@@ -37,7 +37,8 @@
 
 ;;	3. If a result is required it overwrites the form with its
 ;;	value, and assumes that the client will delete the property
-;;	after it has read it.
+;;	after it has read it. If no result is required, it will delete
+;;	the property after having read it.
 
 (defvar server-window (let
 			  ((win (create-window 'root -100 -100 10 10)))
@@ -57,19 +58,21 @@
 	  (progn
 	    (setq form (read-from-string (nth 2 form-data) 0))
 	    (setq value (eval form))
-	    (when needs-result
-	      (set-x-property window prop
-			      (let
-				  ((print-escape t))
-				(format nil "%S" value))
-			      'STRING 8)))
+	    (if needs-result
+		(set-x-property window prop
+				(let
+				    ((print-escape t))
+				  (format nil "%S" value))
+				'STRING 8)
+	      (delete-x-property window prop)))
 	(error
-	 (when needs-result
-	   (set-x-property window prop
-			   (let
-			       ((print-escape t))
-			     (format nil "error--> %S" error-data))
-			   'STRING 8))))
+	 (if needs-result
+	     (set-x-property window prop
+			     (let
+				 ((print-escape t))
+			       (format nil "error--> %S" error-data))
+			     'STRING 8)
+	   (delete-x-property window prop))))
       t)))
 
 (defun server-exit ()
