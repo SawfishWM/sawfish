@@ -38,6 +38,7 @@
     (setq root-menu (delq (last root-menu) root-menu))))
 
 ;; invoke the GNOME control-center to configure sawfish
+(eval-when-compile (require 'customize))
 (setq customize-program "sawfish-capplet")
 (setq customize-group-opt "--sawfish-group")
 (setq custom-menu-includes-all-settings nil)
