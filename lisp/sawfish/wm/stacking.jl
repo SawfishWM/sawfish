@@ -28,7 +28,7 @@
 ;; this level, and positive for windows above the normal level
 
 (defcustom transients-above-parents t
-  "Transient windows are always stacked higher than their parent windows."
+  "Keep transient windows stacked above normal windows."
   :group misc
   :type boolean)
 
