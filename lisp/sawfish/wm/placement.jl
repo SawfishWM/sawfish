@@ -23,7 +23,8 @@
 
 (defcustom place-window-mode 'random
   "Method of selecting the position of a freshly-mapped window."
-  :type (set random interactive smart)
+; :type (set random interactive smart)
+  :type (set random)
   :group placement)
 
 (defcustom ignore-program-positions nil
@@ -54,9 +55,9 @@
 	       (move-window-to
 		w
 		(random (max 0 (- (screen-width)
-				  (car (window-dimensions w)))))
+				  (car (window-frame-dimensions w)))))
 		(random (max 0 (- (screen-height)
-				  (cdr (window-dimensions w))))))))
+				  (cdr (window-frame-dimensions w))))))))
 	t))))
 
 (add-hook 'place-window-hook 'place-window t)
