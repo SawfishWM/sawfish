@@ -25,7 +25,7 @@ AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR(etc)
 
 dnl Release versioning info
-version="0.30.3"
+version="0.31-pre"
 
 output_files="src/Makefile lisp/Makefile scripts/Makefile themes/Makefile\
  lisp/sawfish/ui/Makefile lisp/sawfish/gtk/Makefile sounds/Makefile\
@@ -126,7 +126,7 @@ dnl Check for image handling libraries
 AC_ARG_WITH(gdk-pixbuf,
  [  --with-gdk-pixbuf	  Use gdk-pixbuf for image management
   --without-gdk-pixbuf	  Use Imlib1 instead], [],
- [with_gdk_pixbuf=maybe])
+ [with_gdk_pixbuf=no])
 if test "$with_gdk_pixbuf" != "no"; then
   AC_MSG_CHECKING([for gdk_pixbuf (xlib version)])
   dnl gnome-config is the most broken shell script I've ever
