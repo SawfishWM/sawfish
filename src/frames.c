@@ -38,6 +38,7 @@
 #endif
    
 #include "sawmill.h"
+#include <string.h>
 #include <X11/Xutil.h>
 #include <X11/Xresource.h>
 #include <X11/extensions/shape.h>

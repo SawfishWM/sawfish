@@ -22,6 +22,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
+#include <string.h>
 #include <X11/Xatom.h>
 
 

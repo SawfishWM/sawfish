@@ -44,7 +44,7 @@
 # include <netdb.h>
 #endif
 
-char *prog_name, *visual_name;
+char *visual_name;
 Display *dpy;
 int screen_num, screen_width, screen_height;
 Window root_window, no_focus_window;
@@ -286,7 +286,7 @@ choose_visual (void)
 bool
 sys_init(char *program_name)
 {
-    char *display_name = 0;
+    char *display_name = 0, *prog_name = 0;
     repv opt;
 
 #ifdef HAVE_UNIX

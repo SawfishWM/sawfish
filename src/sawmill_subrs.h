@@ -51,7 +51,6 @@ extern repv Fcommandp (repv arg);
 extern void commands_init (void);
 
 /* from display.c */
-extern char *prog_name;
 extern Display *dpy;
 extern int screen_num, screen_width, screen_height, preferred_depth;
 extern Visual *preferred_visual;

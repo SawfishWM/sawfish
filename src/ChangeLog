@@ -1,5 +1,11 @@
 2005-01-04  John Harper  <jsh@unfactored.org>
 
+	* sawmill_subrs.h, main.c, display.c: cleaned up some global
+	variables
+
+	* x.c, windows.c, selection.c, images.c, frames.c, events.c:
+	fix compiler warnings
+
 	* events.c (property_notify): handle STRING properties through
 	the XmbTextPropertyToTextList () function, needed to convert
 	from Latin-1 to current locale (patch from Jean-Christophe

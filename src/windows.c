@@ -21,6 +21,7 @@
 
 #include "sawmill.h"
 #include <assert.h>
+#include <string.h>
 #include <X11/extensions/shape.h>
 
 Lisp_Window *window_list;

@@ -41,6 +41,7 @@
 #include "build.h"
 #include <string.h>
 #include <limits.h>
+#include <unistd.h>
 #include <X11/Xlocale.h>		/* for setlocale () */
 #ifdef HAVE_GDK_PIXBUF
 #include <glib-object.h>
@@ -48,9 +49,6 @@
 
 /* one of the ec_ values */
 int exit_code = ec_no_exit;
-
-/* Saved value of argv[0] */
-static char *prog_name;
 
 DEFSYM(sawfish_directory, "sawfish-directory");
 DEFSYM(sawfish_lisp_lib_directory, "sawfish-lisp-lib-directory");
@@ -336,6 +334,7 @@ main(int argc, char **argv)
     char **old_argv;
     int old_argc;
     char *lang;
+    char *prog_name;
 
     /* This will fork multiple copies, if necessary */
     multihead_init (&argc, &argv);

@@ -21,6 +21,7 @@
 
 #include "sawmill.h"
 #include <limits.h>
+#include <string.h>
 #include <time.h>
 #include <X11/extensions/shape.h>
 #include <X11/Xresource.h>

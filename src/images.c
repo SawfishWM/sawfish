@@ -39,6 +39,7 @@
 
 #include "sawmill.h"
 #include <assert.h>
+#include <string.h>
 
 static Lisp_Image *image_list;
 int image_type;

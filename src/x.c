@@ -41,6 +41,7 @@
 #endif
    
 #include "sawmill.h"
+#include <string.h>
 #include <X11/Xresource.h>
 
 #ifdef HAVE_X11_EXTENSIONS_XDBE_H
