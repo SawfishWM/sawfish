@@ -337,7 +337,12 @@ sys_init(char *program_name)
 	    xa_wm_take_focus = XInternAtom (dpy, "WM_TAKE_FOCUS", False);
 	    xa_compound_text = XInternAtom (dpy, "COMPOUND_TEXT", False);
 
-	    XShapeQueryExtension (dpy, &shape_event_base, &shape_error_base);
+	    if (!XShapeQueryExtension (dpy, &shape_event_base,
+				       &shape_error_base))
+	    {
+		fprintf (stderr, "sawfish: your X server doesn't suppot the SHAPE extension; aborting\n");
+		return FALSE;
+	    }
 
 	    XSetErrorHandler (error_other_wm);
 	    XSelectInput (dpy, root_window, ROOT_EVENTS);
