@@ -82,7 +82,8 @@
 ;; returns (EDGE-1 EDGE-2) where they're within EPSILON of each other. MODE
 ;; is one of the symbols `magnetism', `resistance', or `attraction'. DELTA
 ;; is the (signed) number of pixels moved since the last call
-(defun edges-within-epsilon (list-1 list-2 epsilon delta &optional mode)
+(defun edges-within-epsilon (list-1 list-2 epsilon delta
+			     old-edge &optional mode)
   (let
       ((compare (cond ((or (null mode) (eq mode 'magnetism))
 		       (lambda (e1 e2)
@@ -112,17 +113,26 @@
 			      (lambda (e1 e2) nil))
 			     ((> delta 0)
 			      (lambda (e1 e2)
-				(and (not (nth 3 e1)) (nth 3 e2)
+				(and (or (and (not (nth 3 e1)) (nth 3 e2)
+					      (>= (car e1) (car e2)))
+					 (and (equal old-edge e2)
+					      (<= (car e1) (car e2))))
 				     (< (nth 1 e1) (nth 2 e2))
 				     (> (nth 2 e1) (nth 1 e2))
-				     (<= 0 (- (car e1) (car e2)) epsilon))))
+				     (<= (- epsilon)
+					 (- (car e1) (car e2))
+					 epsilon))))
 			     ((< delta 0)
 			      (lambda (e1 e2)
-				(and (nth 3 e1) (not (nth 3 e2))
+				(and (or (and (nth 3 e1) (not (nth 3 e2))
+					      (<= (car e1) (car e2)))
+					 (and (equal old-edge e2)
+					      (>= (car e1) (car e2))))
 				     (< (nth 1 e1) (nth 2 e2))
 				     (> (nth 2 e1) (nth 1 e2))
-				     (<= (- epsilon) (- (car e1)
-							(car e2)) 0)))))))))
+				     (<= (- epsilon)
+					 (- (car e1) (car e2))
+					 epsilon)))))))))
     (catch 'out
       (mapc (lambda (edge-1)
 	      (mapc (lambda (edge-2)
@@ -132,8 +142,9 @@
 	    list-1)
       nil)))
 
-;; returns the new (X . Y) of WINDOW
-(defun snap-window-position-to-edges (window coords deltas hysteresis
+;; returns the new (X . Y) of WINDOW. STATE is a cons cell that will be
+;; used to record state across successive calls
+(defun snap-window-position-to-edges (window coords deltas state
 				      &optional epsilon edges mode)
   (let*
       ((dims (window-frame-dimensions window))
@@ -145,6 +156,8 @@
 			      (+ (car coords) (car dims)) t)
 			(list (+ (cdr coords) (cdr dims))
 			      (car coords) (+ (car coords) (car dims)) nil)))
+       (hysteresis (or (car state) (rplaca state (cons 0 0))))
+       (old-snap-edges (or (cdr state) (rplacd state (cons))))
        tem)
     (setq coords (cons (car coords) (cdr coords)))
     (unless edges
@@ -160,16 +173,24 @@
       (rplacd hysteresis (cdr deltas)))
 
     ;; snap in X direction
-    (when (setq tem (edges-within-epsilon w-x-edges (car edges) epsilon
-					  (car hysteresis) mode))
-      (setq tem (+ (car coords) (- (car (cdr tem)) (car (car tem)))))
-      (when (and (> tem (- (car dims))) (< tem (screen-width)))
-	(rplaca coords tem)))
+    (if (setq tem (edges-within-epsilon
+		   w-x-edges (car edges) epsilon
+		   (car hysteresis) (car old-snap-edges) mode))
+	(progn
+	  (rplaca old-snap-edges (cdr tem))
+	  (setq tem (+ (car coords) (- (car (cdr tem)) (car (car tem)))))
+	  (when (and (> tem (- (car dims))) (< tem (screen-width)))
+	    (rplaca coords tem)))
+      (rplaca old-snap-edges nil))
 
     ;; snap in Y direction
-    (when (setq tem (edges-within-epsilon w-y-edges (cdr edges) epsilon
-					  (cdr hysteresis) mode))
-      (setq tem (+ (cdr coords) (- (car (cdr tem)) (car (car tem)))))
-      (when (and (> tem (- (cdr dims))) (< tem (screen-height)))
-	(rplacd coords tem)))
+    (if (setq tem (edges-within-epsilon
+		   w-y-edges (cdr edges) epsilon
+		   (cdr hysteresis) (cdr old-snap-edges) mode))
+	(progn
+	  (rplacd old-snap-edges (cdr tem))
+	  (setq tem (+ (cdr coords) (- (car (cdr tem)) (car (car tem)))))
+	  (when (and (> tem (- (cdr dims))) (< tem (screen-height)))
+	    (rplacd coords tem)))
+      (rplacd old-snap-edges nil))
     coords))
