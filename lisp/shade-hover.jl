@@ -26,40 +26,39 @@
 
 (defvar shade-hover-timer nil)
 
-(defvar shade-hover-hooks nil)
+(defun shade-hover-leave (w)
+  (unless (eq w 'root)
+    (when shade-hover-timer
+      (delete-timer shade-hover-timer)
+      (setq shade-hover-timer nil))
+    (when (window-get w 'shade-hover-unshaded)
+      (window-put w 'shade-hover-unshaded nil)
+      (shade-window w))
+    (when (in-hook-p 'pre-command-hook shade-hover-before)
+    (remove-hook 'pre-command-hook shade-hover-before))))
 
-(defun shade-hover-fp-leave (w fp)
-  (when shade-hover-timer
-    (delete-timer shade-hover-timer)
-    (setq shade-hover-timer nil))
-  (when (window-get w 'shade-hover-unshaded)
-    (window-put w 'shade-hover-unshaded nil)
-    (shade-window w))
-  (while shade-hover-hooks
-    (setq pre-command-hook (delq (car shade-hover-hooks) pre-command-hook))
-    (setq shade-hover-hooks (cdr shade-hover-hooks))))
+(defun shade-hover-before ()
+  (let
+      ((command (lookup-event-binding (current-event)))
+       (w (current-event-window)))
+    (when (and (eq command 'toggle-window-shaded) w)
+      (shade-hover-leave w))))
 
-(defun shade-hover-fp-enter (w fp)
-  (when (window-get w 'shaded)
-    (let
-	((callback
-	  (lambda ()
-	    (window-put w 'shade-hover-unshaded t)
-	    (unshade-window w)))
-	 (pre-command-callback
-	  (lambda ()
-	    (let
-		((command (lookup-event-binding (current-event))))
-	      (unless (eq command 'toggle-window-shaded)
-		(window-put w 'shade-hover-unshaded nil))
-	      (shade-hover-fp-leave w fp)))))
-      (when shade-hover-timer
-	(delete-timer shade-hover-timer))
-      (setq shade-hover-timer (make-timer callback
-					  (/ shade-hover-delay 1000)
-					  (mod shade-hover-delay 1000)))
-      (add-hook 'pre-command-hook pre-command-callback)
-      (setq shade-hover-hooks (cons pre-command-callback shade-hover-hooks)))))
+(defun shade-hover-enter (w)
+  (unless (eq w 'root)
+    (when (window-get w 'shaded)
+      (let
+	  ((callback
+	    (lambda ()
+	      (window-put w 'shade-hover-unshaded t)
+	      (unshade-window w))))
+	(when shade-hover-timer
+	  (delete-timer shade-hover-timer))
+	(setq shade-hover-timer (make-timer callback
+					    (/ shade-hover-delay 1000)
+					    (mod shade-hover-delay 1000)))
+	(unless (in-hook-p 'pre-command-hook shade-hover-before)
+	  (add-hook 'pre-command-hook shade-hover-before))))))
 
-(add-hook 'enter-frame-part-hook shade-hover-fp-enter)
-(add-hook 'leave-frame-part-hook shade-hover-fp-leave)
+(add-hook 'enter-notify-hook shade-hover-enter)
+(add-hook 'leave-notify-hook shade-hover-leave)
