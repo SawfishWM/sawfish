@@ -114,7 +114,7 @@
 		      (- (+ (- size in) inc))))))
       (rplaca pos (pos-fn (car pos) (screen-width) 0))
       (rplacd pos (pos-fn (cdr pos) (screen-height) 16))
-      (display-message text
+      (display-message (if (functionp text) (text) text)
 		       `((position . ,pos)
 			 (background . ,tooltips-background-color)
 			 (foreground . ,tooltips-foreground-color)
