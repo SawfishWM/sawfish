@@ -1,3 +1,12 @@
+2000-11-27  John Harper  <jsh@eazel.com>
+
+	* widgets/frame-style.jl (make-frame-style-item): reversed
+	order of combo box and label; don't set usize of text box
+
+	* layout.jl: renamed `expand' flag as `expand-vertically';
+	added an `expand-horizontally' flag; changed `framed' flag to
+	use a vbox instead of a frame widget
+
 2000-11-21  John Harper  <jsh@eazel.com>
 
 	* layout.jl (layout-box): don't set the border of the box
