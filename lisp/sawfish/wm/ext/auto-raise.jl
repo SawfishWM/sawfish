@@ -33,6 +33,11 @@
   :type number
   :group focus)
 
+(defcustom raise-groups-on-focus t
+  "Raise entire group after focusing a window (when auto-raise is enabled)."
+  :type boolean
+  :group (focus advanced))
+
 (defvar disable-auto-raise nil)
 
 (defvar rw-timer nil)
@@ -44,19 +49,24 @@
     (delete-timer rw-timer)
     (setq rw-timer nil)))
 
+(defun rw-raise-window (w)
+  (if raise-groups-on-focus
+      (raise-group w)
+    (raise-window w)))
+
 (defun rw-on-focus (w)
   (unless disable-auto-raise
     (if (or (window-get w 'raise-on-focus) raise-windows-on-focus)
 	(if (<= raise-window-timeout 0)
 	    (progn
-	      (raise-window w)
+	      (rw-raise-window w)
 	      (rw-disable-timer))
 	  (setq rw-window w)
 	  (if rw-timer
 	      (set-timer rw-timer)
 	    (let
 		((timer-callback (lambda ()
-				   (raise-window rw-window)
+				   (rw-raise-window rw-window)
 				   (setq rw-timer nil))))
 	      (setq rw-timer (make-timer timer-callback
 					 (quotient raise-window-timeout 1000)
