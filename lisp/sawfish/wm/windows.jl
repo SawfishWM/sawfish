@@ -382,7 +382,7 @@ STATES has been changed. STATES may also be a single symbol."
 	    window-mapped-p window-frame set-window-frame rebuild-frame
 	    window-position window-dimensions window-frame-dimensions windowp
 	    managed-windows stacking-order window-visibility
-	    window-transient-p window-shaped-p window-visible-p
+	    window-transient-p window-urgent-p window-shaped-p window-visible-p
 	    window-framed-p window-id window-group-id window-size-hints
 	    call-window-hook input-focus window-icon-image map-windows
 	    filter-windows))
