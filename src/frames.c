@@ -1272,6 +1272,8 @@ list_frame_generator (Lisp_Window *w)
 		XMapWindow (dpy, w->id);
 	    w->client_unmapped = unmap_client;
 	    after_local_map (w);
+	    if (focus_window == w)
+		focus_on_window (w);
 	}
     }
 
