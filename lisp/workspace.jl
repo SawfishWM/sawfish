@@ -406,6 +406,12 @@ workspace."
     (window-put w 'sticky t))
   (call-window-hook 'window-state-change-hook w))
 
+(defun ws-client-msg-handler (w atom data)
+  (cond ((and (windowp w) (eq atom 'WM_CHANGE_STATE) (= (aref data 0) 3))
+	 ;; IconicState
+	 (iconify-window w)
+	 t)))
+
 
 ;; Initialisation
 
@@ -413,4 +419,5 @@ workspace."
   (add-hook 'add-window-hook 'ws-add-window t)
   (add-hook 'destroy-notify-hook 'ws-remove-window t)
   (add-hook 'map-notify-hook 'ws-window-mapped t)
+  (add-hook 'client-message-hook 'ws-client-msg-handler t)
   (mapc 'ws-add-window (managed-windows)))
