@@ -29,14 +29,14 @@
 
 (defcustom viewport-columns 1
   "Number of columns in each virtual workspace."
-  :group workspace
+  :group viewport
   :type number
   :range (1 . nil)
   :after-set viewport-size-changed)
 
 (defcustom viewport-rows 1
   "Number of rows in each virtual workspace."
-  :group workspace
+  :group viewport
   :type number
   :range (1 . nil)
   :after-set viewport-size-changed)
@@ -44,7 +44,7 @@
 (defcustom uniconify-to-current-viewport t
   "Windows are uniconified to the current viewport."
   :type boolean
-  :group workspace)
+  :group viewport)
 
 
 ;; raw viewport handling
