@@ -255,25 +255,6 @@ do_restart (void)
     exit (10);
 }
 
-static void
-usage (void)
-{
-    fputs ("\
-    --version		Print version details\n\
-    --no-rc		Don't load rc or site-init files\n\
-\n\
-    --display=DPY	Connect to X display DPY\n\
-    --visual=VISUAL	Preferred visual type\n\
-    --depth=DEPTH	Preferred color depth\n\
-    --disable-nls	Disable internationalization of messages\n\
-\n\
-    -f FUNCTION		Call the Lisp function FUNCTION\n\
-    -l FILE		Load the file of Lisp forms called FILE\n\
-    -q			Quit\n\
-    FILE		Load the Lisp file FILE\n"
-	   , stderr);
-}
-
 static repv
 inner_main (repv arg)
 {
@@ -323,7 +304,7 @@ main(int argc, char **argv)
 
     prog_name = *argv++; argc--;
     lang = setlocale(LC_ALL, "");
-    rep_init (prog_name, &argc, &argv, 0, usage);
+    rep_init (prog_name, &argc, &argv, 0, 0);
     stash_argv (old_argc, old_argv);
 
     if (rep_get_option ("--version", 0))
@@ -331,6 +312,36 @@ main(int argc, char **argv)
 	printf ("sawfish version %s\n", SAWFISH_VERSION);
 	return 0;
     }
+
+    if (rep_get_option ("--help", 0))
+    {
+	printf ("\
+usage: %s [OPTIONS...]\n\
+\n\
+where OPTIONS are any of:\n\
+\n\
+    --display=DPY	Connect to X display DPY\n\
+    --visual=VISUAL	Preferred visual type\n\
+    --depth=DEPTH	Preferred color depth\n\
+    --disable-nls	Disable internationalization of messages\n\
+\n\
+    FILE		load the Lisp file FILE (from the cwd if possible,\n\
+			 implies --batch mode)\n\
+\n\
+    --batch		batch mode: process options and exit\n\
+    --interp		interpreted mode: don't load compiled Lisp files\n\
+\n\
+    --call FUNCTION	call the Lisp function FUNCTION\n\
+    --f FUNCTION\n\
+\n\
+    --load FILE		load the file of Lisp forms called FILE\n\
+    -l FILE\n\
+\n\
+    --version		print version details\n\
+    --no-rc		don't load rc or site-init files\n\
+    --quit, -q		terminate the interpreter process\n", prog_name);
+	return 0;
+   }
 
     rep_push_structure ("sawfish.wm");
 
