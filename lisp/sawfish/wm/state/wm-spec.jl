@@ -435,9 +435,11 @@
 			    ((eq mode _NET_WM_MOVERESIZE_SIZE_RIGHT) '(right)))))
 		 (resize-window-interactively w))))))
 
-	((_NET_NUMBER_OF_DESKTOPS _NET_DESKTOP_GEOMETRY)
-	 ;; XXX these conflict with user preferences
-	 )
+	((_NET_NUMBER_OF_DESKTOPS)
+	 (set-number-of-workspaces (aref data 0)))
+
+	((_NET_DESKTOP_GEOMETRY)
+	 (set-number-of-viewports (aref data 0) (aref data 1)))
 
 	((_NET_DESKTOP_VIEWPORT)
 	 (set-viewport (aref data 0) (aref data 1)))
@@ -446,6 +448,8 @@
 	 (select-workspace (workspace-id-from-logical (aref data 0))))
 
 	((_NET_DESKTOP_NAMES)
+	 ;; XXX this is kind of broken now we use workspace-names to
+	 ;; XXX define the minimum number of workspaces to display?
 	 (setq data (aref data 0))
 	 (let loop ((i 0)
 		    (out '()))
