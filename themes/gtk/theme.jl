@@ -56,7 +56,8 @@
 				    (nth 2 gtkrc-background-pixmaps))
 				   (t
 				    (nth 3 gtkrc-background-pixmaps)))))
-		      (tile-image img bg)
+		      (when bg
+			(tile-image img bg))
 		      (bevel-image img 1 (not (eq state 'clicked)))))))
 
   (flet
