@@ -53,19 +53,16 @@
     (set-x-property 'root '_WIN_CLIENT_LIST vec 'CARDINAL 32)))
 
 (defun gnome-set-workspace ()
-  (let
-      ((total 0))
-    (mapc #'(lambda (space)
-	      (when (eq space current-workspace)
-		(set-x-property 'root '_WIN_WORKSPACE
-				(vector total) 'CARDINAL 32))
-	      (mapc #'(lambda (w)
-			(set-x-property w '_WIN_WORKSPACE
-					(vector total) 'CARDINAL 32))
-		    (cdr space))
-	      (setq total (1+ total)))
-	  workspace-list)
-    (set-x-property 'root '_WIN_WORKSPACE_COUNT (vector total) 'CARDINAL 32)))
+  (mapc #'(lambda (w)
+	    (when (window-get w 'workspace)
+	      (set-x-property
+	       w '_WIN_WORKSPACE
+	       (vector (window-get w 'workspace)) 'CARDINAL 32)))
+	(managed-windows))
+  (set-x-property
+   'root '_WIN_WORKSPACE (vector current-workspace) 'CARDINAL 32)
+  (set-x-property
+   'root '_WIN_WORKSPACE_COUNT (vector total-workspaces) 'CARDINAL 32))
 
 (defun gnome-set-client-state (w)
   (let
@@ -106,7 +103,7 @@
       (setq layer (aref (nth 2 layer) 0))
       (set-window-depth w (- layer WIN_LAYER_NORMAL)))
     (when space
-      (ws-add-window-to-space-by-index w (aref (nth 2 space) 0)))))
+      (ws-add-window-to-space w (aref (nth 2 space) 0)))))
 
 (defun gnome-client-message-handler (w type data)
   (cond ((eq type '_WIN_WORKSPACE)
