@@ -3,14 +3,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish\n"
-"POT-Creation-Date: 2001-06-04 13:43-0700\n"
-"PO-Revision-Date: 2002-10-27 21:46GMT+2\n"
+"POT-Creation-Date: 2002-11-02 23:33-0800\n"
+"PO-Revision-Date: 2002-11-05 13:02+0200\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
-"Language-Team: belarusian <i18n@mova.org>\n"
+"Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.5\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #. ../scripts/sawfish-about.jl
 msgid "and many others..."
@@ -78,6 +78,7 @@ msgstr "Уласьцівасьці відарысу"
 
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
+#, c-format
 msgid "No matching item for %S"
 msgstr "Няма супаўшых элемэнтаў для %S"
 
@@ -105,6 +106,7 @@ msgid "Added frame type `%s'"
 msgstr "Даданы кадар тыпу `%s'"
 
 #. ../themer/themer.in
+#, c-format
 msgid "error while building frame: %S"
 msgstr "памылка падчас зборкі кадру: %S"
 
@@ -205,7 +207,9 @@ msgstr "Колер неактыўных кадраў (калі ня ўсталя
 
 #. ../themes/mono/theme.jl
 msgid "Color of active frames (if unset use GTK+ selection color)."
-msgstr "Колер актыўных кадраў (калі ня усталявана, выкарыстоўваецца колер вылучэньня GTK+)."
+msgstr ""
+"Колер актыўных кадраў (калі ня усталявана, выкарыстоўваецца колер вылучэньня "
+"GTK+)."
 
 #. ../themes/mono/theme.jl
 msgid "left"
@@ -308,13 +312,17 @@ msgstr "Даданьне:"
 msgid "Edit:"
 msgstr "Рэдагаваньне:"
 
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "Yes"
+msgstr "Так"
+
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "No"
+msgstr "Не"
+
 #. ../lisp/sawfish/gtk/widget.jl
 msgid "** unknown widget **  "
 msgstr "** невядомы віджэт **  "
-
-#. ../lisp/sawfish/gtk/stock.jl
-msgid "Revert"
-msgstr "Аднавіць"
 
 #. ../lisp/sawfish/ui/layouts/keymaps.jl
 msgid "Context:"
@@ -385,13 +393,12 @@ msgid "Actions"
 msgstr "Дзеяньні"
 
 #. ../lisp/sawfish/ui/widgets/match-window.jl
+msgid "not"
+msgstr "не"
+
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Match window properties"
 msgstr "Супадзеньне уласьцівасьцяў акна"
-
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Index:"
-msgstr "Індэкс:"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -403,25 +410,20 @@ msgstr "Праход праз вокны"
 msgid "Sound"
 msgstr "Гук"
 
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Edge Flipping"
-msgstr "Заварот края"
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Matched Windows"
 msgstr "Супаўшыя вокны"
 
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Shade Hover"
-msgstr "Часовае аўтавысоўваньне"
-
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Tooltips"
 msgstr "Падказкі"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Index:"
+msgstr "Індэкс:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
@@ -470,6 +472,10 @@ msgid "Kill client"
 msgstr "Забіць кліента"
 
 #. ../lisp/sawfish/wm/commands.jl
+msgid "No operation"
+msgstr "Няма дзеяньня"
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Call command with output to screen"
 msgstr "Выканаць каманду й выдаць вынікі на экран"
 
@@ -506,16 +512,8 @@ msgid "Bindings"
 msgstr "Хуткія клявішы"
 
 #. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing/Maximizing"
-msgstr "Найменьшаньне/Найбольшаньне"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing"
-msgstr "Найменьшаньне"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Maximizing"
-msgstr "Найбольшаньне"
+msgid "Minimizing and Maximizing"
+msgstr "Найменьшаньне й найбольшаньне"
 
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Miscellaneous"
@@ -534,8 +532,8 @@ msgid "When does the mouse pointer affect the input focus."
 msgstr "Спосаб перадачы засяроджаньня ўказальнікам."
 
 #. ../lisp/sawfish/wm/focus.jl
-msgid "Does click-to-focus mode pass the click through to the window."
-msgstr "Ці перадаваць клік акну ў рэжыме клікаць-для-засяроджаньня."
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Засяроджаньне перадаецца праз дастасаваньне."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default frame style:"
@@ -546,24 +544,8 @@ msgid "Automatically reload themes when they are updated."
 msgstr "Аўтаматычна перазагружаць тэмы калі яны абнаўляюцца."
 
 #. ../lisp/sawfish/wm/frames.jl
-msgid ""
-"Frame type fallbacks:\n"
-"\n"
-"Associate frame types with type to try if the theme doesn't implement the "
-"requested type."
-msgstr ""
-"Замяшчэньне тыпаў рамак:\n"
-"\n"
-"Укажыце замяшчэньне тыпаў рамак на йншыя тыпы (гэта будзе скарыстана ў "
-"выпадку калі тэма ня вызначае якісьці тып рамак)"
-
-#. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Дапомны шрыфт: \\w"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Bevel intensity: \\wpercent."
-msgstr "Інтэнсыўнасьць скосаў: \\wpercent."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -630,8 +612,8 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the title of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Камбінацыі актыўныя калі указальнік знаходзіцца на загалоўке акна. (Дапушчальныя "
-"толькі падзеі мышы)"
+"Камбінацыі актыўныя калі указальнік знаходзіцца на загалоўке акна. "
+"(Дапушчальныя толькі падзеі мышы)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
@@ -678,8 +660,8 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the maximize\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы найбольшаньня акна. "
-"(Дапушчальны толькі падзеі мышы)"
+"Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы найбольшаньня "
+"акна. (Дапушчальны толькі падзеі мышы)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
@@ -706,16 +688,8 @@ msgstr ""
 "(Дапушчальныя толькі падзеі мышы)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Motion threshold for mouse pointer: \\wpixels"
-msgstr "Парог перамяшчэньня для указальніку: \\wпіксэляў"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr "Клявіша-мадыфікатар, якая выкарыстоўваецца ў якасьці мадыфікатару мэнаджару вокнаў."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display key-binding information in menu items."
-msgstr "Адлюстроўваць інфармацыю пра клявіятурныя камбінацыі ў пунктах мэню."
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Клявіша-мадыфікатар для дапомных хуткіх клявішаў."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -761,22 +735,7 @@ msgstr "Скапіяваць на папяр."
 msgid "Copy to next"
 msgstr "Скапіяваць на наст."
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Left"
-msgstr "У_лева"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Right"
-msgstr "У_рава"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Up"
-msgstr "У_гору"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Down"
-msgstr "Д_олу"
-
+#. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Stacking"
 msgstr "Парадак"
@@ -888,10 +847,6 @@ msgstr "Мэтад разьмяшчэньня вокнаў: \\w"
 msgid "Method of placing dialog windows: \\w"
 msgstr "Мэтад разьмяшчэньня дыялёгавых вокнаў: \\w"
 
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Ignore program-specified window placements."
-msgstr "Ігнараваць указанае праграмай разьмяшчэньне акна."
-
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "all"
 msgstr "усе"
@@ -956,10 +911,6 @@ msgstr "Апусьціць акно"
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Put the window in the stacking level beneath its current level."
 msgstr "Зьмясьціць акно ў стос пад яго бягучым узроўнем."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Windows uniconify to the current viewport."
-msgstr "Вокны разгортваюцца ў бягучай вобласьці прагляду."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
@@ -1038,75 +989,40 @@ msgid "Move window right"
 msgstr "Перанесьці акно ў правы бок"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport on the right."
-msgstr "Перанесьці акно ў вобласьць прагляду з правага боку."
+msgid "Move the window to the viewport on the right, and switch to that viewport."
+msgstr "Перанесьці акно ў вобласьць прагляду з правага боку і пераключыцца на яго."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window left"
 msgstr "Перанесьці акно ўлева"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport on the left."
-msgstr "Перанесьці акно ў вобласьць прагляду з левага боку."
+msgid "Move the window to the viewport on the left, and switch to that viewport."
+msgstr "Перанесьці акно ў вобласьць прагляду з левага боку і пераключыцца на яго."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window up"
 msgstr "Перанесьці акно ўгору"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport above."
-msgstr "Перанесьці акно ў вобласьць прагляду вышей."
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr "Перанесьці акно ў вобласьць прагляду з левага боку і пераключыцца на яго."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
 msgstr "Перанесьці акно дадолу"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport below."
-msgstr "Перанесьці акно ў вобласьць прагляду ніжэй."
-
-#. ../lisp/sawfish/wm/window-anim.jl
-msgid "The default window animation mode: \\w"
-msgstr "Дапомны рэжым анімацыі акна: \\w"
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr "Перанесьці акно ў вобласьць прагляду з левага боку і пераключыцца на яго."
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Give focus to windows even when they haven't asked for it.\n"
-"\n"
-"Windows should set the `accepts input' hint in their WM_HINTS property to "
-"show if they require the focus or not."
-msgstr ""
-"Даваць засяроджаньне вокнам нават калі яны яго не запытвалі.\n"
-"\n"
-"Вокны павінны ўсталёўваць хінт `accepts input' ва ўласьцівасьці WM_HINTS каб "
-"паведаміць, ці патрэбна ім засяроджаньне."
+msgid "Focus desktop"
+msgstr "Засяроджаньне стальца"
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Offset (%) from left window edge when warping pointer.\n"
-"\n"
-"A negative number means outside the left window edge."
-msgstr ""
-"Зрух (%) ад левага краю акна пры загінаньні ўказальніку.\n"
-"Адмоўная лічба азначае нутраны бок левага краю акна."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Offset (%) from top window edge when warping pointer.\n"
-"\n"
-"A negative number means outside the top window edge."
-msgstr ""
-"Зрух (%) ад верхняга краю акна пры загінаньні ўказальніку.\n"
-"Адмоўная лічба азначае нутраны бок верхняга краю акна."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Format to create unique window names.\n"
-"\n"
-"Has two arguments (NAME INDEX) applied to it."
-msgstr ""
-"Фармат для стварэньня ўнікальных назваў вокнаў. Мае два аргумэнты (НАЗВА "
-"ЙНДЭКС) якія ўжываюцца да яго."
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "Перадаць засяроджаньне акну стальца (калі тое існуе)"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window"
@@ -1131,42 +1047,6 @@ msgstr "Выбраць унікальнае імя для акна"
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Force the current window to have a unique title."
 msgstr "Прымусовае выкарыстаньне унікальнага загалоўка бягучым акном."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Virtual desktop configuration."
-msgstr "Наладка віртуальных стальцоў."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "stop"
-msgstr "спыніць"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "wrap-around"
-msgstr "загортвацца"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "keep-going"
-msgstr "працягваць рух"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "When passing the first or last workspace: \\w"
-msgstr "Пры перадачы на першую ці апошнюю працоўную прастору: \\w"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "When passing the first or last workspace, while moving a window: \\w"
-msgstr "Пры перадачы на першую ці апошнюю працоўную прастору пры пераносе акна: \\w"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspaces are deleted when their last window closes."
-msgstr "Працоўныя прасторы выдаляюцца калі зачыняюцца апошнія вокны."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Preserve empty workspaces in pager."
-msgstr "Захоўваць пустыя працоўныя прасторы ў пераключальніку."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Dialogs appear on the same workspace as their application."
-msgstr "Дыялёгі ўзьнікаюць на тых жа працоўных прасторах, што й іх дастасаваньні."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace names"
@@ -1295,7 +1175,8 @@ msgid ""
 "Delete the current workspace. Its member windows are relocated to the next\n"
 "workspace."
 msgstr ""
-"Выдаліць бягучую працоўную прастору. Яе вокны будуць перанесены на наст. працоўную\n"
+"Выдаліць бягучую працоўную прастору. Яе вокны будуць перанесены на наст. "
+"працоўную\n"
 "прастору."
 
 #. ../lisp/sawfish/wm/workspace.jl
@@ -1307,7 +1188,8 @@ msgid ""
 "Delete the current workspace. Its member windows are relocated to the\n"
 "previous workspace."
 msgstr ""
-"Выдаліць бягучую працоўную прастору. Яе вокны будуць перанесены на папяр. працоўную\\n\"\n"
+"Выдаліць бягучую працоўную прастору. Яе вокны будуць перанесены на папяр. "
+"працоўную\\n\"\n"
 "\"прастору."
 
 #. ../lisp/sawfish/wm/workspace.jl
@@ -1616,8 +1498,8 @@ msgid "Delete all windows in the group that the current window is a member of."
 msgstr "Выдаляць усе вокны ў групе, да якой належыць акно."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether growing an already grown window grows it again."
-msgstr "Працягваць ці павялічваць памер ужо павялічанага акна"
+msgid "Growing and packing of windows"
+msgstr "Павялічэньне й памяньшэньне вокнаў"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
@@ -1630,12 +1512,12 @@ msgstr ""
 "вяртаньня папярэдняга памеру."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "maybe"
-msgstr "можа быць"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "always"
 msgstr "заўсёды"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr "можа быць"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "never"
@@ -1664,68 +1546,156 @@ msgstr ""
 "`ніколі' значыцца што ўказальнік ня перасоўваецца."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Whether to bump into fully obscured windows when growing or packing\n"
+"windows."
+msgstr "Сутыкнуцца з цалкам зацененым вакном пад час павялічэньня ці памяньшэньня."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Whether to bump into windows on a different depth when growing or packing\n"
+"windows.\n"
+"`maybe' means only avoided windows in other depths."
+msgstr ""
+"Ці сутыкаюцца вокны з рознымі глыбінямі пад час павялічэньня й\n"
+"памяньшэньня. \n"
+"\"магчыма\" маюцца на ўвазе толькі пазьбегнутыя вокны ў іншых глыбінях."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into ignored windows when growing or packing."
+msgstr "Ці сутыкаюцца ігнараваныя вокны пад час павялічэньня й памяньшэньня."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
 msgstr "Павялічваць акно ўлева да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window to the left until it `bumps into' another window."
-msgstr "Павялічваць акно ўлева, покуль яно ня \"сутыкнецца\" з іншым акном."
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Павялічваць акно ўлева, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
+"Глядзіце `grow-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window right"
 msgstr "Павялічваць акно ўправа да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window to the right until it `bumps into' another window."
-msgstr "Павялічваць акно ўправа, покуль яно ня \"сутыкнецца з іншым акном."
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Павялічваць акно ўправа, покуль яно ня \"сутыкнецца з іншым акном.\n"
+"Глядзіце `grow-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window up"
 msgstr "Павялічваць акно ўгору да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window upwards until it `bumps into' another window."
-msgstr "Павялічваць акно ўгору, покуль яно ня \"сутыкнецца\" з іншым акном."
+#, fuzzy
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
+msgstr "Павялічвае акно угору покуль яно ня сутыкнецца з іншым вкном.\n"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Павялічваць акно наніз да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window downwards until it `bumps into' another window."
-msgstr "Павялічваць акно наніз, покуль яно ня \"сутыкнецца\" з іншым акном."
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Павялічваць акно наніз, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
+"Глядзіце `grow-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window left"
 msgstr "Перасунуць акно ўлева да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window to the left until it `bumps into' another window."
-msgstr "Пераносіць акно ўлева, покуль яно ня \"сутыкнецца\" з іншым акном."
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Пераносіць акно ўлева, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
+"Глядзіце `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window right"
 msgstr "Перасунуць акно ўправа да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window to the right until it `bumps into' another window."
-msgstr "Пераносіць акно ўправа, покуль яно ня \"сутыкнецца\" з іншым акном."
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Пераносіць акно ўправа, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
+"Глядзіце `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window up"
 msgstr "Перасунуць акно ўгору да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window upwards until it `bumps into' another window."
-msgstr "Перасоўваць акно ўгору, покуль яно ня \"сутыкнецца\" з іншым акном."
+#, fuzzy
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
+msgstr "Перасоўваць акно вышэй, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "Перасунуць акно наніз да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window downwards until it `bumps into' another window."
-msgstr "Перасоўваць акно наніз, покуль яно ня \"сутыкнецца\" з іншым акном."
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Перасоўваць акно наніз, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
+"Глядзіце `pack-window-up'."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow left"
+msgstr "Павялічваць улева"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow right"
+msgstr "Павялічваць управа"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow up"
+msgstr "Павялічваць дагары"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow down"
+msgstr "Павялічваць да долу"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack left"
+msgstr "Перасунуць улева"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack right"
+msgstr "Перасунуць управа"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack up"
+msgstr "Перасунуць ўгору"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack down"
+msgstr "Перасунуць наніз"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show faq"
@@ -1818,26 +1788,6 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr "Перасунуць курсор на 1 піксэл наніз."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "opaque"
-msgstr "адлюстроўваць зьмест"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "box"
-msgstr "адлюстроўваць каркас"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How windows being moved are animated: \\w"
-msgstr "Як будзе анімавацца перасоўваньне вокнаў: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How windows being resized are animated: \\w"
-msgstr "Як будзе анімавацца зьмяненьне памеру вокнаў: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Raise windows when they are moved or resized."
-msgstr "Паднімаць вокны падчас перасоўваньня ці зьмяненьня памеру."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Show current position of windows while moving."
 msgstr "Адлюстроўваць бягучую пазыцыю вокнаў падчас перасоўваньня."
 
@@ -1846,56 +1796,15 @@ msgid "Show current dimensions of windows while resizing."
 msgstr "Адлюстроўваць бягучыя памеры падчас зьмяненьня памераў акна."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "region"
-msgstr "вобласьць"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "border"
-msgstr "рамка"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "grab"
-msgstr "захапіць"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "border-grab"
-msgstr "захапіць рамку"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How to choose window edges when resizing: \\w"
-msgstr "Як выбіраць края акна падчас зьмяненьня памеру: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Snap window position to edges of other windows while moving."
-msgstr "Раўнаць пазыцыю акна по краёх іншых вокнаў падчас перасоўваньня."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Proximity in pixels before snapping to a window edge."
-msgstr "Адлегласьць у піксэлях перад прыцягваньнем да краю акна."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "magnetism"
-msgstr "магнетызм"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "resistance"
-msgstr "супраціў"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "attraction"
-msgstr "прыцягненьне"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How to snap together window edges: \\w"
-msgstr "Як раўнаць адносна адно аднаго края вокнаў: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Snap to otherwise-ignored windows."
-msgstr "Прыцягваць да йнакш-ігнаруемых вокнаў"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Only update window contents after it has stopped moving."
-msgstr "Абнаўляць зьмест акна толькі пасьля заканчэньня руху."
+msgid ""
+"Distance in pixels before window edges align with each other.\n"
+"\n"
+"When moving a window, this option lets you align one of its edges with an "
+"edge of another window."
+msgstr ""
+"Адлегласьць у піксэлях да таго, як вокны параўнаюцца адно з адным.\n"
+"\n"
+"Пад час пераносу акна гэтая опцыя дазваляе раўнаць край акна з краям іншага."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -1919,7 +1828,9 @@ msgstr "Выбраць акно й перасунуць яго"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Wait for the user to select a window, then interactively move that window."
-msgstr "Чакаць покуль карыстальнік абярэ акно, затым інтэрактыўна перасоўваць гэта акно."
+msgstr ""
+"Чакаць покуль карыстальнік абярэ акно, затым інтэрактыўна перасоўваць гэта "
+"акно."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize selected window"
@@ -1940,7 +1851,8 @@ msgid ""
 "Raise the window that received the current event, then replay any pointer\n"
 "events that invoked the command."
 msgstr ""
-"Падняць акно, якое атрымала бягучую падзею, потым паўтарыць падзеі ўказальніку,\n"
+"Падняць акно, якое атрымала бягучую падзею, потым паўтарыць падзеі "
+"ўказальніку,\n"
 "якія выклікалі гэтую каманду."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
@@ -1952,8 +1864,8 @@ msgid ""
 "Raise the window that received the current event (if it's focused), then\n"
 "replay any pointer events that invoked the command."
 msgstr ""
-"Падняць акно, якое атрымала бягучую падзею (калі яно мае засяроджаньне), потым "
-"паўтарыць\n"
+"Падняць акно, якое атрымала бягучую падзею (калі яно мае засяроджаньне), "
+"потым паўтарыць\n"
 "падзеі указальніку, якія выклікалі гэтую каманду."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
@@ -1991,14 +1903,6 @@ msgstr ""
 "потым паўтарыць падзеі ўказальніку, якія выклікалі гэтую каманду."
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
-msgid ""
-"Default increment for size-window commands (when the window doesn't\n"
-"specify it's own increments)."
-msgstr ""
-"Дапомная велічыня павялічэньня памеру акна для апэрацыяў зьвязаных\n"
-"са зьмяненьнем памеру (калі акно само ня ўказвае велічыню зьмяненьня)"
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
 msgstr "Павялічыць памер акна вэртыкальна"
 
@@ -2029,10 +1933,6 @@ msgstr "Паменьшыць памер па гарызанталі"
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Decrease the size of the current window by one column."
 msgstr "Паменьшыць памер бягучага акна на адзін слупок."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Number of pixels to move window in `slide-' commands."
-msgstr "Колькасьць піксэлаў для зруху акна у камандзе \"зрух-\"."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window left"
@@ -2139,12 +2039,8 @@ msgid "Set window viewport linear"
 msgstr "Перанесьці акно ў вобласьць прагляду з зададзеным лінейным індэксам"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window names while cycling through windows."
-msgstr "Адлюстроўваць назвы вокнаў падчас перабору."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window icons while cycling through windows."
-msgstr "Адлюстроўваць значкі вокнаў падчас перабору."
+msgid "Display window names and icons while cycling through windows."
+msgstr "Адлюстроўваць назвы й значкі вокнаў падчас пераходу між вокнаў."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Include iconified windows when cycling."
@@ -2159,22 +2055,6 @@ msgid "Include windows on all viewports when cycling."
 msgstr "Уключыць вокны ва ўсе вобласьці прагляду падчас перабору."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Паднімаць вокны калі яны часова вылучаны падчас перабору."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Warp the mouse pointer to windows as they're temporarily selected."
-msgstr "Загінаць указальнік мышы ў вокны калі яны часова выбраны."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Focus windows when they're temporarily selected during cycling."
-msgstr "Засяроджваць вокны калі яны часова выбраны ў працэсе перабору."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Disable auto-raising while temporarily selecting windows."
-msgstr "Адключыць аўтападняцьце падчас часовага выбару вокнаў."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "cycle-keymap"
 msgstr "cycle-keymap"
 
@@ -2183,12 +2063,16 @@ msgid "Keymap containing bindings active only during window cycling operations."
 msgstr "Камбінацыі, актыўныя пад час пераходу між вокнамі."
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Terminal"
+msgstr "Тэрмінал"
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "The program launched by the `xterm' command."
 msgstr "Праграма, якая запускаецца камандай \"xterm\"."
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Optional arguments given to the `xterm' command."
-msgstr "Дадатковыя аргумэнты, якія перадаюцца камандзе \"xterm\"."
+msgid "Arguments given to the `xterm' command."
+msgstr "Аргумэнты, якія перадаюцца камандзе \"xterm\"."
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "Xterm"
@@ -2207,16 +2091,16 @@ msgid "Play sound effects for window events."
 msgstr "Уключыць гукавыя эфекты для падзеяў."
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Play sound effects for unmanaged windows."
-msgstr "Уключыць гукавыя эфекты для вокнаў, якія ня кіруюцца."
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Event"
 msgstr "Падзея"
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Audio file"
 msgstr "Гукавы файл"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+msgid "Auto-Raise"
+msgstr "Аўта-падняцьце"
 
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Raise windows when they are focused."
@@ -2226,9 +2110,9 @@ msgstr "Паднімаць акно, калі яно атрымлівае зас
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr "Затрымка ў мілісэкундах перад пад'ёмам акна, якое атрымала засяроджаньне."
 
-#. ../lisp/sawfish/wm/ext/beos-window-menu.jl
-msgid "The hierarchical window menu raises singleton submenus."
-msgstr "Гіерархічнае мэню акна выклікае падмэню-самотнікі."
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Edge Flipping"
+msgstr "Заварот края"
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Select the next desktop when the pointer hits screen edge."
@@ -2250,21 +2134,13 @@ msgstr "Дотык да краю экрану выбірае наступны: \
 msgid "Only flip when interactively moving a window."
 msgstr "Адлюстроўвае толькі пад час інтэрактыўнага зруху акна."
 
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Milliseconds to delay before flipping: \\w"
-msgstr "Затрымка перад адлюстраваньнем у мілісэкундах: \\w"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Warp pointer to opposite screen edge when flipping."
-msgstr "Загінаць указальнік на супрацьлеглы край экрану пры адлюстраваньні."
-
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Error Handling"
 msgstr "Апрацоўка памылак"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Emit a beeping sound when errors occur."
-msgstr "Аднаўленьне гукавага сыгналу пасьля памылкі"
+msgid "Beep when errors occur."
+msgstr "Сыгнал пасьля памылкі."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "nowhere"
@@ -2279,8 +2155,8 @@ msgid "standard-error"
 msgstr "стандартная плыня памылак"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Where to display error messages: \\w"
-msgstr "Дзе адлюстроўваць паведамленьні пра памылкі: \\w"
+msgid "Display error messages to: \\w"
+msgstr "Адлюстроўваць паведамленьні пра памылкі: \\w"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "No errors."
@@ -2443,6 +2319,10 @@ msgid "Other"
 msgstr "Іншае"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Shade Hover"
+msgstr "Часовае аўтавысоўваньне"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid ""
 "Enable shade-hover mode.\n"
 "\n"
@@ -2456,7 +2336,6 @@ msgstr ""
 msgid "Delay in milliseconds before unshading windows."
 msgstr "Затрымка ў мілісэкундах перад высоўваньнем акна"
 
-#. ../lisp/sawfish/wm/state/shading.jl
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Raise windows when they are unshaded."
 msgstr "Паднімаць вокны пад час іх высоўваньня"
@@ -2466,32 +2345,8 @@ msgid "Display tooltips for window frames."
 msgstr "Адлюстроўваць падказкі для кадраў акна."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Remove tooltips after a period of time."
-msgstr "Выдаляць падказкі праз указаны час."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Show full documentation in tooltips."
 msgstr "Адлюстроўваць поўную дакумэнтацыю ў падказках."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Колькасьць мілісэкундаў да паказу падказкі."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Колькасьць мілісэкундаў да хаваньня падказкі."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Font used to display tooltips."
-msgstr "Шрыфт для адлюстраваньня падказак."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips background"
-msgstr "Колер тла падказак"
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips foreground"
-msgstr "Колер тэксту падказак"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _position"
@@ -2508,6 +2363,10 @@ msgstr "Запомніць атрыбуты"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "Забыцца на захаваны стан"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "History"
+msgstr "Гісторыя"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2569,9 +2428,69 @@ msgstr "Забыцца на ўсю захаваную гісторыю вокн�
 msgid "_History"
 msgstr "_Гісторыя"
 
-#. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "Invoke the GNOME control center from the `Customize' menu."
-msgstr "Выклікаць \"Цэнтар кіраваньня GNOME\" з мэню \"Наладка\"."
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace down"
+msgstr "Працоўная прастора ніжэй"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Адлюстраваць працоўную прастору пад бягучай працоўнай прасторай."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace up"
+msgstr "Працоўная прастора вышэй"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Адлюстраваць працоўную прастору па-над бягучай працоўнай прасторай."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace left"
+msgstr "Працоўная прастора злева"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Адлюстраваць працоўную прастору з правага боку ад бягучай працоўнай прасторы"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace right"
+msgstr "Працоўная прастора зправа"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Адлюстраваць працоўную прастору з правага боку ад бягучай працоўнай прасторы"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace down"
+msgstr "Даслаць на працоўную прастору ніжэй"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Даслаць акно на працоўную прастору пад бягучай працоўнай прасторай."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace up"
+msgstr "Даслаць на працоўную прастору вышэй"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Даслаць акно на працоўную прастору вышэй па-над бягучай працоўнай прасторай."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace left"
+msgstr "Даслаць на працоўную прастору злева"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Даслаць акно на працоўную прастору з левага боку ад бягучай працоўнай прасторы."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace right"
+msgstr "Даслаць на працоўную прастору зправа"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Даслаць акно на працоўную прастору з правага боку ад бягучай працоўнай прасторы."
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
@@ -2589,45 +2508,13 @@ msgstr "Пра праграму GNOME..."
 msgid "Gnome menus update"
 msgstr "Абнавіць мэню GNOME"
 
-#. ../lisp/sawfish/wm/placement/smart.jl
-msgid ""
-"Try to leave at least this many pixels between window edges in first/best-"
-"fit."
-msgstr ""
-"Спрабаваць пакінуць хаця б гэтую колькасьць піксэлаў між краямі акна ў "
-"\"першае\"/\"лепшае запаўненьне\"."
-
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
 msgstr "Адлегласьць між пасьлядоўнымі размешчаньнямі ў рэжыме `уступ'"
 
-#. ../lisp/sawfish/wm/state/configure.jl
-msgid "Automatically select window gravity from position on screen."
-msgstr "Аўтаматычна выбіраць гравітацыю вокнаў сыходзячы з іх пазыцыі."
-
-#. ../lisp/sawfish/wm/state/configure.jl
-msgid "Ignore requests from applications to change window stacking."
-msgstr "Ігнараваць запыты дастасаваньняў аб зьмене стосу вокнаў."
-
 #. ../lisp/sawfish/wm/state/gnome.jl
 msgid "In GNOME _task list"
 msgstr "У сьпісе задачаў GNOME"
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows are focused after being uniconified."
-msgstr "Вокны засяроджваюцца пасьля разгортваньня."
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows are raised after being uniconified."
-msgstr "Вокны падымаюцца пасьля разгортваньня."
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Unmanaged windows may be iconified."
-msgstr "Вокны, якія ня кіруюцца, могуць быць згорнутыя."
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows uniconify to the current workspace."
-msgstr "Вокны разгортваюцца на бягучым працоўным мейсцы."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2640,28 +2527,28 @@ msgid "group"
 msgstr "група"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconifying a window also iconifies the: \\w"
-msgstr "Згортваньне акна таксама прыводзіць да згортваньня: \\w"
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Пад час найменшаньня акна, таксама прыбіраць: \\w"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Uniconifying a window also uniconifies the: \\w"
-msgstr "Разгортваньне акна таксама разгортвае: \\w"
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Пад час падняцьця акна, таксама падымаць: \\w"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconify window"
 msgstr "Згарнуць акно"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconify the window."
-msgstr "Згарнуць акно ў значку."
+msgid "Minimize the window."
+msgstr "Найменьшыць акно."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Uniconify window"
 msgstr "Разгарнуць акно"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Return the window from its iconified state."
-msgstr "Разгарнуць акно са значкі."
+msgid "Restore the window from its minimized state."
+msgstr "Разгарнуць акно з найменшанага стану."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window iconified"
@@ -2676,7 +2563,7 @@ msgid "Iconify workspace windows"
 msgstr "Згарнуць усе вокны на дадзенай працоўнай прасторы"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconify all windows on the current workspace."
+msgid "Minimize all windows on the current workspace."
 msgstr "Згарнуць усе вокны на бягучай працоўнай прасторы."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2695,11 +2582,9 @@ msgstr "Пераключыць ліпкасьць акна"
 msgid ""
 "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
-msgstr "Пераключыць `ліпкасьць' акна --ці адлюстроўваць яго на ўсіх працоўных прасторах."
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Toggle single window mode"
-msgstr "Пераключыць рэжым аднаго акна"
+msgstr ""
+"Пераключыць `ліпкасьць' акна --ці адлюстроўваць яго на ўсіх працоўных "
+"прасторах."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
@@ -2768,26 +2653,6 @@ msgstr "_Цыклічнае"
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
 msgstr "У сьпісе _вокнаў"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Maximizing a window in one dimension must increase the size of that "
-"dimension."
-msgstr ""
-"Максымізацыя акна ў адным вымярэньні павінна павялічыць яго памер у гэтым "
-"вымярэньні."
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Raise windows when they are maximized."
-msgstr "Падымаць вокны падчас найбольшаньня."
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Let unmanaged windows be overlapped when filling windows."
-msgstr "Дазволіць перакрываньне вокнаў, якія ня кіруюцца, пад час запаўненьня вокнаў."
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Don't cover `avoided' windows when maximizing."
-msgstr "Ня зачыняць вокны, якіх 'пазьбягаюць', пад час  найбольшаньня."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Lock position and size while windows are maximized."
@@ -2887,9 +2752,7 @@ msgstr "Пераключыць найбольшаньне бяз заслане�
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Toggle the state of the window between maximized-filled and unmaximized."
-msgstr ""
-"Пераключыць стан акна між найбольшаным-запоўненым і "
-"ня найбольшаным."
+msgstr "Пераключыць стан акна між найбольшаным-запоўненым і ня найбольшаным."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally toggle"
@@ -2900,8 +2763,8 @@ msgid ""
 "Toggle the state of the window between horizontally maximized-filled and\n"
 "unmaximized."
 msgstr ""
-"Пераключыць стан акна між гарызантальна найбольшаным-запоўненым "
-"і ня найбольшаным."
+"Пераключыць стан акна між гарызантальна найбольшаным-запоўненым і ня "
+"найбольшаным."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
@@ -2912,8 +2775,16 @@ msgid ""
 "Toggle the state of the window between vertically maximized-filled and\n"
 "unmaximized."
 msgstr ""
-"Пераключыць стан вакна між вэртыкальна найбольшаным-запоўненым і "
-"ня найбольшаным."
+"Пераключыць стан вакна між вэртыкальна найбольшаным-запоўненым і ня "
+"найбольшаным."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window fullscreen"
+msgstr "Найбольшыць акна на ўвесь экран"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window fullscreen toggle"
+msgstr "Пераключыць найбольшаньне акна"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
@@ -2931,9 +2802,7 @@ msgstr "Вярнуць з цені"
 msgid ""
 "If the window is shaded (see `shade-window'), restore it to it's usual\n"
 "state."
-msgstr ""
-"Калі акно у цяні (гл. `shade-window'), аднавіць яго папярэдні "
-"стан."
+msgstr "Калі акно у цяні (гл. `shade-window'), аднавіць яго папярэдні стан."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
@@ -2950,14 +2819,6 @@ msgstr "У _цяні"
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Focus on application windows when they first appear."
 msgstr "Перадаваць акну фокус пры першым адлюстраваньні."
-
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid "Dialog windows inherit the focus from their parent."
-msgstr "Дыялёгавыя вокны атрымліваюць ад бацькоў у спадчыну засяроджаньне."
-
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid "Decorate dialog windows similarly to application windows."
-msgstr "Аздабляць вокны дыялёгаў як і вокны дастасаваньняў."
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise window and transients"
@@ -2999,20 +2860,8 @@ msgstr ""
 "зьмяніць узровень усіх яго прамежкаавых вокнаў."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Windows uniconify to the current workspace when they are selected."
-msgstr "Вокны разгортваюцца на бягучай працоўнай прасторы калі яны выбраны."
-
-#. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Unshade selected windows."
 msgstr "Зьняць цень з выбраных вокнаў."
-
-#. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Raise selected windows (normally by the Windows menu)."
-msgstr "Падняць выбраныя вокны (звычайна з дапамогаю мэню \"Вокны\")."
-
-#. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Warp the pointer to selected windows."
-msgstr "Загінаць указальнік у выбраных вокнах."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window without focusing"
@@ -3028,15 +2877,9 @@ msgstr "Адлюстраваць акно"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display the workspace containing the window W, then focus on W."
-msgstr "Адлюстраваць працоўную прастору, якое ўтрымлівае акно W, пры засяроджаньні на W."
-
-#. ../lisp/sawfish/wm/util/groups.jl
-msgid "Group transient windows with their parents."
-msgstr "Згрупаваць прамежкавыя вокны з іх бацькамі."
-
-#. ../lisp/sawfish/wm/util/groups.jl
-msgid "Persistent group ids"
-msgstr "Ідэнтыфікатары сталых групаў"
+msgstr ""
+"Адлюстраваць працоўную прастору, якое ўтрымлівае акно W, пры засяроджаньні "
+"на W."
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -3077,42 +2920,6 @@ msgid ""
 msgstr ""
 "Даслаць наступныя падзеі клявіятуры наўпрост да засяроджанага кліентскага "
 "акна, ігнаруючы любыя сувязі мэнаджару вокнаў, якія ён можа мець."
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "novice"
-msgstr "навічок"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "intermediate"
-msgstr "сярэдняга ўзроўню"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "expert"
-msgstr "экспэрт"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Show options suitable for \\w users."
-msgstr "Адлюстраваць парамэтры, якія падыходзяць для \\w карыстальнікаў."
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "ok"
-msgstr "добра"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "revert/cancel/ok"
-msgstr "вярнуць/адмяніць/добра"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "apply/revert/cancel/ok"
-msgstr "ужыць/вярнуць/адмяніць/добра"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Buttons shown in configurator: \\w"
-msgstr "Кнопкі, якія адлюстраваны у канфігуратары: \\w"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Show variable names of each customization option."
-msgstr "Адлюстраваць назвы пераменных для кожнага наладжанага парамэтру."
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
 msgid ""
@@ -3352,4 +3159,350 @@ msgstr "_Усталяваньні"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Тэмы"
+
+#~ msgid "Revert"
+#~ msgstr "Аднавіць"
+
+#~ msgid "Minimizing"
+#~ msgstr "Найменьшаньне"
+
+#~ msgid "Maximizing"
+#~ msgstr "Найбольшаньне"
+
+#~ msgid ""
+#~ "Frame type fallbacks:\n"
+#~ "\n"
+#~ "Associate frame types with type to try if the theme doesn't implement the "
+#~ "requested type."
+#~ msgstr ""
+#~ "Замяшчэньне тыпаў рамак:\n"
+#~ "\n"
+#~ "Укажыце замяшчэньне тыпаў рамак на йншыя тыпы (гэта будзе скарыстана ў "
+#~ "выпадку калі тэма ня вызначае якісьці тып рамак)"
+
+#~ msgid "Bevel intensity: \\wpercent."
+#~ msgstr "Інтэнсыўнасьць скосаў: \\wpercent."
+
+#~ msgid "Motion threshold for mouse pointer: \\wpixels"
+#~ msgstr "Парог перамяшчэньня для указальніку: \\wпіксэляў"
+
+#~ msgid "Display key-binding information in menu items."
+#~ msgstr ""
+#~ "Адлюстроўваць інфармацыю пра клявіятурныя камбінацыі ў пунктах мэню."
+
+#~ msgid "_Left"
+#~ msgstr "У_лева"
+
+#~ msgid "_Right"
+#~ msgstr "У_рава"
+
+#~ msgid "_Up"
+#~ msgstr "У_гору"
+
+#~ msgid "_Down"
+#~ msgstr "Д_олу"
+
+#~ msgid "Ignore program-specified window placements."
+#~ msgstr "Ігнараваць указанае праграмай разьмяшчэньне акна."
+
+#~ msgid "Windows uniconify to the current viewport."
+#~ msgstr "Вокны разгортваюцца ў бягучай вобласьці прагляду."
+
+#~ msgid "Move the window to the viewport above."
+#~ msgstr "Перанесьці акно ў вобласьць прагляду вышей."
+
+#~ msgid "Move the window to the viewport below."
+#~ msgstr "Перанесьці акно ў вобласьць прагляду ніжэй."
+
+#~ msgid "The default window animation mode: \\w"
+#~ msgstr "Дапомны рэжым анімацыі акна: \\w"
+
+#~ msgid ""
+#~ "Give focus to windows even when they haven't asked for it.\n"
+#~ "\n"
+#~ "Windows should set the `accepts input' hint in their WM_HINTS property to "
+#~ "show if they require the focus or not."
+#~ msgstr ""
+#~ "Даваць засяроджаньне вокнам нават калі яны яго не запытвалі.\n"
+#~ "\n"
+#~ "Вокны павінны ўсталёўваць хінт `accepts input' ва ўласьцівасьці WM_HINTS "
+#~ "каб паведаміць, ці патрэбна ім засяроджаньне."
+
+#~ msgid ""
+#~ "Offset (%) from left window edge when warping pointer.\n"
+#~ "\n"
+#~ "A negative number means outside the left window edge."
+#~ msgstr ""
+#~ "Зрух (%) ад левага краю акна пры загінаньні ўказальніку.\n"
+#~ "Адмоўная лічба азначае нутраны бок левага краю акна."
+
+#~ msgid ""
+#~ "Offset (%) from top window edge when warping pointer.\n"
+#~ "\n"
+#~ "A negative number means outside the top window edge."
+#~ msgstr ""
+#~ "Зрух (%) ад верхняга краю акна пры загінаньні ўказальніку.\n"
+#~ "Адмоўная лічба азначае нутраны бок верхняга краю акна."
+
+#~ msgid ""
+#~ "Format to create unique window names.\n"
+#~ "\n"
+#~ "Has two arguments (NAME INDEX) applied to it."
+#~ msgstr ""
+#~ "Фармат для стварэньня ўнікальных назваў вокнаў. Мае два аргумэнты (НАЗВА "
+#~ "ЙНДЭКС) якія ўжываюцца да яго."
+
+#~ msgid "Virtual desktop configuration."
+#~ msgstr "Наладка віртуальных стальцоў."
+
+#~ msgid "stop"
+#~ msgstr "спыніць"
+
+#~ msgid "wrap-around"
+#~ msgstr "загортвацца"
+
+#~ msgid "keep-going"
+#~ msgstr "працягваць рух"
+
+#~ msgid "When passing the first or last workspace: \\w"
+#~ msgstr "Пры перадачы на першую ці апошнюю працоўную прастору: \\w"
+
+#~ msgid "When passing the first or last workspace, while moving a window: \\w"
+#~ msgstr ""
+#~ "Пры перадачы на першую ці апошнюю працоўную прастору пры пераносе акна: "
+#~ "\\w"
+
+#~ msgid "Workspaces are deleted when their last window closes."
+#~ msgstr "Працоўныя прасторы выдаляюцца калі зачыняюцца апошнія вокны."
+
+#~ msgid "Preserve empty workspaces in pager."
+#~ msgstr "Захоўваць пустыя працоўныя прасторы ў пераключальніку."
+
+#~ msgid "Dialogs appear on the same workspace as their application."
+#~ msgstr ""
+#~ "Дыялёгі ўзьнікаюць на тых жа працоўных прасторах, што й іх дастасаваньні."
+
+#~ msgid "Whether growing an already grown window grows it again."
+#~ msgstr "Працягваць ці павялічваць памер ужо павялічанага акна"
+
+#~ msgid "Grows window upwards until it `bumps into' another window."
+#~ msgstr "Павялічваць акно ўгору, покуль яно ня \"сутыкнецца\" з іншым акном."
+
+#~ msgid "Moves window upwards until it `bumps into' another window."
+#~ msgstr "Перасоўваць акно ўгору, покуль яно ня \"сутыкнецца\" з іншым акном."
+
+#~ msgid "opaque"
+#~ msgstr "адлюстроўваць зьмест"
+
+#~ msgid "box"
+#~ msgstr "адлюстроўваць каркас"
+
+#~ msgid "How windows being moved are animated: \\w"
+#~ msgstr "Як будзе анімавацца перасоўваньне вокнаў: \\w"
+
+#~ msgid "How windows being resized are animated: \\w"
+#~ msgstr "Як будзе анімавацца зьмяненьне памеру вокнаў: \\w"
+
+#~ msgid "Raise windows when they are moved or resized."
+#~ msgstr "Паднімаць вокны падчас перасоўваньня ці зьмяненьня памеру."
+
+#~ msgid "region"
+#~ msgstr "вобласьць"
+
+#~ msgid "border"
+#~ msgstr "рамка"
+
+#~ msgid "grab"
+#~ msgstr "захапіць"
+
+#~ msgid "border-grab"
+#~ msgstr "захапіць рамку"
+
+#~ msgid "How to choose window edges when resizing: \\w"
+#~ msgstr "Як выбіраць края акна падчас зьмяненьня памеру: \\w"
+
+#~ msgid "Snap window position to edges of other windows while moving."
+#~ msgstr "Раўнаць пазыцыю акна по краёх іншых вокнаў падчас перасоўваньня."
+
+#~ msgid "Proximity in pixels before snapping to a window edge."
+#~ msgstr "Адлегласьць у піксэлях перад прыцягваньнем да краю акна."
+
+#~ msgid "magnetism"
+#~ msgstr "магнетызм"
+
+#~ msgid "resistance"
+#~ msgstr "супраціў"
+
+#~ msgid "attraction"
+#~ msgstr "прыцягненьне"
+
+#~ msgid "How to snap together window edges: \\w"
+#~ msgstr "Як раўнаць адносна адно аднаго края вокнаў: \\w"
+
+#~ msgid "Snap to otherwise-ignored windows."
+#~ msgstr "Прыцягваць да йнакш-ігнаруемых вокнаў"
+
+#~ msgid "Only update window contents after it has stopped moving."
+#~ msgstr "Абнаўляць зьмест акна толькі пасьля заканчэньня руху."
+
+#~ msgid ""
+#~ "Default increment for size-window commands (when the window doesn't\n"
+#~ "specify it's own increments)."
+#~ msgstr ""
+#~ "Дапомная велічыня павялічэньня памеру акна для апэрацыяў зьвязаных\n"
+#~ "са зьмяненьнем памеру (калі акно само ня ўказвае велічыню зьмяненьня)"
+
+#~ msgid "Number of pixels to move window in `slide-' commands."
+#~ msgstr "Колькасьць піксэлаў для зруху акна у камандзе \"зрух-\"."
+
+#~ msgid "Display window names while cycling through windows."
+#~ msgstr "Адлюстроўваць назвы вокнаў падчас перабору."
+
+#~ msgid "Raise windows while they're temporarily selected during cycling."
+#~ msgstr "Паднімаць вокны калі яны часова вылучаны падчас перабору."
+
+#~ msgid "Warp the mouse pointer to windows as they're temporarily selected."
+#~ msgstr "Загінаць указальнік мышы ў вокны калі яны часова выбраны."
+
+#~ msgid "Focus windows when they're temporarily selected during cycling."
+#~ msgstr "Засяроджваць вокны калі яны часова выбраны ў працэсе перабору."
+
+#~ msgid "Disable auto-raising while temporarily selecting windows."
+#~ msgstr "Адключыць аўтападняцьце падчас часовага выбару вокнаў."
+
+#~ msgid "Play sound effects for unmanaged windows."
+#~ msgstr "Уключыць гукавыя эфекты для вокнаў, якія ня кіруюцца."
+
+#~ msgid "The hierarchical window menu raises singleton submenus."
+#~ msgstr "Гіерархічнае мэню акна выклікае падмэню-самотнікі."
+
+#~ msgid "Milliseconds to delay before flipping: \\w"
+#~ msgstr "Затрымка перад адлюстраваньнем у мілісэкундах: \\w"
+
+#~ msgid "Warp pointer to opposite screen edge when flipping."
+#~ msgstr "Загінаць указальнік на супрацьлеглы край экрану пры адлюстраваньні."
+
+#~ msgid "Remove tooltips after a period of time."
+#~ msgstr "Выдаляць падказкі праз указаны час."
+
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "Колькасьць мілісэкундаў да паказу падказкі."
+
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "Колькасьць мілісэкундаў да хаваньня падказкі."
+
+#~ msgid "Font used to display tooltips."
+#~ msgstr "Шрыфт для адлюстраваньня падказак."
+
+#~ msgid "Color used for the tooltips background"
+#~ msgstr "Колер тла падказак"
+
+#~ msgid "Color used for the tooltips foreground"
+#~ msgstr "Колер тэксту падказак"
+
+#~ msgid "Invoke the GNOME control center from the `Customize' menu."
+#~ msgstr "Выклікаць \"Цэнтар кіраваньня GNOME\" з мэню \"Наладка\"."
+
+#~ msgid ""
+#~ "Try to leave at least this many pixels between window edges in first/best-"
+#~ "fit."
+#~ msgstr ""
+#~ "Спрабаваць пакінуць хаця б гэтую колькасьць піксэлаў між краямі акна ў "
+#~ "\"першае\"/\"лепшае запаўненьне\"."
+
+#~ msgid "Automatically select window gravity from position on screen."
+#~ msgstr "Аўтаматычна выбіраць гравітацыю вокнаў сыходзячы з іх пазыцыі."
+
+#~ msgid "Ignore requests from applications to change window stacking."
+#~ msgstr "Ігнараваць запыты дастасаваньняў аб зьмене стосу вокнаў."
+
+#~ msgid "Windows are focused after being uniconified."
+#~ msgstr "Вокны засяроджваюцца пасьля разгортваньня."
+
+#~ msgid "Windows are raised after being uniconified."
+#~ msgstr "Вокны падымаюцца пасьля разгортваньня."
+
+#~ msgid "Unmanaged windows may be iconified."
+#~ msgstr "Вокны, якія ня кіруюцца, могуць быць згорнутыя."
+
+#~ msgid "Windows uniconify to the current workspace."
+#~ msgstr "Вокны разгортваюцца на бягучым працоўным мейсцы."
+
+#~ msgid "Iconifying a window also iconifies the: \\w"
+#~ msgstr "Згортваньне акна таксама прыводзіць да згортваньня: \\w"
+
+#~ msgid "Uniconifying a window also uniconifies the: \\w"
+#~ msgstr "Разгортваньне акна таксама разгортвае: \\w"
+
+#~ msgid "Iconify the window."
+#~ msgstr "Згарнуць акно ў значку."
+
+#~ msgid "Toggle single window mode"
+#~ msgstr "Пераключыць рэжым аднаго акна"
+
+#~ msgid ""
+#~ "Maximizing a window in one dimension must increase the size of that "
+#~ "dimension."
+#~ msgstr ""
+#~ "Максымізацыя акна ў адным вымярэньні павінна павялічыць яго памер у гэтым "
+#~ "вымярэньні."
+
+#~ msgid "Raise windows when they are maximized."
+#~ msgstr "Падымаць вокны падчас найбольшаньня."
+
+#~ msgid "Let unmanaged windows be overlapped when filling windows."
+#~ msgstr ""
+#~ "Дазволіць перакрываньне вокнаў, якія ня кіруюцца, пад час запаўненьня "
+#~ "вокнаў."
+
+#~ msgid "Don't cover `avoided' windows when maximizing."
+#~ msgstr "Ня зачыняць вокны, якіх 'пазьбягаюць', пад час  найбольшаньня."
+
+#~ msgid "Dialog windows inherit the focus from their parent."
+#~ msgstr "Дыялёгавыя вокны атрымліваюць ад бацькоў у спадчыну засяроджаньне."
+
+#~ msgid "Decorate dialog windows similarly to application windows."
+#~ msgstr "Аздабляць вокны дыялёгаў як і вокны дастасаваньняў."
+
+#~ msgid "Windows uniconify to the current workspace when they are selected."
+#~ msgstr "Вокны разгортваюцца на бягучай працоўнай прасторы калі яны выбраны."
+
+#~ msgid "Raise selected windows (normally by the Windows menu)."
+#~ msgstr "Падняць выбраныя вокны (звычайна з дапамогаю мэню \"Вокны\")."
+
+#~ msgid "Warp the pointer to selected windows."
+#~ msgstr "Загінаць указальнік у выбраных вокнах."
+
+#~ msgid "Group transient windows with their parents."
+#~ msgstr "Згрупаваць прамежкавыя вокны з іх бацькамі."
+
+#~ msgid "Persistent group ids"
+#~ msgstr "Ідэнтыфікатары сталых групаў"
+
+#~ msgid "novice"
+#~ msgstr "навічок"
+
+#~ msgid "intermediate"
+#~ msgstr "сярэдняга ўзроўню"
+
+#~ msgid "expert"
+#~ msgstr "экспэрт"
+
+#~ msgid "Show options suitable for \\w users."
+#~ msgstr "Адлюстраваць парамэтры, якія падыходзяць для \\w карыстальнікаў."
+
+#~ msgid "ok"
+#~ msgstr "добра"
+
+#~ msgid "revert/cancel/ok"
+#~ msgstr "вярнуць/адмяніць/добра"
+
+#~ msgid "apply/revert/cancel/ok"
+#~ msgstr "ужыць/вярнуць/адмяніць/добра"
+
+#~ msgid "Buttons shown in configurator: \\w"
+#~ msgstr "Кнопкі, якія адлюстраваны у канфігуратары: \\w"
+
+#~ msgid "Show variable names of each customization option."
+#~ msgstr "Адлюстраваць назвы пераменных для кожнага наладжанага парамэтру."
 
