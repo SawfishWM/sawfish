@@ -252,6 +252,7 @@ install_window_frame (Lisp_Window *w)
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	w->reparented = TRUE;
 	after_local_map (w);
+	restack_window (w);
 
 	XAddToSaveSet (dpy, w->id);
 	restack_frame_parts (w);
@@ -275,6 +276,7 @@ remove_window_frame (Lisp_Window *w)
 	XReparentWindow (dpy, w->id, root_window, w->attr.x, w->attr.y);
 	w->reparented = FALSE;
 	after_local_map (w);
+	restack_window (w);
 
 	if (!w->mapped)
 	    XRemoveFromSaveSet (dpy, w->id);
@@ -313,6 +315,10 @@ add_window (Window id)
 	w->plist = Qnil;
 	w->frame_style = Qnil;;
 	w->icon_image = rep_NULL;
+
+	/* have to put it somewhere until it finds the right place */
+	insert_in_stacking_list_above_all (w);
+	restack_window (w);
 
 	/* ..now do the X11 stuff */
 
@@ -467,6 +473,8 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
     }
     else if (w->frame != 0 && from_error == Qnil)
 	destroy_window_frame (w, FALSE);
+
+    remove_from_stacking_list (w);
 
     /* We can lose the focus sometimes, notably after a was-focused
        window is closed while a keyboard grab exists.. (netscape) */
@@ -881,24 +889,7 @@ Return a list of windows defining the current stacking order of all
 client windows.
 ::end:: */
 {
-    Window root, parent, *children;
-    u_int nchildren;
-    if (XQueryTree (dpy, root_window, &root, &parent, &children, &nchildren))
-    {
-	int i;
-	repv ret = Qnil;
-	for (i = 0; i < nchildren; i++)
-	{
-	    Lisp_Window *w = find_window_by_id (children[i]);
-	    if (w != 0)
-		ret = Fcons (rep_VAL(w), ret);
-	}
-	if (children != 0)
-	    XFree (children);
-	return ret;
-    }
-    else
-	return Qnil;
+    return make_stacking_list ();
 }
 
 DEFUN("window-visibility", Fwindow_visibility, Swindow_visibility,

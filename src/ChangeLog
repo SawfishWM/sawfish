@@ -1,3 +1,34 @@
+2001-02-09  John Harper  <jsh@eazel.com>
+
+	Work to cache the stacking order of windows locally - this
+	fixes the bug where reparenting windows screws the stacking
+	order and therefore makes the constraint-based stacking code go
+	haywire. It's also an efficiency win since we don't need to
+	keep asking the server for the order
+
+	* stacking-list.c: new file, code to maintain and manipulate a
+	doubly linked list of all managed windows, representing the
+	current stacking order. Also has a function to restack a window
+	such that it's consistent with its position in the list
+
+	* sawmill.h (Lisp_Window): new fields `above' and `below' -
+	linkage for the stacking list
+
+	* functions.c (Frestack_windows, Fx_raise_window,
+	Fx_lower_window): these are now implemented in terms of the
+	stacking list primitives. The method is simple: get the list
+	into the new order, then call restack_window () on any windows
+	that changed position in the list
+
+	* windows.c (Fstacking_order): just call make_stacking_list ()
+
+	(add_window, remove_window): add and remove the window from the
+	stacking list
+
+	(install_window_frame, remove_window_frame): after calling
+	XReparentWindow (), call restack_window () to fix the stacking
+	order of the window - this fixes the original bug
+
 2001-02-07  John Harper  <jsh@eazel.com>
 
 	* colors.c (Fget_color): don't try to call XParseColor if we

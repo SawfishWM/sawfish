@@ -343,4 +343,13 @@ extern void manage_windows (void);
 extern void windows_init (void);
 extern void windows_kill (void);
 
+/* from window-list.c */
+extern void remove_from_stacking_list (Lisp_Window *w);
+extern void insert_in_stacking_list_above_all (Lisp_Window *w);
+extern void insert_in_stacking_list_below_all (Lisp_Window *w);
+extern void insert_in_stacking_list_above (Lisp_Window *w, Lisp_Window *x);
+extern void insert_in_stacking_list_below (Lisp_Window *w, Lisp_Window *x);
+extern void restack_window (Lisp_Window *w);
+extern repv make_stacking_list (void);
+
 #endif /* SAWMILL_SUBRS_H */

@@ -102,6 +102,9 @@ typedef struct lisp_window {
     repv plist;
     repv frame_style;
 
+    /* stacking order */
+    struct lisp_window *above, *below;
+
     /* Is the client window mapped? (by its app) */
     u_int mapped : 1;
 
