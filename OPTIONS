@@ -28,7 +28,8 @@
 ;; window animation options
 
 ;;  (define-special-variable default-window-animator 'none
-;;    "The default window animation mode")
+;;    "The default window animation mode. Options include none,
+;;wireframe and solid.")
 
 ;;  (define-special-variable anim-outline-icon-coords
 ;;    (cons (screen-width) (screen-height))
@@ -51,13 +52,15 @@
 ;;    "Show variable names of each customization option.")
 
 ;;  (define-special-variable customize-command-classes '(default)
-;;    "Also include commands of these classes the key bindings panel.")
+;;    "Also include commands of these classes the key bindings panel.
+;;Add the `viewport' keyboard to make viewport commands show up.")
  
 
 ;; focus options
 
 ;;  (define-special-variable focus-mode 'click
-;;     "When does the mouse pointer affect the input focus.")
+;;     "When does the mouse pointer affect the input focus. Standard
+;;modes are click, enter-exit, and enter-only.")
 
 ;;  (define-special-variable focus-click-through t
 ;;    "Click-to-focus mode passes the click through to the application.")
@@ -103,17 +106,16 @@
 ;;  (define-special-variable user-theme-directory "~/.sawfish/themes"
 ;;    "Directory containing user-local themes.")
 
-;;  (define-special-variable system-theme-directory (expand-file-name
-;;				  "../themes" sawfish-lisp-lib-directory)
+;;  (define-special-variable system-theme-directory
+;;    (expand-file-name "../themes" sawfish-lisp-lib-directory)
 ;;    "Directory containing themes from the current sawfish version.")
 
-;;  (define-special-variable site-theme-directory (expand-file-name
-;;				"../../themes" sawfish-lisp-lib-directory)
+;;  (define-special-variable site-theme-directory
+;;    (expand-file-name "../../themes" sawfish-lisp-lib-directory)
 ;;    "Directory containing system-wide themes.")
 
-;;  (define-special-variable theme-load-path (list user-theme-directory
-;;				site-theme-directory
-;;				system-theme-directory)
+;;  (define-special-variable theme-load-path
+;;    (list user-theme-directory site-theme-directory system-theme-directory)
 ;;    "List of directories search for themes.")
 
 ;;  (define-special-variable themes-are-gaolled t
@@ -155,7 +157,9 @@
 ;; window placement options
 
 ;;  (define-special-variable place-window-mode 'top-left
-;;    "Method of placing windows")
+;;    "Method of placing windows. Standard modes include: randomly,
+;;interactively, centered, centered-on-parent, under-pointer, none,
+;;top-left, off-center, first-fit, best-fit.")
 
 ;;  (define-special-variable place-transient-mode 'centered-on-parent
 ;;    "Method of placing dialog windows")
