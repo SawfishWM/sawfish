@@ -65,7 +65,11 @@
 						     customize-user-forms)))
 		(end-of-stream))
 	    (close-file file))
-	  (setq customize-user-forms (nreverse customize-user-forms))))
+	  (setq customize-user-forms
+		;; remove obsolete variables
+		(delete-if (lambda (form)
+			     (get (cadadr form) 'custom-obsolete))
+			   (nreverse customize-user-forms)))))
       (setq customize-user-file-read t)
       (setq customize-user-file-dirty nil))))
 
