@@ -1,5 +1,12 @@
 1999-09-06  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c, images.c, fonts.c, cursors.c, colors.c: define rep
+	comparison functions for these types, I'd forgotten that they
+	couldn't just be null pointers
+
+	* display.c (error_handler): don't call destroy-notify-hook
+	since it might generate X protocol requests (not allowed)
+
 	* frames.c (Fframe_state_mutex): when this variable is non-nil,
 	entering or leaving a frame-part's window won't affect its
 	state. As a hack, if you set this to `clicked' the frame part's

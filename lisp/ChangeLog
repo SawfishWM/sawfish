@@ -1,5 +1,8 @@
 1999-09-06  John Harper  <john@dcs.warwick.ac.uk>
 
+	* stacking.jl (restack-by-depth): try to optimise the
+	restacking done, by comparing the old order with the new order
+
 	* move-resize.jl (move-resize-window): set frame-state-mutex to
 	`clicked' while dragging the window
 
