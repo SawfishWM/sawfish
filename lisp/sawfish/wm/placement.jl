@@ -116,16 +116,20 @@ this mode. The single argument is the window to be placed."
   (let*
       ((dims (window-frame-dimensions w))
        (max-rect (maximize-find-workarea w))
-       (x (cond ((and max-rect (< (car dims) (nth 2 max-rect)))
-		 (+ (nth 0 max-rect) (random (- (nth 2 max-rect) (car dims)))))
-		((< (car dims) (screen-width))
-		 (random (- (screen-width) (car dims))))
-		(t 0)))
-       (y (cond ((and max-rect (< (cdr dims) (nth 3 max-rect)))
-		 (+ (nth 1 max-rect) (random (- (nth 3 max-rect) (cdr dims)))))
-		((< (cdr dims) (screen-height))
-		 (random (- (screen-height) (cdr dims))))
-		(t 0))))
+       (x (+ (cond ((and max-rect (< (car dims) (nth 2 max-rect)))
+		    (+ (nth 0 max-rect) (random (- (nth 2 max-rect)
+						   (car dims)))))
+		   ((< (car dims) (car (current-head-dimensions)))
+		    (random (- (car (current-head-dimensions)) (car dims))))
+		   (t 0))
+	     (car (current-head-offset))))
+       (y (+ (cond ((and max-rect (< (cdr dims) (nth 3 max-rect)))
+		    (+ (nth 1 max-rect) (random (- (nth 3 max-rect)
+						   (cdr dims)))))
+		   ((< (cdr dims) (cdr (current-head-dimensions)))
+		    (random (- (cdr (current-head-dimensions)) (cdr dims))))
+		   (t 0))
+	     (cdr (current-head-offset)))))
     (move-window-to w x y)))
 
 (defun place-window-interactively (w)
@@ -146,8 +150,12 @@ this mode. The single argument is the window to be placed."
 (defun place-window-centered (w)
   (let
       ((dims (window-frame-dimensions w)))
-    (move-window-to w (quotient (max 0 (- (screen-width) (car dims))) 2)
-		    (quotient (max 0 (- (screen-height) (cdr dims))) 2))))
+    (move-window-to w (+ (car (current-head-offset))
+			 (quotient (max 0 (- (car (current-head-dimensions))
+					     (car dims))) 2))
+		    (+ (cdr (current-head-offset))
+		       (quotient (max 0 (- (cdr (current-head-dimensions))
+					   (cdr dims))) 2)))))
 
 (defun place-window-centered-on-parent (w)
   (let
@@ -164,6 +172,7 @@ this mode. The single argument is the window to be placed."
 			  (quotient (- (cdr pdims) (cdr dims)) 2)))
 	(move-window-to w (car coords) (cdr coords))))))
 
+;; XXX fix for Xinerama
 (defun place-window-under-pointer (w)
   (let
       ((dims (window-frame-dimensions w))
