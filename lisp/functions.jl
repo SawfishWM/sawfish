@@ -77,6 +77,19 @@ is the list of windows to search. Returns nil if no such window is found."
 	 (progn ,@forms)
        (ungrab-server))))
 
+(let
+    ((counter 0))
+  (defun call-with-keyboard-grabbed (thunk)
+"Call the zero-parameter function THUNK with the keyboard grabbed. If unable
+to grab the keyboard then THUNK won't be called."
+    (when (grab-keyboard)
+      (unwind-protect
+	 (progn
+	   (setq counter (1+ counter))
+	   (thunk))
+	(when (zerop (setq counter (1- counter)))
+	  (ungrab-keyboard))))))
+
 (defmacro save-stacking-order (&rest forms)
   "Execute FORMS, then reinstall the original stacking order."
   (let
