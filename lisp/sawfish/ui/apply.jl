@@ -32,7 +32,9 @@
     (open rep
 	  rep.system
 	  rep.data.tables
+	  gui.gtk
 	  sawfish.gtk.widget
+	  sawfish.gtk.stock
 	  sawfish.ui.slot
 	  sawfish.ui.wm)
 
@@ -65,11 +67,42 @@
 
   (add-hook '*nokogiri-slot-changed-hook* after-changed)
 
+  (define in-apply-changes (make-fluid))
+
   (define (apply-changes-for slots getter)
-    (when slots
+    (define (do-apply)
       (wm-apply-changes (mapcar (lambda (slot)
 				  (cons (slot-name slot) (getter slot)))
-				slots))
+				slots)))
+    (define (format-error ex)
+      (when (eq (car ex) 'remote-sawfish)
+	(condition-case nil
+	    ;; this may fail if the string contains #<..>
+	    (setq ex (read-from-string (cadr ex)))
+	  (error nil)))
+      (format nil "While updating %s:\n\n%s: %s"
+	      (mapconcat (lambda (x)
+			   (format nil "`%s'" (slot-name x))) slots ", ")
+	      (or (get (car ex) 'error-message) (car ex))
+	      (mapconcat (lambda (x) (format nil "%s" x)) (cdr ex) ", ")))
+
+    (when slots
+      (if (fluid in-apply-changes)
+	  ;; avoid infinite regress..
+	  (do-apply)
+	(let-fluids ((in-apply-changes t))
+	  (condition-case data
+	      (do-apply)
+	    (remote-sawfish
+	     ;; An error occurred while setting the values,
+	     ;; back them all out, then display the error message
+	     (revert-slots slots)
+	     (let ((label (gtk-label-new (format-error data))))
+	       (gtk-label-set-justify label 'left)
+	       (gtk-widget-show label)
+	       (simple-dialog (_ "Sawfish Error") label nil
+			      (gtk-widget-get-toplevel
+			       (slot-gtk-widget (car slots)))))))))
       (mapc (lambda (slot)
 	      (mapc (lambda (h) (h)) (slot-change-handlers slot))) slots)))
 
@@ -80,12 +113,14 @@
   (define (apply-slot-1 slot)
     (apply-changes-for (list slot) slot-value))
 
-  (define (revert-slot-changes)
+  (define (revert-slots slots)
     (mapc (lambda (slot)
 	    (widget-set (slot-widget slot) (slot-old-value slot))
-	    (update-dependences slot))
-	  changed-slots-ever)
-    (apply-changes-for changed-slots-ever slot-old-value)
+	    (update-dependences slot)) slots)
+    (apply-changes-for slots slot-old-value))
+
+  (define (revert-slot-changes)
+    (revert-slots changed-slots-ever)
     (setq changed-slots-ever '()))
 
   (define (changes-to-apply-p) changed-slots)
