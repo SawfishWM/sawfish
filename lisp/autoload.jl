@@ -132,4 +132,5 @@
 (autoload 'toggle-window-never-focus "ignore-window" t)
 (autoload 'raise-window-and-pass-through-click "raise-commands" t)
 (autoload 'raise-and-pass-through-click-if-focused "raise-commands" t)
+(autoload 'raise-or-pass-through-click "raise-commands" t)
 ;;; ::autoload-end::

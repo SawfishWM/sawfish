@@ -11,6 +11,9 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
+  ! The uniconify this window to current view port only works when
+    uniconify to current workspace is also enabled
+
   ! Sawmill gets confused about where a window is when snapping to
     edges.  To trigger the bug, snap one window to the bottom of
     another.  Next, grab the bottom window and move it downward, then
@@ -88,9 +91,11 @@ Outstanding bugs
 Window manager tasks
 ====================
 
-  + handle language codes better in gnome-menu
+  + set placement gravity when smart-placement aligns window to edge
 
-  + look at TryExec field in GNOME desktop entries
+  + make configure_request () grok placement gravity
+
+  + handle language codes better in gnome-menu
 
   + add a function to turn icons into lisp images
 
