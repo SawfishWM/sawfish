@@ -60,10 +60,20 @@
 
   ;; iconification
 
-  (define (iconify-group w) (map-window-group iconify-window w))
-  (define (uniconify-group w) (map-window-group uniconify-window w))
-  (define (iconify-transient-group w) (map-transient-group iconify-window w))
-  (define (uniconify-transient-group w) (map-transient-group uniconify-window w))
+  (define (call-with-iconify-mode mode fun w)
+    (let ((iconify-group-mode mode)
+	  (uniconify-group-mode mode))
+      (fun w)))
+
+  (define (iconify-group w)
+    (call-with-iconify-mode 'group iconify-window w))
+  (define (uniconify-group w)
+    (call-with-iconify-mode 'group uniconify-window w))
+
+  (define (iconify-transient-group w)
+    (call-with-iconify-mode 'transients iconify-window w))
+  (define (uniconify-transient-group w)
+    (call-with-iconify-mode 'transients uniconify-window w))
 
   (define-command 'iconify-group iconify-group #:spec "%W")
   (define-command 'uniconify-group uniconify-group #:spec "%W")

@@ -1,5 +1,20 @@
 2000-12-19  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/state/iconify.jl (iconify-window,
+	uniconify-window): support `group' and `transients'
+	[un]iconification modes better. Don't use a recursive method,
+	instead identify all the windows to be changed, then do
+	everything in one go. For `transients' mode, only change state
+	of shared transients if they [will] have no visible parents
+	left
+
+	* sawfish/wm/commands/groups.jl (iconify-group,
+	uniconify-group, iconify-transient-group,
+	uniconify-transient-group): use [un]iconify-window to implement
+	these (by temporarily binding the necessary special variables)
+
+	[ Last two changes fix #5252 ]
+
 	* sawfish/wm/util/keymap.jl (where-is,
 	make-memoizing-where-is): use substitute-wm-modifier to avoid
 	showing W- in results
