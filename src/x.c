@@ -528,6 +528,15 @@ x_window_parse_changes (XWindowChanges *changes, repv attrs)
     return changesMask;
 }
 
+static void
+x_window_note_changes (Lisp_X_Window *w, long mask, XWindowChanges *changes)
+{
+    if (mask & CWWidth)
+	w->width = changes->width;
+    if (mask & CWHeight)
+	w->height = changes->height;
+}
+
 static long
 x_window_parse_attributes (XSetWindowAttributes *attributes, repv attrs)
 {
@@ -727,7 +736,7 @@ x-unmap-window X-WINDOW
 DEFUN ("x-configure-window", Fx_configure_window,
        Sx_configure_window, (repv window, repv attrs), rep_Subr2) /*
 ::doc:sawfish.wm.util.x#x-configure-window::
-x-configure-window WINDOW ATTRS
+x-configure-window X-WINDOW ATTRS
 
 Reconfigures the X-WINDOW. ATTRS should be an alist mapping attribute
 names to values. Known attributes include the symbols `x', `y',
@@ -746,6 +755,7 @@ names to values. Known attributes include the symbols `x', `y',
     {
 	XConfigureWindow (dpy, VX_DRAWABLE (window)->id,
 			  changesMask, &changes);
+	x_window_note_changes (VX_DRAWABLE (window), changesMask, &changes);
     }
 
     return Qt;

@@ -1,3 +1,11 @@
+2001-04-11  John Harper  <jsh@eazel.com>
+
+	Fixed bug 6970 (X plugin doesn't update width and height of
+	drawable structure):
+
+	* x.c (x_window_note_changes): new function, called by
+	Fx_configure_window () after making changes
+
 2001-03-29  John Harper  <jsh@eazel.com>
 
 	Fixed an ICCCM compliance problem:
