@@ -11,10 +11,6 @@ and longer-term ideas are marked -
 Broken during modularization
 ============================
 
- ! rep-xgettext will miss commands
-
-   scan for define-command forms, then scan for just those functions
-
  ! menus work, but too much eval-ing
 
  ! check all necessary aliases are in place
@@ -91,7 +87,7 @@ Outstanding bugs
 
   ! swapped-out window properties aren't saved with session
 
-  ! xv/java-apps get weird placement [apps being non-ICCCM compliant?]
+  ! java-apps get weird placement [apps being non-ICCCM compliant?]
 
   ! the gnome _WIN_MAXIMIZED_ hints are ignored when the window is
     mapped, since it's not possible to maximize the window at that
@@ -128,6 +124,8 @@ Outstanding bugs
 
 Window manager tasks
 ====================
+
+  ! when drawing into frame parts manually, no way to set shape
 
   + make command list hierarchical?
 
