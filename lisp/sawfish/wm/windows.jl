@@ -122,9 +122,9 @@ Returns nil if no such window is found."
   (define (window-in-cycle-p w)
     "Returns true if the window W should be included when cycling between
 windows."
-    (not (or (window-get w 'never-focus)
-	     (window-get w 'cycle-skip)
-	     (desktop-window-p w))))
+    (and (window-really-wants-input-p w)
+	 (not (or (window-get w 'cycle-skip)
+		  (desktop-window-p w)))))
 
   (define (window-class w)
     "Return the class that window W belongs to, as a string. Returns `nil' if W
