@@ -85,7 +85,7 @@
     (right-edge . 5)
     (top-edge . -18)
     (keymap . close-button-keymap))))
-(frame-put simple-frame 'unshaped t)
+(put 'simple-frame 'unshaped t)
 
 ;; XXX get rid of this
 (setq default-frame 'simple-frame)
