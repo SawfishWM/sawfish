@@ -76,6 +76,23 @@
     (when win
       (set-input-focus win))))
 
+;; The problem is that any sticky windows that have been focused once
+;; will _always_ rise to the top of the order when switching workspaces
+;; (since the topmost window is _always_ focused when entering a new
+;; workspace). The hacky solution is to remove the order of any sticky
+;; windows that aren't at the top of the stack before switching spaces
+
+(defun window-order-pop-low-sticky-windows (space)
+  (let
+      ((order (window-order space t t)))
+    (while (and order (window-get (car order) 'sticky))
+      (setq order (cdr order)))
+    (mapc (lambda (w)
+	    (when (window-get w 'sticky)
+	      (window-put w 'order nil))) order)))
+
+(add-hook 'leave-workspace-hook window-order-pop-low-sticky-windows)
+
 (sm-add-saved-properties 'order)
 (add-hook 'sm-after-restore-hook window-order-compress)
 (add-hook 'iconify-window-hook window-order-pop)
