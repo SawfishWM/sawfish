@@ -27,9 +27,6 @@
 
 ;;(setq debug-on-error '(bad-arg missing-arg void-value invalid-function))
 
-;; quiet autoloading
-(setq autoload-verbose nil)
-
 ;; so modularised rep knows where to inherit specials and load from
 (setq *root-structure* 'sawfish.wm)
 (setq *user-structure* 'user)
