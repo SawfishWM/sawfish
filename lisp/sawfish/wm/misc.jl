@@ -102,10 +102,16 @@ list of strings DIRS."
     (find-head (query-pointer))))
 
 (define (current-head-dimensions #!optional w)
-  (head-dimensions (current-head w)))
+  (let ((head (current-head w)))
+    (if head
+	(head-dimensions head)
+      (screen-dimensions))))
 
 (define (current-head-offset #!optional w)
-  (head-offset (current-head w)))
+  (let ((head (current-head w)))
+    (if head
+	(head-offset head)
+      (cons 0 0))))
 
 (define (load-module name)
   "Ensure that the module called NAME has been loaded. Note that this does
