@@ -76,7 +76,7 @@
 				  frame-style cycle-skip window-list-skip))
   
   ;; property matched on
-  (defvar window-history-key-property 'WM_CLASS)
+  (defvar window-history-key-property '(WM_CLASS WM_WINDOW_ROLE))
 
   (defvar window-history-menu
     `((,(_ "Remember _position") window-history-save-position)
@@ -133,10 +133,13 @@
     ;; state of the app window, then a transient with the same class gets
     ;; given the same state..
 
-    (if (window-transient-p w)
-	(cons (nth 2 (get-x-property w window-history-key-property))
-	      (window-name w))
-      (nth 2 (get-x-property w window-history-key-property))))
+    (define (get-prop p) (nth 2 (get-x-property w p)))
+
+    (nconc (if (listp window-history-key-property)
+	       (mapcar get-prop window-history-key-property)
+	     (list (get-prop window-history-key-property)))
+	   (and (window-transient-p w)
+		(list (window-name w)))))
 
   (define (window-history-ref w)
     (let ((class (window-history-key w)))
