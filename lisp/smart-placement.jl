@@ -329,15 +329,23 @@ weights mean that the window is harder to cover.")
       ((windows (sp-get-windows w))
        (rects (sp-make-rects windows))
        (grid (sp-make-grid rects t))
-       (dims  (window-frame-dimensions w))
+       (dims (window-frame-dimensions w))
        point)
-    (rplaca dims (min (+ (car dims) (* sp-padding 2)) (screen-width)))
-    (rplacd dims (min (+ (cdr dims) (* sp-padding 2)) (screen-height)))
-    (setq point (funcall (if (eq mode 'first-fit) 'sp-first-fit 'sp-best-fit)
-			 dims grid rects))
 
-    (when (and (null point) (> sp-padding 0))
-      ;; no position, try with no padding
+    ;; first try with padding
+    (when (and (> sp-padding 0)
+	       (<= (+ (car dims) sp-padding) (screen-width))
+	       (<= (+ (cdr dims) sp-padding) (screen-height)))
+      (rplaca dims (+ (car dims) (* sp-padding 2)))
+      (rplacd dims (+ (cdr dims) (* sp-padding 2)))
+      (setq point (funcall (if (eq mode 'first-fit) 'sp-first-fit 'sp-best-fit)
+			   dims grid rects))
+      (when point
+	(rplaca point (+ (car point) sp-padding))
+	(rplacd point (+ (cdr point) sp-padding))))
+
+    ;; then try without padding
+    (when (null point)
       (setq dims (window-frame-dimensions w))
       (rplaca dims (min (car dims) (screen-width)))
       (rplacd dims (min (cdr dims) (screen-height)))
@@ -345,8 +353,7 @@ weights mean that the window is harder to cover.")
 			   dims grid rects)))
 
     (if point
-	(move-window-to
-	 w (+ (car point) sp-padding) (+ (cdr point) sp-padding))
+	(move-window-to w (car point) (cdr point))
       (place-window-randomly w))))
 
 ;;;###autoload
