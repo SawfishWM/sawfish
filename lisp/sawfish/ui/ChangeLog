@@ -1,5 +1,11 @@
 2000-09-25  John Harper  <john@dcs.warwick.ac.uk>
 
+	* widgets/keymap.jl (make-keymap:binding-item): add a `Key:'
+	label to the event widget
+
+	* widgets/event.jl (make-event-item): don't prefix the widget
+	with a `Key:' label, it's more useful without it
+
 	* layout.jl (document-slot): handle adding any tooltip embedded
 	in the slots documentation string
 

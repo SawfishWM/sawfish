@@ -1,4 +1,19 @@
+2000-09-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/commands/x-cycle.jl (cycle-windows): add the
+	modifiers of the invoking event to the cycle-reverse-event when
+	creating its binding
+
+	* sawfish/wm/util/decode-events.jl (decode-event): use a `do'
+	statement instead of while and setq
+
 2000-09-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/commands/x-cycle.jl (cycle-reverse-event): new
+	option, the name of the event that causes cycling to reverse
+	direction. (My rationale is that this is less fiddly to use
+	than, e.g., making M-S-TAB go backwards, and also is cleaner to
+	implement)
 
 	* sawfish/wm/misc.jl (current-head): fall back to checking the
 	pointer position if no head is found for the window
