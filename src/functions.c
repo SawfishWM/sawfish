@@ -153,19 +153,28 @@ DEFUN("warp-cursor-to-window", Fwarp_cursor_to_window, Swarp_cursor_to_window,
 ::doc:Swarp-cursor-to-window::
 warp-cursor-to-window WINDOW [X Y]
 
-Move the mouse pointer to position (X, Y) (or (0, 0) if undefined) relative
-to the origin of window object WINDOW.
+Move the mouse pointer to position (X, Y) relative to the client window
+associated with object WINDOW.
+
+If X and Y are nil, then they are taken as the top-left corner of the
+window frame.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
     if (VWIN(win)->visible)
     {
-	int dest_x = 0, dest_y = 0;
-	if (rep_INTP(x))
-	    dest_x = rep_INT(x);
-	if (rep_INTP(y))
-	    dest_y = rep_INT(y);
-	XWarpPointer (dpy, None, VWIN(win)->id, 0, 0, 0, 0, dest_x, dest_y);
+	Window w = VWIN(win)->id;
+	int dest_x = 1, dest_y = 1;
+	if (!rep_INTP(x) && !rep_INTP(y) && VWIN(win)->reparented)
+	    w = VWIN(win)->frame;
+	else
+	{
+	    if (rep_INTP(x))
+		dest_x = rep_INT(x);
+	    if (rep_INTP(y))
+		dest_y = rep_INT(y);
+	}
+	XWarpPointer (dpy, None, w, 0, 0, 0, 0, dest_x, dest_y);
 	return win;
     }
     else
