@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawmill 0.18\n"
-"POT-Creation-Date: 1999-12-13 22:14+0100\n"
+"POT-Creation-Date: 1999-12-16 15:36%z\n"
 "PO-Revision-Date: 1999-12-13 22:18+0100\n"
 "Last-Translator: Jesús Bravo Álvarez <jba@pobox.com>\n"
 "Language-Team: Galician <gpul-traduccion@ceu.fi.udc.es>\n"
@@ -131,6 +131,56 @@ msgstr "Eleva-las fiestras ó seren enfocadas."
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr "Retardo en milisegundos ata que as fiestras enfocadas sexan elevadas."
 
+# ../lisp/custom.jl
+msgid "List of features to load before running customize."
+msgstr ""
+"Lista de características a cargar antes de executa-la configuración do "
+"usuario."
+
+# ../lisp/custom.jl
+msgid "File used to store user's configuration settings."
+msgstr "Ficheiro usado para garda-los axustes de configuración do usuario."
+
+# ../lisp/custom.jl
+msgid "All settings"
+msgstr "Tódalas propiedades"
+
+# ../lisp/custom.jl
+msgid "Focus"
+msgstr "Foco"
+
+# ../lisp/custom.jl
+msgid "Move/Resize"
+msgstr "Mover/Redimensionar"
+
+# ../lisp/custom.jl
+msgid "Placement"
+msgstr "Colocación"
+
+# ../lisp/custom.jl
+msgid "Appearance"
+msgstr "Aparencia"
+
+# ../lisp/custom.jl
+msgid "Workspaces"
+msgstr "Escritorios"
+
+# ../lisp/keymaps.jl
+msgid "Bindings"
+msgstr "Atallos"
+
+# ../lisp/custom.jl
+msgid "Iconifying"
+msgstr "Iconificar"
+
+# ../lisp/custom.jl
+msgid "Maximizing"
+msgstr "Maximizar"
+
+# ../lisp/custom.jl
+msgid "Miscellaneous"
+msgstr "Varios"
+
 # ../lisp/customize.jl
 msgid "Location of the program implementing sawmill's configuration interface."
 msgstr ""
@@ -189,56 +239,6 @@ msgstr ""
 "detalles.\n"
 "\n"
 "Visite a páxina Web do Sawmill en http://sawmill.sourceforge.net/"
-
-# ../lisp/custom.jl
-msgid "List of features to load before running customize."
-msgstr ""
-"Lista de características a cargar antes de executa-la configuración do "
-"usuario."
-
-# ../lisp/custom.jl
-msgid "File used to store user's configuration settings."
-msgstr "Ficheiro usado para garda-los axustes de configuración do usuario."
-
-# ../lisp/custom.jl
-msgid "All settings"
-msgstr "Tódalas propiedades"
-
-# ../lisp/custom.jl
-msgid "Focus"
-msgstr "Foco"
-
-# ../lisp/custom.jl
-msgid "Move/Resize"
-msgstr "Mover/Redimensionar"
-
-# ../lisp/custom.jl
-msgid "Placement"
-msgstr "Colocación"
-
-# ../lisp/custom.jl
-msgid "Appearance"
-msgstr "Aparencia"
-
-# ../lisp/custom.jl
-msgid "Workspaces"
-msgstr "Escritorios"
-
-# ../lisp/keymaps.jl
-msgid "Bindings"
-msgstr "Atallos"
-
-# ../lisp/custom.jl
-msgid "Iconifying"
-msgstr "Iconificar"
-
-# ../lisp/custom.jl
-msgid "Maximizing"
-msgstr "Maximizar"
-
-# ../lisp/custom.jl
-msgid "Miscellaneous"
-msgstr "Varios"
 
 # ../lisp/cycle.jl
 msgid "Select the next window of the current workspace."
@@ -707,6 +707,16 @@ msgstr "Escritorio anterior"
 msgid "Next workspace"
 msgstr "Escritorio seguinte"
 
+# ../lisp/workspace.jl
+#, fuzzy
+msgid "Copy to previous workspace"
+msgstr "Amosa-lo escritorio anterior."
+
+# ../lisp/workspace.jl
+#, fuzzy
+msgid "Copy to next workspace"
+msgstr "Amosa-lo seguinte escritorio."
+
 # ../lisp/menus.jl
 msgid "Left"
 msgstr "Esquerda"
@@ -967,22 +977,6 @@ msgstr "Move-lo grupo de fiestras `slide-window-increment' puntos para arriba."
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Move-lo grupo de fiestras `slide-window-increment' puntos para abaixo."
 
-# ../lisp/smart-placement.jl
-msgid ""
-"Try to leave at least this many pixels between window edges in "
-"first/best-fit."
-msgstr ""
-"Tentar deixar polo menos este número de puntos entre os eixos das fiestras "
-"nos modos first/best-fit."
-
-# ../lisp/smart-placement.jl
-msgid ""
-"Weighting between future usefulness and edge alignment in best-fit mode.\n"
-"A value between 0 and 1023 inclusive."
-msgstr ""
-"Función de peso entre a utilidade e o aliñamento de eixo no modo best-fit. "
-"Pode ser un valor entre 0 e 1023 inclusive."
-
 # ../lisp/sm-init.jl
 msgid "A string identifying the current session."
 msgstr "Unha cadea identificando a sesión actual."
@@ -1014,6 +1008,22 @@ msgstr ""
 # ../lisp/sm-init.jl
 msgid "Hook called after loading a saved session."
 msgstr "Extensión a chamar despois de cargar unha sesión gardada."
+
+# ../lisp/smart-placement.jl
+msgid ""
+"Try to leave at least this many pixels between window edges in "
+"first/best-fit."
+msgstr ""
+"Tentar deixar polo menos este número de puntos entre os eixos das fiestras "
+"nos modos first/best-fit."
+
+# ../lisp/smart-placement.jl
+msgid ""
+"Weighting between future usefulness and edge alignment in best-fit mode.\n"
+"A value between 0 and 1023 inclusive."
+msgstr ""
+"Función de peso entre a utilidade e o aliñamento de eixo no modo best-fit. "
+"Pode ser un valor entre 0 e 1023 inclusive."
 
 # ../lisp/stacking.jl
 msgid "Keep transient windows stacked above."
@@ -1050,6 +1060,22 @@ msgid ""
 msgstr ""
 "Eleva-la fiestra que recibiu o evento actual, e entón reproducir calquera "
 "evento de punteiro que provocou o comando."
+
+# ../lisp/tooltips.jl
+msgid "Tooltips"
+msgstr ""
+
+# ../lisp/menus.jl
+#, fuzzy
+msgid "Display tooltips for window frames."
+msgstr "Amosa-lo menú con tódalas operacións de fiestra."
+
+# ../lisp/edge-flip.jl
+#, fuzzy
+msgid "Number of milliseconds to wait before displaying tooltip."
+msgstr ""
+"Número de milisegundos a agardar antes de saltar cando o punteiro chega ó "
+"eixo da pantalla."
 
 # ../lisp/transient.jl
 msgid "Focus each window when first displayed."
@@ -1216,6 +1242,10 @@ msgid "Display the next workspace."
 msgstr "Amosa-lo seguinte escritorio."
 
 # ../lisp/workspace.jl
+msgid "Display the previous workspace."
+msgstr "Amosa-lo escritorio anterior."
+
+# ../lisp/workspace.jl
 msgid ""
 "Move the window to the next workspace. If no next workspace exists, one\n"
 "will be created."
@@ -1223,18 +1253,14 @@ msgstr "Move-la fiestra ó seguinte escritorio. Se non existe, crearase un."
 
 # ../lisp/workspace.jl
 msgid ""
-"Create a new workspace at the end of the list, and move the window to it."
-msgstr "Crear un novo escritorio ó remate da lista, e move-la fiestra alí."
-
-# ../lisp/workspace.jl
-msgid "Display the previous workspace."
-msgstr "Amosa-lo escritorio anterior."
-
-# ../lisp/workspace.jl
-msgid ""
 "Move the window to the previous workspace. If no such workspace exists, one\n"
 "will be created."
 msgstr "Move-la fiestra ó escritorio anterior. Se non existe, crearase un."
+
+# ../lisp/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr "Crear un novo escritorio ó remate da lista, e move-la fiestra alí."
 
 # ../lisp/workspace.jl
 msgid ""
