@@ -320,7 +320,7 @@ Returns the numeric value of the raw prefix argument ARG.
     case rep_Symbol:
 	arg = rep_MAKE_INT(rep_NILP(arg) ? 1 : -1);
 	break;
-    case rep_Int:
+    case rep_Int: case rep_Number:
 	break;
     case rep_Cons:
 	arg = rep_CAR(arg);

@@ -116,8 +116,8 @@ WINDOW may be a window object or a numeric window id.
 {
     if (WINDOWP(win))
 	XDestroyWindow (dpy, VWIN(win)->id);
-    else if (rep_INTP(win))
-	XDestroyWindow (dpy, rep_INT(win));
+    else if (rep_INTEGERP(win))
+	XDestroyWindow (dpy, rep_get_long_uint (win));
     else
 	return rep_signal_arg_error (win, 1);
     return win;
@@ -729,7 +729,7 @@ converted to their numeric X atoms.
 	    if (a_type == XA_ATOM && rep_SYMBOLP(rep_VECTI(data, i)))
 		l_data[i] = XInternAtom (dpy, rep_STR(rep_SYM(rep_VECTI(data, i))->name), False);
 	    else
-		l_data[i] = rep_INT(rep_VECTI(data, i));
+		l_data[i] = rep_get_long_uint (rep_VECTI(data, i));
 	}
 	break;
     }
@@ -862,12 +862,7 @@ FORMAT sized quantities (8, 16 or 32).
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
 	for (i = 0; i < rep_VECT_LEN(data) && i < 5; i++)
-	{
-	    if (rep_LONG_INTP(rep_VECTI(data, i)))
-		ev.data.l[i] = rep_LONG_INT(rep_VECTI(data, i));
-	    else
-		ev.data.l[i] = rep_INT(rep_VECTI(data, i));
-	}
+	    ev.data.l[i] = rep_get_long_uint (rep_VECTI(data, i));
 	break;
     }
 

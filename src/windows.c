@@ -794,8 +794,8 @@ Return the window object associated with xid ID, or nil.
 ::end:: */
 {
     Lisp_Window *w;
-    rep_DECLARE1(id, rep_INTP);
-    w = find_window_by_id (rep_INT(id));
+    rep_DECLARE1(id, rep_INTEGERP);
+    w = find_window_by_id (rep_get_long_uint (id));
     return w ? rep_VAL(w) : Qnil;
 }
 

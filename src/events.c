@@ -1268,7 +1268,7 @@ server, otherwise the most recent timestamp seen by the window manager
 {
     Time time = ((from_server == Qnil)
 		 ? last_event_time : get_server_timestamp ());
-    return rep_MAKE_LONG_INT (time);
+    return rep_make_long_uint (time);
 }
 
 DEFUN("x-events-queued", Fx_events_queued, Sx_events_queued, (void), rep_Subr0)

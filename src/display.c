@@ -340,8 +340,8 @@ x_win_from_arg (repv arg)
 	return root_window;
     else if (WINDOWP(arg))
 	return VWIN(arg)->id;
-    else if (rep_INTP(arg))
-	return rep_INT(arg);
+    else if (rep_INTEGERP(arg))
+	return rep_get_long_uint (arg);
     else
 	return 0;
 }
