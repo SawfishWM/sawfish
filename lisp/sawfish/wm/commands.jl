@@ -102,7 +102,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
   ;; return the spec associated with command NAME, or nil
   (define (command-spec name)
     (or (get name 'command-spec)
-	(function-spec (command-ref name))))
+	(cadr (function-spec (command-ref name)))))
 
   (define (commandp arg)
     "Return t if ARG names a command."
@@ -150,7 +150,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
 	   (let ((spec (function-spec name)))
 	     (if spec
 		 ;; function has an embedded spec, so use it
-		 (let ((args (build-arg-list spec name)))
+		 (let ((args (build-arg-list (cadr spec) name)))
 		   (setq current-prefix-arg pfx-arg)
 		   (apply name args))
 	       ;; no spec, just call it
@@ -304,12 +304,12 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
 	 (let ((body (closure-function fun)))
 	   (cond ((bytecodep body)
 		  ;; interactive spec is 5th element of the vector
-		  (and (>= (length body) 5) (aref body 4)))
+		  (and (>= (length body) 5) (list 'interactive (aref body 4))))
 		 ((eq (car body) 'lambda)
 		  ;; search for interactive decl at head of body
 		  (let loop ((rest (cddr body)))
 		    (cond ((stringp (car rest)) (loop (cdr rest)))
-			  ((eq (caar rest) 'interactive) (cadar rest))
+			  ((eq (caar rest) 'interactive) (car rest))
 			  (t nil))))))))
 
 ;;; some default commands
