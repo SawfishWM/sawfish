@@ -29,14 +29,14 @@
 
 (defcustom viewport-columns 1
   "Number of columns in each virtual workspace."
-  :group viewport
+  :group workspace
   :type number
   :range (1 . nil)
   :after-set viewport-size-changed)
 
 (defcustom viewport-rows 1
   "Number of rows in each virtual workspace."
-  :group viewport
+  :group workspace
   :type number
   :range (1 . nil)
   :after-set viewport-size-changed)
