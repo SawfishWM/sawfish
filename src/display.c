@@ -84,8 +84,6 @@ error_handler (Display *dpy, XErrorEvent *ev)
     if (w != 0)
     {
 	DB(("error_handler (%s)\n", rep_STR(w->name)));
-	if (w == focus_window)
-	    focus_window = 0;
 	if (w->id != 0)
 	    remove_window (w, Qt, Qt);
 	/* so we call emit_pending_destroys () at some point */

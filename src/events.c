@@ -400,8 +400,6 @@ destroy_notify (XEvent *ev)
     Lisp_Window *w = x_find_window_by_id (ev->xdestroywindow.window);
     if (w == 0 || ev->xdestroywindow.window != w->saved_id)
 	return;
-    if (w == focus_window)
-	focus_window = 0;
     remove_window (w, Qt, Qnil);
     emit_pending_destroys ();
 }
