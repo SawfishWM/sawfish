@@ -27,7 +27,8 @@ srcdir=@srcdir@
 VPATH=@top_srcdir@/src:.
 
 SRCS :=	colors.c commands.c cursors.c display.c events.c fonts.c frames.c \
-	functions.c images.c keys.c main.c server.c session.c windows.c
+	functions.c images.c keys.c main.c pixmap-cache.c server.c \
+	session.c windows.c
 OBJS := $(SRCS:.c=.o)
 
 DL_SRCS := gradient.c flippers.c x.c selection.c play-sample.c
@@ -36,14 +37,14 @@ DL_OBJS := $(DL_SRCS:%.c=%.la)
 LISP_SRCS := sawmill-ui.jl sawmill-menu.jl
 LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
 
-override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMLIB_CFLAGS) $(X11_CFLAGS) $(ESD_CFLAGS)
+override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(ESD_CFLAGS)
 
 all : sawfish sawfish-client libclient.o $(DL_OBJS) $(LISP_OBJS) gtk-style
 
 sawfish : $(OBJS) $(LIBOBJS)
 	$(rep_LIBTOOL) $(CC) -export-dynamic $(LDFLAGS) \
 	  -o sawfish $(OBJS) $(LIBOBJS) $(REP_LIBS) \
-	  $(IMLIB_LIBS) $(X11_LIBS) $(LIBS)
+	  $(IMAGE_LIBS) $(X11_LIBS) $(LIBS)
 
 sawfish-client : client.o libclient.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBOBJS) $(X11_LIBS) $(READLINE_LIBS) $(LIBS)
