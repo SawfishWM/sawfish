@@ -1,0 +1,222 @@
+/* server.c -- client/server backend
+   $Id$
+
+   Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+
+   This file is part of sawmill.
+
+   sawmill is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   sawmill is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with sawmill; see the file COPYING.   If not, write to
+   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
+
+#include "sawmill.h"
+#include "server.h"
+
+#ifdef HAVE_UNIX
+
+#include <fcntl.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <stdarg.h>
+#include <errno.h>
+
+#ifdef HAVE_SYS_TIME_H
+# include <sys/time.h>
+#endif
+
+#ifdef HAVE_UNISTD_H
+# include <unistd.h>
+#endif
+
+/* fd of the socket which clients connect to, or zero. */
+static int socket_fd = -1;
+
+/* pathname of the socket. */
+static repv socket_name;
+
+DEFSTRING(io_error, "server_make_connection:io");
+DEFSYM(server_eval, "server-eval");
+
+static void
+server_handle_request(int fd)
+{
+    u_char req;
+    if(read(fd, &req, 1) != 1)
+	goto disconnect;
+    /* XXX this is a bit lame */
+    last_event_time = CurrentTime;
+    switch(req)
+    {
+	u_long len;
+	repv val;
+
+    case req_eval:
+    case req_eval_async:
+	/* 1. read length field
+	   2. read LENGTH bytes of FORM
+	   3. eval and print FORM
+	   4. write length of result-string
+	   5. write LENGTH bytes of result string */
+	if(read(fd, &len, sizeof(u_long)) != sizeof(u_long)
+	   || (val = rep_make_string(len + 1)) == rep_NULL
+	   || read(fd, rep_STR(val), len) != len)
+	    goto io_error;
+	rep_STR(val)[len] = 0;
+	val = rep_call_lisp1 (Qserver_eval, val);
+	if (req != req_eval_async)
+	{
+	    if(val && rep_STRINGP(val))
+	    {
+		len = rep_STRING_LEN(val);
+		if(write(fd, &len, sizeof(u_long)) != sizeof(u_long)
+		   || write(fd, rep_STR(val), len) != len)
+		    goto io_error;
+	    }
+	    else
+	    {
+		len = 0;
+		if(write(fd, &len, sizeof(u_long)) != sizeof(u_long))
+		    goto io_error;
+	    }
+	}
+	break;
+
+    io_error:
+	Fsignal(Qerror, rep_LIST_1(rep_VAL(&io_error)));
+	return;
+
+    case req_end_of_session:
+    disconnect:
+	rep_deregister_input_fd(fd);
+	close(fd);
+    }
+    XFlush (dpy);
+}
+
+static void
+server_accept_connection(int unused_fd)
+{
+    int confd = accept(socket_fd, NULL, NULL);
+    if(confd >= 0)
+    {
+	/* Once upon a time, I started reading commands here. I think
+	   it's cleaner to just register CONFD as an input source */
+	rep_register_input_fd(confd, server_handle_request);
+
+	/* CONFD will inherit the properties of SOCKET-FD, i.e. non-
+	   blocking. Make it block.. */
+	rep_unix_set_fd_blocking(confd);
+    }
+}
+
+
+/* initialisation */
+
+void
+server_init (void)
+{
+    char namebuf[256];
+    repv name, dir;
+
+    rep_INTERN(server_eval);
+
+    if (rep_SYM(Qbatch_mode)->value != Qnil)
+	return;
+
+    name = Fsymbol_value (Qcanonical_display_name, Qt);
+
+    if(!name || !rep_STRINGP(name))
+	return;
+
+#ifdef HAVE_SNPRINTF
+    snprintf(namebuf, sizeof(namebuf), "~/" SAWMILL_SOCK_NAME, rep_STR(name));
+#else
+    sprintf(namebuf, "~/" SAWMILL_SOCK_NAME, rep_STR(name));
+#endif
+    name = Flocal_file_name(rep_string_dup(namebuf));
+
+#ifdef HAVE_SNPRINTF
+    snprintf(namebuf, sizeof(namebuf), "~/" SAWMILL_SOCK_DIR);
+#else
+    sprintf(namebuf, "~/" SAWMILL_SOCK_DIR);
+#endif
+    dir = Flocal_file_name(rep_string_dup(namebuf));
+
+    if(name && rep_STRINGP(name) && dir && rep_STRINGP(dir))
+    {
+	if(access(rep_STR(name), F_OK) == 0)
+	{
+	    /* Socket already exists. See if it's live */
+	    struct sockaddr_un addr;
+	    int sock = socket(AF_UNIX, SOCK_STREAM, 0);
+	    if(sock >= 0)
+	    {
+		strcpy(addr.sun_path, rep_STR(name));
+		addr.sun_family = AF_UNIX;
+		if(connect(sock, (struct sockaddr *)&addr,
+                   sizeof(addr.sun_family) + strlen(addr.sun_path)) == 0)
+		{
+		    close(sock);
+		    return;
+		}
+		close(sock);
+		/* Socket is probably parentless; delete it */
+		unlink(rep_STR(name));
+	    }
+	}
+	socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
+	if(socket_fd >= 0)
+	{
+	    struct sockaddr_un addr;
+	    addr.sun_family = AF_UNIX;
+	    strcpy(addr.sun_path, rep_STR(name));
+	    if (access (rep_STR(dir), F_OK) != 0)
+		mkdir (rep_STR(dir), S_IRWXU | S_IRWXG | S_IRWXO);
+	    if(bind(socket_fd, (struct sockaddr *)&addr,
+		    sizeof(addr.sun_family) + strlen(addr.sun_path)) == 0)
+	    {
+		if(listen(socket_fd, 5) == 0)
+		{
+		    rep_unix_set_fd_nonblocking(socket_fd);
+		    rep_register_input_fd(socket_fd, server_accept_connection);
+
+		    socket_name = name;
+		    return;
+		}
+	    }
+	    perror ("bind");
+	    close(socket_fd);
+	}
+	else
+	    perror ("socket");
+	socket_fd = -1;
+    }
+}
+
+void
+server_kill (void)
+{
+    if(socket_fd > 0)
+    {
+	rep_deregister_input_fd(socket_fd);
+	close(socket_fd);
+	socket_fd = -1;
+	unlink(rep_STR(socket_name));
+	socket_name = rep_NULL;
+    }
+}
+
+#endif /* HAVE_UNIX */
