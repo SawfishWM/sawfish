@@ -67,6 +67,12 @@ the window.")
   (defvar sm-after-restore-hook nil
     "Hook called after loading a saved session.")
 
+  (defvar sm-sloppy-id-matching nil
+    "When loading sessions, the algorithm that matches saved session data
+to running clients requires that if one has a session id, then so must
+the other, and they must match. Setting this variable to true turns
+that feature off, allowing some broken clients to be session managed.")
+
 ;;; utilities
 
   ;; PREFIX may be null
