@@ -223,8 +223,8 @@
   (delete-x-property 'root '_WIN_WORKSPACE_NAMES)
 
   (add-hook 'workspace-state-change-hook 'gnome-set-workspace)
-  (add-hook 'screen-viewport-resized-hook 'gnome-set-workspace)
-  (add-hook 'screen-viewport-moved-hook 'gnome-set-workspace)
+  (add-hook 'viewport-resized-hook 'gnome-set-workspace)
+  (add-hook 'viewport-moved-hook 'gnome-set-workspace)
 
   (add-hook 'add-window-hook 'gnome-add-window)
 
