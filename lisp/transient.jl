@@ -19,16 +19,7 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;; XXX rename this file frames.jl
-
 (provide 'transient)
-
-(defvar fallback-frameset '((default . default-frame)
-			    (shaped . default-frame)
-			    (transient . nil-frame)
-			    (shaped-transient . nil-frame)))
-
-(defvar default-frameset fallback-frameset)
 
 (defcustom ignored-windows-re nil
   "Regular expression matching windows to ignore."
@@ -42,6 +33,12 @@
   :type string
   :allow-nil t)
 
+(defcustom transients-get-focus t
+  "Mapping a transient window whose parent is currently focused transfers
+the input focus to the transient window."
+  :group misc
+  :type boolean)
+
 (defvar ignored-window-names nil
   "A list of regular expressions matching windows that don't get a frame.")
 
@@ -49,11 +46,8 @@
   "A list of regular expressions matching window names that exist across
 workspaces.")
 
-(defcustom transients-get-focus t
-  "Mapping a transient window whose parent is currently focused transfers
-the input focus to the transient window."
-  :group misc
-  :type boolean)
+
+;; utility functions
 
 (defun window-type (w)
   (if (window-transient-p w)
@@ -63,6 +57,9 @@ the input focus to the transient window."
     (if (window-shaped-p w)
 	'shaped
       'default)))
+
+
+;; hooks
 
 ;; called from the add-window-hook
 (defun transient-add-window (w)
@@ -84,14 +81,7 @@ the input focus to the transient window."
 		    (when (string-match r (window-name w))
 		      (throw 'foo t))) sticky-window-names)
 	  nil)
-    (window-put w 'sticky t))
-  (unless (window-frame w)
-    (let
-	((type (window-type w))
-	 (set (or (window-get w 'frameset) default-frameset)))
-      (set-window-frame w (or (cdr (assq type set))
-			      (cdr (assq type fallback-frameset))
-			      default-frame)))))
+    (window-put w 'sticky t)))
 
 (defun transient-map-window (w)
   (when (window-transient-p w)
@@ -100,5 +90,5 @@ the input focus to the transient window."
       (when (and parent transients-get-focus (eq (input-focus) parent))
 	(set-input-focus w)))))
 
-(add-hook 'add-window-hook 'transient-add-window)
-(add-hook 'map-notify-hook 'transient-map-window)
+(add-hook 'add-window-hook 'transient-add-window t)
+(add-hook 'map-notify-hook 'transient-map-window t)
