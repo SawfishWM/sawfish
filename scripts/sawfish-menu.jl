@@ -95,7 +95,7 @@ exec rep "$0" "$@"
 		      (when insensitive
 			(gtk-widget-set-sensitive item nil))))
 
-		  (gtk-signal-connect
+		  (g-signal-connect
 		   item "activate" (lambda ()
 				     (setq menu-selected (car cell))))))
 	      (when item
@@ -108,7 +108,7 @@ exec rep "$0" "$@"
 (define (popup-menu spec #!optional timestamp position)
   (let ((menu (let-fluids ((group-table (make-group-table)))
 		(create-menu spec))))
-    (gtk-signal-connect menu "deactivate" gtk-main-quit)
+    (g-signal-connect menu "deactivate" gtk-main-quit)
     (setq menu-selected nil)
     (gtk-menu-popup-interp menu nil nil 0 (or timestamp 0) position)
     (gtk-main)
