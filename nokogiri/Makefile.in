@@ -1,3 +1,24 @@
+# Makefile.in for nokogiri subdirectory
+
+# $Id$
+
+# Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+
+# This file is part of sawfish.
+
+# sawfish is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+
+# sawfish is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with sawfish; see the file COPYING.  If not, write to
+# the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 include ../Makedefs
 
@@ -6,12 +27,15 @@ top_srcdir=@top_srcdir@
 srcdir=@srcdir@
 VPATH=@top_srcdir@/src:.
 
-SRCS =	nokogiri-apply.jl		\
+REP_GTK_GNOME=@REP_GTK_GNOME@
+
+SRCS :=	nokogiri-apply.jl		\
 	nokogiri-color-preview.jl	\
 	nokogiri-config.jl		\
 	nokogiri-dialog.jl		\
 	nokogiri-group.jl		\
 	nokogiri-i18n.jl		\
+	nokogiri-interfaces.jl		\
 	nokogiri-layout.jl		\
 	nokogiri-main.jl		\
 	nokogiri-shell.jl		\
@@ -22,7 +46,7 @@ SRCS =	nokogiri-apply.jl		\
 	nokogiri-widget-test.jl		\
 	nokogiri-wm.jl
 
-W_SRCS = nokogiri-widgets/alist.jl	\
+W_SRCS := nokogiri-widgets/alist.jl	\
 	nokogiri-widgets/color.jl	\
 	nokogiri-widgets/file.jl	\
 	nokogiri-widgets/font.jl	\
@@ -31,20 +55,38 @@ W_SRCS = nokogiri-widgets/alist.jl	\
 	nokogiri-widgets/list.jl	\
 	nokogiri-widgets/match-window.jl \
 	nokogiri-widgets/pair.jl
+G_W_SRCS :=				\
+	nokogiri-widgets/workspace-geometry.jl \
+	nokogiri-widgets/icon.jl
 
-L_SRCS = nokogiri-layouts/keymaps.jl
+L_SRCS := nokogiri-layouts/keymaps.jl
+G_L_SRCS :=
 
-OBJS = $(SRCS:.jl=.jlc)
-W_OBJS = $(W_SRCS:.jl=.jlc)
-L_OBJS = $(L_SRCS:.jl=.jlc)
+ifeq ($(REP_GTK_GNOME),yes)
+ W_SRCS := $(W_SRCS) $(G_W_SRCS)
+ L_SRCS := $(L_SRCS) $(G_L_SRCS)
+ SRCS := $(SRCS) nokogiri-gnome.jl
+else
+ SRCS := $(SRCS) nokogiri-no-gnome.jl
+endif
+
+OBJS := $(SRCS:.jl=.jlc)
+W_OBJS := $(W_SRCS:.jl=.jlc)
+L_OBJS := $(L_SRCS:.jl=.jlc)
+
+ALL_SRCS := $(SRCS) $(W_SRCS) $(L_SRCS)
+ALL_OBJS := $(OBJS) $(W_OBJS) $(L_OBJS)
+
+SUBSTS := -e "s|__nokogiridir__|$(nokogiridir)|"  \
+	  -e "s|__rep_gtk_gnome__|$(REP_GTK_GNOME)|"
 
 %.jlc : %.jl
 	REP_GTK_DONT_INITIALIZE=1 rep compiler -f compile-batch $<
 
-all : $(OBJS) $(W_OBJS) $(L_OBJS)
+all : $(ALL_SRCS) $(ALL_OBJS)
 
-nokogiri-main.jl : nokogiri-main.jl.in ../config.status
-	sed -e "s|__nokogiridir__|$(nokogiridir)|" $< >$@
+%.jl : %.jl.in ./Makefile
+	sed $(SUBSTS) $< >$@
 
 install : all installdirs
 	for p in $(SRCS) $(OBJS); do \
