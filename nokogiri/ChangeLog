@@ -1,3 +1,9 @@
+2000-08-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* nokogiri-shell.jl (initialize-shell): only hook to
+	`delete_event' signal if window isn't a plug (avoids race
+	condition found by Havoc Pennington)
+
 2000-08-03  John Harper  <john@dcs.warwick.ac.uk>
 
 	* nokogiri-widget.jl (make-number-item): added backwards

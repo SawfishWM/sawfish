@@ -1,3 +1,21 @@
+2000-08-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* server.h, libclient.h, libclient.c, client.c: server now
+	reliably communicates errors back to the client (as `(signal
+	'remote-sawfish (list DATA))' where DATA is a string). Also
+	renamed the sockets and X properties. The X protocol now
+	includes a version number
+
+2000-08-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (configure_request): don't adjust for frame offset
+	when marshalling position
+
+2000-08-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x.c (create_x_drawable): initialize event_handler field
+	(patch from Matt Tucker <tuck@whistlingfish.net>)
+
 2000-07-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c (create_window_frame): don't try to reframe windows

@@ -1,3 +1,39 @@
+2000-08-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/state/configure.jl (configure-request-handler): be
+	ICCCM compliant when handling move requests -- honour the
+	gravity if given, or default to NorthWest. Previously was
+	always doing the equivalent of Static gravity (has this broken
+	[m]any apps?)
+
+2000-08-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/server.jl: server now reliably communicates errors
+	back to the client (as `(signal 'remote-sawfish (list DATA))'
+	where DATA is a string). Also renamed the sockets and X
+	properties. The X protocol now includes a version number
+
+2000-08-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/commands/grow-pack.jl (pack-warp-pointer): new
+	option. Update from Kai Grossjohann
+
+2000-08-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/placement.jl (adjust-window-for-gravity): use
+	adjust-position-for-gravity 
+
+	* sawfish/wm/windows.jl (adjust-position-for-gravity): new
+	function (abstracted from adjust-window-for-gravity)
+
+	* sawfish/wm/commands.jl (function-spec): interactive spec in
+	bytecode subr is now 5th element, not 6th
+
+2000-08-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/ext/match-window.jl (safe-string-match): wrapper
+	for string-match that catches and prints regexp errors
+
 2000-08-03  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm.jl: include sawfish.wm.state.{transient,iconify,
