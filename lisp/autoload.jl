@@ -95,7 +95,7 @@
 (autoload 'remove-window-matcher "match-window")
 (autoload 'gnome-logout "gnome-commands" t)
 (autoload 'set-viewport-linear "viewport-linear" t)
-(define-command-args 'set-viewport-linear `(and (labellled `(_ "Index:") (number 0))))
+(define-command-args 'set-viewport-linear `(and (labelled ,(_ "Index:") (number 0))))
 (autoload 'set-window-viewport-linear "viewport-linear" t)
 (define-command-args 'set-window-viewport-linear `(and (labelled ,(_ "Index:") (number 0))))
 (autoload 'set-viewport-linear:1 "viewport-linear" t)

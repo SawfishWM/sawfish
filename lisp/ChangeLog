@@ -1,4 +1,44 @@
+2000-07-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* move-resize.jl: use constrain-dimension-to-hints instead of
+	local hack
+
+	* functions.jl (constrain-dimension-to-hints): new function,
+	implements the size hints checking correctly (I was using
+	base-size instead of min-size in some places)
+
+	* stacking.jl (transients-above): stack above parents by
+	default
+
+	* keymaps.jl: use the commands that raise a window and its
+	transients by default
+
+	* transient.jl (indirect-transient-of-p, transient-group): new
+	functions
+
+	* transient.jl
+	({raise,lower,raise-or-lower}-window-and-transients): new
+	commands
+
+	* groups.jl ({raise,lower,raise-lower}-group): use the new
+	functions for stacking lists of windows
+
+	* stacking.jl (raise-windows, lower-windows,
+	raise-lower-windows): new functions for stacking groups of
+	windows
+
+	* raise-commands.jl (raise-transients-and-pass-through-click):
+	new command
+
 2000-07-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* window-history.jl (window-history-apply): use
+	resize-window-with-hints* to apply any saved dimensions. Fixes
+	bug of making windows too small
+
+	* functions.jl (resize-window-with-hints*): new function,
+	similar to resize-window-with-hints, but with dimensions
+	specified in pixels
 
 	* version 0.29
 
