@@ -60,7 +60,7 @@
 	  (when (memq gravity '(north center south))
 	    ;; [y] placed relative to the center
 	    (rplacd coords (- (cdr coords) (/ (- (cdr tem) (cdr dims)) 2)))))
-
+	 
 	 ;; I confess: I used Mathematica to find these identities. s
 	 ;; is the screen size, l and r the left and right offsets from
 	 ;; the screen edges, and c the window width. Capitalised
@@ -90,9 +90,7 @@
 	     (t
 	      (rplaca coords (/ (+ (- (* (+ xoff (car tem)) (car coords)))
 				   (* (car coords) (screen-width)))
-				(+ (car coords) (- (screen-width)
-						   (car coords)
-						   (car fdims))))))))
+				(- (screen-width) (car fdims)))))))
 	  (let* ((yoff (- (cdr fdims) (cdr dims)))
 		 (top (cdr coords))
 		 (bottom (- (screen-height) (cdr coords) (cdr fdims))))
@@ -111,9 +109,7 @@
 	     (t
 	      (rplacd coords (/ (+ (- (* (+ yoff (cdr tem)) (cdr coords)))
 				   (* (cdr coords) (screen-height)))
-				(+ (cdr coords) (- (screen-height)
-						   (cdr coords)
-						   (cdr fdims))))))))))
+				(- (screen-height) (cdr fdims)))))))))
 	(setq dims tem)))
     (when (setq tem (cdr (assq 'position alist)))
       (setq coords tem))
