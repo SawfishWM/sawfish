@@ -588,6 +588,7 @@
 	(let
 	    ((spaces (window-workspaces w))
 	     (limits (workspace-limits)))
+	  (ws-window-set-workspaces w '())
 	  (mapc (lambda (space)
 		  (ws-add-window-to-space
 		   w (workspace-id-from-logical space limits))) spaces))
