@@ -1,3 +1,34 @@
+1999-12-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.19
+
+	* frames.c (frame_part_destroyer): if we unclick a frame part,
+	ungrab the pointer as well
+
+	* functions.c (Fgrab_pointer): grab with owner_events=True
+
+	* functions.c (Fdisplay_message): new attribute `spacing',
+	space between each line of text
+
+	* events.c (handle_input_mask): preserve current_x_event and
+	current_event_window in case of recursive calls
+
+	* events.c (Qenter_frame_part_hook, Qleave_frame_part_hook):
+	new hooks, called when the pointer enter a frame part, two args
+	(WIN CLASS)
+
+	* frames.c (Fframe_part_get): new function, get frame part
+	properties (part is found by window and class)
+
+	* frames.c (frame_part_exposer): only allow expose events to
+	override the frame_draw_mutex when the server isn't grabbed
+
+	* functions.c (Fserver_grabbed_p): new function
+
+1999-12-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl: i18n for all natural language strings
+
 1999-12-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* cursors.c (Fget_cursor): can now create cursors from two
@@ -14,7 +45,7 @@
 
 	* gradient.c (Fdraw_diagonal_gradient): the gradient now scales
 	linearly for all lines parallel to that connecting the top-left
-	and bottom-left corners (from Chris Hanson <cph@zurich.ai.mit.edu>)
+	and bottom-right corners (from Chris Hanson <cph@zurich.ai.mit.edu>)
 
 	* images.c (Fbevel_pixel): new optional parameter BEVEL-PERCENT
 	(from Chris Hanson <cph@zurich.ai.mit.edu>)

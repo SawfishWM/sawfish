@@ -7,6 +7,60 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.19
+
+@itemize @bullet
+
+@item Added tooltips for window frames (disabled by default)
+
+@item Added @samp{Grab@dots{}} button to match-windows dialogue, grabs
+the value of an X property from a window
+
+@item Support for creating cursors from bitmaps, and for changing the
+colors of cursors
+
+@item Internationalized all strings in the configurator
+
+@item New functions: @code{frame-part-get}, @code{server-grabbed-p},
+@code{forget-button-press}, @code{resize-window-with-hints},
+@code{window-in-workspace-p}, @code{windows-share-workspace-p}
+
+@item New window properties: @code{never-focus}, @code{raise-on-focus}
+
+@item New pseudo-property (for window matching): @code{size}, in terms
+of the window's size hints
+
+@item Message catalogue additions/updates: Galician (Jesus Bravo
+Alvarez); Danish (Birger Langkjer)
+
+@item Don't ignore initial state property of windows
+
+@item Option to control height of drawn bevels (Chris Hanson)
+
+@item More logical method of drawing diagonal gradients (Chris Hanson)
+
+@item Fixed typo when looking for i18n theme README files (Jesus Bravo
+Alvarez)
+
+@item Fixed @code{popup-apps-menu} command (Gérard Milmeister)
+
+@item Fixed @code{define-frame-class} when creating keymaps
+
+@item Fixed conversion of old-style @code{(set @dots{})} custom types
+
+@item Fixed @code{raise-window-and-pass-through-click} command to
+pass-through subsequent clicks
+
+@item Fixed problems when grabbing/ungrabbing customized keymaps
+
+@item Fixed screen corruption when doing wireframe moving and
+@code{move-resize-raise-window} is set
+
+@item Hacked around window-order problem when sticky windows exist
+
+@end itemize
+
+
 @unnumberedsec 0.18
 
 @itemize @bullet

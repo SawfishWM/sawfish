@@ -98,4 +98,5 @@
 (autoload 'remove-window-matcher "match-window")
 (setq custom-required (cons 'match-window custom-required))
 (autoload 'gnome-logout "gnome-commands" t)
+(setq custom-required (cons 'tooltips custom-required))
 ;;; ::autoload-end::

@@ -3,9 +3,9 @@
 @settitle sawmill Programming Manual
 @footnotestyle end
 
-@set EDITION 0.5
-@set VERSION 0.18
-@set UPDATED 5 December 1999
+@set EDITION 0.6
+@set VERSION 0.19
+@set UPDATED 12 December 1999
 @set UPDATE-MONTH December 1999
 
 @ifinfo
@@ -396,11 +396,19 @@ Set the image modifier of @var{image} defined by @var{type}.
 
 There are also several other functions manipulating images:
 
-@defun bevel-image image border upwards
+@defun bevel-image image border upwards &optional bevel-percent
 Transform the edgemost pixels of @var{image} to give it a ``bevelled''
 effect. @var{BORDER} is an integer defining the width of the bevel. If
 @var{upwards} is non-nil the bevel is raised, otherwise it is lowered.
+
+If @var{bevel-percent} is defined it specifies the height or depth of
+the drawn bevel. When undefined, the value of the parameter is taken
+from the @code{default-bevel-percent} variable.
 @end defun
+
+@defvar default-bevel-percent
+Default height of drawn bevels, as a percentage.
+@end defvar
 
 @defun clear-image image &optional color
 Set all pixels in @var{image} to @var{color} (or black if @var{color}
@@ -430,11 +438,19 @@ Returns the cursor object representing the cursor defined by
 @code{cursor-shape} property.
 
 Possible @var{data} values are an integer representing a glyph in the
-standard X11 cursor font, or an image object.
+standard X11 cursor font, or a four-element vector.
+
+If a vector the format is @code{[@var{image} @var{mask} @var{fg}
+@var{bg}]} where @var{image} and @var{mask} are the filenames of
+standard X11 bitmaps, and @var{fg} and @var{bg} are colors (or names of
+colors). All bitmap files are searched for using the
+@code{image-load-path} variable.
 @end defun
 
-Note that as of yet (version @value{VERSION}), image-derived cursors
-are still unimplemented.
+@defun recolor-cursor cursor fg bg
+Change the colors of the cursor object @var{cursor} to @var{fg} and
+@var{bg} (either color objects or the names of colors).
+@end defun
 
 @defvar default-cursor
 The cursor object displayed in the root window, and in parts of window
@@ -1567,6 +1583,19 @@ the foreground. The window manager will automatically refresh the
 foreground of all frame parts of a window whenever any X property of
 that window changes.
 
+Given a framed window, and a particular frame part class, it is
+possible to retrieve the values of individual attributes from the
+complete list of definitions (including inherited or overrided
+definitions).
+
+@defun frame-part-get window class attr
+Returns the value of the attribute @var{attr} for the frame part of
+class @var{class} in the current frame of @var{window}.
+
+Returns @code{nil} if no such attribute exists. If more than one frame
+part of class @var{class} exists then the value will be taken from the
+first part found.
+@end defun
 
 @node Frame Functions, Frame Types, Frame Part Definition, Window Frames
 @section Frame Functions
@@ -2435,6 +2464,10 @@ Note that calls to @code{grab-server} and @code{ungrab-server}
 Evaluate forms with the server grabbed. Releases the grab afterwards.
 @end defmac
 
+@defun server-grabbed-p
+Returns @code{t} if the X server is currently grabbed.
+@end defun
+
 @defun grab-pointer &optional window cursor
 Grab the mouse pointer and direct all pointer events to window object
 @var{window}. If @var{cursor} is defined and a cursor object, display
@@ -2523,6 +2556,10 @@ The color to draw the background with
 @item x-justify
 The justification method for multi-line strings. One of the symbols
 @code{left}, @code{right}, or @code{center}
+
+@item spacing
+The number of extra pixels of vertical spacing to leave between text
+lines.
 
 @item position
 A cons cell defining the coordinates at which to display the message
@@ -2652,6 +2689,12 @@ been destroyed as is possible.
 @itemx shape-notify-hook
 Called with a single window argument, analogous to the X events of the
 same names.
+
+@item enter-frame-part-hook
+@itemx leave-frame-part-hook
+Called with two arguments, the window and the frame part class
+(@pxref{Frame Part Classes}), when the pointer enters or leaves a frame
+part.
 
 @item window-moved-hook
 @itemx window-resized-hook

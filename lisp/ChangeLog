@@ -1,3 +1,19 @@
+1999-12-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.19
+
+	* x-cycle.jl: disable tooltips while cycling
+
+	* tooltips.jl: new file, implements tooltips for frame parts
+	with keymaps
+
+	* window-order.jl: hack around the annoying behaviour when
+	switching workspace with sticky windows existing
+
+	* move-resize.jl (move-resize-window): if
+	move-resize-raise-window is set, and mode is not opaque, then
+	raise the window _after_ the move/resize
+
 1999-12-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* workspace.jl (window-in-workspace-p,
