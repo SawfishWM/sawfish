@@ -60,8 +60,8 @@ exec rep "$0" "$@"
 				authors comments
 				#:logo logo
 				#:extra hbox)))
-      (gtk-signal-connect widget "destroy"
-			  (lambda () (throw 'out)))
+      (g-signal-connect widget "destroy"
+			(lambda () (throw 'out)))
       (catch 'out
 	(setq interrupt-mode 'exit)
 	(recursive-edit)))))
