@@ -112,9 +112,9 @@ unused before killing it."
     (or (start-process menu-process menu-program)
 	(error "Can't start menu backend: %s" menu-program))))
 
-(defun menu-stop-process ()
+(defun menu-stop-process (&optional force)
   (when menu-process
-    (cond ((numberp menu-program-stays-running)
+    (cond ((and (not force) (numberp menu-program-stays-running))
 	   ;; number of seconds to let it hang around for
 	   (require 'timers)
 	   (setq menu-timer (make-timer #'(lambda ()
@@ -122,7 +122,7 @@ unused before killing it."
 					    (setq menu-process nil)
 					    (setq menu-timer nil))
 					menu-program-stays-running)))
-	  ((not menu-program-stays-running)
+	  ((or force (not menu-program-stays-running))
 	   (kill-process menu-process)
 	   (setq menu-process nil)))))
 
