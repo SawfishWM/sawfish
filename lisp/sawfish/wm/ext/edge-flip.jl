@@ -43,6 +43,11 @@ flipping to the next viewport."
   :group viewport
   :range (0 . 1000))
 
+(defcustom edge-flip-type 'viewport
+  "What edge-flipping actually flips."
+  :type (set viewport workspace)
+  :group viewport)
+
 (defvar ef-current-edge nil)
 (defvar ef-timer nil)
 
@@ -78,26 +83,44 @@ flipping to the next viewport."
 (defun edge-flip-for-edge (edge)
   (let
       ((ptr (query-pointer t)))
-    (cond ((eq edge 'left)
-	   (when (move-viewport -1 0)
-	     (rplaca ptr (- (screen-width) 2))))
-	  ((eq edge 'right)
-	   (when (move-viewport 1 0)
-	     (rplaca ptr 1)))
-	  ((eq edge 'top)
-	   (when (move-viewport 0 -1)
-	     (rplacd ptr (- (screen-height) 2))))
-	  ((eq edge 'bottom)
-	   (when (move-viewport 0 1)
-	     (rplacd ptr 1))))
-    (warp-cursor (car ptr) (cdr ptr))))
+    (if (eq edge-flip-type 'viewport)
+	(progn
+	  (cond ((eq edge 'left)
+		 (when (move-viewport -1 0)
+		   (rplaca ptr (- (screen-width) 2))))
+		((eq edge 'right)
+		 (when (move-viewport 1 0)
+		   (rplaca ptr 1)))
+		((eq edge 'top)
+		 (when (move-viewport 0 -1)
+		   (rplacd ptr (- (screen-height) 2))))
+		((eq edge 'bottom)
+		 (when (move-viewport 0 1)
+		   (rplacd ptr 1))))
+	  (warp-cursor (car ptr) (cdr ptr)))
+      (let
+	  ((orig current-workspace))
+	(cond ((eq edge 'left)
+	       (previous-workspace 1)
+	       (rplaca ptr (- (screen-width) 2)))
+	      ((eq edge 'right)
+	       (next-workspace 1)
+	       (rplaca ptr 1))
+	      ((eq edge 'top)
+	       (previous-workspace 1)
+	       (rplacd ptr (- (screen-height) 2)))
+	      ((eq edge 'bottom)
+	       (next-workspace 1)
+	       (rplacd ptr 1)))
+	(unless (= current-workspace orig)
+	  (warp-cursor (car ptr) (cdr ptr)))))))
 
 ;; this is a hack -- while the pointer's grabbed the flipper windows
 ;; won't get enter/leave notify events (this is normally the right
 ;; thing to do), so synthesize them ourselves while interactively
 ;; moving windows
 ;; XXX this probably doesn't handle the screen corners correctly
-(defun edge-flip-while-moving ()
+(defun edge-flip-synthesize ()
   (when edge-flip-enabled
     (let
 	((ptr (query-pointer))
@@ -114,6 +137,12 @@ flipping to the next viewport."
 	(if edge
 	    (call-hook 'enter-flipper-hook (list edge))
 	  (call-hook 'leave-flipper-hook (list ef-current-edge)))))))
+
+(defun edge-flip-while-moving (w)
+  (when edge-flip-enabled
+    (edge-flip-synthesize)
+  (when (eq edge-flip-type 'workspace)
+    (ws-move-window w current-workspace t))))
 
 (add-hook 'enter-flipper-hook 'edge-flip-enter)
 (add-hook 'leave-flipper-hook 'edge-flip-leave)
