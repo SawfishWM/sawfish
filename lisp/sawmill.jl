@@ -73,13 +73,13 @@
 	  (custom-load-user-file)
 
 	  ;; then the sawmill specific user configuration
-	  (load "~/.sawmillrc" t t)
-
-	  ;; use a default theme if none given
-	  (unless default-frame-style
-	    (set-frame-style fallback-frame-style))))
+	  (load "~/.sawmillrc" t t)))
     (error
      (format (stderr-file) "error in local config--> %S\n" error-data))))
+
+;; use a default theme if none given
+(unless (or batch-mode default-frame-style)
+  (set-frame-style fallback-frame-style))
 
 ;; Use all arguments which are left.
 (let
