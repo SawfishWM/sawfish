@@ -118,7 +118,7 @@ workspaces.")
 						       (window-mapped-p x))))
 					     (stacking-order))))
 	  (setq parent (query-pointer-window))))
-      (when (window-wants-input-p parent)
+      (when (or (null parent) (window-wants-input-p parent))
 	(set-input-focus parent)))))
 
 (add-hook 'add-window-hook 'transient-add-window)
