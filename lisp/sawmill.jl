@@ -23,7 +23,6 @@
 
 (provide 'sawmill)
 (provide 'sawfish)
-(require 'define)			;for old (broken?) reps
 
 ;; frame-style loaded if user hasn't set their own
 (define fallback-frame-style 'microGUI)
@@ -35,8 +34,9 @@
 (define *user-structure* 'sawfish)
 (define *root-structure* 'sawfish)
 
-;; hack to load setenv etc before autoloads are defined
-(load "environ")
+(when (< rep-interface-id 10)
+  ;; hack to load setenv etc before autoloads are defined
+  (load "environ"))
 
 ;; load always-present session-manager stuff
 (require 'sm-init)
