@@ -90,7 +90,7 @@
 		     (load-all s (lambda (f)
 				   (load f nil t))))
 		 (lambda (s)
-		   (load-all s t)))))
+		   (load-all s)))))
   (load-all "autoload.jl")
   (load-all (concat "os-" (symbol-name operating-system))))
 
