@@ -1,5 +1,16 @@
 2000-02-11  John Harper  <john@dcs.warwick.ac.uk>
 
+	* move-resize.jl (resize-edge-mode): replaces options
+	resize-by-frame-class and resize-add-edges. Also allows
+	twm-style resizing (adapted from Mark Probst
+	<schani@mips.complang.tuwien.ac.at>)
+
+	* decode-events.jl (decode-event, encode-events): new
+	functions, map from opaque events to symbolic forms, and back
+
+	* workspace.jl (ws-insert-workspace): fix off-by-one error if
+	no BEFORE given (from Kirk Saranathan <ksaranat@yahoo.com>)
+
 	* custom.jl (custom-add-to-group): don't add options more than once
 
 2000-02-10  John Harper  <john@dcs.warwick.ac.uk>

@@ -138,4 +138,6 @@
 (autoload 'move-cursor-right-fine "move-cursor" t)
 (autoload 'move-cursor-up-fine "move-cursor" t)
 (autoload 'move-cursor-down-fine "move-cursor" t)
+(autoload 'decode-event "decode-events")
+(autoload 'encode-event "decode-events")
 ;;; ::autoload-end::
