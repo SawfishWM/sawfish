@@ -28,7 +28,7 @@
 (defgroup bindings "Bindings"
   :widget custom-keymap-group-widget)
 
-(defcustom global-keymap (make-sparse-keymap)
+(defcustom global-keymap (make-keymap)
   "Keymap containing bindings active anywhere."
   :group bindings
   :type keymap
@@ -37,7 +37,7 @@
   :after-set (lambda ()
 	       (grab-keymap global-keymap)))
 
-(defcustom window-keymap (make-sparse-keymap)
+(defcustom window-keymap (make-keymap)
   "Keymap containing bindings active when a client window is focused."
   :group bindings
   :type keymap
@@ -46,36 +46,36 @@
   :after-set (lambda ()
 	       (grab-keymap window-keymap)))
 
-(defcustom root-window-keymap (make-sparse-keymap)
+(defcustom root-window-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the root window."
   :group bindings
   :type keymap)
 
-(defcustom title-keymap (make-sparse-keymap)
+(defcustom title-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the title of
 a window."
   :group bindings
   :type keymap)
 
-(defcustom close-button-keymap (make-sparse-keymap)
+(defcustom close-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the close button
 of a window."
   :group bindings
   :type keymap)
 
-(defcustom iconify-button-keymap (make-sparse-keymap)
+(defcustom iconify-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the iconify
 button of a window."
   :group bindings
   :type keymap)
 
-(defcustom maximize-button-keymap (make-sparse-keymap)
+(defcustom maximize-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the maximize
 button of a window."
   :group bindings
   :type keymap)
 
-(defcustom menu-button-keymap (make-sparse-keymap)
+(defcustom menu-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the menu button
 of a window."
   :group bindings
@@ -97,7 +97,8 @@ of a window."
   (bind-keys title-keymap
     "Button3-Off" 'raise-lower-window
     "Button1-Move" 'move-window-interactively
-    "Button2-Move" 'resize-window-interactively)
+    "Button2-Move" 'resize-window-interactively
+    "Button1-Click2" 'toggle-window-shaded)
 
   (bind-keys window-keymap
     "C-M-Up" 'raise-window

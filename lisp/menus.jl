@@ -58,6 +58,7 @@ unused before killing it.")
     ("Send left" send-to-previous-workspace)
     ("Send right" send-to-next-workspace)
     ("Toggle sticky" toggle-window-sticky)
+    ("Toggle shaded" toggle-window-shaded)
     ("Depth"
      ("Raise" raise-window)
      ("Lower" lower-window)
