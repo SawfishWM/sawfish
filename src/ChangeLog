@@ -1,3 +1,15 @@
+2002-02-17  John Harper  <jsh@unfactored.org>
+
+	* windows.c (remove_window): check for w->id == 0 immediately
+	before calling remove_from_stacking_list (). Avoids triggering
+	an assertion on logout (since remove_window () may be called
+	recursively from the error handler!)
+
+2002-01-24  John Harper  <jsh@unfactored.org>
+
+	* frames.c: fixed definitions of Qtop and Qbottom. This bug
+	must have existed forever!
+
 2001-12-05  John Harper  <jsh@unfactored.org>
 
 	* windows.c (Fwindow_visibility): check argument is windowp
