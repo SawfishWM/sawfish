@@ -19,6 +19,8 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(eval-when-compile (require 'match-window))
+
 (provide 'window-history)
 
 ;; Commentary:
@@ -28,10 +30,13 @@
 ;; a bit like session management, but across window instances, not
 ;; session instances.
 
-;; It's currently a bit flaky, hence it's not enabled by default. It
-;; matches against WM_CLASS, and remembers window properties after
+;; I'm still not convinced that this is a stunningly great idea, hence
+;; it's not enabled by default, do (require 'window-history) to load it.
+
+;; It matches against WM_CLASS, and remembers window properties after
 ;; they're manually altered. E.g. move a window, then other windows of
 ;; that class/instance pair will subsequently appear at that position.
+;; Similarly for window sizes and attributes (e.g. frame style/type)
 
 
 ;; Configuration / variables
@@ -53,6 +58,29 @@
 (define window-history-key-property 'WM_CLASS)
 
 
+;; customizations
+
+(defgroup window-history "Window History" :group workspace)
+
+(defcustom window-history-save-position t
+  "Remember window positions."
+  :group (workspace window-history)
+  :type boolean
+  :require window-history)
+
+(defcustom window-history-save-dimensions t
+  "Remember window sizes."
+  :group (workspace window-history)
+  :type boolean
+  :require window-history)
+
+(defcustom window-history-save-state t
+  "Remember other window attributes."
+  :group (workspace window-history)
+  :type boolean
+  :require window-history)
+
+
 ;; matching windows
 
 (define (window-history-key w)
@@ -66,38 +94,44 @@
 (define (window-history-match w)
   (let ((alist (cdr (window-history-find w))))
     (when alist
-      (require 'sm-load)
-      (sm-apply-to-window w alist))))
+      (window-history-apply w alist))))
 
 
 ;; recording attributes
 
-(define (window-history-snapshotter state)
-  (lambda (w)
-    (unless (window-get w 'no-history)
-      (let* ((alist (window-history-find w))
-	     (value (if (get state 'window-history-snapshotter)
-			((get state 'window-history-snapshotter) w)
-		      (window-get w state)))
-	     (cell (assq state (cdr alist))))
-	(unless alist
-	  (setq alist (list (window-history-key w)))
-	  (setq window-history-state (cons alist window-history-state)))
-	(cond ((and value cell)
-	       (rplacd cell value))
-	      (value
-	       (rplacd alist (cons (cons state value) (cdr alist))))
-	      (cell
-	       (rplacd alist (delq cell (cdr alist)))))
-	(setq window-history-dirty t)))))
+(define (window-history-snapshotter w state)
+  (unless (window-get w 'no-history)
+    (let* ((alist (window-history-find w))
+	   (value (if (get state 'window-history-snapshotter)
+		      ((get state 'window-history-snapshotter) w)
+		    (window-get w state)))
+	   (cell (assq state (cdr alist))))
+      (unless alist
+	(setq alist (list (window-history-key w)))
+	(setq window-history-state (cons alist window-history-state)))
+      (cond ((and value cell)
+	     (rplacd cell value))
+	    (value
+	     (rplacd alist (cons (cons state value) (cdr alist))))
+	    (cell
+	     (rplacd alist (delq cell (cdr alist)))))
+      (setq window-history-dirty t))))
 
 (put 'position 'window-history-snapshotter window-absolute-position)
 (put 'dimensions 'window-history-snapshotter window-dimensions)
 
+(define (window-history-position-snapshotter w)
+  (when window-history-save-position
+    (window-history-snapshotter w 'position)))
+
+(define (window-history-dimensions-snapshotter w)
+  (when window-history-save-dimensions
+    (window-history-snapshotter w 'dimensions)))
+
 (define (window-history-state-snapshotter w states)
-  (when states
+  (when (and window-history-save-state states)
     (when (memq (car states) window-history-states)
-      ((window-history-snapshotter (car states)) w))
+      (window-history-snapshotter w (car states)))
     (window-history-state-snapshotter w (cdr states))))
 
 (defun window-history-forget (w)
@@ -108,6 +142,33 @@
     (when alist
       (setq window-history-state (delq alist window-history-state))
       (setq window-history-dirty t))))
+
+
+;; restoring attributes
+
+(define (window-history-apply w alist)
+  ;; handle the `position' attribute specially
+  (let ((position (cdr (assq 'position alist))))
+    (when position
+      ;; we don't want to place two windows of the same class 
+      ;; at the same position, that's just pointless
+      (let ((key (window-history-key w))
+	    (space (or (cdr (assq 'workspace alist)) current-workspace)))
+	(catch 'out
+	  (map-windows
+	   (lambda (x)
+	     (when (and (equal (window-history-key x) key)
+			(window-appears-in-workspace-p x space)
+			(equal position (window-absolute-position x)))
+	       ;; here's our match..
+	       (setq alist (filter (lambda (cell)
+				     (not (eq (car cell) 'position)))
+				   alist))
+	       (throw 'out t))))))))
+
+  ;; the session manager code will do the right thing for the rest
+  (require 'sm-load)
+  (sm-apply-to-window w alist))
 
 
 ;; saving and loading state
@@ -152,8 +213,8 @@
 ;; init
 
 (add-hook 'before-add-window-hook window-history-match)
-(add-hook 'after-move-hook (window-history-snapshotter 'position))
-(add-hook 'after-resize-hook (window-history-snapshotter 'dimensions))
+(add-hook 'after-move-hook window-history-position-snapshotter)
+(add-hook 'after-resize-hook window-history-dimensions-snapshotter)
 (add-hook 'window-state-change-hook window-history-state-snapshotter)
 (add-hook 'before-exit-hook window-history-save)
 
@@ -161,3 +222,10 @@
 (setq window-ops-menu (nconc window-ops-menu
 			     (list `(,(_ "_Forget state")
 				     window-history-forget))))
+
+(if (featurep 'match-window)
+    (setq match-window-properties (nconc match-window-properties
+					 (list '(no-history boolean))))
+  (eval-after-load "match-window"
+    '(setq match-window-properties (nconc match-window-properties
+					  (list '(no-history boolean))))))
