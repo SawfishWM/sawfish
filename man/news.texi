@@ -11,11 +11,19 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item The first-fit and best-fit algorithms are now much more
+intelligent, e.g. instead of falling back to random placement when a
+window can't be placed without overlapping an existing window, they
+will attempt to minimize this degree of overlapping
+
 @item Use Imlib's fuzzy color matching for all color allocation; this
 should help on @code{PseudoColor} visuals
 
 @item Fix seg fault when running out of color cells while generating a
 window frame
+
+@item Fix bug where the window-workspace mapping wasn't reloaded from
+saved sessions
 
 @end itemize
 

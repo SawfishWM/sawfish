@@ -1,5 +1,15 @@
 1999-09-21  John Harper  <john@dcs.warwick.ac.uk>
 
+	* workspace.jl (ws-add-window): if `workspace' property is
+	already set, then add to that workspace
+
+	* smart-placement.jl (sp-padding): new option--the number of
+	pixels to try and leave between window edges
+
+	* smart-placement.jl (sp-cost): now tries to maximize the
+	number of grid lines crossed, and the length of the shared
+	window edges
+
 	* smart-placement.jl: improved first-fit fallback algorithm,
 	looks for the position where the window has the smallest
 	overlap with all other windows
