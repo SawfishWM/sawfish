@@ -1391,7 +1391,8 @@ list_frame_generator (Lisp_Window *w)
     }
     else
     {
-	XResizeWindow (dpy, w->frame, w->frame_width, w->frame_height);
+	XMoveResizeWindow (dpy, w->frame, w->attr.x, w->attr.y,
+			   w->frame_width, w->frame_height);
 	if (w->reparented)
 	    XMoveWindow (dpy, w->id, -w->frame_x, -w->frame_y);
     }
