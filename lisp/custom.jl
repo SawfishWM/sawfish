@@ -203,6 +203,7 @@
 (defgroup appearance "Appearance")
 (defgroup workspace "Workspaces")
 (defgroup bindings "Bindings")
+(defgroup maximize "Maximizing")
 (defgroup misc "Miscellaneous")
 
 
