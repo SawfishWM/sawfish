@@ -237,3 +237,13 @@ main(int argc, char **argv)
     }
     return rc;
 }
+
+void
+add_hook (repv sym, repv fun)
+{
+    repv val = Fsymbol_value (sym, Qt);
+    if (rep_VOIDP(val))
+	val = Qnil;
+    val = Fcons (fun, val);
+    Fset (sym, val);
+}
