@@ -46,6 +46,7 @@
 (autoload 'substitute-keymap-event "keymap")
 (autoload 'lazy-bind-keys "keymap")
 (autoload 'where-is "keymap")
+(autoload 'read-event "keymap")
 (autoload 'next-workspace-window "cycle" t)
 (autoload 'previous-workspace-window "cycle" t)
 (autoload 'next-window "cycle" t)
