@@ -139,11 +139,10 @@ install_window_frame (Lisp_Window *w)
     {
 	XSelectInput (dpy, w->frame,
 		      ButtonPressMask | ButtonReleaseMask
-		      | KeyPressMask
-		      | ButtonMotionMask | PointerMotionHintMask
+		      | KeyPressMask | ButtonMotionMask | PointerMotionHintMask
 		      | EnterWindowMask | LeaveWindowMask
 		      | ExposureMask | VisibilityChangeMask
-		      | FocusChangeMask);
+		      | FocusChangeMask | SubstructureRedirectMask);
 
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	w->reparented = TRUE;
