@@ -1,3 +1,23 @@
+2000-05-17  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-gaol.jl: added some more `x' functions
+
+	* smart-placement.jl (sp-cost): split each cost component into
+	a separate function, the variable sp-cost-components tells how
+	to combine them into a single value
+
+	* rects.jl (rectangle-center, rectangle-center*): new functions
+
+	* place-window.jl (place-transient-mode): defaults to
+	centered-on-parent
+
+2000-05-16  John Harper  <john@dcs.warwick.ac.uk>
+
+	* beos-window-menu.jl: new file, replaces window-menu by
+	something that creates sub-menus by window group
+
+	* window-history.jl: use a hash table to record history
+
 2000-05-15  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-gaol.jl (sawmill-safe-specials): added batch-mode

@@ -11,6 +11,8 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
+  ! raise-groups-on-focus is commented out
+
   ! running multiple instances of the wm loses
 
     (because they share the same ~/.sawmill/custom file)
@@ -101,6 +103,20 @@ Outstanding bugs
 
 Window manager tasks
 ====================
+
+  + some hci ideas:
+
+    placement mode to favour some/any of:
+
+	- positions near the currently focused window
+	- near the mouse pointer
+
+	  [ the above two are now possible using best-fit cost
+	    components.. not sure if they work 100% correctly.. ]
+
+	- near other windows in the same group
+
+    theme that has visual cues (colours?) for group membership
 
   + look at kde khotkeys for ideas
 

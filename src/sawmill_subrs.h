@@ -188,6 +188,7 @@ extern ImlibData *imlib_id;
 extern Pixmap make_bitmap (repv file, int *widthp, int *heightp,
 			   int *x_hotp, int *y_hotp);
 extern repv Fmake_image (repv file, repv plist);
+extern repv Fmake_image_from_x_drawable (repv id, repv mask_id);
 extern repv Fwindow_icon_image (repv win);
 extern repv Fcopy_image (repv source);
 extern repv Fimage_get (repv image, repv prop);

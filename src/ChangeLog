@@ -1,3 +1,15 @@
+2000-05-16  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x.c: the old window type can now contain one of three
+	different types of drawable: window, pixmap, or bitmap (single
+	bitplane pixmap); there's also a function to grab the contents
+	of a drawable to an image
+
+	* images.c (Fmake_image_from_x_drawable): new function, the
+	guts of Fwindow_icon_image, which now calls this new function
+
+	* sawmill-ui.jl: set the WM_CLASS property on windows
+
 2000-05-15  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c (Qdefault_frame, Qnil_frame): deleted, nil-frame is
