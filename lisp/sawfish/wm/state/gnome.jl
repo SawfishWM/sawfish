@@ -79,6 +79,7 @@
   (let
       ((state (get-x-property w '_WIN_STATE))
        (layer (get-x-property w '_WIN_LAYER))
+       (space (get-x-property w '_WIN_WORKSPACE))
        bits)
     (when (eq (car state) 'CARDINAL)
       (setq bits (aref (nth 2 state) 0))
@@ -94,6 +95,8 @@
     (when layer
       (setq layer (aref (nth 2 layer) 0))
       (set-window-depth w (- layer WIN_LAYER_NORMAL)))
+    (when space
+      (ws-add-window-to-space-by-index w (aref (nth 2 space) 0)))
     w))
 
 (defun gnome-client-message-handler (w type data)
@@ -169,7 +172,7 @@
   (add-hook 'umap-notify-hook 'gnome-set-client-list)
 
   (add-hook 'window-state-change-hook 'gnome-set-client-state)
-  (add-hook 'add-window-hook 'gnome-honour-client-state)
+  (add-hook 'before-add-window-hook 'gnome-honour-client-state)
   (add-hook 'add-window-hook 'gnome-set-client-state t)
 
   (add-hook 'client-message-hook 'gnome-client-message-handler)
