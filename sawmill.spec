@@ -13,6 +13,7 @@ Group: User Interface/Desktops
 Source: ftp.dcs.warwick.ac.uk:/people/John.Harper/sawmill/sawmill-%{ver}.tar.gz
 URL: http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
 Packager: John Harper <john@dcs.warwick.ac.uk>
+Buildroot: /var/tmp/%{nam}-root
 
 %description
 This is an extensible window manager using an Emacs Lisp-like scripting
@@ -40,9 +41,11 @@ center applet
 make CFLAGS="$RPM_OPT_FLAGS"
 
 %install
-rm -f %{_prefix}/info/sawmill*
-make install
-gzip -9nf %{_prefix}/info/sawmill*
+rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT/%{_prefix}/share/gnome/wm-properties
+mkdir -p $RPM_BUILD_ROOT/%{_prefix}/share/control-center
+make prefix=$RPM_BUILD_ROOT/%{_prefix} install
+gzip -9nf $RPM_BUILD_ROOT/%{_prefix}/info/sawmill*
 
 %files
 %doc README NEWS TODO
@@ -57,3 +60,10 @@ gzip -9nf %{_prefix}/info/sawmill*
 %{_prefix}/bin/sawmill-capplet
 %{_prefix}/share/control-center/Sawmill
 %{_prefix}/share/gnome/wm-properties/Sawmill.desktop
+
+%changelog
+* Fri Sep 17 1999 John Harper <john@dcs.warwick.ac.uk>
+- don't patch the Makefile
+
+* Tue Sep 14 1999 Aron Griffis <agriffis@bigfoot.com>
+- 0.6 spec file update: added buildroot
