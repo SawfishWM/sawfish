@@ -588,6 +588,18 @@ previous workspace."
     (select-workspace (+ count (car limits)) was-focused)
     (ws-move-window window current-workspace was-focused)))
 
+(defun delete-empty-workspaces ()
+  (interactive)
+  (let*
+      ((limits (workspace-limits))
+       (space (car limits)))
+    (while (<= space (cdr limits))
+      (if (workspace-empty-p space)
+	  (progn
+	    (ws-remove-workspace space)
+	    (setq limits (workspace-limits)))
+	(setq space (1+ space))))))
+
 
 ;; some commands for moving directly to a workspace
 
