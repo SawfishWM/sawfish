@@ -98,11 +98,20 @@ doug_lea_malloc=yes
 AC_CHECK_FUNC(malloc_get_state, , doug_lea_malloc=no)
 AC_CHECK_FUNC(malloc_set_state, , doug_lea_malloc=no)
 if test "$doug_lea_malloc" = "no"; then
-  LIBOBJS="${LIBOBJS} dlmalloc.o"
+  case ${host} in
+    *-dec-osf*)
+      # dlmalloc is broken on Tru64
+      AC_DEFINE(LIBC_MALLOC)
+      ;;
+    *)
+      LIBOBJS="${LIBOBJS} dlmalloc.o"
+      AC_DEFINE(DOUG_LEA_MALLOC)
+      ;;
+  esac
 else
+  AC_DEFINE(DOUG_LEA_MALLOC)
   AC_DEFINE(LIBC_MALLOC)
 fi
-AC_DEFINE(DOUG_LEA_MALLOC)
 
 dnl Check for readline
 AC_ARG_WITH(readline,
