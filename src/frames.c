@@ -44,6 +44,9 @@
 
 static XID window_fp_context;
 
+int frame_part_type;
+static struct frame_part *allocated_parts;
+
 DEFSYM(default_frame, "default-frame");
 DEFSYM(nil_frame, "nil-frame");
 DEFSYM(internal, "internal");
@@ -87,9 +90,80 @@ static repv state_syms[fps_MAX];
 static bool frame_draw_mutex;
 bool frame_state_mutex;
 
-/* Used while building frames to provide temporary roots for gc. Each
-   pointer actually points to a `struct frame_part *' */
-static rep_GC_root *gc_parts;
+
+/* type hooks */
+
+static struct frame_part *
+fp_new (Lisp_Window *win, repv alist)
+{
+    struct frame_part *fp = rep_ALLOC_CELL (sizeof (struct frame_part));
+    rep_data_after_gc += sizeof (struct frame_part);
+    memset (fp, 0, sizeof (struct frame_part));
+    fp->car = frame_part_type;
+    fp->win = win;
+    fp->alist = alist;
+    fp->next_alloc = allocated_parts;
+    allocated_parts = fp;
+    return fp;
+}
+
+static int
+fp_cmp (repv w1, repv w2)
+{
+    return w1 != w2;
+}
+
+static void
+fp_prin (repv stream, repv win)
+{
+    char buf[128];
+    sprintf (buf, "#<frame-part %lx>", VPART(win)->id);
+    rep_stream_puts (stream, buf, -1, FALSE);
+}
+
+static void
+fp_mark (repv obj)
+{
+    int i;
+    struct frame_part *fp = VPART(obj);
+    rep_MARKVAL(fp->alist);
+    rep_MARKVAL(rep_VAL(fp->win));
+    for (i = 0; i < fps_MAX; i++)
+    {
+	rep_MARKVAL(fp->font[i]);
+	rep_MARKVAL(fp->fg[i]);
+	rep_MARKVAL(fp->bg[i]);
+    }
+    rep_MARKVAL(rep_VAL(fp->cursor));
+    rep_MARKVAL(rep_VAL(fp->renderer));
+    rep_MARKVAL(rep_VAL(fp->rendered_image));
+    rep_MARKVAL(fp->drawn.font);
+    rep_MARKVAL(fp->drawn.text);
+    rep_MARKVAL(fp->drawn.x_justify);
+    rep_MARKVAL(fp->drawn.y_justify);
+    rep_MARKVAL(fp->drawn.fg);
+    rep_MARKVAL(fp->drawn.bg);
+}
+
+static void
+fp_sweep (void)
+{
+    struct frame_part *fp = allocated_parts;
+    allocated_parts = 0;
+    while (fp != 0)
+    {
+	struct frame_part *next = fp->next_alloc;
+	if (!rep_GC_CELL_MARKEDP(rep_VAL(fp)))
+	    rep_FREE_CELL(fp);
+	else
+	{
+	    fp->next_alloc = allocated_parts;
+	    allocated_parts = fp;
+	    rep_GC_CLR_CELL(rep_VAL(fp));
+	}
+	fp = next;
+    }
+}
 
 
 /* building frames from component lists
@@ -136,7 +210,7 @@ static rep_GC_root *gc_parts;
    Note that all numeric quantities may be defined dynamically by
    substituting a function */
 
-static int
+int
 current_state (struct frame_part *fp)
 {
     if (fp->clicked)
@@ -428,6 +502,11 @@ set_frame_part_bg (struct frame_part *fp)
 	fp->drawn.bg = bg;
 	fp->drawn.fg = rep_NULL;
     }
+    else if (Ffunctionp (bg) != Qnil)
+    {
+	rep_call_lisp1 (bg, rep_VAL(fp));
+	fp->drawn.bg = bg;
+    }
     else
 	fp->drawn.bg = Qnil;
 }
@@ -447,7 +526,11 @@ set_frame_part_fg (struct frame_part *fp)
     if (fp->id == 0)
 	return;
 
-    if (IMAGEP(fg) || fp->text != Qnil)
+    if (Ffunctionp (fg) != Qnil)
+    {
+	rep_call_lisp1 (fg, rep_VAL(fp));
+    }
+    else if (IMAGEP(fg) || fp->text != Qnil)
     {
 	if (!COLORP(fg) && !IMAGEP(fg))
 	    fg = Fsymbol_value (Qdefault_foreground, Qt);
@@ -667,16 +750,21 @@ frame_part_destroyer (Lisp_Window *w)
 	}
 
 	if (fp->gc)
+	{
 	    XFreeGC (dpy, fp->gc);
+	    fp->gc = 0;
+	}
 
 	if (fp->id != 0)
 	{
 	    XDeleteContext (dpy, fp->id, window_fp_context);
 	    XDestroyWindow (dpy, fp->id);
+	    fp->id = 0;
 	}
 
+	fp->win = 0;
 	next = fp->next;
-	rep_free (fp);
+	fp->next = 0;
     }
     w->frame_parts = 0;
 }
@@ -929,24 +1017,15 @@ list_frame_generator (Lisp_Window *w)
 	rep_GC_root gc_class, gc_class_elt, gc_ov_class_elt, gc_fp;
 	bool had_left_edge = FALSE, had_top_edge = FALSE;
 	bool had_right_edge = FALSE, had_bottom_edge = FALSE;
+	repv fp_ = rep_VAL(fp);
 
 	rep_PUSHGC(gc_class, class);
 	rep_PUSHGC(gc_class_elt, class_elt);
 	rep_PUSHGC(gc_ov_class_elt, ov_class_elt);
-
-	/* Custom protection for the part we're currently building
-	   (and thus may not be linked into the window yet) */
-	gc_fp.ptr = (repv *) &fp;
-	gc_fp.next = gc_parts;
-	gc_parts = &gc_fp;
+	rep_PUSHGC(gc_fp, fp_);
 
 	if (!regen)
-	{
-	    fp = rep_alloc (sizeof (struct frame_part));
-	    memset (fp, 0, sizeof (struct frame_part));
-	    fp->win = w;
-	    fp->alist = rep_CAR(ptr);
-	}
+	    fp = fp_new (w, rep_CAR (ptr));
 	elt = fp->alist;
 
 	fp->width = fp->height = -1;
@@ -1173,8 +1252,7 @@ list_frame_generator (Lisp_Window *w)
 	else
 	    fp = fp->next;
 
-	gc_parts = gc_parts->next;
-	rep_POPGC; rep_POPGC; rep_POPGC;
+	rep_POPGC; rep_POPGC; rep_POPGC; rep_POPGC;
     }
 
     /* now we can find the size and offset of the frame. */
@@ -1308,49 +1386,13 @@ get_keymap_for_frame_part (struct frame_part *fp)
     return tem;
 }
 
-static void
-mark_frame_part (struct frame_part *fp)
-{
-    int i;
-    rep_MARKVAL(fp->alist);
-    rep_MARKVAL(rep_VAL(fp->win));
-    for (i = 0; i < fps_MAX; i++)
-    {
-	rep_MARKVAL(fp->font[i]);
-	rep_MARKVAL(fp->fg[i]);
-	rep_MARKVAL(fp->bg[i]);
-    }
-    rep_MARKVAL(rep_VAL(fp->cursor));
-    rep_MARKVAL(rep_VAL(fp->renderer));
-    rep_MARKVAL(rep_VAL(fp->rendered_image));
-    rep_MARKVAL(fp->drawn.font);
-    rep_MARKVAL(fp->drawn.text);
-    rep_MARKVAL(fp->drawn.x_justify);
-    rep_MARKVAL(fp->drawn.y_justify);
-    rep_MARKVAL(fp->drawn.fg);
-    rep_MARKVAL(fp->drawn.bg);
-}
-
 /* Mark all frame-parts of window W for gc. */
 void
 mark_frame_parts (Lisp_Window *w)
 {
     struct frame_part *fp;
     for (fp = w->frame_parts; fp != 0; fp = fp->next)
-	mark_frame_part (fp);
-}
-
-/* called once per gc; marks any frame parts currently being built */
-void
-mark_frame_type (void)
-{
-    rep_GC_root *root = gc_parts;
-    while (root != 0)
-    {
-	struct frame_part *fp = *(struct frame_part **)(root->ptr);
-	mark_frame_part (fp);
-	root = root->next;
-    }
+	rep_MARKVAL (rep_VAL(fp));
 }
 
 /* Reset state of all frame parts in window W. */
@@ -1419,6 +1461,7 @@ destroy_window_frame (Lisp_Window *w, bool leave_frame_win)
 }
 
 
+/* Lisp functions */
 
 DEFUN("frame-draw-mutex", Vframe_draw_mutex,
       Sframe_draw_mutex, (repv arg), rep_Var) /*
@@ -1469,26 +1512,112 @@ altered when the pointer enters or leaves its window.
     return frame_state_mutex ? Qt : Qnil;
 }
 
-DEFUN("frame-part-get", Fframe_part_get, Sframe_part_get,
-      (repv win, repv class, repv prop), rep_Subr3) /*
+DEFUN("frame-part-get", Fframe_part_get,
+      Sframe_part_get, (repv part, repv prop), rep_Subr2) /*
 ::doc:frame-part-get::
-frame-part-get WINDOW CLASS PROPERTY
+frame-part-get PART PROPERTY
 ::end:: */
 {
-    struct frame_part *fp;
-    rep_DECLARE1(win, WINDOWP);
-    rep_DECLARE2(class, rep_SYMBOLP);
-    rep_DECLARE3(prop, rep_SYMBOLP);
-    for (fp = VWIN(win)->frame_parts; fp != 0; fp = fp->next)
+    repv tem;
+    rep_DECLARE1 (part, PARTP);
+    rep_DECLARE2 (prop, rep_SYMBOLP);
+    tem = x_fp_assq (prop, VPART(part));
+    return (tem != Qnil) ? rep_CDR(tem) : Qnil;
+}
+
+DEFUN("frame-part-put", Fframe_part_put, Sframe_part_put,
+      (repv part, repv prop, repv value), rep_Subr3)
+{
+    repv tem;
+    rep_DECLARE1(part, PARTP);
+    rep_DECLARE2(prop, rep_SYMBOLP);
+    tem = Fassq (prop, VPART(part)->alist);
+    if (tem != rep_NULL)
     {
-	repv fp_class = x_fp_assq (Qclass, fp);
-	if (fp_class && rep_CDR(fp_class) == class)
-	{
-	    repv ret = x_fp_assq (prop, fp);
-	    return (ret != Qnil) ? rep_CDR(ret) : Qnil;
-	}
+	if (tem != Qnil)
+	    rep_CDR (tem) = value;
+	else
+	    VPART(part)->alist = Fcons (Fcons (prop, value),
+					VPART(part)->alist);
     }
+    return value;
+}
+
+DEFUN("frame-part-window", Fframe_part_window,
+      Sframe_part_window, (repv part), rep_Subr1)
+{ 
+    rep_DECLARE1(part, PARTP);
+    return rep_VAL(VPART(part)->win);
+}
+
+DEFUN("frame-part-x-window", Fframe_part_x_window,
+      Sframe_part_x_window, (repv part), rep_Subr1)
+{ 
+    rep_DECLARE1(part, PARTP);
+    return VPART(part)->id != 0 ? rep_MAKE_INT(VPART(part)->id) : Qnil;
+}
+
+DEFUN("frame-part-position", Fframe_part_position,
+      Sframe_part_position, (repv part), rep_Subr1)
+{ 
+    rep_DECLARE1(part, PARTP);
+    return Fcons (rep_MAKE_INT(VPART(part)->x - VPART(part)->win->frame_x),
+		  rep_MAKE_INT(VPART(part)->y - VPART(part)->win->frame_y));
+}
+
+DEFUN("frame-part-dimensions", Fframe_part_dimensions,
+      Sframe_part_dimensions, (repv part), rep_Subr1)
+{ 
+    rep_DECLARE1(part, PARTP);
+    return Fcons (rep_MAKE_INT(VPART(part)->width),
+		  rep_MAKE_INT(VPART(part)->height));
+}
+
+DEFUN("frame-part-state", Fframe_part_state,
+      Sframe_part_state, (repv part), rep_Subr1)
+{ 
+    rep_DECLARE1(part, PARTP);
+    return state_syms[current_state (VPART(part))];
+}
+
+DEFUN("map-frame-parts", Fmap_frame_parts,
+      Smap_frame_parts, (repv fun, repv win), rep_Subr2)
+{
+    rep_GC_root gc_win;
+    struct frame_part *fp;
+
+    rep_DECLARE (1, fun, Ffunctionp (fun) != Qnil);
+    rep_DECLARE2 (win, WINDOWP);
+
+    rep_PUSHGC (gc_win, win);
+    fp = VWIN(win)->frame_parts;
+    while (fp != 0)
+    {
+	repv tem = rep_call_lisp1 (fun, rep_VAL(fp));	/* fun,fp protected */
+	if (tem == rep_NULL)
+	    break;
+	fp = fp->next;
+    }
+    rep_POPGC;
     return Qnil;
+}
+
+DEFUN("refresh-frame-part", Frefresh_frame_part,
+      Srefresh_frame_part, (repv part), rep_Subr1)
+{
+    rep_DECLARE1(part, PARTP);
+    if (VPART(part)->id != 0)
+	refresh_frame_part (VPART(part));
+    return Qt;
+}
+
+DEFUN("refresh-window", Frefresh_window,
+      Srefresh_window, (repv win), rep_Subr1)
+{
+    rep_DECLARE1(win, XWINDOWP);
+    if (VWIN(win)->id != 0)
+	refresh_frame_parts (VWIN(win));
+    return Qt;
 }
 
 
@@ -1497,6 +1626,10 @@ frame-part-get WINDOW CLASS PROPERTY
 void
 frames_init (void)
 {
+    frame_part_type = rep_register_new_type ("frame-part", fp_cmp, fp_prin,
+					     fp_prin, fp_sweep, fp_mark, 0,
+					     0, 0, 0, 0, 0, 0);
+
     rep_INTERN_SPECIAL(default_frame);
     rep_SYM(Qdefault_frame)->value = Qnil;
 
@@ -1506,6 +1639,15 @@ frames_init (void)
     rep_ADD_SUBR(Sframe_draw_mutex);
     rep_ADD_SUBR(Sframe_state_mutex);
     rep_ADD_SUBR(Sframe_part_get);
+    rep_ADD_SUBR(Sframe_part_put);
+    rep_ADD_SUBR(Sframe_part_window);
+    rep_ADD_SUBR(Sframe_part_x_window);
+    rep_ADD_SUBR(Sframe_part_position);
+    rep_ADD_SUBR(Sframe_part_dimensions);
+    rep_ADD_SUBR(Sframe_part_state);
+    rep_ADD_SUBR(Smap_frame_parts);
+    rep_ADD_SUBR(Srefresh_frame_part);
+    rep_ADD_SUBR(Srefresh_window);
 
     rep_INTERN(internal);
     rep_INTERN(tiled);
