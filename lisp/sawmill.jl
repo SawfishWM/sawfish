@@ -32,6 +32,7 @@
 (require 'functions)
 (require 'cursors)
 (require 'keymaps)
+(require 'sawmill-gaol)
 
 ;; all rep-based programs should do this
 (load-all "autoload.jl" t)
