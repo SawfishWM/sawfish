@@ -1,3 +1,11 @@
+1999-12-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* functions.c (Fgrab_pointer): revert to using
+	owner_events=False, it stops annoying focus flickers
+
+	* keys.c (translate_event_to_x_button): fix typo (pointed out
+	by Hamish Macdonald <hamishm@lucent.com>)
+
 1999-12-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* images.c (make_image): when adding to rep_data_after_gc,

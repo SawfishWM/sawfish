@@ -1,3 +1,19 @@
+1999-12-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (workspace-swap-in): handle frame-style
+	specially (use knowledge that if frame-style property isn't
+	set, then we should use the default-frame-style)
+	(add-swapped-properties): new function
+	* sawmill.jl: require 'workspace earlier
+
+	* window-order.jl, stacking.jl, shading.jl, maximize.jl,
+	frames.jl: use add-swapped-properties
+
+	* gnome.jl (gnome-set-workspace): show windows on the workspace
+	theyre currently swapped into, not the closest to the current one
+
+	* sm-init.jl (sm-add-saved-properties): only add properties once
+
 1999-12-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* tooltips.jl (tooltips-delay): reduced to 500ms
