@@ -3,12 +3,13 @@
 (provide 'sawmill)
 
 ;; load standard libraries
+(require 'functions)
 (require 'cursors)
 (require 'focus)
 (require 'keymaps)
 (require 'transient)
 (require 'workspace)
-;(require 'place-window)
+(require 'place-window)
 
 (load-all "autoload.jl" t)
 (load-all (concat "os-" (symbol-name operating-system)) t)
