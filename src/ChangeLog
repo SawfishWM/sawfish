@@ -1,5 +1,15 @@
 1999-08-23  John Harper  <john@dcs.warwick.ac.uk>
 
+	* commands.c (Fcall_command): the `W' specifier ignores the
+	current event's window if it's the root
+
+	* client.c: new option `-c COMMAND' to invoke an interactive
+	function
+
+	* sawmill-ui.jl (build-pages): use a HPaned widget to contain
+	the box and group frame, this stops the boundary changing to
+	match their relative sizes
+
 	* version 0.3a
 
 	* functions.c (Fgrab_pointer): remove the hack choosing which
