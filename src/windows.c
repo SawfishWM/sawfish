@@ -378,6 +378,10 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 {
     DB(("remove_window (%s, %s)\n",
 	rep_STR(w->name), destroyed == Qnil ? "nil" : "t"));
+
+    if (focus_window == w)
+	focus_window = 0;
+
     if (w->id != 0)
     {
 	if (destroyed == Qnil && from_error == Qnil)
@@ -401,6 +405,17 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
     }
     else if (w->frame != 0 && from_error == Qnil)
 	destroy_window_frame (w, FALSE);
+
+    /* We can lose the focus sometimes, notably after a was-focused
+       window is closed while a keyboard grab exists.. (netscape) */
+    if (from_error == Qnil)
+    {
+	Window focus;
+	int revert_to;
+	XGetInputFocus (dpy, &focus, &revert_to);
+	if (focus == None || focus == PointerRoot)
+	    focus_on_window (focus_window);
+    }
 }
 
 void
