@@ -1135,7 +1135,7 @@ refresh_message_window ()
 static void
 message_event_handler (XEvent *ev)
 {
-    if (ev->type == Expose)
+    if (ev->type == Expose && ev->xexpose.count == 0)
 	refresh_message_window ();
     else if (ev->type == ButtonPress)
 	Fdisplay_message (Qnil, Qnil);
