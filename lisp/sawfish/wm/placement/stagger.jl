@@ -27,7 +27,8 @@
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.placement
-	  sawfish.wm.custom)
+	  sawfish.wm.custom
+	  sawfish.wm.util.workarea)
 
   (defcustom stagger-placement-step 32
     "Distance between successive placements in `stagger' placement mode."
@@ -39,13 +40,14 @@
     (let ((last-x 0)
 	  (last-y 0))
       (lambda (w)
-	(let ((dims (window-frame-dimensions w)))
+	(let ((dims (window-frame-dimensions w))
+	      (workarea (calculate-workarea #:window w)))
 	  (setq last-x (+ last-x stagger-placement-step))
 	  (setq last-y (+ last-y stagger-placement-step))
-	  (when (>= (+ last-x (car dims)) (screen-width))
-	    (setq last-x 0))
-	  (when (>= (+ last-y (cdr dims)) (screen-height))
-	    (setq last-y 0))
+	  (when (>= (+ last-x (car dims)) (nth 2 workarea))
+	    (setq last-x (nth 0 workarea)))
+	  (when (>= (+ last-y (cdr dims)) (nth 3 workarea))
+	    (setq last-y (nth 1 workarea)))
 	  (move-window-to w last-x last-y)))))
 
   ;;###autoload
