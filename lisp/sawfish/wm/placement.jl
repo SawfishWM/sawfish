@@ -74,8 +74,9 @@ this mode. The single argument is the window to be placed."
 
   (define placement-mode (autoloader-ref getter))
 
-  (define (adjust-window-for-gravity w grav)
-    (let ((coords (adjust-position-for-gravity w grav (window-position w))))
+  (define (adjust-window-for-gravity w grav #!optional unadjust)
+    (let ((coords (adjust-position-for-gravity
+		   w grav (window-position w) unadjust)))
       (move-window-to w (car coords) (cdr coords))))
 
   ;; make sure the window doesn't overlap an avoided window
@@ -90,16 +91,17 @@ this mode. The single argument is the window to be placed."
   ;; called from the place-window-hook
   (define (place-window w)
     (let ((hints (window-size-hints w)))
-      (if (or (cdr (assq 'user-position hints))
+      ;; The only time this is ever called with (window-get w 'placed) non-nil
+      ;; is when we're initializing the wm, and we want to adjust the window's
+      ;; position for its gravity setting
+      (if (or (window-get w 'placed)
+	      (cdr (assq 'user-position hints))
 	      (and (not (window-get w 'ignore-program-position))
 		   (not ignore-program-positions)
 		   (cdr (assq 'program-position hints))
 		   (or (window-get w 'ignored)
 		       (acceptable-placement w (window-position w)))))
-	  (let ((gravity (or (window-get w 'gravity)
-			     (cdr (assq 'window-gravity hints)))))
-	    (when gravity
-	      (adjust-window-for-gravity w gravity)))
+	  (adjust-window-for-gravity w (window-gravity w))
 	(let ((mode (or (window-get w 'place-mode)
 			(if (window-transient-p w)
 			    place-transient-mode
@@ -107,7 +109,11 @@ this mode. The single argument is the window to be placed."
 	  ((or (placement-mode mode) place-window-randomly) w)
 	  t))))
 
+  (define (unplace-window w)
+    (adjust-window-for-gravity w (window-gravity w) t))
+
   (add-hook 'place-window-hook place-window t)
+  (add-hook 'remove-window-hook unplace-window)
 
 
 ;;; standard placement modes
