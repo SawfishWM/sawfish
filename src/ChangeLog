@@ -1,5 +1,11 @@
 2000-03-06  John Harper  <john@dcs.warwick.ac.uk>
 
+	* keys.c (eval_input_event, print_event_prefix): ported code
+	from Jade to print prefix keys after a period
+
+	* main.c (on_idle): don't ungrab the keyboard if in the middle
+	of a multi-key sequence
+
 	* keys.c (eval_input_event): only abort when receiving
 	unhandled events if in the top-level event loop
 

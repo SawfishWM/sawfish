@@ -209,6 +209,7 @@ extern void images_kill (void);
 /* from keys.c */
 extern repv Qglobal_keymap, Qunbound_key_hook, Qkeymap;
 extern repv eval_input_event (repv context_map);
+extern bool print_event_prefix(void);
 extern repv Fmake_keymap (void);
 extern repv Fmake_sparse_keymap (repv base);
 extern repv Fbind_keys (repv args);
