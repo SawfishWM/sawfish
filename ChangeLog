@@ -1,3 +1,14 @@
+2001-05-01  John Harper  <jsh@eazel.com>
+
+	* themes/Crux/theme.jl: don't include close buttons on
+	transient windows, since it may lead to confusion (ideally,
+	we'd only remove close buttons from dialogs with more than one
+	choice, but the wm can't determine that)
+
+	Also, moved all button theme definitions into the special
+	variable Crux:button-themes, then the button-theme function
+	just dereferences this
+
 2001-04-25  Ole Laursen  <olau@hardworking.dk>
 
 	* po/da.po: Updated Danish translation.

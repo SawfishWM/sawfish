@@ -16,7 +16,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id: theme.jl,v 1.5 2001/02/14 04:31:28 jsh Exp $
+   $Id: theme.jl,v 1.6 2001/03/01 04:35:00 jsh Exp $
 
    Authors: John Harper <jsh@eazel.com>
 |#
@@ -40,8 +40,26 @@
   :group (appearance Crux)
   :after-set (lambda () (rebuild-all)))
 
+(defvar Crux:button-themes '((default
+			      ((close-button)
+			       . (iconify-button maximize-button shade-button)))
+			     (platinum
+			      ((close-button) . (maximize-button shade-button)))
+			     (macos-x
+			      ((close-button maximize-button iconify-button)))
+			     (windows
+			      ((menu-button)
+			       . (iconify-button maximize-button close-button))
+			      ((menu-button)))
+			     (next
+			      ((iconify-button) . (close-button))
+			      ((iconify-button) . (close-button)))))
+			       
+
 (defcustom Crux:button-theme 'default
   "Display title buttons to mimic: \\w"
+  ;; XXX it would be better if the choices were extracted from
+  ;; XXX the above alist somehow
   :type (choice (default "Default")
 		(platinum "Mac OS Platinum")
 		(macos-x "Mac OS X")
@@ -365,23 +383,11 @@
     (shade-button . ,shade-fg)))
 
 (define (button-theme type)
-  (case Crux:button-theme
-    ((default)
-     (if (eq type 'transient)
-	 '((close-button) . ())
-       '((close-button) . (iconify-button maximize-button shade-button))))
-    ((platinum)
-     (if (eq type 'transient)
-	 '((close-button) . ())
-       '((close-button) . (maximize-button shade-button))))
-    ((macos-x)
-     '((close-button maximize-button iconify-button) . ()))
-    ((windows)
-     (if (eq type 'transient)
-	 '((menu-button) . (close-button))
-       '((menu-button) . (iconify-button maximize-button close-button))))
-    ((next)
-     '((iconify-button) . (close-button)))))
+  (let ((style (cdr (or (assq Crux:button-theme Crux:button-themes)
+			(assq 'default Crux:button-themes)))))
+    (if (eq type 'transient)
+	(cadr style)
+      (car style))))
 
 (define (make-buttons spec background edge)
 
