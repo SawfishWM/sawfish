@@ -1,3 +1,15 @@
+2000-05-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (display-window:uniconify-to-current-workspace):
+	new option
+	* iconify.jl (display-window-without-focusing): bind
+	uniconify-to-current-workspace to the value of the above option
+	before uniconifying
+	[ adapted from from John N S Gill ]
+
+	* prompt-extras.jl: don't bind special variables in parameter
+	lists
+
 2000-05-22  John Harper  <john@dcs.warwick.ac.uk>
 
 	* edge-flip.jl (edge-flip-warp-pointer): new option, whether or
