@@ -252,12 +252,9 @@
 (defun sp-cost (point dims grid rects)
   (let ((total 0))
     (mapc (lambda (cell)
-	    (let ((this ((cdr cell) point dims grid rects)))
-	      (format standard-error
-		      "%s --> %d * %d\n" (cdr cell) (car cell) this)
-	      (setq total (+ total (* (car cell) this)))))
+	    (setq total (+ total (* (car cell)
+				    ((cdr cell) point dims grid rects)))))
 	  sp-cost-components)
-    (format standard-error " ** total = %d\n" total)
     total))
 
 (defun sp-best-fit (dims grid rects)
