@@ -88,16 +88,19 @@
   (nth 2 (get-x-property w window-history-key-property)))
 
 (define (window-history-ref w)
-  (window-history-load)
-  (table-ref window-history-state (window-history-key w)))
+  (let ((class (window-history-key w)))
+    (when class
+      (window-history-load)
+      (table-ref window-history-state class))))
 
 (define (window-history-set w alist)
   (let ((class (window-history-key w)))
-    (window-history-load)
-    (if alist
-	(table-set window-history-state class alist)
-      (table-unset window-history-state class))
-    (setq window-history-dirty t)))
+    (when class
+      (window-history-load)
+      (if alist
+	  (table-set window-history-state class alist)
+	(table-unset window-history-state class))
+      (setq window-history-dirty t))))
 
 (define (window-history-match w)
   (let ((alist (window-history-ref w)))
@@ -160,14 +163,15 @@
 		  (let ((key (window-history-key w))
 			(space (or (cdr (assq 'workspace alist))
 				   current-workspace)))
-		    (map-windows
-		     (lambda (x)
-		       (when (and (equal (window-history-key x) key)
-				  (window-appears-in-workspace-p x space)
-				  (equal position
-					 (window-absolute-position x)))
-			 ;; here's our match..
-			 (throw 'out t)))))))
+		    (when key
+		      (map-windows
+		       (lambda (x)
+			 (when (and (equal (window-history-key x) key)
+				    (window-appears-in-workspace-p x space)
+				    (equal position
+					   (window-absolute-position x)))
+			   ;; here's our match..
+			   (throw 'out t))))))))
 	(setq alist (filter (lambda (cell)
 			      (not (eq (car cell) 'position)))
 			    alist)))))
