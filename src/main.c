@@ -255,8 +255,8 @@ main(int argc, char **argv)
 	/* call all init funcs... */
 	session_init ();
 	events_init ();
-	colors_init ();
 	images_init ();
+	colors_init ();
 	fonts_init ();
 	cursors_init ();
 	frames_init ();
@@ -328,8 +328,8 @@ main(int argc, char **argv)
 	frames_kill ();
 	cursors_kill ();
 	fonts_kill ();
-	images_kill ();
 	colors_kill ();
+	images_kill ();
 	events_kill ();
 	session_kill ();
 
