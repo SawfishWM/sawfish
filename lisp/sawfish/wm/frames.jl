@@ -120,6 +120,12 @@ that overrides settings set elsewhere.")
 (defvar transient-normal-frame-alist '((transient . default)
 				       (shaped-transient . shaped)))
 
+;; list of (REGEXP DIR-EXPAND NAME-EXPAND)
+(defvar theme-suffix-regexps
+  '(("^(.*)\\.tar(\\.gz|\\.Z|\\.bz2)$" "\\0#tar" "\\1")))
+
+(defvar theme-suffixes '("" ".tar" ".tar.gz" ".tar.Z" ".tar.bz2"))
+
 
 ;; managing frame styles
 
@@ -264,35 +270,53 @@ that overrides settings set elsewhere.")
 
 ;; loading ``themes'' (currently just frame styles)
 
-(defun frame-style-directory-p (dir)
-  (or (file-exists-p (expand-file-name "theme.jl" dir))
-      (file-exists-p (expand-file-name "theme.jlc" dir))))
+(defun frame-style-directory (dir &optional get-name)
+  (if (and (file-directory-p dir)
+	   (or (file-exists-p (expand-file-name "theme.jl" dir))
+	       (file-exists-p (expand-file-name "theme.jlc" dir))))
+      (if get-name
+	  (file-name-nondirectory dir)
+	dir)
+    ;; try the list of suffixes
+    (catch 'out
+      (mapc #'(lambda (cell)
+		(when (string-match (car cell) dir)
+		  (if get-name
+		      (throw 'out (file-name-nondirectory
+				   (expand-last-match (nth 2 cell))))
+		    (throw 'out (expand-last-match (nth 1 cell))))))
+	    theme-suffix-regexps)
+      nil)))
 
 (defun load-frame-style (name)
   (catch 'out
     (mapc #'(lambda (dir)
-	      (let
-		  ((t-dir  (expand-file-name (symbol-name name) dir)))
-		;; XXX allow .tar and .tar.gz files..?
-		(when (and (file-directory-p t-dir)
-			   (frame-style-directory-p t-dir))
-		  (let
-		      ((image-load-path (cons t-dir image-load-path)))
-		    (load (expand-file-name "theme" t-dir) nil t)
-		    (throw 'out t)))))
+	      (mapc #'(lambda (suf)
+			(let*
+			    ((t-dir (expand-file-name
+				     (concat (symbol-name name) suf) dir))
+			     tem)
+			  (when (file-exists-p t-dir)
+			    (setq tem (frame-style-directory t-dir))
+			    (when tem
+			      (let
+				  ((image-load-path
+				    (cons tem image-load-path)))
+				(load (expand-file-name "theme" tem) nil t)
+				(throw 'out t))))))
+		    theme-suffixes))
 	  theme-load-path)
     nil))
 
 (defun find-all-frame-styles (&optional sorted)
   (let
-      (list)
+      (list tem)
     (mapc #'(lambda (dir)
 	      (when (file-directory-p dir)
 		(mapc #'(lambda (t-dir)
-			  (when (and (frame-style-directory-p
-				      (expand-file-name t-dir dir))
-				     (not (member t-dir list)))
-			    (setq list (cons t-dir list))))
+			  (when (setq tem (frame-style-directory
+					   (expand-file-name t-dir dir) t))
+			    (setq list (cons tem list))))
 		      (directory-files dir))))
 	  theme-load-path)
     (when sorted
