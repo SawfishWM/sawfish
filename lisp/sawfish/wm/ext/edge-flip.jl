@@ -55,6 +55,12 @@ flipping."
   :group (workspace edge-flip)
   :range (0 . 1000))
 
+(defcustom edge-flip-warp-pointer t
+  "Warp pointer to opposite screen edge when flipping."
+  :type boolean
+  :group (workspace edge-flip)
+  :after-set (lambda () (edge-flip-enable)))
+
 (defvar ef-current-edge nil)
 (defvar ef-timer nil)
 
@@ -102,7 +108,8 @@ flipping."
 		((eq edge 'bottom)
 		 (when (move-viewport 0 1)
 		   (rplacd ptr 1))))
-	  (warp-cursor (car ptr) (cdr ptr)))
+	  (when edge-flip-warp-pointer
+	    (warp-cursor (car ptr) (cdr ptr))))
       (let
 	  ((orig current-workspace))
 	(cond ((eq edge 'left)
@@ -117,7 +124,8 @@ flipping."
 	      ((eq edge 'bottom)
 	       (next-workspace 1)
 	       (rplacd ptr 1)))
-	(unless (= current-workspace orig)
+	(unless (or (= current-workspace orig)
+		    (not edge-flip-warp-pointer))
 	  (warp-cursor (car ptr) (cdr ptr)))))))
 
 ;; this is a hack -- while the pointer's grabbed the flipper windows
