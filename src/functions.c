@@ -94,7 +94,7 @@ DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1
 delete-window WINDOW
 
 Delete WINDOW, i.e. send a WM_DELETE_WINDOW client-message if possible, or
-just delete the window if not.
+just kill the owning client if not.
 
 WINDOW may be a window object or a numeric window id.
 ::end:: */
@@ -105,7 +105,7 @@ WINDOW may be a window object or a numeric window id.
     if (WINDOWP(win) && VWIN(win)->does_wm_delete_window)
 	send_client_message (w, xa_wm_delete_window, last_event_time);
     else
-	XDestroyWindow (dpy, w);
+	XKillClient (dpy, w);
     return win;
 }
 
