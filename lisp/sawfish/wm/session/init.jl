@@ -47,53 +47,50 @@ the window.")
       (delete-file file))))
 
 
-;; initialising the session properties
+;; initialisation
 
-(defun sm-init-properties ()
+(when (and (not batch-mode) sm-client-id)
+  ;; 1. setup all session manager properties
+
+  ;; remove any --sm-client-id option from saved-command-line-args
   (let
       ((args saved-command-line-args)
        tem)
-
-    ;; remove any --sm-client-id option from saved-command-line-args
     (while (cdr args)
       (when (string-match "^--sm-client-id" (car (cdr args)))
 	(setq tem (car (cdr args)))
 	(rplacd args (cdr (cdr args)))
 	(unless (string-match "^--sm-client-id=" tem)
 	  (rplacd args (cdr (cdr args)))))
-      (setq args (cdr args)))
+      (setq args (cdr args))))
 
-    ;; XXX should I set this to SmRestartImmediately (2) instead
-    ;; XXX of SmRestartIfRunning (0) ?
-    (sm-set-property "RestartStyleHint" 0)
+  ;; XXX should I set this to SmRestartImmediately (2) instead
+  ;; XXX of SmRestartIfRunning (0) ?
+  (sm-set-property "RestartStyleHint" 0)
 
-    (sm-set-property "CloneCommand" saved-command-line-args)
+  (sm-set-property "CloneCommand" saved-command-line-args)
 
-    ;; fix saved-command-line-args to include the client-id
-    (rplacd saved-command-line-args (list* "--sm-client-id" sm-client-id
-					   (cdr saved-command-line-args)))
+  ;; fix saved-command-line-args to include the client-id
+  (rplacd saved-command-line-args (list* "--sm-client-id" sm-client-id
+					 (cdr saved-command-line-args)))
 
-    (sm-set-property "RestartCommand" saved-command-line-args)
+  (sm-set-property "RestartCommand" saved-command-line-args)
 
-    (sm-set-property "CurrentDirectory" default-directory)
-    (sm-set-property
-     "DiscardCommand" (list "rm" "-f" (local-file-name
-				       (sm-find-file sm-client-id))))
-    (sm-set-property "ProcessId" (format nil "%d" (getpid)))
-    (sm-set-property "Program" (car saved-command-line-args))
-    (sm-set-property "UserId" (user-login-name))
-    (sm-set-property
-     "Environment" (apply 'nconc
-			  (mapcar #'(lambda (e)
-				      (when (string-match "=" e)
-					(list (substring e 0 (match-start))
-					      (substring e (match-end)))))
-				  process-environment)))))
+  (sm-set-property "CurrentDirectory" default-directory)
+  (sm-set-property
+   "DiscardCommand" (list "rm" "-f" (local-file-name
+				     (sm-find-file sm-client-id))))
+  (sm-set-property "ProcessId" (format nil "%d" (getpid)))
+  (sm-set-property "Program" (car saved-command-line-args))
+  (sm-set-property "UserId" (user-login-name))
+  (sm-set-property
+   "Environment" (apply 'nconc
+			(mapcar #'(lambda (e)
+				    (when (string-match "=" e)
+				      (list (substring e 0 (match-start))
+					    (substring e (match-end)))))
+				process-environment)))
 
-
-;; initialisation
-
-(when (and (not batch-mode) sm-client-id)
-  (sm-init-properties)
+  ;; 2. load the session if it exists
   (when (file-exists-p (sm-find-file sm-client-id))
     (load-session sm-client-id)))
