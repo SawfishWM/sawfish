@@ -121,9 +121,7 @@ ui_output_callback (gpointer data, gint fd, GdkInputCondition cond)
 	    capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
 	    break;
 
-	case 'e':
-	    /* probably `error-->' */
-	    kill (ui_pid, SIGTERM);
+	case 'g':			/* group doesn't exist */
 	    waitpid (ui_pid, 0, 0);
 	    ui_pid = 0;
 	    gtk_container_remove (GTK_CONTAINER (capplet), ui_socket);
@@ -225,7 +223,6 @@ sawmill_setup (void)
     case 0:				/* child */
 	dup2 (ui_stdin[0], 0);
 	dup2 (ui_stdout[1], 1);
-	dup2 (ui_stdout[1], 2);
 	close (ui_stdin[0]);
 	close (ui_stdin[1]);
 	close (ui_stdout[0]);
