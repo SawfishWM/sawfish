@@ -252,7 +252,7 @@ handle_fp_click (struct frame_part *fp, XEvent *ev)
 	fp->clicked = 0;
 	clicked_frame_part = 0;
     }
-    if (fp->clicked != old_clicked)
+    if (fp->clicked != old_clicked && fp->id != 0 && fp->win != 0)
 	refresh_frame_part (fp);
 }
 
@@ -264,7 +264,8 @@ unclick_current_fp (void)
 	if (clicked_frame_part->clicked)
 	{
 	    clicked_frame_part->clicked = 0;
-	    refresh_frame_part (clicked_frame_part);
+	    if (clicked_frame_part->id != 0 && clicked_frame_part->win != 0)
+		refresh_frame_part (clicked_frame_part);
 	}
 	clicked_frame_part = 0;
     }
