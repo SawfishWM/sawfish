@@ -102,4 +102,4 @@
 	     x-window-swap-buffers x-clear-window x-draw-string
 	     x-draw-line x-draw-rectangle x-fill-rectangle
 	     x-draw-arc x-fill-arc x-fill-polygon x-copy-area
-	     x-draw-image x-grab-image-from-drawable)))))
+	     x-draw-image x-grab-image-from-drawable x-gc-set-dashes)))))
