@@ -299,11 +299,22 @@
       (case prop
 	((_WIN_WORKSPACE)                       
 	  (let ((space (get-x-property w '_WIN_WORKSPACE)))
-	    (when (and space (eq (car space) 'CARDINAL))
+	    (when (and space (eq (car space) 'CARDINAL)
+		       (= (length (nth 2 space)) 1))
 	      (let ((count (aref (nth 2 space) 0)))
 		(unless (window-appears-in-workspace-p
 			 w (workspace-id-from-logical count))
-		  (send-window-to-workspace-from-first w count)))))))))
+		  (send-window-to-workspace-from-first w count))))))
+
+	((_WIN_AREA)
+	 (let ((area (get-x-property w '_WIN_AREA)))
+	   (when (and area (eq (car area) 'CARDINAL)
+		      (= (length (nth 2 area)) 2))
+	     (let ((x (aref (nth 2 area) 0))
+		   (y (aref (nth 2 area) 1))
+		   (port (window-viewport w)))
+	       (unless (and (= (car port) x) (= (cdr port) y))
+		 (set-window-viewport w x y)))))))))
 
   (define (gnome-event-proxyer)
     (when (and (current-event) (eq (current-event-window) 'root))
