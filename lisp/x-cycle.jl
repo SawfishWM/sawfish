@@ -184,6 +184,18 @@ prefix of the current window."
 				  (managed-windows))))
       (cycle-windows event))))
 
+;;;###autoload
+(defun cycle-class (event w)
+  "Cycle through all windows with the same class as the current window."
+  (interactive "e\n%W")
+  (let*
+      ((class (aref (get-x-text-property w 'WM_CLASS) 1))
+       (x-cycle-windows
+	(filter (lambda (x)
+		  (string= (aref (get-x-text-property x 'WM_CLASS) 1) class))
+		(managed-windows))))
+    (cycle-windows event)))
+
 (defun x-cycle-next ()
   (interactive)
   (let
