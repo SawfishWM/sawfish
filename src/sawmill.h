@@ -145,30 +145,6 @@ typedef struct lisp_image {
 #define IMAGEP(v)	rep_CELL16_TYPEP(v, image_type)
 #define VIMAGE(v)	((Lisp_Image *)rep_PTR(v))
 
-enum frame_types {
-    f_nil = 0,
-    f_function,
-    f_list,
-    f_MAX
-};
-
-/* A type of window frame */
-typedef struct lisp_frame {
-    repv car;
-    struct lisp_frame *next;
-    repv name;
-    repv plist;
-
-    enum frame_types type;
-    union {
-	void (*function)(Lisp_Window *w);
-	repv list;
-    } generator;
-} Lisp_Frame;
-
-#define FRAMEP(v)	rep_CELL16_TYPEP(v, frame_type)
-#define VFRAME(v)	((Lisp_Frame *)rep_PTR(v))
-
 enum frame_part_states {
     fps_normal = 0,
     fps_focused,
@@ -177,7 +153,7 @@ enum frame_part_states {
     fps_MAX
 };
 
-/* one component of a frame, built from a f_list frame */
+/* one component of a frame */
 struct frame_part {
     struct frame_part *next;
     repv alist;				/* the generator alist */
