@@ -83,6 +83,9 @@ state."
 	(case type
 	  ((default shaped) 'shaded)
 	  ((transient shaped-transient) 'shaded-transient)
+	  ((utility shaped-utility) 'shaded-utility)
+	  ((menu shaped-menu) 'shaded-menu)
+	  ((toolbar shaped-toolbar) 'shaded-toolbar)
 	  (t type))
       type))
 
