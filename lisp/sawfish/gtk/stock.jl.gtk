@@ -46,7 +46,7 @@
 
   (define (simple-dialog title widget #!optional ok-callback main-window)
 
-    (let ((window (gtk-window-new 'dialog))
+    (let ((window (gtk-window-new 'toplevel))
 	  (vbox (gtk-vbox-new nil box-spacing))
 	  (hbbox (gtk-hbutton-box-new))
 	  (ok (stock-button 'ok))
@@ -60,8 +60,9 @@
 	(gtk-widget-destroy window))
 	  
       (gtk-window-set-title window title)
+      ;;(gtk-window-set-modal window t)
       (gtk-window-set-wmclass window "ok_cancel_dialog" "Nokogiri")
-      (gtk-container-border-width window box-border)
+      (gtk-container-set-border-width window box-border)
       (when main-window
 	(gtk-window-set-transient-for window main-window))
 
@@ -88,17 +89,20 @@
 
   (define (about-dialog title version copyright
 			authors comments #!key logo extra)
-    (let ((box (gtk-vbox-new nil 4))
-	  (text (gtk-text-new)))
+    (declare (unused logo))
+    (let* ((box (gtk-vbox-new nil 4))
+	   (text-view (gtk-text-view-new))
+	   (text-buffer (gtk-text-view-get-buffer text-view)))
       (define (insert s)
-	(gtk-text-insert text nil nil nil s (length s)))
+	(gtk-text-buffer-insert-at-cursor text-buffer s (length s)))
       (insert (format nil "%s %s\n" title version))
       (insert (format nil "%s\n\n" copyright))
       (when authors
 	(insert "Authors:\n")
 	(mapc (lambda (x) (insert (format nil "    %s\n" x))) authors))
       (insert (format nil "\n%s\n" comments))
-      (gtk-container-add box text)
+      (gtk-text-view-set-editable text-view nil)
+      (gtk-container-add box text-view)
       (when extra
 	(gtk-box-pack-end box extra))
       (gtk-widget-show-all box)

@@ -31,7 +31,7 @@
     (let* ((box (gtk-hbox-new nil box-spacing))
 	   (entry (gtk-entry-new))
 	   (button (gtk-button-new-with-label (_ "Browse..."))))
-      (gtk-container-border-width box box-border)
+      (gtk-container-set-border-width box box-border)
       (gtk-box-pack-start box entry)
       (gtk-box-pack-start box button)
       (when changed-callback

@@ -63,4 +63,4 @@
 		(when (gtk-preview-p w)
 		  (set-preview-color w color)
 		  (gtk-widget-draw-interp w)))
-	      (gtk-container-children button))))))
+	      (gtk-container-get-children button))))))

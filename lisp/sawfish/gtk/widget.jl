@@ -194,7 +194,7 @@
 	(when rest
 	  (let ((button (gtk-radio-menu-item-new-with-label-from-widget
 			 last (_ (or (cadar rest) (symbol-name (car rest)))))))
-	    (gtk-menu-append menu button)
+	    (gtk-menu-shell-append menu button)
 	    (gtk-widget-show button)
 	    (gtk-signal-connect button "toggled"
 				(lambda (w)
@@ -211,9 +211,9 @@
 		   (let ((idx (option-index options x)))
 		     (gtk-option-menu-set-history omenu idx)
 		     (do ((i 0 (1+ i))
-			  (rest (gtk-container-children menu) (cdr rest)))
+			  (rest (gtk-container-get-children menu) (cdr rest)))
 			 ((null rest))
-		       (gtk-check-menu-item-set-state (car rest) (= i idx))))))
+		       (gtk-check-menu-item-set-active (car rest) (= i idx))))))
 	  ((clear) nop)
 	  ((ref) (lambda () value))
 	  ((gtk-widget) omenu)
@@ -269,11 +269,8 @@
     ;; XXX backwards compat..
     (when (eq minimum 'nil) (setq minimum nil))
     (when (eq maximum 'nil) (setq maximum nil))
-    (let ((widget (gtk-spin-button-new (gtk-adjustment-new
-					(or minimum 0)
-					(or minimum 0)
-					(or maximum 65535)
-					1 16 0) 1 0)))
+    (let ((widget (gtk-spin-button-new-with-range (or minimum 0)
+						  (or maximum 65535) 1)))
       (when changed-callback
 	(gtk-signal-connect
 	 widget "changed" (make-signal-callback changed-callback)))
@@ -285,7 +282,7 @@
 		     (gtk-spin-button-set-value widget x))))
 	  ((clear) nop)
 	  ((ref) (lambda ()
-		   (let ((value (gtk-spin-button-get-value-as-float widget)))
+		   (let ((value (gtk-spin-button-get-value widget)))
 		     (if (integerp value)
 			 (inexact->exact value)
 		       value))))
@@ -299,7 +296,7 @@
 		      (gtk-check-button-new-with-label label)
 		    (gtk-check-button-new))))
       (when label
-	(gtk-label-set-justify (car (gtk-container-children widget)) 'left))
+	(gtk-label-set-justify (car (gtk-container-get-children widget)) 'left))
       (when changed-callback
 	(gtk-signal-connect
 	 widget "toggled" (make-signal-callback changed-callback)))
@@ -307,11 +304,11 @@
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (gtk-toggle-button-set-state widget x)))
+		   (gtk-toggle-button-set-active widget x)))
 	  ((clear) (lambda ()
-		     (gtk-toggle-button-set-state widget nil)))
+		     (gtk-toggle-button-set-active widget nil)))
 	  ((ref) (lambda ()
-		   (gtk-toggle-button-active widget)))
+		   (gtk-toggle-button-get-active widget)))
 	  ((gtk-widget) widget)
 	  ((validp) (lambda () t))))))
 
@@ -335,15 +332,15 @@
 	      (let ((i 0))
 		(mapc (lambda (x)
 			(set-widget-enabled x (eq enabled-item x))
-			(gtk-toggle-button-set-state
+			(gtk-toggle-button-set-active
 			 (nth i checks) (eq enabled-item x))
 			(setq i (1+ i))) items))
 	      (call-callback changed-callback)))
 	   (toggle-fun
 	    (lambda (index)
 	      (when (or (eq (nth index items) enabled-item)
-			(gtk-toggle-button-active (nth index checks)))
-		(setq enabled-item (and (gtk-toggle-button-active
+			(gtk-toggle-button-get-active (nth index checks)))
+		(setq enabled-item (and (gtk-toggle-button-get-active
 					 (nth index checks))
 					(nth index items))))
 	      (refresh-item))))
@@ -459,9 +456,9 @@
       (gtk-signal-connect
        check "toggled"
        (lambda ()
-	 (set-widget-enabled item (gtk-toggle-button-active check))
+	 (set-widget-enabled item (gtk-toggle-button-get-active check))
 	 (call-callback changed-callback)))
-      (gtk-toggle-button-set-state check nil)
+      (gtk-toggle-button-set-active check nil)
       (disable-widget item)
       (gtk-widget-show-all box)
       (lambda (op)
@@ -470,13 +467,14 @@
 		   (when x
 		     (widget-set item x))
 		   (set-widget-enabled item x)
-		   (gtk-toggle-button-set-state check x)))
+		   (gtk-toggle-button-set-active check x)))
 	  ((clear) (lambda ()
 		     (widget-clear item)
 		     (disable-widget item)
-		     (gtk-toggle-button-set-state check nil)))
+		     (gtk-toggle-button-set-active check nil)))
 	  ((ref) (lambda ()
-		   (and (gtk-toggle-button-active check) (widget-ref item))))
+		   (and (gtk-toggle-button-get-active check)
+			(widget-ref item))))
 	  ((gtk-widget) box)
 	  ((validp) (lambda (x)
 		      (or (null x) (widget-valid-p item x))))))))
@@ -502,6 +500,7 @@
 ;;; widget used for unknown widget types
 
   (define (make-unknown-item changed-callback)
+    (declare (unused changed-callback))
     (let ((label (gtk-label-new (format nil (_ "** unknown widget **  "))))
 	  value)
       (gtk-widget-show label)
@@ -511,7 +510,7 @@
 	  ((clear) (lambda () (setq value nil)))
 	  ((ref) (lambda () value))
 	  ((gtk-widget) label)
-	  ((validp) (lambda (x) t))))))
+	  ((validp) (lambda (x) (declare (unused x)) t))))))
 
   (define-widget-type 'unknown make-unknown-item)
 

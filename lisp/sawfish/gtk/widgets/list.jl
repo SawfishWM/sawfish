@@ -131,17 +131,21 @@
       (gtk-signal-connect edit "clicked" edit-item)
       (gtk-signal-connect clist "select_row"
 			  (lambda (w row col)
+			    (declare (unused w col))
 			    (set-selection row)))
       (gtk-signal-connect clist "unselect_row"
 			  (lambda (w row col)
+			    (declare (unused w col))
 			    (when (= row selection)
 			      (set-selection nil))))
       (gtk-signal-connect clist "button_press_event"
 			  (lambda (w ev)
+			    (declare (unused w))
 			    (when (eq (gdk-event-type ev) '2button-press)
 			      (edit-item))))
       (gtk-signal-connect clist "key_press_event"
 			  (lambda (w ev)
+			    (declare (unused w))
 			    (when (string= (gdk-event-string ev) "\r")
 			      (edit-item))))
 
@@ -150,7 +154,8 @@
       (gtk-clist-set-selection-mode clist 'browse)
       (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
       (gtk-scrolled-window-add-with-viewport scroller clist)
-      (gtk-widget-set-usize scroller list-width list-height)
+      ;; XXX fixme
+      ;;(gtk-widget-set-usize scroller list-width list-height)
       (gtk-container-add outer-box scroller)
       (gtk-box-pack-end outer-box other-box)
       (gtk-box-pack-start other-box button-box)
