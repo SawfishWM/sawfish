@@ -159,23 +159,8 @@ server_init (void)
     {
 	if(access(rep_STR(name), F_OK) == 0)
 	{
-	    /* Socket already exists. See if it's live */
-	    struct sockaddr_un addr;
-	    int sock = socket(AF_UNIX, SOCK_STREAM, 0);
-	    if(sock >= 0)
-	    {
-		strcpy(addr.sun_path, rep_STR(name));
-		addr.sun_family = AF_UNIX;
-		if(connect(sock, (struct sockaddr *)&addr,
-                   sizeof(addr.sun_family) + strlen(addr.sun_path)) == 0)
-		{
-		    close(sock);
-		    return;
-		}
-		close(sock);
-		/* Socket is probably parentless; delete it */
-		unlink(rep_STR(name));
-	    }
+	    /* Socket already exists. Delete it */
+	    unlink(rep_STR(name));
 	}
 	socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
 	if(socket_fd >= 0)
@@ -188,6 +173,7 @@ server_init (void)
 	    if(bind(socket_fd, (struct sockaddr *)&addr,
 		    sizeof(addr.sun_family) + strlen(addr.sun_path)) == 0)
 	    {
+		chmod (rep_STR(name), S_IRWXU);
 		if(listen(socket_fd, 5) == 0)
 		{
 		    rep_unix_set_fd_nonblocking(socket_fd);
@@ -196,8 +182,11 @@ server_init (void)
 		    socket_name = name;
 		    return;
 		}
+		else
+		    perror ("listen");
 	    }
-	    perror ("bind");
+	    else
+		perror ("bind");
 	    close(socket_fd);
 	}
 	else
