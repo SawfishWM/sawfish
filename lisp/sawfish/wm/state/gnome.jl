@@ -37,7 +37,8 @@
 
 (defun gnome-add-window (w)
   (when (string-match "^gmc|panel$" (window-name w))
-    (window-put w 'focus-proxy-click t))
+    (window-put w 'focus-proxy-click t)
+    (window-put w 'ignored t))
   (gnome-set-client-list))
 
 (defun gnome-set-client-list ()
