@@ -1,5 +1,12 @@
 1999-09-05  John Harper  <john@dcs.warwick.ac.uk>
 
+	* workspace.jl (ws-index): renamed as workspace-index
+	(select-workspace): ignore negative indices
+
+	* gnome.jl (gnome-init): set the _WIN_AREA and _WIN_AREA_COUNT
+	properties (even though we only have one area), the gnome pager
+	doesn't take any notice if we just delete them
+
 	* frames.jl (frame-style-menu): added a `Default' option.
 	(set-window-frame-style): move the save-stacking-order macro
 	call to this function
