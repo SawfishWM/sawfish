@@ -75,13 +75,13 @@
   :type boolean
   :require window-history)
 
-(defcustom window-history-auto-save-dimensions t
+(defcustom window-history-auto-save-dimensions nil
   "Automatically remember window sizes."
   :group (workspace window-history)
   :type boolean
   :require window-history)
 
-(defcustom window-history-auto-save-state t
+(defcustom window-history-auto-save-state nil
   "Automatically remember other window attributes."
   :group (workspace window-history)
   :type boolean
