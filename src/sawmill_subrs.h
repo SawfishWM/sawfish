@@ -187,7 +187,7 @@ extern void install_window_frame (Lisp_Window *w);
 extern void remove_window_frame (Lisp_Window *w);
 extern Lisp_Window *add_window (Window id);
 extern void set_window_shape (Lisp_Window *w);
-extern void remove_window (Lisp_Window *win, repv destroyed);
+extern void remove_window (Lisp_Window *win, repv destroyed, repv from_error);
 extern repv Fwindow_get (repv win, repv prop);
 extern repv Fwindow_put (repv win, repv prop, repv value);
 extern repv Fwindow_name (repv win);

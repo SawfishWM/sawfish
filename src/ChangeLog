@@ -1,3 +1,13 @@
+1999-08-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (remove_window): a new argument FROM-ERROR. If
+	non-nil then we're being called from the error handler, and
+	thus won't generate any X protocol requests, let gc destroy the
+	frame later
+
+	* frames.c (frame_part_destroyer): don't try to delete parts
+	without windows
+
 1999-08-19  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c, events.c: it's possible for Imlib_render to trigger
