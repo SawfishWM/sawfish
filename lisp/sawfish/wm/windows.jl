@@ -28,6 +28,7 @@
      (export get-window-by-name
 	     get-window-by-name-re
 	     window-really-wants-input-p
+	     desktop-window-p
 	     window-class
 	     warp-cursor-to-window
 	     constrain-dimension-to-hints
@@ -108,6 +109,9 @@ Returns nil if no such window is found."
 	 (or ignore-window-input-hint
 	     (window-get w 'ignore-window-input-hint)
 	     (window-wants-input-p w))))
+
+  (define (desktop-window-p arg)
+    (or (eq arg 'root) (and (windowp arg) (window-get arg 'desktop))))
 
   (define (window-class w)
     "Return the class that window W belongs to, as a string. Returns `nil' if W
