@@ -42,6 +42,16 @@
   :group move
   :type boolean)
 
+(defcustom move-show-position t
+  "Show the current position while moving windows interactively."
+  :group move
+  :type boolean)
+
+(defcustom resize-show-dimensions t
+  "Show the current dimensions while resizing windows interactively."
+  :group move
+  :type boolean)
+
 (defcustom move-snap-edges nil
   "Snap window position to edges of other windows when interactively moving."
   :group move
@@ -148,7 +158,8 @@
 		    (recursive-edit)))
 	      (ungrab-pointer))))
       (when server-grabbed
-	(ungrab-server)))))
+	(ungrab-server))
+      (show-message nil))))
 
 ;; round up a window dimension X in increments of INC, with minimum
 ;; value BASE
@@ -167,44 +178,51 @@
 	   (setq move-resize-x (+ move-resize-old-x
 				  (- ptr-x move-resize-old-ptr-x)))
 	   (setq move-resize-y (+ move-resize-old-y
-				  (- ptr-y move-resize-old-ptr-y))))
+				  (- ptr-y move-resize-old-ptr-y)))
+	   (when move-show-position
+	     (show-message (format nil "%+d%+d" move-resize-x move-resize-y))))
 	  ((eq move-resize-function 'resize)
-	   (cond
-	    ((memq 'right move-resize-moving-edges)
-	     (setq move-resize-width
-		   (move-resize-roundup
-		    (+ move-resize-old-width (- ptr-x move-resize-old-ptr-x))
-		    (or (cdr (assq 'width-inc move-resize-hints)) 1)
-		    (or (cdr (or (assq 'base-width move-resize-hints)
-				 (assq 'min-width move-resize-hints))) 1))))
-	    ((memq 'left move-resize-moving-edges)
-	     (setq move-resize-width
-		   (move-resize-roundup
-		    (+ move-resize-old-width (- move-resize-old-ptr-x ptr-x))
-		    (or (cdr (assq 'width-inc move-resize-hints)) 1)
-		    (or (cdr (or (assq 'base-width move-resize-hints)
-				 (assq 'min-width move-resize-hints))) 1)))
-	     (setq move-resize-x (- move-resize-old-x
-				    (- move-resize-width
-				       move-resize-old-width)))))
-	   (cond
-	    ((memq 'bottom move-resize-moving-edges)
-	     (setq move-resize-height
-		   (move-resize-roundup
-		    (+ move-resize-old-height (- ptr-y move-resize-old-ptr-y))
-		    (or (cdr (assq 'height-inc move-resize-hints)) 1)
-		    (or (cdr (or (assq 'base-height move-resize-hints)
-				 (assq 'min-height move-resize-hints))) 1))))
+	   (let
+	       ((x-base (or (cdr (or (assq 'base-width move-resize-hints)
+				     (assq 'min-width move-resize-hints))) 1))
+		(x-inc (or (cdr (assq 'width-inc move-resize-hints)) 1))
+		(y-base (or (cdr (or (assq 'base-height move-resize-hints)
+				     (assq 'min-height move-resize-hints))) 1))
+		(y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1)))
+	     (cond
+	      ((memq 'right move-resize-moving-edges)
+	       (setq move-resize-width
+		     (move-resize-roundup
+		      (+ move-resize-old-width
+			 (- ptr-x move-resize-old-ptr-x)) x-inc x-base)))
+	      ((memq 'left move-resize-moving-edges)
+	       (setq move-resize-width
+		     (move-resize-roundup
+		      (+ move-resize-old-width
+			 (- move-resize-old-ptr-x ptr-x)) x-inc x-base))
+	       (setq move-resize-x (- move-resize-old-x
+				      (- move-resize-width
+					 move-resize-old-width)))))
+	     (cond
+	      ((memq 'bottom move-resize-moving-edges)
+	       (setq move-resize-height
+		     (move-resize-roundup
+		      (+ move-resize-old-height
+			 (- ptr-y move-resize-old-ptr-y)) y-inc y-base)))
 	    ((memq 'top move-resize-moving-edges)
 	     (setq move-resize-height
 		   (move-resize-roundup
-		    (+ move-resize-old-height (- move-resize-old-ptr-y ptr-y))
-		    (or (cdr (assq 'height-inc move-resize-hints)) 1)
-		    (or (cdr (or (assq 'base-height move-resize-hints)
-				 (assq 'min-height move-resize-hints))) 1)))
+		    (+ move-resize-old-height
+		       (- move-resize-old-ptr-y ptr-y)) y-inc y-base))
 	     (setq move-resize-y (- move-resize-old-y
 				    (- move-resize-height
-				       move-resize-old-height)))))))
+				       move-resize-old-height)))))
+	     (when resize-show-dimensions
+	       (show-message (format nil "%dx%d"
+				     (/ (- move-resize-width
+					   x-base) x-inc)
+				     (/ (- move-resize-height
+					   y-base) y-inc)))))))
     (if (eq move-resize-mode 'opaque)
 	(move-resize-apply)
       (if (and (eq move-resize-function 'move) move-snap-edges)
