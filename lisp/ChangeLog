@@ -1,5 +1,9 @@
 2000-11-21  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/focus.jl: now that unfocusable windows don't
+	contain the click-to-focus keymap, use the state-change-hook to
+	be notified when the never-focus state changes
+
 	* sawfish/wm/workspace.jl, sawfish/wm/ext/audio-events.jl,
 	sawfish/wm/util/groups.jl: put titles of some list widgets into
 	the actual title of the list, not above the list widget

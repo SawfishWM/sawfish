@@ -227,6 +227,13 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
   (add-hook 'focus-out-hook focus-out-fun t)
   (add-hook 'map-notify-hook focus-add-window)
 
+  (call-after-state-changed
+   '(never-focus)
+   (lambda (w)
+     (if (window-get w 'never-focus)
+	 (focus-pop-map w)
+       (focus-add-window w))))
+
   (add-hook 'after-initialization-hook
 	    (lambda () (map-windows focus-add-window)))
 
