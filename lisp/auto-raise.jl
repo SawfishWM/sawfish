@@ -20,7 +20,7 @@
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (require 'timers)
-(provide 'focus)
+(provide 'auto-raise)
 
 (defvar raise-windows-on-focus t
   "When non-nil, windows are raised after receiving focus. If a string,
