@@ -95,8 +95,8 @@ AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
 dnl Check for librep
 AM_PATH_REP(0.12)
 
-rep_gtk_function=gtk-window-set-default-size
-rep_gtk_version=0.12
+rep_gtk_function=gtk-main-iteration-do
+rep_gtk_version=0.13
 
 AC_MSG_CHECKING([for correct rep-gtk version])
 cat >conftest <<EOF
