@@ -7,9 +7,8 @@
 # Karl Eichwalder <ke@suse.de>, 2000, 2001.
 # Hubert Nachbaur <hubert.nachbaur@vlbg.at>, 2000.
 # Christoph Rauch <Christoph.Rauch@pfaffenhofen.de>, 1999. 
-#
+# Christian Neumair <chris@gnome-de.org>, 2003.
 # Dank für Hinweise an Benjamin Greiner.
-#
 # KONVENTIONEN: 
 # workspace = Arbeitsfläche 
 # desktop = Arbeitsplatz 
@@ -20,16 +19,17 @@
 # keymap = Tastenbelegung (*nicht* Tastaturbelegung!) 
 # binding = Tastenkombination 
 # transient windows = ?
-#
 # Schlagt mich nicht, aber irgendwie muss man das alles übersetzen, 
 # und ich habe für jede dieser Übersetzungen sehr gute Gründe! -mw- 
-#
+# 
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: sawfish 2.0.x\n"
-"POT-Creation-Date: 2002-11-02 23:33-0800\n"
-"PO-Revision-Date: 2002-11-16 15:01+0100\n"
-"Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
+"Project-Id-Version: sawfish\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-01-12 12:11-0800\n"
+"PO-Revision-Date: 2005-01-13 17:05+0100\n"
+"Last-Translator: Frank Arnold <frank@scirocco-5v-turbo.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -364,7 +364,7 @@ msgid "Sawfish Error"
 msgstr "Sawfish-Fehler"
 
 #. ../lisp/sawfish/ui/shell.jl
-msgid "Sawfish configurator"
+msgid "Sawfish Configurator"
 msgstr "Sawfish-Einstellungen"
 
 #. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
@@ -403,7 +403,7 @@ msgid "Select Icon"
 msgstr "Icon wählen"
 
 #. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Edit binding"
+msgid "Edit Binding"
 msgstr "Tastenkombination editieren"
 
 #. ../lisp/sawfish/ui/widgets/keymap.jl
@@ -423,7 +423,7 @@ msgid "not"
 msgstr "nicht"
 
 #. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match window properties"
+msgid "Match Window Properties"
 msgstr "Fenstereigenschaften mit Muster vergleichen"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -479,12 +479,10 @@ msgstr "Befehlssequenz"
 msgid "Invoke the list of commands, one by one."
 msgstr "Die Liste von Befehlen ausführen, einen nach dem anderen."
 
-#. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Quit"
 msgstr "Beenden"
 
-#. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Restart"
 msgstr "Neustart"
@@ -741,7 +739,7 @@ msgstr "Maximieren"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
-msgstr "Schließen"
+msgstr "_Schließen"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Toggle"
@@ -841,7 +839,15 @@ msgstr "_Handbuch..."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_About Sawfish..."
-msgstr "Über Sawfish..."
+msgstr "_Info zu Sawfish..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Restart"
+msgstr "_Neustart"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Quit"
+msgstr "_Beenden"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup window menu"
@@ -868,8 +874,8 @@ msgid "Display the applications menu."
 msgstr "Das Anwendungsmenü anzeigen."
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "All settings"
-msgstr "Alle Einstellungen"
+msgid "_All settings"
+msgstr "_Alle Einstellungen"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
@@ -1104,18 +1110,17 @@ msgstr "Erzwingen, dass das aktuelle Fenster einen eindeutigen Titel hat."
 msgid "Workspace names"
 msgstr "Namen der Arbeitsflächen"
 
-#. ../lisp/sawfish/wm/util/compat.jl
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace"
-msgstr "Arbeitfläche einfügen"
+msgid "_Insert workspace"
+msgstr "Arbeitfläche e_infügen"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Select next workspace"
-msgstr "Nächste Arbeitsfläche auswählen"
+msgid "Select _next workspace"
+msgstr "_Nächste Arbeitsfläche auswählen"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Select previous workspace"
-msgstr "Vorherige Arbeitsfläche auswählen"
+msgid "Select _previous workspace"
+msgstr "_Vorherige Arbeitsfläche auswählen"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with next"
@@ -1126,12 +1131,12 @@ msgid "Merge with previous"
 msgstr "Mit der vorherigen verschmelzen"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace right"
-msgstr "Arbeitsfläche nach rechts verschieben"
+msgid "Move workspace _right"
+msgstr "Arbeitsfläche nach _rechts verschieben"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace left"
-msgstr "Arbeitsfläche nach links verschieben"
+msgid "Move workspace _left"
+msgstr "Arbeitsfläche nach _links verschieben"
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, c-format
@@ -2441,7 +2446,7 @@ msgstr "An _Position erinnern"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _dimensions"
-msgstr "An Maße erinnern"
+msgstr "An _Maße erinnern"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _attributes"
@@ -2958,6 +2963,10 @@ msgstr ""
 "Falls das Fenster auf seiner höchsten möglichen Stellung ist, es auf\n"
 "die niedrigstmögliche absenken. Es andernfalls so weit wie erlaubt\n"
 "anheben. Auch die Ebene aller dazugehörigen Dialoge mit ändern."
+
+#. ../lisp/sawfish/wm/util/compat.jl
+msgid "Insert workspace"
+msgstr "Arbeitfläche einfügen"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Unshade selected windows."
