@@ -2,16 +2,11 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Kjartan Maraas <kmaraas@online.no>, 2000.
 #
-#. ../themer/themer.glade:353 ../themer/themer.glade:397
-#. * ../themer/themer.glade:472 ../themer/themer.glade:562
-#. * ../themer/themer.glade:1070 ../themer/themer.glade:1300
-#. * ../themer/themer.glade:1320 ../themer/themer.glade:1349
-#. * ../themer/themer.glade:1369 ../themer/themer.glade:1852
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.27\n"
-"POT-Creation-Date: 2000-07-03 11:00+0100\n"
-"PO-Revision-Date: 2000-07-10 00:23+02:00\n"
+"POT-Creation-Date: 2000-07-16 09:53+0200\n"
+"PO-Revision-Date: 2000-07-16 20:22+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +20,7 @@ msgstr "Lyd"
 
 #. ../lisp/audio-events.jl
 msgid "Play sound effects for window events."
-msgstr ""
+msgstr "Spill lydeffekter for vindushendelser."
 
 #. ../lisp/audio-events.jl
 msgid "Play sound effects for unmanaged windows."
@@ -33,15 +28,15 @@ msgstr "Spill lydeffekter for ikke-håndterte vinduer."
 
 #. ../lisp/audio-events.jl
 msgid "Map window events to sound files."
-msgstr ""
+msgstr "Koble vindushendelser til lydfiler."
 
-#. ../lisp/auto-raise.jl
-msgid "Raise windows when they are focused."
-msgstr ""
+#. ../lisp/audio-events.jl
+msgid "Event"
+msgstr "Hendelse"
 
-#. ../lisp/auto-raise.jl
-msgid "Delay in milliseconds until focused windows are raised."
-msgstr ""
+#. ../lisp/audio-events.jl
+msgid "Sample"
+msgstr "Sample"
 
 #. ../lisp/viewport-linear.jl
 #. ../lisp/autoload.jl
@@ -51,12 +46,12 @@ msgstr "Indeks:"
 #. ../lisp/edge-flip.jl
 #. ../lisp/autoload.jl
 msgid "Edge Flipping"
-msgstr ""
+msgstr "Kantvending"
 
 #. ../lisp/match-window.jl
 #. ../lisp/autoload.jl
 msgid "Matched Windows"
-msgstr ""
+msgstr "Like vinduer"
 
 #. ../lisp/tooltips.jl
 #. ../lisp/autoload.jl
@@ -66,15 +61,27 @@ msgstr "Verktøytips"
 #. ../lisp/shade-hover.jl
 #. ../lisp/autoload.jl
 msgid "Shade Hover"
-msgstr ""
+msgstr "Overhengende skygge"
 
 #. ../lisp/x-cycle.jl
 #. ../lisp/autoload.jl
 msgid "Window Cycling"
 msgstr "Vindusskifting"
 
+#. ../lisp/auto-raise.jl
+msgid "Raise windows when they are focused."
+msgstr "Hev vinduer når de har fokus."
+
+#. ../lisp/auto-raise.jl
+msgid "Delay in milliseconds until focused windows are raised."
+msgstr "Pause i millisekunder før fokuserte vinduer heves."
+
 #. ../lisp/configure.jl
 msgid "Automatically select window gravity from position on screen."
+msgstr "Velg vindustyngde automatisk fra posisjon på skjermen."
+
+#. ../lisp/customize.jl
+msgid "Invoke the user-customization system."
 msgstr ""
 
 #. ../lisp/custom.jl
@@ -110,7 +117,7 @@ msgstr "Utseende"
 
 #. ../lisp/custom.jl
 msgid "Workspaces"
-msgstr ""
+msgstr "Arbeidsområder"
 
 #. ../lisp/keymaps.jl
 #. ../lisp/custom.jl
@@ -119,55 +126,51 @@ msgstr "Bindinger"
 
 #. ../lisp/custom.jl
 msgid "Minimizing/Maximizing"
-msgstr ""
+msgstr "Minimering/Maksimering"
 
 #. ../lisp/custom.jl
 msgid "Minimizing"
-msgstr ""
+msgstr "Minimering"
 
 #. ../lisp/custom.jl
 msgid "Maximizing"
-msgstr ""
+msgstr "Maksimering"
 
 #. ../lisp/custom.jl
 msgid "Miscellaneous"
-msgstr ""
-
-#. ../lisp/customize.jl
-msgid "Invoke the user-customization system."
-msgstr ""
+msgstr "Forskjellig"
 
 #. ../lisp/cycle.jl
 msgid "Select the next window of the current workspace."
-msgstr ""
+msgstr "Velg neste vindu på aktivt arbeidsområde."
 
 #. ../lisp/cycle.jl
 msgid "Focus on the previous window of the current workspace."
-msgstr ""
+msgstr "Fokus på forrige vindu på aktivt arbeidsområde."
 
 #. ../lisp/cycle.jl
 msgid "Select the next window, cycling through all possible workspaces."
-msgstr ""
+msgstr "Velg neste vindu, og bla gjennom alle mulige arbeidsområder."
 
 #. ../lisp/cycle.jl
 msgid "Select the previous window, cycling through all possible workspaces."
-msgstr ""
+msgstr "Velg forrige vindu, og bla gjennom alle mulige arbeidsområder."
 
 #. ../lisp/edge-flip.jl
 msgid "Select the next desktop when the pointer hits screen edge."
-msgstr ""
+msgstr "Velg neste skrivebord når pekeren treffer skjermkanten."
 
 #. ../lisp/edge-flip.jl
 msgid "Hitting the screen edge selects the next: \\w"
-msgstr ""
+msgstr "Når skjermkanten treffes velges neste: \\w"
 
 #. ../lisp/edge-flip.jl
 msgid "Only flip when interactively moving a window."
-msgstr ""
+msgstr "Vend kun når et vindu flyttes interaktivt."
 
 #. ../lisp/edge-flip.jl
 msgid "Milliseconds to delay before flipping: \\w"
-msgstr ""
+msgstr "Millisekunder ventetid før vending: \\w"
 
 #. ../lisp/edge-flip.jl
 msgid "Warp pointer to opposite screen edge when flipping."
@@ -183,14 +186,10 @@ msgstr ""
 
 #. ../lisp/frames.jl
 msgid "Default frame style (theme)."
-msgstr ""
+msgstr "Forvalgt rammestil (tema)."
 
 #. ../lisp/frames.jl
 msgid "Update all windows when the default frame style is changed."
-msgstr ""
-
-#. ../lisp/frames.jl
-msgid "Decorate dialog windows similarly to application windows."
 msgstr ""
 
 #. ../lisp/frames.jl
@@ -205,7 +204,7 @@ msgstr ""
 
 #. ../lisp/frames.jl
 msgid "Default font: \\w"
-msgstr ""
+msgstr "Forvalgt skrifttype: \\w"
 
 #. ../lisp/frames.jl
 msgid "Intensity of bevels: \\wpercent."
@@ -213,7 +212,7 @@ msgstr ""
 
 #. ../lisp/frames.jl
 msgid "Default"
-msgstr ""
+msgstr "Forvalgt"
 
 #. ../lisp/functions.jl
 msgid "Give focus to windows even when they haven't asked for it."
@@ -233,11 +232,11 @@ msgstr ""
 
 #. ../lisp/functions.jl
 msgid "The program launched by the `xterm' command."
-msgstr ""
+msgstr "Programmet som startes av 'xterm' kommandoen."
 
 #. ../lisp/functions.jl
 msgid "Optional arguments given to the `xterm' command."
-msgstr ""
+msgstr "Alternative argumenter gitt til 'xterm' kommandoen."
 
 #. ../lisp/functions.jl
 msgid ""
@@ -247,15 +246,25 @@ msgstr ""
 
 #. ../lisp/functions.jl
 msgid "Start a new xterm."
-msgstr ""
+msgstr "Start en ny xterm."
 
 #. ../lisp/functions.jl
 msgid "Execute the given shell command."
-msgstr ""
+msgstr "Kjør oppgitt skallkommando."
 
 #. ../lisp/functions.jl
 msgid "Command:"
 msgstr "Kommando:"
+
+#. ../lisp/functions.jl
+msgid "Invoke the list of commands, one by one."
+msgstr ""
+
+#. ../nokogiri/nokogiri-widgets/keymap.jl
+#. ../nokogiri/nokogiri-widgets/command.jl
+#. ../lisp/functions.jl
+msgid "Command"
+msgstr "Kommando"
 
 #. ../lisp/functions.jl
 msgid "Force the current window to have a unique title."
@@ -299,7 +308,7 @@ msgstr ""
 
 #. ../lisp/gnome-commands.jl
 msgid "Launch the GNOME help browser."
-msgstr ""
+msgstr "Start GNOME hjelpleser."
 
 #. ../lisp/gnome-int.jl
 msgid "Invoke the GNOME control center from the `Customize' menu."
@@ -308,15 +317,15 @@ msgstr ""
 #. ../lisp/menus.jl
 #. ../lisp/gnome-int.jl
 msgid "_Help"
-msgstr ""
+msgstr "_Hjelp"
 
 #. ../lisp/gnome-int.jl
 msgid "_GNOME Help"
-msgstr ""
+msgstr "_GNOME hjelp"
 
 #. ../lisp/gnome-int.jl
 msgid "GNOME WWW"
-msgstr ""
+msgstr "GNOME WWW"
 
 #. ../lisp/group-funs.jl
 msgid "Group transient windows with their parents."
@@ -328,7 +337,7 @@ msgstr ""
 
 #. ../lisp/group-funs.jl
 msgid "New group"
-msgstr ""
+msgstr "Ny gruppe"
 
 #. ../lisp/grow-pack.jl
 msgid "Whether growing an already grown window grows it again."
@@ -379,6 +388,14 @@ msgstr ""
 
 #. ../lisp/iconify.jl
 msgid "Unmanaged windows may be iconified."
+msgstr ""
+
+#. ../lisp/iconify.jl
+msgid "Iconifying a window also iconifies the: \\w"
+msgstr ""
+
+#. ../lisp/iconify.jl
+msgid "Uniconifying a window also uniconifies the: \\w"
 msgstr ""
 
 #. ../lisp/iconify.jl
@@ -436,7 +453,9 @@ msgid "Press key..."
 msgstr "Trykk en tast..."
 
 #. ../lisp/keymap.jl
-msgid "Read a single event and send it to the focused window."
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
 msgstr ""
 
 #. ../lisp/keymap.jl
@@ -495,11 +514,11 @@ msgstr ""
 
 #. ../lisp/match-window.jl
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. ../lisp/match-window.jl
 msgid "Other"
-msgstr ""
+msgstr "Andre"
 
 #. ../lisp/maximize.jl
 msgid ""
@@ -575,7 +594,7 @@ msgstr ""
 
 #. ../lisp/menus.jl
 msgid "_Iconify"
-msgstr ""
+msgstr "_Ikonifiser"
 
 #. ../lisp/menus.jl
 msgid "_Delete"
@@ -583,39 +602,39 @@ msgstr "_Slett"
 
 #. ../lisp/menus.jl
 msgid "Destroy"
-msgstr ""
+msgstr "Ødelegg"
 
 #. ../lisp/menus.jl
 msgid "_Toggle"
-msgstr ""
+msgstr "_Slå av/på"
 
 #. ../lisp/menus.jl
 msgid "_Maximize"
-msgstr ""
+msgstr "_Maksimer"
 
 #. ../lisp/menus.jl
 msgid "_Vertically"
-msgstr ""
+msgstr "_Vertikalt"
 
 #. ../lisp/menus.jl
 msgid "_Horizontally"
-msgstr ""
+msgstr "_Horisontalt"
 
 #. ../lisp/menus.jl
 msgid "_Both"
-msgstr ""
+msgstr "_Begge"
 
 #. ../lisp/menus.jl
 msgid "Fill vertically"
-msgstr ""
+msgstr "Fyll vertikalt"
 
 #. ../lisp/menus.jl
 msgid "Fill horizontally"
-msgstr ""
+msgstr "Fyll horisontalt"
 
 #. ../lisp/menus.jl
 msgid "Fill both"
-msgstr ""
+msgstr "Fyll begge"
 
 #. ../lisp/menus.jl
 msgid "_Un-maximize"
@@ -623,23 +642,23 @@ msgstr ""
 
 #. ../lisp/menus.jl
 msgid "In _group"
-msgstr ""
+msgstr "I _gruppe"
 
 #. ../lisp/menus.jl
 msgid "_Send window to"
-msgstr ""
+msgstr "_Send vinduer til"
 
 #. ../lisp/menus.jl
 msgid "_Previous workspace"
-msgstr ""
+msgstr "_Forrige arbeidsområde"
 
 #. ../lisp/menus.jl
 msgid "_Next workspace"
-msgstr ""
+msgstr "_Neste arbeidsområde"
 
 #. ../lisp/menus.jl
 msgid "Copy to previous"
-msgstr ""
+msgstr "Kopier til forrige"
 
 #. ../lisp/menus.jl
 msgid "Copy to next"
@@ -751,19 +770,19 @@ msgstr "_Egendefinert"
 
 #. ../lisp/menus.jl
 msgid "_FAQ"
-msgstr ""
+msgstr "_FAQ"
 
 #. ../lisp/menus.jl
 msgid "_News"
-msgstr ""
+msgstr "_Nyheter"
 
 #. ../lisp/menus.jl
 msgid "_WWW page"
-msgstr ""
+msgstr "_WWW-side"
 
 #. ../lisp/menus.jl
 msgid "_Manual"
-msgstr ""
+msgstr "_Manual"
 
 #. ../lisp/menus.jl
 msgid "Restart"
@@ -889,11 +908,11 @@ msgstr ""
 
 #. ../lisp/nokogiri-sawfish.jl
 msgid "Show options suitable for \\w users."
-msgstr ""
+msgstr "Vis alternativer som passer for \\w brukere."
 
 #. ../lisp/nokogiri-sawfish.jl
 msgid "Buttons shown in configurator: \\w"
-msgstr ""
+msgstr "Knapper som vises i konfigurator: \\w"
 
 #. ../lisp/nokogiri-sawfish.jl
 msgid "Show variable names of each customization option."
@@ -916,24 +935,6 @@ msgid ""
 "The program used to play audio samples. If unset, built-in support for ESD "
 "is used."
 msgstr ""
-
-#. ../lisp/prompt-wm.jl
-msgid "Window:"
-msgstr "Vindu:"
-
-#. ../lisp/prompt-wm.jl
-#, c-format
-msgid "Workspace %d"
-msgstr "Arbeidsområde %d"
-
-#. ../lisp/workspace.jl
-#. ../lisp/prompt-wm.jl
-msgid "Workspace:"
-msgstr "Arbeidsområde:"
-
-#. ../lisp/prompt-wm.jl
-msgid "Prompt for a workspace and switch to it."
-msgstr "Spør om arbeidsområde og bytt til det."
 
 #. ../lisp/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
@@ -983,6 +984,24 @@ msgstr "Flytt til begynnelsen av linjen."
 msgid "Move to end of line."
 msgstr "Flytt til slutten av linjen."
 
+#. ../lisp/prompt-wm.jl
+msgid "Window:"
+msgstr "Vindu:"
+
+#. ../lisp/prompt-wm.jl
+#, c-format
+msgid "Workspace %d"
+msgstr "Arbeidsområde %d"
+
+#. ../lisp/workspace.jl
+#. ../lisp/prompt-wm.jl
+msgid "Workspace:"
+msgstr "Arbeidsområde:"
+
+#. ../lisp/prompt-wm.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Spør om arbeidsområde og bytt til det."
+
 #. ../lisp/raise-commands.jl
 msgid ""
 "Raise the window that received the current event, then replay any pointer\n"
@@ -993,6 +1012,12 @@ msgstr ""
 msgid ""
 "Raise the group of windows that received the current event, then replay any\n"
 "pointer events that invoked the command."
+msgstr ""
+
+#. ../lisp/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it has,\n"
+"then replay any pointer events that invoked the command."
 msgstr ""
 
 #. ../lisp/raise-commands.jl
@@ -1165,8 +1190,28 @@ msgstr ""
 msgid "Dialog windows inherit the focus from their parent."
 msgstr ""
 
-#. ../lisp/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+#. ../lisp/transient.jl
+msgid "Decorate dialog windows similarly to application windows."
+msgstr ""
+
+#. ../lisp/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+
+#. ../lisp/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+
+#. ../lisp/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
 msgstr ""
 
 #. ../lisp/viewport.jl
@@ -1175,7 +1220,23 @@ msgstr ""
 
 #. ../lisp/viewport.jl
 msgid "Select the specified viewport."
-msgstr ""
+msgstr "Velg spesifisert visningsport."
+
+#. ../lisp/viewport.jl
+msgid "Column:"
+msgstr "Kolonne:"
+
+#. ../lisp/viewport.jl
+msgid "Row:"
+msgstr "Rad:"
+
+#. ../lisp/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Velg spesifisert kolonne i visningsport."
+
+#. ../lisp/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Velg spesifisert rad i visningsport."
 
 #. ../lisp/viewport.jl
 msgid "Move the current window to the specified viewport."
@@ -1183,39 +1244,39 @@ msgstr "Flytt dette vinduet til spesifisert visningsområde."
 
 #. ../lisp/viewport.jl
 msgid "Move the viewport one screen to the right."
-msgstr ""
+msgstr "Flytt visningsport en skjerm til høyre."
 
 #. ../lisp/viewport.jl
 msgid "Move the viewport one screen to the left."
-msgstr ""
+msgstr "Flytt visningsport en skjerm til venstre."
 
 #. ../lisp/viewport.jl
 msgid "Move the viewport one screen down."
-msgstr ""
+msgstr "Flytt visningsport en skjerm ned."
 
 #. ../lisp/viewport.jl
 msgid "Move the viewport one screen up."
-msgstr ""
+msgstr "Flytt visningsport en skjerm opp."
 
 #. ../lisp/viewport.jl
 msgid "Move the window to the viewport on the left."
-msgstr ""
+msgstr "Flytt vinduet til visningsporten til venstre."
 
 #. ../lisp/viewport.jl
 msgid "Move the window to the viewport on the right."
-msgstr ""
+msgstr "Flytt vinduet til visningsområdet til høyre."
 
 #. ../lisp/viewport.jl
 msgid "Move the window to the viewport below."
-msgstr ""
+msgstr "Flytt vinduet til visningsområdet under."
 
 #. ../lisp/viewport.jl
 msgid "Move the window to the viewport above."
-msgstr ""
+msgstr "Flytt vinduet til visningsområdet over."
 
 #. ../lisp/window-anim.jl
 msgid "The default window animation mode: \\w"
-msgstr ""
+msgstr "Forvalgt animeringsmodus for vinduer: \\w"
 
 #. ../lisp/window-history.jl
 msgid "Remember _position"
@@ -1258,28 +1319,24 @@ msgid "Prompt for a command, execute it, and print any output to the screen."
 msgstr "Spør etter en kommando, kjør den, og vis utdata på skjermen."
 
 #. ../lisp/workspace.jl
-#, fuzzy
-msgid "When passing the first or last workspace: \\w"
+msgid "Virtual desktop configuration."
 msgstr ""
-"Handling ved passering av første eller siste arbeidsområde ved flytting."
 
 #. ../lisp/workspace.jl
-#, fuzzy
+msgid "When passing the first or last workspace: \\w"
+msgstr "Ved passering av første eller siste arbeidsområde: \\w"
+
+#. ../lisp/workspace.jl
 msgid "When passing the first or last workspace, while moving a window: \\w"
-msgstr ""
-"Handling ved passering av første eller siste arbeidsområde ved flytting."
+msgstr "Ved passering av første eller siste arbeidsområde under flytting: \\w"
 
 #. ../lisp/workspace.jl
 msgid "Workspaces are deleted when their last window closes."
-msgstr ""
-
-#. ../lisp/workspace.jl
-msgid "Minimum number of workspaces: \\w"
-msgstr ""
+msgstr "Arbeidsområder slettes når deres siste vindu lukkes."
 
 #. ../lisp/workspace.jl
 msgid "Preserve empty workspaces in pager."
-msgstr ""
+msgstr "Behold tomme arbeidsområder i velgeren."
 
 #. ../lisp/workspace.jl
 msgid "Windows uniconify to the current workspace."
@@ -1298,7 +1355,7 @@ msgid "Windows are focused after being uniconified."
 msgstr ""
 
 #. ../lisp/workspace.jl
-msgid "Dialog windows are opened on the same workspace as their application."
+msgid "Dialogs appear on the same workspace as their application."
 msgstr ""
 
 #. ../lisp/workspace.jl
@@ -1314,17 +1371,12 @@ msgid "Warp the pointer to selected windows."
 msgstr ""
 
 #. ../lisp/workspace.jl
-msgid "Iconifying a window iconifies its whole group."
-msgstr ""
-
-#. ../lisp/workspace.jl
-msgid "Uniconifying a window uniconifies its whole group."
-msgstr ""
-
-#. ../lisp/workspace.jl
-#, fuzzy
 msgid "Workspace names."
-msgstr "Arbeid_sområder"
+msgstr "Navn på arbeidsområder."
+
+#. ../lisp/workspace.jl
+msgid "Name"
+msgstr "Navn"
 
 #. ../lisp/workspace.jl
 msgid "Insert workspace"
@@ -1445,19 +1497,16 @@ msgid ""
 msgstr ""
 
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "Select the N'th workspace."
-msgstr "Velg neste arbeidsområde"
+msgstr "Velg n'te arbeidsområde."
 
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "Move the current window to the N'th workspace."
-msgstr "Flytt vinduet til neste arbeidsområde."
+msgstr "Flytt aktivt vindu til n'te arbeidsområde."
 
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "Copy the current window to the N'th workspace."
-msgstr "Kopier vinduet til neste arbeidsområde."
+msgstr "Kopier aktivt vindu til n'te arbeidsområde."
 
 #. ../lisp/x-cycle.jl
 msgid "Display window names while cycling through windows."
@@ -1509,23 +1558,53 @@ msgstr ""
 msgid "Cycle through all windows with the same class as the current window."
 msgstr ""
 
-#. ../nokogiri/nokogiri-shell.jl
-#. ../nokogiri/nokogiri-dialog.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+#. ../nokogiri/nokogiri-gnome.jl
+msgid "Revert"
+msgstr "Forkast"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
 msgid "OK"
 msgstr "OK"
 
-#. ../nokogiri/nokogiri-shell.jl
-#. ../nokogiri/nokogiri-dialog.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
 msgid "Cancel"
 msgstr "Avbryt"
 
-#. ../nokogiri/nokogiri-shell.jl
-msgid "Try"
-msgstr "Prøv"
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Apply"
+msgstr "Bruk"
 
-#. ../nokogiri/nokogiri-shell.jl
-msgid "Revert"
-msgstr "Forkast"
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Yes"
+msgstr "Ja"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "No"
+msgstr "Nei"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Close"
+msgstr "Lukk"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Help"
+msgstr "Hjelp"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Workspaces:"
+msgstr "Arbeidsområder:"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Columns:"
+msgstr "Kolonner:"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Rows:"
+msgstr "Rader:"
 
 #. ../nokogiri/nokogiri-shell.jl
 msgid "Sawfish configurator"
@@ -1534,7 +1613,7 @@ msgstr "Sawfish konfigurator"
 #. ../themer/themer.in
 #. ../nokogiri/nokogiri-widget.jl
 msgid "No matching item for %S"
-msgstr ""
+msgstr "Ingen lik oppføring for %S"
 
 #. ../nokogiri/nokogiri-widgets/keymap.jl
 #. ../nokogiri/nokogiri-widgets/alist.jl
@@ -1543,12 +1622,25 @@ msgstr "Tast"
 
 #. ../nokogiri/nokogiri-widgets/alist.jl
 msgid "Value"
-msgstr ""
+msgstr "Verdi"
 
 #. ../themer/themer.in
 #. ../nokogiri/nokogiri-widgets/color.jl
 msgid "Select color"
 msgstr "Velg farge"
+
+#. ../nokogiri/nokogiri-widgets/command.jl
+msgid "Undocumented"
+msgstr "Udokumentert"
+
+#. ../nokogiri/nokogiri-widgets/match-window.jl
+#. ../nokogiri/nokogiri-widgets/event.jl
+msgid "Grab..."
+msgstr "Hent..."
+
+#. ../nokogiri/nokogiri-widgets/event.jl
+msgid "Key:"
+msgstr "Tast:"
 
 #. ../themer/themer.in
 #. ../nokogiri/nokogiri-widgets/font.jl
@@ -1565,33 +1657,17 @@ msgstr "Velg fil"
 msgid "Select font"
 msgstr "Velg skrifttype"
 
+#. ../nokogiri/nokogiri-widgets/icon.jl
+msgid "Select Icon"
+msgstr "Velg ikon"
+
 #. ../nokogiri/nokogiri-widgets/keymap.jl
-#, fuzzy
 msgid "Edit binding"
-msgstr "Bindinger"
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Command"
-msgstr "Kommando"
-
-#. ../nokogiri/nokogiri-widgets/match-window.jl
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Grab..."
-msgstr "Hent..."
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Undocumented"
-msgstr "Udokumentert"
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-#, fuzzy
-msgid "Key:"
-msgstr "Tast"
+msgstr "Rediger binding"
 
 #. ../nokogiri/nokogiri-widgets/list.jl
-#, fuzzy
 msgid "Insert..."
-msgstr "Sett inn"
+msgstr "Sett inn..."
 
 #. ../nokogiri/nokogiri-widgets/list.jl
 msgid "Delete"
@@ -1602,18 +1678,16 @@ msgid "Edit..."
 msgstr "Rediger..."
 
 #. ../nokogiri/nokogiri-widgets/list.jl
-#, fuzzy
 msgid "Insert:"
-msgstr "Sett inn"
+msgstr "Sett inn:"
 
 #. ../nokogiri/nokogiri-widgets/list.jl
-#, fuzzy
 msgid "Edit:"
-msgstr "Rediger..."
+msgstr "Rediger:"
 
 #. ../nokogiri/nokogiri-widgets/match-window.jl
 msgid "Matchers"
-msgstr ""
+msgstr "Treff"
 
 #. ../nokogiri/nokogiri-widgets/match-window.jl
 msgid "Actions"
@@ -1624,9 +1698,8 @@ msgid "Match window properties"
 msgstr ""
 
 #. ../nokogiri/nokogiri-layouts/keymaps.jl
-#, fuzzy
 msgid "Context:"
-msgstr "Kopiér til neste"
+msgstr "Kontekst:"
 
 #. ../themer/themer.in
 msgid "Reload themes in window manager after saving."
@@ -1676,7 +1749,7 @@ msgstr "Rammenavn"
 #. ../themer/themer.in
 #, c-format
 msgid "Added frame `%s'"
-msgstr ""
+msgstr "Lagt til ramme '%s'"
 
 #. ../themer/themer.in
 msgid "<none>"
@@ -1685,7 +1758,7 @@ msgstr "<ingen>"
 #. ../themer/themer.in
 #, c-format
 msgid "Added frame type `%s'"
-msgstr ""
+msgstr "Lagt til rammetype '%s'"
 
 #. ../themer/themer.in
 msgid "error while building frame: %S"
@@ -1748,7 +1821,7 @@ msgstr ""
 
 #. ../themes/mono/theme.jl
 msgid "Mono Theme"
-msgstr ""
+msgstr "Mono-tema"
 
 #. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
@@ -1756,11 +1829,11 @@ msgstr ""
 
 #. ../themes/mono/theme.jl
 msgid "Color of active frames."
-msgstr ""
+msgstr "Farge på aktive rammer."
 
 #. ../themes/mono/theme.jl
 msgid "Text is \\w justified in window titles."
-msgstr ""
+msgstr "Tekst er \\w-justert i vindustitler."
 
 #. ../themes/simple/theme.jl
 msgid "Simple Theme"
@@ -1776,7 +1849,7 @@ msgstr ""
 
 #. ../themes/smaker/theme.jl
 msgid "SMaker Theme"
-msgstr ""
+msgstr "SMaker tema"
 
 #. ../themes/smaker/theme.jl
 msgid "Use black-on-white button images."
@@ -1904,24 +1977,24 @@ msgid ""
 "Inactive-\n"
 "Clicked"
 msgstr ""
+"Inaktiv-\n"
+"Klikket"
 
 #. ../themer/themer.glade:661 ../themer/themer.glade:828
 msgid ""
 "Inactive-\n"
 "Highlighted"
 msgstr ""
+"Inaktiv-\n"
+"Merket"
 
 #. ../themer/themer.glade:1278
 msgid "Map: "
-msgstr ""
+msgstr "Kobling: "
 
 #. ../themer/themer.glade:1492
 msgid "Mapping"
-msgstr ""
-
-#. ../themer/themer.glade:527 ../themer/themer.glade:775
-msgid "Name"
-msgstr "Navn"
+msgstr "Kobling"
 
 #. ../themer/themer.glade:86
 msgid "New Theme"
@@ -1941,11 +2014,11 @@ msgstr "Lagre tema _som..."
 
 #. ../themer/themer.glade:37
 msgid "Sawfish Theme Builder"
-msgstr ""
+msgstr "Sawfish temabygger"
 
 #. ../themer/themer.glade:1524
 msgid "Sawfish Themer Preview"
-msgstr ""
+msgstr "Sawfish temaviser"
 
 #. ../themer/themer.glade:318
 msgid "Theme name: "
@@ -1953,7 +2026,7 @@ msgstr "Temanavn:"
 
 #. ../themer/themer.glade:1543
 msgid "This window previews the current theme."
-msgstr ""
+msgstr "Dette vinduet forhåndsviser aktivt tema."
 
 #. ../themer/themer.glade:1421
 msgid "Type"
