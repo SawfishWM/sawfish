@@ -142,6 +142,7 @@
 			    (gtk-clist-moveto clist selection 0)))
 
       (gtk-text-set-word-wrap text 1)
+      (gtk-editable-set-editable text nil)
       (gtk-widget-set-usize text -2 50)
       (gtk-clist-set-selection-mode clist 'browse)
       (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
