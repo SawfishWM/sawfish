@@ -36,10 +36,8 @@
   ;; todo:
 
   ;; - _NET_WORKAREA
-  ;; - _NET_VIRTUAL_ROOTS
   ;; - _NET_WM_NAME		-- needs to be in C code?
   ;; - _NET_WM_STRUT
-  ;; - _NET_WM_ICON_GEOMETRY
   ;; - _NET_WM_ICON
 
 
@@ -199,6 +197,10 @@
 
 ;;; honouring the initially set window state hints
 
+  (define (update-icon-geometry w geom)
+    (when (>= (length geom) 2)
+      (window-put w 'icon-position (cons (aref geom 0) (aref geom 1)))))
+
   (define (honour-client-state w)
     ;; XXX is this thing still required
     (let ((class (get-x-text-property w 'WM_CLASS)))
@@ -237,7 +239,11 @@
 	(do ((i 0 (1+ i)))
 	    ((= i (length state)))
 	  (call-state-fun w (aref state i) 'init))
-	(window-put w 'wm-spec-last-states (vector->list state)))))
+	(window-put w 'wm-spec-last-states (vector->list state))))
+
+    (let ((geom (get-x-property w '_NET_WM_ICON_GEOMETRY)))
+      (when geom
+	(update-icon-geometry w (nth 2 geom)))))
 
 
 ;;; helper functions
@@ -407,6 +413,17 @@
       handled))
 
 
+;;; property changes
+
+  (define (property-change-handler w prop kind)
+    (declare (unused kind))
+    (case prop
+      ((_NET_WM_ICON_GEOMETRY)
+       (let ((geom (get-x-property w '_NET_WM_ICON_GEOMETRY)))
+	 (when geom
+	   (update-icon-geometry w geom))))))
+
+
 ;;; utilities
 
   (define (vector->list vec)
@@ -450,6 +467,8 @@
     (add-hook 'focus-out-hook update-focus-state)
 
     (add-hook 'client-message-hook client-message-handler)
+    (add-hook 'property-notify-hook property-change-handler)
+
     (add-hook 'before-exit-hook exit)
 
     (map-windows update-client-state))

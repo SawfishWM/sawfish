@@ -1,3 +1,30 @@
+2000-11-27  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/frames.jl, sawfish/wm/workspace.jl,
+	sawfish/wm/ext/audio-events.jl, sawfish/wm/util/groups.jl:
+	changed flags of some widgets
+
+	* sawfish/wm/swapper.jl, sawfish/wm/stacking.jl,
+	sawfish/wm/menus.jl, sawfish/wm/commands/x-cycle.jl,
+	sawfish/wm/ext/tooltips.jl, sawfish/wm/ext/match-window.jl,
+	sawfish/wm/ext/edge-flip.jl, sawfish/wm/gnome/match-window.jl, 
+	sawfish/wm/placement/smart.jl, sawfish/wm/state/maximize.jl,
+	sawfish/wm/theming/make-theme.jl, sawfish/wm/util/gtkrc.jl:
+	Added some `(unused ...)' declarations to turn off some
+	meaningless warnings (needs a recent cvs librep for this to
+	actually work)
+
+2000-11-26  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/util/ping.jl: new module, implements the
+	_NET_WM_PING protocol of the new window manager spec. Exports
+	functions `window-supports-ping-p' and `ping-window'. (This
+	code is totally untested)
+
+	* sawfish/wm/state/wm-spec.jl: added code to monitor
+	_NET_WM_ICON_GEOMETRY; when present the `icon-position' window
+	property is set from its value. Fixes #4245
+
 2000-11-21  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/focus.jl: now that unfocusable windows don't
