@@ -37,8 +37,12 @@ static int current_mouse_x, current_mouse_y;
 /* ..And the position before the most recently known */
 static int previous_mouse_x, previous_mouse_y;
 
-/* Most recently seen server timestamp */
+/* Most recently seen server timestamp. May be CurrentTime if we
+   haven't seen a timestamp recently */
 Time last_event_time;
+
+/* The actual most-recently-seen server timestamp */
+static Time actual_last_event_time;
 
 /* Current XEvent or a null pointer */
 XEvent *current_x_event;
@@ -81,24 +85,29 @@ record_event_time (XEvent *ev)
     case KeyPress:
     case KeyRelease:
 	last_event_time = ev->xkey.time;
+	actual_last_event_time = last_event_time;
 	break;
 
     case ButtonPress:
     case ButtonRelease:
 	last_event_time = ev->xbutton.time;
+	actual_last_event_time = last_event_time;
 	break;
 
     case MotionNotify:
 	last_event_time = ev->xmotion.time;
+	actual_last_event_time = last_event_time;
 	break;
 
     case EnterNotify:
     case LeaveNotify:
 	last_event_time = ev->xcrossing.time;
+	actual_last_event_time = last_event_time;
 	break;
 
     case PropertyNotify:
 	last_event_time = ev->xproperty.time;
+	actual_last_event_time = last_event_time;
 	break;
     }
 }
@@ -618,7 +627,15 @@ focus_out (XEvent *ev)
     {
 	XUninstallColormap (dpy, w->attr.colormap);
 	if (focus_window == w)
+	{
 	    focus_window = 0;
+	    /* The idea here is that we don't want to override
+	       any other attempt to set the focus, only if it's
+	       not set at all. It seems to work.. I'm not quite
+	       sure why.. */
+	    XSetInputFocus (dpy, no_focus_window,
+			    RevertToNone, actual_last_event_time);
+	}
 	if (w->focus_change != 0)
 	{
 	    DB (("  calling focus change %p on %s\n",
