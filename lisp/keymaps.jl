@@ -92,7 +92,7 @@ of a window.")
 
 (bind-keys iconify-button-keymap
   "Button1-Off" 'iconify-window
-  "Button3-Off" 'delete-window)
+  "Button3-Off" 'popup-window-menu)
 
 (bind-keys menu-button-keymap
   "Button1-Off" 'popup-window-menu
