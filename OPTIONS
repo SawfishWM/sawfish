@@ -114,6 +114,7 @@
 ;;  (define-special-variable theme-load-path (list user-theme-directory
 ;;				site-theme-directory
 ;;				system-theme-directory)
+;;    "List of directories search for themes.")
 
 ;;  (define-special-variable themes-are-gaolled t
 ;;    "When non-nil themes are assumed to be malicious.")
@@ -430,7 +431,7 @@
 ;;  (define-special-variable sp-avoided-windows-weight 100)
 ;;  (define-special-variable sp-normal-windows-weight 1)
 
-;;  (define-special-variable sp-padding 4
+;;  (define-special-variable sp-padding 0
 ;;    "Try to leave at least this many pixels between window edges in
 ;;first/best-fit.")
 
@@ -558,7 +559,7 @@
 ;;    "List of symbols naming window groups that always exist.")
 
 ;;  (define-special-variable xterm-program "xterm"
-;;    "The program launched by the `xterm' command."(
+;;    "The program launched by the `xterm' command.")
 
 ;;  (define-special-variable xterm-args ""
 ;;    "Arguments given to the `xterm' command.")
