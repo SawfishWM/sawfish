@@ -751,6 +751,147 @@ Return the process-id of the running Lisp interpreter.
 }
 
 
+/* Displaying a `message' window */
+
+Window message_win;
+
+static struct {
+    GC gc;
+    repv text, fg, bg, font;
+} message;
+
+#define MSG_PAD_X 20
+#define MSG_PAD_Y 10
+
+void
+refresh_message_window ()
+{
+    if (message_win != 0)
+    {
+	XGCValues values;
+	u_long mask;
+	values.foreground = VCOLOR(message.fg)->color.pixel;
+	values.background = VCOLOR(message.bg)->color.pixel;
+	values.font = VFONT(message.font)->font->fid;
+	mask = GCForeground | GCBackground | GCFont;
+
+	if (message.gc == 0)
+	    message.gc = XCreateGC (dpy, message_win, mask, &values);
+	else
+	    XChangeGC (dpy, message.gc, mask, &values);
+
+	XClearWindow (dpy, message_win);
+	XDrawString (dpy, message_win, message.gc, MSG_PAD_X,
+		     MSG_PAD_Y + VFONT(message.font)->font->ascent,
+		     rep_STR(message.text), rep_STRING_LEN(message.text));
+    }
+}
+
+DEFSTRING(white, "white");
+DEFSTRING(black, "black");
+
+DEFUN("show-message", Fshow_message, Sshow_message,
+      (repv text, repv font, repv fg, repv bg), rep_Subr4) /*
+::doc:Sshow-message::
+show-message [TEXT] [FONT] [FG] [BG]
+
+Display the string TEXT in the center of the screen. If TEXT is not
+specified then any string previously displayed is removed. Returns the
+numeric id of the window displaying the message, or nil if no message
+is displayed.
+
+FONT defines the font to use, if undefined the `default-font' variable
+provides this value. FG and BG define the color of the text and its
+background respectively. If undefined they are black and white.
+
+Note that newlines in TEXT are ignored. This may change in the future.
+::end:: */
+{
+    if (text == Qnil)
+    {
+	if (message_win != 0)
+	{
+	    XDestroyWindow (dpy, message_win);
+	    message_win = 0;
+	}
+	if (message.gc != 0)
+	{
+	    XFreeGC (dpy, message.gc);
+	    message.gc = 0;
+	}
+	message.font = message.fg = message.bg = message.text = Qnil;
+	return Qnil;
+    }
+    else
+    {
+	int width, height, x, y;
+
+	rep_DECLARE1(text, rep_STRINGP);
+
+	if (!FONTP(font))
+	    font = Fsymbol_value (Qdefault_font, Qt);
+	if (!FONTP(font))
+	    return rep_signal_arg_error (font, 1);
+
+	if (!COLORP(fg))
+	    fg = Fget_color (rep_VAL(&black));
+	if (!COLORP(fg))
+	    return rep_signal_arg_error (fg, 1);
+
+	if (!COLORP(bg))
+	    bg = Fget_color (rep_VAL(&white));
+	if (!COLORP(bg))
+	    return rep_signal_arg_error (bg, 1);
+
+	message.text = text;
+	message.font = font;
+	message.fg = fg;
+	message.bg = bg;
+
+	width = rep_INT(Ftext_width (text, font)) + MSG_PAD_X * 2;
+	height = rep_INT(Ffont_height (font)) + MSG_PAD_Y * 2;
+	x = (screen_width - width) / 2;
+	y = (screen_height - height) / 2;
+
+	if (message_win == 0)
+	{
+	    XSetWindowAttributes attr;
+	    attr.override_redirect = True;
+	    attr.background_pixel = VCOLOR(bg)->color.pixel;
+	    attr.border_pixel = BlackPixel(dpy, screen_num);
+	    attr.save_under = True;
+	    attr.backing_store = WhenMapped;
+	    attr.event_mask = ExposureMask;
+	    attr.colormap = screen_cmap;
+	    message_win = XCreateWindow (dpy, root_window, x, y,
+					 width, height, 1, screen_depth,
+					 InputOutput, screen_visual,
+					 CWBackPixel | CWBorderPixel
+					 | CWBackingStore | CWOverrideRedirect
+					 | CWSaveUnder | CWEventMask
+					 | CWColormap, &attr);
+	    if (message_win == 0)
+		return Qnil;
+	    XMapRaised (dpy, message_win);
+	}
+	else
+	{
+	    XWindowChanges attr;
+	    attr.x = x;
+	    attr.y = y;
+	    attr.width = width;
+	    attr.height = height;
+	    attr.stack_mode = TopIf;
+	    XConfigureWindow (dpy, message_win,
+			      CWX | CWY | CWWidth | CWHeight | CWStackMode,
+			      &attr);
+	    refresh_message_window ();
+	}
+	return rep_MAKE_INT(message_win);
+    }
+}
+
+
 /* initialisation */
 
 void
@@ -782,5 +923,18 @@ functions_init (void)
     rep_ADD_SUBR(Sx_atom);
     rep_ADD_SUBR(Sx_atom_name);
     rep_ADD_SUBR(Sgetpid);
+    rep_ADD_SUBR(Sshow_message);
     rep_INTERN(root);
+
+    rep_mark_static (&message.text);
+    rep_mark_static (&message.fg);
+    rep_mark_static (&message.bg);
+    rep_mark_static (&message.font);
+}
+
+void
+functions_kill (void)
+{
+    if (message_win != 0)
+	XDestroyWindow (dpy, message_win);
 }
