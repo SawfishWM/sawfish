@@ -46,7 +46,7 @@ sawmill : $(OBJS) $(LIBOBJS)
 	  $(IMLIB_LIBS) $(X11_LIBS) $(LIBS)
 
 sawmill-client : client.o libclient.o
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBOBJS) $(X11_LIBS) $(LIBS)
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBOBJS) $(X11_LIBS) $(READLINE_LIBS) $(LIBS)
 
 lib%.la : %.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $<
