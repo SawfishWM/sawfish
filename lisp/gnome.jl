@@ -73,7 +73,9 @@
     (mapc (lambda (w)
 	    (let
 		;; XXX the gnome-wm standard sucks :-)
-		((space (nearest-workspace-with-window w current-workspace)))
+		((space (and (not (window-get w 'sticky))
+			     (nearest-workspace-with-window
+			      w current-workspace))))
 	      (if space
 		  (set-x-property w '_WIN_WORKSPACE
 				  (vector (- space (car limits))) 'CARDINAL 32)
