@@ -10,11 +10,15 @@
 # 2000-05-19 02:00:33 CEST -ke-
 # Die meisten Meldungen infinitivisch umformulieren.
 #
+# FRAGE:
+# 2000-06-17 18:34:04 CEST -ke-
+# Möchte jemand diese Übersetzungen fortführen?  Bitte melden!
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: sawfish 0.28-pre\n"
-"POT-Creation-Date: 2000-06-01 06:01+0200\n"
-"PO-Revision-Date: 2000-06-01 06:34+02:00\n"
+"Project-Id-Version: sawfish 0.28.1\n"
+"POT-Creation-Date: 2000-06-17 18:20+0200\n"
+"PO-Revision-Date: 2000-06-17 18:37+02:00\n"
 "Last-Translator: Karl Eichwalder <ke@suse.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -244,12 +248,12 @@ msgstr ""
 #. ../lisp/configure.jl
 msgid "Automatically select window gravity from position on screen."
 msgstr ""
-"Wähle automatisch die Fenstergravitation von der Position auf dem\n"
-"Bildschirm."
+"Automatisch die Fenstergravitation von der Position auf dem\n"
+"Bildschirm wählen."
 
 #. ../lisp/customize.jl
 msgid "Show variable names of each customization option."
-msgstr "Zeige Variablennamen von jeder Konfigurationsoption."
+msgstr "Variablennamen von jeder Konfigurationsoption zeigen."
 
 #. ../lisp/customize.jl
 msgid "Font used by default."
@@ -473,32 +477,53 @@ msgstr "Das Fenster entfernen."
 #. ../lisp/functions.jl
 msgid "Delete the window, or beep if the window can't be closed safely."
 msgstr ""
-"Entferne das Fenster oder piepse, wenn das Fenster nicht\n"
+"Das Fenster entfernen oder piepsen, wenn das Fenster nicht\n"
 "ordnungsgemäß geschlossen werden kann."
 
 #. ../lisp/gnome-commands.jl
 msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-msgstr "Schalte zwischen dem GNOME SKIP_WINLIST Hinweis des Fensters um."
+msgstr "Zwischen dem GNOME SKIP_WINLIST-Hinweis des Fensters umschalten."
 
 #. ../lisp/gnome-commands.jl
 msgid "Set the GNOME SKIP_WINLIST hint of the window."
-msgstr "Setze den GNOME SKIP_WINLIST Hinweis des Fensters."
+msgstr "Den GNOME SKIP_WINLIST-Hinweis des Fensters setzen."
 
 #. ../lisp/gnome-commands.jl
 msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-msgstr "Setze den GNOME SKIP_WINLIST Hinweis des Fensters zurück."
+msgstr "Den GNOME SKIP_WINLIST-Hinweis des Fensters zurücksetzen."
 
 #. ../lisp/gnome-commands.jl
 msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-msgstr "Schalte zwischen dem GNOME SKIP_TASKLIST Hinweis des Fensters um."
+msgstr "Zwischen dem GNOME SKIP_TASKLIST-Hinweis des Fensters umschalten."
 
 #. ../lisp/gnome-commands.jl
 msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-msgstr "Setze den GNOME SKIP_TASKLIST Hinweis des Fensters."
+msgstr "Den GNOME SKIP_TASKLIST-Hinweis des Fensters setzen."
 
 #. ../lisp/gnome-commands.jl
 msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-msgstr "Setze den GNOME SKIP_TASKLIST Hinweis des Fenster zurück."
+msgstr "Den GNOME SKIP_TASKLIST-Hinweis des Fenster zurücksetzen."
+
+#. ../lisp/gnome-commands.jl
+msgid "Logout from the current GNOME session."
+msgstr "Von der aktuellen GNOME-Sitzung abmelden."
+
+#. ../lisp/gnome-commands.jl
+msgid "Launch the GNOME help browser."
+msgstr "Die GNOME-Hilfe starten."
+
+#. ../lisp/menus.jl
+#. ../lisp/gnome-int.jl
+msgid "_Help"
+msgstr "_Hilfe"
+
+#. ../lisp/gnome-int.jl
+msgid "_GNOME Help"
+msgstr "_GNOME-Hilfe"
+
+#. ../lisp/gnome-int.jl
+msgid "GNOME WWW"
+msgstr "GNOME WWW"
 
 #. ../lisp/group-funs.jl
 msgid "Group transient windows with their parents."
@@ -574,6 +599,10 @@ msgstr "Den (virtuellen) Arbeitsplatz mit dem Fenster W zeigen."
 #. ../lisp/iconify.jl
 msgid "Display the workspace containing the window W, then focus on W."
 msgstr "Den Arbeitsplatz mit dem Fenster W und fokussiere W zeigen."
+
+#. ../lisp/iconify.jl
+msgid "Iconify all windows on the current workspace."
+msgstr "Alle Fenster auf dem aktuellen Arbeitsplatz iconifizieren."
 
 #. ../lisp/iconify.jl
 msgid ""
@@ -921,6 +950,22 @@ msgid "_Customize"
 msgstr "_Anpassen"
 
 #. ../lisp/menus.jl
+msgid "_FAQ"
+msgstr "_FAQ"
+
+#. ../lisp/menus.jl
+msgid "_News"
+msgstr ""
+
+#. ../lisp/menus.jl
+msgid "_WWW page"
+msgstr ""
+
+#. ../lisp/menus.jl
+msgid "_Manual"
+msgstr "_Handbuch"
+
+#. ../lisp/menus.jl
 msgid "Restart"
 msgstr "Neustart"
 
@@ -942,7 +987,7 @@ msgstr "Das Menü mit den Anwendungen anzeigen."
 
 #. ../lisp/move-cursor.jl
 msgid "Number of pixels to move pointer in `move-cursor-' commands."
-msgstr "Anzahl von Pixeln beim Bewegen des Zeigers in `move-cursor-' Befehlen."
+msgstr "Anzahl von Pixeln beim Bewegen des Zeigers in »move-cursor-«-Befehlen."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the left."
@@ -986,15 +1031,19 @@ msgstr "Die Methode des Zeichnens der Fenster beim interaktiven Vergrößern."
 
 #. ../lisp/move-resize.jl
 msgid "Raise windows being moved or resized interactively."
-msgstr "Die Fenster beim Verschieben oder interaktiven Vergrößern in den Vordergrund bringen."
+msgstr ""
+"Die Fenster beim Verschieben oder interaktiven Vergrößern in den Vordergrund "
+"bringen."
 
 #. ../lisp/move-resize.jl
 msgid "Show the current position while moving windows interactively."
-msgstr "Die aktuelle Position beim interaktiven Verschieben von Fenstern zeigen."
+msgstr ""
+"Die aktuelle Position beim interaktiven Verschieben von Fenstern zeigen."
 
 #. ../lisp/move-resize.jl
 msgid "Show the current dimensions while resizing windows interactively."
-msgstr "Die aktuellen Dimensionen beim interaktiven Vergrößern der Fenster zeigen."
+msgstr ""
+"Die aktuellen Dimensionen beim interaktiven Vergrößern der Fenster zeigen."
 
 #. ../lisp/move-resize.jl
 msgid ""
@@ -1028,7 +1077,9 @@ msgstr "Die Fenstergeometrie sperren, während das Fenster maximiert ist."
 #. ../lisp/move-resize.jl
 msgid ""
 "Only update window contents after it has been moved to its final position."
-msgstr "Den Fensterinhalt erst neu zeichen, wenn das Fenster an die endgültige Stelle verschoben ist."
+msgstr ""
+"Den Fensterinhalt erst neu zeichen, wenn das Fenster an die endgültige "
+"Stelle verschoben ist."
 
 #. ../lisp/move-resize.jl
 msgid "Move the window interactively using the mouse."
@@ -1041,12 +1092,16 @@ msgstr "Die Fenstergröße interaktiv mit der Maus ändern."
 #. ../lisp/move-resize.jl
 msgid ""
 "Wait for the user to select a window, then interactively move that window."
-msgstr "Warten, bis der Benutzer ein Fenster wählt; dann das Fenster interaktiv verschieben."
+msgstr ""
+"Warten, bis der Benutzer ein Fenster wählt; dann das Fenster interaktiv "
+"verschieben."
 
 #. ../lisp/move-resize.jl
 msgid ""
 "Wait for the user to select a window, then interactively resize that window."
-msgstr "Warten, bis der Benutzer ein Fenster wählt; dann das Fenster interaktiv verschieben."
+msgstr ""
+"Warten, bis der Benutzer ein Fenster wählt; dann das Fenster interaktiv "
+"verschieben."
 
 #. ../lisp/place-window.jl
 msgid "Method of selecting the position of a freshly-mapped window."
@@ -1682,11 +1737,11 @@ msgstr ""
 
 #. ../themes/gradient/theme.jl
 msgid "Gradient Theme"
-msgstr ""
+msgstr "Thema mit Farbverlauf"
 
 #. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
-msgstr ""
+msgstr "Richtung des Farbverlaufs beim `Farbverlauf'-Rahmenstil."
 
 #. ../themes/gradient/theme.jl
 msgid "`From' color of inactive frames in `gradient' frame style."
@@ -1952,10 +2007,6 @@ msgstr "_Info"
 #. ../themer/themer.glade:71
 msgid "_File"
 msgstr "_Datei"
-
-#. ../themer/themer.glade:211
-msgid "_Help"
-msgstr "_Hilfe"
 
 #. ../themer/themer.glade:103
 msgid "_Open Theme.."
