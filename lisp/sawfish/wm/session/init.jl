@@ -42,6 +42,9 @@ the state file.")
 called with args (WINDOW ALIST), where ALIST defines the state saved for
 the window.")
 
+(defvar sm-after-restore-hook nil
+  "Hook called after loading a saved session.")
+
 
 ;; utilities
 
