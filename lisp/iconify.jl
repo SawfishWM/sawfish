@@ -48,7 +48,7 @@
     (cond ((window-get w 'sticky)
 	   (show-window w))
 	  (uniconify-to-current-workspace
-	   (ws-remove-window w)
+	   (ws-remove-window w t)
 	   (ws-add-window-to-space w current-workspace))
 	  ((window-in-workspace-p w current-workspace)
 	   (show-window w)))
