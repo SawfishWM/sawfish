@@ -21,7 +21,6 @@
 
 #include "sawmill.h"
 #include <limits.h>
-#include <assert.h>
 #include <X11/extensions/shape.h>
 #include <X11/Xresource.h>
 
@@ -103,7 +102,6 @@ subtract_timestamps (Time t2, Time t1)
 	diff = ULONG_MAX - diff + 1;
     }
 
-    assert (diff < LONG_MAX);
     return diff;
 }
 
