@@ -123,3 +123,8 @@ unmaximized."
 unmaximized."
   (interactive "W")
   (maximize-window-toggle w 'horizontal))
+
+
+;; initialisation
+
+(sm-add-saved-properties 'unmaximized-geometry)

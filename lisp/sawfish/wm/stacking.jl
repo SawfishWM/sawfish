@@ -162,3 +162,4 @@ bottom of this level, otherwise raise it to the top of its level."
 
 (add-hook 'add-window-hook 'stacking-add-window t)
 (add-hook 'reparent-notify-hook 'restack-by-depth t)
+(sm-add-saved-properties 'depth)

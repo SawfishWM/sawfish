@@ -306,3 +306,8 @@ they inherit.")
 (defun add-frame-class (w class)
   (window-put w 'removed-classes (delq class (window-get w 'removed-classes)))
   (rebuild-frame w))
+
+
+;; initialisation
+
+(sm-add-saved-properties 'type 'ignored 'frame-style)
