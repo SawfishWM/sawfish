@@ -174,38 +174,22 @@ string). PLIST defines the property list of the image.
     return Fsignal (Qerror, rep_list_2(rep_string_dup("no such image"), file));
 }
 
-DEFUN("window-icon-image", Fwindow_icon_image,
-      Swindow_icon_image, (repv win), rep_Subr1) /*
-::doc:window-icon-image::
-window-icon-image WINDOW
-
-Returns an image object representing the icon currently associated with
-WINDOW. Returns the symbol `nil' if no such image.
+DEFUN("make-image-from-x-drawable", Fmake_image_from_x_drawable,
+      Smake_image_from_x_drawable, (repv id, repv mask_id), rep_Subr2) /*
+::doc:make-image-from-x-drawable::
+make-image-from-x-drawable ID [MASK-ID]
 ::end:: */
 {
    Drawable d;
-   Pixmap mask;
+   Pixmap mask = 0;
    Window root;
    int x, y, w, h, bdr, dp;
    ImlibImage *im;
 
-   rep_DECLARE1 (win, WINDOWP);
-
-   if (VWIN(win)->wmhints->flags & IconPixmapHint)
-       d = VWIN(win)->wmhints->icon_pixmap;
-   else if (VWIN(win)->wmhints->flags & IconWindowHint)
-       /* XXX this won't work unless the icon window is mapped,
-	  XXX which it won't be. But it does no harm.. */
-       d = VWIN(win)->wmhints->icon_window;
-   else
-       return Qnil;
-
-   /* XXX Imlib currently ignores the MASK parameter, but maybe it
-      XXX won't in the future (and pigs might fly, also) */
-   if (VWIN(win)->wmhints->flags & IconMaskHint)
-       mask = VWIN(win)->wmhints->icon_mask;
-   else
-       mask = 0;
+   rep_DECLARE1 (id, rep_INTP);
+   d = rep_INT (id);
+   if (rep_INTP (mask_id))
+       mask = rep_INT (mask_id);
 
    if (!XGetGeometry (dpy, d, &root, &x, &y, &w, &h, &bdr, &dp))
        return Qnil;
@@ -216,6 +200,38 @@ WINDOW. Returns the symbol `nil' if no such image.
    regrab_server ();
 
    return im ? make_image (im, Qnil) : Qnil;
+}
+
+DEFUN("window-icon-image", Fwindow_icon_image,
+      Swindow_icon_image, (repv win), rep_Subr1) /*
+::doc:window-icon-image::
+window-icon-image WINDOW
+
+Returns an image object representing the icon currently associated with
+WINDOW. Returns the symbol `nil' if no such image.
+::end:: */
+{
+   repv id, mask_id;
+
+   rep_DECLARE1 (win, WINDOWP);
+
+   if (VWIN(win)->wmhints->flags & IconPixmapHint)
+       id = rep_MAKE_INT (VWIN(win)->wmhints->icon_pixmap);
+   else if (VWIN(win)->wmhints->flags & IconWindowHint)
+       /* XXX this won't work unless the icon window is mapped,
+	  XXX which it won't be. But it does no harm.. */
+       id = rep_MAKE_INT (VWIN(win)->wmhints->icon_window);
+   else
+       return Qnil;
+
+   /* XXX Imlib currently ignores the MASK parameter, but maybe it
+      XXX won't in the future (and pigs might fly, also) */
+   if (VWIN(win)->wmhints->flags & IconMaskHint)
+       mask_id = rep_MAKE_INT (VWIN(win)->wmhints->icon_mask);
+   else
+       mask_id = Qnil;
+
+   return Fmake_image_from_x_drawable (id, mask_id);
 }
 
 DEFUN("copy-image", Fcopy_image, Scopy_image, (repv source), rep_Subr1) /*
@@ -756,6 +772,7 @@ images_init (void)
 	imlib_id = Imlib_init_with_params (dpy, &params);
     }
     rep_ADD_SUBR(Smake_image);
+    rep_ADD_SUBR(Smake_image_from_x_drawable);
     rep_ADD_SUBR(Swindow_icon_image);
     rep_ADD_SUBR(Scopy_image);
     rep_ADD_SUBR(Sflip_image_horizontally);
