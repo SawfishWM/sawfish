@@ -46,6 +46,7 @@
 	     frame-type-menu
 	     remove-frame-class
 	     add-frame-class
+	     frame-class-removed-p
 	     set-frame-part-value
 	     def-frame-class
 	     define-frame-class))
@@ -527,6 +528,9 @@ deciding which frame type to ask a theme to generate.")
 		(delq class (window-get w 'removed-classes)))
     (when (window-framed-p w)
       (rebuild-frame w)))
+
+  (define (frame-class-removed-p w class)
+    (memq class (window-get w 'removed-classes)))
 
 
 ;;; manipulating the frame part classes variables

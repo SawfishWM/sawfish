@@ -55,6 +55,7 @@
 	  sawfish.wm.workspace
 	  sawfish.wm.util.display-window
 	  sawfish.wm.util.stacking
+	  sawfish.wm.frames
 	  sawfish.wm.misc)
 
   (define-structure-alias maximize sawfish.wm.state.maximize)
@@ -484,6 +485,24 @@ unmaximized."
 				 (horiz 'horizontal))))))
 
   (add-hook 'after-add-window-hook after-add-window)
+
+  (define (check-if-maximizable w)
+    (let ((maximizable (window-maximizable-p w)))
+      (when (and (not maximizable)
+		 (not (frame-class-removed-p w 'maximize-button)))
+	(remove-frame-class w 'maximize-button)
+	(window-put w 'maximize-removed-maximize-button t))
+      (when (and maximizable
+		 (window-get w 'maximize-removed-maximize-button))
+	(add-frame-class w 'maximize-button)
+	(window-put w 'maximize-removed-maximize-button nil))))
+
+  (define (property-notify w prop type)
+    (when (eq prop 'WM_NORMAL_HINTS)
+      (check-if-maximizable w)))
+
+  (add-hook 'property-notify-hook property-notify)
+  (add-hook 'add-window-hook check-if-maximizable)
 
   (sm-add-saved-properties
    'unmaximized-geometry 'maximized-vertically 'maximized-horizontally)
