@@ -23,7 +23,7 @@
 
 (defvar place-window-modes '(random interactive first-fit best-fit
 			     first-fit-or-interactive centered
-			     under-pointer none))
+			     centered-on-parent under-pointer none))
 
 (defcustom place-window-mode 'best-fit
   "Method of selecting the position of a freshly-mapped window."
@@ -76,6 +76,19 @@
       ((dims (window-frame-dimensions w)))
     (move-window-to w (/ (max 0 (- (screen-width) (car dims))) 2)
 		    (/ (max 0 (- (screen-height) (cdr dims))) 2))))
+
+(defun place-window-centered-on-parent (w)
+  (let
+      ((parent (window-transient-p w)))
+    (if (or (not parent) (not (setq parent (get-window-by-id parent))))
+	(place-window-centered w)
+      (let
+	  ((dims (window-frame-dimensions w))
+	   (pdims (window-frame-dimensions parent))
+	   (coords (window-position parent)))
+	(rplaca coords (+ (car coords) (/ (- (car pdims) (car dims)) 2)))
+	(rplacd coords (+ (cdr coords) (/ (- (cdr pdims) (cdr dims)) 2)))
+	(move-window-to w (car coords) (cdr coords))))))
 
 (defun place-window-under-pointer (w)
   (let
@@ -136,6 +149,7 @@
 (put 'first-fit-or-interactive 'placement-mode
      place-window-first-fit-or-interactive)
 (put 'centered 'placement-mode place-window-centered)
+(put 'centered-on-parent 'placement-mode place-window-centered-on-parent)
 (put 'under-pointer 'placement-mode place-window-under-pointer)
 (put 'none 'placement-mode nop)
 
