@@ -37,15 +37,15 @@ lisp :
 
 install : all installdirs
 	for f in $(INSTALL_FILES); do \
-	  $(INSTALL_DATA) $$f $(lispdir); \
+	  $(INSTALL_DATA) $$f $(DESTDIR)$(lispdir); \
 	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(lispdir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(lispdir)
 
 uninstall :
 	for f in $(INSTALL_FILES); do \
-	  rm -f $(lispdir)/$$f; \
+	  rm -f $(DESTDIR)$(lispdir)/$$f; \
 	done
 
 clean :

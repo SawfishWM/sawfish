@@ -1,5 +1,5 @@
 # Makefile.in -- input for the capplet directory's Makefile
-# $Id: Makefile.in,v 1.6 1999/10/20 14:52:03 john Exp $
+# $Id: Makefile.in,v 1.7 1999/10/30 10:54:51 john Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -42,29 +42,29 @@ sawmill-capplet : sawmill-capplet.c ../src/libclient.o
 
 install : all installdirs
 	for p in sawmill-capplet; do \
-	  $(INSTALL_PROGRAM) $$p ${bindir}; \
+	  $(INSTALL_PROGRAM) $$p $(DESTDIR)${bindir}; \
 	done
 	-set -e; for d in $(prefix) $(GNOME_DIRS); do \
-	  if [ -d $$d/share/control-center ]; then \
-	    rm -rf $$d/share/control-center/Sawmill; \
-	    cp -r desktop-entries $$d/share/control-center/Sawmill; \
+	  if [ -d $(DESTDIR)$$d/share/control-center ]; then \
+	    rm -rf $(DESTDIR)$$d/share/control-center/Sawmill; \
+	    cp -r desktop-entries $(DESTDIR)$$d/share/control-center/Sawmill; \
 	    break; \
 	  fi \
 	done
 
 uninstall :
 	for p in sawmill-capplet; do \
-	  rm -f ${bindir}/$$p; \
+	  rm -f $(DESTDIR)${bindir}/$$p; \
 	done
 	-set -e; for d in / /usr /usr/local /opt /gnome; do \
-	  if [ -d $$d/share/control-center ]; then \
-	    rm -rf $$d/share/control-center/Sawmill; \
+	  if [ -d $(DESTDIR)$$d/share/control-center ]; then \
+	    rm -rf $(DESTDIR)$$d/share/control-center/Sawmill; \
 	    break; \
 	  fi \
 	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(bindir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
 
 clean :
 	rm -f *~ *.o *.lo *.la build.h core

@@ -39,17 +39,17 @@ all :
 
 install : all installdirs
 	for d in $(THEMES); do \
-	  rm -rf $(themedir)/$$d; \
-	  mkdir $(themedir)/$$d; \
-	  $(INSTALL_DATA) $$d/* $(themedir)/$$d; \
+	  rm -rf $(DESTDIR)$(themedir)/$$d; \
+	  mkdir $(DESTDIR)$(themedir)/$$d; \
+	  $(INSTALL_DATA) $$d/* $(DESTDIR)$(themedir)/$$d; \
 	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(themedir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(themedir)
 
 uninstall :
 	for d in $(THEMES); do \
-	  rm -rf $(themedir)/$$d; \
+	  rm -rf $(DESTDIR)$(themedir)/$$d; \
 	done
 
 clean :

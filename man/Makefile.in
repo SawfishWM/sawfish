@@ -54,13 +54,13 @@ sawmill.ps : sawmill.dvi
 man : sawmill.info sawmill.guide sawmill.doc sawmill.dvi sawmill.ps
 
 install : sawmill.info installdirs
-	$(INSTALL_DATA) sawmill.info* $(infodir)
+	$(INSTALL_DATA) sawmill.info* $(DESTDIR)$(infodir)
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(infodir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(infodir)
 
 uninstall :
-	rm -f $(infodir)/sawmill.info*
+	rm -f $(DESTDIR)$(infodir)/sawmill.info*
 
 clean :
 	rm -f *~ sawmill.info* sawmill.?? sawmill.???

@@ -59,28 +59,30 @@ gtk-style : gtk-style.c
 
 install : all installdirs
 	for p in sawmill sawmill-client; do \
-	  $(rep_LIBTOOL) $(INSTALL_PROGRAM) $$p ${bindir}; \
+	  $(rep_LIBTOOL) $(INSTALL_PROGRAM) $$p $(DESTDIR)${bindir}; \
 	done
 	for p in gtk-style $(DL_OBJS); do \
-	  $(rep_DL_INSTALL) $$p ${sawmillexecdir}; \
+	  $(rep_DL_INSTALL) $$p $(DESTDIR)${sawmillexecdir}; \
 	done
-	$(INSTALL_SCRIPT) sawmill-ui.jlc $(bindir)/sawmill-ui
-	$(INSTALL_SCRIPT) sawmill-menu.jlc $(sawmillexecdir)/sawmill-menu
-	if [ -f $(bindir)/sawmill-menu ]; then \
-	  rm -f $(bindir)/sawmill-menu; \
+	$(INSTALL_SCRIPT) sawmill-ui.jlc $(DESTDIR)$(bindir)/sawmill-ui
+	$(INSTALL_SCRIPT) sawmill-menu.jlc $(DESTDIR)$(sawmillexecdir)/sawmill-menu
+	if [ -f $(DESTDIR)$(bindir)/sawmill-menu ]; then \
+	  rm -f $(DESTDIR)$(bindir)/sawmill-menu; \
 	fi
 
 uninstall :
 	for p in sawmill sawmill-client; do \
-	  $(rep_LIBTOOL) rm ${bindir}/$$p; \
+	  $(rep_LIBTOOL) rm $(DESTDIR)${bindir}/$$p; \
 	done
 	for p in gtk-style $(DL_OBJS); do \
-	  $(rep_DL_UNINSTALL) ${sawmillexecdir}/$$p; \
+	  $(rep_DL_UNINSTALL) $(DESTDIR)${sawmillexecdir}/$$p; \
 	done
-	rm -f ${bindir}/sawmill-ui ${sawmillexecdir}/sawmill-menu
+	rm -f $(DESTDIR)${bindir}/sawmill-ui
+	rm -f $(DESTDIR)${sawmillexecdir}/sawmill-menu
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(bindir) $(sawmillexecdir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir) \
+	  $(DESTDIR)$(sawmillexecdir)
 
 clean :
 	rm -f *~ *.o *.lo *.la build.h core

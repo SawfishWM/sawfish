@@ -37,25 +37,25 @@ build.h : build-info config.status
 	  '$(sawmilldir)' '$(lispdir)' '$(sawmillexecdir)'
 
 install : all installdirs
-	set -e; for dir in $(SUBDIRS); do \
+	-set -e; for dir in $(SUBDIRS); do \
 	  ( cd $$dir && $(MAKE) $@ ); \
 	done
-	$(INSTALL_DATA) ./DOC.* $(sawmilldir)/$(version)
-	-set -e; for d in $(prefix) $(GNOME_DIRS); do \
+	$(INSTALL_DATA) ./DOC.* $(DESTDIR)$(sawmilldir)/$(version)
+	-set -e; for d in $(prefix) $(DESTDIR)$(GNOME_DIRS); do \
 	  if [ -d $$d/share/gnome/wm-properties ]; then \
-	    $(INSTALL_DATA) Sawmill.desktop $$d/share/gnome/wm-properties; \
+	    $(INSTALL_DATA) Sawmill.desktop $(DESTDIR)$$d/share/gnome/wm-properties; \
 	    break; \
 	  fi \
 	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(sawmilldir)/$(version) $(bindir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(sawmilldir)/$(version) $(DESTDIR)$(bindir)
 
 uninstall :
 	set -e; for dir in $(SUBDIRS); do \
 	  ( cd $$dir && $(MAKE) $@ ); \
 	done
-	rm -rf $(sawmilldir)/$(version)
+	rm -rf $(DESTDIR)$(sawmilldir)/$(version)
 
 DOC.dir :
 	repdoc DOC `find . -name '*.c' -print`
