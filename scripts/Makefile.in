@@ -57,7 +57,8 @@ uninstall :
 	rm -f $(DESTDIR)$(G_PIXMAP_DIR)/sawfish.png
 
 installdirs : mkinstalldirs
-	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)/$(sawfishexecdir)
+	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir) \
+	  $(DESTDIR)$(G_PIXMAP_DIR)
 
 clean :
 	rm -f *~ *.jlc core
