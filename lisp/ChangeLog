@@ -1,3 +1,16 @@
+2000-02-18  John Harper  <john@dcs.warwick.ac.uk>
+
+	* smart-placement.jl (sp-prune-points): use a better medthod of
+	pruning
+	(sp-make-grid): ensure the screen edges aren't pruned
+
+	* match-window.jl (match-window-properties): added
+	`auto-gravity' option
+
+	* configure.jl: don't infer gravity from position, it doesn't
+	work too well. Instead keep position of window relative to each
+	screen edge constant (unless gravity is specified)
+
 2000-02-17  John Harper  <john@dcs.warwick.ac.uk>
 
 	* match-window.jl (match-window-properties): new boolean
