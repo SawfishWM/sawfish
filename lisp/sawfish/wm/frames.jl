@@ -126,6 +126,9 @@ that overrides settings set elsewhere.")
 
 (defvar theme-suffixes '("" ".tar" ".tar.gz" ".tar.Z" ".tar.bz2"))
 
+(defvar themes-are-gaolled t
+  "When non-nil themes are assumed to be malicious.")
+
 
 ;; managing frame styles
 
@@ -297,10 +300,15 @@ that overrides settings set elsewhere.")
 			  (when (file-exists-p t-dir)
 			    (setq tem (frame-style-directory t-dir))
 			    (when tem
+			      (setq tem (or (local-file-name tem) tem))
 			      (let
 				  ((image-load-path
 				    (cons tem image-load-path)))
-				(load (expand-file-name "theme" tem) nil t)
+				(if themes-are-gaolled
+				    (gaol-load
+				     (expand-file-name "theme.jl" tem) nil t t)
+				  (load
+				   (expand-file-name "theme" tem) nil t))
 				(throw 'out t))))))
 		    theme-suffixes))
 	  theme-load-path)
