@@ -94,7 +94,8 @@ cell). The symbolic description has the form `(TYPE MODIFIER-LIST ACTION)'."
 	    ((not (zerop (logand mods (lsh 1 17))))
 	     ;; mouse event
 	     (list 'mouse (decode-modifier mods)
-		   (aref [click-1 click-2 move off click-3] (1- code))))
+		   (aref [click-1 click-2 move off-1 click-3 off-2 off-3]
+			 (1- code))))
 	    (t (error "Unknown event type")))))
 
   (define (encode-event event)
@@ -108,11 +109,15 @@ event description EVENT, a list `(TYPE MODIFIER-LIST ACTION)'."
 	     (setq code (x-lookup-keysym (caddr event))))
 	    ((eq (car event) 'mouse)
 	     (setq mods (logior mods (lsh 1 17)))
-	     (setq code (cdr (assq (caddr event) '((click-1 . 1)
+	     (setq code (cdr (assq (caddr event) '((click . 1)
+						   (click-1 . 1)
 						   (click-2 . 2)
 						   (move . 3)
 						   (off . 4)
-						   (click-3 . 5))))))
+						   (off-1 . 4)
+						   (click-3 . 5)
+						   (off-2 . 6)
+						   (off-3 . 7))))))
 	    (t (error "Unknown event type: %s" (car event))))
       (cons code mods)))
 
@@ -156,7 +161,7 @@ representing the X11 keysyms that may generate the modifier."
 	   (variants (mapcar (lambda (action)
 			       (encode-event
 				(list (car decoded) (cadr decoded) action)))
-			     '(click-2 click-3 move off))))
+			     '(click-2 click-3 move off-1 off-2 off-3))))
       (let loop ((rest (cdr keymap)))
 	(cond ((null rest) nil)
 	      ((member-event (cdar rest) variants) t)

@@ -119,7 +119,7 @@
   (defcustom title-keymap (bind-keys (make-keymap)
 			    "Button3-Off" 'raise-lower-window
 			    "Button2-Move" 'resize-window-interactively
-			    "Button1-Click2" 'toggle-window-shaded
+			    "Button1-Off2" 'toggle-window-shaded
 			    "Button1-Move" 'move-window-interactively)
     "Keymap containing bindings active when the pointer is in the title of
 a window. (Only mouse-bindings are evaluated in this map.)"

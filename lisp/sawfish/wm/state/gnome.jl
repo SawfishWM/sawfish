@@ -329,7 +329,7 @@
 	       ;; send with SubstructureNotifyMask
 	       (proxy-current-event gnome-window-id (lsh 1 19))
 	       t)
-	      ((and (string-match "^(.*)-Off$" event)
+	      ((and (string-match "^(.*)-Off[123]?$" event)
 		    (let ((mirrors
 			   (mapcar (lambda (x)
 				     (lookup-event
