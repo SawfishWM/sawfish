@@ -16,7 +16,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id: theme.jl,v 1.4 2001/02/06 20:56:18 jsh Exp $
+   $Id: theme.jl,v 1.5 2001/02/14 04:31:28 jsh Exp $
 
    Authors: John Harper <jsh@eazel.com>
 |#
@@ -40,9 +40,10 @@
   :group (appearance Crux)
   :after-set (lambda () (rebuild-all)))
 
-(defcustom Crux:button-theme 'windows
+(defcustom Crux:button-theme 'default
   "Display title buttons to mimic: \\w"
-  :type (choice (platinum "Mac OS Platinum")
+  :type (choice (default "Default")
+		(platinum "Mac OS Platinum")
 		(macos-x "Mac OS X")
 		(windows "MS Windows")
 		(next "NeXTSTEP"))
@@ -139,13 +140,6 @@
 	(make-image "active:bottom-right-corner.png")))
 
 ;; 16x16
-(define menu-button
-  `((inactive . ,(make-image "inactive:menu-button.png"))
-    (focused . ,(make-image "active:menu-button.png"))
-    (inactive-highlighted . ,(make-image "inactive:menu-button-hilight.png"))
-    (highlighted . ,(make-image "active:menu-button-hilight.png"))
-    (inactive-clicked . ,(make-image "inactive:menu-button-pressed.png"))
-    (clicked . ,(make-image "active:menu-button-pressed.png"))))
 (define button-background
   `((inactive . ,(make-image "inactive:button.png"))
     (focused . ,(make-image "active:button.png"))
@@ -153,6 +147,13 @@
     (highlighted . ,(make-image "active:button-hilight.png"))
     (inactive-clicked . ,(make-image "inactive:button-pressed.png"))
     (clicked . ,(make-image "active:button-pressed.png"))))
+(define menu-button
+  `((inactive . ,(make-image "inactive:menu-button.png"))
+    (focused . ,(make-image "active:menu-button.png"))
+    (inactive-highlighted . ,(make-image "inactive:menu-button-hilight.png"))
+    (highlighted . ,(make-image "active:menu-button-hilight.png"))
+    (inactive-clicked . ,(make-image "inactive:menu-button-pressed.png"))
+    (clicked . ,(make-image "active:menu-button-pressed.png"))))
 
 (let ((make-button-fg
        (lambda (inactive active)
@@ -365,6 +366,10 @@
 
 (define (button-theme type)
   (case Crux:button-theme
+    ((default)
+     (if (eq type 'transient)
+	 '((close-button) . ())
+       '((close-button) . (iconify-button maximize-button shade-button))))
     ((platinum)
      (if (eq type 'transient)
 	 '((close-button) . ())
