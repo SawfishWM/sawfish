@@ -429,6 +429,27 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 			    0, 0, shape_win, ShapeBounding, ShapeSet);
 	XDestroyWindow (dpy, shape_win);
     }
+
+    w->pending_reshape = 0;
+}
+
+/* Queue an atomic reshape for the frame of W. It will happen sometime
+   in the near future. */
+void
+queue_reshape_frame (Lisp_Window *w)
+{
+    w->pending_reshape = 1;
+}
+
+void
+commit_queued_reshapes (void)
+{
+    Lisp_Window *w;
+    for (w = window_list; w != 0; w = w->next)
+    {
+	if (w->id != 0 && w->pending_reshape)
+	    set_frame_shapes (w, TRUE);
+    }
 }
 
 /* Draw the background of the frame-part FP. This is either a solid color
@@ -492,7 +513,6 @@ set_frame_part_bg (struct frame_part *fp)
 	{
 	    image_render (image, fp->width, fp->height, &bg_pixmap, &bg_mask);
 	}
-
 
 	/* Some of the Imlib_ functions call XSync on our display. In turn
 	   this can cause the error handler to run if a window has been
@@ -565,6 +585,8 @@ set_frame_part_bg (struct frame_part *fp)
 
 	fp->drawn.bg = bg;
 	fp->drawn.fg = rep_NULL;
+
+	queue_reshape_frame (fp->win);
     }
     else if (Ffunctionp (bg) != Qnil)
     {
@@ -1782,7 +1804,7 @@ DEFUN("rebuild-frame-part", Frebuild_frame_part,
     {
 	/* XXX what about reconfiguring the container window..? */
 	configure_frame_part (VPART(part));
-	set_frame_shapes (VPART(part)->win, TRUE);
+	queue_reshape_frame (VPART(part)->win);
     }
     rep_POPGC;
     return Qt;
