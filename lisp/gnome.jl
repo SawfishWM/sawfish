@@ -181,5 +181,5 @@
   (delete-x-property 'root '_WIN_SUPPORTING_WM_CHECK)
   (delete-x-property 'root '_WIN_PROTOCOLS))
 
-(unless gnome-window-id
+(unless (or gnome-window-id batch-mode)
   (gnome-init))

@@ -84,6 +84,7 @@
 
 ;; initialisation
 
-(server-init)
-(add-hook 'client-message-hook 'server-client-message-handler)
-(add-hook 'before-exit-hook 'server-exit)
+(unless batch-mode
+  (server-init)
+  (add-hook 'client-message-hook 'server-client-message-handler)
+  (add-hook 'before-exit-hook 'server-exit))
