@@ -196,4 +196,4 @@
 ;; init
 
 (unless (boundp 'apps-menu)
-  (setq apps-menu '("System Menus" . gnome-menus)))
+  (setq apps-menu (cons (_ "System Menus") gnome-menus)))

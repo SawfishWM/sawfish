@@ -54,6 +54,8 @@
       ((type (or (get symbol 'custom-type) 'boolean))
        (doc (or (documentation symbol t) (symbol-name symbol)))
        (value (funcall (or (get symbol 'custom-get) 'symbol-value) symbol)))
+    (when (stringp doc)
+      (setq doc (_ doc)))
     (when customize-show-symbols
       (setq doc (format nil "%s\n[%s]" doc (symbol-name symbol))))
     (cond ((eq type 'boolean)
@@ -114,9 +116,9 @@
        (mapcar #'(lambda (group-list)
 		   (let
 		       ((group (car group-list)))
-		 (list (or (get group 'custom-group-doc)
-			   (symbol-name group))
-		       (customize-group-spec group-list))))
+		     (list (_ (or (get group 'custom-group-doc)
+				  (symbol-name group)))
+			   (customize-group-spec group-list))))
 	       custom-groups))
     (customize-group-spec (assq group custom-groups))))
 
@@ -188,7 +190,7 @@
 
 (defgroup about "About"
   :widget (lambda ()
-	    (list 'label (format nil "\
+	    (list 'label (format nil (_ "\
 Sawmill %s
 
 Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
@@ -204,5 +206,5 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the \
 GNU General Public License for more details.
 
 Visit the Sawmill homepage at http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
-"
+")
 				 sawmill-version))))

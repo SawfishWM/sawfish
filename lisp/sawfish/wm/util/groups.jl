@@ -137,8 +137,8 @@
     (rplacd menus (cons '() (cdr menus)))
     `(,@menus
       ()
-      ("New group" (add-window-to-new-group
-		    (get-window-by-id ,(window-id w)))))))
+      (,(_ "New group") (add-window-to-new-group
+			 (get-window-by-id ,(window-id w)))))))
 
 
 ;; session management -- only save group-ids that are _symbols_

@@ -117,7 +117,7 @@ for the bindings to be installed if and when it is."
     (unwind-protect
 	(let
 	    ((override-keymap '(keymap)))
-	  (show-message (or prompt "Press key..."))
+	  (show-message (or prompt (_ "Press key...")))
 	  (add-hook 'unbound-key-hook 'read-event-callback)
 	  (catch 'read-event
 	    (recursive-edit)))
