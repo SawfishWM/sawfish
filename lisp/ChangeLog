@@ -1,3 +1,16 @@
+1999-10-04  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.10.1
+
+	* smart-placement.jl (sp-do-placement): if no position with
+	padding, try without padding
+
+	* gnome.jl (gnome-set-workspace): delete the _WIN_WORKSPACE
+	property of sticky windows
+
+	* workspace.jl (ws-add-window): ensure that sticky windows are
+	added to no workspaces and are visible
+
 1999-10-03  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.10
