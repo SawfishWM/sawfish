@@ -99,6 +99,15 @@
        (bottom (- (* viewport-rows (screen-height)) viewport-y-offset)))
     (or (>= (car pos) right) (>= (car pos) bottom))))
 
+(defun window-outside-viewport-p (window)
+  (let
+      ((pos (window-position window))
+       (dims (window-frame-dimensions window)))
+    (or (<= (+ (car pos) (car dims)) 0)
+	(<= (+ (cdr pos) (cdr dims)) 0)
+	(> (car pos) (screen-width))
+	(> (cdr pos) (screen-height)))))
+
 (defun move-window-to-current-viewport (window)
   (let
       ((pos (window-position window)))
