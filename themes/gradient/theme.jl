@@ -145,7 +145,6 @@
     (top-edge . -18)
     (class . close-button)
     (removable . t))))
-(put 'gradient:frame 'unshaped t)
 
 (defvar gradient:shaped-frame
  `(;; title bar
@@ -196,7 +195,6 @@
     (top-edge . -19)
     (class . close-button)
     (removable . t))))
-(put 'gradient:shaped-frame 'unshaped t)
 
 (defvar gradient:transient-frame
  `(;; title bar
@@ -239,7 +237,6 @@
     (right-edge . 0)
     (bottom-edge . -5)
     (height . 1))))
-(put 'gradient:transient-frame 'unshaped t)
 
 (defvar gradient:shaped-transient-frame
  `(;; title bar
@@ -274,7 +271,6 @@
     (right-edge . 0)
     (top-edge . -1)
     (height . 1))))
-(put 'gradient:transient-shaped-frame 'unshaped t)
 
 (defun gradient:frame-style (w type)
   (cond ((eq type 'shaped)

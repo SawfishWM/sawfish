@@ -82,7 +82,6 @@
 
 ;; frame layout
 
-(put 'brushed-metal:frame 'unshaped t)
 (defvar brushed-metal:frame
  `(;; menu button
    ((background . ,brushed-metal:menu-images)
@@ -171,7 +170,6 @@
     (bottom-edge . -4)
     (class . bottom-right-corner))))
 
-(put 'brushed-metal:shaped-frame 'unshaped t)
 (defvar brushed-metal:shaped-frame
  `(;; menu button
    ((background . ,brushed-metal:menu-images)
@@ -260,7 +258,6 @@
     (top-edge . -4)
     (class . bottom-right-corner))))
 
-(put 'brushed-metal:transient-frame 'unshaped t)
 (defvar brushed-metal:transient-frame
   `(;; top
     ((background . ,brushed-metal:top-images)

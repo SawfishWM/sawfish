@@ -31,16 +31,9 @@
 ;; frame defs
 
 (defvar gtk:frame nil)
-(put 'gtk:frame 'unshaped t)
-
 (defvar gtk:shaped-frame nil)
-(put 'gtk:shaped-frame 'unshaped t)
-
 (defvar gtk:transient-frame nil)
-(put 'gtk:transient-frame 'unshaped t)
-
 (defvar gtk:shaped-transient-frame nil)
-(put 'gtk:transient-shaped-frame 'unshaped t)
 
 (defun gtk:rebuild-frames ()
   (gtk:construct-frame-defs)
