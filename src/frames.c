@@ -1214,8 +1214,9 @@ list_frame_generator (Lisp_Window *w)
 	    else
 	    {
 		XDestroyWindow (dpy, fp->id);
-		XFreeGC (dpy, fp->gc);
 		fp->id = 0;
+		XFreeGC (dpy, fp->gc);
+		fp->gc = 0;
 	    }
 	}
 	if (fp->id != 0)
