@@ -214,6 +214,9 @@
   (define-widget-type 'string make-string-item)
 
   (define (make-number-item changed-callback &optional minimum maximum)
+    ;; XXX backwards compat..
+    (when (eq minimum 'nil) (setq minimum nil))
+    (when (eq maximum 'nil) (setq maximum nil))
     (let ((widget (gtk-spin-button-new (gtk-adjustment-new
 					(or minimum 0)
 					(or minimum 0)
