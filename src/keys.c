@@ -1702,6 +1702,17 @@ grab_window_events (Lisp_Window *w, bool grab)
 	grab_keymap_events (w->id, tem, grab);
 }
 
+static void
+keymap_prop_change (Lisp_Window *w, repv prop, repv old, repv new)
+{
+    if (prop == Qkeymap && w->id != 0)
+    {
+	/* A bit of a hack */
+	grab_keymap_events (w->id, old, FALSE);
+	grab_keymap_events (w->id, new, TRUE);
+    }
+}
+
 
 /* initialisation */
 
@@ -1776,6 +1787,8 @@ keys_init(void)
     rep_INTERN(call_command);
 
     rep_mark_static(&next_keymap_path);
+ 
+    register_property_monitor (Qkeymap, keymap_prop_change);
 
     if (!batch_mode_p ())
 	update_keyboard_mapping ();
