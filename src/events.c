@@ -636,9 +636,11 @@ configure_request (XEvent *ev)
 	{
 	    int old_x = w->attr.x, old_y = w->attr.y;
 	    if (mask & CWX)
-		w->attr.x = ev->xconfigurerequest.x;
+		w->attr.x = (ev->xconfigurerequest.x
+			     + (w->reparented ? w->frame_x : 0));
 	    if (ev->xconfigurerequest.value_mask & CWY)
-		w->attr.y = ev->xconfigurerequest.y;
+		w->attr.y = (ev->xconfigurerequest.y
+			     + (w->reparented ? w->frame_y : 0));
 	    if (w->attr.x != old_x || w->attr.y != old_y)
 		need_move = TRUE;
 	}
