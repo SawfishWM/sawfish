@@ -184,6 +184,24 @@ record_mouse_position (int x, int y, int event_type, Window w)
     current_event_updated_mouse = TRUE;
 }
 
+static void
+install_colormaps (Lisp_Window *w)
+{
+    XWindowAttributes attr;
+    if (w->n_cmap_windows > 0)
+    {
+	int i;
+	for (i = w->n_cmap_windows - 1; i >= 0; i--)
+	{
+	    XGetWindowAttributes (dpy, w->cmap_windows[i], &attr);
+	    XInstallColormap (dpy, attr.colormap);
+	}
+    }
+    XGetWindowAttributes (dpy, w->id, &attr);
+    w->attr.colormap = attr.colormap;
+    XInstallColormap (dpy, attr.colormap);
+}
+
 
 /* Individual event handlers */
 
@@ -207,14 +225,8 @@ colormap_notify (XEvent *ev)
     Lisp_Window *w = find_window_by_id (ev->xcolormap.window);
     if (w != 0 && ev->xcolormap.window == w->id)
     {
-	XWindowAttributes attr;
-	XGetWindowAttributes (dpy, w->id, &attr);
-	w->attr.colormap = attr.colormap;
-	/* Is it worth copying any other fields..?
-	   Note that we _musn't_ copy the x or y values */
-
 	if (w == focus_window)
-	    XInstallColormap (dpy, w->attr.colormap);
+	    install_colormaps (w);
     }
 }
 
@@ -444,6 +456,20 @@ property_notify (XEvent *ev)
 	    if (!XGetTransientForHint (dpy, w->id, &w->transient_for_hint))
 		w->transient_for_hint = 0;
 	    break;
+
+	default:
+	    if (ev->xproperty.atom == xa_wm_colormap_windows)
+	    {
+		if (w->n_cmap_windows > 0)
+		    XFree (w->cmap_windows);
+		if (!XGetWMColormapWindows (dpy, w->id, &w->cmap_windows,
+					    &w->n_cmap_windows))
+		{
+		    w->n_cmap_windows = 0;
+		}
+		if (w == focus_window)
+		    install_colormaps (w);
+	    }
 	}
 
 	if (need_refresh && w->reparented
@@ -733,8 +759,8 @@ focus_in (XEvent *ev)
 	return;
     if (w != 0 && w->visible)
     {
-	XInstallColormap (dpy, w->attr.colormap);
 	focus_window = w;
+	install_colormaps (w);
 	if (w->focus_change != 0)
 	{
 	    DB (("  calling focus change %p on %s\n",
