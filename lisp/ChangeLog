@@ -1,3 +1,39 @@
+2000-07-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.29
+
+2000-07-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome-int.jl (gnome-use-capplet): make this an option
+
+	* workspace.jl (activate-workspace, send-window-to-workspace,
+	copy-window-to-workspace): customizable commands
+	(select-workspace:N, send-to-workspace:N, copy-to-workspace:N):
+	deprecated, moved to compat.jl
+
+	* viewport.jl (activate-viewport, move-window-to-viewport):
+	customizable commands
+
+	* viewport-linear.jl (set-viewport-linear,
+	set-window-viewport-linear): customizable commands. Deprecate
+	the rest
+
+	* nokogiri-sawfish.jl: Set `deprecated-command' property of
+	commands that I don't want to show up in the configurator
+	(nokogiri-report-commands): new function.
+
+	* keymaps.jl (custom-get-keymap, custom-set-keymap): allow
+	non-symbol commands to pass through to the configurator if they
+	specify the type of their argument list
+
+	* functions.jl (run-shell-command): new command, forks its
+	argument using `system', is customizable
+
+	* custom.jl (define-command-args): new function, associates a
+	custom type with a command, should describe the _list_ of
+	arguments that can be given to the function (i.e. an `and'
+	widget usually)
+
 2000-06-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* nokogiri-sawfish.jl (nokogiri-report-slot): convert

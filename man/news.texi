@@ -7,6 +7,70 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
 
+@unnumberedsec 0.29
+
+@itemize @bullet
+
+@item Rewrote the configuration user interface. Improvements include:
+
+@itemize @minus
+@item Key bindings may now include parameters. E.g. this finally allows
+shell commands to be bound to keys using the GUI (use the new
+@code{run-shell-command} command)
+
+@item Nautilus-like user-levels to tailor the options shown to the
+expertise of the user
+
+@item Options may have much richer type descriptions (including
+@code{match-window} options). Also, extra widget types and containers
+may be added as extra Lisp modules
+
+@item By default the stand-alone configurator commits changes to the
+window manager as they are made, instead of waiting for the @samp{Try}
+button to be pressed
+
+@item Added dependences---options with dependences are only editable
+when the value of their dependence is non-@code{nil}
+@end itemize
+
+@item Rewrote window stacking code to be based on ``stacking
+predicates''---functions that accept or reject a possible stacking
+configuration. This allows the ``stack-transients-above-parents''
+option to work correctly, only keeping transient windows above their
+@emph{own} parent windows
+
+@item The configure-event handler now understands and handles the full
+complexity of stacking requests (Brad Thompson)
+
+@item New frame-part attribute: @code{scale-foreground}. The
+@code{cursor} attribute may now be a function
+
+@item Made the @code{centered}, @code{centered-on-parent} and
+@code{under-pointer} placement modes clamp the window into the current
+work area (i.e. without overlapping windows that shouldn't be covered).
+Added a @code{stagger} placement mode
+
+@item When grabbing window icons to images, preserve their shape masks
+
+@item Moved @code{window-history} options to @code{placement} group.
+Fixed some more bugs and sub-optimal default option values
+
+@item Don't set cursors for button classes, use the default value
+
+@item GNOME @code{SKIP_FOCUS} window hint sets @code{never-focus}
+property on window, as well as the @code{ignored} property
+
+@item Translation updates: de (Karl Eichwalder), ru (Valek Filippov),
+da (Kenneth Christiansen)
+
+@item Added mostly-complete support for using gdk-pixbuf instead of
+Imlib (requires an experimental Xlib version of the gdk-pixbuf library)
+
+@item Various bug fixes and other minor changes@dots{}
+
+@end itemize
+
+
 @unnumberedsec 0.28.1
 
 @itemize @bullet

@@ -1,3 +1,38 @@
+2000-07-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.29
+
+2000-07-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* nokogiri-shell.jl (*nokogiri-single-level*): new defvar
+	* nokogiri-main.jl.in: new option, --single-level
+
+	* nokogiri-widgets/keymap.jl: set the documentation widget
+	uneditable
+
+	* nokogiri-widgets/frame-style.jl: use a GtkText widget to
+	display the theme README
+
+	* nokogiri-apply.jl (revert-slot-changes): when updating widget
+	values, call update-dependences on the slot
+
+	* nokogiri-shell.jl (initialize-shell): when possible, use
+	gtk-window-set-default-size instead of gtk-widget-set-usize
+
+	* nokogiri-dialog.jl: set the TRANSIENT_FOR hint of the dialog
+	when the necessary Gtk+ function is available
+
+	* nokogiri-widgets/keymap.jl: support commands with arguments
+
+	* nokogiri-wm.jl (wm-command-list): use nokogiri-report-commands
+	(wm-documentation): require `lisp-doc' on server-side
+
+	* nokogiri-widget.jl: removed all setting of borders from
+	widgets
+	(labelled): move the label to the left of the widget
+
+	* nokogiri-dialog.jl: don't show-all the passed-in widget
+
 2000-06-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* nokogiri-shell.jl: when flattening the group tree for the

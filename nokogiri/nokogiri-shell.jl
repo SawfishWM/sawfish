@@ -55,8 +55,9 @@
   (define cancel-widget)
 
   ;; XXX not in all rep-gtk versions
-  (define gtk-window-set-default-size (or gtk-window-set-default-size
-					  gtk-widget-set-usize))
+  (define gtk-window-set-default-size (if (boundp 'gtk-window-set-default-size)
+					  gtk-window-set-default-size
+					gtk-widget-set-usize))
 
   (define (initialize-shell &optional socket-id)
     (let ((vbox (gtk-vbox-new nil box-spacing))

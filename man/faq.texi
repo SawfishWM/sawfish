@@ -116,17 +116,9 @@ So @emph{don't} run the net server with X access control disabled
 
 @item How do I bind a key to execute a shell command?
 
-This isn't yet possible through the configuration tool. However these
-bindings can be defined in your @file{~/.sawfishrc} file. For example:
-
-@lisp
-(bind-keys global-keymap
-  "C-M-ESC" '(system "xterm &"))
-@end lisp
-
-@noindent
-binds the event @kbd{C-M-ESC} to the Lisp code to start an @code{xterm}
-subprocess
+Bind a key to the @samp{run-shell-command} command; remember to enter
+the shell command you want to execute in the string entry in the
+@samp{Edit binding} dialog window.
 
 
 @item How do I make clicking on a window raise the window?
@@ -303,6 +295,27 @@ $ killall panel
 
 @noindent
 (assuming you have a session manager to restart the panel afterwards!)
+
+
+@item What do these @samp{bytecode-error} messages mean?
+
+It means that you're trying to execute Lisp code that was compiled for
+an outdated version of the Lisp virtual machine. Recompile any Lisp
+files that you have installed locally.
+
+
+@item How do I compile Lisp files?
+
+Use the shell command:
+
+@example
+sawfish --batch -l compiler -f compile-batch @var{files@dots{}}
+@end example
+
+@noindent where @var{files@dots{}} are the names of the files you want
+to compile. They will normally have @file{.jl} suffixes, the compiler
+will create associated files with @file{.jlc} suffixes containing the
+compiled Lisp code.
 
 
 @end enumerate
