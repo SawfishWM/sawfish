@@ -417,6 +417,37 @@ the width of the bevel. If UP is non-nil the bevel is raised.
     return image;
 }
 
+DEFUN("clear-image", Fclear_image, Sclear_image,
+      (repv image, repv color), rep_Subr2) /*
+::doc:Sclear-image::
+clear-image IMAGE [COLOR]
+
+Set all pixels in IMAGE to COLOR (or black if COLOR is undefined).
+::end:: */
+{
+    int i, r, g, b;
+    u_char *data;
+    rep_DECLARE1(image, IMAGEP);
+    if (COLORP(color))
+    {
+	r = VCOLOR(color)->color.red / 256;
+	g = VCOLOR(color)->color.green / 256;
+	b = VCOLOR(color)->color.blue / 256;
+    }
+    else
+	r = g = b = 0;
+    data = VIMAGE(image)->image->rgb_data;
+    for (i = 0; i < VIMAGE(image)->image->rgb_height * VIMAGE(image)->image->rgb_width; i++)
+    {
+	*data++ = r;
+	*data++ = g;
+	*data++ = b;
+    }
+
+    Imlib_changed_image (imlib_id, VIMAGE(image)->image);
+    return image;
+}
+
 /* XXX stubs for suitable Imlib functions... */
 
 DEFUN("make-sized-image", Fmake_sized_image, Smake_sized_image,
@@ -531,6 +562,7 @@ images_init (void)
     rep_ADD_SUBR(Sset_image_modifier);
     rep_ADD_SUBR(Smake_sized_image);
     rep_ADD_SUBR(Sbevel_image);
+    rep_ADD_SUBR(Sclear_image);
     rep_INTERN(image_directory);
     rep_SYM(Qimage_directory)->value
 	= rep_concat2 (rep_STR(rep_SYM(Qsawmill_directory)->value), "/images");
