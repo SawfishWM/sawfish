@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sk\n"
-"POT-Creation-Date: 2002-04-30 13:09+0200\n"
-"PO-Revision-Date: 2002-05-17 15:45+0200\n"
-"Last-Translator: Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>\n"
+"POT-Creation-Date: 2002-11-02 23:33-0800\n"
+"PO-Revision-Date: 2002-11-04 18:31+0100\n"
+"Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0beta2\n"
+"X-Generator: KBabel 1.0\n"
 
 #. ../scripts/sawfish-about.jl
 msgid "and many others..."
@@ -82,6 +82,7 @@ msgstr "Vlastnosti obrázku"
 
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
+#, c-format
 msgid "No matching item for %S"
 msgstr "%S neodpovedá žiadna položka"
 
@@ -109,6 +110,7 @@ msgid "Added frame type `%s'"
 msgstr "Pridaný typ rámu `%s'"
 
 #. ../themer/themer.in
+#, c-format
 msgid "error while building frame: %S"
 msgstr "chyba pri vytváraní rámu: %S"
 
@@ -686,8 +688,8 @@ msgstr ""
 "(Použijú sa len skratky myši.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr "Modifikátor použitý pre štandardné skratky správcu okien."
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Modifikátor použitý pre štandardné skratky."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -732,22 +734,6 @@ msgstr "Kopírovať na predchádzajúcu"
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Copy to next"
 msgstr "Kopírovať na nasledujúcu"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Left"
-msgstr "_Vľavo"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Right"
-msgstr "_Vpravo"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Up"
-msgstr "_Hore"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Down"
-msgstr "_Dolu"
 
 #. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
@@ -1820,8 +1806,8 @@ msgid ""
 msgstr ""
 "Vzdialenosť v bodoch pred okrajom okna pri ich zarovnaní.\n"
 "\n"
-"Pri presune okna táto možnosť určuje, či zarovnať okraje okna "
-"k okraju iného okna."
+"Pri presune okna táto možnosť určuje, či zarovnať okraje okna k okraju iného "
+"okna."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -2436,6 +2422,70 @@ msgstr "Zabudnúť celú uloženú históriu okien."
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
 msgstr "_História"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace down"
+msgstr "Pracovná plocha dole"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Zobraziť pracovnú plochu pod aktuálnou pracovnou plochou"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace up"
+msgstr "Pracovná plocha hore"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Zobraziť pracovnú plochu nad aktuálnou pracovnou plochou"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace left"
+msgstr "Pracovná plocha vľavo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Zobraziť pracovnú plochu vľavo od aktuálnej plochy"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace right"
+msgstr "Pracovná plocha vpravo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Zobraziť pracovnú plochu vpravo od aktuálnej plochy"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace down"
+msgstr "Poslať na plochu dole"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Poslať okno na pracovnú plochu dole od aktuálnej plochy"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace up"
+msgstr "Poslať na plochu hore"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Poslať okno na pracovnú plochu hore od aktuálnej plochy"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace left"
+msgstr "Poslať na plochu vľavo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Poslať okno na pracovnú plochu vľavo od aktuálnej plochy"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace right"
+msgstr "Poslať na plochu vpravo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Poslať okno na pracovnú plochu vpravo od aktuálnej plochy"
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
@@ -3098,346 +3148,4 @@ msgstr "Na_stavenie"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Témy"
-
-#~ msgid "Revert"
-#~ msgstr "Vrátiť"
-
-#~ msgid "Apply"
-#~ msgstr "Použiť"
-
-#~ msgid "Close"
-#~ msgstr "Zavrieť"
-
-#~ msgid "Help"
-#~ msgstr "Pomocník"
-
-#~ msgid "Minimizing"
-#~ msgstr "Minimalizácia"
-
-#~ msgid "Maximizing"
-#~ msgstr "Maximalizácia"
-
-#~ msgid ""
-#~ "Frame type fallbacks:\n"
-#~ "\n"
-#~ "Associate frame types with type to try if the theme doesn't implement the "
-#~ "requested type."
-#~ msgstr ""
-#~ "Náhrada pre typy rámov:\n"
-#~ "\n"
-#~ "Spojiť typy rámov so štandardným typom, ak téma neimplementuje "
-#~ "požadovaný\n"
-#~ "typ."
-
-#~ msgid "Bevel intensity: \\wpercent."
-#~ msgstr "Intenzita zkosenia: \\wpercent."
-
-#~ msgid "Motion threshold for mouse pointer: \\wpixels"
-#~ msgstr "Hranica pohybu pre kurzor myši: \\wbodov"
-
-#~ msgid "Display key-binding information in menu items."
-#~ msgstr "Zobraziť informáciu o klávesových skratkách v položkách menu."
-
-#~ msgid "Ignore program-specified window placements."
-#~ msgstr "Ignorovať umiestnenie okna uvedené programom."
-
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Okná obnovovať z ikony v aktuálnom pohľade."
-
-#~ msgid "The default window animation mode: \\w"
-#~ msgstr "Štandardný mód animácie okien: \\w"
-
-#~ msgid ""
-#~ "Give focus to windows even when they haven't asked for it.\n"
-#~ "\n"
-#~ "Windows should set the `accepts input' hint in their WM_HINTS property to "
-#~ "show if they require the focus or not."
-#~ msgstr ""
-#~ "Predať fokus oknám, aj keď o to nežiadali.\n"
-#~ "\n"
-#~ "Okná by mali nastaviť príznak 'accepts input' v ich WM_HINTS aby "
-#~ "naznačili, či požadujú fokus alebo nie."
-
-#~ msgid ""
-#~ "Offset (%) from left window edge when warping pointer.\n"
-#~ "\n"
-#~ "A negative number means outside the left window edge."
-#~ msgstr ""
-#~ "Vzdialenosť (%) od ľavého okraja okna pri presune kurzoru.\n"
-#~ "\n"
-#~ "Záporné číslo znamená mimo okna."
-
-#~ msgid ""
-#~ "Offset (%) from top window edge when warping pointer.\n"
-#~ "\n"
-#~ "A negative number means outside the top window edge."
-#~ msgstr ""
-#~ "Vzdialenosť (%) od horného okraja okna pri presune kurzoru.\n"
-#~ "\n"
-#~ "Záporné číslo znamená mimo okna."
-
-#~ msgid ""
-#~ "Format to create unique window names.\n"
-#~ "\n"
-#~ "Has two arguments (NAME INDEX) applied to it."
-#~ msgstr ""
-#~ "Formát pre vytváranie jednoznačným mien okien.\n"
-#~ "\n"
-#~ "Použijú sa dva argumenty (MENO INDEX)."
-
-#~ msgid "Virtual desktop configuration."
-#~ msgstr "Nastavenie virtuálnych pracovných plôch."
-
-#~ msgid "stop"
-#~ msgstr "zastaviť"
-
-#~ msgid "wrap-around"
-#~ msgstr "zalomiť"
-
-#~ msgid "keep-going"
-#~ msgstr "pokračovať"
-
-#~ msgid "When passing the first or last workspace: \\w"
-#~ msgstr "Pri prepnutí na prvej alebo poslednej ploche: \\w"
-
-#~ msgid "When passing the first or last workspace, while moving a window: \\w"
-#~ msgstr ""
-#~ "Pri prepnutí na prvej alebo poslednej ploche počet presunu okna: \\w"
-
-#~ msgid "Workspaces are deleted when their last window closes."
-#~ msgstr "Pracovné plochy sa majú zatvoriť po zatvorení ich posledného okna."
-
-#~ msgid "Preserve empty workspaces in pager."
-#~ msgstr "Zachovať prázdne plochy v pageri."
-
-#~ msgid "Dialogs appear on the same workspace as their application."
-#~ msgstr "Dialógy sa zobrazujú na rovnakej ploche ako ich aplikácia."
-
-#~ msgid "Whether growing an already grown window grows it again."
-#~ msgstr "Či sa má zväčšiť už raz zväčšené okno."
-
-#~ msgid "Grows window upwards until it `bumps into' another window."
-#~ msgstr "Zväčšiť okno nahor až po najbližšie okno."
-
-#~ msgid "Moves window upwards until it `bumps into' another window."
-#~ msgstr "Presunúť okno hore kým nenarazí na iné okno."
-
-#~ msgid "opaque"
-#~ msgstr "nepriehľadný"
-
-#~ msgid "box"
-#~ msgstr "obdĺžnik"
-
-#~ msgid "How windows being moved are animated: \\w"
-#~ msgstr "Ako sú animované okná pri presune: \\w"
-
-#~ msgid "How windows being resized are animated: \\w"
-#~ msgstr "Ako sú animované okná pri zmene veľkosti: \\w"
-
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Presunúť dopredu okná pri presune alebo zmene veľkosti."
-
-#~ msgid "region"
-#~ msgstr "oblasť"
-
-#~ msgid "border"
-#~ msgstr "okraj"
-
-#~ msgid "grab"
-#~ msgstr "zachytiť"
-
-#~ msgid "border-grab"
-#~ msgstr "zachytiť pri okraji"
-
-#~ msgid "How to choose window edges when resizing: \\w"
-#~ msgstr "Ako vybrať okraje okna pri zmene veľkosti: \\w"
-
-#~ msgid "Snap window position to edges of other windows while moving."
-#~ msgstr "Pritiahnuť okno k okrajom ostatných okien pri presune."
-
-#~ msgid "Proximity in pixels before snapping to a window edge."
-#~ msgstr "Vzdialenosť v bodoch od okraja okna pre pritiahnutie."
-
-#~ msgid "magnetism"
-#~ msgstr "magnetizmus"
-
-#~ msgid "resistance"
-#~ msgstr "odolnosť"
-
-#~ msgid "attraction"
-#~ msgstr "príťažlivosť"
-
-#~ msgid "How to snap together window edges: \\w"
-#~ msgstr "Ako priťahovať okraje okien: \\w"
-
-#~ msgid "Snap to otherwise-ignored windows."
-#~ msgstr "Priťahovať k inak ignorovaným oknám."
-
-#~ msgid "Only update window contents after it has stopped moving."
-#~ msgstr "Obnoviť obsah okna až po skončení presunu."
-
-#~ msgid ""
-#~ "Default increment for size-window commands (when the window doesn't\n"
-#~ "specify it's own increments)."
-#~ msgstr ""
-#~ "Štandardná zmena pre príkazy zmeny veľkosti okna (ak okno nedefinuje "
-#~ "svoje\n"
-#~ "vlastné zmeny veľkosti)."
-
-#~ msgid "Number of pixels to move window in `slide-' commands."
-#~ msgstr "Počet bodov, o ktoré presunúť okno v príkazoch `slide-'."
-
-#~ msgid "Display window names while cycling through windows."
-#~ msgstr "Zobraziť mená okien pri prepínaní medzi oknami."
-
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr ""
-#~ "Presunúť dopredu okná keď sú dočasne vybrané pri prepínaním medzi oknami."
-
-#~ msgid "Warp the mouse pointer to windows as they're temporarily selected."
-#~ msgstr ""
-#~ "Presunúť kurzor do okien keď sú dočasne vybrané pri prepínaním medzi "
-#~ "oknami."
-
-#~ msgid "Focus windows when they're temporarily selected during cycling."
-#~ msgstr ""
-#~ "Prepnúť fokus do okien keď sú dočasne vybrané pri prepínaním medzi oknami."
-
-#~ msgid "Disable auto-raising while temporarily selecting windows."
-#~ msgstr "Zakázať automatický presun dopredu počas dočasného vybrania okien."
-
-#~ msgid "Play sound effects for unmanaged windows."
-#~ msgstr "Zahrať zvukové efekty pre nespravované okná."
-
-#~ msgid "The hierarchical window menu raises singleton submenus."
-#~ msgstr "Hierarchické menu okna zobrazuje jednoprvkové podmenu."
-
-#~ msgid "Milliseconds to delay before flipping: \\w"
-#~ msgstr "Pauza v milisekundách pred prepnutím:\\w"
-
-#~ msgid "Warp pointer to opposite screen edge when flipping."
-#~ msgstr "Presunúť kurzor na opačnú stranu obrazovky pri prepnutí."
-
-#~ msgid "Remove tooltips after a period of time."
-#~ msgstr "Odstrániť rady po danej dobe."
-
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Počet milisekúnd pred zobrazením rady."
-
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Počet milisekúnd pred odstránením rady."
-
-#~ msgid "Font used to display tooltips."
-#~ msgstr "Písmo pre rady."
-
-#~ msgid "Color used for the tooltips background"
-#~ msgstr "Farba pozadia pre rady"
-
-#~ msgid "Color used for the tooltips foreground"
-#~ msgstr "Farba popredia pre rady"
-
-#~ msgid "Invoke the GNOME control center from the `Customize' menu."
-#~ msgstr "Vyvolať ovládacie centrum GNOME z menu 'Prispôsobiť'."
-
-#~ msgid ""
-#~ "Try to leave at least this many pixels between window edges in first/best-"
-#~ "fit."
-#~ msgstr ""
-#~ "Snažiť sa nechávať aspoň toľkoto bodom medzi okrajmi okien v first/best-"
-#~ "fit."
-
-#~ msgid "Automatically select window gravity from position on screen."
-#~ msgstr "Automaticky vybrať príťažlivosť okna podľa pozície na obrazovke."
-
-#~ msgid "Ignore requests from applications to change window stacking."
-#~ msgstr "Ignorovať požiadavky aplikácií na zmenu hromadenia okien."
-
-#~ msgid "Windows are focused after being uniconified."
-#~ msgstr "Okná majú získať fokus pri obnovovaní z ikony."
-
-#~ msgid "Windows are raised after being uniconified."
-#~ msgstr "Okná presúvať dopredu pri obnovovaní z ikony."
-
-#~ msgid "Unmanaged windows may be iconified."
-#~ msgstr "Nespravované okná je možné zmenšiť do ikony."
-
-#~ msgid "Windows uniconify to the current workspace."
-#~ msgstr "Okná obnovovať z ikony na aktuálnu plochu."
-
-#~ msgid "Iconifying a window also iconifies the: \\w"
-#~ msgstr "Zmenšenie okna do ikony tiež zmenší: \\w"
-
-#~ msgid "Uniconifying a window also uniconifies the: \\w"
-#~ msgstr "Obnovenie okna z tiež obnoví: \\w"
-
-#~ msgid "Iconify the window."
-#~ msgstr "Okno do ikony."
-
-#~ msgid "Toggle single window mode"
-#~ msgstr "Prepnúť mód jednoho okna"
-
-#~ msgid ""
-#~ "Maximizing a window in one dimension must increase the size of that "
-#~ "dimension."
-#~ msgstr ""
-#~ "Maximalizácia okna v jednom smere musí zväčšiť veľkosť v tomto smere."
-
-#~ msgid "Raise windows when they are maximized."
-#~ msgstr "Presunúť okná dopredu pri maximalizácii."
-
-#~ msgid "Let unmanaged windows be overlapped when filling windows."
-#~ msgstr ""
-#~ "Nespravované okná sa môžu prekrývať pri naobmedzujúcom maximalizovaní "
-#~ "okien."
-
-#~ msgid "Don't cover `avoided' windows when maximizing."
-#~ msgstr "Nezakrývať okná 'chránené' pri maximalizácii."
-
-#~ msgid "Dialog windows inherit the focus from their parent."
-#~ msgstr "Dialógy preberajú fokus od rodičovského okna."
-
-#~ msgid "Decorate dialog windows similarly to application windows."
-#~ msgstr "Okraje dialógov podobné oknám aplikácií."
-
-#~ msgid "Windows uniconify to the current workspace when they are selected."
-#~ msgstr "Okná obnovovať z ikony na aktuálnu plochu pri výbere."
-
-#~ msgid "Raise selected windows (normally by the Windows menu)."
-#~ msgstr "Vybrané okná presunúť dopredu (normálne pomocou menu Okná)."
-
-#~ msgid "Warp the pointer to selected windows."
-#~ msgstr "Presunúť kurzor do vybraných okien."
-
-#~ msgid "Group transient windows with their parents."
-#~ msgstr "Zoskupiť podriadené okná s ich rodičovskými."
-
-#~ msgid "Persistent group ids"
-#~ msgstr "Stále ID skupín"
-
-#~ msgid "novice"
-#~ msgstr "začiatočník"
-
-#~ msgid "intermediate"
-#~ msgstr "pokročilý"
-
-#~ msgid "expert"
-#~ msgstr "expert"
-
-#~ msgid "Show options suitable for \\w users."
-#~ msgstr "Zobraziť možnosti vhodné pre \\w."
-
-#~ msgid "ok"
-#~ msgstr "ok"
-
-#~ msgid "revert/cancel/ok"
-#~ msgstr "vrátiť/zrušiť/ok"
-
-#~ msgid "apply/revert/cancel/ok"
-#~ msgstr "použiť/vrátiť/zrušiť/ok"
-
-#~ msgid "Buttons shown in configurator: \\w"
-#~ msgstr "Tlačidlá v nastavení: \\w"
-
-#~ msgid "Show variable names of each customization option."
-#~ msgstr "Zobraziť mená premenných pre každú voľbu."
 
