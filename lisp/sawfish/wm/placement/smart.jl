@@ -66,6 +66,9 @@ weights mean that the window is harder to cover.")
 
 (defconst sp-cost-max 1024)
 
+;; the maximum number of points to keep in each grid dimension
+(defvar sp-max-points 5)
+
 
 ;; utility functions
 
@@ -76,24 +79,25 @@ weights mean that the window is harder to cover.")
       ((x-edges (nconc (mapcar 'car rects)
 		       (mapcar #'(lambda (x) (nth 2 x)) rects)))
        (y-edges (nconc (mapcar #'(lambda (x) (nth 1 x)) rects)
-		       (mapcar #'(lambda (x) (nth 3 x)) rects)))
-       tem)
+		       (mapcar #'(lambda (x) (nth 3 x)) rects))))
     (when with-root
       (setq x-edges (cons 0 (nconc x-edges (list (screen-width)))))
       (setq y-edges (cons 0 (nconc y-edges (list (screen-height))))))
-    (setq x-edges (sort x-edges))
-    (setq y-edges (sort y-edges))
-    (setq tem x-edges)
-    (while (cdr tem)
-      (if (= (car tem) (car (cdr tem)))
-	  (rplacd tem (cdr (cdr tem)))
-	(setq tem (cdr tem))))
-    (setq tem y-edges)
-    (while (cdr tem)
-      (if (= (car tem) (car (cdr tem)))
-	  (rplacd tem (cdr (cdr tem)))
-	(setq tem (cdr tem))))
+    (setq x-edges (sort (sp-prune-points x-edges sp-max-points)))
+    (setq y-edges (sort (sp-prune-points y-edges sp-max-points)))
     (cons x-edges y-edges)))
+
+(defun sp-prune-points (points max)
+  (let*
+      ((total (length points))
+       (cutoff (- total max))
+       tem)
+    (setq tem points)
+    (while (cdr (cdr tem))
+      (if (< (random total) cutoff)
+          (rplacd tem (cdr (cdr tem)))
+        (setq tem (cdr tem))))
+    points))
 
 ;; returns a list of (LEFT TOP RIGHT BOTTOM [OVERLAP-WEIGHT])
 (defun sp-make-rects (windows)
