@@ -127,6 +127,11 @@
 
 (put 'position 'window-history-snapshotter window-absolute-position)
 (put 'dimensions 'window-history-snapshotter window-dimensions)
+(put 'type 'window-history-snapshotter (lambda (w)
+					 ;; XXX hacky
+					 (if (window-get w 'shaded)
+					     (window-get w 'shaded-old-type)
+					   (window-type w))))
 
 (define (window-history-position-snapshotter w)
   (when (and window-history-save-position
