@@ -1,3 +1,19 @@
+2000-10-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c (eval_input_event): only set current_event to null
+	when leaving the top-level event loop. This helps when working
+	with multiple commands and/or event loops
+
+2000-10-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (Fwindow_wants_input_p): if no WM_HINTS, default to
+	false. Also if the window supports WM_TAKE_FOCUS, always return
+	true
+
+	(focus_on_window): if sending a WM_TAKE_FOCUS message, only
+	explicitly focus on the window if it's accepts-input hint is
+	set
+
 2000-09-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* fake-libexec: patch from John H. Palmieri

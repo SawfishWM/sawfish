@@ -1,3 +1,124 @@
+2000-10-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/stacking.jl (raise-windows, lower-windows):
+	rewritten to be more intelligent. These now search for the
+	required stacking order of the windows then restack the windows
+	in a single pass such that the minimum number of expose events
+	are generated on the windows.
+
+	[ Rob Hodges <s323140@student.uq.edu.au> found the algorithm
+	and made the initial implementation of raise-windows. I
+	translated it to tail-recursive iteration and implemented
+	lower-windows along the same lines ]
+
+	* sawfish/wm/state/transient.jl (transient-of-p): only apply
+	the `(= WM_TRANSIENT_FOR Root) => transient for whole group'
+	rule to non-transient windows
+	(transient-children): new function
+
+	* sawfish/wm/commands/x-cycle.jl: added ::doc: style embedded
+	doc strings for the cycle commands
+
+	* sawfish/wm/state/maximize.jl (window-maximizable-p,
+	maximize-truncate-dims): fixed some bugs introduced by quoted
+	nil no longer being boolean false
+
+	* sawfish/wm/commands/x-cycle.jl (cycle-reverse-event): deleted
+	(define-cycle-command): new function, used to create a pair of
+	commands for cycling backwards and forwards through a given
+	list of windows
+	(cycle-begin): renamed from cycle-windows; search global-keymap
+	for bindings of the command that cycles in the opposite
+	direction to the currently executing command
+
+	* sawfish/wm/state/gnome.jl (gnome-honour-client-state):
+	SKIP_FOCUS no longer sets never-focus and ignored properties,
+	instead it just sets cycle-skip. SKIP_FOCUS defining whether
+	the window is focusable or not wasn't very clever, WM_HINTS
+	defines that
+
+	Added a `window-list-skip' property to allow windows to be
+	taken out of the windows menu
+
+	* sawfish/wm/state/ignored.jl (toggle-window-list-skip): new
+	function / command
+
+	* sawfish/wm/state/gnome.jl (gnome-honour-client-state):
+	if SKIP_WINLIST set, then set window-list-skip property
+	(gnome-set-client-hints): new function, updates _WIN_HINTS when
+	the user changes something. Currently just maps
+	window-list-skip to SKIP_WINLIST
+
+	* sawfish/wm/gnome/match-window.jl: no longer handles
+	SKIP_WINLIST, that's now tied to the window-list-skip property
+
+	* sawfish/wm/ext/window-history.jl (window-history-states):
+	added window-list-skip property
+
+	* sawfish/wm/ext/old-window-menu.jl,
+	sawfish/wm/ext/beos-window-menu.jl: check for window-list-skip
+	property
+
+	* sawfish/wm/ext/match-window.jl (match-window-properties):
+	added cycle-skip and window-list-skip properties
+
+	* sawfish/wm/commands/gnome.jl: implemented skip-winlist
+	commands in terms of window-list-skip property and
+	toggle-window-list-skip function
+
+2000-10-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/user.jl: catch and print errors while calling
+	custom-load-user-file
+
+	* sawfish/wm/ext/match-window.jl (match-window): ensure that
+	each property is a symbol before calling get-prop
+
+	* sawfish/wm/ext/auto-raise.jl (rw-on-focus): minimum timeout
+	is now one millisecond, not zero
+
+	* sawfish/wm/ext/auto-raise.jl (rw-on-focus): in the timer
+	callback, if disable-auto-raise is set, reset the timer for
+	another try later
+
+2000-10-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/ext/beos-window-menu.jl (group-name): only look
+	for window-class of an integer id if it's positive
+
+2000-10-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/windows.jl (window-in-cycle-p): use
+	window-really-wants-input-p instead of just checking
+	'never-focus property
+
+	* sawfish/wm/focus.jl (focus-click): on exit, if the window
+	isn't focused push the click-to-focus-map back onto the window
+
+	* sawfish/wm/windows.jl (ignore-window-input-hint): defaults to
+	false now that window-accepts-input-p defaults to true if no
+	WM_HINTS property
+
+2000-10-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/user.jl: fix typo when loading the `defaults' file
+	(patch from Ronald Wahl
+	<ronald.wahl@informatik.tu-chemnitz.de>)
+
+	* sawfish/wm/viewport.jl: fix command spec's of move-window-foo
+	commands (patch from Yoshiki Hayashi <yoshiki@xemacs.org>)
+
+2000-09-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/state/wm-spec.jl: fixed some minor bugs
+
+	(wm-spec-honour-client-state): treat _NET_WM_WINDOW_TYPE as a
+	vector of atoms, the first atom we have a type definition for
+	is the one we use
+
+	(define-wm-spec-window-type, define-wm-spec-window-type): new
+	functions
+
 2000-09-26  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/commands/x-cycle.jl: don't pass EVENT parameter
