@@ -52,12 +52,15 @@
       (quote-menu-item (concat (cond ((window-get w 'iconified) ?\[)
 				     ((not (window-appears-in-workspace-p
 					    w current-workspace)) ?\())
-			       (abbreviate name 48)
+			       (abbreviate name)
 			       (cond ((window-get w 'iconified)  ?\])
 				     ((not (window-appears-in-workspace-p
 					    w current-workspace)) ?\)))))))
 
+  (define windows-left (make-fluid))
+
   (define (make-item w)
+    (fluid-set windows-left (delq w (fluid windows-left)))
     (list (make-label w)
 	  (lambda ()
 	    (when (windowp w)
@@ -74,21 +77,21 @@
 			   "Unnamed")))
 	     (abbreviate name)))))
 
+  (define (window-suitable-p w)
+    (and (memq w (fluid windows-left))
+	 (window-mapped-p w)
+	 (or (window-get w 'iconified)
+	     (and (not (window-get w 'window-list-skip))
+		  (not (window-get w 'ignored))))))
+
   (define (make-group-item id)
     (let loop ((menu '())
 	       (windows (windows-by-group id)))
       (if (null windows)
 	  (cons (group-name id) (nreverse menu))
-	(if (and (window-mapped-p (car windows))
-		 (not (window-get (car windows) 'window-list-skip))
-		 (not (window-get (car windows) 'ignored)))
+	(if (window-suitable-p (car windows))
 	    (loop (cons (make-item (car windows)) menu) (cdr windows))
 	  (loop menu (cdr windows))))))
-
-  (define (delete-group-windows id lst)
-    (let ((windows (windows-by-group id)))
-      (delete-if (lambda (x)
-		   (memq x windows)) lst)))
 
   (define (cleanup-menu menu)
     ;; sort the group names..
@@ -106,25 +109,27 @@
     menu)
 
   (define (make-menu)
-    (let loop-1 ((menu '())
-		 (groups (window-group-ids))
-		 (windows (managed-windows)))
-      (if (null groups)
-	  (progn
-	    (setq menu (cleanup-menu menu))
-	    (if windows
-		(let loop-2 ((menu (cons '() menu))
-			     (rest windows))
-		  (if (null rest)
-		      menu
-		    (loop-2 (cons (make-item (car rest)) menu) (cdr rest))))
-	      menu))
-	(loop-1 (let ((item (make-group-item (car groups))))
-		  (if (cdr item)
-		      (cons item menu)
-		    menu))
-		(cdr groups)
-		(delete-group-windows (car groups) windows)))))
+    (let-fluids ((windows-left (managed-windows)))
+      (let loop-1 ((menu '())
+		   (groups (window-group-ids)))
+	(if (null groups)
+	    (progn
+	      (setq menu (cleanup-menu menu))
+	      (let ((left (delete-if-not window-suitable-p
+					 (fluid windows-left))))
+		(if left
+		    (let loop-2 ((menu (cons '() menu))
+				 (rest left))
+		      (if (null rest)
+			  menu
+			(loop-2 (cons (make-item (car rest)) menu)
+				(cdr rest))))
+		  menu)))
+	  (loop-1 (let ((item (make-group-item (car groups))))
+		    (if (cdr item)
+			(cons item menu)
+		      menu))
+		  (cdr groups))))))
 
   (define (simplify menu)
     (let loop ((rest menu)
