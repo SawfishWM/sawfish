@@ -604,7 +604,7 @@ handle_sync_input(int fd)
 	else
 	    fprintf (stderr, "warning: unhandled event: %d\n", xev.type);
 	current_x_event = 0;
-	XFlush (dpy);
+	XSync (dpy, False);
     }
 }
 
