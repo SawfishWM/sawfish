@@ -1,5 +1,12 @@
 #!/bin/sh
-REP_LOAD_PATH="__nokogiridir__" exec rep "$0" "$@"
+
+# I tried: `REP_LOAD_PATH=... exec ...' but solaris /bin/sh won't play along
+
+REP_LOAD_PATH="__nokogiridir__"
+export REP_LOAD_PATH
+
+exec rep "$0" "$@"
+
 !#
 
 #| nokogiri-main.jl -- entry point
