@@ -1,3 +1,9 @@
+2000-04-17  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (list_frame_generator): lower the client window
+	before configuring each frame part, otherwise the below-client
+	attribute is ignored
+
 2000-04-15  John Harper  <john@dcs.warwick.ac.uk>
 
 	* images.c (find_image_file): use global_symbol_value () to
