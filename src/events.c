@@ -1,14 +1,39 @@
 /* events.c -- Event handling
-   $Id$ */
+   $Id$
+
+   Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+
+   This file is part of sawmill.
+
+   sawmill is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   sawmill is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with sawmill; see the file COPYING.   If not, write to
+   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
 
+/* Lookup table of event handlers */
 void (*event_handlers[LASTEvent])(XEvent *ev);
 
-/* relative to the root window */
+/* Map events to their names for debugging */
+static char *event_names[LASTEvent];
+
+/* Most recent known mouse position relative to the root window */
 int current_mouse_x, current_mouse_y;
 
+/* Most recently seen server timestamp */
 Time last_event_time;
+
+/* Current XEvent or a null pointer */
 XEvent *current_x_event;
 
 DEFSYM(visibility_notify_hook, "visibility-notify-hook");
@@ -23,9 +48,6 @@ DEFSYM(iconify_window, "iconify-window");
 
 /* for enter/leave-notify-hook */
 DEFSYM(root, "root");
-
-/* map events to their names */
-static char *event_names[LASTEvent];
 
 /* Where possible record the timestamp from event EV */
 void

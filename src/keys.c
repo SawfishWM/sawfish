@@ -1,5 +1,23 @@
 /* keys.c -- Key binding and evaluating (this should be called events.c)
-   $Id$ */
+   $Id$
+
+   Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+
+   This file is part of sawmill.
+
+   sawmill is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   sawmill is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with sawmill; see the file COPYING.   If not, write to
+   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
 #include "keys.h"
@@ -28,11 +46,13 @@ DEFSYM(override_keymap, "override-keymap");
 DEFSYM(unbound_key_hook, "unbound-key-hook");
 DEFSYM(keymap, "keymap");
 
+/* The X modifier being used for Meta */
 static u_long meta_mod;
 
 
 /* Translate from X events to Lisp events */
 
+/* Translate the X key or button event XEV to *CODE and *MODS */
 static void
 translate_event(u_long *code, u_long *mods, XEvent *xev)
 {
@@ -102,6 +122,8 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
     }
 }
 
+/* Translate the Lisp key event EV to X keycode *KEYCODE and modifier
+   mask *STATE, returning true if successful. */
 static bool
 translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
 {
@@ -117,6 +139,8 @@ translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
 	return FALSE;
 }
 
+/* Translate the Lisp button event EV to X button identifier *BUTTON and
+   modifier mask *STATE, returning true if successful. */
 static bool
 translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 {
@@ -454,12 +478,13 @@ lookup_event_name(u_char *buf, u_long code, u_long mods)
 	    {
 		if(x->mods == mask)
 		{
-		    end = stpcpy(end, x->name);
+		    strcpy (end, x->name);
+		    end += strlen (x->name);
 		    break;
 		}
 		x++;
 	    }
-	    end = stpcpy(end, "-");
+	    *end++ = '-';
 	}
     }
 
@@ -789,7 +814,7 @@ Returns t if the ARG is an input event.
 }
 
 
-/* Return the jade modifier mask used as the meta key. This code
+/* Return the lisp modifier mask used as the meta key. This code
    shamelessly stolen from Emacs 19. :-) */
 static u_long
 find_meta(void)
@@ -913,6 +938,7 @@ grab_keymap_events (Window grab_win, repv keymap)
     }
 }
 
+/* Grab all bound events in client window W. */
 void
 grab_window_events (Lisp_Window *w)
 {

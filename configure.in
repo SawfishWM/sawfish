@@ -94,10 +94,8 @@ AC_TYPE_SIZE_T
 
 dnl Checks for library functions.
 AC_FUNC_ALLOCA
-AC_FUNC_MEMCMP
 AC_FUNC_VPRINTF
-AC_CHECK_FUNCS(getcwd gethostname socket strcspn strstr strtol snprintf getpagesize)
-AC_REPLACE_FUNCS(realpath)
+AC_CHECK_FUNCS(gethostname socket snprintf getpagesize)
 
 dnl Custom tests
 

@@ -1,13 +1,40 @@
 ;; menus.jl -- popup menus
 ;; $Id$
 
+;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+
+;; This file is part of sawmill.
+
+;; sawmill is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; sawmill is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with sawmill; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
 (provide 'menus)
 
-(defvar menu-program "sawmill-ui")
-(defvar menu-program-stays-running nil)
+(defvar menu-program "sawmill-ui"
+  "Name of the program implementing sawmill's high-level user-interface.")
 
+(defvar menu-program-stays-running nil
+  "When non-nil, the user-interface program is never stopped.")
+
+;; the active user interface process
 (defvar menu-process nil)
+
+;; output from the user-interface process that's received but not
+;; yet processed
 (defvar menu-pending nil)
+
+;; non-nil when we're waiting for a response from the ui process
 (defvar menu-active nil)
 
 (defvar window-ops-menu

@@ -1,11 +1,25 @@
 ;; workspace.jl -- similar to virtual desktops
 ;; $Id$
 
+;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+
+;; This file is part of sawmill.
+
+;; sawmill is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; sawmill is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with sawmill; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
 (provide 'workspace)
-
-(defvar ws-workspaces nil)
-
-(defvar ws-current-workspace nil)
 
 (defvar cycle-through-workspaces nil
   "When non-nil, moving through workspaces is cyclical, instead of stopping
@@ -18,6 +32,17 @@ windows.")
 (defvar uniconify-to-current-workspace t
   "When non-nil, windows that are uniconified appear on the current
 workspace.")
+
+(defvar raise-windows-on-uniconify t
+  "When non-nil, windows are raised after being uniconified.")
+
+;; List of all workspaces; a workspace is `(workspace WINDOWS...)'.
+;; Each window has its `workspace' property set to the workspace it's
+;; a member of.
+(defvar ws-workspaces nil)
+
+;; Currently active workspace
+(defvar ws-current-workspace nil)
 
 (defvar static-workspace-menus
   '(("Next" next-workspace)
@@ -35,6 +60,7 @@ workspace.")
 	     (not (window-get w 'iconified)))
     (show-window w)))
 
+;; usually called from the add-window-hook
 (defun ws-add-window (w)
   (unless (window-get w 'sticky)
     (if (null ws-current-workspace)
@@ -62,11 +88,6 @@ workspace.")
       (window-put w 'workspace nil)
       (when (windowp w)
 	(hide-window w)))))
-
-(defun ws-clean-lists ()
-  (mapc #'(lambda (space)
-	    (rplacd space (delete-if-not 'windowp (cdr space))))
-	ws-workspaces))
 
 (defun ws-add-workspace (at-end)
   (let
@@ -105,7 +126,7 @@ workspace.")
       (call-hook 'enter-workspace-hook (list ws-current-workspace)))))
 
 
-;; menu constructors
+;; Menu constructors
 
 (defun workspace-menu ()
   (let
@@ -191,7 +212,9 @@ will be created."
     (ws-add-window-to-space window space)))
 
 
-;; iconification (but without icons)
+;; Iconification (but without icons)
+
+;; If iconified, a window has its `iconified' property set to t
 
 (defun iconify-window (w)
   (interactive "f")
@@ -210,6 +233,8 @@ will be created."
 	  (uniconify-to-current-workspace
 	   (ws-remove-window w)
 	   (ws-add-window w)))
+    (when raise-windows-on-uniconify
+      (raise-window w))
     (call-hook 'uniconify-window-hook (list w))))
 
 (defun display-window (w)
@@ -226,7 +251,7 @@ will be created."
 	(warp-cursor-to-window w)))))
 
 
-;; initialisation
+;; Initialisation
 
 (unless (memq 'ws-add-window add-window-hook)
   (add-hook 'add-window-hook 'ws-add-window t)

@@ -1,22 +1,23 @@
 /* sawmill.h -- Main include file, brings in all the rest
-   Copyright (C) 1993, 1994 John Harper <john@dcs.warwick.ac.uk>
-   $Id$
+   $Id: sawmill.h,v 1.2 1999/07/25 15:02:21 john Exp
 
-   This file is part of Jade.
+   Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
-   Jade is free software; you can redistribute it and/or modify it
+   This file is part of sawmill.
+
+   sawmill is free software; you can redistribute it and/or modify it
    under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
    any later version.
 
-   Jade is distributed in the hope that it will be useful, but
+   sawmill is distributed in the hope that it will be useful, but
    WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with Jade; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
+   along with sawmill; see the file COPYING.   If not, write to
+   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #ifndef SAWMILL_H
 #define SAWMILL_H
@@ -33,12 +34,15 @@
 #include <X11/Xlib.h>
 #include <Imlib.h>
 
-typedef char bool;
+typedef int bool;
 
 #ifdef rep_HAVE_UNIX
 # define HAVE_UNIX 1
 #endif
 
+/* Uncomment the following line to get reams of debugging data. But
+   redirect it to a non-X terminal (otherwise we can't printf when
+   the server is grabbed => deadlock) */
 /* #define DEBUG */
 
 
@@ -55,7 +59,7 @@ typedef struct lisp_window {
     /* Is the client window mapped? */
     int mapped : 1;
 
-    /* Is the frame visible? (not hidden) */
+    /* Is the frame visible? (not hidden by hide-window) */
     int visible : 1;
 
     /* Is the client window reparented to the frame? */
@@ -69,21 +73,22 @@ typedef struct lisp_window {
     int does_wm_take_focus : 1;
     int does_wm_delete_window : 1;
 
+    /* The position and dimensions of `attr' is always maintained. */
     XWindowAttributes attr;
     XSizeHints hints;
     XWMHints *wmhints;
     char *full_name, *name, *icon_name;
     int frame_vis;
 
+    /* Frame data */
     Window frame;
     struct frame_part *frame_parts;
-    u_int frame_x, frame_y;		/* relative to subwindow */
+    u_int frame_x, frame_y;		/* relative to client-window */
     u_int frame_width, frame_height;
     void (*destroy_frame)(struct lisp_window *w);
     void (*focus_change)(struct lisp_window *w);
     void (*rebuild_frame)(struct lisp_window *w);
     void (*property_change)(struct lisp_window *w);
-    void *frame_data;
 } Lisp_Window;
 
 #define VWIN(v)		((Lisp_Window *)rep_PTR(v))
@@ -181,7 +186,7 @@ struct frame_part {
 
     int clicked;
 
-    repv text;		/* may be nil, a string, or a function */
+    repv text;			/* may be nil, a string, or a function */
     repv x_justify, y_justify;
 
     repv font[fps_MAX];
@@ -210,19 +215,6 @@ enum exit_codes {
 #define MAX(x,y) (((x) > (y)) ? (x) : (y))
 #undef MIN
 #define MIN(x,y) (((x) < (y)) ? (x) : (y))
-#define POS(x)   MAX(x, 0)
-
-/* Round the integer X to the next or previous multiple of Y. */
-#define ROUND_UP_INT(x,y) ((((x) + (y)-1) / (y)) * (y))
-#define ROUND_DOWN_INT(x,y) (((x) / (y)) * (y))
-
-#ifndef HAVE_STPCPY
-extern char *stpcpy(char *, const char *);
-#endif
-
-#ifndef HAVE_MEMCHR
-extern void *memchr(const void *, int, size_t);
-#endif
 
 #ifndef NULL
 # define NULL 0
@@ -242,4 +234,4 @@ extern void *memchr(const void *, int, size_t);
 # define DB(x) do { ; } while (0)
 #endif
 
-#endif /* JADE_H */
+#endif /* SAWMILL_H */

@@ -1,20 +1,43 @@
 ;; move-resize.jl -- interactive moving and resizing of windows
 ;; $Id$
 
+;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+
+;; This file is part of sawmill.
+
+;; sawmill is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; sawmill is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with sawmill; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
 (provide 'move-resize)
 
 ;; todo:
-;;  * obey the size hints (min/max and increments)
+;;  * obey the aspect ratio size hints
 ;;  * resize has truly bizarre behaviour
 
-(defvar move-outline-mode 'opaque)
-(defvar resize-outline-mode 'opaque)
+(defvar move-outline-mode 'opaque
+  "The method of drawing windows being moved interactively.")
+
+(defvar resize-outline-mode 'opaque
+  "The method of drawing windows being resized interactively.")
+
+(defvar move-resize-raise-window nil
+  "When non-nil, any window being moved or resized interactively is first
+raised to the top of the display stack.")
 
 (defvar move-resize-map (bind-keys (make-sparse-keymap)
 			  "Any-PointerUp" 'move-resize-finished
 			  "Any-PointerMove" 'move-resize-motion))
-
-(defvar move-resize-raise-window nil)
 
 ;; specials
 (defvar move-resize-window nil)
@@ -33,6 +56,8 @@
 (defvar move-resize-hints nil)
 (defvar move-resize-frame nil)
 
+;; called to initiate a move or resize on window W. FUNCTION is either
+;; `move' or `resize'
 (defun move-resize-window (w function)
   (when move-resize-raise-window
     (raise-window w))
@@ -80,9 +105,12 @@
     (unless (eq move-resize-mode 'opaque)
       (ungrab-server))))
 
+;; round up a window dimension X in increments of INC, with minimum
+;; value BASE
 (defsubst move-resize-roundup (x inc base)
   (+ base (max 0 (* (1+ (/ (1- (- x base)) inc)) inc))))
 
+;; called each pointer motion event during move/resize
 (defun move-resize-motion ()
   (interactive)
   (let
@@ -122,6 +150,7 @@
 			   (+ move-resize-width (car move-resize-frame))
 			   (+ move-resize-height (cdr move-resize-frame))))))
 
+;; called when the move/resize finished (i.e. button-release event)
 (defun move-resize-finished ()
   (interactive)
   (unless (eq move-resize-mode 'opaque)
@@ -134,6 +163,7 @@
   (move-resize-apply)
   (throw 'move-resize-done t))
 
+;; commit the current state of the move or resize
 (defun move-resize-apply ()
   (cond ((eq move-resize-function 'move)
 	 (move-window-to move-resize-window move-resize-x move-resize-y))
@@ -146,16 +176,19 @@
 
 ;;;###autoload
 (defun move-window-interactively (w)
+  "Move window W interactively."
   (interactive "f")
   (move-resize-window w 'move))
 
 ;;;###autoload
 (defun resize-window-interactively (w)
+  "Resize window W interactively."
   (interactive "f")
   (move-resize-window w 'resize))
 
 ;;;###autoload
 (defun move-selected-window ()
+  "Wait for the user to select a window, then interactively move that window."
   (interactive)
   (let
       ((w (select-window)))
@@ -165,6 +198,7 @@
 
 ;;;###autoload
 (defun resize-selected-window ()
+  "Wait for the user to select a window, then interactively resize that window."
   (interactive)
   (let
       ((w (select-window)))
