@@ -219,8 +219,8 @@ AC_ARG_ENABLE(capplet,
 
 if test "$enable_capplet" = "yes"; then
   AC_MSG_CHECKING([for GNOME control center config])
-  GNOME_CC_CFLAGS="`(gnome-config --cflags capplet) 2>/dev/null`"
-  GNOME_CC_LIBS="`(gnome-config --libs capplet) 2>/dev/null`"
+  GNOME_CC_CFLAGS="`(gnome-config --cflags gnome gnomeui capplet) 2>/dev/null`"
+  GNOME_CC_LIBS="`(gnome-config --libs gnome gnomeui capplet) 2>/dev/null`"
   if test $? -ne 0; then
     AC_MSG_RESULT([no])
     AC_MSG_WARN([Can't run "gnome-config capplet", not building capplet])
