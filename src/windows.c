@@ -22,9 +22,6 @@
 #include "sawmill.h"
 #include <X11/extensions/shape.h>
 
-#define CLIENT_EVENTS (PropertyChangeMask | StructureNotifyMask \
-		       | ColormapChangeMask | VisibilityChangeMask)
-
 Lisp_Window *window_list;
 int window_type;
 
@@ -77,17 +74,24 @@ mapped_not_override_p (Window id)
 void
 focus_on_window (Lisp_Window *w)
 {
-    if (w != 0)
+    if (w != 0 && (w->id != 0 || w->frame != 0))
     {
+	Window focus;
 	DB(("focus_on_window (%s)\n", rep_STR(w->name)));
-	if (w->does_wm_take_focus)
+	if (!w->client_unmapped)
 	{
-	    DB(("  sending WM_TAKE_FOCUS message\n"));
-	    send_client_message (w->id, xa_wm_take_focus, last_event_time);
+	    if (w->does_wm_take_focus)
+	    {
+		DB(("  sending WM_TAKE_FOCUS message\n"));
+		send_client_message (w->id, xa_wm_take_focus, last_event_time);
+	    }
+	    focus = w->id;
 	}
-	DB(("  XSetInputFocus (%lx, RevertToParent, %ld)\n", w->id,
+	else
+	    focus = w->frame;
+	DB(("  XSetInputFocus (%lx, RevertToParent, %ld)\n", focus,
 	    last_event_time));
-	XSetInputFocus (dpy, w->id, RevertToParent, last_event_time);
+	XSetInputFocus (dpy, focus, RevertToParent, last_event_time);
 	focus_window = w;
     }
     else
@@ -213,13 +217,7 @@ install_window_frame (Lisp_Window *w)
     DB(("install_window_frame (%s)\n", rep_STR(w->name)));
     if (!w->reparented && w->frame != 0)
     {
-	XSelectInput (dpy, w->frame,
-		      ButtonPressMask | ButtonReleaseMask
-		      | KeyPressMask | ButtonMotionMask | PointerMotionHintMask
-		      | EnterWindowMask | LeaveWindowMask
-		      | ExposureMask | FocusChangeMask
-		      | SubstructureRedirectMask);
-
+	XSelectInput (dpy, w->frame, FRAME_EVENTS);
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	XLowerWindow (dpy, w->id);	/* see end of list_frame_generator */
 	XAddToSaveSet (dpy, w->id);
@@ -816,15 +814,14 @@ Prevent WINDOW from being displayed. See `show-window'.
 	if (VWIN(win)->mapped)
 	{
 	    XUnmapWindow (dpy, VWIN(win)->frame);
-
-	    /* ICCCM says we must unmap the client window, but we
-	       don't want events.c to think the client unmapped it.. */
-	    XSelectInput (dpy, VWIN(win)->id,
-			  CLIENT_EVENTS & ~StructureNotifyMask);
-	    XUnmapWindow (dpy, VWIN(win)->id);
-	    XSelectInput (dpy, VWIN(win)->id, CLIENT_EVENTS);
+	    if (!VWIN(win)->client_unmapped)
+	    {
+		XUnmapWindow (dpy, VWIN(win)->id);
+		VWIN(win)->local_unmaps++;
+		VWIN(win)->client_unmapped = 1;
+	    }
 	}
-	VWIN(win)->visible = FALSE;
+	VWIN(win)->visible = 0;
 	reset_frame_parts (VWIN(win));
     }
     return win;
@@ -842,14 +839,15 @@ Ensure that WINDOW (if it has been mapped) is visible. See `hide-window'.
     {
 	if (VWIN(win)->mapped)
 	{
-	    XSelectInput (dpy, VWIN(win)->id,
-			  CLIENT_EVENTS & ~StructureNotifyMask);
-	    XMapWindow (dpy, VWIN(win)->id);
-	    XSelectInput (dpy, VWIN(win)->id, CLIENT_EVENTS);
-
+	    if (VWIN(win)->client_unmapped && !VWIN(win)->client_hidden)
+	    {
+		XMapWindow (dpy, VWIN(win)->id);
+		VWIN(win)->local_maps++;
+		VWIN(win)->client_unmapped = 0;
+	    }
 	    XMapWindow (dpy, VWIN(win)->frame);
 	}
-	VWIN(win)->visible = TRUE;
+	VWIN(win)->visible = 1;
     }
     return win;
 }
