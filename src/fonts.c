@@ -122,6 +122,31 @@ fontp ARG
     return FONTP(win) ? Qt : Qnil;
 }
 
+DEFUN("text-width", Ftext_width, Stext_width, (repv string, repv font), rep_Subr2) /*
+::doc:Stext-width::
+text-width STRING [FONT]
+::end:: */
+{
+    rep_DECLARE1(string, rep_STRINGP);
+    if (font == Qnil)
+	font = Fsymbol_value (Qdefault_font, Qt);
+    rep_DECLARE2(font, FONTP);
+    return rep_MAKE_INT(XTextWidth (VFONT(font)->font, rep_STR(string),
+				    rep_STRING_LEN(string)));
+}
+
+DEFUN("font-height", Ffont_height, Sfont_height, (repv font), rep_Subr1) /*
+::doc:Sfont-height::
+font-height [FONT]
+::end:: */
+{
+    if (font == Qnil)
+	font = Fsymbol_value (Qdefault_font, Qt);
+    rep_DECLARE1(font, FONTP);
+    return rep_MAKE_INT(VFONT(font)->font->ascent
+			+ VFONT(font)->font->descent);
+}
+
 
 /* type hooks */
 
@@ -177,6 +202,8 @@ fonts_init (void)
     rep_ADD_SUBR(Sfont_put);
     rep_ADD_SUBR(Sfont_name);
     rep_ADD_SUBR(Sfontp);
+    rep_ADD_SUBR(Stext_width);
+    rep_ADD_SUBR(Sfont_height);
     rep_INTERN(default_font);
     rep_SYM(Qdefault_font)->value = Fget_font (rep_string_dup("fixed"));
 }
