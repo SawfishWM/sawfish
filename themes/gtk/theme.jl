@@ -30,12 +30,15 @@
 (defvar gtk-font nil)
 (defvar gtk-foreground nil)
 
+(defvar gtk-dummy-window nil)
+
 ;; 15x15
 (defvar gtk-minimize (list (make-image "as_min.png")
 			   nil nil (make-image "as_min-b.png")))
 (defvar gtk-close (list (make-image "as_close.png")
 			nil nil (make-image "as_close-b.png")))
 
+;; read the current default style
 (defun gtk-get-style ()
   (let*
       ((output (make-string-output-stream))
@@ -57,6 +60,7 @@
 		      ?/ (substring str (match-end)))))
   str)
 
+;; act on settings in gtk-style alist
 (defun gtk-apply-style ()
   (let
       (tem)
@@ -93,6 +97,27 @@
   (interactive)
   (gtk-get-style)
   (gtk-apply-style))
+
+;; recognize when the GTK theme has been switched
+(defun gtk-handle-client-msg (w type data)
+  (when (and (eq w gtk-dummy-window) (eq type '_GTK_READ_RCFILES))
+    (gtk-reload-style)
+    (when (featurep 'menus)
+      (menu-stop-process))
+    t))
+
+(defun gtk-init ()
+  (setq gtk-dummy-window (create-window 'root -100 -100 10 10))
+  (set-x-property gtk-dummy-window 'WM_STATE (vector 0) 'WM_STATE 32)
+  (add-hook 'client-message-hook 'gtk-handle-client-msg)
+  (add-hook 'before-exit-hook 'gtk-quit)
+  (gtk-reload-style))
+
+(defun gtk-quit ()
+  (destroy-window gtk-dummy-window))
+
+
+;; frame defs
 
 (defun gtk-foreground ()
   gtk-foreground)
@@ -299,5 +324,8 @@
 
 (add-frame-style 'gtk 'gtk-frame-style)
 
+
+;; initialisation
+
 (unless batch-mode
-  (gtk-reload-style))
+  (gtk-init))
