@@ -150,6 +150,11 @@ has no associated class."
       ((prop (get-x-text-property w 'WM_CLASS)))
     (and prop (aref prop 1))))
 
+(defun member-if (fun lst)
+  (cond ((null lst) '())
+	((fun (car lst)) lst)
+	(t (member-if fun (cdr lst)))))
+
 (defun uniquify-list (lst)
   "Remove all duplicates from list, tests using eq, order is lost."
   (let
