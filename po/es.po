@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawmill 0.20\n"
-"POT-Creation-Date: 2000-01-10 21:51+0000\n"
+"POT-Creation-Date: 2000-02-4 15:50+0100\n"
 "PO-Revision-Date: 1999-12-21 01:15+0100\n"
-"Last-Translator: Iñaki García Etxebarria"
+"Last-Translator: Iñaki García Etxebarria\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -237,13 +237,25 @@ msgstr "Lista de mejoras a cargar antes de ejecutar configuración."
 msgid "File used to store user's configuration settings."
 msgstr "Fichero usado para guardar la configuración del usuario."
 
+# ../lisp/custom.jl 
+msgid "Main"
+msgstr "Principal"
+
 # ../lisp/custom.jl
 msgid "All settings"
 msgstr "Todo"
 
+# ../src/sawmill-ui.jl
+msgid "Edit theme..."
+msgstr "Editar tema..."
+
 # ../lisp/custom.jl
 msgid "Focus"
 msgstr "Foco/Selección"
+
+# ../lisp/custom.jl 
+msgid "Advanced"
+msgstr "Avanzado"
 
 # ../lisp/custom.jl
 msgid "Move/Resize"
@@ -296,15 +308,6 @@ msgid "Intensity of bevels (percentage)."
 msgstr "Intensidad de los filos (porcentaje)."
 
 # ../lisp/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "Ejecuta el programa de configuración de usuario"
-
-# ../lisp/customize.jl
-#: ../themer/themer.glade:1599
-msgid "About"
-msgstr "Acerca de"
-
-# ../lisp/customize.jl
 msgid ""
 "Sawmill %s (rep %s)\n"
 "\n"
@@ -337,6 +340,10 @@ msgstr ""
 "detalles.\n"
 "\n"
 "Visite la página principal de Sawmill en http://sawmill.sourceforge.net/"
+
+# ../lisp/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "Ejecuta el programa de configuración de usuario"
 
 # ../lisp/cycle.jl
 msgid "Select the next window of the current workspace."
@@ -448,9 +455,35 @@ msgstr "Por defecto"
 msgid "Give focus to windows even when they haven't asked for it."
 msgstr "Dar el foco a la ventana incluso si no lo ha pedido."
 
+# ../lisp/functions.jl 
+msgid ""
+"Offset in percent from left window edge, when warping.\n"
+"A negative number means warp to outside the left window edge."
+msgstr ""
+"Desplazamiento en porcentaje desde el borde izquierdo al confinar.\n"
+"Un numero negativo significa confinar fuera del borde izquierdo."
+
+# ../lisp/functions.jl 
+msgid ""
+"Offset in percent from top window edge, when warping.\n"
+"A negative number means warp to outside the top window edge."
+msgstr ""
+"Desplazamiento en porcentaje desde el borde superior al confinar.\n"
+"Un numero negativo significa confinar fuera del borde superior."
+
 # ../lisp/functions.jl
 msgid "Start a new xterm."
 msgstr "Iniciar una nueva terminal."
+
+# ../lisp/ignore-window.jl
+msgid "Delete the window."
+msgstr "Eliminar la ventana."
+
+# ../lisp/functions.jl 
+msgid "Delete the window, or beep if the window can't be closed safely."
+msgstr ""
+"Eliminar la ventana, o pitar si la ventana no se puede\n"
+"cerrar de modo seguro."
 
 # ../lisp/gnome-commands.jl
 msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
@@ -529,6 +562,10 @@ msgstr "No ignorar la ventana."
 # ../lisp/ignore-window.jl
 msgid "Toggle whether a window is ignored or not."
 msgstr "Invertir el estado de ignorado de la ventana."
+
+# ../lisp/ignore-window.jl
+msgid "Toggle whether a window is focusable or not."
+msgstr "Invertir el estado de seleccionable de la ventana."
 
 # ../lisp/keymap.jl
 msgid ""
@@ -886,6 +923,10 @@ msgstr "Sombra/Título"
 msgid "Ignored"
 msgstr "Omitida"
 
+# ../lisp/custom.jl
+msgid "Focusable"
+msgstr "Foco"
+
 # ../lisp/menus.jl
 msgid "In window list"
 msgstr "En lista de ventanas"
@@ -907,10 +948,6 @@ msgid "Customize"
 msgstr "Configurar"
 
 # ../lisp/menus.jl
-msgid "About..."
-msgstr "Acerca de..."
-
-# ../lisp/menus.jl
 msgid "Restart"
 msgstr "Reiniciar"
 
@@ -929,6 +966,42 @@ msgstr "Muestra el menú principal."
 # ../lisp/menus.jl
 msgid "Display the applications menu."
 msgstr "Muestra el menú de aplicaciones."
+
+# ../lisp/slide-window.jl
+msgid "Number of pixels to move pointer in `move-cursor-' commands."
+msgstr "Número de puntos a mover el puntero en comandos `move-cursor'."
+
+# ../lisp/slide-window.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr "Mover el puntero `move-cursor-increment' puntos a la izquierda."
+
+# ../lisp/slide-window.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the right."
+msgstr "Mover el puntero `move-cursor-increment' puntos a la derecha."
+
+# ../lisp/slide-window.jl
+msgid "Move the cursor `move-cursor-increment' pixels upwards."
+msgstr "Mover el puntero `move-cursor-increment' puntos arriba."
+
+# ../lisp/slide-window.jl
+msgid "Move the cursor `move-cursor-increment' pixels downwards."
+msgstr "Mover el puntero `move-cursor-increment' puntos abajo."
+
+# ../lisp/workspace.jl
+msgid "Move the cursor 1 pixel to the left."
+msgstr "Mueve el puntero 1 pixel a la izquierda."
+
+# ../lisp/workspace.jl
+msgid "Move the cursor 1 pixel to the right."
+msgstr "Mueve el puntero 1 pixel a la derecha."
+
+# ../lisp/slide-window.jl
+msgid "Move the cursor 1 pixel upwards."
+msgstr "Mueve el puntero 1 pixel arriba."
+
+# ../lisp/slide-window.jl
+msgid "Move the cursor 1 pixel downwards."
+msgstr "Mueve el puntero 1 pixel abajo."
 
 # ../lisp/move-resize.jl
 msgid "Choose resized window edges by border-part, not by mouse position."
@@ -1006,6 +1079,44 @@ msgstr ""
 # ../lisp/place-window.jl
 msgid "Ignore program-specified window positions."
 msgstr "Ignorar posiciones especificadas por el programa."
+
+# ../lisp/stacking.jl
+msgid ""
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
+msgstr ""
+"Poner la ventana en primer plano si recibe un evento, después repetir los\n"
+"eventos de puntero que causaron el comando."
+
+# ../lisp/stacking.jl
+msgid ""
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
+msgstr ""
+"Poner la ventana que recibió el evento actual (si tiene el foco) en\n"
+"primer plano y reproducir entonces los eventos del puntero que\n"
+"invocaron el comando"
+
+# ../lisp/shade-hover.jl 
+msgid "Shade Hover"
+msgstr ""
+
+# ../lisp/shade-hover.jl 
+msgid ""
+"Enable shade-hover mode.\n"
+"(Temporarily unshade windows while pointer is over them.)"
+msgstr ""
+"Habilitar modo shade-hover.\n"
+"(Desenrollar temporalmente las ventanas mientras el puntero\n"
+"está sobre ellas.)"
+
+# ../lisp/auto-raise.jl
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Retardo en milisegundos para desenrollar ventanas."
+
+# ../lisp/auto-raise.jl
+msgid "Raise windows when they are unshaded."
+msgstr "Poner ventanas en primer plano cuando son desenrolladas."
 
 # ../lisp/shading.jl
 msgid "Display only the title bar of the window."
@@ -1134,14 +1245,6 @@ msgstr "Bajar la ventana."
 # ../lisp/stacking.jl
 msgid "Put the window in the stacking level above its current level."
 msgstr "Subir la ventana."
-
-# ../lisp/stacking.jl
-msgid ""
-"Raise the window that received the current event, then replay any pointer\n"
-"events that invoked the command."
-msgstr ""
-"Poner la ventana en primer plano si recibe un evento, después repetir los\n"
-"eventos de puntero que causaron el comando."
 
 # ../lisp/tooltips.jl
 msgid "Tooltips"
@@ -1445,8 +1548,8 @@ msgid "Cycle through all windows in order of recent selections."
 msgstr "Rotar ventanas en el orden de selección más reciente."
 
 # ../themes/gradient/theme.jl
-msgid "Gradient frame"
-msgstr "Marco gradiente"
+msgid "Gradient Theme"
+msgstr "Tema Gradiente"
 
 # ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
@@ -1475,8 +1578,8 @@ msgstr ""
 "calidad."
 
 # ../themes/mono/theme.jl
-msgid "Mono Frame"
-msgstr "Marco monocolor"
+msgid "Mono Theme"
+msgstr "Tema Mono"
 
 # ../themes/mono/theme.jl
 msgid "Use the GTK+ background color for inactive frames."
@@ -1491,9 +1594,13 @@ msgstr ""
 msgid "Color of active frames."
 msgstr "Color de los marcos activos."
 
+# ../themes/mono/theme.jl 
+msgid "Method of justifying text in window titles."
+msgstr "Método de justificar el texto en los títulos de las ventanas."
+
 # ../themes/simple/theme.jl
-msgid "Simple Frame"
-msgstr "Marco simple"
+msgid "Simple Theme"
+msgstr "Tema Simple"
 
 # ../themes/simple/theme.jl
 msgid "Color of inactive frames in `simple' frame style."
@@ -1503,9 +1610,8 @@ msgstr "Color del marco inactivo en estilo `simple'."
 msgid "Color of active frames in `simple' frame style."
 msgstr "Color del marco activo en estilo `simple'."
 
-# ../themes/smaker/theme.jl
-msgid "SMaker Frame"
-msgstr "Marco SMaker"
+msgid "SMaker Theme"
+msgstr "Tema SMaker"
 
 # ../themes/smaker/theme.jl
 msgid "Use black-on-white button images."
@@ -1546,6 +1652,11 @@ msgstr "Anchura de la imágenes de la barra de título."
 #: ../themer/themer.glade:1327
 msgid " to: "
 msgstr " a:"
+
+# ../lisp/customize.jl
+#: ../themer/themer.glade:1599
+msgid "About"
+msgstr "Acerca de"
 
 # ../lisp/customize.jl
 #: ../themer/themer.glade:424
@@ -1742,6 +1853,14 @@ msgstr "_Opciones"
 #: ../themer/themer.glade:262
 msgid "_Themes"
 msgstr "_Temas"
+
+# ../lisp/menus.jl
+#~ msgid "About..."
+#~ msgstr "Acerca de..."
+
+# ../themes/smaker/theme.jl
+#~ msgid "SMaker Frame"
+#~ msgstr "Marco SMaker"
 
 # ../lisp/frames.jl
 #~ msgid "Highlight window borders even when the window is unfocused."
