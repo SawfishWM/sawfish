@@ -1225,7 +1225,9 @@ configure_frame_part (struct frame_part *fp)
 	if (fp->width > 0 && fp->height > 0)
 	{
 	    XGCValues gcv;
-	    wamask = 0;
+	    wa.win_gravity = StaticGravity;
+	    wa.bit_gravity = StaticGravity;
+	    wamask = CWWinGravity | CWBitGravity;
 	    fp->id = XCreateWindow (dpy, w->frame,
 				    fp->x - w->frame_x, fp->y - w->frame_y,
 				    fp->width, fp->height,
@@ -1289,6 +1291,7 @@ list_frame_generator (Lisp_Window *w)
     rep_GC_root gc_win, gc_ptr;
     repv win = rep_VAL(w);
     bool regen;				/* are we resizing the frame */
+    bool bigger;
     int nparts = 0;
     XSetWindowAttributes wa;
     u_long wamask;
@@ -1378,6 +1381,9 @@ list_frame_generator (Lisp_Window *w)
     }
     rep_POPGC;				/* ptr */
 
+    bigger = (right_x - left_x > w->frame_width
+	      || bottom_y - top_y > w->frame_height);
+
     /* now we can find the size and offset of the frame. */
     w->frame_width = right_x - left_x;
     w->frame_height = bottom_y - top_y;
@@ -1386,6 +1392,9 @@ list_frame_generator (Lisp_Window *w)
 
     DB(("  bounding box: x=%d y=%d width=%d height=%d\n",
 	w->frame_x, w->frame_y, w->frame_width, w->frame_height));
+
+    if (w->reparented && bigger)
+	set_frame_shapes (w, TRUE);
 
     /* create the child-of-root frame window, or if it already exists,
        configure it to the correct size.. */
@@ -1403,8 +1412,12 @@ list_frame_generator (Lisp_Window *w)
     {
 	XMoveResizeWindow (dpy, w->frame, w->attr.x, w->attr.y,
 			   w->frame_width, w->frame_height);
+
 	if (w->reparented)
-	    XMoveWindow (dpy, w->id, -w->frame_x, -w->frame_y);
+	    XMoveResizeWindow (dpy, w->id, -w->frame_x, -w->frame_y,
+			       w->attr.width, w->attr.height);
+	else
+	    XResizeWindow (dpy, w->id, w->attr.width, w->attr.height);
     }
 
     w->destroy_frame = frame_part_destroyer;
@@ -1422,8 +1435,8 @@ list_frame_generator (Lisp_Window *w)
     if (w->reparented)
 	XLowerWindow (dpy, w->id);
 
-    /* make the initial frame shape */
-    set_frame_shapes (w, TRUE);
+    if (!w->reparented || !bigger)
+	set_frame_shapes (w, TRUE);
 
     /* ICCCM says we must unmap the client window when it's hidden */
     {
