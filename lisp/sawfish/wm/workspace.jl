@@ -326,6 +326,21 @@
       (setq space (cdr space))
       (when space
 	(setq menu (cons nil menu))))
+    ;; search for any iconified windows that aren't anywhere else in the menu
+    (let
+	(extra)
+      (mapc #'(lambda (w)
+		(when (and (window-get w 'iconified)
+			   (not (window-get w 'workspace)))
+		  (setq extra (cons (list (window-name w)
+					  `(lambda ()
+					     (display-window
+					      (get-window-by-id
+					       ,(window-id w)))))
+				    extra))))
+	    (managed-windows))
+      (when extra
+	(setq menu (nconc extra (list nil) menu))))
     (nreverse menu)))
 
 (defun popup-window-list ()
@@ -470,7 +485,8 @@ previous workspace."
   (interactive "f")
   (when (window-get w 'iconified)
     (window-put w 'iconified nil)
-    (cond ((eq (window-get w 'workspace) current-workspace)
+    (cond ((or (not (window-get w 'worspace))
+	       (eq (window-get w 'workspace) current-workspace))
 	   (show-window w))
 	  (uniconify-to-current-workspace
 	   (ws-remove-window w)
@@ -484,7 +500,9 @@ previous workspace."
   "Display the workspace containing the window W, then focus on W."
   (interactive "f")
   (when w
-    (if (and (window-get w 'iconified) uniconify-to-current-workspace)
+    (if (and (window-get w 'iconified)
+	     (or uniconify-to-current-workspace
+		 (not (window-get w 'workspace))))
 	(uniconify-window w)
       (let
 	  ((space (window-get w 'workspace)))
@@ -552,4 +570,5 @@ all workspaces."
   (add-hook 'window-state-change-hook 'ws-set-client-state t)
   (add-hook 'sm-window-save-functions 'ws-save-session)
   (add-hook 'sm-restore-window-hook 'ws-restore-session)
+  (sm-add-saved-properties 'sticky 'iconified)
   (mapc 'ws-add-window (managed-windows)))
