@@ -99,9 +99,8 @@
 	(setq cancel-widget (stock-button 'cancel))
 	(gtk-window-set-title main-window (_ "Sawfish configurator"))
 	(gtk-widget-set-name main-window (_ "Sawfish configurator"))
-	(gtk-window-set-wmclass main-window "main" "Nokogiri"))
-
-      (gtk-signal-connect main-window "delete_event" on-quit)
+	(gtk-window-set-wmclass main-window "main" "Nokogiri")
+	(gtk-signal-connect main-window "delete_event" on-quit))
       (gtk-container-add main-window vbox)
 
       (unless socket-id
