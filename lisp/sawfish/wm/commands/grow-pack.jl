@@ -44,6 +44,7 @@
 	  sawfish.wm.misc
 	  sawfish.wm.util.rects
 	  sawfish.wm.state.maximize
+	  sawfish.wm.state.iconify
 	  sawfish.wm.custom
 	  sawfish.wm.commands
 	  sawfish.wm.workspace
@@ -178,6 +179,7 @@ already in the window, then does like `maybe'.
 	   ;; If window does not overlap W but does overlap the
 	   ;; larger W, then we need to avoid this window.
 	   (and (window-mapped-p x)
+		(not (window-iconified-p x))
 		(window-appears-in-workspace-p x current-workspace)
 		(<= (rect-2d-overlap* (list xleft xtop xright xbottom)
 				      (list wleft wtop wright wbottom)) 0)
