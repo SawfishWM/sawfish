@@ -269,11 +269,11 @@
     (when pseudo
       (put x 'wm-spec-pseudo-state t)))
 
-  (define (supported-state-p x) (get x 'wm-spec-state))
-  (define (pseudo-state-p x) (get x 'wm-spec-pseudo-state))
+  (define (supported-state-p x) (and (symbolp x) (get x 'wm-spec-state)))
+  (define (pseudo-state-p x) (and (symbolp x) (get x 'wm-spec-pseudo-state)))
 
   (define (call-state-fun w state mode)
-    (let ((fun (get state 'wm-spec-state)))
+    (let ((fun (and (symbolp state) (get state 'wm-spec-state))))
       (when fun
 	(fun w mode))))
 
