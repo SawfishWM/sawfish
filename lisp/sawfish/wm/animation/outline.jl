@@ -29,6 +29,8 @@
 	  sawfish.wm.util.window-outline
 	  rep.io.timers)
 
+  (define-structure-alias anim-outline sawfish.wm.animation.outline)
+
   (defvar anim-outline-icon-coords (cons (screen-width) (screen-height)))
 
   (defvar anim-outline-steps 16)
@@ -91,7 +93,9 @@
 	 (if (window-get w 'iconified)
 	     (anim-outline-run w mode (window-position w)
 			       (window-frame-dimensions w)
-			       anim-outline-icon-coords '(1 . 1)))))))
+			       (or (window-get w 'icon-position)
+				   anim-outline-icon-coords)
+			       '(1 . 1)))))))
 
   (define (wireframe-animator w op #!optional action)
     (anim-outline-entry 'box w op action))
