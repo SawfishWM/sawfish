@@ -35,7 +35,7 @@ DEFSYM(add_window_hook, "add-window-hook");
 DEFSYM(before_add_window_hook, "before-add-window-hook");
 DEFSYM(place_window_hook, "place-window-hook");
 DEFSYM(placed, "placed");
-
+DEFSYM(after_framing_hook, "after-framing-hook");
 DEFSYM(after_initialization_hook, "after-initialization-hook");
 
 /* for visibility-notify-hook */
@@ -571,6 +571,7 @@ new frame constructed as specified by FRAME.
 	create_window_frame (VWIN(win));
 
     Fungrab_server ();
+    Fcall_window_hook (Qafter_framing_hook, win, Qnil, Qnil);
     return VWIN(win)->frame_style;
 }
 
@@ -586,6 +587,7 @@ Reinitialises and recalibrates the window frame of WINDOW.
     {
 	VWIN(win)->rebuild_frame (VWIN(win));
 	refresh_frame_parts (VWIN(win));
+	Fcall_window_hook (Qafter_framing_hook, win, Qnil, Qnil);
     }
     return win;
 }
@@ -1145,6 +1147,7 @@ windows_init (void)
     rep_INTERN(add_window_hook);
     rep_INTERN(place_window_hook);
     rep_INTERN(placed);
+    rep_INTERN(after_framing_hook);
     rep_INTERN(after_initialization_hook);
 
     rep_INTERN(fully_obscured);
