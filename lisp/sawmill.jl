@@ -37,7 +37,7 @@
 (load-all "autoload.jl" t)
 (load-all (concat "os-" (symbol-name operating-system)) t)
 
-;; If we connected with a session manager, initialise our state
+;; load always-present session-manager stuff
 (require 'sm-init)
 
 ;; load libraries that may affect window state _after_ sm-init
@@ -83,6 +83,13 @@
 ;; use a default theme if none given
 (unless (or batch-mode default-frame-style)
   (set-frame-style fallback-frame-style))
+
+;; now connect with the session manager; gsm requires that apps don't
+;; connect until they're ready to handle the later priority levels
+(let
+    ((tem (get-command-line-option "--sm-client-id" t)))
+  (when (and (not batch-mode) (getenv "SESSION_MANAGER"))
+    (sm-init tem)))
 
 ;; Use all arguments which are left.
 (let
