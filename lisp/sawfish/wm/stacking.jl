@@ -27,7 +27,7 @@
 ;; represents the level of normal windows, negative for windows below
 ;; this level, and positive for windows above the normal level
 
-(defcustom transients-above 'none
+(defcustom transients-above 'parents
   "Keep transient windows stacked above: \\w"
   :group misc
   :type (choice all parents none)
@@ -303,6 +303,29 @@ lowest possible position. Otherwise raise it as far as allowed."
   "Put the window in the stacking level above its current level."
   (interactive "%W")
   (set-window-depth w (1+ (window-get w 'depth))))
+
+
+;; stacking groups of windows
+
+(defun raise-windows (w order)
+  (mapc raise-window order)
+  (raise-window w))
+
+(defun lower-windows (w order)
+  (mapc lower-window (nreverse order))
+  (lower-window w))
+
+(defun raise-lower-windows (w order)
+  (if (or (eq (window-visibility w) 'unobscured)
+	  (and (window-on-top-p (car order))
+	       ;; look for the group as a block.. this is a heuristic
+	       (let loop ((rest (memq (car order) (stacking-order))))
+		 (cond ((null rest) nil)
+		       ((eq (car rest) w) t)
+		       ((memq (car rest) order) (loop (cdr rest)))
+		       (t nil)))))
+      (lower-windows w order)
+    (raise-windows w order)))
 
 
 ;; hooks
