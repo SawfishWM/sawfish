@@ -25,10 +25,20 @@ This file is loaded @emph{after} @file{sawmill-defaults}, but @emph{before}
 @end table
 
 
+@item I just created my @file{.sawmillrc} file, now the GNOME support
+is broken?
+
+You need the line @samp{(require 'gnome)} in your @file{.sawmillrc}
+
+(This is usually done by the @file{sawmill-defaults} library, which
+doesn't get loaded if @file{~/.sawmillrc} exists)
+
+
 @item What's this @code{sawmill-client} program?
 
 This allows you to connect to a window manager process and evaluate
-arbitrary Lisp forms. Do @samp{sawmill-client -?} for more details.
+arbitrary Lisp forms. Do @samp{sawmill-client -?} for more details
+(@samp{sawmill-client -} for a read-eval-print loop)
 
 By default you can only connect from the host running the wm (through a
 unix-domain socket in the @file{~/.sawmill} directory). To enable the
@@ -62,12 +72,6 @@ subprocess
 
 See the @samp{Popup Menus} node in the Info manual (@pxref{Popup
 Menus})
-
-
-@item I just created my @file{.sawmillrc} file, now the GNOME support
-is broken?
-
-You need the line @samp{(require 'gnome)} in your @file{.sawmillrc}
 
 
 @item How do I create a new theme?

@@ -12,14 +12,19 @@ they occurred between. For more detailed information see the
 @itemize @bullet
 
 @item Implemented virtual workspaces, bind to the
-@code{move-viewport-@var{x}} commands (for @var{x} being @code{left},
-@code{right}, @code{up}, or @code{down})
+@code{move-viewport-@var{x}} and @code{move-window-@var{x}} commands
+(for @var{x} being @code{left}, @code{right}, @code{up}, or
+@code{down})
 
 @item Added a new theme: @code{microGUI} by Ryan Lovett
 @email{ryan@@ocf.berkeley.edu}, based on the QNX Photon screenshots
 
 @item Added a @samp{Grab key} button in the bindings widget, replaces
 the current binding with the next pressed key
+
+@item Lisp module to load the GNOME menus and use them to replace the
+applications menu. Add @code{(require 'gnome-menu)} to your
+@file{~/.sawmillrc} file to load it
 
 @item Network server is disabled by default (since it can provide a
 security hole if X access control is disabled); re-enabled the old unix
@@ -54,6 +59,9 @@ resized or moved
 defocused
 
 @item Fix problems when @samp{--prefix} option has a trailing slash
+
+@item Now handles client windows being reparented by a third party
+(i.e. swallowing apps)
 
 @end itemize
 

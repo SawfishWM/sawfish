@@ -39,8 +39,6 @@ Outstanding bugs
   ! ICCCM says we should not passive grab on the client windows, but on
     our frames instead
 
-  ! swallowing windows to the panel doesn't work?
-
   ! transient windows decorated as the non-transient ones, but certain
     applications like XMMS (that should not show decoraions at all)
     shows them in the playlist window and the equalizer window
@@ -57,11 +55,23 @@ Outstanding bugs
   ! rebuild-frame shouldn't change any parts whose appearance (i.e.
     geometry, contents) haven't changed (need to store more state)
 
+  ! desk-guide misinterprets the window geometries when there's more
+    than one workspace, with multiple viewports
+
+    (it looks as though it expects only windows on the _current_
+    workspace to be moved with the viewport; the old gnome pager gets
+    this right, so I don't think it's my fault. But enlightenment works
+    with desk-guide but not with the old pager..!?)
+
+    also, when workspaces are added it sometimes doesn't notice that
+    the contents of the current workspace changed (since it still has
+    the same index, i.e. insert before the first and move to it)
+
 
 General tasks
 =============
 
-  + option to re-place windows when they move workspaces?
+  + option to re-place windows when they move workspaces/viewports?
 
   + use panes to separate areas in bindings widget
 
@@ -85,10 +95,12 @@ General tasks
   + features for the gnome/redhat guys:
 
     * code to read the gnome apps menu, then replace apps-menu
+      [2/10: this is pretty much done]
 
     * remove restart/quit/[about?] from the root menu
 
     * launch capplet instead of standalone config tool
+      [use customize-program and customize-group-opt to do this]
 
     * 2x2 workspaces [30/9: this has been done]
 

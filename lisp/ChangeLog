@@ -1,3 +1,24 @@
+1999-10-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keymaps.jl: noted in doc strings that certain keymaps are
+	only useful for mouse-bindings
+
+	* viewport.jl (set-viewport): call viewport-moved-hook from
+	here, instead of set-screen-viewport
+
+1999-10-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome-menu.jl: new file, read the GNOME menu entries and
+	replace the apps-menu
+
+	* workspace.jl (ws-saved-state, ws-load-state): normalize
+	workspace numbers to zero when saving/loading the session
+
+	* viewport.jl (set-window-viewport, move-window-viewport): new
+	functions
+	(move-window-left, move-window-right, move-window-up,
+	move-window-down): new commands
+
 1999-10-01  John Harper  <john@dcs.warwick.ac.uk>
 
 	* viewport.jl (move-viewport-to-window): new function

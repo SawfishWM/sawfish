@@ -1,3 +1,13 @@
+1999-10-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (reparent_notify): handle case where we're not doing
+	the reparenting--unadopt the window and reissue the reparent
+	request
+
+1999-10-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* server.c (server_init): chmod the socket to rwx------
+
 1999-10-01  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c (list_frame_generator): when hide-client is set,
