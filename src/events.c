@@ -483,6 +483,9 @@ map_request (XEvent *ev)
 
     if (!w->client_unmapped)
 	XMapWindow (dpy, w->id);
+    else
+	/* wouldn't happen otherwise */
+	Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 
     if (w->visible)
 	XMapWindow (dpy, w->frame);
@@ -542,7 +545,8 @@ static void
 unmap_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xunmap.window);
-    if (w != 0 && ev->xunmap.window == w->id && ev->xunmap.event == w->id)
+    if (w != 0 && ev->xunmap.window == w->id
+	&& (ev->xunmap.event == w->id || ev->xunmap.send_event))
     {
 	w->mapped = FALSE;
 	if (w->reparented)
@@ -559,9 +563,11 @@ unmap_notify (XEvent *ev)
 	    destroy_window_frame (w, FALSE);
 	}
 	Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
-	
+
 	if (focus_window == w)
 	    focus_on_window (0);
+
+	XDeleteProperty (dpy, w->id, xa_wm_state);
     }
 }
 
