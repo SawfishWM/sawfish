@@ -60,10 +60,11 @@
     (setq viewport-y-offset y)
     (call-hook 'viewport-moved-hook)))
 
-(add-hook 'before-exit-hook
-	  #'(lambda ()
-	      (set-screen-viewport 0 0)
-	      (mapc 'move-window-to-current-viewport (managed-windows))))
+(defun viewport-before-exiting ()
+  (set-screen-viewport 0 0)
+  (mapc 'move-window-to-current-viewport (managed-windows)))
+
+(add-hook 'before-exit-hook 'viewport-before-exiting t)
 
 
 ;; screen sized viewport handling
@@ -97,7 +98,7 @@
       ((pos (window-position window))
        (right (- (* viewport-columns (screen-width)) viewport-x-offset))
        (bottom (- (* viewport-rows (screen-height)) viewport-y-offset)))
-    (or (>= (car pos) right) (>= (car pos) bottom))))
+    (or (>= (car pos) right) (>= (cdr pos) bottom))))
 
 (defun window-outside-viewport-p (window)
   (let
@@ -132,6 +133,12 @@
 			       (screen-width)) col)
 			 (+ (/ (+ (cdr pos) viewport-y-offset)
 			       (screen-height)) row))))
+
+(defun window-viewport (w)
+  (let
+      ((position (window-position w)))
+    (cons (/ (+ (car position) viewport-x-offset) (screen-width))
+	  (/ (+ (cdr position) viewport-y-offset) (screen-height)))))
 
 (defun viewport-size-changed ()
   (let
@@ -202,10 +209,7 @@
       (rplacd position (mod (cdr position) (screen-height))))
     `((position . ,(cons (mod (car position) (screen-width))
 			 (mod (cdr position) (screen-height))))
-      (viewport . ,(cons (/ (+ (car position) viewport-x-offset)
-			    (screen-width))
-			 (/ (+ (cdr position) viewport-y-offset)
-			    (screen-height)))))))
+      (viewport . ,(window-viewport w)))))
 
 (defun viewport-load-state (w alist)
   (let
