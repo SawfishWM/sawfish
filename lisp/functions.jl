@@ -154,6 +154,14 @@ list of strings DIRS."
 (define-command-args 'run-shell-command
 		     `(and (labelled ,(_ "Command:") string)))
 
+(defun command-sequence (commands)
+  "Invoke the list of commands, one by one."
+  (interactive)
+  (mapc call-command commands))
+
+(define-command-args 'command-sequence
+		     `(and (quoted (list command ,(_ "Command")))))
+
 (defun window-really-wants-input-p (w)
   "Return nil if window W should never be focused."
   (and (not (window-get w 'never-focus))
