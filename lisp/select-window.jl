@@ -26,15 +26,15 @@
 ;; returns that window
 ;;;###autoload
 (defun select-window ()
-  (grab-pointer (or (input-focus) (car (managed-windows)))
-		(get-cursor 'crosshair))
-  (unwind-protect
-      (progn
-	(let
-	    ((override-keymap select-window-map))
-	  (catch 'select-window
-	    (recursive-edit))))
-    (ungrab-pointer)))
+  (when (grab-pointer (or (input-focus) (car (managed-windows)))
+		      (get-cursor 'crosshair))
+    (unwind-protect
+	(progn
+	  (let
+	      ((override-keymap select-window-map))
+	    (catch 'select-window
+	      (recursive-edit))))
+      (ungrab-pointer))))
 
 (defun select-window-finished ()
   (interactive)
