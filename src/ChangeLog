@@ -1,5 +1,20 @@
 1999-10-27  John Harper  <john@dcs.warwick.ac.uk>
 
+	* events.c (synthesize_button_release): function to be called
+	when ungrabbing the pointer
+	* functions.c (Fungrab_pointer): call synthesize_button_release
+
+	* events.c (Fquery_last_pointer): replaced this function by
+	Fquery_button_press_pointer, instead of returning the last but
+	one mouse position, return the position at the last ButtonPress
+	event. This helps us work-around problems when MotionNotify
+	events are received without an immediately preceding ButtonPress
+
+	* windows.c (Fwindow_id): return nil if the client window has
+	been deleted
+	(Fwindow_frame_dimensions): call Fwindow_dimensions if the
+	window is currently unframed
+
 	* events.c (property_notify): update cached WM_TRANSIENT_FOR
 	property when it changes
 

@@ -86,6 +86,7 @@ extern repv Qvisibility_notify_hook, Qdestroy_notify_hook, Qmap_notify_hook,
 extern repv Qiconify_window, Quniconify_window;
 extern struct frame_part *clicked_frame_part;
 extern void unclick_current_fp (void);
+extern void synthesize_button_release (void);
 extern void map_request (XEvent *ev);
 extern void send_synthetic_configure (Lisp_Window *w);
 extern long get_event_mask (int type);
@@ -94,7 +95,7 @@ extern void deregister_event_handler (Window w);
 extern void handle_input_mask(long mask);
 extern void handle_sync_input(int fd);
 extern repv Fquery_pointer (repv get);
-extern repv Fquery_last_pointer (void);
+extern repv Fquery_button_press_pointer (void);
 extern repv Fquery_pointer_window (void);
 extern repv Fcurrent_event_window (repv win);
 extern void events_init (void);

@@ -1,5 +1,28 @@
 1999-10-27  John Harper  <john@dcs.warwick.ac.uk>
 
+	* rects.jl (rectangles-from-windows): replace the weight-alist
+	parameter by weight-fun, an optional function to return the
+	window's weight
+
+	* functions.jl (avoided-windows-re, window-avoided-p,
+	avoided-windows): moved from maximize.jl and generalized,
+	property to set is now `avoid' instead of `maximize-avoid'
+	* maximize.jl: use the common avoided windows mechanism
+	* gnome.jl: set `avoid' property not `maximize-avoid'
+
+	* smart-placement.jl (sp-important-windows,
+	sp-auto-weight-alist): deleted these variables, any windows
+	that aren't avoided-p get given weight sp-avoided-windows-weight;
+	other windows can have their `placement-weight' property set
+
+	* stacking.jl (transients-above): changed default value to none
+
+	* move-resize.jl: use query-button-press-pointer instead of
+	query-last-pointer
+
+	* maximize.jl (maximize-avoided-windows): don't include
+	unmapped windows
+
 	* maximize.jl (maximize-expand-edges): rewrote the (not
 	maximize-always-expands) case, so that it works (find the
 	largest gap)
