@@ -1220,7 +1220,7 @@ exec rep "$0" "$@"
   (let
       ((output (sawfish-eval
 		`(progn
-		   (require 'sawfish.wm.themeing.make-theme-preview)
+		   (require 'sawfish.wm.theming.make-theme-preview)
 		   (make-theme-preview ',patterns-alist
 				       ',frames-alist
 				       ',mapping-alist)))))
