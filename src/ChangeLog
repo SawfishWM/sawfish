@@ -1,3 +1,15 @@
+2000-02-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl: use `quotient' instead of `/' where
+	appropriate. Define `quotient' to `/' if unbound
+
+	* windows.c, functions.c, events.c, display.c, commands.c: use
+	the non-fixnum number representations where appropriate (where
+	32-bit data may be found)
+
+	* sawmill.h, main.c: define rep_INTEGERP (), rep_make_long_uint
+	() and rep_get_long_uint () if rep_INTERFACE < 8
+
 2000-02-24  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-ui.jl: put the theme README in a scroller
