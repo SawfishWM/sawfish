@@ -19,6 +19,8 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(provide 'slide-window)
+
 (defcustom slide-window-increment 16
   "Number of pixels to move window in `slide-' commands."
   :group misc
