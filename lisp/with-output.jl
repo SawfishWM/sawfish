@@ -21,9 +21,9 @@
 
 ;;;###autoload
 (defun call-with-output-to-screen (thunk)
-  "Call the zero-parameter function THUNK with the `standard-output' stream
-bound so that output is collected. After THUNK returns, the emitted text
-will be display on the screen."
+  "Call the zero-parameter function THUNK with the `standard-output'
+stream bound so that output is collected. After THUNK returns, the
+emitted text will be display on the screen."
   (let
       ((standard-output (make-string-output-stream)))
     (unwind-protect
@@ -43,3 +43,9 @@ will be display on the screen."
   "Prompt for a command, execute it, and print any output to the screen."
   (interactive "CCommand:")
   (call-with-output-to-screen (lambda () (call-command command))))
+
+;;;###autoload
+(defmacro with-output-to-screen (&rest forms)
+  "Evaluate FORMS. Any data they print to standard-output will be
+displayed on the screen after they return."
+  `(call-with-output-to-screen (lambda () ,@forms)))
