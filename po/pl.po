@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Sawfish 0.29\n"
-"POT-Creation-Date: 2000-07-02 16:18+0100\n"
-"PO-Revision-Date: 2000-07-05 00:25+0200\n"
+"Project-Id-Version: Sawfish 0.30\n"
+"POT-Creation-Date: 2000-07-09 15:36+0100\n"
+"PO-Revision-Date: 2000-07-13 00:25+0200\n"
 "Last-Translator: GnomePL Team <translators@gnome.pl>\n"
 "Language-Team: Polski <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,6 +30,14 @@ msgstr "Odtwarzanie efektów d¼wiêkowych dla niezarz±dzanych okien."
 #. ../lisp/audio-events.jl
 msgid "Map window events to sound files."
 msgstr "Przypisz zdarzenia okna do plików d¼wiêkowych."
+
+#. ../lisp/audio-events.jl
+msgid "Event"
+msgstr "Zdarzenie"
+
+#. ../lisp/audio-events.jl
+msgid "Sample"
+msgstr "Odtwórz"
 
 #. ../lisp/auto-raise.jl
 msgid "Raise windows when they are focused."
@@ -268,6 +276,16 @@ msgid "Command:"
 msgstr "Polecenie:"
 
 #. ../lisp/functions.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Wywo³uje listê poleceñ"
+
+#. ../nokogiri/nokogiri-widgets/keymap.jl
+#. ../nokogiri/nokogiri-widgets/command.jl
+#. ../lisp/functions.jl
+msgid "Command"
+msgstr "Polecenie"
+
+#. ../lisp/functions.jl
 msgid "Force the current window to have a unique title."
 msgstr "Wymu¶ niepowtarzaln± nazwê bie¿±cego okna."
 
@@ -335,7 +353,8 @@ msgstr "Grupowanie okien potomnych z macierzystymi."
 
 #. ../lisp/group-funs.jl
 msgid "List of group ids that always exist, even when they have no members."
-msgstr "Lista identyfikatorów grup, które istniej± nawet je¶li brak cz³onków grupy."
+msgstr ""
+"Lista identyfikatorów grup, które istniej± nawet je¶li brak cz³onków grupy."
 
 #. ../lisp/group-funs.jl
 msgid "New group"
@@ -394,6 +413,14 @@ msgstr "Ponownie za³aduj ustawienia gtkrc."
 #. ../lisp/iconify.jl
 msgid "Unmanaged windows may be iconified."
 msgstr "Niezarz±dzane okna mog± byæ minimalizowane."
+
+#. ../lisp/iconify.jl
+msgid "Iconifying a window also iconifies the: \\w"
+msgstr "Minimalizacja okna minimalizuje tak¿e: \\w"
+
+#. ../lisp/iconify.jl
+msgid "Uniconifying a window also uniconifies the: \\w"
+msgstr "Przywracanie okna przywraca tak¿e: \\w"
 
 #. ../lisp/iconify.jl
 msgid "Iconify the window."
@@ -535,8 +562,7 @@ msgstr "Inne"
 msgid ""
 "Maximizing a window in one dimension must increase the size of that "
 "dimension."
-msgstr ""
-"Maksymalizacja okna w danym kierunku zwiêksza jego rozmiar."
+msgstr "Maksymalizacja okna w danym kierunku zwiêksza jego rozmiar."
 
 #. ../lisp/maximize.jl
 msgid "Raise windows when they are maximized."
@@ -956,7 +982,7 @@ msgid ""
 "is used."
 msgstr ""
 "Program u¿ywany do odtwarzania d¼wiêków. Je¶li nie zaznaczone, uruchamiana "
-"jestwbudowana obs³uga ESD."
+"jest wbudowana obs³uga ESD."
 
 #. ../lisp/prompt-wm.jl
 msgid "Window:"
@@ -1039,6 +1065,14 @@ msgid ""
 msgstr ""
 "Przywo³aj okno które otrzyma³o bie¿±ce zdarzenie i powtórz zdarzenia,\n"
 "które wywo³a³y polecenie."
+
+#. ../lisp/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it has,\n"
+"then replay any pointer events that invoked the command."
+msgstr ""
+"Przywo³aj okno które otrzyma³o bie¿±ce zdarzenie oraz wszystkie jego potomne\n"
+"i powtórz zdarzenia,które wywo³a³y polecenie."
 
 #. ../lisp/raise-commands.jl
 msgid ""
@@ -1195,7 +1229,9 @@ msgstr "Przesuñ okno o poziom wy¿ej w stosie."
 
 #. ../lisp/stagger-placement.jl
 msgid "Distance between successive placements in `stagger' placement mode."
-msgstr "Odleg³o¶æ pomiêdzy kolejnymi pozycjami pojawiaj±cych siê okien w trybie \"stagger\"."
+msgstr ""
+"Odleg³o¶æ pomiêdzy kolejnymi pozycjami pojawiaj±cych siê okien w trybie "
+"\"stagger\"."
 
 #. ../lisp/tooltips.jl
 msgid "Display tooltips for window frames."
@@ -1237,9 +1273,27 @@ msgstr "Aktywacja okna przy pierwszym wy¶wietleniu."
 msgid "Dialog windows inherit the focus from their parent."
 msgstr "Dziedziczenie aktywno¶ci przez okna potomne."
 
-#. ../lisp/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr "Liczba kolumn i rzêdów (pulpitów) na wirtualnych biurkach: \\w"
+#. ../lisp/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr "Przywo³aj okno i jego okna potomne na wierzch stosu."
+
+#. ../lisp/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr "Odwo³aj okno i jego okna potomne na spód stosu."
+
+#. ../lisp/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
+msgstr ""
+"Je¶li okno jest na wierzchu stosu, odwo³aj je na spód; w przeciwnym\n"
+"wypadku przywo³aj je. Dotyczy tak¿e wszystkich jego okien potomnych."
 
 #. ../lisp/viewport.jl
 msgid "Windows uniconify to the current viewport."
@@ -1248,6 +1302,22 @@ msgstr "Przywracanie zminimalizowanych okien na bie¿±cy pulpit."
 #. ../lisp/viewport.jl
 msgid "Select the specified viewport."
 msgstr "Wybór danego pulpitu."
+
+#. ../lisp/viewport.jl
+msgid "Column:"
+msgstr "Kolumna:"
+
+#. ../lisp/viewport.jl
+msgid "Row:"
+msgstr "Rz±d:"
+
+#. ../lisp/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Wybór danej kolumny pulpitu."
+
+#. ../lisp/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Wybór danego rzêdu pulpitu."
 
 #. ../lisp/viewport.jl
 msgid "Move the current window to the specified viewport."
@@ -1330,21 +1400,22 @@ msgid "Prompt for a command, execute it, and print any output to the screen."
 msgstr "Wczytaj polecenie, wykonaj je i wy¶wietl rezultaty."
 
 #. ../lisp/workspace.jl
+msgid "Virtual desktop configuration."
+msgstr "Konfiguracja wirtualnego biurka."
+
+#. ../lisp/workspace.jl
 msgid "When passing the first or last workspace: \\w"
 msgstr "Czynno¶æ wykonywana po miniêciu pierwszego lub ostatniego biurka: \\w"
 
 #. ../lisp/workspace.jl
 msgid "When passing the first or last workspace, while moving a window: \\w"
 msgstr ""
-"Czynno¶æ wykonywana po przeniesieniu okna za pierwsze lub ostatnie biurko: \\w"
+"Czynno¶æ wykonywana po przeniesieniu okna za pierwsze lub ostatnie biurko: "
+"\\w"
 
 #. ../lisp/workspace.jl
 msgid "Workspaces are deleted when their last window closes."
 msgstr "Do³±czanie biurka do nastêpnika po zamkniêciu ostatniego okna."
-
-#. ../lisp/workspace.jl
-msgid "Minimum number of workspaces: \\w"
-msgstr "Minimalna ilo¶æ biurek: \\w"
 
 #. ../lisp/workspace.jl
 msgid "Preserve empty workspaces in pager."
@@ -1367,8 +1438,8 @@ msgid "Windows are focused after being uniconified."
 msgstr "Aktywacja zminimalizowanych okien po przywróceniu."
 
 #. ../lisp/workspace.jl
-msgid "Dialog windows are opened on the same workspace as their application."
-msgstr "Otwieranie okien potomnych na biurku okna macierzystego."
+msgid "Dialogs appear on the same workspace as their application."
+msgstr "Okna dialogowe na tych samych biurkach co ich aplikacja."
 
 #. ../lisp/workspace.jl
 msgid "Raise selected windows (normally by the Windows menu)."
@@ -1383,16 +1454,12 @@ msgid "Warp the pointer to selected windows."
 msgstr "Przesuwanie wska¼nika do wybranych okien."
 
 #. ../lisp/workspace.jl
-msgid "Iconifying a window iconifies its whole group."
-msgstr "Usuwanie grupy okien przy minimalizacji jednego z cz³onków grupy."
-
-#. ../lisp/workspace.jl
-msgid "Uniconifying a window uniconifies its whole group."
-msgstr "Przywracanie grupy okien przy przywracaniu jednego z cz³onków grupy."
-
-#. ../lisp/workspace.jl
 msgid "Workspace names."
 msgstr "Biurka"
+
+#. ../lisp/workspace.jl
+msgid "Name"
+msgstr "Nazwa"
 
 #. ../lisp/workspace.jl
 msgid "Insert workspace"
@@ -1566,8 +1633,8 @@ msgstr ""
 #. ../lisp/x-cycle.jl
 msgid "Cycle through all windows in the same group as the current window."
 msgstr ""
-"Przechodzenie cyklicznie przez wszystkie okna nale¿±ce do tej samej grupy, co "
-"bie¿±ce."
+"Przechodzenie cyklicznie przez wszystkie okna nale¿±ce do tej samej grupy, "
+"co bie¿±ce."
 
 #. ../lisp/x-cycle.jl
 msgid ""
@@ -1579,25 +1646,56 @@ msgstr ""
 
 #. ../lisp/x-cycle.jl
 msgid "Cycle through all windows with the same class as the current window."
-msgstr "Przechodzenie cyklicznie przez wszystkie okna tej samej klasy co bie¿±ce."
+msgstr ""
+"Przechodzenie cyklicznie przez wszystkie okna tej samej klasy co bie¿±ce."
 
-#. ../nokogiri/nokogiri-shell.jl
-#. ../nokogiri/nokogiri-dialog.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+#. ../nokogiri/nokogiri-gnome.jl
+msgid "Revert"
+msgstr "Przywróæ"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
 msgid "OK"
 msgstr "OK"
 
-#. ../nokogiri/nokogiri-shell.jl
-#. ../nokogiri/nokogiri-dialog.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
 msgid "Cancel"
 msgstr "Anuluj"
 
-#. ../nokogiri/nokogiri-shell.jl
-msgid "Try"
-msgstr "Wypróbuj"
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Apply"
+msgstr "Zastosuj"
 
-#. ../nokogiri/nokogiri-shell.jl
-msgid "Revert"
-msgstr "Przywróæ"
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Yes"
+msgstr "Tak"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "No"
+msgstr "Nie"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Close"
+msgstr "Zamknij"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Help"
+msgstr "Pomoc"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Workspaces:"
+msgstr "Biurka:"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "X:"
+msgstr "X:"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Y:"
+msgstr "Y:"
 
 #. ../nokogiri/nokogiri-shell.jl
 msgid "Sawfish configurator"
@@ -1622,6 +1720,19 @@ msgstr "Warto¶æ"
 msgid "Select color"
 msgstr "Wybierz kolor"
 
+#. ../nokogiri/nokogiri-widgets/command.jl
+msgid "Undocumented"
+msgstr "Nieudokumentowane"
+
+#. ../nokogiri/nokogiri-widgets/match-window.jl
+#. ../nokogiri/nokogiri-widgets/event.jl
+msgid "Grab..."
+msgstr "Przechwyæ..."
+
+#. ../nokogiri/nokogiri-widgets/event.jl
+msgid "Key:"
+msgstr "Klawisz:"
+
 #. ../themer/themer.in
 #. ../nokogiri/nokogiri-widgets/font.jl
 #. ../nokogiri/nokogiri-widgets/file.jl
@@ -1637,26 +1748,13 @@ msgstr "Wybierz plik"
 msgid "Select font"
 msgstr "Wybierz czcionkê"
 
+#. ../nokogiri/nokogiri-widgets/icon.jl
+msgid "Select Icon"
+msgstr "Wybierz ikonê"
+
 #. ../nokogiri/nokogiri-widgets/keymap.jl
 msgid "Edit binding"
 msgstr "Skróty"
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Command"
-msgstr "Polecenie:"
-
-#. ../nokogiri/nokogiri-widgets/match-window.jl
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Grab..."
-msgstr "Przechwyæ..."
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Undocumented"
-msgstr "Nieudokumentowane"
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Key:"
-msgstr "Klawisz:"
 
 #. ../nokogiri/nokogiri-widgets/list.jl
 msgid "Insert..."
@@ -1990,10 +2088,6 @@ msgstr "Mapuj: "
 msgid "Mapping"
 msgstr "Mapowanie"
 
-#. ../themer/themer.glade:527 ../themer/themer.glade:775
-msgid "Name"
-msgstr "Nazwa"
-
 #. ../themer/themer.glade:86
 msgid "New Theme"
 msgstr "Nowy motyw"
@@ -2081,6 +2175,15 @@ msgstr "_Ustawienia"
 #. ../themer/themer.glade:262
 msgid "_Themes"
 msgstr "_Motywy"
+
+#~ msgid "Number of columns and rows in each virtual workspace: \\w"
+#~ msgstr "Liczba kolumn i rzêdów (pulpitów) na wirtualnych biurkach: \\w"
+
+#~ msgid "Minimum number of workspaces: \\w"
+#~ msgstr "Minimalna ilo¶æ biurek: \\w"
+
+#~ msgid "Try"
+#~ msgstr "Wypróbuj"
 
 #~ msgid "Grab key..."
 #~ msgstr "Przechwyæ skrót..."
