@@ -26,14 +26,14 @@
   :group focus)
 
 (defcustom shade-hover-mode nil
-  "Enable shade-hover mode. (Temporarily unshade windows
-while pointer is over them.)"
+  "Enable shade-hover mode.
+(Temporarily unshade windows while pointer is over them.)"
   :group (focus shade-hover)
   :type boolean
   :require shade-hover)
 
 (defcustom shade-hover-delay 250
-  "Delay in microseconds before unshading windows."
+  "Delay in milliseconds before unshading windows."
   :group (focus shade-hover)
   :type number
   :range (1 . 5000))
