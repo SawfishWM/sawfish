@@ -22,7 +22,7 @@
 (provide 'focus)
 
 (defcustom focus-mode 'enter-exit
-  "How does the mouse pointer affect the input focus."
+  "When does the mouse pointer affect the input focus."
   :type (set enter-exit enter-only click)
   :group focus
   :after-set focus-mode-changed)
