@@ -59,9 +59,11 @@
 	  (gtk-table-attach-defaults table button 2 3 i (1+ i))
 	  (gtk-signal-connect button "clicked"
 	   (lambda ()
-	     (let ((string (gtk-entry-get-text (gtk-combo-entry combo))))
+	     (let* ((string (gtk-entry-get-text (gtk-combo-entry combo)))
+		    (x-prop (and string (car (rassoc string
+						     l10n-x-properties)))))
 	       (when string
-		 (let ((prop (wm-grab-x-property string)))
+		 (let ((prop (wm-grab-x-property (or x-prop (intern string)))))
 		   (gtk-entry-set-text entry (if (stringp prop)
 						 prop
 					       "")))))))
