@@ -105,10 +105,12 @@
   (let
       ((pos (window-position window))
        (dims (window-frame-dimensions window))
+       (left (- viewport-x-offset))
        (right (- (* viewport-columns (screen-width)) viewport-x-offset))
+       (top (- viewport-y-offset))
        (bottom (- (* viewport-rows (screen-height)) viewport-y-offset)))
     (or (>= (car pos) right) (>= (cdr pos) bottom)
-	(<= (+ (car pos) (car dims)) 0) (<= (+ (cdr pos) (cdr dims)) 0))))
+	(<= (+ (car pos) (car dims)) left) (<= (+ (cdr pos) (cdr dims)) top))))
 
 (defun window-outside-viewport-p (window)
   (let
