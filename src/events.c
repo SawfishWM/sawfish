@@ -1042,7 +1042,8 @@ configure_request (XEvent *ev)
 	{
 	    /* Be sure to send one (and only one) synthetic ConfigureNotify
 	       to the window. The ICCCM states that we should send the event
-	       even if the state of the window doesn't change */
+	       even if the state of the window doesn't change. But not
+	       if the window has been resized */
 
 	    Fsynthetic_configure_mutex (Qt);
 	    send_synthetic_configure (w);

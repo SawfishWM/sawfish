@@ -276,6 +276,7 @@ Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
     VWIN(win)->attr.width = rep_INT(width);
     VWIN(win)->attr.height = rep_INT(height);
     fix_window_size (VWIN(win));
+    VWIN (win)->pending_configure = 0;
     Fcall_window_hook (Qwindow_resized_hook, win, Qnil, Qnil);
     return win;
 }
@@ -303,7 +304,10 @@ Reconfigure the geometry of window object WINDOW as specified.
     VWIN(win)->attr.width = rep_INT(width);
     VWIN(win)->attr.height = rep_INT(height);
     if (resized)
+    {
 	fix_window_size (VWIN(win));
+	VWIN (win)->pending_configure = 0;
+    }
     if (moved && !resized)
     {
 	XMoveWindow (dpy, VWIN(win)->reparented ? VWIN(win)->frame

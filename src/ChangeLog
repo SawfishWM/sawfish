@@ -1,3 +1,12 @@
+2001-03-29  John Harper  <jsh@eazel.com>
+
+	Fixed an ICCCM compliance problem:
+
+	* functions.c, events.c (configure_request, Fresize_window_to,
+	Fmove_resize_window_to): don't send a synthetic configure
+	notify event if the window was resized (in which case a real
+	configure notify was generated)
+
 2001-03-21  John Harper  <jsh@eazel.com>
 
 	* fonts.c (x_create_font_set): reverted the last change to
