@@ -1,5 +1,14 @@
 1999-10-07  John Harper  <john@dcs.warwick.ac.uk>
 
+	* place-window.jl (place-window): ignore-program-position may
+	now be set for each window
+	(place-window-randomly): handle dimensions >= the screen
+	* smart-placement.jl (sp-do-placement): handle window
+	dimensions near or greater the screen size better
+
+	* workspace.jl (lock-first-workspace): enabled by default (too
+	many people think the other behaviour is a bug)
+
 	* viewport.jl (window-outside-viewport-p): new function
 
 	* window-order.jl (window-order): new optional arg ALL-VIEWPORTS

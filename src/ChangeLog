@@ -1,5 +1,8 @@
 1999-10-07  John Harper  <john@dcs.warwick.ac.uk>
 
+	* display.c, libclient.c (canonical_display): canonicalise any
+	given hostname (i.e. tizer:0 => tizer.dcs.warwick.ac.uk:0.0)
+
 	* events.c, display.c (destroy_notify, error_handler): don't
 	set focus_window = 0, if the current window is destroyed,
 	instead let remove_window () or emit_pending_destroys () call
