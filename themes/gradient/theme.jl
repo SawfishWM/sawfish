@@ -30,7 +30,7 @@
 
 (defgroup gradient-frame "Gradient frame")
 
-(defcustom gradient-gradient-type 'diagonal
+(defcustom gradient-gradient-type 'horizontal
   "Direction of gradient in `gradient' frame style."
   :type (set horizontal vertical diagonal)
   :group gradient-frame
