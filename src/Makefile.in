@@ -27,8 +27,8 @@ srcdir=@srcdir@
 VPATH=@srcdir@:@top_srcdir@
 
 SRCS :=	colors.c cursors.c display.c events.c fonts.c frames.c \
-	functions.c images.c keys.c main.c pixmap-cache.c server.c \
-	session.c stacking-list.c windows.c
+	functions.c images.c keys.c main.c multihead.c pixmap-cache.c \
+	server.c session.c stacking-list.c windows.c
 OBJS := $(SRCS:.c=.o)
 
 DL_SRCS := gradient.c flippers.c x.c selection.c play-sample.c

@@ -1,3 +1,15 @@
+2001-06-20  John Harper  <jsh@pixelslut.com>
+
+	* sawmill_subrs.h, multihead.c, main.c, Makefile.in: support a
+	`--multiehead' command-line option. When given and the X server
+	has more than one screen, fork extra copies of sawfish for each
+	extra screen. This has some fundamental problems (e.g. the
+	copies share files in ~/.sawfish without any synchronization),
+	but seems to be useful for some people..
+
+	The other people who contributed to this feature are Michael
+	Vogt and Mahmood Ali
+
 2001-06-12  John Harper  <jsh@pixelslut.com>
 
 	* display.c (sys_init): if XQueryShapeExtension fails, print a

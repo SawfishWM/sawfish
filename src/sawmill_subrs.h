@@ -262,6 +262,9 @@ extern void add_hook (repv sym, repv fun);
 extern repv module_symbol_value (repv mod, repv sym);
 extern repv global_symbol_value (repv sym);
 
+/* from multihead.c */
+extern void multihead_init (int *argcp, char ***argvp);
+
 /* from pixmap-cache.c */
 #ifdef NEED_PIXMAP_CACHE
 extern bool pixmap_cache_ref (Lisp_Image *im, int width, int height,
