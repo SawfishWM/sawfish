@@ -82,6 +82,7 @@
 (require 'transient)
 (require 'iconify)
 (require 'shading)
+(require 'window-anim)
 (require 'server)
 (require 'compat)
 
