@@ -33,7 +33,8 @@ static char *prog_name;
 DEFSYM(sawmill_directory, "sawmill-directory");
 DEFSYM(sawmill_lisp_lib_directory, "sawmill-lisp-lib-directory");
 DEFSYM(sawmill_site_lisp_directory, "sawmill-site-lisp-directory");
-DEFSYM(sawmill_exec_directory, "sawmill-exec-directory"); /*
+DEFSYM(sawmill_exec_directory, "sawmill-exec-directory");
+DEFSYM(sawmill_version, "sawmill-version"); /*
 ::doc:Vsawmill-directory::
 The directory in which all of sawmill's installed data files live.
 ::end::
@@ -45,6 +46,9 @@ The name of the directory in which site-specific Lisp files are stored.
 ::end::
 ::doc:Vsawmill-exec-directory::
 The name of the directory containing sawmill's architecture specific files.
+::end::
+::doc:Vsawmill-version::
+A string defining the version number of the current sawmill release.
 ::end:: */
 
 /* some errors */
@@ -54,6 +58,7 @@ DEFSYM(invalid_pos, "invalid-pos");
 DEFSTRING(err_invalid_pos, "Invalid position");
 DEFSYM(bad_event_desc, "bad-event-desc");
 DEFSTRING(err_bad_event_desc, "Invalid event description");
+DEFSTRING(version_string, SAWMILL_VERSION);
 
 static rep_bool
 on_idle (int since_last)
@@ -134,6 +139,9 @@ sawmill_symbols (void)
 
     rep_SYM(Qdl_load_path)->value = Fcons(rep_SYM(Qsawmill_exec_directory)->value,
 					  rep_SYM(Qdl_load_path)->value);
+
+    rep_INTERN(sawmill_version);
+    rep_SYM(Qsawmill_version)->value = rep_VAL(&version_string);
 
     rep_INTERN(window_error); rep_ERROR(window_error);
     rep_INTERN(invalid_pos); rep_ERROR(invalid_pos);
