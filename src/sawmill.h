@@ -231,6 +231,14 @@ struct frame_part {
     int render_scale, rendered_state;
 
     repv cursor;
+
+    /* cached state of the window */
+    struct {
+	int width, height;
+	repv font, text;
+	repv x_justify, y_justify;
+	repv fg, bg;
+    } drawn;
 };
 
 /* codes for the clean_exit_jmp_buf */
