@@ -50,6 +50,8 @@
 
 ;; Private functions are prefixed by ws-
 
+(eval-when-compile '(require 'sawfish.wm.menus))
+
 (define-structure sawfish.wm.workspace
 
     (export current-workspace
@@ -633,7 +635,8 @@
 	(let ((ws-name (or (nth (- i (car limits)) workspace-names)
 			   (format nil (_ "space %d")
 				   (1+ (- i (car limits)))))))
-	  (setq menu (cons (list (format nil "%s%s" ws-name
+	  (setq menu (cons (list (format nil "%s%s"
+					 (quote-menu-item ws-name)
 					 (if (= i current-workspace) " *" ""))
 				 (lambda () (select-workspace i)))
 			   menu))))

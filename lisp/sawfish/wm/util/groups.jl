@@ -153,8 +153,9 @@ id of the new group."
 					    (substring name 0 20) "...")))
 			      (when (eq id group-id)
 				(setq name (concat name " *")))
-			      (list name (lambda ()
-					   (add-window-to-group w id)))))
+			      (list (quote-menu-item name)
+				    (lambda ()
+				      (add-window-to-group w id)))))
 			  group-ids))
       (rplacd menus (cons '() (cdr menus)))
       (nconc menus

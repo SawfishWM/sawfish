@@ -26,18 +26,19 @@
     (open rep
 	  sawfish.wm.windows
 	  sawfish.wm.workspace
+	  sawfish.wm.misc
 	  sawfish.wm.util.display-window)
 
   (define-structure-alias old-window-menu sawfish.wm.ext.old-window-menu)
 
   (define (make-label w)
     (let ((name (window-name w)))
-      (concat (and (window-get w 'iconified) ?\[)
-	      (if (> (length name) 20)
-		  (concat (substring name 0 20) "...")
-		name)
-	      (and (window-get w 'iconified)  ?\])
-	      (and (eq (input-focus) w) " *"))))
+      (quote-menu-item (concat (and (window-get w 'iconified) ?\[)
+			       (if (> (length name) 20)
+				   (concat (substring name 0 20) "...")
+				 name)
+			       (and (window-get w 'iconified)  ?\])
+			       (and (eq (input-focus) w) " *")))))
 
   (define (old-window-menu)
     (let* ((limits (workspace-limits))

@@ -42,14 +42,14 @@
 
   (define (make-label w)
     (let ((name (window-name w)))
-      (concat (cond ((window-get w 'iconified) ?\[)
-		    ((not (window-appears-in-workspace-p
-			   w current-workspace)) ?\())
-	      (abbreviate name 48)
-	      (cond ((window-get w 'iconified)  ?\])
-		    ((not (window-appears-in-workspace-p
-			   w current-workspace)) ?\)))
-	      (and (eq (input-focus) w) " *"))))
+      (quote-menu-item (concat (cond ((window-get w 'iconified) ?\[)
+				     ((not (window-appears-in-workspace-p
+					    w current-workspace)) ?\())
+			       (abbreviate name 48)
+			       (cond ((window-get w 'iconified)  ?\])
+				     ((not (window-appears-in-workspace-p
+					    w current-workspace)) ?\)))
+			       (and (eq (input-focus) w) " *")))))
 
   (define (make-item w)
     (list (make-label w)
