@@ -209,15 +209,16 @@
 	  (setq last-workarea workarea)))
 
       (define (set-window-hints w)
-	(cond ((window-sticky-p/workspace w)
-	       (set-x-property w '_NET_WM_DESKTOP
-			       (vector #xffffffff) 'CARDINAL 32))
-	      ((window-get w 'swapped-in)
-	       ;; XXX the gnome-wm standard sucks..!
-	       (let ((space (window-get w 'swapped-in)))
-		 (set-x-property w '_NET_WM_DESKTOP
-				 (vector (- space (car limits)))
-				 'CARDINAL 32)))))
+	(let ((vec (if (window-sticky-p/workspace w)
+		       (vector #xffffffff)
+		     (let ((space (or (window-get w 'swapped-in)
+				      (car (window-workspaces w)))))
+		       (and space (vector (- space (car limits))))))))
+	  (unless (equal vec (window-get w 'wm-spec/last-workspace))
+	    (if vec
+		(set-x-property w '_NET_WM_DESKTOP vec 'CARDINAL 32)
+	      (delete-x-property w '_NET_WM_DESTOP))
+	    (window-put w 'wm-spec/last-workspace vec))))
 
       ;; calculate workareas
       (do ((i 0 (1+ i)))
