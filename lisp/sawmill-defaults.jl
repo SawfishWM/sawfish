@@ -38,6 +38,5 @@
 	      (throw 'out t)))
 	  (list-x-properties 'root))))
 
-;; turn on tooltips for first-time users
+;; load tooltips for first-time users
 (require 'tooltips)
-(setq tooltips-enabled t)
