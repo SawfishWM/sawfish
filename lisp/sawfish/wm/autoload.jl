@@ -168,6 +168,7 @@
 (defgroup tooltips "Tooltips" :group misc :require sawfish.wm.ext.tooltips)
 (autoload-placement-mode 'first-fit 'sawfish.wm.placement.smart)
 (autoload-placement-mode 'best-fit 'sawfish.wm.placement.smart)
+(autoload-placement-mode 'best-fit-group 'sawfish.wm.placement.smart)
 (autoload-placement-mode 'first-fit-or-interactive 'sawfish.wm.placement.smart)
 (autoload-placement-mode 'stagger 'sawfish.wm.placement.stagger)
 (autoload-command (quote maximize-window) (quote sawfish.wm.state.maximize))

@@ -1,3 +1,22 @@
+2000-10-29  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/placement/smart.jl (sp-make-grid): don't add root
+	window points if they're already in the list; add (1-
+	(screen-width)) etc, so that these points aren't chopped
+
+	(sp-get-windows): new optional parameter PRED, a predicate
+	function to use to select the windows to check for overlap.
+	Also included a fix from David Bustos <bustos@its.caltech.edu>
+	to fix a typo in the window-mapped-p check
+
+	(sp-do-placement): new keyword arg #:window-filter, passed to
+	sp-get-windows
+
+	(place-window-best-fit-group): new placement mode
+	`best-fit-group'. Same as `best-fit', except that windows not
+	in the same group as the window being placed aren't included in
+	the overlap calculation (useful for transients)
+
 2000-10-28  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/custom-defaults.jl: added some more settings;
