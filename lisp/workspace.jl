@@ -648,7 +648,7 @@
 	(extra)
       (mapc (lambda (w)
 	      (when (and (window-get w 'iconified) (window-get w 'sticky))
-		(setq extra (cons (list (make-label name)
+		(setq extra (cons (list (make-label w)
 					`(display-window
 					  (get-window-by-id ,(window-id w))))
 				  extra))))
