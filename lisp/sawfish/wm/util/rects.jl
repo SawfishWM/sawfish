@@ -100,33 +100,32 @@ grid."
       (setq y-edges (cons 0 (nconc y-edges (list (screen-height))))))
     (cons (uniquify-list x-edges) (uniquify-list y-edges))))
 
-(defmacro rectangle-area (rect)
+(defun rectangle-area (rect)
   "Given a rectangle RECT, return its area."
-  `(* (- (nth 2 ,rect) (nth 0 ,rect))
-      (- (nth 3 ,rect) (nth 1 ,rect))))
+  (* (- (nth 2 rect) (nth 0 rect))
+     (- (nth 3 rect) (nth 1 rect))))
 
-(defun spans-heads-p (point dims)
-  "Return t if rectangle RECT appears on more than one of the screens heads."
-  (let ((corners
-	 (lambda ()
-	   (list point
-		 (cons (car point) (+ (cdr point) (cdr dims)))
-		 (cons (+ (car point) (car dims)) (cdr point))
-		 (cons (+ (car point) (car dims))
-		       (+ (cdr point) (cdr dims)))))))
-    (or (< (car point) 0)
-	(< (cdr point) 0)
-	(>= (+ (car point) (car dims)) (screen-width))
-	(>= (+ (cdr point) (cdr dims)) (screen-height))
-	(apply /= (mapcar find-head (corners))))))
+(defun rectangle-from-coords (point dims)
+  "Return a list representing the rectangle with origin POINT and dimensions
+DIMS."
+  (list (car point) (cdr point)
+	(+ (car point) (car dims)) (+ (cdr point) (cdr dims))))
+
+(defun rectangle-corners (rect)
+  "Return a list of four cons cells representing the coordinates of the corners
+of the rectangle RECT."
+  (list (cons (nth 0 rect) (nth 1 rect))
+	(cons (nth 0 rect) (nth 3 rect))
+	(cons (nth 2 rect) (nth 1 rect))
+	(cons (nth 2 rect) (nth 3 rect))))
 
 
 ;; overlap
 
-(defmacro rect-1d-overlap (a-1 a-2 b-1 b-2)
+(defun rect-1d-overlap (a-1 a-2 b-1 b-2)
   "Returns the overlap between two 1D line segments, A-1 to A-2, and
 B-1 to B-2."
-  `(max 0 (- (min ,a-2 ,b-2) (max ,a-1 ,b-1))))
+  (max 0 (- (min a-2 b-2) (max a-1 b-1))))
 
 (defun rect-2d-overlap (dims point rect)
   "Returns the overlap between two rectangles, one defined as having
@@ -160,3 +159,15 @@ DIMS and POINT, and the list of rectangles RECTS when placed at POINT."
   "Return t if RECT is completely inside the screen boundaries."
   (and (>= (car rect) 0) (>= (nth 1 rect) 0)
        (<= (nth 2 rect) (screen-width)) (<= (nth 3 rect) (screen-height))))
+
+(defun rectangle-heads (rect)
+  "Return the number of screen heads that rectangle RECT appears on."
+  (let loop ((head 0)
+	     (count 0))
+    (if (= head (head-count))
+	count
+      (loop (1+ head)
+	    (if (> (rect-2d-overlap (head-dimensions head)
+				    (head-offset head) rect) 0)
+		(1+ count)
+	      count)))))
