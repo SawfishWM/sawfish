@@ -1,3 +1,32 @@
+2000-05-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.27.1
+
+	* 3d-hack.jl (3d-rotate flatten): use inexact->exact on
+	transformed coordinates (fixes bug introduced by rounding
+	functions now preserving inexactness)
+
+	* maximize.jl (maximize-do-horizontal, maximize-do-vertical):
+	use current-head-dimensions and current-head-offset of the
+	maximized window to give the maximization bounds
+
+	(maximize-find-max-rectangle): new optional arg HEAD, the head
+	to constrain the rectangle to. Also, the output rectangle may
+	only span a single head
+
+	(maximize-do-both): constrain the maximized window to its
+	current head
+
+	* functions.jl (current-head, current-head-dimensions,
+	current-head-offset): all now take an optional window
+	parameter, which means to find the current head in relation to
+	this window (else use the focused window)
+
+	* functions.jl (get-window-by-name-re): new function
+
+	* sawmill.jl: after renaming .sawmill -> .sawfish, create a
+	symlink .sawmill in case user code refers to it
+
 2000-05-09  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.27
