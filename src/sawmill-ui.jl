@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.19 1999/09/07 16:48:47 john Exp $
+;; $Id: sawmill-ui.jl,v 1.20 1999/09/07 19:40:43 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -23,9 +23,9 @@ exec rep "$0" "$@"
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(setq print-length 5)
-(setq print-depth 3)
-(setq debug-on-error t)
+;(setq print-length 5)
+;(setq print-depth 3)
+;(setq debug-on-error t)
 
 (require 'gtk)
 
@@ -34,6 +34,7 @@ exec rep "$0" "$@"
 (defvar ui-debug nil)
 
 (defvar ui-group t)
+(defvar ui-socket-id nil)
 
 (defvar ui-active nil)
 
@@ -292,8 +293,8 @@ exec rep "$0" "$@"
 
 (defun build-entry:changed (spec)
   (unless (get-key spec ':in-apply-hook)
-    (add-hook 'ui-apply-changed-hook `(lambda ()
-					(build-entry:set ',spec)))
+    (ui-add-apply-hook `(lambda ()
+			  (build-entry:set ',spec)))
     (ui-set-button-states)
     (set-key spec ':in-apply-hook nil)))
 
@@ -829,55 +830,63 @@ exec rep "$0" "$@"
        (ui-original-values nil)
        (ui-changed-variables nil)
        (ui-active t)
-       (ui-window (gtk-window-new 'toplevel))
+       (ui-window (if ui-socket-id
+		      (gtk-plug-new ui-socket-id)
+		    (gtk-window-new 'toplevel)))
        (ui-root (build-ui spec))
        (vbox (gtk-vbox-new nil 0))
        (hbox (gtk-hbutton-box-new))
-       (ui-ok (gtk-button-new-with-label "OK"))
-       (ui-apply (gtk-button-new-with-label "Try"))
-       (ui-revert (and ui-enable-revert (gtk-button-new-with-label "Revert")))
-       (refresh (and ui-enable-refresh (gtk-button-new-with-label "Refresh")))
-       (cancel (gtk-button-new-with-label "Cancel")))
-    (gtk-window-set-title ui-window "Sawmill configurator")
-    (gtk-widget-set-name ui-window "Sawmill configurator")
+       ui-ok ui-apply ui-revert refresh cancel)
+    (unless ui-socket-id
+      (setq ui-ok (gtk-button-new-with-label "OK"))
+      (setq ui-apply (gtk-button-new-with-label "Try"))
+      (setq ui-revert (and ui-enable-revert
+			  (gtk-button-new-with-label "Revert")))
+      (setq refresh (and ui-enable-refresh
+			 (gtk-button-new-with-label "Refresh")))
+      (setq cancel (gtk-button-new-with-label "Cancel"))
+      (gtk-window-set-title ui-window "Sawmill configurator")
+      (gtk-widget-set-name ui-window "Sawmill configurator"))
     (gtk-signal-connect ui-window "delete_event" 'ui-quit)
     (gtk-container-add ui-window vbox)
     (gtk-box-set-spacing vbox ui-box-spacing)
     (gtk-container-border-width vbox ui-box-border)
     (gtk-box-set-spacing hbox ui-box-spacing)
     (gtk-container-border-width hbox ui-box-border)
-    (gtk-box-pack-end vbox hbox)
     (gtk-button-box-set-layout hbox 'end)
-    (gtk-signal-connect ui-ok "clicked" 'ui-ok)
-    (gtk-signal-connect ui-apply "clicked" 'ui-apply)
-    (gtk-signal-connect cancel "clicked" 'ui-cancel)
-    (when ui-enable-revert
-      (gtk-signal-connect ui-revert "clicked" #'(lambda () (ui-revert))))
-    (when ui-enable-refresh
-      (gtk-signal-connect refresh "clicked" 'ui-refresh))
-    (gtk-container-add hbox ui-apply)
-    (when ui-enable-revert
-      (gtk-container-add hbox ui-revert))
-    (gtk-container-add hbox ui-ok)
-    (gtk-container-add hbox cancel)
-    (when ui-enable-refresh
-      (gtk-container-add hbox refresh))
+    (unless ui-socket-id
+      (gtk-box-pack-end vbox hbox)
+      (gtk-signal-connect ui-ok "clicked" 'ui-ok)
+      (gtk-signal-connect ui-apply "clicked" 'ui-apply)
+      (gtk-signal-connect cancel "clicked" 'ui-cancel)
+      (when ui-enable-revert
+	(gtk-signal-connect ui-revert "clicked" #'(lambda () (ui-revert))))
+      (when ui-enable-refresh
+	(gtk-signal-connect refresh "clicked" 'ui-refresh))
+      (gtk-container-add hbox ui-apply)
+      (when ui-enable-revert
+	(gtk-container-add hbox ui-revert))
+      (gtk-container-add hbox ui-ok)
+      (gtk-container-add hbox cancel)
+      (when ui-enable-refresh
+	(gtk-container-add hbox refresh)))
     (gtk-container-add vbox ui-root)
     (ui-set-button-states)
     (gtk-widget-show-all ui-window)
-    (while t
+    (while ui-window
       (gtk-main))))
 
 (defun ui-set-button-states ()
-  (when ui-apply
-    (gtk-widget-set-sensitive ui-apply (or ui-values-to-apply
-					   ui-apply-changed-hook)))
-  (when ui-revert
-    (gtk-widget-set-sensitive ui-revert ui-changed-variables))
-  (when ui-apply
-    (gtk-widget-set-sensitive ui-ok (or ui-values-to-apply
-					ui-apply-changed-hook
-					ui-changed-variables))))
+  (unless ui-socket-id
+    (when ui-apply
+      (gtk-widget-set-sensitive ui-apply (or ui-values-to-apply
+					     ui-apply-changed-hook)))
+    (when ui-revert
+      (gtk-widget-set-sensitive ui-revert ui-changed-variables))
+    (when ui-apply
+      (gtk-widget-set-sensitive ui-ok (or ui-values-to-apply
+					  ui-apply-changed-hook
+					  ui-changed-variables)))))
 
 (defun ui-set-button-label (button text)
   (mapc #'(lambda (w)
@@ -887,7 +896,18 @@ exec rep "$0" "$@"
 
 ;; acting on settings
 
+(defun ui-add-apply-hook (fun)
+  (when (and ui-socket-id
+	     (null ui-values-to-apply)
+	     (null ui-apply-changed-hook))
+    (ui-capplet-state-changed))
+  (add-hook 'ui-apply-changed-hook fun))
+
 (defun ui-set (spec symbol value)
+  (when (and ui-socket-id
+	     (null ui-values-to-apply)
+	     (null ui-apply-changed-hook))
+    (ui-capplet-state-changed))
   (ui-set-original spec symbol)
   (setq ui-values-to-apply (delete-if #'(lambda (x)
 					  (eq (car x) spec))
@@ -978,6 +998,31 @@ exec rep "$0" "$@"
     (gtk-widget-show-all ui-window)
     (ui-set-button-states)))
 
+(defun ui-capplet-input ()
+  (let
+      ((tem (read-line standard-input)))
+    (condition-case nil
+	(progn
+	  (cond ((string-match "apply" tem)
+		 (ui-apply))
+		((string-match "revert" tem)
+		 (ui-revert))
+		((string-match "ok" tem)
+		 (ui-ok))
+		((string-match "cancel" tem)
+		 (ui-revert t)
+		 (gtk-widget-destroy ui-window)
+		 (setq ui-window nil)))
+	  (write standard-output ?\001)
+	  (flush-file standard-output)
+	  (when (null ui-window)
+	    (gtk-main-quit)))
+      (end-of-stream))))
+
+(defun ui-capplet-state-changed ()
+  (write standard-output ?c)
+  (flush-file standard-output))
+
 
 ;; utilities
 
@@ -997,7 +1042,12 @@ exec rep "$0" "$@"
   (when (setq tem (get-command-line-option "--group" t))
     (setq ui-group (intern tem)))
   (when (get-command-line-option "--notebook")
-    (setq ui-pages-style 'notebook)))
+    (setq ui-pages-style 'notebook))
+  (when (setq tem (get-command-line-option "--socket-id" t))
+    (setq ui-socket-id (read-from-string tem))))
+
+(when ui-socket-id
+  (set-input-handler standard-input 'ui-capplet-input))
 
 (show-ui (ui-get-spec))
 
