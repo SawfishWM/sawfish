@@ -34,7 +34,7 @@ static XFontSet x_create_font_set (char *xlfd, char ***missing,
 
 
 DEFUN("get-font", Fget_font, Sget_font, (repv name), rep_Subr1) /*
-::doc:get-font::
+::doc:sawfish.wm.fonts#get-font::
 get-font NAME
 
 Return the font object representing the font named NAME (a standard X
@@ -129,7 +129,7 @@ font specifier string).
 }
 
 DEFUN("font-get", Ffont_get, Sfont_get, (repv win, repv prop), rep_Subr2) /*
-::doc::Sfont-get::
+::doc:sawfish.wm.fonts#:Sfont-get::
 font-get FONT PROPERTY
 
 Return the property PROPERTY (a symbol) associated with FONT.
@@ -152,7 +152,7 @@ Return the property PROPERTY (a symbol) associated with FONT.
 }
 
 DEFUN("font-put", Ffont_put, Sfont_put, (repv win, repv prop, repv val), rep_Subr3) /*
-::doc:font-put::
+::doc:sawfish.wm.fonts#font-put::
 font-put FONT PROPERTY VALUE
 
 Set the property PROPERTY (a symbol) associated with FONT to VALUE.
@@ -179,7 +179,7 @@ Set the property PROPERTY (a symbol) associated with FONT to VALUE.
 }
 
 DEFUN("font-name", Ffont_name, Sfont_name, (repv font), rep_Subr1) /*
-::doc:font-name::
+::doc:sawfish.wm.fonts#font-name::
 font-name FONT
 
 Return the name of the font represented by the font object FONT.
@@ -190,7 +190,7 @@ Return the name of the font represented by the font object FONT.
 }
 
 DEFUN("fontp", Ffontp, Sfontp, (repv win), rep_Subr1) /*
-::doc:fontp::
+::doc:sawfish.wm.fonts#fontp::
 fontp ARG
 
 Return t if ARG is a font object.
@@ -222,7 +222,7 @@ x_draw_string (Window id, repv font, GC gc,
 }
 
 DEFUN("text-width", Ftext_width, Stext_width, (repv string, repv font), rep_Subr2) /*
-::doc:text-width::
+::doc:sawfish.wm.fonts#text-width::
 text-width STRING [FONT]
 
 Return the number of horizontal pixels that would be required to display
@@ -238,7 +238,7 @@ the text STRING using font object FONT (or the default-font).
 }
 
 DEFUN("font-height", Ffont_height, Sfont_height, (repv font), rep_Subr1) /*
-::doc:font-height::
+::doc:sawfish.wm.fonts#font-height::
 font-height [FONT]
 
 Return the bounding height of glyphs rendered using FONT (or the
@@ -252,7 +252,7 @@ default-font).
 }
 
 DEFUN("font-ascent", Ffont_ascent, Sfont_ascent, (repv font), rep_Subr1) /*
-::doc:font-ascent::
+::doc:sawfish.wm.fonts#font-ascent::
 font-ascent [FONT]
 
 Return the ascent of glyphs rendered using FONT (or the
@@ -266,7 +266,7 @@ default-font).
 }
 
 DEFUN("font-descent", Ffont_descent, Sfont_descent, (repv font), rep_Subr1) /*
-::doc:font-descent::
+::doc:sawfish.wm.fonts#font-descent::
 font-descent [FONT]
 
 Return the descent of glyphs rendered using FONT (or the

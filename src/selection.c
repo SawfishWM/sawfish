@@ -37,7 +37,7 @@ symbol_to_atom (repv sym)
 
 DEFUN ("x-selection-active-p", Fx_selection_active_p,
        Sx_selection_active_p, (repv sel), rep_Subr1) /*
-::doc:x-selection-active-p::
+::doc:sawfish.wm.util.selection#x-selection-active-p::
 x-selection-active-p SELECTION
 
 Returns t if the X11 selection defined by the symbol SELECTION is
@@ -58,7 +58,7 @@ selnotify_pred (Display *dpy, XEvent *ev, XPointer arg)
 
 DEFUN ("x-get-selection", Fx_get_selection,
        Sx_get_selection, (repv sel), rep_Subr1) /*
-::doc:x-get-selection::
+::doc:sawfish.wm.util.selection#x-get-selection::
 x-get-selection SELECTION
 
 Returns the string corresponding to the current value of the X11

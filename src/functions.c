@@ -68,7 +68,7 @@ DEFSYM(spacing, "spacing");
 
 DEFUN("restack-windows", Frestack_windows, Srestack_windows,
       (repv list), rep_Subr1) /*
-::doc:restack-windows::
+::doc:sawfish.wm.windows.subrs#restack-windows::
 restack-windows LIST
 
 Restack all windows in the list of windows LIST in the order they occur
@@ -131,7 +131,7 @@ do_raise_lower (repv win, repv sib, u_int mode)
 
 DEFUN("x-raise-window", Fx_raise_window, Sx_raise_window,
       (repv win, repv above), rep_Subr2) /*
-::doc:x-raise-window::
+::doc:sawfish.wm.windows.subrs#x-raise-window::
 x-raise-window WINDOW [ABOVE]
 
 Raise WINDOW so that it is above window ABOVE. If ABOVE is undefined,
@@ -143,7 +143,7 @@ raise WINDOW to the top of the stacking order.
 
 DEFUN("x-lower-window", Fx_lower_window, Sx_lower_window,
       (repv win, repv below), rep_Subr2) /*
-::doc:x-lower-window::
+::doc:sawfish.wm.windows.subrs#x-lower-window::
 x-lower-window WINDOW [BELOW]
 
 Lower WINDOW so that it is below window BELOW. If BELOW is undefined,
@@ -164,7 +164,7 @@ DEFUN("x-kill-client", Fx_kill_client, Sx_kill_client,
 }
 
 DEFUN_INT("destroy-window", Fdestroy_window, Sdestroy_window, (repv win), rep_Subr1, "%W") /*
-::doc:destroy-window::
+::doc:sawfish.wm.windows.subrs#destroy-window::
 destroy-window WINDOW
 
 Destroy WINDOW with out giving the owning application any warning.
@@ -182,7 +182,7 @@ WINDOW may be a window object or a numeric window id.
 }
 
 DEFUN("warp-cursor", Fwarp_cursor, Swarp_cursor, (repv x, repv y), rep_Subr2) /*
-::doc:warp-cursor::
+::doc:sawfish.wm.misc#warp-cursor::
 warp-cursor X Y
 
 Move the mouse pointer to position (X, Y) relative to the origin of the
@@ -204,7 +204,7 @@ root window.
 
 DEFUN("move-window-to", Fmove_window_to, Smove_window_to,
       (repv win, repv x, repv y), rep_Subr3) /*
-::doc:move-window-to::
+::doc:sawfish.wm.windows.subrs#move-window-to::
 move-window-to WINDOW X Y
 
 Move the top-left corner of window object WINDOW to (X, Y).
@@ -228,7 +228,7 @@ Move the top-left corner of window object WINDOW to (X, Y).
 
 DEFUN("resize-window-to", Fresize_window_to, Sresize_window_to,
       (repv win, repv width, repv height), rep_Subr3) /*
-::doc:resize-window-to::
+::doc:sawfish.wm.windows.subrs#resize-window-to::
 resize-window-to WINDOW WIDTH HEIGHT
 
 Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
@@ -246,7 +246,7 @@ Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
 
 DEFUN("move-resize-window-to", Fmove_resize_window_to, Smove_resize_window_to,
       (repv win, repv x, repv y, repv width, repv height), rep_Subr5) /*
-::doc:move-resize-window-to::
+::doc:sawfish.wm.windows.subrs#move-resize-window-to::
 move-resize-window-to WINDOW X Y WIDTH HEIGHT
 
 Reconfigure the geometry of window object WINDOW as specified.
@@ -282,7 +282,7 @@ Reconfigure the geometry of window object WINDOW as specified.
 }
 
 DEFUN("grab-server", Fgrab_server, Sgrab_server, (void), rep_Subr0) /*
-::doc:grab-server::
+::doc:sawfish.wm.misc#grab-server::
 grab-server
 
 Prevent any other clients from accessing the X server. See `ungrab-server'.
@@ -298,7 +298,7 @@ Prevent any other clients from accessing the X server. See `ungrab-server'.
 }
 
 DEFUN("ungrab-server", Fungrab_server, Sungrab_server, (void), rep_Subr0) /*
-::doc:ungrab-server::
+::doc:sawfish.wm.misc#ungrab-server::
 ungrab-server
 
 After a call to `grab-server' this will allow other clients to access
@@ -317,7 +317,7 @@ Note that calls to `grab-server' and `ungrab-server' _nest_.
 
 DEFUN("server-grabbed-p", Fserver_grabbed_p,
       Sserver_grabbed_p, (void), rep_Subr0) /*
-::doc:server-grabbed-p::
+::doc:sawfish.wm.misc#server-grabbed-p::
 server-grabbed-p
 
 Return t if the server is currently grabbed.
@@ -341,7 +341,7 @@ regrab_server (void)
 DEFUN("grab-pointer", Fgrab_pointer, Sgrab_pointer,
       (repv win, repv cursor, repv ptr_sync, repv kbd_sync, repv confine_to),
       rep_Subr5) /*
-::doc:grab-pointer::
+::doc:sawfish.wm.events#grab-pointer::
 grab-pointer [WINDOW] [CURSOR] [PTR-SYNC] [KBD-SYNC] [CONFINE-TO]
 
 Grab the pointer and direct all pointer events to window object
@@ -409,7 +409,7 @@ again:
 }
 
 DEFUN("ungrab-pointer", Fungrab_pointer, Sungrab_pointer, (void), rep_Subr0) /*
-::doc:ungrab-pointer::
+::doc:sawfish.wm.events#ungrab-pointer::
 ungrab-pointer
 
 Release the grab on the mouse pointer.
@@ -423,7 +423,7 @@ Release the grab on the mouse pointer.
 
 DEFUN("grab-keyboard", Fgrab_keyboard, Sgrab_keyboard,
       (repv win, repv ptr_sync, repv kbd_sync), rep_Subr3) /*
-::doc:grab-keyboard::
+::doc:sawfish.wm.events#grab-keyboard::
 grab-keyboard [WINDOW] [PTR-SYNC] [KBD-SYNC]
 
 Grab the keyboard and direct all keyboard events to window object
@@ -468,7 +468,7 @@ again:
     
 DEFUN("ungrab-keyboard", Fungrab_keyboard,
       Sungrab_keyboard, (void), rep_Subr0) /*
-::doc:ungrab-keyboard::
+::doc:sawfish.wm.events#ungrab-keyboard::
 ungrab-keyboard
 
 Release the grab on the keyboard.
@@ -480,7 +480,7 @@ Release the grab on the keyboard.
 }
 
 DEFUN("screen-width", Fscreen_width, Sscreen_width, (void), rep_Subr0) /*
-::doc:screen-width::
+::doc:sawfish.wm.misc#screen-width::
 screen-width
 
 Return the width of the root window (in pixels).
@@ -490,7 +490,7 @@ Return the width of the root window (in pixels).
 }
 
 DEFUN("screen-height", Fscreen_height, Sscreen_height, (void), rep_Subr0) /*
-::doc:screen-height::
+::doc:sawfish.wm.misc#screen-height::
 screen-height
 
 Return the height of the root window (in pixels).
@@ -500,7 +500,7 @@ Return the height of the root window (in pixels).
 }
 
 DEFUN("sync-server", Fsync_server, Ssync_server, (void), rep_Subr0) /*
-::doc:sync-server::
+::doc:sawfish.wm.misc#sync-server::
 sync-server
 
 Flush all pending X requests, don't wait for them to finish.
@@ -512,7 +512,7 @@ Flush all pending X requests, don't wait for them to finish.
 
 DEFUN("delete-x-property", Fdelete_x_property, Sdelete_x_property,
       (repv win, repv atom), rep_Subr2) /*
-::doc:delete-x-property::
+::doc:sawfish.wm.misc#delete-x-property::
 delete-x-property WINDOW ATOM
 
 Delete the X property ATOM (a symbol) of WINDOW.
@@ -531,7 +531,7 @@ WINDOW may be the symbol `root', a window object or a numeric window id.
 
 DEFUN("list-x-properties", Flist_x_properties, Slist_x_properties,
       (repv win), rep_Subr1) /*
-::doc:list-x-properties::
+::doc:sawfish.wm.misc#list-x-properties::
 list-x-properties WINDOW
 
 List all X properties (symbols) of WINDOW.
@@ -575,7 +575,7 @@ WINDOW may be the symbol `root', a window object or a numeric window id.
 
 DEFUN("get-x-property", Fget_x_property, Sget_x_property,
       (repv win, repv prop), rep_Subr2) /*
-::doc:get-x-property::
+::doc:sawfish.wm.misc#get-x-property::
 get-x-property WINDOW PROPERTY
 
 Return (TYPE FORMAT DATA) representing the X property PROPERTY (a
@@ -675,7 +675,7 @@ symbols, representing the atoms read.
 
 DEFUN("set-x-property", Fset_x_property, Sset_x_property,
       (repv win, repv prop, repv data, repv type, repv format), rep_Subr5) /*
-::doc:set-x-property::
+::doc:sawfish.wm.misc#set-x-property::
 set-x-property WINDOW PROPERTY DATA TYPE FORMAT
 
 Set the X property PROPERTY (a symbol) of WINDOW to the array DATA.
@@ -762,7 +762,7 @@ converted to their numeric X atoms.
 
 DEFUN("get-x-text-property", Fget_x_text_property, Sget_x_text_property,
       (repv win, repv prop), rep_Subr2) /*
-::doc:get-x-text-property::
+::doc:sawfish.wm.misc#get-x-text-property::
 get-x-text-property WINDOW PROPERTY
 ::end:: */
 {
@@ -797,7 +797,7 @@ get-x-text-property WINDOW PROPERTY
 
 DEFUN("set-x-text-property", Fset_x_text_property, Sset_x_text_property, 
       (repv win, repv prop, repv vect), rep_Subr3) /*
-::doc:set-x-text-prooperty::
+::doc:sawfish.wm.misc#set-x-text-prooperty::
 set-x-text-property WINDOW PROPERTY STRING-VECTOR
 ::end:: */
 {
@@ -833,7 +833,7 @@ set-x-text-property WINDOW PROPERTY STRING-VECTOR
 
 DEFUN("send-client-message", Fsend_client_message, Ssend_client_message,
       (repv win, repv type, repv data, repv format), rep_Subr4) /*
-::doc:send-client-message::
+::doc:sawfish.wm.events#send-client-message::
 send-client-message WINDOW TYPE DATA FORMAT
 
 Send an X ClientMessage event to WINDOW (a window object or the symbol
@@ -892,7 +892,7 @@ FORMAT sized quantities (8, 16 or 32).
 
 DEFUN("create-window", Fcreate_window, Screate_window,
       (repv parent, repv x, repv y, repv width, repv height), rep_Subr5) /*
-::doc:create-window::
+::doc:sawfish.wm.misc#create-window::
 create-window PARENT-WINDOW X Y WIDTH HEIGHT
 
 Create an unmapped window that is a child of PARENT-WINDOW (a window object,
@@ -917,7 +917,7 @@ Returns the window id of the new window.
 }
 
 DEFUN("x-atom", Fx_atom, Sx_atom, (repv symbol), rep_Subr1) /*
-::doc:x-atom::
+::doc:sawfish.wm.misc#x-atom::
 x-atom SYMBOL
 
 Return the integer identifying the X atom with the same name as SYMBOL.
@@ -929,7 +929,7 @@ Return the integer identifying the X atom with the same name as SYMBOL.
 }
 
 DEFUN("x-atom-name", Fx_atom_name, Sx_atom_name, (repv atom), rep_Subr1) /*
-::doc:x-atom-name::
+::doc:sawfish.wm.misc#x-atom-name::
 x-atom-name ATOM
 
 Return the symbol with the same name as the X atom identified by the
@@ -941,7 +941,7 @@ integer ATOM.
 }
 
 DEFUN("root-window-id", Froot_window_id, Sroot_window_id, (void), rep_Subr0) /*
-::doc:root-window-id::
+::doc:sawfish.wm.misc#root-window-id::
 root-window-id
 
 Returns the numeric id of the root window of the managed screen.
@@ -1320,10 +1320,6 @@ functions_init (void)
     rep_ADD_SUBR(Sgrab_server);
     rep_ADD_SUBR(Sungrab_server);
     rep_ADD_SUBR(Sserver_grabbed_p);
-    rep_ADD_SUBR(Sgrab_pointer);
-    rep_ADD_SUBR(Sungrab_pointer);
-    rep_ADD_SUBR(Sgrab_keyboard);
-    rep_ADD_SUBR(Sungrab_keyboard);
     rep_ADD_SUBR(Sscreen_width);
     rep_ADD_SUBR(Sscreen_height);
     rep_ADD_SUBR(Ssync_server);
@@ -1333,7 +1329,6 @@ functions_init (void)
     rep_ADD_SUBR(Sset_x_property);
     rep_ADD_SUBR(Sget_x_text_property);
     rep_ADD_SUBR(Sset_x_text_property);
-    rep_ADD_SUBR(Ssend_client_message);
     rep_ADD_SUBR(Screate_window);
     rep_ADD_SUBR(Sx_atom);
     rep_ADD_SUBR(Sx_atom_name);
@@ -1343,6 +1338,14 @@ functions_init (void)
     rep_ADD_SUBR(Shead_dimensions);
     rep_ADD_SUBR(Shead_offset);
     rep_ADD_SUBR(Sdisplay_message);
+    rep_pop_structure (tem);
+
+    tem = rep_push_structure ("sawfish.wm.events");
+    rep_ADD_SUBR(Sgrab_pointer);
+    rep_ADD_SUBR(Sungrab_pointer);
+    rep_ADD_SUBR(Sgrab_keyboard);
+    rep_ADD_SUBR(Sungrab_keyboard);
+    rep_ADD_SUBR(Ssend_client_message);
     rep_pop_structure (tem);
 
     rep_INTERN(root);

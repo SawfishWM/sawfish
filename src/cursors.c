@@ -83,7 +83,7 @@ make_bm_cursor (repv image, repv mask, repv fg, repv bg)
 
 
 DEFUN("get-cursor", Fget_cursor, Sget_cursor, (repv data), rep_Subr1) /*
-::doc:get-cursor::
+::doc:sawfish.wm.cursors#get-cursor::
 get-cursor DATA
 
 Returns the cursor object representing the cursor defined by DATA.
@@ -140,7 +140,7 @@ X11 cursor font, or an image object.
 
 DEFUN("recolor-cursor", Frecolor_cursor, Srecolor_cursor,
       (repv cursor, repv fg, repv bg), rep_Subr3) /*
-::doc:Srecolor-cursor::
+::doc:sawfish.wm.cursors#Srecolor-cursor::
 recolor-cursor CURSOR FG BG
 ::end:: */
 {
@@ -165,7 +165,7 @@ recolor-cursor CURSOR FG BG
 }
 
 DEFUN("default-cursor", Fdefault_cursor, Sdefault_cursor, (repv arg), rep_Subr1) /*
-::doc:default-cursor::
+::doc:sawfish.wm.cursors#default-cursor::
 default-cursor [NEW-VALUE]
 
 The cursor object displayed in the root window, and in frame parts which
@@ -181,7 +181,7 @@ have no other cursor specified.
 }
 
 DEFUN("cursorp", Fcursorp, Scursorp, (repv arg), rep_Subr1) /*
-::doc:cursorp::
+::doc:sawfish.wm.cursors#cursorp::
 cursor ARG
 
 Returns t if ARG is an cursor object.

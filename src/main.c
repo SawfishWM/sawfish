@@ -108,7 +108,7 @@ on_termination (void)
 }
 
 DEFUN_INT("quit", Fquit, Squit, (void), rep_Subr0, "") /*
-::doc:quit::
+::doc:sawfish.wm.misc#quit::
 quit
 
 Terminate the sawfish process.
@@ -118,7 +118,7 @@ Terminate the sawfish process.
 }
 
 DEFUN_INT("restart", Frestart, Srestart, (void), rep_Subr0, "") /*
-::doc:restart::
+::doc:sawfish.wm.misc#restart::
 restart
 
 Restart the sawfish process.

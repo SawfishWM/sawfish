@@ -191,7 +191,7 @@ make_bitmap (repv file, int *widthp, int *heightp, int *x_hotp, int *y_hotp)
 
 DEFUN("make-image", Fmake_image, Smake_image,
       (repv file, repv plist), rep_Subr2) /*
-::doc:make-image::
+::doc:sawfish.wm.images#make-image::
 make-image FILE [PLIST]
 
 Return a new image object representing the image stored in FILE (a
@@ -219,7 +219,7 @@ string). PLIST defines the property list of the image.
 
 DEFUN("make-image-from-x-drawable", Fmake_image_from_x_drawable,
       Smake_image_from_x_drawable, (repv id, repv mask_id), rep_Subr2) /*
-::doc:make-image-from-x-drawable::
+::doc:sawfish.wm.images#make-image-from-x-drawable::
 make-image-from-x-drawable ID [MASK-ID]
 ::end:: */
 {
@@ -338,7 +338,7 @@ make-image-from-x-drawable ID [MASK-ID]
 }
 
 DEFUN("copy-image", Fcopy_image, Scopy_image, (repv source), rep_Subr1) /*
-::doc:copy-image::
+::doc:sawfish.wm.images#copy-image::
 copy-image SOURCE-IMAGE
 
 Return a new image object, a clone of SOURCE-IMAGE.
@@ -359,7 +359,7 @@ Return a new image object, a clone of SOURCE-IMAGE.
 
 DEFUN("flip-image-horizontally", Fflip_image_horizontally,
       Sflip_image_horizontally, (repv image), rep_Subr1) /*
-::doc:flip-image-horizontally::
+::doc:sawfish.wm.images#flip-image-horizontally::
 flip-image-horizontally IMAGE 
 
 Flip the contents of IMAGE around the vertical axis.
@@ -398,7 +398,7 @@ Flip the contents of IMAGE around the vertical axis.
 
 DEFUN("flip-image-vertically", Fflip_image_vertically,
       Sflip_image_vertically, (repv image), rep_Subr1) /*
-::doc:flip-image-vertically::
+::doc:sawfish.wm.images#flip-image-vertically::
 flip-image-vertically IMAGE 
 
 Flip the contents of IMAGE around the horizontal axis.
@@ -430,7 +430,7 @@ Flip the contents of IMAGE around the horizontal axis.
 
 DEFUN("flip-image-diagonally", Fflip_image_diagonally,
       Sflip_image_diagonally, (repv image), rep_Subr1) /*
-::doc:flip-image-diagonally::
+::doc:sawfish.wm.images#flip-image-diagonally::
 flip-image-diagonally IMAGE 
 
 Flip the contents of IMAGE around a diagonal axis from the top-left to
@@ -474,7 +474,7 @@ the bottom right of the image.
 }
 
 DEFUN("image-get", Fimage_get, Simage_get, (repv win, repv prop), rep_Subr2) /*
-::doc::Simage-get::
+::doc:sawfish.wm.images#:Simage-get::
 image-get IMAGE PROPERTY
 
 Return the value of the property named PROPERTY (a symbol) of IMAGE.
@@ -498,7 +498,7 @@ Return the value of the property named PROPERTY (a symbol) of IMAGE.
 
 DEFUN("image-put", Fimage_put, Simage_put,
       (repv win, repv prop, repv val), rep_Subr3) /*
-::doc:image-put::
+::doc:sawfish.wm.images#image-put::
 image-put IMAGE PROPERTY VALUE
 
 Set the value of the property named PROPERTY (a symbol) of IMAGE to VALUE.
@@ -525,7 +525,7 @@ Set the value of the property named PROPERTY (a symbol) of IMAGE to VALUE.
 }
 
 DEFUN("imagep", Fimagep, Simagep, (repv arg), rep_Subr1) /*
-::doc:imagep::
+::doc:sawfish.wm.images#imagep::
 image ARG
 
 Returns t if ARG is an image object.
@@ -536,7 +536,7 @@ Returns t if ARG is an image object.
 
 DEFUN("image-dimensions", Fimage_dimensions, Simage_dimensions,
       (repv img), rep_Subr1) /*
-::doc:image-dimensions::
+::doc:sawfish.wm.images#image-dimensions::
 image-dimensions IMAGE
 
 Return (WIDTH . HEIGHT) representing the dimensions in pixels of IMAGE.
@@ -550,7 +550,7 @@ Return (WIDTH . HEIGHT) representing the dimensions in pixels of IMAGE.
 
 DEFUN("image-shape-color", Fimage_shape_color,
       Simage_shape_color, (repv img), rep_Subr1) /*
-::doc:image-shape-color::
+::doc:sawfish.wm.images#image-shape-color::
 image-shape-color IMAGE
 ::end:: */
 {
@@ -572,7 +572,7 @@ image-shape-color IMAGE
 
 DEFUN("set-image-shape-color", Fset_image_shape_color, Sset_image_shape_color,
       (repv img, repv shape), rep_Subr2) /*
-::doc:set-image-shape-color::
+::doc:sawfish.wm.images#set-image-shape-color::
 set-image-shape-color IMAGE TRANSPARENT-COLOR
 ::end:: */
 {
@@ -592,7 +592,7 @@ set-image-shape-color IMAGE TRANSPARENT-COLOR
 }
 
 DEFUN("image-border", Fimage_border, Simage_border, (repv img), rep_Subr1) /*
-::doc:image-border::
+::doc:sawfish.wm.images#image-border::
 image-border IMAGE
 
 Return (LEFT RIGHT TOP BOTTOM) representing the border (in pixels) of IMAGE.
@@ -618,7 +618,7 @@ Return (LEFT RIGHT TOP BOTTOM) representing the border (in pixels) of IMAGE.
 
 DEFUN("set-image-border", Fset_image_border, Sset_image_border,
       (repv img, repv left, repv right, repv top, repv bottom), rep_Subr5) /*
-::doc:set-image-border::
+::doc:sawfish.wm.images#set-image-border::
 set-image-border IMAGE LEFT RIGHT TOP BOTTOM
 
 Set the border of IMAGE to (LEFT RIGHT TOP BOTTOM). The border of an
@@ -653,7 +653,7 @@ are resized.
 
 DEFUN("image-modifier", Fimage_modifier, Simage_modifier,
       (repv img, repv type), rep_Subr2) /*
-::doc:image-modifier::
+::doc:sawfish.wm.images#image-modifier::
 image-modifier IMAGE TYPE
 
 TYPE may be one of nil, red, green, blue. returned modifier is
@@ -681,7 +681,7 @@ TYPE may be one of nil, red, green, blue. returned modifier is
 
 DEFUN("set-image-modifier", Fset_image_modifier, Sset_image_modifier,
       (repv img, repv type, repv mod), rep_Subr3) /*
-::doc:set-image-modifier::
+::doc:sawfish.wm.images#set-image-modifier::
 set-image-modifier IMAGE TYPE MODIFIER
 
 TYPE may be one of nil, red, green, blue. MODIFIER is (GAMMA BRIGHTNESS
@@ -789,7 +789,7 @@ bevel_vertically (u_char *data, int width, int height,
 DEFUN("bevel-image", Fbevel_image, Sbevel_image,
       (repv image, repv border, repv up, repv bevel_percent),
       rep_Subr4) /*
-::doc:bevel-image::
+::doc:sawfish.wm.images#bevel-image::
 bevel-image IMAGE BORDER UP [BEVEL-PERCENT]
 
 Draw a bevelled edge outline onto IMAGE. BORDER is an integer defining
@@ -843,7 +843,7 @@ intensity of the bevel created.
 
 DEFUN("clear-image", Fclear_image, Sclear_image,
       (repv image, repv color), rep_Subr2) /*
-::doc:clear-image::
+::doc:sawfish.wm.images#clear-image::
 clear-image IMAGE [COLOR]
 
 Set all pixels in IMAGE to COLOR (or black if COLOR is undefined).
@@ -892,7 +892,7 @@ free_pixbuf_data (guchar *pixels, gpointer data)
 
 DEFUN("make-sized-image", Fmake_sized_image, Smake_sized_image,
       (repv width, repv height, repv color), rep_Subr3) /*
-::doc:make-sized-image::
+::doc:sawfish.wm.images#make-sized-image::
 make-sized-image WIDTH HEIGHT [COLOR]
 
 Return a new image of dimensions (WIDTH, HEIGHT). The object COLOR
@@ -952,7 +952,7 @@ defines the color of its pixels.
 }
 
 DEFUN("tile-image", Ftile_image, Stile_image, (repv dst, repv src), rep_Subr2) /*
-::doc:tile-image::
+::doc:sawfish.wm.images#tile-image::
 tile-image DEST-IMAGE SOURCE-IMAGE
 
 Tile SOURCE-IMAGE into DEST-IMAGE.
@@ -1003,7 +1003,7 @@ Tile SOURCE-IMAGE into DEST-IMAGE.
     
 DEFUN("scale-image", Fscale_image, Sscale_image,
       (repv img, repv w, repv h), rep_Subr3) /*
-::doc:scale-image::
+::doc:sawfish.wm.images#scale-image::
 scale-image IMAGE WIDTH HEIGHT
 
 Return a new image object, a copy of the contents of IMAGE, but scaled
@@ -1034,7 +1034,7 @@ to WIDTH by HEIGHT pixels.
 
 DEFUN ("composite-images", Fcomposite_images,
        Scomposite_images, (repv img1, repv img2, repv x, repv y), rep_Subr4) /*
-::doc:composite-images::
+::doc:sawfish.wm.images#composite-images::
 composite-images DEST-IMAGE SRC-IMAGE [X Y]
 
 Modify DEST-IMAGE by compositing SRC-IMAGE onto its current contents,
@@ -1083,7 +1083,7 @@ at position (X, Y), or (0, 0) if no position is given.
 
 DEFUN ("crop-image", Fcrop_image, Scrop_image,
        (repv img, repv x, repv y, repv w, repv h), rep_Subr5) /*
-::doc:crop-image::
+::doc:sawfish.wm.images#crop-image::
 crop-image IMAGE X Y WIDTH HEIGHT
 
 Return a new image, with dimensions WIDTH by HEIGHT. A copy of the
@@ -1493,7 +1493,7 @@ set_pixel (Lisp_Image *im, int x, int y, repv pixel)
 
 DEFUN("image-ref", Fimage_ref, Simage_ref,
       (repv im, repv x, repv y), rep_Subr3) /*
-::doc:image-ref::
+::doc:sawfish.wm.images#image-ref::
 image-ref IMAGE X Y
 
 Return a list `(R G B A)', the red, green, blue and alpha components of
@@ -1518,7 +1518,7 @@ All values are in the range 0 to 255 inclusive.
 
 DEFUN ("image-set", Fimage_set, Simage_set,
        (repv im, repv x, repv y, repv pixel), rep_Subr4) /*
-::doc:image-set::
+::doc:sawfish.wm.images#image-set::
 image-set IMAGE X Y PIXEL
 
 Set the pixel at position (X, Y) in IMAGE to PIXEL. PIXEL is a list of
@@ -1544,7 +1544,7 @@ the pixel. All values are in the range 0 to 255 inclusive.
 }
 
 DEFUN ("image-map", Fimage_map, Simage_map, (repv fun, repv im), rep_Subr2) /*
-::doc:image-map::
+::doc:sawfish.wm.images#image-map::
 image-map XFORM IMAGE
 
 Transform the values of all pixels in IMAGE according to XFORM.
@@ -1588,7 +1588,7 @@ element list).
 
 DEFUN ("image-fill", Fimage_fill, Simage_fill,
        (repv fun, repv im), rep_Subr2) /*
-::doc:image-fill::
+::doc:sawfish.wm.images#image-fill::
 image-fill GENERATOR IMAGE
 
 Set the values of all pixels in IMAGE according to GENERATOR.

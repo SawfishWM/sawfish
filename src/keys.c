@@ -824,7 +824,7 @@ print_event_prefix(void)
 /* Lisp functions */
 
 DEFUN("make-keymap", Fmake_keymap, Smake_keymap, (void), rep_Subr0) /*
-::doc:make-keymap::
+::doc:sawfish.wm.events#make-keymap::
 make-keymap
 
 Return a new keymap suitable for storing bindings in. This is a cons cell
@@ -836,7 +836,7 @@ nil.
 }
 
 DEFUN("bind-keys", Fbind_keys, Sbind_keys, (repv args), rep_SubrN) /*
-::doc:bind-keys::
+::doc:sawfish.wm.events#bind-keys::
 bind-keys KEYMAP { EVENT-DESCRIPTION COMMAND }...
 
 Adds key bindings to KEYMAP. Each EVENT-DESCRIPTION is a string naming an
@@ -885,7 +885,7 @@ Returns KEYMAP when successful.
 }
 
 DEFUN("unbind-keys", Funbind_keys, Sunbind_keys, (repv args), rep_SubrN) /*
-::doc:unbind-keys::
+::doc:sawfish.wm.events#unbind-keys::
 unbind-keys KEY-MAP EVENT-DESCRIPTION...
 ::end:: */
 {
@@ -940,7 +940,7 @@ unbind-keys KEY-MAP EVENT-DESCRIPTION...
 }
 
 DEFUN("grab-keymap", Fgrab_keymap, Sgrab_keymap, (repv map), rep_Subr1) /*
-::doc:grab-keymap::
+::doc:sawfish.wm.events#grab-keymap::
 grab-keymap KEYMAP
 
 Grab any events in KEYMAP that need to be grabbed so that bindings in
@@ -953,7 +953,7 @@ KEYMAP may be serviced.
 }
 
 DEFUN("ungrab-keymap", Fungrab_keymap, Sungrab_keymap, (repv map), rep_Subr1)/*
-::doc:ungrab-keymap::
+::doc:sawfish.wm.events#ungrab-keymap::
 ungrab-keymap KEYMAP
 
 Ungrab any events in KEYMAP that would have been grabbed so that bindings in
@@ -967,7 +967,7 @@ KEYMAP may be serviced.
 
 DEFSTRING(not_in_handler, "Not in event handler");
 DEFUN("current-event-string", Fcurrent_event_string, Scurrent_event_string, (void), rep_Subr0) /*
-::doc:current-event-string::
+::doc:sawfish.wm.events#current-event-string::
 current-event-string
 
 Returns the string which would have been inserted by the current event if
@@ -990,7 +990,7 @@ a Lisp function hadn't been called instead.
 }
 
 DEFUN("current-event", Fcurrent_event, Scurrent_event, (void), rep_Subr0) /*
-::doc:current-event::
+::doc:sawfish.wm.events#current-event::
 current-event
 
 Return the event which caused the current command to be invoked.
@@ -1005,7 +1005,7 @@ Return the event which caused the current command to be invoked.
 
 DEFUN("proxy-current-event", Fproxy_current_event, Sproxy_current_event,
       (repv win, repv mask, repv prop), rep_Subr3) /*
-::doc:proxy-current-event::
+::doc:sawfish.wm.events#proxy-current-event::
 proxy-current-event WINDOW [MASK] [PROPAGATE]
 
 Send the current X event to WINDOW, either a window object, a numeric
@@ -1032,7 +1032,7 @@ grab will be released first.
 }
 
 DEFUN("allow-events", Fallow_events, Sallow_events, (repv mode), rep_Subr1) /*
-::doc:allow-events::
+::doc:sawfish.wm.events#allow-events::
 allow-events MODE
 ::end:: */
 {
@@ -1061,7 +1061,7 @@ allow-events MODE
 }
 
 DEFUN("last-event", Flast_event, Slast_event, (void), rep_Subr0) /*
-::doc:last-event::
+::doc:sawfish.wm.events#last-event::
 last-event
 
 Return the previous event which occurred.
@@ -1075,7 +1075,7 @@ Return the previous event which occurred.
 }
 
 DEFUN("event-name", Fevent_name, Sevent_name, (repv ev), rep_Subr1) /*
-::doc:event-name::
+::doc:sawfish.wm.events#event-name::
 event-name EVENT
 
 Returns a string naming the event EVENT.
@@ -1095,7 +1095,7 @@ Returns a string naming the event EVENT.
 }
 
 DEFUN("lookup-event", Flookup_event, Slookup_event, (repv name), rep_Subr1) /*
-::doc:lookup-event::
+::doc:sawfish.wm.events#lookup-event::
 lookup-event EVENT-NAME
 
 Return the event whose name is EVENT-NAME.
@@ -1111,7 +1111,7 @@ Return the event whose name is EVENT-NAME.
 }
 
 DEFUN("lookup-event-binding", Flookup_event_binding, Slookup_event_binding, (repv ev), rep_Subr1) /*
-::doc:lookup-event-binding::
+::doc:sawfish.wm.events#lookup-event-binding::
 lookup-event-binding EVENT
 
 Return the command currently associated with the event EVENT.
@@ -1144,7 +1144,7 @@ currently focused window for keyboard events.
 
 DEFUN("search-keymap", Fsearch_keymap, Ssearch_keymap,
       (repv ev, repv km), rep_Subr2) /*
-::doc:search-keymap::
+::doc:sawfish.wm.events#search-keymap::
 search-keymap EVENT KEYMAP
 
 Return the (COMMAND . EVENT) binding of EVENT in KEYMAP, or nil.
@@ -1159,7 +1159,7 @@ Return the (COMMAND . EVENT) binding of EVENT in KEYMAP, or nil.
 
 DEFUN("x-lookup-keysym", Fx_lookup_keysym,
       Sx_lookup_keysym, (repv name), rep_Subr1) /*
-::doc:x-lookup-keysym::
+::doc:sawfish.wm.events#x-lookup-keysym::
 x-lookup-keysym NAME
 
 Return the X11 keysym (an integer), named by the Lisp symbol NAME.
@@ -1172,7 +1172,7 @@ Return the X11 keysym (an integer), named by the Lisp symbol NAME.
 }
 
 DEFUN("x-keysym-name", Fx_keysym_name, Sx_keysym_name, (repv ks), rep_Subr1) /*
-::doc:x-keysym-name::
+::doc:sawfish.wm.events#x-keysym-name::
 x-keysym-name KEYSYM
 
 Return the Lisp symbol naming the X11 keysym represented by the integer
@@ -1186,7 +1186,7 @@ KEYSYM.
 }
 
 DEFUN("keymapp", Fkeymapp, Skeymapp, (repv arg), rep_Subr1) /*
-::doc:keymapp::
+::doc:sawfish.wm.events#keymapp::
 keymapp ARG
 
 Returns t if ARG can be used as a keymap.
@@ -1196,7 +1196,7 @@ Returns t if ARG can be used as a keymap.
 }
 
 DEFUN("eventp", Feventp, Seventp, (repv arg), rep_Subr1) /*
-::doc:eventp::
+::doc:sawfish.wm.events#eventp::
 eventp ARG
 
 Returns t if the ARG is an input event.
@@ -1253,7 +1253,7 @@ again:
 
 DEFUN("synthesize-event", Fsynthesize_event, Ssynthesize_event,
       (repv event, repv win, repv propagate), rep_Subr3) /*
-::doc:synthesize-event::
+::doc:sawfish.wm.events#synthesize-event::
 synthesize-event EVENT WINDOW [PROPAGATE]
 ::end:: */
 {

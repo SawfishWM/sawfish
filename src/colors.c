@@ -28,7 +28,7 @@ DEFSYM(default_foreground, "default-foreground");
 
 DEFUN("get-color-rgb", Fget_color_rgb, Sget_color_rgb,
       (repv red, repv green, repv blue), rep_Subr3) /*
-::doc:get-color-rgb::
+::doc:sawfish.wm.colors#get-color-rgb::
 get-color-rgb RED GREEN BLUE
 ::end:: */
 {
@@ -72,7 +72,7 @@ get-color-rgb RED GREEN BLUE
 }
     
 DEFUN("get-color", Fget_color, Sget_color, (repv name), rep_Subr1) /*
-::doc:get-color::
+::doc:sawfish.wm.colors#get-color::
 get-color NAME
 
 Return the color object representing the color named NAME, a standard
@@ -97,7 +97,7 @@ X11 color specifier.
 }
 
 DEFUN("color-name", Fcolor_name, Scolor_name, (repv color), rep_Subr1) /*
-::doc:color-name::
+::doc:sawfish.wm.colors#color-name::
 color-name COLOR
 
 Return the name of the color represented by the color object COLOR.
@@ -111,7 +111,7 @@ Return the name of the color represented by the color object COLOR.
 }
 
 DEFUN("color-rgb", Fcolor_rgb, Scolor_rgb, (repv color), rep_Subr1) /*
-::doc:color-rgb::
+::doc:sawfish.wm.colors#color-rgb::
 color-rgb COLOR
 
 Returns a list of integers (RED GREEN BLUE) representing the actual
@@ -126,7 +126,7 @@ values range from zero to 65535.
 }
 
 DEFUN("color-rgb-8", Fcolor_rgb_8, Scolor_rgb_8, (repv color), rep_Subr1) /*
-::doc:color-rgb::
+::doc:sawfish.wm.colors#color-rgb::
 color-rgb-8 COLOR
 
 Returns a list of integers (RED GREEN BLUE) representing the actual
@@ -141,7 +141,7 @@ values range from zero to 255.
 }
 
 DEFUN("colorp", Fcolorp, Scolorp, (repv win), rep_Subr1) /*
-::doc:colorp::
+::doc:sawfish.wm.colors#colorp::
 colorp ARG
 
 Returns t if ARG is a color object.

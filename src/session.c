@@ -55,7 +55,7 @@ static SmcConn sm_conn;
 
 DEFUN("sm-set-property", Fsm_set_property, Ssm_set_property,
       (repv prop, repv value), rep_Subr2) /*
-::doc:sm-set-property::
+::doc:sawfish.wm.session.util#sm-set-property::
 sm-set-property PROPERTY-NAME VALUE
 
 Sets the session manager property called PROPERTY-NAME (a string) to
@@ -116,7 +116,7 @@ VALUE. VALUE may be either an integer, a string, or a list of strings.
 
 DEFUN("sm-delete-property", Fsm_delete_property, Ssm_delete_property,
       (repv prop), rep_Subr1) /*
-::doc:sm-delete-property::
+::doc:sawfish.wm.session.util#sm-delete-property::
 sm-delete-property PROPERTY-NAME
 
 Deletes the session manager property called PROPERTY-NAME (a string).

@@ -398,7 +398,7 @@ new_gc (Drawable id, u_long mask, XGCValues *gcv)
 
 DEFUN ("x-create-gc", Fx_create_gc, Sx_create_gc,
        (repv window, repv attrs), rep_Subr2) /*
-::doc:x-create-gc::
+::doc:sawfish.wm.util.x#x-create-gc::
 x-create-gc WINDOW ATTRS
 
 Creates a new GC for the specified window. ATTRS should be an alist
@@ -422,7 +422,7 @@ mapping attributes to values. Known attributes are `foreground' and
 
 DEFUN ("x-create-root-xor-gc", Fx_create_root_xor_gc,
        Sx_create_root_xor_gc, (void), rep_Subr0) /*
-::doc:x-create-root-xor-gc:
+::doc:sawfish.wm.util.x#x-create-root-xor-gc:
 x-create-root-xor-gc
 ::end:: */
 {
@@ -446,7 +446,7 @@ x-create-root-xor-gc
 
 DEFUN ("x-change-gc", Fx_change_gc, Sx_change_gc,
        (repv gc, repv attrs), rep_Subr2) /*
-::doc:x-change-gc::
+::doc:sawfish.wm.util.x#x-change-gc::
 x-change-gc X-GC ATTRS
 
 Sets attributes of the X-GC. ATTRS should be a list of cons cells mapping
@@ -468,7 +468,7 @@ attributes to values. Known attributes are `foreground' and `background'.
 }
 
 DEFUN ("x-destroy-gc", Fx_destroy_gc, Sx_destroy_gc, (repv gc), rep_Subr1) /*
-::doc:x-destroy-gc::
+::doc:sawfish.wm.util.x#x-destroy-gc::
 x-destroy-gc X-GC
 
 Destroy the X-GC.
@@ -483,7 +483,7 @@ Destroy the X-GC.
 }
 
 DEFUN ("x-gc-p", Fx_gc_p, Sx_gc_p, (repv gc), rep_Subr1) /*
-::doc:x-gc-p::
+::doc:sawfish.wm.util.x#x-gc-p::
 x-gcp ARG
 
 Return t if ARG is a X-GC object.
@@ -615,7 +615,7 @@ create_x_drawable (Drawable id, int width, int height)
 
 DEFUN ("x-create-window", Fx_create_window, Sx_create_window,
        (repv xy, repv wh, repv bw, repv attrs, repv ev), rep_Subr5) /*
-::doc:x-create-window::
+::doc:sawfish.wm.util.x#x-create-window::
 x-create-window (X . Y) (W . H) BW ATTRS [EVENT-HANDLER]
 
 Creates a new X-WINDOW with the specified position, dimensions and
@@ -711,7 +711,7 @@ DEFUN ("x-create-bitmap", Fx_create_bitmap,
 
 DEFUN ("x-map-window", Fx_map_window, Sx_map_window,
        (repv win, repv unraised), rep_Subr2) /*
-::doc:x-map-window::
+::doc:sawfish.wm.util.x#x-map-window::
 x-map-window X-WINDOW [UNRAISED]
 ::end:: */
 {
@@ -725,7 +725,7 @@ x-map-window X-WINDOW [UNRAISED]
 
 DEFUN ("x-unmap-window", Fx_unmap_window,
        Sx_unmap_window, (repv win), rep_Subr1) /*
-::doc:x-unmap-window::
+::doc:sawfish.wm.util.x#x-unmap-window::
 x-unmap-window X-WINDOW
 ::end:: */
 {
@@ -736,7 +736,7 @@ x-unmap-window X-WINDOW
 
 DEFUN ("x-configure-window", Fx_configure_window,
        Sx_configure_window, (repv window, repv attrs), rep_Subr2) /*
-::doc:x-configure-window::
+::doc:sawfish.wm.util.x#x-configure-window::
 x-configure-window WINDOW ATTRS
 
 Reconfigures the X-WINDOW. ATTRS should be an alist mapping attribute
@@ -763,7 +763,7 @@ names to values. Known attributes include the symbols `x', `y',
 
 DEFUN ("x-change-window-attributes", Fx_change_window_attributes,
        Sx_change_window_attributes, (repv window, repv attrs), rep_Subr2) /*
-::doc:x-change-window-attributes::
+::doc:sawfish.wm.util.x#x-change-window-attributes::
 x-change-window-attributes WINDOW ATTRS
 
 Sets attributes of the X-WINDOW. ATTRS should be an alist mapping
@@ -790,7 +790,7 @@ attribute names to values. Known attributes include the symbols
 
 DEFUN ("x-destroy-drawable", Fx_destroy_drawable,
        Sx_destroy_drawable, (repv drawable), rep_Subr1) /*
-::doc:x-destroy-drawable::
+::doc:sawfish.wm.util.x#x-destroy-drawable::
 x-destroy-drawable DRAWABLE
 
 Destroys the X-DRAWABLE.
@@ -813,7 +813,7 @@ Destroys the X-DRAWABLE.
 
 DEFUN ("x-destroy-window", Fx_destroy_window,
        Sx_destroy_window, (repv window), rep_Subr1) /*
-::doc:x-destroy-window::
+::doc:sawfish.wm.util.x#x-destroy-window::
 x-destroy-window WINDOW
 
 Destroys the X-WINDOW.
@@ -824,7 +824,7 @@ Destroys the X-WINDOW.
 
 DEFUN ("x-drawable-id", Fx_drawable_id,
        Sx_drawable_id, (repv drawable), rep_Subr1) /*
-::doc:x-drawable-id::
+::doc:sawfish.wm.util.x#x-drawable-id::
 x-drawable-id DRAWABLE
 
 Return the X11 drawable-id (an integer) associated with X-DRAWABLE.
@@ -837,7 +837,7 @@ Return the X11 drawable-id (an integer) associated with X-DRAWABLE.
 
 DEFUN ("x-drawable-width", Fx_drawable_width,
        Sx_drawable_width, (repv drawable), rep_Subr1) /*
-::doc:x-drawable-width::
+::doc:sawfish.wm.util.x#x-drawable-width::
 x-drawable-width DRAWABLE
 
 Return the width in pixels of X-DRAWABLE.
@@ -850,7 +850,7 @@ Return the width in pixels of X-DRAWABLE.
 
 DEFUN ("x-drawable-height", Fx_drawable_height,
        Sx_drawable_height, (repv drawable), rep_Subr1) /*
-::doc:x-drawable-height::
+::doc:sawfish.wm.util.x#x-drawable-height::
 x-drawable-height DRAWABLE
 
 Return the height in pixels of X-DRAWABLE.
@@ -862,7 +862,7 @@ Return the height in pixels of X-DRAWABLE.
 }
 
 DEFUN ("x-window-id", Fx_window_id, Sx_window_id, (repv window), rep_Subr1) /*
-::doc:x-window-id::
+::doc:sawfish.wm.util.x#x-window-id::
 x-window-id WINDOW
 
 Return the X11 window-id (an integer) associated with X-WINDOW.
@@ -873,7 +873,7 @@ Return the X11 window-id (an integer) associated with X-WINDOW.
 
 DEFUN ("x-drawable-p", Fx_drawable_p,
        Sx_drawable_p, (repv window), rep_Subr1) /*
-::doc:x-drawable-p::
+::doc:sawfish.wm.util.x#x-drawable-p::
 x-drawable-p ARG
 
 Return t if ARG is a X-DRAWABLE object.
@@ -883,7 +883,7 @@ Return t if ARG is a X-DRAWABLE object.
 }
 
 DEFUN ("x-window-p", Fx_window_p, Sx_window_p, (repv window), rep_Subr1) /*
-::doc:x-window-p::
+::doc:sawfish.wm.util.x#x-window-p::
 x-window-p ARG
 
 Return t if ARG is a X-WINDOW object.
@@ -893,7 +893,7 @@ Return t if ARG is a X-WINDOW object.
 }
 
 DEFUN ("x-pixmap-p", Fx_pixmap_p, Sx_pixmap_p, (repv pixmap), rep_Subr1) /*
-::doc:x-pixmap-p::
+::doc:sawfish.wm.util.x#x-pixmap-p::
 x-pixmap-p ARG
 
 Return t if ARG is a X-PIXMAP object.
@@ -903,7 +903,7 @@ Return t if ARG is a X-PIXMAP object.
 }
 
 DEFUN ("x-bitmap-p", Fx_bitmap_p, Sx_bitmap_p, (repv bitmap), rep_Subr1) /*
-::doc:x-bitmap-p::
+::doc:sawfish.wm.util.x#x-bitmap-p::
 x-bitmap-p ARG
 
 Return t if ARG is a X-BITMAP object.
@@ -963,7 +963,7 @@ DEFUN ("x-window-swap-buffers", Fx_window_swap_buffers,
 
 DEFUN ("x-clear-window", Fx_clear_window,
        Sx_clear_window, (repv window), rep_Subr1) /*
-::doc:x-clear-window::
+::doc:sawfish.wm.util.x#x-clear-window::
 x-clear-window WINDOW
 
 Clears the window associated with WINDOW to its background color.
@@ -978,7 +978,7 @@ Clears the window associated with WINDOW to its background color.
 
 DEFUN ("x-draw-string", Fx_draw_string, Sx_draw_string,
        (repv window, repv gc, repv xy, repv string, repv font), rep_Subr5) /*
-::doc:x-draw-string::
+::doc:sawfish.wm.util.x#x-draw-string::
 x-draw-string WINDOW GC (X . Y) STRING [FONT]
 
 Draws the specified string at the specified location in the optional
@@ -1009,7 +1009,7 @@ specified font in the window associated with WINDOW.
 
 DEFUN ("x-draw-line", Fx_draw_line, Sx_draw_line,
        (repv window, repv gc, repv start, repv end), rep_Subr4) /*
-::doc:x-draw-line::
+::doc:sawfish.wm.util.x#x-draw-line::
 x-draw-line WINDOW GC (X1 . Y1) (X2 . Y2)
 
 Draws a line from (X1, Y1) to (X2, Y2) in WINDOW, using GC.
@@ -1037,7 +1037,7 @@ Draws a line from (X1, Y1) to (X2, Y2) in WINDOW, using GC.
 
 DEFUN ("x-draw-rectangle", Fx_draw_rectangle, Sx_draw_rectangle,
        (repv window, repv gc, repv xy, repv wh), rep_Subr4) /*
-::doc:x-draw-rectangle::
+::doc:sawfish.wm.util.x#x-draw-rectangle::
 x-draw-rectangle WINDOW GC (X . Y) (WIDTH . HEIGHT)
 
 Draws a rectangle with top-left corner (X1, Y1) and dimensions (WIDTH,
@@ -1066,7 +1066,7 @@ HEIGHT) in WINDOW, using GC.
 
 DEFUN ("x-fill-rectangle", Fx_fill_rectangle, Sx_fill_rectangle,
        (repv window, repv gc, repv xy, repv wh), rep_Subr4) /*
-::doc:x-fill-rectangle::
+::doc:sawfish.wm.util.x#x-fill-rectangle::
 x-fill-rectangle WINDOW GC (X . Y) (WIDTH . HEIGHT)
 
 Draws a filled rectangle with top-left corner (X, Y) and dimensions
@@ -1095,7 +1095,7 @@ Draws a filled rectangle with top-left corner (X, Y) and dimensions
 
 DEFUN ("x-draw-arc", Fx_draw_arc, Sx_draw_arc,
        (repv window, repv gc, repv xy, repv wh, repv angle), rep_Subr5) /*
-::doc:x-draw-arc::
+::doc:sawfish.wm.util.x#x-draw-arc::
 x-draw-arc WINDOW GC (X . Y) (WIDTH . HEIGHT) (ANGLE1 . ANGLE2)
 
 Draws a single circular or elliptical arc. Each arc is specified by a
@@ -1136,7 +1136,7 @@ indicate clockwise motion.
 
 DEFUN ("x-fill-arc", Fx_fill_arc, Sx_fill_arc,
        (repv window, repv gc, repv xy, repv wh, repv angle), rep_Subr5) /*
-::doc:x-fill-arc::
+::doc:sawfish.wm.util.x#x-fill-arc::
 x-fill-arc WINDOW GC (X . Y) (WIDTH . HEIGHT) (ANGLE1 . ANGLE2)
 
 Draws a single filled circular or elliptical arc. Each arc is specified
@@ -1177,7 +1177,7 @@ indicate clockwise motion.
 
 DEFUN ("x-fill-polygon", Fx_fill_polygon, Sx_fill_polygon,
        (repv window, repv gc, repv points, repv mode_), rep_Subr4) /*
-::doc:x-fill-arc::
+::doc:sawfish.wm.util.x#x-fill-arc::
 x-fill-arc WINDOW GC POINTS [MODE]
 
 Draws a single filled polygon in WINDOW using GC. Each point is `(X . Y)'.
@@ -1224,7 +1224,7 @@ Draws a single filled polygon in WINDOW using GC. Each point is `(X . Y)'.
 
 DEFUN ("x-copy-area", Fx_copy_area, Sx_copy_area,
        (repv window, repv gc, repv xy, repv wh, repv dest), rep_Subr5) /*
-::doc:x-fill-rectangle::
+::doc:sawfish.wm.util.x#x-fill-rectangle::
 x-fill-rectangle WINDOW GC (X . Y) (WIDTH . HEIGHT) (DEST-X . DEST-Y)
 
 Copy a region of WINDOW with top-left corner (X, Y) and dimensions
@@ -1258,7 +1258,7 @@ Copy a region of WINDOW with top-left corner (X, Y) and dimensions
 
 DEFUN ("x-draw-image", Fx_draw_image, Sx_draw_image,
        (repv img, repv window, repv xy, repv wh), rep_Subr4) /*
-::doc:x-draw-image::
+::doc:sawfish.wm.util.x#x-draw-image::
 x-draw-image IMAGE WINDOW (X . Y) [(WIDTH . HEIGHT)]
 
 Render the image object IMAGE in WINDOW at position (X, Y). If WIDTH
@@ -1309,7 +1309,7 @@ DEFUN ("x-grab-image-from-drawable", Fx_grab_image_from_drawable,
 
 DEFUN ("x-gc-set-dashes", Fx_gc_set_dashes, Sx_gc_set_dashes,
        (repv _gc, repv _dash_list, repv _offset), rep_Subr3) /*
-::doc:x-gc-set-dashes::
+::doc:sawfish.wm.util.x#x-gc-set-dashes::
 x-gc-set-dashes GC ((PIXELS-ON . PIXELS-OFF) [...]) [OFFSET]
 
 Set the dash style to the specified list, optionally setting

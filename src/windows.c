@@ -499,7 +499,7 @@ emit_pending_destroys (void)
 
 DEFUN("window-get", Fwindow_get, Swindow_get,
       (repv win, repv prop), rep_Subr2) /*
-::doc::window-get::
+::doc:sawfish.wm.windows.subrs#:window-get::
 window-get WINDOW PROPERTY
 
 Return the value of the property named PROPERTY (a symbol) of WINDOW.
@@ -525,7 +525,7 @@ Note that these are Lisp properties not X properties.
 
 DEFUN("map-window-properties", Fmap_window_properties,
       Smap_window_properties, (repv fun, repv win), rep_Subr2) /*
-::doc:map-window-properties::
+::doc:sawfish.wm.windows.subrs#map-window-properties::
 map-window-properties FUNCTION WINDOW
 
 Call (FUNCTION PROPERTY VALUE) for all Lisp properties set on window
@@ -551,7 +551,7 @@ object WINDOW.
 
 DEFUN("window-put", Fwindow_put, Swindow_put,
       (repv win, repv prop, repv val), rep_Subr3) /*
-::doc:window-put::
+::doc:sawfish.wm.windows.subrs#window-put::
 window-put WINDOW PROPERTY VALUE
 
 Set the value of the property named PROPERTY (a symbol) of WINDOW to VALUE.
@@ -587,7 +587,7 @@ Note that these are Lisp properties not X properties.
 }
 
 DEFUN("window-name", Fwindow_name, Swindow_name, (repv win), rep_Subr1) /*
-::doc:window-name::
+::doc:sawfish.wm.windows.subrs#window-name::
 window-name WINDOW
 
 Return the name of window object WINDOW.
@@ -599,7 +599,7 @@ Return the name of window object WINDOW.
 
 DEFUN("window-full-name", Fwindow_full_name, Swindow_full_name,
       (repv win), rep_Subr1) /*
-::doc:window-full-name::
+::doc:sawfish.wm.windows.subrs#window-full-name::
 window-full-name WINDOW
 
 Return the full name of window object WINDOW.
@@ -611,7 +611,7 @@ Return the full name of window object WINDOW.
 
 DEFUN("window-icon-name", Fwindow_icon_name, Swindow_icon_name,
       (repv win), rep_Subr1) /*
-::doc:window-icon-name::
+::doc:sawfish.wm.windows.subrs#window-icon-name::
 window-icon-name WINDOW
 
 Return the name of window object WINDOW's icon.
@@ -623,7 +623,7 @@ Return the name of window object WINDOW's icon.
 
 DEFUN("window-mapped-p", Fwindow_mapped_p, Swindow_mapped_p,
       (repv win), rep_Subr1) /*
-::doc:window-mapped-p::
+::doc:sawfish.wm.windows.subrs#window-mapped-p::
 window-mapped-p WINDOW
 
 Return t if the client window associated with object WINDOW is mapped.
@@ -635,7 +635,7 @@ Return t if the client window associated with object WINDOW is mapped.
 }
 
 DEFUN("window-frame", Fwindow_frame, Swindow_frame, (repv win), rep_Subr1) /*
-::doc:window-frame::
+::doc:sawfish.wm.windows.subrs#window-frame::
 window-frame WINDOW
 
 Return the frame object associated with WINDOW.
@@ -647,7 +647,7 @@ Return the frame object associated with WINDOW.
 
 DEFUN("set-window-frame", Fset_window_frame, Sset_window_frame,
       (repv win, repv frame), rep_Subr2) /*
-::doc:set-window-frame::
+::doc:sawfish.wm.windows.subrs#set-window-frame::
 set-window-frame WINDOW FRAME
 
 Set the frame associated with the window object WINDOW to FRAME (a
@@ -673,7 +673,7 @@ new frame constructed as specified by FRAME.
 }
 
 DEFUN("rebuild-frame", Frebuild_frame, Srebuild_frame, (repv win), rep_Subr1) /*
-::doc:rebuild-frame::
+::doc:sawfish.wm.windows.subrs#rebuild-frame::
 rebuild-frame WINDOW
 
 Reinitialises and recalibrates the window frame of WINDOW.
@@ -691,7 +691,7 @@ Reinitialises and recalibrates the window frame of WINDOW.
 
 DEFUN("window-position", Fwindow_position, Swindow_position,
       (repv win), rep_Subr1) /*
-::doc:window-position::
+::doc:sawfish.wm.windows.subrs#window-position::
 window-position WINDOW
 
 Return (X . Y) defining the current position of WINDOW.
@@ -704,7 +704,7 @@ Return (X . Y) defining the current position of WINDOW.
 
 DEFUN("window-dimensions", Fwindow_dimensions, Swindow_dimensions,
       (repv win), rep_Subr1) /*
-::doc:window-dimensions::
+::doc:sawfish.wm.windows.subrs#window-dimensions::
 window-dimensions WINDOW
 
 Return (WIDTH . HEIGHT) defining the current dimensions of the client
@@ -718,7 +718,7 @@ window associated with WINDOW.
 
 DEFUN("window-frame-dimensions", Fwindow_frame_dimensions,
       Swindow_frame_dimensions, (repv win), rep_Subr1) /*
-::doc:window-frame-dimensions::
+::doc:sawfish.wm.windows.subrs#window-frame-dimensions::
 window-frame-dimensions WINDOW
 
 Return (WIDTH . HEIGHT) defining the current dimensions of the frame
@@ -737,7 +737,7 @@ surrounding WINDOW.
 
 DEFUN("window-frame-offset", Fwindow_frame_offset,
       Swindow_frame_offset, (repv win), rep_Subr1) /*
-::doc:window-frame-offset::
+::doc:sawfish.wm.windows.subrs#window-frame-offset::
 window-frame-offset WINDOW
 
 Return (X . Y) defining the offset from the origin of the client window
@@ -750,7 +750,7 @@ associated with WINDOW to its frame window.
 }
 
 DEFUN("windowp", Fwindowp, Swindowp, (repv win), rep_Subr1) /*
-::doc:windowp::
+::doc:sawfish.wm.windows.subrs#windowp::
 windowp ARG
 
 Return t if ARG is a window object.
@@ -761,7 +761,7 @@ Return t if ARG is a window object.
 
 DEFUN("set-input-focus", Fset_input_focus, Sset_input_focus,
       (repv win), rep_Subr1) /*
-::doc:set-input-focus::
+::doc:sawfish.wm.windows.subrs#set-input-focus::
 set-input-focus WINDOW
 
 Set the input focus to WINDOW. If WINDOW is nil, then no window will
@@ -779,7 +779,7 @@ have the focus.
 }
 
 DEFUN("input-focus", Finput_focus, Sinput_focus, (void), rep_Subr0) /*
-::doc:input-focus::
+::doc:sawfish.wm.windows.subrs#input-focus::
 input-focus
 
 Return the window object that has the input focus, or nil if none does.
@@ -790,7 +790,7 @@ Return the window object that has the input focus, or nil if none does.
 
 DEFUN("window-wants-input-p", Fwindow_wants_input_p, Swindow_wants_input_p,
       (repv win), rep_Subr1) /*
-::doc:window-wants-input-p::
+::doc:sawfish.wm.windows.subrs#window-wants-input-p::
 window-wants-input-p WINDOW
 
 Return t if the client window associated with object WINDOW has hinted
@@ -803,7 +803,7 @@ that it would like to be given the input focus when applicable.
 
 DEFUN("managed-windows", Fmanaged_windows, Smanaged_windows,
       (void), rep_Subr0) /*
-::doc:managed-windows::
+::doc:sawfish.wm.windows.subrs#managed-windows::
 managed-windows
 
 Return a list of all known client window objects.
@@ -822,7 +822,7 @@ Return a list of all known client window objects.
 
 DEFUN("get-window-by-id", Fget_window_by_id, Sget_window_by_id,
       (repv id), rep_Subr1) /*
-::doc:get-window-by-id::
+::doc:sawfish.wm.windows.subrs#get-window-by-id::
 get-window-by-id ID
 
 Return the window object associated with xid ID, or nil.
@@ -835,7 +835,7 @@ Return the window object associated with xid ID, or nil.
 }
 
 DEFUN("stacking-order", Fstacking_order, Sstacking_order, (void), rep_Subr0) /*
-::doc:stacking-order::
+::doc:sawfish.wm.windows.subrs#stacking-order::
 stacking-order
 
 Return a list of windows defining the current stacking order of all
@@ -868,7 +868,7 @@ client windows.
 
 DEFUN("window-visibility", Fwindow_visibility, Swindow_visibility,
       (repv win), rep_Subr1) /*
-::doc:window-visibility::
+::doc:sawfish.wm.windows.subrs#window-visibility::
 window-visibility WINDOW
 
 Return a symbol defining the visibility of WINDOW. Possible returned
@@ -895,7 +895,7 @@ symbols are `fully-obscured', `partially-obscured' or `unobscured'.
 
 DEFUN("window-transient-p", Fwindow_transient_p, Swindow_transient_p,
       (repv win), rep_Subr1) /*
-::doc:window-transient-p::
+::doc:sawfish.wm.windows.subrs#window-transient-p::
 window-transient-p WINDOW
 
 Return non-nil if WINDOW is a transient window. The returned value will
@@ -909,7 +909,7 @@ then be the numeric id of its parent window.
 
 DEFUN("window-shaped-p", Fwindow_shaped_p, Swindow_shaped_p,
       (repv win), rep_Subr1) /*
-::doc:window-shaped-p::
+::doc:sawfish.wm.windows.subrs#window-shaped-p::
 window-shaped-p WINDOW
 
 Return non-nil if WINDOW is shaped.
@@ -920,7 +920,7 @@ Return non-nil if WINDOW is shaped.
 }
 
 DEFUN("hide-window", Fhide_window, Shide_window, (repv win), rep_Subr1) /*
-::doc:hide-window::
+::doc:sawfish.wm.windows.subrs#hide-window::
 hide-window WINDOW
 
 Prevent WINDOW from being displayed. See `show-window'.
@@ -948,7 +948,7 @@ Prevent WINDOW from being displayed. See `show-window'.
 }
 
 DEFUN("show-window", Fshow_window, Sshow_window, (repv win), rep_Subr1) /*
-::doc:show-window::
+::doc:sawfish.wm.windows.subrs#show-window::
 show-window WINDOW
 
 Ensure that WINDOW (if it has been mapped) is visible. See `hide-window'.
@@ -976,7 +976,7 @@ Ensure that WINDOW (if it has been mapped) is visible. See `hide-window'.
 
 DEFUN("window-visible-p", Fwindow_visible_p, Swindow_visible_p,
       (repv win), rep_Subr1) /*
-::doc:window-visible-p::
+::doc:sawfish.wm.windows.subrs#window-visible-p::
 window-visible-p WINDOW
 
 Return t if WINDOW is currently visible (i.e. not hidden, see `hide-window').
@@ -988,7 +988,7 @@ Return t if WINDOW is currently visible (i.e. not hidden, see `hide-window').
 
 DEFUN("window-framed-p", Fwindow_framed_p, Swindow_framed_p,
       (repv win), rep_Subr1) /*
-::doc:window-framed-p::
+::doc:sawfish.wm.windows.subrs#window-framed-p::
 window-framed-p WINDOW
 
 Return t if WINDOW has been reparented to a frame window.
@@ -999,7 +999,7 @@ Return t if WINDOW has been reparented to a frame window.
 }
 
 DEFUN("window-id", Fwindow_id, Swindow_id, (repv win), rep_Subr1) /*
-::doc:window-id::
+::doc:sawfish.wm.windows.subrs#window-id::
 window-id WINDOW
 
 Return the numeric id of the client window associated with object
@@ -1012,7 +1012,7 @@ WINDOW. Returns nil if the client window has been deleted.
 
 DEFUN("window-group-id", Fwindow_group_id, Swindow_group_id,
       (repv win), rep_Subr1) /*
-::doc:window-group-id::
+::doc:sawfish.wm.windows.subrs#window-group-id::
 window-group-id WINDOW
 
 Return the numeric id defining the leader of the group that WINDOW is a
@@ -1029,7 +1029,7 @@ member of, or nil if it is not a member of a group.
 
 DEFUN("window-border-width", Fwindow_border_width, Swindow_border_width,
       (repv win), rep_Subr1) /*
-::doc:window-border-width::
+::doc:sawfish.wm.windows.subrs#window-border-width::
 window-border-width WINDOW
 ::end:: */
 {
@@ -1039,7 +1039,7 @@ window-border-width WINDOW
 
 DEFUN("window-size-hints", Fwindow_size_hints, Swindow_size_hints,
       (repv win), rep_Subr1) /*
-::doc:window-size-hints::
+::doc:sawfish.wm.windows.subrs#window-size-hints::
 window-size-hints WINDOW
 
 Return an alist defining the size-hints specified by the client window
@@ -1126,7 +1126,7 @@ associated with WINDOW. Possible keys in the alist are `min-height',
 
 DEFUN("call-window-hook", Fcall_window_hook, Scall_window_hook,
       (repv hook, repv win, repv args, repv type), rep_Subr4) /*
-::doc:call-window-hook::
+::doc:sawfish.wm.windows.subrs#call-window-hook::
 call-window-hook HOOK WINDOW &optional ARGS HOOK-TYPE
 
 Call HOOK for WINDOW with extra arguments ARGS. See `call-hook' for a
@@ -1159,7 +1159,7 @@ out:
 
 DEFUN("window-icon-image", Fwindow_icon_image,
       Swindow_icon_image, (repv win), rep_Subr1) /*
-::doc:window-icon-image::
+::doc:sawfish.wm.windows.subrs#window-icon-image::
 window-icon-image WINDOW
 
 Returns an image object representing the icon currently associated with
@@ -1204,7 +1204,7 @@ WINDOW. Returns the symbol `nil' if no such image.
 }
 
 DEFUN ("map-windows", Fmap_windows, Smap_windows, (repv fun), rep_Subr1) /*
-::doc:map-windows::
+::doc:sawfish.wm.windows.subrs#map-windows::
 map-windows FUN
 
 Map the single-parameter function FUN over all existing windows.
@@ -1231,7 +1231,7 @@ Map the single-parameter function FUN over all existing windows.
 
 DEFUN ("filter-windows", Ffilter_windows,
        Sfilter_windows, (repv pred), rep_Subr1) /*
-::doc:filter-windows::
+::doc:sawfish.wm.windows.subrs#filter-windows::
 filter-windows PRED
 
 Return the list of windows that match the predicate function PRED.
