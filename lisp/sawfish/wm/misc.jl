@@ -107,13 +107,17 @@ list of strings DIRS."
   "Return the screen dimensions in pixels as a cons cell `(WIDTH . HEIGHT)'."
   (cons (screen-width) (screen-height)))
 
+(define (pointer-head)
+  "Return the id of a head currently containing the mouse pointer."
+  (find-head (query-pointer)))
+
 (define (current-head #!optional (w (input-focus)))
-  "Return the ID of the `current' head."
+  "Return the id of the `current' head."
   (or (and w (let ((point (window-position w))
 		   (dims (window-dimensions w)))
 	       (find-head (+ (car point) (quotient (car dims) 2))
 			  (+ (cdr point) (quotient (cdr dims) 2)))))
-      (find-head (query-pointer))))
+      (pointer-head)))
 
 (define (current-head-dimensions #!optional w)
   "Return a cons-cell defining the size in pixels of the current head (that
@@ -162,6 +166,6 @@ the label of a menu item."
 		   call-with-keyboard-grabbed
 		   make-directory-recursively locate-file
 		   clamp clamp* uniquify-list screen-dimensions
-		   current-head current-head-dimensions
+		   pointer-head current-head current-head-dimensions
 		   current-head-offset load-module eval-in
 		   user-eval user-require quote-menu-item))
