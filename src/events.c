@@ -772,6 +772,9 @@ handle_input_mask(long mask)
 	current_x_event = 0;
 	XFlush (dpy);
     }
+    /* in case a function is invoked from outside the event loop
+       that passes last_event_time to an X function */
+    last_event_time = CurrentTime;
 }
 
 /* Handle all available X events on file descriptor FD. */
