@@ -467,6 +467,11 @@ all workspaces."
 	 (iconify-window w)
 	 t)))
 
+(defun ws-set-client-state (w)
+  (set-x-property w 'WM_STATE
+		  (vector (if (window-get w 'iconified) 3 1))
+		  'WM_STATE 32))
+
 
 ;; Initialisation
 
@@ -475,4 +480,6 @@ all workspaces."
   (add-hook 'destroy-notify-hook 'ws-remove-window t)
   (add-hook 'map-notify-hook 'ws-window-mapped t)
   (add-hook 'client-message-hook 'ws-client-msg-handler t)
+  (add-hook 'add-window-hook 'ws-set-client-state t)
+  (add-hook 'window-state-change-hook 'ws-set-client-state t)
   (mapc 'ws-add-window (managed-windows)))
