@@ -174,7 +174,7 @@ void
 install_window_frame (Lisp_Window *w)
 {
     DB(("install_window_frame (%s)\n", w->name));
-    if (!w->reparented)
+    if (!w->reparented && w->frame != 0)
     {
 	XSelectInput (dpy, w->frame,
 		      ButtonPressMask | ButtonReleaseMask
@@ -185,7 +185,7 @@ install_window_frame (Lisp_Window *w)
 
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	w->reparented = TRUE;
-	w->reparenting++;
+	w->reparenting = TRUE;
 	DB(("  reparented to %lx [%dx%d%+d%+d]\n",
 	    w->frame, w->frame_width, w->frame_height,
 	    w->frame_x, w->frame_y));
@@ -201,7 +201,7 @@ remove_window_frame (Lisp_Window *w)
 	/* reparent the subwindow back to the root window */
 	XReparentWindow (dpy, w->id, root_window, w->attr.x, w->attr.y);
 	w->reparented = FALSE;
-	w->reparenting++;
+	w->reparenting = TRUE;
     }
 }
 

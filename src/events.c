@@ -349,7 +349,7 @@ reparent_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xreparent.window);
     if (w != 0 && ev->xreparent.window == w->id)
-	w->reparenting--;
+	w->reparenting = FALSE;
 }
 
 static void
@@ -359,13 +359,13 @@ map_notify (XEvent *ev)
     if (w != 0 && ev->xmap.window == w->id)
     {
 	w->mapped = TRUE;
-	if (!w->reparenting)
+	if (!w->reparenting && w->frame != 0)
 	{
 	    install_window_frame (w);
 	    if (w->visible)
 		XMapWindow (dpy, w->frame);
+	    Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 	}
-	Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
@@ -375,7 +375,7 @@ unmap_notify (XEvent *ev)
     Lisp_Window *w = find_window_by_id (ev->xunmap.window);
     if (w != 0 && ev->xunmap.window == w->id)
     {
-	if (!w->reparenting)
+	if (!w->reparenting && w->frame != 0)
 	{
 	    w->mapped = FALSE;
 	    if (w->visible)
@@ -384,8 +384,8 @@ unmap_notify (XEvent *ev)
 	       the root. This means that we receive the next MapRequest
 	       for the window. */
 	    remove_window_frame (w);
+	    Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 	}
-	Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
