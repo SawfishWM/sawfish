@@ -837,7 +837,8 @@ Prevent WINDOW from being displayed. See `show-window'.
     {
 	if (VWIN(win)->mapped)
 	{
-	    XUnmapWindow (dpy, VWIN(win)->frame);
+	    if (VWIN(win)->frame)
+		XUnmapWindow (dpy, VWIN(win)->frame);
 	    if (!VWIN(win)->client_unmapped)
 	    {
 		before_local_map (VWIN(win));
@@ -871,7 +872,8 @@ Ensure that WINDOW (if it has been mapped) is visible. See `hide-window'.
 		VWIN(win)->client_unmapped = 0;
 		after_local_map (VWIN(win));
 	    }
-	    XMapWindow (dpy, VWIN(win)->frame);
+	    if (VWIN(win)->frame)
+		XMapWindow (dpy, VWIN(win)->frame);
 	}
 	VWIN(win)->visible = 1;
     }
