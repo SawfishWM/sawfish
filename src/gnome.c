@@ -304,6 +304,14 @@ rep_dl_init(repv file_name)
     XChangeProperty (dpy, root_window, xa_win_protocols,
 		     XA_ATOM, 32, PropModeReplace, (u_char *)prot, 4);
 
+    /* enlightenment doesn't clean up after itself.. */
+    XDeleteProperty (dpy, root_window,
+		     XInternAtom (dpy, "_WIN_AREA", False));
+    XDeleteProperty (dpy, root_window,
+		     XInternAtom (dpy, "_WIN_AREA_COUNT", False));
+    XDeleteProperty (dpy, root_window,
+		     XInternAtom (dpy, "_WIN_WORKSPACE_NAMES", False));
+
     rep_ADD_SUBR(Sgnome_set_client_list);
     rep_ADD_SUBR(Sgnome_set_workspace);
     rep_ADD_SUBR(Sgnome_client_message_handler);
