@@ -287,27 +287,32 @@ property_notify (XEvent *ev)
     Lisp_Window *w = find_window_by_id (ev->xproperty.window);
     if (w != 0 && ev->xproperty.window == w->id)
     {
-	u_char *prop;
-	Atom actual;
-	int junk1;
-	long junk2, len;
-	XSizeHints hints;
-	XGetWindowProperty (dpy, w->id, ev->xproperty.atom, 0, 200, False,
-			    XA_STRING, &actual, &junk1, &junk2, &len, &prop);
-	if (actual == None || w->id == 0)
-	    return;
-	if (prop == 0)
-	    prop = "";
 	switch (ev->xproperty.atom)
 	{
-	case XA_WM_NAME:
-	    w->full_name = w->name = rep_string_dup (prop);
-	    XFree (prop);
-	    break;
+	    u_char *prop;
+	    Atom actual;
+	    int format;
+	    long nitems, bytes_after;
+	    XSizeHints hints;
 
+	case XA_WM_NAME:
 	case XA_WM_ICON_NAME:
-	    w->icon_name = rep_string_dup (prop);
-	    XFree (prop);
+	    if (ev->xproperty.state == PropertyNewValue
+		&& XGetWindowProperty (dpy, w->id, ev->xproperty.atom,
+				       0, 200, False, XA_STRING, &actual,
+				       &format, &nitems,
+				       &bytes_after, &prop) == Success
+		&& actual != None)
+	    {
+		if (format == 8 && w->id != 0)
+		{
+		    if (ev->xproperty.atom == XA_WM_NAME)
+			w->full_name = w->name = rep_string_dup (prop);
+		    else
+			w->icon_name = rep_string_dup (prop);
+		}
+		XFree (prop);
+	    }
 	    break;
 
 	case XA_WM_HINTS:
