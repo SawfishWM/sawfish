@@ -167,6 +167,7 @@ unused before killing it.")
       ((orig-win menu-active))
     (menu-stop-process)
     (setq menu-active nil)
+    (setq frame-draw-mutex nil)
     (when result
       (when (windowp orig-win)
 	(current-event-window orig-win))
@@ -187,6 +188,9 @@ unused before killing it.")
 	 (dims (clicked-frame-part-dimensions)))
       (setq menu-active (or (current-event-window) (input-focus)))
       (menu-start-process)
+      ;; prevent any depressed button being redrawn until the menu
+      ;; is popped down
+      (setq frame-draw-mutex t)
       ;; This function is probably called from a ButtonPress event,
       ;; so cancel the implicit pointer grab (to allow the menu's grab
       ;; to succeed)
