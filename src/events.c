@@ -796,7 +796,6 @@ unmap_notify (XEvent *ev)
 	}
 	Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 
-	focus_off_window (w);
 	XDeleteProperty (dpy, w->id, xa_wm_state);
 
 	/* Changed the window-handling model, don't let windows exist
@@ -914,8 +913,6 @@ focus_in (XEvent *ev)
     if (w != 0 && w->visible)
     {
 	focus_window = w;
-	if (pending_focus_window == w)
-	    pending_focus_window = 0;
 
 	if (last_focused != w)
 	{
@@ -1310,9 +1307,14 @@ handle_input_mask(long mask)
 	if (xev.type == NoExpose || xev.type == GraphicsExpose)
 	    continue;
 
-	DB(("** Event: %s (win %lx)\n",
-	    xev.type < LASTEvent ? event_names[xev.type] : "unknown",
-	    (long)xev.xany.window));
+#ifdef DEBUG
+	do {
+	    Lisp_Window *w = x_find_window_by_id (xev.xany.window);
+	    DB(("** Event: %s (win %lx: %s)\n",
+		xev.type < LASTEvent ? event_names[xev.type] : "unknown",
+		(long)xev.xany.window, w ? (char *) rep_STR (w->name) : "unknown"));
+	} while (0);
+#endif
 
 	record_event_time (&xev);
 	current_x_event = &xev;

@@ -1,3 +1,30 @@
+2002-04-17  John Harper  <jsh@unfactored.org>
+
+	Work to fix fallout from fix for #67958 (focus getting lost
+	sometimes):
+
+	* windows.c (pending_focus_window): deleted this variable
+
+	(focus_off_window): if the window is the one that's currently
+	focused, call XSetInputFocus to immediately transfer focus to
+	our window that gets the focus if nothing else has it. This
+	avoids us getting left with nothing focused (e.g. if we send
+	WM_TAKE_FOCUS to a window that doesn't accept the focus)
+
+	* windows.c (commit_queued_focus_change): disabled call to
+	check_for_lost_focus ()
+
+	* windows.c (find_window_by_id, x_find_window_by_id): don't do
+	debugging printing here
+	* events.c (handle_input_mask): print names of windows when
+	debugging is enabled
+
+2002-04-12  John Harper  <jsh@unfactored.org>
+
+	* windows.c (remove_window, install_window_frame,
+	remove_window_frame): update pending_focus_window and
+	queued_focus_id as necessary (fixes a "lost focus" bug)
+
 2002-04-09  John Harper  <jsh@unfactored.org>
 
 	* windows.c (commit_queued_focus_change, focus_on_window,

@@ -26,7 +26,7 @@
 Lisp_Window *window_list;
 int window_type;
 
-Lisp_Window *focus_window, *pending_focus_window;
+Lisp_Window *focus_window;
 
 int pending_destroys;
 
@@ -115,9 +115,27 @@ static bool queued_set_focus;
 static int queued_focus_revert;
 static Time queued_focus_time;
 
+/* We can lose the focus sometimes, notably after a was-focused
+   window is closed while a keyboard grab exists.. (netscape) */
+static void
+check_for_lost_focus (void)
+{
+    Window focus;
+    int revert_to;
+    XGetInputFocus (dpy, &focus, &revert_to);
+    if (focus == None || focus == PointerRoot)
+    {
+	DB (("lost focus (%ld)\n", focus));
+	focus_on_window (focus_window);
+    }
+}
+
 void
 commit_queued_focus_change (void)
 {
+    if (0 && queued_focus_id == 0)
+	check_for_lost_focus ();
+
     if (queued_focus_id != 0)
     {
 	if (queued_take_focus)
@@ -144,6 +162,7 @@ void
 focus_on_window (Lisp_Window *w)
 {
     /* something's going to change, so */
+    queued_focus_id = 0;
     queued_focus_time = last_event_time;
     queued_set_focus = FALSE;
     queued_take_focus = FALSE;
@@ -172,16 +191,15 @@ focus_on_window (Lisp_Window *w)
 	}
 
 	queued_focus_revert = RevertToParent;
-	pending_focus_window = w;
     }
-    else
+
+    if (queued_focus_id == 0 || (!queued_set_focus && !queued_take_focus))
     {
 	DB(("focus_on_window (nil)\n"));
 	queued_focus_id = no_focus_window;
 	queued_set_focus = TRUE;
 	queued_focus_revert = RevertToNone;
 	queued_focus_time = last_event_time;
-	pending_focus_window = 0;
     }
 }
 
@@ -189,17 +207,15 @@ focus_on_window (Lisp_Window *w)
 void
 focus_off_window (Lisp_Window *w)
 {
-    if (pending_focus_window == w)
-    {
-	pending_focus_window = 0;
-	queued_focus_id = 0;
-    }
-
-    if (focus_window == w)
+    if (w == focus_window)
     {
 	focus_window = 0;
-	if (pending_focus_window == 0 || pending_focus_window == w)
-	    focus_on_window (0);
+
+	/* Do this immediately. Any real focus-change will be queued,
+	   so will happen after this. Doing this here just prevents us
+	   getting stuck with focus on nothing in some cases.. */
+
+	XSetInputFocus (dpy, no_focus_window, RevertToNone, last_event_time);
     }
 }
 
@@ -265,12 +281,6 @@ find_window_by_id (Window id)
 	w = w->next;
     if (w != 0 && WINDOW_IS_GONE_P (w))
 	w = 0;
-    if (w != 0)
-    {
-	DB(("find_window_by_id (%lx) --> %s\n", id,
-	    (w->name && rep_STRINGP(w->name))
-	    ? (char *) rep_STR(w->name) : ""));
-    }
     return w;
 }
 
@@ -283,12 +293,6 @@ x_find_window_by_id (Window id)
     w = window_list;
     while (w != 0 && w->saved_id != id && w->frame != id)
 	w = w->next;
-    if (w != 0)
-    {
-	DB(("x_find_window_by_id (%lx) --> %s\n", id,
-	    (w->name && rep_STRINGP(w->name))
-	    ? (char *) rep_STR(w->name) : ""));
-    }
     return w;
 }
 
@@ -305,6 +309,9 @@ install_window_frame (Lisp_Window *w)
 	w->reparented = TRUE;
 	after_local_map (w);
 	restack_window (w);
+
+	if (queued_focus_id == w->id)
+	    queued_focus_id = w->frame;
 
 	XAddToSaveSet (dpy, w->id);
 	restack_frame_parts (w);
@@ -329,6 +336,9 @@ remove_window_frame (Lisp_Window *w)
 	w->reparented = FALSE;
 	after_local_map (w);
 	restack_window (w);
+
+	if (queued_focus_id == w->frame)
+	    queued_focus_id = w->id;
 
 	if (!w->mapped)
 	    XRemoveFromSaveSet (dpy, w->id);
@@ -521,6 +531,8 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 	if (!WINDOW_IS_GONE_P (w))
 	    remove_from_stacking_list (w);
 
+	focus_off_window (w);
+
 	w->id = 0;
 	pending_destroys++;
 
@@ -528,21 +540,6 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
     }
     else if (w->frame != 0 && from_error == Qnil)
 	destroy_window_frame (w, FALSE);
-
-    /* We can lose the focus sometimes, notably after a was-focused
-       window is closed while a keyboard grab exists.. (netscape) */
-    if (from_error == Qnil)
-    {
-	Window focus;
-	int revert_to;
-	XGetInputFocus (dpy, &focus, &revert_to);
-	if (focus == None || focus == PointerRoot)
-	{
-	    DB (("lost focus (%ld)\n", focus));
-	    focus_on_window (pending_focus_window
-			     ? pending_focus_window : focus_window);
-	}
-    }
 }
 
 void
