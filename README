@@ -71,6 +71,9 @@ Alternatively, just use the graphical configuration tool -- either
 execute the command `sawmill-ui' or select the `Customize' option from
 the root-window menu.
 
+Please read the TODO list, especially the more speculative suggestions
+at the end, and then send me any feedback.
+
 
 Default Bindings
 ****************
@@ -154,6 +157,7 @@ The list of hooks currently called is:
 	delete-workspace-hook
 	add-to-workspace-hook	these two are called with a window
 	remove-from-workspace-hook
+	workspace-state-change-hook
 
 	place-window-hook	called the first time a window is mapped
 

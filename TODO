@@ -1,27 +1,54 @@
 -*- indented-text -*-
 
-todo:
+TODO list for sawmill
+*********************
 
-  ! resize is non-intuitive
+Bugs are marked !, things that should be done soon are marked +,
+and longer-term ideas are marked -
 
-  + handle window groups
+
+Outstanding bugs
+================
+
+  ! Resize is non-intuitive
+
+  ! Is it possible for the pointer not to be ungrabbed after moving a
+    window? From looking at the source I can't see how, but it has
+    happened a couple of times..
+
+  ! Sometimes switching workspaces gives me an error about a nil arg,
+    doesn't seem to make any difference though
+
+
+General tasks
+=============
+
+  + Add property-notify-hook
+
+  + Smart placement
+
+    What's a good algorithm? What are we trying to optimize?
+    Intuitively, its the probability that we'll be able to place the
+    _next_ mapped window without overlapping..
+
+  + Handle window groups
 
   + better transient handling
 
     When moving a window to another workspace, also move any transients (?)
 
-  + only random window placement currently works
+  + Pixmap cursors / cursor recolouring
 
-  + pixmap cursors / cursor recolouring
+  + Icons (?)
 
-  + icons (?)
-
-  + more seamless ``theming''
+  + More seamless ``theming''
 
     Possibly define a `load-theme' function and lay down some interface
     requirements..?
 
-  + export more Imlib functions
+    Load compressed tarballs?
+
+  + Export more Imlib functions
 
     (the bevel function in Imlib 1.9.5+)
 
@@ -31,16 +58,19 @@ todo:
     Add support for the various window state operations.. (currently
     only the sticky attribute is supported)
 
-  + support MWM hints
+  + Support MWM hints
 
-    I've partially done this, but it's totally untested (also goes for
-    OpenLook hints)
+    I've partially done this (also goes for OpenLook hints)
 
   + GUI configuration
 
     Customization of key bindings is a bit simplistic -- whenever a
     single binding is changed, the whole keymap is then fixed in the
     user's .sawmill-custom file
+
+  + Support the KDE hints
+
+    Where are they defined?
 
   - Rewrite key-binding
 
@@ -58,6 +88,28 @@ todo:
     windows when asked (i.e. geometry, sticky, maximized, ...) and have
     a facility for reloading this information when asked?
 
+  - Custom frame parts
+
+    Currently the background of each frame part is either a solid color
+    or a (scaled or tiled) image.
+
+    It should be possible to define _functional_ backgrounds. For
+    example a plugin could draw an afterstep-like gradient, or a
+    bevelled box, or whatever.
+
+    Similar effects can always be obtained through the present
+    image-based system, but probably using more memory, and with less
+    flexibility..
+
+  - Rotated text
+
+    Allow text to be rendered at angles (in multiples of 90 degrees?).
+    This could be useful for the sides of windows
+
+
+Long term ideas
+===============
+
   - Remove root menu?
 
     The argument is that doing this removes the need for the wm to
@@ -72,3 +124,58 @@ todo:
 
     With a bit of work the dynamically generated menus (e.g. the window
     and workspace submenus) could also be generated through the client
+
+  - Target guile instead of rep
+
+    In theory this is a good idea, probably a lot of work, but still.
+    These are some of the arguments/justifications for sticking with
+    rep:
+
+	1. The single-threadedness is not a problem for a window
+	   manager, where the flow of control pretty much follows the X
+	   event queue
+
+	2. It's lighter-weight than guile (though the effects of sharing
+	   libraries probably negates this a bit)
+
+	3. I have some half-cooked ideas about using the built-in
+	   remote-file handling to access a theme repository somewhere
+
+	4. It has lots of support (i.e. hooks) for being used as an
+	   extension language
+
+    And these are some reasons for using guile:
+
+	1. Scheme's a cleaner and more modern language than rep's Lisp
+	   dialect (one namespace, lexical scope, continuations, ...)
+
+	2. More people know scheme than lisp (though the closeness to
+	   Emacs-lisp offsets this)
+
+	3. Sawmill would depend on fewer "weird" libraries (librep,
+	   rep-gtk), that someone (i.e. me) has to maintain
+
+    The main things counting against guile are that I've never used it,
+    and that I'm lazy
+
+  - CORBA interface
+
+    First write CORBA support for rep (does guile support CORBA?), then
+    what? Would this be useful?
+
+  - Theme repository
+
+    Something similar to foo.themes.org, but I want to be able to load
+    themes straight from the net
+
+    They could be loaded through the remote-ftp system (would need to
+    redefine pwd-prompt somehow, GTK?), then installed in the user's
+    local theme directory, then activated (all without restarting the
+    wm)
+
+    How about a drag 'n drop target in the configurator. Load the
+    specified URI then install the theme it contains
+
+    This way you should be able to drag from both netscape and the file
+    manager to activate a theme
+
