@@ -68,6 +68,9 @@ DEFSYM(root, "root");
 DEFSYM(new_value, "new-value");
 DEFSYM(deleted, "deleted");
 
+DEFSYM(raise_window, "raise-window");
+DEFSYM(lower_window, "lower-window");
+
 /* Where possible record the timestamp from event EV */
 static void
 record_event_time (XEvent *ev)
@@ -603,17 +606,21 @@ configure_request (XEvent *ev)
 	{
 	    if (ev->xconfigurerequest.detail == Above)
 	    {
+		rep_GC_root gc_win;
+		repv win = rep_VAL(w);
+		rep_PUSHGC(gc_win, win);
 		/* The GNOME pager seems to believe that asking for
 		   a window to be raised to the top of the stack will
 		   uniconify it. The Xlib manual suggests that the
 		   correct method is to just remap the window.. */
 #ifndef GNOME_PAGER_UNICONIFY_IS_BROKEN
-		rep_call_lisp1 (Quniconify_window, rep_VAL(w));
+		rep_call_lisp1 (Quniconify_window, win);
 #endif
-		XRaiseWindow (dpy, w->frame);
+		rep_call_lisp1 (Qraise_window, win);
+		rep_POPGC;
 	    }
 	    else if (ev->xconfigurerequest.detail == Below)
-		XLowerWindow (dpy, w->frame);
+		rep_call_lisp1 (Qlower_window, rep_VAL(w));
 	}
 	{
 	    /* Is the window shaped? */
@@ -962,6 +969,8 @@ events_init (void)
     rep_INTERN(root);
     rep_INTERN(new_value);
     rep_INTERN(deleted);
+    rep_INTERN(raise_window);
+    rep_INTERN(lower_window);
 }
 
 void
