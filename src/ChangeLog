@@ -1,5 +1,14 @@
 1999-08-13  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill-ui.jl (build-color): implements a separate `color'
+	element (pretty similar to the `font' element)
+	(build-pages): pages are now implemented as a clist and a frame
+	(instead of a notebook). This can be changed via the
+	ui-pages-style variable
+
+	* frames.c (list_frame_generator): the `foreground',
+	`background' and `font' keys may now be functions
+
 	* frames.c (set_frame_part_bg): for shaped images, apply the
 	mask at the correct frame coordinates
 

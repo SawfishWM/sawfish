@@ -1,5 +1,14 @@
 1999-08-13  John Harper  <john@dcs.warwick.ac.uk>
 
+	* themes/simple.jl: defined the missing three frame types;
+	border colors are now configurable
+
+	* keymaps.jl (iconify-button-keymap): Button3 is now bound to
+	`popup-window-menu'
+
+	* customize.jl (customize-symbol-spec): use the `color' widget
+	for colors
+
 	* transient.jl (transients-get-focus): moved to custom group
 	`focus'
 

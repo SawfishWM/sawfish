@@ -1,0 +1,58 @@
+@c -*- texinfo -*-
+
+@chapter News
+
+This lists the user-visible changes made to Sawmill, and which releases
+they occurred between. For more detailed information see the
+@file{ChangeLog} files in the Sawmill source tree.
+
+@section 0.2
+
+@itemize @bullet
+
+@item Added a user-customization system, inspired by Emacs' customize
+facility. Invoke this through the @samp{sawmill-ui} program, or from
+the @samp{Customize...} entry in the main menu. All changes are stored
+in the Lisp script @file{~/.sawmill-custom}
+
+@item Selected windows may now be raised
+(@code{raise-selected-windows})
+
+@item It's possible to prevent the mouse pointer being warped to
+selected windows (@code{warp-to-selected-windows})
+
+@item The @code{brushed-metal} and @code{simple} themes now define all
+four standard frame types
+
+@item Frame themes are now stored in a separate directory
+(@file{@var{prefix}/share/sawmill/@var{version}/lisp/themes}) so that
+the list of all available themes can be made automatically
+
+@item The frame colors of the @code{simple} frame style can now be
+customized (@code{simple-normal-color} and @code{simple-active-color})
+
+@item The @file{sawmill-defaults.jl} script enables GNOME compliance
+unconditionally (since it has no ill-effects even if GNOME isn't being
+used)
+
+@item Transient windows can be given the same frames as normal windows
+(@code{decorate-transients})
+
+@item The @code{foreground}, @code{background} and @code{font}
+attributes of each frame part may now refer to a function
+
+@item Fixed the window-move bug whereby the first motion event was
+discarded
+
+@item Fixed the bug where windows may be placed partially off the root
+window, even if they needn't be
+
+@item Fixed the shaped frame parts bug (they didn't work)
+
+@item Miscellaneous other bug-fixes
+
+@end itemize
+
+@section 0.1
+
+First proper release
