@@ -21,11 +21,16 @@
 
 (provide 'menus)
 
+;; Suppress annoying compiler warnings
+(eval-when-compile (require 'timers))
+
 (defvar menu-program "sawmill-ui"
   "Name of the program implementing sawmill's high-level user-interface.")
 
-(defvar menu-program-stays-running nil
-  "When non-nil, the user-interface program is never stopped.")
+(defvar menu-program-stays-running 60
+  "When non-nil, the user-interface program is never stopped. If a number,
+then this is taken as the number of seconds to let the process hang around
+unused before killing it.")
 
 ;; the active user interface process
 (defvar menu-process nil)
@@ -36,6 +41,10 @@
 
 ;; non-nil when we're waiting for a response from the ui process
 (defvar menu-active nil)
+
+;; if menu-program-stays-running is a number, this may be a timer
+;; waiting to kill the process
+(defvar menu-timer nil)
 
 (defvar window-ops-menu
   '(("Move" move-window-interactively)
@@ -67,6 +76,9 @@
     ("xcalc" (lambda () (system "xcalc &")))))
 
 (defun menu-start-process ()
+  (when menu-timer
+    (delete-timer menu-timer)
+    (setq menu-timer nil))
   (unless (and menu-process (process-in-use-p menu-process))
     (when menu-process
       (kill-process menu-process))
@@ -75,9 +87,18 @@
 	(error "Can't start menu backend: %s" menu-program))))
 
 (defun menu-stop-process ()
-  (when (and menu-process (not menu-program-stays-running))
-    (kill-process menu-process)
-    (setq menu-process nil)))
+  (when menu-process
+    (cond ((numberp menu-program-stays-running)
+	   ;; number of seconds to let it hang around for
+	   (require 'timers)
+	   (setq menu-timer (make-timer #'(lambda ()
+					    (kill-process menu-process)
+					    (setq menu-process nil)
+					    (setq menu-timer nil))
+					menu-program-stays-running)))
+	  ((not menu-program-stays-running)
+	   (kill-process menu-process)
+	   (setq menu-process nil)))))
 
 (defun menu-filter (output)
   (setq output (concat menu-pending output))
@@ -91,7 +112,10 @@
 
 (defun menu-sentinel (process)
   (when (and menu-process (not (process-in-use-p menu-process)))
-    (setq menu-process nil)))
+    (setq menu-process nil))
+  (when menu-timer
+    (delete-timer menu-timer)
+    (setq menu-timer nil)))
 
 (defun menu-preprocessor (cell)
   (when (and cell (symbolp (car cell)) (not (functionp cell)))
