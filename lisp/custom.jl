@@ -36,6 +36,7 @@
 ;;	:allow-nil t
 ;;	:set FUNCTION
 ;;	:get FUNCTION
+;;	:before-set FUNCTION
 ;;	:after-set FUNCTION
 
 ;; TYPE may be `boolean', `number', `string', `(set SYMBOLS..)',
@@ -62,8 +63,8 @@
 	      (list 'quote symbol) value (list 'quote keys))
 	doc))
 
-(defmacro defgroup (symbol doc)
-  (list 'custom-declare-group (list 'quote symbol) doc))
+(defmacro defgroup (symbol doc &rest keys)
+  (list 'custom-declare-group (list 'quote symbol) doc (list 'quote keys)))
 
 (defun custom-declare-variable (symbol value keys)
   (let
@@ -88,7 +89,9 @@
 	    ((eq tem ':widget)
 	     (put symbol 'custom-widget (car keys)))
 	    ((eq tem ':after-set)
-	     (put symbol 'custom-after-set (car keys))))
+	     (put symbol 'custom-after-set (car keys)))
+	    ((eq tem ':before-set)
+	     (put symbol 'custom-before-set (car keys))))
       (setq keys (cdr keys)))
     (when (symbolp type)
       (when (and (not (get symbol 'custom-get))
@@ -102,11 +105,19 @@
 	(put symbol 'custom-widget (get type 'custom-widget))))
     value))
 
-(defun custom-declare-group (group &optional doc)
+(defun custom-declare-group (group &optional doc keys)
   (unless (assq group custom-groups)
     (setq custom-groups (nconc custom-groups (list (list group)))))
   (when doc
-    (put group 'custom-group-doc doc)))
+    (put group 'custom-group-doc doc))
+  (let
+      (tem)
+    (while keys
+      (setq tem (car keys))
+      (setq keys (cdr keys))
+      (cond ((eq tem ':widget)
+	     (put group 'custom-group-widget (car keys))))
+      (setq keys (cdr keys)))))
 
 (defun custom-add-to-group (symbol group)
   (let
@@ -119,6 +130,8 @@
 (defun custom-set-variable (symbol value &optional require)
   (when require
     (require require))
+  (when (get symbol 'custom-before-set)
+    (funcall (get symbol 'custom-before-set) symbol))
   (set symbol value)
   (when (get symbol 'custom-after-set)
     (funcall (get symbol 'custom-after-set) symbol)))
@@ -129,11 +142,10 @@
 (put 'font 'custom-set 'custom-set-font)
 (put 'font 'custom-get 'custom-get-font)
 
-(defun custom-set-font (symbol value &optional require)
-  (custom-set-variable symbol (if (stringp value)
-				  (get-font value)
-				value)
-		       require))
+(defun custom-set-font (symbol value &rest args)
+  (apply 'custom-set-variable symbol (if (stringp value)
+					 (get-font value)
+				       value) args))
 
 (defun custom-get-font (symbol)
   (let
@@ -145,11 +157,10 @@
 (put 'color 'custom-set 'custom-set-color)
 (put 'color 'custom-get 'custom-get-color)
 
-(defun custom-set-color (symbol value &optional require)
-  (custom-set-variable symbol (if (stringp value)
-				  (get-color value)
-				value)
-		       require))
+(defun custom-set-color (symbol value &rest args)
+  (apply 'custom-set-variable symbol (if (stringp value)
+					 (get-color value)
+				       value) args))
 
 (defun custom-get-color (symbol)
   (let
