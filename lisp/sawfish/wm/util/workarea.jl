@@ -27,9 +27,11 @@
 
     (export define-window-strut
 	    largest-rectangle-from-edges
-	    calculate-workarea)
+	    calculate-workarea
+	    calculate-workarea-from-struts)
 
     (open rep
+	  rep.system
 	  sawfish.wm.util.edges
 	  sawfish.wm.util.rects
 	  sawfish.wm.windows
@@ -37,11 +39,18 @@
 	  sawfish.wm.misc)
 
   (define (define-window-strut w left top right bottom)
-    (window-put w 'workarea-strut (list left top right bottom)))
+    (let ((new (list left top right bottom))
+	  (old (window-get w 'workarea-strut)))
+      (unless (equal old new)
+	(window-put w 'workarea-strut new)
+	(call-hook 'workarea-changed-hook))))
 
-  (define (combined-struts)
-    (let ((struts (mapcar (lambda (x) (window-get x 'workarea-strut))
-			  (workspace-windows))))
+  (define (combined-struts #!key (space current-workspace))
+    (let ((struts (mapcar (lambda (x)
+			    (window-get x 'workarea-strut))
+			  (filter-windows
+			   (lambda (x)
+			     (window-appears-in-workspace-p x space))))))
       (list (apply max (cons 0 (delq nil (mapcar car struts))))
 	    (apply max (cons 0 (delq nil (mapcar cadr struts))))
 	    (apply max (cons 0 (delq nil (mapcar caddr struts))))
@@ -106,4 +115,15 @@ head (of WINDOW)."
 		      edges #:avoided avoided #:head head) head-rect)))
       ;; Shrink that to the union of all struts
       (rectangle-intersection
-       rect (apply-struts-to-rect (combined-struts) head-rect)))))
+       rect (apply-struts-to-rect (combined-struts) head-rect))))
+
+  (define (calculate-workarea-from-struts #!key (workspace current-workspace))
+    (apply-struts-to-rect (combined-struts workspace)
+			  (rectangle-from-coords
+			   (cons 0 0) (screen-dimensions))))
+
+  (define (on-unmap w)
+    (when (window-get w 'workarea-strut)
+      (call-hook 'workarea-changed-hook)))
+
+  (add-hook 'unmap-notify-hook on-unmap))
