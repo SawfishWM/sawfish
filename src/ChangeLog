@@ -1,3 +1,15 @@
+1999-08-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (button_press): click the frame before looking for
+	the context map (since we only look for these maps in clicked
+	frame parts)
+	(unmap_notify): call reset_frame_parts
+
+	* windows.c (Fhide_window): call reset_frame_parts
+
+	* frames.c (reset_frame_parts): new function, resets clicked or
+	highlighted state associated with a window frame
+
 1999-08-29  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-ui.jl: fix option-menu problems, abbreviate displayed
