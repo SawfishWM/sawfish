@@ -262,6 +262,19 @@ Window manager tasks
 
     Use rep-orbit to provide the CORBA binding
 
+  - `wmlets'
+
+    allow applications to inject ``policy'' into the wm to affect their
+    windows. This could either be (sandboxed?) lisp code, or something
+    more declarative (but even then it could be lisp data, c.f. themes
+    created by sawfish-themer)
+
+    obvious uses for this: focus policy, placement policy, appearance
+    (apps that must (?) theme themself could also control their frames
+    without losing the consistent feel provided by the wm), ...?
+
+    (didn't NeWS allow this kind of thing, must do research..)
+
 
 
 ui tasks

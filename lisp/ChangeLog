@@ -1,3 +1,41 @@
+2000-10-20  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/util/nokogiri.jl (nokogiri-report-commands): use
+	keys to pass back type and user-level of commands that have
+	them
+
+	* sawfish/wm/ext/shade-hover.jl (shade-hover-before): check for
+	windowp before window-get'ing
+
+	* sawfish/wm/keymaps.jl: use user-customizable raise commands
+	by default
+
+	* sawfish/wm/commands/x-cycle.jl,
+	sawfish/wm/commands/move-resize.jl,
+	sawfish/wm/commands/grow-pack.jl, sawfish/wm/ext/auto-raise.jl,
+	sawfish/wm/state/shading.jl, sawfish/wm/state/maximize.jl,
+	sawfish/wm/state/configure.jl,
+	sawfish/wm/util/display-window.jl: use raise-window* instead of
+	raise-window
+
+	* sawfish/wm/util/stacking.jl (raise-window*, lower-window*,
+	raise-lower-window*): new functions, they choose a raise mode
+	based on the customization option user-raise-type
+
+	* sawfish/wm/stacking.jl, sawfish/wm/commands/groups.jl,
+	sawfish/wm/state/transient.jl: put raise/lower commands at
+	'expert level
+
+	* sawfish/wm/commands/raise-commands.jl: new command
+	raise-and-pass-through-click, uses user's preferred raise mode
+
+	* sawfish/wm/stacking.jl: renamed raise-window, lower-window,
+	and raise-lower-window as raise-single-window, etc..
+
+	* sawfish/wm/commands.jl (apply-command-keys): abstracted
+	command #!key args here. New parameter #:user-level
+	(command-type, command-user-level): new functions
+
 2000-10-19  John Harper  <jsh@eazel.com>
 
 	* version 0.32
