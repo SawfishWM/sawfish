@@ -43,6 +43,13 @@
   :type boolean
   :group maximize)
 
+(defcustom grow-is-maximize t
+  "Whether growing is considered to be maximization.  When you turn
+this on, you can use `unmaximize-window' or something similar to get
+back to the original size."
+  :type boolean
+  :group maximize)
+
 ;; Entry points.
 
 ;;;###autoload
@@ -109,6 +116,7 @@
 ;; Implementation part.
 
 (require 'rects)
+(require 'maximize)
 
 (defun gp-avoid-windows (w direction)
   "Returns list of windows to avoid when growing/filling window W in DIRECTION."
@@ -209,7 +217,6 @@
       (setq nheight (- stop wtop (- (cdr fdim) wheight))))
     (let
 	((tem (cons nwidth nheight)))
-      (require 'maximize)
       (maximize-truncate-dims w tem)	;truncate to column/row increments
       (setq nwidth (car tem))
       (setq nheight (cdr tem)))
@@ -217,7 +224,20 @@
       (setq wleft (- wleft (- nwidth wwidth))))
     (when (eq direction 'up)
       (setq wtop (- wtop (- nheight wheight))))
-    (move-resize-window-to w wleft wtop nwidth nheight)))
+    (when grow-is-maximize
+      (unless (window-get w 'unmaximized-geometry)
+        (window-put w 'unmaximized-geometry (list (car wpos) (cdr wpos)
+                                                  (car wdim) (cdr wdim))))
+      (if (memq direction '(left right))
+          (window-put w 'maximized-horizontally t)
+        (window-put w 'maximzed-vertically t)))
+    (move-resize-window-to w wleft wtop nwidth nheight)
+    (when maximize-raises (raise-window w))
+    (when grow-is-maximize
+      (call-window-hook 'window-maximized-hook w
+			(list (if (member direction '(left right))
+				  'horizontal 'vertical)))
+      (call-window-hook 'window-state-change-hook w (list '(maximized))))))
 
 (defun pack-window (w direction)
   (let* ((avoid-wins (gp-avoid-windows w direction))
@@ -236,7 +256,10 @@
     (when (eq direction 'up) (setq wtop sbottom))
     (when (eq direction 'right) (setq wleft (- sleft wwidth)))
     (when (eq direction 'down) (setq wtop (- stop wheight)))
-    (move-window-to w wleft wtop)))
+    (move-window-to w wleft wtop)
+    (call-window-hook 'after-move-hook w
+                      (list (list (if (memq direction '(left right))
+                                      'horizontal 'vertical))))))
 
 (provide 'grow-pack)
 
