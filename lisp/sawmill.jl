@@ -36,6 +36,7 @@
 (require 'functions)
 (require 'cursors)
 (require 'keymaps)
+(require 'configure)
 (require 'sawmill-gaol)
 
 ;; all rep-based programs should do this
