@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.62 2000/05/16 00:08:28 john Exp $
+;; $Id: sawmill-ui.jl,v 1.63 2000/05/30 15:08:28 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -1002,11 +1002,12 @@ exec rep "$0" "$@"
 		  ((full (expand-file-name theme dir)))
 		(when (catch 'out
 			(mapc (lambda (suf)
-				(let
-				    ((dir (format nil suf full theme)))
-				  (when (file-directory-p dir)
-				    (setq full dir)
-				    (throw 'out t))))
+				(let ((dir (format nil suf full theme)))
+				  (condition-case nil
+				      (when (file-directory-p dir)
+					(setq full dir)
+					(throw 'out t))
+				    (error))))
 			      '("%s" "%s.tar#tar/%s" "%s.tar.gz#tar/%s"
 			       "%s.tar.Z#tar/%s" "%s.tar.bz2#tar/%s"))
 			nil)
