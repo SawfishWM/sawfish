@@ -330,6 +330,8 @@
 	 'nil-frame)
 	((eq type 'transient)
 	 'brushed-metal-transient-frame)
+	((eq type 'unframed)
+	 'nil-frame)
 	(t
 	 'brushed-metal-frame)))
 

@@ -242,6 +242,8 @@
 	 'simple-transient-frame)
 	((eq type 'shaped-transient)
 	 'simple-shaped-transient-frame)
+	((eq type 'unframed)
+	 'nil-frame)
 	(t
 	 'simple-frame)))
 

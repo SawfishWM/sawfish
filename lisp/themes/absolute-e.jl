@@ -236,21 +236,21 @@
 
 (defvar absolute-e-shaped-transient-frame
  `(((background . ,absolute-e-bar-images)
-    (left-edge . 0)
-    (right-edge . 0)
+    (left-edge . 4)
+    (right-edge . 4)
     (top-edge . -4)
     (height . 4)
     (keymap . title-keymap)
     (cursor . hand2))
    ;; top-right corner
    ((background . ,absolute-e-bar-images)
-    (right-edge . -4)
+    (right-edge . 0)
     (width . 4)
     (top-edge . -4)
     (height . 4))
    ;; top-left corner
    ((background . ,absolute-e-bar-images)
-    (left-edge . -4)
+    (left-edge . 0)
     (width . 4)
     (top-edge . -4)
     (height . 4))))
@@ -262,6 +262,8 @@
 	 'absolute-e-transient-frame)
 	((eq type 'shaped-transient)
 	 'absolute-e-shaped-transient-frame)
+	((eq type 'unframed)
+	 'nil-frame)
 	(t
 	 'absolute-e-frame)))
 
