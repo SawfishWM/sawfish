@@ -1,5 +1,8 @@
 2000-12-04  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/frames.jl (frame-style-directory): check if the
+	directory exists before returning the result. Fixes #4902
+
 	* version 0.34
 
 	* sawfish/wm/keymaps.jl (wm-modifier-value): moved to the

@@ -440,9 +440,11 @@ deciding which frame type to ask a theme to generate.")
       (catch 'out
 	(mapc (lambda (cell)
 		(when (string-match (car cell) dir)
-		  (throw 'out (expand-last-match (if get-name
-						     (nth 2 cell)
-						   (nth 1 cell))))))
+		  (let ((full (expand-last-match (nth 1 cell))))
+		    (when (file-directory-p full)
+		      (throw 'out (if get-name
+				      (expand-last-match (nth 2 cell))
+				    full))))))
 	      theme-suffix-regexps)
 	nil)))
 
