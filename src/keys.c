@@ -519,7 +519,8 @@ eval_input_event(repv context_map)
 	repv hook = Fsymbol_value (Qunbound_key_hook, Qt);
 	if (!rep_VOIDP (hook) && hook != Qnil)
 	    result = Fcall_hook(Qunbound_key_hook, Qnil, Qor);
-	else if ((mods & (EV_TYPE_KEY | EV_MOD_RELEASE)) == EV_TYPE_KEY)
+	else if (rep_recurse_depth == 0
+		 && (mods & (EV_TYPE_KEY | EV_MOD_RELEASE)) == EV_TYPE_KEY)
 	{
 	    /* We're receiving events that we have no way of handling..
 	       I think this gives us justification in aborting in case
