@@ -1742,11 +1742,6 @@ A symbol naming the frame style to use for windows where no other style
 is explicitly specified.
 @end defvar
 
-@defun check-frame-availability name
-Returns @code{t} if a frame style called @var{name} exists. Will try to
-load such a frame from the filing system if necessary.
-@end defun
-
 @defun set-window-frame-style window style &optional type from-user
 Sets the frame of @var{window} to the style named by the symbol
 @var{style}. If @var{type} is defined then it names the frame type to
