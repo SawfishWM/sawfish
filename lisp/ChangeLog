@@ -1,5 +1,10 @@
 2000-10-24  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/focus.jl (focus-enter-fun, focus-leave-fun):
+	accept an extra MODE parameter		
+	(enter-exit mode): pointer-leave events only cause focus to be
+	jettisoned if (eq MODE 'normal)
+
 	* sawfish/wm/focus.jl (focus-click): call forget-button-press
 	after either replaying or ungrabbing pointer events (otherwise
 	following events are marked as click2, which won't trigger the

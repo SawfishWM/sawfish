@@ -1,5 +1,10 @@
 2000-10-24  John Harper  <jsh@eazel.com>
 
+	* events.c: reverted last change (it breaks some focus stuff),
+	instead the leave/enter hooks pass an extra argument: MODE, one
+	of the symbols `normal', `grab' or `ungrab', the xcrossing.mode
+	field of the event
+
 	* events.c: only call leave-notify-hook or enter-notify-hook
 	for NotifyNormal events (i.e. ignore Grab/Ungrab events since
 	they don't really represent the pointer crossing window
