@@ -1,3 +1,13 @@
+2000-02-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (save_timestamp): don't print the ``time backwards''
+	messages anymore
+
+	* functions.c (Fdisplay_message): translate font names to fonts
+
+	* colors.c, cursors.c, fonts.c, images.c (Fget_color,
+	Fget_cursor, Fget_font, Fmake_image): if dpy == 0, return nil
+
 2000-02-06  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.c (Fdisplay_message): if possible, keep the message
