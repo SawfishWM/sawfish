@@ -5,23 +5,26 @@
 (provide 'sawmill-gaol)
 
 (defvar sawmill-safe-functions
-  '(get-color-rgb get-color color-name color-rgb colorp
-    get-cursor cursorp get-font font-name fontp text-width font-height
+  '(get-color-rgb get-color color-name color-rgb colorp get-cursor
+    cursorp get-font font-name fontp text-width font-height
     screen-width screen-height get-x-property get-x-text-property
     list-x-properties x-atom x-atom-name make-image copy-image
     flip-image-horizontally flip-image-vertically flip-image-diagonally
-    image-get image-put imagep image-dimensions image-border
-    set-image-border image-shape-color set-image-shape-color
-    image-modifier set-image-modifier make-sized-image bevel-image
-    clear-image tile-image make-keymap bind-keys unbind-keys keymapp
-    eventp window-get window-name window-full-name window-icon-name
+    frame-part-get frame-part-put frame-part-window frame-part-position
+    frame-part-dimensions frame-part-state map-frame-parts
+    refresh-frame-part refresh-window rebuild-frame-part image-get
+    image-put imagep image-dimensions image-border set-image-border
+    image-shape-color set-image-shape-color image-modifier
+    set-image-modifier make-sized-image bevel-image clear-image
+    tile-image make-keymap bind-keys unbind-keys keymapp eventp
+    window-get window-name window-full-name window-icon-name
     window-mapped-p window-frame set-window-frame rebuild-frame
     window-position window-dimensions window-frame-dimensions windowp
     managed-windows get-window-by-id stacking-order window-visibility
     window-transient-p window-shaped-p window-visible-p window-framed-p
     window-id window-group-id window-size-hints call-window-hook
     window-maximized-p window-maximized-horizontally-p
-    window-maximized-vertically-p
+    window-maximized-vertically-p 
 
     add-frame-style check-frame-availability set-window-frame-style
     set-frame-for-window reframe-one-window rebuild-frames-with-style
