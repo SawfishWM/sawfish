@@ -19,7 +19,6 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;;;###autoload
 (defun shade-window (w)
   (interactive "W")
   (unless (window-get w 'shaded)
@@ -37,7 +36,6 @@
       (call-window-hook 'shade-window-hook w)
       (call-window-hook 'window-state-change-hook w))))
 
-;;;###autoload
 (defun unshade-window (w)
   (interactive "W")
   (when (window-get w 'shaded)
@@ -49,9 +47,15 @@
     (call-window-hook 'unshade-window-hook w)
     (call-window-hook 'window-state-change-hook w)))
 
-;;;###autoload
 (defun toggle-window-shaded (w)
   (interactive "W")
   (if (window-get w 'shaded)
       (unshade-window w)
     (shade-window w)))
+
+(defun shading-add-window (w)
+  (when (window-get w 'shaded)
+    (window-put w 'shaded nil)
+    (shade-window w)))
+
+(add-hook 'add-window-hook 'shading-add-window t)
