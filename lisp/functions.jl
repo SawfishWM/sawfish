@@ -146,6 +146,14 @@ list of strings DIRS."
   (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
 		  xterm-program (or xterm-args ""))))
 
+(defun run-shell-command (command)
+  "Execute the given shell command."
+  (interactive "sCommand:")
+  (system (format nil "%s &" command)))
+
+(define-command-args 'run-shell-command
+		     `(and (labelled ,(_ "Command:") string)))
+
 (defun window-really-wants-input-p (w)
   "Return nil if window W should never be focused."
   (and (not (window-get w 'never-focus))
