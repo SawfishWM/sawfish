@@ -1,3 +1,12 @@
+2001-03-07  John Harper  <jsh@eazel.com>
+
+	* functions.c (Fx_raise_window, Fx_lower_window): when these
+	functions are given a sibling, check if it has been destroyed.
+	If so, do nothing to the stacking order
+
+	(This should fix a failed assertion that Ramiro and Duane were
+	seeing)
+
 2001-02-26  John Harper  <jsh@eazel.com>
 
 	* keys.c (wm_mod): changed default value from EV_MOD_META to

@@ -49,8 +49,6 @@ static int server_grabs;
 
 static int xinerama_heads;
 
-static int xinerama_event_base, xinerama_error_base;
-
 #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
 # include <X11/extensions/Xinerama.h>
   static XineramaScreenInfo *xinerama_head_info;
@@ -60,6 +58,8 @@ static int xinerama_event_base, xinerama_error_base;
      { 0, 512, 0, 512, 768 }
    };
    static int debug_nheads = 2;
+# else
+   static int xinerama_event_base, xinerama_error_base;
 # endif
 #endif
 
@@ -102,7 +102,7 @@ windows isn't affected.
 
 	if (!WINDOW_IS_GONE_P (this))
 	{
-	    if (pred != 0)
+	    if (pred != 0 && !WINDOW_IS_GONE_P (pred))
 	    {
 		remove_from_stacking_list (this);
 		insert_in_stacking_list_below (this, pred);
@@ -138,11 +138,19 @@ raise WINDOW to the top of the stacking order.
 
     if (!WINDOW_IS_GONE_P (VWIN (win)))
     {
-	remove_from_stacking_list (VWIN (win));
 	if (WINDOWP (above))
-	    insert_in_stacking_list_above (VWIN (win), VWIN (above));
+	{
+	    if (!WINDOW_IS_GONE_P (VWIN (above)))
+	    {
+		remove_from_stacking_list (VWIN (win));
+		insert_in_stacking_list_above (VWIN (win), VWIN (above));
+	    }
+	}
 	else
+	{
+	    remove_from_stacking_list (VWIN (win));
 	    insert_in_stacking_list_above_all (VWIN (win));
+	}
 	restack_window (VWIN (win));
 	Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
     }
@@ -162,11 +170,19 @@ lower WINDOW to the bottom of the stacking order.
 
     if (!WINDOW_IS_GONE_P (VWIN (win)))
     {
-	remove_from_stacking_list (VWIN (win));
 	if (WINDOWP (below))
-	    insert_in_stacking_list_below (VWIN (win), VWIN (below));
+	{
+	    if (!WINDOW_IS_GONE_P (VWIN (below)))
+	    {
+		remove_from_stacking_list (VWIN (win));
+		insert_in_stacking_list_below (VWIN (win), VWIN (below));
+	    }
+	}
 	else
+	{
+	    remove_from_stacking_list (VWIN (win));
 	    insert_in_stacking_list_below_all (VWIN (win));
+	}
 	restack_window (VWIN (win));
 	Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
     }
@@ -966,7 +982,6 @@ DEFUN ("head-count", Fhead_count, Shead_count, (void), rep_Subr0)
 
 DEFUN ("find-head", Ffind_head, Sfind_head, (repv x, repv y), rep_Subr2)
 {
-    int i;
     if (rep_CONSP (x) && y == Qnil)
     {
 	y = rep_CDR (x);
@@ -976,16 +991,19 @@ DEFUN ("find-head", Ffind_head, Sfind_head, (repv x, repv y), rep_Subr2)
     rep_DECLARE (2, y, rep_INTP (y));
 
 #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
-    for (i = 0; i < xinerama_heads; i++)
     {
-	if ((xinerama_head_info[i].x_org <= rep_INT (x))
-	    && (xinerama_head_info[i].y_org <= rep_INT (y))
-	    && (xinerama_head_info[i].x_org
-		+ xinerama_head_info[i].width > rep_INT (x))
-	    && (xinerama_head_info[i].y_org
-		+ xinerama_head_info[i].height > rep_INT (y)))
+	int i;
+	for (i = 0; i < xinerama_heads; i++)
 	{
-	    return rep_MAKE_INT (i);
+	    if ((xinerama_head_info[i].x_org <= rep_INT (x))
+		&& (xinerama_head_info[i].y_org <= rep_INT (y))
+		&& (xinerama_head_info[i].x_org
+		    + xinerama_head_info[i].width > rep_INT (x))
+		&& (xinerama_head_info[i].y_org
+		    + xinerama_head_info[i].height > rep_INT (y)))
+	    {
+		return rep_MAKE_INT (i);
+	    }
 	}
     }
 #endif
