@@ -59,8 +59,9 @@ the window.")
 
 (defun sm-add-saved-properties (&rest props)
   (mapc (lambda (p)
-	  (setq sm-saved-window-properties
-		(cons p sm-saved-window-properties)))
+	  (or (memq p sm-saved-window-properties)
+	      (setq sm-saved-window-properties
+		    (cons p sm-saved-window-properties))))
 	props))
 
 
