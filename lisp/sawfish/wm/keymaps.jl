@@ -61,6 +61,12 @@
 						       (error nil))))
 					      (and ev (cons (car cell) ev))))
 					  (cdr value)))))
+
+	   (when (eq old-value (variable-default-value symbol))
+	     ;; protect the default-value, an ugly hack..
+	     (put symbol 'custom-default-value
+		  (copy-sequence (variable-default-value symbol))))
+
 	   ;; add in any non-command bindings
 	   (setq new-tail (nconc new-tail
 				 (filter (lambda (cell)
@@ -80,69 +86,96 @@
 
 ;;; Options
 
-  (defcustom global-keymap (make-keymap)
+  (defcustom global-keymap (bind-keys (make-keymap)
+			     "W-Left" 'previous-workspace
+			     "W-Right" 'next-workspace
+			     "W-Tab" 'cycle-windows)
     "Keymap containing bindings active anywhere."
     :group bindings
     :type keymap
     :before-set (lambda () (ungrab-keymap global-keymap))
     :after-set (lambda () (grab-keymap global-keymap)))
 
-  (defcustom window-keymap (make-keymap)
+  (defcustom window-keymap (bind-keys (make-keymap)
+			     "W-Up" 'raise-window
+			     "W-Down" 'lower-window
+			     "W-Button3-Click1" 'raise-lower-window
+			     "W-Button2-Click1" 'popup-window-menu
+			     "W-Button1-Move" 'move-window-interactively)
     "Keymap containing bindings active when a client window is focused."
     :group bindings
     :type keymap
     :before-set (lambda () (ungrab-keymap window-keymap))
     :after-set (lambda () (grab-keymap window-keymap)))
 
-  (defcustom root-window-keymap (make-keymap)
+  (defcustom root-window-keymap (bind-keys (make-keymap)
+				  "Button2-Click1" 'popup-root-menu)
     "Keymap containing bindings active when the pointer is in the root window
 (or when no window is focused)."
     :group bindings
     :user-level expert
     :type keymap)
 
-  (defcustom title-keymap (make-keymap)
+  (defcustom title-keymap (bind-keys (make-keymap)
+			    "Button3-Off" 'raise-lower-window
+			    "Button2-Move" 'resize-window-interactively
+			    "Button1-Click2" 'toggle-window-shaded
+			    "Button1-Move" 'move-window-interactively)
     "Keymap containing bindings active when the pointer is in the title of
 a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
-  (defcustom border-keymap (make-keymap)
+  (defcustom border-keymap (bind-keys (make-keymap)
+			     "Button3-Off" 'raise-lower-window
+			     "Button2-Move" 'move-window-interactively
+			     "Button1-Move" 'resize-window-interactively)
     "Keymap containing bindings active when the pointer is in the border of
 a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :user-level expert
     :type keymap)
 
-  (defcustom close-button-keymap (make-keymap)
+  (defcustom close-button-keymap (bind-keys (make-keymap)
+				   "Button3-Click1" 'popup-window-menu
+				   "S-Button1-Off" 'delete-group
+				   "Button1-Off" 'delete-window)
     "Keymap containing bindings active when the pointer is in the close button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :user-level expert
     :type keymap)
 
-  (defcustom iconify-button-keymap (make-keymap)
+  (defcustom iconify-button-keymap (bind-keys (make-keymap)
+				     "Button3-Click1" 'popup-window-menu
+				     "Button1-Off" 'iconify-window)
     "Keymap containing bindings active when the pointer is in the iconify
 button of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :user-level expert
     :type keymap)
 
-  (defcustom maximize-button-keymap (make-keymap)
+  (defcustom maximize-button-keymap (bind-keys (make-keymap)
+				      "Button3-Off" 'maximize-window-horizontally-toggle
+				      "Button2-Off" 'maximize-window-vertically-toggle
+				      "Button1-Off" 'maximize-window-toggle)
     "Keymap containing bindings active when the pointer is in the maximize
 button of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :user-level expert
     :type keymap)
 
-  (defcustom menu-button-keymap (make-keymap)
+  (defcustom menu-button-keymap (bind-keys (make-keymap)
+				  "Button3-Off" 'delete-window
+				  "Button1-Click1" 'popup-window-menu)
     "Keymap containing bindings active when the pointer is in the menu button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :user-level expert
     :type keymap)
 
-  (defcustom shade-button-keymap (make-keymap)
+  (defcustom shade-button-keymap (bind-keys (make-keymap)
+				   "Button1-Off" 'toggle-window-shaded)
     "Keymap containing bindings active when the pointer is in the shade button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
@@ -186,55 +219,4 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
   (define-custom-deserializer 'modifier-list
 			      (lambda (value)
 				(require 'sawfish.wm.util.decode-events)
-				(encode-modifier value)))
-
-
-;;; some bindings
-
-  (unless batch-mode
-    (bind-keys title-keymap
-      "Button3-Off" 'raise-lower-window
-      "Button2-Move" 'resize-window-interactively
-      "Button1-Click2" 'toggle-window-shaded
-      "Button1-Move" 'move-window-interactively)
-
-    (bind-keys border-keymap
-      "Button3-Off" 'raise-lower-window
-      "Button2-Move" 'move-window-interactively
-      "Button1-Move" 'resize-window-interactively)
-    
-    (bind-keys window-keymap
-      "W-Up" 'raise-window
-      "W-Down" 'lower-window
-      "W-Button3-Click1" 'raise-lower-window
-      "W-Button2-Click1" 'popup-window-menu
-      "W-Button1-Move" 'move-window-interactively)
-    
-    (bind-keys global-keymap
-      "W-Left" 'previous-workspace
-      "W-Right" 'next-workspace
-      "W-Tab" 'cycle-windows)
-    
-    (bind-keys root-window-keymap
-      "Button2-Click1" 'popup-root-menu)
-    
-    (bind-keys close-button-keymap
-      "Button3-Click1" 'popup-window-menu
-      "S-Button1-Off" 'delete-group
-      "Button1-Off" 'delete-window)
-    
-    (bind-keys iconify-button-keymap
-      "Button3-Click1" 'popup-window-menu
-      "Button1-Off" 'iconify-window)
-    
-    (bind-keys menu-button-keymap
-      "Button3-Off" 'delete-window
-      "Button1-Click1" 'popup-window-menu)
-    
-    (bind-keys maximize-button-keymap
-      "Button3-Off" 'maximize-window-horizontally-toggle
-      "Button2-Off" 'maximize-window-vertically-toggle
-      "Button1-Off" 'maximize-window-toggle)
-
-    (bind-keys shade-button-keymap
-      "Button1-Off" 'toggle-window-shaded)))
+				(encode-modifier value))))

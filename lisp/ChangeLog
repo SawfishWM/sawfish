@@ -1,5 +1,44 @@
 2001-04-11  John Harper  <jsh@eazel.com>
 
+	Committed some work-in-progress changes. The end goal is to
+	store customized keymaps as deltas from their default value.
+	That doesn't happen yet, but these changes will make it easier.
+
+	Work to record default values of all custom options:
+
+	* sawfish/wm/custom.jl (variable-default-value,
+	variable-declared-p): new functions
+
+	(custom-declare-variable): new keyword parameter DEFAULT-VALUE.
+
+	(defcustom): the expansion now passes the DEFAULT-VALUE to
+	custom-declare-variable
+
+	* sawfish/wm/keymaps.jl: Rewrote all keymap initializations to
+	use a single form instead of side-effecting the keymap after
+	it's created. This lets the default value be known
+
+	(custom-set-keymap): use an ugly hack to prevent the default
+	value being destructively modified
+
+
+	Added an extra deserialize/serialize pair when applying values
+	from the UI. This is so that the customize-set function can do
+	some kind of transformation at some point in the future..
+	
+	* sawfish/wm/custom.jl (make-custom-form): now requires an
+	unserialized VALUE. It serializes it before creating the form
+
+	* sawfish/wm/util/nokogiri.jl (nokogiri-apply-changes):
+	deserialize the value from the UI before passing it to
+	customize-set
+
+
+	* sawfish/wm/util/keymap-diff.jl (diff-keymaps, patch-keymap):
+	new file. Experimental code for keymap abuse
+
+2001-04-11  John Harper  <jsh@eazel.com>
+
 	Fixed bug 8047 (SOLARIS: Setting Gnomecc Workspaces spin button
 	to decrease no of workspaces fails.):
 

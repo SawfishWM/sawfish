@@ -119,7 +119,10 @@
 
   (define (nokogiri-apply-changes changes)
     (mapc (lambda (cell)
-	    (customize-set (car cell) (cdr cell))) changes))
+	    (customize-set (car cell)
+			   (custom-deserialize (cdr cell)
+					       (variable-type (car cell)))))
+	  changes))
 
   (define (nokogiri-report-commands)
     (mapcar (lambda (sym)

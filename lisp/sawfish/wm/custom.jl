@@ -41,6 +41,8 @@
 	    custom-set-typed-variable
 	    variable-customized-p
 	    variable-type
+	    variable-default-value
+	    variable-declared-p
 	    make-custom-form
 	    custom-eval
 	    custom-serialize
@@ -143,12 +145,13 @@ string representation required by some widget types. custom-widget may
 construct the widget definition passed to the ui backend."
 
     (let* ((cell (memq ':tooltip keys))
-	   (tooltip (cadr cell)))
+	   (tooltip (cadr cell))
+	   (tem (gensym)))
       (when cell
 	(setq keys (delq (car cell) (delq (cadr cell) keys))))
-      `(progn
-	 (defvar ,symbol ,value ,(if tooltip (concat doc "\n\n" tooltip) doc))
-	 (custom-declare-variable ',symbol ,(custom-quote-keys keys)))))
+      `(let ((,tem ,value))
+	 (defvar ,symbol ,tem ,(if tooltip (concat doc "\n\n" tooltip) doc))
+	 (custom-declare-variable ',symbol ,(custom-quote-keys keys) ,tem))))
 
   (defmacro defgroup (symbol doc #!rest keys)
     "Declare a new custom group called SYMBOL, with English name DOC. The
@@ -161,7 +164,7 @@ Note that the value of the `:group' key is not evaluated."
 
     `(custom-declare-group ',symbol ,doc ,(custom-quote-keys keys)))
 
-  (define (custom-declare-variable symbol keys)
+  (define (custom-declare-variable symbol keys #!optional default-value)
     (let (type prop)
       (while keys
 	(setq prop (cdr (assq (car keys) custom-option-alist)))
@@ -183,6 +186,7 @@ Note that the value of the `:group' key is not evaluated."
 	  (put symbol 'custom-set (get type 'custom-set)))
 	(when (and (not (get symbol 'custom-widget)) (get type 'custom-widget))
 	  (put symbol 'custom-widget (get type 'custom-widget))))
+      (put symbol 'custom-default-value default-value)
       symbol))
 
   (define (custom-declare-group group #!optional doc keys)
@@ -357,9 +361,19 @@ of choices."
     "Returns the customizable type of the variable named SYMBOL."
     (get symbol 'custom-type))
 
+  (define (variable-default-value symbol)
+    "Returns the default value of SYMBOL."
+    (get symbol 'custom-default-value))
+
+  ;; if the custom variable has been declared, then it will always
+  ;; have a default-value property
+  (define (variable-declared-p symbol)
+    (memq 'custom-default-value (symbol-plist symbol)))
+
   (define (make-custom-form symbol value)
-    (let ((fun (or (get symbol 'custom-set) 'custom-set-typed-variable)))
-      `(,fun ',symbol ',value
+    (let ((fun (or (get symbol 'custom-set) 'custom-set-typed-variable))
+	  (custom-value (custom-serialize value (variable-type symbol))))
+      `(,fun ',symbol ',custom-value
         ,@(and (eq fun 'custom-set-typed-variable)
 	       (list (list 'quote (variable-type symbol))))
         ,@(and (get symbol 'custom-require)
