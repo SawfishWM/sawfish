@@ -1,5 +1,8 @@
 2000-11-01  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm.jl: load sawfish.wm.state.maximize at startup,
+	since it adds things to hooks
+
 	* sawfish/wm/ext/edge-flip.jl (before-edge-flip-hook,
 	after-edge-flip-hook): new hooks
 
@@ -18,6 +21,10 @@
 	* sawfish/wm/state/wm-spec.jl, sawfish/wm/state/gnome.jl: set
 	queued maximize properties if a newly-created window needs to
 	be maximize
+
+	* sawfish/wm/state/gnome.jl: now understands
+	WIN_HINTS_DO_NOT_COVER flag to be the same as the `avoid'
+	property
 
 2000-10-30  John Harper  <jsh@eazel.com>
 

@@ -68,6 +68,7 @@
 			 sawfish.wm.frames
 			 sawfish.wm.swapper
 			 sawfish.wm.state.configure
+			 sawfish.wm.state.maximize
 			 sawfish.wm.state.mwm
 			 sawfish.wm.state.open-look
 			 sawfish.wm.state.transient
