@@ -335,9 +335,13 @@ A value between 0 and 1023 inclusive.")
   (sp-do-placement w sp-fit-or-nil place-window-interactively))
 
 
-;; reinitialise autoload defs
+;; init
 
-(put 'first-fit 'placement-mode place-window-first-fit)
-(put 'best-fit 'placement-mode place-window-best-fit)
-(put 'first-fit-or-interactive 'placement-mode
-     place-window-first-fit-or-interactive)
+;;;###autoload (define-placement-mode 'first-fit place-window-first-fit)
+;;;###autoload (define-placement-mode 'best-fit place-window-best-fit)
+;;;###autoload (define-placement-mode 'first-fit-or-interactive place-window-first-fit-or-interactive)
+
+(define-placement-mode 'first-fit place-window-first-fit)
+(define-placement-mode 'best-fit place-window-best-fit)
+(define-placement-mode 'first-fit-or-interactive
+		       place-window-first-fit-or-interactive)
