@@ -275,9 +275,13 @@ the proposed placement to the center of the screen."
   (sp-cost-from-distance (rectangle-center* point dims)
 			 (cons (/ (screen-width) 2) (/ (screen-height) 2))))
 
-(defvar sp-cost-components (list (cons sp-cost:focus-locality 1/2)
-				 (cons sp-cost:pointer-locality 1/4)
-				 (cons sp-cost:grid-lines 1/4))
+(defun sp-cost:overlap (point dims grid rects overlap)
+  (- 1 (min 1 (/ overlap
+		 (* (screen-width) (screen-height))))))
+
+(defvar sp-cost-components (list (cons sp-cost:overlap 3/4)
+				 (cons sp-cost:focus-locality 1/8)
+				 (cons sp-cost:pointer-locality 1/8))
   "Alist defining smart placement cost functions and their associated weights
 (multipliers).")
 
@@ -286,10 +290,10 @@ the proposed placement to the center of the screen."
 ;; POINT was chosen, RECTS defines all other windows on the screen.
 ;; The returned value must be non-negative, with higher values reflecting
 ;; better placements
-(defun sp-cost (point dims grid rects)
+(defun sp-cost (point dims grid rects overlap)
   (let ((total 0))
     (mapc (lambda (cell)
-	    (setq total (+ total (* ((car cell) point dims grid rects)
+	    (setq total (+ total (* ((car cell) point dims grid rects overlap)
 				    (cdr cell)))))
 	  sp-cost-components)
     total))
@@ -299,19 +303,14 @@ the proposed placement to the center of the screen."
       ((point (cons 0 0))
        points min-overlap tem)
 
-    ;; 1. find the list of points with the smallest overlap
+    ;; 1. find the list of possible placements (POINT . OVERLAP)
     (mapc (lambda (y)
 	    (rplacd point y)
 	    (mapc (lambda (x)
 		    (rplaca point x)
 		    (setq tem (sp-least-overlap dims point rects))
 		    (when tem
-		      (cond ((or (not min-overlap)
-				 (< (cdr tem) min-overlap))
-			     (setq min-overlap (cdr tem))
-			     (setq points (list (car tem))))
-			    ((= (cdr tem) min-overlap)
-			     (setq points (cons (car tem) points))))))
+		      (setq points (cons tem points))))
 		  (car grid)))
 	  (cdr grid))
 
@@ -321,18 +320,16 @@ the proposed placement to the center of the screen."
 	   nil)
 	  ((null (cdr points))
 	   ;; one choice
-	   (car points))
+	   (caar points))
 	  (t
 	   ;; n choices
-	   (let
-	       ((max-cost 0)
-		(max-point nil))
+	   (let ((max-cost 0)
+		 (max-point nil))
 	     (mapc (lambda (p)
-		     (let
-			 ((cost (sp-cost p dims grid rects)))
+		     (let ((cost (sp-cost (car p) dims grid rects (cdr p))))
 		       (when (> cost max-cost)
 			 (setq max-cost cost)
-			 (setq max-point p))))
+			 (setq max-point (car p)))))
 		   points)
 	     max-point)))))
 
