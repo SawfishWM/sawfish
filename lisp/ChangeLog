@@ -1,3 +1,19 @@
+2000-01-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-defaults.jl: removed default-font setting
+
+	* frames.jl (mark-frame-style-editable, frame-style-editable-p,
+	edit-frame-style): new functions (keeps track of which themes
+	are defined using make-theme, and hence are editable)
+	(sawmill-themer-program): variable naming program to launch to
+	edit a theme
+
+	* custom.jl (custom-menu): if the current theme is editable,
+	add an entry for the edit-frame-style command
+
+	* sawmill-gaol.jl (sawmill-safe-functions): added
+	mark-frame-style-editable
+
 2000-01-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* gnome-menu.jl (gnome-menu-read-order): ensure that blank

@@ -1,3 +1,31 @@
+2000-01-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c, windows.c (property_notify, add_window): support
+	compound text properties in icon and window names
+	* main.c (main): call setlocale (LC_ALL, "")
+	* fonts.c, frames.c, functions.c, sawmill.h: use XFontSet
+	instead of XFontStruct, and related other changes
+	* gtk-style.c: call gtk_set_locale (), handle missing RcStyle's
+	[ patch from Kondara MNU/Linux distribution, forwarded by
+	Yukihiro Nakai <nakai@internetsolutions.co.jp> ]
+
+	* display.c (xa_compound_text): new interned atom
+
+	* sawmill-ui.jl (build-frame-style): use a GtkCombo instead of
+	a GtkOptionMenu to display the list of themes, also put the
+	details box above the combo
+
+	* events.c (get_server_timestamp): new function, jumps through
+	hoops to get a recent timestamp direct from the server
+	(record_event_time): be more careful about accepting
+	timestamps, only if they look like they're actually _after_ the
+	previously last-seen time
+	(Fx_server_timestamp): new optional arg, when non-nil get a
+	timestamp direct from the server
+
+	* server.c (server_handle_request): don't set last_event_time
+	to CurrentTime, instead fetch a timestamp from the server
+
 2000-01-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c (translate_event_to_x_key): return FALSE if no keycode
