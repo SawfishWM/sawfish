@@ -125,13 +125,13 @@ that window on (counting from zero).")
 (defvar last-interesting-workspace nil)
 
 (defvar static-workspace-menus
-  '(("Insert" insert-workspace)
-    ("Next" next-workspace)
-    ("Previous" previous-workspace)
-    ("Merge next" merge-next-workspace)
-    ("Merge previous" merge-previous-workspace)
-    ("Move right" move-workspace-forwards)
-    ("Move left" move-workspace-backwards)))
+  '(("Insert workspace" insert-workspace)
+    ("Select next workspace" next-workspace)
+    ("Select previous workspace" previous-workspace)
+    ("Merge with next" merge-next-workspace)
+    ("Merge with previous" merge-previous-workspace)
+    ("Move workspace right" move-workspace-forwards)
+    ("Move workspace left" move-workspace-backwards)))
 
 ;; X constants
 (defconst NormalState 1)
