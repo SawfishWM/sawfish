@@ -274,10 +274,10 @@ that overrides settings set elsewhere.")
 
 ;; create some commands for setting the window type
 (mapc (lambda (type)
-	(set (intern (concat "set-frame:" (symbol-name type)))
-	     (make-closure `(lambda (w)
-			      (interactive "%W")
-			      (set-frame-for-window w t ',type)))))
+	(define-value (intern (concat "set-frame:" (symbol-name type)))
+		      (lambda (w)
+			(interactive "%W")
+			(set-frame-for-window w t type))))
       '(default transient shaped shaped-transient unframed))
 
 

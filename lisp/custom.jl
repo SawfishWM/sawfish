@@ -134,10 +134,10 @@
 	(put group tem (car keys)))
       (setq keys (cdr keys)))
     ;; declare a command to customize this group
-    (set (intern (concat "customize:" (symbol-name group)))
-	 (make-closure `(lambda ()
-			  (interactive)
-			  (customize ',group))))))
+    (define-value (intern (concat "customize:" (symbol-name group)))
+		  (lambda ()
+		    (interactive)
+		    (customize group)))))
 
 (defun custom-quote-keys (keys)
   (let
