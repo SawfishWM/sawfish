@@ -27,11 +27,11 @@ AC_CONFIG_AUX_DIR(etc)
 dnl Release versioning info
 version="0.30.3"
 
-output_files="src/Makefile lisp/Makefile themes/Makefile\
+output_files="src/Makefile lisp/Makefile scripts/Makefile themes/Makefile\
  lisp/sawfish/ui/Makefile lisp/sawfish/gtk/Makefile sounds/Makefile\
  man/Makefile po/Makefile Makedefs Makefile sawfish.spec"
 
-SUBDIRS="src lisp themes sounds man po"
+SUBDIRS="src lisp scripts themes sounds man po"
 AC_SUBST(SUBDIRS)
 
 add_subdir () {
