@@ -1023,8 +1023,12 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	if (tem && rep_CONSP(tem))
 	{
 	    message.fg = rep_CDR(tem);
-	    if (!COLORP(message.bg))
-		message.bg = Fget_color (message.bg);
+	    if (!COLORP(message.fg))
+	    {
+		message.fg = Fget_color (message.fg);
+		if (!message.fg)
+		    return rep_NULL;
+	    }
 	}
 	if (!COLORP(message.fg))
 	    message.fg = Fget_color (rep_VAL(&black));
@@ -1036,7 +1040,11 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	{
 	    message.bg = rep_CDR(tem);
 	    if (!COLORP(message.bg))
+	    {
 		message.bg = Fget_color (message.bg);
+		if (!message.bg)
+		    return rep_NULL;
+	    }
 	}
 	if (!COLORP(message.bg))
 	    message.bg = Fget_color (rep_VAL(&white));
@@ -1129,6 +1137,7 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	    XConfigureWindow (dpy, message_win,
 			      CWX | CWY | CWWidth | CWHeight | CWStackMode,
 			      &attr);
+	    XSetWindowBackground (dpy, message_win, VCOLOR(message.bg)->pixel);
 	    refresh_message_window ();
 	}
 	return rep_MAKE_INT(message_win);
