@@ -29,7 +29,10 @@ void (*event_handlers[LASTEvent])(XEvent *ev);
 static char *event_names[LASTEvent];
 
 /* Most recent known mouse position relative to the root window */
-int current_mouse_x, current_mouse_y;
+static int current_mouse_x, current_mouse_y;
+
+/* ..And the position before the most recently known */
+static int previous_mouse_x, previous_mouse_y;
 
 /* Most recently seen server timestamp */
 Time last_event_time;
@@ -53,7 +56,7 @@ DEFSYM(client_message_hook, "client-message-hook");
 DEFSYM(root, "root");
 
 /* Where possible record the timestamp from event EV */
-void
+static void
 record_event_time (XEvent *ev)
 {
     switch (ev->type)
@@ -81,6 +84,15 @@ record_event_time (XEvent *ev)
 	last_event_time = ev->xproperty.time;
 	break;
     }
+}
+
+static void
+record_mouse_position (int x, int y)
+{
+    previous_mouse_x = current_mouse_x;
+    previous_mouse_y = current_mouse_y;
+    current_mouse_x = x;
+    current_mouse_y = y;
 }
 
 
@@ -122,8 +134,7 @@ key_press (XEvent *ev)
     struct frame_part *fp;
     repv context_map = Qnil;
 
-    current_mouse_x = ev->xkey.x_root;
-    current_mouse_y = ev->xkey.y_root;
+    record_mouse_position (ev->xkey.x_root, ev->xkey.y_root);
 
     fp = find_frame_part_by_window (ev->xkey.window);
     if (fp != 0)
@@ -158,8 +169,7 @@ button_press (XEvent *ev)
     struct frame_part *fp;
     repv context_map = Qnil;
 
-    current_mouse_x = ev->xbutton.x_root;
-    current_mouse_y = ev->xbutton.y_root;
+    record_mouse_position (ev->xbutton.x_root, ev->xbutton.y_root);
 
     fp = find_frame_part_by_window (ev->xbutton.window);
     if (fp != 0)
@@ -208,8 +218,7 @@ motion_notify (XEvent *ev)
     if(XQueryPointer(dpy, ev->xmotion.window,
 		     &tmpw, &tmpw, &x, &y, &tmp, &tmp, &tmp))
     {
-	current_mouse_x = x;
-	current_mouse_y = y;
+	record_mouse_position (x, y);
     }
 
     fp = find_frame_part_by_window (ev->xmotion.window);
@@ -662,6 +671,18 @@ Returns (MOUSE-X . MOUSE-Y)
 		  rep_MAKE_INT(current_mouse_y));
 }
 
+DEFUN("query-last-pointer", Fquery_last_pointer, Squery_last_pointer,
+      (void), rep_Subr0) /*
+::doc:Squery-last-pointer::
+query-last-pointer
+
+Returns (MOUSE-X . MOUSE-Y)
+::end:: */
+{
+    return Fcons (rep_MAKE_INT(previous_mouse_x),
+		  rep_MAKE_INT(previous_mouse_y));
+}
+
 DEFUN("query-pointer-window", Fquery_pointer_window, Squery_pointer_window, (void), rep_Subr0) /*
 ::doc:Squery-pointer-window::
 query-pointer-window
@@ -751,6 +772,7 @@ events_init (void)
     event_names[MappingNotify] = "MappingNotify";
 
     rep_ADD_SUBR(Squery_pointer);
+    rep_ADD_SUBR(Squery_last_pointer);
     rep_ADD_SUBR(Squery_pointer_window);
 
     rep_INTERN(visibility_notify_hook);
