@@ -29,7 +29,7 @@
   :group focus
   :after-set (lambda () (focus-mode-changed)))
 
-(defcustom focus-proxy-click t
+(defcustom focus-click-through t
   "Does click-to-focus mode pass the click through to the window."
   :type boolean
   :group focus)
@@ -59,8 +59,8 @@
   (when (window-really-wants-input-p w)
     (set-input-focus w))
   (focus-pop-map w)
-  (when (or (window-get w 'focus-proxy-click)
-	    focus-proxy-click
+  (when (or (window-get w 'focus-click-through)
+	    focus-click-through
 	    (not (window-really-wants-input-p w)))
     ;; there's a problem here. allow-events called with replay-pointer
     ;; ignores any passive grabs on the window, thus if the wm has a

@@ -676,14 +676,14 @@ previous workspace."
   (unless (window-get w 'sticky)
     (ws-remove-window w t)
     (window-put w 'sticky t)
-    (window-put w 'fixed-position t)
+    (window-put w 'sticky-viewport t)
     (call-window-hook 'window-state-change-hook w)))
   
 (defun make-window-unsticky (w)
   (interactive "%W")
   (when (window-get w 'sticky)
     (window-put w 'sticky nil)
-    (window-put w 'fixed-position nil)
+    (window-put w 'sticky-viewport nil)
     (ws-add-window-to-space w current-workspace)
     (call-window-hook 'window-state-change-hook w)))
   

@@ -55,7 +55,7 @@
 (defun set-viewport (x y)
   (unless (and (= viewport-x-offset x) (= viewport-y-offset y))
     (mapc (lambda (w)
-	    (unless (window-get w 'fixed-position)
+	    (unless (window-get w 'sticky-viewport)
 	      (let
 		  ((pos (window-position w)))
 		(move-window-to w (- (+ (car pos) viewport-x-offset) x)
@@ -221,7 +221,7 @@
 (defun viewport-saved-state (w)
   (let
       ((position (window-position w)))
-    (when (window-get w 'fixed-position)
+    (when (window-get w 'sticky-viewport)
       (rplaca position (mod (car position) (screen-width)))
       (rplacd position (mod (cdr position) (screen-height))))
     `((position . ,(cons (mod (car position) (screen-width))
@@ -233,7 +233,7 @@
       ((position (cdr (assq 'position alist)))
        (viewport (cdr (assq 'viewport alist))))
     (when position
-      (if (or (not viewport) (window-get w 'fixed-position))
+      (if (or (not viewport) (window-get w 'sticky-viewport))
 	  (move-window-to w (car position) (cdr position))
 	(move-window-to w (+ (* (car viewport) (screen-width)) (car position))
 			(+ (* (cdr viewport) (screen-height)) (cdr position)))
@@ -241,7 +241,7 @@
 	  (move-window-to-current-viewport w)))
       (window-put w 'placed t))))
 			     
-(sm-add-saved-properties 'fixed-position)
+(sm-add-saved-properties 'sticky-viewport)
 (add-hook 'sm-window-save-functions viewport-saved-state)
 (add-hook 'sm-restore-window-hook viewport-load-state)
 

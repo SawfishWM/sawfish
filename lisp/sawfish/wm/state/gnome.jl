@@ -122,7 +122,7 @@
 (defun gnome-honour-client-state (w)
   (when (string= (window-name w) "panel")
     ;; XXX I don't think the GNOME hints specify these things
-    (window-put w 'focus-proxy-click t)
+    (window-put w 'focus-click-through t)
     (window-put w 'avoid t))
   (let
       ((state (get-x-property w '_WIN_STATE))
@@ -134,7 +134,7 @@
       (setq bits (aref (nth 2 state) 0))
       (unless (zerop (logand bits WIN_STATE_STICKY))
 	(window-put w 'sticky t)
-	(window-put w 'fixed-position t))
+	(window-put w 'sticky-viewport t))
       (unless (zerop (logand bits WIN_STATE_SHADED))
 	(window-put w 'shaded t))
 ;;; XXX this doesn't work since the frame hasn't been created yet..
@@ -174,8 +174,8 @@
 			  (not (zerop (logand values WIN_STATE_STICKY))))
 		     (and tem (zerop (logand values WIN_STATE_STICKY))))
 		 (toggle-window-sticky w))
-	     (window-put w 'fixed-position
-			 (not (window-get w 'fixed-position))))
+	     (window-put w 'sticky-viewport
+			 (not (window-get w 'sticky-viewport))))
 	   (unless (zerop (logand mask WIN_STATE_SHADED))
 	     (setq tem (window-get w 'shaded))
 	     (if (or (and (not tem)
