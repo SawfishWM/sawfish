@@ -188,7 +188,7 @@
 
 (defun custom-menu ()
   (list*
-   '("All settings" customize)
+   (list (_ "All settings") 'customize)
    '()
    (mapcar (lambda (group-list)
 	     (list (_ (or (get (car group-list) 'custom-group-doc)
