@@ -140,9 +140,10 @@ colormap_notify (XEvent *ev)
 	w->attr.colormap = attr.colormap;
 	/* Is it worth copying any other fields..?
 	   Note that we _musn't_ copy the x or y values */
+
+	if (w == focus_window)
+	    XInstallColormap (dpy, w->attr.colormap);
     }
-    if (w == focus_window)
-	XInstallColormap (dpy, w->attr.colormap);
 }
 
 static void
