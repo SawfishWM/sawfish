@@ -7,6 +7,106 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
 
+@heading 0.35
+
+@itemize @bullet
+
+@item Translation updates: ja (SATO Satoru), it (Michele Campeotto),
+zh_TW.Big5 (Chun-Chung Chen), pl (Daniel Koc), sk (Stanislav Visnovsky)
+
+@item Items in @code{choice} widgets may now contain descriptive names,
+syntax is @code{(@var{symbol} "@var{description}")}
+
+@item Changed @code{focus-windows-when-mapped} option to only apply to
+non-transient windows (this option is now enabled by default)
+
+@item New placement modes @code{top-left} and @code{off-center}.
+@code{top-left} is now the default mode for non-transients
+
+@item Enabled the module supporting the newly standardized GNOME/KDE
+window manager hints. Also made random changes to support KDE2 a lot
+better
+
+@item Added WM_PROTOCOLS @code{_SAWFISH_WM_RAISE_WINDOW} and
+@code{_SAWFISH_WM_LOWER_WINDOW}. Used by @code{maybe-raise-window} and
+@code{maybe-lower-window} functions.
+
+These are similar to @code{WM_TAKE_FOCUS}, in that if the window
+supports the protocol, it's up to it whether or not it raises (or
+lowers) the window in question. These functions should only be used
+where the user hasn't explicitly requested the restacking
+
+An example usage is an application that doesn't want its window to be
+raised due to a button-press event that initiates a drag operation
+
+@item New option @code{menus-include-shortcuts}, disabled by default
+(Unai Uribarri)
+
+@item Don't interpret windows with @code{WM_TRANSIENT_FOR} set to the
+root window as children of all windows in the group (it causes too many
+annoying effects), instead just decorate these windows as transients
+
+@item Handle @code{group} and @code{transient} iconification modes
+better, don't use a recursive method, instead use one pass to identify
+the windows to change, then another to make the changes. In
+@code{transients} mode, only change the state of shared transients if
+they will have no visible parents afterwards
+
+@item In the (old) GNOME hints code, support a @code{_WIN_HINTS} client
+message (with a similar format to the @code{_WIN_STATE} message)
+
+@item New module @code{sawfish.wm.commands.viewport-extras}, some
+commands for viewport for viewport navigation (Dams Nadé)
+
+@item Check for @code{never-iconify} and @code{never-maximize}
+window properties when appropriate
+
+@item Support sixth and seventh mouse buttons (Steve Haslam)
+
+@item Bug fixes:
+
+@itemize @minus
+
+@item Fixed problems with reverting changes to list-based options
+
+@item Don't allow the empty list as a valid modifier list
+
+@item Fixed bug where restarting the wm with
+@code{focus-windows-when-mapped} set would cause any shaded windows to
+be deleted
+
+@item Ignore iconified windows in the grow-pack code
+
+@item Added @code{font-ascent} and @code{font-descent} functions to the
+gaol
+
+@item Catch errors when loading site-init and rep-defaults files
+
+@item Don't use @code{""} to denote a null doc string (which has bad
+side effects when internationalized)
+
+@item Don't need to run @samp{sawfish-client -} to get a repl anymore,
+just @samp{sawfish-client}
+
+@item Fixed bugs in @code{composite-images} function
+
+@item Fixed ordering of states output by @code{gtk-style} program
+(michaelj@@maine.rr.com)
+
+@item Fixed grabbing mono window icons in gdk-pixbuf mode
+
+@item Reject button event descriptions that don't specify at least one
+mouse button
+
+@item Accept @code{()} as a valid image modifier color component
+
+@item Now grabs translatable strings from @code{defgroup} forms
+correctly
+
+@end itemize
+@end itemize
+
+
 @heading 0.34
 
 @itemize @bullet
