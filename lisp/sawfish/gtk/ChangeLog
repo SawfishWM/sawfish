@@ -1,3 +1,9 @@
+2000-12-22  John Harper  <jsh@eazel.com>
+
+	* widgets/list.jl: never destructively modify the list, fixes
+	some weird bugs. E.g. it allows invalid event descriptions to
+	be caught and reverted (fixing #5323)
+
 2000-12-04  John Harper  <jsh@eazel.com>
 
 	* version 0.34

@@ -307,9 +307,8 @@ the proposed placement to the center of the screen."
     (declare (unused point dims grid rects))
     (exp (- (/ overlap (* (screen-width) (screen-height))))))
 
-  (defvar sp-cost-components (list (cons sp-cost:overlap 3/4)
-				   (cons sp-cost:focus-locality 1/8)
-				   (cons sp-cost:pointer-locality 1/8))
+  (defvar sp-cost-components (list (cons sp-cost:overlap 7/8)
+				   (cons sp-cost:center-locality 1/8))
     "Alist defining smart placement cost functions and their associated weights
 (multipliers).")
 

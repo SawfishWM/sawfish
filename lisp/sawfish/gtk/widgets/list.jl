@@ -76,8 +76,9 @@
 			  (with-clist-frozen clist
 			    (if (not selection)
 				(progn
-				  (setq value (nconc value (list new)))
+				  (setq value (append value (list new)))
 				  (gtk-clist-append clist (print-value new)))
+			      (setq value (copy-sequence value))
 			      (setq value (insert-after new value selection))
 			      (gtk-clist-insert
 			       clist (1+ selection) (print-value new))
@@ -92,6 +93,7 @@
 	  (let ((orig-sel selection))
 	    (if (zerop selection)
 		(setq value (cdr value))
+	      (setq value (copy-sequence value))
 	      (rplacd (nthcdr (1- selection) value)
 		      (nthcdr (1+ selection) value)))
 	    (with-clist-frozen clist
@@ -103,6 +105,7 @@
 
       (define (edit-item)
 	(when selection
+	  (setq value (copy-sequence value))
 	  (let* ((orig-sel selection)
 		 (cell (nthcdr orig-sel value))
 		 (callback (lambda (new)

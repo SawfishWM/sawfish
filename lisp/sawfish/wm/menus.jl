@@ -51,7 +51,7 @@
   ;; Suppress annoying compiler warnings
   (eval-when-compile (require 'rep.io.timers))
 
-  (defcustom menus-include-shortcuts t
+  (defcustom menus-include-shortcuts nil
     "Display key-binding information in menu items."
     :type boolean
     :group misc

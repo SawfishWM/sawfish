@@ -1,5 +1,15 @@
 2000-12-22  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/placement/smart.jl (sp-cost-components): removed
+	the pointer and focus locality components by default
+
+	* sawfish/wm/placement/top-left.jl: new placement mode,
+	staggers from top-left, filling along the diagonal. Supports
+	resizing windows to fit, but this is currently disabled
+
+	* sawfish/wm/menus.jl (menus-include-shortcuts): this option
+	defaults to nil
+
 	* sawfish/wm/commands/grow-pack.jl (gp-avoid-windows): ignore
 	iconified windows
 

@@ -191,4 +191,5 @@
 (autoload-command (quote move-viewport-previous) (quote sawfish.wm.commands.viewport-extras))
 (autoload-command (quote move-window-previous) (quote sawfish.wm.commands.viewport-extras))
 (autoload-command (quote move-window-next) (quote sawfish.wm.commands.viewport-extras))
+(autoload-placement-mode 'top-left 'sawfish.wm.placement.top-left)
 ;;; ::autoload-end::
