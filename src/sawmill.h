@@ -154,6 +154,7 @@ typedef struct lisp_image {
 #define VIMAGE(v)	((Lisp_Image *)rep_PTR(v))
 
 enum frame_part_states {
+    fps_none = -1,
     fps_normal = 0,
     fps_focused,
     fps_highlighted,
@@ -181,6 +182,12 @@ struct frame_part {
     repv font[fps_MAX];
     repv fg[fps_MAX];			/* may only be color */
     repv bg[fps_MAX];			/* may be color or image */
+
+    /* If renderer != Qnil, this overrides the bg array. It's a
+       function to call to render the contents of rendered_image
+       to the current state. */
+    repv renderer, rendered_image;
+    int rendered_state;
 
     repv cursor;
 };
