@@ -103,7 +103,7 @@
 ;; load i18n support when necessary
 (unless batch-mode
   (let
-      ((lang (getenv "LANG")))
+      ((lang (or (getenv "LC_ALL") (getenv "LC_MESSAGES") (getenv "LANG"))))
     (when (and lang (not (string= lang "C"))
 	       (not (get-command-line-option "--disable-nls")))
       (require 'gettext)
