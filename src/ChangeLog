@@ -1,5 +1,12 @@
 1999-09-06  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill-ui.jl (build-frame-style:update-readme): strip
+	trailing whitespace from the README file
+
+	* functions.c (Fshow_message): don't set save_under and
+	backing_store in the message window--they slow down opaque
+	window movement on XFree86..
+
 	* windows.c, images.c, fonts.c, cursors.c, colors.c: define rep
 	comparison functions for these types, I'd forgotten that they
 	couldn't just be null pointers
