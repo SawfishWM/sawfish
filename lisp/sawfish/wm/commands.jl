@@ -302,8 +302,8 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
     (and (closurep fun)
 	 (let ((body (closure-function fun)))
 	   (cond ((bytecodep body)
-		  ;; interactive spec is 6th element of the vector
-		  (and (>= (length body) 6) (aref body 5)))
+		  ;; interactive spec is 5th element of the vector
+		  (and (>= (length body) 5) (aref body 4)))
 		 ((eq (car body) 'lambda)
 		  ;; search for interactive decl at head of body
 		  (let loop ((rest (cddr body)))
