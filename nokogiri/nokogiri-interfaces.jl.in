@@ -23,6 +23,8 @@
 
 (provide 'nokogiri-interfaces)
 
+(defvar *nokogiri-directory* "__nokogiridir__")
+
 (define-interface nokogiri-apply-interface
   (export define-change-handler
 	  apply-slot-changes
