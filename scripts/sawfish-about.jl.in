@@ -1,5 +1,10 @@
 #!/bin/sh
-REP_LOAD_PATH="__lispdir__" exec rep "$0" "$@"
+
+REP_LOAD_PATH="__lispdir__"
+export REP_LOAD_PATH
+
+exec rep "$0" "$@"
+
 !#
 
 #| sawfish-about.jl.in -- helper process for sawfish about dialog
