@@ -68,7 +68,7 @@
 
   (defcustom persistent-group-ids nil
     "Persistent group ids: \\w"
-    :type (list string)
+    :type (list symbol)
     :user-level expert
     :group misc)
 
