@@ -43,6 +43,7 @@
 	     window-type-add-border
 	     find-all-frame-styles
 	     frame-style-menu
+	     frame-type-menu
 	     remove-frame-class
 	     add-frame-class
 	     set-frame-part-value
@@ -475,17 +476,31 @@ deciding which frame type to ask a theme to generate.")
 	(setq lst (sort lst string-lessp)))
       (mapcar intern lst)))
 
-  (define (frame-style-menu)
+  (define (frame-style-menu w)
     (let ((styles (find-all-frame-styles t)))
       (nconc (mapcar (lambda (s)
 		       (list (quote-menu-item (symbol-name s))
 			     (lambda ()
-			       (set-frame-style (current-event-window) s))))
+			       (set-frame-style (current-event-window) s))
+			     (cons 'check (eq (window-get w 'frame-style) s))))
 		     styles)
 	     (list '())
 	     (list (list (_ "Default")
 			 (lambda ()
-			   (set-frame-style (current-event-window) nil)))))))
+			   (set-frame-style (current-event-window) nil))
+			 (cons 'check (not (window-get w 'frame-style))))))))
+
+  (define (frame-type-menu w)
+    `((,(_ "Normal") set-frame:default
+       (check . ,(eq (window-type w) 'default)))
+      (,(_ "Title-only") set-frame:shaped
+       (check . ,(eq (window-type w) 'shaped)))
+      (,(_ "Border-only") set-frame:transient
+       (check . ,(eq (window-type w) 'transient)))
+      (,(_ "Top-border") set-frame:shaped-transient
+       (check . ,(eq (window-type w) 'shaped-transient)))
+      (,(_ "None") set-frame:unframed
+       (check . ,(eq (window-type w) 'unframed)))))
 
 
 ;;; removing frame parts
