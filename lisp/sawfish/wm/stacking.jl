@@ -151,6 +151,9 @@ the empty list."
       (rplaca cell next)
       cell)))
 
+(define (mapped-stacking-order)
+  (delete-if-not window-mapped-p (stacking-order)))
+
 
 ;; stacking functions
 
@@ -159,7 +162,7 @@ the empty list."
   (interactive "%W")
   ;; work downwards from top
   (let ((constraint (make-constraint w))
-	(stack (cons '() (delq w (stacking-order)))))
+	(stack (cons '() (delq w (mapped-stacking-order)))))
     (let loop ()
       (cond ((constraint (car stack) (cdr stack))
 	     (if (car stack)
@@ -176,7 +179,7 @@ the empty list."
   "Lower the window to its lowest allowed position in the stacking order."
   (interactive "%W")
   (let ((constraint (make-constraint w))
-	(stack (cons (nreverse (delq w (stacking-order))) '())))
+	(stack (cons (nreverse (delq w (mapped-stacking-order))) '())))
     ;; work upwards from bottom
     (let loop ()
       (cond ((constraint (car stack) (cdr stack))
@@ -195,7 +198,7 @@ the empty list."
   "Change the stacking of window ABOVE so that it is as closely above window
 BELOW as possible."
   (let ((constraint (make-constraint above))
-	(stack (break-window-list (delq above (stacking-order)) below)))
+	(stack (break-window-list (delq above (mapped-stacking-order)) below)))
     (rplacd stack (cons below (cdr stack)))
     (let loop ()
       (cond ((constraint (car stack) (cdr stack))
@@ -214,7 +217,7 @@ BELOW as possible."
   "Change the stacking of window BELOW so that it is as closely below window
 ABOVE as possible."
   (let ((constraint (make-constraint below))
-	(stack (break-window-list (delq below (stacking-order)) above)))
+	(stack (break-window-list (delq below (mapped-stacking-order)) above)))
     (rplaca stack (cons above (car stack)))
     (let loop ()
       (cond ((constraint (car stack) (cdr stack))
@@ -234,7 +237,7 @@ except, possibly, for the position of window W, restore the consistent
 state including window W. This is achieved by raising or lowering
 window W as appropriate."
   (let ((constraint (make-constraint w))
-	(stack (break-window-list (stacking-order) w)))
+	(stack (break-window-list (mapped-stacking-order) w)))
     (unless (constraint (car stack) (cdr stack))
       (if (< (length (car stack)) (length (cdr stack)))
 	  (raise-window w)
@@ -271,7 +274,7 @@ they are stacked within the layer (top to bottom)."
 			       w current-workspace)))
 		   (lambda (x)
 		     (window-appears-in-workspace-p x space)))
-		 (stacking-order)))
+		 (mapped-stacking-order)))
 	 (old-posn (- (length order) (length (memq w order))))
 	 (stack (cons '() (delq w order))))
     (let loop ()
@@ -311,6 +314,7 @@ lowest possible position. Otherwise raise it as far as allowed."
 
 (add-hook 'add-window-hook stacking-add-window t)
 (add-hook 'after-add-window-hook restack-window t)
+(add-hook 'map-notify-hook restack-window t)
 
 (sm-add-saved-properties 'depth)
 (add-swapped-properties 'depth)
