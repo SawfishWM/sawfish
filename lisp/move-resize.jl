@@ -69,7 +69,8 @@
 
 (defvar move-resize-map (bind-keys (make-keymap)
 			  "Any-Off" 'move-resize-finished
-			  "Any-Move" 'move-resize-motion))
+			  "Any-Move" 'move-resize-motion
+			  "Any-ESC" 'move-resize-cancel))
 
 ;; specials
 (defvar move-resize-window nil)
@@ -150,20 +151,26 @@
 	  ;; ensure that we catch _all_ mouse events
 	  (when (grab-pointer w (get-cursor 'hand2))
 	    (unwind-protect
-		(progn
-		  (unless (eq move-resize-mode 'opaque)
-		    (setq move-resize-last-outline
-			  (list move-resize-mode
-				move-resize-x move-resize-y
-				(+ move-resize-width (car move-resize-frame))
-				(+ move-resize-height (cdr move-resize-frame))))
-		    (apply 'draw-window-outline move-resize-last-outline))
-		  (when (eq move-resize-function 'resize)
-		    (move-resize-infer-anchor))
-		  (catch 'move-resize-done
-		    (when from-motion-event
-		      (move-resize-motion))
-		    (recursive-edit)))
+		(when (grab-keyboard w)
+		  (unwind-protect
+		      (progn
+			(unless (eq move-resize-mode 'opaque)
+			  (setq move-resize-last-outline
+				(list move-resize-mode
+				      move-resize-x move-resize-y
+				      (+ move-resize-width
+					 (car move-resize-frame))
+				      (+ move-resize-height
+					 (cdr move-resize-frame))))
+			  (apply 'draw-window-outline
+				 move-resize-last-outline))
+			(when (eq move-resize-function 'resize)
+			  (move-resize-infer-anchor))
+			(catch 'move-resize-done
+			  (when from-motion-event
+			    (move-resize-motion))
+			  (recursive-edit)))
+		    (ungrab-keyboard)))
 	      (ungrab-pointer))))
       (when server-grabbed
 	(ungrab-server))
@@ -256,6 +263,16 @@
     (apply 'erase-window-outline move-resize-last-outline))
   (move-resize-apply)
   (throw 'move-resize-done t))
+
+(defun move-resize-cancel ()
+  (interactive)
+  (if (eq move-resize-mode 'opaque)
+      (progn
+	(move-window-to move-resize-window move-resize-old-x move-resize-old-y)
+	(resize-window-to
+	 move-resize-window move-resize-old-width move-resize-old-height))
+    (apply 'erase-window-outline move-resize-last-outline))
+  (throw 'move-resize-done nil))
 
 ;; commit the current state of the move or resize
 (defun move-resize-apply ()
