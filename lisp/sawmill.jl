@@ -50,6 +50,7 @@
 (require 'transient)
 (require 'frames)
 (require 'workspace)
+(require 'viewport)
 (require 'shading)
 (require 'stacking)
 (require 'place-window)
