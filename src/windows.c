@@ -140,7 +140,7 @@ find_window_by_id (Window id)
     if (w != 0)
     {
 	DB(("find_window_by_id (%lx) --> %s\n",
-	    id, (w != 0) ? rep_STR(w->name) : ""));
+	    id, (w != 0) ? (char *) rep_STR(w->name) : ""));
     }
     return w;
 }
@@ -157,7 +157,7 @@ x_find_window_by_id (Window id)
     if (w != 0)
     {
 	DB(("x_find_window_by_id (%lx) --> %s\n",
-	    id, (w != 0) ? rep_STR(w->name) : ""));
+	    id, (w != 0) ? (char *) rep_STR(w->name) : ""));
     }
     return w;
 }
@@ -408,7 +408,7 @@ emit_pending_destroys (void)
     {
 	Lisp_Window *w;
     again:
-	for (w = window_list; w != 0; w = w->next)
+	for (w = window_list; w != 0 && !rep_INTERRUPTP; w = w->next)
 	{
 	    if (w->id == 0 && !w->destroyed)
 	    {
