@@ -43,3 +43,5 @@
 
 ;; invoke the GNOME terminal instead of xterm
 (setq xterm-program "gnome-terminal")
+
+(provide 'gnome-int)
