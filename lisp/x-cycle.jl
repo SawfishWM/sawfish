@@ -171,10 +171,25 @@
 
 ;;;###autoload
 (defun cycle-group (event w)
+  "Cycle through all windows in the same group as the current window."
   (interactive "e\n%W")
   (let
       ((x-cycle-windows (windows-in-group w)))
     (cycle-windows event)))
+
+;;;###autoload
+(defun cycle-prefix (event w)
+  "Cycle through all windows whose names match the leading colon-delimited
+prefix of the current window."
+  (interactive "e\n%W")
+  (when (string-match "^([^:]+)\\s*:" (window-name w))
+    (let*
+	((prefix (expand-last-match "\\1"))
+	 (re (concat ?^ (quote-regexp prefix) "\\s*:"))
+	 (x-cycle-windows (filter (lambda (w)
+				    (string-match re (window-name w)))
+				  (managed-windows))))
+      (cycle-windows event))))
 
 (defun x-cycle-next ()
   (interactive)
