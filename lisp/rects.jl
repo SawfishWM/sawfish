@@ -53,7 +53,7 @@
     (nreverse rects)))
 
 ;; returns a list of (LEFT TOP RIGHT BOTTOM [OVERLAP-WEIGHT])
-(defun rectangles-from-windows (windows &optional weight-alist)
+(defun rectangles-from-windows (windows &optional weight-fun)
   (mapcar #'(lambda (w)
 	      (let
 		  ((dims (window-frame-dimensions w))
@@ -62,9 +62,10 @@
 		(list* (car pos) (cdr pos)
 		       (+ (car pos) (car dims))
 		       (+ (cdr pos) (cdr dims))
-		       (and (setq tem (assoc-regexp
-				       (window-name w) weight-alist))
-			    (list (cdr tem))))))
+		       (and (setq tem (if weight-fun
+					  (funcall weight-fun w)
+					(window-get w 'weight)))
+			    (list tem)))))
 	  windows))
 
 ;; returns (X-POINTS . Y-POINTS)
