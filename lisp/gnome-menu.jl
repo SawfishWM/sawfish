@@ -42,7 +42,7 @@
     nil))
 
 (defvar gnome-menu-lang (let
-			    ((lang (getenv "LANG")))
+			    ((lang (or (getenv "LC_ALL") (getenv "LANG"))))
 			  (when (string= lang "en")
 			    (setq lang nil))
 			  lang)
@@ -80,7 +80,7 @@
 		   (setq name (expand-last-match "\\1")))
 		  ((and (eq section 'desktop-entry) gnome-menu-lang
 			(string-looking-at
-			 "Name\\[([a-z]+)\\]=(.*)\n" line 0 t)
+			 "Name\\[([^]]+)\\]=(.*)\n" line 0 t)
 			(string= gnome-menu-lang (expand-last-match "\\1")))
 		   (setq name (expand-last-match "\\2")))
 		  ((and (eq section 'desktop-entry)
