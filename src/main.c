@@ -254,6 +254,37 @@ usage (void)
 	   , stderr);
 }
 
+static repv
+inner_main (repv arg)
+{
+    repv res = rep_load_environment(rep_string_dup ("sawmill"));
+    if (res != rep_NULL)
+    {
+#if (rep_INTERFACE < 8)
+	repv tv;
+	rep_GC_root gc_tv;
+#endif
+
+	/* final initialisation.. */
+	if(rep_SYM(Qbatch_mode)->value == Qnil)
+	    manage_windows ();
+
+	/* then jump into the event loop.. */
+	if(rep_SYM(Qbatch_mode)->value == Qnil)
+	    res = Frecursive_edit ();
+
+#if (rep_INTERFACE < 8)
+	tv = rep_throw_value;
+	rep_throw_value = rep_NULL;
+	rep_PUSHGC(gc_tv, tv);
+	Fcall_hook (Qbefore_exit_hook, Qnil, Qnil);
+	rep_POPGC;
+	rep_throw_value = tv;
+#endif
+    }
+    return res;
+}
+
 int
 main(int argc, char **argv)
 {
@@ -275,8 +306,6 @@ main(int argc, char **argv)
 
     if (sys_init(prog_name))
     {
-	repv res;
-
 	sawmill_symbols();
 
 	/* call all init funcs... */
@@ -293,33 +322,11 @@ main(int argc, char **argv)
 	functions_init ();
 	server_init ();
 
-	res = rep_load_environment(rep_string_dup ("sawmill"));
-	if (res != rep_NULL)
-	{
-#if (rep_INTERFACE < 8)
-	    repv tv;
-	    rep_GC_root gc_tv;
+#if rep_INTERFACE >= 8
+	rep_call_with_barrier (inner_main, Qnil, rep_TRUE, 0, 0, 0);
+#else
+	inner_main (Qnil);
 #endif
-	    rc = 0;
-
-	    /* final initialisation.. */
-	    if(rep_SYM(Qbatch_mode)->value == Qnil)
-		manage_windows ();
-
-	    /* then jump into the event loop.. */
-	    if(rep_SYM(Qbatch_mode)->value == Qnil)
-		res = Frecursive_edit ();
-
-#if (rep_INTERFACE < 8)
-	    tv = rep_throw_value;
-	    rep_throw_value = rep_NULL;
-	    rep_PUSHGC(gc_tv, tv);
-	    Fcall_hook (Qbefore_exit_hook, Qnil, Qnil);
-	    rep_POPGC;
-	    rep_throw_value = tv;
-#endif
-	}
-
 	rc = rep_top_level_exit ();
 
 	/* call all exit funcs... */
