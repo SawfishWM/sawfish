@@ -1,3 +1,25 @@
+2000-09-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/keymaps.jl (pointer-motion-threshold): declare
+	this built-in customization option
+
+2000-08-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/menus.jl: action parts of menu items may now be
+	arbitrary lisp objects, instead of just those with a read
+	syntax. This is achieved by using a hash table to map
+	non-symbol objects to integer ``nicknames'' before passing the
+	menu structure to the helper process. When a nickname comes
+	back as the result, dereference the table to find the actual
+	object. The reason for this is to allow menu items to contain
+	closures, avoiding the gratuitous use of `eval' that was
+	happening
+
+	* sawfish/wm/ext/old-window-menu.jl,
+	sawfish/wm/ext/beos-window-menu.jl, sawfish/wm/workspace.jl,
+	sawfish/wm/frames.jl, sawfish/wm/util/groups.jl: use closures
+	instead of bare code in menu items
+
 2000-08-30    <john@dcs.warwick.ac.uk>
 
 	Some work to help the desktop-in-a-window approach work

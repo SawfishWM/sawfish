@@ -1,3 +1,12 @@
+2000-09-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (record_mouse_position): handle pointer motion
+	threshold
+	(motion_notify): only evaluate the event if pointer_in_motion
+	is true
+
+	* sawmill.h (POS, ABS): new macros
+
 2000-08-31  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c (eval_input_event): removed `yow!' message and
