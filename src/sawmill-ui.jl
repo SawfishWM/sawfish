@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.29 1999/10/17 15:13:35 john Exp $
+;; $Id: sawmill-ui.jl,v 1.30 1999/10/24 19:57:22 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -722,7 +722,7 @@ exec rep "$0" "$@"
 	  (get-key spec ':commands))
     (gtk-container-add entry-hbox entry)
     (gtk-box-pack-end entry-hbox entry-button)
-    (gtk-container-add vbox-2 entry-hbox)
+    (gtk-box-pack-start vbox-2 entry-hbox)
     (gtk-container-add vbox-2 scroller)
     (gtk-signal-connect cmd-clist "select_row"
 			`(lambda (w row col)
@@ -757,7 +757,7 @@ exec rep "$0" "$@"
     (gtk-clist-select-row map-clist 0 0)
 
     (gtk-box-pack-start vbox frame t t)
-    (gtk-box-pack-end vbox hbox-1 nil t)
+    (gtk-box-pack-end vbox hbox-1 t t)
     (gtk-box-pack-end vbox doc-frame nil t)
 
     vbox))
