@@ -81,7 +81,9 @@
   (when move-resize-raise-window
     (raise-window w))
   (let*
-      ((from-motion-event (string-match "-Move$" (event-name (current-event))))
+      ((from-motion-event (and (current-event)
+			       (string-match "-Move$" (event-name
+						       (current-event)))))
        (override-keymap move-resize-map)
        (move-resize-window w)
        (move-resize-function function)
