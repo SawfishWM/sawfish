@@ -75,24 +75,7 @@ this mode. The single argument is the window to be placed."
   (define placement-mode (autoloader-ref getter))
 
   (define (adjust-window-for-gravity w grav)
-    (let ((coords (window-position w))
-	  (dims (window-dimensions w))
-	  (fdims (window-frame-dimensions w))
-	  (off (window-frame-offset w)))
-      (if (eq grav 'static)
-	  (progn
-	    ;; static gravity is relative to the original
-	    ;; client window position
-	    (rplaca coords (+ (car coords) (car off)))
-	    (rplacd coords (+ (cdr coords) (cdr off))))
-	(when (memq grav '(east south-east north-east))
-	  ;; relative to the right of the frame
-	  (rplaca coords (- (car coords) (- (car fdims) (car dims))
-			    (* -2 (window-border-width w)))))
-	(when (memq grav '(south south-east south-west))
-	  ;; relative to the bottom of the frame
-	  (rplacd coords (- (cdr coords) (- (cdr fdims) (cdr dims))
-			    (* -2 (window-border-width w))))))
+    (let ((coords (adjust-position-for-gravity w grav (window-position w))))
       (move-window-to w (car coords) (cdr coords))))
 
   ;; make sure the window doesn't overlap an avoided window
