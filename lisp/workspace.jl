@@ -107,7 +107,7 @@ their parent window.")
       (ws-remove-window w)
       (ws-add-window-to-space w (window-get parent 'workspace)))))
 
-(defun ws-remove-window (w)
+(defun ws-remove-window (w &optional dont-hide)
   (let
       ((space (window-get w 'workspace)))
     (when space
@@ -126,7 +126,7 @@ their parent window.")
 	(call-hook 'delete-workspace-hook (list space)))
       (window-put w 'workspace nil)
       (call-window-hook 'remove-from-workspace-hook w (list space))
-      (when (windowp w)
+      (when (and (not dont-hide) (windowp w))
 	(hide-window w)))))
 
 (defun ws-add-workspace (at-end)
@@ -353,6 +353,15 @@ workspace."
 	  (ws-switch-workspace space))
 	(uniconify-window w)
 	(warp-cursor-to-window w)))))
+
+(defun toggle-window-sticky (w)
+  (interactive "f")
+  (if (window-get w 'sticky)
+      (progn
+	(window-put w 'sticky nil)
+	(ws-add-window w))
+    (ws-remove-window w t)
+    (window-put w 'sticky t)))
 
 
 ;; Initialisation
