@@ -560,8 +560,6 @@ eval_input_event(repv context_map)
 	       we've got stuck with an unbreakable grab somehow.. */
 	    Fungrab_keyboard ();
 	    Fungrab_pointer ();
-	    fprintf (stderr, "yow! may have just avoided a lockup!\n");
-	    Fbeep ();
 	    result = Fthrow (Qtop_level, Qnil);
 	}
     }
