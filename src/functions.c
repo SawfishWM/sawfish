@@ -740,6 +740,16 @@ integer ATOM.
     return x_atom_symbol (rep_INT(atom));
 }
 
+DEFUN("getpid", Fgetpid, Sgetpid, (void), rep_Subr0) /*
+::doc:Sgetpid::
+getpid
+
+Return the process-id of the running Lisp interpreter.
+::end:: */
+{
+    return rep_MAKE_INT(getpid ());
+}
+
 
 /* initialisation */
 
@@ -771,5 +781,6 @@ functions_init (void)
     rep_ADD_SUBR(Screate_window);
     rep_ADD_SUBR(Sx_atom);
     rep_ADD_SUBR(Sx_atom_name);
+    rep_ADD_SUBR(Sgetpid);
     rep_INTERN(root);
 }
