@@ -793,6 +793,25 @@ previous workspace."
 	    (setq limits (workspace-limits)))
 	(setq space (1+ space))))))
 
+(defun delete-window-instance (w)
+  "Remove the copy of the window on the current workspace. If this is the last
+instance remaining, then delete the actual window."
+  (interactive "%W")
+  (let
+      ((spaces (window-workspaces w)))
+    (if (cdr spaces)
+	;; not the last instance
+	(let
+	    ((space (if (memq current-workspace spaces)
+			current-workspace
+		      (car spaces))))
+	  (window-remove-from-workspace w space)
+	  (when (= space current-workspace)
+	    (hide-window w))
+	  (ws-workspace-may-be-empty space)
+	  (call-hook 'workspace-state-change-hook))
+      (delete-window w))))
+
 
 ;; some commands for moving directly to a workspace
 
