@@ -155,7 +155,7 @@
     :group workspace)
 
   (defcustom workspace-names nil
-    "Workspace names."
+    "Workspace names: \\w"
     :type* `(list string ,(_ "Name"))
     :group workspace)
 

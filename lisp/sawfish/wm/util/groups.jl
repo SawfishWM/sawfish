@@ -66,7 +66,7 @@
     :group misc)
 
   (defcustom persistent-group-ids nil
-    "List of group ids that always exist, even when they have no members."
+    "Persistent group ids: \\w"
     :type (list string)
     :user-level expert
     :group misc)
