@@ -134,10 +134,13 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
     ;; manually..
     (let
 	((command (lookup-event-binding (current-event))))
-      (if command
-	  (call-command command)
-	;; pass the event through to the client window
-	(allow-events 'replay-pointer)))))
+      (cond (command
+	     (call-command command))
+	    ((not (should-grab-button-event-p
+		   (current-event) (window-get w 'keymap)))
+	     ;; pass the event through to the client window unless we
+	     ;; need to keep the grab for the events that would follow
+	     (allow-events 'replay-pointer))))))
 
 (define-focus-mode 'click
  (lambda (w action)
