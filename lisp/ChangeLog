@@ -1,3 +1,28 @@
+1999-08-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keymaps.jl: keymaps are now customizable
+
+	* customize.jl (customize-ui-spec): call each group's :widget
+	function if defined
+	(about): a new group, just contains a label with some
+	info/legalese
+
+	* custom.jl (custom-declare-variable): new keyword :before-set,
+	similar to :after-set
+	(custom-declare-group): this now takes a list of keywords as
+	with defcustom. The only keyword currently is :widget, a
+	function to call to layout the page containing the user
+	interface elements of the group
+
+1999-08-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keymaps.jl: add a label to the `bindings' group noting that
+	keybindings aren't implemented
+	* custom.jl: added group `bindings'
+
+	* transient.jl (focus-windows-when-mapped): new variable, any
+	newly-mapped window is given the input focus
+
 1999-08-13  John Harper  <john@dcs.warwick.ac.uk>
 
 	* themes/simple.jl: defined the missing three frame types;

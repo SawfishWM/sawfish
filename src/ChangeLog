@@ -1,3 +1,22 @@
+1999-08-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl: two new elements `keymap' and `keymap-shell',
+	for keymap customization
+
+	* events.c (circulate_notify): empty event handler
+
+	* keys.c (Fgrab_keymap, Fungrab_keymap): new functions
+
+	* keys.c (lookup_event_name): fix the bug where only the bottom
+	16 modifier bits were being checked
+
+1999-08-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl (build-color:clicked): hide the `Help' button
+	in the color selection dialog (since it does nothing)
+
+	* sawmill-ui.jl: always format color specifiers correctly
+
 1999-08-13  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-ui.jl (build-color): implements a separate `color'

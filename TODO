@@ -33,4 +33,15 @@ todo:
 
   + GUI configuration
 
-    Extend customisation to include key bindings
+    Customization of key bindings is a bit simplistic -- whenever a
+    single binding is changed, the whole keymap is then fixed in the
+    user's .sawmill-custom file
+
+  - Rewrite key-binding
+
+    This was originally lifted from Jade, my text editor. But it
+    doesn't really fit that well...
+
+    Also, _key_ bindings in frame parts don't work (since they're not
+    grabbed and the frame part is never actually focused)
+

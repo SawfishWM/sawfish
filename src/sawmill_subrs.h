@@ -149,6 +149,8 @@ extern repv Fmake_keymap (void);
 extern repv Fmake_sparse_keymap (repv base);
 extern repv Fbind_keys (repv args);
 extern repv Funbind_keys (repv args);
+extern repv Fgrab_keymap (repv map);
+extern repv Fungrab_keymap (repv map);
 extern repv Fcurrent_event_string (void);
 extern repv Fcurrent_event (void);
 extern repv Fcurrent_event_window (void);
