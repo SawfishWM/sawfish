@@ -80,23 +80,58 @@
 (defmacro edges-abs (x)
   `(max x (- x)))
 
-;; returns (EDGE-1 EDGE-2) where they're within EPSILON of each other
-(defun edges-within-epsilon (list-1 list-2 epsilon)
-  (catch 'out
-    (mapc (lambda (edge-1)
-	    (mapc (lambda (edge-2)
-		    (when (and (< (nth 1 edge-1) (nth 2 edge-2))
-			       (> (nth 2 edge-1) (nth 1 edge-2))
-			       (<= (- (max (car edge-1) (car edge-2))
-				      (min (car edge-1) (car edge-2)))
-				   epsilon))
-		      (throw 'out (cons edge-1 edge-2))))
-		  list-2))
-	  list-1)
-    nil))
+;; returns (EDGE-1 EDGE-2) where they're within EPSILON of each other. MODE
+;; is one of the symbols `magnetism', `resistance', or `attraction'. DELTA
+;; is the (signed) number of pixels moved since the last call
+(defun edges-within-epsilon (list-1 list-2 epsilon &optional delta mode)
+  (let
+      ((compare (cond ((or (null mode) (eq mode 'magnetism))
+		       (lambda (e1 e2)
+			 (and (< (nth 1 e1) (nth 2 e2))
+			      (> (nth 2 e1) (nth 1 e2))
+			      (<= (- (max (car e1) (car e2))
+				     (min (car e1) (car e2)))
+				  epsilon))))
+		      ((eq mode 'attraction)
+		       (cond ((zerop delta)
+			      (lambda (e1 e2) nil))
+			     ((> delta 0)
+			      (lambda (e1 e2)
+				(and (< (nth 1 e1) (nth 2 e2))
+				     (> (nth 2 e1) (nth 1 e2))
+				     (<= 0 (- (car e2) (car e1)) epsilon))))
+			     ((< delta 0)
+			      (lambda (e1 e2)
+				(and (< (nth 1 e1) (nth 2 e2))
+				     (> (nth 2 e1) (nth 1 e2))
+				     (<= (- epsilon) (- (car e2)
+							(car e1)) 0))))))
+		      ((eq mode 'resistance)
+		       (cond ((zerop delta)
+			      (lambda (e1 e2) nil))
+			     ((> delta 0)
+			      (lambda (e1 e2)
+				(and (< (nth 1 e1) (nth 2 e2))
+				     (> (nth 2 e1) (nth 1 e2))
+				     (<= 0 (- (car e1) (car e2)) epsilon))))
+			     ((< delta 0)
+			      (lambda (e1 e2)
+				(and (< (nth 1 e1) (nth 2 e2))
+				     (> (nth 2 e1) (nth 1 e2))
+				     (<= (- epsilon) (- (car e1)
+							(car e2)) 0)))))))))
+    (catch 'out
+      (mapc (lambda (edge-1)
+	      (mapc (lambda (edge-2)
+		      (when (compare edge-1 edge-2)
+			(throw 'out (cons edge-1 edge-2))))
+		    list-2))
+	    list-1)
+      nil)))
 
 ;; returns the new (X . Y) of WINDOW
-(defun snap-window-position-to-edges (window coords &optional epsilon edges)
+(defun snap-window-position-to-edges (window coords deltas
+				      &optional epsilon edges mode)
   (let*
       ((dims (window-frame-dimensions window))
        (w-x-edges (list (list (car coords) (cdr coords)
@@ -113,11 +148,19 @@
       (setq edges (get-visible-window-edges)))
     (unless epsilon
       (setq epsilon 8))
-    (when (setq tem (edges-within-epsilon w-x-edges (car edges) epsilon))
+    (unless mode
+      (setq mode 'magnetism))
+
+    ;; snap in X direction
+    (when (setq tem (edges-within-epsilon w-x-edges (car edges) epsilon
+					  (car deltas) mode))
       (setq tem (+ (car coords) (- (car (cdr tem)) (car (car tem)))))
       (when (and (> tem (- (car dims))) (< tem (screen-width)))
 	(rplaca coords tem)))
-    (when (setq tem (edges-within-epsilon w-y-edges (cdr edges) epsilon))
+
+    ;; snap in Y direction
+    (when (setq tem (edges-within-epsilon w-y-edges (cdr edges) epsilon
+					  (cdr deltas) mode))
       (setq tem (+ (cdr coords) (- (car (cdr tem)) (car (car tem)))))
       (when (and (> tem (- (cdr dims))) (< tem (screen-height)))
 	(rplacd coords tem)))
