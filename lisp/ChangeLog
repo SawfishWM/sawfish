@@ -1,5 +1,13 @@
 1999-12-03  John Harper  <john@dcs.warwick.ac.uk>
 
+	* x-cycle.jl (cycle-windows): grab the keyboard to the
+	currently focused window, prevents the ``lose focus with a
+	single bug''
+
+	* move-resize.jl (resize-add-edges): new option, controls
+	whether single direction resizes can be upgraded to two
+	directions
+
 	* smart-placement.jl (sp-max-queued-events): increased from 20
 	to 256, seems to still have the desired effect (passes the
 	`gimp /usr/share/pixmaps/*.png &' test)

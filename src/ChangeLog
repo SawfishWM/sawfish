@@ -1,3 +1,14 @@
+1999-12-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (set_frame_part_bg): fixed a bug when tiling shaped
+	frame parts, removed the spurious clipping code
+	(refresh_frame_part): handle the dimensions checking here
+	instead of in set_frame_part_{bg,fg}
+
+	* windows.c (Fset_input_focus): removed the hack of unfocusing
+	before refocusing, it causes too much redrawing when focusing
+	on the currently focused window
+
 1999-12-02  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-ui.jl: new match-window property type `pair', a pair
