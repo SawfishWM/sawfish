@@ -48,14 +48,14 @@
 			       (abbreviate name 48)
 			       (cond ((window-get w 'iconified)  ?\])
 				     ((not (window-appears-in-workspace-p
-					    w current-workspace)) ?\)))
-			       (and (eq (input-focus) w) " *")))))
+					    w current-workspace)) ?\)))))))
 
   (define (make-item w)
     (list (make-label w)
 	  (lambda ()
 	    (when (windowp w)
-	      (display-window w)))))
+	      (display-window w)))
+	  (cons 'check (and (eq (input-focus) w)))))
 
   (define (group-name id)
     (cond ((symbolp id) (symbol-name id))
