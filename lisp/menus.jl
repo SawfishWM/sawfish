@@ -166,10 +166,6 @@ unused before killing it.")
 	   (setq menu-process nil)))))
 
 (defun menu-preprocessor (cell)
-  ;; XXX deprecated; will be removed
-  (when (and cell (symbolp (car cell)) (not (functionp cell)))
-    (write standard-error "warning: variables as menu items are deprecated\n")
-    (setq cell (symbol-value (car cell))))
   (when cell
     (let
 	((label (car cell)))
