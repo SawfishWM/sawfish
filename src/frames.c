@@ -203,14 +203,38 @@ set_frame_part_bg (struct frame_part *fp)
 	    {
 		if (bg_mask)
 		{
-		    Window tem = XCreateSimpleWindow (dpy, win->frame,
-						      -100, -100,
-						      win->frame_width,
-						      win->frame_height,
-						      0, BlackPixel
-						      (dpy, screen_num),
-						      BlackPixel
-						      (dpy, screen_num));
+		    int xoff, yoff, shape_width, shape_height;
+		    Window shape_win, tem;
+
+		    /* If the frame part is inside the client window,
+		       then apply the shape to the _frame_part_ window,
+		       otherwise apply it to the _frame_ window */
+		    if (fp->x + fp->width >= 0
+			&& fp->x <= win->attr.width
+			&& fp->y + fp->height >= 0
+			&& fp->y <= win->attr.height)
+		    {
+			xoff = 0; yoff = 0;
+			shape_width = fp->width;
+			shape_height = fp->height;
+			shape_win = fp->id;
+		    }
+		    else
+		    {
+			xoff = fp->x - win->frame_x;
+			yoff = fp->y - win->frame_y;
+			shape_width = win->frame_width;
+			shape_height = win->frame_height;
+			shape_win = win->frame;
+		    }
+
+		    tem = XCreateSimpleWindow (dpy, win->frame,
+					       -100, -100,
+					       shape_width, shape_height,
+					       0, BlackPixel
+					       (dpy, screen_num),
+					       BlackPixel
+					       (dpy, screen_num));
 
 		    /* The frame shape must always retain the union
 		       of its old and new shapes. Otherwise enter- and
@@ -220,20 +244,16 @@ set_frame_part_bg (struct frame_part *fp)
 
 		    /* 1. C = copy (F) */
 		    XShapeCombineShape (dpy, tem, ShapeBounding,
-					0, 0, win->frame, ShapeBounding,
+					0, 0, shape_win, ShapeBounding,
 					ShapeSet);
 
 		    /* 2. F' = F \cup I */
-		    XShapeCombineMask (dpy, win->frame, ShapeBounding,
-				       fp->x - win->frame_x,
-				       fp->y - win->frame_y,
-				       bg_mask, ShapeUnion);
+		    XShapeCombineMask (dpy, shape_win, ShapeBounding,
+				       xoff, yoff, bg_mask, ShapeUnion);
 
 		    /* 3. C' = C - I */
 		    XShapeCombineMask (dpy, tem, ShapeBounding,
-				       fp->x - win->frame_x,
-				       fp->y - win->frame_y,
-				       bg_mask, ShapeSubtract);
+				       xoff, yoff, bg_mask, ShapeSubtract);
 
 		    if (tiled)
 		    {
@@ -244,15 +264,13 @@ set_frame_part_bg (struct frame_part *fp)
 			int y = 0;
 			do {
 			    do {
-				XShapeCombineMask (dpy, win->frame,
+				XShapeCombineMask (dpy, shape_win,
 						   ShapeBounding,
-						   fp->x - win->frame_x + x,
-						   fp->y - win->frame_y + y,
+						   xoff + x, yoff + y,
 						   bg_mask, ShapeUnion);
 				XShapeCombineMask (dpy, tem,
 						   ShapeBounding,
-						   fp->x - win->frame_x + x,
-						   fp->y - win->frame_y + y,
+						   xoff + x, yoff + y,
 						   bg_mask, ShapeSubtract);
 				x += image->image->rgb_width;
 			    } while (x < fp->width);
@@ -264,8 +282,8 @@ set_frame_part_bg (struct frame_part *fp)
 		    /* 4. C'' = C' \cap full_shape_of_size (I) */
 		    {
 			XRectangle rect;
-			rect.x = fp->x - win->frame_x;
-			rect.y = fp->y - win->frame_y;
+			rect.x = xoff;
+			rect.y = yoff;
 			rect.width = fp->width;
 			rect.height = fp->height;
 			XShapeCombineRectangles (dpy, tem, ShapeBounding,
@@ -274,7 +292,7 @@ set_frame_part_bg (struct frame_part *fp)
 		    }
 
 		    /* 5. F'' = F' - C'' */
-		    XShapeCombineShape (dpy, win->frame, ShapeBounding,
+		    XShapeCombineShape (dpy, shape_win, ShapeBounding,
 					0, 0, tem, ShapeBounding,
 					ShapeSubtract);
 
@@ -315,25 +333,32 @@ set_frame_part_fg (struct frame_part *fp)
 {
     int state = current_state (fp);
     repv font = fp->font[state], fg = fp->fg[state];
+    XGCValues gcv;
+    u_long gcv_mask = 0;
+    u_char *string = 0;
+    int length = 0, width, height, x, y;
+    Lisp_Window *win = fp->win;
 
     if (fp->id == 0)
 	return;
 
     XClearWindow (dpy, fp->id);
 
-    if (fp->text == Qnil)
+    if (!IMAGEP(fg) && fp->text == Qnil)
 	return;
 
-    if (!COLORP(fg))
+    if (!COLORP(fg) && !IMAGEP(fg))
 	fg = Fsymbol_value (Qdefault_foreground, Qt);
     if (!FONTP(font))
 	font = Fsymbol_value (Qdefault_font, Qt);
-    if (COLORP(fg) && FONTP(font))
-    {
-	u_char *string = 0;
-	int length, width, height, x, y;
-	XGCValues gcv;
 
+    if (IMAGEP(fg))
+    {
+	width = VIMAGE(fg)->image->rgb_width;
+	height = VIMAGE(fg)->image->rgb_width;
+    }
+    else
+    {
 	if (rep_STRINGP(fp->text))
 	{
 	    string = rep_STR(fp->text);
@@ -351,47 +376,95 @@ set_frame_part_fg (struct frame_part *fp)
 	}
 
 	width = XTextWidth (VFONT(font)->font, string, length);
-	if (fp->x_justify == Qcenter)
-	    x = MAX(0, (fp->width - width) / 2);
-	else if (fp->x_justify == Qright)
-	    x = MAX(0, fp->width - width);
-	else if (rep_INTP(fp->x_justify))
-	{
-	    x = rep_INT(fp->x_justify);
-	    if (x < 0)
-		x = MAX(0, fp->width + x - width);
-	}
-	else
-	    x = 0;
-
 	height = VFONT(font)->font->ascent + VFONT(font)->font->descent;
-	if (fp->y_justify == Qcenter)
-	    y = MAX(0, (fp->height - height) / 2);
-	else if (fp->y_justify == Qbottom)
-	    y = MAX(0, fp->height - height);
-	else if (rep_INTP(fp->y_justify))
+    }
+
+    if (fp->x_justify == Qcenter)
+	x = MAX(0, (fp->width - width) / 2);
+    else if (fp->x_justify == Qright)
+	x = MAX(0, fp->width - width);
+    else if (rep_INTP(fp->x_justify))
+    {
+	x = rep_INT(fp->x_justify);
+	if (x < 0)
+	    x = MAX(0, fp->width + x - width);
+    }
+    else
+	x = 0;
+
+    if (fp->y_justify == Qcenter)
+	y = MAX(0, (fp->height - height) / 2);
+    else if (fp->y_justify == Qbottom)
+	y = MAX(0, fp->height - height);
+    else if (rep_INTP(fp->y_justify))
+    {
+	y = rep_INT(fp->y_justify);
+	if (y < 0)
+	    y = MAX(0, fp->height + y - height);
+    }
+    else
+	y = 0;
+
+    if (IMAGEP(fg))
+    {
+	Pixmap fg_pixmap, fg_mask;
+	Imlib_render (imlib_id, VIMAGE(fg)->image,
+		      VIMAGE(fg)->image->rgb_width,
+		      VIMAGE(fg)->image->rgb_height);
+	fg_pixmap = Imlib_move_image (imlib_id, VIMAGE(fg)->image);
+	fg_mask = Imlib_move_mask (imlib_id, VIMAGE(fg)->image);
+
+	/* Some of the Imlib_ functions call XSync on our display. In turn
+	   this can cause the error handler to run if a window has been
+	   deleted. This then invalidates the window we're updating */
+	if (win->id == 0)
+	    return;
+
+	if (fg_pixmap)
 	{
-	    y = rep_INT(fp->y_justify);
-	    if (y < 0)
-		y = MAX(0, fp->height + y - height);
+	    if (fg_mask)
+	    {
+		gcv.clip_mask = fg_mask;
+		gcv.clip_x_origin = x;
+		gcv.clip_y_origin = y;
+		gcv_mask |= GCClipMask | GCClipXOrigin | GCClipYOrigin;
+	    }
+	    gcv.function = GXcopy;
+	    gcv_mask |= GCFunction;
+
+	    if (fp->gc == 0)
+		fp->gc = XCreateGC (dpy, fp->id, gcv_mask, &gcv);
+	    else
+		XChangeGC (dpy, fp->gc, gcv_mask, &gcv);
+
+	    XCopyArea (dpy, fg_pixmap, fp->id, fp->gc, 0, 0,
+		       MIN(fp->width, VIMAGE(fg)->image->rgb_width),
+		       MIN(fp->height, VIMAGE(fg)->image->rgb_height),
+		       x, y);
+
+	    Imlib_free_pixmap (imlib_id, fg_pixmap);
 	}
-	else
-	    y = 0;
+    }
+    if (COLORP(fg) && FONTP(font))
+    {
+	if (FONTP(font))
+	{
+	    gcv.font = VFONT(font)->font->fid;
+	    gcv_mask |= GCFont;
+	}
+	if (COLORP(fg))
+	{
+	    gcv.foreground = VCOLOR(fg)->pixel;
+	    gcv_mask |= GCForeground;
+	}
+	gcv.function = GXcopy;
+	gcv_mask |= GCFunction;
 
 	if (fp->gc == 0)
-	{
-	    gcv.font = VFONT(font)->font->fid;
-	    gcv.foreground = VCOLOR(fg)->pixel;
-	    gcv.function = GXcopy;
-	    fp->gc = XCreateGC (dpy, fp->id,
-				GCFunction | GCForeground | GCFont, &gcv);
-	}
+	    fp->gc = XCreateGC (dpy, fp->id, gcv_mask, &gcv);
 	else
-	{
-	    gcv.font = VFONT(font)->font->fid;
-	    gcv.foreground = VCOLOR(fg)->pixel;
-	    XChangeGC (dpy, fp->gc, GCForeground | GCFont, &gcv);
-	}
+	    XChangeGC (dpy, fp->gc, gcv_mask, &gcv);
+
 	XDrawString (dpy, fp->id, fp->gc, x,
 		     y + VFONT(font)->font->ascent, string, length);
     }
@@ -756,7 +829,7 @@ list_frame_generator (Lisp_Window *w)
 		tem = rep_CDR(tem);
 	    if (!tem)
 		goto next_part;
-	    if (COLORP(tem) || rep_STRINGP(tem))
+	    if (IMAGEP(tem) || COLORP(tem) || rep_STRINGP(tem))
 	    {
 		fp->fg[0] = tem;
 		for (i = 1; i < fps_MAX; i++)
@@ -766,7 +839,8 @@ list_frame_generator (Lisp_Window *w)
 	    {
 		for (i = 0; i < fps_MAX; i++)
 		{
-		    fp->fg[i] = ((COLORP(rep_CAR(tem))
+		    fp->fg[i] = ((IMAGEP(rep_CAR(tem))
+				  || COLORP(rep_CAR(tem))
 				  || rep_STRINGP(rep_CAR(tem)))
 				 ? rep_CAR(tem) : fp->fg[i-1]);
 		    if (rep_CONSP(rep_CDR(tem)))
@@ -809,8 +883,11 @@ list_frame_generator (Lisp_Window *w)
 	{
 	    if (rep_STRINGP(fp->fg[i]))
 		fp->fg[i] = Fget_color (fp->fg[i]);
-	    if (fp->fg[i] && fp->fg[i] != Qnil && !COLORP(fp->fg[i]))
+	    if (fp->fg[i] && fp->fg[i] != Qnil
+		&& !IMAGEP(fp->fg[i]) && !COLORP(fp->fg[i]))
+	    {
 		goto next_part;
+	    }
 
 	    if (rep_STRINGP(fp->bg[i]))
 		fp->bg[i] = Fget_color (fp->bg[i]);
@@ -1061,6 +1138,13 @@ list_frame_generator (Lisp_Window *w)
 	    set_frame_part_bg (fp);
 	}
     }
+
+    /* Client window is always left _underneath_ any overlapping frame
+       parts; this may not always be ideal, but we have to choose 
+       either over or under, and this will probably be more useful.. */
+    if (w->reparented)
+	XLowerWindow (dpy, w->id);
+
     rep_POPGC;
 }
 
