@@ -66,28 +66,17 @@ applied to it."
   :user-level expert
   :group misc)
 
-(defun get-window-by-name (name &optional lst)
-  "Find a window object whose window-name is NAME. If LST is non-nil, then it
-is the list of windows to search. Returns nil if no such window is found."
-  (catch 'foo
-    (mapc (lambda (w)
-	    (when (string= (window-name w) name)
-	      (throw 'foo w))) (or lst (managed-windows)))
-    nil))
+(defun get-window-by-name (name)
+  "Find a window object whose window-name is NAME. Returns nil if no such
+window is found."
+  (car (filter-windows (lambda (w)
+			 (string= (window-name w) name)))))
 
-(defun get-window-by-name-re (name &optional lst)
+(defun get-window-by-name-re (name)
   "Find a window object whose window-name matches the regexp NAME.
-If LST is non-nil, then it is the list of windows to search. Returns nil
-if no such window is found."
-  (catch 'foo
-    (mapc (lambda (w)
-	    (when (string-match name (window-name w))
-	      (throw 'foo w))) (or lst (managed-windows)))
-    nil))
-
-(defmacro map-windows (fun)
-  "Map the single-parameter function FUN over all existing windows."
-  `(mapc ,fun (managed-windows)))
+Returns nil if no such window is found."
+  (car (filter-windows (lambda (w)
+			 (string-match name (window-name w))))))
 
 (defmacro with-server-grabbed (&rest forms)
   "Execute FORMS with the server grabbed."
@@ -407,6 +396,6 @@ possible."
   "Returns a list of all windows that should be left unobscured where possible.
 If WINDOW is defined, then it defines a window that will be never returned
 in the list."
-  (delete-if (lambda (w)
-	       (or (eq w window) (not (window-avoided-p w))))
-	     (managed-windows)))
+  (filter-windows (lambda (w)
+		    (and (not (eq w window))
+			 (window-avoided-p w)))))
