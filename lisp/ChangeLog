@@ -1,4 +1,22 @@
+1999-08-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* transient.jl (transients-get-focus): moved to custom group
+	`focus'
+
+	* custom.jl (custom-declare-variable): remember to check for
+	:widget keyword
+
+	* workspace.jl (ws-merge-workspaces): call the
+	delete-workspace-hook after deleting the source workspace
+
 1999-08-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* place-window.jl (place-window): for random placement, use the
+	dimensions of the window frame not the client window
+
+	* transient.jl (transient-unmap-window): new function, used to
+	return the focus from a transient to its parent when the
+	transient window gets unmapped
 
 	* move-resize.jl (move-resize-window): fix the bug whereby the
 	first motion event was ignored (making the pointer and window

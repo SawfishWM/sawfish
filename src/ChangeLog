@@ -1,4 +1,17 @@
+1999-08-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (set_frame_part_bg): for shaped images, apply the
+	mask at the correct frame coordinates
+
 1999-08-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.h (Lisp_Window): cache the TRANSIENT_FOR hint
+	* windows.c (Fwindow_transient_p): use the cached value
+
+	* windows.c (focus_on_window): update `focus_window'
+	immediately, instead of waiting for the FocusIn event
+	* events.c, display.c: be more careful when changing the
+	`focus_window' variable
 
 	* events.c: record the time of the _two_ most recent pointer
 	positions, the new function Fquery_last_pointer allows access
