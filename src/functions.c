@@ -212,18 +212,32 @@ move-resize-window-to X Y WINDOW WIDTH HEIGHT
 Reconfigure the geometry of window object WINDOW as specified.
 ::end:: */
 {
+    bool resized, moved;
     rep_DECLARE1(win, WINDOWP);
     rep_DECLARE2(x, rep_INTP);
     rep_DECLARE3(y, rep_INTP);
     rep_DECLARE4(width, rep_INTP);
     rep_DECLARE5(height, rep_INTP);
+    moved = (VWIN(win)->attr.x != rep_INT(x)
+	     || VWIN(win)->attr.y != rep_INT(y));
+    resized = (VWIN(win)->attr.width != rep_INT(width)
+	       || VWIN(win)->attr.height != rep_INT(height));
     VWIN(win)->attr.x = rep_INT(x);
     VWIN(win)->attr.y = rep_INT(y);
     VWIN(win)->attr.width = rep_INT(width);
     VWIN(win)->attr.height = rep_INT(height);
-    fix_window_size (VWIN(win));
-    Fcall_window_hook (Qwindow_moved_hook, win, Qnil, Qnil);
-    Fcall_window_hook (Qwindow_resized_hook, win, Qnil, Qnil);
+    if (resized)
+	fix_window_size (VWIN(win));
+    if (moved && !resized)
+    {
+	XMoveWindow (dpy, VWIN(win)->reparented ? VWIN(win)->frame
+		     : VWIN(win)->id, VWIN(win)->attr.x, VWIN(win)->attr.y);
+	send_synthetic_configure (VWIN(win));
+    }
+    if (moved)
+	Fcall_window_hook (Qwindow_moved_hook, win, Qnil, Qnil);
+    if (resized)
+	Fcall_window_hook (Qwindow_resized_hook, win, Qnil, Qnil);
     return win;
 }
 
