@@ -21,24 +21,40 @@
 
 (provide 'workspace)
 
-(defvar cycle-through-workspaces nil
-  "When non-nil, moving through workspaces is cyclical, instead of stopping
-when the first or last has been reached.")
+(defcustom cycle-through-workspaces nil
+  "Moving through workspaces is cyclical."
+  :type boolean
+  :group workspace)
 
-(defvar delete-workspaces-when-empty t
-  "When non-nil, workspaces are immediately deleted once they contain no
-windows.")
+(defcustom delete-workspaces-when-empty t
+  "Workspaces are deleted when they contain no windows."
+  :type boolean
+  :group workspace)
 
-(defvar uniconify-to-current-workspace t
-  "When non-nil, windows that are uniconified appear on the current
-workspace.")
+(defcustom uniconify-to-current-workspace t
+  "Windows that are uniconified appear on the current workspace."
+  :type boolean
+  :group workspace)
 
-(defvar raise-windows-on-uniconify t
-  "When non-nil, windows are raised after being uniconified.")
+(defcustom raise-windows-on-uniconify t
+  "Windows are raised after being uniconified."
+  :type boolean
+  :group misc)
 
-(defvar transients-on-parents-workspace nil
-  "When non-nil transient windows are opened on the same workspace as
-their parent window.")
+(defcustom transients-on-parents-workspace nil
+  "Transient windows are opened on the same workspace as their parent window."
+  :type boolean
+  :group workspace)
+
+(defcustom raise-selected-windows t
+  "Windows selected (normally by the Windows menu) are raised."
+  :type boolean
+  :group misc)
+
+(defcustom warp-to-selected-windows t
+  "Warp the mouse pointer to selected windows."
+  :type boolean
+  :group misc)
 
 ;; List of all workspaces; a workspace is `(workspace WINDOWS...)'.
 ;; Each window has its `workspace' property set to the workspace it's
@@ -355,7 +371,10 @@ workspace."
 	(when (and space (not (eq space ws-current-workspace)))
 	  (ws-switch-workspace space))
 	(uniconify-window w)
-	(warp-cursor-to-window w)))))
+	(when raise-selected-windows
+	  (raise-window w))
+	(when warp-to-selected-windows
+	  (warp-cursor-to-window w))))))
 
 (defun toggle-window-sticky (w)
   (interactive "f")
