@@ -94,7 +94,10 @@
 		(load "sawfish/wm/defaults" t))
 
 	      ;; then the customized options
-	      (custom-load-user-file)
+	      (condition-case data
+		  (custom-load-user-file)
+		(error
+		 (format (stderr-file) "error in custom file--> %S\n" data)))
 
 	      ;; then the sawmill specific user configuration
 	      (cond ((rc-file-exists-p "~/.sawfishrc")
