@@ -36,7 +36,7 @@ DL_OBJS := $(DL_SRCS:%.c=%.la)
 LISP_SRCS := sawmill-ui.jl sawmill-menu.jl
 LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
 
-override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMLIB_CFLAGS) $(X11_CFLAGS)
+override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMLIB_CFLAGS) $(X11_CFLAGS) $(ESD_CFLAGS)
 
 all : sawmill sawmill-client libclient.o $(DL_OBJS) $(LISP_OBJS) gtk-style
 
