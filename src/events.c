@@ -357,6 +357,17 @@ flush_current_context_map (void)
 }
 
 static void
+ignore_fp_prop_change (Lisp_Window *w, repv prop, repv old, repv new)
+{
+    if ((old == Qnil) != (new == Qnil))
+    {
+	if (saved_current_context_map != rep_NULL)
+	    flush_current_context_map ();
+	(void) current_context_map ();
+    }
+}
+
+static void
 button_press (XEvent *ev)
 {
     struct frame_part *fp;
@@ -1612,6 +1623,7 @@ events_init (void)
     rep_INTERN(ungrab);
 
     rep_INTERN(ignore_fp_keymap);
+    register_property_monitor (Qignore_fp_keymap, ignore_fp_prop_change);
 
     rep_mark_static (&current_event_window);
     rep_mark_static (&saved_current_context_map);
