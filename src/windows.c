@@ -529,7 +529,8 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 	if (!WINDOW_IS_GONE_P (w))
 	    remove_from_stacking_list (w);
 
-	focus_off_window (w);
+	if (from_error == Qnil)
+	    focus_off_window (w);
 
 	w->id = 0;
 	pending_destroys++;

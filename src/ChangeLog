@@ -1,3 +1,10 @@
+2002-11-13  John Harper  <jsh@unfactored.org>
+
+	Merged from HEAD:
+
+	* windows.c (remove_window): only call focus_off_window () when
+	not being called from the X error handler. Fixes #98405
+
 2002-11-09  John Harper  <jsh@unfactored.org>
 
 	* version 1.2
