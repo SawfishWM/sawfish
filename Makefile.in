@@ -44,7 +44,7 @@ install : all installdirs
 	done
 	-set -e; for d in $(prefix) $(DESTDIR)$(GNOMEDIRS); do \
 	  if [ -d $$d/share/gnome/wm-properties ]; then \
-	    $(INSTALL_DATA) Sawmill.desktop $(DESTDIR)$$d/share/gnome/wm-properties; \
+	    -$(INSTALL_DATA) Sawmill.desktop $(DESTDIR)$$d/share/gnome/wm-properties; \
 	    break; \
 	  fi \
 	done
