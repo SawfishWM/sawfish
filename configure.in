@@ -102,7 +102,7 @@ fi
 
 dnl Check for image handling libraries
 AM_PATH_IMLIB
-if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then : else
+if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then true; else
   AC_MSG_ERROR([imlib must be built with support for png images])
 fi
 AC_DEFINE(HAVE_IMLIB,1)
