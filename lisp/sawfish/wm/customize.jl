@@ -58,10 +58,15 @@
 		    :value ,value))
 
 	  ((eq type 'number)
-	   `(hbox (number :variable ,symbol
-			  :value ,(if (numberp value) value 0)
-			  :allow-nil ,(get symbol 'custom-allow-nil))
-		  (label ,doc)))
+	   (let
+	       ((range (get symbol 'custom-range)))
+	     (when range
+	       (setq range (list ':range range)))
+	     `(hbox (number :variable ,symbol
+			    :value ,(if (numberp value) value 0)
+			    :allow-nil ,(get symbol 'custom-allow-nil)
+			    ,@range)
+		    (label ,doc))))
 
 	  ;; XXX all but the first should have their own widget types
 	  ((memq type '(string file-name program-name))
