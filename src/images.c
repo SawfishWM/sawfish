@@ -1720,6 +1720,11 @@ images_init (void)
 	params.visualid = preferred_visual->visualid;
 	params.flags = PARAMS_VISUALID;
 	imlib_id = Imlib_init_with_params (dpy, &params);
+	if (imlib_id == 0)
+	{
+	    fprintf (stderr, "sawfish: can't initialize Imlib\n");
+	    exit (1);
+	}
 	image_cmap = Imlib_get_colormap (imlib_id);
 	image_visual = Imlib_get_visual (imlib_id);
 	image_depth = imlib_id->x.depth;
