@@ -48,7 +48,7 @@
 
 (defcustom root-window-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the root window
-(or when window is focused)."
+(or when no window is focused)."
   :group bindings
   :type keymap)
 
