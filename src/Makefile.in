@@ -34,7 +34,7 @@ OBJS := $(SRCS:.c=.o)
 DL_SRCS := gradient.c flippers.c x.c selection.c play-sample.c
 DL_OBJS := $(DL_SRCS:%.c=%.la)
 
-LISP_SRCS := sawmill-ui.jl sawmill-menu.jl
+LISP_SRCS := sawmill-menu.jl
 LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
 
 override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(ESD_CFLAGS)
@@ -68,7 +68,6 @@ install : all installdirs
 	for p in gtk-style $(DL_OBJS); do \
 	  $(rep_DL_INSTALL) $$p $(DESTDIR)${sawfishexecdir}; \
 	done
-	$(INSTALL_SCRIPT) sawmill-ui.jlc $(DESTDIR)$(bindir)/sawfish-ui
 	$(INSTALL_SCRIPT) sawmill-menu.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-menu
 
 uninstall :
@@ -78,7 +77,6 @@ uninstall :
 	for p in gtk-style $(DL_OBJS); do \
 	  $(rep_DL_UNINSTALL) $(DESTDIR)${sawfishexecdir}/$$p; \
 	done
-	rm -f $(DESTDIR)${bindir}/sawfish-ui
 	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-menu
 
 installdirs : $(top_srcdir)/mkinstalldirs
