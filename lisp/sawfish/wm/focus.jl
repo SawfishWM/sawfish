@@ -43,11 +43,21 @@
 
 (defvar focus-dont-push nil)
 
+(defun focus-push-map (w)
+  (unless (eq (window-get w 'keymap) 'click-to-focus-keymap)
+    (window-put w 'focus-saved-keymap (window-get w 'keymap))
+    (window-put w 'keymap 'click-to-focus-keymap)))
+
+(defun focus-pop-map (w)
+  (when (eq (window-get w 'keymap) 'click-to-focus-keymap)
+    (window-put w 'keymap (window-get w 'focus-saved-keymap))
+    (window-put w 'focus-saved-keymap nil)))
+
 (defun focus-click (w)
   (interactive "%w")
   (when (window-really-wants-input-p w)
     (set-input-focus w))
-  (window-put w 'keymap window-keymap)
+  (focus-pop-map w)
   (when (or (window-get w 'focus-proxy-click)
 	    focus-proxy-click
 	    (not (window-really-wants-input-p w)))
@@ -71,39 +81,32 @@
       (set-input-focus w))))
 
 (defun focus-in-fun (w)
-  (unless (eq (window-get w 'keymap) window-keymap)
-    (window-put w 'keymap window-keymap))
+  (focus-pop-map w)
   (when (eq focus-mode 'click)
     (mapc #'(lambda (x)
-	      (unless (or (eq x w) (eq (window-get x 'keymap)
-				       click-to-focus-keymap))
-		(window-put x 'keymap click-to-focus-keymap)))))
+	      (unless (eq x w)
+		(focus-push-map x)))))
   (unless focus-dont-push
     (window-order-push w)))
 
 (defun focus-out-fun (w)
-  (when (and (eq focus-mode 'click)
-	     (not (eq (window-get w 'keymap) click-to-focus-keymap)))
-    (window-put w 'keymap click-to-focus-keymap)))
+  (when (eq focus-mode 'click)
+    (focus-push-map w)))
 
 (defun focus-mode-changed ()
   (if (eq focus-mode 'click)
       (mapc #'(lambda (w)
-		(window-put w 'keymap (if (eq (input-focus) w)
-					  window-keymap
-					click-to-focus-keymap)))
+		(if (eq (input-focus) w)
+		    (focus-pop-map w)
+		  (focus-push-map w)))
 	    (managed-windows))
-    (mapc #'(lambda (w)
-	      (window-put w 'keymap window-keymap)) (managed-windows))))
+    (mapc 'focus-pop-map (managed-windows))))
 
 (defun focus-add-window (w)
   (when (eq focus-mode 'click)
-    (window-put w 'keymap click-to-focus-keymap)))
+    (focus-push-map w)))
 
 (add-hook 'enter-notify-hook 'focus-enter-fun t)
 (add-hook 'focus-in-hook 'focus-in-fun t)
 (add-hook 'focus-out-hook 'focus-out-fun t)
 (add-hook 'add-window-hook 'focus-add-window t)
-
-(unless batch-mode
-  (mapc 'focus-add-window (managed-windows)))
