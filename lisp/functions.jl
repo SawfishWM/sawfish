@@ -136,13 +136,22 @@
 	  (setq i (1+ i)))
 	(nreverse out)))))
 
-(defun delete-window (w)
+(defun delete-window (w &optional safely)
   "Delete the window."
   (interactive "%W")
-  (if (memq 'WM_DELETE_WINDOW (get-window-wm-protocols w))
-      (send-client-message w 'WM_PROTOCOLS (vector (x-atom 'WM_DELETE_WINDOW)
-						   (x-server-timestamp)) 32)
-    (x-kill-client w)))
+  (cond
+   ((memq 'WM_DELETE_WINDOW (get-window-wm-protocols w))
+    (send-client-message w 'WM_PROTOCOLS (vector (x-atom 'WM_DELETE_WINDOW)
+						 (x-server-timestamp)) 32))
+   (safely
+    (beep))
+   (t
+    (x-kill-client w))))
+
+(defun delete-window-safely (w)
+  "Delete the window, or beep if the window can't be closed safely."
+  (interactive "%W")
+  (delete-window w t))
 
 
 ;; property and window-state changed interface
