@@ -1,5 +1,5 @@
 # Makefile.in -- input for the capplet directory's Makefile
-# $Id: Makefile.in,v 1.11 2000/04/08 10:10:25 john Exp $
+# $Id: Makefile.in,v 1.12 2000/04/24 23:55:01 john Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -29,8 +29,9 @@ VPATH=@top_srcdir@/src:.
 override CFLAGS += $(GNOME_CC_CFLAGS)
 override LIBS += $(GNOME_CC_LIBS)
 
-G_CC_INFIX := share/control-center
-G_MENU_INFIX := share/gnome/apps/Settings
+G_CC_DIR = $(GNOMEDIR)/share/control-center
+G_MENU_DIR = $(GNOMEDIR)/share/gnome/apps/Settings
+G_PIXMAP_DIR = $(GNOMEDIR)/share/pixmaps
 
 all : sawfish-capplet
 
@@ -41,46 +42,35 @@ install : all installdirs
 	for p in sawfish-capplet; do \
 	  $(INSTALL_PROGRAM) $$p $(DESTDIR)${bindir}; \
 	done
-	-set -e; for d in $(prefix) $(GNOMEDIRS); do \
-	  if [ -d $(DESTDIR)$$d/$(G_CC_INFIX) ]; then \
-	    rm -rf $(DESTDIR)$$d/$(G_CC_INFIX)/Sawfish; \
-	    rm -rf $(DESTDIR)$$d/$(G_CC_INFIX)/Sawmill; \
-	    mkdir $(DESTDIR)$$d/$(G_CC_INFIX)/Sawfish; \
-	    $(INSTALL_DATA) desktop-entries/.directory $(DESTDIR)$$d/$(G_CC_INFIX)/Sawfish/; \
-	    for f in desktop-entries/*.desktop; do \
-	      $(INSTALL_DATA) $$f $(DESTDIR)$$d/$(G_CC_INFIX)/Sawfish/; \
-	    done; \
-	    break; \
-	  fi \
+	rm -rf $(DESTDIR)$(G_CC_DIR)/Sawfish
+	rm -rf $(DESTDIR)$(G_CC_DIR)/Sawmill
+	mkdir $(DESTDIR)$(G_CC_DIR)/Sawfish
+	$(INSTALL_DATA) desktop-entries/.directory $(DESTDIR)$(G_CC_DIR)/Sawfish/
+	for f in desktop-entries/*.desktop; do \
+	  $(INSTALL_DATA) $$f $(DESTDIR)$(G_CC_DIR)/Sawfish/; \
 	done
-	-set -e; for d in $(prefix) $(GNOMEDIRS); do \
-	  if [ -d $(DESTDIR)$$d/$(G_MENU_INFIX) ]; then \
-	    rm -rf $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawfish; \
-	    rm -rf $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawmill; \
-	    mkdir $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawfish; \
-	    $(INSTALL_DATA) desktop-entries/.directory $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawfish/; \
-	    for f in desktop-entries/*.desktop; do \
-	      $(INSTALL_DATA) $$f $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawfish/; \
-	    done; \
-	    break; \
-	  fi \
+	rm -rf $(DESTDIR)$(G_MENU_DIR)/Sawfish
+	rm -rf $(DESTDIR)$(G_MENU_DIR)/Sawmill
+	mkdir $(DESTDIR)$(G_MENU_DIR)/Sawfish
+	$(INSTALL_DATA) desktop-entries/.directory $(DESTDIR)$(G_MENU_DIR)/Sawfish/
+	for f in desktop-entries/*.desktop; do \
+	  $(INSTALL_DATA) $$f $(DESTDIR)$(G_MENU_DIR)/Sawfish/; \
+	done
+	for f in icons/*.png; do \
+	  $(INSTALL_DATA) $$f $(DESTDIR)$(G_PIXMAP_DIR); \
 	done
 
 uninstall :
 	for p in sawfish-capplet; do \
 	  rm -f $(DESTDIR)${bindir}/$$p; \
 	done
-	-set -e; for d in $(prefix) $(GNOMEDIRS); do \
-	  if [ -d $(DESTDIR)$$d/$(G_CC_INFIX)/Sawfish ]; then \
-	    rm -rf $(DESTDIR)$$d/$(G_CC_INFIX)/Sawfish; \
-	  fi; \
-	  if [ -d $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawfish ]; then \
-	    rm -rf $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawfish; \
-	  fi \
-	done
+	rm -rf $(DESTDIR)$(G_CC_DIR)/Sawfish
+	rm -rf $(DESTDIR)$(G_MENU_DIR)/Sawfish
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir) \
+	  $(DESTDIR)$(G_CC_DIR) $(DESTDIR)$(G_MENU_DIR) \
+	  $(DESTDIR)$(G_PIXMAP_DIR)
 
 clean :
 	rm -f *~ *.o *.lo *.la build.h core
