@@ -933,7 +933,7 @@ instance remaining, then delete the actual window."
 
 ;; Initialisation
 
-(sm-add-saved-properties 'sticky 'iconified)
+(sm-add-saved-properties 'sticky 'iconified 'fixed-position)
 
 ;; some of these should really be added by other files
 (add-swapped-properties 'frame-style 'type 'hide-client 'iconified)
