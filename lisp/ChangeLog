@@ -1,3 +1,16 @@
+1999-09-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sm-init.jl (sm-saved-window-properties): save the frame-style
+	property
+
+	* frames.jl (auto-frame-style-alist): new variable
+	(check-frame-availability): new function
+	(set-window-frame-style): give a window a specified frame
+	(frame-style-menu): menu constructor for all frame styles
+
+	* menus.jl (window-ops-menu): added a `Frame style' submenu,
+	from the frame-style-menu constructor
+
 1999-09-04  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.jl (custom-make-frame-style-widget): use the new

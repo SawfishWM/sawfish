@@ -21,6 +21,12 @@ an example
 moving or resizing a window (@code{move-show-position},
 @code{resize-show-dimensions})
 
+@item Mechanism for setting frame styles on a per-window basis (this
+was always possible, just not easy). The @code{auto-frame-style-alist}
+variable associates window name regular expressions with frame styles.
+Also, the @code{window-ops-menu} has a new submenu with all possible
+styles
+
 @item New option @code{preallocated-workspaces}, the number of
 workspaces to create at startup
 
