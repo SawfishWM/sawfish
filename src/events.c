@@ -967,6 +967,17 @@ Return the window that received the current event, or the symbol
     return current_event_window;
 }
 
+DEFUN("x-server-timestamp", Fx_server_timestamp, Sx_server_timestamp,
+      (void), rep_Subr0) /*
+::doc:Sx-server-timestamp::
+x-server-timestamp
+
+Return the most recently seen X server timestamp, as a cons cell.
+::end:: */
+{
+    return rep_MAKE_LONG_INT (actual_last_event_time);
+}
+
 DEFUN("x-events-queued", Fx_events_queued, Sx_events_queued, (void), rep_Subr0)
 {
     return rep_MAKE_INT (XEventsQueued (dpy, QueuedAfterReading));
@@ -1078,6 +1089,7 @@ events_init (void)
     rep_ADD_SUBR(Squery_pointer_window);
     rep_ADD_SUBR(Saccept_x_input);
     rep_ADD_SUBR(Scurrent_event_window);
+    rep_ADD_SUBR(Sx_server_timestamp);
     rep_ADD_SUBR(Sx_events_queued);
 
     rep_INTERN(visibility_notify_hook);
