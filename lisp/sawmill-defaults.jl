@@ -34,18 +34,20 @@
 ;(load "brushed-metal")
 ;(load "simple")
 
-(defvar ignored-window-names "^(xload|xmeter|Dali Clock|xapm|xbuffy|console)$"
-  "Regular expression matching windows that don't get a frame.")
+;; ignore windows matching these regexps
+(setq ignored-window-names
+      (cons "^(xload|xmeter|Dali Clock|xapm|xbuffy|console)$"
+	    ignored-window-names))
 
-(defvar sticky-window-names "^(xload|xmeter|Dali Clock|xapm|xbuffy|console)$"
-  "Regular expression matching window names that exist across workspaces.")
+;; these windows are sticky
+(setq sticky-window-names
+      (cons "^(xload|xmeter|Dali Clock|xapm|xbuffy|console)$"
+	    sticky-window-names))
 
-;; this function is called for each window that is created on the display
-(defun user-add-window (w)
-  (when (string-match ignored-window-names (window-name w))
-    (set-window-frame w 'nil-frame))
-  (when (string-match sticky-window-names (window-name w))
-    (window-put w 'sticky t)))
+;; if you use GNOME, uncomment this
+;(require 'gnome)
 
-;; add the above function into the `add-window-hook' hook
-(add-hook 'add-window-hook 'user-add-window)
+;; alternatively, this will probably work if you use GDM, but only
+;; sometimes use GNOME
+;(when (equal (getenv "GDMSESSION") "Gnome")
+;  (require 'gnome))
