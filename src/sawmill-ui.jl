@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.49 2000/01/11 18:40:21 john Exp $
+;; $Id: sawmill-ui.jl,v 1.50 2000/01/27 08:39:24 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -189,9 +189,13 @@ exec rep "$0" "$@"
   (let
       ((hbox (gtk-hpaned-new))
        (tree (gtk-tree-new))
-       (frame (gtk-frame-new)))
+       (frame (gtk-frame-new))
+       (scroller (gtk-scrolled-window-new)))
+    (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
     (gtk-container-border-width hbox ui-box-border)
-    (gtk-paned-add1 hbox tree)
+    (gtk-paned-add1 hbox scroller)
+    (gtk-scrolled-window-add-with-viewport scroller tree)
+    (gtk-widget-set-usize scroller 120 -2)
     (gtk-paned-add2 hbox frame)
     (gtk-tree-set-selection-mode tree 'browse)
     (setq spec (nconc spec (list ':tree tree
