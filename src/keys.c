@@ -1233,13 +1233,13 @@ grab_keymap_event (repv km, long code, long mods, bool grab)
 	km = Fsymbol_value (km, Qt);
     for (w = window_list; w != 0; w = w->next)
     {
-	if (w->id != 0)
+	if (w->frame != 0)
 	{
 	    repv tem = Fwindow_get (rep_VAL(w), Qkeymap);
 	    if (rep_SYMBOLP(tem) && tem != Qnil)
 		tem = Fsymbol_value (tem, Qt);
 	    if (km == global || tem == km)
-		(grab ? grab_event : ungrab_event) (w->id, ev);
+		(grab ? grab_event : ungrab_event) (w->frame, ev);
 	}
     }
 }
@@ -1293,11 +1293,11 @@ grab_window_events (Lisp_Window *w, bool grab)
 {
     repv tem;
     tem = Fsymbol_value (Qglobal_keymap, Qt);
-    if (tem != Qnil && !rep_VOIDP(tem))
-	grab_keymap_events (w->id, tem, grab);
+    if (tem != Qnil && !rep_VOIDP(tem) && w->frame != 0)
+	grab_keymap_events (w->frame, tem, grab);
     tem = Fwindow_get (rep_VAL(w), Qkeymap);
-    if (tem && tem != Qnil)
-	grab_keymap_events (w->id, tem, grab);
+    if (tem && tem != Qnil && w->frame != 0)
+	grab_keymap_events (w->frame, tem, grab);
 }
 
 
