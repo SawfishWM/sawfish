@@ -1,5 +1,12 @@
 1999-08-23  John Harper  <john@dcs.warwick.ac.uk>
 
+	* frames.jl: (window-type-remove-title, window-type-remove-border,
+	window-type-add-title, window-type-add-border): for windows
+	with no title and no border, use the new type `unframed', not
+	`shaped-transient'
+	* themes/simple.jl, themes/brushed-metal.jl,
+	themes/absolute-e.jl: set `unframed' windows to the `nil-frame'
+
 	* server.jl (server-init): new function
 
 	* version 0.3a

@@ -1,5 +1,8 @@
 1999-08-23  John Harper  <john@dcs.warwick.ac.uk>
 
+	* frames.c (list_frame_generator): was making the rectangle of
+	the client window too big when setting the shape mask
+
 	* commands.c (Fcall_command): the `W' specifier ignores the
 	current event's window if it's the root
 
