@@ -1,4 +1,61 @@
+2000-11-16  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/mwm.jl (mwm-add-window): support the
+	min/max/close options of the mwm function hints
+
+	* sawfish/wm/state/iconify.jl: don't add minimize to the
+	toggles menu
+
+	* sawfish/wm/menus.jl: simplified the window-ops-menu, just
+	have minimize/maximize/close at the top of the menu, with other
+	stuff below
+
+	* sawfish/wm/menus.jl (menu-preprocessor): labels can now be
+	functions, they will be called (with any menu-args) to get the
+	actual string
+
+	* sawfish/wm/frames.jl (after-setting-default-frame): used as
+	:after-set function of default-frame-style. Checks that the new
+	frame style is available, signals an error otherwise
+
+	* sawfish/wm/custom.jl (define-custom-setter, custom-setter):
+	store these in a dedicated hash table
+
+	(custom-set-symbol): function to catch exceptions while
+	committing custom changes, then revert back to the old value if
+	necessary (resignalling the exception)
+
+	(custom-set-variable, custom-set-typed-variable): use
+	custom-set-symbol instead of custom-set directly
+
+	(custom-load): new function, parses and executes a custom file
+	by hand
+	(custom-eval): don't just call eval, deref the function and
+	apply it to the arguments
+
+	(custom-load-user-file): use custom-load instead of load
+
+	* sawfish/wm.jl: use sawfish-locale-directory when calling
+	bindtextdomain
+
+	* sawfish/wm/misc.jl (call-with-error-handler): new function
+
+	* sawfish/wm/windows.jl: fix typo in name of
+	uniquify-window-name command
+
 2000-11-15  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/menus.jl (window-ops-menu): renamed the `Delete'
+	item as `Close'
+
+	* sawfish/wm/menus.jl (window-ops-menu): deleted `Destroy' item
+
+	* sawfish/wm/ext/window-history.jl (window-history-clear): new
+	function and command
+
+	* sawfish/wm/ext/window-history.jl
+	(window-history-ignore-transients): new option, disables auto
+	history saving for transient windows (t by default)
 
 	* sawfish/wm/placement/smart.jl (sp-cost:overlap): changed the
 	function calculating this to (exp (- (/ overlap (*
