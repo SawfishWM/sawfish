@@ -76,7 +76,7 @@
     (move-resize-window-to w (car coords) (cdr coords) (car dims) (cdr dims))
 
     ;; force the window to be somewhere in the virtual workspace..
-    (when (and (not (assq 'position alist))
+    (when (and (not (window-get w 'fixed-position))
 	       (window-outside-workspace-p w))
       (move-window-to-current-viewport w))))
 
