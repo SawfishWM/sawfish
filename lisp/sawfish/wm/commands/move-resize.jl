@@ -42,12 +42,12 @@
   :group move
   :type boolean)
 
-(defcustom move-resize-snap-move nil
+(defcustom move-snap-edges nil
   "Snap window position to edges of other windows when interactively moving."
   :group move
   :type boolean)
 
-(defcustom move-resize-snap-epsilon 8
+(defcustom move-snap-epsilon 8
   "Proximity in pixels before snapping to a window edge."
   :group move
   :type number)
@@ -107,7 +107,7 @@
        (move-resize-mode (if (eq function 'move)
 			     move-outline-mode
 			   resize-outline-mode))
-       (move-resize-edges (and move-resize-snap-move
+       (move-resize-edges (and move-snap-edges
 			       (progn
 				 (require 'edges)
 				 (get-visible-window-edges
@@ -172,12 +172,12 @@
 			       (assq 'min-height move-resize-hints))) 1)))))
     (if (eq move-resize-mode 'opaque)
 	(move-resize-apply)
-      (if (and (eq move-resize-function 'move) move-resize-snap-move)
+      (if (and (eq move-resize-function 'move) move-snap-edges)
 	  (let
 	      ((coords (snap-window-position-to-edges
 			move-resize-window
 			(cons move-resize-x move-resize-y)
-			move-resize-snap-epsilon move-resize-edges)))
+			move-snap-epsilon move-resize-edges)))
 	    (setq move-resize-last-outline
 		  (list move-resize-mode (car coords) (cdr coords)
 			(+ move-resize-width (car move-resize-frame))
@@ -199,14 +199,13 @@
 ;; commit the current state of the move or resize
 (defun move-resize-apply ()
   (cond ((eq move-resize-function 'move)
-	 (if (not move-resize-snap-move)
+	 (if (not move-snap-edges)
 	     (move-window-to move-resize-window move-resize-x move-resize-y)
 	   (let
 	       ((coords (snap-window-position-to-edges
 			 move-resize-window
 			 (cons move-resize-x move-resize-y)
-			 move-resize-snap-epsilon
-			 move-resize-edges)))
+			 move-snap-epsilon move-resize-edges)))
 	     (move-window-to move-resize-window (car coords) (cdr coords)))))
 	((eq move-resize-function 'resize)
 	 (resize-window-to move-resize-window
