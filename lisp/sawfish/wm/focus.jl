@@ -30,7 +30,7 @@ root window is entered.")
   "When non-nil, windows are raised after receiving focus.")
 
 (defvar raise-window-timeout 500
-  "Time in microseconds until windows are raised if raise-windows-on-focus
+  "Time in milliseconds until windows are raised if raise-windows-on-focus
 is set.")
 
 (defun focus-enter-fun (w)
