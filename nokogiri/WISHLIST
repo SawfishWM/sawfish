@@ -3,8 +3,6 @@
 
     (since this may cause slots to be added)
 
-  + method of autoloading group details when demanded
-
   + reversed dependences? i.e. `:depends (not foo)'
 
   + decide whether to use GNOME widgets or not
@@ -16,15 +14,8 @@
 	(progam-name)
 	(directory-name),
 
-  + support for loading groups on demand
-
-    only fetch the current group's information
-    (which may have been cached from the previous time)
-
-    maybe use CORBA for wm communication instead of client program? (or
+  + maybe use CORBA for wm communication instead of client program? (or
     perhaps support both somehow?)
-
-    [done, apart from CORBA]
 
   + do i18n on choices from `:type symbol' options
 
@@ -40,6 +31,13 @@
 --
 
 Items that have been committed:
+
+  + support for loading groups on demand
+
+    only fetch the current group's information
+    (which may have been cached from the previous time)
+
+  + method of autoloading group details when demanded
 
   + more widgets:
 

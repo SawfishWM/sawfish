@@ -1,5 +1,10 @@
 2000-06-28  John Harper  <john@dcs.warwick.ac.uk>
 
+	* nokogiri-shell.jl: when flattening the group tree for the
+	GNOME capplet, use a notebook widget, not a series of frames
+	(less vertical height, so removes the need to make the
+	top-level widget a scrolled window)
+
 	* nokogiri-wm.jl, nokogiri-widget.jl, nokogiri-widget-test.jl,
 	nokogiri-widget-dialog.jl, nokogiri-user-level.jl,
 	nokogiri-slot.jl, nokogiri-shell.jl, nokogiri-main.jl.in,

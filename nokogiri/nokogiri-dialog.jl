@@ -51,10 +51,8 @@
 
       (gtk-container-add vbox widget)
       (gtk-button-box-set-layout hbbox 'end)
-      (GTK-WIDGET-SET-FLAGS ok '(can-default))
       (gtk-box-pack-start hbbox ok)
       (when cancel
-	(GTK-WIDGET-SET-FLAGS cancel '(can-default))
 	(gtk-box-pack-end hbbox cancel))
       (gtk-box-pack-end vbox hbbox)
       (gtk-container-add window vbox)
@@ -67,6 +65,5 @@
       (gtk-widget-show-all window)
       (gtk-grab-add window)
       (gtk-widget-grab-focus widget)
-      (gtk-widget-grab-default ok)
 
       window)))
