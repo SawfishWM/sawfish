@@ -712,8 +712,8 @@ list_frame_generator (Lisp_Window *w)
 	{
 	    rects[i].x = -w->frame_x;
 	    rects[i].y = -w->frame_y;
-	    rects[i].width = w->frame_width;
-	    rects[i].height = w->frame_height;
+	    rects[i].width = w->attr.width;
+	    rects[i].height = w->attr.height;
 	    i++;
 	}
 	XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
