@@ -128,53 +128,64 @@
 (defun cycle-windows (event)
   "Cycle through all windows in order of recent selections."
   (interactive "e")
-  (let*
-      ((decoded (decode-event event))
-       (modifier-keys (apply append (mapcar modifier->keysyms
-					    (nth 1 decoded))))
-       (eval-modifier-events t)
-       (eval-key-release-events t)
-       (override-keymap (make-keymap))
-       (focus-dont-push t)
-       (disable-auto-raise cycle-disable-auto-raise)
-       (tooltips-enabled nil)
-       (x-cycle-current nil)
-       (x-cycle-stacking nil)
-       (x-cycle-grab-win (input-focus))
-       (unmap-notify-hook (cons (lambda (w)
-				  (when (eq w x-cycle-grab-win)
-				    (setq x-cycle-grab-win nil)
-				    (or (grab-keyboard)
-					(throw 'x-cycle-exit nil))))
-				unmap-notify-hook))
-       (enter-workspace-hook (cons (lambda (space)
-				     (when x-cycle-grab-win
-				       (setq x-cycle-grab-win nil)
-				       (or (grab-keyboard)
-					   (throw 'x-cycle-exit nil))))
-				   enter-workspace-hook)))
+  (let ((tail-event nil))
+    (let*
+	((decoded (decode-event event))
+	 (modifier-keys (apply append (mapcar modifier->keysyms
+					      (nth 1 decoded))))
+	 (eval-modifier-events t)
+	 (eval-key-release-events t)
+	 (override-keymap (make-keymap))
+	 (focus-dont-push t)
+	 (disable-auto-raise cycle-disable-auto-raise)
+	 (tooltips-enabled nil)
+	 (x-cycle-current nil)
+	 (x-cycle-stacking nil)
+	 (x-cycle-grab-win (input-focus))
+	 (unmap-notify-hook (cons (lambda (w)
+				    (when (eq w x-cycle-grab-win)
+				      (setq x-cycle-grab-win nil)
+				      (or (grab-keyboard)
+					  (throw 'x-cycle-exit nil))))
+				  unmap-notify-hook))
+	 (enter-workspace-hook (cons (lambda (space)
+				       (when x-cycle-grab-win
+					 (setq x-cycle-grab-win nil)
+					 (or (grab-keyboard)
+					     (throw 'x-cycle-exit nil))))
+				     enter-workspace-hook))
+	 (unbound-key-hook (list (lambda ()
+				   (let ((ev (decode-event (current-event))))
+				     (unless (memq 'release (nth 1 ev))
+				       (setq tail-event (current-event))
+				       (throw 'x-cycle-exit nil)))))))
 
-    (unless (and (eq 'key (car decoded)) (nth 1 decoded))
-      (error "%s must be bound to a key event with modifiers." this-command))
+      (unless (and (eq 'key (car decoded)) (nth 1 decoded))
+	(error "%s must be bound to a key event with modifiers." this-command))
 
-    ;; Use the event that invoked us to contruct the keymap
-    (bind-keys override-keymap event 'x-cycle-next)
-    (mapc (lambda (k)
-	    (bind-keys override-keymap
-	      (encode-event `(key (release any) ,k)) 'x-cycle-exit))
-	  modifier-keys)
+      ;; Use the event that invoked us to contruct the keymap
+      (bind-keys override-keymap event 'x-cycle-next)
+      (mapc (lambda (k)
+	      (bind-keys override-keymap
+		(encode-event `(key (release any) ,k)) 'x-cycle-exit))
+	    modifier-keys)
 
-    (when (grab-keyboard (input-focus))
-      (unwind-protect
-	  (progn
-	    (catch 'x-cycle-exit
-	      ;; do the first step
-	      (x-cycle-next)
-	      (recursive-edit))
-	    (when x-cycle-current
-	      (display-window x-cycle-current)))
-	(display-message nil)
-	(ungrab-keyboard)))))
+      (when (grab-keyboard (input-focus))
+	(unwind-protect
+	    (progn
+	      (catch 'x-cycle-exit
+		;; do the first step
+		(x-cycle-next)
+		(recursive-edit))
+	      (when x-cycle-current
+		(display-window x-cycle-current)))
+	  (display-message nil)
+	  (ungrab-keyboard))))
+
+    (when tail-event
+      (let ((command (lookup-event-binding tail-event)))
+	(when command
+	  (call-command command))))))
 
 ;;;###autoload
 (defun cycle-group (event w)
