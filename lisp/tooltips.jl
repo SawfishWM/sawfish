@@ -34,8 +34,19 @@
   :group tooltips
   :require tooltips)
 
+(defcustom tooltips-timeout-enabled nil
+  "Remove tooltips after a period of time."
+  :type boolean
+  :group tooltips)
+
 (defcustom tooltips-delay 500
-  "Number of milliseconds to wait before displaying tooltip."
+  "Number of milliseconds before displaying tooltips."
+  :type number
+  :range (0 . nil)
+  :group tooltips)
+
+(defcustom tooltips-timeout-delay 5000
+  "Number of milliseconds before removing tooltips."
   :type number
   :range (0 . nil)
   :group tooltips)
@@ -78,6 +89,10 @@
 			      (x-justify . left)
 			      (spacing . 2)))
       (setq tooltips-displayed t)
+      (when tooltips-timeout-enabled 
+	(setq tooltips-timer (make-timer tooltips-cleanup
+					 (/ tooltips-timeout-delay 1000)
+					 (mod tooltips-timeout-delay 1000))))
       (unless (in-hook-p 'pre-command-hook tooltips-cleanup)
 	(add-hook 'pre-command-hook tooltips-cleanup)))))
 
