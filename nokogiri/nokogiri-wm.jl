@@ -25,37 +25,21 @@
 
 (define-structure nokogiri-wm nokogiri-wm-interface
 
-    (open rep)
+    (open rep
+	  sawfish.client)
 
 ;;; wm communication (possibly replace by CORBA..?)
 
-  (define client-program "sawfish-client")
-
   (define (wm-eval form &optional read-back)
-    (let* ((output (make-string-output-stream))
-	   (process (make-process output))
-	   (print-escape t))
-      (if (zerop (call-process process nil client-program
-			       "-e" (format nil "%S" form)))
-	  (progn
-	    (setq output (get-output-stream-string output))
-	    ;; success
-	    (if read-back
-		(read-from-string output)
-	      output))
-	(error "can't call sawfish-client"))))
+    (sawfish-client-eval form (not read-back)))
 
   (define (wm-eval-async form)
-    (let ((process (make-process nil))
-	  (print-escape t))
-      (unless (zerop (call-process process nil client-program
-				   "-q" "-e" (format nil "%S" form)))
-	(error "can't call sawfish-client"))))
+    (sawfish-client-eval-async form))
 
   (define done-init nil)
   (define (init-server)
     (unless done-init
-      (wm-eval '(require 'nokogiri-sawfish))
+      (wm-eval '(require 'sawfish.wm.util.nokogiri))
       (setq done-init t)))
 
 ;;; stub functions
@@ -80,10 +64,10 @@
     (wm-eval '(and (featurep 'gettext) (bindtextdomain "sawfish")) t))
 
   (define (wm-grab-x-property prop-name)
-    (wm-eval `(match-window-grab-x-property ',prop-name) t))
+    (wm-eval `(nokogiri-grab-match-window-property ',prop-name) t))
 
   (define (wm-grab-key)
-    (wm-eval '(event-name (read-event)) t))
+    (wm-eval '(nokogiri-grab-key) t))
 
   (define wm-command-list
     (let ((commands '*undefined*))
