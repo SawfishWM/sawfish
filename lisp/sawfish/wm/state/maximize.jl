@@ -74,6 +74,12 @@
     :user-level expert
     :type boolean)
 
+  (defcustom maximize-avoid-avoided t
+    "Don't cover `avoided' windows when maximizing."
+    :group (min-max maximize)
+    :user-level expert
+    :type boolean)
+
   ;; called when a window is maximized, args (W &optional DIRECTION)
   (defvar window-maximized-hook nil)
 
@@ -301,7 +307,7 @@ doesn't overlap any avoided windows, or nil."
 	   (dims (window-dimensions w))
 	   (fdims (window-frame-dimensions w))
 	   (hints (window-size-hints w))
-	   (avoided (avoided-windows w))
+	   (avoided (and maximize-avoid-avoided (avoided-windows w)))
 	   (edges (get-visible-window-edges ':with-ignored-windows t
 					    ':windows avoided
 					    ':include-root t)))
