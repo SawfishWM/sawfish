@@ -88,7 +88,6 @@
        (focus-when-mapped boolean)
        (never-focus boolean)
        (focus-click-through boolean)
-       (ignore-window-input-hint boolean)
        (focus-mode ,(lambda () `(choice ,@focus-modes))))
       (appearance ,(_ "Appearance")
        (frame-type ,(lambda () `(choice ,@(mapcar car match-window-types))))
