@@ -52,6 +52,12 @@ AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AC_PROG_GCC_TRADITIONAL
 
+dnl Workaround etc/install-sh not being found from subdirectories
+if test "$INSTALL" = "$ac_install_sh"; then
+  dnl Why is the backslash needed?
+  INSTALL='\${top_srcdir}/etc/install-sh -c'
+fi
+
 dnl Checks for libraries.
 AC_CHECK_LIB(nsl, xdr_void)
 AC_CHECK_LIB(socket, bind)
