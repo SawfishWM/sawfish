@@ -152,6 +152,7 @@ extern repv Fmove_window_to (repv win, repv x, repv y);
 extern repv Fresize_window_to (repv win, repv x, repv y);
 extern repv Fgrab_server (void);
 extern repv Fungrab_server (void);
+extern repv Fserver_grabbed_p (void);
 extern repv Fgrab_pointer (repv win, repv cursor);
 extern repv Fungrab_pointer (void);
 extern repv Fgrab_keyboard (repv win);
