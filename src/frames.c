@@ -150,6 +150,7 @@ set_frame_part_bg (struct frame_part *fp)
 	    rep_call_lisp2 (fp->renderer, bg, state_syms[state]);
 	    fp->rendered_state = state;
 	}
+	fp->drawn.bg = Qnil;
     }
 
     if (win->id == 0)
@@ -157,7 +158,11 @@ set_frame_part_bg (struct frame_part *fp)
 
     if (COLORP(bg))
     {
-	XSetWindowBackground (dpy, fp->id, VCOLOR(bg)->pixel);
+	if (bg != fp->drawn.bg)
+	{
+	    XSetWindowBackground (dpy, fp->id, VCOLOR(bg)->pixel);
+	    fp->drawn.bg = bg;
+	}
     }
     else if (IMAGEP(bg))
     {
@@ -165,6 +170,13 @@ set_frame_part_bg (struct frame_part *fp)
 	Pixmap bg_pixmap, bg_mask;
 	bool tiled = FALSE, shaped = TRUE;
 	repv tem;
+
+	if (fp->drawn.bg == bg
+	    && fp->drawn.width == fp->width
+	    && fp->drawn.height == fp->height)
+	{
+	    return;
+	}
 
 	tem = Fimage_get (rep_VAL(image), Qtiled);
 	if (tem && tem != Qnil)
@@ -317,14 +329,18 @@ set_frame_part_bg (struct frame_part *fp)
 	/* Imlib sometimes calls XSync (), which could hide events
 	   from select () */
 	rep_mark_input_pending (ConnectionNumber(dpy));
+
+	fp->drawn.bg = bg;
     }
     else
     {
 	/* No background. Set it to white. */
 	XSetWindowBackground (dpy, fp->id, WhitePixel (dpy, screen_num));
+	fp->drawn.bg = Qnil;
     }
 
     /* background won't be updated until the window is cleared.. */
+    fp->drawn.fg = rep_NULL;
 }
 
 /* Draw the foreground pixels in frame-part FP. */
@@ -335,99 +351,152 @@ set_frame_part_fg (struct frame_part *fp)
     repv font = fp->font[state], fg = fp->fg[state];
     XGCValues gcv;
     u_long gcv_mask = 0;
-    u_char *string = 0;
+    repv string = rep_NULL;
     int length = 0, width, height, x, y;
     Lisp_Window *win = fp->win;
 
     if (fp->id == 0)
 	return;
 
-    XClearWindow (dpy, fp->id);
-
-    if (!IMAGEP(fg) && fp->text == Qnil)
-	return;
-
-    if (!COLORP(fg) && !IMAGEP(fg))
-	fg = Fsymbol_value (Qdefault_foreground, Qt);
-    if (!FONTP(font))
-	font = Fsymbol_value (Qdefault_font, Qt);
-
-    if (IMAGEP(fg))
+    if (IMAGEP(fg) || fp->text != Qnil)
     {
-	width = VIMAGE(fg)->image->rgb_width;
-	height = VIMAGE(fg)->image->rgb_width;
-    }
-    else
-    {
-	if (rep_STRINGP(fp->text))
+	if (!COLORP(fg) && !IMAGEP(fg))
+	    fg = Fsymbol_value (Qdefault_foreground, Qt);
+	if (!FONTP(font))
+	    font = Fsymbol_value (Qdefault_font, Qt);
+
+	if (IMAGEP(fg))
 	{
-	    string = rep_STR(fp->text);
-	    length = rep_STRING_LEN(fp->text);
+	    width = VIMAGE(fg)->image->rgb_width;
+	    height = VIMAGE(fg)->image->rgb_width;
 	}
-	else if (fp->text == Qnil)
-	    return;
 	else
 	{
-	    repv result = rep_call_lisp1 (fp->text, rep_VAL(fp->win));
-	    if (!result || !rep_STRINGP(result))
-		return;
-	    string = rep_STR(result);
-	    length = rep_STRING_LEN(result);
+	    if (rep_STRINGP(fp->text))
+	    {
+		string = fp->text;
+		length = rep_STRING_LEN(fp->text);
+	    }
+	    else
+	    {
+		repv result = rep_call_lisp1 (fp->text, rep_VAL(fp->win));
+		if (!result || !rep_STRINGP(result))
+		    return;
+		string = result;
+		length = rep_STRING_LEN(result);
+	    }
+
+	    width = XTextWidth (VFONT(font)->font, rep_STR(string), length);
+	    height = VFONT(font)->font->ascent + VFONT(font)->font->descent;
 	}
 
-	width = XTextWidth (VFONT(font)->font, string, length);
-	height = VFONT(font)->font->ascent + VFONT(font)->font->descent;
-    }
-
-    if (fp->x_justify == Qcenter)
-	x = MAX(0, (fp->width - width) / 2);
-    else if (fp->x_justify == Qright)
-	x = MAX(0, fp->width - width);
-    else if (rep_INTP(fp->x_justify))
-    {
-	x = rep_INT(fp->x_justify);
-	if (x < 0)
-	    x = MAX(0, fp->width + x - width);
-    }
-    else
-	x = 0;
-
-    if (fp->y_justify == Qcenter)
-	y = MAX(0, (fp->height - height) / 2);
-    else if (fp->y_justify == Qbottom)
-	y = MAX(0, fp->height - height);
-    else if (rep_INTP(fp->y_justify))
-    {
-	y = rep_INT(fp->y_justify);
-	if (y < 0)
-	    y = MAX(0, fp->height + y - height);
-    }
-    else
-	y = 0;
-
-    if (IMAGEP(fg))
-    {
-	Pixmap fg_pixmap, fg_mask;
-	Imlib_render (imlib_id, VIMAGE(fg)->image,
-		      VIMAGE(fg)->image->rgb_width,
-		      VIMAGE(fg)->image->rgb_height);
-	fg_pixmap = Imlib_move_image (imlib_id, VIMAGE(fg)->image);
-	fg_mask = Imlib_move_mask (imlib_id, VIMAGE(fg)->image);
-
-	/* Some of the Imlib_ functions call XSync on our display. In turn
-	   this can cause the error handler to run if a window has been
-	   deleted. This then invalidates the window we're updating */
-	if (win->id == 0)
-	    return;
-
-	if (fg_pixmap)
+	if (fp->x_justify == Qcenter)
+	    x = MAX(0, (fp->width - width) / 2);
+	else if (fp->x_justify == Qright)
+	    x = MAX(0, fp->width - width);
+	else if (rep_INTP(fp->x_justify))
 	{
-	    if (fg_mask)
+	    x = rep_INT(fp->x_justify);
+	    if (x < 0)
+		x = MAX(0, fp->width + x - width);
+	}
+	else
+	    x = 0;
+
+	if (fp->y_justify == Qcenter)
+	    y = MAX(0, (fp->height - height) / 2);
+	else if (fp->y_justify == Qbottom)
+	    y = MAX(0, fp->height - height);
+	else if (rep_INTP(fp->y_justify))
+	{
+	    y = rep_INT(fp->y_justify);
+	    if (y < 0)
+		y = MAX(0, fp->height + y - height);
+	}
+	else
+	    y = 0;
+
+	if (IMAGEP(fg))
+	{
+	    Pixmap fg_pixmap, fg_mask;
+
+	    if (fp->drawn.fg == fg
+		&& fp->drawn.width == fp->width
+		&& fp->drawn.height == fp->height
+		&& fp->drawn.x_justify == fp->x_justify
+		&& fp->drawn.y_justify == fp->y_justify)
 	    {
-		gcv.clip_mask = fg_mask;
-		gcv.clip_x_origin = x;
-		gcv.clip_y_origin = y;
-		gcv_mask |= GCClipMask | GCClipXOrigin | GCClipYOrigin;
+		return;
+	    }
+
+	    XClearWindow (dpy, fp->id);
+
+	    Imlib_render (imlib_id, VIMAGE(fg)->image,
+			  VIMAGE(fg)->image->rgb_width,
+			  VIMAGE(fg)->image->rgb_height);
+	    fg_pixmap = Imlib_move_image (imlib_id, VIMAGE(fg)->image);
+	    fg_mask = Imlib_move_mask (imlib_id, VIMAGE(fg)->image);
+
+	    /* Some of the Imlib_ functions call XSync on our display. In turn
+	       this can cause the error handler to run if a window has been
+	       deleted. This then invalidates the window we're updating */
+	    if (win->id == 0)
+		return;
+
+	    if (fg_pixmap)
+	    {
+		if (fg_mask)
+		{
+		    gcv.clip_mask = fg_mask;
+		    gcv.clip_x_origin = x;
+		    gcv.clip_y_origin = y;
+		    gcv_mask |= GCClipMask | GCClipXOrigin | GCClipYOrigin;
+		}
+		gcv.function = GXcopy;
+		gcv_mask |= GCFunction;
+
+		if (fp->gc == 0)
+		    fp->gc = XCreateGC (dpy, fp->id, gcv_mask, &gcv);
+		else
+		    XChangeGC (dpy, fp->gc, gcv_mask, &gcv);
+
+		XCopyArea (dpy, fg_pixmap, fp->id, fp->gc, 0, 0,
+			   MIN(fp->width, VIMAGE(fg)->image->rgb_width),
+			   MIN(fp->height, VIMAGE(fg)->image->rgb_height),
+			   x, y);
+
+		Imlib_free_pixmap (imlib_id, fg_pixmap);
+	    }
+	    /* Imlib sometimes calls XSync (), which could hide events
+	       from select () */
+	    rep_mark_input_pending (ConnectionNumber(dpy));
+
+	    fp->drawn.text = Qnil;
+	}
+	else if (COLORP(fg) && FONTP(font))
+	{
+	    if ((fp->drawn.text == string
+		 || Fequal (fp->drawn.text, string) != Qnil)
+		&& fp->drawn.font == font && fp->drawn.fg == fg
+		&& fp->drawn.width == fp->width
+		&& fp->drawn.height == fp->height
+		&& fp->drawn.x_justify == fp->x_justify
+		&& fp->drawn.y_justify == fp->y_justify)
+	    {
+		return;
+	    }
+
+	    XClearWindow (dpy, fp->id);
+
+	    if (FONTP(font))
+	    {
+		gcv.font = VFONT(font)->font->fid;
+		gcv_mask |= GCFont;
+	    }
+	    if (COLORP(fg))
+	    {
+		gcv.foreground = VCOLOR(fg)->pixel;
+		gcv_mask |= GCForeground;
 	    }
 	    gcv.function = GXcopy;
 	    gcv_mask |= GCFunction;
@@ -437,40 +506,26 @@ set_frame_part_fg (struct frame_part *fp)
 	    else
 		XChangeGC (dpy, fp->gc, gcv_mask, &gcv);
 
-	    XCopyArea (dpy, fg_pixmap, fp->id, fp->gc, 0, 0,
-		       MIN(fp->width, VIMAGE(fg)->image->rgb_width),
-		       MIN(fp->height, VIMAGE(fg)->image->rgb_height),
-		       x, y);
+	    XDrawString (dpy, fp->id, fp->gc, x, y + VFONT(font)->font->ascent,
+			 rep_STR(string), length);
 
-	    Imlib_free_pixmap (imlib_id, fg_pixmap);
+	    fp->drawn.text = string;
 	}
-	/* Imlib sometimes calls XSync (), which could hide events
-	   from select () */
-	rep_mark_input_pending (ConnectionNumber(dpy));
     }
-    if (COLORP(fg) && FONTP(font))
+    else
     {
-	if (FONTP(font))
-	{
-	    gcv.font = VFONT(font)->font->fid;
-	    gcv_mask |= GCFont;
-	}
-	if (COLORP(fg))
-	{
-	    gcv.foreground = VCOLOR(fg)->pixel;
-	    gcv_mask |= GCForeground;
-	}
-	gcv.function = GXcopy;
-	gcv_mask |= GCFunction;
+	if (fp->drawn.fg == fg)
+	    return;
 
-	if (fp->gc == 0)
-	    fp->gc = XCreateGC (dpy, fp->id, gcv_mask, &gcv);
-	else
-	    XChangeGC (dpy, fp->gc, gcv_mask, &gcv);
-
-	XDrawString (dpy, fp->id, fp->gc, x,
-		     y + VFONT(font)->font->ascent, string, length);
+	XClearWindow (dpy, fp->id);
     }
+
+    fp->drawn.width = fp->width;
+    fp->drawn.height = fp->height;
+    fp->drawn.font = font;
+    fp->drawn.fg = fg;
+    fp->drawn.x_justify = fp->x_justify;
+    fp->drawn.y_justify = fp->y_justify;
 }
 
 /* Redraw FP. */
@@ -545,7 +600,10 @@ void
 frame_part_exposer (XExposeEvent *ev, struct frame_part *fp)
 {
     if (ev->count == 0)
+    {
+	fp->drawn.fg = rep_NULL;		/* force redraw */
 	set_frame_part_fg (fp);
+    }
 }
 
 /* Called when a window property changes */
@@ -1111,6 +1169,9 @@ list_frame_generator (Lisp_Window *w)
 
 		/* stash the fp in the window */
 		XSaveContext (dpy, fp->id, window_fp_context, (XPointer)fp);
+
+		fp->drawn.fg = rep_NULL;
+		fp->drawn.bg = rep_NULL;
 	    }
 	}
 	else
@@ -1197,6 +1258,12 @@ mark_frame_parts (Lisp_Window *w)
 	rep_MARKVAL(rep_VAL(fp->cursor));
 	rep_MARKVAL(rep_VAL(fp->renderer));
 	rep_MARKVAL(rep_VAL(fp->rendered_image));
+	rep_MARKVAL(fp->drawn.font);
+	rep_MARKVAL(fp->drawn.text);
+	rep_MARKVAL(fp->drawn.x_justify);
+	rep_MARKVAL(fp->drawn.y_justify);
+	rep_MARKVAL(fp->drawn.fg);
+	rep_MARKVAL(fp->drawn.bg);
     }
 }
 
