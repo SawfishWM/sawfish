@@ -1,3 +1,16 @@
+1999-12-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* match-window.jl: added customize support
+
+	* custom.jl: deprecated the `(set SYMBOLS..)' type, replaced by
+	`symbol' with an extra tag `:options (SYMBOLS...)'
+	(custom-get-options, custom-add-option): new macros for
+	extending symbol-type defcustom's
+
+	* workspace.jl, stacking.jl, place-window.jl, move-resize.jl,
+	focus.jl, edge-flip.jl, customize.jl: work with the new
+	`symbol' custom type
+
 1999-11-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* match-window.jl: new file, a method of matching windows (by

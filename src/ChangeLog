@@ -1,3 +1,21 @@
+1999-12-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl: added `match-window' widget for editing the
+	match-window-profile variable
+
+	* events.c (Fquery_button_press_window): new function, tries to
+	return the window that the button was pressed in (when in the
+	middle of a press-release sequence)
+	(motion_notify): only look for frame-part context maps when the
+	window that the mouse is currently over is the same window as
+	when the button was originally pressed
+
+	* keys.c (lookup_event_binding): call
+	Fquery_button_press_window () when evaluating a mouse event to
+	find the window whose `keymap' property should be searched
+
+	* sawmill-ui.jl: the `set' type is now called `symbol'
+
 1999-11-29  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.c (Fwarp_cursor_to_window): deleted, now in lisp

@@ -25,9 +25,6 @@ Outstanding bugs
 
   ! xv/java-apps get weird placement [apps being non-ICCCM compliant?]
 
-  ! without gmc, click on root, drag over window title, drag window,
-    release button, move back onto root, title still highlighted
-
   ! the gnome _WIN_MAXIMIZED_ hints are ignored when the window is
     mapped, since it's not possible to maximize the window at that
     point (until the frame has been created)
@@ -104,11 +101,6 @@ General tasks
   + threshold options to control window-move sensitivity?
 
   + add a gradient frame with side pieces
-
-  + ui method for matching windows to attributes
-
-    the lisp mechanism is in place (the add-window-matcher function in
-    match-window.jl); all it needs is a user interface
 
   + wrap-around option for moving viewports
 

@@ -96,6 +96,7 @@ extern void handle_input_mask(long mask);
 extern void handle_sync_input(int fd);
 extern repv Fquery_pointer (repv get);
 extern repv Fquery_button_press_pointer (void);
+extern repv Fquery_button_press_window (void);
 extern repv Fquery_pointer_window (void);
 extern repv Fcurrent_event_window (repv win);
 extern void events_init (void);
