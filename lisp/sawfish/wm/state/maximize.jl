@@ -366,27 +366,34 @@ doesn't overlap any avoided windows, or nil."
 	(call-window-hook 'window-maximized-hook w (list direction))
 	(call-window-hook 'window-state-change-hook w (list '(maximized))))))
 
-  (define (unmaximize-window w #!optional direction)
-    "Restore the dimensions of the window to its original, unmaximized, state."
+  ;; does all unmaximizing except for changing the window properties and
+  ;; calling the hooks
+  (define (unmaximize-window-1 w #!optional direction)
     (let ((geom (window-get w 'unmaximized-geometry))
 	  (coords (window-position w))
 	  (dims (window-dimensions w)))
       (when geom
 	(when (or (null direction) (eq direction 'horizontal))
 	  (rplaca coords (nth 0 geom))
-	  (rplaca dims (nth 2 geom))
-	  (window-put w 'maximized-horizontally nil))
+	  (rplaca dims (nth 2 geom)))
 	(when (or (null direction) (eq direction 'vertical))
 	  (rplacd coords (nth 1 geom))
-	  (rplacd dims (nth 3 geom))
-	  (window-put w 'maximized-vertically nil))
-	(when (and (not (window-maximized-vertically-p w))
-		   (not (window-maximized-horizontally-p w)))
-	  (window-put w 'unmaximized-geometry nil))
+	  (rplacd dims (nth 3 geom)))
 	(move-resize-window-to w (car coords) (cdr coords)
-			       (car dims) (cdr dims))
-	(call-window-hook 'window-unmaximized-hook w (list direction))
-	(call-window-hook 'window-state-change-hook w (list '(maximized))))))
+			       (car dims) (cdr dims)))))
+
+  (define (unmaximize-window w #!optional direction)
+    "Restore the dimensions of the window to its original, unmaximized, state."
+    (unmaximize-window-1 w direction)
+    (when (or (null direction) (eq direction 'horizontal))
+      (window-put w 'maximized-horizontally nil))
+    (when (or (null direction) (eq direction 'vertical))
+      (window-put w 'maximized-vertically nil))
+    (when (and (not (window-maximized-vertically-p w))
+	       (not (window-maximized-horizontally-p w)))
+      (window-put w 'unmaximized-geometry nil))
+    (call-window-hook 'window-unmaximized-hook w (list direction))
+    (call-window-hook 'window-state-change-hook w (list '(maximized))))
 
   (define (maximize-window-vertically w)
     "Maximize the vertical dimension of the window."
@@ -485,6 +492,11 @@ unmaximized."
 				 (horiz 'horizontal))))))
 
   (add-hook 'after-add-window-hook after-add-window)
+
+  ;; before exiting, return all windows to their unmaximized
+  ;; geometries. But _don't_ change any of the properties (either
+  ;; wm-local or X) that mark the window as being maximized
+  (add-hook 'before-exit-hook (lambda () (map-windows unmaximize-window-1)))
 
   (define (check-if-maximizable w)
     (let ((maximizable (window-maximizable-p w)))

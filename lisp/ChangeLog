@@ -1,5 +1,10 @@
 2000-11-03  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/state/maximize.jl: immediately before exiting
+	unmaximize all maximized windows. But be careful not to reflect
+	this change in their properties (either wm-local or in the X
+	server). Fixes #4336
+
 	* sawfish/wm/state/wm-spec.jl (wm-spec-init): changed
 	_NET_SUPPORTING_WM_CHECK properties to type 'WINDOW. Also set
 	_NET_WM_NAME property on the identifying client window
