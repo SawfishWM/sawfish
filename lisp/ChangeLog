@@ -1,3 +1,33 @@
+2000-05-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* transient.jl (transient-unmap-window): misc improvements,
+	should fix the reported problems in click-to-focus mode
+
+	* window-order.jl (window-order-most-recent): new function
+
+	* focus.jl (focus-click): only pass events through to the
+	window if they're not bound, _and_ none of their successor
+	events (move, release, etc) are bound
+
+	* decode-events.jl (should-grab-button-event-p): new function,
+	returns t if a button event needs to be grabbed so that the
+	events that follow it are received
+
+	* transient.jl (transient-map-window): only ever focus the
+	window if it's visible (i.e. on the current workspace and not
+	iconified)
+
+2000-05-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* viewport.jl (window-outside-workspace-p): handle non-zero
+	viewport origins correctly (I think)
+
+	* iconify.jl (ws-set-client-state): add this function to
+	`map-notify-hook' instead of `add-window-hook', since the wm
+	deletes WM_STATE when windows are withdrawn (one of the
+	alternatives suggested by the icccm). This fixes the Code
+	Crusader bug
+
 2000-04-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* shade-hover.jl (shade-hover-delay): changed range lower limit

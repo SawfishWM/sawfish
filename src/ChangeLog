@@ -1,3 +1,16 @@
+2000-05-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl (beautify-symbol-name): adapted to handle any
+	type of argument, but only beautifies symbols
+
+	* sawmill-ui.jl: fixed bug of not beautifying command names
+	after `Copy' or `Insert' operations
+
+2000-05-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl (match-window:edit): use non-destructive
+	operations when splitting property list into bool/non-bool sets
+
 2000-04-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.c (do_raise_lower): signal an error if the window
