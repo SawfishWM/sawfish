@@ -33,13 +33,14 @@
   :type symbol
   :options (all parents none))
 
-;; minimum depth of transient windows
-(defvar transient-depth 2)
+(defvar transient-depth 2
+  "Minimum depth of transient windows.")
 
-;; Resort the stacking order to ensure that the windows' depth attributes
-;; are adhered to. No change is made to windows in the same depth
-;; Note that this can be flickery, try to avoid calling this function
 (defun restack-by-depth ()
+  "Reconfigure the stacking order to ensure that the windows' depth attributes
+are adhered to. No change is made to windows at the same depth.
+
+Note that this can be flickery, try to avoid calling this function."
   (let*
       ((old-order (stacking-order))
        (new-order (sort (copy-sequence old-order)
@@ -56,13 +57,15 @@
       (restack-windows new-order))))
 
 (defun stacking-order-by-depth (depth)
+  "Return a list of windows containing only those in depth DEPTH, in the order
+they are stacked within the layer (top to bottom)."
   (let
       ((order (stacking-order)))
     (delete-if (lambda (x)
 		 (/= (window-get x 'depth) depth)) order)))
 
-;; Set the stacking depth of W to DEPTH
 (defun set-window-depth (w depth)
+  "Set the stacking depth of window W to DEPTH."
   (let
       ((old (window-get w 'depth)))
     (window-put w 'depth depth)
@@ -82,8 +85,8 @@
     (unless depth
       (window-put w 'depth 0))))
 
-;; Return t if W is at the top of its level
 (defun window-on-top-p (w)
+  "Return t if window W is at the top of its stacking depth."
   (or (eq (window-visibility w) 'unobscured)
       (let*
 	  ((depth (window-get w 'depth))
@@ -94,18 +97,33 @@
 		   (stacking-order))))
 	(eq (car order) w))))
 
-;; Change stacking of window BELOW so that it is immediately below
-;; window ABOVE
 (defun stack-window-below (below above)
-  (when (= (window-get above 'depth) (window-get below 'depth))
-    (x-lower-window below above)))
+  "Change the stacking of window BELOW so that it is immediately below window
+ABOVE. If the two windows aren't at the same depth, improvise."
+  (let
+      ((d-below (window-get below 'depth))
+       (d-above (window-get above 'depth)))
+    (cond ((< d-below d-above)
+	   (raise-window below))
+	  ((= d-below d-above)
+	   (x-lower-window below above))
+	  ((> d-below d-above)
+	   (lower-window below)))))
 
-;; Change stacking of window ABOVE so that it is immediately above
-;; window BELOW
 (defun stack-window-above (above below)
-  (when (= (window-get above 'depth) (window-get below 'depth))
-    (x-raise-window above below)))
+  "Change the stacking of window ABOVE so that it is immediately above window
+BELOW. If the two windows aren't at the same depth, improvise."
+  (let
+      ((d-above (window-get above 'depth))
+       (d-below (window-get below 'depth)))
+    (cond ((< d-above d-below)
+	   (raise-window above))
+	  ((= d-above d-below)
+	   (x-raise-window above below))
+	  ((> d-above d-below)
+	   (lower-window above)))))
 
+;; called from map-notify-hook
 (defun stacking-after-map (w)
   (raise-window w)
   ;; if a transient window, maybe put it in a higher layer
