@@ -24,22 +24,20 @@
 (defvar root-menu
   '(("Workspaces" . workspace-menu)
     ("Windows" . window-menu)
-    ()
-    ("Applications"
-     ("Emacs" (lambda () (system "emacs &")))
-     ("Netscape" (lambda () (system "netscape &")))
-     ("The GIMP" (lambda () (system "gimp &")))
-     ("XFIG" (lambda () (system "xfig &")))
-     ("GV" (lambda () (system "gv &"))))
-    ("Utilities"
-     ("xterm" (lambda () (system "xterm &")))
-     ("xcalc" (lambda () (system "xcalc &")))
-     ("xman" (lambda () (system "xman &")))
-     ("xmag" (lambda () (system "xmag &")))
-     ("xfontsel" (lambda () (system "xfontsel &"))))
+    (apps-menu)
     ()
     ("Restart" restart)
     ("Quit" quit)))
+
+(defvar apps-menu
+  '("Applications"
+    ("xterm" (lambda () (system "xterm &")))
+    ("Emacs" (lambda () (system "emacs &")))
+    ("Netscape" (lambda () (system "netscape &")))
+    ("The GIMP" (lambda () (system "gimp &")))
+    ("XFIG" (lambda () (system "xfig &")))
+    ("GV" (lambda () (system "gv &")))
+    ("xcalc" (lambda () (system "xcalc &")))))
 
 (defun menu-start-process ()
   (unless (and menu-process (process-in-use-p menu-process))
@@ -122,9 +120,3 @@
   (if root-menu
       (popup-menu root-menu)
     (beep)))
-
-
-;; dynamic menu constructors  
-
-(defun window-ops-menu ()
-  window-ops-menu)
