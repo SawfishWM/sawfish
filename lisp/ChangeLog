@@ -1,3 +1,9 @@
+2000-05-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* stacking.jl (stacking-after-map): raise the window _after_
+	possibly moving it to a higher layer (else it may end up below
+	the other windows in its layer)
+
 2000-05-27  John Harper  <john@dcs.warwick.ac.uk>
 
 	* window-history.jl: added a custom property getter for `type',
