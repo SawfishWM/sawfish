@@ -51,22 +51,23 @@
 	(or (load (concat (user-home-directory) ".reprc") t t)
 	    (load "rep-defaults" t))
 
-	;; load these before customized settings (but only if there's
-	;; no .sawmillrc file)
-	(unless (or (file-exists-p "~/.sawmillrc")
-		    (file-exists-p "~/.sawmillrc.jl")
-		    (file-exists-p "~/.sawmillrc.jlc"))
-	  (load "sawmill-defaults" t))
+	(unless batch-mode
+	  ;; load these before customized settings (but only if there's
+	  ;; no .sawmillrc file)
+	  (unless (or (file-exists-p "~/.sawmillrc")
+		      (file-exists-p "~/.sawmillrc.jl")
+		      (file-exists-p "~/.sawmillrc.jlc"))
+	    (load "sawmill-defaults" t))
 
-	;; then the customized options
-	(custom-load-user-file)
+	  ;; then the customized options
+	  (custom-load-user-file)
 
-	;; then the sawmill specific user configuration
-	(load "~/.sawmillrc" t t)
+	  ;; then the sawmill specific user configuration
+	  (load "~/.sawmillrc" t t)
 
-	;; use a default theme if none given
-	(unless default-frame-style
-	  (set-frame-style 'absolute-e)))
+	  ;; use a default theme if none given
+	  (unless default-frame-style
+	    (set-frame-style 'absolute-e))))
     (error
      (format (stderr-file) "error in local config--> %S\n" error-data))))
 

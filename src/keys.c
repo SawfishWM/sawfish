@@ -1208,5 +1208,6 @@ keys_init(void)
     rep_ADD_SUBR(Skeymapp);
     rep_ADD_SUBR(Seventp);
 
-    find_meta ();
+    if (rep_SYM(Qbatch_mode)->value == Qnil)
+	find_meta ();
 }

@@ -205,7 +205,8 @@ fonts_init (void)
     rep_ADD_SUBR(Stext_width);
     rep_ADD_SUBR(Sfont_height);
     rep_INTERN(default_font);
-    rep_SYM(Qdefault_font)->value = Fget_font (rep_string_dup("fixed"));
+    if (rep_SYM(Qbatch_mode)->value == Qnil)
+	rep_SYM(Qdefault_font)->value = Fget_font (rep_string_dup("fixed"));
 }
 
 void

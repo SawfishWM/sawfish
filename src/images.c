@@ -334,9 +334,12 @@ images_init (void)
     image_type = rep_register_new_type ("image", 0, image_prin, image_prin,
 					image_sweep, image_mark,
 					0, 0, 0, 0, 0, 0, 0);
-    params.visualid = screen_visual->visualid;
-    params.flags = PARAMS_VISUALID;
-    imlib_id = Imlib_init_with_params (dpy, &params);
+    if (rep_SYM(Qbatch_mode)->value == Qnil)
+    {
+	params.visualid = screen_visual->visualid;
+	params.flags = PARAMS_VISUALID;
+	imlib_id = Imlib_init_with_params (dpy, &params);
+    }
     rep_ADD_SUBR(Smake_image);
     rep_ADD_SUBR(Scopy_image);
     rep_ADD_SUBR(Sflip_image_horizontally);

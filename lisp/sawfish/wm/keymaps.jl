@@ -93,45 +93,46 @@ of a window."
 
 ;; some bindings
 
-(bind-keys title-keymap
-  "Button3-Off" 'raise-lower-window
-  "Button1-Move" 'move-window-interactively
-  "Button2-Move" 'resize-window-interactively)
+(unless batch-mode
+  (bind-keys title-keymap
+    "Button3-Off" 'raise-lower-window
+    "Button1-Move" 'move-window-interactively
+    "Button2-Move" 'resize-window-interactively)
 
-(bind-keys window-keymap
-  "C-M-Up" 'raise-window
-  "C-M-Down" 'lower-window
-  "C-M-Left" 'send-to-previous-workspace
-  "C-M-Right" 'send-to-next-workspace
-  "M-Button1-Click1" 'move-window-interactively
-  "M-Button2-Click1" 'nop		;ensure we get the ButtonRelease
-  "M-Button2-Off" 'popup-window-menu
-  "M-Button3-Click1" 'raise-lower-window)
+  (bind-keys window-keymap
+    "C-M-Up" 'raise-window
+    "C-M-Down" 'lower-window
+    "C-M-Left" 'send-to-previous-workspace
+    "C-M-Right" 'send-to-next-workspace
+    "M-Button1-Click1" 'move-window-interactively
+    "M-Button2-Click1" 'nop		;ensure we get the ButtonRelease
+    "M-Button2-Off" 'popup-window-menu
+    "M-Button3-Click1" 'raise-lower-window)
 
-(bind-keys global-keymap
-  "C-Left" 'previous-workspace
-  "C-Right" 'next-workspace)
+  (bind-keys global-keymap
+    "C-Left" 'previous-workspace
+    "C-Right" 'next-workspace)
 
-(bind-keys root-window-keymap
-  "Button2-Click1" 'popup-root-menu
-  "Button2-Off" 'nop)			;so it doesn't get proxyed
+  (bind-keys root-window-keymap
+    "Button2-Click1" 'popup-root-menu
+    "Button2-Off" 'nop)			;so it doesn't get proxyed
 
-(bind-keys close-button-keymap
-  "Button1-Off" 'delete-window
-  "Button3-Off" 'popup-window-menu)
+  (bind-keys close-button-keymap
+    "Button1-Off" 'delete-window
+    "Button3-Off" 'popup-window-menu)
 
-(bind-keys iconify-button-keymap
-  "Button1-Off" 'iconify-window
-  "Button3-Off" 'popup-window-menu)
+  (bind-keys iconify-button-keymap
+    "Button1-Off" 'iconify-window
+    "Button3-Off" 'popup-window-menu)
 
-(bind-keys menu-button-keymap
-  "Button1-Off" 'popup-window-menu
-  "Button3-Off" 'delete-window)
+  (bind-keys menu-button-keymap
+    "Button1-Off" 'popup-window-menu
+    "Button3-Off" 'delete-window)
 
-(bind-keys maximize-button-keymap
-  "Button1-Off" 'maximize-window-toggle
-  "Button2-Off" 'maximize-window-vertically-toggle
-  "Button3-Off" 'maximize-window-horizontally-toggle)
+  (bind-keys maximize-button-keymap
+    "Button1-Off" 'maximize-window-toggle
+    "Button2-Off" 'maximize-window-vertically-toggle
+    "Button3-Off" 'maximize-window-horizontally-toggle))
 
 
 ;; customize support

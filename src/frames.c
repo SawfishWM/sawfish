@@ -921,7 +921,8 @@ frames_init (void)
     rep_INTERN(bottom_edge);
     rep_INTERN(cursor);
 
-    window_fp_context = XUniqueContext ();
+    if (rep_SYM(Qbatch_mode)->value == Qnil)
+	window_fp_context = XUniqueContext ();
 }
 
 void

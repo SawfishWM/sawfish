@@ -481,7 +481,7 @@ all workspaces."
 
 ;; Initialisation
 
-(unless (memq 'ws-add-window add-window-hook)
+(unless (or batch-mode (memq 'ws-add-window add-window-hook))
   (add-hook 'add-window-hook 'ws-add-window t)
   (add-hook 'destroy-notify-hook 'ws-remove-window t)
   (add-hook 'map-notify-hook 'ws-window-mapped t)
