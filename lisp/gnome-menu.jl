@@ -38,7 +38,7 @@
 	(setq tem (substring path point end))
 	(when (file-exists-p (expand-file-name "gnome-session" tem))
 	  (throw 'out (expand-file-name "../share/gnome" tem)))
-	(setq point end)))
+	(setq point (1+ end))))
     nil))
 
 (defvar gnome-menu-lang (let
