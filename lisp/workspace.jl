@@ -36,6 +36,10 @@ workspace.")
 (defvar raise-windows-on-uniconify t
   "When non-nil, windows are raised after being uniconified.")
 
+(defvar transients-on-parents-workspace nil
+  "When non-nil transient windows are opened on the same workspace as
+their parent window.")
+
 ;; List of all workspaces; a workspace is `(workspace WINDOWS...)'.
 ;; Each window has its `workspace' property set to the workspace it's
 ;; a member of. [src/gnome.c accesses this variable]
@@ -46,7 +50,10 @@ workspace.")
 
 (defvar static-workspace-menus
   '(("Next" next-workspace)
-    ("Previous" previous-workspace)))
+    ("Previous" previous-workspace)
+    ("Insert" insert-workspace)
+    ("Merge next" merge-next-workspace)
+    ("Merge previous" merge-previous-workspace)))
 
 
 ;; Low level functions
@@ -64,18 +71,41 @@ workspace.")
 ;; usually called from the add-window-hook
 (defun ws-add-window (w)
   (unless (window-get w 'sticky)
-    (if (null ws-current-workspace)
-	(progn
-	  ;; initialisation
-	  (setq ws-current-workspace (list 'workspace w))
-	  (setq ws-workspaces (list ws-current-workspace))
-	  (call-hook 'add-workspace-hook (list ws-current-workspace)))
-      (rplacd ws-current-workspace
-	      (nconc (delq w (cdr ws-current-workspace)) (list w))))
-    (window-put w 'workspace ws-current-workspace)
-    (unless (window-visible-p w)
-      (show-window w))
-    (call-hook 'add-to-workspace-hook (list w))))
+    (let
+	(parent)
+      (if (and transients-on-parents-workspace
+	       (window-transient-p w)
+	       (setq parent (get-window-by-id (window-transient-p w)))
+	       (window-get parent 'workspace)
+	       (not (eq (window-get parent 'workspace) ws-current-workspace)))
+	  ;; put the window on its parents workspace
+	  (ws-add-window-to-space w (window-get parent 'workspace))
+	(if (null ws-current-workspace)
+	    (progn
+	      ;; initialisation
+	      (setq ws-current-workspace (list 'workspace w))
+	      (setq ws-workspaces (list ws-current-workspace))
+	      (call-hook 'add-workspace-hook (list ws-current-workspace)))
+	  (rplacd ws-current-workspace
+		  (nconc (delq w (cdr ws-current-workspace)) (list w))))
+	(window-put w 'workspace ws-current-workspace)
+	(unless (window-visible-p w)
+	  (show-window w))
+	(call-hook 'add-to-workspace-hook (list w))))))
+
+;; called from the map-notify hook
+(defun ws-window-mapped (w)
+  (let
+      (parent)
+    (when (and transients-on-parents-workspace
+	       (window-transient-p w)
+	       (not (window-get w 'sticky))
+	       (setq parent (get-window-by-id (window-transient-p w)))
+	       (window-get parent 'workspace)
+	       (not (eq (window-get w 'workspace)
+			(window-get parent 'workspace))))
+      (ws-remove-window w)
+      (ws-add-window-to-space w (window-get parent 'workspace)))))
 
 (defun ws-remove-window (w)
   (let
@@ -108,6 +138,15 @@ workspace.")
     (call-hook 'add-workspace-hook (list space))
     space))
 
+(defun ws-insert-workspace ()
+  (if (null ws-workspaces)
+      (ws-add-workspace t)
+    (let
+	((space (list 'workspace))
+	 (join (memq ws-current-workspace ws-workspaces)))
+      (rplacd join (cons space (cdr join)))
+      space)))
+
 (defun ws-find-next-workspace (&optional cycle)
   (when (cdr ws-workspaces)
     (let
@@ -135,6 +174,18 @@ workspace.")
 		  (show-window w))) (cdr ws-current-workspace))
       (call-hook 'enter-workspace-hook (list ws-current-workspace)))))
 
+(defun ws-merge-workspaces (src dest)
+  ;; XXX doing this causes a nasty flicker of windows that
+  ;; XXX get unmapped, moved, then re-mapped
+  (when (eq ws-current-workspace src)
+    (ws-switch-workspace dest))
+  (while (cdr src)
+    (let
+	((w (nth 1 src)))
+      (ws-remove-window w)
+      (ws-add-window-to-space w dest)))
+  (setq ws-workspaces (delq src ws-workspaces)))
+
 
 ;; Menu constructors
 
@@ -154,6 +205,10 @@ workspace.")
       (setq tem (cdr tem))
       (setq i (1+ i)))
     (nconc (nreverse menu) (list nil) static-workspace-menus)))
+
+(defun popup-workspace-list ()
+  (interactive)
+  (popup-menu (workspace-menu)))
 
 (defun window-menu ()
   (let
@@ -181,6 +236,10 @@ workspace.")
       (when space
 	(setq menu (cons nil menu))))
     (nreverse menu)))
+
+(defun popup-window-list ()
+  (interactive)
+  (popup-menu (window-menu)))
 
 
 ;; Commands
@@ -221,7 +280,6 @@ will be created."
     (ws-remove-window window)
     (ws-add-window-to-space window space)))
 
-
 (defun next-workspace-window ()
   "Focus on the next window of the current workspace"
   (interactive)
@@ -237,6 +295,25 @@ will be created."
       ((space (nth index ws-workspaces)))
     (when (and space (not (eq space ws-current-workspace)))
       (ws-switch-workspace space))))
+
+(defun merge-next-workspace ()
+  "Delete the current workspace. Its member windows are relocated to the next
+workspace."
+  (interactive)
+  (when (> (length ws-workspaces) 1)
+    (ws-merge-workspaces ws-current-workspace (ws-find-next-workspace t))))
+
+(defun merge-previous-workspace ()
+  "Delete the current workspace. Its member windows are relocated to the next
+workspace."
+  (interactive)
+  (when (> (length ws-workspaces) 1)
+    (ws-merge-workspaces ws-current-workspace (ws-find-previous-workspace t))))
+
+(defun insert-workspace ()
+  "Create a new workspace following the current workspace."
+  (interactive)
+  (ws-switch-workspace (ws-insert-workspace)))
 
 
 ;; Iconification (but without icons)
@@ -283,4 +360,5 @@ will be created."
 (unless (memq 'ws-add-window add-window-hook)
   (add-hook 'add-window-hook 'ws-add-window t)
   (add-hook 'destroy-notify-hook 'ws-remove-window t)
+  (add-hook 'map-notify-hook 'ws-window-mapped t)
   (mapc 'ws-add-window (managed-windows)))
