@@ -7,17 +7,18 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Pablo Saratxaga <srtxg@chanae.alphanet.ch> 1999-2002
 # Lucyin Mahin, 2000
-# Lorint Hendschel <LorintHendschel@skynet.be>, 2001
+# Lorint Hendschel <LorintHendschel@skynet.be>, 2001.
+# Pablo Saratxaga <pablo@walon.org>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.0.1\n"
-"POT-Creation-Date: 2002-04-30 13:09+0200\n"
-"PO-Revision-Date: 2002-05-22 11:10MET\n"
+"POT-Creation-Date: 2002-11-02 23:33-0800\n"
+"PO-Revision-Date: 2003-07-06 23:49+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ../scripts/sawfish-about.jl
@@ -86,6 +87,7 @@ msgstr "Prôpietés del imådje"
 
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
+#, c-format
 msgid "No matching item for %S"
 msgstr "Nou cayet corespondant po %S"
 
@@ -113,6 +115,7 @@ msgid "Added frame type `%s'"
 msgstr "Radjouter li sôre di cåde «%s»"
 
 #. ../themer/themer.in
+#, c-format
 msgid "error while building frame: %S"
 msgstr "Åk n' a nén stî tot fjhant li cåde: %S"
 
@@ -129,7 +132,7 @@ msgstr "Tinme djeneré el ridant «%s»"
 #. ../themer/themer.in
 #, c-format
 msgid "Read theme from `%s'"
-msgstr "Lere li tinme di «%s»"
+msgstr "Lére li tinme di «%s»"
 
 #. ../themer/themer.in
 msgid "Theme Directory"
@@ -473,7 +476,7 @@ msgstr "Distrure li purnea"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Kill client"
-msgstr "Touwer cliyant"
+msgstr "Touwer cliyint"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "No operation"
@@ -676,7 +679,7 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default window manager shortcuts."
+msgid "Modifier key(s) used for default shortcuts."
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
@@ -722,22 +725,6 @@ msgstr "Copyî sol ci di dvant"
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Copy to next"
 msgstr "Copyî sol shuvant"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Left"
-msgstr "_Hintche"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Right"
-msgstr "_Droete"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Up"
-msgstr "_Copete"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Down"
-msgstr "_Valeye"
 
 #. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
@@ -876,7 +863,9 @@ msgstr "Rimonter purnea tot seu"
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise the window to its highest allowed position in the stacking order."
-msgstr "Rimonter l' purnea disk' al pus hôte pozucion possibe, dins l' ôre di l' epilaedje."
+msgstr ""
+"Rimonter l' purnea disk' al pus hôte pôzucion possibe, dins l' ôre di "
+"l' epilaedje."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower single window"
@@ -885,11 +874,13 @@ msgstr "Baxhî purnea tot seu"
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower the window to its lowest allowed position in the stacking order."
-msgstr "Baxhî l' purnea disk' al pus hôte pozucion possibe, dins l' ôre di l' epilaedje."
+msgstr ""
+"Baxhî l' purnea disk' al pus hôte pôzucion possibe, dins l' ôre di "
+"l' epilaedje."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise lower single window"
-msgstr "Rimonter li purnea tot seu k' e-st å dzo"
+msgstr "Rimonter li purnea tot seu k' est å dzo"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
@@ -897,8 +888,8 @@ msgid ""
 "If the window is at its highest possible position, then lower it to its\n"
 "lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
-"Si l' purnea e-st a si pus hôte pozucion possibe, adon l' baxhî\n"
-"disk' al pus basse pozucion possibe. Ôtrumint li rmonter ossu\n"
+"Si l' purnea est a si pus hôte pôzucion possibe, adon l' baxhî\n"
+"disk' al pus basse pôzucion possibe. Ôtrumint li rmonter ossu\n"
 "lon ki possibe."
 
 #. ../lisp/sawfish/wm/stacking.jl
@@ -1043,7 +1034,9 @@ msgstr "Disfacer li purnea e såvrité"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete the window, or beep if the window can't be closed safely."
-msgstr "Disfacer li purnea, ou xhîlter si l' purnea n' pout nén esse cloyou e såvrité."
+msgstr ""
+"Disfacer li purnea, ou xhilter si l' purnea n' pout nén esse cloyou e "
+"såvrité."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Uniquify window name"
@@ -1671,7 +1664,7 @@ msgstr "Aidance mostere li FAQ"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show news"
-msgstr "Aidance mostere les news"
+msgstr "Aidance mostere les noveles"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show programmer manual"
@@ -2203,7 +2196,7 @@ msgstr "Môde do focus"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignored"
-msgstr "Passer hûte"
+msgstr "Passer houte"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2259,7 +2252,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
-msgstr "Etat"
+msgstr "Estat"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2306,7 +2299,7 @@ msgstr "Si rmimbrer les _atributs"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
-msgstr "_Rovyî l' etat k' a stî schapé"
+msgstr "_Rovyî l' estat k' a stî schapé"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "History"
@@ -2358,7 +2351,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Forget any persistent state associated with the current window."
-msgstr "Rovyî tot l' minme kén etat asocié avou l' purnea do moumint."
+msgstr "Rovyî tot l' minme kén estat aloyî avou l' purnea do moumint."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history clear"
@@ -2371,6 +2364,70 @@ msgstr "Rovyî tote l' istwere des schapés purneas."
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
 msgstr "_Istwere"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace down"
+msgstr "Sicribanne do dzo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Vey li scribanne å dzo do ci do moumint"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace up"
+msgstr "Sicribanne do dzeu"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Vey li scribanne å dzeu di ci do moumint"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace left"
+msgstr "Sicribanne a hintche"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Vey li scribanne a hintche di ci do moumint"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace right"
+msgstr "Sicribanne a droete"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Vey li scribanne a droete di ci do moumint"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace down"
+msgstr "Evoyî å scribanne do dzo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace up"
+msgstr "Evoyî å scribanne do dzeu"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace left"
+msgstr "Evoyî å scribanne di hintche"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace right"
+msgstr "Evoyî å scribanne di droete"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr ""
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
@@ -2518,7 +2575,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
-msgstr "Passer _hûte"
+msgstr "Passer _houte"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Focusable"
@@ -3016,4 +3073,16 @@ msgstr "_Apontiaedjes"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Tinmes"
+
+#~ msgid "_Left"
+#~ msgstr "_Hintche"
+
+#~ msgid "_Right"
+#~ msgstr "_Droete"
+
+#~ msgid "_Up"
+#~ msgstr "_Copete"
+
+#~ msgid "_Down"
+#~ msgstr "_Valeye"
 
