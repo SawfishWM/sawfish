@@ -1,3 +1,9 @@
+2000-04-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* stacking.jl (raise-window): should have fixed long-standing
+	problem of raising managed windows above override_redirect
+	windows (e.g. menus) in certain cases
+
 2000-04-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.jl (current-head): use focused window to determine
