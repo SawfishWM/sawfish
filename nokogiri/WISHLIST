@@ -1,0 +1,71 @@
+
+  + refresh groups after committing changes
+
+    (since this may cause slots to be added)
+
+  + method of autoloading group details when demanded
+
+  + reversed dependences? i.e. `:depends (not foo)'
+
+  + decide whether to use GNOME widgets or not
+
+  + more widgets:
+
+	(table ("NAME" ...) (WIDGET ...))	[doable]
+
+	(progam-name)
+	(directory-name),
+
+  + support for loading groups on demand
+
+    only fetch the current group's information
+    (which may have been cached from the previous time)
+
+    maybe use CORBA for wm communication instead of client program? (or
+    perhaps support both somehow?)
+
+    [done, apart from CORBA]
+
+  + do i18n on choices from `:type symbol' options
+
+  + add a `Program Launchers' group, that allows commands to be defined
+    for launching programs
+
+  + split theme menu by first letter, if many themes to show
+
+  + another idea: textual search for options/commands
+
+  + Allow text-entry commands in bindings dialog?
+
+--
+
+Items that have been committed:
+
+  + more widgets:
+
+	(alist ("KEY" WIDGET)
+	       ("VALUE" WIDGET))
+
+	(list "NAME" WIDGET)
+
+	(file-name)
+
+  + proper revert
+
+  + choice of `apply/revert/cancel/ok', `revert/cancel/ok', or just `ok'
+
+  + autoload widget definitions (e.g. if requesting widget type `foo'
+    that is unavailable, look for a module nokogiri-widget-foo)
+
+  + nautilus-like ``user levels'' controlling when options get enabled
+
+  + rewrite sawmill-ui to use ``items'' as in sawmill-themer (complex
+    widgets represented by functional data types). This would allow
+    more complex custom types, i.e. `(or number string)' etc...
+
+  + also, add provisions for extensibility (i.e. adding new item types
+    at run-time)
+
+  + also, add simple dependences (i.e. widgets can be activated by a
+    separate boolean option)
+

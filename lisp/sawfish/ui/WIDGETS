@@ -1,0 +1,27 @@
+
+These are the currently implemented widget types:
+
+	(symbol [OPTIONS...])
+	(choice OPTIONS...)
+	(string)
+	(number [MIN MAX])
+	(boolean [LABEL])
+
+	(color)
+	(font)
+	(file)
+
+	(optional WIDGET)
+	(or WIDGETS...)
+
+	(and WIDGETS...)		;creates a list of values
+	(v-and WIDGETS...)		;puts widgets in a vbox
+	(h-and WIDGETS...)		;puts widgets in a hbox
+
+	(pair CAR-WIDGET CDR-WIDGET)
+	(list WIDGET [TITLE])
+	(alist KEY-WIDGET VALUE_WIDGET)
+	(alist (KEY-WIDGET "KEY-TITLE") (VALUE-WIDGET "VALUE-TITLE"))
+
+	(labelled LABEL WIDGET)
+

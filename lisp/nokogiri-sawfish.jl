@@ -24,7 +24,7 @@
 
 ;; meta customizations
 
-(defcustom nokogiri-user-level 'novice
+(defcustom nokogiri-user-level 'intermediate
   "User's level of expertise is \\w"
   :type (choice novice intermediate expert)
   :user-level novice

@@ -28,12 +28,6 @@
 (defvar customize-group-opt "--group")
 (defvar customize-args nil)
 
-(defcustom customize-show-symbols nil
-  "Show variable names of each customization option."
-  :group misc
-  :user-level expert
-  :type boolean)
-
 (defvar customize-user-forms nil)
 (defvar customize-user-file-read nil)
 (defvar customize-user-file-dirty nil)

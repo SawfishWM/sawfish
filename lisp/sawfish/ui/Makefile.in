@@ -1,0 +1,86 @@
+
+include ../Makedefs
+
+top_builddir=..
+top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+VPATH=@top_srcdir@/src:.
+
+SRCS =	nokogiri-apply.jl		\
+	nokogiri-color-preview.jl	\
+	nokogiri-config.jl		\
+	nokogiri-dialog.jl		\
+	nokogiri-group.jl		\
+	nokogiri-i18n.jl		\
+	nokogiri-layout.jl		\
+	nokogiri-main.jl		\
+	nokogiri-shell.jl		\
+	nokogiri-slot.jl		\
+	nokogiri-user-level.jl		\
+	nokogiri-widget.jl		\
+	nokogiri-widget-dialog.jl	\
+	nokogiri-widget-test.jl		\
+	nokogiri-wm.jl
+
+W_SRCS = nokogiri-widgets/alist.jl	\
+	nokogiri-widgets/color.jl	\
+	nokogiri-widgets/file.jl	\
+	nokogiri-widgets/font.jl	\
+	nokogiri-widgets/frame-style.jl	\
+	nokogiri-widgets/keymap.jl	\
+	nokogiri-widgets/list.jl	\
+	nokogiri-widgets/match-window.jl \
+	nokogiri-widgets/pair.jl
+
+L_SRCS = nokogiri-layouts/keymaps.jl
+
+OBJS = $(SRCS:.jl=.jlc)
+W_OBJS = $(W_SRCS:.jl=.jlc)
+L_OBJS = $(L_SRCS:.jl=.jlc)
+
+%.jlc : %.jl
+	REP_GTK_DONT_INITIALIZE=1 rep compiler -f compile-batch $<
+
+all : $(OBJS) $(W_OBJS) $(L_OBJS)
+
+nokogiri-main.jl : nokogiri-main.jl.in
+	sed -e "s|__nokogiridir__|$(nokogiridir)|" $< >$@
+
+install : all installdirs
+	for p in $(SRCS) $(OBJS); do \
+	  $(INSTALL_DATA) $$p $(DESTDIR)${nokogiridir}; \
+	done
+	for p in $(W_SRCS) $(W_OBJS); do \
+	  $(INSTALL_DATA) $$p $(DESTDIR)${nokogiridir}/nokogiri-widgets; \
+	done
+	for p in $(L_SRCS) $(L_OBJS); do \
+	  $(INSTALL_DATA) $$p $(DESTDIR)${nokogiridir}/nokogiri-layouts; \
+	done
+	$(INSTALL_SCRIPT) nokogiri-main.jlc $(DESTDIR)${bindir}/sawfish-ui
+
+uninstall :
+	for p in $(SRCS) $(OBJS); do \
+	  rm -f $(DESTDIR)${nokogiridir}/$$p; \
+	done
+	for p in $(W_SRCS) $(W_OBJS); do \
+	  rm -f $(DESTDIR)${nokogiridir}/nokogiri-widgets/$$p; \
+	done
+	for p in $(L_SRCS) $(L_OBJS); do \
+	  rm -f $(DESTDIR)${nokogiridir}/nokogiri-layouts/$$p; \
+	done
+	rm -f $(DESTDIR)${bindir}/sawfish-ui
+
+installdirs : $(top_srcdir)/mkinstalldirs
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(nokogiridir) \
+	  $(DESTDIR)$(nokogiridir)/nokogiri-widgets \
+	  $(DESTDIR)$(nokogiridir)/nokogiri-layouts $(DESTDIR)$(bindir)
+
+clean : 
+	rm -f *.jlc *~ core
+	rm -f nokogiri-widgets/*~ nokogiri-widgets/*.jlc
+	rm -f nokogiri-layouts/*~ nokogiri-layouts/*.jlc
+
+realclean distclean : clean
+	rm -f Makefile nokogiri-main.jl.in
+
+.PHONY: all install uninstall clean realclean distclean
