@@ -74,19 +74,22 @@
 	;; one has a client-id, the other doesn't -- no match
 	(throw 'out nil))
 
-      (if client-id
-	  (unless (string= client-id (cdr (assq 'client-id alist)))
-	    ;; id's don't match
-	    (throw 'out nil))
-	;; no id, so try matching WM_COMMAND
-	(when (and command (cdr (assq 'command alist))
-		   (not (string= command (cdr (assq 'command alist)))))
-	  (throw 'out nil)))
+      (cond (client-id
+	     (unless (string= client-id (cdr (assq 'client-id alist)))
+	       ;; id's don't match
+	       (throw 'out nil)))
+	    ;; no SM_CLIENT_ID, so try matching WM_COMMAND
+	    ((and command (cdr (assq 'command alist)))
+	     (unless (string= command (cdr (assq 'command alist)))
+	       (throw 'out nil)))
+	    ;; no WM_COMMAND so no match
+	    (t
+	     (throw 'out nil)))
 
       (if (and role (cdr (assq 'role alist)))
 	  (unless (string= role (cdr (assq 'role alist)))
 	    (throw 'out nil))
-	;; no role, so try matching WM_CLASS
+	;; no WM_WINDOW_ROLE, so try matching WM_CLASS
 	(when (and class (cdr (assq 'class alist))
 		   (not (string= class (cdr (assq 'class alist)))))
 	  (throw 'out nil)))
