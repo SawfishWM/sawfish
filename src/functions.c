@@ -105,44 +105,6 @@ DEFUN("x-kill-client", Fx_kill_client, Sx_kill_client,
     return win;
 }
 
-DEFUN("x-delete-window", Fx_delete_window, Sx_delete_window,
-      (repv win), rep_Subr1)
-{
-    Window w = x_win_from_arg (win);
-    if (w == 0)
-	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
-    send_client_message (w, xa_wm_delete_window, last_event_time);
-    return win;
-}
-
-DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1, "%W") /*
-::doc:delete-window::
-delete-window WINDOW
-
-Delete WINDOW, i.e. send a WM_DELETE_WINDOW client-message if possible, or
-just kill the owning client if not.
-
-WINDOW may be a window object or a numeric window id.
-::end:: */
-{
-    Window w;
-
-    if (WINDOWP(win))
-    {
-	/* In case it's late in setting WM_DELETE_WINDOW */
-	get_window_protocols (VWIN(win));
-    }
-
-    w = x_win_from_arg (win);
-    if (w == 0)
-	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
-    if (WINDOWP(win) && VWIN(win)->does_wm_delete_window)
-	send_client_message (w, xa_wm_delete_window, last_event_time);
-    else
-	XKillClient (dpy, w);
-    return win;
-}
-
 DEFUN_INT("destroy-window", Fdestroy_window, Sdestroy_window, (repv win), rep_Subr1, "%W") /*
 ::doc:destroy-window::
 destroy-window WINDOW
@@ -900,7 +862,12 @@ FORMAT sized quantities (8, 16 or 32).
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
 	for (i = 0; i < rep_VECT_LEN(data) && i < 5; i++)
-	    ev.data.l[i] = rep_INT(rep_VECTI(data, i));
+	{
+	    if (rep_LONG_INTP(rep_VECTI(data, i)))
+		ev.data.l[i] = rep_LONG_INT(rep_VECTI(data, i));
+	    else
+		ev.data.l[i] = rep_INT(rep_VECTI(data, i));
+	}
 	break;
     }
 
@@ -1209,9 +1176,7 @@ functions_init (void)
 {
     rep_ADD_SUBR(Srestack_windows);
     rep_ADD_SUBR(Sx_raise_window);
-    rep_ADD_SUBR(Sx_delete_window);
     rep_ADD_SUBR(Sx_kill_client);
-    rep_ADD_SUBR_INT(Sdelete_window);
     rep_ADD_SUBR_INT(Sdestroy_window);
     rep_ADD_SUBR(Swarp_cursor);
     rep_ADD_SUBR(Smove_window_to);
