@@ -46,13 +46,6 @@
 		(throw 'foo w))) (or list (managed-windows)))
     nil))
 
-;; return the window with id ID, or nil
-(defun get-window-by-id (id &optional list)
-  (catch 'foo
-    (mapc #'(lambda (w)
-	      (when (= (window-id w) id)
-		(throw 'foo w))) (or list (managed-windows)))))
-
 ;; execute FORMS with the server grabbed
 (defmacro with-server-grabbed (&rest forms)
   `(progn
