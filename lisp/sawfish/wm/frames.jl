@@ -298,11 +298,13 @@ that overrides settings set elsewhere.")
 		       (list (symbol-name s)
 			     `(lambda ()
 				(set-window-frame-style
-				 (input-focus) ',s nil t))))
+				 (current-event-window) ',s nil t))))
 		   styles)
 	   `(() ("Default" (lambda ()
-			     (window-put (input-focus) 'frame-style nil)
-			     (set-frame-for-window (input-focus) t)))))))
+			     (let
+				 ((w (current-event-window)))
+			       (window-put w 'frame-style nil)
+			       (set-frame-for-window w t))))))))
 
 
 ;; removing frame parts
