@@ -221,8 +221,6 @@ Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
     return win;
 }
 
-static void *saved_message_fun;
-
 DEFUN("grab-server", Fgrab_server, Sgrab_server, (void), rep_Subr0) /*
 ::doc:Sgrab-server::
 grab-server
@@ -232,11 +230,9 @@ Prevent any other clients from accessing the X server. See `ungrab-server'.
 {
     if (server_grabs++ == 0)
     {
-	/* This might go to a terminal.. */
-	saved_message_fun = (void *)rep_message_fun;
-	rep_message_fun = 0;
 	XGrabServer (dpy);
-	XFlush (dpy);
+	XSync (dpy, False);
+	rep_mark_input_pending (ConnectionNumber (dpy));
     }
     return Qt;
 }
@@ -255,7 +251,6 @@ Note that calls to `grab-server' and `ungrab-server' _nest_.
     {
 	XUngrabServer (dpy);
 	XFlush (dpy);
-	(void *)rep_message_fun = saved_message_fun;
     }
     return Qt;
 }
