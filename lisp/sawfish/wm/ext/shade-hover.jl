@@ -58,7 +58,7 @@
 
 (defun shade-hover-before ()
   (let
-      ((command (lookup-event-binding (current-event)))
+      ((command (and (current-event) (lookup-event-binding (current-event))))
        (w (current-event-window)))
     (when (and (eq command 'toggle-window-shaded) w)
       (shade-hover-leave w))))
