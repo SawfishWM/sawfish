@@ -87,9 +87,10 @@
 	 fun tem)
       (unless type
 	(setq type (window-type w))
-	(when (and decorate-transients
+	(when (and decorate-transients (window-transient-p w)
 		   (setq tem (cdr (assq type transient-normal-frame-alist))))
 	  (setq type tem)))
+      (window-put w 'type type)
       (setq fun (cdr (assq style frame-styles)))
       (set-window-frame w (or (funcall fun w type) default-frame)))))
 
