@@ -27,6 +27,7 @@
 	    popup-window-menu
 	    popup-root-menu
 	    popup-apps-menu
+	    add-window-menu-toggle
 	    custom-menu)
 
     (open rep
@@ -103,22 +104,10 @@ unused before killing it.")
        (,(_ "Lower") lower-window)
        (,(_ "Upper layer") raise-window-depth)
        (,(_ "Lower layer") lower-window-depth))
-      (,(_ "Frame type")
-       (,(_ "Normal") set-frame:default)
-       (,(_ "Title-only") set-frame:shaped)
-       (,(_ "Border-only") set-frame:transient)
-       (,(_ "Top-border") set-frame:shaped-transient)
-       (,(_ "None") set-frame:unframed))
+      (,(_ "Frame type") . frame-type-menu)
       (,(_ "Frame style") . frame-style-menu)))
 
-  (defvar window-ops-toggle-menu
-    `((,(_ "_Sticky") toggle-window-sticky)
-      (,(_ "S_haded") toggle-window-shaded)
-      (,(_ "_Ignored") toggle-window-ignored)
-      (,(_ "_Focusable") toggle-window-never-focus)
-      ,@(when (featurep 'gnome)
-	  `((,(_ "In _window list") gnome-toggle-skip-winlist)
-	    (,(_ "In _task list") gnome-toggle-skip-tasklist)))))
+  (defvar window-ops-toggle-menu '())
 
   (defvar window-menu nil)
 
@@ -203,22 +192,35 @@ unused before killing it.")
   (define (nicknamep arg) (fixnump arg))
   (define (nickname-ref nick) (table-ref nickname-table nick))
 
+  (define menu-args (make-fluid '()))
+
   (define (menu-preprocessor cell)
     (when cell
       (let ((label (car cell)))
 	(cond ((functionp (cdr cell))
-	       (setq cell (funcall (cdr cell))))
+	       (setq cell (apply (cdr cell) (fluid menu-args))))
 	      ((and (symbolp (cdr cell)) (not (null (cdr cell))))
 	       (setq cell (symbol-value (cdr cell)))
 	       (when (functionp cell)
-		 (setq cell (funcall cell))))
+		 (setq cell (apply cell (fluid menu-args)))))
 	      (t (setq cell (cdr cell))))
-	(cond ((and (consp (car cell)) (stringp (car (car cell))))
-	       ;; recurse through sub-menu
-	       (setq cell (mapcar menu-preprocessor cell)))
-	      ((and cell (not (symbolp (car cell))))
-	       ;; a non-symbol result, replace by a nickname
-	       (setq cell (cons (make-nickname (car cell)) (cdr cell)))))
+	(when cell
+	  (if (and (consp (car cell)) (stringp (car (car cell))))
+	      ;; recurse through sub-menu
+	      (setq cell (mapcar menu-preprocessor cell))
+	    (let ((action (car cell))
+		  (options (cdr cell)))
+	      (when (not (symbolp action))
+		;; a non-symbol result, replace by a nickname
+		(setq action (make-nickname (car cell))))
+	      ;; scan the alist of options
+	      (setq options (mapcar
+			     (lambda (cell)
+			       (if (functionp (cdr cell))
+				   (cons (car cell)
+					 (apply (cdr cell) (fluid menu-args)))
+				 cell)) options))
+	      (setq cell (cons action options)))))
 	(cons label cell))))
 
   (define (menu-dispatch result)
@@ -288,9 +290,10 @@ unused before killing it.")
 	       (setq menu-active nil)
 	       (apply signal error-data))))))
 
-  (define (popup-window-menu)
+  (define (popup-window-menu w)
     "Display the menu listing all window operations."
-    (popup-menu window-ops-menu))
+    (let-fluids ((menu-args (list w)))
+      (popup-menu window-ops-menu)))
 
   (define (popup-root-menu)
     "Display the main menu."
@@ -299,6 +302,25 @@ unused before killing it.")
   (define (popup-apps-menu)
     "Display the applications menu."
     (popup-menu apps-menu))
+
+  ;;###autoload
+  (define-command 'popup-window-menu popup-window-menu #:spec "%W")
+  (define-command 'popup-root-menu popup-root-menu)
+  (define-command 'popup-apps-menu popup-apps-menu)
+
+;;; menu modifiers
+
+  (define (add-window-menu-toggle label command #!optional predicate)
+    (let ((item (list* label command
+		       (and predicate (list (cons 'check predicate))))))
+    (let loop ((rest window-ops-toggle-menu))
+      (cond
+       ((null rest)
+	(setq window-ops-toggle-menu (nconc window-ops-toggle-menu
+					    (list item))))
+       ((eq (cadar rest) command)
+	(rplaca rest item))
+       (t (loop (cdr rest)))))))
 
 ;;; customize menu
 
@@ -314,9 +336,4 @@ unused before killing it.")
 					(symbol-name (car sub))))))
 		(filter consp (cddr custom-groups)))
       ,@(and (frame-style-editable-p default-frame-style)
-	     (list nil `(,(_"Edit theme...") edit-frame-style)))))
-
-  ;;###autoload
-  (define-command 'popup-window-menu popup-window-menu)
-  (define-command 'popup-root-menu popup-root-menu)
-  (define-command 'popup-apps-menu popup-apps-menu))
+	     (list nil `(,(_"Edit theme...") edit-frame-style))))))
