@@ -11,12 +11,12 @@ and longer-term ideas are marked -
 Before next release
 ===================
 
-  + decide which reverse-cycling implementation to use
-
 
 
 Outstanding bugs
 ================
+
+  ! bindings in frame-part maps can override click-to-focus map
 
   ! nautilus icon renaming still doesn't work on desktop
 
@@ -91,6 +91,9 @@ Outstanding bugs
 
   ! swapped-out window properties aren't saved with session
 
+    [ this also means that a window in different viewports in different
+      workspaces will get saved in the single swapped-in viewport ]
+
   ! java-apps get weird placement [apps being non-ICCCM compliant?]
 
   ! the gnome _WIN_MAXIMIZED_ hints are ignored when the window is
@@ -128,8 +131,6 @@ Outstanding bugs
 
 Window manager tasks
 ====================
-
-  + support urgency hint
 
   ! when drawing into frame parts manually, no way to set shape
 
@@ -270,6 +271,8 @@ themer tasks
   ! only the `default' window type may be previewed
 
     [ workaround: temporarily change the `default' mapping ]
+
+  + rewrite to use sawfish.gtk modules
 
   + allow functional frame part attributes to be defined
 

@@ -1,3 +1,13 @@
+2000-10-19  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/windows.jl (mark-window-as-desktop): new function
+	* sawfish/wm/state/gnome.jl (gnome-honour-client-state): use
+	mark-window-as-desktop
+
+	* sawfish/wm/commands/x-cycle.jl: included patch from merlin
+	for a different reverse-cycling implementation, with minor
+	cleanups
+
 2000-10-18  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/windows.jl: added window-urgent-p to the gaol
