@@ -88,6 +88,9 @@ DEFSYM(before_exit_hook, "before-exit-hook");
 static rep_bool
 on_idle (int since_last)
 {
+    if (print_event_prefix ())
+	return rep_TRUE;
+
     if (since_last == 0 && rep_recurse_depth == 0)
     {
 	/* XXX There have been reports of sawmill locking the display,
@@ -97,6 +100,7 @@ on_idle (int since_last)
 	XUngrabKeyboard (dpy, last_event_time);
 	XFlush (dpy);
     }
+
     return rep_FALSE;
 }
 
