@@ -95,8 +95,7 @@ state."
 
   (define (shading-add-window w)
     (when (window-get w 'shaded)
-      (window-put w 'shaded nil)
-      (shade-window w)))
+      (window-put w 'hide-client t)))
 
   (add-hook 'add-window-hook shading-add-window t)
 
@@ -106,8 +105,9 @@ state."
       (window-put w 'hide-client (window-get w 'shaded))
       (reframe-window w)))
 
+  (add-hook 'after-workspace-swap-in-hook shading-after-swap-in)
+
   (sm-add-saved-properties 'shaded)
   (add-swapped-properties 'shaded)
-  (add-hook 'after-workspace-swap-in-hook shading-after-swap-in)
 
   (add-window-menu-toggle (_ "S_haded") 'toggle-window-shaded window-shaded-p))

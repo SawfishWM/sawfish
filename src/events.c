@@ -675,12 +675,14 @@ map_request (XEvent *ev)
 
     if (!w->client_unmapped)
 	XMapWindow (dpy, w->id);
-    else
-	/* wouldn't happen otherwise */
-	Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 
     if (w->visible)
 	XMapWindow (dpy, w->frame);
+
+    if (w->client_unmapped)
+	/* wouldn't happen otherwise */
+	Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
+
 }
 
 static void
