@@ -80,18 +80,18 @@
   (when always-update-frames
     (reframe-all-windows)))
 
-(defun set-frame-for-window (w &optional override)
+(defun set-frame-for-window (w &optional override type)
   (when (or override (not (window-frame w)))
     (let*
 	((style (or (window-get w 'frame-style) default-frame-style))
-	 (type (window-type w))
 	 fun tem)
-      (when (and decorate-transients
-		 (setq tem (cdr (assq type transient-normal-frame-alist))))
-	(setq type tem))
+      (unless type
+	(setq type (window-type w))
+	(when (and decorate-transients
+		   (setq tem (cdr (assq type transient-normal-frame-alist))))
+	  (setq type tem)))
       (setq fun (cdr (assq style frame-styles)))
-      (set-window-frame w (or (funcall fun w type)
-			      default-frame)))))
+      (set-window-frame w (or (funcall fun w type) default-frame)))))
 
 (add-hook 'add-window-hook 'set-frame-for-window t)
 
@@ -99,7 +99,7 @@
   (save-stacking-order
     (mapc #'(lambda (w)
 	      (when (and (windowp w) (not (window-get w 'ignored)))
-		(set-frame-for-window w t)))
+		(set-frame-for-window w t (window-get w 'type))))
 	  (managed-windows))))
 
 
@@ -154,6 +154,14 @@
 	 'transient)
 	(t
 	 type)))
+
+;; create some commands for setting the window type
+(mapc #'(lambda (type)
+	  (fset (intern (concat "set-frame:" (symbol-name type)))
+		`(lambda (w)
+		   (interactive "W")
+		   (set-frame-for-window w t ',type))))
+      '(default transient shaped shaped-transient unframed))
 
 
 ;; custom support
