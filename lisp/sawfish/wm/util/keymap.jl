@@ -124,3 +124,9 @@ for the bindings to be installed if and when it is."
       (remove-hook 'unbound-key-hook read-event-callback)
       (display-message nil)
       (ungrab-keyboard))))
+
+;;;###autoload
+(defun quote-event (window)
+  "Read a single event and send it to the focused window."
+  (interactive "%W")
+  (synthesize-event (read-event (_ "[Quote]")) window))
