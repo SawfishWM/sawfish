@@ -1,5 +1,8 @@
 1999-08-01  John Harper  <john@dcs.warwick.ac.uk>
 
+	* gnome.c (Fgnome_set_workspace): if no workspace is active,
+	pretend that workspace zero is
+
 	* display.c (error_handler): call destroy-notify-hook _after_
 	setting window->id to zero
 	(sys_init): select for SubstructureNotify on root window

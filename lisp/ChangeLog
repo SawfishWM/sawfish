@@ -1,3 +1,12 @@
+1999-08-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (ws-remove-window): fix the bug whereby deleting
+	the last workspace didn't nullify ws-current-workspace. Also
+	ensure that both remove-from-workspace and
+	delete-workspace-hook are only called _after_ the deletion has
+	occurred. remove-from-workspace now gets two args: window and
+	workspace
+
 1999-07-31  John Harper  <john@dcs.warwick.ac.uk>
 
 	* workspace.jl: new hook `delete-workspace-hook'
