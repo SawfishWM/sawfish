@@ -199,8 +199,8 @@
       (setq space (aref (nth 2 space) 0))
       (cond ((equal space #xffffffff)
 	     (window-put w 'sticky t))
-	    ((integerp space)
-	     (window-add-to-workspace w space)))))
+	    ((and (integerp space) (null (window-workspaces w)))
+	     (ws-set-window-workspaces w (list space))))))
 
   (let ((type (get-x-property w '_NET_WM_WINDOW_TYPE)))
     (when type

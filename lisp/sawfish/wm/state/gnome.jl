@@ -173,7 +173,7 @@
       (setq layer (aref (nth 2 layer) 0))
       (set-window-depth w (- layer WIN_LAYER_NORMAL)))
     (when (and space (not (window-workspaces w)))
-      (window-add-to-workspace w (aref (nth 2 space) 0)))))
+      (ws-window-set-workspaces w (list (aref (nth 2 space) 0))))))
 
 (defun gnome-client-message-handler (w type data)
   (cond ((eq type '_WIN_WORKSPACE)
