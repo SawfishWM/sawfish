@@ -1,5 +1,5 @@
 ;; mono/theme.jl
-;; $Id: theme.jl,v 1.2 1999/12/05 17:58:44 john Exp $
+;; $Id: theme.jl,v 1.3 2000/01/04 15:01:25 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -39,19 +39,19 @@
   :after-set after-setting-frame-option)
 
 (let*
-    ((minimize (list (make-image "min.png") nil
-		     nil (make-image "min-c.png")))
+    ((minimize `((inactive . ,(make-image "min.png"))
+		 (clicked . ,(make-image "min-c.png"))))
      ;; 16x16
-     (close (list (make-image "close.png") nil
-		  nil (make-image "close-c.png")))
-     (maximize (list (make-image "max.png") nil
-		     nil (make-image "max-c.png")))
-     (restore (list (make-image "restore.png") nil
-		     nil (make-image "restore-c.png")))
+     (close `((inactive . ,(make-image "close.png"))
+	      (clicked . ,(make-image "close-c.png"))))
+     (maximize `((inactive . ,(make-image "max.png"))
+		 (clicked . ,(make-image "max-c.png"))))
+     (restore `((inactive . ,(make-image "restore.png"))
+		(clicked . ,(make-image "restore-c.png"))))
      (maximize-restore (lambda (w)
 			 (if (window-maximized-p w) restore maximize)))
-     (menu (list (make-image "menu.png") nil
-		 nil (make-image "menu-c.png")))
+     (menu `((inactive . ,(make-image "menu.png"))
+	     (clicked . ,(make-image "menu-c.png"))))
 
      (initialised-gtk nil)
 
