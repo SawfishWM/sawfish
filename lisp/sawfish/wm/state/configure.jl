@@ -134,7 +134,10 @@
 		;; [y] placed relative to the center
 		(rplacd coords (- (cdr coords) (quotient (- (cdr tem)
 							    (cdr dims)) 2)))))))
-	(setq dims tem))
+	(unless (window-locked-horizontally-p w)
+	  (rplaca dims (car tem)))
+	(unless (window-locked-vertically-p w)
+	  (rplacd dims (cdr tem))))
 
       (when (setq tem (cdr (assq 'position alist)))
 	(let ((grav (window-gravity w hints)))

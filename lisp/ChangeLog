@@ -1,3 +1,13 @@
+2002-09-29    <jsh@unfactored.org>
+
+	* sawfish/wm/state/configure.jl (configure-request-handler): fixed
+	bug of not checking for locked dimensions before overwriting the
+	dims variable. This fixes #88788
+
+	* sawfish/wm/state/wm-spec.jl (_NET_WM_STATE_FULLSCREEN): fixed
+	stupid bug I recently introduced stopping windows putting
+	themselves into fullscreen mode
+
 2002-09-28  John Harper  <jsh@unfactored.org>
 
 	Work to fix #83431:

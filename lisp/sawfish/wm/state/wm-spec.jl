@@ -405,8 +405,8 @@
    (lambda (w mode)
      (require 'sawfish.wm.state.maximize)
      (case mode
-       ((init add) (window-put w 'queued-fullscreen-maximize t))
-       ((remove) (maximize-window-fullscreen w nil))
+       ((init) (window-put w 'queued-fullscreen-maximize t))
+       ((add remove) (maximize-window-fullscreen w (eq mode 'add)))
        ((toggle) (maximize-window-fullscreen-toggle w))
        ((get) (window-maximized-fullscreen-p w)))))
 
