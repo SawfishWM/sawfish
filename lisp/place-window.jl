@@ -108,7 +108,7 @@
 		     (if (window-transient-p w)
 			 place-transient-mode
 		       place-window-mode))))
-	((or (get mode 'placement-mode) 'place-window-randomly) w)
+	((or (get mode 'placement-mode) place-window-randomly) w)
 	t))))
 
 (put 'interactive 'placement-mode place-window-interactively)
