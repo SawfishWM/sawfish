@@ -19,29 +19,28 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'flippers)
-(require 'timers)
 (provide 'edge-flip)
 
 ;;;###autoload (setq custom-required (cons 'edge-flip custom-required))
 
 ;; for the compiler's benefit
-(eval-when-compile (require 'move-resize))
-
-(defgroup edge-flip "Edge Flipping")
+(eval-when-compile (progn
+		     (require 'move-resize)
+		     (require 'flippers)
+		     (require 'timers)))
 
 (defcustom edge-flip-enabled nil
-  "Enable viewport flipping when pointer hits edge of screen."
+  "Flip to next viewport when pointer hits edge of screen."
   :type boolean
   :require edge-flip
-  :group edge-flip
+  :group viewport
   :after-set edge-flip-enable)
 
 (defcustom edge-flip-delay 250
   "Number of milliseconds to wait after pointer hits edge of screen before
 flipping to the next viewport."
   :type number
-  :group edge-flip
+  :group viewport
   :range (0 . 1000))
 
 (defvar ef-current-edge nil)
@@ -49,8 +48,12 @@ flipping to the next viewport."
 
 (defun edge-flip-enable ()
   (if edge-flip-enabled
-      (enable-flippers)
-    (disable-flippers)))
+      (progn
+	(require 'flippers)
+	(require 'timers)
+	(enable-flippers))
+    (when (featurep 'flippers)
+      (disable-flippers))))
 
 (defun edge-flip-enter (edge)
   (if (<= edge-flip-delay 0)
