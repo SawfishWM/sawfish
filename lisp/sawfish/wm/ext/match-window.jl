@@ -255,7 +255,7 @@
 	      (run-actions (cdr cell))))
 	  match-window-profile)))
 
-(add-hook 'before-add-window-hook match-window)
+(add-hook 'before-add-window-hook match-window t)
 
 
 ;; custom property formatters and setters
