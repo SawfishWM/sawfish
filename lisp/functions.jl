@@ -257,6 +257,26 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
     (resize-window-to w (scale cols x-base x-inc x-max)
 		      (scale rows y-base y-inc y-max))))
 
+(defun resize-window-with-hints* (w width height &optional hints)
+  "Resize window W to WIDTH x HEIGHT, with WIDTH and HEIGHT defined in
+terms of pixels. The window's size hints structure defines the minimum
+and maximum dimensions of the window, within which WIDTH and HEIGHT are
+constrained.
+
+If HINTS is non-nil, then it is the size hints structure to use. Otherwise
+(window-size-hints W) is used."
+  (unless hints
+    (setq hints (window-size-hints w)))
+  (let
+      ((x-min (or (cdr (or (assq 'base-width hints)
+			   (assq 'min-width hints))) 1))
+       (y-min (or (cdr (or (assq 'base-height hints)
+			   (assq 'min-height hints))) 1))
+       (x-max (or (cdr (assq 'max-width hints)) 65535))
+       (y-max (or (cdr (assq 'max-height hints)) 65535)))
+    (resize-window-to w (clamp width x-min x-max)
+		      (clamp height y-min y-max))))
+
 (defun get-window-wm-protocols (w)
   "Return a list of symbols defining the X11 window manager protocols supported
 by client window W."
