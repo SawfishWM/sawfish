@@ -160,8 +160,8 @@
   (set-x-property 'root '_WIN_PROTOCOLS
 		  gnome-supported-protocols 'ATOM 32)
 
-  (delete-x-property 'root '_WIN_AREA)
-  (delete-x-property 'root '_WIN_AREA_COUNT)
+  (set-x-property 'root '_WIN_AREA (vector 0 0) 'CARDINAL 32)
+  (set-x-property 'root '_WIN_AREA_COUNT (vector 1 1) 'CARDINAL 32)
   (delete-x-property 'root '_WIN_WORKSPACE_NAMES)
 
   (add-hook 'workspace-state-change-hook 'gnome-set-workspace)
