@@ -121,8 +121,6 @@
     value))
 
 (defun custom-declare-group (group &optional doc keys)
-  (when doc
-    (put group 'custom-group-doc doc))
   (let
       (container tem)
     (while keys
