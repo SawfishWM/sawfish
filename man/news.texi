@@ -13,8 +13,8 @@ they occurred between. For more detailed information see the
 
 @item First version to use lexically scoped librep. This enables themes
 to run in a ``safe'' environment, but all existing themes will need to
-be ported. (Most noticeably, theme definitions must now be closures of
-lists, not just lists, for security reasons)
+be ported; other language changes include the use of a single symbol
+namespace, and scheme-like function call semantics
 
 @item Support for internationalization of messages and run-time
 documentation; an en_GB catalogue is the only translation currently, so
