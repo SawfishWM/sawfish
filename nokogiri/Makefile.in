@@ -85,7 +85,7 @@ SUBSTS := -e "s|__nokogiridir__|$(nokogiridir)|"  \
 	  -e "s|__rep_gtk_gnome__|$(REP_GTK_GNOME)|"
 
 %.jlc : %.jl
-	REP_GTK_DONT_INITIALIZE=1 rep compiler -f compile-batch $<
+	$(REP_ENVIRON) rep compiler -f compile-batch $<
 
 all : $(ALL_SRCS) $(ALL_OBJS)
 
