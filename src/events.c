@@ -94,8 +94,8 @@ visibility_notify (XEvent *ev)
 	repv vis;
 	w->frame_vis = ev->xvisibility.state;
 	vis = Fwindow_visibility (rep_VAL(w));
-	Fcall_hook (Qvisibility_notify_hook,
-		    rep_list_2 (rep_VAL(w), vis), Qnil);
+	Fcall_window_hook (Qvisibility_notify_hook,
+			   rep_VAL(w), Fcons(vis, Qnil), Qnil);
     }
 }
 
@@ -274,9 +274,10 @@ client_message (XEvent *ev)
     {
 	    rep_call_lisp1 (Qiconify_window, rep_VAL(w));
     }
+    else if (w != 0)
+	Fcall_window_hook (Qclient_message_hook, rep_VAL(w), Qnil, Qor);
     else
-	Fcall_hook (Qclient_message_hook,
-		    Fcons (w ? rep_VAL(w) : Qnil, Qnil), Qor);
+	Fcall_hook (Qclient_message_hook, Fcons (Qnil, Qnil), Qor);
 }
 
 static void
@@ -298,7 +299,7 @@ destroy_notify (XEvent *ev)
     if (w->id)
 	remove_window (w, Qt);
     /* the window isn't windowp anymore.. */
-    Fcall_hook (Qdestroy_notify_hook, Fcons (rep_VAL(w), Qnil), Qnil);
+    Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
 }
 
 void
@@ -359,7 +360,7 @@ map_notify (XEvent *ev)
 	w->mapped = TRUE;
 	if (w->visible)
 	    XMapWindow (dpy, w->frame);
-	Fcall_hook (Qmap_notify_hook, Fcons (rep_VAL(w), Qnil), Qnil);
+	Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
@@ -376,7 +377,7 @@ unmap_notify (XEvent *ev)
 	   the root. This means that we receive the next MapRequest
 	   for the window. */
 	remove_window_frame (w);
-	Fcall_hook (Qunmap_notify_hook, Fcons (rep_VAL(w), Qnil), Qnil);
+	Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
@@ -389,7 +390,7 @@ enter_notify (XEvent *ev)
     {
 	Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
 	if (w != 0 && w->mapped && w->visible)
-	    Fcall_hook (Qenter_notify_hook, Fcons (rep_VAL(w), Qnil), Qnil);
+	    Fcall_window_hook (Qenter_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
@@ -416,7 +417,7 @@ leave_notify (XEvent *ev)
 	if (w != 0 && w->mapped && w->visible
 	    && ev->xcrossing.detail != NotifyInferior)
 	{
-	    Fcall_hook (Qleave_notify_hook, Fcons (rep_VAL(w), Qnil), Qnil);
+	    Fcall_window_hook (Qleave_notify_hook, rep_VAL(w), Qnil, Qnil);
 	}
     }
 }
@@ -435,7 +436,7 @@ focus_in (XEvent *ev)
 		 w->focus_change, w->name));
 	    w->focus_change (w);
 	}
-	Fcall_hook (Qfocus_in_hook, Fcons (rep_VAL(w), Qnil), Qnil);
+	Fcall_window_hook (Qfocus_in_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
@@ -453,7 +454,7 @@ focus_out (XEvent *ev)
 		 w->focus_change, w->name));
 	    w->focus_change (w);
 	}
-	Fcall_hook (Qfocus_out_hook, Fcons (rep_VAL(w), Qnil), Qnil);
+	Fcall_window_hook (Qfocus_out_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 

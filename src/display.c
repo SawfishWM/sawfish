@@ -81,7 +81,7 @@ error_handler (Display *dpy, XErrorEvent *ev)
 	if (w->id)
 	    remove_window (w, Qt);
 	/* the window isn't windowp anymore */
-	Fcall_hook (Qdestroy_notify_hook, Fcons (rep_VAL(w), Qnil), Qnil);
+	Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
 	return 0;			/* ?? */
     }
     else
