@@ -57,7 +57,8 @@
 	  sawfish.wm.events
 	  sawfish.wm.placement
 	  sawfish.wm.custom
-	  sawfish.wm.workspace)
+	  sawfish.wm.workspace
+	  sawfish.wm.state.maximize)
 
 
 ;;; options/variables
@@ -379,25 +380,27 @@ the proposed placement to the center of the screen."
 			     (t sp-normal-windows-weight)))))
 	     (grid (sp-make-grid rects t))
 	     (dims (window-frame-dimensions w))
+	     (workarea (maximize-find-workarea w #:head-fallback t))
+	     (workarea-width (- (nth 2 workarea) (nth 0 workarea)))
+	     (workarea-height (- (nth 3 workarea) (nth 1 workarea)))
 	     point)
 
 	;; first try with padding
 	(when (and (> sp-padding 0)
-		   (<= (+ (car dims) sp-padding) (screen-width))
-		   (<= (+ (cdr dims) sp-padding) (screen-height)))
-	  (rplaca dims (+ (car dims) (* sp-padding 2)))
-	  (rplacd dims (+ (cdr dims) (* sp-padding 2)))
-	  (setq point (fit-fun dims grid rects))
+		   (<= (+ (car dims) (* sp-padding 2)) workarea-width)
+		   (<= (+ (cdr dims) (* sp-padding 2)) workarea-height))
+	  (let ((padded-dims (cons (+ (car dims) (* sp-padding 2))
+				   (+ (cdr dims) (* sp-padding 2)))))
+	    (setq point (fit-fun padded-dims grid rects)))
 	  (when point
 	    (rplaca point (+ (car point) sp-padding))
 	    (rplacd point (+ (cdr point) sp-padding))))
 
 	;; then try without padding
 	(when (null point)
-	  (setq dims (window-frame-dimensions w))
-	  (rplaca dims (min (car dims) (screen-width)))
-	  (rplacd dims (min (cdr dims) (screen-height)))
-	  (setq point (fit-fun dims grid rects)))
+	  (let ((smallest-dims (cons (min (car dims) workarea-width)
+				     (min (cdr dims) workarea-height))))
+	    (setq point (fit-fun smallest-dims grid rects))))
 
 	(if point
 	    (move-window-to w (car point) (cdr point))

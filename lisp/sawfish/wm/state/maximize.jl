@@ -327,17 +327,26 @@
 
 ;;; misc functions
 
-  (define (maximize-find-workarea #!optional w #!key head)
+  (define (maximize-find-workarea #!optional w #!key head #!key head-fallback)
     "Return the rectangle representing the largest rectangle on the screen that
-doesn't overlap any avoided windows, or nil."
+doesn't overlap any avoided windows, or nil.  If head-fallback is non-nil, then
+an empty workarea will be replaced with the head area; otherwise nil is returned."
     (unless head
       (setq head (current-head w)))
     (let* ((avoided (avoided-windows w))
 	   (edges (get-visible-window-edges
 		   #:with-ignored-windows t
 		   #:windows avoided
-		   #:include-heads (list head))))
-      (find-max-rectangle avoided edges head)))
+		   #:include-heads (list head)))
+	   (rect (find-max-rectangle avoided edges head)))
+      (or rect
+	  (and head-fallback
+	       (let* ((head-off (head-offset head))
+		      (head-dims (head-dimensions head)))
+		 (list (car head-off)
+		       (cdr head-off)
+		       (+ (car head-off) (car head-dims))
+		       (+ (cdr head-off) (cdr head-dims))))))))
 
   (define (window-locked-vertically-p w)
     (and move-lock-when-maximized

@@ -1,3 +1,21 @@
+2001-12-17  Federico Mena Quintero  <federico@ximian.com>
+
+	Fixes GNOME bug #67138.  However, the rest of smart.jl seems to be
+	using screen-width and screen-height all over the place, so this
+	may not be complete yet.
+
+	* sawfish/wm/placement/top-left.jl (workarea-for): Removed.
+	(place-window-top-left): Use maximize-find-workarea with the
+	head-fallback parameter instead of workarea-for.
+
+	* sawfish/wm/state/maximize.jl (maximize-find-workarea): Added a
+	key parameter head-fallback.  If non-nil and the workarea turns
+	out to be empty, it will fall back to a rectangle that represents
+	the head area.
+
+	* sawfish/wm/placement/smart.jl (sp-do-placement): Use the
+	workarea width and height instead of the screen width and height.
+
 2001-12-14  John Harper  <jsh@unfactored.org>
 
 	[Committed by Federico Mena Quintero <federico@ximian.com> on
