@@ -41,8 +41,7 @@ Display *dpy;
 int screen_num, screen_width, screen_height, screen_depth;
 Visual *screen_visual;
 Colormap screen_cmap;
-Window root_window;
-
+Window root_window, no_focus_window;
 int shape_event_base, shape_error_base;
 
 /* some atoms that may be useful.. */
@@ -167,6 +166,20 @@ sys_init(char *program_name)
 	    XSetErrorHandler (error_handler);
 	}
 
+	{
+	    /* Create the mapped-but-invisible window that is given
+	       the focus when no other window has it. */
+	    XSetWindowAttributes attr;
+	    attr.event_mask = KeyPressMask;
+	    attr.override_redirect = True;
+	    no_focus_window = XCreateWindow (dpy, root_window,
+					     -10, -10, 10, 10, 0, 0,
+					     InputOnly, CopyFromParent,
+					     CWEventMask | CWOverrideRedirect,
+					     &attr);
+	    XMapWindow (dpy, no_focus_window);
+	}
+
 	if (rep_get_option ("--sync", 0))
 	    XSynchronize (dpy, True);
 
@@ -191,6 +204,7 @@ void
 sys_kill (void)
 {
     XSetInputFocus (dpy, PointerRoot, 0, last_event_time);
+    XDestroyWindow (dpy, no_focus_window);
     XCloseDisplay (dpy);
 }
 
