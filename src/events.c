@@ -94,6 +94,8 @@ DEFSYM(bottom_if, "bottom-if");
 DEFSYM(opposite, "opposite");
 DEFSYM(dimensions, "dimensions");
 
+repv Fsynthetic_configure_mutex (repv);
+
 /* `Time' will always be 32-bits, due to underlying wire protocol (?) */
 #define TIME_MAX 4294967295UL
 
@@ -925,8 +927,17 @@ configure_request (XEvent *ev)
 	}
 	if (alist != Qnil)
 	{
+	    /* Be sure to send one (and only one) synthetic ConfigureNotify
+	       to the window. The ICCCM states that we should send the event
+	       even if the state of the window doesn't change */
+
+	    Fsynthetic_configure_mutex (Qt);
+	    send_synthetic_configure (w);
+
 	    Fcall_window_hook (Qconfigure_request_hook, rep_VAL(w),
 			       rep_LIST_1 (alist), Qnil);
+
+	    Fsynthetic_configure_mutex (Qnil);
 	}
     }
 }
@@ -1006,7 +1017,7 @@ send_synthetic_configure (Lisp_Window *w)
 	w->pending_configure = 1;
 }
 
-DEFUN("synthetic-configure-mutex", Vsynthetic_configure_mutex,
+DEFUN("synthetic-configure-mutex", Fsynthetic_configure_mutex,
       Ssynthetic_configure_mutex, (repv arg), rep_Subr1) /*
 ::doc:synthetic-configure-mutex::
 While this variable is non-nil no synthetic ConfigureNotify events will
@@ -1026,7 +1037,7 @@ be sent to windows.
     }
     return ret;
 }
-	
+
 long
 get_event_mask (int type)
 {
