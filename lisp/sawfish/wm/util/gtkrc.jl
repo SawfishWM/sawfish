@@ -63,7 +63,10 @@
       (tem i)
     (setq gtkrc-background-images nil)
     (when (setq tem (cdr (assq 'font gtkrc-style)))
-      (setq gtkrc-font (get-font tem)))
+      (setq gtkrc-font (condition-case nil
+			   (get-font tem)
+			 (error
+			  default-font))))
     (when (setq tem (cdr (assq 'fg gtkrc-style)))
       (setq gtkrc-foreground (list (cdr (assq 'normal tem))
 				   (cdr (assq 'prelight tem))
