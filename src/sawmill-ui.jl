@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.23 1999/09/09 12:45:27 john Exp $
+;; $Id: sawmill-ui.jl,v 1.24 1999/09/23 13:37:18 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -526,6 +526,7 @@ exec rep "$0" "$@"
        (vbox-2 (gtk-vbox-new nil 0))
        (label (gtk-label-new (get-key spec ':doc)))
        (insert (gtk-button-new-with-label "Insert"))
+       (copy (gtk-button-new-with-label "Copy"))
        (delete (gtk-button-new-with-label "Delete"))
        (clist (gtk-clist-new-with-titles ["Key" "Command"]))
        (scroller (gtk-scrolled-window-new)))
@@ -543,6 +544,7 @@ exec rep "$0" "$@"
     (gtk-container-add hbox scroller)
     (gtk-box-pack-end hbox vbox)
     (gtk-container-add scroller clist)
+    (gtk-container-add vbox copy)
     (gtk-container-add vbox insert)
     (gtk-container-add vbox delete)
     (mapc #'(lambda (cell)
@@ -552,6 +554,8 @@ exec rep "$0" "$@"
     (setq spec (nconc spec (list ':shell ui-keymap-shell
 				 ':clist clist
 				 ':selection 0)))
+    (gtk-signal-connect copy "clicked" `(lambda ()
+					  (build-keymap:copy ',spec)))
     (gtk-signal-connect insert "clicked" `(lambda ()
 					    (build-keymap:insert ',spec)))
     (gtk-signal-connect delete "clicked" `(lambda ()
@@ -583,6 +587,20 @@ exec rep "$0" "$@"
     (gtk-clist-insert (get-key spec ':clist)
 		      (get-key spec ':selection)
 		      (vector "Null" "nop"))
+    (gtk-clist-select-row (get-key spec ':clist)
+			  (get-key spec ':selection) 0)))
+
+(defun build-keymap:copy (spec)
+  (let*
+      ((map (copy-sequence (get-key spec ':value)))
+       (binding (nth (get-key spec ':selection) (cdr map)))
+       (pred (nthcdr (get-key spec ':selection) map)))
+    (rplacd pred (cons (cons (car binding) (cdr binding)) (cdr pred)))
+    (ui-set spec (get-key spec ':variable) map)
+    (gtk-clist-insert (get-key spec ':clist)
+		      (get-key spec ':selection)
+		      (vector (cdr binding) (format nil "%S" (car binding))))
+    (set-key spec ':selection (1+ (get-key spec ':selection)))
     (gtk-clist-select-row (get-key spec ':clist)
 			  (get-key spec ':selection) 0)))
 
