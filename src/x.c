@@ -42,7 +42,10 @@
    
 #include "sawmill.h"
 #include <X11/Xresource.h>
-#include <X11/extensions/Xdbe.h>
+
+#ifdef HAVE_X11_EXTENSIONS_XDBE_H
+# include <X11/extensions/Xdbe.h>
+#endif
 
 static int have_dbe;
 
@@ -95,6 +98,7 @@ x_window_from_id (Window id)
 			 (XPointer *) &win) ? Qnil : win;
 }
 
+#ifdef HAVE_X11_EXTENSIONS_XDBE_H
 static inline XdbeBackBuffer
 x_back_buffer_from_id (Window id)
 {
@@ -102,6 +106,7 @@ x_back_buffer_from_id (Window id)
     return (XFindContext (dpy, id, x_dbe_context, &buf)
 	    ? 0 : (XdbeBackBuffer) buf);
 }
+#endif
 
 static Window
 window_from_arg (repv arg)
@@ -522,6 +527,7 @@ DEFUN("x-window-back-buffer", Fx_window_back_buffer,
       Sx_window_back_buffer, (repv win), rep_Subr1)
 {
     Window id = window_from_arg (win);
+#ifdef HAVE_X11_EXTENSIONS_XDBE_H
     XdbeBackBuffer buf;
 
     rep_DECLARE(1, win, id != 0);
@@ -533,12 +539,19 @@ DEFUN("x-window-back-buffer", Fx_window_back_buffer,
 	XSaveContext (dpy, id, x_dbe_context, (XPointer) buf);
     }
 
+    if (buf == 0)
+	buf = id;
+
     return (buf == 0) ? Qnil : rep_MAKE_INT (buf);
+#else
+    return (id == 0) ? Qnil : rep_MAKE_INT (id);
+#endif
 }
 
 DEFUN("x-window-swap-buffers", Fx_window_swap_buffers,
       Sx_window_swap_buffers, (repv win), rep_Subr1)
 {
+#ifdef HAVE_X11_EXTENSIONS_XDBE_H
     Window id = window_from_arg (win);
     XdbeBackBuffer buf;
 
@@ -552,6 +565,7 @@ DEFUN("x-window-swap-buffers", Fx_window_swap_buffers,
 	info.swap_action = XdbeBackground;
 	XdbeSwapBuffers (dpy, &info, 1);
     }
+#endif
     return Qt;
 }
 
@@ -1020,6 +1034,7 @@ rep_dl_init (void)
     rep_INTERN(convex);
     rep_INTERN(non_convex);
 
+#ifdef HAVE_X11_EXTENSIONS_XDBE_H
     if (dpy != 0)
     {
 	int major, minor;
@@ -1029,6 +1044,7 @@ rep_dl_init (void)
 	    x_dbe_context = XUniqueContext ();
 	}
     }
+#endif
 
     return Qx;
 }
