@@ -236,6 +236,34 @@ default-font).
     return rep_MAKE_INT(VFONT(font)->ascent + VFONT(font)->descent);
 }
 
+DEFUN("font-ascent", Ffont_ascent, Sfont_ascent, (repv font), rep_Subr1) /*
+::doc:font-ascent::
+font-ascent [FONT]
+
+Return the ascent of glyphs rendered using FONT (or the
+default-font).
+::end:: */
+{
+    if (font == Qnil)
+	font = Fsymbol_value (Qdefault_font, Qt);
+    rep_DECLARE1(font, FONTP);
+    return rep_MAKE_INT(VFONT(font)->ascent);
+}
+
+DEFUN("font-descent", Ffont_descent, Sfont_descent, (repv font), rep_Subr1) /*
+::doc:font-descent::
+font-descent [FONT]
+
+Return the descent of glyphs rendered using FONT (or the
+default-font).
+::end:: */
+{
+    if (font == Qnil)
+	font = Fsymbol_value (Qdefault_font, Qt);
+    rep_DECLARE1(font, FONTP);
+    return rep_MAKE_INT(VFONT(font)->descent);
+}
+
 
 /* type hooks */
 
@@ -302,6 +330,9 @@ fonts_init (void)
     rep_ADD_SUBR(Sfontp);
     rep_ADD_SUBR(Stext_width);
     rep_ADD_SUBR(Sfont_height);
+    rep_ADD_SUBR(Sfont_ascent);
+    rep_ADD_SUBR(Sfont_descent);
+
     rep_INTERN_SPECIAL(default_font);
     if (rep_SYM(Qbatch_mode)->value == Qnil)
     {
