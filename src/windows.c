@@ -287,7 +287,7 @@ add_window (Window id)
 
 	/* ..then call the add-window-hook.. */
 	rep_PUSHGC(gc_win, win);
-	Fcall_hook (Qadd_window_hook, Fcons (rep_VAL(w), Qnil), Qnil);
+	Fcall_window_hook (Qadd_window_hook, rep_VAL(w), Qnil, Qnil);
 	rep_POPGC;
 
 	/* In case the window disappeared during the hook call */
@@ -310,7 +310,7 @@ add_window (Window id)
 	{
 	    /* ..then the place-window-hook.. */
 	    rep_PUSHGC(gc_win, win);
-	    Fcall_hook (Qplace_window_hook, Fcons (rep_VAL(w), Qnil), Qor);
+	    Fcall_window_hook (Qplace_window_hook, rep_VAL(w), Qnil, Qor);
 	    rep_POPGC;
 	}
     }
@@ -738,6 +738,36 @@ window-size-hints WINDOW
     return ret;
 }
 
+DEFUN("call-window-hook", Fcall_window_hook, Scall_window_hook,
+      (repv hook, repv win, repv args, repv type), rep_Subr4) /*
+::doc:Scall-window-hook::
+call-window-hook HOOK WINDOW &optional ARGS HOOK-TYPE
+::end:: */
+{
+    repv tem;
+    rep_GC_root gc_hook, gc_args, gc_type;
+    rep_DECLARE1(hook, rep_SYMBOLP);
+    rep_DECLARE2(win, XWINDOWP);
+    args = Fcons (win, args);
+    rep_PUSHGC(gc_hook, hook);
+    rep_PUSHGC(gc_args, args);
+    rep_PUSHGC(gc_type, type);
+    tem = Fwindow_get (win, hook);
+    if (tem && tem != Qnil)
+    {
+	tem = Fcall_hook (tem, args, type);
+	if (!tem || (type == Qand && tem == Qnil)
+	    || (type == Qor && tem != Qnil))
+	{
+	    goto out;
+	}
+    }
+    tem = Fcall_hook (hook, args, type);
+out:
+    rep_POPGC; rep_POPGC; rep_POPGC;
+    return tem;
+}
+
 
 /* type hooks */
 
@@ -849,7 +879,7 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_id);
     rep_ADD_SUBR(Swindow_group_id);
     rep_ADD_SUBR(Swindow_size_hints);
-
+    rep_ADD_SUBR(Scall_window_hook);
     rep_INTERN(add_window_hook);
     rep_INTERN(place_window_hook);
 
