@@ -64,7 +64,8 @@
 		      (get-window-by-id (window-transient-p w)))))
       (when (or (not parent)
 		(not (window-mapped-p parent))
-		(not (window-visible-p parent)))
+		(not (window-visible-p parent))
+		(window-outside-viewport-p parent))
 	;; if no parent, choose the topmost window (if in click-to-focus
 	;; mode) or the window under the pointer otherwise
 	(unless (eq focus-mode 'click)
