@@ -24,6 +24,7 @@
     (export window-maximized-p
 	    window-maximized-horizontally-p
 	    window-maximized-vertically-p
+	    window-maximized-fullscreen-p
 	    window-unmaximized-position
 	    window-unmaximized-dimensions
 	    window-maximizable-p
@@ -44,7 +45,9 @@
 	    maximize-fill-window-horizontally
 	    maximize-fill-window-toggle
 	    maximize-fill-window-vertically-toggle
-	    maximize-fill-window-horizontally-toggle)
+	    maximize-fill-window-horizontally-toggle
+	    maximize-window-fullscreen
+	    maximize-window-fullscreen-toggle)
 
     (open rep
 	  rep.system
@@ -106,6 +109,9 @@
   (define (window-maximized-p w)
     (window-get w 'unmaximized-geometry))
 
+  (define (window-maximized-fullscreen-p w)
+    (window-get w 'maximized-fullscreen))
+
   (define (window-maximized-horizontally-p w)
     (window-get w 'maximized-horizontally))
 
@@ -114,7 +120,7 @@
 
   (define (window-unmaximized-position w)
     (let ((coords (window-position w))
-	  (old-geom (window-get w 'unmaximized-geometry)))
+	  (old-geom (unmaximized-geometry w)))
       (when (window-maximized-horizontally-p w)
 	(rplaca coords (nth 0 old-geom)))
       (when (window-maximized-vertically-p w)
@@ -123,12 +129,29 @@
 
   (define (window-unmaximized-dimensions w)
     (let ((dims (window-dimensions w))
-	  (old-geom (window-get w 'unmaximized-geometry)))
+	  (old-geom (unmaximized-geometry w)))
       (when (window-maximized-horizontally-p w)
 	(rplaca dims (nth 2 old-geom)))
       (when (window-maximized-vertically-p w)
 	(rplacd dims (nth 3 old-geom)))
       dims))
+
+  (define (save-unmaximized-geometry w)
+    (unless (window-get w 'unmaximized-geometry)
+      (let ((coords (window-position w))
+	    (dims (window-dimensions w)))
+	(window-put w 'unmaximized-geometry (list (car coords) (cdr coords)
+						  (car dims) (cdr dims))))))
+
+  (define (discard-unmaximized-geometry w)
+    (window-put w 'unmaximized-geometry nil)
+    (let ((type (window-get w 'unmaximized-type)))
+      (when type
+	(set-window-type w type)
+	(window-put w 'unmaximized-type nil))))
+
+  (define (unmaximized-geometry w)
+    (window-get w 'unmaximized-geometry))
 
   (define (maximize-discard w #!optional horizontally vertically)
     (when horizontally
@@ -137,7 +160,7 @@
       (window-put w 'maximized-vertically nil))
     (let ((dims (window-dimensions w))
 	  (coords (window-position w))
-	  (saved (window-get w 'unmaximized-geometry)))
+	  (saved (unmaximized-geometry w)))
       (when saved
 	(unless (window-maximized-horizontally-p w)
 	  (rplaca saved (car coords))
@@ -147,7 +170,7 @@
 	  (rplaca (nthcdr 3 saved) (cdr dims))))
       (when (and (not (window-maximized-vertically-p w))
 		 (not (window-maximized-horizontally-p w)))
-	(window-put w 'unmaximized-geometry nil))))
+	(discard-unmaximized-geometry w))))
 
   (define (maximize-discard-move w directions #!key successful)
     (when successful
@@ -327,7 +350,7 @@
 
 ;;; misc functions
 
-  (define (maximize-find-workarea #!optional w #!key head #!key head-fallback)
+  (define (maximize-find-workarea #!optional w #!key head head-fallback)
     "Return the rectangle representing the largest rectangle on the screen that
 doesn't overlap any avoided windows, or nil.  If head-fallback is non-nil, then
 an empty workarea will be replaced with the head area; otherwise nil is returned."
@@ -375,6 +398,8 @@ an empty workarea will be replaced with the head area; otherwise nil is returned
     "Maximize the dimensions of the window."
     (let ((unshade-selected-windows t))
       (display-window-without-focusing w))
+    (when (window-maximized-fullscreen-p w)
+      (maximize-window-fullscreen w nil))
     (let* ((coords (window-position w))
 	   (dims (window-dimensions w))
 	   (fdims (window-frame-dimensions w))
@@ -385,9 +410,7 @@ an empty workarea will be replaced with the head area; otherwise nil is returned
 		   #:windows avoided
 		   #:include-heads (list (current-head w)))))
       (when (window-maximizable-p w direction hints)
-	(unless (window-get w 'unmaximized-geometry)
-	  (window-put w 'unmaximized-geometry (list (car coords) (cdr coords)
-						    (car dims) (cdr dims))))
+	(save-unmaximized-geometry w)
 	(cond ((null direction)
 	       (if (not only-1d)
 		   (do-both w avoided edges coords dims fdims)
@@ -412,14 +435,14 @@ an empty workarea will be replaced with the head area; otherwise nil is returned
   ;; does all unmaximizing except for changing the window properties and
   ;; calling the hooks
   (define (unmaximize-window-1 w #!optional direction before)
-    (let ((geom (window-get w 'unmaximized-geometry))
+    (let ((geom (unmaximized-geometry w))
 	  (coords (window-position w))
 	  (dims (window-dimensions w)))
       (when geom
-	(when (or (null direction) (eq direction 'horizontal))
+	(when (memq direction '(() fullscreen horizontal))
 	  (rplaca coords (nth 0 geom))
 	  (rplaca dims (nth 2 geom)))
-	(when (or (null direction) (eq direction 'vertical))
+	(when (memq direction '(() fullscreen vertical))
 	  (rplacd coords (nth 1 geom))
 	  (rplacd dims (nth 3 geom)))
 	(when before
@@ -431,13 +454,15 @@ an empty workarea will be replaced with the head area; otherwise nil is returned
     "Restore the dimensions of the window to its original, unmaximized, state."
     (unmaximize-window-1 w direction
      (lambda ()
-       (when (or (null direction) (eq direction 'horizontal))
+       (when (memq direction '(() fullscreen horizontal))
 	 (window-put w 'maximized-horizontally nil))
-       (when (or (null direction) (eq direction 'vertical))
+       (when (memq direction '(() fullscreen vertical))
 	 (window-put w 'maximized-vertically nil))
+       (window-put w 'maximized-fullscreen nil)
        (when (and (not (window-maximized-vertically-p w))
-		  (not (window-maximized-horizontally-p w)))
-	 (window-put w 'unmaximized-geometry nil))))
+		  (not (window-maximized-horizontally-p w))
+		  (not (window-maximized-fullscreen-p w)))
+	 (discard-unmaximized-geometry w))))
     (call-window-hook 'window-unmaximized-hook w (list direction))
     (call-window-hook 'window-state-change-hook w (list '(maximized))))
 
@@ -525,6 +550,39 @@ unmaximized."
   (define-command 'maximize-fill-window-vertically-toggle maximize-fill-window-vertically-toggle #:spec "%W")
 
 
+;; fullscreen commands
+
+  (define (maximize-window-fullscreen w state)
+    (cond ((and state (not (window-maximized-fullscreen-p w)))
+	   (when (window-maximizable-p w)
+	     (let ((head-offset (current-head-offset w))
+		   (head-dims (current-head-dimensions w)))
+	       (save-unmaximized-geometry w)
+	       (window-put w 'unmaximized-type (window-type w))
+	       (set-window-type w 'unframed)
+	       (move-resize-window-to w (car head-offset) (cdr head-offset)
+				      (car head-dims) (cdr head-dims))
+	       (raise-window* w)
+	       (window-put w 'maximized-fullscreen t)
+	       (window-put w 'maximized-vertically t)
+	       (window-put w 'maximized-horizontally t)
+	       (call-window-hook 'window-maximized-hook
+				 w (list 'fullscreen))
+	       (call-window-hook 'window-state-change-hook
+				 w (list '(maximized))))))
+
+	  ((and (not state) (window-maximized-fullscreen-p w))
+	   (unmaximize-window w 'fullscreen))))
+
+  (define (maximize-window-fullscreen-toggle w)
+    (maximize-window-fullscreen w (not (window-maximized-fullscreen-p w))))
+
+  (define-command 'maximize-window-fullscreen
+    maximize-window-fullscreen #:spec "%W")
+  (define-command 'maximize-window-fullscreen-toggle
+    maximize-window-fullscreen-toggle #:spec "%W")
+
+
 ;;; initialisation
 
   (define (after-add-window w)
@@ -571,9 +629,11 @@ unmaximized."
 	      (add-hook 'add-window-hook check-if-maximizable)))
 
   (sm-add-saved-properties
-   'unmaximized-geometry 'maximized-vertically 'maximized-horizontally)
+   'unmaximized-geometry 'maximized-vertically
+   'maximized-horizontally 'maximized-fullscreen)
   (add-swapped-properties
-   'unmaximized-geometry 'maximized-vertically 'maximized-horizontally)
+   'unmaximized-geometry 'maximized-vertically
+   'maximized-horizontally 'maximized-fullscreen)
 
   ;; This is now disabled - it doesn't really make sense for moving..
   ;; (add-hook 'after-move-hook maximize-discard-move)

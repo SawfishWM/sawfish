@@ -31,7 +31,6 @@
 	  sawfish.wm.windows
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
-	  sawfish.wm.state.maximize
 	  sawfish.wm.state.iconify)
 
   ;; todo:
@@ -64,11 +63,46 @@
 
   (define wm-spec-window-id nil)
 
-  (define supported-protocols
-    [_NET_CLIENT_LIST _NET_CLIENT_LIST_STACKING _NET_NUMBER_OF_DESKTOPS
-     _NET_DESKTOP_GEOMETRY _NET_DESKTOP_VIEWPORT _NET_CURRENT_DESKTOP
-     _NET_DESKTOP_NAMES _NET_ACTIVE_WINDOW _NET_CLOSE_WINDOW
-     _NET_WM_MOVERESIZE _NET_WM_DESKTOP _NET_WM_WINDOW_TYPE _NET_WM_STATE])
+  (define supported-atoms
+    [_NET_ACTIVE_WINDOW
+     _NET_CLIENT_LIST
+     _NET_CLIENT_LIST_STACKING
+     _NET_CLOSE_WINDOW
+     _NET_CURRENT_DESKTOP
+     _NET_DESKTOP_GEOMETRY
+     _NET_DESKTOP_NAMES
+     _NET_DESKTOP_VIEWPORT
+     _NET_NUMBER_OF_DESKTOPS
+     _NET_PROTOCOLS
+     _NET_SUPPORTED
+     _NET_SUPPORTING_WM_CHECK
+     _NET_WM_ICON_GEOMETRY
+     _NET_WM_MOVERESIZE
+     _NET_WM_MOVERESIZE_MOVE
+     _NET_WM_MOVERESIZE_SIZE_BOTTOM
+     _NET_WM_MOVERESIZE_SIZE_BOTTOMLEFT
+     _NET_WM_MOVERESIZE_SIZE_BOTTOMRIGHT
+     _NET_WM_MOVERESIZE_SIZE_LEFT
+     _NET_WM_MOVERESIZE_SIZE_RIGHT
+     _NET_WM_MOVERESIZE_SIZE_TOP
+     _NET_WM_MOVERESIZE_SIZE_TOPLEFT
+     _NET_WM_MOVERESIZE_SIZE_TOPRIGHT
+     _NET_WM_PING
+     _NET_WM_STATE
+     _NET_WM_STATE_ADD
+     _NET_WM_STATE_FULLSCREEN
+     _NET_WM_STATE_MAXIMIZED
+     _NET_WM_STATE_MAXIMIZED_HORZ
+     _NET_WM_STATE_MAXIMIZED_VERT
+     _NET_WM_STATE_REMOVE
+     _NET_WM_STATE_SHADED
+     _NET_WM_STATE_SKIP_PAGER
+     _NET_WM_STATE_STICKY
+     _NET_WM_STATE_TOGGLE
+     _NET_WM_WINDOW_TYPE
+     _NET_WM_WINDOW_TYPE_DESKTOP
+     _NET_WM_WINDOW_TYPE_DIALOG
+     _NET_WM_WINDOW_TYPE_DOCK])
   
   (defconst desktop-layer -4)
   (defconst dock-layer +4)
@@ -144,7 +178,7 @@
 		  (set-x-property 'root '_NET_DESKTOP_VIEWPORT
 				  view 'CARDINAL 32)
 		(aset view (* i 2) (* (car port) (screen-width)))
-		(aset view (1+ (* i 2)) (* (cdr port) (screen-width)))
+		(aset view (1+ (* i 2)) (* (cdr port) (screen-height)))
 		(loop (1+ i)))))))
 
       (define (set-window-hints w)
@@ -360,6 +394,16 @@
 			       (not (window-get w 'window-list-skip))))
        ((get)      (window-get w 'window-list-skip)))))
 
+  (define-wm-spec-window-state
+   '_NET_WM_STATE_FULLSCREEN
+   (lambda (w mode)
+     (require 'sawfish.wm.state.maximize)
+     (case mode
+       ((init add) (maximize-window-fullscreen w t))
+       ((remove) (maximize-window-fullscreen w nil))
+       ((toggle) (maximize-window-fullscreen-toggle w))
+       ((get) (window-maximized-fullscreen-p w)))))
+
 
 ;;; client messages
 
@@ -472,7 +516,7 @@
 		    (vector wm-spec-window-id) 'WINDOW 32)
     (set-x-property wm-spec-window-id '_NET_WM_NAME "Sawfish" 'STRING 8)
 
-    (set-x-property 'root '_NET_SUPPORTED supported-protocols 'ATOM 32)
+    (set-x-property 'root '_NET_SUPPORTED supported-atoms 'ATOM 32)
 
     (let ((current-desktop (get-x-property 'root '_NET_CURRENT_DESKTOP)))
       (when (and current-desktop

@@ -37,10 +37,22 @@
 
   (define make-ping-record cons)
   (define ping-callback car)
-  (define ping-timestamp cdr)
+  (define ping-id cdr)
 
   ;; list of ping records sent but not completed
   (define pings-in-transit '())
+
+  ;; The wm-spec talks about "timestamps", and how they can be used as
+  ;; unique ids, but doesn't say whether they're X server timestamps.
+  ;; Obviously, X server timestamps can't be used as unique ids, so we
+  ;; just use sequence numbers..
+
+  (define unique-id
+    (let ((counter 0))
+      (lambda ()
+	(prog1
+	    counter
+	  (setq counter (1+ counter))))))
 
 ;;; public functions
 
@@ -48,18 +60,18 @@
     "Returns true if window W supports the _NET_WM_PING protocol."
     (window-supports-wm-protocol-p w '_NET_WM_PING))
 
-  (define (ping-window w callback timeout-msecs)
+  (define (ping-window w callback #!optional (timeout-msecs 1000))
     "Assuming that window W supports the _NET_WM_PING protocol (i.e. the
 function `window-supports-ping-p' returns true), initiate a ping sequence.
 
 The function CALLBACK will subsequently be called with a single
 argument, true if the window responded to the ping within TIMEOUT-MSECS
-milliseconds, false otherwise."
+milliseconds (defaults to 1 second), false otherwise."
 
-    (let ((ping (make-ping-record callback (x-server-timestamp))))
+    (let ((ping (make-ping-record callback (unique-id))))
       (send-client-message w 'WM_PROTOCOLS
 			   (vector (x-atom '_NET_WM_PING)
-				   (ping-timestamp ping)))
+				   (ping-id ping)) 32)
       (setq pings-in-transit (cons ping pings-in-transit))
       (make-timer (lambda ()
 		    ;; Ensure that this ping hasn't already come back
@@ -75,13 +87,13 @@ milliseconds, false otherwise."
     (when (and (eq type 'WM_PROTOCOLS)
 	       (eq (x-atom-name (aref data 0)) '_NET_WM_PING))
       ;; a returning ping (pong?)
-      (let ((timestamp (aref data 1)))
+      (let ((id (aref data 1)))
 	(let loop ((rest pings-in-transit))
 	  (cond ((null loop)
 		 (format
 		  standard-error "Received stray _NET_WM_PING: %s\n" data))
 
-		((eql (ping-timestamp (car rest)) timestamp)
+		((eql (ping-id (car rest)) id)
 		 ;; found our ping
 		 (let ((this (car rest)))
 		   (setq pings-in-transit (delq this pings-in-transit))

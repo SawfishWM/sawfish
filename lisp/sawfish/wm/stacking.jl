@@ -442,8 +442,8 @@ lowest possible position. Otherwise raise it as far as allowed."
       (let ((parents (transient-parents w)))
 	(if parents
 	    ;; put dialogs in at least as high a layer as their
-	    ;; highest parent
-	    (window-put w 'depth (apply max (mapcar window-depth parents)))
+	    ;; highest parent, but never below the default depth
+	    (window-put w 'depth (apply max 0 (mapcar window-depth parents)))
 	  ;; default depth
 	  (window-put w 'depth 0)))))
 

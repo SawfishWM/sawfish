@@ -116,7 +116,9 @@
     :user-level expert)
 
   (defvar move-resize-map (bind-keys (make-keymap)
-			    "Any-Off" (lambda () (finished))
+			    "Any-Off1" (lambda () (finished))
+			    "Any-Off2" (lambda () (finished))
+			    "Any-Off3" (lambda () (finished))
 			    "Any-Move" (lambda () (motion))
 			    "Any-ESC" (lambda () (cancel))
 			    "Any-RET" (lambda () (finished))
