@@ -193,6 +193,8 @@ canonical_display (char *name)
 static void
 redisplay (void)
 {
+    commit_queued_reshapes ();
+
     /* round-trip requests swallow any pending events.. */
     if (XPending (dpy) > 0)
 	rep_mark_input_pending (ConnectionNumber (dpy));
