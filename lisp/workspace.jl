@@ -68,7 +68,7 @@
   :after-set (lambda ()
 	       (call-hook 'workspace-state-change-hook)))
 
-(defcustom lock-first-workspace nil
+(defcustom lock-first-workspace t
   "Empty workspaces before or after the active workspace aren't hidden."
   :type boolean
   :group workspace
@@ -209,6 +209,9 @@ that window on (counting from zero).")
     (setq index current-workspace))
   (when (> current-workspace index)
     (setq current-workspace (1- current-workspace)))
+  (when (and last-interesting-workspace
+	     (> last-interesting-workspace index))
+    (setq last-interesting-workspace (1- last-interesting-workspace)))
   (mapc #'(lambda (w)
 	    (let
 		((space (window-get w 'workspace)))
