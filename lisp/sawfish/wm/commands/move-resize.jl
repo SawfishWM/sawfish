@@ -134,6 +134,7 @@ the mouse."
 (defvar move-resize-old-ptr-x nil)
 (defvar move-resize-old-ptr-y nil)
 (defvar move-resize-last-ptr nil)
+(defvar move-resize-hysteresis nil)
 (defvar move-resize-mode nil)
 (defvar move-resize-hints nil)
 (defvar move-resize-frame nil)
@@ -169,6 +170,7 @@ the mouse."
        (move-resize-last-ptr  (if from-motion-event
 				  (query-button-press-pointer)
 				(query-pointer t)))
+       (move-resize-hysteresis (cons 0 0))
        (move-resize-old-ptr-x (car move-resize-last-ptr))
        (move-resize-old-ptr-y (cdr move-resize-last-ptr))
        (move-resize-hints (window-size-hints w))
@@ -274,8 +276,8 @@ the mouse."
 						    move-resize-y)
 			   (cons (- ptr-x (car move-resize-last-ptr))
 				 (- ptr-y (cdr move-resize-last-ptr)))
-			   move-snap-epsilon move-resize-edges
-			   move-snap-mode)))
+			   move-resize-hysteresis move-snap-epsilon
+			   move-resize-edges move-snap-mode)))
 	       (setq move-resize-x (car coords))
 	       (setq move-resize-y (cdr coords)))))
 	  ((eq move-resize-function 'resize)
