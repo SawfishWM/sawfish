@@ -865,8 +865,8 @@ refresh_message_window ()
     {
 	XGCValues values;
 	u_long mask;
-	values.foreground = VCOLOR(message.fg)->color.pixel;
-	values.background = VCOLOR(message.bg)->color.pixel;
+	values.foreground = VCOLOR(message.fg)->pixel;
+	values.background = VCOLOR(message.bg)->pixel;
 	values.font = VFONT(message.font)->font->fid;
 	mask = GCForeground | GCBackground | GCFont;
 
@@ -974,7 +974,7 @@ Note that newlines in TEXT are ignored. This may change in the future.
 	       down opaque window moves.. */
 	    XSetWindowAttributes attr;
 	    attr.override_redirect = True;
-	    attr.background_pixel = VCOLOR(bg)->color.pixel;
+	    attr.background_pixel = VCOLOR(bg)->pixel;
 	    attr.border_pixel = BlackPixel(dpy, screen_num);
 	    attr.event_mask = ExposureMask;
 	    attr.colormap = screen_cmap;

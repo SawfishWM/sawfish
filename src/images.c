@@ -440,9 +440,9 @@ Set all pixels in IMAGE to COLOR (or black if COLOR is undefined).
     rep_DECLARE1(image, IMAGEP);
     if (COLORP(color))
     {
-	r = VCOLOR(color)->color.red / 256;
-	g = VCOLOR(color)->color.green / 256;
-	b = VCOLOR(color)->color.blue / 256;
+	r = VCOLOR(color)->red / 256;
+	g = VCOLOR(color)->green / 256;
+	b = VCOLOR(color)->blue / 256;
     }
     else
 	r = g = b = 0;
@@ -475,9 +475,9 @@ defines the color of its pixels.
     rep_DECLARE2(height, rep_INTP);
     if (COLORP(color))
     {
-	r = VCOLOR(color)->color.red / 256;
-	g = VCOLOR(color)->color.green / 256;
-	b = VCOLOR(color)->color.blue / 256;
+	r = VCOLOR(color)->red / 256;
+	g = VCOLOR(color)->green / 256;
+	b = VCOLOR(color)->blue / 256;
     }
     else
 	r = g = b = 0;

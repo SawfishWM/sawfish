@@ -38,12 +38,12 @@ DEFUN("draw-vertical-gradient", Fdraw_vertical_gradient,
     data = VIMAGE(img)->image->rgb_data;
     width = VIMAGE(img)->image->rgb_width;
     height = VIMAGE(img)->image->rgb_height;
-    from[0] = VCOLOR(from_)->color.red / 256;
-    from[1] = VCOLOR(from_)->color.green / 256;
-    from[2] = VCOLOR(from_)->color.blue / 256;
-    to[0] = VCOLOR(to_)->color.red / 256;
-    to[1] = VCOLOR(to_)->color.green / 256;
-    to[2] = VCOLOR(to_)->color.blue / 256;
+    from[0] = VCOLOR(from_)->red / 256;
+    from[1] = VCOLOR(from_)->green / 256;
+    from[2] = VCOLOR(from_)->blue / 256;
+    to[0] = VCOLOR(to_)->red / 256;
+    to[1] = VCOLOR(to_)->green / 256;
+    to[2] = VCOLOR(to_)->blue / 256;
 
     for (y = 0; y < height; y++)
     {
@@ -77,12 +77,12 @@ DEFUN("draw-horizontal-gradient", Fdraw_horizontal_gradient,
     data = VIMAGE(img)->image->rgb_data;
     width = VIMAGE(img)->image->rgb_width;
     height = VIMAGE(img)->image->rgb_height;
-    from[0] = VCOLOR(from_)->color.red / 256;
-    from[1] = VCOLOR(from_)->color.green / 256;
-    from[2] = VCOLOR(from_)->color.blue / 256;
-    to[0] = VCOLOR(to_)->color.red / 256;
-    to[1] = VCOLOR(to_)->color.green / 256;
-    to[2] = VCOLOR(to_)->color.blue / 256;
+    from[0] = VCOLOR(from_)->red / 256;
+    from[1] = VCOLOR(from_)->green / 256;
+    from[2] = VCOLOR(from_)->blue / 256;
+    to[0] = VCOLOR(to_)->red / 256;
+    to[1] = VCOLOR(to_)->green / 256;
+    to[2] = VCOLOR(to_)->blue / 256;
 
     for (y = 0; y < height; y++)
     {
@@ -116,12 +116,12 @@ DEFUN("draw-diagonal-gradient", Fdraw_diagonal_gradient,
     data = VIMAGE(img)->image->rgb_data;
     width = VIMAGE(img)->image->rgb_width;
     height = VIMAGE(img)->image->rgb_height;
-    from[0] = VCOLOR(from_)->color.red / 256;
-    from[1] = VCOLOR(from_)->color.green / 256;
-    from[2] = VCOLOR(from_)->color.blue / 256;
-    to[0] = VCOLOR(to_)->color.red / 256;
-    to[1] = VCOLOR(to_)->color.green / 256;
-    to[2] = VCOLOR(to_)->color.blue / 256;
+    from[0] = VCOLOR(from_)->red / 256;
+    from[1] = VCOLOR(from_)->green / 256;
+    from[2] = VCOLOR(from_)->blue / 256;
+    to[0] = VCOLOR(to_)->red / 256;
+    to[1] = VCOLOR(to_)->green / 256;
+    to[2] = VCOLOR(to_)->blue / 256;
 
     for (y = 0; y < height; y++)
     {
