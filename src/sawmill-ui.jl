@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.8 1999/08/23 20:46:07 john Exp $
+;; $Id: sawmill-ui.jl,v 1.9 1999/08/24 13:16:44 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -626,7 +626,9 @@ fi
        (frame (get-key spec ':doc-frame))
        (label (get-key spec ':doc-label)))
     (gtk-frame-set-label frame (symbol-name command))
-    (gtk-label-set label (or doc "Undocumented"))))
+    (gtk-label-set label (if doc
+			     (flatten-doc-string doc)
+			   "Undocumented"))))
       
 
 ;; building the frame for the element tree
@@ -781,6 +783,17 @@ fi
     (gtk-box-pack-start vbox ui-root)
     (gtk-widget-show-all ui-window)
     (ui-set-button-states)))
+
+
+;; utilities
+
+(defun flatten-doc-string (string)
+  (let
+      ((point 0))
+    (while (string-match "[^\n]\n[^\n]" string point)
+      (aset string (1+ (match-start)) ? )
+      (setq point (match-end)))
+    string))
 
 
 ;; entry point, loop reading command forms, sending back results
