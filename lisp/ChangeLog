@@ -1,9 +1,24 @@
+2000-11-28  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/util/ping.jl (ping-window): fixed bug whereby
+	CALLBACK would get called twice if the ping is ponged before
+	the timer fires
+
+	* sawfish/wm/state/gnome.jl (gnome-window-class-hacks): broke
+	out the WM_CLASS based hacks for parts of the GNOME desktop.
+	Also made panel windows and gmc icons unplacable (otherwise, if
+	the ignore-program-position option is set the windows get
+	placed by the wm, even though they really shouldn't be)
+
+	* sawfish/wm/state/wm-spec.jl: added the unplacable panel hack
+	here also
+
 2000-11-27  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/state/wm-spec.jl: removed the evil hardcoded list
 	of properties in update-client-state by a `get' method in each
 	state function. Also added a PSEUDO keyword arg to
-	define-wm-spec-window-state for properties that should be not
+	define-wm-spec-window-state for properties that should not be
 	set in the _NET_WM_STATE property
 
 	* sawfish/wm/ext/window-history.jl: save and restore

@@ -208,7 +208,9 @@
 	       ;; XXX I don't think the GNOME hints specify these things
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'avoid t)
-	       (window-put w 'no-history t))
+	       (window-put w 'no-history t)
+	       ;; XXX see gnome.jl for why this is needed..
+	       (window-put w 'placed t))
 	      ((string= (aref class 1) "gmc-desktop-icon")
 	       (window-put w 'never-focus t)))))
 

@@ -62,8 +62,10 @@ milliseconds, false otherwise."
 				   (ping-timestamp ping)))
       (setq pings-in-transit (cons ping pings-in-transit))
       (make-timer (lambda ()
-		    (setq pings-in-transit (delq ping pings-in-transit))
-		    (callback nil))
+		    ;; Ensure that this ping hasn't already come back
+		    (when (memq ping pings-in-transit)
+		      (setq pings-in-transit (delq ping pings-in-transit))
+		      (callback nil)))
 		  (quotient timeout-msecs 1000) (mod timeout-msecs 1000))))
 
 ;;; event handler

@@ -179,7 +179,8 @@
 	    states)
       (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
 
-  (define (gnome-honour-client-state w)
+  ;; XXX Ugly hacks to make the GNOME desktop function sanely
+  (define (gnome-window-class-hacks w)
     (let ((class (get-x-text-property w 'WM_CLASS)))
       (when (and class (>= (length class) 2))
 	(cond ((and (string= (aref class 1) "Panel")
@@ -188,14 +189,26 @@
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'no-history t)
 	       ;; XXX the panel should set this, but sometimes it fails..?
-	       (window-put w 'avoid t))
+	       (window-put w 'avoid t)
+	       ;; XXX the panel is broken, in that it doesn't check
+	       ;; XXX that the wm gave it the position that it wanted.
+	       ;; XXX (The wm is under no obligation; the panel should
+	       ;; XXX move itself to the required position after
+	       ;; XXX initially mapping the window, or perhaps it
+	       ;; XXX should use the USPosition hints?). The following
+	       ;; XXX line prevents panel windows being placed at all
+	       (window-put w 'placed t))
 	      ((string= (aref class 1) "gmc-desktop-icon")
 	       (window-put w 'focus-click-through t)
-	       (window-put w 'never-focus t))
+	       (window-put w 'never-focus t)
+	       ;; XXX same reason as above
+	       (window-put w 'placed t))
 	      ((and (string= (aref class 1) "Nautilus")
 		    (string= (aref class 0) "desktop_window"))
-	       ;; XXX ...or these
-	       (mark-window-as-desktop w)))))
+	       (mark-window-as-desktop w))))))
+
+  (define (gnome-honour-client-state w)
+    (gnome-window-class-hacks w)
     (let ((state (get-x-property w '_WIN_STATE))
 	  (hints (get-x-property w '_WIN_HINTS))
 	  (layer (get-x-property w '_WIN_LAYER))
