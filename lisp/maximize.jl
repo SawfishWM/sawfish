@@ -259,6 +259,9 @@
 (defun maximize-window (w &optional direction only-1d)
   "Maximize the dimensions of the window."
   (interactive "%W")
+  (let
+      ((unshade-selected-windows t))
+    (display-window-without-focusing w))
   (let*
       ((coords (window-position w))
        (dims (window-dimensions w))
