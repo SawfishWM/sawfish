@@ -218,6 +218,10 @@
   (when (> x-cycle-highest 1000000)			;arbitrary big number
     (x-cycle-compress)))
 
+;; remove window W from the cycle stack
+(defun x-cycle-pop (w)
+  (window-put w 'x-cycle-order nil))
+
 ;; compress the cycle stack
 (defun x-cycle-compress ()
   (let
@@ -228,3 +232,5 @@
 		(window-put w 'x-cycle-order i)
 		(setq i (1+ i)))) order)
     (setq x-cycle-highest i)))
+
+(add-hook 'iconify-window-hook 'x-cycle-pop)
