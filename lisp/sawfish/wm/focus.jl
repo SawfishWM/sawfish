@@ -35,7 +35,11 @@
 
 (defvar click-to-focus-keymap
   (bind-keys (make-keymap)
-    "Any-Click1" 'focus-click))
+    ;; apparently buttons 4 & 5 are usually bound to the
+    ;; wheel on some mice
+    "Any-Button1-Click1" 'focus-click
+    "Any-Button2-Click1" 'focus-click
+    "Any-Button3-Click1" 'focus-click))
 
 (defvar focus-dont-push nil)
 
