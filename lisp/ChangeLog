@@ -1,3 +1,148 @@
+2000-09-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/ext/tooltips.jl (display-tooltip): the TEXT
+	argument may now be a function (which should produce a string
+	when called)
+
+	* sawfish/wm/ext/tooltips.jl (display-tooltip-after-delay): new
+	exported function
+
+2000-09-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/workspace.jl, sawfish/wm/windows.jl,
+	sawfish/wm/user.jl, sawfish/wm/server.jl, sawfish/wm/misc.jl,
+	sawfish/wm/menus.jl, sawfish/wm/gaol.jl, sawfish/wm/frames.jl,
+	sawfish/wm/customize.jl, sawfish/wm/commands.jl: 
+	* sawfish/wm/commands/xterm.jl,
+	sawfish/wm/commands/viewport-linear.jl,
+	sawfish/wm/commands/move-resize.jl,
+	sawfish/wm/commands/help.jl, sawfish/wm/commands/describe.jl: 
+	* sawfish/wm/ext/window-history.jl, sawfish/wm/ext/tooltips.jl,
+	sawfish/wm/ext/match-window.jl,
+	sawfish/wm/ext/error-handler.jl, sawfish/wm/ext/3d-hack.jl: 
+	* sawfish/wm/gnome/menus.jl: 
+	* sawfish/wm/session/save.jl, sawfish/wm/session/load.jl,
+	sawfish/wm/session/init.jl: 
+	* sawfish/wm/util/with-output.jl, sawfish/wm/util/prompt.jl,
+	sawfish/wm/util/prompt-wm.jl, sawfish/wm/util/nokogiri.jl,
+	sawfish/wm/util/keymap.jl, sawfish/wm/util/gtkrc.jl,
+	sawfish/wm/util/compat.jl: 
+
+	No need to explicitly open `rep.io.streams' anymore
+
+2000-09-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/util/gtkrc.jl (gtkrc-get-style): ungrab the X
+	server before running `gtk-style'. Otherwise it may not be able
+	to connect
+
+	* sawfish/wm/misc.jl (call-with-server-ungrabbed): new function
+
+2000-09-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm.jl: 
+
+	* sawfish/wm/workspace.jl, sawfish/wm/windows.jl,
+	sawfish/wm/window-anim.jl, sawfish/wm/viewport.jl,
+	sawfish/wm/user.jl, sawfish/wm/swapper.jl,
+	sawfish/wm/stacking.jl, sawfish/wm/server.jl,
+	sawfish/wm/placement.jl, sawfish/wm/misc.jl,
+	sawfish/wm/menus.jl, sawfish/wm/keymaps.jl, sawfish/wm/gaol.jl,
+	sawfish/wm/frames.jl, sawfish/wm/focus.jl,
+	sawfish/wm/customize.jl, sawfish/wm/custom.jl,
+	sawfish/wm/commands.jl: 
+
+	* sawfish/wm/commands/xterm.jl, sawfish/wm/commands/x-cycle.jl,
+	sawfish/wm/commands/viewport-linear.jl,
+	sawfish/wm/commands/move-resize.jl,
+	sawfish/wm/commands/help.jl, sawfish/wm/commands/gnome.jl,
+	sawfish/wm/commands/describe.jl: 
+
+	* sawfish/wm/ext/window-history.jl, sawfish/wm/ext/tooltips.jl,
+	sawfish/wm/ext/shade-hover.jl, sawfish/wm/ext/match-window.jl,
+	sawfish/wm/ext/error-handler.jl, sawfish/wm/ext/edge-flip.jl,
+	sawfish/wm/ext/auto-raise.jl, sawfish/wm/ext/audio-events.jl,
+	sawfish/wm/ext/3d-hack.jl: 
+
+	* sawfish/wm/gnome/menus.jl: 
+
+	* sawfish/wm/session/save.jl, sawfish/wm/session/load.jl,
+	sawfish/wm/session/init.jl: 
+
+	* sawfish/wm/state/wm-spec.jl, sawfish/wm/state/transient.jl,
+	sawfish/wm/state/shading.jl, sawfish/wm/state/open-look.jl,
+	sawfish/wm/state/mwm.jl, sawfish/wm/state/maximize.jl,
+	sawfish/wm/state/ignored.jl, sawfish/wm/state/iconify.jl,
+	sawfish/wm/state/gnome.jl, sawfish/wm/state/configure.jl: 
+
+	* sawfish/wm/theming/make-theme.jl,
+	sawfish/wm/theming/make-theme-preview.jl: 
+
+	* sawfish/wm/util/with-output.jl,
+	sawfish/wm/util/window-order.jl, sawfish/wm/util/prompt.jl,
+	sawfish/wm/util/prompt-wm.jl, sawfish/wm/util/prompt-extras.jl,
+	sawfish/wm/util/play-audio.jl, sawfish/wm/util/nokogiri.jl,
+	sawfish/wm/util/keymap.jl, sawfish/wm/util/gtkrc.jl,
+	sawfish/wm/util/groups.jl, sawfish/wm/util/compat.jl: 
+
+	Open the necessary modules that aren't included in `rep'
+	structure anymore (rep.regexp, rep.system, rep.io.streams,
+	rep.io.files, rep.io.file-handlers)
+
+2000-09-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/user.jl (safe-load): convenience function to catch
+	errors from `load'. Used when loading user scripts
+
+	* sawfish/wm/ext/old-window-menu.jl (old-window-menu): fixed
+	the `do' iteration parameters
+
+	* sawfish/wm/customize.jl, sawfish/wm/custom.jl: added module
+	aliases
+
+	* sawfish/wm/menus.jl: 
+	* sawfish/wm/state/iconify.jl: moved the `Iconify' window menu
+	item to the `Toggle' submenu, and called it `Minimized'
+
+	* sawfish/wm/workspace.jl, sawfish/wm/frames.jl: 
+	* sawfish/wm/ext/old-window-menu.jl,
+	sawfish/wm/ext/beos-window-menu.jl: 
+	* sawfish/wm/util/groups.jl: create radio-button menu-items
+	where appropriate
+
+	* sawfish/wm/ext/beos-window-menu.jl
+	(beos-window-menu-simplifies): new option, when t singleton
+	submenus are lifted to replace their parent item
+
+	* sawfish/wm/menus.jl (add-window-menu-toggle): new function,
+	adds items to the `Toggle' submenu of the window-ops-menu
+	(menu-preprocessor): menu items may be dotted to an alist of
+	options (sawfish-menu currently supports `(check . STATE)')
+	(menu-args): fluid providing arg-list for functions called
+	while preprocessing menus
+	(popup-window-menu): now takes a window as its sole arg, then
+	sets menu-args to the singleton list containing this value
+
+	* sawfish/wm/frames.jl, workspace.jl: 
+	* sawfish/wm/ext/old-window-menu.jl,
+	sawfish/wm/ext/beos-window-menu.jl: 
+	* sawfish/wm/util/groups.jl: use check-items where appropriate
+	when creating menus
+
+	* sawfish/wm/state/shading.jl, sawfish/wm/state/ignored.jl,
+	sawfish/wm/state/iconify.jl, sawfish/wm/state/gnome.jl: add
+	window-menu toggle items
+
+	* sawfish/wm/state/iconify.jl (window-iconified-p,
+	window-sticky-p):
+	* sawfish/wm/state/shaded.jl (window-shaded-p):
+	* sawfish/wm/state/ignored.jl (window-ignored-p): new functions
+
+	* sawfish/wm/frames.jl (frame-type-menu): broke this out of
+	sawfish.wm.menus
+
+	* sawfish/wm.jl: intern and export sawfish.wm.state.ignored
+
 2000-09-06  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/window-anim.jl, sawfish/wm/animation/outline.jl:

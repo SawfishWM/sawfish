@@ -1,3 +1,8 @@
+2000-09-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x.c: make r_fns and x_fns global, and initialize them once
+	(non-constant array initializers are a GCC extension)
+
 2000-09-05  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c (lookup_event): when canonifying shifted keysyms,

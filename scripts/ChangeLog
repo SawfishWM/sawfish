@@ -1,3 +1,20 @@
+2000-09-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish-about.jl.in: 
+
+	Open the necessary modules that aren't included in `rep'
+	structure anymore (rep.regexp, rep.system, rep.io.streams,
+	rep.io.files, rep.io.file-handlers)
+
+2000-09-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish-menu.jl: added a `(group . ID)' option, radio-items
+	are created such that all items with the same ID are in the
+	same radio group
+
+	* sawfish-menu.jl: menu items can now be dotted to an alist of
+	options. Currently the only option is `(check . BOOL)'
+
 2000-09-04  John Harper  <john@dcs.warwick.ac.uk>
 
 	* Makefile.in: make sawfish-about.jl depend on ./Makefile

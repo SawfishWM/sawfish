@@ -52,6 +52,10 @@ code more obvious
 have a read syntax. (E.g. this allows closures to be used, avoiding the
 problems arising from modularization)
 
+@item Support for checked and radio-group menu items. Also a new
+function @code{add-window-menu-toggle} to add items to the
+@samp{Toggle} sub-menu of each window
+
 @item Handle @code{ConfigureRequest} events in a way that is compliant
 with the ICCCM---honour the window's @code{win_gravity} setting
 (defaulting to @code{NorthWest} gravity), instead of assuming
@@ -105,6 +109,9 @@ ga (Seán Ó Ceallaigh), ru (Valek Filippov), sl (Andraz Tori)
 @item Bug fixes:
 
 @itemize @minus
+@item Don't let errors in @file{.sawfishrc} prevent customization
+settings being loaded
+
 @item initialize event handler when creating X window proxies (Matt
 Tucker)
 
