@@ -57,6 +57,7 @@ get-color-rgb RED GREEN BLUE
 					    &x_green, &x_blue);
 
 	f = rep_ALLOC_CELL(sizeof(Lisp_Color));
+	rep_data_after_gc += sizeof (Lisp_Color);
 	f->car = color_type;
 	f->next = color_list;
 	color_list = f;

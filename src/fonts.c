@@ -46,6 +46,7 @@ font specifier string).
 	if (font != 0)
 	{
 	    f = rep_ALLOC_CELL(sizeof(Lisp_Font));
+	    rep_data_after_gc += sizeof (Lisp_Font);
 	    f->car = font_type;
 	    f->next = font_list;
 	    font_list = f;

@@ -46,6 +46,7 @@ make_image (ImlibImage *im, repv plist)
 	    return rep_VAL(f);
     }
     f = rep_ALLOC_CELL(sizeof(Lisp_Image));
+    rep_data_after_gc += sizeof (Lisp_Image);
     f->car = image_type;
     f->next = image_list;
     image_list = f;

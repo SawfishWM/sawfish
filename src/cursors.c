@@ -59,6 +59,7 @@ X11 cursor font, or an image object.
 	if (cursor != 0)
 	{
 	    f = rep_ALLOC_CELL(sizeof(Lisp_Cursor));
+	    rep_data_after_gc += sizeof (Lisp_Cursor);
 	    f->car = cursor_type;
 	    f->next = cursor_list;
 	    cursor_list = f;

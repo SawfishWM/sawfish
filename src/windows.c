@@ -265,6 +265,7 @@ add_window (Window id)
 	if (id == root_window)
 	    DB(("  ** adding root window!?\n"));
 
+	rep_data_after_gc += sizeof (Lisp_Window);
 	memset (w, 0, sizeof (Lisp_Window));
 
 	/* First initialise the Lisp stuff.. */
