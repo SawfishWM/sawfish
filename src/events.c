@@ -452,13 +452,8 @@ reparent_notify (XEvent *ev)
     if (w != 0 && ev->xreparent.window == w->id
 	&& ev->xreparent.event == w->id)
     {
-	if (w->reparenting &&
-	    (ev->xreparent.parent == w->frame
-	     || ev->xreparent.parent == root_window))
-	{
-	    w->reparenting = FALSE;
-	}
-	else if (ev->xreparent.parent != root_window)
+	if (ev->xreparent.parent != root_window
+	    && ev->xreparent.parent != w->frame)
 	{
 	    /* Not us doing the reparenting.. */
 	    remove_window (w, Qnil, Qnil);
@@ -475,37 +470,28 @@ map_notify (XEvent *ev)
     Lisp_Window *w = find_window_by_id (ev->xmap.window);
     if (w != 0 && ev->xmap.window == w->id && ev->xmap.event == w->id)
     {
-	if (w->local_maps == 0)
+	XWindowAttributes wa;
+	XGetWindowAttributes (dpy, w->id, &wa);
+	if (wa.override_redirect)
 	{
-	    XWindowAttributes wa;
-	    XGetWindowAttributes (dpy, w->id, &wa);
-	    if (wa.override_redirect)
-	    {
-		/* arrgh, the window changed its override redirect status.. */
-		remove_window (w, Qnil, Qnil);
-	    }
-	    else
-	    {
-		/* copy in some of the new values */
-		w->attr.width = wa.width;
-		w->attr.height = wa.height;
-		w->attr.colormap = wa.colormap;
-
-		w->mapped = TRUE;
-		if (!w->reparenting)
-		{
-		    if (w->frame == 0)
-			create_window_frame (w);
-		    install_window_frame (w);
-		    if (w->visible)
-			XMapWindow (dpy, w->frame);
-		    Fcall_window_hook (Qmap_notify_hook,
-				       rep_VAL(w), Qnil, Qnil);
-		}
-	    }
+	    /* arrgh, the window changed its override redirect status.. */
+	    remove_window (w, Qnil, Qnil);
 	}
 	else
-	    w->local_maps--;
+	{
+	    /* copy in some of the new values */
+	    w->attr.width = wa.width;
+	    w->attr.height = wa.height;
+	    w->attr.colormap = wa.colormap;
+
+	    w->mapped = TRUE;
+	    if (w->frame == 0)
+		create_window_frame (w);
+	    install_window_frame (w);
+	    if (w->visible)
+		XMapWindow (dpy, w->frame);
+	    Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
+	}
     }
 }
 
@@ -515,29 +501,24 @@ unmap_notify (XEvent *ev)
     Lisp_Window *w = find_window_by_id (ev->xunmap.window);
     if (w != 0 && ev->xunmap.window == w->id && ev->xunmap.event == w->id)
     {
-	if (w->local_unmaps == 0)
+	w->mapped = FALSE;
+	if (w->reparented)
 	{
-	    if (!w->reparenting && w->frame != 0)
+	    if (w->visible)
 	    {
-		w->mapped = FALSE;
-		if (w->visible)
-		{
-		    XUnmapWindow (dpy, w->frame);
-		    reset_frame_parts (w);
-		}
-		/* Removing the frame reparents the client window back to
-		   the root. This means that we receive the next MapRequest
-		   for the window. */
-		remove_window_frame (w);
-		destroy_window_frame (w, FALSE);
-		Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
-
-		if (focus_window == w)
-		    focus_on_window (0);
+		XUnmapWindow (dpy, w->frame);
+		reset_frame_parts (w);
 	    }
+	    /* Removing the frame reparents the client window back to
+	       the root. This means that we receive the next MapRequest
+	       for the window. */
+	    remove_window_frame (w);
+	    destroy_window_frame (w, FALSE);
 	}
-	else
-	    w->local_unmaps--;
+	Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
+	
+	if (focus_window == w)
+	    focus_on_window (0);
     }
 }
 
