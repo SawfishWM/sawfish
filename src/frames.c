@@ -84,6 +84,7 @@ DEFSYM(frame_part_classes, "frame-part-classes");
 DEFSYM(override_frame_part_classes, "override-frame-part-classes");
 DEFSYM(below_client, "below-client");
 DEFSYM(scale_foreground, "scale-foreground");
+DEFSYM(hidden, "hidden");
 
 static repv state_syms[fps_MAX];
 
@@ -936,6 +937,22 @@ get_integer_prop (struct frame_part *fp, repv prop, repv class, repv ov_class)
 	return Qnil;
 }
 
+static repv
+get_boolean_prop (struct frame_part *fp, repv prop, repv class, repv ov_class)
+{
+    repv tem = fp_assq (fp, prop, class, ov_class);
+    if (tem && tem != Qnil)
+    {
+	if (Ffunctionp (rep_CDR(tem)) == Qnil)
+	    tem = rep_CDR(tem);
+	else
+	    tem = call_protectedly_1 (rep_CDR(tem), rep_VAL(fp->win), Qnil);
+	return tem;
+    }
+    else
+	return Qnil;
+}
+
 static bool
 get_pattern_prop (struct frame_part *fp, repv *data, repv (*conv)(repv data),
 		  repv prop, repv class, repv ov_class)
@@ -1063,6 +1080,9 @@ build_frame_part (struct frame_part *fp)
     }
 
     /* do we ignore this part? */
+    tem = get_boolean_prop (fp, Qhidden, class_elt, ov_class_elt);
+    if (tem != Qnil)
+	goto next_part;
     tem = Fassq (Qremovable, fp->alist);
     if (tem && tem != Qnil && rep_CDR(tem) != Qnil)
     {
@@ -1075,9 +1095,9 @@ build_frame_part (struct frame_part *fp)
 	}
     }
 
-    tem = fp_assq (fp, Qbelow_client, class_elt, ov_class_elt);
+    tem = get_boolean_prop (fp, Qbelow_client, class_elt, ov_class_elt);
     fp->below_client = (tem && tem != Qnil);
-    tem = fp_assq (fp, Qscale_foreground, class_elt, ov_class_elt);
+    tem = get_boolean_prop (fp, Qscale_foreground, class_elt, ov_class_elt);
     fp->scale_foreground = (tem && tem != Qnil);
 
     /* get text label */
@@ -1830,6 +1850,7 @@ frames_init (void)
     rep_INTERN(removed_classes);
     rep_INTERN(below_client);
     rep_INTERN(scale_foreground);
+    rep_INTERN(hidden);
 
     rep_INTERN_SPECIAL(frame_part_classes);
     rep_INTERN_SPECIAL(override_frame_part_classes);
