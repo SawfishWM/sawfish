@@ -1,3 +1,45 @@
+2000-07-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* Makefile.in: support GNOME and non-GNOME installations
+
+	* nokogiri-widgets/workspace-geometry.jl: new widget, uses
+	GNOME canvas to draw workspace/viewport representation
+
+	* nokogiri-widgets/pair.jl: new optional arg, USE-VBOX
+
+	* nokogiri-widgets/icon.jl: new widget, mostly from Bruce
+	Miller <docmad@md.prestige.net>
+
+	* nokogiri-widgets/frame-style.jl: accepts a doc string
+
+	* nokogiri-widget-test.jl (test-widget): added optional arg
+	INITIAL-VALUE
+
+	* nokogiri-no-gnome.jl, nokogiri-gnome.jl: new files
+
+	* nokogiri-interfaces.jl.in: contains all module interfaces
+
+	* nokogiri-wm.jl, nokogiri-widget.jl,
+	nokogiri-widget-dialog.jl, nokogiri-user-level.jl,
+	nokogiri-slot.jl, nokogiri-shell.jl, nokogiri-layout.jl,
+	nokogiri-i18n.jl, nokogiri-group.jl, nokogiri-dialog.jl,
+	nokogiri-config.jl, nokogiri-color-preview.jl,
+	nokogiri-apply.jl: moved module interfaces to
+	nokogiri-interfaces.jl.in
+
+	* nokogiri-widget.jl (widget-accepts-doc-string,
+	widget-accepts-doc-string-p): functions to allow passing of doc
+	strings to widgets
+
+	* nokogiri-dialog.jl: use stock-button, don't grab the window
+	(e.g. it breaks GnomeIconEntry)
+
+	* nokogiri-shell.jl (initialize-shell): use stock-button to
+	create buttons
+
+	* nokogiri-slot.jl (make-slot-widget): pass doc strings to
+	widgets that accept them
+
 2000-07-03  John Harper  <john@dcs.warwick.ac.uk>
 
 	* nokogiri-group.jl (make-group-tree): translate real-name

@@ -5,8 +5,6 @@
 
   + reversed dependences? i.e. `:depends (not foo)'
 
-  + decide whether to use GNOME widgets or not
-
   + more widgets:
 
 	(table ("NAME" ...) (WIDGET ...))	[doable]
@@ -27,6 +25,12 @@
 --
 
 Items that have been committed:
+
+  + decide whether to use GNOME widgets or not
+
+    [ all GNOME-specific code must either be in nokogiri-gnome or in
+      separate files in nokogiri-widgets, with Gtk+ equivalents in
+      nokogiri-no-gnome ]
 
   + support arguments to commands in keymaps
 

@@ -97,8 +97,6 @@ Outstanding bugs
     decoration is not drawn, only if i move the window or release the
     button
 
-  + features can't be both enabled via customization and demand-loaded
-
   + write documentation: workspaces, viewports, window groups, alist
     frame patterns, frame parts as objects, placement, focus modes,
     symbolic event structures...
@@ -136,7 +134,7 @@ Window manager tasks
 
     [ I've implemented most of the draft spec now ]
 
-  + sound themes, and/or some method of configuring individual samples
+  + sound themes
 
   + drag-and-drop to configure window appearance?
 
@@ -146,17 +144,6 @@ Window manager tasks
     add a hook (frame-part-drop-hook?)
 
     also allow theme files to be dropped on windows
-
-  + Support other visuals
-
-  + revamp the autoload system, and handle both customizations and
-    functions
-
-    scan all lisp files in directories outside of lisp-lib-directory
-    and sawmill-lisp-lib-directory for autoload decls
-
-    make sawmill-ui extract defcustom decls straight from lisp files
-    somehow?
 
   + add a (destroyed . FUN) attribute to display-message
 
@@ -170,13 +157,6 @@ Window manager tasks
   + add option to prevent workspace switching while cycling
 
   + threshold options to control window-move sensitivity?
-
-  + wrap-around option for moving viewports
-
-  + allow workspaces to be named?
-
-    this is done, set the workspace-names variable to a list of
-    strings; but it's not yet customizable through the ui
 
   + in interactive placement, allow the window-pointer position to be
     configurable 
