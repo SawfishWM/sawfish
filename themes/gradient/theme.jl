@@ -30,7 +30,7 @@
 
 (defgroup gradient-frame "Gradient frame")
 
-(defcustom gradient:gradient:type 'horizontal
+(defcustom gradient:gradient-type 'horizontal
   "Direction of gradient in `gradient' frame style."
   :type (set horizontal vertical diagonal)
   :group gradient-frame
@@ -73,11 +73,11 @@
 			     nil nil (make-image "as_close-b.png")))
 
 (defun gradient:render-bg (img state)
-  (apply (cond ((eq gradient:gradient:type 'diagonal)
+  (apply (cond ((eq gradient:gradient-type 'diagonal)
 		'draw-diagonal-gradient)
-	       ((eq gradient:gradient:type 'horizontal)
+	       ((eq gradient:gradient-type 'horizontal)
 		'draw-horizontal-gradient)
-	       ((eq gradient:gradient:type 'vertical)
+	       ((eq gradient:gradient-type 'vertical)
 		'draw-vertical-gradient))
 	 img (if state
 		 (list gradient:active-from-color gradient:active-to-color)
