@@ -29,62 +29,62 @@
     ((image-load-path (cons (expand-file-name "brushed-metal" image-directory) 
 			    image-load-path)))
   ;; 217x4
-  (defvar bm-bottom-image (make-image "b6-.png"))
-  (defvar bm-bottom-hl-image (make-image "b6.png"))
-  (defvar bm-top-image (make-image "b2-.png"))
-  (defvar bm-top-hl-image (make-image "b2.png"))
+  (defvar bm-bottom-images (list (make-image "b6-.png")
+				 (make-image "b6.png")))
+  (defvar bm-top-images (list (make-image "b2-.png")
+			      (make-image "b2.png")))
 
   ;; 4x217
-  (defvar bm-right-image (copy-image bm-bottom-image))
-  (flip-image-diagonally bm-right-image)
-  (defvar bm-right-hl-image (copy-image bm-bottom-hl-image))
-  (flip-image-diagonally bm-right-hl-image)
+  (defvar bm-right-images (list (flip-image-diagonally
+				 (copy-image (nth 0 bm-bottom-images)))
+				(flip-image-diagonally
+				 (copy-image (nth 1 bm-bottom-images)))))
 
   ;; 4x219
-  (defvar bm-left-image (copy-image bm-top-image))
-  (flip-image-diagonally bm-left-image)
-  (defvar bm-left-hl-image (copy-image bm-top-hl-image))
-  (flip-image-diagonally bm-left-hl-image)
+  (defvar bm-left-images (list (flip-image-diagonally
+				(copy-image (nth 0 bm-top-images)))
+			       (flip-image-diagonally
+				(copy-image (nth 1 bm-top-images)))))
 
   ;; 4x4
-  (defvar bm-top-left-image (make-image "b1-.png"))
-  (defvar bm-top-left-hl-image (make-image "b1.png"))
-  (defvar bm-bottom-left-image (make-image "b7-.png"))
-  (defvar bm-bottom-left-hl-image (make-image "b7.png"))
-  (defvar bm-top-right-image (make-image "b3-.png"))
-  (defvar bm-top-right-hl-image (make-image "b3.png"))
-  (defvar bm-bottom-right-image (make-image "b5-.png"))
-  (defvar bm-bottom-right-hl-image (make-image "b5.png"))
+  (defvar bm-top-left-images (list (make-image "b1-.png")
+				   (make-image "b1.png")))
+  (defvar bm-bottom-left-images (list (make-image "b7-.png")
+				      (make-image "b7.png")))
+  (defvar bm-top-right-images (list (make-image "b3-.png")
+				    (make-image "b3.png")))
+  (defvar bm-bottom-right-images (list (make-image "b5-.png")
+				       (make-image "b5.png")))
 
   ;; 21x15
-  (defvar bm-menu-image (make-image "t1-.png"))
-  (defvar bm-menu-hl-image (make-image "t1.png"))
-  (defvar bm-menu-clicked-image (make-image "t1-b.png"))
-  (defvar bm-menu-hl-clicked-image (make-image "t1b.png"))
+  (defvar bm-menu-images (list (make-image "t1-.png")
+			       (make-image "t1.png")
+			       (make-image "t1-b.png")
+			       (make-image "t1b.png")))
 
   ;; 150x15
-  (defvar bm-title-image (make-image "t2-.png"))
-  (set-image-border bm-title-image 10 10 0 0)
-  (defvar bm-title-hl-image (make-image "t2.png"))
-  (set-image-border bm-title-hl-image 10 10 0 0)
+  (defvar bm-title-images (list (set-image-border
+				 (make-image "t2-.png") 10 10 0 0)
+				(set-image-border
+				 (make-image "t2.png") 10 10 0 0)))
 
   ;; 17x15
-  (defvar bm-iconify-image (make-image "t3-.png"))
-  (defvar bm-iconify-hl-image (make-image "t3.png"))
-  (defvar bm-iconify-clicked-image (make-image "t3-b.png"))
-  (defvar bm-iconify-hl-clicked-image (make-image "t3b.png"))
+  (defvar bm-iconify-images (list (make-image "t3-.png")
+				  (make-image "t3.png")
+				  (make-image "t3-b.png")
+				  (make-image "t3b.png")))
 
   ;; 14x15
-  (defvar bm-maximize-image (make-image "t4-.png"))
-  (defvar bm-maximize-hl-image (make-image "t4.png"))
-  (defvar bm-maximize-clicked-image (make-image "t4-b.png"))
-  (defvar bm-maximize-hl-clicked-image (make-image "t4b.png"))
+  (defvar bm-maximize-images (list (make-image "t4-.png")
+				   (make-image "t4.png")
+				   (make-image "t4-b.png")
+				   (make-image "t4b.png")))
 
   ;; 14x15
-  (defvar bm-close-image (make-image "t5-.png"))
-  (defvar bm-close-hl-image (make-image "t5.png"))
-  (defvar bm-close-clicked-image (make-image "t5-b.png"))
-  (defvar bm-close-hl-clicked-image (make-image "t5b.png")))
+  (defvar bm-close-images (list (make-image "t5-.png")
+				(make-image "t5.png")
+				(make-image "t5-b.png")
+				(make-image "t5b.png"))))
 
 
 ;; frame layout
@@ -92,14 +92,13 @@
 (put 'brushed-metal-frame 'unshaped t)
 (defvar brushed-metal-frame
  `(;; menu button
-   ((background . (,bm-menu-image ,bm-menu-hl-image
-		   ,bm-menu-clicked-image ,bm-menu-hl-clicked-image))
+   ((background . ,bm-menu-images)
     (top-edge . -15)
     (left-edge . 0)
     (keymap . menu-button-keymap))
 
    ;; title bar
-   ((background . (,bm-title-image ,bm-title-hl-image))
+   ((background . ,bm-title-images)
     (foreground . "black")
     (text . window-name)
     (x-justify . 10)
@@ -111,28 +110,25 @@
     (keymap . title-keymap))
 
    ;; iconify button
-   ((background . (,bm-iconify-image ,bm-iconify-hl-image
-		   ,bm-iconify-clicked-image ,bm-iconify-hl-clicked-image))
+   ((background . ,bm-iconify-images)
     (right-edge . 28)
     (top-edge . -15)
     (keymap . iconify-button-keymap))
 
    ;; maximize button
-   ((background . (,bm-maximize-image ,bm-maximize-hl-image
-		   ,bm-maximize-clicked-image ,bm-maximize-hl-clicked-image))
+   ((background . ,bm-maximize-images)
     (right-edge . 14)
     (top-edge . -15)
     (keymap . maximize-button-keymap))
 
    ;; delete button
-   ((background . (,bm-close-image ,bm-close-hl-image
-		   ,bm-close-clicked-image ,bm-close-hl-clicked-image))
+   ((background . ,bm-close-images)
     (right-edge . 0)
     (top-edge . -15)
     (keymap . close-button-keymap))
 
    ;; left border
-   ((background . (,bm-left-image ,bm-left-hl-image))
+   ((background . ,bm-left-images)
     (left-edge . -4)
     (top-edge . -15)
     (bottom-edge . 0)
@@ -140,7 +136,7 @@
     (keymap . title-keymap))
 
    ;; right border
-   ((background . (,bm-right-image ,bm-right-hl-image))
+   ((background . ,bm-right-images)
     (right-edge . -4)
     (top-edge . -15)
     (bottom-edge . 0)
@@ -148,7 +144,7 @@
     (keymap . title-keymap))
 
    ;; top border
-   ((background . (,bm-top-image ,bm-top-hl-image))
+   ((background . ,bm-top-images)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -19)
@@ -156,7 +152,7 @@
     (keymap . title-keymap))
 
    ;; bottom border
-   ((background . (,bm-bottom-image ,bm-bottom-hl-image))
+   ((background . ,bm-bottom-images)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
@@ -164,36 +160,35 @@
     (keymap . title-keymap))
 
    ;; top-left corner
-   ((background . (,bm-top-left-image ,bm-top-left-hl-image))
+   ((background . ,bm-top-left-images)
     (left-edge . -4)
     (top-edge . -19))
 
    ;; top-right corner
-   ((background . (,bm-top-right-image ,bm-top-right-hl-image))
+   ((background . ,bm-top-right-images)
     (right-edge . -4)
     (top-edge . -19))
 
    ;; bottom-left corner
-   ((background . (,bm-bottom-left-image ,bm-bottom-left-hl-image))
+   ((background . ,bm-bottom-left-images)
     (left-edge . -4)
     (bottom-edge . -4))
 
    ;; bottom-right corner
-   ((background . (,bm-bottom-right-image ,bm-bottom-right-hl-image))
+   ((background . ,bm-bottom-right-images)
     (right-edge . -4)
     (bottom-edge . -4))))
 
 (put 'brushed-metal-shaped-frame 'unshaped t)
 (defvar brushed-metal-shaped-frame
  `(;; menu button
-   ((background . (,bm-menu-image ,bm-menu-hl-image
-		   ,bm-menu-clicked-image ,bm-menu-hl-clicked-image))
+   ((background . ,bm-menu-images)
     (top-edge . -19)
     (left-edge . 0)
     (keymap . menu-button-keymap))
 
    ;; title bar
-   ((background . (,bm-title-image ,bm-title-hl-image))
+   ((background . ,bm-title-images)
     (foreground . "black")
     (text . window-name)
     (x-justify . 10)
@@ -205,28 +200,25 @@
     (keymap . title-keymap))
 
    ;; iconify button
-   ((background . (,bm-iconify-image ,bm-iconify-hl-image
-		   ,bm-iconify-clicked-image ,bm-iconify-hl-clicked-image))
+   ((background . ,bm-iconify-images)
     (right-edge . 28)
     (top-edge . -19)
     (keymap . iconify-button-keymap))
 
    ;; maximize button
-   ((background . (,bm-maximize-image ,bm-maximize-hl-image
-		   ,bm-maximize-clicked-image ,bm-maximize-hl-clicked-image))
+   ((background . ,bm-maximize-images)
     (right-edge . 14)
     (top-edge . -19)
     (keymap . maximize-button-keymap))
 
    ;; delete button
-   ((background . (,bm-close-image ,bm-close-hl-image
-		   ,bm-close-clicked-image ,bm-close-hl-clicked-image))
+   ((background . ,bm-close-images)
     (right-edge . 0)
     (top-edge . -19)
     (keymap . close-button-keymap))
 
    ;; top border
-   ((background . (,bm-top-image ,bm-top-hl-image))
+   ((background . ,bm-top-images)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -23)
@@ -234,7 +226,7 @@
     (keymap . title-keymap))
 
    ;; bottom border
-   ((background . (,bm-bottom-image ,bm-bottom-hl-image))
+   ((background . ,bm-bottom-images)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -4)
@@ -242,7 +234,7 @@
     (keymap . title-keymap))
 
    ;; left border
-   ((background . (,bm-left-image ,bm-left-hl-image))
+   ((background . ,bm-left-images)
     (left-edge . -4)
     (top-edge . -19)
     (height . 15)
@@ -250,7 +242,7 @@
     (keymap . title-keymap))
 
    ;; right border
-   ((background . (,bm-right-image ,bm-right-hl-image))
+   ((background . ,bm-right-images)
     (right-edge . -4)
     (top-edge . -19)
     (height . 15)
@@ -258,29 +250,29 @@
     (keymap . title-keymap))
 
    ;; top-left corner
-   ((background . (,bm-top-left-image ,bm-top-left-hl-image))
+   ((background . ,bm-top-left-images)
     (left-edge . -4)
     (top-edge . -23))
 
    ;; top-right corner
-   ((background . (,bm-top-right-image ,bm-top-right-hl-image))
+   ((background . ,bm-top-right-images)
     (right-edge . -4)
     (top-edge . -23))
 
    ;; bottom-left corner
-   ((background . (,bm-bottom-left-image ,bm-bottom-left-hl-image))
+   ((background . ,bm-bottom-left-images)
     (left-edge . -4)
     (top-edge . -4))
 
    ;; bottom-right corner
-   ((background . (,bm-bottom-right-image ,bm-bottom-right-hl-image))
+   ((background . ,bm-bottom-right-images)
     (right-edge . -4)
     (top-edge . -4))))
 
 (put 'brushed-metal-transient-frame 'unshaped t)
 (defvar brushed-metal-transient-frame
   `(;; top
-    ((background . (,bm-top-image ,bm-top-hl-image))
+    ((background . ,bm-top-images)
      (left-edge . 0)
      (right-edge . 0)
      (top-edge . -4)
@@ -288,7 +280,7 @@
      (keymap . title-keymap))
 
     ;; bottom
-    ((background . (,bm-bottom-image ,bm-bottom-hl-image))
+    ((background . ,bm-bottom-images)
      (left-edge . 0)
      (right-edge . 0)
      (bottom-edge . -4)
@@ -296,7 +288,7 @@
      (keymap . title-keymap))
 
    ;; left border
-   ((background . (,bm-left-image ,bm-left-hl-image))
+   ((background . ,bm-left-images)
     (left-edge . -4)
     (top-edge . -4)
     (bottom-edge . 0)
@@ -304,7 +296,7 @@
     (keymap . title-keymap))
 
    ;; right border
-   ((background . (,bm-right-image ,bm-right-hl-image))
+   ((background . ,bm-right-images)
     (right-edge . -4)
     (top-edge . -4)
     (bottom-edge . 0)
@@ -312,22 +304,22 @@
     (keymap . title-keymap))
 
    ;; top-left corner
-   ((background . (,bm-top-left-image ,bm-top-left-hl-image))
+   ((background . ,bm-top-left-images)
     (left-edge . -4)
     (top-edge . -4))
 
    ;; top-right corner
-   ((background . (,bm-top-right-image ,bm-top-right-hl-image))
+   ((background . ,bm-top-right-images)
     (right-edge . -4)
     (top-edge . -4))
 
    ;; bottom-left corner
-   ((background . (,bm-bottom-left-image ,bm-bottom-left-hl-image))
+   ((background . ,bm-bottom-left-images)
     (left-edge . -4)
     (bottom-edge . -4))
 
    ;; bottom-right corner
-   ((background . (,bm-bottom-right-image ,bm-bottom-right-hl-image))
+   ((background . ,bm-bottom-right-images)
     (right-edge . -4)
     (bottom-edge . -4))))
 
