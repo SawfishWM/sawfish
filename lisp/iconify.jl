@@ -45,12 +45,13 @@
   (interactive "%W")
   (when (window-get w 'iconified)
     (window-put w 'iconified nil)
-    (cond ((or (window-get w 'sticky)
-	       (window-in-workspace-p w current-workspace))
+    (cond ((window-get w 'sticky)
 	   (show-window w))
 	  (uniconify-to-current-workspace
 	   (ws-remove-window w)
-	   (ws-add-window-to-space w current-workspace)))
+	   (ws-add-window-to-space w current-workspace))
+	  ((window-in-workspace-p w current-workspace)
+	   (show-window w)))
     (when raise-windows-on-uniconify
       (raise-window w))
     (when (and focus-windows-on-uniconify (window-really-wants-input-p w))
