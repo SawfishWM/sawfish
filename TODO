@@ -55,10 +55,9 @@ Outstanding bugs
   ! desk-guide misinterprets the window geometries when there's more
     than one workspace, with multiple viewports
 
-    (it looks as though it expects only windows on the _current_
-    workspace to be moved with the viewport; the old gnome pager gets
-    this right, so I don't think it's my fault. But enlightenment works
-    with desk-guide but not with the old pager..!?)
+    I've got a patch to add support for a _WIN_UNIFIED_AREA root
+    property to desk-guide; this uses the old gnome pager behaviour of
+    moving the viewport on all workspaces when _WIN_AREA is changed
 
     also, when workspaces are added it sometimes doesn't notice that
     the contents of the current workspace changed (since it still has

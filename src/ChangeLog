@@ -1,5 +1,9 @@
 1999-10-05  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill.h (struct frame_part): new bit `below_client'
+	* frames.c: recognize `(below-client . t)' attribute in frame
+	part, when set, the part's window is kept _below_ the client
+
 	* windows.c (remove_window): release passive grabs
 
 	* client.c: include readline support from Christopher P Goller

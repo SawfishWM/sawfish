@@ -1434,6 +1434,11 @@ When specified and @var{value} is non-nil, this frame part may be
 removed from the frame without being detrimental to the overall
 appearance of the frame. This is only important for button classes,
 which may sometimes be removed at the request of the client window.
+
+@item (below-client . @var{value})
+When specified and @var{value} is non-nil, then this frame part will be
+displayed beneath the client window. The default action is for frame
+parts to be stacked above the client window.
 @end table
 
 The values specified for the @code{background}, @code{foreground},
