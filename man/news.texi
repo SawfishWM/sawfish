@@ -6,6 +6,20 @@ This lists the user-visible changes made to Sawmill, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
+
+@section 0.3
+
+@itemize @bullet
+
+@item Added support for snapping to window edges when interactively
+moving windows (@code{move-snap-edges} and @code{move-snap-epsilon})
+
+@item Fixed the bug on Solaris where deleting windows could cause a
+segmentation fault
+
+@end itemize
+
+
 @section 0.2
 
 @itemize @bullet
@@ -58,6 +72,7 @@ window, even if they needn't be
 @item Miscellaneous other bug-fixes
 
 @end itemize
+
 
 @section 0.1
 
