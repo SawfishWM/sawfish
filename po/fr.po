@@ -2,17 +2,17 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Christian Gillot <cgillot@free.fr>, 1999, 2000.
 # Joaquim Fellmann <joaquim@hrnet.fr>, 2000.
-# Christian Marillat <marillat.christian@wanadoo.fr>
+# Christian Marillat <marillat.christian@wanadoo.fr>, 2000.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.30.2\n"
 "POT-Creation-Date: 2000-07-16 09:53+0200\n"
-"PO-Revision-Date: 2000-07-18 18:11+02:00\n"
-"Last-Translator: Joaquim Fellmann <joaquim@hrnet.fr>\n"
+"PO-Revision-Date: 2000-07-20 15:29+02:00\n"
+"Last-Translator: Christian Marillat <marillat.christian@wanadoo.fr>\n"
 "Language-Team: Gnome French Team <gnomefr@gnomefr.traduc.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-15\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ../lisp/autoload.jl
@@ -32,7 +32,7 @@ msgstr "Activer les effets audio pour les fenêtres non gérées."
 
 #. ../lisp/audio-events.jl
 msgid "Map window events to sound files."
-msgstr ""
+msgstr "Associer les évènements des fenêtres a un fichier son."
 
 #. ../lisp/audio-events.jl
 msgid "Event"
@@ -57,9 +57,8 @@ msgstr "Bord coulissant"
 # ../lisp/match-window.jl
 #. ../lisp/match-window.jl
 #. ../lisp/autoload.jl
-#, fuzzy
 msgid "Matched Windows"
-msgstr "Fenêtres Correspondantes"
+msgstr ""
 
 # ../lisp/tooltips.jl
 #. ../lisp/tooltips.jl
@@ -93,6 +92,8 @@ msgstr ""
 #. ../lisp/configure.jl
 msgid "Automatically select window gravity from position on screen."
 msgstr ""
+"Sélectionner automatiquement la gravité de la fenêtre\n"
+"à cette position de l'écran."
 
 # ../lisp/customize.jl
 #. ../lisp/customize.jl
@@ -208,7 +209,7 @@ msgstr "Basculer uniquement lors du déplacement interactif d'une fenêtre."
 
 #. ../lisp/edge-flip.jl
 msgid "Milliseconds to delay before flipping: \\w"
-msgstr "Delai en millisecondes avant de basculer : \\w"
+msgstr "Délai en millisecondes avant de basculer : \\w"
 
 #. ../lisp/edge-flip.jl
 msgid "Warp pointer to opposite screen edge when flipping."
@@ -298,6 +299,8 @@ msgid ""
 "Format to create unique window names. Has two arguments (NAME INDEX)\n"
 "applied to it."
 msgstr ""
+"Format pour créer les noms de fenêtre unique. Deux arguments\n"
+"seront appliqués (NAME INDEX)"
 
 # ../lisp/functions.jl
 #. ../lisp/functions.jl
@@ -306,7 +309,7 @@ msgstr "Démarrer un nouveau xterm."
 
 #. ../lisp/functions.jl
 msgid "Execute the given shell command."
-msgstr "Executer la commande shell spécifiée."
+msgstr "Exécuter la commande shell spécifiée."
 
 # ../src/sawmill-ui.jl
 #. ../lisp/functions.jl
@@ -342,32 +345,32 @@ msgstr ""
 # ../lisp/gnome-commands.jl
 #. ../lisp/gnome-commands.jl
 msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-msgstr ""
+msgstr "Inverser le GNOME SKIP_WINLIST de la fenêtre."
 
 # ../lisp/gnome-commands.jl
 #. ../lisp/gnome-commands.jl
 msgid "Set the GNOME SKIP_WINLIST hint of the window."
-msgstr ""
+msgstr "Sélectionner le GNOME SKIP_WINLIST de la fenêtre."
 
 # ../lisp/gnome-commands.jl
 #. ../lisp/gnome-commands.jl
 msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-msgstr ""
+msgstr "Désélectionner le GNOME SKIP_WINLIST de la fenêtre."
 
 # ../lisp/gnome-commands.jl
 #. ../lisp/gnome-commands.jl
 msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-msgstr ""
+msgstr "Inverser le GNOME SKIP_TASKLIS de la fenêtre."
 
 # ../lisp/gnome-commands.jl
 #. ../lisp/gnome-commands.jl
 msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-msgstr ""
+msgstr "Sélectionner le GNOME SKIP_TASKLIST de la fenêtre."
 
 # ../lisp/gnome-commands.jl
 #. ../lisp/gnome-commands.jl
 msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-msgstr ""
+msgstr "Désélectionner le GNOME SKIP_TASKLIST de la fenêtre."
 
 # ../lisp/sm-init.jl
 #. ../lisp/gnome-commands.jl
@@ -380,7 +383,7 @@ msgstr "Lancer le navigateur d'aide Gnome."
 
 #. ../lisp/gnome-int.jl
 msgid "Invoke the GNOME control center from the `Customize' menu."
-msgstr "Appeler le centre de control Gnome à partir du menu `configuration'."
+msgstr "Appeler le centre de contrôle Gnome à partir du menu `configuration'."
 
 #. ../lisp/menus.jl
 #. ../lisp/gnome-int.jl
@@ -413,9 +416,8 @@ msgid "New group"
 msgstr "Nouveau groupe"
 
 #. ../lisp/grow-pack.jl
-#, fuzzy
 msgid "Whether growing an already grown window grows it again."
-msgstr "Si agrandir une fenêtre déjà grande l'agrandit encore."
+msgstr "Si agrandir une fenêtre déjà grande, l'agrandit encore."
 
 #. ../lisp/grow-pack.jl
 msgid ""
@@ -476,16 +478,16 @@ msgstr "Recharger les paramètres gtkrc."
 
 #. ../lisp/iconify.jl
 msgid "Unmanaged windows may be iconified."
-msgstr "Les fenêtres non gérées peuvent être modifiées"
+msgstr "Les fenêtres non gérées peuvent être icônifiées"
 
 #. ../lisp/iconify.jl
 msgid "Iconifying a window also iconifies the: \\w"
-msgstr "Icônifier une fenêtre icônifie aussi le: \\w"
+msgstr "Icônifier une fenêtre icônifie aussi le : \\w"
 
 # ../lisp/workspace.jl
 #. ../lisp/iconify.jl
 msgid "Uniconifying a window also uniconifies the: \\w"
-msgstr "Déicônifier une fenêtre déicônifie aussi le: \\w"
+msgstr "Déicônifier une fenêtre déicônifie aussi le : \\w"
 
 # ../lisp/workspace.jl
 #. ../lisp/iconify.jl
@@ -499,17 +501,17 @@ msgstr "Retourner la fenêtre à son état icônifié."
 
 #. ../lisp/iconify.jl
 msgid "Toggle the iconification of window W."
-msgstr "Inverser l'icônification de la fenêtre W."
+msgstr "Inverser l'icônification de la fenêtre F."
 
 # ../lisp/workspace.jl
 #. ../lisp/iconify.jl
 msgid "Display the workspace/viewport containing the window W."
-msgstr "Afficher le bureau/visuel contenant la fenêtre W."
+msgstr "Afficher le bureau/visuel contenant la fenêtre F."
 
 # ../lisp/workspace.jl
 #. ../lisp/iconify.jl
 msgid "Display the workspace containing the window W, then focus on W."
-msgstr "Afficher les bureaux contenant la fenêtre F, puis donner le focus à F."
+msgstr "Afficher le bureau contenant la fenêtre F, puis donner le focus à F."
 
 # ../lisp/cycle.jl
 #. ../lisp/iconify.jl
@@ -560,12 +562,12 @@ msgid ""
 "any window manager bindings that it may have."
 msgstr ""
 "Envois le prochain évènement clavier directement à la fenêtre cliente\n"
-"possédant le focus, en ignorant tous les racourcis du gestionnaire de\n"
+"possédant le focus, en ignorant tous les raccourcis du gestionnaire de\n"
 "fenêtres."
 
 #. ../lisp/keymap.jl
 msgid "[Quote]"
-msgstr ""
+msgstr "[citer]"
 
 # ../lisp/keymaps.jl
 #. ../lisp/keymaps.jl
@@ -651,9 +653,8 @@ msgstr ""
 "testés dans cette table.)"
 
 #. ../lisp/match-window.jl
-#, fuzzy
 msgid "State"
-msgstr "Etat"
+msgstr "État"
 
 # ../src/sawmill-ui.jl
 #. ../lisp/match-window.jl
@@ -695,12 +696,12 @@ msgstr "Restorer les dimensions d'une fenêtre à son état originel, démaximisé."
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
 msgid "Maximize the vertical dimension of the window."
-msgstr "Maximiser les dimensions verticales d'une fenêtre."
+msgstr "Maximiser verticalement cette fenêtre."
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
 msgid "Maximize the horizontal dimension of the window."
-msgstr "Maximiser les dimensions verticales d'une fenêtre."
+msgstr "Maximiser horizontalement cette fenêtre."
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
@@ -736,7 +737,7 @@ msgstr "Maximiser verticalement la fenêtre sans recouvrir une autre fenêtre."
 #. ../lisp/maximize.jl
 msgid ""
 "Toggle the state of the window between maximized-filled and unmaximized."
-msgstr "Basculer l'état de la fenêtre entre maximisé-plein et démaximisé."
+msgstr "Basculer l'état de la fenêtre entre maximisé entièrement et démaximisé."
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
@@ -744,7 +745,7 @@ msgid ""
 "Toggle the state of the window between vertically maximized-filled and\n"
 "unmaximized."
 msgstr ""
-"Basculer l'état de la fenêtre entre verticalement maximisé-plein et "
+"Basculer l'état de la fenêtre entre verticalement maximisé-plein et\n"
 "démaximisé."
 
 # ../lisp/maximize.jl
@@ -959,22 +960,22 @@ msgstr "Dans la liste des tâches"
 # ../lisp/menus.jl
 #. ../lisp/menus.jl
 msgid "_Windows"
-msgstr "Fenêtres"
+msgstr "_Fenêtres"
 
 # ../lisp/custom.jl
 #. ../lisp/menus.jl
 msgid "Work_spaces"
-msgstr "Bureaux"
+msgstr "_Bureaux"
 
 # ../lisp/menus.jl
 #. ../lisp/menus.jl
 msgid "_Programs"
-msgstr "_Programmes"
+msgstr "Pro_grammes"
 
 # ../lisp/menus.jl
 #. ../lisp/menus.jl
 msgid "_Customize"
-msgstr "Personnaliser"
+msgstr "_Personnaliser"
 
 #. ../lisp/menus.jl
 msgid "_FAQ"
@@ -1034,11 +1035,11 @@ msgstr "Déplacer le curseur `move-cursor-increment' pixels vers la droite."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels upwards."
-msgstr ""
+msgstr "Déplacer le curseur `move-cursor-increment' pixels vers le haut."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels downwards."
-msgstr ""
+msgstr "Déplacer le curseur `move-cursor-increment' pixels vers le bas."
 
 # ../lisp/workspace.jl
 #. ../lisp/move-cursor.jl
@@ -1061,7 +1062,7 @@ msgstr "Déplacer le curseur d'1 pixel vers le bas."
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
 msgid "How windows being moved are animated: \\w"
-msgstr "Combien de fenêtre déplacées seront animées: \\w"
+msgstr "Combien de fenêtre déplacées seront animées : \\w"
 
 #. ../lisp/move-resize.jl
 msgid "How windows being resized are animated: \\w"
@@ -1082,12 +1083,11 @@ msgstr "Afficher la position de la fenêtre pendant son déplacement."
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
 msgid "Show current dimensions of windows while resizing."
-msgstr "Afficher les dimensions de la fenêtre pendant son reimensionnement."
+msgstr "Afficher les dimensions de la fenêtre pendant son redimensionnement."
 
 #. ../lisp/move-resize.jl
 msgid "How to choose window edges when resizing: \\w"
-msgstr "Comment choisir les bords de la fenêtre lors du redimenssionnement"
-": \\w"
+msgstr "Comment choisir les bords de la fenêtre lors du redimensionnement : \\w"
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
@@ -1103,7 +1103,7 @@ msgstr ""
 
 #. ../lisp/move-resize.jl
 msgid "How to snap together window edges: \\w"
-msgstr "Comment attirer ensemble deux fenêtres: \\w"
+msgstr "Comment attirer ensemble deux fenêtres : \\w"
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
@@ -1149,7 +1149,7 @@ msgstr ""
 
 #. ../lisp/nokogiri-sawfish.jl
 msgid "Show options suitable for \\w users."
-msgstr ""
+msgstr "Afficher les options pour l'utilisateur \\w."
 
 #. ../lisp/nokogiri-sawfish.jl
 msgid "Buttons shown in configurator: \\w"
@@ -1210,11 +1210,11 @@ msgstr "Effacer le reste de la ligne."
 
 #. ../lisp/prompt.jl
 msgid "Move to next non-word character."
-msgstr "Se déplacer au prochain charactère hors du mot."
+msgstr "Aller au prochain caractère hors du mot."
 
 #. ../lisp/prompt.jl
 msgid "Move to previous non-word character."
-msgstr "Se déplacer au caractère précédant hors du mot."
+msgstr "Aller au caractère précédant hors du mot."
 
 #. ../lisp/prompt.jl
 msgid "Move forward one character."
@@ -1226,11 +1226,11 @@ msgstr "Se déplacer d'un caractère en arrière."
 
 #. ../lisp/prompt.jl
 msgid "Move to beginning of line."
-msgstr "Se déplacer au début de la ligne."
+msgstr "Aller au début de la ligne."
 
 #. ../lisp/prompt.jl
 msgid "Move to end of line."
-msgstr "Se déplacer à la fin de la ligne."
+msgstr "Aller à la fin de la ligne."
 
 # ../lisp/menus.jl
 #. ../lisp/prompt-wm.jl
@@ -1294,6 +1294,8 @@ msgid ""
 "Enable shade-hover mode.\n"
 "(Temporarily unshade windows while pointer is over them.)"
 msgstr ""
+"Activer le mode shade-over.\n"
+"(Enlever temporairement le focus de la fenêtre quand la souris passe dessus)."
 
 # ../lisp/auto-raise.jl
 #. ../lisp/shade-hover.jl
@@ -1319,7 +1321,7 @@ msgid ""
 "If the window is shaded (see `shade-window'), restore it to it's usual\n"
 "state."
 msgstr ""
-"Si la fenêtre est ombrée (voir < fenêtre-ombrée >), la restaurer dans\n"
+"Si la fenêtre est ombrée (voir `fenêtre-ombrée'), la restaurer dans\n"
 "son état habituel."
 
 # ../lisp/shading.jl
@@ -1335,6 +1337,8 @@ msgid ""
 "Default increment for size-window commands (when the window doesn't specify\n"
 "it's own increments)."
 msgstr ""
+"Incrément par défaut pour la taille de la fenêtre (quand la fenêtre\n"
+"n'a pas son propre incrément)."
 
 #. ../lisp/size-window.jl
 msgid "Increase the size of the current window by one row."
@@ -1417,7 +1421,7 @@ msgstr ""
 # ../lisp/stacking.jl
 #. ../lisp/stacking.jl
 msgid "Keep transient windows stacked above: \\w"
-msgstr "Garder les fenêtres temporaires empilées au-dessus: \\w"
+msgstr "Garder les fenêtres temporaires empilées au-dessus : \\w"
 
 # ../lisp/stacking.jl
 #. ../lisp/stacking.jl
@@ -1452,7 +1456,7 @@ msgstr "Élever la fenêtre d'un niveau dans l'ordre d'empilement."
 
 #. ../lisp/stagger-placement.jl
 msgid "Distance between successive placements in `stagger' placement mode."
-msgstr ""
+msgstr "Distance entre les placements successif dans le mode `stagger'."
 
 # ../lisp/menus.jl
 #. ../lisp/tooltips.jl
@@ -1466,7 +1470,7 @@ msgstr "Enlever les bulles d'aide après un certain temps."
 
 #. ../lisp/tooltips.jl
 msgid "Show full documentation in tooltips."
-msgstr "Affichier toute la documentation dans les bulles d'aide."
+msgstr "Afficher toute la documentation dans les bulles d'aide."
 
 # ../lisp/tooltips.jl
 #. ../lisp/tooltips.jl
@@ -1511,8 +1515,8 @@ msgid ""
 "Raise the current window to its highest allowed position in the stacking\n"
 "order. Also raise any transient windows that it has."
 msgstr ""
-"Elever la fenêtre courante a sa position la plus haute autorisée dans\n"
-"l'ordre d'empilement. Elever egalement chaque fenêtre fille qu'elle\n"
+"Élever la fenêtre courante a sa position la plus haute autorisée dans\n"
+"l'ordre d'empilement. Élever également chaque fenêtre fille qu'elle\n"
 "possède."
 
 #. ../lisp/transient.jl
@@ -1521,7 +1525,7 @@ msgid ""
 "order. Also lower any transient windows that it has."
 msgstr ""
 "Descendre la fenêtre courante a sa position la plus basse autorisée dans\n"
-"l'ordre d'empilement. Descendre egalement chaque fenêtre fille qu'elle\n"
+"l'ordre d'empilement. Descendre également chaque fenêtre fille qu'elle\n"
 "possède."
 
 #. ../lisp/transient.jl
@@ -1607,7 +1611,7 @@ msgstr "Déplacer la fenêtre vers le visuel d'haut dessus."
 
 #. ../lisp/window-anim.jl
 msgid "The default window animation mode: \\w"
-msgstr "Animation des fenêtres par défaut: \\w"
+msgstr "Animation des fenêtres par défaut : \\w"
 
 # ../lisp/place-window.jl
 #. ../lisp/window-history.jl
@@ -1662,15 +1666,14 @@ msgstr "Configuration des bureaux virtuel."
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
 msgid "When passing the first or last workspace: \\w"
-msgstr "Action quand on passe le premier ou le dernier bureau: \\w"
+msgstr "Action quand on passe le premier ou le dernier bureau : \\w"
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "When passing the first or last workspace, while moving a window: \\w"
 msgstr ""
 "Action quand on passe le premier ou le dernier bureau lorsqu'on déplace\n"
-"une fenêtre: \\w"
+"une fenêtre : \\w"
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
@@ -2100,7 +2103,7 @@ msgstr "Choisir une icône"
 # ../lisp/keymaps.jl
 #. ../nokogiri/nokogiri-widgets/keymap.jl
 msgid "Edit binding"
-msgstr "Editer les raccourcis"
+msgstr "Éditer les raccourcis"
 
 # ../src/sawmill-ui.jl
 #. ../nokogiri/nokogiri-widgets/list.jl
@@ -2219,30 +2222,30 @@ msgstr "<aucun>"
 #. ../themer/themer.in
 #, c-format
 msgid "Added frame type `%s'"
-msgstr "Type de cadre < %s > ajouté"
+msgstr "Type de cadre `%s' ajouté"
 
 # ../themer/themer.in
 #. ../themer/themer.in
 msgid "error while building frame: %S"
-msgstr "erreur lors de la construction du cadre: %S"
+msgstr "erreur lors de la construction du cadre : %S"
 
 # ../themer/themer.in
 #. ../themer/themer.in
 #, c-format
 msgid "Saved as `%s'"
-msgstr "Sauvegardé sous < %s >"
+msgstr "Sauvegardé sous `%s'"
 
 # ../themer/themer.in
 #. ../themer/themer.in
 #, c-format
 msgid "Generated theme in directory `%s'"
-msgstr "Thème généré dans le répertoire < %s >"
+msgstr "Thème généré dans le répertoire `%s'"
 
 # ../themer/themer.in
 #. ../themer/themer.in
 #, c-format
 msgid "Read theme from `%s'"
-msgstr "Lire le thème à partir de < %s >"
+msgstr "Lire le thème à partir de `%s'"
 
 # ../themer/themer.in
 #. ../themer/themer.in
@@ -2457,7 +2460,7 @@ msgstr "Cadre"
 
 #. ../themer/themer.glade:250
 msgid "Frame Part _Definitions"
-msgstr ""
+msgstr "_Définitions du Cadre"
 
 #. ../themer/themer.glade:238
 msgid "Frame _Classes"
@@ -2492,6 +2495,8 @@ msgid ""
 "Inactive-\n"
 "Highlighted"
 msgstr ""
+"Non active\n"
+"Surbrillance"
 
 #. ../themer/themer.glade:1278
 msgid "Map: "
