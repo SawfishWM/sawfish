@@ -89,7 +89,7 @@ focus_on_window (Lisp_Window *w)
 	}
 	else
 	    focus = w->frame;
-	XSetInputFocus (dpy, focus, RevertToNone, last_event_time);
+	XSetInputFocus (dpy, focus, RevertToParent, last_event_time);
 	focus_window = w;
     }
     else
