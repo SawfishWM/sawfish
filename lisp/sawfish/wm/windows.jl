@@ -29,6 +29,7 @@
 	     get-window-by-name-re
 	     window-really-wants-input-p
 	     desktop-window-p
+	     window-in-cycle-p
 	     window-class
 	     warp-cursor-to-window
 	     constrain-dimension-to-hints
@@ -114,6 +115,13 @@ Returns nil if no such window is found."
 
   (define (desktop-window-p arg)
     (or (eq arg 'root) (and (windowp arg) (window-get arg 'desktop))))
+
+  (define (window-in-cycle-p w)
+    "Returns true if the window W should be included when cycling between
+windows."
+    (not (or (window-get w 'never-focus)
+	     (window-get w 'cycle-skip)
+	     (desktop-window-p w))))
 
   (define (window-class w)
     "Return the class that window W belongs to, as a string. Returns `nil' if W
