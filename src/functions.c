@@ -88,7 +88,7 @@ WINDOW may be a window object or a numeric window id.
     if (WINDOWP(win) && VWIN(win)->does_wm_delete_window)
 	send_client_message (w, xa_wm_delete_window, last_event_time);
     else
-	XKillClient (dpy, w);
+	XDestroyWindow (dpy, w);
     return win;
 }
 
@@ -102,7 +102,7 @@ WINDOW may be a window object or a numeric window id.
 ::end:: */
 {
     if (WINDOWP(win))
-	XKillClient (dpy, VWIN(win)->id);
+	XDestroyWindow (dpy, VWIN(win)->id);
     else if (rep_INTP(win))
 	XDestroyWindow (dpy, rep_INT(win));
     else
