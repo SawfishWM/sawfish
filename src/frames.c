@@ -488,6 +488,13 @@ set_frame_part_fg (struct frame_part *fp)
 	    {
 		return;
 	    }
+	    else if (fp->drawn.fg != rep_NULL)
+	    {
+		/* there's something drawn in this part already,
+		   update the background to clear it */
+		fp->drawn.bg = rep_NULL;
+		set_frame_part_bg (fp);
+	    }
 
 	    Imlib_render (imlib_id, VIMAGE(fg)->image,
 			  VIMAGE(fg)->image->rgb_width,
@@ -543,6 +550,13 @@ set_frame_part_fg (struct frame_part *fp)
 		&& fp->drawn.y_justify == fp->y_justify)
 	    {
 		return;
+	    }
+ 	    else if (fp->drawn.fg != rep_NULL)
+	    {
+		/* there's something drawn in this part already,
+		   update the background to clear it */
+		fp->drawn.bg = rep_NULL;
+		set_frame_part_bg (fp);
 	    }
 
 	    if (FONTP(font))
@@ -645,7 +659,6 @@ frame_part_exposer (XExposeEvent *ev, struct frame_part *fp)
 {
     if (ev->count == 0)
     {
-	fp->drawn.fg = rep_NULL;		/* force redraw */
 	fp->drawn.bg = rep_NULL;
 	refresh_frame_part (fp);
     }
