@@ -104,13 +104,23 @@ focus_on_window (Lisp_Window *w)
 	    {
 		DB(("  sending WM_TAKE_FOCUS message\n"));
 		send_client_message (w->id, xa_wm_take_focus, last_event_time);
+
+		/* Only focus on the window if accepts-input is true */
+		if (w->wmhints == 0 || w->wmhints->input)
+		    focus = w->id;
+		else
+		    focus = 0;
 	    }
-	    focus = w->id;
+	    else
+		focus = w->id;
 	}
 	else
 	    focus = w->frame;
-	XSetInputFocus (dpy, focus, RevertToParent, last_event_time);
-	focus_window = w;
+	if (focus != 0)
+	{
+	    XSetInputFocus (dpy, focus, RevertToParent, last_event_time);
+	    focus_window = w;
+	}
     }
     else
     {
@@ -798,7 +808,13 @@ that it would like to be given the input focus when applicable.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
-    return (VWIN(win)->wmhints && VWIN(win)->wmhints->input) ? Qt : Qnil;
+    if (VWIN(win)->does_wm_take_focus)
+	return Qt;
+    else if (VWIN(win)->wmhints)
+	return VWIN(win)->wmhints->input ? Qt : Qnil;
+    else
+	/* Default to assuming that window's want input */
+	return Qt;
 }
 
 DEFUN("managed-windows", Fmanaged_windows, Smanaged_windows,
