@@ -175,10 +175,11 @@
       ((styles (find-all-frame-styles)))
     (setq styles (sort styles #'(lambda (x y)
 				  (< (symbol-name x) (symbol-name y)))))
-    `(hbox (set ,styles
-		:variable ,symbol
-		:value ,value)
-	   (label ,doc))))
+    `(frame-style ,styles
+		  :variable ,symbol
+		  :value ,value
+		  :doc ,doc
+		  :theme-path ,theme-load-path)))
 
 (defun after-setting-frame-option ()
   (when always-update-frames
