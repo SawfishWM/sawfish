@@ -37,6 +37,7 @@
 (autoload 'substitute-keymap-command "keymap")
 (autoload 'substitute-keymap-event "keymap")
 (autoload 'where-is "keymap")
+(autoload 'describe-key "keymap" t)
 (autoload 'read-event "keymap")
 (autoload 'quote-event "keymap" t)
 (autoload 'next-workspace-window "cycle" t)
