@@ -97,6 +97,7 @@
 	    delete-window-instance
 	    add-swapped-properties
 	    workspace-local-properties
+	    set-number-of-workspaces
 
 	    ;; XXX rename these..?
 	    ws-remove-window
@@ -318,10 +319,10 @@ window, one of `stop', `keep-going', `wrap-around'")
   ;; continuum that is `interesting' to the user
   (define (workspace-limits)
     (let* ((all-spaces (all-workspaces))
-	   (max-w (if (and lock-first-workspace last-interesting-workspace)
+	   (max-w (if last-interesting-workspace
 		      (max last-interesting-workspace current-workspace)
 		    current-workspace))
-	   (min-w (if (and lock-first-workspace first-interesting-workspace)
+	   (min-w (if first-interesting-workspace
 		      (min first-interesting-workspace current-workspace)
 		    current-workspace)))
       (cond ((cdr all-spaces)
@@ -331,9 +332,24 @@ window, one of `stop', `keep-going', `wrap-around'")
 	     (setq max-w (max max-w (car all-spaces)))
 	     (setq min-w (min min-w (car all-spaces)))))
       (setq max-w (max max-w (1- (+ (length workspace-names) min-w))))
-      (setq first-interesting-workspace min-w)
-      (setq last-interesting-workspace max-w)
+      (when lock-first-workspace
+	(setq first-interesting-workspace min-w)
+	(setq last-interesting-workspace max-w))
       (cons min-w max-w)))
+
+  (define (set-number-of-workspaces wanted)
+    (or (> wanted 0) (error "Too few workspaces: %s" wanted))
+    (let* ((limits (workspace-limits))
+	   (total (1+ (- (cdr limits) (car limits)))))
+      (cond ((> total wanted)
+	     ;; too many workspaces
+	     (do ((i wanted (1+ i)))
+		 ((>= i total))
+	       (remove-workspace (car limits))))
+	    ((< total wanted)
+	     (setq first-interesting-workspace (car limits))
+	     (setq last-interesting-workspace (1- (+ (car limits) wanted)))
+	     (call-hook 'workspace-state-change-hook)))))
 
   (define (workspace-id-to-logical space #!optional limits)
     (unless limits
@@ -539,7 +555,8 @@ window, one of `stop', `keep-going', `wrap-around'")
 	(call-hook 'workspace-state-change-hook))))
 
   ;; return a list of all windows on workspace index SPACE
-  (define (workspace-windows space #!optional include-iconified)
+  (define (workspace-windows
+	   #!optional (space current-workspace) include-iconified)
     (filter-windows
      (lambda (w)
        (and (window-in-workspace-p w space)
@@ -800,7 +817,8 @@ previous workspace."
 		   (remove-workspace space)
 		   (setq limits (workspace-limits))))
 	  (setq space (1+ space))))
-      (when (> first-interesting-workspace last-interesting-workspace)
+      (when (and first-interesting-workspace
+		 (> first-interesting-workspace last-interesting-workspace))
 	(setq first-interesting-workspace last-interesting-workspace))))
 
   (define-command 'delete-empty-workspaces delete-empty-workspaces

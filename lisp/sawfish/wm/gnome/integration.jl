@@ -46,6 +46,7 @@
   (put 'gnome-use-capplet 'custom-obsolete t)
 
   ;; invoke the GNOME terminal instead of xterm
+  (eval-when-compile (require 'sawfish.wm.commands.xterm))
   (unless (variable-customized-p 'xterm-program)
     (setq xterm-program "gnome-terminal"))
 

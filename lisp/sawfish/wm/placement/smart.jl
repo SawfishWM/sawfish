@@ -52,13 +52,13 @@
     (open rep
 	  sawfish.wm.util.rects
 	  sawfish.wm.util.groups
+	  sawfish.wm.util.workarea
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.placement
 	  sawfish.wm.custom
-	  sawfish.wm.workspace
-	  sawfish.wm.state.maximize)
+	  sawfish.wm.workspace)
 
 
 ;;; options/variables
@@ -377,7 +377,7 @@ the proposed placement to the center of the screen."
 			     (t sp-normal-windows-weight)))))
 	     (grid (sp-make-grid rects t))
 	     (dims (window-frame-dimensions w))
-	     (workarea (maximize-find-workarea w #:head-fallback t))
+	     (workarea (calculate-workarea #:window w))
 	     (workarea-width (- (nth 2 workarea) (nth 0 workarea)))
 	     (workarea-height (- (nth 3 workarea) (nth 1 workarea)))
 	     point)

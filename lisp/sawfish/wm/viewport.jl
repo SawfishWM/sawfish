@@ -33,7 +33,8 @@
 	    set-window-viewport
 	    move-window-viewport
 	    window-viewport
-	    window-absolute-position)
+	    window-absolute-position
+	    set-number-of-viewports)
 
     (open rep
 	  rep.system
@@ -196,6 +197,10 @@
 		     (when (window-outside-workspace-p w)
 		       (move-window-to-current-viewport w))))
       (call-hook 'viewport-resized-hook)))
+
+  (define (set-number-of-viewports width height)
+    (setq viewport-dimensions (cons width height))
+    (viewport-size-changed))
 
 
 ;; commands

@@ -165,7 +165,7 @@ the window.")
 
       (set-restart-command)
 
-      (sm-set-property "CurrentDirectory" default-directory)
+      (sm-set-property "CurrentDirectory" (local-file-name default-directory))
       (sm-set-property "ProcessId" (format nil "%d" (process-id)))
       (sm-set-property "Program" (car saved-command-line-args))
       (sm-set-property "UserId" (user-login-name))

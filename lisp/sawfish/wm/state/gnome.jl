@@ -224,20 +224,7 @@
       (when (and class (>= (length class) 2))
 	(cond ((and (string= (aref class 1) "Panel")
 		    (string= (aref class 0) "panel_window"))
-	       ;; XXX I don't think the GNOME hints specify these things...
-	       (mark-window-as-dock w)
-	       (window-put w 'focus-click-through t)
-	       (window-put w 'no-history t)
-	       (window-put w 'never-iconify t)
-	       (window-put w 'never-maximize t)
-	       ;; XXX the panel is broken, in that it doesn't check
-	       ;; XXX that the wm gave it the position that it wanted.
-	       ;; XXX (The wm is under no obligation; the panel should
-	       ;; XXX move itself to the required position after
-	       ;; XXX initially mapping the window, or perhaps it
-	       ;; XXX should use the USPosition hints?). The following
-	       ;; XXX line prevents panel windows being placed at all
-	       (window-put w 'placed t))
+	       (mark-window-as-dock w))
 	      ((string= (aref class 1) "gmc-desktop-icon")
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'never-focus t)

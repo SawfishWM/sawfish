@@ -1,3 +1,56 @@
+2002-05-06  John Harper  <jsh@unfactored.org>
+
+	* More merging from HEAD:
+
+	2002-05-03  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/gnome/integration.jl (gnome-use-capplet-changed):
+	require xterm module when compiling
+
+	2002-04-27  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/state/transient.jl (transient-map-window,
+	transient-unmap-window): use set-input-focus not
+	activate-window (which raises the window..)
+
+	2002-04-25  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/session/init.jl (sm-init): make the
+	CurrentDirectory a valid filename (e.g., no "~" characters)
+
+	2002-04-23  John Harper  <jsh@unfactored.org>
+
+	Work to support _NET_WM_STRUT. Fixes #66608 (not tested):
+
+	* sawfish/wm/util/workarea.jl: new module, moved the workarea
+	calculations here from the maximize module. Added support for
+	"struts"
+
+	* sawfish/wm/state/wm-spec.jl (honour-client-state): call
+	define-window-strut if _NET_WM_STRUT is set
+
+	* sawfish/wm/windows.jl (dock-window-properties): new variable,
+	list of properties to set on dock windows
+
+	2002-04-23  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/menus.jl (window-ops-menu): removed viewport
+	operations. Fixes #73122
+
+	2002-04-22  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/state/wm-spec.jl (set-ws-hints):
+	_NET_DESKTOP_NAMES property is in UTF8_STRING encoding. Adapted
+	from Gregory Merchan <merchan@phys.lsu.edu>
+
+	* sawfish/wm/util/window-order.jl (on-viewport-change): only
+	don't focus most recent in enter-exit mode. Fixes #67007
+
+	* sawfish/wm/workspace.jl, sawfish/wm/viewport.jl,
+	sawfish/wm/state/wm-spec.jl: Fixed #74904, support
+	_NET_NUMBER_OF_DESKTOPS and _NET_DESKTOP_GEOMETRY client
+	messages
+
 2002-04-21  John Harper  <jsh@unfactored.org>
 
 	* Merged changes from HEAD:

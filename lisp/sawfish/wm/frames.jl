@@ -65,8 +65,7 @@
 	  sawfish.wm.events
 	  sawfish.wm.gaol
 	  sawfish.wm.session.init
-	  sawfish.wm.workspace
-	  sawfish.wm.state.maximize)
+	  sawfish.wm.workspace)
 
   ;; Commentary:
 

@@ -32,13 +32,13 @@
 	  sawfish.wm.windows
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
-	  sawfish.wm.state.iconify)
+	  sawfish.wm.state.iconify
+	  sawfish.wm.util.workarea)
 
   ;; todo:
 
   ;; - _NET_WORKAREA
   ;; - _NET_WM_NAME		-- needs to be in C code?
-  ;; - _NET_WM_STRUT
   ;; - _NET_WM_ICON
 
   ;; maybe add some state extensions for things the spec doesn't
@@ -100,6 +100,7 @@
      _NET_WM_STATE_SKIP_PAGER
      _NET_WM_STATE_STICKY
      _NET_WM_STATE_TOGGLE
+     _NET_WM_STRUT
      _NET_WM_WINDOW_TYPE
      _NET_WM_WINDOW_TYPE_DESKTOP
      _NET_WM_WINDOW_TYPE_DIALOG
@@ -154,7 +155,8 @@
 	(unless (equal last-workspace-names workspace-names)
 	  (setq last-workspace-names workspace-names)
 	  (set-x-text-property 'root '_NET_DESKTOP_NAMES
-			       (apply vector workspace-names)))
+			       (apply vector workspace-names)
+			       'UTF8_STRING))
 
 	;; _NET_CURRENT_DESKTOP
 	(unless (equal last-workspace
@@ -236,33 +238,14 @@
     (when (>= (length geom) 2)
       (window-put w 'icon-position (cons (aref geom 0) (aref geom 1)))))
 
-  (define (wm-class-hacks w)
-    (let ((class (get-x-text-property w 'WM_CLASS)))
-      (when (and class (>= (length class) 2))
-	(cond ((or (and (string= (aref class 1) "Panel")
-			(string= (aref class 0) "panel_window"))
-		   (and (string= (aref class 1) "kicker")
-			(string= (aref class 0) "Panel")))
-	       (window-put w 'focus-click-through t)
-	       (window-put w 'avoid t)
-	       (window-put w 'no-history t)
-	       (window-put w 'never-iconify t)
-	       (window-put w 'never-maximize t)
-	       (window-put w 'sticky t)
-	       (window-put w 'sticky-viewport t)
-	       ;; XXX see gnome.jl for why this is needed..
-	       (window-put w 'placed t)
-	       ;; probably superfluous
-	       (mark-window-as-dock w))
-	      ((string= (aref class 1) "gmc-desktop-icon")
-	       (window-put w 'never-focus t)
-	       (window-put w 'never-iconify t)
-	       (window-put w 'never-maximize t))))))
+  (define (update-strut w)
+    (let ((strut (get-x-property w '_NET_WM_STRUT)))
+      (when (and strut (eq (nth 0 strut) 'CARDINAL))
+	(let ((data (nth 2 strut)))
+	  (define-window-strut w (aref data 0) (aref data 2)
+			       (aref data 1) (aref data 3))))))
 
   (define (honour-client-state w)
-    ;; things the wm-hints doesn't supply
-    (wm-class-hacks w)
-
     (let ((space (get-x-property w '_NET_WM_DESKTOP)))
       (when space
 	(setq space (aref (nth 2 space) 0))
@@ -289,6 +272,8 @@
 	    ((= i (length state)))
 	  (call-state-fun w (aref state i) 'init))
 	(window-put w 'wm-spec-last-states (vector->list state))))
+
+    (update-strut w)
 
     (let ((geom (get-x-property w '_NET_WM_ICON_GEOMETRY)))
       (when geom
@@ -435,9 +420,11 @@
 			    ((eq mode _NET_WM_MOVERESIZE_SIZE_RIGHT) '(right)))))
 		 (resize-window-interactively w))))))
 
-	((_NET_NUMBER_OF_DESKTOPS _NET_DESKTOP_GEOMETRY)
-	 ;; XXX these conflict with user preferences
-	 )
+	((_NET_NUMBER_OF_DESKTOPS)
+	 (set-number-of-workspaces (aref data 0)))
+
+	((_NET_DESKTOP_GEOMETRY)
+	 (set-number-of-viewports (aref data 0) (aref data 1)))
 
 	((_NET_DESKTOP_VIEWPORT)
 	 (set-viewport (aref data 0) (aref data 1)))
@@ -446,6 +433,8 @@
 	 (select-workspace (workspace-id-from-logical (aref data 0))))
 
 	((_NET_DESKTOP_NAMES)
+	 ;; XXX this is kind of broken now we use workspace-names to
+	 ;; XXX define the minimum number of workspaces to display?
 	 (setq data (aref data 0))
 	 (let loop ((i 0)
 		    (out '()))
@@ -498,7 +487,9 @@
       ((_NET_WM_ICON_GEOMETRY)
        (let ((geom (get-x-property w '_NET_WM_ICON_GEOMETRY)))
 	 (when geom
-	   (update-icon-geometry w (nth 2 geom)))))))
+	   (update-icon-geometry w (nth 2 geom)))))
+      ((_NET_WM_STRUT)
+       (update-strut w))))
 
 
 ;;; utilities

@@ -42,7 +42,7 @@
 	  sawfish.wm.viewport
 	  sawfish.wm.workspace
 	  sawfish.wm.util.rects
-	  sawfish.wm.state.maximize
+	  sawfish.wm.util.workarea
 	  sawfish.wm.state.iconify)
 
   (define multipliers '[(0 . 0)		;centered
@@ -106,7 +106,7 @@
     (= (rect-2d-overlap dims point rect) (* (car dims) (cdr dims))))
 
   (define (place-window-off-center w)
-    (let* ((workarea (maximize-find-workarea w #:head-fallback t))
+    (let* ((workarea (calculate-workarea #:window w))
 	   (fdims (window-frame-dimensions w))
 	   (center (rectangle-center workarea)))
 
