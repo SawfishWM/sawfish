@@ -116,12 +116,6 @@ that overrides settings set elsewhere.")
   :group appearance
   :after-set after-setting-frame-option)
 
-;; from frames.c
-(defcustom highlight-when-unfocused nil
-  "Highlight window borders even when the window is unfocused."
-  :type boolean
-  :group appearance)
-
 (defvar user-theme-directory "~/.sawmill/themes"
   "Directory containing user-local themes.")
 
