@@ -2177,7 +2177,7 @@ the root window.
 may only be @code{box} for a 3x3 grid.
 @end defun
 
-@defun show-message &optional text font fg bg
+@defun show-message &optional text font fg bg position
 Display the string @var{text} in the center of the screen. If
 @var{text} is @code{nil} then any string previously displayed is
 removed. Returns the numeric id of the window displaying the message,
@@ -2187,6 +2187,10 @@ or @code{nil} if no message is displayed.
 @code{default-font} variable provides this value. @var{fg} and @var{bg}
 define the color of the text and its background respectively. If
 undefined they are black and white.
+
+@var{position} is a cons cell @code{(@var{x} . @var{y})}. @var{x} and
+@var{y} are integers or @code{nil} (for centered display). If negative
+they count in from the left and bottom edges respectively.
 
 Note that newlines in @var{text} are ignored. This may change in the
 future.
