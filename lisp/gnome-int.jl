@@ -39,9 +39,25 @@
 
 ;; invoke the GNOME control-center to configure sawfish
 (eval-when-compile (require 'customize))
-(setq customize-program "sawfish-capplet")
-(setq customize-group-opt "--sawfish-group")
-(setq custom-menu-includes-all-settings nil)
+
+(defcustom gnome-use-capplet t
+  "Invoke the GNOME control center through the `Customize' menu."
+  :type boolean
+  :group misc
+  :require gnome-int
+  :after-set (lambda () (gnome-use-capplet-changed)))
+
+(defun gnome-use-capplet-changed ()
+  (if gnome-use-capplet
+      (progn
+	(setq customize-program "sawfish-capplet")
+	(setq customize-group-opt "--sawfish-group")
+	(setq custom-menu-includes-all-settings nil))
+    (setq customize-program "sawfish-ui")
+    (setq customize-group-opt "--group")
+    (setq custom-menu-includes-all-settings t)))
+
+(gnome-use-capplet-changed)
 
 ;; invoke the GNOME terminal instead of xterm
 (setq xterm-program "gnome-terminal")
