@@ -1,3 +1,20 @@
+1999-10-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* custom.jl: added `maximize' group
+	* move-resize.jl (move-lock-when-maximized): now in maximize
+	group
+
+	* stacking.jl (stacking-add-window): call restack-by-depth
+
+	* maximize.jl: handle 2D maximization separately, look for the
+	largest rectangle that doesn't contain any reserved windows
+
+	* rects.jl: new file, operations on rectangles, some functions
+	copied from smart-placement.jl and renamed, some new functions
+	* smart-placement.jl: use rects.jl
+
+	* edges.jl (grid-from-edges): new function
+
 1999-10-20  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.jl (def-frame-class): new macro
