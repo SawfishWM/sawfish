@@ -125,6 +125,21 @@ values range from zero to 65535.
 		       rep_MAKE_INT(VCOLOR(color)->blue));
 }
 
+DEFUN("color-rgb-8", Fcolor_rgb_8, Scolor_rgb_8, (repv color), rep_Subr1) /*
+::doc:color-rgb::
+color-rgb-8 COLOR
+
+Returns a list of integers (RED GREEN BLUE) representing the actual
+color values of the color represented by object COLOR. The individual
+values range from zero to 255.
+::end:: */
+{
+    rep_DECLARE1(color, COLORP);
+    return rep_list_3 (rep_MAKE_INT(VCOLOR(color)->red / 256),
+		       rep_MAKE_INT(VCOLOR(color)->green / 256),
+		       rep_MAKE_INT(VCOLOR(color)->blue / 256));
+}
+
 DEFUN("colorp", Fcolorp, Scolorp, (repv win), rep_Subr1) /*
 ::doc:colorp::
 colorp ARG
@@ -186,6 +201,7 @@ colors_init (void)
     rep_ADD_SUBR(Sget_color);
     rep_ADD_SUBR(Scolor_name);
     rep_ADD_SUBR(Scolor_rgb);
+    rep_ADD_SUBR(Scolor_rgb_8);
     rep_ADD_SUBR(Scolorp);
     rep_INTERN_SPECIAL(default_foreground);
     if (!batch_mode_p ())
