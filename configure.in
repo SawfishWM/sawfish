@@ -81,7 +81,12 @@ AC_PATH_XTRA
 AC_HEADER_STDC
 AC_HEADER_TIME
 AC_HEADER_SYS_WAIT
-AC_CHECK_HEADERS(fcntl.h sys/time.h sys/utsname.h unistd.h memory.h X11/SM/SMlib.h X11/extensions/Xdbe.h)
+AC_CHECK_HEADERS(fcntl.h sys/time.h sys/utsname.h unistd.h memory.h X11/SM/SMlib.h X11/extensions/Xdbe.h X11/extensions/Xinerama.h)
+
+XINERAMA_LIBS=""
+AC_SUBST(XINERAMA_LIBS)
+AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
+	     [XINERAMA_LIBS="-lXinerama"],[],[$X_LIBS -lX11 -lXext])
 
 dnl Check for librep
 AM_PATH_REP(0.11)
