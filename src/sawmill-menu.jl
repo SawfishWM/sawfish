@@ -71,6 +71,9 @@ exec rep "$0" "$@"
 
 ;; entry point, loop reading command forms, sending back results
 
+(when (boundp 'gtk-set-locale)
+  (gtk-set-locale))
+
 (condition-case nil
     (while t
       (let
