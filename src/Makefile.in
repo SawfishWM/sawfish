@@ -52,7 +52,7 @@ lib%.la : %.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $<
 
 %.jlc : %.jl
-	rep compiler -f compile-batch $<
+	REP_GTK_DONT_INITIALIZE=1 rep compiler -f compile-batch $<
 
 gtk-style : gtk-style.c
 	$(CC) $(CPPFLAGS) $(GTK_CFLAGS) $(LDFLAGS) -o $@ $< $(GTK_LIBS) $(LIBS)
