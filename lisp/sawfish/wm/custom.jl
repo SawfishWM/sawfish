@@ -261,14 +261,21 @@ of choices."
 			     (filter atom (cddr custom-groups)))))))))
     (inner-fun full-group custom-groups)))
 
-(defun custom-set-variable (symbol value &optional req)
-  (when (and req value)
+(defun custom-set (setter symbol &optional req)
+  (when req
     (require req))
   (when (get symbol 'custom-before-set)
-    (funcall (get symbol 'custom-before-set) symbol))
-  (set symbol value)
+    ((get symbol 'custom-before-set) symbol))
+  (setter)
+  (put symbol 'custom-user-value t)
   (when (get symbol 'custom-after-set)
-    (funcall (get symbol 'custom-after-set) symbol)))
+    ((get symbol 'custom-after-set) symbol)))
+ 
+(defun custom-set-variable (symbol value &optional req)
+  (custom-set (lambda () (set symbol value)) symbol req))
+
+(defun variable-customized-p (symbol)
+  (get symbol 'custom-user-value))
 
 (defun custom-menu ()
   (letrec
