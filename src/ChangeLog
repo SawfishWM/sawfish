@@ -1,3 +1,8 @@
+2002-09-21  John Harper  <jsh@unfactored.org>
+
+	* windows.c (Fwindow_size_hints): accept min size == 0 and set
+	it to one, should fix #77639
+
 2002-09-01  John Harper  <jsh@unfactored.org>
 
 	* server.c (server_accept_connection): don't pass null pointers

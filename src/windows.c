@@ -1154,7 +1154,7 @@ associated with WINDOW. Possible keys in the alist are `min-height',
 
     /* Some sanity checking */
     if ((flags & PMinSize) 
-	&& (hints->min_width <= 0 || hints->min_height <= 0))
+	&& (hints->min_width < 0 || hints->min_height < 0))
 	flags &= ~PMinSize;
     if ((flags & PMaxSize)
 	&& (hints->max_width <= 0 || hints->max_height <= 0))
@@ -1168,9 +1168,8 @@ associated with WINDOW. Possible keys in the alist are `min-height',
 
     if (flags & PMinSize)
     {
-	ret = Fcons (Fcons (Qmin_width, rep_MAKE_INT(hints->min_width)),
-		     Fcons (Fcons (Qmin_height,
-				   rep_MAKE_INT(hints->min_height)), ret));
+	ret = Fcons (Fcons (Qmin_width, rep_MAKE_INT(MAX(hints->min_width,1))),
+		     Fcons (Fcons (Qmin_height, rep_MAKE_INT(MAX(hints->min_height, 1))), ret));
     }
     if (flags & PMaxSize)
     {
