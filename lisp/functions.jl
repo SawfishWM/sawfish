@@ -81,3 +81,12 @@
   (or ignore-window-input-hint
       (window-get w 'ignore-window-input-hint)
       (window-wants-input-p w)))
+
+;; remove all duplicates from list, tests using eq, order is lost
+(defun uniquify-list (list)
+  (let
+      (out)
+    (mapc #'(lambda (x)
+	      (unless (memq x out)
+		(setq out (cons x out)))) list)
+    out))
