@@ -109,6 +109,17 @@ to grab the keyboard then THUNK won't be called."
 	(setq tem (expand-file-name ".." tem)))
       (make-directory tem))))
 
+(defun locate-file (filename dirs)
+  "Search for a file called FILENAME in any of the directories named by the
+list of strings DIRS."
+  (letrec
+      ((loop (lambda (rest)
+	       (cond ((null rest) nil)
+		     ((file-exists-p (expand-file-name filename (car rest)))
+		      (expand-file-name filename (car rest)))
+		     (t (loop (cdr rest)))))))
+    (loop dirs)))
+
 (defun xterm ()
   "Start a new xterm."
   (interactive)
