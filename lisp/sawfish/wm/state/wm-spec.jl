@@ -70,8 +70,8 @@
      _NET_DESKTOP_NAMES _NET_ACTIVE_WINDOW _NET_CLOSE_WINDOW
      _NET_WM_MOVERESIZE _NET_WM_DESKTOP _NET_WM_WINDOW_TYPE _NET_WM_STATE])
   
-  (defconst desktop-layer -1)
-  (defconst dock-layer +1)
+  (defconst desktop-layer -4)
+  (defconst dock-layer +4)
 
   (define supported-states '())
 
