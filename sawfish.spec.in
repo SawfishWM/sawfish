@@ -1,19 +1,15 @@
 
-%define nam	sawfish
-%define ver	@version@
-%define rel	1
-
+Name: sawfish
+Version: @version@
+Release: 1
 Summary: a highly configurable and extensible X11 window manager
-Name: %{nam}
-Version: %{ver}
-Release: %{rel}
 Requires: librep >= 0.10, rep-gtk >= 0.8
 Copyright: GPL
 Group: User Interface/Desktops
-Source: ftp://ftp.dcs.warwick.ac.uk/people/John.Harper/sawfish/sawfish-%{ver}.tar.gz
+Source: ftp://ftp.dcs.warwick.ac.uk/people/John.Harper/sawfish/sawfish-%{version}.tar.gz
 URL: http://www.dcs.warwick.ac.uk/~john/sw/sawfish/
 Packager: John Harper <john@dcs.warwick.ac.uk>
-Buildroot: /var/tmp/%{nam}-root
+Buildroot: /var/tmp/%{name}-root
 BuildPrereq: rep-gtk-libglade control-center-devel gmp-devel
 PreReq: /sbin/install-info
 Obsoletes: sawmill
@@ -30,7 +26,7 @@ mostly-GNOME compliant.
 %package gnome
 Summary: GNOME support for sawfish
 Group: User Interface/Desktops
-Requires: %{nam}
+Requires: %{name}
 Obsoletes: sawmill-gnome
 
 %description gnome
@@ -40,7 +36,7 @@ control center applet
 %package themer
 Summary: GUI for creating sawfish themes
 Group: User Interface/Desktops
-Requires: %{nam}, rep-gtk-libglade
+Requires: %{name}, rep-gtk-libglade
 Obsoletes: sawmill-themer
 
 %description themer
@@ -82,8 +78,8 @@ fi
 %{_prefix}/bin/sawmill
 %{_prefix}/bin/sawmill-client
 %{_prefix}/bin/sawmill-ui
-%{_prefix}/share/sawfish/%{ver}
-%{_prefix}/libexec/sawfish/%{ver}/%{_host}
+%{_prefix}/share/sawfish/%{version}
+%{_prefix}/libexec/sawfish/%{version}/%{_host}
 %{_prefix}/info/sawfish*
 
 %files gnome
@@ -99,7 +95,7 @@ fi
 %defattr(-,root,root)
 %{_prefix}/bin/sawfish-themer
 %{_prefix}/bin/sawmill-themer
-%{_prefix}/share/sawfish/%{ver}/themer.glade
+%{_prefix}/share/sawfish/%{version}/themer.glade
 
 %changelog
 * Mon Apr 24 2000 John Harper <john@dcs.warwick.ac.uk>
