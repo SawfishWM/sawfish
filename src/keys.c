@@ -23,6 +23,7 @@
 #include "keys.h"
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <X11/keysym.h>
 #include <X11/Xutil.h>
 
@@ -713,7 +714,17 @@ lookup_event(u_long *code, u_long *mods, u_char *desc)
 	    }
 	    x++;
 	}
-	ks = XStringToKeysym(desc);
+	if ((*mods & ShiftMask) && islower (desc[0]) && desc[1] == 0)
+	{
+	    /* canonify `S-x' to `X' */
+	    char tem[2];
+	    *mods &= ~ShiftMask;
+	    tem[0] = toupper (desc[0]);
+	    tem[1] = 0;
+	    ks = XStringToKeysym (tem);
+	}
+	else
+	    ks = XStringToKeysym(desc);
 	if(ks != NoSymbol)
 	{
 	    *mods |= EV_TYPE_KEY;
