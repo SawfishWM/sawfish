@@ -96,5 +96,9 @@ include $(repexecdir)/rules.mk
 # Always use GNU gettext implementation
 REP_MSGFMT=@REP_MSGFMT@
 
+# used when compiling/running lisp code
+REP_ENVIRON=REP_DL_LOAD_PATH=$(top_builddir)/src/.libexec \
+	    REP_GTK_DONT_INITIALIZE=1
+
 %.mo : %.po
 	$(REP_MSGFMT) $(MSGFMTFLAGS) -o $@ $<
