@@ -21,11 +21,9 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-i18n
+(require 'nokogiri-interfaces)
 
-    (export i18n-lang
-	    i18n-filename
-	    i18n-init)
+(define-structure nokogiri-i18n nokogiri-i18n-interface
 
     (open rep
 	  gettext

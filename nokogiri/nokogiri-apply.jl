@@ -1,6 +1,6 @@
 #| nokogiri-apply.jl -- setting values in the wm
 
-   $Id: nokogiri-apply.jl,v 1.1 2000/06/28 15:52:13 john Exp $
+   $Id: nokogiri-apply.jl,v 1.2 2000/07/01 14:07:42 john Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -21,13 +21,9 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-apply
+(require 'nokogiri-interfaces)
 
-    (export define-change-handler
-	    apply-slot-changes
-	    revert-slot-changes
-	    changes-to-apply-p
-	    changes-to-revert-p)
+(define-structure nokogiri-apply nokogiri-apply-interface
 
     (open rep
 	  tables

@@ -21,9 +21,9 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widget-dialog
+(require 'nokogiri-interfaces)
 
-    (export widget-dialog)
+(define-structure nokogiri-widget-dialog nokogiri-widget-dialog-interface
 
     (open rep
 	  gtk

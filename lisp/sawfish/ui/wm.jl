@@ -21,16 +21,9 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-wm
+(require 'nokogiri-interfaces)
 
-    (export wm-load-slots
-	    wm-load-group
-	    wm-apply-changes
-	    wm-locale-dir
-	    wm-grab-x-property
-	    wm-grab-key
-	    wm-command-list
-	    wm-documentation)
+(define-structure nokogiri-wm nokogiri-wm-interface
 
     (open rep)
 

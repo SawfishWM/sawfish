@@ -21,28 +21,9 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-group
+(require 'nokogiri-interfaces)
 
-    (export group-name
-	    group-real-name
-	    group-loaded-p
-	    group-slots
-	    group-sub-groups
-	    group-layout
-	    root-group
-	    top-group
-	    set-top-group
-	    group-name-above
-	    group-name-add
-	    group-name=
-	    get-group
-	    fetch-group
-	    update-group
-	    get-sub-groups
-	    group-parent
-	    make-group-tree
-	    select-group
-	    redisplay-group)
+(define-structure nokogiri-group nokogiri-group-interface
 
     (open rep
 	  gtk

@@ -21,11 +21,9 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-layout
+(require 'nokogiri-interfaces)
 
-    (export define-layout-type
-	    layout-slots
-	    document-slot)
+(define-structure nokogiri-layout nokogiri-layout-interface
 
     (open rep
 	  gtk

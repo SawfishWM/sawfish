@@ -21,9 +21,9 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-user-level
+(require 'nokogiri-interfaces)
 
-    (export slot-is-appropriate-p)
+(define-structure nokogiri-user-level nokogiri-user-level-interface
 
     (open rep
 	  nokogiri-config

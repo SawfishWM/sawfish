@@ -21,10 +21,9 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-color-preview
+(require 'nokogiri-interfaces)
 
-    (export button-new-with-color
-	    set-button-color)
+(define-structure nokogiri-color-preview nokogiri-color-preview-interface
 
     (open rep
 	  gtk)
