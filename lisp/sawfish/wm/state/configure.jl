@@ -42,6 +42,12 @@
     :user-level expert
     :group move)
 
+  (defcustom configure-ignore-stacking-requests nil
+    "Ignore requests from applications to change window stacking."
+    :type boolean
+    :group misc
+    :user-level expert)
+
   ;; Returns true if window window1 and window2 intersect, false otherwise.
   (defun windows-intersect-p (window1 window2)
     (let ((w1pos (window-position window1))
@@ -79,7 +85,9 @@
 	  (hints (window-size-hints w))
 	  tem)
 
-      (when (setq tem (cdr (assq 'stack alist)))
+      (when (and (setq tem (cdr (assq 'stack alist)))
+		 (not configure-ignore-stacking-requests)
+		 (not (window-get w 'ignore-stacking-requests)))
 	(let ((relation (car tem))
 	      (sibling (car (cdr tem))))
 	  (case relation

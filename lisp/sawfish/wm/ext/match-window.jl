@@ -108,7 +108,8 @@
        (unique-name boolean)
        (auto-gravity boolean)
        (shade-hover boolean)
-       (transients-above (choice all parents none)))))
+       (transients-above (choice all parents none))
+       (ignore-stacking-requests boolean))))
 
   ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
   ;; libraries implementing them

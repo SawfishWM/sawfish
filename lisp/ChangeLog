@@ -1,3 +1,15 @@
+2001-01-27  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/configure.jl
+	(configure-ignore-stacking-requests): new option. Controls
+	whether stacking requests from windows are honoured or not. The
+	window property `ignore-stacking-requests' has the same effect
+
+	[ adapted from Matt Tucker <tuck@whistlingfish.net> ]
+
+	* sawfish/wm/ext/match-window.jl (match-window-properties):
+	added ignore-stacking-requests to the `Other' section
+
 2001-01-25  John Harper  <jsh@eazel.com>
 
 	Fixed bug 5984 (locked-size-when-maximized is confusing):	
