@@ -29,8 +29,8 @@ sawmill_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/libgradient.la \
 COMPILE_ENV = SAWMILLLISPDIR=. SAWMILLDOCFILE=../DOC
 
 LISP_SRCS := auto-raise.jl cursors.jl custom.jl customize.jl cycle.jl \
-	     edges.jl focus.jl frames.jl functions.jl gnome.jl keymaps.jl \
-	     keymap.jl maximize.jl menus.jl move-resize.jl mwm.jl \
+	     edges.jl focus.jl frames.jl functions.jl gnome.jl gtkrc.jl \
+	     keymaps.jl keymap.jl maximize.jl menus.jl move-resize.jl mwm.jl \
 	     open-look.jl place-window.jl sawmill.jl select-window.jl \
 	     server.jl shading.jl smart-placement.jl sm-common.jl \
 	     sm-init.jl sm-save.jl sm-load.jl stacking.jl transient.jl \

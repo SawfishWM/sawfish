@@ -1320,25 +1320,27 @@ string naming a color. If a single element, then it is used for all
 states of the part, otherwise if a list, then each of the four elements
 defines the background for that particular state.
 
-@item (foreground . @var{color})
+@item (foreground . @var{data})
 @itemx (foreground . (@var{normal} @var{focused} @var{highlighted} @var{clicked}))
-Specifies the foreground color of the frame part, either for all
-states, or for each individual state.
+Specifies a foreground color or image for the frame part, either for
+all states, or for each individual state.
 
 @item (font . @var{font})
 @itemx (font . (@var{normal} @var{focused} @var{highlighted} @var{clicked}))
 Specifies the font(s) of the part.
 
 @item (text . @var{value})
-Specifies the string to draw in the foreground of the frame part.
-Either a string, or a function, that will be called each time that the
-part is refreshed, that will return the string to draw.
+Specifies the string to draw in the foreground of the frame part
+(unless the @code{foreground} property is an image). Either a string,
+or a function, that will be called each time that the part is
+refreshed, that will return the string to draw.
 
 @item (x-justify . @var{value})
-Defines the horizontal position of the text in the part. May be one of
-the symbols @code{left}, @code{right} or @code{center}, or a number. If
-a number it defines the number of pixels from the left edge if
-positive, or the right edge if negative.
+Defines the horizontal position of the foreground contents of the part
+(i.e. the text or foreground image). May be one of the symbols
+@code{left}, @code{right} or @code{center}, or a number. If a number it
+defines the number of pixels from the left edge if positive, or the
+right edge if negative.
 
 @item (y-justify . @var{value})
 Similar to @code{x-justify}, but the accepted symbols are @code{top},

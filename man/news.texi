@@ -16,6 +16,12 @@ intelligent, e.g. instead of falling back to random placement when a
 window can't be placed without overlapping an existing window, they
 will attempt to minimize this degree of overlapping
 
+@item The @code{foreground} property of each frame part may now be an
+image instead of a piece of text
+
+@item New theme @code{smaker}, uses the foreground images capability to
+do a somewhat WindowMaker-like theme (with the absolute-e images)
+
 @item Use Imlib's fuzzy color matching for all color allocation; this
 should help on @code{PseudoColor} visuals
 
@@ -23,6 +29,12 @@ should help on @code{PseudoColor} visuals
 
 @item Improved the bindings customization widget layout; added a
 @samp{Copy} button to insert a copy of the current binding
+
+@item Added @code{jump-workspaces-forwards} (and similar
+@code{backwards}) command. Can be used to mimic a 2d desktop
+
+@item Added option to include ignored windows when edge snapping
+(@code{move-snap-ignored-windows})
 
 @item Fix race condition between startup of sawmill and gmc; sawmill
 now has earlier priority
@@ -37,6 +49,10 @@ saved sessions
 
 @item Fix problems binding to shifted keys when using the XKEYBOARD
 extension and XFree86
+
+@item Be ICCCM compliant when a client requests to be moved
+
+@item Fix crash when tiling small images into large images
 
 @end itemize
 

@@ -29,16 +29,11 @@ This isn't fully possibly at the moment. But you can approximate an
 
 @item Set the number of preallocated workspaces to @var{n} times @var{m}
 
-@item Add the following to your @file{~/.sawmillrc} file:
+@item Set the @code{workspace-jump-distance} variable to @var{n}
 
-@lisp
-(defvar workspace-grid-width @var{n})
-(bind-keys global-keymap
-  "C-Up"   '(select-workspace (- current-workspace
-                                 workspace-grid-width))
-  "C-Down" '(select-workspace (+ current-workspace
-                                 workspace-grid-width)))
-@end lisp
+@item Use the @code{jump-workspaces-forwards} and
+@code{jump-workspaces-backwards} commands to move up and down (bound to
+@kbd{C-Down} and @kbd{C-Up} by default)
 @end enumerate
 
 The pager will still show a vector of workspaces, but it will feel more

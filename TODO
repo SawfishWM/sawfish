@@ -32,9 +32,13 @@ Outstanding bugs
   ! edge snapping doesn't always work correctly:
     <37E6D428.47F0F822@casquet.inet.net.nz>
 
-  ! behaviour of frame parts overlapping client window is undefined?
+    [ 25/9: I can't reproduce this (snapping to non-existent/non-
+      visible windows); has it been fixed? ]
 
-    related to this, shape masks may cut out portions of the client
+  ! shaped frame parts overlapping shaped client windows lose
+
+    does this need fixing..? similarly, shaped frame parts overlapping
+    each other will overwrite the lower parts mask..
 
   ! It's not possible to compile sawmill-ui.jl without an X connection
     (it requires 'gtk, which then calls gtk_init (), ...)
@@ -61,8 +65,6 @@ General tasks
 =============
 
   + create a "never automatically create new workspaces" option?
-
-  + allow images as foreground of frame parts?
 
   + add capplet desktop entries to share/gnome/apps/Settings as well as
     the control center tree
@@ -99,20 +101,12 @@ General tasks
     Why? I think that the user should always be able to manipulate the
     window if they wish to do so
 
-  + regexp to re-include windows when snapping?
-
   + tooltips in frame parts describing their keymaps
 
     requires extending show-message to do multi-line (justification?)
 
   + in interactive placement, allow the window-pointer position to be
     configurable 
-
-  + when grabbing keymaps in windows grab in all subwindows of the
-    client?
-
-    this is unfeasible: how do we know when new subwindows are added?
-    how do other wms handle this?
 
   + change edge snapping to use resistance instead of magnetism?
 
@@ -150,6 +144,10 @@ General tasks
   + Smart placement
 
     How can the best-fit cost function be improved?
+
+    Maybe define a placement-weight-alist mapping window names to
+    overlap weights? Negative weights could be used for windows that we
+    don't really mind being covered
 
   + Handle window groups
 
@@ -252,8 +250,8 @@ Long term ideas
 	3. I have some half-cooked ideas about using the built-in
 	   remote-file handling to access a theme repository somewhere
 
-	4. It has lots of support (i.e. hooks) for being used as an
-	   extension language
+	4. It has lots of support (i.e. hooks, input handling) for
+	   being used as an extension language
 
     And these are some reasons for using guile:
 

@@ -1,4 +1,23 @@
+1999-09-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c, windows.c (list_frame_generator,
+	install_window_frame): client window is always left beneath any
+	overlapping frame parts
+
+	* frames.c (set_frame_part_fg, list_frame_generator): the
+	`foreground' frame part property may now be an image (or list
+	of images), it's drawn into the part, respecting any defined
+	justification, but with no scaling or tiling
+
 1999-09-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (set_frame_part_bg): when a shaped image is placed
+	(at all) inside the client window, apply the shape mask to the
+	frame part's window, not to the frame's window [this may
+	conflict with shaped client windows?]
+
+	* images.c (Ftile-image): fix bug when src image is vertically
+	smaller than dest image
 
 	* events.c (configure_request): when a client asks to be moved,
 	factor in the frame offset if it's reparented
