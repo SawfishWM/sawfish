@@ -9,13 +9,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.2\n"
-"POT-Creation-Date: 2001-04-05 07:39+0200\n"
-"PO-Revision-Date: 2001-02-18 17:03:10+0900\n"
+"POT-Creation-Date: 2001-06-04 13:43-0700\n"
+"PO-Revision-Date: 2002-01-31 20:39+0000\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-7\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. ../scripts/sawfish-about.jl
+msgid "and many others..."
+msgstr "και πολλοί άλλοι..."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish manages your windows extensibly."
+msgstr "Το Πριονόψαρο διαχειρίζεται τα παράθυρά σας ευρύτατα."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish homepage"
+msgstr "Αρχική Σελίδα Πριονόψαρου"
 
 #. ../themer/themer.in
 msgid "Reload themes in window manager after saving."
@@ -41,15 +53,38 @@ msgstr "[επάνω]"
 msgid "[bottom]"
 msgstr "[κάτω]"
 
+#. ../lisp/sawfish/gtk/widgets/color.jl
+#. ../themer/themer.in
+msgid "Select color"
+msgstr "Επιλογή χρώματος"
+
 #. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
 #. ../themer/themer.in
 msgid "Browse..."
 msgstr "Εξερεύνηση..."
 
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../themer/themer.in
+msgid "Select font"
+msgstr "Επιλέξτε γραμματοσειρά"
+
 #. ../themer/themer.in
 msgid "Properties..."
 msgstr "Ιδιότητες..."
+
+#. ../themer/themer.in
+msgid "Select Image"
+msgstr "Επιλογή Εικόνας"
+
+#. ../themer/themer.in
+msgid "Image Properties"
+msgstr "Ιδιότητες Εικόνας"
+
+#. ../lisp/sawfish/gtk/widget.jl
+#. ../themer/themer.in
+msgid "No matching item for %S"
+msgstr "Δε βρέθηκε ταίριασμα για το %S"
 
 #. ../themer/themer.in
 #, c-format
@@ -258,6 +293,10 @@ msgstr "Κλειδί"
 msgid "Value"
 msgstr "Τιμή"
 
+#. ../lisp/sawfish/gtk/widgets/file.jl
+msgid "Select file"
+msgstr "Επιλογή αρχείου"
+
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
 msgstr "Νέος..."
@@ -282,6 +321,10 @@ msgstr "Διόρθωση:"
 msgid "** unknown widget **  "
 msgstr "** άγνωστο μαραφέτι **"
 
+#. ../lisp/sawfish/gtk/stock.jl
+msgid "Revert"
+msgstr "Επαναφορά"
+
 #. ../lisp/sawfish/ui/layouts/keymaps.jl
 msgid "Context:"
 msgstr "Περιεχόμενα:"
@@ -299,6 +342,22 @@ msgstr "Σφάλμα Πριονόψαρου"
 msgid "Sawfish configurator"
 msgstr "Ρυθμιστης του Sawfish"
 
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Χώροι εργασίας:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Στήλες:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Γραμμές:"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/commands.jl
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 #. ../lisp/sawfish/ui/widgets/command.jl
@@ -338,18 +397,6 @@ msgstr "Ενέργειες"
 msgid "Match window properties"
 msgstr "Ταίριασμα ιδιοτήτων παραθύρων"
 
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Χώροι εργασίας:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Στήλες:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Γραμμές:"
-
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
@@ -386,8 +433,63 @@ msgid "Tooltips"
 msgstr "Βοηθήματα"
 
 #. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Call command"
+msgstr "Εντολή"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr ""
+"Κλήση της εντολής ΟΝΟΜΑ· προαιρετικά με το προθεματικό όρισμα ΠΡΟΘ-ΟΡΙΣΜΑ."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Run shell command"
+msgstr "Εκτέλεση εντολής φλοιού"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Execute the given shell command."
+msgstr "Εκτέλεση δοθείσας εντολής φλοιού."
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Command:"
 msgstr "Εντολή:"
+
+#. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Command sequence"
+msgstr "Εντολή"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Κλήση της λίστας εντολών, μία προς μία."
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Quit"
+msgstr "Έξοδος"
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Restart"
+msgstr "Επανεκκίνση"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Destroy window"
+msgstr "Καταστροφή παραθύρου"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Kill client"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command with output to screen"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr ""
+"Προέτρεψε για μια εντολή, εκτέλεσέ την και εκτύπωσε οτιδήποτε έξοδο στην "
+"οθόνη."
 
 # # NOTE: "send focus" refers to whether the remote
 # #   client will be notified about chat window focus changes
@@ -435,6 +537,14 @@ msgstr "Μεγιστοποίηση"
 msgid "Miscellaneous"
 msgstr "Διάφορα"
 
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Customize"
+msgstr "Παραμετροποίηση"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "Κλήση του συστήματος παραμετροποίησης χρήστη."
+
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "Πότε ο δείκτης του ποντικιού επηρεάζει την εστίαση της εισόδου."
@@ -472,6 +582,10 @@ msgid "Bevel intensity: \\wpercent."
 msgstr "Ένταση λοξότμησης: \\wεπί τοις εκατό."
 
 #. ../lisp/sawfish/wm/frames.jl
+msgid "Edit frame style"
+msgstr "Τροποποίηση μορφής πλαισίου"
+
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Default"
 msgstr "Εξ' ορισμού"
 
@@ -496,14 +610,26 @@ msgid "None"
 msgstr "Κανένα"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+msgid "global-keymap"
+msgstr ""
+
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
 msgstr "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται για παντού."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "window-keymap"
+msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap containing bindings active when a client window is focused."
 msgstr ""
 "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν το παράθυρο πελάτης "
 "εστιαστεί."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "root-window-keymap"
+msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -515,6 +641,10 @@ msgstr ""
 "(ή όταν κανένα παράθυρο δεν είναι εστιασμένο.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+msgid "title-keymap"
+msgstr ""
+
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the title of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
@@ -524,12 +654,20 @@ msgstr ""
 "ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+msgid "border-keymap"
+msgstr "border-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the border "
+"of\na window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
 "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
 "περιθώριο ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "close-button-keymap"
+msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -541,6 +679,10 @@ msgstr ""
 "ποντίκι.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+msgid "iconify-button-keymap"
+msgstr ""
+
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the iconify\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
@@ -548,6 +690,10 @@ msgstr ""
 "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
 "κουμπί εικονοποίησης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
 "ποντίκι.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "maximize-button-keymap"
+msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -559,6 +705,10 @@ msgstr ""
 "ποντίκι.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+msgid "menu-button-keymap"
+msgstr ""
+
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
@@ -567,13 +717,17 @@ msgstr ""
 "κουμπί μενού ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+msgid "shade-button-keymap"
+msgstr ""
+
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the shade button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
 "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"κουμπί σκίασης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι, "
-"σε αυτό το χάρτη)"
+"κουμπί σκίασης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι, σε "
+"αυτό το χάρτη)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Motion threshold for mouse pointer: \\wpixels"
@@ -592,6 +746,14 @@ msgstr "Εμφάνιση πληροφοριών πλήκτρων-αντιστοιχίας στα στοιχεία των μενού."
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
 msgstr "Ελαχιστοποίηση"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Unmaximize"
+msgstr "Απόμεγιστοποίηση"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Maximize"
+msgstr "Μεγιστοποίηση"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
@@ -661,10 +823,12 @@ msgstr "Υψηλότερο επίπεδο"
 msgid "Lower layer"
 msgstr "Χαμηλότερο επίπεδο"
 
+#. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Frame type"
 msgstr "Τύπος πλαισίου"
 
+#. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Frame style"
 msgstr "Μορφή πλαισίου"
@@ -713,12 +877,28 @@ msgid "_About Sawfish..."
 msgstr "_Περί του Πριονόψαρου..."
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Restart"
-msgstr "Επανεκκίνση"
+msgid "Popup window menu"
+msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Quit"
-msgstr "Έξοδος"
+msgid "Display the menu listing all window operations."
+msgstr "Εμφάνιση του μενού με όλες τις λειτουργίες παραθύρων."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup root menu"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "Εμφάνιση του κυρίως μενού."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup apps menu"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "Εμφάνιση του μενού εφαρμογών."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "All settings"
@@ -758,9 +938,73 @@ msgstr "κανένα"
 msgid "Keep transient windows stacked above: \\w"
 msgstr "Διατήρηση των βραχύβιων παραθύρων στοιβαγμένων πάνω από: \\w"
 
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise single window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"Raise the window to its highest allowed position in the stacking order."
+msgstr ""
+"Ανασήκωση του παραθύρου στην ψηλότερη δυνατή θέση στη σειρά στοιβάγματος."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower single window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr ""
+"Κατέβασμα του παραθύρου στη χαμηλότερη δυνατή θέση στη σειρά στοιβάγματος."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise lower single window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
+msgstr ""
+"Αν το παράθυρο είναι στην ψηλότερη δυνατή θέση, τότε κατέβασέ το στη\n"
+"χαμηλότερη δυνατή θέση. Διαφορετικά ανασήκωσέ το όσο πιο επάνω είναι "
+"επιτρεπτό."
+
+#. ../lisp/sawfish/wm/stacking.jl
+#, fuzzy
+msgid "Raise window depth"
+msgstr "_Αποστολή παραθύρου στο"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr ""
+"Τοποθέτηση του παραθύρου στο επίπεδο στοιβάγματος πάνω από το τρέχον επίπεδο."
+
+#. ../lisp/sawfish/wm/stacking.jl
+#, fuzzy
+msgid "Lower window depth"
+msgstr "_Αποστολή παραθύρου στο"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr ""
+"Τοποθέτηση του παραθύρου στο επίπεδο στοιβάγματος κάτω από το τρέχον επίπεδο."
+
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Windows uniconify to the current viewport."
 msgstr "Αποεικονοποίηση παραθύρων στην τρέχουσα όψη."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Activate viewport"
+msgstr "θύρα όψης"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "Επιλογή της συγκεκριμένης όψης."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Column:"
@@ -769,6 +1013,105 @@ msgstr "Στήλες:"
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Row:"
 msgstr "Σειρές:"
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Activate viewport column"
+msgstr "Επιλογή της συγκεκριμένης στήλης όψης."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Επιλογή της συγκεκριμένης στήλης όψης."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Activate viewport row"
+msgstr "Επιλογή της συγκεκριμένης γραμμής όψης."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Επιλογή της συγκεκριμένης γραμμής όψης."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Move window to viewport"
+msgstr "Μετακίνηση του παραθύρου στην επόμενη όψη."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "Μετακίνηση του τρέχοντος παραθύρου στη συγκεκριμένη όψη."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Move viewport right"
+msgstr "Μετακίνηση χώρου εργασίας προς τα δεξιά"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "Μετακίνηση της όψης μια οθόνη προς τα δεξιά."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Move viewport left"
+msgstr "Μετακίνηση χώρου εργασίας προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "Μετακίνηση της όψης μια οθόνη προς τα αριστερά."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Move viewport up"
+msgstr "θύρα όψης"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "Μετακίνηση της όψης μια οθόνη προς τα επάνω."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Move viewport down"
+msgstr "Μετακίνηση της όψης μια οθόνη προς τα κάτω."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "Μετακίνηση της όψης μια οθόνη προς τα κάτω."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Move window right"
+msgstr "Μετακίνηση χώρου εργασίας προς τα δεξιά"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport on the right."
+msgstr "Μετακίνηση του παραθύρου μια όψη προς τα δεξιά."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Move window left"
+msgstr "Μετακίνηση χώρου εργασίας προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport on the left."
+msgstr "Μετακίνηση του παραθύρου μια όψη προς τα αριστερά."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Move window up"
+msgstr "_Αποστολή παραθύρου στο"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport above."
+msgstr "Μετακίνηση του παραθύρου μια όψη προς τα επάνω."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Move window down"
+msgstr "_Αποστολή παραθύρου στο"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport below."
+msgstr "Μετακίνηση του παραθύρου μια όψη προς τα κάτω."
 
 #. ../lisp/sawfish/wm/window-anim.jl
 msgid "The default window animation mode: \\w"
@@ -803,8 +1146,7 @@ msgid ""
 "\n"
 "A negative number means outside the top window edge."
 msgstr ""
-"Μετατόπιση (%) από την άκρη της κορυφής της οθόνης στην εκτίναξη του "
-"δείκτη.\n"
+"Μετατόπιση (%) από την άκρη της κορυφής της οθόνης στην εκτίναξη του δείκτη.\n"
 "\n"
 "Ένας αρνητικός αριθμός σημαίνει έξω από την άκρη της κορυφής της οθόνης."
 
@@ -817,6 +1159,33 @@ msgstr ""
 "Μορφή για δημιουργία μοναδικών ονομάτων παραθύρων. \n"
 "\n"
 "Κάνει χρήση δύο παραμέτρων (ΟΝΟΜΑ ΔΕΙΚΤΗΣ)."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window"
+msgstr "Διαγραφή παραθύρου"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window."
+msgstr "Κλείσιμο του παραθύρου."
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Delete window safely"
+msgstr "Κλείσιμο του παραθύρου."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window, or beep if the window can't be closed safely."
+msgstr ""
+"Διαγραφή παραθύρου ή ηχητικό σήμα αν το παράθυρο δε μπορεί να κλήσει με "
+"ασφάλεια."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Uniquify window name"
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "Επιβολή του τρέχοντος παραθύρου να έχει μοναδικό τίτλο."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Virtual desktop configuration."
@@ -860,6 +1229,7 @@ msgstr "Οι διάλογοι εμφανίζονται στον ίδιο χώρο εργασίας με την εφαρμογή τους."
 msgid "Workspace names"
 msgstr "Ονόματα χώρων εργασίας"
 
+#. ../lisp/sawfish/wm/util/compat.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace"
 msgstr "Παρεμβολή χώρου εργασίας"
@@ -893,10 +1263,451 @@ msgstr "Μετακίνηση χώρου εργασίας προς τα αριστερά"
 msgid "space %d"
 msgstr "χώρος %d"
 
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Popup workspace list"
+msgstr "Μετακίνηση χώρου εργασίας προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu containing the list of all workspaces."
+msgstr "Εμφάνιση του μενού που περιέχει τη λίστα όλων των χώρων εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Popup window list"
+msgstr "Στη λίστα _παραθύρων"
+
+# simos@hellug.gr: slide show = προβολή διαφανειών
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu of all managed windows."
+msgstr "Εμφάνιση του μενού σε όλα τα διαλογικά παράθυρα."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Next workspace"
+msgstr "Επόμενος χώρος εργασίας"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the next workspace."
+msgstr "Εμφάνιση του επόμενου χώρου εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Previous workspace"
+msgstr "Προηγούμενος χώρος εργασίας"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the previous workspace."
+msgstr "Εμφάνιση του προηγούμενου χώρου εργασίας"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Send to next workspace"
+msgstr "Επιλογή δεδομένων προς αποθήκευση"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the next workspace."
+msgstr "Μετακίνηση του παραθύρου στο επόμενο χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Send to previous workspace"
+msgstr "Επιλογή προηγούμενου χώρου εργασίας"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the previous workspace."
+msgstr "Μετακίνηση του παραθύρου στο προηγούμενο χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Copy to next workspace"
+msgstr "Εμφάνιση του επόμενου χώρου εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "Αντιγραφή του παραθύρου στο επόμενο χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Copy to previous workspace"
+msgstr "Εμφάνιση του προηγούμενου χώρου εργασίας"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "Αντιγραφή του παραθύρου στο προηγούμενο χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Append workspace and send"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr ""
+"Δημιουργία νέου χώρου εργασίας στο τέλος της λίστας και μετακίνηση του "
+"παραθύρου σε αυτό."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prepend workspace and send"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the start of the list, and move the window to it."
+msgstr ""
+"Μετακίνηση του νέου χώρου εργασίας στην αρχή της λίστας και μετακίνησε το "
+"παράθυρο σε αυτό."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Merge next workspace"
+msgstr "Επιλογή δεδομένων προς αποθήκευση"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
+msgstr ""
+"Διαγραφή του τρέχοντος χώρου εργασίας. Τα παράθυρά του μεταφέρονται στο "
+"επόμενο\n"
+"χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Merge previous workspace"
+msgstr "Επιλογή προηγούμενου χώρου εργασίας"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
+msgstr ""
+"Διαγραφή του τρέχοντος χώρου εργασίας. Τα παράθυρά του μεταφέρονται στο\n"
+"προηγούμενο χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Insert workspace after"
+msgstr "Παρεμβολή χώρου εργασίας"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace following the current workspace."
+msgstr "Δημιουργία νέου χώρου εργασίας μετά το τρέχον χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Insert workspace before"
+msgstr "Παρεμβολή χώρου εργασίας"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace before the current workspace."
+msgstr "Δημιουργία νέου χώρου εργασίας πριν το τρέχον χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Move workspace forwards"
+msgstr "Μετακίνηση χώρου εργασίας προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the right."
+msgstr "Μετακίνηση του τρέχοντος χώρου εργασίας μια θέση στα δεξιά."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Move workspace backwards"
+msgstr "Μετακίνηση χώρου εργασίας προς τα δεξιά"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the left."
+msgstr "Μετακίνηση του τρέχοντος χώρου εργασίας μια θέση προς τα αριστερά."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Delete empty workspaces"
+msgstr "Επιλογή δεδομένων προς αποθήκευση"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete any workspaces that don't contain any windows."
+msgstr "Διαγραφή των χώρων εργασίας που δεν περιέχουν παράθυρα."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Delete window instance"
+msgstr "Κλείσιμο του παραθύρου."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Remove the copy of the window on the current workspace. If this is "
+"the\nlast instance remaining, then delete the actual window."
+msgstr ""
+"Διαγραφή του αντιγράφου του παραθύρου από το τρέχων χώρο εργασίας. Αν είναι\n"
+"το τελευταίο αντίγραφο που απομένει, διέγραψε το ίδιο το παράθυρο."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Activate workspace"
+msgstr "Ενεργοποίηση χώρου εργασίας"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select the N'th workspace."
+msgstr "Επιλογή του νιοστού χώρου εργασίας."
+
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace:"
 msgstr "Χώρος εργασίας:"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to workspace"
+msgstr "Αποστολή σε χώρο εργασίας"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current window to the N'th workspace."
+msgstr "Μετακίνηση του τρέχοντος παραθύρου στο νιοστό χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to workspace"
+msgstr "Αντιγραφή στο χώρο εργασίας"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "Αντιγραφή του τρέχοντος παραθύρου στο νιοστό χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Select workspace interactively"
+msgstr "Επιλογή δεδομένων προς αποθήκευση"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Ερώτηση επιλογής χώρου εργασίας και αλλαγή σε αυτό."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Next workspace window"
+msgstr "Επόμενο παράθυρο χώρου εργασίας"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window of the current workspace."
+msgstr "Επιλογή επόμενου παραθύρου από τον τρέχον χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+#, fuzzy
+msgid "Previous workspace window"
+msgstr "_Προηγούμενο χώρο εργασίας"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Focus on the previous window of the current workspace."
+msgstr "Η προσοχή στο προηγούμενο παράθυρο του τρέχοντος χώρου εργασίας."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Next window"
+msgstr "Επόμενο παράθυρο"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window, cycling through all possible workspaces."
+msgstr ""
+"Επιλογή του επόμενου παραθύρου, περνώντας μέσα σε όλους τους πιθανούς χώρους "
+"εργασίας."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Previous window"
+msgstr "Προηγούμενο παράθυρο"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the previous window, cycling through all possible workspaces."
+msgstr ""
+"Επιλογή του προηγούμενου παραθύρου, περνώντας μέσα σε όλους τους πιθανούς "
+"χώρους εργασίας."
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Describe symbol"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Display the documentation of a specified symbol."
+msgstr "Εμφάνιση της τεκμηρίωσης του καθορισμένου συμβόλου."
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos function"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos variable"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome toggle skip winlist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
+msgstr "Αλλαγή τις τιμής του βοηθήματος GNOME SKIP_WINLIST του παραθύρου."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome set skip winlist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_WINLIST hint of the window."
+msgstr "Ρύθμιση του βοηθήματος GNOME SKIP_WINLIST του παραθύρου."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome clear skip winlist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_WINLIST hint of the window."
+msgstr "Απορρύθμιση του βοηθήματος GNOME SKIP_WINLIST του παραθύρου."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome toggle skip tasklist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Αλλαγή τις τιμής του βοηθήματος GNOME SKIP_TASKLIST του παραθύρου."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome set skip tasklist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Ρύθμιση του βοηθήματος GNOME SKIP_TASKLIST του παραθύρου."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome clear skip tasklist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Απορρύθμιση του βοηθήματος GNOME SKIP_TASKLIST του παραθύρου."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome logout"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Logout from the current GNOME session."
+msgstr "Έξοδος από την τρέχουσα συνεδρία του GNOME."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome www page"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Display the WWW page of the GNOME project."
+msgstr "Εμφάνιση της σελίδας WWW του έργου του GNOME."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+#, fuzzy
+msgid "Gnome help browser"
+msgstr "Εκκίνηση του φυλλομετρητή βοήθειας του GNOME."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME help browser."
+msgstr "Εκκίνηση του φυλλομετρητή βοήθειας του GNOME."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome about"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME about dialog."
+msgstr "Εκκίνηση του διαλόγου \"Πέρι...\" του GNOME."
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Iconify group"
+msgstr "Εικονιδοποίηση ομάδας"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Uniconify group"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Iconify transient group"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Uniconify transientgroup"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Make group sticky"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Make group unsticky"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Toggle group sticky"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+#, fuzzy
+msgid "Send group to current workspace"
+msgstr "Τα παράθυρο αποεικονοποιούνται στο τρέχον χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+#, fuzzy
+msgid "Send group to next workspace"
+msgstr "Επιλογή δεδομένων προς αποθήκευση"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+#, fuzzy
+msgid "Send group to previous workspace"
+msgstr "Επιλογή προηγούμενου χώρου εργασίας"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+#, fuzzy
+msgid "Move group to current viewport"
+msgstr "Μετακίνηση στην επόμενη όψη."
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+#, fuzzy
+msgid "Move group left"
+msgstr "Μετακίνηση χώρου εργασίας προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group right"
+msgstr "Μετακίνηση ομάδας προς τα δεξιά"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group up"
+msgstr "Μετακίνηση ομάδας επάνω"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Raise group"
+msgstr "Ανασήκωση ομάδας"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Lower group"
+msgstr "Χαμήλωμα ομάδας"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Raise lower group"
+msgstr "Ανασήκωση χαμηλότερης ομάδας"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Raise group depth"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Lower group depth"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete group"
+msgstr "Διαγραφή ομάδας"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid ""
+"Delete all windows in the group that the current window is a member of."
+msgstr ""
+"Διαγραφή όλων των παραθύρων της ομάδας με τα οποία το τρέχον παράθυρο είναι "
+"μέλος."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing an already grown window grows it again."
@@ -938,8 +1749,7 @@ msgid ""
 msgstr ""
 "Πότε και πως να μετακινείται ο δείκτης κατά τη συσκευασία των παραθύρων.\n"
 "\n"
-"`ίσως' σημαίνει ότι ο δείκτης μετακινείται μαζί με το παράθυρο, αν ο "
-"δείκτης\n"
+"`ίσως' σημαίνει ότι ο δείκτης μετακινείται μαζί με το παράθυρο, αν ο δείκτης\n"
 "ήταν στην περιοχή του παραθύρου πριν την συσκευασία.\n"
 "\n"
 "`πάντα' εκτινάσει το δείκτη στο κέντρο του παραθύρου αν δεν είναι ήδη στο \n"
@@ -947,9 +1757,179 @@ msgstr ""
 "\n"
 "'ποτέ' σημαίνει ο δείκτης να μην εκτινάσεται."
 
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow window left"
+msgstr "Στη λίστα _παραθύρων"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grows window to the left until it `bumps into' another window."
+msgstr ""
+"Μεγαλώνει το παράθυρο προς τα αριστερά μέχρι να ακουμπήσει σε άλλο παράθυρο."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow window right"
+msgstr "Στη λίστα _παραθύρων"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grows window to the right until it `bumps into' another window."
+msgstr ""
+"Μεγαλώνει το παράθυρο προς τα δεξιά μέχρι να ακουμπήσει σε άλλο παράθυρο."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grows window upwards until it `bumps into' another window."
+msgstr ""
+"Μεγαλώνει το παράθυρο προς τα επάνω μέχρι να ακουμπήσει σε άλλο παράθυρο."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grows window downwards until it `bumps into' another window."
+msgstr ""
+"Μεγαλώνει το παράθυρο προς τα κάτω μέχρι να ακουμπήσει σε άλλο παράθυρο."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Pack window left"
+msgstr "Στη λίστα _παραθύρων"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Moves window to the left until it `bumps into' another window."
+msgstr ""
+"Μετακινεί το παράθυρο προς τα αριστερά μέχρι να ακουμπήσει σε άλλο παράθυρο."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Pack window right"
+msgstr "Στη λίστα _παραθύρων"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Moves window to the right until it `bumps into' another window."
+msgstr ""
+"Μετακινεί το παράθυρο προς τα δεξιά μέχρι να ακουμπήσει σε άλλο παράθυρο."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Moves window upwards until it `bumps into' another window."
+msgstr ""
+"Μετακινεί το παράθυρο προς τα επάνω μέχρι να ακουμπήσει σε άλλο παράθυρο."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Moves window downwards until it `bumps into' another window."
+msgstr ""
+"Μετακινεί το παράθυρο προς τα κάτω μέχρι να ακουμπήσει σε άλλο παράθυρο."
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show faq"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show news"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show programmer manual"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/help.jl
+#, fuzzy
+msgid "Help show homepage"
+msgstr "Αρχική Σελίδα Πριονόψαρου"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help about"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Number of pixels to move pointer in `move-cursor-' commands."
 msgstr "Αριθμός πίξελ για μετακίνηση σε εντολές `move-cursor-'."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor right"
+msgstr "Μετακίνηση χώρου εργασίας προς τα δεξιά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the right."
+msgstr ""
+"Μετακίνηση του δείκτη κατά `move-cursor-increment' πίξελ προς τα δεξιά."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor left"
+msgstr "Μετακίνηση χώρου εργασίας προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr ""
+"Μετακίνηση του δείκτη κατά `move-cursor-increment' πίξελ προς τα αριστερά."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor up"
+msgstr "Μετακίνηση του κέρσορα 1 πίξελ προς τα επάνω."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels upwards."
+msgstr ""
+"Μετακίνηση του δείκτη κατά `move-cursor-increment' πίξελ προς τα επάνω."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor down"
+msgstr "Μετακίνηση του κέρσορα 1 πίξελ προς τα κάτω."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels downwards."
+msgstr "Μετακίνηση του δείκτη κατά `move-cursor-increment' πίξελ προς τα κάτω."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor right fine"
+msgstr "Μετακίνηση χώρου εργασίας προς τα δεξιά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the right."
+msgstr "Μετακίνηση του κέρσορα 1 πίξελ προς τα δεξιά."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor left fine"
+msgstr "Μετακίνηση χώρου εργασίας προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the left."
+msgstr "Μετακίνηση του κέρσορα 1 πίξελ προς τα αριστερά."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor up fine"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel upwards."
+msgstr "Μετακίνηση του κέρσορα 1 πίξελ προς τα επάνω."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor down fine"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel downwards."
+msgstr "Μετακίνηση του κέρσορα 1 πίξελ προς τα κάτω."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
@@ -1033,6 +2013,104 @@ msgid "Only update window contents after it has stopped moving."
 msgstr ""
 "Ανανέωση περιεχομένων παραθύρου μόνο μετά από το σταμάτημα μετακίνησής του."
 
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Move window interactively"
+msgstr "Μετακίνηση του παραθύρου διαλογικά με το ποντίκι."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move the window interactively using the mouse."
+msgstr "Μετακίνηση του παραθύρου διαλογικά με το ποντίκι."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Resize window interactively"
+msgstr "Αλλαγή του μεγέθους του παραθύρου διαλογικά με το ποντίκι."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize the window interactively using the mouse."
+msgstr "Αλλαγή του μεγέθους του παραθύρου διαλογικά με το ποντίκι."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Move selected window"
+msgstr "Αποσκίαση επιλεγμένων παραθύρων."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively move that window."
+msgstr ""
+"Αναμονή για το χρήστη να επιλέξει παράθυρο, έπειτα διαλογική μετακίνησή του."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Resize selected window"
+msgstr "Αποσκίαση επιλεγμένων παραθύρων."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively resize that window."
+msgstr ""
+"Αναμονή για το χρήστη να επιλέξει παράθυρο, έπειτα διαλογική αλλαγή του "
+"μεγέθους του."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
+msgstr ""
+"Ανασήκωση του παραθύρου που έλαβε το τρέχον γεγονός και μετά "
+"επανάληψη\nοτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click if focused"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
+msgstr ""
+"Ανασήκωση του παραθύρου που έλαβε το τρέχον γεγονός (αν είναι εστιασμένο),\n"
+"και έπειτα επανάληψη οτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise or pass through click"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise window and pass through click"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise group and pass through click"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
+msgstr ""
+"Ανασήκωση της ομάδας παραθύρων που έλαβε το τρέχων γεγονός και μετά "
+"επανάληψη\nοτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise transients and pass through click"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients "
+"it\nhas, then replay any pointer events that invoked the command."
+msgstr ""
+"Ανασήκωση του παραθύρου που έλαβε το τρέχων γεγονός και ότι άλλων βραχύβιων "
+"έχει,\n"
+"και έπειτα επανάληψη οτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
+
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid ""
 "Default increment for size-window commands (when the window doesn't\n"
@@ -1041,9 +2119,167 @@ msgstr ""
 "Εξ' ορισμού βήμα αύξησης για της εντολές μεγέθους παραθύρων (όταν το\n"
 "παράθυρο δεν ορίζει τα δικά του βήματα αύξησης)."
 
+#. ../lisp/sawfish/wm/commands/size-window.jl
+#, fuzzy
+msgid "Size window add row"
+msgstr "_Αποστολή παραθύρου στο"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one row."
+msgstr "Αύξηση του μεγέθους του τρέχοντος παραθύρου κατά μια γραμμή."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+#, fuzzy
+msgid "Size window subtract row"
+msgstr "_Αποστολή παραθύρου στο"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one row."
+msgstr "Ελάττωση του μεγέθους του τρέχοντος παραθύρου κατά μια γραμμή."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window add column"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one column."
+msgstr "Αύξηση του μεγέθους του τρέχοντος παραθύρου κατά μια στήλη."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window subtract column"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one column."
+msgstr "Ελάττωση του μεγέθους του τρέχοντος παραθύρου κατά μια στήλη."
+
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Number of pixels to move window in `slide-' commands."
 msgstr "Αριθμός πίξελ για την μετακίνηση παραθύρου στις εντολές `slide-'."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+#, fuzzy
+msgid "Slide window left"
+msgstr "_Αποστολή παραθύρου στο"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the left."
+msgstr ""
+"Μετακίνηση του παραθύρου κατά `slide-window-increment' πίξελ προς τα "
+"αριστερά."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+#, fuzzy
+msgid "Slide window right"
+msgstr "_Αποστολή παραθύρου στο"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the right."
+msgstr ""
+"Μετακίνηση του παραθύρου κατά `slide-window-increment' πίξελ προς τα δεξιά."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+#, fuzzy
+msgid "Slide window up"
+msgstr "_Αποστολή παραθύρου στο"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels upwards."
+msgstr ""
+"Μετακίνηση του παραθύρου κατά `slide-window-increment' πίξελ προς τα επάνω."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+#, fuzzy
+msgid "Slide window down"
+msgstr "_Αποστολή παραθύρου στο"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels downwards."
+msgstr ""
+"Μετακίνηση του παραθύρου κατά `slide-window-increment' πίξελ προς τα κάτω."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the left."
+msgstr ""
+"Μετακίνηση της ομάδας παραθύρων `slide-window-increment' πίξελ προς τα "
+"αριστερά."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the right."
+msgstr ""
+"Μετακίνηση της ομάδας παραθύρων `slide-window-increment' πίξελ προς τα δεξιά."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+#, fuzzy
+msgid "Slide group up"
+msgstr "Νέα Ομάδα"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels upwards."
+msgstr ""
+"Μετακίνηση της ομάδας παραθύρων `slide-window-increment' πίξελ προς τα επάνω."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels downwards."
+msgstr ""
+"Μετακίνηση της ομάδας παραθύρων `slide-window-increment' πίξελ προς τα κάτω."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move viewport next"
+msgstr "Μετακίνηση της όψης μια οθόνη προς τα επάνω."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the next viewport."
+msgstr "Μετακίνηση στην επόμενη όψη."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move viewport previous"
+msgstr "Συγχώνευση με το προηγούμενο"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the previous viewport."
+msgstr "Μετακίνηση στην προηγούμενη όψη."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move window previous"
+msgstr "Συγχώνευση με το προηγούμενο"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the previous viewport."
+msgstr "Μετακίνηση του παραθύρου στην προηγούμενη όψη."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move window next"
+msgstr "_Αποστολή παραθύρου στο"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the next viewport."
+msgstr "Μετακίνηση του παραθύρου στην επόμενη όψη."
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Set viewport linear"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+#, fuzzy
+msgid "Set window viewport linear"
+msgstr "Μετακίνηση του παραθύρου μια όψη προς τα επάνω."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Display window names while cycling through windows."
@@ -1086,6 +2322,10 @@ msgstr ""
 "Απενεργοποίηση της αυτόματης ανασήκωσης όταν προσωρινά επιλέγονται παράθυρα."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "cycle-keymap"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid ""
 "Keymap containing bindings active only during window cycling operations."
 msgstr ""
@@ -1099,6 +2339,18 @@ msgstr "Το πρόγραμμα που εκτελέστηκε από την εντολή `xterm'"
 #. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "Optional arguments given to the `xterm' command."
 msgstr "Προαιρετικές παράμετροι για την εντολή `xterm'."
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Start a new xterm."
+msgstr "Εκκίνηση νέου τερματικού."
+
+#. ../lisp/sawfish/wm/ext/3d-hack.jl
+msgid "3d hack"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Play sound effects for window events."
@@ -1189,6 +2441,159 @@ msgstr "Πού να εμφανίζονται μηνύματα σφαλμάτων: \\w"
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "No errors."
 msgstr "Κανένα σφάλμα."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display errors"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display all errors that have occurred to the screen."
+msgstr "Εμφάνιση όλων των σφαλμάτων που έχουν συμβεί, στην οθόνη."
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Name"
+msgstr "Όνομα"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Class"
+msgstr "Κλάση"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Icon Name"
+msgstr "Όνομα Εικονιδίου"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Role"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Host"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Locale"
+msgstr "Τοπική ρύθμιση"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignore program position"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Place mode"
+msgstr "Κατάσταση τοποθέτησης"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Position"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Dimensions"
+msgstr "Διαστάσεις"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Workspace"
+msgstr "Χώρος εργασίας"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Viewport"
+msgstr "Θύρα όψης"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Depth"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Placement weight"
+msgstr "Τοποθέτηση"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Maximized"
+msgstr "Μεγιστοποιημένο"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Raise on focus"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus when mapped"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never focus"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus click through"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Focus mode"
+msgstr "Εστιασμένο"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "Αγνοημένο"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Iconified"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Shaded"
+msgstr "Σκιασμένο"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Sticky"
+msgstr "Προσκολούμενο"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Sticky viewport"
+msgstr "Προσκολλούμενη θύρα όψης"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Group"
+msgstr "Ομάδα"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ungrouped"
+msgstr "Χωρίς ομαδοποίηση"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Cycle skip"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Window list skip"
+msgstr "Στη λίστα _παραθύρων"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Unique name"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Auto gravity"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Shade hover"
+msgstr "Σκίαση Μετεώρισμα"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Transients above"
+msgstr "προσωρινά"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignore stacking requests"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
@@ -1283,6 +2688,48 @@ msgstr ""
 "Να μη γίνετε αυτόματη απομνημόνευση των θέσεων των βραχύβιων παραθύρων."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save position"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current position of the focused window."
+msgstr "Απομνημόνευση της τρέχουσας θέσης του εστιασμένου παραθύρου."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save dimensions"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current dimensions of the focused window."
+msgstr "Απομνημόνευση των τρεχόντων διαστάσεων του εστιασμένου παραθύρου."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save attributes"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current attributes of the focused window."
+msgstr "Απομνημόνευση των τρεχόντων χαρακτηριστικών του εστιασμένου παραθύρου."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history forget"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget any persistent state associated with the current window."
+msgstr ""
+"Λησμόνηση οποιαδήποτε διαρκούς κατάστασης συσχετισμένης με το τρέχον "
+"παράθυρο."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history clear"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget all saved window history."
+msgstr "Λησμόνηση όλου του αποθηκευμένου ιστορικού παραθύρου."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
 msgstr "_Ιστορικό"
 
@@ -1301,6 +2748,10 @@ msgstr "Δικτυακός τόπος του GNOME..."
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "About GNOME..."
 msgstr "Περί του GNOME..."
+
+#. ../lisp/sawfish/wm/gnome/menus.jl
+msgid "Gnome menus update"
+msgstr ""
 
 #. ../lisp/sawfish/wm/placement/smart.jl
 msgid ""
@@ -1362,8 +2813,121 @@ msgid "Uniconifying a window also uniconifies the: \\w"
 msgstr "Η αποεικονοποίηση ενός παραθύρου επίσης αποεικονοποιεί το: \\w"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Iconify window"
+msgstr "Ελαχιστοποίηση παραθύρου"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Iconify the window."
+msgstr "Ελαχιστοποίηση του παραθύρου."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Uniconify window"
+msgstr "Απελαχιστοποίηση παραθύρου"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Return the window from its iconified state."
+msgstr "Επιστροφή του παραθύρου από την εικονοποιημένη κατάστασή του."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "Toggle window iconified"
+msgstr "Τα μη επιδεκτικά διαχείρησης παράθυρα μπορούν να εικονοποιούνται."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle the iconification of window W."
+msgstr "Αλλαγή της εικονοποίησης του παραθύρου Π."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "Iconify workspace windows"
+msgstr "Ελαχιστοποίηση του παραθύρου."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Iconify all windows on the current workspace."
+msgstr "Ελαχιστοποίηση όλων των παραθύρων στο τρέχον χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "Make window sticky"
+msgstr "Ταιριασμένα παράθυρα"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Make window unsticky"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle window sticky"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
+msgstr ""
+"Αλλαγή της κολλώδους ιδιότητας `stickiness' του παραθύρου· είτε είναι μέλος\n"
+"όλων των χώρων εργασίας είτε όχι."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle single window mode"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Προσκολούμενο"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Make window ignored"
+msgstr "Ταίριασμα ιδιοτήτων παραθύρων"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Ignore the window."
+msgstr "Αγνόηση του παραθύρου."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Make window not ignored"
+msgstr "Ταίριασμα ιδιοτήτων παραθύρων"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Unignore the window."
+msgstr "Παύση αγνόησης του παραθύρου"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle window ignored"
+msgstr "Αλλαγή της τιμής της ιδιότητας αγνόησης παραθύρου."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored or not."
+msgstr "Αλλαγή της τιμής της ιδιότητας αγνόησης παραθύρου."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window never focus"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is focusable or not."
+msgstr "Αλλαγή της τιμής της ιδιότητας εστίασης παραθύρου."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window cycle skip"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored while window cycling."
+msgstr ""
+"Αλλαγή της τιμής της ιδιότητας αγνόησης παραθύρου κατά τη διαδοχή παραθύρων."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle window list skip"
+msgstr "Στη λίστα _παραθύρων"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window will be include in the window list."
+msgstr ""
+"Αλλαγή της τιμής της ιδιότητας συμπερίληψης παραθύρου στη λίστα παραθύρων."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
@@ -1407,6 +2971,169 @@ msgstr "Να μην καλύπτονται τα 'αγνοημένα' παράθυρα κατά τη μεγιστοποίηση."
 msgid "Lock position and size while windows are maximized."
 msgstr "Κλείδωμα θέσης και μεγέθους κατά τη μεγιστοποίηση παραθύρων."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window"
+msgstr "Μεγιστοποίηση παραθύρου"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the dimensions of the window."
+msgstr "Μεγιστοποίηση των διαστάσεων του παραθύρου."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Unmaximize window"
+msgstr "Απόμεγιστοποίηση παραθύρου"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Restore the dimensions of the window to its original, unmaximized, state."
+msgstr ""
+"Επαναφορά των διαστάσεων του παραθύρου στην αρχική, μη μεγιστοποιημένη, "
+"κατάσταση."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window vertically"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the vertical dimension of the window."
+msgstr "Μεγιστοποίηση της κάθετης διάστασης του παραθύρου."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window horizontally"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the horizontal dimension of the window."
+msgstr "Μεγιστοποίηση της οριζόντιας διάστασης του παραθύρου."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window toggle"
+msgstr "Μεγιστοποίηση"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Toggle the state of the window between maximized and unmaximized."
+msgstr "Αλλαγή της κατάστασης παραθύρου μεταξύ μεγιστοποιημένου και μη."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window horizontally toggle"
+msgstr "Οριζόντια μεγιστοποίηση παραθύρου χωρίς την επικάλυψη άλλων παραθύρων."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized and\n"
+"unmaximized."
+msgstr ""
+"Αλλαγή της κατάστασης παραθύρου μεταξύ οριζόντια μεγιστοποιημένου και\n"
+"μη μεγιστοποιημένου."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window vertically toggle"
+msgstr "Κάθετη μεγιστοποίηση παραθύρου χωρίς την επικάλυψη άλλων παραθύρων."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized and\n"
+"unmaximized."
+msgstr ""
+"Αλλαγή της κατάστασης παραθύρου μεταξύ κάθετα μεγιστοποιημένου και\n"
+"μη μεγιστοποιημένου."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize fill window"
+msgstr "Μεγιστοποίηση"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window without obscuring any other windows."
+msgstr "Μεγιστοποίηση παραθύρου χωρίς την επικάλυψη άλλων παραθύρων."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window vertically"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window vertically without obscuring any other windows."
+msgstr "Κάθετη μεγιστοποίηση παραθύρου χωρίς την επικάλυψη άλλων παραθύρων."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window horizontally"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window horizontally without obscuring any other windows."
+msgstr "Οριζόντια μεγιστοποίηση παραθύρου χωρίς την επικάλυψη άλλων παραθύρων."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window toggle"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between maximized-filled and unmaximized."
+msgstr ""
+"Αλλαγή της κατάστασης παραθύρου μεταξύ μεγιστοποιημένου-γεμισμένου και μη "
+"μεγιστοποιημένου."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize fill window horizontally toggle"
+msgstr "Οριζόντια μεγιστοποίηση παραθύρου χωρίς την επικάλυψη άλλων παραθύρων."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"Αλλαγή της κατάστασης παραθύρου μεταξύ οριζόντια μεγιστοποιημένου-γεμισμένου\n"
+"και μη μεγιστοποιημένου."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize fill window vertically toggle"
+msgstr "Κάθετη μεγιστοποίηση παραθύρου χωρίς την επικάλυψη άλλων παραθύρων."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized-filled "
+"and\nunmaximized."
+msgstr ""
+"Αλλαγή της κατάστασης παραθύρου μεταξύ κάθετα μεγιστοποιημένου-γεμισμένου\n"
+"και μη μεγιστοποιημένου."
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid "Shade window"
+msgstr "Σκίαση παραθύρου"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid "Display only the title bar of the window."
+msgstr "Εμφάνιση μόνο της μπάρας τίτλου του παραθύρου."
+
+#. ../lisp/sawfish/wm/state/shading.jl
+#, fuzzy
+msgid "Unshade window"
+msgstr "Αποσκίαση επιλεγμένων παραθύρων."
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"If the window is shaded (see `shade-window'), restore it to it's "
+"usual\nstate."
+msgstr ""
+"Αν το παράθυρο είναι σκιασμένο (δείτε `shade-window'), επαναφορά\n"
+"στη συνήθη κατάσταση."
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid "Toggle window shaded"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"Toggle the shaded (only the title bar is displayed) state of the window."
+msgstr ""
+"Αλλαγή της κατάστασης σκίασης (μόνο η μπάρα τίτλου φαίνετε) του παραθύρου."
+
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "S_haded"
 msgstr "Σ_κιασμένο"
@@ -1422,6 +3149,47 @@ msgstr "Τα παράθυρα διαλόγου κληρονομούν την εστίαση των γονέων τους."
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Decorate dialog windows similarly to application windows."
 msgstr "Διακόσμηση των παραθύρων διαλόγου παρόμοια με των παραθύρων εφαρμογής."
+
+#. ../lisp/sawfish/wm/state/transient.jl
+#, fuzzy
+msgid "Raise window and transients"
+msgstr "Ανασήκωση παραθύρων όταν αποσκιάζονται."
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+"Ανασήκωση του τρέχοντος παραθύρου στην ψηλότερη επιτρεπτή θέση στη διάταξη\n"
+"στοιβάγματος. Επίσης ανασήκωση οτιδήποτε βραχύβιων παραθύρων έχει."
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Lower window and transients"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+"Κατέβασμα του τρέχοντος παραθύρου στην χαμηλότερη επιτρεπτή θέση στη διάταξη\n"
+"στοιβάγματος. Επίσης χαμήλωμα οτιδήποτε βραχύβιων παραθύρων έχει."
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Raise lower window and transients"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also changes\n"
+"the level of any transient windows it has."
+msgstr ""
+"Αν το παράθυρο είναι στην ψηλότερη δυνατή θέση, τότε κατέβασέ το στη "
+"χαμηλότερη\n"
+"δυνατή θέση. Διαφορετικά, ανασήκωσέ το όσο πιο πολύ επιτρέπετε. Επίσεις, "
+"αλλάζει\n"
+"το επίπεδο οτιδήποτε βραχύβιων παραθύρων υπάρχουν."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Windows uniconify to the current workspace when they are selected."
@@ -1440,6 +3208,23 @@ msgstr "Ανασήκωση επιλεγμένων παραθύρων (κανονικά από το μενού Παραθύρων)."
 msgid "Warp the pointer to selected windows."
 msgstr "Εκτίναξη του δείκτη στα επιλεγμένα παράθυρα."
 
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display window without focusing"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace/viewport containing the window W."
+msgstr "Προβολή του χώρου εργασίας/όψης που περιέχει το παράθυρο Π."
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace containing the window W, then focus on W."
+msgstr ""
+"Προβολή του χώρου εργασίας που περιέχει το παράθυρο Π, μετά εστίαση στο Π."
+
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "Group transient windows with their parents."
 msgstr "Ομαδοποίηση βραχύβιων παραθύρων με τα γονικά τους παράθυρα."
@@ -1452,9 +3237,44 @@ msgstr "Διαρκείς ταυτότητες ομάδων"
 msgid "New group"
 msgstr "Νέα Ομάδα"
 
+#. ../lisp/sawfish/wm/util/gtkrc.jl
+msgid "Gtkrc reload style"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/gtkrc.jl
+msgid "Reload the gtkrc settings."
+msgstr "Επαναφόρτωση των ρυθμίσεων gtkrc."
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Describe key"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Prompt for a key sequence, then print its binding."
+msgstr ""
+"Αναμονή για συνδιασμό πλήκτρων και μετά εμφάνιση με τι είναι συνδεδεμένο."
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Press key..."
+msgstr "Πιέστε κάποιο πλήκτρο..."
+
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "[Quote]"
 msgstr "[Αναφέρατε]"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Quote event"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
+msgstr ""
+"Αποστέλνει το επόμενο γεγονός πλήκτρολογίου κατευθείαν στο εστιασμένο "
+"παράθυρο\n"
+"πελάτη, αγνοώντας οτιδήποτε συνδέσεις μπορεί να έχει ο διαχειριστής "
+"παραθύρων."
 
 #. ../lisp/sawfish/wm/util/nokogiri.jl
 msgid "novice"
@@ -1494,8 +3314,8 @@ msgstr "Εμφάνιση ονομάτων μεταβλητών για κάθε επιλογή παραμετροποίησης."
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
 msgid ""
-"The program used to play audio samples. If unset, built-in support for ESD "
-"is used."
+"The program used to play audio samples. If unset, built-in support for ESD is "
+"used."
 msgstr ""
 "Το πρόγραμμα για αναπαραγωγή δειγμάτων ήχου. Αν δεν οριστεί, θα "
 "χρησιμοποιηθεί εσωτερική υποστήριξη του ESD."
@@ -1504,15 +3324,36 @@ msgstr ""
 msgid "Window:"
 msgstr "Παράθυρο:"
 
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+#, c-format
+msgid "Workspace %d"
+msgstr "Χώρος εργασίας %d"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "prompt-keymap"
+msgstr ""
+
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
 msgstr ""
-"Πίνακας χαρακτήτων με ενεργές συνδέσεις όταν αναγιγνώσκεται αλφαριθμητικό "
-"από το χρήστη."
+"Πίνακας χαρακτήτων με ενεργές συνδέσεις όταν αναγιγνώσκεται αλφαριθμητικό από "
+"το χρήστη."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 msgid "When raising a window, also raise its: \\w"
 msgstr "Η ανασήκωση παραθύρου επίσεις ανασηκώνει το: \\w"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Raise window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Lower window"
+msgstr "Χαμήλωμα παραθύρου"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Raise lower window"
+msgstr ""
 
 #. ../themer/themer.glade:1315
 msgid " to: "
@@ -1538,10 +3379,6 @@ msgstr "Ιδιότητες"
 #. ../themer/themer.glade:1746 ../themer/themer.glade:1856
 msgid "Cancel"
 msgstr "Άκυρο"
-
-#. ../themer/themer.glade:1163
-msgid "Class"
-msgstr "Κλάση"
 
 #. ../themer/themer.glade:675 ../themer/themer.glade:829
 msgid "Clicked"
@@ -1622,10 +3459,6 @@ msgstr "Χάρτης:"
 #. ../themer/themer.glade:1480
 msgid "Mapping"
 msgstr "Αντιστοίχηση"
-
-#. ../themer/themer.glade:515 ../themer/themer.glade:763
-msgid "Name"
-msgstr "Όνομα"
 
 #. ../themer/themer.glade:74
 msgid "New Theme"
@@ -1720,646 +3553,5 @@ msgstr "_Ρυθμίσεις"
 msgid "_Themes"
 msgstr "_Θέματα"
 
-#~ msgid "and many others..."
-#~ msgstr "και πολλοί άλλοι..."
-
-#~ msgid "Sawfish manages your windows extensibly."
-#~ msgstr "Το Πριονόψαρο διαχειρίζεται τα παράθυρά σας ευρύτατα."
-
 #~ msgid "Protect the sawfish"
 #~ msgstr "Προστατέψτε το πριονόψαρο"
-
-#~ msgid "Sawfish homepage"
-#~ msgstr "Αρχική Σελίδα Πριονόψαρου"
-
-#~ msgid "Select color"
-#~ msgstr "Επιλογή χρώματος"
-
-#~ msgid "Select font"
-#~ msgstr "Επιλέξτε γραμματοσειρά"
-
-#~ msgid "Select Image"
-#~ msgstr "Επιλογή Εικόνας"
-
-#~ msgid "Image Properties"
-#~ msgstr "Ιδιότητες Εικόνας"
-
-#~ msgid "No matching item for %S"
-#~ msgstr "Δε βρέθηκε ταίριασμα για το %S"
-
-#~ msgid "Select file"
-#~ msgstr "Επιλογή αρχείου"
-
-#~ msgid "Revert"
-#~ msgstr "Επαναφορά"
-
-#~ msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-#~ msgstr ""
-#~ "Κλήση της εντολής ΟΝΟΜΑ· προαιρετικά με το προθεματικό όρισμα ΠΡΟΘ-ΟΡΙΣΜΑ."
-
-#~ msgid "Execute the given shell command."
-#~ msgstr "Εκτέλεση δοθείσας εντολής φλοιού."
-
-#~ msgid "Invoke the list of commands, one by one."
-#~ msgstr "Κλήση της λίστας εντολών, μία προς μία."
-
-#~ msgid ""
-#~ "Prompt for a command, execute it, and print any output to the screen."
-#~ msgstr ""
-#~ "Προέτρεψε για μια εντολή, εκτέλεσέ την και εκτύπωσε οτιδήποτε έξοδο στην "
-#~ "οθόνη."
-
-#~ msgid "Invoke the user-customization system."
-#~ msgstr "Κλήση του συστήματος παραμετροποίησης χρήστη."
-
-#~ msgid "Unmaximize"
-#~ msgstr "Απόμεγιστοποίηση"
-
-#~ msgid "Maximize"
-#~ msgstr "Μεγιστοποίηση"
-
-#~ msgid "Display the menu listing all window operations."
-#~ msgstr "Εμφάνιση του μενού με όλες τις λειτουργίες παραθύρων."
-
-#~ msgid "Display the main menu."
-#~ msgstr "Εμφάνιση του κυρίως μενού."
-
-#~ msgid "Display the applications menu."
-#~ msgstr "Εμφάνιση του μενού εφαρμογών."
-
-#~ msgid ""
-#~ "Raise the window to its highest allowed position in the stacking order."
-#~ msgstr ""
-#~ "Ανασήκωση του παραθύρου στην ψηλότερη δυνατή θέση στη σειρά στοιβάγματος."
-
-#~ msgid ""
-#~ "Lower the window to its lowest allowed position in the stacking order."
-#~ msgstr ""
-#~ "Κατέβασμα του παραθύρου στη χαμηλότερη δυνατή θέση στη σειρά στοιβάγματος."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed."
-#~ msgstr ""
-#~ "Αν το παράθυρο είναι στην ψηλότερη δυνατή θέση, τότε κατέβασέ το στη\n"
-#~ "χαμηλότερη δυνατή θέση. Διαφορετικά ανασήκωσέ το όσο πιο επάνω είναι "
-#~ "επιτρεπτό."
-
-#~ msgid "Put the window in the stacking level above its current level."
-#~ msgstr ""
-#~ "Τοποθέτηση του παραθύρου στο επίπεδο στοιβάγματος πάνω από το τρέχον επίπεδο."
-
-#~ msgid "Put the window in the stacking level beneath its current level."
-#~ msgstr ""
-#~ "Τοποθέτηση του παραθύρου στο επίπεδο στοιβάγματος κάτω από το τρέχον επίπεδο."
-
-#~ msgid "Select the specified viewport."
-#~ msgstr "Επιλογή της συγκεκριμένης όψης."
-
-#~ msgid "Select the specified viewport column."
-#~ msgstr "Επιλογή της συγκεκριμένης στήλης όψης."
-
-#~ msgid "Select the specified viewport row."
-#~ msgstr "Επιλογή της συγκεκριμένης γραμμής όψης."
-
-#~ msgid "Move the current window to the specified viewport."
-#~ msgstr "Μετακίνηση του τρέχοντος παραθύρου στη συγκεκριμένη όψη."
-
-#~ msgid "Move the viewport one screen to the right."
-#~ msgstr "Μετακίνηση της όψης μια οθόνη προς τα δεξιά."
-
-#~ msgid "Move the viewport one screen to the left."
-#~ msgstr "Μετακίνηση της όψης μια οθόνη προς τα αριστερά."
-
-#~ msgid "Move the viewport one screen up."
-#~ msgstr "Μετακίνηση της όψης μια οθόνη προς τα επάνω."
-
-#~ msgid "Move the viewport one screen down."
-#~ msgstr "Μετακίνηση της όψης μια οθόνη προς τα κάτω."
-
-#~ msgid "Move the window to the viewport on the right."
-#~ msgstr "Μετακίνηση του παραθύρου μια όψη προς τα δεξιά."
-
-#~ msgid "Move the window to the viewport on the left."
-#~ msgstr "Μετακίνηση του παραθύρου μια όψη προς τα αριστερά."
-
-#~ msgid "Move the window to the viewport above."
-#~ msgstr "Μετακίνηση του παραθύρου μια όψη προς τα επάνω."
-
-#~ msgid "Move the window to the viewport below."
-#~ msgstr "Μετακίνηση του παραθύρου μια όψη προς τα κάτω."
-
-#~ msgid "Delete the window."
-#~ msgstr "Κλείσιμο του παραθύρου."
-
-#~ msgid "Delete the window, or beep if the window can't be closed safely."
-#~ msgstr ""
-#~ "Διαγραφή παραθύρου ή ηχητικό σήμα αν το παράθυρο δε μπορεί να κλήσει με "
-#~ "ασφάλεια."
-
-#~ msgid "Force the current window to have a unique title."
-#~ msgstr "Επιβολή του τρέχοντος παραθύρου να έχει μοναδικό τίτλο."
-
-#~ msgid "Display the menu containing the list of all workspaces."
-#~ msgstr "Εμφάνιση του μενού που περιέχει τη λίστα όλων των χώρων εργασίας."
-
-# simos@hellug.gr: slide show = προβολή διαφανειών
-#~ msgid "Display the menu of all managed windows."
-#~ msgstr "Εμφάνιση του μενού σε όλα τα διαλογικά παράθυρα."
-
-#~ msgid "Display the next workspace."
-#~ msgstr "Εμφάνιση του επόμενου χώρου εργασίας."
-
-#~ msgid "Display the previous workspace."
-#~ msgstr "Εμφάνιση του προηγούμενου χώρου εργασίας"
-
-#~ msgid "Move the window to the next workspace."
-#~ msgstr "Μετακίνηση του παραθύρου στο επόμενο χώρο εργασίας."
-
-#~ msgid "Move the window to the previous workspace."
-#~ msgstr "Μετακίνηση του παραθύρου στο προηγούμενο χώρο εργασίας."
-
-#~ msgid "Copy the window to the next workspace."
-#~ msgstr "Αντιγραφή του παραθύρου στο επόμενο χώρο εργασίας."
-
-#~ msgid "Copy the window to the previous workspace."
-#~ msgstr "Αντιγραφή του παραθύρου στο προηγούμενο χώρο εργασίας."
-
-#~ msgid ""
-#~ "Create a new workspace at the end of the list, and move the window to it."
-#~ msgstr ""
-#~ "Δημιουργία νέου χώρου εργασίας στο τέλος της λίστας και μετακίνηση του "
-#~ "παραθύρου σε αυτό."
-
-#~ msgid ""
-#~ "Create a new workspace at the start of the list, and move the window to it."
-#~ msgstr ""
-#~ "Μετακίνηση του νέου χώρου εργασίας στην αρχή της λίστας και μετακίνησε το "
-#~ "παράθυρο σε αυτό."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the next\n"
-#~ "workspace."
-#~ msgstr ""
-#~ "Διαγραφή του τρέχοντος χώρου εργασίας. Τα παράθυρά του μεταφέρονται στο "
-#~ "επόμενο\n"
-#~ "χώρο εργασίας."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the\n"
-#~ "previous workspace."
-#~ msgstr ""
-#~ "Διαγραφή του τρέχοντος χώρου εργασίας. Τα παράθυρά του μεταφέρονται στο\n"
-#~ "προηγούμενο χώρο εργασίας."
-
-#~ msgid "Create a new workspace following the current workspace."
-#~ msgstr "Δημιουργία νέου χώρου εργασίας μετά το τρέχον χώρο εργασίας."
-
-#~ msgid "Create a new workspace before the current workspace."
-#~ msgstr "Δημιουργία νέου χώρου εργασίας πριν το τρέχον χώρο εργασίας."
-
-#~ msgid "Move the current workspace one place to the right."
-#~ msgstr "Μετακίνηση του τρέχοντος χώρου εργασίας μια θέση στα δεξιά."
-
-#~ msgid "Move the current workspace one place to the left."
-#~ msgstr "Μετακίνηση του τρέχοντος χώρου εργασίας μια θέση προς τα αριστερά."
-
-#~ msgid "Delete any workspaces that don't contain any windows."
-#~ msgstr "Διαγραφή των χώρων εργασίας που δεν περιέχουν παράθυρα."
-
-#~ msgid ""
-#~ "Remove the copy of the window on the current workspace. If this is the\n"
-#~ "last instance remaining, then delete the actual window."
-#~ msgstr ""
-#~ "Διαγραφή του αντιγράφου του παραθύρου από το τρέχων χώρο εργασίας. Αν είναι\n"
-#~ "το τελευταίο αντίγραφο που απομένει, διέγραψε το ίδιο το παράθυρο."
-
-#~ msgid "Select the N'th workspace."
-#~ msgstr "Επιλογή του νιοστού χώρου εργασίας."
-
-#~ msgid "Move the current window to the N'th workspace."
-#~ msgstr "Μετακίνηση του τρέχοντος παραθύρου στο νιοστό χώρο εργασίας."
-
-#~ msgid "Copy the current window to the N'th workspace."
-#~ msgstr "Αντιγραφή του τρέχοντος παραθύρου στο νιοστό χώρο εργασίας."
-
-#~ msgid "Prompt for a workspace and switch to it."
-#~ msgstr "Ερώτηση επιλογής χώρου εργασίας και αλλαγή σε αυτό."
-
-#~ msgid "Select the next window of the current workspace."
-#~ msgstr "Επιλογή επόμενου παραθύρου από τον τρέχον χώρο εργασίας."
-
-#~ msgid "Focus on the previous window of the current workspace."
-#~ msgstr "Η προσοχή στο προηγούμενο παράθυρο του τρέχοντος χώρου εργασίας."
-
-#~ msgid "Select the next window, cycling through all possible workspaces."
-#~ msgstr ""
-#~ "Επιλογή του επόμενου παραθύρου, περνώντας μέσα σε όλους τους πιθανούς χώρους "
-#~ "εργασίας."
-
-#~ msgid "Select the previous window, cycling through all possible workspaces."
-#~ msgstr ""
-#~ "Επιλογή του προηγούμενου παραθύρου, περνώντας μέσα σε όλους τους πιθανούς "
-#~ "χώρους εργασίας."
-
-#~ msgid "Display the documentation of a specified symbol."
-#~ msgstr "Εμφάνιση της τεκμηρίωσης του καθορισμένου συμβόλου."
-
-#~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Αλλαγή τις τιμής του βοηθήματος GNOME SKIP_WINLIST του παραθύρου."
-
-#~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Ρύθμιση του βοηθήματος GNOME SKIP_WINLIST του παραθύρου."
-
-#~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Απορρύθμιση του βοηθήματος GNOME SKIP_WINLIST του παραθύρου."
-
-#~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Αλλαγή τις τιμής του βοηθήματος GNOME SKIP_TASKLIST του παραθύρου."
-
-#~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Ρύθμιση του βοηθήματος GNOME SKIP_TASKLIST του παραθύρου."
-
-#~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Απορρύθμιση του βοηθήματος GNOME SKIP_TASKLIST του παραθύρου."
-
-#~ msgid "Logout from the current GNOME session."
-#~ msgstr "Έξοδος από την τρέχουσα συνεδρία του GNOME."
-
-#~ msgid "Display the WWW page of the GNOME project."
-#~ msgstr "Εμφάνιση της σελίδας WWW του έργου του GNOME."
-
-#~ msgid "Launch the GNOME help browser."
-#~ msgstr "Εκκίνηση του φυλλομετρητή βοήθειας του GNOME."
-
-#~ msgid "Launch the GNOME about dialog."
-#~ msgstr "Εκκίνηση του διαλόγου \"Πέρι...\" του GNOME."
-
-#~ msgid ""
-#~ "Delete all windows in the group that the current window is a member of."
-#~ msgstr ""
-#~ "Διαγραφή όλων των παραθύρων της ομάδας με τα οποία το τρέχον παράθυρο είναι "
-#~ "μέλος."
-
-#~ msgid "Grows window to the left until it `bumps into' another window."
-#~ msgstr ""
-#~ "Μεγαλώνει το παράθυρο προς τα αριστερά μέχρι να ακουμπήσει σε άλλο παράθυρο."
-
-#~ msgid "Grows window to the right until it `bumps into' another window."
-#~ msgstr ""
-#~ "Μεγαλώνει το παράθυρο προς τα δεξιά μέχρι να ακουμπήσει σε άλλο παράθυρο."
-
-#~ msgid "Grows window upwards until it `bumps into' another window."
-#~ msgstr ""
-#~ "Μεγαλώνει το παράθυρο προς τα επάνω μέχρι να ακουμπήσει σε άλλο παράθυρο."
-
-#~ msgid "Grows window downwards until it `bumps into' another window."
-#~ msgstr ""
-#~ "Μεγαλώνει το παράθυρο προς τα κάτω μέχρι να ακουμπήσει σε άλλο παράθυρο."
-
-#~ msgid "Moves window to the left until it `bumps into' another window."
-#~ msgstr ""
-#~ "Μετακινεί το παράθυρο προς τα αριστερά μέχρι να ακουμπήσει σε άλλο παράθυρο."
-
-#~ msgid "Moves window to the right until it `bumps into' another window."
-#~ msgstr ""
-#~ "Μετακινεί το παράθυρο προς τα δεξιά μέχρι να ακουμπήσει σε άλλο παράθυρο."
-
-#~ msgid "Moves window upwards until it `bumps into' another window."
-#~ msgstr ""
-#~ "Μετακινεί το παράθυρο προς τα επάνω μέχρι να ακουμπήσει σε άλλο παράθυρο."
-
-#~ msgid "Moves window downwards until it `bumps into' another window."
-#~ msgstr ""
-#~ "Μετακινεί το παράθυρο προς τα κάτω μέχρι να ακουμπήσει σε άλλο παράθυρο."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the right."
-#~ msgstr ""
-#~ "Μετακίνηση του δείκτη κατά `move-cursor-increment' πίξελ προς τα δεξιά."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the left."
-#~ msgstr ""
-#~ "Μετακίνηση του δείκτη κατά `move-cursor-increment' πίξελ προς τα αριστερά."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels upwards."
-#~ msgstr ""
-#~ "Μετακίνηση του δείκτη κατά `move-cursor-increment' πίξελ προς τα επάνω."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels downwards."
-#~ msgstr ""
-#~ "Μετακίνηση του δείκτη κατά `move-cursor-increment' πίξελ προς τα κάτω."
-
-#~ msgid "Move the cursor 1 pixel to the right."
-#~ msgstr "Μετακίνηση του κέρσορα 1 πίξελ προς τα δεξιά."
-
-#~ msgid "Move the cursor 1 pixel to the left."
-#~ msgstr "Μετακίνηση του κέρσορα 1 πίξελ προς τα αριστερά."
-
-#~ msgid "Move the cursor 1 pixel upwards."
-#~ msgstr "Μετακίνηση του κέρσορα 1 πίξελ προς τα επάνω."
-
-#~ msgid "Move the cursor 1 pixel downwards."
-#~ msgstr "Μετακίνηση του κέρσορα 1 πίξελ προς τα κάτω."
-
-#~ msgid "Move the window interactively using the mouse."
-#~ msgstr "Μετακίνηση του παραθύρου διαλογικά με το ποντίκι."
-
-#~ msgid "Resize the window interactively using the mouse."
-#~ msgstr "Αλλαγή του μεγέθους του παραθύρου διαλογικά με το ποντίκι."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively move that window."
-#~ msgstr ""
-#~ "Αναμονή για το χρήστη να επιλέξει παράθυρο, έπειτα διαλογική μετακίνησή του."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively resize that window."
-#~ msgstr ""
-#~ "Αναμονή για το χρήστη να επιλέξει παράθυρο, έπειτα διαλογική αλλαγή του "
-#~ "μεγέθους του."
-
-#~ msgid ""
-#~ "Raise the window that received the current event, then replay any pointer\n"
-#~ "events that invoked the command."
-#~ msgstr ""
-#~ "Ανασήκωση του παραθύρου που έλαβε το τρέχον γεγονός και μετά επανάληψη\n"
-#~ "οτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
-
-#~ msgid ""
-#~ "Raise the window that received the current event (if it's focused), then\n"
-#~ "replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Ανασήκωση του παραθύρου που έλαβε το τρέχον γεγονός (αν είναι εστιασμένο),\n"
-#~ "και έπειτα επανάληψη οτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
-
-#~ msgid ""
-#~ "Raise the group of windows that received the current event, then replay\n"
-#~ "any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Ανασήκωση της ομάδας παραθύρων που έλαβε το τρέχων γεγονός και μετά "
-#~ "επανάληψη\n"
-#~ "οτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
-
-#~ msgid ""
-#~ "Raise the window that received the current event and any transients it\n"
-#~ "has, then replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Ανασήκωση του παραθύρου που έλαβε το τρέχων γεγονός και ότι άλλων βραχύβιων "
-#~ "έχει,\n"
-#~ "και έπειτα επανάληψη οτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
-
-#~ msgid "Increase the size of the current window by one row."
-#~ msgstr "Αύξηση του μεγέθους του τρέχοντος παραθύρου κατά μια γραμμή."
-
-#~ msgid "Decrease the size of the current window by one row."
-#~ msgstr "Ελάττωση του μεγέθους του τρέχοντος παραθύρου κατά μια γραμμή."
-
-#~ msgid "Increase the size of the current window by one column."
-#~ msgstr "Αύξηση του μεγέθους του τρέχοντος παραθύρου κατά μια στήλη."
-
-#~ msgid "Decrease the size of the current window by one column."
-#~ msgstr "Ελάττωση του μεγέθους του τρέχοντος παραθύρου κατά μια στήλη."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the left."
-#~ msgstr ""
-#~ "Μετακίνηση του παραθύρου κατά `slide-window-increment' πίξελ προς τα "
-#~ "αριστερά."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the right."
-#~ msgstr ""
-#~ "Μετακίνηση του παραθύρου κατά `slide-window-increment' πίξελ προς τα δεξιά."
-
-#~ msgid "Move the window `slide-window-increment' pixels upwards."
-#~ msgstr ""
-#~ "Μετακίνηση του παραθύρου κατά `slide-window-increment' πίξελ προς τα επάνω."
-
-#~ msgid "Move the window `slide-window-increment' pixels downwards."
-#~ msgstr ""
-#~ "Μετακίνηση του παραθύρου κατά `slide-window-increment' πίξελ προς τα κάτω."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the left."
-#~ msgstr ""
-#~ "Μετακίνηση της ομάδας παραθύρων `slide-window-increment' πίξελ προς τα "
-#~ "αριστερά."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the right."
-#~ msgstr ""
-#~ "Μετακίνηση της ομάδας παραθύρων `slide-window-increment' πίξελ προς τα δεξιά."
-
-#~ msgid "Move the window group `slide-window-increment' pixels upwards."
-#~ msgstr ""
-#~ "Μετακίνηση της ομάδας παραθύρων `slide-window-increment' πίξελ προς τα επάνω."
-
-#~ msgid "Move the window group `slide-window-increment' pixels downwards."
-#~ msgstr ""
-#~ "Μετακίνηση της ομάδας παραθύρων `slide-window-increment' πίξελ προς τα κάτω."
-
-#~ msgid "Start a new xterm."
-#~ msgstr "Εκκίνηση νέου τερματικού."
-
-#~ msgid "Move to the next viewport."
-#~ msgstr "Μετακίνηση στην επόμενη όψη."
-
-#~ msgid "Move to the previous viewport."
-#~ msgstr "Μετακίνηση στην προηγούμενη όψη."
-
-#~ msgid "Move the window to the previous viewport."
-#~ msgstr "Μετακίνηση του παραθύρου στην προηγούμενη όψη."
-
-#~ msgid "Move the window to the next viewport."
-#~ msgstr "Μετακίνηση του παραθύρου στην επόμενη όψη."
-
-#~ msgid "Display all errors that have occurred to the screen."
-#~ msgstr "Εμφάνιση όλων των σφαλμάτων που έχουν συμβεί, στην οθόνη."
-
-#~ msgid "Remember the current position of the focused window."
-#~ msgstr "Απομνημόνευση της τρέχουσας θέσης του εστιασμένου παραθύρου."
-
-#~ msgid "Remember the current dimensions of the focused window."
-#~ msgstr "Απομνημόνευση των τρεχόντων διαστάσεων του εστιασμένου παραθύρου."
-
-#~ msgid "Remember the current attributes of the focused window."
-#~ msgstr ""
-#~ "Απομνημόνευση των τρεχόντων χαρακτηριστικών του εστιασμένου παραθύρου."
-
-#~ msgid "Forget any persistent state associated with the current window."
-#~ msgstr ""
-#~ "Λησμόνηση οποιαδήποτε διαρκούς κατάστασης συσχετισμένης με το τρέχον "
-#~ "παράθυρο."
-
-#~ msgid "Forget all saved window history."
-#~ msgstr "Λησμόνηση όλου του αποθηκευμένου ιστορικού παραθύρου."
-
-#~ msgid "Iconify the window."
-#~ msgstr "Ελαχιστοποίηση του παραθύρου."
-
-#~ msgid "Return the window from its iconified state."
-#~ msgstr "Επιστροφή του παραθύρου από την εικονοποιημένη κατάστασή του."
-
-#~ msgid "Toggle the iconification of window W."
-#~ msgstr "Αλλαγή της εικονοποίησης του παραθύρου Π."
-
-#~ msgid "Iconify all windows on the current workspace."
-#~ msgstr "Ελαχιστοποίηση όλων των παραθύρων στο τρέχον χώρο εργασίας."
-
-#~ msgid ""
-#~ "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#~ "all workspaces."
-#~ msgstr ""
-#~ "Αλλαγή της κολλώδους ιδιότητας `stickiness' του παραθύρου· είτε είναι μέλος\n"
-#~ "όλων των χώρων εργασίας είτε όχι."
-
-#~ msgid "Ignore the window."
-#~ msgstr "Αγνόηση του παραθύρου."
-
-#~ msgid "Unignore the window."
-#~ msgstr "Παύση αγνόησης του παραθύρου"
-
-#~ msgid "Toggle whether a window is ignored or not."
-#~ msgstr "Αλλαγή της τιμής της ιδιότητας αγνόησης παραθύρου."
-
-#~ msgid "Toggle whether a window is focusable or not."
-#~ msgstr "Αλλαγή της τιμής της ιδιότητας εστίασης παραθύρου."
-
-#~ msgid "Toggle whether a window is ignored while window cycling."
-#~ msgstr ""
-#~ "Αλλαγή της τιμής της ιδιότητας αγνόησης παραθύρου κατά τη διαδοχή παραθύρων."
-
-#~ msgid "Toggle whether a window will be include in the window list."
-#~ msgstr ""
-#~ "Αλλαγή της τιμής της ιδιότητας συμπερίληψης παραθύρου στη λίστα παραθύρων."
-
-#~ msgid "Maximize the dimensions of the window."
-#~ msgstr "Μεγιστοποίηση των διαστάσεων του παραθύρου."
-
-#~ msgid ""
-#~ "Restore the dimensions of the window to its original, unmaximized, state."
-#~ msgstr ""
-#~ "Επαναφορά των διαστάσεων του παραθύρου στην αρχική, μη μεγιστοποιημένη, "
-#~ "κατάσταση."
-
-#~ msgid "Maximize the vertical dimension of the window."
-#~ msgstr "Μεγιστοποίηση της κάθετης διάστασης του παραθύρου."
-
-#~ msgid "Maximize the horizontal dimension of the window."
-#~ msgstr "Μεγιστοποίηση της οριζόντιας διάστασης του παραθύρου."
-
-#~ msgid "Toggle the state of the window between maximized and unmaximized."
-#~ msgstr "Αλλαγή της κατάστασης παραθύρου μεταξύ μεγιστοποιημένου και μη."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Αλλαγή της κατάστασης παραθύρου μεταξύ οριζόντια μεγιστοποιημένου και\n"
-#~ "μη μεγιστοποιημένου."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Αλλαγή της κατάστασης παραθύρου μεταξύ κάθετα μεγιστοποιημένου και\n"
-#~ "μη μεγιστοποιημένου."
-
-#~ msgid "Maximize the window without obscuring any other windows."
-#~ msgstr "Μεγιστοποίηση παραθύρου χωρίς την επικάλυψη άλλων παραθύρων."
-
-#~ msgid "Maximize the window vertically without obscuring any other windows."
-#~ msgstr "Κάθετη μεγιστοποίηση παραθύρου χωρίς την επικάλυψη άλλων παραθύρων."
-
-#~ msgid ""
-#~ "Maximize the window horizontally without obscuring any other windows."
-#~ msgstr ""
-#~ "Οριζόντια μεγιστοποίηση παραθύρου χωρίς την επικάλυψη άλλων παραθύρων."
-
-#~ msgid ""
-#~ "Toggle the state of the window between maximized-filled and unmaximized."
-#~ msgstr ""
-#~ "Αλλαγή της κατάστασης παραθύρου μεταξύ μεγιστοποιημένου-γεμισμένου και μη "
-#~ "μεγιστοποιημένου."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Αλλαγή της κατάστασης παραθύρου μεταξύ οριζόντια "
-#~ "μεγιστοποιημένου-γεμισμένου\n"
-#~ "και μη μεγιστοποιημένου."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Αλλαγή της κατάστασης παραθύρου μεταξύ κάθετα μεγιστοποιημένου-γεμισμένου\n"
-#~ "και μη μεγιστοποιημένου."
-
-#~ msgid "Display only the title bar of the window."
-#~ msgstr "Εμφάνιση μόνο της μπάρας τίτλου του παραθύρου."
-
-#~ msgid ""
-#~ "If the window is shaded (see `shade-window'), restore it to it's usual\n"
-#~ "state."
-#~ msgstr ""
-#~ "Αν το παράθυρο είναι σκιασμένο (δείτε `shade-window'), επαναφορά\n"
-#~ "στη συνήθη κατάσταση."
-
-#~ msgid ""
-#~ "Toggle the shaded (only the title bar is displayed) state of the window."
-#~ msgstr ""
-#~ "Αλλαγή της κατάστασης σκίασης (μόνο η μπάρα τίτλου φαίνετε) του παραθύρου."
-
-#~ msgid ""
-#~ "Raise the current window to its highest allowed position in the stacking\n"
-#~ "order. Also raise any transient windows that it has."
-#~ msgstr ""
-#~ "Ανασήκωση του τρέχοντος παραθύρου στην ψηλότερη επιτρεπτή θέση στη διάταξη\n"
-#~ "στοιβάγματος. Επίσης ανασήκωση οτιδήποτε βραχύβιων παραθύρων έχει."
-
-#~ msgid ""
-#~ "Lower the current window to its lowest allowed position in the stacking\n"
-#~ "order. Also lower any transient windows that it has."
-#~ msgstr ""
-#~ "Κατέβασμα του τρέχοντος παραθύρου στην χαμηλότερη επιτρεπτή θέση στη "
-#~ "διάταξη\n"
-#~ "στοιβάγματος. Επίσης χαμήλωμα οτιδήποτε βραχύβιων παραθύρων έχει."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
-#~ "changes\n"
-#~ "the level of any transient windows it has."
-#~ msgstr ""
-#~ "Αν το παράθυρο είναι στην ψηλότερη δυνατή θέση, τότε κατέβασέ το στη "
-#~ "χαμηλότερη\n"
-#~ "δυνατή θέση. Διαφορετικά, ανασήκωσέ το όσο πιο πολύ επιτρέπετε. Επίσεις, "
-#~ "αλλάζει\n"
-#~ "το επίπεδο οτιδήποτε βραχύβιων παραθύρων υπάρχουν."
-
-#~ msgid "Display the workspace/viewport containing the window W."
-#~ msgstr "Προβολή του χώρου εργασίας/όψης που περιέχει το παράθυρο Π."
-
-#~ msgid "Display the workspace containing the window W, then focus on W."
-#~ msgstr ""
-#~ "Προβολή του χώρου εργασίας που περιέχει το παράθυρο Π, μετά εστίαση στο Π."
-
-#~ msgid "Reload the gtkrc settings."
-#~ msgstr "Επαναφόρτωση των ρυθμίσεων gtkrc."
-
-#~ msgid "Prompt for a key sequence, then print its binding."
-#~ msgstr ""
-#~ "Αναμονή για συνδιασμό πλήκτρων και μετά εμφάνιση με τι είναι συνδεδεμένο."
-
-#~ msgid "Press key..."
-#~ msgstr "Πιέστε κάποιο πλήκτρο..."
-
-#~ msgid ""
-#~ "Sends the next key event directly to the focused client window, ignoring\n"
-#~ "any window manager bindings that it may have."
-#~ msgstr ""
-#~ "Αποστέλνει το επόμενο γεγονός πλήκτρολογίου κατευθείαν στο εστιασμένο "
-#~ "παράθυρο\n"
-#~ "πελάτη, αγνοώντας οτιδήποτε συνδέσεις μπορεί να έχει ο διαχειριστής "
-#~ "παραθύρων."
-
-#~ msgid "Workspace %d"
-#~ msgstr "Χώρος εργασίας %d"
