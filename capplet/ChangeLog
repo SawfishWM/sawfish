@@ -1,3 +1,11 @@
+2001-08-31  John Harper  <jsh@pixelslut.com>
+
+	Fixed 4235 (error in sawfish-ui -> sawfish-capplet livelocks):
+
+	* sawmill-capplet.c (ui_output_callback): check for eof or
+	errors when reading from the slave's output stream, and print a
+	message if it occurs
+
 2001-04-09  Christian Rose  <menthos@menthos.com>
 
 	* desktop-entries/sound-properties.desktop: Applied patch for the

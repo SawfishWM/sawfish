@@ -101,13 +101,42 @@ ui_command (char *str)
 }
 
 static void
+display_error (const char *message)
+{
+    GtkWidget *label;
+
+    if (ui_handler_id != 0)
+    {
+	gtk_input_remove (ui_handler_id);
+	ui_handler_id = 0;
+    }
+
+    if (ui_pid != 0  && waitpid (ui_pid, 0, WNOHANG) == ui_pid)
+    {
+	ui_pid = 0;
+    }
+
+    if (ui_socket != 0)
+    {
+	gtk_container_remove (GTK_CONTAINER (capplet), ui_socket);
+	gtk_object_destroy (GTK_OBJECT (ui_socket));
+	ui_socket = 0;
+    }
+
+    label = gtk_label_new (_("The applet encountered an error"));
+    gtk_container_add (GTK_CONTAINER (capplet), label);
+    gtk_widget_show (label);
+}
+
+static void
 ui_output_callback (gpointer data, gint fd, GdkInputCondition cond)
 {
     char out;
-    if (x_read (ui_stdout[0], &out, 1) == 1)
-    {
-	GtkWidget *label;
+    int bytes_read;
 
+    bytes_read = x_read (ui_stdout[0], &out, 1);
+    if (bytes_read == 1)
+    {
 	switch (out)
 	{
 	case 'c':
@@ -115,17 +144,14 @@ ui_output_callback (gpointer data, gint fd, GdkInputCondition cond)
 	    break;
 
 	case 'g':			/* group doesn't exist */
-	    waitpid (ui_pid, 0, 0);
-	    ui_pid = 0;
-	    gtk_container_remove (GTK_CONTAINER (capplet), ui_socket);
-	    gtk_object_destroy (GTK_OBJECT (ui_socket));
-	    ui_socket = 0;
-	    label = gtk_label_new ("[That group doesn't exist]");
-	    gtk_container_add (GTK_CONTAINER (capplet), label);
-	    gtk_widget_show (label);
-	    gtk_input_remove (ui_handler_id);
-	    ui_handler_id = 0;
+	    display_error (_("That group doesn't exist"));
 	}
+    }
+    else
+    {
+	/* EOF or error of some sort */
+
+	display_error (_("The applet encountered an error"));
     }
 }
 
@@ -183,7 +209,7 @@ sawmill_setup (void)
 
     if (!sawmill_running_p ())
     {
-	GtkWidget *label = gtk_label_new ("[Sawfish isn't running]");
+	GtkWidget *label = gtk_label_new (_("Sawfish isn't running"));
 	gtk_container_add (GTK_CONTAINER (capplet), label);
 	return;
     }
