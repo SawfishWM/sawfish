@@ -51,7 +51,7 @@ static guint ui_handler_id;
 static char *group;
 
 char *ui_argv[] = { "sawmill-ui",
-		    "--notebook",
+		    "--flatten",
 		    "--socket-id", 0,
 		    "--group", 0,
 		    0 };
