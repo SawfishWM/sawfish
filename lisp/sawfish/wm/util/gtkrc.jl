@@ -156,4 +156,5 @@
 	'(gtkrc-load-pixmaps gtkrc-reload-style gtkrc-call-after-changed))
   (mapc 'gaol-add-special '(gtkrc-background gtkrc-background-pixmaps
 			    gtkrc-base gtkrc-foreground gtkrc-font))
+  (gaol-rebuild-environment)
   (gtkrc-reload-style))
