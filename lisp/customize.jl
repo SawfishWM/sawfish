@@ -204,7 +204,7 @@
 	    (list 'label (format nil (_ "\
 Sawmill %s (rep %s)
 
-Copyright (C) 1999 John Harper <jsh@sawmill.sourceforge.net>
+Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>
 
 This is free software -- you are welcome to redistribute it and/or \
 modify it under the terms of the GNU General Public License as \
