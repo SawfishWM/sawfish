@@ -6,7 +6,7 @@ Summary: a highly configurable and extensible X11 window manager
 Name: sawmill
 Version: %{ver}
 Release: %{rel}
-Requires: librep >= 0.3, rep-gtk
+Requires: librep >= 0.4, rep-gtk
 Copyright: GPL
 Group: User Interface/Desktops
 Source: ftp.dcs.warwick.ac.uk:/people/John.Harper/sawmill/sawmill-%{ver}.tar.gz
