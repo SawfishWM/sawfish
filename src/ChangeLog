@@ -1,3 +1,17 @@
+2001-11-03  John Harper  <jsh@unfactored.org>
+
+	Fixed bug where Nautilus windows often don't get focused in
+	focus follows mouse mode:
+
+	* windows.c (focus_on_window): don't call XSetInputFocus ()
+	directly store the parameters for later
+
+	(commit_queued_focus_change): new function, calls
+	XSetInputFocus () if there's a queued focus change waiting
+
+	* events.c (handle_input_mask): call commit_queued_focus_change
+	() before exiting
+
 2001-10-21  John Harper  <jsh@unfactored.org>
 
 	Fixed bug where warp-cursor doesn't invalidate the pointer

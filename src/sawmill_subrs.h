@@ -298,6 +298,7 @@ extern Lisp_Window *focus_window, *pending_focus_window;
 extern int pending_destroys;
 extern repv Qadd_window_hook, Qbefore_add_window_hook, Qplace_window_hook;
 extern bool mapped_not_override_p (Window id);
+extern void commit_queued_focus_change (void);
 extern void focus_on_window (Lisp_Window *w);
 extern void focus_off_window (Lisp_Window *w);
 extern void fix_window_size (Lisp_Window *w);

@@ -109,6 +109,21 @@ window_input_hint_p (Lisp_Window *w)
 	return TRUE;
 }
 
+static Window queued_focus_id;
+static int queued_focus_revert;
+static Time queued_focus_time;
+
+void
+commit_queued_focus_change (void)
+{
+    if (queued_focus_id != 0)
+    {
+	XSetInputFocus (dpy, queued_focus_id,
+			queued_focus_revert, queued_focus_time);
+	queued_focus_id = 0;
+    }
+}
+
 /* Give the input focus to window W, or to no window if W is null */
 void
 focus_on_window (Lisp_Window *w)
@@ -137,6 +152,7 @@ focus_on_window (Lisp_Window *w)
 
 		send_client_message (w->id, xa_wm_take_focus,
 				     last_event_time - 1);
+		queued_focus_time = last_event_time - 1;	/* evil */
 
 		/* Only focus on the window if accepts-input is true */
 		if (window_input_hint_p (w))
@@ -151,14 +167,18 @@ focus_on_window (Lisp_Window *w)
 	    focus = w->frame;
 	if (focus != 0)
 	{
-	    XSetInputFocus (dpy, focus, RevertToParent, last_event_time);
+	    queued_focus_id = focus;
+	    queued_focus_revert = RevertToParent;
+	    queued_focus_time = last_event_time;
 	    pending_focus_window = w;
 	}
     }
     else
     {
 	DB(("focus_on_window (nil)\n"));
-	XSetInputFocus (dpy, no_focus_window, RevertToNone, last_event_time);
+	queued_focus_id = no_focus_window;
+	queued_focus_revert = RevertToNone;
+	queued_focus_time = last_event_time;
 	pending_focus_window = 0;
     }
 }

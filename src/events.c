@@ -1298,6 +1298,7 @@ handle_input_mask(long mask)
     }
 
     emit_pending_destroys ();
+    commit_queued_focus_change ();
 }
 
 /* Handle all available X events on file descriptor FD. */
