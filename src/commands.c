@@ -278,7 +278,7 @@ any entered arg is given to the invoked COMMAND.
 			switch(c)
 			{
 			case 'e':
-			    arg = Fcurrent_event();
+			    arg = Fcurrent_event(Qnil);
 			    break;
 			case 'E':
 			    arg = Fcurrent_event_string();
