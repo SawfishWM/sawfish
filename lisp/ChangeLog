@@ -1,5 +1,9 @@
 1999-12-13  John Harper  <john@dcs.warwick.ac.uk>
 
+	* gnome-menu.jl (gnome-menu-read-desktop-entry): recurse into
+	directories if the desktop file is called ".directory", not if
+	it has Type=directory (these may actually be files)
+
 	* tooltips.jl: ignore null keymaps; yellow background color
 
 	* sawmill-defaults.jl: turn on tooltips by default
