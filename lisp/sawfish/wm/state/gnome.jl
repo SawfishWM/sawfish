@@ -32,7 +32,11 @@
 	    WIN_HINTS_SKIP_WINLIST
 	    WIN_HINTS_SKIP_TASKLIST
 	    WIN_HINTS_FOCUS_ON_CLICK
-	    WIN_HINTS_DO_NOT_COVER)
+	    WIN_HINTS_DO_NOT_COVER
+	    gnome-set-hint
+	    gnome-clear-hint
+	    gnome-toggle-hint
+	    gnome-hint-set-p)
 
     (open rep
 	  rep.regexp
@@ -84,6 +88,41 @@
 		       (setq clients (cons (window-id w) clients)))))
       (setq vec (apply vector clients))
       (set-x-property 'root '_WIN_CLIENT_LIST vec 'CARDINAL 32)))
+
+  (define (gnome-set-hint w bit)
+    (let ((hints (get-x-property w '_WIN_HINTS)))
+      (if hints
+	  (setq hints (aref (nth 2 hints) 0))
+	(setq hints 0))
+      (setq hints (logior bit hints))
+      (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
+
+  (define (gnome-clear-hint w bit)
+    (let ((hints (get-x-property w '_WIN_HINTS)))
+      (if hints
+	  (setq hints (aref (nth 2 hints) 0))
+	(setq hints 0))
+      (setq hints (logand (lognot bit) hints))
+      (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
+
+  (define (gnome-toggle-hint w bit)
+    (let ((hints (get-x-property w '_WIN_HINTS)))
+      (if hints
+	  (setq hints (aref (nth 2 hints) 0))
+	(setq hints 0))
+      (setq hints (logxor bit hints))
+      (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
+
+  ;; Queries whether a property in _WIN_HINTS is set.  Involves a
+  ;; server roundtrip as it does get-x-property.
+  (define (gnome-hint-set-p w bit)
+    (let ((hints (get-x-property w '_WIN_HINTS)))
+      (if hints
+	  (setq hints (aref (nth 2 hints) 0))
+	  (setq hints 0))
+      (if (zerop (logand bit hints))
+	  nil
+	  t)))
 
   (define current-workspace-index nil)
   (define current-workspace-count 0)
@@ -414,4 +453,5 @@
     (require 'sawfish.wm.gnome.match-window))
 
   (add-window-menu-toggle (_ "In GNOME _task list")
-			  'gnome-toggle-skip-tasklist))
+			  'gnome-toggle-skip-tasklist
+			  (lambda (w) (not (gnome-hint-set-p w WIN_HINTS_SKIP_TASKLIST)))))

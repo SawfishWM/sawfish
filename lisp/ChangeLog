@@ -1,3 +1,19 @@
+2001-12-11  Federico Mena Quintero  <federico@ximian.com>
+
+	Fixes GNOME bug #66761.
+
+	* sawfish/wm/state/gnome.jl (gnome-set-hint): Moved over from
+	commands/gnome.jl; these should really be here.
+	(gnome-clear-hint): Likewise.
+	(gnome-toggle-hint): Likewise.
+
+	* sawfish/wm/state/gnome.jl (gnome-hint-set-p): New exported
+	function; queries whether a property in _WIN_HINTS is set.
+
+	* sawfish/wm/state/gnome.jl: Added a predicate to the
+	`(add-window-menu-toggle "In GNOME task list' so that we can show
+	the menu item as a proper toggle.
+
 2001-12-09  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/state/wm-spec.jl (set-window-hints): don't mark
@@ -265,7 +281,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	Added an extra deserialize/serialize pair when applying values
 	from the UI. This is so that the customize-set function can do
 	some kind of transformation at some point in the future..
-	
+
 	* sawfish/wm/custom.jl (make-custom-form): now requires an
 	unserialized VALUE. It serializes it before creating the form
 
@@ -418,7 +434,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	implement the _NET_ACTIVE_WINDOW request. Added a
 	_NET_WM_DESKTOP handler - handles making the window sticky or
 	changing its workspace
-	
+
 2001-02-22  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/placement.jl (place-window): don't try to place
@@ -442,8 +458,8 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 
 	* version 0.37
 
-	* sawfish/wm/state/gnome.jl (gnome-window-class-hacks): 
-	* sawfish/wm/state/wm-spec.jl (wm-class-hacks): 
+	* sawfish/wm/state/gnome.jl (gnome-window-class-hacks):
+	* sawfish/wm/state/wm-spec.jl (wm-class-hacks):
 	Look for `Panel/panel_window' instead of `Panel/panel'. This
 	may not work well immediately, but it will with the forthcoming
 	gnome-core release
@@ -518,14 +534,14 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 
 2001-01-25  John Harper  <jsh@eazel.com>
 
-	Fixed bug 5984 (locked-size-when-maximized is confusing):	
+	Fixed bug 5984 (locked-size-when-maximized is confusing):
 
 	* sawfish/wm/frames.jl (frame-part-classes): use calls to
 	define-frame-class to populate this alist
 
 	(cursor-for-frame-part): new function, creates functions to
 	return the correct cursor. Uses frame-part-movable-p to see
-	which cursor should be displayed 
+	which cursor should be displayed
 
 	* sawfish/wm/state/maximize.jl (frame-part-movable-p): new
 	function
@@ -931,7 +947,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	* sawfish/wm/swapper.jl, sawfish/wm/stacking.jl,
 	sawfish/wm/menus.jl, sawfish/wm/commands/x-cycle.jl,
 	sawfish/wm/ext/tooltips.jl, sawfish/wm/ext/match-window.jl,
-	sawfish/wm/ext/edge-flip.jl, sawfish/wm/gnome/match-window.jl, 
+	sawfish/wm/ext/edge-flip.jl, sawfish/wm/gnome/match-window.jl,
 	sawfish/wm/placement/smart.jl, sawfish/wm/state/maximize.jl,
 	sawfish/wm/theming/make-theme.jl, sawfish/wm/util/gtkrc.jl:
 	Added some `(unused ...)' declarations to turn off some
@@ -1320,7 +1336,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	sawfish.wm.ext.match-window instead of just match-window
 
 	* sawfish/wm/focus.jl (focus-enter-fun, focus-leave-fun):
-	accept an extra MODE parameter		
+	accept an extra MODE parameter
 	(enter-exit mode): pointer-leave events only cause focus to be
 	jettisoned if (eq MODE 'normal)
 
@@ -1663,21 +1679,21 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	* sawfish/wm/workspace.jl, sawfish/wm/windows.jl,
 	sawfish/wm/user.jl, sawfish/wm/server.jl, sawfish/wm/misc.jl,
 	sawfish/wm/menus.jl, sawfish/wm/gaol.jl, sawfish/wm/frames.jl,
-	sawfish/wm/customize.jl, sawfish/wm/commands.jl: 
+	sawfish/wm/customize.jl, sawfish/wm/commands.jl:
 	* sawfish/wm/commands/xterm.jl,
 	sawfish/wm/commands/viewport-linear.jl,
 	sawfish/wm/commands/move-resize.jl,
-	sawfish/wm/commands/help.jl, sawfish/wm/commands/describe.jl: 
+	sawfish/wm/commands/help.jl, sawfish/wm/commands/describe.jl:
 	* sawfish/wm/ext/window-history.jl, sawfish/wm/ext/tooltips.jl,
 	sawfish/wm/ext/match-window.jl,
-	sawfish/wm/ext/error-handler.jl, sawfish/wm/ext/3d-hack.jl: 
-	* sawfish/wm/gnome/menus.jl: 
+	sawfish/wm/ext/error-handler.jl, sawfish/wm/ext/3d-hack.jl:
+	* sawfish/wm/gnome/menus.jl:
 	* sawfish/wm/session/save.jl, sawfish/wm/session/load.jl,
-	sawfish/wm/session/init.jl: 
+	sawfish/wm/session/init.jl:
 	* sawfish/wm/util/with-output.jl, sawfish/wm/util/prompt.jl,
 	sawfish/wm/util/prompt-wm.jl, sawfish/wm/util/nokogiri.jl,
 	sawfish/wm/util/keymap.jl, sawfish/wm/util/gtkrc.jl,
-	sawfish/wm/util/compat.jl: 
+	sawfish/wm/util/compat.jl:
 
 	No need to explicitly open `rep.io.streams' anymore
 
@@ -1691,7 +1707,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 
 2000-09-08  John Harper  <john@dcs.warwick.ac.uk>
 
-	* sawfish/wm.jl: 
+	* sawfish/wm.jl:
 
 	* sawfish/wm/workspace.jl, sawfish/wm/windows.jl,
 	sawfish/wm/window-anim.jl, sawfish/wm/viewport.jl,
@@ -1701,40 +1717,40 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	sawfish/wm/menus.jl, sawfish/wm/keymaps.jl, sawfish/wm/gaol.jl,
 	sawfish/wm/frames.jl, sawfish/wm/focus.jl,
 	sawfish/wm/customize.jl, sawfish/wm/custom.jl,
-	sawfish/wm/commands.jl: 
+	sawfish/wm/commands.jl:
 
 	* sawfish/wm/commands/xterm.jl, sawfish/wm/commands/x-cycle.jl,
 	sawfish/wm/commands/viewport-linear.jl,
 	sawfish/wm/commands/move-resize.jl,
 	sawfish/wm/commands/help.jl, sawfish/wm/commands/gnome.jl,
-	sawfish/wm/commands/describe.jl: 
+	sawfish/wm/commands/describe.jl:
 
 	* sawfish/wm/ext/window-history.jl, sawfish/wm/ext/tooltips.jl,
 	sawfish/wm/ext/shade-hover.jl, sawfish/wm/ext/match-window.jl,
 	sawfish/wm/ext/error-handler.jl, sawfish/wm/ext/edge-flip.jl,
 	sawfish/wm/ext/auto-raise.jl, sawfish/wm/ext/audio-events.jl,
-	sawfish/wm/ext/3d-hack.jl: 
+	sawfish/wm/ext/3d-hack.jl:
 
-	* sawfish/wm/gnome/menus.jl: 
+	* sawfish/wm/gnome/menus.jl:
 
 	* sawfish/wm/session/save.jl, sawfish/wm/session/load.jl,
-	sawfish/wm/session/init.jl: 
+	sawfish/wm/session/init.jl:
 
 	* sawfish/wm/state/wm-spec.jl, sawfish/wm/state/transient.jl,
 	sawfish/wm/state/shading.jl, sawfish/wm/state/open-look.jl,
 	sawfish/wm/state/mwm.jl, sawfish/wm/state/maximize.jl,
 	sawfish/wm/state/ignored.jl, sawfish/wm/state/iconify.jl,
-	sawfish/wm/state/gnome.jl, sawfish/wm/state/configure.jl: 
+	sawfish/wm/state/gnome.jl, sawfish/wm/state/configure.jl:
 
 	* sawfish/wm/theming/make-theme.jl,
-	sawfish/wm/theming/make-theme-preview.jl: 
+	sawfish/wm/theming/make-theme-preview.jl:
 
 	* sawfish/wm/util/with-output.jl,
 	sawfish/wm/util/window-order.jl, sawfish/wm/util/prompt.jl,
 	sawfish/wm/util/prompt-wm.jl, sawfish/wm/util/prompt-extras.jl,
 	sawfish/wm/util/play-audio.jl, sawfish/wm/util/nokogiri.jl,
 	sawfish/wm/util/keymap.jl, sawfish/wm/util/gtkrc.jl,
-	sawfish/wm/util/groups.jl, sawfish/wm/util/compat.jl: 
+	sawfish/wm/util/groups.jl, sawfish/wm/util/compat.jl:
 
 	Open the necessary modules that aren't included in `rep'
 	structure anymore (rep.regexp, rep.system, rep.io.streams,
@@ -1751,13 +1767,13 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	* sawfish/wm/customize.jl, sawfish/wm/custom.jl: added module
 	aliases
 
-	* sawfish/wm/menus.jl: 
+	* sawfish/wm/menus.jl:
 	* sawfish/wm/state/iconify.jl: moved the `Iconify' window menu
 	item to the `Toggle' submenu, and called it `Minimized'
 
-	* sawfish/wm/workspace.jl, sawfish/wm/frames.jl: 
+	* sawfish/wm/workspace.jl, sawfish/wm/frames.jl:
 	* sawfish/wm/ext/old-window-menu.jl,
-	sawfish/wm/ext/beos-window-menu.jl: 
+	sawfish/wm/ext/beos-window-menu.jl:
 	* sawfish/wm/util/groups.jl: create radio-button menu-items
 	where appropriate
 
@@ -1774,9 +1790,9 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	(popup-window-menu): now takes a window as its sole arg, then
 	sets menu-args to the singleton list containing this value
 
-	* sawfish/wm/frames.jl, workspace.jl: 
+	* sawfish/wm/frames.jl, workspace.jl:
 	* sawfish/wm/ext/old-window-menu.jl,
-	sawfish/wm/ext/beos-window-menu.jl: 
+	sawfish/wm/ext/beos-window-menu.jl:
 	* sawfish/wm/util/groups.jl: use check-items where appropriate
 	when creating menus
 
@@ -1966,19 +1982,19 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	sawfish/wm/commands/move-resize.jl,
 	sawfish/wm/commands/grow-pack.jl,
 	sawfish/wm/commands/groups.jl, sawfish/wm/commands/gnome.jl,
-	sawfish/wm/commands/describe.jl: 
+	sawfish/wm/commands/describe.jl:
 	* sawfish/wm/ext/window-history.jl, sawfish/wm/ext/tooltips.jl,
-	sawfish/wm/ext/edge-flip.jl: 
-	* sawfish/wm/gnome/menus.jl: 
-	* sawfish/wm/placement/smart.jl: 
-	* sawfish/wm/session/load.jl: 
+	sawfish/wm/ext/edge-flip.jl:
+	* sawfish/wm/gnome/menus.jl:
+	* sawfish/wm/placement/smart.jl:
+	* sawfish/wm/session/load.jl:
 	* sawfish/wm/state/transient.jl, sawfish/wm/state/shading.jl,
 	sawfish/wm/state/maximize.jl, sawfish/wm/state/ignored.jl,
-	sawfish/wm/state/iconify.jl: 
+	sawfish/wm/state/iconify.jl:
 	* sawfish/wm/util/prompt.jl, sawfish/wm/util/prompt-extras.jl,
 	sawfish/wm/util/nokogiri.jl, sawfish/wm/util/gtkrc.jl,
 	sawfish/wm/util/edges.jl, sawfish/wm/util/display-window.jl,
-	sawfish/wm/util/compat.jl: 
+	sawfish/wm/util/compat.jl:
 
 	Updated for new define-command interface
 
@@ -2010,7 +2026,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	sawfish/wm/util/prompt.jl, sawfish/wm/util/prompt-wm.jl,
 	sawfish/wm/util/prompt-extras.jl, sawfish/wm/util/keymap.jl,
 	sawfish/wm/util/groups.jl, sawfish/wm/util/edges.jl,
-	sawfish/wm/util/display-window.jl, sawfish/wm/util/compat.jl: 
+	sawfish/wm/util/display-window.jl, sawfish/wm/util/compat.jl:
 
 	use #!optional and #!rest instead of deprecated &optional and
 	&rest
@@ -2061,7 +2077,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 2000-08-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/placement.jl (adjust-window-for-gravity): use
-	adjust-position-for-gravity 
+	adjust-position-for-gravity
 
 	* sawfish/wm/windows.jl (adjust-position-for-gravity): new
 	function (abstracted from adjust-window-for-gravity)
@@ -4839,7 +4855,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	* workspace.jl (ws-saved-state): fixed
 
 	* customize.jl (default-font): add after-setting-frame-option
-	as :after-set function 
+	as :after-set function
 
 1999-10-08  John Harper  <john@dcs.warwick.ac.uk>
 
@@ -5127,7 +5143,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	* workspace.jl (window-menu): only include non-ignored windows
 
 	* smart-placement.jl (sp-cost): multiple x-edges by y-edges
-	instead of adding when calculating space usefulness 
+	instead of adding when calculating space usefulness
 
 1999-09-21  John Harper  <john@dcs.warwick.ac.uk>
 
@@ -5176,7 +5192,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	* version 0.7
 
 	* x-cycle.jl (x-cycle-next): if the next window was iconified,
-	display its name surrounded by square brackets 
+	display its name surrounded by square brackets
 
 	* smart-placement.jl (place-window-first-fit): do first-fit
 	window placement
@@ -5509,7 +5525,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	* frames.jl: create commands to set the frame of a window to
 	each of the possible window types
 	(set-frame-for-window): new optional arg TYPE
-	
+
 
 	* customize.jl (customize): require all the custom-require
 	features
@@ -5657,7 +5673,7 @@ Sat Aug 18 16:32:37 2001  Owen Taylor  <otaylor@redhat.com>
 	placement mode
 
 	* open-look.jl, mwm.jl: new files, implement some of the Motif
-	and OpenLook window hints 
+	and OpenLook window hints
 	* sawmill.jl: require mwm and open-look
 
 	* frames.jl (window-type): moved from transient.jl; if the

@@ -21,10 +21,7 @@
 
 (define-structure sawfish.wm.commands.gnome
 
-    (export gnome-set-hint
-	    gnome-clear-hint
-	    gnome-toggle-hint
-	    gnome-toggle-skip-winlist
+    (export gnome-toggle-skip-winlist
 	    gnome-set-skip-winlist
 	    gnome-clear-skip-winlist
 	    gnome-toggle-skip-tasklist
@@ -43,30 +40,6 @@
 	  sawfish.wm.commands)
 
   (define-structure-alias gnome-commands sawfish.wm.commands.gnome)
-
-  (define (gnome-set-hint w bit)
-    (let ((hints (get-x-property w '_WIN_HINTS)))
-      (if hints
-	  (setq hints (aref (nth 2 hints) 0))
-	(setq hints 0))
-      (setq hints (logior bit hints))
-      (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
-
-  (define (gnome-clear-hint w bit)
-    (let ((hints (get-x-property w '_WIN_HINTS)))
-      (if hints
-	  (setq hints (aref (nth 2 hints) 0))
-	(setq hints 0))
-      (setq hints (logand (lognot bit) hints))
-      (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
-
-  (define (gnome-toggle-hint w bit)
-    (let ((hints (get-x-property w '_WIN_HINTS)))
-      (if hints
-	  (setq hints (aref (nth 2 hints) 0))
-	(setq hints 0))
-      (setq hints (logxor bit hints))
-      (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
 
 
 ;;; commands
