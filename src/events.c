@@ -604,19 +604,26 @@ send_synthetic_configure (Lisp_Window *w)
 
 /* Event loop */
 
-/* Handle all available X events on file descriptor FD. If SYNCHRONOUS
-   is set, then we're being called from the usual event loop, not in
-   the middle of an executing piece of Lisp code. */
+/* Handle all available X events matching event mask MASK. Or any events
+   if MASK is zero. */
 void
-handle_sync_input(int fd)
+handle_input_mask(long mask)
 {
     /* Read all events in the input queue. */
     while(rep_throw_value == rep_NULL)
     {
 	XEvent xev;
-	if(XEventsQueued(dpy, QueuedAfterReading) <= 0)
-	    break;
-	XNextEvent(dpy, &xev);
+	if (mask == 0)
+	{
+	    if(XEventsQueued(dpy, QueuedAfterReading) <= 0)
+		break;
+	    XNextEvent(dpy, &xev);
+	}
+	else
+	{
+	    if (!XCheckMaskEvent (dpy, mask, &xev))
+		break;
+	}
 
 	DB(("** Event: %s (win %lx)\n",
 	    xev.type < LASTEvent ? event_names[xev.type] : "unknown",
@@ -632,6 +639,13 @@ handle_sync_input(int fd)
 	current_x_event = 0;
 	XSync (dpy, False);
     }
+}
+
+/* Handle all available X events on file descriptor FD. */
+void
+handle_sync_input (int fd)
+{
+    handle_input_mask (0);
 }
 
 
