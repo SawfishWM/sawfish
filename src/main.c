@@ -359,6 +359,7 @@ main(int argc, char **argv)
 	session_init ();
 	events_init ();
 	images_init ();
+	pixmap_cache_init ();
 	colors_init ();
 	fonts_init ();
 	cursors_init ();
