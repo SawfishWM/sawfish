@@ -38,6 +38,22 @@
 ;;	shaped-transient	border-like title-bar only
 ;;	unframed		no frame at all
 
+(defvar frame-part-class-alist
+  '((title . ((cursor . hand2)
+	      (keymap . title-keymap)))
+    (top-border . ((cursor . top_side)
+		   (keymap . border-keymap)))
+    (left-border . ((cursor . left_side)
+		    (keymap . border-keymap)))
+    (right-border . ((cursor . right_side)
+		     (keymap . border-keymap)))
+    (bottom-border . ((cursor . bottom_side)
+		      (keymap . border-keymap)))
+    (menu . ((keymap . menu-button-keymap)))
+    (close . ((keymap . close-button-keymap)))
+    (iconify . ((keymap . iconify-button-keymap)))
+    (maximize . ((keymap . maximize-button-keymap)))))
+
 (put 'frame-style 'custom-set 'custom-set-frame-style)
 (put 'frame-style 'custom-widget 'custom-make-frame-style-widget)
 
@@ -105,12 +121,12 @@
   (let
       (tem)
     (check-frame-availability style)
-    (unless type
+    (if type
+	(window-put w 'type type)
       (setq type (window-type w))
       (when (and decorate-transients (window-transient-p w)
 		 (setq tem (cdr (assq type transient-normal-frame-alist))))
 	(setq type tem)))
-    (window-put w 'type type)
     (window-put w 'current-frame-style style)
     (when from-user
       (window-put w 'frame-style style))      
@@ -265,3 +281,9 @@
 	   `(() ("Default" (lambda ()
 			     (window-put (input-focus) 'frame-style nil)
 			     (set-frame-for-window (input-focus) t)))))))
+
+
+;; standard frame part classes
+
+(defun fp-class (class)
+  (cdr (assq class frame-part-class-alist)))
