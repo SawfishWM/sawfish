@@ -75,6 +75,7 @@ DEFSYM(window_resized_hook, "window-resized-hook");
 DEFSYM(shape_notify_hook, "shape-notify-hook");
 DEFSYM(enter_frame_part_hook, "enter-frame-part-hook");
 DEFSYM(leave_frame_part_hook, "leave-frame-part-hook");
+DEFSYM(configure_request_hook, "configure-request-hook");
 
 /* for enter/leave-notify-hook */
 DEFSYM(root, "root");
@@ -83,8 +84,10 @@ DEFSYM(root, "root");
 DEFSYM(new_value, "new-value");
 DEFSYM(deleted, "deleted");
 
-DEFSYM(raise_window, "raise-window");
-DEFSYM(lower_window, "lower-window");
+DEFSYM(stack, "stack");
+DEFSYM(above, "above");
+DEFSYM(below, "below");
+DEFSYM(dimensions, "dimensions");
 
 /* `Time' will always be 32-bits, due to underlying wire protocol (?) */
 #define TIME_MAX 4294967295UL
@@ -792,27 +795,7 @@ configure_request (XEvent *ev)
     else if (w != 0)
     {
 	u_long mask = ev->xconfigurerequest.value_mask;
-	bool need_move = FALSE, need_resize = FALSE;
-	if (mask & CWStackMode)
-	{
-	    if (ev->xconfigurerequest.detail == Above)
-	    {
-		rep_GC_root gc_win;
-		repv win = rep_VAL(w);
-		rep_PUSHGC(gc_win, win);
-		/* The GNOME pager seems to believe that asking for
-		   a window to be raised to the top of the stack will
-		   uniconify it. The Xlib manual suggests that the
-		   correct method is to just remap the window.. */
-#ifndef GNOME_PAGER_UNICONIFY_IS_BROKEN
-		rep_call_lisp1 (Fsymbol_value (Quniconify_window, Qt), win);
-#endif
-		rep_call_lisp1 (Fsymbol_value (Qraise_window, Qt), win);
-		rep_POPGC;
-	    }
-	    else if (ev->xconfigurerequest.detail == Below)
-		rep_call_lisp1 (Fsymbol_value (Qlower_window, Qt), rep_VAL(w));
-	}
+	repv alist = Qnil;
 	{
 	    /* Is the window shaped? */
 	    int xws, yws, xbs, ybs;
@@ -823,42 +806,48 @@ configure_request (XEvent *ev)
 				&clip, &xbs, &ybs, &wbs, &hbs);
 	    w->shaped = bounding ? 1 : 0;
 	}
+	if (mask & CWStackMode)
+	{
+	    if (ev->xconfigurerequest.detail == Above)
+		alist = Fcons (Fcons (Qstack, Qabove), alist);
+	    else if (ev->xconfigurerequest.detail == Below)
+		alist = Fcons (Fcons (Qstack, Qbelow), alist);
+	}
 	if ((mask & CWX) || (mask & CWY))
 	{
-	    int old_x = w->attr.x, old_y = w->attr.y;
+	    int x = w->attr.x, y = w->attr.y;
 	    if (mask & CWX)
-		w->attr.x = (ev->xconfigurerequest.x
-			     + (w->reparented ? w->frame_x : 0));
+		x = (ev->xconfigurerequest.x
+		     + (w->reparented ? w->frame_x : 0));
 	    if (ev->xconfigurerequest.value_mask & CWY)
-		w->attr.y = (ev->xconfigurerequest.y
-			     + (w->reparented ? w->frame_y : 0));
-	    if (w->attr.x != old_x || w->attr.y != old_y)
-		need_move = TRUE;
+		y = (ev->xconfigurerequest.y
+		     + (w->reparented ? w->frame_y : 0));
+	    if (x != w->attr.x || y != w->attr.y)
+	    {
+		alist = Fcons (Fcons (Qposition,
+				      Fcons (rep_MAKE_INT (x),
+					     rep_MAKE_INT (y))), alist);
+	    }
 	}
 	if ((mask & CWWidth) || (mask & CWHeight))
 	{
-	    int old_width = w->attr.width, old_height = w->attr.height;
+	    int width = w->attr.width, height = w->attr.height;
 	    if (ev->xconfigurerequest.value_mask & CWWidth)
-		w->attr.width = ev->xconfigurerequest.width;
+		width = ev->xconfigurerequest.width;
 	    if (ev->xconfigurerequest.value_mask & CWHeight)
-		w->attr.height = ev->xconfigurerequest.height;
-	    if (w->attr.width != old_width || w->attr.height != old_height)
-		need_resize = TRUE;
+		height = ev->xconfigurerequest.height;
+	    if (w->attr.width != width || w->attr.height != height)
+	    {
+		alist = Fcons (Fcons (Qdimensions,
+				      Fcons (rep_MAKE_INT (width),
+					     rep_MAKE_INT (height))), alist);
+	    }
 	}
-	if (need_move)
+	if (alist != Qnil)
 	{
-	    XMoveWindow (dpy, w->reparented ? w->frame : w->id,
-			 w->attr.x, w->attr.y);
+	    Fcall_window_hook (Qconfigure_request_hook, rep_VAL(w),
+			       rep_LIST_1 (alist), Qnil);
 	}
-	if (need_resize)
-	    fix_window_size (w);
-	if (need_move && !need_resize)
-	    send_synthetic_configure (w);
-
-	if (need_move)
-	    Fcall_window_hook (Qwindow_moved_hook, rep_VAL(w), Qnil, Qnil);
-	if (need_resize)
-	    Fcall_window_hook (Qwindow_resized_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
@@ -1392,14 +1381,17 @@ events_init (void)
     rep_INTERN_SPECIAL(shape_notify_hook);
     rep_INTERN_SPECIAL(enter_frame_part_hook);
     rep_INTERN_SPECIAL(leave_frame_part_hook);
+    rep_INTERN_SPECIAL(configure_request_hook);
 
     rep_INTERN(iconify_window);
     rep_INTERN(uniconify_window);
     rep_INTERN(root);
     rep_INTERN(new_value);
     rep_INTERN(deleted);
-    rep_INTERN(raise_window);
-    rep_INTERN(lower_window);
+    rep_INTERN(stack);
+    rep_INTERN(above);
+    rep_INTERN(below);
+    rep_INTERN(dimensions);
 
     rep_mark_static (&current_event_window);
     current_context_map = Qnil;
