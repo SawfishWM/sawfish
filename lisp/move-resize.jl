@@ -34,12 +34,14 @@
 
 (defcustom move-outline-mode 'opaque
   "The method of drawing windows being moved interactively."
-  :type (set opaque box)
+  :type symbol
+  :options (opaque box)
   :group move)
 
 (defcustom resize-outline-mode 'opaque
   "The method of drawing windows being resized interactively."
-  :type (set opaque box)
+  :type symbol
+  :options (opaque box)
   :group move)
 
 (defcustom move-resize-raise-window nil

@@ -30,7 +30,8 @@
 (defcustom transients-above 'none
   "Keep transient windows stacked above."
   :group misc
-  :type (set all parents none))
+  :type symbol
+  :options (all parents none))
 
 ;; minimum depth of transient windows
 (defvar transient-depth 2)

@@ -23,12 +23,14 @@
 
 (defcustom place-window-mode 'best-fit
   "Method of selecting the position of a freshly-mapped window."
-  :type (set random interactive first-fit best-fit first-fit-or-interactive centered none)
+  :type symbol
+  :options (random interactive first-fit best-fit first-fit-or-interactive centered none)
   :group placement)
 
 (defcustom place-transient-mode 'random
   "Method of selecting the position of a freshly-mapped transient window."
-  :type (set random interactive first-fit best-fit first-fit-or-interactive centered none)
+  :type symbol
+  :options (random interactive first-fit best-fit first-fit-or-interactive centered none)
   :group placement)
 
 (defcustom ignore-program-positions nil

@@ -32,7 +32,8 @@
 
 (defcustom gradient:gradient-type 'horizontal
   "Direction of gradient in `gradient' frame style."
-  :type (set horizontal vertical diagonal)
+  :type symbol
+  :options (horizontal vertical diagonal)
   :group gradient-frame
   :after-set after-setting-frame-option)
 

@@ -87,8 +87,8 @@
 			 :allow-nil ,(get symbol 'custom-allow-nil))
 		  (label ,doc)))
 
-	  ((and (consp type) (eq (car type) 'set))
-	   `(hbox (set ,(cdr type)
+	  ((eq type 'symbol)
+	   `(hbox (symbol ,(get symbol 'custom-options)
 		       :variable ,symbol
 		       :value ,value
 		       :widget ,(get symbol 'custom-widget))

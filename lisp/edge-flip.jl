@@ -40,7 +40,8 @@
 
 (defcustom edge-flip-type 'viewport
   "What hitting the screen edge actually flips."
-  :type (set viewport workspace)
+  :type symbol
+  :options (viewport workspace)
   :group edge-flip)
 
 (defcustom edge-flip-delay 250

@@ -47,12 +47,14 @@
 
 (defcustom workspace-boundary-mode 'stop
   "Action when passing the first or last workspace when moving."
-  :type (set stop wrap-around keep-going)
+  :type symbol
+  :options (stop wrap-around keep-going)
   :group workspace)
 
 (defcustom workspace-send-boundary-mode 'keep-going
   "Action when passing the first or last workspace when moving windows."
-  :type (set stop wrap-around keep-going)
+  :type symbol
+  :options (stop wrap-around keep-going)
   :group workspace)
 
 (defcustom delete-workspaces-when-empty nil
