@@ -19,8 +19,6 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'sm-save)
-(require 'sm-load)
 (provide 'window-history)
 
 ;; Commentary:
@@ -38,16 +36,27 @@
 
 ;; Configuration / variables
 
+(defvar window-history-file "~/.sawfish/window-history"
+  "Name of the file used to store persistent window state.")
+
 ;; an alist mapping encoded WM_CLASS text property to state alist
 (define window-history-state t)
 
-(define window-history-file "~/.sawfish/window-history")
+;; non-nil when window-history-state contains unsaved changes
+(define window-history-dirty nil)
+
+;; list of states in window-state-change-hook that should be tracked
+(define window-history-states '(iconified sticky ignored never-focus
+				shaded type frame-style))
+
+;; property matched on
+(define window-history-key-property 'WM_CLASS)
 
 
 ;; matching windows
 
 (define (window-history-key w)
-  (nth 2 (get-x-property w 'WM_CLASS)))
+  (nth 2 (get-x-property w window-history-key-property)))
 
 (define (window-history-find w)
   (let ((class (window-history-key w)))
@@ -57,6 +66,7 @@
 (define (window-history-match w)
   (let ((alist (cdr (window-history-find w))))
     (when alist
+      (require 'sm-load)
       (sm-apply-to-window w alist))))
 
 
@@ -78,15 +88,26 @@
 	      (value
 	       (rplacd alist (cons (cons state value) (cdr alist))))
 	      (cell
-	       (rplacd alist (delq cell (cdr alist)))))))))
+	       (rplacd alist (delq cell (cdr alist)))))
+	(setq window-history-dirty t)))))
 
 (put 'position 'window-history-snapshotter window-absolute-position)
 (put 'dimensions 'window-history-snapshotter window-dimensions)
 
 (define (window-history-state-snapshotter w states)
   (when states
-    ((window-history-snapshotter (car states)) w)
+    (when (memq (car states) window-history-states)
+      ((window-history-snapshotter (car states)) w))
     (window-history-state-snapshotter w (cdr states))))
+
+(defun window-history-forget (w)
+  "Forget any persistent state associated with the current window."
+  (interactive "%W")
+  (let
+      ((alist (window-history-find w)))
+    (when alist
+      (setq window-history-state (delq alist window-history-state))
+      (setq window-history-dirty t))))
 
 
 ;; saving and loading state
@@ -94,6 +115,7 @@
 (define (window-history-load)
   (unless (listp window-history-state)
     (setq window-history-state nil)
+    (setq window-history-dirty nil)
     (when (file-exists-p window-history-file)
       (let
 	  ((file (open-file window-history-file 'read)))
@@ -108,7 +130,8 @@
 	    (close-file file)))))))
 
 (define (window-history-save)
-  (when (listp window-history-state)
+  (when window-history-dirty
+    (require 'sm-save)
     (unless (file-exists-p (file-name-directory window-history-file))
       (make-directory-recursively (file-name-directory window-history-file)))
     (let
@@ -121,7 +144,8 @@
 		      (user-login-name) (system-name)
 		      sawfish-version (current-time-string))
 	      (mapc (lambda (x)
-		      (sm-print-alist file x)) window-history-state))
+		      (sm-print-alist file x)) window-history-state)
+	      (setq window-history-dirty nil))
 	  (close-file file))))))
 
 
@@ -132,3 +156,8 @@
 (add-hook 'after-resize-hook (window-history-snapshotter 'dimensions))
 (add-hook 'window-state-change-hook window-history-state-snapshotter)
 (add-hook 'before-exit-hook window-history-save)
+
+(require 'menus)
+(setq window-ops-menu (nconc window-ops-menu
+			     (list `(,(_ "_Forget state")
+				     window-history-forget))))
