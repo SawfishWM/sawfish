@@ -67,13 +67,15 @@
       (when (or (not parent)
 		(not (window-mapped-p parent))
 		(not (window-visible-p parent))
-		(window-outside-viewport-p parent))
+		(window-outside-viewport-p parent)
+		(not (window-really-wants-input-p parent)))
 	;; if no parent, choose the topmost window (if in click-to-focus
 	;; mode) or the window under the pointer otherwise
-	(unless (eq focus-mode 'click)
-	  (setq parent (query-pointer-window)))
+	(if (eq focus-mode 'click)
+	    (setq parent (query-pointer-window))
+	  (setq parent nil))
 	(unless (or parent (eq focus-mode 'enter-exit))
-	  (setq parent (car (window-order current-workspace)))))
+	  (setq parent (window-order-most-recent))))
       (when (or (null parent) (window-really-wants-input-p parent))
 	(set-input-focus parent)))))
 
