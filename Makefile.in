@@ -24,6 +24,7 @@ top_builddir=.
 top_srcdir=@top_srcdir@
 
 SUBDIRS = src capplet lisp themes man
+GNOME_DIRS := / /usr /usr/local /opt /gnome /opt/gnome
 
 all : build.h DOC.dir NEWS FAQ
 	set -e; for dir in $(SUBDIRS); do \
@@ -40,7 +41,7 @@ install : all installdirs
 	  ( cd $$dir && $(MAKE) $@ ); \
 	done
 	$(INSTALL_DATA) ./DOC.* $(sawmilldir)/$(version)
-	-set -e; for d in $(prefix) / /usr /usr/local /opt /gnome; do \
+	-set -e; for d in $(prefix) $(GNOME_DIRS); do \
 	  if [ -d $$d/share/gnome/wm-properties ]; then \
 	    $(INSTALL_DATA) Sawmill.desktop $$d/share/gnome/wm-properties; \
 	    break; \

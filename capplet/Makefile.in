@@ -1,5 +1,5 @@
 # Makefile.in -- input for the capplet directory's Makefile
-# $Id: Makefile.in,v 1.4 1999/09/12 21:51:37 john Exp $
+# $Id: Makefile.in,v 1.5 1999/09/30 14:40:14 john Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -26,6 +26,8 @@ top_srcdir=@top_srcdir@
 srcdir=@srcdir@
 VPATH=@top_srcdir@/src:.
 
+GNOME_DIRS := / /usr /usr/local /opt /gnome /opt/gnome
+
 override CFLAGS += $(GNOME_CC_CFLAGS)
 override LIBS += $(GNOME_CC_LIBS)
 
@@ -43,7 +45,7 @@ install : all installdirs
 	for p in sawmill-capplet; do \
 	  $(INSTALL_PROGRAM) $$p ${bindir}; \
 	done
-	-set -e; for d in $(prefix) / /usr /usr/local /opt /gnome; do \
+	-set -e; for d in $(prefix) $(GNOME_DIRS); do \
 	  if [ -d $$d/share/control-center ]; then \
 	    rm -rf $$d/share/control-center/Sawmill; \
 	    cp -r desktop-entries $$d/share/control-center/Sawmill; \
