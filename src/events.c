@@ -898,32 +898,62 @@ shape_notify (XEvent *ev)
 
 
 
+static int synthetic_configure_mutex;
+
 /* From the afterstep sources, ``According to the July 27, 1988 ICCCM
    draft, we should send a "synthetic" ConfigureNotify event to the
    client if the window was moved but not resized.'' */
 void
 send_synthetic_configure (Lisp_Window *w)
 {
-    XEvent ev;
-    ev.type = ConfigureNotify;
-    ev.xconfigure.display = dpy;
-    ev.xconfigure.event = w->id;
-    ev.xconfigure.window = w->id;
-    ev.xconfigure.x = w->attr.x;
-    ev.xconfigure.y = w->attr.y;
-    if (w->reparented)
+    if (!synthetic_configure_mutex)
     {
-	ev.xconfigure.x -= w->frame_x;
-	ev.xconfigure.y -= w->frame_y;
+	XEvent ev;
+	ev.type = ConfigureNotify;
+	ev.xconfigure.display = dpy;
+	ev.xconfigure.event = w->id;
+	ev.xconfigure.window = w->id;
+	ev.xconfigure.x = w->attr.x;
+	ev.xconfigure.y = w->attr.y;
+	if (w->reparented)
+	{
+	    ev.xconfigure.x -= w->frame_x;
+	    ev.xconfigure.y -= w->frame_y;
+	}
+	ev.xconfigure.width = w->attr.width;
+	ev.xconfigure.height = w->attr.height;
+	ev.xconfigure.border_width = w->attr.border_width;
+	ev.xconfigure.above = w->reparented ? w->frame : root_window;
+	ev.xconfigure.override_redirect = False;
+	XSendEvent (dpy, w->id, False, StructureNotifyMask, &ev);
     }
-    ev.xconfigure.width = w->attr.width;
-    ev.xconfigure.height = w->attr.height;
-    ev.xconfigure.border_width = w->attr.border_width;
-    ev.xconfigure.above = w->reparented ? w->frame : root_window;
-    ev.xconfigure.override_redirect = False;
-    XSendEvent (dpy, w->id, False, StructureNotifyMask, &ev);
+    else
+	w->pending_configure = 1;
 }
 
+DEFUN("synthetic-configure-mutex", Vsynthetic_configure_mutex,
+      Ssynthetic_configure_mutex, (repv arg), rep_Var) /*
+::doc:synthetic-configure-mutex::
+While this variable is non-nil no synthetic ConfigureNotify events will
+be sent to windows.
+::end:: */
+{
+    if (arg != 0)
+    {
+	synthetic_configure_mutex = (arg != Qnil);
+	if (!synthetic_configure_mutex)
+	{
+	    Lisp_Window *w;
+	    for (w = window_list; w != 0; w = w->next)
+	    {
+		if (w->pending_configure && w->id != 0)
+		    send_synthetic_configure (w);
+	    }
+	}
+    }
+    return synthetic_configure_mutex ? Qt : Qnil;
+}
+	
 long
 get_event_mask (int type)
 {
@@ -1336,6 +1366,7 @@ events_init (void)
     rep_ADD_SUBR(Sx_server_timestamp);
     rep_ADD_SUBR(Sx_events_queued);
     rep_ADD_SUBR(Sclicked_frame_part);
+    rep_ADD_SUBR(Ssynthetic_configure_mutex);
 
     rep_INTERN_SPECIAL(visibility_notify_hook);
     rep_INTERN_SPECIAL(destroy_notify_hook);
