@@ -210,7 +210,8 @@
   (define (display-unflattened group)
     (let* ((slots (get-slots group)))
       (gtk-container-add
-       slot-box-widget (layout-slots (group-layout group) slots))))
+       slot-box-widget (layout-slots (group-layout group) slots))
+      (setq active-slots (nconc active-slots slots))))
 
   (define (add-group-widgets group)
     (if (and *nokogiri-flatten-groups* (group-sub-groups group))
