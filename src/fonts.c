@@ -324,12 +324,12 @@ generalize_xlfd (const char *xlfd)
 	pxlsz = strdup ("*");
 
 #define XLFD_FORMAT "%s,-*-*-%s-%s-*-*-%s-*-*-*-*-*-*-*," \
-		    "-*-*-*-*-*-*-%s-*-*-*-*-*-*-*,*", \
-		    xlfd, weight, slant, pxlsz, pxlsz
+		    "-*-*-*-*-*-*-%s-*-*-*-*-*-*-*,*"
 
-    len = snprintf (0, 0, XLFD_FORMAT);
+    len = strlen (xlfd) + strlen (weight) + strlen (slant) +
+          strlen (pxlsz) + strlen (pxlsz) + strlen (XLFD_FORMAT);
     buf = malloc (len + 1);
-    snprintf (buf, len + 1, XLFD_FORMAT);
+    snprintf (buf, len + 1, XLFD_FORMAT, xlfd, weight, slant, pxlsz, pxlsz);
 
     free (pxlsz);
     free (slant);
