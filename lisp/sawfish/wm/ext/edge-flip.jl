@@ -109,6 +109,7 @@
 				   (mod edge-flip-delay 1000))))))
 
   (define (edge-flip-leave edge)
+    (declare (unused edge))
     (setq ef-current-edge nil)
     (when ef-timer
       (delete-timer ef-timer)
@@ -191,6 +192,7 @@
 	  (move-window-to-workspace w original-space current-workspace t)))))
 
   (define (edge-flip-while-moving w)
+    (declare (unused w))
     (when edge-flip-enabled
       (edge-flip-synthesize)))
 

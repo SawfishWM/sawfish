@@ -111,6 +111,7 @@
 	     (let ((cutoff (* (max 0 (- total maximum)) 100)))
 	       (setq total (* total 100))
 	       (delete-if (lambda (unused)
+			    (declare (unused unused))
 			    (< (random total) cutoff)) points)))
 	    ((< total maximum)
 	     ;; add points
@@ -210,7 +211,8 @@
 
   (define (sp-cost:grid-lines point dims grid rects)
     "Smart placement cost function. Cost is proportional to the number of grid
-     lines that the proposed placement crosses."
+lines that the proposed placement crosses."
+    (declare (unused rects))
     (let ((win-left (car point))
 	  (win-top (cdr point))
 	  (win-right (+ (car point) (car dims)))
@@ -236,7 +238,8 @@
 
   (define (sp-cost:aligned-edges point dims grid rects)
     "Smart placement cost function. Cost is proportional to the length of the
-     edges that the proposed placement abuts."
+edges that the proposed placement abuts."
+    (declare (unused grid))
     (let ((win-left (car point))
 	  (win-top (cdr point))
 	  (win-right (+ (car point) (car dims)))
@@ -278,12 +281,14 @@
 
   (define (sp-cost:pointer-locality point dims grid rects)
     "Smart placement cost function. Cost is proportional to the distance
-     from the proposed placement to the current pointer position."
+from the proposed placement to the current pointer position."
+    (declare (unused grid rects))
     (sp-cost-from-distance (rectangle-center* point dims) (query-pointer)))
 
   (define (sp-cost:focus-locality point dims grid rects)
     "Smart placement cost function. Cost is proportional to the distance from
-     the proposed placement to the position of the currently focused window."
+the proposed placement to the position of the currently focused window."
+    (declare (unused grid rects))
     (let ((focus (input-focus)))
       (if focus
 	  (sp-cost-from-distance (rectangle-center* point dims)
@@ -293,11 +298,13 @@
 
   (define (sp-cost:center-locality point dims grid rects)
     "Smart placement cost function. Cost is proportional to the distance from
-     the proposed placement to the center of the screen."
+the proposed placement to the center of the screen."
+    (declare (unused grid rects))
     (sp-cost-from-distance (rectangle-center* point dims)
 			   (cons (/ (screen-width) 2) (/ (screen-height) 2))))
 
   (define (sp-cost:overlap point dims grid rects overlap)
+    (declare (unused point dims grid rects))
     (exp (- (/ overlap (* (screen-width) (screen-height))))))
 
   (defvar sp-cost-components (list (cons sp-cost:overlap 3/4)

@@ -94,6 +94,7 @@
   (define (make-theme patterns-alist frame-alist mapping-alist)
     (let ((real-frames (make-frames patterns-alist frame-alist)))
       (lambda (w type)
+	(declare (unused w))
 	(let ((frame-name (or (cdr (assq type mapping-alist)))))
 	  (and frame-name (cdr (assoc frame-name real-frames)))))))
 

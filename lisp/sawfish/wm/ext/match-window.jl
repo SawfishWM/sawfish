@@ -335,12 +335,14 @@
 
   (define-match-window-setter 'workspace
    (lambda (w prop value)
+     (declare (unused prop))
      (unless (or (window-get w 'placed) (window-workspaces w))
        ;; translate from 1.. to 0..
        (set-window-workspaces w (list (1- value))))))
 
   (define-match-window-setter 'position
    (lambda (w prop value)
+     (declare (unused prop))
      (let ((x (car value))
 	   (y (cdr value)))
        (when (< x 0)
@@ -353,28 +355,34 @@
 
   (define-match-window-setter 'dimensions
    (lambda (w prop value)
+     (declare (unused prop))
      (resize-window-with-hints w (car value) (cdr value))))
 
   (define-match-window-setter 'viewport
    (lambda (w prop value)
+     (declare (unused prop))
      (unless (window-get w 'placed)
        (set-screen-viewport (1- (car value)) (1- (cdr value)))
        (set-window-viewport w (1- (car value)) (1- (cdr value))))))
 
   (define-match-window-setter 'frame-type
    (lambda (w prop value)
+     (declare (unused prop))
      (set-window-type w (or (cdr (assq value match-window-types)) value))))
 
   (define-match-window-setter 'ungrouped
    (lambda (w prop value)
+     (declare (unused prop))
      (when value
        (add-window-to-new-group w))))
 
   (define-match-window-setter 'unique-name
     (lambda (w prop value)
+     (declare (unused prop))
       (when value
 	(uniquify-window-name w))))
 
   (define-match-window-setter 'focus-mode
    (lambda (w prop value)
+     (declare (unused prop))
      (set-focus-mode w value))))

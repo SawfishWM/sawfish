@@ -141,7 +141,7 @@ unused before killing it.")
     (unless (and menu-process (process-in-use-p menu-process))
       (when menu-process
 	(kill-process menu-process))
-      (let ((menu-sentinel (lambda (process)
+      (let ((menu-sentinel (lambda ()
 			     (when (and menu-process
 					(not (process-in-use-p menu-process)))
 			       (setq menu-process nil))

@@ -35,6 +35,7 @@
 
   (define-match-window-setter 'skip-tasklist
     (lambda (window property value)
+      (declare (unused property))
       (apply-command (if value
 			 'gnome-set-skip-tasklist
 		       'gnome-clear-skip-tasklist) (list window)))))

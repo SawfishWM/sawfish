@@ -248,6 +248,7 @@
 	    (allow-events 'sync-keyboard)))
 
 	(define (enter-fun space)
+	  (declare (unused space))
 	  (when grab-win
 	    (setq grab-win nil)
 	    (or (grab-keyboard nil nil t)

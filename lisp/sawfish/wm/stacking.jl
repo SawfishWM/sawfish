@@ -99,12 +99,14 @@
     (if (window-transient-p w)
 	;; ensure there are no normal windows above W
 	(lambda (above below)
+	  (declare (unused below))
 	  (let loop ((rest above))
 	    (cond ((null rest) t)
 		  ((not (window-transient-p (car rest))) nil)
 		  (t (loop (cdr rest))))))
       ;; ensure no transients below W
       (lambda (above below)
+	(declare (unused above))
 	(let loop ((rest below))
 	  (cond ((null rest) t)
 		((window-transient-p (car rest)) nil)

@@ -215,6 +215,7 @@
       (display-tooltip (tooltips-format (nreverse items)))))
 
   (define (tooltips-fp-enter win fp)
+    (declare (unused win))
     (when tooltips-enabled
       (call-after-delay (lambda ()
 			  (unless (clicked-frame-part)

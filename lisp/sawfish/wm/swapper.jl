@@ -34,6 +34,7 @@
 ;;; default swappers
 
   (define (workspace-swap-out w space)
+    (declare (unused space))
     (let ((props (mapcar (lambda (prop)
 			   (cons prop (window-get w prop)))
 			 workspace-local-properties)))
@@ -46,6 +47,7 @@
 	(list (cons 'properties props)))))
 
   (define (workspace-swap-in w space alist)
+    (declare (unused space))
     (let ((position (cdr (assq 'position alist)))
 	  (viewport (cdr (assq 'viewport alist)))
 	  (dimensions (cdr (assq 'dimensions alist)))

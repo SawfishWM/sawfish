@@ -513,6 +513,7 @@ unmaximized."
 	(window-put w 'maximize-removed-maximize-button nil))))
 
   (define (property-notify w prop type)
+    (declare (unused type))
     (when (eq prop 'WM_NORMAL_HINTS)
       (check-if-maximizable w)))
 
