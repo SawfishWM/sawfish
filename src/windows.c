@@ -273,6 +273,14 @@ add_window (Window id)
 
         w->visible = TRUE;
 
+	/* window managers are supposed to set WM_STATE to diffentiate
+	   top-level windows of applications from others */
+	{
+	    u_long data = NormalState;
+	    XChangeProperty (dpy, w->id, xa_wm_state, xa_wm_state, 32,
+			     PropModeReplace, (u_char *)&data, 1);
+	}
+
 	/* ..then call the add-window-hook.. */
 	rep_PUSHGC(gc_win, win);
 	Fcall_hook (Qadd_window_hook, Fcons (rep_VAL(w), Qnil), Qnil);
@@ -289,7 +297,7 @@ add_window (Window id)
 	    install_window_frame (w);
 
 	    /* this grabs bound events in the subwindow */
-	    grab_window_events (w);
+	    grab_window_events (w, TRUE);
 
 	    Fungrab_server ();
 	}
@@ -369,6 +377,13 @@ window-put WINDOW PROPERTY VALUE
     {
 	if (rep_CAR(plist) == prop)
 	{
+	    if (prop == Qkeymap && VWIN(win)->id)
+	    {
+		/* A bit of a hack */
+		grab_keymap_events (VWIN(win)->id,
+				    rep_CAR(rep_CDR(plist)), FALSE);
+		grab_keymap_events (VWIN(win)->id, val, TRUE);
+	    }
 	    if (!rep_CONS_WRITABLE_P(rep_CDR(plist)))
 	    {
 		/* Can't write into a dumped cell; need to cons
