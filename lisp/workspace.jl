@@ -155,10 +155,7 @@
 (defconst IconicState 3)
 
 ;; window properties whose values may differ on different workspaces
-(defvar workspace-local-properties
-  '(type frame-style current-frame-style shaded shaded-old-type
-    maximized-horizontally maximized-vertically unmaximized-geometry
-    hide-client depth order iconified))
+(defvar workspace-local-properties nil)
 
 (defvar workspace-swap-in-hook nil)
 (defvar workspace-swap-out-hook nil)
@@ -958,8 +955,9 @@ all workspaces."
        (viewport (cdr (assq 'viewport alist)))
        (dimensions (cdr (assq 'dimensions alist)))
        (properties (cdr (assq 'properties alist)))
-       (old-type (window-get w 'type))
-       (old-frame-style (window-get w 'current-frame-style)))
+       (old-type (window-type w))
+       (old-frame-style (window-get w 'current-frame-style))
+       new-frame-style)
     (when dimensions
       (resize-window-to w (car dimensions) (cdr dimensions)))
     (when (and position viewport)
@@ -970,22 +968,32 @@ all workspaces."
 			 (* (cdr viewport) (screen-height))
 			 (- viewport-y-offset))))
     (mapc (lambda (cell)
-	    (when (and (eq (car cell) 'depth) (null (cdr cell)))
-	      (format standard-error "setting depth of %s to nil\n" (window-name w))
-	      (backtrace standard-error)
-	      (write standard-error ?\n))
 	    (window-put w (car cell) (cdr cell))) properties)
-    (unless (and (eq (window-get w 'type) old-type)
-		 (eq (window-get w 'current-frame-style) old-frame-style))
-      (set-window-frame-style w (or (window-get w 'current-frame-style)
-				    default-frame-style)
-			      (window-get w 'type)))))
+    ;; special case this to help switching the default theme
+    (setq new-frame-style (or (window-get w 'frame-style) default-frame-style))
+    (unless (and (eq old-frame-style new-frame-style)
+		 (eq (window-type w) old-type))
+      (set-window-frame-style w new-frame-style))))
 
 (add-hook 'workspace-swap-in-hook workspace-swap-in)
 (add-hook 'workspace-swap-out-hook workspace-swap-out)
 
+;; Note that all of PROPS (symbols) should be saved and restored
+;; automatically when swapping window states
+(defun add-swapped-properties (&rest props)
+  (mapc (lambda (p)
+	  (or (memq p workspace-local-properties)
+	      (setq workspace-local-properties
+		    (cons p workspace-local-properties))))
+	props))
+
 
 ;; Initialisation
+
+(sm-add-saved-properties 'sticky 'iconified)
+
+;; some of these should really be added by other files
+(add-swapped-properties 'frame-style 'type 'hide-client 'iconified 'order)
 
 (unless (or batch-mode (memq 'ws-add-window add-window-hook))
   (add-hook 'add-window-hook ws-add-window)
@@ -996,6 +1004,5 @@ all workspaces."
   (add-hook 'before-add-window-hook ws-honour-client-state)
   (add-hook 'add-window-hook ws-set-client-state t)
   (add-hook 'window-state-change-hook ws-set-client-state)
-  (sm-add-saved-properties 'sticky 'iconified)
   (add-hook 'sm-window-save-functions ws-saved-state)
   (add-hook 'sm-restore-window-hook ws-load-state))
