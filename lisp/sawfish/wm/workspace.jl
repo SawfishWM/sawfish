@@ -201,7 +201,8 @@
 	((w (nth 1 src)))
       (ws-remove-window w)
       (ws-add-window-to-space w dest)))
-  (setq ws-workspaces (delq src ws-workspaces)))
+  (setq ws-workspaces (delq src ws-workspaces))
+  (call-hook 'delete-workspace-hook (list src)))
 
 
 ;; Menu constructors
