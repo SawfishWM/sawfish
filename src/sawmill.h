@@ -103,34 +103,34 @@ typedef struct lisp_window {
     repv frame_style;
 
     /* Is the client window mapped? (by its app) */
-    int mapped : 1;
+    u_int mapped : 1;
 
     /* Is the frame visible? (not hidden by hide-window) */
-    int visible : 1;
+    u_int visible : 1;
 
     /* Is the client window hidden by us?
        (controlled by window's `hide-client' property -- used for shading) */
-    int client_hidden : 1;
+    u_int client_hidden : 1;
 
     /* Is the client window unmapped by us?
        (because it's !visible or client_hidden) */
-    int client_unmapped : 1;
+    u_int client_unmapped : 1;
 
     /* Is the client window reparented to the frame? */
-    int reparented : 1;
+    u_int reparented : 1;
 
     /* Is the client window shaped? */
-    int shaped : 1;
+    u_int shaped : 1;
 
     /* Have we called the destroy-notify-hook? */
-    int destroyed : 1;
+    u_int destroyed : 1;
 
     /* The WM protocols understood by the client */
-    int does_wm_take_focus : 1;
-    int does_wm_delete_window : 1;
+    u_int does_wm_take_focus : 1;
+    u_int does_wm_delete_window : 1;
 
     /* Do we need to send a synthetic ConfigureNotify to this window? */
-    int pending_configure : 1;
+    u_int pending_configure : 1;
 
     /* The position and dimensions of `attr' is always maintained.
        But the position is the position of the frame, while the
@@ -251,11 +251,11 @@ struct frame_part {
     Window id;
     GC gc;
 
-    int clicked : 1;
-    int highlighted : 1;
-    int pending_refresh : 1;
-    int below_client : 1;
-    int scale_foreground : 1;
+    u_int clicked : 1;
+    u_int highlighted : 1;
+    u_int pending_refresh : 1;
+    u_int below_client : 1;
+    u_int scale_foreground : 1;
 
     repv text;			/* may be nil, a string, or a function */
     repv x_justify, y_justify;
