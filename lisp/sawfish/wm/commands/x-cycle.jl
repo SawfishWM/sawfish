@@ -340,15 +340,14 @@ Any extra arguments are passed to each call to define-command."
 			(lambda (w) (windows-in-group w))
 			#:spec "%W")
 
-  (define-cycle-command 'cycle-prefix 'cycle-prefix-backwards
-			(lambda (w)
-			  (when (string-match "^([^:]+)\\s*:" (window-name w))
-			    (let* ((prefix (expand-last-match "\\1"))
-				   (re (concat ?^ (quote-regexp prefix) "\\s*:")))
-			      (filter-windows
-			       (lambda (x)
-				 (string-match re (window-name x)))))))
-			#:spec "%W")
+  (define-cycle-command
+   'cycle-prefix 'cycle-prefix-backwards
+   (lambda (w)
+     (when (string-looking-at "^.+?\\s*[-:]" (window-name w))
+       (let* ((re (quote-regexp (expand-last-match "\\0"))))
+	 (filter-windows (lambda (x)
+			   (string-looking-at re (window-name x)))))))
+   #:spec "%W")
 
   (define-cycle-command 'cycle-class 'cycle-class-backwards
 			(lambda (w)
