@@ -169,7 +169,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "C-M-Right" 'send-to-next-workspace
     "M-Button3-Click1" 'raise-lower-window
     "M-Button2-Click1" 'popup-window-menu
-    "M-Button1-Click1" 'move-window-interactively)
+    "M-Button1-Move" 'move-window-interactively)
 
   (bind-keys global-keymap
     "C-Left" 'previous-workspace
