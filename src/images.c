@@ -39,6 +39,22 @@ DEFSYM(default_bevel_percent, "default-bevel-percent");
 #define IMLIB_IMAGE_SIZE(i) \
     (sizeof (ImlibImage) + (i)->rgb_width * (i)->rgb_height * 3)
 
+/* Fuck. Imlib's image caching is so annoying. This is the only way
+   I can think of disabling it, even though it may fragment memory.. */
+static ImlibImage *
+load_image (char *file)
+{
+    ImlibImage *im_1 = Imlib_load_image (imlib_id, file);
+    if (im_1 != 0)
+    {
+	ImlibImage *im_2 = Imlib_clone_image (imlib_id, im_1);
+	Imlib_kill_image (imlib_id, im_1);
+	return im_2;
+    }
+    else
+	return 0;
+}
+
 /* Make a Lisp image object from the imlib image IM. Its initial properties
    will be taken from the list PLIST. */
 static repv
@@ -147,7 +163,7 @@ string). PLIST defines the property list of the image.
     rep_POPGC;
     if (file && rep_STRINGP(file))
     {
-	ImlibImage *im = Imlib_load_image (imlib_id, rep_STR(file));
+	ImlibImage *im = load_image (rep_STR(file));
 	if (delete)
 	    Fdelete_file (file);
 	if (im != 0)
