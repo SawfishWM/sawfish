@@ -84,7 +84,6 @@
 	  ((clear) (lambda ()
 		     (gtk-entry-set-text entry default-font)))
 	  ((ref) (lambda ()
-		   ;; FIXME: Assumes we'll always be using Xft..
 		   (let* ((pango-name (gtk-entry-get-text entry))
 			  (face (pango-description->face pango-name)))
 		     (cond ((not face) nil)

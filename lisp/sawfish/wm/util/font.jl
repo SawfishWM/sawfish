@@ -95,7 +95,7 @@
   (define (xft-description->face name)
     (let* ((fields (string-split "\\s*:\\s*" name))
 	   (family "sans")
-	   (size 12))
+	   (size nil))
 
       ;; extract family and size
       (when (car fields)
@@ -125,15 +125,19 @@
 		(t (loop (cdr rest) styles)))))))
 
   (define (face->xft-description face)
-    (mapconcat identity
-	       (cons (format nil "%s-%s" (face-families face) (face-size face))
-		     (mapcar (lambda (x)
-			       (cond ((rassoc x xft-abbrev-map)
-				      (car (rassoc x xft-abbrev-map)))
-				     ((cdr x)
-				      (format nil "%s=%s" (car x) (cdr x)))
-				     (t (car x))))
-			     (face-styles face))) #\:))
+    (let ((families (face-families face))
+	  (size (face-size face))
+	  (styles (face-styles face)))
+      (mapconcat identity
+		 (cons (if size
+			   (format nil "%s-%s" families size)
+			 families)
+		       (mapcar (lambda (x)
+				 (cond ((rassoc x xft-abbrev-map)
+					(car (rassoc x xft-abbrev-map)))
+				       ((cdr x)
+					(format nil "%s=%s" (car x) (cdr x)))
+				       (t (car x)))) styles)) #\:)))
 
 
 ;; Pango naming scheme
@@ -163,7 +167,7 @@
   (define (pango-description->face name)
     (let ((fields (string-split " " name))
 	  (family "sans")
-	  (size 12)
+	  (size nil)
 	  (styles '()))
 
       ;; have to parse backwards, since family names may contain spaces..
@@ -189,10 +193,12 @@
     (let loop ((rest (face-styles face))
 	       (out '()))
       (if (null rest)
-	  (format nil "%s %s %s"
-		  (face-families face)
-		  (mapconcat identity (nreverse out) #\space)
-		  (face-size face))
+	  (mapconcat identity
+		     (nconc (list (face-families face))
+			    (nreverse out)
+			    (and (face-size face)
+				 (list (format nil "%d" (face-size face)))))
+		     #\space)
 	(let ((tem (rassoc (car rest) pango-style-map)))
 	  (if tem
 	      (loop (cdr rest) (cons (car tem) out))
@@ -223,38 +229,48 @@
       ("m" . "mono")))
 
   (define (xlfd-description->face name)
-    (let ((fields (string-split "-" name))
-	  (family "sans")
-	  (size 12)
-	  (styles '()))
+    (let* ((fields (string-split "-" name))
+	   (nfields (length fields))
+	   (family "sans")
+	   (size nil)
+	   (styles '()))
 
-      (unless (string= (nth 2 fields) "*")
-	(setq family (nth 2 fields)))
+      (if (= nfields 1)
 
-      (unless (string= (nth 7 fields) "*")
-	(setq size (string->number (nth 7 fields))))
+	  ;; font alias, e.g. "fixed", kludge this
+	  (make-face name nil nil)
 
-      (let ((slant (nth 4 fields)))
-	(when (assoc slant xlfd-slant-map)
-	  (setq styles (cons (cons "slant"
-				   (cdr (assoc slant xlfd-slant-map)))
-			     styles))))
+	;; normal XLFD string
 
-      (let ((spacing (nth 11 fields)))
-	(when (assoc spacing xlfd-spacing-map)
-	  (setq styles (cons (cons "spacing"
-				   (cdr (assoc spacing xlfd-spacing-map)))
-			     styles))))
+	(unless (or (<= fields 2) (string= (nth 2 fields) "*"))
+	  (setq family (nth 2 fields)))
 
-      (do ((i 1 (1+ i)))
-	  ((= i 14))
-	(let ((field (nth i fields))
-	      (name (assq i xlfd-style-names)))
-	  (when (and name field (not (string= field "*")))
-	    (setq styles (cons (cons (cdr (assq i xlfd-style-names))
-				     (nth i fields)) styles)))))
+	(unless (or (<= fields 7) (string= (nth 7 fields) "*"))
+	  (setq size (string->number (nth 7 fields))))
 
-      (make-face family size styles)))
+	(when (> nfields 4)
+	  (let ((slant (nth 4 fields)))
+	    (when (assoc slant xlfd-slant-map)
+	      (setq styles (cons (cons "slant"
+				       (cdr (assoc slant xlfd-slant-map)))
+				 styles)))))
+
+	(when (> nfields 11)
+	  (let ((spacing (nth 11 fields)))
+	    (when (assoc spacing xlfd-spacing-map)
+	      (setq styles (cons (cons "spacing"
+				       (cdr (assoc spacing xlfd-spacing-map)))
+				 styles)))))
+
+	(do ((i 1 (1+ i)))
+	    ((>= i (min 14 nfields)))
+	  (let ((field (nth i fields))
+		(name (assq i xlfd-style-names)))
+	    (when (and name field (not (string= field "*")))
+	      (setq styles (cons (cons (cdr (assq i xlfd-style-names))
+				       (nth i fields)) styles)))))
+
+	(make-face family size styles))))
 
   (define (face->xlfd-description face)
     (let ((out '()))
@@ -271,7 +287,9 @@
 		 (setq out (cons (or slant "*") out))))
 
 	      ((= i 7)
-	       (setq out (cons (number->string (face-size face)) out)))
+	       (setq out (cons (if (face-size face)
+				   (number->string (face-size face))
+				 "*") out)))
 
 	      ((= i 11)
 	       (let ((spacing (car (rassoc (face-style face "spacing")
