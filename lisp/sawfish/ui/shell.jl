@@ -61,19 +61,25 @@
   (define (initialize-shell #!optional socket-id)
     (let ((vbox (gtk-vbox-new nil box-spacing))
 	  (hbox (gtk-hbutton-box-new))
-	  (s-scroller (and (not socket-id) (gtk-scrolled-window-new))))
+	  (s-scroller (and (not socket-id) (gtk-scrolled-window-new)))
+	  root-container)
 
       (setq main-window (if socket-id
 			    (gtk-plug-new socket-id)
 			  (gtk-window-new 'toplevel)))
       (if socket-id
-	  (gtk-window-set-default-size main-window 400 300)
+	  (progn
+	    (gtk-window-set-default-size main-window 400 300)
+	    (setq root-container main-window))
 	(gtk-window-set-policy main-window nil t nil)
-	(gtk-window-set-default-size main-window 550 400))
+	(gtk-window-set-default-size main-window 550 400)
+	(setq root-container (gtk-frame-new))
+	(gtk-frame-set-shadow-type root-container 'out)
+	(gtk-container-add main-window root-container))
 
       (setq slot-box-widget (gtk-vbox-new nil box-spacing))
 
-      (gtk-container-border-width main-window box-border)
+      (gtk-container-border-width vbox box-border)
       (gtk-container-border-width slot-box-widget box-border)
       (when s-scroller
 	(gtk-scrolled-window-set-policy s-scroller 'automatic 'automatic)
@@ -105,7 +111,6 @@
 	(gtk-window-set-title main-window (_ "Sawfish configurator"))
 	(gtk-widget-set-name main-window (_ "Sawfish configurator"))
 	(gtk-window-set-wmclass main-window "main" "Nokogiri"))
-      (gtk-container-add main-window vbox)
 
       (gtk-signal-connect main-window "delete_event"
 			  (if (not socket-id) on-quit capplet-delete-event))
@@ -122,6 +127,7 @@
 	(gtk-container-add hbox ok-widget)
 	(gtk-container-add hbox cancel-widget))
 
+      (gtk-container-add root-container vbox)
       (gtk-widget-show-all main-window)
       (set-button-states)
 
