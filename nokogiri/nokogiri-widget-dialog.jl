@@ -34,14 +34,16 @@
 			 &optional initial-value main-window)
 
     (let* ((widget (make-widget spec))
-	   (hbox (gtk-hbox-new nil box-spacing)))
+	   (vbox (gtk-vbox-new nil box-spacing))
+	   (hbox (gtk-hbox-new nil 0)))
 
       (when initial-value
 	(widget-set widget initial-value))
 
       (gtk-box-pack-start hbox (gtk-label-new title))
-      (gtk-container-add hbox (widget-gtk-widget widget))
-      (gtk-widget-show-all hbox)
-      (simple-dialog title hbox
+      (gtk-container-add vbox hbox)
+      (gtk-container-add vbox (widget-gtk-widget widget))
+      (gtk-widget-show-all vbox)
+      (simple-dialog title vbox
 		     (lambda () (callback (widget-ref widget)))
 		     main-window))))
