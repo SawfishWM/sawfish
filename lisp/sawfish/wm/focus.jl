@@ -80,7 +80,8 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
   (define focus-mode-ref (autoloader-ref getter))
 
   (define (focus-invoke-mode w . args)
-    (let* ((mode (or (and w (window-get w 'focus-mode)) focus-mode))
+    (let* ((mode (or (and w (windowp w) (window-get w 'focus-mode))
+		     focus-mode))
 	   (fun (focus-mode-ref mode)))
       (when fun
 	(apply fun w args))))
@@ -120,17 +121,22 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 
   (define-focus-mode 'enter-exit
     (lambda (w action)
-      (cond ((eq action 'pointer-in)
-	     (when (window-really-wants-input-p w)
-	       (set-input-focus w)))
-	    ((memq action '(pointer-out enter-root))
-	     (set-input-focus nil)))))
+      (case action
+	((pointer-in)
+	 (when (window-really-wants-input-p w)
+	   (set-input-focus w)))
+	((pointer-out)
+	 (set-input-focus nil))
+	((enter-root)
+	 ;; ensure that any desktop window gets focused
+	 (set-input-focus w)))))
 
   (define-focus-mode 'enter-only
     (lambda (w action)
-      (cond ((eq action 'pointer-in)
-	     (when (and (not (eq w 'root)) (window-really-wants-input-p w))
-	       (set-input-focus w))))))
+      (case action
+	((pointer-in)
+	 (when (window-really-wants-input-p w)
+	   (set-input-focus w))))))
 
   (define (focus-click)
     (let ((w (current-event-window)))
@@ -180,16 +186,16 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 ;;; hooks
 
   (define (focus-enter-fun w)
-    (cond ((windowp w)
-	   (focus-invoke-mode w 'pointer-in))
-	  ((eq w 'root)
-	   (focus-invoke-mode (input-focus) 'enter-root))))
+    (cond ((desktop-window-p w)
+	   (focus-invoke-mode w 'enter-root))
+	  ((windowp w)
+	   (focus-invoke-mode w 'pointer-in))))
 
   (define (focus-leave-fun w)
-    (cond ((windowp w)
-	   (focus-invoke-mode w 'pointer-out))
-	  ((eq w 'root)
-	   (focus-invoke-mode (input-focus) 'leave-root))))
+    (cond ((desktop-window-p w)
+	   (focus-invoke-mode w 'leave-root))
+	  ((windowp w)
+	   (focus-invoke-mode w 'pointer-out))))
 
   (define (focus-in-fun w)
     (focus-invoke-mode w 'focus-in)
