@@ -27,6 +27,10 @@
 ;; quiet autoloading
 (setq autoload-verbose nil)
 
+;; XXX backwards compatibility, remove at some point
+(unless (boundp 'define-value)
+  (setq define-value set))
+
 ;; load standard libraries
 (require 'custom)
 (require 'functions)
@@ -52,6 +56,7 @@
 (require 'transient)
 (require 'frames)
 (require 'viewport)
+(require 'iconify)
 (require 'shading)
 (require 'stacking)
 (require 'place-window)
