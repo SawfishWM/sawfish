@@ -78,10 +78,10 @@ error_handler (Display *dpy, XErrorEvent *ev)
 	DB(("error_handler (%s)\n", w->name));
 	if (w == focus_window)
 	    focus_on_window (0);
-	/* call the hook before removing it so that it's still windowp */
-	Fcall_hook (Qdestroy_notify_hook, Fcons (rep_VAL(w), Qnil), Qnil);
 	if (w->id)
 	    remove_window (w, Qt);
+	/* the window isn't windowp anymore */
+	Fcall_hook (Qdestroy_notify_hook, Fcons (rep_VAL(w), Qnil), Qnil);
 	return 0;			/* ?? */
     }
     else
@@ -159,8 +159,8 @@ sys_init(char *program_name)
 	{
 	    XSetErrorHandler (error_other_wm);
 	    XSelectInput (dpy, root_window,
-			  SubstructureRedirectMask | ButtonPressMask
-			  | ButtonReleaseMask | KeyPressMask
+			  SubstructureRedirectMask | SubstructureNotifyMask
+			  | ButtonPressMask | ButtonReleaseMask | KeyPressMask
 			  | ButtonMotionMask | PointerMotionHintMask
 			  | EnterWindowMask | LeaveWindowMask);
 	    XSync (dpy, False);
