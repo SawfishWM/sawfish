@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.18 1999/09/06 19:08:15 john Exp $
+;; $Id: sawmill-ui.jl,v 1.19 1999/09/07 16:48:47 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -902,6 +902,7 @@ exec rep "$0" "$@"
 				   ui-original-values))))
 
 (defun ui-quit ()
+  (sawmill-eval-async '(customize-write-user-file))
   (gtk-widget-destroy ui-window)
   (throw 'quit 0))
 
