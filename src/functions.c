@@ -95,6 +95,26 @@ Bring WINDOW to the top of the display.
     return win;
 }
 
+DEFUN("x-kill-client", Fx_kill_client, Sx_kill_client,
+      (repv win), rep_Subr1)
+{
+    Window w = x_win_from_arg (win);
+    if (w == 0)
+	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
+    XKillClient (dpy, w);
+    return win;
+}
+
+DEFUN("x-delete-window", Fx_delete_window, Sx_delete_window,
+      (repv win), rep_Subr1)
+{
+    Window w = x_win_from_arg (win);
+    if (w == 0)
+	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
+    send_client_message (w, xa_wm_delete_window, last_event_time);
+    return win;
+}
+
 DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1, "%W") /*
 ::doc:delete-window::
 delete-window WINDOW
@@ -1189,6 +1209,8 @@ functions_init (void)
 {
     rep_ADD_SUBR(Srestack_windows);
     rep_ADD_SUBR(Sx_raise_window);
+    rep_ADD_SUBR(Sx_delete_window);
+    rep_ADD_SUBR(Sx_kill_client);
     rep_ADD_SUBR_INT(Sdelete_window);
     rep_ADD_SUBR_INT(Sdestroy_window);
     rep_ADD_SUBR(Swarp_cursor);
