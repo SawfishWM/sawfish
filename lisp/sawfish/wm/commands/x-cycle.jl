@@ -120,6 +120,7 @@
 ;; associate modifier names with their keys
 (defvar x-cycle-modifier-alist `(("A" ,@alt-keysyms)
 				 ("M" ,@meta-keysyms)
+				 ("H" ,@hyper-keysyms)
 				 ("S" "Shift_L" "Shift_R")
 				 ("C" "Control_L" "Control_R")))
 
