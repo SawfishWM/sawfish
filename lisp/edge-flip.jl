@@ -140,10 +140,14 @@ flipping."
 	  (call-hook 'leave-flipper-hook (list ef-current-edge)))))))
 
 (defun edge-flip-while-moving (w)
-  (when edge-flip-enabled
-    (edge-flip-synthesize)
-  (when (eq edge-flip-type 'workspace)
-    (ws-move-window w current-workspace t))))
+  (let
+      ((original-space current-workspace)
+       (edge-flip-delay 0))
+    (when edge-flip-enabled
+      (edge-flip-synthesize)
+      (when (and (eq edge-flip-type 'workspace)
+		 (/= original-space current-workspace))
+	(ws-move-window w original-space current-workspace t)))))
 
 (add-hook 'enter-flipper-hook edge-flip-enter)
 (add-hook 'leave-flipper-hook edge-flip-leave)
