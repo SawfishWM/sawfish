@@ -326,7 +326,8 @@ workspace."
     (window-put w 'iconified t)
     (when (window-visible-p w)
       (hide-window w))
-    (call-window-hook 'iconify-window-hook w)))
+    (call-window-hook 'iconify-window-hook w)
+    (call-window-hook 'window-state-change-hook w)))
 
 (defun uniconify-window (w)
   (interactive "f")
@@ -339,7 +340,8 @@ workspace."
 	   (ws-add-window w)))
     (when raise-windows-on-uniconify
       (raise-window w))
-    (call-window-hook 'uniconify-window-hook w)))
+    (call-window-hook 'uniconify-window-hook w)
+    (call-window-hook 'window-state-change-hook w)))
 
 (defun display-window (w)
   "Display the workspace containing window W."
@@ -361,7 +363,8 @@ workspace."
 	(window-put w 'sticky nil)
 	(ws-add-window w))
     (ws-remove-window w t)
-    (window-put w 'sticky t)))
+    (window-put w 'sticky t))
+  (call-window-hook 'window-state-change-hook w))
 
 
 ;; Initialisation
