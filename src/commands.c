@@ -21,6 +21,7 @@
 
 #include "sawmill.h"
 #include <string.h>
+#include <ctype.h>
 
 DEFSYM(interactive, "interactive");
 DEFSTRING(err_interactive, "Bad interactive specification");
@@ -198,32 +199,34 @@ any entered arg is given to the invoked COMMAND.
 	    u_char c;
 	    rep_GC_root gc_args;
 
-	    /* Handle leading flags */
+	    /* Strip leading flags */
 	    while(1)
 	    {
 		c = *spec_str;
-#if 0
-		if(c == '*')
-		    note flag *
-		else if(c == '-')
-		    note flag -
-		...
+		if (c != '%' && !isalnum(c))
+		{
+		    /* check for flags.. */
+
+		    spec_str++;
+		}
 		else
 		    break;
-		spec_str++;
-#else
-		break;
-#endif
 	    }
 
 	    rep_PUSHGC(gc_args, args);
 	    while((c = *spec_str++) != 0)
 	    {
 		repv prompt, arg = Qnil;
+		bool sawmill_local = FALSE;
 		if(c != '\n')
 		{
 		    /* Non-null code. */
 		    bool can_be_nil = FALSE;
+		    if (c == '%' && *spec_str != 0)
+		    {
+			sawmill_local = TRUE;
+			c = *spec_str++;
+		    }
 		    if(*spec_str == '\n')
 		    {
 			/* no prompt */
@@ -247,38 +250,50 @@ any entered arg is given to the invoked COMMAND.
 			}
 			spec_str = *end ? end + 1 : end;
 		    }
-		    switch(c)
+		    if (sawmill_local)
 		    {
-		    case 'e':
-			arg = Fcurrent_event();
-			break;
-		    case 'E':
-			arg = Fcurrent_event_string();
-			break;
-		    case 'f':
-			arg = Finput_focus ();
-			break;
-		    case 'p':
-			arg = Fprefix_numeric_argument(Farg);
-			break;
-		    case 'P':
-			arg = Farg;
-			can_be_nil = TRUE;
-			break;
-		    case 't':
-			arg = Qt;
-			break;
-		    case 'w':
-			arg = Fcurrent_event_window ();
-			break;
-		    case 'W':
-			arg = Fcurrent_event_window ();
-			if (arg == Qnil || arg == Qroot)
+			switch (c)
+			{
+			case 'f':
 			    arg = Finput_focus ();
-			break;
-		    default:
-			arg = rep_NULL;
-			Fsignal(Qinteractive, rep_list_2(cmd, int_spec));
+			    break;
+			case 'w':
+			    arg = Fcurrent_event_window ();
+			    break;
+			case 'W':
+			    arg = Fcurrent_event_window ();
+			    if (arg == Qnil || arg == Qroot)
+				arg = Finput_focus ();
+			    break;
+			default:
+			    goto unknown;
+			}
+		    }
+		    else
+		    {
+			switch(c)
+			{
+			case 'e':
+			    arg = Fcurrent_event();
+			    break;
+			case 'E':
+			    arg = Fcurrent_event_string();
+			    break;
+			case 'p':
+			    arg = Fprefix_numeric_argument(Farg);
+			    break;
+			case 'P':
+			    arg = Farg;
+			    can_be_nil = TRUE;
+			    break;
+			case 't':
+			    arg = Qt;
+			    break;
+			default:
+			unknown:
+			    arg = rep_NULL;
+			    Fsignal(Qinteractive, rep_list_2(cmd, int_spec));
+			}
 		    }
 		    if(!arg)
 		    {
@@ -370,27 +385,25 @@ can be either,
     arguments which will be given to the function
 
  3. A string -- zero or more lines (separated by `\n'); each line tells
-    how to get one argument. The first character of each line is a code
-    letter, the rest of the line is an optional prompt-string which the
-    user will see when entering the argument's value.
+    how to get one argument. The first one or two characters of each line
+    tells the call-command how to construct each individual argument, the
+    rest of the line is an optional prompt-string which the user will see
+    when entering the argument's value.
 
-    The code letters available are,
+    The prefixes currently available are:
+
 	e	The event which caused this command
 	E	The event which caused this command as a string
-	f	The window that currently has the input focus
+	%f	The window that currently has the input focus
 	p	The numeric prefix arg
 	P	The raw prefix arg
-	w	The window that received the current event
-	W	Either the window that received the event (provided
+	t	The symbol `t'
+	%w	The window that received the current event
+	%W	Either the window that received the event (provided
 		 that it wasn't the root window), or the window with
 		 the input focus
 
     A null line produces an argument of nil.
-
-    Any non-alphabetic characters at the beginning of the CALLING-SPEC
-    are used as flags, the currently recognised flags are,
-
-	[there aren't any currently]
 ::end:: */
 {
     return(Qnil);
