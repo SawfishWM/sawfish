@@ -24,7 +24,7 @@
 (defvar sm-save-directory "~/.sawmill/sessions")
 
 (defvar sm-saved-window-properties '(depth type sticky ignored iconified
-				     unmaximized-geometry)
+				     unmaximized-geometry frame-style)
   "List of window properties saved with the session.")
 
 (defvar sm-window-save-functions nil
