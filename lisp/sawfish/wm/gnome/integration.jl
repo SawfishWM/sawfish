@@ -46,4 +46,16 @@
 ;; invoke the GNOME terminal instead of xterm
 (setq xterm-program "gnome-terminal")
 
+;; use the GNOME help browser and url launcher
+(require 'help)
+(setq help-display-info-function help-call-info-gnome)
+(setq display-url-command "gnome-moz-remote --newwin '%s'")
+
+;; add some GNOME help menus
+(let ((menu (assoc (_ "_Help") root-menu)))
+  (when menu
+    (nconc menu `(()
+		  (,(_ "_GNOME Help") gnome-help-browser)
+		  (,(_ "GNOME WWW") gnome-www-page)))))
+
 (provide 'gnome-int)
