@@ -39,6 +39,16 @@ exec rep "$0" "$@"
 
   (define socket-id nil)
 
+  (when (get-command-line-option "--help")
+    (write standard-output "\
+usage: sawfish-ui [OPTIONS...]\n
+where OPTIONS are any of:\n
+  --group=GROUP-NAME
+  --flatten
+  --single-level
+  --socket-id=WINDOW-ID\n")
+    (throw 'quit 0))
+
   (let ((group (get-command-line-option "--group" t)))
     (when group
       (setq group (read-from-string group))
