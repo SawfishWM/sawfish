@@ -2,15 +2,10 @@
 # Copyright (C) 1999 Angel Utiel Creus <utiel@retemail.es>
 # Copyright (C) 2000 Iñaki García Etxebarria <garetxe@euskalnet.net>
 #
-#. ../themer/themer.glade:353 ../themer/themer.glade:397
-#. * ../themer/themer.glade:472 ../themer/themer.glade:562
-#. * ../themer/themer.glade:1070 ../themer/themer.glade:1300
-#. * ../themer/themer.glade:1320 ../themer/themer.glade:1349
-#. * ../themer/themer.glade:1369 ../themer/themer.glade:1852
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.24\n"
-"POT-Creation-Date: 2000-05-10 19:11+0100\n"
+"POT-Creation-Date: 2000-06-12 17:37+0100\n"
 "PO-Revision-Date: 2000-04-10 21:04+0100\n"
 "Last-Translator: Iñaki García Etxebarria\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -237,13 +232,6 @@ msgstr ""
 "Retardo en milisegundos hasta que las ventanas seleccionadas\n"
 "se mandan a primer plano."
 
-#. ../lisp/auto-raise.jl
-msgid ""
-"Raise entire group after focusing a window (when auto-raise is enabled)."
-msgstr ""
-"Poner en primer plano todo el grupo al dar el foco a una ventana\n"
-"(cuando auto-elevar [auto-raise] está activo)."
-
 #. ../lisp/configure.jl
 msgid "Automatically select window gravity from position on screen."
 msgstr ""
@@ -397,6 +385,10 @@ msgid ""
 "flipping."
 msgstr "Retardo en milisegundos para cambiar de escritorio."
 
+#. ../lisp/edge-flip.jl
+msgid "Warp pointer to opposite screen edge when flipping."
+msgstr "Mover el ratón al borde opuesto al cambiar."
+
 #. ../lisp/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "¿Cúando selecciona el puntero del ratón la ventana activa?"
@@ -486,6 +478,27 @@ msgstr "Activar la sugerencia/truco GNOME SKIP_TASKLIST de la ventana."
 #. ../lisp/gnome-commands.jl
 msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
 msgstr "Desactivar la sugerencia/truco GNOME SKIP_TASKLIST de la ventana."
+
+#. ../lisp/gnome-commands.jl
+msgid "Logout from the current GNOME session."
+msgstr "Salir de la sesión GNOME."
+
+#. ../lisp/gnome-commands.jl
+msgid "Launch the GNOME help browser."
+msgstr "Iniciar el Visualizador de ayuda GNOME."
+
+#. ../lisp/menus.jl
+#. ../lisp/gnome-int.jl
+msgid "_Help"
+msgstr "_Ayuda"
+
+#. ../lisp/gnome-int.jl
+msgid "_GNOME Help"
+msgstr "Ayuda de _GNOME"
+
+#. ../lisp/gnome-int.jl
+msgid "GNOME WWW"
+msgstr ""
 
 #. ../lisp/group-funs.jl
 msgid "Group transient windows with their parents."
@@ -801,7 +814,7 @@ msgstr "_Restaurar"
 
 #. ../lisp/menus.jl
 msgid "In _group"
-msgstr "Poner en el _grupo"
+msgstr "Poner en el g_rupo"
 
 #. ../lisp/menus.jl
 msgid "_Send window to"
@@ -928,6 +941,22 @@ msgid "_Customize"
 msgstr "_Configurar"
 
 #. ../lisp/menus.jl
+msgid "_FAQ"
+msgstr ""
+
+#. ../lisp/menus.jl
+msgid "_News"
+msgstr "_Noticias"
+
+#. ../lisp/menus.jl
+msgid "_WWW page"
+msgstr "_Página WWW"
+
+#. ../lisp/menus.jl
+msgid "_Manual"
+msgstr ""
+
+#. ../lisp/menus.jl
 msgid "Restart"
 msgstr "Reiniciar"
 
@@ -985,11 +1014,11 @@ msgstr "Mueve el puntero 1 pixel abajo."
 
 #. ../lisp/move-resize.jl
 msgid "The method of drawing windows being moved interactively."
-msgstr "El método de como dibujar el movimiento de las ventanas."
+msgstr "Cómo pintar las ventanas al moverlas."
 
 #. ../lisp/move-resize.jl
 msgid "The method of drawing windows being resized interactively."
-msgstr "El método de como dibujar el cambio de tamaño de las ventanas."
+msgstr "Cómo pintar las ventanas al redimensionarlas."
 
 #. ../lisp/move-resize.jl
 msgid "Raise windows being moved or resized interactively."
@@ -1008,7 +1037,7 @@ msgid ""
 "The method of choosing which window edges are moved while resizing with\n"
 "the mouse."
 msgstr ""
-"Qué método utilizar al elegir qué bordes de ventana se mueven al\n"
+"Método utilizado al elegir qué bordes de ventana se mueven al\n"
 "redimensionar con el ratón."
 
 #. ../lisp/move-resize.jl
@@ -1022,7 +1051,7 @@ msgstr "Proximidad en píxeles antes de pegarse a un lado."
 
 #. ../lisp/move-resize.jl
 msgid "Method of deciding when to snap together two window edges."
-msgstr "Método para decidir cuándo pegar dos bordes."
+msgstr "Método utilizado al decidir cuándo pegar dos bordes."
 
 #. ../lisp/move-resize.jl
 msgid "Snap to otherwise-ignored windows."
@@ -1384,6 +1413,46 @@ msgstr "Mover la ventana al punto de vista de arriba."
 msgid "The default window animation mode."
 msgstr "El modo de animación de ventanas por defecto."
 
+#. ../lisp/window-history.jl
+msgid "Save _position"
+msgstr "Guardar la p_osición"
+
+#. ../lisp/window-history.jl
+msgid "Save _dimensions"
+msgstr "Guardar las _dimensiones"
+
+#. ../lisp/window-history.jl
+msgid "Save _attributes"
+msgstr "Guardar _atributos"
+
+#. ../lisp/window-history.jl
+msgid "_Forget saved state"
+msgstr "_Olvidar el estado"
+
+#. ../lisp/window-history.jl
+msgid "Window History"
+msgstr "Historia de Ventanas"
+
+#. ../lisp/window-history.jl
+msgid "Automatically remember window positions."
+msgstr "Recordar las posiciones de las ventanas."
+
+#. ../lisp/window-history.jl
+msgid "Automatically remember window sizes."
+msgstr "Recordar los tamaños de las ventanas."
+
+#. ../lisp/window-history.jl
+msgid "Automatically remember other window attributes."
+msgstr "Recordar otros atributos de la ventana."
+
+#. ../lisp/window-history.jl
+msgid "Forget any persistent state associated with the current window."
+msgstr "Olvidar cualquier estado persistente de la ventana actual."
+
+#. ../lisp/window-history.jl
+msgid "_History"
+msgstr "_Historia"
+
 #. ../lisp/with-output.jl
 msgid "Prompt for a command, execute it, and print any output to the screen."
 msgstr ""
@@ -1412,8 +1481,13 @@ msgid "Empty workspaces before or after the active workspace aren't hidden."
 msgstr "Los escritorios vacíos cercanos al actual no son escondidos."
 
 #. ../lisp/workspace.jl
-msgid "Windows are uniconified onto the current workspace."
+msgid "Windows uniconify to the current workspace."
 msgstr "Las ventanas son restauradas al escritorio actual."
+
+#. ../lisp/workspace.jl
+msgid "Windows uniconify to the current workspace when they are selected."
+msgstr ""
+"Las ventanas son restauradas al escritorio actual cuando se seleccionan."
 
 #. ../lisp/workspace.jl
 msgid "Windows are raised after being uniconified."
@@ -1911,10 +1985,6 @@ msgstr "_Acerca de"
 #. ../themer/themer.glade:71
 msgid "_File"
 msgstr "_Fichero"
-
-#. ../themer/themer.glade:211
-msgid "_Help"
-msgstr "A_yuda"
 
 #. ../themer/themer.glade:103
 msgid "_Open Theme.."
