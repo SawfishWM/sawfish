@@ -72,16 +72,18 @@
   "Display the workspace/viewport containing the window W."
   (interactive (list (prompt-for-window)))
   (when w
-    (uniconify-window w)
-    (when (or (not preferred-space)
-	      (not (window-in-workspace-p w preferred-space)))
-      (setq preferred-space
-	    (nearest-workspace-with-window w current-workspace)))
-    (when preferred-space
-      (select-workspace preferred-space))
-    (move-viewport-to-window w)
-    (when (and unshade-selected-windows (window-get w 'shaded))
-      (unshade-window w))))
+    (let ((uniconify-to-current-workspace
+	   display-window:uniconify-to-current-workspace))
+      (uniconify-window w)
+      (when (or (not preferred-space)
+		(not (window-in-workspace-p w preferred-space)))
+	(setq preferred-space
+	      (nearest-workspace-with-window w current-workspace)))
+      (when preferred-space
+	(select-workspace preferred-space))
+      (move-viewport-to-window w)
+      (when (and unshade-selected-windows (window-get w 'shaded))
+	(unshade-window w)))))
 
 (defun display-window (w &optional preferred-space)
   "Display the workspace containing the window W, then focus on W."
