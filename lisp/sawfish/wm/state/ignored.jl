@@ -91,5 +91,5 @@
 			  window-ignored-p)
   (add-window-menu-toggle (_ "_Focusable") 'toggle-window-never-focus
 			  (lambda (w) (not (window-get w 'never-focus))))
-  (add-window-menu-toggle (_ "In cycle") 'toggle-window-cycle-skip
+  (add-window-menu-toggle (_ "_Cyclable") 'toggle-window-cycle-skip
 			  (lambda (w) (not (window-get w 'cycle-skip)))))

@@ -1,3 +1,18 @@
+2000-09-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/state/ignored.jl (toggle-window-cycle-skip): new
+	command, also added to the toggle menu
+
+	* sawfish/wm/ext/window-history.jl,
+	sawfish/wm/ext/match-window.jl: include the cycle-skip property
+
+	* sawfish/wm/commands/cycle.jl, sawfish/wm/commands/x-cycle.jl:
+	use window-in-cycle-p to decide which windows to include
+
+	* sawfish/wm/windows.jl (window-in-cycle-p): new function
+
+	[ adapted from a patch from Dave Dribin <yhdrib@yahoo.com> ]
+
 2000-09-13  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/ext/tooltips.jl (display-tooltip): the TEXT
