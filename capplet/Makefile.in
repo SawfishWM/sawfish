@@ -1,5 +1,5 @@
 # Makefile.in -- input for the capplet directory's Makefile
-# $Id$
+# $Id: Makefile.in,v 1.1 1999/09/08 15:39:34 john Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -29,9 +29,9 @@ VPATH=@top_srcdir@/src:.
 CFLAGS := $(CFLAGS) $(GNOME_CC_CFLAGS)
 LIBS := $(LIBS) $(GNOME_CC_LIBS)
 
-enable_capplet=@enable_capplet@
+build_capplet=@build_capplet@
 
-ifneq ($(enable_capplet),0)
+ifneq ($(build_capplet),0)
 
 all : sawmill-capplet
 
@@ -83,6 +83,6 @@ uninstall :
 
 realclean :
 
-clean
+clean :
 
 endif
