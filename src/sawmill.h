@@ -77,7 +77,7 @@ typedef int bool;
 
 /* Events selected in pointer/button grabs */
 #define POINTER_GRAB_EVENTS (ButtonPressMask | ButtonReleaseMask \
-			     | ButtonMotionMask | PointerMotionHintMask)
+			     | PointerMotionMask | PointerMotionHintMask)
 
 
 /* Type defs */
