@@ -1,5 +1,10 @@
 2002-04-18  John Harper  <jsh@unfactored.org>
 
+	* widgets/scheme-boolean.jl, Makefile.in: new widget, a boolean
+	but returns #f and #t (though it accepts nil and t still).
+	Implemented as a toggle button. Adapted from merlin
+	<merlin@merlin.org>
+
 	* widget.jl (make-choice-item): if IDX is null, select the
 	first item. Patch from merlin <merlin@merlin.org>
 
