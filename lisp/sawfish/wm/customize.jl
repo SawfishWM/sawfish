@@ -149,7 +149,7 @@ Visit the Sawmill homepage at http://sawmill.sourceforge.net/")
 		 (custom-find-group group))))
     (if (filter consp groups)
 	(cons 'tree (customize-spec groups))
-      (list 'vbox (cadr (customize-spec groups))))))
+      (cadr (customize-spec groups)))))
 
 ;;;###autoload
 (defun customize (&optional group)
