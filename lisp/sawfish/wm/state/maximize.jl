@@ -147,13 +147,15 @@
 		 (not (window-maximized-horizontally-p w)))
 	(window-put w 'unmaximized-geometry nil))))
 
-  (define (maximize-discard-move w directions)
-    (maximize-discard w (memq 'horizontal directions)
-		      (memq 'vertical directions)))
+  (define (maximize-discard-move w directions #!key successful)
+    (when successful
+      (maximize-discard w (memq 'horizontal directions)
+			(memq 'vertical directions))))
 
-  (define (maximize-discard-resize w edges)
-    (maximize-discard w (or (memq 'left edges) (memq 'right edges))
-		      (or (memq 'top edges) (memq 'bottom edges))))
+  (define (maximize-discard-resize w edges #!key successful)
+    (when successful
+      (maximize-discard w (or (memq 'left edges) (memq 'right edges))
+			(or (memq 'top edges) (memq 'bottom edges)))))
 
 
 ;;; 1D packing

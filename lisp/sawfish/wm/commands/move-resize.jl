@@ -226,6 +226,7 @@
 	   (old-frame-state-mutex (frame-state-mutex 'clicked))
 	   (old-synthetic-configure-mutex
 	    (synthetic-configure-mutex move-resize-inhibit-configure))
+	   (was-successful nil)
 	   server-grabbed)
 
       (when (and move-resize-raise-window (eq move-resize-mode 'opaque))
@@ -265,10 +266,11 @@
 			  (infer-anchor))
 		      (infer-directions))
 		    (when (viable-move-resize-p)
-		      (catch 'move-resize-done
-			(when from-motion-event
-			  (motion))
-			(recursive-edit))))
+		      (setq was-successful
+			    (catch 'move-resize-done
+			      (when from-motion-event
+				(motion))
+			      (recursive-edit)))))
 		(ungrab-keyboard)
 		(ungrab-pointer))))
 
@@ -284,9 +286,12 @@
       (when (and move-resize-raise-window (not (eq move-resize-mode 'opaque)))
 	(raise-window* w))
       (if (eq function 'move)
-	  (call-window-hook 'after-move-hook w (list move-resize-directions))
+	  (call-window-hook 'after-move-hook w
+			    (list move-resize-directions
+				  #:successful was-successful))
 	(call-window-hook 'after-resize-hook w
-			  (list move-resize-moving-edges)))))
+			  (list move-resize-moving-edges
+				#:successful was-successful)))))
 
   (define (update-edges)
     (setq move-resize-edges

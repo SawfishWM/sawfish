@@ -1,3 +1,17 @@
+2001-03-20  John Harper  <jsh@eazel.com>
+
+	Fixed bug 6971 (cancelling resizing a maximized window loses
+	the maximimized status):
+
+	* sawfish/wm/commands/move-resize.jl (do-move-resize): when
+	calling after-move-hook or after-resize-hook pass a SUCCESSFUL
+	keyword arg, whose value is true if the move or resize was
+	successfully completed
+
+	* sawfish/wm/state/maximize.jl (maximize-discard-move,
+	maximize-discard-resize): these now have a SUCCESSFUL keyword
+	parameter, they only do the discarding if it's true
+
 2001-03-17  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/ext/tooltips.jl (tooltips-delay,
