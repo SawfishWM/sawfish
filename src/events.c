@@ -367,14 +367,39 @@ property_notify (XEvent *ev)
 	case XA_WM_ICON_NAME:
 	    if (ev->xproperty.state == PropertyNewValue
 		&& XGetWindowProperty (dpy, w->id, ev->xproperty.atom,
-				       0, 200, False, XA_STRING, &actual,
+				       0, 200, False, AnyPropertyType, &actual,
 				       &format, &nitems,
 				       &bytes_after, &prop) == Success
 		&& actual != None)
 	    {
 		if (format == 8 && w->id != 0)
 		{
-		    repv str = rep_string_dup (prop);
+		    repv str = Qnil;
+		    if (actual == xa_compound_text)
+		    {
+			char **text_list;
+			XTextProperty tprop;
+			int count;
+			tprop.value = prop;
+			tprop.encoding = actual;
+			tprop.format = format;
+			tprop.nitems = strlen (prop);
+			if (XmbTextPropertyToTextList (dpy, &tprop,
+						       &text_list, &count)
+			    >= Success)
+			{
+			    if (count > 0)
+			    	str = rep_string_dup (text_list[0]);
+			    XFreeStringList(text_list);
+			}
+		    }
+		    else if (actual == XA_STRING)
+		    {
+			str = rep_string_dup (prop);
+		    }
+		    if (str == Qnil)
+			str = rep_null_string ();
+
 		    if (ev->xproperty.atom == XA_WM_NAME)
 		    {
 			if (Fequal (w->name, str) == Qnil
@@ -1363,8 +1388,11 @@ events_init (void)
 
     event_handler_context = XUniqueContext ();
 
-    xa_sawmill_timestamp = XInternAtom (dpy, "_SAWMILL_TIMESTAMP", False);
-    last_event_time = get_server_timestamp ();
+    if(rep_SYM(Qbatch_mode)->value == Qnil)
+    {
+	xa_sawmill_timestamp = XInternAtom (dpy, "_SAWMILL_TIMESTAMP", False);
+	last_event_time = get_server_timestamp ();
+    }
 }
 
 void
