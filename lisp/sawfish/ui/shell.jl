@@ -207,7 +207,7 @@
 	(let ((layout (layout-slots (group-layout group) slots)))
 	  (setq active-slots (nconc active-slots slots))
 	  (gtk-notebook-append-page
-	   book layout (gtk-label-new (group-real-name group)))
+	   book layout (gtk-label-new (_ (group-real-name group))))
 	  (when (gtk-container-p layout)
 	    (gtk-container-border-width layout box-border))))
       (mapc (lambda (sub)
