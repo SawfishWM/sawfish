@@ -238,7 +238,7 @@ static void
 usage (void)
 {
     fputs ("\
-    --display DPY	connect to X display DPY
+    --display DPY	connect to X display DPY\n\
     --version		print version details\n\
     --no-rc		don't load rc or site-init files\n\
     -f FUNCTION		call the Lisp function FUNCTION\n\
