@@ -73,7 +73,7 @@ uninstall :
 	done
 
 clean :
-	rm -f `find . \( -name '*.jlc' -or -name '*~' -or -name core \) -print`
+	rm -f `find . \( -name '*.jlc' -o -name '*~' -o -name core \) -print`
 
 realclean : clean
 	rm -f Makefile
