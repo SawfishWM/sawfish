@@ -261,6 +261,13 @@ Returns non-nil if the grab succeeded.
     else
 	g_win = root_window;
 
+    if (cursor != Qnil && !CURSORP(cursor))
+    {
+	cursor = Fget_cursor (cursor);
+	if (!cursor)
+	    cursor = Qnil;
+    }
+
 again:
     ret = XGrabPointer (dpy, g_win, False, POINTER_GRAB_EVENTS,
 			GrabModeAsync, GrabModeAsync, None,
