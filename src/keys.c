@@ -786,7 +786,7 @@ a Lisp function hadn't been called instead.
     u_char buf[256];
     int len;
 
-    if(current_x_event != 0)
+    if(current_x_event == 0)
 	return Fsignal(Qerror, rep_LIST_1(rep_VAL(&not_in_handler)));
 
     len = XLookupString(&current_x_event->xkey,
