@@ -177,7 +177,8 @@ already in the window, then does like `maybe'.
 		(xbottom (+ xtop (cdr xdim))))
 	   ;; If window does not overlap W but does overlap the
 	   ;; larger W, then we need to avoid this window.
-	   (and (window-appears-in-workspace-p x current-workspace)
+	   (and (window-mapped-p x)
+		(window-appears-in-workspace-p x current-workspace)
 		(<= (rect-2d-overlap* (list xleft xtop xright xbottom)
 				      (list wleft wtop wright wbottom)) 0)
 		(> (rect-2d-overlap* (list xleft xtop xright xbottom)
