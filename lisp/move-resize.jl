@@ -20,6 +20,7 @@
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (require 'maximize)
+(eval-when-compile (require 'auto-raise))	;we bind to disable-auto-raise
 (provide 'move-resize)
 
 ;; todo:
