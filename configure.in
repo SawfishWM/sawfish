@@ -25,7 +25,7 @@ AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR(etc)
 
 dnl Release versioning info
-version="0.1"
+version="0.2"
 
 sawmilldir='${datadir}/sawmill'
 lispdir='${sawmilldir}/${version}/lisp'
@@ -56,16 +56,7 @@ AC_HEADER_TIME
 AC_CHECK_HEADERS(fcntl.h sys/time.h sys/utsname.h unistd.h memory.h)
 
 dnl Check for librep
-AC_MSG_CHECKING([for librep]);
-rep_version=`rep-config --version`
-if test $? -eq 0; then
-  CPPFLAGS="$CPPFLAGS `rep-config --cflags`"
-  LIBS="$LIBS `rep-config --libs`"
-  repexecdir="`rep-config --execdir`"
-  AC_MSG_RESULT([version ${rep_version}])
-else
-  AC_MSG_ERROR([Can't find librep. Is it installed?])
-fi
+AM_PATH_REP(0.2)
 
 dnl is X available?
 if test "${no_x}" != "yes"; then
@@ -108,8 +99,6 @@ fi
 
 dnl Nonstandard exported symbols
 AC_SUBST(version)
-AC_SUBST(rep_version)
-AC_SUBST(repexecdir)
 AC_SUBST(sawmilldir)
 AC_SUBST(sawmillexecdir)
 AC_SUBST(lispdir)
