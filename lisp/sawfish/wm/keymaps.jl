@@ -97,3 +97,12 @@ of a window.")
 (bind-keys menu-button-keymap
   "Button1-Off" 'popup-window-menu
   "Button3-Off" 'delete-window)
+
+
+;; placeholder for customize
+
+(defcustom keymap-dummy nil
+  ""
+  :type none
+  :group bindings
+  :widget (lambda () '(label "Keybinding customization is unimplemented.")))
