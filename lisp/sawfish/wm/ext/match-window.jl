@@ -41,11 +41,14 @@
 
 ;; configuration and customize stuff
 
+;;;###autoload (setq custom-required (cons 'match-window custom-required))
+
 (defvar match-window-x-properties
-  '((WM_NAME . "Window name")
-    (WM_CLASS . "Window class")
-    (WM_ICON_NAME . "Icon name")
-    (WM_CLIENT_MACHINE . "Host name")))
+  '((WM_NAME . "Name")
+    (WM_CLASS . "Class")
+    (WM_ICON_NAME . "Icon Name")
+    (WM_CLIENT_MACHINE . "Host")
+    (WM_COMMAND . "Command")))
 
 (defvar match-window-properties
   `((ignored boolean)
@@ -79,13 +82,12 @@
 		      match-window-properties)))
     `(match-window :variable ,symbol
 		   :value ,value
-		   :doc ,doc
 		   :properties ,props
 		   :x-properties ,match-window-x-properties)))
 
 (put 'match-window 'custom-widget match-window-custom-widget)
 
-(defgroup match-window "Matched windows")
+(defgroup match-window "Matched Windows")
 
 ;; List of (MATCH-ELTS . ACTION-ELTS)
 ;; Each MATCH-ELT is (PROP . REGEXP or NUMBER or SYMBOL)
@@ -93,7 +95,8 @@
 (defcustom match-window-profile nil
   "Match windows to properties."
   :type match-window
-  :group match-window)
+  :group match-window
+  :require match-window)
 
 
 ;; main entry point
@@ -193,16 +196,20 @@
        ;; Execute the list of actions for window W
        (run-actions (lambda (actions)
 		      (mapc (lambda (cell)
-			      (window-put w (car cell) (cdr cell))) actions))))
+			      ((or (get (car cell) 'match-window-setter)
+				   window-put)
+			       w (car cell) (cdr cell)))
+			    actions))))
 
     (mapc (lambda (cell)
 	    (when (catch 'out
 		    (mapc (lambda (match)
 			    (let
 				((prop (get-prop (car match))))
-			      (when prop
-				(unless (match-prop (nth 2 prop) (cdr match))
-				  (throw 'out nil)))))
+			      (when (or (not prop)
+					(not (match-prop (nth 2 prop)
+							 (cdr match))))
+				(throw 'out nil))))
 			  (car cell))
 		    t)
 	      (run-actions (cdr cell))))
@@ -213,6 +220,20 @@
 
 ;; custom property formatters
 
-(put 'WM_CLASS 'match-window-formatter
-     (lambda (vec)
-       (format nil "%s/%s" (aref vec 1) (aref vec 0))))
+;; ensure the functions get compiled
+(progn
+  (put 'WM_CLASS 'match-window-formatter
+       (lambda (vec)
+	 (format nil "%s/%s" (aref vec 1) (aref vec 0))))
+
+  (put 'WM_COMMAND 'match-window-formatter
+       (lambda (vec)
+	 (let
+	     ((i 0)
+	      parts)
+	   (while (< i (length vec))
+	     (when parts
+	       (setq parts (cons ?  parts)))
+	     (setq parts (cons (aref vec i) parts))
+	     (setq i (1+ i)))
+	   (apply concat (nreverse parts))))))

@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.39 1999/12/01 11:23:33 john Exp $
+;; $Id: sawmill-ui.jl,v 1.40 1999/12/01 19:10:45 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -944,8 +944,8 @@ exec rep "$0" "$@"
        (hbox-2 (gtk-hbutton-box-new))
        (ok (gtk-button-new-with-label "OK"))
        (cancel (gtk-button-new-with-label "Cancel"))
-       (frame (gtk-frame-new "Actions:"))
-       (frame-1 (gtk-frame-new "Matchers:"))
+       (frame (gtk-frame-new "Actions"))
+       (frame-1 (gtk-frame-new "Matchers"))
        (table (gtk-table-new (length properties) 2 nil))
        (table-1 (gtk-table-new ui-match-window-max-matchers 2 nil))
        (match-widget-alist nil)
@@ -997,7 +997,13 @@ exec rep "$0" "$@"
 			     (error "Unknown widget type"))))
 		    prop-widget-alist)
 
-	      (cons (nreverse matchers) (nreverse actions)))))))
+	      (cons (nreverse matchers) (nreverse actions))))))
+
+       (attach-label (lambda (table label &rest args)
+		       (let
+			   ((box (gtk-hbox-new nil 0)))
+			 (gtk-box-pack-end box label)
+			 (apply gtk-table-attach-defaults table box args)))))
 
     (unless cell
       (setq cell (cons (list (cons 'WM_NAME "")) nil)))
@@ -1009,6 +1015,9 @@ exec rep "$0" "$@"
 			    (filter (lambda (p)
 				      (not (eq (nth 1 p) 'boolean)))
 				    properties)))
+
+    (gtk-window-set-title window "Match window properties")
+    (gtk-widget-set-name window "Match window properties")
 
     (gtk-box-set-spacing hbox-2 ui-box-spacing)
     (gtk-container-border-width hbox-2 ui-box-border)
@@ -1083,8 +1092,7 @@ exec rep "$0" "$@"
 		    (if current
 			(gtk-entry-set-text entry (format nil "%d" current))
 		      (gtk-entry-set-text entry ""))
-		    (gtk-label-set-justify label 'right)
-		    (gtk-table-attach-defaults table label 0 1 i (1+ i))
+		    (attach-label table label 0 1 i (1+ i))
 		    (gtk-table-attach-defaults table entry 1 2 i (1+ i))
 		    (setq prop-widget-alist (cons (cons (car prop) entry)
 						  prop-widget-alist))
@@ -1093,8 +1101,7 @@ exec rep "$0" "$@"
 		  (let
 		      ((combo (gtk-combo-new))
 		       (label (gtk-label-new (symbol-name (car prop)))))
-		    (gtk-label-set-justify label 'right)
-		    (gtk-table-attach-defaults table label 0 1 i (1+ i))
+		    (attach-label table label 0 1 i (1+ i))
 		    (gtk-table-attach-defaults table combo 1 2 i (1+ i))
 		    (gtk-combo-set-popdown-strings
 		     combo (cons "" (mapcar symbol-name (nth 2 prop))))
@@ -1130,7 +1137,6 @@ exec rep "$0" "$@"
       ((vbox (gtk-vbox-new nil 0))
        (hbox (gtk-hbox-new nil 0))
        (scroller (gtk-scrolled-window-new))
-       (label (gtk-label-new (get-key spec ':doc)))
        (clist (gtk-clist-new-with-titles ["Matchers" "Actions"]))
        (add-b (gtk-button-new-with-label "Add..."))
        (delete-b (gtk-button-new-with-label "Delete"))
@@ -1180,35 +1186,39 @@ exec rep "$0" "$@"
 		 ((value (get-key spec ':value)))
 	       (setq value (append value (list cell)))
 	       (gtk-clist-append clist (format-cell cell))
-	       (ui-set spec (get-key spec ':variable value) value))))))
+	       (ui-set spec (get-key spec ':variable) value))))))
 
        (delete-callback
 	(lambda ()
-	  (let*
-	      ((value (get-key spec ':value))
-	       (item (nth selection value)))
-	    (setq value (delq item (copy-sequence value)))
-	    (gtk-clist-remove clist selection)
-	    (when (>= selection (length value))
-	      (setq selection (1- (length value))))
-	    (ui-set spec (get-key spec ':variable value) value))))
+	  (when selection
+	    (let*
+		((value (get-key spec ':value))
+		 (item (nth selection value)))
+	      (setq value (delq item (copy-sequence value)))
+	      (gtk-clist-remove clist selection)
+	      (when (>= selection (length value))
+		(setq selection (1- (length value)))
+		(when (< selection 0)
+		  (setq selection nil)))
+	      (ui-set spec (get-key spec ':variable) value)))))
 
        (edit-callback
 	(lambda ()
-	  (let
-	      ((old-item (nth selection (get-key spec ':value))))
-	    (match-window:edit spec old-item
-	     (lambda (new-item)
-	       (let*
-		   ((value (copy-sequence (get-key spec ':value)))
-		    (ptr value)
-		    (vec (format-cell new-item)))
-		 (while (and ptr (not (eq (car ptr) old-item)))
-		   (setq ptr (cdr ptr)))
-		 (rplaca ptr new-item)
-		 (ui-set spec (get-key spec ':variable) value)
-		 (gtk-clist-set-text clist selection 0 (aref vec 0))
-		 (gtk-clist-set-text clist selection 1 (aref vec 1)))))))))
+	  (when selection
+	    (let
+		((old-item (nth selection (get-key spec ':value))))
+	      (match-window:edit spec old-item
+	       (lambda (new-item)
+		 (let*
+		     ((value (copy-sequence (get-key spec ':value)))
+		      (ptr value)
+		      (vec (format-cell new-item)))
+		   (while (and ptr (not (eq (car ptr) old-item)))
+		     (setq ptr (cdr ptr)))
+		   (rplaca ptr new-item)
+		   (ui-set spec (get-key spec ':variable) value)
+		   (gtk-clist-set-text clist selection 0 (aref vec 0))
+		   (gtk-clist-set-text clist selection 1 (aref vec 1))))))))))
 
     (gtk-box-set-spacing vbox ui-box-spacing)
     (gtk-container-border-width vbox ui-box-border)
@@ -1220,9 +1230,8 @@ exec rep "$0" "$@"
     (gtk-clist-set-selection-mode clist 'browse)
 
     (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
-    (gtk-widget-set-usize scroller 500 200)
+    (gtk-widget-set-usize scroller 400 200)
 
-    (gtk-box-pack-start vbox label)
     (gtk-box-pack-end vbox hbox)
     (gtk-container-add hbox add-b)
     (gtk-container-add hbox edit-b)
@@ -1231,11 +1240,13 @@ exec rep "$0" "$@"
     (gtk-container-add scroller clist)
 
     (mapc (lambda (item)
-	    (gtk-clist-append clist (format-cell item)))
+	    (gtk-clist-append clist (format-cell item))
+	    (unless selection
+	      (setq selection 0)))
 	  (get-key spec ':value))
 
-;   (setq spec (nconc spec (list ':clist clist
-;				 ':selection 0)))
+    (when selection
+      (gtk-clist-select-row clist selection 0))
 
     (gtk-signal-connect add-b "clicked" add-callback)
     (gtk-signal-connect delete-b "clicked" delete-callback)
