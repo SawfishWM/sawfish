@@ -274,10 +274,13 @@ doug_lea_malloc=yes
 AC_CHECK_FUNC(malloc_get_state, , doug_lea_malloc=no)
 AC_CHECK_FUNC(malloc_set_state, , doug_lea_malloc=no)
 if test "$doug_lea_malloc" = "no"; then
+  dnl dlmalloc is broken on Tru64, and may be broken on some
+  dnl solaris platforms
   case ${host} in
-    *-dec-osf*|*-sparc-sun*)
-      dnl dlmalloc is broken on Tru64, and may be broken on some
-      dnl solaris platforms
+    *-dec-osf*)
+      AC_DEFINE(LIBC_MALLOC)
+      ;;
+    *-sparc-sun*)
       AC_DEFINE(LIBC_MALLOC)
       ;;
     *)
