@@ -1307,8 +1307,10 @@ exec rep "$0" "$@"
 		    (when ptr
 		      (write file "\n\n     "))))
 		(write file "\)\n\n")
-		(format file "  \(add-frame-style theme-name %S\)\)\n"
+		(format file "  \(add-frame-style\n   theme-name %S\)\n"
 			`(make-theme patterns-alist frames-alist mapping-alist))
+		(write file "  \(when \(boundp 'mark-frame-style-editable\)\n")
+		(write file "    \(mark-frame-style-editable theme-name\)\)\)\n")
 		(message (format nil (_ "Saved as `%s'") filename)))
 	    (close-file file))))
     (file-error
