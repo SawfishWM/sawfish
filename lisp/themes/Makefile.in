@@ -26,12 +26,14 @@ top_srcdir=@top_srcdir@
 sawmill_prog = ../../src/sawmill --batch --no-rc
 COMPILE_ENV = SAWMILLLISPDIR=.. SAWMILLDOCFILE=../../DOC
 
-INSTALL_FILES = $(wildcard *.jl) $(wildcard *.jlc) $(wildcard *.jld)
+LISP_SRCS := absolute-e.jl brushed-metal.jl simple.jl
+LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
+INSTALL_FILES := $(LISP_SRCS) $(LISP_OBJS)
 
-all : lisp
+%.jlc : %.jl
+	$(COMPILE_ENV) $(sawmill_prog) compiler -f compile-batch $<
 
-lisp :
-	$(COMPILE_ENV) $(sawmill_prog) compiler -f compile-lib-batch .
+all : $(LISP_OBJS)
 
 install : all installdirs
 	for f in $(INSTALL_FILES); do \
