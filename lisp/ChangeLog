@@ -1,4 +1,16 @@
+2000-06-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* window-history.jl: moved customizations to `placement' group.
+	Changed menu items to be `Remember foo' not `Save foo'
+
 2000-06-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* configure.jl (windows-intersect-p, window-occludes-p): new
+	functions
+	(configure-request-handler): handle the newly complex `stack'
+	field of the request (with all relations and siblings)
+
+	[ patch from Brad Thompson <yak@mit.edu> ]
 
 	* window-history.jl (window-history-apply): ignore `dimensions'
 	attribute if the size-hints has a `user-size' property

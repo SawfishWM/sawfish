@@ -67,8 +67,6 @@
 
 ;; customizations
 
-(defgroup window-history "Window History" :group workspace)
-
 (defcustom window-history-auto-save-position t
   "Automatically remember window positions."
   :group placement

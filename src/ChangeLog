@@ -1,3 +1,32 @@
+2000-06-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* fonts.c (generalize_xlfd): don't assume that snprintf (0, ..)
+	returns the size of the string that would be formatted (breaks
+	on Tru64). Patch from Aron Griffis <agriffis@bigfoot.com>
+
+	* pixmap-cache.c (max_cached_pixels): reduced from 256K pixels
+	to 64K pixels
+
+2000-06-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (configure_request): represent the full complexity
+	of the stacking components of the request. The `stack' cell of
+	the alist is (RELATION SIBLING), where RELATION is one of the
+	symbols `above', `below', `top-if', `bottom-if', `opposite' and
+	SIBLING is a window or `nil'
+
+	[ patch from Brad Thompson <yak@mit.edu> ]
+
+	* sawmill.h (Lisp_Window): added `icon_image' field. Null if
+	uninitialized, otherwise either Qnil or the image containing
+	the window's icon
+
+	* windows.c (Fwindow_icon_image): moved here from images.c, now
+	caches the image in the window structure
+
+	* sawmill.h, images.c: added support for gdk-pixbuf image
+	library (xlib version)
+
  2000-06-19  John Harper  <john@dcs.warwick.ac.uk>
  
        * play-sample.c (gnome_sound_play): check if
