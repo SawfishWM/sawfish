@@ -380,7 +380,7 @@ set_frame_part_bg (struct frame_part *fp)
 	    while (y < fp->height)
 	    {
 		int x = 0;
-		while (x < fp->height)
+		while (x < fp->width)
 		{
 		    XCopyArea (dpy, bg_pixmap, fp->id, fp->gc, 0, 0,
 			       image->image->rgb_width,
