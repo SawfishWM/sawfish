@@ -52,6 +52,9 @@
     (setq vec (apply 'vector clients))
     (set-x-property 'root '_WIN_CLIENT_LIST vec 'CARDINAL 32)))
 
+(defvar gnome-current-workspace nil)
+(defvar gnome-current-workspace-count nil)
+
 (defun gnome-set-workspace ()
   (mapc #'(lambda (w)
 	    (when (window-get w 'workspace)
@@ -59,10 +62,14 @@
 	       w '_WIN_WORKSPACE
 	       (vector (window-get w 'workspace)) 'CARDINAL 32)))
 	(managed-windows))
-  (set-x-property
-   'root '_WIN_WORKSPACE (vector current-workspace) 'CARDINAL 32)
-  (set-x-property
-   'root '_WIN_WORKSPACE_COUNT (vector total-workspaces) 'CARDINAL 32))
+  (unless (equal gnome-current-workspace current-workspace)
+    (setq gnome-current-workspace current-workspace)
+    (set-x-property
+     'root '_WIN_WORKSPACE (vector current-workspace) 'CARDINAL 32))
+  (unless (equal gnome-current-workspace-count total-workspaces)
+    (setq gnome-current-workspace-count total-workspaces)
+    (set-x-property
+     'root '_WIN_WORKSPACE_COUNT (vector total-workspaces) 'CARDINAL 32)))
 
 (defun gnome-set-client-state (w)
   (let
