@@ -26,6 +26,7 @@
 #include <X11/keysym.h>
 #include <string.h>
 #include <assert.h>
+#include <stdarg.h>
 
 #ifdef HAVE_UNIX
 # ifdef HAVE_FCNTL_H
@@ -292,3 +293,12 @@ XGetAtomNames (Display *dpy, Atom *atoms, int count, char **names_ret)
     return 0;
 }
 #endif
+
+void
+db_printf(char *fmt, ...)
+{
+    va_list args;
+    va_start(args, fmt);
+    rep_db_vprintf(rep_common_db, fmt, args);
+    va_end(args);
+}
