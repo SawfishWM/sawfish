@@ -141,7 +141,7 @@ to the origin of window object WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
-    if (VWIN(win)->mapped)
+    if (VWIN(win)->visible)
     {
 	int dest_x = 0, dest_y = 0;
 	if (rep_INTP(x))
@@ -248,7 +248,7 @@ Returns non-nil if the grab succeeded.
 {
     Window g_win = 0;
     rep_DECLARE1(win, WINDOWP);
-    if (VWIN(win)->mapped && VWIN(win)->visible)
+    if (VWIN(win)->visible)
 	g_win = VWIN(win)->frame;
     if (g_win == 0)
 	g_win = root_window;
