@@ -1,5 +1,9 @@
 2000-01-10  John Harper  <john@dcs.warwick.ac.uk>
 
+	* keys.c (translate_event_to_x_key): return FALSE if no keycode
+	exists for the specified keysym (i.e. the keyboard has no such
+	key)
+
 	* events.c (record_mouse_position): on button-release, don't
 	cancel the saved position/window, just update the position. The
 	button_press function will clear the position before it exits.

@@ -7,6 +7,25 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.21.1
+
+@itemize @bullet
+
+@item Fixed problem causing spurious double-click events to be reported
+in click-to-focus mode
+
+@item Fixed problem with binding @kbd{-Off} events in the
+@code{window-keymap}. (Matt Krai)
+
+@item Don't try to grab non-existent keys (which actually grabs the
+entire keyboard)
+
+@item Fixed some problems with reading unusually formatted GNOME menu
+entries
+
+@end itemize
+
+
 @unnumberedsec 0.21
 
 @itemize @bullet
