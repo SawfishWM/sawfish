@@ -832,9 +832,9 @@ current-event-window
 }
 
 DEFUN("proxy-current-event", Fproxy_current_event, Sproxy_current_event,
-      (repv win), rep_Subr1) /*
+      (repv win, repv mask, repv prop), rep_Subr3) /*
 ::doc:Sproxy-current-event::
-proxy-current-event WINDOW
+proxy-current-event WINDOW [MASK] [PROPAGATE]
 
 Send the current X event to WINDOW, either a window object, a numeric
 window id, or the symbol `root'. If a ButtonPress event the pointer
@@ -847,9 +847,12 @@ grab will be released first.
 
     if (current_x_event != 0)
     {
+	long e_mask = (rep_INTP(mask) ? rep_INT(mask)
+		       : get_event_mask (current_x_event->type));
 	if (current_x_event->type == ButtonPress)
 	    XUngrabPointer (dpy, CurrentTime);
-	XSendEvent (dpy, w, False, SubstructureNotifyMask, current_x_event);
+	XSendEvent (dpy, w, prop == Qnil ? False : True,
+		    e_mask, current_x_event);
 	return Qt;
     }
     else
