@@ -141,7 +141,6 @@
       (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
       (gtk-scrolled-window-add-with-viewport scroller clist)
       (gtk-widget-set-usize scroller list-width list-height)
-      (gtk-container-border-width vbox box-border)
       (gtk-container-add vbox scroller)
       (gtk-box-pack-end vbox hbox)
       (gtk-box-pack-end hbox insert)
