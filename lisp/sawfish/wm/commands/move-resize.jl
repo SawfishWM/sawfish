@@ -131,6 +131,7 @@
        (move-resize-last-outline nil)
        (move-resize-moving-edges nil)
        (frame-draw-mutex (not (eq move-resize-mode 'opaque)))
+       (frame-state-mutex 'clicked)
        server-grabbed)
     (unless (eq move-resize-mode 'opaque)
       ;; prevent any other programs drawing on the display
