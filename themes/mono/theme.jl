@@ -1,5 +1,5 @@
 ;; mono/theme.jl
-;; $Id: theme.jl,v 1.3 2000/01/04 15:01:25 john Exp $
+;; $Id: theme.jl,v 1.4 2000/01/07 22:17:11 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -38,6 +38,13 @@
   :group mono-frame
   :after-set after-setting-frame-option)
 
+(defcustom mono:text-justify 'left
+  "Method of justifying text in window titles."
+  :type symbol
+  :options (left right centered)
+  :group mono-frame
+  :after-set after-setting-frame-option)
+
 (let*
     ((minimize `((inactive . ,(make-image "min.png"))
 		 (clicked . ,(make-image "min-c.png"))))
@@ -71,10 +78,15 @@
 			   (or (window-get w 'frame-active-color)
 			       mono:active-color))))
 
+     (text-justifier (lambda (w)
+		       (cond ((eq mono:text-justify 'left) 24)
+			     ((eq mono:text-justify 'right) -64)
+			     ((eq mono:text-justify 'centered) 'center))))
+
      (frame `(((background . ,frame-colors)
 	       (foreground . "black")
 	       (text . ,window-name)
-	       (x-justify . 24)
+	       (x-justify . ,text-justifier)
 	       (y-justify . center)
 	       (left-edge . 0)
 	       (right-edge . 0)
@@ -152,7 +164,7 @@
      (shaped-frame `(((background . ,frame-colors)
 		      (foreground . "black")
 		      (text . ,window-name)
-		      (x-justify . 24)
+		      (x-justify . ,text-justifier)
 		      (y-justify . center)
 		      (left-edge . 0)
 		      (right-edge . 0)
