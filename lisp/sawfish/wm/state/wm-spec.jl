@@ -154,7 +154,8 @@
 	(unless (equal last-workspace-names workspace-names)
 	  (setq last-workspace-names workspace-names)
 	  (set-x-text-property 'root '_NET_DESKTOP_NAMES
-			       (apply vector workspace-names)))
+			       (apply vector workspace-names)
+			       'UTF8_STRING))
 
 	;; _NET_CURRENT_DESKTOP
 	(unless (equal last-workspace

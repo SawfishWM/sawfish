@@ -107,7 +107,7 @@ function will restrict its search to the elements of this list."
       (mapc (lambda (w)
 	      (when (window-get w 'sticky-viewport)
 		(window-put w 'order nil))) order))
-    (when (eq focus-mode 'click)
+    (unless (eq focus-mode 'enter-exit)
       (window-order-focus-most-recent)))
 
   (sm-add-saved-properties 'order)
