@@ -113,12 +113,10 @@ workspaces.")
       (unless parent
 	;; if no parent, choose the topmost window (if in click-to-focus
 	;; mode) or the window under the pointer otherwise
-	(if (eq focus-mode 'click)
-	    (setq parent (car (delete-if #'(lambda (x)
-					     (not (and (window-visible-p x)
-						       (window-mapped-p x))))
-					     (stacking-order))))
-	  (setq parent (query-pointer-window))))
+	(unless (eq focus-mode 'click)
+	  (setq parent (query-pointer-window)))
+	(unless (or parent (eq focus-mode 'enter-exit))
+	  (setq parent (car (window-order current-workspace)))))
       (when (or (null parent) (window-really-wants-input-p parent))
 	(set-input-focus parent)))))
 
