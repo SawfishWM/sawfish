@@ -27,12 +27,19 @@
     (open rep
 	  sawfish.wm.windows
 	  sawfish.wm.misc
+	  sawfish.wm.custom
 	  sawfish.wm.workspace
 	  sawfish.wm.util.groups
 	  sawfish.wm.util.display-window
 	  sawfish.wm.menus)
 
   (define-structure-alias beos-window-menu sawfish.wm.ext.beos-window-menu)
+
+  (defcustom beos-window-menu-simplifies t
+    "The hierarchical window menu raises singleton submenus."
+    :type boolean
+    :group misc
+    :user-level expert)
 
   (define (abbreviate name #!optional len)
     (unless len (setq len 20))
@@ -117,7 +124,21 @@
 		(cdr groups)
 		(delete-group-windows (car groups) windows)))))
 
+  (define (simplify menu)
+    (let loop ((rest menu)
+	       (out '()))
+      (if (null rest)
+	  out
+	(let ((next (cdr rest)))
+	  ;; reverse the pointers
+	  (rplacd rest out)
+	  (when (= (length (cdar rest)) 1)
+	    (rplaca rest (cadar rest)))
+	  (loop next rest)))))
+
   (define (beos-window-menu)
-    (nreverse (make-menu)))
+    (if beos-window-menu-simplifies
+	(simplify (make-menu))
+      (nreverse (make-menu))))
 
   (setq window-menu beos-window-menu))
