@@ -72,9 +72,9 @@
 	 ;; Out[1]= {{L -> ------------, R -> -(---------)}}
 	 ;;                   l + r               l + r
 	 ((or configure-auto-gravity (window-get w 'auto-gravity))
-	  (let* ((xoff (- (car fdims) (car dims)))
-		 (lhs (car coords))
-		 (rhs (- (screen-width) (car coords) (car fdims))))
+	  (let ((xoff (- (car fdims) (car dims)))
+		(lhs (car coords))
+		(rhs (- (screen-width) (car coords) (car fdims))))
 	    (cond
 	     ((and (< lhs 0) (>= rhs 0))
 	      ;; lhs of window off-screen, right hand side on
@@ -91,9 +91,9 @@
 	      (rplaca coords (/ (+ (- (* (+ xoff (car tem)) (car coords)))
 				   (* (car coords) (screen-width)))
 				(- (screen-width) (car fdims)))))))
-	  (let* ((yoff (- (cdr fdims) (cdr dims)))
-		 (top (cdr coords))
-		 (bottom (- (screen-height) (cdr coords) (cdr fdims))))
+	  (let ((yoff (- (cdr fdims) (cdr dims)))
+		(top (cdr coords))
+		(bottom (- (screen-height) (cdr coords) (cdr fdims))))
 	    (cond
 	     ((and (< top 0) (>= bottom 0))
 	      ;; top of window off-screen, bottom on screen
