@@ -202,8 +202,8 @@ install_window_frame (Lisp_Window *w)
 	w->reparented = TRUE;
 	after_local_map (w);
 
-	XLowerWindow (dpy, w->id);	/* see end of list_frame_generator */
 	XAddToSaveSet (dpy, w->id);
+	restack_frame_parts (w);
 	reset_frame_parts (w);
 
 	DB(("  reparented to %lx [%dx%d%+d%+d]\n",
