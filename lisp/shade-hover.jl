@@ -64,7 +64,8 @@
       (shade-hover-leave w))))
 
 (defun shade-hover-enter (w)
-  (when (and shade-hover-mode (not (eq w 'root)))
+  (when (and (windowp w)
+	     (or shade-hover-mode (window-get w 'shade-hover)))
     (when (window-get w 'shaded)
       (let
 	  ((callback
