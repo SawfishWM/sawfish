@@ -69,7 +69,8 @@
   (when move-resize-raise-window
     (raise-window w))
   (let*
-      ((override-keymap move-resize-map)
+      ((from-motion-event (string-match "-Move$" (event-name (current-event))))
+       (override-keymap move-resize-map)
        (move-resize-window w)
        (move-resize-function function)
        (move-resize-old-x (car (window-position w)))
@@ -80,8 +81,12 @@
        (move-resize-y move-resize-old-y)
        (move-resize-width move-resize-old-width)
        (move-resize-height move-resize-old-height)
-       (move-resize-old-ptr-x (car (query-pointer)))
-       (move-resize-old-ptr-y (cdr (query-pointer)))
+       (move-resize-old-ptr-x (car (if from-motion-event
+				       (query-last-pointer)
+				     (query-pointer))))
+       (move-resize-old-ptr-y (cdr (if from-motion-event
+				       (query-last-pointer)
+				     (query-pointer))))
        (move-resize-hints (window-size-hints w))
        (move-resize-frame (cons (- (car (window-frame-dimensions w))
 				   move-resize-old-width)
@@ -107,6 +112,8 @@
 				       (+ move-resize-height
 					  (cdr move-resize-frame))))
 		(catch 'move-resize-done
+		  (when from-motion-event
+		    (move-resize-motion))
 		  (recursive-edit))))
 	  (ungrab-pointer)))
     (unless (eq move-resize-mode 'opaque)
