@@ -28,7 +28,8 @@
 
 (define-structure sawfish.wm.util.recolor-image
 
-    (export make-image-recolorer
+    (export make-image-recolorer*
+	    make-image-recolorer
 	    red-channel
 	    green-channel
 	    blue-channel
@@ -45,6 +46,51 @@
 
   (define original-key (make-symbol "recolor-image/original"))
 
+  (define (make-image-recolorer* colors #!key
+				 (zero-channel red-channel)
+				 (index-channels (list green-channel))
+				 (save-original t))
+
+    ;; XXX add doc string here..
+
+    (let* ((color-rgbs (mapcar color-rgb-8 colors))
+	   (red-luts (mapcar (lambda (c)
+			       (make-lut (nth red-channel c))) color-rgbs))
+	   (green-luts (mapcar (lambda (c)
+				 (make-lut (nth green-channel c))) color-rgbs))
+	   (blue-luts (mapcar (lambda (c)
+				(make-lut (nth blue-channel c))) color-rgbs)))
+
+      (lambda (image)
+
+	;; Get the original state of the image
+	(if (image-get image original-key)
+	    ;; Hmm.. don't have a blit-image function, this will do
+	    (tile-image image (image-get image original-key))
+
+	  (when save-original
+	    ;; save a copy for when we recolor in future
+	    (image-put image original-key (copy-image image))))
+
+	(image-map (lambda (pixel)
+		     (when (zerop (nth zero-channel pixel))
+		       (let loop ((rest index-channels)
+				  (red-rest red-luts)
+				  (green-rest green-luts)
+				  (blue-rest blue-luts))
+			 (when rest
+			   (let ((index (nth (car rest) pixel)))
+			     (if (not (zerop index))
+				 (list (aref (car red-rest) index)
+				       (aref (car green-rest) index)
+				       (aref (car blue-rest) index)
+				       (nth alpha-channel pixel))
+			       (loop (cdr rest)
+				     (cdr red-rest)
+				     (cdr green-rest)
+				     (cdr blue-rest))))))))
+		   image))))
+
   (define (make-image-recolorer color #!key
 				(zero-channel red-channel)
 				(index-channel green-channel)
@@ -60,30 +106,10 @@ The original image is always modified. If SAVE-ORIGINAL is true, the
 first time the image is recolored it's original contents will be
 stored, and then used as the basis for any future recoloring."
 
-    (let* ((color-rgb (color-rgb-8 color))
-	   (red-lut (make-lut (nth red-channel color-rgb)))
-	   (green-lut (make-lut (nth green-channel color-rgb)))
-	   (blue-lut (make-lut (nth blue-channel color-rgb))))
-
-      (lambda (image)
-
-	;; Get the original state of the image
-	(if (image-get image original-key)
-	    ;; Hmm.. don't have a blit-image function, this will do
-	    (tile-image image (image-get image original-key))
-
-	  (when save-original
-	    ;; save a copy for when we recolor in future
-	    (image-put image original-key (copy-image image))))
-
-	(image-map (lambda (pixel)
-		     (when (zerop (nth zero-channel pixel))
-		       (let ((index (nth index-channel pixel)))
-			 (list (aref red-lut index)
-			       (aref green-lut index)
-			       (aref blue-lut index)
-			       (nth alpha-channel pixel)))))
-		   image))))
+    (make-image-recolorer* (list color)
+			   #:zero-channel zero-channel
+			   #:index-channels (list index-channel)
+			   #:save-original save-original))
 
   ;; Create a lookup-table, a string containing 256 samples of a gradient
   ;; from 0 -> MID -> 255.

@@ -1,3 +1,18 @@
+2001-01-25  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/wm-spec.jl (init): the change to restore the
+	selected desktop on restart introduced a bug, so I've changed
+	it to not reselect the desktop until after the initialization
+	process has finished (using the after-initialization-hook)
+
+	* sawfish/wm/util/recolor-image.jl (make-image-recolorer*): new
+	function, can recolour multiple channels at once (uses a common
+	zero-channel, recolours based on whichever channel is non-zero
+	for each pixel)
+
+	(make-image-recolorer): now defined in terms of
+	make-image-recolorer*
+
 2001-01-23  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/state/wm-spec.jl (init): check for an old value of

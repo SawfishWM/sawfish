@@ -468,7 +468,11 @@
       (when (and current-desktop
 		 (eq (car current-desktop) 'CARDINAL)
 		 (>= (length (caddr current-desktop)) 1))
-	(select-workspace-from-first (aref (caddr current-desktop) 0))))
+	(add-hook 'after-initialization-hook
+		  ;; Don't do this yet, it can screw things up
+		  (lambda ()
+		    (select-workspace-from-first
+		     (aref (caddr current-desktop) 0))))))
 
     (update-client-list-hints)
     (update-workspace-hints)
