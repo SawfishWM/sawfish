@@ -481,6 +481,12 @@ map_request (XEvent *ev)
 	if (w == 0)
 	    return;
 	w->mapped = TRUE;
+
+	if (w->wmhints && w->wmhints->flags & StateHint
+	    && w->wmhints->initial_state == IconicState)
+	{
+	    rep_call_lisp1 (Fsymbol_value (Qiconify_window, Qt), rep_VAL(w));
+	}
     }
     else
     {
