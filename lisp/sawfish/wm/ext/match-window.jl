@@ -282,8 +282,12 @@
        (lambda (w prop value)
 	 (unless (or (window-get w 'placed) (window-workspaces w))
 	   ;; translate from 1.. to 0..
-	   (window-add-to-workspace w (1- value))
-	   (select-workspace-from-first (1- value)))))
+	   (window-add-to-workspace w (workspace-id-from-logical (1- value)))
+	   ;; XXX commenting out the following line will break smart
+	   ;; XXX placement when windows are swapped out of the
+	   ;; XXX selected workspace...
+	   ;;(select-workspace-from-first (1- value))
+	   )))
 
   (put 'position 'match-window-setter
        (lambda (w prop value)
