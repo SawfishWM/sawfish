@@ -721,7 +721,7 @@ lookup_event(u_long *code, u_long *mods, u_char *desc)
 	    {
 		KeySym lower, upper;
 		XConvertCase (ks, &lower, &upper);
-		if (ks == lower)
+		if (ks == lower && upper != lower)
 		{
 		    /* canonify `S-x' to `X' */
 		    *mods &= ~ShiftMask;
