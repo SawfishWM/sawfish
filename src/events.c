@@ -756,6 +756,9 @@ handle_input_mask(long mask)
 
 	emit_pending_destroys ();
 
+	if (xev.type == NoExpose || xev.type == GraphicsExpose)
+	    continue;
+
 	DB(("** Event: %s (win %lx)\n",
 	    xev.type < LASTEvent ? event_names[xev.type] : "unknown",
 	    (long)xev.xany.window));
