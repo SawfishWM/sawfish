@@ -21,6 +21,7 @@
 
 (provide 'sawmill)
 (provide 'sawfish)
+(require 'define)			;for old (broken?) reps
 
 ;; frame-style loaded if user hasn't set their own
 (define fallback-frame-style 'microGUI)
