@@ -43,7 +43,9 @@ center applet
 make CFLAGS="$RPM_OPT_FLAGS"
 
 %install
+rm -f %{_prefix}/info/sawmill*
 make install
+gzip -9nf %{_prefix}/info/sawmill*
 
 %files
 %doc README NEWS TODO
@@ -52,6 +54,7 @@ make install
 %{_prefix}/bin/sawmill-ui
 %{_prefix}/share/sawmill/%{ver}
 %{_prefix}/libexec/sawmill/%{ver}/%{_host}
+%{_prefix}/info/sawmill*
 
 %files gnome
 %{_prefix}/bin/sawmill-capplet
