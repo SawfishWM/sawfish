@@ -30,14 +30,9 @@
   (unless (window-get w 'shaded)
     (window-put w 'shaded t)
     (window-put w 'hide-client t)
-    (window-put w 'shaded-old-type (window-type w))
-    (let ((type (case (window-type w)
-		  ((default shaped) 'shaded)
-		  ((transient shaped-transient) 'shaded-transient)
-		  (t (window-type w)))))
-      (set-window-frame-style w (window-get w 'current-frame-style) type nil)
-      (call-window-hook 'shade-window-hook w)
-      (call-window-hook 'window-state-change-hook w (list '(shaded))))))
+    (call-window-hook 'shade-window-hook w)
+    (call-window-hook 'window-state-change-hook w (list '(shaded)))
+    (reframe-window w)))
 
 (defun unshade-window (w)
   "If the window is shaded (see `shade-window'), restore it to it's usual
@@ -46,13 +41,11 @@ state."
   (when (window-get w 'shaded)
     (window-put w 'shaded nil)
     (window-put w 'hide-client nil)
-    (set-window-frame-style w (window-get w 'current-frame-style)
-			    (window-get w 'shaded-old-type) nil)
-    (window-put w 'shaded-old-type nil)
-    (when raise-windows-when-unshaded
-      (raise-window w))
     (call-window-hook 'unshade-window-hook w)
-    (call-window-hook 'window-state-change-hook w (list '(shaded)))))
+    (call-window-hook 'window-state-change-hook w (list '(shaded)))
+    (reframe-window w)
+    (when raise-windows-when-unshaded
+      (raise-window w))))
 
 (defun toggle-window-shaded (w)
   "Toggle the shaded (only the title bar is displayed) state of the window."
@@ -61,13 +54,26 @@ state."
       (unshade-window w)
     (shade-window w)))
 
+
+;; displaying
+
+(defun shaded-frame-type-mapper (w type)
+  (if (window-get w 'shaded)
+      (case type
+	((default shaped) 'shaded)
+	((transient shaped-transient) 'shaded-transient)
+	(t type))
+    type))
+
+(define-frame-type-mapper shaded-frame-type-mapper)
+
+
+;; hooks
+
 (defun shading-add-window (w)
   (when (window-get w 'shaded)
-    (window-put w 'shaded nil)
-    (when (window-get w 'shaded-old-type)
-      (window-put w 'type  (window-get w 'shaded-old-type)))
     (shade-window w)))
 
 (add-hook 'add-window-hook shading-add-window t)
-(sm-add-saved-properties 'shaded 'shaded-old-type)
-(add-swapped-properties 'shaded 'shaded-old-type)
+(sm-add-saved-properties 'shaded)
+(add-swapped-properties 'shaded)
