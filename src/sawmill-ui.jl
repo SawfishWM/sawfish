@@ -1,16 +1,9 @@
 #!/bin/sh
-
-if [ "$1" = "--backend" ]; then
-  shift; exec rep "$0" "$@"
-else
-  sawmill-client -w -q -f customize || echo "sawmill server isn't running"
-  exit
-fi
-
+exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.17 1999/09/04 22:18:48 john Exp $
+;; $Id: sawmill-ui.jl,v 1.18 1999/09/06 19:08:15 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -30,11 +23,17 @@ fi
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;(setq print-length 5)
-;(setq print-depth 3)
-;(setq debug-on-error t)
+(setq print-length 5)
+(setq print-depth 3)
+(setq debug-on-error t)
 
 (require 'gtk)
+
+(defvar sawmill-client-program "sawmill-client")
+
+(defvar ui-debug nil)
+
+(defvar ui-group t)
 
 (defvar ui-active nil)
 
@@ -59,7 +58,7 @@ fi
 (defvar ui-box-border 5)
 
 ;; XXX this doesn't always work 100%..
-(defvar ui-enable-revert nil)
+(defvar ui-enable-revert t)
 
 ;; XXX this may be confusing?
 (defvar ui-enable-refresh nil)
@@ -69,6 +68,32 @@ fi
 
 ;; may be list, radio, or menu
 (defvar ui-set-style 'menu)
+
+
+;; wm communication
+
+(defun sawmill-eval (form &optional read)
+  (let*
+      ((output (make-string-output-stream))
+       (process (make-process output))
+       (print-escape t))
+    (if (zerop (call-process process nil sawmill-client-program
+			     "-e" (format nil "%S" form)))
+	(progn
+	  (setq output (get-output-stream-string output))
+	  ;; success
+	  (if read
+	      (read-from-string output)
+	    output))
+      (error "can't call sawmill-client"))))
+
+(defun sawmill-eval-async (form)
+  (let
+      ((process (make-process nil))
+       (print-escape t))
+    (unless (zerop (call-process process nil sawmill-client-program
+				 "-q" "-e" (format nil "%S" form)))
+      (error "can't call sawmill-client"))))
 
 
 ;; ui builder
@@ -840,7 +865,8 @@ fi
     (gtk-container-add vbox ui-root)
     (ui-set-button-states)
     (gtk-widget-show-all ui-window)
-    (gtk-main)))
+    (while t
+      (gtk-main))))
 
 (defun ui-set-button-states ()
   (when ui-apply
@@ -877,7 +903,7 @@ fi
 
 (defun ui-quit ()
   (gtk-widget-destroy ui-window)
-  (gtk-main-quit))
+  (throw 'quit 0))
 
 (defun ui-set-variables (list)
   (let
@@ -927,9 +953,14 @@ fi
   (ui-quit))
 
 (defun ui-command (form)
-  (format standard-output "%S\n" form)
-  (when (filep standard-output)
-    (flush-file standard-output)))
+  (if (null ui-debug)
+      (sawmill-eval-async form)
+    (format standard-error "ui-command: %S\n" form)))
+
+(defun ui-get-spec ()
+  (sawmill-eval `(progn
+		   (require 'customize)
+		   (customize-ui-spec ',ui-group)) t))
 
 (defun ui-refresh ()
   (let
@@ -937,8 +968,7 @@ fi
        spec)
     (gtk-container-remove vbox ui-root)
     (gtk-widget-destroy ui-root)
-    (ui-command '(ui-refresh))
-    (setq spec (read standard-input))
+    (setq spec (ui-get-spec))
     (setq ui-changed-variables nil)
     (setq ui-values-to-apply nil)
     (setq ui-original-values nil)
@@ -959,12 +989,16 @@ fi
     string))
 
 
-;; entry point, loop reading command forms, sending back results
+;; entry point
 
 (let
-    ((input (read standard-input)))
-  (show-ui input)
-  (ui-command '(ui-exit)))
+    (tem)
+  (when (setq tem (get-command-line-option "--group" t))
+    (setq ui-group (intern tem)))
+  (when (get-command-line-option "--notebook")
+    (setq ui-pages-style 'notebook)))
+
+(show-ui (ui-get-spec))
 
 ;; Local Variables:
 ;; major-mode: lisp-mode
