@@ -36,13 +36,16 @@
 
   (define (next-workspace-window)
     "Select the next window of the current workspace."
-    (let ((windows (workspace-windows current-workspace)))
+    (let ((windows (delete-if-not window-in-cycle-p
+				  (workspace-windows current-workspace))))
       (display-window (or (nth 1 (memq (input-focus) windows))
 			  (car windows)))))
 
   (define (previous-workspace-window)
     "Focus on the previous window of the current workspace."
-    (let ((windows (nreverse (workspace-windows current-workspace))))
+    (let ((windows (nreverse
+		    (delete-if-not window-in-cycle-p
+				   (workspace-windows current-workspace)))))
       (display-window (or (nth 1 (memq (input-focus) windows))
 			  (car windows)))))
 
@@ -51,16 +54,17 @@
     (catch 'out
       (let* ((space current-workspace)
 	     (limits (workspace-limits))
-	     (windows (workspace-windows space))
-	     (win (nth 1 (memq (input-focus) windows))))
+	     (windows (lambda ()
+			(delete-if-not window-in-cycle-p
+				       (workspace-windows space))))
+	     (win (nth 1 (memq (input-focus) (windows)))))
 	(while (not win)
 	  (setq space (1+ space))
 	  (when (> space (cdr limits))
 	    (setq space (car limits)))
 	  (when (= space current-workspace)
 	    (throw 'out nil))
-	  (setq windows (workspace-windows space))
-	  (setq win (car windows)))
+	  (setq win (car (windows))))
 	(when win
 	  (display-window win)))))
 
@@ -69,16 +73,17 @@
     (catch 'out
       (let* ((space current-workspace)
 	     (limits (workspace-limits))
-	     (windows (nreverse (workspace-windows space)))
-	     (win (nth 1 (memq (input-focus) windows))))
+	     (windows (lambda ()
+			(nreverse (delete-if-not window-in-cycle-p
+						 (workspace-windows space)))))
+	     (win (nth 1 (memq (input-focus) (windows)))))
 	(while (not win)
 	  (setq space (1- space))
 	  (when (< space (car limits))
 	    (setq space (cdr limits)))
 	  (when (= space current-workspace)
 	    (throw 'out nil))
-	  (setq windows (nreverse (workspace-windows space)))
-	  (setq win (car windows)))
+	  (setq win (car (windows))))
 	(when win
 	  (display-window win)))))
 

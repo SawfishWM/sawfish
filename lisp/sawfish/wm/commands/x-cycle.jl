@@ -159,9 +159,7 @@
       (unless (eq (fluid x-cycle-windows) t)
 	(setq win (delete-if (lambda (w)
 			       (not (memq w (fluid x-cycle-windows)))) win)))
-      (setq win (delete-if (lambda (w)
-			     (or (window-get w 'never-focus)
-				 (desktop-window-p w))) win))
+      (setq win (delete-if-not window-in-cycle-p win))
       (unless win
 	(throw 'x-cycle-exit t))
       (if (fluid x-cycle-current)
