@@ -60,7 +60,10 @@ update-po:
 	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
 	  mv $$lang.po $$lang.old.po; \
 	  echo "$$lang:"; \
-	  if $(MSGMERGE) $$lang.old.po $(PACKAGE).pot -o $$lang.po; then \
+	  if $(MSGMERGE) $$lang.old.po $(PACKAGE).pot -o $$lang.po.x; then \
+	    if grep -v "^# \.\." $$lang.po.x >$$lang.po; then \
+	      rm -f $$lang.po.x; \
+	    fi; \
 	    rm -f $$lang.old.po; \
 	  else \
 	    echo "msgmerge for $$cat failed!"; \
