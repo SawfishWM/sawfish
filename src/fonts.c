@@ -45,38 +45,69 @@ font specifier string).
 	f = f->next;
     if (f == 0)
     {
-	XFontSet font;
+	XFontSet font_set;
+	XFontStruct *font_struct = 0;
+	int ascent, descent;
 	char **missing_charset_list, *def_string;
 	int num_missing_charset_list;
-	font = XCreateFontSet (dpy, rep_STR(name), &missing_charset_list,
-			       &num_missing_charset_list, &def_string);
-	if (font != 0)
+	font_set = XCreateFontSet (dpy, rep_STR(name), &missing_charset_list,
+				   &num_missing_charset_list, &def_string);
+	if (font_set != 0)
 	{
 	    XFontStruct **fstrs;
 	    char **font_names;
 	    int i, num_fonts;
-	    num_fonts = XFontsOfFontSet (font, &fstrs, &font_names);
-	    f = rep_ALLOC_CELL(sizeof(Lisp_Font));
-	    rep_data_after_gc += sizeof (Lisp_Font);
-	    f->car = font_type;
-	    f->next = font_list;
-	    font_list = f;
-	    f->name = name;
-	    f->font = font;
-	    f->plist = Qnil;
-	    f->ascent = f->descent = 0;
+	    num_fonts = XFontsOfFontSet (font_set, &fstrs, &font_names);
+	    ascent = descent = 0;
 	    for (i = 0; i < num_fonts; i++)
 	    {
-		if (fstrs[i]->ascent > f->ascent)
-		    f->ascent = fstrs[i]->ascent;
-		if (fstrs[i]->descent > f->descent)
-		    f->descent = fstrs[i]->descent;
+		if (fstrs[i]->ascent > ascent)
+		    ascent = fstrs[i]->ascent;
+		if (fstrs[i]->descent > descent)
+		    descent = fstrs[i]->descent;
+	    }
+	    if (num_missing_charset_list > 0)
+	    {
+		int i;
+		fprintf (stderr, "Missing charsets in FontSet creation\n");
+		for (i = 0; i < num_missing_charset_list; i++)
+		    fprintf (stderr, "\t%s\n", missing_charset_list[i]);
+		XFreeStringList (missing_charset_list);
 	    }
 	}
 	else
 	{
-	    return Fsignal (Qerror, rep_list_2 (rep_string_dup("no such font"),
-						name));
+	    /* can't load a FontSet, try falling back to a FontStruct */
+
+	    font_struct = XLoadQueryFont (dpy, rep_STR (name));
+	    if (font_struct != 0)
+	    {
+		ascent = font_struct->ascent;
+		descent = font_struct->descent;
+	    }
+	    else
+	    {
+		return Fsignal (Qerror,
+				rep_list_2 (rep_string_dup("no such font"),
+					    name));
+	    }
+	}
+
+	f = rep_ALLOC_CELL(sizeof(Lisp_Font));
+	rep_data_after_gc += sizeof (Lisp_Font);
+	f->car = font_type;
+	f->next = font_list;
+	font_list = f;
+	f->name = name;
+	f->plist = Qnil;
+	f->ascent = ascent;
+	f->descent = 0;
+	if (font_set != 0)
+	    f->font.set = font_set;
+	else
+	{
+	    f->font.str = font_struct;
+	    f->car |= FF_FONT_STRUCT;
 	}
     }
     return rep_VAL(f);
@@ -153,6 +184,28 @@ Return t if ARG is a font object.
     return FONTP(win) ? Qt : Qnil;
 }
 
+int
+x_text_width (repv font, u_char *string, size_t len)
+{
+    if (FONT_STRUCT_P (font))
+	return XTextWidth (VFONT(font)->font.str, string, len);
+    else
+	return XmbTextEscapement (VFONT(font)->font.set, string, len);
+}
+
+void
+x_draw_string (Window id, repv font, GC gc,
+	       int x, int y, u_char *string, size_t len)
+{
+    if (FONT_STRUCT_P (font))
+    {
+	XSetFont (dpy, gc, VFONT(font)->font.str->fid);
+	XDrawString (dpy, id, gc, x, y, string, len);
+    }
+    else
+	XmbDrawString (dpy, id, VFONT(font)->font.set, gc, x, y, string, len);
+}
+
 DEFUN("text-width", Ftext_width, Stext_width, (repv string, repv font), rep_Subr2) /*
 ::doc:text-width::
 text-width STRING [FONT]
@@ -165,8 +218,8 @@ the text STRING using font object FONT (or the default-font).
     if (font == Qnil)
 	font = Fsymbol_value (Qdefault_font, Qt);
     rep_DECLARE2(font, FONTP);
-    return rep_MAKE_INT(XmbTextEscapement (VFONT(font)->font, rep_STR(string),
-					   rep_STRING_LEN(string)));
+    return rep_MAKE_INT (x_text_width (font, rep_STR(string),
+				       rep_STRING_LEN(string)));
 }
 
 DEFUN("font-height", Ffont_height, Sfont_height, (repv font), rep_Subr1) /*
@@ -217,7 +270,10 @@ font_sweep (void)
 	Lisp_Font *next = w->next;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
 	{
-	    XFreeFontSet (dpy, w->font);
+	    if (FONT_STRUCT_P (rep_VAL (w)))
+		XFreeFont (dpy, w->font.str);
+	    else
+		XFreeFontSet (dpy, w->font.set);
 	    rep_FREE_CELL(w);
 	}
 	else
