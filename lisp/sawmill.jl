@@ -24,6 +24,9 @@
 ;; frame-style loaded if user hasn't set their own
 (defvar fallback-frame-style 'absolute-e)
 
+;; quiet autoloading
+(setq autoload-verbose nil)
+
 ;; load standard libraries
 (require 'custom)
 (require 'functions)
