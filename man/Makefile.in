@@ -65,7 +65,7 @@ installdirs : mkinstalldirs
 
 uninstall :
 	rm -f $(DESTDIR)$(infodir)/sawfish.info*
-	-install-info --delete librep.info $(DESTDIR)$(infodir)/dir
+	-install-info --delete sawfish.info $(DESTDIR)$(infodir)/dir
 
 clean :
 	rm -f *~ sawfish.info* sawfish.?? sawfish.???
