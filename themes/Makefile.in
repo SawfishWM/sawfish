@@ -43,8 +43,11 @@ install : all installdirs
 	for d in $(THEMES); do \
 	  rm -rf $(DESTDIR)$(themedir)/$$d; \
 	  mkdir $(DESTDIR)$(themedir)/$$d; \
-	  $(INSTALL_DATA) `echo $$d/* | sed -e 's/'"$$d"'\/CVS//'` \
-	    $(DESTDIR)$(themedir)/$$d; \
+	  for f in $$d/*; do \
+	    if [ $$f != $$d/CVS ]; then \
+	      $(INSTALL_DATA) $$f $(DESTDIR)$(themedir)/$$d; \
+	    fi \
+	  done \
 	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
