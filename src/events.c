@@ -244,7 +244,6 @@ property_notify (XEvent *ev)
 	{
 	case XA_WM_NAME:
 	    w->full_name = w->name = prop;
-	    /* XXX redraw frames.. */
 	    break;
 
 	case XA_WM_ICON_NAME:
@@ -536,7 +535,6 @@ configure_request (XEvent *ev)
 static void
 configure_notify (XEvent *ev)
 {
-    /* XXX Fill this space */
 }
 
 static void

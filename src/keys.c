@@ -923,11 +923,7 @@ find_meta(void)
 }
 
 
-/* Key and button grabbing
-
-   XXX There's a big problem with this -- if the keymap changes after
-   XXX the grabs have been made the changes are propagated to the set
-   XXX of passive grabs.. */
+/* Key and button grabbing */
 
 static void
 grab_event (Window grab_win, repv ev)

@@ -170,9 +170,9 @@ sys_init(char *program_name)
 	if (rep_get_option ("--sync", 0))
 	    XSynchronize (dpy, True);
 
-	/* XXX If I don't do this all the events that are created by
-	   XXX the window initialiation are ignored until the next
-	   XXX new event arrives!? */
+	/* If I don't do this all the events that are created by
+	   the window initialiation are ignored until the next
+	   new event arrives (because of the XSync calls above) */
         rep_mark_input_pending (ConnectionNumber(dpy));
 
 	rep_redisplay_fun = redisplay;
