@@ -134,9 +134,9 @@ custom-set and custom-get may be used to translate data types to the
 string representation required by some widget types. custom-widget may
 construct the widget definition passed to the ui backend."
 
-    `(defvar ,symbol (custom-declare-variable
-		      ',symbol ,value ,(custom-quote-keys keys))
-	     ,doc))
+    `(progn
+       (defvar ,symbol ,value ,doc)
+       (custom-declare-variable ',symbol ,(custom-quote-keys keys))))
 
   (defmacro defgroup (symbol doc #!rest keys)
     "Declare a new custom group called SYMBOL, with English name DOC. The
@@ -149,7 +149,7 @@ Note that the value of the `:group' key is not evaluated."
 
     `(custom-declare-group ',symbol ,doc ,(custom-quote-keys keys)))
 
-  (define (custom-declare-variable symbol value keys)
+  (define (custom-declare-variable symbol keys)
     (let (type prop)
       (while keys
 	(setq prop (cdr (assq (car keys) custom-option-alist)))
@@ -171,7 +171,7 @@ Note that the value of the `:group' key is not evaluated."
 	  (put symbol 'custom-set (get type 'custom-set)))
 	(when (and (not (get symbol 'custom-widget)) (get type 'custom-widget))
 	  (put symbol 'custom-widget (get type 'custom-widget))))
-      value))
+      symbol))
 
   (define (custom-declare-group group #!optional doc keys)
     (let (container)
