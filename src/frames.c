@@ -85,6 +85,10 @@ static repv state_syms[fps_MAX];
 static bool frame_draw_mutex;
 bool frame_state_mutex;
 
+/* Used while building frames to provide temporary roots for gc. Each
+   pointer actually points to a `struct frame_part *' */
+static rep_GC_root *gc_parts;
+
 
 /* building frames from component lists
 
@@ -821,13 +825,19 @@ list_frame_generator (Lisp_Window *w)
 	   || (regen && fp != 0))
     {
 	repv elt, class = Qnil, class_elt = Qnil, ov_class_elt = Qnil;
-	rep_GC_root gc_class, gc_class_elt, gc_ov_class_elt;
+	rep_GC_root gc_class, gc_class_elt, gc_ov_class_elt, gc_fp;
 	bool had_left_edge = FALSE, had_top_edge = FALSE;
 	bool had_right_edge = FALSE, had_bottom_edge = FALSE;
 
 	rep_PUSHGC(gc_class, class);
 	rep_PUSHGC(gc_class_elt, class_elt);
 	rep_PUSHGC(gc_ov_class_elt, ov_class_elt);
+
+	/* Custom protection for the part we're currently building
+	   (and thus may not be linked into the window yet) */
+	gc_fp.ptr = (repv *) &fp;
+	gc_fp.next = gc_parts;
+	gc_parts = &gc_fp;
 
 	if (!regen)
 	{
@@ -1156,6 +1166,7 @@ list_frame_generator (Lisp_Window *w)
 	else
 	    fp = fp->next;
 
+	gc_parts = gc_parts->next;
 	rep_POPGC; rep_POPGC; rep_POPGC;
     }
 
@@ -1290,31 +1301,48 @@ get_keymap_for_frame_part (struct frame_part *fp)
     return tem;
 }
 
+static void
+mark_frame_part (struct frame_part *fp)
+{
+    int i;
+    rep_MARKVAL(fp->alist);
+    rep_MARKVAL(rep_VAL(fp->win));
+    for (i = 0; i < fps_MAX; i++)
+    {
+	rep_MARKVAL(fp->font[i]);
+	rep_MARKVAL(fp->fg[i]);
+	rep_MARKVAL(fp->bg[i]);
+    }
+    rep_MARKVAL(rep_VAL(fp->cursor));
+    rep_MARKVAL(rep_VAL(fp->renderer));
+    rep_MARKVAL(rep_VAL(fp->rendered_image));
+    rep_MARKVAL(fp->drawn.font);
+    rep_MARKVAL(fp->drawn.text);
+    rep_MARKVAL(fp->drawn.x_justify);
+    rep_MARKVAL(fp->drawn.y_justify);
+    rep_MARKVAL(fp->drawn.fg);
+    rep_MARKVAL(fp->drawn.bg);
+}
+
 /* Mark all frame-parts of window W for gc. */
 void
 mark_frame_parts (Lisp_Window *w)
 {
     struct frame_part *fp;
     for (fp = w->frame_parts; fp != 0; fp = fp->next)
+	mark_frame_part (fp);
+}
+
+/* called once per gc; marks any frame parts currently being built */
+void
+mark_frame_type (void)
+{
+    rep_GC_root *root = gc_parts;
+    while (root != 0)
     {
-	int i;
-	rep_MARKVAL(fp->alist);
-	rep_MARKVAL(rep_VAL(fp->win));
-	for (i = 0; i < fps_MAX; i++)
-	{
-	    rep_MARKVAL(fp->font[i]);
-	    rep_MARKVAL(fp->fg[i]);
-	    rep_MARKVAL(fp->bg[i]);
-	}
-	rep_MARKVAL(rep_VAL(fp->cursor));
-	rep_MARKVAL(rep_VAL(fp->renderer));
-	rep_MARKVAL(rep_VAL(fp->rendered_image));
-	rep_MARKVAL(fp->drawn.font);
-	rep_MARKVAL(fp->drawn.text);
-	rep_MARKVAL(fp->drawn.x_justify);
-	rep_MARKVAL(fp->drawn.y_justify);
-	rep_MARKVAL(fp->drawn.fg);
-	rep_MARKVAL(fp->drawn.bg);
+	struct frame_part *fp = *(struct frame_part **)(root->ptr);
+	mark_frame_part (fp);
+	root = root->next;
     }
 }
 
