@@ -35,7 +35,7 @@
     "Display the documentation of a specified symbol."
     (describe-value (symbol-value fun t) fun)
     (format standard-output "\n%s\n"
-	    (or (documentation fun (symbol-value fun t)) "Undocumented.")))
+	    (or (documentation fun nil (symbol-value fun t)) "Undocumented.")))
 
   ;;###autoload
   (define-command 'describe-symbol describe-symbol #:spec "SSymbol:")
