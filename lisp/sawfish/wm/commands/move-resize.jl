@@ -498,7 +498,7 @@
       (not (null (delete-unresizable-edges
 		  (if (memq resize-edge-mode '(region border))
 		      ;; can't grab edges
-		      (copy-sequence move-resize-directions)
+		      (copy-sequence move-resize-edges)
 		    (list 'top 'bottom 'left 'right)))))))
 
 
