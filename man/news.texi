@@ -11,13 +11,34 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
-@item Now does (extensible) session management
+@item Now does session management. The scheme is extensible, arbitrary
+Lisp modules can save and restore window state due to their own
+functionality (using the @code{sm-window-save-functions} and
+@code{sm-restore-window-hook} hooks). See @file{lisp/workspace.jl} for
+an example
+
+@item Displays window position or dimensions whilst interactively
+moving or resizing a window (@code{move-show-position},
+@code{resize-show-dimensions})
+
+@item New option @code{preallocated-workspaces}, the number of
+workspaces to create at startup
+
+@item Window-workspace mapping is preserved through restart (as long as
+the GNOME hints are enabled)
+
+@item Theme directories may contain a short @file{README} file that
+will be displayed in the configuration tool
 
 @item Changed the custom file to @file{~/.sawmill/custom} instead of
 @file{~/.sawmill-custom}. The old file will be moved to the new
 location if it exists
 
-@item Install @file{sawmill-menu} under @file{libexec}
+@item Install @file{sawmill-menu} under @file{libexec} since it
+shouldn't be run manually
+
+@item Option in @code{gradient} theme to create full-sized gradient
+images, trading memory for quality
 
 @item Workaround the flicker when raising windows
 
@@ -68,7 +89,7 @@ set so that the theme can load any images stored in its directory.
 Also created the variable @code{theme-load-path} containing the list of
 directories searched when trying to load a theme. By default it
 contains two directories: @file{~/.sawmill/themes/} and
-@file{@var{prefix}/sawmill/@var{version}/themes}.
+@file{@var{prefix}/share/sawmill/@var{version}/themes}.
 
 @item Resizing now chooses the direction to resize the window in by the
 initial position of the pointer in relation to the window. The window

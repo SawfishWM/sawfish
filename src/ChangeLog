@@ -1,3 +1,18 @@
+1999-09-04  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl (frame-style): new widget type
+
+	* functions.c (Fshow_message): new function, displays a
+	specified string in the middle of the screen
+	* events.c (expose): recognize when the message_win is exposed
+	* main.c (main): call functions_kill
+
+	* frames.c (frame_part_focuser): deleted since it's exactly the
+	same as refresh_frame_parts ()
+
+	* session.c (session_init): only try to connect if
+	SESSION_MANAGER is set in the environment
+
 1999-09-03  John Harper  <john@dcs.warwick.ac.uk>
 
 	* windows.c (add_window): only call place-window-hook if (as

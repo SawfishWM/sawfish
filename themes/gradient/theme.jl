@@ -61,7 +61,7 @@
   :after-set after-setting-frame-option)
 
 (defcustom gradient-save-memory t
-  "Save memory when creating gradients, possibly affecting quality."
+  "Use less memory when creating gradients, possibly affecting quality."
   :type boolean
   :group gradient-frame
   :after-set after-setting-frame-option)

@@ -10,51 +10,33 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
-  ! Is it possible for the pointer not to be ungrabbed after moving a
-    window? From looking at the source I can't see how, but it has
-    happened a couple of times..
-
-    [ 30/8: I think I've fixed this now..? ]
-
   ! Sometimes switching workspaces gives me an error about a nil arg,
     doesn't seem to make any difference though
-
-  ! Raising a window can cause a flicker of other windows
-
-    [ 2/9: work-around by calling XRaiseWindow instead of
-    XRestackWindows when raising a window right to the top of the stack ]
 
   ! It's not possible to compile sawmill-ui.jl without an X connection
     (it requires 'gtk, which then calls gtk_init (), ...)
 
   ! Move functions.c:Fgetpid () to librep
 
-  ! Session management doesn't record workspace info
-
 
 General tasks
 =============
-
-  + Option to pre-allocate X workspaces at startup
 
   + Allow text-entry commands in bindings dialog?
 
   + Intelligent window cycling, also previous-window
 
-  + windows appear above screensaver?
+  + windows appear above xscreensaver?
+
+    there's no way around this, xscreensaver maps its virtual root
+    window with override_redirect set, so the wm never even sees it
+    (otherwise it could be moved to an upper layer)
 
   + Handle multiple-screen displays
 
     What are the issues? Multiple root windows, and..?
 
-  + Preserve workspace information during restart (using GNOME hints?)
-
-  + When no workspaces exist the workspace submenu is empty; is this a
-    problem..?
-
   + Add checked and radio menu item support
-
-  + Display window position/size when moving/resizing
 
   + Smart placement
 
@@ -75,8 +57,6 @@ General tasks
   + Load tarred/compressed themes
 
   + Export more Imlib functions
-
-    (the bevel function in Imlib 1.9.5+)
 
   + GNOME compliance
 
@@ -128,6 +108,25 @@ General tasks
 
     Allow text to be rendered at angles (in multiples of 90 degrees?).
     This could be useful for the sides of windows
+
+  - GTK theme
+
+    Is there any way that the gtk theme could support engine-based GTK
+    themes? Probably not without using a subprocess (since the engines
+    are written to GDK, not Xlib), this could get hairy..
+
+    Also, why do themes with bg_pixmap set use so much memory? Is it
+    just because the images are XPM's..?
+
+  - Internationalisation
+
+    This should be quite easy, since most strings are stored in the
+    documentation databases anyway. There's two ways of doing this,
+    either create alternate doc files for alternate languages, or do
+    the doc-string lookup as normal then call gettext ()
+
+    Also, what about the "%1$s" style printf formatting. rep's format
+    function should be extended to handle this syntax
 
 
 Long term ideas
@@ -201,36 +200,3 @@ Long term ideas
 
     This way you should be able to drag from both netscape and the file
     manager to activate a theme
-
-  - Write a "GTK" frame style
-
-    This would involve parsing a gtkrc file then trying to apply the
-    settings to the window frame.
-
-    Pixmap/color based rc files would be pretty straightforward (would
-    require a set of gtk-like window-button pixmaps), but how could
-    engine-based gtk themes be handled? What's the engine API? Could it
-    be (ab)used by the window manager..?
-
-    This may be best done by a separate plugin, there's probably a yacc
-    grammar for gtkrc files lying around somewhere..?
-
-    Looking at the gtk code there's no grammar, just a custom built
-    parser. Also the engines need to be linked into the standard gtk
-    environment (gtk/gdk/glib) and all drawing is done through gdk
-
-    So maybe ignore the engines (unless it's possible to use some kind
-    of multi-process architecture: the wm communicates to the gtk
-    process that it would like a particular frame-part window drawn),
-    just parse the rc files for the default style (font, colours, and
-    any background pixmaps)
-
-    Actually, it's probably not necessary to parse the rc files
-    manually. Just write a program linked to gtk that queries the
-    default style and writes an s-expression description to stdout
-
-    Note that all this stuff would require the "custom frame parts"
-    idea above to be implemented
-
-    [ 2/9: this has mostly been implemented using the gtk-style program
-    to read the style, and the `gtk' theme to dipsplay it. ]

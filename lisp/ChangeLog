@@ -1,3 +1,48 @@
+1999-09-04  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.jl (custom-make-frame-style-widget): use the new
+	`frame-style' widget
+
+	* frames.jl (after-setting-frame-option): call
+	reframe-all-windows if always-update-frames is set
+
+	* move-resize.jl (move-show-position, resize-show-dimensions):
+	new options, when t the window attributes are displayed while
+	moving or resizing the window
+
+	* sm-init.jl (sm-init-properties): deleted this function, it's
+	now inlined into the initialisation section (since it's only
+	called once, why let it consume memory?)
+
+	* frames.jl (set-frame-for-window): only use the
+	decorate-transients option if the window actually _is_ a
+	transient. Also, store the final window type (so it can be
+	saved with the session)
+
+	* workspace.jl (preallocated-workspaces): new defcustom
+	(ws-add-window-to-space): abort if window is already in a
+	space, remember to hide the window if it's not visible
+	(ws-add-window): abort if window is in a space already
+	(ws-add-window-to-space-by-index): new function
+	(ws-remove-window): never delete the sole remaining workspace
+	(ws-add-workspace): if no workspaces exists, make the new one
+	current
+	(ws-save-session, ws-restore-session): session management hooks
+	to preserve the workspace that each window is on
+
+	* sm-save.jl (sm-get-window-state): fixed how the
+	sm-window-save-functions results are used
+
+	* gnome.jl (gnome-honour-client-state): honour the
+	_WIN_WORKSPACE property
+
+	* mwm.jl, open-look.jl, gnome.jl: moved functions from
+	add-window-hook to before-add-window-hook
+
+	* functions.jl (make-directory-recursively): new function
+	* customize.jl, custom.jl: when writing into `~/.sawmill', call
+	make-directory-recursively first
+
 1999-09-03  John Harper  <john@dcs.warwick.ac.uk>
 
 	* menus.jl (menu-program): this is now under the libexec dir
