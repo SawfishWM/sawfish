@@ -299,8 +299,37 @@ make-image-from-x-drawable ID [MASK-ID]
        }
    }
 #elif defined HAVE_GDK_PIXBUF
-   im = gdk_pixbuf_xlib_get_from_drawable (0, d, image_cmap, image_visual,
-					   0, 0, 0, 0, w, h);
+   if (dp == 1)
+   {
+       /* gdk_pixbuf_xlib_get_from_drawable () doesn't seem to work
+          with single-bitplane drawables. Doing it by hand.. */
+       XImage *xim = XGetImage (dpy, d, 0, 0, w, h, 1, ZPixmap);
+       im = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, w, h);
+       if (xim != 0)
+       {
+	   int rowstride = gdk_pixbuf_get_rowstride (im);
+	   u_char *pixels = gdk_pixbuf_get_pixels (im);
+	   int x, y;
+	   for (y = 0; y < h; y++)
+	   {
+	       for (x = 0; x < w; x++)
+	       {
+		   int idx = y * rowstride + x * 3;
+		   u_char chan = (XGetPixel (xim, x, y) != 0) ? 0 : 255;
+		   pixels[idx+0] = chan;
+		   pixels[idx+1] = chan;
+		   pixels[idx+2] = chan;
+	       }
+	   }
+	   XDestroyImage (xim);
+       }
+   }
+   else
+   {
+       im = gdk_pixbuf_xlib_get_from_drawable (0, d, image_cmap, image_visual,
+					       0, 0, 0, 0, w, h);
+   }
+
    if (mask != 0)
    {
        /* this code inspired by the GNOME tasklist_applet */
