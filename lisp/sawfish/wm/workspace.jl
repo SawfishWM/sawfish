@@ -491,6 +491,8 @@ previous workspace."
 	(when (and space (not (eq space current-workspace)))
 	  (ws-switch-workspace space))
 	(uniconify-window w)
+	(when (window-get w 'shaded)
+	  (unshade-window w))
 	(when raise-selected-windows
 	  (raise-window w))
 	(when warp-to-selected-windows
