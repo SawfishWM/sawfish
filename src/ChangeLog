@@ -1,3 +1,10 @@
+1999-08-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c (num_lock_mod): initialised to the Num_Lock modifier,
+	ignored in events
+	(grab_event, ungrab_event): grab all combinations including
+	LockMask and num_lock_mod
+
 1999-08-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c (translate_event): ignore the Lock modifier
