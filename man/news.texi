@@ -6,6 +6,143 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+@unnumberedsec 0.31
+
+@itemize @bullet
+
+@item Requires librep version @code{0.13}
+
+@item Organized all lisp code into a hierarchy of modules. Root points
+are @code{sawfish.wm} for window manager code, @code{sawfish.ui} for
+configurator and @code{sawfish.gtk} for GTK+ utilities
+
+Compatibility should have been preserved as far as possible, through
+the use of module aliases. The @code{user} module that unmodularized
+user code is loaded in should look very similar to the old environment.
+However, code using private functions, probably will not work
+
+New features written as modules can either import modules individually,
+or just open @code{sawfish.wm} to get the core functionality
+
+@item All command handling is now written in Lisp. It's fully
+compatible except for how commands are defined. Since there is no
+longer a unified namespace the mapping from names to command
+definitions is maintained separately.
+
+@code{define-command} and @code{autoload-command} add entries to this
+mapping. @code{define-command} takes a name and a function (and some
+other optional arguments). The old style of defining commands still
+works, but only in the user module
+
+@item @code{sawfish-client} now provides the same repl as the normal
+@code{rep} program. E.g. this allows the module system to be easily
+inspected
+
+Also, the module of each loaded theme is available for inspection under
+@code{themes.@var{theme-name}}. (With themes using top-level defines
+instead of a single @code{let*} block, this is useful for debugging)
+
+@item @code{sawfish.client} module provides lisp functions for
+communicating with a running window manager. Also, the protocol has
+been modified to support proper communication of errors, which are then
+re-raised on the client-side. This should make debugging client-server
+code more obvious
+
+@item `Action' parts of menu items may now be lisp objects that don't
+have a read syntax. (E.g. this allows closures to be used, avoiding the
+problems arising from modularization)
+
+@item Handle @code{ConfigureRequest} events in a way that is compliant
+with the ICCCM---honour the window's @code{win_gravity} setting
+(defaulting to @code{NorthWest} gravity), instead of assuming
+@code{Static} gravity
+
+@item Support more GC attributes in the @code{sawfish.wm.util.x} plugin
+
+@item Support for handling arbitrary windows as extra ``root'' windows.
+Used, e.g., to support Nautilus' desktop window. Allows the focus modes
+to work correctly
+
+To support this, new window property @code{desktop} denoting a
+``desktop'' window; new function @code{desktop-window-p} recognizing
+one of these things (or the symbol @code{root})
+
+@item Added @code{pointer-motion-threshold} option. Pointer motion
+events are only generated when the pointer moves at this many pixes
+away from the position it had when the button was pressed
+
+@item New functions: @code{scale-image}, @code{composite-images}, and
+@code{crop-image}.
+
+@item New option @code{maximize-avoid-avoided} (Jonas Linde)
+
+@item New functions exported by @code{sawfish.wm.ext.tooltips} module:
+@code{display-tooltip}, @code{remove-tooltip}
+
+@item New function exported from @code{sawfish.wm.viewports} module:
+@code{select-workspace-and-viewport}. Renamed some workspace functions:
+
+@noindent
+@code{ws-move-window} @result{} @code{move-window-to-workspace},
+@code{ws-copy-window} @result{} @code{copy-window-to-workspace},
+@code{ws-insert-workspace} @result{} @code{insert-workspace},
+@code{ws-move-workspace} @result{} @code{move-workspace},
+@code{ws-remove-window} @result{} @code{remove-workspace}.
+
+@item Changed interface of @code{get-visible-window-edges} function to
+use proper keyword parameters, and added some new keywords
+
+@item New commands @code{help:about} and @code{gnome-about}. Added a
+@code{sawfish-about} script to implement the first of these. Added
+associate menu items to the `Help' menu
+
+@item Translation additions and updates: es (Iñaki García Etxebarria),
+tr (Fatih Demir), zh_CN.GB2312 (zw@@zhaoway.com), fr (Christian
+Marillat), ja (SATO Satoru), de (Kai Lahmann), el (Simos Xenitellis),
+ga (Seán Ó Ceallaigh), ru (Valek Filippov), sl (Andraz Tori)
+
+@item Bug fixes:
+
+@itemize @minus
+@item initialize event handler when creating X window proxies (Matt
+Tucker)
+
+@item No longer able to @code{throw} out the top of the program by
+mistake
+
+@item Fixed @code{find-head} function, to allow Xinerama support to
+work
+
+@item When exiting, leave window configurations exactly as they were
+found (E. Jay Berkenbilt)
+
+@item Fixed @code{synthesize-event} to scan the window tree for a child
+window accepting button events (E. Jay Berkenbilt)
+
+@item Removed ``yow! @dots{}'' debugging messages
+
+@item @code{image-set} and related functions will add an alpha channel
+to the image when necessary (when using gdk-pixbuf)
+
+@item Canonify @kbd{S-x} as @kbd{X} where possible
+
+@item Catch and handle errors when matching properties in the
+@code{sawfish.wm.ext.match-window} 
+
+@item Escape underscores in menu items where they shouldn't introduce
+accelerators. (Added @code{quote-menu-item} function to help with this)
+
+@item Fixed race-condition when exiting configurator embedded into the
+GNOME control center (Havoc Pennington, me)
+
+@item Fixed bug in @code{set} method of the @code{icon} widget
+
+@item Fixed shading behaviour of included themes (Daniel Lundell)
+
+@end itemize
+@end itemize
+
+
 @unnumberedsec 0.30.3
 
 @itemize @bullet
