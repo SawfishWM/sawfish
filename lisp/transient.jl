@@ -39,7 +39,7 @@
   :group focus)
 
 (defcustom transients-get-focus t
-  "Transient windows inherit focus state from their parent."
+  "Transient windows inherit focus from their parent."
   :group focus
   :type boolean)
 
