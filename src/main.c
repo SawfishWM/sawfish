@@ -60,6 +60,7 @@ DEFSYM(bad_event_desc, "bad-event-desc");
 DEFSTRING(err_bad_event_desc, "Invalid event description");
 DEFSTRING(version_string, SAWMILL_VERSION);
 
+DEFSYM(saved_command_line_args, "saved-command-line-args");
 DEFSYM(before_exit_hook, "before-exit-hook");
 
 static rep_bool
@@ -169,14 +170,62 @@ sawmill_symbols (void)
     rep_INTERN(before_exit_hook);
 }    
 
+static void
+stash_argv (int argc, char **argv)
+{
+    repv head, *last;
+
+    head = Qnil;
+    last = &head;
+    while(argc > 0)
+    {
+	*last = Fcons(rep_string_dup(*argv), Qnil);
+	last = &rep_CDR(*last);
+	argc--;
+	argv++;
+    }
+    rep_INTERN(saved_command_line_args);
+    Fset (Qsaved_command_line_args, head);
+}
+
+static void
+do_restart (void)
+{
+    repv args = rep_SYM(Qsaved_command_line_args)->value;
+    if (rep_CONSP(args))
+    {
+	repv len = Flength (args);
+	if (rep_INTP(len))
+	{
+	    int argc = rep_INT(len), i;
+	    char **argv = alloca (sizeof (char *) * argc + 1);
+	    for (i = 0; i < argc; i++)
+	    {
+		argv[i] = strdup (rep_STR(rep_CAR(args)));
+		args = rep_CDR(args);
+	    }
+	    argv[i] = 0;
+
+	    /* Only call this once we've finished accessing Lisp data. */
+	    rep_kill ();
+
+	    execvp (*argv, argv);
+	}
+    }
+    exit (10);
+}
+
 int
 main(int argc, char **argv)
 {
     volatile int rc = 5;
-    volatile char **old_argv = (volatile char **)argv;
+    char **old_argv = argv;
+    int old_argc = argc;
 
     prog_name = *argv++; argc--;
     rep_init (prog_name, &argc, &argv, 0, 0);
+
+    stash_argv (old_argc, old_argv);
 
     if (sys_init(prog_name))
     {
@@ -186,6 +235,7 @@ main(int argc, char **argv)
 	sawmill_symbols();
 
 	/* call all init funcs... */
+	session_init ();
 	events_init ();
 	colors_init ();
 	images_init ();
@@ -252,6 +302,8 @@ main(int argc, char **argv)
 	    }
 	}
 
+	rep_throw_value = rep_NULL;
+
 	/* call all exit funcs... */
 	windows_kill ();
 	frames_kill ();
@@ -260,12 +312,15 @@ main(int argc, char **argv)
 	images_kill ();
 	colors_kill ();
 	events_kill ();
+	session_kill ();
 
 	sys_kill();
-	rep_kill();
 
 	if (exit_code == ec_restart)
-	    execvp ((char *)(old_argv[0]), (char **)old_argv);
+	    /* This will call rep_kill () itself when ready */
+	    do_restart ();
+
+	rep_kill();
     }
     return rc;
 }
