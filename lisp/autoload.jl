@@ -20,7 +20,7 @@
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;; ::autoload-start::
-(setq custom-required (cons 'move-resize custom-required))
+(custom-add-required 'move-resize)
 (autoload 'move-window-interactively "move-resize" t)
 (autoload 'resize-window-interactively "move-resize" t)
 (autoload 'move-selected-window "move-resize" t)
@@ -31,7 +31,6 @@
 (autoload 'popup-root-menu "menus" t)
 (autoload 'popup-apps-menu "menus" t)
 (autoload 'customize "customize" t)
-(setq custom-required (cons 'auto-raise custom-required))
 (autoload 'load-session "sm-load")
 (autoload 'save-session "sm-save")
 (autoload 'map-keymap "keymap")
@@ -49,7 +48,6 @@
 (autoload 'place-window-first-fit "smart-placement")
 (autoload 'place-window-best-fit "smart-placement")
 (autoload 'place-window-first-fit-or-interactive "smart-placement")
-(setq custom-required (cons 'edge-flip custom-required))
 (autoload 'iconify-group "groups" t)
 (autoload 'uniconify-group "groups" t)
 (autoload 'make-group-sticky "groups" t)
@@ -89,9 +87,7 @@
 (autoload 'gnome-clear-skip-tasklist "gnome-commands" t)
 (autoload 'add-window-matcher "match-window")
 (autoload 'remove-window-matcher "match-window")
-(setq custom-required (cons 'match-window custom-required))
 (autoload 'gnome-logout "gnome-commands" t)
-(setq custom-required (cons 'tooltips custom-required))
 (autoload 'set-viewport-linear "viewport-linear")
 (autoload 'set-window-viewport-linear "viewport-linear")
 (autoload 'set-viewport-linear:1 "viewport-linear" t)

@@ -1,3 +1,25 @@
+2000-01-27  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome-int.jl: don't use the gnome cc to invoke the
+	configurator for now, they're are some issues to be resolved
+
+	* customize.jl, custom.jl: custom groups are now organized as a
+	tree. Specify the list of nodes to identify a subtree.
+	Top-level groups are still addressable as single symbols. So,
+	e.g., there's now a group `(appearance advanced)'
+
+	* keymaps.jl (custom-keymap-group-widget): fixed for tree
+	organization
+
+	* workspace.jl, move-resize.jl, functions.jl, focus.jl: moved
+	some customizations to `advanced' subgroups
+
+	* sawmill-defaults.jl: add a default set of features to
+	custom-required, if the user wants anymore, or has a
+	.sawmillrc, they'll need to do it themselves
+	* tooltips.jl, match-window.jl, edge-flip.jl, auto-raise.jl:
+	don't add their features to custom-required anymore
+
 2000-01-26  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.jl (delete-window-safely): new command, if the
