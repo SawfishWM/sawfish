@@ -240,6 +240,7 @@ extern int main (int argc, char **argv);
 extern repv Fquit (void);
 extern repv Frestart (void);
 extern void add_hook (repv sym, repv fun);
+extern repv global_symbol_value (repv sym);
 
 /* from server.c */
 extern void server_init (void);
