@@ -44,7 +44,7 @@ all : $(LISP_OBJS)
 sawfish-about.jl : sawfish-about.jl.in
 	sed $(SUBSTS) $< >$@
 
-install :
+install : all installdirs
 	$(INSTALL_SCRIPT) sawfish-menu.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-menu
 	$(INSTALL_SCRIPT) sawfish-client.jlc $(DESTDIR)$(bindir)/sawfish-client
 	$(INSTALL_SCRIPT) sawfish-about.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-about
