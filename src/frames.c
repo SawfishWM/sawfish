@@ -1392,7 +1392,8 @@ list_frame_generator (Lisp_Window *w)
     if (w->frame == 0)
     {
 	/* create the frame */
-	wamask = 0;
+	wa.override_redirect = True;
+	wamask = CWOverrideRedirect;
 	w->frame = XCreateWindow (dpy, root_window, w->attr.x, w->attr.y,
 				  w->frame_width, w->frame_height,
 				  0, screen_depth, InputOutput,
@@ -1411,8 +1412,9 @@ list_frame_generator (Lisp_Window *w)
     w->rebuild_frame = list_frame_generator;
     w->property_change = refresh_frame_parts;
 
-    /* make the initial frame shape */
-    set_frame_shapes (w, TRUE);
+    /* create/update windows for each part */
+    for (fp = w->frame_parts; fp != 0; fp = fp->next)
+	configure_frame_part (fp);
 
     /* Client window is always left _underneath_ any overlapping frame
        parts; this may not always be ideal, but we have to choose 
@@ -1420,9 +1422,8 @@ list_frame_generator (Lisp_Window *w)
     if (w->reparented)
 	XLowerWindow (dpy, w->id);
 
-    /* create/update windows for each part */
-    for (fp = w->frame_parts; fp != 0; fp = fp->next)
-	configure_frame_part (fp);
+    /* make the initial frame shape */
+    set_frame_shapes (w, TRUE);
 
     /* ICCCM says we must unmap the client window when it's hidden */
     {
