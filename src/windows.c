@@ -33,6 +33,7 @@ static bool initialising;
 
 DEFSYM(add_window_hook, "add-window-hook");
 DEFSYM(before_add_window_hook, "before-add-window-hook");
+DEFSYM(after_add_window_hook, "after-add-window-hook");
 DEFSYM(place_window_hook, "place-window-hook");
 DEFSYM(placed, "placed");
 DEFSYM(after_framing_hook, "after-framing-hook");
@@ -383,6 +384,9 @@ add_window (Window id)
 	    }
 	}
 	Fwindow_put (rep_VAL(w), Qplaced, Qt);
+
+	if (w->id != 0)
+	    Fcall_window_hook (Qafter_add_window_hook, rep_VAL(w), Qnil, Qnil);
 
 	if (w->id != 0)
 	{
@@ -1231,6 +1235,7 @@ windows_init (void)
 
     rep_INTERN_SPECIAL(before_add_window_hook);
     rep_INTERN_SPECIAL(add_window_hook);
+    rep_INTERN_SPECIAL(after_add_window_hook);
     rep_INTERN_SPECIAL(place_window_hook);
     rep_INTERN(placed);
     rep_INTERN_SPECIAL(after_framing_hook);
