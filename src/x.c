@@ -116,24 +116,18 @@ window_from_arg (repv arg)
 	id = VWIN(arg)->id;
     else if (PARTP(arg) && VPART(arg)->id != 0)
 	id = VPART(arg)->id;
+    else if (arg == Qroot)
+	id = root_window;
     else
 	id = 0;
 
     return id;
 }
 
-static Drawable
+static inline Drawable
 drawable_from_arg (repv arg)
 {
     Drawable id = window_from_arg (arg);
-
-    if (id != 0)
-    {
-	XdbeBackBuffer buf = x_back_buffer_from_id (id);
-	if (buf != 0)
-	    id = buf;
-    }
-
     return id;
 }
 
@@ -165,6 +159,22 @@ x_gc_parse_attrs (XGCValues *values, repv attrs)
     return valueMask;
 }
 
+static repv
+new_gc (Drawable id, u_long mask, XGCValues *gcv)
+{
+    GC gc = XCreateGC (dpy, id, mask, gcv);
+    Lisp_X_GC *g = rep_ALLOC_CELL(sizeof(Lisp_X_GC));
+
+    rep_data_after_gc += sizeof (Lisp_X_GC);
+    g->car = x_gc_type;
+    g->next = x_gc_list;
+    x_gc_list = g;
+    g->gc = gc;
+    g->id = id;
+
+    return rep_VAL(g);
+}
+
 DEFUN("x-create-gc", Fx_create_gc, Sx_create_gc, (repv window, repv attrs), rep_Subr2) /*
 ::doc:x-create-gc::
 x-create-gc WINDOW ATTRS
@@ -175,10 +185,8 @@ mapping attributes to values. Known attributes are `foreground' and
 ::end:: */
 {
     Drawable id = drawable_from_arg (window);
-    Lisp_X_GC *g;
-    GC gc;
     XGCValues values;
-    long valueMask;
+    u_long valueMask;
 
     if (dpy == 0)
 	return Qnil;
@@ -187,17 +195,31 @@ mapping attributes to values. Known attributes are `foreground' and
     rep_DECLARE2(attrs, rep_LISTP);
 
     valueMask = x_gc_parse_attrs (&values, attrs);
-    gc = XCreateGC (dpy, id, valueMask, &values);
+    return new_gc (id, valueMask, &values);
+}
 
-    g = rep_ALLOC_CELL(sizeof(Lisp_X_GC));
-    rep_data_after_gc += sizeof (Lisp_X_GC);
-    g->car = x_gc_type;
-    g->next = x_gc_list;
-    x_gc_list = g;
-    g->gc = gc;
-    g->id = id;
+DEFUN("x-create-root-xor-gc", Fx_create_root_xor_gc,
+      Sx_create_root_xor_gc, (void), rep_Subr0) /*
+::doc:x-create-root-xor-gc:
+x-create-root-xor-gc
+::end:: */
+{
+    XGCValues gcv;
+    long black, white;
 
-    return rep_VAL(g);
+    if (dpy == 0)
+	return Qnil;
+
+    black = BlackPixel (dpy, screen_num);
+    white = WhitePixel (dpy, screen_num);
+    gcv.line_width = 0;
+    /* I don't understand this, but it works */
+    gcv.function = GXxor;
+    gcv.foreground = black ^ white;
+    gcv.plane_mask = black ^ white;
+    gcv.subwindow_mode = IncludeInferiors;
+    return new_gc (root_window, GCFunction | GCForeground
+		   | GCSubwindowMode | GCLineWidth | GCPlaneMask, &gcv);
 }
 
 DEFUN("x-change-gc", Fx_change_gc, Sx_change_gc, (repv gc, repv attrs), rep_Subr2) /*
@@ -957,6 +979,7 @@ rep_dl_init (void)
 				       x_gc_sweep, x_gc_mark,
 				       0, 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR(Sx_create_gc);
+    rep_ADD_SUBR(Sx_create_root_xor_gc);
     rep_ADD_SUBR(Sx_change_gc);
     rep_ADD_SUBR(Sx_destroy_gc);
     rep_ADD_SUBR(Sx_gc_p);
