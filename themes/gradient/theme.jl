@@ -85,11 +85,14 @@
 		'draw-vertical-gradient))
 	 img (if state
 		 (list gradient-active-from-color gradient-active-to-color)
-	       (list gradient-normal-from-color gradient-normal-to-color))))
+	       (list gradient-normal-from-color gradient-normal-to-color)))
+  (bevel-image img 1 (not (eq state 'clicked)))
+  (set-image-border img 1 1 1 1))
 
 (defvar gradient-frame
  `(;; title bar
    ((renderer . gradient-render-bg)
+    (render-scale . 2)
     (foreground . "black")
     (text . window-name)
     (x-justify . 30)
@@ -120,6 +123,7 @@
     (bottom-edge . -5))
    ;; bottom bar
    ((renderer . gradient-render-bg)
+    (render-scale . 2)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
@@ -147,6 +151,7 @@
 (defvar gradient-shaped-frame
  `(;; title bar
    ((renderer . gradient-render-bg)
+    (render-scale . 2)
     (foreground . "black")
     (text . window-name)
     (x-justify . 30)
@@ -196,6 +201,7 @@
 (defvar gradient-transient-frame
  `(;; title bar
    ((renderer . gradient-render-bg)
+    (render-scale . 2)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -4)
@@ -222,6 +228,7 @@
     (bottom-edge . -5))
    ;; bottom bar
    ((renderer . gradient-render-bg)
+    (render-scale . 2)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
@@ -239,6 +246,7 @@
 (defvar gradient-shaped-transient-frame
  `(;; title bar
    ((renderer . gradient-render-bg)
+    (render-scale . 2)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -5)
