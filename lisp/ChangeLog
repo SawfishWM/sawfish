@@ -1,5 +1,9 @@
 2000-02-21  John Harper  <john@dcs.warwick.ac.uk>
 
+	* edges.jl (edges-within-epsilon): only snap open edges into
+	closed edges and vice versa (and only when moving towards the
+	edge)
+
 	* configure.jl (configure-request-handler): handle all sorts of
 	weird cases for the `equal-ratio' hack (from John N S Gill
 	<jng@renre.com>, with extra cases added by me)
