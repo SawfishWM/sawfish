@@ -100,6 +100,17 @@
 		(throw 'out t)))
 	  (list-x-properties 'root))))
 
+;; load i18n support when necessary
+(unless batch-mode
+  (let
+      ((lang (getenv "LANG")))
+    (when (and lang (not (string= lang "C"))
+	       (not (get-command-line-option "--disable-nls")))
+      (require 'gettext)
+      (bindtextdomain
+       "sawmill" (expand-file-name "../locale" sawmill-lisp-lib-directory))
+      (textdomain "sawmill"))))
+
 ;; now connect with the session manager; gsm requires that apps don't
 ;; connect until they're ready to handle the later priority levels
 (let
