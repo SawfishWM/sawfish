@@ -251,7 +251,12 @@ by client window W."
 
 (defun current-head ()
   "Return the ID of the `current' head."
-  (find-head (query-pointer)))
+  (if (input-focus)
+      (let ((point (window-position (input-focus)))
+	    (dims (window-dimensions (input-focus))))
+	(find-head (+ (car point) (quotient (car dims) 2))
+		   (+ (cdr point) (quotient (cdr dims) 2))))
+    (find-head (query-pointer))))
 
 (defun current-head-dimensions ()
   (head-dimensions (current-head)))
