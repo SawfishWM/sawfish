@@ -293,6 +293,7 @@ again:
 	goto again;
     }
 
+    DB(("grab-pointer: time=%lu ret=%d\n", last_event_time, ret));
     return (ret == GrabSuccess) ? Qt : Qnil;
 }
 
@@ -308,6 +309,7 @@ Release the grab on the mouse pointer.
        ButtonRelease event needed to unclick any associated
        frame part, so.. */
     unclick_current_fp ();
+    DB(("ungrab-pointer: time=%lu\n", last_event_time));
     return Qt;
 }
 
@@ -342,6 +344,7 @@ again:
 	goto again;
     }
 
+    DB(("grab-keyboard: time=%lu ret=%d\n", last_event_time, ret));
     return (ret == GrabSuccess) ? Qt : Qnil;
 }
     
@@ -353,6 +356,7 @@ ungrab-keyboard
 Release the grab on the keyboard.
 ::end:: */
 {
+    DB(("ungrab-keyboard: time=%lu\n", last_event_time));
     XUngrabKeyboard (dpy, last_event_time);
     return Qt;
 }

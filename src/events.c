@@ -110,6 +110,8 @@ record_event_time (XEvent *ev)
 	actual_last_event_time = last_event_time;
 	break;
     }
+    DB(("  last_event_time=%lu actual_last_event_time=%lu\n",
+	last_event_time, actual_last_event_time));
 }
 
 static void
