@@ -80,12 +80,38 @@ Default Bindings
 
 The keymaps.jl script loads some initial event bindings, these include:
 
-In the window title bar (or the rest of the frame):
+Anywhere at all:
+
+	C-Left		previous-workspace
+	C-Right		next-workspace
+	M-TAB		cycle-windows
+
+In any managed window:
+
+	C-M-Up		raise-window
+	C-M-Down	lower-window
+	C-M-Left	send-to-previous-workspace
+	C-M-Right	send-to-next-workspace
+	M-Button1	move-window-interactively
+	M-Button2	popup-window-menu
+	M-Button3	raise-lower-window
+
+In the root window:
+
+	Button2		popup-root-menu
+
+In the window title bar:
 
 	Button1-Move	move-window-interactively
 	Button2-Move	resize-window-interctively
 	Button3		raise-lower-window
 	Button1-Click2	toggle-window-shaded [click2 = double-clicked]
+
+In the window borders:
+
+	Button1-Move	resize-window-interactively
+	Button2-Move	move-window-interactively
+	Button3		raise-lower-window
 
 In the menu button: [ this is the only button in the default
 `absolute-e' theme ]
@@ -109,27 +135,8 @@ In the maximize button:
 	Button2		maximize-window-verically-toggle
 	Button3		maximize-window-horizontally-toggle
 
-In any managed window:
-
-	C-M-Up		raise-window
-	C-M-Down	lower-window
-	C-M-Left	send-to-previous-workspace
-	C-M-Right	send-to-next-workspace
-	M-Button1	move-window-interactively
-	M-Button2	popup-window-menu
-	M-Button3	raise-lower-window
-
-In the root window:
-
-	Button2		popup-root-menu
-
-Anywhere at all:
-
-	C-Left		previous-workspace
-	C-Right		next-workspace
-	M-TAB		cycle-windows
-
-[ C- is the control key, M- is the meta key ]
+[ C- is the control key, M- is the meta key; other modifiers include
+`S-' (shift) and `A-' (alt) ]
 
 
 Notes

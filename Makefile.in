@@ -25,7 +25,7 @@ top_srcdir=@top_srcdir@
 
 SUBDIRS = src capplet lisp themes man
 
-all : build.h DOC.dir NEWS
+all : build.h DOC.dir NEWS FAQ
 	set -e; for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
  	done
@@ -62,6 +62,9 @@ DOC.dir :
 NEWS : man/news.texi
 	(cd man && $(MAKE) ../NEWS )
 
+FAQ : man/faq.texi
+	(cd man && $(MAKE) ../FAQ )
+
 clean :
 	-set -e; for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
@@ -73,7 +76,7 @@ realclean :
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
 	done
 	rm -f config.cache config.h config.log config.status Makedefs Makefile
-	rm -f *~ NEWS DOC.* TAGS build.h libtool
+	rm -f *~ NEWS DOC.* TAGS build.h sawmill.spec
 
 TAGS :
 	etags --language=c `find . -name '*.[ch]' -print` \

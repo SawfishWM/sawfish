@@ -24,7 +24,7 @@ top_srcdir=@top_srcdir@
 srcdir=@srcdir@
 VPATH=@srcdir@
 
-SRCS = sawmill.texi news.texi
+SRCS = sawmill.texi news.texi faq.texi
 
 MAKEINFO = makeinfo
 
@@ -38,6 +38,9 @@ all : sawmill.info ../NEWS
 
 ../NEWS : news.texi
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-headers $< -o ../NEWS
+
+../FAQ : faq.texi
+	$(MAKEINFO) $(MAKEINFOFLAGS) --no-validate --no-headers $< -o ../FAQ
 
 sawmill.info : $(SRCS)
 	$(MAKEINFO) $(MAKEINFOFLAGS) $< -o sawmill.info

@@ -15,6 +15,8 @@ they occurred between. For more detailed information see the
 default. Hold @key{Meta}, keep pressing @key{TAB} until the correct
 window is reached, then let go of @key{Meta}.
 
+@item Added first-fit window placement (a.k.a smart-placement)
+
 @item Completed first stage of workspace rewrite---shouldn't go
 ballistic when windows are removed anymore
 
@@ -37,6 +39,10 @@ keyboard events, disabled by default
 @item Removed the long names of the keyboard modifiers, only the single
 character modifiers are left
 
+@item If no alt modifier, set it to the same as meta; new variables
+@code{alt-keysyms} and @code{meta-keysyms} describe the virtual
+modifier assignments
+
 @item Fix bug when handling shaped frame parts---it was possible to go
 into a long enter-, leave-notify loop when the old shape was cleared
 
@@ -45,7 +51,7 @@ window as well as resizing it
 
 @item Fix bug when raising the only managed window
 
-@item Fix bug where very small client windows get weirdly shaped
+@item Fix bug where very small client windows got weirdly shaped
 frames
 
 @end itemize

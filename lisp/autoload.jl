@@ -51,4 +51,5 @@
 (autoload 'next-window "cycle" t)
 (autoload 'previous-window "cycle" t)
 (autoload 'cycle-windows "x-cycle" t)
+(autoload 'place-window-first-fit "smart-placement")
 ;;; ::autoload-end::

@@ -1,0 +1,80 @@
+@c -*- texinfo -*-
+
+@chapter Frequently Asked Questions
+
+@enumerate
+
+@item How do I bind a key to execute a shell command?
+
+This isn't yet possible through the configuration tool. However these
+bindings can be defined in your @file{~/.sawmillrc} file. For example:
+
+@lisp
+(bind-keys global-keymap
+  "C-M-ESC" '(system "xterm &"))
+@end lisp
+
+@noindent
+binds the event @kbd{C-M-ESC} to the Lisp code to start an @code{xterm}
+subprocess.
+
+
+@item How do I redefine the @samp{Applications} menu?
+
+See the @samp{Popup Menus} node in the Info manual (@pxref{Popup
+Menus})
+
+
+@item How do I get a grid of desktops?
+
+This isn't fully possibly at the moment. But you can approximate an
+@var{n}-by-@var{m} grid by doing the following:
+
+@enumerate
+@item Turn off the @samp{delete workspaces when empty} option
+
+@item Set the number of preallocated workspaces to @var{n} times @var{m}
+
+@item Add the following to your @file{~/.sawmillrc} file:
+
+@lisp
+(defvar workspace-grid-width @var{n})
+(bind-keys global-keymap
+  "C-Up"   '(select-workspace (- current-workspace
+                                 workspace-grid-width))
+  "C-Down" '(select-workspace (+ current-workspace
+                                 workspace-grid-width)))
+@end lisp
+@end enumerate
+
+The pager will still show a vector of workspaces, but it will feel more
+like a grid@dots{}
+
+
+@item Why don't you use GUILE?
+
+Mainly because I'm lazy; I had already written rep, and therefore
+understood it completely, whereas I have never used GUILE. Also, rep
+has some features not available in GUILE (byte-code compilation,
+autoloading, built-in event-loop, @dots{})
+
+But before you flame me: yes I do think scheme is a more elegant
+language
+
+
+@item Will you add feature @var{x}?
+
+Possibly. But only if it can be written in Lisp, or doesn't conflict
+with the overall design aims.
+
+These aims are to build a lightweight, generally applicable, set of
+core window management functions, then write @emph{all} high-level
+functionality as Lisp extensions
+
+
+@item Is there a sawmill mailing list?
+
+Not yet
+
+
+@end enumerate

@@ -91,6 +91,8 @@ last updated @value{UPDATED} for Sawmill version @value{VERSION}.
 * Standard Hooks::		Hooking into wm actions
 * Session Management::		Saving state across sessions
 
+* FAQ::				Frequently asked questions
+
 * Function Index::              Menu of all documented functions
 * Variable Index::              All variables which have been mentioned
 * Concept Index::               Main index, references to all sections
@@ -1823,6 +1825,15 @@ The standard X modifiers, for @var{k} between 1 and 5
 The @var{k}'th mouse button is currently pressed
 @end table
 
+Note that the @samp{M} and @samp{A} modifiers are virtual modifiers
+assigned dynamically, according to the X server's @code{xmodmap}
+configuration. The @samp{A} virtual modifier is assigned to the X
+modifier with either the @key{Alt_L} or @key{Alt_R} keysym assigned to
+it. The @samp{M} virtual modifier is assigned to the X modifier with
+either @key{Meta_L} or @key{Meta_R} assigned to it. If either of these
+two virtual modifiers would be unassigned it is set identically to the
+other virtual modifier.
+
 There are two special modifiers: the @samp{Any} prefix matches any set
 of modifiers; the @samp{Release} modifier matches key-release events
 instead of the default key-presses.
@@ -1867,6 +1878,19 @@ This function returns a string naming the input event @var{event}.
     @result{} "C-x"
 @end lisp
 @end defun
+
+The keysyms generating the two virtual modifiers may be identified
+through the following variables:
+
+@defvar meta-keysyms
+A list defining the names of the X keysyms generating the virtual
+@samp{M} modifier.
+@end defvar
+
+@defvar alt-keysyms
+A list defining the names of the X keysyms generating the virtual
+@samp{A} modifier.
+@end defvar
 
 
 @node Commands, Keymaps, Events, Top
@@ -2484,7 +2508,7 @@ Session management hooks, @ref{Session Management}.
 @end vtable
 
 
-@node Session Management, Function Index, Standard Hooks, Top
+@node Session Management, FAQ, Standard Hooks, Top
 @chapter Session Management
 @cindex Session management
 
@@ -2527,7 +2551,12 @@ any action dependent on the values.
 @end defvar
 
 
-@node Function Index, Variable Index, Session Management, Top
+@node FAQ, Function Index, Session Management, Top
+
+@include faq.texi
+
+
+@node Function Index, Variable Index, FAQ, Top
 @unnumbered Function Index
 
 @printindex fn
