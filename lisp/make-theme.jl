@@ -92,10 +92,7 @@
 
     (lambda (w type)
       (let
-	  ((frame-name (or (cdr (assq type mapping-alist))
-			   (cdr (assq 'default mapping-alist)))))
-	(if frame-name
-	    (or (cdr (assoc frame-name real-frames)) nil-frame)
-	  nil-frame)))))
+	  ((frame-name (or (cdr (assq type mapping-alist)))))
+	(and frame-name (cdr (assoc frame-name real-frames)))))))
 
 (gaol-add-function 'make-theme)
