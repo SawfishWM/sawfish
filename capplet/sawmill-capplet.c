@@ -36,7 +36,7 @@
 #endif
 
 #include <capplet-widget.h>
-#include <gdk/gdkprivate.h>
+#include <gdk/gdkx.h>
 
 static GtkWidget *ui_socket;
 static GtkWidget *capplet;
@@ -54,15 +54,6 @@ char *ui_argv[] = { "sawmill-ui",
 		    0 };
 #define UI_ARGV_SOCKET_SLOT 3
 #define UI_ARGV_GROUP_SLOT 5
-
-
-
-static guint32
-gdk_window_xid (GdkWindow *win)
-{
-    GdkWindowPrivate *pri = (GdkWindowPrivate *)win;
-    return pri->xwindow;
-}
 
 
 /* communicating with sawmill-ui */
@@ -126,12 +117,55 @@ sawmill_cancel (void)
 
 /* initialisation */
 
+/* returns non-zero if sawmill is running */
+static gint
+sawmill_running_p (void)
+{
+    GdkAtom xa_cardinal, xa_sawmill_request_win, actual_type;
+    gint format, length;
+    guchar *data, *data2;
+    gint ret = FALSE;
+
+    xa_cardinal = gdk_atom_intern ("CARDINAL", FALSE);
+    xa_sawmill_request_win = gdk_atom_intern ("_SAWMILL_REQUEST_WIN", FALSE);
+    if (gdk_property_get (0, xa_sawmill_request_win, xa_cardinal, 0, 4, FALSE,
+			  &actual_type, &format, &length, &data))
+    {
+	if (format == 32 && length == 4)
+	{
+	    guint32 xid = *(guint32 *)data;
+	    GdkWindow *win = gdk_window_foreign_new (xid);
+	    if (win != 0
+		&& gdk_property_get (win, xa_sawmill_request_win,
+				     xa_cardinal, 0, 4, FALSE, &actual_type,
+				     &format, &length, &data2))
+	    {
+		if (format == 32 && length == 4)
+		{
+		    guint32 xid2 = *(guint32 *)data;
+		    if (xid == xid2)
+			ret = TRUE;
+		}
+		g_free (data2);
+	    }
+	}
+	g_free (data);
+    }
+    return ret;
+}
+
 static void
 sawmill_setup (void)
 {
-    ui_socket = gtk_socket_new ();
     capplet = capplet_widget_new ();
-    
+
+    if (!sawmill_running_p ())
+    {
+	GtkWidget *label = gtk_label_new ("[Sawmill isn't running]");
+	gtk_container_add (GTK_CONTAINER (capplet), label);
+	return;
+    }
+
     gtk_signal_connect (GTK_OBJECT (capplet), "help",
 			GTK_SIGNAL_FUNC (sawmill_help), NULL);
     gtk_signal_connect (GTK_OBJECT (capplet), "try",
@@ -143,7 +177,10 @@ sawmill_setup (void)
     gtk_signal_connect (GTK_OBJECT (capplet), "cancel",
 			GTK_SIGNAL_FUNC (sawmill_cancel), NULL);
  
+    ui_socket = gtk_socket_new ();
     gtk_container_add (GTK_CONTAINER (capplet), ui_socket);
+
+    /* show this here so the widget gets realized */
     gtk_widget_show_all (capplet);
 
     /* now fork the sawmill-ui script */
@@ -161,7 +198,7 @@ sawmill_setup (void)
 	close (ui_stdin[1]);
 	dup2 (ui_stdout[1], 1);
 	close (ui_stdout[0]);
-	sprintf (buf, "%d", gdk_window_xid (ui_socket->window));
+	sprintf (buf, "%ld", (long)GDK_WINDOW_XWINDOW (ui_socket->window));
 	ui_argv[UI_ARGV_SOCKET_SLOT] = buf;
 	if (group != 0)
 	    ui_argv[UI_ARGV_GROUP_SLOT] = group;
@@ -241,6 +278,7 @@ main (int argc, char **argv)
 
     if (init_results != 1) {
 	sawmill_setup ();
+	gtk_widget_show_all (capplet);
 	capplet_gtk_main ();
 	if (ui_pid != 0)
 	    waitpid (ui_pid, 0, 0);
