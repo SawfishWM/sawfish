@@ -97,7 +97,7 @@ list of windows below W (from top to bottom). If the constraint holds
 for a particular stacking configuration, it will return non-`nil'."
   (combine-constraints
    (mapcar (lambda (c) (c w))
-	   (case transients-above
+	   (case (or (window-get w 'transients-above) transients-above)
 	     ((parents)
 	      (cons stacking-constraint:transients-above-parent
 		    basic-stacking-constraints))
