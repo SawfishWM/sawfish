@@ -1,3 +1,20 @@
+2000-10-22  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/maximize.jl (maximize-find-workarea): new
+	parameter #:head
+
+	Integrated a patch from Geoff Reedy <vader21@imsa.edu> to
+	support Xinerama better
+
+	* sawfish/wm/commands/x-cycle.jl (cycle-display-message): put
+	the message on the head associated with the window
+
+	* sawfish/wm/placement.jl (place-window-under-pointer): centre
+	on the head under the pointer, not the current head
+
+	* sawfish/wm/misc.jl (pointer-head): new function, returns the
+	head that the pointer is on
+
 2000-10-20  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/util/nokogiri.jl (nokogiri-report-commands): use
