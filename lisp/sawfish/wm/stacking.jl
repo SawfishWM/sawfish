@@ -350,10 +350,9 @@ lowest possible position. Otherwise raise it as far as allowed."
   (define (apply-group-order order first successor)
     (when order
       (first (car order))
-      (let loop ((rest order))
-	(when (cdr rest)
-	  (successor (cadr rest) (car rest))
-	  (loop (cdr rest))))))
+      (do ((rest order (cdr rest)))
+	  ((null (cdr rest)))
+	(successor (cadr rest) (car rest)))))
 
   (define (raise-windows w order)
     ;; STRATEGY: take every window in ORDER to its highest possible
