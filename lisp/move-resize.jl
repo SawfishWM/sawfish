@@ -74,6 +74,7 @@
 (defvar move-resize-frame nil)
 (defvar move-resize-edges nil)
 (defvar move-resize-last-outline nil)
+(defvar move-resize-moving-edges nil)
 
 ;; called to initiate a move or resize on window W. FUNCTION is either
 ;; `move' or `resize'
@@ -119,6 +120,7 @@
 				  ':windows-to-ignore (list w)
 				  ':include-root t))))
        (move-resize-last-outline nil)
+       (move-resize-moving-edges nil)
        (frame-draw-mutex (not (eq move-resize-mode 'opaque)))
        server-grabbed)
     (unless (eq move-resize-mode 'opaque)
@@ -138,6 +140,8 @@
 				(+ move-resize-width (car move-resize-frame))
 				(+ move-resize-height (cdr move-resize-frame))))
 		    (apply 'draw-window-outline move-resize-last-outline))
+		  (when (eq move-resize-function 'resize)
+		    (move-resize-infer-anchor))
 		  (catch 'move-resize-done
 		    (when from-motion-event
 		      (move-resize-motion))
@@ -165,18 +169,42 @@
 	   (setq move-resize-y (+ move-resize-old-y
 				  (- ptr-y move-resize-old-ptr-y))))
 	  ((eq move-resize-function 'resize)
-	   (setq move-resize-width
-		 (move-resize-roundup
-		  (+ move-resize-old-width (- ptr-x move-resize-old-ptr-x))
-		  (or (cdr (assq 'width-inc move-resize-hints)) 1)
-		  (or (cdr (or (assq 'base-width move-resize-hints)
-			       (assq 'min-width move-resize-hints))) 1)))
-	   (setq move-resize-height
-		 (move-resize-roundup
-		  (+ move-resize-old-height (- ptr-y move-resize-old-ptr-y))
-		  (or (cdr (assq 'height-inc move-resize-hints)) 1)
-		  (or (cdr (or (assq 'base-height move-resize-hints)
-			       (assq 'min-height move-resize-hints))) 1)))))
+	   (cond
+	    ((memq 'right move-resize-moving-edges)
+	     (setq move-resize-width
+		   (move-resize-roundup
+		    (+ move-resize-old-width (- ptr-x move-resize-old-ptr-x))
+		    (or (cdr (assq 'width-inc move-resize-hints)) 1)
+		    (or (cdr (or (assq 'base-width move-resize-hints)
+				 (assq 'min-width move-resize-hints))) 1))))
+	    ((memq 'left move-resize-moving-edges)
+	     (setq move-resize-width
+		   (move-resize-roundup
+		    (+ move-resize-old-width (- move-resize-old-ptr-x ptr-x))
+		    (or (cdr (assq 'width-inc move-resize-hints)) 1)
+		    (or (cdr (or (assq 'base-width move-resize-hints)
+				 (assq 'min-width move-resize-hints))) 1)))
+	     (setq move-resize-x (- move-resize-old-x
+				    (- move-resize-width
+				       move-resize-old-width)))))
+	   (cond
+	    ((memq 'bottom move-resize-moving-edges)
+	     (setq move-resize-height
+		   (move-resize-roundup
+		    (+ move-resize-old-height (- ptr-y move-resize-old-ptr-y))
+		    (or (cdr (assq 'height-inc move-resize-hints)) 1)
+		    (or (cdr (or (assq 'base-height move-resize-hints)
+				 (assq 'min-height move-resize-hints))) 1))))
+	    ((memq 'top move-resize-moving-edges)
+	     (setq move-resize-height
+		   (move-resize-roundup
+		    (+ move-resize-old-height (- move-resize-old-ptr-y ptr-y))
+		    (or (cdr (assq 'height-inc move-resize-hints)) 1)
+		    (or (cdr (or (assq 'base-height move-resize-hints)
+				 (assq 'min-height move-resize-hints))) 1)))
+	     (setq move-resize-y (- move-resize-old-y
+				    (- move-resize-height
+				       move-resize-old-height)))))))
     (if (eq move-resize-mode 'opaque)
 	(move-resize-apply)
       (if (and (eq move-resize-function 'move) move-snap-edges)
@@ -205,18 +233,39 @@
 
 ;; commit the current state of the move or resize
 (defun move-resize-apply ()
-  (cond ((eq move-resize-function 'move)
-	 (if (not move-snap-edges)
-	     (move-window-to move-resize-window move-resize-x move-resize-y)
-	   (let
-	       ((coords (snap-window-position-to-edges
-			 move-resize-window
-			 (cons move-resize-x move-resize-y)
-			 move-snap-epsilon move-resize-edges)))
-	     (move-window-to move-resize-window (car coords) (cdr coords)))))
-	((eq move-resize-function 'resize)
-	 (resize-window-to move-resize-window
-			   move-resize-width move-resize-height))))
+  (if (not move-snap-edges)
+      (unless (and (= move-resize-old-x move-resize-x)
+		   (= move-resize-old-y move-resize-y))
+	(move-window-to move-resize-window move-resize-x move-resize-y))
+    (let
+	((coords (snap-window-position-to-edges
+		  move-resize-window
+		  (cons move-resize-x move-resize-y)
+		  move-snap-epsilon move-resize-edges)))
+      (move-window-to move-resize-window (car coords) (cdr coords))))
+  (unless (and (= move-resize-old-width move-resize-width)
+	       (= move-resize-old-height move-resize-height))
+    (resize-window-to move-resize-window
+		      move-resize-width move-resize-height)))
+
+;; called when moving, tries to decide which edges to move, which to stick
+(defun move-resize-infer-anchor ()
+  (cond ((<= (- move-resize-old-ptr-x move-resize-old-x)
+	    (/ move-resize-old-width 3))
+	 (setq move-resize-moving-edges
+	       (cons 'left move-resize-moving-edges)))
+	((>= (- move-resize-old-ptr-x move-resize-old-x)
+	     (* (/ move-resize-old-width 3) 2))
+	 (setq move-resize-moving-edges
+	       (cons 'right move-resize-moving-edges))))
+  (cond ((<= (- move-resize-old-ptr-y move-resize-old-y)
+	    (/ move-resize-old-height 3))
+	 (setq move-resize-moving-edges
+	       (cons 'top move-resize-moving-edges)))
+	((>= (- move-resize-old-ptr-y move-resize-old-y)
+	     (* (/ move-resize-old-height 3) 2))
+	 (setq move-resize-moving-edges
+	       (cons 'bottom move-resize-moving-edges)))))
 
 
 ;; Entry points
