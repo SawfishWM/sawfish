@@ -29,9 +29,7 @@ parameter, the window that's has just been adopted
 
 @item New functions @code{x-kill-client}, @code{delete-window-safely}.
 @code{send-client-message} now groks long integers (i.e. cons cells) in
-32-bit data (Timo ??)
-
-XXXXXXXXXXXXXXX
+32-bit data (Timo Korvola)
 
 @item @code{window-put}, @code{window-get}, @code{image-put},
 @code{image-get}, @code{font-put}, @code{font-get}: use @code{equal} to
@@ -62,6 +60,10 @@ shorten sticky entries as usual (James Antill)
 mouse pointer; these commands are bound to the cursor keys when moving
 or resizing windows
 
+@item Translation updates: es (Iñaki García Etxebarria), fr (Fabien
+Ninoles), gl (Jesus Bravo Alvarez), ja (Satoru Sato), nl (Jan
+Nieuwenhuizen), tr (Fâtih Demir)
+
 @item Fix bug of leaving window-name unset when @code{WM_NAME} is a
 null text property
 
@@ -78,6 +80,10 @@ null text property
 @code{move-workspace-backwards} commands
 
 @item Fixed @code{uniconify-to-current-viewport} option
+
+@item Fixed infinite-loop bug in @code{delete-empty-workspaces} command
+
+@item Avoid generating empty sub-menus when reading GNOME menu tree
 
 @end itemize
 
