@@ -912,6 +912,7 @@ defines the color of its pixels.
     else
 	r = g = b = 0;
 
+#if defined HAVE_IMLIB
     data = rep_alloc (rep_INT(width) * rep_INT(height) * 3);
     if (data != 0)
     {
@@ -923,14 +924,25 @@ defines the color of its pixels.
 	    data[i+1] = g;
 	    data[i+2] = b;
 	}
-#if defined HAVE_IMLIB
 	im = Imlib_create_image_from_data (imlib_id, data, 0,
 					   rep_INT(width), rep_INT(height));
 	rep_free (data);
 #elif defined HAVE_GDK_PIXBUF
-	im = gdk_pixbuf_new_from_data (data, GDK_COLORSPACE_RGB, FALSE,
+    data = rep_alloc (rep_INT(width) * rep_INT(height) * 4);
+    if (data != 0)
+    {
+	image_t im;
+	int i;
+	for (i = 0; i < rep_INT(width) * rep_INT(height) * 4; i += 4)
+	{
+	    data[i] = r;
+	    data[i+1] = g;
+	    data[i+2] = b;
+	    data[i+3] = 255;
+	}
+	im = gdk_pixbuf_new_from_data (data, GDK_COLORSPACE_RGB, TRUE,
 				       8, rep_INT (width), rep_INT (height),
-				       rep_INT (width) * 3,
+				       rep_INT (width) * 4,
 				       free_pixbuf_data, data);
 #endif
 	if (im != 0)
@@ -989,6 +1001,135 @@ Tile SOURCE-IMAGE into DEST-IMAGE.
     return dst;
 }
     
+DEFUN("scale-image", Fscale_image, Sscale_image,
+      (repv img, repv w, repv h), rep_Subr3) /*
+::doc:scale-image::
+scale-image IMAGE WIDTH HEIGHT
+
+Return a new image object, a copy of the contents of IMAGE, but scaled
+to WIDTH by HEIGHT pixels.
+::end:: */
+{
+    image_t copy;
+
+    rep_DECLARE1 (img, IMAGEP);
+    rep_DECLARE (2, w, rep_INTP (w) && rep_INT (w) > 0);
+    rep_DECLARE (3, h, rep_INTP (h) && rep_INT (h) > 0);
+
+    /* XXX don't these handle borders differently..? */
+#if defined HAVE_IMLIB
+    copy = Imlib_clone_scaled_image (imlib_id, VIMAGE (img)->image,
+				     rep_INT (w), rep_INT (h));
+#elif defined HAVE_GDK_PIXBUF
+    copy = gdk_pixbuf_scale_simple (VIMAGE (img)->image,
+				    rep_INT (w), rep_INT (h),
+				    interp_type);
+#endif
+
+    if (copy != 0)
+	return make_image (copy, Fcopy_sequence (VIMAGE (img)->plist));
+    else
+	return rep_mem_error ();
+}
+
+DEFUN ("composite-images", Fcomposite_images,
+       Scomposite_images, (repv img1, repv img2, repv x, repv y), rep_Subr4) /*
+::doc:composite-images::
+composite-images DEST-IMAGE SRC-IMAGE [X Y]
+
+Modify DEST-IMAGE by compositing SRC-IMAGE onto its current contents,
+at position (X, Y), or (0, 0) if no position is given.
+::end:: */
+{
+    int w1, h1, w2, h2;
+
+    rep_DECLARE1 (img1, IMAGEP);
+    rep_DECLARE2 (img2, IMAGEP);
+
+    if (x == Qnil)
+	x = rep_MAKE_INT (0);
+    else
+	rep_DECLARE (3, x, rep_INTP (x) && rep_INT (x) >= 0);
+
+    if (y == Qnil)
+	y = rep_MAKE_INT (0);
+    else
+	rep_DECLARE (4, y, rep_INTP (y) && rep_INT (y) >= 0);
+
+    w1 = image_width (VIMAGE (img1));
+    h1 = image_height (VIMAGE (img1));
+    w2 = image_width (VIMAGE (img2));
+    h2 = image_height (VIMAGE (img2));
+
+    w2 = MAX (w2, w1 - rep_INT (x));
+    h2 = MAX (h2, h1 - rep_INT (y));
+    
+#if defined HAVE_IMLIB
+    /* XXX implement me */
+    fprintf (stderr, "image compositing is unimplemented for Imlib\n");
+#elif defined HAVE_GDK_PIXBUF
+    {
+	GdkPixbuf *out = VIMAGE (img1)->image;
+	gdk_pixbuf_composite (VIMAGE (img2)->image, out,
+			      rep_INT (x), rep_INT (y),
+			      w1, h1, 0.0, 0.0, 1.0, 1.0,
+			      interp_type, 255);
+    }
+#endif
+
+    image_changed (VIMAGE (img1));
+    return img1;
+}
+
+DEFUN ("crop-image", Fcrop_image, Scrop_image,
+       (repv img, repv x, repv y, repv w, repv h), rep_Subr5) /*
+::doc:crop-image::
+crop-image IMAGE X Y WIDTH HEIGHT
+
+Return a new image, with dimensions WIDTH by HEIGHT. A copy of the
+contents of IMAGE starting at position (X, Y).
+::end:: */
+{
+    int img_w, img_h;
+    image_t out;
+
+    rep_DECLARE1 (img, IMAGEP);
+    img_w = image_width (VIMAGE (img));
+    img_h = image_height (VIMAGE (img));
+
+    rep_DECLARE (2, x, rep_INTP (x) && rep_INT (x) >= 0);
+    rep_DECLARE (3, y, rep_INTP (y) && rep_INT (y) >= 0);
+    rep_DECLARE (4, w, rep_INTP (w) && rep_INT (w) > 0
+		 && rep_INT (w) <= (img_w - rep_INT (x)));
+    rep_DECLARE (5, h, rep_INTP (h) && rep_INT (y) > 0
+		 && rep_INT (h) <= (img_h - rep_INT (y)));
+
+#if defined HAVE_IMLIB
+    out = Imlib_crop_and_clone_image (imlib_id, VIMAGE (img)->image,
+				      rep_INT (x), rep_INT (y),
+				      rep_INT (w), rep_INT (h));
+#elif defined HAVE_GDK_PIXBUF
+    {
+	GdkPixbuf *in = VIMAGE (img)->image;
+	out = gdk_pixbuf_new (gdk_pixbuf_get_colorspace (in),
+			      gdk_pixbuf_get_has_alpha (in),
+			      gdk_pixbuf_get_bits_per_sample (in),
+			      rep_INT (w), rep_INT (h));
+	if (out != 0)
+	{
+	    gdk_pixbuf_copy_area (in, rep_INT (x), rep_INT (y),
+				  rep_INT (w), rep_INT (h),
+				  out, 0, 0);
+	}
+    }
+#endif
+
+    if (out != 0)
+	return make_image (out, Fcopy_sequence (VIMAGE (img)->plist));
+    else
+	return rep_mem_error ();
+}
+
 
 /* image structure accessors */
 
@@ -1310,8 +1451,23 @@ set_pixel (Lisp_Image *im, int x, int y, repv pixel)
     if (length == 3 || length == 4)
     {
 	int nchannels = image_channels (im);
-	u_char *data = (image_pixels (im)
-			+ (y * image_row_stride (im)) + (x * nchannels));
+	int alpha = (length > 3) ? rep_INT (rep_CADDDR (pixel)) : 255;
+	u_char *data;
+
+#ifdef HAVE_GDK_PIXBUF
+	if (alpha != 255 && nchannels < 4)
+	{
+	    GdkPixbuf *new = gdk_pixbuf_add_alpha (im->image, FALSE, 0, 0, 0);
+	    if (new != 0)
+	    {
+		gdk_pixbuf_unref (im->image);
+		im->image = new;
+		nchannels = image_channels (im);
+	    }
+	}
+#endif
+	data = (image_pixels (im)
+		+ (y * image_row_stride (im)) + (x * nchannels));
 #ifdef HAVE_IMLIB
 	if (length > 3 && rep_INT (rep_CADDDR (pixel)) < 128)
 	{
@@ -1325,11 +1481,12 @@ set_pixel (Lisp_Image *im, int x, int y, repv pixel)
 	else
 #endif
 	{
+		
 	    data[0] = rep_INT (rep_CAR (pixel));
 	    data[1] = rep_INT (rep_CADR (pixel));
 	    data[2] = rep_INT (rep_CADDR (pixel));
 	    if (nchannels > 3)
-		data[3] = (length > 3) ? rep_INT (rep_CADDDR (pixel)) : 255;
+		data[3] = alpha;
 	}
     }
 }
@@ -1486,7 +1643,8 @@ static void
 image_prin (repv stream, repv obj)
 {
     char buf[256];
-    sprintf (buf, "#<image %p>", rep_STR(VIMAGE(obj)->image));
+    sprintf (buf, "#<image %dx%d>",
+	     image_width (VIMAGE (obj)), image_height (VIMAGE (obj)));
     rep_stream_puts (stream, buf, -1, FALSE);
 }
 
@@ -1575,6 +1733,9 @@ images_init (void)
     rep_ADD_SUBR(Sbevel_image);
     rep_ADD_SUBR(Sclear_image);
     rep_ADD_SUBR(Stile_image);
+    rep_ADD_SUBR(Sscale_image);
+    rep_ADD_SUBR(Scomposite_images);
+    rep_ADD_SUBR(Scrop_image);
     rep_ADD_SUBR(Simage_ref);
     rep_ADD_SUBR(Simage_set);
     rep_ADD_SUBR(Simage_map);
