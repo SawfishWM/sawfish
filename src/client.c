@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #ifdef HAVE_LIBREADLINE
 # include <readline/readline.h>
@@ -32,6 +33,89 @@
 #endif
 
 int opt_quiet = 0;		/* don't print results */
+
+
+/* Symbol completion */
+
+#ifdef HAVE_LIBREADLINE
+
+static char *
+completion_generator (char *word, int state)
+{
+    static char *last_buffer, *buffer_end, *next_word;
+
+    if (state == 0)
+    {
+	/* first call; generate the list */
+	int len;
+	char *form = malloc (strlen (word) + 64);
+	char *in, *out;
+	if (last_buffer != 0)
+	{
+	    free (last_buffer);
+	    last_buffer = 0;
+	    next_word = 0;
+	}
+	strcpy (form, "(apropos \"^");
+	in = word;
+	out = form + strlen ("(apropos \"^");
+	while (*in != 0)
+	{
+	    switch (*in)
+	    {
+	    case '*': case '+': case '?': case '.':
+	    case '[': case ']': case '(': case ')':
+	    case '|': case '^': case '$': case '\\':
+		*out++ = '\\';
+		*out++ = *in++;
+		break;
+	    default:
+		*out++ = *in++;
+	    }
+	}
+	strcpy (out, "\")");
+	last_buffer = client_eval (form, 0, &len);
+	if (last_buffer != 0)
+	{
+	    if (strcmp (last_buffer, "nil") == 0)
+	    {
+		free (last_buffer);
+		last_buffer = 0;
+	    }
+	    else
+	    {
+		buffer_end = last_buffer + len;
+		next_word = last_buffer + 1;
+	    }
+	}
+	free (form);
+    }
+
+    if (next_word != 0)
+    {
+	char *tem = next_word + strcspn (next_word, " )");
+	if (tem != next_word)
+	{
+	    char *this = malloc (tem - next_word + 1);
+	    memcpy (this, next_word, tem - next_word);
+	    this[tem - next_word] = 0;
+
+	    if (tem == buffer_end - 1)
+	    {
+		free (last_buffer);
+		last_buffer = 0;
+	        next_word = 0;
+	    }
+	    else
+		next_word = tem + 1;
+
+	    return this;
+	}
+    }
+    return 0;
+}
+
+#endif
 
 
 
@@ -75,6 +159,8 @@ main(int argc, char *argv[])
     int i;
 #ifdef HAVE_LIBREADLINE
     char *user_input = 0;
+
+    rl_completion_entry_function = (void *)completion_generator;
 #endif
 
     argc--; argv++;
