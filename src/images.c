@@ -277,7 +277,7 @@ DEFUN("image-modifier", Fimage_modifier, Simage_modifier,
 image-modifier IMAGE TYPE
 
 TYPE may be one of nil, red, green, blue. returned modifier is
-(GAMMA BRIGHTNESS CONTRAST).
+(GAMMA BRIGHTNESS CONTRAST). All values range from 0 to 255.
 ::end:: */
 {
     ImlibColorModifier modifier;
@@ -300,7 +300,7 @@ DEFUN("set-image-modifier", Fset_image_modifier, Sset_image_modifier,
 set-image-modifier IMAGE TYPE MODIFIER
 
 TYPE may be one of nil, red, green, blue. MODIFIER is (GAMMA BRIGHTNESS
-CONTRAST).
+CONTRAST). These are integers ranging from 0 to 255.
 ::end:: */
 {
     ImlibColorModifier modifier;
