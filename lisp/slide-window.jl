@@ -35,21 +35,25 @@
 
 ;;;###autoload
 (defun slide-window-left (w)
+  "Move the window `slide-window-increment' pixels to the left."
   (interactive "%W")
   (slide-window w (- slide-window-increment) 0))
 
 ;;;###autoload
 (defun slide-window-right (w)
+  "Move the window `slide-window-increment' pixels to the right."
   (interactive "%W")
   (slide-window w slide-window-increment 0))
 
 ;;;###autoload
 (defun slide-window-up (w)
+  "Move the window `slide-window-increment' pixels upwards."
   (interactive "%W")
   (slide-window w 0 (- slide-window-increment)))
 
 ;;;###autoload
 (defun slide-window-down (w)
+  "Move the window `slide-window-increment' pixels downwards."
   (interactive "%W")
   (slide-window w 0 slide-window-increment))
 
@@ -58,20 +62,24 @@
 
 ;;;###autoload
 (defun slide-group-left (w)
+  "Move the window group `slide-window-increment' pixels to the left."
   (interactive "%W")
   (map-window-group slide-window-left w))
 
 ;;;###autoload
 (defun slide-group-right (w)
+  "Move the window group `slide-window-increment' pixels to the right."
   (interactive "%W")
   (map-window-group slide-window-right w))
 
 ;;;###autoload
 (defun slide-group-up (w)
+  "Move the window group `slide-window-increment' pixels upwards."
   (interactive "%W")
   (map-window-group slide-window-up w))
 
 ;;;###autoload
 (defun slide-group-down (w)
+  "Move the window group `slide-window-increment' pixels downwards."
   (interactive "%W")
   (map-window-group slide-window-down w))
