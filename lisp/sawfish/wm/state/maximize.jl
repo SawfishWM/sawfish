@@ -314,14 +314,14 @@
 
 ;;; misc functions
 
-  (define (maximize-find-workarea #!optional w)
+  (define (maximize-find-workarea #!optional w #!key head)
     "Return the rectangle representing the largest rectangle on the screen that
 doesn't overlap any avoided windows, or nil."
     (let* ((avoided (avoided-windows w))
 	   (edges (get-visible-window-edges
 		   #:with-ignored-windows t
 		   #:windows avoided
-		   #:include-heads (list (current-head)))))
+		   #:include-heads (list (or head (current-head))))))
       (find-max-rectangle avoided edges (current-head w))))
 
 
