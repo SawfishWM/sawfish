@@ -36,7 +36,7 @@
     map-window-group window-group-ids
 
     get-window-by-name save-stacking-order uniquify-list
-    call-after-property-changed
+    call-after-property-changed call-after-state-changed
 
     draw-vertical-gradient draw-horizontal-gradient draw-diagonal-gradient))
 
