@@ -98,6 +98,14 @@
 
 ;; kludge different window decors by modifying the assumed window type
 
+;; The different window types are:
+
+;;	default			title bar and border
+;;	transient		border only
+;;	shaped			title-bar only
+;;	shaped-transient	border-like title-bar only
+;;	unframed		no frame at all
+
 (defun window-type (w)
   (or (window-get w 'type)
       (if (window-transient-p w)
@@ -112,7 +120,7 @@
   (cond ((eq type 'default)
 	 'transient)
 	((eq type 'shaped)
-	 'shaped-transient)
+	 'unframed)
 	(t
 	 type)))
 
@@ -120,14 +128,14 @@
   (cond ((eq type 'default)
 	 'shaped)
 	((eq type 'transient)
-	 'shaped-transient)
+	 'unframed)
 	(t
 	 type)))
 
 (defun window-type-add-title (type)
   (cond ((eq type 'transient)
 	 'default)
-	((eq type 'shaped-transient)
+	((eq type 'unframed)
 	 'shaped)
 	(t
 	 type)))
@@ -135,7 +143,7 @@
 (defun window-type-add-border (type)
   (cond ((eq type 'shaped)
 	 'default)
-	((eq type 'shaped-transient)
+	((eq type 'unframed)
 	 'transient)
 	(t
 	 type)))
