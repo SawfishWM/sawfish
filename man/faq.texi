@@ -178,4 +178,18 @@ If you need an EFNet server, check www.efnet.net for a listing.
 @end quotation
 
 
+@item Why does sawmill look weird/crash on Solaris?
+
+Sawmill works stably on Solaris, but you may need to do two things:
+
+@enumerate
+@item
+Disable use of MIT-SHM by Imlib (run the program @code{imlib_config},
+the MIT-SHM option is on the @samp{Rendering} page)
+
+@item
+Recompile GTK+ using the @samp{--disable-xim} option to configure
+@end enumerate
+
+
 @end enumerate
