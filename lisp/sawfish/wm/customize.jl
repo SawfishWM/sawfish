@@ -88,7 +88,8 @@
 
 (defun customize-sentinel (process)
   (when (and customize-process (not (process-in-use-p customize-process)))
-    (setq customize-process nil)))
+    (setq customize-process nil)
+    (customize-write-user-file)))
 
 
 ;; ui
