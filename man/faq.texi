@@ -25,6 +25,21 @@ This file is loaded @emph{after} @file{sawmill-defaults}, but @emph{before}
 @end table
 
 
+@item I created @file{.sawmillrc}, now things have changed?
+
+If a @file{~/.sawmillrc} file exists, it prevents
+@file{sawmill-defaults} from being loaded. But it's
+@file{sawmill-defaults} that loads some of the common window manager
+features, so add the line
+
+@lisp
+(require 'sawmill-defaults)
+@end lisp
+
+@noindent to your @file{.sawmillrc} file if you want to start with all
+the standard features loaded.
+
+
 @item What's this @code{sawmill-client} program?
 
 This allows you to connect to a window manager process and evaluate

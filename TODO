@@ -11,13 +11,8 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
-  ! unable to snap to the same position as the previous move snapped to
-    To trigger the bug, snap one window to the bottom of another. 
-    Next, grab the bottom window and move it downward, then back up
-    (without releasing the mouse button) to snap back to the edge where
-    it started
-
-    [ 28/1: I can't reproduce this anymore, is it fixed? ]
+  ! Snap to edge does not work if I'm switching viewport while dragging
+    the window around.
 
   ! set auto-raise and Panel ``keep panel below'' option, then start a
     GTK app (e.g. gnomecal), activating an app-menu can get obscured by
@@ -84,6 +79,15 @@ Outstanding bugs
 
 Window manager tasks
 ====================
+
+  + revamp the autoload system, and handle both customizations and
+    functions
+
+    scan all lisp files in directories outside of lisp-lib-directory
+    and sawmill-lisp-lib-directory for autoload decls
+
+    make sawmill-ui extract defcustom decls straight from lisp files
+    somehow?
 
   + add property take-focus (focus when window appears)
 
