@@ -146,22 +146,27 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	(set-input-focus w))
       (focus-pop-map w)
       ;; do we need to do anything with the event?
-      (when (and event (or (window-get w 'focus-click-through)
-			   focus-click-through
-			   (not (window-really-wants-input-p w))))
-	;; allow-events called with replay-pointer ignores any passive
-	;; grabs on the window, thus if the wm has a binding in the
-	;; window's keymap, it would be ignored. So search manually..
-	(let ((command (lookup-event-binding event)))
-	  (cond (command
-		 (call-command command))
-		((not (progn
-			(require 'sawfish.wm.util.decode-events)
-			(should-grab-button-event-p
-			 event (window-get w 'keymap))))
-		 ;; pass the event through to the client window unless we
-		 ;; need to keep the grab for the events that would follow
-		 (allow-events 'replay-pointer)))))
+      (if (and event (or (window-get w 'focus-click-through)
+			 focus-click-through
+			 (not (window-really-wants-input-p w))))
+	  ;; allow-events called with replay-pointer ignores any passive
+	  ;; grabs on the window, thus if the wm has a binding in the
+	  ;; window's keymap, it would be ignored. So search manually..
+	  (let ((command (lookup-event-binding event)))
+	    (cond (command
+		   (call-command command))
+		  ((not (progn
+			  (require 'sawfish.wm.util.decode-events)
+			  (should-grab-button-event-p
+			   event (window-get w 'keymap))))
+		   ;; pass the event through to the client window unless we
+		   ;; need to keep the grab for the events that would follow
+		   (allow-events 'replay-pointer))))
+	;; ungrab the pointer so that the non-click-through thing
+	;; works for window decorations as well as the client
+	;; (does this break anything?)
+	(unless (window-really-wants-input-p w)
+	  (ungrab-pointer)))
       ;; set-input-focus may not actually change the focus
       (unless (eq (input-focus) w)
 	(focus-push-map w click-to-focus-map))))
