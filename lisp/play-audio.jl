@@ -31,6 +31,13 @@
 			      ".")
   "List of directories to search for sound samples.")
 
+(defcustom play-sample-program nil
+  "The program used to play audio samples. If unset, built-in support for \
+ESD is used."
+  :type program-name
+  :allow-nil t
+  :group audio)
+
 ;;;###autoload
 (defun play-sample (filename)
   "Play the audio sample stored in file FILENAME."
@@ -44,7 +51,9 @@
       (setq real-name (make-temp-name))
       (copy-file filename real-name)
       (setq delete-it t))
-    (require 'play-sample)
-    (primitive-play-sample real-name)
+    (if play-sample-program
+	(call-process nil nil play-sample-program real-name)
+      (require 'play-sample)
+      (primitive-play-sample real-name))
     (when delete-it
       (delete-file real-name))))
