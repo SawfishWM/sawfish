@@ -77,7 +77,7 @@
 
   (define (shade-hover-before)
     (let ((w (current-event-window)))
-      (when (and w (window-get w 'shade-hover-unshaded))
+      (when (and (windowp w) (window-get w 'shade-hover-unshaded))
 	(case this-command
 	  ((toggle-window-shaded unshade-window)
 	   ;; don't want window to shade then unshade
