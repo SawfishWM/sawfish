@@ -184,7 +184,9 @@ extern void functions_kill (void);
 
 /* from images.c */
 extern int image_type;
-extern ImlibData *imlib_id;
+extern Colormap image_cmap;
+extern Visual *image_visual;
+extern int image_depth;
 extern Pixmap make_bitmap (repv file, int *widthp, int *heightp,
 			   int *x_hotp, int *y_hotp);
 extern repv Fmake_image (repv file, repv plist);
@@ -203,6 +205,19 @@ extern repv Fmake_sized_image (repv w, repv h, repv color);
 extern repv Fbevel_image (repv img, repv border, repv up, repv bevel_percent);
 extern repv Fclear_image (repv img, repv color);
 extern repv Ftile_image (repv dst, repv src);
+extern void pixmap_cache_flush_image (Lisp_Image *im);
+extern void image_render (Lisp_Image *image, int width, int height,
+			  Pixmap *pixmap, Pixmap *mask);
+extern void image_free_pixmaps (Lisp_Image *image, Pixmap pixmap, Pixmap mask);
+extern int best_color_match (int red, int green, int blue);
+extern void paste_image_to_drawable (Lisp_Image *img, Drawable d,
+				     int x, int y, int w, int h);
+extern int image_width (Lisp_Image *im);
+extern int image_height (Lisp_Image *im);
+extern u_char *image_pixels (Lisp_Image *im);
+extern int image_row_stride (Lisp_Image *im);
+extern int image_channels (Lisp_Image *im);
+extern void image_changed (Lisp_Image *im);
 extern void images_init (void);
 extern void images_kill (void);
 
@@ -244,6 +259,18 @@ extern repv Fquit (void);
 extern repv Frestart (void);
 extern void add_hook (repv sym, repv fun);
 extern repv global_symbol_value (repv sym);
+
+/* from pixmap-cache.c */
+#ifdef NEED_PIXMAP_CACHE
+extern bool pixmap_cache_ref (Lisp_Image *im, int width, int height,
+			      Pixmap *p1, Pixmap *p2);
+extern void pixmap_cache_unref (Lisp_Image *im, Pixmap p1, Pixmap p2);
+extern void pixmap_cache_set (Lisp_Image *im, int width, int height,
+			      Pixmap p1, Pixmap p2);
+extern void pixmap_cache_flush_image (Lisp_Image *im);
+#endif
+extern repv Fpixmap_cache_control (repv max);
+extern void pixmap_cache_init (void);
 
 /* from server.c */
 extern void server_init (void);

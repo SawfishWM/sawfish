@@ -1,0 +1,12 @@
+2000-06-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* configure.in: substitute IMAGE_CFLAGS and IMAGE_LIBS to be
+	IMLIB_CFLAGS and IMLIB_LIBS respectively; define HAVE_IMLIB
+
+	* config.h.in: new macros HAVE_IMLIB and NEED_PIXMAP_CACHE
+
+	* Makedefs.in: added -lXext to $(X11_LIBS)
+
+	* Makedefs.in: added IMAGE_CFLAGS and IMAGE_LIBS macros
+
+
