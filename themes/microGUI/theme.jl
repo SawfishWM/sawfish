@@ -17,10 +17,12 @@
 	(let
 	    ((w-width (car (window-dimensions w))))
 	  (max 0 (min (- w-width 100) (text-width (window-name w)))))))
-     
-     (update-text-width (lambda (w atom type)
-			  (if (eq atom 'WM_NAME)
-			      (rebuild-frame w))))
+
+     ;; called after the WM_NAME property changes
+     (update-text-width
+      (lambda (w)
+	(if (eq (window-get w 'current-frame-style) 'microGUI)
+	    (rebuild-frame w))))
      
      ;; 2x6
      (bottom-images (make-image "bottom.png"))
@@ -354,7 +356,4 @@
 			   (t
 			    frame))))
 
-  (call-after-property-changed
-   'WM_NAME (lambda (w)
-	      (if (eq (window-get w 'current-frame-style) 'microGUI)
-		  (rebuild-frame w)))))
+  (call-after-property-changed 'WM_NAME update-text-width))
