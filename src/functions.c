@@ -930,6 +930,16 @@ integer ATOM.
     return x_atom_symbol (rep_INT(atom));
 }
 
+DEFUN("root-window-id", Froot_window_id, Sroot_window_id, (void), rep_Subr0) /*
+::doc:root-window-id::
+root-window-id
+
+Returns the numeric id of the root window of the managed screen.
+::end:: */
+{
+    return rep_MAKE_INT (root_window);
+}
+
 
 /* xinerama support */
 
@@ -1311,6 +1321,7 @@ functions_init (void)
     rep_ADD_SUBR(Screate_window);
     rep_ADD_SUBR(Sx_atom);
     rep_ADD_SUBR(Sx_atom_name);
+    rep_ADD_SUBR(Sroot_window_id);
     rep_ADD_SUBR(Shead_count);
     rep_ADD_SUBR(Sfind_head);
     rep_ADD_SUBR(Shead_dimensions);
