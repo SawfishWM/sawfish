@@ -41,7 +41,7 @@ G_PIXMAP_DIR = $(GNOMEDIR)/share/pixmaps
 
 all : $(LISP_OBJS)
 
-sawfish-about.jl : sawfish-about.jl.in
+sawfish-about.jl : sawfish-about.jl.in ./Makefile
 	sed $(SUBSTS) $< >$@
 
 install : all installdirs
