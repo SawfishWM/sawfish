@@ -39,15 +39,7 @@
     map-window-group window-group-ids
 
     get-window-by-name save-stacking-order uniquify-list
-    call-after-property-changed call-after-state-changed
-
-    draw-vertical-gradient draw-horizontal-gradient draw-diagonal-gradient
-
-    x-create-gc x-change-gc x-destroy-gc x-gc-p
-    x-change-window-attributes x-window-p x-window-id x-window-back-buffer
-    x-window-swap-buffer x-clear-window x-draw-string x-draw-line
-    x-draw-rectangle x-fill-rectangle x-draw-arc x-fill-arc x-fill-polygon
-    x-copy-area x-draw-image))
+    call-after-property-changed call-after-state-changed))
 
 (defvar sawmill-safe-specials
   '(default-foreground display-name canonical-display-name
@@ -56,17 +48,43 @@
 
 (defvar sawmill-safe-features '(gtkrc gradient make-theme x))
 
+(when (>= rep-interface-id 9)
+  ;; compatibility kludge..
+  (defun gaol-add-function (sym)
+    (gaol-replace-function sym (symbol-value sym))))
+
 (unless batch-mode
   ;; for backwards compatibility, / is integer division in themes, use
   ;; `divide' for real division
-  (setq gaol-safe-functions (delq '/ gaol-safe-functions))
-  (gaol-replace-function 'divide '/)
-  (gaol-replace-function '/ 'quotient)
-
-  ;; fix bug in old rep versions
-  (when (and (boundp 'case) (not (memq 'case gaol-safe-functions)))
-    (setq gaol-safe-functions (cons 'case gaol-safe-functions)))
+  (cond ((>= rep-interface-id 9)
+	 (gaol-replace-function 'divide /)
+	 (gaol-replace-function '/ quotient))
+	(t
+	 (setq gaol-safe-functions (delq '/ gaol-safe-functions))
+	 (gaol-replace-function 'divide '/)
+	 (gaol-replace-function '/ 'quotient)))
 
   (mapc gaol-add-function sawmill-safe-functions)
   (mapc gaol-add-special sawmill-safe-specials)
-  (mapc gaol-add-feature sawmill-safe-features))
+
+  (defun gaol:require (feature)
+    (unless (memq feature sawmill-safe-features)
+      (error "Gaolled code trying to require %s" feature))
+    (require feature)
+    (gaol-rebuild-environment))
+  (gaol-replace-function 'require gaol:require)
+
+  (eval-after-load
+   "gradient" '(mapc gaol-add-function '(draw-vertical-gradient
+					 draw-horizontal-gradient
+					 draw-diagonal-gradient)))
+
+  (eval-after-load
+   "x" '(mapc gaol-add-function '(x-create-gc x-change-gc x-destroy-gc x-gc-p
+				  x-change-window-attributes x-window-p
+				  x-window-id x-window-back-buffer
+				  x-window-swap-buffers x-clear-window
+				  x-draw-string x-draw-line
+				  x-draw-rectangle x-fill-rectangle
+				  x-draw-arc x-fill-arc x-fill-polygon
+				  x-copy-area x-draw-image))))
