@@ -1,3 +1,17 @@
+2001-03-09  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/commands/grow-pack.jl: applied patch from Kai
+	Groﬂjohann <Kai.Grossjohann@CS.Uni-Dortmund.DE>:
+
+	    `It makes growing work even for windows which have a
+	    height/width increment.
+
+	    With the old code, repeat-growing xterms didn't always work
+	    right, since the old code only added 1 to the height/width,
+	    and that was often not enough to overlap the next window
+	    edge.  Now I'm adding height/width increment, and
+	    preliminary testing indicates that this is working well.'
+
 2001-03-06  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/focus.jl (scan-windows-for-bugs): disabled the
