@@ -48,6 +48,12 @@
       (bindtextdomain "sawfish" sawfish-locale-directory)
       (textdomain "sawfish"))))
 
+;; ignore file errors on stdio streams
+(when (boundp 'set-file-ignore-errors)
+  (set-file-ignore-errors (stdin-file) t)
+  (set-file-ignore-errors (stdout-file) t)
+  (set-file-ignore-errors (stderr-file) t))
+
 ;; used to mark variable declarations that need special attention
 ;; from the sawfish-xgettext script
 (defmacro i18n-defvar args (cons 'defvar args))
