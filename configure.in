@@ -28,9 +28,10 @@ dnl Release versioning info
 version="0.28.1"
 
 output_files="src/Makefile lisp/Makefile themes/Makefile\
- sounds/Makefile man/Makefile po/Makefile Makedefs Makefile sawfish.spec"
+ nokogiri/Makefile sounds/Makefile\
+ man/Makefile po/Makefile Makedefs Makefile sawfish.spec"
 
-SUBDIRS="src lisp themes sounds man po"
+SUBDIRS="src lisp nokogiri themes sounds man po"
 AC_SUBST(SUBDIRS)
 
 add_subdir () {
@@ -55,6 +56,7 @@ esac
 
 sawfishdir='${datadir}/sawfish'
 lispdir='${sawfishdir}/${version}/lisp'
+nokogiridir='${sawfishdir}/${version}/nokogiri'
 localedir='${sawfishdir}/${version}/locale'
 sawfishexecdir='${libexecdir}/sawfish/${version}/${host_type}'
 
@@ -325,6 +327,7 @@ AC_SUBST(version)
 AC_SUBST(sawfishdir)
 AC_SUBST(sawfishexecdir)
 AC_SUBST(lispdir)
+AC_SUBST(nokogiridir)
 AC_SUBST(localedir)
 AC_SUBST(HAVE_X11)
 AC_SUBST(LIBOBJS)
