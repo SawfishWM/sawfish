@@ -23,7 +23,7 @@
 #define SAWMILL_LIBCLIENT_H
 
 int client_open (char *display);
-char *client_eval (char *form, int async, int *lenp);
+char *client_eval (char *form, int *lenp, int *errorp);
 void client_close (void);
 
 #endif

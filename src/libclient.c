@@ -57,7 +57,9 @@
 #endif /* HAVE_UNIX */
 
 static void (*close_fun)(void);
-static char * (*eval_fun)(char *form, int async, int *lenp);
+static char * (*eval_fun)(char *form, int *lenp, int *errorp);
+
+#define PROTOCOL_X11_VERSION 1
 
 
 
@@ -190,35 +192,36 @@ user_login_name (void)
 
 /* using the X based server io */
 
-Atom xa_sawmill_request, xa_sawmill_request_win;
+Atom xa_sawfish_request, xa_sawfish_request_win;
 Window portal, request_win;
 Display *dpy;
 
 static char *
-net_server_eval (char *form, int async, int *lenp)
+net_server_eval (char *form, int *lenp, int *errorp)
 {
     u_char *data = 0;
     u_long nitems;
     XEvent ev;
 
-    XChangeProperty (dpy, portal, xa_sawmill_request, XA_STRING,
+    XChangeProperty (dpy, portal, xa_sawfish_request, XA_STRING,
 		     8, PropModeReplace, form, strlen (form));
     /* swallow the event created by the above */
     XWindowEvent (dpy, portal, PropertyChangeMask, &ev);
 
     ev.xclient.type = ClientMessage;
     ev.xclient.window = DefaultRootWindow (dpy);
-    ev.xclient.message_type = xa_sawmill_request;
+    ev.xclient.message_type = xa_sawfish_request;
     ev.xclient.format = 32;
-    ev.xclient.data.l[0] = portal;
-    ev.xclient.data.l[1] = xa_sawmill_request;
-    ev.xclient.data.l[2] = !async;
+    ev.xclient.data.l[0] = PROTOCOL_X11_VERSION;
+    ev.xclient.data.l[1] = portal;
+    ev.xclient.data.l[2] = xa_sawfish_request;
+    ev.xclient.data.l[3] = (lenp != 0);
     XSendEvent (dpy, request_win, False, 0L, &ev);
 
     /* Wait for the wm to delete or update the results */
     XWindowEvent (dpy, portal, PropertyChangeMask, &ev);
 
-    if (!async)
+    if (lenp != 0)
     {
 	Atom type;
 	int format;
@@ -229,7 +232,7 @@ net_server_eval (char *form, int async, int *lenp)
 	{
 	    if (data != 0)
 		XFree (data);
-	    if (XGetWindowProperty (dpy, portal, xa_sawmill_request, 0,
+	    if (XGetWindowProperty (dpy, portal, xa_sawfish_request, 0,
 				    long_length, False, XA_STRING,
 				    &type, &format, &nitems,
 				    &bytes_after, &data) != Success)
@@ -243,10 +246,11 @@ net_server_eval (char *form, int async, int *lenp)
 	
 	if(nitems > 0)
 	{
-	    char *ret = malloc (nitems);
-	    memcpy (ret, data, nitems);
+	    char *ret = malloc (nitems - 1);
+	    memcpy (ret, data + 1, nitems - 1);
+	    *lenp = nitems - 1;
+	    *errorp = (*data != '\001');
 	    XFree (data);
-	    *lenp = nitems;
 	    return ret;
 	}
     }
@@ -273,11 +277,11 @@ net_server_init (char *display)
     if (dpy == 0)
 	return 1;
 
-    xa_sawmill_request = XInternAtom (dpy, "_SAWMILL_REQUEST", False);
-    xa_sawmill_request_win = XInternAtom (dpy, "_SAWMILL_REQUEST_WIN", False);
+    xa_sawfish_request = XInternAtom (dpy, "_SAWFISH_REQUEST", False);
+    xa_sawfish_request_win = XInternAtom (dpy, "_SAWFISH_REQUEST_WIN", False);
 
     if (XGetWindowProperty (dpy, DefaultRootWindow (dpy),
-			    xa_sawmill_request_win, 0, 1, False,
+			    xa_sawfish_request_win, 0, 1, False,
 			    XA_CARDINAL, &type, &format, &nitems,
 			    &bytes_after, &data) != Success
         || type != XA_CARDINAL || format != 32 || nitems != 1)
@@ -334,11 +338,11 @@ sock_read (int fd, void *buf, size_t len)
 }
 
 static char *
-unix_server_eval (char *form, int async, int *lenp)
+unix_server_eval (char *form, int *lenp, int *errorp)
 {
     /* Protocol is; >req_eval:1, >FORM-LEN:4, >FORM:?, <RES-LEN:4, <RES:?
        in the local byte-order. */
-    u_char req = !async ? req_eval : req_eval_async;
+    u_char req = (lenp != 0) ? req_eval : req_eval_async;
     u_long len = strlen(form);
     char *result;
 
@@ -351,18 +355,22 @@ unix_server_eval (char *form, int async, int *lenp)
 	perror("eval_req");
 	return 0;
     }
-    if(!async)
+    if(lenp != 0)
     {
 	if(len > 0)
 	{
-	    result = malloc(len);
-	    if(result == 0 || sock_read(socket_fd, result, len) != len)
+	    char state;
+	    result = malloc (len - 1);
+	    if(result == 0
+	       || sock_read(socket_fd, &state, 1) != 1
+	       || sock_read(socket_fd, result, len - 1) != len - 1)
 	    {
 		perror("eval_req");
 		free (result);
 		return 0;
 	    }
-	    *lenp = len;
+	    *lenp = len - 1;
+	    *errorp = (state != '\001');
 	    return result;
 	}
     }
@@ -430,9 +438,9 @@ client_open (char *display)
 }
 
 char *
-client_eval (char *form, int async, int *lenp)
+client_eval (char *form, int *lenp, int *errorp)
 {
-    return (*eval_fun) (form, async, lenp);
+    return (*eval_fun) (form, lenp, errorp);
 }
 
 void

@@ -24,11 +24,12 @@
 ;; The protocol is something like:
 
 ;;	1. Send a ClientMessage event to the window identified by the
-;;	property _SAWMILL_REQUEST_WIN on the root window, event mask 0,
+;;	property _SAWFISH_REQUEST_WIN on the root window, event mask 0,
 ;;	with the event's window field set to the root window, type
-;;	_SAWMILL_REQUEST, format 32. data.l[0] = window to use for
-;;	properties, data.l[1] = property containing form to evaluate,
-;;	data.l[2] is non-zero if a result it required.
+;;	_SAWFISH_REQUEST, format 32. data.l[0] = protocol version (1),
+;;	data.l[1] = window to use for properties, data.l[2] = property
+;;	containing form to evaluate, data.l[3] is non-zero if a result
+;;	it required.
 
 ;;	2. The wm reads and evaluates the form from the specified
 ;;	property on the specified window.
@@ -38,6 +39,8 @@
 ;;	after it has read it. If no result is required, it will delete
 ;;	the property after having read it.
 
+;; The result is a string, it's first byte defines whether an error
+;; occurred or not, \001 if okay, \002 if an error
 (define-structure sawfish.wm.server
 
     (export server-eval
@@ -48,6 +51,8 @@
 	  sawfish.wm.misc
 	  sawfish.wm.windows)
 
+  (defconst protocol-version 1)
+
   (define server-window nil)
 
   (define (server-eval form)
@@ -55,15 +60,17 @@
       (condition-case error-data
 	  (progn
 	    (setq form (read-from-string form))
-	    (format nil "%S" (user-eval form)))
+	    (format nil "\001%S" (user-eval form)))
 	(error
-	 (format nil "error--> %S" error-data)))))
+	 (format nil "\002%S" error-data)))))
 
   (define (server-client-message-handler w type data)
-    (when (and server-window (eq w 'root) (eq type '_SAWMILL_REQUEST))
-      (let* ((window (aref data 0))
-	     (prop (x-atom-name (aref data 1)))
-	     (needs-result (/= (aref data 2) 0))
+    (when (and server-window (eq w 'root)
+	       (eq type '_SAWFISH_REQUEST)
+	       (= (aref data 0) protocol-version))
+      (let* ((window (aref data 1))
+	     (prop (x-atom-name (aref data 2)))
+	     (needs-result (/= (aref data 3) 0))
 	     (form-data (get-x-property window prop))
 	     form value)
 	(if needs-result
@@ -76,14 +83,14 @@
   (define (server-net-init)
     (unless server-window
       (setq server-window (create-window 'root -100 -100 10 10))
-      (set-x-property 'root '_SAWMILL_REQUEST_WIN
+      (set-x-property 'root '_SAWFISH_REQUEST_WIN
 		      (vector server-window) 'CARDINAL 32)
-      (set-x-property server-window '_SAWMILL_REQUEST_WIN
+      (set-x-property server-window '_SAWFISH_REQUEST_WIN
 		      (vector server-window) 'CARDINAL 32)))
 
   (define (server-net-exit)
     (when server-window
-      (delete-x-property 'root '_SAWMILL_REQUEST_WIN)
+      (delete-x-property 'root '_SAWFISH_REQUEST_WIN)
       (destroy-window server-window)
       (setq server-window nil)))
 

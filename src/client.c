@@ -26,12 +26,15 @@
 
 static repv display;
 
+DEFSYM(remote_sawfish, "remote-sawfish");
+DEFSTRING(err_remote_sawfish, "Remote sawfish error");
+
 DEFUN ("%sawfish-client-eval", F_sawfish_client_eval,
        S_sawfish_client_eval, (repv form, repv async), rep_Subr2)
 {
     DEFSTRING (fmt, "%S");
     char *result;
-    int length;
+    int length, error;
 
     form = Fformat (rep_list_3 (Qnil, rep_VAL (&fmt), form));
     if (form == rep_NULL)
@@ -43,16 +46,24 @@ DEFUN ("%sawfish-client-eval", F_sawfish_client_eval,
 	return Fsignal (Qerror, rep_list_2 (rep_VAL (&foo), display));
     }
 
-    result = client_eval (rep_STR (form), async != Qnil, &length);
+    result = client_eval (rep_STR (form),
+			  (async == Qnil) ? &length : 0,
+			  (async == Qnil) ? &error : 0);
 
     client_close ();
 
     if (result != 0)
-	return rep_string_dupn (result, length);
+    {
+	repv ret = rep_string_dupn (result, length);
+	if (error)
+	    return Fsignal (Qremote_sawfish, rep_LIST_1 (ret));
+	else
+	    return ret;
+    }
     else if (async == Qnil)
     {
-	DEFSTRING (foo, "while communicating with sawfish");
-	return Fsignal (Qerror, rep_LIST_1 (rep_VAL (&foo)));
+	DEFSTRING (foo, "unknown error");
+	return Fsignal (Qremote_sawfish, rep_LIST_1 (rep_VAL (&foo)));
     }
     else
 	return Qnil;
@@ -93,6 +104,9 @@ rep_dl_init (void)
 	dpy = ":0";
     display = rep_string_dup (dpy);
     rep_mark_static (&display);
+
+    rep_INTERN (remote_sawfish);
+    rep_ERROR (remote_sawfish);
 
     tem = rep_push_structure ("sawfish.client");
     rep_ADD_INTERNAL_SUBR (S_sawfish_client_eval);

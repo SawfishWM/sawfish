@@ -24,7 +24,7 @@
 
 /* Directory containing the unix domain sockets, each socket is
    simply the canonical display name */
-#define SAWMILL_SOCK_DIR "/tmp/.sawmill-%s"
+#define SAWMILL_SOCK_DIR "/tmp/.sawfish-%s"
 
 /* Types of request packet. A byte with one of these values is sent to
    initiate a command. */
