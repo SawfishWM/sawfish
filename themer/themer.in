@@ -41,6 +41,7 @@ exec rep "$0" "$@"
   (textdomain "sawmill"))
 
 ;; load this after gettext
+(require 'gtk)
 (require 'libglade)
 
 
