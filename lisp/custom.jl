@@ -187,13 +187,14 @@
     (funcall (get symbol 'custom-after-set) symbol)))
 
 (defun custom-menu ()
-  (list*
-   (list (_ "All settings") 'customize)
-   '()
+  (nconc
+   (list `(,(_ "All settings") customize) nil)
    (mapcar (lambda (group-list)
 	     (list (_ (or (get (car group-list) 'custom-group-doc)
 			  (symbol-name (car group-list))))
-		   `(customize ',(car group-list)))) custom-groups)))
+		   `(customize ',(car group-list)))) custom-groups)
+   (and (frame-style-editable-p default-frame-style)
+	(list nil `(,(_"Edit theme...") edit-frame-style)))))
 
 
 ;; support for font and color primitive types
