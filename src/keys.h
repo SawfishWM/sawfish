@@ -56,6 +56,9 @@ enum {
     /* Matches any of the modifiers */
     EV_MOD_ANY    = 0x00400000,
 
+    /* a KeyRelease event */
+    EV_MOD_RELEASE= 0x00800000,
+
     EV_TYPE_MASK  = 0x000f0000,
     EV_MOD_MASK   = 0x00f0ffff,
 };
