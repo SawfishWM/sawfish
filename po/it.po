@@ -3,19 +3,18 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Michele Campeotto <micampe@interpuntonet.it>, 2000.
 #
-#. ../lisp/sawfish/wm/util/groups.jl
 #. ../lisp/sawfish/wm/ext/audio-events.jl
-#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.34\n"
-"POT-Creation-Date: 2000-12-04 11:08-0800\n"
-"PO-Revision-Date: 2000-12-18 21:00+0100\n"
+"Project-Id-Version: 0.35\n"
+"POT-Creation-Date: 2001-01-05 20:59-0800\n"
+"PO-Revision-Date: 2001-01-05 21:40+0100\n"
 "Last-Translator: Michele Campeotto <micampe@f2s.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=iso8859-1\n"
+"Content-Transfer-Encoding: ENCODING\n"
 
 #. ../scripts/sawfish-about.jl
 msgid "and many others..."
@@ -68,6 +67,7 @@ msgid "Properties..."
 msgstr "Proprietà..."
 
 #. ../themer/themer.in
+#, c-format
 msgid "Added pattern `%s'"
 msgstr "Aggiunto pattern `%s'"
 
@@ -76,6 +76,7 @@ msgid "Frame name"
 msgstr "Nome del frame"
 
 #. ../themer/themer.in
+#, c-format
 msgid "Added frame `%s'"
 msgstr "Aggiunto frame `%s'"
 
@@ -84,6 +85,7 @@ msgid "<none>"
 msgstr "<nessuno>"
 
 #. ../themer/themer.in
+#, c-format
 msgid "Added frame type `%s'"
 msgstr "Aggiunto tipo frame `%s'"
 
@@ -92,14 +94,17 @@ msgid "error while building frame: %S"
 msgstr "errore costruendo il frame: %S"
 
 #. ../themer/themer.in
+#, c-format
 msgid "Saved as `%s'"
 msgstr "Salvato come `%s'"
 
 #. ../themer/themer.in
+#, c-format
 msgid "Generated theme in directory `%s'"
 msgstr "Tema generato nella directory `%s'"
 
 #. ../themer/themer.in
+#, c-format
 msgid "Read theme from `%s'"
 msgstr "Tema letto dalla directory `%s'"
 
@@ -114,6 +119,11 @@ msgstr "Apri"
 #. ../themer/themer.in
 msgid "Preferences"
 msgstr "Opzioni"
+
+#. ../themes/gradient/theme.jl
+#, fuzzy
+msgid "Gradient Theme"
+msgstr "_Salva il tema"
 
 #. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
@@ -140,6 +150,11 @@ msgid "Use less memory when creating gradients, possibly affecting quality."
 msgstr "Usa meno memoria per le sfumature, anche peggiorando la qualità."
 
 #. ../themes/mono/theme.jl
+#, fuzzy
+msgid "Mono Theme"
+msgstr "Nuovo tema"
+
+#. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
 msgstr ""
 "Colore delle finstre inattive (se non specificato usa\n"
@@ -154,12 +169,22 @@ msgid "Text is \\w justified in window titles."
 msgstr "Il testo é allineato a \\w nei titoli delle finestre."
 
 #. ../themes/simple/theme.jl
+#, fuzzy
+msgid "Simple Theme"
+msgstr "_Salva il tema"
+
+#. ../themes/simple/theme.jl
 msgid "Color of inactive frames in `simple' frame style."
 msgstr "Colore delle finestre inattive."
 
 #. ../themes/simple/theme.jl
 msgid "Color of active frames in `simple' frame style."
 msgstr "Colore delle finestre attive."
+
+#. ../themes/smaker/theme.jl
+#, fuzzy
+msgid "SMaker Theme"
+msgstr "_Salva il tema"
 
 #. ../themes/smaker/theme.jl
 msgid "Use black-on-white button images."
@@ -239,6 +264,7 @@ msgid "Context:"
 msgstr "Contesto:"
 
 #. ../lisp/sawfish/ui/apply.jl
+#, c-format
 msgid "While changing %s:"
 msgstr "Cambiando %s:"
 
@@ -306,6 +332,36 @@ msgstr "Righe:"
 msgid "Index:"
 msgstr "Indice:"
 
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Window Cycling"
+msgstr "Ciclo Finestre"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Sound"
+msgstr "Suoni"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Edge Flipping"
+msgstr "Bordo attivo"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Matched Windows"
+msgstr "Gruppi di finestre"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Shade Hover"
+msgstr "Shade Hover"
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tooltips"
+msgstr "Tooltip"
+
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
 msgstr "Invoca il comando NAME; opzionalmente preceduto da PFX_ARG."
@@ -325,6 +381,50 @@ msgstr "Invoca i comandi della lista, uno alla volta."
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Prompt for a command, execute it, and print any output to the screen."
 msgstr "Chiede un comando, lo esegue e mostra l'output sullo schermo."
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Focus"
+msgstr "Focus"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Sposta/Ridimensiona"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Placement"
+msgstr "Posizionamento"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Appearance"
+msgstr "Aspetto"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "Workspace"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "Comandi"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing/Maximizing"
+msgstr "A icona/Ingrandisci"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing"
+msgstr "Riduci a icona"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Maximizing"
+msgstr "Ingrandisci"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "Varie"
 
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Invoke the user-customization system."
@@ -463,6 +563,10 @@ msgid "Modifier key(s) used for default window manager shortcuts."
 msgstr "Modificatore/i usato per gli shortcut predefiniti."
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display key-binding information in menu items."
+msgstr "Mostra gli shortcut di tastiera nei menu."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
 msgstr "Riduci a icona"
 
@@ -516,7 +620,7 @@ msgstr "_Giu"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Stacking"
-msgstr ""
+msgstr "Stacking"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Raise"
@@ -627,14 +731,17 @@ msgstr "Ignora la posizione richiesta dal programma."
 msgid "Keep transient windows stacked above: \\w"
 msgstr "Mantieni le finestre di dialogo sopra a: \\w"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise the window to its highest allowed position in the stacking order."
 msgstr "Alza la finestra al livello più alto del suo stack."
 
+#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower the window to its lowest allowed position in the stacking order."
 msgstr "Abbassa la finestra al livello più basso del suo stack."
 
+#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid ""
 "If the window is at its highest possible position, then lower it to its\n"
@@ -829,6 +936,7 @@ msgid "Move workspace left"
 msgstr "Sposta a sinistra"
 
 #. ../lisp/sawfish/wm/workspace.jl
+#, c-format
 msgid "space %d"
 msgstr "Area %d"
 
@@ -1327,6 +1435,26 @@ msgstr "Argomenti opzionali passati al comando `xterm`."
 msgid "Start a new xterm."
 msgstr "Avvia un nuovo xterm."
 
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move to the next viewport."
+msgstr "Sposta la finstra alla viewport superiore."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move to the previous viewport."
+msgstr "Sposta la finestra al workspace precedente."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move the window to the previous viewport."
+msgstr "Sposta la finestra al workspace precedente."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move the window to the next viewport."
+msgstr "Sposta la finstra alla viewport superiore."
+
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Play sound effects for window events."
 msgstr "Attiva i suoni per gli eventi delle finestre."
@@ -1378,6 +1506,10 @@ msgid "Warp pointer to opposite screen edge when flipping."
 msgstr "Sposta il puntatore al lato opposto dello schermo."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Error Handling"
+msgstr "Gestione errori"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Emit a beeping sound when errors occur."
 msgstr "Emetti un beep in caso di errore."
 
@@ -1392,18 +1524,6 @@ msgstr "Nessun errore."
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display all errors that have occurred to the screen."
 msgstr "Mostra tutti gli errori sullo schermo."
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Placement"
-msgstr "Posizionamento"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Focus"
-msgstr "Focus"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Appearance"
-msgstr "Aspetto"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
@@ -1754,7 +1874,8 @@ msgid "S_haded"
 msgstr "_Arrotolata"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid "Focus windows when they are first displayed."
+#, fuzzy
+msgid "Focus on application windows when they first appear."
 msgstr "Assegna il focus alle finestre quando compaiono."
 
 #. ../lisp/sawfish/wm/state/transient.jl
@@ -2087,68 +2208,26 @@ msgstr "_Impostazioni"
 msgid "_Themes"
 msgstr "_Temi"
 
-msgid "Maximize"
-msgstr "Ingrandisci"
+#~ msgid "Maximize"
+#~ msgstr "Ingrandisci"
 
-msgid "Unmaximize"
-msgstr "Ripristina"
+#~ msgid "Unmaximize"
+#~ msgstr "Ripristina"
 
-msgid "Sound"
-msgstr "Suoni"
+#~ msgid "Select color"
+#~ msgstr "Seleziona il colore"
 
-msgid "Matched Windows"
-msgstr "Gruppi di finestre"
+#~ msgid "Select image"
+#~ msgstr "Seleziona l'immagine"
 
-msgid "Tooltips"
-msgstr "Tooltip"
+#~ msgid "Select font"
+#~ msgstr "Seleziona il font"
 
-msgid "Window Cycling"
-msgstr "Ciclo Finestre"
+#~ msgid "Image Properties"
+#~ msgstr "Proprietà dell'immagine"
 
-msgid "Move/Resize"
-msgstr "Sposta/Ridimensiona"
+#~ msgid "From"
+#~ msgstr "Da"
 
-msgid "Workspaces"
-msgstr "Workspace"
-
-msgid "Bindings"
-msgstr "Comandi"
-
-msgid "Minimizing/Maximizing"
-msgstr "A icona/Ingrandisci"
-
-msgid "Minimizing"
-msgstr "Riduci a icona"
-
-msgid "Maximizing"
-msgstr "Ingrandisci"
-
-msgid "Miscellaneous"
-msgstr "Varie"
-
-msgid "Error Handling"
-msgstr "Gestione errori"
-
-msgid "Edge Flipping"
-msgstr "Bordo attivo"
-
-msgid "Select color"
-msgstr "Seleziona il colore"
-
-msgid "Select image"
-msgstr "Seleziona l'immagine"
-
-msgid "Select font"
-msgstr "Seleziona il font"
-
-msgid "Image Properties"
-msgstr "Proprietà dell'immagine"
-
-msgid "From"
-msgstr "Da"
-
-msgid "To"
-msgstr "A"
-
-
-
+#~ msgid "To"
+#~ msgstr "A"
