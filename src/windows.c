@@ -491,7 +491,7 @@ emit_pending_destroys (void)
 
 DEFUN("window-get", Fwindow_get, Swindow_get,
       (repv win, repv prop), rep_Subr2) /*
-::doc::Swindow-get::
+::doc::window-get::
 window-get WINDOW PROPERTY
 
 Return the value of the property named PROPERTY (a symbol) of WINDOW.
@@ -513,6 +513,32 @@ Note that these are Lisp properties not X properties.
 	plist = rep_CDR(rep_CDR(plist));
     }
     return Qnil;
+}
+
+DEFUN("map-window-properties", Fmap_window_properties,
+      Smap_window_properties, (repv fun, repv win), rep_Subr2) /*
+::doc:map-window-properties::
+map-window-properties FUNCTION WINDOW
+
+Call (FUNCTION PROPERTY VALUE) for all Lisp properties set on window
+object WINDOW.
+::end:: */
+{
+    repv ret = Qnil, plist;
+    rep_GC_root gc_plist, gc_fun;
+    rep_DECLARE2 (win, XWINDOWP);
+    plist = VWIN(win)->plist;
+    rep_PUSHGC (gc_plist, plist);
+    rep_PUSHGC (gc_fun, fun);
+    while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
+    {
+	ret = rep_call_lisp2 (fun, rep_CAR (plist), rep_CADR (plist));
+	if (ret == rep_NULL)
+	    break;
+	plist = rep_CDDR (plist);
+    }
+    rep_POPGC; rep_POPGC;
+    return ret;
 }
 
 DEFUN("window-put", Fwindow_put, Swindow_put,
@@ -1213,6 +1239,7 @@ windows_init (void)
 					 window_mark, window_mark_type,
 					 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR(Swindow_get);
+    rep_ADD_SUBR(Smap_window_properties);
     rep_ADD_SUBR(Swindow_put);
     rep_ADD_SUBR(Swindow_name);
     rep_ADD_SUBR(Swindow_full_name);
