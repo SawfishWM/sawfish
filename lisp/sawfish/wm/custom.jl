@@ -55,7 +55,8 @@
 	  sawfish.wm.commands
 	  sawfish.wm.gaol
 	  sawfish.wm.colors
-	  sawfish.wm.fonts)
+	  sawfish.wm.fonts
+	  sawfish.wm.misc)
 
   ;; list associating groups with the list of variables in that group
   (define custom-groups (list 'root "Sawfish"))
@@ -308,7 +309,8 @@ of choices."
     ;; XXX kludge for old custom files..
     (when (eq value 'nil) (setq value nil))
     (when (and req value)
-      (require req))
+      ;; load in the user module in case it's a file of bare code
+      (user-require req))
     (custom-set (lambda ()
 		  (make-variable-special symbol)
 		  (set symbol value)) symbol))
@@ -317,7 +319,7 @@ of choices."
     ;; XXX kludge for old custom files..
     (when (eq value 'nil) (setq value nil))
     (when (and req value)
-      (require req))
+      (user-require req))
     (custom-set (lambda ()
 		  (make-variable-special symbol)
 		  (set symbol (custom-deserialize value type)))
