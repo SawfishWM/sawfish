@@ -22,37 +22,103 @@
 (require 'window-order)
 (provide 'focus)
 
+(defvar focus-modes nil
+  "List containing all symbols naming focus modes.")
+
 (defcustom focus-mode 'enter-exit
   "When does the mouse pointer affect the input focus."
   :type symbol
-  :options (enter-exit enter-only click)
   :group focus
-  :after-set (lambda () (focus-mode-changed)))
+  :before-set (lambda () (focus-mode-changed 'before))
+  :after-set (lambda () (focus-mode-changed 'after)))
 
 (defcustom focus-click-through t
   "Does click-to-focus mode pass the click through to the window."
   :type boolean
   :group (focus advanced))
 
-(defvar click-to-focus-keymap
+(defvar focus-dont-push nil
+  "When t, focusing a window doesn't change it's position in the stack of most-
+recently focused windows.")
+
+
+;; general utilities
+
+(defun define-focus-mode (name fun)
+  "Define a new focus mode called NAME (a symbol). The function FUN will be
+used to implement this focus mode, it will be called with arguments `(WINDOW
+EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
+`pointer-in', `pointer-out', `focus-in', `focus-out', `add-window'
+`before-mode-change', `after-mode-change'"
+  (unless (memq name focus-modes)
+    (setq focus-modes (nconc focus-modes (list name))))
+  (custom-set-property 'focus-mode ':options focus-modes)
+  (put name 'focus-mode fun))
+
+(defun focus-invoke-mode (w &rest args)
+  (let*
+      ((mode (or (and w (window-get w 'focus-mode)) focus-mode))
+       (fun (get mode 'focus-mode)))
+    (when fun
+      (apply fun w args))))
+
+(defun set-focus-mode (w mode)
+  "Set the focus mode of window W to the mode named by symbol MODE."
+  (unless (eq (window-get w 'focus-mode) mode)
+    (focus-invoke-mode w 'before-mode-change)
+    (window-put w 'focus-mode mode)
+    (focus-invoke-mode w 'after-mode-change)))
+
+(defun focus-mode-changed (time)
+  (let
+      ((arg (if (eq time 'before)
+		'before-mode-change
+	      'after-mode-change)))
+    (map-windows
+     (lambda (w)
+       (unless (window-get w 'focus-mode)
+	 (focus-invoke-mode w arg))))))
+
+(defun focus-push-map (w map)
+  (let
+      ((current (window-get w 'keymap))
+       (saved (window-get w 'focus-saved-keymap)))
+    (unless (or (eq current map) (null current))
+      (unless saved
+	(window-put w 'focus-saved-keymap current))
+      (window-put w 'keymap map))))
+
+(defun focus-pop-map (w)
+  (let
+      ((saved (window-get w 'focus-saved-keymap)))
+    (when saved
+      (window-put w 'keymap saved)
+      (window-put w 'focus-saved-keymap nil))))
+
+
+;; modes
+
+(define-focus-mode 'enter-exit
+ (lambda (w action)
+   (cond ((eq action 'pointer-in)
+	  (when (window-really-wants-input-p w)
+	    (set-input-focus w)))
+	 ((eq action 'pointer-out)
+	  (set-input-focus nil)))))
+
+(define-focus-mode 'enter-only
+ (lambda (w action)
+   (cond ((eq action 'pointer-in)
+	  (when (and (not (eq w 'root)) (window-really-wants-input-p w))
+	    (set-input-focus w))))))
+
+(defvar click-to-focus-map
   (bind-keys (make-keymap)
     ;; apparently buttons 4 & 5 are usually bound to the
     ;; wheel on some mice
     "Any-Button1-Click1" 'focus-click
     "Any-Button2-Click1" 'focus-click
     "Any-Button3-Click1" 'focus-click))
-
-(defvar focus-dont-push nil)
-
-(defun focus-push-map (w)
-  (unless (eq (window-get w 'keymap) 'click-to-focus-keymap)
-    (window-put w 'focus-saved-keymap (window-get w 'keymap))
-    (window-put w 'keymap 'click-to-focus-keymap)))
-
-(defun focus-pop-map (w)
-  (when (eq (window-get w 'keymap) 'click-to-focus-keymap)
-    (window-put w 'keymap (window-get w 'focus-saved-keymap))
-    (window-put w 'focus-saved-keymap nil)))
 
 (defun focus-click (w)
   (interactive "%w")
@@ -73,43 +139,45 @@
 	;; pass the event through to the client window
 	(allow-events 'replay-pointer)))))
 
+(define-focus-mode 'click
+ (lambda (w action)
+   (cond ((eq action 'focus-in)
+	  (focus-pop-map w))
+	 ((memq action '(focus-out add-window))
+	  (unless (eq w (input-focus))
+	    (focus-push-map w click-to-focus-map)))
+	 ((eq action 'before-mode-change)
+	  (focus-pop-map w))
+	 ((eq action 'after-mode-change)
+	  (unless (eq w (input-focus))
+	    (focus-push-map w click-to-focus-map))))))
+
+
+;; hooks
+
 (defun focus-enter-fun (w)
-  (if (eq w 'root)
-      (when (eq focus-mode 'enter-exit)
-	(set-input-focus nil))
-    (unless (or (eq focus-mode 'click)
-		(not (window-really-wants-input-p w)))
-      (set-input-focus w))))
+  (when (windowp w)
+    (focus-invoke-mode w 'pointer-in)))
+
+(defun focus-leave-fun (w)
+  (when (windowp w)
+    (focus-invoke-mode w 'pointer-out)))
 
 (defun focus-in-fun (w)
-  (focus-pop-map w)
-  (when (eq focus-mode 'click)
-    (mapc (lambda (x)
-	    (unless (eq x w)
-	      (focus-push-map x)))))
+  (focus-invoke-mode w 'focus-in)
   (unless focus-dont-push
     (window-order-push w)))
 
 (defun focus-out-fun (w)
-  (when (eq focus-mode 'click)
-    (focus-push-map w)))
-
-(defun focus-mode-changed ()
-  (if (eq focus-mode 'click)
-      (mapc (lambda (w)
-	      (if (eq (input-focus) w)
-		  (focus-pop-map w)
-		(focus-push-map w)))
-	    (managed-windows))
-    (mapc focus-pop-map (managed-windows))))
+  (focus-invoke-mode w 'focus-out))
 
 (defun focus-add-window (w)
-  (when (eq focus-mode 'click)
-    (focus-push-map w)))
+  (focus-invoke-mode w 'add-window))
 
 (add-hook 'enter-notify-hook focus-enter-fun t)
+(add-hook 'leave-notify-hook focus-leave-fun t)
 (add-hook 'focus-in-hook focus-in-fun t)
 (add-hook 'focus-out-hook focus-out-fun t)
-(add-hook 'add-window-hook focus-add-window t)
+(add-hook 'after-add-window-hook focus-add-window)
 
-(sm-add-saved-properties 'never-focus)
+(sm-add-saved-properties 'never-focus 'focus-mode)
