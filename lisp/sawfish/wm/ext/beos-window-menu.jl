@@ -78,7 +78,8 @@
 	 (window-mapped-p w)
 	 (or (window-get w 'iconified)
 	     (and (not (window-get w 'window-list-skip))
-		  (not (window-get w 'ignored))))))
+		  (not (window-get w 'ignored))
+		  (not (desktop-window-p w))))))
 
   (define (make-group-item id)
     (let loop ((menu '())

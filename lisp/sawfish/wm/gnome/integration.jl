@@ -23,7 +23,8 @@
 
     (open rep
 	  sawfish.wm.state.gnome
-	  sawfish.wm.gnome.menus
+;; FIXME: add support for GNOME 2 applications
+;;	  sawfish.wm.gnome.menus
 	  sawfish.wm.menus
 	  sawfish.wm.custom
 	  sawfish.wm.commands.help
@@ -33,11 +34,15 @@
 
   ;; delete the `Restart' and `Quit' items from the root menu
   (let ((restart (rassoc '(restart) root-menu))
-	(quit (rassoc '(quit) root-menu)))
+	(quit (rassoc '(quit) root-menu))
+	(programs (rassoc 'apps-menu root-menu)))
     (when restart
       (setq root-menu (delq restart root-menu)))
     (when quit
       (setq root-menu (delq quit root-menu)))
+    ;; FIXME: until GNOME 2 applications are supported
+    (when programs
+      (setq root-menu (delq programs root-menu)))
     (when (null (last root-menu))
       (setq root-menu (delq (last root-menu) root-menu))))
 

@@ -94,18 +94,19 @@
 
   (define (xft-description->face name)
     (let* ((fields (string-split "\\s*:\\s*" name))
-	   (family "sans")
+	   (fam-siz (car fields))
+	   (family "Sans")
 	   (size nil))
 
       ;; extract family and size
-      (when (car fields)
-	(cond ((string-match "\\s*-\\s*" (car fields))
-	       (setq family (substring (car fields) 0 (match-start)))
-	       (setq size (string->number
-			   (substring (car fields) (match-end)))))
-	      ((string-looking-at "\\d+" (car fields))
-	       (setq size (string->number (car fields))))
-	      (t (setq family (car fields)))))
+      (when fam-siz
+	(cond ((string-match "[^\\](\\s*-\\s*)" fam-siz)
+	       (setq family (substring fam-siz 0 (match-start 1)))
+	       (setq size (string->number (substring fam-siz (match-end 1)))))
+	      ((string-looking-at "\\d+" fam-siz)
+	       (setq size (string->number fam-siz)))
+	      (t (setq family fam-siz)))
+	(setq family (string-replace "\\\\-" "-" family)))
 
       ;; extract styles
       (let loop ((rest (cdr fields))
@@ -125,7 +126,7 @@
 		(t (loop (cdr rest) styles)))))))
 
   (define (face->xft-description face)
-    (let ((families (face-families face))
+    (let ((families (string-replace "-" "\\-" (face-families face)))
 	  (size (face-size face))
 	  (styles (face-styles face)))
       (mapconcat identity
@@ -165,13 +166,19 @@
       ("Heavy" "weight" . "black")))		;FIXME?
 
   (define (pango-description->face name)
-    (let ((fields (string-split " " name))
-	  (family "sans")
+    (let ((fields (string-split "\\s*,\\s*" name))
+	  (family "Sans")
+	  (force-family nil)
 	  (size nil)
 	  (styles '()))
 
+      ;; if comma found in name, it separates family name and styles
+      (when (> (length fields) 1)
+	(setq force-family (car fields))
+	(setq fields (list (mapconcat identity fields #\space))))
+
       ;; have to parse backwards, since family names may contain spaces..
-      (setq fields (nreverse fields))
+      (setq fields (nreverse (string-split "\\s+" (car fields))))
 
       ;; look for a size at the end of the string
       (when (string-match "\\s*(\\d+)\\s*$" (car fields))
@@ -184,21 +191,34 @@
 				 (car fields) pango-style-map)) styles))
 	(setq fields (cdr fields)))
 
-      ;; whatever's left is the family name
-      (setq family (mapconcat identity (nreverse fields) #\space))
+      ;; whatever's left is the family name, except of that comma found in name
+      (if force-family
+	  (setq family force-family)
+	(setq family (mapconcat identity (nreverse fields) #\space)))
 
       (make-face family size styles)))
+
+  (define (assoc-grep regexp alist #!optional case-fold)
+    (catch 'found
+      (mapc (lambda (x) (if (string-match regexp (car x) 0 case-fold)
+			    (throw 'found x)))
+	alist)))
 
   (define (face->pango-description face)
     (let loop ((rest (face-styles face))
 	       (out '()))
       (if (null rest)
-	  (mapconcat identity
-		     (nconc (list (face-families face))
-			    (nreverse out)
-			    (and (face-size face)
-				 (list (format nil "%d" (face-size face)))))
-		     #\space)
+	  (let* ((family (face-families face))
+		 (regexp (concat "^" (last (string-split "\\s+" family)))))
+	    (when (and (not (string-equal family ""))
+		       (assoc-grep regexp pango-style-map t))
+	      (setq family (concat family ",")))
+	    (mapconcat identity
+		       (nconc (list family)
+			      (nreverse out)
+			      (and (face-size face)
+				   (list (format nil "%d" (face-size face)))))
+		       #\space))
 	(let ((tem (rassoc (car rest) pango-style-map)))
 	  (if tem
 	      (loop (cdr rest) (cons (car tem) out))
@@ -208,8 +228,7 @@
 ;; XLFD naming scheme
 
   (define xlfd-style-names
-    '((3 . "weight")
-      (5 . "width")
+    '((5 . "width")
       (6 . "add-style")
       (8 . "point-size")
       (9 . "resolution-x")
@@ -231,7 +250,7 @@
   (define (xlfd-description->face name)
     (let* ((fields (string-split "-" name))
 	   (nfields (length fields))
-	   (family "sans")
+	   (family "Sans")
 	   (size nil)
 	   (styles '()))
 
@@ -242,15 +261,20 @@
 
 	;; normal XLFD string
 
-	(unless (or (<= fields 2) (string= (nth 2 fields) "*"))
+	(unless (or (<= nfields 2) (string= (nth 2 fields) "*"))
 	  (setq family (nth 2 fields)))
 
-	(unless (or (<= fields 7) (string= (nth 7 fields) "*"))
+	(unless (or (<= nfields 7) (string= (nth 7 fields) "*"))
 	  (setq size (string->number (nth 7 fields))))
+
+	(when (> nfields 3)
+	  (let ((weight (nth 3 fields)))
+	    (when (not (string= weight "medium"))
+	      (setq styles (cons (cons "weight" weight) styles)))))
 
 	(when (> nfields 4)
 	  (let ((slant (nth 4 fields)))
-	    (when (assoc slant xlfd-slant-map)
+	    (when (and (not (string= slant "r")) (assoc slant xlfd-slant-map))
 	      (setq styles (cons (cons "slant"
 				       (cdr (assoc slant xlfd-slant-map)))
 				 styles)))))
@@ -281,10 +305,13 @@
 	(cond ((= i 2)
 	       (setq out (cons (face-families face) out)))
 
+	      ((= i 3)
+	       (setq out (cons (or (face-style face "weight") "medium") out)))
+
 	      ((= i 4)
 	       (let ((slant (car (rassoc (face-style face "slant")
 					 xlfd-slant-map))))
-		 (setq out (cons (or slant "*") out))))
+		 (setq out (cons (or slant "r") out))))
 
 	      ((= i 7)
 	       (setq out (cons (if (face-size face)
