@@ -1,3 +1,18 @@
+2000-11-02  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/ext/auto-raise.jl (rw-on-focus, rw-out-focus):
+	only do anything if (eq MODE 'normal); fixes #15526 in Red Hat
+	bugzilla. Not totally sure that this doesn't break anything,
+	but it's easily revertable if it does..
+
+	* sawfish/wm/frames.jl (frame-class-removed-p): new function
+
+	* sawfish/wm/state/maximize.jl (check-if-maximizable,
+	property-notify): new functions, added to add-window-hook and
+	property-notify-hook respectively. When WM_NORMAL_HINTS changes
+	in any way, check if the window is maximizable or not; then
+	hide (or reshow) the maximize button as necessary. Fixes #4260
+
 2000-11-01  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm.jl: load sawfish.wm.state.maximize at startup,
