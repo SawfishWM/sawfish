@@ -3,15 +3,18 @@
 REP_SRCS="../src/*.jl ../themer/themer.in ../lisp/*.jl ../themes/*/theme.jl"
 GLADE_SRCS="../themer/themer.glade"
 
+REP_XGETTEXT_FLAGS="--only-commands --include defun --include defcustom --include defgroup"
+
 rm -f sawmill.pot
 
-lisp_pot=.$$.lisp.pot
-glade_pot=.$$.glade.pot
+lisp_c=.$$.lisp.c
+glade_c=.$$.glade.c
 
-rep-xgettext $REP_SRCS >$lisp_pot
-libglade-xgettext -p $GLADE_SRCS  >$glade_pot
+rep-xgettext --c $REP_XGETTEXT_FLAGS $REP_SRCS >$lisp_c
+libglade-xgettext --c $GLADE_SRCS >$glade_c
 
-msghack -o sawmill.pot --append $lisp_pot $glade_pot
+xgettext -a --no-location $lisp_c $glade_c
+mv -f messages.po sawmill.pot
 
-rm -f $lisp_pot $glade_pot
+rm -f $lisp_c $glade_c
 
