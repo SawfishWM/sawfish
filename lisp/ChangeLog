@@ -1,5 +1,14 @@
 1999-10-04  John Harper  <john@dcs.warwick.ac.uk>
 
+	* functions.jl (window-really-wants-input-p): new function,
+	calls window-wants-input-p unless the
+	`ignore-window-input-hint' option, or window property, is t
+	* x-cycle.jl, workspace.jl, transient.jl, focus.jl: use
+	window-really-wants-input-p instead of window-wants-input-p
+
+	* x-cycle.jl (cycle-warp-pointer, cycle-focus-windows): new
+	options
+
 	* version 0.10.1
 
 	* smart-placement.jl (sp-do-placement): if no position with

@@ -1,5 +1,8 @@
 1999-10-04  John Harper  <john@dcs.warwick.ac.uk>
 
+	* functions.c (Fdelete_window): return to using XKillClient
+	instead of XDestroyWindow when WM_DELETE_WINDOW isn't available
+
 	* keys.c, functions.c: when using the x_win_from_arg function,
 	being unable to find a window xid is only an error if we
 	weren't passed a window object (gracefully handle windows being
