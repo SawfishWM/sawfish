@@ -60,6 +60,9 @@ state."
 (defun shading-add-window (w)
   (when (window-get w 'shaded)
     (window-put w 'shaded nil)
+    (when (window-get w 'shaded-old-type)
+      (window-put w 'type  (window-get w 'shaded-old-type)))
     (shade-window w)))
 
 (add-hook 'add-window-hook 'shading-add-window t)
+(sm-add-saved-properties 'shaded 'shaded-old-type)
