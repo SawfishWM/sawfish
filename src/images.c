@@ -232,6 +232,39 @@ Return (WIDTH . HEIGHT) representing the dimensions in pixels of IMAGE.
 		  rep_MAKE_INT(VIMAGE(img)->image->rgb_height));
 }
 
+DEFUN("image-shape-color", Fimage_shape_color,
+      Simage_shape_color, (repv img), rep_Subr1) /*
+::doc:Simage-shape-color::
+image-shape-color IMAGE
+::end:: */
+{
+    ImlibColor shape;
+    rep_DECLARE1(img, IMAGEP);
+    Imlib_get_image_shape (imlib_id, VIMAGE(img)->image, &shape);
+    if (shape.r == -1 && shape.g == -1 && shape.b == -1)
+	return Qnil;
+    else
+	return Fget_color_rgb (rep_MAKE_INT(shape.r * 256),
+			       rep_MAKE_INT(shape.g * 256),
+			       rep_MAKE_INT(shape.b * 256));
+}
+
+DEFUN("set-image-shape-color", Fset_image_shape_color, Sset_image_shape_color,
+      (repv img, repv shape), rep_Subr2) /*
+::doc:Sset-image-shape-color::
+set-image-shape-color IMAGE TRANSPARENT-COLOR
+::end:: */
+{
+    ImlibColor color;
+    rep_DECLARE1(img, IMAGEP);
+    rep_DECLARE2(shape, COLORP);
+    color.r = VCOLOR(shape)->red / 256;
+    color.g = VCOLOR(shape)->green / 256;
+    color.b = VCOLOR(shape)->blue / 256;
+    Imlib_set_image_shape (imlib_id, VIMAGE(img)->image, &color);
+    return img;
+}
+
 DEFUN("image-border", Fimage_border, Simage_border, (repv img), rep_Subr1) /*
 ::doc:Simage-border::
 image-border IMAGE
@@ -602,6 +635,8 @@ images_init (void)
     rep_ADD_SUBR(Simagep);
     rep_ADD_SUBR(Simage_dimensions);
     rep_ADD_SUBR(Simage_border);
+    rep_ADD_SUBR(Sset_image_shape_color);
+    rep_ADD_SUBR(Simage_shape_color);
     rep_ADD_SUBR(Sset_image_border);
     rep_ADD_SUBR(Simage_modifier);
     rep_ADD_SUBR(Sset_image_modifier);
