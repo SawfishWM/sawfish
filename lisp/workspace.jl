@@ -85,7 +85,7 @@ workspace.")
       (rplacd space (delq w (cdr space)))
       (when (and delete-workspaces-when-empty (null (cdr space)))
 	;; workspace is now empty
-	(call-hook 'delete-workspace-hook space)
+	(call-hook 'delete-workspace-hook (list space))
 	(when (eq ws-current-workspace space)
 	  (ws-switch-workspace (or (nth 1 (memq space ws-workspaces))
 				   (car ws-workspaces))))
