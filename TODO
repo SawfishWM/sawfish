@@ -13,6 +13,11 @@ Outstanding bugs
 
   ! cancel the GNOME logout dialog, window decorations aren't redrawn
 
+    [ after looking at the X event trace, I don't think it's a sawmill
+      bug, since sawmill receives _no_ events after the iris effect is
+      removed, until it finally redraws everything. Unless sawmill is
+      somehow not recognizing that events are available..? ]
+
   ! play-sample.c doesn't seem to work on solaris (esdplay does)
 
   ! handle lisp errors more gracefully in theme/frame code
@@ -111,8 +116,6 @@ Window manager tasks
 
     also allow theme files to be dropped on windows
 
-  + add a function map-window-properties
-
   + Support other visuals
 
   + revamp the autoload system, and handle both customizations and
@@ -178,27 +181,12 @@ Window manager tasks
     [ Apparently there's no definition of kde-wm interaction except for
     the kwm sources, which are supposed to be ``heavily commented'' ]
 
-  + clone some ctwm functions:
-
-       f.bottomzoom
-               This function is similar to the  f.fullzoom  func
-               tion, but resizes the window to fill only the bot
-               tom half of the screen.
-
-       f.leftzoom
-               This variable is similar to the f.bottomzoom func
-               tion  but  causes  the  selected  window  is  only
-               resized to the left half of the display.
-
-       etc.
-
   - Rotated text
 
     Allow text to be rendered at angles (in multiples of 90 degrees?).
     This could be useful for the sides of windows
 
-    [ scp found a library for doing this with Xlib.. imlib2 will
-    support rotated text? ]
+    [ scp found a library for doing this with Xlib.. ]
 
   - GTK theme
 
@@ -238,8 +226,11 @@ Window manager tasks
 
   - CORBA interface
 
-    First write CORBA support for rep (does guile support CORBA?), then
-    what? Would this be useful?
+    I have a prototype idl, but it needs rewriting. The idea is to
+    basically reimplement the new GNOME/KDE wm hints using CORBA,
+    perhaps with some other useful features
+
+    Use rep-orbit to provide the CORBA binding
 
 
 
@@ -270,19 +261,6 @@ sawmill-ui tasks
     another idea: textual search for options/commands
 
   + Allow text-entry commands in bindings dialog?
-
-  + add capplet desktop entries to share/gnome/apps/Settings as well as
-    the control center tree
-
-    then again.. there's a problem with this -- gnome menus are
-    _static_, whereas sawmill's customization groups are _dynamic_
-
-    i.e. the `customization' root sub-menu wouldn't match the menu in
-    the gnome `settings' tree. this would be bad since the user may not
-    discover the dynamic menu and thus miss many of the options..
-
-    [ apparently, this is an issue which may be addressed in future
-      versions of the control center ]
 
 
 
