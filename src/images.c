@@ -664,7 +664,7 @@ image_sweep (void)
 	Lisp_Image *next = w->next;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
 	{
-	    Imlib_destroy_image (imlib_id, w->image);
+	    Imlib_kill_image (imlib_id, w->image);
 	    rep_FREE_CELL(w);
 	}
 	else
