@@ -317,8 +317,11 @@ frame_part_destroyer (Lisp_Window *w)
 	if (fp->gc)
 	    XFreeGC (dpy, fp->gc);
 
-	XDeleteContext (dpy, fp->id, window_fp_context);
-	XDestroyWindow (dpy, fp->id);
+	if (fp->id != 0)
+	{
+	    XDeleteContext (dpy, fp->id, window_fp_context);
+	    XDestroyWindow (dpy, fp->id);
+	}
 
 	next = fp->next;
 	rep_free (fp);
@@ -802,6 +805,8 @@ void
 create_window_frame (Lisp_Window *w)
 {
     DB(("create_window_frame (%s)\n", w->name));
+    if (w->frame != 0)
+	destroy_window_frame (w);
     w->destroy_frame = 0;
     w->focus_change = 0;
     w->rebuild_frame = 0;
