@@ -68,7 +68,7 @@ uninstall :
 	rm -rf $(DESTDIR)$(sawfishdir)/$(version)
 
 DOC :
-	repdoc DOC `find $(srcdir) -name '*.c' -print`
+	repdoc DOC `find $(srcdir) \( -name '*.c' -o -name '*.jl' \) -print`
 
 NEWS : man/news.texi
 	(cd man && $(MAKE) ../NEWS )
