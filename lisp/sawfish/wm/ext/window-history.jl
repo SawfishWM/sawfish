@@ -91,7 +91,26 @@
 ;; matching windows
 
 (define (window-history-key w)
-  (nth 2 (get-x-property w window-history-key-property)))
+
+  ;; This function returns the key used to match windows, it can be any
+  ;; lisp object with a read syntax (preferably one that hashes well),
+  ;; if `(equal (window-history-key X) (window-history-key Y))' then
+  ;; the two windows are assumed to be the `same' (whatever that means)
+
+  ;; It has been suggested that WM_NAME should be factored in to this
+  ;; somehow, but I want to avoid that, since windows I consider the
+  ;; same often have different names (e.g. `Netscape: FOO' vs
+  ;; `Netscape: BAR')
+
+  ;; Instead I'm going to try just using this method for transient
+  ;; windows, this should avoid the annoying cases where you save the
+  ;; state of the app window, then a transient with the same class gets
+  ;; given the same state..
+
+  (if (window-transient-p w)
+      (cons (nth 2 (get-x-property w window-history-key-property))
+	    (window-name w))
+    (nth 2 (get-x-property w window-history-key-property))))
 
 (define (window-history-ref w)
   (let ((class (window-history-key w)))
