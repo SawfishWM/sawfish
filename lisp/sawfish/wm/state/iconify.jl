@@ -222,6 +222,4 @@ all workspaces."
   (add-hook 'map-notify-hook ws-set-client-state t)
   (call-after-state-changed '(iconified) ws-set-client-state)
 
-  (add-window-menu-toggle (_ "_Sticky") 'toggle-window-sticky window-sticky-p)
-  (add-window-menu-toggle (_ "_Minimized") 'toggle-window-iconified
-			  window-iconified-p))
+  (add-window-menu-toggle (_ "_Sticky") 'toggle-window-sticky window-sticky-p))
