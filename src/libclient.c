@@ -334,39 +334,28 @@ unix_server_close (void)
 static int
 unix_server_init (char *display)
 {
-    struct passwd *pwd = getpwuid(getuid());
-    if(pwd && pwd->pw_dir)
+    struct sockaddr_un addr;
+    sprintf(addr.sun_path, SAWMILL_SOCK_NAME, display);
+    addr.sun_family = AF_UNIX;
+
+    if(access(addr.sun_path, F_OK) != 0)
+	return 1;
+
+    socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
+    if(socket_fd >= 0)
     {
-	struct sockaddr_un addr;
-	char *end;
-	strcpy(addr.sun_path, pwd->pw_dir);
-	end = addr.sun_path + strlen(addr.sun_path);
-	if(end[-1] != '/')
-	    *end++ = '/';
-	sprintf(end, SAWMILL_SOCK_NAME, display);
-	addr.sun_family = AF_UNIX;
-
-	if(access(addr.sun_path, F_OK) != 0)
-	    return 1;
-
-	socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
-	if(socket_fd >= 0)
+	if(connect(socket_fd, (struct sockaddr *)&addr,
+		   sizeof(addr.sun_family) + strlen(addr.sun_path)) == 0)
 	{
-	    if(connect(socket_fd, (struct sockaddr *)&addr,
-		       sizeof(addr.sun_family) + strlen(addr.sun_path)) == 0)
-	    {
-		eval_fun = unix_server_eval;
-		close_fun = unix_server_close;
-		return 0;
-	    }
-	    else
-		return 1;
+	    eval_fun = unix_server_eval;
+	    close_fun = unix_server_close;
+	    return 0;
 	}
 	else
-	    perror ("socket");
+	    return 1;
     }
     else
-	perror ("getpwuid");
+	perror ("socket");
     return -1;
 }
 

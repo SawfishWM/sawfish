@@ -22,10 +22,8 @@
 #ifndef SAWMILL_SERVER_H
 #define SAWMILL_SERVER_H
 
-/* Name of the unix domain socket. It's stored in the user's home directory,
-   but this is the basename. %s is the display name */
-#define SAWMILL_SOCK_NAME ".sawmill/.unix-%s"
-#define SAWMILL_SOCK_DIR  ".sawmill"
+/* Name of the unix domain socket. %s is the canonical display name */
+#define SAWMILL_SOCK_NAME "/tmp/.sawmill-%s"
 
 /* Types of request packet. A byte with one of these values is sent to
    initiate a command. */

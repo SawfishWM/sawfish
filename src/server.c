@@ -129,7 +129,7 @@ void
 server_init (void)
 {
     char namebuf[256];
-    repv name, dir;
+    repv name;
 
     rep_INTERN(server_eval);
 
@@ -142,20 +142,13 @@ server_init (void)
 	return;
 
 #ifdef HAVE_SNPRINTF
-    snprintf(namebuf, sizeof(namebuf), "~/" SAWMILL_SOCK_NAME, rep_STR(name));
+    snprintf(namebuf, sizeof(namebuf), SAWMILL_SOCK_NAME, rep_STR(name));
 #else
-    sprintf(namebuf, "~/" SAWMILL_SOCK_NAME, rep_STR(name));
+    sprintf(namebuf, SAWMILL_SOCK_NAME, rep_STR(name));
 #endif
     name = Flocal_file_name(rep_string_dup(namebuf));
 
-#ifdef HAVE_SNPRINTF
-    snprintf(namebuf, sizeof(namebuf), "~/" SAWMILL_SOCK_DIR);
-#else
-    sprintf(namebuf, "~/" SAWMILL_SOCK_DIR);
-#endif
-    dir = Flocal_file_name(rep_string_dup(namebuf));
-
-    if(name && rep_STRINGP(name) && dir && rep_STRINGP(dir))
+    if(name && rep_STRINGP(name))
     {
 	if(access(rep_STR(name), F_OK) == 0)
 	{
@@ -168,8 +161,6 @@ server_init (void)
 	    struct sockaddr_un addr;
 	    addr.sun_family = AF_UNIX;
 	    strcpy(addr.sun_path, rep_STR(name));
-	    if (access (rep_STR(dir), F_OK) != 0)
-		mkdir (rep_STR(dir), S_IRWXU | S_IRWXG | S_IRWXO);
 	    if(bind(socket_fd, (struct sockaddr *)&addr,
 		    sizeof(addr.sun_family) + strlen(addr.sun_path) + 1) == 0)
 	    {
