@@ -67,6 +67,10 @@
   "Alist of (CLASS . ALIST) associating classes of frame parts with state
 they inherit.")
 
+(defvar override-frame-part-classes nil
+  "Alist of (CLASS . ALIST) associating classes of frame parts with state
+that overrides settings set elsewhere.")
+
 (put 'frame-style 'custom-set 'custom-set-frame-style)
 (put 'frame-style 'custom-widget 'custom-make-frame-style-widget)
 
