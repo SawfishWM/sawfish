@@ -206,21 +206,14 @@ exec rep "$0" "$@"
 
 ;; macros
 
-(defmacro mapseq (fun minimum maximum)
-  `(let
-       ((__mapseq-i__ ,minimum))
-     (while (< __mapseq-i__ ,maximum)
-       (,fun __mapseq-i__)
-       (setq __mapseq-i__ (1+ __mapseq-i__)))))
-
-(defmacro save-entry-contents (entry &rest forms)
+(defmacro save-entry-contents (entry #!rest forms)
   `(let
        ((__save_entry_text__ (gtk-entry-get-text ,entry)))
      (unwind-protect
 	 (progn ,@forms)
        (gtk-entry-set-text ,entry __save_entry_text__))))
 
-(defmacro with-clist-frozen (clist &rest forms)
+(defmacro with-clist-frozen (clist #!rest forms)
   `(progn
      (gtk-clist-freeze ,clist)
      (unwind-protect
@@ -275,7 +268,7 @@ exec rep "$0" "$@"
 (defun set-item-enabled (item enabled)
   (set-widget-enabled (item 'widget) enabled))
 
-(defun make-symbol-item (changed-callback &rest options)
+(defun make-symbol-item (changed-callback #!rest options)
   (let
       ((widget (gtk-combo-new)))
     ;;(gtk-widget-set-usize (gtk-combo-entry widget) 50 -2)
@@ -325,7 +318,7 @@ exec rep "$0" "$@"
 	     stringp)))))
 (put 'string 'item-maker make-string-item)
 
-(defun make-number-item (changed-callback &optional minimum maximum)
+(defun make-number-item (changed-callback #!optional minimum maximum)
   (let
       ((widget (gtk-spin-button-new (gtk-adjustment-new
 				     0 (or minimum -65535)
@@ -348,7 +341,7 @@ exec rep "$0" "$@"
 	     numberp)))))
 (put 'number 'item-maker make-number-item)
 
-(defun make-boolean-item (changed-callback &optional label)
+(defun make-boolean-item (changed-callback #!optional label)
   (let
       ((widget (if label
 		   (gtk-check-button-new-with-label label)
@@ -571,15 +564,15 @@ exec rep "$0" "$@"
 	 (gtk-box-pack-start vbox table t t)
 	 (gtk-table-set-col-spacings table 4)
 	 (gtk-table-set-row-spacings table 4)
-	 (mapseq (lambda (i)
-		   (((cdr (nth i items)) 'set)
-		    (cdr (assq (car (nth i items)) properties)))
-		   (gtk-table-attach-defaults
-		    table (gtk-label-new (symbol-name (car (nth i items))))
-		    0 1 i (1+ i))
-		   (gtk-table-attach-defaults
-		    table ((cdr (nth i items)) 'widget) 1 2 i (1+ i)))
-		 0 (length items))
+	 (do ((i 0 (1+ i)))
+	     ((>= i (length items)))
+	   (((cdr (nth i items)) 'set)
+	    (cdr (assq (car (nth i items)) properties)))
+	   (gtk-table-attach-defaults
+	    table (gtk-label-new (symbol-name (car (nth i items))))
+	    0 1 i (1+ i))
+	   (gtk-table-attach-defaults
+	    table ((cdr (nth i items)) 'widget) 1 2 i (1+ i)))
 	 (gtk-widget-show-all window)
 	 (gtk-grab-add window))))
     (gtk-signal-connect entry "changed" changed-callback)
@@ -606,7 +599,7 @@ exec rep "$0" "$@"
 	       (and (listp x) (stringp (nth 0 x)))))))))
 (put 'image 'item-maker make-image-item)
 
-(defun make-or-item (changed-callback &rest items)
+(defun make-or-item (changed-callback #!rest items)
   (setq items (mapcar (lambda (x)
 			(make-item x changed-callback)) items))
   (let*
@@ -615,12 +608,9 @@ exec rep "$0" "$@"
 			 (gtk-hbox-new nil 0)) items))
        (checks (mapcar (lambda ()
 			 (gtk-check-button-new)) items))
-       (enabled (make-list (length items) nil))
        (enabled-item nil)
        (refresh-item
 	(lambda ()
-	  (setq enabled (mapcar (lambda (x)
-				  (eq enabled-item x)) items))
 	  (let
 	      ((i 0))
 	    (mapc (lambda (x)
@@ -637,13 +627,12 @@ exec rep "$0" "$@"
 				     (nth index checks))
 				    (nth index items))))
 	  (refresh-item))))
-    (mapseq (lambda (i)
-	      (gtk-signal-connect (nth i checks) "toggled" (lambda ()
-							     (toggle-fun i)))
-	      (gtk-box-pack-start box (nth i hboxes))
-	      (gtk-box-pack-start (nth i hboxes) (nth i checks))
-	      (gtk-box-pack-start (nth i hboxes) ((nth i items) 'widget)))
-	    0 (length items))
+    (do ((i 0 (1+ i)))
+	((>= i (length items)))
+      (gtk-signal-connect (nth i checks) "toggled" (lambda () (toggle-fun i)))
+      (gtk-box-pack-start box (nth i hboxes))
+      (gtk-box-pack-start (nth i hboxes) (nth i checks))
+      (gtk-box-pack-start (nth i hboxes) ((nth i items) 'widget)))
     (refresh-item)
     (lambda (op)
       (cond ((eq op 'set)
@@ -655,12 +644,12 @@ exec rep "$0" "$@"
 		     ((enabled-item 'set) x)
 		   ;; look for a matching type
 		   (catch 'done
-		     (mapseq (lambda (i)
-			       (when (((nth i items) 'validp) x)
-				 (setq enabled-item (nth i items))
-				 ((enabled-item 'set) x)
-				 (throw 'done t)))
-			     0 (length items))
+		     (do ((i 0 (1+ i)))
+			 ((>= i (length items)))
+		       (when (((nth i items) 'validp) x)
+			 (setq enabled-item (nth i items))
+			 ((enabled-item 'set) x)
+			 (throw 'done t)))
 		     (message (format nil (_ "No matching item for %S") x)))))
 	       (refresh-item)))
 	    ((eq op 'clear)
@@ -677,27 +666,28 @@ exec rep "$0" "$@"
 	    ((eq op 'validp)
 	     (lambda (x)
 	       (catch 'out
-		 (mapseq (lambda (i)
-			   (when (((nth i items) 'validp) x)
-			     (throw 'out t)))
-			 0 (length items)))))))))
+		 (do ((i 0 (1+ i)))
+		     ((>= i (length items)))
+		   (when (((nth i items) 'validp) x)
+		     (throw 'out t))))))))))
 (put 'or 'item-maker make-or-item)
 
-(defun make-and-item (changed-callback &rest items)
+(defun make-and-item (changed-callback #!rest items)
   (setq items (mapcar (lambda (x)
 			(make-item x changed-callback)) items))
   (let
       ((box ((if (eq and-direction 'horizontal)
 		 gtk-hbox-new
 	       gtk-vbox-new) nil 4)))
-    (mapseq (lambda (i)
-	      (gtk-box-pack-start box ((nth i items) 'widget)))
-	    0 (length items))
+    (do ((i 0 (1+ i)))
+	((>= i (length items)))
+      (gtk-box-pack-start box ((nth i items) 'widget)))
     (lambda (op)
       (cond ((eq op 'set)
 	     (lambda (x)
-	       (mapseq (lambda (i)
-			 (((nth i items) 'set) (nth i x))) 0 (length items))))
+	       (do ((i 0 (1+ i)))
+		   ((>= i (length items)))
+		 (((nth i items) 'set) (nth i x)))))
 	    ((eq op 'clear)
 	     (lambda ()
 	       (mapc (lambda (x)
@@ -716,17 +706,18 @@ exec rep "$0" "$@"
 		      nil)
 		     (t
 		      (catch 'out
-			(mapseq (lambda (i)
-				  (unless (((nth i items) 'validp) (nth i x))
-				    (throw 'out nil))) 0 (length items))
+			(do ((i 0 (1+ i)))
+			    ((>= i (length items)))
+			  (unless (((nth i items) 'validp) (nth i x))
+			    (throw 'out nil)))
 			t)))))))))
 (put 'and 'item-maker make-and-item)
 
-(put 'h-and 'item-maker (lambda (&rest args)
+(put 'h-and 'item-maker (lambda (#!rest args)
 			  (let
 			      ((and-direction 'horizontal))
 			    (apply make-and-item args))))
-(put 'v-and 'item-maker (lambda (&rest args)
+(put 'v-and 'item-maker (lambda (#!rest args)
 			  (let
 			      ((and-direction 'vertical))
 			    (apply make-and-item args))))
@@ -917,11 +908,10 @@ exec rep "$0" "$@"
 			   (cons (car attr) (((cdr attr) 'get))))
 			 patterns-item-alist)))
       (gtk-clist-set-text patterns-clist patterns-selection 0 name)
-      (mapseq (lambda (i)
-		(gtk-clist-set-text
-		 patterns-clist patterns-selection (1+ i)
-		 (patterns-format-pattern (nth i values))))
-	      0 (length values))
+      (do ((i 0 (1+ i)))
+	  ((>= i (length values)))
+	(gtk-clist-set-text patterns-clist patterns-selection (1+ i)
+			    (patterns-format-pattern (nth i values))))
       (when (string= name "")
 	(setq name nil))
       (let
@@ -938,12 +928,11 @@ exec rep "$0" "$@"
 	(mapcar (lambda (attr)
 		  (cons attr (make-item pattern-type patterns-update-alist)))
 		pattern-attrs))
-  (mapseq (lambda (i)
-	    (gtk-table-attach-defaults
-	     patterns-table
-	     ((cdr (nth i patterns-item-alist)) 'widget)
-	     1 2 (1+ i) (+ i 2)))
-	  0 (length patterns-item-alist))
+  (do ((i 0 (1+ i)))
+      ((>= i (length patterns-item-alist)))
+    (gtk-table-attach-defaults patterns-table
+			       ((cdr (nth i patterns-item-alist)) 'widget)
+			       1 2 (1+ i) (+ i 2)))
   (gtk-widget-show-all patterns-table)
   patterns-table)
 
@@ -1618,7 +1607,7 @@ through a GUI.\n" version))
 	  (recursive-edit))
       (gtk-widget-destroy window))))
 
-(defun file-dialog (title &optional start)
+(defun file-dialog (title #!optional start)
   (let
       ((filesel (gtk-file-selection-new title)))
     (when start
@@ -1706,8 +1695,7 @@ through a GUI.\n" version))
   (let
       ((button (gtk-button-new))
        (preview (gtk-preview-new 'color))
-       (color (and color-name (gdk-color-parse-interp color-name)))
-       i)
+       (color (and color-name (gdk-color-parse-interp color-name))))
     (gtk-preview-size preview color-preview-width color-preview-height)
     (when color
       (set-preview-color preview color))
@@ -1728,7 +1716,7 @@ through a GUI.\n" version))
 
 ;; wm communication
 
-(defun sawfish-eval (form &optional read-back)
+(defun sawfish-eval (form #!optional read-back)
   (sawfish-client-eval form (not read-back)))
 
 (defun sawfish-eval-async (form)
