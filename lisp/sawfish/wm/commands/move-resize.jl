@@ -273,6 +273,9 @@ the mouse position relative to the window."
 					   x-base) x-inc)
 				     (/ (- move-resize-height
 					   y-base) y-inc)))))))
+    (call-hook (if (eq move-resize-function 'move)
+		   'while-moving-hook
+		 'while-resizing-hook))
     (if (eq move-resize-mode 'opaque)
 	(move-resize-apply)
       (if (and (eq move-resize-function 'move) move-snap-edges)
