@@ -28,11 +28,21 @@ exec rep "$0" "$@"
 
 ;; menus
 
-(defvar menu-selected nil)
+(define menu-selected nil)
+
+;; only rep-gtk 0.10+ wraps the necessary functions
+(define with-accels (boundp 'gtk-menu-ensure-uline-accel-group))
+
+(defun remove-underscores (string)
+  (if (string-match "_" string)
+      (remove-underscores (concat (substring string 0 (match-start))
+				  (substring string (match-end))))
+    string))
 
 (defun create-menu (spec &optional bar)
-  (let
-      ((menu (if bar (gtk-menu-bar-new) (gtk-menu-new))))
+  (let*
+      ((menu (if bar (gtk-menu-bar-new) (gtk-menu-new)))
+       (accels (and with-accels (gtk-menu-ensure-uline-accel-group menu))))
     (mapc (lambda (cell)
 	    (let
 		(label item)
@@ -40,7 +50,9 @@ exec rep "$0" "$@"
 		(setq cell (symbol-value (car cell))))
 	      (if (null cell)
 		  (setq item (gtk-menu-item-new))
-		(setq label (car cell))
+		(setq label (if with-accels
+				(car cell)
+			      (remove-underscores (car cell))))
 		(setq cell (cdr cell))
 		(if (and (consp (car cell)) (stringp (car (car cell))))
 		    (let
@@ -50,7 +62,12 @@ exec rep "$0" "$@"
 		  (setq item (gtk-menu-item-new-with-label label))
 		  (gtk-signal-connect
 		   item "activate" (lambda ()
-				     (setq menu-selected (car cell))))))
+				     (setq menu-selected (car cell)))))
+		(when with-accels
+		  (let ((hkey (gtk-label-parse-uline
+			       (car (gtk-container-children item)) label)))
+		    (gtk-widget-add-accelerator
+		     item "activate_item" accels hkey 0 0))))
 	      (when item
 		(gtk-widget-lock-accelerators item)
 		((if bar gtk-menu-bar-append gtk-menu-append) menu item)
@@ -59,14 +76,13 @@ exec rep "$0" "$@"
     menu))
 
 (defun popup-menu (spec &optional timestamp position)
-  (catch 'menu-done
-    (let
-	((menu  (create-menu spec)))
-      (gtk-signal-connect menu "deactivate" gtk-main-quit)
-      (setq menu-selected nil)
-      (gtk-menu-popup-interp menu nil nil 0 (or timestamp 0) position)
-      (gtk-main)
-      menu-selected)))
+  (let
+      ((menu  (create-menu spec)))
+    (gtk-signal-connect menu "deactivate" gtk-main-quit)
+    (setq menu-selected nil)
+    (gtk-menu-popup-interp menu nil nil 0 (or timestamp 0) position)
+    (gtk-main)
+    menu-selected))
 
 
 ;; entry point, loop reading command forms, sending back results
