@@ -99,8 +99,8 @@
 
   (defcustom cycle-reverse-event "SPC"
     "Reversal key: \\w"
-    :tooltip "The key used to reverse direction when cycling through windows.
-Has the active modifiers added to it."
+    :tooltip "The key used to cycle in the reverse direction. Has the active \
+modifiers added to it."
     :group (focus cycle)
     :type event)
 
