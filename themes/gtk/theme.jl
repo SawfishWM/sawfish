@@ -73,16 +73,19 @@
 				      (cdr (assq 'selected tem))))
 	   (setq gtk-background
 		 (mapcar #'(lambda (x)
-			     (setq x (make-image (gtk-fix-image-name x)))
-			     (image-put x 'tiled t)
-			     x)
+			     (when x
+			       (setq x (make-image (gtk-fix-image-name x)))
+			       (image-put x 'tiled t)
+			       x))
 			 gtk-background)))
 	  ((setq tem (cdr (assq 'bg gtk-style)))
 	   (setq gtk-background (list (cdr (assq 'normal tem))
 				      (cdr (assq 'prelight tem))
 				      (cdr (assq 'active tem))
 				      (cdr (assq 'selected tem))))
-	   (setq gtk-background (mapcar 'get-color gtk-background))))
+	   (setq gtk-background (mapcar #'(lambda (x)
+					    (and x (get-color x)))
+					gtk-background))))
     (mapc 'rebuild-frame (managed-windows))))
 
 (defun gtk-reload-style ()
