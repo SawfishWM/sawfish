@@ -28,7 +28,11 @@ INSTALL_DIRS = $(SUBDIRS:%=$(sawmilldir)/images/%)
 
 all :
 
-clean realclean :
+clean :
+	rm -f *~ core
+
+realclean :
+	rm -f Makefile
 
 install : all installdirs
 	for d in $(SUBDIRS); do \
