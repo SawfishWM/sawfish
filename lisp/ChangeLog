@@ -1,3 +1,19 @@
+1999-07-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl: new hook `delete-workspace-hook'
+
+	* transient.jl (ignored-window-names, sticky-window-names): new
+	variables, lists of regexps
+
+	* sawmill-defaults.jl: removed the user-add-window function,
+	added some comments about getting GNOME support
+
+	* place-window.jl (ignore-program-positions): program specified
+	window positions are ignored if this is set. User specified
+	positions are never ignored
+
+	* keymaps.jl: bind the root menu to Button2 not Button1
+
 1999-07-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* menus.jl (menu-program-stays-running): if this variable is a

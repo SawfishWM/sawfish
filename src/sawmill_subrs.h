@@ -70,7 +70,7 @@ extern Time last_event_time;
 extern XEvent *current_x_event;
 extern repv Qvisibility_notify_hook, Qdestroy_notify_hook, Qmap_notify_hook,
     Qunmap_notify_hook, Qenter_notify_hook, Qleave_notify_hook,
-    Qfocus_in_hook, Qfocus_out_hook;
+    Qfocus_in_hook, Qfocus_out_hook, Qclient_message_hook;
 extern void record_event_time (XEvent *ev);
 extern void map_request (XEvent *ev);
 extern void send_synthetic_configure (Lisp_Window *w);
@@ -138,6 +138,7 @@ extern void images_kill (void);
 
 /* from keys.c */
 extern repv Qglobal_keymap, Qunbound_key_hook, Qkeymap;
+extern bool (*event_proxy_fun)(XEvent *ev, long code, long mods);
 extern repv eval_input_event (repv context_map);
 extern repv Fmake_keymap (void);
 extern repv Fmake_sparse_keymap (repv base);

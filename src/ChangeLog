@@ -1,3 +1,27 @@
+1999-08-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* display.c (error_handler): call destroy-notify-hook _after_
+	setting window->id to zero
+	(sys_init): select for SubstructureNotify on root window
+
+	* events.c (client_message): call `client-message-hook' if
+	message isn't handled. This is an `or' style hook
+
+1999-07-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (list_frame_generator): detect when regenerating a
+	frame by looking at w->frame instead of w->frame_parts (which
+	can be null even when the window is framed)
+
+	* gnome.c: new loadable module, minimal GNOME compliance
+	(client list, button proxying, workspace details)
+
+	* windows.c (Fwindow_size_hints): pass along the PPosition,
+	PSize, USPosition and USSize flags
+
+	* keys.c (event_proxy_fun): hook called when an unbound event
+	occurs. Should return TRUE if it handles the event
+
 1999-07-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c: fix stupid stack-smashing bug

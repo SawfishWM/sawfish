@@ -149,10 +149,14 @@ The list of hooks currently called is:
 	leave-notify-hook
 	focus-in-hook
 	focus-out-hook
+	client-message-hook
 
 	add-workspace-hook	each is called with a single parameter,
 	enter-workspace-hook	the workspace whose state has changed
 	leave-workspace-hook
+	delete-workspace-hook
+	add-to-workspace-hook	these two are called with a window
+	remove-from-workspace-hook
 
 	place-window-hook	called the first time a window is mapped
 
@@ -163,3 +167,8 @@ For a description of the structures defining window frame parts, see
 src/frames.c. Search for a comment starting ``building frames from
 component lists''. Also you can look at the example themes:
 `absolute-e.jl', `brushed-metal.jl' and `simple.jl'.
+
+Minimal GNOME compliance can be obtained by requiring the `gnome'
+module, i.e. put "(require 'gnome)" in your .sawmillrc file. This is
+still a bit basic, but it does most things and will get better..
+

@@ -30,7 +30,7 @@ SRCS :=	colors.c commands.c cursors.c display.c events.c fonts.c frames.c \
 	functions.c images.c keys.c main.c windows.c
 OBJS := $(SRCS:.c=.o)
 
-DL_SRCS := server.c
+DL_SRCS := server.c gnome.c
 DL_OBJS := $(DL_SRCS:%.c=lib%.la)
 
 CFLAGS := $(CFLAGS) $(IMLIB_CFLAGS) $(X11_CFLAGS)
@@ -44,7 +44,7 @@ sawmill : $(OBJS) $(LIBOBJS)
 sawmill-client : client.o
 	$(CC) $(LDFLAGS) -o $@ $< $(LIBOBJS) $(LIBS)
 
-libserver.la : server.lo
+lib%.la : %.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $<
 
 install : all installdirs
