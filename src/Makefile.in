@@ -42,7 +42,7 @@ override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(ESD_C
 all : sawfish sawfish-client libclient.o $(DL_OBJS) $(LISP_OBJS) gtk-style
 
 sawfish : $(OBJS) $(LIBOBJS)
-	$(rep_LIBTOOL) $(CC) -export-dynamic $(LDFLAGS) \
+	$(rep_LIBTOOL) --mode=link $(CC) -export-dynamic $(LDFLAGS) \
 	  -o sawfish $(OBJS) $(LIBOBJS) $(REP_LIBS) \
 	  $(IMAGE_LIBS) $(X11_LIBS) $(LIBS)
 
@@ -63,7 +63,7 @@ gtk-style : gtk-style.c
 
 install : all installdirs
 	for p in sawfish sawfish-client; do \
-	  $(rep_LIBTOOL) $(INSTALL_PROGRAM) $$p $(DESTDIR)${bindir}; \
+	  $(rep_LIBTOOL) --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)${bindir}; \
 	done
 	for p in gtk-style $(DL_OBJS); do \
 	  $(rep_DL_INSTALL) $$p $(DESTDIR)${sawfishexecdir}; \
@@ -89,4 +89,4 @@ realclean : clean
 	rm -f .*.d sawfish sawfish-client Makefile gtk-style
 	rm -rf .libs
 
-include $(SRCS:%.c=.%.d) $(DL_SRCS:%.c=.%.d)
+-include $(SRCS:%.c=.%.d) $(DL_SRCS:%.c=.%.d)
