@@ -51,6 +51,8 @@ DEFSYM(right_edge, "right-edge");
 DEFSYM(bottom_edge, "bottom-edge");
 DEFSYM(cursor, "cursor");
 
+static bool frame_draw_mutex;
+
 
 /* building frames from component lists
 
@@ -59,16 +61,16 @@ DEFSYM(cursor, "cursor");
    frame, possible tags include:
 
 	background . IMAGE-OR-COLOR
-	background . (NORMAL FOCUSED CLICKED FOCUSED-CLICKED)
+	background . (NORMAL FOCUSED HIGHLIGHTED CLICKED)
 	foreground . COLOR
-	foreground . (NORMAL FOCUSED CLICKED FOCUSED-CLICKED)
+	foreground . (NORMAL FOCUSED HIGHLIGHTED CLICKED)
 
 	text . STRING-OR-FUNCTION-OR-NIL
 	x-justify . left OR right OR center OR NUMBER
 	y-justify . top OR bottom OR center OR NUMBER
 
 	font . FONT
-	font . (NORMAL FOCUSED CLICKED FOCUSED-CLICKED)
+	font . (NORMAL FOCUSED HIGHLIGHTED CLICKED)
 
 	left-edge . POSITION-REL-LEFT
 	right-edge . POSITION-REL-RIGHT
@@ -86,10 +88,10 @@ DEFSYM(cursor, "cursor");
 static inline int
 current_state (struct frame_part *fp)
 {
-    if (fp->win == focus_window)
-	return fp->clicked ? fps_focused_clicked : fps_focused;
-    else
-	return fp->clicked ? fps_clicked : fps_normal;
+    return (fp->clicked ? fps_clicked
+	    : fp->highlighted ? fps_highlighted
+	    : (fp->win == focus_window) ? fps_focused
+	    : fps_normal);
 }
 
 /* Set the background of the frame-part FP. This is either a solid color
@@ -303,10 +305,15 @@ set_frame_part_fg (struct frame_part *fp)
 void
 refresh_frame_part (struct frame_part *fp)
 {
-    Lisp_Window *w = fp->win;
-    set_frame_part_bg (fp);
-    if (w->id != 0)
-	set_frame_part_fg (fp);
+    if (!frame_draw_mutex)
+    {
+	Lisp_Window *w = fp->win;
+	set_frame_part_bg (fp);
+	if (w->id != 0)
+	    set_frame_part_fg (fp);
+    }
+    else
+	fp->pending_refresh = 1;
 }
 
 /* Find the frame-part that is drawn in window ID */
@@ -750,7 +757,8 @@ list_frame_generator (Lisp_Window *w)
 		XSelectInput (dpy, fp->id,
 			      ButtonPressMask | ButtonReleaseMask
 			      | ButtonMotionMask | PointerMotionHintMask
-			      | LeaveWindowMask | KeyPressMask | ExposureMask);
+			      | EnterWindowMask | LeaveWindowMask
+			      | KeyPressMask | ExposureMask);
 		XMapWindow (dpy, fp->id);
 
 		/* stash the fp in the window */
@@ -837,6 +845,34 @@ destroy_window_frame (Lisp_Window *w)
 }
 
 
+
+DEFUN("frame-draw-mutex", Vframe_draw_mutex,
+      Sframe_draw_mutex, (repv arg), rep_Var)
+{
+    if (arg != 0)
+    {
+	frame_draw_mutex = (arg != Qnil);
+	if (!frame_draw_mutex)
+	{
+	    Lisp_Window *w;
+	    for (w = window_list; w != 0; w = w->next)
+	    {
+		struct frame_part *fp;
+		for (fp = w->frame_parts; fp != 0; fp = fp->next)
+		{
+		    if (fp->pending_refresh)
+		    {
+			refresh_frame_part (fp);
+			fp->pending_refresh = 0;
+		    }
+		}
+	    }
+	}
+    }
+    return frame_draw_mutex ? Qt : Qnil;
+}
+	
+
 /* initialisation */
 
 void
@@ -847,6 +883,8 @@ frames_init (void)
 
     rep_INTERN(nil_frame);
     rep_SYM(Qnil_frame)->value = Qnil;
+
+    rep_ADD_SUBR(Sframe_draw_mutex);
 
     rep_INTERN(internal);
     rep_INTERN(tiled);
