@@ -1,5 +1,8 @@
 2000-01-24  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c (add_window): fix bug of leaving window name unset
+	if XmbTextPropertyToTextList () fails
+
 	* functions.c (Fx_delete_window, Fx_kill_client): two new
 	functions
 
