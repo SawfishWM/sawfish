@@ -27,11 +27,10 @@
   :group focus
   :after-set focus-mode-changed)
 
-;; XXX make this work
-;(defcustom focus-proxy-click t
-;  "Does click-to-focus mode pass the click through to the window."
-;  :type boolean
-;  :group focus)
+(defcustom focus-proxy-click t
+  "Does click-to-focus mode pass the click through to the window."
+  :type boolean
+  :group focus)
 
 (defvar click-to-focus-keymap
   (bind-keys (make-sparse-keymap)
@@ -40,10 +39,10 @@
 (defun focus-click (w)
   (interactive "w")
   (set-input-focus w)
-; (window-put w 'keymap window-keymap)
-; (when (or (window-get w 'focus-proxy-click) focus-proxy-click)
-;   (proxy-current-event w))
-  )
+  (window-put w 'keymap window-keymap)
+  (when (or (window-get w 'focus-proxy-click) focus-proxy-click)
+    ;; pass the event through to the client window
+    (allow-events 'replay-pointer)))
 
 (defun focus-enter-fun (w)
   (if (eq w 'root)
@@ -54,7 +53,12 @@
 
 (defun focus-in-fun (w)
   (unless (eq (window-get w 'keymap) window-keymap)
-    (window-put w 'keymap window-keymap)))
+    (window-put w 'keymap window-keymap))
+  (when (eq focus-mode 'click)
+    (mapc #'(lambda (x)
+	      (unless (or (eq x w) (eq (window-get x 'keymap)
+				       click-to-focus-keymap))
+		(window-put x 'keymap click-to-focus-keymap))))))
 
 (defun focus-out-fun (w)
   (when (and (eq focus-mode 'click)
