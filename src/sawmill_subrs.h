@@ -108,7 +108,7 @@ extern void events_kill (void);
 extern int font_type;
 extern repv Qdefault_font;
 extern int x_text_width (repv font, u_char *string, size_t len);
-extern void x_draw_string (Window id, repv font, GC gc,
+extern void x_draw_string (Window id, repv font, GC gc, Lisp_Color *fg_color,
 			   int x, int y, u_char *string, size_t len);
 extern repv Fget_font(repv name);
 extern repv Ffont_get(repv font, repv prop);

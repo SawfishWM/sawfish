@@ -1,5 +1,5 @@
 /* sawmill.h -- Main include file, brings in all the rest
-   $Id: sawmill.h,v 1.2 1999/07/25 15:02:21 john Exp
+   $Id$
 
    Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -168,10 +168,14 @@ typedef struct lisp_window {
 #define WINDOW_FOCUSED_P(w) (focus_window == w)
 #define WINDOW_IS_GONE_P(w) (w->id == 0)
 
+typedef struct Lisp_Font_Class_struct Lisp_Font_Class;
+
 /* An allocated font */
 typedef struct lisp_font {
     repv car;
     struct lisp_font *next;
+    const Lisp_Font_Class *class;
+    repv type;
     repv name;
     void *font;
     repv plist;
@@ -180,14 +184,6 @@ typedef struct lisp_font {
 
 #define FONTP(v)	rep_CELL16_TYPEP(v, font_type)
 #define VFONT(v)	((Lisp_Font *)rep_PTR(v))
-
-#define FF_FONT_SET	(0 << (rep_CELL16_TYPE_BITS + 0))
-#define FF_FONT_STRUCT	(1 << (rep_CELL16_TYPE_BITS + 0))
-#define FF_FONT_MASK	(3 << (rep_CELL16_TYPE_BITS + 0))
-
-#define FONT_TYPE(v)	(VFONT(v)->car & FF_FONT_MASK)
-#define FONT_SET_P(v)	(FONT_TYPE (v) == FF_FONT_SET)
-#define FONT_STRUCT_P(v) (FONT_TYPE (v) == FF_FONT_STRUCT)
 
 /* An allocated color */
 typedef struct lisp_color {

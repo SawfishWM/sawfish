@@ -658,8 +658,6 @@ set_frame_part_fg (struct frame_part *fp)
 {
     int state = current_state (fp);
     repv font = fp->font[state], fg = fp->fg[state];
-    XGCValues gcv;
-    u_long gcv_mask = 0;
     repv string = rep_NULL;
     int length = 0, width, height, x, y;
     Lisp_Window *win = fp->win;
@@ -743,6 +741,8 @@ set_frame_part_fg (struct frame_part *fp)
 
 	if (IMAGEP(fg))
 	{
+	    XGCValues gcv;
+	    u_long gcv_mask = 0;
 	    Pixmap fg_pixmap, fg_mask;
 
 	    if (fp->drawn.fg == fg
@@ -816,14 +816,8 @@ set_frame_part_fg (struct frame_part *fp)
 		set_frame_part_bg (fp);
 	    }
 
-	    if (COLORP(fg))
-	    {
-		gcv.foreground = VCOLOR(fg)->pixel;
-		gcv_mask |= GCForeground;
-	    }
-
-	    XChangeGC (dpy, fp->gc, gcv_mask, &gcv);
-	    x_draw_string (fp->id, font, fp->gc, x, y + VFONT(font)->ascent,
+	    x_draw_string (fp->id, font, fp->gc, VCOLOR(fg),
+			   x, y + VFONT(font)->ascent,
 			   rep_STR(string), length);
 
 	    fp->drawn.text = string;
