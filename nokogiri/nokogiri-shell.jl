@@ -27,6 +27,7 @@
 
     (open rep
 	  gtk
+	  timers
 	  nokogiri-gnome
 	  nokogiri-group
 	  nokogiri-slot
@@ -98,9 +99,11 @@
 	(setq cancel-widget (stock-button 'cancel))
 	(gtk-window-set-title main-window (_ "Sawfish configurator"))
 	(gtk-widget-set-name main-window (_ "Sawfish configurator"))
-	(gtk-window-set-wmclass main-window "main" "Nokogiri")
-	(gtk-signal-connect main-window "delete_event" on-quit))
+	(gtk-window-set-wmclass main-window "main" "Nokogiri"))
       (gtk-container-add main-window vbox)
+
+      (gtk-signal-connect main-window "delete_event"
+			  (if (not socket-id) on-quit capplet-delete-event))
 
       (unless socket-id
 	(gtk-button-box-set-layout hbox 'end)
@@ -251,7 +254,7 @@
 ;;; capplet interfacing
 
   ;; called when there's input available on stdin
-  (defun capplet-input ()
+  (define (capplet-input)
     (let ((tem (read-line standard-input)))
       (condition-case nil
 	  (progn
@@ -263,10 +266,16 @@
 	    (flush-file standard-output))
 	(end-of-stream))))
 
-  (defun capplet-state-changed ()
+  (define (capplet-delete-event)
+    (gtk-widget-hide main-window)
+    (make-timer on-quit 10)
+    ;; return t so no destroy - if the timer fires we'll destroy then
+    t)
+
+  (define (capplet-state-changed)
     (write standard-output ?c)
     (flush-file standard-output))
 
-  (defun capplet-no-group ()
+  (define (capplet-no-group)
     (write standard-output ?g)
     (flush-file standard-output)))
