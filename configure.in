@@ -25,7 +25,7 @@ AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR(etc)
 
 dnl Release versioning info
-version="1.0.1-gnome2-1"
+version="2.0.pre1"
 
 output_files="src/Makefile lisp/Makefile scripts/Makefile themes/Makefile\
  lisp/sawfish/ui/Makefile lisp/sawfish/gtk/Makefile sounds/Makefile\
@@ -156,13 +156,27 @@ if test "$with_gdk_pixbuf" != "no"; then
     fi
 fi
 if test "$with_gdk_pixbuf" = "no"; then
-  AM_PATH_IMLIB
-  if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then true; else
-    AC_MSG_ERROR([imlib must be built with support for png images])
+  AC_PATH_PROG(IMLIB_CONFIG, imlib-config, no)
+  AC_MSG_CHECKING([for Imlib])
+  if test "$IMLIB_CONFIG" = "no"; then
+    AC_MSG_RESULT([no])
+    AC_MSG_ERROR([can't find imlib-config])
+  else
+    IMLIB_VERSION=`$IMLIB_CONFIG --version`
+    dnl XXX do version check..
+    AC_MSG_RESULT([version $IMLIB_VERSION])
+    IMLIB_CFLAGS=`$IMLIB_CONFIG --cflags`
+    IMLIB_LIBS=`$IMLIB_CONFIG --libs`
+    if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then true; else
+      AC_MSG_ERROR([imlib must be built with support for png images])
+    fi
+    AC_DEFINE(HAVE_IMLIB,1)
+    IMAGE_LIBS='${IMLIB_LIBS}'
+    IMAGE_CFLAGS='${IMLIB_CFLAGS}'
+    AC_SUBST(IMLIB_VERSION)
+    AC_SUBST(IMLIB_CFLAGS)
+    AC_SUBST(IMLIB_LIBS)
   fi
-  AC_DEFINE(HAVE_IMLIB,1)
-  IMAGE_LIBS='${IMLIB_LIBS}'
-  IMAGE_CFLAGS='${IMLIB_CFLAGS}'
 fi
 AC_SUBST(IMAGE_LIBS)
 AC_SUBST(IMAGE_CFLAGS)
@@ -203,6 +217,9 @@ if test "$enable_capplet" = "yes"; then
     AC_MSG_WARN([Can't run "gnome-config capplet", not building capplet])
   else
     AC_MSG_RESULT([yes])
+    dnl XXX this is bogus!
+    GNOME_CC_CFLAGS="`gnome-config --cflags gnome capplet`"
+    GNOME_CC_LIBS="`gnome-config --libs gnome capplet`"
     AC_SUBST(GNOME_CC_CFLAGS)
     AC_SUBST(GNOME_CC_LIBS)
     add_subdir "capplet"
