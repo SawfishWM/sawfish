@@ -86,7 +86,9 @@ typedef struct lisp_window {
     int does_wm_take_focus : 1;
     int does_wm_delete_window : 1;
 
-    /* The position and dimensions of `attr' is always maintained. */
+    /* The position and dimensions of `attr' is always maintained.
+       But the position is the position of the frame, while the
+       dimensions are those of the client */
     XWindowAttributes attr;
     XSizeHints hints;
     XWMHints *wmhints;
