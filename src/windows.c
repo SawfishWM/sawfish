@@ -58,6 +58,22 @@ DEFSYM(user_size, "user-size");
 DEFSYM(program_size, "program-size");
 DEFSYM(user_position, "user-position");
 DEFSYM(program_position, "program-position");
+DEFSYM(window_gravity, "window-gravity");
+
+/* for window-gravity */
+DEFSYM(forget, "forget");
+DEFSYM(static, "static");
+DEFSYM(north_west, "north-west");
+DEFSYM(north, "north");
+DEFSYM(north_east, "north-east");
+DEFSYM(west, "west");
+DEFSYM(center, "center");
+DEFSYM(east, "east");
+DEFSYM(south_west, "south-west");
+DEFSYM(south, "south");
+DEFSYM(south_east, "south-east");
+
+static repv gravity_map[StaticGravity+1];
 
 
 /* utilities */
@@ -306,8 +322,8 @@ add_window (Window id)
 	    w->attr.width, w->attr.height));
 
 	xwcm = CWX | CWX | CWWidth | CWHeight | CWBorderWidth;
-	xwc.x = w->attr.x + w->attr.border_width;
-	xwc.y = w->attr.y + w->attr.border_width;
+	xwc.x = w->attr.x;
+	xwc.y = w->attr.y;
 	xwc.width = w->attr.width;
 	xwc.height = w->attr.height;
 	xwc.border_width = 0;
@@ -933,6 +949,16 @@ member of, or nil if it is not a member of a group.
 	    : Qnil);
 }
 
+DEFUN("window-border-width", Fwindow_border_width, Swindow_border_width,
+      (repv win), rep_Subr1) /*
+::doc:Swindow-border-width::
+window-border-width WINDOW
+::end:: */
+{
+    rep_DECLARE1(win, WINDOWP);
+    return rep_MAKE_INT(VWIN(win)->attr.border_width);
+}
+
 DEFUN("window-size-hints", Fwindow_size_hints, Swindow_size_hints,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-size-hints::
@@ -942,7 +968,8 @@ Return an alist defining the size-hints specified by the client window
 associated with WINDOW. Possible keys in the alist are `min-height',
 `max-height', `min-width', `max-width', `height-inc', `width-inc',
 `min-aspect', `max-aspect', `base-height', `base-width',
-`user-position', `program-position', `user-size', `program-size'.
+`user-position', `program-position', `user-size', `program-size',
+`window-gravity', `border-size'.
 ::end:: */
 {
     repv ret = Qnil;
@@ -995,7 +1022,13 @@ associated with WINDOW. Possible keys in the alist are `min-height',
 	ret = Fcons (Fcons (Quser_size, Qt), ret);
     else if (flags & PSize)
 	ret = Fcons (Fcons (Qprogram_size, Qt), ret);
-
+    if ((flags & PWinGravity)
+	&& hints->win_gravity >= ForgetGravity
+	&& hints->win_gravity <= StaticGravity)
+    {
+	ret = Fcons (Fcons (Qwindow_gravity,
+			    gravity_map[hints->win_gravity]), ret);
+    }
     return ret;
 }
 
@@ -1146,6 +1179,7 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_position);
     rep_ADD_SUBR(Swindow_dimensions);
     rep_ADD_SUBR(Swindow_frame_dimensions);
+    rep_ADD_SUBR(Swindow_frame_offset);
     rep_ADD_SUBR(Swindowp);
     rep_ADD_SUBR(Sset_input_focus);
     rep_ADD_SUBR(Sinput_focus);
@@ -1164,6 +1198,7 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_group_id);
     rep_ADD_SUBR(Swindow_size_hints);
     rep_ADD_SUBR(Scall_window_hook);
+    rep_ADD_SUBR(Swindow_border_width);
 
     rep_INTERN_SPECIAL(before_add_window_hook);
     rep_INTERN_SPECIAL(add_window_hook);
@@ -1190,6 +1225,30 @@ windows_init (void)
     rep_INTERN(user_position);
     rep_INTERN(program_size);
     rep_INTERN(program_position);
+    rep_INTERN(window_gravity);
+    rep_INTERN(forget);
+    rep_INTERN(static);
+    rep_INTERN(north_west);
+    rep_INTERN(north);
+    rep_INTERN(north_east);
+    rep_INTERN(west);
+    rep_INTERN(center);
+    rep_INTERN(east);
+    rep_INTERN(south_west);
+    rep_INTERN(south);
+    rep_INTERN(south_east);
+
+    gravity_map[ForgetGravity] = Qforget;
+    gravity_map[NorthWestGravity] = Qnorth_west;
+    gravity_map[NorthGravity] = Qnorth;
+    gravity_map[NorthEastGravity] = Qnorth_east;
+    gravity_map[WestGravity] = Qwest;
+    gravity_map[CenterGravity] = Qcenter;
+    gravity_map[EastGravity] = Qeast;
+    gravity_map[SouthWestGravity] = Qsouth_west;
+    gravity_map[SouthGravity] = Qsouth;
+    gravity_map[SouthEastGravity] = Qsouth_east;
+    gravity_map[StaticGravity] = Qstatic;
 }
 
 void
