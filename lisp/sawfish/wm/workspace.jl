@@ -637,7 +637,8 @@
 				   (1+ (- i (car limits)))))))
 	  (setq menu (cons (list (quote-menu-item ws-name)
 				 (lambda () (select-workspace i))
-				 (cons 'check (= i current-workspace)))
+				 (cons 'check (= i current-workspace))
+				 '(group . current-workspace))
 			   menu))))
       (nconc (nreverse menu) (list nil) static-workspace-menus)))
 

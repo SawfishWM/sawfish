@@ -62,7 +62,8 @@
 	  (lambda ()
 	    (when (windowp w)
 	      (display-window w)))
-	  (cons 'check (and (eq (input-focus) w)))))
+	  (cons 'check (and (eq (input-focus) w)))
+	  '(group . beos-window-menu)))
 
   (define (group-name id)
     (cond ((symbolp id) (symbol-name id))

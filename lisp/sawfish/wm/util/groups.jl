@@ -156,7 +156,8 @@ id of the new group."
 		       (list (quote-menu-item name)
 			     (lambda ()
 			       (add-window-to-group w id))
-			     (cons 'check (eql (window-actual-group-id w) id)))))
+			     (cons 'check (eql (window-actual-group-id w) id))
+			     '(group . window-group))))
 		   group-ids))
       (nconc menus
 	     (list '())

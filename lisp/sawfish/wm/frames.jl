@@ -482,25 +482,32 @@ deciding which frame type to ask a theme to generate.")
 		       (list (quote-menu-item (symbol-name s))
 			     (lambda ()
 			       (set-frame-style (current-event-window) s))
-			     (cons 'check (eq (window-get w 'frame-style) s))))
+			     (cons 'check (eq (window-get w 'frame-style) s))
+			     '(group . menu-style)))
 		     styles)
 	     (list '())
 	     (list (list (_ "Default")
 			 (lambda ()
 			   (set-frame-style (current-event-window) nil))
-			 (cons 'check (not (window-get w 'frame-style))))))))
+			 (cons 'check (not (window-get w 'frame-style)))
+			 '(group . menu-style))))))
 
   (define (frame-type-menu w)
     `((,(_ "Normal") set-frame:default
-       (check . ,(eq (window-type w) 'default)))
+       (check . ,(eq (window-type w) 'default))
+       (group . menu-type))
       (,(_ "Title-only") set-frame:shaped
-       (check . ,(eq (window-type w) 'shaped)))
+       (check . ,(eq (window-type w) 'shaped))
+       (group . menu-type))
       (,(_ "Border-only") set-frame:transient
-       (check . ,(eq (window-type w) 'transient)))
+       (check . ,(eq (window-type w) 'transient))
+       (group . menu-type))
       (,(_ "Top-border") set-frame:shaped-transient
-       (check . ,(eq (window-type w) 'shaped-transient)))
+       (check . ,(eq (window-type w) 'shaped-transient))
+       (group . menu-type))
       (,(_ "None") set-frame:unframed
-       (check . ,(eq (window-type w) 'unframed)))))
+       (check . ,(eq (window-type w) 'unframed))
+       (group . menu-type))))
 
 
 ;;; removing frame parts
