@@ -269,25 +269,15 @@ else
 fi
 AC_SUBST(REP_GTK_GNOME)
 
-dnl Check for Doug Lea's malloc in libc, otherwise compile dlmalloc.c
+dnl Check for Doug Lea's malloc in libc
 doug_lea_malloc=yes
 AC_CHECK_FUNC(malloc_get_state, , doug_lea_malloc=no)
 AC_CHECK_FUNC(malloc_set_state, , doug_lea_malloc=no)
 if test "$doug_lea_malloc" = "no"; then
-  dnl dlmalloc is broken on Tru64, and may be broken on some
-  dnl solaris platforms
-  case ${host} in
-    *-dec-osf*)
-      AC_DEFINE(LIBC_MALLOC)
-      ;;
-    *-sparc-sun*)
-      AC_DEFINE(LIBC_MALLOC)
-      ;;
-    *)
-      LIBOBJS="${LIBOBJS} dlmalloc.o"
-      AC_DEFINE(DOUG_LEA_MALLOC)
-      ;;
-  esac
+  dnl We used to compile our own version of dlmalloc on most
+  dnl platforms that didn't have it in their libc. But the list
+  dnl of exceptions was growing too long..
+  AC_DEFINE(LIBC_MALLOC)
 else
   AC_DEFINE(DOUG_LEA_MALLOC)
   AC_DEFINE(LIBC_MALLOC)
