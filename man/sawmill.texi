@@ -583,8 +583,8 @@ Return @code{t} if @var{window} is shaped (possibly not rectangular).
 @end defun
 
 @defun window-id window
-Return an integer, the xid of the client window associated with
-@var{window}.
+If window object @var{window} has a client window associated with,
+return an integer defining its xid, otherwise return @code{nil}.
 @end defun
 
 @defun window-group-id window
@@ -1596,6 +1596,9 @@ and recalibrated.
 Return a cons cell @code{(@var{width} . @var{height})} defining the
 dimensions of the frame associated with @var{window}. These will always
 be greater than or equal to the dimensions of the client window.
+
+If @var{window} is not framed, then this function returns the same
+values as @code{window-dimensions} would.
 @end defun
 
 @defun window-frame-offset window
