@@ -60,9 +60,8 @@
 
   (defcustom ignore-window-input-hint nil
     "Give focus to windows even when they haven't asked for it."
-    :tooltip "Windows should set the `accepts input' hint in their WM_HINTS
-property to show if they require the focus or not. Some windows don't do
-this, hence this option."
+    :tooltip "Windows should set the `accepts input' hint in their WM_HINTS \
+property to show if they require the focus or not."
     :type boolean
     :user-level expert
     :group focus)
