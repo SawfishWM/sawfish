@@ -1,65 +1,72 @@
-
+Summary: An extensible window manager for the X Window System.
 Name: sawfish
 Version: @version@
 Release: 1
-Summary: a highly configurable and extensible X11 window manager
-Requires: librep >= 0.10, rep-gtk >= 0.8
+Requires: librep >= 0.11, rep-gtk >= 0.8
 Copyright: GPL
 Group: User Interface/Desktops
-Source: ftp://ftp.dcs.warwick.ac.uk/people/John.Harper/sawfish/sawfish-%{version}.tar.gz
-URL: http://www.dcs.warwick.ac.uk/~john/sw/sawfish/
+Source: http://download.sourceforge.net/sawfish/sawfish-%{version}.tar.gz
+URL: http://sawmill.sourceforge.net/
 Packager: John Harper <john@dcs.warwick.ac.uk>
 Buildroot: /var/tmp/%{name}-root
 BuildPrereq: rep-gtk-libglade control-center-devel gmp-devel
 PreReq: /sbin/install-info
+Provides: windowmanager
 Obsoletes: sawmill
 
 %description
-This is an extensible window manager using a LISP-based scripting
-language--all window decorations are configurable, the basic idea is to
-have as much user-interface policy as possible controlled through the
-Lisp language.
-
-All configuration may be performed through a GTK interface; sawfish is
-mostly-GNOME compliant.
+Sawfish is an extensible window manager which uses a Lisp-based
+scripting language.  All window decorations are configurable and the
+basic idea is to have as much user-interface policy as possible
+controlled through the Lisp language.  Configuration can be
+accomplished by writing Lisp code in a personal .sawfishrc file, or
+using a GTK+ interface.  Sawfish is mostly GNOME compliant; if you
+want to use it with GNOME, you'll need to install sawfish-gnome as
+well..
 
 %package gnome
-Summary: GNOME support for sawfish
+Summary: GNOME support for the sawfish window manager.
 Group: User Interface/Desktops
 Requires: %{name}
 Obsoletes: sawmill-gnome
 
 %description gnome
-Optional GNOME support for sawfish. Includes a wm-entries spec, and a
-control center applet
+The sawfish-gnome package includes GNOME support for the sawfish
+window manager, including a GNOME control center applet. If you want
+to use sawfish with the GNOME GUI desktop, you'll need to install this
+package as well as the sawfish package.
 
 %package themer
-Summary: GUI for creating sawfish themes
+Summary: A GUI for creating sawfish window manager themes.
 Group: User Interface/Desktops
 Requires: %{name}, rep-gtk-libglade
 Obsoletes: sawmill-themer
 
 %description themer
-Optional theme builder for sawfish. Allows static window themes to be
-created/edited in a graphical environment.
+The sawfish-themer package contains an optional theme builder for the
+sawfish window manager. sawfish-themer allows static window themes to
+be created and edited in a graphical environment.
 
 %prep
-%setup
+%setup -q
 
 %build
-./configure --enable-capplet --enable-themer --with-readline --prefix %{_prefix} %{_host}
-make CFLAGS="$RPM_OPT_FLAGS"
+%configure --with-readline
+make host_type=%{_target_platform}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome/wm-properties
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/control-center
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome/apps/Settings
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/bin
-touch $RPM_BUILD_ROOT%{_prefix}/bin/sawmill{,-client,-capplet,-ui,-themer}
-chmod +x $RPM_BUILD_ROOT%{_prefix}/bin/sawmill{,-client,-capplet,-ui,-themer}
-make DESTDIR=$RPM_BUILD_ROOT install
-gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawfish*
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/control-center
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/apps/Settings
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+touch $RPM_BUILD_ROOT%{_bindir}/sawmill{,-client,-capplet,-ui,-themer}
+chmod +x $RPM_BUILD_ROOT%{_bindir}/sawmill{,-client,-capplet,-ui,-themer}
+make install \
+    DESTDIR=$RPM_BUILD_ROOT \
+    GNOMEDIR=$RPM_BUILD_ROOT/%{_prefix} \
+    host_type=%{_target_platform}
+gzip -9nf $RPM_BUILD_ROOT%{_infodir}/sawfish*
 
 %post
 /sbin/install-info /usr/info/sawfish.info.gz /usr/info/dir
@@ -69,35 +76,41 @@ if [ "$1" = 0 ]; then
     /sbin/install-info --delete /usr/info/sawfish.info.gz /usr/info/dir
 fi
 
+%clean
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+
 %files
 %defattr(-,root,root)
 %doc README NEWS FAQ THANKS BUGS TODO po/sawfish.pot
-%{_prefix}/bin/sawfish
-%{_prefix}/bin/sawfish-client
-%{_prefix}/bin/sawfish-ui
-%{_prefix}/bin/sawmill
-%{_prefix}/bin/sawmill-client
-%{_prefix}/bin/sawmill-ui
-%{_prefix}/share/sawfish/%{version}
-%{_prefix}/libexec/sawfish/%{version}/%{_host}
-%{_prefix}/info/sawfish*
+%{_bindir}/sawfish
+%{_bindir}/sawfish-client
+%{_bindir}/sawfish-ui
+%{_bindir}/sawmill
+%{_bindir}/sawmill-client
+%{_bindir}/sawmill-ui
+%{_datadir}/sawfish/%{version}
+%{_libexecdir}/sawfish/%{version}/%{_target_platform}
+%{_infodir}/sawfish*
 
 %files gnome
 %defattr(-,root,root)
-%{_prefix}/bin/sawfish-capplet
-%{_prefix}/bin/sawmill-capplet
-%{_prefix}/share/control-center/Sawfish
-%{_prefix}/share/gnome/apps/Settings/Sawfish
-%{_prefix}/share/gnome/wm-properties/Sawfish.desktop
-%{_prefix}/share/pixmaps/sawfish*.png
+%{_bindir}/sawfish-capplet
+%{_bindir}/sawmill-capplet
+%{_datadir}/control-center/Sawfish
+%{_datadir}/gnome/apps/Settings/Sawfish
+%{_datadir}/gnome/wm-properties/Sawfish.desktop
+%{_datadir}/pixmaps/sawfish*.png
 
 %files themer
 %defattr(-,root,root)
-%{_prefix}/bin/sawfish-themer
-%{_prefix}/bin/sawmill-themer
-%{_prefix}/share/sawfish/%{version}/themer.glade
+%{_bindir}/sawfish-themer
+%{_bindir}/sawmill-themer
+%{_datadir}/sawfish/%{version}/themer.glade
 
 %changelog
+* Tue Jun 12 2000 John Harper <john@dcs.warwick.ac.uk>
+- merged differences from RH spec file
+
 * Mon Apr 24 2000 John Harper <john@dcs.warwick.ac.uk>
 - s/sawmill/sawfish/
 
