@@ -96,12 +96,12 @@ interactive_spec(repv cmd)
 {
     repv fun, spec = rep_NULL;
     if(rep_SYMBOLP(cmd))
-	fun = Fsymbol_function(cmd, Qt);
+	cmd = Fsymbol_value(cmd, Qt);
+again:
+    if (rep_FUNARGP(cmd))
+	fun = rep_FUNARG(cmd)->fun;
     else
 	fun = cmd;
-again:
-    if (rep_FUNARGP(fun))
-	fun = rep_FUNARG(fun)->fun;
     if(!rep_VOIDP(fun) && !rep_NILP(fun))
     {
 	if((rep_TYPE(fun) >= rep_Subr0) && (rep_TYPE(fun) <= rep_SubrN))
@@ -134,14 +134,16 @@ again:
 		    }
 		}
 	    }
-	    else if(rep_CAR(fun) == Qautoload)
+	    else if(rep_CAR(fun) == Qautoload && rep_FUNARGP(cmd))
 	    {
 		/* An autoload, load it then try again. */
-		rep_GC_root gc_cmd;
-		rep_PUSHGC(gc_cmd, cmd);
-		fun = rep_load_autoload(cmd, fun, FALSE);
-		rep_POPGC;
-		if(fun != rep_NULL)
+		struct rep_Call lc;
+		lc.fun = lc.args = lc.args_evalled_p = Qnil;
+		rep_PUSH_CALL(lc);
+		rep_USE_FUNARG(cmd);
+		cmd = rep_load_autoload(cmd);
+		rep_POP_CALL(lc);
+		if(cmd != rep_NULL)
 		    goto again;
 	    }
 	}
@@ -321,7 +323,11 @@ any entered arg is given to the invoked COMMAND.
 	   to build the list of arguments overwrote it. */
 	current_prefix_arg = Farg;
 	if(args)
+	{
+	    if (rep_SYMBOLP(cmd))
+		cmd = Fsymbol_value (cmd, Qt);
 	    res = rep_funcall(cmd, args, FALSE);
+	}
 	rep_POPGC;
     }
     else
@@ -419,7 +425,7 @@ Returns t if COMMAND may be called interactively.
 ::end:: */
 {
     if(rep_SYMBOLP(cmd))
-	cmd = Fsymbol_function(cmd, Qt);
+	cmd = Fsymbol_value(cmd, Qt);
     if (rep_FUNARGP(cmd))
 	cmd = rep_FUNARG(cmd)->fun;
     if(!rep_VOIDP(cmd) && !rep_NILP(cmd))

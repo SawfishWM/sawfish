@@ -478,7 +478,7 @@ map_request (XEvent *ev)
 	    Fungrab_server ();
 	}
 	w->mapped = TRUE;
-	rep_call_lisp1 (Quniconify_window, rep_VAL(w));
+	rep_call_lisp1 (Fsymbol_value (Quniconify_window, Qt), rep_VAL(w));
     }
 
     if (!w->client_unmapped)
@@ -711,13 +711,13 @@ configure_request (XEvent *ev)
 		   uniconify it. The Xlib manual suggests that the
 		   correct method is to just remap the window.. */
 #ifndef GNOME_PAGER_UNICONIFY_IS_BROKEN
-		rep_call_lisp1 (Quniconify_window, win);
+		rep_call_lisp1 (Fsymbol_value (Quniconify_window, Qt), win);
 #endif
-		rep_call_lisp1 (Qraise_window, win);
+		rep_call_lisp1 (Fsymbol_value (Qraise_window, Qt), win);
 		rep_POPGC;
 	    }
 	    else if (ev->xconfigurerequest.detail == Below)
-		rep_call_lisp1 (Qlower_window, rep_VAL(w));
+		rep_call_lisp1 (Fsymbol_value (Qlower_window, Qt), rep_VAL(w));
 	}
 	{
 	    /* Is the window shaped? */

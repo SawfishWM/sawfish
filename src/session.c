@@ -143,7 +143,7 @@ Deletes the session manager property called PROPERTY-NAME (a string).
 static void
 save_yourself_2 (SmcConn conn, SmPointer data)
 {
-    repv ret = rep_call_lisp0 (Qsm_save_yourself);
+    repv ret = rep_call_lisp0 (Fsymbol_value (Qsm_save_yourself, Qt));
     SmcSaveYourselfDone (conn, (ret && ret != Qnil) ? True : False);
 }
 

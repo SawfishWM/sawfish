@@ -25,12 +25,12 @@
 ;;;###autoload
 (defun iconify-group (w)
   (interactive "%W")
-  (map-window-group 'iconify-window w))
+  (map-window-group iconify-window w))
 
 ;;;###autoload
 (defun uniconify-group (w)
   (interactive "%W")
-  (map-window-group 'uniconify-window w))
+  (map-window-group uniconify-window w))
 
 
 ;; sticky
@@ -38,12 +38,12 @@
 ;;;###autoload
 (defun make-group-sticky (w)
   (interactive "%W")
-  (map-window-group 'make-window-sticky w))
+  (map-window-group make-window-sticky w))
 
 ;;;###autoload
 (defun make-group-unsticky (w)
   (interactive "%W")
-  (map-window-group 'make-window-unsticky w))
+  (map-window-group make-window-unsticky w))
 
 ;;;###autoload
 (defun toggle-group-sticky (w)
@@ -57,9 +57,9 @@
 
 ;;;###autoload
 (defun send-group-to-workspace (w send-group-dest-space)
-  (map-window-group #'(lambda (x)
-			(ws-move-window
-			 x send-group-dest-space (eq x (input-focus)))) w))
+  (map-window-group (lambda (x)
+		      (ws-move-window
+		       x send-group-dest-space (eq x (input-focus)))) w))
 
 ;;;###autoload
 (defun send-group-to-current-workspace (w)
@@ -69,9 +69,9 @@
 ;;;###autoload
 (defun send-group-to-next-workspace (send-group-window count)
   (interactive "%W\np")
-  (ws-call-with-workspace #'(lambda (space)
-			      (send-group-to-workspace send-group-window space)
-			      (select-workspace space))
+  (ws-call-with-workspace (lambda (space)
+			    (send-group-to-workspace send-group-window space)
+			    (select-workspace space))
 			  count workspace-send-boundary-mode))
 
 ;;;###autoload
@@ -85,12 +85,12 @@
 ;;;###autoload
 (defun move-group-to-current-viewport (w)
   (interactive "%W")
-  (map-window-group 'move-window-to-current-viewport w))
+  (map-window-group move-window-to-current-viewport w))
 
 ;;;###autoload
 (defun move-group-viewport (w col row)
-  (map-window-group #'(lambda (x)
-			(move-window-viewport x col row)) w)
+  (map-window-group (lambda (x)
+		      (move-window-viewport x col row)) w)
   (move-viewport-to-window w))
 
 ;;;###autoload
@@ -119,22 +119,22 @@
 ;;;###autoload
 (defun raise-group (w)
   (interactive "%W")
-  (map-window-group 'raise-window w))
+  (map-window-group raise-window w))
 
 ;;;###autoload
 (defun lower-group (w)
   (interactive "%W")
-  (map-window-group 'lower-window w))
+  (map-window-group lower-window w))
 
 ;;;###autoload
 (defun raise-group-depth (w)
   (interactive "%W")
-  (map-window-group 'raise-window-depth w))
+  (map-window-group raise-window-depth w))
 
 ;;;###autoload
 (defun lower-group-depth (w)
   (interactive "%W")
-  (map-window-group 'lower-window-depth w))
+  (map-window-group lower-window-depth w))
 
 
 
@@ -143,8 +143,8 @@
 ;;;###autoload
 (defun set-group-frame-style (set-group-w set-group-style
 			      &optional set-group-type set-group-from-user)
-  (map-window-group #'(lambda (w)
-			(set-window-frame-style
-			 w set-group-style set-group-type set-group-from-user))
+  (map-window-group (lambda (w)
+		      (set-window-frame-style
+		       w set-group-style set-group-type set-group-from-user))
 		    set-group-w))
 

@@ -94,10 +94,10 @@
 ;; might it be useful to load the GNOME support?
 (unless batch-mode
   (catch 'out
-    (mapc #'(lambda (prop)
-	      (when (string-match "^GNOME_" (symbol-name prop))
-		(require 'gnome)
-		(throw 'out t)))
+    (mapc (lambda (prop)
+	    (when (string-match "^GNOME_" (symbol-name prop))
+	      (require 'gnome)
+	      (throw 'out t)))
 	  (list-x-properties 'root))))
 
 ;; load i18n support when necessary
@@ -127,7 +127,7 @@
       ((equal "-f" arg)
        (setq arg (car command-line-args))
        (setq command-line-args (cdr command-line-args))
-       (funcall (read-from-string arg)))
+       ((symbol-value (read-from-string arg))))
       ((equal "-l" arg)
        (setq arg (car command-line-args))
        (setq command-line-args (cdr command-line-args))

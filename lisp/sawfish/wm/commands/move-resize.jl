@@ -191,8 +191,7 @@
 				   (car move-resize-frame))
 				(+ move-resize-height
 				   (cdr move-resize-frame))))
-		    (apply 'draw-window-outline
-			   move-resize-last-outline))
+		    (apply draw-window-outline move-resize-last-outline))
 		  (if (eq move-resize-function 'resize)
 			    (move-resize-infer-anchor)
 		    (move-resize-infer-directions))
@@ -212,8 +211,9 @@
 
 ;; round up a window dimension X in increments of INC, with minimum
 ;; value BASE
-(defsubst move-resize-roundup (x inc base &optional max)
-  (min (+ base (max 0 (* (1+ (/ (1- (- x base)) inc)) inc))) (or max 65535)))
+(defsubst move-resize-roundup (x inc base &optional maximum)
+  (min (+ base (max 0 (* (1+ (/ (1- (- x base)) inc)) inc)))
+       (or maximum 65535)))
 
 ;; called each pointer motion event during move/resize
 (defun move-resize-motion ()
@@ -222,7 +222,7 @@
       ((ptr-x (car (query-pointer)))
        (ptr-y (cdr (query-pointer))))
     (unless (eq move-resize-mode 'opaque)
-      (apply 'erase-window-outline move-resize-last-outline))
+      (apply erase-window-outline move-resize-last-outline))
     (cond ((eq move-resize-function 'move)
 	   (when (memq 'horizontal move-resize-directions)
 	     (setq move-resize-x (+ move-resize-old-x
@@ -296,13 +296,13 @@
 	      (list move-resize-mode move-resize-x move-resize-y
 		    (+ move-resize-width (car move-resize-frame))
 		    (+ move-resize-height (cdr move-resize-frame)))))
-      (apply 'draw-window-outline move-resize-last-outline))))
+      (apply draw-window-outline move-resize-last-outline))))
 
 ;; called when the move/resize finished (i.e. button-release event)
 (defun move-resize-finished ()
   (interactive)
   (unless (eq move-resize-mode 'opaque)
-    (apply 'erase-window-outline move-resize-last-outline))
+    (apply erase-window-outline move-resize-last-outline))
   (move-resize-apply)
   (throw 'move-resize-done t))
 
@@ -313,7 +313,7 @@
 	(move-window-to move-resize-window move-resize-old-x move-resize-old-y)
 	(resize-window-to
 	 move-resize-window move-resize-old-width move-resize-old-height))
-    (apply 'erase-window-outline move-resize-last-outline))
+    (apply erase-window-outline move-resize-last-outline))
   (throw 'move-resize-done nil))
 
 ;; commit the current state of the move or resize
@@ -413,8 +413,8 @@
   (when (eq move-resize-window w)
     (move-resize-finished)))
 
-(add-hook 'unmap-notify-hook 'move-resize-lost-window t)
-(add-hook 'destroy-notify-hook 'move-resize-lost-window t)
+(add-hook 'unmap-notify-hook move-resize-lost-window t)
+(add-hook 'destroy-notify-hook move-resize-lost-window t)
 
 
 ;; Entry points

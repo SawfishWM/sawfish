@@ -34,8 +34,8 @@
   :type boolean)
 
 (defvar customize-user-forms nil)
-(defvar customize-read-user-file nil)
-(defvar customize-dirty-user-file nil)
+(defvar customize-user-file-read nil)
+(defvar customize-user-file-dirty nil)
 
 
 ;; defcustom's for some built-in variables
@@ -44,7 +44,7 @@
   "Font used by default."
   :group appearance
   :type font
-  :after-set after-setting-frame-option)
+  :after-set (lambda () after-setting-frame-option))
 
 
 ;; ui
@@ -53,7 +53,7 @@
   (let
       ((type (or (get symbol 'custom-type) 'boolean))
        (doc (or (documentation symbol t) (symbol-name symbol)))
-       (value (funcall (or (get symbol 'custom-get) 'symbol-value) symbol)))
+       (value (funcall (or (get symbol 'custom-get) symbol-value) symbol)))
     (when (stringp doc)
       (setq doc (_ doc)))
     (when customize-show-symbols
@@ -102,23 +102,23 @@
 
 (defun customize-group-spec (group-list)
   (let
-      ((spec (mapcar 'customize-symbol-spec (cdr group-list))))
+      ((spec (mapcar customize-symbol-spec (cdr group-list))))
     (if (get (car group-list) 'custom-group-widget)
 	(funcall
 	 (get (car group-list) 'custom-group-widget) (car group-list) spec)
       (list* 'vbox spec))))
 
 (defun customize-ui-spec (&optional group)
-  (mapc 'require custom-required)
+  (mapc require custom-required)
   (if (or (null group) (eq group t))
       (list*
        'pages
-       (mapcar #'(lambda (group-list)
-		   (let
-		       ((group (car group-list)))
-		     (list (_ (or (get group 'custom-group-doc)
-				  (symbol-name group)))
-			   (customize-group-spec group-list))))
+       (mapcar (lambda (group-list)
+		 (let
+		     ((group (car group-list)))
+		   (list (_ (or (get group 'custom-group-doc)
+				(symbol-name group)))
+			 (customize-group-spec group-list))))
 	       custom-groups))
     (customize-group-spec (assq group custom-groups))))
 
@@ -134,7 +134,7 @@
 ;; setting variables
 
 (defun customize-read-user-file ()
-  (unless customize-read-user-file
+  (unless customize-user-file-read
     (setq customize-user-forms nil)
     (when (file-exists-p custom-user-file)
       (let
@@ -147,11 +147,11 @@
 	      (end-of-stream))
 	  (close-file file))
 	(setq customize-user-forms (nreverse customize-user-forms))))
-    (setq customize-read-user-file t)
-    (setq customize-dirty-user-file nil)))
+    (setq customize-user-file-read t)
+    (setq customize-user-file-dirty nil)))
 
 (defun customize-write-user-file ()
-  (when customize-dirty-user-file
+  (when customize-user-file-dirty
     (make-directory-recursively (file-name-directory custom-user-file))
     (let
 	((file (open-file custom-user-file 'write)))
@@ -162,27 +162,31 @@
 ;; sawmill user customization -- do not edit by hand!
 ;; sawmill version %s, written %s\n\n"
 		      sawmill-version (current-time-string))
-	      (mapc #'(lambda (f)
-			(format file "%S\n" f)) customize-user-forms))
+	      (mapc (lambda (f)
+		      (format file "%S\n" f)) customize-user-forms))
 	  (close-file file))
-	(setq customize-dirty-user-file nil)))))
+	(setq customize-user-file-dirty nil)))))
 
 (defun customize-set (symbol value)
   (customize-read-user-file)
   (let
-      ((form `(,(or (get symbol 'custom-set) 'custom-set-variable)
-	       ',symbol ',value
-	       ,@(and (get symbol 'custom-require)
-		      (list (list 'quote (get symbol 'custom-require)))))))
+      ((fun (get symbol 'custom-set))
+       form)
+    (if fun
+	(setq fun (or (cdr (assq fun custom-set-alist)) 'custom-set-variable))
+      (setq fun 'custom-set-variable))
+    (setq form `(,fun ',symbol ',value
+		,@(and (get symbol 'custom-require)
+		       (list (list 'quote (get symbol 'custom-require))))))
     (catch 'done
-      (mapc #'(lambda (f)
-		(when (eq (nth 1 (nth 1 f)) symbol)
-		  (setq customize-user-forms
-			(cons form (delq f customize-user-forms)))
-		  (throw 'done t)))
+      (mapc (lambda (f)
+	      (when (eq (nth 1 (nth 1 f)) symbol)
+		(setq customize-user-forms
+		      (cons form (delq f customize-user-forms)))
+		(throw 'done t)))
 	    customize-user-forms)
       (setq customize-user-forms (cons form customize-user-forms)))
-    (setq customize-dirty-user-file t)
+    (setq customize-user-file-dirty t)
     (eval form)))
 
 
@@ -191,7 +195,7 @@
 (defgroup about "About"
   :widget (lambda ()
 	    (list 'label (format nil (_ "\
-Sawmill %s
+Sawmill %s (rep %s)
 
 Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -207,4 +211,4 @@ GNU General Public License for more details.
 
 Visit the Sawmill homepage at http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
 ")
-				 sawmill-version))))
+				 sawmill-version rep-version))))

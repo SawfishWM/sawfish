@@ -95,35 +95,35 @@
 (defmacro maximize-edges-touching (start end edge)
   `(> (- (min ,end (nth 2 ,edge)) (max ,start (nth 1 ,edge))) 0))
 
-(defun maximize-expand-edges (start end min max perp-1 perp-2 edges)
+(defun maximize-expand-edges (start end minimum maximum perp-1 perp-2 edges)
   (if maximize-always-expands
       (progn
-	(mapc #'(lambda (edge)
-		  ;; EDGE is (PERP START END OPEN-P)
-		  (if (nth 3 edge)
-		      (when (and (< (car edge) max)
-				 (>= (car edge) perp-2)
-				 (> (car edge) min)
-				 (maximize-edges-touching start end edge))
-			(setq max (car edge)))
-		    (when (and (> (car edge) min)
-			       (<= (car edge) perp-1)
-			       (< (car edge) max)
+	(mapc (lambda (edge)
+		;; EDGE is (PERP START END OPEN-P)
+		(if (nth 3 edge)
+		    (when (and (< (car edge) maximum)
+			       (>= (car edge) perp-2)
+			       (> (car edge) minimum)
 			       (maximize-edges-touching start end edge))
-		      (setq min (car edge)))))
+		      (setq maximum (car edge)))
+		  (when (and (> (car edge) minimum)
+			     (<= (car edge) perp-1)
+			     (< (car edge) maximum)
+			     (maximize-edges-touching start end edge))
+		    (setq minimum (car edge)))))
 	      edges)
-	(cons min max))
+	(cons minimum maximum))
     (let
-	((opening (sort (mapcar 'car (filter #'(lambda (e)
-						 (and (nth 3 e)
-						      (maximize-edges-touching
-						       start end e)))
-					     edges))))
-	 (closing (sort (mapcar 'car (filter #'(lambda (e)
-						 (and (not (nth 3 e))
-						      (maximize-edges-touching
-						       start end e)))
-					     edges))))
+	((opening (sort (mapcar car (filter (lambda (e)
+					      (and (nth 3 e)
+						   (maximize-edges-touching
+						    start end e)))
+					    edges))))
+	 (closing (sort (mapcar car (filter (lambda (e)
+					      (and (not (nth 3 e))
+						   (maximize-edges-touching
+						    start end e)))
+					    edges))))
 	 max-perp
 	 (max-size 0))
       ;; find the maximum gap between a closing and an opening edge which
@@ -176,27 +176,27 @@
        rects)
     (setq rects (rectangles-from-grid
 		 (sort (car grid)) (sort (cdr grid))
-		 #'(lambda (rect)
-		     ;; the rectangle mustn't overlap any avoided windows
-		     (catch 'foo
-		       (mapc #'(lambda (w)
-				 (when (> (rect-2d-overlap
-					   (window-frame-dimensions w)
-					   (window-position w)
-					   rect) 0)
-				   (throw 'foo nil)))
-			     avoided)
-		       t))))
-	  
+		 (lambda (rect)
+		   ;; the rectangle mustn't overlap any avoided windows
+		   (catch 'foo
+		     (mapc (lambda (w)
+			     (when (> (rect-2d-overlap
+				       (window-frame-dimensions w)
+				       (window-position w)
+				       rect) 0)
+			       (throw 'foo nil)))
+			   avoided)
+		     t))))
+
     ;; find the largest rectangle
     (let
 	((max-area 0)
 	 (max-rect nil))
-      (mapc #'(lambda (rect)
-		(when (and (rect-wholly-visible-p rect)
-			   (> (rectangle-area rect) max-area))
-		  (setq max-area (rectangle-area rect))
-		  (setq max-rect rect))) rects)
+      (mapc (lambda (rect)
+	      (when (and (rect-wholly-visible-p rect)
+			 (> (rectangle-area rect) max-area))
+		(setq max-area (rectangle-area rect))
+		(setq max-rect rect))) rects)
       (when max-rect
 	(rplaca coords (nth 0 max-rect))
 	(rplacd coords (nth 1 max-rect))
@@ -356,5 +356,5 @@ unmaximized."
 (sm-add-saved-properties
  'unmaximized-geometry 'maximized-vertically 'maximized-horizontally)
 
-(add-hook 'after-move-hook 'maximize-discard-move)
-(add-hook 'after-resize-hook 'maximize-discard-resize)
+(add-hook 'after-move-hook maximize-discard-move)
+(add-hook 'after-resize-hook maximize-discard-resize)

@@ -38,6 +38,35 @@
 ;;	shaped-transient	border-like title-bar only
 ;;	unframed		no frame at all
 
+
+;; custom support
+
+(defun custom-set-frame-style (symbol value &rest args)
+  (if (eq symbol 'default-frame-style)
+      (set-frame-style value)
+    (apply custom-set-variable symbol value args)))
+
+(defun custom-make-frame-style-widget (symbol value doc)
+  (let
+      ((styles (find-all-frame-styles t)))
+    `(frame-style ,styles
+		  :variable ,symbol
+		  :value ,value
+		  :doc ,doc
+		  :theme-path ,theme-load-path)))
+
+(defun after-setting-frame-option ()
+  (when always-update-frames
+    (reframe-all-windows)))
+
+(put 'frame-style 'custom-set custom-set-frame-style)
+(put 'frame-style 'custom-widget custom-make-frame-style-widget)
+(setq custom-set-alist (cons (cons custom-set-frame-style
+				   'custom-set-frame-style) custom-set-alist))
+
+
+;; variables etc
+
 (defvar frame-part-classes
   '((title . ((cursor . hand2)
 	      (keymap . title-keymap)))
@@ -70,9 +99,6 @@ they inherit.")
 (defvar override-frame-part-classes nil
   "Alist of (CLASS . ALIST) associating classes of frame parts with state
 that overrides settings set elsewhere.")
-
-(put 'frame-style 'custom-set 'custom-set-frame-style)
-(put 'frame-style 'custom-widget 'custom-make-frame-style-widget)
 
 (defcustom default-frame-style nil
   "Default frame style (theme)."
@@ -166,7 +192,7 @@ that overrides settings set elsewhere.")
     (set-window-frame w (or (funcall fun w type) default-frame))))
 
 (defun set-frame-for-window (w &optional override type)
-  (when (or override (not (window-frame w)))
+  (when (or override (not (or (window-frame w) (window-get w 'ignored))))
     (let*
 	((style (window-get w 'frame-style))
 	 fun tem)
@@ -186,7 +212,7 @@ that overrides settings set elsewhere.")
     (set-frame-for-window w t (window-get w 'type))))
 
 (defun reframe-all-windows ()
-  (mapc 'reframe-one-window (managed-windows)))
+  (mapc reframe-one-window (managed-windows)))
 
 
 ;; kludge different window decors by modifying the assumed window type
@@ -241,33 +267,12 @@ that overrides settings set elsewhere.")
 	 type)))
 
 ;; create some commands for setting the window type
-(mapc #'(lambda (type)
-	  (fset (intern (concat "set-frame:" (symbol-name type)))
-		(make-closure `(lambda (w)
-				 (interactive "%W")
-				 (set-frame-for-window w t ',type)))))
+(mapc (lambda (type)
+	(set (intern (concat "set-frame:" (symbol-name type)))
+	     (make-closure `(lambda (w)
+			      (interactive "%W")
+			      (set-frame-for-window w t ',type)))))
       '(default transient shaped shaped-transient unframed))
-
-
-;; custom support
-
-(defun custom-set-frame-style (symbol value &rest args)
-  (if (eq symbol 'default-frame-style)
-      (set-frame-style value)
-    (apply 'custom-set-variable symbol value args)))
-
-(defun custom-make-frame-style-widget (symbol value doc)
-  (let
-      ((styles (find-all-frame-styles t)))
-    `(frame-style ,styles
-		  :variable ,symbol
-		  :value ,value
-		  :doc ,doc
-		  :theme-path ,theme-load-path)))
-
-(defun after-setting-frame-option ()
-  (when always-update-frames
-    (reframe-all-windows)))
 
 
 ;; loading ``themes'' (currently just frame styles)
@@ -281,61 +286,61 @@ that overrides settings set elsewhere.")
 	dir)
     ;; try the list of suffixes
     (catch 'out
-      (mapc #'(lambda (cell)
-		(when (string-match (car cell) dir)
-		  (throw 'out (expand-last-match (if get-name
-						     (nth 2 cell)
-						   (nth 1 cell))))))
+      (mapc (lambda (cell)
+	      (when (string-match (car cell) dir)
+		(throw 'out (expand-last-match (if get-name
+						   (nth 2 cell)
+						 (nth 1 cell))))))
 	    theme-suffix-regexps)
       nil)))
 
 (defun load-frame-style (name)
   (catch 'out
-    (mapc #'(lambda (dir)
-	      (mapc #'(lambda (suf)
-			(let*
-			    ((t-dir (expand-file-name
-				     (concat (symbol-name name) suf) dir))
-			     tem)
-			  (when (file-exists-p t-dir)
-			    (setq tem (frame-style-directory t-dir))
-			    (when tem
-			      (let
-				  ((image-load-path
-				    (cons tem image-load-path)))
-				(if themes-are-gaolled
-				    (gaol-load
-				     (expand-file-name "theme.jl" tem) nil t t)
-				  (load
-				   (expand-file-name "theme" tem) nil t))
-				(throw 'out t))))))
-		    theme-suffixes))
+    (mapc (lambda (dir)
+	    (mapc (lambda (suf)
+		    (let*
+			((t-dir (expand-file-name
+				 (concat (symbol-name name) suf) dir))
+			 tem)
+		      (when (file-exists-p t-dir)
+			(setq tem (frame-style-directory t-dir))
+			(when tem
+			  (let
+			      ((image-load-path
+				(cons tem image-load-path)))
+			    (if themes-are-gaolled
+				(gaol-load
+				 (expand-file-name "theme.jl" tem) nil t t)
+			      (load
+			       (expand-file-name "theme" tem) nil t))
+			    (throw 'out t))))))
+		  theme-suffixes))
 	  theme-load-path)
     nil))
 
 (defun find-all-frame-styles (&optional sorted)
   (let
-      (list tem)
-    (mapc #'(lambda (dir)
-	      (when (file-directory-p dir)
-		(mapc #'(lambda (t-dir)
-			  (when (setq tem (frame-style-directory
-					   (expand-file-name t-dir dir) t))
-			    (unless (member tem list)
-			      (setq list (cons tem list)))))
-		      (directory-files dir))))
+      (lst tem)
+    (mapc (lambda (dir)
+	    (when (file-directory-p dir)
+	      (mapc (lambda (t-dir)
+		      (when (setq tem (frame-style-directory
+				       (expand-file-name t-dir dir) t))
+			(unless (member tem lst)
+			  (setq lst (cons tem lst)))))
+		    (directory-files dir))))
 	  theme-load-path)
     (when sorted
-      (setq list (sort list 'string-lessp)))
-    (mapcar 'intern list)))
+      (setq lst (sort lst string-lessp)))
+    (mapcar intern lst)))
 
 (defun frame-style-menu ()
   (let
       ((styles (find-all-frame-styles t)))
-    (nconc (mapcar #'(lambda (s)
-		       (list (symbol-name s)
-			     `(set-window-frame-style
-			       (current-event-window) ',s nil t)))
+    (nconc (mapcar (lambda (s)
+		     (list (symbol-name s)
+			   `(set-window-frame-style
+			     (current-event-window) ',s nil t)))
 		   styles)
 	   `(() (,(_ "Default") (let
 			       ((w (current-event-window)))
@@ -362,12 +367,12 @@ that overrides settings set elsewhere.")
 (defun set-frame-part-value (class key value &optional override)
   (let*
       ((var (if override 'override-frame-part-classes 'frame-part-classes))
-       (elt (assq class (symbol-value var)))
+       (item (assq class (symbol-value var)))
        tem)
-    (if elt
-	(if (setq tem (assq key (cdr elt)))
+    (if item
+	(if (setq tem (assq key (cdr item)))
 	    (rplacd tem value)
-	  (rplacd elt (cons (cons key value) (cdr elt))))
+	  (rplacd item (cons (cons key value) (cdr item))))
       (set var (cons (cons class (list (cons key value)))
 		     (symbol-value var))))))
 
@@ -394,11 +399,11 @@ that overrides settings set elsewhere.")
 	(progn
 	  (setq cell (cons class alist))
 	  (setq frame-part-classes (cons cell frame-part-classes)))
-      (mapc #'(lambda (attr)
-		(let
-		    ((tem (assq (car attr) (cdr cell))))
-		  (unless tem
-		    (rplacd cell (cons attr (cdr cell))))))
+      (mapc (lambda (attr)
+	      (let
+		  ((tem (assq (car attr) (cdr cell))))
+		(unless tem
+		  (rplacd cell (cons attr (cdr cell))))))
 	    alist))
     (when with-keymap
       (let
@@ -412,7 +417,7 @@ that overrides settings set elsewhere.")
 
 ;; initialisation
 
-(add-hook 'add-window-hook 'set-frame-for-window t)
-(add-hook 'shape-notify-hook 'reframe-one-window t)
+(add-hook 'add-window-hook set-frame-for-window t)
+(add-hook 'shape-notify-hook reframe-one-window t)
 
 (sm-add-saved-properties 'type 'ignored 'frame-style)

@@ -65,8 +65,8 @@
 
 ;; return the list of windows in the group with id GROUP-ID
 (defun windows-by-group (group-id)
-  (delete-if-not #'(lambda (x)
-		     (eq (window-actual-group-id x) group-id))
+  (delete-if-not (lambda (x)
+		   (eq (window-actual-group-id x) group-id))
 		 (managed-windows)))
 
 ;; return the list of windows in the same group as window W
@@ -85,10 +85,10 @@
   (let
       ((ids (copy-sequence persistent-group-ids))
        id)
-    (mapc #'(lambda (w)
-	      (setq id (window-actual-group-id w))
-	      (unless (memq id ids)
-		(setq ids (cons id ids)))) (managed-windows))
+    (mapc (lambda (w)
+	    (setq id (window-actual-group-id w))
+	    (unless (memq id ids)
+	      (setq ids (cons id ids)))) (managed-windows))
     ids))
 
 ;; put window W in group with id GROUP-ID, returns GROUP-ID
@@ -112,27 +112,27 @@
     (setq w (or (current-event-window) (input-focus))))
   (let
       ((group-id (window-actual-group-id w))
-       (group-names (mapcar #'(lambda (x)
-				(cons (window-actual-group-id x)
-				      (window-name x)))
+       (group-names (mapcar (lambda (x)
+			      (cons (window-actual-group-id x)
+				    (window-name x)))
 			    (managed-windows)))
        (group-ids (window-group-ids))
        menus)
     (setq group-ids (cons group-id (delq group-id group-ids)))
-    (setq menus (mapcar #'(lambda (id)
-			    (let
-				((name (if (symbolp id)
-					   (symbol-name id)
-					 (cdr (assq id group-names)))))
-			      (when (> (length name) 20)
-				(setq name (concat
-					    (substring name 0 20) "...")))
-			      (when (eq id group-id)
-				(setq name (concat name " *")))
-			      (list name
-				    `(add-window-to-group
-				      (get-window-by-id
-				       ,(window-id w)) ',id))))
+    (setq menus (mapcar (lambda (id)
+			  (let
+			      ((name (if (symbolp id)
+					 (symbol-name id)
+				       (cdr (assq id group-names)))))
+			    (when (> (length name) 20)
+			      (setq name (concat
+					  (substring name 0 20) "...")))
+			    (when (eq id group-id)
+			      (setq name (concat name " *")))
+			    (list name
+				  `(add-window-to-group
+				    (get-window-by-id
+				     ,(window-id w)) ',id))))
 			group-ids))
     (rplacd menus (cons '() (cdr menus)))
     `(,@menus
@@ -155,8 +155,8 @@
     (when group-id
       (add-window-to-group w group-id))))
 
-(add-hook 'sm-window-save-functions 'group-saved-state)
-(add-hook 'sm-restore-window-hook 'group-load-state)
+(add-hook 'sm-window-save-functions group-saved-state)
+(add-hook 'sm-restore-window-hook group-load-state)
 
 
 ;; hooks
@@ -168,4 +168,4 @@
       (when group
 	(add-window-to-group w group)))))
 
-(add-hook 'before-add-window-hook 'group-window-add t)
+(add-hook 'before-add-window-hook group-window-add t)

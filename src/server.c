@@ -75,7 +75,7 @@ server_handle_request(int fd)
 	   || read(fd, rep_STR(val), len) != len)
 	    goto io_error;
 	rep_STR(val)[len] = 0;
-	val = rep_call_lisp1 (Qserver_eval, val);
+	val = rep_call_lisp1 (Fsymbol_value (Qserver_eval, Qt), val);
 	if (req != req_eval_async)
 	{
 	    if(val && rep_STRINGP(val))

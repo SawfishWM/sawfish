@@ -47,19 +47,19 @@
 	      (end-of-stream
 	       (setq sm-restored-session (nreverse sm-restored-session))))
 	  (close-file file))
-	(mapc 'sm-match-window (managed-windows))))))
+	(mapc sm-match-window (managed-windows))))))
 
 ;; Scan sm-restored-session for window W
 (defun sm-match-window (w)
   (let
-      ((elt (catch 'found
-	      (mapc #'(lambda (x)
-			(when (sm-match-window-to-alist w x)
-			  (throw 'found x)))
-		    sm-restored-session))))
-    (when elt
-      (setq sm-restored-session (delq elt sm-restored-session))
-      (sm-apply-to-window w elt))))
+      ((item (catch 'found
+	       (mapc (lambda (x)
+		       (when (sm-match-window-to-alist w x)
+			 (throw 'found x)))
+		     sm-restored-session))))
+    (when item
+      (setq sm-restored-session (delq item sm-restored-session))
+      (sm-apply-to-window w item))))
 
 ;; Match window W to ALIST
 (defun sm-match-window-to-alist (w alist)
@@ -106,9 +106,9 @@
       (tem)
     (when (setq tem (cdr (assq 'dimensions alist)))
       (resize-window-to w (car tem) (cdr tem)))
-    (mapc #'(lambda (sym)
-	      (when (setq tem (cdr (assq sym alist)))
-		(window-put w sym tem))) sm-saved-window-properties)
+    (mapc (lambda (sym)
+	    (when (setq tem (cdr (assq sym alist)))
+	      (window-put w sym tem))) sm-saved-window-properties)
     (call-window-hook 'sm-restore-window-hook w (list alist))))
 
-(add-hook 'before-add-window-hook 'sm-match-window)
+(add-hook 'before-add-window-hook sm-match-window)

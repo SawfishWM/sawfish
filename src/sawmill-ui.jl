@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.35 1999/11/11 18:24:41 john Exp $
+;; $Id: sawmill-ui.jl,v 1.36 1999/11/19 14:54:24 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -51,9 +51,9 @@ exec rep "$0" "$@"
 (defvar ui-root nil)
 
 ;; buttons if not a plug
-(defvar ui-apply nil)
-(defvar ui-revert nil)
-(defvar ui-ok nil)
+(defvar ui-apply-widget nil)
+(defvar ui-revert-widget nil)
+(defvar ui-ok-widget nil)
 
 ;; list of (SPEC . VALUE) defining uncommitted option changes
 (defvar ui-values-to-apply nil)
@@ -85,7 +85,7 @@ exec rep "$0" "$@"
 
 ;; wm communication
 
-(defun sawmill-eval (form &optional read)
+(defun sawmill-eval (form &optional read-back)
   (let*
       ((output (make-string-output-stream))
        (process (make-process output))
@@ -95,7 +95,7 @@ exec rep "$0" "$@"
 	(progn
 	  (setq output (get-output-stream-string output))
 	  ;; success
-	  (if read
+	  (if read-back
 	      (read-from-string output)
 	    output))
       (error "can't call sawmill-client"))))
@@ -164,19 +164,18 @@ exec rep "$0" "$@"
   (let
       ((fun (get (car spec) 'builder)))
     (if fun
-	(funcall fun spec)
+	(fun spec)
       (error "Unknown ui element: %S" spec))))
 
-(put 'pages 'builder 'build-pages)
 (defun build-pages (spec)
   (cond ((eq ui-pages-style 'notebook)
 	 (let
 	     ((book (gtk-notebook-new)))
 	   (gtk-notebook-set-scrollable book 1)
 	   (gtk-notebook-popup-enable book)
-	   (mapc #'(lambda (page)
-		     (gtk-notebook-append-page book (build-ui (car (cdr page)))
-					       (gtk-label-new (car page))))
+	   (mapc (lambda (page)
+		   (gtk-notebook-append-page book (build-ui (car (cdr page)))
+					     (gtk-label-new (car page))))
 		 (cdr spec))
 	   book))
 	((eq ui-pages-style 'list)
@@ -190,29 +189,28 @@ exec rep "$0" "$@"
 	   (gtk-paned-add1 hbox clist)
 	   (gtk-paned-add2 hbox frame)
 	   (gtk-clist-set-selection-mode clist 'browse)
-	   (mapc #'(lambda (page)
-		     (let
-			 ((row (gtk-clist-append clist (vector (car page))))
-			  (widget (build-ui (nth 1 page))))
-		       ;; (LABEL . WIDGET)
-		       (gtk-widget-show-all widget)
-		       (aset contents row (cons (car page) widget))))
+	   (mapc (lambda (page)
+		   (let
+		       ((row (gtk-clist-append clist (vector (car page))))
+			(widget (build-ui (nth 1 page))))
+		     ;; (LABEL . WIDGET)
+		     (gtk-widget-show-all widget)
+		     (aset contents row (cons (car page) widget))))
 		 (cdr spec))
 	   (gtk-signal-connect clist "select_row"
-			       #'(lambda (clist row col)
-				   (build-pages:select-row
-				    contents row frame)))
+			       (lambda (clist row col)
+				 (build-pages:select-row
+				  contents row frame)))
 	   (gtk-clist-select-row clist 0 0)
 	   hbox))))
+(put 'pages 'builder build-pages)
 
 (defun build-pages:select-row (contents row frame)
-  (mapc #'(lambda (w)
-	    (gtk-container-remove frame w)) (gtk-container-children frame))
+  (mapc (lambda (w)
+	  (gtk-container-remove frame w)) (gtk-container-children frame))
   (gtk-frame-set-label frame (car (aref contents row)))
   (gtk-container-add frame (cdr (aref contents row))))
 
-(put 'vbox 'builder 'build-box)
-(put 'hbox 'builder 'build-box)
 (defun build-box (spec)
   (let
       ((box (if (eq (car spec) 'vbox)
@@ -220,32 +218,33 @@ exec rep "$0" "$@"
 	      (gtk-hbox-new nil 0))))
     (gtk-box-set-spacing box ui-box-spacing)
     (gtk-container-border-width box ui-box-border)
-    (mapc #'(lambda (widget)
-	      (gtk-box-pack-start box (build-ui widget) nil nil)) (cdr spec))
+    (mapc (lambda (widget)
+	    (gtk-box-pack-start box (build-ui widget) nil nil)) (cdr spec))
     box))
+(put 'vbox 'builder build-box)
+(put 'hbox 'builder build-box)
 
-(put 'table 'builder 'build-table)
 (defun build-table (spec)
   (let
       ((table (gtk-table-new (car (nth 1 spec)) (nth 1 (nth 1 spec)) nil)))
-    (mapc #'(lambda (cell)
-	      (gtk-table-attach-defaults table
-					 (build-ui (nth 1 cell))
-					 (nth 0 (car cell))
-					 (nth 1 (car cell))
-					 (nth 2 (car cell))
-					 (nth 3 (car cell)))) (nthcdr 2 spec))
+    (mapc (lambda (cell)
+	    (gtk-table-attach-defaults table
+				       (build-ui (nth 1 cell))
+				       (nth 0 (car cell))
+				       (nth 1 (car cell))
+				       (nth 2 (car cell))
+				       (nth 3 (car cell)))) (nthcdr 2 spec))
     table))
+(put 'table 'builder build-table)
 
-(put 'label 'builder 'build-label)
 (defun build-label (spec)
   (let
       ((label (gtk-label-new (nth 1 spec))))
     (gtk-label-set-justify label 'left)
     (gtk-label-set-line-wrap label t)
     label))
+(put 'label 'builder build-label)
 
-(put 'text 'builder 'build-text)
 (defun build-text (spec)
   (let
       ((text (gtk-text-new)))
@@ -253,43 +252,42 @@ exec rep "$0" "$@"
     (gtk-text-set-word-wrap text 1)
     (gtk-text-insert text nil nil nil (nth 1 spec) (length (nth 1 spec)))
     text))
+(put 'text 'builder build-text)
 
-(put 'frame 'builder 'build-frame)
 (defun build-frame (spec)
   (let
       ((frame (gtk-frame-new (nth 1 spec))))
     (when (nth 2 spec)
       (gtk-container-add frame (build-ui (nth 2 spec))))
     frame))
+(put 'frame 'builder build-frame)
 
-(put 'hsep 'builder 'build-separator)
-(put 'vsep 'builder 'build-separator)
 (defun build-separator (spec)
   (if (eq (car spec) 'hsep)
       (gtk-hseparator-new)
     (gtk-vseparator-new)))
+(put 'hsep 'builder build-separator)
+(put 'vsep 'builder build-separator)
 
-(put 'toggle 'builder 'build-toggle)
 (defun build-toggle (spec)
   (let
       ((toggle (gtk-check-button-new-with-label (nth 1 spec))))
-    (mapc #'(lambda (w)
-	      (when (gtk-label-p w)
-;		(gtk-label-set-line-wrap w t)
-		(gtk-label-set-justify w 'left)))
+    (mapc (lambda (w)
+	    (when (gtk-label-p w)
+	      (gtk-label-set-justify w 'left)))
 	  (gtk-container-children toggle))
     (if (key-exists-p spec ':value)
 	(when (get-key spec ':value)
 	  (gtk-button-clicked toggle))
       (set-key spec ':value nil))
     (gtk-signal-connect toggle "clicked"
-			#'(lambda (w)
-			    (let
-				((value (not (get-key spec ':value))))
-			      (ui-set spec (get-key spec ':variable) value))))
+			(lambda (w)
+			  (let
+			      ((value (not (get-key spec ':value))))
+			    (ui-set spec (get-key spec ':variable) value))))
     toggle))
+(put 'toggle 'builder build-toggle)
 
-(put 'string 'builder 'build-entry)
 (defun build-entry (spec)
   (let
       ((entry (gtk-entry-new))
@@ -300,12 +298,12 @@ exec rep "$0" "$@"
 				    (get-key spec ':value)))
       (set-key spec ':value nil))
     (setq id (gtk-signal-connect entry "changed"
-				 #'(lambda (w)
-				     (build-entry:changed spec))))
+				 (lambda (w)
+				   (build-entry:changed spec))))
     (setq spec (nconc spec (list ':widget entry)))
     entry))
+(put 'string 'builder build-entry)
 
-(put 'number 'builder 'build-number-entry)
 (defun build-number-entry (spec)
   (unless (key-exists-p spec ':value)
     (set-key spec ':value 0))
@@ -318,15 +316,16 @@ exec rep "$0" "$@"
 				    (or (cdr range) 1000000)
 				    1 16 0) 1 0)))
     (gtk-signal-connect entry "changed"
-			#'(lambda (w)
-			    (build-entry:changed spec)))
+			(lambda (w)
+			  (build-entry:changed spec)))
     (setq spec (nconc spec (list ':widget entry)))
     entry))
+(put 'number 'builder build-number-entry)
 
 (defun build-entry:changed (spec)
   (unless (get-key spec ':in-apply-hook)
-    (ui-add-apply-hook #'(lambda ()
-			   (build-entry:set spec)))
+    (ui-add-apply-hook (lambda ()
+			 (build-entry:set spec)))
     (ui-set-button-states)
     (set-key spec ':in-apply-hook nil)))
 
@@ -346,22 +345,22 @@ exec rep "$0" "$@"
     (set-key spec ':in-apply-hook nil)
     (ui-set spec (get-key spec ':variable) value)))
 
-(put 'font 'builder 'build-font)
 (defun build-font (spec)
   (let
       ((button (gtk-button-new-with-label
 		(build-font:abbrev (or (get-key spec ':value) "")))))
-    (mapc #'(lambda (w)
-	      (when (gtk-label-p w)
-		(gtk-label-set-line-wrap w t)))
+    (mapc (lambda (w)
+	    (when (gtk-label-p w)
+	      (gtk-label-set-line-wrap w t)))
 	  (gtk-container-children button))
     (unless (key-exists-p spec ':value)
       (set-key spec ':value nil))
     (gtk-signal-connect button "clicked"
-			#'(lambda (w)
-			    (build-font:clicked spec)))
+			(lambda (w)
+			  (build-font:clicked spec)))
     (setq spec (nconc spec (list ':widget button)))
     button))
+(put 'font 'builder build-font)
 
 (defun build-font:clicked (spec)
   (let
@@ -371,22 +370,22 @@ exec rep "$0" "$@"
     (gtk-signal-connect
      (gtk-font-selection-dialog-ok-button fontsel)
      "clicked"
-     #'(lambda (w)
-	 (let
-	     ((value (gtk-font-selection-dialog-get-font-name fontsel)))
-	   (when (and (string= value "") (get-key spec ':allow-nil))
-	     (setq value nil))
-	   (ui-set spec (get-key spec ':variable) value)
-	   (ui-set-button-label (get-key spec ':widget)
-				(build-font:abbrev value))
-	   (gtk-widget-destroy fontsel))))
+     (lambda (w)
+       (let
+	   ((value (gtk-font-selection-dialog-get-font-name fontsel)))
+	 (when (and (string= value "") (get-key spec ':allow-nil))
+	   (setq value nil))
+	 (ui-set spec (get-key spec ':variable) value)
+	 (ui-set-button-label (get-key spec ':widget)
+			      (build-font:abbrev value))
+	 (gtk-widget-destroy fontsel))))
     (gtk-signal-connect
      (gtk-font-selection-dialog-cancel-button fontsel)
-     "clicked" #'(lambda (w)
-		   (gtk-widget-destroy fontsel)))
+     "clicked" (lambda (w)
+		 (gtk-widget-destroy fontsel)))
     (gtk-signal-connect fontsel
-     "delete_event" #'(lambda (w)
-			(gtk-widget-destroy fontsel)))
+     "delete_event" (lambda (w)
+		      (gtk-widget-destroy fontsel)))
     (gtk-widget-show fontsel)))
 
 (defun build-font:abbrev (font-name)
@@ -394,21 +393,21 @@ exec rep "$0" "$@"
       (expand-last-match "\\1")
     font-name))
 
-(put 'color 'builder 'build-color)
 (defun build-color (spec)
   (let
       ((button (gtk-button-new-with-label (or (get-key spec ':value) ""))))
-    (mapc #'(lambda (w)
-	      (when (gtk-label-p w)
-		(gtk-label-set-line-wrap w t)))
+    (mapc (lambda (w)
+	    (when (gtk-label-p w)
+	      (gtk-label-set-line-wrap w t)))
 	  (gtk-container-children button))
     (unless (key-exists-p spec ':value)
       (set-key spec ':value nil))
     (gtk-signal-connect button "clicked"
-			#'(lambda (w)
-			    (build-color:clicked spec)))
+			(lambda (w)
+			  (build-color:clicked spec)))
     (setq spec (nconc spec (list ':widget button)))
     button))
+(put 'color 'builder build-color)
 
 (defun build-color:clicked (spec)
   (let
@@ -420,44 +419,44 @@ exec rep "$0" "$@"
     (gtk-signal-connect
      (gtk-color-selection-dialog-ok-button colorsel)
      "clicked"
-     #'(lambda (w)
-	 (let*
-	     ((color (gtk-color-selection-get-color-interp
-		      (gtk-color-selection-dialog-colorsel colorsel)))
-	      (name (and color (format nil "#%04x%04x%04x"
-				       (gdk-color-red color)
-				       (gdk-color-green color)
-				       (gdk-color-blue color)))))
-	   (when (or name (get-key spec ':allow-nil))
-	     (ui-set spec (get-key spec ':variable) name)
-	     (ui-set-button-label (get-key spec ':widget) name))
-	   (gtk-widget-destroy colorsel))))
+     (lambda (w)
+       (let*
+	   ((color (gtk-color-selection-get-color-interp
+		    (gtk-color-selection-dialog-colorsel colorsel)))
+	    (name (and color (format nil "#%04x%04x%04x"
+				     (gdk-color-red color)
+				     (gdk-color-green color)
+				     (gdk-color-blue color)))))
+	 (when (or name (get-key spec ':allow-nil))
+	   (ui-set spec (get-key spec ':variable) name)
+	   (ui-set-button-label (get-key spec ':widget) name))
+	 (gtk-widget-destroy colorsel))))
     (gtk-signal-connect
      (gtk-color-selection-dialog-cancel-button colorsel)
-     "clicked" #'(lambda (w)
-		   (gtk-widget-destroy colorsel)))
+     "clicked" (lambda (w)
+		 (gtk-widget-destroy colorsel)))
     (gtk-signal-connect colorsel
-     "delete_event" #'(lambda (w)
-			(gtk-widget-destroy colorsel)))
+     "delete_event" (lambda (w)
+		      (gtk-widget-destroy colorsel)))
     (gtk-widget-hide (gtk-color-selection-dialog-help-button colorsel))
     (gtk-widget-show colorsel)))
 
-(put 'file-name 'builder 'build-file)
 (defun build-file (spec)
   (let
       ((button (gtk-button-new-with-label
 		(file-name-nondirectory (or (get-key spec ':value) "")))))
-    (mapc #'(lambda (w)
-	      (when (gtk-label-p w)
-		(gtk-label-set-line-wrap w t)))
+    (mapc (lambda (w)
+	    (when (gtk-label-p w)
+	      (gtk-label-set-line-wrap w t)))
 	  (gtk-container-children button))
     (unless (key-exists-p spec ':value)
       (set-key spec ':value nil))
     (gtk-signal-connect button "clicked"
-			#'(lambda (w)
-			    (build-file:clicked spec)))
+			(lambda (w)
+			  (build-file:clicked spec)))
     (setq spec (nconc spec (list ':widget button)))
     button))
+(put 'file-name 'builder build-file)
 
 (defun build-file:clicked (spec)
   (let
@@ -467,25 +466,24 @@ exec rep "$0" "$@"
     (gtk-signal-connect
      (gtk-file-selection-ok-button filesel)
      "clicked"
-     #'(lambda (w)
-	 (let
-	     ((value (gtk-file-selection-get-filename filesel)))
-	   (when (and (string= value "") (get-key spec ':allow-nil))
-	     (setq value nil))
-	   (ui-set spec (get-key spec ':variable) value)
-	   (ui-set-button-label (get-key spec ':widget)
-				(file-name-nondirectory value))
-	   (gtk-widget-destroy filesel))))
+     (lambda (w)
+       (let
+	   ((value (gtk-file-selection-get-filename filesel)))
+	 (when (and (string= value "") (get-key spec ':allow-nil))
+	   (setq value nil))
+	 (ui-set spec (get-key spec ':variable) value)
+	 (ui-set-button-label (get-key spec ':widget)
+			      (file-name-nondirectory value))
+	 (gtk-widget-destroy filesel))))
     (gtk-signal-connect
      (gtk-file-selection-cancel-button filesel)
-     "clicked" #'(lambda (w)
-		   (gtk-widget-destroy filesel)))
+     "clicked" (lambda (w)
+		 (gtk-widget-destroy filesel)))
     (gtk-signal-connect filesel
-     "delete_event" #'(lambda (w)
-			(gtk-widget-destroy filesel)))
+     "delete_event" (lambda (w)
+		      (gtk-widget-destroy filesel)))
     (gtk-widget-show filesel)))
 
-(put 'set 'builder 'build-set)
 (defun build-set (spec)
   (let*
       ((values (nth 1 spec))
@@ -534,8 +532,8 @@ exec rep "$0" "$@"
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	(gtk-signal-connect clist "select_row"
-			    #'(lambda (clist row col)
-				(build-set:select-row spec row)))
+			    (lambda (clist row col)
+			      (build-set:select-row spec row)))
 	(setq spec (nconc spec (list ':clist clist)))
 	clist))
      ((eq type 'radio)
@@ -556,6 +554,7 @@ exec rep "$0" "$@"
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	box)))))
+(put 'set 'builder build-set)
 
 (defun build-set:select-row (spec row)
   (ui-set spec (get-key spec ':variable) (nth row (nth 1 spec))))
@@ -565,7 +564,6 @@ exec rep "$0" "$@"
 
 (defvar ui-keymap-shell nil)
 
-(put 'keymap 'builder 'build-keymap)
 (defun build-keymap (spec)
   (let
       ((hbox (gtk-vbox-new nil 0))
@@ -574,7 +572,7 @@ exec rep "$0" "$@"
        (label (gtk-label-new (get-key spec ':doc)))
        (insert (gtk-button-new-with-label "Insert"))
        (copy (gtk-button-new-with-label "Copy"))
-       (delete (gtk-button-new-with-label "Delete"))
+       (deleteb (gtk-button-new-with-label "Delete"))
        (clist (gtk-clist-new-with-titles ["Key" "Command"]))
        (scroller (gtk-scrolled-window-new)))
 
@@ -593,27 +591,28 @@ exec rep "$0" "$@"
     (gtk-container-add scroller clist)
     (gtk-container-add vbox copy)
     (gtk-container-add vbox insert)
-    (gtk-container-add vbox delete)
-    (mapc #'(lambda (cell)
-	      (gtk-clist-append clist (vector (cdr cell)
-					      (format nil "%S" (car cell)))))
+    (gtk-container-add vbox deleteb)
+    (mapc (lambda (cell)
+	    (gtk-clist-append clist (vector (cdr cell)
+					    (format nil "%S" (car cell)))))
 	  (cdr (get-key spec ':value)))
     (setq spec (nconc spec (list ':shell ui-keymap-shell
 				 ':clist clist
 				 ':selection 0)))
-    (gtk-signal-connect copy "clicked" #'(lambda ()
-					   (build-keymap:copy spec)))
-    (gtk-signal-connect insert "clicked" #'(lambda ()
-					     (build-keymap:insert spec)))
-    (gtk-signal-connect delete "clicked" #'(lambda ()
-					     (build-keymap:delete spec)))
-    (gtk-signal-connect clist "select_row" #'(lambda (w row col)
-					       (set-key spec ':selection row)
-					       (build-keymap:select-row spec)))
+    (gtk-signal-connect copy "clicked" (lambda ()
+					 (build-keymap:copy spec)))
+    (gtk-signal-connect insert "clicked" (lambda ()
+					   (build-keymap:insert spec)))
+    (gtk-signal-connect deleteb "clicked" (lambda ()
+					    (build-keymap:delete spec)))
+    (gtk-signal-connect clist "select_row" (lambda (w row col)
+					     (set-key spec ':selection row)
+					     (build-keymap:select-row spec)))
     (gtk-box-pack-start vbox-2 label)
     (gtk-label-set-justify label 'left)
     (gtk-container-add vbox-2 hbox)
     vbox-2))
+(put 'keymap 'builder build-keymap)
 
 (defun build-keymap:select-row (spec)
   (let*
@@ -670,7 +669,6 @@ exec rep "$0" "$@"
       (gtk-clist-set-text (get-key spec ':clist)
 			  index 1 (format nil "%S" (car new))))))
 
-(put 'keymap-shell 'builder 'build-keymap-shell)
 (defun build-keymap-shell (spec)
   (let*
       ((ui-keymap-shell spec)
@@ -719,23 +717,23 @@ exec rep "$0" "$@"
     (gtk-container-add scroller cmd-clist)
     (gtk-clist-set-column-auto-resize cmd-clist 0 t)
     ;(gtk-clist-set-selection-mode cmd-clist 'browse)
-    (mapc #'(lambda (c)
-	      (gtk-clist-append cmd-clist (vector (symbol-name c))))
+    (mapc (lambda (c)
+	    (gtk-clist-append cmd-clist (vector (symbol-name c))))
 	  (get-key spec ':commands))
     (gtk-container-add entry-hbox entry)
     (gtk-box-pack-end entry-hbox entry-button)
     (gtk-box-pack-start vbox-2 entry-hbox)
     (gtk-container-add vbox-2 scroller)
     (gtk-signal-connect cmd-clist "select_row"
-			#'(lambda (w row col)
-			    (set-key spec ':active-cmd row)
-			    (build-keymap-shell:set-command spec)))
+			(lambda (w row col)
+			  (set-key spec ':active-cmd row)
+			  (build-keymap-shell:set-command spec)))
     (gtk-signal-connect entry "changed"
-			#'(lambda (w)
-			    (build-keymap-shell:set-event spec)))
+			(lambda (w)
+			  (build-keymap-shell:set-event spec)))
     (gtk-signal-connect entry-button "clicked"
-			#'(lambda ()
-			    (build-keymap-shell:grab spec)))
+			(lambda ()
+			  (build-keymap-shell:grab spec)))
 
     ;; 2. the keymap selection widget
     (gtk-scrolled-window-set-policy scroller-2 'automatic 'automatic)
@@ -745,17 +743,17 @@ exec rep "$0" "$@"
     (gtk-container-add scroller-2 map-clist)
     (gtk-container-add hbox-1 scroller-2)
     (gtk-container-add hbox-1 vbox-2)
-    (mapc #'(lambda (page)
-	      (let
-		  ((row (gtk-clist-append map-clist (vector (car page)))))
-		(aset maps row (vector (car page)
-				       (nth 1 page)
-				       (build-ui (nth 1 page))))
-		(gtk-widget-show-all (aref (aref maps row) 2))))
+    (mapc (lambda (page)
+	    (let
+		((row (gtk-clist-append map-clist (vector (car page)))))
+	      (aset maps row (vector (car page)
+				     (nth 1 page)
+				     (build-ui (nth 1 page))))
+	      (gtk-widget-show-all (aref (aref maps row) 2))))
 	  pages)
     (gtk-signal-connect map-clist "select_row"
-			#'(lambda (w row col)
-			    (build-keymap-shell:select-map spec maps row)))
+			(lambda (w row col)
+			  (build-keymap-shell:select-map spec maps row)))
     (gtk-clist-select-row map-clist 0 0)
 
     (gtk-box-pack-start vbox frame t t)
@@ -763,6 +761,7 @@ exec rep "$0" "$@"
     (gtk-box-pack-end vbox doc-frame nil t)
 
     vbox))
+(put 'keymap-shell 'builder build-keymap-shell)
 
 (defun build-keymap-shell:current-binding (spec)
   (let*
@@ -774,8 +773,8 @@ exec rep "$0" "$@"
   (let
       ((frame (get-key spec ':frame)))
     (set-key spec ':active-map row)
-    (mapc #'(lambda (w)
-	      (gtk-container-remove frame w)) (gtk-container-children frame))
+    (mapc (lambda (w)
+	    (gtk-container-remove frame w)) (gtk-container-children frame))
     (gtk-frame-set-label frame (aref (aref maps row) 0))
     (gtk-container-add frame (aref (aref maps row) 2))
     (build-keymap:select-row (aref (aref maps row) 1))))
@@ -838,7 +837,6 @@ exec rep "$0" "$@"
 
 ;; customizing frame styles
 
-(put 'frame-style 'builder 'build-frame-style)
 (defun build-frame-style (spec)
   (let
       ((vbox (gtk-vbox-new nil 0))
@@ -850,7 +848,7 @@ exec rep "$0" "$@"
        (frame (gtk-frame-new "Details"))
        (values (nth 1 spec))
        (i 0)
-       history button last)
+       history button previous)
 
     (gtk-box-set-spacing hbox ui-box-spacing)
     (gtk-container-border-width hbox ui-box-border)
@@ -869,7 +867,7 @@ exec rep "$0" "$@"
       (set-key spec ':value (car values)))
     (while values
       (setq button (gtk-radio-menu-item-new-with-label-from-widget
-		    last (symbol-name (car values))))
+		    previous (symbol-name (car values))))
       (gtk-menu-append menu button)
       (when (eq (car values) (get-key spec ':value))
 	(gtk-check-menu-item-set-state button t)
@@ -882,7 +880,7 @@ exec rep "$0" "$@"
 				(build-frame-style:set spec ',(car values))))))
       (setq i (1+ i))
       (setq values (cdr values))
-      (setq last button))
+      (setq previous button))
     (gtk-option-menu-set-menu omenu menu)
     (when history
       (gtk-option-menu-set-history omenu history))
@@ -891,6 +889,7 @@ exec rep "$0" "$@"
 
     (build-frame-style:update-readme spec)
     vbox))
+(put 'frame-style 'builder build-frame-style)
     
 (defun build-frame-style:set (spec value)
   (ui-set spec (get-key spec ':variable) value)
@@ -900,34 +899,34 @@ exec rep "$0" "$@"
   (catch 'out
     (let
 	((theme (symbol-name (get-key spec ':value))))
-      (mapc #'(lambda (dir)
-		(let
-		    ((full (expand-file-name theme dir)))
-		  (when (catch 'out
-			  (mapc #'(lambda (suf)
-				    (let
-					((dir (format nil suf full theme)))
-				      (when (file-directory-p dir)
-					(setq full dir)
-					(throw 'out t))))
-				'("%s" "%s.tar#tar/%s" "%s.tar.gz#tar/%s"
-				  "%s.tar.Z#tar/%s" "%s.tar.bz2#tar/%s"))
-			  nil)
-		    (setq full (expand-file-name "README" full))
-		    (if (file-exists-p full)
-			(let
-			    ((text (make-string-output-stream))
-			     (file (open-file full 'read)))
-			  (unwind-protect
-			      (progn
-				(copy-stream file text)
-				(setq text (get-output-stream-string text))
-				(when (string-match "\\s+$" text)
-				  (setq text (substring text 0 (match-start))))
-				(gtk-label-set (get-key spec ':readme) text))
-			    (close-file file)))
-		      (gtk-label-set (get-key spec ':readme) ""))
-		    (throw 'out t))))
+      (mapc (lambda (dir)
+	      (let
+		  ((full (expand-file-name theme dir)))
+		(when (catch 'out
+			(mapc (lambda (suf)
+				(let
+				    ((dir (format nil suf full theme)))
+				  (when (file-directory-p dir)
+				    (setq full dir)
+				    (throw 'out t))))
+			      '("%s" "%s.tar#tar/%s" "%s.tar.gz#tar/%s"
+			       "%s.tar.Z#tar/%s" "%s.tar.bz2#tar/%s"))
+			nil)
+		  (setq full (expand-file-name "README" full))
+		  (if (file-exists-p full)
+		      (let
+			  ((text (make-string-output-stream))
+			   (file (open-file full 'read)))
+			(unwind-protect
+			    (progn
+			      (copy-stream file text)
+			      (setq text (get-output-stream-string text))
+			      (when (string-match "\\s+$" text)
+				(setq text (substring text 0 (match-start))))
+			      (gtk-label-set (get-key spec ':readme) text))
+			  (close-file file)))
+		    (gtk-label-set (get-key spec ':readme) ""))
+		  (throw 'out t))))
 	    (get-key spec ':theme-path))
       (gtk-label-set (get-key spec ':readme) ""))))
 
@@ -946,18 +945,18 @@ exec rep "$0" "$@"
        (ui-root (build-ui spec))
        (vbox (gtk-vbox-new nil 0))
        (hbox (gtk-hbutton-box-new))
-       ui-ok ui-apply ui-revert refresh cancel)
+       ui-ok-widget ui-apply-widget ui-revert-widget refresh cancel)
     (gtk-window-set-policy ui-window t t nil)
     (unless ui-socket-id
-      (setq ui-ok (gtk-button-new-with-label "OK"))
-      (setq ui-apply (gtk-button-new-with-label "Try"))
-      (setq ui-revert (gtk-button-new-with-label "Revert"))
+      (setq ui-ok-widget (gtk-button-new-with-label "OK"))
+      (setq ui-apply-widget (gtk-button-new-with-label "Try"))
+      (setq ui-revert-widget (gtk-button-new-with-label "Revert"))
       (setq refresh (and ui-enable-refresh
 			 (gtk-button-new-with-label "Refresh")))
       (setq cancel (gtk-button-new-with-label "Cancel"))
       (gtk-window-set-title ui-window "Sawmill configurator")
       (gtk-widget-set-name ui-window "Sawmill configurator"))
-    (gtk-signal-connect ui-window "delete_event" 'ui-quit)
+    (gtk-signal-connect ui-window "delete_event" ui-quit)
     (gtk-container-add ui-window vbox)
     (gtk-box-set-spacing vbox ui-box-spacing)
     (gtk-container-border-width vbox ui-box-border)
@@ -966,15 +965,15 @@ exec rep "$0" "$@"
     (gtk-button-box-set-layout hbox 'end)
     (unless ui-socket-id
       (gtk-box-pack-end vbox hbox)
-      (gtk-signal-connect ui-ok "clicked" 'ui-ok)
-      (gtk-signal-connect ui-apply "clicked" 'ui-apply)
-      (gtk-signal-connect cancel "clicked" 'ui-cancel)
-      (gtk-signal-connect ui-revert "clicked" #'(lambda () (ui-revert)))
+      (gtk-signal-connect ui-ok-widget "clicked" ui-ok)
+      (gtk-signal-connect ui-apply-widget "clicked" ui-apply)
+      (gtk-signal-connect cancel "clicked" ui-cancel)
+      (gtk-signal-connect ui-revert-widget "clicked" (lambda () (ui-revert)))
       (when ui-enable-refresh
-	(gtk-signal-connect refresh "clicked" 'ui-refresh))
-      (gtk-container-add hbox ui-apply)
-      (gtk-container-add hbox ui-revert)
-      (gtk-container-add hbox ui-ok)
+	(gtk-signal-connect refresh "clicked" ui-refresh))
+      (gtk-container-add hbox ui-apply-widget)
+      (gtk-container-add hbox ui-revert-widget)
+      (gtk-container-add hbox ui-ok-widget)
       (gtk-container-add hbox cancel)
       (when ui-enable-refresh
 	(gtk-container-add hbox refresh)))
@@ -986,20 +985,20 @@ exec rep "$0" "$@"
 
 (defun ui-set-button-states ()
   (unless ui-socket-id
-    (when ui-apply
-      (gtk-widget-set-sensitive ui-apply (or ui-values-to-apply
-					     ui-apply-changed-hook)))
-    (when ui-revert
-      (gtk-widget-set-sensitive ui-revert ui-changed-variables))
-    (when ui-apply
-      (gtk-widget-set-sensitive ui-ok (or ui-values-to-apply
-					  ui-apply-changed-hook
-					  ui-changed-variables)))))
+    (when ui-apply-widget
+      (gtk-widget-set-sensitive ui-apply-widget (or ui-values-to-apply
+						    ui-apply-changed-hook)))
+    (when ui-revert-widget
+      (gtk-widget-set-sensitive ui-revert-widget ui-changed-variables))
+    (when ui-ok-widget
+      (gtk-widget-set-sensitive ui-ok-widget (or ui-values-to-apply
+						 ui-apply-changed-hook
+						 ui-changed-variables)))))
 
 (defun ui-set-button-label (button text)
-  (mapc #'(lambda (w)
-	    (when (gtk-label-p w)
-	      (gtk-label-set w text))) (gtk-container-children button)))
+  (mapc (lambda (w)
+	  (when (gtk-label-p w)
+	    (gtk-label-set w text))) (gtk-container-children button)))
 
 
 ;; acting on settings
@@ -1017,8 +1016,8 @@ exec rep "$0" "$@"
 	     (null ui-apply-changed-hook))
     (ui-capplet-state-changed))
   (ui-set-original spec symbol)
-  (setq ui-values-to-apply (delete-if #'(lambda (x)
-					  (eq (car x) spec))
+  (setq ui-values-to-apply (delete-if (lambda (x)
+					(eq (car x) spec))
 				      ui-values-to-apply))
   (setq ui-values-to-apply (cons (cons spec value) ui-values-to-apply))
   (set-key spec ':value value)
@@ -1034,20 +1033,20 @@ exec rep "$0" "$@"
   (gtk-widget-destroy ui-window)
   (throw 'quit 0))
 
-(defun ui-set-variables (list)
+(defun ui-set-variables ()
   (let
       ((commands
-	(mapcar #'(lambda (cell)
-		    (let*
-			((spec (car cell))
-			 (new-value (cdr cell))
-			 (symbol (get-key spec ':variable)))
-		      (unless (memq symbol ui-changed-variables)
-			(setq ui-changed-variables
-			      (cons symbol ui-changed-variables)))
-		      (when (get-key spec ':in-apply-hook)
-			(set-key spec ':in-apply-hook nil))
-		      `(customize-set ',symbol ',new-value)))
+	(mapcar (lambda (cell)
+		  (let*
+		      ((spec (car cell))
+		       (new-value (cdr cell))
+		       (symbol (get-key spec ':variable)))
+		    (unless (memq symbol ui-changed-variables)
+		      (setq ui-changed-variables
+			    (cons symbol ui-changed-variables)))
+		    (when (get-key spec ':in-apply-hook)
+		      (set-key spec ':in-apply-hook nil))
+		    `(customize-set ',symbol ',new-value)))
 		ui-values-to-apply)))
     (ui-command (cons 'progn commands))
     (setq ui-values-to-apply nil)
@@ -1056,7 +1055,7 @@ exec rep "$0" "$@"
 
 (defun ui-apply ()
   (call-hook 'ui-apply-changed-hook)
-  (ui-set-variables ui-values-to-apply)
+  (ui-set-variables)
   (setq ui-apply-changed-hook nil))
 
 (defun ui-ok ()
@@ -1066,9 +1065,9 @@ exec rep "$0" "$@"
 (defun ui-revert (&optional dont-refresh)
   (let
       ((commands
-	(mapcar #'(lambda (symbol)
-		    `(customize-set
-		      ',symbol ',(cdr (assq symbol ui-original-values))))
+	(mapcar (lambda (symbol)
+		  `(customize-set
+		    ',symbol ',(cdr (assq symbol ui-original-values))))
 		ui-changed-variables)))
     (ui-command (cons 'progn commands))
     (setq ui-values-to-apply nil)

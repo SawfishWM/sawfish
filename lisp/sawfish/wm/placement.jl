@@ -83,16 +83,16 @@
 		     (if (window-transient-p w)
 			 place-transient-mode
 		       place-window-mode))))
-	(funcall (or (get mode 'placement-mode) 'place-window-randomly) w)
+	((or (get mode 'placement-mode) 'place-window-randomly) w)
 	t))))
 
-(put 'interactive 'placement-mode 'place-window-interactively)
-(put 'random 'placement-mode 'place-window-randomly)
-(put 'first-fit 'placement-mode 'place-window-first-fit)
-(put 'best-fit 'placement-mode 'place-window-best-fit)
+(put 'interactive 'placement-mode place-window-interactively)
+(put 'random 'placement-mode place-window-randomly)
+(put 'first-fit 'placement-mode place-window-first-fit)
+(put 'best-fit 'placement-mode place-window-best-fit)
 (put 'first-fit-or-interactive 'placement-mode
-     'place-window-first-fit-or-interactive)
-(put 'centered 'placement-mode 'place-window-centered)
-(put 'none 'placement-mode 'nop)
+     place-window-first-fit-or-interactive)
+(put 'centered 'placement-mode place-window-centered)
+(put 'none 'placement-mode nop)
 
-(add-hook 'place-window-hook 'place-window t)
+(add-hook 'place-window-hook place-window t)

@@ -131,7 +131,7 @@
   "Cycle through all windows in order of recent selections."
   (interactive "e")
   (let*
-      ((event-name (event-name event))
+      ((name (event-name event))
        (eval-modifier-events t)
        (eval-key-release-events t)
        (override-keymap (make-keymap))
@@ -142,18 +142,18 @@
 				      raise-windows-on-focus)))
        (x-cycle-current nil)
        (x-cycle-stacking nil)
-       mod tem)
+       modifier tem)
 
     ;; First of all, use the name of the event that invoked us to
     ;; contruct the keymap we'll use
-    (bind-keys override-keymap event-name 'x-cycle-next)
-    (unless (and (string-match "(.*)-.+" event-name)
-		 (setq mod (expand-last-match "\\1"))
-		 (setq tem (cdr (assoc mod x-cycle-modifier-alist))))
+    (bind-keys override-keymap name 'x-cycle-next)
+    (unless (and (string-match "(.*)-.+" name)
+		 (setq modifier (expand-last-match "\\1"))
+		 (setq tem (cdr (assoc modifier x-cycle-modifier-alist))))
       (error "%s must be bound to a singly-modified event" this-command))
-    (mapc #'(lambda (k)
-	      (bind-keys override-keymap
-		(concat "Any-Release-" k) 'x-cycle-exit)) tem)
+    (mapc (lambda (k)
+	    (bind-keys override-keymap
+	      (concat "Any-Release-" k) 'x-cycle-exit)) tem)
 
     (when (grab-keyboard)
       (unwind-protect
@@ -182,8 +182,8 @@
 			    current-workspace)
 			  cycle-include-iconified cycle-all-viewports)))
     (unless (eq x-cycle-windows t)
-      (setq win (delete-if #'(lambda (w)
-			       (not (memq w x-cycle-windows))) win)))
+      (setq win (delete-if (lambda (w)
+			     (not (memq w x-cycle-windows))) win)))
     (unless win
       (throw 'x-cycle-exit t))
     (if x-cycle-current

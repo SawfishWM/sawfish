@@ -55,7 +55,7 @@
   "List of directories to read GNOME menu entries from.")
 
 ;; previously read menus
-(defvar gnome-menus nil)
+(defvar gnome-cached-menus nil)
 
 
 ;; code
@@ -138,15 +138,15 @@
 		   (gnome-menu-read-order
 		    (expand-file-name ".order" dirname))))
        menus item)
-    (mapc #'(lambda (file)
-	      (when (file-exists-p (expand-file-name dirname file))
-		(when (setq item (gnome-menu-read-item dirname file))
-		  (setq menus (cons item menus)))))
+    (mapc (lambda (file)
+	    (when (file-exists-p (expand-file-name dirname file))
+	      (when (setq item (gnome-menu-read-item dirname file))
+		(setq menus (cons item menus)))))
 	  order)
-    (mapc #'(lambda (file)
-	      (unless (or (= (aref file 0) ?.) (member file order))
-		(when (setq item (gnome-menu-read-item dirname file))
-		  (setq menus (cons item menus)))))
+    (mapc (lambda (file)
+	    (unless (or (= (aref file 0) ?.) (member file order))
+	      (when (setq item (gnome-menu-read-item dirname file))
+		(setq menus (cons item menus)))))
 	  (directory-files dirname))
     (nreverse menus)))
 
@@ -178,22 +178,22 @@
 
 (defun gnome-menus-update ()
   (interactive)
-  (setq gnome-menus nil)
-  (mapc #'(lambda (dir)
-	    (when (and (stringp dir) (file-directory-p dir))
-	      (setq gnome-menus (nconc gnome-menus
-				       (gnome-menu-read-directory dir)))))
+  (setq gnome-cached-menus nil)
+  (mapc (lambda (dir)
+	  (when (and (stringp dir) (file-directory-p dir))
+	    (setq gnome-cached-menus (nconc gnome-cached-menus
+					    (gnome-menu-read-directory dir)))))
 	gnome-menu-roots)
-  (setq gnome-menus (gnome-menus-merge-dups gnome-menus))
-  gnome-menus)
+  (setq gnome-cached-menus (gnome-menus-merge-dups gnome-cached-menus))
+  gnome-cached-menus)
 
 (defun gnome-menus ()
-  (unless gnome-menus
+  (unless gnome-cached-menus
     (gnome-menus-update))
-  gnome-menus)
+  gnome-cached-menus)
 
 
 ;; init
 
 (unless (boundp 'apps-menu)
-  (setq apps-menu (cons (_ "System Menus") 'gnome-menus)))
+  (setq apps-menu (cons (_ "System Menus") gnome-menus)))

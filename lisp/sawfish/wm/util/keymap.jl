@@ -50,8 +50,8 @@ cons cell (COMMAND . EVENT)."
 	  (when (symbolp keymap)
 	    (setq keymap (symbol-value keymap)))
 	  (when (keymapp keymap)
-	    (mapc #'(lambda (k)
-		      (funcall function k)) (cdr keymap))))))))
+	    (mapc (lambda (k)
+		    (funcall function k)) (cdr keymap))))))))
 
 
 ;; Substitute one command for another in a keymap
@@ -60,9 +60,9 @@ cons cell (COMMAND . EVENT)."
 (defun substitute-keymap-command (olddef newdef &optional keymap)
   "Substitute all occurrences of the command OLDDEF for the command NEWDEF
 in the keybindings under the keymap or list of keymaps KEYMAP."
-  (map-keymap #'(lambda (k)
-		  (when (eq (car k) olddef)
-		    (rplaca k newdef))) keymap))
+  (map-keymap (lambda (k)
+		(when (eq (car k) olddef)
+		  (rplaca k newdef))) keymap))
 
 ;;;###autoload
 (defun substitute-keymap-event (old-ev new-ev &optional keymap)
@@ -72,9 +72,9 @@ in the keybindings under the keymap or list of keymaps KEYMAP."
     (setq old-ev (lookup-event old-ev)))
   (when (stringp new-ev)
     (setq new-ev (lookup-event new-ev)))
-  (map-keymap #'(lambda (k)
-		  (when (equal (cdr k) old-ev)
-		    (rplacd k new-ev))) keymap))
+  (map-keymap (lambda (k)
+		(when (equal (cdr k) old-ev)
+		  (rplacd k new-ev))) keymap))
 
 
 
@@ -98,10 +98,10 @@ for the bindings to be installed if and when it is."
 (defun where-is (command keymap)
   (let
       ((km-where-is-results nil))
-    (map-keymap #'(lambda (k)
-		    (when (eq (car k) command)
-		      (setq km-where-is-results
-			    (cons (event-name (cdr k)) km-where-is-results))))
+    (map-keymap (lambda (k)
+		  (when (eq (car k) command)
+		    (setq km-where-is-results
+			  (cons (event-name (cdr k)) km-where-is-results))))
 		keymap)
     km-where-is-results))
 
@@ -118,9 +118,9 @@ for the bindings to be installed if and when it is."
 	(let
 	    ((override-keymap '(keymap)))
 	  (show-message (or prompt (_ "Press key...")))
-	  (add-hook 'unbound-key-hook 'read-event-callback)
+	  (add-hook 'unbound-key-hook read-event-callback)
 	  (catch 'read-event
 	    (recursive-edit)))
-      (remove-hook 'unbound-key-hook 'read-event-callback)
+      (remove-hook 'unbound-key-hook read-event-callback)
       (show-message nil)
       (ungrab-keyboard))))

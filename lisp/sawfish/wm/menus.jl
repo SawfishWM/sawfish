@@ -66,7 +66,7 @@ unused before killing it.")
      (,(_ "Fill horizontally") maximize-fill-window-horizontally)
      (,(_ "Fill both") maximize-fill-window))
     (,(_ "Un-maximize") unmaximize-window)
-    (,(_ "In group") . window-group-menu)
+    (,(_ "In group") . ,(lambda () (window-group-menu)))
     (,(_ "Send window to")
      (,(_ "Previous workspace") send-to-previous-workspace)
      (,(_ "Next workspace") send-to-next-workspace)
@@ -86,13 +86,13 @@ unused before killing it.")
      (,(_ "Border-only") set-frame:transient)
      (,(_ "Top-border") set-frame:shaped-transient)
      (,(_ "None") set-frame:unframed))
-    (,(_ "Frame style") . frame-style-menu)))
+    (,(_ "Frame style") . ,(lambda () (frame-style-menu)))))
 
 (defvar root-menu
-  `((,(_ "Windows") . window-menu)
-    (,(_ "Workspaces") . workspace-menu)
+  `((,(_ "Windows") . ,(lambda () (window-menu)))
+    (,(_ "Workspaces") . ,(lambda () (workspace-menu)))
     (apps-menu)
-    (,(_ "Customize") . custom-menu)
+    (,(_ "Customize") . ,(lambda () (custom-menu)))
     (,(_ "About...") (customize 'about))
     ()
     (,(_ "Restart") restart)
@@ -115,7 +115,30 @@ unused before killing it.")
   (unless (and menu-process (process-in-use-p menu-process))
     (when menu-process
       (kill-process menu-process))
-    (setq menu-process (make-process 'menu-filter 'menu-sentinel))
+    (let
+	((menu-sentinel (lambda (process)
+			  (when (and menu-process
+				     (not (process-in-use-p menu-process)))
+			    (setq menu-process nil))
+			  (when menu-timer
+			    (delete-timer menu-timer)
+			    (setq menu-timer nil))))
+	 (menu-filter (lambda (output)
+			(setq output (concat menu-pending output))
+			(setq menu-pending nil)
+			(condition-case nil
+			    (let
+				((result (read-from-string output)))
+			      ;; GTK takes the focus for its menu,
+			      ;; but later returns it to the original
+			      ;; window. We want the focus to be
+			      ;; restored by the time the menu-chosen
+			      ;; command is invoked..
+			      (accept-x-input)
+			      (menu-dispatch result))
+			  (end-of-stream
+			   (setq menu-pending output))))))
+      (setq menu-process (make-process menu-filter menu-sentinel)))
     (set-process-error-stream menu-process nil)
     (or (start-process menu-process menu-program)
 	(error "Can't start menu backend: %s" menu-program))))
@@ -125,35 +148,14 @@ unused before killing it.")
     (cond ((and (not force) (numberp menu-program-stays-running))
 	   ;; number of seconds to let it hang around for
 	   (require 'timers)
-	   (setq menu-timer (make-timer #'(lambda ()
-					    (kill-process menu-process)
-					    (setq menu-process nil)
-					    (setq menu-timer nil))
+	   (setq menu-timer (make-timer (lambda ()
+					  (kill-process menu-process)
+					  (setq menu-process nil)
+					  (setq menu-timer nil))
 					menu-program-stays-running)))
 	  ((or force (not menu-program-stays-running))
 	   (kill-process menu-process)
 	   (setq menu-process nil)))))
-
-(defun menu-filter (output)
-  (setq output (concat menu-pending output))
-  (setq menu-pending nil)
-  (condition-case nil
-      (let
-	  ((result (read-from-string output)))
-	;; GTK takes the focus for its menu, but later returns it to
-	;; the original window. We want the focus to be restored by the
-	;; time the menu-chosen command is invoked..
-	(accept-x-input)
-	(menu-dispatch result))
-    (end-of-stream
-     (setq menu-pending output))))
-
-(defun menu-sentinel (process)
-  (when (and menu-process (not (process-in-use-p menu-process)))
-    (setq menu-process nil))
-  (when menu-timer
-    (delete-timer menu-timer)
-    (setq menu-timer nil)))
 
 (defun menu-preprocessor (cell)
   (when (and cell (symbolp (car cell)) (not (functionp cell)))
@@ -165,7 +167,7 @@ unused before killing it.")
 	  (setq cell (funcall (cdr cell)))
 	(setq cell (cdr cell)))
       (when (and (consp (car cell)) (stringp (car (car cell))))
-	(setq cell (mapcar 'menu-preprocessor cell)))
+	(setq cell (mapcar menu-preprocessor cell)))
       (cons label cell))))
 
 (defun menu-dispatch (result)
@@ -180,7 +182,7 @@ unused before killing it.")
       (cond ((commandp result)
 	     (call-command result))
 	    ((functionp result)
-	     (funcall result))
+	     (result))
 	    ((consp result)
 	     (eval result))
 	    (t
@@ -206,7 +208,7 @@ unused before killing it.")
       (ungrab-keyboard)
       (sync-server)
       (when (functionp spec)
-	(setq spec (funcall spec)))
+	(setq spec (spec)))
       ;; XXX this is a hack, but I want menus to appear under buttons
       (if (and part (setq part (cdr (assq 'class part)))
 	       (windowp menu-active)
@@ -218,7 +220,7 @@ unused before killing it.")
 				     (cdr (window-position menu-active))))))
 	(setq offset nil))
       (format menu-process "(popup-menu %S %S %S)\n"
-	      (mapcar 'menu-preprocessor spec) (x-server-timestamp) offset))))
+	      (mapcar menu-preprocessor spec) (x-server-timestamp) offset))))
 
 ;;;###autoload
 (defun popup-window-menu ()

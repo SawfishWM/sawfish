@@ -48,33 +48,33 @@
 	    (setq bottom-y (car tem-y))
 	    (setq tem-y (cdr tem-y))
 	    (setq rect (list left-x top-y right-x bottom-y))
-	    (when (or (not pred) (funcall pred rect))
+	    (when (or (not pred) (pred rect))
 	      (setq rects (cons rect rects)))))))
     (nreverse rects)))
 
 ;; returns a list of (LEFT TOP RIGHT BOTTOM [OVERLAP-WEIGHT])
 (defun rectangles-from-windows (windows &optional weight-fun)
-  (mapcar #'(lambda (w)
-	      (let
-		  ((dims (window-frame-dimensions w))
-		   (pos (window-position w))
-		   tem)
-		(list* (car pos) (cdr pos)
-		       (+ (car pos) (car dims))
-		       (+ (cdr pos) (cdr dims))
-		       (and (setq tem (if weight-fun
-					  (funcall weight-fun w)
-					(window-get w 'weight)))
-			    (list tem)))))
+  (mapcar (lambda (w)
+	    (let
+		((dims (window-frame-dimensions w))
+		 (pos (window-position w))
+		 tem)
+	      (list* (car pos) (cdr pos)
+		     (+ (car pos) (car dims))
+		     (+ (cdr pos) (cdr dims))
+		     (and (setq tem (if weight-fun
+					(weight-fun w)
+				      (window-get w 'weight)))
+			  (list tem)))))
 	  windows))
 
 ;; returns (X-POINTS . Y-POINTS)
 (defun grid-from-rectangles (rects &optional with-root)
   (let
-      ((x-edges (nconc (mapcar 'car rects)
-		       (mapcar #'(lambda (x) (nth 2 x)) rects)))
-       (y-edges (nconc (mapcar #'(lambda (x) (nth 1 x)) rects)
-		       (mapcar #'(lambda (x) (nth 3 x)) rects))))
+      ((x-edges (nconc (mapcar car rects)
+		       (mapcar (lambda (x) (nth 2 x)) rects)))
+       (y-edges (nconc (mapcar (lambda (x) (nth 1 x)) rects)
+		       (mapcar (lambda (x) (nth 3 x)) rects))))
     (when with-root
       (setq x-edges (cons 0 (nconc x-edges (list (screen-width)))))
       (setq y-edges (cons 0 (nconc y-edges (list (screen-height))))))
@@ -117,8 +117,8 @@
 (defun rect-total-overlap (dims point rects)
   (let
       ((total 0))
-    (mapc #'(lambda (r)
-	      (setq total (+ total (rect-2d-overlap dims point r))))
+    (mapc (lambda (r)
+	    (setq total (+ total (rect-2d-overlap dims point r))))
 	  rects)
     total))
 

@@ -110,4 +110,4 @@
     (unless (eq type orig-type)
       (window-put w 'type type))))
 
-(add-hook 'before-add-window-hook 'mwm-add-window)
+(add-hook 'before-add-window-hook mwm-add-window)

@@ -39,11 +39,11 @@
 (defvar xterm-args nil)
 
 ;; return a window called NAME, or nil
-(defun get-window-by-name (name &optional list)
+(defun get-window-by-name (name &optional lst)
   (catch 'foo
-    (mapc #'(lambda (w)
-	      (when (string= (window-name w) name)
-		(throw 'foo w))) (or list (managed-windows)))
+    (mapc (lambda (w)
+	    (when (string= (window-name w) name)
+	      (throw 'foo w))) (or lst (managed-windows)))
     nil))
 
 ;; execute FORMS with the server grabbed
@@ -85,12 +85,12 @@
       (window-wants-input-p w)))
 
 ;; remove all duplicates from list, tests using eq, order is lost
-(defun uniquify-list (list)
+(defun uniquify-list (lst)
   (let
       (out)
-    (mapc #'(lambda (x)
-	      (unless (memq x out)
-		(setq out (cons x out)))) list)
+    (mapc (lambda (x)
+	    (unless (memq x out)
+	      (setq out (cons x out)))) lst)
     out))
 
 
@@ -104,11 +104,11 @@
     (setq prop-changes (cons (cons prop fun) prop-changes)))
 
   (add-hook 'property-notify-hook
-	    #'(lambda (w atom state)
-		(mapc #'(lambda (cell)
-			  (when (eq (car cell) atom)
-			    (funcall (cdr cell) w atom state)))
-		      prop-changes))))
+	    (lambda (w prop state)
+	      (mapc (lambda (cell)
+		      (when (eq (car cell) prop)
+			(funcall (cdr cell) w prop state)))
+		    prop-changes))))
 
 
 ;; avoided (i.e. non-overlapped) windows
@@ -127,7 +127,7 @@
 	 avoid-by-default)))
 
 (defun avoided-windows (&optional window)
-  (delete-if #'(lambda (w)
-		 (or (eq w window) (not (window-avoided-p w))))
+  (delete-if (lambda (w)
+	       (or (eq w window) (not (window-avoided-p w))))
 	     (managed-windows)))
 

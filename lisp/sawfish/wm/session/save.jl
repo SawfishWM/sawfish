@@ -29,12 +29,11 @@
 ;; create an alist defining the current state of window W
 (defun sm-get-window-state (w)
   (let
-      ((alist (apply 'nconc
-		     (mapcar #'(lambda (fun)
-				 (funcall fun w)) sm-window-save-functions))))
-    (mapc #'(lambda (sym)
-	      (when (window-get w sym)
-		(setq alist (cons (cons sym (window-get w sym)) alist))))
+      ((alist (apply nconc (mapcar (lambda (fun)
+				     (fun w)) sm-window-save-functions))))
+    (mapc (lambda (sym)
+	    (when (window-get w sym)
+	      (setq alist (cons (cons sym (window-get w sym)) alist))))
 	  sm-saved-window-properties)
 
     ;; some standard items
@@ -53,9 +52,9 @@
       (write stream "()\n")
     (let
 	(not-first)
-      (mapc #'(lambda (x)
-		(format stream "%s%S" (if not-first "\n " "\(") x)
-		(setq not-first t))
+      (mapc (lambda (x)
+	      (format stream "%s%S" (if not-first "\n " "\(") x)
+	      (setq not-first t))
 	    alist)
       (write stream "\)\n\n"))))
 
@@ -75,8 +74,8 @@
 				 ";; sawmill version %s; %s\n\n")
 		    (user-login-name) (system-name)
 		    sawmill-version (current-time-string))
-	    (mapc #'(lambda (w)
-		      (sm-print-alist file (sm-get-window-state w)))
+	    (mapc (lambda (w)
+		    (sm-print-alist file (sm-get-window-state w)))
 		  (managed-windows))
 	    t)
 	(close-file file)))))

@@ -57,18 +57,18 @@
 	(setq rw-window w)
 	(if rw-timer
 	    (set-timer rw-timer)
-	  (setq rw-timer (make-timer 'rw-timer-callback
-				     (/ raise-window-timeout 1000)
-				     (mod raise-window-timeout 1000)))))
+	  (let
+	      ((timer-callback (lambda ()
+				 (raise-window rw-window)
+				 (setq rw-timer nil))))
+	    (setq rw-timer (make-timer timer-callback
+				       (/ raise-window-timeout 1000)
+				       (mod raise-window-timeout 1000))))))
     (rw-disable-timer)))
 
 (defun rw-out-focus (w)
   (when (and rw-timer (eq rw-window w))
     (rw-disable-timer)))
 
-(defun rw-timer-callback ()
-  (raise-window rw-window)
-  (setq rw-timer nil))
-
-(add-hook 'focus-in-hook 'rw-on-focus)
-(add-hook 'focus-out-hook 'rw-out-focus)
+(add-hook 'focus-in-hook rw-on-focus)
+(add-hook 'focus-out-hook rw-out-focus)

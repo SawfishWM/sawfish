@@ -93,7 +93,7 @@
       (when (or (null parent) (window-really-wants-input-p parent))
 	(set-input-focus parent)))))
 
-(add-hook 'before-add-window-hook 'transient-add-window)
-(add-hook 'map-notify-hook 'transient-map-window)
-(add-hook 'unmap-notify-hook 'transient-unmap-window)
-(add-hook 'iconify-window-hook 'transient-unmap-window)
+(add-hook 'before-add-window-hook transient-add-window)
+(add-hook 'map-notify-hook transient-map-window)
+(add-hook 'unmap-notify-hook transient-unmap-window)
+(add-hook 'iconify-window-hook transient-unmap-window)

@@ -24,9 +24,10 @@
     add-frame-style check-frame-availability set-window-frame-style
     set-frame-for-window reframe-one-window reframe-all-windows
     window-type def-frame-class define-frame-class
+    after-setting-frame-option
 
     defcustom defgroup custom-declare-variable custom-declare-group
-    custom-quote-keys
+    custom-quote-keys custom-set-property custom-set-group-property
 
     window-actual-group-id windows-by-group windows-in-group
     map-window-group window-group-ids
@@ -44,6 +45,6 @@
 (defvar sawmill-safe-features '(gtkrc gradient))
 
 (unless batch-mode
-  (mapc 'gaol-add-function sawmill-safe-functions)
-  (mapc 'gaol-add-special sawmill-safe-specials)
-  (mapc 'gaol-add-feature sawmill-safe-features))
+  (mapc gaol-add-function sawmill-safe-functions)
+  (mapc gaol-add-special sawmill-safe-specials)
+  (mapc gaol-add-feature sawmill-safe-features))

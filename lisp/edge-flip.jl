@@ -36,7 +36,7 @@
   :type boolean
   :require edge-flip
   :group edge-flip
-  :after-set edge-flip-enable)
+  :after-set (lambda () (edge-flip-enable)))
 
 (defcustom edge-flip-type 'viewport
   "What hitting the screen edge actually flips."
@@ -146,9 +146,9 @@ flipping."
   (when (eq edge-flip-type 'workspace)
     (ws-move-window w current-workspace t))))
 
-(add-hook 'enter-flipper-hook 'edge-flip-enter)
-(add-hook 'leave-flipper-hook 'edge-flip-leave)
-(add-hook 'while-moving-hook 'edge-flip-while-moving)
+(add-hook 'enter-flipper-hook edge-flip-enter)
+(add-hook 'leave-flipper-hook edge-flip-leave)
+(add-hook 'while-moving-hook edge-flip-while-moving)
 
 (unless batch-mode
   (edge-flip-enable))

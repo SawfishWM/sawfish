@@ -26,7 +26,7 @@
   "When does the mouse pointer affect the input focus."
   :type (set enter-exit enter-only click)
   :group focus
-  :after-set focus-mode-changed)
+  :after-set (lambda () (focus-mode-changed)))
 
 (defcustom focus-proxy-click t
   "Does click-to-focus mode pass the click through to the window."
@@ -83,9 +83,9 @@
 (defun focus-in-fun (w)
   (focus-pop-map w)
   (when (eq focus-mode 'click)
-    (mapc #'(lambda (x)
-	      (unless (eq x w)
-		(focus-push-map x)))))
+    (mapc (lambda (x)
+	    (unless (eq x w)
+	      (focus-push-map x)))))
   (unless focus-dont-push
     (window-order-push w)))
 
@@ -95,18 +95,18 @@
 
 (defun focus-mode-changed ()
   (if (eq focus-mode 'click)
-      (mapc #'(lambda (w)
-		(if (eq (input-focus) w)
-		    (focus-pop-map w)
-		  (focus-push-map w)))
+      (mapc (lambda (w)
+	      (if (eq (input-focus) w)
+		  (focus-pop-map w)
+		(focus-push-map w)))
 	    (managed-windows))
-    (mapc 'focus-pop-map (managed-windows))))
+    (mapc focus-pop-map (managed-windows))))
 
 (defun focus-add-window (w)
   (when (eq focus-mode 'click)
     (focus-push-map w)))
 
-(add-hook 'enter-notify-hook 'focus-enter-fun t)
-(add-hook 'focus-in-hook 'focus-in-fun t)
-(add-hook 'focus-out-hook 'focus-out-fun t)
-(add-hook 'add-window-hook 'focus-add-window t)
+(add-hook 'enter-notify-hook focus-enter-fun t)
+(add-hook 'focus-in-hook focus-in-fun t)
+(add-hook 'focus-out-hook focus-out-fun t)
+(add-hook 'add-window-hook focus-add-window t)

@@ -32,14 +32,14 @@
   :group workspace
   :type number
   :range (1 . nil)
-  :after-set viewport-size-changed)
+  :after-set (lambda () (viewport-size-changed)))
 
 (defcustom viewport-rows 1
   "Number of rows in each virtual workspace."
   :group workspace
   :type number
   :range (1 . nil)
-  :after-set viewport-size-changed)
+  :after-set (lambda () (viewport-size-changed)))
 
 (defcustom uniconify-to-current-viewport t
   "Windows are uniconified to the current viewport."
@@ -54,12 +54,12 @@
 
 (defun set-viewport (x y)
   (unless (and (= viewport-x-offset x) (= viewport-y-offset y))
-    (mapc #'(lambda (w)
-	      (unless (window-get w 'fixed-position)
-		(let
-		    ((pos (window-position w)))
-		  (move-window-to w (- (+ (car pos) viewport-x-offset) x)
-				  (- (+ (cdr pos) viewport-y-offset) y)))))
+    (mapc (lambda (w)
+	    (unless (window-get w 'fixed-position)
+	      (let
+		  ((pos (window-position w)))
+		(move-window-to w (- (+ (car pos) viewport-x-offset) x)
+				(- (+ (cdr pos) viewport-y-offset) y)))))
 	  (managed-windows))
     (setq viewport-x-offset x)
     (setq viewport-y-offset y)
@@ -68,7 +68,7 @@
 (defun viewport-before-exiting ()
   (set-screen-viewport 0 0))
 
-(add-hook 'before-exit-hook 'viewport-before-exiting t)
+(add-hook 'before-exit-hook viewport-before-exiting t)
 
 
 ;; screen sized viewport handling
@@ -155,9 +155,9 @@
       ((port (screen-viewport)))
     (set-screen-viewport (min (car port) (1- viewport-columns))
 			 (min (cdr port) (1- viewport-rows)))
-    (mapc #'(lambda (w)
-	      (when (window-outside-workspace-p w)
-		(move-window-to-current-viewport w)))
+    (mapc (lambda (w)
+	    (when (window-outside-workspace-p w)
+	      (move-window-to-current-viewport w)))
 	  (managed-windows))
     (call-hook 'viewport-resized-hook)))
 
@@ -242,11 +242,11 @@
       (window-put w 'placed t))))
 			     
 (sm-add-saved-properties 'fixed-position)
-(add-hook 'sm-window-save-functions 'viewport-saved-state)
-(add-hook 'sm-restore-window-hook 'viewport-load-state)
+(add-hook 'sm-window-save-functions viewport-saved-state)
+(add-hook 'sm-restore-window-hook viewport-load-state)
 
 
 ;; initialisation
 
-(add-hook 'viewport-moved-hook 'window-order-focus-most-recent)
-(add-hook 'uniconify-window-hook 'viewport-window-uniconified)
+(add-hook 'viewport-moved-hook window-order-focus-most-recent)
+(add-hook 'uniconify-window-hook viewport-window-uniconified)

@@ -48,13 +48,13 @@
 (defun gnome-set-client-list ()
   (let
       (clients vec)
-    (mapc #'(lambda (w)
-	      (when (and (windowp w) (window-mapped-p w)
-			 (or gnome-ignored-windows-in-client-list
-			     (not (window-get w 'ignored))))
-		(setq clients (cons (window-id w) clients))))
+    (mapc (lambda (w)
+	    (when (and (windowp w) (window-mapped-p w)
+		       (or gnome-ignored-windows-in-client-list
+			   (not (window-get w 'ignored))))
+	      (setq clients (cons (window-id w) clients))))
 	  (managed-windows))
-    (setq vec (apply 'vector clients))
+    (setq vec (apply vector clients))
     (set-x-property 'root '_WIN_CLIENT_LIST vec 'CARDINAL 32)))
 
 (defvar gnome-current-workspace nil)
@@ -68,13 +68,12 @@
       ((limits (workspace-limits))
        (port (screen-viewport))
        (port-size (cons viewport-columns viewport-rows)))
-    (mapc #'(lambda (w)
-	      (if (window-get w 'workspace)
-		  (set-x-property w '_WIN_WORKSPACE
-				  (vector (- (window-get w 'workspace)
-					     (car limits)))
-				  'CARDINAL 32)
-		(delete-x-property w '_WIN_WORKSPACE)))
+    (mapc (lambda (w)
+	    (if (window-get w 'workspace)
+		(set-x-property w '_WIN_WORKSPACE
+				(vector (- (window-get w 'workspace)
+					   (car limits))) 'CARDINAL 32)
+	      (delete-x-property w '_WIN_WORKSPACE)))
 	  (managed-windows))
     (unless (equal gnome-current-workspace (- current-workspace (car limits)))
       (setq gnome-current-workspace (- current-workspace (car limits)))
@@ -88,7 +87,7 @@
     (unless (equal gnome-current-workspace-names workspace-names)
       (setq gnome-current-workspace-names workspace-names)
       (set-x-text-property 'root '_WIN_WORKSPACE_NAMES
-			   (apply 'vector workspace-names)))
+			   (apply vector workspace-names)))
     (unless (equal gnome-current-area port)
       (setq gnome-current-area port)
       (set-x-property 'root '_WIN_AREA (vector (car port) (cdr port))
@@ -241,22 +240,22 @@
 
   (delete-x-property 'root '_WIN_WORKSPACE_NAMES)
 
-  (add-hook 'workspace-state-change-hook 'gnome-set-workspace)
-  (add-hook 'viewport-resized-hook 'gnome-set-workspace)
-  (add-hook 'viewport-moved-hook 'gnome-set-workspace)
+  (add-hook 'workspace-state-change-hook gnome-set-workspace)
+  (add-hook 'viewport-resized-hook gnome-set-workspace)
+  (add-hook 'viewport-moved-hook gnome-set-workspace)
 
-  (add-hook 'add-window-hook 'gnome-set-client-list)
-  (add-hook 'destroy-notify-hook 'gnome-set-client-list)
-  (add-hook 'map-notify-hook 'gnome-set-client-list)
-  (add-hook 'unmap-notify-hook 'gnome-set-client-list)
+  (add-hook 'add-window-hook gnome-set-client-list)
+  (add-hook 'destroy-notify-hook gnome-set-client-list)
+  (add-hook 'map-notify-hook gnome-set-client-list)
+  (add-hook 'unmap-notify-hook gnome-set-client-list)
 
-  (add-hook 'before-add-window-hook 'gnome-honour-client-state t)
-  (add-hook 'add-window-hook 'gnome-set-client-state)
-  (add-hook 'window-state-change-hook 'gnome-set-client-state)
+  (add-hook 'before-add-window-hook gnome-honour-client-state t)
+  (add-hook 'add-window-hook gnome-set-client-state)
+  (add-hook 'window-state-change-hook gnome-set-client-state)
 
-  (add-hook 'client-message-hook 'gnome-client-message-handler)
-  (add-hook 'unbound-key-hook 'gnome-event-proxyer)
-  (add-hook 'before-exit-hook 'gnome-exit))
+  (add-hook 'client-message-hook gnome-client-message-handler)
+  (add-hook 'unbound-key-hook gnome-event-proxyer)
+  (add-hook 'before-exit-hook gnome-exit))
 
 (defun gnome-exit ()
   (destroy-window gnome-window-id)

@@ -33,31 +33,28 @@ exec rep "$0" "$@"
 (defun create-menu (spec &optional bar)
   (let
       ((menu (if bar (gtk-menu-bar-new) (gtk-menu-new))))
-    (mapc #'(lambda (cell)
-	      (let
-		  (label item)
-		(when (and cell (symbolp (car cell)))
-		  (setq cell (symbol-value (car cell))))
-		(if (null cell)
-		    (setq item (gtk-menu-item-new))
-		  (setq label (car cell))
-		  (if (functionp (cdr cell))
-		      (setq cell (funcall (cdr cell)))
-		    (setq cell (cdr cell)))
-		  (if (and (consp (car cell)) (stringp (car (car cell))))
-		      (let
-			  ((sub (create-menu cell)))
-			(setq item (gtk-menu-item-new-with-label label))
-			(gtk-menu-item-set-submenu item sub))
-		    (setq item (gtk-menu-item-new-with-label label))
-		    (gtk-signal-connect
-		     item "activate" #'(lambda ()
-					 (setq menu-selected (car cell))))))
-		(when item
-		  (gtk-widget-lock-accelerators item)
-		  (funcall (if bar 'gtk-menu-bar-append
-			     'gtk-menu-append) menu item)
-		  (gtk-widget-show item))))
+    (mapc (lambda (cell)
+	    (let
+		(label item)
+	      (when (and cell (symbolp (car cell)))
+		(setq cell (symbol-value (car cell))))
+	      (if (null cell)
+		  (setq item (gtk-menu-item-new))
+		(setq label (car cell))
+		(setq cell (cdr cell))
+		(if (and (consp (car cell)) (stringp (car (car cell))))
+		    (let
+			((sub (create-menu cell)))
+		      (setq item (gtk-menu-item-new-with-label label))
+		      (gtk-menu-item-set-submenu item sub))
+		  (setq item (gtk-menu-item-new-with-label label))
+		  (gtk-signal-connect
+		   item "activate" (lambda ()
+				     (setq menu-selected (car cell))))))
+	      (when item
+		(gtk-widget-lock-accelerators item)
+		((if bar gtk-menu-bar-append gtk-menu-append) menu item)
+		(gtk-widget-show item))))
 	  spec)
     menu))
 
@@ -65,7 +62,7 @@ exec rep "$0" "$@"
   (catch 'menu-done
     (let
 	((menu  (create-menu spec)))
-      (gtk-signal-connect menu "deactivate" 'gtk-main-quit)
+      (gtk-signal-connect menu "deactivate" gtk-main-quit)
       (setq menu-selected nil)
       (gtk-menu-popup-interp menu nil nil 0 (or timestamp 0) position)
       (gtk-main)
@@ -78,7 +75,8 @@ exec rep "$0" "$@"
     (while t
       (let
 	  ((input (read standard-input)))
-	(format standard-output "%S\n" (apply (car input) (cdr input)))
+	(format standard-output "%S\n"
+		(apply (symbol-value (car input)) (cdr input)))
 	(when (filep standard-output)
 	  (flush-file standard-output))))
   (end-of-stream))

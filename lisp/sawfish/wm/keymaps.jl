@@ -21,30 +21,74 @@
 
 (provide 'keymaps)
 
-(put 'keymap 'custom-set 'custom-set-keymap)
-(put 'keymap 'custom-get 'custom-get-keymap)
-(put 'keymap 'custom-widget 'custom-keymap-widget)
+(defgroup bindings "Bindings")
 
-(defgroup bindings "Bindings"
-  :widget custom-keymap-group-widget)
+
+;; Customize support
+
+(defun custom-get-keymap (symbol)
+  (cons 'keymap (mapcar (lambda (cell)
+			  (cons (car cell) (event-name (cdr cell))))
+			(cdr (symbol-value symbol)))))
+
+(defun custom-set-keymap (symbol value &rest args)
+  (when (eq (car value) 'keymap)
+    (let
+	((old-value (and (boundp symbol) (symbol-value symbol)))
+	 (new-tail (delq nil (mapcar (lambda (cell)
+				       (let
+					   ((ev (lookup-event (cdr cell))))
+					 (and ev (cons (car cell) ev))))
+				     (cdr value)))))
+      (if (and old-value (eq (car old-value) 'keymap))
+	  ;; hijack the old keymap to preserve eq-ness
+	  (progn
+	    (rplacd old-value new-tail)
+	    (setq value old-value))
+	(setq value (cons 'keymap new-tail)))
+      (apply custom-set-variable symbol value args))))
+
+(defun custom-keymap-widget (symbol value doc)
+  `(keymap :variable ,symbol
+	   :value ,value
+	   :doc ,doc))
+
+(defun custom-keymap-group-widget (group spec)
+  (let
+      ((names (mapcar symbol-name (cdr (assq 'bindings custom-groups)))))
+    `(keymap-shell ,(mapcar (lambda (item)
+			      (list (car (prog1 names
+					   (setq names (cdr names))))
+				    item)) spec)
+		   :commands ,(sort (apropos "" commandp)
+				    (lambda (x y)
+				      (< (symbol-name x) (symbol-name y))))
+		   :doc-path ,documentation-files)))
+
+(put 'keymap 'custom-set custom-set-keymap)
+(put 'keymap 'custom-get custom-get-keymap)
+(put 'keymap 'custom-widget custom-keymap-widget)
+(setq custom-set-alist (cons (cons custom-set-keymap
+				   'custom-set-keymap) custom-set-alist))
+
+(custom-set-group-property 'bindings ':widget custom-keymap-group-widget)
+
+
+;; Options
 
 (defcustom global-keymap (make-keymap)
   "Keymap containing bindings active anywhere."
   :group bindings
   :type keymap
-  :before-set (lambda ()
-		(ungrab-keymap global-keymap))
-  :after-set (lambda ()
-	       (grab-keymap global-keymap)))
+  :before-set (lambda () (ungrab-keymap global-keymap))
+  :after-set (lambda () (grab-keymap global-keymap)))
 
 (defcustom window-keymap (make-keymap)
   "Keymap containing bindings active when a client window is focused."
   :group bindings
   :type keymap
-  :before-set (lambda ()
-		(ungrab-keymap window-keymap))
-  :after-set (lambda ()
-	       (grab-keymap window-keymap)))
+  :before-set (lambda () (ungrab-keymap window-keymap))
+  :after-set (lambda () (grab-keymap window-keymap)))
 
 (defcustom root-window-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the root window
@@ -95,7 +139,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
   (unless (window-get w 'keymap)
     (window-put w 'keymap window-keymap)))
 
-(add-hook 'add-window-hook 'keymap-add-window)
+(add-hook 'add-window-hook keymap-add-window)
 
 
 ;; some bindings
@@ -146,46 +190,3 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "Button1-Off" 'maximize-window-toggle
     "Button2-Off" 'maximize-window-vertically-toggle
     "Button3-Off" 'maximize-window-horizontally-toggle))
-
-
-;; customize support
-
-(defun custom-get-keymap (symbol)
-  (cons 'keymap (mapcar #'(lambda (cell)
-			    (cons (car cell) (event-name (cdr cell))))
-			(cdr (symbol-value symbol)))))
-
-(defun custom-set-keymap (symbol value &rest args)
-  (when (eq (car value) 'keymap)
-    (let
-	((old-value (and (boundp symbol) (symbol-value symbol)))
-	 (new-tail (delq nil (mapcar #'(lambda (cell)
-					 (let
-					     ((ev (lookup-event (cdr cell))))
-					   (and ev (cons (car cell) ev))))
-				     (cdr value)))))
-      (if (and old-value (eq (car old-value) 'keymap))
-	  ;; hijack the old keymap to preserve eq-ness
-	  (progn
-	    (rplacd old-value new-tail)
-	    (setq value old-value))
-	(setq value (cons 'keymap new-tail)))
-      (apply 'custom-set-variable symbol value args))))
-
-(defun custom-keymap-widget (symbol value doc)
-  `(keymap :variable ,symbol
-	   :value ,value
-	   :doc ,doc))
-
-(defun custom-keymap-group-widget (group spec)
-  (let
-      ((names (mapcar 'symbol-name (cdr (assq 'bindings custom-groups)))))
-    `(keymap-shell ,(mapcar #'(lambda (elt)
-				(list (car (prog1 names
-					     (setq names (cdr names))))
-				      elt)) spec)
-		   :commands ,(sort (apropos "" 'commandp)
-				    #'(lambda (x y)
-					(< (symbol-name x)
-					   (symbol-name y))))
-		   :doc-path ,documentation-files)))

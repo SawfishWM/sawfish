@@ -30,6 +30,25 @@
 (defvar custom-user-file "~/.sawmill/custom"
   "File used to store user's configuration settings.")
 
+(defvar custom-unquoted-keys '(:group :require :type :allow-nil :range))
+
+(defvar custom-option-alist '((:group . custom-group)
+			      (:require . custom-require)
+			      (:type . custom-type)
+			      (:allow-nil . custom-allow-nil)
+			      (:set . custom-set)
+			      (:get . custom-get)
+			      (:widget . custom-widget)
+			      (:after-set . custom-after-set)
+			      (:before-set . custom-before-set)
+			      (:range . custom-range)))
+
+(defvar custom-group-option-alist '((:widget . custom-group-widget)))
+
+;; alist of (CLOSURE . SYMBOL) mapping custom-set functions to
+;; their names
+(defvar custom-set-alist nil)
+
 ;; (defcustom VARIABLE VALUE DOC &rest CUSTOM-KEYS)
 
 ;; where CUSTOM-KEYS is a plist containing any of the following:
@@ -74,42 +93,22 @@
 
 (defun custom-declare-variable (symbol value keys)
   (let
-      (tem type)
+      (type prop)
     (while keys
-      (setq tem (car keys))
+      (setq prop (cdr (assq (car keys) custom-option-alist)))
       (setq keys (cdr keys))
-      (cond ((eq tem ':group)
-	     (put symbol 'custom-group (car keys))
-	     (custom-add-to-group symbol (car keys)))
-	    ((eq tem ':require)
-	     (put symbol 'custom-require (car keys)))
-	    ((eq tem ':type)
-	     (setq type (car keys))
-	     (put symbol 'custom-type type))
-	    ((eq tem ':allow-nil)
-	     (put symbol 'custom-allow-nil (car keys)))
-	    ((eq tem ':set)
-	     (put symbol 'custom-set (car keys)))
-	    ((eq tem ':get)
-	     (put symbol 'custom-get (car keys)))
-	    ((eq tem ':widget)
-	     (put symbol 'custom-widget (car keys)))
-	    ((eq tem ':after-set)
-	     (put symbol 'custom-after-set (car keys)))
-	    ((eq tem ':before-set)
-	     (put symbol 'custom-before-set (car keys)))
-	    ((eq tem ':range)
-	     (put symbol 'custom-range (car keys))))
+      (when prop
+	(put symbol prop (car keys)))
       (setq keys (cdr keys)))
-    (when (symbolp type)
-      (when (and (not (get symbol 'custom-get))
-		 (get type 'custom-get))
+    (custom-add-to-group symbol (or (get symbol 'custom-group)
+				    (error "No :group attribute: %s" symbol)))
+    (setq type (get symbol 'custom-type))
+    (when (and type (symbolp type))
+      (when (and (not (get symbol 'custom-get)) (get type 'custom-get))
 	(put symbol 'custom-get (get type 'custom-get)))
-      (when (and (not (get symbol 'custom-set))
-		 (get type 'custom-set))
+      (when (and (not (get symbol 'custom-set)) (get type 'custom-set))
 	(put symbol 'custom-set (get type 'custom-set)))
-      (when (and (not (get symbol 'custom-widget))
-		 (get type 'custom-widget))
+      (when (and (not (get symbol 'custom-widget)) (get type 'custom-widget))
 	(put symbol 'custom-widget (get type 'custom-widget))))
     value))
 
@@ -121,22 +120,39 @@
   (let
       (tem)
     (while keys
-      (setq tem (car keys))
+      (setq tem (cdr (assq (car keys) custom-group-option-alist)))
       (setq keys (cdr keys))
-      (cond ((eq tem ':widget)
-	     (put group 'custom-group-widget (car keys))))
+      (when tem
+	(put group tem (car keys)))
       (setq keys (cdr keys)))
     ;; declare a command to customize this group
-    (fset (intern (concat "customize:" (symbol-name group)))
-	  (make-closure `(lambda ()
-			   (interactive)
-			   (customize ',group))))))
+    (set (intern (concat "customize:" (symbol-name group)))
+	 (make-closure `(lambda ()
+			  (interactive)
+			  (customize ',group))))))
 
 (defun custom-quote-keys (keys)
-  (cons 'list (mapcar #'(lambda (x)
-			  (if (eq (car x) 'lambda)
-			      (list 'function x)
-			    (list 'quote x))) keys)))
+  (let
+      ((out nil))
+    (while (and keys (cdr keys))
+      (if (memq (car keys) custom-unquoted-keys)
+	  (setq out (cons (list 'quote (nth 1 keys))
+			  (cons (list 'quote (car keys)) out)))
+	(setq out (cons (nth 1 keys) (cons (list 'quote (car keys)) out))))
+      (setq keys (nthcdr 2 keys)))
+    (cons 'list (nreverse out))))
+
+(defmacro custom-set-property (sym prop value)
+  `(let
+       ((__prop__ (cdr (assq ,prop custom-option-alist))))
+     (when __prop__
+       (put ,sym __prop__ ,value))))
+
+(defmacro custom-set-group-property (group prop value)
+  `(let
+       ((__prop__ (cdr (assq ,prop custom-group-option-alist))))
+     (when __prop__
+       (put ,group __prop__ ,value))))
 
 (defun custom-add-to-group (symbol group)
   (let
@@ -146,9 +162,9 @@
       (setq group-list (assq group custom-groups)))
     (rplacd group-list (nconc (delq symbol (cdr group-list)) (list symbol)))))
 
-(defun custom-set-variable (symbol value &optional require)
-  (when require
-    (require require))
+(defun custom-set-variable (symbol value &optional req)
+  (when req
+    (require req))
   (when (get symbol 'custom-before-set)
     (funcall (get symbol 'custom-before-set) symbol))
   (set symbol value)
@@ -159,21 +175,18 @@
   (list*
    '("All settings" customize)
    '()
-   (mapcar #'(lambda (group-list)
-	       (list (_ (or (get (car group-list) 'custom-group-doc)
-			    (symbol-name (car group-list))))
-		     `(customize ',(car group-list)))) custom-groups)))
+   (mapcar (lambda (group-list)
+	     (list (_ (or (get (car group-list) 'custom-group-doc)
+			  (symbol-name (car group-list))))
+		   `(customize ',(car group-list)))) custom-groups)))
 
 
 ;; support for font and color primitive types
 
-(put 'font 'custom-set 'custom-set-font)
-(put 'font 'custom-get 'custom-get-font)
-
 (defun custom-set-font (symbol value &rest args)
-  (apply 'custom-set-variable symbol (if (stringp value)
-					 (get-font value)
-				       value) args))
+  (apply custom-set-variable symbol (if (stringp value)
+					(get-font value)
+				      value) args))
 
 (defun custom-get-font (symbol)
   (let
@@ -182,13 +195,15 @@
 	(font-name value)
       value)))
 
-(put 'color 'custom-set 'custom-set-color)
-(put 'color 'custom-get 'custom-get-color)
+(put 'font 'custom-get custom-get-font)
+(put 'font 'custom-set custom-set-font)
+(setq custom-set-alist (cons (cons custom-set-font 'custom-set-font)
+			     custom-set-alist))
 
 (defun custom-set-color (symbol value &rest args)
-  (apply 'custom-set-variable symbol (if (stringp value)
-					 (get-color value)
-				       value) args))
+  (apply custom-set-variable symbol (if (stringp value)
+					(get-color value)
+				      value) args))
 
 (defun custom-get-color (symbol)
   (let
@@ -196,6 +211,11 @@
     (if (colorp value)
 	(color-name value)
       value)))
+
+(put 'color 'custom-get custom-get-color)
+(put 'color 'custom-set custom-set-color)
+(setq custom-set-alist (cons (cons custom-set-color 'custom-set-color)
+			     custom-set-alist))
 
 
 ;; default groups

@@ -542,7 +542,7 @@ DEFUN("window-frame", Fwindow_frame, Swindow_frame, (repv win), rep_Subr1) /*
 ::doc:Swindow-frame::
 window-frame WINDOW
 
-Return the frame object (a closure) associated with WINDOW.
+Return the frame object associated with WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -555,12 +555,12 @@ DEFUN("set-window-frame", Fset_window_frame, Sset_window_frame,
 set-window-frame WINDOW FRAME
 
 Set the frame associated with the window object WINDOW to FRAME (a
-closure containing a list). If the window is mapped the old frame will
-be destroyed and a new frame constructed as specified by FRAME.
+list). If the window is mapped the old frame will be destroyed and a
+new frame constructed as specified by FRAME.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
-    rep_DECLARE2(frame, rep_FUNARGP);
+    rep_DECLARE2(frame, rep_LISTP);
     Fgrab_server ();
 
     if (VWIN(win)->reparented)

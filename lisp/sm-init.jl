@@ -58,9 +58,9 @@ the window.")
       (delete-file file))))
 
 (defun sm-add-saved-properties (&rest props)
-  (mapc #'(lambda (p)
-	    (setq sm-saved-window-properties
-		  (cons p sm-saved-window-properties)))
+  (mapc (lambda (p)
+	  (setq sm-saved-window-properties
+		(cons p sm-saved-window-properties)))
 	props))
 
 
@@ -110,11 +110,11 @@ the window.")
 
     ;; XXX is this necessary?
 ;   (sm-set-property
-;     "Environment" (apply 'nconc
-;			  (mapcar #'(lambda (e)
-;				      (when (string-match "=" e)
-;					(list (substring e 0 (match-start))
-;					      (substring e (match-end)))))
+;     "Environment" (apply nconc
+;			  (mapcar (lambda (e)
+;				    (when (string-match "=" e)
+;				      (list (substring e 0 (match-start))
+;					    (substring e (match-end)))))
 ;				  process-environment)))
 
     ;; we need to start before gmc, otherwise it won't hint its icons

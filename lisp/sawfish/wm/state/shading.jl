@@ -64,5 +64,5 @@ state."
       (window-put w 'type  (window-get w 'shaded-old-type)))
     (shade-window w)))
 
-(add-hook 'add-window-hook 'shading-add-window t)
+(add-hook 'add-window-hook shading-add-window t)
 (sm-add-saved-properties 'shaded 'shaded-old-type)

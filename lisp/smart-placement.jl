@@ -74,10 +74,10 @@ A value between 0 and 1023 inclusive.")
     (rplacd grid (sort (sp-prune-points (cdr grid) sp-max-points)))
     grid))
 
-(defun sp-prune-points (points max)
+(defun sp-prune-points (points maximum)
   (let*
       ((total (length points))
-       (cutoff (- total max))
+       (cutoff (- total maximum))
        tem)
     (setq tem points)
     (while (cdr (cdr tem))
@@ -89,16 +89,16 @@ A value between 0 and 1023 inclusive.")
 ;; returns the list of windows to compare with when overlapping, by
 ;; default windows with their `ignored' property set are dropped
 (defun sp-get-windows (w)
-  (delete-if #'(lambda (x)
-                (or (eq x w)
-                    (and (window-get x 'ignored)
-			 (not (window-avoided-p x)))
-                    (window-get x 'iconified)
-                    (/= (or (window-get x 'workspace)
-                            current-workspace)
-                        (or (window-get w 'workspace)
-                            current-workspace))))
-            (managed-windows)))
+  (delete-if (lambda (x)
+	       (or (eq x w)
+		   (and (window-get x 'ignored)
+			(not (window-avoided-p x)))
+		   (window-get x 'iconified)
+		   (/= (or (window-get x 'workspace)
+			   current-workspace)
+		       (or (window-get w 'workspace)
+			   current-workspace))))
+	     (managed-windows)))
 
 
 ;; calculating overlaps
@@ -110,21 +110,21 @@ A value between 0 and 1023 inclusive.")
   (let
       ((screen-rect (list 0 0 (screen-width) (screen-height)))
        min-overlap min-point)
-    (mapc #'(lambda (delta)
-	      (let
-		  ((point-foo (cons (+ (car point)
-				       (* (car delta) (car dims)))
-				    (+ (cdr point)
-				       (* (cdr delta) (cdr dims)))))
-		   tem)
-		(when (and (>= (car point-foo) 0)
-			   (>= (cdr point-foo) 0)
-			   (<= (+ (car point-foo) (car dims)) (screen-width))
-			   (<= (+ (cdr point-foo) (cdr dims)) (screen-height)))
-		  (setq tem (rect-total-overlap dims point-foo rects))
-		  (when (or (not min-point) (< tem min-overlap))
-		    (setq min-overlap tem)
-		    (setq min-point point-foo)))))
+    (mapc (lambda (delta)
+	    (let
+		((point-foo (cons (+ (car point)
+				     (* (car delta) (car dims)))
+				  (+ (cdr point)
+				     (* (cdr delta) (cdr dims)))))
+		 tem)
+	      (when (and (>= (car point-foo) 0)
+			 (>= (cdr point-foo) 0)
+			 (<= (+ (car point-foo) (car dims)) (screen-width))
+			 (<= (+ (cdr point-foo) (cdr dims)) (screen-height)))
+		(setq tem (rect-total-overlap dims point-foo rects))
+		(when (or (not min-point) (< tem min-overlap))
+		  (setq min-overlap tem)
+		  (setq min-point point-foo)))))
 	  ;; try aligning all four corners to this point
 	  '((0 . 0) (0 . -1) (-1 . 0) (-1 . -1)))
     (and min-point (cons min-point min-overlap))))
@@ -137,19 +137,19 @@ A value between 0 and 1023 inclusive.")
       ((point (cons 0 0))
        min-point min-overlap tem)
     (catch 'done
-      (mapc #'(lambda (y)
-		(rplacd point y)
-		(mapc #'(lambda (x)
-			  (rplaca point x)
-			  (setq tem (sp-least-overlap dims point rects))
-			  (when tem
-			    (when (zerop (cdr tem))
-			      (throw 'done (car tem)))
-			    (when (or (not min-overlap)
-				      (< (cdr tem) min-overlap))
-			      (setq min-overlap (cdr tem))
-			      (setq min-point (car tem)))))
-		      (car grid)))
+      (mapc (lambda (y)
+	      (rplacd point y)
+	      (mapc (lambda (x)
+		      (rplaca point x)
+		      (setq tem (sp-least-overlap dims point rects))
+		      (when tem
+			(when (zerop (cdr tem))
+			  (throw 'done (car tem)))
+			(when (or (not min-overlap)
+				  (< (cdr tem) min-overlap))
+			  (setq min-overlap (cdr tem))
+			  (setq min-point (car tem)))))
+		    (car grid)))
 	    (cdr grid))
       ;; no zero overlap point, use the point with least overlap
       min-point)))
@@ -159,14 +159,14 @@ A value between 0 and 1023 inclusive.")
       ((point (cons 0 0))
        tem)
     (catch 'done
-      (mapc #'(lambda (y)
-		(rplacd point y)
-		(mapc #'(lambda (x)
-			  (rplaca point x)
-			  (setq tem (sp-least-overlap dims point rects))
-			  (when (and tem (zerop (cdr tem)))
-			    (throw 'done (car tem))))
-		      (car grid)))
+      (mapc (lambda (y)
+	      (rplacd point y)
+	      (mapc (lambda (x)
+		      (rplaca point x)
+		      (setq tem (sp-least-overlap dims point rects))
+		      (when (and tem (zerop (cdr tem)))
+			(throw 'done (car tem))))
+		    (car grid)))
 	    (cdr grid))
       nil)))
 
@@ -199,36 +199,36 @@ A value between 0 and 1023 inclusive.")
     ;; count the number of grid lines this position crosses
     ;; the idea is to maximize this, since it's likely that it
     ;; will use up the annoying small parts of the screen
-    (mapc #'(lambda (x)
-	      (when (and (>= x win-left) (<= x win-right))
-		(setq x-cross (1+ x-cross)))
-	      (setq x-total (1+ x-total)))
+    (mapc (lambda (x)
+	    (when (and (>= x win-left) (<= x win-right))
+	      (setq x-cross (1+ x-cross)))
+	    (setq x-total (1+ x-total)))
 	  (car grid))
-    (mapc #'(lambda (y)
-	      (when (and (>= y win-top) (<= y win-bottom))
-		(setq y-cross (1+ y-cross)))
-	      (setq y-total (1+ y-total)))
+    (mapc (lambda (y)
+	    (when (and (>= y win-top) (<= y win-bottom))
+	      (setq y-cross (1+ y-cross)))
+	    (setq y-total (1+ y-total)))
 	  (cdr grid))
 
     ;; how many window edges does this position abut?
     ;; it can save space to cluster windows as much as possible
-    (mapc #'(lambda (r)
-	      (aset edges 0 (max (sp-edges-adjacent
-				  win-right win-top win-bottom
-				  (car r) (nth 1 r) (nth 3 r))
-				 (aref edges 0)))
-	      (aset edges 1 (max (sp-edges-adjacent
-				  win-left win-top win-bottom
-				  (nth 2 r) (nth 1 r) (nth 3 r))
-				 (aref edges 1)))
-	      (aset edges 2 (max (sp-edges-adjacent
-				  win-bottom win-left win-right
-				  (nth 1 r) (car r) (nth 2 r))
-				 (aref edges 2)))
-	      (aset edges 3 (max (sp-edges-adjacent
-				  win-top win-left win-right
-				  (nth 3 r) (car r) (nth 2 r))
-				 (aref edges 3))))
+    (mapc (lambda (r)
+	    (aset edges 0 (max (sp-edges-adjacent
+				win-right win-top win-bottom
+				(car r) (nth 1 r) (nth 3 r))
+			       (aref edges 0)))
+	    (aset edges 1 (max (sp-edges-adjacent
+				win-left win-top win-bottom
+				(nth 2 r) (nth 1 r) (nth 3 r))
+			       (aref edges 1)))
+	    (aset edges 2 (max (sp-edges-adjacent
+				win-bottom win-left win-right
+				(nth 1 r) (car r) (nth 2 r))
+			       (aref edges 2)))
+	    (aset edges 3 (max (sp-edges-adjacent
+				win-top win-left win-right
+				(nth 3 r) (car r) (nth 2 r))
+			       (aref edges 3))))
 	  rects)
     (setq edges (+ (aref edges 0) (aref edges 1)
 		   (aref edges 2) (aref edges 3)))
@@ -244,19 +244,19 @@ A value between 0 and 1023 inclusive.")
        points min-overlap tem)
 
     ;; 1. find the list of points with the smallest overlap
-    (mapc #'(lambda (y)
-	      (rplacd point y)
-	      (mapc #'(lambda (x)
-			(rplaca point x)
-			(setq tem (sp-least-overlap dims point rects))
-			(when tem
-			  (cond ((or (not min-overlap)
-				     (< (cdr tem) min-overlap))
-				 (setq min-overlap (cdr tem))
-				 (setq points (list (car tem))))
-				((= (cdr tem) min-overlap)
-				 (setq points (cons (car tem) points))))))
-		    (car grid)))
+    (mapc (lambda (y)
+	    (rplacd point y)
+	    (mapc (lambda (x)
+		    (rplaca point x)
+		    (setq tem (sp-least-overlap dims point rects))
+		    (when tem
+		      (cond ((or (not min-overlap)
+				 (< (cdr tem) min-overlap))
+			     (setq min-overlap (cdr tem))
+			     (setq points (list (car tem))))
+			    ((= (cdr tem) min-overlap)
+			     (setq points (cons (car tem) points))))))
+		  (car grid)))
 	  (cdr grid))
 
     ;; 2. choose the best of these points
@@ -271,12 +271,12 @@ A value between 0 and 1023 inclusive.")
 	   (let
 	       ((max-cost 0)
 		(max-point nil))
-	     (mapc #'(lambda (p)
-		       (let
-			   ((cost (sp-cost p dims grid rects)))
-			 (when (> cost max-cost)
-			   (setq max-cost cost)
-			   (setq max-point p))))
+	     (mapc (lambda (p)
+		     (let
+			 ((cost (sp-cost p dims grid rects)))
+		       (when (> cost max-cost)
+			 (setq max-cost cost)
+			 (setq max-point p))))
 		   points)
 	     max-point)))))
 
@@ -293,10 +293,10 @@ A value between 0 and 1023 inclusive.")
 	((windows (sp-get-windows w))
 	 (rects (rectangles-from-windows
 		 windows
-		 #'(lambda (x)
-		     (if (window-avoided-p x)
-			 sp-avoided-windows-weight
-		       (window-get x 'placement-weight)))))
+		 (lambda (x)
+		   (if (window-avoided-p x)
+		       sp-avoided-windows-weight
+		     (window-get x 'placement-weight)))))
 	 (grid (sp-make-grid rects t))
 	 (dims (window-frame-dimensions w))
 	 point)
@@ -307,7 +307,7 @@ A value between 0 and 1023 inclusive.")
 		 (<= (+ (cdr dims) sp-padding) (screen-height)))
 	(rplaca dims (+ (car dims) (* sp-padding 2)))
 	(rplacd dims (+ (cdr dims) (* sp-padding 2)))
-	(setq point (funcall fit-fun dims grid rects))
+	(setq point (fit-fun dims grid rects))
 	(when point
 	  (rplaca point (+ (car point) sp-padding))
 	  (rplacd point (+ (cdr point) sp-padding))))
@@ -317,20 +317,28 @@ A value between 0 and 1023 inclusive.")
 	(setq dims (window-frame-dimensions w))
 	(rplaca dims (min (car dims) (screen-width)))
 	(rplacd dims (min (cdr dims) (screen-height)))
-	(setq point (funcall fit-fun dims grid rects)))
+	(setq point (fit-fun dims grid rects)))
 
       (if point
 	  (move-window-to w (car point) (cdr point))
-	(funcall (or fall-back-fun 'place-window-randomly) w)))))
+	((or fall-back-fun place-window-randomly) w)))))
 
 ;;;###autoload
 (defun place-window-first-fit (w)
-  (sp-do-placement w 'sp-first-fit))
+  (sp-do-placement w sp-first-fit))
 
 ;;;###autoload
 (defun place-window-best-fit (w)
-  (sp-do-placement w 'sp-best-fit))
+  (sp-do-placement w sp-best-fit))
 
 ;;;###autoload
 (defun place-window-first-fit-or-interactive (w)
-  (sp-do-placement w 'sp-fit-or-nil 'place-window-interactively))
+  (sp-do-placement w sp-fit-or-nil 'place-window-interactively))
+
+
+;; reinitialise autoload defs
+
+(put 'first-fit 'placement-mode place-window-first-fit)
+(put 'best-fit 'placement-mode place-window-best-fit)
+(put 'first-fit-or-interactive 'placement-mode
+     place-window-first-fit-or-interactive)

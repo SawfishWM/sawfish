@@ -95,22 +95,22 @@
 					   (cdr (assq 'prelight tem))
 					   (cdr (assq 'active tem))
 					   (cdr (assq 'selected tem)))))
-    (mapc #'(lambda (var)
-	      (when (symbol-value var)
-		(set var (mapcar #'(lambda (x)
-				     (and x (get-color x)))
-				 (symbol-value var)))))
+    (mapc (lambda (var)
+	    (when (symbol-value var)
+	      (set var (mapcar (lambda (x)
+				 (and x (get-color x)))
+			       (symbol-value var)))))
 	  '(gtkrc-background gtkrc-base gtkrc-foreground))))
 
 ;; if a theme want's to use the pixmaps, it must call this function first
 (defun gtkrc-load-pixmaps ()
   (when (and gtkrc-background-pixmaps (not gtkrc-loaded-pixmaps))
     (setq gtkrc-background-pixmaps
-	  (mapcar #'(lambda (x)
-		      (when x
-			(setq x (make-image (gtkrc-fix-image-name x)))
-			(image-put x 'tiled t)
-			x))
+	  (mapcar (lambda (x)
+		    (when x
+		      (setq x (make-image (gtkrc-fix-image-name x)))
+		      (image-put x 'tiled t)
+		      x))
 		  gtkrc-background-pixmaps))
     (setq gtkrc-loaded-pixmaps t)))
 
@@ -139,7 +139,7 @@
     (or (closurep fun) (error "Non-closure to gtkrc-call-after-changed"))
     (setq funs (cons fun funs)))
 
-  (add-hook 'gtkrc-changed-hook #'(lambda () (mapc 'funcall funs))))
+  (add-hook 'gtkrc-changed-hook (lambda () (mapc funcall funs))))
 
 
 ;; init
@@ -150,11 +150,11 @@
 (unless batch-mode
   (setq gtkrc-dummy-window (create-window 'root -100 -100 10 10))
   (set-x-property gtkrc-dummy-window 'WM_STATE (vector 0) 'WM_STATE 32)
-  (add-hook 'client-message-hook 'gtkrc-handle-client-msg)
-  (add-hook 'before-exit-hook 'gtkrc-quit)
-  (mapc 'gaol-add-function
+  (add-hook 'client-message-hook gtkrc-handle-client-msg)
+  (add-hook 'before-exit-hook gtkrc-quit)
+  (mapc gaol-add-function
 	'(gtkrc-load-pixmaps gtkrc-reload-style gtkrc-call-after-changed))
-  (mapc 'gaol-add-special '(gtkrc-background gtkrc-background-pixmaps
-			    gtkrc-base gtkrc-foreground gtkrc-font))
+  (mapc gaol-add-special '(gtkrc-background gtkrc-background-pixmaps
+			   gtkrc-base gtkrc-foreground gtkrc-font))
   (gaol-rebuild-environment)
   (gtkrc-reload-style))
