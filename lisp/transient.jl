@@ -36,7 +36,7 @@
 (defcustom transients-get-focus t
   "Mapping a transient window whose parent is currently focused transfers
 the input focus to the transient window."
-  :group misc
+  :group focus
   :type boolean)
 
 (defvar ignored-window-names nil
@@ -90,5 +90,17 @@ workspaces.")
       (when (and parent transients-get-focus (eq (input-focus) parent))
 	(set-input-focus w)))))
 
+;; If a transient window gets unmapped that currently has the input
+;; focus, pass it (the focus) to its parent
+;; XXX but this only works if the pointer isn't over a different window
+(defun transient-unmap-window (w)
+  (when (eq (input-focus) w)
+    (let
+	((parent (and (window-transient-p w)
+		      (get-window-by-id (window-transient-p w)))))
+      (when parent
+	(set-input-focus parent)))))
+
 (add-hook 'add-window-hook 'transient-add-window t)
 (add-hook 'map-notify-hook 'transient-map-window t)
+(add-hook 'unmap-notify-hook 'transient-unmap-window t)
