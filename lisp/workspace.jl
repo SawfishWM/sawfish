@@ -23,20 +23,31 @@
 
 ;; Commentary:
 
-;; Sawmill's workspace are organised as a dynamic 1-dimensional
-;; structure. Workspaces are added and deleted as required (subject to
-;; the options defined below)
+;; Sawmill's workspace are organised as an infinite 1-dimensional
+;; continuum, from -infinity to +infinity. Normally the user only sees
+;; a small part of this continuum, from the first non-empty workspace
+;; to the last non-empty workspace
+
+;; So that we never run out of workspace ids (yeah right) the non-empty
+;; portion is intermittently normalised to start with index zero
+
+;; Inserting and deleting workspaces just involves shuffling the
+;; workspace index of each window (stored in the `workspace' property,
+;; nil for sticky windows)
+
+;; The intention is that whatever structure the user wants to see (e.g.
+;; grid, cube, ...) is built on top of the underlying 1d structure
 
 
 ;; Options and variables
 
 (defcustom workspace-boundary-mode 'stop
-  "Action when hitting the first or last workspaces while moving."
+  "Action when passing the first or last workspace when moving."
   :type (set stop wrap-around keep-going)
   :group workspace)
 
 (defcustom delete-workspaces-when-empty nil
-  "Workspaces are deleted when they contain no windows."
+  "Workspaces are merged with the next when their last window is removed."
   :type boolean
   :group workspace)
 
@@ -89,7 +100,7 @@
   :type boolean
   :group misc)
 
-;; Currently active workspace, an integer >= 0
+;; Currently active workspace, an integer
 (defvar current-workspace 0)
 
 (defvar static-workspace-menus
@@ -101,6 +112,7 @@
     ("Move right" move-workspace-forwards)
     ("Move left" move-workspace-backwards)))
 
+;; X constants
 (defconst NormalState 1)
 (defconst IconicState 3)
 
@@ -115,6 +127,8 @@
 	  (managed-windows))
     t))
 
+;; returns (FIRST-INDEX . LAST-INDEX) defining the subset of the
+;; continuum that is `interesting' to the user
 (defun ws-workspace-limits ()
   (let
       ((max-w current-workspace)
@@ -128,6 +142,7 @@
 		  (setq min-w tem)))) (managed-windows))
     (cons min-w (max max-w (1- (+ preallocated-workspaces min-w))))))
 
+;; renormalize the interesting workspaces so they being at index zero
 (defun ws-normalize-indices ()
   (let
       ((limits (ws-workspace-limits))
@@ -138,6 +153,8 @@
 	  (managed-windows))
     (setq current-workspace (- current-workspace (car limits)))))
 
+;; insert a new workspace (returning its index) so that the workspace
+;; before it has index BEFORE
 (defun ws-insert-workspace (&optional before)
   (unless before
     (setq before (1+ current-workspace)))
@@ -152,7 +169,7 @@
   (call-hook 'workspace-state-change-hook)
   (1+ before))
 
-;; moves any windows to the next workspace
+;; merge workspace INDEX with workspace INDEX+1
 (defun ws-remove-workspace (&optional index)
   (unless index
     (setq index current-workspace))
@@ -171,6 +188,7 @@
 	(managed-windows))
   (call-hook 'workspace-state-change-hook))
 
+;; move workspace INDEX COUNT positions forwards (+ve or -ve)
 (defun ws-move-workspace (index count)
   (let
       ((windows (managed-windows)))
@@ -216,6 +234,7 @@
 		 (/= (car limits) (cdr limits)))
 	(select-workspace (1- current-workspace))))))
 
+;; called when window W is destroyed
 (defun ws-remove-window (w &optional dont-hide)
   (let
       ((space (window-get w 'workspace)))
@@ -226,6 +245,7 @@
 	(hide-window w))
       (call-hook 'workspace-state-change-hook))))
 
+;; move window W to workspace index NEW
 (defun ws-move-window (w new)
   (let
       ((space (window-get w 'workspace)))
@@ -239,6 +259,7 @@
       (ws-after-removing-window w space)
       (call-hook 'workspace-state-change-hook))))
 
+;; display workspace index SPACE
 (defun select-workspace (space)
   "Activate workspace number SPACE (from zero)."
   (interactive "p")
@@ -261,6 +282,7 @@
       (call-hook 'enter-workspace-hook (list current-workspace))
       (call-hook 'workspace-state-change-hook))))
 
+;; return a list of all windows on workspace index SPACE
 (defun workspace-windows (space &optional include-iconified)
   (filter #'(lambda (w)
 	      (and (equal (window-get w 'workspace) space)
@@ -271,7 +293,8 @@
 
 ;; slightly higher level
 
-;; window shouldn't be in any workspace
+;; add window W to workspace index SPACE; window shouldn't be in any
+;; workspace
 (defun ws-add-window-to-space (w space)
   (unless (or (window-get w 'sticky) (window-get w 'workspace))
     (window-put w 'workspace space)
@@ -281,7 +304,8 @@
     (call-window-hook 'add-to-workspace-hook w)
     (call-hook 'workspace-state-change-hook)))
 
-;; usually called from the add-window-hook
+;; usually called from the add-window-hook; adds window W to the
+;; current workspace (or wherever else it should go)
 (defun ws-add-window (w)
   (unless (window-get w 'sticky)
     (if (window-get w 'workspace)
