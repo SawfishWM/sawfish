@@ -1,3 +1,20 @@
+1999-12-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* menus.jl (menu-preprocessor): deprecated the ``expand
+	variables when first in list'' behaviour, it's too crufty to
+	live. Now we have lisp-1 behaviour it's possible to expand
+	variables when the list is dotted to them, as was previously
+	done only for functions
+	* gnome-menu.jl: changed how apps-menu is hijacked
+
+	* workspace.jl, transient.jl, stacking.jl, group-funs.jl,
+	functions.jl, frames.jl: removed all the auto-foo-alist and
+	bar-windows-re variables -- match-window can do all this stuff
+	in one place
+
+	* frames.jl (site-theme-directory): new variable, put in the
+	theme-load-path, set to ${prefix}/share/sawmill/themes by default
+
 1999-12-01  John Harper  <john@dcs.warwick.ac.uk>
 
 	* match-window.jl: added customize support
