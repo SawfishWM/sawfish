@@ -32,17 +32,6 @@
   (interactive "%W")
   (map-window-group uniconify-window w))
 
-;;;###autoload
-(defun iconify-other-groups (w)
-  (interactive "%W")
-  (let
-      ((group (windows-in-group w)))
-    (map-windows (lambda (x)
-		   (when (and (not (memq x group))
-			      (windows-share-workspace-p w x)
-			      (not (window-get x 'ignored)))
-		     (iconify-window x))))))
-
 
 ;; sticky
 
