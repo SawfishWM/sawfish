@@ -7,6 +7,33 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@section 0.4
+
+@itemize @bullet
+
+@item It's now possible to move the current workspace up or down the
+list of all workspaces
+
+@item New option @samp{-c COMMAND} to @code{sawmill-client}; invokes
+the named interactive function
+
+@item Configurator changes: use a paned widget to separate the list of
+groups from the settings (stops their relative sizes changing), allow
+each group to be customized separately, either through a new set of
+root-submenus or the commands @code{customize:@var{group}} for each
+@var{group}.
+
+@item When an app asks for no title and no border, give it what it
+wants---use the new @code{unframed} window type
+
+@item Fix bug of evaluating both KeyPress @emph{and} KeyRelease events
+
+@item Fix bug of making the shape mask of unshaped client windows too
+big
+
+@end itemize
+
+
 @section 0.3a
 
 @itemize @bullet
@@ -96,7 +123,7 @@ used)
 (@code{decorate-transients})
 
 @item Newly-displayed transient windows can be automatically given the
-focus if there parent window is focused (@code{transients-get-focus})
+focus if their parent window is focused (@code{transients-get-focus})
 
 @item Any newly-displayed windows can be automatically given the input
 focus (@code{focus-windows-when-mapped})

@@ -50,5 +50,25 @@ todo:
     Also, _key_ bindings in frame parts don't work (since they're not
     grabbed and the frame part is never actually focused)
 
-  - session management
+  - Session management
 
+    What needs to be done?
+
+    Do we just have to connect with the sm, then save the state of
+    windows when asked (i.e. geometry, sticky, maximized, ...) and have
+    a facility for reloading this information when asked?
+
+  - Remove root menu?
+
+    The argument is that doing this removes the need for the wm to
+    select ButtonPress events on the root window (which is a point of
+    conflict with, for example, a desktop file manager)
+
+    The sole need for the wm to manage the root menus (as far as I can
+    see) is so that it can offer window management functions (such as
+    "interactively move the focused window" or whatever), but all
+    these things can be invoked through sawmill-client, i.e.
+    "sawmill-client -c move-window-interactively"
+
+    With a bit of work the dynamically generated menus (e.g. the window
+    and workspace submenus) could also be generated through the client

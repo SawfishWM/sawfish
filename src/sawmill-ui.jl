@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.10 1999/08/24 15:15:08 john Exp $
+;; $Id: sawmill-ui.jl,v 1.11 1999/08/24 16:16:57 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -80,23 +80,29 @@ fi
 ;; (text TEXT)
 ;; (hsep)
 ;; (vsep)
-;; (frame TEXT ELEMENTS...)
+;; (frame TEXT ELEMENT)
 
-;; (toggle TEXT KEYS...)
-;; (number KEYS...)
-;; (string KEYS...)
-;; (set LIST KEYS...)
-;; (font KEYS...)
-;; (keymap KEYS...)
-;; (keymap-shell (PAGES...) KEYS...)
+;; (toggle TEXT)
+;; (number)
+;; (string)
+;; (set LIST)
+;; (font)
+;; (keymap)
+;; (keymap-shell (PAGES...))
 
-;; KEYS is a plist, possible keys are:
+;; Most of these elements also use the tail of the list as a plist,
+;; storing both working values and input parameters. Some of the inputs
+;; are as follows:
 
-;; :feature FUNCTION
-;; :variable SYMBOL
-;; :value VALUE
-;; :doc STRING
-;; :allow-nil t
+;;	:feature FUNCTION
+;;	:variable SYMBOL
+;;	:value VALUE
+;;	:doc STRING
+;;	:allow-nil t
+;;	:doc-path DIRECTORY-LIST		only in keymap-shell
+;;	:commands COMMAND-LIST			only in keymap-shell
+
+;; also, much work data is stored in each element's list of keys
 
 (defmacro get-key (spec key)
   `(car (cdr (memq ,key ,spec))))
