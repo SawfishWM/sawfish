@@ -36,6 +36,8 @@
 	    widget-valid-p
 	    call-callback
 	    make-signal-callback
+	    tooltip-split
+	    tooltip-set
 	    set-widget-enabled
 	    enable-widget
 	    disable-widget
@@ -44,7 +46,8 @@
 
     ((open rep
 	   gui.gtk
-	   rep.system)
+	   rep.system
+	   rep.regexp)
      (access rep.structures))
 
   (defconst box-spacing 4)
@@ -128,7 +131,11 @@
 		    (widget-type-constructor 'unknown))))
       (if maker
 	  (if (and doc-string (widget-accepts-doc-string-p type))
-	      (apply maker callback doc-string (cdr cell))
+	      (let* ((split (tooltip-split doc-string))
+		     (widget (apply maker callback (car split) (cdr cell))))
+		(when (cdr split)
+		  (tooltip-set (widget-gtk-widget widget) (cdr split)))
+		widget)
 	    (apply maker callback (cdr cell)))
 	(error "No widget of type %s" type))))
 
@@ -157,6 +164,23 @@
       (fun)))
 
   (define (make-signal-callback fun) (lambda () (call-callback fun)))
+
+
+;;; tooltip support
+
+  (define tooltips)
+
+  ;; returns (LABEL-STRING . TOOLTIP-STRING-OR-NIL)
+  (define (tooltip-split doc)
+    (if (string-match "\n\n\\s*" doc)
+	(cons (substring doc 0 (match-start))
+	      (substring doc (match-end)))
+      (cons doc nil)))
+
+  (define (tooltip-set widget tip-string #!optional (key "Foo"))
+    (unless tooltips
+      (setq tooltips (gtk-tooltips-new)))
+    (gtk-tooltips-set-tip tooltips widget tip-string key))
 
 
 ;;; Predefined widget constructors
