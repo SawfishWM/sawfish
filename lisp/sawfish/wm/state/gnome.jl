@@ -183,6 +183,9 @@
 	       ;; XXX I don't think the GNOME hints specify these things...
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'avoid t))
+	      ((string= (aref class 1) "gmc-desktop-icon")
+	       (window-put w 'focus-click-through t)
+	       (window-put w 'never-focus t))
 	      ((and (string= (aref class 1) "Nautilus")
 		    (string= (aref class 0) "desktop_window"))
 	       ;; XXX ...or these
