@@ -104,7 +104,7 @@ focus_on_window (Lisp_Window *w)
 
 /* Set flags in W relating to which window manager protocols are recognised
    by window W. */
-static void
+void
 get_window_protocols (Lisp_Window *w)
 {
     Atom *prot;
