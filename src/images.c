@@ -1282,6 +1282,200 @@ paste_image_to_drawable (Lisp_Image *img, Drawable d,
 }
 
 
+/* lisp functions for accessing image contents */
+
+static repv
+get_pixel (Lisp_Image *im, int x, int y)
+{
+    int nchannels = image_channels (im);
+    u_char *data = (image_pixels (im)
+		    + (y * image_row_stride (im)) + (x * nchannels));
+    int alpha;
+#ifdef HAVE_IMLIB
+    ImlibColor shape;
+    Imlib_get_image_shape (imlib_id, im->image, &shape);
+    alpha = (data[0] == shape.r && data[1] == shape.g
+	     && data[2] == shape.b) ? 0 : 255;
+#else
+    alpha = nchannels > 3 ? rep_MAKE_INT (data[3]) : rep_MAKE_INT (255);
+#endif
+    return rep_list_4 (rep_MAKE_INT (data[0]),
+		       rep_MAKE_INT (data[1]),
+		       rep_MAKE_INT (data[2]),
+		       rep_MAKE_INT (alpha));
+}
+
+static void
+set_pixel (Lisp_Image *im, int x, int y, repv pixel)
+{
+    int length = rep_INT (Flength (pixel));
+    if (length == 3 || length == 4)
+    {
+	int nchannels = image_channels (im);
+	u_char *data = (image_pixels (im)
+			+ (y * image_row_stride (im)) + (x * nchannels));
+#ifdef HAVE_IMLIB
+	if (length > 3 && rep_INT (rep_CADDDR (pixel)) < 128)
+	{
+	    /* transparent */
+	    ImlibColor shape;
+	    Imlib_get_image_shape (imlib_id, im->image, &shape);
+	    data[0] = shape.r;
+	    data[1] = shape.g;
+	    data[2] = shape.b;
+	}
+	else
+#endif
+	{
+	    data[0] = rep_INT (rep_CAR (pixel));
+	    data[1] = rep_INT (rep_CADR (pixel));
+	    data[2] = rep_INT (rep_CADDR (pixel));
+	    if (length > 3 && nchannels > 3)
+		data[3] = rep_INT (rep_CADDDR (pixel));
+	}
+    }
+}
+
+DEFUN("image-ref", Fimage_ref, Simage_ref,
+      (repv im, repv x, repv y), rep_Subr3) /*
+::doc:image-ref::
+image-ref IMAGE X Y
+
+Return a list `(R G B A)', the red, green, blue and alpha components of
+the pixel at position (X, Y) of IMAGE.
+
+All values are in the range 0 to 255 inclusive.
+::end:: */
+{
+    int width, height;
+
+    rep_DECLARE1 (im, IMAGEP);
+    width = image_width (VIMAGE (im));
+    height = image_height (VIMAGE (im));
+
+    rep_DECLARE (2, x, rep_INTP (x) && rep_INT (x) >= 0
+		 && rep_INT (x) < width);
+    rep_DECLARE (3, y, rep_INTP (y) && rep_INT (y) >= 0
+		 && rep_INT (y) < height);
+
+    return get_pixel (VIMAGE (im), rep_INT (x), rep_INT (y));
+}
+
+DEFUN ("image-set", Fimage_set, Simage_set,
+       (repv im, repv x, repv y, repv pixel), rep_Subr4) /*
+::doc:image-set::
+image-set IMAGE X Y PIXEL
+
+Set the pixel at position (X, Y) in IMAGE to PIXEL. PIXEL is a list of
+four numbers, `(R G B A)', the red, green, blue and alpha components of
+the pixel. All values are in the range 0 to 255 inclusive.
+::end:: */
+{
+    int width, height;
+
+    rep_DECLARE1 (im, IMAGEP);
+    width = image_width (VIMAGE (im));
+    height = image_height (VIMAGE (im));
+
+    rep_DECLARE (2, x, rep_INTP (x) && rep_INT (x) >= 0
+		 && rep_INT (x) < width);
+    rep_DECLARE (3, y, rep_INTP (y) && rep_INT (y) >= 0
+		 && rep_INT (y) < height);
+    rep_DECLARE (4, pixel, rep_LISTP (pixel));
+
+    set_pixel (VIMAGE (im), rep_INT (x), rep_INT (y), pixel);
+    image_changed (VIMAGE (im));
+    return Qnil;
+}
+
+DEFUN ("image-map", Fimage_map, Simage_map, (repv fun, repv im), rep_Subr2) /*
+::doc:image-map::
+image-map XFORM IMAGE
+
+Transform the values of all pixels in IMAGE according to XFORM.
+
+XFORM is a function taking a single argument, the four element list
+representing the current pixel value (as in `pixel-ref'). If XFORM
+returns a non-nil value it should be the new pixel value (another four
+element list).
+::end:: */
+{
+    int width, height;
+    int x, y;
+    rep_GC_root gc_im, gc_fun;
+
+    rep_DECLARE1 (im, IMAGEP);
+    width = image_width (VIMAGE (im));
+    height = image_height (VIMAGE (im));
+
+    rep_DECLARE (2, fun, Ffunctionp (fun) != Qnil);
+
+    rep_PUSHGC (gc_im, im);
+    rep_PUSHGC (gc_fun, fun);
+    for (y = 0; y < height; y++)
+    {
+	for (x = 0; x < width; x++)
+	{
+	    repv pix = rep_call_lisp1 (fun, get_pixel (VIMAGE (im), x, y));
+	    if (pix == rep_NULL)
+	    {
+		rep_POPGC; rep_POPGC;
+		return rep_NULL;
+	    }
+	    if (rep_CONSP (pix))
+		set_pixel (VIMAGE (im), x, y, pix);
+	}
+    }
+    image_changed (VIMAGE (im));
+    rep_POPGC; rep_POPGC;
+    return Qnil;
+}
+
+DEFUN ("image-fill", Fimage_fill, Simage_fill,
+       (repv fun, repv im), rep_Subr2) /*
+::doc:image-fill::
+image-fill GENERATOR IMAGE
+
+Set the values of all pixels in IMAGE according to GENERATOR.
+
+GENERATOR is a function taking two arguments, the coordinates of a
+pixel in the image. It should return the pixel value to set the value
+of the specified pixel to (as accepted by `image-set').
+::end:: */
+{
+    int width, height;
+    int x, y;
+    rep_GC_root gc_im, gc_fun;
+
+    rep_DECLARE1 (im, IMAGEP);
+    width = image_width (VIMAGE (im));
+    height = image_height (VIMAGE (im));
+
+    rep_DECLARE (2, fun, Ffunctionp (fun) != Qnil);
+
+    rep_PUSHGC (gc_im, im);
+    rep_PUSHGC (gc_fun, fun);
+    for (y = 0; y < height; y++)
+    {
+	for (x = 0; x < width; x++)
+	{
+	    repv pix = rep_call_lisp2 (fun, rep_MAKE_INT (x),
+				       rep_MAKE_INT (y));
+	    if (pix == rep_NULL)
+	    {
+		rep_POPGC; rep_POPGC;
+		return rep_NULL;
+	    }
+	    if (rep_CONSP (pix))
+		set_pixel (VIMAGE (im), x, y, pix);
+	}
+    }
+    image_changed (VIMAGE (im));
+    rep_POPGC; rep_POPGC;
+    return Qnil;
+}
+
+
 /* type hooks */
 
 static int
@@ -1380,6 +1574,10 @@ images_init (void)
     rep_ADD_SUBR(Sbevel_image);
     rep_ADD_SUBR(Sclear_image);
     rep_ADD_SUBR(Stile_image);
+    rep_ADD_SUBR(Simage_ref);
+    rep_ADD_SUBR(Simage_set);
+    rep_ADD_SUBR(Simage_map);
+    rep_ADD_SUBR(Simage_fill);
 
     rep_INTERN_SPECIAL(image_directory);
     Fset (Qimage_directory,
