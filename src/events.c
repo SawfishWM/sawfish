@@ -397,6 +397,9 @@ unmap_notify (XEvent *ev)
 	       for the window. */
 	    remove_window_frame (w);
 	    Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
+
+	    if (focus_window == w)
+		focus_on_window (0);
 	}
     }
 }
