@@ -1,6 +1,13 @@
 2001-12-04  Federico Mena Quintero  <federico@ximian.com>
 
 	* sawfish/wm/viewport.jl
+	(move-window-to-viewport-and-move-viewport): Per JSH's suggestion,
+	use raise-window* instead of plain raise-window so that any
+	transients are raised if appropriate.
+
+2001-12-04  Federico Mena Quintero  <federico@ximian.com>
+
+	* sawfish/wm/viewport.jl
 	(move-window-to-viewport-and-move-viewport): New function that
 	generalizes move-window-left and friends.  Also raises the window
 	in its layer so that it doesn't appear occluded when flipping the

@@ -254,11 +254,11 @@
   ;; Moves the window by the specified offsets and then flips to the
   ;; viewport that is relative those offsets to the current viewport.
   (define (move-window-to-viewport-and-move-viewport window col row)
-    (require 'sawfish.wm.stacking)
+    (require 'sawfish.wm.util.stacking)
     (let ((sticky-viewport (window-get window 'sticky-viewport)))
       (window-put window 'sticky-viewport t)
       (with-server-grabbed
-       (raise-window window)
+       (raise-window* window)
        (move-viewport col row))
       (unless sticky-viewport
 	(window-put window 'sticky-viewport nil))))
