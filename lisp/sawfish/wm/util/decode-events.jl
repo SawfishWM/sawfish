@@ -114,3 +114,16 @@ representing the X11 keysyms that may generate the modifier."
 	 '(Control_L Control_R))
 	(t
 	 (error "Unknown modifier: %s" modifier))))
+
+;;;###autoload
+(defun should-grab-button-event-p (event keymap)
+  (let* ((decoded (decode-event event))
+	 (variants (mapcar (lambda (action)
+			     (encode-event
+			      (list (car decoded) (cadr decoded) action)))
+			   '(click-2 click-3 move off))))
+    (letrec ((loop (lambda (rest)
+		     (cond ((null rest) nil)
+			   ((member (cdar rest) variants) t)
+			   (t (loop (cdr rest)))))))
+      (loop (cdr keymap)))))
