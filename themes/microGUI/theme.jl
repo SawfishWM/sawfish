@@ -107,239 +107,243 @@
        
        ;; frame layout
        
-       (frame `(((background . ,top-left-images)
-		 (left-edge . -6)
-		 (top-edge . -19)
-		 (class . top-left-corner))
-		
-		;; top blue
-		((background . ,top-blue-images)
-		 (foreground . "black")
-		 (text . window-name)
-		 (x-justify . 4)
-		 (y-justify . center)
-		 (top-edge . -19)
-		 (left-edge . 19)
-		 (width . ,#'(lambda (w) (+ (title-width w) 13)))
-		 (class . title))
-		
-		;; menu button
-		((background . ,menu-images)
-		 (top-edge . -19)
-		 (left-edge . 0)
-		 (class . menu-button))
-		
-		;; top curves
-		((background . ,top-curves-images)
-		 (left-edge . ,#'(lambda (w) (+ (title-width w) 32)))
-		 (top-edge . -19)
-		 (class . title))
-		
-		;; top grey
-		((background . ,top-grey-images)
-		 (top-edge . -19)
-		 (left-edge . ,#'(lambda (w) (+ (title-width w) 44)))
-		 (right-edge . 52)
-		 (class . title))
-		
-		;; left border
-		((background . ,left-images)
-		 (left-edge . -6)
-		 (top-edge . 8)
-		 (bottom-edge . 0)
-		 (class . left-border))
-		
-		;; top-right corner
-		((background . ,top-right-images)
-		 (right-edge . -6)
-		 (top-edge . -19)
-		 (class . top-right-corner))
-		
-		;; right border
-		((background . ,right-images)
-		 (right-edge . -6)
-		 (top-edge . 0)
-		 (bottom-edge . 0)
-		 (class . right-border))
-		
-		;; bottom border
-		((background . ,bottom-images)
-		 (left-edge . 0)
-		 (right-edge . 0)
-		 (bottom-edge . -6)
-		 (class . bottom-border))
-		
-		;; bottom-left corner
-		((background . ,bottom-left-images)
-		 (left-edge . -6)
-		 (bottom-edge . -6)
-		 (class . bottom-left-corner))
-		
-		;; bottom-right corner
-		((background . ,bottom-right-images)
-		 (right-edge . -6)
-		 (bottom-edge . -6)
-		 (class . bottom-right-corner))
-		
-		;; iconify button
-		((background . ,iconify-images)
-		 (right-edge . 35)
-		 (top-edge . -19)
-		 (class . iconify-button))
-		
-		;; maximize button
-		((background . ,maximize-images)
-		 (right-edge . 18)
-		 (top-edge . -19)
-		 (class . maximize-button))
-		
-		;; delete button
-		((background . ,close-images)
-		 (right-edge . 1)
-		 (top-edge . -19)
-		 (class . close-button))))
+       (frame (make-closure
+	       `(((background . ,top-left-images)
+		  (left-edge . -6)
+		  (top-edge . -19)
+		  (class . top-left-corner))
+		 
+		 ;; top blue
+		 ((background . ,top-blue-images)
+		  (foreground . "black")
+		  (text . window-name)
+		  (x-justify . 4)
+		  (y-justify . center)
+		  (top-edge . -19)
+		  (left-edge . 19)
+		  (width . ,#'(lambda (w) (+ (title-width w) 13)))
+		  (class . title))
+		 
+		 ;; menu button
+		 ((background . ,menu-images)
+		  (top-edge . -19)
+		  (left-edge . 0)
+		  (class . menu-button))
+		 
+		 ;; top curves
+		 ((background . ,top-curves-images)
+		  (left-edge . ,#'(lambda (w) (+ (title-width w) 32)))
+		  (top-edge . -19)
+		  (class . title))
+		 
+		 ;; top grey
+		 ((background . ,top-grey-images)
+		  (top-edge . -19)
+		  (left-edge . ,#'(lambda (w) (+ (title-width w) 44)))
+		  (right-edge . 52)
+		  (class . title))
+		 
+		 ;; left border
+		 ((background . ,left-images)
+		  (left-edge . -6)
+		  (top-edge . 8)
+		  (bottom-edge . 0)
+		  (class . left-border))
+		 
+		 ;; top-right corner
+		 ((background . ,top-right-images)
+		  (right-edge . -6)
+		  (top-edge . -19)
+		  (class . top-right-corner))
+		 
+		 ;; right border
+		 ((background . ,right-images)
+		  (right-edge . -6)
+		  (top-edge . 0)
+		  (bottom-edge . 0)
+		  (class . right-border))
+		 
+		 ;; bottom border
+		 ((background . ,bottom-images)
+		  (left-edge . 0)
+		  (right-edge . 0)
+		  (bottom-edge . -6)
+		  (class . bottom-border))
+		 
+		 ;; bottom-left corner
+		 ((background . ,bottom-left-images)
+		  (left-edge . -6)
+		  (bottom-edge . -6)
+		  (class . bottom-left-corner))
+		 
+		 ;; bottom-right corner
+		 ((background . ,bottom-right-images)
+		  (right-edge . -6)
+		  (bottom-edge . -6)
+		  (class . bottom-right-corner))
+		 
+		 ;; iconify button
+		 ((background . ,iconify-images)
+		  (right-edge . 35)
+		  (top-edge . -19)
+		  (class . iconify-button))
+		 
+		 ;; maximize button
+		 ((background . ,maximize-images)
+		  (right-edge . 18)
+		  (top-edge . -19)
+		  (class . maximize-button))
+		 
+		 ;; delete button
+		 ((background . ,close-images)
+		  (right-edge . 1)
+		  (top-edge . -19)
+		  (class . close-button)))))
        
-       (shaped-frame `(((background . ,top-left-images)
-			(left-edge . -6)
-			(top-edge . -19)
-			(height . 19)
-			(class . top-left-corner))
-		       
-		       ;; top blue
-		       ((background . ,top-blue-images)
-			(foreground . "black")
-			(text . window-name)
-			(x-justify . 4)
-			(y-justify . center)
-			(top-edge . -19)
-			(left-edge . 19)
-			(width . ,#'(lambda (w) (+ (title-width w) 13)))
-			(class . title))
-		       
-		       ;; menu button
-		       ((background . ,menu-images)
-			(top-edge . -19)
-			(left-edge . 0)
-			(class . menu-button))
-		       
-		       ;; top curves
-		       ((background . ,top-curves-images)
-			(left-edge . ,#'(lambda (w) (+ (title-width w) 32)))
-			(top-edge . -19)
-			(class . title))
-		       
-		       ;; top grey
-		       ((background . ,top-grey-images)
-			(top-edge . -19)
-			(left-edge . ,#'(lambda (w) (+ (title-width w) 44)))
-			(right-edge . 52)
-			(class . title))
-		       
-		       ;; top-right corner
-		       ((background . ,top-right-images)
-			(right-edge . -6)
-			(top-edge . -19)
-			(height . 19)
-			(class . top-right-corner))
-		       
-		       ;; iconify button
-		       ((background . ,iconify-images)
-			(right-edge . 35)
-			(top-edge . -19)
-			(class . iconify-button))
-		       
-		       ;; maximize button
-		       ((background . ,maximize-images)
-			(right-edge . 18)
-			(top-edge . -19)
-			(class . maximize-button))
-		       
-		       ;; delete button
-		       ((background . ,close-images)
-			(right-edge . 1)
-			(top-edge . -19)
-			(class . close-button))))
+       (shaped-frame (make-closure
+		      `(((background . ,top-left-images)
+			 (left-edge . -6)
+			 (top-edge . -19)
+			 (height . 19)
+			 (class . top-left-corner))
+			
+			;; top blue
+			((background . ,top-blue-images)
+			 (foreground . "black")
+			 (text . window-name)
+			 (x-justify . 4)
+			 (y-justify . center)
+			 (top-edge . -19)
+			 (left-edge . 19)
+			 (width . ,#'(lambda (w) (+ (title-width w) 13)))
+			 (class . title))
+			
+			;; menu button
+			((background . ,menu-images)
+			 (top-edge . -19)
+			 (left-edge . 0)
+			 (class . menu-button))
+			
+			;; top curves
+			((background . ,top-curves-images)
+			 (left-edge . ,#'(lambda (w) (+ (title-width w) 32)))
+			 (top-edge . -19)
+			 (class . title))
+			
+			;; top grey
+			((background . ,top-grey-images)
+			 (top-edge . -19)
+			 (left-edge . ,#'(lambda (w) (+ (title-width w) 44)))
+			 (right-edge . 52)
+			 (class . title))
+			
+			;; top-right corner
+			((background . ,top-right-images)
+			 (right-edge . -6)
+			 (top-edge . -19)
+			 (height . 19)
+			 (class . top-right-corner))
+			
+			;; iconify button
+			((background . ,iconify-images)
+			 (right-edge . 35)
+			 (top-edge . -19)
+			 (class . iconify-button))
+			
+			;; maximize button
+			((background . ,maximize-images)
+			 (right-edge . 18)
+			 (top-edge . -19)
+			 (class . maximize-button))
+			
+			;; delete button
+			((background . ,close-images)
+			 (right-edge . 1)
+			 (top-edge . -19)
+			 (class . close-button)))))
        
-       (transient-frame `(((background . ,t-top-left-images)
-			   (left-edge . -5)
-			   (top-edge . -5)
-			   (class . top-left-corner))
-			  
-			  ;;top-right corner
-			  ((background . ,t-top-right-images)
-			   (right-edge . -18)
-			   (top-edge . -5)
-			   (class . top-right-corner))
-			  
-			  ;;title border
-			  ((background . ,t-top-images)
-			   (left-edge . -1)
-			   (right-edge . -1)
-			   (top-edge . -5)
-			   (class . top-border))
-			  
-			  ;; left border
-			  ((background . ,t-left-images)
-			   (left-edge . -5)
-			   (top-edge . -1)
-			   (bottom-edge . -1)
-			   (class . left-border))
-			  
-			  ;; right border
-			  ((background . ,t-right-images)
-			   (right-edge . -18)
-			   (top-edge . -1)
-			   (bottom-edge . -1)
-			   (class . title))
-			  
-			  ;; bottom border
-			  ((background . ,t-bottom-images)
-			   (left-edge . -1)
-			   (right-edge . -1)
-			   (bottom-edge . -5)
-			   (class . bottom-border))
-			  
-			  ;; bottom-left corner
-			  ((background . ,t-bottom-left-images)
-			   (left-edge . -5)
-			   (bottom-edge . -5)
-			   (class . bottom-left-corner))
-			  
-			  ;; bottom-right corner
-			  ((background . ,t-bottom-right-images)
-			   (right-edge . -18)
-			   (bottom-edge . -5)
-			   (class . bottom-right-corner))
-			  
-			  ;; delete button
-			  ((background . ,t-close-images)
-			   (right-edge . -18)
-			   (top-edge . 1)
-			   (class . close-button))))
+       (transient-frame (make-closure
+			 `(((background . ,t-top-left-images)
+			    (left-edge . -5)
+			    (top-edge . -5)
+			    (class . top-left-corner))
+			   
+			   ;;top-right corner
+			   ((background . ,t-top-right-images)
+			    (right-edge . -18)
+			    (top-edge . -5)
+			    (class . top-right-corner))
+			   
+			   ;;title border
+			   ((background . ,t-top-images)
+			    (left-edge . -1)
+			    (right-edge . -1)
+			    (top-edge . -5)
+			    (class . top-border))
+			   
+			   ;; left border
+			   ((background . ,t-left-images)
+			    (left-edge . -5)
+			    (top-edge . -1)
+			    (bottom-edge . -1)
+			    (class . left-border))
+			   
+			   ;; right border
+			   ((background . ,t-right-images)
+			    (right-edge . -18)
+			    (top-edge . -1)
+			    (bottom-edge . -1)
+			    (class . title))
+			   
+			   ;; bottom border
+			   ((background . ,t-bottom-images)
+			    (left-edge . -1)
+			    (right-edge . -1)
+			    (bottom-edge . -5)
+			    (class . bottom-border))
+			   
+			   ;; bottom-left corner
+			   ((background . ,t-bottom-left-images)
+			    (left-edge . -5)
+			    (bottom-edge . -5)
+			    (class . bottom-left-corner))
+			   
+			   ;; bottom-right corner
+			   ((background . ,t-bottom-right-images)
+			    (right-edge . -18)
+			    (bottom-edge . -5)
+			    (class . bottom-right-corner))
+			   
+			   ;; delete button
+			   ((background . ,t-close-images)
+			    (right-edge . -18)
+			    (top-edge . 1)
+			    (class . close-button)))))
        
-       (shaped-transient-frame `(((background . ,t-top-right-images)
-				  (right-edge . -18)
-				  (top-edge . -5)
-				  (class . top-right-corner))
-				 
-				 ;; right border
-				 ((background . ,t-right-images)
-				  (right-edge . -18)
-				  (top-edge . -1)
-				  (bottom-edge . -1)
-				  (class . title))
-				 
-				 ;; bottom-right corner
-				 ((background . ,t-bottom-right-images)
-				  (right-edge . -18)
-				  (bottom-edge . -5)
-				  (class . bottom-right-corner))
-				 
-				 ;; delete button
-				 ((background . ,t-close-images)
-				  (right-edge . -18)
-				  (top-edge . 1)
-				  (class . close-button)))))
+       (shaped-transient-frame (make-closure
+				`(((background . ,t-top-right-images)
+				   (right-edge . -18)
+				   (top-edge . -5)
+				   (class . top-right-corner))
+				  
+				  ;; right border
+				  ((background . ,t-right-images)
+				   (right-edge . -18)
+				   (top-edge . -1)
+				   (bottom-edge . -1)
+				   (class . title))
+				  
+				  ;; bottom-right corner
+				  ((background . ,t-bottom-right-images)
+				   (right-edge . -18)
+				   (bottom-edge . -5)
+				   (class . bottom-right-corner))
+				  
+				  ;; delete button
+				  ((background . ,t-close-images)
+				   (right-edge . -18)
+				   (top-edge . 1)
+				  (class . close-button))))))
 
     (add-frame-style 'microGUI
 		     #'(lambda (w type)
