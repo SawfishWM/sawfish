@@ -133,6 +133,10 @@ _not_ import its bindings (or even make them accessible)."
   "Evaluate FORM in the `user' module."
   (eval form *user-module*))
 
+(define (user-require feature)
+  "Require FEATURE in the `user' module."
+  (user-eval `(require ',feature)))
+
 (define (quote-menu-item string)
   "Escape any `_' characters in STRING such that the result can be used as
 the label of a menu item."
@@ -144,5 +148,5 @@ the label of a menu item."
 		   make-directory-recursively locate-file
 		   clamp clamp* uniquify-list screen-dimensions
 		   current-head current-head-dimensions
-		   current-head-offset load-module user-eval eval-in
-		   quote-menu-item))
+		   current-head-offset load-module eval-in
+		   user-eval user-require quote-menu-item))
