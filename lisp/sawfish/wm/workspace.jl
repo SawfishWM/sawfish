@@ -73,6 +73,9 @@
     ("Move right" move-workspace-forwards)
     ("Move left" move-workspace-backwards)))
 
+(defconst NormalState 1)
+(defconst IconicState 3)
+
 
 ;; Low level functions
 
@@ -462,14 +465,17 @@ all workspaces."
   (call-window-hook 'window-state-change-hook w))
 
 (defun ws-client-msg-handler (w atom data)
-  (cond ((and (windowp w) (eq atom 'WM_CHANGE_STATE) (= (aref data 0) 3))
-	 ;; IconicState
+  (cond ((and (windowp w)
+	      (eq atom 'WM_CHANGE_STATE)
+	      (= (aref data 0) IconicState))
 	 (iconify-window w)
 	 t)))
 
 (defun ws-set-client-state (w)
   (set-x-property w 'WM_STATE
-		  (vector (if (window-get w 'iconified) 3 1))
+		  (vector (if (window-get w 'iconified)
+			      IconicState
+			    NormalState))
 		  'WM_STATE 32))
 
 
