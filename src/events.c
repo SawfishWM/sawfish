@@ -107,6 +107,22 @@ subtract_timestamps (Time t2, Time t1)
     return diff;
 }
 
+/* Record the recently seen timestamp T */
+void
+save_timestamp (Time t)
+{
+    long diff = subtract_timestamps (t, last_event_time);
+    if (diff < 0)
+    {
+	fprintf (stderr, "huh!? time's going backwards (%lu -> %lu)\n",
+		 last_event_time, t);
+    }
+    else
+	last_event_time = t;
+
+    DB(("  last_event_time=%lu\n", last_event_time));
+}
+
 /* Where possible record the timestamp from event EV */
 static void
 record_event_time (XEvent *ev)
@@ -139,16 +155,7 @@ record_event_time (XEvent *ev)
     }
 
     if (new_time != CurrentTime)
-    {
-	long diff = subtract_timestamps (new_time, last_event_time);
-	if (diff < 0)
-	    fprintf (stderr, "huh!? time's going backwards (%lu -> %lu)\n",
-		     last_event_time, new_time);
-	else
-	    last_event_time = new_time;
-    }
-
-    DB(("  last_event_time=%lu\n", last_event_time));
+	save_timestamp (new_time);
 }
 
 static void
