@@ -1,3 +1,12 @@
+2000-02-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* match-window.jl (match-window-properties): use
+	placement-modes to get the list of placement options
+
+	* place-window.jl (place-window-under-pointer): new placement
+	mode `under-pointer'
+	(place-window-modes): new variable, the list of all placement modes
+
 2000-02-08  John Harper  <john@dcs.warwick.ac.uk>
 
 	* customize.jl (customize-spec): translate group names
