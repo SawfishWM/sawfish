@@ -25,10 +25,26 @@ AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR(etc)
 
 dnl Release versioning info
-version="0.20.1"
+version="0.21"
 
 output_files="src/Makefile lisp/Makefile capplet/Makefile\
  themes/Makefile man/Makefile po/Makefile Makedefs Makefile sawmill.spec"
+
+SUBDIRS="src capplet lisp themes man po"
+AC_SUBST(SUBDIRS)
+
+GNOMEDIRS="/ /usr /usr/local /opt /gnome /opt/gnome"
+AC_SUBST(GNOMEDIRS)
+
+add_subdir () {
+  sub=$1; shift
+  SUBDIRS="$SUBDIRS $sub"
+  output_files="$output_files $sub/Makefile"
+  for ext in $*; do
+    output_files="$output_files $sub/$ext"
+  done
+  unset sub
+}
 
 dnl Find the system type
 AC_CANONICAL_HOST
@@ -71,7 +87,7 @@ AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS(fcntl.h sys/time.h sys/utsname.h unistd.h memory.h X11/SM/SMlib.h)
 
 dnl Check for librep
-AM_PATH_REP(0.9)
+AM_PATH_REP(0.10)
 
 dnl is X available?
 if test "${no_x}" != "yes"; then
@@ -83,22 +99,31 @@ fi
 AM_PATH_IMLIB
 AM_PATH_GTK(1.2.0)
 
-build_capplet=0
 AC_ARG_ENABLE(capplet,
- [  --enable-capplet	  Build the sawmill GNOME capplet
-  --disable-capplet	  Don't built the capplet [default]],
- [if test "$enableval" != "no"; then
-    GNOME_CC_CFLAGS="`gnome-config --cflags capplet`"
-    GNOME_CC_LIBS="`gnome-config --libs capplet`"
-    if test $? -ne 0; then
-      AC_MSG_WARN([Can't run gnome-config capplet, not building capplet])
-    else
-      build_capplet=1
-      AC_SUBST(GNOME_CC_CFLAGS)
-      AC_SUBST(GNOME_CC_LIBS)
-    fi
-  fi])
-AC_SUBST(build_capplet)
+ [  --enable-capplet	  Build the sawmill GNOME capplet [default]
+  --disable-capplet	  Don't built the capplet], [],
+ [enable_capplet=yes])
+
+if test "$enable_capplet" = "yes"; then
+  GNOME_CC_CFLAGS="`gnome-config --cflags capplet`"
+  GNOME_CC_LIBS="`gnome-config --libs capplet`"
+  if test $? -ne 0; then
+    AC_MSG_WARN([Can't run "gnome-config capplet", not building capplet])
+  else
+    AC_SUBST(GNOME_CC_CFLAGS)
+    AC_SUBST(GNOME_CC_LIBS)
+    add_subdir "capplet"
+  fi
+fi
+
+AC_ARG_ENABLE(themer,
+ [  --enable-themer	  Build the sawmill-themer program [default]
+  --disable-themer	  Don't build the themer], [],
+ [enable_themer=yes])
+
+if test "$enable_themer" = yes; then
+  add_subdir "themer"
+fi
 
 dnl Check for Doug Lea's malloc in libc, otherwise compile dlmalloc.c
 doug_lea_malloc=yes
@@ -122,7 +147,7 @@ fi
 
 dnl Check for readline
 AC_ARG_WITH(readline,
- [  --with-readline         support fancy command input editing], [],
+ [  --with-readline         Support readline input editing], [],
  [with_readline=maybe])
 
 dnl Only look if explicitly asked for..
@@ -139,6 +164,13 @@ if test "$with_readline" = "yes"; then
      AC_DEFINE(HAVE_LIBREADLINE)])])
   LIBS="$saved_LIBS"
 fi
+
+dnl Check for GNOME location
+AC_ARG_WITH(gnome_prefix,
+ [  --with-gnome-prefix=DIR Root of GNOME installation],
+ [if test -d $with_gnome_prefix; then
+   GNOMEDIRS="$with_gnome_prefix";
+ fi])
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
