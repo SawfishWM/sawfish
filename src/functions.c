@@ -38,7 +38,6 @@
 #endif
    
 #include "sawmill.h"
-#include <X11/Xproto.h>
 
 /* Number of outstanding server grabs made; only when this is zero is
    the server ungrabbed. */
@@ -586,7 +585,7 @@ symbols, representing the atoms read.
 		return Qnil;
 	    if (bytes_after == 0)
 		break;
-	    long_length += (bytes_after / 4) + 1;
+	    long_length += (bytes_after / sizeof(long)) + 1;
 	}
     }
 
@@ -596,8 +595,8 @@ symbols, representing the atoms read.
     /* Then convert the contents to a vector or string */
     switch (format)
     {
-	CARD16 *s_data;
-	CARD32 *l_data;
+	short *s_data;
+	long *l_data;
 	int i;
 
     case 8:
@@ -606,14 +605,14 @@ symbols, representing the atoms read.
 
     case 16:
 	ret_data = Fmake_vector (rep_MAKE_INT(nitems), Qnil);
-	s_data = (CARD16 *)data;
+	s_data = (short *)data;
 	for (i = 0; i < nitems; i++)
 	    rep_VECTI(ret_data, i) = rep_MAKE_INT(s_data[i]);
 	break;
 
     case 32:
 	ret_data = Fmake_vector (rep_MAKE_INT(nitems), Qnil);
-	l_data = (CARD32 *)data;
+	l_data = (long *)data;
 	for (i = 0; i < nitems; i++)
 	{
 	    repv name;
@@ -678,8 +677,8 @@ converted to their numeric X atoms.
     switch (rep_INT(format))
     {
 	int i;
-	CARD16 *s_data;
-	CARD32 *l_data;
+	short *s_data;
+	long *l_data;
 
     case 8:
 	if (rep_STRINGP(data))
@@ -696,7 +695,7 @@ converted to their numeric X atoms.
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
 	c_data = alloca (nitems * 2);
-	s_data = (CARD16 *)c_data;
+	s_data = (short *)c_data;
 	for (i = 0; i < nitems; i++)
 	    s_data[i] = rep_INT(rep_VECTI(data, i));
 	break;
@@ -704,8 +703,8 @@ converted to their numeric X atoms.
     case 32:
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
-	c_data = alloca (nitems * 4);
-	l_data = (CARD32 *)c_data;
+	c_data = alloca (nitems * sizeof(long));
+	l_data = (long *)c_data;
 	for (i = 0; i < nitems; i++)
 	{
 	    if (a_type == XA_ATOM && rep_SYMBOLP(rep_VECTI(data, i)))
