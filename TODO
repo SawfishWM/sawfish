@@ -115,13 +115,10 @@ Window manager tasks
 
     placement mode to favour some/any of:
 
-	- positions near the currently focused window
-	- near the mouse pointer
-
-	  [ the above two are now possible using best-fit cost
-	    components.. not sure if they work 100% correctly.. ]
-
 	- near other windows in the same group
+
+	- extend cost components to include overlap, instead of overlap
+	  being non-negotiable (i.e. able to trade overlap for locality)
 
     theme that has visual cues (colours?) for group membership
 

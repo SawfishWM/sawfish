@@ -1,5 +1,15 @@
 2000-05-30  John Harper  <john@dcs.warwick.ac.uk>
 
+	* smart-placement.jl (sp-prune-points): if the number of points
+	is less than the maximum, randomly add points to make up the
+	distance
+
+	(sp-cost-from-distance): made this function not depend on the
+	order of its input positions (doh!)
+
+	(sp-cost-components): reversed the order of the individual
+	cells
+
 	* stacking.jl (stacking-after-map): raise the window _after_
 	possibly moving it to a higher layer (else it may end up below
 	the other windows in its layer)
