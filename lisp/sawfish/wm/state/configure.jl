@@ -74,7 +74,7 @@
   (defun configure-request-handler (w alist)
     (let ((coords (window-position w))
 	  (dims (window-dimensions w))
-	  (fdims (window-frame-dimensions w))
+	  (hints (window-size-hints w))
 	  tem)
 
       (when (setq tem (cdr (assq 'stack alist)))
@@ -107,7 +107,7 @@
 	  (let ((gravity (or (window-get w 'gravity)
 			     (and (window-get w 'auto-gravity)
 				  (configure-choose-gravity w))
-			     (cdr (assq 'window-gravity (window-size-hints w)))
+			     (cdr (assq 'window-gravity hints))
 			     (and configure-auto-gravity
 				  (not (window-get w 'client-set-position))
 				  (configure-choose-gravity w)))))
@@ -130,9 +130,14 @@
 	(setq dims tem))
 
       (when (setq tem (cdr (assq 'position alist)))
-	(setq coords tem)
 	;; if the program is setting its position, best not to interfere..
-	(window-put w 'client-set-position t))
+	(window-put w 'client-set-position t)
+	(let ((grav (or (window-get w 'gravity)
+			(cdr (assq 'window-gravity hints))
+			;; default gravity is NorthWest (from ICCCM)
+			'north-west)))
+	  (setq coords (adjust-position-for-gravity w grav tem))))
+
       (move-resize-window-to w (car coords) (cdr coords) (car dims) (cdr dims))
 
       ;; force the window to be somewhere in the virtual workspace..
