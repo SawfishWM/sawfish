@@ -47,6 +47,7 @@ static int server_grabs;
 DEFSYM(root, "root");
 DEFSYM(after_restacking_hook, "after-restacking-hook");
 DEFSYM(position, "position");
+DEFSYM(spacing, "spacing");
 
 DEFUN("restack-windows", Frestack_windows, Srestack_windows,
       (repv list), rep_Subr1) /*
@@ -280,7 +281,7 @@ Returns non-nil if the grab succeeded.
     }
 
 again:
-    ret = XGrabPointer (dpy, g_win, False, POINTER_GRAB_EVENTS,
+    ret = XGrabPointer (dpy, g_win, True, POINTER_GRAB_EVENTS,
 			GrabModeAsync, GrabModeAsync, None,
 			CURSORP(cursor) ? VCURSOR(cursor)->cursor : None,
 			last_event_time);
@@ -909,7 +910,7 @@ static Window message_win;
 static struct {
     GC gc;
     repv text, fg, bg, font, justify;
-    int width;
+    int width, spacing;
 } message;
 
 #define MSG_PAD_X 20
@@ -958,7 +959,8 @@ refresh_message_window ()
 	    XDrawString (dpy, message_win, message.gc, offset,
 			 MSG_PAD_Y
 			 + row * (VFONT(message.font)->font->ascent
-				  + VFONT(message.font)->font->descent)
+				  + VFONT(message.font)->font->descent
+				  + message.spacing)
 			 + VFONT(message.font)->font->ascent, ptr, end - ptr);
 	    row++;
 	    ptr = end;
@@ -1008,6 +1010,7 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	message.text = text;
 	message.font = message.fg = message.bg = Qnil;
 	message.justify = Qleft;
+	message.spacing = 0;
 
 	tem = Fassq (Qfont, attrs);
 	if (tem && rep_CONSP(tem))
@@ -1037,6 +1040,10 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	if (tem && rep_CONSP(tem))
 	    message.justify = rep_CDR(tem);
 
+	tem = Fassq (Qspacing, attrs);
+	if (tem && rep_CONSP(tem) && rep_INTP(rep_CDR(tem)))
+	    message.spacing = rep_INT(rep_CDR(tem));
+
 	{
 	    char *ptr = rep_STR(text);
 	    int max_width = 0, rows = 0;
@@ -1055,7 +1062,7 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 		    ptr++;
 	    }
 	    message.width = max_width + MSG_PAD_X * 2;
-	    height = (rep_INT(Ffont_height (message.font))
+	    height = ((rep_INT(Ffont_height (message.font)) + message.spacing)
 		      * rows + MSG_PAD_Y * 2);
 	    x = (screen_width - message.width) / 2;
 	    y = (screen_height - height) / 2;
@@ -1160,6 +1167,7 @@ functions_init (void)
     rep_INTERN(root);
     rep_INTERN_SPECIAL(after_restacking_hook);
     rep_INTERN(position);
+    rep_INTERN(spacing);
 
     rep_mark_static (&message.text);
     rep_mark_static (&message.fg);
