@@ -28,21 +28,12 @@
 
 static Atom sawmill_selection;
 
-DEFSYM (xa_primary, "xa-primary");
-DEFSYM (xa_secondary, "xa-secondary");
 DEFSYM (selection, "selection");
 
-DEFSTRING (no_atom, "No atom for symbol");
-
-static Atom
-symbol_to_atom(repv sym)
+static inline Atom
+symbol_to_atom (repv sym)
 {
-    if(sym == Qxa_primary)
-	return XA_PRIMARY;
-    else if(sym == Qxa_secondary)
-	return XA_SECONDARY;
-    else
-	return (Atom) 0;
+    return XInternAtom (dpy, rep_STR (rep_SYM (sym)->name), False);
 }
 
 DEFUN ("x-selection-active-p", Fx_selection_active_p,
@@ -50,24 +41,18 @@ DEFUN ("x-selection-active-p", Fx_selection_active_p,
 ::doc:x-selection-active-p::
 x-selection-active-p SELECTION
 
-Returns t if the X11 selection defined by the symbol SELECTION (either
-`xa-primary' or `xa-secondary') is available for reading.
+Returns t if the X11 selection defined by the symbol SELECTION is
+available for reading.
 ::end:: */
 {
     Atom selection;
     rep_DECLARE1 (sel, rep_SYMBOLP);
     selection = symbol_to_atom (sel);
-    if ((selection == XA_PRIMARY || selection == XA_SECONDARY)
-	&& XGetSelectionOwner (dpy, selection) != None)
-    {
-	return Qt;
-    }
-    else
-	return Qnil;
+    return (XGetSelectionOwner (dpy, selection) != None) ? Qt : Qnil;
 }
 
 static Bool
-selnotify_pred(Display *dpy, XEvent *ev, XPointer arg)
+selnotify_pred (Display *dpy, XEvent *ev, XPointer arg)
 {
     return ev->type == SelectionNotify;
 }
@@ -78,71 +63,64 @@ DEFUN ("x-get-selection", Fx_get_selection,
 x-get-selection SELECTION
 
 Returns the string corresponding to the current value of the X11
-selection defined by the symbol SELECTION (either `xa-primary' or
-`xa-secondary').
+selection defined by the symbol SELECTION.
 
 If the selection currently has no value, nil is returned.
 ::end:: */
 {
+    repv res = Qnil;
     Atom selection;
+    Window owner;
     rep_DECLARE1 (sel, rep_SYMBOLP);
     selection = symbol_to_atom (sel);
-    if (selection == XA_PRIMARY || selection == XA_SECONDARY)
+    owner = XGetSelectionOwner (dpy, selection);
+    if (owner != None)
     {
-	repv res = Qnil;
-	Window owner = XGetSelectionOwner (dpy, selection);
-	if (owner != None)
+	XEvent ev;
+	Window sel_window = no_focus_window;
+	XConvertSelection (dpy, selection, XA_STRING,
+			   sawmill_selection, sel_window, last_event_time);
+	XIfEvent (dpy, &ev, selnotify_pred, (XPointer) 0);
+	if (ev.xselection.property != None)
 	{
-	    XEvent ev;
-	    Window sel_window = no_focus_window;
-	    XConvertSelection (dpy, selection, XA_STRING,
-			       sawmill_selection, sel_window,
-			       CurrentTime);
-	    XIfEvent (dpy, &ev, selnotify_pred, (XPointer) 0);
-	    if (ev.xselection.property != None)
+	    /* First find the size of the property. */
+	    Atom actual_type;
+	    int actual_format;
+	    unsigned long nitems, bytes_after;
+	    unsigned char *prop;          
+	    int r;
+	    int offset;
+	    r = XGetWindowProperty (dpy, sel_window, sawmill_selection,
+				    0, 0, False, AnyPropertyType,
+				    &actual_type, &actual_format,
+				    &nitems, &bytes_after, &prop);
+	    if (r != Success)
+		return Qnil;
+	    XFree (prop);
+	    if (actual_type == None || actual_format != 8)
+		return Qnil;
+	    res = rep_make_string (bytes_after + 1);
+	    if (!res)
+		return rep_mem_error ();
+	    offset = 0;
+	    while (bytes_after > 0)
 	    {
-		/* First find the size of the property. */
-		Atom actual_type;
-		int actual_format;
-		unsigned long nitems, bytes_after;
-		unsigned char *prop;          
-		int r;
-		int offset;
-		r = XGetWindowProperty (dpy, sel_window,
-					sawmill_selection, 0, 0, False,
-					AnyPropertyType, &actual_type,
-					&actual_format, &nitems,
-					&bytes_after, &prop);
+		r = XGetWindowProperty (dpy, sel_window, sawmill_selection,
+					offset/4, (bytes_after / 4) + 1,
+					False, AnyPropertyType,
+					&actual_type, &actual_format,
+					&nitems, &bytes_after, &prop);
 		if (r != Success)
 		    return Qnil;
+		memcpy (rep_STR(res) + offset, prop, nitems);
 		XFree (prop);
-		if (actual_type == None || actual_format != 8)
-		    return Qnil;
-		res = rep_make_string (bytes_after + 1);
-		if (!res)
-		    return rep_mem_error ();
-		offset = 0;
-		while (bytes_after > 0)
-		{
-		    r = XGetWindowProperty (dpy, sel_window,
-					    sawmill_selection, offset/4,
-					    (bytes_after / 4) + 1,
-					    False, AnyPropertyType,
-					    &actual_type, &actual_format,
-					    &nitems, &bytes_after, &prop);
-		    if (r != Success)
-			return Qnil;
-		    memcpy (rep_STR(res) + offset, prop, nitems);
-		    XFree (prop);
-		    offset += nitems;
-		}
-		XDeleteProperty (dpy, sel_window, sawmill_selection);
-		rep_STR(res)[offset] = 0;
+		offset += nitems;
 	    }
+	    XDeleteProperty (dpy, sel_window, sawmill_selection);
+	    rep_STR(res)[offset] = 0;
 	}
-	return res;
     }
-    return Fsignal (Qerror, rep_list_2(rep_VAL(&no_atom), sel));
+    return res;
 }
 
 
@@ -151,14 +129,11 @@ If the selection currently has no value, nil is returned.
 repv
 rep_dl_init (void)
 {
-    rep_ADD_SUBR(Sx_selection_active_p);
-    rep_ADD_SUBR(Sx_get_selection);
-
-    rep_INTERN(xa_primary);
-    rep_INTERN(xa_secondary);
+    rep_ADD_SUBR (Sx_selection_active_p);
+    rep_ADD_SUBR (Sx_get_selection);
 
     if (dpy != 0)
-	sawmill_selection = XInternAtom(dpy, "SAWMILL_SELECTION", False);
+	sawmill_selection = XInternAtom (dpy, "SAWMILL_SELECTION", False);
 
     rep_INTERN (selection);
     return Qselection;
