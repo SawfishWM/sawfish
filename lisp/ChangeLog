@@ -1,4 +1,36 @@
+1999-10-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* move-resize.jl (move-resize-motion): use call-window-hook to
+	invoke the while-moving-hook and while-resizing-hook
+
+	* sawmill.jl (fallback-frame-style): now set to microGUI
+
+	* keymaps.jl (custom-set-keymap): preserve eq-ness of old and
+	new keymap when overwriting an existing keymap definition
+
+1999-10-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* custom.jl: added a viewport customization group
+	* viewport.jl, edge-flip.jl: options now in viewport group
+
+	* edge-flip.jl: only require things when they're actually
+	needed
+
+	* menus.jl: removed the unneeded custom-require autoload
+
+	* edge-flip.jl: let this be enabled/disabled via customization
+
+	* frames.jl (frame-style-directory): themes in tar files are
+	now expected to have a top-level directory with the same name
+	as the theme
+
 1999-10-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* move-resize.jl (move-resize-motion): when only one edge is
+	being resized, and the pointer moves past the end of that edge,
+	start resizing that edge as well
+
+	* workspace.jl (delete-empty-workspaces): new command
 
 	* focus.jl (focus-push-map, focus-pop-map): functions for
 	installing and remove the click-to-focus map, they preserve the

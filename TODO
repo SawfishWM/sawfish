@@ -48,16 +48,9 @@ Outstanding bugs
 
   ! cycle-windows with only one window temporarily unfocuses the window
 
-  ! in window-keymap Button1-M-Click1 => raise-window, Button1-M-Move
-    => move-window-interactively, the move binding doesn't work
-
   ! Num_Lock is filtered, but not Scroll_Lock
 
   ! shouldn't be able to maximize non-resizable windows
-
-  ! when I set the background of a clicked button to "white", the
-    button's foreground image switches to the inverted mode. Nothing in
-    the theme itself [smaker] seems likely to do this.
 
   ! turn off mouse warping options, put cursor in window in center of
     screen (under message window), M-TAB, and the pointer leaving the
@@ -70,22 +63,17 @@ Outstanding bugs
     (ie. I can type in it), but the frame is drawn in the unfocused
     style.
 
+  + features can't be both enabled via customization and demand-loaded
+
 
 General tasks
 =============
 
-  + if vertically resizing, and pointer crosses either vertical window
-    edge, allow that edge to be resized as well
-
-  + delete-empty-workspaces command
-
   + add option send-window-to-workspace won't select workspace
 
-  + follow size hints (increments) when maximizing
+  + follow size hints (increments) when maximizing (?)
 
   + "styles" -- mimic different environments through custom files?
-
-  + recognize top-level directory when loading tar files
 
   + allow cursors to be customized (i.e. when moving/resizing/..)
 
@@ -140,6 +128,9 @@ General tasks
     the gnome `settings' tree. this would be bad since the user may not
     discover the dynamic menu and thus miss many of the options..
 
+    [ apparently, this is an issue which may be addressed in future
+      versions of the control center ]
+
   + tooltips in frame parts describing their keymaps
 
     requires extending show-message to do multi-line (justification?)
@@ -186,6 +177,8 @@ General tasks
   + Pixmap cursors / cursor recolouring
 
   + Icons (?)
+
+    Icons could be handled using a special frame/window type
 
   + Support the KDE hints
 

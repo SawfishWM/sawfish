@@ -1,3 +1,12 @@
+1999-10-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* Makefile.in: don't need to pass -I option anymore
+
+	* sawmill-capplet.c (sawmill_setup): close more file
+	descriptors before exec'ing
+
+	* sawmill-capplet.c: changed how some include files are named
+
 1999-09-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-capplet.c (sawmill_running_p): use libclient.o to

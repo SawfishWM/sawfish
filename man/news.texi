@@ -7,6 +7,59 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.15
+
+@itemize @bullet
+
+@item Changed how themes are loaded from tar files---the tar file must
+now contain a directory with the same name as the theme; it's this
+directory that stores the data files
+
+@item Allow viewport edge-flipping to be enabled by the customization
+system, also enable flipping while moving windows
+
+@item Unified the method of marking which windows should be avoided
+when maximizing, and which windows should be avoided when using the
+fitted placement methods. Set the @code{avoid} property instead of the
+@code{maximize-avoid} property; new functions @code{window-avoided-p}
+and @code{avoided-windows}; new regexp @code{avoided-windows-re}
+
+@item New command @code{delete-empty-workspaces}
+
+@item Default theme is now @code{microGUI}
+
+@item When resizing only one edge of a window, moving the pointer past
+one of the perpendicular edges grabs that edge also
+
+@item Only the first three buttons focus a window in click-to-focus
+mode
+
+@item Changed behaviour of @code{window-id} and
+@code{window-frame-dimensions} functions. Replaced
+@code{query-last-pointer} function by @code{query-button-press-pointer}
+
+@item New hooks: @code{while-moving-hook}, @code{while-resizing-hook}
+
+@item Notice when @code{WM_TRANSIENT_FOR} property changes
+
+@item More bug fixes to the maximization code, mainly for efficiency;
+also make first-fit placement work from top-left again
+
+@item Fix bug when matching events with @kbd{Any} modifier as well as
+other modifiers
+
+@item Fix bug in @code{window-outside-viewport-p} (Andreas Degert)
+
+@item Fix bug in @samp{sawmill-client --} with long inputs
+
+@item Fix bug when matching windows with session
+data---@code{SM_CLIENT_ID} or @code{WM_COMMAND} @emph{has} to match
+
+@item Fix bugs when passive grabbing non-button-press pointer events
+
+@end itemize
+
+
 @unnumberedsec 0.14
 
 @itemize @bullet

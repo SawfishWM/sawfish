@@ -3,16 +3,15 @@
 @settitle sawmill Programming Manual
 @footnotestyle end
 
-@set EDITION 0.3
-@set VERSION 0.14
-@set UPDATED 23 October 1999
+@set EDITION 0.4
+@set VERSION 0.15
+@set UPDATED 31 October 1999
 @set UPDATE-MONTH October 1999
 
 @ifinfo
-@noindent
-START-INFO-DIR-ENTRY@*
-* sawmill: (sawmill).		sawmill programming manual@*
-END-INFO-DIR-ENTRY
+@direntry
+* sawmill: (sawmill).		sawmill programming manual
+@end direntry
 
 This is Edition @value{EDITION}, last updated @value{UPDATED}, of
 @cite{The sawmill Programming Manual}, for sawmill, Version
@@ -2660,6 +2659,7 @@ An @code{or} type hook. Called the first a window is mapped.
 @itemx unshade-window-hook
 @itemx window-maximized-hook
 @itemx window-unmaximized-hook
+@itemx window-depth-change-hook
 Called with a single window.
 
 @item after-initialization-hook
@@ -2678,11 +2678,28 @@ Session management hooks, @ref{Session Management}.
 Called before starting an interactive move or resize, with a single
 argument: the window.
 
+@item while-moving-hook
+@itemx while-resizing-hook
+Called while interactively moving or resizing the window passed as the
+argument to the hook.
+
 @item after-move-hook
 @itemx after-resize-hook
 Called after completion of an interactive move or resize. Called with
-two arguments: the window, and a symbol defining how the window was
-moved or resized.
+two arguments: the window, and a list of symbols defining how the
+window was moved or resized.
+
+@item gtkrc-changed-hook
+When using the @code{gtkrc} module to load the current gtk style
+parameters, this hook is called when the style changes.
+
+@item enter-flipper-hook
+@itemx leave-flipper-hook
+When viewport edge-flipping is enabled, these hooks are called as the
+pointer enters and leaves the pixel-wide border on the edge of the
+screen. They're called with a single argument, one of the symbols
+@code{left}, @code{right}, @code{top}, @code{bottom} defining the edge
+in question.
 
 @end vtable
 
@@ -2702,6 +2719,10 @@ documents a subset of the keys currently used.
 @item ignored
 When set, the window is ignored in many operations.
 
+@item avoid
+When set, the window will not be covered when maximizing, or when
+placing using the first-fit or best-fit methods
+
 @item workspace
 An integer defining the workspace that the window is a member of, or
 unset if the window is not a member of any one workspace.
@@ -2715,6 +2736,25 @@ When set, the window will appear in all viewports of its workspace.
 
 @item keymap
 An optional, window-local, keymap. @xref{Keymaps}.
+
+@item focus-proxy-click
+When set, and click-to-focus mode is enabled, the click that focuses a
+window is passed through to the client window.
+
+@item ignore-window-input-hint
+When set the value of the window's input hint is ignored, i.e. the
+focus @emph{will} be given to the window when appropriate
+
+@item ignore-program-position
+When set the window's program-position property is ignored, use this
+with windows that set this hint incorrectly.
+
+@item place-mode
+When set, the placement mode to be used with this window.
+
+@item placement-weight
+When set, the weight assigned to the pixels in this window when doing
+fitted window placement.
 
 @item type
 The frame-type of the window, or @code{nil}. @xref{Frame Types}.

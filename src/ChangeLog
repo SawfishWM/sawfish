@@ -1,3 +1,22 @@
+1999-10-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c (translate_event_to_x_button): don't ignore non Click1
+	events
+
+	* events.c (key_press, button_press, motion_notify): when a
+	grab is in effect, and there may be more events from it, use
+	the Sync(Pointer|Keyboard) argument to XAllowEvents ()
+
+	* sawmill.h (POINTER_GRAB_EVENTS): new #define, the events to
+	select from pointer grabs
+	* keys.c, functions.c: use POINTER_GRAB_EVENTS when grabbing
+
+1999-10-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl (build-frame-style:update-readme): themes in
+	tar files are now expected to have a top-level directory with
+	the same name as the theme
+
 1999-10-29  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c (list_frame_generator): maybe fix a bug when
