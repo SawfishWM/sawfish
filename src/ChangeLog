@@ -1,5 +1,18 @@
 2000-11-20  John Harper  <jsh@eazel.com>
 
+	* events.c (focus_out): if unable to find a window, check for a
+	deleted window, and nullify focus_window variable if one is
+	found
+
+	* windows.c (remove_window): don't nullify focus_window if
+	removing the focused window
+	(window_mark_type): mark focus_window variable
+
+	* events.c, functions.c, windows.c (Fquery_pointer,
+	Fquery_pointer_window, Flist_x_properties, Fget_x_property,
+	Fstacking_order): don't call emit_pending_destroys () after
+	round trip requests, let them be delivered synchronously
+
 	* events.c: removed all the ignore-fp-keymap stuff
 
 2000-11-18  John Harper  <jsh@eazel.com>

@@ -920,6 +920,13 @@ focus_out (XEvent *ev)
 	    }
 	}
     }
+    else if ((w = x_find_window_by_id (ev->xunmap.window)) != 0
+	     && w->id == 0 && ev->xunmap.window == w->saved_id)
+    {
+	/* focus-out event from a deleted window */
+	if (focus_window == w)
+	    focus_window = 0;
+    }
 }
 
 static void
@@ -1296,7 +1303,6 @@ the server, otherwise it's taken from the current event (if possible).
 	{
 	    record_mouse_position (x, y, -1, 0);
 	}
-	emit_pending_destroys ();
     }
     return Fcons (rep_MAKE_INT(current_mouse_x),
 		  rep_MAKE_INT(current_mouse_y));
@@ -1357,7 +1363,6 @@ is in the root window.
 
     XQueryPointer (dpy, root_window, &root, &child,
 		   &current_mouse_x, &current_mouse_y, &win_x, &win_y, &state);
-    emit_pending_destroys ();
     if (child != 0)
     {
 	Lisp_Window *w = find_window_by_id (child);

@@ -441,9 +441,6 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
     DB(("remove_window (%s, %s)\n",
 	rep_STR(w->name), destroyed == Qnil ? "nil" : "t"));
 
-    if (focus_window == w)
-	focus_window = 0;
-
     if (w->id != 0)
     {
 	if (destroyed == Qnil && from_error == Qnil)
@@ -456,12 +453,7 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 	}
 
 	if (from_error == Qnil)
-	{
 	    destroy_window_frame (w, FALSE);
-
-	    if (focus_window == w)
-		focus_on_window (0);
-	}
 
 	w->id = 0;
 	pending_destroys++;
@@ -890,7 +882,6 @@ client windows.
     {
 	int i;
 	repv ret = Qnil;
-	rep_GC_root gc_ret;
 	for (i = 0; i < nchildren; i++)
 	{
 	    Lisp_Window *w = find_window_by_id (children[i]);
@@ -899,9 +890,6 @@ client windows.
 	}
 	if (children != 0)
 	    XFree (children);
-	rep_PUSHGC(gc_ret, ret);
-	emit_pending_destroys ();
-	rep_POPGC;
 	return ret;
     }
     else
@@ -1361,6 +1349,7 @@ window_mark_type (void)
     }
     for (ph = prop_handlers; ph != 0; ph = ph->next)
 	rep_MARKVAL (ph->prop);
+    rep_MARKVAL (rep_VAL (focus_window));
 }
 
 static void
