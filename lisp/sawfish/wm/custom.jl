@@ -85,6 +85,8 @@
 	     (put symbol 'custom-set (car keys)))
 	    ((eq tem ':get)
 	     (put symbol 'custom-get (car keys)))
+	    ((eq tem ':widget)
+	     (put symbol 'custom-widget (car keys)))
 	    ((eq tem ':after-set)
 	     (put symbol 'custom-after-set (car keys))))
       (setq keys (cdr keys)))
