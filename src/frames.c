@@ -1460,15 +1460,15 @@ list_frame_generator (Lisp_Window *w)
     w->rebuild_frame = list_frame_generator;
     w->property_change = refresh_frame_parts;
 
-    /* create/update windows for each part */
-    for (fp = w->frame_parts; fp != 0; fp = fp->next)
-	configure_frame_part (fp);
-
     /* Client window is always left _underneath_ any overlapping frame
        parts; this may not always be ideal, but we have to choose 
        either over or under, and this will probably be more useful.. */
     if (w->reparented)
 	XLowerWindow (dpy, w->id);
+
+    /* create/update windows for each part */
+    for (fp = w->frame_parts; fp != 0; fp = fp->next)
+	configure_frame_part (fp);
 
     if (!w->reparented || !bigger)
 	set_frame_shapes (w, TRUE);
