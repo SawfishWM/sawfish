@@ -88,7 +88,8 @@
 (defvar move-resize-map (bind-keys (make-keymap)
 			  "Any-Off" 'move-resize-finished
 			  "Any-Move" 'move-resize-motion
-			  "Any-ESC" 'move-resize-cancel))
+			  "Any-ESC" 'move-resize-cancel
+			  "Any-RET" 'move-resize-finished))
 
 (defvar move-resize-fp-edges-alist '((top-border top)
 				     (left-border left)
