@@ -48,8 +48,25 @@
 
   ;; If iconified, a window has its `iconified' property set to t
 
+  (defcustom focus-windows-on-uniconify nil
+    "Windows are focused after being uniconified."
+    :type boolean
+    :group (min-max iconify))
+
+  (defcustom raise-windows-on-uniconify t
+    "Windows are raised after being uniconified."
+    :type boolean
+    :user-level expert
+    :group (min-max iconify))
+
   (defcustom iconify-ignored nil
     "Unmanaged windows may be iconified."
+    :type boolean
+    :user-level expert
+    :group (min-max iconify))
+
+  (defcustom uniconify-to-current-workspace t
+    "Windows uniconify to the current workspace."
     :type boolean
     :user-level expert
     :group (min-max iconify))

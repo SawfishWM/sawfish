@@ -147,21 +147,6 @@
     :user-level expert
     :after-set (lambda () (call-hook 'workspace-state-change-hook)))
 
-  (defcustom uniconify-to-current-workspace t
-    "Windows uniconify to the current workspace."
-    :type boolean
-    :group (min-max iconify))
-
-  (defcustom raise-windows-on-uniconify t
-    "Windows are raised after being uniconified."
-    :type boolean
-    :group (min-max iconify))
-
-  (defcustom focus-windows-on-uniconify nil
-    "Windows are focused after being uniconified."
-    :type boolean
-    :group (min-max iconify))
-
   (defcustom transients-on-parents-workspace nil
     "Dialogs appear on the same workspace as their application."
     :type boolean
