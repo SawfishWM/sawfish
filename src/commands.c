@@ -162,7 +162,7 @@ Invoke the command COMMAND. This can be one of,
  1. A symbol whose function value is to be called, the symbol must be of
     type `commandp'; any interactive calling specification will be
     used to find arguments to give to the function. (see `interactive')
- 2. A lambda-expression to call as a function name
+ 2. A closure to call as a function (with an interactive decl)
  3. A single Lisp form to be evaluated by eval
 
 If PREFIX-ARG is non-nil it specifies the value of the COMMAND's
@@ -181,7 +181,7 @@ any entered arg is given to the invoked COMMAND.
 
     Fcall_hook(Qpre_command_hook, Qnil, Qnil);
 
-    if(rep_SYMBOLP(cmd) || (rep_CONSP(cmd) && rep_CAR(cmd) == Qlambda))
+    if(rep_SYMBOLP(cmd) || rep_FUNARGP(cmd))
     {
 	/* A named command; call it properly taking note of any interactive
 	   declaration. */
