@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.2\n"
-"POT-Creation-Date: 2002-04-30 13:09+0200\n"
-"PO-Revision-Date: 2002-04-22 13:21+0200\n"
+"POT-Creation-Date: 2002-06-01 12:40+0200\n"
+"PO-Revision-Date: 2002-06-01 12:46+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -733,22 +733,6 @@ msgstr "Kopier til forrige"
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Copy to next"
 msgstr "Kopier til neste"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Left"
-msgstr "_Venstre"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Right"
-msgstr "Høy_re"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Up"
-msgstr "_Opp"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Down"
-msgstr "Ne_d"
 
 #. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
@@ -1576,6 +1560,8 @@ msgid ""
 "Whether to bump into fully obscured windows when growing or packing\n"
 "windows."
 msgstr ""
+"Om man skal dunke inn i helt skjulte vinduer ved øking eller pakking\n"
+"av vinduer."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
@@ -1583,10 +1569,13 @@ msgid ""
 "windows.\n"
 "`maybe' means only avoided windows in other depths."
 msgstr ""
+"Om man skal dunke inn i vinduer på en annen dybde ved øking eller pakking\n"
+"av vinduer.\n"
+"«kanskje» betyr at kun vinduer som skal unngås på andre dybder."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether to bump into ignored windows when growing or packing."
-msgstr ""
+msgstr "Om man skal dunke inn i ignorerte vinduer ved øking eller pakking."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
@@ -1625,6 +1614,11 @@ msgid ""
 "by\n"
 "window or pixels instead."
 msgstr ""
+"Øker vinduet oppover til det «dunker inn i» et annet vindu.\n"
+"Hvis den øverste kanten var utenfor skjermens kant hentes den inn igjen.\n"
+"Hvis et universelt prefiksargument oppgis, maksimeres det oppover i stedet.\n"
+"Med et numerisk prefiksargument økes det oppover med antall steg som oppgis for\n"
+"vinduer eller piksler i stedet."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
@@ -1673,6 +1667,11 @@ msgid ""
 "With a universal prefix arg, move upwards maximally instead.\n"
 "With a numeric prefix arg, move upwards by that many pixels instead."
 msgstr ""
+"Flytter vinduet oppover til det «dunker inn i» et annet vindu.\n"
+"Hvis den øverste kanten var utenfor skjermkanten flyttes det inn igjen.\n"
+"Med et universelt prefiksargument flyttes det helt opp i stedet.\n"
+"Med et numerisk prefiksargument flyttes det oppover med spesifisert antll\n"
+"piksler i stedet."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
@@ -1821,6 +1820,9 @@ msgid ""
 "When moving a window, this option lets you align one of its edges with an "
 "edge of another window."
 msgstr ""
+"Avstand i piksler før vinduets kanter justeres i forhold til hverandre.\n"
+"\n"
+"Når et vindu flyttes lar dette alternativet deg justere en av dets kanter med kanten på et annet vindu."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -3118,6 +3120,18 @@ msgstr "Inn_stillinger"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Temaer"
+
+#~ msgid "_Left"
+#~ msgstr "_Venstre"
+
+#~ msgid "_Right"
+#~ msgstr "Høy_re"
+
+#~ msgid "_Up"
+#~ msgstr "_Opp"
+
+#~ msgid "_Down"
+#~ msgstr "Ne_d"
 
 #~ msgid "Revert"
 #~ msgstr "Forkast"
