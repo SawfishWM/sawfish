@@ -127,32 +127,34 @@
   (interactive "%W")
   (let
       ((depth (window-get w 'depth)))
-    (catch 'out
-      ;; find the first window below W's layer
-      (mapc (lambda (x)
-	      (unless (eq x w)
-		(when (< (window-get x 'depth) depth)
-		  (x-raise-window w x)
-		  (throw 'out))))
-	    (stacking-order))
-      ;; nothing below W
-      (x-lower-window w))))
+    (letrec
+	((iter (lambda (order)
+		 (cond ((null order)
+			;; nothing below W
+			(x-lower-window w))
+		       ((< (window-get (car order) 'depth) depth)
+			;; found the first window below W
+			(x-raise-window w (car order)))
+		       (t
+			(iter (cdr order)))))))
+      (iter (stacking-order)))))
 
 (defun raise-window (w)
   "Raise the window to the top of its stacking level."
   (interactive "%W")
   (let
       ((depth (window-get w 'depth)))
-    (catch 'out
-      ;; find the last window above W's layer
-      (mapc (lambda (x)
-	      (unless (eq x w)
-		(when (> (window-get x 'depth) depth)
-		  (x-lower-window w x)
-		  (throw 'out))))
-	    (nreverse (stacking-order)))
-      ;; nothing above W
-      (x-raise-window w))))
+    (letrec
+	((iter (lambda (order)
+		 (cond ((null order)
+			;; nothing above W
+			(x-raise-window w))
+		       ((> (window-get (car order) 'depth) depth)
+			;; found the last window above W
+			(x-lower-window w (car order)))
+		       (t
+			(iter (cdr order)))))))
+      (iter (nreverse (stacking-order))))))
 
 (defun raise-lower-window (w)
   "If the window is the highest window in its stacking level, lower it to the
