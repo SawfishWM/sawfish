@@ -31,11 +31,9 @@
 ;; quiet autoloading
 (setq autoload-verbose nil)
 
-;; XXX backwards compatibility, remove at some point
-(unless (boundp 'define-value)
-  (setq define-value set))
-(unless (boundp 'quotient)
-  (setq quotient /))
+;; so modularised rep knows where to inherit specials and load from
+(setq *user-structure* 'sawmill)
+(setq *root-structure* 'sawmill)
 
 ;; hack to load setenv etc before autoloads are defined
 (load "environ")
@@ -69,7 +67,6 @@
 (require 'cursors)
 (require 'keymaps)
 (require 'configure)
-(require 'sawmill-gaol)
 (require 'workspace)
 (require 'viewport)
 (require 'focus)
@@ -87,8 +84,17 @@
 (require 'compat)
 
 ;; all rep-based programs should do this
-(load-all "autoload.jl" t)
-(load-all (concat "os-" (symbol-name operating-system)) t)
+(let
+    ((load-all (if (>= rep-interface-id 9)
+		   (lambda (s)
+		     (load-all s (lambda (f)
+				   (load f nil t))))
+		 (lambda (s)
+		   (load-all s t)))))
+  (load-all "autoload.jl")
+  (load-all (concat "os-" (symbol-name operating-system))))
+
+(require 'sawmill-gaol)
 
 ;; ensure that the things people usually like doing show up in the
 ;; customization interface
@@ -147,7 +153,13 @@
 
 ;; Use all arguments which are left.
 (let
-    (arg)
+    ((do-load (lambda (name)
+		(cond ((file-exists-p name)
+		       (load name nil t t))
+		      ((string-match "\\.jlc?$" name)
+		       (load name))
+		      (t (require (intern name))))))
+     arg)
   (while (setq arg (car command-line-args))
     (setq command-line-args (cdr command-line-args))
     (cond
@@ -158,8 +170,8 @@
       ((equal "-l" arg)
        (setq arg (car command-line-args))
        (setq command-line-args (cdr command-line-args))
-       (load arg))
+       (do-load arg))
       ((equal "-q" arg)
        (throw 'quit 0))
       (t
-       (load arg)))))
+       (do-load arg)))))
