@@ -61,6 +61,7 @@
     (ignore-program-position boolean)
     (raise-on-focus boolean)
     (never-focus boolean)
+    (focus-when-mapped boolean)
     (ungrouped boolean)
     (group symbol ,(lambda ()
 		     (delete-if-not symbolp (window-group-ids))))
