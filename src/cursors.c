@@ -40,9 +40,9 @@ make_bm_cursor (repv image, repv mask, repv fg, repv bg)
     Cursor cursor = 0;
 
     if (rep_STRINGP(fg))
-	fg = Fget_color (fg);
+	fg = Fget_color (fg, Qnil);
     if (rep_STRINGP(bg))
-	bg = Fget_color (bg);
+	bg = Fget_color (bg, Qnil);
 
     if (!rep_STRINGP(image) || !rep_STRINGP(mask)
 	|| !COLORP(fg) || !COLORP(bg))
@@ -147,10 +147,10 @@ recolor-cursor CURSOR FG BG
     XColor xc_fg, xc_bg;
     rep_DECLARE1(cursor, CURSORP);
     if (rep_STRINGP(fg))
-	fg = Fget_color (fg);
+	fg = Fget_color (fg, Qnil);
     rep_DECLARE(2, fg, fg && COLORP(fg));
     if (rep_STRINGP(bg))
-	bg = Fget_color (bg);
+	bg = Fget_color (bg, Qnil);
     rep_DECLARE(3, bg, bg && COLORP(bg));
     xc_fg.red = VCOLOR(fg)->red;
     xc_fg.green = VCOLOR(fg)->green;

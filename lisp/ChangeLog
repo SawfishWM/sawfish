@@ -2,6 +2,24 @@
 
 	Merged these changes from HEAD:
 
+	* sawfish/wm/session/init.jl, sawfish/wm/session/load.jl
+	(sm-sloppy-id-matching): added this option to let me get some
+	level of session management from broken applications (xterm in
+	this case, which doesn't seem to set SM_CLIENT_ID by the time
+	it maps the window)
+
+	* sawfish/wm/util/font.jl (xlfd-description->face,
+	face->xlfd-description): the missing pieces to this module.
+
+	Also, handle the Xft abbreviated styles more correctly
+
+	* sawfish/wm/windows.jl (dock-window-depth): changed this
+	again, now to zero, the depth of normal windows
+
+2002-11-03  John Harper  <jsh@unfactored.org>
+
+	Merged these changes from HEAD:
+
 	* sawfish/wm/custom.jl: font [de]serializers now export (TYPE .
 	NAME), they accept both this and the old untyped form
 
