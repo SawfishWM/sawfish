@@ -1,3 +1,11 @@
+2001-05-22  John Harper  <jsh@pixelslut.com>
+
+	Fixed bug 8220 (Having Ctrl as default "modifier key used for
+	default WM shortcuts" breaks everything...):
+
+	* keys.c (wm_mod): default window manager modifier is once more
+	`M-' instead of `C-'
+
 2001-05-04  John Harper  <jsh@eazel.com>
 
 	* keys.h, keys.c: added support for Off2 and Off3 event types
