@@ -138,11 +138,11 @@ the level of any transient windows it has."
     (raise-lower-windows w (transient-group w t)))
 
   (define-command 'raise-window-and-transients
-    raise-window-and-transients #:spec "%W")
+    raise-window-and-transients #:spec "%W" #:user-level 'expert)
   (define-command 'lower-window-and-transients
-    lower-window-and-transients #:spec "%W")
+    lower-window-and-transients #:spec "%W" #:user-level 'expert)
   (define-command 'raise-lower-window-and-transients
-    raise-lower-window-and-transients #:spec "%W")
+    raise-lower-window-and-transients #:spec "%W" #:user-level 'expert)
 
 
 ;;; displaying

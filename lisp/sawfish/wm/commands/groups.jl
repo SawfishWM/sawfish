@@ -149,9 +149,12 @@
   (define (lower-group-depth w) (map-window-group lower-window-depth w))
 
   ;;###autoload
-  (define-command 'raise-group raise-group #:spec "%W")
-  (define-command 'lower-group lower-group #:spec "%W")
-  (define-command 'raise-lower-group raise-lower-group #:spec "%W")
+  (define-command 'raise-group raise-group
+    #:spec "%W" #:user-level 'expert)
+  (define-command 'lower-group lower-group
+    #:spec "%W" #:user-level 'expert)
+  (define-command 'raise-lower-group raise-lower-group
+    #:spec "%W" #:user-level 'expert)
   (define-command 'raise-group-depth raise-group-depth #:spec "%W")
   (define-command 'lower-group-depth lower-group-depth #:spec "%W")
 
