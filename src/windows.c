@@ -48,6 +48,10 @@ DEFSYM(base_width, "base-width");
 DEFSYM(base_height, "base-height");
 DEFSYM(min_aspect, "min-aspect");
 DEFSYM(max_aspect, "max-aspect");
+DEFSYM(user_size, "user-size");
+DEFSYM(program_size, "program-size");
+DEFSYM(user_position, "user-position");
+DEFSYM(program_position, "program-position");
 
 
 /* utilities */
@@ -722,6 +726,15 @@ window-size-hints WINDOW
 					  rep_MAKE_INT(hints->max_aspect.y))),
 			    ret));
     }
+    if (flags & USPosition)
+	ret = Fcons (Fcons (Quser_position, Qt), ret);
+    else if (flags & PPosition)
+	ret = Fcons (Fcons (Qprogram_position, Qt), ret);
+    if (flags & USSize)
+	ret = Fcons (Fcons (Quser_size, Qt), ret);
+    else if (flags & PSize)
+	ret = Fcons (Fcons (Qprogram_size, Qt), ret);
+
     return ret;
 }
 
@@ -854,6 +867,10 @@ windows_init (void)
     rep_INTERN(base_height);
     rep_INTERN(min_aspect);
     rep_INTERN(max_aspect);
+    rep_INTERN(user_size);
+    rep_INTERN(user_position);
+    rep_INTERN(program_size);
+    rep_INTERN(program_position);
 }
 
 void
