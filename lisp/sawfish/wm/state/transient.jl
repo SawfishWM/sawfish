@@ -162,23 +162,18 @@ the level of any transient windows it has."
 ;;; hooks
 
   (define (transient-map-window w)
-    (let ((set-focus nil))
-      (when (window-transient-p w)
-	(let ((parent (get-window-by-id (window-transient-p w))))
-	  (when parent
-	    (when (and transients-get-focus
-		       (eq (input-focus) parent)
-		       (window-really-wants-input-p w)
-		       (window-visible-p w))
-	      (set-input-focus w)
-	      (setq set-focus t)))))
-      (when (and (not set-focus)
-		 (or (and focus-windows-when-mapped
-			  (not (window-get w 'never-focus)))
-		     (window-get w 'focus-when-mapped))
-		 (window-really-wants-input-p w)
-		 (window-visible-p w))
-	(set-input-focus w))))
+    (cond ((and transients-get-focus
+		(window-transient-p w)
+		(window-really-wants-input-p w)
+		(window-visible-p w)
+		(transient-of-p w (input-focus)))
+	   (set-input-focus w))
+	  (and (or (and focus-windows-when-mapped
+			(not (window-get w 'never-focus)))
+		   (window-get w 'focus-when-mapped))
+	       (window-really-wants-input-p w)
+	       (window-visible-p w))
+	  (set-input-focus w)))
 
   ;; If a transient window gets unmapped that currently has the input
   ;; focus, pass it (the focus) to its parent. Otherwise, pass the focus

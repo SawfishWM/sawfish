@@ -1,3 +1,10 @@
+2000-11-06  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/transient.jl (transient-map-window): cleaned
+	up control flow (removed unnecessary variable), and using
+	transient-of-p instead of checking manually (this means that
+	the transient-for = root-window convention is supported)
+
 2000-11-03  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/state/maximize.jl: immediately before exiting
