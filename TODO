@@ -20,9 +20,6 @@ Outstanding bugs
     unfocused, but without any other window (or our no_focus_window)
     being focused afterwards.. ]
 
-  ! latency when starting menu subprocesses can be annoying (pointer
-    events are handled unintuitively)
-
   ! It's not possible to compile sawmill-ui.jl without an X connection
     (it requires 'gtk, which then calls gtk_init (), ...)
 
@@ -36,6 +33,8 @@ Outstanding bugs
     (this could be due to grabbing in SyncPointer mode, but
     XAllowEvents should always be called..?)
 
+    [ 24/10: has this been seen recently? I think it may be fixed..? ]
+
   ! xv/java-apps get weird placement [apps being non-ICCCM compliant?]
 
   ! (getpid) has been obsoleted by rep's (process-id)
@@ -47,24 +46,17 @@ Outstanding bugs
     mapped, since it's not possible to maximize the window at that
     point (until the frame has been created)
 
-  ! cycle-windows with only one window unfocuses the window
-
-  ! set interactive placement, double-click on gmc icon, window is only
-    placed interactively if mouse has moved before window is mapped
+  ! cycle-windows with only one window temporarily unfocuses the window
 
 
 General tasks
 =============
-
-  + add separate option for raising non-parented transients
 
   + support for synthesizing events
 
   + visual cue for sticky windows?
 
   + add focus-order to smart placement weights?
-
-  + option to link resize direction to frame part class
 
   + threshold options to control window-move sensitivity?
 
@@ -159,10 +151,6 @@ General tasks
   + Pixmap cursors / cursor recolouring
 
   + Icons (?)
-
-  + Load tarred/compressed themes?
-
-    [ 17/10: this has been added now, but it requires rep 0.7 ]
 
   + Support the KDE hints
 

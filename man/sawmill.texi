@@ -3,10 +3,10 @@
 @settitle sawmill Programming Manual
 @footnotestyle end
 
-@set EDITION 0.2
-@set VERSION 0.7
-@set UPDATED 19 September 1999
-@set UPDATE-MONTH September 1999
+@set EDITION 0.3
+@set VERSION 0.14
+@set UPDATED 23 October 1999
+@set UPDATE-MONTH October 1999
 
 @ifinfo
 @noindent
@@ -160,6 +160,8 @@ grepped @file{/usr/dict/words} for something containing ``wm''.
 @cindex Colors
 
 Sawmill provides a primitive type allowing colors to be represented.
+Each color object allows a single color value to be named and passed
+between Lisp functions.
 
 @defun colorp arg
 Returns @code{t} when @var{arg} is a member of the color type.
@@ -181,18 +183,20 @@ Return the color object representing the color with RGB components as
 specified (each component ranging from 0 to 65535).
 @end defun
 
-Given a color object, it's possible to find both the originally
-specified name of the color, and the actual rgb values:
-
-@defun color-name color
-Return the string defining the X11 name of the color object
-@var{color}.
-@end defun
+Given a color object, it's possible to find both the actual rgb values
+defining the color and one of the names that X11 uses to refer to the
+color.
 
 @defun color-rgb color
 Return a list of integers @code{(@var{red} @var{green} @var{blue})} the
 actual color values of the color represented by object COLOR. The
 individual values range from 0 to 65535.
+@end defun
+
+@defun color-name color
+Return a string defining one of the X11 names used to specify the color
+represented by the color object @var{color}. Note that this may well be
+different to the name used when the color was originally allocated.
 @end defun
 
 Where a color object is used to define the foreground color of a piece
@@ -221,7 +225,8 @@ Return a font object representing the X11 font specified by the string
 Signals an error if no font named @var{name} is available.
 @end defun
 
-Several functions allow details of a font object to be found.
+Several functions allow the attributes associated with a font object to
+be found.
 
 @defun font-name font
 Returns the name of the X11 font represented by object @var{font} (a
@@ -229,7 +234,8 @@ string).
 @end defun
 
 @defun font-height font
-Returns the height of glyphs in the font @var{font}.
+Returns the bounding height of glyphs in the font represented by object
+@var{font}.
 @end defun
 
 @defun text-width string &optional font
@@ -274,7 +280,7 @@ Returns @code{t} when @var{arg} is a member of the image type.
 
 @defun make-image @var{file-name}
 Creates and returns an image object containing the image defined by the
-contents of a file named @var{file-name} (a string). The
+contents of the file named @var{file-name} (a string). The
 @code{image-load-path} directory provides the search path used while
 trying to find a directory containing the file named @var{file-name}.
 
@@ -425,8 +431,8 @@ Possible @var{data} values are an integer representing a glyph in the
 standard X11 cursor font, or an image object.
 @end defun
 
-Note that as of yet (version 0.6), image-derived cursors are still
-unimplemented.
+Note that as of yet (version @value{VERSION}), image-derived cursors
+are still unimplemented.
 
 @defvar default-cursor
 The cursor object displayed in the root window, and in parts of window
@@ -748,7 +754,7 @@ Similar to @code{get-x-property}, but returns either @code{nil} or a
 vector of strings.
 @end defun
 
-@defun set-x-text-property windoe property data
+@defun set-x-text-property window property data
 Sets the X text property @var{property} of @var{window} to the array
 of strings @var{data}.
 @end defun
@@ -765,7 +771,7 @@ with a managed window changes, using the @code{property-notify-hook}.
 @cindex Windows, stacking
 
 The stacking order of the display defines the order in which windows
-are shown, from top-most to bottom-most.
+are shown, from topmost to bottommost.
 
 @defun stacking-order
 Return a list of window objects defining the current stacking order of
@@ -791,8 +797,8 @@ greater than @var{d}. It may be above or below any other windows with
 depth @var{d}.
 
 The @code{depth} property of each window is used to store this depth. A
-depth of zero is ``normal'', with negative depths being below, and
-positive depths stacked above.
+depth of zero is ``normal'', with negative depths stacked below, and
+positive depths stacked above this normal level.
 
 @defun stacking-order-by-depth depth
 Similar to @code{stacking-order}, but only returns windows with depth
@@ -842,7 +848,7 @@ Lower @var{window} to the bottom of its stacking depth.
 @end deffn
 
 @deffn Command raise-window window
-Raise @var{window} to the bottom of its stacking depth.
+Raise @var{window} to the top of its stacking depth.
 @end deffn
 
 @deffn Command raise-lower-window window
@@ -1131,16 +1137,19 @@ customization variables to configure, or all classes if @var{group} is
 undefined.
 @end deffn
 
-The @file{sawmill-ui} program can also be used to invoke the GUI; if
-GNOME is being used, then the GNOME Control Center can also be used to
-customize certain classes.
+The @file{sawmill-ui} program can be used to invoke the GUI manually;
+if GNOME is being used, then the GNOME Control Center can also be used
+to customize certain classes.
 
 In order to provide these customization options however, an extra
 requirement is placed on the Lisp programmer. Instead of just using the
 @code{defvar} special form to declare variables, the @code{defcustom}
 macro must be used. This augments the variable with extra information
-for the GUI, including such things as its required data type. Also,
-customization options are organized into groups.
+for the GUI, including such things as its required data type.
+
+Customization options are organized into groups. Each group has a name
+and contains a set of related options. Currently, it is not possible
+for groups to contain sub-groups.
 
 @defmac defgroup group real-name &rest keys
 Declares a new customization group whose name is defined by the symbol
@@ -1153,8 +1162,8 @@ the property, the second defines its value. Currently the only property
 is @code{:widget}, defining a function to create the group's UI widget.
 
 This macro also creates an interactive function named
-@code{customize:@var{group}} allowing the GUI to be invoked for the new
-group.
+@code{customize:@var{group}} allowing the GUI to be invoked to
+configure the new group.
 @end defmac
 
 @defmac defcustom variable value documentation &rest keys
@@ -1187,8 +1196,8 @@ are loaded on startup, possibly before the modules that define them.
 
 @item :allow-nil @var{bool}
 Specifies whether the variable may be @code{nil}, instead of a member
-of its actual type. This is only supported by the @code{set},
-@code{font} and @code{color} types.
+of its actual type. This is only supported by the @code{string},
+@code{set}, @code{font} and @code{color} types.
 
 @item :set @var{function}
 Specifies that the variable must be set by calling @var{function}
@@ -1341,7 +1350,7 @@ should be self-explanatory:
 
 @noindent
 Extra classes can be created by adding to @code{frame-part-classes}.
-However, it's likely that more than one frame may need to use the same
+However, it's likely that more than one theme may need to use the same
 class, and that the user may then wish to customize any extra keymaps
 used. The @code{def-frame-class} macro should be used to add new
 classes, since it handles these situations.
@@ -1411,7 +1420,7 @@ here.)
 Each frame part is defined as an association list (or alist), a list of
 cons cells, the car of each cell defines the attribute, the cdr defines
 the value given to that attribute. So, for example, the alist
-@code{((foo . 1) (bar . 2))} specifies to attributes: @code{foo} with
+@code{((foo . 1) (bar . 2))} specifies two attributes: @code{foo} with
 value @code{1}, and @code{bar} with value @code{2}.
 @xref{(librep)Association Lists}.
 
@@ -1428,10 +1437,17 @@ string naming a color. If a single element, then it is used for all
 states of the part, otherwise if a list, then each of the four elements
 defines the background for that particular state.
 
+If an image is used it will be scaled to the size of the frame part,
+unless it's @code{tiled} property is set, in which case it will be
+tiled across the frame part.
+
 @item (foreground . @var{data})
 @itemx (foreground . (@var{normal} @var{focused} @var{highlighted} @var{clicked}))
 Specifies a foreground color or image for the frame part, either for
 all states, or for each individual state.
+
+Unlike the @code{background} attribute, images are not scaled when used
+to define the foreground of a frame part.
 
 @item (font . @var{font})
 @itemx (font . (@var{normal} @var{focused} @var{highlighted} @var{clicked}))
@@ -1615,7 +1631,9 @@ A combination of the @code{shaped} and @code{transient} types, normally
 just a very small title border with no text.
 
 @item unframed
-No frame at all, just the client window itself.
+No frame at all, just the client window itself. The predefined
+@code{nil-frame} variable contains a null frame that may be used for
+this frame type.
 @end table
 
 The type of frame that would ideally be given to a window is stored in
@@ -2588,6 +2606,7 @@ been destroyed as is possible.
 @itemx leave-notify-hook
 @itemx focus-in-hook
 @itemx focus-out-hook
+@itemx shape-notify-hook
 Called with a single window argument, analogous to the X events of the
 same names.
 
@@ -2636,6 +2655,9 @@ An @code{or} type hook. Called the first a window is mapped.
 @itemx window-maximized-hook
 @itemx window-unmaximized-hook
 Called with a single window.
+
+@item after-initialization-hook
+Called after adopting the initial set of windows.
 
 @item before-exit-hook
 Called immediately before exiting.

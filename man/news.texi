@@ -7,6 +7,42 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.14
+
+@itemize @bullet
+
+@item Rewrote window-maximization, many new options
+
+@item New option @code{resize-by-frame-class}, when enabled (the
+default), the resized window edges are chosen to match the class of the
+clicked frame part (i.e. matching the cursor shape)
+
+@item Load GNOME support code automatically if it looks like GNOME is
+being used
+
+@item Create unix-domain sockets in @file{/tmp}
+
+@item New hooks: @code{window-moved-hook}, @code{window-resized-hook},
+@code{after-initialization-hook}, @code{shape-notify-hook}.
+
+@item Improved how menus are displayed; the window-ops menu is shown by
+ButtonPress not ButtonRelease events
+
+@item Refocus most-recently-focused window when switching viewport
+
+@item Added @code{centered} placement style
+
+@item Added symbol-completion to readline-based client
+
+@item Fix bug of not noticing WM_NORMAL_HINTS property changes; follow
+the window's maximum size hints
+
+@item Fix bug of not reframing windows when they change from unshaped
+to shaped, or vice versa
+
+@end itemize
+
+
 @unnumberedsec 0.13
 
 @itemize @bullet

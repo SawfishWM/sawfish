@@ -1,4 +1,30 @@
+1999-10-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.14
+
+	* sawmill-ui.jl (documentation): redefine this standard
+	function to get the doc string from the window manager process
+
+	* events.c (shape_notify): call shape-notify-hook
+
+1999-10-23  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (install_window_frame): call restack_frame_parts
+	* frames.c (restack_frame_parts): new function
+
 1999-10-22  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c: expose events override the frame-draw-mutex
+
+	* windows.c (manage_windows): call after-iniitialization-hook
+	after adopting all windows
+
+	* client.c (completion_generator): added basic readline symbol
+	completion; doesn't differentiate between variables and
+	functions
+
+	* server.h, server.c, libclient.c: create sockets in
+	`/tmp/.sawmill-USER/DPY' to try and prevent /tmp exploits
 
 	* sawmill-menu.jl (popup-menu): new optional arg POSITION
 

@@ -1,4 +1,46 @@
+1999-10-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.14
+
+	* workspace.jl (static-workspace-menus): expanded some items
+	* menus.jl (root-menu): swapped position of Workspace and
+	Window menus
+
+	* place-window.jl (place-window-interactively): swallow any
+	pending X events before doing the interactive placement
+
+	* frames.jl: reframe the window when it's shape changes (in
+	case it changed from unshaped to shaped, or vice versa)
+
+	* move-resize.jl (resize-by-frame-class): new option, link
+	edges moved when resizing to the clicked frame part, not to the
+	mouse position (so the behaviour matches the cursor shape)
+
+1999-10-23  John Harper  <john@dcs.warwick.ac.uk>
+
+	* menus.jl (window-ops-menu): cleaned up a bit; added some more
+	items
+
+	* stacking.jl (transients-above): replaces the
+	transients-above-parents option
+
+	* viewport.jl (uniconify-to-current-viewport): new option
+
+	* stacking.jl (raise-window-depth): add restack-by-depth to the
+	after-initialization-hook
+
 1999-10-22  John Harper  <john@dcs.warwick.ac.uk>
+
+	* maximize.jl (maximize-avoided-windows): look for a
+	maximize-avoid property
+
+	* gnome.jl (gnome-honour-client-state): for panel windows, set
+	the focus-proxy-click and maximize-avoid properties
+
+	* menus.jl: set frame-draw-mutex while menus are popped up
+
+	* keymaps.jl (menu-button-keymap): bind popup-window-menu to
+	`Button1-Click1' instead of `Button1-Off'
 
 	* sawmill.jl: if the root window has any property whose name
 	starts with `GNOME_', then require 'gnome
@@ -15,8 +57,6 @@
 	* custom.jl: added `maximize' group
 	* move-resize.jl (move-lock-when-maximized): now in maximize
 	group
-
-	* stacking.jl (stacking-add-window): call restack-by-depth
 
 	* maximize.jl: handle 2D maximization separately, look for the
 	largest rectangle that doesn't contain any reserved windows
