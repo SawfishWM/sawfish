@@ -27,19 +27,6 @@
 ;; structure. Workspaces are added and deleted as required (subject to
 ;; the options defined below)
 
-;; If you want to approximate the common N-by-N grid approach to
-;; virtual desktops, then you could set `preallocated-workspaces' to
-;; NxN and add something like the following to your .sawmillrc:
-
-;; (defvar workspace-grid-width 2)
-
-;; (bind-keys global-keymap
-;;   "C-Down" '(select-workspace (+ current-workspace workspace-grid-width))
-;;   "C-Up" '(select-workspace (- current-workspace workspace-grid-width)))
-
-;; substituting the 2 for suitable values of N. This won't change the
-;; way that the GNOME hints portray the workspace list, but it's a start..
-
 
 ;; Options and variables
 
@@ -56,6 +43,12 @@
 (defcustom uniconify-to-current-workspace t
   "Windows are uniconified onto the current workspace."
   :type boolean
+  :group workspace)
+
+(defcustom workspace-jump-distance 2
+  "Number of workspaces to move when using the jump-workspaces-X commands."
+  :type number
+  :range (1 . nil)
   :group workspace)
 
 (defcustom preallocated-workspaces 1
@@ -465,6 +458,22 @@ previous workspace."
   "Move the current workspace one place to the left."
   (interactive)
   (ws-move-workspace current-workspace (- (or count 1))))
+
+(defun jump-workspaces-forwards ()
+  "Move `workspace-jump-distance' workspaces forwards."
+  (interactive)
+  (let
+      ((dest (max 0 (min (1- total-workspaces)
+			 (+ current-workspace workspace-jump-distance)))))
+    (ws-switch-workspace dest)))
+    
+(defun jump-workspaces-backwards ()
+  "Move `workspace-jump-distance' workspaces backwards."
+  (interactive)
+  (let
+      ((dest (max 0 (min (1- total-workspaces)
+			 (- current-workspace workspace-jump-distance)))))
+    (ws-switch-workspace dest)))
 
 
 ;; some commands for moving directly to a workspace
