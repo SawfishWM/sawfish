@@ -1,5 +1,8 @@
 1999-07-29  John Harper  <john@dcs.warwick.ac.uk>
 
+	* frames.c (list_frame_generator): indirect through multiple
+	symbols in frame_style
+
 	* windows.c, server.c, functions.c, events.c, display.c:
 	replaced some calls to XSync by XFlush. (XSync also buffers any
 	pending events, preventing select from returning)
