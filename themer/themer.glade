@@ -183,30 +183,6 @@
 
       <widget>
 	<class>GtkMenuItem</class>
-	<name>edit1</name>
-	<label>_Edit</label>
-	<right_justify>False</right_justify>
-
-	<widget>
-	  <class>GtkMenu</class>
-	  <name>edit1_menu</name>
-
-	  <widget>
-	    <class>GtkMenuItem</class>
-	    <name>properties1</name>
-	    <signal>
-	      <name>activate</name>
-	      <handler>on-edit-properties</handler>
-	      <last_modification_time>Sat, 08 Jan 2000 02:47:14 GMT</last_modification_time>
-	    </signal>
-	    <label>_Properties...</label>
-	    <right_justify>False</right_justify>
-	  </widget>
-	</widget>
-      </widget>
-
-      <widget>
-	<class>GtkMenuItem</class>
 	<name>settings1</name>
 	<label>_Settings</label>
 	<right_justify>False</right_justify>
@@ -217,7 +193,7 @@
 
 	  <widget>
 	    <class>GtkMenuItem</class>
-	    <name>debug1</name>
+	    <name>menu-help-debug</name>
 	    <signal>
 	      <name>activate</name>
 	      <handler>on-help-debug</handler>
@@ -861,7 +837,7 @@ Highlighted</label>
 	      <child_name>CList:title</child_name>
 	      <name>label45</name>
 	      <label>Inactive-
-HIghlighted</label>
+Highlighted</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
 	      <xalign>0.5</xalign>
