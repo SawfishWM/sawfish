@@ -28,6 +28,60 @@ int cursor_type;
 repv default_cursor;
 DEFSYM(cursor_shape, "cursor-shape");
 
+
+/* Cursors from bitmaps */
+
+static Cursor
+make_bm_cursor (repv image, repv mask, repv fg, repv bg)
+{
+    rep_GC_root gc_image, gc_mask, gc_fg, gc_bg;
+    int width, height, x_hot, y_hot;
+    Pixmap bm_image, bm_mask;
+    Cursor cursor = 0;
+
+    if (rep_STRINGP(fg))
+	fg = Fget_color (fg);
+    if (rep_STRINGP(bg))
+	bg = Fget_color (bg);
+
+    if (!rep_STRINGP(image) || !rep_STRINGP(mask)
+	|| !COLORP(fg) || !COLORP(bg))
+    {
+	return 0;
+    }
+
+    rep_PUSHGC(gc_image, image);
+    rep_PUSHGC(gc_mask, mask);
+    rep_PUSHGC(gc_fg, fg);
+    rep_PUSHGC(gc_bg, bg);
+
+    bm_mask = make_bitmap (mask, &width, &height, &x_hot, &y_hot);
+    if (bm_mask != 0)
+    {
+	bm_image = make_bitmap (image, &width, &height, &x_hot, &y_hot);
+	if (bm_image != 0)
+	{
+	    XColor xc_fg, xc_bg;
+	    xc_fg.red = VCOLOR(fg)->red;
+	    xc_fg.green = VCOLOR(fg)->green;
+	    xc_fg.blue = VCOLOR(fg)->blue;
+	    xc_fg.pixel = VCOLOR(fg)->pixel;
+	    xc_bg.red = VCOLOR(bg)->red;
+	    xc_bg.green = VCOLOR(bg)->green;
+	    xc_bg.blue = VCOLOR(bg)->blue;
+	    xc_bg.pixel = VCOLOR(bg)->pixel;
+	    cursor = XCreatePixmapCursor (dpy, bm_image, bm_mask,
+					  &xc_fg, &xc_bg, x_hot, y_hot);
+	    XFreePixmap (dpy, bm_image);
+	}
+	XFreePixmap (dpy, bm_mask);
+    }
+    rep_POPGC; rep_POPGC; rep_POPGC; rep_POPGC;
+    return cursor;
+}
+
+
+
 DEFUN("get-cursor", Fget_cursor, Sget_cursor, (repv data), rep_Subr1) /*
 ::doc:get-cursor::
 get-cursor DATA
@@ -54,7 +108,12 @@ X11 cursor font, or an image object.
 	    cursor = XCreateFontCursor (dpy, rep_INT(data));
 	else if (IMAGEP(data))
 	{
-	    /* XXX implement pixmap cursors.. */
+	    /* XXX implement cursors from images..? */
+	}
+	else if (rep_VECTORP(data) && rep_VECT_LEN (data) >= 4)
+	{
+	    cursor = make_bm_cursor (rep_VECTI(data, 0), rep_VECTI(data, 1),
+				     rep_VECTI(data, 2), rep_VECTI(data, 2));
 	}
 	if (cursor != 0)
 	{
@@ -74,6 +133,32 @@ X11 cursor font, or an image object.
 	}
     }
     return rep_VAL(f);
+}
+
+DEFUN("recolor-cursor", Frecolor_cursor, Srecolor_cursor,
+      (repv cursor, repv fg, repv bg), rep_Subr3) /*
+::doc:Srecolor-cursor::
+recolor-cursor CURSOR FG BG
+::end:: */
+{
+    XColor xc_fg, xc_bg;
+    rep_DECLARE1(cursor, CURSORP);
+    if (rep_STRINGP(fg))
+	fg = Fget_color (fg);
+    rep_DECLARE(2, fg, fg && COLORP(fg));
+    if (rep_STRINGP(bg))
+	bg = Fget_color (bg);
+    rep_DECLARE(3, bg, bg && COLORP(bg));
+    xc_fg.red = VCOLOR(fg)->red;
+    xc_fg.green = VCOLOR(fg)->green;
+    xc_fg.blue = VCOLOR(fg)->blue;
+    xc_fg.pixel = VCOLOR(fg)->pixel;
+    xc_bg.red = VCOLOR(bg)->red;
+    xc_bg.green = VCOLOR(bg)->green;
+    xc_bg.blue = VCOLOR(bg)->blue;
+    xc_bg.pixel = VCOLOR(bg)->pixel;
+    XRecolorCursor (dpy, VCURSOR(cursor)->cursor, &xc_fg, &xc_bg);
+    return cursor;
 }
 
 DEFUN("default-cursor", Vdefault_cursor, Sdefault_cursor, (repv arg), rep_Var) /*
@@ -156,6 +241,7 @@ cursors_init (void)
 					 cursor_prin, cursor_sweep,
 					 cursor_mark, 0, 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR(Sget_cursor);
+    rep_ADD_SUBR(Srecolor_cursor);
     rep_ADD_SUBR(Sdefault_cursor);
     rep_ADD_SUBR(Scursorp);
     if (rep_SYM(Qbatch_mode)->value == Qnil)
