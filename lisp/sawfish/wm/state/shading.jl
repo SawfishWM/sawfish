@@ -33,7 +33,9 @@
 	    ((memq type '(transient unframed))
 	     (setq type 'shaped-transient)))
       (set-window-frame-style
-       w (window-get w 'current-frame-style) type nil))))
+       w (window-get w 'current-frame-style) type nil)
+      (call-window-hook 'shade-window-hook w)
+      (call-window-hook 'window-state-change-hook w))))
 
 ;;;###autoload
 (defun unshade-window (w)
@@ -43,7 +45,9 @@
     (window-put w 'hide-client nil)
     (set-window-frame-style w (window-get w 'current-frame-style)
 			    (window-get w 'shaded-old-type) nil)
-    (window-put w 'shaded-old-type nil)))
+    (window-put w 'shaded-old-type nil)
+    (call-window-hook 'unshade-window-hook w)
+    (call-window-hook 'window-state-change-hook w)))
 
 ;;;###autoload
 (defun toggle-window-shaded (w)
