@@ -259,6 +259,7 @@ add_window (Window id)
 	XWindowChanges xwc;
 	u_int xwcm;
 	long supplied;
+	XTextProperty prop;
 
 	DB(("add_window (%lx)\n", id));
 
@@ -284,10 +285,24 @@ add_window (Window id)
 	DB(("  orig: width=%d height=%d x=%d y=%d\n",
 	    w->attr.width, w->attr.height, w->attr.x, w->attr.y));
 
-	if (XFetchName (dpy, id, &tem))
+	if (XGetWMName (dpy, id, &prop) && prop.value)
 	{
-	    w->name = rep_string_dup (tem);
-	    XFree (tem);
+	    if (prop.nitems > 0)
+	    {
+		char **list;
+		int count;
+		prop.nitems = strlen(prop.value);
+		if (XmbTextPropertyToTextList (dpy, &prop, &list, &count)
+		    >= Success)
+		{
+		    if (count > 0)
+			w->name = rep_string_dup (list[0]);
+		    else
+			w->name = rep_null_string ();
+		    XFreeStringList (list);
+		}
+	    }
+	    XFree (prop.value);
 	}
 	else
 	    w->name = rep_null_string ();
