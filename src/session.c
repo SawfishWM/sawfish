@@ -158,10 +158,16 @@ save_yourself (SmcConn conn, SmPointer data, int save_type, Bool shutdown,
 }
 
 static void
-die (SmcConn conn, SmPointer data)
+die__ (void)
 {
     exit_code = ec_session_died;
     Fquit ();
+}
+
+static void
+die (SmcConn conn, SmPointer data)
+{
+    die__ ();
 }
 
 static void
@@ -184,7 +190,11 @@ shutdown_cancelled (SmcConn conn, SmPointer data)
 static void
 ICE_input_ready (int fd)
 {
-    IceProcessMessages (ice_conn, 0, 0);
+    if (IceProcessMessages (ice_conn, 0, 0) != IceProcessMessagesSuccess)
+    {
+	fputs ("ICE has broken?\n", stderr);
+	die__ ();
+    }
 }
 
 static void
