@@ -185,7 +185,9 @@
 	(cond ((and (string= (aref class 1) "Panel")
 		    (string= (aref class 0) "panel"))
 	       ;; XXX I don't think the GNOME hints specify these things...
-	       (window-put w 'focus-click-through t))
+	       (window-put w 'focus-click-through t)
+	       ;; XXX the panel should set this, but sometimes it fails..?
+	       (window-put w 'avoid t))
 	      ((string= (aref class 1) "gmc-desktop-icon")
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'never-focus t))
