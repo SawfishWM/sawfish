@@ -160,6 +160,21 @@
 			(vector (+ (window-get w 'depth) WIN_LAYER_NORMAL))
 			'CARDINAL 32))))
 
+  (define (gnome-set-client-hints w states)
+    (let ((hints (let ((prop (get-x-property w '_WIN_HINTS)))
+		   (if (eq (car prop) 'CARDINAL)
+		       (aref (nth 2 prop) 0)
+		     0))))
+      (mapc (lambda (state)
+	      (case state
+		((window-list-skip)
+		 (setq hints (logior (logand
+				      hints (lognot WIN_HINTS_SKIP_WINLIST))
+				     (if (window-get w 'window-list-skip)
+					 WIN_HINTS_SKIP_WINLIST 0))))))
+	    states)
+      (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
+
   (define (gnome-honour-client-state w)
     (let ((class (get-x-text-property w 'WM_CLASS)))
       (when (and class (>= (length class) 2))
@@ -198,8 +213,9 @@
       (when (eq (car hints) 'CARDINAL)
 	(setq bits (aref (nth 2 hints) 0))
 	(unless (zerop (logand bits WIN_HINTS_SKIP_FOCUS))
-	  (window-put w 'never-focus t)
-	  (window-put w 'ignored t)))
+	  (window-put w 'cycle-skip t))
+	(unless (zerop (logand bits WIN_HINTS_SKIP_WINLIST))
+	  (window-put w 'window-list-skip t)))
       (when layer
 	(setq layer (aref (nth 2 layer) 0))
 	(set-window-depth w (- layer WIN_LAYER_NORMAL)))
@@ -320,6 +336,7 @@
     (add-hook 'add-window-hook gnome-set-client-state)
     (call-after-state-changed '(sticky shaded maximized ignored stacking)
 			      gnome-set-client-state)
+    (call-after-state-changed '(window-list-skip) gnome-set-client-hints)
 
     (add-hook 'client-message-hook gnome-client-message-handler)
     (add-hook 'unbound-key-hook gnome-event-proxyer)
@@ -337,5 +354,5 @@
     (gnome-init)
     (require 'sawfish.wm.gnome.match-window))
 
-  (add-window-menu-toggle (_ "In _window list") 'gnome-toggle-skip-winlist)
-  (add-window-menu-toggle (_ "In _task list") 'gnome-toggle-skip-tasklist))
+  (add-window-menu-toggle (_ "In GNOME _task list")
+			  'gnome-toggle-skip-tasklist))
