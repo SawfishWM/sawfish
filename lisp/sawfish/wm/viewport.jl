@@ -21,6 +21,12 @@
 
 (provide 'viewport)
 
+;; Commentary:
+
+;; Virtual workspaces are implemented by moving windows in and out of
+;; the screen dimensions. E.g. moving to the left moves all windows one
+;; screen-width to the right. 
+
 (defcustom viewport-columns 1
   "Number of columns in each virtual workspace."
   :group workspace
@@ -36,27 +42,51 @@
   :after-set viewport-size-changed)
 
 (defun viewport-size-changed ()
-  (call-hook 'screen-viewport-resized-hook))
+  (call-hook 'viewport-resized-hook))
+
+
+;; raw viewport handling
+
+(defvar viewport-x-offset 0)
+(defvar viewport-y-offset 0)
+
+(defun set-viewport (x y)
+  (unless (and (= viewport-x-offset x) (= viewport-y-offset y))
+    (mapc #'(lambda (w)
+	      (unless (window-get w 'fixed-position)
+		(let
+		    ((pos (window-position w)))
+		  (move-window-to w (- (+ (car pos) viewport-x-offset) x)
+				  (- (+ (cdr pos) viewport-y-offset) y)))))
+	  (managed-windows))
+    (setq viewport-x-offset x)
+    (setq viewport-y-offset y)))
+
+(add-hook 'before-exit-hook #'(lambda ()
+				(set-viewport 0 0)))
+
+
+;; screen sized viewport handling
 
 (defun screen-viewport ()
-  (let
-      ((origin (get-viewport)))
-    (rplaca origin (/ (car origin) (screen-width)))
-    (rplacd origin (/ (cdr origin) (screen-height)))
-    origin))
+  (cons (/ viewport-x-offset (screen-width))
+	(/ viewport-y-offset (screen-height))))
 
 (defun set-screen-viewport (col row)
   (when (and (>= col 0) (< col viewport-columns)
 	     (>= row 0) (< row viewport-rows))
     (set-viewport (* col (screen-width))
 		  (* row (screen-height)))
-    (call-hook 'screen-viewport-moved-hook (list col row))))
+    (call-hook 'viewport-moved-hook (list col row))))
   
 (defun move-viewport (right down)
   (let
       ((port (screen-viewport)))
     (set-screen-viewport (+ (car port) right)
 			 (+ (cdr port) down))))
+
+
+;; commands
 
 (defun move-viewport-right ()
   (interactive)
@@ -79,15 +109,16 @@
 
 (defun viewport-saved-state (w)
   (let
-      ((position (window-position w))
-       (origin (get-viewport)))
+      ((position (window-position w)))
     (when (window-get w 'fixed-position)
       (rplaca position (mod (car position) (screen-width)))
       (rplacd position (mod (cdr position) (screen-height))))
     `((position . ,(cons (mod (car position) (screen-width))
 			 (mod (cdr position) (screen-height))))
-      (viewport . ,(cons (/ (+ (car position) (car origin)) (screen-width))
-			 (/ (+ (cdr position) (cdr origin)) (screen-height)))))))
+      (viewport . ,(cons (/ (+ (car position) viewport-x-offset)
+			    (screen-width))
+			 (/ (+ (cdr position) viewport-y-offset)
+			    (screen-height)))))))
 
 (defun viewport-load-state (w alist)
   (let
