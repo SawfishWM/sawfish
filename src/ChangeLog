@@ -1,5 +1,12 @@
 1999-10-12  John Harper  <john@dcs.warwick.ac.uk>
 
+	* events.c (actual_last_event_time): the real last timestamp
+	from the server
+	(focus_out): hack to focus on no_focus_window using the last
+	timestamp (trying not to override existing focus setting)
+
+	* frames.c (set_frame_part_bg): fix image tiling
+
 	* frames.c (Qhighlight_when_unfocused): new option, only
 	highlight frame parts in unfocused windows when this is set
 	non-nil
