@@ -56,20 +56,24 @@
 (defvar gnome-current-workspace-count nil)
 
 (defun gnome-set-workspace ()
-  (mapc #'(lambda (w)
-	    (when (window-get w 'workspace)
-	      (set-x-property
-	       w '_WIN_WORKSPACE
-	       (vector (window-get w 'workspace)) 'CARDINAL 32)))
-	(managed-windows))
-  (unless (equal gnome-current-workspace current-workspace)
-    (setq gnome-current-workspace current-workspace)
-    (set-x-property
-     'root '_WIN_WORKSPACE (vector current-workspace) 'CARDINAL 32))
-  (unless (equal gnome-current-workspace-count total-workspaces)
-    (setq gnome-current-workspace-count total-workspaces)
-    (set-x-property
-     'root '_WIN_WORKSPACE_COUNT (vector total-workspaces) 'CARDINAL 32)))
+  (let
+      ((limits (ws-workspace-limits)))
+    (mapc #'(lambda (w)
+	      (when (window-get w 'workspace)
+		(set-x-property w '_WIN_WORKSPACE
+				(vector (- (window-get w 'workspace)
+					   (car limits)))
+				'CARDINAL 32)))
+	  (managed-windows))
+    (unless (equal gnome-current-workspace (- current-workspace (car limits)))
+      (setq gnome-current-workspace (- current-workspace (car limits)))
+      (set-x-property 'root '_WIN_WORKSPACE
+		      (vector gnome-current-workspace) 'CARDINAL 32))
+    (unless (equal gnome-current-workspace-count
+		   (1+ (- (cdr limits) (car limits))))
+      (setq gnome-current-workspace-count (1+ (- (cdr limits) (car limits))))
+      (set-x-property 'root '_WIN_WORKSPACE_COUNT
+		      (vector gnome-current-workspace-count) 'CARDINAL 32))))
 
 (defun gnome-set-client-state (w)
   (let
@@ -110,12 +114,16 @@
       (setq layer (aref (nth 2 layer) 0))
       (set-window-depth w (- layer WIN_LAYER_NORMAL)))
     (when space
-      (ws-add-window-to-space w (aref (nth 2 space) 0)))))
+      (let
+	  ((limits (ws-workspace-limits)))
+	(ws-add-window-to-space w (+ (aref (nth 2 space) 0) (car limits)))))))
 
 (defun gnome-client-message-handler (w type data)
   (cond ((eq type '_WIN_WORKSPACE)
-	 (select-workspace (aref data 0))
-	 t)
+	 (let
+	     ((limits (ws-workspace-limits)))
+	   (select-workspace (+ (aref data 0) (car limits)))
+	   t))
 	((and (eq type '_WIN_STATE) (windowp w))
 	 (let
 	     ((mask (aref data 0))

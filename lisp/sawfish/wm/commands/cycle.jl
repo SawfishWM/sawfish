@@ -42,12 +42,13 @@
   (catch 'out
     (let*
 	((space current-workspace)
+	 (limits (ws-workspace-limits))
 	 (windows (workspace-windows space))
 	 (win (nth 1 (memq (input-focus) windows))))
       (while (not win)
 	(setq space (1+ space))
-	(when (= space total-workspaces)
-	  (setq space 0))
+	(when (> space (cdr limits))
+	  (setq space (car limits)))
 	(when (= space current-workspace)
 	  (throw 'out nil))
 	(setq windows (workspace-windows space))
@@ -62,12 +63,13 @@
   (catch 'out
     (let*
 	((space current-workspace)
+	 (limits (ws-workspace-limits))
 	 (windows (nreverse (workspace-windows space)))
 	 (win (nth 1 (memq (input-focus) windows))))
       (while (not win)
 	(setq space (1- space))
-	(when (< space 0)
-	  (setq space (1- total-workspaces)))
+	(when (< space (car limits))
+	  (setq space (cdr limits)))
 	(when (= space current-workspace)
 	  (throw 'out nil))
 	(setq windows (nreverse (workspace-windows space)))

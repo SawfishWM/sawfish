@@ -124,8 +124,8 @@ of a window."
   (bind-keys global-keymap
     "C-Left" 'previous-workspace
     "C-Right" 'next-workspace
-    "C-Up" 'jump-workspaces-backwards
-    "C-Down" 'jump-workspaces-forwards
+    "C-Up" 'previous-workspace-row
+    "C-Down" 'next-workspace-row
     "M-Tab" 'cycle-windows)
 
   (bind-keys root-window-keymap
