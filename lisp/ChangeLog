@@ -1,3 +1,18 @@
+2001-08-31  John Harper  <jsh@pixelslut.com>
+
+	* ~/src/sawfish/lisp/sawfish/wm/util/stacking.jl
+	(maybe-raise-window, maybe-lower-window): when adding server
+	timestamp to the client message, subtract one from the actual
+	last seen timestamp. Done for same reason as in windows.c
+
+	* ~/src/sawfish/lisp/sawfish/wm/util/display-window.jl
+	(display-window-without-focusing): new (private) keyword
+	parameter WILL-REFOCUS. Pass this value along to
+	select-workspace
+
+	(display-window): pass WILL-REFOCUS as true when we'll be
+	focusing a window afterwards (helps avoid some race conditions)
+
 2001-08-24  John Harper  <jsh@pixelslut.com>
 
 	* sawfish/wm/menus.jl: ensure menu-process is nil after being

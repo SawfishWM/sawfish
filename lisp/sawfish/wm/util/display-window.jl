@@ -61,7 +61,8 @@
 
 ;;; Activating windows
 
-  (define (display-window-without-focusing w #!optional preferred-space)
+  (define (display-window-without-focusing
+	   w #!optional preferred-space #!key will-refocus)
     "Display the workspace/viewport containing the window W."
     (when w
       (let ((uniconify-to-current-workspace
@@ -72,7 +73,7 @@
 	  (setq preferred-space
 		(nearest-workspace-with-window w current-workspace)))
 	(when preferred-space
-	  (select-workspace preferred-space))
+	  (select-workspace preferred-space will-refocus))
 	(move-viewport-to-window w)
 	(when (and unshade-selected-windows (window-get w 'shaded))
 	  (unshade-window w)))))
@@ -86,7 +87,9 @@
   (define (display-window w #!optional preferred-space)
     "Display the workspace containing the window W, then focus on W."
     (when w
-      (display-window-without-focusing w preferred-space)
+      (display-window-without-focusing
+       w preferred-space
+       #:will-refocus (window-really-wants-input-p w))
       (when raise-selected-windows
 	(raise-window* w))
       (when warp-to-selected-windows

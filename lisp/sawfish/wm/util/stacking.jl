@@ -84,7 +84,9 @@ it wants to raise itself or not. Else, raise the window unconditionally."
     (if (window-supports-wm-protocol-p w '_SAWFISH_WM_RAISE_WINDOW)
 	(send-client-message w 'WM_PROTOCOLS
 			     (vector (x-atom '_SAWFISH_WM_RAISE_WINDOW)
-				     (x-server-timestamp)) 32)
+				     ;; See windows.c:focus_on_window
+				     ;; for why the 1- is necessary..
+				     (1- (x-server-timestamp))) 32)
       (raise-window* w)))
 
   (define (maybe-lower-window w)
@@ -97,5 +99,7 @@ it wants to lower itself or not. Else, lower the window unconditionally."
     (if (window-supports-wm-protocol-p w '_SAWFISH_WM_LOWER_WINDOW)
 	(send-client-message w 'WM_PROTOCOLS
 			     (vector (x-atom '_SAWFISH_WM_LOWER_WINDOW)
-				     (x-server-timestamp)) 32)
+				     ;; See windows.c:focus_on_window
+				     ;; for why the 1- is necessary..
+				     (1- (x-server-timestamp))) 32)
       (lower-window* w))))
