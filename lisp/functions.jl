@@ -26,6 +26,15 @@
   :type boolean
   :group focus)
 
+(defcustom avoided-windows-re nil
+  "Regular expression matching windows to avoid overlapping."
+  :group misc
+  :type string
+  :allow-nil t)
+
+(defvar dont-avoid-ignored nil)
+(defvar avoid-by-default nil)
+
 (defvar xterm-program "xterm")
 (defvar xterm-args nil)
 
@@ -90,3 +99,21 @@
 	      (unless (memq x out)
 		(setq out (cons x out)))) list)
     out))
+
+(defun window-avoided-p (w)
+  (cond ((or (not (window-mapped-p w))
+	     (not (window-visible-p w)))
+	 nil)
+	((or (window-get w 'avoid)
+	     (and avoided-windows-re
+		  (string-match avoided-windows-re (window-name w))))
+	 t)
+	((and dont-avoid-ignored (window-get w 'ignored))
+	 nil)
+	(t
+	 avoid-by-default)))
+
+(defun avoided-windows (&optional window)
+  (delete-if #'(lambda (w)
+		 (or (eq w window) (not (window-avoided-p w))))
+	     (managed-windows)))
