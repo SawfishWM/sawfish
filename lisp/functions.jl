@@ -21,6 +21,11 @@
 
 (provide 'functions)
 
+(defcustom ignore-window-input-hint nil
+  "Give focus to windows even when they haven't asked for it."
+  :type boolean
+  :group focus)
+
 (defvar xterm-program "xterm")
 (defvar xterm-args nil)
 
@@ -71,3 +76,8 @@
   (interactive)
   (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
 		  xterm-program (or xterm-args ""))))
+
+(defun window-really-wants-input-p (w)
+  (or ignore-window-input-hint
+      (window-get w 'ignore-window-input-hint)
+      (window-wants-input-p w)))
