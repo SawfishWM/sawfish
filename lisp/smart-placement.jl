@@ -41,7 +41,7 @@
 
 ;; utility functions
 
-;; RECTS is a list of (LEFT RIGHT TOP BOTTOM); returns sorted, uniquified
+;; RECTS is a list of (LEFT TOP RIGHT BOTTOM); returns sorted, uniquified
 ;; (X-EDGES . Y-EDGES)
 (defun sp-make-grid (rects &optional with-root)
   (let
@@ -51,8 +51,8 @@
 		       (mapcar #'(lambda (x) (nth 3 x)) rects)))
        tem)
     (when with-root
-      (setq x-edges (cons 0 x-edges))
-      (setq y-edges (cons 0 y-edges)))
+      (setq x-edges (cons 0 (nconc x-edges (list (screen-width)))))
+      (setq y-edges (cons 0 (nconc y-edges (list (screen-height))))))
     (setq x-edges (sort x-edges))
     (setq y-edges (sort y-edges))
     (setq tem x-edges)
@@ -84,31 +84,46 @@
 	(list 0 (- (screen-height)) (screen-width) 0)
 	(list 0 (screen-height) (screen-width) (* 2 (screen-height)))))
 
-;; returns t if a rectangle of size DIMS doesn't overlap any of RECTS
+(defmacro sp-1d-overlap (a-1 a-2 b-1 b-2)
+  `(max 0 (- (min ,a-2 ,b-2) (max ,a-1 ,b-1))))
+
+(defun sp-2d-overlap (dims point rect)
+  (* (sp-1d-overlap (car point) (+ (car point) (car dims))
+		    (car rect) (nth 2 rect))
+     (sp-1d-overlap (cdr point) (+ (cdr point) (cdr dims))
+		    (nth 1 rect) (nth 3 rect))))
+
+;; returns zero if a rectangle of size DIMS doesn't overlap any of RECTS
 ;; when placed at POINT
-(defun sp-rect-fits-p (dims point rects)
-  (let*
-      ((left-edge (car point))
-       (top-edge (cdr point))
-       (right-edge (+ (car point) (car dims)))
-       (bottom-edge (+ (cdr point) (cdr dims))))
-    (catch 'out
-      (mapc #'(lambda (r)
-		(when (and (or (and (<= (car r) left-edge)
-				    (< left-edge (nth 2 r)))
-			       (and (< (car r) right-edge)
-				    (<= right-edge (nth 2 r)))
-			       (and (<= left-edge (car r))
-				    (<= (nth 2 r) right-edge)))
-			   (or (and (<= (nth 1 r) top-edge)
-				    (< top-edge (nth 3 r)))
-			       (and (< (nth 1 r) bottom-edge)
-				    (<= bottom-edge (nth 3 r)))
-			       (and (<= top-edge (nth 1 r))
-				    (<= (nth 3 r) bottom-edge))))
-		  (throw 'out nil)))
-	    rects)
-      t)))
+(defun sp-total-overlap (dims point rects)
+  (let
+      ((total 0))
+    (mapc #'(lambda (r)
+	      (setq total (+ total (sp-2d-overlap dims point r))))
+	  rects)
+    total))
+
+;; returns (POINT . OVERLAP)
+(defun sp-least-overlap (dims point rects)
+  (let
+      ((screen-rect (list 0 0 (screen-width) (screen-height)))
+       min-overlap min-point)
+    (mapc #'(lambda (delta)
+	      (let
+		  ((point-foo (cons (+ (car point) (car delta))
+				    (+ (cdr point) (cdr delta))))
+		   tem)
+		(when (and (>= (car point-foo) 0)
+			   (>= (cdr point-foo) 0)
+			   (<= (+ (car point-foo) (car dims)) (screen-width))
+			   (<= (+ (cdr point-foo) (cdr dims)) (screen-height)))
+		  (setq tem (sp-total-overlap dims point-foo rects))
+		  (when (or (not min-point) (< tem min-overlap))
+		    (setq min-overlap tem)
+		    (setq min-point point-foo)))))
+	  (list '(0 . 0) (cons 0 (- (cdr dims))) (cons (- (car dims)) 0)
+		(cons (- (car dims)) (- (cdr dims)))))
+    (and min-point (cons min-point min-overlap))))
 
 (defun sp-get-windows (w)
   (delete-if #'(lambda (x)
@@ -129,20 +144,25 @@
 
 (defun sp-first-fit (dims grid rects)
   (let
-      ((point (cons 0 0)))
+      ((point (cons 0 0))
+       min-point min-overlap tem)
     (catch 'done
       (mapc #'(lambda (y)
 		(rplacd point y)
 		(mapc #'(lambda (x)
 			  (rplaca point x)
-			  (when (and (sp-rect-fits-p dims point rects)
-				     ;; just in case
-				     (>= x 0) (< x (screen-width))
-				     (>= y 0) (< y (screen-height)))
-			    (throw 'done point)))
+			  (setq tem (sp-least-overlap dims point rects))
+			  (when tem
+			    (when (zerop (cdr tem))
+			      (throw 'done (car tem)))
+			    (when (or (not min-overlap)
+				      (< (cdr tem) min-overlap))
+			      (setq min-overlap (cdr tem))
+			      (setq min-point (car tem)))))
 		      (car grid)))
 	    (cdr grid))
-      nil)))
+      ;; no zero overlap point, use the point with least overlap
+      min-point)))
 
 
 ;; best-fit search
@@ -219,10 +239,7 @@
 	      (rplacd point y)
 	      (mapc #'(lambda (x)
 			(rplaca point x)
-			(when (and (sp-rect-fits-p dims point rects)
-				   ;; just in case
-				   (>= x 0) (< x (screen-width))
-				   (>= y 0) (< y (screen-height)))
+			(when (zerop (sp-total-overlap dims point rects))
 			  (setq points (cons (cons x y) points))))
 		    (car grid)))
 	  (cdr grid))
@@ -253,20 +270,19 @@
       ((windows (sp-get-windows w))
        (rects (sp-make-rects windows))
        (grid (sp-make-grid rects t))
-       (point (sp-first-fit (window-frame-dimensions w)
-			    grid (nconc (sp-screen-rects) rects))))
+       (point (sp-first-fit (window-frame-dimensions w) grid rects)))
     (if point
 	(move-window-to w (car point) (cdr point))
       (place-window-randomly w))))
 
 ;;;###autoload
 (defun place-window-best-fit (w)
-  (let*
-      ((windows (sp-get-windows w))
-       (rects (sp-make-rects windows))
-       (grid (sp-make-grid rects t))
-       (point (sp-best-fit (window-frame-dimensions w)
-			   grid (nconc (sp-screen-rects) rects))))
-    (if point
-	(move-window-to w (car point) (cdr point))
-      (place-window-randomly w))))
+  (place-window-first-fit w))
+
+;  (let*
+;      ((windows (sp-get-windows w))
+;       (rects (sp-make-rects windows))
+;       (grid (sp-make-grid rects t))
+;    (if point
+;	(move-window-to w (car point) (cdr point))
+;      (place-window-randomly w))))
