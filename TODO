@@ -21,6 +21,9 @@ Outstanding bugs
 
   ! Raising a window can cause a flicker of other windows
 
+    [ 2/9: work-around by calling XRaiseWindow instead of
+    XRestackWindows when raising a window right to the top of the stack ]
+
   ! It's not possible to compile sawmill-ui.jl without an X connection
     (it requires 'gtk, which then calls gtk_init (), ...)
 

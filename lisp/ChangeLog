@@ -1,5 +1,10 @@
 1999-09-02  John Harper  <john@dcs.warwick.ac.uk>
 
+	* stacking.jl (stacking-order-by-depth, stack-window-below,
+	stack-window-above): new functions
+	(raise-window): use x-raise-window where possible, this removes
+	the ugly flicker (at least when raising into the top layer)
+
 	* version 0.4
 
 	* menus.jl (menu-stop-process): optional arg FORCE

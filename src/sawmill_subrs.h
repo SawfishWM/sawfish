@@ -128,6 +128,7 @@ extern repv Qroot;
 extern repv Fdelete_window (repv win);
 extern repv Fdestroy_window (repv win);
 extern repv Frestack_windows (repv list);
+extern repv Fx_raise_window (repv win);
 extern repv Fwarp_cursor (repv x, repv y);
 extern repv Fwarp_cursor_to_window (repv win, repv x, repv y);
 extern repv Fmove_window_to (repv win, repv x, repv y);
