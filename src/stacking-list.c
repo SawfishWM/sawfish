@@ -27,6 +27,15 @@
 
 static Lisp_Window *lowest_window, *highest_window;
 
+static void
+assert_constraints (Lisp_Window *w)
+{
+    assert (w->above == 0 || WINDOWP (rep_VAL (w->above)));
+    assert (w->below == 0 || WINDOWP (rep_VAL (w->below)));
+    assert (lowest_window == 0 || WINDOWP (rep_VAL (lowest_window)));
+    assert (highest_window == 0 || WINDOWP (rep_VAL (highest_window)));
+}
+
 /* Remove window W from the stacking list */
 void
 remove_from_stacking_list (Lisp_Window *w)
@@ -46,6 +55,8 @@ remove_from_stacking_list (Lisp_Window *w)
 	highest_window = w->below;
 
     w->above = w->below = 0;
+
+    assert_constraints (w);
 }
 
 /* Insert W at the top of the stacking list */
@@ -61,6 +72,8 @@ insert_in_stacking_list_above_all (Lisp_Window *w)
     highest_window = w;
     if (lowest_window == 0)
 	lowest_window = w;
+
+    assert_constraints (w);
 }
 
 /* Insert W at the bottom of the stacking list */
@@ -76,6 +89,8 @@ insert_in_stacking_list_below_all (Lisp_Window *w)
     lowest_window = w;
     if (highest_window == 0)
 	highest_window = w;
+
+    assert_constraints (w);
 }
 
 /* Insert W immediately above X */
@@ -94,6 +109,8 @@ insert_in_stacking_list_above (Lisp_Window *w, Lisp_Window *x)
 
     if (highest_window == x)
 	highest_window = w;
+
+    assert_constraints (w);
 }
 
 /* Insert W immediately below X */
@@ -111,6 +128,8 @@ insert_in_stacking_list_below (Lisp_Window *w, Lisp_Window *x)
 
     if (lowest_window == x)
 	lowest_window = w;
+
+    assert_constraints (w);
 }
 
 static inline Window
