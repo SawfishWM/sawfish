@@ -43,14 +43,16 @@
 	(when parent
 	  (when (and transients-get-focus
 		     (eq (input-focus) parent)
-		     (window-really-wants-input-p w))
+		     (window-really-wants-input-p w)
+		     (window-visible-p w))
 	    (set-input-focus w)
 	    (setq set-focus t)))))
     (when (and (not set-focus)
 	       (or (and focus-windows-when-mapped
 			(not (window-get w 'never-focus)))
 		   (window-get w 'focus-when-mapped))
-	       (window-really-wants-input-p w))
+	       (window-really-wants-input-p w)
+	       (window-visible-p w))
       (set-input-focus w))))
 
 ;; If a transient window gets unmapped that currently has the input
