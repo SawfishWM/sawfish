@@ -59,7 +59,7 @@
   "The method of choosing which window edges are moved while resizing with
 the mouse."
   :type symbol
-  :options (region border grab)
+  :options (region border grab border-grab)
   :group (move advanced))
 
 (defcustom move-snap-edges nil
@@ -279,7 +279,7 @@ the mouse."
 		(y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1))
 		(x-max (cdr (assq 'max-width move-resize-hints)))
 		(y-max (cdr (assq 'max-height move-resize-hints))))
-	     (when (eq resize-edge-mode 'grab)
+	     (when (memq resize-edge-mode '(grab border-grab))
 	       (move-resize-add-edges ptr-x ptr-y))
 	     (cond
 	      ((memq 'right move-resize-moving-edges)
@@ -371,7 +371,7 @@ the mouse."
   (unless move-resize-moving-edges
     (let
 	(tem)
-      (if (and (eq resize-edge-mode 'border)
+      (if (and (memq resize-edge-mode '(border border-grab))
 	       (clicked-frame-part)
 	       (setq tem (frame-part-get (clicked-frame-part) 'class))
 	       (setq tem (cdr (assq tem move-resize-fp-edges-alist))))
