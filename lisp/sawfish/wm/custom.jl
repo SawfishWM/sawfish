@@ -119,8 +119,7 @@ Note that the value of the `:group' key is not evaluated."
       (when prop
 	(put symbol prop (car keys)))
       (setq keys (cdr keys)))
-    (custom-add-to-group symbol (or (get symbol 'custom-group)
-				    (error "No :group attribute: %s" symbol)))
+    (custom-add-to-group symbol (get symbol 'custom-group))
     (setq type (get symbol 'custom-type))
     (when (eq (car type) 'set)
       ;; backwards compatibility
