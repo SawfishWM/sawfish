@@ -23,6 +23,7 @@
 
     (export decode-modifier
 	    encode-modifier
+	    substitute-wm-modifier
 	    decode-event
 	    encode-event
 	    string->keysym
@@ -74,6 +75,12 @@
 
       (apply + (mapcar (lambda (m)
 			 (cdr (assq m encode-mod-map))) in))))
+
+  (define (substitute-wm-modifier event)
+    (if (/= (logand (cdr event) #x04000000) 0)
+	(cons (car event) (logior (wm-modifier) (logand (cdr event)
+							(lognot #x04000000))))
+      event))
 
   (define (decode-event event)
     "Return a symbol description of the low-level event structure EVENT (a cons

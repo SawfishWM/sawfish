@@ -1,5 +1,13 @@
 2000-12-19  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/util/keymap.jl (where-is,
+	make-memoizing-where-is): use substitute-wm-modifier to avoid
+	showing W- in results
+
+	* sawfish/wm/util/decode-events.jl (substitute-wm-modifier):
+	new function, given an event, replaces the W- bit by whatever
+	it's actually assigned to
+
 	* sawfish/wm/state/gnome.jl (gnome-client-message-handler):
 	handle a _WIN_HINTS client message type, format is similar to
 	_WIN_STATE message
