@@ -1133,7 +1133,6 @@ window_mark_type (void)
 	    rep_MARKVAL(rep_VAL(w));
 	w = w->next;
     }
-    mark_frame_type ();
 }
 
 static void
