@@ -161,4 +161,6 @@
       ((equal "-q" arg)
        (throw 'quit 0))
       (t
-       (load arg)))))
+       (if (file-exists-p arg)
+	   (load arg nil t t)
+	 (load arg))))))
