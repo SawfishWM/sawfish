@@ -26,23 +26,27 @@
   (let*
       ((make-pattern
 	(lambda (def)
-	  (mapcar (lambda (x)
-		    (cond ((stringp x)
-			   (get-color x))
-			  ((and (consp x) (stringp (car x)))
-			   (let
-			       ((img (gaol-eval `(make-image ',(car x)))))
-			     (when img
-			       (mapc (lambda (attr)
-				       (cond
-					((eq (car attr) 'tiled)
-					 (image-put img 'tiled (cdr attr)))
-					((eq (car attr) 'border)
-					 (apply set-image-border
-						img (cdr attr)))))
-				     (cdr x)))
-			     img))))
-		  def)))
+	  (mapcar (lambda (elt)
+		    (let
+			((state (car elt))
+			 (value (cdr elt)))
+		      (cond ((stringp value)
+			     (setq value (get-color value)))
+			    ((and (consp value) (stringp (car value)))
+			     (let
+				 ((img (gaol-eval `(make-image
+						    ',(car value)))))
+			       (when img
+				 (mapc (lambda (attr)
+					 (cond
+					  ((eq (car attr) 'tiled)
+					   (image-put img 'tiled (cdr attr)))
+					  ((eq (car attr) 'border)
+					   (apply set-image-border
+						  img (cdr attr)))))
+				       (cdr value)))
+			       (setq value img))))
+		      (cons state value))) def)))
 
        (loaded-patterns
 	(mapcar (lambda (cell)
