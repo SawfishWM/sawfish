@@ -178,27 +178,29 @@ stackable_window_id (Lisp_Window *w)
 void
 restack_window (Lisp_Window *w)
 {
-    XWindowChanges wc;
-    u_int mask = 0;
-
-    assert (!WINDOW_IS_GONE_P (w));
-    assert (window_in_stacking_list_p (w));
-
-    if (w->above != 0)
+    if (!WINDOW_IS_GONE_P (w))
     {
-	wc.stack_mode = Below;
-	wc.sibling = stackable_window_id (w->above);
-	mask = CWStackMode | CWSibling;
-    }
-    else if (w->below != 0)
-    {
-	wc.stack_mode = Above;
-	wc.sibling = stackable_window_id (w->below);
-	mask = CWStackMode | CWSibling;
-    }
+	XWindowChanges wc;
+	u_int mask = 0;
 
-    if (mask != 0)
-	XConfigureWindow (dpy, stackable_window_id (w), mask, &wc);
+	assert (window_in_stacking_list_p (w));
+
+	if (w->above != 0)
+	{
+	    wc.stack_mode = Below;
+	    wc.sibling = stackable_window_id (w->above);
+	    mask = CWStackMode | CWSibling;
+	}
+	else if (w->below != 0)
+	{
+	    wc.stack_mode = Above;
+	    wc.sibling = stackable_window_id (w->below);
+	    mask = CWStackMode | CWSibling;
+	}
+
+	if (mask != 0)
+	    XConfigureWindow (dpy, stackable_window_id (w), mask, &wc);
+    }
 }
 
 

@@ -2,6 +2,12 @@
 
 	* version 0.37.3
 
+	* windows.c (install_window_frame, remove_window_frame): only
+	do the reparenting if the window hasn't been destroyed
+
+	* stacking-list.c (restack_window): just return immediately if
+	the window has already been destroyed
+
 	* stacking-list.c (window_in_stacking_list_p): new predicate,
 	used to replace the assert_window_[not_]in_stacking_list
 	functions (which have been deleted)

@@ -245,7 +245,7 @@ void
 install_window_frame (Lisp_Window *w)
 {
     DB(("install_window_frame (%s)\n", rep_STR(w->name)));
-    if (!w->reparented && w->frame != 0)
+    if (!w->reparented && w->frame != 0 && !WINDOW_IS_GONE_P (w))
     {
 	XSelectInput (dpy, w->frame, FRAME_EVENTS);
 
@@ -269,7 +269,7 @@ void
 remove_window_frame (Lisp_Window *w)
 {
     DB(("remove_window_frame (%s)\n", rep_STR(w->name)));
-    if (w->reparented)
+    if (w->reparented && !WINDOW_IS_GONE_P (w))
     {
 	/* reparent the subwindow back to the root window */
 
