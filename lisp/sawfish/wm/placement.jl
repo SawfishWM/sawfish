@@ -21,17 +21,23 @@
 
 (provide 'place-window)
 
+(defvar place-window-modes '(random interactive first-fit best-fit
+			     first-fit-or-interactive centered
+			     under-pointer none))
+
 (defcustom place-window-mode 'best-fit
   "Method of selecting the position of a freshly-mapped window."
   :type symbol
-  :options (random interactive first-fit best-fit first-fit-or-interactive centered none)
   :group placement)
+
+(custom-set-property 'place-window-mode ':options place-window-modes)
 
 (defcustom place-transient-mode 'random
   "Method of selecting the position of a freshly-mapped transient window."
   :type symbol
-  :options (random interactive first-fit best-fit first-fit-or-interactive centered none)
   :group placement)
+
+(custom-set-property 'place-transient-mode ':options place-window-modes)
 
 (defcustom ignore-program-positions nil
   "Ignore program-specified window positions."
@@ -70,6 +76,16 @@
       ((dims (window-frame-dimensions w)))
     (move-window-to w (/ (max 0 (- (screen-width) (car dims))) 2)
 		    (/ (max 0 (- (screen-height) (cdr dims))) 2))))
+
+(defun place-window-under-pointer (w)
+  (let
+      ((dims (window-frame-dimensions w))
+       (coords (query-pointer)))
+    (rplaca coords (min (- (screen-width) (car dims))
+			(max 0 (- (car coords) (/ (car dims) 2)))))
+    (rplacd coords (min (- (screen-height) (cdr dims))
+			(max 0 (- (cdr coords) (/ (cdr dims) 2)))))
+    (move-window-to w (car coords) (cdr coords))))
 
 (defun adjust-window-for-gravity (w grav)
   (let
@@ -120,6 +136,7 @@
 (put 'first-fit-or-interactive 'placement-mode
      place-window-first-fit-or-interactive)
 (put 'centered 'placement-mode place-window-centered)
+(put 'under-pointer 'placement-mode place-window-under-pointer)
 (put 'none 'placement-mode nop)
 
 (add-hook 'place-window-hook place-window t)
