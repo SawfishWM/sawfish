@@ -61,6 +61,13 @@
     (when uniconify-whole-group
       (uniconify-group w))))
 
+(defun toggle-window-iconified (w)
+  "Toggle the iconification of window W."
+  (interactive "%W")
+  (if (window-get w 'iconified)
+      (uniconify-window w)
+    (iconify-window w)))
+
 (defun display-window-without-focusing (w &optional preferred-space)
   "Display the workspace/viewport containing the window W."
   (interactive (list (prompt-for-window)))
