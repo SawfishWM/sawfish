@@ -117,7 +117,12 @@
       (setq keys (cdr keys))
       (cond ((eq tem ':widget)
 	     (put group 'custom-group-widget (car keys))))
-      (setq keys (cdr keys)))))
+      (setq keys (cdr keys)))
+    ;; declare a command to customize this group
+    (fset (intern (concat "customize:" (symbol-name group)))
+	  `(lambda ()
+	     (interactive)
+	     (customize ',group)))))
 
 (defun custom-add-to-group (symbol group)
   (let
@@ -135,6 +140,16 @@
   (set symbol value)
   (when (get symbol 'custom-after-set)
     (funcall (get symbol 'custom-after-set) symbol)))
+
+(defun custom-menu ()
+  (list*
+   '("All settings" customize)
+   '()
+   (mapcar #'(lambda (group-list)
+	       (list (or (get (car group-list) 'custom-group-doc)
+			 (symbol-name (car group-list)))
+		     `(lambda ()
+			(customize ',(car group-list))))) custom-groups)))
 
 
 ;; support for font and color primitive types
