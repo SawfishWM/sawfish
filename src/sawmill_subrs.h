@@ -278,6 +278,7 @@ extern repv Fset_input_focus (repv win);
 extern repv Finput_focus (void);
 extern repv Fwindow_wants_input_p (repv win);
 extern repv Fmanaged_windows (void);
+extern repv Fget_window_by_id (repv id);
 extern repv Fstacking_order (void);
 extern repv Fwindow_visibility (repv win);
 extern repv Fwindow_transient_p (repv win);
