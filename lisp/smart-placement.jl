@@ -42,7 +42,7 @@
 
 ;; options/variables
 
-(defvar sp-avoided-windows-weight 10)
+(defvar sp-avoided-windows-weight 100)
 (defvar sp-normal-windows-weight 1)
 
 (defcustom sp-padding 4
