@@ -1,20 +1,22 @@
+# translation of sawfish.HEAD.sk.po to Slovak
 # translation of sk.po to Slovak
 # sawfish Slovak translation
-# Copyright (C) 2000-2002 Free Software Foundation, Inc.
+# Copyright (C) 2000-2002,2003 Free Software Foundation, Inc.
 # Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2000-2002.
 # Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>, 2002
+# Stanislav Visnovsky <visnovsky@kde.org>, 2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sk\n"
-"POT-Creation-Date: 2002-11-02 23:33-0800\n"
-"PO-Revision-Date: 2002-11-04 18:31+0100\n"
-"Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
-"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"Project-Id-Version: sawfish.HEAD.sk\n"
+"POT-Creation-Date: 2003-01-12 12:11-0800\n"
+"PO-Revision-Date: 2003-01-23 23:55+0100\n"
+"Last-Translator: Stanislav Visnovsky <visnovsky@kde.org>\n"
+"Language-Team: Slovak <sk-i18n@linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0\n"
+"X-Generator: KBabel 1.2\n"
 
 #. ../scripts/sawfish-about.jl
 msgid "and many others..."
@@ -338,8 +340,8 @@ msgid "Sawfish Error"
 msgstr "Chyba Sawfish"
 
 #. ../lisp/sawfish/ui/shell.jl
-msgid "Sawfish configurator"
-msgstr "Nastavenie sawfish"
+msgid "Sawfish Configurator"
+msgstr "Nastavenie Sawfish"
 
 #. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
 #. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
@@ -377,7 +379,7 @@ msgid "Select Icon"
 msgstr "Vyberte ikonu"
 
 #. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Edit binding"
+msgid "Edit Binding"
 msgstr "Upraviť skratku"
 
 #. ../lisp/sawfish/ui/widgets/keymap.jl
@@ -397,7 +399,7 @@ msgid "not"
 msgstr "nie"
 
 #. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match window properties"
+msgid "Match Window Properties"
 msgstr "Porovnať vlastnosti okna"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -453,12 +455,10 @@ msgstr "Sekvencia príkazov"
 msgid "Invoke the list of commands, one by one."
 msgstr "Vykonať zoznam príkazov, jeden po druhom."
 
-#. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Quit"
 msgstr "Koniec"
 
-#. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Restart"
 msgstr "Reštartovať"
@@ -808,6 +808,14 @@ msgid "_About Sawfish..."
 msgstr "O _Sawfish..."
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "_Restart"
+msgstr "_Reštartovať"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Quit"
+msgstr "_Koniec"
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup window menu"
 msgstr "Kontextové menu okna"
 
@@ -832,8 +840,8 @@ msgid "Display the applications menu."
 msgstr "Zobraziť menu aplikácií."
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "All settings"
-msgstr "Všetky nastavenia"
+msgid "_All settings"
+msgstr "_Všetky nastavenia"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
@@ -1052,18 +1060,17 @@ msgstr "Vynútiť si jednoznačný titulok okna."
 msgid "Workspace names"
 msgstr "Mená pracovných priestorov"
 
-#. ../lisp/sawfish/wm/util/compat.jl
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace"
-msgstr "Vložiť plochu"
+msgid "_Insert workspace"
+msgstr "_Vložiť plochu"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Select next workspace"
-msgstr "Vybrať nasledujúcu plochu"
+msgid "Select _next workspace"
+msgstr "Vybrať _nasledujúcu plochu"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Select previous workspace"
-msgstr "Vybrať predchádzajúcu plochu"
+msgid "Select _previous workspace"
+msgstr "Vybrať _predchádzajúcu plochu"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with next"
@@ -1074,12 +1081,12 @@ msgid "Merge with previous"
 msgstr "Spojiť s predchádzajúcou"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace right"
-msgstr "Presunúť plochu doprava"
+msgid "Move workspace _right"
+msgstr "Presunúť plochu do_prava"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace left"
-msgstr "Presunúť plochu doľava"
+msgid "Move workspace _left"
+msgstr "Presunúť plochu doľa_va"
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, c-format
@@ -2849,6 +2856,10 @@ msgstr ""
 "Ak je okno úplne vpredu, presunúť ho úplne dozadu na najnižšiu povolenú\n"
 "pozíciu. Inak ho presunúť čo najviac dopredu. Spolu s ním presúvať aj jeho\n"
 "podriadené okná."
+
+#. ../lisp/sawfish/wm/util/compat.jl
+msgid "Insert workspace"
+msgstr "Vložiť plochu"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Unshade selected windows."
