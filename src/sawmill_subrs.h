@@ -151,7 +151,11 @@ extern repv Fcreate_window (repv parent, repv x, repv y,
 			    repv width, repv height);
 extern repv Fx_atom (repv symbol);
 extern repv Fx_atom_name (repv atom);
+extern Window message_win;
+extern void refresh_message_window (void);
+extern repv Fshow_message (repv text, repv font, repv fg, repv bg);
 extern void functions_init (void);
+extern void functions_kill (void);
 
 /* from images.c */
 extern int image_type;

@@ -23,7 +23,6 @@
 
 ;; todo:
 ;;  * obey the aspect ratio size hints
-;;  * resize has truly bizarre behaviour
 
 ;;;###autoload (setq custom-required (cons 'move-resize custom-required))
 

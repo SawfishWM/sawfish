@@ -25,17 +25,13 @@
   "Color of inactive frames in `simple' frame style."
   :type color
   :group simple
-  :after-set  (lambda ()
-	       (when always-update-frames
-		 (reframe-all-windows))))
+  :after-set after-setting-frame-option)
 
 (defcustom simple-active-color "goldenrod"
   "Color of active frames in `simple' frame style."
   :type color
   :group simple
-  :after-set  (lambda ()
-	       (when always-update-frames
-		 (reframe-all-windows))))
+  :after-set after-setting-frame-option)
 
 ;; 15x15
 (defvar simple-minimize (list (make-image "as_min.png")
