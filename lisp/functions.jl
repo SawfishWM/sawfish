@@ -32,7 +32,7 @@
   :type string
   :allow-nil t)
 
-(defvar dont-avoid-ignored nil)
+(defvar dont-avoid-ignored t)
 (defvar avoid-by-default nil)
 
 (defvar xterm-program "xterm")
