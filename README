@@ -103,6 +103,12 @@ In the iconify button:
 	Button1		iconify-window
 	Button3		popup-window-menu
 
+In the maximize button:
+
+	Button1		maximize-window-toggle
+	Button2		maximize-window-verically-toggle
+	Button3		maximize-window-horizontally-toggle
+
 In any managed window:
 
 	C-M-Up		raise-window
@@ -144,10 +150,14 @@ The list of hooks currently called is:
 	visibility-notify-hook	window in question
 	map-notify-hook
 	unmap-notify-hook
+	reparent-notify-hook
 	enter-notify-hook
 	leave-notify-hook
 	focus-in-hook
 	focus-out-hook
+
+	property-notify-hook	called with (WINDOW ATOM TYPE)
+				 where type is `new-value' or `deleted'
 
 	client-message-hook	called with (WINDOW TYPE DATA-ARRAY)
 

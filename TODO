@@ -19,11 +19,16 @@ Outstanding bugs
   ! Sometimes switching workspaces gives me an error about a nil arg,
     doesn't seem to make any difference though
 
+  ! raise-lower-window doesn't recognize that a window is at the top of
+    the stack if it's overlapping the edge of the screen
+
 
 General tasks
 =============
 
-  + Add property-notify-hook
+  + Add checked and radio menu item support
+
+  + Display window position/size when moving/resizing
 
   + Smart placement
 
@@ -56,7 +61,7 @@ General tasks
 
     Currently event proxying and the pager hints are implemented.
     Add support for the various window state operations.. (currently
-    only the sticky attribute is supported)
+    only the sticky, maximize, and layer attributes are supported)
 
   + Support MWM hints
 

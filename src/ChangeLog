@@ -1,5 +1,29 @@
 1999-08-26  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill.h (struct frame_part): added `highlighted' and
+	`pending_refresh' bits
+
+	* events.c: handle highlighting frame parts, and temporarily
+	unclicking parts when the mouse leaves them. If the
+	ButtonRelease occurs when the mouse isn't in the part, the
+	context-map is ignored
+
+	* frames.c: the background/foreground attributes are now
+	(NORMAL FOCUSED HIGHLIGHTED CLICKED) (note addition of
+	highlighted class, displayed when the mouse is in the part)
+	(Vframe_draw_mutex): when t no frame parts are redrawn
+
+	* events.c (Qproperty_notify_hook, Qreparent_notify_hook): new
+	hooks
+	(get_event_mask): new function, returns an event mask that
+	would select a specified type of event
+
+	* keys.c (Fproxy_current_event): allow event_mask and propagate
+	args to XSendEvent to be specified
+
+	* frames.c (refresh_frame_part): new function, draws both
+	background and foreground
+
 	* sawmill-ui.jl (build-set): sets can now be displayed as
 	option menus, clists, as well as the old radio buttons,
 	controlled by the ui-set-style var, or the :widget key

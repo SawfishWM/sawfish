@@ -11,6 +11,20 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item Frame parts can now be highlighted when the mouse is over them,
+also they ``un-click'' and ``re-click'' as the pointer leaves and
+re-enters their window. ButtonRelease bindings are only activated when
+the mouse is in the window at the time
+
+@item Configurator changes: use a paned widget to separate the list of
+groups from the settings (stops their relative sizes changing), allow
+each group to be customized separately, either through a new set of
+root-submenus or the commands @code{customize:@var{group}} for each
+@var{group}.
+
+@item New commands @code{select-workspace:@var{X}} for @var{X} between
+1 and 9
+
 @item Support multiple depths, or layers, of windows
 
 @item It's now possible to move the current workspace up or down the
@@ -19,16 +33,16 @@ list of all workspaces
 @item New option @samp{-c COMMAND} to @code{sawmill-client}; invokes
 the named interactive function
 
-@item Configurator changes: use a paned widget to separate the list of
-groups from the settings (stops their relative sizes changing), allow
-each group to be customized separately, either through a new set of
-root-submenus or the commands @code{customize:@var{group}} for each
-@var{group}.
-
 @item When an app asks for no title and no border, give it what it
 wants---use the new @code{unframed} window type
 
-@item The maximize button works now
+@item The maximize button works
+
+@item Option to control placement of transient windows
+(@code{place-transient-mode})
+
+@item Changing the frame style preserves the original window stacking
+order
 
 @item Fix bug of evaluating both KeyPress @emph{and} KeyRelease events
 
@@ -36,6 +50,14 @@ wants---use the new @code{unframed} window type
 big
 
 @item Fix bug where already-handled BadWindow errors were being reported
+
+@item Fix bug where the @code{window-ops-menu} could be displayed from
+one window but then affect a different window
+
+@item Fix bug where click-to-focus doesn't work for new windows
+
+@item Fix bug where deleting the last workspace selected the first, not
+the new last workspace
 
 @end itemize
 

@@ -1,5 +1,21 @@
 1999-08-26  John Harper  <john@dcs.warwick.ac.uk>
 
+	* move-resize.jl: set frame-draw-mutex to t whilst
+	rubber-banding windows
+
+	* themes/simple.jl, themes/brushed-metal.jl,
+	themes/absolute-e.jl: reorder image definitions
+
+	* workspace.jl: define commands `select-workspace:X' for 1 <= X
+	<= 9
+
+	* stacking.jl (auto-depth-alist): match window names to depths
+
+	* focus.jl: add the click-to-focus keymap to new windows
+
+	* menus.jl: record the input focus when starting a menu, then
+	restore it afterwards
+
 	* place-window.jl (place-transient-mode): new variable
 
 	* customize.jl (customize-symbol-spec): propagate the :widget
