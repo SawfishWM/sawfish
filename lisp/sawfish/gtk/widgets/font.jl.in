@@ -34,6 +34,9 @@
   (define use-xft (let ((x (getenv "GDK_USE_XFT")))
 		    (or (not x) (/= (string->number x) 0))))
 
+  ;; defined by configure
+  (define have-pango-xft (eq '@have_pango_xft@ 'yes))
+
   (define default-font (if use-xft "Sans" "fixed"))
 
   (define (make-font-item changed-callback)
@@ -89,7 +92,10 @@
 		   (let* ((pango-name (gtk-entry-get-text entry))
 			  (face (pango-description->face pango-name)))
 		     (cond ((not face) nil)
-			   (use-xft (cons "Xft" (face->xft-description face)))
+			   (use-xft
+			    (if have-pango-xft
+				(cons "Pango" (face->pango-description face))
+			      (cons "Xft" (face->xft-description face))))
 			   (t (cons "xlfd" (face->xlfd-description face)))))))
 	  ((gtk-widget) box)
 	  ((validp) (lambda (x) (stringp x)))))))
