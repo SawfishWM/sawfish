@@ -1009,6 +1009,23 @@ window_event_handler (Window w)
 
 /* Event loop */
 
+static repv
+inner_handle_input (repv arg)
+{
+    XEvent *ev = (XEvent *) rep_PTR (arg);
+
+    void (*handler)(XEvent *) = window_event_handler (ev->xany.window);
+    if (handler != 0)
+	(*handler) (ev);
+    else if (ev->type < LASTEvent && event_handlers[ev->type] != 0)
+	event_handlers[ev->type] (ev);
+    else if (ev->type == shape_event_base + ShapeNotify)
+	shape_notify (ev);
+    else
+	fprintf (stderr, "warning: unhandled event: %d\n", ev->type);
+    return Qnil;
+}
+
 /* Handle all available X events matching event mask MASK. Or any events
    if MASK is zero. */
 void
@@ -1020,7 +1037,6 @@ handle_input_mask(long mask)
 	XEvent xev, *old_current_event = current_x_event;
 	repv old_current_window = current_event_window;
 	rep_GC_root gc_old_current_window;
-	void (*handler)(XEvent *);
 
 	if (mask == 0)
 	{
@@ -1051,15 +1067,14 @@ handle_input_mask(long mask)
 	current_event_window = rep_NULL;
 
 	rep_PUSHGC(gc_old_current_window, old_current_window);
-	handler = window_event_handler (xev.xany.window);
-	if (handler != 0)
-	    (*handler) (&xev);
-	else if (xev.type < LASTEvent && event_handlers[xev.type] != 0)
-	    event_handlers[xev.type] (&xev);
-	else if (xev.type == shape_event_base + ShapeNotify)
-	    shape_notify (&xev);
-	else
-	    fprintf (stderr, "warning: unhandled event: %d\n", xev.type);
+
+#if rep_INTERFACE >= 8
+	rep_call_with_barrier (inner_handle_input, rep_VAL (&xev),
+			       rep_TRUE, 0, 0, 0);
+#else
+	inner_handle_input (rep_VAL (&xev));
+#endif
+
 	rep_POPGC;
 
 	current_x_event = old_current_event;
