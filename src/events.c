@@ -946,10 +946,10 @@ get_server_timestamp (void)
 
     /* XXX There must be an easier method.. */
     while (XCheckWindowEvent (dpy, w, PropertyChangeMask, &ev)) ;
-    XSelectInput (dpy, w, PropertyChangeMask);
+    XSelectInput (dpy, w, PropertyChangeMask | KeyPressMask);
     XChangeProperty (dpy, w, xa_sawmill_timestamp,
 		     XA_STRING, 8, PropModeReplace, "foo", 3);
-    XSelectInput (dpy, w, 0);
+    XSelectInput (dpy, w, KeyPressMask);
     XWindowEvent (dpy, w, PropertyChangeMask, &ev);
 
     return ev.xproperty.time;
