@@ -70,8 +70,6 @@
 
 ;;; slot creation, data structure mgmt
 
-  (define (get-key lst key) (cadr (memq key lst)))
-
   (define (slot-dependences slot)
     (table-ref dependence-table (slot-name slot)))
 
@@ -92,30 +90,26 @@
     (call-hook '*nokogiri-slot-changed-hook* (list slot))
     (update-dependences slot))
 
-  (define (make-slot-widget slot data)
-    (let* ((doc (get-key data ':doc))
-	   (spec (get-key data ':spec))
-	   (callback (lambda () (slot-changed slot)))
-	   (type (or (car spec) spec)))
-      (if (widget-accepts-doc-string-p type)
-	  (slot-widget-set slot (make-widget spec callback doc))
-	(slot-doc-set slot doc)
-	(slot-widget-set slot (make-widget spec callback)))))
-
   (define (slot-gtk-widget slot) (widget-gtk-widget (slot-widget slot)))
 
-  (define (make-slot data)
-    (let ((slot (create-slot (get-key data ':name)
-			     (or (get-key data ':user-level)
-				 default-user-level)
-			     (get-key data ':value)))
-	  (dep (get-key data ':depends)))
+  (define (make-slot #!key name value type doc depends
+		     (user-level default-user-level))
+    (let ((slot (create-slot name user-level value)))
       (table-set slot-table (slot-name slot) slot)
-      (when dep
-	(table-set dependence-table dep
-		   (cons slot (table-ref dependence-table dep))))
-      (make-slot-widget slot data)
+
+      ;; install dependendences
+      (when depends
+	(table-set dependence-table depends
+		   (cons slot (table-ref dependence-table depends))))
+
+      ;; create the widget
+      (let* ((callback (lambda () (slot-changed slot))))
+	(if (widget-accepts-doc-string-p (or (car type) type))
+	    (slot-widget-set slot (make-widget type callback doc))
+	  (slot-doc-set slot doc)
+	  (slot-widget-set slot (make-widget type callback))))
       (widget-set (slot-widget slot) (slot-old-value slot))
+
       slot))
 
   (define (get-slot name) (table-ref slot-table name))
@@ -123,7 +117,7 @@
 
   ;; Return a list of slots for variables NAMES. Will load the data
   ;; from the WM if not already cached
-  (define (fetch-slots group-name names)
+  (define (fetch-slots names)
     ;; don't want to request one slot at a time from wm..
 
     ;; SLOTS is a list of slots matching NAMES, or nil if the slot
@@ -134,7 +128,7 @@
 	(if (null rest)
 	    slots
 	  (when (null (car rest))
-	    (rplaca rest (make-slot (car extra)))
+	    (rplaca rest (apply make-slot (car extra)))
 	    (setq extra (cdr extra)))
 	  (loop (cdr rest)))))
 
