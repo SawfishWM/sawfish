@@ -401,8 +401,8 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 
 	    if (mask != 0)
 	    {
-		int width = image_width (image);
-		int height = image_height (image);
+		int width = !tiled ? fp->width : image_width (image);
+		int height = !tiled ? fp->height : image_height (image);
 		int x_off = fp->x - w->frame_x;
 		int y_off = fp->y - w->frame_y;
 
