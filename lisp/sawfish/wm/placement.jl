@@ -86,7 +86,7 @@
 	(funcall (or (get mode 'placement-mode) 'place-window-randomly) w)
 	t))))
 
-(put 'interactive 'placement-mode 'place-window-interactive)
+(put 'interactive 'placement-mode 'place-window-interactively)
 (put 'random 'placement-mode 'place-window-randomly)
 (put 'first-fit 'placement-mode 'place-window-first-fit)
 (put 'best-fit 'placement-mode 'place-window-best-fit)
