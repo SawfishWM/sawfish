@@ -192,7 +192,8 @@
       ((inner-fun
 	(lambda (group parent)
 	  (if (null group)
-	      (unless (assq (car cell) (cddr parent))
+	      (unless (or (memq cell (cddr parent))
+			  (assq (car cell) (cddr parent)))
 		;; reached the bottom most group
 		(rplacd (cdr parent) (nconc (cddr parent) (list cell))))
 	    ;; keep on recursing
