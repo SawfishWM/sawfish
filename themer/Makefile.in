@@ -26,7 +26,9 @@ top_srcdir=@top_srcdir@
 srcdir=@srcdir@
 VPATH=@top_srcdir@/src:.
 
-SUBSTS := -e "s|__version__|$(version)|" -e "s|__sawmilldir__|$(sawmilldir)|" 
+SUBSTS := -e "s|__version__|$(version)|" \
+	  -e "s|__sawmilldir__|$(sawmilldir)|" \
+	  -e "s|__locale_dir__|$(localedir)|"
 
 all : themer.jlc
 
