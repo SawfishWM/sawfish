@@ -21,7 +21,10 @@
 
 include ../Makedefs
 
+top_builddir=..
 top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+VPATH=@srcdir@:@top_srcdir@
 
 sitethemedir := ${sawfishdir}/themes
 themedir := ${sawfishdir}/${version}/themes
@@ -45,16 +48,15 @@ install : all installdirs
 	for d in $(THEMES); do \
 	  rm -rf $(DESTDIR)$(themedir)/$$d; \
 	  mkdir $(DESTDIR)$(themedir)/$$d; \
-	  for f in $$d/*; do \
-	    if [ $$f != $$d/CVS ]; then \
+	  for f in $(srcdir)/$$d/*; do \
+	    if [ $$f != $(srcdir)/$$d/CVS ]; then \
 	      $(INSTALL_DATA) $$f $(DESTDIR)$(themedir)/$$d; \
 	    fi \
 	  done \
 	done
 
-installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs \
-	  $(DESTDIR)$(themedir) $(DESTDIR)$(sitethemedir)
+installdirs : mkinstalldirs
+	$(SHELL) $< $(DESTDIR)$(themedir) $(DESTDIR)$(sitethemedir)
 
 uninstall :
 	for d in $(THEMES); do \
@@ -63,7 +65,7 @@ uninstall :
 
 clean :
 	for d in $(THEMES); do \
-	  rm -f $$d/*.jlc $$d/*~; \
+	  rm -f $(srcdir)$$d/*.jlc $(srcdir)/$$d/*~; \
 	done
 	rm -f *.jlc *.jld *~
 

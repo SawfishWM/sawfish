@@ -24,7 +24,7 @@ include ../Makedefs
 top_builddir=..
 top_srcdir=@top_srcdir@
 srcdir=@srcdir@
-VPATH=@top_srcdir@/src:.
+VPATH=@srcdir@:@top_srcdir@
 
 SUBSTS := -e "s|__version__|$(version)|" \
 	  -e "s|__sawfishdir__|$(sawfishdir)|" \
@@ -40,14 +40,14 @@ themer.jl : themer.in ../Makedefs
 
 install : all installdirs
 	$(INSTALL_SCRIPT) themer.jlc $(DESTDIR)$(bindir)/sawfish-themer
-	$(INSTALL_DATA) themer.glade $(DESTDIR)$(sawfishdir)/$(version)
+	$(INSTALL_DATA) $(srcdir)/themer.glade $(DESTDIR)$(sawfishdir)/$(version)
 
 uninstall :
 	rm -f $(DESTDIR)${bindir}/sawfish-themer
+	rm -f $(DESTDIR)$(sawfishdir)/$(version)/themer.glade
 
-installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir) \
-	  $(DESTDIR)$(sawfishdir)/$(version)
+installdirs : mkinstalldirs
+	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishdir)/$(version)
 
 clean :
 	rm -f *~ themer.jl *.jlc *.bak core

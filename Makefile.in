@@ -22,6 +22,8 @@ include ./Makedefs
 
 top_builddir=.
 top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+VPATH=@srcdir@
 
 SUBDIRS = @SUBDIRS@
 
@@ -46,18 +48,17 @@ install : all installdirs
 	done
 	if [ -d $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties ]; then \
 	  rm -f $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties/Sawmill.desktop; \
-	  $(INSTALL_DATA) Sawfish.desktop $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties; \
+	  $(INSTALL_DATA) $(srcdir)/Sawfish.desktop $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties; \
 	fi
 	-set -e; for f in $(OLD_BINARIES); do \
 	  if [ -x $(DESTDIR)$(bindir)/$$f ]; then \
 	    rm -f $(DESTDIR)$(bindir)/$$f; \
-	    $(INSTALL_SCRIPT) moved $(DESTDIR)$(bindir)/$$f; \
+	    $(INSTALL_SCRIPT) $(srcdir)/moved $(DESTDIR)$(bindir)/$$f; \
 	  fi \
 	done
 
-installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs \
-	  $(DESTDIR)$(sawfishdir)/$(version) \
+installdirs : mkinstalldirs
+	$(SHELL) $< $(DESTDIR)$(sawfishdir)/$(version) \
 	  $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir)
 
 uninstall :
@@ -67,7 +68,7 @@ uninstall :
 	rm -rf $(DESTDIR)$(sawfishdir)/$(version)
 
 DOC :
-	repdoc DOC `find . -name '*.c' -print`
+	repdoc DOC `find $(srcdir) -name '*.c' -print`
 
 NEWS : man/news.texi
 	(cd man && $(MAKE) ../NEWS )
@@ -91,7 +92,7 @@ realclean :
 distclean : realclean
 
 TAGS :
-	etags --language=c `find . -name '*.[ch]' -print` \
-	      --language=lisp `find . -name '*.jl' -print`
+	etags --language=c `find $(srcdir) -name '*.[ch]' -print` \
+	      --language=lisp `find $(srcdir) -name '*.jl' -print`
 
-.PHONY: install uninstall tar nobak clean realclean distclean TAGS
+.PHONY: install uninstall tar clean realclean distclean TAGS

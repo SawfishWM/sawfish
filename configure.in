@@ -344,7 +344,7 @@ AC_ARG_ENABLE(linguas,
   [ LINGUAS="$enableval" ], [ LINGUAS="" ])
 if test "x$LINGUAS" = x; then
   changequote({,})
-  LINGUAS="`echo po/*.po | sed -e 's/po\/\([^ ]*\)\.po/\1/g'`"
+  LINGUAS="`echo $srcdir/po/*.po | sed -e 's/[^ ]*\/po\/\([^ ]*\)\.po/\1/g'`"
   changequote([,])
 fi
 dnl too gross for words..

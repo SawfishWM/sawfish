@@ -24,7 +24,7 @@ include ../Makedefs
 top_builddir=..
 top_srcdir=@top_srcdir@
 srcdir=@srcdir@
-VPATH=@top_srcdir@/src:.
+VPATH=@srcdir@:@top_srcdir@
 
 SRCS :=	colors.c commands.c cursors.c display.c events.c fonts.c frames.c \
 	functions.c images.c keys.c main.c pixmap-cache.c server.c \
@@ -79,9 +79,8 @@ uninstall :
 	done
 	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-menu
 
-installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir) \
-	  $(DESTDIR)$(sawfishexecdir)
+installdirs : mkinstalldirs
+	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir)
 
 clean :
 	rm -f *~ *.o *.lo *.la *.jlc build.h core

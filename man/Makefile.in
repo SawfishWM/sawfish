@@ -20,9 +20,10 @@
 
 include ../Makedefs
 
+top_builddir=..
 top_srcdir=@top_srcdir@
 srcdir=@srcdir@
-VPATH=@srcdir@
+VPATH=@srcdir@:@top_srcdir@
 
 SRCS = sawmill.texi news.texi faq.texi
 
@@ -43,10 +44,10 @@ all : sawfish.info ../NEWS
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-validate --no-headers $< -o ../FAQ
 
 sawfish.info : $(SRCS)
-	$(MAKEINFO) $(MAKEINFOFLAGS) $< -o sawfish.info
+	$(MAKEINFO) $(MAKEINFOFLAGS) -I $(srcdir) $< -o sawfish.info
 
 sawfish.dvi : $(SRCS)
-	$(TEXI2DVI) $<
+	$(TEXI2DVI) -I $(srcdir) $<
 
 sawfish.ps : sawfish.dvi
 	$(DVIPS) -f <sawfish.dvi >sawfish.ps
@@ -59,8 +60,8 @@ install : sawfish.info installdirs
 	done
 	-install-info sawfish.info $(DESTDIR)$(infodir)/dir
 
-installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(infodir)
+installdirs : mkinstalldirs
+	$(SHELL) $< $(DESTDIR)$(infodir)
 
 uninstall :
 	rm -f $(DESTDIR)$(infodir)/sawfish.info*

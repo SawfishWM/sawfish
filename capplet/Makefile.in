@@ -1,5 +1,5 @@
 # Makefile.in -- input for the capplet directory's Makefile
-# $Id: Makefile.in,v 1.13 2000/04/26 19:12:29 john Exp $
+# $Id: Makefile.in,v 1.14 2000/07/01 14:46:29 john Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -24,7 +24,7 @@ include ../Makedefs
 top_builddir=..
 top_srcdir=@top_srcdir@
 srcdir=@srcdir@
-VPATH=@top_srcdir@/src:.
+VPATH=@srcdir@:@top_srcdir@
 
 override CFLAGS += $(GNOME_CC_CFLAGS)
 override LIBS += $(GNOME_CC_LIBS)
@@ -45,20 +45,20 @@ install : all installdirs
 	rm -rf $(DESTDIR)$(G_CC_DIR)/Sawfish
 	rm -rf $(DESTDIR)$(G_CC_DIR)/Sawmill
 	mkdir $(DESTDIR)$(G_CC_DIR)/Sawfish
-	$(INSTALL_DATA) desktop-entries/.directory $(DESTDIR)$(G_CC_DIR)/Sawfish/
-	$(INSTALL_DATA) desktop-entries/.order $(DESTDIR)$(G_CC_DIR)/Sawfish/
-	for f in desktop-entries/*.desktop; do \
+	$(INSTALL_DATA) $(srcdir)/desktop-entries/.directory $(DESTDIR)$(G_CC_DIR)/Sawfish/
+	$(INSTALL_DATA) $(srcdir)/desktop-entries/.order $(DESTDIR)$(G_CC_DIR)/Sawfish/
+	for f in $(srcdir)/desktop-entries/*.desktop; do \
 	  $(INSTALL_DATA) $$f $(DESTDIR)$(G_CC_DIR)/Sawfish/; \
 	done
 	rm -rf $(DESTDIR)$(G_MENU_DIR)/Sawfish
 	rm -rf $(DESTDIR)$(G_MENU_DIR)/Sawmill
 	mkdir $(DESTDIR)$(G_MENU_DIR)/Sawfish
-	$(INSTALL_DATA) desktop-entries/.directory $(DESTDIR)$(G_MENU_DIR)/Sawfish/
-	$(INSTALL_DATA) desktop-entries/.order $(DESTDIR)$(G_MENU_DIR)/Sawfish/
-	for f in desktop-entries/*.desktop; do \
+	$(INSTALL_DATA) $(srcdir)/desktop-entries/.directory $(DESTDIR)$(G_MENU_DIR)/Sawfish/
+	$(INSTALL_DATA) $(srcdir)/desktop-entries/.order $(DESTDIR)$(G_MENU_DIR)/Sawfish/
+	for f in $(srcdir)/desktop-entries/*.desktop; do \
 	  $(INSTALL_DATA) $$f $(DESTDIR)$(G_MENU_DIR)/Sawfish/; \
 	done
-	for f in icons/*.png; do \
+	for f in $(srcdir)/icons/*.png; do \
 	  $(INSTALL_DATA) $$f $(DESTDIR)$(G_PIXMAP_DIR); \
 	done
 

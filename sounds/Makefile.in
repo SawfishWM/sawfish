@@ -21,9 +21,10 @@
 
 include ../Makedefs
 
+top_builddir=..
 top_srcdir=@top_srcdir@
-
-INSTALL_FILES := *.wav
+srcdir=@srcdir@
+VPATH=@srcdir@:@top_srcdir@
 
 sitesoundsdir := ${sawfishdir}/sounds
 soundsdir := ${sawfishdir}/${version}/sounds
@@ -31,18 +32,15 @@ soundsdir := ${sawfishdir}/${version}/sounds
 all :
 
 install : all installdirs
-	for f in $(INSTALL_FILES); do \
-	  $(INSTALL_DATA) $$f $(DESTDIR)$(soundsdir)/$$f; \
+	for f in $(srcdir)/*.wav; do \
+	  $(INSTALL_DATA) $$f $(DESTDIR)$(soundsdir); \
 	done
 
-installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs \
-	  $(DESTDIR)$(soundsdir) $(DESTDIR)$(sitesoundsdir)
+installdirs : mkinstalldirs
+	$(SHELL) $< $(DESTDIR)$(soundsdir) $(DESTDIR)$(sitesoundsdir)
 
 uninstall :
-	for f in $(INSTALL_FILES); do \
-	  rm -f $(DESTDIR)$(soundsdir)/$$f; \
-	done
+	rm -f $(DESTDIR)$(soundsdir)
 
 clean :
 	rm -f *~ core
