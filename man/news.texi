@@ -7,6 +7,58 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
 
+@heading 0.38
+
+@itemize @bullet
+
+@item Translation updates: gl (Jesus Bravo Alvarez), sv (Martin
+Norbäck), de (Matthias Warkus, Christian Meyer), ru (Vlad Harchev), es
+(Joseba García Etxebarria), pl (Daniel Koc), fi (Antti Ahvensalmi), sk
+(Stanislav Visnovsky), az (Pablo Saratxaga), cz (Stanislav Brabec), no
+(Kjartan Maraas), el (Simos Xenitellis), it (Michele Campeotto), fr
+(Christian Marillat), ro (Marius Andreiana), ko (?)
+
+Extract some more translatable strings (Vlad Harchev)
+
+@item @code{Crux} theme now has an extra button mode: @code{Default},
+like Mac OS Platinum but also has an iconify button. Used by default
+
+@item The @code{grow-pack} module now works with windows which specify
+increments (Kai Großjohann)
+
+@item New command @code{kill-client}
+
+@item Fixed bugs:
+
+@itemize @minus
+
+@item Don't return a null pointer when no default cursor has been set,
+return @code{nil} instead
+
+@item Avoid triggering assertions in the stacking list code when
+raising or lowering windows and the given sibling has been destroyed
+
+@item Turned off the annoying code that beeps and prints a message when
+unfocusable windows are detected
+
+@item The GNOME hints now listen for the @code{_WIN_WORKSPACE} property
+changing and will move the window in response
+
+@item Don't forget maximized state of windows when they're moved, only
+if they're resized
+
+@item Don't show special cursors when moving or resizing windows, or
+when hovering over the title bar
+
+@item Corrected off-by-one error in `smart' placement modes
+
+@item Identified and fixed some problems in the new GNOME/KDE window
+manager hints implementation (Rob Hodges, me)
+
+@end itemize
+@end itemize
+
+
 @heading 0.37
 
 @itemize @bullet
