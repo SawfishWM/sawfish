@@ -16,7 +16,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id$
+   $Id: theme.jl,v 1.1 2001/01/20 02:40:30 jsh Exp $
 
    Authors: John Harper <jsh@eazel.com>
 |#
@@ -42,8 +42,8 @@
 
 (defcustom Crux:button-theme 'windows
   "Display title buttons to mimic: \\w"
-  :type (choice (platinum "MacOS Platinum")
-		(macos-x "MacOS X")
+  :type (choice (platinum "Mac OS Platinum")
+		(macos-x "Mac OS X")
 		(windows "MS Windows")
 		(next "NeXTSTEP"))
   :group (appearance Crux)
