@@ -60,7 +60,7 @@
 			    last (beautify-keymap-name (slot-name slot)))))
 	      (gtk-menu-shell-append menu button)
 	      (gtk-widget-show button)
-	      (gtk-signal-connect button "toggled"
+	      (g-signal-connect button "toggled"
 				  (lambda (w)
 				    (when (gtk-check-menu-item-active w)
 				      (when active

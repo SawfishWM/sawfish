@@ -58,7 +58,7 @@
       (when value
 	(gtk-entry-set-text (gtk-combo-entry combo) (symbol-name value)))
 
-      (gtk-signal-connect (gtk-combo-entry combo) "changed"
+      (g-signal-connect (gtk-combo-entry combo) "changed"
 			  (lambda ()
 			    (setq value (intern (gtk-entry-get-text
 						 (gtk-combo-entry combo))))

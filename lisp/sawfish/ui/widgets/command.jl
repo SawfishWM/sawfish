@@ -94,7 +94,7 @@
       (mapc (lambda (c)
 	      (gtk-clist-append clist (command-item c))) commands)
 
-      (gtk-signal-connect clist "select_row"
+      (g-signal-connect clist "select_row"
 			  (lambda (w row col)
 			    (declare (unused w col))
 			    (setq selection row)
@@ -103,7 +103,7 @@
 			    (call-callback changed)))
 
       ;; seems you have to `moveto' _after_ the widget is realized..
-      (gtk-signal-connect clist "map"
+      (g-signal-connect clist "map"
 			  (lambda ()
 			    (gtk-clist-moveto clist selection 0)))
 

@@ -57,7 +57,7 @@
 	  (gtk-table-attach-defaults table combo 0 1 i (1+ i))
 	  (gtk-table-attach-defaults table entry 1 2 i (1+ i))
 	  (gtk-table-attach-defaults table button 2 3 i (1+ i))
-	  (gtk-signal-connect button "clicked"
+	  (g-signal-connect button "clicked"
 	   (lambda ()
 	     (let* ((string (gtk-entry-get-text (gtk-combo-entry combo)))
 		    (x-prop (and string (car (rassoc string

@@ -39,8 +39,8 @@
       (gtk-box-pack-end hbox grab)
       (gtk-widget-show-all hbox)
 
-      (gtk-signal-connect entry "changed" (make-signal-callback changed))
-      (gtk-signal-connect grab "clicked"
+      (g-signal-connect entry "changed" (make-signal-callback changed))
+      (g-signal-connect grab "clicked"
 			  (lambda ()
 			    (gtk-entry-set-text entry (wm-grab-key))))
 

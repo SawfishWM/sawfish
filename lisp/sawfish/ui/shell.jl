@@ -112,16 +112,16 @@
 	(gtk-widget-set-name main-window (_ "Sawfish configurator"))
 	(gtk-window-set-wmclass main-window "main" "Nokogiri"))
 
-      (gtk-signal-connect main-window "delete_event"
+      (g-signal-connect main-window "delete_event"
 			  (if (not socket-id) on-quit capplet-delete-event))
 
       (unless socket-id
 	(gtk-button-box-set-layout hbox 'end)
 	(gtk-box-pack-end vbox hbox)
-	(gtk-signal-connect ok-widget "clicked" on-ok)
-	(gtk-signal-connect apply-widget "clicked" on-apply)
-	(gtk-signal-connect cancel-widget "clicked" on-cancel)
-	(gtk-signal-connect revert-widget "clicked" on-revert)
+	(g-signal-connect ok-widget "clicked" on-ok)
+	(g-signal-connect apply-widget "clicked" on-apply)
+	(g-signal-connect cancel-widget "clicked" on-cancel)
+	(g-signal-connect revert-widget "clicked" on-revert)
 	(gtk-container-add hbox apply-widget)
 	(gtk-container-add hbox revert-widget)
 	(gtk-container-add hbox ok-widget)

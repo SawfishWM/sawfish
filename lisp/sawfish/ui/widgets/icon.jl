@@ -34,7 +34,7 @@
   (define (make-icon-item changed-callback)
     (let* ((widget (gnome-icon-entry-new "IconEntry" (_ "Select Icon"))))
       (when changed-callback
-	(gtk-signal-connect (gnome-icon-entry-gtk-entry widget) "changed"
+	(g-signal-connect (gnome-icon-entry-gtk-entry widget) "changed"
 			    (make-signal-callback changed-callback)))
       (gtk-widget-show widget)
       (lambda (op)

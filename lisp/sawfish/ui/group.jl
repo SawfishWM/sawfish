@@ -186,9 +186,9 @@
   ;; creates the tree-item for a named group
   (define (make-tree-item parent-name name real-name)
     (let ((item (gtk-tree-item-new-with-label (_ real-name))))
-      (gtk-signal-connect
+      (g-signal-connect
        item "select" (group-selected parent-name name))
-      (gtk-signal-connect
+      (g-signal-connect
        item "deselect" (group-deselected parent-name name))
       item))
 
