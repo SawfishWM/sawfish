@@ -149,23 +149,11 @@ colormap_notify (XEvent *ev)
 static void
 key_press (XEvent *ev)
 {
-    struct frame_part *fp;
-    repv context_map = Qnil;
-
     record_mouse_position (ev->xkey.x_root, ev->xkey.y_root);
 
     if (ev->type == KeyPress)
-    {
-	fp = find_frame_part_by_window (ev->xkey.window);
-	if (fp != 0)
-	{
-	    repv tem = Fassq (Qkeymap, fp->alist);
-	    if (tem && tem != Qnil)
-		context_map = rep_CDR(tem);
-	}
-
-	eval_input_event (context_map);
-    }
+	/* Don't look for a context map, frame parts are never focused */
+	eval_input_event (Qnil);
 
     XAllowEvents (dpy, AsyncKeyboard, last_event_time);
 }
@@ -222,11 +210,7 @@ button_press (XEvent *ev)
 	    handle_fp_click (fp, ev);
 
 	if (fp->clicked)
-	{
-	    repv tem = Fassq (Qkeymap, fp->alist);
-	    if (tem && tem != Qnil)
-		context_map = rep_CDR(tem);
-	}
+	    context_map = get_keymap_for_frame_part (fp);
     }
 
     eval_input_event (context_map);
@@ -272,11 +256,7 @@ motion_notify (XEvent *ev)
 
     fp = find_frame_part_by_window (ev->xmotion.window);
     if (fp != 0)
-    {
-	repv tem = Fassq (Qkeymap, fp->alist);
-	if (tem && tem != Qnil)
-	    context_map = rep_CDR(tem);
-    }
+	context_map = get_keymap_for_frame_part (fp);
 
     eval_input_event (context_map);
 }
