@@ -69,6 +69,17 @@ color-name COLOR
     return VCOLOR(color)->name;
 }
 
+DEFUN("color-rgb", Fcolor_rgb, Scolor_rgb, (repv color), rep_Subr1) /*
+::doc:Scolor-rgb::
+color-rgb COLOR
+::end:: */
+{
+    rep_DECLARE1(color, COLORP);
+    return rep_list_3 (rep_MAKE_INT(VCOLOR(color)->color.red),
+		       rep_MAKE_INT(VCOLOR(color)->color.green),
+		       rep_MAKE_INT(VCOLOR(color)->color.blue));
+}
+
 DEFUN("colorp", Fcolorp, Scolorp, (repv win), rep_Subr1) /*
 ::doc:Scolorp::
 colorp ARG
@@ -128,6 +139,7 @@ colors_init (void)
 					0, 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR(Sget_color);
     rep_ADD_SUBR(Scolor_name);
+    rep_ADD_SUBR(Scolor_rgb);
     rep_ADD_SUBR(Scolorp);
     rep_INTERN(default_foreground);
     rep_SYM(Qdefault_foreground)->value = Fget_color (rep_string_dup("black"));
