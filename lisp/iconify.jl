@@ -96,6 +96,8 @@
   (interactive "%W")
   (unless (and (window-get w 'sticky) (window-get w 'sticky-viewport))
     (ws-remove-window w t)
+    (when (window-outside-viewport-p w)
+      (move-window-to-current-viewport w))
     (window-put w 'sticky t)
     (window-put w 'sticky-viewport t)
     (call-window-hook 'window-state-change-hook w (list '(sticky)))))
