@@ -138,9 +138,13 @@ custom-set and custom-get may be used to translate data types to the
 string representation required by some widget types. custom-widget may
 construct the widget definition passed to the ui backend."
 
-    `(progn
-       (defvar ,symbol ,value ,doc)
-       (custom-declare-variable ',symbol ,(custom-quote-keys keys))))
+    (let* ((cell (memq ':tooltip keys))
+	   (tooltip (cadr cell)))
+      (when cell
+	(setq keys (delq (car cell) (delq (cadr cell) keys))))
+      `(progn
+	 (defvar ,symbol ,value ,(if tooltip (concat doc "\n\n" tooltip) doc))
+	 (custom-declare-variable ',symbol ,(custom-quote-keys keys)))))
 
   (defmacro defgroup (symbol doc #!rest keys)
     "Declare a new custom group called SYMBOL, with English name DOC. The
