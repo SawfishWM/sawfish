@@ -66,7 +66,7 @@
     (group symbol ,(lambda ()
 		     (delete-if-not symbolp (window-group-ids))))
     (place-mode symbol ,(lambda ()
-			  (custom-get-options 'place-window-mode)))
+			  place-window-modes))
     (frame-type symbol ,(lambda ()
 			  (mapcar car match-window-types)))
     (frame-style symbol ,(lambda ()
