@@ -101,7 +101,11 @@
     (unless epsilon
       (setq epsilon 8))
     (when (setq tem (edges-within-epsilon w-x-edges (car edges) epsilon))
-      (rplaca coords (+ (car coords) (- (car (cdr tem)) (car (car tem))))))
+      (setq tem (+ (car coords) (- (car (cdr tem)) (car (car tem)))))
+      (when (and (> tem (- (car dims))) (< tem (screen-width)))
+	(rplaca coords tem)))
     (when (setq tem (edges-within-epsilon w-y-edges (cdr edges) epsilon))
-      (rplacd coords (+ (cdr coords) (- (car (cdr tem)) (car (car tem))))))
+      (setq tem (+ (cdr coords) (- (car (cdr tem)) (car (car tem)))))
+      (when (and (> tem (- (cdr dims))) (< tem (screen-height)))
+	(rplacd coords tem)))
     coords))
