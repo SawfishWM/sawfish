@@ -187,6 +187,10 @@ enum exit_codes {
 
 /* bring in prototypes */
 
+#ifndef XlibSpecificationRelease
+# define XlibSpecificationRelease 4
+#endif
+
 #include "sawmill_subrs.h"
 
 
