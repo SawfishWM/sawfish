@@ -46,8 +46,8 @@ DEFSYM(override_keymap, "override-keymap");
 DEFSYM(unbound_key_hook, "unbound-key-hook");
 DEFSYM(keymap, "keymap");
 
-/* The X modifier being used for Meta */
-static u_long meta_mod;
+/* The X modifiers being used for Meta and Alt */
+static u_long meta_mod, alt_mod;
 
 static void grab_keymap_event (repv km, long code, long mods, bool grab);
 static void grab_all_keylist_events (repv map, repv tem, bool grab);
@@ -335,6 +335,8 @@ static struct key_def default_mods[] = {
     { "Control",  ControlMask },
     { "M",        EV_MOD_META },
     { "Meta",     EV_MOD_META },
+    { "A",        EV_MOD_ALT },
+    { "Alt",      EV_MOD_ALT },
     { "Mod1",     Mod1Mask },
     { "Mod2",     Mod2Mask },
     { "Mod3",     Mod3Mask },
@@ -445,6 +447,8 @@ lookup_event(u_long *code, u_long *mods, u_char *desc)
     }
     if (*mods & EV_MOD_META)
 	*mods = (*mods & ~EV_MOD_META) | meta_mod;
+    if (*mods & EV_MOD_ALT)
+	*mods = (*mods & ~EV_MOD_ALT) | alt_mod;
 
     /* Then go for the code itself */
     {
@@ -489,6 +493,8 @@ lookup_event_name(u_char *buf, u_long code, u_long mods)
 
     if(mods & meta_mod)
 	mods = (mods & ~meta_mod) | EV_MOD_META;
+    if(mods & alt_mod)
+	mods = (mods & ~alt_mod) | EV_MOD_ALT;
     mods &= EV_MOD_MASK;
 
     for(i = 0; i < 32 && mods != 0; i++)	/* magic numbers!? */
@@ -953,13 +959,11 @@ Returns t if the ARG is an input event.
 }
 
 
-/* Return the lisp modifier mask used as the meta key. This code
+/* Find the lisp modifier mask used by the meta and alt keys. This code
    shamelessly stolen from Emacs 19. :-) */
-static u_long
+static void
 find_meta(void)
 {
-    u_long meta_mod = 0, alt_mod = 0;
-
     int min_code, max_code;
     KeySym *syms;
     int syms_per_code;
@@ -1012,8 +1016,6 @@ find_meta(void)
 
     XFree((char *)syms);
     XFreeModifiermap(mods);
-
-    return meta_mod;
 }
 
 
@@ -1174,5 +1176,5 @@ keys_init(void)
     rep_ADD_SUBR(Skeymapp);
     rep_ADD_SUBR(Seventp);
 
-    meta_mod = find_meta ();
+    find_meta ();
 }
