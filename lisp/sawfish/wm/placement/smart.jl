@@ -41,7 +41,13 @@
     (export sp-do-placement
 	    sp-first-fit
 	    sp-best-fit
-	    sp-fit-or-nil)
+	    sp-fit-or-nil
+	    sp-cost:grid-lines
+	    sp-cost:aligned-edges
+	    sp-cost:pointer-locality
+	    sp-cost:focus-locality
+	    sp-cost:center-locality
+	    sp-cost:overlap)
 
     (open rep
 	  sawfish.wm.util.rects
