@@ -36,7 +36,6 @@ make install
 %doc README NEWS TODO
 %{_prefix}/bin/sawmill
 %{_prefix}/bin/sawmill-client
-%{_prefix}/bin/sawmill-menu
 %{_prefix}/bin/sawmill-ui
 %{_prefix}/share/sawmill/%{ver}
 %{_prefix}/libexec/sawmill/%{ver}/%{_host}
