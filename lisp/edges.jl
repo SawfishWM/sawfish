@@ -36,14 +36,14 @@
   (let
       ((with-ignored-windows (car (cdr (memq ':with-ignored-windows args))))
        (windows-to-ignore (car (cdr (memq ':windows-to-ignore args))))
-       (windows (car (cdr (memq ':windows args))))
+       (windows (cdr (memq ':windows args)))
        x-edges y-edges)
     (mapc #'(lambda (w)
 	      (when (and (window-visible-p w)
 			 (or with-ignored-windows
 			     (not (window-get w 'ignored)))
 			 (not (memq w windows-to-ignore))
-			 (or (null windows) (memq w windows)))
+			 (or (null windows) (memq w (car windows))))
 		(let
 		    ((dims (window-frame-dimensions w))
 		     (coords (window-position w)))
