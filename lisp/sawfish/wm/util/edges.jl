@@ -85,7 +85,7 @@
 ;; returns the new (X . Y) of WINDOW
 (defun snap-window-position-to-edges (window coords &optional epsilon edges)
   (let*
-      ((dims (window-frame-dimensions w))
+      ((dims (window-frame-dimensions window))
        (w-x-edges (list (list (car coords) (cdr coords)
 			      (+ (cdr coords) (cdr dims)))
 			(list (+ (car coords) (car dims))
