@@ -701,8 +701,7 @@
   (next-workspace (- count)))
 
 (defun send-to-next-workspace (w count &optional copy)
-  "Move the window to the next workspace. If no next workspace exists, one
-will be created."
+  "Move the window to the next workspace."
   (interactive "%W\np")
   (ws-call-with-workspace (lambda (space)
 			    (let
@@ -720,16 +719,17 @@ will be created."
 			  count workspace-send-boundary-mode))
 
 (defun send-to-previous-workspace (w count &optional copy)
-  "Move the window to the previous workspace. If no such workspace exists, one
-will be created."
+  "Move the window to the previous workspace."
   (interactive "%W\np")
   (send-to-next-workspace w (- count) copy))
 
 (defun copy-to-next-workspace (w count)
+  "Copy the window to the next workspace."
   (interactive "%W\np")
   (send-to-next-workspace w count t))
 
 (defun copy-to-previous-workspace (w count)
+  "Copy the window to the previous workspace."
   (interactive "%W\np")
   (send-to-previous-workspace w count t))
 
