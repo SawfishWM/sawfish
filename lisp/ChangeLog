@@ -1,5 +1,24 @@
 1999-11-04  John Harper  <john@dcs.warwick.ac.uk>
 
+	* workspace.jl (iconify-whole-group, uniconify-whole-group):
+	new options
+	(make-window-sticky, make-window-unsticky): new commands
+	(uniconify-to-current-workspace, raise-windows-on-uniconify,
+	focus-windows-on-uniconify): moved to iconify group
+
+	* groups.jl: new file, provides window-group variants of many
+	window commands
+
+	* functions.jl (transients-are-group-members): new option, put
+	transient windows in the same group as their parent window
+
+	* custom.jl: added `iconify' group
+	* viewport.jl (uniconify-to-current-viewport): moved to iconify
+	group
+
+	* menus.jl (popup-menu): when specifying a position, ensure
+	that it's not less than zero
+
 	* functions.jl (windows-in-group, map-window-group): new
 	functions
 
