@@ -76,6 +76,7 @@ this mode. The single argument is the window to be placed."
 
 ;; make sure the window doesn't overlap an avoided window
 (defun acceptable-placement (w position)
+  (require 'rects)
   (or (window-avoided-p w)
     (let*
         ((avoided-windows (delete-if-not window-avoided-p (managed-windows)))
