@@ -120,3 +120,7 @@
 	  rects)
     total))
 
+;; return t if RECT is a subset of the screen area
+(defun rect-wholly-visible-p (rect)
+  (and (>= (car rect) 0) (>= (nth 1 rect) 0)
+       (<= (nth 2 rect) (screen-width)) (<= (nth 3 rect) (screen-height))))
