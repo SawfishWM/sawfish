@@ -464,31 +464,37 @@ map_notify (XEvent *ev)
     Lisp_Window *w = find_window_by_id (ev->xmap.window);
     if (w != 0 && ev->xmap.window == w->id && ev->xmap.event == w->id)
     {
-	XWindowAttributes wa;
-	XGetWindowAttributes (dpy, w->id, &wa);
-	if (wa.override_redirect)
+	if (w->local_maps == 0)
 	{
-	    /* arrgh, the window changed its override redirect status.. */
-	    remove_window (w, Qnil, Qnil);
-	}
-	else
-	{
-	    /* copy in some of the new values */
-	    w->attr.width = wa.width;
-	    w->attr.height = wa.height;
-	    w->attr.colormap = wa.colormap;
-
-	    w->mapped = TRUE;
-	    if (!w->reparenting)
+	    XWindowAttributes wa;
+	    XGetWindowAttributes (dpy, w->id, &wa);
+	    if (wa.override_redirect)
 	    {
-		if (w->frame == 0)
-		    create_window_frame (w);
-		install_window_frame (w);
-		if (w->visible)
-		    XMapWindow (dpy, w->frame);
-		Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
+		/* arrgh, the window changed its override redirect status.. */
+		remove_window (w, Qnil, Qnil);
+	    }
+	    else
+	    {
+		/* copy in some of the new values */
+		w->attr.width = wa.width;
+		w->attr.height = wa.height;
+		w->attr.colormap = wa.colormap;
+
+		w->mapped = TRUE;
+		if (!w->reparenting)
+		{
+		    if (w->frame == 0)
+			create_window_frame (w);
+		    install_window_frame (w);
+		    if (w->visible)
+			XMapWindow (dpy, w->frame);
+		    Fcall_window_hook (Qmap_notify_hook,
+				       rep_VAL(w), Qnil, Qnil);
+		}
 	    }
 	}
+	else
+	    w->local_maps--;
     }
 }
 
@@ -498,24 +504,29 @@ unmap_notify (XEvent *ev)
     Lisp_Window *w = find_window_by_id (ev->xunmap.window);
     if (w != 0 && ev->xunmap.window == w->id && ev->xunmap.event == w->id)
     {
-	if (!w->reparenting && w->frame != 0)
+	if (w->local_unmaps == 0)
 	{
-	    w->mapped = FALSE;
-	    if (w->visible)
+	    if (!w->reparenting && w->frame != 0)
 	    {
-		XUnmapWindow (dpy, w->frame);
-		reset_frame_parts (w);
-	    }
-	    /* Removing the frame reparents the client window back to
-	       the root. This means that we receive the next MapRequest
-	       for the window. */
-	    remove_window_frame (w);
-	    destroy_window_frame (w, FALSE);
-	    Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
+		w->mapped = FALSE;
+		if (w->visible)
+		{
+		    XUnmapWindow (dpy, w->frame);
+		    reset_frame_parts (w);
+		}
+		/* Removing the frame reparents the client window back to
+		   the root. This means that we receive the next MapRequest
+		   for the window. */
+		remove_window_frame (w);
+		destroy_window_frame (w, FALSE);
+		Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 
-	    if (focus_window == w)
-		focus_on_window (0);
+		if (focus_window == w)
+		    focus_on_window (0);
+	    }
 	}
+	else
+	    w->local_unmaps--;
     }
 }
 
