@@ -25,6 +25,7 @@ static Lisp_Font *font_list;
 int font_type;
 
 DEFSYM(default_font, "default-font");
+DEFSYM(fonts_are_fontsets, "fonts-are-fontsets");
 
 DEFUN("get-font", Fget_font, Sget_font, (repv name), rep_Subr1) /*
 ::doc:get-font::
@@ -45,13 +46,20 @@ font specifier string).
 	f = f->next;
     if (f == 0)
     {
-	XFontSet font_set;
+	repv tem = Fsymbol_value (Qfonts_are_fontsets, Qt);
+
+	XFontSet font_set = 0;
 	XFontStruct *font_struct = 0;
 	int ascent, descent;
 	char **missing_charset_list, *def_string;
 	int num_missing_charset_list;
-	font_set = XCreateFontSet (dpy, rep_STR(name), &missing_charset_list,
-				   &num_missing_charset_list, &def_string);
+
+	if (tem != Qnil)
+	{
+	    font_set = XCreateFontSet (dpy, rep_STR(name),
+				       &missing_charset_list,
+				       &num_missing_charset_list, &def_string);
+	}
 	if (font_set != 0)
 	{
 	    XFontStruct **fstrs;
@@ -332,6 +340,9 @@ fonts_init (void)
     rep_ADD_SUBR(Sfont_height);
     rep_ADD_SUBR(Sfont_ascent);
     rep_ADD_SUBR(Sfont_descent);
+
+    rep_INTERN_SPECIAL(fonts_are_fontsets);
+    Fset (Qfonts_are_fontsets, Qt);
 
     rep_INTERN_SPECIAL(default_font);
     if (rep_SYM(Qbatch_mode)->value == Qnil)
