@@ -69,7 +69,7 @@
   (let*
       ((limits (workspace-limits))
        (port (screen-viewport))
-       (port-size (cons viewport-columns viewport-rows))
+       (port-size viewport-dimensions)
        (total-workspaces (1+ (- (cdr limits) (car limits)))))
     ;; apparently some pagers don't like it if we place windows
     ;; on (temporarily) non-existent workspaces
@@ -143,9 +143,7 @@
 		  (string= (aref class 0) "panel"))
 	     ;; XXX I don't think the GNOME hints specify these things
 	     (window-put w 'focus-click-through t)
-	     (window-put w 'avoid t))
-	    ((string= (aref class 1) "gmc-desktop-icon")
-	     (window-put w 'never-focus t)))))
+	     (window-put w 'avoid t)))))
   (let
       ((state (get-x-property w '_WIN_STATE))
        (hints (get-x-property w '_WIN_HINTS))
@@ -170,7 +168,8 @@
     (when (eq (car hints) 'CARDINAL)
       (setq bits (aref (nth 2 hints) 0))
       (unless (zerop (logand bits WIN_HINTS_SKIP_FOCUS))
-	(window-put w 'never-focus t)))
+	(window-put w 'never-focus t)
+	(window-put w 'ignored t)))
     (when layer
       (setq layer (aref (nth 2 layer) 0))
       (set-window-depth w (- layer WIN_LAYER_NORMAL)))
@@ -270,7 +269,8 @@
     (set-x-property 'root '_WIN_AREA
 		    (vector (car port) (cdr port)) 'CARDINAL 32)
     (set-x-property 'root '_WIN_AREA_COUNT
-		    (vector viewport-columns viewport-rows) 'CARDINAL 32)
+		    (vector (car viewport-dimensions)
+			    (cdr viewport-dimensions)) 'CARDINAL 32)
 
     ;; XXX I'm using this property to tell desk-guide to move
     ;; XXX the current area on all desktops at once
