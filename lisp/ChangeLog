@@ -1,3 +1,19 @@
+2000-05-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* describe.jl (describe-symbol): new command, replaces
+	describe-function and describe-variable
+
+	(apropos-function, apropos-variable): moved these here from
+	rep, this is necessary for rep 0.11+
+
+	* keymap.jl (describe-key): use describe-symbol instead of
+	describe-function
+
+	* with-output.jl (define-command-to-screen): new macro, defines
+	a command that will have its output redirected to the screen,
+	given the name of an existing command to call, and an
+	interactive spec
+
 2000-05-11  John Harper  <john@dcs.warwick.ac.uk>
 
 	* focus.jl (focus-enter-fun, focus-enter-fun): generate events
