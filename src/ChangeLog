@@ -1,3 +1,29 @@
+2000-06-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (Fwindow_icon_image): check that `w->wmhints != 0'
+
+2000-06-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (property_notify): when WM_HINTS changes, uncache
+	icon, and refresh the frame
+
+2000-06-23  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (add_window): if `initialising != 0', then set
+	`placed' property of window before calling any hooks. This
+	stops the window-history module rearranging windows..
+
+	* frames.c (build_frame_part): value of `cursor' attribute will
+	be called if it is functionp
+
+	* frames.c (build_frame_part): don't need to check that values
+	returned by call_protectedly are non-null
+
+	* frames.c: new frame part attribute `scale-foreground'. When
+	non-nil, the foreground image will be scaled to the size of the
+	frame part
+ 	 * sawmill.h (struct frame_part): added `scale_foreground' flag
+
 2000-06-22  John Harper  <john@dcs.warwick.ac.uk>
 
 	* events.c (configure_request): when we know nonthing about the

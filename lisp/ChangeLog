@@ -1,6 +1,23 @@
+2000-06-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* iconify.jl (iconify-ignored): new option, whether or not to
+	allow ignored windows to be iconified, nil by default. (Closes
+	bugs.gnome #11114)
+
 2000-06-23  John Harper  <john@dcs.warwick.ac.uk>
 
-	* sawmill.jl: fixed bug of non load-all'ing site-init within
+	* frames.jl (frame-type-fallback-alist): map `shaded' and
+	`shaded-transient' to `shaped' and `shaped-transient'
+	respectively
+
+	* shading.jl (shade-window): give windows `shaded' or
+	`shaded-transient' type while they are shaded (not `shaped', or
+	`shaped-transient')
+
+	* frames.jl (frame-part-classes): removed the cursor
+	definitions from the `-button' classes
+
+	* sawmill.jl: fixed bug of not load-all'ing site-init within
 	the `sawfish' structure
 
 2000-06-22  John Harper  <john@dcs.warwick.ac.uk>

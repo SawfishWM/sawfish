@@ -1685,6 +1685,12 @@ with a rectangular border.
 A combination of the @code{shaped} and @code{transient} types, normally
 just a very small title border with no text.
 
+@item shaded
+A shaded window (normally just the title bar).
+
+@item shaded-transient
+A shaded transient window.
+
 @item unframed
 No frame at all, just the client window itself. The predefined
 @code{nil-frame} variable contains a null frame that may be used for
@@ -1717,6 +1723,10 @@ Defines a new frame style called @var{name} (a symbol). When a frame of
 this style is required for a particular window, @var{function} is
 called with two arguments, the window itself and a symbol defining the
 frame type to create (@pxref{Frame Types}).
+
+If the frame style is unable to provide a frame definition of the
+required type, it should return the symbol @code{nil}. In which case it
+may subsequently be asked for a frame of a different type.
 
 If no default frame style exists, the new style will be made the
 default.
