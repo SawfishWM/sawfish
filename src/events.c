@@ -24,6 +24,7 @@
 #include <time.h>
 #include <X11/extensions/shape.h>
 #include <X11/Xresource.h>
+#include <X11/Xatom.h>
 
 /* Lookup table of event handlers */
 void (*event_handlers[LASTEvent])(XEvent *ev);
@@ -190,6 +191,8 @@ install_colormaps (Lisp_Window *w)
 {
     XWindowAttributes attr;
     bool seen_toplevel = FALSE;
+    if (w->reparented)
+	XInstallColormap (dpy, image_cmap);
     if (w->n_cmap_windows > 0)
     {
 	int i;
