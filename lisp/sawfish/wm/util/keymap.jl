@@ -26,12 +26,14 @@
 	    substitute-keymap-event
 	    lazy-bind-keys
 	    where-is
+	    make-memoizing-where-is
 	    describe-key
 	    read-event
 	    quote-event)
 
     (open rep
 	  rep.system
+	  rep.data.symbol-table
 	  sawfish.wm.events
 	  sawfish.wm.commands
 	  sawfish.wm.misc
@@ -113,6 +115,22 @@ for the bindings to be installed if and when it is."
 			    (cons (event-name (cdr k)) where-is-results))))
 		  (or keymap global-keymap))
       where-is-results))
+
+  ;; XXX make this handle prefix keymaps
+  (define (make-memoizing-where-is keymaps)
+    "Return a function which when called with a command name as its single
+argument, will return either false or a string naming the event to which
+the command is found in the list of keymaps KEYMAPS."
+    (let ((cache (make-symbol-table)))
+      (mapc (lambda (keymap)
+	      (map-keymap (lambda (k)
+			    (when (symbolp (car k))
+			      (symbol-table-set cache (car k) (cdr k))))
+			  keymap))
+	    keymaps)
+      (lambda (command)
+	(let ((key (symbol-table-ref cache command)))
+	  (and key (event-name key))))))
 
   (define (describe-key #!optional map)
     "Prompt for a key sequence, then print its binding."

@@ -1,3 +1,14 @@
+2000-12-18  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/menus.jl (menus-include-shortcuts): new option,
+	when set, include `shortcut' attributes in created menu
+	descriptions. Adapted from Unai Uribarri <unaiur@telecable.es>
+
+	* sawfish/wm/util/keymap.jl (make-memoizing-where-is): new
+	function, when called repeatedly has better time complexity
+	than multiple calls to where-is (since it builds a temporary
+	hash table)
+
 2000-12-10  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/util/stacking.jl (raise-window*, lower-window*,

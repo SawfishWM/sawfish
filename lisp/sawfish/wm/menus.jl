@@ -51,6 +51,12 @@
   ;; Suppress annoying compiler warnings
   (eval-when-compile (require 'rep.io.timers))
 
+  (defcustom menus-include-shortcuts t
+    "Display key-binding information in menu items."
+    :type boolean
+    :group misc
+    :user-level expert)
+
   (defvar menu-program (expand-file-name "sawfish-menu" sawfish-exec-directory)
     "Location of the program implementing sawfish's menu interface.")
 
@@ -198,37 +204,50 @@ unused before killing it.")
   (define (nickname-ref nick) (table-ref nickname-table nick))
 
   (define menu-args (make-fluid '()))
+  (define where-is-fun (make-fluid '()))
 
   (define (menu-preprocessor cell)
-    (when cell
-      (let ((label (car cell)))
-	(when (functionp label)
-	  (setq label (apply label (fluid menu-args))))
-	(cond ((functionp (cdr cell))
-	       (setq cell (apply (cdr cell) (fluid menu-args))))
-	      ((and (symbolp (cdr cell)) (not (null (cdr cell))))
-	       (setq cell (symbol-value (cdr cell)))
-	       (when (functionp cell)
-		 (setq cell (apply cell (fluid menu-args)))))
-	      (t (setq cell (cdr cell))))
-	(when cell
-	  (if (and (consp (car cell)) (stringp (car (car cell))))
-	      ;; recurse through sub-menu
-	      (setq cell (mapcar menu-preprocessor cell))
-	    (let ((action (car cell))
-		  (options (cdr cell)))
-	      (when (not (symbolp action))
-		;; a non-symbol result, replace by a nickname
-		(setq action (make-nickname (car cell))))
-	      ;; scan the alist of options
-	      (setq options (mapcar
-			     (lambda (cell)
-			       (if (functionp (cdr cell))
-				   (cons (car cell)
-					 (apply (cdr cell) (fluid menu-args)))
-				 cell)) options))
-	      (setq cell (cons action options)))))
-	(cons label cell))))
+    (define (inner cell)
+      (when cell
+	(let ((label (car cell)))
+	  (when (functionp label)
+	    (setq label (apply label (fluid menu-args))))
+	  (cond ((functionp (cdr cell))
+		 (setq cell (apply (cdr cell) (fluid menu-args))))
+		((and (symbolp (cdr cell)) (not (null (cdr cell))))
+		 (setq cell (symbol-value (cdr cell)))
+		 (when (functionp cell)
+		   (setq cell (apply cell (fluid menu-args)))))
+		(t (setq cell (cdr cell))))
+	  (when cell
+	    (if (and (consp (car cell)) (stringp (car (car cell))))
+		;; recurse through sub-menu
+		(setq cell (mapcar inner cell))
+	      (let* ((action (car cell))
+		     (options (cdr cell))
+		     (shortcut (and (fluid where-is-fun)
+				    (symbolp action)
+				    ((fluid where-is-fun) action))))
+		(when (not (symbolp action))
+		  ;; a non-symbol result, replace by a nickname
+		  (setq action (make-nickname (car cell))))
+		;; scan the alist of options
+		(setq options (mapcar
+			       (lambda (cell)
+				 (if (functionp (cdr cell))
+				     (cons (car cell)
+					   (apply (cdr cell)
+						  (fluid menu-args)))
+				   cell)) options))
+		(when shortcut
+		  (setq options (cons (cons 'shortcut shortcut) options)))
+		(setq cell (cons action options)))))
+	  (cons label cell))))
+    (let-fluids ((where-is-fun (and menus-include-shortcuts
+				    (require 'sawfish.wm.util.keymap)
+				    (make-memoizing-where-is
+				     (list global-keymap window-keymap)))))
+      (inner cell)))
 
   (define (menu-dispatch result)
     (let ((orig-win menu-active))
