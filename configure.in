@@ -26,6 +26,15 @@ AC_CONFIG_AUX_DIR(etc)
 
 dnl Release versioning info
 version="0.14.2"
+dir_version=`pwd | sed -e 's/.*-//'`
+case "${dir_version}" in
+  *.*)
+    ;;
+  *)
+    version=${dir_version}
+    ;;
+esac
+unset dir_version
 
 output_files="src/Makefile lisp/Makefile capplet/Makefile\
  themes/Makefile man/Makefile Makedefs Makefile sawmill.spec"
