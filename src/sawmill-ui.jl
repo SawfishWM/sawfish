@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.56 2000/03/02 19:35:29 john Exp $
+;; $Id: sawmill-ui.jl,v 1.57 2000/03/02 23:31:53 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -1579,9 +1579,16 @@ exec rep "$0" "$@"
     (format standard-error "ui-command: %S\n" form)))
 
 (defun ui-get-spec ()
-  (sawmill-eval `(progn
-		   (require 'customize)
-		   (customize-ui-spec ',ui-group)) t))
+  (let ((response (sawmill-eval `(progn
+				   (require 'customize)
+				   (customize-ui-spec ',ui-group)))))
+    (if (string-match "^error-->" response)
+	(progn
+	  (if ui-socket-id
+	      (ui-capplet-no-group)
+	    (format standard-error "No such group: %s\n" ui-group))
+	  (throw 'quit 1))
+      (read-from-string response))))
 
 (defun ui-refresh ()
   (let
@@ -1622,6 +1629,10 @@ exec rep "$0" "$@"
 
 (defun ui-capplet-state-changed ()
   (write standard-output ?c)
+  (flush-file standard-output))
+
+(defun ui-capplet-no-group ()
+  (write standard-output ?g)
   (flush-file standard-output))
 
 
