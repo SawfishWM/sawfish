@@ -375,14 +375,15 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
     for (fp = w->frame_parts; fp != 0 && w->id != 0; fp = fp->next)
     {
 	Pixmap pixmap, mask;
+	int state = current_state (fp);
 
 	if (fp->width <= 0 || fp->height <= 0)
 	    continue;
 
-	if (IMAGEP(fp->bg[0]))
+	if (IMAGEP(fp->bg[state]))
 	{
 	    bool tiled = FALSE;
-	    Lisp_Image *image = VIMAGE(fp->bg[0]);
+	    Lisp_Image *image = VIMAGE(fp->bg[state]);
 	    repv tem;
 
 	    tem = Fimage_get (rep_VAL(image), Qtiled);
@@ -550,11 +551,23 @@ set_frame_part_bg (struct frame_part *fp)
 	if (win->id == 0)
 	    return;
 
+	if (bg_mask == 0)
+	{
+	    /* No mask, so we always want to force the rectangle
+	       including the frame part to be shown.. */
+	    XRectangle rect;
+	    rect.x = rect.y = 0;
+	    rect.width = fp->width;
+	    rect.height = fp->height;
+	    XShapeCombineRectangles (dpy, fp->id, ShapeBounding,
+				     0, 0, &rect, 1, ShapeSet, Unsorted);
+	}
+
 	if (!tiled)
 	{
 	    XCopyArea (dpy, bg_pixmap, fp->id, fp->gc, 0, 0,
 		       fp->width, fp->height, 0, 0);
-	    if (bg_mask)
+	    if (bg_mask != 0)
 	    {
 		XShapeCombineMask (dpy, fp->id, ShapeBounding,
 				   0, 0, bg_mask, ShapeSet);
@@ -591,7 +604,7 @@ set_frame_part_bg (struct frame_part *fp)
 		{
 		    XCopyArea (dpy, bg_pixmap, fp->id, fp->gc,
 			       0, 0, width, height, x, y);
-		    if (bg_mask)
+		    if (bg_mask != 0)
 		    {
 			XShapeCombineMask (dpy, tem, ShapeBounding,
 					   x, y, bg_mask, ShapeUnion);
@@ -600,7 +613,7 @@ set_frame_part_bg (struct frame_part *fp)
 		}
 		y += height;
 	    }
-	    if (bg_mask)
+	    if (bg_mask != 0)
 	    {
 		XShapeCombineShape (dpy, fp->id, ShapeBounding, 0, 0,
 				    tem, ShapeBounding, ShapeSet);
@@ -1383,6 +1396,8 @@ configure_frame_part (struct frame_part *fp)
 	    attr.stack_mode = fp->below_client ? Below : Above;
 	    XConfigureWindow (dpy, fp->id, CWX | CWY | CWWidth
 			      | CWHeight | CWStackMode, &attr);
+	    /* Generate an Expose event for the window. */
+	    XClearArea (dpy, fp->id, 0, 0, 0, 0, True);
 	}
 	else
 	{

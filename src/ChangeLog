@@ -1,3 +1,20 @@
+2001-01-17  John Harper  <jsh@eazel.com>
+
+	* frames.c (set_frame_shapes): apply the mask of the image
+	associated with	the current state of the frame part, not always
+	the inactive state
+
+	* frames.c (set_frame_part_bg): if applying a pixmap with no
+	mask, set the shape to be the rectangle defined by the edges of
+	the frame part. This fixes the bug where parts in which only
+	some of the constituent images have alpha channels, get
+	corrupted when resized
+
+	* frames.c (configure_frame_part): if the window already
+	exists, call XClearArea () to generate an Expose event. This
+	fixes the bug where window decorations can update
+	inconsistently when resizing windows
+
 2001-01-15  John Harper  <jsh@eazel.com>
 
 	* keys.c (Fbind_keys): signal an error when <1 arg, don't just
