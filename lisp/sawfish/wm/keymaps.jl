@@ -132,11 +132,11 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
 
   (bind-keys close-button-keymap
     "Button1-Off" 'delete-window
-    "Button3-Off" 'popup-window-menu)
+    "Button3-Click1" 'popup-window-menu)
 
   (bind-keys iconify-button-keymap
     "Button1-Off" 'iconify-window
-    "Button3-Off" 'popup-window-menu)
+    "Button3-Click1" 'popup-window-menu)
 
   (bind-keys menu-button-keymap
     "Button1-Click1" 'popup-window-menu
