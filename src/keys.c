@@ -911,7 +911,7 @@ Returns KEYMAP when successful.
 {
     repv km, arg1;
     if (!rep_CONSP(args))
-	return rep_NULL;
+	return rep_signal_missing_arg (1);
     km = rep_CAR(args);
     args = rep_CDR(args);
     while (rep_CONSP(args) && rep_CONSP(rep_CDR(args)))

@@ -1,3 +1,8 @@
+2001-01-15  John Harper  <jsh@eazel.com>
+
+	* keys.c (Fbind_keys): signal an error when <1 arg, don't just
+	return rep_NULL (which may cause a crash later)
+
 2001-01-09  John Harper  <jsh@eazel.com>
 
 	* windows.c (Fwindow_icon_image): added support for icons
