@@ -46,7 +46,7 @@ print_colors (char *name, GdkColor *x, int n)
     printf (")\n");
 }
 
-void
+int
 print_rc_colors (char *name, GdkColor *x, int n,
 		 GtkRcFlags *flags, GtkRcFlags mask)
 {
@@ -57,7 +57,7 @@ print_rc_colors (char *name, GdkColor *x, int n,
 	    break;
     }
     if (i == n)
-	return;
+	return 1;
     printf ("(%s", name);
     for (i = 0; i < n; i++)
     {
@@ -69,6 +69,7 @@ print_rc_colors (char *name, GdkColor *x, int n,
 	}
     }
     printf (")\n");
+    return 0;
 }
 
 void
@@ -92,16 +93,23 @@ print_strings (char *name, char **x, int n)
 }
 
 void
-print_rc_style (GtkRcStyle *rc)
+print_rc_style (GtkRcStyle *rc, GtkStyle *style)
 {
     if (rc->font_name != 0)
 	printf ("(font . \"%s\")\n", rc->font_name);
     if (rc->fontset_name != 0)
 	printf ("(fontset . \"%s\")\n", rc->fontset_name);
-    print_rc_colors ("fg", rc->fg, 5, rc->color_flags, GTK_RC_FG);
-    print_rc_colors ("bg", rc->bg, 5, rc->color_flags, GTK_RC_BG);
-    print_rc_colors ("text", rc->text, 5, rc->color_flags, GTK_RC_TEXT);
-    print_rc_colors ("base", rc->base, 5, rc->color_flags, GTK_RC_BASE);
+    if (print_rc_colors ("fg", rc->fg, 5, rc->color_flags, GTK_RC_FG))
+    	print_colors ("fg", style->fg, 5);
+    if (print_rc_colors ("bg", rc->bg, 5, rc->color_flags, GTK_RC_BG))
+    	print_colors ("bg", style->bg, 5);
+    if (print_rc_colors ("text", rc->text, 5, rc->color_flags, GTK_RC_TEXT))
+    	print_colors ("text", style->text, 5);
+    if (print_rc_colors ("base", rc->base, 5, rc->color_flags, GTK_RC_BASE))
+    	print_colors ("base", style->base, 5);
+    print_colors ("light", style->light, 5);
+    print_colors ("dark", style->dark, 5);
+    print_colors ("mid", style->mid, 5);
     print_strings ("bg-pixmap", rc->bg_pixmap_name, 5);
 }
 
@@ -123,6 +131,7 @@ main (int argc, char **argv)
     GtkWidget *win;
     GtkStyle *style = 0;
 
+    gtk_set_locale();
     gtk_init (&argc, &argv);
     win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     style = gtk_rc_get_style (win);
@@ -131,7 +140,7 @@ main (int argc, char **argv)
     if (style != 0)
     {
 	if (style->rc_style != 0)
-	    print_rc_style (style->rc_style);
+	    print_rc_style (style->rc_style, style);
 	else
 	    print_style (style);
     }
