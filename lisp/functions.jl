@@ -24,7 +24,7 @@
 (defcustom ignore-window-input-hint t
   "Give focus to windows even when they haven't asked for it."
   :type boolean
-  :group focus)
+  :group (focus advanced))
 
 (defvar dont-avoid-ignored t)
 (defvar avoid-by-default nil)

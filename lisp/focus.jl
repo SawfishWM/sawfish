@@ -32,7 +32,7 @@
 (defcustom focus-click-through t
   "Does click-to-focus mode pass the click through to the window."
   :type boolean
-  :group focus)
+  :group (focus advanced))
 
 (defvar click-to-focus-keymap
   (bind-keys (make-keymap)

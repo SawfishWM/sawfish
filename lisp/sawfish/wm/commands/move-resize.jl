@@ -26,17 +26,17 @@
 ;; todo:
 ;;  * obey the aspect ratio size hints
 
-;;;###autoload (setq custom-required (cons 'move-resize custom-required))
+;;;###autoload (custom-add-required 'move-resize)
 
 (defcustom resize-by-frame-class t
   "Choose resized window edges by border-part, not by mouse position."
   :type boolean
-  :group move)
+  :group (move advanced))
 
 (defcustom resize-add-edges t
   "Allow other window edges to be grabbed while resizing interactively."
   :type boolean
-  :group move)
+  :group (move advanced))
 
 (defcustom move-outline-mode 'opaque
   "The method of drawing windows being moved interactively."
@@ -67,18 +67,18 @@
 
 (defcustom move-snap-edges nil
   "Snap window position to edges of other windows when interactively moving."
-  :group move
+  :group (move advanced)
   :type boolean)
 
 (defcustom move-snap-epsilon 8
   "Proximity in pixels before snapping to a window edge."
-  :group move
+  :group (move advanced)
   :type number
   :range (0 . 64))
 
 (defcustom move-snap-ignored-windows nil
   "Snap to otherwise-ignored windows."
-  :group move
+  :group (move advanced)
   :type boolean)
 
 (defcustom move-lock-when-maximized t

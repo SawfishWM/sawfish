@@ -60,18 +60,18 @@
   "Action when passing the first or last workspace when moving."
   :type symbol
   :options (stop wrap-around keep-going)
-  :group workspace)
+  :group (workspace advanced))
 
 (defcustom workspace-send-boundary-mode 'keep-going
   "Action when passing the first or last workspace when moving windows."
   :type symbol
   :options (stop wrap-around keep-going)
-  :group workspace)
+  :group (workspace advanced))
 
 (defcustom delete-workspaces-when-empty nil
   "Workspaces are merged with the next when their last window is closed."
   :type boolean
-  :group workspace)
+  :group (workspace advanced))
 
 (defcustom preallocated-workspaces 1
   "The minimum number of workspaces that may exist."
@@ -83,7 +83,7 @@
 (defcustom lock-first-workspace t
   "Empty workspaces before or after the active workspace aren't hidden."
   :type boolean
-  :group workspace
+  :group (workspace advanced)
   :after-set (lambda () (call-hook 'workspace-state-change-hook)))
 
 (defcustom uniconify-to-current-workspace t
