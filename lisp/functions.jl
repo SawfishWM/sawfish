@@ -53,3 +53,12 @@
        (unwind-protect
 	   (progn ,@forms)
 	 (restack-windows ,tem)))))
+
+;; try to create dir and all nonexistent parent dirs (like mkdir -p)
+(defun make-directory-recursively (dir)
+  (while (not (file-exists-p dir))
+    (let
+	((tem dir))
+      (while (not (file-exists-p (expand-file-name ".." tem)))
+	(setq tem (expand-file-name ".." tem)))
+      (make-directory tem))))
