@@ -121,16 +121,17 @@
 ;;;###autoload
 (defun raise-group (w)
   (interactive "%W")
-  (let ((order (windows-in-group w t)))
-    (mapc raise-window order)
-    (raise-window w)))
+  (raise-windows w (windows-in-group w t)))
 
 ;;;###autoload
 (defun lower-group (w)
   (interactive "%W")
-  (let ((order (windows-in-group w t)))
-    (mapc lower-window (nreverse order))
-    (lower-window w)))
+  (lower-windows w (windows-in-group w t)))
+
+;;;###autoload
+(defun raise-lower-group (w)
+  (interactive "%W")
+  (raise-lower-windows w (windows-in-group w t)))
 
 ;;;###autoload
 (defun raise-group-depth (w)
@@ -141,21 +142,6 @@
 (defun lower-group-depth (w)
   (interactive "%W")
   (map-window-group lower-window-depth w))
-
-;;;###autoload
-(defun raise-lower-group (w)
-  (interactive "%W")
-  (if (or (eq (window-visibility w) 'unobscured)
-	  (let ((order (windows-in-group w t)))
-	    (and (window-on-top-p (car order))
-		 ;; look for the group as a block.. this is a heuristic
-		 (let loop ((rest (memq (car order) (stacking-order))))
-		   (cond ((null rest) nil)
-			 ((eq (car rest) w) t)
-			 ((memq (car rest) order) (loop (cdr rest)))
-			 (t nil))))))
-      (lower-group w)
-    (raise-group w)))
 
 
 ;; framing
