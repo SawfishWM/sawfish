@@ -387,6 +387,7 @@ add_window (Window id)
 	w->plist = Qnil;
 	w->frame_style = Qnil;;
 	w->icon_image = rep_NULL;
+	w->name = rep_null_string ();
 
 	/* have to put it somewhere until it finds the right place */
 	insert_in_stacking_list_above_all (w);
@@ -416,8 +417,6 @@ add_window (Window id)
 	    }
 	    XFree (prop.value);
 	}
-	if (w->name == 0)
-	    w->name = rep_null_string ();
 	w->full_name = w->name;
 	if (XGetIconName (dpy, id, &tem))
 	{
