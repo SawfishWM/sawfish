@@ -1,3 +1,25 @@
+1999-07-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.h (Lisp_Window): new field `shaped' set if the client
+	window is shaped
+	* events.c: handle shaped client windows (ShapeNotify events)
+	* windows.c (set_window_shape): new function, copies the client
+	windows shape to the frame
+	(install_window_frame): call set_window_shape
+
+	* display.c (shape_event_base, shape_error_base): new variables
+
+	* frames.c (list_frame_generator): when regenerating a frame
+	recenter the client window in the resized frame window
+
+	* events.c (button_press): fake an unwind-protect around the
+	event evaluation, so a ButtonRelease can unclick buttons
+	without aborting
+
+	* windows.c (install_window_frame): also select
+	SubstructureRedirectMask for frame, so that we get
+	ConfigureRequest events for the client window
+
 1999-07-25  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c (list_frame_generator): add LeaveWindowMask to frame
