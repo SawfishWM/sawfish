@@ -59,6 +59,9 @@ DEFSYM(async_both, "async-both");
 /* The X modifiers being used for Meta and Alt */
 static u_long meta_mod, alt_mod, num_lock_mod;
 
+DEFSYM(meta_keysyms, "meta-keysyms");
+DEFSYM(alt_keysyms, "alt-keysyms");
+
 static void grab_keymap_event (repv km, long code, long mods, bool grab);
 static void grab_all_keylist_events (repv map, bool grab);
 
@@ -971,6 +974,12 @@ DEFUN("eval-modifier-events", Veval_modifier_events,
 
 /* Find the lisp modifier mask used by the meta and alt keys. This code
    shamelessly stolen from Emacs 19. :-) */
+
+DEFSTRING(meta_l, "Meta_L");
+DEFSTRING(meta_r, "Meta_R");
+DEFSTRING(alt_l, "Alt_L");
+DEFSTRING(alt_r, "Alt_R");
+
 static void
 find_meta(void)
 {
@@ -1025,11 +1034,27 @@ find_meta(void)
 	}
     }
 
-    if(meta_mod == 0)
-	meta_mod = alt_mod;
-
     XFree((char *)syms);
     XFreeModifiermap(mods);
+
+    if (meta_mod == 0 && alt_mod == 0)
+	return;
+
+    if (meta_mod == 0)
+    {
+	meta_mod = alt_mod;
+	Fset (Qmeta_keysyms, rep_list_2 (rep_VAL(&alt_l), rep_VAL(&alt_r)));
+    }
+    else
+	Fset (Qmeta_keysyms, rep_list_2 (rep_VAL(&meta_l), rep_VAL(&meta_r)));
+
+    if (alt_mod == 0)
+    {
+	alt_mod = meta_mod;
+	Fset (Qalt_keysyms, rep_list_2 (rep_VAL(&meta_l), rep_VAL(&meta_r)));
+    }
+    else
+	Fset (Qalt_keysyms, rep_list_2 (rep_VAL(&alt_l), rep_VAL(&alt_r)));
 }
 
 
@@ -1250,6 +1275,11 @@ keys_init(void)
     rep_INTERN(replay_keyboard);
     rep_INTERN(sync_both);
     rep_INTERN(async_both);
+
+    rep_INTERN(meta_keysyms);
+    Fset (Qmeta_keysyms, Qnil);
+    rep_INTERN(alt_keysyms);
+    Fset (Qalt_keysyms, Qnil);
 
     if (rep_SYM(Qbatch_mode)->value == Qnil)
 	find_meta ();
