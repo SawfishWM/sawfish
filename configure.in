@@ -24,9 +24,8 @@ AC_INIT(src/sawmill.h)
 AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR(etc)
 
-version="0.0"
-version_major=0
-version_minor=0
+dnl Release versioning info
+version="0.1"
 
 sawmilldir='${datadir}/sawmill'
 lispdir='${sawmilldir}/${version}/lisp'
@@ -108,8 +107,6 @@ fi
 
 dnl Nonstandard exported symbols
 AC_SUBST(version)
-AC_SUBST(version_minor)
-AC_SUBST(version_major)
 AC_SUBST(rep_version)
 AC_SUBST(repexecdir)
 AC_SUBST(sawmilldir)
