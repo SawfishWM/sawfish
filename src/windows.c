@@ -8,26 +8,33 @@ int window_type;
 
 Lisp_Window *focus_window;
 
+static bool initialising;
+
 #define MAX_WINDOW_WIDTH 32767
 #define MAX_WINDOW_HEIGHT 32767
 
 DEFSYM(add_window_hook, "add-window-hook");
+DEFSYM(place_window_hook, "place-window-hook");
 
 /* for visibility-notify-hook */
 DEFSYM(fully_obscured, "fully-obscured");
 DEFSYM(partially_obscured, "partially-obscured");
 DEFSYM(unobscured, "unobscured");
 
+/* for window-size-hints */
+DEFSYM(min_width, "min-width");
+DEFSYM(min_height, "min-height");
+DEFSYM(max_width, "max-width");
+DEFSYM(max_height, "max-height");
+DEFSYM(width_inc, "width-inc");
+DEFSYM(height_inc, "height-inc");
+DEFSYM(base_width, "base-width");
+DEFSYM(base_height, "base-height");
+DEFSYM(min_aspect, "min-aspect");
+DEFSYM(max_aspect, "max-aspect");
+
 
 /* utilities */
-
-/* Returns true if window ID is a transient */
-bool
-transient_p (Window id)
-{
-    Window tem;
-    return (XGetTransientForHint (dpy, id, &tem) == True);
-}
 
 /* Returns true if we should manage window ID */
 bool
@@ -61,74 +68,6 @@ focus_on_window (Lisp_Window *w)
 	DB(("  XSetInputFocus (None, RevertToParent, %ld)\n",
 	    last_event_time));
 	XSetInputFocus (dpy, None, RevertToParent, last_event_time);
-    }
-}
-
-/* Copied from afterstep; initialises all size hints for window W */
-static void
-get_window_size_hints (Lisp_Window *w)
-{
-    long supplied = 0;
-
-    if (!XGetWMNormalHints (dpy, w->id, &w->hints, &supplied))
-	w->hints.flags = 0;
-
-    /* Beat up our copy of the hints, so that all important field are
-       filled in! */
-    if (w->hints.flags & PResizeInc) 
-    {
-	if (w->hints.width_inc == 0)
-	    w->hints.width_inc = 1;
-	if (w->hints.height_inc == 0)
-	    w->hints.height_inc = 1;
-    }
-    else
-    {
-	w->hints.width_inc = 1;
-	w->hints.height_inc = 1;
-    }
-  
-    /* ICCCM says that PMinSize is the default if no PBaseSize is given,
-       and vice-versa. */
-
-    if(!(w->hints.flags & PBaseSize))
-    {
-	if(w->hints.flags & PMinSize)
-	{
-	    w->hints.base_width = w->hints.min_width;
-	    w->hints.base_height = w->hints.min_height;      
-	}
-	else
-	{
-	    w->hints.base_width = 0;
-	    w->hints.base_height = 0;
-	}
-    }
-    if(!(w->hints.flags & PMinSize))
-    {
-	w->hints.min_width = w->hints.base_width;
-	w->hints.min_height = w->hints.base_height;            
-    }
-    if(!(w->hints.flags & PMaxSize))
-    {
-	w->hints.max_width = MAX_WINDOW_WIDTH;
-	w->hints.max_height = MAX_WINDOW_HEIGHT;
-    }
-    if(w->hints.max_width < w->hints.min_width)
-	w->hints.max_width = MAX_WINDOW_WIDTH;    
-    if(w->hints.max_height < w->hints.min_height)
-	w->hints.max_height = MAX_WINDOW_HEIGHT;    
-
-    /* Zero width/height windows are bad news! */
-    if(w->hints.min_height <= 0)
-	w->hints.min_height = 1;
-    if(w->hints.min_width <= 0)
-	w->hints.min_width = 1;
-  
-    if(!(w->hints.flags & PWinGravity))
-    {
-	w->hints.win_gravity = NorthWestGravity;
-	w->hints.flags |= PWinGravity;
     }
 }
 
@@ -224,6 +163,7 @@ add_window (Window id)
 	repv win = rep_VAL(w);
 	XWindowChanges xwc;
 	u_int xwcm;
+	long supplied;
 
 	DB(("add_window (%lx)\n", id));
 
@@ -252,7 +192,8 @@ add_window (Window id)
 	XGetClassHint (dpy, id, &w->class);
 #endif
 	w->wmhints = XGetWMHints (dpy, id);
-	get_window_size_hints (w);
+	if (!XGetWMNormalHints (dpy, w->id, &w->hints, &supplied))
+	    w->hints.flags = 0;
 	get_window_protocols (w);
 
 	if (w->name == 0)
@@ -293,6 +234,14 @@ add_window (Window id)
 	    grab_window_events (w);
 
 	    Fungrab_server ();
+	}
+
+	if (w->id != 0 && !initialising)
+	{
+	    /* ..then the place-window-hook.. */
+	    rep_PUSHGC(gc_win, win);
+	    Fcall_hook (Qplace_window_hook, Fcons (rep_VAL(w), Qnil), Qor);
+	    rep_POPGC;
 	}
     }
     return w;
@@ -577,8 +526,10 @@ DEFUN("window-transient-p", Fwindow_transient_p, Swindow_transient_p,
 window-transient-p WINDOW
 ::end:: */
 {
+    Window tem;
     rep_DECLARE1(win, WINDOWP);
-    return transient_p (VWIN(win)->id) ? Qt : Qnil;
+    return (XGetTransientForHint (dpy, VWIN(win)->id, &tem)
+	    ? rep_MAKE_INT(tem) : Qnil);
 }
 
 DEFUN("hide-window", Fhide_window, Shide_window, (repv win), rep_Subr1) /*
@@ -619,6 +570,78 @@ window-visible-p WINDOW
 {
     rep_DECLARE1(win, WINDOWP);
     return VWIN(win)->visible ? Qt : Qnil;
+}
+
+DEFUN("window-id", Fwindow_id, Swindow_id, (repv win), rep_Subr1) /*
+::doc:Swindow-id::
+window-id WINDOW
+::end:: */
+{
+    rep_DECLARE1(win, WINDOWP);
+    return rep_MAKE_INT (VWIN(win)->id);
+}
+
+DEFUN("window-group-id", Fwindow_group_id, Swindow_group_id,
+      (repv win), rep_Subr1) /*
+::doc:Swindow-group-id::
+window-group-id WINDOW
+::end:: */
+{
+    rep_DECLARE1(win, WINDOWP);
+    return ((VWIN(win)->wmhints->flags & WindowGroupHint)
+	    ? rep_MAKE_INT (VWIN(win)->wmhints->window_group)
+	    : Qnil);
+}
+
+DEFUN("window-size-hints", Fwindow_size_hints, Swindow_size_hints,
+      (repv win), rep_Subr1) /*
+::doc:Swindow-size-hints::
+window-size-hints WINDOW
+::end:: */
+{
+    repv ret = Qnil;
+    XSizeHints *hints;
+    long flags;
+    rep_DECLARE1(win, WINDOWP);
+
+    hints = &VWIN(win)->hints;
+    flags = hints->flags;
+
+    if (flags & PMinSize)
+    {
+	ret = Fcons (Fcons (Qmin_width, rep_MAKE_INT(hints->min_width)),
+		     Fcons (Fcons (Qmin_height,
+				   rep_MAKE_INT(hints->min_height)), ret));
+    }
+    if (flags & PMaxSize)
+    {
+	ret = Fcons (Fcons (Qmax_width, rep_MAKE_INT(hints->max_width)),
+		     Fcons (Fcons (Qmax_height,
+				   rep_MAKE_INT(hints->max_height)), ret));
+    }
+    if (flags & PResizeInc)
+    {
+	ret = Fcons (Fcons (Qwidth_inc, rep_MAKE_INT(hints->width_inc)),
+		     Fcons (Fcons (Qheight_inc,
+				   rep_MAKE_INT(hints->height_inc)), ret));
+    }
+    if (flags & PBaseSize)
+    {
+	ret = Fcons (Fcons (Qbase_width, rep_MAKE_INT(hints->base_width)),
+		     Fcons (Fcons (Qbase_height,
+				   rep_MAKE_INT(hints->base_height)), ret));
+    }
+    if (flags & PAspect)
+    {
+	ret = Fcons (Fcons (Qmin_aspect,
+			    Fcons (rep_MAKE_INT(hints->min_aspect.x),
+				   rep_MAKE_INT(hints->min_aspect.y))),
+		     Fcons (Fcons (Qmax_aspect,
+				   Fcons (rep_MAKE_INT(hints->max_aspect.x),
+					  rep_MAKE_INT(hints->max_aspect.y))),
+			    ret));
+    }
+    return ret;
 }
 
 
@@ -684,6 +707,7 @@ manage_windows (void)
 
     Fgrab_server ();
     XQueryTree (dpy, root_window, &root, &parent, &children, &nchildren);
+    initialising = TRUE;
     for (i = 0; i < nchildren; i++)
     {
 	if (mapped_not_override_p (children[i]))
@@ -695,6 +719,7 @@ manage_windows (void)
 	    w = find_window_by_id (children[i]);
 	}
     }
+    initialising = FALSE;
     if (nchildren > 0)
 	XFree (children);
     Fungrab_server ();
@@ -726,12 +751,27 @@ windows_init (void)
     rep_ADD_SUBR(Shide_window);
     rep_ADD_SUBR(Sshow_window);
     rep_ADD_SUBR(Swindow_visible_p);
+    rep_ADD_SUBR(Swindow_id);
+    rep_ADD_SUBR(Swindow_group_id);
+    rep_ADD_SUBR(Swindow_size_hints);
+
     rep_INTERN(add_window_hook);
-    rep_SYM(Qadd_window_hook)->value = Qnil;
+    rep_INTERN(place_window_hook);
 
     rep_INTERN(fully_obscured);
     rep_INTERN(partially_obscured);
     rep_INTERN(unobscured);
+
+    rep_INTERN(min_width);
+    rep_INTERN(min_height);
+    rep_INTERN(max_width);
+    rep_INTERN(max_height);
+    rep_INTERN(width_inc);
+    rep_INTERN(height_inc);
+    rep_INTERN(base_width);
+    rep_INTERN(base_height);
+    rep_INTERN(min_aspect);
+    rep_INTERN(max_aspect);
 }
 
 void
