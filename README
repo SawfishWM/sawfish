@@ -47,9 +47,9 @@ more details...
 Installing
 **********
 
-To compile this snapshot you'll need GNU Autoconf, GNU make, Imlib, my
-librep Lisp interpreter, and the rep-gtk binding installed. Sources for
-some of these are:
+To compile this distribution you'll need GNU make, Imlib, my librep
+Lisp interpreter, and the rep-gtk binding installed. Sources for some
+of these are:
 
 	ftp://ftp.enlightenment.org/e/enlightenment/		[for imlib]
 	http://www.dcs.warwick.ac.uk/~john/sw/librep.html
@@ -59,10 +59,12 @@ After making sure that Imlib, librep, and rep-gtk are installed, do
 something similar to the following in the root of the unpacked sawmill
 distribution:
 
-	$ aclocal ; autoconf
 	$ ./configure
 	$ make all
 	$ make install
+
+If you're compiling from a CVS snapshot add `aclocal ; autoconf' before
+configuring.
 
 Before running the window manager, look at the lisp/sawmill-defaults.jl
 script. If you make any changes, copy the final version to ~/.sawmillrc
