@@ -28,13 +28,7 @@
 ;; This sets the window property `unmaximized-geometry' of each
 ;; currently maximize window to `(X Y W H)', the saved geometry.
 
-(defcustom maximize-avoided-windows-re nil
-  "Regular expression matching windows to avoid overlapping when maximizing."
-  :group maximize
-  :type string
-  :allow-nil t)
-
-(defcustom maximize-always-expands t
+(defcustom maximize-always-expands nil
   "Maxmizing a window dimension always increases the size of that dimension."
   :group maximize
   :type boolean)
@@ -48,9 +42,6 @@
   "Let ignored windows be overlapped when filling windows."
   :group maximize
   :type boolean)
-
-(defvar maximize-dont-avoid-ignored nil)
-(defvar maximize-avoid-by-default nil)
 
 ;; called when a window is maximized, args (W &optional DIRECTION)
 (defvar window-maximized-hook nil)
@@ -103,22 +94,6 @@
 
 (defmacro maximize-edges-touching (start end edge)
   `(> (- (min ,end (nth 2 ,edge)) (max ,start (nth 1 ,edge))) 0))
-
-(defun maximize-avoided-windows ()
-  (delete-if #'(lambda (w)
-		 (cond ((not (window-mapped-p w)))
-		       ((window-get w 'maximize-avoid)
-			nil)
-		       ((and maximize-avoided-windows-re
-			     (string-match maximize-avoided-windows-re
-					   (window-name w)))
-			nil)
-		       ((and maximize-dont-avoid-ignored
-			     (window-get w 'ignored))
-			t)
-		       (t
-			(not maximize-avoid-by-default))))
-	     (managed-windows)))
 
 (defun maximize-expand-edges (start end min max perp-1 perp-2 edges)
   (if maximize-always-expands
@@ -242,7 +217,7 @@
       ((coords (window-position w))
        (dims (window-dimensions w))
        (fdims (window-frame-dimensions w))
-       (avoided (delq w (maximize-avoided-windows)))
+       (avoided (avoided-windows w))
        (edges (get-visible-window-edges ':with-ignored-windows t
 					':windows avoided
 					':include-root t)))
@@ -336,9 +311,9 @@ unmaximized."
   "Maximize the window without obscuring any other windows."
   (interactive "%W")
   (let
-      ((maximize-avoid-by-default t)
+      ((avoid-by-default t)
        (maximize-always-expands t)
-       (maximize-dont-avoid-ignored maximize-ignore-when-filling))
+       (avoid-ignored maximize-ignore-when-filling))
     (maximize-window w direction t)))
 
 ;;;###autoload
