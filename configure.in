@@ -28,10 +28,10 @@ dnl Release versioning info
 version="0.30.3"
 
 output_files="src/Makefile lisp/Makefile themes/Makefile\
- nokogiri/Makefile sounds/Makefile\
+ lisp/sawfish/ui/Makefile lisp/sawfish/gtk/Makefile sounds/Makefile\
  man/Makefile po/Makefile Makedefs Makefile sawfish.spec"
 
-SUBDIRS="src lisp nokogiri themes sounds man po"
+SUBDIRS="src lisp themes sounds man po"
 AC_SUBST(SUBDIRS)
 
 add_subdir () {
@@ -56,7 +56,6 @@ esac
 
 sawfishdir='${datadir}/sawfish'
 lispdir='${sawfishdir}/${version}/lisp'
-nokogiridir='${sawfishdir}/${version}/nokogiri'
 localedir='${sawfishdir}/${version}/locale'
 sawfishexecdir='${libexecdir}/sawfish/${version}/${host_type}'
 
@@ -124,10 +123,11 @@ else
 fi
 
 dnl Check for image handling libraries
+with_gdk_pixbuf=maybe
 AC_ARG_WITH(gdk-pixbuf,
  [  --with-gdk-pixbuf	  Use gdk-pixbuf for image management],
  [ with_gdk_pixbuf=yes ])
-if test "$with_gdk_pixbuf" = "yes"; then
+if test "$with_gdk_pixbuf" != "no"; then
   AC_MSG_CHECKING([for gdk_pixbuf (xlib version)])
   GDK_PIXBUF_VERSION=`gnome-config gdk_pixbuf_xlib --modversion`
   if test $? -eq 0; then
@@ -141,10 +141,17 @@ if test "$with_gdk_pixbuf" = "yes"; then
     AC_DEFINE(NEED_PIXMAP_CACHE,1)
     IMAGE_LIBS='${GDK_PIXBUF_LIBS}'
     IMAGE_CFLAGS='${GDK_PIXBUF_CFLAGS}'
+    with_gdk_pixbuf=yes
   else
-    AC_MSG_ERROR(no)
+    AC_MSG_RESULT(no)
+    if test "$with_gdk_pixbuf" = "yes"; then
+      AC_MSG_ERROR([can't locate gdk-pixbuf-xlib library])
+    else
+      with_gdk_pixbuf=no
+    fi
   fi
-else
+fi
+if test "$with_gdk_pixbuf" = "no"; then
   AM_PATH_IMLIB
   if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then true; else
     AC_MSG_ERROR([imlib must be built with support for png images])
@@ -339,7 +346,6 @@ AC_SUBST(version)
 AC_SUBST(sawfishdir)
 AC_SUBST(sawfishexecdir)
 AC_SUBST(lispdir)
-AC_SUBST(nokogiridir)
 AC_SUBST(localedir)
 AC_SUBST(HAVE_X11)
 AC_SUBST(LIBOBJS)
