@@ -322,16 +322,17 @@ add_window (Window id)
 /* Remove W from the managed windows. If DESTROYED is nil, then the
    window will be reparented back to the root window */
 void
-remove_window (Lisp_Window *w, repv destroyed)
+remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 {
     DB(("remove_window (%s, %s)\n", w->name, destroyed == Qnil ? "nil" : "t"));
     if (w->id != 0)
     {
-	if (destroyed == Qnil)
+	if (destroyed == Qnil && from_error == Qnil)
 	{
 	    remove_window_frame (w);
 	    XRemoveFromSaveSet (dpy, w->id);
 	}
+	if (from_error == Qnil)
 	destroy_window_frame (w);
 	w->id = 0;
 	/* gc will do the rest... */
@@ -836,7 +837,10 @@ window_sweep (void)
     {
 	Lisp_Window *next = w->next;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
+	{
+	    destroy_window_frame (w);
 	    rep_FREE_CELL(w);
+	}
 	else
 	{
 	    rep_GC_CLR_CELL(rep_VAL(w));
@@ -941,7 +945,7 @@ windows_kill (void)
     Lisp_Window *w = window_list;
     while (w != 0)
     {
-	remove_window (w, Qnil);
+	remove_window (w, Qnil, Qnil);
 	w = w->next;
     }
 }
