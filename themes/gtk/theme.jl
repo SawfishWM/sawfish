@@ -27,6 +27,7 @@
 (defvar gtk-style nil)
 
 (defvar gtk-background nil)
+(defvar gtk-background-images nil)	;for bg colors
 (defvar gtk-font nil)
 (defvar gtk-foreground nil)
 
@@ -63,7 +64,8 @@
 ;; act on settings in gtk-style alist
 (defun gtk-apply-style ()
   (let
-      (tem)
+      (tem i)
+    (setq gtk-background-images nil)
     (when (setq tem (cdr (assq 'font gtk-style)))
       (setq gtk-font (get-font tem)))
     (when (setq tem (cdr (assq 'fg gtk-style)))
@@ -90,15 +92,31 @@
 				      (cdr (assq 'selected tem))))
 	   (setq gtk-background (mapcar #'(lambda (x)
 					    (and x (get-color x)))
-					gtk-background))))
-    (mapc #'(lambda (w)
-	      (when (eq (window-get w 'current-frame-style) 'gtk)
-		(rebuild-frame w))) (managed-windows))))
+					gtk-background))
+	   (setq i -1)
+	   (setq gtk-background-images
+		 (mapcar #'(lambda (x)
+			     (setq i (1+ i))
+			     (and (colorp x)
+				  (progn
+				    (setq x (make-sized-image 16 16 x))
+				    (bevel-image x 1 (/= i 3))
+				    (set-image-border x 1 1 1 1)
+				    x)))
+			 gtk-background))))))
+
+(defun gtk-rebuild-frames ()
+  (mapc #'(lambda (w)
+	    (when (eq (window-get w 'current-frame-style) 'gtk)
+	      (set-window-frame-style w 'gtk)))
+	(managed-windows)))
 
 (defun gtk-reload-style ()
   (interactive)
   (gtk-get-style)
-  (gtk-apply-style))
+  (gtk-apply-style)
+  (gtk-construct-frame-defs)
+  (gtk-rebuild-frames))
 
 ;; recognize when the GTK theme has been switched
 (defun gtk-handle-client-msg (w type data)
@@ -118,197 +136,223 @@
 (defun gtk-quit ()
   (destroy-window gtk-dummy-window))
 
-
-;; frame defs
+;; for pixmap frames; this is going to use horrendous amounts of memory,
+;; but what other options are there..?
+(defun gtk-render-bg (img state)
+  (let
+      ((bg (cond ((eq state nil)
+		  (nth 0 gtk-background))
+		 ((eq state 'focused)
+		  (nth 1 gtk-background))
+		 ((eq state 'highlighted)
+		  (nth 2 gtk-background))
+		 (t
+		  (nth 3 gtk-background)))))
+    (tile-image img bg)
+    (bevel-image img 1 (not (eq state 'clicked)))))
 
 (defun gtk-foreground ()
   gtk-foreground)
 
 (defun gtk-background ()
-  gtk-background)
+  (if gtk-background-images
+      (cons 'background gtk-background-images)
+    (cons 'renderer 'gtk-render-bg)))
 
-(defvar gtk-frame
- `(;; title bar
-   ((background . gtk-background)
-    (foreground . gtk-foreground)
-    (text . window-name)
-    (x-justify . 30)
-    (y-justify . center)
-    (left-edge . 0)
-    (right-edge . 0)
-    (top-edge . -21)
-    (height . 21)
-    (class . title))
-   ;; title frame
-   ((background . "black")
-    (left-edge . 0)
-    (right-edge . 0)
-    (top-edge . -22)
-    (height . 1))
-   ;; left frame
-   ((background . "black")
-    (left-edge . -1)
-    (width . 1)
-    (top-edge . -22)
-    (bottom-edge . -5))
-   ;; right frame
-   ((background . "black")
-    (right-edge . -1)
-    (width . 1)
-    (top-edge . -22)
-    (bottom-edge . -5))
-   ;; bottom bar
-   ((background . gtk-background)
-    (left-edge . 0)
-    (right-edge . 0)
-    (bottom-edge . -4)
-    (height . 4)
-    (class . bottom-border))
-   ;; bottom frame
-   ((background . "black")
-    (left-edge . 0)
-    (right-edge . 0)
-    (bottom-edge . -5)
-    (height . 1))
-   ;; minimize button
-   ((background . ,gtk-minimize)
-    (left-edge . 4)
-    (top-edge . -18)
-    (class . iconify)
-    (removable . t))
-   ;; close button
-   ((background . ,gtk-close)
-    (right-edge . 4)
-    (top-edge . -18)
-    (class . close)
-    (removable . t))))
+
+;; frame defs
+
+(defvar gtk-frame nil)
 (put 'gtk-frame 'unshaped t)
 
-(defvar gtk-shaped-frame
- `(;; title bar
-   ((background . gtk-background)
-    (foreground . gtk-foreground)
-    (text . window-name)
-    (x-justify . 30)
-    (y-justify . center)
-    (left-edge . 0)
-    (right-edge . 0)
-    (top-edge . -22)
-    (height . 21)
-    (class . title))
-   ;; title frame
-   ((background . "black")
-    (left-edge . 0)
-    (right-edge . 0)
-    (top-edge . -23)
-    (height . 1))
-   ;; left frame
-   ((background . "black")
-    (left-edge . -1)
-    (width . 1)
-    (top-edge . -23)
-    (height . 23))
-   ;; right frame
-   ((background . "black")
-    (right-edge . -1)
-    (width . 1)
-    (top-edge . -23)
-    (height . 23))
-   ;; bottom frame
-   ((background . "black")
-    (left-edge . 0)
-    (right-edge . 0)
-    (top-edge . -1)
-    (height . 1))
-   ;; minimize button
-   ((background . ,gtk-minimize)
-    (left-edge . 5)
-    (top-edge . -19)
-    (class . iconify)
-    (removable . t))
-   ;; close button
-   ((background . ,gtk-close)
-    (right-edge . 5)
-    (top-edge . -19)
-    (class . close)
-    (removable . t))))
+(defvar gtk-shaped-frame nil)
 (put 'gtk-shaped-frame 'unshaped t)
 
-(defvar gtk-transient-frame
- `(;; title bar
-   ((background . gtk-background)
-    (left-edge . 0)
-    (right-edge . 0)
-    (top-edge . -4)
-    (height . 4)
-    (class . title))
-   ;; title frame
-   ((background . "black")
-    (left-edge . 0)
-    (right-edge . 0)
-    (top-edge . -5)
-    (height . 1))
-   ;; left frame
-   ((background . "black")
-    (left-edge . -1)
-    (width . 1)
-    (top-edge . -5)
-    (bottom-edge . -5))
-   ;; right frame
-   ((background . "black")
-    (right-edge . -1)
-    (width . 1)
-    (top-edge . -5)
-    (bottom-edge . -5))
-   ;; bottom bar
-   ((background . gtk-background)
-    (render-scale . 2)
-    (left-edge . 0)
-    (right-edge . 0)
-    (bottom-edge . -4)
-    (height . 4)
-    (class . bottom-border))
-   ;; bottom frame
-   ((background . "black")
-    (left-edge . 0)
-    (right-edge . 0)
-    (bottom-edge . -5)
-    (height . 1))))
+(defvar gtk-transient-frame nil)
 (put 'gtk-transient-frame 'unshaped t)
 
-(defvar gtk-shaped-transient-frame
- `(;; title bar
-   ((background . gtk-background)
-    (left-edge . 0)
-    (right-edge . 0)
-    (top-edge . -5)
-    (height . 4)
-    (class . title))
-   ;; title frame
-   ((background . "black")
-    (left-edge . 0)
-    (right-edge . 0)
-    (top-edge . -6)
-    (height . 1))
-   ;; left frame
-   ((background . "black")
-    (left-edge . -1)
-    (width . 1)
-    (top-edge . -6)
-    (height . 6))
-   ;; right frame
-   ((background . "black")
-    (right-edge . -1)
-    (width . 1)
-    (top-edge . -6)
-    (height . 6))
-   ;; bottom frame
-   ((background . "black")
-    (left-edge . 0)
-    (right-edge . 0)
-    (top-edge . -1)
-    (height . 1))))
+(defvar gtk-shaped-transient-frame nil)
 (put 'gtk-transient-shaped-frame 'unshaped t)
+
+(defun gtk-construct-frame-defs ()
+  (setq gtk-frame
+	`(;; title bar
+	 (,(gtk-background)
+	  (foreground . gtk-foreground)
+	  (text . window-name)
+	  (x-justify . 30)
+	  (y-justify . center)
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (top-edge . -21)
+	  (height . 21)
+	  (class . title))
+	 ;; title frame
+	 ((background . "black")
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (top-edge . -22)
+	  (height . 1))
+	 ;; left frame
+	 ((background . "black")
+	  (left-edge . -1)
+	  (width . 1)
+	  (top-edge . -22)
+	  (bottom-edge . -5))
+	 ;; right frame
+	 ((background . "black")
+	  (right-edge . -1)
+	  (width . 1)
+	  (top-edge . -22)
+	  (bottom-edge . -5))
+	 ;; bottom bar
+	 (,(gtk-background)
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (bottom-edge . -4)
+	  (height . 4)
+	  (class . bottom-border))
+	 ;; bottom frame
+	 ((background . "black")
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (bottom-edge . -5)
+	  (height . 1))
+	 ;; minimize button
+	 ((background . ,gtk-minimize)
+	  (left-edge . 4)
+	  (top-edge . -18)
+	  (class . iconify)
+	  (removable . t))
+	 ;; close button
+	 ((background . ,gtk-close)
+	  (right-edge . 4)
+	  (top-edge . -18)
+	  (class . close)
+	  (removable . t))))
+
+  (setq gtk-shaped-frame
+	`(;; title bar
+	 (,(gtk-background)
+	  (foreground . gtk-foreground)
+	  (text . window-name)
+	  (x-justify . 30)
+	  (y-justify . center)
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (top-edge . -22)
+	  (height . 21)
+	  (class . title))
+	 ;; title frame
+	 ((background . "black")
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (top-edge . -23)
+	  (height . 1))
+	 ;; left frame
+	 ((background . "black")
+	  (left-edge . -1)
+	  (width . 1)
+	  (top-edge . -23)
+	  (height . 23))
+	 ;; right frame
+	 ((background . "black")
+	  (right-edge . -1)
+	  (width . 1)
+	  (top-edge . -23)
+	  (height . 23))
+	 ;; bottom frame
+	 ((background . "black")
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (top-edge . -1)
+	  (height . 1))
+	 ;; minimize button
+	 ((background . ,gtk-minimize)
+	  (left-edge . 5)
+	  (top-edge . -19)
+	  (class . iconify)
+	  (removable . t))
+	 ;; close button
+	 ((background . ,gtk-close)
+	  (right-edge . 5)
+	  (top-edge . -19)
+	  (class . close)
+	  (removable . t))))
+
+  (setq gtk-transient-frame
+	`(;; title bar
+	 (,(gtk-background)
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (top-edge . -4)
+	  (height . 4)
+	  (class . title))
+	 ;; title frame
+	 ((background . "black")
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (top-edge . -5)
+	  (height . 1))
+	 ;; left frame
+	 ((background . "black")
+	  (left-edge . -1)
+	  (width . 1)
+	  (top-edge . -5)
+	  (bottom-edge . -5))
+	 ;; right frame
+	 ((background . "black")
+	  (right-edge . -1)
+	  (width . 1)
+	  (top-edge . -5)
+	  (bottom-edge . -5))
+	 ;; bottom bar
+	 (,(gtk-background)
+	  (render-scale . 2)
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (bottom-edge . -4)
+	  (height . 4)
+	  (class . bottom-border))
+	 ;; bottom frame
+	 ((background . "black")
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (bottom-edge . -5)
+	  (height . 1))))
+
+  (setq gtk-shaped-transient-frame
+	`(;; title bar
+	 (,(gtk-background)
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (top-edge . -5)
+	  (height . 4)
+	  (class . title))
+	 ;; title frame
+	 ((background . "black")
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (top-edge . -6)
+	  (height . 1))
+	 ;; left frame
+	 ((background . "black")
+	  (left-edge . -1)
+	  (width . 1)
+	  (top-edge . -6)
+	  (height . 6))
+	 ;; right frame
+	 ((background . "black")
+	  (right-edge . -1)
+	  (width . 1)
+	  (top-edge . -6)
+	  (height . 6))
+	 ;; bottom frame
+	 ((background . "black")
+	  (left-edge . 0)
+	  (right-edge . 0)
+	  (top-edge . -1)
+	  (height . 1)))))
 
 (defun gtk-frame-style (w type)
   (cond ((eq type 'shaped)
