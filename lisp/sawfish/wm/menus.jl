@@ -211,32 +211,41 @@ unused before killing it.")
 	 (offset (and part (frame-part-position part)))
 	 (dims (and part (frame-part-dimensions part))))
       (setq menu-active (or (current-event-window) (input-focus)))
-      (menu-start-process)
-      ;; prevent any depressed button being redrawn until the menu
-      ;; is popped down
-      ;; XXX expose events screw this up..
-      (when (clicked-frame-part)
-	(frame-draw-mutex t))
-      ;; This function is probably called from a ButtonPress event,
-      ;; so cancel the implicit pointer grab (to allow the menu's grab
-      ;; to succeed)
-      (ungrab-pointer)
-      (ungrab-keyboard)
-      (sync-server)
-      (when (functionp spec)
-	(setq spec (spec)))
-      ;; XXX this is a hack, but I want menus to appear under buttons
-      (if (and part (setq part (frame-part-get part 'class))
-	       (windowp menu-active)
-	       (string-match "-button$" (symbol-name part)))
+      (condition-case error-data
 	  (progn
-	    (rplaca offset (max 0 (+ (car offset)
-				     (car (window-position menu-active)))))
-	    (rplacd offset (max 0 (+ (cdr offset) (cdr dims)
-				     (cdr (window-position menu-active))))))
-	(setq offset nil))
-      (format menu-process "(popup-menu %S %S %S)\n"
-	      (mapcar menu-preprocessor spec) (x-server-timestamp) offset))))
+	    (menu-start-process)
+	    ;; prevent any depressed button being redrawn until the menu
+	    ;; is popped down
+	    ;; XXX expose events screw this up..
+	    (when (clicked-frame-part)
+	      (frame-draw-mutex t))
+	    ;; This function is probably called from a ButtonPress event,
+	    ;; so cancel the implicit pointer grab (to allow the menu's grab
+	    ;; to succeed)
+	    (ungrab-pointer)
+	    (ungrab-keyboard)
+	    (sync-server)
+	    (when (functionp spec)
+	      (setq spec (spec)))
+	    ;; XXX this is a hack, but I want menus to appear under buttons
+	    (if (and part (setq part (frame-part-get part 'class))
+		     (windowp menu-active)
+		     (string-match "-button$" (symbol-name part)))
+		(progn
+		  (rplaca offset
+			  (max 0 (+ (car offset)
+				    (car (window-position menu-active)))))
+		  (rplacd offset
+			  (max 0 (+ (cdr offset) (cdr dims)
+				    (cdr (window-position menu-active))))))
+	      (setq offset nil))
+	    (format menu-process "(popup-menu %S %S %S)\n"
+		    (mapcar menu-preprocessor spec)
+		    (x-server-timestamp) offset))
+	(error
+	 ;; prevents spurious errors with subsequent menus
+	 (setq menu-active nil)
+	 (apply signal error-data))))))
 
 ;;;###autoload
 (defun popup-window-menu ()
