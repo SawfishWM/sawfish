@@ -23,6 +23,7 @@
 
     (export sm-find-file
 	    sm-add-saved-properties
+	    sm-add-restored-properties
 	    sm-get-window-prop
 	    sm-save-yourself
 	    sm-init)
@@ -50,6 +51,9 @@
   (defvar sm-saved-window-properties nil
     "List of window properties saved with the session.")
 
+  (defvar sm-restored-window-properties nil
+    "Extra window properties restored from the session.")
+
   (defvar sm-window-save-functions nil
     "List of functions called when the state of each window is saved. Each
 function should return a list of alist elements that will be saved in
@@ -76,6 +80,13 @@ the window.")
 	    (or (memq p sm-saved-window-properties)
 		(setq sm-saved-window-properties
 		      (cons p sm-saved-window-properties))))
+	  props))
+
+  (define (sm-add-restored-properties #!rest props)
+    (mapc (lambda (p)
+	    (or (memq p sm-restored-window-properties)
+		(setq sm-restored-window-properties
+		      (cons p sm-restored-window-properties))))
 	  props))
 
   ;; find PROP associated with W, or nil

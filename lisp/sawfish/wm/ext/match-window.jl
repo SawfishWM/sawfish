@@ -251,7 +251,7 @@
 	    ((tem (assq p prop-cache)))
 	  (if tem
 	      (cdr tem)
-	    (setq tem (get-x-property w p))
+	    (setq tem (copy-sequence (get-x-property w p)))
 	    (when (and tem (eq (car tem) 'STRING))
 	      (rplaca (cddr tem) (get-x-text-property w p)))
 	    (when (and tem (get p 'match-window-formatter))

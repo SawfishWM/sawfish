@@ -34,7 +34,8 @@
 	  sawfish.wm.events
 	  sawfish.wm.viewport
 	  sawfish.wm.workspace
-	  sawfish.wm.commands.move-resize)
+	  sawfish.wm.commands.move-resize
+	  sawfish.wm.ext.workspace-grid)
 
   (define-structure-alias edge-flip sawfish.wm.ext.edge-flip)
 
@@ -124,16 +125,16 @@
 	    (warp-cursor (car ptr) (cdr ptr)))
 	(let ((orig current-workspace))
 	  (cond ((eq edge 'left)
-		 (previous-workspace 1)
+		 (workspace-left)
 		 (rplaca ptr (- (screen-width) 2)))
 		((eq edge 'right)
-		 (next-workspace 1)
+		 (workspace-right)
 		 (rplaca ptr 1))
 		((eq edge 'top)
-		 (previous-workspace 1)
+		 (workspace-up 1)
 		 (rplacd ptr (- (screen-height) 2)))
 		((eq edge 'bottom)
-		 (next-workspace 1)
+		 (workspace-down 1)
 		 (rplacd ptr 1)))
 	  (unless (= current-workspace orig)
 	    (warp-cursor (car ptr) (cdr ptr)))))

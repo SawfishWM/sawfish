@@ -134,16 +134,18 @@
 		;; [y] placed relative to the center
 		(rplacd coords (- (cdr coords) (quotient (- (cdr tem)
 							    (cdr dims)) 2)))))))
-	(setq dims tem))
+	(unless (window-locked-horizontally-p w)
+	  (rplaca dims (car tem)))
+	(unless (window-locked-vertically-p w)
+	  (rplacd dims (cdr tem))))
 
       (when (setq tem (cdr (assq 'position alist)))
+	(let ((grav (window-gravity w hints)))
+	  (when (and (car tem) (not (window-locked-horizontally-p w)))
+	    (rplaca coords (adjust-position-for-gravity/x w grav (car tem))))
+	  (when (and (cdr tem) (not (window-locked-vertically-p w)))
+	    (rplacd coords (adjust-position-for-gravity/y w grav (cdr tem)))))
 	;; if the program is setting its position, best not to interfere..
-	(let ((new (adjust-position-for-gravity
-		    w (window-gravity w hints) tem)))
-	  (unless (window-locked-horizontally-p w)
-	    (rplaca coords (car new)))
-	  (unless (window-locked-vertically-p w)
-	    (rplacd coords (cdr new))))
 	(window-put w 'client-set-position t))
 
       (move-resize-window-to w (car coords) (cdr coords) (car dims) (cdr dims))

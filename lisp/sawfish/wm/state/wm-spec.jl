@@ -37,7 +37,6 @@
 
   ;; todo:
 
-  ;; - _NET_WORKAREA
   ;; - _NET_WM_NAME		-- needs to be in C code?
   ;; - _NET_WM_ICON
 
@@ -77,6 +76,7 @@
      _NET_PROTOCOLS
      _NET_SUPPORTED
      _NET_SUPPORTING_WM_CHECK
+     _NET_WORKAREA
      _NET_WM_ICON_GEOMETRY
      _NET_WM_MOVERESIZE
      _NET_WM_MOVERESIZE_MOVE
@@ -137,12 +137,14 @@
   (define last-workspace-names nil)
   (define last-area nil)
   (define last-area-count nil)
+  (define last-workarea nil)
 
   (define (update-workspace-hints)
     (let* ((limits (workspace-limits))
 	   (port (screen-viewport))
 	   (port-size viewport-dimensions)
-	   (total-workspaces (1+ (- (cdr limits) (car limits)))))
+	   (total-workspaces (1+ (- (cdr limits) (car limits))))
+	   (workarea (make-vector (* 4 total-workspaces))))
 
       (define (set-ws-hints)
 	;; _NET_NUMBER_OF_DESKTOPS
@@ -182,7 +184,12 @@
 				  view 'CARDINAL 32)
 		(aset view (* i 2) (* (car port) (screen-width)))
 		(aset view (1+ (* i 2)) (* (cdr port) (screen-height)))
-		(loop (1+ i)))))))
+		(loop (1+ i))))))
+
+	;; _NET_WORKAREA
+	(unless (equal last-workarea workarea)
+	  (set-x-property 'root '_NET_WORKAREA workarea 'CARDINAL 32)
+	  (setq last-workarea workarea)))
 
       (define (set-window-hints w)
 	(cond ((window-sticky-p/workspace w)
@@ -194,6 +201,16 @@
 		 (set-x-property w '_NET_WM_DESKTOP
 				 (vector (- space (car limits)))
 				 'CARDINAL 32)))))
+
+      ;; calculate workareas
+      (do ((i 0 (1+ i)))
+	  ((= i total-workspaces))
+	(let ((area (calculate-workarea-from-struts
+		     #:workspace (+ i (car limits)))))
+	  (aset workarea (+ (* i 4) 0) (nth 0 area))
+	  (aset workarea (+ (* i 4) 1) (nth 1 area))
+	  (aset workarea (+ (* i 4) 2) (- (nth 2 area) (nth 0 area)))
+	  (aset workarea (+ (* i 4) 3) (- (nth 3 area) (nth 1 area)))))
 		 
       ;; apparently some pagers don't like it if we place windows
       ;; on (temporarily) non-existent workspaces
@@ -347,10 +364,12 @@
 	((remove) (unmaximize-window w direction))
 	((add)    (maximize-window w direction))
 	((toggle) (maximize-window-toggle w direction))
-	((get)    (case direction
-		    ((vertical) (window-maximized-vertically-p w))
-		    ((horizontal) (window-maximized-horizontally-p w))
-		    (t (window-maximized-p w)))))))
+	((get)    (if (window-maximized-fullscreen-p w)
+		      nil
+		    (case direction
+		      ((vertical) (window-maximized-vertically-p w))
+		      ((horizontal) (window-maximized-horizontally-p w))
+		      (t (window-maximized-p w))))))))
 
   (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED_VERT
 			       (wm-spec-maximize-handler 'vertical))
@@ -386,8 +405,8 @@
    (lambda (w mode)
      (require 'sawfish.wm.state.maximize)
      (case mode
-       ((init add) (maximize-window-fullscreen w t))
-       ((remove) (maximize-window-fullscreen w nil))
+       ((init) (window-put w 'queued-fullscreen-maximize t))
+       ((add remove) (maximize-window-fullscreen w (eq mode 'add)))
        ((toggle) (maximize-window-fullscreen-toggle w))
        ((get) (window-maximized-fullscreen-p w)))))
 
@@ -529,6 +548,7 @@
     (add-hook 'workspace-state-change-hook update-workspace-hints)
     (add-hook 'viewport-resized-hook update-workspace-hints)
     (add-hook 'viewport-moved-hook update-workspace-hints)
+    (add-hook 'workarea-changed-hook update-workspace-hints)
 
     (add-hook 'add-window-hook update-client-list-hints)
     (add-hook 'destroy-notify-hook update-client-list-hints)
