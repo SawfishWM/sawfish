@@ -24,8 +24,6 @@
 
 ;;;###autoload (setq custom-required (cons 'auto-raise custom-required))
 
-;; if a string, windows are only raised if their name matches this
-;; regular expression.
 (defcustom raise-windows-on-focus nil
   "Raise windows when they are focused."
   :type boolean
@@ -37,6 +35,8 @@
   :type number
   :group focus)
 
+(defvar disable-auto-raise nil)
+
 (defvar rw-timer nil)
 (defvar rw-window nil)
 
@@ -47,24 +47,23 @@
     (setq rw-timer nil)))
 
 (defun rw-on-focus (w)
-  (if (or (and (stringp raise-windows-on-focus)
-	       (string-match raise-windows-on-focus (window-name w)))
-	  raise-windows-on-focus)
-      (if (<= raise-window-timeout 0)
-	  (progn
-	    (raise-window w)
-	    (rw-disable-timer))
-	(setq rw-window w)
-	(if rw-timer
-	    (set-timer rw-timer)
-	  (let
-	      ((timer-callback (lambda ()
-				 (raise-window rw-window)
-				 (setq rw-timer nil))))
-	    (setq rw-timer (make-timer timer-callback
-				       (/ raise-window-timeout 1000)
-				       (mod raise-window-timeout 1000))))))
-    (rw-disable-timer)))
+  (unless disable-auto-raise
+    (if (or (window-get w 'raise-on-focus) raise-windows-on-focus)
+	(if (<= raise-window-timeout 0)
+	    (progn
+	      (raise-window w)
+	      (rw-disable-timer))
+	  (setq rw-window w)
+	  (if rw-timer
+	      (set-timer rw-timer)
+	    (let
+		((timer-callback (lambda ()
+				   (raise-window rw-window)
+				   (setq rw-timer nil))))
+	      (setq rw-timer (make-timer timer-callback
+					 (/ raise-window-timeout 1000)
+					 (mod raise-window-timeout 1000))))))
+      (rw-disable-timer))))
 
 (defun rw-out-focus (w)
   (when (and rw-timer (eq rw-window w))
