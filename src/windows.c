@@ -1488,6 +1488,9 @@ manage_windows (void)
 	    XEvent fake;
 	    Lisp_Window *w;
 	    fake.xmaprequest.window = children[i];
+	    /* Make sure the window is initially unmapped. We expect to
+	       get map-notify events when we later remap it.. #67601 */
+	    XUnmapWindow (dpy, children[i]);
 	    map_request (&fake);
 	    w = find_window_by_id (children[i]);
 	}
