@@ -1,5 +1,5 @@
 ;; mono/theme.jl
-;; $Id: theme.jl,v 1.6 2000/01/27 08:39:37 john Exp $
+;; $Id: theme.jl,v 1.7 2000/05/15 16:37:52 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -22,27 +22,23 @@
 (defgroup mono "Mono Theme"
   :group appearance)
 
-(defcustom mono:gtk-background-color t
-  "Use the GTK+ background color for inactive frames."
-  :type boolean
-  :group (appearance mono))
-
-(defcustom mono:normal-color "slateblue1"
-  "Color of inactive frames. (When the above option is unset.)"
-  :type color
+(defcustom mono:normal-color nil
+  "Color of inactive frames (if unset use GTK+ background color)."
+  :type (optional color)
   :group (appearance mono)
+  :user-level novice
   :after-set after-setting-frame-option)
 
 (defcustom mono:active-color "yellowgreen"
   "Color of active frames."
   :type color
   :group (appearance mono)
+  :user-level novice
   :after-set after-setting-frame-option)
 
 (defcustom mono:text-justify 'left
-  "Method of justifying text in window titles."
-  :type symbol
-  :options (left right centered)
+  "Text is \\w justified in window titles."
+  :type (choice left right center)
   :group (appearance mono)
   :after-set after-setting-frame-option)
 
@@ -64,7 +60,8 @@
      (initialised-gtk nil)
 
      (rebuild (lambda ()
-		(when (and mono:gtk-background-color (not initialised-gtk))
+		(when (and (not mono:normal-color)
+			   (not initialised-gtk))
 		  (setq initialised-gtk t)
 		  (require 'gtkrc)
 		  (gtkrc-call-after-changed
@@ -73,7 +70,7 @@
 
      (frame-colors (lambda (w)
 		     (list (or (window-get w 'frame-inactive-color)
-			       (and mono:gtk-background-color
+			       (and (not mono:normal-color)
 				    (car gtkrc-background))
 			       mono:normal-color)
 			   (or (window-get w 'frame-active-color)
@@ -82,7 +79,7 @@
      (text-justifier (lambda (w)
 		       (cond ((eq mono:text-justify 'left) 24)
 			     ((eq mono:text-justify 'right) -64)
-			     ((eq mono:text-justify 'centered) 'center))))
+			     ((eq mono:text-justify 'center) 'center))))
 
      (frame `(((background . ,frame-colors)
 	       (foreground . "black")
@@ -310,4 +307,4 @@
 		       ((shaped) shaped-frame)
 		       ((shaped-transient) shaped-transient-frame))))
   (rebuild)
-  (custom-set-property 'mono:gtk-background-color ':after-set rebuild))
+  (custom-set-property 'mono:normal-color ':after-set rebuild))

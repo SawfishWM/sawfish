@@ -1,5 +1,5 @@
 ;; smaker/theme.jl -- somewhat windowmaker like theme, heavily customizable
-;; $Id: theme.jl,v 1.9 2000/01/27 08:39:38 john Exp $
+;; $Id: theme.jl,v 1.10 2000/05/15 16:37:52 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -25,11 +25,13 @@
 (defcustom smaker:inverted-buttons nil
   "Use black-on-white button images."
   :group (appearance smaker)
+  :user-level novice
   :type boolean)
 
 (defcustom smaker:fg-color "white"
   "Color to use when drawing text."
   :group (appearance smaker)
+  :user-level novice
   :type color)
 
 (defcustom smaker:bar-normal "bar_normal.png"
