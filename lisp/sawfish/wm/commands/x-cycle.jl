@@ -203,11 +203,10 @@ prefix of the current window."
   "Cycle through all windows with the same class as the current window."
   (interactive "e\n%W")
   (let*
-      ((class (aref (get-x-text-property w 'WM_CLASS) 1))
-       (x-cycle-windows
-	(filter (lambda (x)
-		  (string= (aref (get-x-text-property x 'WM_CLASS) 1) class))
-		(managed-windows))))
+      ((class (window-class w))
+       (x-cycle-windows (filter (lambda (x)
+				  (equal (window-class w) class))
+				(managed-windows))))
     (cycle-windows event)))
 
 (defun x-cycle-next ()
