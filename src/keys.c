@@ -185,6 +185,16 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	ret = TRUE;
 	break;
     }
+
+    if (ret)
+    {
+	if(*mods & meta_mod)
+	    *mods = (*mods & ~meta_mod) | EV_MOD_META;
+	if(*mods & alt_mod)
+	    *mods = (*mods & ~alt_mod) | EV_MOD_ALT;
+	if(*mods & hyper_mod)
+	    *mods = (*mods & ~hyper_mod) | EV_MOD_HYPER;
+    }
     return ret;
 }
 
@@ -535,12 +545,6 @@ lookup_event(u_long *code, u_long *mods, u_char *desc)
 
 	desc = tem + 1;
     }
-    if (*mods & EV_MOD_META)
-	*mods = (*mods & ~EV_MOD_META) | meta_mod;
-    if (*mods & EV_MOD_ALT)
-	*mods = (*mods & ~EV_MOD_ALT) | alt_mod;
-    if (*mods & EV_MOD_HYPER)
-	*mods = (*mods & ~EV_MOD_HYPER) | hyper_mod;
 
     /* Then go for the code itself */
     {
@@ -583,14 +587,7 @@ lookup_event_name(u_char *buf, u_long code, u_long mods)
     char *end = buf, *tem;
     *buf = 0;
 
-    if(mods & meta_mod)
-	mods = (mods & ~meta_mod) | EV_MOD_META;
-    if(mods & alt_mod)
-	mods = (mods & ~alt_mod) | EV_MOD_ALT;
-    if(mods & hyper_mod)
-	mods = (mods & ~hyper_mod) | EV_MOD_HYPER;
     mods &= EV_MOD_MASK;
-
     for(i = 0; i < 32 && mods != 0; i++)	/* magic numbers!? */
     {
 	u_long mask = 1 << i;
@@ -966,6 +963,34 @@ Return the (COMMAND . EVENT) binding of EVENT in KEYMAP, or nil.
     res = search_keymap(km, rep_INT(EVENT_CODE(ev)),
 			rep_INT(EVENT_MODS(ev)), 0);
     return res ? res : Qnil;
+}
+
+DEFUN("x-lookup-keysym", Fx_lookup_keysym,
+      Sx_lookup_keysym, (repv name), rep_Subr1) /*
+::doc:x-lookup-keysym::
+x-lookup-keysym NAME
+
+Return the X11 keysym (an integer), named by the Lisp symbol NAME.
+::end:: */
+{
+    KeySym sym;
+    rep_DECLARE1(name, rep_SYMBOLP);
+    sym = XStringToKeysym (rep_STR(rep_SYM(name)->name));
+    return sym == NoSymbol ? Qnil : rep_MAKE_INT (sym);
+}
+
+DEFUN("x-keysym-name", Fx_keysym_name, Sx_keysym_name, (repv ks), rep_Subr1) /*
+::doc:x-keysym-name::
+x-keysym-name KEYSYM
+
+Return the Lisp symbol naming the X11 keysym represented by the integer
+KEYSYM.
+::end:: */
+{
+    char *id;
+    rep_DECLARE1(ks, rep_INTP);
+    id = XKeysymToString (rep_INT(ks));
+    return !id ? Qnil : Fintern (rep_string_dup (id), rep_obarray);
 }
 
 DEFUN("keymapp", Fkeymapp, Skeymapp, (repv arg), rep_Subr1) /*
@@ -1353,6 +1378,8 @@ keys_init(void)
     rep_ADD_SUBR(Skeymapp);
     rep_ADD_SUBR(Seventp);
     rep_ADD_SUBR(Sforget_button_press);
+    rep_ADD_SUBR(Sx_lookup_keysym);
+    rep_ADD_SUBR(Sx_keysym_name);
 
     rep_INTERN(async_pointer);
     rep_INTERN(async_keyboard);
