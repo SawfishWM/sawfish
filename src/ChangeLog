@@ -1,5 +1,8 @@
 1999-08-27  John Harper  <john@dcs.warwick.ac.uk>
 
+	* events.c (colormap_notify): fix bug where changing a colormap
+	when no window is focused causes a segfault
+
 	* sawmill.h (XlibSpecificationRelease): if undefined, define to
 	4; this really means X11R4 or _less_
 
