@@ -19,14 +19,26 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+;; XXX rename this file frames.jl
+
 (provide 'transient)
 
 (defvar transient-frame nil-frame
   "Frame used to decorate transient windows.")
 
+(defvar shaped-frame default-frame
+  "Frame used to decorate shaped windows.")
+
+(defvar shaped-transient-frame nil-frame
+  "Frame used to decorate shaped transient windows.")
+
 ;; called from the add-window-hook
 (defun transient-add-window (w)
-  (when (window-transient-p w)
-    (set-window-frame w transient-frame)))
+  (if (window-transient-p w)
+      (if (window-shaped-p w)
+	  (set-window-frame w shaped-transient-frame)
+	(set-window-frame w transient-frame))
+    (when (window-shaped-p w)
+      (set-window-frame w shaped-frame))))
 
 (add-hook 'add-window-hook 'transient-add-window t)
