@@ -193,7 +193,7 @@
 		 (last nil))
 	(when rest
 	  (let ((button (gtk-radio-menu-item-new-with-label-from-widget
-			 last (symbol-name (car rest)))))
+			 last (_ (symbol-name (car rest))))))
 	    (gtk-menu-append menu button)
 	    (gtk-widget-show button)
 	    (gtk-signal-connect button "toggled"
@@ -234,6 +234,7 @@
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
+		   ;; Can't i18n'ize these strings..
 		   (gtk-entry-set-text (gtk-combo-entry widget)
 				       (if x (symbol-name x) ""))))
 	  ((clear) (lambda ()
@@ -438,6 +439,7 @@
   (define (make-labelled-item changed-callback label item)
     (let ((box (gtk-hbox-new nil box-spacing)))
       (setq item (make-widget item changed-callback))
+      ;; XXX i18n the label string?
       (gtk-box-pack-start box (gtk-label-new label))
       (gtk-container-add box (widget-gtk-widget item))
       (gtk-widget-show-all box)
@@ -500,7 +502,7 @@
 ;;; widget used for unknown widget types
 
   (define (make-unknown-item changed-callback)
-    (let ((label (gtk-label-new (format nil "** unknown widget **  ")))
+    (let ((label (gtk-label-new (format nil (_ "** unknown widget **  "))))
 	  value)
       (gtk-widget-show label)
       (lambda (op)
