@@ -71,6 +71,8 @@
     (error
      (format (stderr-file) "error in local config--> %S\n" error-data))))
 
+(require 'sm-init)
+
 ;; Use all arguments which are left.
 (let
     (arg)
