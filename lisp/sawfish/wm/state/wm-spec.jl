@@ -231,7 +231,8 @@
 	 (require 'sawfish.wm.stacking)
 	 (set-window-depth w wm-spec-desktop-layer)
 	 (window-put w 'fixed-position t)
-	 (window-put w 'never-focus t)))
+	 (window-put w 'desktop t)
+	 (window-put w 'keymap root-window-keymap)))
 
   (put 'wm-spec-type '_NET_WM_WINDOW_TYPE_DOCK
        (lambda (w)
