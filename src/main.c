@@ -263,7 +263,8 @@ usage (void)
     --disable-nls	disable internationalization of messages\n\
     -f FUNCTION		call the Lisp function FUNCTION\n\
     -l FILE		load the file of Lisp forms called FILE\n\
-    -q			quit\n"
+    -q			quit\n\
+    FILE		load the Lisp file FILE (from the cwd if possible)\n"
 	   , stderr);
 }
 
