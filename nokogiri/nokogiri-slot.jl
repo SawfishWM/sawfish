@@ -21,22 +21,9 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-slot
+(require 'nokogiri-interfaces)
 
-    (export slot-name
-	    slot-widget
-	    slot-old-value
-	    slot-user-level
-	    slot-gtk-widget
-	    slot-doc slot-doc-set
-	    slot-layout set-slot-layout
-	    update-dependences
-	    update-all-dependences
-	    define-slot-constructor
-	    get-slot
-	    slot-value
-	    fetch-slots
-	    custom-symbol-value)
+(define-structure nokogiri-slot nokogiri-slot-interface
 
     (open rep
 	  gtk
@@ -93,31 +80,15 @@
     (call-hook '*nokogiri-slot-changed-hook* (list slot))
     (update-dependences slot))
 
-  (define (define-slot-constructor type fun)
-    (put 'type 'nokogiri-slot-constructor fun))
-
   (define (make-slot-widget slot data)
-    (let ((doc (get-key data ':doc))
-	  (spec (get-key data ':spec))
-	  (callback (lambda () (slot-changed slot))))
-      (case (or (car spec) spec)
-	((boolean)
-	 (slot-widget-set slot (make-widget `(boolean ,doc) callback)))
-
-	;; XXX remove these hacks
-	((frame-style)
-	 (slot-widget-set slot (make-widget
-				(append spec (list doc)) callback)))
-
-	(t (let ((type (or (car spec) spec)))
-	     ;; ensure the type constructor is loaded..
-	     (widget-type-constructor type)
-
-	     ;; ..then look for any special handler
-	     (slot-doc-set slot doc)
-	     (if (get type 'nokogiri-slot-constructor)
-		 ((get type 'nokogiri-slot-constructor) slot type)
-	       (slot-widget-set slot (make-widget spec callback))))))))
+    (let* ((doc (get-key data ':doc))
+	   (spec (get-key data ':spec))
+	   (callback (lambda () (slot-changed slot)))
+	   (type (or (car spec) spec)))
+      (if (widget-accepts-doc-string-p type)
+	  (slot-widget-set slot (make-widget spec callback doc))
+	(slot-doc-set slot doc)
+	(slot-widget-set slot (make-widget spec callback)))))
 
   (define (slot-gtk-widget slot) (widget-gtk-widget (slot-widget slot)))
 
