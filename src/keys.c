@@ -57,6 +57,8 @@ DEFSYM(replay_keyboard, "replay-keyboard");
 DEFSYM(sync_both, "sync-both");
 DEFSYM(async_both, "async-both");
 
+static repv next_keymap_path;
+
 /* The X modifiers being used for Meta, Alt, and Hyper */
 static u_long meta_mod, alt_mod, hyper_mod;
 
@@ -349,35 +351,94 @@ static repv
 lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
 	       repv context_keymap, Lisp_Window *current_window)
 {
-    repv k = rep_NULL;
+    repv k = rep_NULL, nkp = next_keymap_path;
+    next_keymap_path = rep_NULL;
 
-    repv tem = Fsymbol_value (Qoverride_keymap, Qt);
-    if (tem != Qnil && !rep_VOIDP(tem))
-	k = search_keymap (tem, code, mods, callback);
+    if(nkp == rep_NULL || nkp == Qglobal_keymap)
+    {
+
+	repv tem = Fsymbol_value (Qoverride_keymap, Qt);
+	if (tem != Qnil && !rep_VOIDP(tem))
+	    k = search_keymap (tem, code, mods, callback);
+	else
+	{
+	    /* 1. search keymap for active window decoration */
+	    k = search_keymap(context_keymap, code, mods, callback);
+
+	    if (!k && (current_x_event != 0
+		       && (current_x_event->xany.window == root_window
+			   || current_x_event->xany.window
+			   == no_focus_window)))
+	    {
+		/* 2. if event from root, search the root-window-keymap */
+		k = search_keymap (Qroot_window_keymap, code, mods, callback);
+	    }
+
+	    if (!k && current_window)
+	    {
+		/* 2. search focused/pointer window keymap property */
+		tem = Fwindow_get (rep_VAL(current_window), Qkeymap);
+		if (tem && tem != Qnil)
+		    k = search_keymap(tem, code, mods, callback);
+	    }
+	    if(!k)
+		/* 3. search global-keymap */
+		k = search_keymap(Qglobal_keymap, code, mods, callback);
+	}
+    }
     else
     {
-	/* 1. search keymap for active window decoration */
-	k = search_keymap(context_keymap, code, mods, callback);
-
-	if (!k && (current_x_event != 0
-		   && (current_x_event->xany.window == root_window
-		       || current_x_event->xany.window == no_focus_window)))
-	    /* 2. if event from root, search the root-window-keymap */
-	    k = search_keymap (Qroot_window_keymap, code, mods, callback);
-
-	if (!k && current_window)
+	rep_GC_root gc_nkp;
+	rep_PUSHGC(gc_nkp, nkp);
+	while(!k && rep_CONSP(nkp))
 	{
-	    /* 2. search focused/pointer window keymap property */
-	    tem = Fwindow_get (rep_VAL(current_window), Qkeymap);
-	    if (tem && tem != Qnil)
-		k = search_keymap(tem, code, mods, callback);
+	    k = search_keymap(rep_CAR(nkp), code, mods, callback);
+	    nkp = rep_CDR(nkp);
 	}
-	if(!k)
-	    /* 3. search global-keymap */
-	    k = search_keymap(Qglobal_keymap, code, mods, callback);
+	rep_POPGC;
     }
-
     return (k != rep_NULL && KEYP(k)) ? KEY_COMMAND(k) : rep_NULL;
+}
+
+static bool
+eval_input_callback(repv key)
+{
+    repv cmd = KEY_COMMAND(key);
+    if(rep_SYMBOLP(cmd))
+    {
+	cmd = Fsymbol_value (cmd, Qt);
+	if (rep_FUNARGP(cmd))
+	{
+	    repv fun = rep_FUNARG(cmd)->fun;
+	    if(rep_CONSP(fun) && rep_CAR(fun) == Qautoload)
+	    {
+		/* An autoload, try to load it. */
+		rep_GC_root gc_key;
+		struct rep_Call lc;
+		lc.fun = lc.args = lc.args_evalled_p = Qnil;
+		rep_PUSH_CALL(lc);
+		rep_USE_FUNARG(cmd);
+		rep_PUSHGC(gc_key, key);
+		cmd = rep_load_autoload(cmd);
+		rep_POPGC;
+		rep_POP_CALL(lc);
+		if(cmd == rep_NULL)
+		    return FALSE;
+	    }
+	}
+    }
+    if(Fkeymapp (cmd) != Qnil)
+    {
+	/* A prefix key, add its list to the next-keymap-path. */
+	next_keymap_path = Fcons(cmd, next_keymap_path
+				 ? next_keymap_path : Qnil);
+	/* Look for more prefix keys */
+	return FALSE;
+    }
+    if (cmd == Qnil)
+	return FALSE;
+    next_keymap_path = rep_NULL;
+    return TRUE;
 }
 
 static repv
@@ -394,7 +455,7 @@ lookup_event_binding (u_long code, u_long mods, repv context_map)
     }
     else
 	w = focus_window;
-    return lookup_binding(code, mods, 0, context_map, w);
+    return lookup_binding(code, mods, eval_input_callback, context_map, w);
 }
 
 /* Process the event CODE+MODS. OS-INPUT-MSG is the raw input event
@@ -403,7 +464,7 @@ repv
 eval_input_event(repv context_map)
 {
     u_long code, mods;
-    repv result = Qnil, cmd;
+    repv result = Qnil, cmd, orig_next_keymap_path = next_keymap_path;
 
     if (!translate_event (&code, &mods, current_x_event))
 	return Qnil;
@@ -418,11 +479,46 @@ eval_input_event(repv context_map)
 	/* Found a binding for this event; evaluate it. */
 	result = Fcall_command(cmd, Qnil);
     }
+    else if(next_keymap_path != rep_NULL)
+    {
+	/* We already handled some prefixes. */
+	Fset (Qthis_command, Qkeymap);
+	result = Qnil;
+
+	/* Grab the input devices for the next event */
+	Fgrab_keyboard (focus_window ? rep_VAL(focus_window) : Qnil, Qt, Qt);
+    }
+    else if(orig_next_keymap_path != rep_NULL
+	    && orig_next_keymap_path != Qglobal_keymap)
+    {
+	/* A multi-key binding, but no final step; clear the prefix
+	   argument for the next command and beep. */
+	Fset (Qprefix_arg, Qnil);
+	Fbeep();
+    }
     else
     {
 	/* An unbound key with no prefix keys. */
-	result = Fcall_hook(Qunbound_key_hook, Qnil, Qor);
+
+	repv hook = Fsymbol_value (Qunbound_key_hook, Qt);
+	if (!rep_VOIDP (hook) && hook != Qnil)
+	    result = Fcall_hook(Qunbound_key_hook, Qnil, Qor);
+	else if ((mods & (EV_TYPE_KEY | EV_MOD_RELEASE)) == EV_TYPE_KEY)
+	{
+	    /* We're receiving events that we have no way of handling..
+	       I think this gives us justification in aborting in case
+	       we've got stuck with an unbreakable grab somehow.. */
+	    Fungrab_keyboard ();
+	    Fungrab_pointer ();
+	    fprintf (stderr, "yow! may have just avoided a lockup!\n");
+	    Fbeep ();
+	    result = Fthrow (Qtop_level, Qnil);
+	}
     }
+
+    /* Out of a multi-key sequence, ungrab */
+    if (orig_next_keymap_path && !next_keymap_path)
+	Fungrab_keyboard ();
 
     last_event[0] = current_event[0];
     last_event[1] = current_event[1];
@@ -1487,6 +1583,8 @@ keys_init(void)
     Fset (Qalt_keysyms, Qnil);
     rep_INTERN_SPECIAL(hyper_keysyms);
     Fset (Qhyper_keysyms, Qnil);
+
+    rep_mark_static(&next_keymap_path);
 
     if (rep_SYM(Qbatch_mode)->value == Qnil)
 	update_keyboard_mapping ();
