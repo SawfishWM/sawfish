@@ -221,9 +221,6 @@ the pager, or nil of none exists."
   	      (when (= (aref (caddr layout-property) 0) 1)
   		(swap cols rows))
 
-	      ;; Swap layout again because of libwnck bug
-	      (swap cols rows)
-	      
 	      (if (= rows 0)
 		  ;; Compute rows from colums and num-workspaces
 		  (let ((total (num-workspaces)))
