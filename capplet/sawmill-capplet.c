@@ -121,7 +121,6 @@ static void
 sawmill_cancel (void)
 {
     ui_command ("cancel\n");
-    gtk_widget_destroy (capplet);
 }
 
 
@@ -214,6 +213,11 @@ main (int argc, char **argv)
     client = gnome_master_client ();
     flags = gnome_client_get_flags(client);
 
+#if 0
+    /* XXX I copied this from mouse-properties.c, but the
+       XXX GNOME_SAWMILL_PROPERTIES root property just grows
+       XXX each time the capplet is started... */
+
     if (flags & GNOME_CLIENT_IS_CONNECTED) {
 	token = gnome_startup_acquire_token("GNOME_SAWMILL_PROPERTIES",
 					    gnome_client_get_id(client));
@@ -233,6 +237,7 @@ main (int argc, char **argv)
     }
     else
 	token = 1;
+#endif
 
     if (init_results != 1) {
 	sawmill_setup ();
