@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# make-pot -- extract .pot file from sources
+
+# $Id$
+
+# This file is part of sawfish.
+
+# sawfish is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+
+# sawfish is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with sawfish; see the file COPYING.  If not, write to
+# the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+REP_SRCS="../src/*.jl\
+ ../lisp/*.jl\
+ ../nokogiri/*.jl\
+ ../nokogiri/nokogiri-widgets/*.jl\
+ ../nokogiri/nokogiri-layouts/*.jl\
+ ../themer/themer.in\
+ ../themes/*/theme.jl"
+
+GLADE_SRCS="../themer/themer.glade"
+
+REP_XGETTEXT_FLAGS="--only-commands --include defun --include defcustom --include defgroup"
+
+rm -f sawfish.pot
+
+lisp_c=.$$.lisp.c
+glade_c=.$$.glade.c
+
+rep-xgettext --c $REP_XGETTEXT_FLAGS $REP_SRCS >$lisp_c
+libglade-xgettext --c $GLADE_SRCS >$glade_c
+
+xgettext --add-comments -a --no-location $lisp_c $glade_c
+mv -f messages.po sawfish.pot
+
+rm -f $lisp_c $glade_c
+
