@@ -5,6 +5,9 @@
 	* events.c (motion_notify): don't compare the event window with
 	the button-press window; just use the saved context map from
 	the actual button-press event
+	(button_press): only use the context map if the part is
+	currently clicked; forcible ungrab the pointer after all button
+	release events
 
 	* frames.c (frame_part_destroyer): if we unclick a frame part,
 	ungrab the pointer as well

@@ -259,13 +259,16 @@ button_press (XEvent *ev)
 	w = fp->win;
 
 	if (ev->type == ButtonPress)
+	{
 	    handle_fp_click (fp, ev);
-
-	if (fp->clicked)
 	    current_context_map = get_keymap_for_frame_part (fp);
+	}
     }
 
-    eval_input_event (current_context_map);
+    /* Only use the context map if the frame part is currently clicked */
+    eval_input_event ((clicked_frame_part
+		       && clicked_frame_part->clicked)
+		      ? current_context_map : Qnil);
 
     if (fp != 0 && w->id != 0 && ev->type == ButtonRelease)
     {
@@ -285,6 +288,8 @@ button_press (XEvent *ev)
 	button_press_mouse_x = button_press_mouse_y = -1;
 	button_press_window = 0;
 	current_context_map = Qnil;
+	/* The pointer is _always_ ungrabbed after a button-release */
+	XUngrabPointer (dpy, last_event_time);
     }
 
     XAllowEvents (dpy, ev->type == ButtonPress ? SyncPointer : AsyncPointer,
