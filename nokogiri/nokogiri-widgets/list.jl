@@ -51,7 +51,7 @@
 						  title))
 		   (gtk-clist-new 1)))
 	  (scroller (gtk-scrolled-window-new))
-	  (insert (gtk-button-new-with-label (_ "Insert...")))
+	  (add (gtk-button-new-with-label (_ "Add...")))
 	  (delete (gtk-button-new-with-label (_ "Delete")))
 	  (edit (gtk-button-new-with-label (_ "Edit...")))
 	  (vbox (gtk-vbox-new nil box-spacing))
@@ -69,21 +69,21 @@
 	    ((spec 'print) x)
 	  (list (format nil "%s" x))))
 
-      (define (insert-item)
+      (define (add-item)
 	(let ((callback (lambda (new)
 			  (with-clist-frozen clist
 			    (if (not selection)
 				(progn
 				  (setq value (nconc value (list new)))
 				  (gtk-clist-append clist (print-value new)))
-			      (setq value (insert-into new value selection))
+			      (setq value (insert-after new value selection))
 			      (gtk-clist-insert
-			       clist selection (print-value new))
+			       clist (1+ selection) (print-value new))
 			      (gtk-clist-select-row clist (1+ selection) 0)))
 			  (call-callback changed-callback))))
 	  (if (functionp spec)
-	      ((spec 'dialog) (_ "Insert:") callback)
-	    (widget-dialog (_ "Insert:") spec callback nil main-window))))
+	      ((spec 'dialog) (_ "Add:") callback)
+	    (widget-dialog (_ "Add:") spec callback nil main-window))))
 
       (define (delete-item)
 	(when selection
@@ -120,7 +120,7 @@
 	(gtk-clist-clear clist)
 	(setq value '()))
 
-      (gtk-signal-connect insert "clicked" insert-item)
+      (gtk-signal-connect add "clicked" add-item)
       (gtk-signal-connect delete "clicked" delete-item)
       (gtk-signal-connect edit "clicked" edit-item)
       (gtk-signal-connect clist "select_row"
@@ -143,7 +143,7 @@
       (gtk-widget-set-usize scroller list-width list-height)
       (gtk-container-add vbox scroller)
       (gtk-box-pack-end vbox hbox)
-      (gtk-box-pack-end hbox insert)
+      (gtk-box-pack-end hbox add)
       (gtk-box-pack-end hbox edit)
       (gtk-box-pack-end hbox delete)
       (gtk-widget-show-all vbox)
@@ -177,12 +177,12 @@
 
 ;;; utilities
 
-  (define (insert-into x lst idx)
-    (if (= idx 0)
-	(cons x lst)
-      (let ((cell (nthcdr (1- idx) lst)))
-	(rplacd cell (cons x (cdr cell)))
-	lst)))
+  (define (insert-after x lst idx)
+    (let ((cell (nthcdr idx lst)))
+      (if cell
+	  (rplacd cell (cons x (cdr cell)))
+	(setq lst (nconc lst (list x))))
+      lst))
 
   (defmacro with-clist-frozen (clist . body)
     `(progn
