@@ -132,11 +132,8 @@
       (when (setq tem (cdr (assq 'position alist)))
 	;; if the program is setting its position, best not to interfere..
 	(window-put w 'client-set-position t)
-	(let ((grav (or (window-get w 'gravity)
-			(cdr (assq 'window-gravity hints))
-			;; default gravity is NorthWest (from ICCCM)
-			'north-west)))
-	  (setq coords (adjust-position-for-gravity w grav tem))))
+	(setq coords (adjust-position-for-gravity
+		      w (window-gravity w hints) tem)))
 
       (move-resize-window-to w (car coords) (cdr coords) (car dims) (cdr dims))
 
