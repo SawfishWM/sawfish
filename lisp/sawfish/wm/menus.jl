@@ -30,6 +30,7 @@
 	    custom-menu)
 
     (open rep
+	  rep.data.tables
 	  sawfish.wm.events
 	  sawfish.wm.windows
 	  sawfish.wm.misc
@@ -63,6 +64,10 @@ unused before killing it.")
   ;; if a window, then it's the window that received the event causing
   ;; the menu to be shown
   (define menu-active nil)
+
+  ;; hash table mapping nicknames to result objects without read syntax
+  (define nickname-table)
+  (define nickname-index)
 
   ;; if menu-program-stays-running is a number, this may be a timer
   ;; waiting to kill the process
@@ -188,6 +193,15 @@ unused before killing it.")
 	     (kill-process menu-process)
 	     (setq menu-process nil)))))
 
+  (define (make-nickname obj)
+    (let ((nick nickname-index))
+      (setq nickname-index (1+ nickname-index))
+      (table-set nickname-table nick obj)
+      nick))
+
+  (define (nicknamep arg) (fixnump arg))
+  (define (nickname-ref nick) (table-ref nickname-table nick))
+
   (define (menu-preprocessor cell)
     (when cell
       (let ((label (car cell)))
@@ -198,14 +212,21 @@ unused before killing it.")
 	       (when (functionp cell)
 		 (setq cell (funcall cell))))
 	      (t (setq cell (cdr cell))))
-	(when (and (consp (car cell)) (stringp (car (car cell))))
-	  (setq cell (mapcar menu-preprocessor cell)))
+	(cond ((and (consp (car cell)) (stringp (car (car cell))))
+	       ;; recurse through sub-menu
+	       (setq cell (mapcar menu-preprocessor cell)))
+	      ((and cell (not (symbolp (car cell))))
+	       ;; a non-symbol result, replace by a nickname
+	       (setq cell (cons (make-nickname (car cell)) (cdr cell)))))
 	(cons label cell))))
 
   (define (menu-dispatch result)
     (let ((orig-win menu-active))
       (menu-stop-process)
+      (when (nicknamep result)
+	(setq result (nickname-ref result)))
       (setq menu-active nil)
+      (setq nickname-table nil)
       (frame-draw-mutex nil)
       (when result
 	(when (windowp orig-win)
@@ -254,6 +275,8 @@ unused before killing it.")
 			    (max 0 (+ (cdr offset) (cdr dims)
 				      (cdr (window-position menu-active))))))
 		(setq offset nil))
+	      (setq nickname-table (make-table eq-hash eq))
+	      (setq nickname-index 0)
 	      (format menu-process "(popup-menu %s %S %S)\n"
 		      ;; write out the menu spec in one chunk to
 		      ;; avoid large numbers of system calls :-[
