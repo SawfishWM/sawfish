@@ -38,8 +38,5 @@
 	      (throw 'out t)))
 	  (list-x-properties 'root))))
 
-;; this is probably good for novice users?
-(require 'sawfish.wm.ext.window-history)
-
 ;; save errors to aid debugging
 (require 'sawfish.wm.ext.error-handler)

@@ -101,7 +101,8 @@
 			     "W-Down" 'lower-window
 			     "W-Button3-Click1" 'raise-lower-window
 			     "W-Button2-Click1" 'popup-window-menu
-			     "W-Button1-Move" 'move-window-interactively)
+			     "W-Button1-Move" 'move-window-interactively
+			     "Button1-Click1" 'raise-and-pass-through-click)
     "Keymap containing bindings active when a client window is focused."
     :group bindings
     :type keymap

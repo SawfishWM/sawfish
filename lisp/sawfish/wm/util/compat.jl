@@ -92,13 +92,35 @@
 
 ;;; obsolete options
 
-  (put 'viewport-columns 'custom-obsolete t)
-  (put 'viewport-rows 'custom-obsolete t)
-  (put 'viewport-dimensions 'custom-obsolete t)
-  (put 'preallocated-workspaces 'custom-obsolete t)
-  (put 'iconify-whole-group 'custom-obsolete t)
-  (put 'uniconify-whole-group 'custom-obsolete t)
-  (put 'always-update-frames 'custom-obsolete t)
+  (mapc (lambda (x)
+	  (put x 'custom-obsolete t))
+	'(viewport-columns viewport-rows viewport-dimensions
+
+	  preallocated-workspaces iconify-whole-group
+	  uniconify-whole-group always-update-frames
+	  cycle-disable-auto-raise cycle-show-window-icons
+	  cycle-warp-pointer cycle-focus-windows cycle-raise-windows
+	  edge-flip-warp-pointer frame-type-fallbacks
+	  warp-to-window-x-offset warp-to-window-y-offset
+	  uniquify-name-format transients-get-focus decorate-transients
+	  raise-windows-on-uniconify uniconify-to-current-workspace
+	  uniconify-to-current-viewport iconify-ignored
+	  maximize-always-expands maximize-ignore-when-filling
+	  maximize-avoid-avoided focus-windows-on-uniconify
+	  transients-are-group-members raise-selected-windows
+	  warp-to-selected-windows menus-include-shortcuts
+	  configure-auto-gravity configure-ignore-stacking-requests
+	  beos-window-menu-simplifies customize-show-symbols
+	  tooltips-timeout-enabled tooltips-delay
+	  tooltips-timeout-delay tooltips-font
+	  tooltips-foreground-color tooltips-background-color
+	  move-snap-mode move-snap-ignored-windows
+	  move-resize-inhibit-configure move-snap-edges
+	  raise-windows-when-unshaded persistent-group-ids
+	  delete-workspaces-when-empty transients-on-parents-workspace
+	  edge-flip-delay audio-for-ignored-windows
+
+	  ))
 
 ;;; obsolete custom setters
 

@@ -52,10 +52,8 @@
   (defvar viewport-dimensions '(1 . 1)
     "Size of each virtual workspace.")
 
-  (defcustom uniconify-to-current-viewport t
-    "Windows uniconify to the current viewport."
-    :type boolean
-    :group (min-max iconify))
+  (defvar uniconify-to-current-viewport t
+    "Windows uniconify to the current viewport.")
 
 
 ;;; raw viewport handling

@@ -70,19 +70,9 @@ property to show if they require the focus or not."
     :user-level expert
     :group focus)
 
-  (defcustom warp-to-window-x-offset -1
-    "Offset (%) from left window edge when warping pointer."
-    :tooltip "A negative number means outside the left window edge."
-    :type (number -65536 65535)
-    :user-level expert
-    :group focus)
- 
-  (defcustom warp-to-window-y-offset -1
-    "Offset (%) from top window edge when warping pointer."
-    :tooltip "A negative number means outside the top window edge."
-    :type (number -65536 65535)
-    :user-level expert
-    :group focus)
+  (defvar warp-to-window-offset (cons -1 -1)
+    "Offset (%) from window edges when warping pointer. A negative number
+means outside the left window edge.")
  
   (defvar dont-avoid-ignored t
     "When non-nil, ignored windows aren't avoided by default.")
@@ -90,12 +80,8 @@ property to show if they require the focus or not."
   (defvar avoid-by-default nil
     "When non-nil, any unspecified windows are avoided by default.")
 
-  (defcustom uniquify-name-format "%s [%d]"
-    "Format to create unique window names."
-    :tooltip "Has two arguments (NAME INDEX) applied to it."
-    :type string
-    :user-level expert
-    :group misc)
+  (defvar uniquify-name-format "%s [%d]"
+    "Format to create unique window names.")
 
 
 ;;; finding windows, reading properties
@@ -195,13 +181,13 @@ specified by the user."
 	  (dims (window-dimensions w)))
       (unless x
 	(setq x
-	      (if (< warp-to-window-x-offset 0)
-		  warp-to-window-x-offset
-		(quotient (* (car dims) warp-to-window-x-offset) 100))))
+	      (if (< (car warp-to-window-offset) 0)
+		  (car warp-to-window-offset)
+		(quotient (* (car dims) (car warp-to-window-offset)) 100))))
       (unless y
-	(setq y (if (< warp-to-window-y-offset 0)
-		    warp-to-window-y-offset
-		  (quotient (* (cdr dims) warp-to-window-y-offset) 100))))
+	(setq y (if (< (cdr warp-to-window-offset) 0)
+		    (cdr warp-to-window-offset)
+		  (quotient (* (cdr dims) (cdr warp-to-window-offset)) 100))))
       (warp-cursor
        (max 0 (min (1- (screen-width)) (+ x (car coords) (- (car foff)))))
        (max 0 (min (1- (screen-height)) (+ y (cdr coords) (- (cdr foff))))))))

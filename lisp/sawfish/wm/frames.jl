@@ -144,7 +144,7 @@ that overrides settings set elsewhere.")
     :user-level expert
     :group misc)
 
-  (defcustom frame-type-fallback-alist
+  (defvar frame-type-fallback-alist
     '((transient . default)
       (shaped . default)
       (shaped-transient . shaped)
@@ -152,17 +152,7 @@ that overrides settings set elsewhere.")
       (shaded-transient . shaped-transient)
       (icon . shaped-transient)
       (dock . icon))
-    "Frame type fallbacks:"
-    :tooltip "Associate frame types with type to try if the theme doesn't \
-implement the requested type."
-    :type (alist ((symbol default shaped transient
-			  shaped-transient icon doc) "From")
-		 ((symbol default shaped transient
-			  shaped-transient icon doc) "To"))
-    :widget-flags (expand-vertically framed)
-    :group appearance
-    :user-level expert
-    :after-set (lambda () (after-setting-frame-option)))
+    "Frame type fallbacks.")
 
   (defvar theme-update-interval 60
     "Number of seconds between checking if theme files have been modified.")

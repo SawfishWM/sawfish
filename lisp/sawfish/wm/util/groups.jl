@@ -60,18 +60,11 @@
 
   (define-structure-alias group-funs sawfish.wm.util.groups)
 
-  (defcustom transients-are-group-members t
-    "Group transient windows with their parents."
-    :type boolean
-    :user-level expert
-    :group misc)
+  (defvar transients-are-group-members t
+    "Group transient windows with their parents.")
 
-  (defcustom persistent-group-ids nil
-    nil
-    :type* `(list symbol ,(_ "Persistent group ids"))
-    :widget-flags (expand-vertically framed)
-    :user-level expert
-    :group misc)
+  (defvar persistent-group-ids '()
+    "List of symbols naming groups that always exist.")
 
   (define (window-actual-group-id w)
     "Return the id of the group that window W is a member of."

@@ -45,11 +45,8 @@
     :require sawfish.wm.ext.audio-events
     :group audio)
 
-  (defcustom audio-for-ignored-windows nil
-    "Play sound effects for unmanaged windows."
-    :type boolean
-    :depends audio-events-enabled
-    :group audio)
+  (defvar audio-for-ignored-windows nil
+    "Play sound effects for unmanaged windows.")
 
   ;; standard events are: iconified, uniconified, shaded, unshaded,
   ;; maximized, unmaximized, mapped, unmapped, mapped-transient,

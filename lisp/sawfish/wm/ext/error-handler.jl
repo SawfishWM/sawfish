@@ -37,12 +37,12 @@
     :group misc)
 
   (defcustom error-handler-beep t
-    "Emit a beeping sound when errors occur."
+    "Beep when errors occur."
     :type boolean
     :group (misc error-handling))
 
   (defcustom error-destination 'standard-error
-    "Where to display error messages: \\w"
+    "Display error messages to: \\w"
     :type (choice nowhere screen standard-error)
     :user-level expert
     :group (misc error-handling))

@@ -169,6 +169,7 @@
 (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
 (defgroup shade-hover "Shade Hover" :group focus :require sawfish.wm.ext.shade-hover)
 (defgroup tooltips "Tooltips" :group misc :require sawfish.wm.ext.tooltips)
+(defgroup xterm "Terminal" :group misc :require sawfish.wm.commands.xterm)
 (autoload-placement-mode 'first-fit 'sawfish.wm.placement.smart)
 (autoload-placement-mode 'best-fit 'sawfish.wm.placement.smart)
 (autoload-placement-mode 'best-fit-group 'sawfish.wm.placement.smart)

@@ -37,17 +37,11 @@
 	  sawfish.wm.util.stacking
 	  sawfish.wm.viewport)
 
-  (defcustom configure-auto-gravity t
-    "Automatically select window gravity from position on screen."
-    :type boolean
-    :user-level expert
-    :group move)
+  (defvar configure-auto-gravity t
+    "Automatically select window gravity from position on screen.")
 
-  (defcustom configure-ignore-stacking-requests nil
-    "Ignore requests from applications to change window stacking."
-    :type boolean
-    :group misc
-    :user-level expert)
+  (defvar configure-ignore-stacking-requests nil
+    "Ignore requests from applications to change window stacking.")
 
   ;; Returns true if window window1 and window2 intersect, false otherwise.
   (defun windows-intersect-p (window1 window2)

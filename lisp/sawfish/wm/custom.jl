@@ -321,17 +321,18 @@ of choices."
       ((get symbol 'custom-after-set) symbol)))
 
   (define (custom-set-symbol setter symbol)
-    (let* ((was-bound (boundp symbol))
-	   (old-value (and was-bound (symbol-value symbol))))
-      (call-with-exception-handler
-       (lambda ()
-	 (custom-set setter symbol))
-       (lambda (ex)
-	 ;; error while setting SYMBOL; revert to its old state
-	 (if was-bound
-	     (set symbol old-value)
-	   (makunbound symbol))
-	 (raise-exception ex)))))
+    (unless (get symbol 'custom-obsolete)
+      (let* ((was-bound (boundp symbol))
+	     (old-value (and was-bound (symbol-value symbol))))
+	(call-with-exception-handler
+	 (lambda ()
+	   (custom-set setter symbol))
+	 (lambda (ex)
+	   ;; error while setting SYMBOL; revert to its old state
+	   (if was-bound
+	       (set symbol old-value)
+	     (makunbound symbol))
+	   (raise-exception ex))))))
  
   (define (custom-set-variable symbol value #!optional req)
     ;; XXX kludge for old custom files..
@@ -476,15 +477,13 @@ of choices."
 
 ;;; default groups
 
-  (defgroup focus "Focus" :require sawfish.wm.ext.auto-raise)
+  (defgroup focus "Focus")
   (defgroup move "Move/Resize" :require sawfish.wm.commands.move-resize)
   (defgroup placement "Placement")
   (defgroup appearance "Appearance")
   (defgroup workspace "Workspaces")
   (defgroup bindings "Bindings")
-  (defgroup min-max "Minimizing/Maximizing")
-  (defgroup iconify "Minimizing" :group min-max)
-  (defgroup maximize "Maximizing" :group min-max)
+  (defgroup min-max "Minimizing and Maximizing")
   (defgroup misc "Miscellaneous")
 
 

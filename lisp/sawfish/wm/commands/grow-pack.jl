@@ -49,6 +49,7 @@
 	  sawfish.wm.misc
 	  sawfish.wm.state.maximize
 	  sawfish.wm.state.iconify
+	  sawfish.wm.state.ignored
 	  sawfish.wm.custom
 	  sawfish.wm.commands
 	  sawfish.wm.focus
@@ -57,14 +58,16 @@
 
   (define-structure-alias grow-pack sawfish.wm.commands.grow-pack)
 
-;;; Code:
+;;; Customization options.
+   
+  (defgroup grow-pack "Growing and packing of windows" :group misc)
 
   (defcustom grow-is-maximize t
     "Whether growing is considered to be maximization.  When you turn
 this on, you can use `unmaximize-window' or something similar to get
 back to the original size."
     :type boolean
-    :group (min-max maximize))
+    :group (misc grow-pack))
 
   (defcustom pack-warp-pointer 'maybe
     "Whether and how to move the pointer when packing windows.
@@ -77,20 +80,27 @@ already in the window, then does like `maybe'.
 
 `never' means not to warp the pointer."
     :type (choice always maybe never)
-    :group (move))
+    :group (misc grow-pack))
 
   (defcustom grow-pack-bump-obscured ()
     "Whether to bump into fully obscured windows when growing or packing
 windows."
     :type boolean
-    :group (move))
+    :group (misc grow-pack))
 
   (defcustom grow-pack-bump-other-depth 'always
     "Whether to bump into windows on a different depth when growing or packing
 windows.
 `maybe' means only avoided windows in other depths."
     :type (choice always maybe never)
-    :group (move))
+    :group (misc grow-pack))
+
+  (defcustom grow-pack-bump-ignored t
+    "Whether to bump into ignored windows when growing or packing."
+    :type boolean
+    :group (misc grow-pack))
+
+;;; Code:
 
   ;; Entry points.
 
@@ -205,6 +215,8 @@ See `pack-window-up'."
 			  (eq grow-pack-bump-other-depth 'always))))
 		  (or grow-pack-bump-obscured
 		      (not (eq (window-visibility x) 'fully-obscured)))
+		  (or grow-pack-bump-ignored
+		      (not (window-ignored-p x)))
 		  (setq xa (window-position x)
 			xz (window-frame-dimensions x))
 		  (cmp bump (car (setq x (xborders))) min-next)

@@ -28,6 +28,7 @@
 
     (open rep
 	  sawfish.wm.misc
+	  sawfish.wm.focus
 	  sawfish.wm.workspace
 	  sawfish.wm.custom
 	  sawfish.wm.commands
@@ -38,26 +39,10 @@
 	  sawfish.wm.windows
 	  sawfish.wm.util.window-order)
 
-  (defcustom display-window:uniconify-to-current-workspace t
-    "Windows uniconify to the current workspace when they are selected."
-    :type boolean
-    :user-level expert
-    :group (min-max iconify))
-
   (defcustom unshade-selected-windows nil
     "Unshade selected windows."
     :type boolean
-    :group misc)
-
-  (defcustom raise-selected-windows t
-    "Raise selected windows (normally by the Windows menu)."
-    :type boolean
-    :group misc)
-
-  (defcustom warp-to-selected-windows t
-    "Warp the pointer to selected windows."
-    :type boolean
-    :group misc)
+    :group min-max)
 
 ;;; Activating windows
 
@@ -65,18 +50,16 @@
 	   w #!optional preferred-space #!key will-refocus)
     "Display the workspace/viewport containing the window W."
     (when w
-      (let ((uniconify-to-current-workspace
-	     display-window:uniconify-to-current-workspace))
-	(uniconify-window w)
-	(when (or (not preferred-space)
-		  (not (window-in-workspace-p w preferred-space)))
-	  (setq preferred-space
-		(nearest-workspace-with-window w current-workspace)))
-	(when preferred-space
-	  (select-workspace preferred-space will-refocus))
-	(move-viewport-to-window w)
-	(when (and unshade-selected-windows (window-get w 'shaded))
-	  (unshade-window w)))))
+      (uniconify-window w)
+      (when (or (not preferred-space)
+		(not (window-in-workspace-p w preferred-space)))
+	(setq preferred-space
+	      (nearest-workspace-with-window w current-workspace)))
+      (when preferred-space
+	(select-workspace preferred-space will-refocus))
+      (move-viewport-to-window w)
+      (when (and unshade-selected-windows (window-get w 'shaded))
+	(unshade-window w))))
 
   (define-command 'display-window-without-focusing
     display-window-without-focusing
@@ -90,12 +73,10 @@
       (display-window-without-focusing
        w preferred-space
        #:will-refocus (window-really-wants-input-p w))
-      (when raise-selected-windows
-	(raise-window* w))
-      (when warp-to-selected-windows
-	(warp-cursor-to-window w))
+      (raise-window* w)
       (when (window-really-wants-input-p w)
 	(set-input-focus w))
+      (warp-pointer-if-necessary w)
       (window-order-push w)))
 
   (define-command 'display-window display-window

@@ -136,12 +136,6 @@
     :user-level expert
     :group workspace)
 
-  (defcustom delete-workspaces-when-empty nil
-    "Workspaces are deleted when their last window closes."
-    :type boolean
-    :user-level expert
-    :group workspace)
-
   (defvar preallocated-workspaces 1
     "Minimum number of workspaces.")
 
@@ -151,11 +145,6 @@
     :group workspace
     :user-level expert
     :after-set (lambda () (call-hook 'workspace-state-change-hook)))
-
-  (defcustom transients-on-parents-workspace nil
-    "Dialogs appear on the same workspace as their application."
-    :type boolean
-    :group workspace)
 
   (defcustom workspace-names nil
     nil
@@ -460,26 +449,11 @@
 		  (setq current-workspace (1+ current-workspace))))))
     (call-hook 'workspace-state-change-hook))
 
-  ;; called when workspace with id SPACE may contain no windows
-  (define (ws-workspace-may-be-empty space)
-    (when (and delete-workspaces-when-empty (workspace-empty-p space))
-      ;; workspace is now empty
-      (let* ((limits (workspace-limits))
-	     (need-to-move (and (= space current-workspace)
-				(/= space (car limits))
-				(= space (cdr limits)))))
-	(remove-workspace space)
-	(normalize-indices)
-	(when need-to-move
-	  (select-workspace (1- current-workspace))))))
-
   ;; called when window W is destroyed
   (define (ws-remove-window w #!optional dont-hide)
     (let ((spaces (window-workspaces w)))
       (mapc (lambda (space)
 	      (window-remove-from-workspace w space)) spaces)
-      (mapc (lambda (space)
-	      (ws-workspace-may-be-empty space)) (sort spaces >))
       (when (and (not dont-hide) (windowp w))
 	(hide-window w))
       (mapc (lambda (space)
@@ -507,7 +481,6 @@
 	     (hide-window w))
 	    ((and (= new current-workspace) (not (window-get w 'iconified)))
 	     (show-window w)))
-      (ws-workspace-may-be-empty old)
       ;; the window may lose the focus when switching spaces
       (when (and was-focused (window-visible-p w))
 	(set-input-focus w))
@@ -622,17 +595,8 @@
 	    (mapc (lambda (space)
 		    (ws-add-window-to-space
 		     w (workspace-id-from-logical space limits))) spaces))
-	(let (parent)
-	  (if (and transients-on-parents-workspace
-		   (window-transient-p w)
-		   (setq parent (get-window-by-id (window-transient-p w)))
-		   (not (window-get parent 'sticky)))
-	      ;; put the window on its parents workspaces
-	      (mapc (lambda (space)
-		      (ws-add-window-to-space w space))
-		    (window-workspaces parent))
-	    ;; add it to the current workspace
-	    (ws-add-window-to-space w current-workspace))))))
+	;; add it to the current workspace
+	(ws-add-window-to-space w current-workspace))))
 
   ;; called from the unmap-notify hook
   (define (ws-window-unmapped w)
@@ -873,7 +837,6 @@ last instance remaining, then delete the actual window."
 	    (window-remove-from-workspace w space)
 	    (when (= space current-workspace)
 	      (hide-window w))
-	    (ws-workspace-may-be-empty space)
 	    (call-window-hook 'remove-from-workspace-hook w (list space))
 	    (call-hook 'workspace-state-change-hook))
 	(delete-window w))))

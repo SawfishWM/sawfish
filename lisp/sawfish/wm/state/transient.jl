@@ -49,16 +49,8 @@
     :type boolean
     :group focus)
 
-  (defcustom transients-get-focus t
-    "Dialog windows inherit the focus from their parent."
-    :group focus
-    :type boolean)
-
-  (defcustom decorate-transients nil
-    "Decorate dialog windows similarly to application windows."
-    :type boolean
-    :group appearance
-    :after-set after-setting-frame-option)
+  (defvar decorate-transients nil
+    "Decorate dialog windows similarly to application windows.")
 
 
 ;;; functions
@@ -167,8 +159,7 @@ the level of any transient windows it has."
 ;;; hooks
 
   (define (transient-map-window w)
-    (cond ((and transients-get-focus
-		(window-transient-p w)
+    (cond ((and (window-transient-p w)
 		(window-really-wants-input-p w)
 		(window-visible-p w)
 		(input-focus)

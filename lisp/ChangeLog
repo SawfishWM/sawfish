@@ -1,3 +1,54 @@
+2002-04-20  John Harper  <jsh@unfactored.org>
+
+	Removed a lot of dead wood. Deleted some options altogether,
+	made a lot more into standard variables (i.e. they can still be
+	set using setq, but don't appear in the configurator). Also got
+	rid of all warp-pointer type options, this is now part of the
+	focus mode -- click to focus doesn't warp, focus follows mouse
+	does
+
+	Still to do: remove user levels, more pruning of move-resize
+	and workspace groups
+
+	* sawfish/wm/workspace.jl, sawfish/wm/windows.jl,
+	sawfish/wm/viewport.jl, sawfish/wm/stacking.jl,
+	sawfish/wm/menus.jl, sawfish/wm/keymaps.jl,
+	sawfish/wm/frames.jl, sawfish/wm/focus.jl,
+	sawfish/wm/defaults.jl, sawfish/wm/custom.jl,
+	sawfish/wm/custom-defaults.jl, sawfish/wm/autoload.jl: 
+
+	* sawfish/wm/commands/xterm.jl, sawfish/wm/commands/x-cycle.jl,
+	sawfish/wm/commands/move-resize.jl,
+	sawfish/wm/commands/grow-pack.jl: 
+
+	* sawfish/wm/ext/window-history.jl, sawfish/wm/ext/tooltips.jl,
+	sawfish/wm/ext/error-handler.jl, sawfish/wm/ext/edge-flip.jl,
+	sawfish/wm/ext/beos-window-menu.jl,
+	sawfish/wm/ext/auto-raise.jl, sawfish/wm/ext/audio-events.jl: 
+
+	* sawfish/wm/state/transient.jl, sawfish/wm/state/shading.jl,
+	sawfish/wm/state/maximize.jl, sawfish/wm/state/iconify.jl,
+	sawfish/wm/state/configure.jl: 
+
+	* sawfish/wm/util/stacking.jl, sawfish/wm/util/nokogiri.jl,
+	sawfish/wm/util/groups.jl, sawfish/wm/util/display-window.jl,
+	sawfish/wm/util/compat.jl: 
+
+2002-04-14  Kai Groﬂjohann  <Kai.Grossjohann@CS.Uni-Dortmund.DE>
+
+	* sawfish/wm/commands/grow-pack.jl (grow-pack): New group, parent
+	is `misc'.
+	(grow-is-maximize, pack-warp-pointer, grow-pack-bump-obscured)
+	(grow-pack-bump-other-depth, grow-pack-bump-ignored): Use the new
+	group for the customization options.
+	Suggestion from John Harper.
+
+2002-04-11  Kai Groﬂjohann  <Kai.Grossjohann@CS.Uni-Dortmund.DE>
+
+	* sawfish/wm/commands/grow-pack.jl (grow-pack-bump-ignored): New
+	user option.  Suggestion from Markus Holmberg.
+	(bump-distance): Optionally ignore ignored windows.
+
 2002-04-18  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/ext/match-window.jl: accept #f for false in
