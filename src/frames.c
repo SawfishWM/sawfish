@@ -523,6 +523,7 @@ set_frame_part_bg (struct frame_part *fp)
     {
 	rep_call_lisp1 (bg, rep_VAL(fp));
 	fp->drawn.bg = bg;
+	fp->drawn.fg = rep_NULL;
     }
     else
 	fp->drawn.bg = Qnil;
