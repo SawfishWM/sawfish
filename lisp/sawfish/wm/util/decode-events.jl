@@ -92,3 +92,25 @@ event description EVENT, a list `(TYPE MODIFIER-LIST ACTION)'."
 	  (t
 	   (error "Unknown event type: %s" (car event))))
     (cons code mods)))
+
+;;;###autoload
+(defun string->keysym (string)
+  "Convert a string naming a key into a symbol naming an X11 keysym."
+  (x-keysym-name (car (lookup-event string))))
+
+;;;###autoload
+(defun modifier->keysyms (modifier)
+  "Convert a symbol naming an event modifier into a list of symbols
+representing the X11 keysyms that may generate the modifier."
+  (cond ((eq modifier 'alt)
+	 (mapcar string->keysym alt-keysyms))
+	((eq modifier 'meta)
+	 (mapcar string->keysym meta-keysyms))
+	((eq modifier 'hyper)
+	 (mapcar string->keysym hyper-keysyms))
+	((eq modifier 'shift)
+	 '(Shift_L Shift_R))
+	((eq modifier 'control)
+	 '(Control_L Control_R))
+	(t
+	 (error "Unknown modifier: %s" modifier))))
