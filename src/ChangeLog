@@ -1,0 +1,27 @@
+1999-07-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (list_frame_generator): add LeaveWindowMask to frame
+	parts
+
+	* windows.c (Qplace_window_hook): new hook, called when windows
+	are mapped for the first time
+	(Fwindow_transient_p): now returns the id of the other window
+	if the window is a transient
+	(Fwindow_id, Fwindow_group_id): new functions
+	(Fwindow_size_hints): new function, returns the size hints as
+	an alist
+
+	* sawmill.h: added exit types for the clean_exit_jmp_buf
+
+	* main.c (Fquit, Frestart): new functions
+
+	* keys.c (Qroot_window_keymap): window to use when mouse is
+	over the root
+
+	* functions.c (Fsync_server): new function, calls XSync ()
+
+	* events.c (button_press): handle ButtonPress before evaluating
+	the binding, and ButtonRelease after the binding
+	(leave_notify): if leaving a frame part, ensure that the
+	clicked count is zero
+

@@ -5,6 +5,11 @@ is known to compile on at least Solaris/sparc and Linux/ix86; it is
 released under the terms of the GNU GPL, copyright John Harper
 <john@dcs.warwick.ac.uk>
 
+It should be considered alpha quality, but seems to be reasonably
+stable in my environment. For more details, see the url:
+
+	http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
+
 
 Manifesto
 *********
@@ -16,19 +21,19 @@ through the Lisp language. This is no layer on top of twm, but a wholly
 new architecture.
 
 Despite this extensibility its policy is currently very minimal
-compared to most window managers---no icons, menus, desktop
-backgrounds, sliding windows, or whatever visual tricks are currently
-flavour of the month. (Menus will be added later using a separate
-process and GTK+, iconification will probably also be added).
+compared to most window managers---no icons, desktop backgrounds,
+sliding windows, or whatever visual tricks are currently flavour of the
+month.
 
 All high-level wm functions are implemented in Lisp for future
-extensibility or redefinition. Currently this includes interactive
-window moving and resizing, virtual workspaces, focus/transient window
-policies and frame theme definitions.
+extensibility or redefinition. Currently this includes menus (using
+GTK+), interactive window moving and resizing, virtual workspaces,
+iconification, focus/transient window policies and frame theme
+definitions.
 
 Also, most received events are exported to the Lisp environment through
-``key-bindings'' similar to in Emacs. These events include pointer
-behaviour and many internal X11 events (enter/leave,
+``key-bindings'' and hooks, similar to in Emacs. These events include
+pointer behaviour and many internal X11 events (enter/leave,
 focus-in/focus-out, map/unmap, etc..)
 
 Several themes are included, most mimic the window frames of particular
@@ -42,30 +47,20 @@ more details...
 Installing
 **********
 
-This is a snapshot of the CVS repository:
-
-        http://sprite.dcs.warwick.ac.uk:8080/cgi-bin/cvsweb
-
-It should be considered alpha quality, but seems to be reasonably
-stable in my environment. For more details, and the latest news, see the
-url:
-
-	http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
-
-To compile this snapshot you'll need GNU Autoconf, GNU make, Imlib, and
-my librep Lisp interpreter installed. The GTK+ binding for librep may
-also be useful. Sources for some of these are:
+To compile this snapshot you'll need GNU Autoconf, GNU make, Imlib, my
+librep Lisp interpreter, and the rep-gtk binding installed. Sources for
+some of these are:
 
 	http://www.enlightenment.org/				[ full path? ]
 	http://www.dcs.warwick.ac.uk/~john/sw/librep.html
 	http://www.dcs.warwick.ac.uk/~john/sw/rep-gtk.html
 
-After making sure that Imlib and librep are installed, do something
-similar to the following in the root of the unpacked sawmill
+After making sure that Imlib, librep, and rep-gtk are installed, do
+something similar to the following in the root of the unpacked sawmill
 distribution:
 
 	$ aclocal ; autoconf
-	$ ./configure [USUAL-CONFIGURE-OPTIONS..]
+	$ ./configure
 	$ make all
 	$ make install
 
@@ -76,8 +71,7 @@ script. If you make any changes, copy the final version to ~/.sawmillrc
 Default Bindings
 ****************
 
-The lisp/keymaps.jl script loads some initial event bindings, these
-include:
+The keymaps.jl script loads some initial event bindings, these include:
 
 In the window title bar (or the rest of the frame):
 
@@ -85,34 +79,45 @@ In the window title bar (or the rest of the frame):
 	Button2-Move	resize-window-interctively
 	Button3		raise-lower-window
 
+
+In the menu button: [ this is the only button in the default
+`absolute-e' theme ]
+
+	Button1		popup-window-menu
+	Button3		close-window
+
 In the window close button:
 
 	Button1		close-window
-	Button3		destroy-window
+	Button3		popup-window-menu
 
 In the iconify button:
 
-	Button1		iconify-window		[unimplemented]
+	Button1		iconify-window
+	Button2		popup-window-menu
 	Button3		delete-window
-
-[ this is the only button in the `absolute-e' theme ]
 
 In any managed window:
 
 	C-M-Up		raise-window
 	C-M-Down	lower-window
+	C-M-Left	send-to-previous-workspace
+	C-M-Right	send-to-next-workspace
 	M-Button1	move-window-interactively
 	M-Button3	raise-lower-window
+
+In the root window:
+
+	M-Button1	popup-root-menu
 
 Anywhere at all:
 
 	C-Left		previous-workspace
 	C-Right		next-workspace
-	C-M-Left	send-to-previous-workspace
-	C-M-Right	send-to-next-workspace
 	C-M-ESC		exit
 
 [ C- is the control key, M- is the meta key ]
+
 
 Notes
 *****
@@ -124,6 +129,10 @@ create one, remove all windows to delete it.
 The `sloppy-focus' variable controls whether the focus is preserved
 when the root window is entered. Currently there's no click-to-focus
 option.
+
+The `move-outline-mode' and `resize-outline-mode' variables control the
+window update modes. Currently the only options are `nil' (twm-like
+rubber banding) and `opaque' (the default).
 
 The list of hooks currently called is:
 
@@ -146,6 +155,12 @@ The list of hooks currently called is:
 	enter-workspace-hook	the workspace whose state has changed
 	leave-workspace-hook
 
+	place-window-hook	called the first time a window is mapped
+
+	iconify-window-hook	called with the window as parameter
+	uniconifiy-window-hook
+
 For a description of the structures defining window frame parts, see
 src/frames.c. Search for a comment starting ``building frames from
-component lists''
+component lists''. Also you can look at the example themes:
+`absolute-e.jl', `brushed-metal.jl' and `simple.jl'.

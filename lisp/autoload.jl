@@ -10,4 +10,7 @@
 (autoload 'move-selected-window "move-resize" t)
 (autoload 'resize-selected-window "move-resize" t)
 (autoload 'select-window "select-window")
+(autoload 'popup-menu "menus")
+(autoload 'popup-window-menu "menus" t)
+(autoload 'popup-root-menu "menus" t)
 ;;; ::autoload-end::

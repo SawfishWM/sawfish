@@ -48,7 +48,6 @@ extern void send_client_message (Window w, Atom a, Time time);
 extern void (*event_handlers[LASTEvent])(XEvent *ev);
 extern int current_mouse_x, current_mouse_y;
 extern Time last_event_time;
-extern bool async_event_lock;
 extern XEvent *current_x_event;
 extern repv Qvisibility_notify_hook, Qdestroy_notify_hook, Qmap_notify_hook,
     Qunmap_notify_hook, Qenter_notify_hook, Qleave_notify_hook,
@@ -57,7 +56,6 @@ extern void record_event_time (XEvent *ev);
 extern void map_request (XEvent *ev);
 extern void send_synthetic_configure (Lisp_Window *w);
 extern void handle_sync_input(int fd);
-extern void handle_async_input(void);
 extern repv Fquery_pointer (void);
 extern repv Fquery_pointer_window (void);
 extern void events_init (void);
@@ -107,7 +105,7 @@ extern repv Fresize_window_to (repv win, repv x, repv y);
 extern repv Fgrab_server (void);
 extern repv Fungrab_server (void);
 extern repv Fgrab_pointer (repv win, repv cursor);
-extern repv Fungrab_server (void);
+extern repv Fungrab_pointer (void);
 extern repv Fdraw_window_outline (repv mode, repv x, repv y,
 				  repv width, repv height);
 extern repv Ferase_window_outline (repv mode, repv x, repv y,
@@ -157,8 +155,7 @@ extern int main (int argc, char **argv);
 extern Lisp_Window *window_list;
 extern int window_type;
 extern Lisp_Window *focus_window;
-extern repv Qadd_window_hook;
-extern bool transient_p (Window id);
+extern repv Qadd_window_hook, Qplace_window_hook;
 extern bool mapped_not_override_p (Window id);
 extern void focus_on_window (Lisp_Window *w);
 extern void fix_window_size (Lisp_Window *w);
@@ -188,6 +185,8 @@ extern repv Fwindow_transient_p (repv win);
 extern repv Fhide_window (repv win);
 extern repv Fshow_window (repv win);
 extern repv Fwindow_visible_p (repv win);
+extern repv Fwindow_id (repv win);
+extern repv Fwindow_group_id (repv win);
 extern void manage_windows (void);
 extern void windows_init (void);
 extern void windows_kill (void);

@@ -1,0 +1,24 @@
+1999-07-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (cycle-through-workspaces,
+	delete-workspaces-when-empty, uniconify-to-current-workspace,
+	static-workspace-menus): new variables
+	(workspace-menu, window-menu): dynamic menu constructors
+	(iconify-window, uniconify-window): new commands
+
+	* sawmill.jl: load some more libraries
+
+	* place-window.jl: this uses the new place-window-hook. But
+	random placement is still the only working option
+
+	* move-resize.jl: now obeys most of the window's size hints
+	(all but the aspect ratios)
+
+	* menus.jl: implement popup menus using the sawmill-ui script
+
+	* functions.jl (get-window-by-name, get-window-by-id): new
+	functions
+
+	* keymaps.jl: some more bindings
+	(root-window-keymap): new keymap
+
