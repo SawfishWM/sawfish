@@ -19,6 +19,11 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(defcustom raise-windows-when-unshaded nil
+  "Raise windows when they are unshaded."
+  :group misc
+  :type boolean)
+
 (defun shade-window (w)
   "Display only the title bar of the window."
   (interactive "%W")
@@ -46,6 +51,8 @@ state."
     (set-window-frame-style w (window-get w 'current-frame-style)
 			    (window-get w 'shaded-old-type) nil)
     (window-put w 'shaded-old-type nil)
+    (when raise-windows-when-unshaded
+      (raise-window w))
     (call-window-hook 'unshade-window-hook w)
     (call-window-hook 'window-state-change-hook w (list '(shaded)))))
 
