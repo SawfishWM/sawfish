@@ -1,3 +1,12 @@
+2000-10-27  John Harper  <jsh@eazel.com>
+
+	* themer.in (on-preview): don't need to grep for errors in the
+	output from make-theme-preview now that remote errors are
+	signalled as exceptions
+
+	* themer.in (patterns-update-all): when canonicalising file
+	names, expand twice to make sure
+
 2000-09-22  John Harper  <john@dcs.warwick.ac.uk>
 
 	* themer.in (on-preview): fixed typo in require statement

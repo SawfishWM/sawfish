@@ -848,8 +848,11 @@ exec rep "$0" "$@"
 				 current-filename)
 			(rplaca (cdr elt)
 				(expand-file-name
-				 name (file-name-directory
-				       current-filename))))))
+				 ;; expand twice to ensure canonicism
+				 (expand-file-name
+				  name (file-name-directory
+					current-filename))
+				 (local-file-name default-directory))))))
 		  (cdr cell))
 	    (gtk-clist-append patterns-clist (patterns-format-list cell)))
 	  patterns-alist)))
@@ -1217,23 +1220,24 @@ exec rep "$0" "$@"
 ;; frame previews
 
 (defun on-preview ()
-  (let
-      ((output (sawfish-eval
-		`(progn
-		   (require 'sawfish.wm.theming.make-theme-preview)
-		   (make-theme-preview ',patterns-alist
-				       ',frames-alist
-				       ',mapping-alist)))))
-    (if (string-match "^error-->(.*)\n" output)
-	(message (format nil (_ "error while building frame: %S")
-			 (expand-last-match "\\1")))
-      (unless preview-window
-	(let
-	    ((preview-xml (or (glade-xml-new glade-file "preview-window")
-			      (error "something happened"))))
-	  (glade-xml-signal-autoconnect preview-xml)
-	  (setq preview-window (glade-xml-get-widget
-				preview-xml "preview-window")))))))
+  (condition-case data
+      (progn
+	(sawfish-eval
+	 `(progn
+	    (require 'sawfish.wm.theming.make-theme-preview)
+	    (make-theme-preview ',patterns-alist
+				',frames-alist
+				',mapping-alist)))
+	(unless preview-window
+	  (let
+	      ((preview-xml (or (glade-xml-new glade-file "preview-window")
+				(error "something happened"))))
+	    (glade-xml-signal-autoconnect preview-xml)
+	    (setq preview-window (glade-xml-get-widget
+				  preview-xml "preview-window")))))
+    (remote-sawfish
+     (message (format nil (_ "error while building frame: %S") data)))))
+
 
 (defun on-preview-close ()
   (when preview-window
