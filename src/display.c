@@ -296,7 +296,7 @@ sys_init(char *program_name)
 	}
 	else
 	{
-	    fprintf(stderr, "sawmill: Can't open display: %s\n",
+	    fprintf(stderr, "sawfish: Can't open display: %s\n",
 		    display_name ? display_name : "");
 	    return FALSE;
 	}

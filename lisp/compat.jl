@@ -21,11 +21,8 @@
 
 (provide 'compat)
 
-(defmacro ws-workspace-limits ()
-  '(workspace-limits))
-
-(defmacro ws-workspace-empty-p (space)
-  `(workspace-empty-p ,space))
+(define ws-workspace-limits workspace-limits)
+(define ws-workspace-empty-p workspace-empty-p)
 
 (defun show-message (&optional text font fg bg position)
   (let
@@ -39,3 +36,9 @@
     (when position
       (setq attrs (cons (cons 'position position) attrs)))
     (display-message text attrs)))
+
+(define sawmill-directory sawfish-directory)
+(define sawmill-lisp-lib-directory sawfish-lisp-lib-directory)
+(define sawmill-site-lisp-directory sawfish-site-lisp-directory)
+(define sawmill-exec-directory sawfish-exec-directory)
+(define sawmill-version sawfish-version)

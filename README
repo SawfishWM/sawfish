@@ -1,6 +1,6 @@
 -*- text -*-
 
-This is sawmill, a highly configurable window manager for X11. It is
+This is sawfish, a highly configurable window manager for X11. It is
 known to compile on at least Solaris/sparc and Linux/ix86; it is
 released under the terms of the GNU GPL, copyright John Harper
 <jsh@users.sourceforge.net>
@@ -14,7 +14,7 @@ environment. For more details, see the url:
 Manifesto
 *********
 
-Sawmill is an extensible window manager using an Emacs Lisp-like
+Sawfish is an extensible window manager using an Emacs Lisp-like
 scripting language--all window decorations are configurable, the basic
 idea is to have as much user-interface policy as possible controlled
 through the Lisp language. This is no layer on top of twm, but a wholly
@@ -44,7 +44,7 @@ of the configuration tool.
 
 As yet there is no user documentation; most simple configuration can be
 made through the built-in customization tool. The info programming
-manual documents most of the sawmill lisp interface, otherwise see the
+manual documents most of the sawfish lisp interface, otherwise see the
 source code for more details...
 
 
@@ -60,7 +60,7 @@ of these are:
 	ftp://ftp.enlightenment.org/e/enlightenment/libs/
 
 After making sure that Imlib, librep, and rep-gtk are installed, do
-something similar to the following in the root of the unpacked sawmill
+something similar to the following in the root of the unpacked sawfish
 distribution:
 
 	$ ./configure
@@ -68,10 +68,10 @@ distribution:
 	$ make install
 
 If you've got GNOME installed, and you'd like to be able to configure
-sawmill via the control center, pass the --enable-capplet option to
+sawfish via the control center, pass the --enable-capplet option to
 configure
 
-Similarly, to enable readline support in the sawmill-client program,
+Similarly, to enable readline support in the sawfish-client program,
 pass --with-readline to configure
 
 Please read the TODO list, and send me any feedback. Bug reports are
@@ -81,7 +81,7 @@ especially welcome :-)
 Notes
 *****
 
-Sawmill is fully session managed using the X11R6 protocols. If the
+Sawfish is fully session managed using the X11R6 protocols. If the
 environment variable SESSION_MANAGER is set, the window manager will
 attempt to connect to it. All window state is saved and reloaded; Lisp
 modules may register their own session-manager functions for any window
@@ -90,19 +90,19 @@ state that they add.
 To dump all Lisp documentation strings execute the following in the
 shell:
 
-	$ sawmill --batch --no-rc rep -f rep <<EOF
+	$ sawfish --batch --no-rc rep -f rep <<EOF
 	> (apropos-function "" t)
 	> (apropos-variable "")
 	> EOF
 
 You probably want to redirect this to a file since it's about 150k in
 size. Also it contains many functions better documented in the librep
-and sawmill Info manuals.
+and sawfish Info manuals.
 
 Any customizations that can't be performed through the GUI can be put
-in the `~/.sawmillrc' file, a Lisp script that is executed at startup
+in the `~/.sawfishrc' file, a Lisp script that is executed at startup
 (after loading the GUI customizations). If this script exists, it
-prevents the `sawmill-defaults.jl' script being evaluated.
+prevents the `sawmill-defaults' lisp library being loaded.
 
-There is an Info manual (sawmill.info) documenting the lisp interface.
+There is an Info manual (sawfish.info) documenting the lisp interface.
 

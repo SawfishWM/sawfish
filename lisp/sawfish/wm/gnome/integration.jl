@@ -37,9 +37,9 @@
   (when (null (last root-menu))
     (setq root-menu (delq (last root-menu) root-menu))))
 
-;; invoke the GNOME control-center to configure sawmill
-(setq customize-program "sawmill-capplet")
-(setq customize-group-opt "--sawmill-group")
+;; invoke the GNOME control-center to configure sawfish
+(setq customize-program "sawfish-capplet")
+(setq customize-group-opt "--sawfish-group")
 (setq custom-menu-includes-all-settings nil)
 
 ;; invoke the GNOME terminal instead of xterm

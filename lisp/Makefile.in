@@ -25,18 +25,18 @@ top_builddir=..
 top_srcdir=@top_srcdir@
 
 # also in themes/Makefile.in
-sawmill_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/gradient.la \
-		../src/sawmill --batch --no-rc
-COMPILE_ENV = SAWMILLLISPDIR=. \
-	      SAWMILLEXECDIR=$(top_builddir)/src/.libs \
-	      SAWMILLDOCFILE=../DOC
+sawfish_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/gradient.la \
+		../src/sawfish --batch --no-rc
+COMPILE_ENV = SAWFISHLISPDIR=. \
+	      SAWFISHEXECDIR=$(top_builddir)/src/.libs \
+	      SAWFISHDOCFILE=../DOC
 
 INSTALL_FILES := *.jl *.jlc
 
 all : lisp
 
 lisp :
-	$(COMPILE_ENV) $(sawmill_prog) compiler -f compile-lib-batch .
+	$(COMPILE_ENV) $(sawfish_prog) compiler -f compile-lib-batch .
 
 install : all installdirs
 	for f in $(INSTALL_FILES); do \

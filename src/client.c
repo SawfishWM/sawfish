@@ -328,11 +328,11 @@ main(int argc, char *argv[])
 		do {
 		    if(isatty(0))
 #ifdef HAVE_LIBREADLINE
-  		        user_input = readline("sawmill% ");
+  		        user_input = readline("sawfish% ");
 		    if (user_input == 0)
 #else
 		    {
-			printf("sawmill%% ");
+			printf("sawfish%% ");
 			fflush(stdout);
 		    }
 		    if(fgets(buf, sizeof(buf), stdin) == 0) 

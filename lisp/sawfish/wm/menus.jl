@@ -24,8 +24,8 @@
 ;; Suppress annoying compiler warnings
 (eval-when-compile (require 'timers))
 
-(defvar menu-program (expand-file-name "sawmill-menu" sawmill-exec-directory)
-  "Location of the program implementing sawmill's menu interface.")
+(defvar menu-program (expand-file-name "sawfish-menu" sawfish-exec-directory)
+  "Location of the program implementing sawfish's menu interface.")
 
 (defvar menu-program-stays-running 60
   "When non-nil, the user-interface program is never stopped. If a number,

@@ -21,13 +21,13 @@
 
 (provide 'play-audio)
 
-(defvar audio-load-path (list "~/.sawmill/sounds"
-			      (or (getenv "SAWMILLSOUNDSDIR")
+(defvar audio-load-path (list "~/.sawfish/sounds"
+			      (or (getenv "SAWFISHSOUNDSDIR")
 				  (expand-file-name
-				   "../sounds" sawmill-lisp-lib-directory))
-			      (or (getenv "SAWMILLSITESOUNDSDIR")
+				   "../sounds" sawfish-lisp-lib-directory))
+			      (or (getenv "SAWFISHSITESOUNDSDIR")
 				  (expand-file-name
-				   "../../sounds" sawmill-lisp-lib-directory))
+				   "../../sounds" sawfish-lisp-lib-directory))
 			      ".")
   "List of directories to search for sound samples.")
 

@@ -1,5 +1,5 @@
 
-%define nam	sawmill
+%define nam	sawfish
 %define ver	@version@
 %define rel	1
 
@@ -10,8 +10,8 @@ Release: %{rel}
 Requires: librep >= 0.10, rep-gtk >= 0.8
 Copyright: GPL
 Group: User Interface/Desktops
-Source: ftp://ftp.dcs.warwick.ac.uk/people/John.Harper/sawmill/sawmill-%{ver}.tar.gz
-URL: http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
+Source: ftp://ftp.dcs.warwick.ac.uk/people/John.Harper/sawfish/sawfish-%{ver}.tar.gz
+URL: http://www.dcs.warwick.ac.uk/~john/sw/sawfish/
 Packager: John Harper <john@dcs.warwick.ac.uk>
 Buildroot: /var/tmp/%{nam}-root
 BuildPrereq: rep-gtk-libglade control-center-devel gmp-devel
@@ -23,25 +23,25 @@ language--all window decorations are configurable, the basic idea is to
 have as much user-interface policy as possible controlled through the
 Lisp language.
 
-All configuration may be performed through a GTK interface; sawmill is
+All configuration may be performed through a GTK interface; sawfish is
 mostly-GNOME compliant.
 
 %package gnome
-Summary: GNOME support for sawmill
+Summary: GNOME support for sawfish
 Group: User Interface/Desktops
 Requires: %{nam}
 
 %description gnome
-Optional GNOME support for sawmill. Includes a wm-entries spec, and a
+Optional GNOME support for sawfish. Includes a wm-entries spec, and a
 control center applet
 
 %package themer
-Summary: GUI for creating sawmill themes
+Summary: GUI for creating sawfish themes
 Group: User Interface/Desktops
 Requires: %{nam}, rep-gtk-libglade
 
 %description themer
-Optional theme builder for sawmill. Allows static window themes to be
+Optional theme builder for sawfish. Allows static window themes to be
 created/edited in a graphical environment.
 
 %prep
@@ -57,39 +57,47 @@ mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome/wm-properties
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/control-center
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome/apps/Settings
 make prefix=$RPM_BUILD_ROOT%{_prefix} install
-gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawmill*
+gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawfish*
 
 %post
-/sbin/install-info /usr/info/sawmill.info.gz /usr/info/dir
+/sbin/install-info /usr/info/sawfish.info.gz /usr/info/dir
 
 %preun
 if [ "$1" = 0 ]; then
-    /sbin/install-info --delete /usr/info/sawmill.info.gz /usr/info/dir
+    /sbin/install-info --delete /usr/info/sawfish.info.gz /usr/info/dir
 fi
 
 %files
 %defattr(-,root,root)
-%doc README NEWS FAQ THANKS TODO po/sawmill.pot
+%doc README NEWS FAQ THANKS TODO po/sawfish.pot
+%{_prefix}/bin/sawfish
+%{_prefix}/bin/sawfish-client
+%{_prefix}/bin/sawfish-ui
 %{_prefix}/bin/sawmill
 %{_prefix}/bin/sawmill-client
 %{_prefix}/bin/sawmill-ui
-%{_prefix}/share/sawmill/%{ver}
-%{_prefix}/libexec/sawmill/%{ver}/%{_host}
-%{_prefix}/info/sawmill*
+%{_prefix}/share/sawfish/%{ver}
+%{_prefix}/libexec/sawfish/%{ver}/%{_host}
+%{_prefix}/info/sawfish*
 
 %files gnome
 %defattr(-,root,root)
+%{_prefix}/bin/sawfish-capplet
 %{_prefix}/bin/sawmill-capplet
-%{_prefix}/share/control-center/Sawmill
-%{_prefix}/share/gnome/apps/Settings/Sawmill
-%{_prefix}/share/gnome/wm-properties/Sawmill.desktop
+%{_prefix}/share/control-center/Sawfish
+%{_prefix}/share/gnome/apps/Settings/Sawfish
+%{_prefix}/share/gnome/wm-properties/Sawfish.desktop
 
 %files themer
 %defattr(-,root,root)
+%{_prefix}/bin/sawfish-themer
 %{_prefix}/bin/sawmill-themer
-%{_prefix}/share/sawmill/%{ver}/themer.glade
+%{_prefix}/share/sawfish/%{ver}/themer.glade
 
 %changelog
+* Mon Apr 24 2000 John Harper <john@dcs.warwick.ac.uk>
+- s/sawmill/sawfish/
+
 * Fri Sep 17 1999 John Harper <john@dcs.warwick.ac.uk>
 - don't patch the Makefile
 

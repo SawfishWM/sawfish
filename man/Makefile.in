@@ -34,7 +34,7 @@ MAKEINFOFLAGS =
 TEXI2DVI = texi2dvi
 DVIPS = dvips
 
-all : sawmill.info ../NEWS
+all : sawfish.info ../NEWS
 
 ../NEWS : news.texi
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-headers $< -o ../NEWS
@@ -42,19 +42,19 @@ all : sawmill.info ../NEWS
 ../FAQ : faq.texi
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-validate --no-headers $< -o ../FAQ
 
-sawmill.info : $(SRCS)
-	$(MAKEINFO) $(MAKEINFOFLAGS) $< -o sawmill.info
+sawfish.info : $(SRCS)
+	$(MAKEINFO) $(MAKEINFOFLAGS) $< -o sawfish.info
 
-sawmill.dvi : $(SRCS)
+sawfish.dvi : $(SRCS)
 	$(TEXI2DVI) $<
 
-sawmill.ps : sawmill.dvi
-	$(DVIPS) -f <sawmill.dvi >sawmill.ps
+sawfish.ps : sawfish.dvi
+	$(DVIPS) -f <sawfish.dvi >sawfish.ps
 
-man : sawmill.info sawmill.guide sawmill.doc sawmill.dvi sawmill.ps
+man : sawfish.info sawfish.guide sawfish.doc sawfish.dvi sawfish.ps
 
-install : sawmill.info installdirs
-	for f in sawmill.info*; do \
+install : sawfish.info installdirs
+	for f in sawfish.info*; do \
  	  $(INSTALL_DATA) $$f $(DESTDIR)$(infodir); \
 	done
 	-install-info librep.info $(DESTDIR)$(infodir)/dir
@@ -63,11 +63,11 @@ installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(infodir)
 
 uninstall :
-	rm -f $(DESTDIR)$(infodir)/sawmill.info*
+	rm -f $(DESTDIR)$(infodir)/sawfish.info*
 	-install-info --delete librep.info $(DESTDIR)$(infodir)/dir
 
 clean :
-	rm -f *~ sawmill.info* sawmill.?? sawmill.???
+	rm -f *~ sawfish.info* sawfish.?? sawfish.???
 
 realclean : clean
 	rm -f Makefile

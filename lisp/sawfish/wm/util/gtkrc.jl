@@ -22,7 +22,7 @@
 (provide 'gtkrc)
 
 (defvar gtkrc-style-program
-  (expand-file-name "gtk-style" sawmill-exec-directory))
+  (expand-file-name "gtk-style" sawfish-exec-directory))
 
 (defvar gtkrc-style nil)
 

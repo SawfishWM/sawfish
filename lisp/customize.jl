@@ -22,8 +22,8 @@
 (require 'custom)
 (provide 'customize)
 
-(defvar customize-program "sawmill-ui"
-  "Location of the program implementing sawmill's configuration interface.")
+(defvar customize-program "sawfish-ui"
+  "Location of the program implementing sawfish's configuration interface.")
 
 (defvar customize-group-opt "--group")
 (defvar customize-args nil)
@@ -122,7 +122,7 @@
 		   ((get (car item) 'custom-group-widget) (car item) items))
 		  ((eq (car item) 'root)
 		   `(vbox (label ,(format nil (_ "\
-Sawmill %s (rep %s)
+Sawfish %s (rep %s)
 
 Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>
 
@@ -131,13 +131,13 @@ modify it under the terms of the GNU General Public License as \
 published by the Free Software Foundation; either version 2, or \
 (at your option) any later version.
 
-Sawmill is distributed in the hope that it will be useful, but \
+Sawfish is distributed in the hope that it will be useful, but \
 WITHOUT ANY WARRANTY; without even the implied warranty of \
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the \
 GNU General Public License for more details.
 
-Visit the Sawmill homepage at http://sawmill.sourceforge.net/")
-				     sawmill-version rep-version))))
+Visit the Sawfish homepage at http://sawmill.sourceforge.net/")
+				     sawfish-version rep-version))))
 		  (t
 		   (cons 'vbox items)))
 		 subtrees)))))
@@ -195,9 +195,9 @@ Visit the Sawmill homepage at http://sawmill.sourceforge.net/")
 	(unwind-protect
 	    (progn
 	      (format file "\
-;; sawmill user customization -- do not edit by hand!
-;; sawmill version %s, written %s\n\n"
-		      sawmill-version (current-time-string))
+;; sawfish user customization -- do not edit by hand!
+;; sawfish version %s, written %s\n\n"
+		      sawfish-version (current-time-string))
 	      (mapc (lambda (f)
 		      (format file "%S\n" f)) customize-user-forms))
 	  (close-file file))

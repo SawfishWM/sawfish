@@ -72,6 +72,7 @@
 (autoload 'lower-group "groups" t)
 (autoload 'raise-group-depth "groups" t)
 (autoload 'lower-group-depth "groups" t)
+(autoload 'raise-lower-group "groups" t)
 (autoload 'set-group-frame-style "groups")
 (autoload 'slide-window-left "slide-window" t)
 (autoload 'slide-window-right "slide-window" t)

@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.57 2000/03/02 23:31:53 john Exp $
+;; $Id: sawmill-ui.jl,v 1.58 2000/04/12 14:01:44 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -29,7 +29,7 @@ exec rep "$0" "$@"
 
 (require 'gtk)
 
-(defvar sawmill-client-program "sawmill-client")
+(defvar sawmill-client-program "sawfish-client")
 
 ;; non-nil prevents actually changing any options, just print what
 ;; would be done to stderr
@@ -121,7 +121,7 @@ exec rep "$0" "$@"
 	  (if read-back
 	      (read-from-string output)
 	    output))
-      (error "can't call sawmill-client"))))
+      (error "can't call sawfish-client"))))
 
 (defun sawmill-eval-async (form)
   (let
@@ -129,7 +129,7 @@ exec rep "$0" "$@"
        (print-escape t))
     (unless (zerop (call-process process nil sawmill-client-program
 				 "-q" "-e" (format nil "%S" form)))
-      (error "can't call sawmill-client"))))
+      (error "can't call sawfish-client"))))
 
 
 ;; ui builder
@@ -1446,8 +1446,8 @@ exec rep "$0" "$@"
       (setq refresh (and ui-enable-refresh
 			 (gtk-button-new-with-label (_ "Refresh"))))
       (setq cancel (gtk-button-new-with-label (_ "Cancel")))
-      (gtk-window-set-title ui-window (_ "Sawmill configurator"))
-      (gtk-widget-set-name ui-window (_ "Sawmill configurator")))
+      (gtk-window-set-title ui-window (_ "Sawfish configurator"))
+      (gtk-widget-set-name ui-window (_ "Sawfish configurator")))
     (gtk-signal-connect ui-window "delete_event" ui-quit)
     (gtk-container-add ui-window vbox)
     (gtk-box-set-spacing vbox ui-box-spacing)
@@ -1739,11 +1739,11 @@ exec rep "$0" "$@"
 (let
     ((locale-dir (sawmill-eval
 		  '(and (featurep 'gettext)
-			(bindtextdomain "sawmill")) t)))
+			(bindtextdomain "sawfish")) t)))
   (when (and (not (get-command-line-option "--disable-nls")) locale-dir)
     (require 'gettext)
-    (bindtextdomain "sawmill" locale-dir)
-    (textdomain "sawmill")))
+    (bindtextdomain "sawfish" locale-dir)
+    (textdomain "sawfish")))
 
 (show-ui (ui-get-spec))
 

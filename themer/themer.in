@@ -31,14 +31,14 @@ exec rep "$0" "$@"
 (setq backtrace-on-error '(bad-arg missing-arg void-value invalid-function))
 
 (defvar version "__version__")
-(defvar glade-file "__sawmilldir__/__version__/themer.glade")
+(defvar glade-file "__sawfishdir__/__version__/themer.glade")
 (defvar locale-dir "__locale_dir__")
 
 (when (and (not (get-command-line-option "--disable-nls"))
 	   (file-directory-p locale-dir))
   (require 'gettext)
-  (bindtextdomain "sawmill" locale-dir)
-  (textdomain "sawmill"))
+  (bindtextdomain "sawfish" locale-dir)
+  (textdomain "sawfish"))
 
 ;; load this after gettext
 (require 'gtk)
@@ -47,7 +47,7 @@ exec rep "$0" "$@"
 
 ;; configuration
 
-(defvar sawmill-client-program "sawmill-client")
+(defvar sawfish-client-program "sawfish-client")
 
 ;; preferences
 (defvar reload-themes-after-saving t)
@@ -1228,7 +1228,7 @@ exec rep "$0" "$@"
 
 (defun on-preview ()
   (let
-      ((output (sawmill-eval
+      ((output (sawfish-eval
 		`(progn
 		   (require 'make-theme-preview)
 		   (make-theme-preview ',patterns-alist
@@ -1311,7 +1311,7 @@ exec rep "$0" "$@"
 	      (progn
 		(format file ";; theme file, written %s\n"
 			(current-time-string))
-		(write file ";; created by sawmill-themer -- DO NOT EDIT!\n\n")
+		(write file ";; created by sawfish-themer -- DO NOT EDIT!\n\n")
 		(write file "(require 'make-theme)\n\n")
 		(write file "\(let\n    \(")
 		(let
@@ -1381,7 +1381,7 @@ exec rep "$0" "$@"
   (write-readme-file dir)
   (message (format nil (_ "Generated theme in directory `%s'") dir))
   (when reload-themes-after-saving
-    (sawmill-eval-async `(reload-frame-style ',theme-name))))
+    (sawfish-eval-async `(reload-frame-style ',theme-name))))
 
 (defun new-theme ()
   (with-clist-frozen patterns-clist
@@ -1457,10 +1457,10 @@ exec rep "$0" "$@"
 ;; Preferences
 
 (defun save-preferences ()
-  (unless (file-exists-p "~/.sawmill")
-    (make-directory "~/.sawmill"))
+  (unless (file-exists-p "~/.sawfish")
+    (make-directory "~/.sawfish"))
   (let
-      ((file (open-file "~/.sawmill/themer-prefs" 'write)))
+      ((file (open-file "~/.sawfish/themer-prefs" 'write)))
     (when file
       (unwind-protect
 	  (mapc (lambda (x)
@@ -1470,8 +1470,8 @@ exec rep "$0" "$@"
 	(close-file file)))))
 
 (defun load-preferences ()
-  (and (file-exists-p "~/.sawmill/themer-prefs")
-       (load "~/.sawmill/themer-prefs" t t t)))
+  (and (file-exists-p "~/.sawfish/themer-prefs")
+       (load "~/.sawfish/themer-prefs" t t t)))
 
 (defun on-settings-preferences ()
   (let*
@@ -1513,7 +1513,7 @@ exec rep "$0" "$@"
 				   (defs . "Frame_Part_Definition")
 				   (themes . "Themes"))))
 		 (error "No help for %s!" node)))
-  (system (format nil "gnome-help-browser 'info:sawmill#%s' &" node))) 
+  (system (format nil "gnome-help-browser 'info:sawfish#%s' &" node))) 
 
 (setq help-launcher gnome-help-launcher)
 
@@ -1539,13 +1539,13 @@ exec rep "$0" "$@"
 		      (gtk-widget-destroy window))))
     (glade-xml-signal-autoconnect about-xml)
     (gtk-label-set label (format nil "\
-Sawmill Themer %s
+Sawfish Themer %s
 
 Copyright (C) 2000 John Harper
 <jsh@users.sourceforge.net>
 
 This program allows window manager
-themes for sawmill to be created
+themes for sawfish to be created
 through a GUI.\n" version))
     (gtk-grab-add window)))
 
@@ -1725,12 +1725,12 @@ through a GUI.\n" version))
 
 ;; wm communication
 
-(defun sawmill-eval (form &optional read-back)
+(defun sawfish-eval (form &optional read-back)
   (let*
       ((output (make-string-output-stream))
        (process (make-process output))
        (print-escape t))
-    (if (zerop (call-process process nil sawmill-client-program
+    (if (zerop (call-process process nil sawfish-client-program
 			     "-e" (format nil "%S" form)))
 	(progn
 	  (setq output (get-output-stream-string output))
@@ -1738,15 +1738,15 @@ through a GUI.\n" version))
 	  (if read-back
 	      (read-from-string output)
 	    output))
-      (error "can't call sawmill-client"))))
+      (error "can't call sawfish-client"))))
 
-(defun sawmill-eval-async (form)
+(defun sawfish-eval-async (form)
   (let
       ((process (make-process nil))
        (print-escape t))
-    (unless (zerop (call-process process nil sawmill-client-program
+    (unless (zerop (call-process process nil sawfish-client-program
 				 "-q" "-e" (format nil "%S" form)))
-      (error "can't call sawmill-client"))))
+      (error "can't call sawfish-client"))))
 
 
 ;; entry point

@@ -1,6 +1,6 @@
 \input texinfo  @c -*-Texinfo-*-
-@setfilename sawmill.info
-@settitle sawmill Programming Manual
+@setfilename sawfish.info
+@settitle sawfish Programming Manual
 @footnotestyle end
 
 @set EDITION 0.6
@@ -10,11 +10,11 @@
 
 @ifinfo
 @direntry
-* sawmill: (sawmill).		sawmill programming manual
+* sawfish: (sawfish).		sawfish programming manual
 @end direntry
 
 This is Edition @value{EDITION}, last updated @value{UPDATED}, of
-@cite{The sawmill Programming Manual}, for sawmill, Version
+@cite{The sawfish Programming Manual}, for sawfish, Version
 @value{VERSION}.
 
 Copyright 1999 John Harper.
@@ -37,7 +37,7 @@ notice identical to this one.
 @end ifinfo
 
 @titlepage
-@title sawmill
+@title sawfish
 @subtitle An Extensible X11 Window Manager
 @subtitle Programming Manual
 @subtitle Edition @value{EDITION}
@@ -61,15 +61,15 @@ notice identical to this one.
 
 @ifnottex
 This document describes the Lisp programming interface to
-@code{sawmill}, an extensible X11 window manager.
+@code{sawfish}, an extensible X11 window manager.
 
 This is Edition @value{EDITION} of its documentation,
-last updated @value{UPDATED} for Sawmill version @value{VERSION}.
+last updated @value{UPDATED} for Sawfish version @value{VERSION}.
 @end ifnottex
 
 @menu
 * Copying::                     Distribution conditions
-* Introduction::                Brief introduction to sawmill
+* Introduction::                Brief introduction to sawfish
 
 * Colors::			Color type
 * Fonts::			Font type
@@ -101,7 +101,7 @@ last updated @value{UPDATED} for Sawmill version @value{VERSION}.
 @chapter Copying
 @cindex Copying
 
-Sawmill is copyright (C) 1999 John Harper and is released under the
+Sawfish is copyright (C) 1999 John Harper and is released under the
 terms of the GNU General Public License. See the included file
 @file{COPYING} for the full text of the license (or @pxref{Copying, ,
 Copying, emacs, The GNU Emacs Manual}).
@@ -112,7 +112,7 @@ modify it under the terms of the GNU General Public License as
 published by the Free Software Foundation; either version 2, or
 (at your option) any later version.
 
-Sawmill is distributed in the hope that it will be useful, but
+Sawfish is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
@@ -123,7 +123,7 @@ GNU General Public License for more details.
 @chapter Introduction
 @cindex Introduction
 
-Sawmill is a lisp-extensible window manager for X11. Its aim is to
+Sawfish is a lisp-extensible window manager for X11. Its aim is to
 allow all areas of window management (decoration, manipulation) to be
 customized as far as is possible, yet still remain as fast or faster
 than existing window managers.
@@ -139,22 +139,22 @@ exported to the Lisp environment through key-bindings and hooks,
 similar to in Emacs. These events include pointer behavior and many
 internal X11 events.
 
-Sawmill uses the librep Lisp environment (@pxref{Top, , Overview,
+Sawfish uses the librep Lisp environment (@pxref{Top, , Overview,
 librep, The Librep Manual}), this is a run-time library implementing a
 language similar to Emacs Lisp (@pxref{Top, , Overview, elisp, The
 Emacs-Lisp Manual}), but with many extensions, and using lexical
 instead of dynamic scope. This manual assumes at least a basic
 knowledge of the language.
 
-Incidentally, there is no meaning to the name ``Sawmill'', the author
-grepped @file{/usr/dict/words} for something containing ``wm''.
+@c Incidentally, there is no meaning to the name ``Sawmill'', the author
+@c grepped @file{/usr/dict/words} for something containing ``wm''.
 
 
 @node Colors, Fonts, Introduction, Top
 @chapter Colors
 @cindex Colors
 
-Sawmill provides a primitive type allowing colors to be represented.
+Sawfish provides a primitive type allowing colors to be represented.
 Each color object allows a single color value to be named and passed
 between Lisp functions.
 
@@ -487,7 +487,7 @@ Volume Two, @cite{Xlib Reference Manual}.
 @chapter Windows
 @cindex Windows
 
-One of the most important data types in sawmill is the window type. All
+One of the most important data types in sawfish is the window type. All
 managed client windows have a single window object associated with
 them.
 
@@ -534,7 +534,7 @@ with individual windows. For example, the module handling iconification
 needs to associate a boolean value with each window---whether that
 window is iconified or not.
 
-To solve this problem, Sawmill gives each window a property list. These
+To solve this problem, Sawfish gives each window a property list. These
 are exactly analogous to the property lists stored with each symbol
 (@pxref{Property Lists, , Property Lists, librep, The Librep Manual});
 they allow values to be associated with Lisp symbols, for a particular
@@ -671,7 +671,7 @@ This option may be set on a per-window basis by setting the
 @code{window-put} function).
 @end defvar
 
-Sawmill also maintains the order in which windows were recently
+Sawfish also maintains the order in which windows were recently
 focused.
 
 @defun window-order &optional workspace allow-iconified all-viewports
@@ -706,7 +706,7 @@ current workspace.
 @cindex Windows, X properties
 
 The X window system associates properties with windows (these are
-totally separate to the properties that sawmill associates with window
+totally separate to the properties that sawfish associates with window
 @emph{objects}, @pxref{Window Property Lists}). Most inter-client
 communication is performed through manipulation of these properties.
 
@@ -715,7 +715,7 @@ All functions defined below, that operate on X properties, accept their
 associated client window), the numeric xid of a window, or the symbol
 @code{root} denoting the root window.
 
-Sawmill represents X atoms (both the names and data types of  X
+Sawfish represents X atoms (both the names and data types of  X
 properties) as symbols. There is an exact correspondence between the
 names of atoms and the name of the symbol representing them. For
 example, the X atom @samp{STRING} is represented by the lisp symbol
@@ -759,7 +759,7 @@ in @var{data} will be converted to their numeric X atoms.
 The standard X property formats don't allow for an array of strings to
 be stored, so these are often encoded as the strings concatenated,
 separated by zero characters. These are usually called @dfn{text
-properties}. Sawmill has two functions for manipulating them:
+properties}. Sawfish has two functions for manipulating them:
 
 @defun get-x-text-property window property
 Similar to @code{get-x-property}, but returns either @code{nil} or a
@@ -801,7 +801,7 @@ Raise the client window associated with object @var{window} to the top
 of the display.
 @end defun
 
-Sawmill allows the stacking order to be managed as a sequence of
+Sawfish allows the stacking order to be managed as a sequence of
 layers, with windows being assigned a particular depth within the
 order. For any given window with depth @var{d}, it will be above all
 windows with depth less than @var{d}, and below all windows with depth
@@ -971,7 +971,7 @@ The distance in pixels before snapping together two edges.
 @cindex Hiding and showing windows
 @cindex Windows, showing and hiding
 
-Sawmill provides two low-level functions for withdrawing client windows
+Sawfish provides two low-level functions for withdrawing client windows
 from the display. These are used to implement both virtual workspaces
 (@pxref{Workspaces}) and iconification (@pxref{Iconifying Windows}).
 
@@ -1056,7 +1056,7 @@ then the window will appear in its shaded state.
 @cindex Windows, iconifying
 
 X defines an iconic state for windows, often windows in this state are
-displayed as small icons. Sawmill does not display these icons, instead
+displayed as small icons. Sawfish does not display these icons, instead
 iconified windows are shown slightly differently in the menu of all
 windows.
 
@@ -1136,7 +1136,7 @@ Return @code{t} when @var{window} is horizontally maximized.
 @chapter Customization
 @cindex Customization
 
-Sawmill provides two levels of configuration:
+Sawfish provides two levels of configuration:
 
 @enumerate
 @item @dfn{customization}: setting variables to change the behavior of
@@ -1149,7 +1149,7 @@ the window manager through the creation of new Lisp modules.
 Obviously the first of these requires a lot less specialized knowledge
 than the second. But even then, the user has to edit startup files
 containing the Lisp forms setting the variables. To remove this need
-for hand-editing, Sawmill has a specialized system allowing all
+for hand-editing, Sawfish has a specialized system allowing all
 customizations to be made through a GUI, and then automatically
 reloaded each time that the window manager is started.
 
@@ -1159,7 +1159,7 @@ customization variables to configure, or all classes if @var{group} is
 undefined.
 @end deffn
 
-The @file{sawmill-ui} program can be used to invoke the GUI manually;
+The @file{sawfish-ui} program can be used to invoke the GUI manually;
 if GNOME is being used, then the GNOME Control Center can also be used
 to customize certain classes.
 
@@ -1288,7 +1288,7 @@ ability to decorate client windows, typically seen as an added border,
 and then to allow the window to be manipulated through user input on
 the border.
 
-Sawmill provides an extremely flexible method of decorating windows,
+Sawfish provides an extremely flexible method of decorating windows,
 the look and feel of the border may be specified completely. Also, no
 limits are placed on which windows are given which borders, if
 necessary a completely different border could be dynamically created
@@ -1315,7 +1315,7 @@ by the window manager. Usually these decorations will be immediately
 adjacent to the outer edges of the window, but there is no requirement
 to use this model.
 
-In Sawmill, each window frame is constructed from a list of @dfn{frame
+In Sawfish, each window frame is constructed from a list of @dfn{frame
 parts}, conceptually rectangular objects with a specified position
 relative to the edges of the client window. When shaped images are used
 to define frame parts, they are still thought of as being rectangular,
@@ -1342,7 +1342,7 @@ the entire window frame.
 @cindex Window frames, frame part classes
 @cindex Classes, of frame parts
 
-Although one of the aims of Sawmill is to provide as much flexibility
+Although one of the aims of Sawfish is to provide as much flexibility
 as possible, this can sometimes be detrimental to the overall
 experience. For example, it would be easier for the user if all themes
 use consistent keymaps and cursor images in conceptually similar parts
@@ -1350,7 +1350,7 @@ of window frames. That is, it would be better if all close buttons had
 the same mouse button bindings and the same mouse cursor displayed when
 the pointer is over them.
 
-To achieve this, Sawmill defines a number of @dfn{classes} of frame
+To achieve this, Sawfish defines a number of @dfn{classes} of frame
 parts, each with several default attributes. When defining a window
 frame, the definitions of each part then specifies which class it is a
 member of, and inherits the associated default attributes (provided
@@ -1810,7 +1810,7 @@ declaring any global variables or functions, the only usual exception
 is when declaring customization options with @code{defcustom}; these
 must be globally visible.
 
-Since themes are generally passed around very casually, sawmill
+Since themes are generally passed around very casually, sawfish
 evaluates all theme code in a very restricted environment; the idea
 being that themes should only be able to affect the look of the window
 manager. Despite this, it is still possible for malicious themes to
@@ -1827,7 +1827,7 @@ the system theme directory.
 
 @defvar user-theme-directory
 The name of the user's theme directory, by default
-@file{~/.sawmill/themes}.
+@file{~/.sawfish/themes}.
 @end defvar
 
 @defvar system-theme-directory
@@ -1843,7 +1843,7 @@ The name of the system theme directory.
 
 It is often useful to be able to disable certain parts of a window's
 frame. For example, a window may hint to the window manager that it
-doesn't want a maximize button. Sawmill allows all parts of a
+doesn't want a maximize button. Sawfish allows all parts of a
 particular class to be disabled or enabled on a window by window basis.
 However, not all frame styles will support this (it depends on the
 frame part's @code{removable} property, @ref{Frame Part Definition}).
@@ -1915,7 +1915,7 @@ Consider the following definition:
 @end lisp
 
 @noindent
-This is the definition of Sawmill's root menu. We can see that four
+This is the definition of Sawfish's root menu. We can see that four
 submenus are created dynamically by dereferencing variables (in fact,
 three of this variables contain functions) (@code{workspace-menu},
 @code{window-menu}, @code{apps-menu} and @code{custom-menu}).
@@ -2289,7 +2289,7 @@ Keymaps active in the standard window frame buttons.
 @cindex Event loop
 
 The event loop reads all X events received on any of the windows that
-Sawmill is aware off. Many of these events invoke hooks, as described
+Sawfish is aware off. Many of these events invoke hooks, as described
 in @ref{Standard Hooks}. Keyboard and pointer events are translated to
 their Lisp equivalents (@pxref{Events}) and then used to scan all
 active keymaps for a binding. If a binding is found, the associated
@@ -2644,12 +2644,12 @@ integer @var{integer}.
 @cindex Standard hooks
 @cindex Hooks, standard
 
-Sawmill provides many hooks to allow extension of previously defined
+Sawfish provides many hooks to allow extension of previously defined
 functions. Also, many X events are exported to the Lisp environment via
 the hooks mechanism. For more details on the hooks mechanism see
 @ref{Normal Hooks, , Normal Hooks, librep, The Librep Manual}.
 
-As well as using the standard @code{call-hook} function, sawmill also
+As well as using the standard @code{call-hook} function, sawfish also
 provides the @code{call-window-hook} function. This is used to invoke
 hooks which refer to a single window. If the hook has a local value
 defined in the window's property list then this value is used, before
@@ -2661,7 +2661,7 @@ Call @var{hook} for @var{window} with further arguments @var{args}. See
 the hook is called with arguments @code{(@var{window} . @var{args})}.
 @end defun
 
-The following table describes all standard hooks called by Sawmill, and
+The following table describes all standard hooks called by Sawfish, and
 the arguments they are called with:
 
 @vtable @code
@@ -2903,7 +2903,7 @@ hints. May be one of the symbols: @code{north-west}, @code{north},
 @chapter Session Management
 @cindex Session management
 
-Sawmill has fully integrated support for the X session management
+Sawfish has fully integrated support for the X session management
 protocols. Also, this support is extensible to allow all Lisp modules
 to save and reload their own window state.
 

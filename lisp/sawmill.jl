@@ -20,20 +20,21 @@
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (provide 'sawmill)
+(provide 'sawfish)
 
 ;; frame-style loaded if user hasn't set their own
-(defvar fallback-frame-style 'microGUI)
+(define fallback-frame-style 'microGUI)
 
 ;; regexp matching languages to use FontSets for. Please send me
 ;; patches adding to this as required
-(defvar fontset-languages-re "\\b(ja|ko|zh)(\\b|_)")
+(define fontset-languages-re "\\b(ja|ko|zh)(\\b|_)")
 
 ;; quiet autoloading
 (setq autoload-verbose nil)
 
 ;; so modularised rep knows where to inherit specials and load from
-(setq *user-structure* 'sawmill)
-(setq *root-structure* 'sawmill)
+(define *user-structure* 'sawfish)
+(define *root-structure* 'sawfish)
 
 ;; hack to load setenv etc before autoloads are defined
 (load "environ")
@@ -53,8 +54,8 @@
     (when (and lang (not disable-nls) (not (string= lang "C")))
       (require 'gettext)
       (bindtextdomain
-       "sawmill" (expand-file-name "../locale" sawmill-lisp-lib-directory))
-      (textdomain "sawmill"))
+       "sawfish" (expand-file-name "../locale" sawfish-lisp-lib-directory))
+      (textdomain "sawfish"))
 
     ;; XFree86 servers don't like using FontSets to draw Latin1
     ;; characters it seems.. :-(
@@ -106,6 +107,12 @@
 (unless (get-command-line-option "--no-rc")
   (condition-case error-data
       (progn
+	;; try to rename ~/.sawmill to ~/.sawfish
+	(when (and (file-directory-p "~/.sawmill")
+		   (not (file-exists-p "~/.sawfish")))
+	  (rename-file "~/.sawmill" "~/.sawfish")
+	  (message "Renamed directory ~/.sawmill -> ~/.sawfish"))
+
 	;; First the site-wide stuff
 	(load-all "site-init")
 
@@ -114,18 +121,24 @@
 	    (load "rep-defaults" t))
 
 	(unless batch-mode
-	  ;; load these before customized settings (but only if there's
-	  ;; no .sawmillrc file)
-	  (unless (or (file-exists-p "~/.sawmillrc")
-		      (file-exists-p "~/.sawmillrc.jl")
-		      (file-exists-p "~/.sawmillrc.jlc"))
-	    (load "sawmill-defaults" t))
+	  (let ((rc-file-exists-p (lambda (f)
+				    (or (file-exists-p f)
+					(file-exists-p (concat f ".jl"))
+					(file-exists-p (concat f ".jlc"))))))
+	    ;; load these before customized settings (but only if there's
+	    ;; no .sawmillrc file)
+	    (unless (or (rc-file-exists-p "~/.sawfishrc")
+			(rc-file-exists-p "~/.sawmillrc"))
+	      (load "sawmill-defaults" t))
 
-	  ;; then the customized options
-	  (custom-load-user-file)
+	    ;; then the customized options
+	    (custom-load-user-file)
 
-	  ;; then the sawmill specific user configuration
-	  (load "~/.sawmillrc" t t)))
+	    ;; then the sawmill specific user configuration
+	    (cond ((rc-file-exists-p "~/.sawfishrc")
+		   (load "~/.sawfishrc" t t))
+		  ((rc-file-exists-p "~/.sawmillrc")
+		   (load "~/.sawmillrc" t t))))))
     (error
      (format (stderr-file) "error in local config--> %S\n" error-data))))
 

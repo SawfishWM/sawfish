@@ -4,11 +4,47 @@
 
 @enumerate
 
-@item I installed Sawmill but it's not working!  All I see when I
+@item Why is it now called @emph{Sawfish}?
+
+Because the old name (@samp{Sawmill}) was already being used by another
+company, who were in the process of registering it as a trademark.
+
+The rename should be mostly painless, all old binaries still work for
+the time being, but will be phased out over time. Where before you
+would execute a program called @file{sawmill*}, replace it by
+@file{sawfish*}. E.g. @file{sawmill} becomes @file{sawfish}, and
+@file{sawmill-client} becomes @file{sawfish-client}.
+
+Your @file{~/.sawmill} directory will automatically be renamed
+@file{~/.sawfish} unless it would overwrite an existing file. Both
+@file{~/.sawfishrc} and @file{~/.sawmillrc} will be checked currently
+(though only one will be actually loaded).
+
+My apologies for any inconvenience caused.
+
+
+@item But why @emph{Sawfish}, and not <insert your favourite
+alternative>?
+
+Well I had to choose something! And hopefully it satisfies the main
+requirements:
+
+@itemize @bullet
+@item There are no other computer-related users of the name (as checked
+in April 2000,)
+
+@item It's similar enough to the old name to hopefully carry some
+recognition across,
+
+@item It has no tenuous relationship to window-managing.
+@end itemize
+
+
+@item I installed Sawfish but it's not working!  All I see when I
 start X is the default stipple background: no programs, no menus, no
 pager.
 
-This is exactly what it's supposed to do. Sawmill is a @emph{window
+This is exactly what it's supposed to do. Sawfish is a @emph{window
 manager} and as such is not responsible for setting the background,
 starting programs or displaying a pager---these can all be done using
 separate applications (e.g. by using a desktop environment such as
@@ -18,9 +54,9 @@ The default menu binding is somewhat obscure; you must middle-click on
 the background to bring up the menus. (If you have a two-button mouse,
 try clicking both buttons simultaneously)
 
-If, after reading this, you still think that sawmill isn't working,
-please send mail describing the problem to the sawmill mailing list
-@email{sawmill@@aarg.net}
+If, after reading this, you still think that sawfish isn't working,
+please send mail describing the problem to the sawfish mailing list
+@email{sawfish@@aarg.net}
 
 
 @item How do I add customizations?
@@ -28,25 +64,25 @@ please send mail describing the problem to the sawmill mailing list
 There are several files controlling this:
 
 @table @file
-@item ~/.sawmillrc
+@item ~/.sawfishrc
 Hand written lisp code, loaded at startup. This is where almost all
 explicit customization should be done.
 
 @item sawmill-defaults
-This lisp library is only loaded if there's no @file{.sawmillrc} file.
+This lisp library is only loaded if there's no @file{.sawfishrc} file.
 
-@item ~/.sawmill/custom
+@item ~/.sawfish/custom
 This stores customizations created by the configuration tool; it
 shouldn't really be edited manually.
 
 This file is loaded @emph{after} @file{sawmill-defaults}, but @emph{before}
-@file{.sawmillrc}.
+@file{.sawfishrc}.
 @end table
 
 
-@item I created @file{.sawmillrc}, now things have changed?
+@item I created @file{.sawfishrc}, now things have changed?
 
-If a @file{~/.sawmillrc} file exists, it prevents
+If a @file{~/.sawfishrc} file exists, it prevents
 @file{sawmill-defaults} from being loaded. But it's
 @file{sawmill-defaults} that loads some of the common window manager
 features, so add the line
@@ -55,15 +91,15 @@ features, so add the line
 (require 'sawmill-defaults)
 @end lisp
 
-@noindent to your @file{.sawmillrc} file if you want to start with all
+@noindent to your @file{.sawfishrc} file if you want to start with all
 the standard features loaded.
 
 
-@item What's this @code{sawmill-client} program?
+@item What's this @code{sawfish-client} program?
 
 This allows you to connect to a window manager process and evaluate
-arbitrary Lisp forms. Do @samp{sawmill-client -?} for more details
-(@samp{sawmill-client -} for a read-eval-print loop)
+arbitrary Lisp forms. Do @samp{sawfish-client -?} for more details
+(@samp{sawfish-client -} for a read-eval-print loop)
 
 By default you can only connect from the host running the wm (through a
 unix-domain socket). To enable the network based server, evaluate the
@@ -81,7 +117,7 @@ So @emph{don't} run the net server with X access control disabled
 @item How do I bind a key to execute a shell command?
 
 This isn't yet possible through the configuration tool. However these
-bindings can be defined in your @file{~/.sawmillrc} file. For example:
+bindings can be defined in your @file{~/.sawfishrc} file. For example:
 
 @lisp
 (bind-keys global-keymap
@@ -107,11 +143,11 @@ Menus})
 
 @item How do I read the Info manual?
 
-Either execute the command @samp{info sawmill}, or enter the Info mode
-within Emacs (@kbd{C-h i}) and type @kbd{g (sawmill) RET}.
+Either execute the command @samp{info sawfish}, or enter the Info mode
+within Emacs (@kbd{C-h i}) and type @kbd{g (sawfish) RET}.
 
 If you're using GNOME, then try executing @samp{gnome-help-browser
-info:sawmill}.
+info:sawfish}.
 
 
 @item How do I create a new theme?
@@ -119,7 +155,7 @@ info:sawmill}.
 See the @samp{Window Frames} node of the Info manual (@pxref{Window
 Frames})
 
-Basically though, create a directory @file{~/.sawmill/themes/@var{foo}}
+Basically though, create a directory @file{~/.sawfish/themes/@var{foo}}
 where @var{foo} is the name of your theme. Then copy any images into
 this directory and create a file @file{theme.jl} that will be loaded to
 initialise the theme
@@ -128,7 +164,7 @@ The configuration tool will display the contents of a file called
 @file{README} in the directory (but make it 80-column text, and only a
 few lines)
 
-Recent versions of sawmill include a program @code{sawmill-themer} that
+Recent versions of sawfish include a program @code{sawfish-themer} that
 allows simple themes to be created using a GTK+ interface. Ian McKellar
 has created @code{GimpMill}:
 
@@ -143,7 +179,7 @@ creation like the GAP extends it to allow animation creation.
 GimpMill is available from @url{http://www.yakk.net/projects.gimpmill.html}
 
 
-@item How do I port an Enlightenment theme to sawmill?
+@item How do I port an Enlightenment theme to sawfish?
 
 There's no automatic translation available. Get the images used in the
 window border, then write a @file{theme.jl} file telling the window
@@ -159,7 +195,7 @@ Thanks to those nice people at themes.org, there's now
 @url{http://sawmill.themes.org/} for your theming pleasure
 
 
-@item Why don't GTK themes work with sawmill?
+@item Why don't GTK themes work with sawfish?
 
 There was a problem with older versions of the @code{gtk-engines}
 package preventing engine based themes working with several interpreted
@@ -195,7 +231,7 @@ GNOME hints, simply monitor property @code{_WIN_WORKSPACE} on the root
 window).
 
 
-@item Is there a sawmill mailing list?
+@item Is there a sawfish mailing list?
 
 Yes, thanks to Erik Arneson @email{erik@@starseed.com} who manages it.
 
@@ -205,7 +241,7 @@ To subscribe, send a message to @email{majordomo@@aarg.net} with
 The list is archived at @url{http://inanna.starseed.com/sawmill}.
 
 
-@item Is there a sawmill IRC channel?
+@item Is there a sawfish IRC channel?
 
 From Ryan Pavlik @email{rpav@@mythosource.org}:
 
@@ -219,9 +255,9 @@ If you need an EFNet server, check www.efnet.net for a listing.
 @end quotation
 
 
-@item Why does sawmill look weird/crash on Solaris?
+@item Why does sawfish look weird/crash on Solaris?
 
-Sawmill works stably on Solaris, but you may need to do two things:
+Sawfish works stably on Solaris, but you may need to do two things:
 
 @enumerate
 @item

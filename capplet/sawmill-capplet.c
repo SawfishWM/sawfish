@@ -52,7 +52,7 @@ static guint ui_handler_id;
 
 static char *group;
 
-char *ui_argv[] = { "sawmill-ui",
+char *ui_argv[] = { "sawfish-ui",
 		    "--flatten",
 		    "--socket-id", 0,
 		    "--group", 0,
@@ -61,7 +61,7 @@ char *ui_argv[] = { "sawmill-ui",
 #define UI_ARGV_GROUP_SLOT 5
 
 
-/* communicating with sawmill-ui */
+/* communicating with sawfish-ui */
 
 #define X_IO(op, fd, buf, len)				\
 	char *buf__ = (char *)buf;			\
@@ -171,7 +171,7 @@ sawmill_cancel (void)
 
 /* initialisation */
 
-/* returns non-zero if sawmill is running */
+/* returns non-zero if sawfish is running */
 static gint
 sawmill_running_p (void)
 {
@@ -188,7 +188,7 @@ sawmill_setup (void)
 
     if (!sawmill_running_p ())
     {
-	GtkWidget *label = gtk_label_new ("[Sawmill isn't running]");
+	GtkWidget *label = gtk_label_new ("[Sawfish isn't running]");
 	gtk_container_add (GTK_CONTAINER (capplet), label);
 	return;
     }
@@ -258,7 +258,9 @@ main (int argc, char **argv)
 
     static struct poptOption options[] = {
 	{ "sawmill-group", 0, POPT_ARG_STRING, &group,
-	  0, "Sawmill customization group", "GROUP" },
+	  0, "Sawfish customization group", "GROUP" },
+	{ "sawfish-group", 0, POPT_ARG_STRING, &group,
+	  0, "Sawfish customization group", "GROUP" },
 	{ 0, 0, 0, 0, 0 }
     };
 
@@ -267,12 +269,12 @@ main (int argc, char **argv)
     textdomain (PACKAGE);
 #endif
 
-    init_results = gnome_capplet_init("sawmill-properties", SAWMILL_VERSION,
+    init_results = gnome_capplet_init("sawfish-properties", SAWFISH_VERSION,
 				      argc, argv, options, 0, NULL);
 
     if (init_results < 0) {
 	g_warning ("an initialization error occurred while "
-		   "starting 'sawmill-properties-capplet'.\n"
+		   "starting 'sawfish-properties-capplet'.\n"
 		   "aborting...\n");
 	exit (1);
     }
@@ -282,11 +284,11 @@ main (int argc, char **argv)
 
 #if 0
     /* XXX I copied this from mouse-properties.c, but the
-       XXX GNOME_SAWMILL_PROPERTIES root property just grows
+       XXX GNOME_SAWFISH_PROPERTIES root property just grows
        XXX each time the capplet is started... */
 
     if (flags & GNOME_CLIENT_IS_CONNECTED) {
-	token = gnome_startup_acquire_token("GNOME_SAWMILL_PROPERTIES",
+	token = gnome_startup_acquire_token("GNOME_SAWFISH_PROPERTIES",
 					    gnome_client_get_id(client));
 
 	if (token) {

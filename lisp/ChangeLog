@@ -1,3 +1,27 @@
+2000-04-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sm-save.jl, sm-init.jl, sawmill.jl, play-audio.jl, menus.jl,
+	make-theme-preview.jl, gtkrc.jl, gnome-int.jl, frames.jl,
+	customize.jl, custom.jl, compat.jl, autoload.jl, Makefile.in:
+	s/sawmill/sawfish/ where appropriate
+
+2000-04-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* tooltips.jl: put `tooltips' customization group under `misc'
+
+2000-04-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* auto-raise.jl (raise-groups-on-focus): new option (in
+	focus/advanced)
+
+	* groups.jl (raise-group, lower-group): preserve the stacking
+	order of the group, then raise/lower the indicated window
+	(raise-lower-group): new command
+
+	* group-funs.jl (windows-by-group, windows-in-group): added an
+	optional parameter `BY-DEPTH', when t the windows are returned
+	by order of depth, not creation time
+
 2000-04-18  John Harper  <john@dcs.warwick.ac.uk>
 
 	* workspace.jl (workspace-menu): fixed to put the focus marking

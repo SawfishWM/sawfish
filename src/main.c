@@ -49,25 +49,25 @@ int exit_code = ec_exit;
 /* Saved value of argv[0] */
 static char *prog_name;
 
-DEFSYM(sawmill_directory, "sawmill-directory");
-DEFSYM(sawmill_lisp_lib_directory, "sawmill-lisp-lib-directory");
-DEFSYM(sawmill_site_lisp_directory, "sawmill-site-lisp-directory");
-DEFSYM(sawmill_exec_directory, "sawmill-exec-directory");
-DEFSYM(sawmill_version, "sawmill-version"); /*
-::doc:sawmill-directory::
-The directory in which all of sawmill's installed data files live.
+DEFSYM(sawfish_directory, "sawfish-directory");
+DEFSYM(sawfish_lisp_lib_directory, "sawfish-lisp-lib-directory");
+DEFSYM(sawfish_site_lisp_directory, "sawfish-site-lisp-directory");
+DEFSYM(sawfish_exec_directory, "sawfish-exec-directory");
+DEFSYM(sawfish_version, "sawfish-version"); /*
+::doc:sawfish-directory::
+The directory in which all of sawfish's installed data files live.
 ::end::
-::doc:sawmill-lisp-lib-directory::
+::doc:sawfish-lisp-lib-directory::
 The name of the directory in which the standard lisp files live.
 ::end::
-::doc:sawmill-site-lisp-directory::
+::doc:sawfish-site-lisp-directory::
 The name of the directory in which site-specific Lisp files are stored.
 ::end::
-::doc:sawmill-exec-directory::
-The name of the directory containing sawmill's architecture specific files.
+::doc:sawfish-exec-directory::
+The name of the directory containing sawfish's architecture specific files.
 ::end::
-::doc:sawmill-version::
-A string defining the version number of the current sawmill release.
+::doc:sawfish-version::
+A string defining the version number of the current sawfish release.
 ::end:: */
 
 /* some errors */
@@ -77,7 +77,7 @@ DEFSYM(invalid_pos, "invalid-pos");
 DEFSTRING(err_invalid_pos, "Invalid position");
 DEFSYM(bad_event_desc, "bad-event-desc");
 DEFSTRING(err_bad_event_desc, "Invalid event description");
-DEFSTRING(version_string, SAWMILL_VERSION);
+DEFSTRING(version_string, SAWFISH_VERSION);
 
 DEFSYM(saved_command_line_args, "saved-command-line-args");
 
@@ -117,7 +117,7 @@ DEFUN_INT("quit", Fquit, Squit, (void), rep_Subr0, "") /*
 ::doc:quit::
 quit
 
-Terminate the sawmill process.
+Terminate the sawfish process.
 ::end:: */
 {
     return Fthrow (Qquit, rep_MAKE_INT(0));
@@ -127,7 +127,7 @@ DEFUN_INT("restart", Frestart, Srestart, (void), rep_Subr0, "") /*
 ::doc:restart::
 restart
 
-Restart the sawmill process.
+Restart the sawfish process.
 ::end:: */
 {
     exit_code = ec_restart;
@@ -135,63 +135,63 @@ Restart the sawmill process.
 }
 
 static void
-sawmill_symbols (void)
+sawfish_symbols (void)
 {
-    rep_INTERN_SPECIAL(sawmill_directory);
-    if(getenv("SAWMILLDIR") != 0)
-	Fset (Qsawmill_directory, rep_string_dup(getenv("SAWMILLDIR")));
+    rep_INTERN_SPECIAL(sawfish_directory);
+    if(getenv("SAWFISHDIR") != 0)
+	Fset (Qsawfish_directory, rep_string_dup(getenv("SAWFISHDIR")));
     else
-	Fset (Qsawmill_directory, rep_string_dup(SAWMILL_DIR));
+	Fset (Qsawfish_directory, rep_string_dup(SAWFISH_DIR));
 
-    rep_INTERN_SPECIAL(sawmill_lisp_lib_directory);
-    if(getenv("SAWMILLLISPDIR") != 0)
+    rep_INTERN_SPECIAL(sawfish_lisp_lib_directory);
+    if(getenv("SAWFISHLISPDIR") != 0)
     {
-	Fset (Qsawmill_lisp_lib_directory,
-	      rep_string_dup(getenv("SAWMILLLISPDIR")));
+	Fset (Qsawfish_lisp_lib_directory,
+	      rep_string_dup(getenv("SAWFISHLISPDIR")));
     }
     else
-	Fset (Qsawmill_lisp_lib_directory, rep_string_dup(SAWMILL_LISPDIR));
+	Fset (Qsawfish_lisp_lib_directory, rep_string_dup(SAWFISH_LISPDIR));
 
-    rep_INTERN_SPECIAL(sawmill_site_lisp_directory);
-    if(getenv("SAWMILLSITELISPDIR") != 0)
+    rep_INTERN_SPECIAL(sawfish_site_lisp_directory);
+    if(getenv("SAWFISHSITELISPDIR") != 0)
     {
-	Fset (Qsawmill_site_lisp_directory,
-	      rep_string_dup(getenv("SAWMILLSITELISPDIR")));
+	Fset (Qsawfish_site_lisp_directory,
+	      rep_string_dup(getenv("SAWFISHSITELISPDIR")));
     }
     else
     {
-	Fset (Qsawmill_site_lisp_directory,
-	      rep_concat2 (rep_STR (Fsymbol_value (Qsawmill_directory, Qt)),
+	Fset (Qsawfish_site_lisp_directory,
+	      rep_concat2 (rep_STR (Fsymbol_value (Qsawfish_directory, Qt)),
 			   "/site-lisp"));
     }
 
-    rep_INTERN_SPECIAL(sawmill_exec_directory);
-    if(getenv("SAWMILLEXECDIR") != 0)
-	Fset (Qsawmill_exec_directory, rep_string_dup(getenv("SAWMILLEXECDIR")));
+    rep_INTERN_SPECIAL(sawfish_exec_directory);
+    if(getenv("SAWFISHEXECDIR") != 0)
+	Fset (Qsawfish_exec_directory, rep_string_dup(getenv("SAWFISHEXECDIR")));
     else
-	Fset (Qsawmill_exec_directory, rep_string_dup(SAWMILL_EXECDIR));
+	Fset (Qsawfish_exec_directory, rep_string_dup(SAWFISH_EXECDIR));
 
-    if(getenv("SAWMILLDOCFILE") != 0)
-	Fset (Qdocumentation_file, rep_string_dup(getenv("SAWMILLDOCFILE")));
+    if(getenv("SAWFISHDOCFILE") != 0)
+	Fset (Qdocumentation_file, rep_string_dup(getenv("SAWFISHDOCFILE")));
     else
     {
 	Fset (Qdocumentation_file,
-	      rep_concat2 (rep_STR (Fsymbol_value (Qsawmill_directory, Qt)),
-			   "/" SAWMILL_VERSION "/DOC"));
+	      rep_concat2 (rep_STR (Fsymbol_value (Qsawfish_directory, Qt)),
+			   "/" SAWFISH_VERSION "/DOC"));
     }
 
     Fset (Qdocumentation_files, Fcons(Fsymbol_value (Qdocumentation_file, Qt),
 				      Fsymbol_value (Qdocumentation_files, Qt)));
 
-    Fset (Qload_path, Fcons (Fsymbol_value (Qsawmill_lisp_lib_directory, Qt),
-			     Fcons (Fsymbol_value (Qsawmill_site_lisp_directory, Qt),
+    Fset (Qload_path, Fcons (Fsymbol_value (Qsawfish_lisp_lib_directory, Qt),
+			     Fcons (Fsymbol_value (Qsawfish_site_lisp_directory, Qt),
 				    Fsymbol_value (Qload_path, Qt))));
 
-    Fset (Qdl_load_path, Fcons (Fsymbol_value (Qsawmill_exec_directory, Qt),
+    Fset (Qdl_load_path, Fcons (Fsymbol_value (Qsawfish_exec_directory, Qt),
 				Fsymbol_value (Qdl_load_path, Qt)));
 
-    rep_INTERN_SPECIAL(sawmill_version);
-    Fset (Qsawmill_version, rep_VAL(&version_string));
+    rep_INTERN_SPECIAL(sawfish_version);
+    Fset (Qsawfish_version, rep_VAL(&version_string));
 
     rep_INTERN(window_error); rep_ERROR(window_error);
     rep_INTERN(invalid_pos); rep_ERROR(invalid_pos);
@@ -326,12 +326,12 @@ main(int argc, char **argv)
 
     if (rep_get_option ("--version", 0))
     {
-	printf ("sawmill version %s\n", SAWMILL_VERSION);
+	printf ("sawfish version %s\n", SAWFISH_VERSION);
 	return 0;
     }
 
 #if rep_INTERFACE >= 9
-    rep_push_structure ("sawmill");
+    rep_push_structure ("sawfish");
     rep_structure_exports_all (rep_structure, rep_TRUE);
     rep_INTERN (rep);
     Frequire (Qrep);
@@ -339,7 +339,7 @@ main(int argc, char **argv)
 
     if (sys_init(prog_name))
     {
-	sawmill_symbols();
+	sawfish_symbols();
 
 	/* call all init funcs... */
 	session_init ();
@@ -403,7 +403,7 @@ global_symbol_value (repv sym)
 {
     repv value;
 #if rep_INTERFACE >= 9
-    repv tem = rep_push_structure ("sawmill");
+    repv tem = rep_push_structure ("sawfish");
 #endif
     value = Fsymbol_value (sym, Qt);
 #if rep_INTERFACE >= 9

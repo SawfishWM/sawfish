@@ -31,7 +31,7 @@
 	    (let
 		((class (get-x-text-property w 'WM_CLASS)))
 	      (when (and (>= (length class) 2)
-			 (string= (aref class 1) "SawmillThemer")
+			 (string= (aref class 1) "SawfishThemer")
 			 (string= (aref class 0) "preview"))
 		(setq make-theme-preview-window w)
 		(when make-theme-preview-theme

@@ -125,15 +125,15 @@ that overrides settings set elsewhere.")
 (defvar theme-update-interval 60
   "Number of seconds between checking if theme files have been modified.")
 
-(defvar user-theme-directory "~/.sawmill/themes"
+(defvar user-theme-directory "~/.sawfish/themes"
   "Directory containing user-local themes.")
 
 (defvar system-theme-directory (expand-file-name
-				"../themes" sawmill-lisp-lib-directory)
-  "Directory containing themes from the current sawmill version.")
+				"../themes" sawfish-lisp-lib-directory)
+  "Directory containing themes from the current sawfish version.")
 
 (defvar site-theme-directory (expand-file-name
-			      "../../themes" sawmill-lisp-lib-directory)
+			      "../../themes" sawfish-lisp-lib-directory)
   "Directory containing system-wide themes.")
 
 (defvar theme-load-path (list user-theme-directory
@@ -148,7 +148,7 @@ that overrides settings set elsewhere.")
 ;; files they were loaded from; used to check if the theme needs reloading
 (defvar frame-style-files nil)
 
-;; List of styles that can be edited using sawmill-themer
+;; List of styles that can be edited using sawfish-themer
 (defvar editable-frame-styles nil)
 
 ;; used when decorate-transients is non-nil, map transient window
@@ -165,7 +165,7 @@ that overrides settings set elsewhere.")
 (defvar themes-are-gaolled t
   "When non-nil themes are assumed to be malicious.")
 
-(defvar sawmill-themer-program "sawmill-themer")
+(defvar sawfish-themer-program "sawfish-themer")
 
 
 ;; managing frame styles
@@ -277,7 +277,7 @@ that overrides settings set elsewhere.")
     (let
 	((dir (find-frame-style style)))
       (when dir
-	(system (format nil "%s %s &" sawmill-themer-program dir))))))
+	(system (format nil "%s %s &" sawfish-themer-program dir))))))
 
 
 ;; kludge different window decors by modifying the assumed window type

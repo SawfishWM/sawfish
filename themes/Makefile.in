@@ -23,22 +23,22 @@ include ../Makedefs
 
 top_srcdir=@top_srcdir@
 
-sitethemedir := ${sawmilldir}/themes
-themedir := ${sawmilldir}/${version}/themes
+sitethemedir := ${sawfishdir}/themes
+themedir := ${sawfishdir}/${version}/themes
 
 # also in lisp/Makefile.in
-sawmill_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/gradient.la \
-		../src/sawmill --batch --no-rc
-COMPILE_ENV = SAWMILLLISPDIR=../lisp \
-	      SAWMILLEXECDIR=$(top_builddir)/src/.libs \
-	      SAWMILLDOCFILE=../DOC
+sawfish_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/gradient.la \
+		../src/sawfish --batch --no-rc
+COMPILE_ENV = SAWFISHLISPDIR=../lisp \
+	      SAWFISHEXECDIR=$(top_builddir)/src/.libs \
+	      SAWFISHDOCFILE=../DOC
 
 THEMES := absolute-e brushed-metal gradient gtk microGUI mono simple smaker
 
 all :
 # only uncompiled themes are loaded for now, so no point doing this
 #	for d in $(THEMES); do \
-#	  $(COMPILE_ENV) $(sawmill_prog) compiler -f compile-lib-batch $$d; \
+#	  $(COMPILE_ENV) $(sawfish_prog) compiler -f compile-lib-batch $$d; \
 #	done
 
 install : all installdirs

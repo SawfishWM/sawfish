@@ -27,7 +27,7 @@ srcdir=@srcdir@
 VPATH=@top_srcdir@/src:.
 
 SUBSTS := -e "s|__version__|$(version)|" \
-	  -e "s|__sawmilldir__|$(sawmilldir)|" \
+	  -e "s|__sawfishdir__|$(sawfishdir)|" \
 	  -e "s|__locale_dir__|$(localedir)|"
 
 all : themer.jlc
@@ -39,14 +39,15 @@ themer.jl : themer.in ../Makedefs
 	REP_GTK_DONT_INITIALIZE=1 rep compiler -f compile-batch $<
 
 install : all installdirs
-	$(INSTALL_SCRIPT) themer.jlc $(DESTDIR)$(bindir)/sawmill-themer
-	$(INSTALL_DATA) themer.glade $(DESTDIR)$(sawmilldir)/$(version)
+	$(INSTALL_SCRIPT) themer.jlc $(DESTDIR)$(bindir)/sawfish-themer
+	$(INSTALL_DATA) themer.glade $(DESTDIR)$(sawfishdir)/$(version)
+
 uninstall :
-	rm -f $(DESTDIR)${bindir}/sawmill-themer
+	rm -f $(DESTDIR)${bindir}/sawfish-themer
 
 installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir) \
-	  $(DESTDIR)$(sawmilldir)/$(version)
+	  $(DESTDIR)$(sawfishdir)/$(version)
 
 clean :
 	rm -f *~ themer.jl *.jlc *.bak core

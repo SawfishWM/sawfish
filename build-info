@@ -6,9 +6,9 @@ sys_name="`hostname`.`domainname`"
 user_name="$LOGNAME"
 host_type="$1"
 version="$2"
-sawmilldir="$3"
+sawfishdir="$3"
 lispdir="$4"
-sawmillexecdir="$5"
+sawfishexecdir="$5"
 
 build_date="`date +'%a %b %e %Y'`"
 build_time="`date +'%T %Z'`"
@@ -20,10 +20,10 @@ cat >build.h <<EOF
 #ifndef BUILD_H
 #define BUILD_H
 
-#define SAWMILL_VERSION "$version"
-#define SAWMILL_DIR "$sawmilldir"
-#define SAWMILL_LISPDIR "$lispdir"
-#define SAWMILL_EXECDIR "$sawmillexecdir"
+#define SAWFISH_VERSION "$version"
+#define SAWFISH_DIR "$sawfishdir"
+#define SAWFISH_LISPDIR "$lispdir"
+#define SAWFISH_EXECDIR "$sawfishexecdir"
 
 #define HOST_TYPE "$host_type"
 

@@ -733,7 +733,7 @@ images_init (void)
 
     rep_INTERN_SPECIAL(image_directory);
     Fset (Qimage_directory,
-	  rep_concat2 (rep_STR (Fsymbol_value (Qsawmill_directory, Qt)),
+	  rep_concat2 (rep_STR (Fsymbol_value (Qsawfish_directory, Qt)),
 		       "/images"));
     rep_INTERN_SPECIAL(image_load_path);
     Fset (Qimage_load_path,

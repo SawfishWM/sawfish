@@ -28,7 +28,7 @@ dnl Release versioning info
 version="0.26"
 
 output_files="src/Makefile lisp/Makefile themes/Makefile\
- sounds/Makefile man/Makefile po/Makefile Makedefs Makefile sawmill.spec"
+ sounds/Makefile man/Makefile po/Makefile Makedefs Makefile sawfish.spec"
 
 SUBDIRS="src lisp themes sounds man po"
 AC_SUBST(SUBDIRS)
@@ -56,10 +56,10 @@ case "${prefix}" in
     ;;
 esac
 
-sawmilldir='${datadir}/sawmill'
-lispdir='${sawmilldir}/${version}/lisp'
-localedir='${sawmilldir}/${version}/locale'
-sawmillexecdir='${libexecdir}/sawmill/${version}/${host_type}'
+sawfishdir='${datadir}/sawfish'
+lispdir='${sawfishdir}/${version}/lisp'
+localedir='${sawfishdir}/${version}/locale'
+sawfishexecdir='${libexecdir}/sawfish/${version}/${host_type}'
 
 dnl Checks for programs.
 AC_PROG_CC
@@ -93,7 +93,7 @@ dnl is X available?
 if test "${no_x}" != "yes"; then
   AC_DEFINE(HAVE_X11)
 else
-  AC_MSG_ERROR([You need X11 for sawmill])
+  AC_MSG_ERROR([You need X11 for sawfish])
 fi
 
 AM_PATH_IMLIB
@@ -136,7 +136,7 @@ if test "$with_esd" = "yes"; then
 fi
 
 AC_ARG_ENABLE(capplet,
- [  --enable-capplet	  Build the sawmill GNOME capplet [default]
+ [  --enable-capplet	  Build the sawfish GNOME capplet [default]
   --disable-capplet	  Don't built the capplet], [],
  [enable_capplet=yes])
 
@@ -156,7 +156,7 @@ if test "$enable_capplet" = "yes"; then
 fi
 
 AC_ARG_ENABLE(themer,
- [  --enable-themer	  Build the sawmill-themer program [default]
+ [  --enable-themer	  Build the sawfish-themer program [default]
   --disable-themer	  Don't build the themer], [],
  [enable_themer=yes])
 
@@ -278,8 +278,8 @@ AC_SUBST(LINGUAS)
 
 dnl Nonstandard exported symbols
 AC_SUBST(version)
-AC_SUBST(sawmilldir)
-AC_SUBST(sawmillexecdir)
+AC_SUBST(sawfishdir)
+AC_SUBST(sawfishexecdir)
 AC_SUBST(lispdir)
 AC_SUBST(localedir)
 AC_SUBST(HAVE_X11)
@@ -299,7 +299,7 @@ AC_OUTPUT(${output_files})
 dnl If it doesn't look like GNU Make is being used, give a friendly warning
 tem=`make --version -f /dev/null 2>&1 | grep GNU`
 if test "x$tem" = "x"; then
-  AC_MSG_WARN([You need to use GNU Make when compiling sawmill])
+  AC_MSG_WARN([You need to use GNU Make when compiling sawfish])
 fi
 
 dnl Local variables:

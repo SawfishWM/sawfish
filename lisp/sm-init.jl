@@ -27,7 +27,7 @@
 ;; this is before both the panel and gmc..?
 (defvar sm-gsm-priority 30)
 
-(defvar sm-save-directory "~/.sawmill/sessions")
+(defvar sm-save-directory "~/.sawfish/sessions")
 
 (defvar sm-saved-window-properties nil
   "List of window properties saved with the session.")

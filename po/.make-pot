@@ -5,7 +5,7 @@ GLADE_SRCS="../themer/themer.glade"
 
 REP_XGETTEXT_FLAGS="--only-commands --include defun --include defcustom --include defgroup"
 
-rm -f sawmill.pot
+rm -f sawfish.pot
 
 lisp_c=.$$.lisp.c
 glade_c=.$$.glade.c
@@ -14,7 +14,7 @@ rep-xgettext --c $REP_XGETTEXT_FLAGS $REP_SRCS >$lisp_c
 libglade-xgettext --c $GLADE_SRCS >$glade_c
 
 xgettext --add-comments -a --no-location $lisp_c $glade_c
-mv -f messages.po sawmill.pot
+mv -f messages.po sawfish.pot
 
 rm -f $lisp_c $glade_c
 

@@ -19,16 +19,15 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'define)
 (provide 'custom)
 
 ;; list associating groups with the list of variables in that group
-(define custom-groups (list 'root "Sawmill"))
+(define custom-groups (list 'root "Sawfish"))
 
 (define custom-required nil
   "List of features to load before running customize.")
 
-(defvar custom-user-file "~/.sawmill/custom"
+(defvar custom-user-file "~/.sawfish/custom"
   "File used to store user's configuration settings.")
 
 (defvar custom-default-file "custom-defaults"

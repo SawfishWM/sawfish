@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# moved -- script to ease the pain of The Grand Renaming
+
+# $Id$
+
+dir=`dirname $0`
+name=`basename $0`
+
+case $name in
+  sawmill*)
+    ext=`echo $name | sed -e 's/^sawmill\(.*\)$/\1/'`
+    ;;
+  *)
+    echo "Can't work out new name of program $name."
+    exit 5
+    ;;
+esac
+
+if [ "x$QUIET_SAWFISH" != "xyes" ]; then
+  cat >&2 <<EOF
+
+ ***  "$name" is now called "sawfish$ext"
+
+ ***  For legal reasons the window manager "sawmill" is now called
+ ***  "sawfish". Please edit any scripts that refer to programs called
+ ***  "sawmill*" to invoke "sawfish*" instead
+
+ ***  For now I will run the new program for you automatically; this
+ ***  facility will be removed in a future release.
+
+EOF
+fi
+
+exec "$dir/sawfish$ext" "$@"

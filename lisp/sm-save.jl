@@ -71,9 +71,9 @@
       (unwind-protect
 	  (progn
 	    (format file (concat ";; session saved for %s@%s\n"
-				 ";; sawmill version %s; %s\n\n")
+				 ";; sawfish version %s; %s\n\n")
 		    (user-login-name) (system-name)
-		    sawmill-version (current-time-string))
+		    sawfish-version (current-time-string))
 	    (mapc (lambda (w)
 		    (sm-print-alist file (sm-get-window-state w)))
 		  (managed-windows))
