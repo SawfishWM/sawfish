@@ -1,5 +1,12 @@
 1999-09-23  John Harper  <john@dcs.warwick.ac.uk>
 
+	* keys.c (translate_event): fix bug where X server reports that
+	it has a keysym at index 1 as well at index 0, even when
+	xmodmap disagrees, and the keysyms are the same (XKB extension
+	on XFree86)
+
+	* sawmill-ui.jl (build-keymap): fix cancel/revert problem
+
 	* sawmill-ui.jl (build-keymap): new button: copy
 
 	* sawmill-ui.jl: improved the bindings widget, try to remove
