@@ -55,7 +55,8 @@ unused before killing it.")
     ("Delete" delete-window)
     ("Destroy" destroy-window)
     ("Send left" send-to-previous-workspace)
-    ("Send right" send-to-next-workspace)))
+    ("Send right" send-to-next-workspace)
+    ("Sticky" toggle-window-sticky)))
 
 (defvar root-menu
   '(("Workspaces" . workspace-menu)
