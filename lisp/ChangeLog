@@ -1,3 +1,11 @@
+2000-01-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* functions.jl (delete-window-safely): new command, if the
+	window doesn't support the WM_DELETE_WINDOW protocol, just beep
+
+	* viewport-linear.jl (define-linear-viewport-commands): made
+	into a user-visible function
+
 2000-01-25  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.jl (get-window-wm-protocols): new function, returns

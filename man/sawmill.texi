@@ -995,22 +995,31 @@ Returns @code{t} if object @var{window} has not been hidden by the
 @cindex Destroying windows
 @cindex Windows, destroying
 
-There are two methods of deleting a client window from the display. The
-first asks the owner of the window to delete it if possible, while the
-second destroys the window immediately.
+There are several methods through which X11 client windows may be
+removed from the display. These differ in the level ``politeness'' they
+show the window and its owning application.
 
 @deffn Command delete-window window
 Delete @var{window}, i.e. send a @code{WM_DELETE_WINDOW} client-message
-if possible, or just delete the window if not.
-
+if possible, or just kill the associated X11 client if not.
 @var{window} may be a window object or a numeric window id.
+@end deffn
+
+@deffn Command delete-window-safely window
+If the application owning @var{window} supports it, send a
+@code{WM_DELETE_WINDOW} message to @var{window}. Otherwise just emit a
+beep.
 @end deffn
 
 @deffn Command destroy-window window
 Destroy @var{window} without giving the owning application any warning.
-
 @var{window} may be a window object or a numeric window id.
 @end deffn
+
+@defun x-kill-client window
+Force a close down of the X11 client that created the window specified
+by @var{window} (a window object, or numeric id).
+@end defun
 
 When a managed window is destroyed, the @code{destroy-notify-hook} will
 subsequently be invoked (@pxref{Standard Hooks}).

@@ -1,3 +1,9 @@
+2000-01-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* fonts.c (fonts_init): don't cause following code to fail
+	catastrophically if unable to load fixed font
+	* frames.c (set_frame_part_fg): bail out if no font whatsoever
+
 2000-01-25  John Harper  <john@dcs.warwick.ac.uk>
 
 	* main.c: only call before-exit-hook if rep_INTERFACE < 8
