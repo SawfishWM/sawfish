@@ -106,9 +106,13 @@
 	      (when (window-get w 'sticky)
 		(window-put w 'order nil))) order)))
 
+  (define (on-viewport-change)
+    (window-order-pop-low-sticky-windows current-workspace)
+    (window-order-focus-most-recent))
+
   (sm-add-saved-properties 'order)
 
   (add-hook 'sm-after-restore-hook window-order-compress)
   (add-hook 'iconify-window-hook window-order-pop)
-  (add-hook 'viewport-moved-hook window-order-focus-most-recent)
+  (add-hook 'viewport-moved-hook on-viewport-change)
   (add-hook 'leave-workspace-hook window-order-pop-low-sticky-windows))
