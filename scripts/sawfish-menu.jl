@@ -40,18 +40,20 @@ exec rep "$0" "$@"
 
 (define (create-menu spec #!optional bar)
   (let* ((menu (if bar (gtk-menu-bar-new) (gtk-menu-new)))
-	 (accels (gtk-menu-ensure-uline-accel-group menu)))
+	 ;;(accels (gtk-menu-ensure-uline-accel-group menu))
+	 )
 
     ;; Set the label of the menu item, handling underlined accelerators
     (define (label-menu-item item label-text #!optional shortcut)
       (let* ((label (gtk-label-new label-text))
 	     (hbox (gtk-hbox-new nil 16))
-	     (hkey (gtk-label-parse-uline label label-text)))
+	     ;;(hkey (gtk-label-parse-uline label label-text))
+	     )
 	(gtk-box-pack-start hbox label nil nil t 0)
 	(when shortcut
 	  (let ((accel (gtk-label-new shortcut)))
 	    (gtk-box-pack-end hbox accel nil nil 0)))
-	(gtk-widget-add-accelerator item "activate_item" accels hkey 0 0)
+	;;(gtk-widget-add-accelerator item "activate_item" accels hkey 0 0)
 	(gtk-widget-show-all hbox)
 	(gtk-container-add item hbox)))
 
@@ -85,11 +87,11 @@ exec rep "$0" "$@"
 			     (group-id-set group item))
 			    (check
 			     (setq item (gtk-check-menu-item-new))
-			     (gtk-check-menu-item-set-show-toggle item t))
+			     (gtk-check-menu-item-set-active item t))
 			    (t (setq item (gtk-menu-item-new))))
 		      (label-menu-item item label shortcut)
 		      (when check
-			(gtk-check-menu-item-set-state item (cdr check)))
+			(gtk-check-menu-item-set-active item (cdr check)))
 		      (when insensitive
 			(gtk-widget-set-sensitive item nil))))
 
@@ -97,8 +99,8 @@ exec rep "$0" "$@"
 		   item "activate" (lambda ()
 				     (setq menu-selected (car cell))))))
 	      (when item
-		(gtk-widget-lock-accelerators item)
-		((if bar gtk-menu-bar-append gtk-menu-append) menu item)
+		;;(gtk-widget-lock-accelerators item)
+		(gtk-menu-shell-append menu item)
 		(gtk-widget-show item))))
 	  spec)
     menu))
