@@ -253,7 +253,7 @@ property_notify (XEvent *ev)
 	XSizeHints hints;
 	XGetWindowProperty (dpy, w->id, ev->xproperty.atom, 0, 200, False,
 			    XA_STRING, &actual, &junk1, &junk2, &len, &prop);
-	if (actual == None)
+	if (actual == None || w->id == 0)
 	    return;
 	if (prop == 0)
 	    prop = "";
@@ -275,7 +275,7 @@ property_notify (XEvent *ev)
 	    XGetNormalHints (dpy, w->id, &hints);
 	    break;
 	}
-	if (w->reparented && w->property_change != 0)
+	if (w->reparented && w->property_change != 0 && w->id != 0)
 	    w->property_change (w);
     }
 }
@@ -331,13 +331,12 @@ expose (XEvent *ev)
 static void
 destroy_notify (XEvent *ev)
 {
-    Lisp_Window *w = find_window_by_id (ev->xdestroywindow.window);
-    if (w == 0 || ev->xdestroywindow.window != w->id)
+    Lisp_Window *w = x_find_window_by_id (ev->xdestroywindow.window);
+    if (w == 0 || ev->xdestroywindow.window != w->saved_id)
 	return;
     if (w == focus_window)
 	focus_window = 0;
-    if (w->id)
-	remove_window (w, Qt, Qnil);
+    remove_window (w, Qt, Qnil);
     /* the window isn't windowp anymore.. */
     Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
 }
