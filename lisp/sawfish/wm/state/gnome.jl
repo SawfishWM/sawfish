@@ -26,12 +26,13 @@
 (defconst WIN_STATE_MAXIMIZED_VERT 4)
 (defconst WIN_STATE_MAXIMIZED_HORIZ 8)
 
-(defvar gnome-window-names "^(gmc|panel)$")
+(defconst WIN_LAYER_NORMAL 4)
 
 (defvar gnome-window-id nil)
 
 (defvar gnome-supported-protocols [_WIN_CLIENT_LIST _WIN_WORKSPACE
-				   _WIN_WORKSPACE_COUNT _WIN_STATE])
+				   _WIN_WORKSPACE_COUNT _WIN_STATE
+				   _WIN_LAYER])
 
 (defun gnome-set-client-list ()
   (let
@@ -68,11 +69,16 @@
       (setq state (logior state WIN_STATE_MAXIMIZED_VERT)))
     (when (window-maximized-horizontally-p w)
       (setq state (logior state WIN_STATE_MAXIMIZED_HORIZ)))
-    (set-x-property w '_WIN_STATE (vector state) 'CARDINAL 32)))
+    (set-x-property w '_WIN_STATE (vector state) 'CARDINAL 32)
+    (when (window-get w 'depth)
+      (set-x-property w '_WIN_LAYER
+		      (vector (+ (window-get w 'depth) WIN_LAYER_NORMAL))
+		      'CARDINAL 32))))
 
 (defun gnome-honour-client-state (w)
   (let
       ((state (get-x-property w '_WIN_STATE))
+       (layer (get-x-property w '_WIN_LAYER))
        bits)
     (when (eq (car state) 'CARDINAL)
       (setq bits (aref (nth 2 state) 0))
@@ -85,6 +91,9 @@
       (unless (zerop (logand bits WIN_STATE_MAXIMIZED_HORIZ))
 	(unless (window-maximized-horizontally-p w)
 	  (maximize-window-horizontally w))))
+    (when layer
+      (setq layer (aref (nth 2 layer) 0))
+      (set-window-depth w (- layer WIN_LAYER_NORMAL)))
     w))
 
 (defun gnome-client-message-handler (w type data)
@@ -112,6 +121,9 @@
 	     (if (or (and (not tem) (not (zerop (logand values WIN_STATE_MAXIMIZED_HORIZ))))
 		     (and tem (zerop (logand values WIN_STATE_MAXIMIZED_HORIZ))))
 		 (maximize-window-horizontally-toggle w))))
+	 t)
+	((eq type '_WIN_LAYER)
+	 (set-window-depth w (- (aref data 0) WIN_LAYER_NORMAL))
 	 t)))
 
 (defun gnome-event-proxyer ()
@@ -129,8 +141,6 @@
 ;; initialisation
 
 (defun gnome-init ()
-  (setq ignored-window-names (cons gnome-window-names ignored-window-names))
-  (setq sticky-window-names (cons gnome-window-names sticky-window-names))
   (setq gnome-window-id (create-window 'root -200 -200 5 5))
 
   (set-x-property 'root '_WIN_SUPPORTING_WM_CHECK
