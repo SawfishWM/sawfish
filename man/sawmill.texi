@@ -140,9 +140,10 @@ exported to the Lisp environment through key-bindings and hooks,
 similar to in Emacs. These events include pointer behavior and many
 internal X11 events.
 
-Sawmill uses the librep Lisp environment (@pxref{(librep)}), this is a
-run-time library implementing a language similar to Emacs Lisp
-(@pxref{(elisp)}), but with many extensions. This manual assumes at
+Sawmill uses the librep Lisp environment (@pxref{Top, , Overview,
+librep, The Librep Manual}), this is a run-time library implementing a
+language similar to Emacs Lisp (@pxref{Top, , Overview, elisp, The
+Emacs-Lisp Manual}), but with many extensions. This manual assumes at
 least a basic knowledge of the language.
 
 Incidentally, there is no meaning to the name ``Sawmill'', the author
@@ -525,8 +526,9 @@ window is iconified or not.
 
 To solve this problem, Sawmill gives each window a property list. These
 are exactly analogous to the property lists stored with each symbol
-(@pxref{(librep)Property Lists}); they allow values to be associated
-with Lisp symbols, for a particular window.
+(@pxref{Property Lists, , Property Lists, librep, The Librep Manual});
+they allow values to be associated with Lisp symbols, for a particular
+window.
 
 Note that these properties are different to the properties that X
 stores with each window, since these properties are internal to the
@@ -1421,8 +1423,8 @@ Each frame part is defined as an association list (or alist), a list of
 cons cells, the car of each cell defines the attribute, the cdr defines
 the value given to that attribute. So, for example, the alist
 @code{((foo . 1) (bar . 2))} specifies two attributes: @code{foo} with
-value @code{1}, and @code{bar} with value @code{2}.
-@xref{(librep)Association Lists}.
+value @code{1}, and @code{bar} with value @code{2}. @xref{Association
+Lists, , Association Lists, librep, The Librep Manual}.
 
 The attributes that may be defined are as follows:
 
@@ -1879,9 +1881,10 @@ applications menu. The default definition is as follows:
 @end lisp
 
 @noindent
-Anonymous functions (@pxref{(librep)Anonymous Functions}) are used to
+Anonymous functions (@pxref{Anonymous Functions, , Anonymous Functions,
+librep, The Librep Manual}) are used to
 execute the commands, using librep's @code{system} function
-(@pxref{(librep)Shell Commands}).
+(@pxref{Shell Commands, , Shell Commands, librep, The Librep Manual}).
 
 @defun popup-menu spec
 Displays a menu defined by the list of item definitions @var{spec}.
@@ -2559,7 +2562,7 @@ Return the process-id of the running Lisp interpreter.
 Sawmill provides many hooks to allow extension of previously defined
 functions. Also, many X events are exported to the Lisp environment via
 the hooks mechanism. For more details on the hooks mechanism see
-@ref{(librep)Normal Hooks}.
+@ref{Normal Hooks, , Normal Hooks, librep, The Librep Manual}.
 
 As well as using the standard @code{call-hook} function, sawmill also
 provides the @code{call-window-hook} function. This is used to invoke
