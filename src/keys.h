@@ -55,6 +55,10 @@ enum {
     EV_MOD_HYPER  = 0x01000000,
     EV_MOD_SUPER  = 0x02000000,
 
+    /* this is a customizable modifier; it allows the user to move
+       all predefined wm key bindings to a different modifier */
+    EV_MOD_WM     = 0x04000000,
+
     /* Matches any of the modifiers */
     EV_MOD_ANY    = 0x00400000,
 

@@ -1,3 +1,11 @@
+2000-11-28  John Harper  <jsh@eazel.com>
+
+	* keys.c (wm_mods, Fwm_modifier, Fset_wm_modifier): a new
+	modifier, `W-', that's user-settable
+	(Fevent_match): new function for comparing events
+
+	* keys.h (EV_MOD_WM): new bit
+
 2000-11-27  John Harper  <jsh@eazel.com>
 
 	* x.c (x_window_event_handler): ignore any expose events which

@@ -82,6 +82,10 @@ DEFSYM(multi_click_delay, "multi-click-delay");
 /* The X modifiers being used for Meta, Alt, and Hyper */
 static u_long meta_mod, alt_mod, hyper_mod, super_mod;
 
+/* The user-customizable modifier; used for default key bindings. This
+   shouldn't include any bits that don't have a fixed meaning. */
+static u_long wm_mod = EV_MOD_META;
+
 /* The X modifiers bound to the Num_Lock and Scroll_Lock keysyms */
 static u_long num_lock_mod, scroll_lock_mod;
 
@@ -101,6 +105,40 @@ static int all_lock_combs[2*2*2];
 
 
 /* Translate from X events to Lisp events */
+
+static u_long
+direct_modifiers (u_long mods)
+{
+    /* Do this first, since it may contain other indirect mods */
+    if (mods & EV_MOD_WM)
+	mods = (mods & ~EV_MOD_WM) | wm_mod;
+
+    if (mods & EV_MOD_META)
+	mods = (mods & ~EV_MOD_META) | meta_mod;
+    if (mods & EV_MOD_ALT)
+	mods = (mods & ~EV_MOD_ALT) | alt_mod;
+    if (mods & EV_MOD_HYPER)
+	mods = (mods & ~EV_MOD_HYPER) | hyper_mod;
+    if (mods & EV_MOD_SUPER)
+	mods = (mods & ~EV_MOD_SUPER) | super_mod;
+
+    return mods;
+}
+
+static u_long
+indirect_modifiers (u_long mods)
+{
+    if(mods & meta_mod)
+	mods = (mods & ~meta_mod) | EV_MOD_META;
+    if(mods & alt_mod)
+	mods = (mods & ~alt_mod) | EV_MOD_ALT;
+    if(mods & hyper_mod)
+	mods = (mods & ~hyper_mod) | EV_MOD_HYPER;
+    if(mods & super_mod)
+	mods = (mods & ~super_mod) | EV_MOD_SUPER;
+
+    return mods;
+}
 
 /* Translate the X key or button event XEV to *CODE and *MODS */
 static bool
@@ -224,16 +262,8 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
     }
 
     if (ret)
-    {
-	if(*mods & meta_mod)
-	    *mods = (*mods & ~meta_mod) | EV_MOD_META;
-	if(*mods & alt_mod)
-	    *mods = (*mods & ~alt_mod) | EV_MOD_ALT;
-	if(*mods & hyper_mod)
-	    *mods = (*mods & ~hyper_mod) | EV_MOD_HYPER;
-	if(*mods & super_mod)
-	    *mods = (*mods & ~super_mod) | EV_MOD_SUPER;
-    }
+	*mods = indirect_modifiers (*mods);
+
     return ret;
 }
 
@@ -252,14 +282,7 @@ translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
 	if (k == 0)
 	    return FALSE;
 
-	if (s & EV_MOD_META)
-	    s = (s & ~EV_MOD_META) | meta_mod;
-	if (s & EV_MOD_ALT)
-	    s = (s & ~EV_MOD_ALT) | alt_mod;
-	if (s & EV_MOD_HYPER)
-	    s = (s & ~EV_MOD_HYPER) | hyper_mod;
-	if (s & EV_MOD_SUPER)
-	    s = (s & ~EV_MOD_SUPER) | super_mod;
+	s = direct_modifiers (s);
 
 	/* Check if we need a shift modifier */
 	normal = XKeycodeToKeysym (dpy, k, 0);
@@ -304,15 +327,7 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 	    {
 		u_int s;
 		mods &= ~buttons[i].mask;
-		s = mods & EV_MOD_MASK;
-		if (s & EV_MOD_META)
-		    s = (s & ~EV_MOD_META) | meta_mod;
-		if (s & EV_MOD_ALT)
-		    s = (s & ~EV_MOD_ALT) | alt_mod;
-		if (s & EV_MOD_HYPER)
-		    s = (s & ~EV_MOD_HYPER) | hyper_mod;
-		if (s & EV_MOD_SUPER)
-		    s = (s & ~EV_MOD_SUPER) | super_mod;
+		s = direct_modifiers (mods & EV_MOD_MASK);
 		if (s == EV_MOD_ANY)
 		    s = AnyModifier;
 		*button = buttons[i].button;
@@ -334,6 +349,20 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 
 
 /* Keymap searching */
+
+static inline bool
+compare_events (u_long code1, u_long mods1, u_long code2, u_long mods2)
+{
+    return (code1 == code2
+	    && ((mods1 == mods2)
+		|| ((mods2 & wm_mod) == wm_mod
+		    && ((mods2 & ~wm_mod) | EV_MOD_WM) == mods1)
+		|| (((mods1 & EV_MOD_MASK) & EV_MOD_ANY)
+		    /* this allows things like Any-C-x, mapping to C-x
+		       _plus_ any other modifiers */
+		    && (((mods1 & ~EV_MOD_ANY) & mods2)
+			== (mods1 & ~EV_MOD_ANY)))));
+}
 
 /* Search the keymap KM for a binding of CODE&MODS.
    If CALLBACK is non-nil it's a function to call for the binding found.
@@ -365,14 +394,9 @@ search_keymap(repv km, u_long code, u_long mods, bool (*callback)(repv key))
 	if(rep_CONSP(rep_CAR(km)))
 	{
 	    repv ev = KEY_EVENT(rep_CAR(km));
-	    u_long ev_mods = rep_INT(EVENT_MODS(ev));
-	    if(rep_INT(EVENT_CODE(ev)) == code
-	       && ((ev_mods == mods)
-		   || (((ev_mods & EV_MOD_MASK) & EV_MOD_ANY)
-		       /* this allows things like Any-C-x, mapping to C-x
-		       _plus_ any other modifiers */
-		       && (((ev_mods & ~EV_MOD_ANY) & mods)
-			   == (ev_mods & ~EV_MOD_ANY)))))
+	    if(compare_events (rep_INT(EVENT_CODE(ev)),
+			       rep_INT(EVENT_MODS(ev)),
+			       code, mods))
 	    {
 		repv key = rep_CAR(km);
 		if(callback == 0 || callback(key))
@@ -490,6 +514,7 @@ lookup_event_binding (u_long code, u_long mods, repv context_map)
     }
     else
 	w = focus_window;
+
     return lookup_binding(code, mods, eval_input_callback, context_map, w);
 }
 
@@ -601,6 +626,7 @@ static struct key_def default_mods[] = {
     { "H",        EV_MOD_HYPER },
     { "Hyper",    EV_MOD_HYPER },
     { "Super",    EV_MOD_SUPER },
+    { "W",	  EV_MOD_WM },
     { "Mod1",     Mod1Mask },
     { "Mod2",     Mod2Mask },
     { "Mod3",     Mod3Mask },
@@ -1219,6 +1245,25 @@ Returns t if the ARG is an input event.
     return EVENTP(arg) ? Qt : Qnil;
 }
 
+DEFUN("event-match", Fevent_match,
+      Sevent_match, (repv ev1, repv ev2), rep_Subr2) /*
+::doc:sawfish.wm.events#event-match::
+event-match EVENT1 EVENT2
+::end:: */
+{
+    rep_DECLARE1 (ev1, EVENTP);
+    rep_DECLARE2 (ev2, EVENTP);
+
+    return (compare_events (rep_INT (EVENT_CODE (ev1)),
+			    rep_INT (EVENT_MODS (ev1)),
+			    rep_INT (EVENT_CODE (ev2)),
+			    rep_INT (EVENT_MODS (ev2)))
+	    || compare_events (rep_INT (EVENT_CODE (ev2)),
+			       rep_INT (EVENT_MODS (ev2)),
+			       rep_INT (EVENT_CODE (ev1)),
+			       rep_INT (EVENT_MODS (ev1)))) ? Qt : Qnil;
+}
+
 DEFUN("forget-button-press", Fforget_button_press,
       Sforget_button_press, (void), rep_Subr0)
 {
@@ -1514,6 +1559,35 @@ update_keyboard_mapping (void)
     build_lock_mods ();
 }
 
+static void
+set_wm_modifier (u_long mods)
+{
+    wm_mod = indirect_modifiers (mods);
+}
+
+DEFUN ("set-wm-modifier", Fset_wm_modifier,
+       Sset_wm_modifier, (repv mods), rep_Subr1) /*
+::doc:sawfish.wm.events#set-wm-modifier::
+set-wm-modifier MODIFIERS
+
+Set the value of the `Window Manager' modifier to MODIFIERS, an integer.
+::end:: */
+{
+    rep_DECLARE1 (mods, rep_INTP);
+    set_wm_modifier (rep_INT (mods));
+    return Qt;
+}
+
+DEFUN ("wm-modifier", Fwm_modifier, Swm_modifier, (void), rep_Subr0) /*
+::doc:sawfish.wm.events#wm-modifier::
+wm-modifier
+
+Returns the current value of the `Window Manager' modifier, an integer.
+::end:: */
+{
+    return rep_MAKE_INT (wm_mod);
+}
+
 
 /* Key and button grabbing */
 
@@ -1748,10 +1822,13 @@ keys_init(void)
     rep_ADD_SUBR(Ssearch_keymap);
     rep_ADD_SUBR(Skeymapp);
     rep_ADD_SUBR(Seventp);
+    rep_ADD_SUBR(Sevent_match);
     rep_ADD_SUBR(Sforget_button_press);
     rep_ADD_SUBR(Sx_lookup_keysym);
     rep_ADD_SUBR(Sx_keysym_name);
     rep_ADD_SUBR(Ssynthesize_event);
+    rep_ADD_SUBR(Sset_wm_modifier);
+    rep_ADD_SUBR(Swm_modifier);
     rep_pop_structure (tem);
 
     rep_INTERN(async_pointer);
