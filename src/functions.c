@@ -585,7 +585,7 @@ symbols, representing the atoms read.
 		return Qnil;
 	    if (bytes_after == 0)
 		break;
-	    long_length += (bytes_after / sizeof(long)) + 1;
+	    long_length += (bytes_after / sizeof(u_long)) + 1;
 	}
     }
 
@@ -595,8 +595,8 @@ symbols, representing the atoms read.
     /* Then convert the contents to a vector or string */
     switch (format)
     {
-	short *s_data;
-	long *l_data;
+	u_short *s_data;
+	u_long *l_data;
 	int i;
 
     case 8:
@@ -605,14 +605,14 @@ symbols, representing the atoms read.
 
     case 16:
 	ret_data = Fmake_vector (rep_MAKE_INT(nitems), Qnil);
-	s_data = (short *)data;
+	s_data = (u_short *)data;
 	for (i = 0; i < nitems; i++)
 	    rep_VECTI(ret_data, i) = rep_MAKE_INT(s_data[i]);
 	break;
 
     case 32:
 	ret_data = Fmake_vector (rep_MAKE_INT(nitems), Qnil);
-	l_data = (long *)data;
+	l_data = (u_long *)data;
 	for (i = 0; i < nitems; i++)
 	{
 	    repv name;
@@ -677,8 +677,8 @@ converted to their numeric X atoms.
     switch (rep_INT(format))
     {
 	int i;
-	short *s_data;
-	long *l_data;
+	u_short *s_data;
+	u_long *l_data;
 
     case 8:
 	if (rep_STRINGP(data))
@@ -694,8 +694,8 @@ converted to their numeric X atoms.
     case 16:
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
-	c_data = alloca (nitems * 2);
-	s_data = (short *)c_data;
+	c_data = alloca (nitems * sizeof (u_short));
+	s_data = (u_short *)c_data;
 	for (i = 0; i < nitems; i++)
 	    s_data[i] = rep_INT(rep_VECTI(data, i));
 	break;
@@ -703,8 +703,8 @@ converted to their numeric X atoms.
     case 32:
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
-	c_data = alloca (nitems * sizeof(long));
-	l_data = (long *)c_data;
+	c_data = alloca (nitems * sizeof (u_long));
+	l_data = (u_long *)c_data;
 	for (i = 0; i < nitems; i++)
 	{
 	    if (a_type == XA_ATOM && rep_SYMBOLP(rep_VECTI(data, i)))
