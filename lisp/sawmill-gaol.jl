@@ -48,6 +48,12 @@
 
 (defvar sawmill-safe-features '(gtkrc gradient make-theme x))
 
+(defun gaol:require (feature)
+  (unless (memq feature sawmill-safe-features)
+    (error "Gaolled code trying to require %s" feature))
+  (require feature)
+  (gaol-rebuild-environment))
+
 (when (>= rep-interface-id 9)
   ;; compatibility kludge..
   (defun gaol-add-function (sym)
@@ -58,21 +64,16 @@
   ;; `divide' for real division
   (cond ((>= rep-interface-id 9)
 	 (gaol-replace-function 'divide /)
-	 (gaol-replace-function '/ quotient))
+	 (gaol-replace-function '/ quotient)
+	 (gaol-replace-function 'require gaol:require))
 	(t
 	 (setq gaol-safe-functions (delq '/ gaol-safe-functions))
 	 (gaol-replace-function 'divide '/)
-	 (gaol-replace-function '/ 'quotient)))
+	 (gaol-replace-function '/ 'quotient)
+	 (gaol-replace-function 'require 'gaol:require)))
 
   (mapc gaol-add-function sawmill-safe-functions)
   (mapc gaol-add-special sawmill-safe-specials)
-
-  (defun gaol:require (feature)
-    (unless (memq feature sawmill-safe-features)
-      (error "Gaolled code trying to require %s" feature))
-    (require feature)
-    (gaol-rebuild-environment))
-  (gaol-replace-function 'require gaol:require)
 
   (eval-after-load
    "gradient" '(mapc gaol-add-function '(draw-vertical-gradient
