@@ -1,0 +1,337 @@
+2002-03-03  John Harper  <jsh@pixelslut.com>
+
+	* desktop-entries/workspace-properties.desktop,
+	desktop-entries/sound-properties.desktop,
+	desktop-entries/placement-properties.desktop,
+	desktop-entries/move-properties.desktop,
+	desktop-entries/misc-properties.desktop,
+	desktop-entries/maximize-properties.desktop,
+	desktop-entries/match-properties.desktop,
+	desktop-entries/focus-properties.desktop,
+	desktop-entries/bindings-properties.desktop,
+	desktop-entries/appearance-properties.desktop: updated for
+	gnome2
+
+	* desktop-entries/meta-properties.desktop,
+	desktop-entries/.order, desktop-entries/.directory: removed
+
+2002-03-02 JeyaSudha <jeyasudha.duraipandy@wipro.com>
+	
+	* Makefile.in: remove sawmill-capplet and just use sawfish-ui.
+	Also, don't install .desktop files in the menu directory
+
+2001-08-31  John Harper  <jsh@pixelslut.com>
+
+	Fixed 4235 (error in sawfish-ui -> sawfish-capplet livelocks):
+
+	* sawmill-capplet.c (ui_output_callback): check for eof or
+	errors when reading from the slave's output stream, and print a
+	message if it occurs
+
+2001-04-09  Christian Rose  <menthos@menthos.com>
+
+	* desktop-entries/sound-properties.desktop: Applied patch for the
+	sv entry by Peter Winnberg <petey@sdf.sbacka.pitea.se>.
+
+2001-04-05  John Harper  <jsh@eazel.com>
+
+	* desktop-entries/sound-properties.desktop: small change to
+	comment
+
+2001-03-11  Christian Meyer  <chrisime@gnome.org>
+
+	* desktop-entries/meta-properties.destop: Added German strings.
+
+2001-03-10  Christian Rose  <menthos@menthos.com>
+
+	* desktop-entries/.directory,
+	desktop-entries/appearance-properties.desktop,
+	desktop-entries/bindings-properties.desktop,
+	desktop-entries/focus-properties.desktop,
+	desktop-entries/match-properties.desktop,
+	desktop-entries/maximize-properties.desktop,
+	desktop-entries/meta-properties.desktop,
+	desktop-entries/misc-properties.desktop,
+	desktop-entries/move-properties.desktop,
+	desktop-entries/placement-properties.desktop,
+	desktop-entries/sound-properties.desktop,
+	desktop-entries/workspace-properties.desktop: Added Swedish (sv)
+	entries.
+
+2001-03-08  Jesus Bravo Alvarez  <jba@pobox.com>
+
+	* desktop-entries/*.desktop: Revised Galician entries.
+
+2001-03-05  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* desktop-entries/*.desktop: Fixed broken encoding.
+	Scream if this breaks anything.
+	
+2001-03-05  Stanislav Brabec  <utx@penguin.cz>
+
+	* */*.desktop: Added Czech translation from Jiri Cerny
+	<jiri.cerny@epfl.ch>.
+
+2001-02-24  John Harper  <jsh@eazel.com>
+
+	* desktop-entries/bindings-properties.desktop: more revert
+	surgery
+
+2001-02-23  Marius Andreiana  <mandreiana@yahoo.com>
+
+	* desktop-entries/move-properties.desktop,
+	desktop-entries/meta-properties.desktop,
+	desktop-entries/maximize-properties.desktop,
+	desktop-entries/match-properties.desktop,
+	desktop-entries/bindings-properties.desktop: re-added 
+	ro translations
+
+2001-02-19  John Harper  <jsh@eazel.com>
+
+	* version 0.37.3
+
+	* desktop-entries/move-properties.desktop,
+	desktop-entries/meta-properties.desktop,
+	desktop-entries/maximize-properties.desktop,
+	desktop-entries/match-properties.desktop,
+	desktop-entries/bindings-properties.desktop: reverted all
+	changes made by cvs user `mandreiana' where they touched more
+	than just `ro' translations
+
+2001-02-10  John Harper  <jsh@eazel.com>
+
+	* desktop-entries/meta-properties.desktop,
+	desktop-entries/match-properties.desktop: updated Japansese
+	translations from Sato Satoru
+
+2001-02-03  Marius Andreiana  <mandreiana@yahoo.com>
+
+	* desktop-entries/*: Added ro (Romanian) translations
+	
+2001-02-01  Szabolcs Ban  <shooby@gnome.hu>
+
+	* desktop-entries/*: Added Hungarian translations.
+	
+2000-12-18  John Harper  <jsh@eazel.com>
+
+	* desktop-entries/move-properties.desktop,
+	desktop-entries/meta-properties.desktop,
+	desktop-entries/maximize-properties.desktop,
+	desktop-entries/match-properties.desktop,
+	desktop-entries/bindings-properties.desktop: updated ja
+	translations from SATO Satoru <ssato@redhat.com>
+
+2000-11-17  John Harper  <jsh@eazel.com>
+
+	* desktop-entries/*.desktop: added pt_BR translations from
+	Flávio Bruno Leitner <flavio@conectiva.com>
+
+2000-11-02  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* desktop-entries/*: Added Norwegian translations.
+	
+2000-10-30  John Harper  <jsh@eazel.com>
+
+	* desktop-entries/meta-properties.desktop,
+	desktop-entries/maximize-properties.desktop: update from Antti
+	Ahvensalmi <aahven@mbnet.fi>
+
+2000-10-27  Christopher R. Gabriel  <cgabriel@softwarelibero.org>
+
+	* deskstop-entries/*: sorted the italian translations.
+
+2000-10-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* desktop-entries/misc-properties.desktop: updated Japanese
+	translations from SATO Satoru <ssato@redhat.com>
+
+2000-10-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* desktop-entries/workspace-properties.desktop: updated French
+	translations from Christian Marillat <marillat.christian@wanadoo.fr>
+
+2000-09-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.31
+
+2000-09-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* desktop-entries/workspace-properties.desktop,
+	desktop-entries/sound-properties.desktop,
+	desktop-entries/placement-properties.desktop,
+	desktop-entries/move-properties.desktop,
+	desktop-entries/misc-properties.desktop,
+	desktop-entries/meta-properties.desktop,
+	desktop-entries/maximize-properties.desktop,
+	desktop-entries/match-properties.desktop,
+	desktop-entries/focus-properties.desktop,
+	desktop-entries/bindings-properties.desktop,
+	desktop-entries/appearance-properties.desktop: added Greek
+	translations from Simos Xenitellis <root@pc96.ma.rhbnc.ac.uk>
+
+2000-09-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* icons/sawfish-logo.png: deleted
+
+2000-08-21  John Harper  <john@dcs.warwick.ac.uk>
+
+       * sawmill-capplet.c: reverted patch to catch `destroy' signal;
+       this is solved better on the slave side
+
+2000-08-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* desktop-entries/.directory: fixed for ja (patch from SATO
+	Satoru)
+
+	* sawmill-capplet.c: hook to `destroy' signal of capplet, then
+	forward a `cancel' command to the child process
+
+2000-08-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* desktop-entries/workspace-properties.desktop,
+	desktop-entries/sound-properties.desktop,
+	desktop-entries/meta-properties.desktop,
+	desktop-entries/maximize-properties.desktop,
+	desktop-entries/focus-properties.desktop: updated French
+	translations from Christian Marillat
+	<marillat.christian@wanadoo.fr>
+
+2000-07-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* Makefile.in: avoid warnings from unbuilt dependency files
+	(from David Kaelbling <drk@sgi.com>)
+
+2000-07-19  John Harper  <john@dcs.warwick.ac.uk>
+
+	* desktop-entries/workspace-properties.desktop,
+	desktop-entries/sound-properties.desktop,
+	desktop-entries/placement-properties.desktop,
+	desktop-entries/move-properties.desktop,
+	desktop-entries/misc-properties.desktop,
+	desktop-entries/meta-properties.desktop,
+	desktop-entries/maximize-properties.desktop,
+	desktop-entries/match-properties.desktop,
+	desktop-entries/focus-properties.desktop,
+	desktop-entries/bindings-properties.desktop,
+	desktop-entries/appearance-properties.desktop,
+	desktop-entries/.directory: Italian translations from Michele
+	Campeotto <micampe@interpuntonet.it>
+
+	* desktop-entries/sound-properties.desktop,
+	desktop-entries/misc-properties.desktop: Japanese translations
+	from SATO Satoru
+
+2000-07-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* desktop-entries/meta-properties.desktop,
+	desktop-entries/focus-properties.desktop: added Polish
+	translations from Daniel Koc
+
+2000-07-04  John Harper  <john@dcs.warwick.ac.uk>
+
+	* desktop-entries/sound-properties.desktop: added Polish
+	translations from Daniel Koc
+
+2000-07-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* desktop-entries/sound-properties.desktop: added Spanish
+	translations from Iñaki García Etxebarria
+
+2000-07-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.29
+
+2000-07-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* desktop-entries/meta-properties.desktop: new file, for the
+	user-level option (not the best way to present this, but I
+	can't think of an alternative)
+
+	* desktop-entries/.order: try to put the `meta' item at the top
+	* Makefile.in: install .order
+
+	* desktop-entries/.directory: use the usual GNOME wm icon
+
+	* sawmill-capplet.c: new option, --no-flatten
+
+2000-06-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-capplet.c (sawmill_ok, sawmill_cancel): remove the
+	socket from its container before passing the command to the
+	slave process (prevents GDK choking on X errors..?)
+
+2000-04-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* Makefile.in: don't search for GNOME prefix, just use
+	$(GNOMEDIR) which is found by configure
+
+	* added Tigert's great icons (also added a version of Glyph's
+	saw logo for the .directory file)
+
+2000-04-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-capplet.c, Makefile.in: s/sawmill/sawfish/ where
+	appropriate
+
+2000-04-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* dekstop-entries/sound-properties.desktop: new file
+
+2000-04-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-capplet.c (ui_output_callback): code `g' means that
+	sawmill-ui couldn't find the group we asked for
+
+	* sawmill-capplet.c (sawmill_setup): don't link stderr to the
+	parent process, causes problems with GTK errors
+
+2000-03-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-capplet.c: don't assume atomic I/O (pointed out by
+	James Antill <james@and.org>)
+
+2000-02-27  John Harper  <john@dcs.warwick.ac.uk>
+
+	* Makefile.in: install desktop entries under Settings/Sawmill
+	in the apps menu as well as in the control center directory
+
+2000-02-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-capplet.c: replace --notebook option to sawmill-ui
+	with --flatten
+
+2000-02-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-capplet.c: handle sawmill-ui failing to start
+	correctly
+
+1999-10-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* Makefile.in: don't need to pass -I option anymore
+
+	* sawmill-capplet.c (sawmill_setup): close more file
+	descriptors before exec'ing
+
+	* sawmill-capplet.c: changed how some include files are named
+
+1999-09-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-capplet.c (sawmill_running_p): use libclient.o to
+	check if the wm is running (due to the multiple connection
+	methods)
+
+1999-09-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-capplet.c (sawmill_running_p): new function, test if
+	sawmill is actually running
+	(sawmill_setup): if the wm isn't running, just print a message
+	to this effect in the capplet widget
+
+	* sawmill-capplet.c (main): disabled some of the session
+	management stuff that was copied from mouse-properties.c; I
+	don't understand it fully and it makes the
+	GNOME_SAWMILL_PROPERTIES root property expand forever..
+
+	* sawmill-capplet.c (sawmill_cancel): don't destroy the capplet
+	widget
+
