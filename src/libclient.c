@@ -100,6 +100,29 @@ system_name(void)
 }
 
 static char *
+canonical_host (char *host)
+{
+    /* check that the name is fully qualified */
+    if (!strchr (host, '.'))
+    {
+	struct hostent *h = gethostbyname (host);
+	if (h != 0)
+	{
+	    if (!strchr (h->h_name, '.'))
+	    {
+		char **aliases = h->h_aliases;
+		while (*aliases && !strchr (*aliases, '.'))
+		    aliases++;
+		host = *aliases ? *aliases : h->h_name;
+	    }
+	    else
+		host = h->h_name;
+	}
+    }
+    return host;
+}
+
+static char *
 canonical_display (char *name)
 {
     static char buf[256];
@@ -115,8 +138,16 @@ canonical_display (char *name)
     }
     else
     {
+	char *fq;
 	while (*name && *name != ':')
 	    *ptr++ = *name++;
+	*ptr = 0;
+	fq = canonical_host (buf);
+	if (fq != buf)
+	{
+	    strcpy (buf, fq);
+	    ptr = buf + strlen (buf);
+	}
     }
     *ptr++ = *name++;
     while (*name && *name != '.')
