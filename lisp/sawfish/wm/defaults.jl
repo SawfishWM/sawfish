@@ -31,3 +31,7 @@
 ;; sometimes use GNOME
 ;(when (equal (getenv "GDMSESSION") "Gnome")
 ;  (require 'gnome))
+
+;; turn on tooltips for first-time users
+(require 'tooltips)
+(setq tooltips-enabled t)
