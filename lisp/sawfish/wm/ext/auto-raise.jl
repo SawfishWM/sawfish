@@ -33,10 +33,11 @@
   :type number
   :group focus)
 
-(defcustom raise-groups-on-focus t
-  "Raise entire group after focusing a window (when auto-raise is enabled)."
-  :type boolean
-  :group (focus advanced))
+;XXX this thing is hosed
+;(defcustom raise-groups-on-focus t
+;  "Raise entire group after focusing a window (when auto-raise is enabled)."
+;  :type boolean
+;  :group (focus advanced))
 
 (defvar disable-auto-raise nil)
 
@@ -50,9 +51,12 @@
     (setq rw-timer nil)))
 
 (defun rw-raise-window (w)
-  (if raise-groups-on-focus
-      (raise-group w)
-    (raise-window w)))
+  (raise-window w))
+
+;(defun rw-raise-window (w)
+;  (if raise-groups-on-focus
+;      (raise-group w)
+;    (raise-window w)))
 
 (defun rw-on-focus (w)
   (unless disable-auto-raise
