@@ -7,6 +7,57 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
 
+@heading 0.36
+
+@itemize @bullet
+
+@item Added a new default theme: `Crux'. By default it recolours itself
+to match the current GTK+ selection colour. (Arlo Rose, me)
+
+@item Updated translations: it (Michele Campeotto), fr (Christian
+Marillat)
+
+@item Added a @code{shade-button} button class (many themes created it
+anyway)
+
+@item Added a @code{sawfish.wm.util.recolor-image} module, currently
+contains a single function for recolouring parts of images based on a
+given colour gradient
+
+@item Added new command @code{delete-group}. Deletes a whole group of
+windows. With default bindings, shift-click on the close button to
+invoke this command
+
+@item Added support for KDE-style mini-icons. If the window has no
+normal icon, then @code{window-icon-image} will return the mini-icon
+
+@item Fixed bugs:
+
+@itemize @minus
+
+@item Themes that use the module for reading the user's gtk preferences
+will once again get updated when the gtk theme changes
+
+@item Fix another of the null-string translation bugs (Christian
+Marillat)
+
+@item Work around @code{XUrgencyHint} not being defined before X11R6
+
+@item Fixed some long-standing bugs when decorating windows (use the
+correct mask when creating the overall window shape; for frame parts
+with no mask, set the local shape to the appropriate rectangle; be sure
+to generate at least one Expose event when reconfiguring frame parts)
+
+@item Fixed crashing bug when @code{bind-keys} is called with zero
+arguments
+
+@item Fixed typo in @code{crop-image} function when checking validity
+of @var{height} parameter (martin@@whoever.com)
+
+@end itemize
+@end itemize
+
+
 @heading 0.35
 
 @itemize @bullet
