@@ -108,10 +108,10 @@ AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
 dnl Try using pkg-config first, since it looks like Xft2 may fail our
 dnl hand-crafted tests
 PKG_CHECK_MODULES(XFT, xft >= 1.0,
- [_cflags=$CFLAGS
-  CFLAGS="$CFLAGS $XFT_CFLAGS"
+ [_cppflags=$CPPFLAGS
+  CPPFLAGS="$CPPFLAGS $XFT_CFLAGS"
   AC_CHECK_HEADERS(X11/Xft/Xft.h)
-  CFLAGS=$_cflags],
+  CPPFLAGS=$_cppflags],
  [AC_CHECK_LIB(Xft, XftDrawCreate,
 	       [XFT_LIBS="-lXft -lXrender"
 	       AC_CHECK_HEADERS(X11/Xft/Xft.h)],
