@@ -46,6 +46,8 @@
     (when (and lang (not disable-nls) (not (string= lang "C")))
       (require 'rep.i18n.gettext)
       (bindtextdomain "sawfish" sawfish-locale-directory)
+      (when (boundp 'bindtextdomaincodeset)
+	(bindtextdomaincodeset "sawfish" "UTF-8"))
       (textdomain "sawfish"))))
 
 ;; ignore file errors on stdio streams

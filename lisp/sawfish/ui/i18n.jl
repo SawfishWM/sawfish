@@ -59,4 +59,6 @@
       (let ((locale-dir (wm-locale-dir)))
 	(when locale-dir
 	  (bindtextdomain "sawfish" locale-dir)
+	  (when (boundp 'bindtextdomaincodeset)
+	    (bindtextdomaincodeset "sawfish" "UTF-8"))
 	  (textdomain "sawfish"))))))

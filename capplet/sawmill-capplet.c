@@ -301,6 +301,7 @@ main (int argc, char **argv)
 
 #if 0
     bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+    bind_textdomain_codeset (PACKAGE, "UTF-8");
     textdomain (PACKAGE);
 #endif
 
