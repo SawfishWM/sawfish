@@ -1149,7 +1149,7 @@ contents of IMAGE starting at position (X, Y).
     rep_DECLARE (3, y, rep_INTP (y) && rep_INT (y) >= 0);
     rep_DECLARE (4, w, rep_INTP (w) && rep_INT (w) > 0
 		 && rep_INT (w) <= (img_w - rep_INT (x)));
-    rep_DECLARE (5, h, rep_INTP (h) && rep_INT (y) > 0
+    rep_DECLARE (5, h, rep_INTP (h) && rep_INT (h) > 0
 		 && rep_INT (h) <= (img_h - rep_INT (y)));
 
 #if defined HAVE_IMLIB
