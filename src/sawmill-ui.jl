@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.44 1999/12/05 16:28:20 john Exp $
+;; $Id: sawmill-ui.jl,v 1.45 1999/12/07 13:23:18 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -955,7 +955,7 @@ exec rep "$0" "$@"
        (frame (gtk-frame-new "Actions"))
        (frame-1 (gtk-frame-new "Matchers"))
        (table (gtk-table-new (length properties) 2 nil))
-       (table-1 (gtk-table-new ui-match-window-max-matchers 2 nil))
+       (table-1 (gtk-table-new ui-match-window-max-matchers 3 nil))
        (match-widget-alist nil)
        (prop-widget-alist nil)
 
@@ -1061,13 +1061,28 @@ exec rep "$0" "$@"
       (while (< i ui-match-window-max-matchers)
 	(let
 	    ((combo (gtk-combo-new))
-	     (entry (gtk-entry-new)))
+	     (entry (gtk-entry-new))
+	     (button (gtk-button-new-with-label "Grab...")))
 	  (gtk-combo-set-popdown-strings
 	   combo (cons "" (mapcar cdr x-properties)))
 	  (gtk-table-attach-defaults table-1 combo 0 1 i (1+ i))
 	  (gtk-table-attach-defaults table-1 entry 1 2 i (1+ i))
+	  (gtk-table-attach-defaults table-1 button 2 3 i (1+ i))
 	  (setq match-widget-alist (cons (cons combo entry)
 					 match-widget-alist))
+	  (gtk-signal-connect button "clicked"
+			      (lambda ()
+				(let*
+				    ((string (gtk-entry-get-text
+					      (gtk-combo-entry combo)))
+				     prop)
+				  (when string
+				    (setq prop (sawmill-eval
+						`(match-window-grab-x-property
+						  ,string) t))
+				    (unless (stringp prop)
+				      (setq prop ""))
+				    (gtk-entry-set-text entry prop)))))
 	  (setq i (1+ i))))
       (setq match-widget-alist (nreverse match-widget-alist))
       (setq i 0)
