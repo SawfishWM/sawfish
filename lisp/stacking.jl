@@ -34,11 +34,20 @@ stacking level to place them in.")
 ;; Resort the stacking order to ensure that the windows' depth attributes
 ;; are adhered to. No change is made to windows in the same depth
 (defun restack-by-depth ()
-  (let
-      ((order (sort (stacking-order)
-		    #'(lambda (x y)
-			(> (window-get x 'depth) (window-get y 'depth))))))
-    (restack-windows order)))
+  (let*
+      ((old-order (stacking-order))
+       (new-order (sort (copy-sequence old-order)
+			#'(lambda (x y)
+			    (> (window-get x 'depth) (window-get y 'depth))))))
+    ;; try to optimise..
+    (unless (equal old-order new-order)
+      ;; look for common prefix to both lists
+      (when (eq (car old-order) (car new-order))
+	(while (and (cdr old-order) (cdr new-order)
+		    (eq (car (cdr old-order)) (car (cdr new-order))))
+	  (setq old-order (cdr old-order))
+	  (setq new-order (cdr new-order))))
+      (restack-windows new-order))))
 
 (defun stacking-order-by-depth (depth)
   (let
