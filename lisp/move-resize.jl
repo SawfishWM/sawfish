@@ -239,6 +239,7 @@ the mouse position relative to the window."
 		(y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1))
 		(x-max (cdr (assq 'max-width move-resize-hints)))
 		(y-max (cdr (assq 'max-height move-resize-hints))))
+	     (move-resize-add-edges ptr-x ptr-y)
 	     (cond
 	      ((memq 'right move-resize-moving-edges)
 	       (setq move-resize-width
@@ -364,6 +365,35 @@ the mouse position relative to the window."
       (setq move-resize-moving-edges
 	    (delq 'left (delq 'right move-resize-moving-edges))))))
 
+(defun move-resize-add-edges (ptr-x ptr-y)
+  (unless (or (and move-lock-when-maximized
+		   (window-maximized-horizontally-p move-resize-window))
+	      (memq 'left move-resize-moving-edges)
+	      (memq 'right move-resize-moving-edges))
+    (cond ((< ptr-x move-resize-x)
+	   (setq move-resize-moving-edges
+		 (cons 'left move-resize-moving-edges))
+	   (setq move-resize-old-ptr-x move-resize-x))
+	  ((> ptr-x (+ move-resize-x move-resize-width
+		       (car move-resize-frame)))
+	   (setq move-resize-moving-edges
+		 (cons 'right move-resize-moving-edges))
+	   (setq move-resize-old-ptr-x (+ move-resize-x move-resize-width
+					  (car move-resize-frame))))))
+  (unless (or (and move-lock-when-maximized
+		   (window-maximized-vertically-p move-resize-window))
+	      (memq 'top move-resize-moving-edges)
+	      (memq 'bottom move-resize-moving-edges))
+    (cond ((< ptr-y move-resize-y)
+	   (setq move-resize-moving-edges
+		 (cons 'top move-resize-moving-edges))
+	   (setq move-resize-old-ptr-y move-resize-y))
+	  ((> ptr-y (+ move-resize-y move-resize-height
+		       (cdr move-resize-frame)))
+	   (setq move-resize-moving-edges
+		 (cons 'bottom move-resize-moving-edges))
+	   (setq move-resize-old-ptr-y (+ move-resize-y move-resize-height
+					  (cdr move-resize-frame)))))))
 (defun move-resize-infer-directions ()
   (unless move-resize-directions
     (setq move-resize-directions (list 'vertical 'horizontal)))
