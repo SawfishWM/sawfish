@@ -48,7 +48,7 @@
 
 (defcustom default-bevel-percent nil
   "Intensity of bevels (percentage)."
-  :group appearance
+  :group (appearance advanced)
   :type number
   :range (0 . 100)
   :after-set (lambda () (after-setting-frame-option)))
@@ -107,33 +107,51 @@
 	     (when fun
 	       (funcall fun symbol value doc)))))))
 
-(defun customize-group-spec (group-list)
-  (let
-      ((spec (mapcar customize-symbol-spec (cdr group-list))))
-    (if (get (car group-list) 'custom-group-widget)
-	(funcall
-	 (get (car group-list) 'custom-group-widget) (car group-list) spec)
-      (list* 'vbox spec))))
+(defun customize-spec (item)
+  (cond ((null item) nil)
+	((symbolp item)
+	 (customize-symbol-spec item))
+	(t
+	 (let
+	     ((items (mapcar customize-symbol-spec (filter atom (cddr item))))
+	      (subtrees (mapcar customize-spec (filter consp (cddr item)))))
+	   (list (cadr item)
+		 (cond
+		  ((get (car item) 'custom-group-widget)
+		   ((get (car item) 'custom-group-widget) (car item) items))
+		  ((eq (car item) 'root)
+		   `(vbox (label ,(format nil (_ "\
+Sawmill %s (rep %s)
+
+Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>
+
+This is free software -- you are welcome to redistribute it and/or \
+modify it under the terms of the GNU General Public License as \
+published by the Free Software Foundation; either version 2, or \
+(at your option) any later version.
+
+Sawmill is distributed in the hope that it will be useful, but \
+WITHOUT ANY WARRANTY; without even the implied warranty of \
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the \
+GNU General Public License for more details.
+
+Visit the Sawmill homepage at http://sawmill.sourceforge.net/")
+				     sawmill-version rep-version))))
+		  (t
+		   (cons 'vbox items)))
+		 subtrees)))))
 
 (defun customize-ui-spec (&optional group)
   (mapc require custom-required)
   (if (or (null group) (eq group t))
-      (list*
-       'pages
-       (mapcar (lambda (group-list)
-		 (let
-		     ((group (car group-list)))
-		   (list (_ (or (get group 'custom-group-doc)
-				(symbol-name group)))
-			 (customize-group-spec group-list))))
-	       custom-groups))
-    (customize-group-spec (assq group custom-groups))))
+      (cons 'tree (customize-spec custom-groups))
+    (cadr (customize-spec (custom-find-group group)))))
 
 ;;;###autoload
 (defun customize (&optional group)
   "Invoke the user-customization system."
   (interactive)
-  (system (format nil "%s %s %s %s >/dev/null 2>&1 </dev/null &"
+  (system (format nil "%s %s %s '%S' >/dev/null 2>&1 </dev/null &"
 		  customize-program customize-args
 		  (and group customize-group-opt) (or group ""))))
 
@@ -195,26 +213,3 @@
       (setq customize-user-forms (cons form customize-user-forms)))
     (setq customize-user-file-dirty t)
     (eval form)))
-
-
-;; some blurb
-
-(defgroup about "About"
-  :widget (lambda ()
-	    (list 'label (format nil (_ "\
-Sawmill %s (rep %s)
-
-Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>
-
-This is free software -- you are welcome to redistribute it and/or \
-modify it under the terms of the GNU General Public License as \
-published by the Free Software Foundation; either version 2, or \
-(at your option) any later version.
-
-Sawmill is distributed in the hope that it will be useful, but \
-WITHOUT ANY WARRANTY; without even the implied warranty of \
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the \
-GNU General Public License for more details.
-
-Visit the Sawmill homepage at http://sawmill.sourceforge.net/")
-				 sawmill-version rep-version))))

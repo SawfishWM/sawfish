@@ -22,7 +22,7 @@
 (provide 'custom)
 
 ;; list associating groups with the list of variables in that group
-(defvar custom-groups nil)
+(defvar custom-groups (list 'root "Sawmill"))
 
 (defvar custom-required nil
   "List of features to load before running customize.")
@@ -121,23 +121,24 @@
     value))
 
 (defun custom-declare-group (group &optional doc keys)
-  (unless (assq group custom-groups)
-    (setq custom-groups (nconc custom-groups (list (list group)))))
   (when doc
     (put group 'custom-group-doc doc))
   (let
-      (tem)
+      (container tem)
     (while keys
-      (setq tem (cdr (assq (car keys) custom-group-option-alist)))
-      (setq keys (cdr keys))
-      (when tem
-	(put group tem (car keys)))
-      (setq keys (cdr keys)))
-    ;; declare a command to customize this group
-    (define-value (intern (concat "customize:" (symbol-name group)))
-		  (lambda ()
-		    (interactive)
-		    (customize group)))))
+      (if (eq (car keys) ':group)
+	  (setq container (nth 1 keys))
+	(setq tem (cdr (assq (car keys) custom-group-option-alist)))
+	(when tem
+	  (put group tem (cadr keys))))
+      (setq keys (cddr keys)))
+    (custom-add-to-group (list group doc) container)
+    (unless container
+      ;; declare a command to customize this group
+      (define-value (intern (concat "customize:" (symbol-name group)))
+		    (lambda ()
+		      (interactive)
+		      (customize group))))))
 
 (defun custom-quote-keys (keys)
   (let
@@ -169,16 +170,44 @@
 (defmacro custom-get-options (sym)
   `(get ,sym 'custom-options))
 
-(defun custom-add-to-group (symbol group)
-  (let
-      ((group-list (assq group custom-groups)))
-    (unless group-list
-      (custom-declare-group group)
-      (setq group-list (assq group custom-groups)))
-    (rplacd group-list (nconc (delq symbol (cdr group-list)) (list symbol)))))
+(defun custom-find-group (full-group)
+  (when (and (symbolp full-group) (not (null full-group)))
+    (setq full-group (list full-group)))
+  (letrec
+      ((iterate
+	(lambda (group parent)
+	  (if (null group)
+	      parent
+	    (iterate (cdr group)
+		     (or (assq (car group) (cddr parent))
+			 (error "No such group: %S" full-group)))))))
+    (iterate full-group custom-groups)))
+
+(defun custom-add-to-group (cell full-group &optional tail)
+  (require 'sort)
+  (when (and (symbolp full-group) (not (null full-group)))
+    (setq full-group (list full-group)))
+  (letrec
+      ((inner-fun
+	(lambda (group parent)
+	  (if (null group)
+	      (unless (assq (car cell) (cddr parent))
+		;; reached the bottom most group
+		(rplacd (cdr parent) (nconc (cddr parent) (list cell))))
+	    ;; keep on recursing
+	    (inner-fun (cdr group)
+		       (or (assq (car group) (cddr parent))
+			   (error "Unknown group %s" full-group)))
+	    (unless (cdr group)
+	      (rplacd (cdr custom-groups)
+		      (nconc (sort (filter consp (cddr custom-groups))
+				   (lambda (x y)
+				     (string-lessp (cadr x) (cadr y))))
+			     (filter atom (cddr custom-groups)))))))))
+    (inner-fun full-group custom-groups)))
 
 (defun custom-set-variable (symbol value &optional req)
-  (when req
+  (when (and req value)
     (require req))
   (when (get symbol 'custom-before-set)
     (funcall (get symbol 'custom-before-set) symbol))
@@ -187,14 +216,18 @@
     (funcall (get symbol 'custom-after-set) symbol)))
 
 (defun custom-menu ()
-  (nconc
-   (list `(,(_ "All settings") customize) nil)
-   (mapcar (lambda (group-list)
-	     (list (_ (or (get (car group-list) 'custom-group-doc)
-			  (symbol-name (car group-list))))
-		   `(customize ',(car group-list)))) custom-groups)
-   (and (frame-style-editable-p default-frame-style)
-	(list nil `(,(_"Edit theme...") edit-frame-style)))))
+  `((,(_ "All settings") customize)
+    ()
+    ,@(mapcar (lambda (sub)
+		(list (_ (cadr sub))
+		      `(customize ',(car sub))))
+	      (filter consp (cddr custom-groups)))
+    ,@(and (frame-style-editable-p default-frame-style)
+	   (list nil `(,(_"Edit theme...") edit-frame-style)))))
+
+(defun custom-add-required (feature)
+  (unless (memq feature custom-required)
+    (setq custom-required (cons feature custom-required))))
 
 
 ;; support for font and color primitive types
@@ -237,10 +270,14 @@
 ;; default groups
 
 (defgroup focus "Focus")
+(defgroup advanced "Advanced" :group focus)
 (defgroup move "Move/Resize")
+(defgroup advanced "Advanced" :group move)
 (defgroup placement "Placement")
 (defgroup appearance "Appearance")
+(defgroup advanced "Advanced" :group appearance)
 (defgroup workspace "Workspaces")
+(defgroup advanced "Advanced" :group workspace)
 (defgroup bindings "Bindings")
 (defgroup iconify "Iconifying")
 (defgroup maximize "Maximizing")
