@@ -28,59 +28,59 @@
 	  sawfish.wm.util.stacking
 	  sawfish.wm.state.transient
 	  sawfish.wm.commands.groups
-	  sawfish.wm.commands)
+	  sawfish.wm.commands
+	  sawfish.wm.focus)
+
+  (define (replay-pointer w)
+    ;; click-to-focus mode sets this to t when it calls a command
+    ;; from within a button press event
+    (unless (and (fluid focus-within-click-event)
+		 (not (or focus-click-through
+			  (window-get w 'focus-click-through)
+			  (not (window-really-wants-input-p w)))))
+      (allow-events 'replay-pointer)
+      (unless (clicked-frame-part)
+	(forget-button-press))))
 
   (define (and-pass-through-click w)
     "Raise the window that received the current event, then replay any pointer
 events that invoked the command."
     (when (windowp w)
       (raise-window* w))
-    (allow-events 'replay-pointer)
-    (unless (clicked-frame-part)
-      (forget-button-press)))
+    (replay-pointer w))
 
   (define (and-pass-through-click-if-focused w)
     "Raise the window that received the current event (if it's focused), then
 replay any pointer events that invoked the command."
     (when (and (windowp w) (eq w (input-focus)))
       (raise-window* w))
-    (allow-events 'replay-pointer)
-    (unless (clicked-frame-part)
-      (forget-button-press)))
+    (replay-pointer w))
 
   (define (or-pass-through-click w)
     (if (and (windowp w) (not (window-on-top-p w)))
 	(raise-window* w)
-      (allow-events 'replay-pointer)
-      (unless (clicked-frame-part)
-	(forget-button-press))))
+      (replay-pointer w)))
 
   (define (window-and-pass-through-click w)
     "Raise the window that received the current event, then replay any pointer
 events that invoked the command."
     (when (windowp w)
       (raise-window w))
-    (allow-events 'replay-pointer)
-    (unless (clicked-frame-part)
-      (forget-button-press)))
+    (replay-pointer w))
 
   (define (group-and-pass-through-click w)
     "Raise the group of windows that received the current event, then replay
 any pointer events that invoked the command."
     (when (windowp w)
       (raise-group w))
-    (allow-events 'replay-pointer)
-    (unless (clicked-frame-part)
-      (forget-button-press)))
+    (replay-pointer w))
 
   (define (transients-and-pass-through-click w)
     "Raise the window that received the current event and any transients it
 has, then replay any pointer events that invoked the command."
     (when (windowp w)
       (raise-window-and-transients w))
-    (allow-events 'replay-pointer)
-    (unless (clicked-frame-part)
-      (forget-button-press)))
+    (replay-pointer w))
 
   ;;###autoload
   (define-command 'raise-and-pass-through-click

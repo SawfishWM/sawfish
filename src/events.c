@@ -50,6 +50,7 @@ Time last_event_time;
 XEvent *current_x_event;
 static bool current_event_updated_mouse;
 static repv current_event_window;
+
 static repv saved_current_context_map;
 
 /* We need a ButtonRelease on this fp. */
@@ -103,8 +104,6 @@ DEFSYM(dimensions, "dimensions");
 DEFSYM(normal, "normal");
 DEFSYM(grab, "grab");
 DEFSYM(ungrab, "ungrab");
-
-DEFSYM(ignore_fp_keymap, "ignore-fp-keymap");
 
 repv Fsynthetic_configure_mutex (repv);
 
@@ -338,10 +337,7 @@ current_context_map (void)
 	    && clicked_frame_part->win != 0
 	    && clicked_frame_part->win->visible)
 	{
-	    repv tem = Fwindow_get (rep_VAL (clicked_frame_part->win),
-				    Qignore_fp_keymap);
-	    if (tem == Qnil)
-		map = get_keymap_for_frame_part (clicked_frame_part);
+	    map = get_keymap_for_frame_part (clicked_frame_part);
 	}
 
 	saved_current_context_map = map;
@@ -354,17 +350,6 @@ static void
 flush_current_context_map (void)
 {
     saved_current_context_map = rep_NULL;
-}
-
-static void
-ignore_fp_prop_change (Lisp_Window *w, repv prop, repv old, repv new)
-{
-    if ((old == Qnil) != (new == Qnil))
-    {
-	if (saved_current_context_map != rep_NULL)
-	    flush_current_context_map ();
-	(void) current_context_map ();
-    }
 }
 
 static void
@@ -1621,9 +1606,6 @@ events_init (void)
     rep_INTERN(normal);
     rep_INTERN(grab);
     rep_INTERN(ungrab);
-
-    rep_INTERN(ignore_fp_keymap);
-    register_property_monitor (Qignore_fp_keymap, ignore_fp_prop_change);
 
     rep_mark_static (&current_event_window);
     rep_mark_static (&saved_current_context_map);

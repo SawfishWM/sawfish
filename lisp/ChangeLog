@@ -1,5 +1,17 @@
 2000-11-20  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/focus.jl: removed all code to support the
+	focus-click-through option on non-client windows (mfleming
+	convinced me it was a bad idea, and it fixes a hard bug)
+
+	* sawfish/wm/focus.jl (focus-within-click-event): new fluid,
+	set to t when calling a command from within the click-to-focus
+	event
+
+	* sawfish/wm/commands/raise-commands.jl (replay-pointer):
+	function to do the replaying, dependent on whether or not we're
+	in the click-to-focus event or not
+
 	* sawfish/wm/state/wm-spec.jl: support SKIP_PAGER state (linked
 	to the `window-list-skip' property)
 
