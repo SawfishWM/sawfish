@@ -34,7 +34,7 @@
   :group tooltips
   :require tooltips)
 
-(defcustom tooltips-delay 1000
+(defcustom tooltips-delay 500
   "Number of milliseconds to wait before displaying tooltip."
   :type number
   :range (0 . nil)
