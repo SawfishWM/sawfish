@@ -74,7 +74,7 @@ focus_on_window (Lisp_Window *w)
 {
     if (w != 0)
     {
-	DB(("focus_on_window (%s)\n", w->name));
+	DB(("focus_on_window (%s)\n", rep_STR(w->name)));
 	if (w->does_wm_take_focus)
 	{
 	    DB(("  sending WM_TAKE_FOCUS message\n"));
@@ -136,7 +136,10 @@ find_window_by_id (Window id)
     if (w != 0 && w->id == 0)
 	w = 0;
     if (w != 0)
-	DB(("find_window_by_id (%lx) --> %s\n", id, (w != 0) ? w->name : ""));
+    {
+	DB(("find_window_by_id (%lx) --> %s\n",
+	    id, (w != 0) ? rep_STR(w->name) : ""));
+    }
     return w;
 }
 
@@ -150,7 +153,10 @@ x_find_window_by_id (Window id)
     while (w != 0 && w->saved_id != id && w->frame != id)
 	w = w->next;
     if (w != 0)
-	DB(("x_find_window_by_id (%lx) --> %s\n", id, (w != 0) ? w->name : ""));
+    {
+	DB(("x_find_window_by_id (%lx) --> %s\n",
+	    id, (w != 0) ? rep_STR(w->name) : ""));
+    }
     return w;
 }
 
@@ -189,7 +195,7 @@ set_window_shape (Lisp_Window *w)
 void
 install_window_frame (Lisp_Window *w)
 {
-    DB(("install_window_frame (%s)\n", w->name));
+    DB(("install_window_frame (%s)\n", rep_STR(w->name)));
     if (!w->reparented && w->frame != 0)
     {
 	XSelectInput (dpy, w->frame,
@@ -213,7 +219,7 @@ install_window_frame (Lisp_Window *w)
 void
 remove_window_frame (Lisp_Window *w)
 {
-    DB(("remove_window_frame (%s)\n", w->name));
+    DB(("remove_window_frame (%s)\n", rep_STR(w->name)));
     if (w->reparented)
     {
 	/* reparent the subwindow back to the root window */
@@ -228,6 +234,7 @@ remove_window_frame (Lisp_Window *w)
 Lisp_Window *
 add_window (Window id)
 {
+    char *tem;
     Lisp_Window *w = rep_ALLOC_CELL(sizeof (Lisp_Window));
     if (w != 0)
     {
@@ -260,10 +267,23 @@ add_window (Window id)
 	XGetWindowAttributes (dpy, id, &w->attr);
 	DB(("  orig: width=%d height=%d x=%d y=%d\n",
 	    w->attr.width, w->attr.height, w->attr.x, w->attr.y));
-	XFetchName (dpy, id, &w->name);
-#if 0
-	XGetClassHint (dpy, id, &w->class);
-#endif
+
+	if (XFetchName (dpy, id, &tem))
+	{
+	    w->name = rep_string_dup (tem);
+	    XFree (tem);
+	}
+	else
+	    w->name = rep_null_string ();
+	w->full_name = w->name;
+	if (XGetIconName (dpy, id, &tem))
+	{
+	    w->icon_name = rep_string_dup (tem);
+	    XFree (tem);
+	}
+	else
+	    w->icon_name = w->name;
+
 	w->wmhints = XGetWMHints (dpy, id);
 	if (!XGetWMNormalHints (dpy, w->id, &w->hints, &supplied))
 	    w->hints.flags = 0;
@@ -282,14 +302,9 @@ add_window (Window id)
 	    w->shaped = bounding ? 1 : 0;
 	}
 
-	if (w->name == 0)
-	    w->name = "";
-	w->full_name = w->name;
-	if (XGetIconName (dpy, id, &w->icon_name) == 0)
-	    w->icon_name = w->name;
-
 	DB(("  name=`%s' x=%d y=%d width=%d height=%d\n",
-	    w->name, w->attr.x, w->attr.y, w->attr.width, w->attr.height));
+	    rep_STR(w->name), w->attr.x, w->attr.y,
+	    w->attr.width, w->attr.height));
 
 	xwcm = CWX | CWX | CWWidth | CWHeight | CWBorderWidth;
 	xwc.x = w->attr.x + w->attr.border_width;
@@ -342,7 +357,8 @@ add_window (Window id)
 void
 remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 {
-    DB(("remove_window (%s, %s)\n", w->name, destroyed == Qnil ? "nil" : "t"));
+    DB(("remove_window (%s, %s)\n",
+	rep_STR(w->name), destroyed == Qnil ? "nil" : "t"));
     if (w->id != 0)
     {
 	if (destroyed == Qnil && from_error == Qnil)
@@ -461,7 +477,7 @@ Return the name of window object WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
-    return rep_string_dup (VWIN(win)->name);
+    return VWIN(win)->name;
 }
 
 DEFUN("window-full-name", Fwindow_full_name, Swindow_full_name,
@@ -473,7 +489,7 @@ Return the full name of window object WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
-    return rep_string_dup (VWIN(win)->full_name);
+    return VWIN(win)->full_name;
 }
 
 DEFUN("window-icon-name", Fwindow_icon_name, Swindow_icon_name,
@@ -485,7 +501,7 @@ Return the name of window object WINDOW's icon.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
-    return rep_string_dup (VWIN(win)->icon_name);
+    return VWIN(win)->icon_name;
 }
 
 DEFUN("window-mapped-p", Fwindow_mapped_p, Swindow_mapped_p,
@@ -943,6 +959,9 @@ window_mark (repv win)
     rep_MARKVAL(VWIN(win)->frame_style);
     if (VWIN(win)->frame)
 	mark_frame_parts (VWIN(win));
+    rep_MARKVAL(VWIN(win)->name);
+    rep_MARKVAL(VWIN(win)->full_name);
+    rep_MARKVAL(VWIN(win)->icon_name);
 }
 
 static void
@@ -968,6 +987,8 @@ window_sweep (void)
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
 	{
 	    destroy_window_frame (w, FALSE);
+	    if (w->wmhints != 0)
+		XFree (w->wmhints);
 	    rep_FREE_CELL(w);
 	}
 	else

@@ -301,14 +301,18 @@ property_notify (XEvent *ev)
 	switch (ev->xproperty.atom)
 	{
 	case XA_WM_NAME:
-	    w->full_name = w->name = prop;
+	    w->full_name = w->name = rep_string_dup (prop);
+	    XFree (prop);
 	    break;
 
 	case XA_WM_ICON_NAME:
-	    w->icon_name = prop;
+	    w->icon_name = rep_string_dup (prop);
+	    XFree (prop);
 	    break;
 
 	case XA_WM_HINTS:
+	    if (w->wmhints != 0)
+		XFree (w->wmhints);
 	    w->wmhints = XGetWMHints (dpy, w->id);
 	    break;
 
@@ -565,7 +569,7 @@ focus_in (XEvent *ev)
 	if (w->focus_change != 0)
 	{
 	    DB (("  calling focus change %p on %s\n",
-		 w->focus_change, w->name));
+		 w->focus_change, rep_STR(w->name)));
 	    w->focus_change (w);
 	}
 	if (w->id != 0)
@@ -585,7 +589,7 @@ focus_out (XEvent *ev)
 	if (w->focus_change != 0)
 	{
 	    DB (("  calling focus change %p on %s\n",
-		 w->focus_change, w->name));
+		 w->focus_change, rep_STR(w->name)));
 	    w->focus_change (w);
 	}
 	if (w->id != 0)
