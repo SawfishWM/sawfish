@@ -51,7 +51,7 @@ int shape_event_base, shape_error_base;
 
 /* some atoms that may be useful.. */
 Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols, xa_wm_delete_window,
-    xa_wm_colormap_windows, xa_wm_take_focus;
+    xa_wm_colormap_windows, xa_wm_take_focus, xa_compound_text;
 
 DEFSYM(display_name, "display-name");
 DEFSYM(canonical_display_name, "canonical-display-name");
@@ -249,6 +249,7 @@ sys_init(char *program_name)
 	    xa_wm_delete_window = XInternAtom (dpy, "WM_DELETE_WINDOW", False);
 	    xa_wm_colormap_windows = XInternAtom (dpy, "WM_COLORMAP_WINDOWS", False);
 	    xa_wm_take_focus = XInternAtom (dpy, "WM_TAKE_FOCUS", False);
+	    xa_compound_text = XInternAtom (dpy, "COMPOUND_TEXT", False);
 
 	    XShapeQueryExtension (dpy, &shape_event_base, &shape_error_base);
 
