@@ -71,16 +71,18 @@ error_handler (Display *dpy, XErrorEvent *ev)
 #ifdef DEBUG
     print_error (ev);
 #endif
-    w = find_window_by_id (ev->resourceid);
+    w = x_find_window_by_id (ev->resourceid);
     if (w != 0)
     {
 	DB(("error_handler (%s)\n", w->name));
 	if (w == focus_window)
 	    focus_window = 0;
-	if (w->id)
+	if (w->id != 0)
+	{
 	    remove_window (w, Qt, Qt);
-	/* the window isn't windowp anymore */
-	Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
+	    /* the window isn't windowp anymore */
+	    Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
+	}
 	return 0;			/* ?? */
     }
     else
