@@ -5,13 +5,13 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Sawfish 0.34\n"
-"POT-Creation-Date: 2000-12-04 11:08-0800\n"
-"PO-Revision-Date: 2000-12-09 02:55GMT\n"
+"Project-Id-Version: Sawfish 0.36\n"
+"POT-Creation-Date: 2001-01-20 21:29-0800\n"
+"PO-Revision-Date: 2001-01-24 03:10GMT\n"
 "Last-Translator: Daniel Koæ <kocio@bigfoot.com>\n"
 "Language-Team: Polski <pl@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Type: text/plain; charset=ISO 8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.6\n"
 
@@ -119,6 +119,26 @@ msgstr "Otwórz"
 msgid "Preferences"
 msgstr "Preferencje"
 
+#. ../themes/Crux/theme.jl
+msgid "Crux Theme"
+msgstr "Motyw Crux"
+
+#. ../themes/Crux/theme.jl
+msgid "Accent color for focused windows (if unset uses the GTK+ selection color)."
+msgstr "Akcentowany kolor aktywnych okien (je¶li niezaznaczone u¿ywa koloru wyboru GTK+)."
+
+#. ../themes/Crux/theme.jl
+msgid "Display the window's icon in its menu button."
+msgstr "Wy¶wietlanie ikony okna w przycisku menu."
+
+#. ../themes/Crux/theme.jl
+msgid "Display title buttons to mimic: \\w"
+msgstr "Wy¶wietlanie przycisków jak w: \\w"
+
+#. ../themes/gradient/theme.jl
+msgid "Gradient Theme"
+msgstr "Motyw Gradient"
+
 #. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
 msgstr "Kierunek nasycania w ramce z motywem \"gradient\"."
@@ -144,6 +164,10 @@ msgid "Use less memory when creating gradients, possibly affecting quality."
 msgstr "U¿yj mniejszej ilo¶ci pamiêci podczas nasycania (kosztem jako¶ci)."
 
 #. ../themes/mono/theme.jl
+msgid "Mono Theme"
+msgstr "Motyw Mono"
+
+#. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
 msgstr "Kolor nieaktywnych ramek (je¶li niezaznaczone u¿ywa koloru t³a GTK+)."
 
@@ -156,12 +180,20 @@ msgid "Text is \\w justified in window titles."
 msgstr "Tekst jest \\w justowany w paskach tytu³owych okien."
 
 #. ../themes/simple/theme.jl
+msgid "Simple Theme"
+msgstr "Motyw Simple"
+
+#. ../themes/simple/theme.jl
 msgid "Color of inactive frames in `simple' frame style."
 msgstr "Kolor nieaktywnych ramek z motywem \"simple\"."
 
 #. ../themes/simple/theme.jl
 msgid "Color of active frames in `simple' frame style."
 msgstr "Kolor aktywnych ramek z motywem \"simple\"."
+
+#. ../themes/smaker/theme.jl
+msgid "SMaker Theme"
+msgstr "Motyw SMaker"
 
 #. ../themes/smaker/theme.jl
 msgid "Use black-on-white button images."
@@ -309,6 +341,36 @@ msgstr "Rzêdy:"
 msgid "Index:"
 msgstr "Indeks:"
 
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Window Cycling"
+msgstr "Cykliczna zmiana"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Sound"
+msgstr "D¼wiêk"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Edge Flipping"
+msgstr "Sklejanie krawêdzi"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Matched Windows"
+msgstr "Skojarzenia"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Shade Hover"
+msgstr "Zwijanie"
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tooltips"
+msgstr "Podpowiedzi"
+
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
 msgstr "Wywo³aj polecenie NAZWA; opcjonalnie z argumentem prefiksowym PFX-ARG."
@@ -328,6 +390,50 @@ msgstr "Wywo³uje listê poleceñ, jedno po drugim."
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Prompt for a command, execute it, and print any output to the screen."
 msgstr "Wczytaj polecenie, wykonaj je i wy¶wietl rezultaty."
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Focus"
+msgstr "Aktywacja"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Przenoszenie/zmiana rozmiaru"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Placement"
+msgstr "Po³o¿enie"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Appearance"
+msgstr "Wygl±d"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "Biurka"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "Skróty"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing/Maximizing"
+msgstr "Minimalizacja/maksymalizacja"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing"
+msgstr "_Minimalizuj"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Maximizing"
+msgstr "M_aksymalizuj"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "Ró¿ne"
 
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Invoke the user-customization system."
@@ -458,6 +564,14 @@ msgstr ""
 "nad ikon± menu okna (tylko skróty myszy). "
 
 #. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Zestaw skrótów aktywnych gdy wska¼nik znajduje siê\n"
+"nad ikon± zwijania okna (tylko skróty myszy). "
+
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Motion threshold for mouse pointer: \\wpixels"
 msgstr "Próg wra¿liwo¶ci myszy: \\wpixels"
 
@@ -466,8 +580,20 @@ msgid "Modifier key(s) used for default window manager shortcuts."
 msgstr "Klawisz modyfikuj±cy dla domy¶lnych skrótów mened¿era okien."
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display key-binding information in menu items."
+msgstr "Wy¶wietlanie skrótów w menu."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
 msgstr "_Minimalizuj"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Unmaximize"
+msgstr "_Przywróæ"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Maximize"
+msgstr "M_aksymalizuj"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
@@ -519,7 +645,7 @@ msgstr "w _dó³"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Stacking"
-msgstr "Warstwy"
+msgstr "_Warstwy"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Raise"
@@ -630,14 +756,17 @@ msgstr "Pomijanie pozycji okna okre¶lonej przez program."
 msgid "Keep transient windows stacked above: \\w"
 msgstr "Utrzymywanie okien potomnych ponad: \\w"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise the window to its highest allowed position in the stacking order."
 msgstr "Przywo³aj okno na wierzch stosu."
 
+#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower the window to its lowest allowed position in the stacking order."
 msgstr "Odwo³aj okno na spód stosu."
 
+#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid ""
 "If the window is at its highest possible position, then lower it to its\n"
@@ -727,8 +856,8 @@ msgid ""
 msgstr ""
 "Aktywacja okien nawet kiedy tego nie ¿±da³y..\n"
 "\n"
-"Okna powinny w³±czaæ ¿±danie 'accepts input' we w³a¶ciwo¶ci WM_HINTS "
-"aby okre¶liæ czy chc± aktywacji."
+"Okna powinny w³±czaæ ¿±danie 'accepts input' we w³a¶ciwo¶ci WM_HINTS aby "
+"okre¶liæ czy chc± aktywacji."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid ""
@@ -736,7 +865,8 @@ msgid ""
 "\n"
 "A negative number means outside the left window edge."
 msgstr ""
-"Przesuniêcie (%) od lewej krawêdzi okna gdy wska¼nik przenoszony jest do okna\n"
+"Przesuniêcie (%) od lewej krawêdzi okna gdy wska¼nik przenoszony jest do "
+"okna\n"
 "\n"
 "Liczba ujemna oznacza miejsce poza lew± krawêdzi± okna."
 
@@ -746,7 +876,8 @@ msgid ""
 "\n"
 "A negative number means outside the top window edge."
 msgstr ""
-"Przesuniêcie (%) od górnej krawêdzi okna gdy wska¼nik przenoszony jest do okna\n"
+"Przesuniêcie (%) od górnej krawêdzi okna gdy wska¼nik przenoszony jest do "
+"okna\n"
 "\n"
 "Liczba ujemna oznacza miejsce poza górn± krawêdzi± okna."
 
@@ -996,6 +1127,10 @@ msgstr "Uruchom przegl±darkê pomocy GNOME."
 msgid "Launch the GNOME about dialog."
 msgstr "Uruchom okno dialogowe \"O GNOME\"."
 
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete all windows in the group that the current window is a member of."
+msgstr "Usuwa wszystkie okna z grupy której cz³onkiem jest bie¿±ce okna"
+
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing an already grown window grows it again."
 msgstr "Czy zwiêkszanie ju¿ zwiêkszonego okna powoduje dalsze powiêkszenie."
@@ -1193,7 +1328,8 @@ msgid ""
 "Raise the group of windows that received the current event, then replay\n"
 "any pointer events that invoked the command."
 msgstr ""
-"Przywo³aj grupê okien która otrzyma³a bie¿±ce zdarzenie i powtórz zdarzenia,\n"
+"Przywo³aj grupê okien która otrzyma³a bie¿±ce zdarzenie i powtórz "
+"zdarzenia,\n"
 "które wywo³a³y polecenie."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
@@ -1332,6 +1468,22 @@ msgstr "Opcjonalne argumenty przekazywane do polecenia \"xterm\"."
 msgid "Start a new xterm."
 msgstr "Uruchom nowy xterm."
 
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the next viewport."
+msgstr "Przenie¶ okno na natêpny pulpit."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the previous viewport."
+msgstr "Przenie¶ na poprzedni pulpit."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the previous viewport."
+msgstr "Przenosi okno na poprzedni pulpit."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the next viewport."
+msgstr "Przenosi okno na nastêpny pulpit."
+
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Play sound effects for window events."
 msgstr "Odtwarzanie efektów d¼wiêkowych dla zdarzeñ mened¿era okien."
@@ -1381,6 +1533,10 @@ msgid "Warp pointer to opposite screen edge when flipping."
 msgstr "Przenoszenienie wska¼nika do przeciwnej krawêdzi ekranu podczas prze³±czania."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Error Handling"
+msgstr "Obs³uga b³êdów"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Emit a beeping sound when errors occur."
 msgstr "Wydaje d¼wiêk przy wyst±pieniu b³êdu."
 
@@ -1395,18 +1551,6 @@ msgstr "Brak b³êdów."
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display all errors that have occurred to the screen."
 msgstr "Wy¶wietlanie wszystkiech b³êdów na ekranie."
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Placement"
-msgstr "Po³o¿enie"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Focus"
-msgstr "Aktywacja"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Appearance"
-msgstr "Wygl±d"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
@@ -1537,7 +1681,7 @@ msgstr "Strona _WWW GNOME..."
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "About GNOME..."
-msgstr "O GNOME..."
+msgstr "O GNO_ME..."
 
 #. ../lisp/sawfish/wm/placement/smart.jl
 msgid ""
@@ -1752,7 +1896,7 @@ msgid "S_haded"
 msgstr "_zwijanie"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid "Focus windows when they are first displayed."
+msgid "Focus on application windows when they first appear."
 msgstr "Aktywacja okna przy pierwszym wy¶wietleniu."
 
 #. ../lisp/sawfish/wm/state/transient.jl

@@ -16,7 +16,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id: theme.jl,v 1.1 2001/01/20 02:40:30 jsh Exp $
+   $Id: theme.jl,v 1.2 2001/01/26 05:09:32 jsh Exp $
 
    Authors: John Harper <jsh@eazel.com>
 |#
@@ -154,19 +154,27 @@
     (inactive-clicked . ,(make-image "inactive:button-pressed.png"))
     (clicked . ,(make-image "active:button-pressed.png"))))
 
-;; 12x12
-(define minimize-fg
-  `((inactive . ,(make-image "inactive:minimize-button.png"))
-    (focused . ,(make-image "active:minimize-button.png"))))
-(define maximize-fg
-  `((inactive . ,(make-image "inactive:maximize-button.png"))
-    (focused . ,(make-image "active:maximize-button.png"))))
-(define close-fg
-  `((inactive . ,(make-image "inactive:close-button.png"))
-    (focused . ,(make-image "active:close-button.png"))))
-(define shade-fg
-  `((inactive . ,(make-image "inactive:shade-button.png"))
-    (focused . ,(make-image "active:shade-button.png"))))
+(let ((make-button-fg
+       (lambda (inactive active)
+	 `((inactive . ,inactive)
+	   (focused . ,active)
+	   (inactive-highlighted . ,active)
+	   (highlighted . ,active)
+	   (inactive-clicked . ,active)
+	   (clicked . ,active)))))
+
+  (define minimize-fg
+    (make-button-fg (make-image "inactive:minimize-button.png")
+		    (make-image "active:minimize-button.png")))
+  (define maximize-fg
+    (make-button-fg (make-image "inactive:maximize-button.png")
+		    (make-image "active:maximize-button.png")))
+  (define close-fg
+    (make-button-fg (make-image "inactive:close-button.png")
+		    (make-image "active:close-button.png")))
+  (define shade-fg
+    (make-button-fg (make-image "inactive:shade-button.png")
+		    (make-image "active:shade-button.png"))))
 
 
 ;; geometry computations
