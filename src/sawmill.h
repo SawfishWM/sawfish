@@ -35,6 +35,10 @@
 #include <X11/Xlib.h>
 #include <Imlib.h>
 
+#ifndef rep_INTERFACE
+# define rep_INTERFACE 7		/* rep 0.10 */
+#endif
+
 typedef int bool;
 
 #ifdef rep_HAVE_UNIX
