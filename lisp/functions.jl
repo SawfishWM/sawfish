@@ -35,23 +35,28 @@
 (defvar dont-avoid-ignored t)
 (defvar avoid-by-default nil)
 
+(defcustom transients-are-group-members t
+  "Transient windows are in the same group as their parent."
+  :type boolean
+  :group misc)
+
 (defvar xterm-program "xterm")
 (defvar xterm-args nil)
 
 ;; return a window called NAME, or nil
-(defun get-window-by-name (name)
+(defun get-window-by-name (name &optional list)
   (catch 'foo
     (mapc #'(lambda (w)
 	      (when (string= (window-name w) name)
-		(throw 'foo w))) (managed-windows))
+		(throw 'foo w))) (or list (managed-windows)))
     nil))
 
 ;; return the window with id ID, or nil
-(defun get-window-by-id (id)
+(defun get-window-by-id (id &optional list)
   (catch 'foo
     (mapc #'(lambda (w)
 	      (when (= (window-id w) id)
-		(throw 'foo w))) (managed-windows))))
+		(throw 'foo w))) (or list (managed-windows)))))
 
 ;; execute FORMS with the server grabbed
 (defmacro with-server-grabbed (&rest forms)
@@ -120,9 +125,29 @@
 
 (defun windows-in-group (w)
   (let
-      ((group-id (or (window-group-id w) (window-id w))))
-    (delete-if-not #'(lambda (x)
-		       (eq (window-group-id x) group-id)) (managed-windows))))
+      ((windows (managed-windows))
+       group-id group tem)
+    (setq group-id (or (window-group-id w)
+		       (and transients-are-group-members
+			    (window-transient-p w)
+			    (setq tem (get-window-by-id
+				       (window-transient-p w) windows))
+			    (or (window-group-id tem) (window-id tem)))
+		       (window-id w)))
+    (setq group (filter  #'(lambda (x)
+			     (eq (or (window-group-id x)
+				     (window-id x)) group-id)) 
+				 windows))
+    (when transients-are-group-members
+      (mapc #'(lambda (w)
+		(when (window-transient-p w)
+		  (let
+		      ((parent (get-window-by-id
+				(window-transient-p w) windows)))
+		    (when (and parent (memq parent group) (not (memq w group)))
+		      (setq group (cons w group))))))
+	    windows))
+    group))
 
 (defun map-window-group (fun w)
   (mapc fun (windows-in-group w)))
