@@ -376,7 +376,10 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
     if (w->id != 0)
     {
 	if (destroyed == Qnil && from_error == Qnil)
+	{
+	    grab_window_events (w, FALSE);
 	    remove_window_frame (w);
+	}
 
 	if (from_error == Qnil)
 	    destroy_window_frame (w, FALSE);
