@@ -226,7 +226,9 @@
 
 (put 'wm-spec-type '_NET_WM_WINDOW_TYPE_DESKTOP
   (lambda (w)
-    (set-window-depth w wm-spec-desktop-layer)))
+    (set-window-depth w wm-spec-desktop-layer)
+    (window-put w 'fixed-position t)
+    (window-put w 'never-focus t)))
 
 (put 'wm-spec-type '_NET_WM_WINDOW_TYPE_DOCK
   (lambda (w)
