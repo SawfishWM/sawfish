@@ -1,3 +1,13 @@
+2001-02-07  John Harper  <jsh@eazel.com>
+
+	* colors.c (Fget_color): don't try to call XParseColor if we
+	have no display connection, just return nil. Patch from merlin
+	<merlin@merlin.org
+
+	* fonts.c (x_create_font_set): merged two calls to setlocale ()
+	into one. This also avoids problems with its possibly static
+	buffer
+
 2001-02-06  John Harper  <jsh@eazel.com>
 
 	* functions.c (functions_init): call XineramaQueryExtension

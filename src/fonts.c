@@ -356,12 +356,12 @@ x_create_font_set (char *xlfd, char ***missing,
 
     if (fs == 0)
     {
-	char *old_locale = setlocale (LC_CTYPE, 0);
+	char *old_locale;
 	if (*nmissing != 0)
-	    XFreeStringList(*missing);
-	setlocale (LC_CTYPE, "C");
+	    XFreeStringList (*missing);
+	old_locale = setlocale (LC_CTYPE, "C");
 	fs = XCreateFontSet (dpy, xlfd, missing, nmissing, def_string);
-	setlocale(LC_CTYPE, old_locale);
+	setlocale (LC_CTYPE, old_locale);
     }
 
     /* make XLFD font name for pattern analysis */
