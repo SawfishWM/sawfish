@@ -306,6 +306,9 @@ frame_part_destroyer (Lisp_Window *w)
 	if (fp->gc)
 	    XFreeGC (dpy, fp->gc);
 
+	XDeleteContext (dpy, fp->id, window_fp_context);
+	XDestroyWindow (dpy, fp->id);
+
 	next = fp->next;
 	rep_free (fp);
     }
@@ -656,7 +659,7 @@ list_frame_generator (Lisp_Window *w)
 	tem = Fget (w->frame_style, Qunshaped);
     else
 	tem = Qnil;
-    if (tem == Qnil)
+    if (tem == Qnil || w->shaped)
     {
 	XRectangle *rects = alloca (sizeof (XRectangle) * (nparts + 1));
 	int i;
