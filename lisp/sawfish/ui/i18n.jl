@@ -24,7 +24,8 @@
 (define-structure nokogiri-i18n
 
     (export i18n-lang
-	    i18n-filename)
+	    i18n-filename
+	    i18n-init)
 
     (open rep
 	  gettext
@@ -50,9 +51,9 @@
 	   (concat file #\. i18n-lang-base))
 	  (t file)))
 
-  ;; initialize gettext
-  (unless (get-command-line-option "--disable-nls")
-    (let ((locale-dir (wm-locale-dir)))
-      (when locale-dir
-	(bindtextdomain "sawfish" locale-dir)
-	(textdomain "sawfish")))))
+  (define (i18n-init)
+    (unless (get-command-line-option "--disable-nls")
+      (let ((locale-dir (wm-locale-dir)))
+	(when locale-dir
+	  (bindtextdomain "sawfish" locale-dir)
+	  (textdomain "sawfish"))))))

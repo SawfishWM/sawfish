@@ -43,7 +43,7 @@ L_OBJS = $(L_SRCS:.jl=.jlc)
 
 all : $(OBJS) $(W_OBJS) $(L_OBJS)
 
-nokogiri-main.jl : nokogiri-main.jl.in
+nokogiri-main.jl : nokogiri-main.jl.in ../config.status
 	sed -e "s|__nokogiridir__|$(nokogiridir)|" $< >$@
 
 install : all installdirs

@@ -30,6 +30,7 @@ exec rep "$0" "$@"
 (structure ()
 
     (open rep
+	  nokogiri-i18n
 	  nokogiri-shell
 	  nokogiri-group
 	  nokogiri-user-level)
@@ -58,6 +59,7 @@ exec rep "$0" "$@"
       (setq socket-id (string->number id))))
 
   (setq interrupt-mode 'exit)
+  (i18n-init)
   (run-shell socket-id))
 
 ;; Local variables:
