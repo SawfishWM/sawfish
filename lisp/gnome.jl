@@ -109,7 +109,7 @@
   (cond ((eq type '_WIN_WORKSPACE)
 	 (select-workspace (aref data 0))
 	 t)
-	((eq type '_WIN_STATE)
+	((and (eq type '_WIN_STATE) (windowp w))
 	 (let
 	     ((mask (aref data 0))
 	      (values (aref data 1))
@@ -137,7 +137,7 @@
 		     (and tem (zerop (logand values WIN_STATE_MAXIMIZED_HORIZ))))
 		 (maximize-window-horizontally-toggle w))))
 	 t)
-	((eq type '_WIN_LAYER)
+	((and (eq type '_WIN_LAYER) (windowp w))
 	 (set-window-depth w (- (aref data 0) WIN_LAYER_NORMAL))
 	 t)))
 
