@@ -27,6 +27,8 @@ int window_type;
 
 Lisp_Window *focus_window;
 
+int pending_destroys;
+
 static bool initialising;
 
 DEFSYM(add_window_hook, "add-window-hook");
@@ -346,6 +348,8 @@ add_window (Window id)
 
 	    Fungrab_server ();
 	}
+	else
+	    emit_pending_destroys ();
 
 	if (w->id != 0 && !initialising)
 	{
@@ -378,6 +382,8 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 	    destroy_window_frame (w, FALSE);
 
 	w->id = 0;
+	pending_destroys++;
+
 	/* gc will do the rest... */
     }
     else if (w->frame != 0 && from_error == Qnil)
@@ -398,17 +404,22 @@ fix_window_size (Lisp_Window *w)
 void
 emit_pending_destroys (void)
 {
-    Lisp_Window *w;
-again:
-    for (w = window_list; w != 0; w = w->next)
+    if (pending_destroys > 0)
     {
-	if (w->id == 0 && !w->destroyed)
+	Lisp_Window *w;
+    again:
+	for (w = window_list; w != 0; w = w->next)
 	{
-	    w->destroyed = 1;
-	    Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
-	    /* gc may have reordered the list, so we have to start
-	       at the beginning again.. */
-	    goto again;
+	    if (w->id == 0 && !w->destroyed)
+	    {
+		pending_destroys--;
+		w->destroyed = 1;
+		Fcall_window_hook (Qdestroy_notify_hook,
+				   rep_VAL(w), Qnil, Qnil);
+		/* gc may have reordered the list, so we have to start
+		   at the beginning again.. */
+		goto again;
+	    }
 	}
     }
 }
@@ -706,12 +717,16 @@ client windows.
     {
 	int i;
 	repv ret = Qnil;
+	rep_GC_root gc_ret;
 	for (i = 0; i < nchildren; i++)
 	{
 	    Lisp_Window *w = find_window_by_id (children[i]);
 	    if (w != 0)
 		ret = Fcons (rep_VAL(w), ret);
 	}
+	rep_PUSHGC(gc_ret, ret);
+	emit_pending_destroys ();
+	rep_POPGC;
 	return ret;
     }
     else
