@@ -21,12 +21,13 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-dialog
+(require 'nokogiri-interfaces)
 
-    (export ok-cancel-dialog)
+(define-structure nokogiri-dialog nokogiri-dialog-interface
 
     (open rep
 	  gtk
+	  nokogiri-gnome
 	  nokogiri-shell		;for main-window
 	  nokogiri-widget)		;for box- constants
 
@@ -35,9 +36,8 @@
     (let ((window (gtk-window-new 'dialog))
 	  (vbox (gtk-vbox-new nil box-spacing))
 	  (hbbox (gtk-hbutton-box-new))
-	  (ok (gtk-button-new-with-label (_ "OK")))
-	  (cancel (and ok-cancel-dialog
-		       (gtk-button-new-with-label (_ "Cancel")))))
+	  (ok (stock-button 'ok))
+	  (cancel (and ok-cancel-dialog (stock-button 'cancel))))
 
       (define (on-cancel)
 	(gtk-widget-destroy window))
@@ -67,7 +67,7 @@
       (gtk-signal-connect window "delete_event" on-cancel)
 
       (gtk-widget-show window)
-      (gtk-grab-add window)
+      ;;(gtk-grab-add window)
       (gtk-widget-grab-focus widget)
 
       window)))
