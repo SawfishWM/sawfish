@@ -51,6 +51,9 @@ static u_long meta_mod;
 
 static void grab_keymap_event (repv km, long code, long mods, bool grab);
 
+/* Called for unbound events */
+bool (*event_proxy_fun)(XEvent *ev, long code, long mods);
+
 
 /* Translate from X events to Lisp events */
 
@@ -284,6 +287,8 @@ eval_input_event(repv context_map)
 	/* Found a binding for this event; evaluate it. */
 	result = Fcall_command(cmd, Qnil);
     }
+    else if (event_proxy_fun && event_proxy_fun (current_x_event, code, mods))
+	;
     else
     {
 	/* An unbound key with no prefix keys. */
