@@ -23,24 +23,30 @@
 
 (provide 'transient)
 
-(defvar transient-frame nil-frame
-  "Frame used to decorate transient windows.")
+(defvar fallback-frameset '((default . default-frame)
+			    (shaped . default-frame)
+			    (transient . nil-frame)
+			    (shaped-transient . nil-frame)))
 
-(defvar shaped-frame default-frame
-  "Frame used to decorate shaped windows.")
+(defvar default-frameset fallback-frameset)
 
-(defvar shaped-transient-frame nil-frame
-  "Frame used to decorate shaped transient windows.")
+(defun window-type (w)
+  (if (window-transient-p w)
+      (if (window-shaped-p w)
+	  'shaped-transient
+	'transient)
+    (if (window-shaped-p w)
+	'shaped
+      'default)))
 
 ;; called from the add-window-hook
 (defun transient-add-window (w)
   (unless (window-frame w)
-    (if (window-transient-p w)
-	(if (window-shaped-p w)
-	    (set-window-frame w shaped-transient-frame)
-	  (set-window-frame w transient-frame))
-      (if (window-shaped-p w)
-	  (set-window-frame w shaped-frame)
-	(set-window-frame w default-frame)))))
+    (let
+	((type (window-type w))
+	 (set (or (window-get w 'frameset) default-frameset)))
+      (set-window-frame w (or (cdr (assq type set))
+			      (cdr (assq type fallback-frameset))
+			      default-frame)))))
 
 (add-hook 'add-window-hook 'transient-add-window t)
