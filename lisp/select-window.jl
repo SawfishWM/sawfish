@@ -19,7 +19,7 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defvar select-window-map (bind-keys (make-sparse-keymap)
+(defvar select-window-map (bind-keys (make-keymap)
 			    "Any-Click1" 'select-window-finished))
 
 ;; this function waits for the user to select a client window, then

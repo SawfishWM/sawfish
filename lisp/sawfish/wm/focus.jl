@@ -33,7 +33,7 @@
   :group focus)
 
 (defvar click-to-focus-keymap
-  (bind-keys (make-sparse-keymap)
+  (bind-keys (make-keymap)
     "Button1-Click1" 'focus-click))
 
 (defun focus-click (w)

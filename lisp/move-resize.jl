@@ -62,7 +62,7 @@
   :type number
   :range (0 . 64))
 
-(defvar move-resize-map (bind-keys (make-sparse-keymap)
+(defvar move-resize-map (bind-keys (make-keymap)
 			  "Any-PointerUp" 'move-resize-finished
 			  "Any-PointerMove" 'move-resize-motion))
 
