@@ -171,7 +171,7 @@
 		((vectorp prop)
 		 (setq prop (aref prop 0))))))
       (when (stringp prop)
-	(setq prop (quote-regexp prop)))
+	(setq prop (concat #\^ (quote-regexp prop) #\$)))
       prop))
 
   (define (define-match-window-group group name)
