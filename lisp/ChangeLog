@@ -1,3 +1,19 @@
+1999-12-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* tooltips.jl: ignore null keymaps; yellow background color
+
+	* sawmill-defaults.jl: turn on tooltips by default
+
+	* tooltips.jl: massively simplified how we know when to remove
+	the tooltip window--just hook into pre-command-hook and
+	frame-part-leave-hook
+
+	* stacking.jl (raise-window-and-pass-through-click): only call
+	forget-button-press if a frame part isn't clicked
+
+	* gnome-commands.jl (gnome-logout): should be --kill not --quit
+	(from Jens Finke <pearl@darkride.net>)
+
 1999-12-12  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.19

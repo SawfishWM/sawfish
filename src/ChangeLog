@@ -1,3 +1,14 @@
+1999-12-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (add_window): call send_synthetic_configure ()
+	after placing the window
+
+	* functions.c (Fdisplay_message): allow color names in
+	foreground and background atttributes, not just color objects
+
+	* frames.c (list_frame_generator): when client_unmapped changes
+	and the window is focused, refocus it
+
 1999-12-12  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.19
