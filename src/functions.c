@@ -72,7 +72,7 @@ Bring WINDOW to the top of the display.
     return win;
 }
 
-DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1, "W") /*
+DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1, "%W") /*
 ::doc:Sdelete-window::
 delete-window WINDOW
 
@@ -92,7 +92,7 @@ WINDOW may be a window object or a numeric window id.
     return win;
 }
 
-DEFUN_INT("destroy-window", Fdestroy_window, Sdestroy_window, (repv win), rep_Subr1, "W") /*
+DEFUN_INT("destroy-window", Fdestroy_window, Sdestroy_window, (repv win), rep_Subr1, "%W") /*
 ::doc:Sdestroy-window::
 destroy-window WINDOW
 
