@@ -145,7 +145,7 @@
 
 (defcustom workspace-names nil
   "Workspace names."
-  :type (list string "Name")
+  :type* `(list string ,(_ "Name"))
   :group workspace)
 
 ;; Currently active workspace, an integer

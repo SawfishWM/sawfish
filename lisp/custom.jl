@@ -38,6 +38,7 @@
 (define custom-option-alist '((:group . custom-group)
 			      (:require . custom-require)
 			      (:type . custom-type)
+			      (:type* . custom-type)
 			      (:options . custom-options)
 			      (:depends . custom-depends)
 			      (:user-level . custom-user-level)
