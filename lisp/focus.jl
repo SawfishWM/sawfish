@@ -46,6 +46,7 @@ is set.")
     (set-input-focus nil)))
 
 (defun focus-raise (w)
+  (sync-server)
   (sit-for 0 raise-window-timeout)
   (raise-window w))
 
