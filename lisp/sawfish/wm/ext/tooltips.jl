@@ -22,6 +22,7 @@
 (define-structure sawfish.wm.ext.tooltips
 
     (export display-tooltip
+	    display-tooltip-after-delay
 	    remove-tooltip)
 
     (open rep
@@ -145,6 +146,21 @@
 
   (add-hook 'unmap-notify-hook tooltips-unmapped)
 
+  (define (call-after-delay thunk)
+    (remove-tooltip)
+    (when tooltips-enabled
+      (setq tooltips-timer (make-timer (lambda ()
+					 (setq tooltips-timer nil)
+					 (thunk))
+				       (quotient tooltips-delay 1000)
+				       (mod tooltips-delay 1000)))
+      (unless (in-hook-p 'pre-command-hook remove-tooltip)
+	(add-hook 'pre-command-hook remove-tooltip))))
+
+  (define (display-tooltip-after-delay . args)
+    (call-after-delay (lambda ()
+			(apply display-tooltip args))))
+
 ;;; frame-part tooltips
 
   ;; each item is (EVENT-DESC . DOC)
@@ -200,17 +216,9 @@
 
   (define (tooltips-fp-enter win fp)
     (when tooltips-enabled
-      (let ((callback (lambda ()
-			(setq tooltips-timer nil)
-			(unless (clicked-frame-part)
-			  (display-fp-tooltip fp)))))
-	(when tooltips-timer
-	  (delete-timer tooltips-timer))
-	(setq tooltips-timer (make-timer callback
-					 (quotient tooltips-delay 1000)
-					 (mod tooltips-delay 1000)))
-	(unless (in-hook-p 'pre-command-hook remove-tooltip)
-	  (add-hook 'pre-command-hook remove-tooltip)))))
+      (call-after-delay (lambda ()
+			  (unless (clicked-frame-part)
+			    (display-fp-tooltip fp))))))
 
   (add-hook 'enter-frame-part-hook tooltips-fp-enter)
   (add-hook 'leave-frame-part-hook remove-tooltip))
