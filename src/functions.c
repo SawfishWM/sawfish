@@ -835,7 +835,7 @@ FORMAT sized quantities (8, 16 or 32).
 	else
 	{
 	    for (i = 0; i < rep_VECT_LEN(data) && i < 20; i++)
-		ev.data.b[0] = rep_INT(rep_VECTI(data, i));
+		ev.data.b[i] = rep_INT(rep_VECTI(data, i));
 	}
 	break;
 
@@ -843,14 +843,14 @@ FORMAT sized quantities (8, 16 or 32).
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
 	for (i = 0; i < rep_VECT_LEN(data) && i < 10; i++)
-	    ev.data.s[0] = rep_INT(rep_VECTI(data, i));
+	    ev.data.s[i] = rep_INT(rep_VECTI(data, i));
 	break;
 
     case 32:
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
 	for (i = 0; i < rep_VECT_LEN(data) && i < 5; i++)
-	    ev.data.l[0] = rep_INT(rep_VECTI(data, i));
+	    ev.data.l[i] = rep_INT(rep_VECTI(data, i));
 	break;
     }
 
