@@ -52,6 +52,30 @@ typedef int bool;
 /* #define DEBUG 1 */
 
 
+/* Event masks */
+
+/* Events selected on client windows */
+#define CLIENT_EVENTS (PropertyChangeMask | StructureNotifyMask \
+		       | ColormapChangeMask | VisibilityChangeMask)
+
+/* Events selected on the root window */
+#define ROOT_EVENTS (SubstructureRedirectMask | SubstructureNotifyMask \
+		     | ButtonPressMask | ButtonReleaseMask | KeyPressMask \
+		     | ButtonMotionMask | PointerMotionHintMask \
+		     | EnterWindowMask | LeaveWindowMask)
+
+/* Events selected on each frame part */
+#define FP_EVENTS (ButtonPressMask | ButtonReleaseMask | ButtonMotionMask \
+		   | PointerMotionHintMask | EnterWindowMask \
+		   | LeaveWindowMask | KeyPressMask | ExposureMask)
+
+/* Events selected on the frame window */
+#define FRAME_EVENTS (ButtonPressMask | ButtonReleaseMask | KeyPressMask \
+		      | ButtonMotionMask | PointerMotionHintMask \
+		      | EnterWindowMask | LeaveWindowMask | ExposureMask \
+		      | FocusChangeMask | SubstructureRedirectMask)
+
+
 /* Type defs */
 
 /* A managed window */
@@ -62,11 +86,19 @@ typedef struct lisp_window {
     repv plist;
     repv frame_style;
 
-    /* Is the client window mapped? */
+    /* Is the client window mapped? (by its app) */
     int mapped : 1;
 
     /* Is the frame visible? (not hidden by hide-window) */
     int visible : 1;
+
+    /* Is the client window hidden by us?
+       (controlled by window's `hide-client' property -- used for shading) */
+    int client_hidden : 1;
+
+    /* Is the client window unmapped by us?
+       (because it's !visible or client_hidden) */
+    int client_unmapped : 1;
 
     /* Is the client window reparented to the frame? */
     int reparented : 1;
@@ -94,6 +126,11 @@ typedef struct lisp_window {
     Window transient_for_hint;
     repv full_name, name, icon_name;
     int frame_vis;
+
+    /* The number of expected MapNotify and UnmapNotify events (i.e.
+       we caused them, so they don't reflect state changes by the
+       client itself) */
+    int local_maps, local_unmaps;
 
     /* Frame data */
     Window frame;
