@@ -104,7 +104,7 @@ DEFUN("draw-horizontal-gradient", Fdraw_horizontal_gradient,
 DEFUN("draw-diagonal-gradient", Fdraw_diagonal_gradient,
       Sdraw_diagonal_gradient, (repv img, repv from_, repv to_), rep_Subr3)
 {
-    u_char from[3], to[3];
+    double from[3], to[3];
     int width, height;
     int x, y;
     u_char *data;
@@ -127,15 +127,21 @@ DEFUN("draw-diagonal-gradient", Fdraw_diagonal_gradient,
     {
 	for (x = 0; x < width; x++)
 	{
-	    data[y*width*3+x*3+0] = (from[0]
-				     + (to[0] - from[0])
-				     * (x * y) / (width * height));
-	    data[y*width*3+x*3+1] = (from[1]
-				     + (to[1] - from[1])
-				     * (x * y) / (width *height));
-	    data[y*width*3+x*3+2] = (from[2]
-				     + (to[2] - from[2])
-				     * (x * y) / (width *height));
+	    data[y*width*3+x*3+0] = ((from[0]
+				      + ((to[0] - from[0]) / 2.0)
+				      * (((double) x / (double) width)
+					 + ((double) y / (double) height)))
+				     + 0.5);
+	    data[y*width*3+x*3+1] = ((from[1]
+				      + ((to[1] - from[1]) / 2.0)
+				      * (((double) x / (double) width)
+					 + ((double) y / (double) height)))
+				     + 0.5);
+	    data[y*width*3+x*3+2] = ((from[2]
+				      + ((to[2] - from[2]) / 2.0)
+				      * (((double) x / (double) width)
+					 + ((double) y / (double) height)))
+				     + 0.5);
 	}
     }
 
