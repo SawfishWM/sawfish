@@ -32,3 +32,6 @@
 	      (require 'gnome-int)
 	      (throw 'out t)))
 	  (list-x-properties 'root))))
+
+;; this is probably good for novice users?
+(require 'window-history)
