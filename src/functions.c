@@ -1026,6 +1026,8 @@ message_event_handler (XEvent *ev)
 {
     if (ev->type == Expose)
 	refresh_message_window ();
+    else if (ev->type == ButtonPress)
+	Fdisplay_message (Qnil, Qnil);
 }
 
 DEFSTRING(white, "white");
@@ -1180,7 +1182,7 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	    attr.override_redirect = True;
 	    attr.background_pixel = VCOLOR(message.bg)->pixel;
 	    attr.border_pixel = BlackPixel(dpy, screen_num);
-	    attr.event_mask = ExposureMask;
+	    attr.event_mask = ExposureMask | ButtonPressMask;
 	    attr.colormap = screen_cmap;
 	    message_win = XCreateWindow (dpy, root_window, x, y,
 					 message.width, height, 1,
