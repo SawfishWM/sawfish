@@ -78,6 +78,7 @@ DEFSYM(removed_classes, "removed-classes");
 DEFSYM(frame_part_classes, "frame-part-classes");
 DEFSYM(override_frame_part_classes, "override-frame-part-classes");
 DEFSYM(below_client, "below-client");
+DEFSYM(highlight_when_unfocused, "highlight-when-unfocused");
 
 static repv state_syms[fps_MAX];
 
@@ -123,13 +124,23 @@ bool frame_state_mutex;
    Note that all numeric quantities may be defined dynamically by
    substituting a function */
 
-static inline int
+static int
 current_state (struct frame_part *fp)
 {
-    return (fp->clicked ? fps_clicked
-	    : fp->highlighted ? fps_highlighted
-	    : (fp->win == focus_window) ? fps_focused
-	    : fps_normal);
+    if (fp->clicked)
+	return fps_clicked;
+    else if (fp->highlighted)
+    {
+	repv tem = Fsymbol_value (Qhighlight_when_unfocused, Qt);
+	if (fp->win == focus_window || !(rep_VOIDP(tem) || tem == Qnil))
+	    return fps_highlighted;
+	else
+	    return fps_normal;
+    }
+    else if (fp->win == focus_window)
+	return fps_focused;
+    else
+	return fps_normal;
 }
 
 /* Construct the frame window's shape mask from the union of all
@@ -1448,6 +1459,7 @@ frames_init (void)
 
     rep_INTERN(frame_part_classes);
     rep_INTERN(override_frame_part_classes);
+    rep_INTERN(highlight_when_unfocused);
 
     state_syms[fps_normal] = Qnil;
     state_syms[fps_focused] = Qfocused;
