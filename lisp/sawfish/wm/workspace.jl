@@ -567,7 +567,7 @@ previous workspace."
 	   (ws-add-window w)))
     (when raise-windows-on-uniconify
       (raise-window w))
-    (when focus-windows-on-uniconify
+    (when (and focus-windows-on-uniconify (window-wants-input-p w))
       (set-input-focus w))
     (call-window-hook 'uniconify-window-hook w)
     (call-window-hook 'window-state-change-hook w)))
@@ -591,7 +591,8 @@ previous workspace."
 	  (raise-window w))
 	(when warp-to-selected-windows
 	  (warp-cursor-to-window w))
-	(set-input-focus w)))))
+	(when (window-wants-input-p w)
+	  (set-input-focus w))))))
 
 (defun toggle-window-sticky (w)
   "Toggle the `stickiness' of the window--whether or not it is a member of
@@ -631,13 +632,13 @@ all workspaces."
 ;; Initialisation
 
 (unless (or batch-mode (memq 'ws-add-window add-window-hook))
-  (add-hook 'add-window-hook 'ws-add-window t)
-  (add-hook 'map-notify-hook 'ws-window-mapped t)
-  (add-hook 'destroy-notify-hook 'ws-remove-window t)
-  (add-hook 'client-message-hook 'ws-client-msg-handler t)
+  (add-hook 'add-window-hook 'ws-add-window)
+  (add-hook 'map-notify-hook 'ws-window-mapped)
+  (add-hook 'destroy-notify-hook 'ws-remove-window)
+  (add-hook 'client-message-hook 'ws-client-msg-handler)
   (add-hook 'before-add-window-hook 'ws-honour-client-state)
   (add-hook 'add-window-hook 'ws-set-client-state t)
-  (add-hook 'window-state-change-hook 'ws-set-client-state t)
+  (add-hook 'window-state-change-hook 'ws-set-client-state)
   (sm-add-saved-properties 'sticky 'iconified 'workspace)
   (mapc 'ws-honour-client-state (managed-windows))
   (mapc 'ws-add-window (managed-windows)))

@@ -183,7 +183,8 @@
 	(show-message (concat (and (window-get win 'iconified) ?[)
 			      (window-name win)
 			      (and (window-get win 'iconified) ?]))))
-      (set-input-focus win))))
+      (when (window-wants-input-p win)
+	(set-input-focus win)))))
 
 (defun x-cycle-exit ()
   (interactive)

@@ -88,12 +88,16 @@ workspaces.")
       (let
 	  ((parent (get-window-by-id (window-transient-p w))))
 	(when parent
-	  (when (and transients-get-focus (eq (input-focus) parent))
+	  (when (and transients-get-focus
+		     (eq (input-focus) parent)
+		     (window-wants-input-p w))
 	    (set-input-focus w)
 	    (setq set-focus t))
 	  (when transients-above-parents
 	    (set-window-depth w (1+ (window-get parent 'depth)))))))
-    (when (and (not set-focus) focus-windows-when-mapped)
+    (when (and (not set-focus)
+	       focus-windows-when-mapped
+	       (window-wants-input-p w))
       (set-input-focus w))))
 
 ;; If a transient window gets unmapped that currently has the input
@@ -114,8 +118,9 @@ workspaces.")
 						       (window-mapped-p x))))
 					     (stacking-order))))
 	  (setq parent (query-pointer-window))))
-      (set-input-focus parent))))
+      (when (window-wants-input-p parent)
+	(set-input-focus parent)))))
 
-(add-hook 'add-window-hook 'transient-add-window t)
-(add-hook 'map-notify-hook 'transient-map-window t)
-(add-hook 'unmap-notify-hook 'transient-unmap-window t)
+(add-hook 'add-window-hook 'transient-add-window)
+(add-hook 'map-notify-hook 'transient-map-window)
+(add-hook 'unmap-notify-hook 'transient-unmap-window)
