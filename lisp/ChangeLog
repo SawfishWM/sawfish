@@ -1,3 +1,11 @@
+2001-01-22  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/ext/auto-raise.jl (rw-on-focus, rw-out-focus):
+	reverted the test for (eq mode 'normal). (See 2000-11-02 entry
+	for reason.) This causes worse problems than it solves (e.g.
+	switch desktops, M-TAB to a new window, but the old window gets
+	raised)
+
 2001-01-20  John Harper  <jsh@eazel.com>
 
 	* version 0.36

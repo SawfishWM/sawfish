@@ -55,7 +55,7 @@
       (setq rw-timer nil)))
 
   (define (rw-on-focus w mode)
-    (when (and (not disable-auto-raise) (eq mode 'normal))
+    (when (not disable-auto-raise)
       (if (or (window-get w 'raise-on-focus) raise-windows-on-focus)
 	  (progn
 	    (setq rw-window w)
@@ -73,7 +73,7 @@
 	(rw-disable-timer))))
 
   (define (rw-out-focus w mode)
-    (when (and rw-timer (eq rw-window w) (eq mode 'normal))
+    (when (and rw-timer (eq rw-window w))
       (rw-disable-timer)))
 
   (add-hook 'focus-in-hook rw-on-focus)
