@@ -67,19 +67,18 @@ extern void send_client_message (Window w, Atom a, Time time);
 
 /* from events.c */
 extern void (*event_handlers[LASTEvent])(XEvent *ev);
-extern int current_mouse_x, current_mouse_y;
 extern Time last_event_time;
 extern XEvent *current_x_event;
 extern repv Qvisibility_notify_hook, Qdestroy_notify_hook, Qmap_notify_hook,
     Qunmap_notify_hook, Qenter_notify_hook, Qleave_notify_hook,
     Qfocus_in_hook, Qfocus_out_hook, Qclient_message_hook;
 extern repv Qiconify_window, Quniconify_window;
-extern void record_event_time (XEvent *ev);
 extern void map_request (XEvent *ev);
 extern void send_synthetic_configure (Lisp_Window *w);
 extern void handle_input_mask(long mask);
 extern void handle_sync_input(int fd);
 extern repv Fquery_pointer (void);
+extern repv Fquery_last_pointer (void);
 extern repv Fquery_pointer_window (void);
 extern void events_init (void);
 extern void events_kill (void);
