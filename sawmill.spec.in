@@ -57,6 +57,7 @@ make prefix=$RPM_BUILD_ROOT%{_prefix} install
 gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawmill*
 
 %files
+%defattr(-,root,root)
 %doc README NEWS FAQ TODO po/sawmill.pot
 %{_prefix}/bin/sawmill
 %{_prefix}/bin/sawmill-client
@@ -66,11 +67,13 @@ gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawmill*
 %{_prefix}/info/sawmill*
 
 %files gnome
+%defattr(-,root,root)
 %{_prefix}/bin/sawmill-capplet
 %{_prefix}/share/control-center/Sawmill
 %{_prefix}/share/gnome/wm-properties/Sawmill.desktop
 
 %files themer
+%defattr(-,root,root)
 %{_prefix}/bin/sawmill-themer
 %{_prefix}/share/sawmill/%{ver}/themer.glade
 
