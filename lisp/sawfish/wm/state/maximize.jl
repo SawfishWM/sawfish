@@ -26,6 +26,12 @@
 ;; This sets the window property `unmaximized-geometry' of each
 ;; currently maximize window to `(X Y W H)', the saved geometry.
 
+(defcustom maximize-avoided-windows-re nil
+  "Regular expression matching windows to avoid overlapping when maximizing."
+  :group misc
+  :type string
+  :allow-nil t)
+
 ;; called when a window is maximized, args (W &optional DIRECTION)
 (defvar window-maximized-hook nil)
 
@@ -36,30 +42,94 @@
   (window-get w 'unmaximized-geometry))
 
 (defun window-maximized-horizontally-p (w)
-  (and (zerop (car (window-position w)))
-       (= (car (window-frame-dimensions w)) (screen-width))))
+  (window-get w 'maximized-horizontally))
 
 (defun window-maximized-vertically-p (w)
-  (and (zerop (cdr (window-position w)))
-       (= (cdr (window-frame-dimensions w)) (screen-height))))
+  (window-get w 'maximized-vertically))
+
+(defun maximize-discard (w)
+  (window-put w 'unmaximized-geometry nil)
+  (window-put w 'maximized-vertically nil)
+  (window-put w 'maximized-horizontally nil))
+
+(defmacro maximize-edges-touching (start end edge)
+  `(> (- (min ,end (nth 2 ,edge)) (max ,start (nth 1 ,edge))) 0))
+
+(defun maximize-avoided-windows ()
+  (let
+      ((windows (managed-windows)))
+    (if maximize-avoided-windows-re
+	(delete-if-not #'(lambda (w)
+			   (or (window-get w 'maximize-avoid)
+			       (string-match
+				maximize-avoided-windows-re (window-name w))))
+		   windows)
+      windows)))
+
+(defun maximize-expand-edges (start end min max perp-1 perp-2 edges)
+  (mapc #'(lambda (edge)
+	    ;; EDGE is (PERP START END OPEN-P)
+	    (if (nth 3 edge)
+		(when (and (< (car edge) max)
+			   (> (car edge) perp-2)
+			   (> (car edge) min)
+			   (maximize-edges-touching start end edge))
+		  (setq max (car edge)))
+	      (when (and (> (car edge) min)
+			 (< (car edge) perp-1)
+			 (< (car edge) max)
+			 (maximize-edges-touching start end edge))
+		(setq min (car edge)))))
+	edges)
+  (cons min max))
+
+(defun maximize-do-horizontal (w edges coords dims fdims)
+  (let
+      ((x-span (maximize-expand-edges (cdr coords) (+ (cdr coords)
+						      (cdr fdims))
+				      0 (screen-width)
+				      (car coords) (+ (car coords)
+						      (car fdims))
+				      (car edges))))
+    (rplaca coords (car x-span))
+    (rplaca dims (- (- (cdr x-span) (car x-span))
+		    (- (car fdims) (car dims))))
+    w))
+
+(defun maximize-do-vertical (w edges coords dims fdims)
+  (let
+      ((y-span (maximize-expand-edges (car coords) (+ (car coords)
+						      (car fdims))
+				      0 (screen-height)
+				      (cdr coords) (+ (cdr coords)
+							  (cdr fdims))
+				      (cdr edges))))
+    (rplacd coords (car y-span))
+    (rplacd dims (- (- (cdr y-span) (car y-span))
+		    (- (cdr fdims) (cdr dims))))
+    w))
 
 ;;;###autoload
 (defun maximize-window (w &optional direction)
   "Maximize the dimensions of the window."
   (interactive "%W")
+  (require 'edges)
   (let
       ((coords (window-position w))
        (dims (window-dimensions w))
-       (fdims (window-frame-dimensions w)))
+       (fdims (window-frame-dimensions w))
+       (edges (get-visible-window-edges ':with-ignored-windows t
+					':windows (maximize-avoided-windows)
+					':include-root t)))
     (unless (window-get w 'unmaximized-geometry)
       (window-put w 'unmaximized-geometry (list (car coords) (cdr coords)
 						(car dims) (cdr dims))))
     (when (or (null direction) (eq direction 'horizontal))
-      (rplaca coords 0)
-      (rplaca dims (- (screen-width) (- (car fdims) (car dims)))))
+      (maximize-do-horizontal w edges coords dims fdims)
+      (window-put w 'maximized-horizontally t))
     (when (or (null direction) (eq direction 'vertical))
-      (rplacd coords 0)
-      (rplacd dims (- (screen-height) (- (cdr fdims) (cdr dims)))))
+      (maximize-do-vertical w edges coords dims fdims)
+      (window-put w 'maximized-vertically t))
     (move-window-to w (car coords) (cdr coords))
     (resize-window-to w (car dims) (cdr dims))
     (call-window-hook 'window-maximized-hook w (list direction))
@@ -76,10 +146,12 @@
     (when geom
       (when (or (null direction) (eq direction 'horizontal))
 	(rplaca coords (nth 0 geom))
-	(rplaca dims (nth 2 geom)))
+	(rplaca dims (nth 2 geom))
+	(window-put w 'maximized-horizontally nil))
       (when (or (null direction) (eq direction 'vertical))
 	(rplacd coords (nth 1 geom))
-	(rplacd dims (nth 3 geom)))
+	(rplacd dims (nth 3 geom))
+	(window-put w 'maximized-vertically nil))
       (resize-window-to w (car dims) (cdr dims))
       (move-window-to w (car coords) (cdr coords))
       (when (and (= (car coords) (nth 0 geom))
@@ -125,6 +197,56 @@ unmaximized."
   (maximize-window-toggle w 'horizontal))
 
 
+;; fill commands
+
+;;;###autoload
+(defun maximize-fill-window (w &optional direction)
+  "Maximize the window without obscuring any other windows."
+  (interactive "%W")
+  (let
+      ((maximize-avoided-windows-re ".*"))
+    (maximize-window w direction)))
+
+;;;###autoload
+(defun maximize-fill-window-vertically (w)
+  "Maximize the window vertically without obscuring any other windows."
+  (interactive "%W")
+  (maximize-fill-window w 'vertical))
+
+;;;###autoload
+(defun maximize-fill-window-horizontally (w)
+  (interactive "%W")
+  "Maximize the window horizontally without obscuring any other windows."
+  (maximize-fill-window w 'horizontal))
+
+;;;###autoload
+(defun maximize-fill-window-toggle (w &optional direction)
+  "Toggle the state of the window between maximized-filled and unmaximized."
+  (interactive "%W")
+  (if (window-maximized-p w)
+      (unmaximize-window w direction)
+    (maximize-fill-window w direction)))
+
+;;;###autoload
+(defun maximize-fill-window-vertically-toggle (w)
+  "Toggle the state of the window between vertically maximized-filled and
+unmaximized."
+  (interactive "%W")
+  (maximize-fill-window-toggle w 'vertical))
+
+;;;###autoload
+(defun maximize-fill-window-horizontally-toggle (w)
+  "Toggle the state of the window between horizontally maximized-filled and
+unmaximized."
+  (interactive "%W")
+  (maximize-fill-window-toggle w 'horizontal))
+
+
 ;; initialisation
 
-(sm-add-saved-properties 'unmaximized-geometry)
+(sm-add-saved-properties
+ 'unmaximized-geometry 'maximized-vertically 'maximized-hoizontally)
+
+;; XXX should discard maximized state of individual edges
+(add-hook 'after-move-hook 'maximize-discard)
+(add-hook 'after-resize-hook 'maximize-discard)
