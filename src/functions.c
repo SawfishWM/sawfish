@@ -41,6 +41,7 @@
 #endif
    
 #include "sawmill.h"
+#include <string.h>
 #include <X11/Xatom.h>
 
 /* Number of outstanding server grabs made; only when this is zero is
