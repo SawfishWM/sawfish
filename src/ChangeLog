@@ -1,5 +1,11 @@
 1999-09-25  John Harper  <john@dcs.warwick.ac.uk>
 
+	* events.c (handle_input_mask): ignore NoExpose and
+	GraphicsExpose events
+
+	* sawmill-ui.jl (build-file): new widget `file-name' for
+	selecting files
+
 	* frames.c, windows.c (list_frame_generator,
 	install_window_frame): client window is always left beneath any
 	overlapping frame parts

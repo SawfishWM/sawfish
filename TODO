@@ -20,9 +20,6 @@ Outstanding bugs
 
     Move cursor very slowly over frame holding button1
 
-  ! don't allow windows to be totally moved out of the viewport (or
-    give a method for bringing them back in)
-
   ! While moving or resizing, when you release button and move mouse
     out of frame very fast, frame remains in highlighted state
 
@@ -38,7 +35,7 @@ Outstanding bugs
   ! shaped frame parts overlapping shaped client windows lose
 
     does this need fixing..? similarly, shaped frame parts overlapping
-    each other will overwrite the lower parts mask..
+    each other will overwrite the lower part's mask..
 
   ! It's not possible to compile sawmill-ui.jl without an X connection
     (it requires 'gtk, which then calls gtk_init (), ...)
@@ -93,8 +90,9 @@ General tasks
 
   + option to maximize with frame outside the root boundaries?
 
-    if this is done, how does the window get unmaximized (since the
-    buttons that are probably on the title bar will be hidden)
+    but only put the border of the window outside, not the title
+
+    this would be hard to achieve (i.e. parsing the frame def)
 
   + option to disable moving/resizing in maximized state
 
