@@ -127,6 +127,26 @@ get_window_protocols (Lisp_Window *w)
     }
 }
 
+/* These two functions are used to bracket Xlib requests that would map,
+   unmap, or reparent the client window. They ensure that any
+   StructureNotifymask events generated between calling before_local_map ()
+   and after_local_map () are discarded, but no others (so that we don't
+   lose client-generated events) */
+
+void
+before_local_map (Lisp_Window *w)
+{
+    Fgrab_server ();
+    XSelectInput (dpy, w->id, CLIENT_EVENTS & ~StructureNotifyMask);
+}
+
+void
+after_local_map (Lisp_Window *w)
+{
+    XSelectInput (dpy, w->id, CLIENT_EVENTS);
+    Fungrab_server ();
+}
+
 
 /* manipulating the Lisp window structures */
 
@@ -216,12 +236,16 @@ install_window_frame (Lisp_Window *w)
     if (!w->reparented && w->frame != 0)
     {
 	XSelectInput (dpy, w->frame, FRAME_EVENTS);
+
+	before_local_map (w);
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
+	w->reparented = TRUE;
+	after_local_map (w);
+
 	XLowerWindow (dpy, w->id);	/* see end of list_frame_generator */
 	XAddToSaveSet (dpy, w->id);
-	w->reparented = TRUE;
-	w->reparenting = TRUE;
 	reset_frame_parts (w);
+
 	DB(("  reparented to %lx [%dx%d%+d%+d]\n",
 	    w->frame, w->frame_width, w->frame_height,
 	    w->frame_x, w->frame_y));
@@ -235,11 +259,14 @@ remove_window_frame (Lisp_Window *w)
     if (w->reparented)
     {
 	/* reparent the subwindow back to the root window */
+
+	before_local_map (w);
 	XReparentWindow (dpy, w->id, root_window, w->attr.x, w->attr.y);
+	w->reparented = FALSE;
+	after_local_map (w);
+
 	if (!w->mapped)
 	    XRemoveFromSaveSet (dpy, w->id);
-	w->reparented = FALSE;
-	w->reparenting = TRUE;
     }
 }
 
@@ -826,9 +853,10 @@ Prevent WINDOW from being displayed. See `show-window'.
 	    XUnmapWindow (dpy, VWIN(win)->frame);
 	    if (!VWIN(win)->client_unmapped)
 	    {
+		before_local_map (VWIN(win));
 		XUnmapWindow (dpy, VWIN(win)->id);
-		VWIN(win)->local_unmaps++;
 		VWIN(win)->client_unmapped = 1;
+		after_local_map (VWIN(win));
 	    }
 	}
 	VWIN(win)->visible = 0;
@@ -853,9 +881,10 @@ Ensure that WINDOW (if it has been mapped) is visible. See `hide-window'.
 	{
 	    if (VWIN(win)->client_unmapped && !VWIN(win)->client_hidden)
 	    {
+		before_local_map (VWIN(win));
 		XMapWindow (dpy, VWIN(win)->id);
-		VWIN(win)->local_maps++;
 		VWIN(win)->client_unmapped = 0;
+		after_local_map (VWIN(win));
 	    }
 	    XMapWindow (dpy, VWIN(win)->frame);
 	}
