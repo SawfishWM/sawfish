@@ -254,33 +254,42 @@ Note that calls to `grab-server' and `ungrab-server' _nest_.
 DEFUN("grab-pointer", Fgrab_pointer, Sgrab_pointer,
       (repv win, repv cursor), rep_Subr2) /*
 ::doc:Sgrab-pointer::
-grab-pointer WINDOW [CURSOR]
+grab-pointer [WINDOW] [CURSOR]
 
 Grab the mouse pointer and direct all pointer events to window object
 WINDOW. If CURSOR is defined and a cursor object, display this whilst
 the pointer is grabbed.
 
+If WINDOW is nil, or unviewable, the grab will be made on the root
+window.
+
 Returns non-nil if the grab succeeded.
 ::end:: */
 {
-    Window g_win = 0;
-    rep_DECLARE1(win, WINDOWP);
-    if (VWIN(win)->visible)
+    Window g_win;
+    int ret;
+
+    if (WINDOWP(win) && VWIN(win)->visible)
 	g_win = VWIN(win)->frame;
-    if (g_win == 0)
-	g_win = root_window;
-    if (XGrabPointer (dpy, g_win, False,
-		      ButtonPressMask | ButtonReleaseMask
-		      | PointerMotionMask | PointerMotionHintMask,
-		      GrabModeAsync, GrabModeAsync,
-		      None,
-		      CURSORP(cursor) ? VCURSOR(cursor)->cursor : None,
-		      last_event_time) == GrabSuccess)
-    {
-	return Qt;
-    }
     else
-	return Qnil;
+	g_win = root_window;
+
+again:
+    ret = XGrabPointer (dpy, g_win, False,
+			ButtonPressMask | ButtonReleaseMask
+			| PointerMotionMask | PointerMotionHintMask,
+			GrabModeAsync, GrabModeAsync,
+			None,
+			CURSORP(cursor) ? VCURSOR(cursor)->cursor : None,
+			last_event_time);
+    if (ret == GrabNotViewable && g_win != root_window)
+    {
+	/* fall back to the root window. */
+	g_win = root_window;
+	goto again;
+    }
+
+    return (ret == GrabSuccess) ? Qt : Qnil;
 }
 
 DEFUN("ungrab-pointer", Fungrab_pointer, Sungrab_pointer, (void), rep_Subr0) /*
