@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.43 1999/12/02 22:11:38 john Exp $
+;; $Id: sawmill-ui.jl,v 1.44 1999/12/05 16:28:20 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -1524,7 +1524,7 @@ exec rep "$0" "$@"
 ;; the language code for the current language
 (defun i18n-filename (file)
   (cond ((and ui-lang (file-exists-p (concat file ?. ui-lang)))
-	 (concat file ?. lang))
+	 (concat file ?. ui-lang))
 	((and ui-lang-base (file-exists-p (concat file ?. ui-lang-base)))
 	 (concat file ?. ui-lang-base))
 	(t
