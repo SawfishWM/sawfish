@@ -30,36 +30,34 @@
 
 ;; Options and variables
 
-(defcustom cycle-through-workspaces nil
-  "Moving through workspaces is cyclical."
+(defcustom workspace-boundary-mode 'stop
+  "Action when hitting the first or last workspaces while moving."
+  :type (set stop wrap-around keep-going)
+  :group workspace)
+
+(defcustom delete-workspaces-when-empty nil
+  "Workspaces are deleted when they contain no windows."
   :type boolean
   :group workspace)
 
-(defcustom delete-workspaces-when-empty t
-  "Workspaces are deleted when they contain no windows."
-  :type boolean
+(defcustom preallocated-workspaces 1
+  "The minimum number of workspaces that may exist."
+  :type number
+  :range (1 . nil)
+  :group workspace
+  :after-set (lambda ()
+	       (call-hook 'workspace-state-change-hook)))
+
+(defcustom workspace-columns 2
+  "Number of workspaces in a conceptual row."
+  :type number
+  :range (1 . nil)
   :group workspace)
 
 (defcustom uniconify-to-current-workspace t
   "Windows are uniconified onto the current workspace."
   :type boolean
   :group workspace)
-
-(defcustom workspace-jump-distance 2
-  "Number of workspaces to move when using the jump-workspaces-X commands."
-  :type number
-  :range (1 . nil)
-  :group workspace)
-
-(defcustom preallocated-workspaces 1
-  "The number of workspaces that are allocated automatically at startup."
-  :type number
-  :range (1 . nil)
-  :group workspace
-  :after-set (lambda ()
-	       (when (< total-workspaces preallocated-workspaces)
-		 (setq total-workspaces preallocated-workspaces))
-	       (call-hook 'workspace-state-change-hook)))
 
 (defcustom raise-windows-on-uniconify t
   "Windows are raised after being uniconified."
@@ -93,7 +91,6 @@
 
 ;; Currently active workspace, an integer >= 0
 (defvar current-workspace 0)
-(defvar total-workspaces preallocated-workspaces)
 
 (defvar static-workspace-menus
   '(("Insert" insert-workspace)
@@ -118,6 +115,29 @@
 	  (managed-windows))
     t))
 
+(defun ws-workspace-limits ()
+  (let
+      ((max-w current-workspace)
+       (min-w current-workspace)
+       tem)
+    (mapc #'(lambda (w)
+	      (when (setq tem (window-get w 'workspace))
+		(when (> tem max-w)
+		  (setq max-w tem))
+		(when (< tem min-w)
+		  (setq min-w tem)))) (managed-windows))
+    (cons min-w (max max-w (1- (+ preallocated-workspaces min-w))))))
+
+(defun ws-normalize-indices ()
+  (let
+      ((limits (ws-workspace-limits))
+       tem)
+    (mapc #'(lambda (w)
+	      (when (setq tem (window-get w 'workspace))
+		(window-put w 'workspace (- tem (car limits)))))
+	  (managed-windows))
+    (setq current-workspace (- current-workspace (car limits)))))
+
 (defun ws-insert-workspace (&optional before)
   (unless before
     (setq before (1+ current-workspace)))
@@ -129,8 +149,6 @@
 	(managed-windows))
   (when (> current-workspace before)
     (setq current-workspace (1+ current-workspace)))
-  (setq total-workspaces (1+ total-workspaces))
-  (call-hook 'add-workspace-hook (list (1+ before)))
   (call-hook 'workspace-state-change-hook)
   (1+ before))
 
@@ -138,11 +156,8 @@
 (defun ws-remove-workspace (&optional index)
   (unless index
     (setq index current-workspace))
-  (setq total-workspaces (1- total-workspaces))
-  (cond ((>= current-workspace total-workspaces)
-	 (setq current-workspace (1- total-workspaces)))
-	((> current-workspace index)
-	 (setq current-workspace (1- current-workspace))))
+  (when (> current-workspace index)
+    (setq current-workspace (1- current-workspace)))
   (mapc #'(lambda (w)
 	    (let
 		((space (window-get w 'workspace)))
@@ -154,13 +169,12 @@
 			   (not (window-get w 'iconified)))
 		  (show-window w)))))
 	(managed-windows))
-  (call-hook 'delete-workspace-hook (list index))
   (call-hook 'workspace-state-change-hook))
 
 (defun ws-move-workspace (index count)
   (let
       ((windows (managed-windows)))
-    (while (and (> count 0) (< index (1- total-workspaces)))
+    (while (> count 0)
       (mapc #'(lambda (w)
 		(let
 		    ((space (window-get w 'workspace)))
@@ -170,9 +184,11 @@
 			 ((= space (1+ index))
 			  (window-put w 'workspace index))))))
 	    windows)
+      (when (= current-workspace index)
+	(setq current-workspace (1+ current-workspace)))
       (setq count (1- count))
       (setq index (1+ index)))
-    (while (and (< count 0) (> index 0))
+    (while (< count 0)
       (mapc #'(lambda (w)
 		(let
 		    ((space (window-get w 'workspace)))
@@ -182,17 +198,23 @@
 			  ((= space (1- index))
 			   (window-put w 'workspace index))))))
 	    windows)
+      (when (= current-workspace index)
+	(setq current-workspace (1- current-workspace)))
       (setq count (1+ count))
       (setq index (1- index)))
-    (call-hook 'move-workspace-hook (list index))
     (call-hook 'workspace-state-change-hook)))
 
 (defun ws-after-removing-window (w space)
   (when (and delete-workspaces-when-empty
-	     (ws-workspace-empty-p space)
-	     (> total-workspaces 1))
+	     (ws-workspace-empty-p space))
     ;; workspace is now empty
-    (ws-remove-workspace space)))
+    (ws-remove-workspace space)
+    (ws-normalize-indices)
+    (let
+	((limits (ws-workspace-limits)))
+      (when (and (= current-workspace (cdr limits))
+		 (/= (car limits) (cdr limits)))
+	(select-workspace (1- current-workspace))))))
 
 (defun ws-remove-window (w &optional dont-hide)
   (let
@@ -207,10 +229,9 @@
 (defun ws-move-window (w new)
   (let
       ((space (window-get w 'workspace)))
-    (when space
+    (if (null space)
+	(ws-add-window-to-space w new)
       (window-put w 'workspace new)
-      (when (>= new total-workspaces)
-	(setq total-workspaces (1+ new)))
       (cond ((= space current-workspace)
 	     (hide-window w))
 	    ((and (= new current-workspace) (not (window-get w 'iconified)))
@@ -218,7 +239,9 @@
       (ws-after-removing-window w space)
       (call-hook 'workspace-state-change-hook))))
 
-(defun ws-switch-workspace (space)
+(defun select-workspace (space)
+  "Activate workspace number SPACE (from zero)."
+  (interactive "p")
   (unless (= current-workspace space)
     (when current-workspace
       (mapc #'(lambda (w)
@@ -252,8 +275,6 @@
 (defun ws-add-window-to-space (w space)
   (unless (or (window-get w 'sticky) (window-get w 'workspace))
     (window-put w 'workspace space)
-    (when (>= space total-workspaces)
-      (setq total-workspaces (1+ space)))
     (if (and (= space current-workspace) (not (window-get w 'iconified)))
 	(show-window w)
       (hide-window w))
@@ -301,15 +322,15 @@
 ;; Menu constructors
 
 (defun workspace-menu ()
-  (let
-      ((i 0)
+  (let*
+      ((limits (ws-workspace-limits))
+       (i (car limits))
        menu)
-    (while (< i total-workspaces)
-      (setq menu (cons (list (format nil "space %d%s"
-				     (1+ i)
+    (while (<= i (cdr limits))
+      (setq menu (cons (list (format nil "space %d%s" (1+ (- i (car limits)))
 				     (if (= i current-workspace) " *" ""))
 			     `(lambda ()
-				(ws-switch-workspace ,i)))
+				(select-workspace ,i)))
 		       menu))
       (setq i (1+ i)))
     (nconc (nreverse menu) (list nil) static-workspace-menus)))
@@ -320,11 +341,12 @@
   (popup-menu (workspace-menu)))
 
 (defun window-menu ()
-  (let
-      ((i 0)
+  (let*
+      ((limits (ws-workspace-limits))
        (windows (managed-windows))
+       (i (car limits))
        menu name)
-    (while (< i total-workspaces)
+    (while (<= i (cdr limits))
       (mapc #'(lambda (w)
 		(when (and (equal (window-get w 'workspace) i)
 			   (window-mapped-p w)
@@ -344,16 +366,16 @@
 					      ,(window-id w)))))
 				   menu))))
 	    windows)
-      (setq i (1+ i))
-      (unless (= i total-workspaces)
-	(setq menu (cons nil menu))))
+      (unless (or (= i (cdr limits)) (null (car menu)))
+	(setq menu (cons nil menu)))
+      (setq i (1+ i)))
     ;; search for any iconified windows that aren't anywhere else in the menu
     (let
 	(extra)
       (mapc #'(lambda (w)
 		(when (and (window-get w 'iconified)
 			   (not (window-get w 'workspace)))
-		  (setq extra (cons (list (window-name w)
+		  (setq extra (cons (list (concat ?[ (window-name w) ?])
 					  `(lambda ()
 					     (display-window
 					      (get-window-by-id
@@ -372,13 +394,22 @@
 
 ;; Commands
 
-(defun next-workspace ()
+(defun next-workspace (count)
   "Display the next workspace."
-  (interactive)
-  (cond ((< current-workspace (1- total-workspaces))
-	 (ws-switch-workspace (1+ current-workspace)))
-	(cycle-through-workspaces
-	 (ws-switch-workspace 0))))
+  (interactive "p")
+  (let
+      ((limits (ws-workspace-limits))
+       (target (+ current-workspace count)))
+    (if (and (>= target (car limits)) (<= target (cdr limits)))
+	(select-workspace target)
+      (cond ((eq workspace-boundary-mode 'stop))
+	    ((eq workspace-boundary-mode 'wrap-around)
+	     (select-workspace
+	      (+ (car limits)
+		 (mod (- target (car limits))
+		      (1+ (- (cdr limits) (car limits)))))))
+	    ((eq workspace-boundary-mode 'keep-going)
+	     (select-workspace target))))))
 
 (defun send-to-next-workspace (window)
   "Move the window to the next workspace. If no next workspace exists, one
@@ -387,21 +418,22 @@ will be created."
   (let
       ((space (window-get window 'workspace)))
     (when space
-      (ws-move-window window (1+ space)))))
+      (select-workspace (1+ space))
+      (ws-move-window window current-workspace))))
 
 (defun append-workspace-and-send (window)
   "Create a new workspace at the end of the list, and move the window to it."
   (interactive "%f")
-  (when (window-get window 'workspace)
-    (ws-move-window window total-workspaces)))
+  (let
+      ((limits (ws-workspace-limits)))
+    (when (window-get window 'workspace)
+      (select-workspace (1+ (cdr limits)))
+      (ws-move-window window current-workspace))))
 
-(defun previous-workspace ()
+(defun previous-workspace (count)
   "Display the previous workspace."
-  (interactive)
-  (cond ((> current-workspace 0)
-	 (ws-switch-workspace (1- current-workspace)))
-	(cycle-through-workspaces
-	 (ws-switch-workspace (1- total-workspaces)))))
+  (interactive "p")
+  (next-workspace (- count)))
 
 (defun send-to-previous-workspace (window)
   "Move the window to the previous workspace. If no such workspace exists, one
@@ -410,44 +442,41 @@ will be created."
   (let
       ((space (window-get window 'workspace)))
     (when space
-      (if (zerop space)
-	  (ws-insert-workspace -1)	;cheeky!
-	(setq space (1- space)))
-      (ws-move-window window space))))
+      (select-workspace (1- space))
+      (ws-move-window window current-workspace))))
 
 (defun prepend-workspace-and-send (window)
   "Create a new workspace at the start of the list, and move the window to it."
   (interactive "%f")
-  (when (window-get window 'workspace)
-    (ws-insert-workspace -1)
-    (ws-move-window window 0)))
-
-(defun select-workspace (index)
-  "Activate workspace number INDEX (from zero)."
-  (interactive "p")
-  (when (and (/= index current-workspace)
-	     (>= index 0) (< index total-workspaces))
-    (ws-switch-workspace index)))
+  (let
+      ((limits (ws-workspace-limits)))
+    (when (window-get window 'workspace)
+      (select-workspace (1- (car limits)))
+      (ws-move-window window current-workspace))))
 
 (defun merge-next-workspace ()
   "Delete the current workspace. Its member windows are relocated to the next
 workspace."
   (interactive)
-  (when (< current-workspace (1- total-workspaces))
-    (ws-remove-workspace current-workspace)))
+  (ws-remove-workspace current-workspace))
 
 (defun merge-previous-workspace ()
   "Delete the current workspace. Its member windows are relocated to the
 previous workspace."
   (interactive)
-  (when (and (> current-workspace 0) (> total-workspaces 1))
-    (ws-remove-workspace (1- current-workspace))))
+  (ws-remove-workspace (1- current-workspace)))
 
 (defun insert-workspace ()
   "Create a new workspace following the current workspace."
   (interactive)
   (ws-insert-workspace current-workspace)
-  (ws-switch-workspace (1+ current-workspace)))
+  (select-workspace (1+ current-workspace)))
+
+(defun insert-workspace-before ()
+  "Create a new workspace before the current workspace."
+  (interactive)
+  (ws-insert-workspace (1- current-workspace))
+  (select-workspace (- current-workspace 2)))
 
 (defun move-workspace-forwards (&optional count)
   "Move the current workspace one place to the right."
@@ -459,21 +488,20 @@ previous workspace."
   (interactive)
   (ws-move-workspace current-workspace (- (or count 1))))
 
-(defun jump-workspaces-forwards ()
-  "Move `workspace-jump-distance' workspaces forwards."
-  (interactive)
-  (let
-      ((dest (max 0 (min (1- total-workspaces)
-			 (+ current-workspace workspace-jump-distance)))))
-    (ws-switch-workspace dest)))
+(defun next-workspace-row (count)
+  "Move to the next workspace row."
+  (interactive "p")
+  (next-workspace (* count workspace-columns)))
     
-(defun jump-workspaces-backwards ()
-  "Move `workspace-jump-distance' workspaces backwards."
-  (interactive)
+(defun previous-workspace-row (count)
+  "Move to the previous workspace row."
+  (interactive "p")
+  (previous-workspace (* count workspace-columns)))
+
+(defun select-workspace-from-first (count)
   (let
-      ((dest (max 0 (min (1- total-workspaces)
-			 (- current-workspace workspace-jump-distance)))))
-    (ws-switch-workspace dest)))
+      ((limits (ws-workspace-limits)))
+    (select-workspace (- count (car limits)))))
 
 
 ;; some commands for moving directly to a workspace
@@ -484,7 +512,7 @@ previous workspace."
     (fset (intern (format nil "select-workspace:%s" i))
 	  `(lambda ()
 	     (interactive)
-	     (select-workspace ,(1- i))))
+	     (select-workspace-from-first ,(1- i))))
     (setq i (1+ i))))
 
 
@@ -530,8 +558,8 @@ previous workspace."
 	(uniconify-window w)
       (let
 	  ((space (window-get w 'workspace)))
-	(when (and space (not (= space current-workspace)))
-	  (ws-switch-workspace space))
+	(when space
+	  (select-workspace space))
 	(uniconify-window w)
 	(when (and unshade-selected-windows (window-get w 'shaded))
 	  (unshade-window w))
