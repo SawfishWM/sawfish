@@ -335,6 +335,15 @@ weights mean that the window is harder to cover.")
     (rplacd dims (min (+ (cdr dims) (* sp-padding 2)) (screen-height)))
     (setq point (funcall (if (eq mode 'first-fit) 'sp-first-fit 'sp-best-fit)
 			 dims grid rects))
+
+    (when (and (null point) (> sp-padding 0))
+      ;; no position, try with no padding
+      (setq dims (window-frame-dimensions w))
+      (rplaca dims (min (car dims) (screen-width)))
+      (rplacd dims (min (cdr dims) (screen-height)))
+      (setq point (funcall (if (eq mode 'first-fit) 'sp-first-fit 'sp-best-fit)
+			   dims grid rects)))
+
     (if point
 	(move-window-to
 	 w (+ (car point) sp-padding) (+ (cdr point) sp-padding))
