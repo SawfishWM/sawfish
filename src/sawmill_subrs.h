@@ -90,6 +90,7 @@ extern void synthesize_button_release (void);
 extern void map_request (XEvent *ev);
 extern void send_synthetic_configure (Lisp_Window *w);
 extern long get_event_mask (int type);
+extern Time get_server_timestamp (void);
 extern void register_event_handler (Window w, void (*fun)(XEvent *ev));
 extern void deregister_event_handler (Window w);
 extern void handle_input_mask(long mask);
