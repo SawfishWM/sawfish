@@ -171,7 +171,7 @@ server_init (void)
 	    if (access (rep_STR(dir), F_OK) != 0)
 		mkdir (rep_STR(dir), S_IRWXU | S_IRWXG | S_IRWXO);
 	    if(bind(socket_fd, (struct sockaddr *)&addr,
-		    sizeof(addr.sun_family) + strlen(addr.sun_path)) == 0)
+		    sizeof(addr.sun_family) + strlen(addr.sun_path) + 1) == 0)
 	    {
 		chmod (rep_STR(name), S_IRWXU);
 		if(listen(socket_fd, 5) == 0)
