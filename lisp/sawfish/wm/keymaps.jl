@@ -47,8 +47,8 @@
 	       (grab-keymap window-keymap)))
 
 (defcustom root-window-keymap (make-keymap)
-  "Keymap containing bindings active when the pointer is in the root window.
-(Only mouse-bindings are evaluated in this map.)"
+  "Keymap containing bindings active when the pointer is in the root window
+(or when window is focused)."
   :group bindings
   :type keymap)
 
