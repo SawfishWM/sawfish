@@ -72,3 +72,5 @@
 (put 'viewport-rows 'custom-obsolete t)
 (put 'viewport-dimensions 'custom-obsolete t)
 (put 'preallocated-workspaces 'custom-obsolete t)
+(put 'iconify-whole-group 'custom-obsolete t)
+(put 'uniconify-whole-group 'custom-obsolete t)

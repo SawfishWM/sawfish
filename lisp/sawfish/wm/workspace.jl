@@ -133,16 +133,6 @@
   :type boolean
   :group misc)
 
-(defcustom iconify-whole-group nil
-  "Iconifying a window iconifies its whole group."
-  :type boolean
-  :group (min-max iconify))
-
-(defcustom uniconify-whole-group nil
-  "Uniconifying a window uniconifies its whole group."
-  :type boolean
-  :group (min-max iconify))
-
 (defcustom workspace-names nil
   "Workspace names."
   :type* `(list string ,(_ "Name"))

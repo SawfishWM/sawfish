@@ -1,4 +1,4 @@
-#| nokogiri-interfaces.jl -- module interfaces
+#| nokogiri-interfaces.jl -- module interfaces  -*- lisp -*-
 
    $Id$
 
@@ -40,11 +40,9 @@
   (export define-config-item
 	  initialize-configs))
 
-(define-interface nokogiri-dialog-interface
-  (export ok-cancel-dialog))
-
 (define-interface nokogiri-gnome-interface
-  (export stock-button))
+  (export stock-button
+	  simple-dialog))
 
 (define-interface nokogiri-group-interface
   (export group-real-name

@@ -234,4 +234,6 @@
 (autoload 'cycle-class "x-cycle" t)
 (autoload 'maximize-find-workarea "maximize")
 (autoload 'raise-transients-and-pass-through-click "raise-commands" t)
+(autoload 'iconify-transient-group "groups" t)
+(autoload 'uniconify-transient-group "groups" t)
 ;;; ::autoload-end::
