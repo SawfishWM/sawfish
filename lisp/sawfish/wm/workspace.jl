@@ -38,10 +38,10 @@ workspace.")
 
 ;; List of all workspaces; a workspace is `(workspace WINDOWS...)'.
 ;; Each window has its `workspace' property set to the workspace it's
-;; a member of.
+;; a member of. [src/gnome.c accesses this variable]
 (defvar ws-workspaces nil)
 
-;; Currently active workspace
+;; Currently active workspace. [src/gnome.c accesses this variable]
 (defvar ws-current-workspace nil)
 
 (defvar static-workspace-menus
@@ -58,7 +58,8 @@ workspace.")
   (when (and ws-current-workspace
 	     (eq space ws-current-workspace)
 	     (not (window-get w 'iconified)))
-    (show-window w)))
+    (show-window w))
+  (call-hook 'add-to-workspace-hook (list w)))
 
 ;; usually called from the add-window-hook
 (defun ws-add-window (w)
@@ -67,20 +68,24 @@ workspace.")
 	(progn
 	  ;; initialisation
 	  (setq ws-current-workspace (list 'workspace w))
-	  (setq ws-workspaces (list ws-current-workspace)))
+	  (setq ws-workspaces (list ws-current-workspace))
+	  (call-hook 'add-workspace-hook (list ws-current-workspace)))
       (rplacd ws-current-workspace
 	      (nconc (delq w (cdr ws-current-workspace)) (list w))))
     (window-put w 'workspace ws-current-workspace)
     (unless (window-visible-p w)
-      (show-window w))))
+      (show-window w))
+    (call-hook 'add-to-workspace-hook (list w))))
 
 (defun ws-remove-window (w)
   (let
       ((space (window-get w 'workspace)))
     (when space
+      (call-hook 'remove-from-workspace-hook (list w))
       (rplacd space (delq w (cdr space)))
       (when (and delete-workspaces-when-empty (null (cdr space)))
 	;; workspace is now empty
+	(call-hook 'delete-workspace-hook space)
 	(when (eq ws-current-workspace space)
 	  (ws-switch-workspace (or (nth 1 (memq space ws-workspaces))
 				   (car ws-workspaces))))
@@ -219,6 +224,14 @@ will be created."
       ((windows (filter 'window-visible-p (cdr ws-current-workspace))))
     (set-input-focus (or (nth 1 (memq (input-focus) windows))
 			 (car windows)))))
+
+(defun select-workspace (index)
+  "Activate workspace number INDEX (from zero)."
+  (interactive "p")
+  (let
+      ((space (nth index ws-workspaces)))
+    (when (and space (not (eq space ws-current-workspace)))
+      (ws-switch-workspace space))))
 
 
 ;; Iconification (but without icons)
