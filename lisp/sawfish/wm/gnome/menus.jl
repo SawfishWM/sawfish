@@ -51,7 +51,8 @@
 	  (when (file-exists-p (expand-file-name "gnome-session" tem))
 	    (throw 'out (expand-file-name "../share/gnome" tem)))
 	  (setq point (1+ end))))
-      nil))
+      ;; default to /usr/share/gnome, better than nothing at all
+      "/usr/share/gnome"))
 
   (defvar gnome-menu-lang (let ((lang (or (getenv "LANGUAGE")
 					  (getenv "LC_ALL")

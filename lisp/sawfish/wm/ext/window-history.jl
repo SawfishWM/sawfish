@@ -135,11 +135,14 @@
 
     (define (get-prop p) (nth 2 (get-x-property w p)))
 
-    (nconc (if (listp window-history-key-property)
-	       (mapcar get-prop window-history-key-property)
-	     (list (get-prop window-history-key-property)))
-	   (and (window-transient-p w)
-		(list (window-name w)))))
+    (let ((props (append (if (listp window-history-key-property)
+			     window-history-key-property
+			   (list window-history-key-property))
+			 (and (window-transient-p w)
+			      (list 'WM_NAME)))))
+      ;; This isn't the best method of creating keys, but it
+      ;; preserves some backwards compatibility with old versions
+      (mapconcat identity (delq nil (mapcar get-prop props)) "/")))
 
   (define (window-history-ref w)
     (let ((class (window-history-key w)))
