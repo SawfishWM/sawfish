@@ -216,6 +216,7 @@ struct frame_part {
     int clicked : 1;
     int highlighted : 1;
     int pending_refresh : 1;
+    int below_client : 1;
 
     repv text;			/* may be nil, a string, or a function */
     repv x_justify, y_justify;
