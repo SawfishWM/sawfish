@@ -35,8 +35,8 @@ static long event_masks[LASTEvent];
 /* Most recent known mouse position relative to the root window */
 static int current_mouse_x, current_mouse_y;
 
-/* ..And the position before the most recently known */
-static int previous_mouse_x, previous_mouse_y;
+/* ..and the position at the last button-press */
+static int button_press_mouse_x = -1, button_press_mouse_y = -1;
 
 /* Most recently seen server timestamp. May be CurrentTime if we
    haven't seen a timestamp recently */
@@ -121,12 +121,28 @@ record_event_time (XEvent *ev)
 }
 
 static void
-record_mouse_position (int x, int y)
+record_mouse_position (int x, int y, int event_type)
 {
-    previous_mouse_x = current_mouse_x;
-    previous_mouse_y = current_mouse_y;
     current_mouse_x = x;
     current_mouse_y = y;
+    switch (event_type)
+    {
+    case ButtonPress:
+	button_press_mouse_x = x;
+	button_press_mouse_y = y;
+	break;
+
+    case MotionNotify:
+	if (button_press_mouse_x == -1)
+	{
+	    button_press_mouse_x = x;
+	    button_press_mouse_y = y;
+	}
+	break;
+
+    case ButtonRelease:
+	button_press_mouse_x = button_press_mouse_y = -1;
+    }
     current_event_updated_mouse = TRUE;
 }
 
@@ -167,7 +183,7 @@ colormap_notify (XEvent *ev)
 static void
 key_press (XEvent *ev)
 {
-    record_mouse_position (ev->xkey.x_root, ev->xkey.y_root);
+    record_mouse_position (ev->xkey.x_root, ev->xkey.y_root, ev->type);
 
     /* Don't look for a context map, frame parts are never focused */
     eval_input_event (Qnil);
@@ -209,6 +225,15 @@ unclick_current_fp (void)
     }
 }
 
+/* Called when the pointer is ungrabbed (i.e. no ButtonRelease
+   event will follow) */
+void
+synthesize_button_release (void)
+{
+    unclick_current_fp ();
+    button_press_mouse_x = button_press_mouse_y = -1;
+}
+
 static void
 button_press (XEvent *ev)
 {
@@ -216,7 +241,7 @@ button_press (XEvent *ev)
     Lisp_Window *w = 0;
     repv context_map = Qnil;
 
-    record_mouse_position (ev->xbutton.x_root, ev->xbutton.y_root);
+    record_mouse_position (ev->xbutton.x_root, ev->xbutton.y_root, ev->type);
 
     fp = find_frame_part_by_window (ev->xbutton.window);
     if (fp != 0)
@@ -245,6 +270,9 @@ button_press (XEvent *ev)
 	rep_throw_value = old_throw;
     }
 
+    if (ev->type == ButtonRelease)
+	button_press_mouse_x = button_press_mouse_y = -1;
+
     XAllowEvents (dpy, AsyncPointer, last_event_time);
 }
 
@@ -268,7 +296,7 @@ motion_notify (XEvent *ev)
     if(XQueryPointer(dpy, ev->xmotion.window,
 		     &tmpw, &tmpw, &x, &y, &tmp, &tmp, &tmp))
     {
-	record_mouse_position (x, y);
+	record_mouse_position (x, y, ev->type);
     }
 
     fp = find_frame_part_by_window (ev->xmotion.window);
@@ -921,7 +949,7 @@ the server, otherwise it's taken from the current event (if possible).
 	if(XQueryPointer(dpy, root_window, &tmpw, &tmpw,
 			 &x, &y, &tmp, &tmp, &tmp))
 	{
-	    record_mouse_position (x, y);
+	    record_mouse_position (x, y, -1);
 	}
 	emit_pending_destroys ();
     }
@@ -929,17 +957,22 @@ the server, otherwise it's taken from the current event (if possible).
 		  rep_MAKE_INT(current_mouse_y));
 }
 
-DEFUN("query-last-pointer", Fquery_last_pointer, Squery_last_pointer,
-      (void), rep_Subr0) /*
-::doc:Squery-last-pointer::
-query-last-pointer
+DEFUN("query-button-press-pointer", Fquery_button_press_pointer,
+      Squery_button_press_pointer, (void), rep_Subr0) /*
+::doc:Squery-button-press-pointer::
+query-button-press-pointer
 
-Returns (MOUSE-X . MOUSE-Y) representing the second most recent mouse
-pointer position, relative to the root window.
+Returns (MOUSE-X . MOUSE-Y) representing the mouse position relative to
+the root window at the last button-press event.
 ::end:: */
 {
-    return Fcons (rep_MAKE_INT(previous_mouse_x),
-		  rep_MAKE_INT(previous_mouse_y));
+    if (button_press_mouse_x != -1)
+    {
+	return Fcons (rep_MAKE_INT(button_press_mouse_x),
+		      rep_MAKE_INT(button_press_mouse_y));
+    }
+    else
+	return Qnil;
 }
 
 DEFUN("query-pointer-window", Fquery_pointer_window, Squery_pointer_window, (void), rep_Subr0) /*
@@ -1164,7 +1197,7 @@ events_init (void)
     event_masks[MappingNotify] = StructureNotifyMask | SubstructureNotifyMask;
 
     rep_ADD_SUBR(Squery_pointer);
-    rep_ADD_SUBR(Squery_last_pointer);
+    rep_ADD_SUBR(Squery_button_press_pointer);
     rep_ADD_SUBR(Squery_pointer_window);
     rep_ADD_SUBR(Saccept_x_input);
     rep_ADD_SUBR(Scurrent_event_window);
