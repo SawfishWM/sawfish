@@ -2116,10 +2116,13 @@ Note that calls to @code{grab-server} and @code{ungrab-server}
 Evaluate forms with the server grabbed. Releases the grab afterwards.
 @end defmac
 
-@defun grab-pointer window &optional cursor
+@defun grab-pointer &optional window cursor
 Grab the mouse pointer and direct all pointer events to window object
 @var{window}. If @var{cursor} is defined and a cursor object, display
 this while the pointer is grabbed.
+
+If @var{window} is @code{nil}, or unviewable, the grab will be made on
+the root window.
 
 Returns @code{y} if the grab succeeded.
 @end defun
