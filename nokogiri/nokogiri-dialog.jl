@@ -49,20 +49,22 @@
       (gtk-window-set-wmclass window "ok_cancel_dialog" "Nokogiri")
       (gtk-container-border-width window box-border)
 
-      (gtk-container-add vbox widget)
       (gtk-button-box-set-layout hbbox 'end)
       (gtk-box-pack-start hbbox ok)
       (when cancel
 	(gtk-box-pack-end hbbox cancel))
       (gtk-box-pack-end vbox hbbox)
       (gtk-container-add window vbox)
+      (gtk-widget-show-all vbox)
+
+      (gtk-container-add vbox widget)
 
       (when cancel
 	(gtk-signal-connect cancel "clicked" on-cancel))
       (gtk-signal-connect ok "clicked" (if ok-callback on-ok on-cancel))
       (gtk-signal-connect window "delete_event" on-cancel)
 
-      (gtk-widget-show-all window)
+      (gtk-widget-show window)
       (gtk-grab-add window)
       (gtk-widget-grab-focus widget)
 
