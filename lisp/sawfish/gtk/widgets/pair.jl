@@ -29,13 +29,17 @@
 
   ;; (pair CAR-SPEC CDR-SPEC)
 
-  (define (make-pair-item changed-callback left right &optional use-vbox)
+  (define (make-pair-item changed-callback left right
+			  &optional use-vbox reversed)
     (let ((hbox ((if use-vbox gtk-vbox-new gtk-hbox-new) nil box-spacing))
 	  (left-widget (make-widget left changed-callback))
 	  (right-widget (make-widget right changed-callback)))
 
-      (gtk-container-add hbox (widget-gtk-widget left-widget))
+      (unless reversed
+	(gtk-container-add hbox (widget-gtk-widget left-widget)))
       (gtk-container-add hbox (widget-gtk-widget right-widget))
+      (when reversed
+	(gtk-container-add hbox (widget-gtk-widget left-widget)))
       (gtk-widget-show hbox)
 
       (lambda (op)
