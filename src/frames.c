@@ -71,6 +71,9 @@ DEFSYM(cursor, "cursor");
 DEFSYM(focused, "focused");
 DEFSYM(highlighted, "highlighted");
 DEFSYM(clicked, "clicked");
+DEFSYM(inactive, "inactive");
+DEFSYM(inactive_highlighted, "inactive-highlighted");
+DEFSYM(inactive_clicked, "inactive-clicked");
 DEFSYM(hide_client, "hide-client");
 DEFSYM(class, "class");
 DEFSYM(removable, "removable");
@@ -78,7 +81,6 @@ DEFSYM(removed_classes, "removed-classes");
 DEFSYM(frame_part_classes, "frame-part-classes");
 DEFSYM(override_frame_part_classes, "override-frame-part-classes");
 DEFSYM(below_client, "below-client");
-DEFSYM(highlight_when_unfocused, "highlight-when-unfocused");
 
 static repv state_syms[fps_MAX];
 
@@ -100,8 +102,10 @@ static rep_GC_root *gc_parts;
 
 	background . IMAGE-OR-COLOR
 	background . (NORMAL FOCUSED HIGHLIGHTED CLICKED)
+	background . ((STATE . VALUE) ...)
 	foreground . COLOR
 	foreground . (NORMAL FOCUSED HIGHLIGHTED CLICKED)
+	foreground . ((STATE . VALUE) ...)
 
 	renderer . FUNCTION
 	render-scale . INTEGER
@@ -112,6 +116,7 @@ static rep_GC_root *gc_parts;
 
 	font . FONT
 	font . (NORMAL FOCUSED HIGHLIGHTED CLICKED)
+	font . ((STATE . FONT) ...)
 
 	left-edge . POSITION-REL-LEFT
 	right-edge . POSITION-REL-RIGHT
@@ -125,6 +130,9 @@ static rep_GC_root *gc_parts;
 
 	below-client . t
 
+   STATE's are one of: inactive, focused, highlighted, clicked,
+   inactive-highlighted, inactive-clicked.
+
    Note that all numeric quantities may be defined dynamically by
    substituting a function */
 
@@ -132,19 +140,23 @@ static int
 current_state (struct frame_part *fp)
 {
     if (fp->clicked)
-	return fps_clicked;
+    {
+	if (fp->win == focus_window)
+	    return fps_clicked;
+	else
+	    return fps_inactive_clicked;
+    }
     else if (fp->highlighted)
     {
-	repv tem = Fsymbol_value (Qhighlight_when_unfocused, Qt);
-	if (fp->win == focus_window || !(rep_VOIDP(tem) || tem == Qnil))
+	if (fp->win == focus_window)
 	    return fps_highlighted;
 	else
-	    return fps_normal;
+	    return fps_inactive_highlighted;
     }
     else if (fp->win == focus_window)
 	return fps_focused;
     else
-	return fps_normal;
+	return fps_inactive;
 }
 
 /* Construct the frame window's shape mask from the union of all
@@ -757,6 +769,99 @@ get_integer_prop (Lisp_Window *w, repv prop, repv elt,
 	return Qnil;
 }
 
+static bool
+get_pattern_prop (Lisp_Window *w, repv *data, repv (*conv)(repv data),
+		  repv prop, repv elt, repv class, repv ov_class)
+{
+    int i;
+    repv tem;
+
+    tem = fp_assq (prop, elt, class, ov_class);
+    if (tem != Qnil)
+    {
+	if (Ffunctionp (rep_CDR(tem)) != Qnil)
+	    tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
+	else
+	    tem = rep_CDR(tem);
+	if (!tem)
+	    return FALSE;
+	if (!rep_CONSP(tem))
+	{
+	    /* single value pattern */
+	    data[0] = tem;
+	    for (i = 1; i < fps_MAX; i++)
+		data[i] = data[0];
+	}
+	else if (!rep_CONSP(rep_CAR(tem)))
+	{
+	    /* list of four elements: (NORMAL FOCUSED HIGHLIGHTED CLICKED) */
+
+	    static int map[4] = {
+		fps_inactive, fps_focused, fps_highlighted, fps_clicked
+	    };
+
+	    for (i = 0; i < 4; i++)
+	    {
+		data[map[i]] = rep_CAR(tem);
+		if (rep_CONSP(rep_CDR(tem)))
+		    tem = rep_CDR(tem);
+	    }
+	}
+	else
+	{
+	    /* alist of elements (STATE . VALUE) */
+
+	    while (rep_CONSP(tem) && rep_CONSP(rep_CAR(tem)))
+	    {
+		repv state = rep_CAR(rep_CAR(tem));
+		int idx = fps_none;
+
+		if (state == Qinactive)
+		    idx = fps_inactive;
+		else if (state == Qfocused)
+		    idx = fps_focused;
+		else if (state == Qhighlighted)
+		    idx = fps_highlighted;
+		else if (state == Qclicked)
+		    idx = fps_clicked;
+		else if (state == Qinactive_highlighted)
+		    idx = fps_inactive_highlighted;
+		else if (state == Qinactive_clicked)
+		    idx = fps_inactive_clicked;
+		if (idx != fps_none)
+		    data[idx] = rep_CDR(rep_CAR(tem));
+
+		tem = rep_CDR(tem);
+	    }
+	}
+
+	/* now handle string conversions */
+	for (i = 0; i < fps_MAX; i++)
+	{
+	    if (rep_STRINGP(data[i]))
+	    {
+		repv tem = conv (data[i]);
+		if (tem == rep_NULL)
+		    return FALSE;
+		data[i] = tem;
+	    }
+	}
+
+	/* now fill any gaps in the state table */
+	for (i = 0; i < fps_MAX; i++)
+	{
+	    static int map[fps_MAX] = {
+		fps_inactive, fps_inactive, fps_focused,
+		fps_inactive, fps_highlighted, fps_inactive_highlighted
+	    };
+
+	    if (data[i] == Qnil)
+		data[i] = data[map[i]];
+	}
+    }
+    return TRUE;
+}
+
 /* Generate a frame-part frame for window W. If called for a window that
    already has a frame, it will be rebuilt to the current window size. */
 static void
@@ -934,117 +1039,24 @@ list_frame_generator (Lisp_Window *w)
 	    fp->renderer = Qnil;
 
 	/* get background images or colors */
-	tem = fp_assq (Qbackground, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
+	if (!get_pattern_prop (w, fp->bg, Fget_color, Qbackground,
+			       elt, class_elt, ov_class_elt))
 	{
-	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
-		tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
-	    else
-		tem = rep_CDR(tem);
-	    if (!tem)
-		goto next_part;
-	    if (IMAGEP(tem) || COLORP(tem) || rep_STRINGP(tem))
-	    {
-		fp->bg[0] = tem;
-		for (i = 1; i < fps_MAX; i++)
-		    fp->bg[i] = fp->bg[0];
-	    }
-	    else if (rep_CONSP(tem))
-	    {
-		for (i = 0; i < fps_MAX; i++)
-		{
-		    fp->bg[i] = ((IMAGEP(rep_CAR(tem))
-				  || COLORP(rep_CAR(tem))
-				  || rep_STRINGP(rep_CAR(tem)))
-				 ? rep_CAR(tem) : fp->bg[i-1]);
-		    if (rep_CONSP(rep_CDR(tem)))
-			tem = rep_CDR(tem);
-		}
-	    }
+	    goto next_part;
 	}
 
-	/* get foreground colors */
-	tem = fp_assq (Qforeground, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
+	/* get foreground colors or images */
+	if (!get_pattern_prop (w, fp->fg, Fget_color, Qforeground,
+			       elt, class_elt, ov_class_elt))
 	{
-	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
-		tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
-	    else
-		tem = rep_CDR(tem);
-	    if (!tem)
-		goto next_part;
-	    if (IMAGEP(tem) || COLORP(tem) || rep_STRINGP(tem))
-	    {
-		fp->fg[0] = tem;
-		for (i = 1; i < fps_MAX; i++)
-		    fp->fg[i] = fp->fg[0];
-	    }
-	    else if (rep_CONSP(tem))
-	    {
-		for (i = 0; i < fps_MAX; i++)
-		{
-		    fp->fg[i] = ((IMAGEP(rep_CAR(tem))
-				  || COLORP(rep_CAR(tem))
-				  || rep_STRINGP(rep_CAR(tem)))
-				 ? rep_CAR(tem) : fp->fg[i-1]);
-		    if (rep_CONSP(rep_CDR(tem)))
-			tem = rep_CDR(tem);
-		}
-	    }
+	    goto next_part;
 	}
 
 	/* get fonts */
-	tem = fp_assq (Qfont, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
+	if (!get_pattern_prop (w, fp->font, Fget_font, Qfont,
+			       elt, class_elt, ov_class_elt))
 	{
-	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
-		tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
-	    else
-		tem = rep_CDR(tem);
-	    if (!tem)
-		goto next_part;
-	    if (FONTP(tem) || rep_STRINGP(tem))
-	    {
-		fp->font[0] = tem;
-		for (i = 1; i < fps_MAX; i++)
-		    fp->font[i] = fp->font[0];
-	    }
-	    else if (rep_CONSP(tem))
-	    {
-		for (i = 0; i < fps_MAX; i++)
-		{
-		    fp->font[i] = ((FONTP(rep_CAR(tem))
-				    || rep_STRINGP(rep_CAR(tem)))
-				   ? rep_CAR(tem) : fp->font[i-1]);
-		    if (rep_CONSP(rep_CDR(tem)))
-			tem = rep_CDR(tem);
-		}
-	    }
-	}
-
-	/* resolve string bg/fg/font attributes to the actual objects */
-	for (i = 0; i < fps_MAX; i++)
-	{
-	    if (rep_STRINGP(fp->fg[i]))
-		fp->fg[i] = Fget_color (fp->fg[i]);
-	    if (fp->fg[i] && fp->fg[i] != Qnil
-		&& !IMAGEP(fp->fg[i]) && !COLORP(fp->fg[i]))
-	    {
-		goto next_part;
-	    }
-
-	    if (rep_STRINGP(fp->bg[i]))
-		fp->bg[i] = Fget_color (fp->bg[i]);
-	    if (fp->bg[i] && fp->bg[i] != Qnil
-		&& !IMAGEP(fp->bg[i]) && !COLORP(fp->bg[i]))
-	    {
-		goto next_part;
-	    }
-
-	    if (rep_STRINGP(fp->font[i]))
-		fp->font[i] = Fget_font (fp->font[i]);
-	    if (!fp->font[i] || !FONTP(fp->font[i]))
-		fp->font[i] = Qnil;
+	    goto next_part;
 	}
 
 	/* If we have a background image for this part, take it as
@@ -1524,6 +1536,9 @@ frames_init (void)
     rep_INTERN(focused);
     rep_INTERN(highlighted);
     rep_INTERN(clicked);
+    rep_INTERN(inactive);
+    rep_INTERN(inactive_highlighted);
+    rep_INTERN(inactive_clicked);
     rep_INTERN(hide_client);
     rep_INTERN(class);
     rep_INTERN(removable);
@@ -1532,12 +1547,13 @@ frames_init (void)
 
     rep_INTERN_SPECIAL(frame_part_classes);
     rep_INTERN_SPECIAL(override_frame_part_classes);
-    rep_INTERN_SPECIAL(highlight_when_unfocused);
 
-    state_syms[fps_normal] = Qnil;
+    state_syms[fps_inactive] = Qnil;
     state_syms[fps_focused] = Qfocused;
     state_syms[fps_highlighted] = Qhighlighted;
     state_syms[fps_clicked] = Qclicked;
+    state_syms[fps_inactive_highlighted] = Qinactive_highlighted;
+    state_syms[fps_inactive_clicked] = Qinactive_clicked;
 
     if (rep_SYM(Qbatch_mode)->value == Qnil)
 	window_fp_context = XUniqueContext ();
