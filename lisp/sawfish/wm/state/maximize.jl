@@ -207,6 +207,49 @@
 	window))))
 
 
+;; size hints stuff
+
+(defun window-maximizable-p (w &optional direction hints)
+  (unless hints
+    (setq hints (window-size-hints w)))
+  (let
+      ((max-width (cdr (assq 'max-width hints)))
+       (max-height (cdr (assq 'max-height hints)))
+       (dims (window-dimensions w)))
+    (catch 'out
+      (when (and (memq direction '(nil horizontal))
+		 max-width
+		 (>= (car dims) max-width))
+	(throw 'out nil))
+      (when (and (memq direction '(nil vertical))
+		 max-height
+		 (>= (cdr dims) max-height))
+	(throw 'out nil))
+      t)))
+
+(defun maximize-truncate-dims (w dims &optional direction hints)
+  (unless hints
+    (setq hints (window-size-hints w)))
+  (let
+      ((x-base (or (cdr (or (assq 'base-width hints)
+			    (assq 'min-width hints))) 1))
+       (x-inc (or (cdr (assq 'width-inc hints)) 1))
+       (y-base (or (cdr (or (assq 'base-height hints)
+			    (assq 'min-height hints))) 1))
+       (y-inc (or (cdr (assq 'height-inc hints)) 1))
+       (x-max (cdr (assq 'max-width hints)))
+       (y-max (cdr (assq 'max-height hints)))
+
+       (trunc (lambda (x inc base &optional maximum)
+		(min (+ base (max 0 (* (/ (1- (- x base)) inc) inc)))
+		     (or maximum 65535)))))
+    (when (memq direction '(nil horizontal))
+      (rplaca dims (trunc (car dims) x-inc x-base x-max)))
+    (when (memq direction '(nil vertical))
+      (rplacd dims (trunc (cdr dims) y-inc y-base y-max)))
+    dims))
+
+
 ;; commands
 
 ;;;###autoload
@@ -217,32 +260,35 @@
       ((coords (window-position w))
        (dims (window-dimensions w))
        (fdims (window-frame-dimensions w))
+       (hints (window-size-hints w))
        (avoided (avoided-windows w))
        (edges (get-visible-window-edges ':with-ignored-windows t
 					':windows avoided
 					':include-root t)))
-    (unless (window-get w 'unmaximized-geometry)
-      (window-put w 'unmaximized-geometry (list (car coords) (cdr coords)
-						(car dims) (cdr dims))))
-    (cond ((null direction)
-	   (if (not only-1d)
-	       (maximize-do-both w avoided edges coords dims fdims)
+    (when (window-maximizable-p w direction hints)
+      (unless (window-get w 'unmaximized-geometry)
+	(window-put w 'unmaximized-geometry (list (car coords) (cdr coords)
+						  (car dims) (cdr dims))))
+      (cond ((null direction)
+	     (if (not only-1d)
+		 (maximize-do-both w avoided edges coords dims fdims)
+	       (maximize-do-horizontal w edges coords dims fdims)
+	       (maximize-do-vertical w edges coords dims fdims))
+	     (window-put w 'maximized-horizontally t)
+	     (window-put w 'maximized-vertically t))
+	    ((eq direction 'horizontal)
 	     (maximize-do-horizontal w edges coords dims fdims)
-	     (maximize-do-vertical w edges coords dims fdims))
-	   (window-put w 'maximized-horizontally t)
-	   (window-put w 'maximized-vertically t))
-	  ((eq direction 'horizontal)
-	   (maximize-do-horizontal w edges coords dims fdims)
-	   (window-put w 'maximized-horizontally t))
-	  ((eq direction 'vertical)
-	   (maximize-do-vertical w edges coords dims fdims)
-	   (window-put w 'maximized-vertically t)))
-    (move-window-to w (car coords) (cdr coords))
-    (resize-window-to w (car dims) (cdr dims))
-    (when maximize-raises
-      (raise-window w))
-    (call-window-hook 'window-maximized-hook w (list direction))
-    (call-window-hook 'window-state-change-hook w)))
+	     (window-put w 'maximized-horizontally t))
+	    ((eq direction 'vertical)
+	     (maximize-do-vertical w edges coords dims fdims)
+	     (window-put w 'maximized-vertically t)))
+      (maximize-truncate-dims w dims direction hints)
+      (move-window-to w (car coords) (cdr coords))
+      (resize-window-to w (car dims) (cdr dims))
+      (when maximize-raises
+	(raise-window w))
+      (call-window-hook 'window-maximized-hook w (list direction))
+      (call-window-hook 'window-state-change-hook w))))
 
 ;;;###autoload
 (defun unmaximize-window (w &optional direction)
