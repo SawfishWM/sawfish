@@ -34,41 +34,37 @@
   "Direction of gradient in `gradient' frame style."
   :type (set horizontal vertical diagonal)
   :group gradient-frame
-  :after-set  (lambda ()
-	       (when always-update-frames
-		 (reframe-all-windows))))
+  :after-set after-setting-frame-option)
 
 (defcustom gradient-normal-from-color (get-color "#b6b6b6")
   "`From' color of inactive frames in `gradient' frame style."
   :type color
   :group gradient-frame
-  :after-set  (lambda ()
-	       (when always-update-frames
-		 (reframe-all-windows))))
+  :after-set after-setting-frame-option)
 
 (defcustom gradient-normal-to-color (get-color "#323232")
   "`To' color of inactive frames in `gradient' frame style."
   :type color
   :group gradient-frame
-  :after-set  (lambda ()
-	       (when always-update-frames
-		 (reframe-all-windows))))
+  :after-set after-setting-frame-option)
 
 (defcustom gradient-active-from-color (get-color "#64b4df")
   "`From' color of active frames in `gradient' frame style."
   :type color
   :group gradient-frame
-  :after-set  (lambda ()
-	       (when always-update-frames
-		 (reframe-all-windows))))
+  :after-set after-setting-frame-option)
 
 (defcustom gradient-active-to-color (get-color "#000030")
   "`To' color of active frames in `gradient' frame style."
   :type color
   :group gradient-frame
-  :after-set  (lambda ()
-	       (when always-update-frames
-		 (reframe-all-windows))))
+  :after-set after-setting-frame-option)
+
+(defcustom gradient-save-memory t
+  "Save memory when creating gradients, possibly affecting quality."
+  :type boolean
+  :group gradient-frame
+  :after-set after-setting-frame-option)
 
 ;; 15x15
 (defvar gradient-minimize (list (make-image "as_min.png")
@@ -89,10 +85,13 @@
   (bevel-image img 1 (not (eq state 'clicked)))
   (set-image-border img 1 1 1 1))
 
+(defun gradient-scale ()
+  (if gradient-save-memory 2 1))
+
 (defvar gradient-frame
  `(;; title bar
    ((renderer . gradient-render-bg)
-    (render-scale . 2)
+    (render-scale . gradient-scale)
     (foreground . "black")
     (text . window-name)
     (x-justify . 30)
@@ -123,7 +122,7 @@
     (bottom-edge . -5))
    ;; bottom bar
    ((renderer . gradient-render-bg)
-    (render-scale . 2)
+    (render-scale . gradient-scale)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
@@ -151,7 +150,7 @@
 (defvar gradient-shaped-frame
  `(;; title bar
    ((renderer . gradient-render-bg)
-    (render-scale . 2)
+    (render-scale . gradient-scale)
     (foreground . "black")
     (text . window-name)
     (x-justify . 30)
@@ -201,7 +200,7 @@
 (defvar gradient-transient-frame
  `(;; title bar
    ((renderer . gradient-render-bg)
-    (render-scale . 2)
+    (render-scale . gradient-scale)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -4)
@@ -228,7 +227,7 @@
     (bottom-edge . -5))
    ;; bottom bar
    ((renderer . gradient-render-bg)
-    (render-scale . 2)
+    (render-scale . gradient-scale)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
@@ -246,7 +245,7 @@
 (defvar gradient-shaped-transient-frame
  `(;; title bar
    ((renderer . gradient-render-bg)
-    (render-scale . 2)
+    (render-scale . gradient-scale)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -5)
