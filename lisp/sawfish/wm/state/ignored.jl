@@ -73,13 +73,23 @@
       (window-order-focus-most-recent))
     (call-window-hook 'window-state-change-hook w (list '(never-focus))))
 
+  (define (toggle-window-cycle-skip w)
+    "Toggle whether a window is ignored while window cycling."
+    (if (window-get w 'cycle-skip)
+	(window-put w 'cycle-skip nil)
+      (window-put w 'cycle-skip t))
+    (call-window-hook 'window-state-change-hook w (list '(cycle-skip))))
+
   ;;###autoload
   (define-command 'make-window-ignored make-window-ignored #:spec "%W")
   (define-command 'make-window-not-ignored make-window-not-ignored #:spec "%W")
   (define-command 'toggle-window-ignored toggle-window-ignored #:spec "%W")
   (define-command 'toggle-window-never-focus toggle-window-never-focus #:spec "%W")
+  (define-command 'toggle-window-cycle-skip toggle-window-cycle-skip #:spec "%W")
 
   (add-window-menu-toggle (_ "_Ignored") 'toggle-window-ignored
 			  window-ignored-p)
   (add-window-menu-toggle (_ "_Focusable") 'toggle-window-never-focus
-			  (lambda (w) (not (window-get w 'never-focus)))))
+			  (lambda (w) (not (window-get w 'never-focus))))
+  (add-window-menu-toggle (_ "In cycle") 'toggle-window-cycle-skip
+			  (lambda (w) (not (window-get w 'cycle-skip)))))
