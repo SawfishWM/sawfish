@@ -710,7 +710,7 @@ x_fp_assq (repv prop, struct frame_part *fp)
 	class = rep_NULL;
 
     tem = Fsymbol_value (Qoverride_frame_part_classes, Qt);
-    if (rep_CONSP(tem))
+    if (class != rep_NULL && rep_CONSP(tem))
     {
 	tem = Fassq (class, tem);
 	if (tem && tem != Qnil)
@@ -723,7 +723,7 @@ x_fp_assq (repv prop, struct frame_part *fp)
     if (ret && ret == Qnil)
     {
 	tem = Fsymbol_value (Qframe_part_classes, Qt);
-	if (rep_CONSP(tem))
+	if (class != rep_NULL && rep_CONSP(tem))
 	{
 	    tem = Fassq (class, tem);
 	    if (tem && tem != Qnil)
@@ -1430,7 +1430,29 @@ altered when the pointer enters or leaves its window.
     }   
     return frame_state_mutex ? Qt : Qnil;
 }
-	
+
+DEFUN("frame-part-get", Fframe_part_get, Sframe_part_get,
+      (repv win, repv class, repv prop), rep_Subr3) /*
+::doc:frame-part-get::
+frame-part-get WINDOW CLASS PROPERTY
+::end:: */
+{
+    struct frame_part *fp;
+    rep_DECLARE1(win, WINDOWP);
+    rep_DECLARE2(class, rep_SYMBOLP);
+    rep_DECLARE3(prop, rep_SYMBOLP);
+    for (fp = VWIN(win)->frame_parts; fp != 0; fp = fp->next)
+    {
+	repv fp_class = x_fp_assq (Qclass, fp);
+	if (fp_class && rep_CDR(fp_class) == class)
+	{
+	    repv ret = x_fp_assq (prop, fp);
+	    return ret ? rep_CDR(ret) : Qnil;
+	}
+    }
+    return Qnil;
+}
+
 
 /* initialisation */
 
@@ -1445,6 +1467,7 @@ frames_init (void)
 
     rep_ADD_SUBR(Sframe_draw_mutex);
     rep_ADD_SUBR(Sframe_state_mutex);
+    rep_ADD_SUBR(Sframe_part_get);
 
     rep_INTERN(internal);
     rep_INTERN(tiled);
