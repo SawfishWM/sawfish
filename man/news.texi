@@ -6,6 +6,63 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+@heading 1.2
+
+@itemize @bullet
+
+@item Added an @file{OPTIONS} file describing the variables that may be
+customized
+
+@item Some drawing optimizations: don't reinstall frame shape at each
+redraw, turn off graphics exposures in all contexts
+
+@item Added a cache for X properties to minimize server round-trips
+
+@item Added support for Xft fonts
+
+@item Color objects now store alpha as well as rgb data
+
+@item Support useful parts of 1.1 NET WM spec; also fixed some bugs /
+omissions in support for 1.0 spec (e.g. @code{_NET_WORKAREA})
+
+@item Support for two dimensional workspace layouts and edge flipping
+(Michael Toomin)
+
+@item Translation updates (Dmitry G. Mastrukov, Jordi Mallach, Vincent
+van Adrighem, Christian Rose, Stanislav Visnovsky, Daniel Yacob, Andras
+Timar, Sava Chankov, Christian Neumair, Peteris Krisjanis, Gustavo
+Noronha Silva, Christian Meyer, Fatih Demir, Hasbullah Bin Pit,
+Christophe Fergeau)
+ 
+@item Bug fixes:
+
+@itemize @minus
+
+@item Don't pass null pointers to @code{accept ()}
+
+@item Stacking list assertions no longer abort execution, they just
+print an error message
+
+@item Handle minimum-size hints that are zero
+
+@item Understand the Pango font names that the Gtk2 font selector uses
+
+@item Fixed bugs when iconifying sticky windows
+
+@item When servicing configure-window requests, respect the window's
+locked dimensions. Also handle moving in only one direction
+
+@item @code{grow-pack} bug fixes (Daniel Pfeiffer)
+
+@item Fixed some problems with fullscreen mode
+
+@item Fixed some problems in the Gtk2 config tool
+
+@item Other bug fixes (Greg Morris, Claudio Bley)
+
+@end itemize
+@end itemize
+
 
 @heading 1.1
 
