@@ -42,7 +42,7 @@
 	* keys.c (eval_input_event): removed `yow!' message and
 	associated call to Fbeep ()
 
-2000-08-31    <john@dcs.warwick.ac.uk>
+2000-08-31  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c (window_getting_button_event): new function
 	(Fsynthesize_event): for pointer events use
@@ -52,12 +52,12 @@
 
 	* functions.c, frames.c, events.c: doc/comment fixes
 
-2000-08-30    <john@dcs.warwick.ac.uk>
+2000-08-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* windows.c (Fset_input_focus): treat Qroot arg as Qnil (since
 	root-window-keymap is searched when no_focus_window is active)
 
-2000-08-29    <john@dcs.warwick.ac.uk>
+2000-08-29  John Harper  <john@dcs.warwick.ac.uk>
 
 	* windows.c (add_window): call place-window-hook if
 	`initialising' is true; this is the only time that
@@ -76,7 +76,7 @@
 	* functions.c: if TEST_XINERAMA is defined, fakes a two-headed
 	Xinerama config, for testing purposes
 
-2000-08-26    <john@dcs.warwick.ac.uk>
+2000-08-26  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.c (Ffind_head): this was totally broken
 
