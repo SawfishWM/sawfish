@@ -320,6 +320,11 @@ add_window (Window id)
 	get_window_protocols (w);
 	if (!XGetTransientForHint (dpy, w->id, &w->transient_for_hint))
 	    w->transient_for_hint = 0;
+	if (!XGetWMColormapWindows (dpy, w->id,
+				    &w->cmap_windows, &w->n_cmap_windows))
+	{
+	    w->n_cmap_windows = 0;
+	}
 
 	{
 	    /* Is the window shaped? */
@@ -1155,6 +1160,8 @@ window_sweep (void)
 	    destroy_window_frame (w, FALSE);
 	    if (w->wmhints != 0)
 		XFree (w->wmhints);
+	    if (w->n_cmap_windows > 0)
+		XFree (w->cmap_windows);
 	    *ptr = w->next;
 	    rep_FREE_CELL(w);
 	}
