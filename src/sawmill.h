@@ -73,7 +73,8 @@ typedef int bool;
 #define FRAME_EVENTS (ButtonPressMask | ButtonReleaseMask | KeyPressMask \
 		      | ButtonMotionMask | PointerMotionHintMask \
 		      | EnterWindowMask | LeaveWindowMask | ExposureMask \
-		      | FocusChangeMask | SubstructureRedirectMask)
+		      | FocusChangeMask | SubstructureRedirectMask \
+		      | VisibilityChangeMask)
 
 /* Events selected in pointer/button grabs */
 #define POINTER_GRAB_EVENTS (ButtonPressMask | ButtonReleaseMask \
