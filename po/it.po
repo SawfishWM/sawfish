@@ -5,17 +5,16 @@
 #
 # Michele Campeotto <micampe@f2s.com>, 2000.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish 0.37.3\n"
-"POT-Creation-Date: 2001-02-12 12:08-0800\n"
+"POT-Creation-Date: 2001-02-24 00:24-0800\n"
 "PO-Revision-Date: 2001-01-25 21:40+0100\n"
 "Last-Translator: Michele Campeotto <micampe@f2s.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso8859-1\n"
-"Content-Transfer-Encoding: iso8859-1\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 #. ../scripts/sawfish-about.jl
 msgid "and many others..."
@@ -168,6 +167,18 @@ msgid "Gradient Theme"
 msgstr "Tema `Gradient'"
 
 #. ../themes/gradient/theme.jl
+msgid "horizontal"
+msgstr "Orizzontale"
+
+#. ../themes/gradient/theme.jl
+msgid "vertical"
+msgstr "Verticale"
+
+#. ../themes/gradient/theme.jl
+msgid "diagonal"
+msgstr "Diagonale"
+
+#. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
 msgstr "Direzione della sfumatura: \\w"
 
@@ -206,6 +217,18 @@ msgid "Color of active frames (if unset use GTK+ selection color)."
 msgstr ""
 "Colore delle finestre attive (se non specificato\n"
 "usa il colore della selezione di GTK+)."
+
+#. ../themes/mono/theme.jl
+msgid "left"
+msgstr "Sinistra"
+
+#. ../themes/mono/theme.jl
+msgid "right"
+msgstr "Destra"
+
+#. ../themes/mono/theme.jl
+msgid "center"
+msgstr "Centro"
 
 #. ../themes/mono/theme.jl
 msgid "Text is \\w justified in window titles."
@@ -792,6 +815,20 @@ msgid "Ignore program-specified window placements."
 msgstr "Ignora la posizione richiesta dal programma."
 
 #. ../lisp/sawfish/wm/stacking.jl
+msgid "all"
+msgstr "Tutti"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "Proprietari"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "none"
+msgstr "Niente"
+
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Keep transient windows stacked above: \\w"
 msgstr "Mantieni le finestre di dialogo sopra a: \\w"
 
@@ -945,6 +982,18 @@ msgstr "Forza la finestra corrente ad avere un titolo unico."
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Virtual desktop configuration."
 msgstr "Configurazione del desktop virtuale."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "stop"
+msgstr "Fermati"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "wrap-around"
+msgstr "Ricomincia"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "keep-going"
+msgstr "Aggiungi workspace"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "When passing the first or last workspace: \\w"
@@ -1194,6 +1243,19 @@ msgstr ""
 "dimensione originale."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "always"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "never"
+msgstr "Ripristina"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
 "Whether and how to move the pointer when packing windows.\n"
 "\n"
@@ -1287,6 +1349,14 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr "Sposta il puntatore 1 pixel in basso."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "opaque"
+msgstr "Opache"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "box"
+msgstr "Linee"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How windows being moved are animated: \\w"
 msgstr "Come vengono mostrate le finestre spostate: \\w"
 
@@ -1307,6 +1377,22 @@ msgid "Show current dimensions of windows while resizing."
 msgstr "Mostra la dimensione quando le finestre vengono ridimensionate."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "region"
+msgstr "Regione"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "border"
+msgstr "Bordo"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "grab"
+msgstr "Cattura"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "border-grab"
+msgstr "Bordo o cattura"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to choose window edges when resizing: \\w"
 msgstr "Come scegliere il bordo da ridimensionare: \\w"
 
@@ -1317,6 +1403,18 @@ msgstr "Attacca la finestra alle altre mentre viene spostata."
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Proximity in pixels before snapping to a window edge."
 msgstr "Distanza a cui la finestra si attacca alle altre."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "magnetism"
+msgstr "Magnetismo"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "resistance"
+msgstr "Resistenza"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "attraction"
+msgstr "Attrazione"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to snap together window edges: \\w"
@@ -1550,6 +1648,14 @@ msgstr ""
 "al bordo dello schermo."
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "viewport"
+msgstr "Viewport"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "workspace"
+msgstr "Workspace"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Hitting the screen edge selects the next: \\w"
 msgstr "Il bordo dello schermo seleziona il successivo: \\w"
 
@@ -1572,6 +1678,18 @@ msgstr "Gestione errori"
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Emit a beeping sound when errors occur."
 msgstr "Emetti un beep in caso di errore."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "nowhere"
+msgstr "Da nessuna parte"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "screen"
+msgstr "Sullo schermo"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "standard-error"
+msgstr "Sullo standard error"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Where to display error messages: \\w"
@@ -1734,7 +1852,9 @@ msgstr "Seleziona automaticamente la gravità secondo la posizione."
 
 #. ../lisp/sawfish/wm/state/configure.jl
 msgid "Ignore requests from applications to change window stacking."
-msgstr "Ignora le richeste delle applicazioni di modificare il livello delle finestre."
+msgstr ""
+"Ignora le richeste delle applicazioni di modificare il livello delle "
+"finestre."
 
 #. ../lisp/sawfish/wm/state/gnome.jl
 msgid "In GNOME _task list"
@@ -1755,6 +1875,16 @@ msgstr "Le finestre non gestite possono essere ridotte ad icona."
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Windows uniconify to the current workspace."
 msgstr "Le finestre vengono ripristinate nel workspace corrente."
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "transients"
+msgstr "Finestre di dialogo"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "group"
+msgstr "Gruppo"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconifying a window also iconifies the: \\w"
@@ -2040,8 +2170,32 @@ msgstr ""
 "qualsiasi impostazione del window manager."
 
 #. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "novice"
+msgstr "Principianti"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "intermediate"
+msgstr "Intermedi"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "expert"
+msgstr "Esperti"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
 msgid "Show options suitable for \\w users."
 msgstr "Mostra le opzioni per utenti: \\w"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "ok"
+msgstr "Ok"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "revert/cancel/ok"
+msgstr "Ripristina / Ok / Annulla"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "apply/revert/cancel/ok"
+msgstr "Applica / Ripristina / Ok / Annulla"
 
 #. ../lisp/sawfish/wm/util/nokogiri.jl
 msgid "Buttons shown in configurator: \\w"
@@ -2286,206 +2440,104 @@ msgstr "_Temi"
 #~ msgstr "Colore delle finestre attive."
 
 # --- Manually added strings ---
-msgid "Focus windows when they are first displayed."
-msgstr "Attiva le finestre quando compaiono."
+#~ msgid "Focus windows when they are first displayed."
+#~ msgstr "Attiva le finestre quando compaiono."
 
 # No
-msgid "From"
-msgstr "Da"
+#~ msgid "From"
+#~ msgstr "Da"
 
 # No
-msgid "To"
-msgstr "A"
+#~ msgid "To"
+#~ msgstr "A"
 
-msgid "novice"
-msgstr "Principianti"
+#~ msgid "solid"
+#~ msgstr "Opaco"
 
-msgid "intermediate"
-msgstr "Intermedi"
-
-msgid "expert"
-msgstr "Esperti"
-
-msgid "ok"
-msgstr "Ok"
-
-msgid "revert/cancel/ok"
-msgstr "Ripristina / Ok / Annulla"
-
-msgid "apply/revert/cancel/ok"
-msgstr "Applica / Ripristina / Ok / Annulla"
-
-msgid "solid"
-msgstr "Opaco"
-
-msgid "wireframe"
-msgstr "Linee"
-
-msgid "none"
-msgstr "Niente"
+#~ msgid "wireframe"
+#~ msgstr "Linee"
 
 # No
-msgid "Global"
-msgstr "Globale"
+#~ msgid "Global"
+#~ msgstr "Globale"
 
 # No
-msgid "Window"
-msgstr "Finestra"
+#~ msgid "Window"
+#~ msgstr "Finestra"
 
 # No
-msgid "Root window"
-msgstr "Sfondo"
+#~ msgid "Root window"
+#~ msgstr "Sfondo"
 
 # No
-msgid "Title"
-msgstr "Titolo della finestra"
+#~ msgid "Title"
+#~ msgstr "Titolo della finestra"
 
 # No
-msgid "Border"
-msgstr "Bordo della finestra"
+#~ msgid "Border"
+#~ msgstr "Bordo della finestra"
 
 # No
-msgid "Close button"
-msgstr "Bottone `chiudi'"
+#~ msgid "Close button"
+#~ msgstr "Bottone `chiudi'"
 
 # No
-msgid "Iconify button"
-msgstr "Bottone `riduci ad icona'"
+#~ msgid "Iconify button"
+#~ msgstr "Bottone `riduci ad icona'"
 
 # No
-msgid "Maximize button"
-msgstr "Bottone `ingrandisci'"
+#~ msgid "Maximize button"
+#~ msgstr "Bottone `ingrandisci'"
 
 # No
-msgid "Menu button"
-msgstr "Bottone `menù'"
+#~ msgid "Menu button"
+#~ msgstr "Bottone `menù'"
 
 # No
-msgid "Cycle"
-msgstr "Ciclo delle finestre"
+#~ msgid "Cycle"
+#~ msgstr "Ciclo delle finestre"
 
-msgid "enter-exit"
-msgstr "Il focus segue il mouse"
+#~ msgid "enter-exit"
+#~ msgstr "Il focus segue il mouse"
 
-msgid "enter-only"
-msgstr "Il focus segue il mouse (intelligente)"
+#~ msgid "enter-only"
+#~ msgstr "Il focus segue il mouse (intelligente)"
 
-msgid "click"
-msgstr "Click per assegnare il focus"
+#~ msgid "click"
+#~ msgstr "Click per assegnare il focus"
 
-msgid "transients"
-msgstr "Finestre di dialogo"
+#~ msgid "randomly"
+#~ msgstr "A caso"
 
-msgid "group"
-msgstr "Gruppo"
+#~ msgid "interactively"
+#~ msgstr "A scelta"
 
-msgid "all"
-msgstr "Tutti"
+#~ msgid "centered"
+#~ msgstr "Al centro dello schermo"
 
-msgid "parents"
-msgstr "Proprietari"
+#~ msgid "centered-on-parent"
+#~ msgstr "Al centro del proprietario"
 
-msgid "screen"
-msgstr "Sullo schermo"
+#~ msgid "under-pointer"
+#~ msgstr "Vicino al mouse"
 
-msgid "nowhere"
-msgstr "Da nessuna parte"
+#~ msgid "first-fit"
+#~ msgstr "Primo posto disponibile"
 
-msgid "standard-error"
-msgstr "Sullo standard error"
+#~ msgid "best-fit"
+#~ msgstr "Miglior posto disponibile"
 
-msgid "opaque"
-msgstr "Opache"
+#~ msgid "best-fit-group"
+#~ msgstr "Miglior posto vicino al gruppo"
 
-msgid "box"
-msgstr "Linee"
+#~ msgid "first-fit-or-interactive"
+#~ msgstr "Primo posto o a scelta"
 
-msgid "region"
-msgstr "Regione"
+#~ msgid "stagger"
+#~ msgstr "A scalinata"
 
-msgid "border"
-msgstr "Bordo"
+#~ msgid "top-left"
+#~ msgstr "In alto a sinistra"
 
-msgid "grab"
-msgstr "Cattura"
-
-msgid "border-grab"
-msgstr "Bordo o cattura"
-
-msgid "magnetism"
-msgstr "Magnetismo"
-
-msgid "resistance"
-msgstr "Resistenza"
-
-msgid "attraction"
-msgstr "Attrazione"
-
-msgid "randomly"
-msgstr "A caso"
-
-msgid "interactively"
-msgstr "A scelta"
-
-msgid "centered"
-msgstr "Al centro dello schermo"
-
-msgid "centered-on-parent"
-msgstr "Al centro del proprietario"
-
-msgid "under-pointer"
-msgstr "Vicino al mouse"
-
-msgid "first-fit"
-msgstr "Primo posto disponibile"
-
-msgid "best-fit"
-msgstr "Miglior posto disponibile"
-
-msgid "best-fit-group"
-msgstr "Miglior posto vicino al gruppo"
-
-msgid "first-fit-or-interactive"
-msgstr "Primo posto o a scelta"
-
-msgid "stagger"
-msgstr "A scalinata"
-
-msgid "top-left"
-msgstr "In alto a sinistra"
-
-msgid "off-center"
-msgstr "Dal centro verso l'esterno"
-
-msgid "stop"
-msgstr "Fermati"
-
-msgid "wrap-around"
-msgstr "Ricomincia"
-
-msgid "keep-going"
-msgstr "Aggiungi workspace"
-
-msgid "horizontal"
-msgstr "Orizzontale"
-
-msgid "vertical"
-msgstr "Verticale"
-
-msgid "diagonal"
-msgstr "Diagonale"
-
-msgid "left"
-msgstr "Sinistra"
-
-msgid "right"
-msgstr "Destra"
-
-msgid "center"
-msgstr "Centro"
-
-msgid "viewport"
-msgstr "Viewport"
-
-msgid "workspace"
-msgstr "Workspace"
+#~ msgid "off-center"
+#~ msgstr "Dal centro verso l'esterno"

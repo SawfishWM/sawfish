@@ -2,16 +2,15 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Antti Ahvensalmi <aahven@mbnet.fi>, 2000.
 #
-#. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish 0.32\n"
-"POT-Creation-Date: 2001-01-05 20:59-0800\n"
+"POT-Creation-Date: 2001-02-24 00:24-0800\n"
 "PO-Revision-Date: 2000-01-06 13:10+00:00\n"
 "Last-Translator: Antti Ahvensalmi <aahven@mbnet.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ../scripts/sawfish-about.jl
@@ -56,15 +55,42 @@ msgstr "[yläosa]"
 msgid "[bottom]"
 msgstr "[alaosa]"
 
+#. ../lisp/sawfish/gtk/widgets/color.jl
+#. ../themer/themer.in
+#, fuzzy
+msgid "Select color"
+msgstr "Valitse kuvake"
+
 #. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
 #. ../themer/themer.in
 msgid "Browse..."
 msgstr "Selaa..."
 
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../themer/themer.in
+#, fuzzy
+msgid "Select font"
+msgstr "Valitse kuvake"
+
 #. ../themer/themer.in
 msgid "Properties..."
 msgstr "Ominaisuudet..."
+
+#. ../themer/themer.in
+#, fuzzy
+msgid "Select Image"
+msgstr "Valitse kuvake"
+
+#. ../themer/themer.in
+#, fuzzy
+msgid "Image Properties"
+msgstr "Ominaisuudet"
+
+#. ../lisp/sawfish/gtk/widget.jl
+#. ../themer/themer.in
+msgid "No matching item for %S"
+msgstr ""
 
 #. ../themer/themer.in
 #, c-format
@@ -120,9 +146,43 @@ msgstr "Avaa"
 msgid "Preferences"
 msgstr "Asetukset"
 
+#. ../themes/Crux/theme.jl
+#, fuzzy
+msgid "Crux Theme"
+msgstr "SMaker-teema"
+
+#. ../themes/Crux/theme.jl
+#, fuzzy
+msgid ""
+"Accent color for focused windows (if unset uses the GTK+ selection color)."
+msgstr "Epäaktiivisten kehysten väri (Jos määrittelemätön, GTK+:n taustaväri)."
+
+#. ../themes/Crux/theme.jl
+#, fuzzy
+msgid "Display the window's icon in its menu button."
+msgstr "Näytä ohjelmavalikko."
+
+#. ../themes/Crux/theme.jl
+msgid "Display title buttons to mimic: \\w"
+msgstr ""
+
 #. ../themes/gradient/theme.jl
 msgid "Gradient Theme"
 msgstr "Gradient-teema"
+
+#. ../themes/gradient/theme.jl
+#, fuzzy
+msgid "horizontal"
+msgstr "P_oikkisuunnassa"
+
+#. ../themes/gradient/theme.jl
+#, fuzzy
+msgid "vertical"
+msgstr "_Pystysuunnassa"
+
+#. ../themes/gradient/theme.jl
+msgid "diagonal"
+msgstr ""
 
 #. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
@@ -158,8 +218,23 @@ msgid "Color of inactive frames (if unset use GTK+ background color)."
 msgstr "Epäaktiivisten kehysten väri (Jos määrittelemätön, GTK+:n taustaväri)."
 
 #. ../themes/mono/theme.jl
-msgid "Color of active frames."
-msgstr "Aktiivisten kehysten väri."
+#, fuzzy
+msgid "Color of active frames (if unset use GTK+ selection color)."
+msgstr "Epäaktiivisten kehysten väri (Jos määrittelemätön, GTK+:n taustaväri)."
+
+#. ../themes/mono/theme.jl
+#, fuzzy
+msgid "left"
+msgstr "[vasen]"
+
+#. ../themes/mono/theme.jl
+#, fuzzy
+msgid "right"
+msgstr "[oikea]"
+
+#. ../themes/mono/theme.jl
+msgid "center"
+msgstr ""
 
 #. ../themes/mono/theme.jl
 msgid "Text is \\w justified in window titles."
@@ -226,6 +301,11 @@ msgstr "Näppäin"
 msgid "Value"
 msgstr "Arvo"
 
+#. ../lisp/sawfish/gtk/widgets/file.jl
+#, fuzzy
+msgid "Select file"
+msgstr "Valitse kuvake"
+
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
 msgstr "Lisää..."
@@ -271,6 +351,21 @@ msgstr "Sawfish-virhe"
 msgid "Sawfish configurator"
 msgstr "Sawfish configurator"
 
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Työpöydät:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Sarakkeita:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Rivejä:"
+
 #. ../lisp/sawfish/wm/commands.jl
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 #. ../lisp/sawfish/ui/widgets/command.jl
@@ -309,18 +404,6 @@ msgstr "Toiminnot"
 #. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Match window properties"
 msgstr "Ominaisuuksien määrittely"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Työpöydät:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Sarakkeita:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Rivejä:"
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -549,6 +632,15 @@ msgstr ""
 "Koskee vain hiiren nappeja."
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Näppäimet, jotka toimivat kun osoitin on ikkunan sulkemisnapin yllä.\n"
+"Koskee vain hiiren nappeja."
+
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Motion threshold for mouse pointer: \\wpixels"
 msgstr "Liikkeenvastustus hiiren osoittimelle: \\wpixels"
 
@@ -563,6 +655,16 @@ msgstr "Näytä oikotietiedot valikoissa."
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
 msgstr "_Pienennä"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Unmaximize"
+msgstr "_Palauta koko"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Maximize"
+msgstr "Suurentaminen"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
@@ -722,6 +824,21 @@ msgid "Ignore program-specified window placements."
 msgstr "Ohita ohjelmien määrittelemät sijainnit."
 
 #. ../lisp/sawfish/wm/stacking.jl
+msgid "all"
+msgstr ""
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+#, fuzzy
+msgid "none"
+msgstr "<ei mitään>"
+
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Keep transient windows stacked above: \\w"
 msgstr "Pidä ali-ikkunat näiden yläpuolella: \\w"
 
@@ -874,6 +991,19 @@ msgstr "Anna kohdistetulle ikkunalle muista eroava nimi."
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Virtual desktop configuration."
 msgstr "Työpöytien asetukset."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "stop"
+msgstr "[yläosa]"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "wrap-around"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "keep-going"
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "When passing the first or last workspace: \\w"
@@ -1096,6 +1226,11 @@ msgstr "Käynnistä Gnomen Ohjeselain."
 msgid "Launch the GNOME about dialog."
 msgstr "Näytä tietoja GNOME:sta."
 
+#. ../lisp/sawfish/wm/commands/groups.jl
+#, fuzzy
+msgid "Delete all windows in the group that the current window is a member of."
+msgstr "Kelaa kohdistetun ikkunan kanssa samaan ryhmään kuuluvia ikkunoita."
+
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing an already grown window grows it again."
 msgstr "Mikäli kasvatetaan ikkunaa, joka on jo kasvanut, se kasvaa jälleen."
@@ -1108,6 +1243,19 @@ msgid ""
 msgstr ""
 "Jos koon muutos voidaan tulkita suurennukseksi, voit\n"
 "palauttaa koon normaaliksi `Palauta koko'-toiminnolla."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "always"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "never"
+msgstr "Peruuta"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
@@ -1191,6 +1339,14 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr "Siirrä osoitinta pikselin verran alaspäin."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "opaque"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "box"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How windows being moved are animated: \\w"
 msgstr "Miten ikkunat piirretään siirtäessä: \\w"
 
@@ -1211,6 +1367,23 @@ msgid "Show current dimensions of windows while resizing."
 msgstr "Näytä ikkunoiden koko sitä muutettaessa."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "region"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "border"
+msgstr "Yläreuna"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "grab"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "border-grab"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to choose window edges when resizing: \\w"
 msgstr "Miten valitaan ikkunan reunat kokoa muutettaessa: \\w"
 
@@ -1223,16 +1396,24 @@ msgid "Proximity in pixels before snapping to a window edge."
 msgstr "Etäisyys pikseleinä ennen reunaan pysäyttämistä."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "magnetism"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "resistance"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "attraction"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to snap together window edges: \\w"
 msgstr "Miten ikkunoiden reunat napsautetaan yhteen: \\w"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Snap to otherwise-ignored windows."
 msgstr "Pysäytä myös muuten ohitettaviin ikkunoihin."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Lock position and size while windows are maximized."
-msgstr "Lukitse ikkunoiden koko ja sijainti suurennettaessa."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Only update window contents after it has stopped moving."
@@ -1451,6 +1632,15 @@ msgid "Select the next desktop when the pointer hits screen edge."
 msgstr "Valitse seuraava työpöytä, kun osoitin osuu ruudun reunaan."
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "viewport"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+#, fuzzy
+msgid "workspace"
+msgstr "Työpöydät:"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Hitting the screen edge selects the next: \\w"
 msgstr "Ruudun reunaan osuminen valitsee seuraavan: \\w"
 
@@ -1473,6 +1663,19 @@ msgstr "Virheenkäsittely"
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Emit a beeping sound when errors occur."
 msgstr "Päästä piippaava äänimerkki virheen sattuessa."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+#, fuzzy
+msgid "nowhere"
+msgstr "Laske"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "screen"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "standard-error"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Where to display error messages: \\w"
@@ -1635,6 +1838,10 @@ msgstr ""
 msgid "Automatically select window gravity from position on screen."
 msgstr ""
 
+#. ../lisp/sawfish/wm/state/configure.jl
+msgid "Ignore requests from applications to change window stacking."
+msgstr ""
+
 #. ../lisp/sawfish/wm/state/gnome.jl
 msgid "In GNOME _task list"
 msgstr "Gnomen _tehtävälistalla"
@@ -1654,6 +1861,17 @@ msgstr "Ohitettavat ikkunat voidaan pienentää."
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Windows uniconify to the current workspace."
 msgstr "Ikkunat palautetaan senhetkiselle työpöydälle."
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "transients"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "group"
+msgstr "_Ryhmässä"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconifying a window also iconifies the: \\w"
@@ -1749,6 +1967,10 @@ msgstr "Anna ohitettavien ikkunoiden peittyä tilaa täytettäessä."
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Don't cover `avoided' windows when maximizing."
 msgstr "Älä peitä \"välteltäviä\" ikkunoita suurentaessa."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Lock position and size while windows are maximized."
+msgstr "Lukitse ikkunoiden koko ja sijainti suurennettaessa."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize the dimensions of the window."
@@ -1911,6 +2133,10 @@ msgid "Prompt for a key sequence, then print its binding."
 msgstr "Pyydä näppäinyhdistelmä, ja näytä sen toiminto."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Press key..."
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/keymap.jl
 msgid "[Quote]"
 msgstr "[Lainaus]"
 
@@ -1923,8 +2149,33 @@ msgstr ""
 "piittaamatta ikkunointiohjelman näppäinasetuksista."
 
 #. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "novice"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "intermediate"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+#, fuzzy
+msgid "expert"
+msgstr "Peruuta"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
 msgid "Show options suitable for \\w users."
 msgstr "Näytä asetukset, jotka sopivat \\w -käyttäjille."
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "ok"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "revert/cancel/ok"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "apply/revert/cancel/ok"
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/nokogiri.jl
 msgid "Buttons shown in configurator: \\w"
@@ -1945,6 +2196,11 @@ msgstr ""
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Ikkuna:"
+
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+#, fuzzy, c-format
+msgid "Workspace %d"
+msgstr "Työpöydät:"
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
@@ -2161,17 +2417,14 @@ msgstr "_Asetukset"
 msgid "_Themes"
 msgstr "_Teemat"
 
+#~ msgid "Color of active frames."
+#~ msgstr "Aktiivisten kehysten väri."
+
 #~ msgid "_Delete"
 #~ msgstr "_Sulje"
 
 #~ msgid "Destroy"
 #~ msgstr "Tuhoa"
-
-#~ msgid "_Vertically"
-#~ msgstr "_Pystysuunnassa"
-
-#~ msgid "_Horizontally"
-#~ msgstr "P_oikkisuunnassa"
 
 #~ msgid "_Both"
 #~ msgstr "_Molemmissa"
@@ -2185,9 +2438,6 @@ msgstr "_Teemat"
 #~ msgid "Fill both"
 #~ msgstr "Täytä molemmat suunnat"
 
-#~ msgid "_Un-maximize"
-#~ msgstr "_Palauta koko"
-
 #~ msgid "Depth"
 #~ msgstr "Syvyys"
 
@@ -2199,9 +2449,6 @@ msgstr "_Teemat"
 
 #~ msgid "Cycle through all windows in order of recent selections."
 #~ msgstr "Kelaa ikkunoita kohdistusjärjestyksessä."
-
-#~ msgid "Cycle through all windows in the same group as the current window."
-#~ msgstr "Kelaa kohdistetun ikkunan kanssa samaan ryhmään kuuluvia ikkunoita."
 
 #~ msgid ""
 #~ "Cycle through all windows whose names match the leading colon-delimited\n"
