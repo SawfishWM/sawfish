@@ -158,8 +158,10 @@
        min-overlap min-point)
     (mapc #'(lambda (delta)
 	      (let
-		  ((point-foo (cons (+ (car point) (car delta))
-				    (+ (cdr point) (cdr delta))))
+		  ((point-foo (cons (+ (car point)
+				       (* (car delta) (car dims)))
+				    (+ (cdr point)
+				       (* (cdr delta) (cdr dims)))))
 		   tem)
 		(when (and (>= (car point-foo) 0)
 			   (>= (cdr point-foo) 0)
@@ -169,8 +171,8 @@
 		  (when (or (not min-point) (< tem min-overlap))
 		    (setq min-overlap tem)
 		    (setq min-point point-foo)))))
-	  (list '(0 . 0) (cons 0 (- (cdr dims))) (cons (- (car dims)) 0)
-		(cons (- (car dims)) (- (cdr dims)))))
+	  ;; try aligning all four corners to this point
+	  '((0 . 0) (0 . -1) (-1 . 0) (-1 . -1)))
     (and min-point (cons min-point min-overlap))))
 
 
@@ -261,6 +263,7 @@
     (setq edges (+ (aref edges 0) (aref edges 1)
 		   (aref edges 2) (aref edges 3)))
 
+    ;; factor in the two quantities scaled upto sp-cost-max by sp-area-weight
     (+ (/ (* sp-area-weight (+ x-cross y-cross)) (+ x-total y-total))
        (/ (* (- sp-cost-max sp-area-weight) edges)
 	  (+ (* 2 (car dims)) (* 2 (cdr dims)))))))
