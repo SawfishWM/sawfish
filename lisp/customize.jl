@@ -46,6 +46,13 @@
   :type font
   :after-set (lambda () (after-setting-frame-option)))
 
+(defcustom default-bevel-percent nil
+  "Intensity of bevels (percentage)."
+  :group appearance
+  :type number
+  :range (0 . 100)
+  :after-set (lambda () (after-setting-frame-option)))
+
 
 ;; ui
 
