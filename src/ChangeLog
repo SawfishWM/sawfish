@@ -1,3 +1,17 @@
+2000-02-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.24
+
+	* sawmill.h (Lisp_Font): support for both XFontSet and
+	XFontStruct representations
+
+	* fonts.c (Fget_font): if a FontSet can't be created, try to
+	load a FontStruct
+	(x_text_width, x_draw_string): switch on actual font
+	representation
+
+	* frames.c, functions.c: use x_text_width () and x_draw_string ()
+
 2000-02-11  John Harper  <john@dcs.warwick.ac.uk>
 
 	* events.c (configure_request): marshal the event to an alist,
