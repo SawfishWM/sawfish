@@ -951,6 +951,7 @@ symbols are `fully-obscured', `partially-obscured' or `unobscured'.
 ::end:: */
 {
     repv sym = Qnil;
+    rep_DECLARE1(win, WINDOWP);
     switch (VWIN(win)->frame_vis)
     {
     case VisibilityFullyObscured:
