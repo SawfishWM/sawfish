@@ -34,6 +34,7 @@ exec rep "$0" "$@"
 
 (defvar version "__version__")
 (defvar glade-file "__sawmilldir__/__version__/themer.glade")
+(defvar locale-dir "__locale_dir__")
 
 
 ;; configuration
@@ -48,10 +49,10 @@ exec rep "$0" "$@"
 (defvar help-launcher nil)
 
 (defvar preferences-attrs
-  '((reload-themes-after-saving
-     (boolean "Reload themes in window manager after saving."))
+  `((reload-themes-after-saving
+     (boolean ,(_ "Reload themes in window manager after saving.")))
     (filter-when-saving
-     (boolean "Remove unused definitions when saving."))))
+     (boolean ,(_ "Remove unused definitions when saving.")))))
 
 ;; list of all frame part classes
 (defvar frame-part-classes '(title menu-button close-button iconify-button
@@ -91,10 +92,10 @@ exec rep "$0" "$@"
 
 ;; item spec for editing image properties
 (defvar image-attrs
-  '((border (optional (v-and (labelled "[left]" number)
-			     (labelled "[right]" number)
-			     (labelled "[top]" number)
-			     (labelled "[bottom]" number))))
+  `((border (optional (v-and (labelled ,(_ "[left]") number)
+			     (labelled ,(_ "[right]") number)
+			     (labelled ,(_ "[top]") number)
+			     (labelled ,(_ "[bottom]") number))))
     (tiled boolean)))
 
 ;; list of all window types
@@ -544,7 +545,7 @@ exec rep "$0" "$@"
 		 (when (gtk-label-p w)
 		   (gtk-container-remove vbox w)))
 	       (gtk-container-children vbox))
-	 (gtk-window-set-title window "Image Properties")
+	 (gtk-window-set-title window (_ "Image Properties"))
 	 (gtk-box-pack-start vbox table t t)
 	 (gtk-table-set-col-spacings table 4)
 	 (gtk-table-set-row-spacings table 4)
@@ -1349,7 +1350,7 @@ exec rep "$0" "$@"
       ((patterns-alist (generate-patterns patterns-alist dir)))
     (save-to-file current-filename))
   (write-readme-file dir)
-  (message (format nil "Generated theme in directory `%s'" dir))
+  (message (format nil (_ "Generated theme in directory `%s'") dir))
   (when reload-themes-after-saving
     (sawmill-eval-async `(reload-frame-style ',theme-name))))
 
@@ -1460,7 +1461,7 @@ exec rep "$0" "$@"
 	  (gtk-widget-destroy window))))
     (glade-xml-signal-autoconnect props-xml)
     (gtk-container-border-width vbox 16)
-    (gtk-window-set-title window "Preferences")
+    (gtk-window-set-title window (_ "Preferences"))
     (mapc (lambda (w)
 	    (when (gtk-label-p w)
 	      (gtk-container-remove vbox w)))
@@ -1521,10 +1522,6 @@ through a GUI.\n" version))
 
 (defun on-quit ()
   (throw 'quit 0))
-
-(defun on-help-debug ()
-  (break)
-  t)
 
 
 ;; utilities
@@ -1721,6 +1718,12 @@ through a GUI.\n" version))
 
 
 ;; entry point
+
+(when (and (not (get-command-line-option "--disable-nls"))
+	   (file-directory-p locale-dir))
+  (require 'gettext)
+  (bindtextdomain "sawmill" locale-dir)
+  (textdomain "sawmill"))
 
 (load-preferences)
 
