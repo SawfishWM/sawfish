@@ -178,7 +178,11 @@
 
   (define (delete-group w)
     "Delete all windows in the group that the current window is a member of."
-    (map-window-group delete-window w))
+    (map-window-group (lambda (x)
+			;; Don't delete the desktop-window. It should
+			;; probably be in a separate group, but isn't..
+			(unless (desktop-window-p x)
+			  (delete-window x))) w))
 
   ;;###autoload
   (define-command 'delete-group delete-group #:spec "%W"))
