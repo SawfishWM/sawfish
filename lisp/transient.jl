@@ -65,7 +65,7 @@ workspaces.")
 		      (throw 'foo t))) ignored-window-names)
 	  nil)
     (window-put w 'ignored t)
-    (set-window-frame w 'nil-frame))
+    (set-window-frame w nil-frame))
   (when (catch 'foo
 	  (when (and sticky-windows-re
 		     (string-match sticky-windows-re (window-name w)))
