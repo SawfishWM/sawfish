@@ -87,7 +87,12 @@
   :after-set (lambda () (call-hook 'workspace-state-change-hook)))
 
 (defcustom uniconify-to-current-workspace t
-  "Windows are uniconified onto the current workspace."
+  "Windows uniconify to the current workspace."
+  :type boolean
+  :group (min-max iconify))
+
+(defcustom display-window:uniconify-to-current-workspace t
+  "Windows uniconify to the current workspace when they are selected."
   :type boolean
   :group (min-max iconify))
 
