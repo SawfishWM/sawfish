@@ -26,6 +26,44 @@ int color_type;
 
 DEFSYM(default_foreground, "default-foreground");
 
+DEFUN("get-color-rgb", Fget_color_rgb, Sget_color_rgb,
+      (repv red, repv green, repv blue), rep_Subr3) /*
+::doc:Sget-color-rgb::
+get-color-rgb RED GREEN BLUE
+::end:: */
+{
+    Lisp_Color *f;
+    rep_DECLARE1(red, rep_INTP);
+    rep_DECLARE2(green, rep_INTP);
+    rep_DECLARE3(blue, rep_INTP);
+
+    f = color_list;
+    while (f != 0 && f->red != rep_INT(red)
+	   && f->green != rep_INT(green) && f->blue != rep_INT(blue))
+    {
+	f = f->next;
+    }
+    if (f == 0)
+    {
+	int x_red = rep_INT(red) / 256;
+	int x_green = rep_INT(green) / 256;
+	int x_blue = rep_INT(blue) / 256;
+	int pixel = Imlib_best_color_match (imlib_id, &x_red,
+					    &x_green, &x_blue);
+
+	f = rep_ALLOC_CELL(sizeof(Lisp_Color));
+	f->car = color_type;
+	f->next = color_list;
+	color_list = f;
+
+	f->red = rep_INT(red);
+	f->green = rep_INT(green);
+	f->blue = rep_INT(blue);
+	f->pixel = pixel;
+    }
+    return rep_VAL(f);
+}
+    
 DEFUN("get-color", Fget_color, Sget_color, (repv name), rep_Subr1) /*
 ::doc:Sget-color::
 get-color NAME
@@ -34,43 +72,22 @@ Return the color object representing the color named NAME, a standard
 X11 color specifier.
 ::end:: */
 {
-    Lisp_Color *f;
+    XColor screen_col, exact_col;
     rep_DECLARE1(name, rep_STRINGP);
 
-    f = color_list;
-    while (f != 0 && strcmp (rep_STR(name), rep_STR(f->name)) != 0)
-	f = f->next;
-    if (f == 0)
+    if (XLookupColor (dpy, screen_cmap, rep_STR(name),
+		      &exact_col, &screen_col) != 0)
     {
-	XColor screen_col, exact_col;
-	if (XLookupColor (dpy, screen_cmap, rep_STR(name),
-			  &exact_col, &screen_col) != 0)
-	{
-	    int red = exact_col.red / 256;
-	    int green = exact_col.green / 256;
-	    int blue = exact_col.blue / 256;
-	    int pixel = Imlib_best_color_match (imlib_id,
-						&red, &green, &blue);
-
-	    f = rep_ALLOC_CELL(sizeof(Lisp_Color));
-	    f->car = color_type;
-	    f->next = color_list;
-	    color_list = f;
-
-	    f->name = name;
-	    f->red = exact_col.red;
-	    f->green = exact_col.green;
-	    f->blue = exact_col.blue;
-	    f->pixel = pixel;
-	}
-	else
-	{
-	    return Fsignal (Qerror,
-			    rep_list_2 (rep_string_dup("no such color"),
-					name));
-	}
+	return Fget_color_rgb (rep_MAKE_INT(exact_col.red),
+			       rep_MAKE_INT(exact_col.green),
+			       rep_MAKE_INT(exact_col.blue));
     }
-    return rep_VAL(f);
+    else
+    {
+	return Fsignal (Qerror,
+			rep_list_2 (rep_string_dup("no such color"),
+				    name));
+    }
 }
 
 DEFUN("color-name", Fcolor_name, Scolor_name, (repv color), rep_Subr1) /*
@@ -80,8 +97,11 @@ color-name COLOR
 Return the name of the color represented by the color object COLOR.
 ::end:: */
 {
+    char buf[32];
     rep_DECLARE1(color, COLORP);
-    return VCOLOR(color)->name;
+    sprintf (buf, "#%04x%04x%04x",
+	     VCOLOR(color)->red, VCOLOR(color)->green, VCOLOR(color)->blue);
+    return rep_string_dup (buf);
 }
 
 DEFUN("color-rgb", Fcolor_rgb, Scolor_rgb, (repv color), rep_Subr1) /*
@@ -122,14 +142,9 @@ static void
 color_prin (repv stream, repv obj)
 {
     char buf[256];
-    sprintf (buf, "#<color %s>", rep_STR(VCOLOR(obj)->name));
+    sprintf (buf, "#<color #%04x%04x%04x>",
+	     VCOLOR(obj)->red, VCOLOR(obj)->green, VCOLOR(obj)->blue);
     rep_stream_puts (stream, buf, -1, FALSE);
-}
-
-static void
-color_mark (repv obj)
-{
-    rep_MARKVAL(VCOLOR(obj)->name);
 }
 
 static void
@@ -159,8 +174,9 @@ void
 colors_init (void)
 {
     color_type = rep_register_new_type ("color", color_cmp, color_prin,
-					color_prin, color_sweep, color_mark,
+					color_prin, color_sweep, 0,
 					0, 0, 0, 0, 0, 0, 0);
+    rep_ADD_SUBR(Sget_color_rgb);
     rep_ADD_SUBR(Sget_color);
     rep_ADD_SUBR(Scolor_name);
     rep_ADD_SUBR(Scolor_rgb);
