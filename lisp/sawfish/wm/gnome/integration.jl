@@ -45,7 +45,7 @@
     "Invoke the GNOME control center from the `Customize' menu."
     :type boolean
     :group misc
-    :require sawfish.gnome.integration
+    :require sawfish.wm.gnome.integration
     :after-set (lambda () (gnome-use-capplet-changed)))
 
   (defun gnome-use-capplet-changed ()
