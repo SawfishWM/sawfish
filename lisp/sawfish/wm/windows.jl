@@ -33,6 +33,7 @@
 	     constrain-dimension-to-hints
 	     resize-window-with-hints
 	     resize-window-with-hints*
+	     window-gravity
 	     adjust-position-for-gravity
 	     get-window-wm-protocols
 	     delete-window
@@ -198,27 +199,38 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
     (resize-window-to w (constrain-dimension-to-hints width 'x hints)
 		      (constrain-dimension-to-hints height 'y hints)))
 
-  (define (adjust-position-for-gravity w grav coords)
+  (define (window-gravity w #!optional hints)
+    (or (window-get w 'gravity)
+	(cdr (assq 'window-gravity (or hints (window-size-hints w))))
+	;; default gravity is NorthWest (from ICCCM)
+	'north-west))
+
+  ;; UNADJUST means to reverse the gravity compensation, suitable for
+  ;; when unmanaging windows at shutdown
+  (define (adjust-position-for-gravity w grav coords #!optional unadjust)
     (let* ((tl-off (window-frame-offset w))
 	   (br-off (let ((w-dims (window-dimensions w))
 			 (f-dims (window-frame-dimensions w)))
 		     (cons (- (car f-dims) (car w-dims))
-			   (- (cdr f-dims) (cdr w-dims))))))
+			   (- (cdr f-dims) (cdr w-dims)))))
+	   (sign (if unadjust -1 +1)))
       (setq coords (cons (car coords) (cdr coords)))
       (if (eq grav 'static)
 	  (progn
 	    ;; static gravity is relative to the original
 	    ;; client window position
-	    (rplaca coords (+ (car coords) (car tl-off)))
-	    (rplacd coords (+ (cdr coords) (cdr tl-off))))
+	    (rplaca coords (+ (car coords) (* sign (car tl-off))))
+	    (rplacd coords (+ (cdr coords) (* sign (cdr tl-off)))))
 	(when (memq grav '(east south-east north-east))
 	  ;; relative to the right of the frame
-	  (rplaca coords (- (car coords) (car br-off)
-			    (* -2 (window-border-width w)))))
+	  (rplaca coords (- (car coords)
+			    (* sign (+ (car br-off)
+				       (* -2 (window-border-width w)))))))
 	(when (memq grav '(south south-east south-west))
 	  ;; relative to the bottom of the frame
-	  (rplacd coords (- (cdr coords) (cdr br-off)
-			    (* -2 (window-border-width w))))))
+	  (rplacd coords (- (cdr coords)
+			    (* sign (+ (cdr br-off)
+				       (* -2 (window-border-width w))))))))
       coords))
 
 
