@@ -233,4 +233,5 @@
 (defgroup cycle "Window Cycling" :group focus :require x-cycle)
 (autoload 'cycle-class "x-cycle" t)
 (autoload 'maximize-find-workarea "maximize")
+(autoload 'raise-transients-and-pass-through-click "raise-commands" t)
 ;;; ::autoload-end::

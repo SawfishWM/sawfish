@@ -25,6 +25,7 @@
     window-id window-group-id window-size-hints call-window-hook
     window-maximized-p window-maximized-horizontally-p
     window-maximized-vertically-p input-focus window-icon-image
+    image-ref image-set image-map image-fill color-rgb-8
 
     add-frame-style check-frame-availability set-window-frame-style
     set-frame-for-window reframe-one-window rebuild-frames-with-style
@@ -63,6 +64,9 @@
 ;; `divide' for real division
 (gaol-replace-function 'divide /)
 (gaol-replace-function '/ quotient)
+
+;; left out in 0.12.2 and below
+(gaol-add-function 'define-value)
 
 ;; use safe version of require
 (gaol-replace-function 'require gaol:require)
