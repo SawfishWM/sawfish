@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.33 1999/11/04 22:18:10 john Exp $
+;; $Id: sawmill-ui.jl,v 1.34 1999/11/10 17:22:14 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -373,7 +373,7 @@ exec rep "$0" "$@"
      "clicked"
      #'(lambda (w)
 	 (let
-	     ((value (gtk-font-selection-dialog-get-font-name ',fontsel)))
+	     ((value (gtk-font-selection-dialog-get-font-name fontsel)))
 	   (when (and (string= value "") (get-key spec ':allow-nil))
 	     (setq value nil))
 	   (ui-set spec (get-key spec ':variable) value)
