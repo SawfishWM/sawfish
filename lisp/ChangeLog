@@ -1,4 +1,40 @@
+2000-08-18  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/commands.jl (define-command): spec and type args
+	are now keyword parameters
+
+	* sawfish/wm/workspace.jl, sawfish/wm/windows.jl,
+	sawfish/wm/viewport.jl, sawfish/wm/swapper.jl,
+	sawfish/wm/stacking.jl, sawfish/wm/server.jl,
+	sawfish/wm/gaol.jl, sawfish/wm/frames.jl:
+	* sawfish/wm/commands/x-cycle.jl,
+	sawfish/wm/commands/viewport-linear.jl,
+	sawfish/wm/commands/slide-window.jl,
+	sawfish/wm/commands/size-window.jl,
+	sawfish/wm/commands/raise-commands.jl,
+	sawfish/wm/commands/move-resize.jl,
+	sawfish/wm/commands/grow-pack.jl,
+	sawfish/wm/commands/groups.jl, sawfish/wm/commands/gnome.jl,
+	sawfish/wm/commands/describe.jl: 
+	* sawfish/wm/ext/window-history.jl, sawfish/wm/ext/tooltips.jl,
+	sawfish/wm/ext/edge-flip.jl: 
+	* sawfish/wm/gnome/menus.jl: 
+	* sawfish/wm/placement/smart.jl: 
+	* sawfish/wm/session/load.jl: 
+	* sawfish/wm/state/transient.jl, sawfish/wm/state/shading.jl,
+	sawfish/wm/state/maximize.jl, sawfish/wm/state/ignored.jl,
+	sawfish/wm/state/iconify.jl: 
+	* sawfish/wm/util/prompt.jl, sawfish/wm/util/prompt-extras.jl,
+	sawfish/wm/util/nokogiri.jl, sawfish/wm/util/gtkrc.jl,
+	sawfish/wm/util/edges.jl, sawfish/wm/util/display-window.jl,
+	sawfish/wm/util/compat.jl: 
+
+	Updated for new define-command interface
+
 2000-08-16  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/commands.jl: fixed bug of functions with
+	`(interactive)' not being commandp
 
 	* sawfish/wm/commands.jl: give interactive spec for
 	destroy-window command

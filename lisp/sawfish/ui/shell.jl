@@ -54,7 +54,6 @@
 
   (define (initialize-shell #!optional socket-id)
     (let ((vbox (gtk-vbox-new nil box-spacing))
-	  (paned (gtk-hpaned-new))
 	  (hbox (gtk-hbutton-box-new))
 	  (s-scroller (and (not socket-id) (gtk-scrolled-window-new))))
 

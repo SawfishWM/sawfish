@@ -277,12 +277,9 @@
 			     (gtk-hbox-new nil box-spacing)) items))
 	   (checks (mapcar (lambda ()
 			     (gtk-check-button-new)) items))
-	   (enabled (make-list (length items) nil))
 	   (enabled-item nil)
 	   (refresh-item
 	    (lambda ()
-	      (setq enabled (mapcar (lambda (x)
-				      (eq enabled-item x)) items))
 	      (let ((i 0))
 		(mapc (lambda (x)
 			(set-widget-enabled x (eq enabled-item x))
