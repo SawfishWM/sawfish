@@ -37,6 +37,7 @@ sharedstatedir=@sharedstatedir@
 
 sawmilldir=@sawmilldir@
 lispdir=@lispdir@
+localedir=@localedir@
 sawmillexecdir=@sawmillexecdir@
 host_type=@host@
 
@@ -58,6 +59,7 @@ REP_LIBS=@REP_LIBS@
 GNOME_CC_CFLAGS=@GNOME_CC_CFLAGS@
 GNOME_CC_LIBS=@GNOME_CC_LIBS@
 READLINE_LIBS=@READLINE_LIBS@
+LINGUAS=@LINGUAS@
 
 DESTDIR=
 INSTALL=@INSTALL@
@@ -80,3 +82,9 @@ include $(repexecdir)/rules.mk
 .%.d : %.c
 	$(SHELL) -ec '$(MAKEDEP) $(CPPFLAGS) $(CFLAGS) $< \
 	| sed '\''s/$*\.o/& $*.lo .$*\.d/g'\'' > $@'
+
+# Always use GNU gettext implementation
+REP_MSGFMT=@REP_MSGFMT@
+
+%.mo : %.po
+	$(REP_MSGFMT) $(MSGFMTFLAGS) -o $@ $<

@@ -28,7 +28,7 @@ dnl Release versioning info
 version="0.16"
 
 output_files="src/Makefile lisp/Makefile capplet/Makefile\
- themes/Makefile man/Makefile Makedefs Makefile sawmill.spec"
+ themes/Makefile man/Makefile po/Makefile Makedefs Makefile sawmill.spec"
 
 dnl Find the system type
 AC_CANONICAL_HOST
@@ -42,6 +42,7 @@ esac
 
 sawmilldir='${datadir}/sawmill'
 lispdir='${sawmilldir}/${version}/lisp'
+localedir='${sawmilldir}/${version}/locale'
 sawmillexecdir='${libexecdir}/sawmill/${version}/${host_type}'
 
 dnl Checks for programs.
@@ -179,11 +180,19 @@ if test "x${GCC}" = "xyes" -a "x$CFLAGS" = "x-g -O2"; then
   CFLAGS="${CFLAGS} -Wall -Wmissing-prototypes -Wno-implicit-int"
 fi
 
+AC_MSG_CHECKING(for languages to install)
+if test "x$LINGUAS" = x; then
+  LINGUAS=`find po -name '*.po' -print | sed -e 's/^po\/\(.*\)\.po$/\1/'`
+fi
+AC_MSG_RESULT($LINGUAS)
+AC_SUBST(LINGUAS)
+
 dnl Nonstandard exported symbols
 AC_SUBST(version)
 AC_SUBST(sawmilldir)
 AC_SUBST(sawmillexecdir)
 AC_SUBST(lispdir)
+AC_SUBST(localedir)
 AC_SUBST(HAVE_X11)
 AC_SUBST(LIBOBJS)
 AC_SUBST(CPPFLAGS)
