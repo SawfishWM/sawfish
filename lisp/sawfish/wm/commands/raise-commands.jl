@@ -40,3 +40,12 @@ replay any pointer events that invoked the command."
   (allow-events 'replay-pointer)
   (unless (clicked-frame-part)
     (forget-button-press)))
+
+;;;###autoload
+(defun raise-or-pass-through-click (w)
+  (interactive "%w")
+  (if (and (windowp w) (not (window-on-top-p w)))
+      (raise-window w)
+    (allow-events 'replay-pointer)
+    (unless (clicked-frame-part)
+      (forget-button-press))))
