@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui,v 1.4 1999/08/09 15:21:59 john Exp $
+;; $Id: sawmill-ui.jl,v 1.1 1999/08/10 16:19:20 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -38,6 +38,7 @@ fi
 (defvar ui-root nil)
 (defvar ui-apply nil)
 (defvar ui-revert nil)
+(defvar ui-ok nil)
 
 ;; list of (SPEC . VALUE)
 (defvar ui-values-to-apply nil)
@@ -52,6 +53,12 @@ fi
 
 (defvar ui-box-spacing 4)
 (defvar ui-box-border 5)
+
+;; XXX this doesn't always work 100%..
+(defvar ui-enable-revert nil)
+
+;; XXX this may be confusing?
+(defvar ui-enable-refresh nil)
 
 
 ;; ui builder
@@ -301,11 +308,11 @@ fi
        (ui-window (gtk-window-new 'toplevel))
        (ui-root (build-ui spec))
        (vbox (gtk-vbox-new nil 0))
-       (hbox (gtk-hbox-new nil 0))
-       (ok (gtk-button-new-with-label "OK"))
+       (hbox (gtk-hbutton-box-new))
+       (ui-ok (gtk-button-new-with-label "OK"))
        (ui-apply (gtk-button-new-with-label "Try"))
-       (ui-revert (gtk-button-new-with-label "Revert"))
-       (refresh (gtk-button-new-with-label "Refresh"))
+       (ui-revert (and ui-enable-revert (gtk-button-new-with-label "Revert")))
+       (refresh (and ui-enable-refresh (gtk-button-new-with-label "Refresh")))
        (cancel (gtk-button-new-with-label "Cancel")))
     (gtk-window-set-title ui-window "Sawmill configurator")
     (gtk-widget-set-name ui-window "Sawmill configurator")
@@ -316,16 +323,21 @@ fi
     (gtk-box-set-spacing hbox ui-box-spacing)
     (gtk-container-border-width hbox ui-box-border)
     (gtk-box-pack-end vbox hbox)
-    (gtk-signal-connect ok "clicked" 'ui-ok)
+    (gtk-button-box-set-layout hbox 'end)
+    (gtk-signal-connect ui-ok "clicked" 'ui-ok)
     (gtk-signal-connect ui-apply "clicked" 'ui-apply)
     (gtk-signal-connect cancel "clicked" 'ui-cancel)
-    (gtk-signal-connect ui-revert "clicked" #'(lambda () (ui-revert)))
-    (gtk-signal-connect refresh "clicked" 'ui-refresh)
-    (gtk-box-pack-start hbox ui-apply)
-    (gtk-box-pack-start hbox ui-revert)
-    (gtk-box-pack-start hbox ok)
-    (gtk-box-pack-start hbox cancel)
-    (gtk-box-pack-end hbox refresh)
+    (when ui-enable-revert
+      (gtk-signal-connect ui-revert "clicked" #'(lambda () (ui-revert))))
+    (when ui-enable-refresh
+      (gtk-signal-connect refresh "clicked" 'ui-refresh))
+    (gtk-container-add hbox ui-apply)
+    (when ui-enable-revert
+      (gtk-container-add hbox ui-revert))
+    (gtk-container-add hbox ui-ok)
+    (gtk-container-add hbox cancel)
+    (when ui-enable-refresh
+      (gtk-container-add hbox refresh))
     (gtk-box-pack-start vbox ui-root)
     (ui-set-button-states)
     (gtk-widget-show-all ui-window)
@@ -336,7 +348,11 @@ fi
     (gtk-widget-set-sensitive ui-apply (or ui-values-to-apply
 					   ui-apply-changed-hook)))
   (when ui-revert
-    (gtk-widget-set-sensitive ui-revert ui-changed-variables)))
+    (gtk-widget-set-sensitive ui-revert ui-changed-variables))
+  (when ui-apply
+    (gtk-widget-set-sensitive ui-ok (or ui-values-to-apply
+					ui-apply-changed-hook
+					ui-changed-variables))))
 
 (defun ui-set-button-label (button text)
   (mapc #'(lambda (w)
@@ -443,14 +459,10 @@ fi
 
 ;; entry point, loop reading command forms, sending back results
 
-(condition-case nil
-    (while t
-      (let
-	  ((input (read standard-input)))
-	(show-ui input)
-	(ui-command '(ui-exit))))
-  (end-of-stream))
-
+(let
+    ((input (read standard-input)))
+  (show-ui input)
+  (ui-command '(ui-exit)))
 
 ;; Local Variables:
 ;; major-mode: lisp-mode
