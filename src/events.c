@@ -88,7 +88,7 @@ static void
 visibility_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xvisibility.window);
-    if (w != 0 && ev->xvisibility.window == w->frame)
+    if (w != 0)
     {
 	repv vis;
 	w->frame_vis = ev->xvisibility.state;
