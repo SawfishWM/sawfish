@@ -96,13 +96,14 @@
 		   (setq type (expand-last-match "\\1")))))
 	(close-file file))
       (cond ((string= (file-name-nondirectory filename) ".directory")
-	     `(,name ,@(gnome-menu-read-directory
-			(file-name-directory filename))))
+	     `(,(or name filename) ,@(gnome-menu-read-directory
+				      (file-name-directory filename))))
 	    (exec
 	     ;; create a menu item
-	     `(,name (system ,(concat (if terminal
-					  (concat "xterm -e " exec)
-					exec) " &"))))))))
+	     `(,(or name exec)
+	       (system ,(concat (if terminal
+				    (concat "xterm -e " exec)
+				  exec) " &"))))))))
 
 (defun gnome-menu-read-order (filename)
   (let
