@@ -19,6 +19,9 @@
    along with sawmill; see the file COPYING.   If not, write to
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
+/* Define this to disable all pixmap caching */
+#undef DISABLE_CACHE
+
 /* Commentary:
 
    This file provides the pixmap cache, a mapping from (image, width,
@@ -117,6 +120,15 @@ free_node (pixmap_cache_node *n, bool dealloc)
 	rep_free (n);
 }
 
+static void
+delete_node (pixmap_cache_node *n, bool dealloc)
+{
+    remove_from_image (n);
+    remove_from_age_list (n);
+    cached_pixels -= n->width * n->height;
+    free_node (n, dealloc);
+}
+
 
 /* public interface */
 
@@ -153,6 +165,10 @@ pixmap_cache_unref (Lisp_Image *im, Pixmap p1, Pixmap p2)
 	if (n->p1 == p1 && n->p2 == p2)
 	{
 	    n->ref_count--;
+#ifdef DISABLE_CACHE
+	    if (n->ref_count == 0)
+		delete_node (n, TRUE);
+#endif		
 	    return;
 	}
     }
@@ -174,10 +190,7 @@ pixmap_cache_set (Lisp_Image *im, int width, int height,
 	    this = this->newer;
 	if (this == 0)
 	    break;
-	remove_from_image (this);
-	remove_from_age_list (this);
-	cached_pixels -= this->width * this->height;
-	free_node (this, n != 0);
+	delete_node (this, n != 0);
 	if (n == 0)
 	    n = this;
     }
