@@ -34,22 +34,23 @@
 	  (hbox (gtk-hbox-new nil 0))
 	  (combo (gtk-combo-new))
 	  (doc-label (gtk-label-new doc))
-	  (readme-label (gtk-label-new ""))
+	  (readme-text (gtk-text-new))
 	  (readme-scroller (gtk-scrolled-window-new))
 	  (value (car options)))
 
       (gtk-box-set-spacing hbox box-spacing)
       (gtk-box-set-spacing vbox box-spacing)
-      (gtk-scrolled-window-add-with-viewport readme-scroller readme-label)
+      (gtk-container-add readme-scroller readme-text)
       (gtk-container-add hbox combo)
       (gtk-container-add hbox doc-label)
       (gtk-container-add vbox readme-scroller)
       (gtk-container-add vbox hbox)
       (gtk-label-set-justify doc-label 'left)
-      (gtk-label-set-justify readme-label 'left)
+      ;;(gtk-text-set-word-wrap readme-text 1)
+      (gtk-editable-set-editable readme-text nil)
       (gtk-entry-set-editable (gtk-combo-entry combo) nil)
       (gtk-scrolled-window-set-policy readme-scroller 'automatic 'automatic)
-      (gtk-widget-set-usize readme-scroller -2 200)
+      (gtk-widget-set-usize readme-scroller -2 150)
 
       (gtk-combo-set-popdown-strings combo (mapcar symbol-name options))
       (when value
@@ -59,10 +60,10 @@
 			  (lambda ()
 			    (setq value (intern (gtk-entry-get-text
 						 (gtk-combo-entry combo))))
-			    (update-readme value readme-label path)
+			    (update-readme value readme-text path)
 			    (call-callback changed-callback)))
 
-      (update-readme value readme-label path)
+      (update-readme value readme-text path)
       (gtk-widget-show-all vbox)
 
       (lambda (op)
@@ -77,7 +78,13 @@
 
   (define-widget-type 'frame-style make-frame-style-item)
 
-  (define (update-readme value label theme-path)
+  (define (gtk-text-set widget string)
+    (gtk-text-set-point widget 0)
+    (gtk-text-forward-delete widget (gtk-text-get-length widget))
+    (gtk-text-insert widget nil nil nil string (length string))
+    (gtk-text-set-point widget 0))
+
+  (define (update-readme value text-widget theme-path)
     (catch 'out
       (let ((theme (symbol-name value)))
 	(mapc (lambda (dir)
@@ -104,9 +111,9 @@
 				(setq text (get-output-stream-string text))
 				(when (string-match "\\s+$" text)
 				  (setq text (substring text 0 (match-start))))
-				(gtk-label-set label text))
+				(gtk-text-set text-widget text))
 			    (close-file file)))
-		      (gtk-label-set label ""))
+		      (gtk-text-set text-widget ""))
 		    (throw 'out t))))
 	      theme-path)
-	(gtk-label-set label "")))))
+	(gtk-text-set text-widget "")))))
