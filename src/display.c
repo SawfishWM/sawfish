@@ -224,14 +224,17 @@ choose_visual (void)
 	else if (!strcasecmp ("DirectColor", visual_name))
 	    id = DirectColor;
     }
-    if (id != 0)
+    if (id != 0 || preferred_depth != 0)
     {
 	XVisualInfo in, *out;
-	int n_out;
-	in.class = id;
+	int mask = VisualScreenMask, n_out;
 	in.screen = screen_num;
-	out = XGetVisualInfo (dpy, VisualClassMask
-			      | VisualScreenMask, &in, &n_out);
+	if (id != 0)
+	{
+	    in.class = id;
+	    mask |= VisualClassMask;
+	}
+	out = XGetVisualInfo (dpy, mask, &in, &n_out);
 	if (out != 0)
 	{
 	    int i, best = -1;
