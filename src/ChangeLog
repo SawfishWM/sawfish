@@ -1,5 +1,11 @@
 1999-10-14  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c (Fhide_window): go back to old method of not
+	unfocusing when hidden window has focus
+
+	* windows.c (add_window): set the `mapped' bit (so that it's
+	set when hooks are called)
+
 	* session.c (save_yourself): ignore SmSaveGlobal requests
 
 	* events.c (handle_input_mask): don't set last_event_time to
