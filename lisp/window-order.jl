@@ -25,7 +25,7 @@
 (defvar window-order-highest 1)
 
 ;; return windows in MRU order
-(defun window-order (&optional workspace allow-iconified)
+(defun window-order (&optional workspace allow-iconified all-viewports)
   (let
       ((windows (managed-windows)))
     (setq windows (delete-if #'(lambda (w)
@@ -38,6 +38,8 @@
 					  (not (equal (window-get w 'workspace)
 						      workspace)))))
 			     windows))
+    (unless all-viewports
+      (setq windows (delete-if 'window-outside-viewport-p windows)))
     (sort windows #'(lambda (x y)
 		      (setq x (window-get x 'order))
 		      (setq y (window-get y 'order))
