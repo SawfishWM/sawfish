@@ -95,15 +95,41 @@ for the bindings to be installed if and when it is."
 (defvar km-where-is-results nil)
 
 ;;;###autoload
-(defun where-is (command keymap)
+(defun where-is (command &optional keymap)
   (let
       ((km-where-is-results nil))
     (map-keymap (lambda (k)
 		  (when (eq (car k) command)
 		    (setq km-where-is-results
 			  (cons (event-name (cdr k)) km-where-is-results))))
-		keymap)
+		(or keymap global-keymap))
     km-where-is-results))
+
+;;;###autoload
+(defun describe-key (&optional map)
+  "Prompt for a key sequence, then print its binding."
+  (interactive)
+  (let (components)
+    (letrec
+	((loop
+	  (lambda (keymap)
+	    (let* ((key (read-event (concat "Describe key: " components)))
+		   (binding (and key (search-keymap key keymap))))
+	      (when binding
+		(setq binding (car binding))
+		(setq components (concat components
+					 (and components ? )
+					 (event-name key)))
+		(cond ((keymapp binding)
+		       (loop binding))
+		      ((and (symbolp binding)
+			    (keymapp (symbol-value binding t)))
+		       (loop (symbol-value binding)))
+		      (t
+		       (format standard-output
+			       "`%s' is bound to `%s'\n" components binding)
+		       (describe-function binding))))))))
+      (loop (or map global-keymap)))))
 
 
 ;; grab the next key event
