@@ -29,6 +29,7 @@
 	     get-window-by-name-re
 	     window-really-wants-input-p
 	     desktop-window-p
+	     mark-window-as-desktop
 	     window-in-cycle-p
 	     window-class
 	     warp-cursor-to-window
@@ -116,7 +117,13 @@ Returns nil if no such window is found."
 	     (window-wants-input-p w))))
 
   (define (desktop-window-p arg)
+    "Return true if ARG represents a desktop window."
     (or (eq arg 'root) (and (windowp arg) (window-get arg 'desktop))))
+
+  (define (mark-window-as-desktop w)
+    "Mark that the window associated with object W is a desktop window."
+    (window-put w 'desktop t)
+    (window-put w 'keymap root-window-keymap))
 
   (define (window-in-cycle-p w)
     "Returns true if the window W should be included when cycling between
