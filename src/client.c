@@ -281,7 +281,7 @@ main(int argc, char *argv[])
 			if(bufuse + len + 1 >= bufsiz)
 			{
 			    bufsiz *= 2;
-			    input_buf = realloc(buf, bufsiz);
+			    input_buf = realloc(input_buf, bufsiz);
 			    if(input_buf == 0)
 			    {
 				perror("realloc");
