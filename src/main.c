@@ -178,8 +178,8 @@ sawfish_symbols (void)
     else
     {
 	Fset (Qdocumentation_file,
-	      rep_concat2 (rep_STR (Fsymbol_value (Qsawfish_directory, Qt)),
-			   "/" SAWFISH_VERSION "/DOC"));
+	      rep_concat2 (rep_STR (Fsymbol_value
+				    (Qsawfish_exec_directory, Qt)), "/DOC"));
     }
 
     Fset (Qdocumentation_files, Fcons(Fsymbol_value (Qdocumentation_file, Qt),
