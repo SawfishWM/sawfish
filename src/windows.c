@@ -30,7 +30,9 @@ Lisp_Window *focus_window;
 static bool initialising;
 
 DEFSYM(add_window_hook, "add-window-hook");
+DEFSYM(before_add_window_hook, "before-add-window-hook");
 DEFSYM(place_window_hook, "place-window-hook");
+DEFSYM(placed, "placed");
 
 /* for visibility-notify-hook */
 DEFSYM(fully_obscured, "fully-obscured");
@@ -297,8 +299,9 @@ add_window (Window id)
 
         w->visible = TRUE;
 
-	/* ..then call the add-window-hook.. */
+	/* ..then call the add-window-hook's.. */
 	rep_PUSHGC(gc_win, win);
+	Fcall_window_hook (Qbefore_add_window_hook, rep_VAL(w), Qnil, Qnil);
 	Fcall_window_hook (Qadd_window_hook, rep_VAL(w), Qnil, Qnil);
 	rep_POPGC;
 
@@ -320,10 +323,14 @@ add_window (Window id)
 
 	if (w->id != 0 && !initialising)
 	{
-	    /* ..then the place-window-hook.. */
-	    rep_PUSHGC(gc_win, win);
-	    Fcall_window_hook (Qplace_window_hook, rep_VAL(w), Qnil, Qor);
-	    rep_POPGC;
+	    repv tem = Fwindow_get (rep_VAL(w), Qplaced);
+	    if (tem && tem == Qnil)
+	    {
+		/* ..then the place-window-hook.. */
+		rep_PUSHGC(gc_win, win);
+		Fcall_window_hook (Qplace_window_hook, rep_VAL(w), Qnil, Qor);
+		rep_POPGC;
+	    }
 	}
     }
     return w;
@@ -804,6 +811,8 @@ member of, or nil if it is not a member of a group.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
+    if (VWIN(win)->wmhints == 0)
+	return Qnil;
     return ((VWIN(win)->wmhints->flags & WindowGroupHint)
 	    ? rep_MAKE_INT (VWIN(win)->wmhints->window_group)
 	    : Qnil);
@@ -1025,8 +1034,11 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_group_id);
     rep_ADD_SUBR(Swindow_size_hints);
     rep_ADD_SUBR(Scall_window_hook);
+
+    rep_INTERN(before_add_window_hook);
     rep_INTERN(add_window_hook);
     rep_INTERN(place_window_hook);
+    rep_INTERN(placed);
 
     rep_INTERN(fully_obscured);
     rep_INTERN(partially_obscured);
