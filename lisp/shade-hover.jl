@@ -71,9 +71,9 @@
 	  ((callback
 	    (lambda ()
 	      (window-put w 'shade-hover-unshaded t)
-	      (unshade-window w)
-	      (when shade-hover-raise
-		(raise-window w)))))
+	      (let
+		  ((raise-windows-when-unshaded shade-hover-raise))
+		(unshade-window w)))))
 	(when shade-hover-timer
 	  (delete-timer shade-hover-timer))
 	(if (zerop shade-hover-delay)
