@@ -255,12 +255,13 @@ struct frame_part {
     int highlighted : 1;
     int pending_refresh : 1;
     int below_client : 1;
+    int scale_foreground : 1;
 
     repv text;			/* may be nil, a string, or a function */
     repv x_justify, y_justify;
 
     repv font[fps_MAX];
-    repv fg[fps_MAX];			/* may only be color */
+    repv fg[fps_MAX];			/* may be color or image */
     repv bg[fps_MAX];			/* may be color or image */
 
     /* If renderer != Qnil, this overrides the bg array. It's a
