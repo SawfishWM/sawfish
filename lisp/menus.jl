@@ -90,8 +90,8 @@ unused before killing it.")
     ("Frame style" . frame-style-menu)))
 
 (defvar root-menu
-  '(("Workspaces" . workspace-menu)
-    ("Windows" . window-menu)
+  '(("Windows" . window-menu)
+    ("Workspaces" . workspace-menu)
     (apps-menu)
     ("Customize" . custom-menu)
     ("About..." (lambda () (customize 'about)))
