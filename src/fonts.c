@@ -20,6 +20,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
+#include <string.h>
 #include <X11/Xlocale.h>
 
 static Lisp_Font *font_list;
@@ -333,12 +334,12 @@ xlfd_match_element (const char *xlfd, ...)
 }
 
 static char *
-xlfd_get_element (const char *xlfd, int index)
+xlfd_get_element (const char *xlfd, int idx)
 {
     const char *p = xlfd;
     while (*p != 0)
     {
-	if (*p == '-' && --index == 0)
+	if (*p == '-' && --idx == 0)
 	{
 	    const char *end = strchr (p + 1, '-');
 	    char *buf;
