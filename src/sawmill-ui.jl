@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.59 2000/04/24 23:55:03 john Exp $
+;; $Id: sawmill-ui.jl,v 1.60 2000/05/03 22:02:05 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -695,11 +695,8 @@ exec rep "$0" "$@"
     (gtk-container-add vbox deleteb)
     (mapc (lambda (cell)
 	    (gtk-clist-append clist (vector (cdr cell)
-					    (format nil "%s"
-						    (if (symbolp (car cell))
-							(beautify-symbol-name
-							 (car cell))
-						      (car cell))))))
+					    (beautify-symbol-name
+					     (car cell)))))
 	  (cdr (get-key spec ':value)))
     (setq spec (nconc spec (list ':shell ui-keymap-shell
 				 ':clist clist
@@ -736,7 +733,7 @@ exec rep "$0" "$@"
     (ui-set spec (get-key spec ':variable) map)
     (gtk-clist-insert (get-key spec ':clist)
 		      (get-key spec ':selection)
-		      (vector "Null" "nop"))
+		      (vector "Null" (beautify-symbol-name 'nop)))
     (gtk-clist-select-row (get-key spec ':clist)
 			  (get-key spec ':selection) 0)))
 
@@ -749,7 +746,8 @@ exec rep "$0" "$@"
     (ui-set spec (get-key spec ':variable) map)
     (gtk-clist-insert (get-key spec ':clist)
 		      (get-key spec ':selection)
-		      (vector (cdr binding) (format nil "%S" (car binding))))
+		      (vector (cdr binding)
+			      (beautify-symbol-name (car binding))))
     (set-key spec ':selection (1+ (get-key spec ':selection)))
     (gtk-clist-select-row (get-key spec ':clist)
 			  (get-key spec ':selection) 0)))
@@ -772,10 +770,7 @@ exec rep "$0" "$@"
       (gtk-clist-set-text (get-key spec ':clist)
 			  index 0 (cdr new))
       (gtk-clist-set-text (get-key spec ':clist)
-			  index 1 (format nil "%s"
-					  (if (symbolp (car new))
-					      (beautify-symbol-name (car new))
-					    (car new)))))))
+			  index 1 (beautify-symbol-name (car new))))))
 
 (defun build-keymap-shell (spec)
   (let*
@@ -1664,15 +1659,18 @@ exec rep "$0" "$@"
 	 file)))
 
 (defun beautify-symbol-name (symbol)
-  (if (not ui-beautify-keymaps)
-      (symbol-name symbol)
-    (let
-	((name (copy-sequence (symbol-name symbol))))
-      (while (string-match "[-:]" name)
-	(setq name (concat (substring name 0 (match-start))
-			   ?  (substring name (match-end)))))
-      (aset name 0 (char-upcase (aref name 0)))
-      name)))
+  (cond ((stringp symbol) symbol)
+	((not (symbolp symbol)) (format "%s" symbol))
+	(t
+	 (if (not ui-beautify-keymaps)
+	     (symbol-name symbol)
+	   (let
+	       ((name (copy-sequence (symbol-name symbol))))
+	     (while (string-match "[-:]" name)
+	       (setq name (concat (substring name 0 (match-start))
+				  ?  (substring name (match-end)))))
+	     (aset name 0 (char-upcase (aref name 0)))
+	     name)))))
 
 
 ;; color previews
