@@ -19,8 +19,9 @@ focus when moving windows between workspaces
 (@code{cycle-disable-auto-raise}); option to restrict cycling to the
 current viewport (@code{cycle-all-viewports})
 
-@item New option @code{lock-first-workspace}, enabled by default,
-prevents the interesting workspaces being contracted
+@item Option @code{lock-first-workspace} is now enabled by default, and
+prevents both the first and last interesting workspaces being moved
+inwards
 
 @item Added readline support to the client program, pass
 @samp{--with-readline} option to configure (from Christopher P Goller
@@ -32,9 +33,12 @@ prevents the interesting workspaces being contracted
 
 @item Release passive grabs when unadopting windows
 
+@item When no window has the focus, the @code{root-window-keymap} is
+searched for key-press events
+
 @item Fix bug when binding to the unix-domain socket
 
-@item Fix focus somtimes being lost when the focused window is
+@item Fix focus sometimes being lost when the focused window is
 destroyed
 
 @item Fix bug when reading GNOME menu entries without @samp{Type}
@@ -49,8 +53,15 @@ window types (make the window completely unframed)
 @item Fix some bugs when placing windows that are almost as big or
 bigger than the screen
 
-@item Fixed some race-conditions between wm-generated and
+@item Fix some race-conditions between wm-generated and
 client-generated map/unmap/reparent events
+
+@item Fix infamous ``jerky pointer'' bug, this will also make
+overlapping shaped frame-parts display correctly
+
+@item Fix bug where @code{cycle-windows} could leave a window
+originally under the pointer that's unfocused, drawn as though it is
+focused
 
 @end itemize
 

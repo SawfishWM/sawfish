@@ -1,9 +1,25 @@
+1999-10-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (focus_in, focus_out): ignore events with detail
+	NotifyPointer
+
 1999-10-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (set_frame_shapes): new function, construct the
+	frame shape from the union of all individual shapes
+	(set_frame_part_bg): draw the background manually, instead of
+	setting it as the window background and letting the X server do it
+	[these changes fix the infamous ``jerky pointer while changing
+	focus'' bug, also the `unshaped' property has been removed]
+
+	* windows.c (set_window_shape): deleted
+	* events.c (shape_notify): call set_frame_shapes not
+	set_window_shape
 
 	* keys.c (lookup_binding): when event is from no_focus_window,
 	search the root-window-keymap
 
-	* windows.c (before_local_map, after_local_map): new method
+	* windows.c (before_local_map, after_local_map): new method of
 	ignoring locally-generated map/unmap/reparent notify events;
 	should remove all race conditions (!). The method is to grab
 	the server, unselect the StructureNotifyMask on the window, do

@@ -22,11 +22,6 @@ Outstanding bugs
   ! latency when starting menu subprocesses can be annoying (pointer
     events are handled unintuitively)
 
-  ! shaped frame parts overlapping shaped client windows lose
-
-    does this need fixing..? similarly, shaped frame parts overlapping
-    each other will overwrite the lower part's mask..
-
   ! It's not possible to compile sawmill-ui.jl without an X connection
     (it requires 'gtk, which then calls gtk_init (), ...)
 
@@ -46,43 +41,7 @@ Outstanding bugs
     (this could be due to grabbing in SyncPointer mode, but
     XAllowEvents should always be called..?)
 
-  ! desk-guide misinterprets the window geometries when there's more
-    than one workspace, with multiple viewports
-
-    I've got a patch to add support for a _WIN_UNIFIED_AREA root
-    property to desk-guide; this uses the old gnome pager behaviour of
-    moving the viewport on all workspaces when _WIN_AREA is changed
-
-    also, when workspaces are added it sometimes doesn't notice that
-    the contents of the current workspace changed (since it still has
-    the same index, i.e. insert before the first and move to it)
-
   ! xv/java-apps get weird placement [apps being non-ICCCM compliant?]
-
-  ! 1) Use my custom file attached to this mail.
-       [basically, click-to-focus]
-
-    2) Put up three windows on the screen.
-
-   +-Window 1----+
-   |             |
-   |             |
-   |             |   +-Window 3----+
-   +-------------+   | Mouse       |
-                     | pointer     |
-   +-Window 2----+   | in here.    |
-   |             |   +-------------+
-   |             |
-   |             |
-   +-------------+
-
-    3) Have Window 1 and Window 2 highest in the "focus stack", so you
-    can change between them with an Alt-Tab.
-
-    4) With the mouse pointer in Window 3 and focus on Window 1, press
-    A-TAB so the focus goes to Window 2. Release TAB but not Alt.
-
-    5) Notice that both Window 2 and Window 3 are highlighted.
 
 
 General tasks
@@ -97,26 +56,6 @@ General tasks
   + ui method for matching windows to attributes
 
     allow matching of WM_CLASS as well as WM_NAME
-
-  + rewrite fg/bg updating
-
-    1. function to form shape union of client and all parts
-
-    2. set local shape mask of each part where necessary
-
-    3. draw bg&fg in one go, but don't use the window bg
-
-       [it turns out that clearing the frame part to update the
-       bg is the performance bottleneck causing the pointer jerkyness]
-
-       this means that bg will have to be drawn in exposures, but..
-
-    4. require that frame part bg shapes are the same for all
-       images (normal, focused, etc..)
-
-       possibly, assume that having a `removable' property means that
-       the part's shape is local (i.e. that there's something else
-       beneath it)
 
   + do the virtual-workspace edge-flipping thing?
 
@@ -135,7 +74,7 @@ General tasks
   + features for the gnome/redhat guys:
 
     * code to read the gnome apps menu, then replace apps-menu
-      [2/10: this is pretty much done]
+      [2/10: this is pretty much done: (require 'gnome-menu)]
 
     * remove restart/quit/[about?] from the root menu
 
