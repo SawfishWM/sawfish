@@ -93,12 +93,12 @@ msgstr "Додано шаблон \"%s\""
 
 #. ../themer/themer.in
 msgid "Frame name"
-msgstr "Назва кадру"
+msgstr "Назва рамки"
 
 #. ../themer/themer.in
 #, c-format
 msgid "Added frame `%s'"
-msgstr "Додано кадр \"%s\""
+msgstr "Додано рамку \"%s\""
 
 #. ../themer/themer.in
 msgid "<none>"
@@ -107,11 +107,11 @@ msgstr "<нема╓>"
 #. ../themer/themer.in
 #, c-format
 msgid "Added frame type `%s'"
-msgstr "Додано кадр типу \"%s\""
+msgstr "Додано рамку типу \"%s\""
 
 #. ../themer/themer.in
 msgid "error while building frame: %S"
-msgstr "помилка складання кадру: %S"
+msgstr "помилка складання рамки: %S"
 
 #. ../themer/themer.in
 #, c-format
@@ -176,7 +176,7 @@ msgstr "д╕гональна"
 
 #. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
-msgstr "Напрямок град╕╓нту в кадр╕ град╕╓нтного типу."
+msgstr "Напрямок град╕╓нту в рамц╕ град╕╓нтного типу."
 
 #. ../themes/gradient/theme.jl
 msgid "`From' color of inactive frames in `gradient' frame style."
@@ -207,12 +207,12 @@ msgstr "Монохронма тема"
 #. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
 msgstr ""
-"Кол╕р неактивних кадр╕в (якщо не встановлено, використання кольору тла GTK+)."
+"Кол╕р неактивних рамок (якщо не встановлено, використання кольору тла GTK+)."
 
 #. ../themes/mono/theme.jl
 msgid "Color of active frames (if unset use GTK+ selection color)."
 msgstr ""
-"Кол╕р активних кадр╕в (якщо не встановлено, використання кольору вибору GTK+)."
+"Кол╕р активних рамок (якщо не встановлено, використання кольору вибору GTK+)."
 
 #. ../themes/mono/theme.jl
 msgid "left"
@@ -236,11 +236,11 @@ msgstr "Проста тема"
 
 #. ../themes/simple/theme.jl
 msgid "Color of inactive frames in `simple' frame style."
-msgstr "Кол╕р неактивних кадр╕в у \"простому\" стил╕ кадру."
+msgstr "Кол╕р неактивних рамок у \"простому\" стил╕ рамки."
 
 #. ../themes/simple/theme.jl
 msgid "Color of active frames in `simple' frame style."
-msgstr "Кол╕р активних кадр╕в у \"простому\" стил╕ кадру."
+msgstr "Кол╕р активних рамок у \"простому\" стил╕ рамки."
 
 #. ../themes/smaker/theme.jl
 msgid "SMaker Theme"
@@ -611,7 +611,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Motion threshold for mouse pointer: \\wpixels"
-msgstr ""
+msgstr "Пор╕г перем╕щення для вказ╕вника миш╕ (в п╕кселях): \\w"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default window manager shortcuts."
@@ -2128,6 +2128,8 @@ msgid ""
 "The program used to play audio samples. If unset, built-in support for ESD "
 "is used."
 msgstr ""
+"Програма, що використову╓ться для в╕дтворення звук╕в. Якщо не встановлено, "
+"використову╓ться владнана п╕дтримка для ESD."
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
@@ -2205,19 +2207,19 @@ msgstr "Сфокусоване"
 
 #. ../themer/themer.glade:987 ../themer/themer.glade:1422
 msgid "Frame"
-msgstr "Кадр"
+msgstr "Рамка"
 
 #. ../themer/themer.glade:238
 msgid "Frame Part _Definitions"
-msgstr "Визначення кадру"
+msgstr "Означення частин рамки"
 
 #. ../themer/themer.glade:226
 msgid "Frame _Classes"
-msgstr "Класи кадру"
+msgstr "Класи рамок"
 
 #. ../themer/themer.glade:1237
 msgid "Frames"
-msgstr "Кадри"
+msgstr "Рамки"
 
 #. ../themer/themer.glade:622
 msgid "HIghlighted"
@@ -2302,7 +2304,7 @@ msgstr "Тип"
 
 #. ../themer/themer.glade:214
 msgid "Window _Frames"
-msgstr "Кадри в╕кна"
+msgstr "Рамки в╕кон"
 
 #. ../themer/themer.glade:1652
 msgid "[about text]"
@@ -2310,11 +2312,11 @@ msgstr "[текст про]"
 
 #. ../themer/themer.glade:1106
 msgid "[frame-part-table]"
-msgstr ""
+msgstr "[таблиця-частин-рамки]"
 
 #. ../themer/themer.glade:1766
 msgid "[place holder]"
-msgstr ""
+msgstr "[зарезервоване м╕сце]"
 
 #. ../themer/themer.glade:1786 ../themer/themer.glade:1876
 msgid "[title]"
@@ -2351,108 +2353,3 @@ msgstr "Установки"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "Теми"
-
-#~ msgid "Map window events to sound files."
-#~ msgstr "В╕добразити под╕╖ в╕кон у звуков╕ файли."
-
-#~ msgid "Sample"
-#~ msgstr "Фра╜мент"
-
-#~ msgid "Main"
-#~ msgstr "Головне"
-
-#~ msgid "Update all windows when the default frame style is changed."
-#~ msgstr "Оновити вс╕ в╕кна, коли буде зм╕нено типовий стиль рамки."
-
-#~ msgid "List of group ids that always exist, even when they have no members."
-#~ msgstr ""
-#~ "Перериховувати список завжди ╕снуючих ╕дентиф╕катор╕в груп, нав╕ть вони не "
-#~ "мають член╕в."
-
-#~ msgid "_Iconify"
-#~ msgstr "М╕н╕м╕зувати"
-
-#~ msgid "_Delete"
-#~ msgstr "Стерти"
-
-#~ msgid "Destroy"
-#~ msgstr "Знищити"
-
-#~ msgid "_Both"
-#~ msgstr "В ус╕х напрямках"
-
-#~ msgid "Fill vertically"
-#~ msgstr "Заповнити вертикально"
-
-#~ msgid "Fill horizontally"
-#~ msgstr "Заповнити горизонтально"
-
-#~ msgid "Fill both"
-#~ msgstr "Максим╕зувати"
-
-#~ msgid "Depth"
-#~ msgstr "Глибина"
-
-#~ msgid "Cancel string input."
-#~ msgstr "В╕дм╕нити вв╕д рядка."
-
-#~ msgid "End input and accept current string."
-#~ msgstr "Завершити вв╕д та прийняти поточний рядок."
-
-#~ msgid "Clear input buffer."
-#~ msgstr "Очистити буфер вводу."
-
-#~ msgid "Remove previous character from buffer."
-#~ msgstr "Видалити попередн╕й символ з буфера."
-
-#~ msgid "Delete rest of line."
-#~ msgstr "Стерти залишок рядка."
-
-#~ msgid "Move forward one character."
-#~ msgstr "Перейти вперед на один символ."
-
-#~ msgid "Move backward one character."
-#~ msgstr "Перейти назад на один символ."
-
-#~ msgid "Move to beginning of line."
-#~ msgstr "Перейти на початок рядка."
-
-#~ msgid "Move to end of line."
-#~ msgstr "Перейти на к╕нець рядка."
-
-#~ msgid "%s%s"
-#~ msgstr "%s%s"
-
-#~ msgid "Cycle through all windows in order of recent selections."
-#~ msgstr "Перебирати в╕кна в порядку посл╕довного вибору."
-
-#~ msgid ""
-#~ "Cycle through all windows whose names match the leading colon-delimited\n"
-#~ "prefix of the current window."
-#~ msgstr ""
-#~ "Перебирати в╕кна, чи╖ назви сп╕впадають з початковою, в╕дд╕леною двокрапкою, "
-#~ "частиною назви поточного в╕кна."
-
-#~ msgid "Cycle through all windows with the same class as the current window."
-#~ msgstr "Перебирати в╕кна з тим же класом що ╕ в поточного в╕кна."
-
-#~ msgid "Apply"
-#~ msgstr "Застосувати"
-
-#~ msgid "Yes"
-#~ msgstr "Так"
-
-#~ msgid "No"
-#~ msgstr "Н╕"
-
-#~ msgid "Help"
-#~ msgstr "Дов╕дка"
-
-#~ msgid "Insert..."
-#~ msgstr "Вставити..."
-
-#~ msgid "Insert:"
-#~ msgstr "Вставити:"
-
-#~ msgid "Color of active frames."
-#~ msgstr "Кол╕р активних кадр╕в."
