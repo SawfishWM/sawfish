@@ -122,7 +122,21 @@ focus_on_window (Lisp_Window *w)
 	    if (w->does_wm_take_focus)
 	    {
 		DB(("  sending WM_TAKE_FOCUS message\n"));
-		send_client_message (w->id, xa_wm_take_focus, last_event_time);
+
+		/* The -1 is an Ugly Hack. The problem is with the case
+		   where the window focuses itself after receiving the
+		   WM_TAKE_FOCUS message. If during the time between us
+		   sending the client message and the window focusing
+		   itself we focused another window using the same
+		   timestamp, the original window (that received the
+		   client message) will still get focused.
+
+		   I'm assuming that it's unlikely that two events will
+		   arrive generating focus changes with timestamps that
+		   only differ by one.. */
+
+		send_client_message (w->id, xa_wm_take_focus,
+				     last_event_time - 1);
 
 		/* Only focus on the window if accepts-input is true */
 		if (window_input_hint_p (w))

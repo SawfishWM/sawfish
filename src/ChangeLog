@@ -1,3 +1,20 @@
+2001-08-31  John Harper  <jsh@pixelslut.com>
+
+	* windows.c (focus_on_window): subtract one from the last seen
+	server timestamp when sending the WM_TAKE_FOCUS message. The
+	explanatory comment in the source reads:
+
+	The -1 is an Ugly Hack. The problem is with the case where the
+	window focuses itself after receiving the WM_TAKE_FOCUS
+	message. If during the time between us sending the client
+	message and the window focusing itself we focused another
+	window using the same timestamp, the original window (that
+	received the client message) will still get focused.
+
+	I'm assuming that it's unlikely that two events will arrive
+	generating focus changes with timestamps that only differ by
+	one..
+
 2001-08-24  John Harper  <jsh@pixelslut.com>
 
 	* events.c (unmap_notify): call remove_window () on unmapped
