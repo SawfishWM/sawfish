@@ -26,7 +26,7 @@
 
 ;;;###autoload (setq custom-required (cons 'menu custom-required))
 
-(defvar menu-program "sawmill-menu"
+(defvar menu-program (expand-file-name "sawmill-menu" sawmill-exec-directory)
   "Location of the program implementing sawmill's menu interface.")
 
 (defvar menu-program-stays-running 60
