@@ -1050,6 +1050,20 @@ associated with WINDOW. Possible keys in the alist are `min-height',
     hints = &VWIN(win)->hints;
     flags = hints->flags;
 
+    /* Some sanity checking */
+    if ((flags & PMinSize) 
+	&& (hints->min_width <= 0 || hints->min_height <= 0))
+	flags &= ~PMinSize;
+    if ((flags & PMaxSize)
+	&& (hints->max_width <= 0 || hints->max_height <= 0))
+	flags &= ~PMaxSize;
+    if ((flags & PResizeInc)
+	&& (hints->width_inc <= 0 || hints->width_inc <= 0))
+	flags &= ~PResizeInc;
+    if ((flags & PBaseSize)
+	&& (hints->base_width <= 0 || hints->base_height <= 0))
+	flags &= ~PBaseSize;
+
     if (flags & PMinSize)
     {
 	ret = Fcons (Fcons (Qmin_width, rep_MAKE_INT(hints->min_width)),
