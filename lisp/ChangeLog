@@ -1,3 +1,41 @@
+2000-05-18  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.27.2
+
+2000-05-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-gaol.jl (sawmill-safe-specials): added batch-mode
+
+2000-05-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* auto-raise.jl (raise-groups-on-focus): commented out this
+	option, it causes window groups to flicker (sometimes
+	repeatedly) in certain cases due to the extra focus events it
+	causes
+
+2000-05-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome-menu.jl (gnome-menu-lang): now a list of strings, made
+	by destructuring the language code, e.g. if LANG=de_DE, then
+	the list will be ("de" "de_DE")
+
+	(gnome-menu-read-desktop-entry): match encountered languages
+	against all items in gnome-menu-lang
+
+	* gnome-menu.jl, sawmill.jl: search LANGUAGE, LC_ALL,
+	LC_MESSAGES, LANG for the language code to use, in that order
+
+2000-05-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* focus.jl (focus-enter-fun, focus-enter-fun): generate events
+	when the root window is entered/left, enter-root and leave-root
+	(enter-exit): unfocus the window when the root window is
+	entered, as well as when the window is left
+
+	* transient.jl (transient-unmap-window): fix bug of looking for
+	window under pointer _in_ click to focus mode, it should be
+	only done when _not in_ this mode
+
 2000-05-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.27.1

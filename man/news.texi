@@ -6,9 +6,33 @@ This lists the user-visible changes made to Sawmill, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
+
+@unnumberedsec 0.27.2
+
+@itemize @bullet
+
+@item Translation updates: da (Kenneth Christiansen), de (Karl
+Eichwalder), es (Iñaki García Etxebarria), ja (SATO Satoru)
+
+@item Attempt to destructure the language code when parsing GNOME
+desktop items (e.g. if @samp{LANG=de_DE} look for both @samp{de_DE} and
+@samp{de} translations)
+
+@item New focus handler events @code{enter-root} and @code{leave-root}
+
+@item Removed @code{raise-groups-on-focus} option, it caused unstable
+window flickering in certain cases
+
+@item Fixed bug When transferring focus after a window is unmapped
+(inverted choice of when to look under pointer, and when to look in
+focus history)
+
+@end itemize
+
+
 @unnumberedsec 0.27
 
-@itemize
+@itemize @bullet
 
 @item Changed the name from @samp{sawmill} to @samp{sawfish}; all
 user-visible binaries have been renamed appropriately, the old programs

@@ -710,8 +710,11 @@ enter_notify (XEvent *ev)
     else
     {
 	Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
-	if (w != 0 && w->mapped && w->visible)
+	if (w != 0 && w->mapped && w->visible
+	    && ev->xcrossing.detail != NotifyInferior)
+	{
 	    Fcall_window_hook (Qenter_notify_hook, rep_VAL(w), Qnil, Qnil);
+	}
     }
 }
 

@@ -103,7 +103,7 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
    (cond ((eq action 'pointer-in)
 	  (when (window-really-wants-input-p w)
 	    (set-input-focus w)))
-	 ((eq action 'pointer-out)
+	 ((memq action '(pointer-out enter-root))
 	  (set-input-focus nil)))))
 
 (define-focus-mode 'enter-only
@@ -159,12 +159,16 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 ;; hooks
 
 (defun focus-enter-fun (w)
-  (when (windowp w)
-    (focus-invoke-mode w 'pointer-in)))
+  (cond ((windowp w)
+	 (focus-invoke-mode w 'pointer-in))
+	((eq w 'root)
+	 (focus-invoke-mode (input-focus) 'enter-root))))
 
 (defun focus-leave-fun (w)
-  (when (windowp w)
-    (focus-invoke-mode w 'pointer-out)))
+  (cond ((windowp w)
+	 (focus-invoke-mode w 'pointer-out))
+	((eq w 'root)
+	 (focus-invoke-mode (input-focus) 'leave-root))))
 
 (defun focus-in-fun (w)
   (focus-invoke-mode w 'focus-in)
