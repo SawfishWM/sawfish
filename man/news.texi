@@ -16,13 +16,38 @@ activate that window after changing workspaces; also, try to preserve
 focus when moving windows between workspaces
 
 @item Option to disable auto-raise while cycling through windows
-(@code{cycle-disable-auto-raise})
+(@code{cycle-disable-auto-raise}); option to restrict cycling to the
+current viewport (@code{cycle-all-viewports})
+
+@item New option @code{lock-first-workspace}, enabled by default,
+prevents the interesting workspaces being contracted
 
 @item Added readline support to the client program, pass
 @samp{--with-readline} option to configure (from Christopher P Goller
 @email{goller@@eng.utah.edu})
 
+@item Added shaped-transient frame to microGUI theme
+
+@item New frame part attribute @code{below-client}
+
 @item Release passive grabs when unadopting windows
+
+@item Fix bug when binding to the unix-domain socket
+
+@item Fix focus somtimes being lost when the focused window is
+destroyed
+
+@item Fix bug when reading GNOME menu entries without @samp{Type}
+fields
+
+@item Fix bug when removing title or border of @code{shaped-transient}
+window types (make the window completely unframed)
+
+@item Fix bug when shading a transient window with
+@code{decorate-transients} enabled
+
+@item Fix some bugs when placing windows that are almost as big or
+bigger than the screen
 
 @end itemize
 
