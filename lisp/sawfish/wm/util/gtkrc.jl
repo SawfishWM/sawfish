@@ -38,7 +38,6 @@
 	  rep.system
 	  rep.regexp
 	  rep.io.files
-	  rep.io.streams
 	  rep.io.processes
 	  sawfish.wm.colors
 	  sawfish.wm.fonts
@@ -75,8 +74,12 @@
     (let* ((output (make-string-output-stream))
 	   (process (make-process output)))
       (set-process-error-stream process nil)
-      (unless (zerop (call-process process nil gtkrc-style-program))
-	(error "Can't start gtkrc-style-program"))
+      ;; XXX the gtk-style program can't connect to the X server
+      ;; XXX if it's currently grabbed, hence this kludge..
+      (call-with-server-ungrabbed
+       (lambda ()
+	 (unless (zerop (call-process process nil gtkrc-style-program))
+	   (error "Can't start gtkrc-style-program"))))
       (setq output (make-string-input-stream
 		    (get-output-stream-string output)))
       (setq gtkrc-style nil)
