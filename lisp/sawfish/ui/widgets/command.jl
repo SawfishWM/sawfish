@@ -27,9 +27,10 @@
 	  gui.gtk
 	  rep.regexp
 	  sawfish.gtk.widget
+	  sawfish.ui.user-level
 	  sawfish.ui.wm)
 
-  (define commands)
+  (define all-commands)
 
   (define (command-name command) (or (car command) command))
 
@@ -37,14 +38,25 @@
     (and (listp command) (cadr (memq #:type command))))
 
   (define (command-user-level command)
-    (and (listp command) (cadr (memq #:user-level command))))
+    (or (and (listp command) (cadr (memq #:user-level command)))
+	'intermediate))
+
+  (define (get-command name)
+    (or (memq name all-commands) (assq name all-commands)))
+
+  (define (filter-command-list)
+    (filter (lambda (x) (user-level-is-appropriate-p (command-user-level x)))
+	    all-commands))
+
+  (define (command-item x) (list (beautify-symbol-name (command-name x))))
 
   (define (make-command-item changed)
 
-    (unless commands
-      (setq commands (wm-command-list)))
+    (unless all-commands
+      (setq all-commands (wm-command-list)))
     
-    (let ((clist (gtk-clist-new-with-titles (list (_ "Command"))))
+    (let ((commands (filter-command-list))
+	  (clist (gtk-clist-new-with-titles (list (_ "Command"))))
 	  (text (gtk-text-new))
 	  (vbox (gtk-vbox-new nil box-spacing))
 	  (scroller (gtk-scrolled-window-new))
@@ -65,7 +77,7 @@
 	  (gtk-text-set-point text 0)))
 
       (define (update-params)
-	(let ((new-spec (cadr (nth selection commands))))
+	(let ((new-spec (command-type (nth selection commands))))
 	  (unless (equal new-spec params-spec)
 	    (when params-widget
 	      (gtk-container-remove params-hbox (widget-gtk-widget
@@ -79,9 +91,7 @@
 	      (gtk-widget-show params-hbox)))))
 
       (mapc (lambda (c)
-	      (gtk-clist-append
-	       clist (list (beautify-symbol-name (command-name c)))))
-	    commands)
+	      (gtk-clist-append clist (command-item c))) commands)
 
       (gtk-signal-connect clist "select_row"
 			  (lambda (w row col)
@@ -121,8 +131,18 @@
 		     (gtk-clist-select-row 0 0)
 		     (gtk-clist-moveto clist 0 0)))
 	  ((set) (lambda (x)
-		   (let ((index (or (command-index
-				     commands (command-name x)) 0)))
+		   (let ((index (command-index commands (command-name x))))
+		     (unless index
+		       ;; scan in all-commands
+		       (setq index (command-index
+				    all-commands (command-name x)))
+		       (if index
+			   ;; yes, add it to the list
+			   (let ((command (nth index all-commands)))
+			     (setq commands (nconc commands (list command)))
+			     (gtk-clist-append clist (command-item command))
+			     (setq index (1- (length commands))))
+			 (setq index 0)))
 		     (setq selection index)
 		     (gtk-clist-select-row clist index 0)
 		     (gtk-clist-moveto clist index 0)
@@ -131,7 +151,7 @@
 		       (widget-set params-widget (cdr x))))))
 	  ((ref) (lambda ()
 		   (if params-widget
-		       (cons (car (nth selection commands))
+		       (cons (command-name (nth selection commands))
 			     (widget-ref params-widget))
 		     (nth selection commands))))
 	  ((validp) (lambda (x)
