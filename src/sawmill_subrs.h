@@ -260,6 +260,7 @@ extern repv Fwindow_frame_offset (repv win);
 extern repv Fwindowp (repv win);
 extern repv Fset_input_focus (repv win);
 extern repv Finput_focus (void);
+extern repv Fwindow_wants_input_p (repv win);
 extern repv Fmanaged_windows (void);
 extern repv Fstacking_order (void);
 extern repv Fwindow_visibility (repv win);

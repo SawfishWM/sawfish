@@ -563,6 +563,13 @@ Return an integer defining the xid of the leader of the group that
 member of a group.
 @end defun
 
+@defun window-wants-input-p window
+Return @code{t} when the client window associated with object
+@var{window} has asked for the input focus to be assigned to it when
+applicable (through the @code{input} field of its @code{WM_HINTS}
+property).
+@end defun
+
 @defun window-dimensions window
 Returns a cons cell @code{(@var{width} . @var{height})} defining the
 dimensions of the client window associated with object @var{window}.

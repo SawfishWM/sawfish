@@ -1,3 +1,14 @@
+1999-09-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* session.c: if HAVE_X11_SM_SMLIB_H isn't defined, don't do any
+	session management
+
+	* windows.c (Fwindow_wants_input_p): new function, returns the
+	input field of a window's WM_HINTS property
+
+	* frames.c (set_frame_part_bg): when checking if the part
+	overlaps the client, do it correctly
+
 1999-09-27  John Harper  <john@dcs.warwick.ac.uk>
 
 	* windows.c (remove_window_frame): only remove windows from

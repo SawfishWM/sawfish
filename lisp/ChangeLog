@@ -1,3 +1,17 @@
+1999-09-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x-cycle.jl, workspace.jl, transient.jl, focus.jl: only give
+	windows the focus if they've said they want it (through the
+	input field of their WM_HINTS property)
+
+	* sm-init.jl (sm-init): don't set the `Environment' property,
+	I've had reports that it may prevent $SESSION_MANAGER being
+	connected with on restart
+
+	* move-resize.jl (move-resize-lost-window): hooked into the
+	unmap and destroy notify hooks, if the window being
+	moved/resized is gone, then quit
+
 1999-09-27  John Harper  <john@dcs.warwick.ac.uk>
 
 	* transient.jl (transients-above-parents): new option

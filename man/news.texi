@@ -14,6 +14,8 @@ they occurred between. For more detailed information see the
 @item Added a new theme: @code{microGUI} by Ryan Lovett
 @email{ryan@@ocf.berkeley.edu}, based on the QNX Photon screenshots
 
+@item Only give the input focus to windows that actually want it
+
 @item New option to keep transient windows above their parents
 (@code{transients-above-parents})
 
@@ -21,6 +23,14 @@ they occurred between. For more detailed information see the
 
 @item Slightly different method of handling destroyed clients,
 hopefully results in fewer annoying error messages
+
+@item Support X installations without X11R6 session management (by not
+doing any session management)
+
+@item Don't ask the session manager to save our environment
+
+@item Fix bug where a window is destroyed/unmapped while it's being
+resized or moved
 
 @end itemize
 
