@@ -133,7 +133,7 @@
 (defun cycle-windows (event)
   "Cycle through all windows in order of recent selections."
   (interactive "e")
-  (let ((tail-event nil))
+  (let ((tail-command nil))
     (let*
 	((decoded (decode-event event))
 	 (modifier-keys (apply append (mapcar modifier->keysyms
@@ -150,20 +150,31 @@
 	 (unmap-notify-hook (cons (lambda (w)
 				    (when (eq w x-cycle-grab-win)
 				      (setq x-cycle-grab-win nil)
-				      (or (grab-keyboard)
-					  (throw 'x-cycle-exit nil))))
+				      (or (grab-keyboard nil nil t)
+					  (throw 'x-cycle-exit nil))
+				      (allow-events 'sync-keyboard)))
 				  unmap-notify-hook))
 	 (enter-workspace-hook (cons (lambda (space)
 				       (when x-cycle-grab-win
 					 (setq x-cycle-grab-win nil)
-					 (or (grab-keyboard)
-					     (throw 'x-cycle-exit nil))))
+					 (or (grab-keyboard nil nil t)
+					     (throw 'x-cycle-exit nil))
+					 (allow-events 'sync-keyboard)))
 				     enter-workspace-hook))
-	 (unbound-key-hook (list (lambda ()
-				   (let ((ev (decode-event (current-event))))
-				     (unless (memq 'release (nth 1 ev))
-				       (setq tail-event (current-event))
-				       (throw 'x-cycle-exit nil)))))))
+	 (unbound-key-hook
+	  (list (lambda ()
+		  (let ((ev (decode-event (current-event))))
+		    (unless (memq 'release (nth 1 ev))
+		      ;; want to search the usual keymaps
+		      (setq override-keymap nil)
+		      (setq tail-command (lookup-event-binding
+					  (current-event)))
+		      (unless tail-command
+			;; no wm binding, so forward the event to
+			;; the focused window (this is why we have
+			;; to grab the keyboard synchronously)
+			(allow-events 'replay-keyboard))
+		      (throw 'x-cycle-exit nil)))))))
 
       (unless (and (eq 'key (car decoded)) (nth 1 decoded))
 	(error "%s must be bound to a key event with modifiers." this-command))
@@ -175,7 +186,8 @@
 		(encode-event `(key (release any) ,k)) 'x-cycle-exit))
 	    modifier-keys)
 
-      (when (grab-keyboard (input-focus))
+      ;; grab synchronously, so that event replaying works
+      (when (grab-keyboard (input-focus) nil t)
 	(unwind-protect
 	    (progn
 	      (catch 'x-cycle-exit
@@ -187,10 +199,12 @@
 	  (display-message nil)
 	  (ungrab-keyboard))))
 
-    (when tail-event
-      (let ((command (lookup-event-binding tail-event)))
-	(when command
-	  (call-command command))))))
+    (when tail-command
+      ;; make sure that the command operates on the newly-focused
+      ;; window, not the window that was focused when the original
+      ;; event was received
+      (current-event-window (input-focus))
+      (call-command tail-command))))
 
 ;;;###autoload
 (defun cycle-group (event w)
@@ -272,7 +286,8 @@ prefix of the current window."
 			       (window-name win)
 			       (and (window-get win 'iconified) ?]))))
     (when (and cycle-focus-windows (window-really-wants-input-p win))
-      (set-input-focus win))))
+      (set-input-focus win))
+    (allow-events 'sync-keyboard)))
 
 (defun x-cycle-exit ()
   (interactive)
