@@ -160,23 +160,16 @@ Has the active modifiers added to it."
   ;; the list of windows being cycled through
   (define x-cycle-windows (make-fluid))
 
-  ;; true if cycling in reverse direction
-  (define x-cycle-backwards (make-fluid))
-
 
 ;;; code
 
-  ;; return the list item following ELT (wrapping at list end)
-  (define (after elt lst) (car (or (cdr (memq elt lst)) lst)))
-
-  ;; return the list item preceding ELT (wrapping at list start)
-  (define (before elt lst)
-    (if (eq (car lst) elt)
-	(last lst)
-      (let loop ((rest lst))
-	(cond ((null (cdr rest)) (car lst))
-	      ((eq (cadr rest) elt) (car rest))
-	      (t (loop (cdr rest)))))))
+  (define (forwards lst elt count)
+    (let ((total (length lst))
+	  (current (let loop ((rest lst) (i 0))
+		     (cond ((null rest) 0)
+			   ((eq (car rest) elt) i)
+			   (t (loop (cdr rest) (1+ i)))))))
+      (nth (mod (+ current count) total) lst)))
 
   (define (merge-unsorted x y)
     (let loop ((rest y)
@@ -185,7 +178,7 @@ Has the active modifiers added to it."
 	    ((memq (car rest) out) (loop (cdr rest) out))
 	    (t (loop (cdr rest) (cons (car rest) out))))))
 
-  (define (next)
+  (define ((next count))
     (let ((win (window-order (if cycle-all-workspaces
 				 nil
 			       current-workspace)
@@ -212,9 +205,7 @@ Has the active modifiers added to it."
 	(restack-windows (fluid x-cycle-stacking))
 	(fluid-set x-cycle-stacking nil))
       (if (fluid x-cycle-current)
-	  (setq win (if (fluid x-cycle-backwards)
-			(before (fluid x-cycle-current) win)
-		      (after (fluid x-cycle-current) win)))
+	  (setq win (forwards win (fluid x-cycle-current) count))
 	(setq win (car win)))
       (fluid-set x-cycle-current win)
       (when (not (window-get win 'sticky))
@@ -238,16 +229,12 @@ Has the active modifiers added to it."
 
   (define (x-cycle-exit) (throw 'x-cycle-exit t))
 
-  (define (x-cycle-reverse)
-    (fluid-set x-cycle-backwards (not (fluid x-cycle-backwards))))
-
-  (define (cycle-windows event #!optional windows)
+  (define (cycle-windows event #!optional windows #!key (step +1))
     "Cycle through all windows in order of recent selections."
     (let ((tail-command nil))
       (let-fluids ((x-cycle-current nil)
 		   (x-cycle-stacking nil)
-		   (x-cycle-windows (or windows t))
-		   (x-cycle-backwards nil))
+		   (x-cycle-windows (or windows t)))
 	(let* ((decoded (decode-event event))
 	       (modifier-keys (apply append (mapcar modifier->keysyms
 						    (nth 1 decoded))))
@@ -275,7 +262,8 @@ Has the active modifiers added to it."
 	       (unbound-key-hook
 		(list (lambda ()
 			(let ((ev (decode-event (current-event))))
-			  (unless (memq 'release (nth 1 ev))
+			  (unless (or (memq 'release (nth 1 ev))
+				      (modifier-keysym-p (nth 2 ev)))
 			    ;; want to search the usual keymaps
 			    (setq override-keymap nil)
 			    (setq tail-command (lookup-event-binding
@@ -292,7 +280,7 @@ Has the active modifiers added to it."
 		   this-command))
 
 	  ;; Use the event that invoked us to contruct the keymap
-	  (bind-keys override-keymap event next)
+	  (bind-keys override-keymap event (next step))
 
 	  ;; add the reverse key
 	  (when cycle-reverse-event
@@ -304,7 +292,7 @@ Has the active modifiers added to it."
 						(merge-unsorted (cadr in)
 								(cadr decoded))
 						(caddr in)))))
-		  (bind-keys override-keymap out x-cycle-reverse))
+		  (bind-keys override-keymap out (next (- step))))
 	      (error nil)))
 
 	  (mapc (lambda (k)
@@ -318,7 +306,7 @@ Has the active modifiers added to it."
 		(progn
 		  (catch 'x-cycle-exit
 		    ;; do the first step
-		    (next)
+		    ((next step))
 		    (recursive-edit))
 		  (when (fluid x-cycle-current)
 		    (display-window (fluid x-cycle-current))))
