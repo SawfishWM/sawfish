@@ -1,5 +1,18 @@
 2000-07-11  John Harper  <john@dcs.warwick.ac.uk>
 
+	* menus.jl (popup-menu): catch errors and unset menu-active
+
+	* x-cycle.jl, workspace.jl, window-order.jl, viewport.jl,
+	transient.jl, stacking.jl, smart-placement.jl, sm-save.jl,
+	sm-load.jl, sawmill-gaol.jl, place-window.jl, grow-pack.jl,
+	group-funs.jl, gnome.jl, frames.jl, edges.jl: replace `(mapc
+	foo (managed-windows))' by `(map-windows foo)', and similar
+	for filter-windows variants
+
+	* functions.jl (map-windows): deleted, now a C function
+	(get-window-by-name, get-window-by-name-re): deleted optional
+	LST parameters; use filter-windows
+
 	Cleaned up frame style and window type management:
 
 	* frames.jl (define-frame-type-mapper): used to register a

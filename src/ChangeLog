@@ -1,3 +1,9 @@
+2000-07-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (Fmap_windows, Ffilter_windows): new functions.
+	Implementing them in C avoids the need to cons up a load of
+	list structure just to throw it away immediately afterwards
+
 2000-07-09  John Harper  <john@dcs.warwick.ac.uk>
 
 	* versiom 0.30
