@@ -104,16 +104,16 @@ General tasks
 
   - Custom frame parts
 
-    Currently the background of each frame part is either a solid color
-    or a (scaled or tiled) image.
+    It's possible for frame part backgrounds to be drawn on-the-fly
+    using the `renderer' attribute. (See themes/gradient)
 
-    It should be possible to define _functional_ backgrounds. For
-    example a plugin could draw an afterstep-like gradient, or a
-    bevelled box, or whatever.
+    This uses Imlib images as buffers for rendering into. This has two
+    main advantages -- palette handling and shape masks are for free
 
-    Similar effects can always be obtained through the present
-    image-based system, but probably using more memory, and with less
-    flexibility..
+    But the main disadvantage is the memory cost. Each pixel costs
+    three bytes, so a 500x20 title bar costs ~30k. The only alternative
+    is to draw directly into the frame part's window, which means we
+    have to handle all colour allocation manually..
 
   - Rotated text
 

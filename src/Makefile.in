@@ -30,7 +30,7 @@ SRCS :=	colors.c commands.c cursors.c display.c events.c fonts.c frames.c \
 	functions.c images.c keys.c main.c windows.c
 OBJS := $(SRCS:.c=.o)
 
-DL_SRCS := 
+DL_SRCS := gradient.c
 DL_OBJS := $(DL_SRCS:%.c=lib%.la)
 
 LISP_SRCS := sawmill-ui.jl sawmill-menu.jl
@@ -58,9 +58,9 @@ install : all installdirs
 	for p in sawmill sawmill-client; do \
 	  $(rep_LIBTOOL) $(INSTALL_PROGRAM) $$p ${bindir}; \
 	done
-#	for p in $(DL_OBJS); do \
-#	  $(rep_DL_INSTALL) $$p ${sawmillexecdir}; \
-#	done
+	for p in $(DL_OBJS); do \
+	  $(rep_DL_INSTALL) $$p ${sawmillexecdir}; \
+	done
 	$(INSTALL_PROGRAM) sawmill-ui.jlc $(bindir)/sawmill-ui
 	$(INSTALL_PROGRAM) sawmill-menu.jlc $(bindir)/sawmill-menu
 
@@ -68,9 +68,9 @@ uninstall :
 	for p in sawmill sawmill-client; do \
 	  $(rep_LIBTOOL) rm ${bindir}/$$p; \
 	done
-#	for p in $(DL_OBJS); do \
-#	  $(rep_DL_UNINSTALL) ${sawmillexecdir}/$$p; \
-#	done
+	for p in $(DL_OBJS); do \
+	  $(rep_DL_UNINSTALL) ${sawmillexecdir}/$$p; \
+	done
 	rm -f ${bindir}/sawmill-ui ${bindir}/sawmill-menu
 
 installdirs : $(top_srcdir)/mkinstalldirs

@@ -2,6 +2,23 @@
 
 	* version 0.4
 
+	* frames.c: new attribute in frame part alists: `renderer', a
+	function called with args (IMAGE STATE). It should draw the
+	background of the frame part into IMAGE for STATE (nil,
+	focused, highlighted, clicked)
+
+	* sawmill.h (struct frame_part): new fields `renderer',
+	`rendered_image' and `rendered_state'
+
+	* images.c (make_image): search the list of images before
+	making a new lisp object
+	(Fmake_sized_image): new function, create a blank image of a
+	certain size and colour
+
+	* gradient.c (Fdraw_vertical_gradient,
+	Fdraw_horizontal_gradient, Fdraw_diagonal_gradient): new
+	plugin, new functions
+
 	* windows.c, main.c, keys.c, images.c, functions.c, frames.c,
 	fonts.c, events.c, cursors.c, colors.c: added doc strings for
 	built-in functions

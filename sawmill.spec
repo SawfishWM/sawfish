@@ -1,5 +1,5 @@
 
-%define ver	4
+%define ver	0.4
 %define rel	1
 
 Summary: a highly configurable and extensible X11 window manager

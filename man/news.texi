@@ -16,6 +16,16 @@ also they ``un-click'' and ``re-click'' as the pointer leaves and
 re-enters their window. ButtonRelease bindings are only activated when
 the mouse is in the window at the time
 
+@item Frame part backgrounds can now be rendered on-the-fly using the
+new @code{renderer} property in frame definitions. This property is a
+function called with args @code{(@var{image} @var{state})}; it should
+draw a background into @var{image} for the specified state (@code{nil},
+@code{focused}, @code{highlighted} or @code{clicked})
+
+@item Functions for drawing color gradients into images. The new
+@code{gradient} theme uses these and on-the-fly rendering to do
+@code{afterstep}-like window titles
+
 @item Configurator changes: use a paned widget to separate the list of
 groups from the settings (stops their relative sizes changing), allow
 each group to be customized separately, either through a new set of
