@@ -46,6 +46,7 @@ DEFSYM(leave_notify_hook, "leave-notify-hook");
 DEFSYM(focus_in_hook, "focus-in-hook");
 DEFSYM(focus_out_hook, "focus-out-hook");
 DEFSYM(iconify_window, "iconify-window");
+DEFSYM(client_message_hook, "client-message-hook");
 
 /* for enter/leave-notify-hook */
 DEFSYM(root, "root");
@@ -102,7 +103,7 @@ static void
 colormap_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xcolormap.window);
-    if (w != 0)
+    if (w != 0 && ev->xcolormap.window == w->id)
     {
 	XWindowAttributes attr;
 	XGetWindowAttributes (dpy, w->id, &attr);
@@ -226,7 +227,7 @@ static void
 property_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xproperty.window);
-    if (w != 0)
+    if (w != 0 && ev->xproperty.window == w->id)
     {
 	u_char *prop;
 	Atom actual;
@@ -266,13 +267,17 @@ property_notify (XEvent *ev)
 static void
 client_message (XEvent *ev)
 {
+    Lisp_Window *w = find_window_by_id (ev->xclient.window);
     if (ev->xclient.message_type == xa_wm_change_state
-	&& ev->xclient.format == 32)
+	&& ev->xclient.format == 32
+	&& w != 0
+	&& ev->xclient.data.l[0] == IconicState)
     {
-	Lisp_Window *w = find_window_by_id (ev->xclient.window);
-	if (w != 0 && ev->xclient.data.l[0] == IconicState)
 	    rep_call_lisp1 (Qiconify_window, rep_VAL(w));
     }
+    else
+	Fcall_hook (Qclient_message_hook,
+		    Fcons (w ? rep_VAL(w) : Qnil, Qnil), Qor);
 }
 
 static void
@@ -287,14 +292,14 @@ static void
 destroy_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xdestroywindow.window);
-    if (w == 0)
+    if (w == 0 || ev->xdestroywindow.window != w->id)
 	return;
     if (w == focus_window)
 	focus_on_window (0);
-    /* call the hook before removing it so that it's still windowp */
-    Fcall_hook (Qdestroy_notify_hook, Fcons (rep_VAL(w), Qnil), Qnil);
     if (w->id)
 	remove_window (w, Qt);
+    /* the window isn't windowp anymore.. */
+    Fcall_hook (Qdestroy_notify_hook, Fcons (rep_VAL(w), Qnil), Qnil);
 }
 
 void
@@ -340,8 +345,8 @@ map_request (XEvent *ev)
 static void
 reparent_notify (XEvent *ev)
 {
-    Lisp_Window *w = find_window_by_id (ev->xmap.window);
-    if (w != 0)
+    Lisp_Window *w = find_window_by_id (ev->xreparent.window);
+    if (w != 0 && ev->xreparent.window == w->id)
 	w->reparenting = FALSE;
 }
 
@@ -349,7 +354,7 @@ static void
 map_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xmap.window);
-    if (w != 0 && !w->reparenting)
+    if (w != 0 && ev->xmap.window == w->id && !w->reparenting)
     {
 	install_window_frame (w);
 	w->mapped = TRUE;
@@ -363,7 +368,7 @@ static void
 unmap_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xunmap.window);
-    if (w != 0 && !w->reparenting)
+    if (w != 0 && ev->xunmap.window == w->id && !w->reparenting)
     {
 	w->mapped = FALSE;
 	if (w->visible)
@@ -535,11 +540,16 @@ configure_notify (XEvent *ev)
 }
 
 static void
+create_notify (XEvent *ev)
+{
+}
+
+static void
 shape_notify (XEvent *ev)
 {
     XShapeEvent *sev = (XShapeEvent *)ev;
     Lisp_Window *w = find_window_by_id (sev->window);
-    if (sev->kind == ShapeBounding)
+    if (w != 0 && sev->window == w->id && sev->kind == ShapeBounding)
     {
 	w->shaped = sev->shaped ? 1 : 0;
 	set_window_shape (w);
@@ -674,6 +684,7 @@ events_init (void)
     event_handlers[ConfigureRequest] = configure_request;
     event_handlers[ConfigureNotify] = configure_notify;
     event_handlers[ReparentNotify] = reparent_notify;
+    event_handlers[CreateNotify] = create_notify;
 
     event_names[KeyPress] = "KeyPress";
     event_names[KeyRelease] = "KeyRelease";
@@ -720,6 +731,7 @@ events_init (void)
     rep_INTERN(leave_notify_hook);
     rep_INTERN(focus_in_hook);
     rep_INTERN(focus_out_hook);
+    rep_INTERN(client_message_hook);
     rep_INTERN(iconify_window);
     rep_INTERN(root);
 }
