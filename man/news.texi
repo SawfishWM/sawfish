@@ -7,6 +7,81 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.23
+
+@itemize @bullet
+
+@item Customization groups are now organized as a tree structure, with
+groups able to contain subgroups
+
+@item Define the list of features that will be presented to the user in
+@file{sawmill-defaults.jl}, by calling @code{custom-add-required}. If
+you have a @file{.sawmillrc} you'll need to do this manually
+
+@item New function @code{move-resize-window-to} doing a combined
+move/resize. New variable @code{synthetic-configure-mutex}, when set
+holds off sending synthetic @code{ConfigureNotify} events to windows
+until it's unset (this is held while interactively moving or resizing
+windows)
+
+@item New hook @code{after-add-window-hook}. Called with a single
+parameter, the window that's has just been adopted
+
+@item New functions @code{x-kill-client}, @code{delete-window-safely}.
+@code{send-client-message} now groks long integers (i.e. cons cells) in
+32-bit data (Timo ??)
+
+XXXXXXXXXXXXXXX
+
+@item @code{window-put}, @code{window-get}, @code{image-put},
+@code{image-get}, @code{font-put}, @code{font-get}: use @code{equal} to
+compare keys, not @code{eq}
+
+@item New module @code{error-handler}, implements a simple alternative
+error handler (and allows the much-maligned beep to be turned off),
+requires rep 0.11+
+
+@item Allow the pointer-warp position to be defined relative to the
+window (Kai Groﬂjohann)
+
+@item New module @code{shade-hover}, unshades windows while the pointer
+is over them
+
+@item Don't automatically warp to the new workspace when opening
+windows on a different workspace
+
+@item Include iconified sticky windows in the @code{window-menu},
+shorten sticky entries as usual (James Antill)
+
+@item Support the @samp{TryExec} field in GNOME desktop files (Ian)
+
+@item New commands: @code{raise-or-pass-through-click},
+@code{raise-and-pass-through-click-if-focused}
+
+@item New module @code{move-cursor}, various commands for moving the
+mouse pointer; these commands are bound to the cursor keys when moving
+or resizing windows
+
+@item Fix bug of leaving window-name unset when @code{WM_NAME} is a
+null text property
+
+@item Don't fail catastrophically if unable to open the default font
+
+@item Fixed method of truncating maximized window dimensions
+
+@item Fixed the match-window @code{skip-winlist} and
+@code{skip-tasklist} properties I'd stupidly broken
+
+@item Fixed bug of trying to edge-flip sticky windows
+
+@item Fixed the @code{move-workspace-forwards} and
+@code{move-workspace-backwards} commands
+
+@item Fixed @code{uniconify-to-current-viewport} option
+
+@end itemize
+
+
 @unnumberedsec 0.22
 
 @itemize @bullet

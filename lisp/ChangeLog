@@ -1,4 +1,27 @@
+2000-01-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* shade-hover.jl (shade-hover-raise): new option, raise windows
+	as they're unshaded
+
+	* custom.jl (custom-menu): generate a tree of menu items, not
+	just a list of the top-level groups
+
+	* shade-hover.jl: defcustom-ized (in group Focus/Shade Hover)
+	* sawmill-defaults.jl: add shade-hover to the list of features
+	required by customize
+
+	* shade-hover.jl: use window enter/notify hooks instead of
+	frame parts. This means that the window stays unshaded until
+	the pointer leaves the _entire window_
+
 2000-01-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* menus.jl (root-menu): removed the `About' menu, it didn't
+	work anymore anyway..
+
+	* iconify.jl (display-window): call uniconify-window whenever
+	the window is iconified, not only if it's also sticky or the
+	uniconify-to-current-workspace option is set
 
 	* shade-hover.jl: new file, temporarily unshades windows while
 	the pointer is over their frame
