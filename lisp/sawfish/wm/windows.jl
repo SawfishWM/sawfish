@@ -40,6 +40,8 @@
 	     resize-window-with-hints
 	     resize-window-with-hints*
 	     window-gravity
+	     adjust-position-for-gravity/x
+	     adjust-position-for-gravity/y
 	     adjust-position-for-gravity
 	     get-window-wm-protocols
 	     window-supports-wm-protocol-p
@@ -261,45 +263,49 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
 	;; default gravity is NorthWest (from ICCCM)
 	'north-west))
 
+  (define (adjust-position-for-gravity/x w grav x #!key inverse)
+    (let* ((tl-off (car (window-frame-offset w)))
+	   (br-off (- (car (window-frame-dimensions w))
+		      (car (window-dimensions w))))
+	   (sign (if inverse -1 +1)))
+      (cond ((eq grav 'static)
+	     ;; static gravity is relative to the original
+	     ;; client window position
+	     (+ x (* sign tl-off)))
+	    ((memq grav '(east south-east north-east))
+	     ;; relative to the right of the frame
+	     (- x (* sign (+ br-off (* -2 (window-border-width w))))))
+	    ((memq grav '(north center south))
+	     ;; relative to the horizontal center of the frame
+	     (- x (* sign (quotient
+			   (+ br-off (* -2 (window-border-width w))) 2))))
+	    (t x))))
+
+  (define (adjust-position-for-gravity/y w grav y #!key inverse)
+    (let* ((tl-off (window-frame-offset w))
+	   (br-off (- (cdr (window-frame-dimensions w))
+		      (cdr (window-dimensions w))))
+	   (sign (if inverse -1 +1)))
+      (cond ((eq grav 'static)
+	     ;; static gravity is relative to the original
+	     ;; client window position
+	     (+ y (* sign tl-off)))
+	    ((memq grav '(south south-east south-west))
+	     ;; relative to the bottom of the frame
+	     (- y (* sign (+ br-off (* -2 (window-border-width w))))))
+	    ((memq grav '(east center west))
+	     ;; relative to the vertical center of the frame
+	     (- y (* sign (quotient
+			   (+ br-off (* -2 (window-border-width w))) 2))))
+	    (t y))))
+
   ;; UNADJUST means to reverse the gravity compensation, suitable for
   ;; when unmanaging windows at shutdown
   (define (adjust-position-for-gravity w grav coords #!optional unadjust)
-    (let* ((tl-off (window-frame-offset w))
-	   (br-off (let ((w-dims (window-dimensions w))
-			 (f-dims (window-frame-dimensions w)))
-		     (cons (- (car f-dims) (car w-dims))
-			   (- (cdr f-dims) (cdr w-dims)))))
-	   (sign (if unadjust -1 +1)))
-      (setq coords (cons (car coords) (cdr coords)))
-      (if (eq grav 'static)
-	  (progn
-	    ;; static gravity is relative to the original
-	    ;; client window position
-	    (rplaca coords (+ (car coords) (* sign (car tl-off))))
-	    (rplacd coords (+ (cdr coords) (* sign (cdr tl-off)))))
-	(when (memq grav '(east south-east north-east))
-	  ;; relative to the right of the frame
-	  (rplaca coords (- (car coords)
-			    (* sign (+ (car br-off)
-				       (* -2 (window-border-width w)))))))
-	(when (memq grav '(north center south))
-	  ;; relative to the horizontal center of the frame
-	  (rplaca coords (- (car coords)
-			    (* sign (quotient (+ (car br-off)
-				                 (* -2 (window-border-width w)))
-                                              2)))))
-	(when (memq grav '(south south-east south-west))
-	  ;; relative to the bottom of the frame
-	  (rplacd coords (- (cdr coords)
-			    (* sign (+ (cdr br-off)
-				       (* -2 (window-border-width w)))))))
-	(when (memq grav '(east center west))
-	  ;; relative to the vertical center of the frame
-	  (rplacd coords (- (cdr coords)
-			    (* sign (quotient (+ (cdr br-off)
-				                 (* -2 (window-border-width w)))
-                            	              2))))))
-      coords))
+    (cons (adjust-position-for-gravity/x
+	   w grav (car coords) #:inverse unadjust)
+	  (adjust-position-for-gravity/y
+	   w grav (cdr coords) #:inverse unadjust)))
 
 
 ;;; deleting windows

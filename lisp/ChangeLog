@@ -1,3 +1,15 @@
+2002-09-28  John Harper  <jsh@unfactored.org>
+
+	Work to fix #83431:
+
+	* sawfish/wm/state/configure.jl (configure-request-handler):
+	handle nil x or y components of `position' request.
+
+	* sawfish/wm/windows.jl (adjust-position-for-gravity/x,
+	adjust-position-for-gravity/y): new functions, factored out of
+	adjust-position-for-gravity, which is now defined in terms of
+	these two
+
 2002-09-26  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/commands/grow-pack.jl (bump-distance): patch from
