@@ -7,6 +7,48 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
 
+@heading 1.0.1
+
+@itemize @bullet
+
+@item Translation updates: pt (Carlos Perelló Marín), it (Michele
+Campeotto), pl (Zbigniew Chyla), zh_CN (Wang Jian), zh_TW (Abel
+Cheung), es (Eneko Lacunza), tr (Ömer Fadýl USTA), sv (Göran Uddeborg,
+Christian Rose), da (Ole Laursen), gl (Jesus Bravo Alvarez)
+
+@item Bug fixes:
+
+@itemize @minus
+
+@item Fixed typo in @code{apply-command-keys} function (David Bustos)
+
+@item Fixed bug in @code{wm-spec} module causing nautilus desktop
+window to cover panel
+
+@item Adopt windows with a maximized hint correctly
+
+@item Fixed bug in @code{display-window} function that can prevent the
+window getting focused
+
+@item Don't allow windows to be moved or resized by third-parties when
+they're maximized (and the necessary option is set)
+
+@item Fixed problem with localizing property names in the
+matched-windows configuration widget
+
+@item Handle window gravity more correctly (Owen Taylor)
+
+@item Forget everything about withdrawn windows -- better ICCCM
+compliance
+
+@item Fixed root-window event proxying (the infamous gmc bug)
+
+@item Don't use dlmalloc on sparcs (Brian Nitz)
+
+@end itemize
+@end itemize
+
+
 @heading 0.99
 
 @itemize @bullet
