@@ -291,8 +291,10 @@ weights mean that the window is harder to cover.")
     (let*
 	((windows (sp-get-windows w))
 	 (rects (rectangles-from-windows
-		 windows (cons (cons sp-important-windows
-				     sp-important-windows-weight))))
+		 windows (nconc (and sp-important-windows
+				     (list (cons sp-important-windows
+						 sp-important-windows-weight)))
+				sp-auto-weight-alist)))
 	 (grid (sp-make-grid rects t))
 	 (dims (window-frame-dimensions w))
 	 point)
