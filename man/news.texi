@@ -7,6 +7,71 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.22
+
+@itemize @bullet
+
+@item Window frame parts are now first-class lisp data objects,
+allowing a higher level of control by themes
+
+New or updated functions to access frame parts directly:
+
+@noindent @code{frame-part-get}, @code{frame-part-put},
+@code{frame-part-window}, @code{frame-part-x-window},
+@code{frame-part-position}, @code{frame-part-dimensions},
+@code{frame-part-state}, @code{map-frame-parts},
+@code{refresh-frame-part}, @code{rebuild-frame-part}
+
+Other new functions: @code{refresh-window}
+
+@item Updated @code{sawmill-themer} to emit code to tell the window
+manager that the theme is editable. The wm adds an @samp{Edit Theme...}
+option to the Customize menu when appropriate
+
+@item The @code{call-after-property-changed} function can now be given
+a list of properties to monitor (James Antill)
+
+@item New function @code{call-after-state-changed}, monitors a list of
+window states (i.e. things like iconified, shaded, @dots{}) and calls a
+function when any of them change. The @code{window-state-change-hook}
+now has a second argument (apart from the window), the list of symbolic
+states that changed (James Antill)
+
+@item Add support for @code{skip-winlist} and @code{skip-tasklist} to
+the window matcher when GNOME support is enabled (Ben Liblit)
+
+@item Integrated patch supporting multi-byte languages from the Kondara
+MNU/Linux distribution (forwarded by Yukihiro Nakai)
+
+@item Translation updates: de (Christoph Rauch), es (Iñaki García
+Etxebarria), gl (Jesus Bravo Alvarez), ja (Satoru Sato), tr (Fâtih
+Demir)
+
+@item Use a combo box in the configurator to display the list of
+themes (it gets given scroll bars when too big for the screen)
+
+@item Changed timestamp handling---attempt to detect and discard
+timestamps that arrive out of order
+
+@item Added option controlling title justification to @code{mono} theme
+
+@item Filter @key{Scroll_Lock} modifiers as well as the other lock
+modifiers (Matt Krai)
+
+@item Fixed @code{display-message} function update background color,
+and gracefully handle invalid color specifiers (Matt Krai)
+
+@item Reverted to grabbing events on the client window, not the frame,
+avoids some awkward-to-fix-correctly problems
+
+@item Load i18n support @emph{before} other libraries; ensures that
+some static strings get translated
+
+@item Fixed annoying flicker when cycling to an iconified window
+
+@end itemize
+
+
 @unnumberedsec 0.21.1
 
 @itemize @bullet
