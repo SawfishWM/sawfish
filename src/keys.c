@@ -571,8 +571,11 @@ eval_input_event(repv context_map)
 
     last_event[0] = current_event[0];
     last_event[1] = current_event[1];
-    current_event[0] = current_event[1] = 0;
- 
+
+    /* Only lose the current event when in the topmost event loop. */
+    if (rep_recurse_depth == 0)
+	current_event[0] = current_event[1] = 0;
+
     if (print_prefix)
 	print_event_prefix ();
 
