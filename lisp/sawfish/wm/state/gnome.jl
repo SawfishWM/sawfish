@@ -170,7 +170,7 @@
     (when (eq (car hints) 'CARDINAL)
       (setq bits (aref (nth 2 hints) 0))
       (unless (zerop (logand bits WIN_HINTS_SKIP_FOCUS))
-	(window-put w 'ignored t)))
+	(window-put w 'never-focus t)))
     (when layer
       (setq layer (aref (nth 2 layer) 0))
       (set-window-depth w (- layer WIN_LAYER_NORMAL)))
