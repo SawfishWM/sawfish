@@ -53,6 +53,8 @@
   ;; frame-style loaded if user hasn't set their own
   (define fallback-frame-style 'Crux)
 
+  (define rc-files '("~/.sawfishrc" "~/.sawfish/rc" "~/.sawmillrc"))
+
   ;; initialize the special variable pointing at this structure
   (structure () (open rep rep.structures)
     (setq *user-module* (get-structure 'user)))
@@ -89,8 +91,10 @@
 					  (file-exists-p (concat f ".jlc"))))))
 	      ;; load these before customized settings (but only if there's
 	      ;; no .sawmillrc file)
-	      (unless (or (rc-file-exists-p "~/.sawfishrc")
-			  (rc-file-exists-p "~/.sawmillrc"))
+	      (unless (let loop ((rest rc-files))
+			(when rest
+			  (or (rc-file-exists-p (car rest))
+			      (loop (cdr rest)))))
 		(load "sawfish/wm/defaults" t))
 
 	      ;; then the customized options
@@ -100,10 +104,11 @@
 		 (format (stderr-file) "error in custom file--> %S\n" data)))
 
 	      ;; then the sawmill specific user configuration
-	      (cond ((rc-file-exists-p "~/.sawfishrc")
-		     (safe-load "~/.sawfishrc" t t t))
-		    ((rc-file-exists-p "~/.sawmillrc")
-		     (safe-load "~/.sawmillrc" t t t))))))
+	      (let loop ((rest rc-files))
+		(when rest
+		  (if (rc-file-exists-p (car rest))
+		      (safe-load (car rest) t t t)
+		    (loop (cdr rest))))))))
       (error
        (format (stderr-file) "error in local config--> %S\n" error-data))))
 
