@@ -157,7 +157,7 @@ the level of any transient windows it has."
     (if (and decorate-transients (window-transient-p w))
 	(case type
 	  ((transient) 'default)
-	  ((shaped-transient) 'shaped)
+	  ((shaded-transient) 'shaded)
 	  (t type))
       type))
 
