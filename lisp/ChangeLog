@@ -1,5 +1,10 @@
 2000-11-06  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/focus.jl: add focus-add-window to the
+	map-notify-hook not after-add-window-hook. When checking for
+	the `click-to-focus windows unfocusable' bug, only check mapped
+	windows, and use focus-push-map to recover, not custom hackery
+
 	* sawfish/wm/state/transient.jl (transient-map-window): cleaned
 	up control flow (removed unnecessary variable), and using
 	transient-of-p instead of checking manually (this means that

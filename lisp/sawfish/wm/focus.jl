@@ -226,7 +226,7 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
   (add-hook 'leave-notify-hook focus-leave-fun t)
   (add-hook 'focus-in-hook focus-in-fun t)
   (add-hook 'focus-out-hook focus-out-fun t)
-  (add-hook 'after-add-window-hook focus-add-window)
+  (add-hook 'map-notify-hook focus-add-window)
 
   (sm-add-saved-properties 'never-focus 'focus-mode)
 
@@ -242,12 +242,13 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 		   (when (eq (window-focus-mode w) 'click)
 		     ;; check that the correct keymaps are in place
 		     (unless (or (eq (input-focus) w)
+				 (not (window-mapped-p w))
 				 (eq (window-get w 'keymap)
 				     click-to-focus-map))
 		       (format standard-error
 			       "Window lost focus keymap: %s, %s\n"
 			       (window-name w) (window-get w 'keymap))
 		       (beep) (beep)
-		       (window-put w 'keymap click-to-focus-map))))))
+		       (focus-push-map w click-to-focus-map))))))
 
   (add-hook 'idle-hook scan-windows-for-bugs))
