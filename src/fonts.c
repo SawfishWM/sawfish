@@ -282,57 +282,6 @@ default-font).
 
 /* XLFD pattern matching */
 
-/* Return a pointer to the first occurrence of string PTN in STR ignoring
-   character case differences, or a null pointer if there is no such
-   occurrence. PTN itself must be lower case. */
-static const char *
-strstr_i (const char *str, const char *ptn)
-{
-    const char *s2, *p2;
-    for (; *str; str++)
-    {
-	s2 = str; p2 = ptn;
-	while (1)
-	{
-	    if (*p2 == 0)
-		return str;
-	    if (tolower (*s2) != *p2)
-		break;
-	    s2++; p2++;
-	}
-    }
-    return 0;
-}
-
-static char *
-xlfd_match_element (const char *xlfd, ...)
-{
-    const char *p, *v;
-    va_list va;
-
-    va_start (va, xlfd);
-    while ((v = va_arg (va, char *)) != 0)
-    {
-	p = strstr_i (xlfd, v);
-	if (p != 0)
-	{
-	    const char *end = strchr (p + 1, '-');
-	    char *buf;
-	    size_t len;
-	    if (end == 0)
-		end = p + strlen (p);
-	    len = end - (p + 1);
-	    buf = malloc (len);
-	    memcpy (buf, p + 1, len);
-	    buf[len] = 0;
-	    va_end (va);
-	    return buf;
-	}
-    }
-    va_end (va);
-    return 0;
-}
-
 static char *
 xlfd_get_element (const char *xlfd, int idx)
 {
@@ -360,11 +309,9 @@ xlfd_get_element (const char *xlfd, int idx)
 static char *
 generalize_xlfd (const char *xlfd)
 {
-    char *weight = xlfd_match_element (xlfd, "-medium-", "-bold-",
-				       "-demibold-", "-regular-", 0);
-    char *slant = xlfd_match_element (xlfd, "-r-", "-i-", "-o-",
-				      "-ri-", "-ro-", 0);
-    char *pxlsz = xlfd_get_element (xlfd, 7);	/* 7 dashes before pxlsz */
+    char *weight = xlfd_get_element (xlfd, 3);
+    char *slant = xlfd_get_element (xlfd, 4);
+    char *pxlsz = xlfd_get_element (xlfd, 7);
 
     char *buf;
     int len;
@@ -376,13 +323,13 @@ generalize_xlfd (const char *xlfd)
     if (pxlsz == 0)
 	pxlsz = strdup ("*");
 
-    len = snprintf (0, 0, "%s,-*-*-%s-%s-*-*-%s-*-*-*-*-*-*-*,"
-		    "-*-*-*-*-*-*-%s-*-*-*-*-*-*-*,*",
-		    xlfd, weight, slant, pxlsz, pxlsz);
+#define XLFD_FORMAT "%s,-*-*-%s-%s-*-*-%s-*-*-*-*-*-*-*," \
+		    "-*-*-*-*-*-*-%s-*-*-*-*-*-*-*,*", \
+		    xlfd, weight, slant, pxlsz, pxlsz
+
+    len = snprintf (0, 0, XLFD_FORMAT);
     buf = malloc (len + 1);
-    snprintf (buf, len + 1, "%s,-*-*-%s-%s-*-*-%s-*-*-*-*-*-*-*,"
-	      "-*-*-*-*-*-*-%s-*-*-*-*-*-*-*,*",
-	      xlfd, weight, slant, pxlsz, pxlsz);
+    snprintf (buf, len + 1, XLFD_FORMAT);
 
     free (pxlsz);
     free (slant);
