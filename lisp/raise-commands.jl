@@ -31,6 +31,17 @@ events that invoked the command."
     (forget-button-press)))
 
 ;;;###autoload
+(defun raise-group-and-pass-through-click (w)
+  "Raise the group of windows that received the current event, then replay any
+pointer events that invoked the command."
+  (interactive "%w")
+  (when (windowp w)
+    (raise-group w))
+  (allow-events 'replay-pointer)
+  (unless (clicked-frame-part)
+    (forget-button-press)))
+
+;;;###autoload
 (defun raise-and-pass-through-click-if-focused (w)
   "Raise the window that received the current event (if it's focused), then
 replay any pointer events that invoked the command."
