@@ -1,5 +1,16 @@
 2000-12-20  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/state/transient.jl (transient-of-p,
+	indirect-transient-of-p): added keyword arg ALLOW-ROOT which
+	enables the (= transient-for ROOT) checking code
+
+	(transient-map-window): pass `#:allow-root t' to transient-of-p
+
+	* sawfish/wm/placement.jl (place-window-centered-on-parent): if
+	no single known parent, check if the currently focused window
+	is in the same group as the window being placed. If so, take it
+	as the implicit parent while placing
+
 	* sawfish/wm/state/transient.jl (transient-of-p): disabled the
 	code that checks if (= transient-for ROOT), it causes havoc in
 	too many places

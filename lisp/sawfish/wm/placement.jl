@@ -34,6 +34,7 @@
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.windows
+	  sawfish.wm.util.groups
 	  sawfish.wm.custom)
 
   (defvar placement-modes nil
@@ -169,8 +170,14 @@ this mode. The single argument is the window to be placed."
 			      (cdr dims) (nth 1 screen) (nth 3 screen)))))
 
   (define (place-window-centered-on-parent w)
-    (let ((parent (window-transient-p w)))
-      (if (or (not parent) (not (setq parent (get-window-by-id parent))))
+    (let ((parent (let ((id (window-transient-p w)))
+		    (and id (get-window-by-id id)))))
+      ;; if no known parent, look if the focused window is in the
+      ;; same group as W, if so use it
+      (when (and (not parent) (not (eq (input-focus) w))
+		 (memq (input-focus) (windows-in-group w)))
+	(setq parent (input-focus)))
+      (if (not parent)
 	  (place-window-centered w)
 	(let ((dims (window-frame-dimensions w))
 	      (pdims (window-frame-dimensions parent))
