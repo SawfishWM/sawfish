@@ -1330,8 +1330,7 @@ DEFUN("x-server-timestamp", Fx_server_timestamp, Sx_server_timestamp,
 ::doc:x-server-timestamp::
 x-server-timestamp [FROM-SERVER]
 
-Return a recent X server timestamp, as a cons cell containing two
-integers.
+Return a recent X server timestamp, as an integer.
 
 If FROM-SERVER is non-nil the timestamp is read directly from the
 server, otherwise the most recent timestamp seen by the window manager

@@ -247,7 +247,7 @@ Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
 DEFUN("move-resize-window-to", Fmove_resize_window_to, Smove_resize_window_to,
       (repv win, repv x, repv y, repv width, repv height), rep_Subr5) /*
 ::doc:move-resize-window-to::
-move-resize-window-to X Y WINDOW WIDTH HEIGHT
+move-resize-window-to WINDOW X Y WIDTH HEIGHT
 
 Reconfigure the geometry of window object WINDOW as specified.
 ::end:: */

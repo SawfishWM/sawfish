@@ -1484,7 +1484,7 @@ list_frame_generator (Lisp_Window *w)
     }
     else
     {
-	/* adjust frame posiotion to keep absolute client position constant */
+	/* adjust frame position to keep absolute client position constant */
 	w->attr.x += w->frame_x - old_x_off;
 	w->attr.y += w->frame_y - old_y_off;
 
@@ -1503,9 +1503,6 @@ list_frame_generator (Lisp_Window *w)
     w->rebuild_frame = list_frame_generator;
     w->property_change = refresh_frame_parts;
 
-    /* Client window is always left _underneath_ any overlapping frame
-       parts; this may not always be ideal, but we have to choose 
-       either over or under, and this will probably be more useful.. */
     if (w->reparented)
 	XLowerWindow (dpy, w->id);
 
