@@ -128,7 +128,8 @@
 	  ((and (consp type) (eq (car type) 'set))
 	   `(hbox (set ,(cdr type)
 		       :variable ,symbol
-		       :value ,value)
+		       :value ,value
+		       :widget ,(get symbol 'custom-widget))
 		  (label ,doc)))
 
 	  (t
