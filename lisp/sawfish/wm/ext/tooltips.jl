@@ -93,7 +93,8 @@
 			 (foreground . ,tooltips-foreground-color)
 			 (x-justify . left)
 			 (spacing . 2)
-			 ,@(and tooltips-font (cons 'font tooltips-font))))
+			 ,@(and tooltips-font
+				(list (cons 'font tooltips-font)))))
       (setq tooltips-displayed (or win t))
       (setq tooltips-timer
 	    (make-timer remove-tooltip
