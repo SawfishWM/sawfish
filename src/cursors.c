@@ -35,14 +35,15 @@ get-cursor DATA
 {
     Lisp_Cursor *f;
 
+    if (rep_SYMBOLP(data))
+	data = Fget (data, Qcursor_shape);
+
     f = cursor_list;
     while (f != 0 && f->data != data)
 	f = f->next;
     if (f == 0)
     {
 	Cursor cursor = 0;
-	if (rep_SYMBOLP(data))
-	    data = Fget (data, Qcursor_shape);
 	if (rep_INTP(data))
 	    cursor = XCreateFontCursor (dpy, rep_INT(data));
 	else if (IMAGEP(data))
