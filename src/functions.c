@@ -281,7 +281,7 @@ Returns non-nil if the grab succeeded.
     }
 
 again:
-    ret = XGrabPointer (dpy, g_win, True, POINTER_GRAB_EVENTS,
+    ret = XGrabPointer (dpy, g_win, False, POINTER_GRAB_EVENTS,
 			GrabModeAsync, GrabModeAsync, None,
 			CURSORP(cursor) ? VCURSOR(cursor)->cursor : None,
 			last_event_time);
