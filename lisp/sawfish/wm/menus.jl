@@ -198,6 +198,7 @@ unused before killing it.")
 
 ;;;###autoload
 (defun popup-menu (spec)
+  (or spec (error "No menu given to popup-menu"))
   (if (and menu-active menu-process (process-in-use-p menu-process))
       (error "Menu already active")
     (let*
@@ -234,22 +235,16 @@ unused before killing it.")
 (defun popup-window-menu ()
   "Display the menu listing all window operations."
   (interactive)
-  (if window-ops-menu
-      (popup-menu window-ops-menu)
-    (beep)))
+  (popup-menu window-ops-menu))
 
 ;;;###autoload
 (defun popup-root-menu ()
   "Display the main menu."
   (interactive)
-  (if root-menu
-      (popup-menu root-menu)
-    (beep)))
+  (popup-menu root-menu))
 
 ;;;###autoload
 (defun popup-apps-menu ()
   "Display the applications menu."
   (interactive)
-  (if root-menu
-      (popup-menu apps-menu)
-    (beep)))
+  (popup-menu apps-menu))

@@ -273,7 +273,7 @@ that overrides settings set elsewhere.")
 (defun edit-frame-style (style)
   (interactive (list default-frame-style))
   (if (not (memq style editable-frame-styles))
-      (beep)
+      (error "Frame style isn't editable")
     (let
 	((dir (find-frame-style style)))
       (when dir

@@ -454,9 +454,8 @@
   (interactive)
   (let
       ((w (select-window)))
-    (if w
-	(move-window-interactively w)
-      (beep))))
+    (when w
+      (move-window-interactively w))))
 
 ;;;###autoload
 (defun resize-selected-window ()
@@ -464,6 +463,5 @@
   (interactive)
   (let
       ((w (select-window)))
-    (if w
-	(resize-window-interactively w)
-      (beep))))
+    (when w
+      (resize-window-interactively w))))
