@@ -1,3 +1,29 @@
+2000-01-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (window-menu): include iconified windows, even
+	when they're ignored; shorten sticky entries as usual (patch
+	from James Antill)
+
+	* move-resize.jl (move-resize-window): set
+	synthetic-configure-mutex to t while moving
+
+	* move-resize.jl (move-resize-finished, move-resize-apply): use
+	move-resize-window-to to do simultaneous move&resize --
+	elminates flicker
+
+	* match-window.jl: in workspace setter function, convert the id
+	from logical to physical where needed. Also, commented out the
+	call to select the workspace
+
+	* workspace.jl (workspace-id-to-logical,
+	workspace-id-from-logical): functions for converting between
+	workspace ids and offsets
+
+	* gnome-match.jl: fix the property names I'd forgotten to change
+
+	* maximize.jl (maximize-truncate-dims): fixed the truncation
+	method
+
 2000-01-19  John Harper  <john@dcs.warwick.ac.uk>
 
 	* error-handler.jl: new file, displays rep errors in a message

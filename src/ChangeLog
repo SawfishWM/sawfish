@@ -1,3 +1,15 @@
+2000-01-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (Vsynthetic_configure_mutex): new variable, while t,
+	no synthetic ConfigureNotify events are sent to windows after
+	they've been moved
+	* sawmill.h (Lisp_Window): new flag, `pending_configure'
+
+	* functions.c (Fmove_resize_window_to): new function,
+	simultaneous move&resize
+	* frames.c (list_frame_generator): when reconfiguring an
+	existing frame window, set its position as well as its size
+
 2000-01-19  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.22
