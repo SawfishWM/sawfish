@@ -89,6 +89,7 @@ last updated @value{UPDATED} for Sawmill version @value{VERSION}.
 * Event Loop::			Handling input events
 * Miscellaneous Functions::	Useful features
 * Standard Hooks::		Hooking into wm actions
+* Standard Properties::		Window properties
 * Session Management::		Saving state across sessions
 
 * FAQ::				Frequently asked questions
@@ -535,6 +536,9 @@ Return the window property named @var{property} associated with the
 window object @var{window}, or @code{nil} if no such property exists.
 @end defun
 
+For a list of the standard window properties, see @ref{Standard
+Properties}.
+
 
 @node Window Attributes, Input Focus, Window Property Lists, Windows
 @section Window Attributes
@@ -648,6 +652,33 @@ This option may be set on a per-window basis by setting the
 @code{focus-proxy-click} property of the window (using the
 @code{window-put} function).
 @end defvar
+
+Sawmill also maintains the order in which windows were recently
+focused.
+
+@defun window-order &optional workspace allow-iconified all-viewports
+Return a list of windows, in most-recently-focused order.
+
+If @var{workspace} is an integer, then only windows on that workspace
+are included, otherwise all workspaces are searched.
+
+If @var{allow-iconified} is non-nil, iconified windows are included. If
+@code{all-viewports} is non-nil, then all viewports of the workspace(s)
+are scanned.
+@end defun
+
+@defun window-order-push window
+Push window object @var{window} onto the top of the focus stack.
+@end defun
+
+@defun window-order-pop window
+Remove window object @var{window} from the focus stack.
+@end defun
+
+@defun window-order-focus-most-recent
+Focus the most-recently-focused window on the current viewport of the
+current workspace.
+@end defun
 
 
 @node X Properties, Window Stacking, Input Focus, Windows
@@ -2461,7 +2492,7 @@ Return the process-id of the running Lisp interpreter.
 @end defun
 
 
-@node Standard Hooks, Session Management, Miscellaneous Functions, Top
+@node Standard Hooks, Standard Properties, Miscellaneous Functions, Top
 @chapter Standard Hooks
 @cindex Standard hooks
 @cindex Hooks, standard
@@ -2566,11 +2597,77 @@ Called immediately before exiting.
 
 @item sm-window-save-functions
 @itemx sm-restore-window-hook
+@itemx sm-after-restore-hook
 Session management hooks, @ref{Session Management}.
 @end vtable
 
 
-@node Session Management, FAQ, Standard Hooks, Top
+@node Standard Properties, Session Management, Standard Hooks, Top
+@chapter Standard Window Properties
+@cindex Standard window properties
+@cindex Window properties, standard
+
+As described in an earlier section of this manual, each window has a
+property list, which may be used to associate arbitrary lisp data with
+symbolic keys (@pxref{Window Property Lists}). The following table
+documents a subset of the keys currently used.
+
+@vtable @code
+
+@item ignored
+When set, the window is ignored in many operations.
+
+@item workspace
+An integer defining the workspace that the window is a member of, or
+unset if the window is not a member of any one workspace.
+@xref{Workspaces}.
+
+@item sticky
+Whether the window should appear on all workspaces.
+
+@item fixed-position
+When set, the window will appear in all viewports of its workspace.
+
+@item keymap
+An optional, window-local, keymap. @xref{Keymaps}.
+
+@item type
+The frame-type of the window, or @code{nil}. @xref{Frame Types}.
+
+@item frame-style
+The frame style explicitly chosen by the user, or unset. @xref{Frame
+Styles}.
+
+@item current-frame-style
+The frame style currently used for the window. @xref{Frame Styles}.
+
+@item removed-classes
+A list of frame part classes removed from the decorations of this
+window. @xref{Removing Frame Parts}.
+
+@item shaded
+Is the window shaded? @xref{Shading Windows}.
+
+@item hide-client
+Is the client window visible within its frame. Used to implement window
+shading.
+
+@item depth
+An integer, the layer that the window is a member of. Layer zero is the
+depth of ``normal'' windows, negative depths are below this level,
+while positive depths are above. @xref{Window Stacking}.
+
+@item placed
+Has the window been placed in a position yet? The
+@code{place-window-hook} is only called when this is unset.
+
+@item iconified
+Is the window iconified? @xref{Iconifying Windows}.
+
+@end vtable
+
+
+@node Session Management, FAQ, Standard Properties, Top
 @chapter Session Management
 @cindex Session management
 
@@ -2610,6 +2707,12 @@ is called with arguments @code{(@var{window} @var{alist})}, where
 
 Each function should look for the properties it saved, and then take
 any action dependent on the values.
+@end defvar
+
+The following hook is also called.
+
+@defvar sm-after-restore-hook
+Hook called after loading a saved session.
 @end defvar
 
 

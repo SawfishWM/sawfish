@@ -22,22 +22,11 @@ Outstanding bugs
     unfocused, but without any other window (or our no_focus_window)
     being focused afterwards.. ]
 
-  ! Without GMC you can press button1 on root window, and holding it
-    move over frame, and that frame gets clicked and action bound to
-    this frame is taken
-
-    Move cursor very slowly over frame holding button1
-
-  ! While moving or resizing, when you release button and move mouse
-    out of frame very fast, frame remains in highlighted state
-
   ! latency when starting menu subprocesses can be annoying (pointer
     events are handled unintuitively)
 
   ! It's not possible to compile sawmill-ui.jl without an X connection
     (it requires 'gtk, which then calls gtk_init (), ...)
-
-  ! Move functions.c:Fgetpid () to librep
 
   ! install-sh script isn't found from subdirectories?
 
@@ -55,16 +44,7 @@ Outstanding bugs
 
   ! xv/java-apps get weird placement [apps being non-ICCCM compliant?]
 
-  ! doing send-to-next-workspace or send-to-previous-workspace
-    sometimes causes the window to be "anti-focus", that is, it cannot
-    be focused by any means.
-
-  ! `sawmill --version' gives rep-version not sawmill-version
-
-  ! smart placement algorithms blow-up with large numbers of windows
-
-    [ hacked this by limiting the number of points in the grid, in
-    general these rectangular packing problems are NP-complete ]
+  ! (getpid) has been obsoleted by rep's (process-id)
 
 
 General tasks
@@ -76,8 +56,6 @@ General tasks
 
   + placement fall-back options?
 
-  + add an `exit without changing' command to interactive move-resize
-
   + add a gradient frame with side pieces
 
   + ui method for matching windows to attributes
@@ -88,12 +66,7 @@ General tasks
 
   + wrap-around option for moving viewports
 
-  + option to re-place windows when they move workspaces/viewports?
-
   + use panes to separate areas in bindings widget
-
-  + when cycling windows, show all names (with mark against current),
-    but don't focus each temporarily selected window? (options?)
 
   + allow workspaces to be named?
 
@@ -125,30 +98,6 @@ General tasks
     i.e. the `customization' root sub-menu wouldn't match the menu in
     the gnome `settings' tree. this would be bad since the user may not
     discover the dynamic menu and thus miss many of the options..
-
-  + Ability to execute commands (like select-workspace:X) while
-    moving/resizing.
-
-    Could solve this by specifying a keymap to the
-    grab-pointer/grab-keyboard functions, then evaluate the other type
-    of events as normal
-
-    Would this introduce other problems..? What if the outer command
-    has the server grabbed (e.g. rubber-banding in progress)
-
-    Also, what protection is there against the user doing something
-    "foolish"? (like switching desktops while resizing a window)
-
-  + option to maximize with frame outside the root boundaries?
-
-    but only put the border of the window outside, not the title
-
-    this would be hard to achieve (i.e. parsing the frame def)
-
-  + option to disable moving/resizing in maximized state
-
-    Why? I think that the user should always be able to manipulate the
-    window if they wish to do so
 
   + tooltips in frame parts describing their keymaps
 
@@ -186,9 +135,12 @@ General tasks
 
     How can the best-fit cost function be improved?
 
-    Maybe define a placement-weight-alist mapping window names to
-    overlap weights? Negative weights could be used for windows that we
-    don't really mind being covered
+    the algorithm can still be a bit slow when there's a large number
+    of windows
+
+    hacked around this by limiting the number of points in the grid, in
+    general these rectangular packing problems have non-polynomial
+    complexity (i.e. they become quickly intractable)
 
   + Handle window groups
 
@@ -203,13 +155,7 @@ General tasks
 
   + Icons (?)
 
-  + Load tarred/compressed themes
-
-  + GUI configuration
-
-    Customization of key bindings is a bit simplistic -- whenever a
-    single binding is changed, the whole keymap is then fixed in the
-    user's .sawmill-custom file
+  + Load tarred/compressed themes?
 
   + Support the KDE hints
 

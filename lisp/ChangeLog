@@ -1,5 +1,14 @@
 1999-10-13  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sm-init.jl (sm-after-restore-hook): new hook
+
+	* window-order.jl: after loading session compress the stack
+	(window-order-compress): remove `order' properties of windows
+	not in the order stack
+
+	* move-resize.jl: typing `ESC' during move/resize cancels the
+	operation, restoring the original geometry
+
 	* workspace.jl (select-workspace): only call
 	window-order-focus-most-recent if not in enter-exit focus mode
 
