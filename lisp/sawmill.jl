@@ -45,6 +45,17 @@
 ;; set $DISPLAY so that any subprocesses inherit it
 (setenv "DISPLAY" display-name)
 
+;; load i18n support when necessary
+(unless batch-mode
+  (let
+      ((lang (or (getenv "LC_ALL") (getenv "LC_MESSAGES") (getenv "LANG"))))
+    (when (and (not (get-command-line-option "--disable-nls"))
+	       lang (not (string= lang "C")))
+      (require 'gettext)
+      (bindtextdomain
+       "sawmill" (expand-file-name "../locale" sawmill-lisp-lib-directory))
+      (textdomain "sawmill"))))
+
 ;; load always-present session-manager stuff
 (require 'sm-init)
 (require 'workspace)
@@ -104,17 +115,6 @@
 	      (require 'gnome)
 	      (throw 'out t)))
 	  (list-x-properties 'root))))
-
-;; load i18n support when necessary
-(unless batch-mode
-  (let
-      ((lang (or (getenv "LC_ALL") (getenv "LC_MESSAGES") (getenv "LANG"))))
-    (when (and (not (get-command-line-option "--disable-nls"))
-	       lang (not (string= lang "C")))
-      (require 'gettext)
-      (bindtextdomain
-       "sawmill" (expand-file-name "../locale" sawmill-lisp-lib-directory))
-      (textdomain "sawmill"))))
 
 ;; now connect with the session manager; gsm requires that apps don't
 ;; connect until they're ready to handle the later priority levels
