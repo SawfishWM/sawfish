@@ -1,3 +1,13 @@
+2000-02-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* shade-hover.jl (shade-hover-enter): allow shade-hover to be
+	enabled by window shade-hover property
+	* match-window.jl (match-window-properties): added shade-hover
+
+	* gnome-menu.jl: on startup, arrange to read the menus off disk
+	when the wm gets its first idle cycles -- this reduces latency
+	when first displaying the root-menu
+
 2000-02-27  John Harper  <john@dcs.warwick.ac.uk>
 
 	* edges.jl (edges-within-epsilon,
