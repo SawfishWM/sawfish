@@ -67,8 +67,8 @@
     :group misc)
 
   (defcustom persistent-group-ids nil
-    "Persistent group ids"
-    :type (list symbol)
+    ""
+    :type* `(list symbol ,(_ "Persistent group ids"))
     :widget-flags (expand framed)
     :user-level expert
     :group misc)

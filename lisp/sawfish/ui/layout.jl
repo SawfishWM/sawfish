@@ -71,7 +71,6 @@
     (let ((box ((if (eq style 'hbox)
 		    gtk-hbox-new
 		  gtk-vbox-new) nil box-spacing)))
-      (gtk-container-border-width box box-border)
       (mapc (lambda (s)
 	      (let ((w (document-slot s)))
 		(set-slot-layout s w)
@@ -98,7 +97,7 @@
 
   (define (document-slot slot)
     (let ((doc (slot-doc slot)))
-      (if (null doc)
+      (if (or (null doc) (string= doc ""))
 	  (slot-gtk-widget slot)
 	(let ((split (tooltip-split doc)))
 	  (define (add-tooltip widget)

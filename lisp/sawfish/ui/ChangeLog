@@ -1,5 +1,9 @@
 2000-11-21  John Harper  <jsh@eazel.com>
 
+	* layout.jl (layout-box): don't set the border of the box
+	(document-slot): when checking whether a doc string is given or
+	not, also check if the value is the null string
+
 	* widgets/command.jl (update-params): when ref'ing commands
 	without arguments, remember to use command-name to remove any
 	keywords in the command definition. Fixes #4827

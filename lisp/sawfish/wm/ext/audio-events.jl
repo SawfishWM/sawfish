@@ -69,7 +69,7 @@
 				  ;(focused . "clicked.wav")
 				  (switch-workspace . "toggled.wav")
 				  (move-viewport . "toggled.wav"))
-    "Event mapping:"
+    ""
     :type* `(alist ((symbol iconified uniconified
 			    shaded unshaded
 			    maximized unmaximized
@@ -78,8 +78,7 @@
 			    switch-workspace move-viewport
 			    focused unfocused) ,(_ "Event"))
 		   (file ,(_ "Audio file")))
-    :widget-flags (expand framed)
-    :user-level expert
+    :widget-flags (expand)
     :depends audio-events-enabled
     :group audio)
 
