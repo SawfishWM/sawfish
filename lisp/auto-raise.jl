@@ -44,7 +44,12 @@
   (if (or (and (stringp raise-windows-on-focus)
 	       (string-match raise-windows-on-focus (window-name w)))
 	  raise-windows-on-focus)
-      (progn
+      (if (<= raise-window-timeout 0)
+	  (progn
+	    (raise-window w)
+	    (when rw-timer
+	      (delete-timer rw-timer)
+	      (setq rw-timer nil)))
 	(setq rw-window w)
 	(if rw-timer
 	    (set-timer rw-timer)
