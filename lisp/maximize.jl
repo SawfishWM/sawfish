@@ -173,7 +173,7 @@
 
 ;; 2D packing
 
-(defun maximize-do-both (window avoided edges coords dims fdims)
+(defun maximize-find-max-rectangle (avoided edges)
   (let*
       ((grid (grid-from-edges (car edges) (cdr edges)))
        rects)
@@ -200,14 +200,19 @@
 			 (> (rectangle-area rect) max-area))
 		(setq max-area (rectangle-area rect))
 		(setq max-rect rect))) rects)
-      (when max-rect
-	(rplaca coords (nth 0 max-rect))
-	(rplacd coords (nth 1 max-rect))
-	(rplaca dims (- (- (nth 2 max-rect) (nth 0 max-rect))
-			(- (car fdims) (car dims))))
-	(rplacd dims (- (- (nth 3 max-rect) (nth 1 max-rect))
-			(- (cdr fdims) (cdr dims))))
-	window))))
+      max-rect)))
+
+(defun maximize-do-both (window avoided edges coords dims fdims)
+  (let
+      ((max-rect (maximize-find-max-rectangle avoided edges)))
+    (when max-rect
+      (rplaca coords (nth 0 max-rect))
+      (rplacd coords (nth 1 max-rect))
+      (rplaca dims (- (- (nth 2 max-rect) (nth 0 max-rect))
+		      (- (car fdims) (car dims))))
+      (rplacd dims (- (- (nth 3 max-rect) (nth 1 max-rect))
+		      (- (cdr fdims) (cdr dims))))
+      window)))
 
 
 ;; size hints stuff
@@ -251,6 +256,19 @@
     (when (memq direction '(nil vertical))
       (rplacd dims (trunc (cdr dims) y-inc y-base y-max)))
     dims))
+
+
+;; misc functions
+
+(defun maximize-find-workarea (&optional w)
+  "Return the rectangle representing the largest rectangle on the screen that
+doesn't overlap any avoided windows, or nil."
+  (let*
+      ((avoided (avoided-windows w))
+       (edges (get-visible-window-edges ':with-ignored-windows t
+					':windows avoided
+					':include-root t)))
+    (maximize-find-max-rectangle avoided edges)))
 
 
 ;; commands
