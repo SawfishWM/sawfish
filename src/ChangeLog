@@ -1,5 +1,9 @@
 1999-07-29  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c, server.c, functions.c, events.c, display.c:
+	replaced some calls to XSync by XFlush. (XSync also buffers any
+	pending events, preventing select from returning)
+
 	* display.c: add a call to XSync in the rep_redisplay_fun hook
 
 1999-07-28  John Harper  <john@dcs.warwick.ac.uk>
