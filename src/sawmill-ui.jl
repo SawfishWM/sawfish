@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.22 1999/09/08 22:33:18 john Exp $
+;; $Id: sawmill-ui.jl,v 1.23 1999/09/09 12:45:27 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -524,7 +524,7 @@ exec rep "$0" "$@"
       ((hbox (gtk-vbox-new nil 0))
        (vbox (gtk-hbox-new nil 0))
        (vbox-2 (gtk-vbox-new nil 0))
-       (label (gtk-label-new (flatten-doc-string (get-key spec ':doc))))
+       (label (gtk-label-new (get-key spec ':doc)))
        (insert (gtk-button-new-with-label "Insert"))
        (delete (gtk-button-new-with-label "Delete"))
        (clist (gtk-clist-new-with-titles ["Key" "Command"]))
@@ -562,7 +562,6 @@ exec rep "$0" "$@"
 					       ',spec)))
     (gtk-box-pack-start vbox-2 label)
     (gtk-label-set-justify label 'left)
-    (gtk-label-set-line-wrap label t)
     (gtk-container-add vbox-2 hbox)
     vbox-2))
 
@@ -639,7 +638,6 @@ exec rep "$0" "$@"
 
     (gtk-container-add doc-frame doc-label)
     (gtk-label-set-justify doc-label 'left)
-    (gtk-label-set-line-wrap doc-label t)
 
     (rplacd spec (nthcdr 2 spec))
     (setq spec (nconc spec (list ':maps maps
@@ -690,9 +688,9 @@ exec rep "$0" "$@"
 			   (build-keymap-shell:select-map ',spec ',maps row)))
     (gtk-clist-select-row map-clist 0 0)
 
-    (gtk-container-add vbox frame)
-    (gtk-container-add vbox hbox-1)
-    (gtk-container-add vbox doc-frame)
+    (gtk-box-pack-start vbox frame t t)
+    (gtk-box-pack-end vbox hbox-1 nil t)
+    (gtk-box-pack-end vbox doc-frame nil t)
 
     vbox))
 
@@ -757,9 +755,7 @@ exec rep "$0" "$@"
 	(let
 	    ((doc (documentation command)))
 	  (gtk-frame-set-label frame (symbol-name command))
-	  (gtk-label-set label (if doc
-				   (flatten-doc-string doc)
-				 "Undocumented")))
+	  (gtk-label-set label (or doc "Undocumented")))
       (gtk-frame-set-label frame "")
       (gtk-label-set label ""))))
       
@@ -792,7 +788,6 @@ exec rep "$0" "$@"
     (gtk-container-add vbox frame)
     (gtk-label-set-justify doc-label 'left)
     (gtk-label-set-justify readme-label 'left)
-    ;(gtk-label-set-line-wrap readme-label t)
 
     (unless (key-exists-p spec ':value)
       (set-key spec ':value (car values)))
@@ -865,6 +860,7 @@ exec rep "$0" "$@"
        (vbox (gtk-vbox-new nil 0))
        (hbox (gtk-hbutton-box-new))
        ui-ok ui-apply ui-revert refresh cancel)
+    (gtk-window-set-policy ui-window t t nil)
     (unless ui-socket-id
       (setq ui-ok (gtk-button-new-with-label "OK"))
       (setq ui-apply (gtk-button-new-with-label "Try"))
