@@ -101,14 +101,35 @@ else
 fi
 
 dnl Check for image handling libraries
-AM_PATH_IMLIB
-if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then true; else
-  AC_MSG_ERROR([imlib must be built with support for png images])
+AC_ARG_WITH(gdk-pixbuf,
+ [  --with-gdk-pixbuf	  Use gdk-pixbuf for image management],
+ [ with_gdk_pixbuf=yes ])
+if test "$with_gdk_pixbuf" = "yes"; then
+  AC_MSG_CHECKING([for gdk_pixbuf (xlib version)])
+  GDK_PIXBUF_VERSION=`gnome-config gdk_pixbuf_xlib --modversion`
+  if test $? -eq 0; then
+    AC_MSG_RESULT($GDK_PIXBUF_VERSION)
+    GDK_PIXBUF_CFLAGS=`gnome-config gdk_pixbuf_xlib --cflags`
+    GDK_PIXBUF_LIBS=`gnome-config gdk_pixbuf_xlib --libs`
+    AC_SUBST(GDK_PIXBUF_VERSION)
+    AC_SUBST(GDK_PIXBUF_CFLAGS)
+    AC_SUBST(GDK_PIXBUF_LIBS)
+    AC_DEFINE(HAVE_GDK_PIXBUF,1)
+    AC_DEFINE(NEED_PIXMAP_CACHE,1)
+    IMAGE_LIBS='${GDK_PIXBUF_LIBS}'
+    IMAGE_CFLAGS='${GDK_PIXBUF_CFLAGS}'
+  else
+    AC_MSG_ERROR(no)
+  fi
+else
+  AM_PATH_IMLIB
+  if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then true; else
+    AC_MSG_ERROR([imlib must be built with support for png images])
+  fi
+  AC_DEFINE(HAVE_IMLIB,1)
+  IMAGE_LIBS='${IMLIB_LIBS}'
+  IMAGE_CFLAGS='${IMLIB_CFLAGS}'
 fi
-AC_DEFINE(HAVE_IMLIB,1)
-IMAGE_LIBS='${IMLIB_LIBS}'
-IMAGE_CFLAGS='${IMLIB_CFLAGS}'
-
 AC_SUBST(IMAGE_LIBS)
 AC_SUBST(IMAGE_CFLAGS)
 
