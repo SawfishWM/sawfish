@@ -142,12 +142,14 @@
 			  (lambda (w ev)
 			    (declare (unused w))
 			    (when (eq (gdk-event-type ev) '2button-press)
-			      (edit-item))))
+			      (edit-item))
+			    nil))
       (g-signal-connect clist "key_press_event"
 			  (lambda (w ev)
 			    (declare (unused w))
 			    (when (string= (gdk-event-string ev) "\r")
-			      (edit-item))))
+			      (edit-item))
+			    nil))
 
       (gtk-clist-set-shadow-type clist 'none)
       (gtk-clist-set-column-width clist 0 100)
