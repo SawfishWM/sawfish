@@ -1,3 +1,24 @@
+1999-09-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl: changed the architecture, instead of the wm
+	connecting with the configurator, make the configurator connect
+	with the wm (using sawmill-client); re-enabled the "revert"
+	button
+
+	* sawmill.h (Lisp_Window): added `destroyed' bit
+	* windows.c (emit_pending_destroys): call destroy-notify-hook
+	where it's required
+	* events.c (destroy_notify): only call hook if it's not already
+	been called
+	(handle_input_mask): call emit_pending_destroys after each event
+	* display.c (error_handler): mark that may be input pending on
+	the X connection (so that the event loop will call
+	emit_pending_destroys)
+
+	* windows.c (install_window_frame, remove_window_frame): handle
+	adding and deleting from the save-set here (so that unmapped
+	but not destroyed windows are removed from it)
+
 1999-09-06  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-ui.jl (build-frame-style:update-readme): strip

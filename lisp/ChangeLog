@@ -1,3 +1,13 @@
+1999-09-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* customize.jl: removed all the subprocess code, now we just
+	fork off the configurator using the system function and forget
+	about it
+
+	* server.jl (server-client-message-handler): for async
+	requests, delete the property immediately after reading it, not
+	after evaluating the form
+
 1999-09-06  John Harper  <john@dcs.warwick.ac.uk>
 
 	* move-resize.jl (move-resize-infer-anchor): if no edges have
