@@ -44,8 +44,8 @@
 	  sawfish.wm.util.groups
 	  sawfish.wm.frames)
 
-  (defcustom focus-windows-when-mapped nil
-    "Focus windows when they are first displayed."
+  (defcustom focus-windows-when-mapped t
+    "Focus on application windows when they first appear."
     :type boolean
     :group focus)
 

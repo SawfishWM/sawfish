@@ -68,7 +68,8 @@
 	(window-put w 'current-frame-style (or (window-get w 'frame-style)
 					       default-frame-style))
 	(unless (eq (window-get w 'current-frame-style) old-frame-style)
-	  (reframe-window w)))))
+	  (reframe-window w))))
+    (call-hook 'after-workspace-swap-in-hook (list w space)))
 
   (add-hook 'workspace-swap-in-hook workspace-swap-in)
   (add-hook 'workspace-swap-out-hook workspace-swap-out))

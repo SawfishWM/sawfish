@@ -1,5 +1,26 @@
 2001-01-04  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/workspace.jl: don't include hide-client in the
+	call to add-swapped-properties
+
+	* sawfish/wm/state/shading.jl (shading-after-swap-in): added to
+	the after-workspace-swap-in-hook, updates the hide-client
+	property to match the shaded property and reframes the window
+	if necessary
+
+	* sawfish/wm/swapper.jl (workspace-swap-in): before exiting,
+	run after-workspace-swap-in-hook with two args (W SPACE)
+
+	[ Last three changes fix bug 5179 (shaded state is fixed for
+	all workspaces) ]
+
+	* sawfish/wm/state/transient.jl (focus-windows-when-mapped):
+	defaults to t; changed doc string to reflect the earlier change
+	in semantics
+
+	* sawfish/wm/placement.jl (place-window-mode): set to
+	`top-left' by default now
+
 	* sawfish/wm/placement/top-left.jl (windows-around): ignore
 	windows that have yet to be placed
 

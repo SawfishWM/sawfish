@@ -40,7 +40,7 @@
   (defvar placement-modes nil
     "List containing all symbols naming window placement modes.")
 
-  (defcustom place-window-mode 'best-fit
+  (defcustom place-window-mode 'top-left
     "Method of placing windows: \\w"
     :type symbol
     :group placement)
