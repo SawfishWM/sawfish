@@ -324,10 +324,9 @@
 (defun move-resize-cancel ()
   (interactive)
   (if (eq move-resize-mode 'opaque)
-      (progn
-	(move-window-to move-resize-window move-resize-old-x move-resize-old-y)
-	(resize-window-to
-	 move-resize-window move-resize-old-width move-resize-old-height))
+      (move-resize-window-to move-resize-window
+			     move-resize-old-x move-resize-old-y
+			     move-resize-old-width move-resize-old-height)
     (apply erase-window-outline move-resize-last-outline))
   (throw 'move-resize-done nil))
 
@@ -345,13 +344,9 @@
     (rplacd m-pos (1- (screen-height))))
    ((<= (cdr m-pos) (- (+ move-resize-height (cdr move-resize-frame))))
     (rplacd m-pos (1+ (- (+ move-resize-height (cdr move-resize-frame)))))))
-  (unless (and (= move-resize-old-x (car m-pos))
-	       (= move-resize-old-y (cdr m-pos)))
-    (move-window-to move-resize-window (car m-pos) (cdr m-pos)))
-  (unless (and (= move-resize-old-width move-resize-width)
-	       (= move-resize-old-height move-resize-height))
-    (resize-window-to move-resize-window
-		      move-resize-width move-resize-height)))
+  (move-resize-window-to move-resize-window
+			 (car m-pos) (cdr m-pos)
+			 move-resize-width move-resize-height))
 
 ;; called when moving, tries to decide which edges to move, which to stick
 (defun move-resize-infer-anchor ()
