@@ -32,17 +32,18 @@
 	  gui.gtk-2.gtk
 	  sawfish.gtk.widget)
 
+  ;; same as in gnome now
   (define (stock-button type)
-    (gtk-button-new-with-label
+    (gtk-button-new-from-stock
      (case type
-       ((ok) (_ "OK"))
-       ((cancel) (_ "Cancel"))
-       ((revert) (_ "Revert"))
-       ((apply) (_ "Apply"))
-       ((yes) (_ "Yes"))
-       ((no) (_ "No"))
-       ((close) (_ "Close"))
-       ((help) (_ "Help")))))
+       ((ok) "gtk-ok")
+       ((cancel) "gtk-cancel")
+       ((revert) "gtk-revert-to-saved")
+       ((apply) "gtk-apply")
+       ((yes) "gtk-yes")
+       ((no) "gtk-no")
+       ((close) "gtk-close")
+       ((help) "gtk-help"))))
 
   (define (simple-dialog title widget #!optional ok-callback main-window)
 
@@ -60,7 +61,6 @@
 	(gtk-widget-destroy window))
 	  
       (gtk-window-set-title window title)
-      ;;(gtk-window-set-modal window t)
       (gtk-window-set-wmclass window "ok_cancel_dialog" "Nokogiri")
       (gtk-container-set-border-width window box-border)
       (when main-window

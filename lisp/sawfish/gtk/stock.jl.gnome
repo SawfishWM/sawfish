@@ -32,12 +32,18 @@
 	  gui.gtk-2.gtk
 	  gui.gtk-2.gnome-ui)
 
+  ;; same as in gtk now
   (define (stock-button type)
-    (case type
-      ((ok cancel yes no close apply help)
-       (gnome-stock-button type))
-      ((revert)
-       (gtk-button-new-with-label (_ "Revert")))))
+    (gtk-button-new-from-stock
+     (case type
+       ((ok) "gtk-ok")
+       ((cancel) "gtk-cancel")
+       ((revert) "gtk-revert-to-saved")
+       ((apply) "gtk-apply")
+       ((yes) "gtk-yes")
+       ((no) "gtk-no")
+       ((close) "gtk-close")
+       ((help) "gtk-help"))))
 
   (define (simple-dialog title widget #!optional ok-callback main-window)
 
