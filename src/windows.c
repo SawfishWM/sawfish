@@ -688,6 +688,19 @@ Return the window object that has the input focus, or nil if none does.
     return (focus_window == 0) ? Qnil : rep_VAL(focus_window);
 }
 
+DEFUN("window-wants-input-p", Fwindow_wants_input_p, Swindow_wants_input_p,
+      (repv win), rep_Subr1) /*
+::doc:Swindow-wants-input-p::
+window-wants-input-p WINDOW
+
+Return t if the client window associated with object WINDOW has hinted
+that it would like to be given the input focus when applicable.
+::end:: */
+{
+    rep_DECLARE1(win, WINDOWP);
+    return (VWIN(win)->wmhints && VWIN(win)->wmhints->input) ? Qt : Qnil;
+}
+
 DEFUN("managed-windows", Fmanaged_windows, Smanaged_windows,
       (void), rep_Subr0) /*
 ::doc:Smanaged-windows::
@@ -1107,6 +1120,7 @@ windows_init (void)
     rep_ADD_SUBR(Swindowp);
     rep_ADD_SUBR(Sset_input_focus);
     rep_ADD_SUBR(Sinput_focus);
+    rep_ADD_SUBR(Swindow_wants_input_p);
     rep_ADD_SUBR(Smanaged_windows);
     rep_ADD_SUBR(Sstacking_order);
     rep_ADD_SUBR(Swindow_visibility);
