@@ -19,6 +19,7 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'window-order)
 (provide 'focus)
 
 (defcustom focus-mode 'enter-exit
@@ -35,6 +36,8 @@
 (defvar click-to-focus-keymap
   (bind-keys (make-keymap)
     "Any-Click1" 'focus-click))
+
+(defvar focus-dont-push nil)
 
 (defun focus-click (w)
   (interactive "%w")
@@ -70,7 +73,9 @@
     (mapc #'(lambda (x)
 	      (unless (or (eq x w) (eq (window-get x 'keymap)
 				       click-to-focus-keymap))
-		(window-put x 'keymap click-to-focus-keymap))))))
+		(window-put x 'keymap click-to-focus-keymap)))))
+  (unless focus-dont-push
+    (window-order-push w)))
 
 (defun focus-out-fun (w)
   (when (and (eq focus-mode 'click)
