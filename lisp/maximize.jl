@@ -286,8 +286,7 @@
 	     (maximize-do-vertical w edges coords dims fdims)
 	     (window-put w 'maximized-vertically t)))
       (maximize-truncate-dims w dims direction hints)
-      (move-window-to w (car coords) (cdr coords))
-      (resize-window-to w (car dims) (cdr dims))
+      (move-resize-window-to w (car coords) (cdr coords) (car dims) (cdr dims))
       (when maximize-raises
 	(raise-window w))
       (call-window-hook 'window-maximized-hook w (list direction))
@@ -313,8 +312,7 @@
       (when (and (not (window-maximized-vertically-p w))
 		 (not (window-maximized-horizontally-p w)))
 	(window-put w 'unmaximized-geometry nil))
-      (resize-window-to w (car dims) (cdr dims))
-      (move-window-to w (car coords) (cdr coords))
+      (move-resize-window-to w (car coords) (cdr coords) (car dims) (cdr dims))
       (call-window-hook 'window-unmaximized-hook w (list direction))
       (call-window-hook 'window-state-change-hook w (list '(maximized))))))
 
