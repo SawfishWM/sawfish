@@ -32,6 +32,7 @@ LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
 REP_ENVIRON := $(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp
 
 SUBSTS := -e "s|__lispdir__|$(lispdir)|" \
+	  -e "s|__localedir__|$(localedir)|" \
 	  -e "s|__version__|$(version)|"
 
 G_PIXMAP_DIR = $(GNOMEDIR)/share/pixmaps

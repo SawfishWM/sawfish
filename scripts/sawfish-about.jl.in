@@ -40,7 +40,7 @@ exec rep "$0" "$@"
 	  sawfish.gtk.stock)
 
   (unless (get-command-line-option "--disable-nls")
-    (bindtextdomain "sawfish" (expand-file-name "../locale" "__lispdir__"))
+    (bindtextdomain "sawfish" __localedir__)
     (textdomain "sawfish"))
 
   (define title "Sawfish")
