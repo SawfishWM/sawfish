@@ -151,6 +151,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "Modifier key(s) used for default window manager shortcuts."
     :group bindings
     :type modifier-list
+    :user-level novice
     :after-set (lambda ()
 		 (ungrab-keymap global-keymap)
 		 (ungrab-keymap window-keymap)
