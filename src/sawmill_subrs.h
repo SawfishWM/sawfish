@@ -77,6 +77,7 @@ extern repv Qiconify_window, Quniconify_window;
 extern void record_event_time (XEvent *ev);
 extern void map_request (XEvent *ev);
 extern void send_synthetic_configure (Lisp_Window *w);
+extern void handle_input_mask(long mask);
 extern void handle_sync_input(int fd);
 extern repv Fquery_pointer (void);
 extern repv Fquery_pointer_window (void);

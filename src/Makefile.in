@@ -33,9 +33,12 @@ OBJS := $(SRCS:.c=.o)
 DL_SRCS := server.c gnome.c
 DL_OBJS := $(DL_SRCS:%.c=lib%.la)
 
+LISP_SRCS := sawmill-ui.jl sawmill-menu.jl
+LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
+
 CFLAGS := $(CFLAGS) $(IMLIB_CFLAGS) $(X11_CFLAGS)
 
-all : sawmill sawmill-client $(DL_OBJS)
+all : sawmill sawmill-client $(DL_OBJS) $(LISP_OBJS)
 
 sawmill : $(OBJS) $(LIBOBJS)
 	$(rep_LIBTOOL) $(CC) -export-dynamic $(LDFLAGS) \
@@ -47,6 +50,9 @@ sawmill-client : client.o
 lib%.la : %.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $<
 
+%.jlc : %.jl
+	rep compiler -f compile-batch $<
+
 install : all installdirs
 	for p in sawmill sawmill-client; do \
 	  $(rep_LIBTOOL) $(INSTALL_PROGRAM) $$p ${bindir}; \
@@ -54,6 +60,8 @@ install : all installdirs
 	for p in $(DL_OBJS); do \
 	  $(rep_DL_INSTALL) $$p ${sawmillexecdir}; \
 	done
+	$(INSTALL_PROGRAM) sawmill-ui.jlc $(bindir)/sawmill-ui
+	$(INSTALL_PROGRAM) sawmill-menu.jlc $(bindir)/sawmill-menu
 
 uninstall :
 	for p in sawmill; do \
@@ -62,6 +70,7 @@ uninstall :
 	for p in $(DL_OBJS); do \
 	  $(rep_DL_UNINSTALL) ${sawmillexecdir}/$$p; \
 	done
+	rm -f ${bindir}/sawmill-ui ${bindir}/sawmill-menu
 
 installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(bindir) $(sawmillexecdir)
@@ -70,7 +79,7 @@ clean :
 	rm -f *~ *.o *.lo *.la build.h core
 
 realclean : clean
-	rm -f .*.d sawmill sawmill-client Makefile
+	rm -f .*.d sawmill sawmill-client Makefile *.jlc
 	rm -rf .libs
 
 include $(SRCS:%.c=.%.d) $(DL_SRCS:%.c=.%.d)

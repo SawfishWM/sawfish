@@ -39,7 +39,6 @@ install : all installdirs
 	set -e; for dir in $(SUBDIRS); do \
 	  ( cd $$dir && $(MAKE) $@ ); \
 	done
-	$(INSTALL_PROGRAM) sawmill-ui sawmill-menu $(bindir)
 	$(INSTALL_DATA) ./DOC.* $(sawmilldir)/$(version)
 
 installdirs : $(top_srcdir)/mkinstalldirs
@@ -49,8 +48,6 @@ uninstall :
 	set -e; for dir in $(SUBDIRS); do \
 	  ( cd $$dir && $(MAKE) $@ ); \
 	done
-	rm -f $(bindir)/sawmill-ui
-	rm -f $(bindir)/sawmill-menu
 	rm -rf $(sawmilldir)/$(version)
 
 DOC.dir :

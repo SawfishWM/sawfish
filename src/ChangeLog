@@ -1,3 +1,15 @@
+1999-08-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl, sawmill-menu.jl: copied from top-level
+	directory, these are now compiled before being installed
+
+	* events.c (handle_input_mask): new function, handle all
+	outstanding events matching a specified event mask
+
+	* windows.c (Fset_window_frame): between removing the old frame
+	and installing the new frame handle all SubstructureNotify
+	events to prevent the dread infinite frame-add-remove bug
+
 1999-08-09  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill.h (Lisp_Window): make `reparenting' an int so it can
