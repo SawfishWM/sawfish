@@ -29,6 +29,7 @@
 #include "../src/libclient.h"
 
 #include <stdio.h>
+#include <signal.h>
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
@@ -45,6 +46,7 @@ static GtkWidget *capplet;
 static int ui_pid;
 static int ui_stdin[2];
 static int ui_stdout[2];
+static guint ui_handler_id;
 
 static char *group;
 
@@ -62,10 +64,15 @@ char *ui_argv[] = { "sawmill-ui",
 static int
 ui_command (char *str)
 {
-    u_char ret;
-    write (ui_stdin[1], str, strlen(str));
-    read (ui_stdout[0], &ret, 1);
-    return ret;
+    if (ui_pid != 0)
+    {
+	u_char ret;
+	write (ui_stdin[1], str, strlen(str));
+	read (ui_stdout[0], &ret, 1);
+	return ret;
+    }
+    else
+	return 0;
 }
 
 static void
@@ -74,11 +81,27 @@ ui_output_callback (gpointer data, gint fd, GdkInputCondition cond)
     char out;
     if (read (ui_stdout[0], &out, 1) == 1)
     {
+	GtkWidget *label;
+
 	switch (out)
 	{
 	case 'c':
 	    capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
 	    break;
+
+	case 'e':
+	    /* probably `error-->' */
+	    kill (ui_pid, SIGTERM);
+	    waitpid (ui_pid, 0, 0);
+	    ui_pid = 0;
+	    gtk_container_remove (GTK_CONTAINER (capplet), ui_socket);
+	    gtk_object_destroy (GTK_OBJECT (ui_socket));
+	    ui_socket = 0;
+	    label = gtk_label_new ("[That group doesn't exist]");
+	    gtk_container_add (GTK_CONTAINER (capplet), label);
+	    gtk_widget_show (label);
+	    gtk_input_remove (ui_handler_id);
+	    ui_handler_id = 0;
 	}
     }
 }
@@ -170,6 +193,7 @@ sawmill_setup (void)
     case 0:				/* child */
 	dup2 (ui_stdin[0], 0);
 	dup2 (ui_stdout[1], 1);
+	dup2 (ui_stdout[1], 2);
 	close (ui_stdin[0]);
 	close (ui_stdin[1]);
 	close (ui_stdout[0]);
@@ -186,8 +210,9 @@ sawmill_setup (void)
     default:				/* parent */
 	close (ui_stdin[0]);
 	close (ui_stdout[1]);
-	gdk_input_add (ui_stdout[0], GDK_INPUT_READ,
-		       (GdkInputFunction) ui_output_callback, 0);
+	ui_handler_id = gdk_input_add (ui_stdout[0], GDK_INPUT_READ,
+				       (GdkInputFunction)
+				       ui_output_callback, 0);
     }
 }
 
