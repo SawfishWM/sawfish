@@ -6,6 +6,73 @@ This lists the user-visible changes made to Sawmill, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
+@unnumberedsec 0.25.2
+
+@itemize @bullet
+
+@item If no user customization file when saving options, inherit from
+the custom-defaults file
+
+@item Rewrote window stacking (fixes bugs, more efficient)
+
+@item Added @code{input-focus} to theme-callable functions
+
+@item When focused window is unmapped, don't try to focus non-visible
+windows
+
+@item Fixed @code{display-window} when it's applied to iconified
+windows
+
+@item New variables @code{fonts-are-fontsets} and
+@code{fontset-languages-re} to work around broken X servers
+
+@item Update edges for snapping to when dragging windows across
+workspaces or viewports
+
+@item When passing keymaps to customization system, filter out, then
+later restore, bindings that aren't symbols
+
+@item Most commands to move/copy windows between workspaces can now be
+told whether to select the destination workspace or not
+
+@item In GNOME hints, never place windows on workspaces that don't
+exist (from the pager's POV). (Rob Hodges)
+
+@item Fixed @code{ws-move-window} to not remove the window if source
+and dest are the same (Rob Hodges)
+
+@item Fixed @code{sp-prune-points} function (Dan Winship)
+
+@item Fixed @code{move-viewport-to-window} to only flip viewports if
+window isn't already on the current viewport (Merlin)
+
+@item Try to detect and handle system clock being rewound
+
+@item Optional second arg to @code{x-raise-window}; added symmetrical
+function @code{x-lower-window}
+
+@item Fixed unix-domain server code assuming atomic writes to sockets
+
+@item Added double buffering support to @code{x} module
+
+@item Fixed grabs during multi-key sequences; also, print the current
+prefix keys if idle during a multi-key sequence
+
+@end itemize
+
+
+@unnumberedsec 0.25.1
+
+@itemize @bullet
+
+@item Only force windows onto the visible screen if they didn't
+explicitly set their position
+
+@item Redefine @code{/} in themes to be the @code{quotient} function
+(integer division), which is what they expect. The @code{divide}
+function can be used for real division
+@end itemize
+
 
 @unnumberedsec 0.25
 
