@@ -256,7 +256,7 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 	if (mods & EV_MOD_ANY)
 	{
 	    *state = AnyModifier;
-	    *button = buttons[0].button;	/* anything.. */
+	    *button = 0;		/* anything.. */
 	    return TRUE;
 	}
     }
@@ -1119,6 +1119,12 @@ grab_event (Window grab_win, repv ev)
 				 GrabModeSync, GrabModeSync, None, None);
 		}
 	    }
+	    else if (code != 0)
+	    {
+		XGrabButton (dpy, code, AnyModifier, grab_win,
+			     False, POINTER_GRAB_EVENTS,
+			     GrabModeSync, GrabModeSync, None, None);
+	    }
 	    else
 	    {
 		/* sawmill treats mouse buttons as modifiers, not as
@@ -1165,6 +1171,10 @@ ungrab_event (Window grab_win, repv ev)
 		    XUngrabButton (dpy, code,
 				   state | all_lock_combs[i], grab_win);
 		}
+	    }
+	    else if (code != 0)
+	    {
+		XUngrabButton (dpy, code, AnyModifier, grab_win);
 	    }
 	    else
 	    {
