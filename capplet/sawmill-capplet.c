@@ -163,6 +163,12 @@ sawmill_cancel (void)
     ui_command ("cancel\n");
 }
 
+static void
+sawmill_destroy (void)
+{
+    ui_command ("cancel\n");
+}
+
 
 /* initialisation */
 
@@ -198,7 +204,9 @@ sawmill_setup (void)
 			GTK_SIGNAL_FUNC (sawmill_ok), NULL);
     gtk_signal_connect (GTK_OBJECT (capplet), "cancel",
 			GTK_SIGNAL_FUNC (sawmill_cancel), NULL);
- 
+    gtk_signal_connect (GTK_OBJECT (capplet), "destroy",
+			GTK_SIGNAL_FUNC (sawmill_destroy), NULL);
+
     ui_socket = gtk_socket_new ();
     gtk_container_add (GTK_CONTAINER (capplet), ui_socket);
 
