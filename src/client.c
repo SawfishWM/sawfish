@@ -54,7 +54,9 @@ eval_lisp_form(char *form)
     ev.xclient.data.l[1] = xa_sawmill_request;
     ev.xclient.data.l[2] = !opt_quiet;
     XSendEvent (dpy, request_win, False, 0L, &ev);
-    XFlush (dpy);
+
+    /* Wait for the wm to delete or update the results */
+    XWindowEvent (dpy, portal, PropertyChangeMask, &ev);
 
     if (!opt_quiet)
     {
@@ -62,9 +64,6 @@ eval_lisp_form(char *form)
 	int format;
         long long_length = 16;
 	u_long bytes_after;
-
-	/* Wait for the wm to update the results */
-	XWindowEvent (dpy, portal, PropertyChangeMask, &ev);
 
 	while (1)
 	{
