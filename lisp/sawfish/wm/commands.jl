@@ -70,7 +70,7 @@ evaluated.")
   (define autoloader (make-autoloader getter setter))
   (define real-getter (autoloader-ref getter))
 
-  (define (define-command name fun #!optional spec type)
+  (define (define-command name fun #!key spec type)
     "Define a window managed command called NAME (a symbol). The
 function FUN will be called to execute the command. SPEC and TYPE may
 be used to define the arguments expected by the command. (an
@@ -79,13 +79,13 @@ interactive specification and a custom-type specification respectively)."
     (when spec
       (put name 'command-spec spec))
     (when type
-      (define-command-args name type)))
+      (put name 'custom-command-args type)))
 
   ;; obsolete, use define-command
   (define (define-command-args name spec)
     (put name 'custom-command-args spec))
 
-  (define (autoload-command name module #!optional type)
+  (define (autoload-command name module #!key type)
     "Record that loading the module called MODULE (a symbol) will provde a
 command called NAME (optionally whose arguments have custom-type TYPE)."
     (autoloader name module)
@@ -164,7 +164,8 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
     (setq this-command nil)
     (setq current-prefix-arg nil))
 
-  (define-command 'call-command call-command "CEnter command:\nP")
+  (define-command 'call-command call-command
+    #:spec "CEnter command:\nP")
 
 ;;; building command arg-list from spec strings
 
@@ -319,27 +320,27 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
     (system (format nil "%s &" command)))
 
   (define-command 'run-shell-command run-shell-command
-    "sCommand:" `(and (labelled ,(_ "Command:") string)))
+    #:spec "sCommand:"
+    #:type `(and (labelled ,(_ "Command:") string)))
 
   (define (command-sequence commands)
     "Invoke the list of commands, one by one."
     (mapc call-command commands))
 
   (define-command 'command-sequence command-sequence
-    () `(and (quoted (list command ,(_ "Command")))))
+    #:type `(and (quoted (list command ,(_ "Command")))))
 
   (define-command 'quit quit)
   (define-command 'restart restart)
-  (define-command 'destroy-window destroy-window "%W")
+  (define-command 'destroy-window destroy-window #:spec "%W")
 
   (define (call-command-with-output-to-screen command)
     "Prompt for a command, execute it, and print any output to the screen."
     (call-with-output-to-screen (lambda () (call-command command))))
 
   (define-command 'call-command-with-output-to-screen
-    call-command-with-output-to-screen "CCommand:")
+    call-command-with-output-to-screen #:spec "CCommand:")
 
-  (define (define-command-to-screen name fun #!optional spec type)
-    (define-command name (lambda args (with-output-to-screen
-				       (apply fun args)))
-		    spec type)))
+  (define (define-command-to-screen name fun #!rest keys)
+    (apply define-command name (lambda args (with-output-to-screen
+					     (apply fun args))) keys)))
