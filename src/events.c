@@ -86,23 +86,24 @@ DEFSYM(deleted, "deleted");
 DEFSYM(raise_window, "raise-window");
 DEFSYM(lower_window, "lower-window");
 
+/* `Time' will always be 32-bits, due to underlying wire protocol (?) */
+#define TIME_MAX 4294967295UL
+
 /* Return the value of T2 - T1, compensating for clock wrap-arounds.
    If the difference is greater than half the possible range, assumes
    that T2 is _less_ than T1, returning a negative value */
 static long
 subtract_timestamps (Time t2, Time t1)
 {
-    u_long diff = ((t2 >= t1)
-		   ? (t2 - t1)
-		   : (ULONG_MAX - (t1 - t2) + 1));
+    Time diff = ((t2 >= t1)
+		 ? (t2 - t1)
+		 : (TIME_MAX - (t1 - t2) + 1));
 
-    if (diff > ULONG_MAX / 2)
-    {
+    if (diff > TIME_MAX / 2)
 	/* too big, assume it's negative */
-	diff = ULONG_MAX - diff + 1;
-    }
-
-    return diff;
+	return - (long) (TIME_MAX - diff + 1);
+    else
+	return (long) diff;
 }
 
 /* Record the recently seen timestamp T */
@@ -125,35 +126,31 @@ save_timestamp (Time t)
 static void
 record_event_time (XEvent *ev)
 {
-    Time new_time = CurrentTime;
     switch (ev->type)
     {
     case KeyPress:
     case KeyRelease:
-	new_time = ev->xkey.time;
+	save_timestamp (ev->xkey.time);
 	break;
 
     case ButtonPress:
     case ButtonRelease:
-	new_time = ev->xbutton.time;
+	save_timestamp (ev->xbutton.time);
 	break;
 
     case MotionNotify:
-	new_time = ev->xmotion.time;
+	save_timestamp (ev->xmotion.time);
 	break;
 
     case EnterNotify:
     case LeaveNotify:
-	new_time = ev->xcrossing.time;
+	save_timestamp (ev->xcrossing.time);
 	break;
 
     case PropertyNotify:
-	new_time = ev->xproperty.time;
+	save_timestamp (ev->xproperty.time);
 	break;
     }
-
-    if (new_time != CurrentTime)
-	save_timestamp (new_time);
 }
 
 static void
