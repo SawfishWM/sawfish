@@ -140,24 +140,25 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	   (set-input-focus w))))))
 
   (define (focus-click)
-    (let ((w (current-event-window)))
+    (let ((w (current-event-window))
+	  (event (current-event)))
       (when (window-really-wants-input-p w)
 	(set-input-focus w))
       (focus-pop-map w)
-      (when (or (window-get w 'focus-click-through)
-		focus-click-through
-		(not (window-really-wants-input-p w)))
-	;; there's a problem here. allow-events called with replay-pointer
-	;; ignores any passive grabs on the window, thus if the wm has a
-	;; binding in the window's keymap, it would be ignored. So search
-	;; manually..
-	(let ((command (lookup-event-binding (current-event))))
+      ;; do we need to do anything with the event?
+      (when (and event (or (window-get w 'focus-click-through)
+			   focus-click-through
+			   (not (window-really-wants-input-p w))))
+	;; allow-events called with replay-pointer ignores any passive
+	;; grabs on the window, thus if the wm has a binding in the
+	;; window's keymap, it would be ignored. So search manually..
+	(let ((command (lookup-event-binding event)))
 	  (cond (command
 		 (call-command command))
 		((not (progn
 			(require 'sawfish.wm.util.decode-events)
 			(should-grab-button-event-p
-			 (current-event) (window-get w 'keymap))))
+			 event (window-get w 'keymap))))
 		 ;; pass the event through to the client window unless we
 		 ;; need to keep the grab for the events that would follow
 		 (allow-events 'replay-pointer)))))))
