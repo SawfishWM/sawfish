@@ -155,7 +155,7 @@ that overrides settings set elsewhere.")
     :type frame-style
     :user-level novice
     :group appearance
-    :after-set (lambda () (after-setting-frame-option)))
+    :after-set (lambda () (after-setting-default-frame)))
 
   (defcustom reload-themes-when-changed t
     "Automatically reload themes when they are updated."
@@ -335,6 +335,10 @@ deciding which frame type to ask a theme to generate.")
   (define (reframe-all-windows) (map-windows reframe-window))
 
   (define after-setting-frame-option reframe-all-windows)
+
+  (define (after-setting-default-frame)
+    (check-frame-availability default-frame-style)
+    (after-setting-frame-option))
 
   (define (rebuild-frames-with-style style)
     (map-windows (lambda (w)
