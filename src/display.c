@@ -113,6 +113,12 @@ redisplay (void)
     XFlush (dpy);
 }
 
+static void
+beep(void)
+{
+    XBell(dpy, 0);
+}
+
 /* Called from main(). */
 bool
 sys_init(char *program_name)
@@ -191,6 +197,7 @@ sys_init(char *program_name)
         rep_mark_input_pending (ConnectionNumber(dpy));
 
 	rep_redisplay_fun = redisplay;
+	rep_beep_fun = beep;
 
 	return TRUE;
     }
