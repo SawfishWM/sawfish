@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
-"POT-Creation-Date: 2002-02-12 23:17-0800\n"
+"POT-Creation-Date: 2002-06-26 01:55+0800\n"
 "PO-Revision-Date: 2002-02-27 01:41+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Projek Gabai (Bahasa Melayu) <gabai-penyumbang@lists."
@@ -204,10 +204,14 @@ msgstr "Tema Mono"
 #. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
 msgstr ""
+"Warna bagi kerangka tidak aktif (jika tidak ditetapkan, guna warna "
+"latarbelakang GTK+"
 
 #. ../themes/mono/theme.jl
 msgid "Color of active frames (if unset use GTK+ selection color)."
 msgstr ""
+"Warna bagi kerangka aktif (jika tidak ditetapkan, guna warna latarbelakang "
+"GTK+"
 
 #. ../themes/mono/theme.jl
 msgid "left"
@@ -310,41 +314,17 @@ msgstr "Tambah:"
 msgid "Edit:"
 msgstr "Edit:"
 
-#. ../lisp/sawfish/gtk/widget.jl
-msgid "** unknown widget **  "
-msgstr "Widget tidak diketahui"
-
-#. ../lisp/sawfish/gtk/stock.jl
-msgid "OK"
-msgstr "OK"
-
-#. ../lisp/sawfish/gtk/stock.jl
-msgid "Cancel"
-msgstr "Batal"
-
-#. ../lisp/sawfish/gtk/stock.jl
-msgid "Revert"
-msgstr "Berbalik"
-
-#. ../lisp/sawfish/gtk/stock.jl
-msgid "Apply"
-msgstr "Terapkan"
-
-#. ../lisp/sawfish/gtk/stock.jl
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
 msgid "Yes"
 msgstr "Ya"
 
-#. ../lisp/sawfish/gtk/stock.jl
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
 msgid "No"
 msgstr "Tidak"
 
-#. ../lisp/sawfish/gtk/stock.jl
-msgid "Close"
-msgstr "Tutup"
-
-#. ../lisp/sawfish/gtk/stock.jl
-msgid "Help"
-msgstr "Bantuan"
+#. ../lisp/sawfish/gtk/widget.jl
+msgid "** unknown widget **  "
+msgstr "Widget tidak diketahui"
 
 #. ../lisp/sawfish/ui/layouts/keymaps.jl
 msgid "Context:"
@@ -415,13 +395,12 @@ msgid "Actions"
 msgstr "Aksi"
 
 #. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match window properties"
-msgstr ""
+msgid "not"
+msgstr "bukan"
 
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Index:"
-msgstr "Indeks:"
+#. ../lisp/sawfish/ui/widgets/match-window.jl
+msgid "Match window properties"
+msgstr "Padan ciri-ciri tetingkap"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -433,26 +412,20 @@ msgstr "Kitaran Tetingkap"
 msgid "Sound"
 msgstr "Bunyi"
 
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Edge Flipping"
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Matched Windows"
 msgstr "Tetingkap Sepadan"
 
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
-#. ../lisp/sawfish/wm/autoload.jl
-#, fuzzy
-msgid "Shade Hover"
-msgstr "Nyahsorok di sini"
-
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Tooltips"
 msgstr "Tooltip"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Index:"
+msgstr "Indeks:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
@@ -541,16 +514,8 @@ msgid "Bindings"
 msgstr "Pengikatan"
 
 #. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing/Maximizing"
+msgid "Minimizing and Maximizing"
 msgstr ""
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing"
-msgstr "Miniatur"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Maximizing"
-msgstr "Maksima"
 
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Miscellaneous"
@@ -569,7 +534,7 @@ msgid "When does the mouse pointer affect the input focus."
 msgstr ""
 
 #. ../lisp/sawfish/wm/focus.jl
-msgid "Does click-to-focus mode pass the click through to the window."
+msgid "Click-to-focus mode passes the click through to the application."
 msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
@@ -581,20 +546,8 @@ msgid "Automatically reload themes when they are updated."
 msgstr "Automatik ulangmuat tema bila ianya dikemaskini."
 
 #. ../lisp/sawfish/wm/frames.jl
-msgid ""
-"Frame type fallbacks:\n"
-"\n"
-"Associate frame types with type to try if the theme doesn't implement the "
-"requested type."
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Font Default: \\w"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Bevel intensity: \\wpercent."
-msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -721,15 +674,7 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Motion threshold for mouse pointer: \\wpixels"
-msgstr ""
-
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr ""
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display key-binding information in menu items."
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
@@ -776,22 +721,7 @@ msgstr "Salin ke terdahulu"
 msgid "Copy to next"
 msgstr "Salin ke seterusnya"
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Left"
-msgstr "Ki_ri"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Right"
-msgstr "Ka_nan"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Up"
-msgstr "_Naik"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Down"
-msgstr "_Turun"
-
+#. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Stacking"
 msgstr ""
@@ -903,10 +833,6 @@ msgstr "Kaedag menempatkan tetingkap: \\w"
 msgid "Method of placing dialog windows: \\w"
 msgstr "Kaedah menempatkan tetingkap dialog: \\w"
 
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Ignore program-specified window placements."
-msgstr "Abaikan penempatan tetingkap dinyatakan-program."
-
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "all"
 msgstr "semua"
@@ -970,10 +896,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Put the window in the stacking level beneath its current level."
-msgstr ""
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Windows uniconify to the current viewport."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -1071,131 +993,55 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window up"
-msgstr ""
+msgstr "Gerakkan tetingkap ke atas"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #, fuzzy
 msgid "Move the window to the viewport above, and switch to that viewport."
 msgstr ""
-"Biarkan tetingkap di atas tetingkap lain\n"
-"jangan izinkan mereka menghadangnya."
+"Biarkan tetingkap di atas tetingkap lainjangan izinkan mereka menghadangnya."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
-msgstr ""
+msgstr "Gerakkan tetingkap ke bawah"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
 msgid "Move the window to the viewport below, and switch to that viewport."
-msgstr ""
-"Biarkan tetingkap di atas tetingkap lain\n"
-"jangan izinkan mereka menghadangnya."
-
-#. ../lisp/sawfish/wm/window-anim.jl
-msgid "The default window animation mode: \\w"
-msgstr ""
+msgstr "Gerakkan tetingkap ke viewport di bawah, dan tuker ke viewport itu."
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Give focus to windows even when they haven't asked for it.\n"
-"\n"
-"Windows should set the `accepts input' hint in their WM_HINTS property to "
-"show if they require the focus or not."
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Offset (%) from left window edge when warping pointer.\n"
-"\n"
-"A negative number means outside the left window edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Offset (%) from top window edge when warping pointer.\n"
-"\n"
-"A negative number means outside the top window edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Format to create unique window names.\n"
-"\n"
-"Has two arguments (NAME INDEX) applied to it."
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Focus desktop"
-msgstr "Difokus"
+msgstr "Fokus Desktop"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Transfer input focus to the desktop window (if one exists)."
-msgstr ""
+msgstr "Pindahkan fokus input ke tetingkap desktop(jika wujud)."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Delete window"
-msgstr "Pilih tetingkap"
+msgstr "Padam tetingkap"
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Delete the window."
-msgstr "Pilih tetingkap"
+msgstr "Padam tetingkap."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Delete window safely"
-msgstr "Pilih tetingkap"
+msgstr "Padam tetingkap dengan selamat"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete the window, or beep if the window can't be closed safely."
 msgstr ""
+"Padam tetingkap, atau beep jika tetingkap tak boleh ditutup dengans elamat."
 
+# lom
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Uniquify window name"
-msgstr "Imej Miniwindow"
+msgstr "Unikkan nama tetingkap"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Force the current window to have a unique title."
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Virtual desktop configuration."
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "stop"
-msgstr "Henti"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "wrap-around"
-msgstr "balut-sekeliling"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "keep-going"
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "When passing the first or last workspace: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "When passing the first or last workspace, while moving a window: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspaces are deleted when their last window closes."
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Preserve empty workspaces in pager."
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Dialogs appear on the same workspace as their application."
-msgstr ""
+msgstr "Paksa tetingkap semasa untuk mempunyai tajuk unik."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace names"
@@ -1209,34 +1055,32 @@ msgstr "Selit Ruangkerja"
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Select next workspace"
-msgstr "Tukarnama Ruangkerja"
+msgstr "Pilih ruangkerja berikut"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Select previous workspace"
-msgstr ""
+msgstr "Pilih ruangkerja terdahulu"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with next"
-msgstr ""
+msgstr "Cantumkan dengan seterusnya"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with previous"
-msgstr ""
+msgstr "Cantum dengan terdahulu"
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Move workspace right"
-msgstr "Simpan keadaan ruangkerja"
+msgstr "Gerakkan ruangkerja ke kanan"
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Move workspace left"
-msgstr "Simpan keadaan ruangkerja"
+msgstr "Gerakkan ruangkerja ke kiri"
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy, c-format
 msgid "space %d"
-msgstr "Ruangkerja %i"
+msgstr "Ruang %d"
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
@@ -1245,12 +1089,11 @@ msgstr "Simpan keadaan ruangkerja"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Display the menu containing the list of all workspaces."
-msgstr ""
+msgstr "Papar menu yang mengandungi senarai semua ruangkerja."
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Popup window list"
-msgstr "Senarai Tetingkap"
+msgstr "Popup senarai tetingkap"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Display the menu of all managed windows."
@@ -1662,7 +1505,7 @@ msgid "Delete all windows in the group that the current window is a member of."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether growing an already grown window grows it again."
+msgid "Growing and packing of windows"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1673,12 +1516,12 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "maybe"
-msgstr "mungkin"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "always"
 msgstr "sentiasa"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr "mungkin"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "never"
@@ -1698,11 +1541,30 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Whether to bump into fully obscured windows when growing or packing\n"
+"windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Whether to bump into windows on a different depth when growing or packing\n"
+"windows.\n"
+"`maybe' means only avoided windows in other depths."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into ignored windows when growing or packing."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window to the left until it `bumps into' another window."
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1710,7 +1572,9 @@ msgid "Grow window right"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window to the right until it `bumps into' another window."
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1718,7 +1582,13 @@ msgid "Grow window up"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window upwards until it `bumps into' another window."
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1726,7 +1596,9 @@ msgid "Grow window down"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window downwards until it `bumps into' another window."
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1734,7 +1606,9 @@ msgid "Pack window left"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window to the left until it `bumps into' another window."
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1742,7 +1616,9 @@ msgid "Pack window right"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window to the right until it `bumps into' another window."
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1750,7 +1626,11 @@ msgid "Pack window up"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window upwards until it `bumps into' another window."
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1758,7 +1638,46 @@ msgid "Pack window down"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window downwards until it `bumps into' another window."
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow left"
+msgstr "kiri"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow right"
+msgstr "kanan"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow up"
+msgstr "Kumpulan"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Pack left"
+msgstr "kiri"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Pack right"
+msgstr "kanan"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack down"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/help.jl
@@ -1853,26 +1772,6 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "opaque"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "box"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How windows being moved are animated: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How windows being resized are animated: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Raise windows when they are moved or resized."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Show current position of windows while moving."
 msgstr ""
 
@@ -1881,55 +1780,11 @@ msgid "Show current dimensions of windows while resizing."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "region"
-msgstr "kawasan"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "border"
-msgstr "sempadan"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "grab"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "border-grab"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How to choose window edges when resizing: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Snap window position to edges of other windows while moving."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Proximity in pixels before snapping to a window edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "magnetism"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "resistance"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "attraction"
-msgstr "Tarikan"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How to snap together window edges: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Snap to otherwise-ignored windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Only update window contents after it has stopped moving."
+msgid ""
+"Distance in pixels before window edges align with each other.\n"
+"\n"
+"When moving a window, this option lets you align one of its edges with an "
+"edge of another window."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -2018,12 +1873,6 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
-msgid ""
-"Default increment for size-window commands (when the window doesn't\n"
-"specify it's own increments)."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
 msgstr ""
 
@@ -2053,10 +1902,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Decrease the size of the current window by one column."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Number of pixels to move window in `slide-' commands."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
@@ -2168,11 +2013,7 @@ msgid "Set window viewport linear"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window names while cycling through windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window icons while cycling through windows."
+msgid "Display window names and icons while cycling through windows."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -2189,22 +2030,6 @@ msgid "Include windows on all viewports when cycling."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Warp the mouse pointer to windows as they're temporarily selected."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Focus windows when they're temporarily selected during cycling."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Disable auto-raising while temporarily selecting windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "cycle-keymap"
 msgstr ""
 
@@ -2214,11 +2039,16 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
+#, fuzzy
+msgid "Terminal"
+msgstr "menegak"
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "The program launched by the `xterm' command."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Optional arguments given to the `xterm' command."
+msgid "Arguments given to the `xterm' command."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
@@ -2238,16 +2068,17 @@ msgid "Play sound effects for window events."
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Play sound effects for unmanaged windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Event"
 msgstr "Acara"
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Audio file"
 msgstr "Fail audio"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+#, fuzzy
+msgid "Auto-Raise"
+msgstr "Angkat"
 
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Raise windows when they are focused."
@@ -2257,8 +2088,8 @@ msgstr ""
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr ""
 
-#. ../lisp/sawfish/wm/ext/beos-window-menu.jl
-msgid "The hierarchical window menu raises singleton submenus."
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Edge Flipping"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
@@ -2281,20 +2112,12 @@ msgstr ""
 msgid "Only flip when interactively moving a window."
 msgstr ""
 
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Milliseconds to delay before flipping: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Warp pointer to opposite screen edge when flipping."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Error Handling"
 msgstr "Pengendalian Ralat"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Emit a beeping sound when errors occur."
+msgid "Beep when errors occur."
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
@@ -2311,7 +2134,8 @@ msgid "standard-error"
 msgstr "ralat-piawai"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Where to display error messages: \\w"
+#, fuzzy
+msgid "Display error messages to: \\w"
 msgstr "Dimana untuk memaparkan mesej ralat: \\w"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
@@ -2482,6 +2306,11 @@ msgid "Other"
 msgstr "Lain-lain"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
+#, fuzzy
+msgid "Shade Hover"
+msgstr "Nyahsorok di sini"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid ""
 "Enable shade-hover mode.\n"
 "\n"
@@ -2492,7 +2321,6 @@ msgstr ""
 msgid "Delay in milliseconds before unshading windows."
 msgstr ""
 
-#. ../lisp/sawfish/wm/state/shading.jl
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Raise windows when they are unshaded."
 msgstr ""
@@ -2502,31 +2330,7 @@ msgid "Display tooltips for window frames."
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Remove tooltips after a period of time."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Show full documentation in tooltips."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before displaying tooltips."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before removing tooltips."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Font used to display tooltips."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips background"
-msgstr "Warna digunakan bagi latarbelakang tooltip"
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips foreground"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
@@ -2544,6 +2348,11 @@ msgstr "Ingat Atribut"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "History"
+msgstr "_Sejarah"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2612,10 +2421,6 @@ msgid "_History"
 msgstr "_Sejarah"
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "Invoke the GNOME control center from the `Customize' menu."
-msgstr ""
-
-#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "Bantuan _GNOME"
 
@@ -2631,42 +2436,12 @@ msgstr "Perihal GNOME..."
 msgid "Gnome menus update"
 msgstr ""
 
-#. ../lisp/sawfish/wm/placement/smart.jl
-msgid ""
-"Try to leave at least this many pixels between window edges in first/best-"
-"fit."
-msgstr ""
-
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
 msgstr ""
 
-#. ../lisp/sawfish/wm/state/configure.jl
-msgid "Automatically select window gravity from position on screen."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/configure.jl
-msgid "Ignore requests from applications to change window stacking."
-msgstr ""
-
 #. ../lisp/sawfish/wm/state/gnome.jl
 msgid "In GNOME _task list"
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows are focused after being uniconified."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows are raised after being uniconified."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Unmanaged windows may be iconified."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows uniconify to the current workspace."
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/stacking.jl
@@ -2682,11 +2457,11 @@ msgid "group"
 msgstr "Kumpulan"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconifying a window also iconifies the: \\w"
+msgid "Minimizing a window also removes its: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Uniconifying a window also uniconifies the: \\w"
+msgid "Unminimizing a window also restores its: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2694,16 +2469,18 @@ msgid "Iconify window"
 msgstr "Ikonifikasikan tetingkap"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconify the window."
-msgstr "Ikonifikasikan tetingkap"
+#, fuzzy
+msgid "Minimize the window."
+msgstr "Maksima tetingkap"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Uniconify window"
 msgstr "Nyahikonifikasi tetingkap"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Return the window from its iconified state."
-msgstr ""
+#, fuzzy
+msgid "Restore the window from its minimized state."
+msgstr "Jadikan tetingkap ada semua ruangkerja."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window iconified"
@@ -2718,8 +2495,9 @@ msgid "Iconify workspace windows"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconify all windows on the current workspace."
-msgstr ""
+#, fuzzy
+msgid "Minimize all windows on the current workspace."
+msgstr "Jadikan tetingkap ada semua ruangkerja."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Make window sticky"
@@ -2737,10 +2515,6 @@ msgstr ""
 msgid ""
 "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Toggle single window mode"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2814,24 +2588,6 @@ msgstr ""
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
 msgstr "Dalam senarai tetingkap"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Maximizing a window in one dimension must increase the size of that "
-"dimension."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Raise windows when they are maximized."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Let unmanaged windows be overlapped when filling windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Don't cover `avoided' windows when maximizing."
-msgstr ""
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Lock position and size while windows are maximized."
@@ -2955,6 +2711,16 @@ msgid ""
 "unmaximized."
 msgstr ""
 
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullscreen"
+msgstr "Imej Miniwindow"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullscreen toggle"
+msgstr "Imej Miniwindow"
+
 #. ../lisp/sawfish/wm/state/shading.jl
 #, fuzzy
 msgid "Shade window"
@@ -2994,14 +2760,6 @@ msgid "Focus on application windows when they first appear."
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid "Dialog windows inherit the focus from their parent."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid "Decorate dialog windows similarly to application windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise window and transients"
 msgstr ""
 
@@ -3034,22 +2792,9 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Windows uniconify to the current workspace when they are selected."
-msgstr ""
-
-#. ../lisp/sawfish/wm/util/display-window.jl
 #, fuzzy
 msgid "Unshade selected windows."
 msgstr "Pilih tetingkap"
-
-#. ../lisp/sawfish/wm/util/display-window.jl
-#, fuzzy
-msgid "Raise selected windows (normally by the Windows menu)."
-msgstr "Sentiasa tetingkap di bawah semua tetingkap lain."
-
-#. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Warp the pointer to selected windows."
-msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window without focusing"
@@ -3067,14 +2812,6 @@ msgstr ""
 #, fuzzy
 msgid "Display the workspace containing the window W, then focus on W."
 msgstr "Ruangkerja dimana letaknya tetingkap bila ianya pertamakali dipaparkan"
-
-#. ../lisp/sawfish/wm/util/groups.jl
-msgid "Group transient windows with their parents."
-msgstr ""
-
-#. ../lisp/sawfish/wm/util/groups.jl
-msgid "Persistent group ids"
-msgstr ""
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -3114,42 +2851,6 @@ msgid ""
 "any window manager bindings that it may have."
 msgstr ""
 
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "novice"
-msgstr "novis"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "intermediate"
-msgstr "Pertengahan"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "expert"
-msgstr "mahir"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Show options suitable for \\w users."
-msgstr "Papar opsyen sesuai bagi \\w pengguna."
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "ok"
-msgstr "OK"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "revert/cancel/ok"
-msgstr "Berbalik/batal/ok"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "apply/revert/cancel/ok"
-msgstr "Terap/berbalik/baral/ok"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Buttons shown in configurator: \\w"
-msgstr "Butang dipaparkan pada pengkonfigurasi: \\w"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Show variable names of each customization option."
-msgstr ""
-
 #. ../lisp/sawfish/wm/util/play-audio.jl
 msgid ""
 "The program used to play audio samples. If unset, built-in support for ESD "
@@ -3167,15 +2868,16 @@ msgstr "Ruangkerja %d"
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
-msgstr ""
+msgstr "prompt-keymap"
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
 msgstr ""
+"Keymap mengandungi pengikatan aktif bila membaca rentetan dari pengguna."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 msgid "When raising a window, also raise its: \\w"
-msgstr ""
+msgstr "Bila mengangkat tetingkap, juga angkat:\\w"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 msgid "Raise window"
@@ -3183,16 +2885,15 @@ msgstr "Angkat tetingkap"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 msgid "Lower window"
-msgstr ""
+msgstr "Tetingkap bawah"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
-#, fuzzy
 msgid "Raise lower window"
-msgstr "Pilih tetingkap"
+msgstr "Angkat tetingkap bawah"
 
 #. ../themer/themer.glade:1315
 msgid " to: "
-msgstr ""
+msgstr " ke: "
 
 #. ../themer/themer.glade:1587
 msgid "About"
@@ -3210,6 +2911,10 @@ msgstr "Tambah"
 #. ../themer/themer.glade:1176
 msgid "Attributes"
 msgstr "Atribut"
+
+#. ../themer/themer.glade:1746 ../themer/themer.glade:1856
+msgid "Cancel"
+msgstr "Batal"
 
 #. ../themer/themer.glade:675 ../themer/themer.glade:829
 msgid "Clicked"
@@ -3272,12 +2977,16 @@ msgid ""
 "Inactive-\n"
 "Clicked"
 msgstr ""
+"Tidak aktif-\n"
+"Diklik"
 
 #. ../themer/themer.glade:649 ../themer/themer.glade:816
 msgid ""
 "Inactive-\n"
 "Highlighted"
 msgstr ""
+"Tidak aktif-\n"
+"Terserlah"
 
 #. ../themer/themer.glade:1266
 msgid "Map: "
@@ -3290,6 +2999,11 @@ msgstr "Pemetaan"
 #. ../themer/themer.glade:74
 msgid "New Theme"
 msgstr "Tema Baru"
+
+#. ../themer/themer.glade:1571 ../themer/themer.glade:1644
+#. * ../themer/themer.glade:1733 ../themer/themer.glade:1843
+msgid "OK"
+msgstr "OK"
 
 #. ../themer/themer.glade:914
 msgid "Patterns"
@@ -3329,7 +3043,7 @@ msgstr "_Kerangka Tetingkap"
 
 #. ../themer/themer.glade:1652
 msgid "[about text]"
-msgstr ""
+msgstr "[perihal teks]"
 
 #. ../themer/themer.glade:1106
 msgid "[frame-part-table]"
@@ -3345,7 +3059,7 @@ msgstr "[tajuk]"
 
 #. ../themer/themer.glade:268
 msgid "_About"
-msgstr "Perih_al"
+msgstr "_Perihal"
 
 #. ../themer/themer.glade:59
 msgid "_File"
@@ -3357,7 +3071,7 @@ msgstr "_Buka Tema..."
 
 #. ../themer/themer.glade:190
 msgid "_Preferences..."
-msgstr "_Keutamaan"
+msgstr "_Keutamaan..."
 
 #. ../themer/themer.glade:143
 msgid "_Preview"
@@ -3374,3 +3088,85 @@ msgstr "_Tetapan"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Tema"
+
+#~ msgid "Revert"
+#~ msgstr "Berbalik"
+
+#~ msgid "Apply"
+#~ msgstr "Terapkan"
+
+#~ msgid "Close"
+#~ msgstr "Tutup"
+
+#~ msgid "Help"
+#~ msgstr "Bantuan"
+
+#~ msgid "Minimizing"
+#~ msgstr "Miniatur"
+
+#~ msgid "Maximizing"
+#~ msgstr "Maksima"
+
+#~ msgid "_Left"
+#~ msgstr "Ki_ri"
+
+#~ msgid "_Right"
+#~ msgstr "Ka_nan"
+
+#~ msgid "_Up"
+#~ msgstr "_Naik"
+
+#~ msgid "_Down"
+#~ msgstr "_Turun"
+
+#~ msgid "Ignore program-specified window placements."
+#~ msgstr "Abaikan penempatan tetingkap dinyatakan-program."
+
+#~ msgid "stop"
+#~ msgstr "Henti"
+
+#~ msgid "wrap-around"
+#~ msgstr "balut-sekeliling"
+
+#~ msgid "region"
+#~ msgstr "kawasan"
+
+#~ msgid "border"
+#~ msgstr "sempadan"
+
+#~ msgid "attraction"
+#~ msgstr "Tarikan"
+
+#~ msgid "Color used for the tooltips background"
+#~ msgstr "Warna digunakan bagi latarbelakang tooltip"
+
+#~ msgid "Iconify the window."
+#~ msgstr "Ikonifikasikan tetingkap"
+
+#, fuzzy
+#~ msgid "Raise selected windows (normally by the Windows menu)."
+#~ msgstr "Sentiasa tetingkap di bawah semua tetingkap lain."
+
+#~ msgid "novice"
+#~ msgstr "novis"
+
+#~ msgid "intermediate"
+#~ msgstr "Pertengahan"
+
+#~ msgid "expert"
+#~ msgstr "mahir"
+
+#~ msgid "Show options suitable for \\w users."
+#~ msgstr "Papar opsyen sesuai bagi \\w pengguna."
+
+#~ msgid "ok"
+#~ msgstr "OK"
+
+#~ msgid "revert/cancel/ok"
+#~ msgstr "Berbalik/batal/ok"
+
+#~ msgid "apply/revert/cancel/ok"
+#~ msgstr "Terap/berbalik/baral/ok"
+
+#~ msgid "Buttons shown in configurator: \\w"
+#~ msgstr "Butang dipaparkan pada pengkonfigurasi: \\w"
