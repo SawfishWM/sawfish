@@ -26,6 +26,37 @@
   :type boolean
   :group (move advanced))
 
+;; Returns true if window window1 and window2 intersect, false otherwise.
+(defun windows-intersect-p (window1 window2)
+  (let ((w1pos (window-position window1))
+	(w2pos (window-position window2))
+	(w1dim (window-dimensions window1))
+	(w2dim (window-dimensions window2)))
+    (not (or (not (windows-share-workspace-p window1 window2))
+	     (> (car w1pos) (+ (car w2pos) (car w2dim)))
+	     (> (car w2pos) (+ (car w1pos) (car w1dim)))
+	     (> (cdr w1pos) (+ (cdr w2pos) (cdr w2dim)))
+	     (> (cdr w2pos) (+ (cdr w1pos) (cdr w1dim)))))))
+
+;; Returns true if window w occludes any window in the window
+;; list wlist, false otherwise.  Windows do not occlude
+;; themself.  If inverse is set and true, this function
+;; returns whether w is occluded _by_ any window in wlist.
+(defun window-occludes-p (w wlist &optional inverse)
+  (letrec ((xid< (lambda (a b) (< (window-id a) (window-id b))))
+	   (order (if inverse (reverse (stacking-order)) (stacking-order)))
+	   (below-w (sort (cdr (member w order)) xid<))
+	   (sorted-wlist (sort (copy-sequence wlist) xid<))
+	   (iter (lambda (below wins)
+		   (cond ((or (not below) (not wins)) nil)
+			 ((xid< (car below) (car wins))
+			  (iter (cdr below) wins))
+			 ((xid< (car wins) (car below))
+			  (iter below (cdr wins)))
+			 ((windows-intersect-p w (car wins)) t)
+			 (t (iter (cdr below) (cdr wins)))))))
+    (iter below-w sorted-wlist)))
+  
 (defun configure-request-handler (w alist)
   (let
       ((coords (window-position w))
@@ -34,12 +65,29 @@
        tem)
 
     (when (setq tem (cdr (assq 'stack alist)))
-      (cond ((eq tem 'below)
-	     (lower-window w))
-	    ((eq tem 'above)
-	     ;; for the old GNOME pager's benefit..
-	     (uniconify-window w)
-	     (raise-window w))))
+      (let ((relation (car tem))
+	    (sibling (car (cdr tem))))
+	(case relation
+	      ((above)
+	       (if sibling (stack-window-above w sibling) (raise-window w)))
+	      ((below)
+       	       (if sibling (stack-window-below w sibling) (lower-window w)))
+	      ((top-if)
+	       (if (window-occludes-p w (if sibling (list sibling)
+					  (stacking-order)) t)
+		   (raise-window w)))
+	      ((bottom-if)
+	       (if (window-occludes-p w (if sibling (list sibling)
+					  (stacking-order)))
+		   (lower-window w)))
+	      ((opposite)
+	       (cond ((window-occludes-p w (if sibling (list sibling)
+					     (stacking-order)) t)
+		      (raise-window w))
+		     ((window-occludes-p w (if sibling (list sibling)
+					     (stacking-order)))
+		      (lower-window w))))
+	      (t (error "Bad stacking relation: %s" relation)))))
 
     (when (setq tem (cdr (assq 'dimensions alist)))
       (when (not (assq 'position alist))
@@ -83,10 +131,7 @@
 ;; decide which gravity to use to resize window W
 (defun configure-choose-gravity (w)
   (let*
-      ((abs (lambda (x)
-	      (max x (- x))))
-       (delta (lambda (x-1 y-1 x-2 y-2)
-		;; no sqrt function...
+      ((delta (lambda (x-1 y-1 x-2 y-2)
 		(+ (* (- x-2 x-1) (- x-2 x-1)) (* (- y-2 y-1) (- y-2 y-1)))))
        (width (screen-width))
        (height (screen-height))
