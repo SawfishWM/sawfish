@@ -26,3 +26,16 @@
 
 (defmacro ws-workspace-empty-p (space)
   `(workspace-empty-p ,space))
+
+(defun show-message (&optional text font fg bg position)
+  (let
+      ((attrs nil))
+    (when font
+      (setq attrs (cons (cons 'font font) attrs)))
+    (when fg
+      (setq attrs (cons (cons 'fg fg) attrs)))
+    (when bg
+      (setq attrs (cons (cons 'bg bg) attrs)))
+    (when position
+      (setq attrs (cons (cons 'position position) attrs)))
+    (display-message text attrs)))
