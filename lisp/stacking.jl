@@ -27,10 +27,10 @@
 ;; represents the level of normal windows, negative for windows below
 ;; this level, and positive for windows above the normal level
 
-(defcustom transients-above-parents t
-  "Keep transient windows stacked above normal windows."
+(defcustom transients-above 'all
+  "Keep transient windows stacked above."
   :group misc
-  :type boolean)
+  :type (set all parents none))
 
 ;; minimum depth of transient windows
 (defvar transient-depth 2)
@@ -116,14 +116,19 @@ stacking level to place them in.")
 	(restack-windows (list (car order) above))))))
 
 (defun stacking-after-map (w)
-  (if (and transients-above-parents (window-transient-p w))
+  ;; if a transient window, maybe put it in a higher layer
+  (if (window-transient-p w)
       (let
 	  ((parent (get-window-by-id (window-transient-p w))))
-	(set-window-depth w (if parent
-				(max (1+ (window-get parent 'depth))
-				     transient-depth)
-			      transient-depth)))
+	(if (or (eq transients-above 'all)
+		(and (eq transients-above 'parents) parent))
+	    (set-window-depth w (if parent
+				    (max (1+ (window-get parent 'depth))
+					 transient-depth)
+				  transient-depth))
+	  (restack-by-depth)))
     (restack-by-depth))
+  ;; raise the window within its layer
   (raise-window w))
 
 
