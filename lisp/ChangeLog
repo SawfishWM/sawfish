@@ -1,4 +1,21 @@
+2000-05-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* auto-raise.jl (raise-groups-on-focus): commented out this
+	option, it causes window groups to flicker (sometimes
+	repeatedly) in certain cases due to the extra focus events it
+	causes
+
 2000-05-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome-menu.jl (gnome-menu-lang): now a list of strings, made
+	by destructuring the language code, e.g. if LANG=de_DE, then
+	the list will be ("de" "de_DE")
+
+	(gnome-menu-read-desktop-entry): match encountered languages
+	against all items in gnome-menu-lang
+
+	* gnome-menu.jl, sawmill.jl: search LANGUAGE, LC_ALL,
+	LC_MESSAGES, LANG for the language code to use, in that order
 
 	* describe.jl (describe-symbol): new command, replaces
 	describe-function and describe-variable
