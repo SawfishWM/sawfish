@@ -58,6 +58,20 @@ windows isn't affected.
     return Qt;
 }
 
+DEFUN("x-raise-window", Fx_raise_window, Sx_raise_window,
+      (repv win), rep_Subr1) /*
+::doc:Sx-raise-window::
+x-raise-window WINDOW
+
+Bring WINDOW to the top of the display.
+::end:: */
+{
+    rep_DECLARE1(win, WINDOWP);
+    if (VWIN(win)->reparented)
+       XRaiseWindow (dpy, VWIN(win)->frame);
+    return win;
+}
+
 DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1, "W") /*
 ::doc:Sdelete-window::
 delete-window WINDOW
@@ -733,6 +747,7 @@ void
 functions_init (void)
 {
     rep_ADD_SUBR(Srestack_windows);
+    rep_ADD_SUBR(Sx_raise_window);
     rep_ADD_SUBR_INT(Sdelete_window);
     rep_ADD_SUBR_INT(Sdestroy_window);
     rep_ADD_SUBR(Swarp_cursor);
