@@ -80,15 +80,16 @@
 
   (define (stacking-constraint:transients-above-parent w)
     (let ((parents (transient-parents w))
-	  (children (filter-windows (lambda (x)
-				      (transient-of-p x w)))))
+	  (children (transient-children w)))
       (lambda (above below)
 	(and (or (null parents)
+		 ;; All parents must be below W
 		 (let loop ((rest parents))
 		   (cond ((null rest) t)
 			 ((memq (car rest) above) nil)
 			 (t (loop (cdr rest))))))
 	     (or (null children)
+		 ;; All children must be above W
 		 (let loop ((rest children))
 		   (cond ((null rest) t)
 			 ((memq (car rest) below) nil)
@@ -342,22 +343,64 @@ lowest possible position. Otherwise raise it as far as allowed."
 
 ;;; stacking groups of windows
 
+  ;; Helper function for raise-windows and lower-windows. Calls (FIRST
+  ;; X) on the first element X of ORDER, then (SUCCESSOR Y X) on each
+  ;; pair of adjacent elements X and Y
+
+  (define (apply-group-order order first successor)
+    (when order
+      (first (car order))
+      (let loop ((rest order))
+	(when (cdr rest)
+	  (successor (cadr rest) (car rest))
+	  (loop (cdr rest))))))
+
   (define (raise-windows w order)
-    ;; why am I doing this twice, when raise-window is non-trivial..?
-    ;; otherwise either (1) the stacking order of the windows in ORDER
-    ;; is lost, or (2) some windows aren't raised as high as possible..
-    ;; XXX need less brute force and ignorance here, is there a solution?
-    ;; ``When in doubt, use brute force'' -- Ken Thompson
-    (mapc raise-window order)
-    (mapc raise-window (reverse order))
-    (raise-window w))
+    ;; STRATEGY: take every window in ORDER to its highest possible
+    ;; position, giving W priority but otherwise obeying ORDER, which
+    ;; must be a valid stacking configuration (highest-to-lowest).  Do
+    ;; the restacking in such a way that no part of any window in
+    ;; ORDER is exposed during the restacking that is not exposed
+    ;; afterwards. 
+
+    (define (highest-window order)
+      ;; find the first window in ORDER that is allowed 
+      ;; to be above all other windows in ORDER...
+      (let loop ((rest order))
+	(cond ((null rest) nil)
+	      (((make-constraint (car rest)) '() (remq (car rest) order))
+	       (car rest))
+	      (t (loop (cdr rest))))))
+
+    ;; Cons up the new order (in reverse), by picking the most-raisable
+    ;; each time until no windows are left, then commit that ordering
+    (let loop ((rest (cons w (remq w order)))
+	       (out '()))
+      (if (null rest)
+	  (apply-group-order (nreverse out) raise-window stack-window-below)
+	(let ((highest (or (highest-window rest)
+			   (error "Stacking constraint failed"))))
+	  (loop (delq highest rest) (cons highest out))))))
 
   (define (lower-windows w order)
-    ;; it's not currently necessary to do this twice, but since the
-    ;; stacking constraints are extensible, best to be sure..
-    (mapc lower-window (reverse order))
-    (mapc lower-window order)
-    (lower-window w))
+
+    (define (lowest-window order)
+      ;; find the last window in ORDER that may be below all other
+      ;; windows in ORDER
+      (let ((reversed (reverse order)))
+	(let loop ((rest reversed))
+	  (cond ((null rest) nil)
+		(((make-constraint (car rest))
+		  (remq (car rest) reversed) '()) (car rest))
+		(t (loop (cdr rest)))))))
+
+    (let loop ((rest (nconc (remq w order) (list w)))
+	       (out '()))
+      (if (null rest)
+	  (apply-group-order (nreverse out) lower-window stack-window-above)
+	(let ((lowest (or (lowest-window rest)
+			  (error "Stacking constraint failed"))))
+	  (loop (delq lowest rest) (cons lowest out))))))
 
   (define (raise-lower-windows w order)
     (if (or (eq (window-visibility w) 'unobscured)
