@@ -50,6 +50,7 @@ Time last_event_time;
 XEvent *current_x_event;
 static bool current_event_updated_mouse;
 static repv current_event_window;
+static repv saved_current_context_map;
 
 /* We need a ButtonRelease on this fp. */
 struct frame_part *clicked_frame_part;
@@ -326,22 +327,33 @@ synthesize_button_release (void)
 static repv
 current_context_map (void)
 {
-    repv map = Qnil;
-
-    /* Only use the context map if the frame part is currently clicked,
-       and it's window is visible (i.e. not iconified) */
-    if (clicked_frame_part
-	&& clicked_frame_part->clicked
-	&& clicked_frame_part->win != 0
-	&& clicked_frame_part->win->visible)
+    if (saved_current_context_map == rep_NULL)
     {
-	repv tem = Fwindow_get (rep_VAL (clicked_frame_part->win),
-				Qignore_fp_keymap);
-	if (tem == Qnil)
-	    map = get_keymap_for_frame_part (clicked_frame_part);
+	repv map = Qnil;
+
+	/* Only use the context map if the frame part is currently clicked,
+	   and it's window is visible (i.e. not iconified) */
+	if (clicked_frame_part
+	    && clicked_frame_part->clicked
+	    && clicked_frame_part->win != 0
+	    && clicked_frame_part->win->visible)
+	{
+	    repv tem = Fwindow_get (rep_VAL (clicked_frame_part->win),
+				    Qignore_fp_keymap);
+	    if (tem == Qnil)
+		map = get_keymap_for_frame_part (clicked_frame_part);
+	}
+
+	saved_current_context_map = map;
     }
 
-    return map;
+    return saved_current_context_map;
+}
+
+static void
+flush_current_context_map (void)
+{
+    saved_current_context_map = rep_NULL;
 }
 
 static void
@@ -349,6 +361,13 @@ button_press (XEvent *ev)
 {
     struct frame_part *fp;
     Lisp_Window *w = 0;
+
+    /* This works for both press and release events. The desired outcome
+       is that press and motion events get the context map active when
+       the button was initially pressed, while release events get
+       the context map active when the button was released (in case the
+       pointer left the frame part) */
+    flush_current_context_map ();
 
     record_mouse_position (ev->xbutton.x_root, ev->xbutton.y_root,
 			   ev->type, ev->xany.window);
@@ -412,6 +431,11 @@ motion_notify (XEvent *ev)
 	eval_input_event (current_context_map ());
 
     XAllowEvents (dpy, SyncPointer, last_event_time);
+
+    /* Don't call flush_current_context_map (), since we want to
+       fix it for all motion events (in case the motion threshold
+       kicks in, and the pointer leaves the original fp before
+       a motion event is actually evaluated) */
 }
 
 static void
@@ -1590,6 +1614,7 @@ events_init (void)
     rep_INTERN(ignore_fp_keymap);
 
     rep_mark_static (&current_event_window);
+    rep_mark_static (&saved_current_context_map);
 
     event_handler_context = XUniqueContext ();
 

@@ -1,3 +1,14 @@
+2000-11-14  John Harper  <jsh@eazel.com>
+
+	* events.c (current_context_map): cache the context map across
+	calls
+	(flush_current_context_map): new function
+
+	(button_press, motion_notify): new semantics for context maps
+	in motion events, the map is the map that was active when the
+	button-press event was received. This fixes the
+	fast-window-drag bug #4708
+
 2000-11-13  John Harper  <jsh@eazel.com>
 
 	* version 0.33.1
