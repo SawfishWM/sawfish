@@ -915,7 +915,7 @@ last instance remaining, then delete the actual window."
 	(select-workspace-from-first ws))))
 
   (define-command 'select-workspace-interactively
-    select-workspace-interactively #:spec "%S")
+    select-workspace-interactively)
 
 
 ;;; session management
