@@ -48,7 +48,8 @@
     (WM_CLASS . "Class")
     (WM_ICON_NAME . "Icon Name")
     (WM_CLIENT_MACHINE . "Host")
-    (WM_COMMAND . "Command")))
+    (WM_COMMAND . "Command")
+    (WM_LOCALE_NAME . "Locale")))
 
 (defvar match-window-properties
   `((ignored boolean)
@@ -72,7 +73,7 @@
     (frame-style symbol ,(lambda ()
 			   (find-all-frame-styles t)))))
 
-(defun match-window-custom-widget (symbol value doc)
+(defun match-window-widget (symbol value doc)
   (let
       ((props (mapcar (lambda (prop)
 			(if (and (eq (nth 1 prop) 'symbol)
@@ -85,7 +86,12 @@
 		   :properties ,props
 		   :x-properties ,match-window-x-properties)))
 
-(put 'match-window 'custom-widget match-window-custom-widget)
+;; use this so the single widget expands properly
+(defun match-window-group-widget (group spec)
+  (car spec))
+
+(put 'match-window 'custom-widget match-window-widget)
+(put 'match-window 'custom-group-widget match-window-group-widget)
 
 (defgroup match-window "Matched Windows")
 
@@ -236,4 +242,9 @@
 	       (setq parts (cons ?  parts)))
 	     (setq parts (cons (aref vec i) parts))
 	     (setq i (1+ i)))
-	   (apply concat (nreverse parts))))))
+	   (apply concat (nreverse parts)))))
+
+  (put 'workspace 'match-window-setter
+       (lambda (w prop value)
+	 ;; translate from 1.. to 0..
+	 (window-put w prop (1- value)))))
