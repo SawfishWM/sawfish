@@ -40,6 +40,10 @@
 	      (throw 'foo w))) (or lst (managed-windows)))
     nil))
 
+;; map FUN over all managed windows
+(defmacro map-windows (fun)
+  `(mapc ,fun (managed-windows)))
+
 ;; execute FORMS with the server grabbed
 (defmacro with-server-grabbed (&rest forms)
   `(progn
