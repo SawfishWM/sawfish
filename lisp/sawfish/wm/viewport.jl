@@ -113,8 +113,8 @@
        (dims (window-frame-dimensions window)))
     (or (<= (+ (car pos) (car dims)) 0)
 	(<= (+ (cdr pos) (cdr dims)) 0)
-	(> (car pos) (screen-width))
-	(> (cdr pos) (screen-height)))))
+	(>= (car pos) (screen-width))
+	(>= (cdr pos) (screen-height)))))
 
 (defun move-window-to-current-viewport (window)
   (when (window-outside-viewport-p window)
