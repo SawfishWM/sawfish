@@ -183,7 +183,4 @@
     (right-edge . -4)
     (bottom-edge . -4))))
 
-(defvar brushed-metal-frames '((default . brushed-metal-frame)))
-
-;; XXX get rid of this
-(setq default-frame 'brushed-metal-frame)
+(setq default-frame brushed-metal-frame)

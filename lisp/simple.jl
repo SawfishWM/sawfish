@@ -87,5 +87,4 @@
     (keymap . close-button-keymap))))
 (put 'simple-frame 'unshaped t)
 
-;; XXX get rid of this
 (setq default-frame 'simple-frame)

@@ -1,5 +1,5 @@
 ;; absolute-e.jl
-;; $Id: absolute-e.jl,v 1.4 1999/07/28 15:22:22 john Exp $
+;; $Id: absolute-e.jl,v 1.5 1999/07/28 16:11:30 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -255,14 +255,11 @@
     (top-edge . -4)
     (height . 4))))
 
-(defvar absolute-e-frames '((default . absolute-e-frame)
-			    (shaped . absolute-e-shaped-frame)
-			    (transient . absolute-e-transient-frame)
-			    (shaped-transient
-			     . absolute-e-shaped-transient-frame)))
+(defvar absolute-e-frameset
+  '((default . absolute-e-frame)
+    (shaped . absolute-e-shaped-frame)
+    (transient . absolute-e-transient-frame)
+    (shaped-transient . absolute-e-shaped-transient-frame)))
 
-;; XXX get rid of this
-(setq default-frame 'absolute-e-frame)
-(setq shaped-frame 'absolute-e-shaped-frame)
-(setq transient-frame 'absolute-e-transient-frame)
-(setq shaped-transient-frame 'absolute-e-shaped-transient-frame)
+(setq default-frame absolute-e-frame)
+(setq default-frameset absolute-e-frameset)
