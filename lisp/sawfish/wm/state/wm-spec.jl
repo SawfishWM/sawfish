@@ -392,9 +392,10 @@
     (setq wm-spec-window-id (create-window 'root -200 -200 5 5))
 
     (set-x-property 'root '_NET_SUPPORTING_WM_CHECK
-		    (vector wm-spec-window-id) 'CARDINAL 32)
+		    (vector wm-spec-window-id) 'WINDOW 32)
     (set-x-property wm-spec-window-id '_NET_SUPPORTING_WM_CHECK
-		    (vector wm-spec-window-id) 'CARDINAL 32)
+		    (vector wm-spec-window-id) 'WINDOW 32)
+    (set-x-property wm-spec-window-id '_NET_WM_NAME "Sawfish" 'STRING 8)
 
     (set-x-property 'root '_NET_SUPPORTED wm-spec-supported-protocols 'ATOM 32)
 
