@@ -1,0 +1,64 @@
+#!/bin/sh
+REP_LOAD_PATH="__lispdir__" exec rep "$0" "$@"
+!#
+
+#| sawfish-about.jl.in -- helper process for sawfish about dialog
+
+   $Id$
+
+   Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+
+   This file is part of sawfish.
+
+   sawfish is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   sawfish is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with sawfish; see the file COPYING.  If not, write to
+   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+|#
+
+(structure ()
+
+    (open rep
+	  gui.gtk
+	  rep.i18n.gettext
+	  sawfish.gtk.stock)
+
+  (unless (get-command-line-option "--disable-nls")
+    (bindtextdomain "sawfish" (expand-file-name "../locale" "__lispdir__"))
+    (textdomain "sawfish"))
+
+  (define title "Sawfish")
+  (define version "__version__")
+  (define copyright "(C) 1999-2000 John Harper")
+  (define authors `("John Harper <jsh@users.sourceforge.net>"
+		    ,(_ "and many others...")))
+  (define comments (_ "Sawfish manages your windows extensibly."))
+  (define logo "sawfish.png")
+
+  (let* ((hbox (gtk-hbox-new t 0))
+	 (ref (make-url-widget "http://iwc.org/volunteers/archives/Oct98/spec_pg0.htm"
+			       (_ "Protect the sawfish"))))
+    (gtk-box-pack-start hbox ref)
+    (gtk-widget-show-all hbox)
+    (let ((widget (about-dialog title version copyright
+				authors comments
+				#:logo logo
+				#:extra hbox)))
+      (gtk-signal-connect widget "destroy"
+			  (lambda () (throw 'out)))
+      (catch 'out
+	(setq interrupt-mode 'exit)
+	(recursive-edit)))))
+
+;; Local variables:
+;; major-mode: lisp-mode
+;; End:
