@@ -42,6 +42,16 @@
   :group move
   :type boolean)
 
+(defcustom move-resize-snap-move nil
+  "Snap window position to edges of other windows when interactively moving."
+  :group move
+  :type boolean)
+
+(defcustom move-resize-snap-epsilon 8
+  "Proximity in pixels before snapping to a window edge."
+  :group move
+  :type number)
+
 (defvar move-resize-map (bind-keys (make-sparse-keymap)
 			  "Any-PointerUp" 'move-resize-finished
 			  "Any-PointerMove" 'move-resize-motion))
@@ -62,6 +72,8 @@
 (defvar move-resize-mode nil)
 (defvar move-resize-hints nil)
 (defvar move-resize-frame nil)
+(defvar move-resize-edges nil)
+(defvar move-resize-last-outline nil)
 
 ;; called to initiate a move or resize on window W. FUNCTION is either
 ;; `move' or `resize'
@@ -94,7 +106,15 @@
 				   move-resize-old-height)))
        (move-resize-mode (if (eq function 'move)
 			     move-outline-mode
-			   resize-outline-mode)))
+			   resize-outline-mode))
+       (move-resize-edges (and move-resize-snap-move
+			       (progn
+				 (require 'edges)
+				 (get-visible-window-edges
+				  ':with-ignored-windows nil
+				  ':windows-to-ignore (list w)
+				  ':include-root t))))
+       (move-resize-last-outline nil))
     (unless (eq move-resize-mode 'opaque)
       ;; prevent any other programs drawing on the display
       (grab-server))
@@ -105,12 +125,12 @@
 	  (unwind-protect
 	      (progn
 		(unless (eq move-resize-mode 'opaque)
-		  (draw-window-outline move-resize-mode
-				       move-resize-x move-resize-y
-				       (+ move-resize-width
-					  (car move-resize-frame))
-				       (+ move-resize-height
-					  (cdr move-resize-frame))))
+		  (setq move-resize-last-outline
+			(list move-resize-mode
+			      move-resize-x move-resize-y
+			      (+ move-resize-width (car move-resize-frame))
+			      (+ move-resize-height (cdr move-resize-frame))))
+		  (apply 'draw-window-outline move-resize-last-outline))
 		(catch 'move-resize-done
 		  (when from-motion-event
 		    (move-resize-motion))
@@ -131,12 +151,7 @@
       ((ptr-x (car (query-pointer)))
        (ptr-y (cdr (query-pointer))))
     (unless (eq move-resize-mode 'opaque)
-      (erase-window-outline (if (eq move-resize-function 'move)
-				move-outline-mode
-			      resize-outline-mode)
-			    move-resize-x move-resize-y
-			    (+ move-resize-width (car move-resize-frame))
-			    (+ move-resize-height (cdr move-resize-frame))))
+      (apply 'erase-window-outline move-resize-last-outline))
     (cond ((eq move-resize-function 'move)
 	   (setq move-resize-x (+ move-resize-old-x
 				  (- ptr-x move-resize-old-ptr-x)))
@@ -157,30 +172,42 @@
 			       (assq 'min-height move-resize-hints))) 1)))))
     (if (eq move-resize-mode 'opaque)
 	(move-resize-apply)
-      (draw-window-outline (if (eq move-resize-function 'move)
-			       move-outline-mode
-			     resize-outline-mode)
-			   move-resize-x move-resize-y
-			   (+ move-resize-width (car move-resize-frame))
-			   (+ move-resize-height (cdr move-resize-frame))))))
+      (if (and (eq move-resize-function 'move) move-resize-snap-move)
+	  (let
+	      ((coords (snap-window-position-to-edges
+			move-resize-window
+			(cons move-resize-x move-resize-y)
+			move-resize-snap-epsilon move-resize-edges)))
+	    (setq move-resize-last-outline
+		  (list move-resize-mode (car coords) (cdr coords)
+			(+ move-resize-width (car move-resize-frame))
+			(+ move-resize-height (cdr move-resize-frame)))))
+	(setq move-resize-last-outline
+	      (list move-resize-mode move-resize-x move-resize-y
+		    (+ move-resize-width (car move-resize-frame))
+		    (+ move-resize-height (cdr move-resize-frame)))))
+      (apply 'draw-window-outline move-resize-last-outline))))
 
 ;; called when the move/resize finished (i.e. button-release event)
 (defun move-resize-finished ()
   (interactive)
   (unless (eq move-resize-mode 'opaque)
-    (erase-window-outline (if (eq move-resize-function 'move)
-			      move-outline-mode
-			    resize-outline-mode)
-			  move-resize-x move-resize-y
-			  (+ move-resize-width (car move-resize-frame))
-			  (+ move-resize-height (cdr move-resize-frame))))
+    (apply 'erase-window-outline move-resize-last-outline))
   (move-resize-apply)
   (throw 'move-resize-done t))
 
 ;; commit the current state of the move or resize
 (defun move-resize-apply ()
   (cond ((eq move-resize-function 'move)
-	 (move-window-to move-resize-window move-resize-x move-resize-y))
+	 (if (not move-resize-snap-move)
+	     (move-window-to move-resize-window move-resize-x move-resize-y)
+	   (let
+	       ((coords (snap-window-position-to-edges
+			 move-resize-window
+			 (cons move-resize-x move-resize-y)
+			 move-resize-snap-epsilon
+			 move-resize-edges)))
+	     (move-window-to move-resize-window (car coords) (cdr coords)))))
 	((eq move-resize-function 'resize)
 	 (resize-window-to move-resize-window
 			   move-resize-width move-resize-height))))
