@@ -1460,9 +1460,9 @@ Return the window that received the current event, or the symbol
 }
 
 DEFUN("x-server-timestamp", Fx_server_timestamp, Sx_server_timestamp,
-      (repv from_server), rep_Subr1) /*
+      (repv from_server, repv store), rep_Subr2) /*
 ::doc:sawfish.wm.events#x-server-timestamp::
-x-server-timestamp [FROM-SERVER]
+x-server-timestamp [FROM-SERVER] [STORE]
 
 Return a recent X server timestamp, as an integer.
 
@@ -1473,6 +1473,8 @@ server, otherwise the most recent timestamp seen by the window manager
 {
     Time time = ((from_server == Qnil)
 		 ? last_event_time : get_server_timestamp ());
+    if (store != Qnil)
+	save_timestamp (time);
     return rep_make_long_uint (time);
 }
 
