@@ -34,11 +34,13 @@
 
 ;; called from the add-window-hook
 (defun transient-add-window (w)
-  (if (window-transient-p w)
+  (unless (window-frame w)
+    (if (window-transient-p w)
+	(if (window-shaped-p w)
+	    (set-window-frame w shaped-transient-frame)
+	  (set-window-frame w transient-frame))
       (if (window-shaped-p w)
-	  (set-window-frame w shaped-transient-frame)
-	(set-window-frame w transient-frame))
-    (when (window-shaped-p w)
-      (set-window-frame w shaped-frame))))
+	  (set-window-frame w shaped-frame)
+	(set-window-frame w default-frame)))))
 
 (add-hook 'add-window-hook 'transient-add-window t)
