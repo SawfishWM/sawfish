@@ -6,6 +6,74 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+
+@heading 0.32
+
+@itemize @bullet
+
+@item @kbd{M-TAB} window cycling now works in both directions, bind
+keys to @code{@var{cycle-command}-backwards}, e.g.
+@code{cycle-windows-backwards} (Merlin, me)
+
+@item Added support for X `Urgency' hint: @code{window-urgent-p} and
+@code{window-state-change-hook} is called with @code{urgency} state
+when it changes
+
+@item Some improvements to @code{shade-hover} mode (adapted from Eli
+Barzilay)
+
+@item Functions that raise/lower groups of windows now generate the
+minimum number of expose events (Rob Hodges, me)
+
+@item New window property @code{window-list-skip}. Unified with GNOME
+skip-winlist hint
+
+@item Custom options may have tooltips, use @code{:tooltip} tag
+
+@item Catch errors when applying custom changes and revert to previous
+state
+
+@item Translation updates: uk (Yuri Syrota), pt_BR (Douglas Moura
+Ferreira), hu (Róbert Ványi), de (Christian Meyer), ja (SATO Satoru),
+da (Keld Jørn Simonsen), es (Iñaki García Etxebarria), fr (Christian
+Marillat)
+
+@item Fixed bugs:
+
+@itemize @minus
+@item With click-to-focus in non-click-through mode, don't
+click-through into window decorations
+
+@item @code{dimensions} property in window matching was called
+@code{size} by mistake
+
+@item Export the various @code{sp-cost:} functions from
+the @code{sawfish.wm.placement.smart} module
+
+@item Don't allow cycles in the transient-for relationship
+
+@item Fixed some maximize bugs
+
+@item GNOME skip-focus property no longer causes the window to be
+unfocusable, just uncyclable-to
+
+@item Coerce auto-raise timeout to be at least one millisecond; support
+@code{disable-auto-raise} correctly
+
+@item Window input hints defaults to true not false
+
+@item Fixed typo when loading the defaults file (Ronald Wahl)
+
+@item Fixed command spec of @code{move-window-@var{foo}} commands
+(Yoshiki Hayashi)
+
+@item When sending @code{WM_TAKE_FOCUS} message, only focus the window
+if its `Input' hint is set
+@end itemize
+
+@end itemize
+
+
 @heading 0.31.1
 
 @itemize @bullet
