@@ -1,5 +1,12 @@
 1999-09-17  John Harper  <john@dcs.warwick.ac.uk>
 
+	* x-cycle.jl: remove the possibility of the stack ids
+	overflowing
+
+	* keymap.jl (substitute-key-definition): renamed
+	substitute-keymap-command
+	(substitute-keymap-event): new function
+
 	* stacking.jl (raise-window): handle case where there's only
 	one window, the window being raised
 
