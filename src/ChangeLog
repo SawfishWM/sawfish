@@ -1,5 +1,13 @@
 2000-11-06  John Harper  <jsh@eazel.com>
 
+	* frames.c (apply_mask): local function to clip a mask (if
+	required) before union'ing it onto the destination window
+
+	(set_frame_shapes): use apply_mask () to form the image mask,
+	otherwise only images whose dimensions are an integer multiple
+	of the tiled image can be created without corrupting the
+	surrounding state. Fixes #4519
+
 	* pixmap-cache.c: added code to disable the pixmap cache if
 	DISABLE_CACHE preprocessor macro is defined
 

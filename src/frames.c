@@ -287,6 +287,33 @@ call_protectedly_1 (repv fun, repv arg, repv error_return)
     return call_protectedly (Ffuncall, rep_LIST_2 (fun, arg), error_return);
 }
 
+static void
+apply_mask (Drawable dest, int x_off, int y_off,
+	    int dest_width, int dest_height,
+	    Pixmap src, int src_width, int src_height)
+{
+    if (dest_width - x_off >= src_width
+	&& dest_height - y_off >= src_height)
+    {
+	/* No need for a temporary buffer */
+	XShapeCombineMask (dpy, dest, ShapeBounding,
+			   x_off, y_off, src, ShapeUnion);
+    }
+    else
+    {
+	Pixmap tem = XCreatePixmap (dpy, src, dest_width - x_off,
+				    dest_height - y_off, 1);
+	XGCValues gcv;
+	GC gc = XCreateGC (dpy, tem, 0, &gcv);
+	XCopyArea (dpy, src, tem, gc, 0, 0,
+		   dest_width - x_off, dest_height - y_off, 0, 0);
+	XShapeCombineMask (dpy, dest, ShapeBounding,
+			   x_off, y_off, tem, ShapeUnion);
+	XFreeGC (dpy, gc);
+	XFreePixmap (dpy, tem);
+    }
+}
+
 /* Construct the frame window's shape mask from the union of all
    individual shapes (frame parts and the client window, if appropriate).
    If ATOMIC is true, then the frame shape is changed _once_ only, using
@@ -374,22 +401,25 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 
 	    if (mask != 0)
 	    {
-		XShapeCombineMask (dpy, shape_win, ShapeBounding,
-				   fp->x - w->frame_x, fp->y - w->frame_y,
-				   mask, ShapeUnion);
+		int width = image_width (image);
+		int height = image_height (image);
+		int x_off = fp->x - w->frame_x;
+		int y_off = fp->y - w->frame_y;
+
+		apply_mask (shape_win, x_off, y_off,
+			    x_off + fp->width, y_off + fp->height,
+			    mask, width, height);
+
 		if (tiled)
 		{
-		    int width = image_width (image);
-		    int height = image_height (image);
 		    int x = width, y = 0;
 		    while (y < fp->height)
 		    {
 			while (x < fp->width)
 			{
-			    XShapeCombineMask (dpy, shape_win, ShapeBounding,
-					       fp->x - w->frame_x + x,
-					       fp->y - w->frame_y + y,
-					       mask, ShapeUnion);
+			    apply_mask (shape_win, x_off + x, y_off + y,
+					x_off + fp->width, y_off + fp->height,
+					mask, width, height);
 			    x += width;
 			}
 			y += height;
