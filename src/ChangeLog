@@ -1,3 +1,11 @@
+2001-03-21  John Harper  <jsh@eazel.com>
+
+	* fonts.c (x_create_font_set): reverted the last change to
+	merge calls to setlocale (). (I had failed to realize that the
+	result of calling setlocale describes the current locale not
+	the original one). Also added some code to copy the returned
+	locale name since it's in a static buffer
+
 2001-03-19  John Harper  <jsh@eazel.com>
 
 	* windows.c, sawmill.h: moved XUrgencyHint definition to

@@ -19,6 +19,24 @@
    along with sawmill; see the file COPYING.   If not, write to
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
+/* AIX requires this to be the first thing in the file.  */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+#ifndef __GNUC__
+# if HAVE_ALLOCA_H
+#  include <alloca.h>
+# else
+#  ifdef _AIX
+ #pragma alloca
+#  else
+#   ifndef alloca /* predefined by HP cc +Olibcalls */
+   char *alloca ();
+#   endif
+#  endif
+# endif
+#endif
+
 #include "sawmill.h"
 #include <string.h>
 #include <X11/Xlocale.h>
@@ -356,12 +374,29 @@ x_create_font_set (char *xlfd, char ***missing,
 
     if (fs == 0)
     {
-	char *old_locale;
+	char *old_locale, *tem;
+
 	if (*nmissing != 0)
 	    XFreeStringList (*missing);
-	old_locale = setlocale (LC_CTYPE, "C");
+
+	/* Save the old LC_CTYPE locale.. */
+	tem = setlocale (LC_CTYPE, 0);
+	if (tem != 0)
+	{
+	    old_locale = alloca (strlen (tem) + 1);
+	    strcpy (old_locale, tem);
+
+	    /* ..then create the fontset in the default locale.. */
+	    setlocale (LC_CTYPE, "C");
+	}
+	else
+	    old_locale = 0;
+
 	fs = XCreateFontSet (dpy, xlfd, missing, nmissing, def_string);
-	setlocale (LC_CTYPE, old_locale);
+
+	/* ..then restore the original locale */
+	if (old_locale != 0)
+	    setlocale (LC_CTYPE, old_locale);
     }
 
     /* make XLFD font name for pattern analysis */
