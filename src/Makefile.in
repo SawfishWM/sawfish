@@ -36,13 +36,14 @@ DL_OBJS := $(DL_SRCS:%.c=lib%.la)
 LISP_SRCS := sawmill-ui.jl sawmill-menu.jl
 LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
 
-CFLAGS := $(CFLAGS) $(IMLIB_CFLAGS) $(X11_CFLAGS)
+CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMLIB_CFLAGS) $(X11_CFLAGS)
 
 all : sawmill sawmill-client $(DL_OBJS) $(LISP_OBJS)
 
 sawmill : $(OBJS) $(LIBOBJS)
 	$(rep_LIBTOOL) $(CC) -export-dynamic $(LDFLAGS) \
-	  -o sawmill $(OBJS) $(LIBOBJS) $(IMLIB_LIBS) $(X11_LIBS) $(LIBS)
+	  -o sawmill $(OBJS) $(LIBOBJS) $(REP_LIBS) \
+	  $(IMLIB_LIBS) $(X11_LIBS) $(LIBS)
 
 sawmill-client : client.o
 	$(CC) $(LDFLAGS) -o $@ $< $(LIBOBJS) $(LIBS)
