@@ -238,6 +238,17 @@ Note that calls to `grab-server' and `ungrab-server' _nest_.
     return Qt;
 }
 
+DEFUN("server-grabbed-p", Fserver_grabbed_p,
+      Sserver_grabbed_p, (void), rep_Subr0) /*
+::doc:server-grabbed-p::
+server-grabbed-p
+
+Return t if the server is currently grabbed.
+::end:: */
+{
+    return (server_grabs > 0) ? Qt : Qnil;
+}
+
 DEFUN("grab-pointer", Fgrab_pointer, Sgrab_pointer,
       (repv win, repv cursor), rep_Subr2) /*
 ::doc:grab-pointer::
@@ -1125,6 +1136,7 @@ functions_init (void)
     rep_ADD_SUBR(Sresize_window_to);
     rep_ADD_SUBR(Sgrab_server);
     rep_ADD_SUBR(Sungrab_server);
+    rep_ADD_SUBR(Sserver_grabbed_p);
     rep_ADD_SUBR(Sgrab_pointer);
     rep_ADD_SUBR(Sungrab_pointer);
     rep_ADD_SUBR(Sgrab_keyboard);
