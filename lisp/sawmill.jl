@@ -28,6 +28,7 @@
 (require 'focus)
 (require 'keymaps)
 (require 'transient)
+(require 'frames)
 (require 'workspace)
 (require 'place-window)
 
@@ -42,16 +43,20 @@
 	;; First the site-wide stuff
 	(load-all "site-init")
 
-	;; then the customized options
-	(custom-load-user-file)
-
 	;; then the users rep configuration, or site-wide defaults
 	(or (load (concat (user-home-directory) ".reprc") t t)
 	    (load "rep-defaults" t))
 
 	;; then the sawmill specific user configuration
 	(or (load (concat (user-home-directory) ".sawmillrc") t t)
-	    (load "sawmill-defaults" t)))
+	    (load "sawmill-defaults" t))
+
+	;; then the customized options
+	(custom-load-user-file)
+
+	;; use a default theme if none given
+	(unless default-frame-style
+	  (set-frame-style 'absolute-e)))
     (error
      (format (stderr-file) "error in local config--> %S\n" error-data))))
 
