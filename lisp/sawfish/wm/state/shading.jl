@@ -26,8 +26,14 @@
     (window-put w 'shaded t)
     (window-put w 'hide-client t)
     (window-put w 'shaded-old-type (window-type w))
-    (set-window-frame-style w (window-get w 'current-frame-style)
-			    (window-type-remove-border (window-type w)) nil)))
+    (let
+	((type (window-type w)))
+      (cond ((eq type 'default)
+	     (setq type 'shaped))
+	    ((memq type '(transient unframed))
+	     (setq type 'shaped-transient)))
+      (set-window-frame-style
+       w (window-get w 'current-frame-style) type nil))))
 
 ;;;###autoload
 (defun unshade-window (w)
