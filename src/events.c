@@ -1656,7 +1656,6 @@ events_init (void)
     rep_INTERN_SPECIAL(window_state_change_hook);
 
     rep_INTERN_SPECIAL(pointer_motion_threshold);
-    Fset (Qpointer_motion_threshold, rep_MAKE_INT (0));
 
     rep_INTERN(iconify_window);
     rep_INTERN(uniconify_window);
