@@ -84,7 +84,6 @@
   (let*
       ((hints (get-x-property w '_MOTIF_WM_HINTS))
        (type (window-type w))
-       (orig-type type)
        data)
     ;; XXX act on functions and input-mode hints...
     (when hints
@@ -107,7 +106,6 @@
 	      (when (zerop (logand decor mwm-decor-maximize))
 		(remove-frame-class w 'maximize-button)))
 	  (setq type 'default)))))
-    (unless (eq type orig-type)
-      (window-put w 'type type))))
+    (set-window-type w type)))
 
 (add-hook 'before-add-window-hook mwm-add-window)

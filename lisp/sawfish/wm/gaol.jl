@@ -27,11 +27,10 @@
     window-maximized-vertically-p input-focus window-icon-image
     image-ref image-set image-map image-fill color-rgb-8
 
-    add-frame-style check-frame-availability set-window-frame-style
-    set-frame-for-window reframe-one-window rebuild-frames-with-style
-    reframe-windows-with-style reframe-all-windows window-type
-    def-frame-class define-frame-class after-setting-frame-option
-    mark-frame-style-editable
+    add-frame-style check-frame-availability reframe-window
+    rebuild-frames-with-style reframe-windows-with-style
+    reframe-all-windows window-type def-frame-class define-frame-class
+    after-setting-frame-option mark-frame-style-editable
 
     defcustom defgroup custom-declare-variable custom-declare-group
     custom-quote-keys custom-set-property custom-set-group-property

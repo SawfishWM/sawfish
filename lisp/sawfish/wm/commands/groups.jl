@@ -157,10 +157,6 @@
 ;; framing
 
 ;;;###autoload
-(defun set-group-frame-style (set-group-w set-group-style
-			      &optional set-group-type set-group-from-user)
-  (map-window-group (lambda (w)
-		      (set-window-frame-style
-		       w set-group-style set-group-type set-group-from-user))
-		    set-group-w))
-
+(defun set-group-frame-style (w style)
+  (map-window-group (lambda (x)
+		      (set-frame-style x style)) w))

@@ -140,7 +140,7 @@
 
 ;; use a default theme if none given
 (unless (or batch-mode default-frame-style)
-  (set-frame-style fallback-frame-style))
+  (setq default-frame-style fallback-frame-style))
 
 ;; might it be useful to load the GNOME support?
 (unless batch-mode

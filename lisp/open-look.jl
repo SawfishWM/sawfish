@@ -29,7 +29,6 @@
 (defun ol-add-window (w)
   (let*
       ((type (window-type w))
-       (orig-type type)
        prop data)
     (when (setq prop (get-x-property w '_OL_WIN_ATTR))
       (setq data (nth 2 prop))
@@ -60,7 +59,6 @@
 	  (when (eq (aref data i) '_OL_DECOR_HEADER)
 	    (setq type (window-type-remove-title type)))
 	  (setq i (1+ i)))))
-    (unless (eq type orig-type)
-      (window-put w 'type type))))
+    (set-window-type w type))
 
 (add-hook 'before-add-window-hook ol-add-window)

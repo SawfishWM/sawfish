@@ -39,7 +39,7 @@
   (interactive "%W")
   (when (window-get w 'ignored)
     (window-put w 'ignored nil)
-    (set-frame-for-window w t)
+    (reframe-window w)
     (call-window-hook 'window-state-change-hook w (list '(ignored)))
     (call-hook 'workspace-state-change-hook)))
 

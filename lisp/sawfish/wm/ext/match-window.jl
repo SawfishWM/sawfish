@@ -350,7 +350,7 @@
 
   (define-match-window-setter 'frame-type
    (lambda (w prop value)
-     (window-put w 'type (or (cdr (assq value match-window-types)) value))))
+     (set-window-type w (or (cdr (assq value match-window-types)) value))))
 
   (define-match-window-setter 'ungrouped
    (lambda (w prop value)

@@ -234,7 +234,7 @@
 
 (put 'wm-spec-type '_NET_WM_WINDOW_TYPE_DIALOG
   (lambda (w)
-    (window-put w 'type 'transient)))
+    (set-window-type w 'transient)))
 
 (put 'wm-spec-state '_NET_WM_STATE_STICKY
   (lambda (w mode)
