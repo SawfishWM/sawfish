@@ -1,5 +1,8 @@
 2000-03-02  John Harper  <john@dcs.warwick.ac.uk>
 
+	* functions.jl (warp-cursor-to-window): clamp the warp
+	coordinates to be within the screen boundaries (from Merlin)
+
 	* prompt.jl (prompt-display-fun): function to somehow format
 	the prompt contents before displaying it
 	(prompt): use call-with-keyboard-grabbed

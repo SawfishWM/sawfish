@@ -1,5 +1,19 @@
 2000-03-02  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill-ui.jl: `beautify' symbol names in the keymap widget
+	(s/[:-]/ / and capitalize first word). Also remove redundant
+	`keymap' suffix from keymap names
+
+	* frames.c (list_frame_generator): if resizing a window be
+	smarter about when the shape is reinitialized (before the
+	resize if the frame is growing, after otherwise). Also, move
+	and resize the client window in a single request
+	(configure_frame_part): set bit- and win-gravity of frame parts
+	to StaticGravity
+
+	* windows.c (fix_window_size): only call XResizeWindow () if
+	not calling rebuild_frame ()
+
 	* frames.c (list_frame_generator): reorder some operations,
 	maybe less flicker when resizing opaquely?
 
