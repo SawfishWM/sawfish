@@ -38,7 +38,7 @@
 	       (when always-update-frames
 		 (reframe-all-windows))))
 
-(defcustom gradient-normal-from-color (get-color "ivory1")
+(defcustom gradient-normal-from-color (get-color "#b6b6b6")
   "`From' color of inactive frames in `gradient' frame style."
   :type color
   :group gradient-frame
@@ -46,7 +46,7 @@
 	       (when always-update-frames
 		 (reframe-all-windows))))
 
-(defcustom gradient-normal-to-color (get-color "ivory4")
+(defcustom gradient-normal-to-color (get-color "#323232")
   "`To' color of inactive frames in `gradient' frame style."
   :type color
   :group gradient-frame
@@ -54,7 +54,7 @@
 	       (when always-update-frames
 		 (reframe-all-windows))))
 
-(defcustom gradient-active-from-color (get-color "#5080c0")
+(defcustom gradient-active-from-color (get-color "#64b4df")
   "`From' color of active frames in `gradient' frame style."
   :type color
   :group gradient-frame
