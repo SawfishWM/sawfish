@@ -34,7 +34,6 @@
 	  (grab (gtk-button-new-with-label (_ "Grab...")))
 	  (hbox (gtk-hbox-new nil box-spacing)))
 
-      (gtk-box-pack-start hbox (gtk-label-new (_ "Key:")))
       (gtk-container-add hbox entry)
       (gtk-box-pack-end hbox grab)
       (gtk-widget-show-all hbox)
