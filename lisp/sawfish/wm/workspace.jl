@@ -470,20 +470,21 @@
   (or (window-in-workspace-p w old)
       (error
        "ws-move-window--window isn't in original workspace: %s, %s" w old))
-  (if (window-in-workspace-p w new)
-      ;; just remove from the source workspace
-      (progn
-	(window-remove-from-workspace w old)
-	(call-window-hook 'remove-from-workspace-hook w (list old)))
-    ;; need to move it..
-    (transform-window-workspaces (lambda (space)
-				   (if (= space old)
-				       new
-				     space)) w)
-    (cond ((= old current-workspace)
-	   (hide-window w))
-	  ((and (= new current-workspace) (not (window-get w 'iconified)))
-	   (show-window w))))
+  (cond ((= old new))
+	((window-in-workspace-p w new)
+	 ;; just remove from the source workspace
+	 (window-remove-from-workspace w old)
+	 (call-window-hook 'remove-from-workspace-hook w (list old)))
+	(t
+	 ;; need to move it..
+	 (transform-window-workspaces (lambda (space)
+					(if (= space old)
+					    new
+					  space)) w)
+	 (cond ((= old current-workspace)
+		(hide-window w))
+	       ((and (= new current-workspace) (not (window-get w 'iconified)))
+		(show-window w)))))
   (ws-workspace-may-be-empty old)
   ;; the window may lose the focus when switching spaces
   (when (and was-focused (window-visible-p w))
