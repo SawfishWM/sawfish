@@ -15,29 +15,29 @@ msgid "Sound"
 msgstr "Som"
 
 # ../lisp/tooltips.jl
-#. ../lisp/audio-events.jl
 #
+#. ../lisp/audio-events.jl
 msgid "Play sound effects for window events."
-msgstr "Emitir efeitos sonoros para os eventos na janela."
+msgstr "Reproduzir sons para os eventos da janela."
 
 # ../lisp/workspace.jl
-#. ../lisp/audio-events.jl
 #
+#. ../lisp/audio-events.jl
 msgid "Play sound effects for unmanaged windows."
-msgstr "Emitir efeitos sonoros para as janelas ociosas."
+msgstr "Reproduzir sons para as janelas ociosas."
 
 # ../lisp/match-window.jl
-#. ../lisp/audio-events.jl
 #
+#. ../lisp/audio-events.jl
 msgid "Map window events to sound files."
-msgstr "Mapear os eventos da janela aos arquivos de som."
+msgstr "Mapear eventos da janela para arq. de som."
 
 #. ../lisp/audio-events.jl
 msgid "Event"
 msgstr "Evento"
 
-#. ../lisp/audio-events.jl
 #
+#. ../lisp/audio-events.jl
 msgid "Sample"
 msgstr "Amostra"
 
@@ -62,7 +62,7 @@ msgstr "Janelas Combinadas"
 #. ../lisp/tooltips.jl
 #. ../lisp/autoload.jl
 msgid "Tooltips"
-msgstr "Dicas de ferramentas"
+msgstr "Dicas"
 
 #. ../lisp/shade-hover.jl
 #. ../lisp/autoload.jl
@@ -73,21 +73,22 @@ msgstr "Shade Hover"
 #. ../lisp/x-cycle.jl
 #. ../lisp/autoload.jl
 msgid "Window Cycling"
-msgstr "Alternância entre Janelas"
+msgstr "Alternar Janelas"
 
 # ../lisp/auto-raise.jl
 #. ../lisp/auto-raise.jl
 msgid "Raise windows when they are focused."
-msgstr "Realçar janelas ao serem focalizadas."
+msgstr "Levanta janelas ao serem focalizadas."
 
 # ../lisp/auto-raise.jl
 #. ../lisp/auto-raise.jl
 msgid "Delay in milliseconds until focused windows are raised."
-msgstr "Espera (em milissegundos) para realçar as janelas focalizadas."
+msgstr "Atraso (em milissegundos) para levantar janelas focalizadas."
 
 #. ../lisp/configure.jl
 msgid "Automatically select window gravity from position on screen."
-msgstr "Estabelecer automaticamente a importância da janela conforme posição na tela."
+msgstr ""
+"Estabelecer automaticamente a importância da janela conforme posição na tela."
 
 # ../lisp/customize.jl
 #. ../lisp/customize.jl
@@ -101,7 +102,7 @@ msgstr "Principal"
 # ../lisp/custom.jl
 #. ../lisp/custom.jl
 msgid "All settings"
-msgstr "Todas as configurações"
+msgstr "Todas configurações"
 
 # ../src/sawmill-ui.jl
 #. ../lisp/custom.jl
@@ -162,7 +163,7 @@ msgstr "Maximizar"
 # ../lisp/custom.jl
 #. ../lisp/custom.jl
 msgid "Miscellaneous"
-msgstr "Miscelânea"
+msgstr "Diversos"
 
 # ../lisp/cycle.jl
 #. ../lisp/cycle.jl
@@ -177,34 +178,37 @@ msgstr "Selecionar a janela anterior desta área de trabalho."
 # ../lisp/cycle.jl
 #. ../lisp/cycle.jl
 msgid "Select the next window, cycling through all possible workspaces."
-msgstr "Selecionar a próxima janela, passando por todas as áreas de trabalho "
+msgstr ""
+"Selecionar a próxima janela, passando por todas as áreas de trabalho "
 "possíveis."
 
 # ../lisp/cycle.jl
 #. ../lisp/cycle.jl
 msgid "Select the previous window, cycling through all possible workspaces."
-msgstr "Selecionar a janela anterior, passando por todas as áreas de trabalho "
+msgstr ""
+"Selecionar a janela anterior, passando por todas as áreas de trabalho "
 "possíveis."
 
 # ../lisp/edge-flip.jl
 #. ../lisp/edge-flip.jl
 msgid "Select the next desktop when the pointer hits screen edge."
-msgstr "Selecionar a próxima área de trabalho quando o ponteiro tocar a borda "
-"da tela."
+msgstr ""
+"Selecionar a próxima área de trabalho quando o ponteiro chegar na borda da "
+"tela."
 
 #. ../lisp/edge-flip.jl
 msgid "Hitting the screen edge selects the next: \\w"
-msgstr "Tocar a borda da tela seleciona a próxima: \\w"
+msgstr "Chegar à borda da tela seleciona a próxima: \\w"
 
 # ../lisp/move-resize.jl
-#. ../lisp/edge-flip.jl
 #
+#. ../lisp/edge-flip.jl
 msgid "Only flip when interactively moving a window."
 msgstr "Mudar só quando mover interativamente uma janela"
 
 #. ../lisp/edge-flip.jl
 msgid "Milliseconds to delay before flipping: \\w"
-msgstr "Espera em milissegundos antes da mudança: \\w"
+msgstr "Atraso em milissegundos antes da mudança: \\w"
 
 #. ../lisp/edge-flip.jl
 msgid "Warp pointer to opposite screen edge when flipping."
@@ -244,14 +248,14 @@ msgstr ""
 "o tipo solicitado."
 
 # ../lisp/frames.jl
-#. ../lisp/frames.jl
 #
+#. ../lisp/frames.jl
 msgid "Default font: \\w"
 msgstr "Fonte padrão: \\w"
 
 # ../lisp/customize.jl
-#. ../lisp/frames.jl
 #
+#. ../lisp/frames.jl
 msgid "Intensity of bevels: \\wpercent."
 msgstr "Intensidade do bisel: \\wpercent."
 
@@ -263,22 +267,23 @@ msgstr "Padrão"
 # ../lisp/functions.jl
 #. ../lisp/functions.jl
 msgid "Give focus to windows even when they haven't asked for it."
-msgstr "Ajustar o foco das janelas mesmo quando elas não solicitaram."
+msgstr "Focar as janelas mesmo quando não solicitado."
 
 #. ../lisp/functions.jl
 msgid ""
 "Offset (%) from left window edge when warping pointer.\n"
 "A negative number means outside the left window edge."
 msgstr ""
-"Afastamento (%) da borda esquerda da janela ao virar o ponteiro.\n"
+"Offset (%) da borda esquerda da janela ao virar o ponteiro.\n"
 "Um valor negativo significa fora da borda esquerda da janela."
 
 #. ../lisp/functions.jl
 msgid ""
 "Offset (%) from top window edge when warping pointer.\n"
 "A negative number means outside the top window edge."
-msgstr "Afastamento (%) da borda superior da janela quando virar o ponteiro."
-"Um valor negativo significa fora da borda superior da janela."
+msgstr ""
+"Offset (%) da borda superior da janela quando virar o ponteiro.Um valor "
+"negativo significa fora da borda superior da janela."
 
 #. ../lisp/functions.jl
 msgid "The program launched by the `xterm' command."
@@ -293,7 +298,8 @@ msgid ""
 "Format to create unique window names. Has two arguments (NAME INDEX)\n"
 "applied to it."
 msgstr ""
-"Formato para criar nomes de janelas exclusivos. Tem dois argumentos (ÍNDICE DE NOMES)\n"
+"Formato para criar nomes de janelas exclusivos. Tem dois argumentos (ÍNDICE "
+"DE NOMES)\n"
 "aplicados a ele."
 
 # ../lisp/functions.jl
@@ -326,14 +332,16 @@ msgid "Force the current window to have a unique title."
 msgstr "Forçar esta janela a ter título único."
 
 # ../lisp/ignore-window.jl
-#. ../lisp/functions.jl
 #
+#. ../lisp/functions.jl
 msgid "Delete the window."
 msgstr "Eliminar a janela."
 
 #. ../lisp/functions.jl
 msgid "Delete the window, or beep if the window can't be closed safely."
-msgstr "Eliminar a janela, ou emitir aviso sonoro se ela não puder ser fechada em segurança."
+msgstr ""
+"Eliminar a janela, ou emitir aviso sonoro se ela não puder ser fechada em "
+"segurança."
 
 # ../lisp/gnome-commands.jl
 #. ../lisp/gnome-commands.jl
@@ -399,7 +407,8 @@ msgstr "Agrupar as janelas transientes com as suas mães."
 # ../lisp/group-funs.jl
 #. ../lisp/group-funs.jl
 msgid "List of group ids that always exist, even when they have no members."
-msgstr "Lista de ids de grupos permanentes, mesmo que não tenham nenhum membro."
+msgstr ""
+"Lista de ids de grupos permanentes, mesmo que não tenham nenhum membro."
 
 # ../lisp/group-funs.jl
 #. ../lisp/group-funs.jl
@@ -408,7 +417,7 @@ msgstr "Grupo novo"
 
 #. ../lisp/grow-pack.jl
 msgid "Whether growing an already grown window grows it again."
-msgstr "Ao aumentar uma janela aumentada ela aumenta novamente."
+msgstr "Se aumentar uma janela aumentada ela aumenta novamente."
 
 #. ../lisp/grow-pack.jl
 msgid ""
@@ -441,14 +450,14 @@ msgid "Moves window to the left until it `bumps into' another window."
 msgstr "Move a janela para a esquerda até ela `encostar' em outra janela."
 
 # ../lisp/maximize.jl
-#. ../lisp/grow-pack.jl
 #
+#. ../lisp/grow-pack.jl
 msgid "Moves window to the right until it `bumps into' another window."
 msgstr "Move a janela para a direita até ela `encostar' em outra janela."
 
 # ../lisp/maximize.jl
-#. ../lisp/grow-pack.jl
 #
+#. ../lisp/grow-pack.jl
 msgid "Moves window upwards until it `bumps into' another window."
 msgstr "Move a janela para cima até ela `encostar' em outra janela. "
 
@@ -459,7 +468,7 @@ msgstr "Move a janela para baixo até ela `encostar' em outra janela."
 # ../lisp/gtkrc.jl
 #. ../lisp/gtkrc.jl
 msgid "Reload the gtkrc settings."
-msgstr "Recarregar as configurações da gtkrc."
+msgstr "Recarregar as configurações do gtkrc."
 
 #. ../lisp/iconify.jl
 msgid "Unmanaged windows may be iconified."
@@ -467,11 +476,11 @@ msgstr "Janelas ociosas podem ser minimizadas."
 
 #. ../lisp/iconify.jl
 msgid "Iconifying a window also iconifies the: \\w"
-msgstr "A minimização de uma janela minimiza também a: \\w "
+msgstr "A minimização de uma janela também minimiza: \\w "
 
 # ../lisp/workspace.jl
-#. ../lisp/iconify.jl
 #
+#. ../lisp/iconify.jl
 msgid "Uniconifying a window also uniconifies the: \\w"
 msgstr "A restauração de uma janela restaura também o: \\w"
 
@@ -490,8 +499,8 @@ msgid "Toggle the iconification of window W."
 msgstr "Alternar a minimização da janela W."
 
 # ../lisp/iconify.jl
-#. ../lisp/iconify.jl
 #
+#. ../lisp/iconify.jl
 msgid "Display the workspace/viewport containing the window W."
 msgstr "Mostrar a área de trabalho/visualização que contém a janela W."
 
@@ -501,8 +510,8 @@ msgid "Display the workspace containing the window W, then focus on W."
 msgstr "Mostrar a área de trabalho que contém a janela W, depois focar em W."
 
 # ../lisp/cycle.jl
-#. ../lisp/iconify.jl
 #
+#. ../lisp/iconify.jl
 msgid "Iconify all windows on the current workspace."
 msgstr "Minimizar todas as janelas desta área de trabalho."
 
@@ -531,14 +540,15 @@ msgid "Toggle whether a window is ignored or not."
 msgstr "Alternar independente de aplicar ou não à janela."
 
 # ../lisp/ignore-window.jl
-#. ../lisp/ignore-window.jl
 #
+#. ../lisp/ignore-window.jl
 msgid "Toggle whether a window is focusable or not."
-msgstr "Alternar independente de a janela ser ou não focável."
+msgstr "Alternar se a janela estiver ou não focável."
 
 #. ../lisp/keymap.jl
 msgid "Prompt for a key sequence, then print its binding."
-msgstr "Preparar para uma seqüência de chaves, em seguida imprimir seus atalhos."
+msgstr ""
+"Preparar para uma seqüência de chaves, em seguida imprimir seus atalhos."
 
 # ../lisp/keymap.jl
 #. ../lisp/keymap.jl
@@ -550,7 +560,7 @@ msgid ""
 "Sends the next key event directly to the focused client window, ignoring\n"
 "any window manager bindings that it may have."
 msgstr ""
-"Aplica o próximo evento da tecla à janela cliente focalizada, ignorando\n"
+"Aplica o próximo evento de tecla à janela cliente focalizada, ignorando\n"
 "qualquer atalho gerenciador de janelas que ela possa conter."
 
 #. ../lisp/keymap.jl
@@ -565,7 +575,8 @@ msgstr "Mapa de teclas contendo atalhos ativos em algum lugar."
 # ../lisp/keymaps.jl
 #. ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when a client window is focused."
-msgstr "Mapa de teclas contendo atalhos ativos ao focalizar uma janela cliente."
+msgstr ""
+"Mapa de teclas contendo atalhos ativos ao focalizar uma janela cliente."
 
 # ../lisp/keymaps.jl
 #. ../lisp/keymaps.jl
@@ -601,7 +612,8 @@ msgid ""
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
 "Mapa de teclas contendo atalhos ativos quando o mouse está sobre o botão de\n"
-"fechamento de uma janela (Só os atalhos do mouse são reconhecidos neste mapa)."
+"fechamento de uma janela (Só os atalhos do mouse são reconhecidos neste "
+"mapa)."
 
 # ../lisp/keymaps.jl
 #. ../lisp/keymaps.jl
@@ -610,7 +622,8 @@ msgid ""
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
 "Mapa de teclas contendo atalhos ativos quando o mouse está sobre o botão de\n"
-"minimização de uma janela (Só os atalhos do mouse são reconhecidos neste mapa)."
+"minimização de uma janela (Só os atalhos do mouse são reconhecidos neste "
+"mapa)."
 
 # ../lisp/keymaps.jl
 #. ../lisp/keymaps.jl
@@ -619,7 +632,8 @@ msgid ""
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
 "Mapa de teclas contendo atalhos ativos quando o mouse está sobre o botão de\n"
-"maximização de uma janela (Só os atalhos do mouse são reconhecidos neste mapa)."
+"maximização de uma janela (Só os atalhos do mouse são reconhecidos neste "
+"mapa)."
 
 # ../lisp/keymaps.jl
 #. ../lisp/keymaps.jl
@@ -640,13 +654,13 @@ msgid "Other"
 msgstr "Outros"
 
 # ../lisp/maximize.jl
-#. ../lisp/maximize.jl
 #
+#. ../lisp/maximize.jl
 msgid ""
 "Maximizing a window in one dimension must increase the size of that "
 "dimension."
 msgstr ""
-"A maximização de uma dimensão da janela tem de aumentar o tamanho dessa dimensão."
+"A maximização de uma dimensão da janela tem de aumentar o tamanho desta."
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
@@ -656,7 +670,8 @@ msgstr "Realçar as janelas quando maximizadas."
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
 msgid "Let unmanaged windows be overlapped when filling windows."
-msgstr "Permitir que as janelas ociosas sejam sobrepostas ao preencher as janelas."
+msgstr ""
+"Permitir que as janelas ociosas sejam sobrepostas ao preencher as janelas."
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
@@ -667,7 +682,8 @@ msgstr "Maximizar as dimensões da janela."
 #. ../lisp/maximize.jl
 msgid ""
 "Restore the dimensions of the window to its original, unmaximized, state."
-msgstr "Restaurar as dimensões da janela ao seu estado original, não maximizado."
+msgstr ""
+"Restaurar as dimensões da janela ao seu estado original, não maximizado."
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
@@ -716,7 +732,8 @@ msgstr "Maximizar verticalmente a janela sem obscurecer outras janelas."
 #. ../lisp/maximize.jl
 msgid ""
 "Toggle the state of the window between maximized-filled and unmaximized."
-msgstr "Alternar o estado da janela entre completamente maximizado e desmaximizado."
+msgstr ""
+"Alternar o estado da janela entre completamente maximizado e desmaximizado."
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
@@ -737,15 +754,15 @@ msgstr ""
 "desmaximizado."
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Iconify"
 msgstr "_Minimizar"
 
 # ../lisp/menus.jl
 # ../src/sawmill-ui.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Delete"
 msgstr "_Eliminar"
 
@@ -755,32 +772,32 @@ msgid "Destroy"
 msgstr "Destruir"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Toggle"
 msgstr "_Alternar"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Maximize"
 msgstr "_Maximizar"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Vertically"
 msgstr "_Verticalmente"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Horizontally"
 msgstr "_Horizontalmente"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Both"
 msgstr "Am_bos"
 
@@ -800,8 +817,8 @@ msgid "Fill both"
 msgstr "Completar horizontal e verticalmente"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Un-maximize"
 msgstr "_Desmaximizar"
 
@@ -816,14 +833,14 @@ msgid "_Send window to"
 msgstr "_Enviar janela para"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Previous workspace"
 msgstr "Área de trabalho _anterior"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Next workspace"
 msgstr "Área de trabalho _seguinte"
 
@@ -918,63 +935,63 @@ msgid "Frame style"
 msgstr "Tema"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Sticky"
 msgstr "_Fixa"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "S_haded"
 msgstr "_Protegida"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Ignored"
 msgstr "_Desconsiderada"
 
 # ../lisp/custom.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Focusable"
 msgstr "_Focalizável"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "In _window list"
 msgstr "Na lista de _janelas"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "In _task list"
 msgstr "Na lista de _tarefas"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Windows"
 msgstr "_Janelas"
 
 # ../lisp/menus.jl
 # ../lisp/custom.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "Work_spaces"
 msgstr "Áreas de _Trabalho"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Programs"
 msgstr "_Programas"
 
 # ../lisp/menus.jl
-#. ../lisp/menus.jl
 #
+#. ../lisp/menus.jl
 msgid "_Customize"
 msgstr "_Personalizar"
 
@@ -988,7 +1005,7 @@ msgstr "_Notícias"
 
 #. ../lisp/menus.jl
 msgid "_WWW page"
-msgstr "Página da _WWW"
+msgstr "Página _WWW"
 
 #. ../lisp/menus.jl
 msgid "_Manual"
@@ -1020,56 +1037,56 @@ msgid "Display the applications menu."
 msgstr "Mostrar o menu de aplicativos."
 
 # ../lisp/slide-window.jl
-#. ../lisp/move-cursor.jl
 #
+#. ../lisp/move-cursor.jl
 msgid "Number of pixels to move pointer in `move-cursor-' commands."
 msgstr "Número de pixels para mover o ponteiro em comandos `move-cursor-'."
 
 # ../lisp/slide-window.jl
-#. ../lisp/move-cursor.jl
 #
+#. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the left."
 msgstr "Mover o cursor `move-cursor-increment' pixels para a esquerda."
 
 # ../lisp/slide-window.jl
-#. ../lisp/move-cursor.jl
 #
+#. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the right."
 msgstr "Mover o cursor `move-cursor-increment' pixels para a direita."
 
 # ../lisp/slide-window.jl
-#. ../lisp/move-cursor.jl
 #
+#. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels upwards."
 msgstr "Mover o cursor `move-cursor-increment' pixels para cima."
 
 # ../lisp/slide-window.jl
-#. ../lisp/move-cursor.jl
 #
+#. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels downwards."
 msgstr "Mover o cursor `move-cursor-increment' pixels para baixo."
 
 # ../lisp/workspace.jl
-#. ../lisp/move-cursor.jl
 #
+#. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel to the left."
-msgstr "Mover o cursor um pixel para a esquerda."
+msgstr "Mover o cursor 1 pixel para a esquerda."
 
 # ../lisp/workspace.jl
-#. ../lisp/move-cursor.jl
 #
+#. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel to the right."
-msgstr "Mover o cursor um pixel para a direita."
+msgstr "Mover o cursor 1 pixel para a direita."
 
 # ../lisp/slide-window.jl
-#. ../lisp/move-cursor.jl
 #
+#. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel upwards."
 msgstr "Mover o cursor 1 pixel para cima."
 
 # ../lisp/slide-window.jl
-#. ../lisp/move-cursor.jl
 #
+#. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel downwards."
 msgstr "Mover o cursor 1 pixel para baixo."
 
@@ -1083,20 +1100,20 @@ msgid "How windows being resized are animated: \\w"
 msgstr "Como as janelas sendo redimensionadas são animadas: \\w"
 
 # ../lisp/auto-raise.jl
-#. ../lisp/move-resize.jl
 #
+#. ../lisp/move-resize.jl
 msgid "Raise windows when they are moved or resized."
 msgstr "Realçar janelas sendo movidas ou redimensionadas."
 
 # ../lisp/move-resize.jl
-#. ../lisp/move-resize.jl
 #
+#. ../lisp/move-resize.jl
 msgid "Show current position of windows while moving."
 msgstr "Exibir a posição atual das janelas ao movê-las."
 
 # ../lisp/move-resize.jl
-#. ../lisp/move-resize.jl
 #
+#. ../lisp/move-resize.jl
 msgid "Show current dimensions of windows while resizing."
 msgstr "Exibir as dimensões atuais das janelas ao redimensioná-las."
 
@@ -1107,7 +1124,8 @@ msgstr "Como escolher as bordas das janelas ao redimensioná-las: \\w"
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
 msgid "Snap window position to edges of other windows while moving."
-msgstr "Alinhar a posição da janela com as bordas das outras janelas ao movê-la."
+msgstr ""
+"Alinhar a posição da janela com as bordas das outras janelas ao movê-la."
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
@@ -1146,13 +1164,16 @@ msgstr "Redimensionar interativamente a janela usando o mouse."
 #. ../lisp/move-resize.jl
 msgid ""
 "Wait for the user to select a window, then interactively move that window."
-msgstr "Esperar o usuário escolher a janela para, então, movê-la interativamente."
+msgstr ""
+"Esperar o usuário escolher a janela para, então, movê-la interativamente."
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
 msgid ""
 "Wait for the user to select a window, then interactively resize that window."
-msgstr "Esperar o usuário escolher a janela para, então, redimensioná-la interativamente."
+msgstr ""
+"Esperar o usuário escolher a janela para, então, redimensioná-la "
+"interativamente."
 
 #. ../lisp/nokogiri-sawfish.jl
 msgid "Show options suitable for \\w users."
@@ -1184,7 +1205,9 @@ msgstr "Ignorar disposição de janelas especificada pelo programa."
 msgid ""
 "The program used to play audio samples. If unset, built-in support for ESD "
 "is used."
-msgstr "Programa para execução de amostras de áudio. Se não configurado, utilizar o suporte a ESD embutido."
+msgstr ""
+"Programa para execução de amostras de áudio. Se não configurado, utilizar o "
+"suporte a ESD embutido."
 
 # ../lisp/keymaps.jl
 #. ../lisp/prompt.jl
@@ -1282,7 +1305,8 @@ msgid ""
 "Raise the window that received the current event and any transients it has,\n"
 "then replay any pointer events that invoked the command."
 msgstr ""
-"Realçar a janela que recebeu o evento atual e toda a transiente que ela possuir,\n"
+"Realçar a janela que recebeu o evento atual e toda a transiente que ela "
+"possuir,\n"
 "e repetir as ações do mouse que chamaram o comando."
 
 # ../lisp/stacking.jl
@@ -1331,7 +1355,8 @@ msgstr ""
 #. ../lisp/shading.jl
 msgid ""
 "Toggle the shaded (only the title bar is displayed) state of the window."
-msgstr "Alternar o estado de escurecimento (visível só a barra de título) da janela."
+msgstr ""
+"Alternar o estado de escurecimento (visível só a barra de título) da janela."
 
 #. ../lisp/size-window.jl
 msgid ""
@@ -1385,12 +1410,14 @@ msgstr "Mover a janela `slide-window-increment' pixels para baixo."
 # ../lisp/slide-window.jl
 #. ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels to the left."
-msgstr "Mover o grupo de janelas `slide-window-increment' pixels para a esquerda."
+msgstr ""
+"Mover o grupo de janelas `slide-window-increment' pixels para a esquerda."
 
 # ../lisp/slide-window.jl
 #. ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels to the right."
-msgstr "Mover o grupo de janelas `slide-window-increment' pixels para a direita."
+msgstr ""
+"Mover o grupo de janelas `slide-window-increment' pixels para a direita."
 
 # ../lisp/slide-window.jl
 #. ../lisp/slide-window.jl
@@ -1407,7 +1434,9 @@ msgstr "Mover o grupo de janelas `slide-window-increment' pixels para cima."
 msgid ""
 "Try to leave at least this many pixels between window edges in "
 "first/best-fit."
-msgstr "Na primeira seleção/melhor ajuste, deixar no mínimo este número de pixels entre as bordas das janelas."
+msgstr ""
+"Na primeira seleção/melhor ajuste, deixar no mínimo este número de pixels "
+"entre as bordas das janelas."
 
 # ../lisp/stacking.jl
 #. ../lisp/stacking.jl
@@ -1417,12 +1446,15 @@ msgstr "Manter as janelas transientes empilhadas acima: \\w"
 # ../lisp/stacking.jl
 #. ../lisp/stacking.jl
 msgid "Raise the window to its highest allowed position in the stacking order."
-msgstr "Elevar a janela à sua posição mais alta permissível na ordem de empilhamento."
+msgstr ""
+"Elevar a janela à sua posição mais alta permissível na ordem de empilhamento."
 
 # ../lisp/stacking.jl
 #. ../lisp/stacking.jl
 msgid "Lower the window to its lowest allowed position in the stacking order."
-msgstr "Baixar a janela à sua posição mais baixa permissível na ordem de empilhamento."
+msgstr ""
+"Baixar a janela à sua posição mais baixa permissível na ordem de "
+"empilhamento."
 
 # ../lisp/stacking.jl
 #. ../lisp/stacking.jl
@@ -1445,7 +1477,9 @@ msgstr "Subir a janela ao nível de empilhamento logo acima do nível atual."
 
 #. ../lisp/stagger-placement.jl
 msgid "Distance between successive placements in `stagger' placement mode."
-msgstr "Distância entre as posições consecutivas no modo de posicionamento `escalonado'."
+msgstr ""
+"Distância entre as posições consecutivas no modo de posicionamento "
+"`escalonado'."
 
 # ../lisp/tooltips.jl
 #. ../lisp/tooltips.jl
@@ -1653,7 +1687,8 @@ msgstr "Ao passar a primeira ou a última área de trabalho: \\w"
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
 msgid "When passing the first or last workspace, while moving a window: \\w"
-msgstr "Ao passar a primeira ou a última área de trabalho, ao mover uma janela: \\w"
+msgstr ""
+"Ao passar a primeira ou a última área de trabalho, ao mover uma janela: \\w"
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
@@ -1672,7 +1707,8 @@ msgstr "As janelas são restauradas nesta área de trabalho."
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
 msgid "Windows uniconify to the current workspace when they are selected."
-msgstr "As janelas são restauradas nesta área de trabalho ao serem selecionadas."
+msgstr ""
+"As janelas são restauradas nesta área de trabalho ao serem selecionadas."
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
@@ -1687,7 +1723,9 @@ msgstr "As janelas têm o foco ajustado ao serem restauradas."
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
 msgid "Dialogs appear on the same workspace as their application."
-msgstr "As janelas de diálogo aparecem na mesma àrea de trabalho dos seus aplicativos."
+msgstr ""
+"As janelas de diálogo aparecem na mesma àrea de trabalho dos seus "
+"aplicativos."
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
@@ -1804,27 +1842,31 @@ msgstr "Copiar a janela para a área de trabalho anterior."
 #. ../lisp/workspace.jl
 msgid ""
 "Create a new workspace at the end of the list, and move the window to it."
-msgstr "Criar uma nova área de trabalho no fim da lista e mover a janela para lá."
+msgstr ""
+"Criar uma nova área de trabalho no fim da lista e mover a janela para lá."
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
 msgid ""
 "Create a new workspace at the start of the list, and move the window to it."
-msgstr "Criar uma nova área de trabalho no início da lista e mover a janela para lá."
+msgstr ""
+"Criar uma nova área de trabalho no início da lista e mover a janela para lá."
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
 msgid ""
 "Delete the current workspace. Its member windows are relocated to the next\n"
 "workspace."
-msgstr "Eliminar esta àrea de trabalho. Suas janelas são relocadas na seguinte."
+msgstr ""
+"Eliminar esta àrea de trabalho. Suas janelas são relocadas na seguinte."
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
 msgid ""
 "Delete the current workspace. Its member windows are relocated to the\n"
 "previous workspace."
-msgstr "Eliminar esta área de trabalho. Suas janelas são relocadas na anterior."
+msgstr ""
+"Eliminar esta área de trabalho. Suas janelas são relocadas na anterior."
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
@@ -1903,12 +1945,15 @@ msgstr "Realçar as janelas enquanto temporáriamente selecionadas ao alternar."
 # ../lisp/x-cycle.jl
 #. ../lisp/x-cycle.jl
 msgid "Warp the mouse pointer to windows as they're temporarily selected."
-msgstr "Arrastar o mouse até as janelas enquanto estão temporariamente selecionadas."
+msgstr ""
+"Arrastar o mouse até as janelas enquanto estão temporariamente selecionadas."
 
 # ../lisp/x-cycle.jl
 #. ../lisp/x-cycle.jl
 msgid "Focus windows when they're temporarily selected during cycling."
-msgstr "Ajustar foco das janelas quando temporariamente selecionadas durante a alternância."
+msgstr ""
+"Ajustar foco das janelas quando temporariamente selecionadas durante a "
+"alternância."
 
 # ../lisp/x-cycle.jl
 #. ../lisp/x-cycle.jl
@@ -2255,7 +2300,8 @@ msgstr "Cor de `Para' de molduras ativas em estilo `gradiente'."
 # ../themes/gradient/theme.jl
 #. ../themes/gradient/theme.jl
 msgid "Use less memory when creating gradients, possibly affecting quality."
-msgstr "Usar menos memória ao criar gradientes, com possível prejuízo da qualidade."
+msgstr ""
+"Usar menos memória ao criar gradientes, com possível prejuízo da qualidade."
 
 # ../themes/mono/theme.jl
 #. ../themes/mono/theme.jl
@@ -2265,7 +2311,8 @@ msgstr "Tema Monocromático"
 # ../themes/simple/theme.jl
 #. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
-msgstr "Cor de molduras inativas (se não configurada usar cor de fundo do GTK+)."
+msgstr ""
+"Cor de molduras inativas (se não configurada usar cor de fundo do GTK+)."
 
 # ../themes/mono/theme.jl
 #. ../themes/mono/theme.jl
@@ -2553,317 +2600,331 @@ msgid "_Themes"
 msgstr "_Temas"
 
 # ../src/sawmill-ui.jl
-#~ msgid "Grab key..."
-#~ msgstr "Capturar tecla..."
+msgid "Grab key..."
+msgstr "Capturar tecla..."
 
 # ../src/sawmill-ui.jl
-#~ msgid "Keymaps"
-#~ msgstr "Mapas de teclas"
+msgid "Keymaps"
+msgstr "Mapas de teclas"
 
 # ../src/sawmill-ui.jl
-#~ msgid "Try"
-#~ msgstr "Experimentar"
+msgid "Try"
+msgstr "Experimentar"
 
 # ../src/sawmill-ui.jl
-#~ msgid "Refresh"
-#~ msgstr "Recarregar"
+msgid "Refresh"
+msgstr "Recarregar"
 
 # ../lisp/custom.jl
-#~ msgid "List of features to load before running customize."
-#~ msgstr "Lista de recursos a carregar antes de rodar a personalização."
+msgid "List of features to load before running customize."
+msgstr "Lista de recursos a carregar antes de rodar a personalização."
 
 # ../lisp/custom.jl
-#~ msgid "File used to store user's configuration settings."
-#~ msgstr "Arquivo usado para armazenar as opções de configuração do usuário."
+msgid "File used to store user's configuration settings."
+msgstr "Arquivo usado para armazenar as opções de configuração do usuário."
 
 # ../lisp/custom.jl
-#~ msgid "Iconifying"
-#~ msgstr "Minimizar"
+msgid "Iconifying"
+msgstr "Minimizar"
 
 # ../lisp/customize.jl
-#~ msgid ""
-#~ "Location of the program implementing sawmill's configuration interface."
-#~ msgstr "Local do programa de implementação da interface de configuração do sawmill."
+msgid "Location of the program implementing sawmill's configuration interface."
+msgstr ""
+"Local do programa de implementação da interface de configuração do sawmill."
 
 # ../lisp/customize.jl
-#~ msgid ""
-#~ "Sawmill %s (rep %s)\n"
-#~ "\n"
-#~ "Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>\n"
-#~ "\n"
-#~ "This is free software -- you are welcome to redistribute it and/or modify it "
-#~ "under the terms of the GNU General Public License as published by the Free "
-#~ "Software Foundation; either version 2, or (at your option) any later "
-#~ "version.\n"
-#~ "\n"
-#~ "Sawmill is distributed in the hope that it will be useful, but WITHOUT ANY "
-#~ "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-#~ "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-#~ "details.\n"
-#~ "\n"
-#~ "Visit the Sawmill homepage at http://sawmill.sourceforge.net/"
-#~ msgstr ""
-#~ "Sawmill %s (rep %s)\n"
-#~ "\n"
-#~ "Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>\n"
-#~ "\n"
-#~ "Este é um programa livre -- sinta-se à vontade para redistribuí-lo e/ou\n"
-#~ "modificá-lo conforme os termos da Licença Pública Geral GNU publicada \n"
-#~ "pela Free Software Foundation, em sua versão 2 ou, a seu critério, qualquer\n"
-#~ "versão posterior.\n"
-#~ "\n"
-#~ "O Sawmill é distribuído na esperança de que possa ser útil, mas SEM NENHUMA \n"
-#~ "GARANTIA; nem mesmo a garantia implícita de COMERCIABILIDADE ou UTILIDADE\n"
-#~ "PARA QUALQUER FINALIDADE EM PARTICULAR. Para mais detalhes, consulte a \n"
-#~ "Licença Pública Geral GNU.\n"
-#~ "\n"
-#~ "Visite a homepage do Sawmill em http://sawmill.sourceforge.net/"
+msgid ""
+"Sawmill %s (rep %s)\n"
+"\n"
+"Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>\n"
+"\n"
+"This is free software -- you are welcome to redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 2, or (at your option) any later "
+"version.\n"
+"\n"
+"Sawmill is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details.\n"
+"\n"
+"Visit the Sawmill homepage at http://sawmill.sourceforge.net/"
+msgstr ""
+"Sawmill %s (rep %s)\n"
+"\n"
+"Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>\n"
+"\n"
+"Este é um programa livre -- sinta-se à vontade para redistribuí-lo e/ou\n"
+"modificá-lo conforme os termos da Licença Pública Geral GNU publicada \n"
+"pela Free Software Foundation, em sua versão 2 ou, a seu critério, qualquer\n"
+"versão posterior.\n"
+"\n"
+"O Sawmill é distribuído na esperança de que possa ser útil, mas SEM NENHUMA "
+"\n"
+"GARANTIA; nem mesmo a garantia implícita de COMERCIABILIDADE ou UTILIDADE\n"
+"PARA QUALQUER FINALIDADE EM PARTICULAR. Para mais detalhes, consulte a \n"
+"Licença Pública Geral GNU.\n"
+"\n"
+"Visite a homepage do Sawmill em http://sawmill.sourceforge.net/"
 
 # ../lisp/edge-flip.jl
-#~ msgid "What hitting the screen edge actually flips."
-#~ msgstr "O que efetivamente muda ao tocar a borda da tela."
+msgid "What hitting the screen edge actually flips."
+msgstr "O que efetivamente muda ao tocar a borda da tela."
 
 # ../lisp/edge-flip.jl
-#~ msgid ""
-#~ "Number of milliseconds to wait after pointer hits screen edge before\n"
-#~ "flipping."
-#~ msgstr ""
-#~ "Espera em milisegundos para mudar após o mouse tocar a borda\n"
-#~ "da tela."
+msgid ""
+"Number of milliseconds to wait after pointer hits screen edge before\n"
+"flipping."
+msgstr ""
+"Espera em milissegundos para mudar após o mouse tocar a borda\n"
+"da tela."
 
 # ../lisp/frames.jl
-#~ msgid ""
-#~ "Alist of (CLASS . ALIST) associating classes of frame parts with state\n"
-#~ "they inherit."
-#~ msgstr ""
-#~ "Lista de (CLASS . ALIST) associando as classes das partes das molduras com o estado\n"
-#~ "herdado por elas."
+msgid ""
+"Alist of (CLASS . ALIST) associating classes of frame parts with state\n"
+"they inherit."
+msgstr ""
+"Lista de (CLASS . ALIST) associando as classes das partes das molduras com o "
+"estado\n"
+"herdado por elas."
 
 # ../lisp/frames.jl
-#~ msgid ""
-#~ "Alist of (CLASS . ALIST) associating classes of frame parts with state\n"
-#~ "that overrides settings set elsewhere."
-#~ msgstr ""
-#~ "Lista de (CLASS . ALIST) associando as classes das peças das molduras com o\n"
-#~ "estado que sobrepõe as opções definidas em algum lugar."
+msgid ""
+"Alist of (CLASS . ALIST) associating classes of frame parts with state\n"
+"that overrides settings set elsewhere."
+msgstr ""
+"Lista de (CLASS . ALIST) associando as classes das peças das molduras com o\n"
+"estado que sobrepõe as opções definidas em algum lugar."
 
 # ../lisp/frames.jl
-#~ msgid ""
-#~ "Number of seconds between checking if theme files have been modified."
-#~ msgstr "Tempo de espera em segundos entre verificações de atualização dos arquivos de temas."
+msgid "Number of seconds between checking if theme files have been modified."
+msgstr ""
+"Tempo de espera em segundos entre verificações de atualização dos arquivos "
+"de temas."
 
 # ../lisp/frames.jl
-#~ msgid "Directory containing user-local themes."
-#~ msgstr "Diretório contendo os temas do usuário."
+msgid "Directory containing user-local themes."
+msgstr "Diretório contendo os temas do usuário."
 
 # ../lisp/frames.jl
-#~ msgid "Directory containing themes from the current sawmill version."
-#~ msgstr "Diretório contendo os temas desta versão do sawmill."
+msgid "Directory containing themes from the current sawmill version."
+msgstr "Diretório contendo os temas desta versão do sawmill."
 
 # ../lisp/frames.jl
-#~ msgid "Directory containing system-wide themes."
-#~ msgstr "Diretório contendo os temas do sistema."
+msgid "Directory containing system-wide themes."
+msgstr "Diretório contendo os temas do sistema."
 
 # ../lisp/frames.jl
-#~ msgid "List of directories from which themes may be loaded."
-#~ msgstr "Lista dos diretórios de onde os temas podem ser carregados."
+msgid "List of directories from which themes may be loaded."
+msgstr "Lista dos diretórios de onde os temas podem ser carregados."
 
 # ../lisp/frames.jl
-#~ msgid "List of (NAME . FUNCTION) defining all loaded frame styles."
-#~ msgstr "Lista de (NOME . FUNÇÃO) definindo todos os estilos de moldura carregados."
+msgid "List of (NAME . FUNCTION) defining all loaded frame styles."
+msgstr ""
+"Lista de (NOME . FUNÇÃO) definindo todos os estilos de moldura carregados."
 
 # ../lisp/frames.jl
-#~ msgid "When non-nil themes are assumed to be malicious."
-#~ msgstr "Quando temas não nulos são considerados prejudiciais."
+msgid "When non-nil themes are assumed to be malicious."
+msgstr "Quando temas não nulos são considerados prejudiciais."
 
 # ../lisp/gnome-menu.jl
-#~ msgid "Language code used when constructing GNOME menus."
-#~ msgstr "Código de linguagem usado para construir os menus do GNOME."
+msgid "Language code used when constructing GNOME menus."
+msgstr "Código de linguagem usado para construir os menus do GNOME."
 
 # ../lisp/gnome-menu.jl
-#~ msgid "List of directories to read GNOME menu entries from."
-#~ msgstr "Lista de diretórios de onde devem ser lidas as entradas dos menus do GNOME."
+msgid "List of directories to read GNOME menu entries from."
+msgstr ""
+"Lista de diretórios de onde devem ser lidas as entradas dos menus do GNOME."
 
 # ../lisp/keymap.jl
-#~ msgid ""
-#~ "When nil, the map-keymap function will only map over the first level of\n"
-#~ "keymaps, i.e. all prefix keys are ignored."
-#~ msgstr ""
-#~ "Quando nula, a função map-keymap mapeará somente o primeiro nível de mapas de\n"
-#~ "teclas, isto é, todas as teclas de prefixo são ignoradas."
+msgid ""
+"When nil, the map-keymap function will only map over the first level of\n"
+"keymaps, i.e. all prefix keys are ignored."
+msgstr ""
+"Quando nula, a função map-keymap mapeará somente o primeiro nível de mapas "
+"de\n"
+"teclas, isto é, todas as teclas de prefixo são ignoradas."
 
 # ../lisp/keymap.jl
-#~ msgid ""
-#~ "Map FUNCTION over all key bindings under the keymap or list of\n"
-#~ "keymaps KEYMAP. FUNCTION is called as (FUNCTION KEY), where KEY is a\n"
-#~ "cons cell (COMMAND . EVENT)."
-#~ msgstr ""
-#~ "Mapear FUNCTION para todas as teclas de atalho ou lista de mapas\n"
-#~ "de teclas KEYMAP. FUNCTION é chamada como (FUNCTION KEY), onde KEY é uma\n"
-#~ "célula constante (COMMAND . EVENT)."
+msgid ""
+"Map FUNCTION over all key bindings under the keymap or list of\n"
+"keymaps KEYMAP. FUNCTION is called as (FUNCTION KEY), where KEY is a\n"
+"cons cell (COMMAND . EVENT)."
+msgstr ""
+"Mapear FUNCTION para todas as teclas de atalho ou lista de mapas\n"
+"de teclas KEYMAP. FUNCTION é chamada como (FUNCTION KEY), onde KEY é uma\n"
+"célula constante (COMMAND . EVENT)."
 
 # ../lisp/keymap.jl
-#~ msgid ""
-#~ "Substitute all occurrences of the command OLDDEF for the command NEWDEF\n"
-#~ "in the keybindings under the keymap or list of keymaps KEYMAP."
-#~ msgstr ""
-#~ "Substituir todas as ocorrências do comando OLDDEF pelo comando NEWDEF nas\n"
-#~ "teclas de atalho sob o mapa de teclas ou lista de mapas de teclas KEYMAP"
+msgid ""
+"Substitute all occurrences of the command OLDDEF for the command NEWDEF\n"
+"in the keybindings under the keymap or list of keymaps KEYMAP."
+msgstr ""
+"Substituir todas as ocorrências do comando OLDDEF pelo comando NEWDEF nas\n"
+"teclas de atalho sob o mapa de teclas ou lista de mapas de teclas KEYMAP"
 
 # ../lisp/keymap.jl
-#~ msgid ""
-#~ "Substitute all occurrences of the event OLD-EV for the event NEW-EV\n"
-#~ "in the keybindings under the keymap or list of keymaps KEYMAP."
-#~ msgstr ""
-#~ "Substituir todas as ocorrências do evento OLD-EV pelo evento NEW-EV nas\n"
-#~ "teclas de atalho sob o mapa de teclas ou lista de mapaas de teclas KEYMAP."
+msgid ""
+"Substitute all occurrences of the event OLD-EV for the event NEW-EV\n"
+"in the keybindings under the keymap or list of keymaps KEYMAP."
+msgstr ""
+"Substituir todas as ocorrências do evento OLD-EV pelo evento NEW-EV nas\n"
+"teclas de atalho sob o mapa de teclas ou lista de mapaas de teclas KEYMAP."
 
 # ../lisp/keymap.jl
-#~ msgid ""
-#~ "Install the list of BINDINGS in KEYMAP, assuming that KEYMAP is available\n"
-#~ "once FEATURE has been provided. If FEATURE has not yet been loaded, arrange\n"
-#~ "for the bindings to be installed if and when it is."
-#~ msgstr ""
-#~ "Instalar a lista de TECLAS DE ATALHO, considerando que o MAPA DE TECLAS está \n"
-#~ "disponível uma vez que o RECURSO foi providenciada. Se ainda não está disponível,\n"
-#~ "providenciar que os atalhos sejam instalados se e quando estiver."
+msgid ""
+"Install the list of BINDINGS in KEYMAP, assuming that KEYMAP is available\n"
+"once FEATURE has been provided. If FEATURE has not yet been loaded, arrange\n"
+"for the bindings to be installed if and when it is."
+msgstr ""
+"Instalar a lista de TECLAS DE ATALHO, considerando que o MAPA DE TECLAS está "
+"\n"
+"disponível uma vez que o RECURSO foi providenciada. Se ainda não está "
+"disponível,\n"
+"providenciar que os atalhos sejam instalados se e quando estiver."
 
 # ../lisp/menus.jl
-#~ msgid "Location of the program implementing sawmill's menu interface."
-#~ msgstr "Local do programa de implementação da interface de menus do sawmill."
+msgid "Location of the program implementing sawmill's menu interface."
+msgstr "Local do programa de implementação da interface de menus do sawmill."
 
 # ../lisp/menus.jl
-#~ msgid ""
-#~ "When non-nil, the user-interface program is never stopped. If a number,\n"
-#~ "then this is taken as the number of seconds to let the process hang around\n"
-#~ "unused before killing it."
-#~ msgstr ""
-#~ "Quando não nulo, o programa de interface do usuário não para. Se for um número,\n"
-#~ "ele é considerado como o tempo em segundos para matar um processo ocioso."
+msgid ""
+"When non-nil, the user-interface program is never stopped. If a number,\n"
+"then this is taken as the number of seconds to let the process hang around\n"
+"unused before killing it."
+msgstr ""
+"Quando não nulo, o programa de interface do usuário não para. Se for um "
+"número,\n"
+"ele é considerado como o tempo em segundos para matar um processo ocioso."
 
 # ../lisp/menus.jl
-#~ msgid "About..."
-#~ msgstr "Sobre..."
+msgid "About..."
+msgstr "Sobre..."
 
 # ../lisp/move-resize.jl
-#~ msgid "Choose resized window edges by border-part, not by mouse position."
-#~ msgstr "Selecionar bordas redimensionadas pela parte delas, não pela posição do mouse."
+msgid "Choose resized window edges by border-part, not by mouse position."
+msgstr ""
+"Selecionar bordas redimensionadas pela parte delas, não pela posição do "
+"mouse."
 
 # ../lisp/move-resize.jl
-#~ msgid "Allow other window edges to be grabbed while resizing interactively."
-#~ msgstr "Permitir que outras bordas sejam capturadas durante redimensionamento interativo."
+msgid "Allow other window edges to be grabbed while resizing interactively."
+msgstr ""
+"Permitir que outras bordas sejam capturadas durante redimensionamento "
+"interativo."
 
 # ../lisp/move-resize.jl
-#~ msgid "The method of drawing windows being moved interactively."
-#~ msgstr "Método de desenhar janelas sendo movidas interactivamente."
+msgid "The method of drawing windows being moved interactively."
+msgstr "Método de desenhar janelas sendo movidas interactivamente."
 
 # ../lisp/move-resize.jl
-#~ msgid "The method of drawing windows being resized interactively."
-#~ msgstr "Método de desenhar janelas sendo redimensionadas interactivamente."
+msgid "The method of drawing windows being resized interactively."
+msgstr "Método de desenhar janelas sendo redimensionadas interactivamente."
 
 # ../lisp/place-window.jl
-#~ msgid "Method of selecting the position of a freshly-mapped window."
-#~ msgstr "Método de seleção da posição de uma janela recém mapeada."
+msgid "Method of selecting the position of a freshly-mapped window."
+msgstr "Método de seleção da posição de uma janela recém mapeada."
 
 # ../lisp/place-window.jl
-#~ msgid ""
-#~ "Method of selecting the position of a freshly-mapped transient window."
-#~ msgstr "Método de seleção da posição de uma janela transiente recém mapeada."
+msgid "Method of selecting the position of a freshly-mapped transient window."
+msgstr "Método de seleção da posição de uma janela transiente recém mapeada."
 
 # ../lisp/sm-init.jl
-#~ msgid "List of window properties saved with the session."
-#~ msgstr "Lista das propriedades de janela salvas com a sessão."
+msgid "List of window properties saved with the session."
+msgstr "Lista das propriedades de janela salvas com a sessão."
 
 # ../lisp/sm-init.jl
-#~ msgid ""
-#~ "List of functions called when the state of each window is saved. Each\n"
-#~ "function should return a list of alist elements that will be saved in\n"
-#~ "the state file."
-#~ msgstr ""
-#~ "Lista das funções chamadas ao salvar o estado de cada janela. Cada função\n"
-#~ "deve retornar uma lista de elementos alist que serão salvos no arquivo de\n"
-#~ "estado."
+msgid ""
+"List of functions called when the state of each window is saved. Each\n"
+"function should return a list of alist elements that will be saved in\n"
+"the state file."
+msgstr ""
+"Lista das funções chamadas ao salvar o estado de cada janela. Cada função\n"
+"deve retornar uma lista de elementos alist que serão salvos no arquivo de\n"
+"estado."
 
 # ../lisp/sm-init.jl
-#~ msgid ""
-#~ "List of functions called when the state of a window is restored. Each is\n"
-#~ "called with args (WINDOW ALIST), where ALIST defines the state saved for\n"
-#~ "the window."
-#~ msgstr ""
-#~ "Lista das funções chamadas ao restaurar o estado de uma janela. Cada uma é\n"
-#~ "chamada com argumentos (WINDOW ALIST), onde ALIST define o estado salvo para\n"
-#~ "a janela."
+msgid ""
+"List of functions called when the state of a window is restored. Each is\n"
+"called with args (WINDOW ALIST), where ALIST defines the state saved for\n"
+"the window."
+msgstr ""
+"Lista das funções chamadas ao restaurar o estado de uma janela. Cada uma é\n"
+"chamada com argumentos (WINDOW ALIST), onde ALIST define o estado salvo "
+"para\n"
+"a janela."
 
 # ../lisp/sm-init.jl
-#~ msgid "Hook called after loading a saved session."
-#~ msgstr "Rotina chamada ao carregar uma sessão salva."
+msgid "Hook called after loading a saved session."
+msgstr "Rotina chamada ao carregar uma sessão salva."
 
 # ../lisp/smart-placement.jl
-#~ msgid ""
-#~ "Weighting between future usefulness and edge alignment in best-fit mode.\n"
-#~ "A value between 0 and 1023 inclusive."
-#~ msgstr ""
-#~ "Peso entre a futura utilidade e o alinhamento da borda no modo melhor posição.\n"
-#~ "Um valor entre 0 e 1023 inclusive."
+msgid ""
+"Weighting between future usefulness and edge alignment in best-fit mode.\n"
+"A value between 0 and 1023 inclusive."
+msgstr ""
+"Peso entre a futura utilidade e o alinhamento da borda no modo melhor "
+"posição.\n"
+"Um valor entre 0 e 1023 inclusive."
 
 # ../lisp/viewport.jl
-#~ msgid "Number of columns in each virtual workspace."
-#~ msgstr "Número de colunas para cada área de trabalho virtual."
+msgid "Number of columns in each virtual workspace."
+msgstr "Número de colunas para cada área de trabalho virtual."
 
 # ../lisp/viewport.jl
-#~ msgid "Number of rows in each virtual workspace."
-#~ msgstr "Número de linhas para cada área de trabalho virtual."
+msgid "Number of rows in each virtual workspace."
+msgstr "Número de linhas para cada área de trabalho virtual."
 
 # ../lisp/workspace.jl
-#~ msgid "The minimum number of workspaces that may exist."
-#~ msgstr "Número mínimo de áreas de trabalho que podem existir."
+msgid "The minimum number of workspaces that may exist."
+msgstr "Número mínimo de áreas de trabalho que podem existir."
 
 # ../lisp/workspace.jl
-#~ msgid "Empty workspaces before or after the active workspace aren't hidden."
-#~ msgstr "Não esconder áreas de trabalho vazias antes ou depois da área ativa."
+msgid "Empty workspaces before or after the active workspace aren't hidden."
+msgstr "Não esconder áreas de trabalho vazias antes ou depois da área ativa."
 
 # ../lisp/workspace.jl
-#~ msgid ""
-#~ "Iconifying a window that's a member of a group removes the whole group."
-#~ msgstr "Ao minimizar uma janela de um grupo, o grupo inteiro é removido."
+msgid "Iconifying a window that's a member of a group removes the whole group."
+msgstr "Ao minimizar uma janela de um grupo, o grupo inteiro é removido."
 
 # ../lisp/workspace.jl
-#~ msgid "List of workspace names."
-#~ msgstr "Lista de nomes de áreas de trabalho."
+msgid "List of workspace names."
+msgstr "Lista de nomes de áreas de trabalho."
 
 # ../lisp/workspace.jl
-#~ msgid "Activate workspace number SPACE (from zero)."
-#~ msgstr "Ativar área de trabalho número SPACE (a partir de zero)."
+msgid "Activate workspace number SPACE (from zero)."
+msgstr "Ativar área de trabalho número SPACE (a partir de zero)."
 
 # ../lisp/workspace.jl
-#~ msgid ""
-#~ "Move the window to the next workspace. If no next workspace exists, one\n"
-#~ "will be created."
-#~ msgstr ""
-#~ "Mover a janela para a próxima área de trabalho. Se esta não existir, uma área\n"
-#~ "nova será criada."
+msgid ""
+"Move the window to the next workspace. If no next workspace exists, one\n"
+"will be created."
+msgstr ""
+"Mover a janela para a próxima área de trabalho. Se esta não existir, uma "
+"área\n"
+"nova será criada."
 
 # ../lisp/workspace.jl
-#~ msgid ""
-#~ "Move the window to the previous workspace. If no such workspace exists, one\n"
-#~ "will be created."
-#~ msgstr ""
-#~ "Mover a janela para a área de trabalho anterior. Se esta não existir, uma àrea\n"
-#~ "nova será criada."
+msgid ""
+"Move the window to the previous workspace. If no such workspace exists, one\n"
+"will be created."
+msgstr ""
+"Mover a janela para a área de trabalho anterior. Se esta não existir, uma "
+"àrea\n"
+"nova será criada."
 
 # ../themes/mono/theme.jl
-#~ msgid "Use the GTK+ background color for inactive frames."
-#~ msgstr "Usar a cor de fundo da GTK+ para as molduras inativas."
+msgid "Use the GTK+ background color for inactive frames."
+msgstr "Usar a cor de fundo da GTK+ para as molduras inativas."
 
 # ../themes/mono/theme.jl
-#~ msgid "Color of inactive frames. (When the above option is unset.)"
-#~ msgstr "Cor das molduras inativas (quando a opção acima não está configurada)."
+msgid "Color of inactive frames. (When the above option is unset.)"
+msgstr "Cor das molduras inativas (quando a opção acima não está configurada)."
 
 # ../themes/smaker/theme.jl
-#~ msgid "SMaker Frame"
-#~ msgstr "Moldura SMaker"
+msgid "SMaker Frame"
+msgstr "Moldura SMaker"
 
 # ../lisp/frames.jl
-#~ msgid "Highlight window borders even when the window is unfocused."
-#~ msgstr "Iluminar as bordas da janela, mesmo se ela não estiver focalizada."
-
+msgid "Highlight window borders even when the window is unfocused."
+msgstr "Iluminar as bordas da janela, mesmo se ela não estiver focalizada."
