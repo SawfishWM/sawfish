@@ -22,6 +22,7 @@
 (provide 'sawmill)
 
 ;; load standard libraries
+(require 'custom)
 (require 'functions)
 (require 'cursors)
 (require 'focus)
@@ -40,6 +41,9 @@
       (progn
 	;; First the site-wide stuff
 	(load-all "site-init")
+
+	;; then the customized options
+	(custom-load-user-file)
 
 	;; then the users rep configuration, or site-wide defaults
 	(or (load (concat (user-home-directory) ".reprc") t t)
