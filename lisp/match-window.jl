@@ -65,14 +65,11 @@
     (ungrouped boolean)
     (unique-name boolean)
     (auto-gravity boolean)
-    (group symbol ,(lambda ()
-		     (delete-if-not symbolp (window-group-ids))))
-    (place-mode symbol ,(lambda ()
-			  place-window-modes))
-    (frame-type symbol ,(lambda ()
-			  (mapcar car match-window-types)))
-    (frame-style symbol ,(lambda ()
-			   (find-all-frame-styles t)))
+    (group symbol ,(lambda () (delete-if-not symbolp (window-group-ids))))
+    (place-mode symbol ,(lambda () placement-modes))
+    (focus-mode symbol ,(lambda () focus-modes))
+    (frame-type symbol ,(lambda () (mapcar car match-window-types)))
+    (frame-style symbol ,(lambda () (find-all-frame-styles t)))
     (position pair)
     (size pair)
     (workspace number)
@@ -337,4 +334,8 @@
   (put 'unique-name 'match-window-setter
        (lambda (w prop value)
 	 (when value
-	   (uniquify-window-name w)))))
+	   (uniquify-window-name w))))
+
+  (put 'focus-mode 'match-window-setter
+       (lambda (w prop value)
+	 (set-focus-mode w value))))
