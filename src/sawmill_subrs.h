@@ -235,6 +235,7 @@ extern repv Qsawmill_directory, Qsawmill_lisp_lib_directory,
     Qsawmill_site_lisp_directory, Qsawmill_exec_directory;
 extern repv Qwindow_error, Qinvalid_pos, Qbad_event_desc;
 extern repv Qbefore_exit_hook;
+extern bool batch_mode_p (void);
 extern int main (int argc, char **argv);
 extern repv Fquit (void);
 extern repv Frestart (void);
