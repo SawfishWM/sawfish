@@ -30,6 +30,7 @@
 (autoload 'popup-menu "menus")
 (autoload 'popup-window-menu "menus" t)
 (autoload 'popup-root-menu "menus" t)
+(autoload 'popup-apps-menu "menus" t)
 (autoload 'customize "customize" t)
 (setq custom-required (cons 'auto-raise custom-required))
 (autoload 'maximize-window "maximize" t)
@@ -54,4 +55,5 @@
 (autoload 'cycle-windows "x-cycle" t)
 (autoload 'place-window-first-fit "smart-placement")
 (autoload 'place-window-best-fit "smart-placement")
+(setq custom-required (cons 'menu custom-required))
 ;;; ::autoload-end::
