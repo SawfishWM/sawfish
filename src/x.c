@@ -42,6 +42,9 @@
    
 #include "sawmill.h"
 #include <X11/Xresource.h>
+#include <X11/extensions/Xdbe.h>
+
+static int have_dbe;
 
 /* An allocated x-gc */
 typedef struct lisp_x_gc {
@@ -53,7 +56,7 @@ typedef struct lisp_x_gc {
 
 #define X_XGCP(v)	rep_CELL16_TYPEP(v, x_gc_type)
 #define X_GCP(v)	(X_XGCP(v) && VX_GC(v)->gc != 0)
-#define X_VALID_GCP(v,id) (X_XGCP(v) && VX_GC(v)->gc != 0 && VX_GC(v)->id == id)
+#define X_VALID_GCP(v,id) X_GCP(v)
 #define VX_GC(v)	((Lisp_X_GC *)rep_PTR(v))
 
 /* An allocated x-window */
@@ -61,6 +64,7 @@ typedef struct lisp_x_window {
     repv car;
     struct lisp_x_window *next;
     Window id;
+    XdbeBackBuffer back_buffer;
     repv event_handler;
 } Lisp_X_Window;
 
@@ -90,7 +94,12 @@ window_from_arg (repv arg)
     if (rep_INTEGERP (arg))
 	return rep_get_long_uint (arg);
     else if (X_WINDOWP (arg))
-	return VX_WINDOW(arg)->id;
+    {
+	if (VX_WINDOW(arg)->back_buffer)
+	    return VX_WINDOW(arg)->back_buffer;
+	else
+	    return VX_WINDOW(arg)->id;
+    }
     else if (WINDOWP(arg) && VWIN(arg)->id != 0)
 	return VWIN(arg)->id;
     else if (PARTP(arg) && VPART(arg)->id != 0)
@@ -350,6 +359,7 @@ window is created unmapped.
     w->next = x_window_list;
     x_window_list = w;
     w->id = id;
+    w->back_buffer = 0;
     w->event_handler = ev;
 
     register_event_handler (id, x_window_event_handler);
@@ -464,6 +474,38 @@ Return t if ARG is a X-WINDOW object.
 ::end:: */
 {
     return X_WINDOWP(window) ? Qt : Qnil;
+}
+
+DEFUN("x-window-back-buffer", Fx_window_back_buffer,
+      Sx_window_back_buffer, (repv win), rep_Subr1)
+{
+    rep_DECLARE1(win, X_WINDOWP);
+
+    if (VX_WINDOW(win)->back_buffer == 0 && have_dbe)
+    {
+	VX_WINDOW(win)->back_buffer = (XdbeAllocateBackBufferName
+				       (dpy, VX_WINDOW(win)->id,
+					XdbeBackground));
+    }
+
+    if (VX_WINDOW(win)->back_buffer == 0)
+	return Qnil;
+    else
+	return rep_MAKE_INT (VX_WINDOW(win)->back_buffer);
+}
+
+DEFUN("x-window-swap-buffers", Fx_window_swap_buffers,
+      Sx_window_swap_buffers, (repv win), rep_Subr1)
+{
+    rep_DECLARE1(win, X_WINDOWP);
+    if (VX_WINDOW(win)->back_buffer != 0)
+    {
+	XdbeSwapInfo info;
+	info.swap_window = VX_WINDOW(win)->id;
+	info.swap_action = XdbeBackground;
+	XdbeSwapBuffers (dpy, &info, 1);
+    }
+    return Qt;
 }
 
 
@@ -908,6 +950,8 @@ rep_dl_init (void)
     rep_ADD_SUBR(Sx_destroy_window);
     rep_ADD_SUBR(Sx_window_p);
     rep_ADD_SUBR(Sx_window_id);
+    rep_ADD_SUBR(Sx_window_back_buffer);
+    rep_ADD_SUBR(Sx_window_swap_buffers);
 
     rep_ADD_SUBR(Sx_clear_window);
     rep_ADD_SUBR(Sx_draw_string);
@@ -927,6 +971,13 @@ rep_dl_init (void)
     rep_INTERN(expose);
     rep_INTERN(convex);
     rep_INTERN(non_convex);
+
+    if (dpy != 0)
+    {
+	int major, minor;
+	if (XdbeQueryExtension (dpy, &major, &minor))
+	    have_dbe = TRUE;
+    }
 
     return Qx;
 }
