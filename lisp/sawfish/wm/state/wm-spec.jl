@@ -159,6 +159,18 @@
   (define last-workarea nil)
   (define last-showing-desktop nil)
 
+  (define (update-window-workspace-hints w #!key (limits (workspace-limits)))
+    (let ((vec (if (window-sticky-p/workspace w)
+		   (vector #xffffffff)
+		 (let ((space (or (window-get w 'swapped-in)
+				  (car (window-workspaces w)))))
+		   (and space (vector (- space (car limits))))))))
+      (unless (equal vec (window-get w 'wm-spec/last-workspace))
+	(if vec
+	    (set-x-property w '_NET_WM_DESKTOP vec 'CARDINAL 32)
+	  (delete-x-property w '_NET_WM_DESTOP))
+	(window-put w 'wm-spec/last-workspace vec))))
+
   (define (update-workspace-hints)
     (let* ((limits (workspace-limits))
 	   (port (screen-viewport))
@@ -219,16 +231,7 @@
 	  (setq last-showing-desktop showing-desktop)))
 
       (define (set-window-hints w)
-	(let ((vec (if (window-sticky-p/workspace w)
-		       (vector #xffffffff)
-		     (let ((space (or (window-get w 'swapped-in)
-				      (car (window-workspaces w)))))
-		       (and space (vector (- space (car limits))))))))
-	  (unless (equal vec (window-get w 'wm-spec/last-workspace))
-	    (if vec
-		(set-x-property w '_NET_WM_DESKTOP vec 'CARDINAL 32)
-	      (delete-x-property w '_NET_WM_DESTOP))
-	    (window-put w 'wm-spec/last-workspace vec))))
+	(update-window-workspace-hints w #:limits limits))
 
       ;; calculate workareas
       (do ((i 0 (1+ i)))
@@ -628,6 +631,7 @@
     (call-after-state-changed '(sticky shaded maximized stacking
 				window-list-skip task-list-skip)
 			      update-client-state)
+    (call-after-state-changed 'sticky update-window-workspace-hints)
 
     (add-hook 'focus-in-hook update-focus-state)
     (add-hook 'focus-out-hook update-focus-state)
