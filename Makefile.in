@@ -56,7 +56,9 @@ install : all installdirs
 	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(sawfishdir)/$(version) $(DESTDIR)$(bindir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs \
+	  $(DESTDIR)$(sawfishdir)/$(version) \
+	  $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir)
 
 uninstall :
 	set -e; for dir in $(SUBDIRS); do \
