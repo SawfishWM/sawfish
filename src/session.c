@@ -38,12 +38,17 @@
 #endif
    
 #include "sawmill.h"
-#include <X11/SM/SMlib.h>
+
+#ifdef HAVE_X11_SM_SMLIB_H
+# include <X11/SM/SMlib.h>
+#endif
 
 DEFSYM(sm_save_yourself, "sm-save-yourself");
 
+#ifdef HAVE_X11_SM_SMLIB_H
 static IceConn ice_conn;
 static SmcConn sm_conn;
+#endif
 
 
 /* Lisp functions */
@@ -57,6 +62,7 @@ Sets the session manager property called PROPERTY-NAME (a string) to
 VALUE. VALUE may be either an integer, a string, or a list of strings.
 ::end:: */
 {
+#ifdef HAVE_X11_SM_SMLIB_H
     SmProp sm_prop, *sm_ptr = &sm_prop;
     rep_DECLARE1 (prop, rep_STRINGP);
 
@@ -104,6 +110,7 @@ VALUE. VALUE may be either an integer, a string, or a list of strings.
     else
 	return rep_signal_arg_error (value, 2);
     SmcSetProperties (sm_conn, 1, &sm_ptr);
+#endif
     return Qt;
 }
 
@@ -115,6 +122,7 @@ sm-delete-property PROPERTY-NAME
 Deletes the session manager property called PROPERTY-NAME (a string).
 ::end:: */
 {
+#ifdef HAVE_X11_SM_SMLIB_H
     char *name;
     rep_DECLARE1(prop, rep_STRING);
 
@@ -123,11 +131,14 @@ Deletes the session manager property called PROPERTY-NAME (a string).
 
     name = rep_STR(prop);
     SmcDeleteProperties (sm_conn, 1, &name);
+#endif
     return Qt;
 }
 
 
 /* SM callbacks */
+
+#ifdef HAVE_X11_SM_SMLIB_H
 
 static void
 save_yourself_2 (SmcConn conn, SmPointer data)
@@ -159,8 +170,12 @@ shutdown_cancelled (SmcConn conn, SmPointer data)
 {
 }
 
+#endif /* HAVE_X11_SM_SMLIB_H */
+
 
 /* ICE hooks */
+
+#ifdef HAVE_X11_SM_SMLIB_H
 
 static void
 ICE_input_ready (int fd)
@@ -178,11 +193,14 @@ ICE_watch_callback (IceConn ice, IcePointer client_data,
 	rep_deregister_input_fd (IceConnectionNumber(ice));
 }
 
+#endif /* HAVE_X11_SM_SMLIB_H */
+
 
 /* initialisation */
 
 DEFUN("sm-connect", Fsm_connect, Ssm_connect, (repv id), rep_Subr1)
 {
+#ifdef HAVE_X11_SM_SMLIB_H
     SmcCallbacks call;
     char *ret_id;
     char err[256];
@@ -213,14 +231,19 @@ DEFUN("sm-connect", Fsm_connect, Ssm_connect, (repv id), rep_Subr1)
 			rep_list_2 (rep_string_dup ("sm-open-connection"),
 				    rep_string_dup (err)));
     }
+#else
+    return Qnil;
+#endif
 }
 
 DEFUN("sm-disconnect", Fsm_disconnect, Ssm_disconnect, (void), rep_Subr0)
 {
+#ifdef HAVE_X11_SM_SMLIB_H
     if (sm_conn != 0)
 	SmcCloseConnection (sm_conn, 0, 0);
     sm_conn = 0;
     ice_conn = 0;
+#endif
     return Qt;
 }
 
