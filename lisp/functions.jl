@@ -65,6 +65,16 @@ is the list of windows to search. Returns nil if no such window is found."
 	      (throw 'foo w))) (or lst (managed-windows)))
     nil))
 
+(defun get-window-by-name-re (name &optional lst)
+  "Find a window object whose window-name matches the regexp NAME.
+If LST is non-nil, then it is the list of windows to search. Returns nil
+if no such window is found."
+  (catch 'foo
+    (mapc (lambda (w)
+	    (when (string-match name (window-name w))
+	      (throw 'foo w))) (or lst (managed-windows)))
+    nil))
+
 (defmacro map-windows (fun)
   "Map the single-parameter function FUN over all existing windows."
   `(mapc ,fun (managed-windows)))
