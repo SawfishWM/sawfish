@@ -55,4 +55,5 @@
 (autoload 'cycle-windows "x-cycle" t)
 (autoload 'place-window-first-fit "smart-placement")
 (autoload 'place-window-best-fit "smart-placement")
+(setq custom-required (cons 'edge-flip custom-required))
 ;;; ::autoload-end::

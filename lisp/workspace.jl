@@ -589,6 +589,7 @@ previous workspace."
     (ws-move-window window current-workspace was-focused)))
 
 (defun delete-empty-workspaces ()
+  "Delete any workspaces that don't contain any windows."
   (interactive)
   (let*
       ((limits (workspace-limits))
