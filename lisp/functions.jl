@@ -94,6 +94,23 @@
     out))
 
 
+;; property changed interface
+
+(let
+    (prop-changes)
+
+  (defun call-after-property-changed (prop fun)
+    (or (closurep fun) (error "Non-closure to call-after-property-changed"))
+    (setq prop-changes (cons (cons prop fun) prop-changes)))
+
+  (add-hook 'property-notify-hook
+	    #'(lambda (w atom state)
+		(mapc #'(lambda (cell)
+			  (when (eq (car cell) atom)
+			    (funcall (cdr cell) w atom state)))
+		      prop-changes))))
+
+
 ;; avoided (i.e. non-overlapped) windows
 
 (defun window-avoided-p (w)
