@@ -55,7 +55,7 @@ lib%.la : %.lo
 	rep compiler -f compile-batch $<
 
 gtk-style : gtk-style.c
-	$(CC) $(CPPFLAGS) $(GTK_CFLAGS) $(LDFLAGS) $(GTK_LIBS) $(LIBS) -o $@ $<
+	$(CC) $(CPPFLAGS) $(GTK_CFLAGS) $(LDFLAGS) -o $@ $< $(GTK_LIBS) $(LIBS)
 
 install : all installdirs
 	for p in sawmill sawmill-client; do \
