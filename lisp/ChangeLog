@@ -1,3 +1,9 @@
+2000-10-25  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/workspace.jl (ws-add-window): set swapped-in
+	property of sticky windows, otherwise they don't get swapped
+	out the first time a new workspace is selected
+
 2000-10-24  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/swapper.jl (workspace-swap-out,
