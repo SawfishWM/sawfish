@@ -1405,6 +1405,11 @@ Returns a symbol naming the frame type currently associated with
 @var{window}.
 @end defun
 
+@defvar auto-window-type-alist
+A list of @code{(@var{regexp} . @var{type})} entries, associating
+window names with frame types.
+@end defvar
+
 
 @node Frame Styles, Themes, Frame Types, Window Frames
 @section Frame Styles
