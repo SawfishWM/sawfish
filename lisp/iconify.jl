@@ -65,8 +65,7 @@
   "Display the workspace containing the window W, then focus on W."
   (interactive "%W")
   (when w
-    (if (and (window-get w 'iconified)
-	     (or uniconify-to-current-workspace (window-get w 'sticky)))
+    (if (window-get w 'iconified)
 	(uniconify-window w)
       (when (or (not preferred-space)
 		(not (window-in-workspace-p w preferred-space)))
