@@ -1,3 +1,11 @@
+2000-01-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* main.c: only call before-exit-hook if rep_INTERFACE < 8
+
+	* functions.c (Fx_delete_window, Fdelete_window): removed
+	(Fsend_client_message): if format is 32, accept long-int style
+	values
+
 2000-01-24  John Harper  <john@dcs.warwick.ac.uk>
 
 	* windows.c (add_window): fix bug of leaving window name unset

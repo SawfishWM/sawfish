@@ -1,3 +1,15 @@
+2000-01-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* functions.jl (get-window-wm-protocols): new function, returns
+	a list of atoms
+	(delete-window): now defined in lisp
+
+	* slide-window.jl: provide 'slide-window
+
+	* move-cursor.jl: new file, commands to move the cursor
+	* move-resize.jl (move-resize-map): added bindings to cursor
+	movement commands
+
 2000-01-24  John Harper  <john@dcs.warwick.ac.uk>
 
 	* x-cycle.jl (x-cycle-next): ignore windows with never-focus
