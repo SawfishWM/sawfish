@@ -25,6 +25,9 @@
 (defvar customize-program "sawmill-ui"
   "Location of the program implementing sawmill's configuration interface.")
 
+(defvar customize-group-opt "--group")
+(defvar customize-args nil)
+
 (defcustom customize-show-symbols nil
   "Show variable names of each customization option."
   :group misc
@@ -120,10 +123,9 @@
 (defun customize (&optional group)
   "Invoke the user-customization system."
   (interactive)
-  (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
-		  customize-program (if group
-					(format nil "--group %s" group)
-				      ""))))
+  (system (format nil "%s %s %s %s >/dev/null 2>&1 </dev/null &"
+		  customize-program customize-args
+		  (and group customize-group-opt) (or group ""))))
 
 
 ;; setting variables
