@@ -813,6 +813,19 @@ mark_frame_parts (Lisp_Window *w)
     }
 }
 
+/* Reset state of all frame parts in window W. */
+void
+reset_frame_parts (Lisp_Window *w)
+{
+    struct frame_part *fp;
+    for (fp = w->frame_parts; fp != 0; fp = fp->next)
+    {
+	if (fp->clicked)
+	    unclick_current_fp ();
+	fp->highlighted = 0;
+    }
+}
+
 
 /* creating window frames */
 
