@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
-"POT-Creation-Date: 2002-04-30 13:09+0200\n"
-"PO-Revision-Date: 2002-05-01 00:01+0200\n"
+"POT-Creation-Date: 2002-11-02 23:33-0800\n"
+"PO-Revision-Date: 2002-11-05 00:38+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -85,6 +85,7 @@ msgstr "Bildegenskaper"
 
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
+#, c-format
 msgid "No matching item for %S"
 msgstr "Inget matchande föremål för %S"
 
@@ -112,8 +113,9 @@ msgid "Added frame type `%s'"
 msgstr "Lade till ramtypen \"%s\""
 
 #. ../themer/themer.in
+#, c-format
 msgid "error while building frame: %S"
-msgstr "fel vid ramkonstruktion: %s"
+msgstr "fel vid ramkonstruktion: %S"
 
 #. ../themer/themer.in
 #, c-format
@@ -539,8 +541,7 @@ msgstr "När påverkar muspekaren inmatningsfokus?"
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "Click-to-focus mode passes the click through to the application."
-msgstr ""
-"Klicka-för-att-fokusera-läget skickar vidare klicket till programmet."
+msgstr "Klicka-för-att-fokusera-läget skickar vidare klicket till programmet."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default frame style:"
@@ -696,10 +697,8 @@ msgstr ""
 "skuggknapp. (Endast musbindningar fungerar här)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr ""
-"Modifierartangent(er) som ska användas för standardkortkommandon i "
-"fönsterhanteraren."
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Modifierartangent(er) som ska användas för standardkortkommandon.."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -744,22 +743,6 @@ msgstr "Kopiera till föregående"
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Copy to next"
 msgstr "Kopiera till nästa"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Left"
-msgstr "_Vänster"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Right"
-msgstr "_Höger"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Up"
-msgstr "_Upp"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Down"
-msgstr "_Ner"
 
 #. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
@@ -1039,8 +1022,7 @@ msgstr "Flytta fönstret uppåt"
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move the window to the viewport above, and switch to that viewport."
 msgstr ""
-"Flytta fönstret till skrivbordsvyn ovanför, och byt till den "
-"skrivbordsvyn."
+"Flytta fönstret till skrivbordsvyn ovanför, och byt till den skrivbordsvyn."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
@@ -1049,8 +1031,7 @@ msgstr "Flytta fönstret nedåt"
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move the window to the viewport below, and switch to that viewport."
 msgstr ""
-"Flytta fönstret till skrivbordsvyn nedanför, och byt till den "
-"skrivbordsvyn."
+"Flytta fönstret till skrivbordsvyn nedanför, och byt till den skrivbordsvyn."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Focus desktop"
@@ -1624,8 +1605,7 @@ msgid ""
 "Grows window to the right until it `bumps into' another window.\n"
 "See `grow-window-up'."
 msgstr ""
-"Låter fönstret växa till höger tills det \"krockar\" med ett annat "
-"fönster.\n"
+"Låter fönstret växa till höger tills det \"krockar\" med ett annat fönster.\n"
 "Se \"grow-window-up\"."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1642,8 +1622,7 @@ msgid ""
 "window or pixels instead."
 msgstr ""
 "Låter fönstret växa uppåt tills det \"krockar\" med ett annat fönster.\n"
-"Om den översta kanten var utanför skärmkanten kommer den att tas in "
-"igen.\n"
+"Om den översta kanten var utanför skärmkanten kommer den att tas in igen.\n"
 "Med ett globalt prefixargument maximeras uppåt istället.\n"
 "Med ett numeriskt prefixargument växes istället uppåt med det antal\n"
 "ökningar som är angivet i fönstret eller bildpunkter."
@@ -1669,8 +1648,7 @@ msgid ""
 "Moves window to the left until it `bumps into' another window.\n"
 "See `pack-window-up'."
 msgstr ""
-"Flyttar fönstret till vänster tills det \"krockar\" med ett annat "
-"fönster.\n"
+"Flyttar fönstret till vänster tills det \"krockar\" med ett annat fönster.\n"
 "Se \"pack-window-up\"."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1697,8 +1675,7 @@ msgid ""
 "With a numeric prefix arg, move upwards by that many pixels instead."
 msgstr ""
 "Flyttar fönstret uppåt tills det \"krockar\" med ett annat fönster.\n"
-"Om den översta kanten var utanför skärmkanten kommer den att tas in "
-"igen.\n"
+"Om den översta kanten var utanför skärmkanten kommer den att tas in igen.\n"
 "Med ett globalt prefixargument maximeras uppåt istället.\n"
 "Med ett numeriskt prefixargument flyttas istället uppåt med det antalet\n"
 "bildpunkter."
@@ -2477,6 +2454,70 @@ msgstr "Glöm all sparad fönsterhistorik."
 msgid "_History"
 msgstr "_Historik"
 
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace down"
+msgstr "Arbetsyta ned"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Visa arbetsytan nedanför den aktuella arbetsytan"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace up"
+msgstr "Arbetsyta upp"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Visa arbetsytan ovanför den aktuella arbetsytan"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace left"
+msgstr "Arbetsyta vänster"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Visa arbetsytan till vänster om den aktuella arbetsytan"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace right"
+msgstr "Arbetsyta höger"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Visa arbetsytan till höger om den aktuella arbetsytan"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace down"
+msgstr "Skicka till arbetsytan nedanför"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Skicka fönster till arbetsytan nedanför den aktuella arbetsytan"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace up"
+msgstr "Skicka till arbetsytan ovanför"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Skicka fönster till arbetsytan ovanför den aktuella arbetsytan"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace left"
+msgstr "Skicka till arbetsytan till vänster"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Skicka fönster till arbetsytan till vänster om den aktuella arbetsytan"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace right"
+msgstr "Skicka till arbetsytan till höger"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Skicka fönster till arbetsytan till höger om den aktuella arbetsytan"
+
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "_GNOME-hjälp..."
@@ -2757,8 +2798,7 @@ msgstr "Maximera fyll fönster vertikalt-växel"
 msgid ""
 "Toggle the state of the window between vertically maximized-filled and\n"
 "unmaximized."
-msgstr ""
-"Växla fönsterläge mellan fyllnadsmaximerad och avmaximerad vertikalt."
+msgstr "Växla fönsterläge mellan fyllnadsmaximerad och avmaximerad vertikalt."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
@@ -3144,6 +3184,18 @@ msgstr "_Inställningar"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Teman"
+
+#~ msgid "_Left"
+#~ msgstr "_Vänster"
+
+#~ msgid "_Right"
+#~ msgstr "_Höger"
+
+#~ msgid "_Up"
+#~ msgstr "_Upp"
+
+#~ msgid "_Down"
+#~ msgstr "_Ner"
 
 #~ msgid "Revert"
 #~ msgstr "Återställ"
