@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sawfish 0.30\n"
-"POT-Creation-Date: 2000-07-11 15:12+0200\n"
-"PO-Revision-Date: 2000-07-11 17:00+0200\n"
+"Project-Id-Version: sawfish 0.30.3\n"
+"POT-Creation-Date: 2000-07-26 14:56+0200\n"
+"PO-Revision-Date: 2000-07-26 14:57+0200\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -40,16 +40,6 @@ msgstr "Eylem"
 #. ../lisp/audio-events.jl
 msgid "Sample"
 msgstr "Parça"
-
-# ../lisp/auto-raise.jl
-#. ../lisp/auto-raise.jl
-msgid "Raise windows when they are focused."
-msgstr "Pencereler foküslanýnca onlarý yükselt ."
-
-# ../lisp/auto-raise.jl
-#. ../lisp/auto-raise.jl
-msgid "Delay in milliseconds until focused windows are raised."
-msgstr "Yükseltme arasý ( sayi olarak (ms) ) ."
 
 #. ../lisp/viewport-linear.jl
 #. ../lisp/autoload.jl
@@ -85,9 +75,24 @@ msgstr "Geçici foküs"
 msgid "Window Cycling"
 msgstr "Pencere gezmesi"
 
+# ../lisp/auto-raise.jl
+#. ../lisp/auto-raise.jl
+msgid "Raise windows when they are focused."
+msgstr "Pencereler foküslanýnca onlarý yükselt ."
+
+# ../lisp/auto-raise.jl
+#. ../lisp/auto-raise.jl
+msgid "Delay in milliseconds until focused windows are raised."
+msgstr "Yükseltme arasý ( sayi olarak (ms) ) ."
+
 #. ../lisp/configure.jl
 msgid "Automatically select window gravity from position on screen."
 msgstr "Ekran'daki yerine göre pencerenin aðýlýðýný belirle"
+
+# ../lisp/customize.jl
+#. ../lisp/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "Kullanýcý özelleþtirme sistemini çaðýr ."
 
 #. ../lisp/custom.jl
 msgid "Main"
@@ -159,11 +164,6 @@ msgstr "Azamileþme"
 msgid "Miscellaneous"
 msgstr "Karýþýk"
 
-# ../lisp/customize.jl
-#. ../lisp/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "Kullanýcý özelleþtirme sistemini çaðýr ."
-
 # ../lisp/cycle.jl
 #. ../lisp/cycle.jl
 msgid "Select the next window of the current workspace."
@@ -225,11 +225,6 @@ msgstr "Önayarlý  görünüþü ( theme'i ) ."
 #. ../lisp/frames.jl
 msgid "Update all windows when the default frame style is changed."
 msgstr "Önayarlý görünüþü deðiþince yekin pencelerin görünümünü yenile ."
-
-# ../lisp/frames.jl
-#. ../lisp/frames.jl
-msgid "Decorate dialog windows similarly to application windows."
-msgstr "Diyalok pencerelerini vasat pencereler gibi \"süsle\" ."
 
 # ../lisp/frames.jl
 #. ../lisp/frames.jl
@@ -541,8 +536,13 @@ msgid "Press key..."
 msgstr "Tuþa bas ..."
 
 #. ../lisp/keymap.jl
-msgid "Read a single event and send it to the focused window."
-msgstr "Tek bir eylemi oku ve o eylemi foküslanmýþ pencereye gönder ."
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
+msgstr ""
+"Gelecek tuþ eylemini direkman foküslü pencereye gönder, pencere yöneticisini "
+"\n"
+"herhangi bir tuþ bað_iný gözardý ederek."
 
 #. ../lisp/keymap.jl
 msgid "[Quote]"
@@ -635,9 +635,7 @@ msgstr "Öbürküler"
 msgid ""
 "Maximizing a window in one dimension must increase the size of that "
 "dimension."
-msgstr ""
-"Bir pencere boyutunu azamileþtirmek , o boyutu da her zaman büyütür ."
-" "
+msgstr "Bir pencere boyutunu azamileþtirmek , o boyutu da her zaman büyütür . "
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
@@ -1062,7 +1060,9 @@ msgstr "Yeniden boyutlarken, pencere kenarlarýnýn seçim türü : \\w"
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
 msgid "Snap window position to edges of other windows while moving."
-msgstr "Pencereleri taþýrken pencerenin yerini öbür pencerelerin kenarýna dikkat ederek belirle ."
+msgstr ""
+"Pencereleri taþýrken pencerenin yerini öbür pencerelerin kenarýna dikkat "
+"ederek belirle ."
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
@@ -1145,29 +1145,6 @@ msgstr ""
 "Ses parçalarýný çalacak olan uygulama . Bu belirlenmese, o zaman "
 "sawfish'inkendi ESD desteðiyle sesler çalýnacaktýr ."
 
-# ../lisp/menus.jl
-#. ../lisp/prompt-wm.jl
-msgid "Window:"
-msgstr "Pencere : "
-
-# ../lisp/menus.jl
-# ../lisp/custom.jl
-#. ../lisp/prompt-wm.jl
-#, c-format
-msgid "Workspace %d"
-msgstr "Masaüstü %d"
-
-# ../lisp/menus.jl
-# ../lisp/custom.jl
-#. ../lisp/workspace.jl
-#. ../lisp/prompt-wm.jl
-msgid "Workspace:"
-msgstr "Masaüstü : "
-
-#. ../lisp/prompt-wm.jl
-msgid "Prompt for a workspace and switch to it."
-msgstr "Bir masaüstü için sor ve oraya geç ."
-
 # ../lisp/keymaps.jl
 #. ../lisp/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
@@ -1217,6 +1194,29 @@ msgstr "Satýr baþýna git ."
 #. ../lisp/prompt.jl
 msgid "Move to end of line."
 msgstr "SAtýr sonuna git ."
+
+# ../lisp/menus.jl
+#. ../lisp/prompt-wm.jl
+msgid "Window:"
+msgstr "Pencere : "
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/prompt-wm.jl
+#, c-format
+msgid "Workspace %d"
+msgstr "Masaüstü %d"
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/workspace.jl
+#. ../lisp/prompt-wm.jl
+msgid "Workspace:"
+msgstr "Masaüstü : "
+
+#. ../lisp/prompt-wm.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Bir masaüstü için sor ve oraya geç ."
 
 # ../lisp/stacking.jl
 #. ../lisp/raise-commands.jl
@@ -1458,20 +1458,27 @@ msgstr "Pencereler ilk def'a gösteriliyorsa, o pencereleri foküsle ."
 msgid "Dialog windows inherit the focus from their parent."
 msgstr "Ufakca pencereler ebeveynlerden foküsü vasiyet alsýn ."
 
+# ../lisp/frames.jl
+#. ../lisp/transient.jl
+msgid "Decorate dialog windows similarly to application windows."
+msgstr "Diyalok pencerelerini vasat pencereler gibi \"süsle\" ."
+
 #. ../lisp/transient.jl
 msgid ""
 "Raise the current window to its highest allowed position in the stacking\n"
 "order. Also raise any transient windows that it has."
 msgstr ""
-"Geçerli pencereyi yapýþýk pencere seviyesini mümkün olan en üst yerine taþý .\n"
-"Bu pencereye baðlý olan ufakça pencereleri de yükselt ." 
+"Geçerli pencereyi yapýþýk pencere seviyesini mümkün olan en üst yerine taþý "
+".\n"
+"Bu pencereye baðlý olan ufakça pencereleri de yükselt ."
 
 #. ../lisp/transient.jl
 msgid ""
 "Lower the current window to its lowest allowed position in the stacking\n"
 "order. Also lower any transient windows that it has."
 msgstr ""
-"Geçerli pencereyi yapýþýk pencere seviyesini mümkün olan en alt yerine taþý .\n" 
+"Geçerli pencereyi yapýþýk pencere seviyesini mümkün olan en alt yerine taþý "
+".\n"
 "Bu pencereye baðlý olan ufakça pencereleri de alçalt ."
 
 #. ../lisp/transient.jl
@@ -1482,8 +1489,8 @@ msgid ""
 "the level of any transient windows it has."
 msgstr ""
 "Pencere mümkün olan en üst yerdeyse, mümkün olan en alttaki yerine taþý .\n"
-"Yoksa o'nu mümkün olduðu kadariyle yükselt ve bu pencereye baðlý olan "
-"ufakça pencerelerini de\n"
+"Yoksa o'nu mümkün olduðu kadariyle yükselt ve bu pencereye baðlý olan ufakça "
+"pencerelerini de\n"
 "o pencereyle beraber yükselt/alçalt. "
 
 # ../lisp/viewport.jl
@@ -1615,7 +1622,8 @@ msgstr "Ilk yada son masaüstünü geçince yapýlacak hareket : \\w"
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
 msgid "When passing the first or last workspace, while moving a window: \\w"
-msgstr "Ilk yada son masaüstünü taþýma sürecinde geçince yapýlacak hareket : \\w"
+msgstr ""
+"Ilk yada son masaüstünü taþýma sürecinde geçince yapýlacak hareket : \\w"
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
@@ -1654,7 +1662,8 @@ msgstr "Diyaloklar ebeveynlerinin masaüstünde görünsün ."
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
 msgid "Raise selected windows (normally by the Windows menu)."
-msgstr "Seçili pencereler yükselmiþ olsun  ( normalen Pencereler mönüsünden ) ."
+msgstr ""
+"Seçili pencereler yükselmiþ olsun  ( normalen Pencereler mönüsünden ) ."
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
@@ -1849,7 +1858,8 @@ msgstr "Pencerelerin arasýnda gezerken pencerelerin adlarýný göster ."
 # ../lisp/x-cycle.jl
 #. ../lisp/x-cycle.jl
 msgid "Include iconified windows when cycling."
-msgstr "Pencerelerin arasýnda gezerken simgelenmiþ pencereleri de gözönüne al ."
+msgstr ""
+"Pencerelerin arasýnda gezerken simgelenmiþ pencereleri de gözönüne al ."
 
 # ../lisp/x-cycle.jl
 #. ../lisp/x-cycle.jl
@@ -1956,13 +1966,13 @@ msgstr "Masaüstleri :"
 
 #. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
 #. ../nokogiri/nokogiri-no-gnome.jl
-msgid "X:"
-msgstr "X :"
+msgid "Columns:"
+msgstr "Sütunlar :"
 
 #. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
 #. ../nokogiri/nokogiri-no-gnome.jl
-msgid "Y:"
-msgstr "Y :"
+msgid "Rows:"
+msgstr "Sýralar :"
 
 # ../src/sawfish-ui.jl
 #. ../nokogiri/nokogiri-shell.jl
