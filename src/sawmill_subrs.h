@@ -134,6 +134,7 @@ extern struct frame_part *find_frame_part_by_window (Window id);
 extern void frame_part_exposer (XExposeEvent *ev, struct frame_part *fp);
 extern repv get_keymap_for_frame_part (struct frame_part *fp);
 extern void mark_frame_parts (Lisp_Window *w);
+extern void mark_frame_type (void);
 extern void reset_frame_parts (Lisp_Window *w);
 extern void restack_frame_parts (Lisp_Window *w);
 extern repv Vframe_draw_mutex (repv arg);
