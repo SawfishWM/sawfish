@@ -174,7 +174,7 @@ unused before killing it.")
       (or (start-process menu-process menu-program)
 	  (error "Can't start menu backend: %s" menu-program))))
 
-  (define (menu-stop-process &optional force)
+  (define (menu-stop-process #!optional force)
     (when menu-process
       (cond ((and (not force) (numberp menu-program-stays-running))
 	     ;; number of seconds to let it hang around for

@@ -70,7 +70,7 @@ evaluated.")
   (define autoloader (make-autoloader getter setter))
   (define real-getter (autoloader-ref getter))
 
-  (define (define-command name fun &optional spec type)
+  (define (define-command name fun #!optional spec type)
     "Define a window managed command called NAME (a symbol). The
 function FUN will be called to execute the command. SPEC and TYPE may
 be used to define the arguments expected by the command. (an
@@ -85,7 +85,7 @@ interactive specification and a custom-type specification respectively)."
   (define (define-command-args name spec)
     (put name 'custom-command-args spec))
 
-  (define (autoload-command name module &optional type)
+  (define (autoload-command name module #!optional type)
     "Record that loading the module called MODULE (a symbol) will provde a
 command called NAME (optionally whose arguments have custom-type TYPE)."
     (autoloader name module)
@@ -121,7 +121,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
 	  (error "Command has no function: %s" name))
       (apply fun args)))
 
-  (define (call-command name &optional pfx-arg)
+  (define (call-command name #!optional pfx-arg)
     "Call the command NAME; optionally with the prefix argument PFX-ARG."
 
     ;; prefix
@@ -339,7 +339,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
   (define-command 'call-command-with-output-to-screen
     call-command-with-output-to-screen "CCommand:")
 
-  (define (define-command-to-screen name fun &optional spec type)
+  (define (define-command-to-screen name fun #!optional spec type)
     (define-command name (lambda args (with-output-to-screen
 				       (apply fun args)))
 		    spec type)))

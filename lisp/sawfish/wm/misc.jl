@@ -30,7 +30,7 @@
 
 (defvar *user-module* nil)
 
-(defmacro with-server-grabbed (&rest forms)
+(defmacro with-server-grabbed (#!rest forms)
   "Execute FORMS with the server grabbed."
   `(progn
      (grab-server)
@@ -90,7 +90,7 @@ list of strings DIRS."
   "Return the screen dimensions in pixels as a cons cell `(WIDTH . HEIGHT)'."
   (cons (screen-width) (screen-height)))
 
-(define (current-head &optional w)
+(define (current-head #!optional w)
   "Return the ID of the `current' head."
   (unless w
     (setq w (input-focus)))
@@ -101,10 +101,10 @@ list of strings DIRS."
 		   (+ (cdr point) (quotient (cdr dims) 2))))
     (find-head (query-pointer))))
 
-(define (current-head-dimensions &optional w)
+(define (current-head-dimensions #!optional w)
   (head-dimensions (current-head w)))
 
-(define (current-head-offset &optional w)
+(define (current-head-offset #!optional w)
   (head-offset (current-head w)))
 
 (define (load-module name)

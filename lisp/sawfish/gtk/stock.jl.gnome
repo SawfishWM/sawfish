@@ -36,7 +36,7 @@
       ((revert)
        (gtk-button-new-with-label (_ "Revert")))))
 
-  (define (simple-dialog title widget &optional ok-callback main-window)
+  (define (simple-dialog title widget #!optional ok-callback main-window)
 
     (let ((window (gnome-dialog-new title (if ok-callback
 					      '(ok cancel)

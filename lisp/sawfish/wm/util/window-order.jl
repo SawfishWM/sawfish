@@ -39,7 +39,7 @@
   (define window-order-highest 1)
 
   ;; return windows in MRU order
-  (define (window-order &optional workspace allow-iconified all-viewports)
+  (define (window-order #!optional workspace allow-iconified all-viewports)
     (let ((windows (managed-windows)))
       (setq windows (delete-if (lambda (w)
 				 (or (not (window-mapped-p w))

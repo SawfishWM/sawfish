@@ -361,12 +361,12 @@
       (setq last-interesting-workspace max-w)
       (cons min-w max-w)))
 
-  (define (workspace-id-to-logical space &optional limits)
+  (define (workspace-id-to-logical space #!optional limits)
     (unless limits
       (setq limits (workspace-limits)))
     (- space (car limits)))
 
-  (define (workspace-id-from-logical offset &optional limits)
+  (define (workspace-id-from-logical offset #!optional limits)
     (unless limits
       (setq limits (workspace-limits)))
     (+ offset (car limits)))
@@ -387,7 +387,7 @@
 
   ;; insert a new workspace (returning its index) so that the workspace
   ;; before it has index BEFORE
-  (define (insert-workspace &optional before)
+  (define (insert-workspace #!optional before)
     (unless before
       (setq before current-workspace))
     (map-windows
@@ -402,7 +402,7 @@
     (1+ before))
 
   ;; merge workspace INDEX with workspace INDEX+1
-  (define (remove-workspace &optional index)
+  (define (remove-workspace #!optional index)
     (unless index
       (setq index current-workspace))
     (when (> current-workspace index)
@@ -470,7 +470,7 @@
 	  (select-workspace (1- current-workspace))))))
 
   ;; called when window W is destroyed
-  (define (ws-remove-window w &optional dont-hide)
+  (define (ws-remove-window w #!optional dont-hide)
     (let ((spaces (window-workspaces w)))
       (mapc (lambda (space)
 	      (window-remove-from-workspace w space)) spaces)
@@ -484,7 +484,7 @@
       (call-hook 'workspace-state-change-hook)))
 
   ;; move window W from workspace id OLD to workspace NEW
-  (define (move-window-to-workspace w old new &optional was-focused)
+  (define (move-window-to-workspace w old new #!optional was-focused)
     (or (window-in-workspace-p w old)
 	(error
 	 "move-window-to-workspace--window isn't in original workspace: %s, %s" w old))
@@ -511,7 +511,7 @@
       (call-hook 'workspace-state-change-hook)))
 
   ;; arrange it so that window W appears on both OLD and NEW workspaces
-  (define (copy-window-to-workspace w old new &optional was-focused)
+  (define (copy-window-to-workspace w old new #!optional was-focused)
     (or (window-in-workspace-p w old)
 	(error
 	 "copy-window-to-workspace--window isn't in original workspace: %s, %s" w old))
@@ -527,7 +527,7 @@
       (call-hook 'workspace-state-change-hook)))
 
   ;; switch to workspace with id SPACE
-  (define (select-workspace space &optional dont-focus inner-thunk)
+  (define (select-workspace space #!optional dont-focus inner-thunk)
     "Activate workspace number SPACE (from zero)."
     (unless (= current-workspace space)
       (when current-workspace
@@ -564,7 +564,7 @@
 	(call-hook 'workspace-state-change-hook))))
 
   ;; return a list of all windows on workspace index SPACE
-  (define (workspace-windows space &optional include-iconified)
+  (define (workspace-windows space #!optional include-iconified)
     (filter-windows
      (lambda (w)
        (and (window-in-workspace-p w space)
@@ -680,7 +680,7 @@
   (define-command 'next-workspace next-workspace "p")
   (define-command 'previous-workspace previous-workspace "p")
 
-  (define (send-to-next-workspace w count &optional copy select)
+  (define (send-to-next-workspace w count #!optional copy select)
     "Move the window to the next workspace."
     (ws-call-with-workspace
      (lambda (space)
@@ -697,7 +697,7 @@
 	     (move-window-to-workspace w orig-space space was-focused)))))
      count workspace-send-boundary-mode))
 
-  (define (send-to-previous-workspace w count &optional copy select)
+  (define (send-to-previous-workspace w count #!optional copy select)
     "Move the window to the previous workspace."
     (send-to-next-workspace w (- count) copy select))
 
@@ -708,14 +708,14 @@
     "Copy the window to the next workspace."
     (send-to-next-workspace w count t select))
 
-  (define (copy-to-previous-workspace w count &optional select)
+  (define (copy-to-previous-workspace w count #!optional select)
     "Copy the window to the previous workspace."
     (send-to-previous-workspace w count t select))
 
   (define-command 'copy-to-next-workspace copy-to-next-workspace "%W\np\nt")
   (define-command 'copy-to-previous-workspace copy-to-previous-workspace "%W\np\nt")
 
-  (define (append-workspace-and-send w &optional select)
+  (define (append-workspace-and-send w #!optional select)
     "Create a new workspace at the end of the list, and move the window to it."
     (let ((limits (workspace-limits))
 	  (was-focused (eq (input-focus) w))
@@ -731,7 +731,7 @@
 	  (move-window-to-workspace
 	   w orig-space (1+ (cdr limits)) was-focused)))))
 
-  (define (prepend-workspace-and-send w &optional select)
+  (define (prepend-workspace-and-send w #!optional select)
     "Create a new workspace at the start of the list, and move the window to it."
     (let ((limits (workspace-limits))
 	  (was-focused (eq (input-focus) w))
@@ -776,11 +776,11 @@ previous workspace."
   (define-command 'insert-workspace-after insert-workspace-after)
   (define-command 'insert-workspace-before insert-workspace-before)
 
-  (define (move-workspace-forwards &optional count)
+  (define (move-workspace-forwards #!optional count)
     "Move the current workspace one place to the right."
     (move-workspace current-workspace (or count 1)))
 
-  (define (move-workspace-backwards &optional count)
+  (define (move-workspace-backwards #!optional count)
     "Move the current workspace one place to the left."
     (move-workspace current-workspace (- (or count 1))))
 
@@ -790,7 +790,7 @@ previous workspace."
   (define (select-workspace-from-first count)
     (select-workspace (workspace-id-from-logical count)))
 
-  (define (send-window-to-workspace-from-first w count &optional copy)
+  (define (send-window-to-workspace-from-first w count #!optional copy)
     (let* ((was-focused (eq (input-focus) w))
 	   (orig-space (if (window-in-workspace-p w current-workspace)
 			   current-workspace
@@ -899,7 +899,7 @@ last instance remaining, then delete the actual window."
 
   ;; Note that all of PROPS (symbols) should be saved and restored
   ;; automatically when swapping window states
-  (define (add-swapped-properties &rest props)
+  (define (add-swapped-properties #!rest props)
     (mapc (lambda (p)
 	    (or (memq p workspace-local-properties)
 		(setq workspace-local-properties

@@ -43,7 +43,7 @@
   (defconst list-width 200)
   (defconst list-height -2)
 
-  (define (make-list-item changed-callback spec &optional title)
+  (define (make-list-item changed-callback spec #!optional title)
 
     (let ((clist (if title
 		     (gtk-clist-new-with-titles (if (stringp title)

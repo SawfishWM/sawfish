@@ -93,7 +93,7 @@
 
 ;;; defining custom variables and groups
 
-  (defmacro defcustom (symbol value doc &rest keys)
+  (defmacro defcustom (symbol value doc #!rest keys)
     "Define a new customization variable SYMBOL which initially has value
 VALUE (unless SYMBOL is already bound, in which case its value is not
 altered), and documentations string DOC.
@@ -138,7 +138,7 @@ construct the widget definition passed to the ui backend."
 		      ',symbol ,value ,(custom-quote-keys keys))
 	     ,doc))
 
-  (defmacro defgroup (symbol doc &rest keys)
+  (defmacro defgroup (symbol doc #!rest keys)
     "Declare a new custom group called SYMBOL, with English name DOC. The
 property list KEYS may contain the following key-value items:
 
@@ -173,7 +173,7 @@ Note that the value of the `:group' key is not evaluated."
 	  (put symbol 'custom-widget (get type 'custom-widget))))
       value))
 
-  (define (custom-declare-group group &optional doc keys)
+  (define (custom-declare-group group #!optional doc keys)
     (let (container)
       (while keys
 	(case (car keys)
@@ -304,7 +304,7 @@ of choices."
     (when (get symbol 'custom-after-set)
       ((get symbol 'custom-after-set) symbol)))
  
-  (define (custom-set-variable symbol value &optional req)
+  (define (custom-set-variable symbol value #!optional req)
     ;; XXX kludge for old custom files..
     (when (eq value 'nil) (setq value nil))
     (when (and req value)
@@ -313,7 +313,7 @@ of choices."
 		  (make-variable-special symbol)
 		  (set symbol value)) symbol))
 
-  (define (custom-set-typed-variable symbol value type &optional req)
+  (define (custom-set-typed-variable symbol value type #!optional req)
     ;; XXX kludge for old custom files..
     (when (eq value 'nil) (setq value nil))
     (when (and req value)

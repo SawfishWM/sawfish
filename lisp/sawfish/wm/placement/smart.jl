@@ -76,7 +76,7 @@
 
   ;; RECTS is a list of (LEFT TOP RIGHT BOTTOM); returns sorted, uniquified
   ;; (X-EDGES . Y-EDGES)
-  (define (sp-make-grid rects &optional with-root)
+  (define (sp-make-grid rects #!optional with-root)
     (let ((grid (grid-from-rectangles rects)))
       ;; XXX fix for multiple heads
       (rplaca grid (sort (list* 0 (screen-width)
@@ -344,7 +344,7 @@
 
 ;;; entry-points
 
-  (define (sp-do-placement w fit-fun &optional fall-back-fun)
+  (define (sp-do-placement w fit-fun #!optional fall-back-fun)
     (if (and sp-max-queued-events (> (x-events-queued) sp-max-queued-events))
 	;; fitted placement can cause event tailbacks when there's
 	;; lots of windows being opened with lots of windows already

@@ -103,7 +103,7 @@
   ;; the window it's displayed for (or t)
   (define tooltips-displayed nil)
 
-  (define (display-tooltip text &optional win)
+  (define (display-tooltip text #!optional win)
     (let ((pos (query-pointer))
 	  (pos-fn (lambda (in size inc)
 		    (if (< in (/ size 2))

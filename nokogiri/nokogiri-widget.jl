@@ -92,7 +92,7 @@
   ;; create a new item of type defined by CELL, either a list (TYPE ARGS...)
   ;; or a single symbol TYPE. CALLBACK is a function to be called whenever
   ;; the item's value changes
-  (define (make-widget cell &optional callback doc-string)
+  (define (make-widget cell #!optional callback doc-string)
     (let*
 	((type (or (car cell) cell))
 	 (maker (or (widget-type-constructor type)
@@ -170,7 +170,7 @@
 
   (define-widget-type 'choice make-choice-item)
 
-  (define (make-symbol-item changed-callback &rest options)
+  (define (make-symbol-item changed-callback #!rest options)
     (let ((widget (gtk-combo-new)))
       (when changed-callback
 	(gtk-signal-connect
@@ -213,7 +213,7 @@
 
   (define-widget-type 'string make-string-item)
 
-  (define (make-number-item changed-callback &optional minimum maximum)
+  (define (make-number-item changed-callback #!optional minimum maximum)
     ;; XXX backwards compat..
     (when (eq minimum 'nil) (setq minimum nil))
     (when (eq maximum 'nil) (setq maximum nil))
@@ -242,7 +242,7 @@
 
   (define-widget-type 'number make-number-item)
 
-  (define (make-boolean-item changed-callback &optional label)
+  (define (make-boolean-item changed-callback #!optional label)
     (let ((widget (if label
 		      (gtk-check-button-new-with-label label)
 		    (gtk-check-button-new))))
@@ -269,7 +269,7 @@
 
 ;;; ``Meta'' widgets
 
-  (define (make-or-item changed-callback &rest items)
+  (define (make-or-item changed-callback #!rest items)
     (setq items (mapcar (lambda (x)
 			  (make-widget x changed-callback)) items))
     (let* ((box (gtk-vbox-new nil box-spacing))
@@ -343,7 +343,7 @@
 
   (define-widget-type 'or make-or-item)
 
-  (defun make-and-item (changed-callback &rest items)
+  (defun make-and-item (changed-callback #!rest items)
     (setq items (mapcar (lambda (x)
 			  (make-widget x changed-callback)) items))
     (let
@@ -379,11 +379,11 @@
 
   (define-widget-type 'and make-and-item)
 
-  (define-widget-type 'h-and (lambda (&rest args)
+  (define-widget-type 'h-and (lambda (#!rest args)
 			       (let-fluids ((and-direction 'horizontal))
 				 (apply make-and-item args))))
 
-  (define-widget-type 'v-and (lambda (&rest args)
+  (define-widget-type 'v-and (lambda (#!rest args)
 			       (let-fluids ((and-direction 'vertical))
 				 (apply make-and-item args))))
 

@@ -201,7 +201,7 @@
 
   (define (x-cycle-exit) (throw 'x-cycle-exit t))
 
-  (define (cycle-windows event &optional windows)
+  (define (cycle-windows event #!optional windows)
     "Cycle through all windows in order of recent selections."
     (let ((tail-command nil))
       (let-fluids ((x-cycle-current nil)

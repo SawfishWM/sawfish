@@ -24,7 +24,7 @@
 (require 'sawfish.wm.workspace)
 (require 'sawfish.wm.windows)
 
-(define (prompt-for-window &optional title)
+(define (prompt-for-window #!optional title)
   "Prompt for a window title, return the window associated with that title."
   (letrec ((show-in-list-p
             (lambda (w)
@@ -54,7 +54,7 @@
 					   (cons (window-name w) w))
 					 (managed-windows))))))))
 
-(define (prompt-for-workspace &optional title)
+(define (prompt-for-workspace #!optional title)
   "Prompt for a workspace title, return the workspace number."
   (letrec ((make-workspace-list
             (lambda (ws)

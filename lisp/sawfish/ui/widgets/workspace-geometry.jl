@@ -42,7 +42,7 @@
 
   (define monitor-pixbuf (gdk-pixbuf-new-from-file monitor-pixbuf-file))
 
-  (define (make-workspace-geometry-item changed-callback &optional doc)
+  (define (make-workspace-geometry-item changed-callback #!optional doc)
     (let* ((canvas (gnome-canvas-new))
 	   (vbox (gtk-vbox-new nil box-spacing))
 	   (hbox (gtk-hbox-new nil box-spacing))

@@ -84,7 +84,7 @@
       (record-window-animator w animator)
       (setq timer (make-timer frame nil anim-outline-delay))))
 
-  (define (anim-outline-entry mode w op &optional action)
+  (define (anim-outline-entry mode w op #!optional action)
     (when (eq op 'start)
       (case action
 	((iconified)
@@ -93,10 +93,10 @@
 			       (window-frame-dimensions w)
 			       anim-outline-icon-coords '(1 . 1)))))))
 
-  (define (wireframe-animator w op &optional action)
+  (define (wireframe-animator w op #!optional action)
     (anim-outline-entry 'box w op action))
 
-  (define (solid-animator w op &optional action)
+  (define (solid-animator w op #!optional action)
     (anim-outline-entry 'solid w op action))
 
   ;;###autoload

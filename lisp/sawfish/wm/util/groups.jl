@@ -82,7 +82,7 @@
 	       (or (window-get tem 'group) (window-group-id tem)))
 	  (window-id w))))
 
-  (define (windows-by-group group-id &optional by-depth)
+  (define (windows-by-group group-id #!optional by-depth)
     "Return the list of windows in the group with id GROUP-ID. If BY-DEPTH is
 non-nil, then return the windows in order of stacking, from topmost to
 bottommost."
@@ -90,7 +90,7 @@ bottommost."
 		     (eq (window-actual-group-id x) group-id))
 		   (if by-depth (stacking-order) (managed-windows))))
 
-  (define (windows-in-group w &optional by-depth)
+  (define (windows-in-group w #!optional by-depth)
     "Return the list of windows in the same group as window W."
     (windows-by-group (window-actual-group-id w) by-depth))
 
@@ -133,7 +133,7 @@ id of the new group."
 
 ;;; menu constructor
 
-  (define (window-group-menu &optional w)
+  (define (window-group-menu #!optional w)
     (unless w
       (setq w (or (current-event-window) (input-focus))))
     (let ((group-id (window-actual-group-id w))

@@ -70,14 +70,14 @@ cons cell (COMMAND . EVENT)."
 
 ;;; Substitute one command for another in a keymap
 
-  (define (substitute-keymap-command olddef newdef &optional keymap)
+  (define (substitute-keymap-command olddef newdef #!optional keymap)
     "Substitute all occurrences of the command OLDDEF for the command NEWDEF
 in the keybindings under the keymap or list of keymaps KEYMAP."
     (map-keymap (lambda (k)
 		  (when (eq (car k) olddef)
 		    (rplaca k newdef))) keymap))
 
-  (define (substitute-keymap-event old-ev new-ev &optional keymap)
+  (define (substitute-keymap-event old-ev new-ev #!optional keymap)
     "Substitute all occurrences of the event OLD-EV for the event NEW-EV
 in the keybindings under the keymap or list of keymaps KEYMAP."
     (when (stringp old-ev)
@@ -92,7 +92,7 @@ in the keybindings under the keymap or list of keymaps KEYMAP."
 
 ;;; Adding bindings to a feature that may not yet be loaded
 
-  (defmacro lazy-bind-keys (feature keymap &rest bindings)
+  (defmacro lazy-bind-keys (feature keymap #!rest bindings)
     "Install the list of BINDINGS in KEYMAP, assuming that KEYMAP is available
 once FEATURE has been provided. If FEATURE has not yet been loaded, arrange
 for the bindings to be installed if and when it is."
@@ -104,7 +104,7 @@ for the bindings to be installed if and when it is."
 
 ;;; Search for a named command in the current keymap configuration
 
-  (define (where-is command &optional keymap)
+  (define (where-is command #!optional keymap)
     (let ((where-is-results '()))
       (map-keymap (lambda (k)
 		    (when (eq (car k) command)
@@ -113,7 +113,7 @@ for the bindings to be installed if and when it is."
 		  (or keymap global-keymap))
       where-is-results))
 
-  (define (describe-key &optional map)
+  (define (describe-key #!optional map)
     "Prompt for a key sequence, then print its binding."
     (require 'rep.lang.doc)
     (require 'sawfish.wm.commands.describe)
@@ -147,7 +147,7 @@ for the bindings to be installed if and when it is."
 
 ;;; grab the next key event
 
-  (define (read-event &optional prompt)
+  (define (read-event #!optional prompt)
     (call-with-keyboard-grabbed
      (lambda ()
        (unwind-protect

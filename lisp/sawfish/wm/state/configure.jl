@@ -56,7 +56,7 @@
   ;; list wlist, false otherwise.  Windows do not occlude
   ;; themself.  If inverse is set and true, this function
   ;; returns whether w is occluded _by_ any window in wlist.
-  (defun window-occludes-p (w wlist &optional inverse)
+  (defun window-occludes-p (w wlist #!optional inverse)
     (letrec ((xid< (lambda (a b) (< (window-id a) (window-id b))))
 	     (order (if inverse (reverse (stacking-order)) (stacking-order)))
 	     (below-w (sort (cdr (member w order)) xid<))

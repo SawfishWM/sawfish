@@ -39,7 +39,7 @@ exec rep "$0" "$@"
 				  (substring string (match-end))))
     string))
 
-(defun create-menu (spec &optional bar)
+(defun create-menu (spec #!optional bar)
   (let*
       ((menu (if bar (gtk-menu-bar-new) (gtk-menu-new)))
        (accels (and with-accels (gtk-menu-ensure-uline-accel-group menu))))
@@ -75,7 +75,7 @@ exec rep "$0" "$@"
 	  spec)
     menu))
 
-(defun popup-menu (spec &optional timestamp position)
+(defun popup-menu (spec #!optional timestamp position)
   (let
       ((menu  (create-menu spec)))
     (gtk-signal-connect menu "deactivate" gtk-main-quit)

@@ -41,7 +41,7 @@
 		   (case op
 		     ((print) (lambda (x) (list (prin1-to-string (car x))
 						(prin1-to-string (cdr x)))))
-		     ((dialog) (lambda (title callback &optional value)
+		     ((dialog) (lambda (title callback #!optional value)
 				 (widget-dialog title spec callback
 						value main-window)))
 		     ((validp) ((make-widget spec) 'validp))))))

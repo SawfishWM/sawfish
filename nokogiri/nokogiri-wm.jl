@@ -30,7 +30,7 @@
 
 ;;; wm communication (possibly replace by CORBA..?)
 
-  (define (wm-eval form &optional read-back)
+  (define (wm-eval form #!optional read-back)
     (sawfish-client-eval form (not read-back)))
 
   (define (wm-eval-async form)

@@ -47,7 +47,7 @@
 				     (cdr command) ", "))
 		(beautify-symbol-name command)))))
 
-    (define (dialog title callback &optional value)
+    (define (dialog title callback #!optional value)
       (let ((widget (make-widget `(keymap:binding))))
 	(when value
 	  (widget-set widget value))

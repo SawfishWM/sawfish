@@ -191,7 +191,7 @@
 
 ;;; main entry point
 
-  (define (add-window-matcher prop value &rest actions)
+  (define (add-window-matcher prop value #!rest actions)
     (catch 'out
       (let
 	  ((pair (cons prop value))
@@ -214,7 +214,7 @@
 					 match-window-profile))
 	(add-to (car match-window-profile)))))
 
-  (define (remove-window-matcher prop value &rest props)
+  (define (remove-window-matcher prop value #!rest props)
     (let
 	((pair (cons prop value))
 	 (remove-from (lambda (slot)

@@ -108,7 +108,7 @@ The possible keyword arguments to this function are:
   ;; is one of the symbols `magnetism', `resistance', or `attraction'. DELTA
   ;; is the (signed) number of pixels moved since the last call
   (define (edges-within-epsilon list-1 list-2 epsilon delta
-				old-edge &optional mode)
+				old-edge #!optional mode)
     (let ((compare
 	   (cond ((or (null mode) (eq mode 'magnetism))
 		  (lambda (e1 e2)
@@ -157,7 +157,7 @@ The possible keyword arguments to this function are:
   ;; returns the new (X . Y) of WINDOW. STATE is a cons cell that will be
   ;; used to record state across successive calls
   (define (snap-window-position-to-edges window coords deltas state
-					 &optional epsilon edges mode)
+					 #!optional epsilon edges mode)
     (let* ((dims (window-frame-dimensions window))
 	   (w-x-edges (list (list (car coords) (cdr coords)
 				  (+ (cdr coords) (cdr dims)) t)

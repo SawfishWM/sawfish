@@ -204,7 +204,7 @@
       (list (mapconcat print-matcher (car x) ", ")
 	    (mapconcat print-action (cdr x) ", ")))
 
-    (define (dialog title callback &optional value)
+    (define (dialog title callback #!optional value)
       (let ((vbox (gtk-vbox-new nil box-spacing))
 	    (matcher-widget (make-widget
 			     `(match-window:matchers ,x-properties)))

@@ -49,7 +49,7 @@
 
 ;;; rectangles
 
-  (define (rectangles-from-grid x-points y-points &optional pred)
+  (define (rectangles-from-grid x-points y-points #!optional pred)
     "The two lists of integers X-POINTS and Y-POINTS define a rectangular
 grid. Return the complete list of rectangles formed by the
 intersections of the grid.
@@ -82,7 +82,7 @@ Assumes that X-POINTS and Y-POINTS are both sorted smallest->largest."
 		(setq rects (cons rect rects)))))))
       (nreverse rects)))
 
-  (define (rectangles-from-windows windows &optional weight-fun)
+  (define (rectangles-from-windows windows #!optional weight-fun)
     "Returns a list of (LEFT TOP RIGHT BOTTOM [OVERLAP-WEIGHT])
 representing the rectangles represented by the list of window objects
 WINDOWS.
@@ -104,7 +104,7 @@ return the weight for that window. If not defined, the window's
 			    (list tem)))))
 	    windows))
 
-  (define (grid-from-rectangles rects &optional with-root)
+  (define (grid-from-rectangles rects #!optional with-root)
     "Given a list of rectangles RECTS (each rectangle represented by a
 list of at least four elemements, `(LEFT TOP RIGHT BOTTOM)'), return
 a cons cell `(X-POINTS . Y-POINTS)' defining the grid they represent.

@@ -82,10 +82,10 @@
     :user-level expert
     :type boolean)
 
-  ;; called when a window is maximized, args (W &optional DIRECTION)
+  ;; called when a window is maximized, args (W #!optional DIRECTION)
   (defvar window-maximized-hook nil)
 
-  ;; called when a window is un-maximized, args (W &optional DIRECTION)
+  ;; called when a window is un-maximized, args (W #!optional DIRECTION)
   (defvar window-unmaximized-hook nil)
 
 
@@ -100,7 +100,7 @@
   (define (window-maximized-vertically-p w)
     (window-get w 'maximized-vertically))
 
-  (define (maximize-discard w &optional horizontally vertically)
+  (define (maximize-discard w #!optional horizontally vertically)
     (when horizontally
       (window-put w 'maximized-horizontally nil))
     (when vertically
@@ -203,7 +203,7 @@
 
 ;;; 2D packing
 
-  (define (find-max-rectangle avoided edges &optional head)
+  (define (find-max-rectangle avoided edges #!optional head)
     (let* ((grid (grid-from-edges (car edges) (cdr edges)))
 	   rects)
       (setq rects (rectangles-from-grid
@@ -248,7 +248,7 @@
 
 ;;; size hints stuff
 
-  (define (window-maximizable-p w &optional direction hints)
+  (define (window-maximizable-p w #!optional direction hints)
     (unless hints
       (setq hints (window-size-hints w)))
     (let ((max-width (cdr (assq 'max-width hints)))
@@ -265,7 +265,7 @@
 	  (throw 'out nil))
 	t)))
 
-  (define (maximize-truncate-dims w dims &optional direction hints)
+  (define (maximize-truncate-dims w dims #!optional direction hints)
     (unless hints
       (setq hints (window-size-hints w)))
     (let ((x-base (or (cdr (or (assq 'base-width hints)
@@ -277,7 +277,7 @@
 	  (x-max (cdr (assq 'max-width hints)))
 	  (y-max (cdr (assq 'max-height hints)))
 	  
-	  (trunc (lambda (x inc base &optional maximum)
+	  (trunc (lambda (x inc base #!optional maximum)
 		   (min (+ base (max 0 (- (- x base) (mod (- x base) inc))))
 			(or maximum 65535)))))
       (when (memq direction '(nil horizontal))
@@ -289,7 +289,7 @@
 
 ;;; misc functions
 
-  (define (maximize-find-workarea &optional w)
+  (define (maximize-find-workarea #!optional w)
     "Return the rectangle representing the largest rectangle on the screen that
 doesn't overlap any avoided windows, or nil."
     (let* ((avoided (avoided-windows w))
@@ -301,7 +301,7 @@ doesn't overlap any avoided windows, or nil."
 
 ;;; commands
 
-  (define (maximize-window w &optional direction only-1d)
+  (define (maximize-window w #!optional direction only-1d)
     "Maximize the dimensions of the window."
     (let ((unshade-selected-windows t))
       (display-window-without-focusing w))
@@ -338,7 +338,7 @@ doesn't overlap any avoided windows, or nil."
 	(call-window-hook 'window-maximized-hook w (list direction))
 	(call-window-hook 'window-state-change-hook w (list '(maximized))))))
 
-  (define (unmaximize-window w &optional direction)
+  (define (unmaximize-window w #!optional direction)
     "Restore the dimensions of the window to its original, unmaximized, state."
     (let ((geom (window-get w 'unmaximized-geometry))
 	  (coords (window-position w))
@@ -368,7 +368,7 @@ doesn't overlap any avoided windows, or nil."
     "Maximize the horizontal dimension of the window."
     (maximize-window w 'horizontal))
 
-  (define (maximize-window-toggle w &optional direction)
+  (define (maximize-window-toggle w #!optional direction)
     "Toggle the state of the window between maximized and unmaximized."
     (if (window-maximized-p w)
 	(unmaximize-window w direction)
@@ -400,7 +400,7 @@ unmaximized."
 
 ;;; fill commands
 
-  (define (maximize-fill-window w &optional direction)
+  (define (maximize-fill-window w #!optional direction)
     "Maximize the window without obscuring any other windows."
     (let ((avoid-by-default t)
 	  (maximize-always-expands t)
@@ -415,7 +415,7 @@ unmaximized."
     "Maximize the window horizontally without obscuring any other windows."
     (maximize-fill-window w 'horizontal))
 
-  (define (maximize-fill-window-toggle w &optional direction)
+  (define (maximize-fill-window-toggle w #!optional direction)
     "Toggle the state of the window between maximized-filled and unmaximized."
     (if (window-maximized-p w)
 	(unmaximize-window w direction)

@@ -127,7 +127,7 @@ supported by client window W."
 
 ;;; warping
 
-  (define (warp-cursor-to-window w &optional x y)
+  (define (warp-cursor-to-window w #!optional x y)
     "Move the mouse pointer to position (X, Y) relative to the client window
 associated with object WINDOW.
 
@@ -167,7 +167,7 @@ specified by the user."
 		   (+ (* (ceiling (/ (- x bottom) inc)) inc) bottom)))))
       (clamp x (or minimum base 1) maximum)))
 
-  (define (resize-window-with-hints w cols rows &optional hints)
+  (define (resize-window-with-hints w cols rows #!optional hints)
     "Resize window W to COLS x ROWS, using the window's size hints to define
 the row and column size, and the minimum possible size.
 
@@ -185,7 +185,7 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
        w (constrain-dimension-to-hints (+ x-base (* x-inc cols)) 'x hints)
        (constrain-dimension-to-hints (+ y-base (* y-inc rows)) 'y hints))))
 
-  (define (resize-window-with-hints* w width height &optional hints)
+  (define (resize-window-with-hints* w width height #!optional hints)
     "Resize window W to WIDTH x HEIGHT, with WIDTH and HEIGHT defined in
 terms of pixels. The window's size hints structure defines the minimum
 and maximum dimensions of the window, within which WIDTH and HEIGHT are
@@ -224,7 +224,7 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
 
 ;;; deleting windows
 
-  (define (delete-window w &optional safely)
+  (define (delete-window w #!optional safely)
     "Delete the window."
     (cond
      ((memq 'WM_DELETE_WINDOW (get-window-wm-protocols w))
@@ -296,7 +296,7 @@ possible."
 	  ((and dont-avoid-ignored (window-get w 'ignored)) nil)
 	  (t avoid-by-default)))
 
-  (define (avoided-windows &optional window)
+  (define (avoided-windows #!optional window)
     "Returns a list of all windows that should be left unobscured where
 possible. If WINDOW is defined, then it defines a window that will be never
 returned in the list."

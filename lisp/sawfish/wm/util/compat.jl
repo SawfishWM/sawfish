@@ -43,7 +43,7 @@
 
 ;;; obsolete functions
 
-  (define (show-message &optional text font fg bg position)
+  (define (show-message #!optional text font fg bg position)
     (let ((attrs nil))
       (when font
 	(setq attrs (cons (cons 'font font) attrs)))
@@ -102,11 +102,11 @@
 
 ;;; obsolete custom setters
 
-  (define (custom-set-color var value &optional req)
+  (define (custom-set-color var value #!optional req)
     (custom-set-typed-variable var value 'color req))
-  (define (custom-set-font var value &optional req)
+  (define (custom-set-font var value #!optional req)
     (custom-set-typed-variable var value 'font req))
-  (define (custom-set-frame-style var value &optional req)
+  (define (custom-set-frame-style var value #!optional req)
     (custom-set-typed-variable var value 'frame-style req))
 
   (define-custom-setter 'custom-set-color custom-set-color)

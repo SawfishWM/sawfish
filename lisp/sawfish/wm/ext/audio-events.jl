@@ -81,7 +81,7 @@
     :depends audio-events-enabled
     :group audio)
 
-  (defun audio-event-handler (event &optional w)
+  (defun audio-event-handler (event #!optional w)
     "Possibly play a sound sample for EVENT (a symbol) occurring on window W."
     (when (and audio-events-enabled
 	       (or (null w)

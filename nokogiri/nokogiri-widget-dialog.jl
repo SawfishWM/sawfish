@@ -31,7 +31,7 @@
 	  nokogiri-widget)
 
   (define (widget-dialog title spec callback
-			 &optional initial-value main-window)
+			 #!optional initial-value main-window)
 
     (let* ((widget (make-widget spec))
 	   (vbox (gtk-vbox-new nil box-spacing))

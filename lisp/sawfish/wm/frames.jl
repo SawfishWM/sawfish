@@ -416,7 +416,7 @@ deciding which frame type to ask a theme to generate.")
 
 ;;; loading ``themes'' (currently just frame styles)
 
-  (define (frame-style-directory dir &optional get-name)
+  (define (frame-style-directory dir #!optional get-name)
     (if (and (file-directory-p dir)
 	     (or (file-exists-p (expand-file-name "theme.jl" dir))
 		 (file-exists-p (expand-file-name "theme.jlc" dir))))
@@ -456,7 +456,7 @@ deciding which frame type to ask a theme to generate.")
 	      (gaol-load (expand-file-name "theme.jl" dir) (make-gaol))
 	    (load (expand-file-name "theme" dir) nil t))))))
 
-  (define (find-all-frame-styles &optional sorted)
+  (define (find-all-frame-styles #!optional sorted)
     (let (lst tem)
       (mapc (lambda (dir)
 	      (when (file-directory-p dir)
@@ -498,7 +498,7 @@ deciding which frame type to ask a theme to generate.")
 
 ;;; manipulating the frame part classes variables
 
-  (define (set-frame-part-value class key value &optional override)
+  (define (set-frame-part-value class key value #!optional override)
     (let* ((var (if override 'override-frame-part-classes 'frame-part-classes))
 	   (item (assq class (symbol-value var)))
 	   tem)
@@ -518,13 +518,13 @@ deciding which frame type to ask a theme to generate.")
   ;; they're already set, then create and initialise the keymap from the
   ;; third argument (unless a keymap is already defined)
 
-  (defmacro def-frame-class (class alist &rest keymap-forms)
+  (defmacro def-frame-class (class alist #!rest keymap-forms)
     (if keymap-forms
 	`(when (define-frame-class ',class ,alist t)
 	   ,@keymap-forms)
       `(define-frame-class ',class ,alist)))
 
-  (define (define-frame-class class alist &optional with-keymap)
+  (define (define-frame-class class alist #!optional with-keymap)
     (let ((cell (assq class frame-part-classes))
 	  (ok-to-bind nil))
       (if (not cell)

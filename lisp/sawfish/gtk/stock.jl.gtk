@@ -40,7 +40,7 @@
        ((close) (_ "Close"))
        ((help) (_ "Help")))))
 
-  (define (simple-dialog title widget &optional ok-callback main-window)
+  (define (simple-dialog title widget #!optional ok-callback main-window)
 
     (let ((window (gtk-window-new 'dialog))
 	  (vbox (gtk-vbox-new nil box-spacing))

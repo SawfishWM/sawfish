@@ -33,7 +33,7 @@
 
   (define-structure-alias beos-window-menu sawfish.wm.ext.beos-window-menu)
 
-  (define (abbreviate name &optional len)
+  (define (abbreviate name #!optional len)
     (unless len (setq len 20))
     (if (> (length name) len)
 	(concat (substring name 0 len) "...")

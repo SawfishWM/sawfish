@@ -266,7 +266,7 @@ displayed. See the `display-message' function for more details.")
       (prompt-update-display)
       t))
 
-  (defun prompt (&optional title start)
+  (defun prompt (#!optional title start)
     "Prompt the user for a string."
     (unless (stringp title)
       (setq title "Enter string:"))
@@ -290,7 +290,7 @@ displayed. See the `display-message' function for more details.")
 	       (recursive-edit)))
 	 (display-message nil)))))
 
-  (defun prompt-for-symbol (&optional title predicate validator)
+  (defun prompt-for-symbol (#!optional title predicate validator)
     (let ((prompt-completion-fun 
 	   (lambda (x)
 	     (mapcar symbol-name
@@ -304,7 +304,7 @@ displayed. See the `display-message' function for more details.")
 		 symbol)))))
       (prompt title)))
 
-  (defun prompt-for-function (&optional title)
+  (defun prompt-for-function (#!optional title)
     "Prompt for a function."
     (prompt-for-symbol (or title "Enter name of function:")
 		       (lambda (x)
@@ -314,11 +314,11 @@ displayed. See the `display-message' function for more details.")
 				    (macrop value)
 				    (special-form-p value)))))))
 
-  (defun prompt-for-variable (&optional title start)
+  (defun prompt-for-variable (#!optional title start)
     "Prompt for a variable."
     (prompt-for-symbol (or title "Enter name of variable:") boundp))
 
-  (defun prompt-for-command (&optional title)
+  (defun prompt-for-command (#!optional title)
     (prompt-for-symbol title commandp commandp))
 
 

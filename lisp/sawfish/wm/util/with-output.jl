@@ -46,7 +46,7 @@ emitted text will be display on the screen."
 				#\space (substring out (match-end)))))
 	    (display-message out))))))
 
-  (defmacro with-output-to-screen (&rest forms)
+  (defmacro with-output-to-screen (#!rest forms)
     "Evaluate FORMS. Any data they print to standard-output will be
 displayed on the screen after they return."
     `(call-with-output-to-screen (lambda () ,@forms))))

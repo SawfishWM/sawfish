@@ -41,7 +41,7 @@
     :user-level expert
     :group misc)
 
-  (define (xterm &optional command)
+  (define (xterm #!optional command)
     "Start a new xterm."
     (if (not command)
 	(system (format nil "%s %s >/dev/null 2>&1 </dev/null &"

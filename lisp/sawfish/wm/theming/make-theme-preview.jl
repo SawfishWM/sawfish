@@ -49,7 +49,7 @@
 	      (when (eq w preview-window)
 		(setq preview-window nil))))
 
-  (defun make-theme-preview (patterns frames mappings &optional type)
+  (defun make-theme-preview (patterns frames mappings #!optional type)
     (let ((theme (make-theme patterns frames mappings)))
       (setq preview-theme theme)
       (when type

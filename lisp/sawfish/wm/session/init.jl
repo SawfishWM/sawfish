@@ -67,7 +67,7 @@ the window.")
       (when (file-exists-p file)
 	(delete-file file))))
 
-  (define (sm-add-saved-properties &rest props)
+  (define (sm-add-saved-properties #!rest props)
     (mapc (lambda (p)
 	    (or (memq p sm-saved-window-properties)
 		(setq sm-saved-window-properties

@@ -81,7 +81,7 @@
 
 ;;; entry points
 
-(define (prompt-for-file &optional title existing start default history-list)
+(define (prompt-for-file #!optional title existing start default history-list)
   "Prompt for a file, if EXISTING is t only files which exist are
 allowed to be entered."
   (unless (stringp title)
@@ -97,7 +97,7 @@ allowed to be entered."
       (setq str default))
     str))
 
-(define (prompt-for-directory &optional title existing start default)
+(define (prompt-for-directory #!optional title existing start default)
   "Prompt for a directory, if EXISTING is t only files which exist are
 allowed to be entered."
   (unless (stringp title)
@@ -112,7 +112,7 @@ allowed to be entered."
       (setq str default))
     str))
 
-(define (prompt-from-list options title &optional start dont-validate)
+(define (prompt-from-list options title #!optional start dont-validate)
   "Return a selected choice from the list of options (strings) OPTIONS.
 PROMPT is the title displayed, START the starting choice.
 Unless DONT-VALIDATE is t, only a member of PROMPT-LIST will be returned."
@@ -123,12 +123,12 @@ Unless DONT-VALIDATE is t, only a member of PROMPT-LIST will be returned."
 				 prompt-validate-from-list)))
     (prompt title start)))
 
-(define (prompt-for-string &optional title start)
+(define (prompt-for-string #!optional title start)
   (let ((prompt-completion-fun prompt-complete-filename)
 	(prompt-validation-fun nil))
     (prompt (or title "Enter string: ") start)))
 
-(define (prompt-for-number &optional title)
+(define (prompt-for-number #!optional title)
   (let (num)
     (while (not (numberp num))
       (setq num (read-from-string (prompt (or title "Enter number: ")))))

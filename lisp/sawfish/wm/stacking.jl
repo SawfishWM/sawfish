@@ -56,7 +56,7 @@
     :type (choice all parents none)
     :user-level expert)
 
-  (defmacro save-stacking-order (&rest forms)
+  (defmacro save-stacking-order (#!rest forms)
     "Execute FORMS, then reinstall the original stacking order."
     (let ((tem (gensym)))
       `(let ((,tem (stacking-order)))

@@ -61,7 +61,7 @@
 
 ;;; Activating windows
 
-  (define (display-window-without-focusing w &optional preferred-space)
+  (define (display-window-without-focusing w #!optional preferred-space)
     "Display the workspace/viewport containing the window W."
     (when w
       (let ((uniconify-to-current-workspace
@@ -83,7 +83,7 @@
       (require 'sawfish.wm.util.prompt)
       (list (prompt-for-window))))
 
-  (define (display-window w &optional preferred-space)
+  (define (display-window w #!optional preferred-space)
     "Display the workspace containing the window W, then focus on W."
     (when w
       (display-window-without-focusing w preferred-space)

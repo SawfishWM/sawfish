@@ -81,7 +81,7 @@
 		     (indirect-transient-of-p x-for-w y)
 		   nil))))))
 
-  (define (transient-parents w &optional indirectly)
+  (define (transient-parents w #!optional indirectly)
     "Return the list of windows that window W is a transient for."
     (filter-windows (lambda (x)
 		      (and (window-mapped-p x)
@@ -89,7 +89,7 @@
 				indirect-transient-of-p
 			      transient-of-p) w x)))))
 
-  (define (transient-group w &optional by-depth)
+  (define (transient-group w #!optional by-depth)
     "Return the list of windows which is either a transient window for window
 W, or a window which W is a transient for. This always includes W. The
 `transient window for' relation holds for windows which are direct or

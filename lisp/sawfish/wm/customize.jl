@@ -43,7 +43,7 @@
 
 ;;; ui
 
-  (define (customize &optional group)
+  (define (customize #!optional group)
     "Invoke the user-customization system."
     (system (format nil "%s %s '%S' >/dev/null 2>&1 </dev/null &"
 		    customize-program

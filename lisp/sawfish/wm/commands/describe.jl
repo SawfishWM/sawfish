@@ -49,7 +49,7 @@
 	      (write standard-output #\newline)
 	      (describe-symbol sym)) symbols)))
 
-  (define (apropos-function regexp &optional all-functions)
+  (define (apropos-function regexp #!optional all-functions)
     (format standard-output "Apropos %s `%s':\n\n"
 	    (if all-functions "function" "command") regexp)
     (apropos-output (apropos regexp (if all-functions

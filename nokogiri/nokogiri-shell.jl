@@ -52,7 +52,7 @@
   (define revert-widget)
   (define cancel-widget)
 
-  (define (initialize-shell &optional socket-id)
+  (define (initialize-shell #!optional socket-id)
     (let ((vbox (gtk-vbox-new nil box-spacing))
 	  (paned (gtk-hpaned-new))
 	  (hbox (gtk-hbutton-box-new))
@@ -231,7 +231,7 @@
 	    (gtk-container-remove slot-box-widget w))
 	  (gtk-container-children slot-box-widget)))
 
-  (define (run-shell &optional socket-id)
+  (define (run-shell #!optional socket-id)
     (initialize-configs)
     (initialize-shell socket-id)
     (catch 'nokogiri-exit

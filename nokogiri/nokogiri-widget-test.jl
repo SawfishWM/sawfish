@@ -29,7 +29,7 @@
 	  gtk
 	  nokogiri-widget)
 
-  (define (test-widget spec &optional initial-value)
+  (define (test-widget spec #!optional initial-value)
     (let (widget)
       (setq widget (make-widget spec (lambda ()
 				       (when widget
