@@ -119,12 +119,20 @@
 ;;;###autoload
 (defun raise-group (w)
   (interactive "%W")
-  (map-window-group raise-window w))
+  (let ((order (windows-in-group w t)))
+    (mapc (lambda (x)
+	    (unless (eq w x)
+	      (raise-window x))) (nreverse order))
+    (raise-window w)))
 
 ;;;###autoload
 (defun lower-group (w)
   (interactive "%W")
-  (map-window-group lower-window w))
+  (let ((order (windows-in-group w t)))
+    (mapc (lambda (x)
+	    (unless (eq w x)
+	      (lower-window x))) order)
+    (lower-window w)))
 
 ;;;###autoload
 (defun raise-group-depth (w)
@@ -136,6 +144,15 @@
   (interactive "%W")
   (map-window-group lower-window-depth w))
 
+;;;###autoload
+(defun raise-lower-group (w)
+  (interactive "%W")
+  (if (window-on-top-p w)
+      (progn
+	(lower-group w)
+	(lower-window w))
+    (raise-group w)
+    (raise-window w)))
 
 
 ;; framing
