@@ -273,3 +273,22 @@ send_client_message (Window w, Atom a, Time time)
   ev.data.l[1] = time;
   XSendEvent (dpy, w, False, 0L, (XEvent *) &ev);
 }
+
+#if XlibSpecificationRelease < 6
+Status
+XGetAtomNames (Display *dpy, Atom *atoms, int count, char **names_ret)
+{
+    int i;
+    for (i = 0; i < count; i++)
+    {
+	names_ret[i] = XGetAtomName (dpy, atoms[i]);
+	if (names_ret[i] == 0)
+	    break;
+    }
+    if (i == count)
+	return 1;
+    for (i--; i >= 0; i--)
+	XFree (names_ret[i]);
+    return 0;
+}
+#endif
