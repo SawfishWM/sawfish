@@ -280,8 +280,7 @@
 	   t)
 	  ((and (eq type '_WIN_HINTS) (windowp w))
 	   (let ((mask (aref data 0))
-		 (bits (aref data 1))
-		 tem)
+		 (bits (aref data 1)))
 	     (unless (zerop (logand mask WIN_HINTS_SKIP_FOCUS))
 	       (window-put w 'cycle-skip
 			   (not (zerop (logand bits WIN_HINTS_SKIP_FOCUS)))))
