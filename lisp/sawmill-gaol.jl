@@ -83,10 +83,15 @@
 
   (eval-after-load
    "x" '(mapc gaol-add-function '(x-create-gc x-change-gc x-destroy-gc x-gc-p
+				  x-create-pixmap x-create-bitmap
 				  x-change-window-attributes x-window-p
+				  x-destroy-drawable x-drawable-p
+				  x-pixmap-p x-bitmap-p x-drawable-id
+				  x-drawable-width x-drawable-height
 				  x-window-id x-window-back-buffer
 				  x-window-swap-buffers x-clear-window
 				  x-draw-string x-draw-line
 				  x-draw-rectangle x-fill-rectangle
 				  x-draw-arc x-fill-arc x-fill-polygon
-				  x-copy-area x-draw-image))))
+				  x-copy-area x-draw-image
+				  x-grab-image-from-drawable))))
