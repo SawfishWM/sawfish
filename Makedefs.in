@@ -1,0 +1,102 @@
+# Makedefs.in -- input for the common Makefile definitions
+# $Id$
+#
+# Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+#
+# This file is part of sawmill.
+#
+# sawmill is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# sawmill is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with sawmill; see the file COPYING.  If not, write to
+# the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+version=@version@
+rep_version=@REP_VERSION@
+SHELL=/bin/sh
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+datadir=@datadir@
+bindir=@bindir@
+includedir=@includedir@
+infodir=@infodir@
+libdir=@libdir@
+libexecdir=@libexecdir@
+localstatedir=@localstatedir@
+mandir=@mandir@
+sharedstatedir=@sharedstatedir@
+
+sawfishdir=@sawfishdir@
+lispdir=@lispdir@
+nokogiridir=@nokogiridir@
+localedir=@localedir@
+sawfishexecdir=@sawfishexecdir@
+host_type=@host@
+GNOMEDIR=@GNOMEDIR@
+
+CC=@CC@
+MAKEDEP=@MAKEDEP@
+CPPFLAGS=-DHAVE_CONFIG_H -DSAWFISH -I. -I.. @CPPFLAGS@
+CFLAGS=@CFLAGS@
+LDFLAGS=@LDFLAGS@
+LIBS=@LIBS@
+LIBOBJS=@LIBOBJS@
+X11_CFLAGS=@X_CFLAGS@
+X11_LIBS=@X_PRE_LIBS@ -lX11 @X_LIBS@ @X_EXTRA_LIBS@
+EXTRA_X11_LIBS=@XINERAMA_LIBS@ -lXext
+IMLIB_CFLAGS=@IMLIB_CFLAGS@
+IMLIB_LIBS=@IMLIB_LIBS@
+GDK_PIXBUF_CFLAGS=@GDK_PIXBUF_CFLAGS@
+GDK_PIXBUF_LIBS=@GDK_PIXBUF_LIBS@
+IMAGE_LIBS=@IMAGE_LIBS@
+IMAGE_CFLAGS=@IMAGE_CFLAGS@
+GTK_CFLAGS=@GTK_CFLAGS@
+GTK_LIBS=@GTK_LIBS@
+REP_CFLAGS=@REP_CFLAGS@
+REP_LIBS=@REP_LIBS@
+AUDIOFILE_CFLAGS=@AUDIOFILE_CFLAGS@
+AUDIOFILE_LIBS=@AUDIOFILE_LIBS@
+ESD_CFLAGS=@ESD_CFLAGS@
+ESD_LIBS=@ESD_LIBS@
+LINGUAS=@LINGUAS@
+
+DESTDIR=
+INSTALL=@INSTALL@
+INSTALL_DATA=@INSTALL_DATA@
+INSTALL_PROGRAM=@INSTALL_PROGRAM@
+INSTALL_SCRIPT=@INSTALL_SCRIPT@
+
+.PHONY: clean realclean install
+
+repexecdir=@REP_EXECDIR@
+include $(repexecdir)/rules.mk
+
+%.o : %.c
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
+
+% : %.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LIBS)
+
+# This rule builds dependancy files from C source files.
+.%.d : %.c
+	$(SHELL) -ec '$(MAKEDEP) $(CPPFLAGS) $(CFLAGS) $< \
+	| sed '\''s/$*\.o/& $*.lo .$*\.d/g'\'' > $@'
+
+# Always use GNU gettext implementation
+REP_MSGFMT=@REP_MSGFMT@
+
+# used when compiling/running lisp code
+REP_ENVIRON=REP_DL_LOAD_PATH=$(top_builddir)/src/.libexec \
+	    REP_GTK_DONT_INITIALIZE=1
+
+%.mo : %.po
+	$(REP_MSGFMT) $(MSGFMTFLAGS) -o $@ $<
