@@ -368,6 +368,12 @@ add_window (Window id)
 	    }
 	}
 	Fwindow_put (rep_VAL(w), Qplaced, Qt);
+
+	if (w->id != 0)
+	{
+	    /* Tell the window where it ended up.. */
+	    send_synthetic_configure (w);
+	}
     }
     return w;
 }
