@@ -125,7 +125,7 @@
      _NET_WM_WINDOW_TYPE_UTILITY
      _NET_WM_WINDOW_TYPE_SPLASH])
   
-  (defvar wm-spec-below-depth +2)
+  (defvar wm-spec-below-depth -2)
   (defvar wm-spec-above-depth +2)
 
   (define supported-states '())
