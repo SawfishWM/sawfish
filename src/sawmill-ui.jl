@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.15 1999/08/29 16:19:32 john Exp $
+;; $Id: sawmill-ui.jl,v 1.16 1999/08/30 17:29:05 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -707,6 +707,90 @@ fi
       (gtk-frame-set-label frame "")
       (gtk-label-set label ""))))
       
+
+;; customizing frame styles
+
+(put 'frame-style 'builder 'build-frame-style)
+(defun build-frame-style (spec)
+  (let
+      ((vbox (gtk-vbox-new nil 0))
+       (hbox (gtk-hbox-new nil 0))
+       (omenu (gtk-option-menu-new))
+       (menu (gtk-menu-new))
+       (doc-label (gtk-label-new (get-key spec ':doc)))
+       (readme-label (gtk-label-new ""))
+       (frame (gtk-frame-new "Details"))
+       (values (nth 1 spec))
+       (i 0)
+       history button last)
+
+    (gtk-box-set-spacing hbox ui-box-spacing)
+    (gtk-container-border-width hbox ui-box-border)
+    (gtk-box-set-spacing vbox ui-box-spacing)
+    (gtk-container-border-width vbox ui-box-border)
+    (gtk-frame-set-label frame "Details")
+    (gtk-container-add frame readme-label)
+    (gtk-container-add hbox omenu)
+    (gtk-container-add hbox doc-label)
+    (gtk-container-add vbox hbox)
+    (gtk-container-add vbox frame)
+    (gtk-label-set-justify doc-label 'left)
+    (gtk-label-set-justify readme-label 'left)
+    ;(gtk-label-set-line-wrap readme-label t)
+
+    (unless (key-exists-p spec ':value)
+      (set-key spec ':value (car values)))
+    (while values
+      (setq button (gtk-radio-menu-item-new-with-label-from-widget
+		    last (symbol-name (car values))))
+      (gtk-menu-append menu button)
+      (when (eq (car values) (get-key spec ':value))
+	(gtk-check-menu-item-set-state button t)
+	(setq history i))
+      (gtk-widget-show button)
+      (gtk-signal-connect button "toggled"
+			  `(lambda (w)
+			     (when (gtk-check-menu-item-active w)
+			       (build-frame-style:set ',spec ',(car values)))))
+      (setq i (1+ i))
+      (setq values (cdr values))
+      (setq last button))
+    (gtk-option-menu-set-menu omenu menu)
+    (when history
+      (gtk-option-menu-set-history omenu history))
+
+    (setq spec (nconc spec (list ':readme readme-label)))
+
+    (build-frame-style:update-readme spec)
+    vbox))
+    
+(defun build-frame-style:set (spec value)
+  (ui-set spec (get-key spec ':variable) value)
+  (build-frame-style:update-readme spec))
+
+(defun build-frame-style:update-readme (spec)
+  (catch 'out
+    (mapc #'(lambda (dir)
+	      (let
+		  ((full (expand-file-name
+			  (symbol-name (get-key spec ':value)) dir)))
+		(when (file-directory-p full)
+		  (setq full (expand-file-name "README" full))
+		  (if (file-exists-p full)
+		      (let
+			  ((text (make-string-output-stream))
+			   (file (open-file full 'read)))
+			(unwind-protect
+			    (progn
+			      (copy-stream file text)
+			    (setq text (get-output-stream-string text))
+			      (gtk-label-set (get-key spec ':readme) text))
+			  (close-file file)))
+		    (gtk-label-set (get-key spec ':readme) ""))
+		  (throw 'out t))))
+	  (get-key spec ':theme-path))
+    (gtk-label-set (get-key spec ':readme) "")))
+
 
 ;; building the frame for the element tree
 
