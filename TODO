@@ -18,12 +18,6 @@ Outstanding bugs
   ! (bind-keys global-keymap "KP_End" 'emacs-fg) in .sawmillrc and
     keyboard goes dead
 
-  ! grabbing `-Off' modified events doesn't work anymore (e.g. bind
-    Button1-M-Off in window-keymap to raise-lower-window)
-
-    [ the grab seems to get through, and the command can be found when
-      searching manually, so where's the bug? ]
-
   ! menus appear too high in java/swing apps until window is moved
 
     [ works okay for me with SUN Java on Solaris.. ]
@@ -83,6 +77,8 @@ Outstanding bugs
 
 Window manager tasks
 ====================
+
+  + look at TryExec field in GNOME desktop entries
 
   + add a function to turn icons into lisp images
 
@@ -256,6 +252,8 @@ Window manager tasks
 
 sawmill-ui tasks
 ================
+
+  + split theme menu by first letter, if many themes to show
 
   + rewrite sawmill-ui to use ``items'' as in sawmill-themer (complex
     widgets represented by functional data types). This would allow

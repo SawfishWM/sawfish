@@ -1,4 +1,16 @@
+2000-01-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keymaps.jl (window-keymap): bind move-window-interactively to
+	M-Button1-Move not M-Button1-Click1. Pointed out by Matt Krai
+	<krai@ghs.com>
+
+	* gnome-menu.jl (gnome-menu-read-desktop-entry): handle null
+	names when building menu items
+
 2000-01-09  John Harper  <john@dcs.warwick.ac.uk>
+
+        * iconify.jl (toggle-single-window-mode): set
+        raise-windows-on-uniconify to nil while executing this command
 
 	* version 0.21
 
