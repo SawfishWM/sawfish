@@ -2797,9 +2797,9 @@ When set, the window is ignored in many operations.
 When set, the window will not be covered when maximizing, or when
 placing using the first-fit or best-fit methods
 
-@item workspace
-An integer defining the workspace that the window is a member of, or
-unset if the window is not a member of any one workspace.
+@item workspaces
+A list of integers defining the workspaces that the window is a member of, or
+nil if the window is sticky.
 @xref{Workspaces}.
 
 @item sticky
