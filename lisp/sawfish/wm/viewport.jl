@@ -41,9 +41,6 @@
   :range (1 . nil)
   :after-set viewport-size-changed)
 
-(defun viewport-size-changed ()
-  (call-hook 'viewport-resized-hook))
-
 
 ;; raw viewport handling
 
@@ -62,8 +59,10 @@
     (setq viewport-x-offset x)
     (setq viewport-y-offset y)))
 
-(add-hook 'before-exit-hook #'(lambda ()
-				(set-viewport 0 0)))
+(add-hook 'before-exit-hook
+	  #'(lambda ()
+	      (set-screen-viewport 0 0)
+	      (mapc 'move-window-to-current-viewport (managed-windows))))
 
 
 ;; screen sized viewport handling
@@ -85,22 +84,50 @@
     (set-screen-viewport (+ (car port) right)
 			 (+ (cdr port) down))))
 
+(defun window-outside-workspace-p (window)
+  (let
+      ((pos (window-position window))
+       (right (- (* viewport-columns (screen-width)) viewport-x-offset))
+       (bottom (- (* viewport-rows (screen-height)) viewport-y-offset)))
+    (or (>= (car pos) right) (>= (car pos) bottom))))
+
+(defun move-window-to-current-viewport (window)
+  (let
+      ((pos (window-position window)))
+    (move-window-to window (mod (car pos) (screen-width))
+		    (mod (cdr pos) (screen-height)))))
+
+(defun viewport-size-changed ()
+  (let
+      ((port (screen-viewport)))
+    (set-screen-viewport (min (car port) (1- viewport-columns))
+			 (min (cdr port) (1- viewport-rows)))
+    (mapc #'(lambda (w)
+	      (when (window-outside-workspace-p w)
+		(move-window-to-current-viewport w)))
+	  (managed-windows))
+    (call-hook 'viewport-resized-hook)))
+
 
 ;; commands
 
 (defun move-viewport-right ()
+  "Move the viewport one screen to the right."
   (interactive)
   (move-viewport 1 0))
 
 (defun move-viewport-left ()
+  "Move the viewport one screen to the left."
   (interactive)
   (move-viewport -1 0))
 
 (defun move-viewport-down ()
+  "Move the viewport one screen down."
   (interactive)
   (move-viewport 0 1))
 
 (defun move-viewport-up ()
+  "Move the viewport one screen up."
   (interactive)
   (move-viewport 0 -1))
 
@@ -128,7 +155,9 @@
       (if (or (not viewport) (window-get w 'fixed-position))
 	  (move-window-to w (car position) (cdr position))
 	(move-window-to w (+ (* (car viewport) (screen-width)) (car position))
-			(+ (* (cdr viewport) (screen-height)) (cdr position))))
+			(+ (* (cdr viewport) (screen-height)) (cdr position)))
+	(when (window-outside-workspace-p w)
+	  (move-window-to-current-viewport w)))
       (window-put w 'placed t))))
 			     
 (sm-add-saved-properties 'fixed-position)
