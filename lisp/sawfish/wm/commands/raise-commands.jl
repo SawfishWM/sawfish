@@ -46,20 +46,30 @@
     "Raise the window that received the current event, then replay any pointer
 events that invoked the command."
     (when (windowp w)
-      (raise-window* w))
+      (maybe-raise-window w))
     (replay-pointer w))
 
   (define (and-pass-through-click-if-focused w)
     "Raise the window that received the current event (if it's focused), then
 replay any pointer events that invoked the command."
     (when (and (windowp w) (eq w (input-focus)))
-      (raise-window* w))
+      (maybe-raise-window w))
     (replay-pointer w))
 
   (define (or-pass-through-click w)
     (if (and (windowp w) (not (window-on-top-p w)))
-	(raise-window* w)
+	(maybe-raise-window w)
       (replay-pointer w)))
+
+  ;;###autoload
+  (define-command 'raise-and-pass-through-click
+    and-pass-through-click #:spec "%W")
+  (define-command 'raise-and-pass-through-click-if-focused
+    and-pass-through-click-if-focused #:spec "%w")
+  (define-command 'raise-or-pass-through-click
+    or-pass-through-click #:spec "%w")
+
+;;; these should probably be considered obsolete
 
   (define (window-and-pass-through-click w)
     "Raise the window that received the current event, then replay any pointer
@@ -83,12 +93,6 @@ has, then replay any pointer events that invoked the command."
     (replay-pointer w))
 
   ;;###autoload
-  (define-command 'raise-and-pass-through-click
-    and-pass-through-click #:spec "%W")
-  (define-command 'raise-and-pass-through-click-if-focused
-    and-pass-through-click-if-focused #:spec "%w")
-  (define-command 'raise-or-pass-through-click
-    or-pass-through-click #:spec "%w")
   (define-command 'raise-window-and-pass-through-click
     window-and-pass-through-click #:spec "%w" #:user-level 'expert)
   (define-command 'raise-group-and-pass-through-click

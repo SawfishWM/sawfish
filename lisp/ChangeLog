@@ -1,3 +1,37 @@
+2000-12-31  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/windows.jl (window-supports-wm-protocol-p): new
+	function, saves consing up a list just to call memq on it
+	(delete-window-safely): use the new function
+
+	* sawfish/wm/util/ping.jl (window-supports-ping-p): use
+	window-supports-wm-protocol-p
+
+	* sawfish/wm/util/stacking.jl (maybe-raise-window,
+	maybe-lower-window): new functions. These introduce two new
+	WM_PROTOCOLS: _SAWFISH_WM_RAISE_WINDOW and
+	_SAWFISH_WM_LOWER_WINDOW.
+
+	These are similar to WM_TAKE_FOCUS, in that if the window
+	supports the protocol, it's up to it whether or not it raises
+	(or lowers) the window in question. These functions should only
+	be used where the user hasn't explicitly requested the
+	restacking
+
+	An example usage is an application that doesn't want its window
+	to be raised due to a button-press event that initiates a drag
+	operation
+
+	* sawfish/wm/ext/auto-raise.jl, sawfish/wm/util/stacking.jl:
+	use the maybe-raise-window function instead of raise-window*
+
+2000-12-30  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/placement/off-center.jl: another new placement
+	mode. This one places windows in the centre of the screen.
+	However if doing so would fully cover another window, then try
+	another position roughly in the centre
+
 2000-12-22  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/placement/smart.jl (sp-cost-components): removed

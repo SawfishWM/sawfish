@@ -49,7 +49,8 @@
 	  sawfish.wm.placement
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
-	  sawfish.wm.state.maximize)
+	  sawfish.wm.state.maximize
+	  sawfish.wm.state.iconify)
 
   (define top-left '(8 . 8))
   (define fuzz '(8 . 16))
@@ -68,6 +69,8 @@
      (lambda (w)
        (and (window-in-workspace-p w current-workspace)
 	    (not (window-outside-viewport-p w))
+	    (window-mapped-p w)
+	    (not (window-iconified-p w))
 	    (let ((w-point (window-position w)))
 	      (and (< (abs (- (car w-point) (car point))) (car fuzz))
 		   (< (abs (- (cdr w-point) (cdr point))) (cdr fuzz))))))))

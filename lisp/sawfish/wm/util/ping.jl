@@ -46,7 +46,7 @@
 
   (define (window-supports-ping-p w)
     "Returns true if window W supports the _NET_WM_PING protocol."
-    (memq '_NET_WM_PING (get-window-wm-protocols w)))
+    (window-supports-wm-protocol-p w '_NET_WM_PING))
 
   (define (ping-window w callback timeout-msecs)
     "Assuming that window W supports the _NET_WM_PING protocol (i.e. the
