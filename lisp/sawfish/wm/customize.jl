@@ -112,16 +112,16 @@
 		  (label ,doc)))
 
 	  ;; XXX all but the first should have their own widget types
-	  ((memq type '(string file-name program-name color))
+	  ((memq type '(string file-name program-name))
 	   `(hbox (string :variable ,symbol
 			  :value ,(if (stringp value) value "")
 			  :allow-nil ,(get symbol 'custom-allow-nil))
 		  (label ,doc)))
 
-	  ((eq type 'font)
-	   `(hbox (font :variable ,symbol
-			:value ,value
-			:allow-nil ,(get symbol 'custom-allow-nil))
+	  ((memq type '(font color))
+	   `(hbox (,type :variable ,symbol
+			 :value ,value
+			 :allow-nil ,(get symbol 'custom-allow-nil))
 		  (label ,doc)))
 
 	  ((and (consp type) (eq (car type) 'set))
