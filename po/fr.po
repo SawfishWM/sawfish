@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sawfish 0.35\n"
-"POT-Creation-Date: 2001-01-07 01:50+0100\n"
-"PO-Revision-Date: 2001-01-07 15:48+01:00\n"
+"Project-Id-Version: sawfish 0.38\n"
+"POT-Creation-Date: 2001-03-15 07:05+0100\n"
+"PO-Revision-Date: 2001-03-15 08:04+01:00\n"
 "Last-Translator: Christian Marillat <marillat.christian@wanadoo.fr>\n"
 "Language-Team: Gnome French Team <gnomefr@gnomefr.traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -119,9 +119,40 @@ msgstr "Ouvrir"
 msgid "Preferences"
 msgstr "Préférences"
 
+#. ../themes/Crux/theme.jl
+msgid "Crux Theme"
+msgstr "Thème Crux"
+
+#. ../themes/Crux/theme.jl
+msgid ""
+"Accent color for focused windows (if unset uses the GTK+ selection color)."
+msgstr ""
+"Couleur foncée pour les fenêtres ayant le focus (si non spécifié utiliser\n"
+"la couleur de fond de GTK+."
+
+#. ../themes/Crux/theme.jl
+msgid "Display the window's icon in its menu button."
+msgstr "Afficher les icônes des applications dans le bouton menu."
+
+#. ../themes/Crux/theme.jl
+msgid "Display title buttons to mimic: \\w"
+msgstr "Afficher les titres des boutons en imitant : \\w"
+
 #. ../themes/gradient/theme.jl
 msgid "Gradient Theme"
 msgstr "Thème Gradient"
+
+#. ../themes/gradient/theme.jl
+msgid "horizontal"
+msgstr "horizontal"
+
+#. ../themes/gradient/theme.jl
+msgid "vertical"
+msgstr "vertical"
+
+#. ../themes/gradient/theme.jl
+msgid "diagonal"
+msgstr "diagonal"
 
 #. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
@@ -160,8 +191,20 @@ msgstr ""
 "de fond de GTK+."
 
 #. ../themes/mono/theme.jl
-msgid "Color of active frames."
-msgstr "Couleur des cadres actifs."
+msgid "Color of active frames (if unset use GTK+ selection color)."
+msgstr "Couleur des cadres actifs (si non spécifié utiliser la couleur de GTK+."
+
+#. ../themes/mono/theme.jl
+msgid "left"
+msgstr "gauche"
+
+#. ../themes/mono/theme.jl
+msgid "right"
+msgstr "droite"
+
+#. ../themes/mono/theme.jl
+msgid "center"
+msgstr "centre"
 
 #. ../themes/mono/theme.jl
 msgid "Text is \\w justified in window titles."
@@ -562,12 +605,22 @@ msgstr ""
 "testés dans cette table.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du bouton ombré d'une fenêtre. (Seuls les raccourcis souris sont\n"
+"testés dans cette table.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Motion threshold for mouse pointer: \\wpixels"
 msgstr "Réactivité de déplacement du pointeur de la souris : \\wpixels"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr "Touche(s) modificatrice utilisée(s) pour les raccourcis clavier de Sawfish"
+msgstr ""
+"Touche(s) modificatrice utilisée(s) pour les raccourcis clavier de Sawfish"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Display key-binding information in menu items."
@@ -728,11 +781,25 @@ msgstr "Méthode de placement des fenêtres : \\w"
 
 #. ../lisp/sawfish/wm/placement.jl
 msgid "Method of placing dialog windows: \\w"
-msgstr "Méthode de placement des boïtes de dialogue : \\w"
+msgstr "Méthode de placement des boîtes de dialogue : \\w"
 
 #. ../lisp/sawfish/wm/placement.jl
 msgid "Ignore program-specified window placements."
 msgstr "Ignorer les positions spécifiées par le programme pour la fenêtre."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "all"
+msgstr "Tous"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "parent"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "none"
+msgstr "aucun"
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Keep transient windows stacked above: \\w"
@@ -842,7 +909,8 @@ msgid ""
 msgstr ""
 "Donner le focus aux fenêtres même si il n'a pas été demandé..\n"
 "\n"
-"Les fenêtres doivent avoir `accepts input' dans leurs propriétés WM_HINTS pour savoir si elles requirent le focus ou pas."
+"Les fenêtres doivent avoir `accepts input' dans leurs propriétés WM_HINTS "
+"pour savoir si elles requirent le focus ou pas."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid ""
@@ -882,15 +950,239 @@ msgstr "Effacer la fenêtre."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete the window, or beep if the window can't be closed safely."
-msgstr "Effacer la fenêtre, ou biper si la fenêtre ne peut pas être fermée en toute sécurité"
+msgstr ""
+"Effacer la fenêtre, ou biper si la fenêtre ne peut pas être fermée en toute "
+"sécurité"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Force the current window to have a unique title."
 msgstr "Forcer la fenêtre courante à avoir un titre unique."
 
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Play sound effects for window events."
+msgstr "Activer les effets audio pour les évènements des fenêtres."
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Play sound effects for unmanaged windows."
+msgstr "Activer les effets audio pour les fenêtres non gérées."
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Event"
+msgstr "Événement"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Audio file"
+msgstr "Fichier audio"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+msgid "Raise windows when they are focused."
+msgstr "Mettre au premier plan les fenêtres lorsqu'elles ont le focus."
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+msgid "Delay in milliseconds until focused windows are raised."
+msgstr ""
+"Délai en millisecondes avant que les fenêtres ayant le focus\n"
+"soient mises au premier plan."
+
+#. ../lisp/sawfish/wm/ext/beos-window-menu.jl
+msgid "The hierarchical window menu raises singleton submenus."
+msgstr "Afficher le menu des fenêtres sans sous menus."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr ""
+"Passer au bureau suivant lorsque le pointeur atteint le bord de l'écran."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "viewport"
+msgstr "visuel"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "workspace"
+msgstr "Bureau"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "En atteignant le bord de l'écran, sélectionner le prochain : \\w"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Only flip when interactively moving a window."
+msgstr "Basculer uniquement lors du déplacement interactif d'une fenêtre."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Milliseconds to delay before flipping: \\w"
+msgstr "Délai en millisecondes avant de basculer : \\w"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Warp pointer to opposite screen edge when flipping."
+msgstr ""
+"Déplacer le pointeur sur le coté opposé de l'écran lors du\n"
+"basculement."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Error Handling"
+msgstr "Gestion des erreurs"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Emit a beeping sound when errors occur."
+msgstr "Émettre un beep quand une erreur survient."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "nowhere"
+msgstr "nulle part"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "screen"
+msgstr "écran"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "standard-error"
+msgstr "erreur standard"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Where to display error messages: \\w"
+msgstr "Ou afficher les messages d'erreur : \\w"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "No errors."
+msgstr "Pas d'erreurs"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display all errors that have occurred to the screen."
+msgstr "Afficher toutes les erreurs survenues à l'écran."
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "State"
+msgstr "État"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Other"
+msgstr "Autre"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid ""
+"Enable shade-hover mode.\n"
+"\n"
+"(Temporarily unshades windows while the mouse pointer is over them.)"
+msgstr ""
+"Activer le mode shade-hover.\n"
+"\n"
+"(Enlever temporairement le focus de la fenêtre quand la souris passe dessus)."
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Delay in milliseconds before unshading windows."
+msgstr ""
+"Délai en millisecondes avant que les fenêtres ayant le focus soient\n"
+"mises au premier plan."
+
+#. ../lisp/sawfish/wm/state/shading.jl
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Raise windows when they are unshaded."
+msgstr "Mettre au premier plan les fenêtres lorsqu'elles n'ont pas le focus."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Display tooltips for window frames."
+msgstr "Afficher les bulles d'aide pour les cadres des fenêtres."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Remove tooltips after a period of time."
+msgstr "Enlever les bulles d'aide après un certain temps."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Show full documentation in tooltips."
+msgstr "Afficher toute la documentation dans les bulles d'aide."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Délai (en ms) avant d'afficher les bulles d'aide."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Délai (en ms) avant d'effacer les bulles d'aide."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Font used to display tooltips."
+msgstr "Police utilisée pour les bulles d'aide."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips background"
+msgstr "Couleur du fond pour les bulles d'aide"
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips foreground"
+msgstr "Couleur du texte pour les bulles d'aide"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember _position"
+msgstr "Mémoriser la _position"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember _dimensions"
+msgstr "Mémoriser la _dimension"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember _attributes"
+msgstr "Mémoriser les _attributs"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "_Forget saved state"
+msgstr "_Oublier l'état sauvé"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember window positions."
+msgstr "Mémoriser automatiquement la position des fenêtres."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember window sizes."
+msgstr "Mémoriser automatiquement la taille des fenêtres."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember other window attributes."
+msgstr "Mémoriser automatiquement les autres attributs des fenêtres."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Don't automatically remember details of transient windows."
+msgstr "Ne pas mémoriser automatiquement les détails des fenêtres temporaire."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current position of the focused window."
+msgstr "Mémoriser la position de la fenêtre ayant le focus."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current dimensions of the focused window."
+msgstr "Mémoriser les dimensions de la fenêtre ayant le focus."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current attributes of the focused window."
+msgstr "Mémoriser les attributs de la fenêtre ayant le focus."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget any persistent state associated with the current window."
+msgstr "Oublis tout état persistant associé à la fenêtre courante."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget all saved window history."
+msgstr "Oublier l'historique des fenêtres déjà sauvé."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "_History"
+msgstr "_Historique"
+
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Virtual desktop configuration."
 msgstr "Configuration des bureaux virtuel."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "stop"
+msgstr "stop"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "wrap-around"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "keep-going"
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "When passing the first or last workspace: \\w"
@@ -1126,6 +1418,10 @@ msgstr "Lancer le navigateur d'aide Gnome."
 msgid "Launch the GNOME about dialog."
 msgstr "Afficher la boîte de dialogue à propos Gnome."
 
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete all windows in the group that the current window is a member of."
+msgstr "Effacer toutes les fenêtres du groupe duquel appartient la fenêtre courante."
+
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing an already grown window grows it again."
 msgstr "Si agrandir une fenêtre déjà grande, l'agrandit encore."
@@ -1139,6 +1435,18 @@ msgstr ""
 "Si agrandir est considéré comme la maximisation. Si vous enclenchez\n"
 "ceci, vous pouvez utiliser `démaximiser la fenêtre' or quelque chose\n"
 "de similaire pour restaurer la taille originale."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr "peut être"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "always"
+msgstr "toujours"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "never"
+msgstr "jamais"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
@@ -1241,6 +1549,14 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr "Déplacer le curseur d'un pixel vers le bas."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "opaque"
+msgstr "opaque"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "box"
+msgstr "boite"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How windows being moved are animated: \\w"
 msgstr "Comment les fenêtres déplacées seront animées : \\w"
 
@@ -1263,6 +1579,22 @@ msgid "Show current dimensions of windows while resizing."
 msgstr "Afficher les dimensions de la fenêtre pendant son redimensionnement."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "region"
+msgstr "region"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "border"
+msgstr "bordure"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "grab"
+msgstr "saisir"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "border-grab"
+msgstr "saisir le bord"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to choose window edges when resizing: \\w"
 msgstr ""
 "Comment choisir les bords de la fenêtre lors du redimensionnement : \\w"
@@ -1278,18 +1610,24 @@ msgstr ""
 "les attirer bordure à bordure."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "magnetism"
+msgstr "magnétisme"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "resistance"
+msgstr "résistance"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "attraction"
+msgstr "attraction"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to snap together window edges: \\w"
 msgstr "Comment attirer ensemble deux fenêtres : \\w"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Snap to otherwise-ignored windows."
 msgstr "Attirer bordure à bordure avec les autres fenêtres ignorées."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Lock position and size while windows are maximized."
-msgstr ""
-"Bloquer la taille et la position d'une fenêtre pendant que la\n"
-"fenêtre est maximisée."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Only update window contents after it has stopped moving."
@@ -1436,7 +1774,8 @@ msgstr "Déplacer la fenêtre vers le visuel suivant."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Display window names while cycling through windows."
-msgstr "Afficher le nom des fenêtres lors de la rotation à travers les fenêtres."
+msgstr ""
+"Afficher le nom des fenêtres lors de la rotation à travers les fenêtres."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Display window icons while cycling through windows."
@@ -1497,196 +1836,6 @@ msgstr "Paramètres optionnels passés à la commande `xterm'."
 msgid "Start a new xterm."
 msgstr "Démarrer un nouveau xterm."
 
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Play sound effects for window events."
-msgstr "Activer les effets audio pour les évènements des fenêtres."
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Play sound effects for unmanaged windows."
-msgstr "Activer les effets audio pour les fenêtres non gérées."
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Event"
-msgstr "Événement"
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Audio file"
-msgstr "Fichier audio"
-
-#. ../lisp/sawfish/wm/ext/auto-raise.jl
-msgid "Raise windows when they are focused."
-msgstr "Mettre au premier plan les fenêtres lorsqu'elles ont le focus."
-
-#. ../lisp/sawfish/wm/ext/auto-raise.jl
-msgid "Delay in milliseconds until focused windows are raised."
-msgstr ""
-"Délai en millisecondes avant que les fenêtres ayant le focus\n"
-"soient mises au premier plan."
-
-#. ../lisp/sawfish/wm/ext/beos-window-menu.jl
-msgid "The hierarchical window menu raises singleton submenus."
-msgstr "Afficher le menu des fenêtres sans sous menus."
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Select the next desktop when the pointer hits screen edge."
-msgstr ""
-"Passer au bureau suivant lorsque le pointeur atteint le bord de l'écran."
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Hitting the screen edge selects the next: \\w"
-msgstr "En atteignant le bord de l'écran, sélectionner le prochain : \\w"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Only flip when interactively moving a window."
-msgstr "Basculer uniquement lors du déplacement interactif d'une fenêtre."
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Milliseconds to delay before flipping: \\w"
-msgstr "Délai en millisecondes avant de basculer : \\w"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Warp pointer to opposite screen edge when flipping."
-msgstr ""
-"Déplacer le pointeur sur le coté opposé de l'écran lors du\n"
-"basculement."
-
-#. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Error Handling"
-msgstr "Gestion des erreurs"
-
-#. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Emit a beeping sound when errors occur."
-msgstr "Émettre un beep quand une erreur survient."
-
-#. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Where to display error messages: \\w"
-msgstr "Ou afficher les messages d'erreur : \\w"
-
-#. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "No errors."
-msgstr "Pas d'erreurs"
-
-#. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Display all errors that have occurred to the screen."
-msgstr "Afficher toutes les erreurs survenues à l'écran."
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "État"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Other"
-msgstr "Autre"
-
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
-msgid ""
-"Enable shade-hover mode.\n"
-"\n"
-"(Temporarily unshades windows while the mouse pointer is over them.)"
-msgstr ""
-"Activer le mode shade-hover.\n"
-"\n"
-"(Enlever temporairement le focus de la fenêtre quand la souris passe dessus)."
-
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
-msgid "Delay in milliseconds before unshading windows."
-msgstr ""
-"Délai en millisecondes avant que les fenêtres ayant le focus soient\n"
-"mises au premier plan."
-
-#. ../lisp/sawfish/wm/state/shading.jl
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
-msgid "Raise windows when they are unshaded."
-msgstr "Mettre au premier plan les fenêtres lorsqu'elles n'ont pas le focus."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Display tooltips for window frames."
-msgstr "Afficher les bulles d'aide pour les cadres des fenêtres."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Remove tooltips after a period of time."
-msgstr "Enlever les bulles d'aide après un certain temps."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Show full documentation in tooltips."
-msgstr "Afficher toute la documentation dans les bulles d'aide."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Délai (en ms) avant d'afficher les bulles d'aide."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Délai (en ms) avant d'effacer les bulles d'aide."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Font used to display tooltips."
-msgstr "Police utilisée pour les bulles d'aide."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips background"
-msgstr "Couleur du fond pour les bulles d'aide"
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips foreground"
-msgstr "Couleur du texte pour les bulles d'aide"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember _position"
-msgstr "Mémoriser la _position"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember _dimensions"
-msgstr "Mémoriser la _dimension"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember _attributes"
-msgstr "Mémoriser les _attributs"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "_Forget saved state"
-msgstr "_Oublier l'état sauvé"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Automatically remember window positions."
-msgstr "Mémoriser automatiquement la position des fenêtres."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Automatically remember window sizes."
-msgstr "Mémoriser automatiquement la taille des fenêtres."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Automatically remember other window attributes."
-msgstr "Mémoriser automatiquement les autres attributs des fenêtres."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Don't automatically remember details of transient windows."
-msgstr "Ne pas mémoriser automatiquement les détails des fenêtres temporaire."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember the current position of the focused window."
-msgstr "Mémoriser la position de la fenêtre ayant le focus."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember the current dimensions of the focused window."
-msgstr "Mémoriser les dimensions de la fenêtre ayant le focus."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember the current attributes of the focused window."
-msgstr "Mémoriser les attributs de la fenêtre ayant le focus."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Forget any persistent state associated with the current window."
-msgstr "Oublis tout état persistant associé à la fenêtre courante."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Forget all saved window history."
-msgstr "Oublier l'historique des fenêtres déjà sauvé."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "_History"
-msgstr "_Historique"
-
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "Invoke the GNOME control center from the `Customize' menu."
 msgstr "Appeler le centre de contrôle Gnome à partir du menu `configuration'."
@@ -1721,6 +1870,10 @@ msgstr ""
 "Sélectionner automatiquement la gravité de la fenêtre\n"
 "à cette position de l'écran."
 
+#. ../lisp/sawfish/wm/state/configure.jl
+msgid "Ignore requests from applications to change window stacking."
+msgstr "Ignorer les requêtes des applications pour changer l'empilement des fenêtres."
+
 #. ../lisp/sawfish/wm/state/gnome.jl
 msgid "In GNOME _task list"
 msgstr "Dans la liste des tâches Gnome"
@@ -1740,6 +1893,16 @@ msgstr "Les fenêtres non gérées peuvent être icônifiées"
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Windows uniconify to the current workspace."
 msgstr "Les fenêtres sont désicônifiées sur le bureau actuel."
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "transients"
+msgstr "provisoire"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "group"
+msgstr "groupe"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconifying a window also iconifies the: \\w"
@@ -1779,7 +1942,7 @@ msgstr "_Collant"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Ignore the window."
-msgstr "Ignoere la fenêtre."
+msgstr "Ignore la fenêtre."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Unignore the window."
@@ -1840,13 +2003,20 @@ msgid "Don't cover `avoided' windows when maximizing."
 msgstr "Ne pas recouvrir les fenêtre `avoided' pendant la maximisation."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Lock position and size while windows are maximized."
+msgstr ""
+"Bloquer la taille et la position d'une fenêtre pendant que la\n"
+"fenêtre est maximisée."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize the dimensions of the window."
 msgstr "Maximiser les dimensions de la fenêtre."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid ""
 "Restore the dimensions of the window to its original, unmaximized, state."
-msgstr "Restorer les dimensions d'une fenêtre à son état originel, état démaximisé."
+msgstr ""
+"Restorer les dimensions d'une fenêtre à son état originel, état démaximisé."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize the vertical dimension of the window."
@@ -2033,8 +2203,32 @@ msgstr ""
 "fenêtres."
 
 #. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "novice"
+msgstr "débutant"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "intermediate"
+msgstr "intermédiaire"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "expert"
+msgstr "expert"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
 msgid "Show options suitable for \\w users."
 msgstr "Afficher les options pour l'utilisateur \\w."
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "ok"
+msgstr "Appliquer"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "revert/cancel/ok"
+msgstr "défaire/valider/annuler"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "apply/revert/cancel/ok"
+msgstr "appliquer/défaire/valider/annuler"
 
 #. ../lisp/sawfish/wm/util/nokogiri.jl
 msgid "Buttons shown in configurator: \\w"
