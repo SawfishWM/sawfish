@@ -127,7 +127,7 @@
       nil)))
 
 ;; returns the new (X . Y) of WINDOW
-(defun snap-window-position-to-edges (window coords deltas
+(defun snap-window-position-to-edges (window coords deltas hysteresis
 				      &optional epsilon edges mode)
   (let*
       ((dims (window-frame-dimensions window))
@@ -148,16 +148,21 @@
     (unless mode
       (setq mode 'magnetism))
 
+    (unless (zerop (car deltas))
+      (rplaca hysteresis (car deltas)))
+    (unless (zerop (cdr deltas))
+      (rplacd hysteresis (cdr deltas)))
+
     ;; snap in X direction
     (when (setq tem (edges-within-epsilon w-x-edges (car edges) epsilon
-					  (car deltas) mode))
+					  (car hysteresis) mode))
       (setq tem (+ (car coords) (- (car (cdr tem)) (car (car tem)))))
       (when (and (> tem (- (car dims))) (< tem (screen-width)))
 	(rplaca coords tem)))
 
     ;; snap in Y direction
     (when (setq tem (edges-within-epsilon w-y-edges (cdr edges) epsilon
-					  (cdr deltas) mode))
+					  (cdr hysteresis) mode))
       (setq tem (+ (cdr coords) (- (car (cdr tem)) (car (car tem)))))
       (when (and (> tem (- (cdr dims))) (< tem (screen-height)))
 	(rplacd coords tem)))
