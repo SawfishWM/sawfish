@@ -1,3 +1,43 @@
+2003-08-13  John Harper  <jsh@unfactored.org>
+
+	Integrated patches from Shun-ichi TAHARA <jado@flowernet.gr.jp>:
+
+	* sawfish/wm/util/font.jl:
+
+	Pango fontname handler has a bug on some font name, for
+	example, "Nimbus Sans L". When set one of those fonts in
+	"appearance" menu of sawfish-ui, and call that menu again, then
+	the font name in dialog is reset to the default value of
+	"Sans". Pango font name needs comma after the font family name
+	if the last word of family name matches the style name (for
+	example, "L" in "Nimbus Sans L" matches "Light"). So if set
+	"Nimbus Sans L" with its size 12, sawfish holds the pango
+	fontname "Nimbus Sans L 12", but GTK+ font selector extract it
+	with the family name to be "Nimbus Sans", the style "L
+	(=Light)", the size "12". In this case, sawfish must have the
+	pango fontname as "Nimbus Sans L, 12".
+
+	When using xft-type fonts, cannot set the font with hyphens in
+	its name, for example, "Eras-Black". Xft font name separates
+	the font family name and font size by hyphen, so Xft font
+	loader cannot extract font name and size correctly. Xft
+	requires hyphens in the font family name escaped by backslash,
+	so sawfish must have the xft fontname as "Eras\-Black-12", not
+	"Eras-Black-12".
+
+	When using xlfd-type fonts, selecting "medium" or "r" style (in
+	XLFD description) are sometime void, because the descripiton of
+	"-*-" in XLFD often matches "-bold-" or "-i-". Sawfish must
+	have xlfd font name with its weight or slant description to be
+	set explicitly; like "-medium-" or "-r-", not "-*-".
+
+	* sawfish/wm/gnome/integration.jl: don't use the module that
+	reads GNOME menus, it only handles the old style menus. Also,
+	remove the "Programs" entry from the root menu
+
+	* sawfish/wm/ext/beos-window-menu.jl (window-suitable-p):
+	ignore desktop windows
+
 2003-06-29  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/state/wm-spec.jl: update a window's workspace
