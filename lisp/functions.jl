@@ -245,6 +245,20 @@ by client window W."
   (interactive "%W")
   (delete-window w t))
 
+(defun screen-dimensions ()
+  "Return the screen dimensions in pixels as a cons cell `(WIDTH . HEIGHT)'."
+  (cons (screen-width) (screen-height)))
+
+(defun current-head ()
+  "Return the ID of the `current' head."
+  (find-head (query-pointer)))
+
+(defun current-head-dimensions ()
+  (head-dimensions (current-head)))
+
+(defun current-head-offset ()
+  (head-offset (current-head)))
+
 
 ;; property and window-state changed interface
 
