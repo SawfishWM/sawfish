@@ -200,7 +200,7 @@
       (cond ((equal space #xffffffff)
 	     (window-put w 'sticky t))
 	    ((and (integerp space) (null (window-workspaces w)))
-	     (ws-set-window-workspaces w (list space))))))
+	     (ws-window-set-workspaces w (list space))))))
 
   (let ((type (get-x-property w '_NET_WM_WINDOW_TYPE)))
     (when type
