@@ -1,3 +1,36 @@
+2002-09-23  John Harper  <jsh@unfactored.org>
+
+	Work to fix #81616 (fullscreen windows lose their original
+	frame type when loaded from saved session):
+
+	* sawfish/wm/state/maximize.jl: more work on session
+	management. Fullscreen windows shouldn't lose their unmaximized
+	'type property anymore
+
+	* sawfish/wm/frames.jl (push-window-type, pop-window-type):
+	mechanism for setting a temporary window type (that doesn't get
+	saved in the session file)
+
+	* sawfish/wm/session/load.jl, sawfish/wm/session/init.jl
+	(sm-add-restored-properties, sm-restored-properties):
+	properties to restored but not save (i.e. assumes they're saved
+	by hand using the sm-window-save-functions hook)
+
+2002-09-22  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/state/wm-spec.jl (wm-spec-maximize-handler): don't
+	mark the window as maximized when it's fullscreen, avoids
+	confusing the restart handler. Also, some other cleanup of the
+	fullscreen code
+
+	* sawfish/wm/state/maximize.jl (after-add-window): check for
+	queued-fullscreen-maximize property
+
+	* sawfish/wm/state/maximize.jl: added a function to
+	sm-window-save-functions to save the queued-foo-maximize
+	properties into the session file, not the actual properties.
+	Makes restart process cleaner
+
 2002-09-22  John Harper  <jsh@unfactored.org>
 
 	Work to (partially) support _NET_WORKAREA property, for #90291:

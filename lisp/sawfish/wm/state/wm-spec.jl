@@ -364,10 +364,12 @@
 	((remove) (unmaximize-window w direction))
 	((add)    (maximize-window w direction))
 	((toggle) (maximize-window-toggle w direction))
-	((get)    (case direction
-		    ((vertical) (window-maximized-vertically-p w))
-		    ((horizontal) (window-maximized-horizontally-p w))
-		    (t (window-maximized-p w)))))))
+	((get)    (if (window-maximized-fullscreen-p w)
+		      nil
+		    (case direction
+		      ((vertical) (window-maximized-vertically-p w))
+		      ((horizontal) (window-maximized-horizontally-p w))
+		      (t (window-maximized-p w))))))))
 
   (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED_VERT
 			       (wm-spec-maximize-handler 'vertical))
@@ -403,7 +405,7 @@
    (lambda (w mode)
      (require 'sawfish.wm.state.maximize)
      (case mode
-       ((init add) (maximize-window-fullscreen w t))
+       ((init add) (window-put w 'queued-fullscreen-maximize t))
        ((remove) (maximize-window-fullscreen w nil))
        ((toggle) (maximize-window-fullscreen-toggle w))
        ((get) (window-maximized-fullscreen-p w)))))

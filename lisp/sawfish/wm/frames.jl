@@ -38,6 +38,8 @@
 	     frame-style-editable-p
 	     window-type
 	     set-window-type
+	     push-window-type
+	     pop-window-type
 	     window-type-remove-title
 	     window-type-remove-border
 	     window-type-add-title
@@ -374,10 +376,33 @@ deciding which frame type to ask a theme to generate.")
 	    'default))))
 
   (define (set-window-type w type)
-    (unless (eq (window-get w 'type) type)
+    (if (window-get w 'type/saved)
+	(window-put w 'type/saved type)
+      (unless (eq (window-get w 'type) type)
+	(window-put w 'type type)
+	(call-window-hook 'window-state-change-hook w (list '(type)))
+	(reframe-window w))))
+
+  ;; XXX do something with KEY. (It's a unique symbol used to mark
+  ;; XXX the different users of these functions)
+
+  (define (push-window-type w type key)
+    (window-put w 'type/key key)
+    (unless (eq (window-get w 'type type))
+      (unless (window-get w 'type/saved)
+	(window-put w 'type/saved (window-get w 'type)))
       (window-put w 'type type)
       (call-window-hook 'window-state-change-hook w (list '(type)))
       (reframe-window w)))
+
+  (define (pop-window-type w key)
+    (when (and (window-get w 'type/saved)
+	       (eq (window-get w 'type/key) key))
+      (window-put w 'type (window-get w 'type/saved))
+      (window-put w 'type/saved nil)
+      (window-put w 'type/key nil))
+    (call-window-hook 'window-state-change-hook w (list '(type)))
+    (reframe-window w))
 
   (define (window-type-remove-title type)
     (case type
@@ -623,5 +648,13 @@ deciding which frame type to ask a theme to generate.")
 
   (make-timer frames-on-idle theme-update-interval)
 
-  (sm-add-saved-properties 'type 'ignored 'frame-style)
+  (add-hook 'sm-window-save-functions
+	    (lambda (w)
+	      (cond ((window-get w 'type/saved)
+		     (list (cons 'type (window-get w 'type/saved))))
+		    ((window-get w 'type)
+		     (list (cons 'type (window-get w 'type)))))))
+
+  (sm-add-saved-properties 'ignored 'frame-style)
+  (sm-add-restored-properties 'type)
   (add-swapped-properties 'frame-active-color 'frame-inactive-color))

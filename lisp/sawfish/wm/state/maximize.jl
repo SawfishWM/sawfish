@@ -135,10 +135,7 @@
 
   (define (discard-unmaximized-geometry w)
     (window-put w 'unmaximized-geometry nil)
-    (let ((type (window-get w 'unmaximized-type)))
-      (when type
-	(set-window-type w type)
-	(window-put w 'unmaximized-type nil))))
+    (pop-window-type w 'sawfish.wm.state.maximize))
 
   (define (unmaximized-geometry w)
     (window-get w 'unmaximized-geometry))
@@ -503,7 +500,7 @@ unmaximized."
 		   (head-dims (current-head-dimensions w)))
 	       (save-unmaximized-geometry w)
 	       (window-put w 'unmaximized-type (window-type w))
-	       (set-window-type w 'unframed)
+	       (push-window-type w 'unframed 'sawfish.wm.state.maximize)
 	       (move-resize-window-to w (car head-offset) (cdr head-offset)
 				      (car head-dims) (cdr head-dims))
 	       (raise-window* w)
@@ -531,13 +528,20 @@ unmaximized."
 
   (define (after-add-window w)
     (let ((vert (window-get w 'queued-vertical-maximize))
-	  (horiz (window-get w 'queued-horizontal-maximize)))
-      (when (or vert horiz)
-	(window-put w 'queued-vertical-maximize nil)
-	(window-put w 'queued-horizontal-maximize nil)
-	(maximize-window w (cond ((and vert horiz) nil)
-				 (vert 'vertical)
-				 (horiz 'horizontal))))))
+	  (horiz (window-get w 'queued-horizontal-maximize))
+	  (full (window-get w 'queued-fullscreen-maximize)))
+      (when (or vert horiz full)
+	(when vert
+	  (window-put w 'queued-vertical-maximize nil))
+	(when horiz
+	  (window-put w 'queued-horizontal-maximize nil))
+	(when full
+	  (window-put w 'queued-fullscreen-maximize nil))
+	(if full
+	    (maximize-window-fullscreen w t)
+	  (maximize-window w (cond ((and vert horiz) nil)
+				   (vert 'vertical)
+				   (horiz 'horizontal)))))))
 
   (add-hook 'after-add-window-hook after-add-window)
 
@@ -572,9 +576,27 @@ unmaximized."
 	      ;; avoided windows
 	      (add-hook 'add-window-hook check-if-maximizable)))
 
-  (sm-add-saved-properties
-   'unmaximized-geometry 'maximized-vertically
-   'maximized-horizontally 'maximized-fullscreen)
+  (add-hook 'sm-window-save-functions
+	    (lambda (w)
+	      (if (window-maximized-fullscreen-p w)
+		  (list '(maximized-fullscreen . t))
+		(nconc (and (window-maximized-horizontally-p w)
+			    (list '(maximized-horizontally . t)))
+		       (and (window-maximized-vertically-p w)
+			    (list '(maximized-vertically . t)))))))
+
+  (add-hook 'sm-restore-window-hook
+	    (lambda (w alist)
+	      (mapc (lambda (cell)
+		      (let ((v (cdr (assq (car cell) alist))))
+			(when v
+			  (window-put w (cdr cell) v))))
+		    '((maximized-fullscreen . queued-fullscreen-maximize)
+		      (maximized-vertically . queued-vertical-maximize)
+		      (maximized-horizontally . queued-horizontal-maximize)))))
+
+  (sm-add-saved-properties 'unmaximized-geometry)
+
   (add-swapped-properties
    'unmaximized-geometry 'maximized-vertically
    'maximized-horizontally 'maximized-fullscreen)
