@@ -1,3 +1,18 @@
+2001-03-19  John Harper  <jsh@eazel.com>
+
+	* configure.in: patch from albert chin
+	(china@thewrittenword.com):
+
+	1. No need to AC_MSG_CHECKING if the user has disabled the
+	feature
+
+	2. /usr/ccs/lib/cpp is a more portable location for cpp under
+	Solaris
+
+	3. Run some *-config scripts in a sub-process so we can handle
+	the case where the command is not found (else the shell outputs
+	<blah> command not found).
+
 2001-03-14  John Harper  <jsh@eazel.com>
 
 	* configure.in: version 0.38

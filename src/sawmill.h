@@ -306,6 +306,11 @@ enum exit_codes {
 # define XlibSpecificationRelease 4
 #endif
 
+/* Work around for X11R5 and earlier */
+#ifndef XUrgencyHint
+#define XUrgencyHint (1 << 8)
+#endif
+
 #include "sawmill_subrs.h"
 
 
