@@ -135,7 +135,8 @@ find_window_by_id (Window id)
 	w = w->next;
     if (w != 0 && w->id == 0)
 	w = 0;
-    DB(("find_window_by_id (%lx) --> %s\n", id, (w != 0) ? w->name : ""));
+    if (w != 0)
+	DB(("find_window_by_id (%lx) --> %s\n", id, (w != 0) ? w->name : ""));
     return w;
 }
 
@@ -148,7 +149,8 @@ x_find_window_by_id (Window id)
     w = window_list;
     while (w != 0 && w->saved_id != id && w->frame != id)
 	w = w->next;
-    DB(("x_find_window_by_id (%lx) --> %s\n", id, (w != 0) ? w->name : ""));
+    if (w != 0)
+	DB(("x_find_window_by_id (%lx) --> %s\n", id, (w != 0) ? w->name : ""));
     return w;
 }
 
