@@ -101,6 +101,15 @@ they inherit.")
   "Alist of (CLASS . ALIST) associating classes of frame parts with state
 that overrides settings set elsewhere.")
 
+(defvar frame-type-fallback-alist '((transient . default)
+				    (shaped . default)
+				    (shaped-transient . shaped))
+  "Alist associated frame types with type to try if the style doesn't offer a
+frame of the requested type. If no entry, then the `unframed' style is used.")
+
+(defvar nil-frame nil
+  "Frame definition used for unframed windows.")
+
 (defcustom default-frame-style nil
   "Default frame style (theme)."
   :type frame-style
@@ -207,21 +216,28 @@ that overrides settings set elsewhere.")
   (when always-update-frames
     (reframe-all-windows)))
 
+(defun find-frame-definition (w style type)
+  (if (eq type 'unframed)
+      nil-frame
+    (or (style w type)
+	(find-frame-definition
+	 w style (or (cdr (assq type frame-type-fallback-alist)) 'unframed)))))
+
 (defun set-window-frame-style (w style &optional type from-user)
-  (let
-      (fun)
-    (check-frame-availability style)
-    (if type
-	(progn
-	  (window-put w 'type type)
-	  (call-window-hook 'window-state-change-hook w (list '(type))))
-      (setq type (window-type w)))
-    (window-put w 'current-frame-style style)
-    (when from-user
-      (window-put w 'frame-style style)
-      (call-window-hook 'window-state-change-hook w (list '(frame-style))))
-    (setq fun (cdr (assq style frame-styles)))
-    (set-window-frame w (or (funcall fun w type) default-frame))))
+  (check-frame-availability style)
+  (if type
+      (progn
+	(window-put w 'type type)
+	(call-window-hook 'window-state-change-hook w (list '(type))))
+    (setq type (window-type w)))
+  (window-put w 'current-frame-style style)
+  (when from-user
+    (window-put w 'frame-style style)
+    (call-window-hook 'window-state-change-hook w (list '(frame-style))))
+  (let ((style-fun (cdr (assq style frame-styles))))
+    (set-window-frame w (if style-fun
+			    (find-frame-definition w style-fun type)
+			  nil-frame))))
 
 (defun set-frame-for-window (w &optional override type)
   (when (or override (not (or (window-frame w) (window-get w 'ignored))))
