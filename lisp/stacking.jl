@@ -27,36 +27,41 @@
 ;; represents the level of normal windows, negative for windows below
 ;; this level, and positive for windows above the normal level
 
-(defun restack-by-layer ()
+(defvar auto-depth-alist nil
+  "A list of (REGEXP . DEPTH) matching window names to the depth of the
+stacking level to place them in.")
+
+;; Resort the stacking order to ensure that the windows' depth attributes
+;; are adhered to. No change is made to windows in the same depth
+(defun restack-by-depth ()
   (let
       ((order (sort (stacking-order)
 		    #'(lambda (x y)
 			(> (window-get x 'depth) (window-get y 'depth))))))
     (restack-windows order)))
 
+;; Set the stacking depth of W to DEPTH
 (defun set-window-depth (w depth)
   (let
       ((old (window-get w 'depth)))
     (window-put w 'depth depth)
-    (restack-by-layer)
+    (restack-by-depth)
     (call-window-hook 'window-depth-change-hook w (list depth))
     (call-window-hook 'window-state-change-hook w)))
 
+;; Called from the add-window-hook
 (defun stacking-add-window (w)
   (let
       ((depth (window-get w 'depth)))
     (unless depth
-      (setq depth 0)
+      (setq depth (or (cdr (assoc-regexp (window-name w) auto-depth-alist)) 0))
       (window-put w 'depth depth))))
-
-(defun stacking-order-in-layer (depth)
-   (filter #'(lambda (w)
-	       (= (window-get w 'depth) depth)) (stacking-order)))
 
 
 ;; Commands
 
 (defun lower-window (w)
+  "Raise the window to the bottom of its stacking level."
   (interactive "W")
   (let
       ((order (stacking-order))
@@ -70,6 +75,7 @@
     (restack-windows order)))
 
 (defun raise-window (w)
+  "Raise the window to the top of its stacking level."
   (interactive "W")
   (let
       ((order (stacking-order))
@@ -85,30 +91,22 @@
     (restack-windows order)))
 
 (defun raise-lower-window (w)
+  "If the window is the highest window in its stacking level, lower it to the
+bottom of this level, otherwise raise it to the top of its level."
   (interactive "W")
-  (let*
-      ((order (stacking-order))
-       (depth (window-get w 'depth))
-       tem)
-    (setq tem order)
-    (while (and tem (< (window-get (car tem) 'depth) depth))
-      (setq tem (cdr tem)))
-    (while (and tem (not (eq (car tem) w))
-		(= (window-get (car tem) 'depth) depth)
-		(not (eq (window-get w 'workspace)
-			 (window-get (car tem) 'workspace))))
-      (setq tem (cdr tem)))
-    (if (eq (car tem) w)
-	(lower-window w)
-      (raise-window w))))
+  (if (eq (window-visibility w) 'unobscured)
+      (lower-window w)
+    (raise-window w)))
 
-(defun lower-window-layer (w)
+(defun lower-window-depth (w)
+  "Put the window in the stacking level beneath its current level."
   (interactive "W")
   (set-window-depth w (1- (window-get w 'depth))))
 
-(defun raise-window-layer (w)
+(defun raise-window-depth (w)
+  "Put the window in the stacking level above its current level."
   (interactive "W")
   (set-window-depth w (1+ (window-get w 'depth))))
 
 (add-hook 'add-window-hook 'stacking-add-window t)
-(add-hook 'map-notify-hook 'restack-by-layer t)
+(add-hook 'reparent-notify-hook 'restack-by-depth t)
