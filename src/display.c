@@ -106,6 +106,12 @@ error_other_wm (Display *dpy, XErrorEvent *ev)
 
 
 
+static void
+redisplay (void)
+{
+    XSync (dpy, False);
+}
+
 /* Called from main(). */
 bool
 sys_init(char *program_name)
@@ -168,6 +174,8 @@ sys_init(char *program_name)
 	   XXX the window initialiation are ignored until the next
 	   XXX new event arrives!? */
         rep_mark_input_pending (ConnectionNumber(dpy));
+
+	rep_redisplay_fun = redisplay;
 
 	return TRUE;
     }
