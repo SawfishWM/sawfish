@@ -36,6 +36,14 @@
   :type boolean
   :group workspace)
 
+(defcustom preallocated-workspaces 1
+  "The number of workspaces that are allocated automatically at startup."
+  :type number
+  :group workspace
+  :after-set (lambda ()
+	       (while (< (length workspace-list) preallocated-workspaces)
+		 (ws-add-workspace t))))
+
 (defcustom raise-windows-on-uniconify t
   "Windows are raised after being uniconified."
   :type boolean
@@ -81,19 +89,22 @@
 
 ;; window shouldn't be in any workspace
 (defun ws-add-window-to-space (w space)
-  (unless (window-get w 'sticky)
+  (unless (or (window-get w 'sticky)
+	      (window-get w 'workspace))
     (rplacd space (nconc (cdr space) (list w)))
     (window-put w 'workspace space)
-    (when (and current-workspace
-	       (eq space current-workspace)
-	       (not (window-get w 'iconified)))
-      (show-window w))
+    (if (and current-workspace
+	     (eq space current-workspace)
+	     (not (window-get w 'iconified)))
+	(show-window w)
+      (hide-window w))
     (call-window-hook 'add-to-workspace-hook w)
     (call-hook 'workspace-state-change-hook)))
 
 ;; usually called from the add-window-hook
 (defun ws-add-window (w)
-  (unless (window-get w 'sticky)
+  (unless (or (window-get w 'sticky)
+	      (window-get w 'workspace))
     (let
 	(parent)
       (if (and transients-on-parents-workspace
@@ -117,6 +128,11 @@
 	(call-window-hook 'add-to-workspace-hook w))
       (call-hook 'workspace-state-change-hook))))
 
+(defun ws-add-window-to-space-by-index (w index)
+  (while (>= index (length workspace-list))
+    (ws-add-workspace t))
+  (ws-add-window-to-space w (nth index workspace-list)))
+
 ;; called from the map-notify hook
 (defun ws-window-mapped (w)
   (let
@@ -136,18 +152,15 @@
       ((space (window-get w 'workspace)))
     (when space
       (rplacd space (delq w (cdr space)))
-      (when (and delete-workspaces-when-empty (null (cdr space)))
+      (when (and delete-workspaces-when-empty
+		 (null (cdr space))
+		 (/= (length workspace-list) 1))
 	;; workspace is now empty
 	(when (eq current-workspace space)
-	  (if (= (length workspace-list) 1)
-	      ;; deleting the sole workspace!
-	      (progn
-		(setq workspace-list nil)
-		(setq current-workspace nil))
-	    (ws-switch-workspace (or (nth 1 (memq space workspace-list))
-				     ;; deleted the last workspace
-				     (nth (- (length workspace-list) 2)
-					  workspace-list)))))
+	  (ws-switch-workspace (or (nth 1 (memq space workspace-list))
+				   ;; deleted the last workspace
+				   (nth (- (length workspace-list) 2)
+					workspace-list))))
 	(setq workspace-list (delq space workspace-list))
 	(call-hook 'delete-workspace-hook (list space)))
       (window-put w 'workspace nil)
@@ -159,6 +172,8 @@
 (defun ws-add-workspace (at-end)
   (let
       ((space (list 'workspace)))
+    (unless current-workspace
+      (setq current-workspace space))
     (if at-end
 	(setq workspace-list (nconc workspace-list (list space)))
       (setq workspace-list (cons space workspace-list)))
@@ -232,6 +247,9 @@
 	(rplacd tem (cons space (cdr tem))))
       (call-hook 'move-workspace-hook (list space))
       (call-hook 'workspace-state-change-hook))))
+
+(defun ws-index (space)
+  (- (length workspace-list) (length (memq space workspace-list))))
 
 
 ;; Menu constructors
@@ -479,6 +497,21 @@ all workspaces."
 		  'WM_STATE 32))
 
 
+;; Session manager hooks for workspace information
+
+(defun ws-save-session (w)
+  (let
+      ((space (window-get w 'workspace)))
+    (when space
+      `((workspace . ,(ws-index space))))))
+
+(defun ws-restore-session (w alist)
+  (let
+      ((index (cdr (assq 'workspace alist))))
+    (when (and index (numberp index) (>= index 0))
+      (ws-add-window-to-space-by-index w index))))
+
+
 ;; Initialisation
 
 (unless (or batch-mode (memq 'ws-add-window add-window-hook))
@@ -488,4 +521,6 @@ all workspaces."
   (add-hook 'client-message-hook 'ws-client-msg-handler t)
   (add-hook 'add-window-hook 'ws-set-client-state t)
   (add-hook 'window-state-change-hook 'ws-set-client-state t)
+  (add-hook 'sm-window-save-functions 'ws-save-session)
+  (add-hook 'sm-restore-window-hook 'ws-restore-session)
   (mapc 'ws-add-window (managed-windows)))
