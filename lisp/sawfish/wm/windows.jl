@@ -33,6 +33,7 @@
 	     constrain-dimension-to-hints
 	     resize-window-with-hints
 	     resize-window-with-hints*
+	     adjust-position-for-gravity
 	     get-window-wm-protocols
 	     delete-window
 	     delete-window-safely
@@ -179,9 +180,7 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
 	  (x-inc (or (cdr (assq 'width-inc hints)) 1))
 	  (y-base (or (cdr (or (assq 'base-height hints)
 			       (assq 'min-height hints))) 1))
-	  (y-inc (or (cdr (assq 'height-inc hints)) 1))
-	  (scale (lambda (x base inc maximum)
-		   (min (+ base (* inc (max 0 x))) (or maximum 65535)))))
+	  (y-inc (or (cdr (assq 'height-inc hints)) 1)))
       (resize-window-to
        w (constrain-dimension-to-hints (+ x-base (* x-inc cols)) 'x hints)
        (constrain-dimension-to-hints (+ y-base (* y-inc rows)) 'y hints))))
@@ -198,6 +197,29 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
       (setq hints (window-size-hints w)))
     (resize-window-to w (constrain-dimension-to-hints width 'x hints)
 		      (constrain-dimension-to-hints height 'y hints)))
+
+  (define (adjust-position-for-gravity w grav coords)
+    (let* ((tl-off (window-frame-offset w))
+	   (br-off (let ((w-dims (window-dimensions w))
+			 (f-dims (window-frame-dimensions w)))
+		     (cons (- (car f-dims) (car w-dims))
+			   (- (cdr f-dims) (cdr w-dims))))))
+      (setq coords (cons (car coords) (cdr coords)))
+      (if (eq grav 'static)
+	  (progn
+	    ;; static gravity is relative to the original
+	    ;; client window position
+	    (rplaca coords (+ (car coords) (car tl-off)))
+	    (rplacd coords (+ (cdr coords) (cdr tl-off))))
+	(when (memq grav '(east south-east north-east))
+	  ;; relative to the right of the frame
+	  (rplaca coords (- (car coords) (car br-off)
+			    (* -2 (window-border-width w)))))
+	(when (memq grav '(south south-east south-west))
+	  ;; relative to the bottom of the frame
+	  (rplacd coords (- (cdr coords) (cdr br-off)
+			    (* -2 (window-border-width w))))))
+      coords))
 
 
 ;;; deleting windows
