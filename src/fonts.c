@@ -96,12 +96,6 @@ Set the property PROPERTY (a symbol) associated with FONT to VALUE.
     {
 	if (rep_CAR(plist) == prop)
 	{
-	    if (!rep_CONS_WRITABLE_P(rep_CDR(plist)))
-	    {
-		/* Can't write into a dumped cell; need to cons
-		   onto the head. */
-		break;
-	    }
 	    rep_CAR(rep_CDR(plist)) = val;
 	    return val;
 	}

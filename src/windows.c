@@ -512,12 +512,6 @@ Note that these are Lisp properties not X properties.
 				    rep_CAR(rep_CDR(plist)), FALSE);
 		grab_keymap_events (VWIN(win)->id, val, TRUE);
 	    }
-	    if (!rep_CONS_WRITABLE_P(rep_CDR(plist)))
-	    {
-		/* Can't write into a dumped cell; need to cons
-		   onto the head. */
-		break;
-	    }
 	    rep_CAR(rep_CDR(plist)) = val;
 	    return val;
 	}
