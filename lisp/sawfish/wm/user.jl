@@ -36,11 +36,12 @@
 
 (define-structure user ()
 
-    (open rep
-	  sawfish.wm
-	  sawfish.wm.util.groups
-	  sawfish.wm.util.display-window
-	  sawfish.wm.util.compat)
+    ((open rep
+	   sawfish.wm
+	   sawfish.wm.util.groups
+	   sawfish.wm.util.display-window
+	   sawfish.wm.util.compat)
+     (set-binds))
 
   ;; frame-style loaded if user hasn't set their own
   (define fallback-frame-style 'microGUI)
