@@ -76,6 +76,8 @@
   (unless server-window
     (setq server-window (create-window 'root -100 -100 10 10))
     (set-x-property 'root '_SAWMILL_REQUEST_WIN
+		    (vector server-window) 'CARDINAL 32)
+    (set-x-property server-window '_SAWMILL_REQUEST_WIN
 		    (vector server-window) 'CARDINAL 32)))
 (defun server-exit ()
   (when server-window
