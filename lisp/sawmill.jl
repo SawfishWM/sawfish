@@ -26,7 +26,7 @@
 
 ;; regexp matching languages to use FontSets for. Please send me
 ;; patches adding to this as required
-(defvar fontset-languages-re "\\bja\\b")
+(defvar fontset-languages-re "\\b(ja|ko|zh)(\\b|_)")
 
 ;; quiet autoloading
 (setq autoload-verbose nil)
