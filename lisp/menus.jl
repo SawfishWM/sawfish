@@ -68,7 +68,11 @@ unused before killing it.")
     ("Maximize"
      ("Vertically" maximize-window-vertically)
      ("Horizontally" maximize-window-horizontally)
-     ("Both" maximize-window))
+     ("Both" maximize-window)
+     ()
+     ("Fill vertically" maximize-fill-window-vertically)
+     ("Fill horizontally" maximize-fill-window-horizontally)
+     ("Fill both" maximize-fill-window))
     ("Un-maximize" unmaximize-window)
     ("Frame type"
      ("Normal" set-frame:default)
@@ -184,6 +188,8 @@ unused before killing it.")
     ;; to succeed)
     (ungrab-pointer)
     (sync-server)
+    (when (functionp spec)
+      (setq spec (funcall spec)))
     (format menu-process "(popup-menu %S)\n"
 	    (mapcar 'menu-preprocessor spec))))
 
