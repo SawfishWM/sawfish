@@ -33,7 +33,10 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <X11/Xlib.h>
-#include <Imlib.h>
+
+#if defined (HAVE_IMLIB)
+# include <Imlib.h>
+#endif
 
 #ifndef rep_INTERFACE
 # define rep_INTERFACE 7		/* rep 0.10 */
@@ -173,7 +176,7 @@ typedef struct lisp_font {
 #define FF_FONT_STRUCT	(1 << (rep_CELL16_TYPE_BITS + 0))
 #define FONT_STRUCT_P(v) (VFONT(v)->car & FF_FONT_STRUCT)
 
-/* An allocated color (from Imlib) */
+/* An allocated color */
 typedef struct lisp_color {
     repv car;
     struct lisp_color *next;
@@ -195,11 +198,23 @@ typedef struct lisp_cursor {
 #define CURSORP(v)	rep_CELL16_TYPEP(v, cursor_type)
 #define VCURSOR(v)	((Lisp_Cursor *)rep_PTR(v))
 
+#if defined (HAVE_IMLIB)
+typedef ImlibImage *image_t;
+#endif
+
+typedef struct pixmap_cache_node_struct pixmap_cache_node;
+
 /* A loaded image */
 typedef struct lisp_image {
     repv car;
     struct lisp_image *next;
-    ImlibImage *image;
+    image_t image;
+#if !defined (HAVE_IMLIB)
+    int border[4];
+#endif
+#if defined (NEED_PIXMAP_CACHE)
+    pixmap_cache_node *pixmap_first, *pixmap_last;
+#endif
     repv plist;
 } Lisp_Image;
 
