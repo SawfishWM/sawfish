@@ -40,26 +40,13 @@
 #include "sawmill.h"
 #include <X11/SM/SMlib.h>
 
-DEFSYM(save_session, "save-session");
-
-static repv sm_client_id;		/* string or nil */
+DEFSYM(sm_save_yourself, "sm-save-yourself");
 
 static IceConn ice_conn;
 static SmcConn sm_conn;
 
 
 /* Lisp functions */
-
-DEFUN ("sm-client-id", Vsm_client_id, Ssm_client_id, (repv arg), rep_Var) /*
-::doc:Vsm-client-id::
-A string defining the current session client id, or nil if no connection
-has been made with the session manager.
-::end:: */
-{
-    if (arg && (rep_STRINGP(arg) || arg == Qnil))
-	sm_client_id = arg;
-    return sm_client_id;
-}
 
 DEFUN("sm-set-property", Fsm_set_property, Ssm_set_property,
       (repv prop, repv value), rep_Subr2) /*
@@ -145,7 +132,7 @@ Deletes the session manager property called PROPERTY-NAME (a string).
 static void
 save_yourself_2 (SmcConn conn, SmPointer data)
 {
-    repv ret = rep_call_lisp1 (Qsave_session, sm_client_id);
+    repv ret = rep_call_lisp0 (Qsm_save_yourself);
     SmcSaveYourselfDone (conn, (ret && ret != Qnil) ? True : False);
 }
 
@@ -194,60 +181,61 @@ ICE_watch_callback (IceConn ice, IcePointer client_data,
 
 /* initialisation */
 
-void
-session_init (void)
+DEFUN("sm-connect", Fsm_connect, Ssm_connect, (repv id), rep_Subr1)
 {
-    if (rep_SYM(Qbatch_mode)->value == Qnil
-	&& !rep_get_option ("--sm-disable", 0)
-	&& getenv ("SESSION_MANAGER") != 0)
+    SmcCallbacks call;
+    char *ret_id;
+    char err[256];
+
+    IceAddConnectionWatch (ICE_watch_callback, 0);
+
+    call.save_yourself.callback = save_yourself;
+    call.die.callback = die;
+    call.save_complete.callback = save_complete;
+    call.shutdown_cancelled.callback = shutdown_cancelled;
+
+    sm_conn = SmcOpenConnection (0, 0, 1, 0,
+				 SmcSaveYourselfProcMask
+				 | SmcDieProcMask
+				 | SmcSaveCompleteProcMask
+				 | SmcShutdownCancelledProcMask,
+				 &call,
+				 rep_STRINGP(id) ? rep_STR(id) : 0,
+				 &ret_id, sizeof (err), err);
+    if (sm_conn != 0)
     {
-	SmcCallbacks call;
-	char *ret_id;
-	char err[256];
-
-	IceAddConnectionWatch (ICE_watch_callback, 0);
-
-	if (!rep_get_option ("--sm-client-id", &sm_client_id))
-	    sm_client_id = Qnil;
-	call.save_yourself.callback = save_yourself;
-	call.die.callback = die;
-	call.save_complete.callback = save_complete;
-	call.shutdown_cancelled.callback = shutdown_cancelled;
-
-	sm_conn = SmcOpenConnection (0, 0, 1, 0,
-				     SmcSaveYourselfProcMask
-				     | SmcDieProcMask
-				     | SmcSaveCompleteProcMask
-				     | SmcShutdownCancelledProcMask,
-				     &call,
-				     rep_STRINGP(sm_client_id)
-				     ? rep_STR(sm_client_id) : 0,
-				     &ret_id, sizeof (err), err);
-	if (sm_conn != 0)
-	{
-	    sm_client_id = rep_string_dup (ret_id);
-	    ice_conn = SmcGetIceConnection (sm_conn);
-	}
-	else
-	{
-	    sm_client_id = Qnil;
-	    fprintf (stderr, "sm-open-connection: %s\n", err);
-	}
+	ice_conn = SmcGetIceConnection (sm_conn);
+	return rep_string_dup (ret_id);
     }
     else
-	sm_client_id = Qnil;
-    rep_ADD_SUBR(Ssm_client_id);
-    rep_ADD_SUBR(Ssm_set_property);
-    rep_ADD_SUBR(Ssm_delete_property);
-    rep_INTERN(save_session);
-    rep_mark_static (&sm_client_id);
+    {
+	return Fsignal (Qerror,
+			rep_list_2 (rep_string_dup ("sm-open-connection"),
+				    rep_string_dup (err)));
+    }
 }
 
-void
-session_kill (void)
+DEFUN("sm-disconnect", Fsm_disconnect, Ssm_disconnect, (void), rep_Subr0)
 {
     if (sm_conn != 0)
 	SmcCloseConnection (sm_conn, 0, 0);
     sm_conn = 0;
     ice_conn = 0;
+    return Qt;
+}
+
+void
+session_init (void)
+{
+    rep_ADD_SUBR(Ssm_set_property);
+    rep_ADD_SUBR(Ssm_delete_property);
+    rep_ADD_SUBR(Ssm_connect);
+    rep_ADD_SUBR(Ssm_disconnect);
+    rep_INTERN(sm_save_yourself);
+}
+
+void
+session_kill (void)
+{
+    Fsm_disconnect ();
 }
