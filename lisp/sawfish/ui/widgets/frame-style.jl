@@ -38,7 +38,8 @@
 	  (doc-label (gtk-label-new doc))
 	  (readme-text-view (gtk-text-view-new))
 	  (readme-scroller (gtk-scrolled-window-new))
-	  (value (car options)))
+	  (value (car options))
+	  (last-value nil))
 
       (gtk-box-set-spacing hbox box-spacing)
       (gtk-box-set-spacing vbox box-spacing)
@@ -61,8 +62,14 @@
 			  (lambda ()
 			    (setq value (intern (gtk-entry-get-text
 						 (gtk-combo-entry combo))))
-			    (update-readme value readme-text-view path)
-			    (call-callback changed-callback)))
+			    ;; ugh. the gtk2 combo seems pretty fucked; this
+			    ;; didn't used to be necessary
+			    (when (and (not (eq value last-value))
+				       (memq value options))
+			      (setq last-value value)
+			      (format standard-error "changed: %s\n" value)
+			      (update-readme value readme-text-view path)
+			      (call-callback changed-callback))))
 
       (update-readme value readme-text-view path)
       (gtk-widget-show-all vbox)
