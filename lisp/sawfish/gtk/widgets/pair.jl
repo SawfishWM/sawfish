@@ -29,17 +29,24 @@
 
   ;; (pair CAR-SPEC CDR-SPEC)
 
+  (define (box-packer arg)
+    (case arg
+      ((start) gtk-box-pack-start)
+      ((end) gtk-box-pack-end)
+      (t gtk-container-add)))
+
   (define (make-pair-item changed-callback left right
-			  #!optional use-vbox reversed)
+			  #!optional use-vbox reversed packing)
     (let ((hbox ((if use-vbox gtk-vbox-new gtk-hbox-new) nil box-spacing))
 	  (left-widget (make-widget left changed-callback))
 	  (right-widget (make-widget right changed-callback)))
 
-      (unless reversed
-	(gtk-container-add hbox (widget-gtk-widget left-widget)))
-      (gtk-container-add hbox (widget-gtk-widget right-widget))
-      (when reversed
-	(gtk-container-add hbox (widget-gtk-widget left-widget)))
+      (let ((w1 (if (not reversed) left-widget right-widget))
+	    (w2 (if (not reversed) right-widget left-widget)))
+
+	((box-packer (car packing)) hbox (widget-gtk-widget w1))
+	((box-packer (cdr packing)) hbox (widget-gtk-widget w2)))
+
       (gtk-widget-show hbox)
 
       (lambda (op)
