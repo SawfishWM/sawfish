@@ -220,13 +220,6 @@
       (ws-after-removing-window w space)
       (call-hook 'workspace-state-change-hook))))
 
-(defun ws-workspace-windows (space &optional include-iconified)
-  (filter #'(lambda (w)
-	      (and (equal (window-get w 'workspace) space)
-		   (or include-iconified
-		       (not (window-get w 'iconified)))))
-	  (managed-windows)))
-
 (defun ws-switch-workspace (space)
   (unless (= current-workspace space)
     (when current-workspace
@@ -246,6 +239,13 @@
 	    (managed-windows))
       (call-hook 'enter-workspace-hook (list current-workspace))
       (call-hook 'workspace-state-change-hook))))
+
+(defun workspace-windows (space &optional include-iconified)
+  (filter #'(lambda (w)
+	      (and (equal (window-get w 'workspace) space)
+		   (or include-iconified
+		       (not (window-get w 'iconified)))))
+	  (managed-windows)))
 
 
 ;; slightly higher level
@@ -414,32 +414,6 @@ will be created."
   (when (window-get window 'workspace)
     (ws-insert-workspace -1)
     (ws-move-window window 0)))
-
-(defun next-workspace-window ()
-  "Focus on the next window of the current workspace."
-  (interactive)
-  (let
-      ((windows (ws-workspace-windows current-workspace)))
-    (display-window (or (nth 1 (memq (input-focus) windows)) (car windows)))))
-
-(defun next-window ()
-  "Focus on the next window, cycling through all possible workspaces."
-  (interactive)
-  (catch 'out
-    (let*
-	((space current-workspace)
-	 (windows (ws-workspace-windows space))
-	 (win (nth 1 (memq (input-focus) windows))))
-      (while (not win)
-	(setq space (1+ space))
-	(when (= space total-workspaces)
-	  (setq space 0))
-	(when (= space current-workspace)
-	  (throw 'out nil))
-	(setq windows (ws-workspace-windows space))
-	(setq win (car windows)))
-      (when win
-	(display-window win)))))
 
 (defun select-workspace (index)
   "Activate workspace number INDEX (from zero)."
