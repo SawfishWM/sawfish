@@ -23,6 +23,9 @@
 (require 'timers)
 (provide 'edge-flip)
 
+;; for the compiler's benefit
+(eval-when-compile (require 'move-resize))
+
 (defgroup edge-flip "Edge Flipping")
 
 (defcustom edge-flip-delay 250
@@ -72,5 +75,28 @@ flipping to the next viewport."
 	     (rplacd ptr 1))))
     (warp-cursor (car ptr) (cdr ptr))))
 
+;; this is a hack -- while the pointer's grabbed the flipper windows
+;; won't get enter/leave notify events (this is normally the right
+;; thing to do), so synthesize them ourselves while interactively
+;; moving windows
+;; XXX this probably doesn't handle the screen corners correctly
+(defun edge-flip-while-moving ()
+  (let
+      ((ptr (query-pointer))
+       edge)
+    (cond ((zerop (car ptr))
+	   (setq edge 'left))
+	  ((= (car ptr) (1- (screen-width)))
+	   (setq edge 'right))
+	  ((zerop (cdr ptr))
+	   (setq edge 'top))
+	  ((= (cdr ptr) (1- (screen-height)))
+	   (setq edge 'bottom)))
+    (unless (eq edge ef-current-edge)
+      (if edge
+	  (call-hook 'enter-flipper-hook (list edge))
+	(call-hook 'leave-flipper-hook (list ef-current-edge))))))
+
 (add-hook 'enter-flipper-hook 'edge-flip-enter)
 (add-hook 'leave-flipper-hook 'edge-flip-leave)
+(add-hook 'while-moving-hook 'edge-flip-while-moving)
