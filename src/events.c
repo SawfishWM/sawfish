@@ -206,7 +206,7 @@ static void
 button_press (XEvent *ev)
 {
     struct frame_part *fp;
-    Lisp_Window *w;
+    Lisp_Window *w = 0;
     repv context_map = Qnil;
 
     record_mouse_position (ev->xbutton.x_root, ev->xbutton.y_root);
@@ -215,15 +215,16 @@ button_press (XEvent *ev)
     if (fp != 0)
     {
 	w = fp->win;
+
+	if (ev->type == ButtonPress)
+	    handle_fp_click (fp, ev);
+
 	if (fp->clicked)
 	{
 	    repv tem = Fassq (Qkeymap, fp->alist);
 	    if (tem && tem != Qnil)
 		context_map = rep_CDR(tem);
 	}
-
-	if (ev->type == ButtonPress)
-	    handle_fp_click (fp, ev);
     }
 
     eval_input_event (context_map);
@@ -462,7 +463,10 @@ unmap_notify (XEvent *ev)
 	{
 	    w->mapped = FALSE;
 	    if (w->visible)
+	    {
 		XUnmapWindow (dpy, w->frame);
+		reset_frame_parts (w);
+	    }
 	    /* Removing the frame reparents the client window back to
 	       the root. This means that we receive the next MapRequest
 	       for the window. */
