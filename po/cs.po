@@ -1,13 +1,15 @@
 # sawfish Czech translation
 # Copyright (C) 2000-2001 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2004 sawfish'S COPYRIGHT HOLDER
+# Copyright (C) 2004 Miloslav Trmac <mitr@volny.cz>
 # Jiri Cerny <jiri.cerny@epfl.ch>, 2001
-# Miloslav Trmac <mitr@volny.cz>, 2002
+# Miloslav Trmac <mitr@volny.cz>, 2002, 2004
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.37.3\n"
-"POT-Creation-Date: 2002-11-02 23:33-0800\n"
-"PO-Revision-Date: 2002-11-11 19:43+0100\n"
+"Project-Id-Version: sawfish VERSION\n"
+"POT-Creation-Date: 2003-01-12 12:11-0800\n"
+"PO-Revision-Date: 2004-04-16 17:02+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -340,7 +342,7 @@ msgid "Sawfish Error"
 msgstr "Chyba Sawfish"
 
 #. ../lisp/sawfish/ui/shell.jl
-msgid "Sawfish configurator"
+msgid "Sawfish Configurator"
 msgstr "Nastavení Sawfish"
 
 #. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
@@ -379,7 +381,7 @@ msgid "Select Icon"
 msgstr "Vyberte ikonu"
 
 #. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Edit binding"
+msgid "Edit Binding"
 msgstr "Upravit zkratku"
 
 #. ../lisp/sawfish/ui/widgets/keymap.jl
@@ -399,7 +401,7 @@ msgid "not"
 msgstr "ne"
 
 #. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match window properties"
+msgid "Match Window Properties"
 msgstr "Porovnat vlastnosti okna"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -455,12 +457,10 @@ msgstr "Posloupnost příkazů"
 msgid "Invoke the list of commands, one by one."
 msgstr "Provést postupně seznam příkazů"
 
-#. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Quit"
 msgstr "Konec"
 
-#. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Restart"
 msgstr "Restartovat"
@@ -812,6 +812,14 @@ msgid "_About Sawfish..."
 msgstr "_O Sawfish..."
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "_Restart"
+msgstr "_Restartovat"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Quit"
+msgstr "U_končit"
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup window menu"
 msgstr "Zobrazit menu okna"
 
@@ -836,8 +844,8 @@ msgid "Display the applications menu."
 msgstr "Zobrazit menu aplikací."
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "All settings"
-msgstr "Všechna nastavení"
+msgid "_All settings"
+msgstr "_Všechna nastavení"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
@@ -1058,18 +1066,17 @@ msgstr "Vynutit jednoznačné jméno aktuálního okna"
 msgid "Workspace names"
 msgstr "Jména pracovních ploch"
 
-#. ../lisp/sawfish/wm/util/compat.jl
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace"
-msgstr "Vložit plochu"
+msgid "_Insert workspace"
+msgstr "_Vložit plochu"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Select next workspace"
-msgstr "Přejít na následující plochu"
+msgid "Select _next workspace"
+msgstr "Vybrat _následující plochu"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Select previous workspace"
-msgstr "Přejít na předchozí plochu"
+msgid "Select _previous workspace"
+msgstr "Vybrat _předchozí plochu"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with next"
@@ -1080,12 +1087,12 @@ msgid "Merge with previous"
 msgstr "Spojit s předchozí"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace right"
-msgstr "Přesunout plochu doprava"
+msgid "Move workspace _right"
+msgstr "Přesunout plochu dop_rava"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace left"
-msgstr "Přesunout plochu doleva"
+msgid "Move workspace _left"
+msgstr "Přesunout plochu do_leva"
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, c-format
@@ -2871,6 +2878,10 @@ msgstr ""
 "pozici. Jinak je zvýšit co možná nejvýš. Také změní úroveň všech jeho\n"
 "podřízených oken."
 
+#. ../lisp/sawfish/wm/util/compat.jl
+msgid "Insert workspace"
+msgstr "Vložit plochu"
+
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Unshade selected windows."
 msgstr "Rozbalit vybraná okna."
@@ -3169,12 +3180,6 @@ msgstr "Na_stavení"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Témata"
-
-#~ msgid "Minimizing"
-#~ msgstr "Minimalizace"
-
-#~ msgid "Maximizing"
-#~ msgstr "Maximalizace"
 
 #~ msgid ""
 #~ "Frame type fallbacks:\n"
