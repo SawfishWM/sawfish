@@ -1,7 +1,7 @@
 /* images.c -- Image handling
    $Id$
 
-   Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+   Copyright (C) 1999, 2000 John Harper <john@dcs.warwick.ac.uk>
 
    This file is part of sawmill.
 
@@ -20,11 +20,18 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
+#include <assert.h>
 
 static Lisp_Image *image_list;
 int image_type;
 
-ImlibData *imlib_id;
+#if defined (HAVE_IMLIB)
+static ImlibData *imlib_id;
+#endif
+
+Colormap image_cmap;
+Visual *image_visual;
+int image_depth;
 
 DEFSYM(image_load_path, "image-load-path");
 DEFSYM(image_directory, "image-directory");
@@ -35,15 +42,18 @@ DEFSYM(blue, "blue");
 
 DEFSYM(default_bevel_percent, "default-bevel-percent");
 
-/* A rough estimate of the memory used by a single ImlibImage */
-#define IMLIB_IMAGE_SIZE(i) \
+/* A rough estimate of the memory used by a single image_t */
+#if defined (HAVE_IMLIB)
+#define IMAGE_T_SIZE(i) \
     (sizeof (ImlibImage) + (i)->rgb_width * (i)->rgb_height * 3)
+#endif
 
-/* Fuck. Imlib's image caching is so annoying. This is the only way
-   I can think of disabling it, even though it may fragment memory.. */
-static ImlibImage *
+static image_t
 load_image (char *file)
 {
+#if defined (HAVE_IMLIB)
+    /* Fuck. Imlib's image caching is so annoying. This is the only way
+       I can think of disabling it, even though it may fragment memory.. */
     ImlibImage *im_1 = Imlib_load_image (imlib_id, file);
     if (im_1 != 0)
     {
@@ -53,12 +63,13 @@ load_image (char *file)
     }
     else
 	return 0;
+#endif
 }
 
 /* Make a Lisp image object from the imlib image IM. Its initial properties
    will be taken from the list PLIST. */
 static repv
-make_image (ImlibImage *im, repv plist)
+make_image (image_t im, repv plist)
 {
     Lisp_Image *f;
     for (f = image_list; f != 0; f = f->next)
@@ -68,11 +79,17 @@ make_image (ImlibImage *im, repv plist)
 	    return rep_VAL(f);
     }
     f = rep_ALLOC_CELL(sizeof(Lisp_Image));
-    rep_data_after_gc += sizeof (Lisp_Image) + IMLIB_IMAGE_SIZE (im);
+    rep_data_after_gc += sizeof (Lisp_Image) + IMAGE_T_SIZE (im);
     f->car = image_type;
     f->next = image_list;
     image_list = f;
     f->image = im;
+#if !defined (HAVE_IMLIB)
+    f->border[0] = f->border[1] = f->border[2] = f->border[3] = 0;
+#endif
+#if defined (NEED_PIXMAP_CACHE)
+    f->pixmap_first = f->pixmap_last = 0;
+#endif
     f->plist = plist;
     return rep_VAL(f);
 }
@@ -165,7 +182,7 @@ string). PLIST defines the property list of the image.
     rep_POPGC;
     if (file && rep_STRINGP(file))
     {
-	ImlibImage *im = load_image (rep_STR(file));
+	image_t im = load_image (rep_STR(file));
 	if (delete)
 	    Fdelete_file (file);
 	if (im != 0)
@@ -184,7 +201,7 @@ make-image-from-x-drawable ID [MASK-ID]
    Pixmap mask = 0;
    Window root;
    int x, y, w, h, bdr, dp;
-   ImlibImage *im;
+   image_t im;
 
    rep_DECLARE1 (id, rep_INTP);
    d = rep_INT (id);
@@ -194,9 +211,13 @@ make-image-from-x-drawable ID [MASK-ID]
    if (!XGetGeometry (dpy, d, &root, &x, &y, &w, &h, &bdr, &dp))
        return Qnil;
 
+#if defined (HAVE_IMLIB)
+   /* XXX Imlib currently ignores the MASK parameter, but maybe it
+      XXX won't in the future (and pigs might fly, also) */
    im = Imlib_create_image_from_drawable (imlib_id, d, mask, 0, 0, w, h);
+#endif
 
-   /* Imlib documentation says that server grab is lost in the above call */
+   /* server grab may be lost in the above calls */
    regrab_server ();
 
    return im ? make_image (im, Qnil) : Qnil;
@@ -224,8 +245,6 @@ WINDOW. Returns the symbol `nil' if no such image.
    else
        return Qnil;
 
-   /* XXX Imlib currently ignores the MASK parameter, but maybe it
-      XXX won't in the future (and pigs might fly, also) */
    if (VWIN(win)->wmhints->flags & IconMaskHint)
        mask_id = rep_MAKE_INT (VWIN(win)->wmhints->icon_mask);
    else
@@ -241,9 +260,11 @@ copy-image SOURCE-IMAGE
 Return a new image object, a clone of SOURCE-IMAGE.
 ::end:: */
 {
-    ImlibImage *im;
+    image_t im;
     rep_DECLARE1(source, IMAGEP);
+#if defined (HAVE_IMLIB)
     im = Imlib_clone_image (imlib_id, VIMAGE(source)->image);
+#endif
     if (im != 0)
 	return make_image (im, Fcopy_sequence (VIMAGE(source)->plist));
     return Fsignal (Qerror,
@@ -259,7 +280,9 @@ Flip the contents of IMAGE around the vertical axis.
 ::end:: */
 {
     rep_DECLARE1(image, IMAGEP);
+#if defined (HAVE_IMLIB)
     Imlib_flip_image_horizontal (imlib_id, VIMAGE(image)->image);
+#endif
     return image;
 }
 
@@ -272,7 +295,9 @@ Flip the contents of IMAGE around the horizontal axis.
 ::end:: */
 {
     rep_DECLARE1(image, IMAGEP);
+#if defined (HAVE_IMLIB)
     Imlib_flip_image_vertical (imlib_id, VIMAGE(image)->image);
+#endif
     return image;
 }
 
@@ -286,7 +311,9 @@ the bottom right of the image.
 ::end:: */
 {
     rep_DECLARE1(image, IMAGEP);
+#if defined (HAVE_IMLIB)
     Imlib_rotate_image (imlib_id, VIMAGE(image)->image, 1);
+#endif
     return image;
 }
 
@@ -360,8 +387,9 @@ Return (WIDTH . HEIGHT) representing the dimensions in pixels of IMAGE.
 ::end:: */
 {
     rep_DECLARE1(img, IMAGEP);
-    return Fcons (rep_MAKE_INT(VIMAGE(img)->image->rgb_width),
-		  rep_MAKE_INT(VIMAGE(img)->image->rgb_height));
+
+    return Fcons (rep_MAKE_INT(image_width(VIMAGE(img))),
+		  rep_MAKE_INT(image_height(VIMAGE(img))));
 }
 
 DEFUN("image-shape-color", Fimage_shape_color,
@@ -370,6 +398,7 @@ DEFUN("image-shape-color", Fimage_shape_color,
 image-shape-color IMAGE
 ::end:: */
 {
+#if defined (HAVE_IMLIB)
     ImlibColor shape;
     rep_DECLARE1(img, IMAGEP);
     Imlib_get_image_shape (imlib_id, VIMAGE(img)->image, &shape);
@@ -379,6 +408,7 @@ image-shape-color IMAGE
 	return Fget_color_rgb (rep_MAKE_INT(shape.r * 256),
 			       rep_MAKE_INT(shape.g * 256),
 			       rep_MAKE_INT(shape.b * 256));
+#endif
 }
 
 DEFUN("set-image-shape-color", Fset_image_shape_color, Sset_image_shape_color,
@@ -387,6 +417,7 @@ DEFUN("set-image-shape-color", Fset_image_shape_color, Sset_image_shape_color,
 set-image-shape-color IMAGE TRANSPARENT-COLOR
 ::end:: */
 {
+#if defined (HAVE_IMLIB)
     ImlibColor color;
     rep_DECLARE1(img, IMAGEP);
     rep_DECLARE2(shape, COLORP);
@@ -395,6 +426,7 @@ set-image-shape-color IMAGE TRANSPARENT-COLOR
     color.b = VCOLOR(shape)->blue / 256;
     Imlib_set_image_shape (imlib_id, VIMAGE(img)->image, &color);
     return img;
+#endif
 }
 
 DEFUN("image-border", Fimage_border, Simage_border, (repv img), rep_Subr1) /*
@@ -404,11 +436,22 @@ image-border IMAGE
 Return (LEFT RIGHT TOP BOTTOM) representing the border (in pixels) of IMAGE.
 ::end:: */
 {
-    ImlibBorder border;
     rep_DECLARE1(img, IMAGEP);
-    Imlib_get_image_border (imlib_id, VIMAGE(img)->image, &border);
-    return rep_list_4 (rep_MAKE_INT(border.left), rep_MAKE_INT(border.right),
-		       rep_MAKE_INT(border.top), rep_MAKE_INT(border.bottom));
+#if !defined (HAVE_IMLIB)
+    return rep_list_4 (rep_MAKE_INT (VIMAGE(img)->border[0]),
+		       rep_MAKE_INT (VIMAGE(img)->border[1]),
+		       rep_MAKE_INT (VIMAGE(img)->border[2]),
+		       rep_MAKE_INT (VIMAGE(img)->border[3]));
+#else
+    {
+	ImlibBorder border;
+	Imlib_get_image_border (imlib_id, VIMAGE(img)->image, &border);
+	return rep_list_4 (rep_MAKE_INT(border.left),
+			   rep_MAKE_INT(border.right),
+			   rep_MAKE_INT(border.top),
+			   rep_MAKE_INT(border.bottom));
+    }
+#endif
 }
 
 DEFUN("set-image-border", Fset_image_border, Sset_image_border,
@@ -421,18 +464,28 @@ image defines how that image is scaled -- only pixels inside the border
 are resized.
 ::end:: */
 {
-    ImlibBorder border;
     rep_DECLARE1(img, IMAGEP);
-    Imlib_get_image_border (imlib_id, VIMAGE(img)->image, &border);
-    if (rep_INTP(left))
-	border.left = rep_INT(left);
-    if (rep_INTP(right))
-	border.right = rep_INT(right);
-    if (rep_INTP(top))
-	border.top = rep_INT(top);
-    if (rep_INTP(bottom))
-	border.bottom = rep_INT(bottom);
-    Imlib_set_image_border (imlib_id, VIMAGE(img)->image, &border);
+#if !defined (HAVE_IMLIB)
+    VIMAGE(img)->border[0] = rep_INTP (left) ? rep_INT (left) : 0;
+    VIMAGE(img)->border[1] = rep_INTP (right) ? rep_INT (right) : 0;
+    VIMAGE(img)->border[2] = rep_INTP (top) ? rep_INT (top) : 0;
+    VIMAGE(img)->border[3] = rep_INTP (bottom) ? rep_INT (bottom) : 0;
+    image_changed (VIMAGE(img));
+#else
+    {
+	ImlibBorder border;
+	Imlib_get_image_border (imlib_id, VIMAGE(img)->image, &border);
+	if (rep_INTP(left))
+	    border.left = rep_INT(left);
+	if (rep_INTP(right))
+	    border.right = rep_INT(right);
+	if (rep_INTP(top))
+	    border.top = rep_INT(top);
+	if (rep_INTP(bottom))
+	    border.bottom = rep_INT(bottom);
+	Imlib_set_image_border (imlib_id, VIMAGE(img)->image, &border);
+    }
+#endif
     return img;
 }
 
@@ -445,6 +498,7 @@ TYPE may be one of nil, red, green, blue. returned modifier is
 (GAMMA BRIGHTNESS CONTRAST). All values range from 0 to 255.
 ::end:: */
 {
+#if defined (HAVE_IMLIB)
     ImlibColorModifier modifier;
     void (*fun)(ImlibData *, ImlibImage *, ImlibColorModifier *);
     rep_DECLARE1(img, IMAGEP);
@@ -457,6 +511,7 @@ TYPE may be one of nil, red, green, blue. returned modifier is
     return rep_list_3 (rep_MAKE_INT(modifier.gamma),
 		       rep_MAKE_INT(modifier.brightness),
 		       rep_MAKE_INT(modifier.contrast));
+#endif
 }
 
 DEFUN("set-image-modifier", Fset_image_modifier, Sset_image_modifier,
@@ -468,6 +523,7 @@ TYPE may be one of nil, red, green, blue. MODIFIER is (GAMMA BRIGHTNESS
 CONTRAST). These are integers ranging from 0 to 255.
 ::end:: */
 {
+#if defined (HAVE_IMLIB)
     ImlibColorModifier modifier;
     void (*fun)(ImlibData *, ImlibImage *, ImlibColorModifier *);
     rep_DECLARE1(img, IMAGEP);
@@ -486,6 +542,7 @@ CONTRAST). These are integers ranging from 0 to 255.
 	   : Imlib_set_image_modifier);
     (*fun) (imlib_id, VIMAGE(img)->image, &modifier);
     return img;
+#endif
 }
 
 static inline void
@@ -517,6 +574,7 @@ bevel_pixel (u_char *data, bool up, double bevel_fraction)
 
 static inline void
 bevel_horizontally (u_char *data, int width, int height,
+		    int row_stride, int channels, 
 		    int border, bool top, bool up, double bevel_fraction)
 {
     int rows;
@@ -526,19 +584,20 @@ bevel_horizontally (u_char *data, int width, int height,
 	u_char *ptr = data;
 	int x;
 	if (top)
-	    ptr += (rows * width) * 3 + (rows + 1) * 3;
+	    ptr += (rows * row_stride) + (rows + 1) * channels;
 	else
-	    ptr += width * (height - (rows + 1)) * 3 + (rows) * 3;
+	    ptr += row_stride * (height - (rows + 1)) + (rows) * channels;
 	for (x = rows; x < width - (rows + 1); x++)
 	{
 	    bevel_pixel (ptr, up, bevel_fraction);
-	    ptr += 3;
+	    ptr += channels;
 	}
     }
 }
 
 static inline void
 bevel_vertically (u_char *data, int width, int height,
+		  int row_stride, int channels,
 		  int border, bool top, bool up, double bevel_fraction)
 {
     int cols;
@@ -548,13 +607,13 @@ bevel_vertically (u_char *data, int width, int height,
 	u_char *ptr = data;
 	int y;
 	if (top)
-	    ptr += cols * 3 + (cols * width) * 3;
+	    ptr += cols * channels + (cols * row_stride);
 	else
-	    ptr += (width - (cols + 1)) * 3 + ((cols) * width) * 3;
+	    ptr += (width - (cols + 1)) * channels + ((cols) * row_stride);
 	for (y = cols; y <= height - (cols + 1); y++)
 	{
 	    bevel_pixel (ptr, up, bevel_fraction);
-	    ptr += width * 3;
+	    ptr += row_stride;
 	}
     }
 }
@@ -585,24 +644,32 @@ intensity of the bevel created.
 	    bevel_fraction = (((double) bp) / 100.0);
     }
 
-    bevel_horizontally (VIMAGE(image)->image->rgb_data,
-			VIMAGE(image)->image->rgb_width,
-			VIMAGE(image)->image->rgb_height,
+    bevel_horizontally (image_pixels (VIMAGE(image)),
+			image_width (VIMAGE(image)),
+			image_height (VIMAGE(image)),
+			image_row_stride (VIMAGE(image)),
+			image_channels (VIMAGE(image)),
 			rep_INT(border), TRUE, up != Qnil, bevel_fraction);
-    bevel_vertically (VIMAGE(image)->image->rgb_data,
-		      VIMAGE(image)->image->rgb_width,
-		      VIMAGE(image)->image->rgb_height,
+    bevel_vertically (image_pixels (VIMAGE(image)),
+		      image_width (VIMAGE(image)),
+		      image_height (VIMAGE(image)),
+		      image_row_stride (VIMAGE(image)),
+		      image_channels (VIMAGE(image)),
 		      rep_INT(border), TRUE, up != Qnil, bevel_fraction);
-    bevel_horizontally (VIMAGE(image)->image->rgb_data,
-			VIMAGE(image)->image->rgb_width,
-			VIMAGE(image)->image->rgb_height,
+    bevel_horizontally (image_pixels (VIMAGE(image)),
+			image_width (VIMAGE(image)),
+			image_height (VIMAGE(image)),
+			image_row_stride (VIMAGE(image)),
+			image_channels (VIMAGE(image)),
 			rep_INT(border), FALSE, up != Qnil, bevel_fraction);
-    bevel_vertically (VIMAGE(image)->image->rgb_data,
-		      VIMAGE(image)->image->rgb_width,
-		      VIMAGE(image)->image->rgb_height,
+    bevel_vertically (image_pixels (VIMAGE(image)),
+		      image_width (VIMAGE(image)),
+		      image_height (VIMAGE(image)),
+		      image_row_stride (VIMAGE(image)),
+		      image_channels (VIMAGE(image)),
 		      rep_INT(border), FALSE, up != Qnil, bevel_fraction);
 
-    Imlib_changed_image (imlib_id, VIMAGE(image)->image);
+    image_changed (VIMAGE(image));
     return image;
 }
 
@@ -614,8 +681,10 @@ clear-image IMAGE [COLOR]
 Set all pixels in IMAGE to COLOR (or black if COLOR is undefined).
 ::end:: */
 {
-    int i, r, g, b;
+    int width, height, stride, channels;
+    int x, y, r, g, b;
     u_char *data;
+
     rep_DECLARE1(image, IMAGEP);
     if (COLORP(color))
     {
@@ -625,19 +694,25 @@ Set all pixels in IMAGE to COLOR (or black if COLOR is undefined).
     }
     else
 	r = g = b = 0;
-    data = VIMAGE(image)->image->rgb_data;
-    for (i = 0; i < VIMAGE(image)->image->rgb_height * VIMAGE(image)->image->rgb_width; i++)
+
+    data = image_pixels (VIMAGE(image));
+    width = image_width (VIMAGE(image));
+    height = image_height (VIMAGE(image));
+    stride = image_row_stride (VIMAGE(image));
+    channels = image_channels (VIMAGE(image));
+    for (y = 0; y < height; y++)
     {
-	*data++ = r;
-	*data++ = g;
-	*data++ = b;
+	for (x = 0; x < width; x++)
+	{
+	    data[y * stride + x * channels + 0] = r;
+	    data[y * stride + x * channels + 1] = g;
+	    data[y * stride + x * channels + 2] = b;
+	}
     }
 
-    Imlib_changed_image (imlib_id, VIMAGE(image)->image);
+    image_changed (VIMAGE(image));
     return image;
 }
-
-/* XXX stubs for suitable Imlib functions... */
 
 DEFUN("make-sized-image", Fmake_sized_image, Smake_sized_image,
       (repv width, repv height, repv color), rep_Subr3) /*
@@ -664,7 +739,7 @@ defines the color of its pixels.
     data = rep_alloc (rep_INT(width) * rep_INT(height) * 3);
     if (data != 0)
     {
-	ImlibImage *im;
+	image_t im;
 	int i;
 	for (i = 0; i < rep_INT(width) * rep_INT(height) * 3; i += 3)
 	{
@@ -672,9 +747,11 @@ defines the color of its pixels.
 	    data[i+1] = g;
 	    data[i+2] = b;
 	}
+#if defined (HAVE_IMLIB)
 	im = Imlib_create_image_from_data (imlib_id, data, 0,
 					   rep_INT(width), rep_INT(height));
 	rep_free (data);
+#endif
 	if (im != 0)
 	    return make_image (im, Qnil);
     }
@@ -688,27 +765,144 @@ tile-image DEST-IMAGE SOURCE-IMAGE
 Tile SOURCE-IMAGE into DEST-IMAGE.
 ::end:: */
 {
-    ImlibImage *src_im, *dst_im;
+    image_t src_im, dst_im;
+    int src_width, src_height;
+    int dst_width, dst_height;
     int x, src_y, dst_y;
+
     rep_DECLARE1(dst, IMAGEP);
     rep_DECLARE2(src, IMAGEP);
     src_im = VIMAGE(src)->image;
     dst_im = VIMAGE(dst)->image;
-    for (dst_y = src_y = 0; dst_y < dst_im->rgb_height; dst_y++, src_y++)
+    src_width = image_width (VIMAGE (src));
+    src_height = image_height (VIMAGE (src));
+    dst_width = image_width (VIMAGE (dst));
+    dst_height = image_height (VIMAGE (dst));
+
+#if defined (HAVE_IMLIB)
+    for (dst_y = src_y = 0; dst_y < dst_height; dst_y++, src_y++)
     {
-	if (src_y >= src_im->rgb_height)
+	if (src_y >= src_height)
 	    src_y = 0;
-	for (x = 0; x < dst_im->rgb_width; x += src_im->rgb_width)
+	for (x = 0; x < dst_width; x += src_width)
 	{
-	    memcpy (dst_im->rgb_data + dst_y*dst_im->rgb_width*3 + x*3,
-		    src_im->rgb_data + src_y*src_im->rgb_width*3,
-		    MIN (dst_im->rgb_width - x, src_im->rgb_width) * 3);
+	    memcpy (dst_im->rgb_data + dst_y*dst_width*3 + x*3,
+		    src_im->rgb_data + src_y*src_width*3,
+		    MIN (dst_width - x, src_width) * 3);
 	}
     }
-    Imlib_changed_image (imlib_id, dst_im);
+#endif
+
+    image_changed (VIMAGE(dst));
     return dst;
 }
     
+
+/* image structure accessors */
+
+int
+image_width (Lisp_Image *im)
+{
+#if defined (HAVE_IMLIB)
+    return im->image->rgb_width;
+#endif
+}
+
+int
+image_height (Lisp_Image *im)
+{
+#if defined (HAVE_IMLIB)
+    return im->image->rgb_height;
+#endif
+}
+
+u_char *
+image_pixels (Lisp_Image *im)
+{
+#if defined (HAVE_IMLIB)
+    return im->image->rgb_data;
+#endif
+}
+
+int
+image_row_stride (Lisp_Image *im)
+{
+#if defined (HAVE_IMLIB)
+    return im->image->rgb_width * 3;
+#endif
+}
+
+int
+image_channels (Lisp_Image *im)
+{
+#if defined (HAVE_IMLIB)
+    return 3;
+#endif
+}
+
+void
+image_changed (Lisp_Image *im)
+{
+#if defined (HAVE_IMLIB)
+    Imlib_changed_image (imlib_id, im->image);
+#endif
+}
+
+
+/* render functions */
+
+void
+image_render (Lisp_Image *image, int width, int height,
+	      Pixmap *pixmap, Pixmap *mask)
+{
+    image_t im = image->image;
+
+    assert (width > 0);
+    assert (height > 0);
+
+#if defined (HAVE_IMLIB)
+    Imlib_render (imlib_id, im, width, height);
+    if (pixmap != 0)
+	*pixmap = Imlib_move_image (imlib_id, im);
+    if (mask != 0)
+	*mask = Imlib_move_mask (imlib_id, im);
+#endif
+
+    /* Imlib sometimes calls XSync (), which could hide events */
+    rep_mark_input_pending (ConnectionNumber(dpy));
+}
+
+void
+image_free_pixmaps (Lisp_Image *image, Pixmap pixmap, Pixmap mask)
+{
+#if defined (NEED_PIXMAP_CACHE)
+    pixmap_cache_unref (image, pixmap, mask);
+#endif
+#if defined (HAVE_IMLIB)
+    Imlib_free_pixmap (imlib_id, pixmap);
+#endif
+}
+
+int
+best_color_match (int red, int green, int blue)
+{
+#if defined (HAVE_IMLIB)
+    return Imlib_best_color_match (imlib_id, &red, &green, &blue);
+#endif
+}
+
+void
+paste_image_to_drawable (Lisp_Image *img, Drawable d,
+			 int x, int y, int w, int h)
+{
+#if defined (HAVE_IMLIB)
+    Imlib_paste_image (imlib_id, img->image, d, x, y, w, h);
+
+    /* Imlib sometimes calls XSync (), which could hide events */
+    rep_mark_input_pending (ConnectionNumber(dpy));
+#endif
+}
+
 
 /* type hooks */
 
@@ -742,7 +936,12 @@ image_sweep (void)
 	Lisp_Image *next = w->next;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
 	{
+#if defined (NEED_PIXMAP_CACHE)
+	    pixmap_cache_flush_image (w);
+#endif
+#if defined (HAVE_IMLIB)
 	    Imlib_kill_image (imlib_id, w->image);
+#endif
 	    rep_FREE_CELL(w);
 	}
 	else
@@ -761,15 +960,20 @@ image_sweep (void)
 void
 images_init (void)
 {
-    ImlibInitParams params;
     image_type = rep_register_new_type ("image", image_cmp, image_prin,
 					image_prin, image_sweep, image_mark,
 					0, 0, 0, 0, 0, 0, 0);
     if (!batch_mode_p ())
     {
+#if defined (HAVE_IMLIB)
+	ImlibInitParams params;
 	params.visualid = screen_visual->visualid;
 	params.flags = PARAMS_VISUALID;
 	imlib_id = Imlib_init_with_params (dpy, &params);
+	image_cmap = Imlib_get_colormap (imlib_id);
+	image_visual = Imlib_get_visual (imlib_id);
+	image_depth = imlib_id->x.depth;
+#endif
     }
     rep_ADD_SUBR(Smake_image);
     rep_ADD_SUBR(Smake_image_from_x_drawable);
