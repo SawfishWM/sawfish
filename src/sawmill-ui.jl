@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.4 1999/08/14 10:54:54 john Exp $
+;; $Id: sawmill-ui.jl,v 1.5 1999/08/14 11:02:18 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -29,6 +29,10 @@ fi
 ;; You should have received a copy of the GNU General Public License
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+;(setq print-length 5)
+;(setq print-depth 3)
+;(setq debug-on-error t)
 
 (require 'gtk)
 
@@ -73,6 +77,7 @@ fi
 ;; (vbox ELEMENTS...)
 ;; (table (COLS ROWS) ((LEFT RIGHT TOP BOTTOM) ELEMENT)...)
 ;; (label TEXT)
+;; (text TEXT)
 ;; (hsep)
 ;; (vsep)
 ;; (frame TEXT ELEMENTS...)
@@ -82,6 +87,8 @@ fi
 ;; (string KEYS...)
 ;; (set LIST KEYS...)
 ;; (font KEYS...)
+;; (keymap KEYS...)
+;; (keymap-shell (PAGES...) KEYS...)
 
 ;; KEYS is a plist, possible keys are:
 
@@ -127,6 +134,8 @@ fi
 	      (clist (gtk-clist-new 1))
 	      (frame (gtk-frame-new))
 	      (contents (make-vector (length (cdr spec)))))
+	   (gtk-box-set-spacing hbox ui-box-spacing)
+	   (gtk-container-border-width hbox ui-box-border)
 	   (gtk-clist-set-column-auto-resize clist 0 t)
 	   (gtk-container-add hbox clist)
 	   (gtk-container-add hbox frame)
@@ -185,6 +194,15 @@ fi
     (gtk-label-set-justify label 'left)
     (gtk-label-set-line-wrap label t)
     label))
+
+(put 'text 'builder 'build-text)
+(defun build-text (spec)
+  (let
+      ((text (gtk-text-new)))
+    (gtk-text-set-editable text nil)
+    (gtk-text-set-word-wrap text 1)
+    (gtk-text-insert text nil nil nil (nth 1 spec) (length (nth 1 spec)))
+    text))
 
 (put 'frame 'builder 'build-frame)
 (defun build-frame (spec)
@@ -379,6 +397,218 @@ fi
       (setq values (cdr values)))
     box))
 
+
+;; customizing keymaps
+
+(defvar ui-keymap-shell nil)
+
+(put 'keymap 'builder 'build-keymap)
+(defun build-keymap (spec)
+  (let
+      ((hbox (gtk-vbox-new nil 0))
+       (vbox (gtk-hbox-new nil 0))
+       (vbox-2 (gtk-vbox-new nil 0))
+       (label (gtk-label-new (get-key spec ':doc)))
+       (insert (gtk-button-new-with-label "Insert"))
+       (delete (gtk-button-new-with-label "Delete"))
+       (clist (gtk-clist-new-with-titles ["Key" "Command"]))
+       (scroller (gtk-scrolled-window-new)))
+
+    (gtk-box-set-spacing hbox ui-box-spacing)
+    (gtk-container-border-width hbox ui-box-border)
+    (gtk-box-set-spacing vbox ui-box-spacing)
+    (gtk-container-border-width vbox ui-box-border)
+
+    (gtk-clist-set-column-auto-resize clist 0 t)
+    (gtk-clist-set-column-auto-resize clist 1 t)
+    (gtk-clist-set-selection-mode clist 'browse)
+    (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
+    (gtk-widget-set-usize scroller 200 100)
+    (gtk-container-add hbox scroller)
+    (gtk-box-pack-end hbox vbox)
+    (gtk-container-add scroller clist)
+    (gtk-container-add vbox insert)
+    (gtk-container-add vbox delete)
+    (mapc #'(lambda (cell)
+	      (gtk-clist-append clist (vector (cdr cell)
+					      (symbol-name (car cell)))))
+	  (cdr (get-key spec ':value)))
+    (setq spec (nconc spec (list ':shell ui-keymap-shell
+				 ':clist clist
+				 ':selection 0)))
+    (gtk-signal-connect insert "clicked" `(lambda ()
+					    (build-keymap:insert ',spec)))
+    (gtk-signal-connect delete "clicked" `(lambda ()
+					    (build-keymap:delete ',spec)))
+    (gtk-signal-connect clist "select_row" `(lambda (w row col)
+					      (set-key ',spec ':selection row)
+					      (build-keymap:select-row
+					       ',spec)))
+    (gtk-box-pack-start vbox-2 label)
+    (gtk-label-set-justify label 'left)
+    (gtk-container-add vbox-2 hbox)
+    vbox-2))
+
+(defun build-keymap:select-row (spec)
+  (let*
+      ((row (or (get-key spec ':selection) 0))
+       (shell (get-key spec ':shell))
+       (binding (nth row (cdr (get-key spec ':value)))))
+    (if binding
+	(build-keymap-shell:set-binding shell (cdr binding) (car binding))
+      (build-keymap-shell:set-binding shell "" 'nop))))
+
+(defun build-keymap:insert (spec)
+  (let*
+      ((map (copy-sequence (get-key spec ':value)))
+       (pred (nthcdr (get-key spec ':selection) map)))
+    (rplacd pred (cons (cons 'nop "Null") (cdr pred)))
+    (ui-set spec (get-key spec ':variable) map)
+    (gtk-clist-insert (get-key spec ':clist)
+		      (get-key spec ':selection)
+		      (vector "Null" "nop"))
+    (gtk-clist-select-row (get-key spec ':clist)
+			  (get-key spec ':selection) 0)))
+
+(defun build-keymap:delete (spec)
+  (let*
+      ((map (copy-sequence (get-key spec ':value)))
+       (pred (nthcdr (get-key spec ':selection) map)))
+    (rplacd pred (nthcdr 2 pred))
+    (ui-set spec (get-key spec ':variable) map)
+    (gtk-clist-remove (get-key spec ':clist) (get-key spec ':selection))))
+
+(defun ui-bind-key (spec index new)
+  (let*
+      ((map (copy-sequence (get-key spec ':value)))
+       (cell (nth index (cdr map))))
+    (unless (equal cell new)
+      (rplaca cell (car new))
+      (rplacd cell (cdr new))
+      (ui-set spec (get-key spec ':variable) map)
+      (gtk-clist-set-text (get-key spec ':clist)
+			  index 0 (cdr cell))
+      (gtk-clist-set-text (get-key spec ':clist)
+			  index 1 (symbol-name (car cell))))))
+
+(put 'keymap-shell 'builder 'build-keymap-shell)
+(defun build-keymap-shell (spec)
+  (let*
+      ((ui-keymap-shell spec)
+       (pages (nth 1 spec))
+       (hbox-1 (gtk-hbox-new nil 0))
+       (vbox-2 (gtk-vbox-new nil 0))
+       (vbox (gtk-vbox-new nil 0))
+       (entry (gtk-entry-new))
+       (map-clist (gtk-clist-new-with-titles ["Keymaps"]))
+       (frame (gtk-frame-new))
+       (cmd-clist (gtk-clist-new-with-titles ["Commands"]))
+       (scroller (gtk-scrolled-window-new))
+       (scroller-2 (gtk-scrolled-window-new))
+       ;; vector of [LABEL SPEC WIDGET] for each keymap
+       (maps (make-vector (length pages))))
+
+    (gtk-box-set-spacing hbox-1 ui-box-spacing)
+    (gtk-container-border-width hbox-1 ui-box-border)
+    (gtk-box-set-spacing vbox-2 ui-box-spacing)
+    (gtk-container-border-width vbox-2 ui-box-border)
+    (gtk-box-set-spacing vbox ui-box-spacing)
+    (gtk-container-border-width vbox ui-box-border)
+
+    (rplacd spec (nthcdr 2 spec))
+    (setq spec (nconc spec (list ':maps maps
+				 ':frame frame
+				 ':cmd-clist cmd-clist
+				 ':entry entry
+				 ':active-map 0
+				 ':active-cmd 0)))
+
+    ;; 1. the key and command editing widget
+    (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
+    (gtk-widget-set-usize scroller 200 100)
+    (gtk-container-add scroller cmd-clist)
+    (gtk-clist-set-column-auto-resize cmd-clist 0 t)
+    (gtk-clist-set-selection-mode cmd-clist 'browse)
+    (mapc #'(lambda (c)
+	      (gtk-clist-append cmd-clist (vector (symbol-name c))))
+	  (get-key spec ':commands))
+    (gtk-container-add vbox-2 entry)
+    (gtk-container-add vbox-2 scroller)
+    (gtk-signal-connect cmd-clist "select_row"
+			`(lambda (w row col)
+			   (set-key ',spec ':active-cmd row)
+			   (build-keymap-shell:set-command ',spec)))
+    (gtk-signal-connect entry "changed"
+			`(lambda (w)
+			   (build-keymap-shell:set-event ',spec)))
+
+    ;; 2. the keymap selection widget
+    (gtk-scrolled-window-set-policy scroller-2 'automatic 'automatic)
+    (gtk-clist-set-column-auto-resize map-clist 0 t)
+    (gtk-clist-set-selection-mode map-clist 'browse)
+    (gtk-widget-set-usize scroller-2 100 100)
+    (gtk-container-add scroller-2 map-clist)
+    (gtk-container-add hbox-1 scroller-2)
+    (gtk-container-add hbox-1 vbox-2)
+    (mapc #'(lambda (page)
+	      (let
+		  ((row (gtk-clist-append map-clist (vector (car page)))))
+		(aset maps row (vector (car page)
+				       (nth 1 page)
+				       (build-ui (nth 1 page))))
+		(gtk-widget-show-all (aref (aref maps row) 2))))
+	  pages)
+    (gtk-signal-connect map-clist "select_row"
+			`(lambda (w row col)
+			   (build-keymap-shell:select-map ',spec ',maps row)))
+    (gtk-clist-select-row map-clist 0 0)
+
+    (gtk-container-add vbox frame)
+    (gtk-container-add vbox hbox-1)
+
+    vbox))
+
+(defun build-keymap-shell:select-map (spec maps row)
+  (let
+      ((frame (get-key spec ':frame)))
+    (set-key spec ':active-map row)
+    (mapc #'(lambda (w)
+	      (gtk-container-remove frame w)) (gtk-container-children frame))
+    (gtk-frame-set-label frame (aref (aref maps row) 0))
+    (gtk-container-add frame (aref (aref maps row) 2))
+    (build-keymap:select-row (aref (aref maps row) 1))))
+
+(defun build-keymap-shell:set-binding (spec event command)
+  (let*
+      ((commands (get-key spec ':commands))
+       (c-row (- (length commands) (length (memq command commands)))))
+    (gtk-clist-select-row (get-key spec ':cmd-clist) c-row 0)
+    (gtk-clist-moveto (get-key spec ':cmd-clist) c-row 0)
+    (gtk-entry-set-text (get-key spec ':entry) event)))
+
+(defun build-keymap-shell:set-event (spec)
+  (let*
+      ((text (gtk-entry-get-text (get-key spec ':entry)))
+       (map (aref (get-key spec ':maps) (get-key spec ':active-map)))
+       (binding (get-key (aref map 1) ':selection))
+       (value (nth binding (cdr (get-key (aref map 1) ':value)))))
+    (when value
+      (setq value (cons (car value) text))
+      (ui-bind-key (aref map 1) binding value))))
+    
+(defun build-keymap-shell:set-command (spec)
+  (let*
+      ((command (nth (get-key spec ':active-cmd) (get-key spec ':commands)))
+       (map (aref (get-key spec ':maps) (get-key spec ':active-map)))
+       (binding (get-key (aref map 1) ':selection))
+       (value (nth binding (cdr (get-key (aref map 1) ':value)))))
+    (when value
+      (setq value (cons command (cdr value)))
+      (ui-bind-key (aref map 1) binding value))))
+
+
+;; building the frame for the element tree
+
 (defun show-ui (spec)
   (let
       ((ui-apply-hook nil)
@@ -451,10 +681,7 @@ fi
 				      ui-values-to-apply))
   (setq ui-values-to-apply (cons (cons spec value) ui-values-to-apply))
   (set-key spec ':value value)
-  (ui-set-button-states)
-; (format standard-error "--| original %S\n--| to-apply %S\n--| changed %S\n"
-;	  ui-original-values ui-values-to-apply ui-changed-variables)
-  )
+  (ui-set-button-states))
 
 (defun ui-set-original (spec symbol)
   (unless (assq symbol ui-original-values)
@@ -483,10 +710,7 @@ fi
     (ui-command (cons 'progn commands))
     (setq ui-values-to-apply nil)
     (setq ui-apply-changed-hook nil)
-    (ui-set-button-states)
-;   (format standard-error "--| original %S\n--| to-apply %S\n--| changed %S\n"
-;	    ui-original-values ui-values-to-apply ui-changed-variables)
-    ))
+    (ui-set-button-states)))
 
 (defun ui-apply ()
   (call-hook 'ui-apply-changed-hook)
@@ -508,8 +732,6 @@ fi
     (ui-command (cons 'progn commands))
     (setq ui-values-to-apply nil)
     (setq ui-changed-variables nil)
-;   (format standard-error "--| original %S\n--| to-apply %S\n--| changed %S\n"
-;	    ui-original-values ui-values-to-apply ui-changed-variables)
     (unless dont-refresh
       (ui-refresh))))
 
