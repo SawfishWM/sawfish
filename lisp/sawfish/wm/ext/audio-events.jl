@@ -21,7 +21,9 @@
 
 ;;;###autoload (defgroup audio "Sound" :require sawfish.wm.ext.audio-events)
 
-(define-structure sawfish.wm.ext.audio-events ()
+(define-structure sawfish.wm.ext.audio-events
+
+    (export audio-event-handler)
 
     (open rep
 	  sawfish.wm.custom
