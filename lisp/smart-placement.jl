@@ -19,6 +19,8 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'rects)
+
 ;; Commentary:
 
 ;; This implements two different algorithms: first-fit and best-fit. 
@@ -79,17 +81,11 @@ weights mean that the window is harder to cover.")
 ;; RECTS is a list of (LEFT TOP RIGHT BOTTOM); returns sorted, uniquified
 ;; (X-EDGES . Y-EDGES)
 (defun sp-make-grid (rects &optional with-root)
-  (let
-      ((x-edges (nconc (mapcar 'car rects)
-		       (mapcar #'(lambda (x) (nth 2 x)) rects)))
-       (y-edges (nconc (mapcar #'(lambda (x) (nth 1 x)) rects)
-		       (mapcar #'(lambda (x) (nth 3 x)) rects))))
-    (when with-root
-      (setq x-edges (cons 0 (nconc x-edges (list (screen-width)))))
-      (setq y-edges (cons 0 (nconc y-edges (list (screen-height))))))
-    (setq x-edges (sp-prune-points x-edges sp-max-points))
-    (setq y-edges (sp-prune-points y-edges sp-max-points))
-    (cons x-edges y-edges)))
+  (let*
+      ((grid (grid-from-rectangles rects with-root)))
+    (rplaca grid (sp-prune-points (car grid) sp-max-points))
+    (rplacd grid (sp-prune-points (cdr grid) sp-max-points))
+    grid))
 
 (defun sp-prune-points (points max)
   (let*
@@ -102,25 +98,6 @@ weights mean that the window is harder to cover.")
           (rplacd tem (cdr (cdr tem)))
         (setq tem (cdr tem))))
     points))
-
-;; returns a list of (LEFT TOP RIGHT BOTTOM [OVERLAP-WEIGHT])
-(defun sp-make-rects (windows)
-  (mapcar #'(lambda (w)
-	      (let
-		  ((dims (window-frame-dimensions w))
-		   (pos (window-position w))
-		   tem)
-		(list* (car pos) (cdr pos)
-		       (+ (car pos) (car dims))
-		       (+ (cdr pos) (cdr dims))
-		       (if (and sp-important-windows
-				(string-match
-				 sp-important-windows (window-name w)))
-			    (list sp-important-windows-weight)
-			 (and (setq tem (assoc-regexp (window-name w)
-						      sp-auto-weight-alist))
-			      (list (cdr tem)))))))
-	  windows))
 
 ;; returns the list of windows to compare with when overlapping, by
 ;; default windows with their `ignored' property set are dropped
@@ -141,33 +118,6 @@ weights mean that the window is harder to cover.")
 
 ;; calculating overlaps
 
-;; returns the overlap between two 1d line segments, A-1 to A-2, and
-;; B-1 to B-2
-(defmacro sp-1d-overlap (a-1 a-2 b-1 b-2)
-  `(max 0 (- (min ,a-2 ,b-2) (max ,a-1 ,b-1))))
-
-;; returns the overlap between two rectangles, one defined as having
-;; dimensions DIMS and origin POINT, while the other is defined
-;; by RECT
-(defun sp-2d-overlap (dims point rect)
-  (* (sp-1d-overlap (car point) (+ (car point) (car dims))
-		    (car rect) (nth 2 rect))
-     (sp-1d-overlap (cdr point) (+ (cdr point) (cdr dims))
-		    (nth 1 rect) (nth 3 rect))
-     ;; include the weight of the rectangle if it has one
-     (or (nth 4 rect) 1)))
-
-;; returns the total area of the overlap between a rectangle defined by
-;; DIMS and POINT, and the list of rectangles RECTS
-;; when placed at POINT
-(defun sp-total-overlap (dims point rects)
-  (let
-      ((total 0))
-    (mapc #'(lambda (r)
-	      (setq total (+ total (sp-2d-overlap dims point r))))
-	  rects)
-    total))
-
 ;; returns (POINT . OVERLAP), find the alignment of the rectangle
 ;; of dimensions DIMS at POINT with the least overlap compared to
 ;; RECTS
@@ -186,7 +136,7 @@ weights mean that the window is harder to cover.")
 			   (>= (cdr point-foo) 0)
 			   (<= (+ (car point-foo) (car dims)) (screen-width))
 			   (<= (+ (cdr point-foo) (cdr dims)) (screen-height)))
-		  (setq tem (sp-total-overlap dims point-foo rects))
+		  (setq tem (rect-total-overlap dims point-foo rects))
 		  (when (or (not min-point) (< tem min-overlap))
 		    (setq min-overlap tem)
 		    (setq min-point point-foo)))))
@@ -224,7 +174,7 @@ weights mean that the window is harder to cover.")
 
 (defmacro sp-edges-adjacent (align-1 start-1 end-1 align-2 start-2 end-2)
   `(if (= ,align-1 ,align-2)
-       (sp-1d-overlap ,start-1 ,end-1 ,start-2 ,end-2)
+       (rect-1d-overlap ,start-1 ,end-1 ,start-2 ,end-2)
      0))
 
 ;; This is the crux of the problem -- this function must assign a value
@@ -340,7 +290,9 @@ weights mean that the window is harder to cover.")
       (place-window-randomly w)
     (let*
 	((windows (sp-get-windows w))
-	 (rects (sp-make-rects windows))
+	 (rects (rectangles-from-windows
+		 windows (cons (cons sp-important-windows
+				     sp-important-windows-weight))))
 	 (grid (sp-make-grid rects t))
 	 (dims (window-frame-dimensions w))
 	 point)
