@@ -109,6 +109,7 @@ for the bindings to be installed if and when it is."
 (defun describe-key (&optional map)
   "Prompt for a key sequence, then print its binding."
   (interactive)
+  (require 'lisp-doc)
   (let (components)
     (letrec
 	((loop
