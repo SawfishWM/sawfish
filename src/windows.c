@@ -22,6 +22,9 @@
 #include "sawmill.h"
 #include <X11/extensions/shape.h>
 
+#define CLIENT_EVENTS (PropertyChangeMask | StructureNotifyMask \
+		       | ColormapChangeMask | VisibilityChangeMask)
+
 Lisp_Window *window_list;
 int window_type;
 
@@ -237,7 +240,8 @@ remove_window_frame (Lisp_Window *w)
     {
 	/* reparent the subwindow back to the root window */
 	XReparentWindow (dpy, w->id, root_window, w->attr.x, w->attr.y);
-	XRemoveFromSaveSet (dpy, w->id);
+	if (!w->mapped)
+	    XRemoveFromSaveSet (dpy, w->id);
 	w->reparented = FALSE;
 	w->reparenting = TRUE;
     }
@@ -275,8 +279,7 @@ add_window (Window id)
 
 	/* ..now do the X11 stuff */
 
-	XSelectInput (dpy, id, PropertyChangeMask | StructureNotifyMask
-		      | ColormapChangeMask | VisibilityChangeMask);
+	XSelectInput (dpy, id, CLIENT_EVENTS);
 	XGetWindowAttributes (dpy, id, &w->attr);
 	DB(("  orig: width=%d height=%d x=%d y=%d\n",
 	    w->attr.width, w->attr.height, w->attr.x, w->attr.y));
@@ -798,7 +801,16 @@ Prevent WINDOW from being displayed. See `show-window'.
     if (VWIN(win)->visible)
     {
 	if (VWIN(win)->mapped)
+	{
 	    XUnmapWindow (dpy, VWIN(win)->frame);
+
+	    /* ICCCM says we must unmap the client window, but we
+	       don't want events.c to think the client unmapped it.. */
+	    XSelectInput (dpy, VWIN(win)->id,
+			  CLIENT_EVENTS & ~StructureNotifyMask);
+	    XUnmapWindow (dpy, VWIN(win)->id);
+	    XSelectInput (dpy, VWIN(win)->id, CLIENT_EVENTS);
+	}
 	VWIN(win)->visible = FALSE;
 	reset_frame_parts (VWIN(win));
     }
@@ -816,7 +828,14 @@ Ensure that WINDOW (if it has been mapped) is visible. See `hide-window'.
     if (!VWIN(win)->visible)
     {
 	if (VWIN(win)->mapped)
+	{
+	    XSelectInput (dpy, VWIN(win)->id,
+			  CLIENT_EVENTS & ~StructureNotifyMask);
+	    XMapWindow (dpy, VWIN(win)->id);
+	    XSelectInput (dpy, VWIN(win)->id, CLIENT_EVENTS);
+
 	    XMapWindow (dpy, VWIN(win)->frame);
+	}
 	VWIN(win)->visible = TRUE;
     }
     return win;
