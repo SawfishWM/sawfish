@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.20 1999/09/07 19:40:43 john Exp $
+;; $Id: sawmill-ui.jl,v 1.21 1999/09/08 15:40:47 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -31,35 +31,47 @@ exec rep "$0" "$@"
 
 (defvar sawmill-client-program "sawmill-client")
 
+;; non-nil prevents actually changing any options, just print what
+;; would be done to stderr
 (defvar ui-debug nil)
 
+;; from --group option, symbol defining customization group
 (defvar ui-group t)
+
+;; when non-nil the xid of a GtkSocket window. This prevents the list
+;; of buttons being created and enables a protocol on stdin/stdout to 
+;; detect when the buttons in the capplet are pressed (stdin) or when
+;; there's unapplied state changes (stdout)
 (defvar ui-socket-id nil)
 
-(defvar ui-active nil)
-
+;; top-level window or GtkPlug
 (defvar ui-window nil)
+
+;; root ui element
 (defvar ui-root nil)
+
+;; buttons if not a plug
 (defvar ui-apply nil)
 (defvar ui-revert nil)
 (defvar ui-ok nil)
 
-;; list of (SPEC . VALUE)
+;; list of (SPEC . VALUE) defining uncommitted option changes
 (defvar ui-values-to-apply nil)
 
-(defvar ui-apply-hook nil)
+;; hook called to commit state changes (i.e. for modified text entry
+;; widgets)
 (defvar ui-apply-changed-hook nil)
 
-;; list of (SYMBOL . ORIGINAL-VALUE)
+;; list of (SYMBOL . ORIGINAL-VALUE) defining the old values of changed
+;; options
 (defvar ui-original-values nil)
 
+;; list of variables changed since the last revert
 (defvar ui-changed-variables nil)
 
-(defvar ui-box-spacing 4)
-(defvar ui-box-border 5)
-
-;; XXX this doesn't always work 100%..
-(defvar ui-enable-revert t)
+;; container attributes
+(defconst ui-box-spacing 4)
+(defconst ui-box-border 5)
 
 ;; XXX this may be confusing?
 (defvar ui-enable-refresh nil)
@@ -118,6 +130,7 @@ exec rep "$0" "$@"
 ;; (font)
 ;; (keymap)
 ;; (keymap-shell (PAGES...))
+;; (frame-style (SYMBOLS...))
 
 ;; Most of these elements also use the tail of the list as a plist,
 ;; storing both working values and input parameters. Some of the inputs
@@ -824,12 +837,10 @@ exec rep "$0" "$@"
 
 (defun show-ui (spec)
   (let
-      ((ui-apply-hook nil)
-       (ui-apply-changed-hook nil)
+      ((ui-apply-changed-hook nil)
        (ui-values-to-apply nil)
        (ui-original-values nil)
        (ui-changed-variables nil)
-       (ui-active t)
        (ui-window (if ui-socket-id
 		      (gtk-plug-new ui-socket-id)
 		    (gtk-window-new 'toplevel)))
@@ -840,8 +851,7 @@ exec rep "$0" "$@"
     (unless ui-socket-id
       (setq ui-ok (gtk-button-new-with-label "OK"))
       (setq ui-apply (gtk-button-new-with-label "Try"))
-      (setq ui-revert (and ui-enable-revert
-			  (gtk-button-new-with-label "Revert")))
+      (setq ui-revert (gtk-button-new-with-label "Revert"))
       (setq refresh (and ui-enable-refresh
 			 (gtk-button-new-with-label "Refresh")))
       (setq cancel (gtk-button-new-with-label "Cancel"))
@@ -859,13 +869,11 @@ exec rep "$0" "$@"
       (gtk-signal-connect ui-ok "clicked" 'ui-ok)
       (gtk-signal-connect ui-apply "clicked" 'ui-apply)
       (gtk-signal-connect cancel "clicked" 'ui-cancel)
-      (when ui-enable-revert
-	(gtk-signal-connect ui-revert "clicked" #'(lambda () (ui-revert))))
+      (gtk-signal-connect ui-revert "clicked" #'(lambda () (ui-revert)))
       (when ui-enable-refresh
 	(gtk-signal-connect refresh "clicked" 'ui-refresh))
       (gtk-container-add hbox ui-apply)
-      (when ui-enable-revert
-	(gtk-container-add hbox ui-revert))
+      (gtk-container-add hbox ui-revert)
       (gtk-container-add hbox ui-ok)
       (gtk-container-add hbox cancel)
       (when ui-enable-refresh
@@ -948,7 +956,6 @@ exec rep "$0" "$@"
 
 (defun ui-apply ()
   (call-hook 'ui-apply-changed-hook)
-  (call-hook 'ui-apply-hook)
   (ui-set-variables ui-values-to-apply)
   (setq ui-apply-changed-hook nil))
 
@@ -998,6 +1005,7 @@ exec rep "$0" "$@"
     (gtk-widget-show-all ui-window)
     (ui-set-button-states)))
 
+;; called when there's input available on stdin
 (defun ui-capplet-input ()
   (let
       ((tem (read-line standard-input)))
