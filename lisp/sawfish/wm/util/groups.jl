@@ -136,8 +136,7 @@ id of the new group."
   (define (window-group-menu #!optional w)
     (unless w
       (setq w (or (current-event-window) (input-focus))))
-    (let ((group-id (window-actual-group-id w))
-	  (group-names (mapcar (lambda (x)
+    (let ((group-names (mapcar (lambda (x)
 				 (cons (window-actual-group-id x)
 				       (window-name x)))
 			       (managed-windows)))
