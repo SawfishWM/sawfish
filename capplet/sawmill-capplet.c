@@ -26,6 +26,7 @@
 #endif
 
 #include <build.h>
+#include <libclient.h>
 
 #include <stdio.h>
 #ifdef HAVE_UNISTD_H
@@ -121,37 +122,10 @@ sawmill_cancel (void)
 static gint
 sawmill_running_p (void)
 {
-    GdkAtom xa_cardinal, xa_sawmill_request_win, actual_type;
-    gint format, length;
-    guchar *data, *data2;
-    gint ret = FALSE;
-
-    xa_cardinal = gdk_atom_intern ("CARDINAL", FALSE);
-    xa_sawmill_request_win = gdk_atom_intern ("_SAWMILL_REQUEST_WIN", FALSE);
-    if (gdk_property_get (0, xa_sawmill_request_win, xa_cardinal, 0, 4, FALSE,
-			  &actual_type, &format, &length, &data))
-    {
-	if (format == 32 && length == 4)
-	{
-	    guint32 xid = *(guint32 *)data;
-	    GdkWindow *win = gdk_window_foreign_new (xid);
-	    if (win != 0
-		&& gdk_property_get (win, xa_sawmill_request_win,
-				     xa_cardinal, 0, 4, FALSE, &actual_type,
-				     &format, &length, &data2))
-	    {
-		if (format == 32 && length == 4)
-		{
-		    guint32 xid2 = *(guint32 *)data;
-		    if (xid == xid2)
-			ret = TRUE;
-		}
-		g_free (data2);
-	    }
-	}
-	g_free (data);
-    }
-    return ret;
+    int ret = client_open (0);	/* 0 == $DISPLAY */
+    if (ret == 0)
+	client_close ();
+    return (ret == 0);
 }
 
 static void
