@@ -28,7 +28,7 @@ themedir := ${sawmilldir}/${version}/themes
 sawmill_prog = ../src/sawmill --batch --no-rc
 COMPILE_ENV = SAWMILLLISPDIR=../lisp SAWMILLDOCFILE=../DOC
 
-THEMES := absolute-e brushed-metal gradient simple
+THEMES := absolute-e brushed-metal gradient gtk simple
 
 all :
 	for d in $(THEMES); do \
