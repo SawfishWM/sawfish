@@ -90,6 +90,10 @@ int x_window_type;
 
 static XID x_drawable_context, x_dbe_context;
 
+#define N_FNS 16
+static repv r_fns[N_FNS];
+static int x_fns[N_FNS];
+
 DEFSYM (x, "x");
 DEFSYM (y, "y");
 DEFSYM (border_width, "border-width");
@@ -204,23 +208,7 @@ x_function_from_sym (repv sym)
 {
     int i;
     
-    repv r_fns[] = {
-	Qclear, Qand, QandReverse, Qcopy,
-	QandInverted, Qnoop, Qxor, Qor,
-	Qnor, Qequiv, Qinvert, QorReverse,
-	QcopyInverted, QorInverted, Qnand,
-	Qset
-    };
-    
-    int x_fns[] = {
-	GXclear, GXand, GXandReverse, GXcopy,
-	GXandInverted, GXnoop, GXxor, GXor,
-	GXnor, GXequiv, GXinvert, GXorReverse,
-	GXcopyInverted, GXorInverted, GXnand,
-	GXset
-    };
-
-    for (i = 0; i < sizeof (r_fns); i++)
+    for (i = 0; i < N_FNS; i++)
     {
         if (sym == r_fns[i])
             return x_fns[i];
@@ -1571,6 +1559,23 @@ rep_dl_init (void)
     rep_INTERN (orInverted);
     rep_INTERN (nand);
     rep_INTERN (set);
+
+    x_fns[0] = GXclear; r_fns[0] = Qclear;
+    x_fns[1] = GXand; r_fns[1] = Qand;
+    x_fns[2] = GXandReverse; r_fns[2] = QandReverse;
+    x_fns[3] = GXcopy; r_fns[3] = Qcopy;
+    x_fns[4] = GXandInverted; r_fns[4] = QandInverted;
+    x_fns[5] = GXnoop; r_fns[5] = Qnoop;
+    x_fns[6] = GXxor; r_fns[6] = Qxor;
+    x_fns[7] = GXor; r_fns[7] = Qor;
+    x_fns[8] = GXnor; r_fns[8] = Qnor;
+    x_fns[9] = GXequiv; r_fns[9] = Qequiv;
+    x_fns[10] = GXinvert; r_fns[10] = Qinvert;
+    x_fns[11] = GXorReverse; r_fns[11] = QorReverse;
+    x_fns[12] = GXcopyInverted; r_fns[12] = QcopyInverted;
+    x_fns[13] = GXorInverted; r_fns[13] = QorInverted;
+    x_fns[14] = GXnand; r_fns[14] = Qnand;
+    x_fns[15] = GXset; r_fns[15] = Qset;
 
 #ifdef HAVE_X11_EXTENSIONS_XDBE_H
     if (dpy != 0)
