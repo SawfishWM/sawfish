@@ -1,0 +1,95 @@
+#!/bin/sh
+exec rep "$0" "$@"
+!#
+
+;; sawfish-xgettext -- extract i18n strings from lisp scripts
+;; $Id$
+
+;; This file is part of sawfish.
+
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+(require 'rep.i18n.xgettext)
+(require 'rep.lang.doc)
+
+(defvar *write-c-file* nil)
+
+(define (exit n) (throw 'quit n))
+
+
+;; helper function that groks sawfish specific forms
+
+(define (helper form)
+  (case (car form)
+    ((defcustom)
+     (when (stringp (nth 3 form))
+       (register (nth 3 form))))
+
+    ((defgroup)
+     (let ((real-name (nth 3 form)))
+       (when (stringp real-name)
+	 (register real-name))))
+
+    ((define-command)
+     (let ((name (nth 1 form))
+	   (def (nth 2 form))
+	   (keys (nthcdr 3 form)))
+       ;; XXX beautify name and add it?
+       (when (symbolp def)
+	 (let ((doc (doc-file-ref (symbol-name def))))
+	   (when doc
+	     (register doc))))
+       (let ((type (car (cdr (memq #:type keys)))))
+	 (when type
+	   (scan type)))))
+
+    (t (scan-list form))))
+
+
+;; entry point
+
+(when (get-command-line-option "--help")
+  (write standard-output "\
+Usage: sawfish-xgettext [OPTIONS...] FILES...
+
+Program to extract strings from sawfish Lisp files that should be
+translated.
+
+  --doc-file DOC
+  --c
+  --pot\n")
+  (exit 0))
+
+(when (or (get-command-line-option "-c") (get-command-line-option "--c"))
+  (setq *write-c-file* t))
+(when (or (get-command-line-option "-p") (get-command-line-option "--pot"))
+  (setq *write-c-file* nil))
+
+(let ((doc-file (get-command-line-option "--doc-file" t)))
+  (when doc-file
+    (setq documentation-files (list doc-file))))
+
+(set-helper helper)
+(set-included-definers '())
+(mapc scan-file command-line-args)
+(setq command-line-args '())
+
+(if *write-c-file*
+    (output-c-file)
+  (output-pot-file))
+
+;; Local variables:
+;; major-mode: lisp-mode
+;; End:
