@@ -7,6 +7,75 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
 
+@heading 0.99
+
+@itemize @bullet
+
+@item Requires @code{librep} 0.14 or newer
+
+@item Translation updates: ja (Sato Satoru), no (Kjartan Maraas), es
+(Carlos Perelló Marín), fi (Antti Ahvensalmi), cs (Jiri Cerny), fr
+(Christian Marillat), de (Matthias Warkus, Christian Meyer), da (Ole
+Laursen), sk (Stanislav Visnovsky), tr (Özgür), sv (Christian Rose,
+Peter Winnberg), gl (Jesus Bravo Alvarez)
+
+@item Do i18n on more text strings (Vlad Harchev, me)
+
+@item Broken support for multiple-screen displays. Supplying the new
+@samp{--multihead} option will fork extra copies of sawfish for each
+extra screen. This has some fundamental problems, but some people seem
+to want it (Michael Vogt, Mahmood Ali, me)
+
+@item Window manager virtual modifier once again defaults to @kbd{M-}
+instead of @kbd{C-}
+
+@item Added support for @kbd{Off2} and @kbd{Off3} events
+
+@item @code{menu-program-stays-running} variable now defaults to true
+by popular demand
+
+@item New command @code{focus-desktop}
+
+@item Switch viewports more efficiently (by choosing the best order to
+move windows, to minimize the exposed area)
+
+@item Monitor the @code{_WIN_WORKSPACE} property of each window
+
+@item Bug fixes:
+
+@itemize @minus
+@item Check for X SHAPE extension, exit if it's not available
+
+@item Wait for the focus-in event before changing sawfish's knowledge
+of the focused window when moving focus from one window to another
+
+@item Be more ICCCM-compliant, don't send synthetic configure notify
+events when the window was resized
+
+@item Fixed locale font handling
+
+@item Don't leave grid traces when trying to move/resize a window
+that's locked in place
+
+@item Fixed bug where the pointer being over the message window could
+confuse focus after window cycling
+
+@item @code{decorate-transients} option works again with shaded windows
+
+@item Documentation appears in tooltips again
+
+@item Handle sticky properties better in the @code{window-history}
+module
+
+@item Maximization fixes for multi-headed displays (Florent Guillaume)
+
+@item Cancelling a resize of a maximized window no longer discards the
+window's maximized state
+
+@end itemize
+@end itemize
+
+
 @heading 0.38
 
 @itemize @bullet

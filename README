@@ -5,8 +5,7 @@ known to compile on at least Solaris/sparc and Linux/ix86; it is
 released under the terms of the GNU GPL, copyright John Harper
 <jsh@users.sourceforge.net>
 
-It should be considered alpha quality, but seems stable in my
-environment. For more details, see the url:
+For more details, see the url:
 
 	http://sawmill.sourceforge.net/
 
@@ -37,16 +36,6 @@ Also, most received events are exported to the Lisp environment through
 pointer behaviour and many internal X11 events (enter/leave,
 focus-in/focus-out, map/unmap, etc..)
 
-Several themes are included, most mimic the window frames of particular
-Enlightenment themes (and this is where the images originated), for
-more details see the `themes' subdirectory, or the `Appearance' section
-of the configuration tool.
-
-As yet there is no user documentation; most simple configuration can be
-made through the built-in customization tool. The info programming
-manual documents most of the sawfish lisp interface, otherwise see the
-source code for more details...
-
 
 Installing
 **********
@@ -70,39 +59,3 @@ distribution:
 If you've got GNOME installed, and you'd like to be able to configure
 sawfish via the control center, pass the --enable-capplet option to
 configure
-
-Similarly, to enable readline support in the sawfish-client program,
-pass --with-readline to configure
-
-Please read the TODO list, and send me any feedback. Bug reports are
-especially welcome :-)
-
-
-Notes
-*****
-
-Sawfish is fully session managed using the X11R6 protocols. If the
-environment variable SESSION_MANAGER is set, the window manager will
-attempt to connect to it. All window state is saved and reloaded; Lisp
-modules may register their own session-manager functions for any window
-state that they add.
-
-To dump all Lisp documentation strings execute the following in the
-shell:
-
-	$ sawfish --batch --no-rc rep -f rep <<EOF
-	> (apropos-function "" t)
-	> (apropos-variable "")
-	> EOF
-
-You probably want to redirect this to a file since it's about 150k in
-size. Also it contains many functions better documented in the librep
-and sawfish Info manuals.
-
-Any customizations that can't be performed through the GUI can be put
-in the `~/.sawfishrc' file, a Lisp script that is executed at startup
-(after loading the GUI customizations). If this script exists, it
-prevents the `sawmill-defaults' lisp library being loaded.
-
-There is an Info manual (sawfish.info) documenting the lisp interface.
-
