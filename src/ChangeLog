@@ -1,6 +1,12 @@
-1999-08-31  John Harper  <john@dcs.warwick.ac.uk>
+1999-09-01  John Harper  <john@dcs.warwick.ac.uk>
 
-	* version 0.4
+	* frames.c: added a `render-scale' attribute, allows the buffer
+	size of parts rendered on the fly to be reduced
+	* sawmill.h (struct frame_part): added render_scale field
+
+	* images.c (Fbevel_image): new function
+
+1999-08-31  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c: new attribute in frame part alists: `renderer', a
 	function called with args (IMAGE STATE). It should draw the

@@ -115,6 +115,11 @@ General tasks
     is to draw directly into the frame part's window, which means we
     have to handle all colour allocation manually..
 
+    I've added a `render-scale' attribute. This is used to reduce the
+    size of the image buffer, i.e. set it to two to get a half-sized
+    image (in relation to the actual frame part). Doing this reduces
+    the memory usage by a factor of four, at a cost in image quality
+
   - Rotated text
 
     Allow text to be rendered at angles (in multiples of 90 degrees?).
