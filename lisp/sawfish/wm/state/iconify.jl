@@ -47,11 +47,11 @@
     (window-put w 'iconified nil)
     (cond ((window-get w 'sticky)
 	   (show-window w))
+	  ((window-in-workspace-p w current-workspace)
+	   (show-window w))
 	  (uniconify-to-current-workspace
 	   (ws-remove-window w t)
-	   (ws-add-window-to-space w current-workspace))
-	  ((window-in-workspace-p w current-workspace)
-	   (show-window w)))
+	   (ws-add-window-to-space w current-workspace)))
     (when raise-windows-on-uniconify
       (raise-window w))
     (when (and focus-windows-on-uniconify (window-really-wants-input-p w))
