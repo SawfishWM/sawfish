@@ -327,7 +327,7 @@ that overrides settings set elsewhere.")
 		      (directory-files dir))))
 	  theme-load-path)
     (when sorted
-      (setq list (sort list)))
+      (setq list (sort list 'string-lessp)))
     (mapcar 'intern list)))
 
 (defun frame-style-menu ()
@@ -338,7 +338,7 @@ that overrides settings set elsewhere.")
 			     `(set-window-frame-style
 			       (current-event-window) ',s nil t)))
 		   styles)
-	   `(() ("Default" (let
+	   `(() (,(_ "Default") (let
 			       ((w (current-event-window)))
 			     (window-put w 'frame-style nil)
 			     (set-frame-for-window w t)))))))
