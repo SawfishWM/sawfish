@@ -187,4 +187,8 @@
 (autoload-command (quote describe-key) (quote sawfish.wm.util.keymap))
 (autoload-command (quote describe-key-to-screen) (quote sawfish.wm.util.keymap))
 (autoload-command (quote quote-event) (quote sawfish.wm.util.keymap))
+(autoload-command (quote move-viewport-next) (quote sawfish.wm.commands.viewport-extras))
+(autoload-command (quote move-viewport-previous) (quote sawfish.wm.commands.viewport-extras))
+(autoload-command (quote move-window-previous) (quote sawfish.wm.commands.viewport-extras))
+(autoload-command (quote move-window-next) (quote sawfish.wm.commands.viewport-extras))
 ;;; ::autoload-end::

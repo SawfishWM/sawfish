@@ -76,11 +76,11 @@
 	    (message "Created .sawmill symlink (delete if unwanted)"))
 
 	  ;; First the site-wide stuff
-	  (load-all "site-init" (lambda (f) (load f nil t)))
+	  (load-all "site-init" (lambda (f) (safe-load f nil t)))
 
 	  ;; then the users rep configuration, or site-wide defaults
 	  (or (safe-load (concat (user-home-directory) ".reprc") t t t)
-	      (load "rep-defaults" t))
+	      (safe-load "rep-defaults" t))
 
 	  (unless batch-mode
 	    (let ((rc-file-exists-p (lambda (f)
