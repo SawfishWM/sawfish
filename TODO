@@ -26,11 +26,49 @@ Outstanding bugs
     move over frame, and that frame gets clicked and action bound to
     this frame is taken
 
-    [ 6/9: I can't reproduce this; has it fixed itself? ]
+    Move cursor very slowly over frame holding button1
+
+  ! Java applets start with a 0x0 client window
+
+  ! don't allow windows to be totally moved out of the viewport (or
+    give a method for bringing them back in)
+
+  ! Alt-Tab switching window refresh is sometimes slow, significantly
+    slower than raising via click-to-focus or autoraise. Odd enough, it
+    sometimes doesn't differ at all
+
+  ! While moving or resizing, when you release button and move mouse
+    out of frame very fast, frame remains in highlighted state
+
+  ! Uniconified window doesn't get focus immediately, you have to pick
+    it from sawmill-menu or via pager once again. Maybe this could fix
+    the no-way-to-ever-focus-uniconified-windows-with-click-to-focus
+    bug as a side effect
+
+    [ I think this is a feature, not a bug --jsh ]
+
+  ! replaying click-to-focus event only works to the client, not back
+    to sawmill if we regrab the button
 
 
 General tasks
 =============
+
+  + add an auto-frame-type-alist
+
+  + like the frame-part-classes-alist, add another alist of _forcible_
+    changes, things that override definitions in the theme itself
+
+  + when grabbing keymaps in windows grab in all subwindows of the
+    client?
+
+  + change edge snapping to use resistance instead of magnetism?
+
+  + allow configuration of where move/resize display appears
+
+    allow relative to window, or relative to root, for both x and y
+
+  + option for maximizing not to cover panels
 
   + viewport-based workspaces
 
@@ -64,6 +102,9 @@ General tasks
 
   + Handle window groups
 
+    groups as defined by the apps themselves? or user-defined groups?
+    or both?
+
   + better transient handling
 
     When moving a window to another workspace, also move any transients (?)
@@ -74,18 +115,6 @@ General tasks
 
   + Load tarred/compressed themes
 
-  + Export more Imlib functions
-
-  + GNOME compliance
-
-    Currently event proxying and the pager hints are implemented.
-    Add support for the various window state operations.. (currently
-    only the sticky, maximize, and layer attributes are supported)
-
-  + Support MWM hints
-
-    I've partially done this (also goes for OpenLook hints)
-
   + GUI configuration
 
     Customization of key bindings is a bit simplistic -- whenever a
@@ -95,32 +124,6 @@ General tasks
   + Support the KDE hints
 
     Where are they defined?
-
-  - Rewrite key-binding
-
-    This was originally lifted from Jade, my text editor. But it
-    doesn't really fit that well...
-
-    Also, _key_ bindings in frame parts don't work (since they're not
-    grabbed and the frame part is never actually focused)
-
-  - Custom frame parts
-
-    It's possible for frame part backgrounds to be drawn on-the-fly
-    using the `renderer' attribute. (See themes/gradient)
-
-    This uses Imlib images as buffers for rendering into. This has two
-    main advantages -- palette handling and shape masks are for free
-
-    But the main disadvantage is the memory cost. Each pixel costs
-    three bytes, so a 500x20 title bar costs ~30k. The only alternative
-    is to draw directly into the frame part's window, which means we
-    have to handle all colour allocation manually..
-
-    I've added a `render-scale' attribute. This is used to reduce the
-    size of the image buffer, i.e. set it to two to get a half-sized
-    image (in relation to the actual frame part). Doing this reduces
-    the memory usage by a factor of four, at a cost in image quality
 
   - Rotated text
 

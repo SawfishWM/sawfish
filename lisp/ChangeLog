@@ -1,3 +1,30 @@
+1999-09-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (unshade-selected-windows): new option
+
+	* gnome.jl (gnome-set-workspace): updated for new workspace
+	implementation
+
+	* workspace.jl: major rewrite, removed workspace-list variable,
+	workspaces are now just non-negative integers, no state stored
+	except in each window's plist and the current and last
+	workspace indices
+
+	* mwm.jl (mwm-add-window): remove some buttons when asked
+
+	* frames.jl (remove-frame-class, add-frame-class): only call
+	rebuild-frame if there's a frame to rebuild
+
+1999-09-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome.jl (gnome-add-window): set `ignored' property of gmc
+	and panel windows
+
+	* focus.jl (click-to-focus-keymap): now `Any-Click1'
+
+	* move-resize.jl (move-resize-apply): don't snap when opaque
+	resizing
+
 1999-09-12  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.6

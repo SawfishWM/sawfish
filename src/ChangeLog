@@ -1,3 +1,19 @@
+1999-09-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (window_sweep): preserve the order of window_list
+
+1999-09-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (Fwindow_framed_p): new predicate
+
+	* keys.c (translate_event_to_x_button): if no button is
+	specified, but mod_any is set, then return AnyModifier and
+	Button1 (which should be ignored)
+	(grab_event, ungrab_event): support AnyModifier correctly
+
+	* functions.c (Fdelete_window, Fdestroy_window): never use
+	XKillClient, just XDestroyWindow
+
 1999-09-12  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.6

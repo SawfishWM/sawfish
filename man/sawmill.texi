@@ -439,8 +439,8 @@ client window associated with it.
 @end defun
 
 @defun managed-windows
-Returns a list containing all managed window objects, in no particular
-order.
+Returns a list containing all managed window objects, in the order that
+they were adopted by the window manager (first to last).
 @end defun
 
 @menu
@@ -1341,6 +1341,11 @@ Return the list of frame part definitions defining the frame associated
 with @var{window}.
 @end defun
 
+@defun window-framed-p window
+Return @code{t} when @var{window} has been reparented to a frame
+created by the window manager.
+@end defun
+
 @defun rebuild-frame window
 Recreates the window frame associated with @var{window}, from the
 previously defined frame definition. All frame parts are reinitialized
@@ -1519,12 +1524,12 @@ directories. By default this includes the user's theme directory and
 the system theme directory.
 @end defvar
 
-@defvar user-theme-path
+@defvar user-theme-directory
 The name of the user's theme directory, by default
 @file{~/.sawmill/themes}.
 @end defvar
 
-@defvar system-theme-path
+@defvar system-theme-directory
 The name of the system theme directory.
 @end defvar
 
