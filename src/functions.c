@@ -962,12 +962,12 @@ DEFUN ("find-head", Ffind_head, Sfind_head, (repv x, repv y), rep_Subr2)
 #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
     for (i = 0; i < xinerama_heads; i++)
     {
-	if ((xinerama_head_info[i].x_org >= rep_INT (x))
-	    && (xinerama_head_info[i].y_org >= rep_INT (y))
+	if ((xinerama_head_info[i].x_org <= rep_INT (x))
+	    && (xinerama_head_info[i].y_org <= rep_INT (y))
 	    && (xinerama_head_info[i].x_org
-		+ xinerama_head_info[i].width < rep_INT (y))
+		+ xinerama_head_info[i].width > rep_INT (x))
 	    && (xinerama_head_info[i].y_org
-		+ xinerama_head_info[i].height < rep_INT (y)))
+		+ xinerama_head_info[i].height > rep_INT (y)))
 	{
 	    return rep_MAKE_INT (i);
 	}
