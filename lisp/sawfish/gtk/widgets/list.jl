@@ -58,6 +58,11 @@
 	  (value '())
 	  (selection nil))
 
+      (define (set-selection row)
+	(setq selection row)
+	(gtk-widget-set-sensitive delete selection)
+	(gtk-widget-set-sensitive edit selection))
+
       (define (print-value x)
 	(if (functionp spec)
 	    ((spec 'print) x)
@@ -65,8 +70,14 @@
 
       (define (insert-item)
 	(let ((callback (lambda (new)
-			  (setq value (nconc value (list new)))
-			  (gtk-clist-append clist (print-value new))
+			  (if (not selection)
+			      (progn
+				(setq value (nconc value (list new)))
+				(gtk-clist-append clist (print-value new)))
+			    (setq value (insert-into new value selection))
+			    (gtk-clist-insert
+			     clist selection (print-value new))
+			    (gtk-clist-select-row clist (1+ selection) 0))
 			  (call-callback changed-callback))))
 	  (if (functionp spec)
 	      ((spec 'dialog) (_ "Insert:") callback)
@@ -79,6 +90,9 @@
 	    (rplacd (nthcdr (1- selection) value)
 		    (nthcdr (1+ selection) value)))
 	  (gtk-clist-remove clist selection)
+	  (if (> (gtk-clist-rows clist) selection)
+	      (gtk-clist-select-row clist selection 0)
+	    (set-selection nil))
 	  (call-callback changed-callback)))
 
       (define (edit-item)
@@ -104,7 +118,11 @@
       (gtk-signal-connect edit "clicked" edit-item)
       (gtk-signal-connect clist "select_row"
 			  (lambda (w row col)
-			    (setq selection row)))
+			    (set-selection row)))
+      (gtk-signal-connect clist "unselect_row"
+			  (lambda (w row col)
+			    (when (= row selection)
+			      (set-selection nil))))
       (gtk-signal-connect clist "button_press_event"
 			  (lambda (w ev)
 			    (when (eq (gdk-event-type ev) '2button-press)
@@ -122,6 +140,7 @@
       (gtk-box-pack-end hbox edit)
       (gtk-box-pack-end hbox delete)
       (gtk-widget-show-all vbox)
+      (set-selection nil)
 
       (lambda (op)
 	(case op
@@ -147,4 +166,13 @@
 				    (throw 'out nil))) x))
 			t)))))))
 
-  (define-widget-type 'list make-list-item))
+  (define-widget-type 'list make-list-item)
+
+;;; utilities
+
+  (define (insert-into x lst idx)
+    (if (= idx 0)
+	(cons x lst)
+      (let ((cell (nthcdr (1- idx) lst)))
+	(rplacd cell (cons x (cdr cell)))
+	lst))))
