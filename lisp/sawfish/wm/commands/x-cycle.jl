@@ -71,46 +71,46 @@
 
 ;; customization options
 
-(defgroup cycle "Window Cycling")
+(defgroup cycle "Window Cycling" :group focus)
 
 (defcustom cycle-show-window-names t
   "Display window names while cycling through windows."
-  :group cycle
+  :group (focus cycle)
   :type boolean)
 
 (defcustom cycle-include-iconified t
   "Include iconified windows when cycling."
-  :group cycle
+  :group (focus cycle)
   :type boolean)
 
 (defcustom cycle-all-workspaces nil
   "Include windows on all workspaces when cycling."
-  :group cycle
+  :group (focus cycle)
   :type boolean)
 
 (defcustom cycle-all-viewports nil
   "Include windows on all viewports when cycling."
-  :group cycle
+  :group (focus cycle)
   :type boolean)
 
 (defcustom cycle-raise-windows t
   "Raise windows while they're temporarily selected during cycling."
-  :group cycle
+  :group (focus cycle)
   :type boolean)
 
 (defcustom cycle-warp-pointer t
   "Warp the mouse pointer to windows as they're temporarily selected."
-  :group cycle
+  :group (focus cycle)
   :type boolean)
 
 (defcustom cycle-focus-windows t
   "Focus windows when they're temporarily selected during cycling."
-  :group cycle
+  :group (focus cycle)
   :type boolean)
 
 (defcustom cycle-disable-auto-raise nil
   "Disable auto-raising while temporarily selecting windows."
-  :group cycle
+  :group (focus cycle)
   :type boolean)
 
 
