@@ -301,6 +301,8 @@ of choices."
       ((get symbol 'custom-after-set) symbol)))
  
   (define (custom-set-variable symbol value &optional req)
+    ;; XXX kludge for old custom files..
+    (when (eq value 'nil) (setq value nil))
     (when (and req value)
       (require req))
     (custom-set (lambda ()
@@ -308,6 +310,8 @@ of choices."
 		  (set symbol value)) symbol))
 
   (define (custom-set-typed-variable symbol value type &optional req)
+    ;; XXX kludge for old custom files..
+    (when (eq value 'nil) (setq value nil))
     (when (and req value)
       (require req))
     (custom-set (lambda ()
