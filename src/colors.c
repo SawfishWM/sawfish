@@ -43,15 +43,25 @@ X11 color specifier.
     if (f == 0)
     {
 	XColor screen_col, exact_col;
-	if (XAllocNamedColor (dpy, screen_cmap, rep_STR(name),
-			      &screen_col, &exact_col) != 0)
+	if (XLookupColor (dpy, screen_cmap, rep_STR(name),
+			  &exact_col, &screen_col) != 0)
 	{
+	    int red = exact_col.red / 256;
+	    int green = exact_col.green / 256;
+	    int blue = exact_col.blue / 256;
+	    int pixel = Imlib_best_color_match (imlib_id,
+						&red, &green, &blue);
+
 	    f = rep_ALLOC_CELL(sizeof(Lisp_Color));
 	    f->car = color_type;
 	    f->next = color_list;
 	    color_list = f;
+
 	    f->name = name;
-	    f->color = screen_col;
+	    f->red = exact_col.red;
+	    f->green = exact_col.green;
+	    f->blue = exact_col.blue;
+	    f->pixel = pixel;
 	}
 	else
 	{
@@ -84,9 +94,9 @@ values range from zero to 65535.
 ::end:: */
 {
     rep_DECLARE1(color, COLORP);
-    return rep_list_3 (rep_MAKE_INT(VCOLOR(color)->color.red),
-		       rep_MAKE_INT(VCOLOR(color)->color.green),
-		       rep_MAKE_INT(VCOLOR(color)->color.blue));
+    return rep_list_3 (rep_MAKE_INT(VCOLOR(color)->red),
+		       rep_MAKE_INT(VCOLOR(color)->green),
+		       rep_MAKE_INT(VCOLOR(color)->blue));
 }
 
 DEFUN("colorp", Fcolorp, Scolorp, (repv win), rep_Subr1) /*
@@ -131,10 +141,7 @@ color_sweep (void)
     {
 	Lisp_Color *next = w->next;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
-	{
-	    XFreeColors (dpy, screen_cmap, &w->color.pixel, 1, 0);
 	    rep_FREE_CELL(w);
-	}
 	else
 	{
 	    rep_GC_CLR_CELL(rep_VAL(w));
