@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.6 1999/08/15 15:04:55 john Exp $
+;; $Id: sawmill-ui.jl,v 1.7 1999/08/23 13:42:28 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -130,15 +130,14 @@ fi
 	   book))
 	((eq ui-pages-style 'list)
 	 (let
-	     ((hbox (gtk-hbox-new nil 0))
+	     ((hbox (gtk-hpaned-new))
 	      (clist (gtk-clist-new 1))
 	      (frame (gtk-frame-new))
 	      (contents (make-vector (length (cdr spec)))))
-	   (gtk-box-set-spacing hbox ui-box-spacing)
 	   (gtk-container-border-width hbox ui-box-border)
 	   (gtk-clist-set-column-auto-resize clist 0 t)
-	   (gtk-container-add hbox clist)
-	   (gtk-container-add hbox frame)
+	   (gtk-paned-add1 hbox clist)
+	   (gtk-paned-add2 hbox frame)
 	   (gtk-clist-set-selection-mode clist 'browse)
 	   (mapc #'(lambda (page)
 		     (let
