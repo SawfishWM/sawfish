@@ -418,7 +418,8 @@ will be created."
 (defun select-workspace (index)
   "Activate workspace number INDEX (from zero)."
   (interactive "p")
-  (when (and (>= index 0) (< index total-workspaces))
+  (when (and (/= index current-workspace)
+	     (>= index 0) (< index total-workspaces))
     (ws-switch-workspace index)))
 
 (defun merge-next-workspace ()
