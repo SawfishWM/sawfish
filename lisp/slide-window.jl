@@ -28,9 +28,9 @@
   :user-level expert)
 
 (defun slide-window (w right down)
-  (let
-      ((coords (window-position w)))
-    (move-window-to w (+ (car coords) right) (+ (cdr coords) down))))
+  (unless (window-get w 'fixed-position)
+    (let ((coords (window-position w)))
+      (move-window-to w (+ (car coords) right) (+ (cdr coords) down)))))
 
 
 ;; window commands

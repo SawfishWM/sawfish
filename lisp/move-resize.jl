@@ -461,7 +461,10 @@
 					  (cdr move-resize-frame)))))))
 (defun move-resize-infer-directions ()
   (unless move-resize-directions
-    (setq move-resize-directions (list 'vertical 'horizontal)))
+    (setq move-resize-directions
+	  (if (window-get move-resize-window 'fixed-position)
+	      '()
+	    (list 'vertical 'horizontal))))
   (when move-lock-when-maximized
     (when (window-maximized-horizontally-p move-resize-window)
       (setq move-resize-directions (delq 'horizontal move-resize-directions)))
