@@ -1225,6 +1225,11 @@ synthesize-event EVENT WINDOW [PROPAGATE]
     {
 	x_offset = -VWIN(win)->attr.x;
 	y_offset = -VWIN(win)->attr.y;
+	if (VWIN(win)->reparented) 
+	{
+	    x_offset += VWIN(win)->frame_x;
+	    y_offset += VWIN(win)->frame_y;
+	}
     }
     else
 	x_offset = y_offset = 0;
@@ -1244,8 +1249,8 @@ synthesize-event EVENT WINDOW [PROPAGATE]
 	ev.xkey.time = last_event_time;
 	ev.xkey.x_root = rep_INT (rep_CAR (ptr));
 	ev.xkey.y_root = rep_INT (rep_CDR (ptr));
-	ev.xkey.x = (ev.xkey.x_root + VWIN(win)->attr.x + x_offset);
-	ev.xkey.y = (ev.xkey.y_root + VWIN(win)->attr.y + y_offset);
+	ev.xkey.x = (ev.xkey.x_root + x_offset);
+	ev.xkey.y = (ev.xkey.y_root + y_offset);
 	ev.xkey.same_screen = True;
 	ev.xany.type = KeyPress;
 	XSendEvent (dpy, w, propagate != Qnil, KeyPressMask, &ev);
@@ -1264,8 +1269,8 @@ synthesize-event EVENT WINDOW [PROPAGATE]
 	ev.xbutton.time = last_event_time;
 	ev.xbutton.x_root = rep_INT (rep_CAR (ptr));
 	ev.xbutton.y_root = rep_INT (rep_CDR (ptr));
-	ev.xkey.x = (ev.xkey.x_root + VWIN(win)->attr.x + x_offset);
-	ev.xkey.y = (ev.xkey.y_root + VWIN(win)->attr.y + y_offset);
+	ev.xbutton.x = (ev.xbutton.x_root + x_offset);
+	ev.xbutton.y = (ev.xbutton.y_root + y_offset);
 	ev.xbutton.same_screen = True;
 	ev.xany.type = ButtonPress;
 	XSendEvent (dpy, w, propagate != Qnil, ButtonPressMask, &ev);
