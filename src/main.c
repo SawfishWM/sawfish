@@ -80,7 +80,10 @@ DEFSTRING(err_bad_event_desc, "Invalid event description");
 DEFSTRING(version_string, SAWMILL_VERSION);
 
 DEFSYM(saved_command_line_args, "saved-command-line-args");
+
+#if (rep_INTERFACE < 8)
 DEFSYM(before_exit_hook, "before-exit-hook");
+#endif
 
 static rep_bool
 on_idle (int since_last)
@@ -187,8 +190,10 @@ sawmill_symbols (void)
     rep_ADD_SUBR_INT(Squit);
     rep_ADD_SUBR_INT(Srestart);
 
+#if (rep_INTERFACE < 8)
     rep_INTERN_SPECIAL(before_exit_hook);
-}    
+#endif
+}
 
 static void
 stash_argv (int argc, char **argv)
@@ -291,8 +296,10 @@ main(int argc, char **argv)
 	res = rep_load_environment(rep_string_dup ("sawmill"));
 	if (res != rep_NULL)
 	{
+#if (rep_INTERFACE < 8)
 	    repv tv;
 	    rep_GC_root gc_tv;
+#endif
 	    rc = 0;
 
 	    /* final initialisation.. */
@@ -303,12 +310,14 @@ main(int argc, char **argv)
 	    if(rep_SYM(Qbatch_mode)->value == Qnil)
 		res = Frecursive_edit ();
 
+#if (rep_INTERFACE < 8)
 	    tv = rep_throw_value;
 	    rep_throw_value = rep_NULL;
 	    rep_PUSHGC(gc_tv, tv);
 	    Fcall_hook (Qbefore_exit_hook, Qnil, Qnil);
 	    rep_POPGC;
 	    rep_throw_value = tv;
+#endif
 	}
 
 	rc = rep_top_level_exit ();
