@@ -119,6 +119,7 @@
 (defvar x-cycle-current nil)
 (defvar x-cycle-stacking nil)
 (defvar x-cycle-windows t)
+(defvar x-cycle-grab-win nil)
 
 
 ;; code
@@ -138,7 +139,14 @@
        (disable-auto-raise cycle-disable-auto-raise)
        (tooltips-enabled nil)
        (x-cycle-current nil)
-       (x-cycle-stacking nil))
+       (x-cycle-stacking nil)
+       (x-cycle-grab-win (input-focus))
+       (unmap-notify-hook (cons (lambda (w)
+				  (when (eq w x-cycle-grab-win)
+				    (setq x-cycle-grab-win nil)
+				    (or (grab-keyboard)
+					(throw 'x-cycle-exit nil))))
+				unmap-notify-hook)))
 
     (unless (and (eq 'key (car decoded)) (nth 1 decoded))
       (error "%s must be bound to a key event with modifiers." this-command))
