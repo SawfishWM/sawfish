@@ -24,7 +24,17 @@
 			      
 (defun make-theme (patterns-alist frame-alist mapping-alist)
   (let*
-      ((make-pattern
+      ((image-cache nil)
+
+       (make-image
+	(lambda (file)
+	  (or (cdr (assoc file image-cache))
+	      (let
+		  ((img (gaol-eval `(make-image ',file))))
+		(setq image-cache (cons (cons file img) image-cache))
+		img))))
+
+       (make-pattern
 	(lambda (def)
 	  (mapcar (lambda (elt)
 		    (let
@@ -34,8 +44,7 @@
 			     (setq value (get-color value)))
 			    ((and (consp value) (stringp (car value)))
 			     (let
-				 ((img (gaol-eval `(make-image
-						    ',(car value)))))
+				 ((img (make-image (car value))))
 			       (when img
 				 (mapc (lambda (attr)
 					 (cond
@@ -77,6 +86,9 @@
 	(mapcar (lambda (cell)
 		  (cons (car cell) (mapcar make-frame-part (cdr cell))))
 		frame-alist)))
+
+    ;; don't need this anymore
+    (setq image-cache nil)
 
     (lambda (w type)
       (let
