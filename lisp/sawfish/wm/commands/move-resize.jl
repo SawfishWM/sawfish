@@ -175,29 +175,28 @@ the mouse position relative to the window."
 	(progn
 	  (allow-events 'async-pointer)
 	  ;; ensure that we catch _all_ mouse events
-	  (when (grab-pointer w (get-cursor 'hand2))
+	  (when (grab-pointer nil (get-cursor 'hand2))
 	    (unwind-protect
-		(when (grab-keyboard w)
-		  (unwind-protect
-		      (progn
-			(unless (eq move-resize-mode 'opaque)
-			  (setq move-resize-last-outline
-				(list move-resize-mode
-				      move-resize-x move-resize-y
-				      (+ move-resize-width
-					 (car move-resize-frame))
-				      (+ move-resize-height
-					 (cdr move-resize-frame))))
-			  (apply 'draw-window-outline
-				 move-resize-last-outline))
-			(if (eq move-resize-function 'resize)
+		(progn
+		  (grab-keyboard w)	;this may fail
+		  (unless (eq move-resize-mode 'opaque)
+		    (setq move-resize-last-outline
+			  (list move-resize-mode
+				move-resize-x move-resize-y
+				(+ move-resize-width
+				   (car move-resize-frame))
+				(+ move-resize-height
+				   (cdr move-resize-frame))))
+		    (apply 'draw-window-outline
+			   move-resize-last-outline))
+		  (if (eq move-resize-function 'resize)
 			    (move-resize-infer-anchor)
-			  (move-resize-infer-directions))
-			(catch 'move-resize-done
-			  (when from-motion-event
-			    (move-resize-motion))
-			  (recursive-edit)))
-		    (ungrab-keyboard)))
+		    (move-resize-infer-directions))
+		  (catch 'move-resize-done
+		    (when from-motion-event
+		      (move-resize-motion))
+		    (recursive-edit)))
+	      (ungrab-keyboard)
 	      (ungrab-pointer))))
       (when server-grabbed
 	(ungrab-server))
