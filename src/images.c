@@ -247,25 +247,29 @@ make-image-from-x-drawable ID [MASK-ID]
    if (mask != 0)
    {
        /* this code inspired by the GNOME tasklist_applet */
-       XImage *xim;
-       im = gdk_pixbuf_add_alpha (im, FALSE, 0, 0, 0);
-       xim = XGetImage (dpy, mask, 0, 0, w, h, AllPlanes, ZPixmap);
-       if (xim != 0)
+       GdkPixbuf *tem = gdk_pixbuf_add_alpha (im, FALSE, 0, 0, 0);
+       if (tem != 0)
        {
-	   int rowstride = gdk_pixbuf_get_rowstride (im);
-	   int channels = gdk_pixbuf_get_n_channels (im);
-	   unsigned char *pixels = gdk_pixbuf_get_pixels (im);
-	   int x, y;
-
-	   for (y = 0; y < h; y++)
+	   XImage *xim = XGetImage (dpy, mask, 0, 0, w, h, AllPlanes, ZPixmap);
+	   gdk_pixbuf_unref (im);
+	   im = tem;
+	   if (xim != 0)
 	   {
-	       for (x = 0; x < w; x++)
+	       int rowstride = gdk_pixbuf_get_rowstride (im);
+	       int channels = gdk_pixbuf_get_n_channels (im);
+	       unsigned char *pixels = gdk_pixbuf_get_pixels (im);
+	       int x, y;
+
+	       for (y = 0; y < h; y++)
 	       {
-		   int idx = y * rowstride + x * channels + 3;
-		   pixels[idx] = (XGetPixel (xim, x, y) == 0) ? 0 : 255;
+		   for (x = 0; x < w; x++)
+		   {
+		       int idx = y * rowstride + x * channels + 3;
+		       pixels[idx] = (XGetPixel (xim, x, y) == 0) ? 0 : 255;
+		   }
 	       }
+	       XDestroyImage (xim);
 	   }
-	   XDestroyImage (xim);
        }
    }
 #endif
