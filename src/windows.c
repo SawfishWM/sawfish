@@ -382,7 +382,12 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 	}
 
 	if (from_error == Qnil)
+	{
 	    destroy_window_frame (w, FALSE);
+
+	    if (focus_window == w)
+		focus_on_window (0);
+	}
 
 	w->id = 0;
 	pending_destroys++;
@@ -419,6 +424,10 @@ emit_pending_destroys (void)
 		w->destroyed = 1;
 		Fcall_window_hook (Qdestroy_notify_hook,
 				   rep_VAL(w), Qnil, Qnil);
+
+		if (focus_window == w)
+		    focus_on_window (0);
+
 		/* gc may have reordered the list, so we have to start
 		   at the beginning again.. */
 		goto again;
