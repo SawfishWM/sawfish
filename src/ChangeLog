@@ -1,5 +1,10 @@
 1999-09-08  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill.h (Lisp_Window): store window and icon names as lisp
+	strings
+	* events.c, windows.c: handle lisp string names, fix some
+	memory leaks
+
 	* sawmill-ui.jl: added --socket-id option to allow the ui to be
 	embedded in the gnome control center. This also disables the
 	ok/cancel/etc buttons and enables a hacky protocol on

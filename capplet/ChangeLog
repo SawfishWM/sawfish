@@ -1,5 +1,10 @@
 1999-09-08  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill-capplet.c (sawmill_running_p): new function, test if
+	sawmill is actually running
+	(sawmill_setup): if the wm isn't running, just print a message
+	to this effect in the capplet widget
+
 	* sawmill-capplet.c (main): disabled some of the session
 	management stuff that was copied from mouse-properties.c; I
 	don't understand it fully and it makes the
