@@ -83,6 +83,7 @@ extern repv Qvisibility_notify_hook, Qdestroy_notify_hook, Qmap_notify_hook,
 extern repv Qiconify_window, Quniconify_window;
 extern struct frame_part *clicked_frame_part;
 extern void save_timestamp (Time t);
+extern void invalidate_cached_mouse_position (void);
 extern void unclick_current_fp (void);
 extern void synthesize_button_release (void);
 extern void map_request (XEvent *ev);

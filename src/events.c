@@ -228,6 +228,12 @@ record_mouse_position (int x, int y, int event_type, Window w)
     }
 }
 
+void
+invalidate_cached_mouse_position (void)
+{
+    current_event_updated_mouse = FALSE;
+}
+
 static void
 install_colormaps (Lisp_Window *w)
 {
@@ -1278,7 +1284,7 @@ handle_input_mask(long mask)
 
 	record_event_time (&xev);
 	current_x_event = &xev;
-	current_event_updated_mouse = FALSE;
+	invalidate_cached_mouse_position ();
 	current_event_window = rep_NULL;
 
 	rep_PUSHGC(gc_old_current_window, old_current_window);

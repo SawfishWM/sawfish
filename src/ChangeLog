@@ -1,3 +1,13 @@
+2001-10-21  John Harper  <jsh@unfactored.org>
+
+	Fixed bug where warp-cursor doesn't invalidate the pointer
+	location cache:
+
+	* functions.c (Fwarp_cursor): call
+	invalidate_cached_mouse_position after warping the cursor
+
+	* events.c (invalidate_cached_mouse_position): new function
+
 2001-10-14  John Harper  <jsh@unfactored.org>
 
 	* version 1.0.1
