@@ -1,5 +1,9 @@
 2000-10-22  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/placement.jl (place-window-interactively): after
+	calling accept-x-input, check that the window wasn't destroyed
+	before placing the window.. (patch from merlin)
+
 	* sawfish/wm/state/maximize.jl (maximize-find-workarea): new
 	parameter #:head
 

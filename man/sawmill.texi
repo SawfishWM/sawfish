@@ -2599,6 +2599,11 @@ A cons cell defining the coordinates at which to display the message
 window. The cell is @code{(@var{x} . @var{y})}. @var{x} and @var{y} are
 integers or @code{nil} (for centered display). If negative they count
 in from the left and bottom edges respectively.
+
+@item head
+The head on which to center the message when a position is not specified or
+given as nil.  If not provided defaults to the head containing the window that
+has the input focus.
 @end table
 @end defun
 
