@@ -105,18 +105,8 @@
   (define (within-rectangle point dims rect)
     (= (rect-2d-overlap dims point rect) (* (car dims) (cdr dims))))
 
-  (define (workarea-for w)
-    (or (maximize-find-workarea w)
-	(let* ((head (current-head w))
-	       (head-off (head-offset head))
-	       (head-dims (head-dimensions head)))
-	  (list (car head-off)
-		(cdr head-off)
-		(+ (car head-off) (car head-dims))
-		(+ (cdr head-off) (cdr head-dims))))))
-
   (define (place-window-off-center w)
-    (let* ((workarea (workarea-for w))
+    (let* ((workarea (maximize-find-workarea w #:head-fallback t))
 	   (fdims (window-frame-dimensions w))
 	   (center (rectangle-center workarea)))
 

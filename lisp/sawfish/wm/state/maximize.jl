@@ -327,7 +327,7 @@
 
 ;;; misc functions
 
-  (define (maximize-find-workarea #!optional w #!key head #!key head-fallback)
+  (define (maximize-find-workarea #!optional w #!key head head-fallback)
     "Return the rectangle representing the largest rectangle on the screen that
 doesn't overlap any avoided windows, or nil.  If head-fallback is non-nil, then
 an empty workarea will be replaced with the head area; otherwise nil is returned."
