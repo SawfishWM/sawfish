@@ -2591,6 +2591,11 @@ been destroyed as is possible.
 Called with a single window argument, analogous to the X events of the
 same names.
 
+@item window-moved-hook
+@itemx window-resized-hook
+Called with a single window argument whenever the window is moved or
+resized.
+
 @item visibility-notify-hook
 Called with two arguments, the window, and a symbol, one of:
 @code{fully-obscured}, @code{partially-obscured}, @code{unobscured}.
@@ -2639,6 +2644,18 @@ Called immediately before exiting.
 @itemx sm-restore-window-hook
 @itemx sm-after-restore-hook
 Session management hooks, @ref{Session Management}.
+
+@item before-move-hook
+@itemx before-resize-hook
+Called before starting an interactive move or resize, with a single
+argument: the window.
+
+@item after-move-hook
+@itemx after-resize-hook
+Called after completion of an interactive move or resize. Called with
+two arguments: the window, and a symbol defining how the window was
+moved or resized.
+
 @end vtable
 
 

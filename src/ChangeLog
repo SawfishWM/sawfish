@@ -1,3 +1,14 @@
+1999-10-22  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-menu.jl (popup-menu): new optional arg POSITION
+
+	* events.c (Fclicked_frame_part, Fclicked_frame_part_offset,
+	Fclicked_frame_part_dimensions): new functions
+
+	* events.c, functions.c (configure_request, Fmove_window_to,
+	Fresize_window_to): call window-moved-hook and
+	window-resized-hook as appropriate
+
 1999-10-20  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-menu.jl (popup-menu): new optional arg TIMESTAMP

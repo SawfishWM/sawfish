@@ -1,3 +1,12 @@
+1999-10-22  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.jl: if the root window has any property whose name
+	starts with `GNOME_', then require 'gnome
+
+	* menus.jl (popup-menu): if the menu is popped from a frame
+	part whose class ends in `-button', align the menu to the
+	bottom-left corner of the button
+
 1999-10-21  John Harper  <john@dcs.warwick.ac.uk>
 
 	* maximize.jl (maximize-ignore-when-filling): new option, other

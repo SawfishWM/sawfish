@@ -81,7 +81,8 @@ extern Time last_event_time;
 extern XEvent *current_x_event;
 extern repv Qvisibility_notify_hook, Qdestroy_notify_hook, Qmap_notify_hook,
     Qunmap_notify_hook, Qreparent_notify_hook, Qenter_notify_hook,
-    Qleave_notify_hook, Qfocus_in_hook, Qfocus_out_hook, Qclient_message_hook;
+    Qleave_notify_hook, Qfocus_in_hook, Qfocus_out_hook, Qclient_message_hook,
+    Qwindow_moved_hook, Qwindow_resized_hook;
 extern repv Qiconify_window, Quniconify_window;
 extern struct frame_part *clicked_frame_part;
 extern void unclick_current_fp (void);
