@@ -224,7 +224,7 @@
   ;; also do `dimensions'
   (let ((dims (cdr (assq 'dimensions alist))))
     (when (and dims (not (cdr (assq 'user-size (window-size-hints w)))))
-      (resize-window-to w (car dims) (cdr dims))))
+      (resize-window-with-hints* w (car dims) (cdr dims))))
 
   ;; then the rest (borrowed from sm-load.jl)
   (mapc (lambda (sym)
