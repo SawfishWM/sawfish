@@ -51,6 +51,7 @@
 
     (open rep
 	  rep.data.tables
+	  rep.structures
 	  sawfish.wm.commands
 	  sawfish.wm.gaol
 	  sawfish.wm.colors
@@ -210,8 +211,11 @@ Note that the value of the `:group' key is not evaluated."
   ;; XXX this is lame -- it should build a dedicated environment
   ;; XXX containing only the custom-set-foo functions (and quote), then
   ;; XXX run in that.
-  (define (define-custom-setter name def) (set name def))
-  (define (custom-setter name) (and (boundp name) (symbol-value name)))
+  (define (define-custom-setter name def)
+    (structure-define (current-structure) name def))
+  (define (custom-setter name)
+    (and (structure-bound-p (current-structure) name)
+	 (%structure-ref (current-structure) name)))
       
   (defmacro custom-set-property (sym prop value)
     "Set the custom key PROP for defcustom'd symbol SYM to value."
