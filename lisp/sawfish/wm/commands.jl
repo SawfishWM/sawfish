@@ -133,44 +133,52 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
     "Call the command NAME; optionally with the prefix argument PFX-ARG."
 
     ;; prefix
-    (setq this-command name)
-    (unless pfx-arg (setq pfx-arg prefix-arg))
-    (setq prefix-arg nil)
-    (setq current-prefix-arg pfx-arg)
-    (call-hook 'pre-command-hook (list name))
+    (let ((this-command name))
+      (unless pfx-arg (setq pfx-arg prefix-arg))
+      (setq prefix-arg nil)
+      (setq current-prefix-arg pfx-arg)
 
-    ;; call
-    (cond ((commandp name)
-	   ;; a named command
-	   (command-ref name)			;so spec is loaded
-	   (let ((spec (command-spec name))
-		 args)
-	     (when spec
-	       (setq args (build-arg-list spec name)))
-	     ;; reinitialize current-prefix-arg in case it got overwritten
-	     (setq current-prefix-arg pfx-arg)
-	     (apply-command name args)))
+      ;; pre-command-hook is allowed to modifiy this-command
+      ;; and current-prefix-arg. If this-command is set to nil the
+      ;; command won't be called
+      (call-hook 'pre-command-hook (list name))
 
-	  ((commandp (car name))
-	   (apply-command (car name) (mapcar user-eval (cdr name))))
+      (setq name this-command)
+      (setq pfx-arg current-prefix-arg)
 
-	  ((functionp name)
-	   (let ((spec (function-spec name)))
-	     (if spec
-		 ;; function has an embedded spec, so use it
-		 (let ((args (build-arg-list (cadr spec) name)))
-		   (setq current-prefix-arg pfx-arg)
-		   (apply name args))
-	       ;; no spec, just call it
-	       (name))))
+      ;; call
+      (cond ((null name))
 
-	  (t (user-eval name)))		;just eval it
+	    ((commandp name)
+	     ;; a named command
+	     (command-ref name)			;so spec is loaded
+	     (let ((spec (command-spec name))
+		   args)
+	       (when spec
+		 (setq args (build-arg-list spec name)))
+	       ;; reinitialize current-prefix-arg in case it got overwritten
+	       (setq current-prefix-arg pfx-arg)
+	       (apply-command name args)))
 
-    ;; postfix
-    (call-hook 'post-command-hook (list name))
-    (setq last-command this-command)
-    (setq this-command nil)
-    (setq current-prefix-arg nil))
+	    ((commandp (car name))
+	     (apply-command (car name) (mapcar user-eval (cdr name))))
+
+	    ((functionp name)
+	     (let ((spec (function-spec name)))
+	       (if spec
+		   ;; function has an embedded spec, so use it
+		   (let ((args (build-arg-list (cadr spec) name)))
+		     (setq current-prefix-arg pfx-arg)
+		     (apply name args))
+		 ;; no spec, just call it
+		 (name))))
+
+	    (t (user-eval name)))		;just eval it
+
+      ;; postfix
+      (call-hook 'post-command-hook (list name))
+      (setq last-command this-command)
+      (setq current-prefix-arg nil)))
 
   (define-command 'call-command call-command
     #:spec "CEnter command:\nP")
