@@ -43,7 +43,8 @@
 (defcustom default-font nil
   "Font used for text which doesn't have a font explicitly specified."
   :group appearance
-  :type font)
+  :type font
+  :after-set after-setting-frame-option)
 
 
 ;; ui
