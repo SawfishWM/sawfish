@@ -31,6 +31,11 @@
 
   (defconst default-font "fixed")
 
+  ;; FIXME: this is broken, in that only if Xrender is present
+  ;; does gdk use Xft. But, it's the best I can do..
+  (define use-xft (let ((x (getenv "GDK_USE_XFT")))
+		    (and x (/= (string->number x) 0))))
+
   (define (make-font-item changed-callback)
     (let* ((box (gtk-hbox-new nil box-spacing))
 	   (entry (gtk-entry-new))
@@ -66,10 +71,12 @@
 	  ((set) (lambda (x)
 		   (cond ((stringp x)
 			  (gtk-entry-set-text entry x))
-			 ((and (consp x)
-			       (string-equal (car x) "Xft"))
-			  ;; FIXME: should also handle XLFD here
-			  (let ((face (xft-description->face (cdr x))))
+			 ((consp x)
+			  (let ((face (case (car x)
+					(("Xft")
+					 (xft-description->face (cdr x)))
+					(("xlfd")
+					 (xlfd-description->face (cdr x))))))
 			    (when face
 			      (gtk-entry-set-text
 			       entry (face->pango-description face)))))
@@ -80,7 +87,9 @@
 		   ;; FIXME: Assumes we'll always be using Xft..
 		   (let* ((pango-name (gtk-entry-get-text entry))
 			  (face (pango-description->face pango-name)))
-		     (and face (cons "Xft" (face->xft-description face))))))
+		     (cond ((not face) nil)
+			   (use-xft (cons "Xft" (face->xft-description face)))
+			   (t (cons "xlfd" (face->xlfd-description face)))))))
 	  ((gtk-widget) box)
 	  ((validp) (lambda (x) (stringp x)))))))
 

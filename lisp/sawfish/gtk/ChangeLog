@@ -1,5 +1,12 @@
 2002-11-03  John Harper  <jsh@unfactored.org>
 
+	* widgets/font.jl (make-font-item): use XLFD fonts when
+	GDK_USE_XFT isn't set. (I couldn't test this, since the GTK
+	font selector totally fails to work for me when this
+	environment variable isn't set)
+
+2002-11-03  John Harper  <jsh@unfactored.org>
+
 	* widgets/font.jl (make-font-item): support for new typed font
 	descriptions. Convert the Xft description to and from the Pango
 	descriptions used by GtkFontSelection. Needs some work to
