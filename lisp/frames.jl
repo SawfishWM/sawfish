@@ -42,9 +42,15 @@
 	       (when always-update-frames
 		 (reframe-all-windows))))
 
-(defvar frame-style-directory
-  (expand-file-name "themes" sawmill-lisp-lib-directory))
-(setq load-path (nconc load-path (list frame-style-directory)))
+(defvar user-theme-directory "~/.sawmill/themes"
+  "Directory containing user-local themes.")
+
+(defvar system-theme-directory (expand-file-name
+				"../themes" sawmill-lisp-lib-directory)
+  "Directory containing system themes.")
+
+(defvar theme-load-path (list user-theme-directory system-theme-directory)
+  "List of directories from which themes may be loaded.")
 
 (defvar frame-styles nil
   "List of (NAME . FUNCTION) defining all loaded frame styles.")
@@ -68,7 +74,7 @@
 
 (defun set-frame-style (name)
   (unless (assq name frame-styles)
-    (require name)
+    (load-frame-style name)
     (or (assq name frame-styles) (error "No such frame style: %s" name)))
   (setq default-frame-style name)
   (when always-update-frames
@@ -159,17 +165,46 @@
 
 (defun custom-make-frame-style-widget (symbol value doc)
   (let
-      ((styles (mapcar 'car frame-styles)))
-    (mapc #'(lambda (f)
-	      (when (string-match "\\.jlc?$" f)
-		(let
-		    ((name (intern (substring f 0 (match-start)))))
-		  (unless (memq name styles)
-		    (setq styles (cons name styles))))))
-	  (directory-files frame-style-directory))
+      ((styles (find-all-frame-styles)))
     (setq styles (sort styles #'(lambda (x y)
 				  (< (symbol-name x) (symbol-name y)))))
     `(hbox (set ,styles
 		:variable ,symbol
 		:value ,value)
 	   (label ,doc))))
+
+
+;; loading ``themes'' (currently just frame styles)
+
+(defun frame-style-directory-p (dir)
+  (or (file-exists-p (expand-file-name "theme.jl" dir))
+      (file-exists-p (expand-file-name "theme.jlc" dir))))
+
+(defun load-frame-style (name)
+  (catch 'out
+    (mapc #'(lambda (dir)
+	      (let
+		  ((t-dir  (expand-file-name (symbol-name name) dir)))
+		;; XXX allow .tar and .tar.gz files..?
+		(when (and (file-directory-p t-dir)
+			   (frame-style-directory-p t-dir))
+		  (let
+		      ((image-load-path (cons t-dir image-load-path)))
+		    (load (expand-file-name "theme" t-dir) nil t)
+		    (throw 'out t)))))
+	  theme-load-path)
+    nil))
+
+(defun find-all-frame-styles ()
+  (let
+      (list)
+    (mapc #'(lambda (dir)
+	      (when (file-directory-p dir)
+		(mapc #'(lambda (t-dir)
+			  (when (and (frame-style-directory-p
+				      (expand-file-name t-dir dir))
+				     (not (member t-dir list)))
+			    (setq list (cons t-dir list))))
+		      (directory-files dir))))
+	  theme-load-path)
+    (mapcar 'intern list)))
