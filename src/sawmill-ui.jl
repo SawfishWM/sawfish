@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.9 1999/08/24 13:16:44 john Exp $
+;; $Id: sawmill-ui.jl,v 1.10 1999/08/24 15:15:08 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -407,7 +407,7 @@ fi
       ((hbox (gtk-vbox-new nil 0))
        (vbox (gtk-hbox-new nil 0))
        (vbox-2 (gtk-vbox-new nil 0))
-       (label (gtk-label-new (get-key spec ':doc)))
+       (label (gtk-label-new (flatten-doc-string (get-key spec ':doc))))
        (insert (gtk-button-new-with-label "Insert"))
        (delete (gtk-button-new-with-label "Delete"))
        (clist (gtk-clist-new-with-titles ["Key" "Command"]))
@@ -445,6 +445,7 @@ fi
 					       ',spec)))
     (gtk-box-pack-start vbox-2 label)
     (gtk-label-set-justify label 'left)
+    (gtk-label-set-line-wrap label t)
     (gtk-container-add vbox-2 hbox)
     vbox-2))
 
