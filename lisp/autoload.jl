@@ -196,4 +196,10 @@
 (autoload 'apropos-function-to-screen "describe" t)
 (autoload 'apropos-variable-to-screen "describe" t)
 (autoload 'describe-key-to-screen "keymap" t)
+(autoload 'help:show-faq "help" t)
+(autoload 'help:show-programmer-manual "help" t)
+(autoload 'help:show-news "help" t)
+(autoload 'help:show-homepage "help" t)
+(autoload 'gnome-www-page "gnome-commands" t)
+(autoload 'gnome-help-browser "gnome-commands" t)
 ;;; ::autoload-end::

@@ -1,3 +1,13 @@
+2000-06-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl (build-frame-style:update-readme): catch errors
+	while testing for directory existance (tarfh may error out)
+
+2000-06-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c, keys.h: support `Super' modifier; don't always map
+	`Alt' to some modifier, only do this for `Meta' now
+
 2000-06-07  John Harper  <john@dcs.warwick.ac.uk>
 
 	* main.c (sawfish_symbols): moved documentation-file to execdir

@@ -70,6 +70,7 @@ last updated @value{UPDATED} for Sawfish version @value{VERSION}.
 @menu
 * Copying::                     Distribution conditions
 * Introduction::                Brief introduction to sawfish
+* News::                        Feature history
 
 * Colors::			Color type
 * Fonts::			Font type
@@ -119,7 +120,7 @@ GNU General Public License for more details.
 @end quotation
 
 
-@node Introduction, Colors, Copying, Top
+@node Introduction, News, Copying, Top
 @chapter Introduction
 @cindex Introduction
 
@@ -150,7 +151,12 @@ knowledge of the language.
 @c grepped @file{/usr/dict/words} for something containing ``wm''.
 
 
-@node Colors, Fonts, Introduction, Top
+@node News, Colors, Introduction, Top
+
+@include news.texi
+
+
+@node Colors, Fonts, News, Top
 @chapter Colors
 @cindex Colors
 
