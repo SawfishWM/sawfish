@@ -61,6 +61,9 @@
 (defvar custom-menu-includes-all-settings t
   "When non-nil, the custom menu includes the `All settings' item.")
 
+
+;; defining custom variables and groups
+
 (defmacro defcustom (symbol value doc &rest keys)
   "Define a new customization variable SYMBOL which initially has value
 VALUE (unless SYMBOL is already bound, in which case its value is not
@@ -174,6 +177,9 @@ Note that the value of the `:group' key is not evaluated."
       (setq keys (nthcdr 2 keys)))
     (cons 'list (nreverse out))))
 
+
+;; general management
+
 (defun define-custom-setter (name def)
   (setq custom-set-alist (cons (cons def name) custom-set-alist)))
 
@@ -261,6 +267,9 @@ of choices."
 			     (filter atom (cddr custom-groups)))))))))
     (inner-fun full-group custom-groups)))
 
+
+;; setting values
+
 (defun custom-set (setter symbol &optional req)
   (when req
     (require req))
@@ -274,8 +283,84 @@ of choices."
 (defun custom-set-variable (symbol value &optional req)
   (custom-set (lambda () (set symbol value)) symbol req))
 
+(defun custom-set-typed-variable (symbol value type &optional req)
+  (custom-set (lambda ()
+		(set symbol (custom-deserialize value type)))
+	      symbol req))
+
 (defun variable-customized-p (symbol)
+  "Returns `t' if the variable named SYMBOL has been customized by the user."
   (get symbol 'custom-user-value))
+
+(defun variable-type (symbol)
+  "Returns the customizable type of the variable named SYMBOL."
+  (get symbol 'custom-type))
+
+
+;; serializing unreadable types
+
+;; property name (symbol) to find type converters on during custom-convert
+(define custom-converter-property (make-fluid))
+
+;; convert VALUE of TYPE to or from a printable object
+(define (custom-convert value type)
+  (case (or (car type) type)
+    ((optional)
+     (custom-convert value (cadr type)))
+
+    ((labelled)
+     (custom-convert value (caddr type)))
+
+    ((quoted)
+     `(quote ,(custom-convert (cadr value) (cadr type))))
+
+    ((pair)
+     (cons (custom-convert (car value) (car type))
+	   (custom-convert (cdr value) (cdr type))))
+
+    ((list)
+     (mapcar (lambda (x) (custom-convert x type)) value))
+
+    ((alist)
+     (let ((k-type (or (car (cadr type)) (cadr type)))
+	   (v-type (or (car (caddr type)) (caddr type))))
+       (mapcar (lambda (x)
+		 (cons (custom-convert (car x) k-type)
+		       (custom-convert (cdr x) v-type))) value)))
+
+    ((and v-and h-and)
+     (do ((values value (cdr values))
+	  (types type (cdr types))
+	  (out '() (cons (custom-convert (car values) (car types)) out)))
+	 ((or (null types) (null values))
+	  (nreverse out))))
+
+    ;; XXX handle `or' (needs type predicates)
+
+    (t (let ((converter (get (or (car type) type)
+			     (fluid custom-converter-property))))
+	 (if converter
+	     (converter value type)
+	   value)))))
+
+(defun custom-serialize (value type)
+  "Convert VALUE of TYPE to a printable value."
+  (let-fluids ((custom-converter-property 'custom-serializer))
+    (custom-convert value type)))
+
+(defun custom-deserialize (value type)
+  "Convert VALUE of TYPE back from a printable value."
+  (let-fluids ((custom-converter-property 'custom-deserializer))
+    (custom-convert value type)))
+
+(defun define-custom-serializer (type fun)
+  (put type 'custom-serializer fun))
+
+(defun define-custom-deserializer (type fun)
+  (put type 'custom-deserializer fun))
+
+
+;; customize menu
 
 (defun custom-menu ()
   (letrec
@@ -302,37 +387,25 @@ of choices."
 
 ;; support for font and color primitive types
 
-(defun custom-set-font (symbol value &rest args)
-  (apply custom-set-variable symbol (if (stringp value)
+(define-custom-serializer 'font (lambda (value)
+				  (if (fontp value)
+				      (font-name value)
+				    value)))
+
+(define-custom-deserializer 'font (lambda (value)
+				    (if (stringp value)
 					(get-font value)
-				      value) args))
+				      value)))
 
-(defun custom-get-font (symbol)
-  (let
-      ((value (symbol-value symbol)))
-    (if (fontp value)
-	(font-name value)
-      value)))
+(define-custom-serializer 'color (lambda (value)
+				   (if (colorp value)
+				       (color-name value)
+				     value)))
 
-(put 'font 'custom-get custom-get-font)
-(put 'font 'custom-set custom-set-font)
-(define-custom-setter 'custom-set-font custom-set-font)
-
-(defun custom-set-color (symbol value &rest args)
-  (apply custom-set-variable symbol (if (stringp value)
-					(get-color value)
-				      value) args))
-
-(defun custom-get-color (symbol)
-  (let
-      ((value (symbol-value symbol)))
-    (if (colorp value)
-	(color-name value)
-      value)))
-
-(put 'color 'custom-get custom-get-color)
-(put 'color 'custom-set custom-set-color)
-(define-custom-setter 'custom-set-color custom-set-color)
+(define-custom-deserializer 'color (lambda (value)
+				     (if (stringp value)
+					 (get-color value)
+				       value)))
 
 
 ;; default groups
