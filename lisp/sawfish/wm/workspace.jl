@@ -815,7 +815,7 @@ previous workspace."
 			   current-workspace
 			 (car (window-workspaces w))))
 	   (new-space (workspace-id-from-logical count)))
-      (when orig-space
+      (when (and orig-space (/= orig-space new-space))
 	(copy-window-to-workspace w orig-space new-space was-focused)
 	(select-workspace new-space was-focused)
 	(unless copy

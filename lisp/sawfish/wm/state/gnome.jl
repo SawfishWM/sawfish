@@ -294,6 +294,15 @@
 	   (set-window-depth w (- (aref data 0) WIN_LAYER_NORMAL))
 	   t)))
 
+  (define (gnome-property-handler w prop)
+    (when (windowp w)
+      (case prop
+	((_WIN_WORKSPACE)                       
+	  (let ((space (get-x-property w '_WIN_WORKSPACE)))
+	    (when (and space (eq (car space) 'CARDINAL))
+	      (send-window-to-workspace-from-first
+	       w (aref (nth 2 space) 0))))))))
+
   (define (gnome-event-proxyer)
     (when (and (current-event) (eq (current-event-window) 'root))
       (let ((event (event-name (current-event))))
@@ -374,6 +383,8 @@
     (call-after-state-changed '(window-list-skip) gnome-set-client-hints)
 
     (add-hook 'client-message-hook gnome-client-message-handler)
+    (add-hook 'property-notify-hook gnome-property-handler)
+
     (add-hook 'unbound-key-hook gnome-event-proxyer)
     (add-hook 'before-exit-hook gnome-exit))
 

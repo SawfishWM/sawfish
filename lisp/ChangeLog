@@ -1,3 +1,20 @@
+2001-02-28  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/gnome.jl (gnome-property-handler): new
+	function, added to property-notify-hook. Currently just watches
+	for _WIN_WORKSPACE changes, and responds by moving the window
+
+	* sawfish/wm/workspace.jl
+	(send-window-to-workspace-from-first): don't do any copying and
+	moving if the FROM and TO workspaces are the same
+
+	* sawfish/wm/commands/move-resize.jl (move-cursor-shape,
+	resize-cursor-shape): default to the value of the
+	default-cursor function
+
+	* sawfish/wm/frames.jl (cursor-for-frame-part): don't use a
+	special cursor in titles
+
 2001-02-24  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/commands.jl (command-sequence): define

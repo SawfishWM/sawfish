@@ -582,8 +582,7 @@ deciding which frame type to ask a theme to generate.")
 	  ((top-left-corner) 'top_left_corner)
 	  ((top-right-corner) 'top_right_corner)
 	  ((bottom-left-corner) 'bottom_left_corner)
-	  ((bottom-right-corner) 'bottom_right_corner)
-	  ((title) 'hand2))
+	  ((bottom-right-corner) 'bottom_right_corner))
       nil))
 
 
