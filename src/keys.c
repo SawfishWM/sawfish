@@ -1214,6 +1214,45 @@ DEFUN("forget-button-press", Fforget_button_press,
     return Qt;
 }
 
+/* Find the bottom-most window below TOP containing (X,Y) that selects
+   for button events */
+static Window
+window_getting_button_event(Window top, int x, int y)
+{
+    Window w = top, w2 = w, child;
+    XWindowAttributes wa;
+
+    /* Find the bottom-most child of W containing (X,Y) */
+    do {
+	XTranslateCoordinates (dpy, w, w2, x, y, &x, &y, &child);
+	w = w2;
+	if (child)
+	    w2 = child;
+    } while (child);
+
+    /* Then work up until TOP is reached, or a window selecting
+       button events is found */
+again:
+    XGetWindowAttributes (dpy, w, &wa);
+    if (w != top
+	&& !(wa.all_event_masks & (ButtonPressMask | ButtonReleaseMask)))
+    {
+	Window d1, *d2, parent;
+	u_int d3;
+	    
+	XQueryTree (dpy, w, &d1, &parent, &d2, &d3);
+	if (d2 != 0)
+	    XFree (d2);
+	if (parent != 0)
+	{
+	    w = parent;
+	    goto again;
+	}
+    }
+
+    return w;
+}
+
 DEFUN("synthesize-event", Fsynthesize_event, Ssynthesize_event,
       (repv event, repv win, repv propagate), rep_Subr3) /*
 ::doc:synthesize-event::
@@ -1223,6 +1262,7 @@ synthesize-event EVENT WINDOW [PROPAGATE]
     XEvent ev;
     repv ptr = Fquery_pointer (Qnil);
     Window w = x_win_from_arg (win);
+    Window child, dummy;
     int x_offset, y_offset;
 
     if (w == 0)
@@ -1281,16 +1321,24 @@ synthesize-event EVENT WINDOW [PROPAGATE]
 	ev.xbutton.root = root_window;
 	ev.xbutton.subwindow = 0;
 	ev.xbutton.time = last_event_time;
-	ev.xbutton.x_root = rep_INT (rep_CAR (ptr));
-	ev.xbutton.y_root = rep_INT (rep_CDR (ptr));
-	ev.xbutton.x = (ev.xbutton.x_root + x_offset);
-	ev.xbutton.y = (ev.xbutton.y_root + y_offset);
+	ev.xbutton.x = rep_INT (rep_CAR (ptr)) + x_offset;
+	ev.xbutton.y = rep_INT (rep_CDR (ptr)) + y_offset;
+	XTranslateCoordinates (dpy, w, root_window,
+			       ev.xbutton.x, ev.xbutton.y,
+			       &ev.xbutton.x_root, &ev.xbutton.y_root,
+			       &dummy);
+	child = window_getting_button_event (w, ev.xbutton.x, ev.xbutton.y);
+	XTranslateCoordinates (dpy, w, child,
+			       ev.xbutton.x, ev.xbutton.y,
+			       &ev.xbutton.x, &ev.xbutton.y,
+			       &dummy);
 	ev.xbutton.same_screen = True;
+	ev.xbutton.window = child;
 	ev.xany.type = ButtonPress;
-	XSendEvent (dpy, w, propagate != Qnil, ButtonPressMask, &ev);
+	XSendEvent (dpy, child, propagate != Qnil, ButtonPressMask, &ev);
 	ev.xany.type = ButtonRelease;
 	ev.xbutton.state |= mask;
-	XSendEvent (dpy, w, propagate != Qnil, ButtonReleaseMask, &ev);
+	XSendEvent (dpy, child, propagate != Qnil, ButtonReleaseMask, &ev);
 	break;
 
     default:
