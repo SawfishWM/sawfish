@@ -26,9 +26,6 @@
 #include <X11/keysym.h>
 #include <X11/Xutil.h>
 
-#define KEYTAB_HASH_FUN(c,m) ((c) * 33)
-#define KEYTAB_SIZE 127
-
 /* max number of milliseconds between double-clicks */
 #define DOUBLE_CLICK_TIME 250
 
@@ -59,7 +56,7 @@ DEFSYM(async_both, "async-both");
 static u_long meta_mod, alt_mod, num_lock_mod;
 
 static void grab_keymap_event (repv km, long code, long mods, bool grab);
-static void grab_all_keylist_events (repv map, repv tem, bool grab);
+static void grab_all_keylist_events (repv map, bool grab);
 
 /* Called for unbound events */
 bool (*event_proxy_fun)(XEvent *ev, long code, long mods);
@@ -210,13 +207,7 @@ search_keymap(repv km, u_long code, u_long mods, bool (*callback)(repv key))
     }
 
     /* Find the list of bindings to scan. */
-    if(rep_VECTORP(km))
-    {
-	if(rep_VECT_LEN(km) != KEYTAB_SIZE)
-	    return rep_NULL;
-	km = rep_VECTI(km, KEYTAB_HASH_FUN(code, mods) % KEYTAB_SIZE);
-    }
-    else if rep_CONSP(km)
+    if rep_CONSP(km)
 	km = rep_CDR(km);
     else
 	return rep_NULL;
@@ -553,31 +544,12 @@ DEFUN("make-keymap", Fmake_keymap, Smake_keymap, (void), rep_Subr0) /*
 ::doc:Smake-keymap::
 make-keymap
 
-Return a new keymap suitable for storing bindings in. This is a 127
-element vector, each element is an empty list of bindings for that hash
-bucket. Compare with the make-sparse-keymap function.
-::end:: */
-{
-    return Fmake_vector(rep_MAKE_INT(KEYTAB_SIZE), Qnil);
-}
-
-DEFUN("make-sparse-keymap", Fmake_sparse_keymap, Smake_sparse_keymap,
-      (repv base), rep_Subr1) /*
-::doc:Smake-sparse-keymap::
-make-sparse-keymap [BASE-KEYMAP]
-
 Return a new keymap suitable for storing bindings in. This is a cons cell
 looking like `(keymap . LIST-OF-BINDINGS)', LIST-OF-BINDINGS is initially
 nil.
-
-If BASE-KEYMAP is non-nil, it should be an existing sparse keymap whose
-bindings are to be inherited by the new keymap.
 ::end:: */
 {
-    if(!rep_NILP(base) && (!rep_CONSP(base) || rep_CAR(base) != Qkeymap))
-	return rep_signal_arg_error(base, 1);
-
-    return Fcons(Qkeymap, base);
+    return Fcons(Qkeymap, Qnil);
 }
 
 DEFUN("bind-keys", Fbind_keys, Sbind_keys, (repv args), rep_SubrN) /*
@@ -590,56 +562,43 @@ event to bind to the corresponding COMMAND.
 Returns KEYMAP when successful.
 ::end:: */
 {
-    bool rc = TRUE;
-    repv km, arg1, res = rep_NULL;
-    if(!rep_CONSP(args))
+    repv km, arg1;
+    if (!rep_CONSP(args))
 	return rep_NULL;
     km = rep_CAR(args);
     args = rep_CDR(args);
-    while(rc && rep_CONSP(args) && rep_CONSP(rep_CDR(args)))
+    while (rep_CONSP(args) && rep_CONSP(rep_CDR(args)))
     {
 	u_long code, mods;
 	repv key;
 	arg1 = rep_CAR(args);
 	args = rep_CDR(args);
-	if(rep_STRINGP(arg1))
+	if (rep_STRINGP(arg1))
 	{
-	    if(!lookup_event(&code, &mods, rep_STR(arg1)))
-		goto end;
+	    if (!lookup_event (&code, &mods, rep_STR(arg1)))
+		return Fsignal (Qbad_event_desc, rep_LIST_1(arg1));
 	}
-	else if(!rep_NILP(Feventp(arg1)))
+	else if(Feventp(arg1) != Qnil)
 	{
 	    code = rep_INT(rep_CAR(arg1));
 	    mods = rep_INT(rep_CDR(arg1));
 	}
 	else
-	{
-	    Fsignal(Qbad_event_desc, rep_LIST_1(arg1));
-	    goto end;
-	}
-	rc = FALSE;
-	key = MAKE_KEY(MAKE_EVENT(rep_MAKE_INT(code), rep_MAKE_INT(mods)), rep_CAR(args));
-	if(key != rep_NULL)
-	{
-	    if(rep_VECTORP(km))
-	    {
-		u_long hash = KEYTAB_HASH_FUN(code, mods) % KEYTAB_SIZE;
-		repv old = rep_VECTI(km, hash);
-		rep_VECTI(km, hash) = Fcons(key, old);
-	    }
-	    else
-		rep_CDR(km) = Fcons(key, rep_CDR(km));
-	    args = rep_CDR(args);
-	    grab_keymap_event (km, code, mods, TRUE);
-	    rc = TRUE;
-	}
+	    return Fsignal (Qbad_event_desc, rep_LIST_1(arg1));
+
+	key = search_keymap (km, code, mods, 0);
+	if (key != rep_NULL && rep_CONSP(key))
+	    KEY_COMMAND(key) = rep_CAR(args);
 	else
-	    goto end;
+	{
+	    key = MAKE_KEY(MAKE_EVENT(rep_MAKE_INT(code), rep_MAKE_INT(mods)),
+			   rep_CAR(args));
+	    rep_CDR(km) = Fcons(key, rep_CDR(km));
+	    grab_keymap_event (km, code, mods, TRUE);
+	}
+	args = rep_CDR(args);
     }
-    if(rc)
-	res = km;
-end:
-    return res;
+    return km;
 }
 
 DEFUN("unbind-keys", Funbind_keys, Sunbind_keys, (repv args), rep_SubrN) /*
@@ -647,92 +606,54 @@ DEFUN("unbind-keys", Funbind_keys, Sunbind_keys, (repv args), rep_SubrN) /*
 unbind-keys KEY-MAP EVENT-DESCRIPTION...
 ::end:: */
 {
-    bool rc = TRUE;
-    repv km, arg1, res = rep_NULL;
-    if(!rep_CONSP(args))
-	return rep_NULL;
+    repv km, arg1;
+    if (!rep_CONSP(args))
+	return rep_signal_missing_arg (1);
+
     km = rep_CAR(args);
-    if(!((rep_VECTORP(km) && rep_VECT_LEN(km) == KEYTAB_SIZE)
-       || rep_CONSP(km)))
-	return(rep_signal_arg_error(km, 1));
+    if (!rep_CONSP(km))
+	return rep_signal_arg_error(km, 1);
+
     args = rep_CDR(args);
-    while(rc && rep_CONSP(args))
+    while (rep_CONSP(args))
     {
 	u_long code, mods;
 	repv *keyp;
 	arg1 = rep_CAR(args);
-	if(rep_STRINGP(arg1))
+	if (rep_STRINGP(arg1))
 	{
-	    if(!lookup_event(&code, &mods, rep_STR(arg1)))
-		goto end;
+	    if (!lookup_event (&code, &mods, rep_STR(arg1)))
+		return Fsignal (Qbad_event_desc, rep_LIST_1(arg1));
 	}
-	else if(!rep_NILP(Feventp(arg1)))
+	else if(Feventp(arg1) != Qnil)
 	{
 	    code = rep_INT(rep_CAR(arg1));
 	    mods = rep_INT(rep_CDR(arg1));
 	}
 	else
-	{
-	    Fsignal(Qbad_event_desc, rep_LIST_1(arg1));
-	    goto end;
-	}
-	rc = FALSE;
-	if(rep_VECTORP(km))
-	    keyp = &rep_VECTI(km, KEYTAB_HASH_FUN(code, mods) % KEYTAB_SIZE);
-	else
-	    keyp = &rep_CDR(km);
-	while(rep_CONSP(*keyp))
+	    return Fsignal(Qbad_event_desc, rep_LIST_1(arg1));
+
+	keyp = &rep_CDR(km);
+	while (rep_CONSP(*keyp))
 	{
 	    repv cell = rep_CAR(*keyp);
-	    if(rep_CONSP(cell))
+	    if (rep_CONSP(cell))
 	    {
-		if((rep_INT(EVENT_MODS(KEY_EVENT(cell))) == mods)
-		   && (rep_INT(EVENT_CODE(KEY_EVENT(cell))) == code))
+		if ((rep_INT(EVENT_MODS(KEY_EVENT(cell))) == mods)
+		    && (rep_INT(EVENT_CODE(KEY_EVENT(cell))) == code))
 		{
 		    *keyp = rep_CDR(*keyp);
-		    /* Keybindings are supposed to nest so only delete the
-		    first entry for this event  */
-		    break;
 		}
 		else
 		    keyp = &rep_CDR(*keyp);
 	    }
-	    else
-		/* An inherited keymap. Only delete bindings from
-		   the initial keymap. */
-		break;
-
 	    rep_TEST_INT; if(rep_INTERRUPTP) return rep_NULL;
 	}
-	/* Do we ungrab this event? */
-	{
-	    repv tem = *keyp;
-	    while (rep_CONSP(tem))
-	    {
-		repv cell = rep_CAR(tem);
-		if(rep_CONSP(cell))
-		{
-		    if((rep_INT(EVENT_MODS(KEY_EVENT(cell))) == mods)
-		       && (rep_INT(EVENT_CODE(KEY_EVENT(cell))) == code))
-		    {
-			/* A second binding. Don't ungrab. */
-			break;
-		    }
-		}
-		tem = rep_CDR(tem);
-		rep_TEST_INT; if(rep_INTERRUPTP) return rep_NULL;
-	    }
-	    if (!rep_CONSP(tem))
-		grab_keymap_event (km, code, mods, FALSE);
-	}
+	grab_keymap_event (km, code, mods, FALSE);
 
-	rc = TRUE;
 	args = rep_CDR(args);
     }
-    if(rc)
-	res = Qt;
-end:
-    return(res);
+    return km;
 }
 
 DEFUN("grab-keymap", Fgrab_keymap, Sgrab_keymap, (repv map), rep_Subr1) /*
@@ -743,15 +664,8 @@ Grab any events in KEYMAP that need to be grabbed so that bindings in
 KEYMAP may be serviced.
 ::end:: */
 {
-    repv tem = map;
-    if (rep_CONSP(tem))
-	grab_all_keylist_events (map, rep_CDR(map), TRUE);
-    else if (rep_VECTORP(map))
-    {
-	int i;
-	for (i = 0; i < rep_VECT_SIZE(map); i++)
-	    grab_all_keylist_events (map, rep_VECTI(map, i), TRUE);
-    }
+    rep_DECLARE1(map, rep_CONSP);
+    grab_all_keylist_events (map, TRUE);
     return map;
 }
 
@@ -763,15 +677,8 @@ Ungrab any events in KEYMAP that would have been grabbed so that bindings in
 KEYMAP may be serviced.
 ::end:: */
 {
-    repv tem = map;
-    if (rep_CONSP(tem))
-	grab_all_keylist_events (map, rep_CDR(map), FALSE);
-    else if (rep_VECTORP(map))
-    {
-	int i;
-	for (i = 0; i < rep_VECT_SIZE(map); i++)
-	    grab_all_keylist_events (map, rep_VECTI(map, i), FALSE);
-    }
+    rep_DECLARE1(map, rep_CONSP);
+    grab_all_keylist_events (map, FALSE);
     return map;
 }
 
@@ -925,8 +832,11 @@ Returns a string naming the event EVENT.
     if(!EVENTP(ev))
 	return rep_signal_arg_error(ev, 1);
 
-    if(lookup_event_name(buf, rep_INT(EVENT_CODE(ev)), rep_INT(EVENT_MODS(ev))))
+    if(lookup_event_name(buf, rep_INT(EVENT_CODE(ev)),
+			 rep_INT(EVENT_MODS(ev))))
+    {
 	return rep_string_dup(buf);
+    }
     else
 	return Qnil;
 }
@@ -974,7 +884,8 @@ Return the (COMMAND . EVENT) binding of EVENT in KEYMAP, or nil.
 {
     repv res;
     rep_DECLARE1(ev, EVENTP);
-    res = search_keymap(km, rep_INT(EVENT_CODE(ev)), rep_INT(EVENT_MODS(ev)), 0);
+    res = search_keymap(km, rep_INT(EVENT_CODE(ev)),
+			rep_INT(EVENT_MODS(ev)), 0);
     return res ? res : Qnil;
 }
 
@@ -985,11 +896,7 @@ keymapp ARG
 Returns t if ARG can be used as a keymap.
 ::end:: */
 {
-    if((rep_VECTORP(arg) && rep_VECT_LEN(arg) == KEYTAB_SIZE)
-       || (rep_CONSP(arg) && rep_CAR(arg) == Qkeymap))
-	return Qt;
-    else
-	return Qnil;
+    return (rep_CONSP(arg) && rep_CAR(arg) == Qkeymap) ? Qt : Qnil;
 }
 
 DEFUN("eventp", Feventp, Seventp, (repv arg), rep_Subr1) /*
@@ -1159,8 +1066,9 @@ grab_keymap_event (repv km, long code, long mods, bool grab)
 }
 
 static void
-grab_all_keylist_events (repv map, repv tem, bool grab)
+grab_all_keylist_events (repv map, bool grab)
 {
+    repv tem = rep_CDR(map);
     while (rep_CONSP(tem) && !rep_INTERRUPTP)
     {
 	repv key = KEY_EVENT(rep_CAR(tem));
@@ -1198,12 +1106,6 @@ grab_keymap_events (Window grab_win, repv keymap, bool grab)
 
     if (rep_CONSP(keymap))
 	grab_keylist_events (grab_win, rep_CDR(keymap), grab);
-    else if (rep_VECTORP(keymap))
-    {
-	int i;
-	for (i = 0; i < rep_VECT_SIZE(keymap); i++)
-	    grab_keylist_events (grab_win, rep_VECTI(keymap, i), grab);
-    }
 }
 
 /* Grab all bound events in client window W. */
@@ -1232,7 +1134,6 @@ keys_init(void)
     rep_INTERN(keymap);
 
     rep_ADD_SUBR(Smake_keymap);
-    rep_ADD_SUBR(Smake_sparse_keymap);
     rep_ADD_SUBR(Sbind_keys);
     rep_ADD_SUBR(Sunbind_keys);
     rep_ADD_SUBR(Sgrab_keymap);
