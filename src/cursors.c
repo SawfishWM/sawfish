@@ -89,6 +89,16 @@ have no other cursor specified.
     return default_cursor;
 }
 
+DEFUN("cursorp", Fcursorp, Scursorp, (repv arg), rep_Subr1) /*
+::doc:Scursorp::
+cursor ARG
+
+Returns t if ARG is an cursor object.
+::end:: */
+{
+    return CURSORP(arg) ? Qt : Qnil;
+}
+
 
 /* type hooks */
 
@@ -146,6 +156,7 @@ cursors_init (void)
 					 cursor_mark, 0, 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR(Sget_cursor);
     rep_ADD_SUBR(Sdefault_cursor);
+    rep_ADD_SUBR(Scursorp);
     if (rep_SYM(Qbatch_mode)->value == Qnil)
 	Vdefault_cursor (Fget_cursor (rep_MAKE_INT (XC_left_ptr)));
     rep_mark_static (&default_cursor);
