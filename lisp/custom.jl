@@ -163,11 +163,11 @@
 
 (defgroup focus "Focus")
 (defgroup move "Move/Resize")
-(defgroup menus "Menus")
-(defgroup workspace "Workspaces")
 (defgroup placement "Placement")
 (defgroup appearance "Appearance")
+(defgroup workspace "Workspaces")
 (defgroup misc "Miscellaneous")
+(defgroup menus "Menus")
 (defgroup customize "Customization")
 
 
