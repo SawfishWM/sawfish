@@ -839,9 +839,6 @@ handle_input_mask(long mask)
 	current_event_window = Qnil;
 	XFlush (dpy);
     }
-    /* in case a function is invoked from outside the event loop
-       that passes last_event_time to an X function */
-    last_event_time = CurrentTime;
 
     emit_pending_destroys ();
 }
