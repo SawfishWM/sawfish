@@ -758,9 +758,9 @@
 	   w orig-space (1- (car limits)) was-focused)))))
 
   (define-command 'append-workspace-and-send append-workspace-and-send
-    #:spec "%W\nt")
+    #:spec "%W\nt" #:user-level 'expert)
   (define-command 'prepend-workspace-and-send prepend-workspace-and-send
-    #:spec "%W\nt")
+    #:spec "%W\nt" #:user-level 'expert)
 
   (define (merge-next-workspace)
     "Delete the current workspace. Its member windows are relocated to the next
@@ -772,8 +772,10 @@ workspace."
 previous workspace."
     (remove-workspace (1- current-workspace)))
 
-  (define-command 'merge-next-workspace merge-next-workspace)
-  (define-command 'merge-previous-workspace merge-previous-workspace)
+  (define-command 'merge-next-workspace merge-next-workspace
+    #:user-level 'expert)
+  (define-command 'merge-previous-workspace merge-previous-workspace
+    #:user-level 'expert)
 
   (define (insert-workspace-after)
     "Create a new workspace following the current workspace."
@@ -785,8 +787,10 @@ previous workspace."
     (insert-workspace (1- current-workspace))
     (select-workspace (- current-workspace 2)))
 
-  (define-command 'insert-workspace-after insert-workspace-after)
-  (define-command 'insert-workspace-before insert-workspace-before)
+  (define-command 'insert-workspace-after insert-workspace-after
+    #:user-level 'expert)
+  (define-command 'insert-workspace-before insert-workspace-before
+    #:user-level 'expert)
 
   (define (move-workspace-forwards #!optional count)
     "Move the current workspace one place to the right."
@@ -796,8 +800,10 @@ previous workspace."
     "Move the current workspace one place to the left."
     (move-workspace current-workspace (- (or count 1))))
 
-  (define-command 'move-workspace-forwards move-workspace-forwards)
-  (define-command 'move-workspace-backwards move-workspace-backwards)
+  (define-command 'move-workspace-forwards move-workspace-forwards
+    #:user-level 'expert)
+  (define-command 'move-workspace-backwards move-workspace-backwards
+    #:user-level 'expert)
 
   (define (select-workspace-from-first count)
     (select-workspace (workspace-id-from-logical count)))
@@ -835,7 +841,8 @@ previous workspace."
       (when (> first-interesting-workspace last-interesting-workspace)
 	(setq first-interesting-workspace last-interesting-workspace))))
 
-  (define-command 'delete-empty-workspaces delete-empty-workspaces)
+  (define-command 'delete-empty-workspaces delete-empty-workspaces
+    #:user-level 'expert)
 
   (define (delete-window-instance w)
     "Remove the copy of the window on the current workspace. If this is the

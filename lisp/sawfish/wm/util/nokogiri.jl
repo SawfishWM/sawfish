@@ -123,7 +123,7 @@
     (mapcar (lambda (sym)
 	      (let ((params (command-type sym))
 		    (user-level (command-user-level sym)))
-		(if (and params user-level)
+		(if (or params user-level)
 		    (nconc (list sym)
 			   (and params (list #:type params))
 			   (and user-level (list #:user-level user-level)))
