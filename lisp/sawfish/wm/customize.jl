@@ -147,7 +147,6 @@
       (list* 'vbox spec))))
 
 (defun customize-ui-spec ()
-  (mapc 'require custom-required)
   (list*
    'pages
    (mapcar #'(lambda (group-list)
@@ -165,6 +164,7 @@
   (if customize-process
       (error "Customize already active")
     (customize-start-process)
+    (mapc 'require custom-required)
     (if (null group)
 	(format customize-process "%S\n" (customize-ui-spec))
       (let
