@@ -124,6 +124,26 @@
     (resize-window-to w (scale cols x-base x-inc x-max)
 		      (scale rows y-base y-inc y-max))))
 
+(defun get-window-wm-protocols (w)
+  (let*
+      ((prop (get-x-property w 'WM_PROTOCOLS))
+       (data (and prop (eq (car prop) 'ATOM) (nth 2 prop))))
+    (when data
+      (let ((i 0)
+	    out)
+	(while (< i (length data))
+	  (setq out (cons (aref data i) out))
+	  (setq i (1+ i)))
+	(nreverse out)))))
+
+(defun delete-window (w)
+  "Delete the window."
+  (interactive "%W")
+  (if (memq 'WM_DELETE_WINDOW (get-window-wm-protocols w))
+      (send-client-message w 'WM_PROTOCOLS (vector (x-atom 'WM_DELETE_WINDOW)
+						   (x-server-timestamp)) 32)
+    (x-kill-client w)))
+
 
 ;; property and window-state changed interface
 
@@ -178,4 +198,3 @@
   (delete-if (lambda (w)
 	       (or (eq w window) (not (window-avoided-p w))))
 	     (managed-windows)))
-
