@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.13 1999/08/25 23:08:06 john Exp $
+;; $Id: sawmill-ui.jl,v 1.14 1999/08/27 10:58:44 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -291,7 +291,8 @@ fi
 (put 'font 'builder 'build-font)
 (defun build-font (spec)
   (let
-      ((button (gtk-button-new-with-label (or (get-key spec ':value) ""))))
+      ((button (gtk-button-new-with-label
+		(build-font:abbrev (or (get-key spec ':value) "")))))
     (mapc #'(lambda (w)
 	      (when (gtk-label-p w)
 		(gtk-label-set-line-wrap w t)))
@@ -318,7 +319,8 @@ fi
 	  (when (and (string= value "") (get-key spec ':allow-nil))
 	    (setq value nil))
 	  (ui-set ',spec (get-key ',spec ':variable) value)
-	  (ui-set-button-label ',(get-key spec ':widget) value)
+	  (ui-set-button-label ',(get-key spec ':widget)
+			       (build-font:abbrev value))
 	  (gtk-widget-destroy ',fontsel))))
     (gtk-signal-connect
      (gtk-font-selection-dialog-cancel-button fontsel)
@@ -328,6 +330,11 @@ fi
      "delete_event" `(lambda (w)
 		       (gtk-widget-destroy ',fontsel)))
     (gtk-widget-show fontsel)))
+
+(defun build-font:abbrev (font-name)
+  (if (string-match "-[^-]+-([^-]+)-" font-name)
+      (expand-last-match "\\1")
+    font-name))
 
 (put 'color 'builder 'build-color)
 (defun build-color (spec)
@@ -405,8 +412,7 @@ fi
 	  (gtk-signal-connect (aref buttons i) "toggled"
 			      `(lambda (w)
 				 (when (gtk-check-menu-item-active w)
-				   (ui-set ',spec ',(get-key spec ':variable)
-					   ',(car values)))))
+				   (build-set:select-row ',spec ,i))))
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	(gtk-option-menu-set-menu omenu menu)
@@ -437,14 +443,13 @@ fi
 	  (aset buttons i (gtk-radio-button-new-with-label-from-widget
 			   (if (zerop i) nil (aref buttons (1- i)))
 			   (symbol-name (car values))))
-	  (when (eq (car values) (get-key spec ':history))
+	  (when (eq (car values) (get-key spec ':value))
 	    (gtk-toggle-button-set-state (aref buttons i) t))
 	  (gtk-box-pack-start box (aref buttons i) nil nil)
 	  (gtk-signal-connect (aref buttons i) "toggled"
 			      `(lambda (w)
 				 (when (gtk-toggle-button-active w)
-				   (ui-set ',spec ',(get-key spec ':variable)
-					   ',(car values)))))
+				   (build-set:select-row ',spec ,i))))
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	box)))))
