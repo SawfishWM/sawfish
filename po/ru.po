@@ -1,16 +1,11 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Valek Filippov <frob@df.ru>, 2000.
 #
-#. ../themer/themer.glade:353 ../themer/themer.glade:397
-#. * ../themer/themer.glade:472 ../themer/themer.glade:562
-#. * ../themer/themer.glade:1070 ../themer/themer.glade:1300
-#. * ../themer/themer.glade:1320 ../themer/themer.glade:1349
-#. * ../themer/themer.glade:1369 ../themer/themer.glade:1852
 msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish\n"
-"POT-Creation-Date: 2000-07-03 11:00+0100\n"
-"PO-Revision-Date: 2000-07-03 19:53+00:00\n"
+"POT-Creation-Date: 2000-07-16 09:53+0200\n"
+"PO-Revision-Date: 2000-07-16 17:54+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,13 +29,13 @@ msgstr "Включить звуковые эффекты для неуправляемых окон."
 msgid "Map window events to sound files."
 msgstr "Отобразить события окон в звуковые файлы."
 
-#. ../lisp/auto-raise.jl
-msgid "Raise windows when they are focused."
-msgstr "Поднимать окно, когда оно получает фокус."
+#. ../lisp/audio-events.jl
+msgid "Event"
+msgstr "Событие"
 
-#. ../lisp/auto-raise.jl
-msgid "Delay in milliseconds until focused windows are raised."
-msgstr "Задержка в миллисекундах перед подъемом получившего фокус окна."
+#. ../lisp/audio-events.jl
+msgid "Sample"
+msgstr "Образец"
 
 #. ../lisp/viewport-linear.jl
 #. ../lisp/autoload.jl
@@ -70,10 +65,22 @@ msgstr ""
 #. ../lisp/x-cycle.jl
 #. ../lisp/autoload.jl
 msgid "Window Cycling"
-msgstr ""
+msgstr "Проход через окна"
+
+#. ../lisp/auto-raise.jl
+msgid "Raise windows when they are focused."
+msgstr "Поднимать окно, когда оно получает фокус."
+
+#. ../lisp/auto-raise.jl
+msgid "Delay in milliseconds until focused windows are raised."
+msgstr "Задержка в миллисекундах перед подъемом получившего фокус окна."
 
 #. ../lisp/configure.jl
 msgid "Automatically select window gravity from position on screen."
+msgstr ""
+
+#. ../lisp/customize.jl
+msgid "Invoke the user-customization system."
 msgstr ""
 
 #. ../lisp/custom.jl
@@ -132,10 +139,6 @@ msgstr "Максимизация"
 msgid "Miscellaneous"
 msgstr "Разное"
 
-#. ../lisp/customize.jl
-msgid "Invoke the user-customization system."
-msgstr ""
-
 #. ../lisp/cycle.jl
 msgid "Select the next window of the current workspace."
 msgstr "Выбрать след. окно на текущем рабочем месте."
@@ -190,10 +193,6 @@ msgstr ""
 "Обновить все окна при изменении стиля кадра используемого по умолчанию."
 
 #. ../lisp/frames.jl
-msgid "Decorate dialog windows similarly to application windows."
-msgstr "Оформлять окна диалогов подобно окнам приложений."
-
-#. ../lisp/frames.jl
 msgid "Automatically reload themes when they are updated."
 msgstr "Автоматически перезагружать темы когда они обновляются."
 
@@ -243,7 +242,7 @@ msgstr "Дополнительные аргументы передаваемые команде \"xterm\"."
 msgid ""
 "Format to create unique window names. Has two arguments (NAME INDEX)\n"
 "applied to it."
-msgstr ""
+msgstr "Формат для создания уникальных названий окон. Имеет два аргумента (НАЗВАНИЕ ИНДЕКС) применяемых к нему."
 
 #. ../lisp/functions.jl
 msgid "Start a new xterm."
@@ -256,6 +255,16 @@ msgstr "Выполнить заданную команду оболочки."
 #. ../lisp/functions.jl
 msgid "Command:"
 msgstr "Команда:"
+
+#. ../lisp/functions.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Вызвать список команд, одну за другой."
+
+#. ../nokogiri/nokogiri-widgets/keymap.jl
+#. ../nokogiri/nokogiri-widgets/command.jl
+#. ../lisp/functions.jl
+msgid "Command"
+msgstr "Команда"
 
 #. ../lisp/functions.jl
 msgid "Force the current window to have a unique title."
@@ -303,7 +312,7 @@ msgstr "Запустить систему просмотра справки GNOME."
 
 #. ../lisp/gnome-int.jl
 msgid "Invoke the GNOME control center from the `Customize' menu."
-msgstr ""
+msgstr "Вызвать \"Центр управления GNOME\" из меню \"Настройки\"."
 
 #. ../lisp/menus.jl
 #. ../lisp/gnome-int.jl
@@ -382,6 +391,14 @@ msgid "Unmanaged windows may be iconified."
 msgstr "Неуправляемые окна могут быть свернуты."
 
 #. ../lisp/iconify.jl
+msgid "Iconifying a window also iconifies the: \\w"
+msgstr "Сворачивание окна также приводит к сворачиванию: \\w"
+
+#. ../lisp/iconify.jl
+msgid "Uniconifying a window also uniconifies the: \\w"
+msgstr "Разворачивание окна также приводит к разворачиванию: \\w"
+
+#. ../lisp/iconify.jl
 msgid "Iconify the window."
 msgstr "Свернуть окно в пиктограмму."
 
@@ -391,7 +408,7 @@ msgstr "Развернуть окно из пиктограммы."
 
 #. ../lisp/iconify.jl
 msgid "Toggle the iconification of window W."
-msgstr ""
+msgstr "Переключить свернутость окна W."
 
 #. ../lisp/iconify.jl
 msgid "Display the workspace/viewport containing the window W."
@@ -429,19 +446,21 @@ msgstr "Переключить будет ли окно получать фокус или нет."
 
 #. ../lisp/keymap.jl
 msgid "Prompt for a key sequence, then print its binding."
-msgstr ""
+msgstr "Приглашение для ввода сочетания клавиш, затем печать их функции."
 
 #. ../lisp/keymap.jl
 msgid "Press key..."
 msgstr "Нажмите клавишу..."
 
 #. ../lisp/keymap.jl
-msgid "Read a single event and send it to the focused window."
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
 msgstr ""
 
 #. ../lisp/keymap.jl
 msgid "[Quote]"
-msgstr ""
+msgstr "[Кавычка]"
 
 #. ../lisp/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
@@ -555,28 +574,28 @@ msgstr ""
 
 #. ../lisp/maximize.jl
 msgid "Maximize the window without obscuring any other windows."
-msgstr ""
+msgstr "Максимизация окна без скрытия любых других окон."
 
 #. ../lisp/maximize.jl
 msgid "Maximize the window vertically without obscuring any other windows."
-msgstr ""
+msgstr "Вертикальная максимизация окна без скрытия любых других окон."
 
 #. ../lisp/maximize.jl
 msgid ""
 "Toggle the state of the window between maximized-filled and unmaximized."
-msgstr ""
+msgstr "Переключить состояние окна между максимизированным-заполненным и немаксимизированным."
 
 #. ../lisp/maximize.jl
 msgid ""
 "Toggle the state of the window between vertically maximized-filled and\n"
 "unmaximized."
-msgstr ""
+msgstr "Переключить состояние окна между вертикально максимизированным-заполненным и немаксимизированным."
 
 #. ../lisp/maximize.jl
 msgid ""
 "Toggle the state of the window between horizontally maximized-filled and\n"
 "unmaximized."
-msgstr ""
+msgstr "Переключить состояние окна между горизонтально максимизированным-заполненным и немаксимизированным."
 
 #. ../lisp/menus.jl
 msgid "_Iconify"
@@ -885,12 +904,15 @@ msgstr "Изменять размер окна интерактивно используя мышь."
 #. ../lisp/move-resize.jl
 msgid ""
 "Wait for the user to select a window, then interactively move that window."
-msgstr "Ждать пока пользователь выберет окно, затем интерактивно перемещать это окно."
+msgstr ""
+"Ждать пока пользователь выберет окно, затем интерактивно перемещать это окно."
 
 #. ../lisp/move-resize.jl
 msgid ""
 "Wait for the user to select a window, then interactively resize that window."
-msgstr "Ждать пока пользователь выберет окно, затем интерактивно изменять размер этого окна."
+msgstr ""
+"Ждать пока пользователь выберет окно, затем интерактивно изменять размер "
+"этого окна."
 
 #. ../lisp/nokogiri-sawfish.jl
 msgid "Show options suitable for \\w users."
@@ -920,25 +942,9 @@ msgstr ""
 msgid ""
 "The program used to play audio samples. If unset, built-in support for ESD "
 "is used."
-msgstr "Программа используемая для воспроизведения звуков. Если не установлена, используется встроенная поддержка для ESD."
-
-#. ../lisp/prompt-wm.jl
-msgid "Window:"
-msgstr "Окно:"
-
-#. ../lisp/prompt-wm.jl
-#, c-format
-msgid "Workspace %d"
-msgstr "Рабочее место %d"
-
-#. ../lisp/workspace.jl
-#. ../lisp/prompt-wm.jl
-msgid "Workspace:"
-msgstr "Рабочее место:"
-
-#. ../lisp/prompt-wm.jl
-msgid "Prompt for a workspace and switch to it."
-msgstr "Запрос рабочего места и переключение на него."
+msgstr ""
+"Программа используемая для воспроизведения звуков. Если не установлена, "
+"используется встроенная поддержка для ESD."
 
 #. ../lisp/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
@@ -988,6 +994,24 @@ msgstr "Перейти к началу строки."
 msgid "Move to end of line."
 msgstr "Перейти к концу строки."
 
+#. ../lisp/prompt-wm.jl
+msgid "Window:"
+msgstr "Окно:"
+
+#. ../lisp/prompt-wm.jl
+#, c-format
+msgid "Workspace %d"
+msgstr "Рабочее место %d"
+
+#. ../lisp/workspace.jl
+#. ../lisp/prompt-wm.jl
+msgid "Workspace:"
+msgstr "Рабочее место:"
+
+#. ../lisp/prompt-wm.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Запрос рабочего места и переключение на него."
+
 #. ../lisp/raise-commands.jl
 msgid ""
 "Raise the window that received the current event, then replay any pointer\n"
@@ -998,6 +1022,12 @@ msgstr ""
 msgid ""
 "Raise the group of windows that received the current event, then replay any\n"
 "pointer events that invoked the command."
+msgstr ""
+
+#. ../lisp/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it has,\n"
+"then replay any pointer events that invoked the command."
 msgstr ""
 
 #. ../lisp/raise-commands.jl
@@ -1170,9 +1200,29 @@ msgstr "Передавать окну фокус при первом отображении."
 msgid "Dialog windows inherit the focus from their parent."
 msgstr "Диалоговые окна наследуют фокус от своих родителей."
 
-#. ../lisp/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr "Число столбцов и строк на каждом виртуальном рабочем месте: \\w"
+#. ../lisp/transient.jl
+msgid "Decorate dialog windows similarly to application windows."
+msgstr "Оформлять окна диалогов подобно окнам приложений."
+
+#. ../lisp/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+
+#. ../lisp/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+
+#. ../lisp/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
+msgstr ""
 
 #. ../lisp/viewport.jl
 msgid "Windows uniconify to the current viewport."
@@ -1181,6 +1231,22 @@ msgstr "Окна разворачиваются в текущей области просмотра."
 #. ../lisp/viewport.jl
 msgid "Select the specified viewport."
 msgstr "Выбрать указанною область просмотра."
+
+#. ../lisp/viewport.jl
+msgid "Column:"
+msgstr "Столбец:"
+
+#. ../lisp/viewport.jl
+msgid "Row:"
+msgstr "Строка:"
+
+#. ../lisp/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Выбрать указанный столбец области просмотра."
+
+#. ../lisp/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Выбрать указанную строку области просмотра."
 
 #. ../lisp/viewport.jl
 msgid "Move the current window to the specified viewport."
@@ -1263,20 +1329,21 @@ msgid "Prompt for a command, execute it, and print any output to the screen."
 msgstr "Запрос команды, выполнение и выдача результатов на экран."
 
 #. ../lisp/workspace.jl
+msgid "Virtual desktop configuration."
+msgstr "Настройка виртуальных рабочих столов."
+
+#. ../lisp/workspace.jl
 msgid "When passing the first or last workspace: \\w"
 msgstr "При передаче на первое или последнее рабочее место: \\w"
 
 #. ../lisp/workspace.jl
 msgid "When passing the first or last workspace, while moving a window: \\w"
-msgstr "При передаче на первое или последнее рабочее место при перемещении окна: \\w"
+msgstr ""
+"При передаче на первое или последнее рабочее место при перемещении окна: \\w"
 
 #. ../lisp/workspace.jl
 msgid "Workspaces are deleted when their last window closes."
 msgstr "Рабочие пространства удаляются когда закрываются последние окна."
-
-#. ../lisp/workspace.jl
-msgid "Minimum number of workspaces: \\w"
-msgstr "Минимальное число рабочих мест: \\w"
 
 #. ../lisp/workspace.jl
 msgid "Preserve empty workspaces in pager."
@@ -1299,12 +1366,12 @@ msgid "Windows are focused after being uniconified."
 msgstr ""
 
 #. ../lisp/workspace.jl
-msgid "Dialog windows are opened on the same workspace as their application."
-msgstr ""
+msgid "Dialogs appear on the same workspace as their application."
+msgstr "Диалоги возникают на тех же рабочих местах, что и их приложения."
 
 #. ../lisp/workspace.jl
 msgid "Raise selected windows (normally by the Windows menu)."
-msgstr ""
+msgstr "Поднять выбранные окна (обычно с помощью меню \"Окна\")."
 
 #. ../lisp/workspace.jl
 msgid "Unshade selected windows."
@@ -1315,16 +1382,12 @@ msgid "Warp the pointer to selected windows."
 msgstr ""
 
 #. ../lisp/workspace.jl
-msgid "Iconifying a window iconifies its whole group."
-msgstr "Сворачивание окна сворачивает всю его группу."
-
-#. ../lisp/workspace.jl
-msgid "Uniconifying a window uniconifies its whole group."
-msgstr "Разворачивание окна разворачивает всю его группу."
-
-#. ../lisp/workspace.jl
 msgid "Workspace names."
 msgstr "Названия рабочих мест."
+
+#. ../lisp/workspace.jl
+msgid "Name"
+msgstr "Название"
 
 #. ../lisp/workspace.jl
 msgid "Insert workspace"
@@ -1499,7 +1562,7 @@ msgstr "Цикл через все окна в порядке последовательного выделения."
 
 #. ../lisp/x-cycle.jl
 msgid "Cycle through all windows in the same group as the current window."
-msgstr ""
+msgstr "Проход через все окна в той же группе что и у текущего окна."
 
 #. ../lisp/x-cycle.jl
 msgid ""
@@ -1511,23 +1574,53 @@ msgstr ""
 msgid "Cycle through all windows with the same class as the current window."
 msgstr ""
 
-#. ../nokogiri/nokogiri-shell.jl
-#. ../nokogiri/nokogiri-dialog.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+#. ../nokogiri/nokogiri-gnome.jl
+msgid "Revert"
+msgstr "Вернуть"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
 msgid "OK"
 msgstr "Ok"
 
-#. ../nokogiri/nokogiri-shell.jl
-#. ../nokogiri/nokogiri-dialog.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
 msgid "Cancel"
 msgstr "Отмена"
 
-#. ../nokogiri/nokogiri-shell.jl
-msgid "Try"
-msgstr "Попробовать"
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Apply"
+msgstr "Применить"
 
-#. ../nokogiri/nokogiri-shell.jl
-msgid "Revert"
-msgstr "Вернуть"
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Yes"
+msgstr "Да"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "No"
+msgstr "Нет"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Close"
+msgstr "Закрыть"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Help"
+msgstr "Справка"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Workspaces:"
+msgstr "Рабочие места:"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Columns:"
+msgstr "Столбцы:"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Rows:"
+msgstr "Строки:"
 
 #. ../nokogiri/nokogiri-shell.jl
 msgid "Sawfish configurator"
@@ -1552,6 +1645,19 @@ msgstr "Значение"
 msgid "Select color"
 msgstr "Выбор цвета"
 
+#. ../nokogiri/nokogiri-widgets/command.jl
+msgid "Undocumented"
+msgstr "Недокументированное"
+
+#. ../nokogiri/nokogiri-widgets/match-window.jl
+#. ../nokogiri/nokogiri-widgets/event.jl
+msgid "Grab..."
+msgstr "Захватить..."
+
+#. ../nokogiri/nokogiri-widgets/event.jl
+msgid "Key:"
+msgstr "Клавиша:"
+
 #. ../themer/themer.in
 #. ../nokogiri/nokogiri-widgets/font.jl
 #. ../nokogiri/nokogiri-widgets/file.jl
@@ -1565,28 +1671,15 @@ msgstr "Выбор файла"
 #. ../themer/themer.in
 #. ../nokogiri/nokogiri-widgets/font.jl
 msgid "Select font"
-msgstr "Выбор шрифта"
+msgstr "Выбрать шрифт"
+
+#. ../nokogiri/nokogiri-widgets/icon.jl
+msgid "Select Icon"
+msgstr "Выбрать пиктограмму"
 
 #. ../nokogiri/nokogiri-widgets/keymap.jl
 msgid "Edit binding"
 msgstr "Правка связей"
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Command"
-msgstr "Команда"
-
-#. ../nokogiri/nokogiri-widgets/match-window.jl
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Grab..."
-msgstr "Захватить..."
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Undocumented"
-msgstr "Недокументированное"
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Key:"
-msgstr "Клавиша:"
 
 #. ../nokogiri/nokogiri-widgets/list.jl
 msgid "Insert..."
@@ -1724,23 +1817,23 @@ msgstr "Направление градиента в \"градиентном\" стиле кадра."
 
 #. ../themes/gradient/theme.jl
 msgid "`From' color of inactive frames in `gradient' frame style."
-msgstr ""
+msgstr "Цвет \"Из\" для неактивных рамок в стиле рамок \"градиент\"."
 
 #. ../themes/gradient/theme.jl
 msgid "`To' color of inactive frames in `gradient' frame style."
-msgstr ""
+msgstr "Цвет \"В\" для неактивных рамок в стиле рамок \"градиент\"."
 
 #. ../themes/gradient/theme.jl
 msgid "`From' color of active frames in `gradient' frame style."
-msgstr ""
+msgstr "Цвет \"Из\" для активных рамок в стиле рамок \"градиент\"."
 
 #. ../themes/gradient/theme.jl
 msgid "`To' color of active frames in `gradient' frame style."
-msgstr ""
+msgstr "Цвет \"В\" для активных рамок в стиле рамок \"градиент\"."
 
 #. ../themes/gradient/theme.jl
 msgid "Use less memory when creating gradients, possibly affecting quality."
-msgstr ""
+msgstr "Использовать меньше памяти при создании градиентов, возможно в ущерб качеству."
 
 #. ../themes/mono/theme.jl
 msgid "Mono Theme"
@@ -1748,7 +1841,8 @@ msgstr "Монохромная тема"
 
 #. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
-msgstr "Цвет неактивных кадров (если не установлено использование цвета фона GTK+)."
+msgstr ""
+"Цвет неактивных кадров (если не установлено использование цвета фона GTK+)."
 
 #. ../themes/mono/theme.jl
 msgid "Color of active frames."
@@ -1784,15 +1878,15 @@ msgstr "Цвет текста"
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for unfocused windows."
-msgstr ""
+msgstr "Изображение строки для окон не имеющих фокуса."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for focused windows."
-msgstr ""
+msgstr "Изображение строки для окон имеющих фокус."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for highlighted parts."
-msgstr ""
+msgstr "Изображение строки для подсвеченных частей."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for clicked parts."
@@ -1808,7 +1902,7 @@ msgstr "Ширина рамки окна."
 
 #. ../themes/smaker/theme.jl
 msgid "Border width of bar images."
-msgstr ""
+msgstr "Ширина рамки изображения строки."
 
 #. ../themer/themer.glade:1327
 msgid " to: "
@@ -1915,10 +2009,6 @@ msgstr "Карта:"
 msgid "Mapping"
 msgstr "Отображение"
 
-#. ../themer/themer.glade:527 ../themer/themer.glade:775
-msgid "Name"
-msgstr "Название"
-
 #. ../themer/themer.glade:86
 msgid "New Theme"
 msgstr "Новая тема"
@@ -1961,7 +2051,7 @@ msgstr "Кадры окна"
 
 #. ../themer/themer.glade:1619
 msgid "[about text]"
-msgstr ""
+msgstr "[текст о]"
 
 #. ../themer/themer.glade:1118
 msgid "[frame-part-table]"

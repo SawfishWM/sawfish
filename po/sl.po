@@ -2,15 +2,10 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Andraz Tori <andraz.tori1@guest.arnes.si> 2000
 #
-#. ../themer/themer.glade:353 ../themer/themer.glade:397
-#. * ../themer/themer.glade:472 ../themer/themer.glade:562
-#. * ../themer/themer.glade:1070 ../themer/themer.glade:1300
-#. * ../themer/themer.glade:1320 ../themer/themer.glade:1349
-#. * ../themer/themer.glade:1369 ../themer/themer.glade:1852
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
-"POT-Creation-Date: 2000-07-03 11:00+0100\n"
+"POT-Creation-Date: 2000-07-16 09:53+0200\n"
 "PO-Revision-Date: 2000-07-03 11:46+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -35,13 +30,13 @@ msgstr "Igraj zvoène uèinke za neupravljana okna."
 msgid "Map window events to sound files."
 msgstr "Dogodki oken naj bodo povezani z zvoènimi datotekami."
 
-#. ../lisp/auto-raise.jl
-msgid "Raise windows when they are focused."
-msgstr "Dvigni okna, do dobijo fokus"
+#. ../lisp/audio-events.jl
+msgid "Event"
+msgstr "Dogodek"
 
-#. ../lisp/auto-raise.jl
-msgid "Delay in milliseconds until focused windows are raised."
-msgstr "Èas v mikrosekundah, preden so fokusirana okna dvignjena."
+#. ../lisp/audio-events.jl
+msgid "Sample"
+msgstr "Vzorec"
 
 #. ../lisp/viewport-linear.jl
 #. ../lisp/autoload.jl
@@ -73,9 +68,21 @@ msgstr "Zaèasne odsenèitve"
 msgid "Window Cycling"
 msgstr "Kro¾enje Oken"
 
+#. ../lisp/auto-raise.jl
+msgid "Raise windows when they are focused."
+msgstr "Dvigni okna, do dobijo fokus"
+
+#. ../lisp/auto-raise.jl
+msgid "Delay in milliseconds until focused windows are raised."
+msgstr "Èas v mikrosekundah, preden so fokusirana okna dvignjena."
+
 #. ../lisp/configure.jl
 msgid "Automatically select window gravity from position on screen."
 msgstr "Samodejno izberi gravitacijo oken iz polo¾aja na zaslonu."
+
+#. ../lisp/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "Vpelji sistem nastavljen po meri uporabnika."
 
 #. ../lisp/custom.jl
 msgid "Main"
@@ -133,10 +140,6 @@ msgstr "Razpenjanje"
 msgid "Miscellaneous"
 msgstr "Razno"
 
-#. ../lisp/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "Vpelji sistem nastavljen po meri uporabnika."
-
 #. ../lisp/cycle.jl
 msgid "Select the next window of the current workspace."
 msgstr "Izberi naslednje okno trenutne delovne povr¹ine."
@@ -155,8 +158,7 @@ msgstr "Izberi prej¹nje okno, pojdi èez vse mo¾ne delovne povr¹ine"
 
 #. ../lisp/edge-flip.jl
 msgid "Select the next desktop when the pointer hits screen edge."
-msgstr ""
-"Preskoèi na naslednje namizje, ko kazalec zadane ob rob zaslona."
+msgstr "Preskoèi na naslednje namizje, ko kazalec zadane ob rob zaslona."
 
 #. ../lisp/edge-flip.jl
 msgid "Hitting the screen edge selects the next: \\w"
@@ -189,10 +191,6 @@ msgstr "Privzet slog okvirjev (tema)."
 #. ../lisp/frames.jl
 msgid "Update all windows when the default frame style is changed."
 msgstr "Posodobi vsa okna, ko se spremeni privzeti slog okvirjev."
-
-#. ../lisp/frames.jl
-msgid "Decorate dialog windows similarly to application windows."
-msgstr "Dekoriraj okna dialogov podobno kot programska okna."
 
 #. ../lisp/frames.jl
 msgid "Automatically reload themes when they are updated."
@@ -251,7 +249,8 @@ msgid ""
 "Format to create unique window names. Has two arguments (NAME INDEX)\n"
 "applied to it."
 msgstr ""
-"Naèin ustvarjanja edinstvenih imen oken. Ima dva argumenta (NAME in INDEX)\n."
+"Naèin ustvarjanja edinstvenih imen oken. Ima dva argumenta (NAME in INDEX)\n"
+"."
 
 #. ../lisp/functions.jl
 msgid "Start a new xterm."
@@ -264,6 +263,16 @@ msgstr "Izvedi dan ukaz lupine"
 #. ../lisp/functions.jl
 msgid "Command:"
 msgstr "Ukaz:"
+
+#. ../lisp/functions.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Poka¾i seznam ukazov, enega po enega."
+
+#. ../nokogiri/nokogiri-widgets/keymap.jl
+#. ../nokogiri/nokogiri-widgets/command.jl
+#. ../lisp/functions.jl
+msgid "Command"
+msgstr "Ukaz"
 
 #. ../lisp/functions.jl
 msgid "Force the current window to have a unique title."
@@ -393,6 +402,14 @@ msgid "Unmanaged windows may be iconified."
 msgstr "Neupravljana okna se lahko skrèijo."
 
 #. ../lisp/iconify.jl
+msgid "Iconifying a window also iconifies the: \\w"
+msgstr "Skrèenje okna skrèi tudi: \\w."
+
+#. ../lisp/iconify.jl
+msgid "Uniconifying a window also uniconifies the: \\w"
+msgstr "Odkrèenje okna, odrkèi tudi: \\w."
+
+#. ../lisp/iconify.jl
 msgid "Iconify the window."
 msgstr "Skrèi okno v ikono."
 
@@ -449,8 +466,12 @@ msgid "Press key..."
 msgstr "Pritisnite tipko..."
 
 #. ../lisp/keymap.jl
-msgid "Read a single event and send it to the focused window."
-msgstr "Preberi en sam dogodek in ga po¹lji fokusiranemu oknu."
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
+msgstr ""
+"Po¹lje naslednji tipkovnièin dogodek neposredno na fokusirano okno, ne \n"
+"oziraje se na povezave, ki jih ima upravljalnik oken za ta dogodek."
 
 #. ../lisp/keymap.jl
 msgid "[Quote]"
@@ -532,8 +553,9 @@ msgstr "Drugo"
 msgid ""
 "Maximizing a window in one dimension must increase the size of that "
 "dimension."
-msgstr "Poveèevanje velikosti okna po eni stranici nujno vedno poveèa "
-"velikost te stranice."
+msgstr ""
+"Poveèevanje velikosti okna po eni stranici nujno vedno poveèa velikost te "
+"stranice."
 
 #. ../lisp/maximize.jl
 msgid "Raise windows when they are maximized."
@@ -953,24 +975,6 @@ msgstr ""
 "Program za igranje zvoènih vzorcev. Èe ni nastavljeno bo uporabljena ¾e "
 "vgrajena ESD podpora."
 
-#. ../lisp/prompt-wm.jl
-msgid "Window:"
-msgstr "Okno:"
-
-#. ../lisp/prompt-wm.jl
-#, c-format
-msgid "Workspace %d"
-msgstr "Delovna povr¹ina %d"
-
-#. ../lisp/workspace.jl
-#. ../lisp/prompt-wm.jl
-msgid "Workspace:"
-msgstr "Delovna povr¹ina:"
-
-#. ../lisp/prompt-wm.jl
-msgid "Prompt for a workspace and switch to it."
-msgstr "Vpra¹aj za delovno povr¹ino in preklopi nanjo."
-
 #. ../lisp/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
 msgstr "Mapiranje tipk, ki je aktivno kadar uporabnik vpisuje besedilo."
@@ -1019,6 +1023,24 @@ msgstr "Premakni se na zaèetek vrstice."
 msgid "Move to end of line."
 msgstr "Premakni se na konec vrstice."
 
+#. ../lisp/prompt-wm.jl
+msgid "Window:"
+msgstr "Okno:"
+
+#. ../lisp/prompt-wm.jl
+#, c-format
+msgid "Workspace %d"
+msgstr "Delovna povr¹ina %d"
+
+#. ../lisp/workspace.jl
+#. ../lisp/prompt-wm.jl
+msgid "Workspace:"
+msgstr "Delovna povr¹ina:"
+
+#. ../lisp/prompt-wm.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Vpra¹aj za delovno povr¹ino in preklopi nanjo."
+
 #. ../lisp/raise-commands.jl
 msgid ""
 "Raise the window that received the current event, then replay any pointer\n"
@@ -1032,7 +1054,16 @@ msgid ""
 "Raise the group of windows that received the current event, then replay any\n"
 "pointer events that invoked the command."
 msgstr ""
-"Dvigni skupino oken, ki so prejela dogodek, nato znova spro¾i dogodke kazalca,\n"
+"Dvigni skupino oken, ki so prejela dogodek, nato znova spro¾i dogodke "
+"kazalca,\n"
+"ki so povzroèili ukaz."
+
+#. ../lisp/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it has,\n"
+"then replay any pointer events that invoked the command."
+msgstr ""
+"Dvigni okno, ki je prejelo dogodek (in njegove dialoge), nato znova spro¾i dogodke kazalca,\n"
 "ki so povzroèili ukaz."
 
 #. ../lisp/raise-commands.jl
@@ -1162,7 +1193,8 @@ msgid ""
 "If the window is at its highest possible position, then lower it to its\n"
 "lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
-"Èe je okno na najvi¹jem mo¾nem polo¾aju, ga spusti na najni¾ji mo¾en polo¾aj,\n"
+"Èe je okno na najvi¹jem mo¾nem polo¾aju, ga spusti na najni¾ji mo¾en "
+"polo¾aj,\n"
 "sicer pa ga dvigni èimbolj na vrh."
 
 #. ../lisp/stacking.jl
@@ -1217,9 +1249,32 @@ msgstr "Fokusiraj okna, ko so prviè prikazana."
 msgid "Dialog windows inherit the focus from their parent."
 msgstr "Okna dialogov podedujejo fokus od njihovih star¹ev."
 
-#. ../lisp/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr "©tevilo stolpcev v vsaki navidezni delovni povr¹ini: \\w"
+#. ../lisp/transient.jl
+msgid "Decorate dialog windows similarly to application windows."
+msgstr "Dekoriraj okna dialogov podobno kot programska okna."
+
+#. ../lisp/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr "Zvi¹aj okno na vrh znotraj njegovega sklada (skupaj z njegovimi dialogi)."
+
+#. ../lisp/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr "Zni¾aj okno na dno znotraj njegovega sklada (skupaj z njegovimi dialogi)."
+
+#. ../lisp/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
+msgstr ""
+"Èe je okno na najvi¹jem mo¾nem polo¾aju, ga spusti na najni¾ji mo¾en "
+"polo¾aj,\n"
+"sicer pa ga dvigni èimbolj na vrh. (spremeni tudi nivo dialogov)"
 
 #. ../lisp/viewport.jl
 msgid "Windows uniconify to the current viewport."
@@ -1228,6 +1283,22 @@ msgstr "Odkrèi okna v trenutni pogled."
 #. ../lisp/viewport.jl
 msgid "Select the specified viewport."
 msgstr "Izberi naveden pogled."
+
+#. ../lisp/viewport.jl
+msgid "Column:"
+msgstr "Stolpec:"
+
+#. ../lisp/viewport.jl
+msgid "Row:"
+msgstr "Vrstica"
+
+#. ../lisp/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Izberi pogled doloèenega stolpca."
+
+#. ../lisp/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Izberi pogled doloèene vrstice."
 
 #. ../lisp/viewport.jl
 msgid "Move the current window to the specified viewport."
@@ -1310,22 +1381,22 @@ msgid "Prompt for a command, execute it, and print any output to the screen."
 msgstr "Vpra¹aj za ukaz, ga izvedi in izpi¹i izhod na zaslon."
 
 #. ../lisp/workspace.jl
+msgid "Virtual desktop configuration."
+msgstr "Nastavitev navideznega namizja."
+
+#. ../lisp/workspace.jl
 msgid "When passing the first or last workspace: \\w"
 msgstr "Dejanje kadar se gre mimo prve ali zadnje delovne povr¹ine: \\w"
 
 #. ../lisp/workspace.jl
 msgid "When passing the first or last workspace, while moving a window: \\w"
 msgstr ""
-"Dejanje kadar se gre mimo prve ali zadnje delovne povr¹ine med "
-"premikanjem okna: \\w"
+"Dejanje kadar se gre mimo prve ali zadnje delovne povr¹ine med premikanjem "
+"okna: \\w"
 
 #. ../lisp/workspace.jl
 msgid "Workspaces are deleted when their last window closes."
 msgstr "Delovne povr¹ine se zbri¹ejo, ko se zapre njihovo zadnje okno."
-
-#. ../lisp/workspace.jl
-msgid "Minimum number of workspaces: \\w"
-msgstr "Najmanj¹e ¹tevilo delovnih povr¹in: \\w"
 
 #. ../lisp/workspace.jl
 msgid "Preserve empty workspaces in pager."
@@ -1348,8 +1419,8 @@ msgid "Windows are focused after being uniconified."
 msgstr "Okna se fokusirajo po tem, ko so bila odkrèena."
 
 #. ../lisp/workspace.jl
-msgid "Dialog windows are opened on the same workspace as their application."
-msgstr "Okna dialogov se odpro na isti delovni povr¹ini kot njihovi programi."
+msgid "Dialogs appear on the same workspace as their application."
+msgstr "Dialogi se odpro na isti delovni povr¹ini kot njihovi programi."
 
 #. ../lisp/workspace.jl
 msgid "Raise selected windows (normally by the Windows menu)."
@@ -1364,16 +1435,12 @@ msgid "Warp the pointer to selected windows."
 msgstr "Mi¹kin kazalec naj bo le znotraj izbranih oken."
 
 #. ../lisp/workspace.jl
-msgid "Iconifying a window iconifies its whole group."
-msgstr "Krèenje okna, skrèi njegovo celotno skupino."
-
-#. ../lisp/workspace.jl
-msgid "Uniconifying a window uniconifies its whole group."
-msgstr "Odkrèenje okna, odrkèi njegovo celotno skupino."
-
-#. ../lisp/workspace.jl
 msgid "Workspace names."
 msgstr "Imena delovnih povr¹in."
+
+#. ../lisp/workspace.jl
+msgid "Name"
+msgstr "Ime"
 
 #. ../lisp/workspace.jl
 msgid "Insert workspace"
@@ -1565,23 +1632,53 @@ msgstr ""
 msgid "Cycle through all windows with the same class as the current window."
 msgstr "Kro¾i èez vsa okna v istem razredu kot trenutno okno."
 
-#. ../nokogiri/nokogiri-shell.jl
-#. ../nokogiri/nokogiri-dialog.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+#. ../nokogiri/nokogiri-gnome.jl
+msgid "Revert"
+msgstr "Povrni"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
 msgid "OK"
 msgstr "V redu"
 
-#. ../nokogiri/nokogiri-shell.jl
-#. ../nokogiri/nokogiri-dialog.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
 msgid "Cancel"
 msgstr "Preklièi"
 
-#. ../nokogiri/nokogiri-shell.jl
-msgid "Try"
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Apply"
 msgstr "Poskusi"
 
-#. ../nokogiri/nokogiri-shell.jl
-msgid "Revert"
-msgstr "Povrni"
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Yes"
+msgstr "Da"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "No"
+msgstr "Brez"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Close"
+msgstr "Zapri"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Help"
+msgstr "Pomoè"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Workspaces:"
+msgstr "Delovne povr¹ine:"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Columns:"
+msgstr "Stolpcev:"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Rows:"
+msgstr "Vrstic:"
 
 #. ../nokogiri/nokogiri-shell.jl
 msgid "Sawfish configurator"
@@ -1606,6 +1703,19 @@ msgstr "Vrednost"
 msgid "Select color"
 msgstr "Izberi barvo"
 
+#. ../nokogiri/nokogiri-widgets/command.jl
+msgid "Undocumented"
+msgstr "Nedokumentirano"
+
+#. ../nokogiri/nokogiri-widgets/match-window.jl
+#. ../nokogiri/nokogiri-widgets/event.jl
+msgid "Grab..."
+msgstr "Zgrabi..."
+
+#. ../nokogiri/nokogiri-widgets/event.jl
+msgid "Key:"
+msgstr "Tipka:"
+
 #. ../themer/themer.in
 #. ../nokogiri/nokogiri-widgets/font.jl
 #. ../nokogiri/nokogiri-widgets/file.jl
@@ -1621,26 +1731,13 @@ msgstr "Izberi datoteko"
 msgid "Select font"
 msgstr "Izberi pisavo"
 
+#. ../nokogiri/nokogiri-widgets/icon.jl
+msgid "Select Icon"
+msgstr "Izberi ikono"
+
 #. ../nokogiri/nokogiri-widgets/keymap.jl
 msgid "Edit binding"
 msgstr "Uredi povezave"
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Command"
-msgstr "Ukaz"
-
-#. ../nokogiri/nokogiri-widgets/match-window.jl
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Grab..."
-msgstr "Zgrabi..."
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Undocumented"
-msgstr "Nedokumentirano"
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Key:"
-msgstr "Tipka:"
 
 #. ../nokogiri/nokogiri-widgets/list.jl
 msgid "Insert..."
@@ -1803,7 +1900,8 @@ msgstr "Enobarvna Tema"
 
 #. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
-msgstr "Barva nedejavnih okvirjev (èe ni nastavljena uporabi GTK+ barvo ozadja)."
+msgstr ""
+"Barva nedejavnih okvirjev (èe ni nastavljena uporabi GTK+ barvo ozadja)."
 
 #. ../themes/mono/theme.jl
 msgid "Color of active frames."
@@ -1974,10 +2072,6 @@ msgstr "Preslikava: "
 msgid "Mapping"
 msgstr "Tipkovna preslikava"
 
-#. ../themer/themer.glade:527 ../themer/themer.glade:775
-msgid "Name"
-msgstr "Ime"
-
 #. ../themer/themer.glade:86
 msgid "New Theme"
 msgstr "Nova Tema"
@@ -2065,6 +2159,18 @@ msgstr "_Nastavitve"
 #. ../themer/themer.glade:262
 msgid "_Themes"
 msgstr "_Teme"
+
+#~ msgid "Read a single event and send it to the focused window."
+#~ msgstr "Preberi en sam dogodek in ga po¹lji fokusiranemu oknu."
+
+#~ msgid "Number of columns and rows in each virtual workspace: \\w"
+#~ msgstr "©tevilo stolpcev v vsaki navidezni delovni povr¹ini: \\w"
+
+#~ msgid "Minimum number of workspaces: \\w"
+#~ msgstr "Najmanj¹e ¹tevilo delovnih povr¹in: \\w"
+
+#~ msgid "Try"
+#~ msgstr "Poskusi"
 
 #~ msgid "Grab key..."
 #~ msgstr "Preberi tipko..."
