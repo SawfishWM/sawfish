@@ -1,5 +1,5 @@
 # Makefile.in -- input for the capplet directory's Makefile
-# $Id: Makefile.in,v 1.5 1999/09/30 14:40:14 john Exp $
+# $Id: Makefile.in,v 1.6 1999/10/20 14:52:03 john Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -38,8 +38,7 @@ ifneq ($(build_capplet),0)
 all : sawmill-capplet
 
 sawmill-capplet : sawmill-capplet.c ../src/libclient.o
-	$(CC) $(CPPFLAGS) -I$(top_srcdir)/src $(CFLAGS) $(LDFLAGS) \
-	  -o $@ $^ $(LIBS)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 install : all installdirs
 	for p in sawmill-capplet; do \
