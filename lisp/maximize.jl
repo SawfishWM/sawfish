@@ -190,7 +190,8 @@
 	((max-area 0)
 	 (max-rect nil))
       (mapc #'(lambda (rect)
-		(when (> (rectangle-area rect) max-area)
+		(when (and (rect-wholly-visible-p rect)
+			   (> (rectangle-area rect) max-area))
 		  (setq max-area (rectangle-area rect))
 		  (setq max-rect rect))) rects)
       (when max-rect
