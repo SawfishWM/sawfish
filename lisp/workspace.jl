@@ -73,6 +73,11 @@
   :type boolean
   :group misc)
 
+(defcustom focus-windows-on-uniconify nil
+  "Windows are focused after being uniconified."
+  :type boolean
+  :group focus)
+
 (defcustom transients-on-parents-workspace nil
   "Transient windows are opened on the same workspace as their parent window."
   :type boolean
@@ -496,6 +501,8 @@ previous workspace."
 	   (ws-add-window w)))
     (when raise-windows-on-uniconify
       (raise-window w))
+    (when focus-windows-on-uniconify
+      (set-input-focus w))
     (call-window-hook 'uniconify-window-hook w)
     (call-window-hook 'window-state-change-hook w)))
 
