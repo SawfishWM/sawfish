@@ -1,3 +1,15 @@
+2001-02-24  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/commands.jl (command-sequence): define
+	`kill-client' command (using the x-kill-client function)
+
+	Fixed off-by-one error when placing windows flush with the
+	right or bottom of the screen
+
+	* sawfish/wm/placement/smart.jl (sp-make-grid): don't subtract
+	one from screen-width or screen-height
+	(sp-prune-points): allow (<= X RANGE) instead of (< X RANGE)
+
 2001-02-23  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/state/iconify.jl (window-sticky-p/workspace,

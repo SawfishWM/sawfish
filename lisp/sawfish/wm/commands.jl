@@ -374,6 +374,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
   (define-command 'quit quit)
   (define-command 'restart restart)
   (define-command 'destroy-window destroy-window #:spec "%W")
+  (define-command 'kill-client x-kill-client #:spec "%W")
 
   (define (call-command-with-output-to-screen command)
     "Prompt for a command, execute it, and print any output to the screen."
