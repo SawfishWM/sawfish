@@ -386,6 +386,7 @@ create_x_drawable (Drawable id, int width, int height)
     w->width = width;
     w->height = height;
     w->is_window = w->is_pixmap = w->is_bitmap = 0;
+    w->event_handler = Qnil;
     XSaveContext (dpy, id, x_drawable_context, (XPointer) w);
     return w;
 }
