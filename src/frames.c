@@ -1343,6 +1343,7 @@ list_frame_generator (Lisp_Window *w)
     int nparts = 0;
     XSetWindowAttributes wa;
     u_long wamask;
+    int old_x_off, old_y_off;
 
     /* bounding box of frame */
     int left_x, top_y, right_x, bottom_y;
@@ -1432,6 +1433,9 @@ list_frame_generator (Lisp_Window *w)
     bigger = (right_x - left_x > w->frame_width
 	      || bottom_y - top_y > w->frame_height);
 
+    old_x_off = w->frame_x;
+    old_y_off = w->frame_y;
+
     /* now we can find the size and offset of the frame. */
     w->frame_width = right_x - left_x;
     w->frame_height = bottom_y - top_y;
@@ -1439,7 +1443,7 @@ list_frame_generator (Lisp_Window *w)
     w->frame_y = top_y;
 
     DB(("  bounding box: x=%d y=%d width=%d height=%d\n",
-	w->frame_x, w->frame_y, w->frame_width, w->frame_height));
+	left_x, top_y, w->frame_width, w->frame_height));
 
     if (w->reparented && bigger)
 	set_frame_shapes (w, TRUE);
@@ -1460,11 +1464,15 @@ list_frame_generator (Lisp_Window *w)
     }
     else
     {
+	/* adjust frame posiotion to keep absolute client position constant */
+	w->attr.x += w->frame_x - old_x_off;
+	w->attr.y += w->frame_y - old_y_off;
+
 	XMoveResizeWindow (dpy, w->frame, w->attr.x, w->attr.y,
 			   w->frame_width, w->frame_height);
 
 	if (w->reparented)
-	    XMoveResizeWindow (dpy, w->id, -w->frame_x, -w->frame_y,
+	    XMoveResizeWindow (dpy, w->id, -left_x, -top_y,
 			       w->attr.width, w->attr.height);
 	else
 	    XResizeWindow (dpy, w->id, w->attr.width, w->attr.height);
