@@ -97,6 +97,12 @@
   ;;###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
   (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
 
+  (defcustom cycle-reverse-event "M-SPC"
+    "Reversal key: \\w"
+    :tooltip "The key used to reverse direction when cycling through windows."
+    :group (focus cycle)
+    :type event)
+
   (defcustom cycle-show-window-names t
     "Display window names while cycling through windows."
     :group (focus cycle)
@@ -144,12 +150,32 @@
 
 ;; variables
 
+  ;; the current window
   (define x-cycle-current (make-fluid))
+
+  ;; the original stacking order
   (define x-cycle-stacking (make-fluid))
+
+  ;; the list of windows being cycled through
   (define x-cycle-windows (make-fluid))
+
+  ;; true if cycling in reverse direction
+  (define x-cycle-backwards (make-fluid))
 
 
 ;;; code
+
+  ;; return the list item following ELT (wrapping at list end)
+  (define (after elt lst) (car (or (cdr (memq elt lst)) lst)))
+
+  ;; return the list item preceding ELT (wrapping at list start)
+  (define (before elt lst)
+    (if (eq (car lst) elt)
+	(last lst)
+      (let loop ((rest lst))
+	(cond ((null (cdr rest)) (car lst))
+	      ((eq (cadr rest) elt) (car rest))
+	      (t (loop (cdr rest)))))))
 
   (define (next)
     (let ((win (window-order (if cycle-all-workspaces
@@ -177,9 +203,11 @@
       (when (fluid x-cycle-stacking)
 	(restack-windows (fluid x-cycle-stacking))
 	(fluid-set x-cycle-stacking nil))
-      (when (fluid x-cycle-current)
-	(setq win (or (cdr (memq (fluid x-cycle-current) win)) win)))
-      (setq win (car win))
+      (if (fluid x-cycle-current)
+	  (setq win (if (fluid x-cycle-backwards)
+			(before (fluid x-cycle-current) win)
+		      (after (fluid x-cycle-current) win)))
+	(setq win (car win)))
       (fluid-set x-cycle-current win)
       (when (not (window-get win 'sticky))
 	(select-workspace (nearest-workspace-with-window
@@ -202,12 +230,16 @@
 
   (define (x-cycle-exit) (throw 'x-cycle-exit t))
 
+  (define (x-cycle-reverse)
+    (fluid-set x-cycle-backwards (not (fluid x-cycle-backwards))))
+
   (define (cycle-windows event #!optional windows)
     "Cycle through all windows in order of recent selections."
     (let ((tail-command nil))
       (let-fluids ((x-cycle-current nil)
 		   (x-cycle-stacking nil)
-		   (x-cycle-windows (or windows t)))
+		   (x-cycle-windows (or windows t))
+		   (x-cycle-backwards nil))
 	(let* ((decoded (decode-event event))
 	       (modifier-keys (apply append (mapcar modifier->keysyms
 						    (nth 1 decoded))))
@@ -253,6 +285,11 @@
 
 	  ;; Use the event that invoked us to contruct the keymap
 	  (bind-keys override-keymap event next)
+
+	  ;; add the reverse key
+	  (when cycle-reverse-event
+	    (bind-keys override-keymap cycle-reverse-event x-cycle-reverse))
+
 	  (mapc (lambda (k)
 		  (bind-keys override-keymap
 		    (encode-event `(key (release any) ,k)) x-cycle-exit))
