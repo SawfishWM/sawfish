@@ -71,11 +71,13 @@
        (port (screen-viewport))
        (port-size (cons viewport-columns viewport-rows)))
     (mapc (lambda (w)
-	    (if (window-get w 'workspace)
-		(set-x-property w '_WIN_WORKSPACE
-				(vector (- (window-get w 'workspace)
-					   (car limits))) 'CARDINAL 32)
-	      (delete-x-property w '_WIN_WORKSPACE)))
+	    (let
+		;; XXX the gnome-wm standard sucks :-)
+		((space (nearest-workspace-with-window w current-workspace)))
+	      (if space
+		  (set-x-property w '_WIN_WORKSPACE
+				  (vector (- space (car limits))) 'CARDINAL 32)
+		(delete-x-property w '_WIN_WORKSPACE))))
 	  (managed-windows))
     (unless (equal gnome-current-workspace (- current-workspace (car limits)))
       (setq gnome-current-workspace (- current-workspace (car limits)))
@@ -158,8 +160,8 @@
     (when layer
       (setq layer (aref (nth 2 layer) 0))
       (set-window-depth w (- layer WIN_LAYER_NORMAL)))
-    (when space
-      (window-put w 'workspace (aref (nth 2 space) 0)))))
+    (when (and space (not (window-workspaces w)))
+      (window-add-to-workspace w (aref (nth 2 space) 0)))))
 
 (defun gnome-client-message-handler (w type data)
   (cond ((eq type '_WIN_WORKSPACE)

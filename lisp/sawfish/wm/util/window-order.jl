@@ -34,7 +34,7 @@
 				   (and (not allow-iconified)
 					(window-get w 'iconified))
 				   (and workspace
-					(not (window-in-workspace-p
+					(not (window-appears-in-workspace-p
 					      w workspace)))))
 			     windows))
     (unless all-viewports

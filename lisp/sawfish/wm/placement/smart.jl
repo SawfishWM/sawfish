@@ -20,6 +20,7 @@
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (require 'rects)
+(provide 'smart-placement)
 
 ;; Commentary:
 
@@ -91,8 +92,7 @@ A value between 0 and 1023 inclusive.")
 (defun sp-get-windows (w)
   (delete-if (lambda (x)
 	       (or (eq x w)
-		   (and (window-get x 'ignored)
-			(not (window-avoided-p x)))
+		   (and (window-get x 'ignored) (not (window-avoided-p x)))
 		   (window-get x 'iconified)
 		   (not (windows-share-workspace-p x w))))
 	     (managed-windows)))

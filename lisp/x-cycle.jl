@@ -187,7 +187,7 @@
       (throw 'x-cycle-exit t))
     (if x-cycle-current
 	(when (or (window-get x-cycle-current 'iconified)
-		  (not (window-in-workspace-p
+		  (not (window-appears-in-workspace-p
 			x-cycle-current current-workspace)))
 	  (hide-window x-cycle-current))
       ;; first call, push the currently focused window onto
@@ -203,8 +203,8 @@
       (setq win (or (cdr (memq x-cycle-current win)) win)))
     (setq win (car win))
     (setq x-cycle-current win)
-    (when (window-get win 'workspace)
-      (select-workspace (window-get win 'workspace)))
+    (when (not (window-get win 'sticky))
+      (select-workspace (nearest-workspace-with-window win current-workspace)))
     (move-viewport-to-window win)
     (when (window-get win 'iconified)
       (show-window win))

@@ -232,7 +232,10 @@
 			      ((or (get (car cell) 'match-window-setter)
 				   window-put)
 			       w (car cell) (cdr cell)))
-			    actions))))
+			    actions)
+		      ;; hack alert!
+		      (when (assq 'position actions)
+			(window-put w 'placed t)))))
 
     (mapc (lambda (cell)
 	    (when (catch 'out
@@ -273,9 +276,10 @@
 
   (put 'workspace 'match-window-setter
        (lambda (w prop value)
-	 ;; translate from 1.. to 0..
-	 (window-put w prop (1- value))
-	 (select-workspace-from-first (1- value))))
+	 (unless (or (window-get w 'placed) (window-workspaces w))
+	   ;; translate from 1.. to 0..
+	   (window-add-to-workspace w (1- value))
+	   (select-workspace-from-first (1- value)))))
 
   (put 'position 'match-window-setter
        (lambda (w prop value)
@@ -288,8 +292,7 @@
 	   (when (< y 0)
 	     ;; XXX should change placement gravity
 	     (setq y (+ (screen-height) y)))
-	   (move-window-to w x y)
-	   (window-put w 'placed t))))
+	   (move-window-to w x y))))
 
   (put 'size 'match-window-setter
        (lambda (w prop value)
@@ -297,8 +300,9 @@
 
   (put 'viewport 'match-window-setter
        (lambda (w prop value)
-	 (set-screen-viewport (1- (car value)) (1- (cdr value)))
-	 (set-window-viewport w (1- (car value)) (1- (cdr value)))))
+	 (unless (window-get w 'placed)
+	   (set-screen-viewport (1- (car value)) (1- (cdr value)))
+	   (set-window-viewport w (1- (car value)) (1- (cdr value))))))
 
   (put 'frame-type 'match-window-setter
        (lambda (w prop value)
