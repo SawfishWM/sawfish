@@ -63,7 +63,12 @@ unused before killing it."
     ("Destroy" destroy-window)
     ("Send left" send-to-previous-workspace)
     ("Send right" send-to-next-workspace)
-    ("Sticky" toggle-window-sticky)))
+    ("Sticky" toggle-window-sticky)
+    ("Maximize"
+     ("Vertically" maximize-window-vertically)
+     ("Horizontally" maximize-window-horizontally)
+     ("Both" maximize-window))
+    ("Un-maximize" unmaximize-window)))
 
 (defvar root-menu
   '(("Workspaces" . workspace-menu)
