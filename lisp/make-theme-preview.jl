@@ -43,10 +43,12 @@
 	    (when (eq w make-theme-preview-window)
 	      (setq make-theme-preview-window nil))))
 
-(defun make-theme-preview (patterns frames mappings)
+(defun make-theme-preview (patterns frames mappings &optional type)
   (let
       ((theme (make-theme patterns frames mappings)))
     (setq make-theme-preview-theme theme)
+    (when type
+      (setq make-theme-preview-type type))
     (when make-theme-preview-window
       (set-window-frame make-theme-preview-window
 			(theme make-theme-preview-window
