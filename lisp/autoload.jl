@@ -77,4 +77,12 @@
 (autoload 'raise-group-depth "groups" t)
 (autoload 'lower-group-depth "groups" t)
 (autoload 'set-group-frame-style "groups")
+(autoload 'slide-window-left "slide-window" t)
+(autoload 'slide-window-right "slide-window" t)
+(autoload 'slide-window-up "slide-window" t)
+(autoload 'slide-window-down "slide-window" t)
+(autoload 'slide-group-left "slide-window" t)
+(autoload 'slide-group-right "slide-window" t)
+(autoload 'slide-group-up "slide-window" t)
+(autoload 'slide-group-down "slide-window" t)
 ;;; ::autoload-end::
