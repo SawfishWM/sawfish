@@ -269,11 +269,23 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
 	  (rplaca coords (- (car coords)
 			    (* sign (+ (car br-off)
 				       (* -2 (window-border-width w)))))))
+	(when (memq grav '(north center south))
+	  ;; relative to the horizontal center of the frame
+	  (rplaca coords (- (car coords)
+			    (* sign (quotient (+ (car br-off)
+				                 (* -2 (window-border-width w)))
+                                              2)))))
 	(when (memq grav '(south south-east south-west))
 	  ;; relative to the bottom of the frame
 	  (rplacd coords (- (cdr coords)
 			    (* sign (+ (cdr br-off)
-				       (* -2 (window-border-width w))))))))
+				       (* -2 (window-border-width w)))))))
+	(when (memq grav '(east center west))
+	  ;; relative to the vertical center of the frame
+	  (rplacd coords (- (cdr coords)
+			    (* sign (quotient (+ (cdr br-off)
+				                 (* -2 (window-border-width w)))
+                            	              2))))))
       coords))
 
 
