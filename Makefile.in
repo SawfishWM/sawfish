@@ -39,16 +39,31 @@ install : all installdirs
 	set -e; for dir in $(SUBDIRS); do \
 	  ( cd $$dir && $(MAKE) $@ ); \
 	done
+	$(INSTALL_PROG) sawmill-ui $(bindir)
 	$(INSTALL_DATA) ./DOC.* $(sawmilldir)/$(version)
+	for d in images/*; do \
+	  mkdir $(sawmilldir)/images/$d \
+	  for f in $$d/*; do \
+	    $(INSTALL_DATA) $$f $(sawmilldir)/$$f; \
+	  done \
+	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(sawmilldir)/$(version) $(bindir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(sawmilldir)/$(version) \
+	  $(bindir) $(sawmilldir)/images
 
 uninstall :
 	set -e; for dir in $(SUBDIRS); do \
 	  ( cd $$dir && $(MAKE) $@ ); \
 	done
+	rm -f $(bindir)/sawmill-ui
 	rm -rf $(sawmilldir)/$(version)
+	for d in images/*; do \
+	  for f in $$d/*; do \
+	    rm -f $(sawmilldir)/$$f; \
+	  done \
+	  rmdir $(sawmilldir)/images/$$d \
+	done
 
 DOC.dir :
 	repdoc DOC `find . -name '*.c' -print`
