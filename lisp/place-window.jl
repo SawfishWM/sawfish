@@ -23,12 +23,12 @@
 
 (defcustom place-window-mode 'random
   "Method of selecting the position of a freshly-mapped window."
-  :type (set random interactive first-fit none)
+  :type (set random interactive first-fit best-fit none)
   :group placement)
 
 (defcustom place-transient-mode 'random
   "Method of selecting the position of a freshly-mapped transient window."
-  :type (set random interactive first-fit none)
+  :type (set random interactive first-fit best-fit none)
   :group placement)
 
 (defcustom ignore-program-positions nil
@@ -70,7 +70,9 @@
 	      ((eq mode 'random)
 	       (place-window-randomly w))
 	      ((eq mode 'first-fit)
-	       (place-window-first-fit w)))
+	       (place-window-first-fit w))
+	      ((eq mode 'best-fit)
+	       (place-window-best-fit w)))
 	t))))
 
 (add-hook 'place-window-hook 'place-window t)
