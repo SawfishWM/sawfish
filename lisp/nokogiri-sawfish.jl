@@ -68,7 +68,11 @@
       ((number)
        (when (get symbol 'custom-range)
 	 (let ((range (get symbol 'custom-range)))
-	   (setq type `(number ,(car range) ,(cdr range)))))))
+	   (setq type `(number ,(car range) ,(cdr range))))))
+      ((file-name)
+       (setq type 'file))
+      ((program-name)
+       (setq type 'program)))
 
     (nconc (list ':name symbol
 		 ':spec type
