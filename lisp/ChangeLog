@@ -1,5 +1,11 @@
 1999-09-28  John Harper  <john@dcs.warwick.ac.uk>
 
+	* customize.jl (customize-group-opt, customize-args): new
+	variables, control how the cutomize-program is called
+
+	* x-cycle.jl (cycle-windows): stop the cycling when the
+	invoking modifier is released with _any_ other modifiers held
+
 	* x-cycle.jl, workspace.jl, transient.jl, focus.jl: only give
 	windows the focus if they've said they want it (through the
 	input field of their WM_HINTS property)

@@ -36,24 +36,12 @@ Outstanding bugs
 
     [workaround: install GNU fileutils]
 
-  ! the configuration tool doesn't use gtk engine themes correctly (cf.
-    the scrollbars)
-
-    [ 22/9: this happens because the engine doesn't have a library
-      dependency on libglib.so. I could add RTLD_GLOBAL to
-      rep_open_dl_library () but this isn't a good idea since it would
-      expose the internals of all plugins to everything else..
-
-      -- gtk-engines on cvs.gnome.org has this fixed ]
-
   ! ICCCM says we should not passive grab on the client windows, but on
     our frames instead
 
 
 General tasks
 =============
-
-  + create a "never automatically create new workspaces" option?
 
   + add capplet desktop entries to share/gnome/apps/Settings as well as
     the control center tree
@@ -106,16 +94,28 @@ General tasks
 
   + option for maximizing not to cover panels
 
-  + viewport-based workspaces
+  + greater than 1d workspaces
 
-    possibly just do workspaces as an N-d structure, then expand to a
-    regular cube for the pager..?
+    I'm not going to do this as in other window managers (i.e. faking
+    the position of the window, then translating from the viewport
+    origin) 
 
-    --I've tried this (and have the diffs to prove it), but even though
-    it works ok (encoding N-d indices in the workspace number), the
-    user interface is horrible
+    the reason: there's too much replication between the two methods,
+    with too much intrusion, and too little reward (the only thing
+    gained is the ability to make a window span more than one viewport)
 
-    this is why I like the expanding 1d structure--its so simple
+    structures with >1 dimension can be made using the 1d workspace
+    continuum, e.g. for a grid with X columns, moving up/down
+    subtracts/adds X to the current workspace id
+
+    the problem is getting the pager to display this under GNOME, the
+    wm spec allows for ``areas'' but then implicitly assumes the usual
+    geometry-based model (i.e. using the window geometry to infer which
+    area it's in)
+
+    this could be fixed by making the pager look for an optional
+    _WIN_AREA property on each client, analogous to the _WIN_WORKSPACE
+    property
 
   + Allow text-entry commands in bindings dialog?
 

@@ -1,5 +1,8 @@
 1999-09-28  John Harper  <john@dcs.warwick.ac.uk>
 
+	* keys.c (search_keymap): allow things like `Any-C-x' to work;
+	this looks for a `C-x' event plus any other modifiers
+
 	* session.c: if HAVE_X11_SM_SMLIB_H isn't defined, don't do any
 	session management
 
