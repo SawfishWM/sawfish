@@ -1,3 +1,9 @@
+2000-05-27  John Harper  <john@dcs.warwick.ac.uk>
+
+	* themer.in: use glade-xml-signal-connect to manually connect
+	signals to handlers where the handlers are defined in the local
+	environment (which no longer works from compiled code)
+
 2000-04-25  John Harper  <john@dcs.warwick.ac.uk>
 
 	* themer.in, themer.glade, Makefile.in: s/sawmill/sawfish/
