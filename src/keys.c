@@ -286,7 +286,11 @@ search_keymap(repv km, u_long code, u_long mods, bool (*callback)(repv key))
 	{
 	    repv ev = KEY_EVENT(rep_CAR(km));
 	    if(((rep_INT(EVENT_MODS(ev)) == mods)
-		|| ((rep_INT(EVENT_MODS(ev)) & EV_MOD_MASK) == EV_MOD_ANY))
+		|| (((rep_INT(EVENT_MODS(ev)) & EV_MOD_MASK) & EV_MOD_ANY)
+		    /* this allows things like Any-C-x, mapping to C-x
+		       _plus_ any other modifiers */
+		    && (((rep_INT(EVENT_MODS(ev)) & ~EV_MOD_MASK) & mods)
+			== (rep_INT(EVENT_MODS(ev)) & ~EV_MOD_MASK))))
 	       && rep_INT(EVENT_CODE(ev)) == code)
 	    {
 		repv key = rep_CAR(km);
