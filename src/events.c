@@ -151,9 +151,8 @@ key_press (XEvent *ev)
 {
     record_mouse_position (ev->xkey.x_root, ev->xkey.y_root);
 
-    if (ev->type == KeyPress)
-	/* Don't look for a context map, frame parts are never focused */
-	eval_input_event (Qnil);
+    /* Don't look for a context map, frame parts are never focused */
+    eval_input_event (Qnil);
 
     XAllowEvents (dpy, AsyncKeyboard, last_event_time);
 }
