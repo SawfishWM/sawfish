@@ -75,8 +75,7 @@ unused before killing it.")
   (define menu-timer nil)
 
   (defvar window-ops-menu
-    `((,(_ "_Iconify") iconify-window)
-      (,(_ "_Delete") delete-window)
+    `((,(_ "_Delete") delete-window)
       (,(_ "Destroy") destroy-window)
       (,(_ "_Toggle") . window-ops-toggle-menu)
       (,(_ "_Maximize")
