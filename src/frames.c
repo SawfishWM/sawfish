@@ -911,10 +911,9 @@ list_frame_generator (Lisp_Window *w)
 	tem = fp_assq (Qcursor, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	{
-	    if (rep_SYMBOLP(rep_CDR(tem)))
-		tem = Fget_cursor (rep_CDR(tem));
-	    else
-		tem = rep_CDR(tem);
+	    tem = rep_CDR(tem);
+	    if (!CURSORP(tem) && tem != Qnil)
+		tem = Fget_cursor (tem);
 	    if (tem && CURSORP(tem))
 		fp->cursor = tem;
 	}
