@@ -1,3 +1,18 @@
+1999-12-17  John Harper  <john@dcs.warwick.ac.uk>
+
+	* viewport-linear.jl: new file, based on code posted by Eric
+	Kidd <eric.kidd@pobox.com> to the mailing list
+
+	* sawmill.jl: require iconify, set define-value if unbound
+
+	* menus.jl (menu-preprocessor): removed the deprecated
+	variable-expansion thing
+
+	* iconify.jl: new file, extracted from workspace.jl
+
+	* frames.jl, custom.jl, workspace.jl: use closures to create
+	dynamic commands
+
 1999-12-16  John Harper  <john@dcs.warwick.ac.uk>
 
 	* move-resize.jl (move-resize-pos): move the position
