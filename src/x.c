@@ -425,7 +425,7 @@ window is created unmapped.
     attributes.colormap = image_cmap;
     if (!(attributesMask & CWBorderPixel))
     {
-	attributes.border_pixel = BlackPixel (dpy, BlackPixel (dpy, screen_num);)
+	attributes.border_pixel = BlackPixel (dpy, BlackPixel (dpy, screen_num));
 	attributesMask |= CWBorderPixel;
     }
 
