@@ -22,6 +22,11 @@
 #include "sawmill.h"
 #include <X11/extensions/shape.h>
 
+/* Work around for X11R5 and earlier */
+#ifndef XUrgencyHint
+#define XUrgencyHint (1 << 8)
+#endif
+
 Lisp_Window *window_list;
 int window_type;
 

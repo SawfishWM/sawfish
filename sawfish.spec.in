@@ -37,6 +37,12 @@ be created and edited in a graphical environment.
 %setup -q
 
 %build
+
+LC_ALL=""
+LINGUAS=""
+LANG=""
+export LC_ALL LINGUAS LANG
+
 %configure
 make host_type=%{_target_platform}
 
