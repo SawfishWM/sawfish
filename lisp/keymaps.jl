@@ -40,31 +40,29 @@
 
 ;; can't just call out to custom-set-variable since we side-effect VALUE
 (defun custom-set-keymap (symbol value &optional req)
-  (when req
-    (require req))
-  (when (get symbol 'custom-before-set)
-    (funcall (get symbol 'custom-before-set) symbol))
-  (when (eq (car value) 'keymap)
-    (let
-	((old-value (and (boundp symbol) (symbol-value symbol)))
-	 (new-tail (delq nil (mapcar (lambda (cell)
-				       (let
-					   ((ev (condition-case nil
-						    (lookup-event (cdr cell))
-						  (error nil))))
-					 (and ev (cons (car cell) ev))))
-				     (cdr value)))))
-      ;; add in any non-command bindings
-      (setq new-tail (nconc new-tail (filter (lambda (cell)
-					       (not (customizable-command-p
-						     (car cell))))
-					     (cdr old-value))))
-      (if (and old-value (eq (car old-value) 'keymap))
-	  ;; hijack the old keymap to preserve eq-ness
-	  (rplacd old-value new-tail)
-	(set symbol (cons 'keymap new-tail)))))
-  (when (get symbol 'custom-after-set)
-    (funcall (get symbol 'custom-after-set) symbol)))
+  (custom-set
+   (lambda ()
+     (when (eq (car value) 'keymap)
+       (let
+	   ((old-value (and (boundp symbol) (symbol-value symbol)))
+	    (new-tail (delq nil (mapcar (lambda (cell)
+					  (let
+					      ((ev (condition-case nil
+						       (lookup-event
+							(cdr cell))
+						     (error nil))))
+					    (and ev (cons (car cell) ev))))
+					(cdr value)))))
+	 ;; add in any non-command bindings
+	 (setq new-tail (nconc new-tail (filter (lambda (cell)
+						  (not (customizable-command-p
+							(car cell))))
+						(cdr old-value))))
+	 (if (and old-value (eq (car old-value) 'keymap))
+	     ;; hijack the old keymap to preserve eq-ness
+	     (rplacd old-value new-tail)
+	   (set symbol (cons 'keymap new-tail))))))
+   symbol req))
 
 (put 'keymap 'custom-set custom-set-keymap)
 (put 'keymap 'custom-get custom-get-keymap)
