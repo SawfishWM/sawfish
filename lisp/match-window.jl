@@ -77,6 +77,11 @@
     (depth number)
     (placement-weight number)))
 
+;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
+;; libraries implementing them
+(defvar match-window-features
+  '((raise-on-focus . auto-raise)))
+
 (defvar match-window-types
   '((normal . default)
     (title-only . shaped)
@@ -231,6 +236,12 @@
        ;; Execute the list of actions for window W
        (run-actions (lambda (actions)
 		      (mapc (lambda (cell)
+			      (let
+				  ((feature
+				    (cdr (assq (car cell)
+					       match-window-features))))
+				(when feature
+				  (require feature)))
 			      ((or (get (car cell) 'match-window-setter)
 				   window-put)
 			       w (car cell) (cdr cell)))
