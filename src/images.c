@@ -223,36 +223,6 @@ make-image-from-x-drawable ID [MASK-ID]
    return im ? make_image (im, Qnil) : Qnil;
 }
 
-DEFUN("window-icon-image", Fwindow_icon_image,
-      Swindow_icon_image, (repv win), rep_Subr1) /*
-::doc:window-icon-image::
-window-icon-image WINDOW
-
-Returns an image object representing the icon currently associated with
-WINDOW. Returns the symbol `nil' if no such image.
-::end:: */
-{
-   repv id, mask_id;
-
-   rep_DECLARE1 (win, WINDOWP);
-
-   if (VWIN(win)->wmhints->flags & IconPixmapHint)
-       id = rep_MAKE_INT (VWIN(win)->wmhints->icon_pixmap);
-   else if (VWIN(win)->wmhints->flags & IconWindowHint)
-       /* XXX this won't work unless the icon window is mapped,
-	  XXX which it won't be. But it does no harm.. */
-       id = rep_MAKE_INT (VWIN(win)->wmhints->icon_window);
-   else
-       return Qnil;
-
-   if (VWIN(win)->wmhints->flags & IconMaskHint)
-       mask_id = rep_MAKE_INT (VWIN(win)->wmhints->icon_mask);
-   else
-       mask_id = Qnil;
-
-   return Fmake_image_from_x_drawable (id, mask_id);
-}
-
 DEFUN("copy-image", Fcopy_image, Scopy_image, (repv source), rep_Subr1) /*
 ::doc:copy-image::
 copy-image SOURCE-IMAGE
@@ -977,7 +947,6 @@ images_init (void)
     }
     rep_ADD_SUBR(Smake_image);
     rep_ADD_SUBR(Smake_image_from_x_drawable);
-    rep_ADD_SUBR(Swindow_icon_image);
     rep_ADD_SUBR(Scopy_image);
     rep_ADD_SUBR(Sflip_image_horizontally);
     rep_ADD_SUBR(Sflip_image_vertically);
