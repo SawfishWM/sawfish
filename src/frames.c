@@ -22,6 +22,7 @@
 #include "sawmill.h"
 #include <X11/Xutil.h>
 #include <X11/Xresource.h>
+#include <X11/extensions/shape.h>
 #include <alloca.h>
 
 static Lisp_Frame *frame_list;
