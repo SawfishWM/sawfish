@@ -1,3 +1,21 @@
+2002-11-03  John Harper  <jsh@unfactored.org>
+
+	Merged these changes from HEAD:
+
+	* sawfish/wm/custom.jl: font [de]serializers now export (TYPE .
+	NAME), they accept both this and the old untyped form
+
+	* sawfish/wm/util/font.jl: new file, some functions for
+	representing font (face) names, and converting between Xft and
+	Pango representations of these names. Somewhat incomplete
+	(doesn't know how to map Pango widths to Xft yet)
+
+	2002-11-02  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/menus.jl: added some more accelerators
+	* sawfish/wm/workspace.jl (static-workspace-menus): added a few
+	accelerators (for #76286)
+
 2002-11-02  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/keymaps.jl (wm-modifier-value): shorter doc string

@@ -460,13 +460,17 @@ of choices."
 
   (define-custom-serializer 'font (lambda (value)
 				    (if (fontp value)
-					(font-name value)
+					(cons (font-type value)
+					      (font-name value))
 				      value)))
 
   (define-custom-deserializer 'font (lambda (value)
-				      (if (stringp value)
-					  (get-font value)
-					value)))
+				      (cond ((stringp value)
+					     (get-font value))
+					    ((consp value)
+					     (get-font-typed
+					      (car value) (cdr value)))
+					    (t value))))
 
   (define-custom-serializer 'color (lambda (value)
 				     (if (colorp value)

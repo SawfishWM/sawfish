@@ -126,8 +126,8 @@ before killing it.")
        (,(_ "_Manual...") help:show-programmer-manual)
        (,(_ "_About Sawfish...") help:about))
       ()
-      (,(_ "Restart") restart)
-      (,(_ "Quit") quit)))
+      (,(_ "_Restart") restart)
+      (,(_ "_Quit") quit)))
 
   (defvar apps-menu
     `(("xterm" (system "xterm &"))
@@ -349,7 +349,7 @@ before killing it.")
 
   (define (custom-menu)
     `(,@(and custom-menu-includes-all-settings
-	     (list (list (_ "All settings") 'customize) nil))
+	     (list (list (_ "_All settings") 'customize) nil))
       ,@(mapcar (lambda (sub)
 		  (list (_ (cadr sub))
 			(intern (concat "customize:"
