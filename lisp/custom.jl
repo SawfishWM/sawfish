@@ -19,6 +19,7 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'define)
 (provide 'custom)
 
 ;; list associating groups with the list of variables in that group
