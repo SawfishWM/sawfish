@@ -137,7 +137,9 @@
 		  (string= (aref class 0) "panel"))
 	     ;; XXX I don't think the GNOME hints specify these things
 	     (window-put w 'focus-click-through t)
-	     (window-put w 'avoid t))
+	     (window-put w 'avoid t)
+	     ;; XXX I think this is assumed..
+	     (window-put w 'gravity 'static))
 	    ((string= (aref class 1) "gmc-desktop-icon")
 	     (window-put w 'never-focus t)))))
   (let
