@@ -53,7 +53,7 @@
     (right-edge . 0)
     (top-edge . -21)
     (height . 21)
-    ,@(fp-class 'title))
+    (class . title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)
@@ -78,7 +78,7 @@
     (right-edge . 0)
     (bottom-edge . -4)
     (height . 4)
-    ,@(fp-class 'bottom-border))
+    (class . bottom-border))
    ;; bottom frame
    ((background . "black")
     (left-edge . 0)
@@ -89,12 +89,14 @@
    ((background . ,simple-minimize)
     (left-edge . 4)
     (top-edge . -18)
-    ,@(fp-class 'iconify))
+    (class . iconify)
+    (removable . t))
    ;; close button
    ((background . ,simple-close)
     (right-edge . 4)
     (top-edge . -18)
-    ,@(fp-class 'close))))
+    (class . close)
+    (removable . t))))
 (put 'simple-frame 'unshaped t)
 
 (defvar simple-shaped-frame
@@ -108,7 +110,7 @@
     (right-edge . 0)
     (top-edge . -22)
     (height . 21)
-    ,@(fp-class 'title))
+    (class . title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)
@@ -137,12 +139,14 @@
    ((background . ,simple-minimize)
     (left-edge . 5)
     (top-edge . -19)
-    ,@(fp-class 'iconify))
+    (class . iconify)
+    (removable . t))
    ;; close button
    ((background . ,simple-close)
     (right-edge . 5)
     (top-edge . -19)
-    ,@(fp-class 'close))))
+    (class . close)
+    (removable . t))))
 (put 'simple-shaped-frame 'unshaped t)
 
 (defvar simple-transient-frame
@@ -152,7 +156,7 @@
     (right-edge . 0)
     (top-edge . -4)
     (height . 4)
-    ,@(fp-class 'title))
+    (class . title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)
@@ -177,7 +181,7 @@
     (right-edge . 0)
     (bottom-edge . -4)
     (height . 4)
-    ,@(fp-class 'bottom-border))
+    (class . bottom-border))
    ;; bottom frame
    ((background . "black")
     (left-edge . 0)
@@ -193,7 +197,7 @@
     (right-edge . 0)
     (top-edge . -5)
     (height . 4)
-    ,@(fp-class 'title))
+    (class . title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)

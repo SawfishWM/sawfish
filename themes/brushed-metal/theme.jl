@@ -88,7 +88,7 @@
    ((background . ,brushed-metal-menu-images)
     (top-edge . -15)
     (left-edge . 0)
-    ,@(fp-class 'menu))
+    (class . menu))
 
    ;; title bar
    ((background . ,brushed-metal-title-images)
@@ -99,73 +99,77 @@
     (left-edge . 21)
     (right-edge . 45)
     (top-edge . -15)
-    ,@(fp-class 'title))
+    (class . title))
 
    ;; iconify button
    ((background . ,brushed-metal-iconify-images)
     (right-edge . 28)
     (top-edge . -15)
-    ,@(fp-class 'iconify))
+    (class . iconify))
 
    ;; maximize button
    ((background . ,brushed-metal-maximize-images)
     (right-edge . 14)
     (top-edge . -15)
-    ,@(fp-class 'maximize))
+    (class . maximize))
 
    ;; delete button
    ((background . ,brushed-metal-close-images)
     (right-edge . 0)
     (top-edge . -15)
-    ,@(fp-class 'close))
+    (class . close))
 
    ;; left border
    ((background . ,brushed-metal-left-images)
     (left-edge . -4)
     (top-edge . -15)
     (bottom-edge . 0)
-    ,@(fp-class 'left-border))
+    (class . left-border))
 
    ;; right border
    ((background . ,brushed-metal-right-images)
     (right-edge . -4)
     (top-edge . -15)
     (bottom-edge . 0)
-    ,@(fp-class 'right-border))
+    (class . right-border))
 
    ;; top border
    ((background . ,brushed-metal-top-images)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -19)
-    ,@(fp-class 'top-border))
+    (class . top-border))
 
    ;; bottom border
    ((background . ,brushed-metal-bottom-images)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
-    ,@(fp-class 'bottom-border))
+    (class . bottom-border))
 
    ;; top-left corner
    ((background . ,brushed-metal-top-left-images)
     (left-edge . -4)
-    (top-edge . -19))
+    (top-edge . -19)
+    (class . top-left-corner))
 
    ;; top-right corner
    ((background . ,brushed-metal-top-right-images)
     (right-edge . -4)
-    (top-edge . -19))
+    (top-edge . -19)
+    (class . top-right-corner))
 
    ;; bottom-left corner
    ((background . ,brushed-metal-bottom-left-images)
     (left-edge . -4)
-    (bottom-edge . -4))
+    (bottom-edge . -4)
+    (class . bottom-left-corner))
 
    ;; bottom-right corner
    ((background . ,brushed-metal-bottom-right-images)
     (right-edge . -4)
-    (bottom-edge . -4))))
+    (bottom-edge . -4)
+    (class . bottom-right-corner))))
 
 (put 'brushed-metal-shaped-frame 'unshaped t)
 (defvar brushed-metal-shaped-frame
@@ -173,7 +177,7 @@
    ((background . ,brushed-metal-menu-images)
     (top-edge . -19)
     (left-edge . 0)
-    ,@(fp-class 'menu))
+    (class . menu))
 
    ;; title bar
    ((background . ,brushed-metal-title-images)
@@ -184,73 +188,77 @@
     (left-edge . 21)
     (right-edge . 45)
     (top-edge . -19)
-    ,@(fp-class 'title))
+    (class . title))
 
    ;; iconify button
    ((background . ,brushed-metal-iconify-images)
     (right-edge . 28)
     (top-edge . -19)
-    ,@(fp-class 'iconify))
+    (class . iconify))
 
    ;; maximize button
    ((background . ,brushed-metal-maximize-images)
     (right-edge . 14)
     (top-edge . -19)
-    ,@(fp-class 'maximize))
+    (class . maximize))
 
    ;; delete button
    ((background . ,brushed-metal-close-images)
     (right-edge . 0)
     (top-edge . -19)
-    ,@(fp-class 'close))
+    (class . close))
 
    ;; top border
    ((background . ,brushed-metal-top-images)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -23)
-    ,@(fp-class 'top-border))
+    (class . top-border))
 
    ;; bottom border
    ((background . ,brushed-metal-bottom-images)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -4)
-    ,@(fp-class 'bottom-border))
+    (class . bottom-border))
 
    ;; left border
    ((background . ,brushed-metal-left-images)
     (left-edge . -4)
     (top-edge . -19)
     (height . 15)
-    ,@(fp-class 'left-border))
+    (class . left-border))
 
    ;; right border
    ((background . ,brushed-metal-right-images)
     (right-edge . -4)
     (top-edge . -19)
     (height . 15)
-    ,@(fp-class 'right-border))
+    (class . right-border))
 
    ;; top-left corner
    ((background . ,brushed-metal-top-left-images)
     (left-edge . -4)
-    (top-edge . -23))
+    (top-edge . -23)
+    (class . top-left-corner))
 
    ;; top-right corner
    ((background . ,brushed-metal-top-right-images)
     (right-edge . -4)
-    (top-edge . -23))
+    (top-edge . -23)
+    (class . top-right-corner))
 
    ;; bottom-left corner
    ((background . ,brushed-metal-bottom-left-images)
     (left-edge . -4)
-    (top-edge . -4))
+    (top-edge . -4)
+    (class . bottom-left-corner))
 
    ;; bottom-right corner
    ((background . ,brushed-metal-bottom-right-images)
     (right-edge . -4)
-    (top-edge . -4))))
+    (top-edge . -4)
+    (class . bottom-right-corner))))
 
 (put 'brushed-metal-transient-frame 'unshaped t)
 (defvar brushed-metal-transient-frame
@@ -259,48 +267,52 @@
      (left-edge . 0)
      (right-edge . 0)
      (top-edge . -4)
-     ,@(fp-class 'title))
+     (class . title))
 
     ;; bottom
     ((background . ,brushed-metal-bottom-images)
      (left-edge . 0)
      (right-edge . 0)
      (bottom-edge . -4)
-     ,@(fp-class 'bottom-border))
+     (class . bottom-border))
 
    ;; left border
    ((background . ,brushed-metal-left-images)
     (left-edge . -4)
     (top-edge . -4)
     (bottom-edge . 0)
-    ,@(fp-class 'left-border))
+    (class . left-border))
 
    ;; right border
    ((background . ,brushed-metal-right-images)
     (right-edge . -4)
     (top-edge . -4)
     (bottom-edge . 0)
-    ,@(fp-class 'right-border))
+    (class . right-border))
 
    ;; top-left corner
    ((background . ,brushed-metal-top-left-images)
     (left-edge . -4)
-    (top-edge . -4))
+    (top-edge . -4)
+    (class . top-left-corner))
 
    ;; top-right corner
    ((background . ,brushed-metal-top-right-images)
     (right-edge . -4)
-    (top-edge . -4))
+    (top-edge . -4)
+    (class . top-right-corner))
 
    ;; bottom-left corner
    ((background . ,brushed-metal-bottom-left-images)
     (left-edge . -4)
-    (bottom-edge . -4))
+    (bottom-edge . -4)
+    (class . bottom-left-corner))
 
    ;; bottom-right corner
    ((background . ,brushed-metal-bottom-right-images)
     (right-edge . -4)
-    (bottom-edge . -4))))
+    (bottom-edge . -4)
+    (class . bottom-right-corner))))
 
 (defun brushed-metal-frame-style (w type)
   (cond ((eq type 'shaped)

@@ -138,7 +138,7 @@
     (right-edge . 0)
     (top-edge . -21)
     (height . 21)
-    ,@(fp-class 'title))
+    (class . title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)
@@ -163,7 +163,7 @@
     (right-edge . 0)
     (bottom-edge . -4)
     (height . 4)
-    ,@(fp-class 'bottom-border))
+    (class . bottom-border))
    ;; bottom frame
    ((background . "black")
     (left-edge . 0)
@@ -174,12 +174,14 @@
    ((background . ,gtk-minimize)
     (left-edge . 4)
     (top-edge . -18)
-    ,@(fp-class 'iconify))
+    (class . iconify)
+    (removable . t))
    ;; close button
    ((background . ,gtk-close)
     (right-edge . 4)
     (top-edge . -18)
-    ,@(fp-class 'close))))
+    (class . close)
+    (removable . t))))
 (put 'gtk-frame 'unshaped t)
 
 (defvar gtk-shaped-frame
@@ -193,7 +195,7 @@
     (right-edge . 0)
     (top-edge . -22)
     (height . 21)
-    ,@(fp-class 'title))
+    (class . title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)
@@ -222,12 +224,14 @@
    ((background . ,gtk-minimize)
     (left-edge . 5)
     (top-edge . -19)
-    ,@(fp-class 'iconify))
+    (class . iconify)
+    (removable . t))
    ;; close button
    ((background . ,gtk-close)
     (right-edge . 5)
     (top-edge . -19)
-    ,@(fp-class 'close))))
+    (class . close)
+    (removable . t))))
 (put 'gtk-shaped-frame 'unshaped t)
 
 (defvar gtk-transient-frame
@@ -237,7 +241,7 @@
     (right-edge . 0)
     (top-edge . -4)
     (height . 4)
-    ,@(fp-class 'title))
+    (class . title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)
@@ -263,7 +267,7 @@
     (right-edge . 0)
     (bottom-edge . -4)
     (height . 4)
-    ,@(fp-class 'bottom-border))
+    (class . bottom-border))
    ;; bottom frame
    ((background . "black")
     (left-edge . 0)
@@ -279,7 +283,7 @@
     (right-edge . 0)
     (top-edge . -5)
     (height . 4)
-    ,@(fp-class 'title))
+    (class . title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)
