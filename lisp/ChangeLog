@@ -1,3 +1,17 @@
+1999-11-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.jl (themes-are-gaolled): new variable, set it to nil
+	to remove the gaol around loaded themes
+
+	* sawmill-gaol.jl: new file, customize rep's gaol for sawmill
+	* sawmill.jl: require sawmill-gaol
+
+	* functions.jl (call-after-property-changed): new function, a
+	safe alternative to property-notify-hook (only accepts closures)
+
+	* gtkrc.jl: add safe functions and variables to the gaol
+	(gtkrc-call-after-changed): safe alternative to gtkrc-changed-hook
+
 1999-11-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* workspace.jl, menus.jl, group-funs.jl, gnome-menu.jl,
