@@ -384,9 +384,6 @@ unix_server_init (char *display)
 	    user_login_name (), display);
     addr.sun_family = AF_UNIX;
 
-    if(access(addr.sun_path, R_OK) != 0)
-	return 1;
-
     socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
     if(socket_fd >= 0)
     {
@@ -397,11 +394,10 @@ unix_server_init (char *display)
 	    close_fun = unix_server_close;
 	    return 0;
 	}
-	else
-	    return 1;
+	close (socket_fd);
+	return 1;
     }
-    else
-	perror ("socket");
+    perror ("socket");
     return -1;
 }
 
