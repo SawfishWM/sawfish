@@ -155,4 +155,5 @@ of a window."
 		   :commands ,(sort (apropos "" 'commandp)
 				    #'(lambda (x y)
 					(< (symbol-name x)
-					   (symbol-name y)))))))
+					   (symbol-name y))))
+		   :doc-path ,documentation-files)))

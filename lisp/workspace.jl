@@ -225,6 +225,7 @@
     (nconc (nreverse menu) (list nil) static-workspace-menus)))
 
 (defun popup-workspace-list ()
+  "Display the menu containing the list of all workspaces."
   (interactive)
   (popup-menu (workspace-menu)))
 
@@ -256,6 +257,7 @@
     (nreverse menu)))
 
 (defun popup-window-list ()
+  "Display the menu of all managed windows."
   (interactive)
   (popup-menu (window-menu)))
 
@@ -271,8 +273,8 @@
       (ws-switch-workspace space))))
 
 (defun send-to-next-workspace (window)
-  "Move WINDOW to the next workspace. If no next workspace exists, one will be
-created."
+  "Move the window to the next workspace. If no next workspace exists, one
+will be created."
   (interactive "f")
   (let
       ((space (or (ws-find-next-workspace)
@@ -289,7 +291,7 @@ created."
       (ws-switch-workspace space))))
 
 (defun send-to-previous-workspace (window)
-  "Move WINDOW to the previous workspace. If no such workspace exists, one
+  "Move the window to the previous workspace. If no such workspace exists, one
 will be created."
   (interactive "f")
   (let
@@ -299,7 +301,7 @@ will be created."
     (ws-add-window-to-space window space)))
 
 (defun next-workspace-window ()
-  "Focus on the next window of the current workspace"
+  "Focus on the next window of the current workspace."
   (interactive)
   (let
       ((windows (filter 'window-visible-p (cdr ws-current-workspace))))
@@ -342,8 +344,8 @@ workspace."
     (ws-merge-workspaces ws-current-workspace (ws-find-next-workspace t))))
 
 (defun merge-previous-workspace ()
-  "Delete the current workspace. Its member windows are relocated to the next
-workspace."
+  "Delete the current workspace. Its member windows are relocated to the
+previous workspace."
   (interactive)
   (when (> (length ws-workspaces) 1)
     (ws-merge-workspaces ws-current-workspace (ws-find-previous-workspace t))))
@@ -358,6 +360,7 @@ workspace."
 ;; If iconified, a window has its `iconified' property set to t
 
 (defun iconify-window (w)
+  "Iconify the window."
   (interactive "f")
   (unless (window-get w 'iconified)
     (window-put w 'iconified t)
@@ -367,6 +370,7 @@ workspace."
     (call-window-hook 'window-state-change-hook w)))
 
 (defun uniconify-window (w)
+  "Return the window from its iconified state."
   (interactive "f")
   (when (window-get w 'iconified)
     (window-put w 'iconified nil)
@@ -381,7 +385,7 @@ workspace."
     (call-window-hook 'window-state-change-hook w)))
 
 (defun display-window (w)
-  "Display the workspace containing window W."
+  "Display the workspace containing the window."
   (interactive "f")
   (when w
     (if (and (window-get w 'iconified) uniconify-to-current-workspace)
@@ -397,6 +401,8 @@ workspace."
 	  (warp-cursor-to-window w))))))
 
 (defun toggle-window-sticky (w)
+  "Toggle the `stickiness' of the window--whether or not it is a member of
+all workspaces."
   (interactive "f")
   (if (window-get w 'sticky)
       (progn

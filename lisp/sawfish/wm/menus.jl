@@ -174,6 +174,7 @@ unused before killing it."
 
 ;;;###autoload
 (defun popup-window-menu ()
+  "Display the menu listing all window operations."
   (interactive)
   (if window-ops-menu
       (popup-menu window-ops-menu)
@@ -181,6 +182,7 @@ unused before killing it."
 
 ;;;###autoload
 (defun popup-root-menu ()
+  "Display the main menu."
   (interactive)
   (if root-menu
       (popup-menu root-menu)
