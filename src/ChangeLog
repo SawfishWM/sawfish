@@ -1,3 +1,20 @@
+1999-09-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (Qoverride_frame_part_classes): new variable,
+	similar to Qframe_part_classes but with higher precedence than
+	the frame definition itself
+
+	* session.c, main.c, functions.c, frames.c, commands.c,
+	alloca.c: try to support C_ALLOCA and other variants
+
+	* windows.c (emit_pending_destroys): abort if a lisp interrupt
+	occurs
+
+	* frames.c (set_frame_part_bg): rearrange how shaped images are
+	handled -- it's imperative that the frame must _always_ retain
+	the union of the old and new shapes, unfortunately this means
+	that we need to make a copy of the original frame shape..
+
 1999-09-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* commands.c (Fcall_command): changed `f', `w' and `W'

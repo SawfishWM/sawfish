@@ -1187,6 +1187,29 @@ should be self-explanatory:
 @noindent
 Extra classes can be created by adding to @code{frame-part-classes}.
 
+In some cases it might be valuable to be able to override pre-defined
+frame part properties. For example, it might be your preference that
+text in window title bars is always blue.
+
+@defvar override-frame-part-classes
+Similar to @code{frame-part-classes} except that the properties take
+precedence over values defined both in that variable and in the frame
+style itself.
+@end defvar
+
+@noindent
+The following example would override the colors of all title bars:
+
+@lisp
+(setq override-frame-part-classes '((title (background
+                                            "black" "white"
+                                            "green" "blue"))))
+@end lisp
+
+@noindent
+(See the next section for details about what is actually being set
+here.)
+
 
 @node Frame Part Definition, Frame Functions, Frame Part Classes, Window Frames
 @section Frame Part Definitions

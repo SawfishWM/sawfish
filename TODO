@@ -27,6 +27,8 @@ Outstanding bugs
 
   ! Java applets start with a 0x0 client window
 
+    [ 15/9: seems to have fixed itself :-) ]
+
   ! don't allow windows to be totally moved out of the viewport (or
     give a method for bringing them back in)
 
@@ -47,12 +49,11 @@ Outstanding bugs
   ! replaying click-to-focus event only works to the client, not back
     to sawmill if we regrab the button
 
+  ! very small windows look ugly/weird
+
 
 General tasks
 =============
-
-  + like the frame-part-classes-alist, add another alist of _forcible_
-    changes, things that override definitions in the theme itself
 
   + when grabbing keymaps in windows grab in all subwindows of the
     client?
@@ -224,3 +225,9 @@ Long term ideas
 
     This way you should be able to drag from both netscape and the file
     manager to activate a theme
+
+ - Theme builder
+
+   Use the client to frame a temporary window with control over its
+   decorations (GTK interface), then output the Lisp code to build the
+   theme
