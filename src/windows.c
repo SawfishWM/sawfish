@@ -1214,9 +1214,12 @@ Map the single-parameter function FUN over all existing windows.
     rep_PUSHGC (gc_w, w);
     for (w = rep_VAL (window_list); w != rep_NULL; w = rep_VAL (VWIN(w)->next))
     {
-	ret = rep_call_lisp1 (fun, w);
-	if (ret == rep_NULL)
-	    break;
+	if (VWIN (w)->id != 0)
+	{
+	    ret = rep_call_lisp1 (fun, w);
+	    if (ret == rep_NULL)
+		break;
+	}
     }
     rep_POPGC; rep_POPGC;
     return ret;
@@ -1238,16 +1241,19 @@ Return the list of windows that match the predicate function PRED.
     rep_PUSHGC(gc_output, output);
     for (w = rep_VAL (window_list); w != rep_NULL; w = rep_VAL (VWIN(w)->next))
     {
-	repv tem = rep_call_lisp1 (pred, w);
-	if (tem == rep_NULL)
+	if (VWIN (w)->id != 0)
 	{
-	    output = rep_NULL;
-	    break;
-	}
-	if (tem != Qnil)
-	{
-	    *ptr = Fcons (w, Qnil);
-	    ptr = rep_CDRLOC (*ptr);
+	    repv tem = rep_call_lisp1 (pred, w);
+	    if (tem == rep_NULL)
+	    {
+		output = rep_NULL;
+		break;
+	    }
+	    if (tem != Qnil)
+	    {
+		*ptr = Fcons (w, Qnil);
+		ptr = rep_CDRLOC (*ptr);
+	    }
 	}
     }
     rep_POPGC; rep_POPGC; rep_POPGC;
