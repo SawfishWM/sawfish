@@ -109,7 +109,7 @@ error_other_wm (Display *dpy, XErrorEvent *ev)
 static void
 redisplay (void)
 {
-    XSync (dpy, False);
+    XFlush (dpy);
 }
 
 /* Called from main(). */
@@ -191,7 +191,6 @@ void
 sys_kill (void)
 {
     XSetInputFocus (dpy, PointerRoot, 0, last_event_time);
-    XSync (dpy, False);
     XCloseDisplay (dpy);
 }
 

@@ -107,7 +107,7 @@ server_handle_request(int fd)
 	rep_deregister_input_fd(fd);
 	close(fd);
     }
-    XSync (dpy, False);
+    XFlush (dpy);
 }
 
 static void

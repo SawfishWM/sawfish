@@ -851,5 +851,4 @@ windows_kill (void)
 	remove_window (w, Qnil);
 	w = w->next;
     }
-    XSync (dpy, False);
 }

@@ -185,7 +185,7 @@ grab-server
     if (server_grabs++ == 0)
     {
 	XGrabServer (dpy);
-	XSync (dpy, False);
+	XFlush (dpy);
     }
     return Qt;
 }
@@ -198,7 +198,7 @@ ungrab-server
     if (--server_grabs == 0)
     {
 	XUngrabServer (dpy);
-	XSync (dpy, False);
+	XFlush (dpy);
     }
     return Qt;
 }
@@ -337,7 +337,7 @@ DEFUN("sync-server", Fsync_server, Ssync_server, (void), rep_Subr0) /*
 sync-server
 ::end:: */
 {
-    XSync (dpy, False);
+    XFlush (dpy);
     return Qt;
 }
 
