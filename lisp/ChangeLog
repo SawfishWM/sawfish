@@ -1,3 +1,24 @@
+2000-11-20  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/wm-spec.jl: support SKIP_PAGER state (linked
+	to the `window-list-skip' property)
+
+	(honour-client-state): set `no-history' property of panels
+
+	(honour-client-state): fixed typo of _NET_WM_WINDOW_STATE
+	instead of _NET_WM_STATE
+
+	(update-workspace-hints): for sticky windows, set
+	_NET_WM_DESKTOP to #xffffffff instead of deleting it
+
+	(define-wm-spec-window-state): records the names of all
+	registered states in `supported-states' variable
+	(supported-state-p): new function
+
+	(client-message-handler): deleted _NET_INSERT_DESKTOP and
+	_NET_DELETE_DESKTOP messages, they're not in the spec anymore?
+	Fixed paren bug in _NET_ACTIVE_WINDOW message handler
+
 2000-11-16  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/state/gnome.jl (gnome-honour-client-state): set
