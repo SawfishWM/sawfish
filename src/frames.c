@@ -998,7 +998,7 @@ list_frame_generator (Lisp_Window *w)
 		for (i = 1; i < fps_MAX; i++)
 		    fp->font[i] = fp->font[0];
 	    }
-	    else
+	    else if (rep_CONSP(tem))
 	    {
 		for (i = 0; i < fps_MAX; i++)
 		{
