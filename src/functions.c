@@ -207,7 +207,7 @@ grab-pointer WINDOW [CURSOR]
 		      GrabModeAsync, GrabModeAsync,
 		      None,
 		      CURSORP(cursor) ? VCURSOR(cursor)->cursor : None,
-		      CurrentTime) == GrabSuccess)
+		      last_event_time) == GrabSuccess)
     {
 	return Qt;
     }
