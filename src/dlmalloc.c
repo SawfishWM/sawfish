@@ -798,7 +798,7 @@ Void_t *(*__morecore)() = __default_morecore_init;
 
 #else /* INTERNAL_LINUX_C_LIB */
 
-#ifndef __FreeBSD__
+#if !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__NetBSD__)
 #if __STD_C
 extern Void_t*     sbrk(ptrdiff_t);
 #else
