@@ -147,6 +147,7 @@ save_yourself_2 (SmcConn conn, SmPointer data)
 {
     repv ret = rep_call_lisp0 (global_symbol_value (Qsm_save_yourself));
     SmcSaveYourselfDone (conn, (ret && ret != Qnil) ? True : False);
+    outstanding_save_done = FALSE;
 }
 
 static void
