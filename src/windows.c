@@ -1102,8 +1102,7 @@ window_mark (repv win)
 {
     rep_MARKVAL(VWIN(win)->plist);
     rep_MARKVAL(VWIN(win)->frame_style);
-    if (VWIN(win)->frame)
-	mark_frame_parts (VWIN(win));
+    mark_frame_parts (VWIN(win));
     rep_MARKVAL(VWIN(win)->name);
     rep_MARKVAL(VWIN(win)->full_name);
     rep_MARKVAL(VWIN(win)->icon_name);
@@ -1119,6 +1118,7 @@ window_mark_type (void)
 	    rep_MARKVAL(rep_VAL(w));
 	w = w->next;
     }
+    mark_frame_type ();
 }
 
 static void
