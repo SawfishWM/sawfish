@@ -30,6 +30,14 @@
   :type string
   :allow-nil t)
 
+(defcustom sp-area-weight 512
+  "Weighting between used area and edge alignment in best-fit mode."
+  :group placement
+  :type number
+  :range (0 . 1024))
+
+(defconst sp-cost-max 1024)
+
 
 ;; utility functions
 
@@ -127,11 +135,114 @@
 		(rplacd point y)
 		(mapc #'(lambda (x)
 			  (rplaca point x)
-			  (when (sp-rect-fits-p dims point rects)
+			  (when (and (sp-rect-fits-p dims point rects)
+				     ;; just in case
+				     (>= x 0) (< x (screen-width))
+				     (>= y 0) (< y (screen-height)))
 			    (throw 'done point)))
 		      (car grid)))
 	    (cdr grid))
       nil)))
+
+
+;; best-fit search
+
+(defmacro sp-edges-adjacent-p (align-1 start-1 end-1 align-2 start-2 end-2)
+  `(and (= ,align-1 ,align-2)
+	(or (> ,start-1 ,end-2) (< ,end-1 ,start-2))))
+
+;; This is the crux of the problem -- this function must assign a value
+;; to placing a window of DIMS at POINT. GRID defines the grid from which
+;; POINT was chosen, RECTS defines all other windows on the screen.
+;; The returned value must be between zero and sp-cost-max, with higher
+;; values better placements
+(defun sp-cost (point dims grid rects)
+  (let
+      ((rect-left (car point))
+       (rect-top (cdr point))
+       (rect-right (+ (car point) (car dims)))
+       (rect-bottom (+ (cdr point) (cdr dims)))
+       (edges (make-vector 4 0))
+       tem)
+
+    ;; try to find the width and height of the containing rectangle.
+    ;; this is wrong since the rectangles are pretty meaningless in
+    ;; this context..
+
+    (when (setq tem (cdr (memq rect-left (car grid))))
+      (while (and tem (< (car tem) (+ rect-left (car dims))))
+	(setq tem (cdr tem)))
+      (setq rect-right (car tem)))
+    (unless rect-right
+      (setq rect-right (screen-width)))
+
+    (when (setq tem (cdr (memq rect-top (cdr grid))))
+      (while (and tem (< (car tem) (+ rect-top (cdr dims))))
+	(setq tem (cdr tem)))
+      (setq rect-bottom (car tem)))
+    (unless rect-bottom
+      (setq rect-bottom (screen-height)))
+
+    ;; how many window edges does this grid square abut?
+    (mapc #'(lambda (r)
+	      (when (sp-edges-adjacent-p rect-right rect-top rect-bottom
+					 (car r) (nth 1 r) (nth 3 r))
+		(aset edges 0 1))
+	      (when (sp-edges-adjacent-p rect-left rect-top rect-bottom
+					 (nth 2 r) (nth 1 r) (nth 3 r))
+		(aset edges 1 1))
+	      (when (sp-edges-adjacent-p rect-bottom rect-left rect-right
+					 (nth 1 r) (car r) (nth 2 r))
+		(aset edges 2 1))
+	      (when (sp-edges-adjacent-p rect-top rect-left rect-right
+					 (nth 3 r) (car r) (nth 2 r))
+		(aset edges 3 1)))
+	  rects)
+    (setq edges (+ (aref edges 0) (aref edges 1)
+		   (aref edges 2) (aref edges 3)))
+
+    ;; this function is trying to account for the unused area in
+    ;; the assigned grid rectangle, and the number of abutted edges
+    (+ (/ (* sp-area-weight
+	     (* (- rect-right rect-left) (- rect-bottom rect-top)))
+	  (* (car dims) (cdr dims)))
+       (/ (* (- sp-cost-max sp-area-weight) edges) 4))))
+
+(defun sp-best-fit (dims grid rects)
+  (let
+      ((points nil)
+       point)
+
+    ;; 1. find all possible positions
+    (setq point (cons nil nil))
+    (mapc #'(lambda (y)
+	      (rplacd point y)
+	      (mapc #'(lambda (x)
+			(rplaca point x)
+			(when (and (sp-rect-fits-p dims point rects)
+				   ;; just in case
+				   (>= x 0) (< x (screen-width))
+				   (>= y 0) (< y (screen-height)))
+			  (setq points (cons (cons x y) points))))
+		    (car grid)))
+	  (cdr grid))
+
+    (cond ((null points)
+	   nil)
+	  ((null (cdr points))
+	   (car points))
+	  (t
+	   (let
+	       ((max-cost 0)
+		(max-point nil))
+	     (mapc #'(lambda (p)
+		       (let
+			   ((cost (sp-cost p dims grid rects)))
+			 (when (> cost max-cost)
+			   (setq max-cost cost)
+			   (setq max-point p))))
+		   points)
+	     max-point)))))
 
 
 ;; entry-points
@@ -144,6 +255,18 @@
        (grid (sp-make-grid rects t))
        (point (sp-first-fit (window-frame-dimensions w)
 			    grid (nconc (sp-screen-rects) rects))))
+    (if point
+	(move-window-to w (car point) (cdr point))
+      (place-window-randomly w))))
+
+;;;###autoload
+(defun place-window-best-fit (w)
+  (let*
+      ((windows (sp-get-windows w))
+       (rects (sp-make-rects windows))
+       (grid (sp-make-grid rects t))
+       (point (sp-best-fit (window-frame-dimensions w)
+			   grid (nconc (sp-screen-rects) rects))))
     (if point
 	(move-window-to w (car point) (cdr point))
       (place-window-randomly w))))
