@@ -76,12 +76,13 @@
 		 (inside '())
 		 (outside '()))
 	(cond ((null rest)
-	       ;; First move all windows not on the old viewport, and
-	       ;; move in top-to-bottom order..
-	       (mapc move-window (nreverse outside))
-	       ;; ..then move away the windows on the old viewport,
-	       ;; in bottom-to-top order
-	       (mapc move-window inside))
+	       (with-server-grabbed
+		;; First move all windows not on the old viewport, and
+		;; move in top-to-bottom order..
+		(mapc move-window (nreverse outside))
+		;; ..then move away the windows on the old viewport,
+		;; in bottom-to-top order
+		(mapc move-window inside)))
 
 	      ((window-outside-viewport-p (car rest))
 	       (loop (cdr rest) inside (cons (car rest) outside)))
