@@ -98,6 +98,14 @@
       (set-input-focus w))
     (window-order-push w)))
 
+(defun iconify-workspace-windows ()
+  "Iconify all windows on the current workspace."
+  (interactive)
+  (map-windows (lambda (w)
+		 (when (and (not (window-get w 'ignored))
+			    (window-in-workspace-p w current-workspace))
+		   (iconify-window w)))))
+
 
 ;; sticky-ness, could be in a separate file..
 
