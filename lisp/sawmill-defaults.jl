@@ -12,9 +12,9 @@
 (setq default-font (get-font "-*-lucida-medium-r-*-*-10-*-*-*-*-*-*-*"))
 
 ;; load a theme, take your pick from the few choices..
-(require 'absolute-e)
-;(require 'brushed-metal)
-;(require 'simple)
+(load "absolute-e")
+;(load "brushed-metal")
+;(load "simple")
 
 (defvar ignored-window-names "^(xload|xmeter|Dali Clock|xapm|xbuffy|console)$"
   "Regular expression matching windows that don't get a frame.")
