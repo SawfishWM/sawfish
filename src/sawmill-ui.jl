@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.31 1999/10/29 13:47:09 john Exp $
+;; $Id: sawmill-ui.jl,v 1.32 1999/10/29 23:22:41 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -172,6 +172,8 @@ exec rep "$0" "$@"
   (cond ((eq ui-pages-style 'notebook)
 	 (let
 	     ((book (gtk-notebook-new)))
+	   (gtk-notebook-set-scrollable book 1)
+	   (gtk-notebook-popup-enable book)
 	   (mapc #'(lambda (page)
 		     (gtk-notebook-append-page book (build-ui (car (cdr page)))
 					       (gtk-label-new (car page))))
