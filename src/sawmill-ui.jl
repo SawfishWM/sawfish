@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.37 1999/11/25 23:34:05 john Exp $
+;; $Id: sawmill-ui.jl,v 1.38 1999/11/27 14:36:21 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -126,7 +126,7 @@ exec rep "$0" "$@"
 ;; (toggle TEXT)
 ;; (number)
 ;; (string)
-;; (set LIST)
+;; (symbol LIST)
 ;; (font)
 ;; (file-name)
 ;; (keymap)
@@ -484,7 +484,7 @@ exec rep "$0" "$@"
 		      (gtk-widget-destroy filesel)))
     (gtk-widget-show filesel)))
 
-(defun build-set (spec)
+(defun build-symbol (spec)
   (let*
       ((values (nth 1 spec))
        (buttons (make-vector (length values)))
@@ -512,7 +512,7 @@ exec rep "$0" "$@"
 			      (make-closure
 			       `(lambda (w)
 				  (when (gtk-check-menu-item-active w)
-				    (build-set:select-row spec ,i)))))
+				    (build-symbol:select-row spec ,i)))))
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	(gtk-option-menu-set-menu omenu menu)
@@ -533,7 +533,7 @@ exec rep "$0" "$@"
 	  (setq values (cdr values)))
 	(gtk-signal-connect clist "select_row"
 			    (lambda (clist row col)
-			      (build-set:select-row spec row)))
+			      (build-symbol:select-row spec row)))
 	(setq spec (nconc spec (list ':clist clist)))
 	clist))
      ((eq type 'radio)
@@ -550,13 +550,13 @@ exec rep "$0" "$@"
 			      (make-closure
 			       `(lambda (w)
 				  (when (gtk-toggle-button-active w)
-				    (build-set:select-row spec ,i)))))
+				    (build-symbol:select-row spec ,i)))))
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	box)))))
-(put 'set 'builder build-set)
+(put 'symbol 'builder build-symbol)
 
-(defun build-set:select-row (spec row)
+(defun build-symbol:select-row (spec row)
   (ui-set spec (get-key spec ':variable) (nth row (nth 1 spec))))
 
 
