@@ -46,7 +46,7 @@ sawmill.dvi : $(SRCS)
 	$(TEXI2DVI) $<
 
 sawmill.ps : sawmill.dvi
-	$(DVIPS) sawmill.dvi
+	$(DVIPS) -f <sawmill.dvi >sawmill.ps
 
 man : sawmill.info sawmill.guide sawmill.doc sawmill.dvi sawmill.ps
 
@@ -60,7 +60,7 @@ uninstall :
 	rm -f $(infodir)/sawmill.info*
 
 clean :
-	rm -f *~ sawmill.info* sawmill.dvi sawmill.ps
+	rm -f *~ sawmill.info* sawmill.?? sawmill.???
 
 realclean : clean
 	rm -f Makefile

@@ -3,9 +3,9 @@
 @settitle sawmill Programming Manual
 @footnotestyle end
 
-@set EDITION 0.1
-@set VERSION 0.6
-@set UPDATED 12 September 1999
+@set EDITION 0.2
+@set VERSION 0.7
+@set UPDATED 19 September 1999
 @set UPDATE-MONTH September 1999
 
 @ifinfo
@@ -354,6 +354,8 @@ each color component, and one for the image as a whole.
 @defun image-modifier image type
 Return the modifier defined by the symbol @var{type} of @var{image}, a
 list of integers @code{(@var{gamma} @var{brightness} @var{contrast})}.
+Each integer has a value between zero and 255 representing the weight
+applied to the associated attribute when rendering the image.
 
 The four types are @code{red}, @code{green}, @code{blue} and @code{nil}
 (all colors).
@@ -361,6 +363,24 @@ The four types are @code{red}, @code{green}, @code{blue} and @code{nil}
 
 @defun set-image-modifier image type gamma brightness contrast
 Set the image modifier of @var{image} defined by @var{type}.
+@end defun
+
+There are also several other functions manipulating images:
+
+@defun bevel-image image border upwards
+Transform the edgemost pixels of @var{image} to give it a ``bevelled''
+effect. @var{BORDER} is an integer defining the width of the bevel. If
+@var{upwards} is non-nil the bevel is raised, otherwise it is lowered.
+@end defun
+
+@defun clear-image image &optional color
+Set all pixels in @var{image} to @var{color} (or black if @var{color}
+is undefined).
+@end defun
+
+@defun tile-image dest-image source-image
+Tiles @var{source-image} into @var{dest-image}, starting from the
+upper-left corner, working outwards.
 @end defun
 
 
@@ -443,7 +463,16 @@ Returns a list containing all managed window objects, in the order that
 they were adopted by the window manager (first to last).
 @end defun
 
+@defun get-window-by-id xid
+Return a window object with id @var{xid}, or @code{nil}.
+@end defun
+
+@defun get-window-by-name name
+Return a window object with name @var{name}, or @code{nil}.
+@end defun
+
 @menu
+* Window Property Lists::
 * Window Attributes::
 * Input Focus::
 * X Properties::
@@ -457,21 +486,41 @@ they were adopted by the window manager (first to last).
 @end menu
 
 
-@node Window Attributes, Input Focus, , Windows
+@node Window Property Lists, Window Attributes, , Windows
+@section Window Property Lists
+@cindex  Window property lists
+@cindex Property lists, of windows
+
+Many window manager extensions need to be able to associate Lisp data
+with individual windows. For example, the module handling iconification
+needs to associate a boolean value with each window---whether that
+window is iconified or not.
+
+To solve this problem, Sawmill gives each window a property list. These
+are exactly analogous to the property lists stored with each symbol
+(@pxref{(librep)Property Lists}); they allow values to be associated
+with Lisp symbols, for a particular window.
+
+Note that these properties are different to the properties that X
+stores with each window, since these properties are internal to the
+window manager (@pxref{X Properties}).
+
+@defun window-put window property value
+Set the lisp property named @var{property} (a symbol) associated with
+window object @var{window} to @var{value}.
+@end defun
+
+@defun window-get window property
+Return the window property named @var{property} associated with the
+window object @var{window}, or @code{nil} if no such property exists.
+@end defun
+
+
+@node Window Attributes, Input Focus, Window Property Lists, Windows
 @section Window Attributes
 @cindex Window attributes
 @cindex Attributes, of windows
 @cindex Windows, attributes of
-
-@defun window-put window property value
-Set the lisp property named @var{property} (a symbol) of @var{window}
-to @var{value}.
-@end defun
-
-@defun window-get window property
-Return the window property named @var{property} of @var{window}, or
-@code{nil} if no such property exists.
-@end defun
 
 @defun window-name window
 Return the name associated with @var{window}.
@@ -582,8 +631,8 @@ This option may be set on a per-window basis by setting the
 
 The X window system associates properties with windows (these are
 totally separate to the properties that sawmill associates with window
-@emph{objects}). Most inter-client communication is performed through
-manipulation of these properties.
+@emph{objects}, @pxref{Window Property Lists}). Most inter-client
+communication is performed through manipulation of these properties.
 
 All functions defined below, that operate on X properties, accept their
 @var{window} parameter as either a window object (denoting the
@@ -1775,7 +1824,7 @@ The @var{k}'th mouse button is currently pressed
 @end table
 
 There are two special modifiers: the @samp{Any} prefix matches any set
-of modifiers; the @samp{Release} modifiers matches key-release events
+of modifiers; the @samp{Release} modifier matches key-release events
 instead of the default key-presses.
 
 Generally keys have the same names as their X keysyms, there are
@@ -2120,6 +2169,19 @@ details).
 @chapter Miscellaneous Functions
 @cindex Miscellaneous functions
 
+@menu
+* Pointer Functions::
+* Grab Functions::
+* Display Functions::
+* Gradient Functions::
+* Other Functions::
+@end menu
+
+@node Pointer Functions, Grab Functions, , Miscellaneous Functions
+@section Pointer Functions
+@cindex Pointer functions
+@cindex Functions, pointer
+
 @defun query-pointer &optional from-server
 Returns a cons cell @code{(@var{x} . @var{y})} representing the current
 mouse pointer position, relative to the origin of the root window.
@@ -2150,6 +2212,12 @@ client window associated with object @var{window}.
 If @var{x} and @var{y} are @code{nil}, then they are taken as the
 top-left corner of the window's frame.
 @end defun
+
+
+@node Grab Functions, Display Functions, Pointer Functions, Miscellaneous Functions
+@section Grab Functions
+@cindex Grab functions
+@cindex Functions, grab
 
 @defun grab-server
 Prevent any other clients from accessing the X server.
@@ -2194,13 +2262,11 @@ Returns non-nil if the grab succeeded.
 Release the grab on the keyboard.
 @end defun
 
-@defun get-window-by-id xid
-Return a window object with id @var{xid}, or @code{nil}.
-@end defun
 
-@defun get-window-by-name name
-Return a window object with name @var{name}, or @code{nil}.
-@end defun
+@node Display Functions, Gradient Functions, Grab Functions, Miscellaneous Functions
+@section Display Functions
+@cindex Display functions
+@cindex Functions, display
 
 @defun screen-width
 Return the width of the root window.
@@ -2208,41 +2274,6 @@ Return the width of the root window.
 
 @defun screen-height
 Return the height of the root window.
-@end defun
-
-@defun sync-server
-Flush all pending X requests, don't wait for them to finish.
-@end defun
-
-@defun send-client-message window type data format
-Send an X @code{ClientMessage} event to @var{window} (a window object,
-the symbol @code{root} or a numeric xid).
-
-The event will be of the type @var{type} (a symbol), contain the array
-of integers @var{data} (i.e. a vector or a string), and will be
-transferred as @var{format} sized quantities (8, 16 or 32).
-@end defun
-
-@defun create-window parent x y width height
-Create an unmapped window that is a child of @var{parent} (a window
-object, an integer window id, or the symbol @code{root}), with the
-specified dimensions.
-
-Returns the window id of the new window.
-@end defun
-
-@defun x-atom symbol
-Return the integer identifying the X atom with the same name as
-@var{symbol}.
-@end defun
-
-@defun x-atom-name integer
-Return the symbol with the same name as the X atom identified by the
-integer @var{integer}.
-@end defun
-
-@defun getpid
-Return the process-id of the running Lisp interpreter.
 @end defun
 
 @defun draw-window-outline mode x y width height
@@ -2283,6 +2314,71 @@ they count in from the left and bottom edges respectively.
 
 Note that newlines in @var{text} are ignored. This may change in the
 future.
+@end defun
+
+
+@node Gradient Functions, Other Functions, Display Functions, Miscellaneous Functions
+@section Gradient Functions
+@cindex Gradient functions
+@cindex Functions, gradients
+
+The @code{gradient} feature allows color gradients to be drawn in
+images. (Evaluate @code{(require 'gradient)} to load this feature.)
+
+@defun draw-vertical-gradient image from to
+Draw a vertical color gradient in @var{image}. The color at the top of
+the image will be @var{from}, the color at the bottom @var{to}, with a
+smooth transition between.
+@end defun
+
+@defun draw-horizontal-gradient image from to
+Draw a horizontal color gradient in @var{image}, from left to right.
+@end defun
+
+@defun draw-diagonal-gradient image from to
+Draw a horizontal color gradient in @var{image}, from the top-left
+corner to the bottom-right.
+@end defun
+
+
+@node Other Functions, , Gradient Functions, Miscellaneous Functions
+@section Other Functions
+@cindex Other functions
+@cindex Functions, other
+
+@defun sync-server
+Flush all pending X requests, don't wait for them to finish.
+@end defun
+
+@defun send-client-message window type data format
+Send an X @code{ClientMessage} event to @var{window} (a window object,
+the symbol @code{root} or a numeric xid).
+
+The event will be of the type @var{type} (a symbol), contain the array
+of integers @var{data} (i.e. a vector or a string), and will be
+transferred as @var{format} sized quantities (8, 16 or 32).
+@end defun
+
+@defun create-window parent x y width height
+Create an unmapped window that is a child of @var{parent} (a window
+object, an integer window id, or the symbol @code{root}), with the
+specified dimensions.
+
+Returns the window id of the new window.
+@end defun
+
+@defun x-atom symbol
+Return the integer identifying the X atom with the same name as
+@var{symbol}.
+@end defun
+
+@defun x-atom-name integer
+Return the symbol with the same name as the X atom identified by the
+integer @var{integer}.
+@end defun
+
+@defun getpid
+Return the process-id of the running Lisp interpreter.
 @end defun
 
 
