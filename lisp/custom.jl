@@ -270,9 +270,7 @@ of choices."
 
 ;; setting values
 
-(defun custom-set (setter symbol &optional req)
-  (when req
-    (require req))
+(defun custom-set (setter symbol)
   (when (get symbol 'custom-before-set)
     ((get symbol 'custom-before-set) symbol))
   (setter)
@@ -281,12 +279,20 @@ of choices."
     ((get symbol 'custom-after-set) symbol)))
  
 (defun custom-set-variable (symbol value &optional req)
-  (custom-set (lambda () (set symbol value)) symbol req))
+  (when (and req value)
+    (require req))
+  (custom-set (lambda ()
+		(make-variable-special symbol)
+		(set symbol value))
+	      symbol))
 
 (defun custom-set-typed-variable (symbol value type &optional req)
+  (when (and req value)
+    (require req))
   (custom-set (lambda ()
+		(make-variable-special symbol)
 		(set symbol (custom-deserialize value type)))
-	      symbol req))
+	      symbol))
 
 (defun variable-customized-p (symbol)
   "Returns `t' if the variable named SYMBOL has been customized by the user."
