@@ -157,7 +157,8 @@ save_yourself (SmcConn conn, SmPointer data, int save_type, Bool shutdown,
 static void
 die (SmcConn conn, SmPointer data)
 {
-    longjmp (clean_exit_jmp_buf, ec_session_died);
+    exit_code = ec_session_died;
+    Fquit ();
 }
 
 static void
