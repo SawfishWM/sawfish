@@ -516,14 +516,14 @@ add_window (Window id)
 /* Remove W from the managed windows. If DESTROYED is nil, then the
    window will be reparented back to the root window */
 void
-remove_window (Lisp_Window *w, repv destroyed, repv from_error)
+remove_window (Lisp_Window *w, bool destroyed, bool from_error)
 {
     DB(("remove_window (%s, %s)\n",
-	rep_STR(w->name), destroyed == Qnil ? "nil" : "t"));
+	rep_STR(w->name), destroyed ? "destroyed" : "not-destroyed"));
 
     if (w->id != 0)
     {
-	if (destroyed == Qnil && from_error == Qnil)
+	if (!destroyed && !from_error)
 	{
 	    grab_window_events (w, FALSE);
 	    remove_window_frame (w);
@@ -532,13 +532,13 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 	    XSetWindowBorderWidth (dpy, w->id, w->attr.border_width);
 	}
 
-	if (from_error == Qnil)
+	if (!from_error)
 	    destroy_window_frame (w, FALSE);
 
 	if (!WINDOW_IS_GONE_P (w))
 	    remove_from_stacking_list (w);
 
-	if (from_error == Qnil)
+	if (!from_error)
 	    focus_off_window (w);
 
 	w->id = 0;
@@ -546,7 +546,7 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 
 	/* gc will do the rest... */
     }
-    else if (w->frame != 0 && from_error == Qnil)
+    else if (w->frame != 0 && !from_error)
 	destroy_window_frame (w, FALSE);
 }
 
@@ -1624,7 +1624,7 @@ windows_kill (void)
     {
 	next = rep_VAL (w->next);
 	Fcall_window_hook (Qremove_window_hook, rep_VAL (w), Qnil, Qnil);
-	remove_window (w, Qnil, Qnil);
+	remove_window (w, FALSE, FALSE);
 	w = VWIN (next);
     }
 }

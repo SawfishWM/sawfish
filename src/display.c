@@ -25,6 +25,7 @@
 #include <X11/cursorfont.h>
 #include <X11/keysym.h>
 #include <X11/extensions/shape.h>
+#include <X11/Xproto.h>
 #include <string.h>
 #include <assert.h>
 #include <stdarg.h>
@@ -79,32 +80,29 @@ static int
 error_handler (Display *dpy, XErrorEvent *ev)
 {
     Lisp_Window *w;
+
 #ifdef DEBUG
     print_error (ev);
 #endif
-    if (ev->resourceid == 0)		/* probably a deleted window */
-	return 0;
-    w = x_find_window_by_id (ev->resourceid);
-    if (w != 0 && (ev->error_code == BadWindow
-		   || ev->error_code == BadDrawable))
+
+    if (ev->resourceid != 0
+	&& (ev->error_code == BadWindow || ev->error_code == BadDrawable))
     {
-	DB(("error_handler (%s)\n", rep_STR(w->name)));
-	if (!WINDOW_IS_GONE_P (w))
-	    remove_window (w, Qt, Qt);
-	/* so we call emit_pending_destroys () at some point */
-	rep_mark_input_pending (ConnectionNumber (dpy));
-	return 0;			/* ?? */
+	w = x_find_window_by_id (ev->resourceid);
+
+	if (w != NULL)
+	{
+	    DB(("error_handler (%s)\n", rep_STR(w->name)));
+	    
+	    if (!WINDOW_IS_GONE_P (w))
+		remove_window (w, TRUE, TRUE);
+
+	    /* so we call emit_pending_destroys () at some point */
+	    rep_mark_input_pending (ConnectionNumber (dpy));
+	}
     }
-    else
-    {
-#if 0
-	/* I'm fed up seeing these errors! :-) */
-#ifndef DEBUG
-	print_error (ev);
-#endif
-#endif
-	return 0;
-    }
+
+    return 0;
 }
 
 /* Installed whilst trying to set the root window event mask */

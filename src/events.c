@@ -673,9 +673,11 @@ destroy_notify (XEvent *ev)
     Lisp_Window *w = x_find_window_by_id (ev->xdestroywindow.window);
     if (w == 0 || ev->xdestroywindow.window != w->saved_id)
 	return;
-    remove_window (w, Qt, Qnil);
+    remove_window (w, TRUE, FALSE);
     property_cache_invalidate_window (rep_VAL (w));
     emit_pending_destroys ();
+    /* in case the id gets recycled but the window doesn't get gc'd..? */
+    w->saved_id = 0;
 }
 
 void
@@ -734,7 +736,7 @@ reparent_notify (XEvent *ev)
 	    && ev->xreparent.parent != w->frame)
 	{
 	    /* Not us doing the reparenting.. */
-	    remove_window (w, Qnil, Qnil);
+	    remove_window (w, FALSE, FALSE);
 	    XReparentWindow (dpy, ev->xreparent.window, ev->xreparent.parent,
 			     ev->xreparent.x, ev->xreparent.y);
 	}
@@ -753,7 +755,7 @@ map_notify (XEvent *ev)
 	if (wa.override_redirect)
 	{
 	    /* arrgh, the window changed its override redirect status.. */
-	    remove_window (w, Qnil, Qnil);
+	    remove_window (w, FALSE, FALSE);
 	}
 	else
 	{
@@ -799,7 +801,7 @@ unmap_notify (XEvent *ev)
 
 	/* Changed the window-handling model, don't let windows exist
 	   while they're withdrawn */
-	remove_window (w, Qnil, Qnil);
+	remove_window (w, FALSE, FALSE);
     }
 }
 
