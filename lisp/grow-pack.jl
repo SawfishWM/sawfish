@@ -38,6 +38,11 @@
 
 ;;; Code:
 
+(defcustom grow-window-repeat t
+  "Whether growing an already grown window grows it again."
+  :type boolean
+  :group maximize)
+
 ;; Entry points.
 
 ;;;###autoload
@@ -112,24 +117,43 @@
          (wleft   (car wpos))
          (wtop    (cdr wpos))
          (wright  (+ wleft (car wdim)))
-         (wbottom (+ wtop (cdr wdim))))
-    (when (eq direction 'left) (setq wleft 0))
-    (when (eq direction 'right) (setq wright (screen-width)))
-    (when (eq direction 'up) (setq wtop 0))
-    (when (eq direction 'down) (setq wbottom (screen-height)))
-    (delete nil
-            (mapcar
+         (wbottom (+ wtop (cdr wdim)))
+         (nleft   wleft)
+         (ntop    wtop)
+         (nright  wright)
+         (nbottom wbottom))
+    (when (eq direction 'left)
+      (setq nleft 0)
+      (when grow-window-repeat
+        (setq wleft (max (- wleft 1) 0))))
+    (when (eq direction 'right)
+      (setq nright (screen-width))
+      (when grow-window-repeat
+        (setq wright (min (+ wright 1) (screen-width)))))
+    (when (eq direction 'up)
+      (setq ntop 0)
+      (when grow-window-repeat
+        (setq wtop (max (- wtop 1) 0))))
+    (when (eq direction 'down)
+      (setq nbottom (screen-height))
+      (when grow-window-repeat
+        (setq wbottom (min (+ wbottom 1) (screen-height)))))
+    (filter
              (lambda (x)
+       (let* ((xpos (window-position x))
+              (xdim (window-frame-dimensions x))
+              (xleft (car xpos))
+              (xtop (cdr xpos))
+              (xright (+ xleft (car xdim)))
+              (xbottom (+ xtop (cdr xdim))))
                ;; If window does not overlap W but does overlap the
                ;; larger W, then we need to avoid this window.
-               (and (<= (rect-2d-overlap*
-                         (car (rectangles-from-windows (list x)))
-                         (car (rectangles-from-windows (list w)))) 0)
-                    (> (rect-2d-overlap*
-                        (car (rectangles-from-windows (list x)))
+         (and (window-appears-in-workspace-p x current-workspace)
+              (<= (rect-2d-overlap* (list xleft xtop xright xbottom)
                         (list wleft wtop wright wbottom)) 0)
-                    x))
-             (workspace-windows current-workspace)))))
+              (> (rect-2d-overlap* (list xleft xtop xright xbottom)
+                                   (list nleft ntop nright nbottom)) 0))))
+     (managed-windows))))
 
 (defun gp-surrounding-rect (wlist)
   "Returns the rectangle surrounding all given windows."
