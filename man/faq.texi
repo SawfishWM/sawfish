@@ -58,27 +58,6 @@ binds the event @kbd{C-M-ESC} to the Lisp code to start an @code{xterm}
 subprocess
 
 
-@item How do I get a grid of desktops?
-
-This isn't completely possibly at the moment. But you can closely
-approximate an @var{n}-by-@var{m} grid by doing the following:
-
-@enumerate
-@item Turn off the @samp{delete workspaces when empty} option
-
-@item Set the minimum number of workspaces to @var{n} times @var{m}
-
-@item Set the @code{workspace-columns} variable to @var{n}
-
-@item Use the @code{next-workspace-row} and
-@code{previous-workspace-row} commands to move up and down (bound to
-@kbd{C-Down} and @kbd{C-Up} by default)
-
-@item If you're using the GNOME pager, then you should set the
-@samp{Rows of pagers} option to @var{m}
-@end enumerate
-
-
 @item How do I redefine the @samp{Applications} menu?
 
 See the @samp{Popup Menus} node in the Info manual (@pxref{Popup

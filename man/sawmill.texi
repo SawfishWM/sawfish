@@ -2506,7 +2506,7 @@ been destroyed as is possible.
 Called with a single window argument, analogous to the X events of the
 same names.
 
-@item visbility-notify-hook
+@item visibility-notify-hook
 Called with two arguments, the window, and a symbol, one of:
 @code{fully-obscured}, @code{partially-obscured}, @code{unobscured}.
 
@@ -2518,16 +2518,23 @@ where @var{type} is @code{new-value} or @code{deleted}.
 An @code{or} type hook. Called with arguments @code{(@var{window}
 @var{type} @var{data-array})}.
 
-@item add-workspace-hook
-@itemx enter-workspace-hook
+@item enter-workspace-hook
 @itemx leave-workspace-hook
-@itemx delete-workspace-hook
 @itemx workspace-state-change-hook
 Called with a single argument: the workspace.
 
 @item add-to-workspace-hook
 @itemx remove-from-workspace-hook
 Called with a single argument: the window.
+
+@item viewport-resized-hook
+Called when the number of rows and columns in each virtual workspace is
+changed.
+
+@item viewport-moved-hook
+Called when the origin of the viewport into the virtual workspace is
+moved. Called with two arguments: @code{(@var{x} @var{y})}, the indices
+of the new current viewport (in terms of the screen dimensions)
 
 @item place-window-hook
 An @code{or} type hook. Called the first a window is mapped.
