@@ -352,6 +352,9 @@ that overrides settings set elsewhere.")
   (when (window-framed-p w)
     (rebuild-frame w)))
 
+
+;; manipulating the frame part classes variables
+
 (defun set-frame-part-value (class key value &optional override)
   (let*
       ((var (if override 'override-frame-part-classes 'frame-part-classes))
@@ -363,6 +366,44 @@ that overrides settings set elsewhere.")
 	  (rplacd elt (cons (cons key value) (cdr elt))))
       (set var (cons (cons class (list (cons key value)))
 		     (symbol-value var))))))
+
+;; (def-frame-class shade-button '((cursor . foo) ...)
+;;   (bind-keys shade-button-keymap
+;;     "Button1-Off" 'toggle-window-shaded))
+;; 
+;; the idea being that it will only create the frame part if it doesn't
+;; exist, it will add all properties from the second argument unless
+;; they're already set, then create and initialise the keymap from the
+;; third argument (unless a keymap is already defined)
+
+(defmacro def-frame-class (class alist &rest keymap-forms)
+  (if keymap-forms
+      `(when (define-frame-class ',class ,alist t)
+	 ,@keymap-forms)
+    `(define-frame-class ',class ,alist)))
+
+(defun define-frame-class (class alist &optional with-keymap)
+  (let
+      ((cell (assq class frame-part-classes))
+       (ok-to-bind nil))
+    (if (not cell)
+	(progn
+	  (setq cell (cons class alist))
+	  (setq frame-part-classes (cons cell frame-part-classes)))
+      (mapc #'(lambda (attr)
+		(let
+		    ((tem (assq (car attr) (cdr cell))))
+		  (unless tem
+		    (rplacd cell (cons attr (cdr cell))))))
+	    alist))
+    (when with-keymap
+      (let
+	  ((map-name (intern (concat (symbol-name class) "-keymap"))))
+	(unless (boundp map-name)
+	  (set map-name (make-keymap))
+	  (setq ok-to-bind t))
+	(set-frame-part-value class 'keymap map-name)))
+    ok-to-bind))
 
 
 ;; initialisation
