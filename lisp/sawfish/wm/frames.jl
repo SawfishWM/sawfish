@@ -103,7 +103,9 @@ that overrides settings set elsewhere.")
 
 (defvar frame-type-fallback-alist '((transient . default)
 				    (shaped . default)
-				    (shaped-transient . shaped))
+				    (shaped-transient . shaped)
+				    (icon . shaped-transient)
+				    (dock . icon))
   "Alist associated frame types with type to try if the style doesn't offer a
 frame of the requested type. If no entry, then the `unframed' style is used.")
 
