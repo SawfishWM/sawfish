@@ -115,6 +115,91 @@ completion_generator (char *word, int state)
     return 0;
 }
 
+/* gratuitously stolen from guile, guile-readline/readline.c */
+static void match_paren(int x, int k);
+static int find_matching_paren(int k);
+static void init_bouncing_parens();
+
+static void
+init_bouncing_parens()
+{
+  if(strncmp(rl_get_keymap_name(rl_get_keymap()), "vi", 2)) {
+    rl_bind_key(')', match_paren);
+    rl_bind_key(']', match_paren);
+    rl_bind_key('}', match_paren);
+  }
+}
+
+static int
+find_matching_paren(int k)
+{
+  register int i;
+  register char c = 0;
+  int end_parens_found = 0;
+
+  /* Choose the corresponding opening bracket.  */
+  if (k == ')') c = '(';
+  else if (k == ']') c = '[';
+  else if (k == '}') c = '{';
+
+  for (i=rl_point-2; i>=0; i--)
+    {
+      /* Is the current character part of a character literal?  */
+      if (i - 2 >= 0
+	  && rl_line_buffer[i - 1] == '\\'
+	  && rl_line_buffer[i - 2] == '#')
+	;
+      else if (rl_line_buffer[i] == k)
+	end_parens_found++;
+      else if (rl_line_buffer[i] == '"')
+	{
+	  /* Skip over a string literal.  */
+	  for (i--; i >= 0; i--)
+	    if (rl_line_buffer[i] == '"'
+		&& ! (i - 1 >= 0
+		      && rl_line_buffer[i - 1] == '\\'))
+	      break;
+	}
+      else if (rl_line_buffer[i] == c)
+	{
+	  if (end_parens_found==0) return i;
+	  else --end_parens_found;
+	}
+    }
+  return -1;
+}
+
+static void
+match_paren(int x, int k)
+{
+  int tmp;
+  fd_set readset;
+  struct timeval timeout;
+  
+  rl_insert(x, k);
+
+  /* Did we just insert a quoted paren?  If so, then don't bounce.  */
+  if (rl_point - 1 >= 1
+      && rl_line_buffer[rl_point - 2] == '\\')
+    return;
+
+  /* tmp = 200000 */
+  timeout.tv_sec = 0 /* tmp / 1000000 */ ; 
+  timeout.tv_usec = 200000 /* tmp % 1000000 */ ;
+  FD_ZERO(&readset);
+  FD_SET(fileno(rl_instream), &readset);
+  
+  if(rl_point > 1) {
+    tmp = rl_point;
+    rl_point = find_matching_paren(k);
+    if(rl_point > -1) {
+      rl_redisplay();
+      select(1, &readset, NULL, NULL, &timeout);
+    }
+    rl_point = tmp;
+  }
+}
+
 #endif
 
 
@@ -162,6 +247,7 @@ main(int argc, char *argv[])
 
     rl_completion_entry_function = (void *)completion_generator;
     rl_basic_quote_characters = "\"";
+    init_bouncing_parens ();
 #endif
 
     argc--; argv++;
