@@ -11,8 +11,6 @@ int current_mouse_x, current_mouse_y;
 Time last_event_time;
 XEvent *current_x_event;
 
-bool async_event_lock;
-
 DEFSYM(visibility_notify_hook, "visibility-notify-hook");
 DEFSYM(destroy_notify_hook, "destroy-notify-hook");
 DEFSYM(map_notify_hook, "map-notify-hook");
@@ -21,6 +19,7 @@ DEFSYM(enter_notify_hook, "enter-notify-hook");
 DEFSYM(leave_notify_hook, "leave-notify-hook");
 DEFSYM(focus_in_hook, "focus-in-hook");
 DEFSYM(focus_out_hook, "focus-out-hook");
+DEFSYM(iconify_window, "iconify-window");
 
 /* for enter/leave-notify-hook */
 DEFSYM(root, "root");
@@ -113,6 +112,22 @@ key_press (XEvent *ev)
 }
 
 static void
+handle_fp_click (struct frame_part *fp, XEvent *ev)
+{
+    int old_clicked = fp->clicked;
+    if (ev->type == ButtonPress)
+	fp->clicked++;
+    else if (ev->type == ButtonRelease)
+	fp->clicked--;
+    if ((old_clicked && !fp->clicked)
+	|| (!old_clicked && fp->clicked))
+    {
+	set_frame_part_bg (fp);
+	set_frame_part_fg (fp);
+    }
+}
+
+static void
 button_press (XEvent *ev)
 {
     struct frame_part *fp;
@@ -125,23 +140,17 @@ button_press (XEvent *ev)
     if (fp != 0)
     {
 	repv tem = Fassq (Qkeymap, fp->alist);
-	int old_clicked = fp->clicked;
 	if (tem && tem != Qnil)
 	    context_map = rep_CDR(tem);
 
 	if (ev->type == ButtonPress)
-	    fp->clicked++;
-	else if (ev->type == ButtonRelease)
-	    fp->clicked--;
-	if ((old_clicked && !fp->clicked)
-	    || (!old_clicked && fp->clicked))
-	{
-	    set_frame_part_bg (fp);
-	    set_frame_part_fg (fp);
-	}
+	    handle_fp_click (fp, ev);
     }
 
     eval_input_event (context_map);
+
+    if (fp != 0 && ev->type == ButtonRelease)
+	handle_fp_click (fp, ev);
 }
 
 static void
@@ -224,7 +233,13 @@ property_notify (XEvent *ev)
 static void
 client_message (XEvent *ev)
 {
-    /* XXX implement this... */
+    if (ev->xclient.message_type == xa_wm_change_state
+	&& ev->xclient.format == 32)
+    {
+	Lisp_Window *w = find_window_by_id (ev->xclient.window);
+	if (w != 0 && ev->xclient.data.l[0] == IconicState)
+	    rep_call_lisp1 (Qiconify_window, rep_VAL(w));
+    }
 }
 
 static void
@@ -260,31 +275,18 @@ map_request (XEvent *ev)
 	w = add_window (id);
 	if (w == 0)
 	    return;
-	if (w->wmhints && w->wmhints->flags & StateHint)
-	{
-	    switch (w->wmhints->initial_state)
-	    {
-	    case IconicState:
-		/* XXX implement this... */
 
-	    case DontCareState:
-	    case NormalState:
-	    case ZoomState:
-	    case InactiveState:
-		XMapWindow (dpy, w->id);
-		w->mapped = TRUE;
-		if (w->visible)
-		    XMapRaised (dpy, w->frame);
-		break;
-	    }
-	}
-	else
+	XMapWindow (dpy, w->id);
+	w->mapped = TRUE;
+
+	if (w->wmhints && w->wmhints->flags & StateHint
+	    && w->wmhints->initial_state == IconicState)
 	{
-	    XMapWindow (dpy, w->id);
-	    w->mapped = TRUE;
-	    if (w->visible)
-		XMapRaised (dpy, w->frame);
+	    rep_call_lisp1 (Qiconify_window, rep_VAL(w));
 	}
+
+	if (w->visible)
+	    XMapRaised (dpy, w->frame);
     }
     else
     {
@@ -357,8 +359,20 @@ enter_notify (XEvent *ev)
 static void
 leave_notify (XEvent *ev)
 {
+    struct frame_part *fp;
     if (ev->xcrossing.window == root_window)
 	Fcall_hook (Qleave_notify_hook, Fcons (Qroot, Qnil), Qnil);
+    else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
+    {
+	/* safety net in case clicked didn't get decremented when
+	   it should have */
+	if (fp->clicked != 0)
+	{
+	    fp->clicked = 0;
+	    set_frame_part_bg (fp);
+	    set_frame_part_fg (fp);
+	}
+    }
     else
     {
 	Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
@@ -481,7 +495,7 @@ configure_notify (XEvent *ev)
 
 /* From the afterstep sources, ``According to the July 27, 1988 ICCCM
    draft, we should send a "synthetic" ConfigureNotify event to the
-   client if the window was moved but not resized. */
+   client if the window was moved but not resized.'' */
 void
 send_synthetic_configure (Lisp_Window *w)
 {
@@ -509,60 +523,19 @@ send_synthetic_configure (Lisp_Window *w)
 
 /* Event loop */
 
-/* arg == x11_display */
-static Bool
-async_event_pred(Display *dpy, XEvent *ev, XPointer arg)
-{
-#if 0
-    if(ev->xany.type == Expose
-       || ev->xany.type == GraphicsExpose
-       || ev->xany.type == MappingNotify
-       || ev->xany.type == SelectionRequest
-       || ev->xany.type == SelectionClear)
-	return True;
-    else if(ev->xany.type == KeyPress)
-    {
-	u_long code = 0, mods = 0;
-	translate_event(&code, &mods, ev, (struct x11_display *)arg);
-	if(code == XK_g && mods == (EV_TYPE_KEYBD | EV_MOD_CTRL))
-	{
-	    /* Got one. */
-	    rep_throw_value = rep_int_cell;
-	    return True;
-	}
-    }
-#endif
-    /* This event has now been read, so select() wouldn't notice it.. */
-    rep_mark_input_pending(ConnectionNumber(dpy));
-    return False;
-}
-
 /* Handle all available X events on file descriptor FD. If SYNCHRONOUS
    is set, then we're being called from the usual event loop, not in
    the middle of an executing piece of Lisp code. */
-static void
-handle_events(int fd, bool synchronous)
+void
+handle_sync_input(int fd)
 {
     /* Read all events in the input queue. */
     while(rep_throw_value == rep_NULL)
     {
 	XEvent xev;
-	if(synchronous)
-	{
-	    if(XEventsQueued(dpy, QueuedAfterReading) <= 0)
-		break;
-	    XNextEvent(dpy, &xev);
-	}
-	else
-	{
-	    if(!XCheckIfEvent(dpy, &xev, &async_event_pred, 0))
-		break;
-
-	    if(xev.xany.type == KeyPress)
-		continue;
-
-	    /* Should only be ``safe'' events that pass through here */
-	}
+	if(XEventsQueued(dpy, QueuedAfterReading) <= 0)
+	    break;
+	XNextEvent(dpy, &xev);
 
 	DB(("** Event: %s (win %lx)\n",
 	    event_names[xev.type], (long)xev.xany.window));
@@ -577,25 +550,6 @@ handle_events(int fd, bool synchronous)
     }
 }
 
-/* This is the registered input callback for each X display */
-void
-handle_sync_input(int fd)
-{
-    handle_events(fd, TRUE);
-}
-
-/* This is embedded in the rep_TEST_INT macro. */
-void
-handle_async_input(void)
-{
-    if(!async_event_lock)
-    {
-	int fd = ConnectionNumber(dpy);
-	if(rep_poll_input(fd))
-	    handle_events(fd, FALSE);
-    }
-}
-
 
 /* Lisp functions */
 
@@ -606,7 +560,6 @@ query-pointer
 Returns (MOUSE-X . MOUSE-Y)
 ::end:: */
 {
-    /* XXX Should we actually _call_ XQueryPointer? */
     return Fcons (rep_MAKE_INT(current_mouse_x),
 		  rep_MAKE_INT(current_mouse_y));
 }
@@ -709,7 +662,7 @@ events_init (void)
     rep_INTERN(leave_notify_hook);
     rep_INTERN(focus_in_hook);
     rep_INTERN(focus_out_hook);
-
+    rep_INTERN(iconify_window);
     rep_INTERN(root);
 }
 
