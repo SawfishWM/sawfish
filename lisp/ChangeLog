@@ -1,5 +1,17 @@
 1999-10-25  John Harper  <john@dcs.warwick.ac.uk>
 
+	* version 0.14.2
+
+	* maximize.jl (maximize-do-both): sort grid before passing it
+	to rectangles-from-grid, this stops things going _really_
+	ballistic
+
+	* edge-flip.jl: new file, viewport flipping by pushing the
+	pointer against the screen edges
+
+	* viewport.jl (set-screen-viewport, move-viewport): document
+	that these now return t if they actually move the viewport
+
 	* version 0.14.1
 
 	* maximize.jl (maximize-do-both): only choose rectangles that

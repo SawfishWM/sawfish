@@ -89,6 +89,8 @@ extern void unclick_current_fp (void);
 extern void map_request (XEvent *ev);
 extern void send_synthetic_configure (Lisp_Window *w);
 extern long get_event_mask (int type);
+extern void register_event_handler (Window w, void (*fun)(XEvent *ev));
+extern void deregister_event_handler (Window w);
 extern void handle_input_mask(long mask);
 extern void handle_sync_input(int fd);
 extern repv Fquery_pointer (repv get);
@@ -135,7 +137,7 @@ extern void frames_init (void);
 extern void frames_kill (void);
 
 /* from functions.c */
-extern repv Qroot;
+extern repv Qroot, Qafter_restacking_hook;
 extern repv Fdelete_window (repv win);
 extern repv Fdestroy_window (repv win);
 extern repv Frestack_windows (repv list);
@@ -166,8 +168,6 @@ extern repv Fcreate_window (repv parent, repv x, repv y,
 			    repv width, repv height);
 extern repv Fx_atom (repv symbol);
 extern repv Fx_atom_name (repv atom);
-extern Window message_win;
-extern void refresh_message_window (void);
 extern repv Fshow_message (repv text, repv font, repv fg, repv bg, repv pos);
 extern void functions_init (void);
 extern void functions_kill (void);
@@ -251,6 +251,7 @@ extern void focus_on_window (Lisp_Window *w);
 extern void fix_window_size (Lisp_Window *w);
 extern Lisp_Window *find_window_by_id (Window id);
 extern Lisp_Window *x_find_window_by_id (Window id);
+extern void get_window_protocols (Lisp_Window *w);
 extern void before_local_map (Lisp_Window *w);
 extern void after_local_map (Lisp_Window *w);
 extern void install_window_frame (Lisp_Window *w);

@@ -1,5 +1,23 @@
 1999-10-25  John Harper  <john@dcs.warwick.ac.uk>
 
+	* version 0.14.2
+
+	* functions.c (Fdelete_window): reinterrogate the window's
+	WM_PROTOCOLS property in case it set WM_DELETE_WINDOW after
+	being mapped
+
+	* functions.c (Qafter_restacking_hook): new hook, called
+	whenever the stacking order is explicitly altered
+
+	* functions.c (Fshow_message): use a local event handler for
+	better data hiding
+
+	* events.c (register_event_handler, deregister_event_handler):
+	new functions, allow window-local event handlers to be created
+
+	* flippers.c: new plugin, provides the mechanism for viewport
+	edge-flipping (hooks enter-flipper-hook and leave-flipper-hook)
+
 	* version 0.14.1
 
 	* functions.c (Fsend_client_message): bug fix from Ricardo R.
