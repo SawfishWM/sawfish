@@ -339,6 +339,19 @@ refresh_frame_part (struct frame_part *fp)
 	fp->pending_refresh = 1;
 }
 
+/* Redraw frame parts in W. */
+void
+refresh_frame_parts (Lisp_Window *w)
+{
+    struct frame_part *fp;
+    for (fp = w->frame_parts; fp != 0; fp = fp->next)
+    {
+	refresh_frame_part (fp);
+	if (w->id == 0)
+	    break;
+    }
+}
+
 /* Find the frame-part that is drawn in window ID */
 struct frame_part *
 find_frame_part_by_window (Window id)
