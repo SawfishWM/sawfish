@@ -186,7 +186,7 @@ resize-window-to WINDOW WIDTH HEIGHT
     return win;
 }
 
-static void (*saved_message_fun)();
+static void *saved_message_fun;
 
 DEFUN("grab-server", Fgrab_server, Sgrab_server, (void), rep_Subr0) /*
 ::doc:Sgrab-server::
