@@ -68,7 +68,7 @@
     (wm-eval `(nokogiri-apply-changes ',changes)))
 
   (define (wm-locale-dir)
-    (wm-eval '(and (featurep 'gettext) (bindtextdomain "sawfish")) t))
+    (wm-eval 'sawfish-locale-directory t))
 
   (define (wm-grab-x-property prop-name)
     (wm-eval `(nokogiri-grab-match-window-property ',prop-name) t))
