@@ -1,5 +1,9 @@
 1999-08-30  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill-ui.jl (keymap-shell): doesn't choke on non-symbol
+	commands anymore, but it's still not possible to edit arbitrary
+	forms..
+
 	* events.c (button_press): click the frame before looking for
 	the context map (since we only look for these maps in clicked
 	frame parts)
