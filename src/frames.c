@@ -694,7 +694,7 @@ list_frame_generator (Lisp_Window *w)
 	{
 	    fp->rendered_image = Fmake_sized_image (rep_MAKE_INT(fp->width / fp->render_scale),
 						    rep_MAKE_INT(fp->height / fp->render_scale),
-						    Qnil, Qnil, Qnil);
+						    Qnil);
 	    fp->rendered_state = fps_none;
 	}
 	else

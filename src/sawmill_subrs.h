@@ -161,7 +161,7 @@ extern repv Fimage_put (repv image, repv prop, repv value);
 extern repv Fimage_dimensions (repv img);
 extern repv Fimage_border (repv img);
 extern repv Fset_image_border (repv img, repv, repv, repv, repv);
-extern repv Fmake_sized_image (repv w, repv h, repv r, repv g, repv b);
+extern repv Fmake_sized_image (repv w, repv h, repv color);
 extern repv Fbevel_image (repv img, repv border, repv up);
 extern void images_init (void);
 extern void images_kill (void);
