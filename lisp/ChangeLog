@@ -1,5 +1,18 @@
 2000-11-27  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/util/display-wininfo.jl: new module, exports a
+	single function to display a message with some user-relevant
+	details of the window (currently icon and name)
+
+	* sawfish/wm/commands/x-cycle.jl (cycle-show-window-icons): new
+	option
+	(cycle-display-message): if cycle-show-window-icons is set,
+	use display-wininfo function
+	(remove-message): new function
+
+	The above two changes from a patch by Unai Uribarri
+	<unaiur@telecable.es>, with minor changes
+
 	* sawfish/wm/frames.jl, sawfish/wm/workspace.jl,
 	sawfish/wm/ext/audio-events.jl, sawfish/wm/util/groups.jl:
 	changed flags of some widgets

@@ -102,6 +102,13 @@
     :group (focus cycle)
     :type boolean)
 
+  (defcustom cycle-show-window-icons t
+    "Display window icons while cycling through windows."
+    :group (focus cycle)
+    :user-level expert
+    :depends cycle-show-window-names
+    :type boolean)
+
   (defcustom cycle-include-iconified t
     "Include iconified windows when cycling."
     :group (focus cycle)
@@ -178,10 +185,21 @@
 
   (define (cycle-display-message)
     (let ((win (fluid x-cycle-current)))
-      (display-message (concat (and (window-get win 'iconified) ?[)
-				    (window-name win)
-				    (and (window-get win 'iconified) ?]))
-		       (list (cons 'head (current-head win))))))
+      (if cycle-show-window-icons
+	  (progn
+	    (require 'sawfish.wm.util.display-wininfo)
+	    (display-wininfo win))
+	(display-message (concat (and (window-get win 'iconified) ?[)
+				 (window-name win)
+				 (and (window-get win 'iconified) ?]))
+			 (list (cons 'head (current-head win)))))))
+
+  (define (remove-message)
+    (if cycle-show-window-icons
+	(progn
+	  (require 'sawfish.wm.util.display-wininfo)
+	  (display-wininfo nil))
+      (display-message nil)))
 
   (define (cycle-next windows count)
     (fluid-set x-cycle-windows windows)
@@ -308,7 +326,7 @@
 		    (recursive-edit))
 		  (when (fluid x-cycle-current)
 		    (display-window (fluid x-cycle-current))))
-	      (display-message nil)
+	      (remove-message)
 	      (ungrab-keyboard)))))
 
       (when tail-command
