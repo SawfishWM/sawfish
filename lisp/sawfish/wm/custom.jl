@@ -166,6 +166,7 @@
 (defgroup placement "Placement")
 (defgroup appearance "Appearance")
 (defgroup workspace "Workspaces")
+(defgroup bindings "Bindings")
 (defgroup misc "Miscellaneous")
 (defgroup menus "Menus")
 (defgroup customize "Customization")
