@@ -680,6 +680,8 @@ static void
 enter_notify (XEvent *ev)
 {
     struct frame_part *fp;
+    if (ev->xcrossing.mode != NotifyNormal)
+	return;
     if (ev->xcrossing.window == root_window)
 	Fcall_hook (Qenter_notify_hook, Fcons (Qroot, Qnil), Qnil);
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
@@ -710,8 +712,11 @@ enter_notify (XEvent *ev)
     else
     {
 	Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
-	if (w != 0 && w->mapped && w->visible)
+	if (w != 0 && w->mapped && w->visible
+	    && ev->xcrossing.detail != NotifyInferior)
+	{
 	    Fcall_window_hook (Qenter_notify_hook, rep_VAL(w), Qnil, Qnil);
+	}
     }
 }
 
@@ -719,6 +724,8 @@ static void
 leave_notify (XEvent *ev)
 {
     struct frame_part *fp;
+    if (ev->xcrossing.mode != NotifyNormal)
+	return;
     if (ev->xcrossing.window == root_window)
 	Fcall_hook (Qleave_notify_hook, Fcons (Qroot, Qnil), Qnil);
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
