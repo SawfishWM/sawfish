@@ -42,7 +42,8 @@ unused before killing it.")
 (defvar menu-pending nil)
 
 ;; non-nil when we're waiting for a response from the ui process
-;; if a window, then it's the originally focused window
+;; if a window, then it's the window that received the event causing
+;; the menu to be shown
 (defvar menu-active nil)
 
 ;; if menu-program-stays-running is a number, this may be a timer
@@ -159,12 +160,12 @@ unused before killing it.")
 
 (defun menu-dispatch (result)
   (let
-      ((orig-focus menu-active))
+      ((orig-win menu-active))
     (menu-stop-process)
     (setq menu-active nil)
     (when result
-      (when (windowp orig-focus)
-	(set-input-focus orig-focus))
+      (when (windowp orig-win)
+	(current-event-window orig-win))
       (cond ((commandp result)
 	     (call-command result))
 	    ((functionp result)
@@ -176,7 +177,7 @@ unused before killing it.")
 (defun popup-menu (spec)
   (if (and menu-active menu-process (process-in-use-p menu-process))
       (error "Menu already active")
-    (setq menu-active (input-focus))
+    (setq menu-active (or (current-event-window) (input-focus)))
     (menu-start-process)
     ;; This function is probably called from a ButtonPress event,
     ;; so cancel the implicit pointer grab (to allow the menu's grab
