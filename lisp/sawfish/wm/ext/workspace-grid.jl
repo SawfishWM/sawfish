@@ -87,6 +87,7 @@ number of rows your workspaces are arranged in")
     (safe-select-workspace
      (get-workspace-right current-workspace 1)))
 
+  ;;###autoload
   (define-command 'workspace-down workspace-down)
   (define-command 'workspace-up workspace-up)
   (define-command 'workspace-left workspace-left)
@@ -117,6 +118,7 @@ number of rows your workspaces are arranged in")
      window
      (get-workspace-right current-workspace 1)))
 
+  ;;###autoload
   (define-command 'send-to-workspace-down send-to-workspace-down #:spec "%W")
   (define-command 'send-to-workspace-up send-to-workspace-up #:spec "%W")
   (define-command 'send-to-workspace-left send-to-workspace-left #:spec "%W")
