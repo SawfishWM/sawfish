@@ -125,7 +125,6 @@ BELOW. If the two windows aren't at the same depth, improvise."
 
 ;; called from map-notify-hook
 (defun stacking-after-map (w)
-  (raise-window w)
   ;; if a transient window, maybe put it in a higher layer
   (when (window-transient-p w)
     (let
@@ -135,7 +134,8 @@ BELOW. If the two windows aren't at the same depth, improvise."
 	(set-window-depth w (if parent
 				(max (1+ (window-get parent 'depth))
 				     transient-depth)
-			      transient-depth))))))
+			      transient-depth)))))
+  (raise-window w))
 
 
 ;; Commands
