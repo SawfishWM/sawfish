@@ -45,6 +45,7 @@
 (autoload 'previous-window "cycle" t)
 (autoload 'cycle-windows "x-cycle" t)
 (autoload 'cycle-group "x-cycle" t)
+(autoload 'cycle-prefix "x-cycle" t)
 (autoload 'place-window-first-fit "smart-placement")
 (autoload 'place-window-best-fit "smart-placement")
 (autoload 'place-window-first-fit-or-interactive "smart-placement")
