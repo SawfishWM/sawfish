@@ -1,4 +1,4 @@
-#| nokogiri-gnome.jl -- some code to use GNOME widgets
+#| nokogiri-gnome.jl -- some code to use GNOME widgets -*- lisp -*-
 
    $Id$
 
@@ -21,13 +21,14 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.gtk.stock
 
-(define-structure nokogiri-gnome nokogiri-gnome-interface
+    (export stock-button
+	    simple-dialog)
 
     (open rep
-	  gtk
-	  gnomeui)
+	  gui.gtk
+	  gui.gnome.ui)
 
   (define (stock-button type)
     (case type

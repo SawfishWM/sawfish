@@ -21,11 +21,11 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widgets/font ()
+(define-structure sawfish.gtk.widgets.font ()
 
     (open rep
-	  gtk
-	  nokogiri-widget)
+	  gui.gtk
+	  sawfish.gtk.widget)
 
   (defconst default-font "fixed")
 

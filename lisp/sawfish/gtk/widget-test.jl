@@ -21,13 +21,13 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widget-test
+(define-structure sawfish.gtk.widget-test
 
     (export test-widget)
 
     (open rep
-	  gtk
-	  nokogiri-widget)
+	  gui.gtk
+	  sawfish.gtk.widget)
 
   (define (test-widget spec #!optional initial-value)
     (let (widget)

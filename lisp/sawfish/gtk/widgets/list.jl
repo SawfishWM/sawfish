@@ -21,20 +21,19 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widgets/list ()
+(define-structure sawfish.gtk.widgets.list ()
 
     (open rep
-	  gtk
-	  nokogiri-widget
-	  nokogiri-widget-dialog
-	  nokogiri-shell)
+	  gui.gtk
+	  sawfish.gtk.widget
+	  sawfish.gtk.widget-dialog)
 
   ;; (list SPEC-OR-FUNCTION [TITLE])
 
   ;; if a functional spec is passed, these operations will be used:
 
   ;; - ((SPEC 'print) VALUE) => LIST-OF-STRINGS
-  ;; - ((SPEC 'dialog) TITLE CALLBACK [VALUE])
+  ;; - ((SPEC 'dialog) TITLE CALLBACK [#:for WIDGET] [#:value VALUE])
   ;; - ((SPEC 'validp) ARG) => BOOL
 
   ;; CALLBACK is a function that will be called with the new value
@@ -54,10 +53,13 @@
 	  (add (gtk-button-new-with-label (_ "Add...")))
 	  (delete (gtk-button-new-with-label (_ "Delete")))
 	  (edit (gtk-button-new-with-label (_ "Edit...")))
-	  (vbox (gtk-vbox-new nil box-spacing))
-	  (hbox (gtk-hbox-new nil box-spacing))
+	  (outer-box (gtk-hbox-new nil box-spacing))
+	  (button-box (gtk-vbox-new nil box-spacing))
+	  (other-box (gtk-vbox-new nil box-spacing))
 	  (value '())
 	  (selection nil))
+
+      (define (top-level) (gtk-widget-get-toplevel outer-box))
 
       (define (set-selection row)
 	(setq selection row)
@@ -82,8 +84,8 @@
 			      (gtk-clist-select-row clist (1+ selection) 0)))
 			  (call-callback changed-callback))))
 	  (if (functionp spec)
-	      ((spec 'dialog) (_ "Add:") callback)
-	    (widget-dialog (_ "Add:") spec callback nil main-window))))
+	      ((spec 'dialog) (_ "Add:") callback #:for (top-level))
+	    (widget-dialog (_ "Add:") spec callback nil (top-level)))))
 
       (define (delete-item)
 	(when selection
@@ -112,9 +114,10 @@
 			       (gtk-clist-select-row clist orig-sel 0))
 			     (call-callback changed-callback))))
 	    (if (functionp spec)
-		((spec 'dialog) (_ "Edit:") callback (car cell))
+		((spec 'dialog) (_ "Edit:") callback
+		 #:value (car cell) #:for (top-level))
 	      (widget-dialog (_ "Edit:") spec callback
-			     (car cell) main-window)))))
+			     (car cell) (top-level))))))
 
       (define (clear)
 	(gtk-clist-clear clist)
@@ -141,17 +144,18 @@
       (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
       (gtk-scrolled-window-add-with-viewport scroller clist)
       (gtk-widget-set-usize scroller list-width list-height)
-      (gtk-container-add vbox scroller)
-      (gtk-box-pack-end vbox hbox)
-      (gtk-box-pack-end hbox add)
-      (gtk-box-pack-end hbox edit)
-      (gtk-box-pack-end hbox delete)
-      (gtk-widget-show-all vbox)
+      (gtk-container-add outer-box scroller)
+      (gtk-box-pack-end outer-box other-box)
+      (gtk-box-pack-start other-box button-box)
+      (gtk-box-pack-start button-box add)
+      (gtk-box-pack-start button-box edit)
+      (gtk-box-pack-start button-box delete)
+      (gtk-widget-show-all outer-box)
       (set-selection nil)
 
       (lambda (op)
 	(case op
-	  ((gtk-widget) vbox)
+	  ((gtk-widget) outer-box)
 	  ((clear) (lambda ()
 		     (clear)
 		     (call-callback changed-callback)))

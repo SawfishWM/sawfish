@@ -21,15 +21,36 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.gtk.widget
 
-(define-structure nokogiri-widget nokogiri-widget-interface
+    (export add-widget-prefix
+	    define-widget-type
+	    widget-type-constructor
+	    widget-accepts-doc-string
+	    widget-accepts-doc-string-p
+	    make-widget
+	    widget-ref
+	    widget-set
+	    widget-clear
+	    widget-gtk-widget
+	    widget-valid-p
+	    call-callback
+	    make-signal-callback
+	    set-widget-enabled
+	    enable-widget
+	    disable-widget
+	    box-spacing
+	    box-border)
 
-    (open rep
-	  gtk)
+    ((open rep
+	   gui.gtk)
+     (access rep.structures))
 
   (defconst box-spacing 4)
   (defconst box-border 5)
+
+  ;; list of possible module prefixes when auto-loading widgets
+  (define widget-prefixes '(sawfish.gtk.widgets))
 
   ;; predefined widget types are:
 
@@ -49,19 +70,26 @@
   ;; items without arguments may be specified by name, i.e. `string'
   ;; instead of `(string)'
 
+  (define (add-widget-prefix arg)
+    (setq widget-prefixes (cons arg (delq arg widget-prefixes))))
+
   (define (define-widget-type name constructor)
     (put name 'nokogiri-widget-constructor constructor))
 
   (define (widget-type-constructor name)
     (or (get name 'nokogiri-widget-constructor)
 	;; try to dynamically load the widget constructor..
-	(let ((module-name (intern (concat "nokogiri-widgets/"
-					   (symbol-name name)))))
-	  (condition-case nil
-	      (progn
-		(require module-name)
-		(get name 'nokogiri-widget-constructor))
-	    (error (widget-type-constructor 'unknown))))))
+	(catch 'out
+	  (mapc (lambda (prefix)
+		  (let ((module-name (intern (concat (symbol-name prefix)
+						     #\. (symbol-name name)))))
+		    (condition-case nil
+			(progn
+			  (rep.structures#intern-structure module-name)
+			  (throw 'out (get name 'nokogiri-widget-constructor)))
+		      (error nil))))
+		widget-prefixes)
+	  (widget-type-constructor 'unknown))))
 
   (define (widget-accepts-doc-string name)
     (put name 'nokogiri-widget-accepts-doc-string t))

@@ -21,12 +21,12 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widgets/color ()
+(define-structure sawfish.gtk.widgets.color ()
 
     (open rep
-	  gtk
-	  nokogiri-widget
-	  nokogiri-color-preview)
+	  gui.gtk
+	  sawfish.gtk.widget
+	  sawfish.gtk.color-preview)
 
   (defconst default-color "#000000")
 

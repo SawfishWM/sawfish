@@ -21,12 +21,13 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.gtk.color-preview
 
-(define-structure nokogiri-color-preview nokogiri-color-preview-interface
+    (export button-new-with-color
+	    set-button-color)
 
     (open rep
-	  gtk)
+	  gui.gtk)
 
   (defconst color-preview-width 28)
   (defconst color-preview-height 16)

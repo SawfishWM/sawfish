@@ -21,14 +21,14 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.gtk.widget-dialog
 
-(define-structure nokogiri-widget-dialog nokogiri-widget-dialog-interface
+    (export widget-dialog)
 
     (open rep
-	  gtk
-	  nokogiri-gnome
-	  nokogiri-widget)
+	  gui.gtk
+	  sawfish.gtk.stock
+	  sawfish.gtk.widget)
 
   (define (widget-dialog title spec callback
 			 #!optional initial-value main-window)

@@ -21,11 +21,11 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widgets/file ()
+(define-structure sawfish.gtk.widgets.file ()
 
     (open rep
-	  gtk
-	  nokogiri-widget)
+	  gui.gtk
+	  sawfish.gtk.widget)
 
   (define (make-file-item changed-callback)
     (let* ((box (gtk-hbox-new nil box-spacing))

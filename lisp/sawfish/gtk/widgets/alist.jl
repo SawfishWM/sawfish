@@ -21,13 +21,12 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widgets/alist ()
+(define-structure sawfish.gtk.widgets.alist ()
 
     (open rep
-	  gtk
-	  nokogiri-widget
-	  nokogiri-widget-dialog
-	  nokogiri-shell)
+	  gui.gtk
+	  sawfish.gtk.widget
+	  sawfish.gtk.widget-dialog)
 
   ;; (alist (KEY-SPEC "KEY-TITLE") (VALUE-SPEC "VALUE-TITLE"))
 
@@ -36,15 +35,15 @@
     (let* ((spec `(pair ,(or (car key) key)
 			,(or (car value) value)))
 	   (title `(,(or (cadr key) (_ "Key"))
-		    ,(or (cadr value) (_ "Value"))))
-	   (type (lambda (op)
-		   (case op
-		     ((print) (lambda (x) (list (prin1-to-string (car x))
-						(prin1-to-string (cdr x)))))
-		     ((dialog) (lambda (title callback #!optional value)
-				 (widget-dialog title spec callback
-						value main-window)))
-		     ((validp) ((make-widget spec) 'validp))))))
+		    ,(or (cadr value) (_ "Value")))))
+
+      (define (type op)
+	(case op
+	  ((print) (lambda (x) (list (prin1-to-string (car x))
+				     (prin1-to-string (cdr x)))))
+	  ((dialog) (lambda (title callback #!key value for)
+		      (widget-dialog title spec callback value for)))
+	  ((validp) ((make-widget spec) 'validp))))
 
       (make-widget `(list ,type ,title) changed-callback)))
 
