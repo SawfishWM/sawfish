@@ -754,7 +754,7 @@ specified font in the window associated with WINDOW.
 		&& rep_INTP (rep_CAR (xy)) && rep_INTP (rep_CDR (xy)));
     rep_DECLARE4(string, rep_STRINGP);
     if (font == Qnil)
-	font = Fsymbol_value (Qdefault_font, Qt);
+	font = global_symbol_value (Qdefault_font);
     rep_DECLARE5(font, FONTP);
 
     x = rep_INT (rep_CAR (xy));

@@ -1149,7 +1149,7 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	    }
 	}
 	if (!FONTP(message.font))
-	    message.font = Fsymbol_value (Qdefault_font, Qt);
+	    message.font = global_symbol_value (Qdefault_font);
 	if (!FONTP(message.font))
 	    return rep_signal_arg_error (Qfont, 1);
 

@@ -804,7 +804,7 @@ intensity of the bevel created.
     rep_DECLARE2(border, rep_INTP);
 
     if (!rep_INTP(bevel_percent))
-	bevel_percent = Fsymbol_value (Qdefault_bevel_percent, Qt);
+	bevel_percent = global_symbol_value (Qdefault_bevel_percent);
     if (rep_INTP(bevel_percent))
     {
 	int bp = rep_INT(bevel_percent);

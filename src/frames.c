@@ -597,10 +597,10 @@ set_frame_part_fg (struct frame_part *fp)
     else if (IMAGEP(fg) || fp->text != Qnil)
     {
 	if (!COLORP(fg) && !IMAGEP(fg))
-	    fg = Fsymbol_value (Qdefault_foreground, Qt);
+	    fg = global_symbol_value (Qdefault_foreground);
 	if (!FONTP(font))
 	{
-	    font = Fsymbol_value (Qdefault_font, Qt);
+	    font = global_symbol_value (Qdefault_font);
 	    if (!FONTP(font))
 		goto out;
 	}
@@ -895,7 +895,7 @@ x_fp_assq (struct frame_part *fp, repv prop)
     else
 	class = rep_NULL;
 
-    tem = Fsymbol_value (Qoverride_frame_part_classes, Qt);
+    tem = global_symbol_value (Qoverride_frame_part_classes);
     if (class != rep_NULL && rep_CONSP(tem))
     {
 	tem = Fassq (class, tem);
@@ -908,7 +908,7 @@ x_fp_assq (struct frame_part *fp, repv prop)
 
     if (ret && ret == Qnil)
     {
-	tem = Fsymbol_value (Qframe_part_classes, Qt);
+	tem = global_symbol_value (Qframe_part_classes);
 	if (class != rep_NULL && rep_CONSP(tem))
 	{
 	    tem = Fassq (class, tem);
@@ -1046,14 +1046,14 @@ build_frame_part (struct frame_part *fp)
     if (tem && tem != Qnil)
     {
 	class = rep_CDR(tem);
-	tem = Fsymbol_value (Qframe_part_classes, Qt);
+	tem = global_symbol_value (Qframe_part_classes);
 	if (rep_CONSP(tem))
 	{
 	    tem = Fassq (class, tem);
 	    if (tem && tem != Qnil)
 		class_elt = rep_CDR(tem);
 	}
-	tem = Fsymbol_value (Qoverride_frame_part_classes, Qt);
+	tem = global_symbol_value (Qoverride_frame_part_classes);
 	if (rep_CONSP(tem))
 	{
 	    tem = Fassq (class, tem);

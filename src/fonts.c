@@ -52,7 +52,7 @@ font specifier string).
 	f = f->next;
     if (f == 0)
     {
-	repv tem = Fsymbol_value (Qfonts_are_fontsets, Qt);
+	repv tem = global_symbol_value (Qfonts_are_fontsets);
 
 	XFontSet font_set = 0;
 	XFontStruct *font_struct = 0;
@@ -231,7 +231,7 @@ the text STRING using font object FONT (or the default-font).
 {
     rep_DECLARE1(string, rep_STRINGP);
     if (font == Qnil)
-	font = Fsymbol_value (Qdefault_font, Qt);
+	font = global_symbol_value (Qdefault_font);
     rep_DECLARE2(font, FONTP);
     return rep_MAKE_INT (x_text_width (font, rep_STR(string),
 				       rep_STRING_LEN(string)));
@@ -246,7 +246,7 @@ default-font).
 ::end:: */
 {
     if (font == Qnil)
-	font = Fsymbol_value (Qdefault_font, Qt);
+	font = global_symbol_value (Qdefault_font);
     rep_DECLARE1(font, FONTP);
     return rep_MAKE_INT(VFONT(font)->ascent + VFONT(font)->descent);
 }
@@ -260,7 +260,7 @@ default-font).
 ::end:: */
 {
     if (font == Qnil)
-	font = Fsymbol_value (Qdefault_font, Qt);
+	font = global_symbol_value (Qdefault_font);
     rep_DECLARE1(font, FONTP);
     return rep_MAKE_INT(VFONT(font)->ascent);
 }
@@ -274,7 +274,7 @@ default-font).
 ::end:: */
 {
     if (font == Qnil)
-	font = Fsymbol_value (Qdefault_font, Qt);
+	font = global_symbol_value (Qdefault_font);
     rep_DECLARE1(font, FONTP);
     return rep_MAKE_INT(VFONT(font)->descent);
 }

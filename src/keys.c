@@ -106,7 +106,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
     switch(xev->type)
     {
     case KeyRelease:
-	if (Fsymbol_value (Qeval_key_release_events, Qt) == Qnil)
+	if (global_symbol_value (Qeval_key_release_events) == Qnil)
 	    break;
 	/* FALL THROUGH */
 
@@ -139,7 +139,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	    *code = XKeycodeToKeysym(xev->xany.display, xev->xkey.keycode, 0);
 	if(*code != NoSymbol
 	   && (!IsModifierKey (*code)
-	       || Fsymbol_value (Qeval_modifier_events, Qt) == Qt))
+	       || global_symbol_value (Qeval_modifier_events) == Qt))
 	{
 	    *mods |= EV_TYPE_KEY;
 	    ret = TRUE;
@@ -150,7 +150,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 
 	if(xev->xbutton.button == last_click_button)
         {
-            multi_click_delay = Fsymbol_value (Qmulti_click_delay, Qt);
+            multi_click_delay = global_symbol_value (Qmulti_click_delay);
             if (rep_INTP(multi_click_delay))
                 delay = rep_INT(multi_click_delay);
             else
@@ -391,7 +391,7 @@ lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
     if(nkp == rep_NULL || nkp == Qglobal_keymap)
     {
 
-	repv tem = Fsymbol_value (Qoverride_keymap, Qt);
+	repv tem = global_symbol_value (Qoverride_keymap);
 	if (tem != Qnil && !rep_VOIDP(tem))
 	    k = search_keymap (tem, code, mods, callback);
 	else
@@ -512,7 +512,7 @@ eval_input_event(repv context_map)
     if (next_keymap_path == rep_NULL)
     {
 	if (print_prefix)
-	    rep_call_lisp1 (Fsymbol_value (Qdisplay_message, Qt), Qnil);
+	    rep_call_lisp1 (global_symbol_value (Qdisplay_message), Qnil);
 	print_prefix = FALSE;
 	event_index = 0;
     }
@@ -543,7 +543,7 @@ eval_input_event(repv context_map)
     {
 	/* An unbound key with no prefix keys. */
 
-	repv hook = Fsymbol_value (Qunbound_key_hook, Qt);
+	repv hook = global_symbol_value (Qunbound_key_hook);
 	if (!rep_VOIDP (hook) && hook != Qnil)
 	    result = Fcall_hook(Qunbound_key_hook, Qnil, Qor);
 	else if (rep_recurse_depth == 0
@@ -809,7 +809,7 @@ print_event_prefix(void)
 	*bufp++ = '.';
     }
 
-    rep_call_lisp1 (Fsymbol_value (Qdisplay_message, Qt),
+    rep_call_lisp1 (global_symbol_value (Qdisplay_message),
 		    rep_string_dupn (buf, bufp - buf));
     printed_this_prefix = TRUE;
 
