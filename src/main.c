@@ -234,6 +234,19 @@ do_restart (void)
     exit (10);
 }
 
+static void
+usage (void)
+{
+    fputs ("\
+    --display DPY	connect to X display DPY
+    --version		print version details\n\
+    --no-rc		don't load rc or site-init files\n\
+    -f FUNCTION		call the Lisp function FUNCTION\n\
+    -l FILE		load the file of Lisp forms called FILE\n\
+    -q			quit\n"
+	   , stderr);
+}
+
 int
 main(int argc, char **argv)
 {
@@ -242,9 +255,15 @@ main(int argc, char **argv)
     int old_argc = argc;
 
     prog_name = *argv++; argc--;
-    rep_init (prog_name, &argc, &argv, 0, 0);
+    rep_init (prog_name, &argc, &argv, 0, usage);
 
     stash_argv (old_argc, old_argv);
+
+    if (rep_get_option ("--version", 0))
+    {
+	printf ("sawmill version %s\n", SAWMILL_VERSION);
+	return 0;
+    }
 
     if (sys_init(prog_name))
     {
