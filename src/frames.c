@@ -99,6 +99,7 @@ set_frame_part_bg (struct frame_part *fp)
 {
     int state = current_state (fp);
     repv bg = fp->bg[state];
+    Lisp_Window *win = fp->win;
 
     if (fp->id == 0)
 	return;
@@ -110,16 +111,16 @@ set_frame_part_bg (struct frame_part *fp)
     else if (IMAGEP(bg))
     {
 	Lisp_Image *image = VIMAGE(bg);
-	Pixmap bg_pixmap;
+	Pixmap bg_pixmap, bg_mask;
 	bool tiled = FALSE, shaped = TRUE;
 	repv tem;
 
 	tem = Fimage_get (rep_VAL(image), Qtiled);
 	if (tem && tem != Qnil)
 	    tiled = TRUE;
-	if (rep_SYMBOLP(fp->win->frame_style))
+	if (rep_SYMBOLP(win->frame_style))
 	{
-	    tem = Fget (fp->win->frame_style, Qunshaped);
+	    tem = Fget (win->frame_style, Qunshaped);
 	    if (tem && tem != Qnil)
 		shaped = FALSE;
 	}
@@ -136,27 +137,34 @@ set_frame_part_bg (struct frame_part *fp)
 	}
 
 	bg_pixmap = Imlib_move_image (imlib_id, image->image);
+	bg_mask = Imlib_move_mask (imlib_id, image->image);
+
+	/* Some of the Imlib_ functions call XSync on our display. In turn
+	   this can cause the error handler to run if a window has been
+	   deleted. This then invalidates the window we're updating */
+	if (win->id == 0)
+	    return;
+
 	if (bg_pixmap)
 	{
 	    XSetWindowBackgroundPixmap (dpy, fp->id, bg_pixmap);
 	    if (shaped)
 	    {
-		Pixmap bg_mask = Imlib_move_mask (imlib_id, image->image);
 		if (bg_mask)
 		{
 		    XRectangle rect;
-		    rect.x = fp->x - fp->win->frame_x;
-		    rect.y = fp->y - fp->win->frame_y;
+		    rect.x = fp->x - win->frame_x;
+		    rect.y = fp->y - win->frame_y;
 		    rect.width = fp->width;
 		    rect.height = fp->height;
-		    XShapeCombineRectangles (dpy, fp->win->frame,
+		    XShapeCombineRectangles (dpy, win->frame,
 					     ShapeBounding, 0, 0,
 					     &rect, 1, ShapeSubtract,
 					     Unsorted);
 
-		    XShapeCombineMask (dpy, fp->win->frame, ShapeBounding,
-				       fp->x - fp->win->frame_x,
-				       fp->y - fp->win->frame_y,
+		    XShapeCombineMask (dpy, win->frame, ShapeBounding,
+				       fp->x - win->frame_x,
+				       fp->y - win->frame_y,
 				       bg_mask, ShapeUnion);
 		    if (tiled)
 		    {
@@ -166,12 +174,10 @@ set_frame_part_bg (struct frame_part *fp)
 			int y = 0;
 			do {
 			    do {
-				XShapeCombineMask (dpy, fp->win->frame,
+				XShapeCombineMask (dpy, win->frame,
 						   ShapeBounding,
-						   (fp->x
-						    - fp->win->frame_x + x),
-						   (fp->y
-						    - fp->win->frame_y + y),
+						   fp->x - win->frame_x + x,
+						   fp->y - win->frame_y + y,
 						   bg_mask, ShapeUnion);
 				x += image->image->rgb_width;
 			    } while (x < fp->width);
@@ -184,11 +190,11 @@ set_frame_part_bg (struct frame_part *fp)
 		else
 		{
 		    XRectangle rect;
-		    rect.x = fp->x - fp->win->frame_x;
-		    rect.y = fp->y - fp->win->frame_y;
+		    rect.x = fp->x - win->frame_x;
+		    rect.y = fp->y - win->frame_y;
 		    rect.width = fp->width;
 		    rect.height = fp->height;
-		    XShapeCombineRectangles (dpy, fp->win->frame,
+		    XShapeCombineRectangles (dpy, win->frame,
 					     ShapeBounding, 0, 0,
 					     &rect, 1, ShapeUnion, Unsorted);
 		}
@@ -327,9 +333,14 @@ static void
 frame_part_focuser (Lisp_Window *w)
 {
     struct frame_part *fp;
-    for (fp = w->frame_parts; fp != 0; fp = fp->next)
+    for (fp = w->frame_parts; fp != 0 && w->id != 0; fp = fp->next)
     {
 	set_frame_part_bg (fp);
+
+	/* set_frame_part_bg may trigger the error handler */
+	if (w->id == 0)
+	    break;
+
 	set_frame_part_fg (fp);
     }
 }

@@ -158,8 +158,10 @@ handle_fp_click (struct frame_part *fp, XEvent *ev)
     if ((old_clicked && !fp->clicked)
 	|| (!old_clicked && fp->clicked))
     {
+	Lisp_Window *w = fp->win;
 	set_frame_part_bg (fp);
-	set_frame_part_fg (fp);
+	if (w->id != 0)
+	    set_frame_part_fg (fp);
     }
 }
 
@@ -167,6 +169,7 @@ static void
 button_press (XEvent *ev)
 {
     struct frame_part *fp;
+    Lisp_Window *w;
     repv context_map = Qnil;
 
     record_mouse_position (ev->xbutton.x_root, ev->xbutton.y_root);
@@ -174,7 +177,9 @@ button_press (XEvent *ev)
     fp = find_frame_part_by_window (ev->xbutton.window);
     if (fp != 0)
     {
-	repv tem = Fassq (Qkeymap, fp->alist);
+	repv tem;
+	w = fp->win;
+	tem = Fassq (Qkeymap, fp->alist);
 	if (tem && tem != Qnil)
 	    context_map = rep_CDR(tem);
 
@@ -184,7 +189,7 @@ button_press (XEvent *ev)
 
     eval_input_event (context_map);
 
-    if (fp != 0 && ev->type == ButtonRelease)
+    if (fp != 0 && w->id != 0 && ev->type == ButtonRelease)
     {
 	/* In case the event binding threw a non-local-exit, fake
 	   an unwind-protect thing */
@@ -348,7 +353,7 @@ map_request (XEvent *ev)
 	XMapWindow (dpy, w->id);
 	w->mapped = TRUE;
 	rep_call_lisp1 (Quniconify_window, rep_VAL(w));
-	if (w->visible)
+	if (w->id != 0 && w->visible)
 	    XMapRaised (dpy, w->frame);
     }
 }
@@ -429,9 +434,11 @@ leave_notify (XEvent *ev)
 	   it should have */
 	if (fp->clicked != 0)
 	{
+	    Lisp_Window *w = fp->win;
 	    fp->clicked = 0;
 	    set_frame_part_bg (fp);
-	    set_frame_part_fg (fp);
+	    if (w->id != 0)
+		set_frame_part_fg (fp);
 	}
     }
     else
@@ -459,7 +466,8 @@ focus_in (XEvent *ev)
 		 w->focus_change, w->name));
 	    w->focus_change (w);
 	}
-	Fcall_window_hook (Qfocus_in_hook, rep_VAL(w), Qnil, Qnil);
+	if (w->id != 0)
+	    Fcall_window_hook (Qfocus_in_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
@@ -478,7 +486,8 @@ focus_out (XEvent *ev)
 		 w->focus_change, w->name));
 	    w->focus_change (w);
 	}
-	Fcall_window_hook (Qfocus_out_hook, rep_VAL(w), Qnil, Qnil);
+	if (w->id != 0)
+	    Fcall_window_hook (Qfocus_out_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
