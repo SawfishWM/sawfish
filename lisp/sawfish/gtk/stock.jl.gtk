@@ -77,9 +77,9 @@
       (gtk-container-add vbox widget)
 
       (when cancel
-	(gtk-signal-connect cancel "clicked" on-cancel))
-      (gtk-signal-connect ok "clicked" (if ok-callback on-ok on-cancel))
-      (gtk-signal-connect window "delete_event" on-cancel)
+	(g-signal-connect cancel "clicked" on-cancel))
+      (g-signal-connect ok "clicked" (if ok-callback on-ok on-cancel))
+      (g-signal-connect window "delete_event" on-cancel)
 
       (gtk-widget-show window)
       (gtk-window-set-modal window t)

@@ -56,12 +56,12 @@
 	(gnome-dialog-set-parent window main-window))
       (gtk-container-add (gnome-dialog-vbox window) widget)
 
-      (gtk-signal-connect window "clicked"
-			  (lambda (w button)
-			    (if (and (= button 0) ok-callback)
-				(ok-callback))
-			    (gtk-widget-destroy w)))
-      (gtk-signal-connect window "delete_event" gtk-widget-destroy)
+      (g-signal-connect window "clicked"
+			(lambda (w button)
+			  (if (and (= button 0) ok-callback)
+			      (ok-callback))
+			  (gtk-widget-destroy w)))
+      (g-signal-connect window "delete_event" gtk-widget-destroy)
 
       (gtk-widget-show window)
       (gtk-window-set-modal window t)
