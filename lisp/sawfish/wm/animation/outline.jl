@@ -19,7 +19,9 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.animation.outline ()
+(define-structure sawfish.wm.animation.outline
+
+    (export make-outline-animator)
 
     (open rep
 	  sawfish.wm.misc
@@ -97,11 +99,12 @@
 				   anim-outline-icon-coords)
 			       '(1 . 1)))))))
 
-  (define (wireframe-animator w op #!optional action)
-    (anim-outline-entry 'box w op action))
+  (define (make-outline-animator mode)
+    (lambda (w op #!optional action)
+      (anim-outline-entry mode w op action)))
 
-  (define (solid-animator w op #!optional action)
-    (anim-outline-entry 'solid w op action))
+  (define wireframe-animator (make-outline-animator 'box))
+  (define solid-animator (make-outline-animator 'solid))
 
   ;;###autoload
   (define-window-animator 'wireframe wireframe-animator)
