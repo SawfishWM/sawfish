@@ -49,7 +49,7 @@
 	  sawfish.wm.placement
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
-	  sawfish.wm.state.maximize
+	  sawfish.wm.util.workarea
 	  sawfish.wm.state.iconify)
 
   (define top-left '(8 . 8))
@@ -86,7 +86,7 @@
 	    (t (loop (next-position point))))))
 
   (define (place-window-top-left w)
-    (let* ((workarea (maximize-find-workarea w #:head-fallback t))
+    (let* ((workarea (calculate-workarea #:window w))
 	   (dims (window-dimensions w))
 	   (f-dims (window-frame-dimensions w))
 	   (hints (window-size-hints w))

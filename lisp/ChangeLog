@@ -1,5 +1,19 @@
 2002-04-23  John Harper  <jsh@unfactored.org>
 
+	Work to support _NET_WM_STRUT. Fixes #66608 (not tested):
+
+	* sawfish/wm/util/workarea.jl: new module, moved the workarea
+	calculations here from the maximize module. Added support for
+	"struts"
+
+	* sawfish/wm/state/wm-spec.jl (honour-client-state): call
+	define-window-strut if _NET_WM_STRUT is set
+
+	* sawfish/wm/windows.jl (dock-window-properties): new variable,
+	list of properties to set on dock windows
+
+2002-04-23  John Harper  <jsh@unfactored.org>
+
 	* sawfish/wm/menus.jl (window-ops-menu): removed viewport
 	operations. Fixes #73122
 

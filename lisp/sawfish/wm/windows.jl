@@ -82,6 +82,12 @@ means outside the left window edge.")
   (defvar uniquify-name-format "%s [%d]"
     "Format to create unique window names.")
 
+  (defvar dock-window-properties
+    '(window-list-skip cycle-skip fixed-position focus-click-through
+      avoid no-history never-iconify never-maximize sticky
+      stick-viewport placed)
+    "List of properties set (to true) on windows marked as docks.")
+
 
 ;;; finding windows, reading properties
 
@@ -128,9 +134,7 @@ Returns nil if no such window is found."
   (define (mark-window-as-dock w)
     "Mark that the window associated with object W is a dock window."
     (window-put w 'dock-type t)
-    (window-put w 'window-list-skip t)
-    (window-put w 'cycle-skip t)
-    (window-put w 'fixed-position t))
+    (mapc (lambda (p) (window-put w p t)) dock-window-properties))
 
   (define (window-in-cycle-p w #!key ignore-cycle-skip)
     "Returns true if the window W should be included when cycling between

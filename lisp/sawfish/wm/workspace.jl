@@ -555,7 +555,8 @@ window, one of `stop', `keep-going', `wrap-around'")
 	(call-hook 'workspace-state-change-hook))))
 
   ;; return a list of all windows on workspace index SPACE
-  (define (workspace-windows space #!optional include-iconified)
+  (define (workspace-windows
+	   #!optional (space current-workspace) include-iconified)
     (filter-windows
      (lambda (w)
        (and (window-in-workspace-p w space)

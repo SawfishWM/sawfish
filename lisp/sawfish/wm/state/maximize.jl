@@ -53,6 +53,7 @@
 	  rep.system
 	  sawfish.wm.util.edges
 	  sawfish.wm.util.rects
+	  sawfish.wm.util.workarea
 	  sawfish.wm.windows
 	  sawfish.wm.commands
 	  sawfish.wm.custom
@@ -251,39 +252,9 @@
 
 ;;; 2D packing
 
-  (define (find-max-rectangle avoided edges #!optional head)
-    (let* ((grid (grid-from-edges (car edges) (cdr edges)))
-	   rects)
-      (setq rects (rectangles-from-grid
-		   (sort (car grid)) (sort (cdr grid))
-		   (lambda (rect)
-		     ;; the rectangle mustn't overlap any avoided windows
-		     ;; or span multiple heads, or be on a different head
-		     ;; to that requested
-		     (catch 'foo
-		       (mapc (lambda (w)
-			       (when (or (> (rect-2d-overlap
-					     (window-frame-dimensions w)
-					     (window-position w)
-					     rect) 0)
-					 (/= (rectangle-heads rect) 1)
-					 (and head (/= head (find-head (car rect) (cadr rect)))))
-				 (throw 'foo nil)))
-			     avoided)
-		       t))))
-
-      ;; find the largest rectangle
-      (let ((max-area 0)
-	    (max-rect nil))
-	(mapc (lambda (rect)
-		(when (and (rect-wholly-visible-p rect)
-			   (> (rectangle-area rect) max-area))
-		  (setq max-area (rectangle-area rect))
-		  (setq max-rect rect))) rects)
-	max-rect)))
-
   (define (do-both window avoided edges coords dims fdims)
-    (let ((max-rect (find-max-rectangle avoided edges (current-head window))))
+    (let ((max-rect (largest-rectangle-from-edges
+		     edges #:avoided avoided #:head (current-head window))))
       (when max-rect
 	(rplaca coords (nth 0 max-rect))
 	(rplacd coords (nth 1 max-rect))
@@ -340,25 +311,9 @@
 ;;; misc functions
 
   (define (maximize-find-workarea #!optional w #!key head head-fallback)
-    "Return the rectangle representing the largest rectangle on the screen that
-doesn't overlap any avoided windows, or nil.  If head-fallback is non-nil, then
-an empty workarea will be replaced with the head area; otherwise nil is returned."
-    (unless head
-      (setq head (current-head w)))
-    (let* ((avoided (avoided-windows w))
-	   (edges (get-visible-window-edges
-		   #:with-ignored-windows t
-		   #:windows avoided
-		   #:include-heads (list head)))
-	   (rect (find-max-rectangle avoided edges head)))
-      (or rect
-	  (and head-fallback
-	       (let* ((head-off (head-offset head))
-		      (head-dims (head-dimensions head)))
-		 (list (car head-off)
-		       (cdr head-off)
-		       (+ (car head-off) (car head-dims))
-		       (+ (cdr head-off) (cdr head-dims))))))))
+    "This function is deprecated. Use calculate-workarea instead."
+    (declare (unused head-fallback))
+    (calculate-workarea #:window w #:head head))
 
   (define (window-locked-vertically-p w)
     (and move-lock-when-maximized

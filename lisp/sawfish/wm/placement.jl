@@ -30,11 +30,11 @@
     (open rep
 	  rep.system
 	  rep.util.autoloader
-	  sawfish.wm.state.maximize
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.windows
 	  sawfish.wm.util.groups
+	  sawfish.wm.util.workarea
 	  sawfish.wm.custom)
 
   (defcustom place-window-mode 'top-left
@@ -133,14 +133,10 @@ this mode. The single argument is the window to be placed."
 
   (define (place-window-randomly w)
     (let* ((dims (window-frame-dimensions w))
-	   (max-rect (maximize-find-workarea w))
-	   (rect-dims (if max-rect
-			  (cons (- (nth 2 max-rect) (nth 0 max-rect))
-				(- (nth 3 max-rect) (nth 1 max-rect)))
-			(current-head-dimensions)))
-	   (rect-pos (if max-rect
-			 (cons (nth 0 max-rect) (nth 1 max-rect))
-		       (current-head-offset)))
+	   (max-rect (calculate-workarea #:window w))
+	   (rect-dims (cons (- (nth 2 max-rect) (nth 0 max-rect))
+			    (- (nth 3 max-rect) (nth 1 max-rect))))
+	   (rect-pos (cons (nth 0 max-rect) (nth 1 max-rect)))
 	   (x (+ (car rect-pos)
 		 (if (< (car dims) (car rect-dims))
 		     (random (- (car rect-dims) (car dims)))
@@ -170,7 +166,7 @@ this mode. The single argument is the window to be placed."
     (let ((dims (window-frame-dimensions w))
 	  (h-dims (current-head-dimensions))
 	  (h-off (current-head-offset))
-	  (screen (maximize-find-workarea w #:head-fallback t)))
+	  (screen (calculate-workarea #:window w)))
       (move-window-to w
 		      (clamp* (+ (car h-off)
 				 (quotient (- (car h-dims) (car dims)) 2))
@@ -192,7 +188,7 @@ this mode. The single argument is the window to be placed."
 	(let ((dims (window-frame-dimensions w))
 	      (pdims (window-frame-dimensions parent))
 	      (coords (window-position parent))
-	      (screen (maximize-find-workarea w #:head-fallback t)))
+	      (screen (calculate-workarea #:window w)))
 	  (rplaca coords (clamp* (+ (car coords)
 				    (quotient (- (car pdims) (car dims)) 2))
 				 (car dims) (nth 0 screen) (nth 2 screen)))
@@ -204,8 +200,7 @@ this mode. The single argument is the window to be placed."
   (define (place-window-under-pointer w)
     (let ((dims (window-frame-dimensions w))
 	  (coords (query-pointer))
-	  (screen (maximize-find-workarea w #:head (pointer-head)
-					  #:head-fallback t)))
+	  (screen (calculate-workarea #:window w #:head (pointer-head))))
       (rplaca coords (clamp* (- (car coords) (quotient (car dims) 2))
 			     (car dims) (nth 0 screen) (nth 2 screen)))
       (rplacd coords (clamp* (- (cdr coords) (quotient (cdr dims) 2))
