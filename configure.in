@@ -108,7 +108,7 @@ cat >conftest <<EOF
   (error
     (throw 'quit 1)))
 EOF
-if rep ./conftest 2>&5; then
+if REP_GTK_DONT_INITIALIZE=1 rep ./conftest 2>&5; then
   AC_MSG_RESULT([yes])
 else
   AC_MSG_RESULT([no])
@@ -229,6 +229,17 @@ if test "$enable_themer" = yes; then
     AC_MSG_WARN([Can't load rep's libglade wrapper, not building themer])
   fi
 fi
+
+AC_MSG_CHECKING([for rep-gtk GNOME wrappers])
+if REP_GTK_DONT_INITIALIZE=1 rep --batch -l gnomeui -l gdk-pixbuf -l gnome-canvas-pixbuf 2>&5; then 
+  AC_MSG_RESULT([yes])
+  REP_GTK_GNOME=yes
+else 
+  AC_MSG_RESULT([no])
+  REP_GTK_GNOME=no
+  AC_MSG_WARN([Can't load rep's gnome wrappers])
+fi
+AC_SUBST(REP_GTK_GNOME)
 
 dnl Check for Doug Lea's malloc in libc, otherwise compile dlmalloc.c
 doug_lea_malloc=yes
