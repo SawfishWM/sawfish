@@ -46,7 +46,7 @@
   :allow-nil t)
 
 (defcustom sp-padding 4
-  "Try to leave at least this many pixels between window edges."
+  "Try to leave at least this many pixels between window edges in first/best-fit."
   :group placement
   :type number
   :range (0 . 64))
