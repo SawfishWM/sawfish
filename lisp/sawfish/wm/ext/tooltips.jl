@@ -19,7 +19,10 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.ext.tooltips ()
+(define-structure sawfish.wm.ext.tooltips
+
+    (export display-tooltip
+	    remove-tooltip)
 
     (open rep
 	  rep.io.timers
@@ -95,18 +98,52 @@
     :depends tooltips-enabled
     :type color)
 
-  ;; the window it's displayed for
+;;; displaying tooltips
+
+  ;; the window it's displayed for (or t)
   (define tooltips-displayed nil)
 
-  (define (tooltips-cleanup)
-    (when (in-hook-p 'pre-command-hook tooltips-cleanup)
-      (remove-hook 'pre-command-hook tooltips-cleanup))
+  (define (display-tooltip text &optional win)
+    (let ((pos (query-pointer))
+	  (pos-fn (lambda (in size inc)
+		    (if (< in (/ size 2))
+			(+ in inc)
+		      (- (+ (- size in) inc))))))
+      (rplaca pos (pos-fn (car pos) (screen-width) 0))
+      (rplacd pos (pos-fn (cdr pos) (screen-height) 16))
+      (display-message text
+		       `((position . ,pos)
+			 (background . ,tooltips-background-color)
+			 (foreground . ,tooltips-foreground-color)
+			 (x-justify . left)
+			 (spacing . 2)
+			 (font . ,tooltips-font)))
+      (setq tooltips-displayed (or win t))
+      (when tooltips-timeout-enabled 
+	(setq tooltips-timer
+	      (make-timer remove-tooltip
+			  (quotient tooltips-timeout-delay 1000)
+			  (mod tooltips-timeout-delay 1000))))
+      (unless (in-hook-p 'pre-command-hook remove-tooltip)
+	(add-hook 'pre-command-hook remove-tooltip))))
+
+  (define (remove-tooltip)
+    (when (in-hook-p 'pre-command-hook remove-tooltip)
+      (remove-hook 'pre-command-hook remove-tooltip))
     (when tooltips-displayed
       (display-message nil)
       (setq tooltips-displayed nil))
     (when tooltips-timer
       (delete-timer tooltips-timer)
       (setq tooltips-timer nil)))
+
+  (define (tooltips-unmapped win)
+    (when (eq win tooltips-displayed)
+      (remove-tooltip)))
+
+  (add-hook 'unmap-notify-hook tooltips-unmapped)
+
+;;; frame-part tooltips
 
   ;; each item is (EVENT-DESC . DOC)
   (define (tooltips-format items)
@@ -138,66 +175,40 @@
 			(setq out (cons ?\n out))) (cdr parts)))) items)
       (apply concat (nreverse out))))
 
-  (define (tooltips-display win fp)
+  (define (command-info command)
+    (let (doc)
+      (if (and tooltips-show-doc-strings command
+	       (symbolp command)
+	       (progn
+		 (require 'rep.lang.doc)
+		 (setq doc (documentation command))))
+	  (_ doc)
+	(format nil "%S" command))))
+
+  (define (display-fp-tooltip win fp)
     (let ((keymap (frame-part-get fp 'keymap))
-	  (pos (query-pointer))
-	  (pos-fn (lambda (in size inc)
-		    (if (< in (/ size 2))
-			(+ in inc)
-		      (- (+ (- size in) inc)))))
-	  (doc-fn (lambda (command)
-		    (let (doc)
-		      (if (and tooltips-show-doc-strings command
-			       (symbolp command)
-			       (progn
-				 (require 'rep.lang.doc)
-				 (setq doc (documentation command))))
-			  (_ doc)
-			(format nil "%S" command)))))
 	  items)
       (when (symbolp keymap)
 	(setq keymap (symbol-value keymap)))
       (map-keymap (lambda (cell)
 		    (setq items (cons (cons (event-name (cdr cell))
-					    (doc-fn (car cell))) items)))
+					    (command-info (car cell))) items)))
 		  keymap)
-      (when items
-	(rplaca pos (pos-fn (car pos) (screen-width) 0))
-	(rplacd pos (pos-fn (cdr pos) (screen-height) 16))
-	(display-message (tooltips-format (nreverse items))
-			 `((position . ,pos)
-			   (background . ,tooltips-background-color)
-			   (foreground . ,tooltips-foreground-color)
-			   (x-justify . left)
-			   (spacing . 2)
-			   (font . ,tooltips-font)))
-	(setq tooltips-displayed win)
-	(when tooltips-timeout-enabled 
-	  (setq tooltips-timer
-		(make-timer tooltips-cleanup
-			    (quotient tooltips-timeout-delay 1000)
-			    (mod tooltips-timeout-delay 1000))))
-	(unless (in-hook-p 'pre-command-hook tooltips-cleanup)
-	  (add-hook 'pre-command-hook tooltips-cleanup)))))
+      (display-tooltip (tooltips-format (nreverse items)))))
 
   (define (tooltips-fp-enter win fp)
     (when tooltips-enabled
       (let ((callback (lambda ()
 			(setq tooltips-timer nil)
 			(unless (clicked-frame-part)
-			  (tooltips-display win fp)))))
+			  (display-fp-tooltip win fp)))))
 	(when tooltips-timer
 	  (delete-timer tooltips-timer))
 	(setq tooltips-timer (make-timer callback
 					 (quotient tooltips-delay 1000)
 					 (mod tooltips-delay 1000)))
-	(unless (in-hook-p 'pre-command-hook tooltips-cleanup)
-	  (add-hook 'pre-command-hook tooltips-cleanup)))))
-
-  (define (tooltips-unmapped win)
-    (when (eq win tooltips-displayed)
-      (tooltips-cleanup)))
+	(unless (in-hook-p 'pre-command-hook remove-tooltip)
+	  (add-hook 'pre-command-hook remove-tooltip)))))
 
   (add-hook 'enter-frame-part-hook tooltips-fp-enter)
-  (add-hook 'leave-frame-part-hook tooltips-cleanup)
-  (add-hook 'unmap-notify-hook tooltips-unmapped))
+  (add-hook 'leave-frame-part-hook remove-tooltip))
