@@ -248,7 +248,7 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 		if (s & EV_MOD_ALT)
 		    s = (s & ~EV_MOD_ALT) | alt_mod;
 		if (s & EV_MOD_HYPER)
-		    s = (s & ~EV_MOD_HYPER) | alt_mod;
+		    s = (s & ~EV_MOD_HYPER) | hyper_mod;
 		if (s == EV_MOD_ANY)
 		    s = AnyModifier;
 		*button = buttons[i].button;
