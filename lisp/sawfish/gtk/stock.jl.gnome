@@ -67,9 +67,9 @@
 			authors comments #!key logo extra)
     (let ((widget (gnome-about-new title version copyright
 				   authors comments logo)))
-      (gtk-widget-show widget)
       (when extra
 	(gtk-box-pack-start (gnome-dialog-vbox widget) extra t))
+      (gtk-widget-show widget)
       widget))
 
   (define (make-url-widget url label) (gnome-href-new url label)))

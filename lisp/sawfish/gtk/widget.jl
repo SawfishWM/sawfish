@@ -151,8 +151,6 @@
   (define (enable-widget item) (set-widget-enabled item t))
   (define (disable-widget item) (set-widget-enabled item nil))
 
-  (define (get-key lst key) (cadr (memq key lst)))
-
   (define (call-callback fun)
     (when (and fun (fluid callback-enabled))
       (fun)))
