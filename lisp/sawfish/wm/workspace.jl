@@ -211,6 +211,15 @@ will be created."
     (ws-remove-window window)
     (ws-add-window-to-space window space)))
 
+
+(defun next-workspace-window ()
+  "Focus on the next window of the current workspace"
+  (interactive)
+  (let
+      ((windows (filter 'window-visible-p (cdr ws-current-workspace))))
+    (set-input-focus (or (nth 1 (memq (input-focus) windows))
+			 (car windows)))))
+
 
 ;; Iconification (but without icons)
 
