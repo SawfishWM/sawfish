@@ -26,6 +26,20 @@
   :type boolean
   :group (focus advanced))
 
+(defcustom warp-to-window-x-offset -1
+  "Offset in percent from left window edge, when warping.
+A negative number means warp to outside the left window edge."
+  :type number
+  :range (-65536 . 65535)
+  :group (focus advanced))
+ 
+(defcustom warp-to-window-y-offset -1
+  "Offset in percent from top window edge, when warping.
+A negative number means warp to outside the top window edge."
+  :type number
+  :range (-65536 . 65535)
+  :group (focus advanced))
+ 
 (defvar dont-avoid-ignored t)
 (defvar avoid-by-default nil)
 
@@ -99,11 +113,17 @@
 (defun warp-cursor-to-window (w &optional x y)
   (let
       ((coords (window-position w))
-       (foff (window-frame-offset w)))
+       (foff (window-frame-offset w))
+       (dims (window-dimensions w)))
     (unless x
-      (setq x -1))
+      (setq x
+            (if (< warp-to-window-x-offset 0)
+		warp-to-window-x-offset
+	      (/ (* (car dims) warp-to-window-x-offset) 100))))
     (unless y
-      (setq y -1))
+      (setq y (if (< warp-to-window-y-offset 0)
+		  warp-to-window-y-offset
+		(/ (* (cdr dims) warp-to-window-y-offset) 100))))
     (warp-cursor (+ x (car coords) (- (car foff)))
 		 (+ y (cdr coords) (- (cdr foff))))))
 
