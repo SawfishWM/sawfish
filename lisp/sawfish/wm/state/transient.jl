@@ -169,12 +169,12 @@ the level of any transient windows it has."
 		(input-focus)
 		(transient-of-p w (input-focus)))
 	   (set-input-focus w))
-	  (and (or (and focus-windows-when-mapped
-			(not (window-get w 'never-focus)))
-		   (window-get w 'focus-when-mapped))
-	       (window-really-wants-input-p w)
-	       (window-visible-p w))
-	  (set-input-focus w)))
+	  ((and (or (and focus-windows-when-mapped
+			 (not (window-get w 'never-focus)))
+		    (window-get w 'focus-when-mapped))
+		(window-really-wants-input-p w)
+		(window-visible-p w))
+	   (set-input-focus w))))
 
   ;; If a transient window gets unmapped that currently has the input
   ;; focus, pass it (the focus) to its parent. Otherwise, pass the focus
