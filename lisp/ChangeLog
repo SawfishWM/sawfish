@@ -1,3 +1,11 @@
+2000-01-22  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x-cycle.jl, move-resize.jl: require at compile time those
+	modules whose variables we bind to
+
+	* maximize.jl (maximize-window, unmaximized-window): use
+	move-resize-window-to instead of separate calls
+
 2000-01-21  John Harper  <john@dcs.warwick.ac.uk>
 
 	* window-order.jl (window-order-focus-most-recent): ignore
