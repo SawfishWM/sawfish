@@ -361,7 +361,7 @@ get_integer_prop (Lisp_Window *w, repv prop, repv elt)
 	    tem = rep_CDR(tem);
 	else
 	    tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
-	return  (tem && rep_INTP(tem)) ? tem : Qnil;
+	return (tem && rep_INTP(tem)) ? tem : Qnil;
     }
     else
 	return Qnil;
@@ -467,17 +467,20 @@ list_frame_generator (Lisp_Window *w)
 	tem = Fassq (Qbackground, elt);
 	if (tem && tem != Qnil)
 	{
-	    if (IMAGEP(rep_CDR(tem))
-		|| COLORP(rep_CDR(tem))
-		|| rep_STRINGP(rep_CDR(tem)))
+	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
+		tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
+	    else
+		tem = rep_CDR(tem);
+	    if (!tem)
+		goto next_part;
+	    if (IMAGEP(tem) || COLORP(tem) || rep_STRINGP(tem))
 	    {
-		fp->bg[0] = rep_CDR(tem);
+		fp->bg[0] = tem;
 		for (i = 1; i < fps_MAX; i++)
 		    fp->bg[i] = fp->bg[0];
 	    }
-	    else if (rep_CONSP(rep_CDR(tem)))
+	    else if (rep_CONSP(tem))
 	    {
-		tem = rep_CDR(tem);
 		for (i = 0; i < fps_MAX; i++)
 		{
 		    fp->bg[i] = ((IMAGEP(rep_CAR(tem))
@@ -488,35 +491,31 @@ list_frame_generator (Lisp_Window *w)
 			tem = rep_CDR(tem);
 		}
 	    }
-	    for (i = 0; i < fps_MAX; i++)
-	    {
-		if (IMAGEP(fp->bg[i]))
-		{
-		    fp->width = VIMAGE(fp->bg[fps_normal])->image->rgb_width;
-		    fp->height = VIMAGE(fp->bg[fps_normal])->image->rgb_height;
-		    break;
-		}
-	    }
 	}
 
 	/* get foreground colors */
 	tem = Fassq (Qforeground, elt);
 	if (tem && tem != Qnil)
 	{
-	    if (COLORP(rep_CDR(tem)) || rep_STRINGP(rep_CDR(tem)))
+	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
+		tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
+	    else
+		tem = rep_CDR(tem);
+	    if (!tem)
+		goto next_part;
+	    if (COLORP(tem) || rep_STRINGP(tem))
 	    {
-		fp->fg[0] = rep_CDR(tem);
+		fp->fg[0] = tem;
 		for (i = 1; i < fps_MAX; i++)
 		    fp->fg[i] = fp->fg[0];
 	    }
-	    else if (rep_CONSP(rep_CDR(tem)))
+	    else if (rep_CONSP(tem))
 	    {
-		tem = rep_CDR(tem);
 		for (i = 0; i < fps_MAX; i++)
 		{
-		    fp->font[i] = ((COLORP(rep_CAR(tem))
-				    || rep_STRINGP(rep_CAR(tem)))
-				   ? rep_CAR(tem) : fp->fg[i-1]);
+		    fp->fg[i] = ((COLORP(rep_CAR(tem))
+				  || rep_STRINGP(rep_CAR(tem)))
+				 ? rep_CAR(tem) : fp->fg[i-1]);
 		    if (rep_CONSP(rep_CDR(tem)))
 			tem = rep_CDR(tem);
 		}
@@ -527,15 +526,20 @@ list_frame_generator (Lisp_Window *w)
 	tem = Fassq (Qfont, elt);
 	if (tem && tem != Qnil)
 	{
-	    if (FONTP(rep_CDR(tem)) || rep_STRINGP(rep_CDR(tem)))
+	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
+		tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
+	    else
+		tem = rep_CDR(tem);
+	    if (!tem)
+		goto next_part;
+	    if (FONTP(tem) || rep_STRINGP(tem))
 	    {
-		fp->font[0] = rep_CDR(tem);
+		fp->font[0] = tem;
 		for (i = 1; i < fps_MAX; i++)
 		    fp->font[i] = fp->font[0];
 	    }
-	    else if (rep_CONSP(rep_CDR(tem)))
+	    else
 	    {
-		tem = rep_CDR(tem);
 		for (i = 0; i < fps_MAX; i++)
 		{
 		    fp->font[i] = ((FONTP(rep_CAR(tem))
@@ -547,20 +551,35 @@ list_frame_generator (Lisp_Window *w)
 	    }
 	}
 
+	/* resolve string bg/fg/font attributes to the actual objects */
 	for (i = 0; i < fps_MAX; i++)
 	{
 	    if (rep_STRINGP(fp->fg[i]))
 		fp->fg[i] = Fget_color (fp->fg[i]);
 	    if (fp->fg[i] != Qnil && !COLORP(fp->fg[i]))
 		goto next_part;
+
 	    if (rep_STRINGP(fp->bg[i]))
 		fp->bg[i] = Fget_color (fp->bg[i]);
 	    if (fp->bg[i] != Qnil && !IMAGEP(fp->bg[i]) && !COLORP(fp->bg[i]))
 		goto next_part;
+
 	    if (rep_STRINGP(fp->font[i]))
 		fp->font[i] = Fget_font (fp->font[i]);
 	    if (fp->font[i] != Qnil && !FONTP(fp->font[i]))
 		goto next_part;
+	}
+
+	/* If we have a background image for this part, take it as
+	   the provisional dimensions of the part */
+	for (i = 0; i < fps_MAX; i++)
+	{
+	    if (IMAGEP(fp->bg[i]))
+	    {
+		fp->width = VIMAGE(fp->bg[fps_normal])->image->rgb_width;
+		fp->height = VIMAGE(fp->bg[fps_normal])->image->rgb_height;
+		break;
+	    }
 	}
 
 	/* get dimensions.. */
