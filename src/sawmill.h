@@ -132,6 +132,9 @@ typedef struct lisp_window {
     /* Do we need to send a synthetic ConfigureNotify to this window? */
     u_int pending_configure : 1;
 
+    /* Do we need to recalculate the shape mask of the frame? */
+    u_int pending_reshape : 1;
+
     /* The position and dimensions of `attr' is always maintained.
        But the position is the position of the frame, while the
        dimensions are those of the client */
@@ -312,7 +315,7 @@ enum exit_codes {
 #undef POS
 #define POS(x)   MAX(x, 0)
 #undef ABS
-#define ABS(x)   MAX(x, -(x))
+#define ABS(x)   (((x) >= 0) ? (x) : -(x))
 
 #ifndef NULL
 # define NULL 0
