@@ -69,7 +69,7 @@
 				  ;(focused . "clicked.wav")
 				  (switch-workspace . "toggled.wav")
 				  (move-viewport . "toggled.wav"))
-    ""
+    nil
     :type* `(alist ((symbol iconified uniconified
 			    shaded unshaded
 			    maximized unmaximized
