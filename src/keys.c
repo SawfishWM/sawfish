@@ -47,7 +47,7 @@ DEFSYM(unbound_key_hook, "unbound-key-hook");
 DEFSYM(keymap, "keymap");
 
 /* The X modifiers being used for Meta and Alt */
-static u_long meta_mod, alt_mod;
+static u_long meta_mod, alt_mod, num_lock_mod;
 
 static void grab_keymap_event (repv km, long code, long mods, bool grab);
 static void grab_all_keylist_events (repv map, repv tem, bool grab);
@@ -65,7 +65,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
     switch(xev->type)
     {
     case KeyPress:
-	*mods = xev->xkey.state & ~LockMask;
+	*mods = xev->xkey.state & ~(LockMask | num_lock_mod);
 	if(*mods & ShiftMask)
 	{
 	    /* Some keys don't have keysym at index 1, if not treat it as
@@ -98,7 +98,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
     case ButtonRelease:
 	*code = EV_CODE_MOUSE_UP;
     button:
-	*mods = xev->xbutton.state;
+	*mods = xev->xbutton.state & ~(LockMask | num_lock_mod);
 	*mods |= EV_TYPE_MOUSE;
 	switch(xev->xbutton.button)
 	{
@@ -122,7 +122,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 
     case MotionNotify:
 	*code = EV_CODE_MOUSE_MOVE;
-	*mods = xev->xmotion.state;
+	*mods = xev->xmotion.state & ~(LockMask | num_lock_mod);
 	*mods |= EV_TYPE_MOUSE;
 	break;
     }
@@ -1008,6 +1008,10 @@ find_meta(void)
 		    case XK_Alt_L: case XK_Alt_R:
 			alt_mod = 1 << row;
 			break;
+
+		    case XK_Num_Lock:
+			num_lock_mod = 1 << row;
+			break;
 		    }
 		}
 	    }
@@ -1036,6 +1040,12 @@ grab_event (Window grab_win, repv ev)
 	{
 	    XGrabKey (dpy, code, state, grab_win,
 		      False, GrabModeAsync, GrabModeAsync);
+	    XGrabKey (dpy, code, state | LockMask, grab_win,
+		      False, GrabModeAsync, GrabModeAsync);
+	    XGrabKey (dpy, code, state | num_lock_mod, grab_win,
+		      False, GrabModeAsync, GrabModeAsync);
+	    XGrabKey (dpy, code, state | LockMask | num_lock_mod, grab_win,
+		      False, GrabModeAsync, GrabModeAsync);
 	}
 	break;
 
@@ -1043,6 +1053,15 @@ grab_event (Window grab_win, repv ev)
 	if (translate_event_to_x_button (ev, &code, &state))
 	{
 	    XGrabButton (dpy, code, state, grab_win,
+			 False, ButtonPressMask | ButtonReleaseMask,
+			 GrabModeAsync, GrabModeAsync, None, None);
+	    XGrabButton (dpy, code, state | LockMask, grab_win,
+			 False, ButtonPressMask | ButtonReleaseMask,
+			 GrabModeAsync, GrabModeAsync, None, None);
+	    XGrabButton (dpy, code, state | num_lock_mod, grab_win,
+			 False, ButtonPressMask | ButtonReleaseMask,
+			 GrabModeAsync, GrabModeAsync, None, None);
+	    XGrabButton (dpy, code, state | LockMask | num_lock_mod, grab_win,
 			 False, ButtonPressMask | ButtonReleaseMask,
 			 GrabModeAsync, GrabModeAsync, None, None);
 	}
@@ -1058,12 +1077,22 @@ ungrab_event (Window grab_win, repv ev)
 
     case EV_TYPE_KEY:
 	if (translate_event_to_x_key (ev, &code, &state))
+	{
 	    XUngrabKey (dpy, code, state, grab_win);
+	    XUngrabKey (dpy, code, state | LockMask, grab_win);
+	    XUngrabKey (dpy, code, state | num_lock_mod, grab_win);
+	    XUngrabKey (dpy, code, state | LockMask | num_lock_mod, grab_win);
+	}
 	break;
 
     case EV_TYPE_MOUSE:
 	if (translate_event_to_x_button (ev, &code, &state))
+	{
 	    XUngrabButton (dpy, code, state, grab_win);
+	    XUngrabButton (dpy, code, state | LockMask, grab_win);
+	    XUngrabButton (dpy, code, state | num_lock_mod, grab_win);
+	    XUngrabButton (dpy, code, state | LockMask | num_lock_mod, grab_win);
+	}
     }
 }
 
