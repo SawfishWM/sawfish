@@ -100,6 +100,11 @@
   :group cycle
   :type boolean)
 
+(defcustom cycle-disable-auto-raise nil
+  "Disable auto-raising while temporarily selecting windows."
+  :group cycle
+  :type boolean)
+
 
 ;; variables
 
@@ -125,6 +130,10 @@
        (eval-key-release-events t)
        (override-keymap (make-keymap))
        (focus-dont-push t)
+       (raise-windows-on-focus (if cycle-disable-auto-raise
+				   nil
+				 (and (boundp 'raise-windows-on-focus)
+				      raise-windows-on-focus)))
        (x-cycle-current nil)
        (x-cycle-stacking nil)
        mod tem)
