@@ -45,6 +45,7 @@
 static int server_grabs;
 
 DEFSYM(root, "root");
+DEFSYM(TEXT, "TEXT");
 
 DEFUN("restack-windows", Frestack_windows, Srestack_windows,
       (repv list), rep_Subr1) /*
@@ -727,6 +728,77 @@ converted to their numeric X atoms.
     return prop;
 }
 
+DEFUN("get-x-text-property", Fget_x_text_property, Sget_x_text_property,
+      (repv win, repv prop), rep_Subr2) /*
+::doc:Sget-x-text-property::
+get-x-text-property WINDOW PROPERTY
+::end:: */
+{
+    Window w;
+    Atom a_prop;
+    XTextProperty t_prop;
+    repv ret = Qnil;
+
+    w = x_win_from_arg (win);
+    if (w == 0)
+	return rep_signal_arg_error (win, 1);
+    rep_DECLARE2(prop, rep_SYMBOLP);
+    a_prop = XInternAtom (dpy, rep_STR(rep_SYM(prop)->name), False);
+
+    if (XGetTextProperty (dpy, w, &t_prop, a_prop) != 0)
+    {
+	char **list;
+	int count;
+	if (XTextPropertyToStringList (&t_prop, &list, &count) != 0)
+	{
+	    int i;
+	    ret = Fmake_vector (rep_MAKE_INT(count), Qnil);
+	    for (i = 0; i < count; i++)
+		rep_VECTI(ret, i) = rep_string_dup (list[i]);
+	    XFreeStringList (list);
+	}
+	XFree (t_prop.value);
+    }
+
+    return ret;
+}
+
+DEFUN("set-x-text-property", Fset_x_text_property, Sset_x_text_property, 
+      (repv win, repv prop, repv vect), rep_Subr3) /*
+::doc:Sset-x-text-prooperty::
+set-x-text-property WINDOW PROPERTY STRING-VECTOR
+::end:: */
+{
+    Window w;
+    Atom a_prop;
+    XTextProperty t_prop;
+    char **strings;
+    int count, i;
+
+    w = x_win_from_arg (win);
+    if (w == 0)
+	return rep_signal_arg_error (win, 1);
+    rep_DECLARE2(prop, rep_SYMBOLP);
+    rep_DECLARE3(vect, rep_VECTORP);
+    a_prop = XInternAtom (dpy, rep_STR(rep_SYM(prop)->name), False);
+
+    count = rep_VECT_LEN(vect);
+    strings = alloca (sizeof (char *) * (count + 1));
+    for (i = 0; i < count; i++)
+    {
+	if (!rep_STRINGP(rep_VECTI(vect, i)))
+	    return rep_signal_arg_error (vect, 3);
+	strings[i] = rep_STR(rep_VECTI(vect, i));
+    }
+    if (XStringListToTextProperty (strings, count, &t_prop) != 0)
+    {
+	XSetTextProperty (dpy, w, &t_prop, a_prop);
+	XFree (t_prop.value);
+    }
+
+    return Qt;
+}
+
 DEFUN("send-client-message", Fsend_client_message, Ssend_client_message,
       (repv win, repv type, repv data, repv format), rep_Subr4) /*
 ::doc:Ssend-client-message::
@@ -1034,6 +1106,8 @@ functions_init (void)
     rep_ADD_SUBR(Slist_x_properties);
     rep_ADD_SUBR(Sget_x_property);
     rep_ADD_SUBR(Sset_x_property);
+    rep_ADD_SUBR(Sget_x_text_property);
+    rep_ADD_SUBR(Sset_x_text_property);
     rep_ADD_SUBR(Ssend_client_message);
     rep_ADD_SUBR(Screate_window);
     rep_ADD_SUBR(Sx_atom);
@@ -1041,6 +1115,7 @@ functions_init (void)
     rep_ADD_SUBR(Sgetpid);
     rep_ADD_SUBR(Sshow_message);
     rep_INTERN(root);
+    rep_INTERN(TEXT);
 
     rep_mark_static (&message.text);
     rep_mark_static (&message.fg);
