@@ -707,6 +707,21 @@ If @var{type} is @code{ATOM} and @var{format} is 32, then any symbols
 in @var{data} will be converted to their numeric X atoms.
 @end defun
 
+The standard X property formats don't allow for an array of strings to
+be stored, so these are often encoded as the strings concatenated,
+separated by zero characters. These are usually called @dfn{text
+properties}. Sawmill has two functions for manipulating them:
+
+@defun get-x-text-property window property
+Similar to @code{get-x-property}, but returns either @code{nil} or a
+vector of strings.
+@end defun
+
+@defun set-x-text-property windoe property data
+Sets the X text property @var{property} of @var{window} to the array
+of strings @var{data}.
+@end defun
+
 It's also possible to detect when the value of any property associated
 with a managed window changes, using the @code{property-notify-hook}.
 @xref{Standard Hooks}.

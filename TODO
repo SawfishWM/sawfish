@@ -39,11 +39,11 @@ Outstanding bugs
   ! ICCCM says we should not passive grab on the client windows, but on
     our frames instead
 
+  ! swallowing windows to the panel doesn't work?
+
 
 General tasks
 =============
-
-  + option to never automatically create new workspaces
 
   + allow workspaces to be named?
 
@@ -51,6 +51,9 @@ General tasks
     strings; but it's not yet customizable through the ui
 
   + remember last focused window on each workspace?
+
+    perhaps generalize the x-cycle-order property to be ever-present,
+    then use it for this as well?
 
   + features for the gnome/redhat guys:
 
@@ -60,7 +63,7 @@ General tasks
 
     * launch capplet instead of standalone config tool
 
-    * 2x2 workspaces (see below `viewport based workspaces')
+    * 2x2 workspaces [30/9: this has been done]
 
     there will be a new lisp module (`gnome-int'?) that has these
     things as options (enabled by default). It will also require
@@ -109,34 +112,14 @@ General tasks
 
   + change edge snapping to use resistance instead of magnetism?
 
+    perhaps allow mode to be set as an option; it would be nice to
+    differentiate between screen edges and window edges
+
   + allow configuration of where move/resize display appears
 
     allow relative to window, or relative to root, for both x and y
 
   + option for maximizing not to cover panels
-
-  + greater than 1d workspaces
-
-    I'm not going to do this as in other window managers (i.e. faking
-    the position of the window, then translating from the viewport
-    origin) 
-
-    the reason: there's too much replication between the two methods,
-    with too much intrusion, and too little reward (the only thing
-    gained is the ability to make a window span more than one viewport)
-
-    structures with >1 dimension can be made using the 1d workspace
-    continuum, e.g. for a grid with X columns, moving up/down
-    subtracts/adds X to the current workspace id
-
-    the problem is getting the pager to display this under GNOME, the
-    wm spec allows for ``areas'' but then implicitly assumes the usual
-    geometry-based model (i.e. using the window geometry to infer which
-    area it's in)
-
-    this could be fixed by making the pager look for an optional
-    _WIN_AREA property on each client, analogous to the _WIN_WORKSPACE
-    property
 
   + Allow text-entry commands in bindings dialog?
 

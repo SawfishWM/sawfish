@@ -1,3 +1,15 @@
+1999-09-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* functions.c (Fset_viewport, Fget_viewport): functions for
+	implementing virtual desktops
+
+	* frames.c (set_frame_part_fg): remember to tell the event loop
+	that there may be X events read but not handled (Imlib..)
+
+	* libclient.c, libclient.h: abstracted the guts of client.c,
+	providing a better interface
+	* client.c: call the client_ functions in libclient.o
+
 1999-09-29  John Harper  <john@dcs.warwick.ac.uk>
 
 	* client.c: added back the old unix domain code, if this can't

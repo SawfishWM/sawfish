@@ -11,6 +11,10 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item Implemented virtual workspaces, bind to the
+@code{move-viewport-@var{x}} commands (for @var{x} being @code{left},
+@code{right}, @code{up}, or @code{down})
+
 @item Added a new theme: @code{microGUI} by Ryan Lovett
 @email{ryan@@ocf.berkeley.edu}, based on the QNX Photon screenshots
 
@@ -22,6 +26,12 @@ domain socket code (see the FAQ for more details)
 
 @item New option to keep transient windows above their parents
 (@code{transients-above-parents})
+
+@item New option to control how the workspace boundary is handled when
+moving windows between workspaces (@code{workspace-send-boundary-mode})
+
+@item New commands @code{send-to-workspace:@var{x}} for @var{x} from 1
+to 9
 
 @item While windows are hidden, unmap the client (for ICCCM compliance)
 

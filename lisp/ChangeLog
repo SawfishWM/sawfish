@@ -1,3 +1,20 @@
+1999-09-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* viewport.jl: new file, support virtual workspaces
+	* workspace.jl: deleted the workspace-columns hack, set
+	fixed-position property of sticky windows
+	* gnome.jl: handle _WIN_AREA properties
+	* sawmill.jl: require viewport
+
+	* transient.jl (transient-add-window): set fixed-position as
+	well in sticky windows
+
+	* sm-save.jl, sm-load.jl: don't save position of windows,
+	handled by viewport module
+
+	* workspace.jl (workspace-send-boundary-mode): new option
+	(send-to-workspace:X): new commands, 0 < X < 10
+
 1999-09-29  John Harper  <john@dcs.warwick.ac.uk>
 
 	* server.jl (server-eval): function to evaluate a string to a
