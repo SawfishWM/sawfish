@@ -409,9 +409,9 @@ bevel_horizontally (u_char *data, int width, int height,
 	u_char *ptr = data;
 	int x;
 	if (top)
-	    ptr += rows * 3;
+	    ptr += (rows * width) * 3 + (rows + 1) * 3;
 	else
-	    ptr += width * (height - (rows + 1)) * 3;
+	    ptr += width * (height - (rows + 1)) * 3 + (rows) * 3;
 	for (x = rows; x < width - (rows + 1); x++)
 	{
 	    bevel_pixel (ptr, up);
@@ -431,10 +431,10 @@ bevel_vertically (u_char *data, int width, int height,
 	u_char *ptr = data;
 	int y;
 	if (top)
-	    ptr += cols * 3;
+	    ptr += cols * 3 + (cols * width) * 3;
 	else
-	    ptr += (width - (cols + 1)) * 3;
-	for (y = cols; y < height - (cols + 1); y++)
+	    ptr += (width - (cols + 1)) * 3 + ((cols) * width) * 3;
+	for (y = cols; y <= height - (cols + 1); y++)
 	{
 	    bevel_pixel (ptr, up);
 	    ptr += width * 3;
@@ -458,14 +458,14 @@ the width of the bevel. If UP is non-nil the bevel is raised.
 			VIMAGE(image)->image->rgb_width,
 			VIMAGE(image)->image->rgb_height,
 			rep_INT(border), TRUE, up != Qnil);
-    bevel_horizontally (VIMAGE(image)->image->rgb_data,
-			VIMAGE(image)->image->rgb_width,
-			VIMAGE(image)->image->rgb_height,
-			rep_INT(border), FALSE, up != Qnil);
     bevel_vertically (VIMAGE(image)->image->rgb_data,
 		      VIMAGE(image)->image->rgb_width,
 		      VIMAGE(image)->image->rgb_height,
 		      rep_INT(border), TRUE, up != Qnil);
+    bevel_horizontally (VIMAGE(image)->image->rgb_data,
+			VIMAGE(image)->image->rgb_width,
+			VIMAGE(image)->image->rgb_height,
+			rep_INT(border), FALSE, up != Qnil);
     bevel_vertically (VIMAGE(image)->image->rgb_data,
 		      VIMAGE(image)->image->rgb_width,
 		      VIMAGE(image)->image->rgb_height,
