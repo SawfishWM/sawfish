@@ -623,6 +623,8 @@ focus_in (XEvent *ev)
 	if (w->id != 0)
 	    Fcall_window_hook (Qfocus_in_hook, rep_VAL(w), Qnil, Qnil);
     }
+    else if (ev->xfocus.window == root_window)
+	focus_on_window (0);
 }
 
 static void
