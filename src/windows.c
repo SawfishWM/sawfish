@@ -312,6 +312,7 @@ add_window (Window id)
 	XConfigureWindow (dpy, id, xwcm, &xwc);
 
         w->visible = TRUE;
+	w->mapped = TRUE;		/* only called from map request */
 
 	/* ..then call the add-window-hook's.. */
 	rep_PUSHGC(gc_win, win);
@@ -819,8 +820,6 @@ Prevent WINDOW from being displayed. See `show-window'.
 	}
 	VWIN(win)->visible = 0;
 	reset_frame_parts (VWIN(win));
-	if (focus_window == VWIN(win))
-	    focus_on_window (0);
     }
     return win;
 }
