@@ -250,6 +250,40 @@ current_state (struct frame_part *fp)
 	return fps_inactive;
 }
 
+/* Call FUN (ARG) with error protection in place. If an error occurs
+   a message is printed, and ERROR-RETURN is returned, else just return
+   the result of calling FUN. */
+static repv
+call_protectedly (repv (*fun)(repv), repv arg, repv error_return)
+{
+    rep_GC_root gc_error_return;
+    repv result;
+    rep_PUSHGC (gc_error_return, error_return);
+    result = fun (arg);
+    if (result == rep_NULL)
+    {
+	repv throw = rep_throw_value, stream;
+	rep_throw_value = rep_NULL;
+        stream = Fstderr_file();
+        if (stream != rep_NULL)
+        {
+	    rep_stream_puts (stream, "frame error: ", -1, rep_FALSE);
+            rep_print_val (stream, rep_CDR(throw));
+            rep_stream_putc (stream, '\n');
+        }
+	result = error_return;
+    }
+    rep_POPGC;
+    return result;
+}
+
+/* Call lisp function FUN with the single arg ARG, with error protection */
+static repv
+call_protectedly_1 (repv fun, repv arg, repv error_return)
+{
+    return call_protectedly (Ffuncall, rep_LIST_2 (fun, arg), error_return);
+}
+
 /* Construct the frame window's shape mask from the union of all
    individual shapes (frame parts and the client window, if appropriate).
    If ATOMIC is true, then the frame shape is changed _once_ only, using
@@ -879,7 +913,7 @@ get_integer_prop (struct frame_part *fp, repv prop, repv class, repv ov_class)
 	if (rep_INTP(rep_CDR(tem)))
 	    tem = rep_CDR(tem);
 	else
-	    tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(fp->win));
+	    tem = call_protectedly_1 (rep_CDR(tem), rep_VAL(fp->win), Qnil);
 	return (tem && rep_INTP(tem)) ? tem : Qnil;
     }
     else
@@ -897,7 +931,7 @@ get_pattern_prop (struct frame_part *fp, repv *data, repv (*conv)(repv data),
     if (tem != Qnil)
     {
 	if (Ffunctionp (rep_CDR(tem)) != Qnil)
-	    tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(fp->win));
+	    tem = call_protectedly_1 (rep_CDR(tem), rep_VAL(fp->win), Qnil);
 	else
 	    tem = rep_CDR(tem);
 	if (!tem)
@@ -957,7 +991,7 @@ get_pattern_prop (struct frame_part *fp, repv *data, repv (*conv)(repv data),
 	{
 	    if (rep_STRINGP(data[i]))
 	    {
-		repv tem = conv (data[i]);
+		repv tem = call_protectedly (conv, data[i], Qnil);
 		if (tem == rep_NULL)
 		    return FALSE;
 		data[i] = tem;
@@ -1046,7 +1080,7 @@ build_frame_part (struct frame_part *fp)
     {
 	tem = rep_CDR(tem);
 	if (Ffunctionp (tem) != Qnil)
-	    tem = rep_call_lisp1 (tem, rep_VAL(w));
+	    tem = call_protectedly_1 (tem, rep_VAL(w), Qnil);
 	if (tem != rep_NULL)
 	    fp->x_justify = tem;
     }
@@ -1057,7 +1091,7 @@ build_frame_part (struct frame_part *fp)
     {
 	tem = rep_CDR(tem);
 	if (Ffunctionp (tem) != Qnil)
-	    tem = rep_call_lisp1 (tem, rep_VAL(w));
+	    tem = call_protectedly_1 (tem, rep_VAL(w), Qnil);
 	if (tem != rep_NULL)
 	    fp->y_justify = tem;
     }
@@ -1071,7 +1105,7 @@ build_frame_part (struct frame_part *fp)
     {
 	tem = rep_CDR(tem);
 	if (!CURSORP(tem) && tem != Qnil)
-	    tem = Fget_cursor (tem);
+	    tem = call_protectedly (Fget_cursor, tem, Qnil);
 	if (tem && CURSORP(tem))
 	    fp->cursor = tem;
     }
