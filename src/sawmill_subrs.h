@@ -53,9 +53,8 @@ extern void commands_init (void);
 /* from display.c */
 extern char *prog_name;
 extern Display *dpy;
-extern int screen_num, screen_width, screen_height, screen_depth;
-extern Visual *screen_visual;
-extern Colormap screen_cmap;
+extern int screen_num, screen_width, screen_height, preferred_depth;
+extern Visual *preferred_visual;
 extern Window root_window, no_focus_window;
 extern Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols,
     xa_wm_delete_window, xa_wm_colormap_windows, xa_wm_take_focus,

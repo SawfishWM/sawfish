@@ -1,5 +1,10 @@
 2000-06-13  John Harper  <john@dcs.warwick.ac.uk>
 
+	* window-history.jl: don't save the `iconified' and `shaded'
+	states (they relate to the current instance of the window
+	only). Also when restoring window state, use the current value
+	of window-history-states to decided which properties to update
+
 	* iconify.jl (iconify-workspace-windows): new command
 
 2000-06-12  John Harper  <john@dcs.warwick.ac.uk>

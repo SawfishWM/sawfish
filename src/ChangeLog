@@ -1,3 +1,17 @@
+2000-06-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	Work to support non-default visuals and color depths
+
+	* main.c (usage): updated for new options
+
+	* display.c: support options --visual=TYPE and --depth=DEPTH
+	for specifying the preferred visual type and color depth. Also
+	removed the screen_{cmap,visual,depth} variables. Replaced by
+	preferred_{visual,depth}
+
+	* frames.c, flippers.c, colors.c, images.c, x.c: no longer use
+	screen_{cmap,visual,depth}
+
 2000-06-12  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.28
