@@ -634,6 +634,23 @@ all workspaces."
 		  'WM_STATE 32))
 
 
+;; session management
+
+(defun ws-saved-state (w)
+  (let
+      ((limits (ws-workspace-limits))
+       (space (window-get w 'workspace)))
+    (when space
+      `((workspace . ,(- (car limits) space))))))
+
+(defun ws-load-state (w alist)
+  (let
+      ((limits (ws-workspace-limits))
+       (space (cdr (assq 'workspace alist))))
+    (when space
+      (window-put w 'workspace (+ (car limits) space)))))
+
+
 ;; Initialisation
 
 (unless (or batch-mode (memq 'ws-add-window add-window-hook))
@@ -644,6 +661,6 @@ all workspaces."
   (add-hook 'before-add-window-hook 'ws-honour-client-state)
   (add-hook 'add-window-hook 'ws-set-client-state t)
   (add-hook 'window-state-change-hook 'ws-set-client-state)
-  (sm-add-saved-properties 'sticky 'iconified 'workspace)
-  (mapc 'ws-honour-client-state (managed-windows))
-  (mapc 'ws-add-window (managed-windows)))
+  (sm-add-saved-properties 'sticky 'iconified)
+  (add-hook 'sm-window-save-functions 'ws-saved-state)
+  (add-hook 'sm-restore-window-hook 'ws-load-state))
