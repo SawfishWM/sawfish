@@ -290,7 +290,8 @@
 
   (add-hook 'before-add-window-hook gnome-honour-client-state t)
   (add-hook 'add-window-hook gnome-set-client-state)
-  (add-hook 'window-state-change-hook gnome-set-client-state)
+  (call-after-state-changed '(sticky shaded maximized ignored stacking)
+			    gnome-set-client-state)
 
   (add-hook 'client-message-hook gnome-client-message-handler)
   (add-hook 'unbound-key-hook gnome-event-proxyer)
