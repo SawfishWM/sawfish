@@ -262,6 +262,7 @@ sys_init(char *program_name)
 		/* Create the mapped-but-invisible window that is given
 		   the focus when no other window has it. */
 		XSetWindowAttributes attr;
+		/* this value is assumed in events.c:get_server_timestamp */
 		attr.event_mask = KeyPressMask;
 		attr.override_redirect = True;
 		no_focus_window = XCreateWindow (dpy, root_window,
