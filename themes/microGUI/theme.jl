@@ -38,11 +38,6 @@
 ;; 25x25
 (defvar microGUI:bottom-right-images (make-image "br.png"))
 
-(defvar microGUI:top-left-trans-images (make-image "tl.png"))
-
-(defvar microGUI:top-right-trans-images
-  (flip-image-diagonally (copy-image microGUI:bottom-left-images)))
-
 ;; 17x16
 (defvar microGUI:close-images (list (make-image "close_normal.png")
 				    (make-image "close_active.png") nil
@@ -71,6 +66,35 @@
 
 (defvar microGUI:top-images
   (flip-image-diagonally (copy-image microGUI:left-images)))
+
+;; 18x17
+(defvar microGUI:t-close-images (list (make-image "t_close_normal.png")
+				      (make-image "t_close_active.png") nil
+				      (make-image "t_close_clicked.png")))
+;; 5x19
+(defvar microGUI:t-left-images (make-image "t_left.png"))
+
+;; 18x10
+(defvar microGUI:t-right-images (make-image "t_right.png"))
+
+;; 19x5
+(defvar microGUI:t-top-images (make-image "t_top.png"))
+
+;; 19x5
+(defvar microGUI:t-bottom-images (make-image "t_bottom.png"))
+
+;; 4x4
+(defvar microGUI:t-top-left-images (make-image "t_top_left.png"))
+
+;; 4x4
+(defvar microGUI:t-bottom-left-images (make-image "t_bottom_left.png"))
+
+;; 17x4
+(defvar microGUI:t-top-right-images (make-image "t_top_right.png"))
+
+;; 17x4
+(defvar microGUI:t-bottom-right-images (make-image "t_bottom_right.png"))
+
 
 
 ;; frame layout
@@ -238,56 +262,62 @@
 
 (defvar microGUI:transient-frame
   `(;;top-left corner
-    ((background . ,microGUI:top-left-trans-images)
-     (left-edge . -6)
-     (top-edge . -6)
+    ((background . ,microGUI:t-top-left-images)
+     (left-edge . -5)
+     (top-edge . -5)
      (class . top-left-corner))
 
     ;;top-right corner
-    ((background . ,microGUI:top-right-trans-images)
-     (right-edge . -6)
-     (top-edge . -6)
+    ((background . ,microGUI:t-top-right-images)
+     (right-edge . -18)
+     (top-edge . -5)
      (class . top-right-corner))
 
     ;;title border
-    ((background . ,microGUI:top-images)
-     (left-edge . 17)
-     (right-edge . 19)
-     (top-edge . -6)
-     (class . title))
+    ((background . ,microGUI:t-top-images)
+     (left-edge . -1)
+     (right-edge . -1)
+     (top-edge . -5)
+     (class . top-border))
 
    ;; left border
-   ((background . ,microGUI:left-images)
-    (left-edge . -6)
-    (top-edge . 19)
-    (bottom-edge . 19)
+   ((background . ,microGUI:t-left-images)
+    (left-edge . -5)
+    (top-edge . -1)
+    (bottom-edge . -1)
     (class . left-border))
 
    ;; right border
-   ((background . ,microGUI:right-images)
-    (right-edge . -6)
-    (top-edge . 0)
-    (bottom-edge . 0)
-    (class . right-border))
+   ((background . ,microGUI:t-right-images)
+    (right-edge . -18)
+    (top-edge . -1)
+    (bottom-edge . -1)
+    (class . title))
 
    ;; bottom border
-   ((background . ,microGUI:bottom-images)
-    (left-edge . 17)
-    (right-edge . 19)
-    (bottom-edge . -6)
+   ((background . ,microGUI:t-bottom-images)
+    (left-edge . -1)
+    (right-edge . -1)
+    (bottom-edge . -5)
     (class . bottom-border))
 
    ;; bottom-left corner
-   ((background . ,microGUI:bottom-left-images)
-    (left-edge . -6)
-    (bottom-edge . -6)
+   ((background . ,microGUI:t-bottom-left-images)
+    (left-edge . -5)
+    (bottom-edge . -5)
     (class . bottom-left-corner))
 
    ;; bottom-right corner
-   ((background . ,microGUI:bottom-right-images)
-    (right-edge . -6)
-    (bottom-edge . -6)
+   ((background . ,microGUI:t-bottom-right-images)
+    (right-edge . -18)
+    (bottom-edge . -5)
     (class . bottom-right-corner))
+
+   ;; delete button
+   ((background . ,microGUI:t-close-images)
+    (right-edge . -18)
+    (top-edge . 1)
+    (class . close-button))
 ))
 
 
