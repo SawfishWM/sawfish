@@ -65,11 +65,7 @@
 
 (define-structure sawfish.wm.commands.x-cycle
 
-    (export cycle-windows
-	    cycle-group
-	    cycle-prefix
-	    cycle-class
-	    cycle-next)
+    (export define-cycle-command)
 
     (open rep
 	  rep.system
@@ -77,6 +73,7 @@
 	  sawfish.wm.misc
 	  sawfish.wm.windows
 	  sawfish.wm.util.window-order
+	  sawfish.wm.util.keymap
 	  sawfish.wm.commands
 	  sawfish.wm.custom
 	  sawfish.wm.workspace
@@ -97,13 +94,6 @@
 
   ;;###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
   (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-
-  (defcustom cycle-reverse-event "SPC"
-    "Reversal key: \\w"
-    :tooltip "The key used to cycle in the reverse direction. Has the active \
-modifiers added to it."
-    :group (focus cycle)
-    :type event)
 
   (defcustom cycle-show-window-names t
     "Display window names while cycling through windows."
@@ -160,6 +150,9 @@ modifiers added to it."
 
   ;; the list of windows being cycled through
   (define x-cycle-windows (make-fluid))
+
+  ;; alist of names (FORWARD . REVERSE) of all cycle commands
+  (define cycle-commands '())
 
 
 ;;; code
@@ -230,7 +223,7 @@ modifiers added to it."
 
   (define (x-cycle-exit) (throw 'x-cycle-exit t))
 
-  (define (cycle-windows #!optional windows (step +1))
+  (define (cycle-begin windows step)
     "Cycle through all windows in order of recent selections."
     (let ((tail-command nil))
       (let-fluids ((x-cycle-current nil)
@@ -284,18 +277,14 @@ modifiers added to it."
 	  ;; Use the event that invoked us to contruct the keymap
 	  (bind-keys override-keymap event (cycle-next step))
 
-	  ;; add the reverse key
-	  (when cycle-reverse-event
-	    (condition-case nil
-		;; merge the modifiers of the cycle-reverse-event
-		;; and the decoded current-event
-		(let* ((in (decode-event (lookup-event cycle-reverse-event)))
-		       (out (encode-event (list (car in)
-						(merge-unsorted (cadr in)
-								(cadr decoded))
-						(caddr in)))))
-		  (bind-keys override-keymap out (cycle-next (- step))))
-	      (error nil)))
+	  ;; search the global-keymap for any bindings of the
+	  ;; associated reverse command
+	  (let ((reversed (reciprocal-command this-command)))
+	    (when reversed
+	      (let ((keys (where-is reversed)))
+		(mapc (lambda (k)
+			(bind-keys override-keymap k (cycle-next (- step))))
+		      keys))))
 
 	  (mapc (lambda (k)
 		  (bind-keys override-keymap
@@ -322,36 +311,65 @@ modifiers added to it."
 	(current-event-window (input-focus))
 	(call-command tail-command))))
 
-;;; variants
+  ;; return the name of the command cycling in the opposite direction
+  ;; to NAME
+  (define (reciprocal-command name)
+    (or (cdr (assq name cycle-commands))
+	(car (rassq name cycle-commands))))
 
-  (define (cycle-group w #!optional (step +1))
-    "Cycle through all windows in the same group as the current window."
-    (let ((windows (windows-in-group w)))
-      (when windows
-	(cycle-windows windows step))))
+;;; public entry point
 
-  (define (cycle-prefix w #!optional (step +1))
-    "Cycle through all windows whose names match the leading colon-delimited
-prefix of the current window."
-    (when (string-match "^([^:]+)\\s*:" (window-name w))
-      (let* ((prefix (expand-last-match "\\1"))
-	     (re (concat ?^ (quote-regexp prefix) "\\s*:"))
-	     (windows (filter-windows
-		       (lambda (x)
-			 (string-match re (window-name x))))))
-	(when windows
-	  (cycle-windows windows step)))))
+  (define (define-cycle-command forward-name reverse-name selector . rest)
+    "Create a pair of commands for cycling through windows. The command named
+FORWARD-NAME cycles forwards, while the command named REVERSE-NAME cycles
+backwards.
 
-  (define (cycle-class w #!optional (step +1))
-    "Cycle through all windows with the same class as the current window."
-    (let ((class (window-class w)))
-      (let ((windows (filter-windows (lambda (x)
-				       (equal (window-class x) class)))))
-	(when windows
-	  (cycle-windows windows step)))))
+SELECTOR is called when initializing the cycle environment, it should
+return the list of windows to cycle through, or the symbol `t' to
+denote all cyclable windows.
 
-  ;;###autoload
-  (define-command 'cycle-windows cycle-windows)
-  (define-command 'cycle-group cycle-group #:spec "%W")
-  (define-command 'cycle-prefix cycle-prefix #:spec "%W")
-  (define-command 'cycle-class cycle-class #:spec "%W"))
+Any extra arguments are passed to each call to define-command."
+    (define (command-body step)
+      (lambda args
+	(let ((windows (apply selector args)))
+	  (when windows
+	    (cycle-begin windows step)))))
+    (apply define-command forward-name (command-body +1) rest)
+    (apply define-command reverse-name (command-body -1) rest)
+    (unless (assq forward-name cycle-commands)
+      (setq cycle-commands (cons (cons forward-name reverse-name)
+				 cycle-commands))))
+
+;;; commands
+
+  (define-cycle-command 'cycle-windows 'cycle-windows-backwards (lambda () t))
+
+  (define-cycle-command 'cycle-group 'cycle-group-backwards
+			(lambda (w) (windows-in-group w))
+			#:spec "%W")
+
+  (define-cycle-command 'cycle-prefix 'cycle-prefix-backwards
+			(lambda (w)
+			  (when (string-match "^([^:]+)\\s*:" (window-name w))
+			    (let* ((prefix (expand-last-match "\\1"))
+				   (re (concat ?^ (quote-regexp prefix) "\\s*:")))
+			      (filter-windows
+			       (lambda (x)
+				 (string-match re (window-name x)))))))
+			#:spec "%W")
+
+  (define-cycle-command 'cycle-class 'cycle-class-backwards
+			(lambda (w)
+			  (let ((class (window-class w)))
+			    (filter-windows
+			     (lambda (x) (equal (window-class x) class)))))
+			#:spec "%W"))
+
+;;###autoload (autoload-command 'cycle-windows 'sawfish.wm.commands.x-cycle)
+;;###autoload (autoload-command 'cycle-windows-backwards 'sawfish.wm.commands.x-cycle)
+;;###autoload (autoload-command 'cycle-group 'sawfish.wm.commands.x-cycle)
+;;###autoload (autoload-command 'cycle-group-backwards 'sawfish.wm.commands.x-cycle)
+;;###autoload (autoload-command 'cycle-prefix 'sawfish.wm.commands.x-cycle)
+;;###autoload (autoload-command 'cycle-prefix-backwards 'sawfish.wm.commands.x-cycle)
+;;###autoload (autoload-command 'cycle-class 'sawfish.wm.commands.x-cycle)
+;;###autoload (autoload-command 'cycle-class-backwards 'sawfish.wm.commands.x-cycle)
