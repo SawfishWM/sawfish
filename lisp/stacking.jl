@@ -187,7 +187,8 @@ events that invoked the command."
   (when (windowp w)
     (raise-window w))
   (allow-events 'replay-pointer)
-  (forget-button-press))
+  (unless (clicked-frame-part)
+    (forget-button-press)))
 
 (add-hook 'after-initialization-hook restack-by-depth)
 (add-hook 'add-window-hook stacking-add-window t)
