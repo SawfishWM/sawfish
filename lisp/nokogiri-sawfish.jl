@@ -36,6 +36,12 @@
   :user-level expert
   :group ())
 
+(defcustom customize-show-symbols nil
+  "Show variable names of each customization option."
+  :group misc
+  :user-level expert
+  :type boolean)
+
 
 ;; interfaces
 
