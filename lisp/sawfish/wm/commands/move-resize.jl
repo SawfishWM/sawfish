@@ -138,6 +138,7 @@
       (setq server-grabbed t))
     (unwind-protect
 	(progn
+	  (allow-events 'async-pointer)
 	  ;; ensure that we catch _all_ mouse events
 	  (when (grab-pointer w (get-cursor 'hand2))
 	    (unwind-protect
