@@ -40,6 +40,7 @@
   (let*
       ((output (make-string-output-stream))
        (process (make-process output)))
+    (set-process-error-stream process nil)
     (unless (zerop (call-process process nil gtk-style-program))
       (error "Can't start gtk-style-program"))
     (setq output (make-string-input-stream (get-output-stream-string output)))
