@@ -3,12 +3,15 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Michele Campeotto <micampe@interpuntonet.it>, 2000.
 #
+#. ../lisp/sawfish/wm/util/groups.jl
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+#. ../lisp/sawfish/wm/workspace.jl
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.33.1\n"
-"POT-Creation-Date: 2000-11-13 16:04-0800\n"
-"PO-Revision-Date: 2000-11-14 11:00+0100\n"
-"Last-Translator: Michele Campeotto <micampe@interpuntonet.it>\n"
+"Project-Id-Version: 0.34\n"
+"POT-Creation-Date: 2000-12-04 11:08-0800\n"
+"PO-Revision-Date: 2000-12-18 21:00+0100\n"
+"Last-Translator: Michele Campeotto <micampe@f2s.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso8859-1\n"
@@ -223,6 +226,10 @@ msgstr "Aggiungi:"
 msgid "Edit:"
 msgstr "Modifica:"
 
+#. ../lisp/sawfish/gtk/widget.jl
+msgid "** unknown widget **  "
+msgstr "** widget sconosciuto **  "
+
 #. ../lisp/sawfish/gtk/stock.jl
 msgid "Revert"
 msgstr "Inverti"
@@ -332,8 +339,8 @@ msgid "Does click-to-focus mode pass the click through to the window."
 msgstr "In modo 'click-to-focus' il click è passato alla finestra."
 
 #. ../lisp/sawfish/wm/frames.jl
-msgid "Default frame style (theme)."
-msgstr "Stile di default (tema)."
+msgid "Default frame style:"
+msgstr "Stile di default (tema):"
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Automatically reload themes when they are updated."
@@ -341,7 +348,7 @@ msgstr "Ricarica automaticamente i temi quando vengono modificati."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid ""
-"Frame type fallbacks.\n"
+"Frame type fallbacks:\n"
 "\n"
 "Associate frame types with type to try if the theme doesn't implement the "
 "requested type."
@@ -349,7 +356,7 @@ msgstr ""
 "Tipi delle finestre predefiniti.\n"
 "\n"
 "Associa i tipi di finestra con i frame per verificare se il tema non "
-"implementa tutti i tipi."
+"implementa il tipo richiesto."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
@@ -451,49 +458,21 @@ msgstr ""
 msgid "Motion threshold for mouse pointer: \\wpixels"
 msgstr "Soglia per il movimento del mouse: \\wpixels"
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Delete"
-msgstr "_Elimina"
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Modifier key(s) used for default window manager shortcuts."
+msgstr "Modificatore/i usato per gli shortcut predefiniti."
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Destroy"
-msgstr "Distruggi"
+msgid "Minimize"
+msgstr "Riduci a icona"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Close"
+msgstr "_Chiudi"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Toggle"
 msgstr "_On/Off"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Maximize"
-msgstr "In_grandisci"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Vertically"
-msgstr "_Verticalmente"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Horizontally"
-msgstr "_Orizzontalmente"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Both"
-msgstr "_Entrambi"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Fill vertically"
-msgstr "Riempi verticalmente"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Fill horizontally"
-msgstr "Riempi orizzontalmente"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Fill both"
-msgstr "Riempi entrambi"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Un-maximize"
-msgstr "_Ripristina"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "In _group"
@@ -536,8 +515,8 @@ msgid "_Down"
 msgstr "_Giu"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Depth"
-msgstr "Profondità"
+msgid "Stacking"
+msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Raise"
@@ -818,8 +797,8 @@ msgid "Dialogs appear on the same workspace as their application."
 msgstr "Le finestre di dialogo compaiono nel workspace del proprietario."
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspace names: \\w"
-msgstr "Nomi dei wrokspace: \\w"
+msgid "Workspace names"
+msgstr "Nomi dei wrokspace"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace"
@@ -1300,6 +1279,10 @@ msgid "Display window names while cycling through windows."
 msgstr "Mostra i nomi delle finestre nel ciclo."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Display window icons while cycling through windows."
+msgstr "Mostra le icone nel ciclo delle finestre."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Include iconified windows when cycling."
 msgstr "Mostra le finestre ridotte ad icona nel ciclo."
 
@@ -1353,8 +1336,12 @@ msgid "Play sound effects for unmanaged windows."
 msgstr "Attiva i suoni per tutte le finestre."
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Map window events to sound files."
-msgstr "Collega i suoni agli eventi."
+msgid "Event"
+msgstr "Evento"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Audio file"
+msgstr "File audio"
 
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Raise windows when they are focused."
@@ -1389,6 +1376,22 @@ msgstr "Ritardo in millisecondi prima di scattare. \\w"
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Warp pointer to opposite screen edge when flipping."
 msgstr "Sposta il puntatore al lato opposto dello schermo."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Emit a beeping sound when errors occur."
+msgstr "Emetti un beep in caso di errore."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Where to display error messages: \\w"
+msgstr "Dove mostrare i messaggi di errore: \\w"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "No errors."
+msgstr "Nessun errore."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display all errors that have occurred to the screen."
+msgstr "Mostra tutti gli errori sullo schermo."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Placement"
@@ -1490,8 +1493,28 @@ msgid "Automatically remember other window attributes."
 msgstr "Salva automaticamente gli attributi delle finestre."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Don't automatically remember details of transient windows."
+msgstr "Non salvare i dettagli delle finestre di dialogo."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current position of the focused window."
+msgstr "Memorizza la posizione della finestra attiva."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current dimensions of the focused window."
+msgstr "Memorizza le dimensioni della finestra attiva."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current attributes of the focused window."
+msgstr "Memorizza gli attributi della finestra attiva."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Forget any persistent state associated with the current window."
 msgstr "Dimentica lo stato salvato associato a questa finestra."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget all saved window history."
+msgstr "Dimentica le impostazioni delle finestre."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
@@ -1583,21 +1606,17 @@ msgstr "Attiva/Disattiva l'onnipresenza della finestra."
 msgid "_Sticky"
 msgstr "_Onnipresente"
 
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "_Minimized"
-msgstr "In_grandisci"
-
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Ignore the window."
 msgstr "Ignora la finestra."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Unignore the window."
-msgstr ""
+msgstr "Non ignora la finestra."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle whether a window is ignored or not."
-msgstr ""
+msgstr "Attiva/Disattiva se una finestra è ignorata o meno."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle whether a window is focusable or not."
@@ -1606,10 +1625,12 @@ msgstr "Attiva/Disattiva la possibiltà di ricevere il focus."
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle whether a window is ignored while window cycling."
 msgstr ""
+"Attiva/Disattiva se una finestra è ignorata durante il ciclo delle finestre."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle whether a window will be include in the window list."
 msgstr ""
+"Attiva/Disattiva la visibilità di una finestra nella lista delle finestre."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
@@ -1621,11 +1642,11 @@ msgstr "Riceve _focus"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Cyclable"
-msgstr "_Ciclabile"
+msgstr "Presente nel _ciclo"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
-msgstr "Nella lista finestre"
+msgstr "Nella _lista finestre"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid ""
@@ -1801,8 +1822,8 @@ msgid "Group transient windows with their parents."
 msgstr "Raggruppa le finestre di dialogo con i proprietari."
 
 #. ../lisp/sawfish/wm/util/groups.jl
-msgid "Persistent group ids: \\w"
-msgstr "Gruppi sempre presenti: \\w"
+msgid "Persistent group ids"
+msgstr "Gruppi persistenti"
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -2066,14 +2087,14 @@ msgstr "_Impostazioni"
 msgid "_Themes"
 msgstr "_Temi"
 
+msgid "Maximize"
+msgstr "Ingrandisci"
+
+msgid "Unmaximize"
+msgstr "Ripristina"
+
 msgid "Sound"
 msgstr "Suoni"
-
-msgid "Event"
-msgstr "Evento"
-
-msgid "Sample"
-msgstr "Suono"
 
 msgid "Matched Windows"
 msgstr "Gruppi di finestre"
@@ -2083,9 +2104,6 @@ msgstr "Tooltip"
 
 msgid "Window Cycling"
 msgstr "Ciclo Finestre"
-
-msgid "Main"
-msgstr "Principale"
 
 msgid "Move/Resize"
 msgstr "Sposta/Ridimensiona"
@@ -2108,41 +2126,29 @@ msgstr "Ingrandisci"
 msgid "Miscellaneous"
 msgstr "Varie"
 
-#~ msgid "_Iconify"
-#~ msgstr "Riduci a _icona"
+msgid "Error Handling"
+msgstr "Gestione errori"
 
-msgid "Apply"
-msgstr "Applica"
-
-msgid "Yes"
-msgstr "Si"
-
-msgid "No"
-msgstr "No"
-
-msgid "Close"
-msgstr "Chiudi"
-
-msgid "Help"
-msgstr "Aiuto"
+msgid "Edge Flipping"
+msgstr "Bordo attivo"
 
 msgid "Select color"
 msgstr "Seleziona il colore"
 
-msgid "Select file"
-msgstr "Seleziona il file"
+msgid "Select image"
+msgstr "Seleziona l'immagine"
 
 msgid "Select font"
 msgstr "Seleziona il font"
 
-msgid "Insert..."
-msgstr "Aggiungi..."
-
-msgid "Insert:"
-msgstr "Inserisci:"
-
-msgid "Select Image"
-msgstr "Seleziona l'immagine"
-
 msgid "Image Properties"
 msgstr "Proprietà dell'immagine"
+
+msgid "From"
+msgstr "Da"
+
+msgid "To"
+msgstr "A"
+
+
+
