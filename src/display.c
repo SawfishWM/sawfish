@@ -70,7 +70,7 @@ error_handler (Display *dpy, XErrorEvent *ev)
 	print_error (ev);
 #endif
 #if 0
-	longjmp (clean_exit_jmp_buf, 1);
+	longjmp (clean_exit_jmp_buf, ec_exit);
 #endif
 	return 0;
     }
