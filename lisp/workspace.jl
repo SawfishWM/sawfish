@@ -304,25 +304,29 @@ that window on (counting from zero).")
   "Activate workspace number SPACE (from zero)."
   (interactive "p")
   (unless (= current-workspace space)
-    (when current-workspace
-      (call-hook 'leave-workspace-hook (list current-workspace))
-      (mapc #'(lambda (w)
-		(when (and (window-get w 'workspace)
-			   (= (window-get w 'workspace) current-workspace))
-		  (hide-window w)))
-	    (managed-windows)))
-    (setq current-workspace space)
-    (when current-workspace
-      (mapc #'(lambda (w)
-		(when (and (window-get w 'workspace)
-			   (= (window-get w 'workspace) current-workspace)
-			   (not (window-get w 'iconified)))
-		  (show-window w)))
-	    (managed-windows))
-      (unless dont-focus
-	(window-order-focus-most-recent))
-      (call-hook 'enter-workspace-hook (list current-workspace))
-      (call-hook 'workspace-state-change-hook))))
+     (when current-workspace
+       (call-hook 'leave-workspace-hook (list current-workspace))
+       ;; the server grabs are just for optimisation (each call to
+       ;; show-window or hide-window may also grab the server semaphore)
+       (with-server-grabbed
+	(mapc #'(lambda (w)
+		  (when (and (window-get w 'workspace)
+			     (= (window-get w 'workspace) current-workspace))
+		    (hide-window w)))
+	      (managed-windows))))
+     (setq current-workspace space)
+     (when current-workspace
+       (with-server-grabbed
+	(mapc #'(lambda (w)
+		  (when (and (window-get w 'workspace)
+			     (= (window-get w 'workspace) current-workspace)
+			     (not (window-get w 'iconified)))
+		    (show-window w)))
+	      (managed-windows)))
+       (unless dont-focus
+	 (window-order-focus-most-recent))
+       (call-hook 'enter-workspace-hook (list current-workspace))
+       (call-hook 'workspace-state-change-hook))))
 
 ;; return a list of all windows on workspace index SPACE
 (defun workspace-windows (space &optional include-iconified)
