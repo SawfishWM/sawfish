@@ -200,6 +200,7 @@ install_window_frame (Lisp_Window *w)
 		      | SubstructureRedirectMask);
 
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
+	XAddToSaveSet (dpy, w->id);
 	w->reparented = TRUE;
 	w->reparenting = TRUE;
 	reset_frame_parts (w);
@@ -217,6 +218,7 @@ remove_window_frame (Lisp_Window *w)
     {
 	/* reparent the subwindow back to the root window */
 	XReparentWindow (dpy, w->id, root_window, w->attr.x, w->attr.y);
+	XRemoveFromSaveSet (dpy, w->id);
 	w->reparented = FALSE;
 	w->reparenting = TRUE;
     }
@@ -309,7 +311,6 @@ add_window (Window id)
 	if (w->id != 0)
 	{
 	    Fgrab_server ();
-	    XAddToSaveSet (dpy, id);
 
 	    /* this is where we create and reparent the window frame */
 	    create_window_frame (w);
@@ -345,12 +346,11 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
     if (w->id != 0)
     {
 	if (destroyed == Qnil && from_error == Qnil)
-	{
 	    remove_window_frame (w);
-	    XRemoveFromSaveSet (dpy, w->id);
-	}
+
 	if (from_error == Qnil)
 	    destroy_window_frame (w);
+
 	w->id = 0;
 	/* gc will do the rest... */
     }
@@ -366,6 +366,25 @@ fix_window_size (Lisp_Window *w)
     if (w->frame != 0 && w->rebuild_frame != 0)
 	w->rebuild_frame (w);
     Fungrab_server ();
+}
+
+/* Call destroy-notify-hook on any newly-dead windows */
+void
+emit_pending_destroys (void)
+{
+    Lisp_Window *w;
+again:
+    for (w = window_list; w != 0; w = w->next)
+    {
+	if (w->id == 0 && !w->destroyed)
+	{
+	    w->destroyed = 1;
+	    Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
+	    /* gc may have reordered the list, so we have to start
+	       at the beginning again.. */
+	    goto again;
+	}
+    }
 }
 
 
