@@ -112,7 +112,9 @@
 	(when (and (file-directory-p "~/.sawmill")
 		   (not (file-exists-p "~/.sawfish")))
 	  (rename-file "~/.sawmill" "~/.sawfish")
-	  (message "Renamed directory ~/.sawmill -> ~/.sawfish"))
+	  (message "Renamed directory ~/.sawmill -> ~/.sawfish")
+	  (make-symlink "~/.sawmill" ".sawfish")
+	  (message "Created .sawmill symlink (delete if unwanted)"))
 
 	;; First the site-wide stuff
 	(load-all "site-init")
