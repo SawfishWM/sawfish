@@ -93,6 +93,9 @@ the mouse position relative to the window."
 				     (bottom-left-corner bottom left)
 				     (bottom-right-corner bottom right)))
 
+(defvar move-cursor-shape 'hand2)
+(defvar resize-cursor-shape 'hand2)
+
 ;; specials
 (defvar move-resize-window nil)
 (defvar move-resize-function nil)
@@ -175,7 +178,9 @@ the mouse position relative to the window."
 	(progn
 	  (allow-events 'async-pointer)
 	  ;; ensure that we catch _all_ mouse events
-	  (when (grab-pointer nil (get-cursor 'hand2))
+	  (when (grab-pointer
+		 nil (get-cursor (if (eq move-resize-function 'move)
+				     move-cursor-shape resize-cursor-shape)))
 	    (unwind-protect
 		(progn
 		  (grab-keyboard w)	;this may fail
