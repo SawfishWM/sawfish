@@ -1,5 +1,13 @@
 2000-11-20  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/stacking.jl (raise-window, lower-window,
+	stack-window-above, stack-window-below, restack-window,
+	window-on-top-p): use stacking-order instead of
+	stacked-mapping-order. Otherwise strange things can happen when
+	unmapped windows are present (e.g. fixes #4824 where raising a
+	nautilus window with (eq user-raise-type 'groups) also raises
+	the desktop window..)
+
 	* sawfish/wm/viewport.jl (move-window-to-current-viewport,
 	set-window-viewport): don't move sticky-viewport windows
 
