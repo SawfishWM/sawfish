@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.3 1999/08/13 16:56:32 john Exp $
+;; $Id: sawmill-ui.jl,v 1.4 1999/08/14 10:54:54 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -348,6 +348,7 @@ fi
     (gtk-signal-connect colorsel
      "delete_event" `(lambda (w)
 		       (gtk-widget-destroy ',colorsel)))
+    (gtk-widget-hide (gtk-color-selection-dialog-help-button colorsel))
     (gtk-widget-show colorsel)))
 
 (put 'set 'builder 'build-set)
