@@ -31,6 +31,7 @@ mostly-GNOME compliant.
 Summary: GNOME support for sawfish
 Group: User Interface/Desktops
 Requires: %{nam}
+Obsoletes: sawmill-gnome
 
 %description gnome
 Optional GNOME support for sawfish. Includes a wm-entries spec, and a
@@ -40,6 +41,7 @@ control center applet
 Summary: GUI for creating sawfish themes
 Group: User Interface/Desktops
 Requires: %{nam}, rep-gtk-libglade
+Obsoletes: sawmill-themer
 
 %description themer
 Optional theme builder for sawfish. Allows static window themes to be
@@ -49,7 +51,7 @@ created/edited in a graphical environment.
 %setup
 
 %build
-./configure --enable-capplet --enable-themer --with-readline --with-gnome-prefix=%{_prefix} --prefix %{_prefix} %{_host}
+./configure --enable-capplet --enable-themer --with-readline --prefix %{_prefix} %{_host}
 make CFLAGS="$RPM_OPT_FLAGS"
 
 %install
@@ -57,7 +59,10 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome/wm-properties
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/control-center
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome/apps/Settings
-make prefix=$RPM_BUILD_ROOT%{_prefix} install
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/bin
+touch $RPM_BUILD_ROOT%{_prefix}/bin/sawmill{,-client,-capplet,-ui,-themer}
+chmod +x $RPM_BUILD_ROOT%{_prefix}/bin/sawmill{,-client,-capplet,-ui,-themer}
+make DESTDIR=$RPM_BUILD_ROOT install
 gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawfish*
 
 %post
@@ -88,7 +93,7 @@ fi
 %{_prefix}/share/control-center/Sawfish
 %{_prefix}/share/gnome/apps/Settings/Sawfish
 %{_prefix}/share/gnome/wm-properties/Sawfish.desktop
-${_prefix}/share/pixmaps/sawfish*.png
+%{_prefix}/share/pixmaps/sawfish*.png
 
 %files themer
 %defattr(-,root,root)
