@@ -210,6 +210,7 @@ server_init (void)
 	if(bind(socket_fd, (struct sockaddr *)&addr,
 		sizeof(addr.sun_family) + strlen(addr.sun_path) + 1) == 0)
 	{
+	    chmod (namebuf, 0700);
 	    if(listen(socket_fd, 5) == 0)
 	    {
 		rep_unix_set_fd_nonblocking(socket_fd);
