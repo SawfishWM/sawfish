@@ -34,15 +34,32 @@
 
 ;; functions
 
+(define (transient-of-p x y)
+  "Return t if window X is directly a transient for window Y."
+  (let ((x-for (window-transient-p x)))
+    (and x-for
+	 (or (eql x-for (window-id y))
+	     ;; windows that set WM_TRANSIENT_FOR to the root window are
+	     ;; transients for their entire group (de facto standard)
+	     (and (eql x-for (root-window-id))
+		  (eql (window-group-id x) (window-group-id y)))))))
+
 (define (indirect-transient-of-p x y)
   "Return t if window X is (directly, or indirectly) a transient for window Y."
-  (let ((x-for (window-transient-p x)))
-    (cond ((eql x-for (window-id y)) t)
-	  ((not x-for) nil)
-	  (t (let ((x-for-w (get-window-by-id x-for)))
+  (or (transient-of-p x y)
+      (let ((x-for (window-transient-p x)))
+	(and x-for
+	     (let ((x-for-w (get-window-by-id x-for)))
 	       (if x-for-w
 		   (indirect-transient-of-p x-for-w y)
 		 nil))))))
+
+(define (transient-parents w &optional indirectly)
+  "Return the list of windows that window W is a transient for."
+  (delete-if-not (lambda (x)
+		   ((if indirectly
+			indirect-transient-of-p
+		      transient-of-p) w x)) (managed-windows)))
 
 (defun transient-group (w &optional by-depth)
   "Return the list of windows which is either a transient window for window W,
