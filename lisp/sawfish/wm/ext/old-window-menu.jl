@@ -25,7 +25,8 @@
 
     (open rep
 	  sawfish.wm.windows
-	  sawfish.wm.workspace)
+	  sawfish.wm.workspace
+	  sawfish.wm.util.display-window)
 
   (define-structure-alias old-window-menu sawfish.wm.ext.old-window-menu)
 
@@ -50,9 +51,9 @@
 			   (or (not (window-get w 'ignored))
 			       (window-get w 'iconified)))
 		  (setq menu (cons (list (make-label w)
-					 `(display-window
-					   (get-window-by-id
-					    ,(window-id w)) ,i))
+					 (lambda ()
+					   (when (windowp w)
+					     (display-window w))))
 				   menu))))
 	      windows)
 	(unless (or (= i (cdr limits)) (null (car menu)))

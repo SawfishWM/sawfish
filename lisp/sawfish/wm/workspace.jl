@@ -626,18 +626,17 @@
 ;;; Menu constructors
 
   (define (workspace-menu)
-    (let* ((limits (workspace-limits))
-	   (i (car limits))
-	   menu)
-      (while (<= i (cdr limits))
+    (let ((limits (workspace-limits))
+	  menu)
+      (do ((i (car limits) (1+ i)))
+	  ((> i (cdr limits)))
 	(let ((ws-name (or (nth (- i (car limits)) workspace-names)
 			   (format nil (_ "space %d")
 				   (1+ (- i (car limits)))))))
 	  (setq menu (cons (list (format nil "%s%s" ws-name
 					 (if (= i current-workspace) " *" ""))
-				 `(select-workspace ,i))
-			   menu)))
-	(setq i (1+ i)))
+				 (lambda () (select-workspace i)))
+			   menu))))
       (nconc (nreverse menu) (list nil) static-workspace-menus)))
 
   (define (popup-workspace-list)

@@ -475,10 +475,13 @@ deciding which frame type to ask a theme to generate.")
     (let ((styles (find-all-frame-styles t)))
       (nconc (mapcar (lambda (s)
 		       (list (symbol-name s)
-			     `(set-frame-style (current-event-window) ',s)))
+			     (lambda ()
+			       (set-frame-style (current-event-window) s))))
 		     styles)
-	     `(() (,(_ "Default")
-		  (set-frame-style (current-event-window) nil))))))
+	     (list '())
+	     (list (list (_ "Default")
+			 (lambda ()
+			   (set-frame-style (current-event-window) nil)))))))
 
 
 ;;; removing frame parts

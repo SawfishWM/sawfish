@@ -153,16 +153,15 @@ id of the new group."
 					    (substring name 0 20) "...")))
 			      (when (eq id group-id)
 				(setq name (concat name " *")))
-			      (list name
-				    `(add-window-to-group
-				      (get-window-by-id
-				       ,(window-id w)) ',id))))
+			      (list name (lambda ()
+					   (add-window-to-group w id)))))
 			  group-ids))
       (rplacd menus (cons '() (cdr menus)))
-      `(,@menus
-        ()
-        (,(_ "New group") (add-window-to-new-group
-			   (get-window-by-id ,(window-id w)))))))
+      (nconc menus
+	     (list '())
+	     (list (list (_ "New group")
+			 (lambda ()
+			   (add-window-to-new-group w)))))))
 
 
 ;;; session management -- only save group-ids that are _symbols_

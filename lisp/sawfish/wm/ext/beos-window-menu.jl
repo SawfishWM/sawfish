@@ -29,6 +29,7 @@
 	  sawfish.wm.misc
 	  sawfish.wm.workspace
 	  sawfish.wm.util.groups
+	  sawfish.wm.util.display-window
 	  sawfish.wm.menus)
 
   (define-structure-alias beos-window-menu sawfish.wm.ext.beos-window-menu)
@@ -51,7 +52,10 @@
 	      (and (eq (input-focus) w) " *"))))
 
   (define (make-item w)
-    (list (make-label w) `(display-window (get-window-by-id ,(window-id w)))))
+    (list (make-label w)
+	  (lambda ()
+	    (when (windowp w)
+	      (display-window w)))))
 
   (define (group-name id)
     (cond ((symbolp id) (symbol-name id))
