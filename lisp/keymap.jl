@@ -104,3 +104,23 @@ for the bindings to be installed if and when it is."
 			    (cons (event-name (cdr k)) km-where-is-results))))
 		keymap)
     km-where-is-results))
+
+
+;; grab the next key event
+
+(defun read-event-callback ()
+  (throw 'read-event (current-event)))
+
+;;;###autoload
+(defun read-event (&optional prompt)
+  (when (grab-keyboard)
+    (unwind-protect
+	(let
+	    ((override-keymap '(keymap)))
+	  (show-message (or prompt "Press key..."))
+	  (add-hook 'unbound-key-hook 'read-event-callback)
+	  (catch 'read-event
+	    (recursive-edit)))
+      (remove-hook 'unbound-key-hook 'read-event-callback)
+      (show-message nil)
+      (ungrab-keyboard))))
