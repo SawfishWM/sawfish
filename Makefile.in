@@ -40,6 +40,12 @@ install : all installdirs
 	  ( cd $$dir && $(MAKE) $@ ); \
 	done
 	$(INSTALL_DATA) ./DOC.* $(sawmilldir)/$(version)
+	-set -e; for d in / /usr /usr/local /opt /gnome; do \
+	  if [ -d $$d/share/gnome/wm-properties ]; then \
+	    $(INSTALL_DATA) Sawmill.desktop $$d/share/gnome/wm-properties; \
+	    break; \
+	  fi \
+	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(sawmilldir)/$(version) $(bindir)
