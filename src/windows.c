@@ -451,9 +451,10 @@ void
 fix_window_size (Lisp_Window *w)
 {
     Fgrab_server ();
-    XResizeWindow (dpy, w->id, w->attr.width, w->attr.height);
     if (w->frame != 0 && w->rebuild_frame != 0)
 	w->rebuild_frame (w);
+    else
+	XResizeWindow (dpy, w->id, w->attr.width, w->attr.height);
     Fungrab_server ();
 }
 
