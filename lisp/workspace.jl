@@ -328,7 +328,7 @@ that window on (counting from zero).")
 			     (not (window-get w 'iconified)))
 		    (show-window w)))
 	      (managed-windows)))
-       (unless dont-focus
+       (unless (or dont-focus (eq focus-mode 'enter-exit))
 	 (window-order-focus-most-recent))
        (call-hook 'enter-workspace-hook (list current-workspace))
        (call-hook 'workspace-state-change-hook))))
