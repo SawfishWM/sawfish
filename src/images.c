@@ -209,6 +209,16 @@ Set the value of the property named PROPERTY (a symbol) of IMAGE to VALUE.
     return val;
 }
 
+DEFUN("imagep", Fimagep, Simagep, (repv arg), rep_Subr1) /*
+::doc:Simagep::
+image ARG
+
+Returns t if ARG is an image object.
+::end:: */
+{
+    return IMAGEP(arg) ? Qt : Qnil;
+}
+
 DEFUN("image-dimensions", Fimage_dimensions, Simage_dimensions,
       (repv img), rep_Subr1) /*
 ::doc:Simage-dimensions::
@@ -322,18 +332,18 @@ bevel_pixel (u_char *data, bool up)
     pix[2] = ((double)data[2]) / 256.0;
     if (up)
     {
-	pix[0] = pix[0] + (1.0 - pix[0]) * 0.5;
-	pix[1] = pix[1] + (1.0 - pix[1]) * 0.5;
-	pix[2] = pix[2] + (1.0 - pix[2]) * 0.5;
+	pix[0] = pix[0] + (1.0 - pix[0]) * 0.75;
+	pix[1] = pix[1] + (1.0 - pix[1]) * 0.75;
+	pix[2] = pix[2] + (1.0 - pix[2]) * 0.75;
 	data[0] = pix[0] * 256.0;
 	data[1] = pix[1] * 256.0;
 	data[2] = pix[2] * 256.0;
     }
     else
     {
-	pix[0] = pix[0] - pix[0] * 0.5;
-	pix[1] = pix[1] - pix[1] * 0.5;
-	pix[2] = pix[2] - pix[2] * 0.5;
+	pix[0] = pix[0] - pix[0] * 0.75;
+	pix[1] = pix[1] - pix[1] * 0.75;
+	pix[2] = pix[2] - pix[2] * 0.75;
 	data[0] = pix[0] * 256.0;
 	data[1] = pix[1] * 256.0;
 	data[2] = pix[2] * 256.0;
@@ -587,6 +597,7 @@ images_init (void)
     rep_ADD_SUBR(Sflip_image_diagonally);
     rep_ADD_SUBR(Simage_get);
     rep_ADD_SUBR(Simage_put);
+    rep_ADD_SUBR(Simagep);
     rep_ADD_SUBR(Simage_dimensions);
     rep_ADD_SUBR(Simage_border);
     rep_ADD_SUBR(Sset_image_border);
