@@ -52,7 +52,7 @@
   "List of group ids that always exist, even when they have no members.")
 
 ;; return the id of the group that window W is a member of
-(defun window-real-group-id (w)
+(defun window-actual-group-id (w)
   (let
       (tem)
     (or (window-get w 'group)
@@ -66,14 +66,14 @@
 ;; return the list of windows in the group with id GROUP-ID
 (defun windows-by-group (group-id)
   (delete-if-not #'(lambda (x)
-		     (eq (window-real-group-id x) group-id))
+		     (eq (window-actual-group-id x) group-id))
 		 (managed-windows)))
 
 ;; return the list of windows in the same group as window W
 (defun windows-in-group (w)
   (let
       (group-id tem)
-    (setq group-id (window-real-group-id w))
+    (setq group-id (window-actual-group-id w))
     (windows-by-group group-id)))
 
 ;; map FUN over all windows in the same group as window W
@@ -86,12 +86,12 @@
       ((ids (copy-sequence undeletable-group-ids))
        id)
     (mapc #'(lambda (w)
-	      (setq id (window-real-group-id w))
+	      (setq id (window-actual-group-id w))
 	      (unless (memq id ids)
 		(setq ids (cons id ids)))) (managed-windows))
     ids))
 
-;; put window W in group with id GROUP-ID
+;; put window W in group with id GROUP-ID, returns GROUP-ID
 (defun add-window-to-group (w group-id)
   (window-put w 'group group-id))
 
@@ -109,9 +109,9 @@
 
 (defun window-group-menu (w)
   (let
-      ((group-id (window-real-group-id w))
+      ((group-id (window-actual-group-id w))
        (group-names (mapcar #'(lambda (x)
-				(cons (window-real-group-id x)
+				(cons (window-actual-group-id x)
 				      (window-name x)))
 			    (managed-windows)))
        (group-ids (window-group-ids))
