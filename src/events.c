@@ -986,7 +986,7 @@ shape_notify (XEvent *ev)
     if (w != 0 && sev->window == w->id && sev->kind == ShapeBounding)
     {
 	w->shaped = sev->shaped ? 1 : 0;
-	set_frame_shapes (w, TRUE);
+	queue_reshape_frame (w);
 	Fcall_window_hook (Qshape_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
