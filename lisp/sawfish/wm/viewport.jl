@@ -227,3 +227,8 @@
 (sm-add-saved-properties 'fixed-position)
 (add-hook 'sm-window-save-functions 'viewport-saved-state)
 (add-hook 'sm-restore-window-hook 'viewport-load-state)
+
+
+;; initialisation
+
+(add-hook 'viewport-moved-hook 'window-order-focus-most-recent)
