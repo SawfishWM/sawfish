@@ -50,6 +50,12 @@
   (structure () (open rep rep.structures)
     (setq *user-module* (get-structure 'user)))
 
+  (define (safe-load . args)
+    (condition-case data
+	(apply load args)
+      (error
+       (error-handler-function (car data) (cdr data)))))
+
   ;; they're probably not going to leave us in an unusable state
   (unless (get-command-line-option "--no-rc")
     (condition-case error-data
@@ -66,7 +72,7 @@
 	  (load-all "site-init" (lambda (f) (load f nil t)))
 
 	  ;; then the users rep configuration, or site-wide defaults
-	  (or (load (concat (user-home-directory) ".reprc") t t t)
+	  (or (safe-load (concat (user-home-directory) ".reprc") t t t)
 	      (load "rep-defaults" t))
 
 	  (unless batch-mode
@@ -85,9 +91,9 @@
 
 	      ;; then the sawmill specific user configuration
 	      (cond ((rc-file-exists-p "~/.sawfishrc")
-		     (load "~/.sawfishrc" t t t))
+		     (safe-load "~/.sawfishrc" t t t))
 		    ((rc-file-exists-p "~/.sawmillrc")
-		     (load "~/.sawmillrc" t t t))))))
+		     (safe-load "~/.sawmillrc" t t t))))))
       (error
        (format (stderr-file) "error in local config--> %S\n" error-data))))
 
