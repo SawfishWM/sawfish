@@ -324,10 +324,12 @@ main(int argc, char **argv)
 
 	if (lang == 0
 	    || strcmp (lang, "C") == 0
-	    || strcmp (lang, "POSIX") == 0)
+	    || strcmp (lang, "POSIX") == 0
+	    || ! XSupportsLocale ())
 	{
-	    /* if setlocale fails, or returns an ASCII locale, using
-	       fontsets fails to draw 8-bit characters. */
+	    /* if setlocale fails, or returns an ASCII locale, or X just
+	       doesn't support the lcoale, using fontsets fails to draw
+	       8-bit characters. */
 	    Fset (Qfonts_are_fontsets, Qnil);
 	}
 
