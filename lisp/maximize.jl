@@ -52,12 +52,15 @@
 
 ;; handling maximized state
 
+;;;###autoload
 (defun window-maximized-p (w)
   (window-get w 'unmaximized-geometry))
 
+;;;###autoload
 (defun window-maximized-horizontally-p (w)
   (window-get w 'maximized-horizontally))
 
+;;;###autoload
 (defun window-maximized-vertically-p (w)
   (window-get w 'maximized-vertically))
 
