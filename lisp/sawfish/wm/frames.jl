@@ -133,7 +133,8 @@ requested type."
 	       ((symbol default shaped transient
 		 shaped-transient icon doc) "To"))
   :group appearance
-  :user-level expert)
+  :user-level expert
+  :after-set after-setting-frame-option)
 
 (defvar theme-update-interval 60
   "Number of seconds between checking if theme files have been modified.")
