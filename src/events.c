@@ -46,6 +46,7 @@ DEFSYM(leave_notify_hook, "leave-notify-hook");
 DEFSYM(focus_in_hook, "focus-in-hook");
 DEFSYM(focus_out_hook, "focus-out-hook");
 DEFSYM(iconify_window, "iconify-window");
+DEFSYM(uniconify_window, "uniconify-window");
 DEFSYM(client_message_hook, "client-message-hook");
 
 /* for enter/leave-notify-hook */
@@ -337,6 +338,7 @@ map_request (XEvent *ev)
 	}
 	XMapWindow (dpy, w->id);
 	w->mapped = TRUE;
+	rep_call_lisp1 (Quniconify_window, rep_VAL(w));
 	if (w->visible)
 	    XMapRaised (dpy, w->frame);
     }
@@ -487,7 +489,16 @@ configure_request (XEvent *ev)
 	if (mask & CWStackMode)
 	{
 	    if (ev->xconfigurerequest.detail == Above)
+	    {
+		/* The GNOME pager seems to believe that asking for
+		   a window to be raised to the top of the stack will
+		   uniconify it. The Xlib manual suggests that the
+		   correct method is to just remap the window.. */
+#ifndef GNOME_PAGER_UNICONIFY_IS_BROKEN
+		rep_call_lisp1 (Quniconify_window, rep_VAL(w));
+#endif
 		XRaiseWindow (dpy, w->frame);
+	    }
 	    else if (ev->xconfigurerequest.detail == Below)
 		XLowerWindow (dpy, w->frame);
 	}
@@ -732,6 +743,7 @@ events_init (void)
     rep_INTERN(focus_out_hook);
     rep_INTERN(client_message_hook);
     rep_INTERN(iconify_window);
+    rep_INTERN(uniconify_window);
     rep_INTERN(root);
 }
 
