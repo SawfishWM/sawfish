@@ -1,3 +1,12 @@
+2002-02-22  John Harper  <jsh@pixelslut.com>
+
+	* sawfish/wm/viewport.jl (viewport-load-state): add the current
+	viewport offsets into any set window geometries
+
+	* sawfish/wm/state/wm-spec.jl (set-ws-hints): fixed using
+	screen-width instead of screen-height (noticed by
+	tal00r@ecs.soton.ac.uk)
+
 2002-02-21  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/stacking.jl (stacking-add-window): don't put
