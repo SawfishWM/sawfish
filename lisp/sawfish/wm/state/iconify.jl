@@ -61,8 +61,8 @@
     (when uniconify-whole-group
       (uniconify-group w))))
 
-(defun display-window (w &optional preferred-space)
-  "Display the workspace containing the window W, then focus on W."
+(defun display-window-without-focusing (w &optional preferred-space)
+  "Display the workspace/viewport containing the window W."
   (interactive (list (prompt-for-window)))
   (when w
     (uniconify-window w)
@@ -74,7 +74,13 @@
       (select-workspace preferred-space))
     (move-viewport-to-window w)
     (when (and unshade-selected-windows (window-get w 'shaded))
-      (unshade-window w))
+      (unshade-window w))))
+
+(defun display-window (w &optional preferred-space)
+  "Display the workspace containing the window W, then focus on W."
+  (interactive (list (prompt-for-window)))
+  (when w
+    (display-window-without-focusing w preferred-space)
     (when raise-selected-windows
       (raise-window w))
     (when warp-to-selected-windows
