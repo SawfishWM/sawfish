@@ -42,7 +42,7 @@ install : all installdirs
 	  ( cd $$dir && $(MAKE) $@ ); \
 	done
 	for f in ./DOC*; do \
-	  $(INSTALL_DATA) $$f $(DESTDIR)$(sawfishdir)/$(version); \
+	  $(INSTALL_DATA) $$f $(DESTDIR)$(sawfishexecdir); \
 	done
 	if [ -d $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties ]; then \
 	  rm -f $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties/Sawmill.desktop; \
