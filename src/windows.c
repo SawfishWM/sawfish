@@ -923,6 +923,20 @@ then be the numeric id of its parent window.
 	    ? rep_MAKE_INT(VWIN(win)->transient_for_hint) : Qnil);
 }
 
+DEFUN("window-urgent-p", Fwindow_urgent_p, Swindow_urgent_p,
+      (repv win), rep_Subr1) /*
+::doc:sawfish.wm.windows.subrs#window-urgent-p::
+window-urgent-p WINDOW
+
+Return true if the `Urgency' hint of the window associated with WINDOW
+is set.
+::end:: */
+{
+    rep_DECLARE1 (win, WINDOWP);
+    return ((VWIN (win)->wmhints
+	     && VWIN (win)->wmhints->flags & XUrgencyHint) ? Qt : Qnil);
+}
+
 DEFUN("window-shaped-p", Fwindow_shaped_p, Swindow_shaped_p,
       (repv win), rep_Subr1) /*
 ::doc:sawfish.wm.windows.subrs#window-shaped-p::
@@ -1439,6 +1453,7 @@ windows_init (void)
     rep_ADD_SUBR(Sstacking_order);
     rep_ADD_SUBR(Swindow_visibility);
     rep_ADD_SUBR(Swindow_transient_p);
+    rep_ADD_SUBR(Swindow_urgent_p);
     rep_ADD_SUBR(Swindow_shaped_p);
     rep_ADD_SUBR(Shide_window);
     rep_ADD_SUBR(Sshow_window);
