@@ -38,6 +38,7 @@
 #endif
    
 #include "sawmill.h"
+#include <X11/Xatom.h>
 
 /* Number of outstanding server grabs made; only when this is zero is
    the server ungrabbed. */
@@ -1244,11 +1245,11 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	    attr.background_pixel = VCOLOR(message.bg)->pixel;
 	    attr.border_pixel = BlackPixel(dpy, screen_num);
 	    attr.event_mask = ExposureMask | ButtonPressMask;
-	    attr.colormap = screen_cmap;
+	    attr.colormap = image_cmap;
 	    message_win = XCreateWindow (dpy, root_window, x, y,
 					 message.width, height, 1,
-					 screen_depth, InputOutput,
-					 screen_visual,
+					 image_depth, InputOutput,
+					 image_visual,
 					 CWBackPixel | CWBorderPixel
 					 | CWOverrideRedirect | CWEventMask
 					 | CWColormap, &attr);
