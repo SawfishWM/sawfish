@@ -1,3 +1,21 @@
+2000-09-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c (lookup_event): canonify `S-x' -> `X'
+
+	* x.c, windows.c, session.c, selection.c, main.c, keys.c,
+	images.c, functions.c, frames.c, fonts.c, events.c, cursors.c,
+	colors.c: magic doc-string comments now include module names
+
+	* images.c (Fmake_sized_image): include an alpha channel when
+	using gdk-pixbuf
+	(set_pixel): if the image doesn't have an alpha channel, and
+	the new value requires it, add it to the image
+
+2000-09-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* images.c (Fscale_image, Fcomposite_images, Fcrop_image): new
+	functions. (composite-image isn't implemented for Imlib yet)
+
 2000-09-01  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-menu.jl, sawfish-client.jl: moved to ../scripts

@@ -1,3 +1,35 @@
+2000-09-04  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/commands.jl (define-command): new keyword args DOC
+	and DOC-KEY
+	(command-documentation): new function, a bit of a kludge
+
+2000-09-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/misc.jl (quote-menu-item): function to translate
+	`_' to `__' in menu items (to avoid introducing unintended
+	keyboard accelerators)
+
+	* sawfish/wm/workspace.jl, sawfish/wm/frames.jl,
+	sawfish/wm/ext/old-window-menu.jl,
+	sawfish/wm/ext/beos-window-menu.jl, sawfish/wm/util/groups.jl:
+	use quote-menu-item when creating menus
+
+	* sawfish/wm/commands/describe.jl (describe-symbol): include
+	null STRUCTURE arg in call to `documentation'
+
+	* sawfish/wm/gaol.jl: added some more known-to-be-safe modules,
+	export define-gaol-structure
+
+2000-09-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/frames.jl (load-frame-style): name each gaol
+	containing a theme as `themes.FOO' for a theme called FOO. This
+	allows the theme's definitions to be inspected using the repl
+
+	* sawfish/wm/util/nokogiri.jl (nokogiri-report-slot,
+	nokogiri-report-group): use actual keywords in the results
+
 2000-09-01  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/gnome/integration.jl: when adding to the `Help'

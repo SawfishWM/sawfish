@@ -1,3 +1,14 @@
+2000-09-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish-client.jl: print a copyright banner when starting the
+	repl
+
+	* sawfish-client.jl (do-eval): remember to update current-repl
+	after reading the new structure over the connection
+
+	* sawfish-client.jl (rl-completion-generator): use
+	repl-completions function to generate completions
+
 2000-09-01  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish-about.jl.in: an `about' program for sawfish, uses the
