@@ -22,9 +22,9 @@
     window-id window-group-id window-size-hints call-window-hook
 
     add-frame-style check-frame-availability set-window-frame-style
-    set-frame-for-window reframe-one-window reframe-all-windows
-    window-type def-frame-class define-frame-class
-    after-setting-frame-option
+    set-frame-for-window reframe-one-window rebuild-frames-with-style
+    reframe-windows-with-style reframe-all-windows window-type
+    def-frame-class define-frame-class after-setting-frame-option
 
     defcustom defgroup custom-declare-variable custom-declare-group
     custom-quote-keys custom-set-property custom-set-group-property
