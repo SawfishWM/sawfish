@@ -855,20 +855,19 @@ Note that newlines in TEXT are ignored. This may change in the future.
 
 	if (message_win == 0)
 	{
+	    /* I tried setting save_under in here, but it just slows
+	       down opaque window moves.. */
 	    XSetWindowAttributes attr;
 	    attr.override_redirect = True;
 	    attr.background_pixel = VCOLOR(bg)->color.pixel;
 	    attr.border_pixel = BlackPixel(dpy, screen_num);
-	    attr.save_under = True;
-	    attr.backing_store = WhenMapped;
 	    attr.event_mask = ExposureMask;
 	    attr.colormap = screen_cmap;
 	    message_win = XCreateWindow (dpy, root_window, x, y,
 					 width, height, 1, screen_depth,
 					 InputOutput, screen_visual,
 					 CWBackPixel | CWBorderPixel
-					 | CWBackingStore | CWOverrideRedirect
-					 | CWSaveUnder | CWEventMask
+					 | CWOverrideRedirect | CWEventMask
 					 | CWColormap, &attr);
 	    if (message_win == 0)
 		return Qnil;
