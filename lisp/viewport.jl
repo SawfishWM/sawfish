@@ -93,12 +93,13 @@
 			 (+ (cdr port) down))))
 
 (defun move-viewport-to-window (window)
-  (let
-      ((pos (window-position window)))
-    (rplaca pos (+ (car pos) viewport-x-offset))
-    (rplacd pos (+ (cdr pos) viewport-y-offset))
-    (set-screen-viewport (quotient (car pos) (screen-width))
-			 (quotient (cdr pos) (screen-height)))))
+  (when (window-outside-viewport-p window)
+    (let
+	((pos (window-position window)))
+      (rplaca pos (+ (car pos) viewport-x-offset))
+      (rplacd pos (+ (cdr pos) viewport-y-offset))
+      (set-screen-viewport (quotient (car pos) (screen-width))
+			   (quotient (cdr pos) (screen-height))))))
 
 (defun window-outside-workspace-p (window)
   (let
