@@ -482,8 +482,7 @@ struct frame_part *
 find_frame_part_by_window (Window id)
 {
     struct frame_part *fp;
-    return XFindContext (dpy, id, window_fp_context,
-			 (XPointer *)&fp) ? 0 : fp;
+    return XFindContext (dpy, id, window_fp_context, (XPointer *)&fp) ? 0 : fp;
 }
 
 /* Destroy the window frame of W, assuming it's a frame-part derived frame */
@@ -868,7 +867,7 @@ list_frame_generator (Lisp_Window *w)
 		XSelectInput (dpy, fp->id,
 			      ButtonPressMask | ButtonReleaseMask
 			      | ButtonMotionMask | PointerMotionHintMask
-			      | KeyPressMask | ExposureMask);
+			      | LeaveWindowMask | KeyPressMask | ExposureMask);
 		XMapWindow (dpy, fp->id);
 
 		/* stash the fp in the window */
