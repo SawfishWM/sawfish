@@ -53,19 +53,19 @@ DEFSYM(sawmill_lisp_lib_directory, "sawmill-lisp-lib-directory");
 DEFSYM(sawmill_site_lisp_directory, "sawmill-site-lisp-directory");
 DEFSYM(sawmill_exec_directory, "sawmill-exec-directory");
 DEFSYM(sawmill_version, "sawmill-version"); /*
-::doc:Vsawmill-directory::
+::doc:sawmill-directory::
 The directory in which all of sawmill's installed data files live.
 ::end::
-::doc:Vsawmill-lisp-lib-directory::
+::doc:sawmill-lisp-lib-directory::
 The name of the directory in which the standard lisp files live.
 ::end::
-::doc:Vsawmill-site-lisp-directory::
+::doc:sawmill-site-lisp-directory::
 The name of the directory in which site-specific Lisp files are stored.
 ::end::
-::doc:Vsawmill-exec-directory::
+::doc:sawmill-exec-directory::
 The name of the directory containing sawmill's architecture specific files.
 ::end::
-::doc:Vsawmill-version::
+::doc:sawmill-version::
 A string defining the version number of the current sawmill release.
 ::end:: */
 
@@ -93,7 +93,7 @@ on_termination (void)
 }
 
 DEFUN_INT("quit", Fquit, Squit, (void), rep_Subr0, "") /*
-::doc:Squit::
+::doc:quit::
 quit
 
 Terminate the sawmill process.
@@ -103,7 +103,7 @@ Terminate the sawmill process.
 }
 
 DEFUN_INT("restart", Frestart, Srestart, (void), rep_Subr0, "") /*
-::doc:Srestart::
+::doc:restart::
 restart
 
 Restart the sawmill process.

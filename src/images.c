@@ -57,7 +57,7 @@ make_image (ImlibImage *im, repv plist)
 
 DEFUN("make-image", Fmake_image, Smake_image,
       (repv file, repv plist), rep_Subr2) /*
-::doc:Smake-image::
+::doc:make-image::
 make-image FILE [PLIST]
 
 Return a new image object representing the image stored in FILE (a
@@ -119,7 +119,7 @@ string). PLIST defines the property list of the image.
 }
 
 DEFUN("copy-image", Fcopy_image, Scopy_image, (repv source), rep_Subr1) /*
-::doc:Scopy-image::
+::doc:copy-image::
 copy-image SOURCE-IMAGE
 
 Return a new image object, a clone of SOURCE-IMAGE.
@@ -136,7 +136,7 @@ Return a new image object, a clone of SOURCE-IMAGE.
 
 DEFUN("flip-image-horizontally", Fflip_image_horizontally,
       Sflip_image_horizontally, (repv image), rep_Subr1) /*
-::doc:Sflip-image-horizontally::
+::doc:flip-image-horizontally::
 flip-image-horizontally IMAGE 
 
 Flip the contents of IMAGE around the vertical axis.
@@ -149,7 +149,7 @@ Flip the contents of IMAGE around the vertical axis.
 
 DEFUN("flip-image-vertically", Fflip_image_vertically,
       Sflip_image_vertically, (repv image), rep_Subr1) /*
-::doc:Sflip-image-vertically::
+::doc:flip-image-vertically::
 flip-image-vertically IMAGE 
 
 Flip the contents of IMAGE around the horizontal axis.
@@ -162,7 +162,7 @@ Flip the contents of IMAGE around the horizontal axis.
 
 DEFUN("flip-image-diagonally", Fflip_image_diagonally,
       Sflip_image_diagonally, (repv image), rep_Subr1) /*
-::doc:Sflip-image-diagonally::
+::doc:flip-image-diagonally::
 flip-image-diagonally IMAGE 
 
 Flip the contents of IMAGE around a diagonal axis from the top-left to
@@ -195,7 +195,7 @@ Return the value of the property named PROPERTY (a symbol) of IMAGE.
 
 DEFUN("image-put", Fimage_put, Simage_put,
       (repv win, repv prop, repv val), rep_Subr3) /*
-::doc:Simage-put::
+::doc:image-put::
 image-put IMAGE PROPERTY VALUE
 
 Set the value of the property named PROPERTY (a symbol) of IMAGE to VALUE.
@@ -226,7 +226,7 @@ Set the value of the property named PROPERTY (a symbol) of IMAGE to VALUE.
 }
 
 DEFUN("imagep", Fimagep, Simagep, (repv arg), rep_Subr1) /*
-::doc:Simagep::
+::doc:imagep::
 image ARG
 
 Returns t if ARG is an image object.
@@ -237,7 +237,7 @@ Returns t if ARG is an image object.
 
 DEFUN("image-dimensions", Fimage_dimensions, Simage_dimensions,
       (repv img), rep_Subr1) /*
-::doc:Simage-dimensions::
+::doc:image-dimensions::
 image-dimensions IMAGE
 
 Return (WIDTH . HEIGHT) representing the dimensions in pixels of IMAGE.
@@ -250,7 +250,7 @@ Return (WIDTH . HEIGHT) representing the dimensions in pixels of IMAGE.
 
 DEFUN("image-shape-color", Fimage_shape_color,
       Simage_shape_color, (repv img), rep_Subr1) /*
-::doc:Simage-shape-color::
+::doc:image-shape-color::
 image-shape-color IMAGE
 ::end:: */
 {
@@ -267,7 +267,7 @@ image-shape-color IMAGE
 
 DEFUN("set-image-shape-color", Fset_image_shape_color, Sset_image_shape_color,
       (repv img, repv shape), rep_Subr2) /*
-::doc:Sset-image-shape-color::
+::doc:set-image-shape-color::
 set-image-shape-color IMAGE TRANSPARENT-COLOR
 ::end:: */
 {
@@ -282,7 +282,7 @@ set-image-shape-color IMAGE TRANSPARENT-COLOR
 }
 
 DEFUN("image-border", Fimage_border, Simage_border, (repv img), rep_Subr1) /*
-::doc:Simage-border::
+::doc:image-border::
 image-border IMAGE
 
 Return (LEFT RIGHT TOP BOTTOM) representing the border (in pixels) of IMAGE.
@@ -297,7 +297,7 @@ Return (LEFT RIGHT TOP BOTTOM) representing the border (in pixels) of IMAGE.
 
 DEFUN("set-image-border", Fset_image_border, Sset_image_border,
       (repv img, repv left, repv right, repv top, repv bottom), rep_Subr5) /*
-::doc:Sset-image-border::
+::doc:set-image-border::
 set-image-border IMAGE LEFT RIGHT TOP BOTTOM
 
 Set the border of IMAGE to (LEFT RIGHT TOP BOTTOM). The border of an
@@ -322,7 +322,7 @@ are resized.
 
 DEFUN("image-modifier", Fimage_modifier, Simage_modifier,
       (repv img, repv type), rep_Subr2) /*
-::doc:Simage-modifier::
+::doc:image-modifier::
 image-modifier IMAGE TYPE
 
 TYPE may be one of nil, red, green, blue. returned modifier is
@@ -345,7 +345,7 @@ TYPE may be one of nil, red, green, blue. returned modifier is
 
 DEFUN("set-image-modifier", Fset_image_modifier, Sset_image_modifier,
       (repv img, repv type, repv mod), rep_Subr3) /*
-::doc:Sset-image-modifier::
+::doc:set-image-modifier::
 set-image-modifier IMAGE TYPE MODIFIER
 
 TYPE may be one of nil, red, green, blue. MODIFIER is (GAMMA BRIGHTNESS
@@ -445,7 +445,7 @@ bevel_vertically (u_char *data, int width, int height,
 
 DEFUN("bevel-image", Fbevel_image, Sbevel_image,
       (repv image, repv border, repv up), rep_Subr3) /*
-::doc:Sbevel-image::
+::doc:bevel-image::
 bevel-image IMAGE BORDER UP
 
 Draw a bevelled edge outline onto IMAGE. BORDER is an integer defining
@@ -478,7 +478,7 @@ the width of the bevel. If UP is non-nil the bevel is raised.
 
 DEFUN("clear-image", Fclear_image, Sclear_image,
       (repv image, repv color), rep_Subr2) /*
-::doc:Sclear-image::
+::doc:clear-image::
 clear-image IMAGE [COLOR]
 
 Set all pixels in IMAGE to COLOR (or black if COLOR is undefined).
@@ -511,7 +511,7 @@ Set all pixels in IMAGE to COLOR (or black if COLOR is undefined).
 
 DEFUN("make-sized-image", Fmake_sized_image, Smake_sized_image,
       (repv width, repv height, repv color), rep_Subr3) /*
-::doc:Smake-sized-image::
+::doc:make-sized-image::
 make-sized-image WIDTH HEIGHT [COLOR]
 
 Return a new image of dimensions (WIDTH, HEIGHT). The object COLOR
@@ -552,7 +552,7 @@ defines the color of its pixels.
 }
 
 DEFUN("tile-image", Ftile_image, Stile_image, (repv dst, repv src), rep_Subr2) /*
-::doc:Stile-image::
+::doc:tile-image::
 tile-image DEST-IMAGE SOURCE-IMAGE
 
 Tile SOURCE-IMAGE into DEST-IMAGE.

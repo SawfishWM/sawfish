@@ -27,7 +27,7 @@ int font_type;
 DEFSYM(default_font, "default-font");
 
 DEFUN("get-font", Fget_font, Sget_font, (repv name), rep_Subr1) /*
-::doc:Sget-font::
+::doc:get-font::
 get-font NAME
 
 Return the font object representing the font named NAME (a standard X
@@ -83,7 +83,7 @@ Return the property PROPERTY (a symbol) associated with FONT.
 }
 
 DEFUN("font-put", Ffont_put, Sfont_put, (repv win, repv prop, repv val), rep_Subr3) /*
-::doc:Sfont-put::
+::doc:font-put::
 font-put FONT PROPERTY VALUE
 
 Set the property PROPERTY (a symbol) associated with FONT to VALUE.
@@ -114,7 +114,7 @@ Set the property PROPERTY (a symbol) associated with FONT to VALUE.
 }
 
 DEFUN("font-name", Ffont_name, Sfont_name, (repv font), rep_Subr1) /*
-::doc:Sfont-name::
+::doc:font-name::
 font-name FONT
 
 Return the name of the font represented by the font object FONT.
@@ -125,7 +125,7 @@ Return the name of the font represented by the font object FONT.
 }
 
 DEFUN("fontp", Ffontp, Sfontp, (repv win), rep_Subr1) /*
-::doc:Sfontp::
+::doc:fontp::
 fontp ARG
 
 Return t if ARG is a font object.
@@ -135,7 +135,7 @@ Return t if ARG is a font object.
 }
 
 DEFUN("text-width", Ftext_width, Stext_width, (repv string, repv font), rep_Subr2) /*
-::doc:Stext-width::
+::doc:text-width::
 text-width STRING [FONT]
 
 Return the number of horizontal pixels that would be required to display
@@ -151,7 +151,7 @@ the text STRING using font object FONT (or the default-font).
 }
 
 DEFUN("font-height", Ffont_height, Sfont_height, (repv font), rep_Subr1) /*
-::doc:Sfont-height::
+::doc:font-height::
 font-height [FONT]
 
 Return the bounding height of glyphs rendered using FONT (or the

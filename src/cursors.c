@@ -29,7 +29,7 @@ repv default_cursor;
 DEFSYM(cursor_shape, "cursor-shape");
 
 DEFUN("get-cursor", Fget_cursor, Sget_cursor, (repv data), rep_Subr1) /*
-::doc:Sget-cursor::
+::doc:get-cursor::
 get-cursor DATA
 
 Returns the cursor object representing the cursor defined by DATA.
@@ -77,7 +77,7 @@ X11 cursor font, or an image object.
 }
 
 DEFUN("default-cursor", Vdefault_cursor, Sdefault_cursor, (repv arg), rep_Var) /*
-::doc:Vdefault-cursor::
+::doc:default-cursor::
 The cursor object displayed in the root window, and in frame parts which
 have no other cursor specified.
 ::end:: */
@@ -91,7 +91,7 @@ have no other cursor specified.
 }
 
 DEFUN("cursorp", Fcursorp, Scursorp, (repv arg), rep_Subr1) /*
-::doc:Scursorp::
+::doc:cursorp::
 cursor ARG
 
 Returns t if ARG is an cursor object.

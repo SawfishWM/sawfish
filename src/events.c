@@ -933,7 +933,7 @@ handle_sync_input (int fd)
 /* Lisp functions */
 
 DEFUN("query-pointer", Fquery_pointer, Squery_pointer, (repv get), rep_Subr1) /*
-::doc:Squery-pointer::
+::doc:query-pointer::
 query-pointer [GET-FROM-SERVER]
 
 Returns (MOUSE-X . MOUSE-Y) representing the current mouse pointer position,
@@ -961,7 +961,7 @@ the server, otherwise it's taken from the current event (if possible).
 
 DEFUN("query-button-press-pointer", Fquery_button_press_pointer,
       Squery_button_press_pointer, (void), rep_Subr0) /*
-::doc:Squery-button-press-pointer::
+::doc:query-button-press-pointer::
 query-button-press-pointer
 
 Returns (MOUSE-X . MOUSE-Y) representing the mouse position relative to
@@ -978,7 +978,7 @@ the root window at the last button-press event.
 }
 
 DEFUN("query-pointer-window", Fquery_pointer_window, Squery_pointer_window, (void), rep_Subr0) /*
-::doc:Squery-pointer-window::
+::doc:query-pointer-window::
 query-pointer-window
 
 Returns the top-level window under the mouse pointer, or nil if the cursor
@@ -1007,7 +1007,7 @@ is in the root window.
 }
 
 DEFUN("accept-x-input", Faccept_x_input, Saccept_x_input, (repv mask), rep_Subr1) /*
-::doc:Saccept-x-input::
+::doc:accept-x-input::
 accept-x-input [EVENT-MASK]
 
 Handle any X events received. If EVENT-MASK is non-nil then only events
@@ -1020,7 +1020,7 @@ matching this numeric value are handled (see <X11/X.h>).
 
 DEFUN("current-event-window", Fcurrent_event_window, Scurrent_event_window,
       (repv win), rep_Subr1) /*
-::doc:Scurrent-event-window::
+::doc:current-event-window::
 current-event-window
 
 Return the window that received the current event, or the symbol
@@ -1052,7 +1052,7 @@ Return the window that received the current event, or the symbol
 
 DEFUN("x-server-timestamp", Fx_server_timestamp, Sx_server_timestamp,
       (void), rep_Subr0) /*
-::doc:Sx-server-timestamp::
+::doc:x-server-timestamp::
 x-server-timestamp
 
 Return the most recently seen X server timestamp, as a cons cell.

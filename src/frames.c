@@ -355,6 +355,15 @@ set_frame_part_bg (struct frame_part *fp)
 	if (win->id == 0)
 	    return;
 
+	if (bg_mask)
+	{
+	    XGCValues gcv;
+	    gcv.clip_mask = bg_mask;
+	    gcv.clip_x_origin = 0;
+	    gcv.clip_y_origin = 0;
+	    XChangeGC (dpy, fp->gc, GCClipMask | GCClipXOrigin
+		       | GCClipYOrigin, &gcv);
+	}
 	if (!tiled)
 	{
 	    XCopyArea (dpy, bg_pixmap, fp->id, fp->gc, 0, 0,
@@ -382,6 +391,7 @@ set_frame_part_bg (struct frame_part *fp)
 		int x = 0;
 		while (x < fp->width)
 		{
+		    XSetClipOrigin (dpy, fp->gc, x, y);
 		    XCopyArea (dpy, bg_pixmap, fp->id, fp->gc, 0, 0,
 			       image->image->rgb_width,
 			       image->image->rgb_height, x, y);
@@ -400,6 +410,12 @@ set_frame_part_bg (struct frame_part *fp)
 				    fp->id, ShapeBounding, ShapeSet);
 		XDestroyWindow (dpy, tem);
 	    }
+	}
+	if (bg_mask)
+	{
+	    XGCValues gcv;
+	    gcv.clip_mask = None;
+	    XChangeGC (dpy, fp->gc, GCClipMask, &gcv);
 	}
 	Imlib_free_pixmap (imlib_id, bg_pixmap);
 
@@ -1039,8 +1055,8 @@ list_frame_generator (Lisp_Window *w)
 	{
 	    if (IMAGEP(fp->bg[i]))
 	    {
-		fp->width = VIMAGE(fp->bg[fps_normal])->image->rgb_width;
-		fp->height = VIMAGE(fp->bg[fps_normal])->image->rgb_height;
+		fp->width = VIMAGE(fp->bg[i])->image->rgb_width;
+		fp->height = VIMAGE(fp->bg[i])->image->rgb_height;
 		break;
 	    }
 	}
@@ -1380,7 +1396,7 @@ destroy_window_frame (Lisp_Window *w, bool leave_frame_win)
 
 DEFUN("frame-draw-mutex", Vframe_draw_mutex,
       Sframe_draw_mutex, (repv arg), rep_Var) /*
-::doc:Vframe-draw-mutex::
+::doc:frame-draw-mutex::
 While this variable is non-nil no frame parts will be redrawn. When it is
 set to nil any pending redraws will take place.
 ::end:: */
@@ -1407,7 +1423,7 @@ set to nil any pending redraws will take place.
 	
 DEFUN("frame-state-mutex", Vframe_state_mutex,
       Sframe_state_mutex, (repv arg), rep_Var) /*
-::doc:Vframe-state-mutex::
+::doc:frame-state-mutex::
 While this variable is non-nil the state of frame parts will not be
 altered when the pointer enters or leaves its window.
 ::end:: */

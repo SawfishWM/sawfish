@@ -50,7 +50,7 @@ DEFSYM(position, "position");
 
 DEFUN("restack-windows", Frestack_windows, Srestack_windows,
       (repv list), rep_Subr1) /*
-::doc:Srestack-windows::
+::doc:restack-windows::
 restack-windows LIST
 
 Restack all windows in the list of windows LIST in the order they occur
@@ -80,7 +80,7 @@ windows isn't affected.
 
 DEFUN("x-raise-window", Fx_raise_window, Sx_raise_window,
       (repv win), rep_Subr1) /*
-::doc:Sx-raise-window::
+::doc:x-raise-window::
 x-raise-window WINDOW
 
 Bring WINDOW to the top of the display.
@@ -96,7 +96,7 @@ Bring WINDOW to the top of the display.
 }
 
 DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1, "%W") /*
-::doc:Sdelete-window::
+::doc:delete-window::
 delete-window WINDOW
 
 Delete WINDOW, i.e. send a WM_DELETE_WINDOW client-message if possible, or
@@ -124,7 +124,7 @@ WINDOW may be a window object or a numeric window id.
 }
 
 DEFUN_INT("destroy-window", Fdestroy_window, Sdestroy_window, (repv win), rep_Subr1, "%W") /*
-::doc:Sdestroy-window::
+::doc:destroy-window::
 destroy-window WINDOW
 
 Destroy WINDOW with out giving the owning application any warning.
@@ -142,7 +142,7 @@ WINDOW may be a window object or a numeric window id.
 }
 
 DEFUN("warp-cursor", Fwarp_cursor, Swarp_cursor, (repv x, repv y), rep_Subr2) /*
-::doc:Swarp-cursor::
+::doc:warp-cursor::
 warp-cursor X Y
 
 Move the mouse pointer to position (X, Y) relative to the origin of the
@@ -164,7 +164,7 @@ root window.
 
 DEFUN("warp-cursor-to-window", Fwarp_cursor_to_window, Swarp_cursor_to_window,
       (repv win, repv x, repv y), rep_Subr3) /*
-::doc:Swarp-cursor-to-window::
+::doc:warp-cursor-to-window::
 warp-cursor-to-window WINDOW [X Y]
 
 Move the mouse pointer to position (X, Y) relative to the client window
@@ -197,7 +197,7 @@ window frame.
 
 DEFUN("move-window-to", Fmove_window_to, Smove_window_to,
       (repv win, repv x, repv y), rep_Subr3) /*
-::doc:Smove-window-to::
+::doc:move-window-to::
 move-window-to WINDOW X Y
 
 Move the top-left corner of window object WINDOW to (X, Y).
@@ -221,7 +221,7 @@ Move the top-left corner of window object WINDOW to (X, Y).
 
 DEFUN("resize-window-to", Fresize_window_to, Sresize_window_to,
       (repv win, repv width, repv height), rep_Subr3) /*
-::doc:Sresize-window-to::
+::doc:resize-window-to::
 resize-window-to WINDOW WIDTH HEIGHT
 
 Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
@@ -238,7 +238,7 @@ Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
 }
 
 DEFUN("grab-server", Fgrab_server, Sgrab_server, (void), rep_Subr0) /*
-::doc:Sgrab-server::
+::doc:grab-server::
 grab-server
 
 Prevent any other clients from accessing the X server. See `ungrab-server'.
@@ -254,7 +254,7 @@ Prevent any other clients from accessing the X server. See `ungrab-server'.
 }
 
 DEFUN("ungrab-server", Fungrab_server, Sungrab_server, (void), rep_Subr0) /*
-::doc:Sungrab-server::
+::doc:ungrab-server::
 ungrab-server
 
 After a call to `grab-server' this will allow other clients to access
@@ -273,7 +273,7 @@ Note that calls to `grab-server' and `ungrab-server' _nest_.
 
 DEFUN("grab-pointer", Fgrab_pointer, Sgrab_pointer,
       (repv win, repv cursor), rep_Subr2) /*
-::doc:Sgrab-pointer::
+::doc:grab-pointer::
 grab-pointer [WINDOW] [CURSOR]
 
 Grab the mouse pointer and direct all pointer events to window object
@@ -311,7 +311,7 @@ again:
 }
 
 DEFUN("ungrab-pointer", Fungrab_pointer, Sungrab_pointer, (void), rep_Subr0) /*
-::doc:Sungrab-pointer::
+::doc:ungrab-pointer::
 ungrab-pointer
 
 Release the grab on the mouse pointer.
@@ -324,7 +324,7 @@ Release the grab on the mouse pointer.
 }
 
 DEFUN("grab-keyboard", Fgrab_keyboard, Sgrab_keyboard, (repv win), rep_Subr1) /*
-::doc:Sgrab-keyboard::
+::doc:grab-keyboard::
 grab-keyboard [WINDOW]
 
 Grab the keyboard and direct all keyboard events to window object
@@ -360,7 +360,7 @@ again:
     
 DEFUN("ungrab-keyboard", Fungrab_keyboard,
       Sungrab_keyboard, (void), rep_Subr0) /*
-::doc:Sungrab-keyboard::
+::doc:ungrab-keyboard::
 ungrab-keyboard
 
 Release the grab on the keyboard.
@@ -414,7 +414,7 @@ draw_box_outline (int x, int y, int width, int height)
 
 DEFUN("draw-window-outline", Fdraw_window_outline, Sdraw_window_outline,
       (repv mode, repv x, repv y, repv width, repv height), rep_Subr5) /*
-::doc:Sdraw-window-outline::
+::doc:draw-window-outline::
 draw-window-outline MODE X Y WIDTH HEIGHT
 
 Draw an outline of a window of dimensions (WIDTH, HEIGHT) at position
@@ -438,7 +438,7 @@ grabbed until the outline is erased.
 
 DEFUN("erase-window-outline", Ferase_window_outline, Serase_window_outline,
       (repv mode, repv x, repv y, repv width, repv height), rep_Subr5) /*
-::doc:Serase-window-outline::
+::doc:erase-window-outline::
 erase-window-outline MODE X Y WIDTH HEIGHT
 Erase a previously drawn outline of a window of dimensions (WIDTH, HEIGHT)
 at position (X, Y) relative to the root window. See `draw-window-outline'.
@@ -456,7 +456,7 @@ only be `box' for a 3x3 grid.
 }
 
 DEFUN("screen-width", Fscreen_width, Sscreen_width, (void), rep_Subr0) /*
-::doc:Sscreen-width::
+::doc:screen-width::
 screen-width
 
 Return the width of the root window (in pixels).
@@ -466,7 +466,7 @@ Return the width of the root window (in pixels).
 }
 
 DEFUN("screen-height", Fscreen_height, Sscreen_height, (void), rep_Subr0) /*
-::doc:Sscreen-height::
+::doc:screen-height::
 screen-height
 
 Return the height of the root window (in pixels).
@@ -476,7 +476,7 @@ Return the height of the root window (in pixels).
 }
 
 DEFUN("sync-server", Fsync_server, Ssync_server, (void), rep_Subr0) /*
-::doc:Ssync-server::
+::doc:sync-server::
 sync-server
 
 Flush all pending X requests, don't wait for them to finish.
@@ -488,7 +488,7 @@ Flush all pending X requests, don't wait for them to finish.
 
 DEFUN("delete-x-property", Fdelete_x_property, Sdelete_x_property,
       (repv win, repv atom), rep_Subr2) /*
-::doc:Sdelete-x-property::
+::doc:delete-x-property::
 delete-x-property WINDOW ATOM
 
 Delete the X property ATOM (a symbol) of WINDOW.
@@ -507,7 +507,7 @@ WINDOW may be the symbol `root', a window object or a numeric window id.
 
 DEFUN("list-x-properties", Flist_x_properties, Slist_x_properties,
       (repv win), rep_Subr1) /*
-::doc:Slist-x-properties::
+::doc:list-x-properties::
 list-x-properties WINDOW
 
 List all X properties (symbols) of WINDOW.
@@ -551,7 +551,7 @@ WINDOW may be the symbol `root', a window object or a numeric window id.
 
 DEFUN("get-x-property", Fget_x_property, Sget_x_property,
       (repv win, repv prop), rep_Subr2) /*
-::doc:Sget-x-property::
+::doc:get-x-property::
 get-x-property WINDOW PROPERTY
 
 Return (TYPE FORMAT DATA) representing the X property PROPERTY (a
@@ -651,7 +651,7 @@ symbols, representing the atoms read.
 
 DEFUN("set-x-property", Fset_x_property, Sset_x_property,
       (repv win, repv prop, repv data, repv type, repv format), rep_Subr5) /*
-::doc:Sset-x-property::
+::doc:set-x-property::
 set-x-property WINDOW PROPERTY DATA TYPE FORMAT
 
 Set the X property PROPERTY (a symbol) of WINDOW to the array DATA.
@@ -738,7 +738,7 @@ converted to their numeric X atoms.
 
 DEFUN("get-x-text-property", Fget_x_text_property, Sget_x_text_property,
       (repv win, repv prop), rep_Subr2) /*
-::doc:Sget-x-text-property::
+::doc:get-x-text-property::
 get-x-text-property WINDOW PROPERTY
 ::end:: */
 {
@@ -773,7 +773,7 @@ get-x-text-property WINDOW PROPERTY
 
 DEFUN("set-x-text-property", Fset_x_text_property, Sset_x_text_property, 
       (repv win, repv prop, repv vect), rep_Subr3) /*
-::doc:Sset-x-text-prooperty::
+::doc:set-x-text-prooperty::
 set-x-text-property WINDOW PROPERTY STRING-VECTOR
 ::end:: */
 {
@@ -809,7 +809,7 @@ set-x-text-property WINDOW PROPERTY STRING-VECTOR
 
 DEFUN("send-client-message", Fsend_client_message, Ssend_client_message,
       (repv win, repv type, repv data, repv format), rep_Subr4) /*
-::doc:Ssend-client-message::
+::doc:send-client-message::
 send-client-message WINDOW TYPE DATA FORMAT
 
 Send an X ClientMessage event to WINDOW (a window object or the symbol
@@ -868,7 +868,7 @@ FORMAT sized quantities (8, 16 or 32).
 
 DEFUN("create-window", Fcreate_window, Screate_window,
       (repv parent, repv x, repv y, repv width, repv height), rep_Subr5) /*
-::doc:Screate-window::
+::doc:create-window::
 create-window PARENT-WINDOW X Y WIDTH HEIGHT
 
 Create an unmapped window that is a child of PARENT-WINDOW (a window object,
@@ -893,7 +893,7 @@ Returns the window id of the new window.
 }
 
 DEFUN("x-atom", Fx_atom, Sx_atom, (repv symbol), rep_Subr1) /*
-::doc:Sx-atom::
+::doc:x-atom::
 x-atom SYMBOL
 
 Return the integer identifying the X atom with the same name as SYMBOL.
@@ -905,7 +905,7 @@ Return the integer identifying the X atom with the same name as SYMBOL.
 }
 
 DEFUN("x-atom-name", Fx_atom_name, Sx_atom_name, (repv atom), rep_Subr1) /*
-::doc:Sx-atom-name::
+::doc:x-atom-name::
 x-atom-name ATOM
 
 Return the symbol with the same name as the X atom identified by the
