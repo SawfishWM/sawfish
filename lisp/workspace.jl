@@ -141,8 +141,10 @@
   (unless index
     (setq index current-workspace))
   (setq total-workspaces (1- total-workspaces))
-  (when (> current-workspace index)
-    (setq current-workspace (1- current-workspace)))
+  (cond ((>= current-workspace total-workspaces)
+	 (setq current-workspace (1- total-workspaces)))
+	((> current-workspace index)
+	 (setq current-workspace (1- current-workspace))))
   (mapc #'(lambda (w)
 	    (let
 		((space (window-get w 'workspace)))
@@ -225,6 +227,26 @@
 		       (not (window-get w 'iconified)))))
 	  (managed-windows)))
 
+(defun ws-switch-workspace (space)
+  (unless (= current-workspace space)
+    (when current-workspace
+      (mapc #'(lambda (w)
+		(when (and (window-get w 'workspace)
+			   (= (window-get w 'workspace) current-workspace))
+		  (hide-window w)))
+	    (managed-windows))
+      (call-hook 'leave-workspace-hook (list current-workspace)))
+    (setq current-workspace space)
+    (when current-workspace
+      (mapc #'(lambda (w)
+		(when (and (window-get w 'workspace)
+			   (= (window-get w 'workspace) current-workspace)
+			   (not (window-get w 'iconified)))
+		  (show-window w)))
+	    (managed-windows))
+      (call-hook 'enter-workspace-hook (list current-workspace))
+      (call-hook 'workspace-state-change-hook))))
+
 
 ;; slightly higher level
 
@@ -272,26 +294,6 @@
       (ws-remove-window w)
       (ws-add-window-to-space w (window-get parent 'workspace)))
     (raise-window w)))
-
-(defun ws-switch-workspace (space)
-  (unless (= current-workspace space)
-    (when current-workspace
-      (mapc #'(lambda (w)
-		(when (and (window-get w 'workspace)
-			   (= (window-get w 'workspace) current-workspace))
-		  (hide-window w)))
-	    (managed-windows))
-      (call-hook 'leave-workspace-hook (list current-workspace)))
-    (setq current-workspace space)
-    (when current-workspace
-      (mapc #'(lambda (w)
-		(when (and (window-get w 'workspace)
-			   (= (window-get w 'workspace) current-workspace)
-			   (not (window-get w 'iconified)))
-		  (show-window w)))
-	    (managed-windows))
-      (call-hook 'enter-workspace-hook (list current-workspace))
-      (call-hook 'workspace-state-change-hook))))
 
 
 ;; Menu constructors
