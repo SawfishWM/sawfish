@@ -269,27 +269,48 @@ Return t if the server is currently grabbed.
 }
 
 DEFUN("grab-pointer", Fgrab_pointer, Sgrab_pointer,
-      (repv win, repv cursor), rep_Subr2) /*
+      (repv win, repv cursor, repv ptr_sync, repv kbd_sync, repv confine_to),
+      rep_Subr5) /*
 ::doc:grab-pointer::
-grab-pointer [WINDOW] [CURSOR]
+grab-pointer [WINDOW] [CURSOR] [PTR-SYNC] [KBD-SYNC] [CONFINE-TO]
 
-Grab the mouse pointer and direct all pointer events to window object
+Grab the pointer and direct all pointer events to window object
 WINDOW. If CURSOR is defined and a cursor object, display this whilst
 the pointer is grabbed.
 
-If WINDOW is nil, or unviewable, the grab will be made on the root
-window.
+If PTR-SYNC or KBD-SYNC is non-nil the pointer or the keyboard will be
+frozen, i.e., the device will not produce events until either the grab
+is released or events are re-enabled using allow-events.
+
+CONFINE-TO, if non-nil, is a visible window to confine the pointer to.
+
+If WINDOW is a window object corresponding to a visible window the
+grab will be made on its frame.  If WINDOW is an integer, it specifies the
+window id of the grab window.  Otherwise the grab will be made on the root
+window.  CONFINE-TO is interpreted similarly except that the default
+is not to confine the pointer.  If the window id of a non-viewable window
+was specified for either WINDOW of CONFINE-TO the grab will be made on the
+root window without confining the pointer.
 
 Returns non-nil if the grab succeeded.
 ::end:: */
 {
-    Window g_win;
+    Window g_win, c_win;
     int ret;
 
     if (WINDOWP(win) && VWIN(win)->visible)
 	g_win = VWIN(win)->frame;
+    else if (rep_INTP(win))
+	g_win = rep_INT(win);
     else
 	g_win = root_window;
+
+    if (WINDOWP(confine_to) && VWIN(confine_to)->visible)
+        c_win = VWIN(confine_to)->frame;
+    else if (rep_INTP(confine_to))
+	c_win = rep_INT(confine_to);
+    else
+        c_win = None;
 
     if (cursor != Qnil && !CURSORP(cursor))
     {
@@ -300,13 +321,16 @@ Returns non-nil if the grab succeeded.
 
 again:
     ret = XGrabPointer (dpy, g_win, False, POINTER_GRAB_EVENTS,
-			GrabModeAsync, GrabModeAsync, None,
+			rep_NILP( ptr_sync) ? GrabModeAsync : GrabModeSync,
+			rep_NILP( kbd_sync) ? GrabModeAsync : GrabModeSync,
+			c_win,
 			CURSORP(cursor) ? VCURSOR(cursor)->cursor : None,
 			last_event_time);
-    if (ret == GrabNotViewable && g_win != root_window)
+    if (ret == GrabNotViewable && (g_win != root_window || c_win != None))
     {
 	/* fall back to the root window. */
 	g_win = root_window;
+	c_win = None;
 	goto again;
     }
 
@@ -327,15 +351,21 @@ Release the grab on the mouse pointer.
     return Qt;
 }
 
-DEFUN("grab-keyboard", Fgrab_keyboard, Sgrab_keyboard, (repv win), rep_Subr1) /*
+DEFUN("grab-keyboard", Fgrab_keyboard, Sgrab_keyboard,
+      (repv win, repv ptr_sync, repv kbd_sync), rep_Subr3) /*
 ::doc:grab-keyboard::
-grab-keyboard [WINDOW]
+grab-keyboard [WINDOW] [PTR-SYNC] [KBD-SYNC]
 
 Grab the keyboard and direct all keyboard events to window object
-WINDOW.
+WINDOW.  If WINDOW is a window object corresponding to a visible
+window the grab will be made on its frame.  If WINDOW is an integer it
+specifies the window id of the grab window.  Otherwise the grab will
+be made on the root window.  If the window id of a non-viewable window
+was specified the grab is made on the root window instead.
 
-If WINDOW is nil, or unviewable, the grab will be made on the root
-window.
+If PTR-SYNC or KBD-SYNC is non-nil the pointer or the keyboard will be
+frozen, i.e., the device will not produce events until either the grab
+is released or events are re-enabled using allow-events.
 
 Returns non-nil if the grab succeeded.
 ::end:: */
@@ -345,12 +375,16 @@ Returns non-nil if the grab succeeded.
 
     if (WINDOWP(win) && VWIN(win)->visible)
 	g_win = VWIN(win)->frame;
+    else if (rep_INTP(win))
+	g_win = rep_INT(win);
     else
 	g_win = root_window;
 
 again:
-    ret = XGrabKeyboard (dpy, g_win, False, GrabModeAsync,
-			 GrabModeAsync, last_event_time);
+    ret = XGrabKeyboard (dpy, g_win, False,
+			 rep_NILP( ptr_sync) ? GrabModeAsync : GrabModeSync,
+			 rep_NILP( kbd_sync) ? GrabModeAsync : GrabModeSync,
+			 last_event_time);
     if (ret == GrabNotViewable && g_win != root_window)
     {
 	/* fall back to the root window. */
