@@ -49,9 +49,27 @@ Outstanding bugs
 
   ! cycle-windows with only one window unfocuses the window
 
+  ! set interactive placement, double-click on gmc icon, window is only
+    placed interactively if mouse has moved before window is mapped
+
 
 General tasks
 =============
+
+  + support for synthesizing events
+
+  + add def-frame-class macro
+
+> (def-frame-class shade-button '((cursor . foo) ...)
+>   (bind-keys shade-button-keymap
+>     "Button1-Off" 'toggle-window-shaded))
+> 
+> the idea being that it will only create the frame part if it doesn't
+> exist, it will add all properties from the second argument unless
+> they're already set, then create and initialise the keymap from the
+> third argument (unless a keymap is already defined)
+
+  + visual cue for sticky windows?
 
   + add focus-order to smart placement weights?
 
@@ -120,8 +138,6 @@ General tasks
 
     allow relative to window, or relative to root, for both x and y
 
-  + option for maximizing not to cover panels
-
   + Allow text-entry commands in bindings dialog?
 
   + windows appear above xscreensaver?
@@ -162,12 +178,6 @@ General tasks
     Where are they defined?
 
   + clone some ctwm functions:
-
-       f.fill string
-               Where string is either : "right", "left", "top" or
-               "bottom".  The current window is  resized  in  the
-               specified  direction  until it reaches an obstacle
-               (either another window, or the screen border).
 
        f.pack string
                Where string is either : "right", "left", "top" or

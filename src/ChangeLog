@@ -1,5 +1,9 @@
 1999-10-20  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill-menu.jl (popup-menu): new optional arg TIMESTAMP
+
+	* events.c (Fx_server_timestamp): new function
+
 	* server.h, server.c, libclient.c: unix-domain socket is now
 	`/tmp/.sawmill-DPY' since there have been problems with
 	network-mounted home directories

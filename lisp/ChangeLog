@@ -1,7 +1,12 @@
 1999-10-20  John Harper  <john@dcs.warwick.ac.uk>
 
+	* keymaps.jl (window-keymap): bind popup-window-menu to
+	button-press not button-release event
+
 	* move-resize.jl (move-lock-when-maximized): new option, lock
 	geometry on x/y/both axes depending how the window is maximized
+	* menus.jl (popup-menu): pass the server timestamp argument
+	across
 
 	* maximize.jl: discard/update maximized window state when
 	window is moved or resized
