@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.28-pre\n"
-"POT-Creation-Date: 2000-05-25 21:46+0200\n"
-"PO-Revision-Date: 2000-05-26 06:30+02:00\n"
+"POT-Creation-Date: 2000-06-01 06:01+0200\n"
+"PO-Revision-Date: 2000-06-01 06:34+02:00\n"
 "Last-Translator: Karl Eichwalder <ke@suse.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -383,39 +383,43 @@ msgstr ""
 
 #. ../lisp/edge-flip.jl
 msgid "Edge Flipping"
-msgstr ""
+msgstr "Randsprung (Edge Flipping)"
 
 #. ../lisp/edge-flip.jl
 msgid "Flip to next viewport/workspace when pointer hits screen edge."
 msgstr ""
-"Wechsle zu nächstem (virtuellen) Arbeitsplatz, wenn der Mauszeiger\n"
-"die Bildschirmecke berührt."
+"Zum nächsten (virtuellen) Arbeitsplatz springen, wenn der Mauszeiger\n"
+"den Bildschirmrand berührt."
 
 #. ../lisp/edge-flip.jl
 msgid "Only flip when interactively moving a window."
-msgstr ""
+msgstr "Nur beim interaktiven Verschieben der Fenster springen."
 
 #. ../lisp/edge-flip.jl
 msgid "What hitting the screen edge actually flips."
-msgstr ""
+msgstr "Berühung des Bildschirmrand, die das Springen auslöst."
 
 #. ../lisp/edge-flip.jl
 msgid ""
 "Number of milliseconds to wait after pointer hits screen edge before\n"
 "flipping."
 msgstr ""
+"Zu wartende Millisekunden, die der Mauszeiger den Bildschirmrand\n"
+"berührt haben muss, bevor es zum Springen kommt."
 
 #. ../lisp/edge-flip.jl
 msgid "Warp pointer to opposite screen edge when flipping."
 msgstr ""
+"Den Mauszeiger beim Springen zum gegenüberliegenden Bildschirmrand\n"
+"holen."
 
 #. ../lisp/focus.jl
 msgid "When does the mouse pointer affect the input focus."
-msgstr "Wann beeinflusst die Mausbewegung den Eingabe-Fokus."
+msgstr "Wann der Mauszeiger den Eingabe-Fokus beeinflusst."
 
 #. ../lisp/focus.jl
 msgid "Does click-to-focus mode pass the click through to the window."
-msgstr ""
+msgstr "»click-to-focus«-Modus reicht den Klick an das Fenster weiter."
 
 #. ../lisp/frames.jl
 msgid "Default frame style (theme)."
@@ -456,15 +460,15 @@ msgstr ""
 
 #. ../lisp/functions.jl
 msgid "Start a new xterm."
-msgstr "Starte ein neues xterm."
+msgstr "Ein neues xterm starten."
 
 #. ../lisp/functions.jl
 msgid "Force the current window to have a unique title."
-msgstr "Erzwinge eindeutigen Titel für das aktuelle Fenster."
+msgstr "Eindeutigen Titel für das aktuelle Fenster erzwingen."
 
 #. ../lisp/functions.jl
 msgid "Delete the window."
-msgstr "Entferne das Fenster."
+msgstr "Das Fenster entfernen."
 
 #. ../lisp/functions.jl
 msgid "Delete the window, or beep if the window can't be closed safely."
@@ -553,59 +557,59 @@ msgstr "Die gtkrc-Einstellungen neu laden."
 
 #. ../lisp/iconify.jl
 msgid "Iconify the window."
-msgstr "Iconifiziere das Fenster."
+msgstr "Das Fenster iconifizieren."
 
 #. ../lisp/iconify.jl
 msgid "Return the window from its iconified state."
-msgstr "Hole das Fenster aus seinem iconifizierten Zustand."
+msgstr "Das Fenster aus dem iconifizierten Zustand holen."
 
 #. ../lisp/iconify.jl
 msgid "Toggle the iconification of window W."
-msgstr "Schalte die Iconifizierung des Fensters W um."
+msgstr "Die Iconifizierung des Fensters W umschalten."
 
 #. ../lisp/iconify.jl
 msgid "Display the workspace/viewport containing the window W."
-msgstr "Zeige den (virtuellen) Arbeitsplatz mit dem Fenster W."
+msgstr "Den (virtuellen) Arbeitsplatz mit dem Fenster W zeigen."
 
 #. ../lisp/iconify.jl
 msgid "Display the workspace containing the window W, then focus on W."
-msgstr "Zeige den Arbeitsplatz mit dem Fenster W und fokussiere W."
+msgstr "Den Arbeitsplatz mit dem Fenster W und fokussiere W zeigen."
 
 #. ../lisp/iconify.jl
 msgid ""
 "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
 msgstr ""
-"Schalte die 'Klebrigkeit' (`stickiness') des Fensters um -- vorhanden auf\n"
+"Die 'Klebrigkeit' (`stickiness') des Fensters umschalten -- vorhanden auf\n"
 "allen Arbeitsplätzen oder nicht."
 
 #. ../lisp/ignore-window.jl
 msgid "Ignore the window."
-msgstr "Ignoriere das Fenster."
+msgstr "Das Fenster ignorieren."
 
 #. ../lisp/ignore-window.jl
 msgid "Unignore the window."
-msgstr "Ignoriere das Fenster nicht."
+msgstr "Das Fenster nicht ignorieren."
 
 #. ../lisp/ignore-window.jl
 msgid "Toggle whether a window is ignored or not."
-msgstr "Schalte zwischen ignoriert oder nicht ignoriert um."
+msgstr "Zwischen ignoriert oder nicht ignoriert umschalten."
 
 #. ../lisp/ignore-window.jl
 msgid "Toggle whether a window is focusable or not."
-msgstr "Schalte zwischen fokussierbar und nicht fokussierbar um."
+msgstr "Zwischen fokussierbar und nicht fokussierbar umschalten."
 
 #. ../lisp/keymap.jl
 msgid "Prompt for a key sequence, then print its binding."
-msgstr "Frage nach einer Tasten-Kombination, dann zeige die Belegung an."
+msgstr "Nach einer Tasten-Kombination fragen, dann die Belegung anzeigen."
 
 #. ../lisp/keymap.jl
 msgid "Press key..."
-msgstr "Drücke Taste..."
+msgstr "Taste drücken..."
 
 #. ../lisp/keymap.jl
 msgid "Read a single event and send it to the focused window."
-msgstr "Lese ein einziges Ereignis und sende es zum fokussierten Fenster."
+msgstr "Ein einziges Ereignis lesen und es zum fokussierten Fenster schicken."
 
 #. ../lisp/keymap.jl
 msgid "[Quote]"
@@ -676,7 +680,7 @@ msgstr ""
 
 #. ../lisp/maximize.jl
 msgid "Raise windows when they're maximized."
-msgstr "Bringe Fenster in den Vordergrund beim Maximieren."
+msgstr "Fenster beim Maximieren in den Vordergrund bringen."
 
 #. ../lisp/maximize.jl
 msgid "Let ignored windows be overlapped when filling windows."
@@ -684,44 +688,44 @@ msgstr ""
 
 #. ../lisp/maximize.jl
 msgid "Maximize the dimensions of the window."
-msgstr "Maximiere die Dimensionen des Fensters."
+msgstr "Die Dimensionen des Fensters maximieren."
 
 #. ../lisp/maximize.jl
 msgid ""
 "Restore the dimensions of the window to its original, unmaximized, state."
-msgstr "Stelle die Dimensionen des unmaximierten Fensters wieder her."
+msgstr "Die Dimensionen des unmaximierten Fensters wieder herstellen."
 
 #. ../lisp/maximize.jl
 msgid "Maximize the vertical dimension of the window."
-msgstr "Maximiere die vertikale Dimension des Fensters."
+msgstr "Die vertikale Dimension des Fensters maximieren."
 
 #. ../lisp/maximize.jl
 msgid "Maximize the horizontal dimension of the window."
-msgstr "Maximiere die horizontale Dimension des Fensters."
+msgstr "Die horizontale Dimension des Fensters maximieren."
 
 #. ../lisp/maximize.jl
 msgid "Toggle the state of the window between maximized and unmaximized."
-msgstr "Schalte das Fenster zwischen maximiert und unmaximiert um."
+msgstr "Das Fenster zwischen maximiert und unmaximiert umschalten."
 
 #. ../lisp/maximize.jl
 msgid ""
 "Toggle the state of the window between vertically maximized and\n"
 "unmaximized."
-msgstr "Schalte das Fenster zwischen vertikal maximiert und unmaximiert um."
+msgstr "Das Fenster zwischen vertikal maximiert und unmaximiert umschalten."
 
 #. ../lisp/maximize.jl
 msgid ""
 "Toggle the state of the window between horizontally maximized and\n"
 "unmaximized."
-msgstr "Schalte das Fenster zwischen horizontal maximiert und unmaximiert um."
+msgstr "Das Fenster zwischen horizontal maximiert und unmaximiert umschalten."
 
 #. ../lisp/maximize.jl
 msgid "Maximize the window without obscuring any other windows."
-msgstr "Maximiere das Fenster ohne andere Fenster zu verdecken."
+msgstr "Das Fenster maximieren, ohne andere Fenster zu verdecken."
 
 #. ../lisp/maximize.jl
 msgid "Maximize the window vertically without obscuring any other windows."
-msgstr "Maximiere das Fenster vertikal ohne andere Fenster zu verdecken."
+msgstr "Das Fenster vertikal maximieren, ohne andere Fenster zu verdecken."
 
 #. ../lisp/maximize.jl
 msgid ""
@@ -926,15 +930,15 @@ msgstr "Beenden"
 
 #. ../lisp/menus.jl
 msgid "Display the menu listing all window operations."
-msgstr "Zeige das Menü an, das alle Fenster-Manipulationen auflistet."
+msgstr "Das Menü anzeigen, das alle Fenster-Manipulationen auflistet."
 
 #. ../lisp/menus.jl
 msgid "Display the main menu."
-msgstr "Zeige das Hauptmenü an."
+msgstr "Das Hauptmenü anzeigen."
 
 #. ../lisp/menus.jl
 msgid "Display the applications menu."
-msgstr "Zeige das Applikationsmenü an."
+msgstr "Das Menü mit den Anwendungen anzeigen."
 
 #. ../lisp/move-cursor.jl
 msgid "Number of pixels to move pointer in `move-cursor-' commands."
@@ -942,35 +946,35 @@ msgstr "Anzahl von Pixeln beim Bewegen des Zeigers in `move-cursor-' Befehlen."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the left."
-msgstr "Bewege den Zeiger `move-cursor-increment' Pixel nach links."
+msgstr "Den Zeiger »move-cursor-increment« Pixel nach links bewegen."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the right."
-msgstr "Bewege den Zeiger `move-cursor-increment' Pixel nach rechts."
+msgstr "Den Zeiger »move-cursor-increment« Pixel nach rechts bewegen."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels upwards."
-msgstr "Bewege den Zeiger `move-cursor-increment' Pixel nach oben."
+msgstr "Den Zeiger »move-cursor-increment« Pixel nach oben bewegen."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels downwards."
-msgstr "Bewege den Zeiger `move-cursor-increment' Pixel nach unten."
+msgstr "Den Zeiger »move-cursor-increment« Pixel nach unten bewegen."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel to the left."
-msgstr "Bewege den Zeiger 1 Pixel nach links."
+msgstr "Den Zeiger 1 Pixel nach links bewegen."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel to the right."
-msgstr "Bewege den Zeiger 1 Pixel nach rechts."
+msgstr "Den Zeiger 1 Pixel nach rechts bewegen."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel upwards."
-msgstr "Bewege den Zeiger 1 Pixel nach oben."
+msgstr "Den Zeiger 1 Pixel nach oben bewegen."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel downwards."
-msgstr "Bewege den Zeiger 1 Pixel nach unten."
+msgstr "Den Zeiger 1 Pixel nach unten bewegen."
 
 #. ../lisp/move-resize.jl
 msgid "The method of drawing windows being moved interactively."
@@ -982,25 +986,23 @@ msgstr "Die Methode des Zeichnens der Fenster beim interaktiven Vergrößern."
 
 #. ../lisp/move-resize.jl
 msgid "Raise windows being moved or resized interactively."
-msgstr ""
-"Bringe die Fenster beim Verschieben oder interaktiven Vergrößern in den "
-"Vordergrund."
+msgstr "Die Fenster beim Verschieben oder interaktiven Vergrößern in den Vordergrund bringen."
 
 #. ../lisp/move-resize.jl
 msgid "Show the current position while moving windows interactively."
-msgstr ""
-"Zeige die aktuelle Position beim interaktiven Verschieben von Fenstern."
+msgstr "Die aktuelle Position beim interaktiven Verschieben von Fenstern zeigen."
 
 #. ../lisp/move-resize.jl
 msgid "Show the current dimensions while resizing windows interactively."
-msgstr ""
-"Zeige die aktuellen Dimensionen beim interaktiven Vergrößern der Fenster."
+msgstr "Die aktuellen Dimensionen beim interaktiven Vergrößern der Fenster zeigen."
 
 #. ../lisp/move-resize.jl
 msgid ""
 "The method of choosing which window edges are moved while resizing with\n"
 "the mouse."
 msgstr ""
+"Auswahlmethode, welche Fensterecken beim Vergrößern mit der Maus\n"
+"verschoben werden."
 
 #. ../lisp/move-resize.jl
 msgid ""
@@ -1021,36 +1023,30 @@ msgstr ""
 
 #. ../lisp/move-resize.jl
 msgid "Lock window geometry while the window is maximized."
-msgstr "Sperre die Fenstergeometrie während das Fenster maximiert ist."
+msgstr "Die Fenstergeometrie sperren, während das Fenster maximiert ist."
 
 #. ../lisp/move-resize.jl
 msgid ""
 "Only update window contents after it has been moved to its final position."
-msgstr ""
-"Zeichne Den Fensterinhalt erst neu, wenn das Fenster an die endgültige "
-"Stelle verschoben ist."
+msgstr "Den Fensterinhalt erst neu zeichen, wenn das Fenster an die endgültige Stelle verschoben ist."
 
 #. ../lisp/move-resize.jl
 msgid "Move the window interactively using the mouse."
-msgstr "Verschiebe das Fenster interaktiv per Maus."
+msgstr "Das Fenster interaktiv mit der Maus verschieben."
 
 #. ../lisp/move-resize.jl
 msgid "Resize the window interactively using the mouse."
-msgstr "Ändere die Fenstergröße interaktiv per Maus."
+msgstr "Die Fenstergröße interaktiv mit der Maus ändern."
 
 #. ../lisp/move-resize.jl
 msgid ""
 "Wait for the user to select a window, then interactively move that window."
-msgstr ""
-"Warte bis der Benutzer ein Fenster wählt, verschiebe das Fenster dann "
-"interaktiv."
+msgstr "Warten, bis der Benutzer ein Fenster wählt; dann das Fenster interaktiv verschieben."
 
 #. ../lisp/move-resize.jl
 msgid ""
 "Wait for the user to select a window, then interactively resize that window."
-msgstr ""
-"Warte bis der Benutzer ein Fenster wählt, vergrößere das Fenster dann "
-"interaktiv."
+msgstr "Warten, bis der Benutzer ein Fenster wählt; dann das Fenster interaktiv verschieben."
 
 #. ../lisp/place-window.jl
 msgid "Method of selecting the position of a freshly-mapped window."
@@ -1062,7 +1058,7 @@ msgstr ""
 
 #. ../lisp/place-window.jl
 msgid "Ignore program-specified window positions."
-msgstr "Ignoriere von Programmen geforderte Fensterpositionen."
+msgstr "Von Programmen geforderte Fensterpositionen ignorieren."
 
 #. ../lisp/play-audio.jl
 msgid ""
@@ -1135,7 +1131,7 @@ msgstr "Arbeitsplätze:"
 
 #. ../lisp/prompt-wm.jl
 msgid "Prompt for a workspace and switch to it."
-msgstr "Frage nach einem Arbeitsplatz und wechsele zu diesem."
+msgstr "Nach einem Arbeitsplatz fragen und zu diesem wechseln."
 
 #. ../lisp/raise-commands.jl
 msgid ""
@@ -1281,39 +1277,39 @@ msgstr ""
 
 #. ../lisp/tooltips.jl
 msgid "Tooltips"
-msgstr "Sprechblasen"
+msgstr "Minihilfen"
 
 #. ../lisp/tooltips.jl
 msgid "Display tooltips for window frames."
-msgstr "Zeige Sprechblasen für die Fensterrahmen an."
+msgstr "Minihilfen für die Fensterrahmen anzeigen."
 
 #. ../lisp/tooltips.jl
 msgid "Remove tooltips after a period of time."
-msgstr "Lasse Sprechblasen nach einer gewissen Zeit verschwinden."
+msgstr "Minihilfen nach einer gewissen Zeit verschwinden lassen."
 
 #. ../lisp/tooltips.jl
 msgid "Show full documentation in tooltips."
-msgstr "Zeige die ausführliche Dokumentation in den Sprechblasen."
+msgstr "Die ausführliche Dokumentation in den Minihilfen zeigen."
 
 #. ../lisp/tooltips.jl
 msgid "Number of milliseconds before displaying tooltips."
-msgstr "Millisekunden warten bis Sprechblase angezeigt wird."
+msgstr "Millisekunden warten, bis die Minihilfe angezeigt wird."
 
 #. ../lisp/tooltips.jl
 msgid "Number of milliseconds before removing tooltips."
-msgstr "Millisekunden warten bis Sprechblase verschwindet."
+msgstr "Millisekunden warten, bis die Minihilfe verschwindet."
 
 #. ../lisp/tooltips.jl
 msgid "Font used to display tooltips."
-msgstr "Schriftart der Sprechblasen."
+msgstr "Schriftart in den Minihilfen."
 
 #. ../lisp/tooltips.jl
 msgid "Color used for the tooltips background"
-msgstr "Farbe für den Hintergrund der Sprechblasen"
+msgstr "Farbe für den Hintergrund in den Minihilfen."
 
 #. ../lisp/tooltips.jl
 msgid "Color used for the tooltips foreground"
-msgstr "Farbe für den Vordergrund der Sprechblasen"
+msgstr "Farbe für den Vordergrund in den Minihilfen."
 
 #. ../lisp/transient.jl
 msgid "Focus each window when first displayed."
@@ -1372,20 +1368,36 @@ msgid "The default window animation mode."
 msgstr "Animationsmodus für die Fenster."
 
 #. ../lisp/window-history.jl
+msgid "Save _position"
+msgstr "_Position speichern"
+
+#. ../lisp/window-history.jl
+msgid "Save _dimensions"
+msgstr "_Dimensionen speichern"
+
+#. ../lisp/window-history.jl
+msgid "Save _attributes"
+msgstr "_Attribute speichern"
+
+#. ../lisp/window-history.jl
+msgid "_Forget saved state"
+msgstr "Gespeicherten Zustand _vergessen"
+
+#. ../lisp/window-history.jl
 msgid "Window History"
 msgstr "Fensterchronik"
 
 #. ../lisp/window-history.jl
-msgid "Remember window positions."
-msgstr "Fensterpositionen erinnern."
+msgid "Automatically remember window positions."
+msgstr "Fensterpositionen automatisch erinnern."
 
 #. ../lisp/window-history.jl
-msgid "Remember window sizes."
-msgstr "Fenstergrößen erinnern."
+msgid "Automatically remember window sizes."
+msgstr "Fenstergrößen automatisch erinnern."
 
 #. ../lisp/window-history.jl
-msgid "Remember other window attributes."
-msgstr "Andere Fensterattribute erinnern."
+msgid "Automatically remember other window attributes."
+msgstr "Andere Fensterattribute automatisch erinnern."
 
 #. ../lisp/window-history.jl
 msgid "Forget any persistent state associated with the current window."
@@ -1394,8 +1406,8 @@ msgstr ""
 "verbunden ist."
 
 #. ../lisp/window-history.jl
-msgid "_Forget state"
-msgstr "Zustand _vergessen"
+msgid "_History"
+msgstr "C_hronik"
 
 #. ../lisp/with-output.jl
 msgid "Prompt for a command, execute it, and print any output to the screen."
@@ -1461,7 +1473,7 @@ msgstr "Ausgewählte Fenster ausrollen."
 
 #. ../lisp/workspace.jl
 msgid "Warp the mouse pointer to selected windows."
-msgstr "Den Mauszeiger in das geholte Fenster holen."
+msgstr "Den Mauszeiger in das gewählte Fenster holen."
 
 #. ../lisp/workspace.jl
 msgid "Iconifying a window that's a member of a group removes the whole group."
@@ -1638,7 +1650,7 @@ msgstr ""
 
 #. ../lisp/x-cycle.jl
 msgid "Warp the mouse pointer to windows as they're temporarily selected."
-msgstr ""
+msgstr "Den Mauszeiger in die Fenster holen, als wären sie temporär gewählt."
 
 #. ../lisp/x-cycle.jl
 msgid "Focus windows when they're temporarily selected during cycling."
@@ -1646,7 +1658,7 @@ msgstr "Beim Blättern die Fenster fokussieren, die temporär gewählt sind."
 
 #. ../lisp/x-cycle.jl
 msgid "Disable auto-raising while temporarily selecting windows."
-msgstr ""
+msgstr "Automatisches Anheben der Fenster beim temporären Wählen abschalten."
 
 #. ../lisp/x-cycle.jl
 msgid "Cycle through all windows in order of recent selections."
@@ -1746,11 +1758,11 @@ msgstr "Farbe für das Zeichnen der Texte."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for unfocused windows."
-msgstr ""
+msgstr "Bild der Leiste für nicht fokussierte Fenster."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for focused windows."
-msgstr ""
+msgstr "Bild der Leiste für fokussierte Fenster."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for highlighted parts."
@@ -1770,7 +1782,7 @@ msgstr "Breite des Fensterrahmen."
 
 #. ../themes/smaker/theme.jl
 msgid "Border width of bar images."
-msgstr "Rahmenbreite der Balkenbilder."
+msgstr "Rahmenbreite der Leistenbilder."
 
 #. ../themer/themer.glade:1327
 msgid " to: "
