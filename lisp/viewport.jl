@@ -61,8 +61,7 @@
     (call-hook 'viewport-moved-hook)))
 
 (defun viewport-before-exiting ()
-  (set-screen-viewport 0 0)
-  (mapc 'move-window-to-current-viewport (managed-windows)))
+  (set-screen-viewport 0 0))
 
 (add-hook 'before-exit-hook 'viewport-before-exiting t)
 
@@ -110,10 +109,11 @@
 	(> (cdr pos) (screen-height)))))
 
 (defun move-window-to-current-viewport (window)
-  (let
-      ((pos (window-position window)))
-    (move-window-to window (mod (car pos) (screen-width))
-		    (mod (cdr pos) (screen-height)))))
+  (when (window-outside-viewport-p window)
+    (let
+	((pos (window-position window)))
+      (move-window-to window (mod (car pos) (screen-width))
+		      (mod (cdr pos) (screen-height))))))
 
 (defun set-window-viewport (window col row)
   (let
