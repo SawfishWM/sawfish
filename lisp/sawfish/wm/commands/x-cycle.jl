@@ -165,13 +165,6 @@
 			   (t (loop (cdr rest) (1+ i)))))))
       (nth (mod (+ current count) total) lst)))
 
-  (define (merge-unsorted x y)
-    (let loop ((rest y)
-	       (out x))
-      (cond ((null rest) out)
-	    ((memq (car rest) out) (loop (cdr rest) out))
-	    (t (loop (cdr rest) (cons (car rest) out))))))
-
   (define ((cycle-next count))
     (let ((win (window-order (if cycle-all-workspaces
 				 nil
