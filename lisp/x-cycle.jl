@@ -194,7 +194,7 @@
 	(show-message (concat (and (window-get win 'iconified) ?[)
 			      (window-name win)
 			      (and (window-get win 'iconified) ?]))))
-      (when (and cycle-focus-windows (window-wants-input-p win))
+      (when (and cycle-focus-windows (window-really-wants-input-p win))
 	(set-input-focus win)))))
 
 (defun x-cycle-exit ()

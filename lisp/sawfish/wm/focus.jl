@@ -38,12 +38,12 @@
 
 (defun focus-click (w)
   (interactive "%w")
-  (when (window-wants-input-p w)
+  (when (window-really-wants-input-p w)
     (set-input-focus w))
   (window-put w 'keymap window-keymap)
   (when (or (window-get w 'focus-proxy-click)
 	    focus-proxy-click
-	    (not (window-wants-input-p w)))
+	    (not (window-really-wants-input-p w)))
     ;; there's a problem here. allow-events called with replay-pointer
     ;; ignores any passive grabs on the window, thus if the wm has a
     ;; binding in the window's keymap, it would be ignored. So search
@@ -60,7 +60,7 @@
       (when (eq focus-mode 'enter-exit)
 	(set-input-focus nil))
     (unless (or (eq focus-mode 'click)
-		(not (window-wants-input-p w)))
+		(not (window-really-wants-input-p w)))
       (set-input-focus w))))
 
 (defun focus-in-fun (w)

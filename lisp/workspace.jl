@@ -584,7 +584,7 @@ previous workspace."
 	   (ws-add-window-to-space w current-workspace)))
     (when raise-windows-on-uniconify
       (raise-window w))
-    (when (and focus-windows-on-uniconify (window-wants-input-p w))
+    (when (and focus-windows-on-uniconify (window-really-wants-input-p w))
       (set-input-focus w))
     (call-window-hook 'uniconify-window-hook w)
     (call-window-hook 'window-state-change-hook w)))
@@ -609,7 +609,7 @@ previous workspace."
 	  (raise-window w))
 	(when warp-to-selected-windows
 	  (warp-cursor-to-window w))
-	(when (window-wants-input-p w)
+	(when (window-really-wants-input-p w)
 	  (set-input-focus w))))))
 
 (defun toggle-window-sticky (w)
