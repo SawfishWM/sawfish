@@ -652,7 +652,7 @@ symbols, representing the atoms read.
 	    if (type == XA_ATOM && (name = x_atom_symbol (l_data[i])) != Qnil)
 		rep_VECTI(ret_data, i) = name;
 	    else
-		rep_VECTI(ret_data, i) = rep_MAKE_INT(l_data[i]);
+		rep_VECTI(ret_data, i) = rep_make_long_uint(l_data[i]);
 	}
 	break;
     }

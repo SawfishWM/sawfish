@@ -603,7 +603,7 @@ client_message (XEvent *ev)
     case 32:
 	data = Fmake_vector (rep_MAKE_INT(5), Qnil);
 	for (i = 0; i < 5; i++)
-	    rep_VECTI(data,i) = rep_MAKE_INT (ev->xclient.data.l[i]);
+	    rep_VECTI(data,i) = rep_make_long_uint (ev->xclient.data.l[i]);
 	break;
 
     default:

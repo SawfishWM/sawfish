@@ -1,3 +1,9 @@
+2000-11-26  John Harper  <jsh@eazel.com>
+
+	* events.c, functions.c (client_message, Fget_x_property): when
+	converting from 32-bit data use rep_make_long_uint () instead
+	of rep_MAKE_INT () (which will fail on large values)
+
 2000-11-20  John Harper  <jsh@eazel.com>
 
 	* events.c (focus_out): if unable to find a window, check for a
