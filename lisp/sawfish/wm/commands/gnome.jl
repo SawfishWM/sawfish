@@ -91,7 +91,7 @@
 
   (define (gnome-logout)
     "Logout from the current GNOME session."
-    (system "save-session --kill &"))
+    (system "gnome-session-save --kill &"))
 
   (define (gnome-www-page)
     "Display the WWW page of the GNOME project."
