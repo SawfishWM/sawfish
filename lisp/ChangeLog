@@ -1,5 +1,9 @@
 2000-03-07  John Harper  <john@dcs.warwick.ac.uk>
 
+	* gnome.jl (gnome-set-workspace): never place windows on
+	workspaces that don't exist (from the pager's POV). (from Rob
+	Hodges)
+
 	* workspace.jl (ws-move-window): don't remove the window if
 	source and destination are the same (from Rob Hodges)
 
