@@ -33,6 +33,7 @@
 	  sawfish.wm.custom
 	  sawfish.wm.workspace
 	  sawfish.wm.stacking
+	  sawfish.wm.state.maximize
 	  sawfish.wm.util.stacking
 	  sawfish.wm.viewport)
 
@@ -122,28 +123,34 @@
 				  (not (window-get w 'client-set-position))
 				  (configure-choose-gravity w)))))
 
-	    ;; anchor the window to the point specified by the gravity
-	    (when (memq gravity '(east south-east north-east))
-	      ;; [x] placed relative to the right of the frame
-	      (rplaca coords (- (car coords) (- (car tem) (car dims)))))
-	    (when (memq gravity '(north center south))
-	      ;; [x] placed relative to the center
-	      (rplaca coords (- (car coords) (quotient (- (car tem)
-							  (car dims)) 2))))
-	    (when (memq gravity '(south south-east south-west))
-	      ;; [y] placed relative to the bottom of the frame
-	      (rplacd coords (- (cdr coords) (- (cdr tem) (cdr dims)))))
-	    (when (memq gravity '(east center west))
-	      ;; [y] placed relative to the center
-	      (rplacd coords (- (cdr coords) (quotient (- (cdr tem)
-							  (cdr dims)) 2))))))
+	    (unless (window-locked-horizontally-p w)
+	      ;; anchor the window to the point specified by the gravity
+	      (when (memq gravity '(east south-east north-east))
+		;; [x] placed relative to the right of the frame
+		(rplaca coords (- (car coords) (- (car tem) (car dims)))))
+	      (when (memq gravity '(north center south))
+		;; [x] placed relative to the center
+		(rplaca coords (- (car coords) (quotient (- (car tem)
+							    (car dims)) 2)))))
+	    (unless (window-locked-vertically-p w)
+	      (when (memq gravity '(south south-east south-west))
+		;; [y] placed relative to the bottom of the frame
+		(rplacd coords (- (cdr coords) (- (cdr tem) (cdr dims)))))
+	      (when (memq gravity '(east center west))
+		;; [y] placed relative to the center
+		(rplacd coords (- (cdr coords) (quotient (- (cdr tem)
+							    (cdr dims)) 2)))))))
 	(setq dims tem))
 
       (when (setq tem (cdr (assq 'position alist)))
 	;; if the program is setting its position, best not to interfere..
-	(window-put w 'client-set-position t)
-	(setq coords (adjust-position-for-gravity
-		      w (window-gravity w hints) tem)))
+	(let ((new (adjust-position-for-gravity
+		    w (window-gravity w hints) tem)))
+	  (unless (window-locked-horizontally-p w)
+	    (rplaca coords (car new)))
+	  (unless (window-locked-vertically-p w)
+	    (rplacd coords (cdr new))))
+	(window-put w 'client-set-position t))
 
       (move-resize-window-to w (car coords) (cdr coords) (car dims) (cdr dims))
 

@@ -1,5 +1,19 @@
 2001-08-23  John Harper  <jsh@pixelslut.com>
 
+	* sawfish/wm/commands.jl (no-operation): new command. Fixes
+	8463
+
+	* sawfish/wm/state/configure.jl (configure-request-handler):
+	don't allow the window to be moved or resized when it's
+	maximized. Fixes 8410
+
+	* sawfish/wm/state/maximize.jl (window-locked-vertically-p,
+	window-locked-horizontally-p): new functions
+
+	* sawfish/wm/placement.jl (place-window-randomly): removed
+	bogus middle cases from from x and y position calculations.
+	Fixes 8415
+
 	* sawfish/wm/ext/match-window.jl
 	(match-window-grab-x-property): take a symbol with the actual
 	name of the X property, not one of the strings in the

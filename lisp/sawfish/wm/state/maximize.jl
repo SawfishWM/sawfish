@@ -30,6 +30,8 @@
 	    frame-part-movable-p
 	    maximize-truncate-dims
 	    maximize-find-workarea
+	    window-locked-vertically-p
+	    window-locked-horizontally-p
 	    maximize-window
 	    unmaximize-window
 	    maximize-window-vertically
@@ -336,6 +338,14 @@ doesn't overlap any avoided windows, or nil."
 		   #:windows avoided
 		   #:include-heads (list head))))
       (find-max-rectangle avoided edges head)))
+
+  (define (window-locked-vertically-p w)
+    (and move-lock-when-maximized
+	 (window-maximized-vertically-p w)))
+
+  (define (window-locked-horizontally-p w)
+    (and move-lock-when-maximized
+	 (window-maximized-horizontally-p w)))
 
   (define (frame-part-movable-p w part)
     (if (not move-lock-when-maximized)
