@@ -54,6 +54,7 @@
 
 (defvar gnome-current-workspace nil)
 (defvar gnome-current-workspace-count nil)
+(defvar gnome-current-workspace-names nil)
 
 (defun gnome-set-workspace ()
   (let
@@ -73,7 +74,11 @@
 		   (1+ (- (cdr limits) (car limits))))
       (setq gnome-current-workspace-count (1+ (- (cdr limits) (car limits))))
       (set-x-property 'root '_WIN_WORKSPACE_COUNT
-		      (vector gnome-current-workspace-count) 'CARDINAL 32))))
+		      (vector gnome-current-workspace-count) 'CARDINAL 32))
+    (unless (equal gnome-current-workspace-names workspace-names)
+      (setq gnome-current-workspace-names workspace-names)
+      (set-x-text-property 'root '_WIN_WORKSPACE_NAMES
+			   (apply 'vector workspace-names)))))
 
 (defun gnome-set-client-state (w)
   (let
