@@ -32,7 +32,7 @@ all : build.h DOC.dir
 
 # this depends on config.status so it's rebuilt if configure is re-run
 build.h : build-info config.status
-	$(SHELL) $< $(host_type) $(version) $(version_major) $(version_minor) \
+	$(SHELL) $< $(host_type) $(version) \
 	  '$(sawmilldir)' '$(lispdir)' '$(sawmillexecdir)'
 
 install : all installdirs
