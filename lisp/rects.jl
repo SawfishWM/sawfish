@@ -77,7 +77,7 @@
     (when with-root
       (setq x-edges (cons 0 (nconc x-edges (list (screen-width)))))
       (setq y-edges (cons 0 (nconc y-edges (list (screen-height))))))
-    (cons x-edges y-edges)))
+    (cons (uniquify-list x-edges) (uniquify-list y-edges))))
 
 (defmacro rectangle-area (rect)
   `(* (- (nth 2 ,rect) (nth 0 ,rect))
