@@ -1,5 +1,10 @@
 2000-11-16  John Harper  <jsh@eazel.com>
 
+	* slot.jl: added a `flags' field to the slot structure, used to
+	store flags for when displaying widgets
+
+	* layout.jl: check slot-flags, handle `expand' and `framed'
+
 	* wm.jl (wm-locale-dir): dereference sawfish-locale-directory
 	on the remote side, instead of using bindtextdomain
 
