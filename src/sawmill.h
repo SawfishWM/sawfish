@@ -174,10 +174,7 @@ typedef struct lisp_font {
     repv car;
     struct lisp_font *next;
     repv name;
-    union {
-	XFontSet set;
-	XFontStruct *str;
-    } font;
+    void *font;
     repv plist;
     int ascent, descent;
 } Lisp_Font;
@@ -185,8 +182,13 @@ typedef struct lisp_font {
 #define FONTP(v)	rep_CELL16_TYPEP(v, font_type)
 #define VFONT(v)	((Lisp_Font *)rep_PTR(v))
 
+#define FF_FONT_SET	(0 << (rep_CELL16_TYPE_BITS + 0))
 #define FF_FONT_STRUCT	(1 << (rep_CELL16_TYPE_BITS + 0))
-#define FONT_STRUCT_P(v) (VFONT(v)->car & FF_FONT_STRUCT)
+#define FF_FONT_MASK	(3 << (rep_CELL16_TYPE_BITS + 0))
+
+#define FONT_TYPE(v)	(VFONT(v)->car & FF_FONT_MASK)
+#define FONT_SET_P(v)	(FONT_TYPE (v) == FF_FONT_SET)
+#define FONT_STRUCT_P(v) (FONT_TYPE (v) == FF_FONT_STRUCT)
 
 /* An allocated color */
 typedef struct lisp_color {
@@ -347,6 +349,39 @@ enum exit_codes {
 # define DB(x) db_printf x
 #else
 # define DB(x) printf x
+#endif
+
+#ifndef NDEBUG
+# define return_if_fail(x)					\
+    do {							\
+	if (!(x)) {						\
+	    fprintf (stderr, "%s:%d: assertion failed: %s\n",	\
+		     __FILE__, __LINE__, #x);			\
+	    return;						\
+	}							\
+    } while (0)
+
+# define return_val_if_fail(x, v)				\
+    do {							\
+	if (!(x)) {						\
+	    fprintf (stderr, "%s:%d: assertion failed: %s\n",	\
+		     __FILE__, __LINE__, #x);			\
+	    return (v);						\
+	}							\
+    } while (0)
+
+#define nonterminal_assert(x)					\
+    do {							\
+	if (!(x)) {						\
+	    fprintf (stderr, "%s:%d: assertion failed: %s\n",	\
+		     __FILE__, __LINE__, #x);			\
+	}							\
+    } while (0)
+	
+#else
+# define return_if_fail(x) do {} while (0)
+# define return_val_if_fail(x, v) do {} while (0)
+# define nonterminal_assert(x) do {} while (0)
 #endif
 
 #endif /* SAWMILL_H */

@@ -280,6 +280,12 @@ extern void pixmap_cache_flush_image (Lisp_Image *im);
 extern repv Fpixmap_cache_control (repv max);
 extern void pixmap_cache_init (void);
 
+/* from property-cache.c */
+extern repv property_cache_ref (repv id, repv prop);
+extern void property_cache_set (repv id, repv prop, repv value, int invals);
+extern void property_cache_invalidate_window (repv id);
+extern void property_cache_invalidate (repv id, repv prop);
+
 /* from server.c */
 extern void server_init (void);
 extern void server_kill (void);

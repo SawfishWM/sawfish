@@ -301,14 +301,21 @@ apply_mask (Drawable dest, int x_off, int y_off,
     }
     else
     {
-	Pixmap tem = XCreatePixmap (dpy, src, dest_width - x_off,
-				    dest_height - y_off, 1);
+	Pixmap tem;
 	XGCValues gcv;
-	GC gc = XCreateGC (dpy, tem, 0, &gcv);
+	GC gc;
+
+	tem = XCreatePixmap (dpy, src, dest_width - x_off,
+			     dest_height - y_off, 1);
+
+	gcv.graphics_exposures = False;
+	gc = XCreateGC (dpy, tem, GCGraphicsExposures, &gcv);
+
 	XCopyArea (dpy, src, tem, gc, 0, 0,
 		   dest_width - x_off, dest_height - y_off, 0, 0);
 	XShapeCombineMask (dpy, dest, ShapeBounding,
 			   x_off, y_off, tem, ShapeUnion);
+
 	XFreeGC (dpy, gc);
 	XFreePixmap (dpy, tem);
     }
@@ -629,7 +636,11 @@ set_frame_part_bg (struct frame_part *fp)
 	fp->drawn.bg = bg;
 	fp->drawn.fg = rep_NULL;
 
+#if 0
+	/* FIXME: this was added to let different frame states have
+	   different shapes, but it's pretty costly.. */
 	queue_reshape_frame (fp->win);
+#endif
     }
     else if (Ffunctionp (bg) != Qnil)
     {
@@ -1366,7 +1377,8 @@ configure_frame_part (struct frame_part *fp)
 				    fp->width, fp->height,
 				    0, image_depth, InputOutput,
 				    image_visual, wamask, &wa);
-	    fp->gc = XCreateGC (dpy, fp->id, 0, &gcv);
+	    gcv.graphics_exposures = False;
+	    fp->gc = XCreateGC (dpy, fp->id, GCGraphicsExposures, &gcv);
 	    XSelectInput (dpy, fp->id, FP_EVENTS);
 
 	    if (!fp->below_client)

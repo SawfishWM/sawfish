@@ -1462,6 +1462,8 @@ paste_image_to_drawable (Lisp_Image *img, Drawable d,
     int gcmask = 0;
     Pixmap pixmap, mask;
     image_render (img, w, h, &pixmap, &mask);
+    gcv.graphics_exposures = False;
+    gcmask |= GCGraphicsExposures;
     if (mask != 0)
     {
 	gcv.clip_mask = mask;

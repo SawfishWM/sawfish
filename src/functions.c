@@ -570,6 +570,8 @@ WINDOW may be the symbol `root', a window object or a numeric window id.
 	return WINDOWP(win) ? atom : rep_signal_arg_error (win, 1);
     XDeleteProperty (dpy, w,
 		     XInternAtom (dpy, rep_STR(rep_SYM(atom)->name), False));
+    if (WINDOWP (win))
+	property_cache_invalidate (win, atom);
     return atom;
 }
 
@@ -642,6 +644,14 @@ symbols, representing the atoms read.
     rep_DECLARE2(prop, rep_SYMBOLP);
     if (w == 0)
 	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
+
+    if (WINDOWP (win))
+    {
+	ret_data = property_cache_ref (win, prop);
+	if (ret_data != rep_NULL)
+	    return ret_data;
+    }
+
     a_prop = XInternAtom (dpy, rep_STR(rep_SYM(prop)->name), False);
 
     /* First read the data.. */
@@ -650,14 +660,15 @@ symbols, representing the atoms read.
 	u_long bytes_after;
 	while (1)
 	{
+	    ret_data = Qnil;
 	    if (data != 0)
 		XFree (data);
 	    if (XGetWindowProperty (dpy, w, a_prop, 0, long_length, False,
 				    AnyPropertyType, &type, &format,
 				    &nitems, &bytes_after, &data) != Success)
-		return Qnil;
+		goto out;
 	    if (type == None)
-		return Qnil;
+		goto out;
 	    if (bytes_after == 0)
 		break;
 	    long_length += (bytes_after / sizeof(u_long)) + 1;
@@ -698,9 +709,15 @@ symbols, representing the atoms read.
 	}
 	break;
     }
-    XFree (data);
 
-    return rep_list_3 (type_sym, rep_MAKE_INT(format), ret_data);
+    XFree (data);
+    ret_data = rep_list_3 (type_sym, rep_MAKE_INT(format), ret_data);
+
+out:
+    if (WINDOWP (win))
+	property_cache_set (win, prop, ret_data, 0);
+
+    return ret_data;
 }
 
 DEFUN("set-x-property", Fset_x_property, Sset_x_property,
@@ -735,6 +752,9 @@ converted to their numeric X atoms.
     rep_DECLARE5(format, rep_INTP);
     if (w == 0)
 	return WINDOWP(win) ? prop : rep_signal_arg_error (win, 1);
+
+    if (WINDOWP (win))
+	property_cache_set (win, prop, rep_list_3 (type, format, data), 1);
 
     /* Convert to data array */
 
@@ -864,6 +884,9 @@ set-x-text-property WINDOW PROPERTY STRING-VECTOR [ENCODING-ATOM]
 	XSetTextProperty (dpy, w, &t_prop, a_prop);
 	XFree (t_prop.value);
     }
+
+    if (WINDOWP (win))
+	property_cache_invalidate (win, prop);
 
     return Qt;
 }
@@ -1101,7 +1124,8 @@ refresh_message_window ()
 
 	values.foreground = VCOLOR(message.fg)->pixel;
 	values.background = VCOLOR(message.bg)->pixel;
-	mask = GCForeground | GCBackground;
+	values.graphics_exposures = False;
+	mask = GCForeground | GCBackground | GCGraphicsExposures;
 
 	if (message.gc == 0)
 	    message.gc = XCreateGC (dpy, message_win, mask, &values);

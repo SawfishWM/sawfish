@@ -1,3 +1,58 @@
+2002-09-30  John Harper  <jsh@unfactored.org>
+
+	* merging from HEAD:
+
+	2002-09-29  John Harper  <jsh@unfactored.org>
+
+	* sawmill.h, fonts.c: refactored some of the font loading code
+
+	2002-09-28  John Harper  <jsh@unfactored.org>
+
+	* events.c (configure_request): for `position' configuration,
+	pass nil x or y if unset (instead of just ignoring it). Part of
+	fixing #83431
+
+	2002-09-28  John Harper  <jsh@unfactored.org>
+
+	Some performance optimizations, especially avoiding server
+	round trips:
+
+	* property-cache.c: new file, cache results of
+	[gs]et-x-property (doesn't do [gs]et-x-text-property yet)
+
+	* functions.c, frames.c, events.c: use/maintain the property
+	cache
+
+	* frames.c (apply_mask, configure_frame_part): turn off
+	graphics exposure events in GCs
+	* functions.c (refresh_message_window): same
+	* images.c (paste_image_to_drawable): same
+
+	* frames.c (set_frame_part_bg): don't reshape frames every time
+	we redraw the background, too expensive
+
+	2002-09-21  John Harper  <jsh@unfactored.org>
+
+	* stacking-list.c: replaced assert () instances by non-terminal
+	macros, i.e. they'll print a message but not abort the program.
+	Lame-ass way of "fixing" #81027
+
+	* sawmill.h (return_if_fail, return_val_if_fail,
+	nonterminal_assert): new macros
+
+	* windows.c (Fwindow_size_hints): accept min size == 0 and set
+	it to one, should fix #77639
+
+	2002-09-01  John Harper  <jsh@unfactored.org>
+
+	* server.c (server_accept_connection): don't pass null pointers
+	to accept (), it's been reported to cause crashes (patch
+	suggested by Sergey Bratus <sergey@cs.dartmouth.edu>)
+
+2002-06-28  John Harper  <jsh@unfactored.org>
+
+	* version 1.1
+
 2002-05-06  John Harper  <jsh@unfactored.org>
 
 	* More merging from HEAD:
