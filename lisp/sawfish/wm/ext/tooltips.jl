@@ -29,6 +29,7 @@
 	  rep.system
 	  rep.regexp
 	  rep.io.timers
+	  sawfish.wm.commands
 	  sawfish.wm.custom
 	  sawfish.wm.misc
 	  sawfish.wm.windows
@@ -197,9 +198,7 @@
     (let (doc)
       (if (and tooltips-show-doc-strings command
 	       (symbolp command)
-	       (progn
-		 (require 'rep.lang.doc)
-		 (setq doc (documentation command))))
+	       (setq doc (command-documentation command)))
 	  (_ doc)
 	(format nil "%S" command))))
 
