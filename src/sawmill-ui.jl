@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.54 2000/02/25 12:03:04 john Exp $
+;; $Id: sawmill-ui.jl,v 1.55 2000/02/26 23:36:38 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -75,6 +75,9 @@ exec rep "$0" "$@"
 
 ;; XXX this may be confusing?
 (defvar ui-enable-refresh nil)
+
+;; polish symbol names in keymaps
+(defvar ui-beautify-keymaps t)
 
 ;; may be list or notebook
 (defvar ui-pages-style 'list)
@@ -204,7 +207,7 @@ exec rep "$0" "$@"
     (gtk-widget-set-usize scroller 120 -2)
     (gtk-paned-add2 hbox vbox)
     (gtk-tree-set-selection-mode tree 'browse)
-    (gtk-container-border-width vbox 16)
+    ;;(gtk-container-border-width vbox 16)
     (letrec
 	((iterator
 	  (lambda (tree tree-widget)
@@ -222,7 +225,7 @@ exec rep "$0" "$@"
 		       (gtk-container-children vbox))
 		 (gtk-widget-show-all t-vbox)
 		 (gtk-container-add vbox t-vbox)))
-	      (gtk-box-pack-start t-vbox widget)
+	      (gtk-box-pack-start t-vbox widget t t)
 	      (when (nth 2 tree)
 		(let
 		    ((subtree (gtk-tree-new)))
@@ -692,7 +695,11 @@ exec rep "$0" "$@"
     (gtk-container-add vbox deleteb)
     (mapc (lambda (cell)
 	    (gtk-clist-append clist (vector (cdr cell)
-					    (format nil "%S" (car cell)))))
+					    (format nil "%s"
+						    (if (symbolp (car cell))
+							(beautify-symbol-name
+							 (car cell))
+						      (car cell))))))
 	  (cdr (get-key spec ':value)))
     (setq spec (nconc spec (list ':shell ui-keymap-shell
 				 ':clist clist
@@ -765,7 +772,10 @@ exec rep "$0" "$@"
       (gtk-clist-set-text (get-key spec ':clist)
 			  index 0 (cdr new))
       (gtk-clist-set-text (get-key spec ':clist)
-			  index 1 (format nil "%S" (car new))))))
+			  index 1 (format nil "%s"
+					  (if (symbolp (car new))
+					      (beautify-symbol-name (car new))
+					    (car new)))))))
 
 (defun build-keymap-shell (spec)
   (let*
@@ -788,9 +798,7 @@ exec rep "$0" "$@"
        (maps (make-vector (length pages))))
 
     (gtk-box-set-spacing hbox-1 ui-box-spacing)
-    (gtk-container-border-width hbox-1 ui-box-border)
     (gtk-box-set-spacing vbox-2 ui-box-spacing)
-    (gtk-container-border-width vbox-2 ui-box-border)
     (gtk-box-set-spacing vbox ui-box-spacing)
     (gtk-container-border-width vbox ui-box-border)
 
@@ -816,12 +824,12 @@ exec rep "$0" "$@"
     (gtk-clist-set-column-auto-resize cmd-clist 0 t)
     ;(gtk-clist-set-selection-mode cmd-clist 'browse)
     (mapc (lambda (c)
-	    (gtk-clist-append cmd-clist (vector (symbol-name c))))
+	    (gtk-clist-append cmd-clist (vector (beautify-symbol-name c))))
 	  (get-key spec ':commands))
     (gtk-container-add entry-hbox entry)
     (gtk-box-pack-end entry-hbox entry-button)
-    (gtk-box-pack-start vbox-2 entry-hbox)
     (gtk-container-add vbox-2 scroller)
+    (gtk-box-pack-end vbox-2 entry-hbox)
     (gtk-signal-connect cmd-clist "select_row"
 			(lambda (w row col)
 			  (set-key spec ':active-cmd row)
@@ -842,8 +850,12 @@ exec rep "$0" "$@"
     (gtk-container-add hbox-1 scroller-2)
     (gtk-container-add hbox-1 vbox-2)
     (mapc (lambda (page)
-	    (let
-		((row (gtk-clist-append map-clist (vector (car page)))))
+	    (let*
+		((name (beautify-symbol-name (intern (car page))))
+		 row)
+	      (when (and ui-beautify-keymaps (string-match " keymap" name))
+		(setq name (substring name 0 (match-start))))
+	      (setq row (gtk-clist-append map-clist (vector name)))
 	      (aset maps row (vector (car page)
 				     (nth 1 page)
 				     (build-ui (nth 1 page))))
@@ -921,7 +933,7 @@ exec rep "$0" "$@"
     (if (and command (symbolp command))
 	(let
 	    ((doc (documentation command)))
-	  (gtk-frame-set-label frame (symbol-name command))
+	  (gtk-frame-set-label frame (beautify-symbol-name command))
 	  (gtk-label-set label (or doc (_ "Undocumented"))))
       (gtk-frame-set-label frame "")
       (gtk-label-set label ""))))
@@ -1637,6 +1649,17 @@ exec rep "$0" "$@"
 	 (concat file ?. ui-lang-base))
 	(t
 	 file)))
+
+(defun beautify-symbol-name (symbol)
+  (if (not ui-beautify-keymaps)
+      (symbol-name symbol)
+    (let
+	((name (copy-sequence (symbol-name symbol))))
+      (while (string-match "[-:]" name)
+	(setq name (concat (substring name 0 (match-start))
+			   ?  (substring name (match-end)))))
+      (aset name 0 (char-upcase (aref name 0)))
+      name)))
 
 
 ;; color previews
