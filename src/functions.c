@@ -81,6 +81,7 @@ windows isn't affected.
 ::end:: */
 {
     repv ptr;
+    Lisp_Window *pred;
 
     rep_DECLARE1(list, rep_LISTP);
     for (ptr = list; rep_CONSP (ptr); ptr = rep_CDR (ptr))
@@ -93,24 +94,32 @@ windows isn't affected.
 	return Qt;
 
     ptr = list;
-    if (rep_CONSP (ptr))
+    pred = 0;
+
+    while (rep_CONSP (ptr))
     {
-	Lisp_Window *pred = VWIN (rep_CAR (ptr));
+	Lisp_Window *this = VWIN (rep_CAR (ptr));
+
+	if (!WINDOW_IS_GONE_P (this))
+	{
+	    if (pred != 0)
+	    {
+		remove_from_stacking_list (this);
+		insert_in_stacking_list_below (this, pred);
+
+		/* This works because it tries to stack relative to
+		   the window above THIS first; which we just set */
+		restack_window (this);
+	    }
+	    pred = this;
+	}
+
 	ptr = rep_CDR (ptr);
 
-	while (rep_CONSP (ptr))
-	{
-	    Lisp_Window *this = VWIN (rep_CAR (ptr));
-	    remove_from_stacking_list (this);
-	    insert_in_stacking_list_below (this, pred);
-	    pred = this;
-
-	    ptr = rep_CDR (ptr);
-	}
+	rep_TEST_INT;
+	if (rep_INTERRUPTP)
+	    return rep_NULL;
     }
-
-    for (ptr = rep_CDR (list); rep_CONSP (ptr); ptr = rep_CDR (ptr))
-	restack_window (VWIN (rep_CAR (ptr)));
 
     Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
     return Qt;
@@ -126,13 +135,17 @@ raise WINDOW to the top of the stacking order.
 ::end:: */
 {
     rep_DECLARE1 (win, WINDOWP);
-    remove_from_stacking_list (VWIN (win));
-    if (WINDOWP (above))
-	insert_in_stacking_list_above (VWIN (win), VWIN (above));
-    else
-	insert_in_stacking_list_above_all (VWIN (win));
-    restack_window (VWIN (win));
-    Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
+
+    if (!WINDOW_IS_GONE_P (VWIN (win)))
+    {
+	remove_from_stacking_list (VWIN (win));
+	if (WINDOWP (above))
+	    insert_in_stacking_list_above (VWIN (win), VWIN (above));
+	else
+	    insert_in_stacking_list_above_all (VWIN (win));
+	restack_window (VWIN (win));
+	Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
+    }
     return win;
 }
 
@@ -146,13 +159,17 @@ lower WINDOW to the bottom of the stacking order.
 ::end:: */
 {
     rep_DECLARE1 (win, WINDOWP);
-    remove_from_stacking_list (VWIN (win));
-    if (WINDOWP (below))
-	insert_in_stacking_list_below (VWIN (win), VWIN (below));
-    else
-	insert_in_stacking_list_below_all (VWIN (win));
-    restack_window (VWIN (win));
-    Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
+
+    if (!WINDOW_IS_GONE_P (VWIN (win)))
+    {
+	remove_from_stacking_list (VWIN (win));
+	if (WINDOWP (below))
+	    insert_in_stacking_list_below (VWIN (win), VWIN (below));
+	else
+	    insert_in_stacking_list_below_all (VWIN (win));
+	restack_window (VWIN (win));
+	Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
+    }
     return win;
 }
 

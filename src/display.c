@@ -88,7 +88,7 @@ error_handler (Display *dpy, XErrorEvent *ev)
     if (w != 0)
     {
 	DB(("error_handler (%s)\n", rep_STR(w->name)));
-	if (w->id != 0)
+	if (!WINDOW_IS_GONE_P (w))
 	    remove_window (w, Qt, Qt);
 	/* so we call emit_pending_destroys () at some point */
 	rep_mark_input_pending (ConnectionNumber (dpy));

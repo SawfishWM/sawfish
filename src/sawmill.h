@@ -167,6 +167,7 @@ typedef struct lisp_window {
 #define WINDOWP(v)	XWINDOWP(v)
 
 #define WINDOW_FOCUSED_P(w) (focus_window == w)
+#define WINDOW_IS_GONE_P(w) (w->id == 0)
 
 /* An allocated font */
 typedef struct lisp_font {

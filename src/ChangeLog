@@ -1,3 +1,32 @@
+2001-02-19  John Harper  <jsh@eazel.com>
+
+	* stacking-list.c (window_in_stacking_list_p): new predicate,
+	used to replace the assert_window_[not_]in_stacking_list
+	functions (which have been deleted)
+
+2001-02-18  John Harper  <jsh@eazel.com>
+
+	* functions.c (Frestack_windows, Fx_raise_window,
+	Fx_lower_window): be sure to never alter the stacking of
+	destroyed windows
+
+	[ I think this should fix the random crashes that some people
+	have been experiencing - it was possible for a deleted window
+	to be reinserted in the stacking list. Then, when the deleted
+	window got garbage collected bogus pointers were left in the
+	list.. ]
+
+	* stacking-list.c: added yet more assertions, this time to
+	check that destroyed windows aren't being manipulated where
+	they shouldn't be
+
+	* sawmill.h (WINDOW_IS_GONE_P): new macro, evaluates to true
+	when the window object no longer has an associated client
+	window
+
+	* windows.c, frames.c, display.c, keys.c: use the above macro
+	instead of `w->id == 0'
+
 2001-02-16  John Harper  <jsh@eazel.com>
 
 	* stacking-list.c (assert_window_in_stacking_list,

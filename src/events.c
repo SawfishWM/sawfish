@@ -393,7 +393,7 @@ button_press (XEvent *ev)
 
     eval_input_event (current_context_map ());
 
-    if (fp != 0 && w->id != 0 && ev->type == ButtonRelease)
+    if (fp != 0 && !WINDOW_IS_GONE_P (w) && ev->type == ButtonRelease)
     {
 	/* In case the event binding threw a non-local-exit, fake
 	   an unwind-protect thing */
@@ -477,7 +477,7 @@ property_notify (XEvent *ev)
 				       &bytes_after, &prop) == Success
 		&& actual != None)
 	    {
-		if (format == 8 && w->id != 0)
+		if (format == 8 && !WINDOW_IS_GONE_P (w))
 		{
 		    repv str = Qnil;
 		    if (actual == xa_compound_text)
@@ -571,7 +571,7 @@ property_notify (XEvent *ev)
 	rep_PUSHGC (gc_changed_states, changed_states);
 
 	if (need_refresh && w->reparented
-	    && w->property_change != 0 && w->id != 0)
+	    && w->property_change != 0 && !WINDOW_IS_GONE_P (w))
 	{
 	    w->property_change (w);
 	}
@@ -812,7 +812,7 @@ enter_notify (XEvent *ev)
 	    refresh_frame_part (fp);
 
 	tem = Fassq (Qclass, fp->alist);
-	if (tem && rep_CONSP(tem) && w->id != 0)
+	if (tem && rep_CONSP(tem) && !WINDOW_IS_GONE_P (w))
 	{
 	    Fcall_window_hook (Qenter_frame_part_hook, rep_VAL(w),
 			       rep_list_2 (rep_VAL(fp), mode), Qnil);
@@ -858,7 +858,7 @@ leave_notify (XEvent *ev)
 	    refresh_frame_part (fp);
 
 	tem = Fassq (Qclass, fp->alist);
-	if (tem && rep_CONSP(tem) && w->id != 0)
+	if (tem && rep_CONSP(tem) && !WINDOW_IS_GONE_P (w))
 	{
 	    Fcall_window_hook (Qleave_frame_part_hook, rep_VAL(w),
 			       rep_LIST_2 (rep_VAL(fp), mode), Qnil);
@@ -897,7 +897,7 @@ focus_in (XEvent *ev)
 		     w->focus_change, rep_STR(w->name)));
 		w->focus_change (w);
 	    }
-	    if (w->id != 0)
+	    if (!WINDOW_IS_GONE_P (w))
 	    {
 		Fcall_window_hook (Qfocus_in_hook, rep_VAL(w),
 				   rep_LIST_1 (mode_to_sym (ev->xfocus.mode)),
@@ -928,7 +928,7 @@ focus_out (XEvent *ev)
 		     w->focus_change, rep_STR(w->name)));
 		w->focus_change (w);
 	    }
-	    if (w->id != 0)
+	    if (!WINDOW_IS_GONE_P (w))
 	    {
 		Fcall_window_hook (Qfocus_out_hook, rep_VAL(w),
 				   rep_LIST_1 (mode_to_sym (ev->xfocus.mode)),
@@ -937,7 +937,7 @@ focus_out (XEvent *ev)
 	}
     }
     else if ((w = x_find_window_by_id (ev->xunmap.window)) != 0
-	     && w->id == 0 && ev->xunmap.window == w->saved_id)
+	     && WINDOW_IS_GONE_P (w) && ev->xunmap.window == w->saved_id)
     {
 	/* focus-out event from a deleted window */
 	if (focus_window == w)
@@ -1144,7 +1144,7 @@ be sent to windows.
 	Lisp_Window *w;
 	for (w = window_list; w != 0; w = w->next)
 	{
-	    if (w->pending_configure && w->id != 0)
+	    if (w->pending_configure && !WINDOW_IS_GONE_P (w))
 		send_synthetic_configure (w);
 	}
     }

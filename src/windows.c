@@ -20,6 +20,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
+#include <assert.h>
 #include <X11/extensions/shape.h>
 
 /* Work around for X11R5 and earlier */
@@ -117,7 +118,7 @@ window_input_hint_p (Lisp_Window *w)
 void
 focus_on_window (Lisp_Window *w)
 {
-    if (w != 0 && w->id != 0 && w->visible)
+    if (w != 0 && !WINDOW_IS_GONE_P (w) && w->visible)
     {
 	Window focus;
 	DB(("focus_on_window (%s)\n", rep_STR(w->name)));
@@ -211,7 +212,7 @@ find_window_by_id (Window id)
     w = window_list;
     while (w != 0 && w->id != id && w->frame != id)
 	w = w->next;
-    if (w != 0 && w->id == 0)
+    if (w != 0 && WINDOW_IS_GONE_P (w))
 	w = 0;
     if (w != 0)
     {
@@ -403,7 +404,7 @@ add_window (Window id)
 	rep_POPGC;
 
 	/* In case the window disappeared during the hook call */
-	if (w->id != 0)
+	if (!WINDOW_IS_GONE_P (w))
 	{
 	    Fgrab_server ();
 
@@ -419,7 +420,7 @@ add_window (Window id)
 	else
 	    emit_pending_destroys ();
 
-	if (w->id != 0)
+	if (!WINDOW_IS_GONE_P (w))
 	{
 	    repv tem = Fwindow_get (rep_VAL(w), Qplaced);
 	    if (initialising || (tem && tem == Qnil))
@@ -432,10 +433,10 @@ add_window (Window id)
 	}
 	Fwindow_put (rep_VAL(w), Qplaced, Qt);
 
-	if (w->id != 0)
+	if (!WINDOW_IS_GONE_P (w))
 	    Fcall_window_hook (Qafter_add_window_hook, rep_VAL(w), Qnil, Qnil);
 
-	if (w->id != 0)
+	if (!WINDOW_IS_GONE_P (w))
 	{
 	    /* Tell the window where it ended up.. */
 	    send_synthetic_configure (w);
@@ -466,10 +467,10 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 	if (from_error == Qnil)
 	    destroy_window_frame (w, FALSE);
 
+	remove_from_stacking_list (w);
+
 	w->id = 0;
 	pending_destroys++;
-
-	remove_from_stacking_list (w);
 
 	/* gc will do the rest... */
     }
@@ -509,7 +510,7 @@ emit_pending_destroys (void)
     again:
 	for (w = window_list; w != 0 && !rep_INTERRUPTP; w = w->next)
 	{
-	    if (w->id == 0 && !w->destroyed)
+	    if (WINDOW_IS_GONE_P (w) && !w->destroyed)
 	    {
 		w->destroyed = 1;
 		Fcall_window_hook (Qdestroy_notify_hook,
@@ -860,7 +861,7 @@ Return a list of all known client window objects.
     Lisp_Window *w = window_list;
     while (w != 0)
     {
-	if (w->id != 0)
+	if (!WINDOW_IS_GONE_P (w))
 	    list = Fcons (rep_VAL(w), list);
 	w = w->next;
     }
@@ -1227,7 +1228,7 @@ WINDOW. Returns the symbol `nil' if no such image.
 	   }
        }
 
-       if (pixmap_id == 0 && VWIN (win)->id != 0)
+       if (pixmap_id == 0 && !WINDOW_IS_GONE_P (VWIN (win)))
        {
 	   Atom actual_type;
 	   int actual_format;
@@ -1282,7 +1283,7 @@ Map the single-parameter function FUN over all existing windows.
     rep_PUSHGC (gc_w, w);
     for (w = rep_VAL (window_list); w != rep_NULL; w = rep_VAL (VWIN(w)->next))
     {
-	if (VWIN (w)->id != 0)
+	if (!WINDOW_IS_GONE_P (VWIN (w)))
 	{
 	    ret = rep_call_lisp1 (fun, w);
 	    if (ret == rep_NULL)
@@ -1309,7 +1310,7 @@ Return the list of windows that match the predicate function PRED.
     rep_PUSHGC(gc_output, output);
     for (w = rep_VAL (window_list); w != rep_NULL; w = rep_VAL (VWIN(w)->next))
     {
-	if (VWIN (w)->id != 0)
+	if (!WINDOW_IS_GONE_P (VWIN (w)))
 	{
 	    repv tem = rep_call_lisp1 (pred, w);
 	    if (tem == rep_NULL)
@@ -1364,7 +1365,7 @@ window_mark_type (void)
     struct prop_handler *ph;
     for (w = window_list; w != 0; w = w->next)
     {
-	if (w->id != 0 || !w->destroyed)
+	if (!WINDOW_IS_GONE_P (w) || !w->destroyed)
 	    rep_MARKVAL(rep_VAL(w));
     }
     for (ph = prop_handlers; ph != 0; ph = ph->next)
@@ -1381,7 +1382,7 @@ window_sweep (void)
 	Lisp_Window *w = *ptr;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
 	{
-	    assert_window_not_in_stacking_list (w);
+	    assert (!window_in_stacking_list_p (w));
 	    destroy_window_frame (w, FALSE);
 	    if (w->wmhints != 0)
 		XFree (w->wmhints);

@@ -372,7 +372,7 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 	}
     }
 
-    for (fp = w->frame_parts; fp != 0 && w->id != 0; fp = fp->next)
+    for (fp = w->frame_parts; fp != 0 && !WINDOW_IS_GONE_P (w); fp = fp->next)
     {
 	Pixmap pixmap, mask;
 	int state = current_state (fp);
@@ -478,7 +478,7 @@ commit_queued_reshapes (void)
     Lisp_Window *w;
     for (w = window_list; w != 0; w = w->next)
     {
-	if (w->id != 0 && w->pending_reshape)
+	if (!WINDOW_IS_GONE_P (w) && w->pending_reshape)
 	    set_frame_shapes (w, TRUE);
     }
 }
@@ -506,7 +506,7 @@ set_frame_part_bg (struct frame_part *fp)
 	fp->drawn.bg = Qnil;
     }
 
-    if (win->id == 0)
+    if (WINDOW_IS_GONE_P (win))
 	return;
 
     if (COLORP(bg))
@@ -548,7 +548,7 @@ set_frame_part_bg (struct frame_part *fp)
 	/* Some of the Imlib_ functions call XSync on our display. In turn
 	   this can cause the error handler to run if a window has been
 	   deleted. This then invalidates the window we're updating */
-	if (win->id == 0)
+	if (WINDOW_IS_GONE_P (win))
 	    return;
 
 	if (bg_mask == 0)
@@ -754,7 +754,7 @@ set_frame_part_fg (struct frame_part *fp)
 	    /* Some of the Imlib_ functions call XSync on our display. In turn
 	       this can cause the error handler to run if a window has been
 	       deleted. This then invalidates the window we're updating */
-	    if (win->id == 0)
+	    if (WINDOW_IS_GONE_P (win))
 		return;
 
 	    if (fg_pixmap)
@@ -838,9 +838,9 @@ refresh_frame_part (struct frame_part *fp)
 	if (fp->drawn.width != fp->width || fp->drawn.height != fp->height)
 	    fp->drawn.bg = rep_NULL;
 
-	if (w->id != 0 && fp->id != 0)
+	if (!WINDOW_IS_GONE_P (w) && fp->id != 0)
 	    set_frame_part_bg (fp);
-	if (w->id != 0 && fp->id != 0)
+	if (!WINDOW_IS_GONE_P (w) && fp->id != 0)
 	    set_frame_part_fg (fp);
 
 	fp->drawn.width = fp->width;
@@ -856,7 +856,7 @@ void
 refresh_frame_parts (Lisp_Window *w)
 {
     struct frame_part *fp;
-    for (fp = w->frame_parts; w->id != 0 && fp != 0; fp = fp->next)
+    for (fp = w->frame_parts; !WINDOW_IS_GONE_P (w) && fp != 0; fp = fp->next)
 	refresh_frame_part (fp);
 }
 
@@ -1859,7 +1859,7 @@ DEFUN("refresh-window", Frefresh_window,
       Srefresh_window, (repv win), rep_Subr1)
 {
     rep_DECLARE1(win, XWINDOWP);
-    if (VWIN(win)->id != 0)
+    if (!WINDOW_IS_GONE_P (VWIN(win)))
 	refresh_frame_parts (VWIN(win));
     return Qt;
 }
