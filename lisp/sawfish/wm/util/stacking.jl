@@ -42,18 +42,22 @@
     :group misc)
 
   (define (raise-window* w)
+    "Raise the window to its highest allowed position in the stacking order."
     (case user-raise-type
       ((transients) (raise-window-and-transients w))
       ((group) (raise-group w))
       (t (raise-window w))))
 
   (define (lower-window* w)
+    "Lower the window to its lowest allowed position in the stacking order."
     (case user-raise-type
       ((transients) (lower-window-and-transients w))
       ((group) (lower-group w))
       (t (lower-window w))))
 
   (define (raise-lower-window* w)
+    "If the window is at its highest possible position, then lower it to its
+lowest possible position. Otherwise raise it as far as allowed."
     (case user-raise-type
       ((transients) (raise-lower-window-and-transients w))
       ((group) (raise-lower-group w))
