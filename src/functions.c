@@ -61,7 +61,10 @@ delete-window WINDOW
     Window w = x_win_from_arg (win);
     if (w == 0)
 	return rep_signal_arg_error (win, 1);
-    send_client_message (w, xa_wm_delete_window, last_event_time);
+    if (WINDOWP(win) && VWIN(win)->does_wm_delete_window)
+	send_client_message (w, xa_wm_delete_window, last_event_time);
+    else
+	XKillClient (dpy, w);
     return win;
 }
 
