@@ -43,3 +43,13 @@
      (unwind-protect
 	 (progn ,@forms)
        (ungrab-server))))
+
+;; execute FORMS, then reinstall the original stacking order
+(defmacro save-stacking-order (&rest forms)
+  (let
+      ((tem (gensym)))
+    `(let
+	 ((,tem (stacking-order)))
+       (unwind-protect
+	   (progn ,@forms)
+	 (restack-windows ,tem)))))
