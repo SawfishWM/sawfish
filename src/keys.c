@@ -1127,6 +1127,10 @@ find_meta(void)
     max_code = dpy->max_keycode;
 #endif
 
+    Fset (Qmeta_keysyms, Qnil);
+    Fset (Qalt_keysyms, Qnil);
+    Fset (Qhyper_keysyms, Qnil);
+
     syms = XGetKeyboardMapping(dpy, min_code, max_code - min_code + 1,
 			       &syms_per_code);
     mods = XGetModifierMapping(dpy);
@@ -1234,6 +1238,13 @@ build_lock_mods (void)
 	    all_lock_combs[i] |= scroll_lock_mod;
     }
     all_lock_mask = LockMask | num_lock_mod | scroll_lock_mod;
+}
+
+void
+update_keyboard_mapping (void)
+{
+    find_meta ();
+    build_lock_mods ();
 }
 
 
@@ -1478,8 +1489,5 @@ keys_init(void)
     Fset (Qhyper_keysyms, Qnil);
 
     if (rep_SYM(Qbatch_mode)->value == Qnil)
-    {
-	find_meta ();
-	build_lock_mods ();
-    }
+	update_keyboard_mapping ();
 }
