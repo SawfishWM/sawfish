@@ -122,7 +122,7 @@ that overrides settings set elsewhere.")
 
 ;; list of (REGEXP DIR-EXPAND NAME-EXPAND)
 (defvar theme-suffix-regexps
-  '(("^(.*)\\.tar(\\.gz|\\.Z|\\.bz2)$" "\\0#tar" "\\1")))
+  '(("^(.*)/(.*)\\.tar(\\.gz|\\.Z|\\.bz2)$" "\\0#tar/\\2" "\\2")))
 
 (defvar theme-suffixes '("" ".tar" ".tar.gz" ".tar.Z" ".tar.bz2"))
 
@@ -280,10 +280,9 @@ that overrides settings set elsewhere.")
     (catch 'out
       (mapc #'(lambda (cell)
 		(when (string-match (car cell) dir)
-		  (if get-name
-		      (throw 'out (file-name-nondirectory
-				   (expand-last-match (nth 2 cell))))
-		    (throw 'out (expand-last-match (nth 1 cell))))))
+		  (throw 'out (expand-last-match (if get-name
+						     (nth 2 cell)
+						   (nth 1 cell))))))
 	    theme-suffix-regexps)
       nil)))
 
