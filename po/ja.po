@@ -2,14 +2,11 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Satoru Sato <ss@gnome.gr.jp>, 2000.
 #
-#. ../lisp/sawfish/wm/workspace.jl
-#. ../lisp/sawfish/wm/util/groups.jl
-#. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish cvs-20001011\n"
-"POT-Creation-Date: 2000-12-14 13:30+0900\n"
-"PO-Revision-Date: 2000-12-14 13:49+09:00\n"
+"POT-Creation-Date: 2001-01-30 08:50-0500\n"
+"PO-Revision-Date: 2001-01-30 08:51-05:00\n"
 "Last-Translator: Satoru Sato <ss@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -121,6 +118,10 @@ msgid "Preferences"
 msgstr "設定"
 
 #. ../themes/gradient/theme.jl
+msgid "Gradient Theme"
+msgstr "グラディエントテーマ"
+
+#. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
 msgstr "`gradient' フレームスタイルでの色勾配(グラディエント)の方向"
 
@@ -145,6 +146,10 @@ msgid "Use less memory when creating gradients, possibly affecting quality."
 msgstr "画質に影響してしまうが、色勾配生成時によりメモリを節約する"
 
 #. ../themes/mono/theme.jl
+msgid "Mono Theme"
+msgstr "モノクロテーマ"
+
+#. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
 msgstr "非アクティブフレームの色(設定されていなければ GTK+ の背景色を使う)"
 
@@ -157,12 +162,20 @@ msgid "Text is \\w justified in window titles."
 msgstr "ウィンドウタイトル内のテキスト幅を \\w に調整"
 
 #. ../themes/simple/theme.jl
+msgid "Simple Theme"
+msgstr "シンプルテーマ"
+
+#. ../themes/simple/theme.jl
 msgid "Color of inactive frames in `simple' frame style."
 msgstr "`simple' フレームスタイルでの非アクティブフレームの色"
 
 #. ../themes/simple/theme.jl
 msgid "Color of active frames in `simple' frame style."
 msgstr "`simple' フレームスタイルでのアクティブフレームの色"
+
+#. ../themes/smaker/theme.jl
+msgid "SMaker Theme"
+msgstr "SMaker テーマ"
 
 #. ../themes/smaker/theme.jl
 msgid "Use black-on-white button images."
@@ -304,6 +317,10 @@ msgstr "値:"
 #. ../lisp/sawfish/gtk/stock.jl
 msgid "Revert"
 msgstr "元に戻す"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display key-binding information in menu items."
+msgstr "メニューの項目内にキー割り当ての情報を表示"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -470,6 +487,11 @@ msgstr "GNOME ウェブ..."
 msgid "About GNOME..."
 msgstr "GNOME について..."
 
+#. ../lisp/sawfish/wm/custom.jl
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Bindings"
+msgstr "ショートカット"
+
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
 msgstr "どこでも有効なショートカットを含むキーマップ"
@@ -543,6 +565,14 @@ msgstr ""
 "だけが評価される)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"マウスポインタがウィンドウのシェードボタン上にあるときに有効なショート\n"
+"カットを含むキーマップ(このマップ内ではマウスの割り当てだけが有効)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Motion threshold for mouse pointer: \\wpixels"
 msgstr "マウスポインタの動きのしきい値: \\wピクセル"
 
@@ -554,14 +584,17 @@ msgstr "ウィンドウマネージャのショートカットのデフォルトのモディファイアキー"
 msgid "Keep transient windows stacked above: \\w"
 msgstr "ダイアログウィンドウをこれの前面に出しておく: \\w"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise the window to its highest allowed position in the stacking order."
 msgstr "ウィンドウを可能なかぎりレイヤの最前面におく"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower the window to its lowest allowed position in the stacking order."
 msgstr "ウィンドウを可能なかぎりレイヤの最後面におく"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid ""
 "If the window is at its highest possible position, then lower it to its\n"
@@ -610,6 +643,11 @@ msgstr "マンドリストを順番に実行"
 msgid "Prompt for a command, execute it, and print any output to the screen."
 msgstr "コマンド入力を求め、それを実行し、その結果を画面に出力"
 
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Sound"
+msgstr "サウンド"
+
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Play sound effects for window events."
 msgstr "ウィンドウイベントで効果音を鳴らす"
@@ -631,6 +669,10 @@ msgid "The hierarchical window menu raises singleton submenus."
 msgstr "階層化されたウィンドウメニューを単一サブメニューにする"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Error Handling"
+msgstr "エラー処理"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Emit a beeping sound when errors occur."
 msgstr "エラーが生じたときにビープ音を鳴らす"
 
@@ -645,6 +687,11 @@ msgstr "エラーなし"
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display all errors that have occurred to the screen."
 msgstr "すべてのエラーについて画面に表示"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Edge Flipping"
+msgstr "画面端での移動"
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Select the next desktop when the pointer hits screen edge."
@@ -674,13 +721,18 @@ msgstr "フォーカス時にウィンドウを前面に出す"
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr "フォーカスウィンドウを前面に出すまでの遅延時間(ミリ秒)"
 
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Shade Hover"
+msgstr "シェードの点滅"
+
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid ""
 "Enable shade-hover mode.\n"
 "\n"
 "(Temporarily unshades windows while the mouse pointer is over them.)"
 msgstr ""
-"影が揺れるモードを有効にする\n"
+"シェード点滅モードを有効にする\n"
 "\n"
 "(マウスポインタがウィンドウ上にある時に一時的にシェードをやめる)"
 
@@ -749,14 +801,17 @@ msgstr "すべてのウィンドウ履歴を破棄"
 msgid "_History"
 msgstr "履歴(_H)"
 
+#. ../lisp/sawfish/wm/custom.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Placement"
 msgstr "配置"
 
+#. ../lisp/sawfish/wm/custom.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Focus"
 msgstr "フォーカス"
 
+#. ../lisp/sawfish/wm/custom.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Appearance"
 msgstr "外観"
@@ -768,6 +823,16 @@ msgstr "状態"
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
 msgstr "その他"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Matched Windows"
+msgstr "ウィンドウプロパティ"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Tooltips"
+msgstr "ツールチップ"
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Display tooltips for window frames."
@@ -954,7 +1019,7 @@ msgstr "キー入力を待ち、それからショートカットを表示"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "[Quote]"
-msgstr ""
+msgstr "[Quote]"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid ""
@@ -1073,6 +1138,10 @@ msgstr "ウィンドウリスト(_w)"
 msgid "Automatically select window gravity from position on screen."
 msgstr "スクリーン上でウィンドウの配置位置を自動選択"
 
+#. ../lisp/sawfish/wm/state/configure.jl
+msgid "Ignore requests from applications to change window stacking."
+msgstr "アプリケーションからのウィンドウの前後の位置関係の変更要請を無視"
+
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid ""
 "Maximizing a window in one dimension must increase the size of that "
@@ -1092,6 +1161,10 @@ msgstr ""
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Don't cover `avoided' windows when maximizing."
 msgstr "最大化するときに `avoided' 属性のついたウィンドウを覆わないようにする"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Lock position and size while windows are maximized."
+msgstr "ウィンドウが最大化される間に大きさと位置をロック"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize the dimensions of the window."
@@ -1183,7 +1256,7 @@ msgid "S_haded"
 msgstr "シェード(_h)"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid "Focus windows when they are first displayed."
+msgid "Focus on application windows when they first appear."
 msgstr "ウィンドウがはじめて表示されるときにフォーカス"
 
 #. ../lisp/sawfish/wm/state/transient.jl
@@ -1318,10 +1391,6 @@ msgid "Snap to otherwise-ignored windows."
 msgstr "otherwise-ignored ウィンドウにくっつける"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Lock position and size while windows are maximized."
-msgstr "ウィンドウが最大化される間に大きさと位置をロック"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Only update window contents after it has stopped moving."
 msgstr "移動完了時のみウィンドウの内容を再描画"
 
@@ -1354,6 +1423,10 @@ msgstr "`xterm' コマンドに与えるオプション引数"
 #. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "Start a new xterm."
 msgstr "新規 `xterm' を起動"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete all windows in the group that the current window is a member of."
+msgstr "今のウィンドウと同じグループのすべてのウィンドウを閉じる"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing an already grown window grows it again."
@@ -1501,6 +1574,11 @@ msgstr "GNOME ヘルプブラウザを起動"
 msgid "Launch the GNOME about dialog."
 msgstr "GNOME 概要ダイアログを表示"
 
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Window Cycling"
+msgstr "ウィンドウ循環"
+
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Display window names while cycling through windows."
 msgstr "ウィンドウを循環していく間にウィンドウの名前を表示"
@@ -1593,6 +1671,22 @@ msgstr "可能なすべてのワークスペースを循環して次のウィンドウを選択"
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Select the previous window, cycling through all possible workspaces."
 msgstr "可能なすべてのワークスペースを循環して前のウィンドウを選択"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the next viewport."
+msgstr "次のビューポートに移動"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the previous viewport."
+msgstr "前のビューポートに移動"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the previous viewport."
+msgstr "ウィンドウを前のビューポートに移動"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the next viewport."
+msgstr "ウィンドウを次のビューポートに移動"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid ""
@@ -1881,6 +1975,30 @@ msgstr "上のビューポートにウィンドウを移動"
 msgid "Move the window to the viewport below."
 msgstr "下のビューポートにウィンドウを移動"
 
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "移動/リサイズ"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "ワークスペース"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing/Maximizing"
+msgstr "最大化/最小化"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing"
+msgstr "最小化"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Maximizing"
+msgstr "最大化"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "その他"
+
 #. ../themer/themer.glade:1315
 msgid " to: "
 msgstr "先:"
@@ -2093,9 +2211,6 @@ msgstr "テーマ(_T)"
 #~ msgid "Destroy"
 #~ msgstr "強制終了"
 
-#~ msgid "_Maximize"
-#~ msgstr "最大化(_M)"
-
 #~ msgid "_Vertically"
 #~ msgstr "垂直方向(_V)"
 
@@ -2136,9 +2251,6 @@ msgstr "テーマ(_T)"
 
 #~ msgid "Cycle through all windows in order of recent selections."
 #~ msgstr "最近選択されたものから順番にウィンドウを循環"
-
-#~ msgid "Cycle through all windows in the same group as the current window."
-#~ msgstr "同じグループのウィンドウ間を循環"
 
 #~ msgid ""
 #~ "Cycle through all windows whose names match the leading colon-delimited\n"
