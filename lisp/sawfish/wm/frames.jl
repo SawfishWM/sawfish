@@ -38,9 +38,16 @@
 ;;	shaped-transient	border-like title-bar only
 ;;	unframed		no frame at all
 
-(defvar frame-part-class-alist
+(defvar frame-part-classes
   '((title . ((cursor . hand2)
 	      (keymap . title-keymap)))
+    (menu . ((keymap . menu-button-keymap)))
+    (close . ((keymap . close-button-keymap)
+	      (cursor . dotbox)))
+    (iconify . ((keymap . iconify-button-keymap)
+		(cursor . sb_down_arrow)))
+    (maximize . ((keymap . maximize-button-keymap)
+		 (cursor . sb_v_double_arrow)))
     (top-border . ((cursor . top_side)
 		   (keymap . border-keymap)))
     (left-border . ((cursor . left_side)
@@ -49,10 +56,16 @@
 		     (keymap . border-keymap)))
     (bottom-border . ((cursor . bottom_side)
 		      (keymap . border-keymap)))
-    (menu . ((keymap . menu-button-keymap)))
-    (close . ((keymap . close-button-keymap)))
-    (iconify . ((keymap . iconify-button-keymap)))
-    (maximize . ((keymap . maximize-button-keymap)))))
+    (top-left-corner . ((cursor . top_left_corner)
+			(keymap . border-keymap)))
+    (top-right-corner . ((cursor . top_right_corner)
+			 (keymap . border-keymap)))
+    (bottom-left-corner . ((cursor . bottom_left_corner)
+			   (keymap . border-keymap)))
+    (bottom-right-corner . ((cursor . bottom_right_corner)
+			    (keymap . border-keymap))))
+  "Alist of (CLASS . ALIST) associating classes of frame parts with state
+they inherit.")
 
 (put 'frame-style 'custom-set 'custom-set-frame-style)
 (put 'frame-style 'custom-widget 'custom-make-frame-style-widget)
@@ -283,7 +296,13 @@
 			     (set-frame-for-window (input-focus) t)))))))
 
 
-;; standard frame part classes
+;; removing frame parts
 
-(defun fp-class (class)
-  (cdr (assq class frame-part-class-alist)))
+(defun remove-frame-class (w class)
+  (window-put w 'removed-classes
+	      (cons class (delq class (window-get w 'removed-classes))))
+  (rebuild-frame w))
+
+(defun add-frame-class (w class)
+  (window-put w 'removed-classes (delq class (window-get w 'removed-classes)))
+  (rebuild-frame w))
