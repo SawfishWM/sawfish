@@ -38,6 +38,11 @@
   :type number
   :range (1 . 5000))
 
+(defcustom shade-hover-raise nil
+  "Raise windows when they are unshaded."
+  :group (focus shade-hover)
+  :type boolean)
+
 (defvar shade-hover-timer nil)
 
 (defun shade-hover-leave (w)
@@ -65,7 +70,9 @@
 	  ((callback
 	    (lambda ()
 	      (window-put w 'shade-hover-unshaded t)
-	      (unshade-window w))))
+	      (unshade-window w)
+	      (when shade-hover-raise
+		(raise-window w)))))
 	(when shade-hover-timer
 	  (delete-timer shade-hover-timer))
 	(if (zerop shade-hover-delay)
