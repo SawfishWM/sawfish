@@ -38,13 +38,40 @@
 ;;	shaped			title-bar only
 ;;	shaped-transient	border-like title-bar only
 ;;	unframed		no frame at all
+;;	icon
+;;	dock
+
+;; There is also a similar concept of frame types. The window type
+;; never changes (unless the user explicitly does so). But the frame
+;; type may depend on the current window state. For example, if it's
+;; shaded, then it may have `shaded' or `shaded-transient' frame type.
+
+;; These are the types that the frame styles see. Current types include
+;; all the above window types plus:
+
+;;	shaded			normal title bar only
+;;	shaded-transient	transient title bar only
+
+;; When framing windows the frame-type-fallback-alist variable will be
+;; used to iterate frame types until a type that the theme implements
+;; is found.
+
+;; However, this separation of frame and window type shouldn't
+;; discourage themes from detecting other window state. For example,
+;; themes may want to display maximized windows differently from
+;; non-maximized. (In fact the frame-type != window-type scheme is
+;; largely just for compatibility)
 
 
 ;; custom support
 
 (defun custom-set-frame-style (symbol value &rest args)
   (if (eq symbol 'default-frame-style)
-      (set-frame-style value)
+      (progn
+	(check-frame-availability value)
+	(setq default-frame-style value)
+	(when always-update-frames
+	  (reframe-all-windows)))
     (apply custom-set-variable symbol value args)))
 
 (defun custom-make-frame-style-widget (symbol)
@@ -106,12 +133,6 @@ that overrides settings set elsewhere.")
   :user-level expert
   :group misc)
 
-(defcustom decorate-transients nil
-  "Decorate dialog windows similarly to application windows."
-  :type boolean
-  :group appearance
-  :after-set after-setting-frame-option)
-
 (defcustom reload-themes-when-changed t
   "Automatically reload themes when they are updated."
   :type boolean
@@ -165,10 +186,9 @@ requested type."
 ;; List of styles that can be edited using sawfish-themer
 (defvar editable-frame-styles nil)
 
-;; used when decorate-transients is non-nil, map transient window
-;; types to type to pass to frame style function
-(defvar transient-normal-frame-alist '((transient . default)
-				       (shaped-transient . shaped)))
+(defvar frame-type-mappers '()
+  "List of functions that map (WINDOW FRAME-TYPE) -> FRAME-TYPE. Used when
+deciding which frame type to ask a theme to generate.")
 
 ;; list of (REGEXP DIR-EXPAND NAME-EXPAND)
 (defvar theme-suffix-regexps
@@ -180,7 +200,6 @@ requested type."
   "When non-nil themes are assumed to be malicious.")
 
 (defvar sawfish-themer-program "sawfish-themer")
-
 
 
 ;; defcustom's for some built-in variables
@@ -198,6 +217,33 @@ requested type."
   :type (number 0 100)
   :user-level expert
   :after-set (lambda () (after-setting-frame-option)))
+
+
+;; managing frame types
+
+(defun define-frame-type-mapper (fun)
+  (unless (memq fun frame-type-mappers)
+    (setq frame-type-mappers (cons fun frame-type-mappers))))
+
+(defun find-frame-definition (w style)
+  ;; 1. map window type to actual frame type
+  (let loop-1 ((rest frame-type-mappers)
+	       (type (window-type w)))
+    (if (null rest)
+	;; found the final frame type, so,
+	;; 2. find the closest type that the style implements to this
+	(let loop-2 ((type type)
+		     (seen (list type)))
+	  (cond ((eq type 'unframed) nil-frame)
+		((style w type))
+		(t (let ((next (or (cdr (assq type frame-type-fallback-alist))
+				   'unframed)))
+		     (if (memq next seen)
+			 ;; been here before..
+			 nil-frame
+		       (loop-2 next (cons next seen)))))))
+      ;; else, apply this transformation and keep looping
+      (loop-1 (cdr rest) ((car rest) w type)))))
 
 
 ;; managing frame styles
@@ -233,72 +279,6 @@ requested type."
     (load-frame-style name)
     (reframe-windows-with-style name)))
 
-(defun set-frame-style (name)
-  (check-frame-availability name)
-  (setq default-frame-style name)
-  (when always-update-frames
-    (reframe-all-windows)))
-
-(defun find-frame-definition (w style type)
-  (letrec ((iter
-	    (lambda (type seen)
-	      (cond
-	       ((eq type 'unframed) nil-frame)
-	       ((style w type))
-	       (t (let ((next (or (cdr (assq type frame-type-fallback-alist))
-				  'unframed)))
-		    (if (memq next seen)
-			;; been here before..
-			nil-frame
-		      (iter next (cons next seen)))))))))
-    (iter type (list type))))
-
-(defun set-window-frame-style (w style &optional type from-user)
-  (check-frame-availability style)
-  (if type
-      (progn
-	(window-put w 'type type)
-	(call-window-hook 'window-state-change-hook w (list '(type))))
-    (setq type (window-type w)))
-  (window-put w 'current-frame-style style)
-  (when from-user
-    (window-put w 'frame-style style)
-    (call-window-hook 'window-state-change-hook w (list '(frame-style))))
-  (let ((style-fun (cdr (assq style frame-styles))))
-    (set-window-frame w (if style-fun
-			    (find-frame-definition w style-fun type)
-			  nil-frame))))
-
-(defun set-frame-for-window (w &optional override type)
-  (when (or override (not (or (window-frame w) (window-get w 'ignored))))
-    (let*
-	((style (window-get w 'frame-style))
-	 fun tem)
-      (unless style
-	(setq style default-frame-style))
-      (unless (assq style frame-styles)
-	(load-frame-style style))
-      (set-window-frame-style w style type))))
-
-(defun reframe-one-window (w)
-  (when (and (windowp w) (not (window-get w 'ignored)))
-    (set-frame-for-window w t (window-get w 'type))))
-
-(defun rebuild-frames-with-style (style)
-  (mapc (lambda (w)
-	  (when (eq (window-get w 'current-frame-style) style)
-	    (rebuild-frame w)))
-	(managed-windows)))
-
-(defun reframe-windows-with-style (style)
-  (mapc (lambda (w)
-	  (when (eq (window-get w 'current-frame-style) style)
-	    (reframe-one-window w)))
-	(managed-windows)))
-
-(defun reframe-all-windows ()
-  (mapc reframe-one-window (managed-windows)))
-
 ;; called periodically from a timer
 (defun frames-on-idle (timer)
   (set-timer timer theme-update-interval)
@@ -311,6 +291,45 @@ requested type."
 	      (when (time-later-p (file-modtime file) modtime)
 		(reload-frame-style style))))
 	  frame-style-files)))
+
+
+;; applying frame styles to windows
+
+(defun reframe-window (w)
+  (when (and (windowp w)
+	     (not (window-get w 'ignored)))
+    (let ((style (or (window-get w 'frame-style)
+		     default-frame-style)))
+      (check-frame-availability style)
+      (let ((style-fun (cdr (assq style frame-styles))))
+	(set-window-frame w (if style-fun
+				(find-frame-definition w style-fun)
+			      nil-frame))
+	(window-put w 'current-frame-style style)))))
+
+(defun reframe-all-windows ()
+  (mapc reframe-window (managed-windows)))
+
+(defun rebuild-frames-with-style (style)
+  (mapc (lambda (w)
+	  (when (eq (window-get w 'current-frame-style) style)
+	    (rebuild-frame w)))
+	(managed-windows)))
+
+(defun reframe-windows-with-style (style)
+  (mapc (lambda (w)
+	  (when (eq (window-get w 'current-frame-style) style)
+	    (reframe-window w)))
+	(managed-windows)))
+
+(defun set-frame-style (w style)
+  (unless (eq (window-get w 'frame-style) style)
+    (window-put w 'frame-style style)
+    (call-window-hook 'window-state-change-hook w (list '(frame-style)))
+    (reframe-window w)))
+
+
+;; editable frame styles
 
 (defun mark-frame-style-editable (style)
   (unless (memq style editable-frame-styles)
@@ -333,58 +352,50 @@ requested type."
 
 (defun window-type (w)
   (or (window-get w 'type)
-      (let
-	  ((type (if (window-transient-p w)
-		     (if (window-shaped-p w)
-			 'shaped-transient
-		       'transient)
-		   (if (window-shaped-p w)
-		       'shaped
-		     'default)))
-	   tem)
-	(when (and decorate-transients (window-transient-p w)
-		   (setq tem (cdr (assq type transient-normal-frame-alist))))
-	  (setq type tem))
-	type)))
+      (if (window-transient-p w)
+	  (if (window-shaped-p w)
+	      'shaped-transient
+	    'transient)
+	(if (window-shaped-p w)
+	    'shaped
+	  'default))))
+
+(defun set-window-type (w type)
+  (unless (eq (window-get w 'type) type)
+    (window-put w 'type type)
+    (call-window-hook 'window-state-change-hook w (list '(type)))
+    (reframe-window w)))
 
 (defun window-type-remove-title (type)
-  (cond ((eq type 'default)
-	 'transient)
-	((memq type '(shaped shaped-transient))
-	 'unframed)
-	(t
-	 type)))
+  (case type
+    ((default) 'transient)
+    ((shaped shaped-transient) 'unframed)
+    (t type)))
 
 (defun window-type-remove-border (type)
-  (cond ((eq type 'default)
-	 'shaped)
-	((memq type '(transient shaped-transient))
-	 'unframed)
-	(t
-	 type)))
+  (case type
+    ((default) 'shaped)
+    ((transient shaped-transient) 'unframed)
+    (t type)))
 
 (defun window-type-add-title (type)
-  (cond ((eq type 'transient)
-	 'default)
-	((eq type 'unframed)
-	 'shaped)
-	(t
-	 type)))
+  (case type
+    ((transient) 'default)
+    ((unframed) 'shaped)
+    (t type)))
 
 (defun window-type-add-border (type)
-  (cond ((eq type 'shaped)
-	 'default)
-	((eq type 'unframed)
-	 'transient)
-	(t
-	 type)))
+  (case type
+    ((shaped) 'default)
+    ((unframed) 'transient)
+    (t type)))
 
 ;; create some commands for setting the window type
 (mapc (lambda (type)
 	(define-value (intern (concat "set-frame:" (symbol-name type)))
 		      (lambda (w)
 			(interactive "%W")
-			(set-frame-for-window w t type))))
+			(set-window-type w type))))
       '(default transient shaped shaped-transient unframed))
 
 
@@ -454,16 +465,10 @@ requested type."
       ((styles (find-all-frame-styles t)))
     (nconc (mapcar (lambda (s)
 		     (list (symbol-name s)
-			   `(set-window-frame-style
-			     (current-event-window) ',s nil t)))
+			   `(set-frame-style (current-event-window) ',s)))
 		   styles)
 	   `(() (,(_ "Default")
-		 (let
-		     ((w (current-event-window)))
-		   (window-put w 'frame-style nil)
-		   (set-frame-for-window w t)
-		   (call-window-hook
-		    'window-state-change-hook w (list '(frame-style)))))))))
+		 (set-frame-style (current-event-window) nil))))))
 
 
 ;; removing frame parts
@@ -538,8 +543,8 @@ requested type."
 
 ;; initialisation
 
-(add-hook 'add-window-hook set-frame-for-window t)
-(add-hook 'shape-notify-hook reframe-one-window t)
+(add-hook 'add-window-hook reframe-window t)
+(add-hook 'shape-notify-hook reframe-window t)
 
 (make-timer frames-on-idle theme-update-interval)
 
