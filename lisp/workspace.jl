@@ -470,42 +470,43 @@
   (or (window-in-workspace-p w old)
       (error
        "ws-move-window--window isn't in original workspace: %s, %s" w old))
-  (cond ((= old new))
-	((window-in-workspace-p w new)
-	 ;; just remove from the source workspace
-	 (window-remove-from-workspace w old)
-	 (call-window-hook 'remove-from-workspace-hook w (list old)))
-	(t
-	 ;; need to move it..
-	 (transform-window-workspaces (lambda (space)
-					(if (= space old)
-					    new
-					  space)) w)
-	 (cond ((= old current-workspace)
-		(hide-window w))
-	       ((and (= new current-workspace) (not (window-get w 'iconified)))
-		(show-window w)))))
-  (ws-workspace-may-be-empty old)
-  ;; the window may lose the focus when switching spaces
-  (when (and was-focused (window-visible-p w))
-    (set-input-focus w))
-  (call-window-hook 'add-to-workspace-hook w (list new))
-  (call-hook 'workspace-state-change-hook))
+  (unless (= old new)
+    (cond ((window-in-workspace-p w new)
+	   ;; just remove from the source workspace
+	   (window-remove-from-workspace w old)
+	   (call-window-hook 'remove-from-workspace-hook w (list old)))
+	  (t
+	   ;; need to move it..
+	   (transform-window-workspaces (lambda (space)
+					  (if (= space old)
+					      new
+					    space)) w)))
+    (cond ((= old current-workspace)
+	   (hide-window w))
+	  ((and (= new current-workspace) (not (window-get w 'iconified)))
+	   (show-window w)))
+    (ws-workspace-may-be-empty old)
+    ;; the window may lose the focus when switching spaces
+    (when (and was-focused (window-visible-p w))
+      (set-input-focus w))
+    (call-window-hook 'add-to-workspace-hook w (list new))
+    (call-hook 'workspace-state-change-hook)))
 
 ;; arrange it so that window W appears on both OLD and NEW workspaces
 (defun ws-copy-window (w old new &optional was-focused)
   (or (window-in-workspace-p w old)
       (error
        "ws-copy-window--window isn't in original workspace: %s, %s" w old))
-  (unless (window-in-workspace-p w new)
-    (window-add-to-workspace w new))
-  (when (and (= new current-workspace) (not (window-get w 'iconified)))
-    (show-window w))
-  ;; the window may lose the focus when switching spaces
-  (when (and was-focused (window-visible-p w))
-    (set-input-focus w))
-  (call-window-hook 'add-to-workspace-hook w (list new))
-  (call-hook 'workspace-state-change-hook))
+  (unless (= old new)
+    (unless (window-in-workspace-p w new)
+      (window-add-to-workspace w new))
+    (when (and (= new current-workspace) (not (window-get w 'iconified)))
+      (show-window w))
+    ;; the window may lose the focus when switching spaces
+    (when (and was-focused (window-visible-p w))
+      (set-input-focus w))
+    (call-window-hook 'add-to-workspace-hook w (list new))
+    (call-hook 'workspace-state-change-hook)))
 
 ;; switch to workspace with id SPACE
 (defun select-workspace (space &optional dont-focus)
@@ -701,9 +702,9 @@
   (interactive "p")
   (next-workspace (- count)))
 
-(defun send-to-next-workspace (w count &optional copy)
+(defun send-to-next-workspace (w count &optional copy select)
   "Move the window to the next workspace."
-  (interactive "%W\np")
+  (interactive "%W\np\n\nt")
   (ws-call-with-workspace (lambda (space)
 			    (let
 				((was-focused (eq w (input-focus)))
@@ -713,30 +714,31 @@
 					       (car (window-workspaces w)))))
 			      (when orig-space
 				(ws-copy-window w orig-space space was-focused)
-				(select-workspace space was-focused)
+				(when select
+				  (select-workspace space was-focused))
 				(unless copy
 				  (ws-move-window
 				   w orig-space space was-focused)))))
 			  count workspace-send-boundary-mode))
 
-(defun send-to-previous-workspace (w count &optional copy)
+(defun send-to-previous-workspace (w count &optional copy select)
   "Move the window to the previous workspace."
-  (interactive "%W\np")
-  (send-to-next-workspace w (- count) copy))
+  (interactive "%W\np\n\nt")
+  (send-to-next-workspace w (- count) copy select))
 
-(defun copy-to-next-workspace (w count)
+(defun copy-to-next-workspace (w count select)
   "Copy the window to the next workspace."
-  (interactive "%W\np")
-  (send-to-next-workspace w count t))
+  (interactive "%W\np\nt")
+  (send-to-next-workspace w count t select))
 
-(defun copy-to-previous-workspace (w count)
+(defun copy-to-previous-workspace (w count &optional select)
   "Copy the window to the previous workspace."
-  (interactive "%W\np")
-  (send-to-previous-workspace w count t))
+  (interactive "%W\np\nt")
+  (send-to-previous-workspace w count t select))
 
-(defun append-workspace-and-send (w)
+(defun append-workspace-and-send (w &optional select)
   "Create a new workspace at the end of the list, and move the window to it."
-  (interactive "%W")
+  (interactive "%W\nt")
   (let
       ((limits (workspace-limits))
        (was-focused (eq (input-focus) w))
@@ -744,12 +746,15 @@
 		       current-workspace
 		     (car (window-workspaces w)))))
     (when orig-space
-      (select-workspace (1+ (cdr limits)) was-focused)
-      (ws-move-window w orig-space current-workspace was-focused))))
+      (if select
+	  (progn
+	    (select-workspace (1+ (cdr limits)) was-focused)
+	    (ws-move-window w orig-space current-workspace was-focused))
+	(ws-move-window w orig-space (1+ (cdr limits)) was-focused)))))
 
-(defun prepend-workspace-and-send (w)
+(defun prepend-workspace-and-send (w &optional select)
   "Create a new workspace at the start of the list, and move the window to it."
-  (interactive "%W")
+  (interactive "%W\nt")
   (let
       ((limits (workspace-limits))
        (was-focused (eq (input-focus) w))
@@ -757,8 +762,11 @@
 		       current-workspace
 		     (car (window-workspaces w)))))
     (when orig-space
-      (select-workspace (1- (car limits)) was-focused)
-      (ws-move-window w orig-space current-workspace was-focused))))
+      (if select
+	  (progn
+	    (select-workspace (1- (car limits)) was-focused)
+	    (ws-move-window w orig-space current-workspace was-focused))
+	(ws-move-window w orig-space (1- (car limits)) was-focused)))))
 
 (defun merge-next-workspace ()
   "Delete the current workspace. Its member windows are relocated to the next
