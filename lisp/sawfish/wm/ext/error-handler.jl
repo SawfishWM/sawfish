@@ -19,19 +19,69 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.ext.error-handler ()
+(define-structure sawfish.wm.ext.error-handler
+
+    (export retrieve-errors
+	    display-errors)
 
     (open rep
 	  rep.system
-	  sawfish.wm.misc)
+	  rep.data.ring
+	  sawfish.wm.misc
+	  sawfish.wm.custom
+	  sawfish.wm.commands)
 
   (define-structure-alias error-handler sawfish.wm.ext.error-handler)
 
-  (defvar error-handler-beep t)
+  (defgroup error-handling "Error Handling"
+    :group misc)
+
+  (defcustom error-handler-beep t
+    "Emit a beeping sound when errors occur."
+    :type boolean
+    :group (misc error-handling))
+
+  (defcustom error-destination 'standard-error
+    "Where to display error messages: \\w"
+    :type (choice nowhere screen standard-error)
+    :user-level expert
+    :group (misc error-handling))
+
+  ;; ring buffer for containing error messages
+  (define error-ring (make-ring))
+
+;;; code
+
+  (define (error->string err data)
+    (format nil "%s: %s"
+	    (or (get err 'error-message) err)
+	    (mapconcat (lambda (x)
+			 (format nil "%s" x)) data ", ")))
 
   (define (handler err data)
-    (when error-handler-beep
-      (beep))
-    (display-message (format nil "%s: %S" err data)))
+    (let ((text (error->string err data)))
+      (ring-append error-ring
+		   (format nil "[%s] %s"
+			   (current-time-string nil "%Y-%m-%d %H:%M:%S") text))
+      (when error-handler-beep
+	(beep))
+      (case error-destination
+	((screen)
+	 (display-message text))
+	((standard-error)
+	 (write standard-error text)
+	 (write standard-error #\newline)))))
 
+  (define (retrieve-errors) (ring->list error-ring))
+
+  (define (display-errors)
+    "Display all errors that have occurred to the screen."
+    (let ((errors (retrieve-errors)))
+      (display-message (if errors
+			   (mapconcat identity errors #\newline)
+			 (_ "No errors.")))))
+
+  (define-command 'display-errors display-errors)
+
+  ;; install our error handler as the system-wide handler
   (setq error-handler-function handler))
