@@ -134,12 +134,13 @@ allowed to be entered."
     str))
 
 ;;;###autoload
-(defun prompt-from-list (prompt-list title &optional start dont-validate)
-  "Return a selected choice from the list of options (strings) PROMPT-LIST.
+(defun prompt-from-list (options title &optional start dont-validate)
+  "Return a selected choice from the list of options (strings) OPTIONS.
 PROMPT is the title displayed, START the starting choice.
 Unless DONT-VALIDATE is t, only a member of PROMPT-LIST will be returned."
   (let
-      ((prompt-completion-fun prompt-complete-from-list)
+      ((prompt-list options)
+       (prompt-completion-fun prompt-complete-from-list)
        (prompt-validation-fun (if dont-validate
 				  nil
 				prompt-validate-from-list)))
