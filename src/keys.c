@@ -784,36 +784,6 @@ Return the event which caused the current command to be invoked.
 	return Qnil;
 }
 
-DEFUN("current-event-window", Fcurrent_event_window, Scurrent_event_window,
-      (void), rep_Subr0) /*
-::doc:Scurrent-event-window::
-current-event-window
-
-Return the window that received the current event, or the symbol
-`root', or nil if no such window.
-::end:: */
-{
-    if (current_x_event != 0)
-    {
-	struct frame_part *fp;
-	Lisp_Window *w = find_window_by_id (current_x_event->xany.window);
-	if (w == 0)
-	{
-	    fp = find_frame_part_by_window (current_x_event->xany.window);
-	    if (fp != 0)
-		w = fp->win;
-	}
-	if (w != 0)
-	    return rep_VAL(w);
-	else if (current_x_event->xany.window == root_window)
-	    return Qroot;
-	else
-	    return Qnil;
-    }
-    else
-	return Qnil;
-}
-
 DEFUN("proxy-current-event", Fproxy_current_event, Sproxy_current_event,
       (repv win, repv mask, repv prop), rep_Subr3) /*
 ::doc:Sproxy-current-event::
@@ -1291,7 +1261,6 @@ keys_init(void)
     rep_ADD_SUBR(Sungrab_keymap);
     rep_ADD_SUBR(Scurrent_event_string);
     rep_ADD_SUBR(Scurrent_event);
-    rep_ADD_SUBR(Scurrent_event_window);
     rep_ADD_SUBR(Sproxy_current_event);
     rep_ADD_SUBR(Sallow_events);
     rep_ADD_SUBR(Slast_event);
