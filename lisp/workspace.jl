@@ -69,7 +69,7 @@
 	       (call-hook 'workspace-state-change-hook)))
 
 (defcustom lock-first-workspace nil
-  "Empty workspaces before the active workspace are never deleted."
+  "Empty workspaces before or after the active workspace aren't hidden."
   :type boolean
   :group workspace
   :after-set (lambda ()
@@ -122,6 +122,7 @@ that window on (counting from zero).")
 (defvar current-workspace 0)
 
 (defvar first-interesting-workspace nil)
+(defvar last-interesting-workspace nil)
 
 (defvar static-workspace-menus
   '(("Insert" insert-workspace)
@@ -151,7 +152,9 @@ that window on (counting from zero).")
 ;; continuum that is `interesting' to the user
 (defun ws-workspace-limits ()
   (let
-      ((max-w current-workspace)
+      ((max-w (if (and lock-first-workspace last-interesting-workspace)
+		  (max last-interesting-workspace current-workspace)
+		current-workspace))
        (min-w (if (and lock-first-workspace first-interesting-workspace)
 		  (min first-interesting-workspace current-workspace)
 		current-workspace))
@@ -162,8 +165,10 @@ that window on (counting from zero).")
 		  (setq max-w tem))
 		(when (< tem min-w)
 		  (setq min-w tem)))) (managed-windows))
+    (setq max-w (max max-w (1- (+ preallocated-workspaces min-w))))
     (setq first-interesting-workspace min-w)
-    (cons min-w (max max-w (1- (+ preallocated-workspaces min-w))))))
+    (setq last-interesting-workspace max-w)
+    (cons min-w max-w)))
 
 ;; renormalize the interesting workspaces so they being at index zero
 (defun ws-normalize-indices ()
@@ -174,7 +179,13 @@ that window on (counting from zero).")
 	      (when (setq tem (window-get w 'workspace))
 		(window-put w 'workspace (- tem (car limits)))))
 	  (managed-windows))
-    (setq current-workspace (- current-workspace (car limits)))))
+    (setq current-workspace (- current-workspace (car limits)))
+    (when first-interesting-workspace
+      (setq first-interesting-workspace
+	    (- first-interesting-workspace (car limits))))
+    (when last-interesting-workspace
+      (setq last-interesting-workspace
+	    (- last-interesting-workspace (car limits))))))
 
 ;; insert a new workspace (returning its index) so that the workspace
 ;; before it has index BEFORE
@@ -291,12 +302,12 @@ that window on (counting from zero).")
   (interactive "p")
   (unless (= current-workspace space)
     (when current-workspace
+      (call-hook 'leave-workspace-hook (list current-workspace))
       (mapc #'(lambda (w)
 		(when (and (window-get w 'workspace)
 			   (= (window-get w 'workspace) current-workspace))
 		  (hide-window w)))
-	    (managed-windows))
-      (call-hook 'leave-workspace-hook (list current-workspace)))
+	    (managed-windows)))
     (setq current-workspace space)
     (when current-workspace
       (mapc #'(lambda (w)
@@ -685,10 +696,9 @@ all workspaces."
 
 (defun ws-load-state (w alist)
   (let
-      ((limits (ws-workspace-limits))
-       (space (cdr (assq 'workspace alist))))
+      ((space (cdr (assq 'workspace alist))))
     (when space
-      (window-put w 'workspace (+ (car limits) space)))))
+      (window-put w 'workspace space))))
 
 
 ;; Initialisation
