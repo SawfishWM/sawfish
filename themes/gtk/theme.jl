@@ -102,8 +102,8 @@
 (defun gtk-handle-client-msg (w type data)
   (when (and (eq w gtk-dummy-window) (eq type '_GTK_READ_RCFILES))
     (gtk-reload-style)
-    (when (featurep 'menus)
-      (menu-stop-process))
+    (when (and (featurep 'menus) (not menu-active))
+      (menu-stop-process t))
     t))
 
 (defun gtk-init ()
