@@ -1022,7 +1022,11 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 
 	tem = Fassq (Qforeground, attrs);
 	if (tem && rep_CONSP(tem))
+	{
 	    message.fg = rep_CDR(tem);
+	    if (!COLORP(message.bg))
+		message.bg = Fget_color (message.bg);
+	}
 	if (!COLORP(message.fg))
 	    message.fg = Fget_color (rep_VAL(&black));
 	if (!COLORP(message.fg))
@@ -1030,7 +1034,11 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 
 	tem = Fassq (Qbackground, attrs);
 	if (tem && rep_CONSP(tem))
+	{
 	    message.bg = rep_CDR(tem);
+	    if (!COLORP(message.bg))
+		message.bg = Fget_color (message.bg);
+	}
 	if (!COLORP(message.bg))
 	    message.bg = Fget_color (rep_VAL(&white));
 	if (!COLORP(message.bg))
