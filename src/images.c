@@ -1290,19 +1290,17 @@ get_pixel (Lisp_Image *im, int x, int y)
     int nchannels = image_channels (im);
     u_char *data = (image_pixels (im)
 		    + (y * image_row_stride (im)) + (x * nchannels));
-    int alpha;
+    repv alpha;
 #ifdef HAVE_IMLIB
     ImlibColor shape;
     Imlib_get_image_shape (imlib_id, im->image, &shape);
     alpha = (data[0] == shape.r && data[1] == shape.g
-	     && data[2] == shape.b) ? 0 : 255;
+	     && data[2] == shape.b) ? rep_MAKE_INT (0) : rep_MAKE_INT (255);
 #else
     alpha = nchannels > 3 ? rep_MAKE_INT (data[3]) : rep_MAKE_INT (255);
 #endif
-    return rep_list_4 (rep_MAKE_INT (data[0]),
-		       rep_MAKE_INT (data[1]),
-		       rep_MAKE_INT (data[2]),
-		       rep_MAKE_INT (alpha));
+    return rep_list_4 (rep_MAKE_INT (data[0]), rep_MAKE_INT (data[1]),
+		       rep_MAKE_INT (data[2]), alpha);
 }
 
 static void
@@ -1330,8 +1328,8 @@ set_pixel (Lisp_Image *im, int x, int y, repv pixel)
 	    data[0] = rep_INT (rep_CAR (pixel));
 	    data[1] = rep_INT (rep_CADR (pixel));
 	    data[2] = rep_INT (rep_CADDR (pixel));
-	    if (length > 3 && nchannels > 3)
-		data[3] = rep_INT (rep_CADDDR (pixel));
+	    if (nchannels > 3)
+		data[3] = (length > 3) ? rep_INT (rep_CADDDR (pixel)) : 255;
 	}
     }
 }
