@@ -1339,6 +1339,23 @@ manage_windows (void)
     Fgrab_server ();
 
     XGetInputFocus (dpy, &focus, &revert_to);
+    if (focus == PointerRoot)
+    {
+    	Window root, child;
+	Bool found;
+	int rx, ry, wx, wy;
+	unsigned mask;
+
+	found = XQueryPointer (dpy, DefaultRootWindow(dpy), &root,
+			       &child, &rx, &ry, &wx, &wy, &mask);
+	if (!found)
+	{
+	    found = XQueryPointer (dpy, root, &root, &child,
+				   &rx, &ry, &wx, &wy, &mask);
+	}
+	focus = child;
+    }
+
     XQueryTree (dpy, root_window, &root, &parent, &children, &nchildren);
     initialising = TRUE;
     for (i = 0; i < nchildren; i++)
@@ -1358,7 +1375,7 @@ manage_windows (void)
 
     /* Try to keep the current focus state. */
     focus_on_window (0);
-    if (focus != None && focus != PointerRoot)
+    if (focus != None)
     {
 	Lisp_Window *w = find_window_by_id (focus);
 	if (w != 0)
