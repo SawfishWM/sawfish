@@ -43,6 +43,7 @@ DEFSYM(y_justify, "y-justify");
 DEFSYM(background, "background");
 DEFSYM(foreground, "foreground");
 DEFSYM(renderer, "renderer");
+DEFSYM(render_scale, "render-scale");
 DEFSYM(font, "font");
 DEFSYM(width, "width");
 DEFSYM(height, "height");
@@ -70,7 +71,9 @@ static bool frame_draw_mutex;
 	background . (NORMAL FOCUSED HIGHLIGHTED CLICKED)
 	foreground . COLOR
 	foreground . (NORMAL FOCUSED HIGHLIGHTED CLICKED)
+
 	renderer . FUNCTION
+	render-scale . INTEGER
 
 	text . STRING-OR-FUNCTION-OR-NIL
 	x-justify . left OR right OR center OR NUMBER
@@ -515,7 +518,14 @@ list_frame_generator (Lisp_Window *w)
 	/* get renderer function */
 	tem = Fassq (Qrenderer, elt);
 	if (tem && tem != Qnil && Ffunctionp (rep_CDR(tem)) != Qnil)
+	{
 	    fp->renderer = rep_CDR(tem);
+	    tem = get_integer_prop (w, Qrender_scale, elt);
+	    if (tem != Qnil && rep_INT(tem) > 0)
+		fp->render_scale = rep_INT(tem);
+	    else
+		fp->render_scale = 1;
+	}
 	else
 	    fp->renderer = Qnil;
 
@@ -682,8 +692,8 @@ list_frame_generator (Lisp_Window *w)
 	   render into. */
 	if (fp->renderer != Qnil)
 	{
-	    fp->rendered_image = Fmake_sized_image (rep_MAKE_INT(fp->width),
-						    rep_MAKE_INT(fp->height),
+	    fp->rendered_image = Fmake_sized_image (rep_MAKE_INT(fp->width / fp->render_scale),
+						    rep_MAKE_INT(fp->height / fp->render_scale),
 						    Qnil, Qnil, Qnil);
 	    fp->rendered_state = fps_none;
 	}
@@ -959,6 +969,7 @@ frames_init (void)
     rep_INTERN(background);
     rep_INTERN(foreground);
     rep_INTERN(renderer);
+    rep_INTERN(render_scale);
     rep_INTERN(font);
     rep_INTERN(width);
     rep_INTERN(height);
