@@ -188,6 +188,7 @@ static void
 install_colormaps (Lisp_Window *w)
 {
     XWindowAttributes attr;
+    bool seen_toplevel = FALSE;
     if (w->n_cmap_windows > 0)
     {
 	int i;
@@ -195,11 +196,15 @@ install_colormaps (Lisp_Window *w)
 	{
 	    XGetWindowAttributes (dpy, w->cmap_windows[i], &attr);
 	    XInstallColormap (dpy, attr.colormap);
+	    if (w->cmap_windows[i] == w->id)
+		seen_toplevel = TRUE;
 	}
     }
-    XGetWindowAttributes (dpy, w->id, &attr);
-    w->attr.colormap = attr.colormap;
-    XInstallColormap (dpy, attr.colormap);
+    if (!seen_toplevel)
+    {
+	XGetWindowAttributes (dpy, w->id, &attr);
+	XInstallColormap (dpy, attr.colormap);
+    }
 }
 
 
@@ -627,7 +632,6 @@ map_notify (XEvent *ev)
 	    /* copy in some of the new values */
 	    w->attr.width = wa.width;
 	    w->attr.height = wa.height;
-	    w->attr.colormap = wa.colormap;
 
 	    w->mapped = TRUE;
 	    if (w->frame == 0)
@@ -782,7 +786,6 @@ focus_out (XEvent *ev)
 	return;
     if (w != 0 && ev->xfocus.detail != NotifyInferior)
     {
-	XUninstallColormap (dpy, w->attr.colormap);
 	if (focus_window == w)
 	    focus_window = 0;
 	if (w->focus_change != 0)
