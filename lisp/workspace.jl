@@ -154,6 +154,19 @@
 	  (managed-windows))
     t))
 
+(defun window-in-workspace-p (w space)
+  (let
+      ((w-space (window-get w 'workspace)))
+    (or (not w-space) (= w-space space))))
+
+(defun windows-share-workspace-p (w-1 w-2)
+  (let
+      ((space-1 (window-get w-1 'workspace))
+       (space-2 (window-get w-2 'workspace)))
+    (or (not space-1)
+	(not space-2)
+	(= space-1 space-2))))
+
 ;; returns (FIRST-INDEX . LAST-INDEX) defining the subset of the
 ;; continuum that is `interesting' to the user
 (defun workspace-limits ()
