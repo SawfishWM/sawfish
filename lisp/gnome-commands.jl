@@ -93,4 +93,4 @@
 ;;;###autoload
 (defun gnome-logout ()
   (interactive)
-  (system "save-session --quit &"))
+  (system "save-session --kill &"))
