@@ -74,6 +74,15 @@ this mode. The single argument is the window to be placed."
 			  (* -2 (window-border-width w))))))
     (move-window-to w (car coords) (cdr coords))))
 
+;; make sure the window doesn't overlap an avoided window
+(defun acceptable-placement (w position)
+  (or (window-avoided-p w)
+    (let*
+        ((avoided-windows (delete-if-not window-avoided-p (managed-windows)))
+         (rects (rectangles-from-windows avoided-windows))
+         (dims (window-frame-dimensions w)))
+      (= 0 (rect-total-overlap dims position rects)))))
+
 ;; called from the place-window-hook
 (defun place-window (w)
   (let
@@ -81,7 +90,9 @@ this mode. The single argument is the window to be placed."
     (if (or (cdr (assq 'user-position hints))
 	    (and (not (window-get w 'ignore-program-position))
 		 (not ignore-program-positions)
-		 (cdr (assq 'program-position hints))))
+		 (cdr (assq 'program-position hints))
+		 (or (window-get w 'ignored)
+		     (acceptable-placement w (window-position w)))))
 	(let
 	    ((gravity (or (window-get w 'gravity)
 			  (cdr (assq 'window-gravity hints)))))
