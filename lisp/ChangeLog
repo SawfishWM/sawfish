@@ -1,3 +1,14 @@
+2002-04-27  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/state/transient.jl (transient-map-window,
+	transient-unmap-window): use set-input-focus not
+	activate-window (which raises the window..)
+
+2002-04-25  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/session/init.jl (sm-init): make the
+	CurrentDirectory a valid filename (e.g., no "~" characters)
+
 2002-04-23  John Harper  <jsh@unfactored.org>
 
 	Work to support _NET_WM_STRUT. Fixes #66608 (not tested):
