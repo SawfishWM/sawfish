@@ -149,8 +149,8 @@ typedef struct lisp_image {
 enum frame_part_states {
     fps_normal = 0,
     fps_focused,
+    fps_highlighted,
     fps_clicked,
-    fps_focused_clicked,
     fps_MAX
 };
 
@@ -165,6 +165,8 @@ struct frame_part {
     GC gc;
 
     int clicked : 1;
+    int highlighted : 1;
+    int pending_refresh : 1;
 
     repv text;			/* may be nil, a string, or a function */
     repv x_justify, y_justify;
