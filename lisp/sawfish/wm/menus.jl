@@ -42,7 +42,8 @@
 	  sawfish.wm.frames
 	  sawfish.wm.commands
 	  sawfish.wm.util.groups
-	  sawfish.wm.workspace)
+	  sawfish.wm.workspace
+	  sawfish.wm.state.maximize)
 
   (define-structure-alias menus sawfish.wm.menus)
 
@@ -78,17 +79,14 @@ unused before killing it.")
   (define menu-timer nil)
 
   (defvar window-ops-menu
-    `((,(_ "_Close") delete-window)
+    `((,(_ "Minimize") iconify-window)
+      (,(lambda (w)
+	  (if (window-maximized-p w)
+	      (_ "Unmaximize")
+	    (_ "Maximize"))) maximize-window-toggle)
+      (,(_ "_Close") delete-window)
+      ()
       (,(_ "_Toggle") . window-ops-toggle-menu)
-      (,(_ "_Maximize")
-       (,(_ "_Vertically") maximize-window-vertically)
-       (,(_ "_Horizontally") maximize-window-horizontally)
-       (,(_ "_Both") maximize-window)
-       ()
-       (,(_ "Fill vertically") maximize-fill-window-vertically)
-       (,(_ "Fill horizontally") maximize-fill-window-horizontally)
-       (,(_ "Fill both") maximize-fill-window))
-       (,(_ "_Un-maximize") unmaximize-window)
       (,(_ "In _group") . window-group-menu)
       (,(_ "_Send window to")
        (,(_ "_Previous workspace") send-to-previous-workspace)
@@ -100,7 +98,7 @@ unused before killing it.")
        (,(_ "_Right") move-window-right)
        (,(_ "_Up") move-window-up)
        (,(_ "_Down") move-window-down))
-      (,(_ "_Depth")
+      (,(_ "Stacking")
        (,(_ "Raise") raise-window)
        (,(_ "Lower") lower-window)
        (,(_ "Upper layer") raise-window-depth)
@@ -198,6 +196,8 @@ unused before killing it.")
   (define (menu-preprocessor cell)
     (when cell
       (let ((label (car cell)))
+	(when (functionp label)
+	  (setq label (apply label (fluid menu-args))))
 	(cond ((functionp (cdr cell))
 	       (setq cell (apply (cdr cell) (fluid menu-args))))
 	      ((and (symbolp (cdr cell)) (not (null (cdr cell))))
