@@ -129,8 +129,11 @@ AC_ARG_WITH(gdk-pixbuf,
  [with_gdk_pixbuf=maybe])
 if test "$with_gdk_pixbuf" != "no"; then
   AC_MSG_CHECKING([for gdk_pixbuf (xlib version)])
-  GDK_PIXBUF_VERSION=`gnome-config gdk_pixbuf_xlib --modversion`
-  if test $? -eq 0; then
+  dnl gnome-config is the most broken shell script I've ever
+  dnl encountered. It often returns true even if it can't
+  dnl find the named module..!
+  if gnome-config gdk_pixbuf_xlib --cflags >/dev/null 2>&1; then
+    GDK_PIXBUF_VERSION=`gnome-config gdk_pixbuf_xlib --modversion`
     AC_MSG_RESULT($GDK_PIXBUF_VERSION)
     GDK_PIXBUF_CFLAGS=`gnome-config gdk_pixbuf_xlib --cflags`
     GDK_PIXBUF_LIBS=`gnome-config gdk_pixbuf_xlib --libs`
