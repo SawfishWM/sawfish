@@ -89,14 +89,24 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	    *mods |= EV_MOD_RELEASE;
 	if(*mods & ShiftMask)
 	{
+	    KeySym normal, shifted;
+	    normal = XKeycodeToKeysym (dpy, xev->xkey.keycode, 0);
+	    shifted = XKeycodeToKeysym (dpy, xev->xkey.keycode, 1);
+
 	    /* Some keys don't have keysym at index 1, if not treat it as
-	       normal keysym shifted.  */
-	    *code = XKeycodeToKeysym(xev->xany.display, xev->xkey.keycode, 1);
-	    if(*code == NoSymbol)
-		*code = XKeycodeToKeysym(xev->xany.display,
-					 xev->xkey.keycode, 0);
+	       normal keysym shifted.
+
+	       But if the keysym at index 1 is the same as that in index
+	       0, then remove the shift modifier */
+
+	    if (shifted == NoSymbol)
+		*code = normal;
 	    else
-		*mods &= ~ShiftMask;
+	    {
+		*code = shifted;
+		if (shifted == normal)
+		    *mods &= ~ShiftMask;
+	    }
 	}
 	else
 	    *code = XKeycodeToKeysym(xev->xany.display, xev->xkey.keycode, 0);
