@@ -70,8 +70,8 @@ A value between 0 and 1023 inclusive.")
 (defun sp-make-grid (rects &optional with-root)
   (let*
       ((grid (grid-from-rectangles rects with-root)))
-    (rplaca grid (sp-prune-points (car grid) sp-max-points))
-    (rplacd grid (sp-prune-points (cdr grid) sp-max-points))
+    (rplaca grid (sort (sp-prune-points (car grid) sp-max-points)))
+    (rplacd grid (sort (sp-prune-points (cdr grid) sp-max-points)))
     grid))
 
 (defun sp-prune-points (points max)
