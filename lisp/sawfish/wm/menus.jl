@@ -209,7 +209,9 @@ unused before killing it.")
       (menu-start-process)
       ;; prevent any depressed button being redrawn until the menu
       ;; is popped down
-      (frame-draw-mutex t)
+      ;; XXX expose events screw this up..
+      (when (clicked-frame-part)
+	(frame-draw-mutex t))
       ;; This function is probably called from a ButtonPress event,
       ;; so cancel the implicit pointer grab (to allow the menu's grab
       ;; to succeed)
