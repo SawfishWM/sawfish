@@ -56,6 +56,7 @@ exec rep "$0" "$@"
 		  (let ((options (cdr cell)))
 		    (let* ((check (assq 'check options))
 			   (group (cdr (assq 'group options)))
+			   (insensitive (cdr (assq 'insensitive options)))
 			   (last-widget (and group (group-id-ref group))))
 		      (cond (group
 			     (setq item (gtk-radio-menu-item-new-with-label-from-widget last-widget label))
@@ -65,7 +66,9 @@ exec rep "$0" "$@"
 			     (gtk-check-menu-item-set-show-toggle item t))
 			    (t (setq item (gtk-menu-item-new-with-label label))))
 		      (when check
-			(gtk-check-menu-item-set-state item (cdr check)))))
+			(gtk-check-menu-item-set-state item (cdr check)))
+		      (when insensitive
+			(gtk-widget-set-sensitive item nil))))
 		  (gtk-signal-connect
 		   item "activate" (lambda ()
 				     (setq menu-selected (car cell)))))
