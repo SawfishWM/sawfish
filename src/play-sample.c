@@ -544,7 +544,7 @@ rep_dl_init (void)
 }
 
 void
-rep_dl_exit (void)
+rep_dl_kill (void)
 {
     if (!batch_mode_p ())
 	gnome_sound_shutdown ();
