@@ -34,6 +34,7 @@
 
     defcustom defgroup custom-declare-variable custom-declare-group
     custom-quote-keys custom-set-property custom-set-group-property
+    custom-option-alist custom-group-option-alist
 
     window-actual-group-id windows-by-group windows-in-group
     map-window-group window-group-ids
