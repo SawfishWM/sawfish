@@ -109,12 +109,11 @@ list of strings DIRS."
 
 (define (current-head #!optional (w (input-focus)))
   "Return the ID of the `current' head."
-  (if w
-      (let ((point (window-position w))
-	    (dims (window-dimensions w)))
-	(find-head (+ (car point) (quotient (car dims) 2))
-		   (+ (cdr point) (quotient (cdr dims) 2))))
-    (find-head (query-pointer))))
+  (or (and w (let ((point (window-position w))
+		   (dims (window-dimensions w)))
+	       (find-head (+ (car point) (quotient (car dims) 2))
+			  (+ (cdr point) (quotient (cdr dims) 2)))))
+      (find-head (query-pointer))))
 
 (define (current-head-dimensions #!optional w)
   "Return a cons-cell defining the size in pixels of the current head (that
