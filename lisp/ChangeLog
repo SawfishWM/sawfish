@@ -1,4 +1,25 @@
+1999-11-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* move-resize.jl (move-resize-window): don't abort if it's not
+	possible to grab the keyboard, only the ESC binding depends on it
+
+	* edge-flip.jl (edge-flip-type): new option, allows the user to
+	choose to flip workspaces, not viewports
+
+1999-11-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome-menu.jl: catch and ignore errors when opening files
+
+	* maximize.jl (maximize-fill-window): use dont-avoid-ignored
+	variable instead of non-existent avoid-ignored
+
+	* functions.jl (dont-avoid-ignored): set to t by default
+
+	* frames.jl (find-all-frame-styles): ignore duplicates
+
 1999-10-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.15
 
 	* move-resize.jl (move-resize-motion): use call-window-hook to
 	invoke the while-moving-hook and while-resizing-hook

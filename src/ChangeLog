@@ -1,4 +1,14 @@
+1999-11-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (Qafter_framing_hook): new hook, called after both
+	set-window-frame and rebuild-frame
+
+	* sawmill.h (POINTER_GRAB_EVENTS): use PointerMotionMask
+	instead of ButtonMotionMask
+
 1999-10-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.15
 
 	* keys.c (translate_event_to_x_button): don't ignore non Click1
 	events
