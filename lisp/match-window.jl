@@ -63,6 +63,7 @@
     (ignore-program-position boolean)
     (raise-on-focus boolean)
     (never-focus boolean)
+    (ungrouped boolean)
     (group symbol ,(lambda ()
 		     (delete-if-not symbolp (window-group-ids))))
     (place-mode symbol ,(lambda ()
@@ -307,4 +308,9 @@
   (put 'frame-type 'match-window-setter
        (lambda (w prop value)
 	 (window-put w 'type (or (cdr (assq value match-window-types))
-				 value)))))
+				 value))))
+
+  (put 'ungrouped 'match-window-setter
+       (lambda (w prop value)
+	 (when value
+	   (add-window-to-new-group w)))))
