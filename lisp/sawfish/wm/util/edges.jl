@@ -34,20 +34,17 @@
   (define-structure-alias edges sawfish.wm.util.edges)
 
   (define (get-visible-window-edges #!key with-ignored-windows
-				    windows-to-ignore (windows t) include-root)
+				    windows-to-ignore (windows t)
+				    include-screen include-heads)
     "Returns (X-EDGES . Y-EDGES), X-EDGES is a list of (X Y1 Y2 OPEN-P),
 and Y-EDGES is a list of (Y X1 X2 OPEN-P). OPEN-P is t if the edge is
 the left or top edge of a window. For the root window, the meaning of
 OPEN-P is reversed.
 
-The returned lists may contain duplicates, and are unsorted.
+#:include-heads may be a list of head ids, or a true non-list, in which
+case all heads are included.
 
-The possible keyword arguments to this function are:
-
-	#:with-ignored-windows t
-	#:windows-to-ignore LIST
-	#:windows LIST
-	#:include-root t"
+The returned lists may contain duplicates, and are unsorted."
 
     (let (x-edges y-edges)
       (map-windows
@@ -75,25 +72,39 @@ The possible keyword arguments to this function are:
 					   (+ (car coords) (car dims))
 					   nil)
 				     y-edges)))))))
-      (when include-root
-	(do ((i 0 (1+ i)))
-	    ((= i (head-count)))
-	  (let ((dims (head-dimensions i))
-		(offset (head-offset i)))
-	    (setq x-edges (list* (list (car offset)
-				       (cdr offset)
-				       (+ (cdr offset) (cdr dims)) nil)
-				 (list (+ (car offset) (car dims))
-				       (cdr offset)
-				       (+ (cdr offset) (cdr dims)) t)
-				 x-edges))
-	    (setq y-edges (list* (list (cdr offset)
-				       (car offset)
-				       (+ (car offset) (car dims)) nil)
-				 (list (+ (cdr offset) (cdr dims))
-				       (car offset)
-				       (+ (car offset) (car dims)) t)
-				 y-edges)))))
+
+      (when include-screen
+	(setq x-edges (list* (list 0 0 (screen-height) nil)
+			     (list (screen-width) 0 (screen-height) t)
+			     x-edges))
+	(setq y-edges (list* (list 0 0 (screen-width) nil)
+			     (list (screen-height) 0 (screen-width) t)
+			     y-edges)))
+
+      (when (and include-heads (not (listp include-heads)))
+	(setq include-heads (do ((i 0 (1+ i))
+				 (lst '() (cons i lst)))
+				((= i (head-count)) lst))))
+      (when include-heads
+	(mapc (lambda (h)
+		(let ((dims (head-dimensions h))
+		      (offset (head-offset h)))
+		  (setq x-edges (list* (list (car offset)
+					     (cdr offset)
+					     (+ (cdr offset) (cdr dims)) nil)
+				       (list (+ (car offset) (car dims))
+					     (cdr offset)
+					     (+ (cdr offset) (cdr dims)) t)
+				       x-edges))
+		  (setq y-edges (list* (list (cdr offset)
+					     (car offset)
+					     (+ (car offset) (car dims)) nil)
+				       (list (+ (cdr offset) (cdr dims))
+					     (car offset)
+					     (+ (car offset) (car dims)) t)
+				       y-edges))))
+	      include-heads))
+	
       (cons x-edges y-edges)))
 
   (define (grid-from-edges x-edges y-edges)
