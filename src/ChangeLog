@@ -1,3 +1,16 @@
+2000-01-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (Fframe_part_put): only set values in the new
+	`local_alist' field, in case `alist' is shared by multiple
+	frame parts (the `local_alist' is scanned first)
+	* sawmill.h (struct frame_part): new field `local_alist'
+
+	* frames.c (Frebuild_frame_part): new function, analogous to
+	Frebuild_frame (), but for a specific part of the frame
+
+	* events.c (subtract_timestamps): made this function actually
+	work (return negative values when necessary)
+
 2000-01-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.c (Fdisplay_message): fixed specifying foreground

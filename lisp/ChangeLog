@@ -1,4 +1,14 @@
+2000-01-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* iconify.jl (uniconify-window): when removing a window to put
+	it onto the current workspace, ensure it's not hidden
+	temporarily
+
 2000-01-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome.jl (gnome-client-message-handler): change how
+	WIN_STICKY and WIN_SHADED states are handled, don't bother with
+	the cumbersome toggle method, just set the states directly
 
 	* functions.jl (call-after-property-changed): can now be given
 	a _list_ of X properties to monitor
