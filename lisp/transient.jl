@@ -31,6 +31,12 @@
   :group focus
   :type boolean)
 
+(defcustom decorate-transients nil
+  "Decorate dialog windows similarly to application windows."
+  :type boolean
+  :group appearance
+  :after-set after-setting-frame-option)
+
 
 ;; functions
 
@@ -98,6 +104,19 @@ lowest possible position. Otherwise raise it as far as allowed. Also changes
 the level of any transient windows it has."
   (interactive "%W")
   (raise-lower-windows w (transient-group w t)))
+
+
+;; displaying
+
+(defun transient-frame-type (w type)
+  (if (and decorate-transients (window-transient-p w))
+      (case type
+	((transient) 'default)
+	((shaped-transient) 'shaped)
+	(t type))
+      type))
+
+(define-frame-type-mapper transient-frame-type)
 
 
 ;; hooks
