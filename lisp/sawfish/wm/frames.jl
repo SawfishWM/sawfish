@@ -148,6 +148,9 @@ that overrides settings set elsewhere.")
 ;; files they were loaded from; used to check if the theme needs reloading
 (defvar frame-style-files nil)
 
+;; List of styles that can be edited using sawmill-themer
+(defvar editable-frame-styles nil)
+
 ;; used when decorate-transients is non-nil, map transient window
 ;; types to type to pass to frame style function
 (defvar transient-normal-frame-alist '((transient . default)
@@ -161,6 +164,8 @@ that overrides settings set elsewhere.")
 
 (defvar themes-are-gaolled t
   "When non-nil themes are assumed to be malicious.")
+
+(defvar sawmill-themer-program "sawmill-themer")
 
 
 ;; managing frame styles
@@ -258,6 +263,22 @@ that overrides settings set elsewhere.")
 		(reload-frame-style style))))
 	  frame-style-files)))
 
+(defun mark-frame-style-editable (style)
+  (unless (memq style editable-frame-styles)
+    (setq editable-frame-styles (cons style editable-frame-styles))))
+
+(defun frame-style-editable-p (style)
+  (memq style editable-frame-styles))
+
+(defun edit-frame-style (style)
+  (interactive (list default-frame-style))
+  (if (not (memq style editable-frame-styles))
+      (beep)
+    (let
+	((dir (find-frame-style style)))
+      (when dir
+	(system (format nil "%s %s &" sawmill-themer-program dir))))))
+
 
 ;; kludge different window decors by modifying the assumed window type
 
@@ -337,7 +358,7 @@ that overrides settings set elsewhere.")
 	    theme-suffix-regexps)
       nil)))
 
-(defun load-frame-style (name)
+(defun find-frame-style (name)
   (catch 'out
     (mapc (lambda (dir)
 	    (mapc (lambda (suf)
@@ -348,18 +369,20 @@ that overrides settings set elsewhere.")
 		      (when (file-exists-p t-dir)
 			(setq tem (frame-style-directory t-dir))
 			(when tem
-			  (let
-			      ((image-load-path
-				(cons tem image-load-path)))
-			    (if themes-are-gaolled
-				(gaol-load
-				 (expand-file-name "theme.jl" tem) nil t t)
-			      (load
-			       (expand-file-name "theme" tem) nil t))
-			    (throw 'out t))))))
+			  (throw 'out tem)))))
 		  theme-suffixes))
 	  theme-load-path)
     nil))
+
+(defun load-frame-style (name)
+  (let
+      ((dir (find-frame-style name)))
+    (when dir
+      (let
+	  ((image-load-path (cons dir image-load-path)))
+	(if themes-are-gaolled
+	    (gaol-load (expand-file-name "theme.jl" dir) nil t t)
+	  (load (expand-file-name "theme" dir) nil t))))))
 
 (defun find-all-frame-styles (&optional sorted)
   (let
