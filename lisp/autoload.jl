@@ -38,7 +38,9 @@
 (autoload 'substitute-keymap-event "keymap")
 (autoload 'where-is "keymap")
 (autoload 'read-event "keymap")
-(autoload-macro 'lazy-bind-keys "keymap")
+(when (boundp 'autoload-macro)
+  ;; XXX rep 0.11+
+  (autoload-macro 'lazy-bind-keys "keymap"))
 (autoload 'quote-event "keymap" t)
 (autoload 'next-workspace-window "cycle" t)
 (autoload 'previous-workspace-window "cycle" t)
