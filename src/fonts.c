@@ -27,7 +27,6 @@ static Lisp_Font *font_list;
 int font_type;
 
 DEFSYM(default_font, "default-font");
-DEFSYM(fonts_are_fontsets, "fonts-are-fontsets");
 
 static XFontSet x_create_font_set (char *xlfd, char ***missing,
 				   int *nmissing, char **def_string);
@@ -450,9 +449,6 @@ fonts_init (void)
     rep_ADD_SUBR(Sfont_height);
     rep_ADD_SUBR(Sfont_ascent);
     rep_ADD_SUBR(Sfont_descent);
-
-    rep_INTERN_SPECIAL(fonts_are_fontsets);
-    Fset (Qfonts_are_fontsets, Qt);
 
     rep_INTERN_SPECIAL(default_font);
     if (!batch_mode_p ())

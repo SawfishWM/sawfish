@@ -89,6 +89,8 @@ DEFSYM(before_exit_hook, "before-exit-hook");
 DEFSYM(rep, "rep");
 #endif
 
+DEFSYM(fonts_are_fontsets, "fonts-are-fontsets");
+
 static rep_bool
 on_idle (int since_last)
 {
@@ -204,6 +206,9 @@ sawfish_symbols (void)
     Fset (Qerror_mode, Qtop_level);
     Fset (Qinterrupt_mode, Qtop_level);
 
+    rep_INTERN_SPECIAL(fonts_are_fontsets);
+    Fset (Qfonts_are_fontsets, Qt);
+
     rep_ADD_SUBR_INT(Squit);
     rep_ADD_SUBR_INT(Srestart);
 
@@ -317,11 +322,11 @@ main(int argc, char **argv)
     volatile int rc = 5;
     char **old_argv = argv;
     int old_argc = argc;
+    char *lang;
 
     prog_name = *argv++; argc--;
-    setlocale(LC_ALL, "");
+    lang = setlocale(LC_ALL, "");
     rep_init (prog_name, &argc, &argv, 0, usage);
-
     stash_argv (old_argc, old_argv);
 
     if (rep_get_option ("--version", 0))
@@ -340,6 +345,15 @@ main(int argc, char **argv)
     if (sys_init(prog_name))
     {
 	sawfish_symbols();
+
+	if (lang == 0
+	    || strcmp (lang, "C") == 0
+	    || strcmp (lang, "POSIX") == 0)
+	{
+	    /* if setlocale fails, or returns an ASCII locale, using
+	       fontsets fails to draw 8-bit characters. */
+	    Fset (Qfonts_are_fontsets, Qnil);
+	}
 
 	/* call all init funcs... */
 	session_init ();
