@@ -51,12 +51,18 @@
 	(or (load (concat (user-home-directory) ".reprc") t t)
 	    (load "rep-defaults" t))
 
-	;; then the sawmill specific user configuration
-	(or (load (concat (user-home-directory) ".sawmillrc") t t)
-	    (load "sawmill-defaults" t))
+	;; load these before customized settings (but only if there's
+	;; no .sawmillrc file)
+	(unless (or (file-exists-p "~/.sawmillrc")
+		    (file-exists-p "~/.sawmillrc.jl")
+		    (file-exists-p "~/.sawmillrc.jlc"))
+	  (load "sawmill-defaults" t))
 
 	;; then the customized options
 	(custom-load-user-file)
+
+	;; then the sawmill specific user configuration
+	(load "~/.sawmillrc" t t)
 
 	;; use a default theme if none given
 	(unless default-frame-style
