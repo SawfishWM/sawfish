@@ -33,8 +33,9 @@
 (defvar custom-default-file "custom-defaults"
   "Lisp library storing default customization settings.")
 
-(defvar custom-unquoted-keys
-  '(:group :require :type :options :allow-nil :range))
+(defvar custom-quoted-keys
+  '(:group :require :type :options :allow-nil :range)
+  "defcustom keys whose values are quoted by the macro expansion.")
 
 (defvar custom-option-alist '((:group . custom-group)
 			      (:require . custom-require)
@@ -50,45 +51,51 @@
 
 (defvar custom-group-option-alist '((:widget . custom-group-widget)))
 
-;; alist of (CLOSURE . SYMBOL) mapping custom-set functions to
-;; their names
-(defvar custom-set-alist nil)
+(defvar custom-set-alist nil
+  "Alist of (CLOSURE . SYMBOL) mapping custom-set functions to their names.")
 
-(defvar custom-menu-includes-all-settings t)
-
-;; (defcustom VARIABLE VALUE DOC &rest CUSTOM-KEYS)
-
-;; where CUSTOM-KEYS is a plist containing any of the following:
-
-;;	:group GROUP
-;;	:require FEATURE
-;;	:type TYPE
-;;	:options OPTIONS
-;;	:allow-nil t
-;;	:set FUNCTION
-;;	:get FUNCTION
-;;	:before-set FUNCTION
-;;	:after-set FUNCTION
-;;	:range (MIN . MAX)		for number type
-
-;; TYPE may be `boolean', `number', `string', `symbol',
-;; `file-name', `program-name', `font', `color'
-
-;; Each defcustom'd variable may have several special properties
-
-;;	custom-set (FUNCTION SYMBOL VALUE)
-;;	custom-get (FUNCTION SYMBOL)
-;;	custom-widget (FUNCTION SYMBOL VALUE DOC)
-
-;; these functions are used while constructing and responding to the
-;; customisation dialog. If not set in the symbol itself they may be
-;; inherited from the plist of the type of the variable.
-
-;; custom-set and custom-get may be used to translate data types to
-;; the string representation required by some widget types. custom-widget
-;; may construct the widget definition passed to the ui backend
+(defvar custom-menu-includes-all-settings t
+  "When non-nil, the custom menu includes the `All settings' item.")
 
 (defmacro defcustom (symbol value doc &rest keys)
+  "Define a new customization variable SYMBOL which initially has value
+VALUE (unless SYMBOL is already bound, in which case its value is not
+altered), and documentations string DOC.
+
+KEYS is a property-list containing any of the following:
+
+	:group GROUP
+	:require FEATURE
+	:type TYPE
+	:options OPTIONS
+	:range (MIN . MAX)		for `number' type
+	:allow-nil t
+	:set FUNCTION
+	:get FUNCTION
+	:before-set FUNCTION
+	:after-set FUNCTION
+	:widget FUNCTION
+
+TYPE may be `boolean', `number', `string', `symbol', `file-name',
+`program-name', `font', `color'.
+
+Note that the values of the `:group', `:require', `:type', `:options',
+`:allow-nil' and `:range' keys are not evaluated. All other key values
+are evaluated.
+
+Each defcustom'd symbol may have several special properties
+
+	custom-set (FUNCTION SYMBOL VALUE)
+	custom-get (FUNCTION SYMBOL)
+	custom-widget (FUNCTION SYMBOL VALUE DOC)
+
+These functions are used while constructing and responding to the
+customisation dialog. If not set in the symbol itself they may be
+inherited from the plist of the type of the variable.
+
+custom-set and custom-get may be used to translate data types to the
+string representation required by some widget types. custom-widget may
+construct the widget definition passed to the ui backend."
   (list 'defvar
 	symbol
 	(list 'custom-declare-variable
@@ -96,6 +103,13 @@
 	doc))
 
 (defmacro defgroup (symbol doc &rest keys)
+  "Declare a new custom group called SYMBOL, with English name DOC. The
+property list KEYS may contain the following key-value items:
+
+	:group PARENT-GROUP
+	:widget WIDGET-FUNCTION
+
+Note that the value of the `:group' key is not evaluated."
   (list 'custom-declare-group (list 'quote symbol)
 	doc (custom-quote-keys keys)))
 
@@ -147,7 +161,7 @@
   (let
       ((out nil))
     (while (and keys (cdr keys))
-      (if (memq (car keys) custom-unquoted-keys)
+      (if (memq (car keys) custom-quoted-keys)
 	  (setq out (cons (list 'quote (nth 1 keys))
 			  (cons (list 'quote (car keys)) out)))
 	(setq out (cons (nth 1 keys) (cons (list 'quote (car keys)) out))))
@@ -155,22 +169,28 @@
     (cons 'list (nreverse out))))
 
 (defmacro custom-set-property (sym prop value)
+  "Set the custom key PROP for defcustom'd symbol SYM to value." 
   `(let
        ((__prop__ (cdr (assq ,prop custom-option-alist))))
      (when __prop__
        (put ,sym __prop__ ,value))))
 
 (defmacro custom-set-group-property (group prop value)
+  "Set the custom key PROP for defgroup'd symbol SYM to value." 
   `(let
        ((__prop__ (cdr (assq ,prop custom-group-option-alist))))
      (when __prop__
        (put ,group __prop__ ,value))))
 
 (defmacro custom-add-option (sym option)
+  "Assuming that defcustom'd symbol SYM is of type `symbol', add the
+symbol OPTION to the list of choices."
   `(put ,sym 'custom-options
 	(nconc (get ,sym 'custom-options) (list ,option))))
 
 (defmacro custom-get-options (sym)
+  "Assuming that defcustom'd symbol SYM is of type `symbol', return the
+of choices."
   `(get ,sym 'custom-options))
 
 (defun custom-find-group (full-group)
@@ -242,6 +262,8 @@
 	     (list nil `(,(_"Edit theme...") edit-frame-style))))))
 
 (defun custom-add-required (feature)
+  "Add the symbol FEATURE to the list of modules required before
+running the configuration tool."
   (unless (memq feature custom-required)
     (setq custom-required (cons feature custom-required))))
 
@@ -304,6 +326,7 @@
 ;; loading user's customisations
 
 (defun custom-load-user-file ()
+  "Load the user's customization file, or the custom-default-file."
   (cond ((file-exists-p custom-user-file)
 	 (load custom-user-file t t t))
 	(custom-default-file

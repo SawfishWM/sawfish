@@ -48,8 +48,8 @@
 (defvar persistent-group-ids nil
   "List of group ids that always exist, even when they have no members.")
 
-;; return the id of the group that window W is a member of
 (defun window-actual-group-id (w)
+  "Return the id of the group that window W is a member of."
   (let
       (tem)
     (or (window-get w 'group)
@@ -60,32 +60,35 @@
 	     (or (window-get tem 'group) (window-group-id tem)))
 	(window-id w))))
 
-;; return the list of windows in the group with id GROUP-ID
 (defun windows-by-group (group-id)
+  "Return the list of windows in the group with id GROUP-ID."
   (delete-if-not (lambda (x)
 		   (eq (window-actual-group-id x) group-id))
 		 (managed-windows)))
 
-;; return the list of windows in the same group as window W
 (defun windows-in-group (w)
+  "Return the list of windows in the same group as window W."
   (let
       (group-id tem)
     (setq group-id (window-actual-group-id w))
     (windows-by-group group-id)))
 
-;; map FUN over all windows in the same group as window W
 (defun map-window-group (fun w)
+  "Map the single argument function FUN over all windows in the same group as
+window W."
   (mapc fun (windows-in-group w)))
 
 (defun map-other-window-groups (fun w)
+  "Map the single argument function FUN over all windows not in the same group
+as window W."
   (let
       ((group (windows-in-group w)))
     (map-windows (lambda (x)
 		   (unless (memq x group)
 		     (fun x))))))
 
-;; return list of all group ids
 (defun window-group-ids ()
+  "Return the list of all group ids."
   (let
       ((ids (copy-sequence persistent-group-ids))
        id)
@@ -95,12 +98,13 @@
 	      (setq ids (cons id ids)))) (managed-windows))
     ids))
 
-;; put window W in group with id GROUP-ID, returns GROUP-ID
 (defun add-window-to-group (w group-id)
+  "Put window W in group with id GROUP-ID; returns GROUP-ID."
   (window-put w 'group group-id))
 
-;; returns the id of the new group
 (defun add-window-to-new-group (w)
+  "Add window W to a new group (i.e. has W as its sole member); returns the id
+of the new group."
   (let
       ((ids (window-group-ids))
        (i -1))

@@ -21,20 +21,20 @@
 
 (provide 'edges)
 
-;; returns (X-EDGES . Y-EDGES), X-EDGES is a list of (X Y1 Y2 OPEN-P), and
-;; Y-EDGES is a list of (Y X1 X2 OPEN-P). OPEN-P is t if the edge is
-;; left or top edge of a window. For the root window, the meaning of
-;; OPEN-P is reversed
-
-;; the returned lists may contain duplicates, and are unsorted
-
-;; keywords:
-;;	:with-ignored-windows t
-;;	:windows-to-ignore LIST
-;;	:windows LIST
-;;	:include-root t
-
 (defun get-visible-window-edges (&rest args)
+  "Returns (X-EDGES . Y-EDGES), X-EDGES is a list of (X Y1 Y2 OPEN-P),
+and Y-EDGES is a list of (Y X1 X2 OPEN-P). OPEN-P is t if the edge is
+the left or top edge of a window. For the root window, the meaning of
+OPEN-P is reversed.
+
+The returned lists may contain duplicates, and are unsorted.
+
+The possible keyword arguments to this function are:
+
+	:with-ignored-windows t
+	:windows-to-ignore LIST
+	:windows LIST
+	:include-root t"
   (let
       ((with-ignored-windows (car (cdr (memq ':with-ignored-windows args))))
        (windows-to-ignore (car (cdr (memq ':windows-to-ignore args))))
@@ -76,6 +76,8 @@
     (cons x-edges y-edges)))
 
 (defun grid-from-edges (x-edges y-edges)
+  "Given lists of edges X-EDGES and Y-EDGES, return a cons cell
+`(X-POINTS . Y-POINTS)' describing the grid they represent."
   (cons (uniquify-list (mapcar car x-edges))
 	(uniquify-list (mapcar car y-edges))))
 

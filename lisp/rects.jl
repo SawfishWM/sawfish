@@ -28,22 +28,31 @@
 
 ;; rectangles
 
-;; assumes that X-POINTS and Y-POINTS are both sorted smallest->largest
-(defun rectangles-from-grid (x-points orig-y-points &optional pred)
+(defun rectangles-from-grid (x-points y-points &optional pred)
+  "The two lists of integers X-POINTS and Y-POINTS define a rectangular
+grid. Return the complete list of rectangles formed by the
+intersections of the grid.
+
+If PRED is defined, it is called for each rectangle, and only those for
+which it returns t are added to the returned list.
+
+Each rectangle is represented by a list `(LEFT TOP RIGHT BOTTOM)'.
+
+Assumes that X-POINTS and Y-POINTS are both sorted smallest->largest."
   (let
-      (rects left-x right-x top-y bottom-y y-points tem-x tem-y rect)
+      (rects left-x right-x top-y bottom-y tem-y-points tem-x tem-y rect)
     (while x-points
       (setq left-x (car x-points))
       (setq x-points (cdr x-points))
-      (setq y-points orig-y-points)
-      (while y-points
-	(setq top-y (car y-points))
-	(setq y-points (cdr y-points))
+      (setq tem-y-points y-points)
+      (while tem-y-points
+	(setq top-y (car tem-y-points))
+	(setq tem-y-points (cdr tem-y-points))
 	(setq tem-x x-points)
 	(while tem-x
 	  (setq right-x (car tem-x))
 	  (setq tem-x (cdr tem-x))
-	  (setq tem-y y-points)
+	  (setq tem-y tem-y-points)
 	  (while tem-y
 	    (setq bottom-y (car tem-y))
 	    (setq tem-y (cdr tem-y))
@@ -52,8 +61,14 @@
 	      (setq rects (cons rect rects)))))))
     (nreverse rects)))
 
-;; returns a list of (LEFT TOP RIGHT BOTTOM [OVERLAP-WEIGHT])
 (defun rectangles-from-windows (windows &optional weight-fun)
+  "Returns a list of (LEFT TOP RIGHT BOTTOM [OVERLAP-WEIGHT])
+representing the rectangles represented by the list of window objects
+WINDOWS.
+
+If WEIGHT-FUN is defined, it is a function to call on each window to
+return the weight for that window. If not defined, the window's
+`weight' property is used instead."
   (mapcar (lambda (w)
 	    (let
 		((dims (window-frame-dimensions w))
@@ -68,8 +83,13 @@
 			  (list tem)))))
 	  windows))
 
-;; returns (X-POINTS . Y-POINTS)
 (defun grid-from-rectangles (rects &optional with-root)
+  "Given a list of rectangles RECTS (each rectangle represented by a
+list of at least four elemements, `(LEFT TOP RIGHT BOTTOM)'), return
+a cons cell `(X-POINTS . Y-POINTS)' defining the grid they represent.
+
+If WITH-ROOT is non-nil, then add the root window boundaries to the
+grid."
   (let
       ((x-edges (nconc (mapcar car rects)
 		       (mapcar (lambda (x) (nth 2 x)) rects)))
@@ -81,21 +101,21 @@
     (cons (uniquify-list x-edges) (uniquify-list y-edges))))
 
 (defmacro rectangle-area (rect)
+  "Given a rectangle RECT, return its area."
   `(* (- (nth 2 ,rect) (nth 0 ,rect))
       (- (nth 3 ,rect) (nth 1 ,rect))))
 
 
 ;; overlap
 
-;; returns the overlap between two 1d line segments, A-1 to A-2, and
-;; B-1 to B-2
 (defmacro rect-1d-overlap (a-1 a-2 b-1 b-2)
+  "Returns the overlap between two 1D line segments, A-1 to A-2, and
+B-1 to B-2."
   `(max 0 (- (min ,a-2 ,b-2) (max ,a-1 ,b-1))))
 
-;; returns the overlap between two rectangles, one defined as having
-;; dimensions DIMS and origin POINT, while the other is defined
-;; by RECT
 (defun rect-2d-overlap (dims point rect)
+  "Returns the overlap between two rectangles, one defined as having
+dimensions DIMS and origin POINT, while the other is defined by RECT."
   (* (rect-1d-overlap (car point) (+ (car point) (car dims))
 		      (car rect) (nth 2 rect))
      (rect-1d-overlap (cdr point) (+ (cdr point) (cdr dims))
@@ -103,18 +123,17 @@
      ;; include the weight of the rectangle if it has one
      (or (nth 4 rect) 1)))
 
-;; similar but for two rectangles
 (defun rect-2d-overlap* (rect1 rect2)
+  "Returns the overlap between two rectangles, RECT1 and RECT2."
   (* (rect-1d-overlap (car rect1) (nth 2 rect1) (car rect2) (nth 2 rect2))
      (rect-1d-overlap (nth 1 rect1) (nth 3 rect1) (nth 1 rect2) (nth 3 rect2))
      ;; include the weight of the rectangle if it has one
      (or (nth 4 rect1) 1)
      (or (nth 4 rect2) 1)))
 
-;; returns the total area of the overlap between a rectangle defined by
-;; DIMS and POINT, and the list of rectangles RECTS
-;; when placed at POINT
 (defun rect-total-overlap (dims point rects)
+  "Returns the total area of the overlap between a rectangle defined by
+DIMS and POINT, and the list of rectangles RECTS when placed at POINT."
   (let
       ((total 0))
     (mapc (lambda (r)
@@ -122,7 +141,7 @@
 	  rects)
     total))
 
-;; return t if RECT is a subset of the screen area
 (defun rect-wholly-visible-p (rect)
+  "Return t if RECT is completely inside the screen boundaries."
   (and (>= (car rect) 0) (>= (nth 1 rect) 0)
        (<= (nth 2 rect) (screen-width)) (<= (nth 3 rect) (screen-height))))
