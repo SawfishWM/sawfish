@@ -565,20 +565,17 @@ x_window_event_handler (XEvent *ev)
     if (win != Qnil && VX_DRAWABLE (win)->event_handler != Qnil)
     {
 	repv type = Qnil, args = Qnil;
-	if (win != Qnil)
+	switch (ev->type)
 	{
-	    switch (ev->type)
-	    {
-	    case Expose:
-		type = Qexpose;
-		break;
+	case Expose:
+	    type = Qexpose;
+	    break;
 
-		/* XXX other event types..? */
-	    }
+	    /* XXX other event types..? */
 	}
 	if (type != Qnil)
 	{
-	    args = Fcons (type, args);
+	    args = Fcons (type, Fcons (win, args));
 	    rep_funcall (VX_DRAWABLE (win)->event_handler, args, rep_FALSE);
 	}
     }
