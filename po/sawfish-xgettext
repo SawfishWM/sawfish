@@ -41,6 +41,9 @@ exec rep "$0" "$@"
        (let ((tooltip (cadr (get-key ':tooltip keys))))
 	 (when tooltip
 	   (setq doc (concat doc "\n\n" tooltip))))
+       (let ((type* (cadr (get-key ':type* keys))))
+	 (when type*
+	   (scan type*)))
        (when (stringp doc)
 	 (register doc))))
 
