@@ -1,3 +1,12 @@
+1999-09-17  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (list_frame_generator): try to prevent weird shaped
+	frames being created for very small client windows. The rule is
+	that if a frame part's position is specified by a single edge,
+	and it overlaps the opposite edge of the client window, then
+	truncate the part to that edge. This still isn't perfect, but
+	at least the border is always correct
+
 1999-09-16  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c: added Mod5 to list of accepted modifiers

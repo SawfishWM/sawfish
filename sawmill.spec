@@ -42,10 +42,10 @@ make CFLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/%{_prefix}/share/gnome/wm-properties
-mkdir -p $RPM_BUILD_ROOT/%{_prefix}/share/control-center
-make prefix=$RPM_BUILD_ROOT/%{_prefix} install
-gzip -9nf $RPM_BUILD_ROOT/%{_prefix}/info/sawmill*
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome/wm-properties
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/control-center
+make prefix=$RPM_BUILD_ROOT%{_prefix} install
+gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawmill*
 
 %files
 %doc README NEWS TODO
