@@ -21,6 +21,7 @@
 
 (eval-when-compile (require 'match-window))
 
+(require 'tables)
 (provide 'window-history)
 
 ;; Commentary:
@@ -44,8 +45,8 @@
 (defvar window-history-file "~/.sawfish/window-history"
   "Name of the file used to store persistent window state.")
 
-;; an alist mapping encoded WM_CLASS text property to state alist
-(define window-history-state t)
+;; a hash table mapping encoded WM_CLASS text property to state alist
+(define window-history-state nil)
 
 ;; non-nil when window-history-state contains unsaved changes
 (define window-history-dirty nil)
@@ -86,13 +87,20 @@
 (define (window-history-key w)
   (nth 2 (get-x-property w window-history-key-property)))
 
-(define (window-history-find w)
+(define (window-history-ref w)
+  (window-history-load)
+  (table-ref window-history-state (window-history-key w)))
+
+(define (window-history-set w alist)
   (let ((class (window-history-key w)))
     (window-history-load)
-    (assoc class window-history-state)))
+    (if alist
+	(table-set window-history-state class alist)
+      (table-unset window-history-state class))
+    (setq window-history-dirty t)))
 
 (define (window-history-match w)
-  (let ((alist (cdr (window-history-find w))))
+  (let ((alist (window-history-ref w)))
     (when alist
       (window-history-apply w alist))))
 
@@ -101,31 +109,30 @@
 
 (define (window-history-snapshotter w state)
   (unless (window-get w 'no-history)
-    (let* ((alist (window-history-find w))
+    (let* ((alist (window-history-ref w))
 	   (value (if (get state 'window-history-snapshotter)
 		      ((get state 'window-history-snapshotter) w)
 		    (window-get w state)))
-	   (cell (assq state (cdr alist))))
-      (unless alist
-	(setq alist (list (window-history-key w)))
-	(setq window-history-state (cons alist window-history-state)))
+	   (cell (assq state alist)))
       (cond ((and value cell)
 	     (rplacd cell value))
 	    (value
-	     (rplacd alist (cons (cons state value) (cdr alist))))
+	     (setq alist (cons (cons state value) alist)))
 	    (cell
-	     (rplacd alist (delq cell (cdr alist)))))
-      (setq window-history-dirty t))))
+	     (setq alist (delq cell alist))))
+      (window-history-set w alist))))
 
 (put 'position 'window-history-snapshotter window-absolute-position)
 (put 'dimensions 'window-history-snapshotter window-dimensions)
 
 (define (window-history-position-snapshotter w)
-  (when window-history-save-position
+  (when (and window-history-save-position
+	     (not (window-get w 'fixed-position)))
     (window-history-snapshotter w 'position)))
 
 (define (window-history-dimensions-snapshotter w)
-  (when window-history-save-dimensions
+  (when (and window-history-save-dimensions
+	     (not (window-get w 'fixed-position)))
     (window-history-snapshotter w 'dimensions)))
 
 (define (window-history-state-snapshotter w states)
@@ -137,11 +144,7 @@
 (defun window-history-forget (w)
   "Forget any persistent state associated with the current window."
   (interactive "%W")
-  (let
-      ((alist (window-history-find w)))
-    (when alist
-      (setq window-history-state (delq alist window-history-state))
-      (setq window-history-dirty t))))
+  (window-history-set w nil))
 
 
 ;; restoring attributes
@@ -174,8 +177,8 @@
 ;; saving and loading state
 
 (define (window-history-load)
-  (unless (listp window-history-state)
-    (setq window-history-state nil)
+  (unless window-history-state
+    (setq window-history-state (make-table equal-hash equal))
     (setq window-history-dirty nil)
     (when (file-exists-p window-history-file)
       (let
@@ -184,10 +187,9 @@
 	  (unwind-protect
 	      (condition-case nil
 		  (while t
-		    (setq window-history-state (cons (read file)
-						     window-history-state)))
-		(end-of-stream
-		 (setq window-history-state (nreverse window-history-state))))
+		    (let ((cell (read file)))
+		      (table-set window-history-state (car cell) (cdr cell))))
+		(end-of-stream))
 	    (close-file file)))))))
 
 (define (window-history-save)
@@ -204,8 +206,9 @@
 				   ";; sawfish version %s; %s\n\n")
 		      (user-login-name) (system-name)
 		      sawfish-version (current-time-string))
-	      (mapc (lambda (x)
-		      (sm-print-alist file x)) window-history-state)
+	      (table-walk (lambda (key value)
+			    (sm-print-alist file (cons key value)))
+			  window-history-state)
 	      (setq window-history-dirty nil))
 	  (close-file file))))))
 
