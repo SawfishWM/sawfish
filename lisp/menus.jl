@@ -68,12 +68,13 @@ unused before killing it.")
      ("Horizontally" maximize-window-horizontally)
      ("Both" maximize-window))
     ("Un-maximize" unmaximize-window)
-    ("Frame"
+    ("Frame type"
      ("Normal" set-frame:default)
      ("Title-only" set-frame:shaped)
      ("Border-only" set-frame:transient)
      ("Top-border" set-frame:shaped-transient)
-     ("None" set-frame:unframed))))
+     ("None" set-frame:unframed))
+    ("Frame style" . frame-style-menu)))
 
 (defvar root-menu
   '(("Workspaces" . workspace-menu)
