@@ -273,7 +273,7 @@ any entered arg is given to the invoked COMMAND.
 			break;
 		    case 'W':
 			arg = Fcurrent_event_window ();
-			if (arg == Qnil)
+			if (arg == Qnil || arg == Qroot)
 			    arg = Finput_focus ();
 			break;
 		    default:
@@ -381,8 +381,9 @@ can be either,
 	p	The numeric prefix arg
 	P	The raw prefix arg
 	w	The window that received the current event
-	W	Either the window that received the event, or
-		 the window with the input focus
+	W	Either the window that received the event (provided
+		 that it wasn't the root window), or the window with
+		 the input focus
 
     A null line produces an argument of nil.
 
