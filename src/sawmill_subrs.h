@@ -184,7 +184,6 @@ extern void images_kill (void);
 
 /* from keys.c */
 extern repv Qglobal_keymap, Qunbound_key_hook, Qkeymap;
-extern bool (*event_proxy_fun)(XEvent *ev, long code, long mods);
 extern repv eval_input_event (repv context_map);
 extern repv Fmake_keymap (void);
 extern repv Fmake_sparse_keymap (repv base);
