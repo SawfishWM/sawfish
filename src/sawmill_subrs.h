@@ -73,12 +73,13 @@ extern void (*event_handlers[LASTEvent])(XEvent *ev);
 extern Time last_event_time;
 extern XEvent *current_x_event;
 extern repv Qvisibility_notify_hook, Qdestroy_notify_hook, Qmap_notify_hook,
-    Qunmap_notify_hook, Qenter_notify_hook, Qleave_notify_hook,
-    Qfocus_in_hook, Qfocus_out_hook, Qclient_message_hook;
+    Qunmap_notify_hook, Qreparent_notify_hook, Qenter_notify_hook,
+    Qleave_notify_hook, Qfocus_in_hook, Qfocus_out_hook, Qclient_message_hook;
 extern repv Qiconify_window, Quniconify_window;
 extern void unclick_current_fp (void);
 extern void map_request (XEvent *ev);
 extern void send_synthetic_configure (Lisp_Window *w);
+extern long get_event_mask (int type);
 extern void handle_input_mask(long mask);
 extern void handle_sync_input(int fd);
 extern repv Fquery_pointer (repv get);
@@ -104,6 +105,7 @@ extern void fonts_kill (void);
 extern repv Qdefault_frame, Qnil_frame;
 extern void set_frame_part_bg (struct frame_part *fp);
 extern void set_frame_part_fg (struct frame_part *fp);
+extern void refresh_frame_part (struct frame_part *fp);
 extern void create_window_frame (Lisp_Window *w);
 extern void destroy_window_frame (Lisp_Window *w);
 extern struct frame_part *find_frame_part_by_window (Window id);
@@ -167,7 +169,7 @@ extern repv Fungrab_keymap (repv map);
 extern repv Fcurrent_event_string (void);
 extern repv Fcurrent_event (void);
 extern repv Fcurrent_event_window (void);
-extern repv Fproxy_current_event (repv win);
+extern repv Fproxy_current_event (repv win, repv mask, repv prop);
 extern repv Flast_event (void);
 extern repv Fevent_name (repv ev);
 extern repv Flookup_event (repv name);
