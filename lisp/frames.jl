@@ -30,9 +30,17 @@
   :group appearance)
 
 (defcustom always-update-frames t
-  "Update all existing window frames when default frame style is changed."
+  "Update all existing window frames when frame style is changed."
   :type boolean
   :group appearance)
+
+(defcustom decorate-transients nil
+  "Decorate transient windows in the same way as non-transient windows."
+  :type boolean
+  :group appearance
+  :after-set (lambda ()
+	       (when always-update-frames
+		 (reframe-all-windows))))
 
 (defvar frame-style-directory
   (expand-file-name "themes" sawmill-lisp-lib-directory))
@@ -40,6 +48,11 @@
 
 (defvar frame-styles nil
   "List of (NAME . FUNCTION) defining all loaded frame styles.")
+
+;; used when decorate-transients is non-nil, map transient window
+;; types to type to pass to frame style function
+(defvar transient-normal-frame-alist '((transient . default)
+				       (shaped-transient . shaped)))
 
 
 ;; managing frame styles
@@ -66,7 +79,11 @@
     (let*
 	((style (or (window-get w 'frame-style) default-frame-style))
 	 (type (window-type w))
-	 (fun (cdr (assq style frame-styles))))
+	 fun tem)
+      (when (and decorate-transients
+		 (setq tem (cdr (assq type transient-normal-frame-alist))))
+	(setq type tem))
+      (setq fun (cdr (assq style frame-styles)))
       (set-window-frame w (or (funcall fun w type)
 			      default-frame)))))
 
