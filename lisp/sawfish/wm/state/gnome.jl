@@ -49,7 +49,7 @@
   (let
       ((total 0))
     (mapc #'(lambda (space)
-	      (when (eq space ws-current-workspace)
+	      (when (eq space current-workspace)
 		(set-x-property 'root '_WIN_WORKSPACE
 				(vector total) 'CARDINAL 32))
 	      (mapc #'(lambda (w)
@@ -57,7 +57,7 @@
 					(vector total) 'CARDINAL 32))
 		    (cdr space))
 	      (setq total (1+ total)))
-	  ws-workspaces)
+	  workspace-list)
     (set-x-property 'root '_WIN_WORKSPACE_COUNT (vector total) 'CARDINAL 32)))
 
 (defun gnome-set-client-state (w)

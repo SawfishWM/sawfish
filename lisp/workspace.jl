@@ -59,15 +59,15 @@
 ;; List of all workspaces; a workspace is `(workspace WINDOWS...)'.
 ;; Each window has its `workspace' property set to the workspace it's
 ;; a member of. [src/gnome.c accesses this variable]
-(defvar ws-workspaces nil)
+(defvar workspace-list nil)
 
 ;; Currently active workspace. [src/gnome.c accesses this variable]
-(defvar ws-current-workspace nil)
+(defvar current-workspace nil)
 
 (defvar static-workspace-menus
-  '(("Next" next-workspace)
+  '(("Insert" insert-workspace)
+    ("Next" next-workspace)
     ("Previous" previous-workspace)
-    ("Insert" insert-workspace)
     ("Merge next" merge-next-workspace)
     ("Merge previous" merge-previous-workspace)
     ("Move right" move-workspace-forwards)
@@ -81,8 +81,8 @@
   (unless (window-get w 'sticky)
     (rplacd space (nconc (cdr space) (list w)))
     (window-put w 'workspace space)
-    (when (and ws-current-workspace
-	       (eq space ws-current-workspace)
+    (when (and current-workspace
+	       (eq space current-workspace)
 	       (not (window-get w 'iconified)))
       (show-window w))
     (call-window-hook 'add-to-workspace-hook w)
@@ -97,18 +97,18 @@
 	       (window-transient-p w)
 	       (setq parent (get-window-by-id (window-transient-p w)))
 	       (window-get parent 'workspace)
-	       (not (eq (window-get parent 'workspace) ws-current-workspace)))
+	       (not (eq (window-get parent 'workspace) current-workspace)))
 	  ;; put the window on its parents workspace
 	  (ws-add-window-to-space w (window-get parent 'workspace))
-	(if (null ws-current-workspace)
+	(if (null current-workspace)
 	    (progn
 	      ;; initialisation
-	      (setq ws-current-workspace (list 'workspace w))
-	      (setq ws-workspaces (list ws-current-workspace))
-	      (call-hook 'add-workspace-hook (list ws-current-workspace)))
-	  (rplacd ws-current-workspace
-		  (nconc (delq w (cdr ws-current-workspace)) (list w))))
-	(window-put w 'workspace ws-current-workspace)
+	      (setq current-workspace (list 'workspace w))
+	      (setq workspace-list (list current-workspace))
+	      (call-hook 'add-workspace-hook (list current-workspace)))
+	  (rplacd current-workspace
+		  (nconc (delq w (cdr current-workspace)) (list w))))
+	(window-put w 'workspace current-workspace)
 	(unless (window-visible-p w)
 	  (show-window w))
 	(call-window-hook 'add-to-workspace-hook w))
@@ -135,17 +135,17 @@
       (rplacd space (delq w (cdr space)))
       (when (and delete-workspaces-when-empty (null (cdr space)))
 	;; workspace is now empty
-	(when (eq ws-current-workspace space)
-	  (if (= (length ws-workspaces) 1)
+	(when (eq current-workspace space)
+	  (if (= (length workspace-list) 1)
 	      ;; deleting the sole workspace!
 	      (progn
-		(setq ws-workspaces nil)
-		(setq ws-current-workspace nil))
-	    (ws-switch-workspace (or (nth 1 (memq space ws-workspaces))
+		(setq workspace-list nil)
+		(setq current-workspace nil))
+	    (ws-switch-workspace (or (nth 1 (memq space workspace-list))
 				     ;; deleted the last workspace
-				     (nth (- (length ws-workspaces) 2)
-					  ws-workspaces)))))
-	(setq ws-workspaces (delq space ws-workspaces))
+				     (nth (- (length workspace-list) 2)
+					  workspace-list)))))
+	(setq workspace-list (delq space workspace-list))
 	(call-hook 'delete-workspace-hook (list space)))
       (window-put w 'workspace nil)
       (call-window-hook 'remove-from-workspace-hook w (list space))
@@ -157,75 +157,75 @@
   (let
       ((space (list 'workspace)))
     (if at-end
-	(setq ws-workspaces (nconc ws-workspaces (list space)))
-      (setq ws-workspaces (cons space ws-workspaces)))
+	(setq workspace-list (nconc workspace-list (list space)))
+      (setq workspace-list (cons space workspace-list)))
     (call-hook 'add-workspace-hook (list space))
     space))
 
 (defun ws-insert-workspace ()
-  (if (null ws-workspaces)
+  (if (null workspace-list)
       (ws-add-workspace t)
     (let
 	((space (list 'workspace))
-	 (join (memq ws-current-workspace ws-workspaces)))
+	 (join (memq current-workspace workspace-list)))
       (rplacd join (cons space (cdr join)))
       (call-hook 'add-workspace-hook (list space))
       (call-hook 'workspace-state-change-hook)
       space)))
 
 (defun ws-find-next-workspace (&optional cycle)
-  (when (cdr ws-workspaces)
+  (when (cdr workspace-list)
     (let
-	((tem (nth 1 (memq ws-current-workspace ws-workspaces))))
-      (or tem (and cycle (car ws-workspaces))))))
+	((tem (nth 1 (memq current-workspace workspace-list))))
+      (or tem (and cycle (car workspace-list))))))
 
 (defun ws-find-previous-workspace (&optional cycle)
-  (when (cdr ws-workspaces)
+  (when (cdr workspace-list)
     (let
-	((tem ws-workspaces))
-      (while (and (cdr tem) (not (eq (nth 1 tem) ws-current-workspace)))
+	((tem workspace-list))
+      (while (and (cdr tem) (not (eq (nth 1 tem) current-workspace)))
 	(setq tem (cdr tem)))
       (and (or cycle (cdr tem))
 	   (car tem)))))
 
 (defun ws-switch-workspace (space)
-  (unless (eq ws-current-workspace space)
-    (when ws-current-workspace
-      (mapc 'hide-window (cdr ws-current-workspace))
-      (call-hook 'leave-workspace-hook (list ws-current-workspace)))
-    (setq ws-current-workspace space)
-    (when ws-current-workspace
+  (unless (eq current-workspace space)
+    (when current-workspace
+      (mapc 'hide-window (cdr current-workspace))
+      (call-hook 'leave-workspace-hook (list current-workspace)))
+    (setq current-workspace space)
+    (when current-workspace
       (mapc #'(lambda (w)
 		(unless (window-get w 'iconified)
-		  (show-window w))) (cdr ws-current-workspace))
-      (call-hook 'enter-workspace-hook (list ws-current-workspace))
+		  (show-window w))) (cdr current-workspace))
+      (call-hook 'enter-workspace-hook (list current-workspace))
       (call-hook 'workspace-state-change-hook))))
 
 (defun ws-merge-workspaces (src dest)
   ;; XXX doing this causes a nasty flicker of windows that
   ;; XXX get unmapped, moved, then re-mapped
-  (when (eq ws-current-workspace src)
+  (when (eq current-workspace src)
     (ws-switch-workspace dest))
   (while (cdr src)
     (let
 	((w (nth 1 src)))
       (ws-remove-window w)
       (ws-add-window-to-space w dest)))
-  (setq ws-workspaces (delq src ws-workspaces))
+  (setq workspace-list (delq src workspace-list))
   (call-hook 'delete-workspace-hook (list src))
   (call-hook 'workspace-state-change-hook))
 
 (defun ws-move-workspace (space count)
   (let*
-      ((current (- (length ws-workspaces)
-		   (length (memq space ws-workspaces))))
-       (desired (min (max 0 (+ current count)) (1- (length ws-workspaces))))
+      ((current (- (length workspace-list)
+		   (length (memq space workspace-list))))
+       (desired (min (max 0 (+ current count)) (1- (length workspace-list))))
        tem)
     (unless (= current desired)
-      (setq ws-workspaces (delq space ws-workspaces))
+      (setq workspace-list (delq space workspace-list))
       (if (zerop desired)
-	  (setq ws-workspaces (cons space ws-workspaces))
-	(setq tem (nthcdr (1- desired) ws-workspaces))
+	  (setq workspace-list (cons space workspace-list))
+	(setq tem (nthcdr (1- desired) workspace-list))
 	(rplacd tem (cons space (cdr tem))))
       (call-hook 'move-workspace-hook (list space))
       (call-hook 'workspace-state-change-hook))))
@@ -235,16 +235,16 @@
 
 (defun workspace-menu ()
   (let
-      ((tem ws-workspaces)
+      ((tem workspace-list)
        (i 0)
        menu)
     (while tem
       (setq menu (cons (list (format nil "space %d%s"
 				     (1+ i)
-				     (if (eq (car tem) ws-current-workspace)
+				     (if (eq (car tem) current-workspace)
 					 " *" ""))
 			     `(lambda ()
-				(ws-switch-workspace (nth ,i ws-workspaces))))
+				(ws-switch-workspace (nth ,i workspace-list))))
 		       menu))
       (setq tem (cdr tem))
       (setq i (1+ i)))
@@ -258,7 +258,7 @@
 (defun window-menu ()
   (let
       (menu space win name)
-    (setq space ws-workspaces)
+    (setq space workspace-list)
     (while space
       (setq win (cdr (car space)))
       (while win
@@ -330,7 +330,7 @@ will be created."
   "Focus on the next window of the current workspace."
   (interactive)
   (let
-      ((windows (filter 'window-visible-p (cdr ws-current-workspace))))
+      ((windows (filter 'window-visible-p (cdr current-workspace))))
     (display-window (or (nth 1 (memq (input-focus) windows))
 			(car windows)))))
 
@@ -339,13 +339,13 @@ will be created."
   (interactive)
   (catch 'out
     (let*
-	((space ws-current-workspace)
+	((space current-workspace)
 	 (windows (filter 'window-visible-p (cdr space)))
 	 (win (nth 1 (memq (input-focus) windows))))
       (while (not win)
-	(setq space (or (nth 1 (memq space ws-workspaces))
-			(car ws-workspaces)))
-	(when (or (not space) (eq space ws-current-workspace))
+	(setq space (or (nth 1 (memq space workspace-list))
+			(car workspace-list)))
+	(when (or (not space) (eq space current-workspace))
 	  (throw 'out nil))
 	(setq windows (filter #'(lambda (w)
 				  (not (window-get w 'iconified)))
@@ -358,23 +358,23 @@ will be created."
   "Activate workspace number INDEX (from zero)."
   (interactive "p")
   (let
-      ((space (nth index ws-workspaces)))
-    (when (and space (not (eq space ws-current-workspace)))
+      ((space (nth index workspace-list)))
+    (when (and space (not (eq space current-workspace)))
       (ws-switch-workspace space))))
 
 (defun merge-next-workspace ()
   "Delete the current workspace. Its member windows are relocated to the next
 workspace."
   (interactive)
-  (when (> (length ws-workspaces) 1)
-    (ws-merge-workspaces ws-current-workspace (ws-find-next-workspace t))))
+  (when (> (length workspace-list) 1)
+    (ws-merge-workspaces current-workspace (ws-find-next-workspace t))))
 
 (defun merge-previous-workspace ()
   "Delete the current workspace. Its member windows are relocated to the
 previous workspace."
   (interactive)
-  (when (> (length ws-workspaces) 1)
-    (ws-merge-workspaces ws-current-workspace (ws-find-previous-workspace t))))
+  (when (> (length workspace-list) 1)
+    (ws-merge-workspaces current-workspace (ws-find-previous-workspace t))))
 
 (defun insert-workspace ()
   "Create a new workspace following the current workspace."
@@ -384,12 +384,12 @@ previous workspace."
 (defun move-workspace-forwards (&optional count)
   "Move the current workspace one place to the right."
   (interactive)
-  (ws-move-workspace ws-current-workspace (or count 1)))
+  (ws-move-workspace current-workspace (or count 1)))
 
 (defun move-workspace-backwards (&optional count)
   "Move the current workspace one place to the left."
   (interactive)
-  (ws-move-workspace ws-current-workspace (- (or count 1))))
+  (ws-move-workspace current-workspace (- (or count 1))))
 
 
 ;; some commands for moving directly to a workspace
@@ -423,7 +423,7 @@ previous workspace."
   (interactive "f")
   (when (window-get w 'iconified)
     (window-put w 'iconified nil)
-    (cond ((eq (window-get w 'workspace) ws-current-workspace)
+    (cond ((eq (window-get w 'workspace) current-workspace)
 	   (show-window w))
 	  (uniconify-to-current-workspace
 	   (ws-remove-window w)
@@ -441,7 +441,7 @@ previous workspace."
 	(uniconify-window w)
       (let
 	  ((space (window-get w 'workspace)))
-	(when (and space (not (eq space ws-current-workspace)))
+	(when (and space (not (eq space current-workspace)))
 	  (ws-switch-workspace space))
 	(uniconify-window w)
 	(when raise-selected-windows
