@@ -333,7 +333,7 @@ A value between 0 and 1023 inclusive.")
 
 ;;;###autoload
 (defun place-window-first-fit-or-interactive (w)
-  (sp-do-placement w sp-fit-or-nil 'place-window-interactively))
+  (sp-do-placement w sp-fit-or-nil place-window-interactively))
 
 
 ;; reinitialise autoload defs

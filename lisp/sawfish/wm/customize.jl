@@ -44,7 +44,7 @@
   "Font used by default."
   :group appearance
   :type font
-  :after-set (lambda () after-setting-frame-option))
+  :after-set (lambda () (after-setting-frame-option)))
 
 
 ;; ui
