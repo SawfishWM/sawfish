@@ -160,8 +160,8 @@
    '("All settings" customize)
    '()
    (mapcar #'(lambda (group-list)
-	       (list (or (get (car group-list) 'custom-group-doc)
-			 (symbol-name (car group-list)))
+	       (list (_ (or (get (car group-list) 'custom-group-doc)
+			    (symbol-name (car group-list))))
 		     `(customize ',(car group-list)))) custom-groups)))
 
 
