@@ -204,6 +204,8 @@ get_window_protocols (Lisp_Window *w)
 {
     Atom *prot;
     u_int n;
+    w->does_wm_take_focus = 0;
+    w->does_wm_delete_window = 0;
     if (XGetWMProtocols (dpy, w->id, &prot, &n) != 0)
     {
 	int i;

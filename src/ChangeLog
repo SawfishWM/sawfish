@@ -1,3 +1,13 @@
+2001-11-12  John Harper  <jsh@unfactored.org>
+
+	Fixed bug of not rereading WM_WINDOW_PROTOCOLS when it changes:
+
+	* events.c (property_notify): call get_window_protocols on
+	WM_WINDOW_PROTOCOLS events
+
+	* windows.c (get_window_protocols): clear the window's
+	does_wm_X flags before reading the property
+
 2001-11-03  John Harper  <jsh@unfactored.org>
 
 	Fixed bug where Nautilus windows often don't get focused in

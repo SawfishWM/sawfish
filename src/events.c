@@ -571,6 +571,10 @@ property_notify (XEvent *ev)
 		if (w == focus_window)
 		    install_colormaps (w);
 	    }
+	    else if (ev->xproperty.atom == xa_wm_protocols)
+	    {
+		get_window_protocols (w);
+	    }
 	}
 
 	rep_PUSHGC (gc_w, w_);
