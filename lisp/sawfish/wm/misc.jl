@@ -40,6 +40,21 @@
 	 (progn ,@forms)
        (ungrab-server))))
 
+(define (call-with-server-ungrabbed thunk)
+  "Return the result of calling the zero-parameter function THUNK. If the
+server is currently grabbed, ungrab it first, restoring the original grab
+status after the call to THUNK returns."
+  (let loop ((counter 0))
+    (if (server-grabbed-p)
+	(progn
+	  (ungrab-server)
+	  (loop (1+ counter)))
+      (unwind-protect
+	  (thunk)
+	(do ((i 0 (1+ i)))
+	    ((= i counter))
+	  (grab-server))))))
+
 (define grab-counter 0)
 
 (define (call-with-keyboard-grabbed thunk)
@@ -146,7 +161,8 @@ the label of a menu item."
 
 ;; exports
 
-(export-bindings '(with-server-grabbed call-with-keyboard-grabbed
+(export-bindings '(with-server-grabbed call-with-server-ungrabbed
+		   call-with-keyboard-grabbed
 		   make-directory-recursively locate-file
 		   clamp clamp* uniquify-list screen-dimensions
 		   current-head current-head-dimensions
