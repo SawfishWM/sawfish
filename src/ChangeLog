@@ -1,3 +1,8 @@
+1999-09-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (configure_request): when a client asks to be moved,
+	factor in the frame offset if it's reparented
+
 1999-09-23  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c (translate_event): fix bug where X server reports that

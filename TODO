@@ -34,6 +34,8 @@ Outstanding bugs
 
   ! behaviour of frame parts overlapping client window is undefined?
 
+    related to this, shape masks may cut out portions of the client
+
   ! It's not possible to compile sawmill-ui.jl without an X connection
     (it requires 'gtk, which then calls gtk_init (), ...)
 
@@ -89,6 +91,9 @@ General tasks
 
   + option to maximize with frame outside the root boundaries?
 
+    if this is done, how does the window get unmaximized (since the
+    buttons that are probably on the title bar will be hidden)
+
   + option to disable moving/resizing in maximized state
 
     Why? I think that the user should always be able to manipulate the
@@ -119,14 +124,14 @@ General tasks
 
   + viewport-based workspaces
 
-    But I want these dynamic as well. i.e. there's no "size" to each
-    workspace, but you can move as far out as you want, or as there are
-    windows.
-
-    The problem with this scheme is that the pager will choke
-
     possibly just do workspaces as an N-d structure, then expand to a
     regular cube for the pager..?
+
+    --I've tried this (and have the diffs to prove it), but even though
+    it works ok (encoding N-d indices in the workspace number), the
+    user interface is horrible
+
+    this is why I like the expanding 1d structure--its so simple
 
   + Allow text-entry commands in bindings dialog?
 

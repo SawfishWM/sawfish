@@ -1,3 +1,14 @@
+1999-09-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome.jl (gnome-set-workspace): only set _WIN_WORKSPACE and
+	_WIN_WORKSPACE_COUNT on the root window when the values have
+	actually changed
+
+	* workspace.jl (jump-workspaces-forwards,
+	jump-workspaces-backwards): new commands
+	* keymaps.jl (global-keymap): bind c-down and c-up to the
+	jump-workspaces- commands
+
 1999-09-23  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.jl (find-all-frame-styles): new optional arg: sorted,
