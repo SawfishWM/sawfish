@@ -274,7 +274,7 @@
 
 ;; init
 
-(add-hook 'before-add-window-hook window-history-match)
+(add-hook 'before-add-window-hook window-history-match t)
 (add-hook 'after-move-hook window-history-position-snapshotter)
 (add-hook 'after-resize-hook window-history-dimensions-snapshotter)
 (add-hook 'window-state-change-hook window-history-state-snapshotter)
