@@ -341,14 +341,18 @@
   "Toggle the state of the window between vertically maximized and
 unmaximized."
   (interactive "%W")
-  (maximize-window-toggle w 'vertical))
+  (if (window-maximized-vertically-p w)
+      (unmaximize-window w 'vertical)
+    (maximize-window w 'vertical)))
 
 ;;;###autoload
 (defun maximize-window-horizontally-toggle (w)
   "Toggle the state of the window between horizontally maximized and
 unmaximized."
   (interactive "%W")
-  (maximize-window-toggle w 'horizontal))
+  (if (window-maximized-horizontally-p w)
+      (unmaximize-window w 'horizontal)
+    (maximize-window w 'horizontal)))
 
 
 ;; fill commands
@@ -388,14 +392,18 @@ unmaximized."
   "Toggle the state of the window between vertically maximized-filled and
 unmaximized."
   (interactive "%W")
-  (maximize-fill-window-toggle w 'vertical))
+  (if (window-maximized-vertically-p w)
+      (unmaximize-window w 'vertical)
+    (maximize-fill-window w 'vertical)))
 
 ;;;###autoload
 (defun maximize-fill-window-horizontally-toggle (w)
   "Toggle the state of the window between horizontally maximized-filled and
 unmaximized."
   (interactive "%W")
-  (maximize-fill-window-toggle w 'horizontal))
+  (if (window-maximized-horizontally-p w)
+      (unmaximize-window w 'horizontal)
+    (maximize-fill-window w 'horizontal)))
 
 
 ;; initialisation
