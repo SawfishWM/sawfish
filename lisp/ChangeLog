@@ -1,3 +1,14 @@
+2000-10-18  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/windows.jl: added window-urgent-p to the gaol
+
+	* sawfish/wm/focus.jl (focus-click): in non-click-through mode,
+	ungrab the pointer so that the release event can't trigger
+	window decorations
+
+	* sawfish/wm/ext/match-window.jl (match-window-properties):
+	`dimensions' property was called `size' by mistake
+
 2000-10-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/placement/smart.jl: export the various sp-cost:
