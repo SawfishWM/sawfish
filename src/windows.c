@@ -1166,29 +1166,34 @@ WINDOW. Returns the symbol `nil' if no such image.
 
    if (VWIN (win)->icon_image == rep_NULL)
    {
-       repv id, mask_id;
-       repv ret = Qnil;
-
-       if (VWIN (win)->wmhints->flags & IconPixmapHint
-	   && VWIN (win)->wmhints->icon_pixmap != 0)
-       {
-	   id = rep_MAKE_INT (VWIN (win)->wmhints->icon_pixmap);
-       }
+       if (VWIN (win)->wmhints == 0)
+	   VWIN (win)->icon_image = Qnil;
        else
-	   id = Qnil;
-
-       if (VWIN (win)->wmhints->flags & IconMaskHint
-	   && VWIN (win)->wmhints->icon_mask != 0)
        {
-	   mask_id = rep_MAKE_INT (VWIN (win)->wmhints->icon_mask);
+	   repv id, mask_id;
+	   repv ret = Qnil;
+
+	   if (VWIN (win)->wmhints->flags & IconPixmapHint
+	       && VWIN (win)->wmhints->icon_pixmap != 0)
+	   {
+	       id = rep_MAKE_INT (VWIN (win)->wmhints->icon_pixmap);
+	   }
+	   else
+	       id = Qnil;
+
+	   if (VWIN (win)->wmhints->flags & IconMaskHint
+	       && VWIN (win)->wmhints->icon_mask != 0)
+	   {
+	       mask_id = rep_MAKE_INT (VWIN (win)->wmhints->icon_mask);
+	   }
+	   else
+	       mask_id = Qnil;
+
+	   if (id != Qnil)
+	       ret = Fmake_image_from_x_drawable (id, mask_id);
+
+	   VWIN (win)->icon_image = ret;
        }
-       else
-	   mask_id = Qnil;
-
-       if (id != Qnil)
-	   ret = Fmake_image_from_x_drawable (id, mask_id);
-
-       VWIN (win)->icon_image = ret;
    }
 
    return VWIN (win)->icon_image;
