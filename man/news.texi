@@ -7,6 +7,67 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
 
+@heading 1.1
+
+@itemize @bullet
+
+@item Reorganized the customization options. Removed user levels.
+Removed many obscure options (most are still available as lisp
+variables, just not from the UI). Viewports are no longer available in
+the UI
+
+@item Updates to the @code{grow-pack} module (Kai Groﬂjohann, Daniel
+Pfeiffer)
+
+@item In matched windows, boolean options can be turned off as well as
+on (me, merlin)
+
+@item New full screen maximization mode
+
+@item Bug fixes:
+
+@itemize @minus
+
+@item Miscellaneous focus fixes
+
+@item Be more selective about which X errors imply window deletion
+
+@item Don't trigger a stacking-list assertion on logout
+
+@item Check for window-ness in window-visibility (Michal Maruπka)
+
+@item Reread WM_WINDOW_PROTOCOLS when it changes
+
+@item Fixed bug of nautilus windows not being focused in focus follows
+mouse modes
+
+@item Recover "lost" windows when selecting windows (merlin)
+
+@item Show correct size when resizing windows (merlin)
+
+@item Most placement modes now respect workarea (Federico Mena
+Quintero, me)
+
+@item Miscellaneous fixes to wm-spec implementation. Includes code to
+support _NET_WM_STRUT
+
+@item Call @code{bindtextdomaincodeset} function if rep implements it
+(Christophe Fergeau)
+
+@item Make the current-directory stored in the session a valid filename
+
+@item Don't put windows below the default depth just because their
+parent is
+
+@item Miscellaneous viewport fixes (Federico Mena Quintero)
+
+@item Don't let ``transients above'' and ``layer'' stacking constraints
+conflict with one another
+
+@end itemize
+@end itemize
+
+
 @heading 1.0.1
 
 @itemize @bullet
