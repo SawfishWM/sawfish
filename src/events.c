@@ -54,6 +54,8 @@ static repv current_event_window;
 /* We need a ButtonRelease on this fp. */
 struct frame_part *clicked_frame_part;
 
+static repv current_context_map;
+
 static XID event_handler_context;
 
 DEFSYM(visibility_notify_hook, "visibility-notify-hook");
@@ -247,7 +249,6 @@ button_press (XEvent *ev)
 {
     struct frame_part *fp;
     Lisp_Window *w = 0;
-    repv context_map = Qnil;
 
     record_mouse_position (ev->xbutton.x_root, ev->xbutton.y_root,
 			   ev->type, ev->xany.window);
@@ -261,10 +262,10 @@ button_press (XEvent *ev)
 	    handle_fp_click (fp, ev);
 
 	if (fp->clicked)
-	    context_map = get_keymap_for_frame_part (fp);
+	    current_context_map = get_keymap_for_frame_part (fp);
     }
 
-    eval_input_event (context_map);
+    eval_input_event (current_context_map);
 
     if (fp != 0 && w->id != 0 && ev->type == ButtonRelease)
     {
@@ -283,6 +284,7 @@ button_press (XEvent *ev)
     {
 	button_press_mouse_x = button_press_mouse_y = -1;
 	button_press_window = 0;
+	current_context_map = Qnil;
     }
 
     XAllowEvents (dpy, ev->type == ButtonPress ? SyncPointer : AsyncPointer,
@@ -292,8 +294,6 @@ button_press (XEvent *ev)
 static void
 motion_notify (XEvent *ev)
 {
-    repv context_map = Qnil;
-
     Window tmpw;
     int tmp;
     int x, y;
@@ -311,17 +311,7 @@ motion_notify (XEvent *ev)
 	record_mouse_position (x, y, ev->type, ev->xmotion.window);
     }
 
-    /* Only look for a frame part map if the current window is the
-       same as where the button was originally pressed; this is
-       more intuitive for most uses.. */
-    if (button_press_window == ev->xmotion.window)
-    {
-	struct frame_part *fp = find_frame_part_by_window (ev->xmotion.window);
-	if (fp != 0)
-	    context_map = get_keymap_for_frame_part (fp);
-    }
-
-    eval_input_event (context_map);
+    eval_input_event (current_context_map);
 
     XAllowEvents (dpy, SyncPointer, last_event_time);
 }
@@ -1311,6 +1301,7 @@ events_init (void)
     rep_INTERN(lower_window);
 
     rep_mark_static (&current_event_window);
+    rep_mark_static (&current_context_map);
 
     event_handler_context = XUniqueContext ();
 }
