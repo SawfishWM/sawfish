@@ -42,52 +42,48 @@
 
 (defvar server-window nil)
 
+(defun server-eval (form)
+  (let
+      ((print-escape t))
+    (condition-case error-data
+	(progn
+	  (setq form (read-from-string form))
+	  (format nil "%S" (eval form)))
+      (error
+       (format nil "error--> %S" error-data)))))
+
 (defun server-client-message-handler (w type data)
-  (when (and (eq w 'root) (eq type '_SAWMILL_REQUEST))
+  (when (and server-window (eq w 'root) (eq type '_SAWMILL_REQUEST))
     (let*
 	((window (aref data 0))
 	 (prop (x-atom-name (aref data 1)))
 	 (needs-result (/= (aref data 2) 0))
 	 (form-data (get-x-property window prop))
 	 form value)
-      (unless needs-result
-	(delete-x-property window prop))
-      (condition-case error-data
-	  (progn
-	    (setq form (read-from-string (nth 2 form-data) 0))
-	    (setq value (eval form))
-	    (when needs-result
-	      (set-x-property window prop
-			      (let
-				  ((print-escape t))
-				(format nil "%S" value))
-			      'STRING 8)))
-	(error
-	 (if needs-result
-	     (set-x-property window prop
-			     (let
-				 ((print-escape t))
-			       (format nil "error--> %S" error-data))
-			     'STRING 8)
-	   (delete-x-property window prop))))
+      (if needs-result
+	  (set-x-property
+	   window prop (server-eval (nth 2 form-data)) 'STRING 8)
+	(delete-x-property window prop)
+	(server-eval (nth 2 form-data)))
       t)))
 
-(defun server-init ()
+(defun server-net-init ()
   (unless server-window
     (setq server-window (create-window 'root -100 -100 10 10))
     (set-x-property 'root '_SAWMILL_REQUEST_WIN
 		    (vector server-window) 'CARDINAL 32)
     (set-x-property server-window '_SAWMILL_REQUEST_WIN
 		    (vector server-window) 'CARDINAL 32)))
-(defun server-exit ()
+
+(defun server-net-exit ()
   (when server-window
     (delete-x-property 'root '_SAWMILL_REQUEST_WIN)
-    (destroy-window server-window)))
+    (destroy-window server-window)
+    (setq server-window nil)))
 
 
 ;; initialisation
 
 (unless batch-mode
-  (server-init)
   (add-hook 'client-message-hook 'server-client-message-handler)
-  (add-hook 'before-exit-hook 'server-exit))
+  (add-hook 'before-exit-hook 'server-net-exit))
