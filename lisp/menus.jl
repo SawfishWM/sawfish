@@ -202,3 +202,11 @@ unused before killing it.")
   (if root-menu
       (popup-menu root-menu)
     (beep)))
+
+;;;###autoload
+(defun popup-apps-menu ()
+  "Display the applications menu."
+  (interactive)
+  (if root-menu
+      (popup-menu (cdr apps-menu))
+    (beep)))
