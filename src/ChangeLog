@@ -1,3 +1,9 @@
+2000-03-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* selection.c: handle selection atoms as with other X11 atoms,
+	i.e. convert literally from symbol name. So do (x-get-selection
+	'PRIMARY) instead of (x-get-selection 'xa-primary)
+
 2000-03-29  John Harper  <john@dcs.warwick.ac.uk>
 
 	* server.c, play-sample.c, main.c, keys.c, images.c, frames.c,
