@@ -58,25 +58,32 @@
 ;; property matched on
 (define window-history-key-property 'WM_CLASS)
 
+(define window-history-menu
+  `((,(_ "Save _position") window-history-save-position)
+    (,(_ "Save _dimensions") window-history-save-dimensions)
+    (,(_ "Save _attributes") window-history-save-attributes)
+    ()
+    (,(_ "_Forget saved state") window-history-forget)))
+
 
 ;; customizations
 
 (defgroup window-history "Window History" :group workspace)
 
-(defcustom window-history-save-position t
-  "Remember window positions."
+(defcustom window-history-auto-save-position t
+  "Automatically remember window positions."
   :group (workspace window-history)
   :type boolean
   :require window-history)
 
-(defcustom window-history-save-dimensions t
-  "Remember window sizes."
+(defcustom window-history-auto-save-dimensions t
+  "Automatically remember window sizes."
   :group (workspace window-history)
   :type boolean
   :require window-history)
 
-(defcustom window-history-save-state t
-  "Remember other window attributes."
+(defcustom window-history-auto-save-state t
+  "Automatically remember other window attributes."
   :group (workspace window-history)
   :type boolean
   :require window-history)
@@ -134,20 +141,37 @@
 					   (window-type w))))
 
 (define (window-history-position-snapshotter w)
-  (when (and window-history-save-position
+  (when (and window-history-auto-save-position
 	     (not (window-get w 'fixed-position)))
     (window-history-snapshotter w 'position)))
 
 (define (window-history-dimensions-snapshotter w)
-  (when (and window-history-save-dimensions
+  (when (and window-history-auto-save-dimensions
 	     (not (window-get w 'fixed-position)))
     (window-history-snapshotter w 'dimensions)))
 
 (define (window-history-state-snapshotter w states)
-  (when (and window-history-save-state states)
+  (when (and window-history-auto-save-state states)
     (when (memq (car states) window-history-states)
       (window-history-snapshotter w (car states)))
     (window-history-state-snapshotter w (cdr states))))
+
+
+;; manual state recording
+
+(defun window-history-save-position (w)
+  (interactive "%W")
+  (window-history-snapshotter w 'position))
+
+(defun window-history-save-dimensions (w)
+  (interactive "%W")
+  (window-history-snapshotter w 'dimensions))
+
+(defun window-history-save-attributes (w)
+  (interactive "%W")
+  (mapc (lambda (state)
+	  (window-history-snapshotter w state))
+	window-history-states))
 
 (defun window-history-forget (w)
   "Forget any persistent state associated with the current window."
@@ -235,8 +259,7 @@
 
 (require 'menus)
 (setq window-ops-menu (nconc window-ops-menu
-			     (list `(,(_ "_Forget state")
-				     window-history-forget))))
+			     (list `(,(_ "_History") . window-history-menu))))
 
 (if (featurep 'match-window)
     (setq match-window-properties (nconc match-window-properties
