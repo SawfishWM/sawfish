@@ -87,7 +87,7 @@
 		 (= (car dims) (nth 2 geom))
 		 (= (cdr dims) (nth 3 geom)))
 	(window-put w 'unmaximized-geometry nil))
-      (call-window-hook 'window-unmaximized-hook w direction)
+      (call-window-hook 'window-unmaximized-hook w (list direction))
       (call-window-hook 'window-state-change-hook w))))
 
 ;;;###autoload
