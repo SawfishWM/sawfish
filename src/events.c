@@ -828,19 +828,15 @@ configure_request (XEvent *ev)
     {
 	XWindowChanges xwc;
 	u_int xwcm = (ev->xconfigurerequest.value_mask & 
-		      (CWX | CWY | CWWidth | CWHeight));
+		      (CWX | CWY | CWWidth | CWHeight
+		       | CWStackMode | CWSibling));
 	xwc.x = ev->xconfigurerequest.x;
 	xwc.y = ev->xconfigurerequest.y;
 	xwc.width = ev->xconfigurerequest.width;
 	xwc.height = ev->xconfigurerequest.height;
+	xwc.sibling = ev->xconfigurerequest.above;
+	xwc.stack_mode = ev->xconfigurerequest.detail;
 	XConfigureWindow (dpy, ev->xconfigurerequest.window, xwcm, &xwc);
-	if (ev->xconfigurerequest.value_mask & CWStackMode)
-	{
-	    if (ev->xconfigurerequest.detail == Above)
-		XRaiseWindow (dpy, ev->xconfigurerequest.window);
-	    else if (ev->xconfigurerequest.detail == Below)
-		XLowerWindow (dpy, ev->xconfigurerequest.window);
-	}
     }
     else if (w != 0)
     {
