@@ -57,14 +57,25 @@ cons cell (COMMAND . EVENT)."
 ;; Substitute one command for another in a keymap
 
 ;;;###autoload
-(defun substitute-key-definition (olddef newdef &optional keymap)
+(defun substitute-keymap-command (olddef newdef &optional keymap)
   "Substitute all occurrences of the command OLDDEF for the command NEWDEF
-in the keybindings under the keymap or list of keymaps KEYMAP. When KEYMAP
-is nil, the currently active keymaps used, i.e. all key bindings currently
-in effect."
+in the keybindings under the keymap or list of keymaps KEYMAP."
   (map-keymap #'(lambda (k)
 		  (when (eq (car k) olddef)
 		    (rplaca k newdef))) keymap))
+
+;;;###autoload
+(defun substitute-keymap-event (old-ev new-ev &optional keymap)
+  "Substitute all occurrences of the event OLD-EV for the event NEW-EV
+in the keybindings under the keymap or list of keymaps KEYMAP."
+  (when (stringp old-ev)
+    (setq old-ev (lookup-event old-ev)))
+  (when (stringp new-ev)
+    (setq new-ev (lookup-event new-ev)))
+  (map-keymap #'(lambda (k)
+		  (when (equal (cdr k) old-ev)
+		    (rplacd k new-ev))) keymap))
+
 
 
 ;; Adding bindings to a feature that may not yet be loaded
