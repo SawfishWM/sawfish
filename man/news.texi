@@ -6,6 +6,33 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+@unnumberedsec 0.30.3
+
+@itemize @bullet
+
+@item If a frame part has a non-nil @code{hidden} attribute, ignore it
+
+@item When reframing windows, keep the absolute position of the client
+window constant
+
+@item Support @code{FIXED_POSITION} GNOME hint (renamed old
+@code{fixed-position} property as @code{client-set-position};
+@code{fixed-position} now means don't allow the window to be moved by
+the user)
+
+@item @code{transients-above} option can now be set per-window
+
+@item Fixed bugs when converting option values
+
+@item Fixed @code{:require} keyword in @code{defcustom} always causing
+the module to be loaded, not just when the option is non-nil
+
+@item Fixed bug when adding windows that are shaded
+
+@item Fixed some minor bugs in the configurator
+
+@end itemize
+
 
 @unnumberedsec 0.30.2
 
