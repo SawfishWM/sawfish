@@ -725,6 +725,20 @@ Return a list of all known client window objects.
     return list;
 }
 
+DEFUN("get-window-by-id", Fget_window_by_id, Sget_window_by_id,
+      (repv id), rep_Subr1) /*
+::doc:Sget-window-by-id::
+get-window-by-id ID
+
+Return the window object associated with xid ID, or nil.
+::end:: */
+{
+    Lisp_Window *w;
+    rep_DECLARE1(id, rep_INTP);
+    w = find_window_by_id (rep_INT(id));
+    return w ? rep_VAL(w) : Qnil;
+}
+
 DEFUN("stacking-order", Fstacking_order, Sstacking_order, (void), rep_Subr0) /*
 ::doc:Sstacking-order::
 stacking-order
@@ -1132,6 +1146,7 @@ windows_init (void)
     rep_ADD_SUBR(Sinput_focus);
     rep_ADD_SUBR(Swindow_wants_input_p);
     rep_ADD_SUBR(Smanaged_windows);
+    rep_ADD_SUBR(Sget_window_by_id);
     rep_ADD_SUBR(Sstacking_order);
     rep_ADD_SUBR(Swindow_visibility);
     rep_ADD_SUBR(Swindow_transient_p);
