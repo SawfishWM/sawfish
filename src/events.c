@@ -1060,8 +1060,8 @@ configure_request (XEvent *ev)
 	    int x = ev->xconfigurerequest.x;
 	    int y = ev->xconfigurerequest.y;
 	    alist = Fcons (Fcons (Qposition,
-				  Fcons ((mask & CWX) ? rep_MAKE_INT (x),
-					 (mask & CWY) ? rep_MAKE_INT (y))),
+				  Fcons ((mask & CWX) ? rep_MAKE_INT (x) : Qnil,
+					 (mask & CWY) ? rep_MAKE_INT (y) : Qnil)),
 			   alist);
 	}
 	if ((mask & CWWidth) || (mask & CWHeight))
