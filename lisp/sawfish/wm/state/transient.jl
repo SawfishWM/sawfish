@@ -39,6 +39,11 @@ the input focus to the transient window."
   :group focus
   :type boolean)
 
+(defcustom transients-above-parents t
+  "Transient windows are always stacked higher than their parent windows."
+  :group misc
+  :type boolean)
+
 (defcustom focus-windows-when-mapped nil
   "Mapping a window gives it the focus."
   :type boolean
@@ -77,14 +82,18 @@ workspaces.")
     (window-put w 'sticky t)))
 
 (defun transient-map-window (w)
-  (catch 'out
+  (let
+      ((set-focus nil))
     (when (window-transient-p w)
       (let
 	  ((parent (get-window-by-id (window-transient-p w))))
-	(when (and parent transients-get-focus (eq (input-focus) parent))
-	  (set-input-focus w)
-	  (throw 'out t))))
-    (when focus-windows-when-mapped
+	(when parent
+	  (when (and transients-get-focus (eq (input-focus) parent))
+	    (set-input-focus w)
+	    (setq set-focus t))
+	  (when transients-above-parents
+	    (set-window-depth w (1+ (window-get parent 'depth)))))))
+    (when (and (not set-focus) focus-windows-when-mapped)
       (set-input-focus w))))
 
 ;; If a transient window gets unmapped that currently has the input
