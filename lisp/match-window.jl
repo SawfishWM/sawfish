@@ -57,13 +57,10 @@
     (shaded boolean)
     (avoid boolean)
     (sticky boolean)
-    (fixed-position boolean)
-    (focus-proxy-click boolean)
+    (sticky-viewport boolean)
+    (focus-click-through boolean)
     (ignore-window-input-hint boolean)
     (ignore-program-position boolean)
-    (workspace number)
-    (depth number)
-    (placement-weight number)
     (group symbol ,(lambda ()
 		     (delete-if-not symbolp (window-group-ids))))
     (place-mode symbol ,(lambda ()
@@ -71,7 +68,12 @@
     (type symbol ,(lambda ()
 		    '(default transient shaped shaped-transient unframed)))
     (frame-style symbol ,(lambda ()
-			   (find-all-frame-styles t)))))
+			   (find-all-frame-styles t)))
+    (position pair)
+    (workspace number)
+    (viewport pair)
+    (depth number)
+    (placement-weight number)))
 
 (defun match-window-widget (symbol value doc)
   (let
@@ -224,7 +226,7 @@
 (add-hook 'before-add-window-hook match-window)
 
 
-;; custom property formatters
+;; custom property formatters and setters
 
 ;; ensure the functions get compiled
 (progn
@@ -247,4 +249,15 @@
   (put 'workspace 'match-window-setter
        (lambda (w prop value)
 	 ;; translate from 1.. to 0..
-	 (window-put w prop (1- value)))))
+	 (window-put w prop (1- value))
+	 (select-workspace-from-first (1- value))))
+
+  (put 'position 'match-window-setter
+       (lambda (w prop value)
+	 (move-window-to w (car value) (cdr value))
+	 (window-put w 'placed t)))
+
+  (put 'viewport 'match-window-setter
+       (lambda (w prop value)
+	 (set-screen-viewport (1- (car value)) (1- (cdr value)))
+	 (set-window-viewport w (1- (car value)) (1- (cdr value))))))
