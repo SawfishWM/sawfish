@@ -1,3 +1,9 @@
+2000-02-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* main.c (main): run in a dynamic root
+	* events.c (handle_input_mask): run all handlers in dynamic
+	roots
+
 2000-02-03  John Harper  <john@dcs.warwick.ac.uk>
 
 	* cursors.c, events.c, frames.c (default-cursor,
