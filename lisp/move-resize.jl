@@ -175,6 +175,7 @@
        (move-resize-directions move-resize-directions)
        (frame-draw-mutex (not (eq move-resize-mode 'opaque)))
        (frame-state-mutex 'clicked)
+       (synthetic-configure-mutex t)
        server-grabbed)
     (when (and move-resize-raise-window (eq move-resize-mode 'opaque))
       ;; only raise window initially if the display will get updated
