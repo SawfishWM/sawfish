@@ -1,3 +1,23 @@
+2000-05-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-gaol.jl (sawmill-safe-specials): added batch-mode
+
+	* frames.jl (frame-type-fallback-alist): variable mapping frame
+	types to type to try if the original type isn't available in
+	the chosen frame style
+	(find-frame-definition): iterate over frame types using the
+	above variable until a frame definition is found
+	(set-window-frame-style): use find-frame-definition
+
+	Note that for this to work, themes must return `nil' when they
+	don't support the requested frame type, until now, the
+	convention had been to return the default frame definition, so
+	most if not all themes will need changing. Themes defined using
+	the themer (or gimpmill?) will still work okay
+
+	* make-theme.jl (make-theme): rewritten the returned lambda to
+	conform to the new theme conventions
+
 2000-05-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* window-history.jl: various enhancements, including: only save

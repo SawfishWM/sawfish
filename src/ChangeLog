@@ -1,3 +1,8 @@
+2000-05-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (Qdefault_frame, Qnil_frame): deleted, nil-frame is
+	defined in frames.jl, default-frame is never used
+
 2000-05-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* client.c: new option `-r FEATURE', evaluates `(require 'FEATURE)'
