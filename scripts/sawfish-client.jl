@@ -116,6 +116,7 @@ where OPTIONS are any of:
 					      (get-output-stream-string
 					       standard-output)))))))
 			 (setq r (car out))
+			 (fluid-set current-repl r)
 			 (write standard-output (cdr out))
 			 (when r (loop))))))))
 	     (loop (cdr args)))
@@ -138,8 +139,7 @@ where OPTIONS are any of:
       
 (define (rl-completion-generator w)
   (sawfish-client-eval
-   `(eval-in '(apropos ,(concat #\^ (quote-regexp w)) boundp)
-	     ',(repl-struct (fluid current-repl)))))
+   `(repl-completions ',(fluid current-repl) ',w)))
 
 (main)
 
