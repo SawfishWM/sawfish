@@ -19,32 +19,32 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defgroup simple "Simple frame")
+(defgroup simple-frame "Simple frame")
 
-(defcustom simple-normal-color "lightsteelblue4"
+(defcustom simple:normal-color "lightsteelblue4"
   "Color of inactive frames in `simple' frame style."
   :type color
-  :group simple
+  :group simple-frame
   :after-set after-setting-frame-option)
 
-(defcustom simple-active-color "goldenrod"
+(defcustom simple:active-color "goldenrod"
   "Color of active frames in `simple' frame style."
   :type color
-  :group simple
+  :group simple-frame
   :after-set after-setting-frame-option)
 
 ;; 15x15
-(defvar simple-minimize (list (make-image "as_min.png")
+(defvar simple:minimize (list (make-image "as_min.png")
 			      nil nil (make-image "as_min-b.png")))
-(defvar simple-close (list (make-image "as_close.png")
+(defvar simple:close (list (make-image "as_close.png")
 			   nil nil (make-image "as_close-b.png")))
 
-(defun simple-frame-colors ()
-  (list simple-normal-color simple-active-color))
+(defun simple:frame-colors ()
+  (list simple:normal-color simple:active-color))
 
-(defvar simple-frame
+(defvar simple:frame
  `(;; title bar
-   ((background . simple-frame-colors)
+   ((background . simple:frame-colors)
     (foreground . "black")
     (text . window-name)
     (x-justify . 30)
@@ -73,7 +73,7 @@
     (top-edge . -22)
     (bottom-edge . -5))
    ;; bottom bar
-   ((background . simple-frame-colors)
+   ((background . simple:frame-colors)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
@@ -86,22 +86,22 @@
     (bottom-edge . -5)
     (height . 1))
    ;; minimize button
-   ((background . ,simple-minimize)
+   ((background . ,simple:minimize)
     (left-edge . 4)
     (top-edge . -18)
     (class . iconify-button)
     (removable . t))
    ;; close button
-   ((background . ,simple-close)
+   ((background . ,simple:close)
     (right-edge . 4)
     (top-edge . -18)
     (class . close-button)
     (removable . t))))
-(put 'simple-frame 'unshaped t)
+(put 'simple:frame 'unshaped t)
 
-(defvar simple-shaped-frame
+(defvar simple:shaped-frame
  `(;; title bar
-   ((background . simple-frame-colors)
+   ((background . simple:frame-colors)
     (foreground . "black")
     (text . window-name)
     (x-justify . 30)
@@ -136,22 +136,22 @@
     (top-edge . -1)
     (height . 1))
    ;; minimize button
-   ((background . ,simple-minimize)
-    (left-edge . 5)
+   ((background . ,simple:minimize)
+    (left-edge . 4)
     (top-edge . -19)
     (class . iconify-button)
     (removable . t))
    ;; close button
-   ((background . ,simple-close)
-    (right-edge . 5)
+   ((background . ,simple:close)
+    (right-edge . 4)
     (top-edge . -19)
     (class . close-button)
     (removable . t))))
-(put 'simple-shaped-frame 'unshaped t)
+(put 'simple:shaped-frame 'unshaped t)
 
-(defvar simple-transient-frame
+(defvar simple:transient-frame
  `(;; title bar
-   ((background . simple-frame-colors)
+   ((background . simple:frame-colors)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -4)
@@ -176,7 +176,7 @@
     (top-edge . -5)
     (bottom-edge . -5))
    ;; bottom bar
-   ((background . simple-frame-colors)
+   ((background . simple:frame-colors)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
@@ -188,11 +188,11 @@
     (right-edge . 0)
     (bottom-edge . -5)
     (height . 1))))
-(put 'simple-transient-frame 'unshaped t)
+(put 'simple:transient-frame 'unshaped t)
 
-(defvar simple-shaped-transient-frame
+(defvar simple:shaped-transient-frame
  `(;; title bar
-   ((background . simple-frame-colors)
+   ((background . simple:frame-colors)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -5)
@@ -222,18 +222,18 @@
     (right-edge . 0)
     (top-edge . -1)
     (height . 1))))
-(put 'simple-transient-shaped-frame 'unshaped t)
+(put 'simple:transient-shaped-frame 'unshaped t)
 
-(defun simple-frame-style (w type)
+(defun simple:frame-style (w type)
   (cond ((eq type 'shaped)
-	 'simple-shaped-frame)
+	 'simple:shaped-frame)
 	((eq type 'transient)
-	 'simple-transient-frame)
+	 'simple:transient-frame)
 	((eq type 'shaped-transient)
-	 'simple-shaped-transient-frame)
+	 'simple:shaped-transient-frame)
 	((eq type 'unframed)
 	 'nil-frame)
 	(t
-	 'simple-frame)))
+	 'simple:frame)))
 
-(add-frame-style 'simple 'simple-frame-style)
+(add-frame-style 'simple 'simple:frame-style)

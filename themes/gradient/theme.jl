@@ -30,68 +30,68 @@
 
 (defgroup gradient-frame "Gradient frame")
 
-(defcustom gradient-gradient-type 'horizontal
+(defcustom gradient:gradient:type 'horizontal
   "Direction of gradient in `gradient' frame style."
   :type (set horizontal vertical diagonal)
   :group gradient-frame
   :after-set after-setting-frame-option)
 
-(defcustom gradient-normal-from-color (get-color "#b6b6b6")
+(defcustom gradient:normal-from-color (get-color "#b6b6b6")
   "`From' color of inactive frames in `gradient' frame style."
   :type color
   :group gradient-frame
   :after-set after-setting-frame-option)
 
-(defcustom gradient-normal-to-color (get-color "#323232")
+(defcustom gradient:normal-to-color (get-color "#323232")
   "`To' color of inactive frames in `gradient' frame style."
   :type color
   :group gradient-frame
   :after-set after-setting-frame-option)
 
-(defcustom gradient-active-from-color (get-color "#64b4df")
+(defcustom gradient:active-from-color (get-color "#64b4df")
   "`From' color of active frames in `gradient' frame style."
   :type color
   :group gradient-frame
   :after-set after-setting-frame-option)
 
-(defcustom gradient-active-to-color (get-color "#000030")
+(defcustom gradient:active-to-color (get-color "#000030")
   "`To' color of active frames in `gradient' frame style."
   :type color
   :group gradient-frame
   :after-set after-setting-frame-option)
 
-(defcustom gradient-save-memory t
+(defcustom gradient:save-memory t
   "Use less memory when creating gradients, possibly affecting quality."
   :type boolean
   :group gradient-frame
   :after-set after-setting-frame-option)
 
 ;; 15x15
-(defvar gradient-minimize (list (make-image "as_min.png")
+(defvar gradient:minimize (list (make-image "as_min.png")
 				nil nil (make-image "as_min-b.png")))
-(defvar gradient-close (list (make-image "as_close.png")
+(defvar gradient:close (list (make-image "as_close.png")
 			     nil nil (make-image "as_close-b.png")))
 
-(defun gradient-render-bg (img state)
-  (apply (cond ((eq gradient-gradient-type 'diagonal)
+(defun gradient:render-bg (img state)
+  (apply (cond ((eq gradient:gradient:type 'diagonal)
 		'draw-diagonal-gradient)
-	       ((eq gradient-gradient-type 'horizontal)
+	       ((eq gradient:gradient:type 'horizontal)
 		'draw-horizontal-gradient)
-	       ((eq gradient-gradient-type 'vertical)
+	       ((eq gradient:gradient:type 'vertical)
 		'draw-vertical-gradient))
 	 img (if state
-		 (list gradient-active-from-color gradient-active-to-color)
-	       (list gradient-normal-from-color gradient-normal-to-color)))
+		 (list gradient:active-from-color gradient:active-to-color)
+	       (list gradient:normal-from-color gradient:normal-to-color)))
   (bevel-image img 1 (not (eq state 'clicked)))
   (set-image-border img 1 1 1 1))
 
-(defun gradient-scale ()
-  (if gradient-save-memory 2 1))
+(defun gradient:scale ()
+  (if gradient:save-memory 2 1))
 
-(defvar gradient-frame
+(defvar gradient:frame
  `(;; title bar
-   ((renderer . gradient-render-bg)
-    (render-scale . gradient-scale)
+   ((renderer . gradient:render-bg)
+    (render-scale . gradient:scale)
     (foreground . "black")
     (text . window-name)
     (x-justify . 30)
@@ -120,8 +120,8 @@
     (top-edge . -22)
     (bottom-edge . -5))
    ;; bottom bar
-   ((renderer . gradient-render-bg)
-    (render-scale . gradient-scale)
+   ((renderer . gradient:render-bg)
+    (render-scale . gradient:scale)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
@@ -134,23 +134,23 @@
     (bottom-edge . -5)
     (height . 1))
    ;; minimize button
-   ((background . ,gradient-minimize)
+   ((background . ,gradient:minimize)
     (left-edge . 4)
     (top-edge . -18)
     (class . iconify-button)
     (removable . t))
    ;; close button
-   ((background . ,gradient-close)
+   ((background . ,gradient:close)
     (right-edge . 4)
     (top-edge . -18)
     (class . close-button)
     (removable . t))))
-(put 'gradient-frame 'unshaped t)
+(put 'gradient:frame 'unshaped t)
 
-(defvar gradient-shaped-frame
+(defvar gradient:shaped-frame
  `(;; title bar
-   ((renderer . gradient-render-bg)
-    (render-scale . gradient-scale)
+   ((renderer . gradient:render-bg)
+    (render-scale . gradient:scale)
     (foreground . "black")
     (text . window-name)
     (x-justify . 30)
@@ -185,23 +185,23 @@
     (top-edge . -1)
     (height . 1))
    ;; minimize button
-   ((background . ,gradient-minimize)
-    (left-edge . 5)
+   ((background . ,gradient:minimize)
+    (left-edge . 4)
     (top-edge . -19)
     (class . iconify-button)
     (removable . t))
    ;; close button
-   ((background . ,gradient-close)
-    (right-edge . 5)
+   ((background . ,gradient:close)
+    (right-edge . 4)
     (top-edge . -19)
     (class . close-button)
     (removable . t))))
-(put 'gradient-shaped-frame 'unshaped t)
+(put 'gradient:shaped-frame 'unshaped t)
 
-(defvar gradient-transient-frame
+(defvar gradient:transient-frame
  `(;; title bar
-   ((renderer . gradient-render-bg)
-    (render-scale . gradient-scale)
+   ((renderer . gradient:render-bg)
+    (render-scale . gradient:scale)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -4)
@@ -226,8 +226,8 @@
     (top-edge . -5)
     (bottom-edge . -5))
    ;; bottom bar
-   ((renderer . gradient-render-bg)
-    (render-scale . gradient-scale)
+   ((renderer . gradient:render-bg)
+    (render-scale . gradient:scale)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
@@ -239,12 +239,12 @@
     (right-edge . 0)
     (bottom-edge . -5)
     (height . 1))))
-(put 'gradient-transient-frame 'unshaped t)
+(put 'gradient:transient-frame 'unshaped t)
 
-(defvar gradient-shaped-transient-frame
+(defvar gradient:shaped-transient-frame
  `(;; title bar
-   ((renderer . gradient-render-bg)
-    (render-scale . gradient-scale)
+   ((renderer . gradient:render-bg)
+    (render-scale . gradient:scale)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -5)
@@ -274,18 +274,18 @@
     (right-edge . 0)
     (top-edge . -1)
     (height . 1))))
-(put 'gradient-transient-shaped-frame 'unshaped t)
+(put 'gradient:transient-shaped-frame 'unshaped t)
 
-(defun gradient-frame-style (w type)
+(defun gradient:frame-style (w type)
   (cond ((eq type 'shaped)
-	 'gradient-shaped-frame)
+	 'gradient:shaped-frame)
 	((eq type 'transient)
-	 'gradient-transient-frame)
+	 'gradient:transient-frame)
 	((eq type 'shaped-transient)
-	 'gradient-shaped-transient-frame)
+	 'gradient:shaped-transient-frame)
 	((eq type 'unframed)
 	 'nil-frame)
 	(t
-	 'gradient-frame)))
+	 'gradient:frame)))
 
-(add-frame-style 'gradient 'gradient-frame-style)
+(add-frame-style 'gradient 'gradient:frame-style)
