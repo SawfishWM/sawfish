@@ -62,12 +62,13 @@
 ;; compress the order stack
 (defun window-order-compress ()
   (let
-      ((order (nreverse (window-order nil t)))		;all windows
+      ((order (nreverse (window-order nil t t)))	;all windows
        (i 1))
     (mapc #'(lambda (w)
-	      (when (window-get w 'order)
-		(window-put w 'order i)
-		(setq i (1+ i)))) order)
+	      (window-put w 'order nil)) (managed-windows))
+    (mapc #'(lambda (w)
+	      (window-put w 'order i)
+	      (setq i (1+ i))) order)
     (setq window-order-highest i)))
 
 (defun window-order-focus-most-recent ()
@@ -77,4 +78,5 @@
       (set-input-focus win))))
 
 (sm-add-saved-properties 'order)
+(add-hook 'sm-after-restore-hook 'window-order-compress)
 (add-hook 'iconify-window-hook 'window-order-pop)
