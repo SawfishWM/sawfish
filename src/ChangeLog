@@ -1,3 +1,11 @@
+1999-11-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (Fset_window_frame): each window frame must be a
+	closure of a list, not just a list
+	* frames.c (set_frame_part_bg, set_frame_part_bg,
+	list_frame_generator): activate the frame's closure before
+	doing anything
+
 1999-11-12  John Harper  <john@dcs.warwick.ac.uk>
 
 	* images.c (Fbevel_image): patch from Scott Sams
