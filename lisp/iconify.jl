@@ -175,5 +175,5 @@ all workspaces."
 
 (add-hook 'client-message-hook ws-client-msg-handler)
 (add-hook 'before-add-window-hook ws-honour-client-state)
-(add-hook 'add-window-hook ws-set-client-state t)
+(add-hook 'map-notify-hook ws-set-client-state t)
 (call-after-state-changed '(iconified) ws-set-client-state)
