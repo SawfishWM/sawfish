@@ -87,7 +87,7 @@ the mouse."
 (defcustom move-lock-when-maximized t
   "Lock window geometry while the window is maximized."
   :type boolean
-  :group maximize)
+  :group (min-max maximize))
 
 (defcustom move-resize-inhibit-configure nil
   "Only update window contents after it has been moved to its final position."

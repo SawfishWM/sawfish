@@ -44,7 +44,7 @@
 (defcustom uniconify-to-current-viewport t
   "Windows are uniconified to the current viewport."
   :type boolean
-  :group iconify)
+  :group (min-max iconify))
 
 
 ;; raw viewport handling

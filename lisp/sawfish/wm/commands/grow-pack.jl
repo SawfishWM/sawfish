@@ -41,14 +41,14 @@
 (defcustom grow-window-repeat t
   "Whether growing an already grown window grows it again."
   :type boolean
-  :group maximize)
+  :group (min-max maximize))
 
 (defcustom grow-is-maximize t
   "Whether growing is considered to be maximization.  When you turn
 this on, you can use `unmaximize-window' or something similar to get
 back to the original size."
   :type boolean
-  :group maximize)
+  :group (min-max maximize))
 
 ;; Entry points.
 

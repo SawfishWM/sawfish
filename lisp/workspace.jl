@@ -89,20 +89,20 @@
 (defcustom uniconify-to-current-workspace t
   "Windows are uniconified onto the current workspace."
   :type boolean
-  :group iconify)
+  :group (min-max iconify))
 
 (defcustom raise-windows-on-uniconify t
   "Windows are raised after being uniconified."
   :type boolean
-  :group iconify)
+  :group (min-max iconify))
 
 (defcustom focus-windows-on-uniconify nil
   "Windows are focused after being uniconified."
   :type boolean
-  :group iconify)
+  :group (min-max iconify))
 
 (defcustom transients-on-parents-workspace nil
-  "Transient windows are opened on the same workspace as their parent window."
+  "Transient windows are opened on the same workspace as their parent."
   :type boolean
   :group workspace)
 
@@ -124,12 +124,12 @@
 (defcustom iconify-whole-group nil
   "Iconifying a window that's a member of a group removes the whole group."
   :type boolean
-  :group iconify)
+  :group (min-max iconify))
 
 (defcustom uniconify-whole-group nil
   "Uniconifying a window that's a member of a group restores the whole group."
   :type boolean
-  :group iconify)
+  :group (min-max iconify))
 
 ;; XXX should be a defcustom, need a string-list type
 (defvar workspace-names nil

@@ -30,17 +30,17 @@
 
 (defcustom maximize-always-expands nil
   "Maximizing a window dimension always increases the size of that dimension."
-  :group maximize
+  :group (min-max maximize)
   :type boolean)
 
 (defcustom maximize-raises t
   "Raise windows when they're maximized."
-  :group maximize
+  :group (min-max maximize)
   :type boolean)
 
 (defcustom maximize-ignore-when-filling t
   "Let ignored windows be overlapped when filling windows."
-  :group maximize
+  :group (min-max maximize)
   :type boolean)
 
 ;; called when a window is maximized, args (W &optional DIRECTION)
