@@ -52,7 +52,7 @@ typedef int bool;
 typedef struct lisp_window {
     repv car;
     struct lisp_window *next;
-    Window id;
+    Window id, saved_id;
     repv plist;
     repv frame_style;
 
