@@ -28,10 +28,6 @@ Outstanding bugs
 
     [ 6/9: I can't reproduce this; has it fixed itself? ]
 
-  ! When you pop up gmc menu with button3 on root window, and then
-    close it, desktop icons are refreshed. Other wm's don't refresh
-    them
-
 
 General tasks
 =============
@@ -143,9 +139,17 @@ General tasks
   - Internationalisation
 
     This should be quite easy, since most strings are stored in the
-    documentation databases anyway. There's two ways of doing this,
-    either create alternate doc files for alternate languages, or do
-    the doc-string lookup as normal then call gettext ()
+    documentation databases anyway. So we just need to provide multiple
+    DOC files, and some tool to aid in the translation/construction
+    process (something like PACE's HMCL parser?) We could probably make
+    this tool compatible with the usual .po files
+
+    There are still some strings that aren't already handled as doc
+    strings (i.e. menu labels, errors, a few things in sawmill-ui).
+    These can also be stored in the DOC file. All keys in the DOC file
+    currently start with either `S' (subr) or `V' (variable). So just
+    add a new prefix `T' for text string, then use the original string
+    as the rest of the key
 
     Also, what about the "%1$s" style printf formatting. rep's format
     function should be extended to handle this syntax

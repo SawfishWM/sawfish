@@ -1,3 +1,10 @@
+1999-09-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (set_window_shape): if updating a shaped window
+	with no frame, just use a single ShapeSet operation, not a
+	ShapeSet followed by a ShapeUnion (fixes the flashing gmc icons
+	bug)
+
 1999-09-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* images.c (Fimagep): new function

@@ -51,6 +51,11 @@ all!
 
 @item Sped up opaque window moving when the position display is enabled
 
+@item Preserve iconified state across restarts
+
+@item Optimise updating the shape of an unframed window (this stops gmc
+icons flashing annoyingly)
+
 @item Fix bugs in click-to-focus mode where some windows were
 un-focusable
 
@@ -64,6 +69,10 @@ didn't allow any of the edges to be moved
 
 @item Fix bug where changing the ``decorate transients'' option didn't
 alter any existing transient windows
+
+@item Fix bug where iconifying a sticky or ignored window gave no way
+of reclaiming it---these windows now appear at the end of the window
+menu
 
 @end itemize
 

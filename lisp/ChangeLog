@@ -1,3 +1,31 @@
+1999-09-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (ws-honour-client-state): new function,
+	iconifies windows whose WM_STATE is IconicState
+
+	* frames.jl (frame-part-classes): appended `-button' to names
+	of `menu', `iconify', `close' and `maximize' classes
+
+	* workspace.jl (uniconify-window, display-window): handle
+	windows that don't have a workspace (i.e. are sticky)
+	(window-menu): add an extra menu for iconified windows that
+	aren't listed in any of the other menus (since they're not in
+	any workspace)
+
+	* sawmill.jl: rearranged loading order again
+
+	* sm-init.jl (sm-saved-window-properties): initialised to nil
+	(sm-add-saved-properties): new function
+	* frames.jl, maximize.jl, shading.jl, stacking.jl,
+	workspace.jl: tell the session manager which window properties
+	to save
+
+	* shading.jl (shading-add-window): reset window type to saved
+	type if possible
+
+	* menus.jl (popup-menu): be more careful about assuming that a
+	menu is already displayed
+
 1999-09-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* shading.jl: in add-window-hook, monitoring `shaded' property
