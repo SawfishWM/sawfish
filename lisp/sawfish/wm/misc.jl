@@ -102,12 +102,18 @@ list of strings DIRS."
     (find-head (query-pointer))))
 
 (define (current-head-dimensions #!optional w)
+  "Return a cons-cell defining the size in pixels of the current head (that
+containing the window W, or the pointer if W is false). Returns the screen
+dimensions if no such head can be identified."
   (let ((head (current-head w)))
     (if head
 	(head-dimensions head)
       (screen-dimensions))))
 
 (define (current-head-offset #!optional w)
+  "Return a cons-cell defining the origin of the current head (that
+containing the window W, or the pointer if W is false). Returns '(0 . 0)
+if no such head can be identified."
   (let ((head (current-head w)))
     (if head
 	(head-offset head)
@@ -119,11 +125,18 @@ _not_ import its bindings (or even make them accessible)."
   (intern-structure name))
 
 (define (eval-in form struct-name)
+  "Evaluate FORM in the module called STRUCT-NAME."
   (eval form (or (get-structure struct-name)
 		 (error "Unknown module: %s" struct-name))))
 
 (define (user-eval form)
+  "Evaluate FORM in the `user' module."
   (eval form *user-module*))
+
+(define (quote-menu-item string)
+  "Escape any `_' characters in STRING such that the result can be used as
+the label of a menu item."
+  (string-replace "_" "__" string))
 
 ;; exports
 
@@ -131,4 +144,5 @@ _not_ import its bindings (or even make them accessible)."
 		   make-directory-recursively locate-file
 		   clamp clamp* uniquify-list screen-dimensions
 		   current-head current-head-dimensions
-		   current-head-offset load-module user-eval eval-in))
+		   current-head-offset load-module user-eval eval-in
+		   quote-menu-item))
