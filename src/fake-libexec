@@ -17,7 +17,7 @@ for f in $libs; do
   g=`echo $f | tr . /`
   src=$libdir
   dest=$libexecdir/`dirname $g`
-  for b in `( cd $libdir && echo \`basename $g\`.* )`; do
+  for b in `( cd $libdir && echo *\`basename $g\`.* )`; do
     rm -f $dest/$b
     echo "$src/$b -> $dest/$b"
     ../mkinstalldirs $dest
