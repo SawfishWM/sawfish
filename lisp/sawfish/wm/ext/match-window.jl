@@ -82,7 +82,8 @@
        (workspace (number 1))
        (viewport (pair (number 1) (number 1)))
        (depth (number -16 16))
-       (placement-weight number))
+       (placement-weight number)
+       (maximized (choice all vertical horizontal)))
       (focus ,(_ "Focus")
        (raise-on-focus boolean)
        (focus-when-mapped boolean)
@@ -385,4 +386,12 @@
   (define-match-window-setter 'focus-mode
    (lambda (w prop value)
      (declare (unused prop))
-     (set-focus-mode w value))))
+     (set-focus-mode w value)))
+
+  (define-match-window-setter 'maximized
+   (lambda (w prop value)
+     (declare (unused prop))
+     (when (memq value '(all vertical))
+       (window-put w 'queued-vertical-maximize t))
+     (when (memq value '(all horizontal))
+       (window-put w 'queued-horizontal-maximize t)))))
