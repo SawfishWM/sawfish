@@ -167,6 +167,12 @@ default-font).
 
 /* type hooks */
 
+static int
+font_cmp (repv w1, repv w2)
+{
+    return w1 != w2;
+}
+
 static void
 font_prin (repv stream, repv obj)
 {
@@ -211,7 +217,7 @@ font_sweep (void)
 void
 fonts_init (void)
 {
-    font_type = rep_register_new_type ("font", 0, font_prin, font_prin,
+    font_type = rep_register_new_type ("font", font_cmp, font_prin, font_prin,
 				       font_sweep, font_mark,
 				       0, 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR(Sget_font);

@@ -495,6 +495,12 @@ defines the color of its pixels.
 
 /* type hooks */
 
+static int
+image_cmp (repv w1, repv w2)
+{
+    return w1 != w2;
+}
+
 static void
 image_prin (repv stream, repv obj)
 {
@@ -539,8 +545,8 @@ void
 images_init (void)
 {
     ImlibInitParams params;
-    image_type = rep_register_new_type ("image", 0, image_prin, image_prin,
-					image_sweep, image_mark,
+    image_type = rep_register_new_type ("image", image_cmp, image_prin,
+					image_prin, image_sweep, image_mark,
 					0, 0, 0, 0, 0, 0, 0);
     if (rep_SYM(Qbatch_mode)->value == Qnil)
     {

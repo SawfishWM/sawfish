@@ -920,6 +920,12 @@ out:
 
 /* type hooks */
 
+static int
+window_cmp (repv w1, repv w2)
+{
+    return w1 != w2;
+}
+
 static void
 window_prin (repv stream, repv win)
 {
@@ -1004,9 +1010,10 @@ manage_windows (void)
 void
 windows_init (void)
 {
-    window_type = rep_register_new_type ("window", 0, window_prin, window_prin,
-					 window_sweep, window_mark,
-					 window_mark_type, 0, 0, 0, 0, 0, 0);
+    window_type = rep_register_new_type ("window", window_cmp, window_prin,
+					 window_prin, window_sweep,
+					 window_mark, window_mark_type,
+					 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR(Swindow_get);
     rep_ADD_SUBR(Swindow_put);
     rep_ADD_SUBR(Swindow_name);

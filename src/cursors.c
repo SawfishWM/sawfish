@@ -92,6 +92,12 @@ have no other cursor specified.
 
 /* type hooks */
 
+static int
+cursor_cmp (repv w1, repv w2)
+{
+    return w1 != w2;
+}
+
 static void
 cursor_prin (repv stream, repv obj)
 {
@@ -135,9 +141,9 @@ cursor_sweep (void)
 void
 cursors_init (void)
 {
-    cursor_type = rep_register_new_type ("cursor", 0, cursor_prin, cursor_prin,
-					 cursor_sweep, cursor_mark,
-					 0, 0, 0, 0, 0, 0, 0);
+    cursor_type = rep_register_new_type ("cursor", cursor_cmp, cursor_prin,
+					 cursor_prin, cursor_sweep,
+					 cursor_mark, 0, 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR(Sget_cursor);
     rep_ADD_SUBR(Sdefault_cursor);
     if (rep_SYM(Qbatch_mode)->value == Qnil)

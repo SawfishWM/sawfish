@@ -102,6 +102,12 @@ Returns t if ARG is a color object.
 
 /* type hooks */
 
+static int
+color_cmp (repv w1, repv w2)
+{
+    return w1 != w2;
+}
+
 static void
 color_prin (repv stream, repv obj)
 {
@@ -145,8 +151,8 @@ color_sweep (void)
 void
 colors_init (void)
 {
-    color_type = rep_register_new_type ("color", 0, color_prin, color_prin,
-					color_sweep, color_mark,
+    color_type = rep_register_new_type ("color", color_cmp, color_prin,
+					color_prin, color_sweep, color_mark,
 					0, 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR(Sget_color);
     rep_ADD_SUBR(Scolor_name);
