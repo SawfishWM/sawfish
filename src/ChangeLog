@@ -1,3 +1,19 @@
+1999-08-22  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (Fquery_pointer): only use the stored mouse position
+	if we're currently handling an event, and this event stored the
+	position
+
+	* functions.c (Fgrab_server, Fungrab_server): set
+	`rep_message_fun' to null whilst the server is grabbed (in case
+	stdout is to an xterm)
+
+	* functions.c (Fgrab_pointer): if the specified window object
+	doesn't have a mapped frame, then grab in the root window
+
+	* functions.c (Fget_x_property): return nil if property doesn't
+	exist
+
 1999-08-21  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.c (Fraise_window, Flower_window,

@@ -11,10 +11,13 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item First attempt at handling a subset of the Motif and OpenLook
+window hints
+
 @item Removed the @code{sloppy-focus} variable, it's replaced by
 @code{focus-mode}. This can currently be one of @code{enter-exit}
 (normal focus follows pointer), @code{enter-only} (``sloppy'' focus) or
-@code{click} (click to focus).
+@code{click} (click to focus)
 
 @item When resolving pointer events, scan the @code{keymap} property of
 the window under the pointer, not the focused window (as with keypress
@@ -27,6 +30,8 @@ shutting down
 
 @item Added support for snapping to window edges when interactively
 moving windows (@code{move-snap-edges} and @code{move-snap-epsilon})
+
+@item Placing windows interactively now works
 
 @item Fixed the bug on Solaris where deleting windows could cause a
 segmentation fault

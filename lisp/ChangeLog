@@ -1,3 +1,18 @@
+1999-08-22  John Harper  <john@dcs.warwick.ac.uk>
+
+	* place-window.jl (place-window): fix the `interactive'
+	placement mode
+
+	* open-look.jl, mwm.jl: new files, implement some of the Motif
+	and OpenLook window hints 
+	* sawmill.jl: require mwm and open-look
+
+	* frames.jl (window-type): moved from transient.jl; if the
+	window has a `type' property, this is assumed to be the window
+	type
+	(window-type-remove-title, window-type-remove-border,
+	window-type-add-title, window-type-add-border): new functions
+
 1999-08-21  John Harper  <john@dcs.warwick.ac.uk>
 
 	* focus.jl (focus-mode): new variable, replaces sloppy-focus.
