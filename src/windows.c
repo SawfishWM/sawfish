@@ -302,6 +302,8 @@ install_window_frame (Lisp_Window *w)
     DB(("install_window_frame (%s)\n", rep_STR(w->name)));
     if (!w->reparented && w->frame != 0 && !WINDOW_IS_GONE_P (w))
     {
+	XSetWindowAttributes wa;
+
 	XSelectInput (dpy, w->frame, FRAME_EVENTS);
 
 	before_local_map (w);
@@ -317,6 +319,9 @@ install_window_frame (Lisp_Window *w)
 	restack_frame_parts (w);
 	reset_frame_parts (w);
 
+	wa.win_gravity = StaticGravity;
+	XChangeWindowAttributes (dpy, w->id, CWWinGravity, &wa);
+
 	DB(("  reparented to %lx [%dx%d%+d%+d]\n",
 	    w->frame, w->frame_width, w->frame_height,
 	    w->frame_x, w->frame_y));
@@ -329,7 +334,12 @@ remove_window_frame (Lisp_Window *w)
     DB(("remove_window_frame (%s)\n", rep_STR(w->name)));
     if (w->reparented && !WINDOW_IS_GONE_P (w))
     {
+	XSetWindowAttributes wa;
+
 	/* reparent the subwindow back to the root window */
+
+	wa.win_gravity = w->attr.win_gravity;
+	XChangeWindowAttributes (dpy, w->id, CWWinGravity, &wa);
 
 	before_local_map (w);
 	XReparentWindow (dpy, w->id, root_window, w->attr.x, w->attr.y);
