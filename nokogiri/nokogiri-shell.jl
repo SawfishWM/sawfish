@@ -70,7 +70,7 @@
       (if socket-id
 	  (gtk-window-set-default-size main-window 400 300)
 	(gtk-window-set-policy main-window nil t nil)
-	(gtk-window-set-default-size main-window 600 500))
+	(gtk-window-set-default-size main-window 550 400))
 
       (setq slot-box-widget (gtk-vbox-new nil box-spacing))
 
@@ -103,8 +103,8 @@
 	(setq apply-widget (gtk-button-new-with-label (_ "Try")))
 	(setq revert-widget (gtk-button-new-with-label (_ "Revert")))
 	(setq cancel-widget (gtk-button-new-with-label (_ "Cancel")))
-	(gtk-window-set-title main-window (_ "Nokogiri"))
-	(gtk-widget-set-name main-window (_ "Nokogiri"))
+	(gtk-window-set-title main-window (_ "Sawfish configurator"))
+	(gtk-widget-set-name main-window (_ "Sawfish configurator"))
 	(gtk-window-set-wmclass main-window "main" "Nokogiri"))
 
       (gtk-signal-connect main-window "delete_event" on-quit)

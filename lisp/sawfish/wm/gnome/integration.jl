@@ -40,8 +40,8 @@
 ;; invoke the GNOME control-center to configure sawfish
 (eval-when-compile (require 'customize))
 
-(defcustom gnome-use-capplet t
-  "Invoke the GNOME control center through the `Customize' menu."
+(defcustom gnome-use-capplet nil
+  "Invoke the GNOME control center from the `Customize' menu."
   :type boolean
   :group misc
   :require gnome-int
