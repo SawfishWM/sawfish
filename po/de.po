@@ -1,11 +1,15 @@
 # This is the German locale definition for Sawfish. 
 # Copyright (C) 1999, 2000, 2001 Free Software Foundation, Inc.
+# Matthias Warkus <mawarkus@gnome.org>, 2001.
 # Christian Meyer <chrisime@gnome.org>, 2000.
 # Kai Lahmann <kl@linuxfaqs.de>, 2000.
 # Matthias Warkus <mawa@iname.com>, 2000.
-# Karl Eichwalder <ke@suse.de>, 2000.
+# Karl Eichwalder <ke@suse.de>, 2000, 2001.
 # Hubert Nachbaur <hubert.nachbaur@vlbg.at>, 2000.
 # Christoph Rauch <Christoph.Rauch@pfaffenhofen.de>, 1999. 
+#
+# Dank für Hinweise an Benjamin Greiner.
+#
 # KONVENTIONEN: 
 # workspace = Arbeitsfläche 
 # desktop = Arbeitsplatz 
@@ -15,26 +19,17 @@
 # to grow = (für Fenster) aufweiten 
 # keymap = Tastenbelegung (*nicht* Tastaturbelegung!) 
 # binding = Tastenkombination 
-# 
+# transient windows = ?
+#
 # Schlagt mich nicht, aber irgendwie muss man das alles übersetzen, 
 # und ich habe für jede dieser Übersetzungen sehr gute Gründe! -mw- 
-# 
-# 
-# TODO: 
-# 
-# 2000-05-19 02:00:33 CEST -ke- 
-# Die meisten Meldungen infinitivisch umformulieren. 
-# 
-# FRAGE: 
-# 2000-06-17 18:34:04 CEST -ke- 
-# Möchte jemand diese Übersetzungen fortführen?  Bitte melden! 
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.x\n"
 "POT-Creation-Date: 2001-05-03 06:09+0200\n"
-"PO-Revision-Date: 2001-05-03 14:34+02:00\n"
-"Last-Translator: Matthias Warkus <mawarkus@gnome.org>\n"
+"PO-Revision-Date: 2001-11-15 10:12+0100\n"
+"Last-Translator: Karl Eichwalder <ke@suse.de>\n"
 "Language-Team: deutsch <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -106,7 +101,7 @@ msgstr "Bild wählen"
 
 #. ../themer/themer.in
 msgid "Image Properties"
-msgstr "Bild-Eigenschaften"
+msgstr "Bildeigenschaften"
 
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
@@ -138,7 +133,7 @@ msgstr "Rahmentyp `%s' hinzugefügt"
 
 #. ../themer/themer.in
 msgid "error while building frame: %S"
-msgstr "Fehler beim Erstellen des Rahmen: %S"
+msgstr "Fehler beim Erstellen des Rahmens: %S"
 
 #. ../themer/themer.in
 #, c-format
@@ -148,7 +143,7 @@ msgstr "Gespeichert unter `%s'"
 #. ../themer/themer.in
 #, c-format
 msgid "Generated theme in directory `%s'"
-msgstr "Thema im Verzeichnis `%s' wurde erzeugt"
+msgstr "Thema wurde im Verzeichnis `%s' erzeugt"
 
 #. ../themer/themer.in
 #, c-format
@@ -570,7 +565,7 @@ msgstr "Das Benutzer-Anpassungssystem aufrufen."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
-msgstr "Mauszeiger den Eingabe-Fokus beeinflusst den Eingabefokus:"
+msgstr "Ereignisse zur Beeinflussung des Fokus durch den Mauszeiger"
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "Does click-to-focus mode pass the click through to the window."
@@ -602,7 +597,7 @@ msgstr "Standardschriftart: \\w"
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Bevel intensity: \\wpercent."
-msgstr "Fasenstärke: \\wpercent."
+msgstr "Stärke des Schrägungseffekts: \\wpercent."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -728,7 +723,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
-msgstr "Menueknopf-Tastenbelegung"
+msgstr "Menüknopf-Tastenbelegung"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -1128,7 +1123,7 @@ msgid ""
 "Windows should set the `accepts input' hint in their WM_HINTS property to "
 "show if they require the focus or not."
 msgstr ""
-"Fenstern den Fokus geben, auch wenn Sie nicht danach gefragt haben.\n"
+"Fenstern den Fokus geben, auch wenn sie ihn nicht angefordert haben.\n"
 "\n"
 "Fenster sollten den Hint `akzeptiert Eingabe' in ihrer WM_HINTS-Eigenschaft "
 "setzen, um klarzustellen, ob sie den Fokus brauchen oder nicht."
@@ -1212,7 +1207,7 @@ msgstr "Beim Passieren der ersten oder letzten Arbeitsfläche: \\w"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "When passing the first or last workspace, while moving a window: \\w"
 msgstr ""
-"Beim Passieren der ersten oder letzten Arbeitsfläche, wenn ein Fenster "
+"Beim Passieren der ersten oder letzten Arbeitsfläche, während ein Fenster "
 "verschoben wird: \\w"
 
 #. ../lisp/sawfish/wm/workspace.jl
