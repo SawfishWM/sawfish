@@ -92,11 +92,9 @@
     (when (eq (car state) 'CARDINAL)
       (setq bits (aref (nth 2 state) 0))
       (unless (zerop (logand bits WIN_STATE_STICKY))
-	(unless (window-get w 'sticky)
-	  (toggle-window-sticky w)))
+	(window-put w 'sticky t))
       (unless (zerop (logand bits WIN_STATE_SHADED))
-	(unless (window-get w 'shaded)
-	  (shade-window w)))
+	(window-put w 'shaded t))
       (unless (zerop (logand bits WIN_STATE_MAXIMIZED_VERT))
 	(unless (window-maximized-vertically-p w)
 	  (maximize-window-vertically w)))
@@ -107,8 +105,7 @@
       (setq layer (aref (nth 2 layer) 0))
       (set-window-depth w (- layer WIN_LAYER_NORMAL)))
     (when space
-      (ws-add-window-to-space-by-index w (aref (nth 2 space) 0)))
-    w))
+      (ws-add-window-to-space-by-index w (aref (nth 2 space) 0)))))
 
 (defun gnome-client-message-handler (w type data)
   (cond ((eq type '_WIN_WORKSPACE)
@@ -190,8 +187,7 @@
   (add-hook 'umap-notify-hook 'gnome-set-client-list)
 
   (add-hook 'window-state-change-hook 'gnome-set-client-state)
-  (add-hook 'before-add-window-hook 'gnome-honour-client-state)
-  (add-hook 'add-window-hook 'gnome-set-client-state t)
+  (add-hook 'before-add-window-hook 'gnome-honour-client-state t)
 
   (add-hook 'client-message-hook 'gnome-client-message-handler)
   (add-hook 'unbound-key-hook 'gnome-event-proxyer)
