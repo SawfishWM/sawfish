@@ -1,3 +1,39 @@
+2000-07-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	Cleaned up frame style and window type management:
+
+	* frames.jl (define-frame-type-mapper): used to register a
+	function that maps (WINDOW FRAME-TYPE) -> FRAME-TYPE. Used by
+	find-frame-type-definition to factor window state into the type
+	asked for from the theme
+
+	(reframe-window): reframes a window, according to its current
+	'type and 'frame-style properties
+
+	(set-frame-style): sets 'frame-style property and acts on it
+	(set-window-type): sets 'type property and acts on it
+
+	(window-type): removed junk to handle decorate-transients
+	option. Window type is _never_ changed for window state
+
+	(set-window-frame-style, set-frame-for-window,
+	reframe-one-window): deleted
+
+	* shading.jl: don't mess with 'type property any more. But
+	register a frame type mapper to handle conversion to shaded
+	frames when 'shaded property is set
+
+	* transient.jl: register a frame type mapper to handle
+	decorate-transients option
+
+	* workspace.jl, wm-spec.jl, window-history.jl, sawmill.jl,
+	sawmill-gaol.jl, open-look.jl, mwm.jl, match-window.jl,
+	ignore-window.jl, groups.jl: updated all users of the changed
+	window frame & type interfaces
+
+	[ amongst other things, these changes make changing the type of
+	a window while it's shaded work correctly ]
+
 2000-07-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keymap.jl (quote-event): new implementation that uses event
