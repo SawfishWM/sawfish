@@ -1,5 +1,7 @@
 1999-08-30  John Harper  <john@dcs.warwick.ac.uk>
 
+	* keys.c (translate_event): ignore the Lock modifier
+
 	* functions.c (Fgrab_pointer): pass last_event_time to
 	XGrabPointer (), not CurrentTime (since Fungrab_pointer also
 	passes last_event_time)

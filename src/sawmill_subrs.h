@@ -71,6 +71,7 @@ extern void send_client_message (Window w, Atom a, Time time);
 extern Status XGetAtomNames (Display *dpy, Atom *atoms,
 			     int count, char **names_ret);
 #endif
+extern void db_printf(char *fmt, ...);
 
 /* from events.c */
 extern void (*event_handlers[LASTEvent])(XEvent *ev);
