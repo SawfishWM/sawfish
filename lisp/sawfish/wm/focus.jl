@@ -111,3 +111,5 @@
 (add-hook 'focus-in-hook focus-in-fun t)
 (add-hook 'focus-out-hook focus-out-fun t)
 (add-hook 'add-window-hook focus-add-window t)
+
+(sm-add-saved-properties 'never-focus)
