@@ -396,13 +396,16 @@ that window on (counting from zero).")
 	  (call-window-hook 'add-to-workspace-hook w)
 	  (call-hook 'workspace-state-change-hook))))))
 
-;; called from the map-notify hook
+;; called from the unmap-notify hook
+(defun ws-window-unmapped (w)
+  (unless (window-get w 'sticky)
+    (ws-remove-window w t)))
+
+;; called from the map-notify-hook
 (defun ws-window-mapped (w)
-  (let
-      (parent)
-    (unless (window-get w 'sticky)
-      (ws-remove-window w t)
-      (ws-add-window w))))
+  (unless (or (window-get w 'sticky)
+	      (window-get w 'workspace))
+    (ws-add-window w)))
 
 
 ;; Menu constructors
@@ -743,6 +746,7 @@ all workspaces."
 (unless (or batch-mode (memq 'ws-add-window add-window-hook))
   (add-hook 'add-window-hook ws-add-window)
   (add-hook 'map-notify-hook ws-window-mapped)
+  (add-hook 'unmap-notify-hook ws-window-unmapped)
   (add-hook 'destroy-notify-hook ws-remove-window)
   (add-hook 'client-message-hook ws-client-msg-handler)
   (add-hook 'before-add-window-hook ws-honour-client-state)
