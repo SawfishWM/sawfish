@@ -445,6 +445,9 @@ again:
 	goto again;
     }
 
+    if (ret == GrabSuccess)
+	mark_pointer_grabbed ();
+
     DB(("grab-pointer: time=%lu ret=%d\n", last_event_time, ret));
     return (ret == GrabSuccess) ? Qt : Qnil;
 }
@@ -456,7 +459,7 @@ ungrab-pointer
 Release the grab on the mouse pointer.
 ::end:: */
 {
-    XUngrabPointer (dpy, last_event_time);
+    ungrab_pointer ();
     synthesize_button_release ();
     DB(("ungrab-pointer: time=%lu\n", last_event_time));
     return Qt;

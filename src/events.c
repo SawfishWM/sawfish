@@ -56,6 +56,9 @@ static repv saved_current_context_map;
 /* We need a ButtonRelease on this fp. */
 struct frame_part *clicked_frame_part;
 
+/* Set to true when the pointer is actively grabbed */
+static bool pointer_is_grabbed;
+
 static XID event_handler_context;
 
 static Atom xa_sawmill_timestamp;
@@ -388,28 +391,34 @@ button_press (XEvent *ev)
     record_mouse_position (ev->xbutton.x_root, ev->xbutton.y_root,
 			   ev->type, ev->xany.window);
 
-    fp = find_frame_part_by_window (ev->xbutton.window);
-    if (fp != 0)
+    /* Only let through events we're expecting */
+    if (pointer_is_grabbed
+	|| ev->xbutton.window != root_window
+	|| ev->xbutton.subwindow == None)
     {
-	w = fp->win;
+	fp = find_frame_part_by_window (ev->xbutton.window);
+	if (fp != 0)
+	{
+	    w = fp->win;
 
-	if (ev->type == ButtonPress)
+	    if (ev->type == ButtonPress)
+		handle_fp_click (fp, ev);
+	}
+
+	eval_input_event (current_context_map ());
+
+	if (fp != 0 && !WINDOW_IS_GONE_P (w) && ev->type == ButtonRelease)
+	{
+	    /* In case the event binding threw a non-local-exit, fake
+	       an unwind-protect thing */
+	    repv old_throw = rep_throw_value;
+	    rep_GC_root gc_old_throw;
+	    rep_throw_value = rep_NULL;
+	    rep_PUSHGC(gc_old_throw, old_throw);
 	    handle_fp_click (fp, ev);
-    }
-
-    eval_input_event (current_context_map ());
-
-    if (fp != 0 && !WINDOW_IS_GONE_P (w) && ev->type == ButtonRelease)
-    {
-	/* In case the event binding threw a non-local-exit, fake
-	   an unwind-protect thing */
-	repv old_throw = rep_throw_value;
-	rep_GC_root gc_old_throw;
-	rep_throw_value = rep_NULL;
-	rep_PUSHGC(gc_old_throw, old_throw);
-	handle_fp_click (fp, ev);
-	rep_POPGC;
-	rep_throw_value = old_throw;
+	    rep_POPGC;
+	    rep_throw_value = old_throw;
+	}
     }
 
     if (ev->type == ButtonRelease)
@@ -417,7 +426,7 @@ button_press (XEvent *ev)
 	button_press_mouse_x = button_press_mouse_y = -1;
 	button_press_window = 0;
 	/* The pointer is _always_ ungrabbed after a button-release */
-	XUngrabPointer (dpy, last_event_time);
+	ungrab_pointer ();
     }
 
     XAllowEvents (dpy, SyncPointer, last_event_time);
@@ -443,8 +452,14 @@ motion_notify (XEvent *ev)
 	record_mouse_position (x, y, ev->type, ev->xmotion.window);
     }
 
-    if (pointer_in_motion)
-	eval_input_event (current_context_map ());
+    /* Only let through events we're expecting */
+    if (pointer_is_grabbed
+	|| ev->xbutton.window != root_window
+	|| ev->xbutton.subwindow == None)
+    {
+	if (pointer_in_motion)
+	    eval_input_event (current_context_map ());
+    }
 
     XAllowEvents (dpy, SyncPointer, last_event_time);
 
@@ -1192,6 +1207,19 @@ get_server_timestamp (void)
     XWindowEvent (dpy, w, PropertyChangeMask, &ev);
 
     return ev.xproperty.time;
+}
+
+void
+mark_pointer_grabbed (void)
+{
+    pointer_is_grabbed = TRUE;
+}
+
+void
+ungrab_pointer (void)
+{
+    pointer_is_grabbed = FALSE;
+    XUngrabPointer (dpy, last_event_time);
 }
 
 

@@ -110,6 +110,8 @@ window_input_hint_p (Lisp_Window *w)
 }
 
 static Window queued_focus_id;
+static bool queued_take_focus;
+static bool queued_set_focus;
 static int queued_focus_revert;
 static Time queued_focus_time;
 
@@ -118,8 +120,21 @@ commit_queued_focus_change (void)
 {
     if (queued_focus_id != 0)
     {
-	XSetInputFocus (dpy, queued_focus_id,
-			queued_focus_revert, queued_focus_time);
+	if (queued_take_focus)
+	{
+	    DB(("  sending WM_TAKE_FOCUS %x %ld\n",
+		(unsigned) queued_focus_id, queued_focus_time));
+	    send_client_message (queued_focus_id,
+				 xa_wm_take_focus,
+				 queued_focus_time);
+	}
+	if (queued_set_focus)
+	{
+	    DB(("  focusing %x %ld\n",
+		(unsigned) queued_focus_id, queued_focus_time));
+	    XSetInputFocus (dpy, queued_focus_id,
+			    queued_focus_revert, queued_focus_time);
+	}
 	queued_focus_id = 0;
     }
 }
@@ -128,55 +143,42 @@ commit_queued_focus_change (void)
 void
 focus_on_window (Lisp_Window *w)
 {
+    /* something's going to change, so */
+    queued_focus_time = last_event_time;
+    queued_set_focus = FALSE;
+    queued_take_focus = FALSE;
+
     if (w != 0 && !WINDOW_IS_GONE_P (w) && w->visible)
     {
-	Window focus;
 	DB(("focus_on_window (%s)\n", rep_STR(w->name)));
 	if (!w->client_unmapped)
-	{                              
+	{
+	    queued_focus_id = w->id;
+
 	    if (w->does_wm_take_focus)
 	    {
-		DB(("  sending WM_TAKE_FOCUS message\n"));
+		queued_take_focus = TRUE;
 
-		/* The -1 is an Ugly Hack. The problem is with the case
-		   where the window focuses itself after receiving the
-		   WM_TAKE_FOCUS message. If during the time between us
-		   sending the client message and the window focusing
-		   itself we focused another window using the same
-		   timestamp, the original window (that received the
-		   client message) will still get focused.
-
-		   I'm assuming that it's unlikely that two events will
-		   arrive generating focus changes with timestamps that
-		   only differ by one.. */
-
-		send_client_message (w->id, xa_wm_take_focus,
-				     last_event_time - 1);
-		queued_focus_time = last_event_time - 1;	/* evil */
-
-		/* Only focus on the window if accepts-input is true */
 		if (window_input_hint_p (w))
-		    focus = w->id;
-		else
-		    focus = 0;
+		    queued_set_focus = TRUE;
 	    }
 	    else
-		focus = w->id;
+		queued_set_focus = TRUE;
 	}
 	else
-	    focus = w->frame;
-	if (focus != 0)
 	{
-	    queued_focus_id = focus;
-	    queued_focus_revert = RevertToParent;
-	    queued_focus_time = last_event_time;
-	    pending_focus_window = w;
+	    queued_focus_id = w->frame;
+	    queued_set_focus = TRUE;
 	}
+
+	queued_focus_revert = RevertToParent;
+	pending_focus_window = w;
     }
     else
     {
 	DB(("focus_on_window (nil)\n"));
 	queued_focus_id = no_focus_window;
+	queued_set_focus = TRUE;
 	queued_focus_revert = RevertToNone;
 	queued_focus_time = last_event_time;
 	pending_focus_window = 0;
@@ -187,14 +189,18 @@ focus_on_window (Lisp_Window *w)
 void
 focus_off_window (Lisp_Window *w)
 {
+    if (pending_focus_window == w)
+    {
+	pending_focus_window = 0;
+	queued_focus_id = 0;
+    }
+
     if (focus_window == w)
     {
 	focus_window = 0;
 	if (pending_focus_window == 0 || pending_focus_window == w)
 	    focus_on_window (0);
     }
-    if (pending_focus_window == w)
-	pending_focus_window = 0;
 }
 
 /* Set flags in W relating to which window manager protocols are recognised

@@ -1103,7 +1103,7 @@ grab will be released first.
 	long e_mask = (rep_INTP(mask) ? rep_INT(mask)
 		       : get_event_mask (current_x_event->type));
 	if (current_x_event->type == ButtonPress)
-	    XUngrabPointer (dpy, last_event_time);
+	    ungrab_pointer ();
 	XSendEvent (dpy, w, prop == Qnil ? False : True,
 		    e_mask, current_x_event);
 	return Qt;

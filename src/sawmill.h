@@ -321,6 +321,8 @@ enum exit_codes {
 #define MAX(x,y) (((x) > (y)) ? (x) : (y))
 #undef MIN
 #define MIN(x,y) (((x) < (y)) ? (x) : (y))
+#undef CLAMP
+#define CLAMP(x,l,h) (((x) > (h)) ? (h) : (((x) < (l)) ? (l) : (x)))
 
 #undef POS
 #define POS(x)   MAX(x, 0)

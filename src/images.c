@@ -743,36 +743,43 @@ CONTRAST). These are integers ranging from 0 to 255.
 }
 
 static inline void
-bevel_pixel (u_char *data, bool up, double bevel_fraction)
+bevel_pixel (u_char *data, bool up, int bevel_percent)
 {
-    double pix[3];
-    pix[0] = ((double)data[0]) / 256.0;
-    pix[1] = ((double)data[1]) / 256.0;
-    pix[2] = ((double)data[2]) / 256.0;
+    unsigned int t0 = data[0], t1 = data[1], t2 = data[2];
     if (up)
     {
-	pix[0] = pix[0] + (1.0 - pix[0]) * bevel_fraction;
-	pix[1] = pix[1] + (1.0 - pix[1]) * bevel_fraction;
-	pix[2] = pix[2] + (1.0 - pix[2]) * bevel_fraction;
-	data[0] = pix[0] * 256.0;
-	data[1] = pix[1] * 256.0;
-	data[2] = pix[2] * 256.0;
+	data[0] = t0 + (255 - t0) * bevel_percent / 100;
+	data[1] = t1 + (255 - t1) * bevel_percent / 100;
+	data[2] = t2 + (255 - t2) * bevel_percent / 100;
     }
     else
     {
-	pix[0] = pix[0] - pix[0] * bevel_fraction;
-	pix[1] = pix[1] - pix[1] * bevel_fraction;
-	pix[2] = pix[2] - pix[2] * bevel_fraction;
-	data[0] = pix[0] * 256.0;
-	data[1] = pix[1] * 256.0;
-	data[2] = pix[2] * 256.0;
+	data[0] = t0 - t0 * bevel_percent / 100;
+	data[1] = t1 - t1 * bevel_percent / 100;
+	data[2] = t2 - t2 * bevel_percent / 100;
+    }
+}
+
+static inline void
+bevel_region (u_char *data, int row_stride, int bpp,
+	      int rx, int ry, int rw, int rh, bool up, int bevel_percent)
+{
+    int x, y;
+    for (y = ry; y < ry + rh; y++)
+    {
+	u_char *row = data + y * row_stride + rx * bpp;
+	for (x = rx; x < rx + rh; x++)
+	{
+	    bevel_pixel (row, up, bevel_percent);
+	    row += bpp;
+	}
     }
 }
 
 static inline void
 bevel_horizontally (u_char *data, int width, int height,
 		    int row_stride, int channels, 
-		    int border, bool top, bool up, double bevel_fraction)
+		    int border, bool top, bool up, int bevel_percent)
 {
     int rows;
     up = top ? up : !up;
@@ -786,7 +793,7 @@ bevel_horizontally (u_char *data, int width, int height,
 	    ptr += row_stride * (height - (rows + 1)) + (rows) * channels;
 	for (x = rows; x < width - (rows + 1); x++)
 	{
-	    bevel_pixel (ptr, up, bevel_fraction);
+	    bevel_pixel (ptr, up, bevel_percent);
 	    ptr += channels;
 	}
     }
@@ -795,7 +802,7 @@ bevel_horizontally (u_char *data, int width, int height,
 static inline void
 bevel_vertically (u_char *data, int width, int height,
 		  int row_stride, int channels,
-		  int border, bool top, bool up, double bevel_fraction)
+		  int border, bool top, bool up, int bevel_percent)
 {
     int cols;
     up = top ? up : !up;
@@ -809,14 +816,14 @@ bevel_vertically (u_char *data, int width, int height,
 	    ptr += (width - (cols + 1)) * channels + ((cols) * row_stride);
 	for (y = cols; y <= height - (cols + 1); y++)
 	{
-	    bevel_pixel (ptr, up, bevel_fraction);
+	    bevel_pixel (ptr, up, bevel_percent);
 	    ptr += row_stride;
 	}
     }
 }
 
 DEFUN("bevel-image", Fbevel_image, Sbevel_image,
-      (repv image, repv border, repv up, repv bevel_percent),
+      (repv image, repv border, repv up, repv bevel_percent_),
       rep_Subr4) /*
 ::doc:sawfish.wm.images#bevel-image::
 bevel-image IMAGE BORDER UP [BEVEL-PERCENT]
@@ -828,17 +835,16 @@ If BEVEL-PERCENT is an integer between 0 and 100, then this is the
 intensity of the bevel created.
 ::end:: */
 {
-    double bevel_fraction = 0.75;
+    int bevel_percent = 75;
     rep_DECLARE1(image, IMAGEP);
     rep_DECLARE2(border, rep_INTP);
 
-    if (!rep_INTP(bevel_percent))
-	bevel_percent = global_symbol_value (Qdefault_bevel_percent);
-    if (rep_INTP(bevel_percent))
+    if (!rep_INTP(bevel_percent_))
+	bevel_percent_ = global_symbol_value (Qdefault_bevel_percent);
+    if (rep_INTP(bevel_percent_))
     {
-	int bp = rep_INT(bevel_percent);
-	if ((bp >= 0) && (bp <= 100))
-	    bevel_fraction = (((double) bp) / 100.0);
+	bevel_percent = rep_INT (bevel_percent_);
+	bevel_percent = CLAMP (bevel_percent, 0, 100);
     }
 
     bevel_horizontally (image_pixels (VIMAGE(image)),
@@ -846,25 +852,25 @@ intensity of the bevel created.
 			image_height (VIMAGE(image)),
 			image_row_stride (VIMAGE(image)),
 			image_channels (VIMAGE(image)),
-			rep_INT(border), TRUE, up != Qnil, bevel_fraction);
+			rep_INT(border), TRUE, up != Qnil, bevel_percent);
     bevel_vertically (image_pixels (VIMAGE(image)),
 		      image_width (VIMAGE(image)),
 		      image_height (VIMAGE(image)),
 		      image_row_stride (VIMAGE(image)),
 		      image_channels (VIMAGE(image)),
-		      rep_INT(border), TRUE, up != Qnil, bevel_fraction);
+		      rep_INT(border), TRUE, up != Qnil, bevel_percent);
     bevel_horizontally (image_pixels (VIMAGE(image)),
 			image_width (VIMAGE(image)),
 			image_height (VIMAGE(image)),
 			image_row_stride (VIMAGE(image)),
 			image_channels (VIMAGE(image)),
-			rep_INT(border), FALSE, up != Qnil, bevel_fraction);
+			rep_INT(border), FALSE, up != Qnil, bevel_percent);
     bevel_vertically (image_pixels (VIMAGE(image)),
 		      image_width (VIMAGE(image)),
 		      image_height (VIMAGE(image)),
 		      image_row_stride (VIMAGE(image)),
 		      image_channels (VIMAGE(image)),
-		      rep_INT(border), FALSE, up != Qnil, bevel_fraction);
+		      rep_INT(border), FALSE, up != Qnil, bevel_percent);
 
     image_changed (VIMAGE(image));
     return image;
