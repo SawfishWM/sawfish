@@ -1,5 +1,10 @@
 2000-11-15  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/placement/smart.jl (sp-cost:overlap): changed the
+	function calculating this to (exp (- (/ overlap (*
+	(screen-width) (screen-height))))). Patch from Unai Uribarri
+	<unaiur@telecable.es>
+
 	* sawfish/wm/keymaps.jl (window-keymap): deleted C-M-Left and
 	C-M-Right bindings (send window to previous/next workspace).
 	They can be confusing when hit by mistake

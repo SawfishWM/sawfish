@@ -298,8 +298,7 @@
 			   (cons (/ (screen-width) 2) (/ (screen-height) 2))))
 
   (define (sp-cost:overlap point dims grid rects overlap)
-    (- 1 (min 1 (/ overlap
-		   (* (screen-width) (screen-height))))))
+    (exp (- (/ overlap (* (screen-width) (screen-height))))))
 
   (defvar sp-cost-components (list (cons sp-cost:overlap 3/4)
 				   (cons sp-cost:focus-locality 1/8)
