@@ -35,6 +35,10 @@ DEFSYM(blue, "blue");
 
 DEFSYM(default_bevel_percent, "default-bevel-percent");
 
+/* A rough estimate of the memory used by a single ImlibImage */
+#define IMLIB_IMAGE_SIZE(i) \
+    (sizeof (ImlibImage) + (i)->rgb_width * (i)->rgb_height * 3)
+
 /* Make a Lisp image object from the imlib image IM. Its initial properties
    will be taken from the list PLIST. */
 static repv
@@ -48,7 +52,7 @@ make_image (ImlibImage *im, repv plist)
 	    return rep_VAL(f);
     }
     f = rep_ALLOC_CELL(sizeof(Lisp_Image));
-    rep_data_after_gc += sizeof (Lisp_Image);
+    rep_data_after_gc += sizeof (Lisp_Image) + IMLIB_IMAGE_SIZE (im);
     f->car = image_type;
     f->next = image_list;
     image_list = f;
