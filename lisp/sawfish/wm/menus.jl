@@ -152,7 +152,8 @@ before killing it.")
       (setq menu-timer nil))
     (unless (and menu-process (process-in-use-p menu-process))
       (when menu-process
-	(kill-process menu-process))
+	(kill-process menu-process)
+	(setq menu-process nil))
       (let ((menu-sentinel (lambda ()
 			     (when (and menu-process
 					(not (process-in-use-p menu-process)))
@@ -186,8 +187,9 @@ before killing it.")
 	     ;; number of seconds to let it hang around for
 	     (require 'rep.io.timers)
 	     (setq menu-timer (make-timer (lambda ()
-					    (kill-process menu-process)
-					    (setq menu-process nil)
+					    (when menu-process
+					      (kill-process menu-process)
+					      (setq menu-process nil))
 					    (setq menu-timer nil))
 					  menu-program-stays-running)))
 	    ((or force (not menu-program-stays-running))
