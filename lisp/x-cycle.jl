@@ -55,8 +55,8 @@
 ;; defining its position in the window stack, higher numbers equal
 ;; more recently selected. The ids may not be contiguous
 
-;; Obviously there's a problem when we overflow rep's integers, but
-;; this should take a while..
+;; Obviously there would be a problem when we overflow rep's integers, but
+;; every now and then we compress the stack to make the ids contiguous
 
 ;; It might seem as though it should be possible to use the actual
 ;; window stacking to define MRU order. But since there are multiple
@@ -138,8 +138,7 @@
 	    (catch 'x-cycle-exit
 	      (recursive-edit))
 	    (when x-cycle-current
-	      (window-put x-cycle-current 'x-cycle-order x-cycle-highest)
-	      (setq x-cycle-highest (1+ x-cycle-highest))
+	      (x-cycle-push x-cycle-current)
 	      (display-window x-cycle-current)))
 	(show-message nil)
 	(ungrab-keyboard)))))
@@ -158,7 +157,11 @@
 			 (not (equal (window-get x-cycle-current 'workspace)
 				     current-workspace))))
 	    (hide-window x-cycle-current))
-	(setq x-cycle-current (input-focus)))
+	;; first call, push the currently focused window onto
+	;; the top of the stack
+	(when (input-focus)
+	  (setq x-cycle-current (input-focus))
+	  (x-cycle-push x-cycle-current)))
       (when x-cycle-stacking
 	(restack-windows x-cycle-stacking)
 	(setq x-cycle-stacking nil))
@@ -204,3 +207,21 @@
 			     (> x y))
 			    (x t)
 			    (t nil))))))
+
+;; push window W onto the top of the cycle stack
+(defun x-cycle-push (w)
+  (window-put w 'x-cycle-order x-cycle-highest)
+  (setq x-cycle-highest (1+ x-cycle-highest))
+  (when (> x-cycle-highest 1000000)			;arbitrary big number
+    (x-cycle-compress)))
+
+;; compress the cycle stack
+(defun x-cycle-compress ()
+  (let
+      ((order (nreverse (x-cycle-order nil t)))		;all windows
+       (i 1))
+    (mapc #'(lambda (w)
+	      (when (window-get w 'x-cycle-order)
+		(window-put w 'x-cycle-order i)
+		(setq i (1+ i)))) order)
+    (setq x-cycle-highest i)))
