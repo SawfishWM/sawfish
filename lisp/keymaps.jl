@@ -182,8 +182,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
   (bind-keys global-keymap
     "C-Left" 'previous-workspace
     "C-Right" 'next-workspace
-    "M-Tab" 'cycle-windows
-    "A-x" 'call-command-with-output-to-screen)
+    "M-Tab" 'cycle-windows)
 
   (bind-keys root-window-keymap
     "Button2-Click1" 'popup-root-menu)
