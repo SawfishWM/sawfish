@@ -119,6 +119,21 @@ PKG_CHECK_MODULES(XFT, xft >= 1.0,
 
 CPPFLAGS="${_cppflags}"
 
+dnl Checks for pango
+PKG_CHECK_MODULES(PANGO, pango >= 1.2.0,
+  [if $PKG_CONFIG --exists pangoxft; then
+     AC_DEFINE(HAVE_PANGO_XFT, 1)
+     PANGO_MODULES="pangoxft pangox"
+   elif $PKG_CONFIG --exists pangox; then
+     PANGO_MODULES="pangox"
+   fi
+   if test "x$PANGO_MODULES" != x; then
+     AC_DEFINE(HAVE_PANGO, 1)
+     AC_DEFINE(HAVE_PANGO_X, 1)
+     PANGO_LIBS=`$PKG_CONFIG --libs $PANGO_MODULES`
+     PANGO_CFLAGS=`$PKG_CONFIG --cflags $PANGO_MODULES`
+   fi], [: nothing])
+
 dnl Check for librep
 AM_PATH_REP(0.14)
 
