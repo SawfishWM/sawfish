@@ -57,6 +57,20 @@ stacking level to place them in.")
       (setq depth (or (cdr (assoc-regexp (window-name w) auto-depth-alist)) 0))
       (window-put w 'depth depth))))
 
+;; Return t if W is at the top of its level
+(defun window-on-top-p (w)
+  (or (eq (window-visibility w) 'unobscured)
+      (let*
+	  ((depth (window-get w 'depth))
+	   (space (or (window-get w 'workspace) current-workspace))
+	   (order (delete-if
+		   #'(lambda (x)
+		       (or (/= (window-get x 'depth) depth)
+			   (and (window-get x 'workspace)
+				(not (eq (window-get x 'workspace) space)))))
+		   (stacking-order))))
+	(eq (car order) w))))
+
 
 ;; Commands
 
@@ -94,7 +108,7 @@ stacking level to place them in.")
   "If the window is the highest window in its stacking level, lower it to the
 bottom of this level, otherwise raise it to the top of its level."
   (interactive "W")
-  (if (eq (window-visibility w) 'unobscured)
+  (if (window-on-top-p w)
       (lower-window w)
     (raise-window w)))
 
