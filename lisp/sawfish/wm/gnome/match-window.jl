@@ -29,17 +29,12 @@
 
   ;; Originally from Ben Liblit <liblit@cs.berkeley.edu>
 
+  ;; the SKIP_WINLIST hint is now tied to the window-list-skip property
+
   (define-match-window-property 'skip-tasklist 'other 'boolean)
-  (define-match-window-property 'skip-winlist 'other 'boolean)
 
   (define-match-window-setter 'skip-tasklist
     (lambda (window property value)
       (apply-command (if value
 			 'gnome-set-skip-tasklist
-		       'gnome-clear-skip-tasklist) (list window))))
-
-  (define-match-window-setter 'skip-winlist
-    (lambda (window property value)
-      (apply-command (if value
-			 'gnome-set-skip-winlist
-		       'gnome-clear-skip-winlist) (list window)))))
+		       'gnome-clear-skip-tasklist) (list window)))))
