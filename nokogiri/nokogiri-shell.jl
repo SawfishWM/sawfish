@@ -56,12 +56,13 @@
     (let ((vbox (gtk-vbox-new nil box-spacing))
 	  (paned (gtk-hpaned-new))
 	  (hbox (gtk-hbutton-box-new))
-	  (s-scroller (gtk-scrolled-window-new)))
+	  (s-scroller (and (not socket-id) (gtk-scrolled-window-new))))
 
       (setq main-window (if socket-id
 			    (gtk-plug-new socket-id)
 			  (gtk-window-new 'toplevel)))
-      (when (gtk-window-p main-window)
+      (if socket-id
+	  (gtk-widget-set-usize main-window 500 400)
 	(gtk-window-set-policy main-window nil t nil)
 	(gtk-widget-set-usize main-window 600 500))
 
@@ -69,8 +70,9 @@
 
       (gtk-container-border-width main-window box-border)
       (gtk-container-border-width slot-box-widget box-border)
-      (gtk-scrolled-window-set-policy s-scroller 'automatic 'automatic)
-      (gtk-scrolled-window-add-with-viewport s-scroller slot-box-widget)
+      (when s-scroller
+	(gtk-scrolled-window-set-policy s-scroller 'automatic 'automatic)
+	(gtk-scrolled-window-add-with-viewport s-scroller slot-box-widget))
 
       (let ((group (get-group top-group)))
 	(fetch-group group)
@@ -82,11 +84,11 @@
 	      (gtk-scrolled-window-set-policy g-scroller 'automatic 'automatic)
 	      (gtk-container-add vbox paned)
 	      (gtk-paned-add1 paned g-scroller)
-	      (gtk-paned-add2 paned s-scroller)
+	      (gtk-paned-add2 paned (or s-scroller slot-box-widget))
 	      (gtk-paned-set-position paned 150)
 	      (gtk-scrolled-window-add-with-viewport g-scroller
 						     group-tree-widget))
-	  (gtk-container-add vbox s-scroller)))
+	  (gtk-container-add vbox (or s-scroller slot-box-widget))))
 
       (unless socket-id
 	(setq ok-widget (gtk-button-new-with-label (_ "OK")))
@@ -180,29 +182,41 @@
 
 ;;; displaying custom groups
 
-  (define (add-group-widgets group)
+  (define (get-slots group)
+    (fetch-group group)
+    (filter slot-is-appropriate-p (group-slots group)))
 
-    (define (get-slots group)
-      (fetch-group group) 
-      (filter slot-is-appropriate-p (group-slots group)))
+  (define (display-flattened group)
 
-    (define (iter container group slots)
-      (let ((layout (layout-slots (group-layout group) slots)))
-	(setq active-slots (nconc active-slots slots))
-	(gtk-container-add container layout)
-	(when *nokogiri-flatten-groups*
-	  (mapc (lambda (sub)
-		  (let ((slots (get-slots sub)))
-		    (when slots
-		      (let ((frame (gtk-frame-new (group-real-name sub))))
-			(iter frame sub slots)
-			(gtk-widget-show frame)
-			(gtk-container-add container frame)))))
-		(get-sub-groups group)))))
+    (define (iter book group slots)
+      (when slots
+	(let ((layout (layout-slots (group-layout group) slots)))
+	  (setq active-slots (nconc active-slots slots))
+	  (gtk-notebook-append-page
+	   book layout (gtk-label-new (group-real-name group)))))
+      (mapc (lambda (sub)
+	      (let ((slots (get-slots sub)))
+		(when (or slots (group-sub-groups group))
+		  (iter book sub slots))))
+	    (get-sub-groups group)))
 
+    (let ((notebook (gtk-notebook-new)))
+      (gtk-notebook-set-scrollable notebook 1)
+      (gtk-notebook-popup-enable notebook)
+      (iter notebook group (get-slots group))
+      (gtk-widget-show notebook)
+      (gtk-container-add slot-box-widget notebook)))
+
+  (define (display-unflattened group)
     (let* ((slots (get-slots group)))
-      (iter slot-box-widget group slots)
-      (update-all-dependences)))
+      (gtk-container-add
+       slot-box-widget (layout-slots (group-layout group) slots))))
+
+  (define (add-group-widgets group)
+    (if (and *nokogiri-flatten-groups* (group-sub-groups group))
+	(display-flattened group)
+      (display-unflattened group))
+    (update-all-dependences))
 
   (define (remove-group-widgets group)
     (mapc (lambda (s)
@@ -254,6 +268,4 @@
 
   (defun capplet-no-group ()
     (write standard-output ?g)
-    (flush-file standard-output))
-
-)
+    (flush-file standard-output)))
