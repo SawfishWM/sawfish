@@ -552,10 +552,12 @@
 	(with-server-grabbed
 	 (map-windows
 	  (lambda (w)
+	    (when (or (window-get w 'sticky)
+		      (window-in-workspace-p w current-workspace))
+	      (swap-in w current-workspace))
 	    (when (and (not (window-get w 'sticky))
 		       (window-in-workspace-p w current-workspace)
 		       (window-get w 'placed))
-	      (swap-in w current-workspace)
 	      (if (window-get w 'iconified)
 		  (hide-window w)
 		(show-window w))))))
