@@ -100,6 +100,11 @@ DEFSYM(bottom_if, "bottom-if");
 DEFSYM(opposite, "opposite");
 DEFSYM(dimensions, "dimensions");
 
+/* for enter/leave-notify-hook */
+DEFSYM(normal, "normal");
+DEFSYM(grab, "grab");
+DEFSYM(ungrab, "ungrab");
+
 repv Fsynthetic_configure_mutex (repv);
 
 /* `Time' will always be 32-bits, due to underlying wire protocol (?) */
@@ -730,11 +735,10 @@ static void
 enter_notify (XEvent *ev)
 {
     struct frame_part *fp;
+    repv mode = (ev->xcrossing.mode == NotifyNormal ? Qnormal
+		 : ev->xcrossing.mode == NotifyGrab ? Qgrab : Qungrab);
     if (ev->xcrossing.window == root_window)
-    {
-	if (ev->xcrossing.mode == NotifyNormal)
-	    Fcall_hook (Qenter_notify_hook, Fcons (Qroot, Qnil), Qnil);
-    }
+	Fcall_hook (Qenter_notify_hook, rep_list_2 (Qroot, mode), Qnil);
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
     {
 	repv tem;
@@ -754,21 +758,20 @@ enter_notify (XEvent *ev)
 	    refresh_frame_part (fp);
 
 	tem = Fassq (Qclass, fp->alist);
-	if (tem && rep_CONSP(tem) && w->id != 0
-	    && ev->xcrossing.mode == NotifyNormal)
+	if (tem && rep_CONSP(tem) && w->id != 0)
 	{
 	    Fcall_window_hook (Qenter_frame_part_hook, rep_VAL(w),
-			       Fcons (rep_VAL(fp), Qnil), Qnil);
+			       rep_list_2 (rep_VAL(fp), mode), Qnil);
 	}
     }
     else
     {
 	Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
 	if (w != 0 && w->mapped && w->visible
-	    && ev->xcrossing.detail != NotifyInferior
-	    && ev->xcrossing.mode == NotifyNormal)
+	    && ev->xcrossing.detail != NotifyInferior)
 	{
-	    Fcall_window_hook (Qenter_notify_hook, rep_VAL(w), Qnil, Qnil);
+	    Fcall_window_hook (Qenter_notify_hook, rep_VAL(w),
+			       rep_LIST_1 (mode), Qnil);
 	}
     }
 }
@@ -777,10 +780,11 @@ static void
 leave_notify (XEvent *ev)
 {
     struct frame_part *fp;
+    repv mode = (ev->xcrossing.mode == NotifyNormal ? Qnormal
+		 : ev->xcrossing.mode == NotifyGrab ? Qgrab : Qungrab);
     if (ev->xcrossing.window == root_window)
     {
-	if (ev->xcrossing.mode == NotifyNormal)
-	    Fcall_hook (Qleave_notify_hook, Fcons (Qroot, Qnil), Qnil);
+	Fcall_hook (Qleave_notify_hook, rep_LIST_2 (Qroot, mode), Qnil);
     }
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
     {
@@ -801,21 +805,20 @@ leave_notify (XEvent *ev)
 	    refresh_frame_part (fp);
 
 	tem = Fassq (Qclass, fp->alist);
-	if (tem && rep_CONSP(tem) && w->id != 0
-	    && ev->xcrossing.mode == NotifyNormal)
+	if (tem && rep_CONSP(tem) && w->id != 0)
 	{
 	    Fcall_window_hook (Qleave_frame_part_hook, rep_VAL(w),
-			       Fcons (rep_VAL(fp), Qnil), Qnil);
+			       rep_LIST_2 (rep_VAL(fp), mode), Qnil);
 	}
     }
     else
     {
 	Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
 	if (w != 0 && w->mapped && w->visible
-	    && ev->xcrossing.detail != NotifyInferior
-	    && ev->xcrossing.mode == NotifyNormal)
+	    && ev->xcrossing.detail != NotifyInferior)
 	{
-	    Fcall_window_hook (Qleave_notify_hook, rep_VAL(w), Qnil, Qnil);
+	    Fcall_window_hook (Qleave_notify_hook, rep_VAL(w),
+			       rep_LIST_1 (mode), Qnil);
 	}
     }
 }
@@ -1546,6 +1549,7 @@ events_init (void)
     rep_INTERN(new_value);
     rep_INTERN(deleted);
     rep_INTERN(urgency);
+
     rep_INTERN(stack);
     rep_INTERN(above);
     rep_INTERN(below);
@@ -1553,6 +1557,10 @@ events_init (void)
     rep_INTERN(top_if);
     rep_INTERN(opposite);
     rep_INTERN(dimensions);
+
+    rep_INTERN(normal);
+    rep_INTERN(grab);
+    rep_INTERN(ungrab);
 
     rep_mark_static (&current_event_window);
     current_context_map = Qnil;
