@@ -22,6 +22,8 @@
 #ifndef SAWMILL_H
 #define SAWMILL_H
 
+#define _GNU_SOURCE
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

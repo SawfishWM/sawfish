@@ -167,7 +167,7 @@ grab-server
     if (server_grabs++ == 0)
     {
 	/* This might go to a terminal.. */
-	saved_message_fun = rep_message_fun;
+	saved_message_fun = (void *)rep_message_fun;
 	rep_message_fun = 0;
 	XGrabServer (dpy);
 	XFlush (dpy);
@@ -184,7 +184,7 @@ ungrab-server
     {
 	XUngrabServer (dpy);
 	XFlush (dpy);
-	rep_message_fun = saved_message_fun;
+	(void *)rep_message_fun = saved_message_fun;
     }
     return Qt;
 }

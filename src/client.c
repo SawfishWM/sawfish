@@ -27,12 +27,12 @@
 #include <limits.h>
 #include <string.h>
 
-static int opt_quiet = 0;		/* don't print results */
-static int opt_nowait = 0;
+int opt_quiet = 0;		/* don't print results */
+int opt_nowait = 0;
 
-static Atom xa_sawmill_request, xa_sawmill_request_win;
-static Window portal, request_win;
-static Display *dpy;
+Atom xa_sawmill_request, xa_sawmill_request_win;
+Window portal, request_win;
+Display *dpy;
 
 static u_long
 eval_lisp_form(char *form)
@@ -92,18 +92,18 @@ eval_lisp_form(char *form)
 static void
 usage(char *prog_name)
 {
-    fprintf(stderr, "usage: %s OPTIONS...\n
-where OPTIONS are any of:\n
-	-display X	Connect to the window manager on display X
-        -w              Don't wait for server if not already running,
-                         return with exit code 1
-	-q		Be quiet (perform commands asynchronously)
-	-f FUNCTION	Call Lisp function FUNCTION on the server
-	-c COMMAND	Call the interactive Lisp function COMMAND
-	-e FORM		Evaluate Lisp form FORM on the server
-	-		Read lines of input until EOF, evaluating each
-			 one as it is read
-	--		Read forms from standard input until EOF, evaluating
+    fprintf(stderr, "usage: %s OPTIONS...\n\n\
+where OPTIONS are any of:\n\n\
+	-display X	Connect to the window manager on display X\n\
+        -w              Don't wait for server if not already running,\n\
+                         return with exit code 1\n\
+	-q		Be quiet (perform commands asynchronously)\n\
+	-f FUNCTION	Call Lisp function FUNCTION on the server\n\
+	-c COMMAND	Call the interactive Lisp function COMMAND\n\
+	-e FORM		Evaluate Lisp form FORM on the server\n\
+	-		Read lines of input until EOF, evaluating each\n\
+			 one as it is read\n\
+	--		Read forms from standard input until EOF, evaluating\n\
 			 the whole lot in one go (inside a progn)\n",
 	    prog_name);
 }
