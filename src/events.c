@@ -39,6 +39,7 @@ Time last_event_time;
 
 /* Current XEvent or a null pointer */
 XEvent *current_x_event;
+static bool current_event_updated_mouse;
 
 DEFSYM(visibility_notify_hook, "visibility-notify-hook");
 DEFSYM(destroy_notify_hook, "destroy-notify-hook");
@@ -93,6 +94,7 @@ record_mouse_position (int x, int y)
     previous_mouse_y = current_mouse_y;
     current_mouse_x = x;
     current_mouse_y = y;
+    current_event_updated_mouse = TRUE;
 }
 
 
@@ -683,6 +685,7 @@ handle_input_mask(long mask)
 	    (long)xev.xany.window));
 	record_event_time (&xev);
 	current_x_event = &xev;
+	current_event_updated_mouse = FALSE;
 	if (xev.type < LASTEvent && event_handlers[xev.type] != 0)
 	    event_handlers[xev.type] (&xev);
 	else if (xev.type == shape_event_base + ShapeNotify)
@@ -711,6 +714,17 @@ query-pointer
 Returns (MOUSE-X . MOUSE-Y)
 ::end:: */
 {
+    if (current_x_event == 0 || !current_event_updated_mouse)
+    {
+	Window tmpw;
+	int tmp;
+	int x, y;
+	if(XQueryPointer(dpy, root_window, &tmpw, &tmpw,
+			 &x, &y, &tmp, &tmp, &tmp))
+	{
+	    record_mouse_position (x, y);
+	}
+    }
     return Fcons (rep_MAKE_INT(current_mouse_x),
 		  rep_MAKE_INT(current_mouse_y));
 }
