@@ -526,7 +526,7 @@ set_frame_part_fg (struct frame_part *fp)
     if (fp->id == 0)
 	return;
 
-    if (Ffunctionp (fg) != Qnil)
+    if (fg != Qnil && Ffunctionp (fg) != Qnil)
     {
 	rep_call_lisp1 (fg, rep_VAL(fp));
     }

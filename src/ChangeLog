@@ -1,5 +1,25 @@
 2000-01-12  John Harper  <john@dcs.warwick.ac.uk>
 
+	* frames.c: frame parts are now first-class lisp objects
+	(Fframe_part_put, Sframe_part_window, Fframe_part_x_window,
+	Fframe_part_position, Fframe_part_dimensions,
+	Fframe_part_state, Fmap_frame_parts, Frefresh_frame_part,
+	Frefresh_window): new functions
+	(set_frame_part_fg, set_frame_part_bg): if the fg or bg object
+	is a function, then call it to do the redrawing, with the frame
+	part as the sole argument
+	(Fframe_part_get): args are now `(FRAME-PART PROP)'
+
+	* sawmill.h (struct frame_part): made into a lisp data type
+
+	* events.c (Fclicked_frame_part_offset,
+	Fclicked_frame_part_dimensions): deleted
+	(Qenter_frame_part_hook, Qleave_frame_part_hook): now called
+	with arguments `(WINDOW FRAME-PART)'
+
+	* windows.c (window_mark_type): no need to call mark_frame_type
+	anymore
+
 	* keys.c: filter Scroll_Lock events as well as Num_Lock and
 	Caps_Lock (from Matt Krai, with minor changes by me)
 
