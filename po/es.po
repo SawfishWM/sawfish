@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.36\n"
-"POT-Creation-Date: 2002-06-01 12:40+0200\n"
-"PO-Revision-Date: 2002-06-02 19:38+0100\n"
+"POT-Creation-Date: 2002-11-02 23:33-0800\n"
+"PO-Revision-Date: 2002-12-18 11:11GMT\n"
 "Last-Translator: Juan Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 0.9.5\n"
 
 #. ../scripts/sawfish-about.jl
 msgid "and many others..."
@@ -81,6 +81,7 @@ msgstr "Propiedades de la imagen"
 
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
+#, c-format
 msgid "No matching item for %S"
 msgstr "No se encontró coincidencia para %S"
 
@@ -108,6 +109,7 @@ msgid "Added frame type `%s'"
 msgstr "Añadido el tipo de marco `%s'"
 
 #. ../themer/themer.in
+#, c-format
 msgid "error while building frame: %S"
 msgstr "error al construir marco: %S"
 
@@ -597,8 +599,8 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the root window\n"
 "(or when no window is focused)."
 msgstr ""
-"Combinación de teclas activas cuando el ratón está en el escritorio, o no hay ninguna "
-"ventana enfocada."
+"Combinación de teclas activas cuando el ratón está en el escritorio, o no "
+"hay ninguna ventana enfocada."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
@@ -609,7 +611,8 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the title of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Combinación de teclas activas, cuando el puntero está sobre el título de la ventana\n"
+"Combinación de teclas activas, cuando el puntero está sobre el título de la "
+"ventana\n"
 "(En esta opción solo se evaluan combinaciones de ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -621,7 +624,8 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the border of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Combinaciones de tecla activas, cuando el puntero está sobre el borde de la ventana\n"
+"Combinaciones de tecla activas, cuando el puntero está sobre el borde de la "
+"ventana\n"
 "(En esta opción solo se evaluan las combinaciones de ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -633,7 +637,8 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the close button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Combinaciones de teclas activas, cuando el puntero está sobre botón cerrar ventana\n"
+"Combinaciones de teclas activas, cuando el puntero está sobre botón cerrar "
+"ventana\n"
 "(En esta opción sólo se evaluan combinaciones de ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -645,7 +650,8 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the iconify\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Combinación de teclas activas, cuando el puntero está sobre botón minimizar ventana\n"
+"Combinación de teclas activas, cuando el puntero está sobre botón minimizar "
+"ventana\n"
 "(En esta opción sólo se evaluan combinaciones de ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -657,7 +663,8 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the maximize\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Combinación de teclas activas, cuando el puntero está sobre botón maximizar ventana\n"
+"Combinación de teclas activas, cuando el puntero está sobre botón maximizar "
+"ventana\n"
 "( En esta opción solo se evaluan combinaciones de ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -669,7 +676,8 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Combinación de teclas activas, cuando el puntero está sobre botón menú de una ventana\n"
+"Combinación de teclas activas, cuando el puntero está sobre botón menú de "
+"una ventana\n"
 "(En esta opción sólo se evaluan combinaciones de ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -685,8 +693,8 @@ msgstr ""
 "de la ventana (En esta opción sólo se evalúan las combinaciones de ratón)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr "Tecla(s) modificadora(s) para las combinaciones de teclas por omisión del gestor de ventanas."
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Combinación de teclas usadas en forma predeterminada"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -1613,8 +1621,8 @@ msgid ""
 "window or pixels instead."
 msgstr ""
 "Amplía la ventana hacia arriba hasta que «tropieza» con otra ventana.\n"
-"Si el borde superior está más allá del borde de la pantalla, se devuelve "
-"a su posición.\n"
+"Si el borde superior está más allá del borde de la pantalla, se devuelve a "
+"su posición.\n"
 "Con un argumento de prefijo universal, maximiza hacia arriba en su lugar.\n"
 "Con un argumento de prefijo numérico, crece hacia arriba tantos incrementos\n"
 "como especificados por ventanas o píxeles en su lugar."
@@ -1820,8 +1828,8 @@ msgid ""
 msgstr ""
 "Distancia en píxeles antes de alinear los bordes de ventana con cada otra.\n"
 "\n"
-"Al mover una ventana, esta opción le permite alinear uno de sus bordes con un "
-"borde de otra ventana."
+"Al mover una ventana, esta opción le permite alinear uno de sus bordes con "
+"un borde de otra ventana."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -2445,6 +2453,70 @@ msgstr "Olvidar toda historia de ventana almacenada."
 msgid "_History"
 msgstr "_Historia"
 
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace down"
+msgstr "Escritorio de abajo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Ver el escritorio siguiente al actual"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace up"
+msgstr "Escritorio superior"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Ver el escritorio anterior al actual"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace left"
+msgstr "Escritorio de la izquierda"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Ver el escritorio situado a la izquierda del actual"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace right"
+msgstr "Escritorio de la derecha"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Ver el escritorio situado a la derecha del actual"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace down"
+msgstr "Enviar al escritorio de abajo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Envía la ventana al escritorio situado abajo del actual"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace up"
+msgstr "Enviar al esctorio de arriba"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Enviar la ventana al escritorio situado arriba del actual"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace left"
+msgstr "Enviar al escritorio de la izquierda"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Enviar la ventana al escritorio situado a la izquierda del actual"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace right"
+msgstr "Enviar al escritorio de la derecha"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Envía la ventana al escritorio situado a la derecha del actual"
+
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "Ayuda de _GNOME"
@@ -2536,7 +2608,7 @@ msgid ""
 "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
 msgstr ""
-"Cambiar la \"permanencia\" de la ventana - si es o no miembro de todos los "
+"Cambiar la «permanencia» de la ventana - si es o no miembro de todos los "
 "escritorios."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2873,8 +2945,8 @@ msgid ""
 "any window manager bindings that it may have."
 msgstr ""
 "Envia el evento de tecla siguiente directamente a la ventana cliente con "
-"foco, ignorando cualquier combinación de teclas que pueda tener el gestor "
-"de ventanas."
+"foco, ignorando cualquier combinación de teclas que pueda tener el gestor de "
+"ventanas."
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
 msgid ""
