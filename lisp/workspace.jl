@@ -525,7 +525,7 @@ previous workspace."
 (defun select-workspace-from-first (count)
   (let
       ((limits (ws-workspace-limits)))
-    (select-workspace (- count (car limits)))))
+    (select-workspace (+ count (car limits)))))
 
 
 ;; some commands for moving directly to a workspace
