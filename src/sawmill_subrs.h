@@ -187,6 +187,7 @@ extern repv Fcurrent_event_string (void);
 extern repv Fcurrent_event (void);
 extern repv Fcurrent_event_window (void);
 extern repv Fproxy_current_event (repv win, repv mask, repv prop);
+extern repv Fallow_events (repv mode);
 extern repv Flast_event (void);
 extern repv Fevent_name (repv ev);
 extern repv Flookup_event (repv name);
