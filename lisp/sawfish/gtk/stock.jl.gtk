@@ -24,7 +24,9 @@
 (define-structure sawfish.gtk.stock
 
     (export stock-button
-	    simple-dialog)
+	    simple-dialog
+	    about-dialog
+	    make-url-widget)
 
     (open rep
 	  gui.gtk
@@ -82,4 +84,25 @@
       (gtk-window-set-modal window t)
       (gtk-widget-grab-focus widget)
 
-      window)))
+      window))
+
+  (define (about-dialog title version copyright
+			authors comments #!key logo extra)
+    (let ((vbox (gtk-vbox-new nil 4))
+	  (text (gtk-text-new)))
+      (define (insert s)
+	(gtk-text-insert text nil nil nil s (length s)))
+      (insert (format nil "%s %s\n" title version)
+      (insert (format nil "%s\n\n" copyright))
+      (when authors
+	(insert "Authors:\n")
+	(mapc (lambda (x) (insert (format nil "    %s\n" x))) authors))
+      (insert (format nil "\n%s\n" comments))
+      (gtk-container-add box text)
+      (when extra
+	(gtk-box-pack-end box extra))
+      (gtk-widget-show-all box)
+      (simple-dialog "About" box))))
+
+  (define (make-url-widget url label)
+    (gtk-label-new (format nil "%s <%s>" label url))))

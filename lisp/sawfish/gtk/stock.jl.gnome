@@ -24,7 +24,9 @@
 (define-structure sawfish.gtk.stock
 
     (export stock-button
-	    simple-dialog)
+	    simple-dialog
+	    about-dialog
+	    make-url-widget)
 
     (open rep
 	  gui.gtk
@@ -59,4 +61,15 @@
       (gtk-window-set-modal window t)
       (gtk-widget-grab-focus widget)
 
-      window)))
+      window))
+
+  (define (about-dialog title version copyright
+			authors comments #!key logo extra)
+    (let ((widget (gnome-about-new title version copyright
+				   authors comments logo)))
+      (gtk-widget-show widget)
+      (when extra
+	(gtk-box-pack-start (gnome-dialog-vbox widget) extra t))
+      widget))
+
+  (define (make-url-widget url label) (gnome-href-new url label)))
