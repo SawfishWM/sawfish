@@ -453,7 +453,19 @@ reparent_notify (XEvent *ev)
     if (w != 0 && ev->xreparent.window == w->id
 	&& ev->xreparent.event == w->id)
     {
-	w->reparenting = FALSE;
+	if (w->reparenting &&
+	    (ev->xreparent.parent == w->frame
+	     || ev->xreparent.parent == root_window))
+	{
+	    w->reparenting = FALSE;
+	}
+	else if (ev->xreparent.parent != root_window)
+	{
+	    /* Not us doing the reparenting.. */
+	    remove_window (w, Qnil, Qnil);
+	    XReparentWindow (dpy, ev->xreparent.window, ev->xreparent.parent,
+			     ev->xreparent.x, ev->xreparent.y);
+	}
 	Fcall_window_hook (Qreparent_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
