@@ -30,6 +30,8 @@
      ;; 6x27
      (top-left-images (list (make-image "top_left_inactive.png")
 			    (make-image "top_left.png")))
+     (top-left-shaped-images (list (make-image "top_left_inactive_s.png")
+				   (make-image "top_left_s.png")))
 
      ;; 19x19
      (top-blue-images (list (make-image "top_blue_inactive.png")
@@ -44,6 +46,7 @@
 
      ;; 7x19
      (top-right-images (make-image "top_right.png"))
+     (top-right-shaped-images (make-image "top_right_s.png"))
 
      ;; 6x6
      (bottom-left-images (make-image "bl.png"))
@@ -201,7 +204,7 @@
 	       (top-edge . -19)
 	       (class . close-button))))
 
-       (shaped-frame `(((background . ,top-left-images)
+       (shaped-frame `(((background . ,top-left-shaped-images)
 			(left-edge . -6)
 			(top-edge . -19)
 			(height . 19)
@@ -238,7 +241,7 @@
 			(class . title))
 
 		       ;; top-right corner
-		       ((background . ,top-right-images)
+		       ((background . ,top-right-shaped-images)
 			(right-edge . -6)
 			(top-edge . -19)
 			(height . 19)
