@@ -301,4 +301,9 @@
   (delete-x-property 'root '_WIN_UNIFIED_AREA))
 
 (unless (or gnome-window-id batch-mode)
-  (gnome-init))
+  (gnome-init)
+
+  ;; arrange for gnome-match to be loaded when necessary..
+  (if (featurep 'match-window)
+      (require 'gnome-match)
+    (eval-after-load "match-window" '(require 'gnome-match))))
