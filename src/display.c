@@ -85,7 +85,8 @@ error_handler (Display *dpy, XErrorEvent *ev)
     if (ev->resourceid == 0)		/* probably a deleted window */
 	return 0;
     w = x_find_window_by_id (ev->resourceid);
-    if (w != 0 && ev->error_code == BadWindow || ev->error_code == BadDrawable)
+    if (w != 0 && (ev->error_code == BadWindow
+		   || ev->error_code == BadDrawable))
     {
 	DB(("error_handler (%s)\n", rep_STR(w->name)));
 	if (!WINDOW_IS_GONE_P (w))
