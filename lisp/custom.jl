@@ -303,4 +303,4 @@
   (cond ((file-exists-p custom-user-file)
 	 (load custom-user-file t t t))
 	(custom-default-file
-	 (load custom-default-file t"))))
+	 (load custom-default-file t))))
