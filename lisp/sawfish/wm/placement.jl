@@ -54,6 +54,11 @@
       ((move-outline-mode nil)
        (ptr (query-pointer))
        (dims (window-frame-dimensions w)))
+    ;; XXX hacktastic! I don't know why the next thing is needed,
+    ;; XXX but it is -- if the window was popped by a button click
+    ;; XXX the ButtonRelease can get caught by move-window-int..
+    ;; XXX (try double clicking on a gmc icon)
+    (accept-x-input)
     (move-window-to w (- (car ptr) (/ (car dims) 2))
 		    (- (cdr ptr) (/ (cdr dims) 2)))
     (move-window-interactively w)))
