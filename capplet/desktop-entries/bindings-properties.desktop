@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Shortcuts
+Name=Key Bindings
 Name[cs]=Klávesové zkratky
 Name[da]=Genveje
 Name[de]=Tastenkürzel
@@ -21,7 +21,7 @@ Name[sk]=Skratky
 Name[sl]=Bli¾njice
 Name[sv]=Snabbtangenter
 Name[tr]=Kýsayollar
-Comment=Configure key shortcuts
+Comment=Configure key bindings
 Comment[cs]=Nastavení klávesových zkratek
 Comment[it]=Configura i comandi per il window manager
 Comment[da]=Indstil tastaturgenveje
@@ -43,7 +43,8 @@ Comment[sk]=Nastavenie klávesových skratiek
 Comment[sl]=Nastavitve tipkovniènih bli¾njic
 Comment[sv]=Konfigurera snabbtangenter
 Comment[tr]=Kýsayollar
-Exec=sawfish-capplet --sawfish-group=bindings
+Exec=sawfish-ui --group=bindings
 Icon=sawfish-shortcuts.png
 Terminal=0
 Type=Application
+Categories=Application;Settings;AdvancedSettings;
