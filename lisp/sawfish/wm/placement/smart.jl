@@ -51,6 +51,7 @@
 
     (open rep
 	  sawfish.wm.util.rects
+	  sawfish.wm.util.groups
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.events
@@ -86,8 +87,14 @@
     (let ((grid (grid-from-rectangles rects)))
       ;; XXX fix for multiple heads
       (when with-root
-	(rplaca grid (list* 0 (screen-width) (car grid)))
-	(rplacd grid (list* 0 (screen-height) (cdr grid))))
+	(unless (memql 0 (car grid))
+	  (rplaca grid (cons 0 (car grid))))
+	(unless (memql (1- (screen-width)) (car grid))
+	  (rplaca grid (cons (1- (screen-width)) (car grid))))
+	(unless (memql 0 (cdr grid))
+	  (rplacd grid (cons 0 (cdr grid))))
+	(unless (memql (1- (screen-height)) (cdr grid))
+	  (rplacd grid (cons (1- (screen-height)) (cdr grid)))))
       (rplaca grid (sort (sp-prune-points (car grid) sp-max-points
 					  (cons 0 (screen-width)))))
       (rplacd grid (sort (sp-prune-points (cdr grid) sp-max-points
@@ -116,12 +123,13 @@
 	   
   ;; returns the list of windows to compare with when overlapping, by
   ;; default windows with their `ignored' property set are dropped
-  (define (sp-get-windows w)
+  (define (sp-get-windows w #!optional pred)
     (filter-windows
      (lambda (x)
        (not (or (eq x w)
-		(not (window-mapped-p w))
-		(and (window-get x 'ignored) (not (window-avoided-p x)))
+		(not (window-mapped-p x))
+		(and (or (and pred (not (pred x))) (window-get x 'ignored))
+		     (not (window-avoided-p x)))
 		(window-get x 'iconified)
 		(not (windows-share-workspace-p x w)))))))
 
@@ -350,13 +358,13 @@
 
 ;;; entry-points
 
-  (define (sp-do-placement w fit-fun #!optional fall-back-fun)
+  (define (sp-do-placement w fit-fun #!optional fall-back-fun #!key window-filter)
     (if (and sp-max-queued-events (> (x-events-queued) sp-max-queued-events))
 	;; fitted placement can cause event tailbacks when there's
 	;; lots of windows being opened with lots of windows already
 	;; open
 	((placement-mode 'randomly) w)
-      (let* ((windows (sp-get-windows w))
+      (let* ((windows (sp-get-windows w window-filter))
 	     (rects (rectangles-from-windows
 		     windows
 		     (lambda (x)
@@ -396,8 +404,14 @@
   (define (place-window-best-fit w)
     (sp-do-placement w sp-best-fit))
 
+  (define (place-window-best-fit-group w)
+    (let ((group (windows-in-group w)))
+      (sp-do-placement w sp-best-fit nil
+		       #:window-filter (lambda (x) (memq x group)))))
+
   (define (place-window-first-fit-or-interactive w)
     (sp-do-placement w sp-fit-or-nil (placement-mode 'interactively)))
+						     
 
 
 ;;; init
@@ -405,4 +419,5 @@
   ;;###autoload
   (define-placement-mode 'first-fit place-window-first-fit)
   (define-placement-mode 'best-fit place-window-best-fit)
+  (define-placement-mode 'best-fit-group place-window-best-fit-group)
   (define-placement-mode 'first-fit-or-interactive place-window-first-fit-or-interactive))
