@@ -179,8 +179,25 @@
   (interactive "NX:\nNY:")
   (set-screen-viewport (1- x) (1- y)))
 
-(define-command-args 'activate-viewport '(and (labelled "X:" (number 1))
-					      (labelled "Y:" (number 1))))
+(define-command-args 'activate-viewport
+		     `(and (labelled ,(_ "Column:") (number 1))
+			   (labelled ,(_ "Row:") (number 1))))
+
+(defun activate-viewport-column (x)
+  "Select the specified viewport column."
+  (interactive "NX:")
+  (set-screen-viewport (1- x) (cdr (screen-viewport))))
+
+(define-command-args 'activate-viewport-column
+		     `(and (labelled ,(_ "Column:") (number 1))))
+
+(defun activate-viewport-row (y)
+  "Select the specified viewport row."
+  (interactive "NY:")
+  (set-screen-viewport (car (screen-viewport)) (1- y)))
+
+(define-command-args 'activate-viewport-row
+		     `(and (labelled ,(_ "Row:") (number 1))))
 
 (defun move-window-to-viewport (x y)
   "Move the current window to the specified viewport."
