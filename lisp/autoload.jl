@@ -112,6 +112,7 @@
 (autoload 'set-window-viewport-linear:8 "viewport-linear" t)
 (autoload 'set-viewport-linear:9 "viewport-linear" t)
 (autoload 'set-window-viewport-linear:9 "viewport-linear" t)
+(autoload 'define-linear-viewport-commands "viewport-linear")
 (autoload 'window-maximized-p "maximize")
 (autoload 'window-maximized-horizontally-p "maximize")
 (autoload 'window-maximized-vertically-p "maximize")
