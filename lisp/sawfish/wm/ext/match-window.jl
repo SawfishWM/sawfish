@@ -82,7 +82,8 @@
     (other ,(_ "Other")
      (unique-name boolean)
      (auto-gravity boolean)
-     (shade-hover boolean))))
+     (shade-hover boolean)
+     (transients-above (choice all parents none)))))
 
 ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
 ;; libraries implementing them
