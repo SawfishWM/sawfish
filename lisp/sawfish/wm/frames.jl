@@ -38,9 +38,7 @@
   "Decorate transient windows in the same way as non-transient windows."
   :type boolean
   :group appearance
-  :after-set (lambda ()
-	       (when always-update-frames
-		 (reframe-all-windows))))
+  :after-set after-setting-frame-option)
 
 (defvar user-theme-directory "~/.sawmill/themes"
   "Directory containing user-local themes.")
@@ -181,6 +179,10 @@
 		:variable ,symbol
 		:value ,value)
 	   (label ,doc))))
+
+(defun after-setting-frame-option ()
+  (when always-update-frames
+    (reframe-all-windows)))
 
 
 ;; loading ``themes'' (currently just frame styles)
