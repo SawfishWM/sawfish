@@ -199,24 +199,30 @@
     (when (>= (length geom) 2)
       (window-put w 'icon-position (cons (aref geom 0) (aref geom 1)))))
 
-  (define (honour-client-state w)
-    ;; XXX is this thing still required
+  (define (wm-class-hacks w)
     (let ((class (get-x-text-property w 'WM_CLASS)))
       (when (and class (>= (length class) 2))
-	(cond ((and (string= (aref class 1) "Panel")
-		    (string= (aref class 0) "panel"))
-	       ;; XXX I don't think the GNOME hints specify these things
+	(cond ((or (and (string= (aref class 1) "Panel")
+			(string= (aref class 0) "panel"))
+		   (and (string= (aref class 1) "kicker")
+			(string= (aref class 0) "Panel")))
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'avoid t)
 	       (window-put w 'no-history t)
 	       (window-put w 'never-iconify t)
 	       (window-put w 'never-maximize t)
+	       (window-put w 'sticky t)
+	       (window-put w 'sticky-viewport t)
 	       ;; XXX see gnome.jl for why this is needed..
 	       (window-put w 'placed t))
 	      ((string= (aref class 1) "gmc-desktop-icon")
 	       (window-put w 'never-focus t)
 	       (window-put w 'never-iconify t)
-	       (window-put w 'never-maximize t)))))
+	       (window-put w 'never-maximize t))))))
+
+  (define (honour-client-state w)
+    ;; things the wm-hints doesn't supply
+    (wm-class-hacks w)
 
     (let ((space (get-x-property w '_NET_WM_DESKTOP)))
       (when space
@@ -273,16 +279,21 @@
    '_NET_WM_WINDOW_TYPE_DESKTOP
    (lambda (w)
      (require 'sawfish.wm.stacking)
-     (set-window-depth w desktop-layer)
+     (mark-window-as-desktop w)
      (window-put w 'fixed-position t)
-     (window-put w 'desktop t)
-     (window-put w 'keymap root-window-keymap)))
+     ;; I thought these would be set by the application, but KDE doesn't..
+     (window-put w 'type 'unframed)
+     (window-put w 'sticky t)
+     (window-put w 'sticky-viewport t)
+     (set-window-depth w desktop-layer)))
 
   (define-wm-spec-window-type
    '_NET_WM_WINDOW_TYPE_DOCK
    (lambda (w)
      (require 'sawfish.wm.stacking)
-     (set-window-depth w dock-layer)))
+     (set-window-depth w dock-layer)
+     (window-put w 'window-list-skip t)
+     (window-put w 'cycle-skip t)))
 
   (define-wm-spec-window-type
    '_NET_WM_WINDOW_TYPE_DIALOG
@@ -355,23 +366,26 @@
   (define (client-message-handler w type data)
     (let ((handled t))
       (case type
-	((_NET_CLOSE_WINDOW) (delete-window w))
+	((_NET_CLOSE_WINDOW)
+	 (when (windowp w)
+	   (delete-window w)))
 
 	((_NET_WM_MOVERESIZE)
-	 (require 'sawfish.wm.commands.move-resize)
-	 (let ((mode (aref data 2)))
-	   (if (eq mode _NET_WM_MOVERESIZE_MOVE)
-	       (move-window-interactively w)
-	     (let ((move-resize-moving-edges
-		    (cond ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPLEFT) '(top left))
-			  ((eq mode _NET_WM_MOVERESIZE_SIZE_TOP) '(top))
-			  ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPRIGHT) '(top right))
-			  ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMLEFT) '(bottom left))
-			  ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOM) '(bottom))
-			  ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMRIGHT) '(bottom right))
-			  ((eq mode _NET_WM_MOVERESIZE_SIZE_LEFT) '(left))
-			  ((eq mode _NET_WM_MOVERESIZE_SIZE_RIGHT) '(right)))))
-	       (resize-window-interactively w)))))
+	 (when (and (windowp w) (window-mapped-p w))
+	   (require 'sawfish.wm.commands.move-resize)
+	   (let ((mode (aref data 2)))
+	     (if (eq mode _NET_WM_MOVERESIZE_MOVE)
+		 (move-window-interactively w)
+	       (let ((move-resize-moving-edges
+		      (cond ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPLEFT) '(top left))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_TOP) '(top))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPRIGHT) '(top right))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMLEFT) '(bottom left))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOM) '(bottom))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMRIGHT) '(bottom right))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_LEFT) '(left))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_RIGHT) '(right)))))
+		 (resize-window-interactively w))))))
 
 	((_NET_NUMBER_OF_DESKTOPS _NET_DESKTOP_GEOMETRY)
 	 ;; XXX these conflict with user preferences
@@ -392,26 +406,27 @@
 	     (loop (1+ i) (cons (aref data i) out)))))
 
 	((_NET_ACTIVE_WINDOW)
-	 (when (window-mapped-p w)
+	 (when (and (windowp w) (window-mapped-p w))
 	   ;; XXX select workspace / viewport automatically?
 	   (set-input-focus w)))
 
 	((_NET_WM_STATE)
-	 (let ((mode (cond ((eql (aref data 0) _NET_WM_STATE_REMOVE) 'remove)
-			   ((eql (aref data 0) _NET_WM_STATE_ADD) 'add)
-			   ((eql (aref data 0) _NET_WM_STATE_TOGGLE) 'toggle)))
-	       (atom1 (x-atom-name (aref data 1)))
-	       (atom2 (x-atom-name (aref data 2))))
-	   (when (or (and (eq atom1 '_NET_WM_STATE_MAXIMIZED_VERT)
-			  (eq atom2 '_NET_WM_STATE_MAXIMIZED_HORIZ))
-		     (and (eq atom2 '_NET_WM_STATE_MAXIMIZED_VERT)
-			  (eq atom1 '_NET_WM_STATE_MAXIMIZED_HORIZ)))
-	     (setq atom1 '_NET_WM_STATE_MAXIMIZED)
-	     (setq atom2 nil))
-	   (when atom1
-	     (call-state-fun w atom1 mode))
-	   (when atom2
-	     (call-state-fun w atom2 mode))))
+	 (when (windowp w)
+	   (let ((mode (cond ((eql (aref data 0) _NET_WM_STATE_REMOVE) 'remove)
+			     ((eql (aref data 0) _NET_WM_STATE_ADD) 'add)
+			     ((eql (aref data 0) _NET_WM_STATE_TOGGLE) 'toggle)))
+		 (atom1 (x-atom-name (aref data 1)))
+		 (atom2 (x-atom-name (aref data 2))))
+	     (when (or (and (eq atom1 '_NET_WM_STATE_MAXIMIZED_VERT)
+			    (eq atom2 '_NET_WM_STATE_MAXIMIZED_HORIZ))
+		       (and (eq atom2 '_NET_WM_STATE_MAXIMIZED_VERT)
+			    (eq atom1 '_NET_WM_STATE_MAXIMIZED_HORIZ)))
+	       (setq atom1 '_NET_WM_STATE_MAXIMIZED)
+	       (setq atom2 nil))
+	     (when atom1
+	       (call-state-fun w atom1 mode))
+	     (when atom2
+	       (call-state-fun w atom2 mode)))))
 
 	(t (setq handled nil)))
       handled))
@@ -425,7 +440,7 @@
       ((_NET_WM_ICON_GEOMETRY)
        (let ((geom (get-x-property w '_NET_WM_ICON_GEOMETRY)))
 	 (when geom
-	   (update-icon-geometry w geom))))))
+	   (update-icon-geometry w (nth 2 geom)))))))
 
 
 ;;; utilities

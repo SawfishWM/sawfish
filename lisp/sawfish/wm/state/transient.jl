@@ -81,6 +81,8 @@
     (or (transient-of-p x y)
 	(let ((x-for (window-transient-p x)))
 	  (and x-for
+	       ;; Some KDE windows set WM_TRANSIENT_FOR to their own id!
+	       (not (eql x-for (window-id x)))
 	       (let ((x-for-w (get-window-by-id x-for)))
 		 (if x-for-w
 		     (indirect-transient-of-p x-for-w y)

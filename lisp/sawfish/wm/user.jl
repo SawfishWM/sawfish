@@ -123,6 +123,15 @@
 		(throw 'out t)))
 	    (list-x-properties 'root))))
 
+  ;; or the new WM-spec code?
+  (unless batch-mode
+    (catch 'out
+      (mapc (lambda (prop)
+	      (when (string-match "^_KDE_" (symbol-name prop))
+		(load-module 'sawfish.wm.state.wm-spec)
+		(throw 'out t)))
+	    (list-x-properties 'root))))
+
   ;; Use all arguments which are left.
   (let ((do-load (lambda (name)
 		   (cond ((file-exists-p name)

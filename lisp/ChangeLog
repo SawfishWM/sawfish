@@ -1,3 +1,17 @@
+2000-12-08  John Harper  <jsh@eazel.com>
+
+	Random work to support KDE2 better:
+
+	* sawfish/wm/user.jl: if there's a property on the root window
+	matching `^_KDE_', load sawfish.wm.state.wm-spec module
+
+	* sawfish/wm/state/wm-spec.jl: bug-fixes and hacks to make KDE2
+	support a lot better
+
+	* sawfish/wm/state/transient.jl (indirect-transient-of-p): test
+	for windows that set WM_TRANSIENT_FOR to themselves! (broken
+	KDE apps)
+
 2000-12-06  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/user.jl: use safe-load when loading site-init and
