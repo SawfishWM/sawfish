@@ -21,16 +21,28 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.ui.slot
 
-(define-structure nokogiri-slot nokogiri-slot-interface
+    (export slot-name
+	    slot-widget
+	    slot-old-value
+	    slot-user-level
+	    slot-gtk-widget
+	    slot-doc
+	    slot-layout set-slot-layout
+	    update-dependences
+	    update-all-dependences
+	    get-slot
+	    slot-value
+	    fetch-slots
+	    custom-symbol-value)
 
     (open rep
-	  gtk
-	  tables
-	  records
-	  nokogiri-widget
-	  nokogiri-wm)
+	  gui.gtk
+	  rep.data.tables
+	  rep.data.records
+	  sawfish.gtk.widget
+	  sawfish.ui.wm)
 
   (define-record-type :slot
     (create-slot name user-level old-value)

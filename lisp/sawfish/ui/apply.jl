@@ -21,15 +21,19 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.ui.apply
 
-(define-structure nokogiri-apply nokogiri-apply-interface
+    (export define-change-handler
+	    apply-slot-changes
+	    revert-slot-changes
+	    changes-to-apply-p
+	    changes-to-revert-p)
 
     (open rep
-	  tables
-	  nokogiri-slot
-	  nokogiri-widget
-	  nokogiri-wm)
+	  rep.data.tables
+	  sawfish.gtk.widget
+	  sawfish.ui.slot
+	  sawfish.ui.wm)
 
   ;; list of slots that have changed since last apply
   (define changed-slots '())

@@ -21,14 +21,13 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widgets/match-window ()
+(define-structure sawfish.ui.widgets.match-window ()
 
     (open rep
-	  gtk
-	  nokogiri-widget
-	  nokogiri-wm
-	  nokogiri-gnome
-	  nokogiri-shell)
+	  gui.gtk
+	  sawfish.gtk.widget
+	  sawfish.gtk.stock
+	  sawfish.ui.wm)
 
   (defconst matcher-count 3)
 
@@ -204,7 +203,7 @@
       (list (mapconcat print-matcher (car x) ", ")
 	    (mapconcat print-action (cdr x) ", ")))
 
-    (define (dialog title callback #!optional value)
+    (define (dialog title callback #!key for value)
       (let ((vbox (gtk-vbox-new nil box-spacing))
 	    (matcher-widget (make-widget
 			     `(match-window:matchers ,x-properties)))
@@ -221,7 +220,7 @@
 		       (lambda ()
 			 (callback (cons (widget-ref matcher-widget)
 					 (widget-ref action-widget))))
-		       main-window)))
+		       for)))
 
     (define (validp x) (and (consp x) (listp (car x)) (listp (cdr x))))
 

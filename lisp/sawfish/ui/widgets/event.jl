@@ -21,12 +21,12 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widgets/event ()
+(define-structure sawfish.ui.widgets.event ()
 
     (open rep
-	  gtk
-	  nokogiri-widget
-	  nokogiri-wm)
+	  gui.gtk
+	  sawfish.gtk.widget
+	  sawfish.ui.wm)
 
   (define (make-event-item changed)
 

@@ -21,24 +21,24 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+;; GNOME version of this widget
 
-(define-structure nokogiri-widgets/workspace-geometry ()
+(define-structure sawfish.ui.widgets.workspace-geometry ()
 
     (open rep
-	  gtk
-	  gnome-canvas
-	  gnome-canvas-pixbuf
-	  gdk-pixbuf
-	  nokogiri-widget
-	  nokogiri-layout)
+	  gui.gtk
+	  gui.gnome.canvas
+	  gui.gnome.canvas-pixbuf
+	  gui.gtk.gdk-pixbuf
+	  sawfish.gtk.widget
+	  sawfish.ui.layout)
 
   (defconst canvas-width 100)
   (defconst canvas-height 100)
 
   (define monitor-pixbuf-file
-    (canonical-file-name
-     (expand-file-name "monitor.png" *nokogiri-directory*)))
+    ;; XXX `(car load-path)' is a total kludge
+    (canonical-file-name (expand-file-name "../monitor.png" (car load-path))))
 
   (define monitor-pixbuf (gdk-pixbuf-new-from-file monitor-pixbuf-file))
 

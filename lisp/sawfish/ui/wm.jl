@@ -21,9 +21,16 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.ui.wm
 
-(define-structure nokogiri-wm nokogiri-wm-interface
+    (export wm-load-slots
+	    wm-load-group
+	    wm-apply-changes
+	    wm-locale-dir
+	    wm-grab-x-property
+	    wm-grab-key
+	    wm-command-list
+	    wm-documentation)
 
     (open rep
 	  sawfish.client)

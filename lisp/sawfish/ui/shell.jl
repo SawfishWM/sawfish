@@ -21,21 +21,23 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.ui.shell
 
-(define-structure nokogiri-shell nokogiri-shell-interface
+    (export initialize-shell
+	    destroy-shell
+	    run-shell)
 
     (open rep
-	  gtk
-	  timers
-	  nokogiri-gnome
-	  nokogiri-group
-	  nokogiri-slot
-	  nokogiri-apply
-	  nokogiri-widget
-	  nokogiri-layout
-	  nokogiri-user-level
-	  nokogiri-config)
+	  gui.gtk
+	  rep.io.timers
+	  sawfish.gtk.stock
+	  sawfish.gtk.widget
+	  sawfish.ui.group
+	  sawfish.ui.slot
+	  sawfish.ui.apply
+	  sawfish.ui.layout
+	  sawfish.ui.user-level
+	  sawfish.ui.config)
 
   (defvar *nokogiri-buttons* nil)
 

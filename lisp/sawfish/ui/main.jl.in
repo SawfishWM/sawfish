@@ -1,5 +1,5 @@
 #!/bin/sh
-exec rep "$0" "$@"
+REP_LOAD_PATH="__nokogiridir__" exec rep "$0" "$@"
 !#
 
 #| nokogiri-main.jl -- entry point
@@ -25,15 +25,14 @@ exec rep "$0" "$@"
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(setq load-path (cons "__nokogiridir__" load-path))
-
 (structure ()
 
     (open rep
-	  nokogiri-i18n
-	  nokogiri-shell
-	  nokogiri-group
-	  nokogiri-user-level)
+	  sawfish.gtk.widget
+	  sawfish.ui.i18n
+	  sawfish.ui.shell
+	  sawfish.ui.group
+	  sawfish.ui.user-level)
 
   (setq backtrace-on-error '(void-value missing-arg bad-arg invalid-function))
 
@@ -70,7 +69,9 @@ where OPTIONS are any of:\n
 
   (setq interrupt-mode 'exit)
   (i18n-init)
+  (add-widget-prefix 'sawfish.ui.widgets)
   (run-shell socket-id))
+
 
 ;; Local variables:
 ;; major-mode: lisp-mode

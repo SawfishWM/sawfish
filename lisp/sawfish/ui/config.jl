@@ -21,15 +21,16 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.ui.config
 
-(define-structure nokogiri-config nokogiri-config-interface
+    (export define-config-item
+	    initialize-configs)
 
     (open rep
-	  tables
-	  nokogiri-apply
-	  nokogiri-slot
-	  nokogiri-group)
+	  rep.data.tables
+	  sawfish.ui.apply
+	  sawfish.ui.slot
+	  sawfish.ui.group)
 
   (define done-init nil)
 

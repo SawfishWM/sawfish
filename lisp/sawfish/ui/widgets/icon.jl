@@ -21,12 +21,14 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widgets/icon ()
+;; GNOME version of this widget
+
+(define-structure sawfish.ui.widgets.icon ()
 
     (open rep
-	  gtk
-	  gnomeui
-	  nokogiri-widget)
+	  gui.gtk
+	  gui.gnome.ui
+	  sawfish.gtk.widget)
 
   (define (make-icon-item changed-callback)
     (let* ((widget (gnome-icon-entry-new "IconEntry" (_ "Select Icon"))))

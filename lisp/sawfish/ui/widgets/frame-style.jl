@@ -21,12 +21,12 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widgets/frame-style ()
+(define-structure sawfish.ui.widgets.frame-style ()
 
     (open rep
-	  gtk
-	  nokogiri-i18n
-	  nokogiri-widget)
+	  gui.gtk
+	  sawfish.gtk.widget
+	  sawfish.ui.i18n)
 
   (define (make-frame-style-item changed-callback doc options path)
 

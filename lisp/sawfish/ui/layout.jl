@@ -21,25 +21,30 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.ui.layout
 
-(define-structure nokogiri-layout nokogiri-layout-interface
+    (export define-layout-type
+	    layout-slots
+	    document-slot
+	    remove-newlines
+	    make-label)
 
-    (open rep
-	  gtk
-	  nokogiri-slot
-	  nokogiri-widget)
+    ((open rep
+	   gui.gtk
+	   sawfish.ui.slot
+	   sawfish.gtk.widget)
+     (access rep.structures))
 
   (define (define-layout-type name fun) (put name 'nokogiri-layout fun))
 
   (define (layout-type name)
     (or (get name 'nokogiri-layout)
 	;; try to dynamically load it
-	(let ((module-name (intern (concat "nokogiri-layouts/"
+	(let ((module-name (intern (concat "sawfish.ui.layouts."
 					   (symbol-name name)))))
 	  (condition-case nil
 	      (progn
-		(require module-name)
+		(rep.structures#intern-structure module-name)
 		(get name 'nokogiri-layout))
 	    (error (layout-type 'vbox))))))
 
@@ -57,8 +62,7 @@
 	   (let ((w (document-slot (car slots))))
 	     (set-slot-layout (car slots) w)
 	     w))
-	  (t
-	   (error "Too many slots for `single' layout"))))
+	  (t (error "Too many slots for `single' layout"))))
 
   (define-layout-type 'single layout-single)
 

@@ -21,14 +21,14 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.ui.user-level
 
-(define-structure nokogiri-user-level nokogiri-user-level-interface
+    (export slot-is-appropriate-p)
 
     (open rep
-	  nokogiri-config
-	  nokogiri-slot
-	  nokogiri-group)
+	  sawfish.ui.config
+	  sawfish.ui.slot
+	  sawfish.ui.group)
 
   (defvar *nokogiri-user-level* nil)	;novice,intermediate,expert
 

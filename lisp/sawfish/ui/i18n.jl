@@ -21,13 +21,15 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.ui.i18n
 
-(define-structure nokogiri-i18n nokogiri-i18n-interface
+    (export i18n-lang
+	    i18n-filename
+	    i18n-init)
 
     (open rep
-	  gettext
-	  nokogiri-wm)
+	  rep.i18n.gettext
+	  sawfish.ui.wm)
 
   (define i18n-lang (or (getenv "LC_ALL")
 			(getenv "LC_MESSAGES")

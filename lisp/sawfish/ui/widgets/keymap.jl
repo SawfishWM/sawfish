@@ -21,13 +21,12 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widgets/keymap ()
+(define-structure sawfish.ui.widgets.keymap ()
 
     (open rep
-	  gtk
-	  nokogiri-gnome
-	  nokogiri-widget
-	  nokogiri-shell)
+	  gui.gtk
+	  sawfish.gtk.stock
+	  sawfish.gtk.widget)
 
 ;;; widget for representing keymaps
 
@@ -47,13 +46,13 @@
 				     (cdr command) ", "))
 		(beautify-symbol-name command)))))
 
-    (define (dialog title callback #!optional value)
+    (define (dialog title callback #!key for value)
       (let ((widget (make-widget `(keymap:binding))))
 	(when value
 	  (widget-set widget value))
 	(simple-dialog (_ "Edit binding") (widget-gtk-widget widget)
 		       (lambda () (callback (widget-ref widget)))
-		       main-window)))
+		       for)))
 
     (define (validp x) (and (consp x) (symbolp (car x)) (stringp (cdr x))))
 

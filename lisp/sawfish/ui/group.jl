@@ -21,16 +21,29 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
+(define-structure sawfish.ui.group
 
-(define-structure nokogiri-group nokogiri-group-interface
+    (export group-real-name
+	    group-slots
+	    group-sub-groups
+	    group-layout
+	    root-group
+	    top-group
+	    set-top-group
+	    get-group
+	    fetch-group
+	    update-group
+	    get-sub-groups
+	    make-group-tree
+	    select-group
+	    redisplay-group)
 
     (open rep
-	  gtk
-	  records
-	  tables
-	  nokogiri-slot
-	  nokogiri-wm)
+	  gui.gtk
+	  rep.data.records
+	  rep.data.tables
+	  sawfish.ui.slot
+	  sawfish.ui.wm)
 
   (define-record-type :group
     (make-group name)

@@ -21,14 +21,14 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-layouts/keymaps ()
+(define-structure sawfish.ui.layouts.keymaps ()
 
     (open rep
-	  gtk
-	  nokogiri-slot
-	  nokogiri-wm
-	  nokogiri-layout
-	  nokogiri-widget)
+	  gui.gtk
+	  sawfish.ui.slot
+	  sawfish.ui.wm
+	  sawfish.ui.layout
+	  sawfish.gtk.widget)
 
   (define (layout-keymaps style slots)
     (let ((menu (gtk-menu-new))
