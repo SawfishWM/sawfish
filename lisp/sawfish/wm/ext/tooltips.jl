@@ -65,7 +65,7 @@
   (defcustom tooltips-delay 500
     "Number of milliseconds before displaying tooltips."
     :type number
-    :range (0 . nil)
+    :range (0)
     :depends tooltips-enabled
     :group (misc tooltips))
 
@@ -73,7 +73,7 @@
     "Number of milliseconds before removing tooltips."
     :type number
     :user-level expert
-    :range (0 . nil)
+    :range (0)
     :depends tooltips-enabled
     :group (misc tooltips))
 

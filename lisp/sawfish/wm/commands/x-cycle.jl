@@ -92,8 +92,8 @@
 
 ;;; customization options
 
-  ;;###autoload (defgroup cycle "Window Cycling" :group focus :require x-cycle)
-  (defgroup cycle "Window Cycling" :group focus :require x-cycle)
+  ;;###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+  (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
 
   (defcustom cycle-show-window-names t
     "Display window names while cycling through windows."
