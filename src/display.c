@@ -116,6 +116,9 @@ error_other_wm (Display *dpy, XErrorEvent *ev)
 static char *
 canonical_host (char *host)
 {
+    static char buf[256];
+    char *ptr;
+
     /* check that the name is fully qualified */
     if (!strchr (host, '.'))
     {
@@ -133,7 +136,14 @@ canonical_host (char *host)
 		host = h->h_name;
 	}
     }
-    return host;
+
+    ptr = buf;
+    while (*host != 0)
+    {
+	*ptr++ = tolower (*host);
+	host++;
+    }
+    return buf;
 }
 
 static char *
@@ -141,6 +151,8 @@ canonical_display (char *name)
 {
     static char buf[256];
     char *ptr = buf;
+    if (strncmp ("unix:", name, 5) == 0)
+	name += 4;
     if (*name == ':')
     {
 	repv host = Fsystem_name ();

@@ -28,6 +28,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <string.h>
+#include <ctype.h>
 
 #ifdef HAVE_UNIX
 # include <sys/types.h>
@@ -102,6 +103,9 @@ system_name(void)
 static char *
 canonical_host (char *host)
 {
+    static char buf[256];
+    char *ptr;
+
     /* check that the name is fully qualified */
     if (!strchr (host, '.'))
     {
@@ -119,7 +123,14 @@ canonical_host (char *host)
 		host = h->h_name;
 	}
     }
-    return host;
+
+    ptr = buf;
+    while (*host != 0)
+    {
+	*ptr++ = tolower (*host);
+	host++;
+    }
+    return buf;
 }
 
 static char *
@@ -127,6 +138,8 @@ canonical_display (char *name)
 {
     static char buf[256];
     char *ptr = buf;
+    if (strncmp ("unix:", name, 5) == 0)
+	name += 4;
     if (*name == ':')
     {
 	char *host = system_name ();
