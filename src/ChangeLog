@@ -1,3 +1,15 @@
+1999-10-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (list_frame_generator): maybe fix a bug when
+	Fget_font returns rep_NULL
+
+	* sawmill-ui.jl (build-keymap-shell): improved some gtk packing
+	parameters
+
+	* sawmill-menu.jl (create-menu): call
+	gtk-widget-lock-accelerators on each menu item if the function
+	is available
+
 1999-10-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* dlmalloc.c: support FreeBSD sbrk ()
