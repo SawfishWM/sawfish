@@ -1,5 +1,8 @@
 1999-08-02  John Harper  <john@dcs.warwick.ac.uk>
 
+	* workspace.jl: call window-state-change-hook when the window's
+	``state'' (i.e. sticky, iconified, ..) changes
+
 	* workspace.jl (toggle-window-sticky): new command
 	(ws-remove-window): new optional argument DONT-HIDE
 
