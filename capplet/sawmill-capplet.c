@@ -30,6 +30,8 @@
 
 #include <stdio.h>
 #include <signal.h>
+#include <errno.h>
+
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
@@ -61,14 +63,44 @@ char *ui_argv[] = { "sawmill-ui",
 
 /* communicating with sawmill-ui */
 
+#define X_IO(op, fd, buf, len)				\
+	char *buf__ = (char *)buf;			\
+	int todo__ = len;				\
+	while(todo__ > 0) {				\
+	    int this__ = op (fd, buf__, todo__);	\
+	    if(this__ < 0) {				\
+		if (errno != EINTR)			\
+		    return -1;				\
+	    }						\
+	    else if(this__ == 0)			\
+		break;					\
+	    else {					\
+		todo__ -= this__;			\
+		buf__ += this__;			\
+	    }						\
+	}						\
+	return len - todo__;
+
+static int
+x_write (int fd, void *buf, size_t len)
+{
+    X_IO (write, fd, buf, len);
+}
+
+static int
+x_read (int fd, void *buf, size_t len)
+{
+    X_IO (read, fd, buf, len);
+}
+
 static int
 ui_command (char *str)
 {
     if (ui_pid != 0)
     {
 	u_char ret;
-	write (ui_stdin[1], str, strlen(str));
-	read (ui_stdout[0], &ret, 1);
+	x_write (ui_stdin[1], str, strlen(str));
+	x_read (ui_stdout[0], &ret, 1);
 	return ret;
     }
     else
@@ -79,7 +111,7 @@ static void
 ui_output_callback (gpointer data, gint fd, GdkInputCondition cond)
 {
     char out;
-    if (read (ui_stdout[0], &out, 1) == 1)
+    if (x_read (ui_stdout[0], &out, 1) == 1)
     {
 	GtkWidget *label;
 
