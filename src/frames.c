@@ -209,10 +209,10 @@ set_frame_part_bg (struct frame_part *fp)
 		    /* If the frame part is inside the client window,
 		       then apply the shape to the _frame_part_ window,
 		       otherwise apply it to the _frame_ window */
-		    if (fp->x + fp->width >= 0
-			&& fp->x <= win->attr.width
-			&& fp->y + fp->height >= 0
-			&& fp->y <= win->attr.height)
+		    if (fp->x + fp->width > 0
+			&& fp->x < win->attr.width
+			&& fp->y + fp->height > 0
+			&& fp->y < win->attr.height)
 		    {
 			xoff = 0; yoff = 0;
 			shape_width = fp->width;
