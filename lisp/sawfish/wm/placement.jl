@@ -150,9 +150,10 @@ this mode. The single argument is the window to be placed."
       ;; XXX the ButtonRelease can get caught by move-window-int..
       ;; XXX (try double clicking on a gmc icon)
       (accept-x-input)
-      (move-window-to w (- (car ptr) (quotient (car dims) 2))
-		      (- (cdr ptr) (quotient (cdr dims) 2)))
-      (move-window-interactively w)))
+      (when (window-id w)
+	(move-window-to w (- (car ptr) (quotient (car dims) 2))
+			(- (cdr ptr) (quotient (cdr dims) 2)))
+	(move-window-interactively w))))
 
   (define (place-window-centered w)
     (let ((dims (window-frame-dimensions w))
