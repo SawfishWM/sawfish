@@ -28,16 +28,6 @@
 
 ;;;###autoload (custom-add-required 'move-resize)
 
-(defcustom resize-by-frame-class t
-  "Choose resized window edges by border-part, not by mouse position."
-  :type boolean
-  :group (move advanced))
-
-(defcustom resize-add-edges t
-  "Allow other window edges to be grabbed while resizing interactively."
-  :type boolean
-  :group (move advanced))
-
 (defcustom move-outline-mode 'opaque
   "The method of drawing windows being moved interactively."
   :type symbol
@@ -64,6 +54,12 @@
   "Show the current dimensions while resizing windows interactively."
   :group move
   :type boolean)
+
+(defcustom resize-edge-mode 'border
+  "The method choosing which window edges are moved while resizing with the mouse."
+  :type symbol
+  :options (region border grab)
+  :group (move advanced))
 
 (defcustom move-snap-edges nil
   "Snap window position to edges of other windows when interactively moving."
@@ -220,7 +216,8 @@
 				   (cdr move-resize-frame))))
 		    (apply draw-window-outline move-resize-last-outline))
 		  (if (eq move-resize-function 'resize)
-			    (move-resize-infer-anchor)
+		      (unless (eq resize-edge-mode 'grab)
+			(move-resize-infer-anchor))
 		    (move-resize-infer-directions))
 		  (catch 'move-resize-done
 		    (when from-motion-event
@@ -281,7 +278,7 @@
 		(y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1))
 		(x-max (cdr (assq 'max-width move-resize-hints)))
 		(y-max (cdr (assq 'max-height move-resize-hints))))
-	     (when resize-add-edges
+	     (when (eq resize-edge-mode 'grab)
 	       (move-resize-add-edges ptr-x ptr-y))
 	     (cond
 	      ((memq 'right move-resize-moving-edges)
@@ -373,7 +370,7 @@
   (unless move-resize-moving-edges
     (let
 	(tem)
-      (if (and resize-by-frame-class
+      (if (and (eq resize-edge-mode 'border)
 	       (clicked-frame-part)
 	       (setq tem (frame-part-get (clicked-frame-part) 'class))
 	       (setq tem (cdr (assq tem move-resize-fp-edges-alist))))
