@@ -56,6 +56,10 @@ DEFSYM(focused, "focused");
 DEFSYM(highlighted, "highlighted");
 DEFSYM(clicked, "clicked");
 DEFSYM(hide_client, "hide-client");
+DEFSYM(class, "class");
+DEFSYM(removable, "removable");
+DEFSYM(removed_classes, "removed-classes");
+DEFSYM(frame_part_classes, "frame-part-classes");
 
 static repv state_syms[fps_MAX];
 
@@ -68,6 +72,8 @@ bool frame_state_mutex;
    build the frame from the list of components. Each element
    in the list is an alist representing one component of the
    frame, possible tags include:
+
+	class . SYMBOL
 
 	background . IMAGE-OR-COLOR
 	background . (NORMAL FOCUSED HIGHLIGHTED CLICKED)
@@ -414,9 +420,20 @@ frame_part_prop_change (Lisp_Window *w)
 }
 
 static repv
-get_integer_prop (Lisp_Window *w, repv prop, repv elt)
+fp_assq (repv prop, repv alist, repv class_alist)
 {
-    repv tem = Fassq (prop, elt);
+    repv tem = Fassq (prop, alist);
+    if (tem && tem == Qnil)
+	tem = Fassq (prop, class_alist);
+    if (!tem)
+	tem = Qnil;
+    return tem;
+}
+
+static repv
+get_integer_prop (Lisp_Window *w, repv prop, repv elt, repv class)
+{
+    repv tem = fp_assq (prop, elt, class);
     if (tem && tem != Qnil)
     {
 	if (rep_INTP(rep_CDR(tem)))
@@ -495,8 +512,12 @@ list_frame_generator (Lisp_Window *w)
     while ((!regen && rep_CONSP(ptr))
 	   || (regen && fp != 0))
     {
-	repv elt;
+	repv elt, class = Qnil, class_elt = Qnil;
+	rep_GC_root gc_class, gc_class_elt;
 	bool had_left_edge = FALSE, had_top_edge = FALSE;
+
+	rep_PUSHGC(gc_class, class);
+	rep_PUSHGC(gc_class_elt, class_elt);
 
 	if (!regen)
 	{
@@ -511,27 +532,54 @@ list_frame_generator (Lisp_Window *w)
 	for (i = 0; i < fps_MAX; i++)
 	    fp->fg[i] = fp->bg[i] = fp->font[i] = Qnil;
 
-	/* get text label */
-	tem = Fassq (Qtext, elt);
+	/* find the class of the part, and the alist of class-local state */
+	tem = Fassq (Qclass, elt);
 	if (tem && tem != Qnil)
+	{
+	    class = rep_CDR(tem);
+	    tem = Fsymbol_value (Qframe_part_classes, Qt);
+	    if (rep_CONSP(tem))
+	    {
+		tem = Fassq (class, tem);
+		if (tem && tem != Qnil)
+		    class_elt = rep_CDR(tem);
+	    }
+	}
+
+	/* do we ignore this part? */
+	tem = Fassq (Qremovable, elt);
+	if (tem && tem != Qnil && rep_CDR(tem) != Qnil)
+	{
+	    tem = Fwindow_get (rep_VAL(w), Qremoved_classes);	/* XXX hoist */
+	    if (tem && rep_CONSP(tem))
+	    {
+		tem = Fmemq (class, tem);
+		if (tem && tem != Qnil)
+		    goto next_part;
+	    }
+	}
+
+	/* get text label */
+	tem = fp_assq (Qtext, elt, class_elt);
+	if (tem != Qnil)
 	    fp->text = rep_CDR(tem);
 	else
 	    fp->text = Qnil;
-	tem = Fassq (Qx_justify, elt);
-	if (tem && tem != Qnil)
+	tem = fp_assq (Qx_justify, elt, class_elt);
+	if (tem != Qnil)
 	    fp->x_justify = rep_CDR(tem);
 	else
 	    fp->x_justify = Qnil;
-	tem = Fassq (Qy_justify, elt);
-	if (tem && tem != Qnil)
+	tem = fp_assq (Qy_justify, elt, class_elt);
+	if (tem != Qnil)
 	    fp->y_justify = rep_CDR(tem);
 	else
 	    fp->y_justify = Qnil;
 
 	/* get cursor */
 	fp->cursor = Qnil;
-	tem = Fassq (Qcursor, elt);
-	if (tem && tem != Qnil)
+	tem = fp_assq (Qcursor, elt, class_elt);
+	if (tem != Qnil)
 	{
 	    if (rep_SYMBOLP(rep_CDR(tem)))
 		tem = Fget_cursor (rep_CDR(tem));
@@ -542,11 +590,11 @@ list_frame_generator (Lisp_Window *w)
 	}
 
 	/* get renderer function */
-	tem = Fassq (Qrenderer, elt);
-	if (tem && tem != Qnil && Ffunctionp (rep_CDR(tem)) != Qnil)
+	tem = fp_assq (Qrenderer, elt, class_elt);
+	if (tem != Qnil && Ffunctionp (rep_CDR(tem)) != Qnil)
 	{
 	    fp->renderer = rep_CDR(tem);
-	    tem = get_integer_prop (w, Qrender_scale, elt);
+	    tem = get_integer_prop (w, Qrender_scale, elt, class_elt);
 	    if (tem != Qnil && rep_INT(tem) > 0)
 		fp->render_scale = rep_INT(tem);
 	    else
@@ -556,8 +604,8 @@ list_frame_generator (Lisp_Window *w)
 	    fp->renderer = Qnil;
 
 	/* get background images or colors */
-	tem = Fassq (Qbackground, elt);
-	if (tem && tem != Qnil)
+	tem = fp_assq (Qbackground, elt, class_elt);
+	if (tem != Qnil)
 	{
 	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
 		tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
@@ -586,8 +634,8 @@ list_frame_generator (Lisp_Window *w)
 	}
 
 	/* get foreground colors */
-	tem = Fassq (Qforeground, elt);
-	if (tem && tem != Qnil)
+	tem = fp_assq (Qforeground, elt, class_elt);
+	if (tem != Qnil)
 	{
 	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
 		tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
@@ -615,8 +663,8 @@ list_frame_generator (Lisp_Window *w)
 	}
 
 	/* get fonts */
-	tem = Fassq (Qfont, elt);
-	if (tem && tem != Qnil)
+	tem = fp_assq (Qfont, elt, class_elt);
+	if (tem != Qnil)
 	{
 	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
 		tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
@@ -675,25 +723,25 @@ list_frame_generator (Lisp_Window *w)
 	}
 
 	/* get dimensions.. */
-	tem = get_integer_prop (w, Qwidth, elt);
+	tem = get_integer_prop (w, Qwidth, elt, class_elt);
 	if (tem != Qnil)
 	    fp->width = rep_INT(tem);
-	tem = get_integer_prop (w, Qheight, elt);
+	tem = get_integer_prop (w, Qheight, elt, class_elt);
 	if (tem != Qnil)
 	    fp->height = rep_INT(tem);
-	tem = get_integer_prop (w, Qleft_edge, elt);
+	tem = get_integer_prop (w, Qleft_edge, elt, class_elt);
 	if (tem != Qnil)
 	{
 	    fp->x = rep_INT(tem);
 	    had_left_edge = TRUE;
 	}
-	tem = get_integer_prop (w, Qtop_edge, elt);
+	tem = get_integer_prop (w, Qtop_edge, elt, class_elt);
 	if (tem != Qnil)
 	{
 	    fp->y = rep_INT(tem);
 	    had_top_edge = TRUE;
 	}
-	tem = get_integer_prop (w, Qright_edge, elt);
+	tem = get_integer_prop (w, Qright_edge, elt, class_elt);
 	if (tem != Qnil)
 	{
 	    if (had_left_edge)
@@ -701,7 +749,7 @@ list_frame_generator (Lisp_Window *w)
 	    else
 		fp->x = w->attr.width - rep_INT(tem) - fp->width;
 	}
-	tem = get_integer_prop (w, Qbottom_edge, elt);
+	tem = get_integer_prop (w, Qbottom_edge, elt, class_elt);
 	if (tem != Qnil)
 	{
 	    if (had_top_edge)
@@ -750,6 +798,8 @@ list_frame_generator (Lisp_Window *w)
 	    ptr = rep_CDR(ptr);
 	else
 	    fp = fp->next;
+
+	rep_POPGC; rep_POPGC;
     }
 
     /* now we can find the size and offset of the frame. */
@@ -791,10 +841,13 @@ list_frame_generator (Lisp_Window *w)
 	int i;
 	for (i = 0, fp = w->frame_parts; i < nparts; i++, fp = fp->next)
 	{
-	    rects[i].x = fp->x - w->frame_x;
-	    rects[i].y = fp->y - w->frame_y;
-	    rects[i].width = fp->width;
-	    rects[i].height = fp->height;
+	    if (fp->width > 0 && fp->height > 0)
+	    {
+		rects[i].x = fp->x - w->frame_x;
+		rects[i].y = fp->y - w->frame_y;
+		rects[i].width = fp->width;
+		rects[i].height = fp->height;
+	    }
 	}
 	if (!hide_client && !w->shaped)
 	{
@@ -864,6 +917,36 @@ list_frame_generator (Lisp_Window *w)
 	}
     }
     rep_POPGC;
+}
+
+/* Return the keymap associated with this frame part, or nil */
+repv
+get_keymap_for_frame_part (struct frame_part *fp)
+{
+    repv context_map = Qnil;
+    repv tem = Fassq (Qkeymap, fp->alist);
+    if (tem && tem != Qnil)
+	context_map = rep_CDR(tem);
+    else
+    {
+	/* no specific map, look in the class */
+	repv class = Fassq (Qclass, fp->alist);
+	if (class && class != Qnil)
+	{
+	    tem = Fsymbol_value (Qframe_part_classes, Qt);
+	    if (rep_CONSP(tem))
+	    {
+		tem = Fassq (rep_CDR(class), tem);
+		if (tem && tem != Qnil)
+		{
+		    tem = Fassq (Qkeymap, rep_CDR(tem));
+		    if (tem && tem != Qnil)
+			context_map = rep_CDR(tem);
+		}
+	    }
+	}
+    }
+    return context_map;
 }
 
 /* Mark all frame-parts of window W for gc. */
@@ -1031,6 +1114,11 @@ frames_init (void)
     rep_INTERN(highlighted);
     rep_INTERN(clicked);
     rep_INTERN(hide_client);
+    rep_INTERN(class);
+    rep_INTERN(removable);
+    rep_INTERN(removed_classes);
+
+    rep_INTERN(frame_part_classes);
 
     state_syms[fps_normal] = Qnil;
     state_syms[fps_focused] = Qfocused;
