@@ -391,7 +391,7 @@ list_frame_generator (Lisp_Window *w)
     rep_PUSHGC(gc_win, win);
 
     /* construct the component list, and find the bounding box */
-    if (w->frame_parts == 0)
+    if (w->frame == 0)
     {
 	ptr = gen_list;
 	last_fp = &w->frame_parts;
