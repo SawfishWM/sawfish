@@ -196,8 +196,8 @@
 	    <name>properties1</name>
 	    <signal>
 	      <name>activate</name>
-	      <handler>on-properties1-activate</handler>
-	      <last_modification_time>Wed, 22 Dec 1999 23:52:56 GMT</last_modification_time>
+	      <handler>on-edit-properties</handler>
+	      <last_modification_time>Sat, 08 Jan 2000 02:47:14 GMT</last_modification_time>
 	    </signal>
 	    <label>_Properties...</label>
 	    <right_justify>False</right_justify>
@@ -232,8 +232,8 @@
 	    <name>preferences1</name>
 	    <signal>
 	      <name>activate</name>
-	      <handler>on-preferences1-activate</handler>
-	      <last_modification_time>Wed, 22 Dec 1999 23:53:44 GMT</last_modification_time>
+	      <handler>on-settings-preferences</handler>
+	      <last_modification_time>Sat, 08 Jan 2000 02:57:25 GMT</last_modification_time>
 	    </signal>
 	    <label>_Preferences...</label>
 	    <right_justify>False</right_justify>
@@ -1549,93 +1549,6 @@ Highlighted</label>
 
 <widget>
   <class>GtkWindow</class>
-  <name>string-dialog</name>
-  <border_width>4</border_width>
-  <signal>
-    <name>delete_event</name>
-    <handler>on-string-dialog-cancel</handler>
-    <last_modification_time>Fri, 24 Dec 1999 23:51:53 GMT</last_modification_time>
-  </signal>
-  <title>[title]</title>
-  <type>GTK_WINDOW_DIALOG</type>
-  <position>GTK_WIN_POS_NONE</position>
-  <modal>False</modal>
-  <allow_shrink>False</allow_shrink>
-  <allow_grow>True</allow_grow>
-  <auto_shrink>False</auto_shrink>
-  <wmclass_name>string_dialog</wmclass_name>
-  <wmclass_class>SawmillThemer</wmclass_class>
-
-  <widget>
-    <class>GtkVBox</class>
-    <name>vbox6</name>
-    <border_width>4</border_width>
-    <homogeneous>False</homogeneous>
-    <spacing>0</spacing>
-
-    <widget>
-      <class>GtkEntry</class>
-      <name>string-dialog-entry</name>
-      <can_focus>True</can_focus>
-      <has_focus>True</has_focus>
-      <editable>True</editable>
-      <text_visible>True</text_visible>
-      <text_max_length>0</text_max_length>
-      <text></text>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>False</fill>
-      </child>
-    </widget>
-
-    <widget>
-      <class>GtkHButtonBox</class>
-      <name>hbuttonbox4</name>
-      <layout_style>GTK_BUTTONBOX_END</layout_style>
-      <spacing>30</spacing>
-      <child_min_width>85</child_min_width>
-      <child_min_height>27</child_min_height>
-      <child_ipad_x>7</child_ipad_x>
-      <child_ipad_y>0</child_ipad_y>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>True</fill>
-      </child>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>button13</name>
-	<can_default>True</can_default>
-	<has_default>True</has_default>
-	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on-string-dialog-ok</handler>
-	  <last_modification_time>Fri, 24 Dec 1999 23:51:15 GMT</last_modification_time>
-	</signal>
-	<label>OK</label>
-      </widget>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>button14</name>
-	<can_default>True</can_default>
-	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on-string-dialog-cancel</handler>
-	  <last_modification_time>Fri, 24 Dec 1999 23:51:37 GMT</last_modification_time>
-	</signal>
-	<label>Cancel</label>
-      </widget>
-    </widget>
-  </widget>
-</widget>
-
-<widget>
-  <class>GtkWindow</class>
   <name>preview-window</name>
   <width>300</width>
   <height>200</height>
@@ -1696,6 +1609,7 @@ Highlighted</label>
 	<class>GtkButton</class>
 	<name>button16</name>
 	<can_default>True</can_default>
+	<has_default>True</has_default>
 	<can_focus>True</can_focus>
 	<signal>
 	  <name>clicked</name>
@@ -1801,20 +1715,20 @@ Highlighted</label>
 
 <widget>
   <class>GtkDialog</class>
-  <name>image-props-dialog</name>
+  <name>props-dialog</name>
   <signal>
     <name>delete_event</name>
-    <handler>on-images-props-cancel</handler>
-    <last_modification_time>Sat, 01 Jan 2000 02:33:52 GMT</last_modification_time>
+    <handler>on-props-cancel</handler>
+    <last_modification_time>Sat, 08 Jan 2000 02:45:48 GMT</last_modification_time>
   </signal>
-  <title>Image Properties</title>
+  <title>Properties</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
   <allow_shrink>False</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
-  <wmclass_name>image_properties</wmclass_name>
+  <wmclass_name>image-properties</wmclass_name>
   <wmclass_class>SawmillThemer</wmclass_class>
 
   <widget>
@@ -1826,7 +1740,7 @@ Highlighted</label>
 
     <widget>
       <class>GtkVBox</class>
-      <name>image-props-vbox</name>
+      <name>props-vbox</name>
       <border_width>4</border_width>
       <homogeneous>False</homogeneous>
       <spacing>4</spacing>
@@ -1887,11 +1801,12 @@ Highlighted</label>
 	  <class>GtkButton</class>
 	  <name>button18</name>
 	  <can_default>True</can_default>
+	  <has_default>True</has_default>
 	  <can_focus>True</can_focus>
 	  <signal>
 	    <name>clicked</name>
-	    <handler>on-image-props-ok</handler>
-	    <last_modification_time>Sat, 01 Jan 2000 03:11:30 GMT</last_modification_time>
+	    <handler>on-props-ok</handler>
+	    <last_modification_time>Sat, 08 Jan 2000 02:46:04 GMT</last_modification_time>
 	  </signal>
 	  <label>OK</label>
 	</widget>
@@ -1903,8 +1818,134 @@ Highlighted</label>
 	  <can_focus>True</can_focus>
 	  <signal>
 	    <name>clicked</name>
-	    <handler>on-image-props-cancel</handler>
-	    <last_modification_time>Sat, 01 Jan 2000 03:04:50 GMT</last_modification_time>
+	    <handler>on-props-cancel</handler>
+	    <last_modification_time>Sat, 08 Jan 2000 02:46:14 GMT</last_modification_time>
+	  </signal>
+	  <label>Cancel</label>
+	</widget>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkDialog</class>
+  <name>string-dialog</name>
+  <title>[title]</title>
+  <type>GTK_WINDOW_DIALOG</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <wmclass_name>string-dialog</wmclass_name>
+  <wmclass_class>SawmillThemer</wmclass_class>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>Dialog:vbox</child_name>
+    <name>dialog-vbox2</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox2</name>
+      <border_width>4</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>4</spacing>
+      <child>
+	<padding>4</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>string-dialog-label</name>
+	<label>[title]</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>False</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkEntry</class>
+	<name>string-dialog-entry</name>
+	<can_focus>True</can_focus>
+	<has_focus>True</has_focus>
+	<editable>True</editable>
+	<text_visible>True</text_visible>
+	<text_max_length>0</text_max_length>
+	<text></text>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkHBox</class>
+      <child_name>Dialog:action_area</child_name>
+      <name>dialog-action_area3</name>
+      <border_width>10</border_width>
+      <homogeneous>True</homogeneous>
+      <spacing>5</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
+
+      <widget>
+	<class>GtkHButtonBox</class>
+	<name>hbuttonbox9</name>
+	<layout_style>GTK_BUTTONBOX_END</layout_style>
+	<spacing>30</spacing>
+	<child_min_width>85</child_min_width>
+	<child_min_height>27</child_min_height>
+	<child_ipad_x>7</child_ipad_x>
+	<child_ipad_y>0</child_ipad_y>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <name>button21</name>
+	  <can_default>True</can_default>
+	  <has_default>True</has_default>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on-string-dialog-ok</handler>
+	    <last_modification_time>Fri, 07 Jan 2000 23:46:52 GMT</last_modification_time>
+	  </signal>
+	  <label>OK</label>
+	</widget>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <name>button22</name>
+	  <can_default>True</can_default>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on-string-dialog-cancel</handler>
+	    <last_modification_time>Fri, 07 Jan 2000 23:47:09 GMT</last_modification_time>
 	  </signal>
 	  <label>Cancel</label>
 	</widget>
