@@ -23,6 +23,8 @@
 
 ;;;###autoload (setq custom-required (cons 'edge-flip custom-required))
 
+(defgroup edge-flip "Edge Flipping")
+
 ;; for the compiler's benefit
 (eval-when-compile (progn
 		     (require 'move-resize)
@@ -30,23 +32,23 @@
 		     (require 'timers)))
 
 (defcustom edge-flip-enabled nil
-  "Flip to next viewport when pointer hits edge of screen."
+  "Flip to next viewport/workspace when pointer hits edge of screen."
   :type boolean
   :require edge-flip
-  :group viewport
+  :group edge-flip
   :after-set edge-flip-enable)
-
-(defcustom edge-flip-delay 250
-  "Number of milliseconds to wait after pointer hits edge of screen before
-flipping to the next viewport."
-  :type number
-  :group viewport
-  :range (0 . 1000))
 
 (defcustom edge-flip-type 'viewport
   "What edge-flipping actually flips."
   :type (set viewport workspace)
-  :group viewport)
+  :group edge-flip)
+
+(defcustom edge-flip-delay 250
+  "Number of milliseconds to wait after pointer hits edge of screen before
+flipping."
+  :type number
+  :group edge-flip
+  :range (0 . 1000))
 
 (defvar ef-current-edge nil)
 (defvar ef-timer nil)
