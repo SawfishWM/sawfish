@@ -63,6 +63,7 @@
     (never-focus boolean)
     (focus-when-mapped boolean)
     (ungrouped boolean)
+    (unique-name boolean)
     (group symbol ,(lambda ()
 		     (delete-if-not symbolp (window-group-ids))))
     (place-mode symbol ,(lambda ()
@@ -330,4 +331,9 @@
   (put 'ungrouped 'match-window-setter
        (lambda (w prop value)
 	 (when value
-	   (add-window-to-new-group w)))))
+	   (add-window-to-new-group w))))
+
+  (put 'unique-name 'match-window-setter
+       (lambda (w prop value)
+	 (when value
+	   (uniquify-window-name w)))))
