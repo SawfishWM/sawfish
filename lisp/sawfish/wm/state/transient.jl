@@ -32,6 +32,52 @@
   :type boolean)
 
 
+;; functions
+
+(define (indirect-transient-of-p x y)
+  "Return t if window X is (directly, or indirectly) a transient for window Y."
+  (let ((x-for (window-transient-p x)))
+    (cond ((eql x-for (window-id y)) t)
+	  ((not x-for) nil)
+	  (t (let ((x-for-w (get-window-by-id x-for)))
+	       (if x-for-w
+		   (indirect-transient-of-p x-for-w y)
+		 nil))))))
+
+(defun transient-group (w &optional by-depth)
+  "Return the list of windows which is either a transient window for window W,
+or a window which W is a transient for. This always includes W. The `transient
+window for' relation holds for windows which are direct or indirect transients
+of the parent window in question."
+  (delete-if-not (lambda (x)
+		   (or (eq x w)
+		       (indirect-transient-of-p x w)
+		       (indirect-transient-of-p w x)))
+		 (if by-depth (stacking-order) (managed-windows))))
+
+
+;; commands for raising windows with their transients
+
+(defun raise-window-and-transients (w)
+  "Raise the current window to its highest allowed position in the stacking
+order. Also raise any transient windows that it has."
+  (interactive "%W")
+  (raise-windows w (transient-group w t)))
+
+(defun lower-window-and-transients (w)
+  "Lower the current window to its lowest allowed position in the stacking
+order. Also lower any transient windows that it has."
+  (interactive "%W")
+  (lower-windows w (transient-group w t)))
+
+(defun raise-lower-window-and-transients (w)
+  "If the window is at its highest possible position, then lower it to its
+lowest possible position. Otherwise raise it as far as allowed. Also changes
+the level of any transient windows it has."
+  (interactive "%W")
+  (raise-lower-windows w (transient-group w t)))
+
+
 ;; hooks
 
 (defun transient-map-window (w)
