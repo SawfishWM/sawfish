@@ -31,7 +31,7 @@ sawmill_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/libgradient.la \
 		../src/sawmill --batch --no-rc
 COMPILE_ENV = SAWMILLLISPDIR=../lisp SAWMILLDOCFILE=../DOC
 
-THEMES := absolute-e brushed-metal gradient gtk microGUI simple smaker
+THEMES := absolute-e brushed-metal gradient gtk microGUI mono simple smaker
 
 all :
 # only uncompiled themes are loaded for now, so no point doing this
