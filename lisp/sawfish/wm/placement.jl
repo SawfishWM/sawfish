@@ -23,12 +23,12 @@
 
 (defcustom place-window-mode 'best-fit
   "Method of selecting the position of a freshly-mapped window."
-  :type (set random interactive first-fit best-fit none)
+  :type (set random interactive first-fit best-fit centered none)
   :group placement)
 
 (defcustom place-transient-mode 'random
   "Method of selecting the position of a freshly-mapped transient window."
-  :type (set random interactive first-fit best-fit none)
+  :type (set random interactive first-fit best-fit centered none)
   :group placement)
 
 (defcustom ignore-program-positions nil
@@ -58,6 +58,12 @@
 		    (- (cdr ptr) (/ (cdr dims) 2)))
     (move-window-interactively w)))
 
+(defun place-window-centered (w)
+  (let
+      ((dims (window-frame-dimensions w)))
+    (move-window-to w (/ (max 0 (- (screen-width) (car dims))) 2)
+		    (/ (max 0 (- (screen-height) (cdr dims))) 2))))
+
 ;; called from the place-window-hook
 (defun place-window (w)
   (let
@@ -79,7 +85,9 @@
 	      ((eq mode 'first-fit)
 	       (place-window-first-fit w))
 	      ((eq mode 'best-fit)
-	       (place-window-best-fit w)))
+	       (place-window-best-fit w))
+	      ((eq mode 'centered)
+	       (place-window-centered w)))
 	t))))
 
 (add-hook 'place-window-hook 'place-window t)
