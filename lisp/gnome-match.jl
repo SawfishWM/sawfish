@@ -24,14 +24,14 @@
 
 ;; Originally from Ben Liblit <liblit@cs.berkeley.edu>
 
-(put 'gnome-skip-tasklist 'match-window-setter
+(put 'skip-tasklist 'match-window-setter
      (lambda (window property value)
        ((if value
 	    gnome-set-skip-tasklist
 	  gnome-clear-skip-tasklist)
 	window)))
 
-(put 'gnome-skip-winlist 'match-window-setter
+(put 'skip-winlist 'match-window-setter
      (lambda (window property value)
        ((if value
 	    gnome-set-skip-winlist
