@@ -27,7 +27,7 @@
 ;; represents the level of normal windows, negative for windows below
 ;; this level, and positive for windows above the normal level
 
-(defcustom transients-above 'all
+(defcustom transients-above 'none
   "Keep transient windows stacked above."
   :group misc
   :type (set all parents none))
