@@ -25,9 +25,6 @@
 #include <X11/extensions/shape.h>
 #include <alloca.h>
 
-static Lisp_Frame *frame_list;
-int frame_type;
-
 static XID window_fp_context;
 
 DEFSYM(default_frame, "default-frame");
@@ -53,214 +50,6 @@ DEFSYM(top_edge, "top-edge");
 DEFSYM(right_edge, "right-edge");
 DEFSYM(bottom_edge, "bottom-edge");
 DEFSYM(cursor, "cursor");
-
-DEFUN("get-frame", Fget_frame, Sget_frame, (repv name), rep_Subr1) /*
-::doc:Sget-frame::
-get-frame NAME
-::end:: */
-{
-    Lisp_Frame *f;
-    rep_DECLARE1(name, rep_STRINGP);
-
-    f = frame_list;
-    while (f != 0 && strcmp (rep_STR(name), rep_STR(f->name)) != 0)
-	f = f->next;
-    return (f == 0) ? Qnil : rep_VAL(f);
-}
-
-DEFUN("make-frame", Fmake_frame, Smake_frame,
-      (repv name, repv plist), rep_Subr2) /*
-::doc:Smake-frame::
-make-frame NAME [PLIST]
-::end:: */
-{
-    Lisp_Frame *f;
-    rep_DECLARE1(name, rep_STRINGP);
-    f = rep_ALLOC_CELL(sizeof(Lisp_Frame));
-    f->car = frame_type;
-    f->next = frame_list;
-    frame_list = f;
-    f->name = name;
-    f->plist = plist;
-    f->type = f_nil;
-    return rep_VAL(f);
-}
-
-DEFUN("frame-get", Fframe_get, Sframe_get, (repv win, repv prop), rep_Subr2) /*
-::doc::Sframe-get::
-frame-get FRAME PROPERTY
-::end:: */
-{
-    repv plist;
-    rep_DECLARE1(win, FRAMEP);
-    plist = VFRAME(win)->plist;
-    while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
-    {
-	if (rep_CAR(plist) == prop)
-	    return rep_CAR(rep_CDR(plist));
-	plist = rep_CDR(rep_CDR(plist));
-    }
-    return Qnil;
-}
-
-DEFUN("frame-put", Fframe_put, Sframe_put,
-      (repv win, repv prop, repv val), rep_Subr3) /*
-::doc:Sframe-put::
-frame-put FRAME PROPERTY VALUE
-::end:: */
-{
-    repv plist;
-    rep_DECLARE1(win, FRAMEP);
-    plist = VFRAME(win)->plist;
-    while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
-    {
-	if (rep_CAR(plist) == prop)
-	{
-	    if (!rep_CONS_WRITABLE_P(rep_CDR(plist)))
-	    {
-		/* Can't write into a dumped cell; need to cons
-		   onto the head. */
-		break;
-	    }
-	    rep_CAR(rep_CDR(plist)) = val;
-	    return val;
-	}
-	plist = rep_CDR(rep_CDR(plist));
-    }
-    plist = Fcons(prop, Fcons(val, VFRAME(win)->plist));
-    if (plist != rep_NULL)
-	VFRAME(win)->plist = plist;
-    return val;
-}
-
-DEFUN("framep", Fframep, Sframep, (repv arg), rep_Subr1) /*
-::doc:Sframep::
-framep ARG
-::end:: */
-{
-    return FRAMEP(arg) ? Qt : Qnil;
-}
-
-DEFUN("frame-generator", Fframe_generator, Sframe_generator,
-      (repv frame), rep_Subr1) /*
-::doc:Sframe-generator::
-frame-generator FRAME
-::end:: */
-{
-    rep_DECLARE1(frame, FRAMEP);
-    switch (VFRAME(frame)->type)
-    {
-    case f_list:
-	return VFRAME(frame)->generator.list;
-
-    case f_function:
-	return Qinternal;
-
-    default:
-	return Qnil;
-    }
-}
-
-DEFUN("set-frame-generator", Fset_frame_generator, Sset_frame_generator,
-      (repv frame, repv gen), rep_Subr2) /*
-::doc:Sset-frame-generator::
-set-frame-generator FRAME GENERATOR
-::end:: */
-{
-    rep_DECLARE1(frame, FRAMEP);
-    if (gen == Qnil)
-	VFRAME(frame)->type = f_nil;
-    else
-    {
-	rep_DECLARE2(gen, rep_CONSP);
-	VFRAME(frame)->type = f_list;
-	VFRAME(frame)->generator.list = gen;
-    }
-    return gen;
-}
-
-
-/* standard decoration */
-
-static long def_title_height = 10, def_border_color, def_title_bg;
-
-static void
-default_frame_destroyer (Lisp_Window *w)
-{
-    XDestroyWindow (dpy, w->frame);
-}
-
-static void
-default_frame_focuser (Lisp_Window *w)
-{
-    XSetWindowAttributes wa;
-    wa.background_pixel = (WINDOW_FOCUSED_P(w)
-			   ? def_border_color : def_title_bg);
-    XChangeWindowAttributes (dpy, w->frame, CWBackPixel, &wa);
-    XClearWindow (dpy, w->frame);
-}
-
-static void
-default_frame_rebuilder (Lisp_Window *w)
-{
-    w->frame_width = w->attr.width + 4;
-    w->frame_height = def_title_height + w->attr.height + 4;
-    XResizeWindow (dpy, w->frame, w->frame_width, w->frame_height);
-}
-
-static void
-default_frame_generator (Lisp_Window *w)
-{
-    XSetWindowAttributes wa;
-    wa.background_pixel = def_title_bg;
-    wa.border_pixel = def_border_color;
-    wa.colormap = screen_cmap;
-    w->frame_width = w->attr.width + 4;
-    w->frame_height = def_title_height + w->attr.height + 4;
-    w->frame_x = -2;
-    w->frame_y = -def_title_height - 2;
-    w->frame = XCreateWindow (dpy, root_window, w->attr.x, w->attr.y,
-			      w->frame_width, w->frame_height,
-			      w->attr.border_width, screen_depth,
-			      InputOutput, screen_visual,
-			      CWBackPixel | CWBorderPixel | CWColormap, &wa);
-    w->destroy_frame = default_frame_destroyer;
-    w->focus_change = default_frame_focuser;
-    w->rebuild_frame = default_frame_rebuilder;
-}
-
-
-/* nil decoration */
-
-static void
-nil_frame_rebuilder (Lisp_Window *w)
-{
-    w->frame_width = w->attr.width;
-    w->frame_height = w->attr.height;
-    XResizeWindow (dpy, w->frame, w->frame_width, w->frame_height);
-}
-
-static void
-nil_frame_generator (Lisp_Window *w)
-{
-    XSetWindowAttributes wa;
-    DB(("  making nil frame\n"));
-    wa.background_pixel = def_title_bg;
-    wa.border_pixel = def_border_color;
-    wa.colormap = screen_cmap;
-    w->frame = w->id;
-    w->frame_width = w->attr.width;
-    w->frame_height = w->attr.height;
-    w->frame_x = 0;
-    w->frame_y = 0;
-    w->frame = XCreateWindow (dpy, root_window, w->attr.x, w->attr.y,
-			      w->frame_width, w->frame_height,
-			      w->attr.border_width, screen_depth,
-			      InputOutput, screen_visual,
-			      CWBackPixel | CWBorderPixel | CWColormap,
-			      &wa);
-    w->rebuild_frame = nil_frame_rebuilder;
-}
 
 
 /* building frames from component lists
@@ -328,9 +117,12 @@ set_frame_part_bg (struct frame_part *fp)
 	tem = Fimage_get (rep_VAL(image), Qtiled);
 	if (tem && tem != Qnil)
 	    tiled = TRUE;
-	tem = Fframe_get (fp->win->frame_style, Qunshaped);
-	if (tem && tem != Qnil)
-	    shaped = FALSE;
+	if (rep_SYMBOLP(fp->win->frame_style))
+	{
+	    tem = Fget (fp->win->frame_style, Qunshaped);
+	    if (tem && tem != Qnil)
+		shaped = FALSE;
+	}
 
 	if (tiled)
 	{
@@ -572,7 +364,7 @@ get_integer_prop (Lisp_Window *w, repv prop, repv elt)
 static void
 list_frame_generator (Lisp_Window *w)
 {
-    repv gen_list = VFRAME(w->frame_style)->generator.list;
+    repv gen_list = w->frame_style;
     repv ptr = rep_NULL, tem;
     struct frame_part **last_fp = 0;
     struct frame_part *fp = 0;
@@ -589,6 +381,9 @@ list_frame_generator (Lisp_Window *w)
     int right_x = w->attr.width, bottom_y = w->attr.height;
 
     DB(("list_frame_generator(%s)\n", w->name));
+
+    if (rep_SYMBOLP(gen_list))
+	gen_list = Fsymbol_value (gen_list, Qt);
 
     rep_PUSHGC(gc_win, win);
 
@@ -854,24 +649,23 @@ list_frame_generator (Lisp_Window *w)
     w->property_change = frame_part_prop_change;
 
     /* if shaped, make the initial frame shape */
-    tem = Fframe_get (w->frame_style, Qunshaped);
+    if (rep_SYMBOLP(w->frame_style))
+	tem = Fget (w->frame_style, Qunshaped);
+    else
+	tem = Qnil;
     if (tem == Qnil)
     {
-	XRectangle *rects = alloca (sizeof (XRectangle) * nparts + 1);
+	XRectangle *rects = alloca (sizeof (XRectangle) * nparts);
 	int i;
-	rects[0].x = -w->frame_x;
-	rects[0].y = -w->frame_y;
-	rects[0].width = w->attr.width;
-	rects[0].height = w->attr.height;
 	for (i = 0, fp = w->frame_parts; i < nparts; i++, fp = fp->next)
 	{
-	    rects[i+1].x = fp->x - w->frame_x;
-	    rects[i+1].y = fp->y - w->frame_y;
-	    rects[i+1].width = fp->width;
-	    rects[i+1].height = fp->height;
+	    rects[i].x = fp->x - w->frame_x;
+	    rects[i].y = fp->y - w->frame_y;
+	    rects[i].width = fp->width;
+	    rects[i].height = fp->height;
 	}
 	XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
-				 rects, nparts + 1, ShapeSet, Unsorted);
+				 rects, nparts, ShapeSet, Unsorted);
     }
 
     /* create/update windows for each part */
@@ -957,22 +751,7 @@ create_window_frame (Lisp_Window *w)
     w->focus_change = 0;
     w->rebuild_frame = 0;
     w->property_change = 0;
-    if (!FRAMEP(w->frame_style))
-	w->frame_style = Fsymbol_value (Qnil_frame, Qt);
-    if (!FRAMEP(w->frame_style) || VFRAME(w->frame_style)->type == f_nil)
-    {
-	nil_frame_generator (w);
-    }
-    else if (VFRAME(w->frame_style)->type == f_function)
-    {
-	DB(("  calling frame generator function %p\n",
-	    VFRAME(w->frame_style)->generator.function));
-	VFRAME(w->frame_style)->generator.function (w);
-    }
-    else if (VFRAME(w->frame_style)->type == f_list)
-    {
-	list_frame_generator (w);
-    }
+    list_frame_generator (w);
 }
 
 /* Destroy the frame of window W */
@@ -990,75 +769,16 @@ destroy_window_frame (Lisp_Window *w)
 }
 
 
-/* type hooks */
-
-static void
-frame_prin (repv stream, repv obj)
-{
-    char buf[256];
-    sprintf (buf, "#<frame %s>", rep_STR(VFRAME(obj)->name));
-    rep_stream_puts (stream, buf, -1, FALSE);
-}
-
-static void
-frame_mark (repv obj)
-{
-    rep_MARKVAL(VFRAME(obj)->name);
-    rep_MARKVAL(VFRAME(obj)->plist);
-    if (VFRAME(obj)->type == f_list)
-	rep_MARKVAL(VFRAME(obj)->generator.list);
-}
-
-static void
-frame_sweep (void)
-{
-    Lisp_Frame *w = frame_list;
-    frame_list = 0;
-    while (w != 0)
-    {
-	Lisp_Frame *next = w->next;
-	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
-	{
-	    rep_FREE_CELL(w);
-	}
-	else
-	{
-	    rep_GC_CLR_CELL(rep_VAL(w));
-	    w->next = frame_list;
-	    frame_list = w;
-	}
-	w = next;
-    }
-}
-
-
 /* initialisation */
 
 void
 frames_init (void)
 {
-    repv def;
-    frame_type = rep_register_new_type ("frame", 0, frame_prin, frame_prin,
-					 frame_sweep, frame_mark,
-					 0, 0, 0, 0, 0, 0, 0);
-    rep_ADD_SUBR(Sget_frame);
-    rep_ADD_SUBR(Smake_frame);
-    rep_ADD_SUBR(Sframe_get);
-    rep_ADD_SUBR(Sframe_put);
-    rep_ADD_SUBR(Sframep);
-    rep_ADD_SUBR(Sframe_generator);
-    rep_ADD_SUBR(Sset_frame_generator);
-
     rep_INTERN(default_frame);
-    def = Fmake_frame (rep_string_dup ("default"), Qnil);
-    VFRAME(def)->type = f_function;
-    VFRAME(def)->generator.function = default_frame_generator;
-    rep_SYM(Qdefault_frame)->value = def;
+    rep_SYM(Qdefault_frame)->value = Qnil;
 
     rep_INTERN(nil_frame);
-    def = Fmake_frame (rep_string_dup ("nil"), Qnil);
-    VFRAME(def)->type = f_nil;
-    rep_SYM(Qnil_frame)->value = def;
+    rep_SYM(Qnil_frame)->value = Qnil;
 
     rep_INTERN(internal);
     rep_INTERN(tiled);
@@ -1081,9 +801,6 @@ frames_init (void)
     rep_INTERN(right_edge);
     rep_INTERN(bottom_edge);
     rep_INTERN(cursor);
-
-    def_border_color = BlackPixel (dpy, screen_num);
-    def_title_bg = WhitePixel (dpy, screen_num);
 
     window_fp_context = XUniqueContext ();
 }
