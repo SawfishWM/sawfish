@@ -187,16 +187,17 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 
   (define-focus-mode 'click
     (lambda (w action)
-      (cond ((eq action 'focus-in)
-	     (focus-pop-map w))
-	    ((memq action '(focus-out add-window))
-	     (unless (eq w (input-focus))
-	       (focus-push-map w click-to-focus-map)))
-	    ((eq action 'before-mode-change)
-	     (focus-pop-map w))
-	    ((eq action 'after-mode-change)
-	     (unless (eq w (input-focus))
-	       (focus-push-map w click-to-focus-map))))))
+      (case action
+	((focus-in)
+	 (focus-pop-map w))
+	((focus-out add-window)
+	 (unless (eq w (input-focus))
+	   (focus-push-map w click-to-focus-map)))
+	((before-mode-change)
+	 (focus-pop-map w))
+	((after-mode-change)
+	 (unless (eq w (input-focus))
+	   (focus-push-map w click-to-focus-map))))))
 
 
 ;;; hooks
