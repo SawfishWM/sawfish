@@ -77,6 +77,14 @@ DEFSYM(south_east, "south-east");
 
 static repv gravity_map[StaticGravity+1];
 
+struct prop_handler {
+    struct prop_handler *next;
+    repv prop;
+    void (*callback) (Lisp_Window *w, repv prop, repv old, repv new);
+};
+
+static struct prop_handler *prop_handlers;
+
 
 /* utilities */
 
@@ -569,6 +577,17 @@ object WINDOW.
     return ret;
 }
 
+void
+register_property_monitor (repv prop,
+			   void (*callback) (Lisp_Window *, repv, repv, repv))
+{
+    struct prop_handler *ph = rep_alloc (sizeof (struct prop_handler));
+    ph->next = prop_handlers;
+    prop_handlers = ph;
+    ph->prop = prop;
+    ph->callback = callback;
+}    
+
 DEFUN("window-put", Fwindow_put, Swindow_put,
       (repv win, repv prop, repv val), rep_Subr3) /*
 ::doc:sawfish.wm.windows.subrs#window-put::
@@ -588,13 +607,12 @@ Note that these are Lisp properties not X properties.
 	    || (!rep_SYMBOLP(prop)
 		&& rep_value_cmp (rep_CAR(plist), prop) == 0))
 	{
-	    if (prop == Qkeymap && VWIN(win)->id != 0)
+	    struct prop_handler *ph;
+	    for (ph = prop_handlers; ph != 0; ph = ph->next)
 	    {
-		/* A bit of a hack */
-		grab_keymap_events (VWIN(win)->id,
-				    rep_CAR(rep_CDR(plist)), FALSE);
-		grab_keymap_events (VWIN(win)->id, val, TRUE);
-
+		repv old = rep_CADR (plist);
+		if (ph->prop == prop && old != val)
+		    ph->callback (VWIN (win), prop, old, val);
 	    }
 	    rep_CAR(rep_CDR(plist)) = val;
 	    return val;
@@ -1334,13 +1352,15 @@ window_mark (repv win)
 static void
 window_mark_type (void)
 {
-    Lisp_Window *w = window_list;
-    while (w != 0)
+    Lisp_Window *w;
+    struct prop_handler *ph;
+    for (w = window_list; w != 0; w = w->next)
     {
 	if (w->id != 0 || !w->destroyed)
 	    rep_MARKVAL(rep_VAL(w));
-	w = w->next;
     }
+    for (ph = prop_handlers; ph != 0; ph = ph->next)
+	rep_MARKVAL (ph->prop);
 }
 
 static void
