@@ -243,8 +243,7 @@ key_press (XEvent *ev)
     /* Don't look for a context map, frame parts are never focused */
     eval_input_event (Qnil);
 
-    XAllowEvents (dpy, ev->type == KeyPress ? SyncKeyboard : AsyncKeyboard,
-		  last_event_time);
+    XAllowEvents (dpy, SyncKeyboard, last_event_time);
 }
 
 static void
@@ -343,8 +342,7 @@ button_press (XEvent *ev)
 	XUngrabPointer (dpy, last_event_time);
     }
 
-    XAllowEvents (dpy, ev->type == ButtonPress ? SyncPointer : AsyncPointer,
-		  last_event_time);
+    XAllowEvents (dpy, SyncPointer, last_event_time);
 }
 
 static void
