@@ -278,6 +278,7 @@ add_window (Window id)
 	w->saved_id = id;
 	w->plist = Qnil;
 	w->frame_style = Qnil;;
+	w->icon_image = rep_NULL;
 
 	/* ..now do the X11 stuff */
 
@@ -1149,6 +1150,47 @@ out:
     return tem;
 }
 
+DEFUN("window-icon-image", Fwindow_icon_image,
+      Swindow_icon_image, (repv win), rep_Subr1) /*
+::doc:window-icon-image::
+window-icon-image WINDOW
+
+Returns an image object representing the icon currently associated with
+WINDOW. Returns the symbol `nil' if no such image.
+::end:: */
+{
+   rep_DECLARE1 (win, WINDOWP);
+
+   if (VWIN (win)->icon_image == rep_NULL)
+   {
+       repv id, mask_id;
+       repv ret = Qnil;
+
+       if (VWIN (win)->wmhints->flags & IconPixmapHint
+	   && VWIN (win)->wmhints->icon_pixmap != 0)
+       {
+	   id = rep_MAKE_INT (VWIN (win)->wmhints->icon_pixmap);
+       }
+       else
+	   id = Qnil;
+
+       if (VWIN (win)->wmhints->flags & IconMaskHint
+	   && VWIN (win)->wmhints->icon_mask != 0)
+       {
+	   mask_id = rep_MAKE_INT (VWIN (win)->wmhints->icon_mask);
+       }
+       else
+	   mask_id = Qnil;
+
+       if (id != Qnil)
+	   ret = Fmake_image_from_x_drawable (id, mask_id);
+
+       VWIN (win)->icon_image = ret;
+   }
+
+   return VWIN (win)->icon_image;
+}
+
 
 /* type hooks */
 
@@ -1175,6 +1217,7 @@ window_mark (repv win)
     rep_MARKVAL(VWIN(win)->name);
     rep_MARKVAL(VWIN(win)->full_name);
     rep_MARKVAL(VWIN(win)->icon_name);
+    rep_MARKVAL(VWIN(win)->icon_image);
 }
 
 static void
@@ -1297,6 +1340,7 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_size_hints);
     rep_ADD_SUBR(Scall_window_hook);
     rep_ADD_SUBR(Swindow_border_width);
+    rep_ADD_SUBR(Swindow_icon_image);
 
     rep_INTERN_SPECIAL(before_add_window_hook);
     rep_INTERN_SPECIAL(add_window_hook);
