@@ -140,7 +140,7 @@ that window on (counting from zero).")
 
 ;; Low level functions
 
-(defun ws-workspace-empty-p (space)
+(defun workspace-empty-p (space)
   (catch 'out
     (mapc #'(lambda (w)
 	      (when (equal (window-get w 'workspace) space)
@@ -150,7 +150,7 @@ that window on (counting from zero).")
 
 ;; returns (FIRST-INDEX . LAST-INDEX) defining the subset of the
 ;; continuum that is `interesting' to the user
-(defun ws-workspace-limits ()
+(defun workspace-limits ()
   (let
       ((max-w (if (and lock-first-workspace last-interesting-workspace)
 		  (max last-interesting-workspace current-workspace)
@@ -173,7 +173,7 @@ that window on (counting from zero).")
 ;; renormalize the interesting workspaces so they being at index zero
 (defun ws-normalize-indices ()
   (let
-      ((limits (ws-workspace-limits))
+      ((limits (workspace-limits))
        tem)
     (mapc #'(lambda (w)
 	      (when (setq tem (window-get w 'workspace))
@@ -264,12 +264,12 @@ that window on (counting from zero).")
 
 (defun ws-after-removing-window (w space)
   (when (and delete-workspaces-when-empty
-	     (ws-workspace-empty-p space))
+	     (workspace-empty-p space))
     ;; workspace is now empty
     (ws-remove-workspace space)
     (ws-normalize-indices)
     (let
-	((limits (ws-workspace-limits)))
+	((limits (workspace-limits)))
       (when (and (= current-workspace (cdr limits))
 		 (/= (car limits) (cdr limits)))
 	(select-workspace (1- current-workspace))))))
@@ -369,7 +369,7 @@ that window on (counting from zero).")
 	  (window-put w 'workspace (cdr tem)))))
     (if (window-get w 'workspace)
 	(let
-	    ((space (- (window-get w 'workspace) (car (ws-workspace-limits)))))
+	    ((space (- (window-get w 'workspace) (car (workspace-limits)))))
 	  (window-put w 'workspace nil)
 	  (ws-add-window-to-space w space))
       (let
@@ -407,7 +407,7 @@ that window on (counting from zero).")
 
 (defun workspace-menu ()
   (let*
-      ((limits (ws-workspace-limits))
+      ((limits (workspace-limits))
        (i (car limits))
        menu)
     (while (<= i (cdr limits))
@@ -428,7 +428,7 @@ that window on (counting from zero).")
 
 (defun window-menu ()
   (let*
-      ((limits (ws-workspace-limits))
+      ((limits (workspace-limits))
        (windows (managed-windows))
        (i (car limits))
        menu name)
@@ -482,7 +482,7 @@ that window on (counting from zero).")
 
 (defun ws-call-with-workspace (fun count mode)
   (let
-      ((limits (ws-workspace-limits))
+      ((limits (workspace-limits))
        (target (+ current-workspace count)))
     (if (and (>= target (car limits)) (<= target (cdr limits)))
 	(funcall fun target)
@@ -515,7 +515,7 @@ will be created."
   "Create a new workspace at the end of the list, and move the window to it."
   (interactive "%W")
   (let
-      ((limits (ws-workspace-limits))
+      ((limits (workspace-limits))
        (was-focused (eq (input-focus) window)))
     (when (window-get window 'workspace)
       (select-workspace (1+ (cdr limits)) was-focused)
@@ -536,7 +536,7 @@ will be created."
   "Create a new workspace at the start of the list, and move the window to it."
   (interactive "%W")
   (let
-      ((limits (ws-workspace-limits))
+      ((limits (workspace-limits))
        (was-focused (eq (input-focus) window)))
     (when (window-get window 'workspace)
       (select-workspace (1- (car limits)) was-focused)
@@ -578,12 +578,12 @@ previous workspace."
 
 (defun select-workspace-from-first (count)
   (let
-      ((limits (ws-workspace-limits)))
+      ((limits (workspace-limits)))
     (select-workspace (+ count (car limits)))))
 
 (defun send-window-to-workspace-from-first (window count)
   (let
-      ((limits (ws-workspace-limits))
+      ((limits (workspace-limits))
        (was-focused (eq (input-focus) window)))
     (select-workspace (+ count (car limits)) was-focused)
     (ws-move-window window current-workspace was-focused)))
@@ -702,7 +702,7 @@ all workspaces."
 
 (defun ws-saved-state (w)
   (let
-      ((limits (ws-workspace-limits))
+      ((limits (workspace-limits))
        (space (window-get w 'workspace)))
     (when space
       `((workspace . ,(- space (car limits)))))))

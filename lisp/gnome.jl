@@ -65,7 +65,7 @@
 
 (defun gnome-set-workspace ()
   (let
-      ((limits (ws-workspace-limits))
+      ((limits (workspace-limits))
        (port (screen-viewport))
        (port-size (cons viewport-columns viewport-rows)))
     (mapc #'(lambda (w)
@@ -151,7 +151,7 @@
 (defun gnome-client-message-handler (w type data)
   (cond ((eq type '_WIN_WORKSPACE)
 	 (let
-	     ((limits (ws-workspace-limits)))
+	     ((limits (workspace-limits)))
 	   (select-workspace (+ (aref data 0) (car limits)))
 	   t))
 	((eq type '_WIN_AREA)

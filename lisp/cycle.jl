@@ -42,7 +42,7 @@
   (catch 'out
     (let*
 	((space current-workspace)
-	 (limits (ws-workspace-limits))
+	 (limits (workspace-limits))
 	 (windows (workspace-windows space))
 	 (win (nth 1 (memq (input-focus) windows))))
       (while (not win)
@@ -63,7 +63,7 @@
   (catch 'out
     (let*
 	((space current-workspace)
-	 (limits (ws-workspace-limits))
+	 (limits (workspace-limits))
 	 (windows (nreverse (workspace-windows space)))
 	 (win (nth 1 (memq (input-focus) windows))))
       (while (not win)
