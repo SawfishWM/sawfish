@@ -658,7 +658,7 @@
 				  extra))))
 	    windows)
       (when extra
-	(setq menu (nconc extra (list nil) menu))))
+	(setq menu (if menu (nconc extra (list nil) menu) extra))))
     (nreverse menu)))
 
 (defun popup-window-list ()
