@@ -120,13 +120,6 @@
 (defvar x-cycle-stacking nil)
 (defvar x-cycle-windows t)
 
-;; associate modifier names with their keys
-(defvar x-cycle-modifier-alist `(("A" ,@alt-keysyms)
-				 ("M" ,@meta-keysyms)
-				 ("H" ,@hyper-keysyms)
-				 ("S" "Shift_L" "Shift_R")
-				 ("C" "Control_L" "Control_R")))
-
 
 ;; code
 
@@ -135,7 +128,9 @@
   "Cycle through all windows in order of recent selections."
   (interactive "e")
   (let*
-      ((name (event-name event))
+      ((decoded (decode-event event))
+       (modifier-keys (apply append (mapcar modifier->keysyms
+					    (nth 1 decoded))))
        (eval-modifier-events t)
        (eval-key-release-events t)
        (override-keymap (make-keymap))
@@ -143,19 +138,17 @@
        (disable-auto-raise cycle-disable-auto-raise)
        (tooltips-enabled nil)
        (x-cycle-current nil)
-       (x-cycle-stacking nil)
-       modifier tem)
+       (x-cycle-stacking nil))
 
-    ;; First of all, use the name of the event that invoked us to
-    ;; contruct the keymap we'll use
-    (bind-keys override-keymap name 'x-cycle-next)
-    (unless (and (string-match "(.*)-.+" name)
-		 (setq modifier (expand-last-match "\\1"))
-		 (setq tem (cdr (assoc modifier x-cycle-modifier-alist))))
-      (error "%s must be bound to a singly-modified event" this-command))
+    (unless (and (eq 'key (car decoded)) (nth 1 decoded))
+      (error "%s must be bound to a key event with modifiers." this-command))
+
+    ;; Use the event that invoked us to contruct the keymap
+    (bind-keys override-keymap event 'x-cycle-next)
     (mapc (lambda (k)
 	    (bind-keys override-keymap
-	      (concat "Any-Release-" k) 'x-cycle-exit)) tem)
+	      (encode-event `(key (release any) ,k)) 'x-cycle-exit))
+	  modifier-keys)
 
     (when (grab-keyboard (input-focus))
       (unwind-protect
@@ -186,8 +179,8 @@ prefix of the current window."
     (let*
 	((prefix (expand-last-match "\\1"))
 	 (re (concat ?^ (quote-regexp prefix) "\\s*:"))
-	 (x-cycle-windows (filter (lambda (w)
-				    (string-match re (window-name w)))
+	 (x-cycle-windows (filter (lambda (x)
+				    (string-match re (window-name x)))
 				  (managed-windows))))
       (cycle-windows event))))
 
