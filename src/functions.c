@@ -186,6 +186,8 @@ resize-window-to WINDOW WIDTH HEIGHT
     return win;
 }
 
+static void (*saved_message_fun)();
+
 DEFUN("grab-server", Fgrab_server, Sgrab_server, (void), rep_Subr0) /*
 ::doc:Sgrab-server::
 grab-server
@@ -193,6 +195,9 @@ grab-server
 {
     if (server_grabs++ == 0)
     {
+	/* This might go to a terminal.. */
+	saved_message_fun = rep_message_fun;
+	rep_message_fun = 0;
 	XGrabServer (dpy);
 	XFlush (dpy);
     }
@@ -208,6 +213,7 @@ ungrab-server
     {
 	XUngrabServer (dpy);
 	XFlush (dpy);
+	rep_message_fun = saved_message_fun;
     }
     return Qt;
 }
@@ -218,9 +224,10 @@ DEFUN("grab-pointer", Fgrab_pointer, Sgrab_pointer,
 grab-pointer WINDOW [CURSOR]
 ::end:: */
 {
-    Window g_win;
+    Window g_win = 0;
     rep_DECLARE1(win, WINDOWP);
-    g_win = VWIN(win)->frame;
+    if (VWIN(win)->mapped && VWIN(win)->visible)
+	g_win = VWIN(win)->frame;
     if (current_x_event)
     {
 	/* XXX This is a hack. If we're being called from an event
@@ -233,6 +240,8 @@ grab-pointer WINDOW [CURSOR]
 	if (fp != 0)
 	    g_win = fp->id;
     }
+    if (g_win == 0)
+	g_win = root_window;
     if (XGrabPointer (dpy, g_win, False,
 		      ButtonPressMask | ButtonReleaseMask
 		      | PointerMotionMask | PointerMotionHintMask,
@@ -429,6 +438,8 @@ get-x-property WINDOW PROPERTY
 	    if (XGetWindowProperty (dpy, w, a_prop, 0, long_length, False,
 				    AnyPropertyType, &type, &format,
 				    &nitems, &bytes_after, &data) != Success)
+		return Qnil;
+	    if (type == None)
 		return Qnil;
 	    if (bytes_after == 0)
 		break;
