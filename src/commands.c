@@ -23,6 +23,19 @@
 #include <string.h>
 #include <ctype.h>
 
+DEFSYM(prompt_for_function, "prompt-for-function");
+DEFSYM(prompt_for_buffer, "prompt-for-buffer");
+DEFSYM(prompt_for_char, "prompt-for-char");
+DEFSYM(prompt_for_command, "prompt-for-command");
+DEFSYM(prompt_for_directory, "prompt-for-directory");
+DEFSYM(prompt_for_file, "prompt-for-file");
+DEFSYM(prompt_for_number, "prompt-for-number");
+DEFSYM(prompt_for_string, "prompt-for-string");
+DEFSYM(prompt_for_symbol, "prompt-for-symbol");
+DEFSYM(prompt_for_variable, "prompt-for-variable");
+DEFSYM(prompt_for_lisp, "prompt-for-lisp");
+DEFSYM(read_event, "read-event");
+
 DEFSYM(interactive, "interactive");
 DEFSTRING(err_interactive, "Bad interactive specification");
 
@@ -118,7 +131,7 @@ again:
 DEFSTRING(nil_arg, "Nil argument to command");
 DEFSTRING(not_command, "Not a command");
 
-DEFUN("call-command", Fcall_command, Scall_command, (repv cmd, repv Farg), rep_Subr2) /*
+DEFUN_INT("call-command", Fcall_command, Scall_command, (repv cmd, repv Farg), rep_Subr2, "CEnter command:" rep_DS_NL "P") /*
 ::doc:call-command::
 call-command COMMAND [PREFIX-ARG]
 
@@ -241,11 +254,38 @@ any entered arg is given to the invoked COMMAND.
 		    {
 			switch(c)
 			{
+			case 'a':
+			    arg = rep_call_lisp1(Fsymbol_value(Qprompt_for_function, Qt), prompt);
+			    break;
+			case 'C':
+			    arg = rep_call_lisp1(Fsymbol_value(Qprompt_for_command, Qt), prompt);
+			    break;
+			case 'D':
+			    arg = rep_call_lisp1(Fsymbol_value(Qprompt_for_directory, Qt), prompt);
+			    break;
 			case 'e':
 			    arg = Fcurrent_event();
 			    break;
 			case 'E':
 			    arg = Fcurrent_event_string();
+			    break;
+			case 'f':
+			    arg = rep_call_lisp2(Fsymbol_value(Qprompt_for_file, Qt), prompt, Qt);
+			    break;
+			case 'F':
+			    arg = rep_call_lisp1(Fsymbol_value(Qprompt_for_file, Qt), prompt);
+			    break;
+			case 'k':
+			    arg = rep_call_lisp1(Fsymbol_value(Qread_event, Qt), prompt);
+			    break;
+			case 'n':
+			    arg = rep_call_lisp1(Fsymbol_value(Qprompt_for_number, Qt), prompt);
+			    break;
+			case 'N':
+			    if(rep_NILP(Farg))
+				arg = rep_call_lisp1(Fsymbol_value(Qprompt_for_number, Qt), prompt);
+			    else
+				arg = Fprefix_numeric_argument(Farg);
 			    break;
 			case 'p':
 			    arg = Fprefix_numeric_argument(Farg);
@@ -254,8 +294,18 @@ any entered arg is given to the invoked COMMAND.
 			    arg = Farg;
 			    can_be_nil = TRUE;
 			    break;
+			case 's':
+			    arg = rep_call_lisp1(Fsymbol_value(Qprompt_for_string, Qt), prompt);
+			    break;
+			case 'S':
+			    arg = rep_call_lisp1(Fsymbol_value(Qprompt_for_symbol, Qt), prompt);
+			    can_be_nil = TRUE;
+			    break;
 			case 't':
 			    arg = Qt;
+			    break;
+			case 'v':
+			    arg = rep_call_lisp1(Fsymbol_value(Qprompt_for_variable, Qt), prompt);
 			    break;
 			default:
 			unknown:
@@ -440,6 +490,19 @@ Returns t if COMMAND may be called interactively.
 void
 commands_init(void)
 {
+    rep_INTERN(prompt_for_function);
+    rep_INTERN(prompt_for_buffer);
+    rep_INTERN(prompt_for_char);
+    rep_INTERN(prompt_for_command);
+    rep_INTERN(prompt_for_directory);
+    rep_INTERN(prompt_for_file);
+    rep_INTERN(prompt_for_number);
+    rep_INTERN(prompt_for_string);
+    rep_INTERN(prompt_for_symbol);
+    rep_INTERN(prompt_for_variable);
+    rep_INTERN(prompt_for_lisp);
+    rep_INTERN(read_event);
+
     rep_INTERN(interactive); rep_ERROR(interactive);
 
     rep_INTERN_SPECIAL(pre_command_hook);
