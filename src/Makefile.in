@@ -64,8 +64,8 @@ install : all installdirs
 	for p in gtk-style $(DL_OBJS); do \
 	  $(rep_DL_INSTALL) $$p ${sawmillexecdir}; \
 	done
-	$(INSTALL_PROGRAM) sawmill-ui.jlc $(bindir)/sawmill-ui
-	$(INSTALL_PROGRAM) sawmill-menu.jlc $(sawmillexecdir)/sawmill-menu
+	$(INSTALL_SCRIPT) sawmill-ui.jlc $(bindir)/sawmill-ui
+	$(INSTALL_SCRIPT) sawmill-menu.jlc $(sawmillexecdir)/sawmill-menu
 	if [ -f $(bindir)/sawmill-menu ]; then \
 	  rm -f $(bindir)/sawmill-menu; \
 	fi
