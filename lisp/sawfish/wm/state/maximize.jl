@@ -34,7 +34,7 @@
   :type string
   :allow-nil t)
 
-(defcustom maximize-always-expands nil
+(defcustom maximize-always-expands t
   "Maxmizing a window dimension always increases the size of that dimension."
   :group maximize
   :type boolean)
@@ -43,6 +43,14 @@
   "Raise windows when they're maximized."
   :group maximize
   :type boolean)
+
+(defcustom maximize-ignore-when-filling t
+  "Let ignored windows be overlapped when filling windows."
+  :group maximize
+  :type boolean)
+
+(defvar maximize-dont-avoid-ignored nil)
+(defvar maximize-avoid-by-default nil)
 
 ;; called when a window is maximized, args (W &optional DIRECTION)
 (defvar window-maximized-hook nil)
@@ -97,12 +105,17 @@
   `(> (- (min ,end (nth 2 ,edge)) (max ,start (nth 1 ,edge))) 0))
 
 (defun maximize-avoided-windows ()
-  (and maximize-avoided-windows-re
-       (delete-if-not #'(lambda (w)
-			  (or (window-get w 'maximize-avoid)
-			      (string-match
-			       maximize-avoided-windows-re (window-name w))))
-		      (managed-windows))))
+  (delete-if #'(lambda (w)
+		 (cond ((and maximize-avoided-windows-re
+			     (string-match maximize-avoided-windows-re
+					   (window-name w)))
+			nil)
+		       ((and maximize-dont-avoid-ignored
+			     (window-get w 'ignored))
+			t)
+		       (t
+			(not maximize-avoid-by-default))))
+	     (managed-windows)))
 
 (defun maximize-expand-edges (start end min max perp-1 perp-2 edges)
   (mapc #'(lambda (edge)
@@ -294,8 +307,9 @@ unmaximized."
   "Maximize the window without obscuring any other windows."
   (interactive "%W")
   (let
-      ((maximize-avoided-windows-re ".*")
-       (maximize-always-expands t))
+      ((maximize-avoid-by-default t)
+       (maximize-always-expands t)
+       (maximize-dont-avoid-ignored maximize-ignore-when-filling))
     (maximize-window w direction t)))
 
 ;;;###autoload
