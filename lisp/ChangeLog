@@ -1,5 +1,10 @@
 2000-07-23  John Harper  <john@dcs.warwick.ac.uk>
 
+	* window-outline.jl (draw-box-outline): ensure numbers are
+	exact after rounding
+
+	* anim-outline.jl (anim-outline-run): use integer arithmetic
+
 	* stacking.jl (make-constraint): check for 'transients-above
 	property on the window, else use global value
 	* match-window.jl (match-window-properties): added
