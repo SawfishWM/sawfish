@@ -36,7 +36,7 @@
     (when (window-visible-p w)
       (hide-window w))
     (call-window-hook 'iconify-window-hook w)
-    (call-window-hook 'window-state-change-hook w)
+    (call-window-hook 'window-state-change-hook w (list '(iconified)))
     (when iconify-whole-group
       (iconify-group w))))
 
@@ -57,7 +57,7 @@
     (when (and focus-windows-on-uniconify (window-really-wants-input-p w))
       (set-input-focus w))
     (call-window-hook 'uniconify-window-hook w)
-    (call-window-hook 'window-state-change-hook w)
+    (call-window-hook 'window-state-change-hook w (list '(iconified)))
     (when uniconify-whole-group
       (uniconify-group w))))
 
@@ -91,25 +91,25 @@
 
 (defun make-window-sticky (w)
   (interactive "%W")
-  (unless (window-get w 'sticky)
+  (unless (and (window-get w 'sticky) (window-get w 'sticky-viewport))
     (ws-remove-window w t)
     (window-put w 'sticky t)
     (window-put w 'sticky-viewport t)
-    (call-window-hook 'window-state-change-hook w)))
+    (call-window-hook 'window-state-change-hook w (list '(sticky)))))
   
 (defun make-window-unsticky (w)
   (interactive "%W")
-  (when (window-get w 'sticky)
+  (when (or (window-get w 'sticky) (window-get w 'sticky-viewport))
     (window-put w 'sticky nil)
     (window-put w 'sticky-viewport nil)
     (ws-add-window-to-space w current-workspace)
-    (call-window-hook 'window-state-change-hook w)))
+    (call-window-hook 'window-state-change-hook w (list '(sticky)))))
   
 (defun toggle-window-sticky (w)
   "Toggle the `stickiness' of the window--whether or not it is a member of
 all workspaces."
   (interactive "%W")
-  (if (window-get w 'sticky)
+  (if (or (window-get w 'sticky) (window-get w 'sticky-viewport))
       (make-window-unsticky w)
     (make-window-sticky w)))
 
@@ -164,4 +164,4 @@ all workspaces."
 (add-hook 'client-message-hook ws-client-msg-handler)
 (add-hook 'before-add-window-hook ws-honour-client-state)
 (add-hook 'add-window-hook ws-set-client-state t)
-(add-hook 'window-state-change-hook ws-set-client-state)
+(call-after-state-changed '(iconified) ws-set-client-state)
