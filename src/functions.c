@@ -80,28 +80,57 @@ windows isn't affected.
     return Qt;
 }
 
-DEFUN("x-raise-window", Fx_raise_window, Sx_raise_window,
-      (repv win), rep_Subr1) /*
-::doc:x-raise-window::
-x-raise-window WINDOW
-
-Bring WINDOW to the top of the display.
-::end:: */
+static repv
+do_raise_lower (repv win, repv sib, u_int mode)
 {
-    if (WINDOWP(win))
-    {
-	if (VWIN(win)->reparented)
-	    XRaiseWindow (dpy, VWIN(win)->frame);
-    }
+    Window win_id, sib_id;
+    XWindowChanges wc;
+    u_int wc_mask = 0;
+    if (WINDOWP(win) && VWIN(win)->reparented)
+	win_id = VWIN(win)->frame;
     else
+	win_id = x_win_from_arg (win);
+    if (WINDOWP(sib) && VWIN(sib)->reparented)
+	sib_id = VWIN(sib)->frame;
+    else
+	sib_id = x_win_from_arg (sib);
+    if (win_id == 0)
+	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
+
+    wc.stack_mode = mode;
+    wc_mask |= CWStackMode;
+    if (sib_id != 0)
     {
-	Window w = x_win_from_arg (win);
-	if (w == 0)
-	    return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
-	XRaiseWindow (dpy, w);
+	wc.sibling = sib_id;
+	wc_mask |= CWSibling;
     }
+    XConfigureWindow (dpy, win_id, wc_mask, &wc);
     Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
     return win;
+}
+
+DEFUN("x-raise-window", Fx_raise_window, Sx_raise_window,
+      (repv win, repv above), rep_Subr2) /*
+::doc:x-raise-window::
+x-raise-window WINDOW [ABOVE]
+
+Raise WINDOW so that it is above window ABOVE. If ABOVE is undefined,
+raise WINDOW to the top of the stacking order.
+::end:: */
+{
+    return do_raise_lower (win, above, Above);
+}
+
+DEFUN("x-lower-window", Fx_lower_window, Sx_lower_window,
+      (repv win, repv below), rep_Subr2) /*
+::doc:x-lower-window::
+x-lower-window WINDOW [BELOW]
+
+Lower WINDOW so that it is below window BELOW. If BELOW is undefined,
+lower WINDOW to the bottom of the stacking order.
+::end:: */
+{
+    return do_raise_lower (win, below, Below);
 }
 
 DEFUN("x-kill-client", Fx_kill_client, Sx_kill_client,
@@ -1231,6 +1260,7 @@ functions_init (void)
 {
     rep_ADD_SUBR(Srestack_windows);
     rep_ADD_SUBR(Sx_raise_window);
+    rep_ADD_SUBR(Sx_lower_window);
     rep_ADD_SUBR(Sx_kill_client);
     rep_ADD_SUBR_INT(Sdestroy_window);
     rep_ADD_SUBR(Swarp_cursor);
