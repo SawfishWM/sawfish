@@ -9,11 +9,13 @@
 
 #include "sawmill.h"
 
-#define g_malloc malloc
-#define g_free free
-#define g_new0(a,b) calloc(b, sizeof (a))
-#define g_warning printf
-#define g_snprintf snprintf
+#ifndef GLIB_MAJOR_VERSION		/* Have we got <glib.h> ? */
+# define g_malloc malloc
+# define g_free free
+# define g_new0(a,b) calloc(b, sizeof (a))
+# define g_warning printf
+# define g_snprintf snprintf
+#endif /* GLIB_MAJOR_VERSION */
 
 int gnome_sound_sample_load(const char *sample_name, const char *filename);
 void gnome_sound_play (const char * filename);
