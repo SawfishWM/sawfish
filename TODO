@@ -38,8 +38,6 @@ Outstanding bugs
 
   ! edge-flip-delay is ignored when flipping while dragging windows
 
-  ! error in sawfish-ui -> sawfish-capplet livelocks
-
   ! uses a really kludgey method of getting command documentation
 
   ! need better error handling in sawfish-ui (e.g. values that don't
@@ -87,10 +85,6 @@ Outstanding bugs
       workspaces will get saved in the single swapped-in viewport ]
 
   ! java-apps get weird placement [apps being non-ICCCM compliant?]
-
-  ! the gnome _WIN_MAXIMIZED_ hints are ignored when the window is
-    mapped, since it's not possible to maximize the window at that
-    point (until the frame has been created)
 
   ! turn off mouse warping options, put cursor in window in center of
     screen (under message window), M-TAB, and the pointer leaving the
@@ -148,6 +142,12 @@ Resolved Bugs
     reloaded, and I can't imagine how the date could affect this..
     (28/10/2000)
 
+  ! error in sawfish-ui -> sawfish-capplet livelocks
+
+  ! the gnome _WIN_MAXIMIZED_ hints are ignored when the window is
+    mapped, since it's not possible to maximize the window at that
+    point (until the frame has been created)
+
 
 
 Window manager tasks
@@ -156,8 +156,6 @@ Window manager tasks
   ! when drawing into frame parts manually, no way to set shape
 
   ! should save increment-relative dimensions (not pixel relative)
-
-  + for windows with (= min-size max-size), remove maximize-button
 
   + allow unused themes to be garbage-collected? (custom options?)
 
