@@ -127,19 +127,19 @@ that overrides settings set elsewhere.")
 
 (defvar system-theme-directory (expand-file-name
 				"../themes" sawmill-lisp-lib-directory)
-  "Directory containing system themes.")
+  "Directory containing themes from the current sawmill version.")
 
-(defvar theme-load-path (list user-theme-directory system-theme-directory)
+(defvar site-theme-directory (expand-file-name
+			      "../../themes" sawmill-lisp-lib-directory)
+  "Directory containing system-wide themes.")
+
+(defvar theme-load-path (list user-theme-directory
+			      site-theme-directory
+			      system-theme-directory)
   "List of directories from which themes may be loaded.")
 
 (defvar frame-styles nil
   "List of (NAME . FUNCTION) defining all loaded frame styles.")
-
-(defvar auto-frame-style-alist nil
-  "List of (REGEXP . STYLE) associating window names with frame styles.")
-
-(defvar auto-window-type-alist nil
-  "List of (REGEXP . TYPE) associating window names with window types.")
 
 ;; used when decorate-transients is non-nil, map transient window
 ;; types to type to pass to frame style function
@@ -197,14 +197,9 @@ that overrides settings set elsewhere.")
 	((style (window-get w 'frame-style))
 	 fun tem)
       (unless style
-	(setq style (cdr (assoc-regexp
-			  (window-name w) auto-frame-style-alist)))
-	(if style
-	    (progn
-	      (unless (assq style frame-styles)
-		(load-frame-style style))
-	      (window-put w 'frame-style style))
-	  (setq style default-frame-style)))
+	(setq style default-frame-style))
+      (unless (assq style frame-styles)
+	(load-frame-style style))
       (set-window-frame-style w style type))))
 
 (defun reframe-one-window (w)
@@ -219,7 +214,6 @@ that overrides settings set elsewhere.")
 
 (defun window-type (w)
   (or (window-get w 'type)
-      (cdr (assoc-regexp (window-name w) auto-window-type-alist))
       (let
 	  ((type (if (window-transient-p w)
 		     (if (window-shaped-p w)
