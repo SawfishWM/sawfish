@@ -47,10 +47,16 @@ exec rep "$0" "$@"
 	   (def (nth 2 form))
 	   (keys (nthcdr 3 form)))
        ;; XXX beautify name and add it?
-       (when (symbolp def)
-	 (let ((doc (doc-file-ref (symbol-name def))))
-	   (when doc
-	     (register doc))))
+       (if (memq #:doc keys)
+	   (register (cadr (memq #:doc keys)))
+	 (let ((key (or (cadr (memq #:doc-key keys))
+			(and (symbolp def)
+			     (doc-file-value-key
+			      def (fluid current-module))))))
+	   (when (stringp key)
+	     (let ((doc (doc-file-ref key)))
+	       (when doc
+		 (register doc))))))
        (let ((type (car (cdr (memq #:type keys)))))
 	 (when type
 	   (scan type)))))
