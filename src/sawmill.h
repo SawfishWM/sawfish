@@ -192,10 +192,12 @@ typedef struct lisp_image {
 
 enum frame_part_states {
     fps_none = -1,
-    fps_normal = 0,
+    fps_inactive = 0,
     fps_focused,
     fps_highlighted,
+    fps_inactive_highlighted,
     fps_clicked,
+    fps_inactive_clicked,
     fps_MAX
 };
 
