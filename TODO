@@ -21,6 +21,9 @@ Outstanding bugs
 
   ! Raising a window can cause a flicker of other windows
 
+  ! It's not possible to compile sawmill-ui.jl without an X connection
+    (it requires 'gtk, which then calls gtk_init (), ...)
+
 
 General tasks
 =============
