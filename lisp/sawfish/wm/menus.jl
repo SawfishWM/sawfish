@@ -190,8 +190,8 @@ unused before killing it.")
     (sync-server)
     (when (functionp spec)
       (setq spec (funcall spec)))
-    (format menu-process "(popup-menu %S)\n"
-	    (mapcar 'menu-preprocessor spec))))
+    (format menu-process "(popup-menu %S %S)\n"
+	    (mapcar 'menu-preprocessor spec) (x-server-timestamp))))
 
 ;;;###autoload
 (defun popup-window-menu ()
