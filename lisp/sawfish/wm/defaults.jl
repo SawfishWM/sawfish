@@ -1,4 +1,4 @@
-;; sawmill-default.jl -- User startup script if ~/.sawmillrc doesn't exist
+;; sawmill-default.jl -- default user startup
 ;; $Id$
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
@@ -19,18 +19,22 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;; Most of these settings can be overridden through customize
+;; Commentary:
+
+;; This file provides defaults for users without .sawmillrc files
 
 ;; the font to use for otherwise unspecified text
 (setq default-font (get-font "-*-lucida-medium-r-*-*-10-*-*-*-*-*-*-*"))
 
-;; if you don't use GNOME, remove this (though it does no harm)
-(require 'gnome)
-
-;; alternatively, this will probably work if you use GDM, but only
-;; sometimes use GNOME
-;(when (equal (getenv "GDMSESSION") "Gnome")
-;  (require 'gnome))
+;; if it looks like GNOME is the desktop environment, then load the
+;; extra GNOME integration module
+(unless batch-mode
+  (catch 'out
+    (mapc (lambda (prop)
+	    (when (string-match "^GNOME_" (symbol-name prop))
+	      (require 'gnome-int)
+	      (throw 'out t)))
+	  (list-x-properties 'root))))
 
 ;; turn on tooltips for first-time users
 (require 'tooltips)
