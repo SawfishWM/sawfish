@@ -207,6 +207,7 @@ struct frame_part {
     repv car;
     struct frame_part *next, *next_alloc;
     repv alist;				/* the generator alist */
+    repv local_alist;
 
     Lisp_Window *win;
     int x, y, width, height;
