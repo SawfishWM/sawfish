@@ -1,3 +1,30 @@
+1999-10-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (select-workspace): only call
+	window-order-focus-most-recent if not in enter-exit focus mode
+
+	* transient.jl (transient-unmap-window): unless enter-exit
+	focus mode, refocus the most recently focused window
+
+	* smart-placement.jl (sp-prune-points): try to prune the grid
+	of tested positions (otherwise the algorithm becomes
+	intractable for large numbers of windows)
+
+	* gnome.jl: don't use WIN_AREA to preserve window->viewport
+	mapping during restart
+
+	* viewport.jl: don't move all windows to single viewport on
+	exit
+	(move-window-to-current-viewport): only move if the window is
+	really outside the viewport
+
+	* stacking.jl: hook into map-notify-hook instead of
+	reparent-notify-hook (which isn't called any longer)
+
+	* gnome.jl (gnome-set-client-list): include ignored clients
+	(gnome-ignored-windows-in-client-list): new variable, defaults
+	to t
+
 1999-10-12  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.jl (highlight-when-unfocused): declare this option

@@ -10,12 +10,17 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
+  ! vertically maximize a window, restart, then window is twice as high
+
+  ! multiple viewports, gnome tasklist only shows windows when on
+    viewport (0,0), but then shows all windows on the workspace
+
   ! OK button in bindings capplet loses bindings until a different
     window is focused
 
     [ 12/10: what's actually happening is that the cc is becoming
     unfocused, but without any other window (or our no_focus_window)
-    being focused afterwards. I've hopefully hacked up a fix.. ]
+    being focused afterwards.. ]
 
   ! Without GMC you can press button1 on root window, and holding it
     move over frame, and that frame gets clicked and action bound to
@@ -54,9 +59,20 @@ Outstanding bugs
     sometimes causes the window to be "anti-focus", that is, it cannot
     be focused by any means.
 
+  ! `sawmill --version' gives rep-version not sawmill-version
+
+  ! smart placement algorithms blow-up with large numbers of windows
+
+    [ hacked this by limiting the number of points in the grid, in
+    general these rectangular packing problems are NP-complete ]
+
 
 General tasks
 =============
+
+  + option to link resize direction to frame part class
+
+  + threshold options to control window-move sensitivity?
 
   + placement fall-back options?
 
