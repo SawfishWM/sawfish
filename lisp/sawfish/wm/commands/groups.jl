@@ -120,18 +120,14 @@
 (defun raise-group (w)
   (interactive "%W")
   (let ((order (windows-in-group w t)))
-    (mapc (lambda (x)
-	    (unless (eq w x)
-	      (raise-window x))) (nreverse order))
+    (mapc raise-window order)
     (raise-window w)))
 
 ;;;###autoload
 (defun lower-group (w)
   (interactive "%W")
   (let ((order (windows-in-group w t)))
-    (mapc (lambda (x)
-	    (unless (eq w x)
-	      (lower-window x))) order)
+    (mapc lower-window (nreverse order))
     (lower-window w)))
 
 ;;;###autoload
@@ -147,12 +143,10 @@
 ;;;###autoload
 (defun raise-lower-group (w)
   (interactive "%W")
+  ;; this is suboptimal, but I see no alternative..
   (if (window-on-top-p w)
-      (progn
-	(lower-group w)
-	(lower-window w))
-    (raise-group w)
-    (raise-window w)))
+      (lower-group w)
+    (raise-group w)))
 
 
 ;; framing
