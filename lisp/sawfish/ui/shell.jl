@@ -206,8 +206,10 @@
       (when slots
 	(let ((layout (layout-slots (group-layout group) slots)))
 	  (setq active-slots (nconc active-slots slots))
-	  (gtk-notebook-append-page
-	   book layout (gtk-label-new (_ (group-real-name group))))
+	  (if (not *nokogiri-single-level*)
+	      (gtk-notebook-append-page
+	       book layout (gtk-label-new (_ (group-real-name group))))
+	    (gtk-box-pack-start book layout))
 	  (when (gtk-container-p layout)
 	    (gtk-container-border-width layout box-border))))
       (mapc (lambda (sub)
@@ -217,9 +219,12 @@
 		  (iter book sub slots))))
 	    (get-sub-groups group)))
 
-    (let ((notebook (gtk-notebook-new)))
-      (gtk-notebook-set-scrollable notebook 1)
-      (gtk-notebook-popup-enable notebook)
+    (let ((notebook (if (not *nokogiri-single-level*)
+			(let ((x (gtk-notebook-new)))
+			  (gtk-notebook-set-scrollable x 1)
+			  (gtk-notebook-popup-enable x)
+			  x)
+		      (gtk-vbox-new nil 0))))
       (iter notebook group (get-slots group))
       (gtk-widget-show notebook)
       (gtk-container-add slot-box-widget notebook)))
