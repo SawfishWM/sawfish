@@ -11,16 +11,21 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
-@item First attempt at best-fit window placement
+@item First attempt at best-fit window placement (doesn't really work
+properly yet@dots{})
 
 @item Added a customization option to focus windows when they're
-un-iconified
+un-iconified (@code{focus-windows-on-uniconify})
 
 @item Fix bug in click-to-focus mode where the click is only passed
 through to the client window, not to any local bindings of the wm
 
 @item Don't leave windows unframed if there's an error in the user's
 startup files
+
+@item Fix bug in @code{preallocated-workspaces} option
+
+@item Don't place windows off-screen in first-fit mode
 
 @end itemize
 

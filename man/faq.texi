@@ -16,13 +16,7 @@ bindings can be defined in your @file{~/.sawmillrc} file. For example:
 
 @noindent
 binds the event @kbd{C-M-ESC} to the Lisp code to start an @code{xterm}
-subprocess.
-
-
-@item How do I redefine the @samp{Applications} menu?
-
-See the @samp{Popup Menus} node in the Info manual (@pxref{Popup
-Menus})
+subprocess
 
 
 @item How do I get a grid of desktops?
@@ -49,6 +43,44 @@ This isn't fully possibly at the moment. But you can approximate an
 
 The pager will still show a vector of workspaces, but it will feel more
 like a grid@dots{}
+
+
+@item How do I redefine the @samp{Applications} menu?
+
+See the @samp{Popup Menus} node in the Info manual (@pxref{Popup
+Menus})
+
+
+@item How do I create a new theme?
+
+See the @samp{Window Frames} node of the Info manual (@pxref{Window
+Frames})
+
+Basically though, create a directory @file{~/.sawmill/themes/@var{foo}}
+where @var{foo} is the name of your theme. Then copy any images into
+this directory and create a file @file{theme.jl} that will be loaded to
+initialise the theme
+
+The configuration tool will display the contents of a file called
+@file{README} in the directory (but make it 80-column text, and only a
+few lines)
+
+
+@item How do I port an Enlightenment theme to sawmill?
+
+There's no automatic translation available. Get the images used in the
+window border, then write a @file{theme.jl} file telling the window
+manager how they are used to form a window frame
+
+See the @file{themes/brushed-metal} directory for an example, and the
+Info manual for the documentation
+
+
+@item Are there any other themes available?
+
+Not that I know of. If you have a theme that you think other people may
+find useful, send it to me (or a URL), and I'll put a link from my web
+page
 
 
 @item Why don't you use GUILE?

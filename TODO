@@ -38,8 +38,6 @@ Outstanding bugs
   ! latency when starting menu subprocesses can be annoying (pointer
     events are handled unintuitively)
 
-  ! possible for first-fit to place windows off-screen?
-
 
 General tasks
 =============
@@ -47,7 +45,14 @@ General tasks
   + add capplet desktop entries to share/gnome/apps/Settings as well as
     the control center tree
 
-  + code to read the gnome apps menu
+    then again.. there's a problem with this -- gnome menus are
+    _static_, whereas sawmill's customization groups are _dynamic_
+
+    i.e. the `customization' root sub-menu wouldn't match the menu in
+    the gnome `settings' tree. this would be bad since the user may not
+    discover the dynamic menu and thus miss many of the options..
+
+  + code to read the gnome apps menu, then replace apps-menu
 
   + Ability to execute commands (like select-workspace:X) while
     moving/resizing.
@@ -179,6 +184,10 @@ General tasks
     that interprets to STRING. The compiler adds STRING to the doc file
     under key ID, inserts code to fetch it back [how can we lose the
     annoying ID parameter?]
+
+    Another option is to have `(defstring VAR STRING)' which resolves
+    all strings when the module is loaded, but then you have to declare
+    all strings up-front, which would be _really_ annoying
 
     Also, what about the "%1$s" style printf formatting. rep's format
     function should be extended to handle this syntax

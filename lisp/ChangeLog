@@ -1,5 +1,10 @@
 1999-09-20  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill.jl: set autoload-verbose to nil
+
+	* workspace.jl (preallocated-workspaces): fix bug in the
+	after-set function (calling unquoted hook)
+
 	* gnome.jl (gnome-client-message-handler): only handle
 	WIN_STATE and WIN_LAYER if we actually have a window object to
 	act on
