@@ -268,6 +268,14 @@ any entered arg is given to the invoked COMMAND.
 		    case 't':
 			arg = Qt;
 			break;
+		    case 'w':
+			arg = Fcurrent_event_window ();
+			break;
+		    case 'W':
+			arg = Fcurrent_event_window ();
+			if (arg == Qnil)
+			    arg = Finput_focus ();
+			break;
 		    default:
 			arg = rep_NULL;
 			Fsignal(Qinteractive, rep_list_2(cmd, int_spec));
@@ -372,6 +380,9 @@ can be either,
 	f	The window that currently has the input focus
 	p	The numeric prefix arg
 	P	The raw prefix arg
+	w	The window that received the current event
+	W	Either the window that received the event, or
+		 the window with the input focus
 
     A null line produces an argument of nil.
 
