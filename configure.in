@@ -2,20 +2,20 @@ dnl  Process this file with autoconf to produce a configure script.
 dnl  Copyright (C) 1998 John Harper <john@dcs.warwick.ac.uk>
 dnl  $Id$
 dnl
-dnl  This file is part of Jade.
+dnl  This file is part of sawmill.
 dnl
-dnl  Jade is free software; you can redistribute it and/or modify it
+dnl  sawmill is free software; you can redistribute it and/or modify it
 dnl  under the terms of the GNU General Public License as published by
 dnl  the Free Software Foundation; either version 2, or (at your option)
 dnl  any later version.
 dnl
-dnl  Jade is distributed in the hope that it will be useful, but
+dnl  sawmill is distributed in the hope that it will be useful, but
 dnl  WITHOUT ANY WARRANTY; without even the implied warranty of
 dnl  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 dnl  GNU General Public License for more details.
 dnl
 dnl  You should have received a copy of the GNU General Public License
-dnl  along with Jade; see the file COPYING.  If not, write to
+dnl  along with sawmill; see the file COPYING.  If not, write to
 dnl  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 AC_REVISION($Revision$)
@@ -32,7 +32,7 @@ sawmilldir='${datadir}/sawmill'
 lispdir='${sawmilldir}/${version}/lisp'
 sawmillexecdir='${libexecdir}/sawmill/${version}/${host_type}'
 
-output_files="src/Makefile lisp/Makefile man/Makefile Makedefs Makefile"
+output_files="src/Makefile lisp/Makefile man/Makefile images/Makefile Makedefs Makefile"
 
 dnl Find the system type
 AC_CANONICAL_HOST
@@ -129,7 +129,7 @@ AC_OUTPUT(${output_files})
 dnl If it doesn't look like GNU Make is being used, give a friendly warning
 tem=`make --version -f /dev/null 2>&1 | grep GNU`
 if test "x$tem" = "x"; then
-  AC_MSG_WARN([You need to use GNU Make when compiling Jade])
+  AC_MSG_WARN([You need to use GNU Make when compiling sawmill])
 fi
 
 dnl Local variables:
