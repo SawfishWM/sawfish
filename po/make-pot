@@ -21,12 +21,13 @@
 # the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 REP_SRCS="../src/*.jl\
- ../lisp/*.jl\
  ../nokogiri/*.jl\
  ../nokogiri/nokogiri-widgets/*.jl\
  ../nokogiri/nokogiri-layouts/*.jl\
  ../themer/themer.in\
  ../themes/*/theme.jl"
+
+REP_SRCS="$REP_SRCS `find ../lisp -name '*.jl' -print`"
 
 GLADE_SRCS="../themer/themer.glade"
 
