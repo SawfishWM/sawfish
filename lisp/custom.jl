@@ -30,9 +30,6 @@
 (defvar custom-user-file "~/.sawmill/custom"
   "File used to store user's configuration settings.")
 
-;; obsolete
-(defvar custom-old-user-file "~/.sawmill-custom")
-
 ;; (defcustom VARIABLE VALUE DOC &rest CUSTOM-KEYS)
 
 ;; where CUSTOM-KEYS is a plist containing any of the following:
@@ -210,12 +207,5 @@
 ;; loading user's customisations
 
 (defun custom-load-user-file ()
-  ;; If the old custom file exists rename it to the new file, unless
-  ;; doing so would overwrite an existing new file
-  (when (file-exists-p custom-old-user-file)
-    (if (file-exists-p custom-user-file)
-	(write standard-error "warning: both ~/.sawmill-custom and ~/.sawmill/custom exist!\n")
-      (make-directory-recursively (file-name-directory custom-user-file))
-      (rename-file custom-old-user-file custom-user-file)))
   (when (file-exists-p custom-user-file)
     (load custom-user-file t t t)))
