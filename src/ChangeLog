@@ -1,4 +1,20 @@
+2000-03-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x.c: double-buffering now works on all window types, not just
+	those created by Fx_create_window ()
+
+2000-03-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (handle_input_mask): detect if system clocks is
+	rewound (could cause us to ignore timestamps)
+
 2000-03-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* main.c: updated usage information
+
+	* functions.c (Fx_raise_window): added an optional second arg,
+	the window to raise the first arg immediately above
+	(Fx_lower_window): new function, symmetrical to x-raise-window
 
 	* server.c, libclient.c: removed the incorrect assumption that
 	I/O on sockets is atomic, should fix large requests on FreeBSD

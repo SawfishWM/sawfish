@@ -1,4 +1,28 @@
+2000-03-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* customize.jl (customize-read-user-file): if no user file,
+	read the custom-default-file (and thus preserve any unchanged
+	default options)
+
+	* functions.jl (locate-file): new function
+
+2000-03-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* stacking.jl, rects.jl, group-funs.jl, edges.jl, custom.jl:
+	added some doc strings
+
+	* stacking.jl (stack-window-below, stack-window-above): handle
+	the case where the two windows aren't in the same layer
+
+	* with-output.jl (with-output-to-screen): new macro (from
+	Jens-Ulrik Petersen and Dave Pearson)
+
 2000-03-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* stacking.jl: avoid calling restack-by-depth since it's often
+	flickery, instead raise-window, lower-window and
+	stacking-after-map do all their own work, only ever using
+	x-raise-window or x-lower-window
 
 	* sawmill-gaol.jl (sawmill-safe-functions): added input-focus
 
