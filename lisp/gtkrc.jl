@@ -27,6 +27,7 @@
 (defvar gtkrc-style nil)
 
 (defvar gtkrc-background nil)
+(defvar gtkrc-background-colors nil)
 (defvar gtkrc-background-images nil)	;for bg colors
 (defvar gtkrc-font nil)
 (defvar gtkrc-foreground nil)
@@ -62,6 +63,9 @@
   (let
       (tem i)
     (setq gtkrc-background-images nil)
+    (setq gtkrc-background-colors nil)
+    (setq gtkrc-foreground nil)
+    (setq gtkrc-font nil)
     (when (setq tem (cdr (assq 'font gtkrc-style)))
       (setq gtkrc-font (condition-case nil
 			   (get-font tem)
@@ -72,6 +76,14 @@
 				   (cdr (assq 'prelight tem))
 				   (cdr (assq 'active tem))
 				   (cdr (assq 'selected tem)))))
+    (when (setq tem (cdr (assq 'bg gtkrc-style)))
+      (setq gtkrc-background-colors (list (cdr (assq 'normal tem))
+					  (cdr (assq 'prelight tem))
+					  (cdr (assq 'active tem))
+					  (cdr (assq 'selected tem))))
+      (setq gtkrc-background-colors (mapcar #'(lambda (x)
+						(and x (get-color x)))
+					    gtkrc-background-colors)))
     (cond ((setq tem (cdr (assq 'bg-pixmap gtkrc-style)))
 	   (setq gtkrc-background (list (cdr (assq 'normal tem))
 					(cdr (assq 'prelight tem))
@@ -84,14 +96,8 @@
 			       (image-put x 'tiled t)
 			       x))
 			 gtkrc-background)))
-	  ((setq tem (cdr (assq 'bg gtkrc-style)))
-	   (setq gtkrc-background (list (cdr (assq 'normal tem))
-					(cdr (assq 'prelight tem))
-					(cdr (assq 'active tem))
-					(cdr (assq 'selected tem))))
-	   (setq gtkrc-background (mapcar #'(lambda (x)
-					      (and x (get-color x)))
-					  gtkrc-background))
+	  (gtkrc-background-colors
+	   (setq gtkrc-background gtkrc-background)
 	   (setq i -1)
 	   (setq gtkrc-background-images
 		 (mapcar #'(lambda (x)
