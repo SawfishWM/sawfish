@@ -1,5 +1,9 @@
 1999-11-29  John Harper  <john@dcs.warwick.ac.uk>
 
+	* functions.jl (warp-cursor-to-window): rewritten in lisp; also
+	when given no position it focuses on the inside top-left corner
+	of the frame, should overlay more frame styles
+
 	* workspace.jl: reworked the map-notify and unmap-notify hook
 	functions; they work again now
 
