@@ -1,3 +1,19 @@
+1999-10-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* smart-placement.jl (sp-make-grid): sort the grid (so
+	first-fit always works from top-left)
+
+	* viewport.jl (window-outside-viewport-p): don't include
+	windows at the left border of the next viewport (from Andreas
+	Degert <ad@papyrus-gmbh.de>)
+
+	* custom.jl: removed support for old-style ~/.sawmill-custom
+	files
+
+	* focus.jl (click-to-focus-keymap): only bind the first three
+	mouse buttons (the others are often apparently used for the
+	wheel thing)
+
 1999-10-27  John Harper  <john@dcs.warwick.ac.uk>
 
 	* rects.jl (rectangles-from-windows): replace the weight-alist

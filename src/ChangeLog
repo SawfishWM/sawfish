@@ -1,3 +1,13 @@
+1999-10-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* dlmalloc.c: support FreeBSD sbrk ()
+
+	* libclient.c (unix_server_init): add one to the length
+	argument to connect ()
+
+	* keys.c (search_keymap): fix matching EV_MOD_ANY events when
+	other modifiers are also specified
+
 1999-10-27  John Harper  <john@dcs.warwick.ac.uk>
 
 	* events.c (synthesize_button_release): function to be called
