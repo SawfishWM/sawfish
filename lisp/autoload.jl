@@ -130,4 +130,6 @@
 (autoload 'maximize-window-horizontally-toggle "maximize" t)
 (autoload 'toggle-single-window-mode "iconify" t)
 (autoload 'toggle-window-never-focus "ignore-window" t)
+(autoload 'raise-window-and-pass-through-click "raise-commands" t)
+(autoload 'raise-and-pass-through-click-if-focused "raise-commands" t)
 ;;; ::autoload-end::
