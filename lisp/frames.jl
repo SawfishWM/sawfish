@@ -300,7 +300,6 @@ that overrides settings set elsewhere.")
 			  (when (file-exists-p t-dir)
 			    (setq tem (frame-style-directory t-dir))
 			    (when tem
-			      (setq tem (or (local-file-name tem) tem))
 			      (let
 				  ((image-load-path
 				    (cons tem image-load-path)))
