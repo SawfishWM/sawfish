@@ -60,38 +60,37 @@
   (defun gaol-add-function (sym)
     (gaol-replace-function sym (symbol-value sym))))
 
-(unless batch-mode
-  ;; for backwards compatibility, / is integer division in themes, use
-  ;; `divide' for real division
-  (cond ((>= rep-interface-id 9)
-	 (gaol-replace-function 'divide /)
-	 (gaol-replace-function '/ quotient)
-	 (gaol-replace-function 'require gaol:require))
-	(t
-	 (setq gaol-safe-functions (delq '/ gaol-safe-functions))
-	 (gaol-replace-function 'divide '/)
-	 (gaol-replace-function '/ 'quotient)
-	 (gaol-replace-function 'require 'gaol:require)))
+;; for backwards compatibility, / is integer division in themes, use
+;; `divide' for real division
+(cond ((>= rep-interface-id 9)
+       (gaol-replace-function 'divide /)
+       (gaol-replace-function '/ quotient)
+       (gaol-replace-function 'require gaol:require))
+      (t
+       (setq gaol-safe-functions (delq '/ gaol-safe-functions))
+       (gaol-replace-function 'divide '/)
+       (gaol-replace-function '/ 'quotient)
+       (gaol-replace-function 'require 'gaol:require)))
 
-  (mapc gaol-add-function sawmill-safe-functions)
-  (mapc gaol-add-special sawmill-safe-specials)
+(mapc gaol-add-function sawmill-safe-functions)
+(mapc gaol-add-special sawmill-safe-specials)
 
-  (eval-after-load
-   "gradient" '(mapc gaol-add-function '(draw-vertical-gradient
-					 draw-horizontal-gradient
-					 draw-diagonal-gradient)))
+(eval-after-load
+ "gradient" '(mapc gaol-add-function '(draw-vertical-gradient
+				       draw-horizontal-gradient
+				       draw-diagonal-gradient)))
 
-  (eval-after-load
-   "x" '(mapc gaol-add-function '(x-create-gc x-change-gc x-destroy-gc x-gc-p
-				  x-create-pixmap x-create-bitmap
-				  x-change-window-attributes x-window-p
-				  x-destroy-drawable x-drawable-p
-				  x-pixmap-p x-bitmap-p x-drawable-id
-				  x-drawable-width x-drawable-height
-				  x-window-id x-window-back-buffer
-				  x-window-swap-buffers x-clear-window
-				  x-draw-string x-draw-line
-				  x-draw-rectangle x-fill-rectangle
-				  x-draw-arc x-fill-arc x-fill-polygon
-				  x-copy-area x-draw-image
-				  x-grab-image-from-drawable))))
+(eval-after-load
+ "x" '(mapc gaol-add-function '(x-create-gc x-change-gc x-destroy-gc x-gc-p
+				x-create-pixmap x-create-bitmap
+				x-change-window-attributes x-window-p
+				x-destroy-drawable x-drawable-p
+				x-pixmap-p x-bitmap-p x-drawable-id
+				x-drawable-width x-drawable-height
+				x-window-id x-window-back-buffer
+				x-window-swap-buffers x-clear-window
+				x-draw-string x-draw-line
+				x-draw-rectangle x-fill-rectangle
+				x-draw-arc x-fill-arc x-fill-polygon
+				x-copy-area x-draw-image
+				x-grab-image-from-drawable)))
