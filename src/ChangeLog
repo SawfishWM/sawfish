@@ -1,3 +1,9 @@
+2003-10-29  John Harper  <jsh@unfactored.org>
+
+	* functions.c (Fget_x_property): patch from David Mosberger to
+	fix reading `negative' unsigned values on 64-bit platforms
+	(with a special case I added to read XA_INTEGER properties)
+
 2003-08-18  John Harper  <jsh@unfactored.org>
 
 	* windows.c, sawmill_subrs.h, events.c, display.c: cleaned up
