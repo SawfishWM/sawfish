@@ -1,4 +1,27 @@
+2000-08-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/workspace.jl: some renaming, ws-move-window ->
+	move-window-to-workspace, ws-copy-window ->
+	copy-window-to-workspace, ws-insert-workspace -> insert
+	workspace, ws-move-workspace -> move-workspace (and exported),
+	ws-remove-workspace -> move-workspace
+	(insert-workspace): this command renamed as
+	insert-workspace-after
+
+	Updated all callers
+
+	* sawfish/wm/compat.jl: handle workspace renamings
+
+	* sawfish/wm/viewport.jl (select-workspace-and-viewport): new
+	function
+
+	* sawfish/wm/commands.jl (command-fun): renamed command-ref and
+	exported
+
 2000-08-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/gaol.jl (safe-functions): added
+	make-image-from-x-drawable
 
 	* sawfish/wm/state/configure.jl (configure-request-handler): be
 	ICCCM compliant when handling move requests -- honour the

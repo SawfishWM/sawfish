@@ -315,10 +315,10 @@
 	       (resize-window-interactively w)))))
 
 	((_NET_INSERT_DESKTOP)
-	 (ws-insert-workspace (workspace-id-from-logical (aref data 0))))
+	 (insert-workspace (workspace-id-from-logical (aref data 0))))
 
 	((_NET_DELETE_DESKTOP)
-	 (ws-remove-workspace (workspace-id-from-logical (aref data 0))))
+	 (remove-workspace (workspace-id-from-logical (aref data 0))))
 
 	((_NET_DESKTOP_GEOMETRY)
 	 ;; XXX this conflicts with user preferences
