@@ -1,3 +1,12 @@
+2000-03-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl: defvar all hooks
+
+	* x-cycle.jl (cycle-windows): add code to enter-workspace-hook
+	to try to regrab the keyboard if we had previously grabbed on a
+	window (since the window will be unmapped, thus losing the
+	grab)
+
 2000-03-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keymap.jl (describe-key): new command

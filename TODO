@@ -11,6 +11,9 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
+  ! timestamp ordering code falls over with machines that vary their
+    clock rate..
+
   ! loading theme `Ganymede' into themer wedges it
 
   ! set auto-raise and Panel ``keep panel below'' option, then start a
@@ -84,6 +87,22 @@ Outstanding bugs
 
 Window manager tasks
 ====================
+
+  + {draw,erase}-window-outline should be in lisp
+
+    (hack x_gc_parse_attrs () to recognize the necessary properties,
+    how to handle the use of pixel values, add color-x-pixel function?)
+
+  + drag-and-drop to configure window appearance?
+
+    this could depend on the theme, but it would be good to allow
+    dropping of colors (gradients?) and images for at least some themes
+
+    add a hook (frame-part-drop-hook?)
+
+    also allow theme files to be dropped on windows
+
+  + add a function map-window-properties
 
   + Support other visuals
 
@@ -217,6 +236,10 @@ Window manager tasks
 
 sawmill-ui tasks
 ================
+
+  + nautilus-like ``user levels'' controlling when options get enabled
+
+    (replaces the lame `advanced' sub-trees?)
 
   + do i18n on choices from `:type symbol' options
 

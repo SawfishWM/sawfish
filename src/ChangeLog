@@ -1,3 +1,8 @@
+2000-03-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (focus_on_window): don't focus on windows whose
+	`visible' flag isn't set (crashes the gnome control center!?)
+
 2000-03-12  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.25.2
