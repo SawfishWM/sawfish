@@ -185,7 +185,7 @@ install_window_frame (Lisp_Window *w)
 
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	w->reparented = TRUE;
-	w->reparenting = TRUE;
+	w->reparenting++;
 	DB(("  reparented to %lx [%dx%d%+d%+d]\n",
 	    w->frame, w->frame_width, w->frame_height,
 	    w->frame_x, w->frame_y));
@@ -201,7 +201,7 @@ remove_window_frame (Lisp_Window *w)
 	/* reparent the subwindow back to the root window */
 	XReparentWindow (dpy, w->id, root_window, w->attr.x, w->attr.y);
 	w->reparented = FALSE;
-	w->reparenting = TRUE;
+	w->reparenting++;
     }
 }
 
