@@ -28,7 +28,7 @@ static int server_grabs;
 
 DEFSYM(root, "root");
 
-DEFUN_INT("raise-window", Fraise_window, Sraise_window, (repv win), rep_Subr1, "f") /*
+DEFUN_INT("raise-window", Fraise_window, Sraise_window, (repv win), rep_Subr1, "W") /*
 ::doc:Sraise-window::
 raise-window WINDOW
 ::end:: */
@@ -39,7 +39,7 @@ raise-window WINDOW
     return win;
 }
 
-DEFUN_INT("lower-window", Flower_window, Slower_window, (repv win), rep_Subr1, "f") /*
+DEFUN_INT("lower-window", Flower_window, Slower_window, (repv win), rep_Subr1, "W") /*
 ::doc:Slower-window::
 lower-window WINDOW
 ::end:: */
@@ -69,7 +69,7 @@ circulate-down
 }
 
 DEFUN_INT("raise-lower-window", Fraise_lower_window, Sraise_lower_window,
-	  (repv win), rep_Subr1, "f") /*
+	  (repv win), rep_Subr1, "W") /*
 ::doc:Sraise-lower-window::
 raise-lower-window WINDOW
 ::end:: */
@@ -85,7 +85,7 @@ raise-lower-window WINDOW
     return win;
 }
 
-DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1, "f") /*
+DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1, "W") /*
 ::doc:Sdelete-window::
 delete-window WINDOW
 ::end:: */
@@ -97,7 +97,7 @@ delete-window WINDOW
     return win;
 }
 
-DEFUN_INT("destroy-window", Fdestroy_window, Sdestroy_window, (repv win), rep_Subr1, "f") /*
+DEFUN_INT("destroy-window", Fdestroy_window, Sdestroy_window, (repv win), rep_Subr1, "W") /*
 ::doc:Sdestroy-window::
 destroy-window WINDOW
 ::end:: */
