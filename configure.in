@@ -86,7 +86,7 @@ AC_CHECK_HEADERS(fcntl.h sys/time.h sys/utsname.h unistd.h memory.h)
 
 dnl Check for X headers, etc
 _cppflags="${CPPFLAGS}"
-CPPFLAGS="${CPPFLAGS} ${X11_CFLAGS}"
+CPPFLAGS="${CPPFLAGS} ${X_CFLAGS}"
 
 AC_CHECK_HEADERS(X11/SM/SMlib.h X11/extensions/Xdbe.h)
 
