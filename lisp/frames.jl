@@ -314,7 +314,8 @@ that overrides settings set elsewhere.")
 		(mapc #'(lambda (t-dir)
 			  (when (setq tem (frame-style-directory
 					   (expand-file-name t-dir dir) t))
-			    (setq list (cons tem list))))
+			    (unless (member tem list)
+			      (setq list (cons tem list)))))
 		      (directory-files dir))))
 	  theme-load-path)
     (when sorted
