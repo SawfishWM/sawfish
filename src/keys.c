@@ -241,7 +241,7 @@ translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
 
 /* Translate the Lisp button event EV to X button identifier *BUTTON and
    modifier mask *STATE, returning true if successful. */
-static bool
+static u_int
 translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 {
     if (rep_INT(EVENT_MODS(ev)) & EV_TYPE_MOUSE)
@@ -274,7 +274,7 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 		    s = AnyModifier;
 		*button = buttons[i].button;
 		*state = s;
-		return TRUE;
+		return buttons[i].mask;
 	    }
 	}
 	/* no actual button specified. if mod_any is set, then just
@@ -283,10 +283,10 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 	{
 	    *state = AnyModifier;
 	    *button = 0;		/* anything.. */
-	    return TRUE;
+	    return 1;
 	}
     }
-    return FALSE;
+    return 0;
 }
 
 
@@ -1020,6 +1020,85 @@ DEFUN("forget-button-press", Fforget_button_press,
     return Qt;
 }
 
+DEFUN("synthesize-event", Fsynthesize_event, Ssynthesize_event,
+      (repv event, repv win, repv propagate), rep_Subr3) /*
+::doc:synthesize-event::
+synthesize-event EVENT WINDOW [PROPAGATE]
+::end:: */
+{
+    XEvent ev;
+    repv ptr = Fquery_pointer (Qnil);
+    Window w = x_win_from_arg (win);
+    int x_offset, y_offset;
+
+    if (w == 0)
+	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
+    if (rep_STRINGP (event))
+	event = Flookup_event (event);
+    if (!event || !ptr)
+	return rep_NULL;
+    rep_DECLARE (1, event, EVENTP (event));
+    ev.xany.display = dpy;
+    ev.xany.window = w;
+
+    if (WINDOWP(win))
+    {
+	x_offset = -VWIN(win)->attr.x;
+	y_offset = -VWIN(win)->attr.y;
+    }
+    else
+	x_offset = y_offset = 0;
+
+    switch (rep_INT(EVENT_MODS(event)) & EV_TYPE_MASK)
+    {
+	u_int mask;
+
+    case EV_TYPE_KEY:
+	if (!translate_event_to_x_key (event, &ev.xkey.keycode,
+				       &ev.xkey.state))
+	{
+	    return rep_signal_arg_error (event, 1);
+	}
+	ev.xkey.root = root_window;
+	ev.xkey.subwindow = 0;
+	ev.xkey.time = last_event_time;
+	ev.xkey.x_root = rep_INT (rep_CAR (ptr));
+	ev.xkey.y_root = rep_INT (rep_CDR (ptr));
+	ev.xkey.x = (ev.xkey.x_root + VWIN(win)->attr.x + x_offset);
+	ev.xkey.y = (ev.xkey.y_root + VWIN(win)->attr.y + y_offset);
+	ev.xkey.same_screen = True;
+	ev.xany.type = KeyPress;
+	XSendEvent (dpy, w, propagate != Qnil, KeyPressMask, &ev);
+	ev.xany.type = KeyRelease;
+	XSendEvent (dpy, w, propagate != Qnil, KeyReleaseMask, &ev);
+	break;
+
+    case EV_TYPE_MOUSE:
+	mask = translate_event_to_x_button (event, &ev.xbutton.button,
+					    &ev.xbutton.state);
+	if (!mask || ev.xbutton.button == 0)
+	    return rep_signal_arg_error (event, 1);
+
+	ev.xbutton.root = root_window;
+	ev.xbutton.subwindow = 0;
+	ev.xbutton.time = last_event_time;
+	ev.xbutton.x_root = rep_INT (rep_CAR (ptr));
+	ev.xbutton.y_root = rep_INT (rep_CDR (ptr));
+	ev.xkey.x = (ev.xkey.x_root + VWIN(win)->attr.x + x_offset);
+	ev.xkey.y = (ev.xkey.y_root + VWIN(win)->attr.y + y_offset);
+	ev.xbutton.same_screen = True;
+	ev.xany.type = ButtonPress;
+	XSendEvent (dpy, w, propagate != Qnil, ButtonPressMask, &ev);
+	ev.xany.type = ButtonRelease;
+	ev.xbutton.state |= mask;
+	XSendEvent (dpy, w, propagate != Qnil, ButtonReleaseMask, &ev);
+	break;
+
+    default:
+	return rep_signal_arg_error (event, 1);
+    }
+    return Qt;
+}
 
 
 /* Find the lisp modifier mask used by the meta and alt keys. This code
@@ -1380,6 +1459,7 @@ keys_init(void)
     rep_ADD_SUBR(Sforget_button_press);
     rep_ADD_SUBR(Sx_lookup_keysym);
     rep_ADD_SUBR(Sx_keysym_name);
+    rep_ADD_SUBR(Ssynthesize_event);
 
     rep_INTERN(async_pointer);
     rep_INTERN(async_keyboard);
