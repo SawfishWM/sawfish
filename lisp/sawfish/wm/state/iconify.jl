@@ -65,25 +65,23 @@
   "Display the workspace containing the window W, then focus on W."
   (interactive "%W")
   (when w
-    (if (window-get w 'iconified)
-	(uniconify-window w)
-      (when (or (not preferred-space)
-		(not (window-in-workspace-p w preferred-space)))
-	(setq preferred-space
-	      (nearest-workspace-with-window w current-workspace)))
-      (when preferred-space
-	(select-workspace preferred-space))
-      (move-viewport-to-window w)
-      (uniconify-window w)
-      (when (and unshade-selected-windows (window-get w 'shaded))
-	(unshade-window w))
-      (when raise-selected-windows
-	(raise-window w))
-      (when warp-to-selected-windows
-	(warp-cursor-to-window w))
-      (when (window-really-wants-input-p w)
-	(set-input-focus w))
-      (window-order-push w))))
+    (uniconify-window w)
+    (when (or (not preferred-space)
+	      (not (window-in-workspace-p w preferred-space)))
+      (setq preferred-space
+	    (nearest-workspace-with-window w current-workspace)))
+    (when preferred-space
+      (select-workspace preferred-space))
+    (move-viewport-to-window w)
+    (when (and unshade-selected-windows (window-get w 'shaded))
+      (unshade-window w))
+    (when raise-selected-windows
+      (raise-window w))
+    (when warp-to-selected-windows
+      (warp-cursor-to-window w))
+    (when (window-really-wants-input-p w)
+      (set-input-focus w))
+    (window-order-push w)))
 
 
 ;; sticky-ness, could be in a separate file..
