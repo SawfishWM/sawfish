@@ -339,6 +339,11 @@ property_notify (XEvent *ev)
 	case XA_WM_NORMAL_HINTS:
 	    XGetNormalHints (dpy, w->id, &w->hints);
 	    break;
+
+	case XA_WM_TRANSIENT_FOR:
+	    if (!XGetTransientForHint (dpy, w->id, &w->transient_for_hint))
+		w->transient_for_hint = 0;
+	    break;
 	}
 
 	if (need_refresh && w->reparented
