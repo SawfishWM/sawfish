@@ -42,8 +42,8 @@
 #include <string.h>
 #include <limits.h>
 
-/* longjmp () to this with one of the ec_ exit codes to quit in some way */
-jmp_buf clean_exit_jmp_buf;
+/* one of the ec_ values */
+int exit_code = ec_exit;
 
 /* Saved value of argv[0] */
 static char *prog_name;
@@ -109,7 +109,8 @@ restart
 Restart the sawmill process.
 ::end:: */
 {
-    longjmp (clean_exit_jmp_buf, ec_restart);
+    exit_code = ec_restart;
+    return Fquit ();
 }
 
 static void
@@ -248,7 +249,6 @@ main(int argc, char **argv)
     if (sys_init(prog_name))
     {
 	repv res;
-	volatile int exit_code;
 
 	sawmill_symbols();
 
@@ -266,59 +266,56 @@ main(int argc, char **argv)
 	functions_init ();
 	server_init ();
 
-	if ((exit_code = setjmp (clean_exit_jmp_buf)) == 0)
+	res = Fload(rep_string_dup ("sawmill"), Qnil, Qnil, Qnil);
+	if (res != rep_NULL)
 	{
-	    res = Fload(rep_string_dup ("sawmill"), Qnil, Qnil, Qnil);
-	    if (res != rep_NULL)
-	    {
-		repv tv;
-		rep_GC_root gc_tv;
+	    repv tv;
+	    rep_GC_root gc_tv;
+	    rc = 0;
+
+	    /* final initialisation.. */
+	    if(rep_SYM(Qbatch_mode)->value == Qnil)
+		manage_windows ();
+
+	    /* then jump into the event loop.. */
+	    if(rep_SYM(Qbatch_mode)->value == Qnil)
+		res = Frecursive_edit ();
+
+	    tv = rep_throw_value;
+	    rep_throw_value = rep_NULL;
+	    rep_PUSHGC(gc_tv, tv);
+	    Fcall_hook (Qbefore_exit_hook, Qnil, Qnil);
+	    rep_POPGC;
+	    rep_throw_value = tv;
+	}
+	else if(rep_throw_value && rep_CAR(rep_throw_value) == Qquit)
+	{
+	    if(rep_INTP(rep_CDR(rep_throw_value)))
+		rc = rep_INT(rep_CDR(rep_throw_value));
+	    else
 		rc = 0;
+	    rep_throw_value = 0;
+	}
 
-		/* final initialisation.. */
-		if(rep_SYM(Qbatch_mode)->value == Qnil)
-		    manage_windows ();
-
-		/* then jump into the event loop.. */
-		if(rep_SYM(Qbatch_mode)->value == Qnil)
-		    res = Frecursive_edit ();
-
-		tv = rep_throw_value;
-		rep_throw_value = rep_NULL;
-		rep_PUSHGC(gc_tv, tv);
-		Fcall_hook (Qbefore_exit_hook, Qnil, Qnil);
-		rep_POPGC;
-		rep_throw_value = tv;
-	    }
-	    else if(rep_throw_value && rep_CAR(rep_throw_value) == Qquit)
+	if(rep_throw_value && rep_CAR(rep_throw_value) == Qerror)
+	{
+	    /* If quitting due to an error, print the error cell if
+	       at all possible. */
+	    repv stream = Fstderr_file();
+	    repv old_tv = rep_throw_value;
+	    rep_GC_root gc_old_tv;
+	    rep_PUSHGC(gc_old_tv, old_tv);
+	    rep_throw_value = rep_NULL;
+	    if(stream && rep_FILEP(stream))
 	    {
-		if(rep_INTP(rep_CDR(rep_throw_value)))
-		    rc = rep_INT(rep_CDR(rep_throw_value));
-		else
-		    rc = 0;
-		rep_throw_value = 0;
+		fputs("error--> ", stderr);
+		Fprin1(rep_CDR(old_tv), stream);
+		fputc('\n', stderr);
 	    }
-
-	    if(rep_throw_value && rep_CAR(rep_throw_value) == Qerror)
-	    {
-		/* If quitting due to an error, print the error cell if
-		   at all possible. */
-		repv stream = Fstderr_file();
-		repv old_tv = rep_throw_value;
-		rep_GC_root gc_old_tv;
-		rep_PUSHGC(gc_old_tv, old_tv);
-		rep_throw_value = rep_NULL;
-		if(stream && rep_FILEP(stream))
-		{
-		    fputs("error--> ", stderr);
-		    Fprin1(rep_CDR(old_tv), stream);
-		    fputc('\n', stderr);
-		}
-		else
-		    fputs("sawmill: error in initialisation\n", stderr);
-		rep_throw_value = old_tv;
-		rep_POPGC;
-	    }
+	    else
+		fputs("sawmill: error in initialisation\n", stderr);
+	    rep_throw_value = old_tv;
+	    rep_POPGC;
 	}
 
 	rep_throw_value = rep_NULL;
