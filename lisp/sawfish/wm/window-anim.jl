@@ -37,10 +37,11 @@
   (define window-animators nil
     "List of all possible window animation types.")
 
-  (defcustom default-window-animator 'none
-    "The default window animation mode: \\w"
-    :type symbol
-    :group appearance)
+  ;; this used to be a defcustom, and I don't have anything against
+  ;; that, except the current animations are so lame it's embarassing
+
+  (defvar default-window-animator 'none
+    "The default window animation mode")
 
 ;;; animator registration
 
@@ -52,8 +53,9 @@ the state of an animation sequence. OP may be one of the symbols `start',
     (put name 'window-animator fun)
     (unless (memq name window-animators)
       (setq window-animators (cons name (delq name window-animators)))
-      (custom-set-property 'default-window-animator
-			   ':options window-animators)))
+;;      (custom-set-property 'default-window-animator
+;;			   ':options window-animators)
+      ))
 
   (define (getter name) (get name 'window-animator))
   

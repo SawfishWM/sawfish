@@ -39,9 +39,9 @@
 
   ;;###autoload
   (define-command 'describe-symbol describe-symbol
-    #:spec "SSymbol:" #:advanced t)
+    #:spec "SSymbol:" #:class 'advanced)
   (define-command-to-screen 'describe-symbol-to-screen describe-symbol
-   #:spec "SSymbol:" #:advanced t)
+   #:spec "SSymbol:" #:class 'advanced)
 
   (define (apropos-output symbols)
     (let ((separator (make-string 72 ?-)))
@@ -61,9 +61,9 @@
 
   ;;###autoload
   (define-command 'apropos-function apropos-function
-    #:spec "sApropos functions:\nP" #:advanced t)
+    #:spec "sApropos functions:\nP" #:class 'advanced)
   (define-command-to-screen 'apropos-function-to-screen apropos-function
-    #:spec "sApropos functions:\nP" #:advanced t)
+    #:spec "sApropos functions:\nP" #:class 'advanced)
   
   (define (apropos-variable regexp)
     (format standard-output "Apropos variable `%s':\n" regexp)
@@ -71,6 +71,6 @@
 
   ;;###autoload
   (define-command 'apropos-variable apropos-variable
-    #:spec "sApropos variables:" #:advanced t)
+    #:spec "sApropos variables:" #:class 'advanced)
   (define-command-to-screen 'apropos-variable-to-screen apropos-variable
-    #:spec "sApropos variables:" #:advanced t))
+    #:spec "sApropos variables:" #:class 'advanced))

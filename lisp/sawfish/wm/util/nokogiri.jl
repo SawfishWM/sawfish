@@ -42,8 +42,8 @@
   (defvar customize-show-symbols nil
     "Show variable names of each customization option.")
 
-  (defvar customize-show-advanced-commands nil
-    "Include more hackerish commands in the key bindigs panel.")
+  (defvar customize-command-classes '(default)
+    "Also include commands of these classes the key bindings panel.")
 
 
 ;;; interfaces
@@ -114,8 +114,9 @@
 		    (list sym #:type params)
 		  sym)))
 	    (sort (apropos "" (lambda (x)
-				(and (commandp x #:allow-advanced customize-show-advanced-commands)
-				     (not (get x 'deprecated-command))))))))
+				(and (commandp x)
+				     (memq (command-class x)
+					   customize-command-classes)))))))
 
   (define (nokogiri-grab-key) (event-name (read-event)))
 

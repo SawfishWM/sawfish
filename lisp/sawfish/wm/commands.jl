@@ -28,6 +28,7 @@
 	    autoload-command
 	    command-ref
 	    command-type
+	    command-class
 	    apply-command
 	    call-command
 	    prefix-numeric-argument
@@ -75,7 +76,7 @@ evaluated.")
   (define autoloader (make-autoloader getter setter))
   (define real-getter (autoloader-ref getter))
 
-  (define (apply-command-keys name #!key spec type doc doc-key advanced)
+  (define (apply-command-keys name #!key spec type doc doc-key class)
     (when spec
       (put name 'command-spec spec))
     (when type
@@ -84,8 +85,8 @@ evaluated.")
       (put name 'command-doc doc))
     (when doc-key
       (put name 'command-doc-key doc-key))
-    (when advanced
-      (put name 'command-advanced t)))
+    (when class
+      (put name 'command-class class)))
 
   (define (define-command name fun . keys)
     "Define a window managed command called NAME (a symbol). The
@@ -118,16 +119,15 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
 	(cadr (function-spec (command-ref name)))))
 
   (define (command-type name) (get name 'custom-command-args))
+  (define (command-class name) (or (get name 'command-class) 'default))
 
-  (define (commandp arg #!key allow-advanced)
+  (define (commandp arg)
     "Return t if ARG names a command."
     (and (symbolp arg)
 	 ;; check this first to avoid loading autoloads
 	 (or (get arg 'command-fun)
 	     (let ((fun (command-ref arg)))
-	       (and fun (function-spec fun))))
-	 (or allow-advanced
-	     (not (get arg 'command-advanced)))))
+	       (and fun (function-spec fun))))))
 
 ;;; calling commands
 

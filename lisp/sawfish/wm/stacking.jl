@@ -353,11 +353,11 @@ lowest possible position. Otherwise raise it as far as allowed."
     (set-window-depth w (1+ (window-depth w))))
 
   (define-command 'raise-single-window raise-window
-    #:spec "%W" #:advanced t)
+    #:spec "%W" #:class 'advanced)
   (define-command 'lower-single-window lower-window
-    #:spec "%W" #:advanced t)
+    #:spec "%W" #:class 'advanced)
   (define-command 'raise-lower-single-window raise-lower-window
-    #:spec "%W" #:advanced t)
+    #:spec "%W" #:class 'advanced)
   (define-command 'raise-window-depth raise-window-depth #:spec "%W")
   (define-command 'lower-window-depth lower-window-depth #:spec "%W")
 

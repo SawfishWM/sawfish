@@ -727,9 +727,9 @@ window, one of `stop', `keep-going', `wrap-around'")
 	   w orig-space (1- (car limits)) was-focused)))))
 
   (define-command 'append-workspace-and-send append-workspace-and-send
-    #:spec "%W\nt" #:advanced t)
+    #:spec "%W\nt" #:class 'advanced)
   (define-command 'prepend-workspace-and-send prepend-workspace-and-send
-    #:spec "%W\nt" #:advanced t)
+    #:spec "%W\nt" #:class 'advanced)
 
   (define (merge-next-workspace)
     "Delete the current workspace. Its member windows are relocated to the next
@@ -742,9 +742,9 @@ previous workspace."
     (remove-workspace (1- current-workspace)))
 
   (define-command 'merge-next-workspace merge-next-workspace
-    #:advanced t)
+    #:class 'advanced)
   (define-command 'merge-previous-workspace merge-previous-workspace
-    #:advanced t)
+    #:class 'advanced)
 
   (define (insert-workspace-after)
     "Create a new workspace following the current workspace."
@@ -757,9 +757,9 @@ previous workspace."
     (select-workspace (- current-workspace 2)))
 
   (define-command 'insert-workspace-after insert-workspace-after
-    #:advanced t)
+    #:class 'advanced)
   (define-command 'insert-workspace-before insert-workspace-before
-    #:advanced t)
+    #:class 'advanced)
 
   (define (move-workspace-forwards #!optional count)
     "Move the current workspace one place to the right."
@@ -770,9 +770,9 @@ previous workspace."
     (move-workspace current-workspace (- (or count 1))))
 
   (define-command 'move-workspace-forwards move-workspace-forwards
-    #:advanced t)
+    #:class 'advanced)
   (define-command 'move-workspace-backwards move-workspace-backwards
-    #:advanced t)
+    #:class 'advanced)
 
   (define (select-workspace-from-first count)
     (select-workspace (workspace-id-from-logical count)))
@@ -811,7 +811,7 @@ previous workspace."
 	(setq first-interesting-workspace last-interesting-workspace))))
 
   (define-command 'delete-empty-workspaces delete-empty-workspaces
-    #:advanced t)
+    #:class 'advanced)
 
   (define (delete-window-instance w)
     "Remove the copy of the window on the current workspace. If this is the

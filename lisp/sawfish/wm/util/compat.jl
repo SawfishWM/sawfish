@@ -74,21 +74,23 @@
     (let ((fn (lambda (base)
 		(intern (format nil "%s:%d" base (1+ index))))))
       (define-command (fn "select-workspace")
-	(lambda () (select-workspace-from-first index)))
+	(lambda () (select-workspace-from-first index))
+	#:class 'deprecated)
       (define-command (fn "send-to-workspace")
-	(lambda (w) (send-window-to-workspace-from-first w index)) #:spec "%W")
+	(lambda (w) (send-window-to-workspace-from-first w index))
+	#:spec "%W"
+	#:class 'deprecated)
       (define-command (fn "copy-to-workspace")
-	(lambda (w) (send-window-to-workspace-from-first w index t)) #:spec "%W")
-      (put (fn "select-workspace") 'deprecated-command t)
-      (put (fn "send-to-workspace") 'deprecated-command t)
-      (put (fn "copy-to-workspace") 'deprecated-command t)))
+	(lambda (w) (send-window-to-workspace-from-first w index t))
+	#:spec "%W"
+	#:class 'deprecated)))
 
   (do ((i 0 (1+ i)))
       ((= i 9))
     (define-commands i))
 
-  (define-command 'insert-workspace (command-ref 'insert-workspace-after))
-  (put 'insert-workspace 'deprecated-command t)
+  (define-command 'insert-workspace (command-ref 'insert-workspace-after)
+    #:class 'deprecated)
 
 ;;; obsolete options
 
@@ -122,7 +124,7 @@
 	  default-bevel-percent sp-padding nokogiri-user-level
 	  nokogiri-buttons workspace-boundary-mode
 	  workspace-send-boundary-mode lock-first-workspace
-	  ignore-window-input-hint))
+	  ignore-window-input-hint default-window-animator))
 
 ;;; obsolete custom setters
 
