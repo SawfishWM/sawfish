@@ -100,6 +100,10 @@
   :type boolean
   :group misc)
 
+;; XXX should be a defcustom, need a string-list type
+(defvar workspace-names nil
+  "List of workspace names.")
+
 ;; Currently active workspace, an integer
 (defvar current-workspace 0)
 
@@ -351,8 +355,10 @@
        (i (car limits))
        menu)
     (while (<= i (cdr limits))
-      (setq menu (cons (list (format nil "space %d%s" (1+ (- i (car limits)))
-				     (if (= i current-workspace) " *" ""))
+      (setq menu (cons (list (or (nth (- i (car limits)) workspace-names)
+				 (format nil "space %d%s"
+					 (1+ (- i (car limits)))
+					 (if (= i current-workspace) " *" "")))
 			     `(lambda ()
 				(select-workspace ,i)))
 		       menu))
