@@ -1,3 +1,11 @@
+2000-09-17  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/ext/3d-hack.jl (3d-hack): check if current-event
+	returns something before passing it to decode-event
+
+	* sawfish/wm/focus.jl (focus-click): only try to pass through
+	the click (or whatever) if current-event returns something
+
 2000-09-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/state/ignored.jl (toggle-window-cycle-skip): new

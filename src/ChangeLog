@@ -1,3 +1,26 @@
+2000-09-17  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.h (Lisp_Window): added bitfield `pending_reshape'
+
+	* frames.c (queue_reshape_frame, commit_queued_reshapes): new
+	functions to allow calls to set_frame_shapes () to be buffered
+
+	(set_frame_part_bg): if the background changes, queue a reshape
+	of the frame. This removes the long-standing misfeature that
+	the different states of each frame part must have the same
+	shape
+
+	[ it also means that a lot of needless shaping is happening;
+	this could perhaps be reduced by writing a function that just
+	calculates the shape of a given sub-region of the frame ]
+
+	* events.c (shape_notify): use queue_reshape_frame () instead
+	of set_frame_shapes ()
+
+	* display.c (redisplay): call commit_queued_reshapes ()
+
+	* play-sample.c: exit fn is called rep_dl_kill not rep_dl_exit
+
 2000-09-07  John Harper  <john@dcs.warwick.ac.uk>
 
 	* x.c: make r_fns and x_fns global, and initialize them once
