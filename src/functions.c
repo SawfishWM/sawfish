@@ -1041,10 +1041,9 @@ refresh_message_window ()
 	char *ptr;
 	int row = 0;
 
-	values.foreground = VCOLOR(message.fg)->pixel;
 	values.background = VCOLOR(message.bg)->pixel;
 	values.graphics_exposures = False;
-	mask = GCForeground | GCBackground | GCGraphicsExposures;
+	mask = GCBackground | GCGraphicsExposures;
 
 	if (message.gc == 0)
 	    message.gc = XCreateGC (dpy, message_win, mask, &values);
@@ -1071,7 +1070,7 @@ refresh_message_window ()
 		    offset = (message.width - width) / 2;
 	    }
 	    x_draw_string (message_win, message.font,
-			   message.gc, offset,
+			   message.gc, VCOLOR(message.fg), offset,
 			   MSG_PAD_Y
 			   + row * (VFONT(message.font)->ascent
 				    + VFONT(message.font)->descent

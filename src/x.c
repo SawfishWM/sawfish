@@ -54,6 +54,7 @@ typedef struct lisp_x_gc {
     repv car;
     struct lisp_x_gc *next;
     GC gc;
+    Lisp_Color fg_copy;
     Window id;
 } Lisp_X_GC;
 
@@ -220,7 +221,7 @@ x_function_from_sym (repv sym)
 /* GC Functions */
 
 static long
-x_gc_parse_attrs (XGCValues *values, repv attrs)
+x_gc_parse_attrs (Lisp_X_GC *gc, XGCValues *values, repv attrs)
 {
     long valueMask = 0;
 
@@ -235,6 +236,7 @@ x_gc_parse_attrs (XGCValues *values, repv attrs)
 
 	    if ((car == Qforeground) && COLORP (cdr))
 	    {
+		gc->fg_copy = *VCOLOR (cdr);
 		values->foreground = VCOLOR (cdr)->pixel;
 		valueMask |= GCForeground;
 	    }
@@ -369,17 +371,25 @@ x_gc_parse_attrs (XGCValues *values, repv attrs)
 }
 
 static repv
-new_gc (Drawable id, u_long mask, XGCValues *gcv)
+new_gc (Drawable id)
 {
-    GC gc = XCreateGC (dpy, id, mask, gcv);
-    Lisp_X_GC *g = rep_ALLOC_CELL (sizeof (Lisp_X_GC));
+    XGCValues gcv;
+    GC gc;
+    Lisp_X_GC *g;
 
+    gc = XCreateGC (dpy, id, 0, &gcv);
+
+    g = rep_ALLOC_CELL (sizeof (Lisp_X_GC));
     rep_data_after_gc += sizeof (Lisp_X_GC);
     g->car = x_gc_type;
     g->next = x_gc_list;
     x_gc_list = g;
+
     g->gc = gc;
     g->id = id;
+
+    g->fg_copy.pixel = 0;
+    g->fg_copy.red = g->fg_copy.green = g->fg_copy.blue = 0;
 
     return rep_VAL (g);
 }
@@ -394,18 +404,29 @@ mapping attributes to values. Known attributes are `foreground' and
 `background'.
 ::end:: */
 {
-    Drawable id = drawable_from_arg (window);
-    XGCValues values;
-    u_long valueMask;
+    Drawable id;
+    repv gc;
 
     if (dpy == 0)
 	return Qnil;
 
+    id = drawable_from_arg (window);
+
     rep_DECLARE (1, window, id != 0);
     rep_DECLARE2 (attrs, rep_LISTP);
 
-    valueMask = x_gc_parse_attrs (&values, attrs);
-    return new_gc (id, valueMask, &values);
+    gc = new_gc (id);
+    if (gc != rep_NULL)
+    {
+	XGCValues gcv;
+	u_long mask;
+
+	mask = x_gc_parse_attrs (VX_GC (gc), &gcv, attrs);
+	if (mask != 0)
+	    XChangeGC (dpy, VX_GC (gc)->gc, mask, &gcv);
+    }
+
+    return gc;
 }
 
 DEFUN ("x-create-root-xor-gc", Fx_create_root_xor_gc,
@@ -416,20 +437,29 @@ x-create-root-xor-gc
 {
     XGCValues gcv;
     long black, white;
+    repv gc;
 
     if (dpy == 0)
 	return Qnil;
 
     black = BlackPixel (dpy, screen_num);
     white = WhitePixel (dpy, screen_num);
+
     gcv.line_width = 0;
     /* I don't understand this, but it works */
     gcv.function = GXxor;
     gcv.foreground = black ^ white;
     gcv.plane_mask = black ^ white;
     gcv.subwindow_mode = IncludeInferiors;
-    return new_gc (root_window, GCFunction | GCForeground
+
+    gc = new_gc (root_window);
+    if (gc != rep_NULL)
+    {
+	XChangeGC (dpy, VX_GC (gc)->gc, GCFunction | GCForeground
 		   | GCSubwindowMode | GCLineWidth | GCPlaneMask, &gcv);
+    }
+
+    return gc;
 }
 
 DEFUN ("x-change-gc", Fx_change_gc, Sx_change_gc,
@@ -447,7 +477,7 @@ attributes to values. Known attributes are `foreground' and `background'.
     rep_DECLARE1 (gc, X_GCP);
     rep_DECLARE2 (attrs, rep_LISTP);
 
-    valueMask = x_gc_parse_attrs (&values, attrs);
+    valueMask = x_gc_parse_attrs (VX_GC (gc), &values, attrs);
 
     if (valueMask)
       XChangeGC (dpy, VX_GC (gc)->gc, valueMask, &values);
@@ -1003,7 +1033,8 @@ specified font in the window associated with WINDOW.
     y = rep_INT (rep_CDR (xy));
     str = rep_STR (string);
 
-    x_draw_string (id, font, VX_GC (gc)->gc, x, y, str, strlen (str));
+    x_draw_string (id, font, VX_GC (gc)->gc,
+		   &VX_GC (gc)->fg_copy, x, y, str, strlen (str));
     return Qt;
 }
 

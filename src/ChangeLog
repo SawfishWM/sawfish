@@ -1,3 +1,10 @@
+2002-11-02  John Harper  <jsh@unfactored.org>
+
+	* fonts.c (x_draw_string): now takes an explicit foreground
+	color parameter, instead of using the one in the gc
+
+	* x.c, sawmill_subrs.h, functions.c, frames.c: updated callers
+
 2002-10-20    <jsh@unfactored.org>
 
 	* windows.c, sawmill_subrs.h, sawmill.h, events.c: removed code

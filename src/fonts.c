@@ -385,20 +385,28 @@ x_text_width (repv font, u_char *string, size_t len)
     }
 }
 
+/* The foreground pixel of GC is undefined after this function returns. */
 void
-x_draw_string (Window id, repv font, GC gc,
+x_draw_string (Window id, repv font, GC gc, Lisp_Color *fg_color,
 	       int x, int y, u_char *string, size_t len)
 {
+
     switch (FONT_TYPE (font))
     {
-    case FF_FONT_STRUCT: {
-	XFontStruct *fs = VFONT(font)->font;
+	XGCValues gcv;
+	XFontStruct *fs;
 
-	XSetFont (dpy, gc, fs->fid);
+    case FF_FONT_STRUCT:
+	fs = VFONT(font)->font;
+	gcv.foreground = fg_color->pixel;
+	gcv.font = fs->fid;
+	XChangeGC (dpy, gc, GCForeground | GCFont, &gcv);
 	XDrawString (dpy, id, gc, x, y, string, len);
-	break; }
+	break;
 
     case FF_FONT_SET:
+	gcv.foreground = fg_color->pixel;
+	XChangeGC (dpy, gc, GCForeground, &gcv);
 	XmbDrawString (dpy, id, VFONT(font)->font, gc, x, y, string, len);
 	break;
     }
