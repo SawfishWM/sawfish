@@ -23,13 +23,14 @@
 
 ;; Commentary:
 
-;; The idea is that the `sawfish-user' module is where all user code
-;; gets to play. By default it has a set of modules opened so that
-;; it looks pretty much how the old non-modular wm looked.
+;; The idea is that the `user' module is where all user code gets to
+;; play. By default it has a set of modules opened so that it looks
+;; pretty much how the old non-modular wm looked.
 
-;; This means that the `sawfish' structure isn't modified by user code,
-;; this is a good thing, since it means that modules importing
-;; `sawfish' know what they are getting (no random user bindings)
+;; This means that the `sawfish.wm' structures aren't modified by user
+;; code, this is a good thing, since it means that modules importing
+;; `sawfish.wm.foo' know what they are getting (no random user
+;; bindings)
 
 ;; The downside is that it's harder for user extensions to redefine
 ;; existing code, IMHO this may also be a good thing..
