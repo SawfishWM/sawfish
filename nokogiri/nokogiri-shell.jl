@@ -25,7 +25,8 @@
 
     (export initialize-shell
 	    destroy-shell
-	    run-shell)
+	    run-shell
+	    main-window)
   
     (open rep
 	  gtk
@@ -52,6 +53,10 @@
   (define revert-widget)
   (define cancel-widget)
 
+  ;; XXX not in all rep-gtk versions
+  (define gtk-window-set-default-size (or gtk-window-set-default-size
+					  gtk-widget-set-usize))
+
   (define (initialize-shell &optional socket-id)
     (let ((vbox (gtk-vbox-new nil box-spacing))
 	  (paned (gtk-hpaned-new))
@@ -62,9 +67,9 @@
 			    (gtk-plug-new socket-id)
 			  (gtk-window-new 'toplevel)))
       (if socket-id
-	  (gtk-widget-set-usize main-window 500 400)
+	  (gtk-window-set-default-size main-window 400 300)
 	(gtk-window-set-policy main-window nil t nil)
-	(gtk-widget-set-usize main-window 600 500))
+	(gtk-window-set-default-size main-window 600 500))
 
       (setq slot-box-widget (gtk-vbox-new nil box-spacing))
 
