@@ -200,6 +200,7 @@ unused before killing it.")
       ;; so cancel the implicit pointer grab (to allow the menu's grab
       ;; to succeed)
       (ungrab-pointer)
+      (ungrab-keyboard)
       (sync-server)
       (when (functionp spec)
 	(setq spec (funcall spec)))
