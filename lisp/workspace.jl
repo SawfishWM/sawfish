@@ -56,7 +56,7 @@
   :group workspace)
 
 (defcustom delete-workspaces-when-empty nil
-  "Workspaces are merged with the next when their last window is removed."
+  "Workspaces are merged with the next when their last window is closed."
   :type boolean
   :group workspace)
 

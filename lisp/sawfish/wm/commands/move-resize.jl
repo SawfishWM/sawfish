@@ -28,8 +28,7 @@
 ;;;###autoload (setq custom-required (cons 'move-resize custom-required))
 
 (defcustom resize-by-frame-class t
-  "Choose window edges to resize by the type of frame part clicked, not by
-the mouse position relative to the window."
+  "Choose resized window edges by border-part, not by mouse position."
   :type boolean
   :group move)
 

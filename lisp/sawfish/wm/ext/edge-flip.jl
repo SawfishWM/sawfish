@@ -32,19 +32,19 @@
 		     (require 'timers)))
 
 (defcustom edge-flip-enabled nil
-  "Flip to next viewport/workspace when pointer hits edge of screen."
+  "Flip to next viewport/workspace when pointer hits screen edge."
   :type boolean
   :require edge-flip
   :group edge-flip
   :after-set edge-flip-enable)
 
 (defcustom edge-flip-type 'viewport
-  "What edge-flipping actually flips."
+  "What hitting the screen edge actually flips."
   :type (set viewport workspace)
   :group edge-flip)
 
 (defcustom edge-flip-delay 250
-  "Number of milliseconds to wait after pointer hits edge of screen before
+  "Number of milliseconds to wait after pointer hits screen edge before
 flipping."
   :type number
   :group edge-flip

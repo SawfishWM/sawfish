@@ -41,7 +41,7 @@
 ;; See groups.jl for the commands that manipulate groups of windows
 
 (defcustom transients-are-group-members t
-  "Transient windows are always in the same group as their parent."
+  "Group transient windows with their parents."
   :type boolean
   :group misc)
 

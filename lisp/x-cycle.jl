@@ -86,7 +86,7 @@
   :type boolean)
 
 (defcustom cycle-all-viewports nil
-  "Include windows on all viewports of workspaces when cycling."
+  "Include windows on all viewports when cycling."
   :group cycle
   :type boolean)
 

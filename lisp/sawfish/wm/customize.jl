@@ -41,7 +41,7 @@
 ;; defcustom's for some built-in variables
 
 (defcustom default-font nil
-  "Font used for text which doesn't have a font explicitly specified."
+  "Font used by default."
   :group appearance
   :type font
   :after-set after-setting-frame-option)

@@ -75,12 +75,12 @@ that overrides settings set elsewhere.")
 (put 'frame-style 'custom-widget 'custom-make-frame-style-widget)
 
 (defcustom default-frame-style nil
-  "Frame style for otherwise unspecified windows."
+  "Default frame style (theme)."
   :type frame-style
   :group appearance)
 
 (defcustom always-update-frames t
-  "Update all existing window frames when frame style is changed."
+  "Update all windows when the default frame style is changed."
   :type boolean
   :group appearance)
 
@@ -92,7 +92,7 @@ that overrides settings set elsewhere.")
 
 ;; from frames.c
 (defcustom highlight-when-unfocused nil
-  "Highlight frame pieces even when the window is unfocused."
+  "Highlight window borders even when the window is unfocused."
   :type boolean
   :group appearance)
 

@@ -29,7 +29,7 @@
 ;; currently maximize window to `(X Y W H)', the saved geometry.
 
 (defcustom maximize-always-expands nil
-  "Maxmizing a window dimension always increases the size of that dimension."
+  "Maximizing a window dimension always increases the size of that dimension."
   :group maximize
   :type boolean)
 
