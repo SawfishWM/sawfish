@@ -1,3 +1,12 @@
+1999-10-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (select-workspace): grab the server while
+	hiding/showing windows, should decrease the actual number of
+	grabs required
+
+	* functions.jl (ignore-window-input-hint): t by default (law of
+	least-surprises..)
+
 1999-10-07  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.jl (window-type): handle the decorate-transients

@@ -1,3 +1,27 @@
+1999-10-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c (lookup_binding): when event is from no_focus_window,
+	search the root-window-keymap
+
+	* windows.c (before_local_map, after_local_map): new method
+	ignoring locally-generated map/unmap/reparent notify events;
+	should remove all race conditions (!). The method is to grab
+	the server, unselect the StructureNotifyMask on the window, do
+	the request, then reselect events and ungrab
+
+	* windows.c, frames.c: use before_local_map and after_local_map
+
+	* events.c (map_notify, unmap_notify, reparent_notify): removed
+	all code attempting to ignore locally-generated events
+
+	* sawmill.h (Lisp_Window): removed the `reparenting',
+	`local_maps' and `local_unmaps' fields
+
+	* functions.c (Fgrab_server, Fungrab_server): don't bother
+	hijacking the message function; Fgrab_server calls XSync
+	instead of XFlush to guarantee the server actually is grabbed
+	on return
+
 1999-10-07  John Harper  <john@dcs.warwick.ac.uk>
 
 	* display.c, libclient.c (canonical_display): canonicalise any
