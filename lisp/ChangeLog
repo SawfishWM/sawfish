@@ -1,5 +1,12 @@
 1999-07-28  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill-defaults.jl: set the frame to `nil-frame' to turn off
+	the frame, not to nil
+
+	* transient.jl (transient-add-window): only set the frame if
+	it's currently nil, set it to default-frame if not transient or
+	shaped
+
 	* simple.jl, brushed-metal.jl, absolute-e.jl: frames are
 	defined as lists now
 

@@ -1,5 +1,16 @@
 1999-07-28  John Harper  <john@dcs.warwick.ac.uk>
 
+	* frames.c: remove the frame data type, now frames are just
+	lists, a null list is a null frame. Also, a window's frame may
+	be specified as a symbol, in this case the plist of the symbol
+	is used for the frame properties
+
+	* windows.c: select VisibiltyChangeMask on the client window
+	not the frame, the frame was always PartiallyObscured (by the
+	client?)
+	* events.c (visibility_notify): don't check that the event
+	window is the frame anymore
+
 	* sawmill.h (Lisp_Window): new field `shaped' set if the client
 	window is shaped
 	* events.c: handle shaped client windows (ShapeNotify events)
