@@ -104,6 +104,8 @@
      ;; 17x4
      (t-bottom-right-images (make-image "t_bottom_right.png"))
 
+     (text-colors '("grey85" "white"))
+
      ;; frame layout
 
      (frame `(((background . ,top-left-images)
@@ -113,7 +115,7 @@
 
 	      ;; top blue
 	      ((background . ,top-blue-images)
-	       (foreground . "black")
+	       (foreground . ,text-colors)
 	       (text . ,window-name)
 	       (x-justify . 4)
 	       (y-justify . center)
@@ -206,7 +208,7 @@
 
 		       ;; top blue
 		       ((background . ,top-blue-images)
-			(foreground . "black")
+			(foreground . ,text-colors)
 			(text . ,window-name)
 			(x-justify . 4)
 			(y-justify . center)
