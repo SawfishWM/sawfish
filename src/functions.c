@@ -57,7 +57,7 @@ static int xinerama_heads;
      { 0, 0, 0, 512, 768 },
      { 0, 512, 0, 512, 768 }
    };
-   int debug_nheads = 2;
+   static int debug_nheads = 2;
 # endif
 #endif
 
