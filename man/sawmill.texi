@@ -1475,8 +1475,12 @@ tiled across the frame part.
 Specifies a foreground color or image for the frame part, either for
 all states, or for each individual state.
 
-Unlike the @code{background} attribute, images are not scaled when used
-to define the foreground of a frame part.
+Unlike the @code{background} attribute, by default images are not
+scaled when used to define the foreground of a frame part.
+
+@item (scale-foreground . @var{value})
+When @var{value} is non-@code{nil}, the foreground image of the frame
+part will be scaled to the size of the part.
 
 @item (font . @var{font})
 @itemx (font . (@var{normal} @var{focused} @var{highlighted} @var{clicked}))
