@@ -90,7 +90,15 @@
 			  "Any-Off" 'move-resize-finished
 			  "Any-Move" 'move-resize-motion
 			  "Any-ESC" 'move-resize-cancel
-			  "Any-RET" 'move-resize-finished))
+			  "Any-RET" 'move-resize-finished
+			  "Up" 'move-cursor-up
+			  "Down" 'move-cursor-down
+			  "Left" 'move-cursor-left
+			  "Right" 'move-cursor-right
+			  "S-Up" 'move-cursor-up-fine
+			  "S-Down" 'move-cursor-down-fine
+			  "S-Left" 'move-cursor-left-fine
+			  "S-Right" 'move-cursor-right-fine))
 
 (defvar move-resize-fp-edges-alist '((top-border top)
 				     (left-border left)
