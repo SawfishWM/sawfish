@@ -239,8 +239,10 @@ unused before killing it.")
 			  (max 0 (+ (cdr offset) (cdr dims)
 				    (cdr (window-position menu-active))))))
 	      (setq offset nil))
-	    (format menu-process "(popup-menu %S %S %S)\n"
-		    (mapcar menu-preprocessor spec)
+	    (format menu-process "(popup-menu %s %S %S)\n"
+		    ;; write out the menu spec in one chunk to
+		    ;; avoid large numbers of system calls :-(
+		    (format nil "%S" (mapcar menu-preprocessor spec))
 		    (x-server-timestamp) offset))
 	(error
 	 ;; prevents spurious errors with subsequent menus
