@@ -39,6 +39,7 @@
     window-actual-group-id windows-by-group windows-in-group
     map-window-group window-group-ids
 
+    map-windows filter-windows
     get-window-by-name save-stacking-order uniquify-list
     call-after-property-changed call-after-state-changed))
 

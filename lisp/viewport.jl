@@ -44,13 +44,13 @@
 
 (defun set-viewport (x y)
   (unless (and (= viewport-x-offset x) (= viewport-y-offset y))
-    (mapc (lambda (w)
-	    (unless (window-get w 'sticky-viewport)
-	      (let
-		  ((pos (window-position w)))
-		(move-window-to w (- (+ (car pos) viewport-x-offset) x)
-				(- (+ (cdr pos) viewport-y-offset) y)))))
-	  (managed-windows))
+    (map-windows
+     (lambda (w)
+       (unless (window-get w 'sticky-viewport)
+	 (let
+	     ((pos (window-position w)))
+	   (move-window-to w (- (+ (car pos) viewport-x-offset) x)
+			   (- (+ (cdr pos) viewport-y-offset) y))))))
     (setq viewport-x-offset x)
     (setq viewport-y-offset y)
     (call-hook 'viewport-moved-hook)))
@@ -158,10 +158,9 @@
       ((port (screen-viewport)))
     (set-screen-viewport (min (car port) (1- (car viewport-dimensions)))
 			 (min (cdr port) (1- (cdr viewport-dimensions))))
-    (mapc (lambda (w)
-	    (when (window-outside-workspace-p w)
-	      (move-window-to-current-viewport w)))
-	  (managed-windows))
+    (map-windows (lambda (w)
+		   (when (window-outside-workspace-p w)
+		     (move-window-to-current-viewport w))))
     (call-hook 'viewport-resized-hook)))
 
 

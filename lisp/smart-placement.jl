@@ -98,13 +98,13 @@
 ;; returns the list of windows to compare with when overlapping, by
 ;; default windows with their `ignored' property set are dropped
 (defun sp-get-windows (w)
-  (delete-if (lambda (x)
-	       (or (eq x w)
-		   (not (window-mapped-p w))
-		   (and (window-get x 'ignored) (not (window-avoided-p x)))
-		   (window-get x 'iconified)
-		   (not (windows-share-workspace-p x w))))
-	     (managed-windows)))
+  (filter-windows
+   (lambda (x)
+     (not (or (eq x w)
+	      (not (window-mapped-p w))
+	      (and (window-get x 'ignored) (not (window-avoided-p x)))
+	      (window-get x 'iconified)
+	      (not (windows-share-workspace-p x w)))))))
 
 
 ;; calculating overlaps

@@ -47,7 +47,7 @@
 	      (end-of-stream
 	       (setq sm-restored-session (nreverse sm-restored-session))))
 	  (close-file file))
-	(mapc sm-match-window (managed-windows))))))
+	(map-windows sm-match-window)))))
 
 ;; Scan sm-restored-session for window W
 (defun sm-match-window (w)

@@ -62,10 +62,10 @@
 
 (define (transient-parents w &optional indirectly)
   "Return the list of windows that window W is a transient for."
-  (delete-if-not (lambda (x)
-		   ((if indirectly
-			indirect-transient-of-p
-		      transient-of-p) w x)) (managed-windows)))
+  (filter-windows (lambda (x)
+		    ((if indirectly
+			 indirect-transient-of-p
+		       transient-of-p) w x))))
 
 (defun transient-group (w &optional by-depth)
   "Return the list of windows which is either a transient window for window W,

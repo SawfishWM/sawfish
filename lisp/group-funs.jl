@@ -95,10 +95,10 @@ as window W."
   (let
       ((ids (copy-sequence persistent-group-ids))
        id)
-    (mapc (lambda (w)
-	    (setq id (window-actual-group-id w))
-	    (unless (memq id ids)
-	      (setq ids (cons id ids)))) (managed-windows))
+    (map-windows (lambda (w)
+		   (setq id (window-actual-group-id w))
+		   (unless (memq id ids)
+		     (setq ids (cons id ids)))))
     ids))
 
 (defun add-window-to-group (w group-id)

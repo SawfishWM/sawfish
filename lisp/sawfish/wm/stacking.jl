@@ -48,8 +48,8 @@
 
 (define (stacking-constraint:transients-above-parent w)
   (let ((parents (transient-parents w))
-	(children (delete-if-not (lambda (x)
-				   (transient-of-p x w)) (managed-windows))))
+	(children (filter-windows (lambda (x)
+				    (transient-of-p x w)))))
     (lambda (above below)
       (and (or (null parents)
 	       (let loop ((rest parents))

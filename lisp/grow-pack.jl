@@ -146,8 +146,8 @@ back to the original size."
       (setq nbottom (screen-height))
       (when grow-window-repeat
         (setq wbottom (min (+ wbottom 1) (screen-height)))))
-    (filter
-             (lambda (x)
+    (filter-windows
+     (lambda (x)
        (let* ((xpos (window-position x))
               (xdim (window-frame-dimensions x))
               (xleft (car xpos))
@@ -160,8 +160,7 @@ back to the original size."
               (<= (rect-2d-overlap* (list xleft xtop xright xbottom)
                         (list wleft wtop wright wbottom)) 0)
               (> (rect-2d-overlap* (list xleft xtop xright xbottom)
-                                   (list nleft ntop nright nbottom)) 0))))
-     (managed-windows))))
+                                   (list nleft ntop nright nbottom)) 0)))))))
 
 (defun gp-surrounding-rect (wlist)
   "Returns the rectangle surrounding all given windows."

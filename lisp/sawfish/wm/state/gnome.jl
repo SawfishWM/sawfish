@@ -50,12 +50,11 @@
 (defun gnome-set-client-list ()
   (let
       (clients vec)
-    (mapc (lambda (w)
-	    (when (and (windowp w) (window-mapped-p w)
-		       (or gnome-ignored-windows-in-client-list
-			   (not (window-get w 'ignored))))
-	      (setq clients (cons (window-id w) clients))))
-	  (managed-windows))
+    (map-windows (lambda (w)
+		   (when (and (windowp w) (window-mapped-p w)
+			      (or gnome-ignored-windows-in-client-list
+				  (not (window-get w 'ignored))))
+		     (setq clients (cons (window-id w) clients)))))
     (setq vec (apply vector clients))
     (set-x-property 'root '_WIN_CLIENT_LIST vec 'CARDINAL 32)))
 
@@ -77,23 +76,23 @@
       (setq gnome-current-workspace-count total-workspaces)
       (set-x-property 'root '_WIN_WORKSPACE_COUNT
 		      (vector gnome-current-workspace-count) 'CARDINAL 32))
-    (mapc (lambda (w)
-	    (let
-		;; XXX the gnome-wm standard sucks..
-		((space (and (not (window-get w 'sticky))
-			     (window-get w 'swapped-in)))
-		 (w-port (and (not (window-get w 'viewport-sticky))
-			      (window-viewport w))))
-	      (if space
-		  (set-x-property w '_WIN_WORKSPACE
-				  (vector (- space (car limits))) 'CARDINAL 32)
-		(delete-x-property w '_WIN_WORKSPACE))
-	      (if w-port
-		  (set-x-property w '_WIN_AREA
-				  (vector (car w-port) (cdr w-port))
-				  'CARDINAL 32)
-		(delete-x-property w '_WIN_AREA))))
-	  (managed-windows))
+    (map-windows
+     (lambda (w)
+       (let
+	   ;; XXX the gnome-wm standard sucks..
+	   ((space (and (not (window-get w 'sticky))
+			(window-get w 'swapped-in)))
+	    (w-port (and (not (window-get w 'viewport-sticky))
+			 (window-viewport w))))
+	 (if space
+	     (set-x-property w '_WIN_WORKSPACE
+			     (vector (- space (car limits))) 'CARDINAL 32)
+	   (delete-x-property w '_WIN_WORKSPACE))
+	 (if w-port
+	     (set-x-property w '_WIN_AREA
+			     (vector (car w-port) (cdr w-port))
+			     'CARDINAL 32)
+	   (delete-x-property w '_WIN_AREA)))))
     (unless (equal gnome-current-workspace (- current-workspace (car limits)))
       (setq gnome-current-workspace (- current-workspace (car limits)))
       (set-x-property 'root '_WIN_WORKSPACE

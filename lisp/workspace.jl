@@ -552,11 +552,10 @@
 
 ;; return a list of all windows on workspace index SPACE
 (defun workspace-windows (space &optional include-iconified)
-  (delete-if-not
+  (filter-windows
    (lambda (w)
      (and (window-in-workspace-p w space)
-	  (or include-iconified (not (window-get w 'iconified)))))
-   (managed-windows)))
+	  (or include-iconified (not (window-get w 'iconified)))))))
 
 ;; add window W to workspace index SPACE; window shouldn't be in any
 ;; workspace

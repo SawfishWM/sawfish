@@ -79,7 +79,7 @@ this mode. The single argument is the window to be placed."
   (require 'rects)
   (or (window-avoided-p w)
     (let*
-        ((avoided-windows (delete-if-not window-avoided-p (managed-windows)))
+        ((avoided-windows (filter-windows window-avoided-p))
          (rects (rectangles-from-windows avoided-windows))
          (dims (window-frame-dimensions w)))
       (= 0 (rect-total-overlap dims position rects)))))

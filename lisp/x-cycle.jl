@@ -223,9 +223,9 @@ prefix of the current window."
     (let*
 	((prefix (expand-last-match "\\1"))
 	 (re (concat ?^ (quote-regexp prefix) "\\s*:"))
-	 (x-cycle-windows (filter (lambda (x)
-				    (string-match re (window-name x)))
-				  (managed-windows))))
+	 (x-cycle-windows (filter-windows
+			   (lambda (x)
+			     (string-match re (window-name x))))))
       (cycle-windows event))))
 
 ;;;###autoload
@@ -234,9 +234,8 @@ prefix of the current window."
   (interactive "e\n%W")
   (let*
       ((class (window-class w))
-       (x-cycle-windows (filter (lambda (x)
-				  (equal (window-class w) class))
-				(managed-windows))))
+       (x-cycle-windows (filter-windows (lambda (x)
+					  (equal (window-class w) class)))))
     (cycle-windows event)))
 
 (defun x-cycle-next ()

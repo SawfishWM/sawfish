@@ -63,8 +63,8 @@
   (let
       ((order (nreverse (window-order nil t t)))	;all windows
        (i 1))
-    (mapc (lambda (w)
-	    (window-put w 'order nil)) (managed-windows))
+    (map-windows (lambda (w)
+		   (window-put w 'order nil)))
     (mapc (lambda (w)
 	    (window-put w 'order i)
 	    (setq i (1+ i))) order)
