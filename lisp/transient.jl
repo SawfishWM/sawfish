@@ -89,15 +89,23 @@ workspaces.")
 
 ;; If a transient window gets unmapped that currently has the input
 ;; focus, pass it (the focus) to its parent. Otherwise, pass the focus
-;; to the window under the mouse. This helps when the pointer isn't
-;; currently in the window being unmapped (and hence no window-enter
-;; event to focus the new window)
+;; to the topmost window if click-to-focus, otherwise the window under
+;; the mouse
 (defun transient-unmap-window (w)
   (when (eq (input-focus) w)
     (let
 	((parent (and (window-transient-p w)
 		      (get-window-by-id (window-transient-p w)))))
-	  (set-input-focus (or parent (query-pointer-window))))))
+      (unless parent
+	;; if no parent, choose the topmost window (if in click-to-focus
+	;; mode) or the window under the pointer otherwise
+	(if (eq focus-mode 'click)
+	    (setq parent (car (delete-if #'(lambda (x)
+					     (not (and (window-visible-p x)
+						       (window-mapped-p x))))
+					     (stacking-order))))
+	  (setq parent (query-pointer-window))))
+      (set-input-focus parent))))
 
 (add-hook 'add-window-hook 'transient-add-window t)
 (add-hook 'map-notify-hook 'transient-map-window t)
