@@ -1,5 +1,8 @@
 2000-04-30  John Harper  <john@dcs.warwick.ac.uk>
 
+	* shade-hover.jl (shade-hover-delay): changed range lower limit
+	from one to zero (from Nils Barth <nbarth@fas.harvard.edu>)
+
 	* stacking.jl (raise-window): check that (/= pred w) before
 	using it to raise above (else, do nothing, since it means that
 	w is already on top)
