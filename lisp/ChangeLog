@@ -1,3 +1,19 @@
+2000-06-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* custom.jl (custom-declare-variable): allow variables to be
+	declare in the null (top-level) group
+
+	* window-history.jl (window-history-key): for transient
+	windows, include the window title in the key
+
+	* beos-window-menu.jl (group-name): use the class name to name
+	the group when possible
+
+	* old-window-menu.jl: new file, contains the original
+	window-menu function
+
+	* sawmill.jl: set window-menu to beos-window-menu by default
+
 2000-06-13  John Harper  <john@dcs.warwick.ac.uk>
 
 	* window-history.jl: don't save the `iconified' and `shaded'

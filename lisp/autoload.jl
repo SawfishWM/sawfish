@@ -202,4 +202,6 @@
 (autoload 'help:show-homepage "help" t)
 (autoload 'gnome-www-page "gnome-commands" t)
 (autoload 'gnome-help-browser "gnome-commands" t)
+(autoload 'old-window-menu "old-window-menu")
+(autoload 'beos-window-menu "beos-window-menu")
 ;;; ::autoload-end::
