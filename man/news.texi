@@ -7,6 +7,48 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.17
+
+@itemize @bullet
+
+@item First version to use lexically scoped librep. This enables themes
+to run in a ``safe'' environment, but all existing themes will need to
+be ported. (Most noticeably, theme definitions must now be closures of
+lists, not just lists, for security reasons)
+
+@item Support for internationalization of messages and run-time
+documentation; an en_GB catalogue is the only translation currently, so
+please send me .po files for your native languages!
+
+New option @samp{--disable-nls} to disable i18n
+
+@item New functions @code{call-after-property-changed} and
+@code{gtkrc-call-after-changed} to allow themes to receive these events
+(hooks are now off-limits to themes)
+
+@item New command @code{raise-window-and-pass-through-click}; bind it
+to a mouse button in the @code{window-keymap} to get the ``raise window
+on click'' behaviour that seems popular 
+
+@item Fixed a memory leak in the @code{stacking-order} function
+
+@item Fixed the @code{bevel-image} function (Scott Sams)
+
+@item Never look in the focused window's keymap by default with mouse
+events
+
+@item Hacked around the ``need an X11 connection to compile'' misfeature
+
+@item Fixed bug in @code{gnome-menu} code when GNOME binaries aren't in
+the first $PATH item; also accept non-alphanumeric language codes
+
+@item Fixed interactive window placement (again)
+
+@item Rewrote obscure documentation for some custom options
+
+@end itemize
+
+
 @unnumberedsec 0.16
 
 @itemize @bullet

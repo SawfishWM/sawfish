@@ -10,13 +10,13 @@ Release: %{rel}
 Requires: librep >= 0.5, rep-gtk >= 0.5
 Copyright: GPL
 Group: User Interface/Desktops
-Source: ftp.dcs.warwick.ac.uk:/people/John.Harper/sawmill/sawmill-%{ver}.tar.gz
+Source: ftp://ftp.dcs.warwick.ac.uk/people/John.Harper/sawmill/sawmill-%{ver}.tar.gz
 URL: http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
 Packager: John Harper <john@dcs.warwick.ac.uk>
 Buildroot: /var/tmp/%{nam}-root
 
 %description
-This is an extensible window manager using an Emacs Lisp-like scripting
+This is an extensible window manager using a LISP-based scripting
 language--all window decorations are configurable, the basic idea is to
 have as much user-interface policy as possible controlled through the
 Lisp language.
@@ -30,8 +30,8 @@ Group: User Interface/Desktops
 Requires: %{nam}
 
 %description gnome
-GNOME support for sawmill. Includes a wm-entries spec, and a control
-center applet
+Optional GNOME support for sawmill. Includes a wm-entries spec, and a
+control center applet
 
 %prep
 %setup
@@ -48,7 +48,7 @@ make prefix=$RPM_BUILD_ROOT%{_prefix} install
 gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawmill*
 
 %files
-%doc README NEWS FAQ TODO
+%doc README NEWS FAQ TODO po/sawmill.pot
 %{_prefix}/bin/sawmill
 %{_prefix}/bin/sawmill-client
 %{_prefix}/bin/sawmill-ui

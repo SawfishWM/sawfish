@@ -3,10 +3,10 @@
 @settitle sawmill Programming Manual
 @footnotestyle end
 
-@set EDITION 0.4
-@set VERSION 0.15
-@set UPDATED 31 October 1999
-@set UPDATE-MONTH October 1999
+@set EDITION 0.5
+@set VERSION 0.17
+@set UPDATED 21 November 1999
+@set UPDATE-MONTH November 1999
 
 @ifinfo
 @direntry
@@ -102,9 +102,10 @@ last updated @value{UPDATED} for Sawmill version @value{VERSION}.
 @chapter Copying
 @cindex Copying
 
-Sawmill is released under the terms of the GNU General Public License,
-copyright (C) 1999 John Harper. See the included file @file{COPYING}
-for the full text of the license.
+Sawmill is copyright (C) 1999 John Harper and is released under the
+terms of the GNU General Public License. See the included file
+@file{COPYING} for the full text of the license (or @pxref{Copying, ,
+Copying, emacs, The GNU Emacs Manual}).
 
 @quotation
 This is free software -- you are welcome to redistribute it and/or
@@ -142,8 +143,9 @@ internal X11 events.
 Sawmill uses the librep Lisp environment (@pxref{Top, , Overview,
 librep, The Librep Manual}), this is a run-time library implementing a
 language similar to Emacs Lisp (@pxref{Top, , Overview, elisp, The
-Emacs-Lisp Manual}), but with many extensions. This manual assumes at
-least a basic knowledge of the language.
+Emacs-Lisp Manual}), but with many extensions, and using lexical
+instead of dynamic scope. This manual assumes at least a basic
+knowledge of the language.
 
 Incidentally, there is no meaning to the name ``Sawmill'', the author
 grepped @file{/usr/dict/words} for something containing ``wm''.
@@ -1570,14 +1572,22 @@ whenever any X property of that window changes.
 
 @defun set-window-frame window frame-def
 Sets the frame of the client window associated with the object
-@var{window} to that defined by the list of frame part definitions
-@var{frame-def}. If the window is mapped the old frame will be
-destroyed and a new frame constructed.
+@var{window} to that defined by the lexical closure @var{frame-def}.
+The closure should contain the list of frame part definitions. If the
+window is mapped the old frame will be destroyed and a new frame
+constructed.
+
+For example:
+
+@lisp
+(set-window-frame w (make-closure '(@dots{})))
+@end lisp
 @end defun
 
 @defun window-frame window
-Return the list of frame part definitions defining the frame associated
-with @var{window}.
+Return the closure containing the list of frame part definitions
+defining the frame associated with @var{window}. (Use the
+@code{closure-function} function to dereference the closure.)
 @end defun
 
 @defun window-framed-p window
@@ -1672,6 +1682,9 @@ this style is required for a particular window, @var{function} is
 called with two arguments, the window itself and a symbol defining the
 frame type to create (@pxref{Frame Types}).
 
+@var{function} should return a lexical closure containing the list of
+frame part definitions specifying the new frame.
+
 If no default frame style exists, the new style will be made the
 default.
 @end defun
@@ -1762,10 +1775,24 @@ variable is set to include the theme directory as its first element.
 This ensures that any image files stored in the directory can be loaded
 using the @code{make-image} function.
 
-Since rep has no module system, any variables defined within the theme
-must be prefixed by the name of the theme to ensure their uniqueness.
-For example, in the theme @code{foo}, a variable @code{bar} would
-actually be called @code{foo:bar}.
+Since rep has no module system, any global variables defined within the
+theme must be prefixed by the name of the theme to ensure their
+uniqueness. For example, in the theme @code{foo}, a variable @code{bar}
+would actually be called @code{foo:bar}.
+
+In most cases however, rep's lexical scoping can be used to avoid
+declaring any global variables or functions, the only usual exception
+is when declaring customization options with @code{defcustom}; these
+must be globally visible.
+
+Since themes are generally passed around very casually, sawmill
+evaluates all theme code in a very restricted environment; the idea
+being that themes should only be able to affect the look of the window
+manager. Despite this, it is still possible for malicious themes to
+lock, and possibly crash, the window manager; in the first case sending
+a @code{SIGINT} signal may unblock it. Hopefully themes are unable to
+affect the rest of the user's environment, but there are no
+guarantees@dots{}
 
 @defvar theme-load-path
 A list of directory names, provides the search path for locating theme
@@ -1832,7 +1859,8 @@ string providing the label for the menu item, the second element is a
 function to be called if that item is selected by the user. If this
 function has an interactive specification it will be invoked using the
 @code{call-command} function, otherwise @code{funcall} will be used.
-So, for example, a single-level menu could be defined by:
+Alternatively the second element may be a lisp form to evaluate. So,
+for example, a single-level menu could be defined by:
 
 @lisp
 (("Item 1" function-1)
@@ -1856,7 +1884,7 @@ Consider the following definition:
  ("Windows" . window-menu)
  (apps-menu)
  ("Customize" . custom-menu)
- ("About..." (lambda () (customize 'about)))
+ ("About..." (customize 'about))
  ()
  ("Restart" restart)
  ("Quit" quit))
@@ -1873,20 +1901,18 @@ applications menu. The default definition is as follows:
 
 @lisp
 ("Applications"
- ("xterm" (lambda () (system "xterm &")))
- ("Emacs" (lambda () (system "emacs &")))
- ("Netscape" (lambda () (system "netscape &")))
- ("The GIMP" (lambda () (system "gimp &")))
- ("XFIG" (lambda () (system "xfig &")))
- ("GV" (lambda () (system "gv &")))
- ("xcalc" (lambda () (system "xcalc &"))))
+ ("xterm" (system "xterm &"))
+ ("Emacs" (system "emacs &"))
+ ("Netscape" (system "netscape &"))
+ ("The GIMP" (system "gimp &"))
+ ("XFIG" (system "xfig &"))
+ ("GV" (system "gv &"))
+ ("xcalc" (system "xcalc &")))
 @end lisp
 
 @noindent
-Anonymous functions (@pxref{Anonymous Functions, , Anonymous Functions,
-librep, The Librep Manual}) are used to
-execute the commands, using librep's @code{system} function
-(@pxref{Shell Commands, , Shell Commands, librep, The Librep Manual}).
+The @code{system} function simply executes its single argument using
+@file{/bin/sh}.
 
 @defun popup-menu spec
 Displays a menu defined by the list of item definitions @var{spec}.
@@ -2549,10 +2575,6 @@ Return the integer identifying the X atom with the same name as
 @defun x-atom-name integer
 Return the symbol with the same name as the X atom identified by the
 integer @var{integer}.
-@end defun
-
-@defun getpid
-Return the process-id of the running Lisp interpreter.
 @end defun
 
 
