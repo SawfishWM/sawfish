@@ -118,4 +118,4 @@
         copy-file delete-directory delete-file describe-key
 	describe-symbol focus-click garbage-collect load
 	make-directory nop rename-file set step system
-	trace untrace))
+	trace untrace recursive-edit))

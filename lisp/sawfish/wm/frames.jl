@@ -186,7 +186,7 @@ requested type."
 ;; defcustom's for some built-in variables
 
 (defcustom default-font nil
-  "Default font for window frames and messages."
+  "Default font: \\w"
   :group appearance
   :type font
   :user-level novice
