@@ -1,0 +1,10 @@
+1999-09-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-capplet.c (main): disabled some of the session
+	management stuff that was copied from mouse-properties.c; I
+	don't understand it fully and it makes the
+	GNOME_SAWMILL_PROPERTIES root property expand forever..
+
+	* sawmill-capplet.c (sawmill_cancel): don't destroy the capplet
+	widget
+
