@@ -6,6 +6,74 @@ This lists the user-visible changes made to Sawmill, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
+@unnumberedsec 0.26
+
+@itemize @bullet
+
+@item Added plugin @code{selection}, adds functions
+@code{x-selection-active-p} and @code{x-get-selection} for retrieving X
+selections (Mark Probst)
+
+@item New functions @code{prompt-for-window},
+@code{prompt-for-workspace} and @code{select-workspace-interactively}
+(Dave Pearson)
+
+@item @code{window-anim} module enabling asynchronous animations after
+window events. Currently only two animation styles @code{wireframe} and
+@code{solid}, and they only animate window iconification
+
+@item @code{audio-events} module; maps window manager events to audio
+samples (played using esd by default, but can be configured to use any
+program)
+
+@item When running programs in terminals from the GNOME apps menu, use
+the value of @code{xterm-program} to decide which terminal program to
+use (James Antill)
+
+@item Translation updates: gl (Jesus Bravo Alvarez), pl (Daniel Koc)
+
+@item New command @code{toggle-window-iconified} (Jens-Ulrik Petersen)
+
+@item New option @code{raise-windows-when-unshaded}
+
+@item Customization options for tooltip colors (Erik Assum)
+
+@item Removed default binding to @kbd{A-x}
+
+@item Added support for librep-with-module-system (cvs version)
+
+@item Note that @samp{ko} and @samp{zh} languages need FontSets
+
+@item When sticking a window not on the current viewport, move it to
+the current viewport (Merlin)
+
+@item Fixed bug (?) of placing over avoided windows in @code{random}
+mode; also increased @code{sp-avoided-windows-weight} by an order of
+magnitude (Dan Winship)
+
+@item Fixed bug of maximizing a window changing its viewport
+
+@item Fixed window cycling losing grab if originally focused window is
+unmapped
+
+@item Fixed @code{get-cursor} to use the correct background color when
+creating cursors from vectors (Alexander Barinov)
+
+@item Fixed @code{get-font} to set `descent' property correctly
+
+@item Changed double-buffering semantics in @code{x} plugin, also only
+support this if configure finds the correct header files
+
+@item Fixed @code{synthesize-event} to generate correct relative
+pointer positions
+
+@item Don't focus on non-visible windows (crashes GNOME control center)
+
+@item Fixed bug of using @file{cp} to install GNOME desktop files
+
+@end itemize
+
+
 @unnumberedsec 0.25.2
 
 @itemize @bullet
