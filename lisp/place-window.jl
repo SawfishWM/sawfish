@@ -24,9 +24,17 @@
 (defvar place-window-mode 'random
   "Method of selecting the position of a freshly-mapped window.")
 
+(defvar ignore-program-positions nil
+  "When non-nil the PPosition size hint is ignored.")
+
 ;; called from the place-window-hook
 (defun place-window (w)
-  (if (window-transient-p w)
+  (let
+      ((hints (window-size-hints w)))
+    (if (or (window-transient-p w)
+	    (cdr (assq 'user-position hints))
+	    (and (not ignore-program-positions)
+		 (cdr (assq 'program-position hints))))
       nil
     (let
 	((mode (or (window-get w 'place-mode) place-window-mode)))
