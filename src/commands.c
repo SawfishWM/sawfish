@@ -438,7 +438,7 @@ Returns t if COMMAND may be called interactively.
 	{
 	    if(rep_CAR(cmd) == Qautoload)
 	    {
-		cmd = Fnth(rep_MAKE_INT(2), cmd);
+		cmd = Fnth(rep_MAKE_INT(3), cmd);
 		if(cmd != rep_NULL && !rep_NILP(cmd))
 		    return(Qt);
 	    }
