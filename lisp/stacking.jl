@@ -39,12 +39,12 @@
 (define (stacking-constraint:layer w)
   (let ((depth (window-get w 'depth)))
     (lambda (above below)
+      ;; constraints are met locally in ABOVE and BELOW, so just
+      ;; test against windows adjacent to W
       (and (or (null above)
-	       (apply <= depth (mapcar (lambda (x)
-					 (window-get x 'depth)) above)))
+	       (<= depth (window-get (car above) 'depth)))
 	   (or (null below)
-	       (apply >= depth (mapcar (lambda (x)
-					 (window-get x 'depth)) below)))))))
+	       (>= depth (window-get (car below) 'depth)))))))
 
 (define (stacking-constraint:transients-above-parent w)
   (let ((parent (and (window-transient-p w)
