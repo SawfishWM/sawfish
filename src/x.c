@@ -64,7 +64,6 @@ typedef struct lisp_x_window {
     repv car;
     struct lisp_x_window *next;
     Window id;
-    XdbeBackBuffer back_buffer;
     repv event_handler;
 } Lisp_X_Window;
 
@@ -78,7 +77,7 @@ int x_gc_type;
 static Lisp_X_Window *x_window_list = NULL;
 int x_window_type;
 
-static XID x_window_context;
+static XID x_window_context, x_dbe_context;
 
 DEFSYM(x, "x");
 DEFSYM(y, "y");
@@ -88,24 +87,54 @@ DEFSYM(expose, "expose");
 DEFSYM(convex, "convex");
 DEFSYM(non_convex, "non-convex");
 
+static inline repv
+x_window_from_id (Window id)
+{
+    repv win;
+    return XFindContext (dpy, id, x_window_context,
+			 (XPointer *) &win) ? Qnil : win;
+}
+
+static inline XdbeBackBuffer
+x_back_buffer_from_id (Window id)
+{
+    XPointer buf;
+    return (XFindContext (dpy, id, x_dbe_context, &buf)
+	    ? 0 : (XdbeBackBuffer) buf);
+}
+
 static Window
 window_from_arg (repv arg)
 {
+    Window id;
+
     if (rep_INTEGERP (arg))
-	return rep_get_long_uint (arg);
+	id = rep_get_long_uint (arg);
     else if (X_WINDOWP (arg))
-    {
-	if (VX_WINDOW(arg)->back_buffer)
-	    return VX_WINDOW(arg)->back_buffer;
-	else
-	    return VX_WINDOW(arg)->id;
-    }
+	id = VX_WINDOW(arg)->id;
     else if (WINDOWP(arg) && VWIN(arg)->id != 0)
-	return VWIN(arg)->id;
+	id = VWIN(arg)->id;
     else if (PARTP(arg) && VPART(arg)->id != 0)
-	return VPART(arg)->id;
+	id = VPART(arg)->id;
     else
-	return 0;
+	id = 0;
+
+    return id;
+}
+
+static Drawable
+drawable_from_arg (repv arg)
+{
+    Drawable id = window_from_arg (arg);
+
+    if (id != 0)
+    {
+	XdbeBackBuffer buf = x_back_buffer_from_id (id);
+	if (buf != 0)
+	    id = buf;
+    }
+
+    return id;
 }
 
 
@@ -145,7 +174,7 @@ mapping attributes to values. Known attributes are `foreground' and
 `background'.
 ::end:: */
 {
-    Window id = window_from_arg (window);
+    Drawable id = drawable_from_arg (window);
     Lisp_X_GC *g;
     GC gc;
     XGCValues values;
@@ -220,14 +249,6 @@ Return t if ARG is a X-GC object.
 
 
 /* Window functions */
-
-static inline repv
-x_window_from_id (Window id)
-{
-    repv win;
-    return XFindContext (dpy, id, x_window_context,
-			 (XPointer *) &win) ? Qnil : win;
-}
 
 static long
 x_window_parse_changes (XWindowChanges *changes, repv attrs)
@@ -359,7 +380,6 @@ window is created unmapped.
     w->next = x_window_list;
     x_window_list = w;
     w->id = id;
-    w->back_buffer = 0;
     w->event_handler = ev;
 
     register_event_handler (id, x_window_event_handler);
@@ -479,29 +499,34 @@ Return t if ARG is a X-WINDOW object.
 DEFUN("x-window-back-buffer", Fx_window_back_buffer,
       Sx_window_back_buffer, (repv win), rep_Subr1)
 {
-    rep_DECLARE1(win, X_WINDOWP);
+    Window id = window_from_arg (win);
+    XdbeBackBuffer buf;
 
-    if (VX_WINDOW(win)->back_buffer == 0 && have_dbe)
+    rep_DECLARE(1, win, id != 0);
+
+    buf = x_back_buffer_from_id (id);
+    if (buf == 0)
     {
-	VX_WINDOW(win)->back_buffer = (XdbeAllocateBackBufferName
-				       (dpy, VX_WINDOW(win)->id,
-					XdbeBackground));
+	buf = XdbeAllocateBackBufferName (dpy, id, XdbeBackground);
+	XSaveContext (dpy, id, x_dbe_context, (XPointer) buf);
     }
 
-    if (VX_WINDOW(win)->back_buffer == 0)
-	return Qnil;
-    else
-	return rep_MAKE_INT (VX_WINDOW(win)->back_buffer);
+    return (buf == 0) ? Qnil : rep_MAKE_INT (buf);
 }
 
 DEFUN("x-window-swap-buffers", Fx_window_swap_buffers,
       Sx_window_swap_buffers, (repv win), rep_Subr1)
 {
-    rep_DECLARE1(win, X_WINDOWP);
-    if (VX_WINDOW(win)->back_buffer != 0)
+    Window id = window_from_arg (win);
+    XdbeBackBuffer buf;
+
+    rep_DECLARE(1, win, id != 0);
+
+    buf = x_back_buffer_from_id (id);
+    if (buf != 0)
     {
 	XdbeSwapInfo info;
-	info.swap_window = VX_WINDOW(win)->id;
+	info.swap_window = id;
 	info.swap_action = XdbeBackground;
 	XdbeSwapBuffers (dpy, &info, 1);
     }
@@ -533,7 +558,7 @@ Draws the specified string at the specified location in the optional
 specified font in the window associated with WINDOW.
 ::end:: */
 {
-    Window id = window_from_arg (window);
+    Drawable id = drawable_from_arg (window);
     int x = 0;
     int y = 0;
     unsigned char *str;
@@ -562,7 +587,7 @@ x-draw-line WINDOW GC (X1 . Y1) (X2 . Y2)
 Draws a line from (X1, Y1) to (X2, Y2) in WINDOW, using GC.
 ::end:: */
 {
-    Window id = window_from_arg (window);
+    Drawable id = drawable_from_arg (window);
     int x1 = 0, y1 = 0;
     int x2 = 0, y2 = 0;
 
@@ -590,7 +615,7 @@ Draws a rectangle with top-left corner (X1, Y1) and dimensions (WIDTH,
 HEIGHT) in WINDOW, using GC.
 ::end:: */
 {
-    Window id = window_from_arg (window);
+    Drawable id = drawable_from_arg (window);
     int x = 0, y = 0;
     int w = 0, h = 0;
 
@@ -618,7 +643,7 @@ Draws a filled rectangle with top-left corner (X, Y) and dimensions
 (WIDTH, HEIGHT) in WINDOW, using GC.
 ::end:: */
 {
-    Window id = window_from_arg (window);
+    Drawable id = drawable_from_arg (window);
     int x = 0, y = 0;
     int w = 0, h = 0;
 
@@ -653,7 +678,7 @@ indicate clockwise motion.
 (See XDrawArc (3X11) for more details.)
 ::end:: */
 {
-    Window id = window_from_arg (window);
+    Drawable id = drawable_from_arg (window);
     int x = 0, y = 0;
     int w = 0, h = 0;
     int a1 = 0, a2 = 0;
@@ -693,7 +718,7 @@ indicate clockwise motion.
 (See XFillArc (3X11) for more details.)
 ::end:: */
 {
-    Window id = window_from_arg (window);
+    Drawable id = drawable_from_arg (window);
     int x = 0, y = 0;
     int w = 0, h = 0;
     int a1 = 0, a2 = 0;
@@ -725,7 +750,7 @@ x-fill-arc WINDOW GC POINTS [MODE]
 Draws a single filled polygon in WINDOW using GC. Each point is `(X . Y)'.
 ::end:: */
 {
-    Window id = window_from_arg (window);
+    Drawable id = drawable_from_arg (window);
     repv npoints;
     XPoint *xpoints;
     int i, mode;
@@ -770,7 +795,7 @@ Copy a region of WINDOW with top-left corner (X, Y) and dimensions
 (WIDTH, HEIGHT), to the position (DEST-X, DEST-Y), using GC.
 ::end:: */
 {
-    Window id = window_from_arg (window);
+    Drawable id = drawable_from_arg (window);
     int x = 0, y = 0;
     int w = 0, h = 0;
     int dx = 0, dy = 0;
@@ -804,7 +829,7 @@ and HEIGHT are defined the image is first scaled to these dimensions,
 otherwise it is drawn using its natural dimensions.
 ::end:: */
 {
-    Window id = window_from_arg (window);
+    Drawable id = drawable_from_arg (window);
     int x = 0, y = 0;
     int w = 0, h = 0;
 
@@ -976,7 +1001,10 @@ rep_dl_init (void)
     {
 	int major, minor;
 	if (XdbeQueryExtension (dpy, &major, &minor))
+	{
 	    have_dbe = TRUE;
+	    x_dbe_context = XUniqueContext ();
+	}
     }
 
     return Qx;
