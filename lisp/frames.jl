@@ -98,11 +98,10 @@
 
 ;; custom support
 
-(defun custom-set-frame-style (symbol value &optional require)
-  (cond ((eq symbol 'default-frame-style)
-	 (set-frame-style value))
-	(t
-	 (set symbol value))))
+(defun custom-set-frame-style (symbol value &rest args)
+  (if (eq symbol 'default-frame-style)
+      (set-frame-style value)
+    (apply 'custom-set-variable symbol value args)))
 
 (defun custom-make-frame-style-widget (symbol value doc)
   (let
