@@ -1,3 +1,18 @@
+1999-08-27  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.h (XlibSpecificationRelease): if undefined, define to
+	4; this really means X11R4 or _less_
+
+	* display.c (XGetAtomNames): implement using XGetAtomName ()
+	for X11R5 or less
+
+	* events.c (configure_request): if we know about the window,
+	call raise-window or lower-window instead of XRaiseWindow () or
+	XLowerWindow ()
+
+	* sawmill-ui.jl (build-set): only call
+	gtk-option-menu-set-history if history is non-nil
+
 1999-08-26  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill.h (struct frame_part): added `highlighted' and

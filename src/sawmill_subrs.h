@@ -67,6 +67,10 @@ extern void sys_kill (void);
 extern repv x_atom_symbol (Atom atom);
 extern Window x_win_from_arg (repv arg);
 extern void send_client_message (Window w, Atom a, Time time);
+#if XlibSpecificationRelease < 6
+extern Status XGetAtomNames (Display *dpy, Atom *atoms,
+			     int count, char **names_ret);
+#endif
 
 /* from events.c */
 extern void (*event_handlers[LASTEvent])(XEvent *ev);
