@@ -1,3 +1,10 @@
+2002-11-10  John Harper  <jsh@unfactored.org>
+
+	* shell.jl (add-active-slots): new function, used to add slots
+	into the active-slots list. Ensures that slots aren't added
+	more than once (which was the cause of #88718 and other similar
+	bugs)
+
 2002-11-09  John Harper  <jsh@unfactored.org>
 
 	* version 1.2

@@ -174,11 +174,16 @@
     (fetch-group group)
     (group-slots group))
 
+  (define (add-active-slots slots)
+    (setq active-slots (nconc active-slots
+			      (filter (lambda (x)
+					(not (memq x active-slots))) slots))))
+
   (define (display-book-tree group)
 
     (define (iter group slots)
       (let ((group-page (and slots (layout-slots (group-layout group) slots))))
-	(setq active-slots (nconc active-slots slots))
+	(add-active-slots slots)
 	(when (and group-page (gtk-container-p group-page))
 	  (gtk-container-set-border-width group-page box-border))
 	(if (group-sub-groups group)
@@ -211,7 +216,7 @@
     (define (iter book group slots)
       (when slots
 	(let ((layout (layout-slots (group-layout group) slots)))
-	  (setq active-slots (nconc active-slots slots))
+	  (add-active-slots slots)
 	  (if (not *nokogiri-single-level*)
 	      (gtk-notebook-append-page
 	       book layout (gtk-label-new (_ (group-real-name group))))
@@ -239,7 +244,7 @@
     (let* ((slots (get-slots group)))
       (gtk-container-add
        slot-box-widget (layout-slots (group-layout group) slots))
-      (setq active-slots (nconc active-slots slots))))
+      (add-active-slots slots)))
 
   (define (add-group-widgets group)
     (if (and *nokogiri-flatten-groups* (group-sub-groups group))
