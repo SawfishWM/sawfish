@@ -37,7 +37,9 @@
 	((old-value (and (boundp symbol) (symbol-value symbol)))
 	 (new-tail (delq nil (mapcar (lambda (cell)
 				       (let
-					   ((ev (lookup-event (cdr cell))))
+					   ((ev (condition-case nil
+						    (lookup-event (cdr cell))
+						  (error nil))))
 					 (and ev (cons (car cell) ev))))
 				     (cdr value)))))
       (if (and old-value (eq (car old-value) 'keymap))
