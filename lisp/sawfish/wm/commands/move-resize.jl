@@ -267,7 +267,8 @@ the mouse."
   (let*
       ((this-ptr (query-pointer))
        (ptr-x (car this-ptr))
-       (ptr-y (cdr this-ptr)))
+       (ptr-y (cdr this-ptr))
+       logical-width logical-height)
     (unless (eq move-resize-mode 'opaque)
       (apply erase-window-outline move-resize-last-outline))
     (cond ((eq move-resize-function 'move)
@@ -320,25 +321,29 @@ the mouse."
 		     (move-resize-roundup
 		      (+ move-resize-old-height
 			 (- ptr-y move-resize-old-ptr-y)) y-inc y-base y-max)))
-	    ((memq 'top move-resize-moving-edges)
-	     (setq move-resize-height
-		   (move-resize-roundup
-		    (+ move-resize-old-height
-		       (- move-resize-old-ptr-y ptr-y)) y-inc y-base y-max))
-	     (setq move-resize-y (- move-resize-old-y
-				    (- move-resize-height
-				       move-resize-old-height)))))
-	     (when resize-show-dimensions
-	       (display-message (format nil "%dx%d"
-					(quotient (- move-resize-width
-						     x-base) x-inc)
-					(quotient (- move-resize-height
-						     y-base) y-inc)))))))
-    (when (and (eq move-resize-function 'move) move-show-position)
-      (display-message (format nil "%+d%+d" move-resize-x move-resize-y)))
+	      ((memq 'top move-resize-moving-edges)
+	       (setq move-resize-height
+		     (move-resize-roundup
+		      (+ move-resize-old-height
+			 (- move-resize-old-ptr-y ptr-y)) y-inc y-base y-max))
+	       (setq move-resize-y (- move-resize-old-y
+				      (- move-resize-height
+					 move-resize-old-height)))))
+	     (setq logical-width (quotient (- move-resize-width
+					      x-base) x-inc))
+	     (setq logical-height (quotient (- move-resize-height
+					       y-base) y-inc)))))
     (call-window-hook (if (eq move-resize-function 'move)
 			  'while-moving-hook
 			'while-resizing-hook) move-resize-window)
+    (cond ((and (eq move-resize-function 'resize) resize-show-dimensions)
+	   (display-message (format nil "%dx%d"
+				    ;; XXX broken if while-resizing-hook
+				    ;; XXX changes dimensions..
+				    logical-width logical-height)))
+	  ((and (eq move-resize-function 'move) move-show-position)
+	   (display-message (format nil "%+d%+d"
+				    move-resize-x move-resize-y))))
     (if (eq move-resize-mode 'opaque)
 	(move-resize-apply)
       (let
