@@ -194,7 +194,8 @@ WINDOW. Returns the symbol `nil' if no such image.
    if (VWIN(win)->wmhints->flags & IconPixmapHint)
        d = VWIN(win)->wmhints->icon_pixmap;
    else if (VWIN(win)->wmhints->flags & IconWindowHint)
-       /* XXX not sure if this is a good idea..? */
+       /* XXX this won't work unless the icon window is mapped,
+	  XXX which it won't be. But it does no harm.. */
        d = VWIN(win)->wmhints->icon_window;
    else
        return Qnil;
