@@ -152,19 +152,12 @@ DEFUN("draw-diagonal-gradient", Fdraw_diagonal_gradient,
 
 /* DL hooks */
 
-rep_xsubr *rep_dl_subrs[] = {
-    &Sdraw_vertical_gradient,
-    &Sdraw_horizontal_gradient,
-    &Sdraw_diagonal_gradient,
-    0
-};
-
-repv rep_dl_feature;
-
 repv
 rep_dl_init (void)
 {
+    rep_ADD_SUBR(Sdraw_vertical_gradient);
+    rep_ADD_SUBR(Sdraw_horizontal_gradient);
+    rep_ADD_SUBR(Sdraw_diagonal_gradient);
     rep_INTERN (gradient);
-    rep_dl_feature = Qgradient;
-    return Qt;
+    return Qgradient;
 }

@@ -112,15 +112,6 @@ DEFUN("flippers-after-restacking", Fflippers_after_restacking,
 
 /* DL hooks / initialisation */
 
-rep_xsubr *rep_dl_subrs[] = {
-    &Senable_flippers,
-    &Sdisable_flippers,
-    &Sflippers_after_restacking,
-    0
-};
-
-repv rep_dl_feature;
-
 static Window
 create_flipper (Window parent, int x, int y, int width, int height)
 {
@@ -141,6 +132,10 @@ create_flipper (Window parent, int x, int y, int width, int height)
 repv
 rep_dl_init (void)
 {
+    rep_ADD_SUBR(Senable_flippers);
+    rep_ADD_SUBR(Sdisable_flippers);
+    rep_ADD_SUBR(Sflippers_after_restacking);
+
     rep_INTERN (flippers);
     rep_INTERN (left);
     rep_INTERN (right);
@@ -161,6 +156,5 @@ rep_dl_init (void)
 	add_hook (Qafter_restacking_hook, rep_VAL(&Sflippers_after_restacking));
 	Fenable_flippers ();
     }
-    rep_dl_feature = Qflippers;
-    return Qt;
+    return Qflippers;
 }
