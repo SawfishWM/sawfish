@@ -74,9 +74,10 @@
 		  xterm-program (or xterm-args ""))))
 
 (defun window-really-wants-input-p (w)
-  (or ignore-window-input-hint
-      (window-get w 'ignore-window-input-hint)
-      (window-wants-input-p w)))
+  (and (not (window-get w 'never-focus))
+       (or ignore-window-input-hint
+	   (window-get w 'ignore-window-input-hint)
+	   (window-wants-input-p w))))
 
 ;; remove all duplicates from list, tests using eq, order is lost
 (defun uniquify-list (lst)
@@ -101,6 +102,23 @@
       (setq y -1))
     (warp-cursor (+ x (car coords) (- (car foff)))
 		 (+ y (cdr coords) (- (cdr foff))))))
+
+(defun resize-window-with-hints (w cols rows &optional hints)
+  (unless hints
+    (setq hints (window-size-hints w)))
+  (let
+      ((x-base (or (cdr (or (assq 'base-width hints)
+			    (assq 'min-width hints))) 1))
+       (x-inc (or (cdr (assq 'width-inc hints)) 1))
+       (y-base (or (cdr (or (assq 'base-height hints)
+			    (assq 'min-height hints))) 1))
+       (y-inc (or (cdr (assq 'height-inc hints)) 1))
+       (x-max (cdr (assq 'max-width hints)))
+       (y-max (cdr (assq 'max-height hints)))
+       (scale (lambda (x base inc maximum)
+		(min (+ base (* inc (max 0 x))) (or maximum 65535)))))
+    (resize-window-to w (scale cols x-base x-inc x-max)
+		      (scale rows y-base y-inc y-max))))
 
 
 ;; property changed interface
