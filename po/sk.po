@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.37\n"
-"POT-Creation-Date: 2001-02-12 12:08-0800\n"
-"PO-Revision-Date: 2001-02-14 14:50CET\n"
+"POT-Creation-Date: 2001-03-02 15:10+0100\n"
+"PO-Revision-Date: 2001-03-02 15:23CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@rak.isternet.sk>\n"
 "MIME-Version: 1.0\n"
@@ -54,38 +54,15 @@ msgstr "[hore]"
 msgid "[bottom]"
 msgstr "[dole]"
 
-#. ../lisp/sawfish/gtk/widgets/color.jl
-#. ../themer/themer.in
-msgid "Select color"
-msgstr "Vyberte farbu"
-
 #. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
 #. ../themer/themer.in
 msgid "Browse..."
 msgstr "Prechádza»..."
 
-#. ../lisp/sawfish/gtk/widgets/font.jl
-#. ../themer/themer.in
-msgid "Select font"
-msgstr "Vyberte písmo"
-
 #. ../themer/themer.in
 msgid "Properties..."
 msgstr "Vlastnosti..."
-
-#. ../themer/themer.in
-msgid "Select Image"
-msgstr "Vyberte obrázok"
-
-#. ../themer/themer.in
-msgid "Image Properties"
-msgstr "Vlastnosti obrázku"
-
-#. ../lisp/sawfish/gtk/widget.jl
-#. ../themer/themer.in
-msgid "No matching item for %S"
-msgstr "Nie neodpovedá %S"
 
 #. ../themer/themer.in
 #, c-format
@@ -164,6 +141,18 @@ msgid "Gradient Theme"
 msgstr "Téma Prechody"
 
 #. ../themes/gradient/theme.jl
+msgid "horizontal"
+msgstr "horizontálne"
+
+#. ../themes/gradient/theme.jl
+msgid "vertical"
+msgstr "vertikálne"
+
+#. ../themes/gradient/theme.jl
+msgid "diagonal"
+msgstr "diagonálne"
+
+#. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
 msgstr "Smer prechodu v ¹týle rámu 'Prechody'."
 
@@ -198,6 +187,18 @@ msgstr "Farba neaktívnych rámov (ak nie je nastavená, pou¾i» farbu pozadia GTK+)
 #. ../themes/mono/theme.jl
 msgid "Color of active frames (if unset use GTK+ selection color)."
 msgstr "Farba aktívnych rámov (ak nie je nastavená, pou¾i» farbu výberu GTK+)."
+
+#. ../themes/mono/theme.jl
+msgid "left"
+msgstr "vµavo"
+
+#. ../themes/mono/theme.jl
+msgid "right"
+msgstr "vpravo"
+
+#. ../themes/mono/theme.jl
+msgid "center"
+msgstr "v strede"
 
 #. ../themes/mono/theme.jl
 msgid "Text is \\w justified in window titles."
@@ -264,10 +265,6 @@ msgstr "Klávesa"
 msgid "Value"
 msgstr "Hodnota"
 
-#. ../lisp/sawfish/gtk/widgets/file.jl
-msgid "Select file"
-msgstr "Vyberte súbor"
-
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
 msgstr "Prida»..."
@@ -313,21 +310,6 @@ msgstr "Chyba Sawfish"
 msgid "Sawfish configurator"
 msgstr "Nastavenie sawfish"
 
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Pracovné plochy:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Ståpce:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Riadky:"
-
 #. ../lisp/sawfish/wm/commands.jl
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 #. ../lisp/sawfish/ui/widgets/command.jl
@@ -366,6 +348,18 @@ msgstr "Akcie"
 #. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Match window properties"
 msgstr "Porovna» vlastnosti okna"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Pracovné plochy:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Ståpce:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Riadky:"
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -619,14 +613,6 @@ msgid "Minimize"
 msgstr "Minimalizova»"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Unmaximize"
-msgstr "Odmaximalizova»"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Maximize"
-msgstr "Maximalizova»"
-
-#. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
 msgstr "_Zavrie»"
 
@@ -784,6 +770,20 @@ msgid "Ignore program-specified window placements."
 msgstr "Ignorova» umiestnenie okna uvedené programom."
 
 #. ../lisp/sawfish/wm/stacking.jl
+msgid "all"
+msgstr "v¹etky"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "rodièia"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "none"
+msgstr "¾iadna"
+
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Keep transient windows stacked above: \\w"
 msgstr "Udr¾iava» podriadené okná nad: \\w"
 
@@ -935,6 +935,18 @@ msgstr "Vynúti» si jednoznaèný titulok okna."
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Virtual desktop configuration."
 msgstr "Nastavenie virtuálnych pracovných plôch."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "stop"
+msgstr "zastavi»"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "wrap-around"
+msgstr "zalomi»"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "keep-going"
+msgstr "pokraèova»"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "When passing the first or last workspace: \\w"
@@ -1177,6 +1189,18 @@ msgstr ""
 "k pôvodnej veµkosti pred zväè¹ením."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr "mo¾no"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "always"
+msgstr "v¾dy"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "never"
+msgstr "nikdy"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
 "Whether and how to move the pointer when packing windows.\n"
 "\n"
@@ -1267,6 +1291,14 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr "Posunú» kurzor o jeden bod dolu."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "opaque"
+msgstr "nepriehµadný"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "box"
+msgstr "obdå¾nik"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How windows being moved are animated: \\w"
 msgstr "Ako sú animované okná pri presune: \\w"
 
@@ -1287,6 +1319,22 @@ msgid "Show current dimensions of windows while resizing."
 msgstr "Zobrazi» aktuálne rozmery okna pri zmene veµkosti."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "region"
+msgstr "oblas»"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "border"
+msgstr "okraj"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "grab"
+msgstr "zachyti»"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "border-grab"
+msgstr "zachyti» pri okraji"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to choose window edges when resizing: \\w"
 msgstr "Ako vybra» okraje okna pri zmene veµkosti: \\w"
 
@@ -1297,6 +1345,18 @@ msgstr "Pritiahnu» okno k okrajom ostatných okien pri presune."
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Proximity in pixels before snapping to a window edge."
 msgstr "Vzdialenos» v bodoch od okraja okna pre pritiahnutie."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "magnetism"
+msgstr "magnetizmus"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "resistance"
+msgstr "odolnos»"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "attraction"
+msgstr "prí»a¾livos»"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to snap together window edges: \\w"
@@ -1519,6 +1579,14 @@ msgid "Select the next desktop when the pointer hits screen edge."
 msgstr "Vybra» nasledujúcu plochu keï kurzor dosiahne okraj obrazovky."
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "viewport"
+msgstr "pohµad"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "workspace"
+msgstr "pracovná plocha"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Hitting the screen edge selects the next: \\w"
 msgstr "Dosiahnutie okraja obrazovky vyberie ïal¹í: \\w"
 
@@ -1541,6 +1609,18 @@ msgstr "Spracovanie chýb"
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Emit a beeping sound when errors occur."
 msgstr "Pri chybe zapípa»."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "nowhere"
+msgstr "nikde"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "screen"
+msgstr "obrazovka"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "standard-error"
+msgstr "¹tandardná chyba"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Where to display error messages: \\w"
@@ -1722,6 +1802,16 @@ msgstr "Nespravované okná je mo¾né zmen¹i» do ikony."
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Windows uniconify to the current workspace."
 msgstr "Okná obnovova» z ikony na aktuálnu plochu."
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "transients"
+msgstr "podriadené"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "group"
+msgstr "skupina"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconifying a window also iconifies the: \\w"
@@ -1987,10 +2077,6 @@ msgid "Prompt for a key sequence, then print its binding."
 msgstr "Vyzva» k zadaniu postupnosti kláves a potom vytlaèi» ich klávesové skratky."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
-msgid "Press key..."
-msgstr "Stlaète kláves..."
-
-#. ../lisp/sawfish/wm/util/keymap.jl
 msgid "[Quote]"
 msgstr "[Apostrof]"
 
@@ -2003,8 +2089,32 @@ msgstr ""
 "ignorova» klávesové skratky nastavené v správcovi okien."
 
 #. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "novice"
+msgstr "zaèiatoèník"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "intermediate"
+msgstr "pokroèilý"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "expert"
+msgstr "expert"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
 msgid "Show options suitable for \\w users."
 msgstr "Zobrazi» mo¾nosti vhodné pre \\w."
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "ok"
+msgstr "ok"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "revert/cancel/ok"
+msgstr "vráti»/zru¹i»/ok"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "apply/revert/cancel/ok"
+msgstr "pou¾i»/vráti»/zru¹i»/ok"
 
 #. ../lisp/sawfish/wm/util/nokogiri.jl
 msgid "Buttons shown in configurator: \\w"
@@ -2025,11 +2135,6 @@ msgstr ""
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Okno:"
-
-#. ../lisp/sawfish/wm/util/prompt-wm.jl
-#, c-format
-msgid "Workspace %d"
-msgstr "Pracovná plocha %d"
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
