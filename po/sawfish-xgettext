@@ -34,8 +34,13 @@ exec rep "$0" "$@"
 (define (helper form)
   (case (car form)
     ((defcustom)
-     (when (stringp (nth 3 form))
-       (register (nth 3 form))))
+     (let ((doc (nth 3 form))
+	   (keys (nthcdr 4 form)))
+       (let ((tooltip (cadr (memq ':tooltip keys))))
+	 (when tooltip
+	   (setq doc (concat doc "\n\n" tooltip))))
+       (when (stringp doc)
+	 (register doc))))
 
     ((defgroup)
      (let ((real-name (nth 3 form)))
