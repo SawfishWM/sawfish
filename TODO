@@ -41,9 +41,36 @@ Outstanding bugs
 
   ! swallowing windows to the panel doesn't work?
 
+  ! transient windows decorated as the non-transient ones, but certain
+    applications like XMMS (that should not show decoraions at all)
+    shows them in the playlist window and the equalizer window
+
+    [ 1/10: should be fixed ]
+
+  ! Every once in a while (haven't figured out a pattern yet), the
+    mouse cursor locks up, and won't move at all.  After I press a
+    mouse button, it goes back to normal again.
+
+    (this could be due to grabbing in SyncPointer mode, but
+    XAllowEvents should always be called..?)
+
+  ! rebuild-frame shouldn't change any parts whose appearance (i.e.
+    geometry, contents) haven't changed (need to store more state)
+
 
 General tasks
 =============
+
+  + option to re-place windows when they move workspaces?
+
+  + use panes to separate areas in bindings widget
+
+  + Include readline patch <199909301857.MAA00629@arachne.eng.utah.edu>
+
+    need to work out autoconf stuff..
+
+  + when cycling windows, show all names (with mark against current),
+    but don't focus each temporarily selected window? (options?)
 
   + allow workspaces to be named?
 
@@ -167,6 +194,33 @@ General tasks
   + Support the KDE hints
 
     Where are they defined?
+
+  + clone some ctwm functions:
+
+       f.fill string
+               Where string is either : "right", "left", "top" or
+               "bottom".  The current window is  resized  in  the
+               specified  direction  until it reaches an obstacle
+               (either another window, or the screen border).
+
+       f.pack string
+               Where string is either : "right", "left", "top" or
+               "bottom" The current window is moved in the speci
+               fied  direction  until  it  reaches  an   obstacle
+               (either another window, or the screen border). The
+               pointer follows the window.
+
+       f.bottomzoom
+               This function is similar to the  f.fullzoom  func
+               tion, but resizes the window to fill only the bot
+               tom half of the screen.
+
+       f.leftzoom
+               This variable is similar to the f.bottomzoom func
+               tion  but  causes  the  selected  window  is  only
+               resized to the left half of the display.
+
+       etc.
 
   - Rotated text
 

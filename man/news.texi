@@ -18,6 +18,9 @@ they occurred between. For more detailed information see the
 @item Added a new theme: @code{microGUI} by Ryan Lovett
 @email{ryan@@ocf.berkeley.edu}, based on the QNX Photon screenshots
 
+@item Added a @samp{Grab key} button in the bindings widget, replaces
+the current binding with the next pressed key
+
 @item Network server is disabled by default (since it can provide a
 security hole if X access control is disabled); re-enabled the old unix
 domain socket code (see the FAQ for more details)
@@ -33,7 +36,8 @@ moving windows between workspaces (@code{workspace-send-boundary-mode})
 @item New commands @code{send-to-workspace:@var{x}} for @var{x} from 1
 to 9
 
-@item While windows are hidden, unmap the client (for ICCCM compliance)
+@item While windows are hidden or shaded, unmap the client (for ICCCM
+compliance)
 
 @item Slightly different method of handling destroyed clients,
 hopefully results in fewer annoying error messages
@@ -48,6 +52,8 @@ resized or moved
 
 @item Fix bug where window can still be auto-raised even if it's been
 defocused
+
+@item Fix problems when @samp{--prefix} option has a trailing slash
 
 @end itemize
 

@@ -1,3 +1,16 @@
+1999-10-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* viewport.jl (move-viewport-to-window): new function
+	* x-cycle.jl, workspace.jl: call move-viewport-to-window when
+	necessary
+
+	* frames.jl (set-window-frame-style): if decorate-transients is
+	set and the window is a transient, only upgrade the type if it
+	hasn't been set explicitly
+
+	* keymap.jl (read-event): new function, grab the keyboard then
+	return the next event
+
 1999-09-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* gnome.jl (gnome-exit): delete _WIN_AREA and _WIN_AREA_COUNT

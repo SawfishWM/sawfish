@@ -1,3 +1,25 @@
+1999-10-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (list_frame_generator): when hide-client is set,
+	ensure that the client window ends up unmapped
+
+	* windows.c (focus_on_window): don't focus unmapped client
+	windows, focus the frame instead (so its state changes)
+
+	* sawmill.h (Lisp_Window): new bits: `client_hidden' and
+	`client_unmapped'. Used to allow the client to be unmapped
+	while its shaded. Added integers `local_maps' and
+	`local_unmaps': the number of expected notify events
+
+	* events.c (map_notify, unmap_notify): look at the local_maps
+	and local_unmaps fields
+
+	* windows.c (Fhide_window, Fshow_window): set the
+	client_unmapped bit, and use local_[un]maps instead of the
+	event mask
+
+	* sawmill-ui.jl (build-keymap-shell): added a `Grab key' button
+
 1999-09-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* main.c (exit_code): variable replacing the old jmp_buf exit
