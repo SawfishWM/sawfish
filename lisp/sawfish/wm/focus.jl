@@ -110,13 +110,15 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	  (saved (window-get w 'focus-saved-keymap)))
       (unless (or (eq current map) (null current))
 	(unless saved
-	  (window-put w 'focus-saved-keymap current))
+	  (window-put w 'focus-saved-keymap current)
+	  (window-put w 'ignore-fp-keymap t))
 	(window-put w 'keymap map))))
 
   (define (focus-pop-map w)
     (let ((saved (window-get w 'focus-saved-keymap)))
       (when saved
 	(window-put w 'keymap saved)
+	(window-put w 'ignore-fp-keymap nil)
 	(window-put w 'focus-saved-keymap nil))))
 
 
@@ -227,6 +229,9 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
   (add-hook 'focus-in-hook focus-in-fun t)
   (add-hook 'focus-out-hook focus-out-fun t)
   (add-hook 'map-notify-hook focus-add-window)
+
+  (add-hook 'after-initialization-hook
+	    (lambda () (map-windows focus-add-window)))
 
   (sm-add-saved-properties 'never-focus 'focus-mode)
 
