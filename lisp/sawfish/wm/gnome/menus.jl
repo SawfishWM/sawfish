@@ -233,3 +233,12 @@
 ;; init
 
 (setq apps-menu gnome-menus)
+
+;; load the menus when we idle, it reduces the latency of the first
+;; menu popup
+
+(letrec
+    ((gnome-on-idle (lambda ()
+		      (gnome-menus)
+		      (remove-hook 'idle-hook gnome-on-idle))))
+  (add-hook 'idle-hook gnome-on-idle))
