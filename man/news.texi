@@ -7,6 +7,73 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.24
+
+@itemize @bullet
+
+@item Configure requests events are now passed to the hook
+@code{configure-request-hook}. The new configure handler respects
+window gravity when resizing
+
+@item New option @code{configure-auto-gravity}. When enabled the window
+gravity is implied by the position of the center of the window. (e.g.
+try placing the GNOME control center in the bottom right corner of the
+screen, then click on an item that causes it to resize)
+
+@item Worked around the numerous reports of non-existent font errors
+that using @code{XCreateFontSet} causes---fall back to
+@code{XLoadQueryFont} if possible
+
+@item There's now a library @file{custom-defaults} giving default
+customization options (only if the user has no
+@file{~/.sawmill/custom})
+
+Also, remove the need to call @code{custom-add-required} in
+@file{.sawmillrc}, it's always done now
+
+@item New window properties @code{focus-when-mapped}, and
+@code{gravity} (overrides the hinted gravity value)
+
+@item New placement modes @code{under-pointer} and
+@code{centered-on-parent}
+
+@item New option @code{resize-edge-mode}, replaces
+@code{resize-by-frame-class} and @code{resize-add-edges}>. Also allows
+twm-style resizing (Mark Probst, me)
+
+@item Optionally display command documentation in tooltips; tooltips
+are now aligned into columns (if you use a monospaced font for them)
+
+@item Variables @code{default-cursor},
+@code{synthetic-configure-mutex}, @code{frame-draw-mutex},
+@code{frame-state-mutex} are now functions
+
+@item New functions @code{x-keysym-name}, @code{x-lookup-keysym},
+@code{decode-event}, @code{encode-event}.
+
+@item New option @code{move-resize-inhibit-configure}
+
+@item Removed @code{fp->win == 0} assertion, it should be harmless and
+was triggering for some people
+
+@item Fixed bug of sending configure notify events to too many windows
+
+@item Fixed off-by-one error in @code{ws-insert-workspace} (Kirk
+Saranathan)
+
+@item Fixed maximization in single directions to work additively
+
+@item Fixed bug of leaving tooltips displayed after the associated
+window has been deleted
+
+@item Fixed bug of not removing @samp{-clientId} option from restart
+parameters
+
+@item Fixed bug of not translating customize group names
+
+@end itemize
+
+
 @unnumberedsec 0.23
 
 @itemize @bullet
