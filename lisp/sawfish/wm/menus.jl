@@ -60,10 +60,10 @@
   (defvar menu-program (expand-file-name "sawfish-menu" sawfish-exec-directory)
     "Location of the program implementing sawfish's menu interface.")
 
-  (defvar menu-program-stays-running 60
-    "When non-nil, the user-interface program is never stopped. If a number,
-then this is taken as the number of seconds to let the process hang around
-unused before killing it.")
+  (defvar menu-program-stays-running t
+    "When non-nil, the menu program is never stopped. If a number, then this
+is taken as the number of seconds to let the process hang around unused
+before killing it.")
 
   ;; the active user interface process
   (define menu-process nil)

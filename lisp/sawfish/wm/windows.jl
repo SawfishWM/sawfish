@@ -126,6 +126,14 @@ Returns nil if no such window is found."
     (window-put w 'desktop t)
     (window-put w 'keymap root-window-keymap))
 
+  (define (focus-desktop)
+    "Transfer input focus to the desktop window (if one exists)."
+    (let ((desktop-window (car (filter-windows desktop-window-p))))
+      (when desktop-window
+	(set-input-focus desktop-window))))
+
+  (define-command 'focus-desktop focus-desktop)
+
   (define (window-in-cycle-p w)
     "Returns true if the window W should be included when cycling between
 windows."
