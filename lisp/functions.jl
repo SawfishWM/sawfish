@@ -235,6 +235,21 @@ specified by the user."
      (max 0 (min (1- (screen-width)) (+ x (car coords) (- (car foff)))))
      (max 0 (min (1- (screen-height)) (+ y (cdr coords) (- (cdr foff))))))))
 
+(defun constrain-dimension-to-hints (x dimension hints)
+  (let ((base (cdr (assq (if (eq dimension 'x)
+			     'base-width 'base-height) hints)))
+	(minimum (cdr (assq (if (eq dimension 'x)
+				'min-width 'min-height) hints)))
+	(maximum (or (cdr (assq (if (eq dimension 'x)
+				    'max-width 'max-height) hints)) 65535))
+	(inc (or (cdr (assq (if (eq dimension 'x)
+				'width-inc 'height-inc) hints)) 1)))
+    (let ((bottom (or base minimum 1)))
+      (unless (= (mod (- x bottom) inc) 0)
+	(setq x (inexact->exact
+		 (+ (* (ceiling (/ (- x bottom) inc)) inc) bottom)))))
+    (clamp x (or minimum base 1) maximum)))
+
 (defun resize-window-with-hints (w cols rows &optional hints)
   "Resize window W to COLS x ROWS, using the window's size hints to define
 the row and column size, and the minimum possible size.
@@ -250,12 +265,11 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
        (y-base (or (cdr (or (assq 'base-height hints)
 			    (assq 'min-height hints))) 1))
        (y-inc (or (cdr (assq 'height-inc hints)) 1))
-       (x-max (cdr (assq 'max-width hints)))
-       (y-max (cdr (assq 'max-height hints)))
        (scale (lambda (x base inc maximum)
 		(min (+ base (* inc (max 0 x))) (or maximum 65535)))))
-    (resize-window-to w (scale cols x-base x-inc x-max)
-		      (scale rows y-base y-inc y-max))))
+    (resize-window-to
+     w (constrain-dimension-to-hints (+ x-base (* x-inc cols)) 'x hints)
+     (constrain-dimension-to-hints (+ y-base (* y-inc rows)) 'y hints))))
 
 (defun resize-window-with-hints* (w width height &optional hints)
   "Resize window W to WIDTH x HEIGHT, with WIDTH and HEIGHT defined in
@@ -267,15 +281,8 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
 (window-size-hints W) is used."
   (unless hints
     (setq hints (window-size-hints w)))
-  (let
-      ((x-min (or (cdr (or (assq 'base-width hints)
-			   (assq 'min-width hints))) 1))
-       (y-min (or (cdr (or (assq 'base-height hints)
-			   (assq 'min-height hints))) 1))
-       (x-max (or (cdr (assq 'max-width hints)) 65535))
-       (y-max (or (cdr (assq 'max-height hints)) 65535)))
-    (resize-window-to w (clamp width x-min x-max)
-		      (clamp height y-min y-max))))
+  (resize-window-to w (constrain-dimension-to-hints width 'x hints)
+		    (constrain-dimension-to-hints height 'y hints)))
 
 (defun get-window-wm-protocols (w)
   "Return a list of symbols defining the X11 window manager protocols supported
