@@ -502,7 +502,7 @@ property_notify (XEvent *ev)
 		if (format == 8 && !WINDOW_IS_GONE_P (w))
 		{
 		    repv str = Qnil;
-		    if (actual == xa_compound_text)
+		    if (actual == xa_compound_text || actual == XA_STRING)
 		    {
 			char **text_list;
 			XTextProperty tprop;
@@ -519,10 +519,6 @@ property_notify (XEvent *ev)
 			    	str = rep_string_dup (text_list[0]);
 			    XFreeStringList(text_list);
 			}
-		    }
-		    else if (actual == XA_STRING)
-		    {
-			str = rep_string_dup (prop);
 		    }
 		    if (str == Qnil)
 			str = rep_null_string ();
