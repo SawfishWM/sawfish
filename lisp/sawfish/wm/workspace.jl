@@ -935,6 +935,11 @@ last instance remaining, then delete the actual window."
   (add-hook 'workspace-geometry-changed
 	    (lambda ()
 	      (setq preallocated-workspaces (car workspace-geometry))
+	      ;; XXX this isn't ideal, but it's better than getting
+	      ;; XXX workspaces that aren't deleted as the total
+	      ;; XXX number of workspaces is decreased...
+	      (setq first-interesting-workspace nil)
+	      (setq last-interesting-workspace nil)
 	      (call-hook 'workspace-state-change-hook)))
 
 

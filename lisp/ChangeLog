@@ -1,3 +1,15 @@
+2001-04-11  John Harper  <jsh@eazel.com>
+
+	Fixed bug 8047 (SOLARIS: Setting Gnomecc Workspaces spin button
+	to decrease no of workspaces fails.):
+
+	* sawfish/wm/workspace.jl: set
+	{first,last}-interesting-workspace to nil when the workspace
+	configuration changes
+
+	this isn't a great fix, but imho it's better than the current
+	behaviour
+
 2001-04-08  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/state/transient.jl (transient-frame-type):
