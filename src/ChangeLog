@@ -1,4 +1,34 @@
+2000-01-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c (lookup_binding): check for non-null current_x_event
+	before accessing it
+
+2000-01-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (create_window_frame): if actually creating the
+	frame window, then call grab_window_events ()
+	* windows.c (add_window, remove_window): don't call
+	grab_window_events () anymore
+	* keys.c, frames.c (grab_window_events, grab_keymap_event,
+	Fwindow_put): when grabbing events, grab on the frame window,
+	not the client window
+
+	* images.c (Fmake_image): _always_ returns a new image, by
+	working around Imlib's annoying caching
+
 2000-01-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.h: added fps_inactive_highlighted and
+	fps_inactive_clicked
+
+	* frames.c (get_pattern_prop): new function, called by
+	list_frame_generator to fill the fp->bg, fp->fg and fp->font
+	arrays. This now takes a new format, an alist mapping state
+	symbols to values (the old formats are also still accepted).
+	Current states are `inactive', `focused', `highlighted',
+	`clicked', `inactive-focused', `inactive-clicked'. The last two
+	are new, there inclusion removes the need for the
+	highlight-when-unfocused option, so it's been removed
 
 	* sawmill.h (FRAME_EVENTS): added VisibilityChangeMask (patch
 	from Matt Krai <kraii@ghs.com>)

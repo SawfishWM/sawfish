@@ -1,4 +1,31 @@
+2000-01-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* groups.jl (iconify-other-groups): new function, iconifies all
+	windows not in the current group
+
+	* gnome.jl (gnome-event-proxyer): only proxy root button clicks
+	if we don't want to keep the grab so as to receive future
+	events
+
+2000-01-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* make-theme.jl (make-theme): memoize images as they're loaded
+	so each one is only loaded once (no built-in image caching
+	anymore)
+
+	* frames.jl (reload-themes-when-changed): new defcustom
+	(theme-update-interval): new variable, defaults to 60 seconds
+
+	* frames.jl (reload-frame-style): new function, reload the
+	named style, then reframe any windows using it
+
 2000-01-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* make-theme.jl (make-theme): handle the new pattern output
+	from the themer (alist of states)
+
+	* frames.jl (highlight-when-unfocused): deleted the defcustom,
+	the variable has been removed
 
 	* workspace.jl (workspace-swap-in): swap in the saved
 	properties before the geometry, so that state is set by the

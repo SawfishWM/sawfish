@@ -7,6 +7,7 @@ Bugs are marked !, things that should be done soon are marked +,
 and longer-term ideas are marked -
 
 
+
 Outstanding bugs
 ================
 
@@ -20,9 +21,12 @@ Outstanding bugs
   ! grabbing `-Off' modified events doesn't work anymore (e.g. bind
     Button1-M-Off in window-keymap to raise-lower-window)
 
+    [ the grab seems to get through, and the command can be found when
+      searching manually, so where's the bug? ]
+
   ! menus appear too high in java/swing apps until window is moved
 
-    [ works okay for me.. ]
+    [ works okay for me with SUN Java on Solaris.. ]
 
   ! * Open Netscape
     * Click the botton on the status-bar that brings the little
@@ -34,9 +38,6 @@ Outstanding bugs
       flicker on the desktop so fast you can't click on anything to get
       rid of it, and you have to 'kill' it (sometimes it eventually dies
       on its own in a minute or two).
-
-  ! ICCCM says we should not passive grab on the client windows, but on
-    our frames instead
 
   ! xv/java-apps get weird placement [apps being non-ICCCM compliant?]
 
@@ -71,24 +72,17 @@ Outstanding bugs
 
   + features can't be both enabled via customization and demand-loaded
 
-  + write documentation: workspaces, viewports, window groups
+  + write documentation: workspaces, viewports, window groups, alist
+    frame patterns...
 
   + allow enter/leave-notify events to be suppressed?
 
     (use this when switching workspaces, but focus must be preserved)
 
 
-General tasks
-=============
 
-  + reload themes when they're modified
-
-  + rewrite sawmill-ui to use ``items'' as in sawmill-themer (complex
-    widgets represented by functional data types). This would allow
-    more complex custom types, i.e. `(or number string)' etc...
-
-    also, add provisions for extensibility (i.e. adding new item types
-    at run-time)
+Window manager tasks
+====================
 
   + add a function to turn icons into lisp images
 
@@ -120,25 +114,10 @@ General tasks
 
   + wrap-around option for moving viewports
 
-  + use panes to separate areas in bindings widget
-
   + allow workspaces to be named?
 
     this is done, set the workspace-names variable to a list of
     strings; but it's not yet customizable through the ui
-
-  + add capplet desktop entries to share/gnome/apps/Settings as well as
-    the control center tree
-
-    then again.. there's a problem with this -- gnome menus are
-    _static_, whereas sawmill's customization groups are _dynamic_
-
-    i.e. the `customization' root sub-menu wouldn't match the menu in
-    the gnome `settings' tree. this would be bad since the user may not
-    discover the dynamic menu and thus miss many of the options..
-
-    [ apparently, this is an issue which may be addressed in future
-      versions of the control center ]
 
   + in interactive placement, allow the window-pointer position to be
     configurable 
@@ -151,8 +130,6 @@ General tasks
   + allow configuration of where move/resize display appears
 
     allow relative to window, or relative to root, for both x and y
-
-  + Allow text-entry commands in bindings dialog?
 
   + windows appear above xscreensaver?
 
@@ -217,11 +194,6 @@ General tasks
     Also, why do themes with bg_pixmap set use so much memory? Is it
     just because the images are XPM's..?
 
-
-
-Long term ideas
-===============
-
   - Remove root menu?
 
     The argument is that doing this removes the need for the wm to
@@ -279,3 +251,57 @@ Long term ideas
 
     First write CORBA support for rep (does guile support CORBA?), then
     what? Would this be useful?
+
+
+
+sawmill-ui tasks
+================
+
+  + rewrite sawmill-ui to use ``items'' as in sawmill-themer (complex
+    widgets represented by functional data types). This would allow
+    more complex custom types, i.e. `(or number string)' etc...
+
+    also, add provisions for extensibility (i.e. adding new item types
+    at run-time)
+
+  + Allow text-entry commands in bindings dialog?
+
+  + use panes to separate areas in bindings widget
+
+  + add capplet desktop entries to share/gnome/apps/Settings as well as
+    the control center tree
+
+    then again.. there's a problem with this -- gnome menus are
+    _static_, whereas sawmill's customization groups are _dynamic_
+
+    i.e. the `customization' root sub-menu wouldn't match the menu in
+    the gnome `settings' tree. this would be bad since the user may not
+    discover the dynamic menu and thus miss many of the options..
+
+    [ apparently, this is an issue which may be addressed in future
+      versions of the control center ]
+
+
+
+sawmill-themer tasks
+====================
+
+  ! only the `default' window type may be previewed
+
+    [ workaround: temporarily change the `default' mapping ]
+
+  + allow functional frame part attributes to be defined
+
+    possibly add an `(extra sexp)' field that is evaluated then added
+    to the end of the frame part definition 
+
+  + allow dynamic patterns to be defined (e.g. gradients)
+
+  + better previewing:
+
+    * highlight the current frame part somehow
+
+    * clicking/hovering on a frame part selects that definition
+
+    * auto-update, either after each change, or from the idle-hook?
+
