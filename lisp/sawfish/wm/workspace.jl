@@ -97,6 +97,7 @@
 	    ws-remove-window
 	    ws-add-window-to-space
 	    ws-move-window
+	    ws-copy-window
 	    ws-call-with-workspace)
 
     (open rep
