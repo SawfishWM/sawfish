@@ -150,6 +150,12 @@
     (cons (/ (+ (car position) viewport-x-offset) (screen-width))
 	  (/ (+ (cdr position) viewport-y-offset) (screen-height)))))
 
+(defun window-absolute-position (w)
+  (let
+      ((position (window-position w)))
+    (cons (mod (+ (car position) viewport-x-offset) (screen-width))
+	  (mod (+ (cdr position) viewport-y-offset) (screen-height)))))
+
 (defun viewport-size-changed ()
   (let
       ((port (screen-viewport)))
@@ -224,8 +230,7 @@
     (when (window-get w 'sticky-viewport)
       (rplaca position (mod (car position) (screen-width)))
       (rplacd position (mod (cdr position) (screen-height))))
-    `((position . ,(cons (mod (car position) (screen-width))
-			 (mod (cdr position) (screen-height))))
+    `((position . ,(window-absolute-position w))
       (viewport . ,(window-viewport w)))))
 
 (defun viewport-load-state (w alist)
