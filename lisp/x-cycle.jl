@@ -155,7 +155,7 @@
 	    (bind-keys override-keymap
 	      (concat "Any-Release-" k) 'x-cycle-exit)) tem)
 
-    (when (grab-keyboard)
+    (when (grab-keyboard (input-focus))
       (unwind-protect
 	  (progn
 	    (catch 'x-cycle-exit
