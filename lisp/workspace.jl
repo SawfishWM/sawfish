@@ -66,7 +66,7 @@ their parent window.")
 	     (eq space ws-current-workspace)
 	     (not (window-get w 'iconified)))
     (show-window w))
-  (call-hook 'add-to-workspace-hook (list w)))
+  (call-window-hook 'add-to-workspace-hook w))
 
 ;; usually called from the add-window-hook
 (defun ws-add-window (w)
@@ -91,7 +91,7 @@ their parent window.")
 	(window-put w 'workspace ws-current-workspace)
 	(unless (window-visible-p w)
 	  (show-window w))
-	(call-hook 'add-to-workspace-hook (list w))))))
+	(call-window-hook 'add-to-workspace-hook w)))))
 
 ;; called from the map-notify hook
 (defun ws-window-mapped (w)
@@ -125,7 +125,7 @@ their parent window.")
 	(setq ws-workspaces (delq space ws-workspaces))
 	(call-hook 'delete-workspace-hook (list space)))
       (window-put w 'workspace nil)
-      (call-hook 'remove-from-workspace-hook (list w space))
+      (call-window-hook 'remove-from-workspace-hook w (list space))
       (when (windowp w)
 	(hide-window w)))))
 
@@ -326,7 +326,7 @@ workspace."
     (window-put w 'iconified t)
     (when (window-visible-p w)
       (hide-window w))
-    (call-hook 'iconify-window-hook (list w))))
+    (call-window-hook 'iconify-window-hook w)))
 
 (defun uniconify-window (w)
   (interactive "f")
@@ -339,7 +339,7 @@ workspace."
 	   (ws-add-window w)))
     (when raise-windows-on-uniconify
       (raise-window w))
-    (call-hook 'uniconify-window-hook (list w))))
+    (call-window-hook 'uniconify-window-hook w)))
 
 (defun display-window (w)
   "Display the workspace containing window W."
