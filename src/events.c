@@ -1301,6 +1301,7 @@ events_init (void)
     rep_INTERN(lower_window);
 
     rep_mark_static (&current_event_window);
+    current_context_map = Qnil;
     rep_mark_static (&current_context_map);
 
     event_handler_context = XUniqueContext ();
