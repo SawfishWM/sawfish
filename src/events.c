@@ -388,7 +388,11 @@ destroy_notify (XEvent *ev)
 	focus_window = 0;
     remove_window (w, Qt, Qnil);
     /* the window isn't windowp anymore.. */
-    Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
+    if (!w->destroyed)
+    {
+	w->destroyed = 1;
+	Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
+    }
 }
 
 void
@@ -765,6 +769,8 @@ handle_input_mask(long mask)
 		break;
 	}
 
+	emit_pending_destroys ();
+
 	DB(("** Event: %s (win %lx)\n",
 	    xev.type < LASTEvent ? event_names[xev.type] : "unknown",
 	    (long)xev.xany.window));
@@ -783,6 +789,8 @@ handle_input_mask(long mask)
     /* in case a function is invoked from outside the event loop
        that passes last_event_time to an X function */
     last_event_time = CurrentTime;
+
+    emit_pending_destroys ();
 }
 
 /* Handle all available X events on file descriptor FD. */
