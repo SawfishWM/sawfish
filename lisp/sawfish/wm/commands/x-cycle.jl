@@ -186,6 +186,8 @@
     (unless (eq x-cycle-windows t)
       (setq win (delete-if (lambda (w)
 			     (not (memq w x-cycle-windows))) win)))
+    (setq win (delete-if (lambda (w)
+			   (window-get w 'never-focus)) win))
     (unless win
       (throw 'x-cycle-exit t))
     (if x-cycle-current
