@@ -77,6 +77,7 @@ DEFSYM(class, "class");
 DEFSYM(removable, "removable");
 DEFSYM(removed_classes, "removed-classes");
 DEFSYM(frame_part_classes, "frame-part-classes");
+DEFSYM(override_frame_part_classes, "override-frame-part-classes");
 
 static repv state_syms[fps_MAX];
 
@@ -481,9 +482,12 @@ frame_part_prop_change (Lisp_Window *w)
 }
 
 static repv
-fp_assq (repv prop, repv alist, repv class_alist)
+fp_assq (repv prop, repv alist, repv class_alist, repv ov_class_alist)
 {
-    repv tem = Fassq (prop, alist);
+    repv tem;
+    tem = Fassq (prop, ov_class_alist);
+    if (tem && tem == Qnil)
+	tem = Fassq (prop, alist);
     if (tem && tem == Qnil)
 	tem = Fassq (prop, class_alist);
     if (!tem)
@@ -492,9 +496,47 @@ fp_assq (repv prop, repv alist, repv class_alist)
 }
 
 static repv
-get_integer_prop (Lisp_Window *w, repv prop, repv elt, repv class)
+x_fp_assq (repv prop, struct frame_part *fp)
 {
-    repv tem = fp_assq (prop, elt, class);
+    repv ret = Qnil, class, tem;
+
+    class = Fassq (Qclass, fp->alist);
+    if (class && class != Qnil)
+	class = rep_CDR(class);
+    else
+	class = rep_NULL;
+
+    tem = Fsymbol_value (Qoverride_frame_part_classes, Qt);
+    if (rep_CONSP(tem))
+    {
+	tem = Fassq (class, tem);
+	if (tem && tem != Qnil)
+	    ret = Fassq (prop, rep_CDR(tem));
+    }
+
+    if (ret && ret == Qnil)
+	ret = Fassq (prop, fp->alist);
+
+    if (ret && ret == Qnil)
+    {
+	tem = Fsymbol_value (Qframe_part_classes, Qt);
+	if (rep_CONSP(tem))
+	{
+	    tem = Fassq (class, tem);
+	    if (tem && tem != Qnil)
+		ret = Fassq (prop, rep_CDR(tem));
+	}
+    }
+    if (!ret)
+	ret = Qnil;
+    return ret;
+}
+
+static repv
+get_integer_prop (Lisp_Window *w, repv prop, repv elt,
+		  repv class, repv ov_class)
+{
+    repv tem = fp_assq (prop, elt, class, ov_class);
     if (tem && tem != Qnil)
     {
 	if (rep_INTP(rep_CDR(tem)))
@@ -573,12 +615,13 @@ list_frame_generator (Lisp_Window *w)
     while ((!regen && rep_CONSP(ptr))
 	   || (regen && fp != 0))
     {
-	repv elt, class = Qnil, class_elt = Qnil;
-	rep_GC_root gc_class, gc_class_elt;
+	repv elt, class = Qnil, class_elt = Qnil, ov_class_elt = Qnil;
+	rep_GC_root gc_class, gc_class_elt, gc_ov_class_elt;
 	bool had_left_edge = FALSE, had_top_edge = FALSE;
 
 	rep_PUSHGC(gc_class, class);
 	rep_PUSHGC(gc_class_elt, class_elt);
+	rep_PUSHGC(gc_ov_class_elt, ov_class_elt);
 
 	if (!regen)
 	{
@@ -593,7 +636,7 @@ list_frame_generator (Lisp_Window *w)
 	for (i = 0; i < fps_MAX; i++)
 	    fp->fg[i] = fp->bg[i] = fp->font[i] = Qnil;
 
-	/* find the class of the part, and the alist of class-local state */
+	/* find the class of the part, and the alists of class-local state */
 	tem = Fassq (Qclass, elt);
 	if (tem && tem != Qnil)
 	{
@@ -604,6 +647,13 @@ list_frame_generator (Lisp_Window *w)
 		tem = Fassq (class, tem);
 		if (tem && tem != Qnil)
 		    class_elt = rep_CDR(tem);
+	    }
+	    tem = Fsymbol_value (Qoverride_frame_part_classes, Qt);
+	    if (rep_CONSP(tem))
+	    {
+		tem = Fassq (class, tem);
+		if (tem && tem != Qnil)
+		    ov_class_elt = rep_CDR(tem);
 	    }
 	}
 
@@ -621,17 +671,17 @@ list_frame_generator (Lisp_Window *w)
 	}
 
 	/* get text label */
-	tem = fp_assq (Qtext, elt, class_elt);
+	tem = fp_assq (Qtext, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	    fp->text = rep_CDR(tem);
 	else
 	    fp->text = Qnil;
-	tem = fp_assq (Qx_justify, elt, class_elt);
+	tem = fp_assq (Qx_justify, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	    fp->x_justify = rep_CDR(tem);
 	else
 	    fp->x_justify = Qnil;
-	tem = fp_assq (Qy_justify, elt, class_elt);
+	tem = fp_assq (Qy_justify, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	    fp->y_justify = rep_CDR(tem);
 	else
@@ -639,7 +689,7 @@ list_frame_generator (Lisp_Window *w)
 
 	/* get cursor */
 	fp->cursor = Qnil;
-	tem = fp_assq (Qcursor, elt, class_elt);
+	tem = fp_assq (Qcursor, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	{
 	    if (rep_SYMBOLP(rep_CDR(tem)))
@@ -651,11 +701,12 @@ list_frame_generator (Lisp_Window *w)
 	}
 
 	/* get renderer function */
-	tem = fp_assq (Qrenderer, elt, class_elt);
+	tem = fp_assq (Qrenderer, elt, class_elt, ov_class_elt);
 	if (tem != Qnil && Ffunctionp (rep_CDR(tem)) != Qnil)
 	{
 	    fp->renderer = rep_CDR(tem);
-	    tem = get_integer_prop (w, Qrender_scale, elt, class_elt);
+	    tem = get_integer_prop (w, Qrender_scale, elt,
+				    class_elt, ov_class_elt);
 	    if (tem != Qnil && rep_INT(tem) > 0)
 		fp->render_scale = rep_INT(tem);
 	    else
@@ -665,7 +716,7 @@ list_frame_generator (Lisp_Window *w)
 	    fp->renderer = Qnil;
 
 	/* get background images or colors */
-	tem = fp_assq (Qbackground, elt, class_elt);
+	tem = fp_assq (Qbackground, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	{
 	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
@@ -695,7 +746,7 @@ list_frame_generator (Lisp_Window *w)
 	}
 
 	/* get foreground colors */
-	tem = fp_assq (Qforeground, elt, class_elt);
+	tem = fp_assq (Qforeground, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	{
 	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
@@ -724,7 +775,7 @@ list_frame_generator (Lisp_Window *w)
 	}
 
 	/* get fonts */
-	tem = fp_assq (Qfont, elt, class_elt);
+	tem = fp_assq (Qfont, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	{
 	    if (Ffunctionp (rep_CDR(tem)) != Qnil)
@@ -784,25 +835,25 @@ list_frame_generator (Lisp_Window *w)
 	}
 
 	/* get dimensions.. */
-	tem = get_integer_prop (w, Qwidth, elt, class_elt);
+	tem = get_integer_prop (w, Qwidth, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	    fp->width = rep_INT(tem);
-	tem = get_integer_prop (w, Qheight, elt, class_elt);
+	tem = get_integer_prop (w, Qheight, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	    fp->height = rep_INT(tem);
-	tem = get_integer_prop (w, Qleft_edge, elt, class_elt);
+	tem = get_integer_prop (w, Qleft_edge, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	{
 	    fp->x = rep_INT(tem);
 	    had_left_edge = TRUE;
 	}
-	tem = get_integer_prop (w, Qtop_edge, elt, class_elt);
+	tem = get_integer_prop (w, Qtop_edge, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	{
 	    fp->y = rep_INT(tem);
 	    had_top_edge = TRUE;
 	}
-	tem = get_integer_prop (w, Qright_edge, elt, class_elt);
+	tem = get_integer_prop (w, Qright_edge, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	{
 	    if (had_left_edge)
@@ -810,7 +861,7 @@ list_frame_generator (Lisp_Window *w)
 	    else
 		fp->x = w->attr.width - rep_INT(tem) - fp->width;
 	}
-	tem = get_integer_prop (w, Qbottom_edge, elt, class_elt);
+	tem = get_integer_prop (w, Qbottom_edge, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	{
 	    if (had_top_edge)
@@ -860,7 +911,7 @@ list_frame_generator (Lisp_Window *w)
 	else
 	    fp = fp->next;
 
-	rep_POPGC; rep_POPGC;
+	rep_POPGC; rep_POPGC; rep_POPGC;
     }
 
     /* now we can find the size and offset of the frame. */
@@ -984,30 +1035,10 @@ list_frame_generator (Lisp_Window *w)
 repv
 get_keymap_for_frame_part (struct frame_part *fp)
 {
-    repv context_map = Qnil;
-    repv tem = Fassq (Qkeymap, fp->alist);
-    if (tem && tem != Qnil)
-	context_map = rep_CDR(tem);
-    else
-    {
-	/* no specific map, look in the class */
-	repv class = Fassq (Qclass, fp->alist);
-	if (class && class != Qnil)
-	{
-	    tem = Fsymbol_value (Qframe_part_classes, Qt);
-	    if (rep_CONSP(tem))
-	    {
-		tem = Fassq (rep_CDR(class), tem);
-		if (tem && tem != Qnil)
-		{
-		    tem = Fassq (Qkeymap, rep_CDR(tem));
-		    if (tem && tem != Qnil)
-			context_map = rep_CDR(tem);
-		}
-	    }
-	}
-    }
-    return context_map;
+    repv tem = x_fp_assq (Qkeymap, fp);
+    if (tem != Qnil)
+	tem = rep_CDR(tem);
+    return tem;
 }
 
 /* Mark all frame-parts of window W for gc. */
@@ -1180,6 +1211,7 @@ frames_init (void)
     rep_INTERN(removed_classes);
 
     rep_INTERN(frame_part_classes);
+    rep_INTERN(override_frame_part_classes);
 
     state_syms[fps_normal] = Qnil;
     state_syms[fps_focused] = Qfocused;
