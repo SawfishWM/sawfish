@@ -359,7 +359,7 @@ unix_server_init (char *display)
     if(socket_fd >= 0)
     {
 	if(connect(socket_fd, (struct sockaddr *)&addr,
-		   sizeof(addr.sun_family) + strlen(addr.sun_path)) == 0)
+		   sizeof(addr.sun_family) + strlen(addr.sun_path) + 1) == 0)
 	{
 	    eval_fun = unix_server_eval;
 	    close_fun = unix_server_close;
