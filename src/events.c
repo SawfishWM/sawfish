@@ -731,7 +731,10 @@ enter_notify (XEvent *ev)
 {
     struct frame_part *fp;
     if (ev->xcrossing.window == root_window)
-	Fcall_hook (Qenter_notify_hook, Fcons (Qroot, Qnil), Qnil);
+    {
+	if (ev->xcrossing.mode == NotifyNormal)
+	    Fcall_hook (Qenter_notify_hook, Fcons (Qroot, Qnil), Qnil);
+    }
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
     {
 	repv tem;
@@ -751,7 +754,8 @@ enter_notify (XEvent *ev)
 	    refresh_frame_part (fp);
 
 	tem = Fassq (Qclass, fp->alist);
-	if (tem && rep_CONSP(tem) && w->id != 0)
+	if (tem && rep_CONSP(tem) && w->id != 0
+	    && ev->xcrossing.mode == NotifyNormal)
 	{
 	    Fcall_window_hook (Qenter_frame_part_hook, rep_VAL(w),
 			       Fcons (rep_VAL(fp), Qnil), Qnil);
@@ -761,7 +765,8 @@ enter_notify (XEvent *ev)
     {
 	Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
 	if (w != 0 && w->mapped && w->visible
-	    && ev->xcrossing.detail != NotifyInferior)
+	    && ev->xcrossing.detail != NotifyInferior
+	    && ev->xcrossing.mode == NotifyNormal)
 	{
 	    Fcall_window_hook (Qenter_notify_hook, rep_VAL(w), Qnil, Qnil);
 	}
@@ -773,7 +778,10 @@ leave_notify (XEvent *ev)
 {
     struct frame_part *fp;
     if (ev->xcrossing.window == root_window)
-	Fcall_hook (Qleave_notify_hook, Fcons (Qroot, Qnil), Qnil);
+    {
+	if (ev->xcrossing.mode == NotifyNormal)
+	    Fcall_hook (Qleave_notify_hook, Fcons (Qroot, Qnil), Qnil);
+    }
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
     {
 	repv tem;
@@ -793,7 +801,8 @@ leave_notify (XEvent *ev)
 	    refresh_frame_part (fp);
 
 	tem = Fassq (Qclass, fp->alist);
-	if (tem && rep_CONSP(tem) && w->id != 0)
+	if (tem && rep_CONSP(tem) && w->id != 0
+	    && ev->xcrossing.mode == NotifyNormal)
 	{
 	    Fcall_window_hook (Qleave_frame_part_hook, rep_VAL(w),
 			       Fcons (rep_VAL(fp), Qnil), Qnil);
@@ -803,7 +812,8 @@ leave_notify (XEvent *ev)
     {
 	Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
 	if (w != 0 && w->mapped && w->visible
-	    && ev->xcrossing.detail != NotifyInferior)
+	    && ev->xcrossing.detail != NotifyInferior
+	    && ev->xcrossing.mode == NotifyNormal)
 	{
 	    Fcall_window_hook (Qleave_notify_hook, rep_VAL(w), Qnil, Qnil);
 	}
