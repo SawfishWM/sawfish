@@ -149,10 +149,8 @@
     :require sawfish.wm.ext.match-window)
 
   ;; used by sawmill-ui when grabbing property values
-  (define (match-window-grab-x-property prop-name)
-    (let ((real-prop (or (car (rassoc prop-name match-window-x-properties))
-			 (intern prop-name)))
-	  (window (select-window))
+  (define (match-window-grab-x-property real-prop)
+    (let ((window (select-window))
 	  prop)
       (when window
 	(setq prop (get-x-property window real-prop))
