@@ -1016,25 +1016,23 @@ window_mark_type (void)
 static void
 window_sweep (void)
 {
-    Lisp_Window *w = window_list;
-    window_list = 0;
-    while (w != 0)
+    Lisp_Window **ptr = &window_list;
+    while (*ptr != 0)
     {
-	Lisp_Window *next = w->next;
+	Lisp_Window *w = *ptr;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
 	{
 	    destroy_window_frame (w, FALSE);
 	    if (w->wmhints != 0)
 		XFree (w->wmhints);
+	    *ptr = w->next;
 	    rep_FREE_CELL(w);
 	}
 	else
 	{
+	    ptr = &(w->next);
 	    rep_GC_CLR_CELL(rep_VAL(w));
-	    w->next = window_list;
-	    window_list = w;
 	}
-	w = next;
     }
 }
 
