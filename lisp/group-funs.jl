@@ -102,7 +102,7 @@
        (i -1))
     (while (memq i ids)
       (setq i (1- i)))
-    (window-put w 'group i)))
+    (add-window-to-group w i)))
 
 
 ;; menu constructor
