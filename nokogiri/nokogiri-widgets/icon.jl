@@ -21,8 +21,6 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(require 'nokogiri-interfaces)
-
 (define-structure nokogiri-widgets/icon ()
 
     (open rep

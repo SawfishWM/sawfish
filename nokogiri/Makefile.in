@@ -54,7 +54,8 @@ W_SRCS := nokogiri-widgets/alist.jl	\
 	nokogiri-widgets/keymap.jl	\
 	nokogiri-widgets/list.jl	\
 	nokogiri-widgets/match-window.jl \
-	nokogiri-widgets/pair.jl
+	nokogiri-widgets/pair.jl	\
+	nokogiri-widgets/program.jl
 G_W_SRCS :=				\
 	nokogiri-widgets/workspace-geometry.jl \
 	nokogiri-widgets/icon.jl
@@ -77,6 +78,8 @@ L_OBJS := $(L_SRCS:.jl=.jlc)
 ALL_SRCS := $(SRCS) $(W_SRCS) $(L_SRCS)
 ALL_OBJS := $(OBJS) $(W_OBJS) $(L_OBJS)
 
+EXTRA_INST := monitor.png
+
 SUBSTS := -e "s|__nokogiridir__|$(nokogiridir)|"  \
 	  -e "s|__rep_gtk_gnome__|$(REP_GTK_GNOME)|"
 
@@ -89,7 +92,7 @@ all : $(ALL_SRCS) $(ALL_OBJS)
 	sed $(SUBSTS) $< >$@
 
 install : all installdirs
-	for p in $(SRCS) $(OBJS); do \
+	for p in $(SRCS) $(OBJS) $(EXTRA_INST); do \
 	  $(INSTALL_DATA) $$p $(DESTDIR)${nokogiridir}; \
 	done
 	for p in $(W_SRCS) $(W_OBJS); do \
@@ -101,7 +104,7 @@ install : all installdirs
 	$(INSTALL_SCRIPT) nokogiri-main.jlc $(DESTDIR)${bindir}/sawfish-ui
 
 uninstall :
-	for p in $(SRCS) $(OBJS); do \
+	for p in $(SRCS) $(OBJS) $(EXTRA_INST); do \
 	  rm -f $(DESTDIR)${nokogiridir}/$$p; \
 	done
 	for p in $(W_SRCS) $(W_OBJS); do \

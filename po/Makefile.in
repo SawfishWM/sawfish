@@ -35,7 +35,7 @@ CATALOGS=$(LINGUAS:%=%$(CATOBJEXT))
 all : $(CATALOGS) $(PACKAGE).pot
 
 $(PACKAGE).pot :
-	./.make-pot
+	./make-pot
 
 ifneq ($(CATALOGS),)
 install : $(CATALOGS) installdirs
