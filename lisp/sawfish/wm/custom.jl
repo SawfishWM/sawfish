@@ -54,6 +54,8 @@
 ;; their names
 (defvar custom-set-alist nil)
 
+(defvar custom-menu-includes-all-settings t)
+
 ;; (defcustom VARIABLE VALUE DOC &rest CUSTOM-KEYS)
 
 ;; where CUSTOM-KEYS is a plist containing any of the following:
@@ -231,10 +233,10 @@
 			       (iterator
 				sub (append group (list (car sub)))))
 			     subtrees)))))))
-    `((,(_ "All settings") customize)
-      ()
+    `(,@(and custom-menu-includes-all-settings
+	     (list (list (_ "All settings") 'customize) nil))
       ,@(mapcar (lambda (sub)
-		  (iterator sub (list (car sub))))
+		  (list (_ (cadr sub)) `(customize ',(car sub))))
 		(filter consp (cddr custom-groups)))
       ,@(and (frame-style-editable-p default-frame-style)
 	     (list nil `(,(_"Edit theme...") edit-frame-style))))))
@@ -293,8 +295,9 @@
 (defgroup workspace "Workspaces")
 (defgroup advanced "Advanced" :group workspace)
 (defgroup bindings "Bindings")
-(defgroup iconify "Iconifying")
-(defgroup maximize "Maximizing")
+(defgroup min-max "Minimizing/Maximizing")
+(defgroup iconify "Minimizing" :group min-max)
+(defgroup maximize "Maximizing" :group min-max)
 (defgroup misc "Miscellaneous")
 
 
