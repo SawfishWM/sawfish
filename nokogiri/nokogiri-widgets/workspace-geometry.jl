@@ -116,8 +116,8 @@
       (setq widget (make-widget
 		    `(pair (labelled ,(_ "Workspaces:")
 				     (number 1))
-			   (pair (labelled ,(_ "X:") (number 1))
-				 (labelled ,(_ "Y:") (number 1))) t)
+			   (pair (labelled ,(_ "Columns:") (number 1))
+				 (labelled ,(_ "Rows:") (number 1))) t)
 		    changed))
 
       (gtk-widget-set-usize canvas (+ canvas-width 10) (+ canvas-height 10))

@@ -90,8 +90,8 @@
   (define-widget-type 'workspace-geometry
     (lambda (changed)
       (make-widget `(pair (labelled ,(_ "Workspaces:") (number 1))
-			  (pair (labelled ,(_ "X:") (number 1))
-				(labelled ,(_ "Y:") (number 1))) t)
+			  (pair (labelled ,(_ "Columns:") (number 1))
+				(labelled ,(_ "Rows:") (number 1))) t)
 		   changed)))
 
   (define-widget-type 'icon (lambda (changed) (make-widget 'file changed))))
