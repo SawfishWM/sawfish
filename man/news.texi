@@ -7,6 +7,62 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
 
+@unnumberedsec 0.30
+
+@itemize @bullet
+
+@item New commands @code{activate-viewport-column},
+@code{activate-viewport-row}
+
+@item New commands @code{raise-window-and-transients},
+@code{lower-window-and-transients} and
+@code{raise-lower-window-and-transients},
+@code{raise-transients-and-pass-through-click}.
+
+As the normal window stacking commands, but restacks the
+``transient-group'' of the window. This includes the window itself and
+any transients it has, and any windows that it itself is a transient
+of.
+
+These commands are used in the default keymaps
+
+@item Functions that deal with transient windows now understand the de
+facto standard of setting the @code{WM_TRANSIENT_FOR} property to the
+root window denotes that the window is a transient for the whole group
+
+@item New image manipulation functions: @code{image-ref},
+@code{image-set}, @code{image-fill}, @code{image-map}. New color
+accessor function @code{color-rgb-8}. New function
+@code{root-window-id}
+
+@item Improvements to @code{sawfish-ui}: optionally use some GNOME
+widgets, more lisp widget types, some bug fixes
+
+@item New command @code{command-sequence}. Allows individual bindings
+to invoke a sequence of commands
+
+@item Options @code{iconify-group-mode} and @code{uniconify-group-mode}
+replace @code{iconify-whole-group} and @code{uniconify-whole-group}.
+New commands @code{iconify-transient-group}, and
+@code{uniconify-transient-group}
+
+@item Added @code{:type*} key to @code{defcustom}, like @code{:type},
+but value is left unquoted
+
+@item Translation updates: pl (Daniel Koc), ru (Valek Filippov), uk
+(Yuri Syrota), es (Iñaki García Etxebarria)
+
+@item Fixed handling of @code{WM_NORMAL_HINTS} (was using base-size
+instead of min-size in places)
+
+@item Fixed further locale / FontSet bug (Tomohiro KUBOTA)
+
+@item @code{window-history} module won't resize a window to a size that
+violates its size constraints
+
+@end itemize
+
+
 @unnumberedsec 0.29
 
 @itemize @bullet

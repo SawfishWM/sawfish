@@ -1,3 +1,30 @@
+2000-07-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.30
+
+	* nokogiri-widget-dialog.jl: put the title above the widget,
+	not beside it
+
+	* nokogiri-widget.jl: new widget type `quoted'
+
+2000-07-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* nokogiri-widgets/pair.jl (make-pair-item): added optional arg
+	REVERSED, when non-nil, the layout order of the widgets is
+	swapped
+
+	* nokogiri-widgets/event.jl, nokogiri-widgets/command.jl:
+	factored these out of the `keymap' widget, since they may be of
+	use individually
+
+2000-07-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* nokogiri-widgets/list.jl: set the clist to `browse' mode, and
+	keep it frozen while modifying it
+
+	* nokogiri-widgets/list.jl (edit-item): save the original value
+	of the selection, since it may get changed asynchronously
+
 2000-07-06  John Harper  <john@dcs.warwick.ac.uk>
 
 	* nokogiri-widget.jl (list-index): made this function terminate

@@ -1,3 +1,13 @@
+2000-07-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* versiom 0.30
+
+2000-07-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* images.c (get_pixel): don't box the integer twice
+	(set_pixel): if no alpha in pixel, but image has alpha channel,
+	assume full opacity
+
 2000-07-06  John Harper  <john@dcs.warwick.ac.uk>
 
 	* main.c (main): unless XSupportsLocale (), don't use FontSets
