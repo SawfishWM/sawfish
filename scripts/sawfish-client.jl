@@ -94,6 +94,10 @@ where OPTIONS are any of:
 	    ((string= (car args) "-")
 	     (require 'rep.io.readline)
 	     (require 'rep.util.repl)
+	     (format standard-output "\
+sawfish %s, Copyright (C) 1999-2000 John Harper
+sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
+		     (sawfish-client-eval 'sawfish-version))
 	     (let ((r (sawfish-client-eval
 		       `(progn
 			  (require 'rep.util.repl)
