@@ -26,7 +26,7 @@
 Lisp_Window *window_list;
 int window_type;
 
-Lisp_Window *focus_window;
+Lisp_Window *focus_window, *pending_focus_window;
 
 int pending_destroys;
 
@@ -138,15 +138,29 @@ focus_on_window (Lisp_Window *w)
 	if (focus != 0)
 	{
 	    XSetInputFocus (dpy, focus, RevertToParent, last_event_time);
-	    focus_window = w;
+	    pending_focus_window = w;
 	}
     }
     else
     {
 	DB(("focus_on_window (nil)\n"));
 	XSetInputFocus (dpy, no_focus_window, RevertToNone, last_event_time);
-	focus_window = 0;
+	pending_focus_window = 0;
     }
+}
+
+/* Should be called when W is no longer focusable. */
+void
+focus_off_window (Lisp_Window *w)
+{
+    if (focus_window == w)
+    {
+	focus_window = 0;
+	if (pending_focus_window == 0 || pending_focus_window == w)
+	    focus_on_window (0);
+    }
+    if (pending_focus_window == w)
+	pending_focus_window = 0;
 }
 
 /* Set flags in W relating to which window manager protocols are recognised
@@ -480,7 +494,11 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 	int revert_to;
 	XGetInputFocus (dpy, &focus, &revert_to);
 	if (focus == None || focus == PointerRoot)
-	    focus_on_window (focus_window);
+	{
+	    DB (("lost focus (%ld)\n", focus));
+	    focus_on_window (pending_focus_window
+			     ? pending_focus_window : focus_window);
+	}
     }
 }
 
@@ -511,8 +529,7 @@ emit_pending_destroys (void)
 		Fcall_window_hook (Qdestroy_notify_hook,
 				   rep_VAL(w), Qnil, Qnil);
 
-		if (focus_window == w)
-		    focus_on_window (0);
+		focus_off_window (w);
 
 		/* gc may have reordered the list, so we have to start
 		   at the beginning again.. */

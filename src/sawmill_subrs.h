@@ -290,11 +290,12 @@ extern void session_kill (void);
 /* from windows.c */
 extern Lisp_Window *window_list;
 extern int window_type;
-extern Lisp_Window *focus_window;
+extern Lisp_Window *focus_window, *pending_focus_window;
 extern int pending_destroys;
 extern repv Qadd_window_hook, Qbefore_add_window_hook, Qplace_window_hook;
 extern bool mapped_not_override_p (Window id);
 extern void focus_on_window (Lisp_Window *w);
+extern void focus_off_window (Lisp_Window *w);
 extern void fix_window_size (Lisp_Window *w);
 extern Lisp_Window *find_window_by_id (Window id);
 extern Lisp_Window *x_find_window_by_id (Window id);

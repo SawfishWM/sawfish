@@ -1,3 +1,19 @@
+2001-06-04  John Harper  <jsh@pixelslut.com>
+
+	* windows.c (focus_on_window): don't update focus_window after
+	calling XSetInputFocus (), instead wait for the focus-in event
+	to do this
+
+	(pending_focus_window): new variable to make this work
+	correctly
+
+	(focus_off_window): new function, called when a window becomes
+	unfocusable
+
+	* events.c (unmap_notify): call focus_off_window
+	(focus_in): nullify pending_focus_window if it actually gets
+	focused
+
 2001-05-22  John Harper  <jsh@pixelslut.com>
 
 	Fixed bug 8220 (Having Ctrl as default "modifier key used for
