@@ -1,5 +1,25 @@
 2002-11-02  John Harper  <jsh@unfactored.org>
 
+	* fonts.c, sawmill.h: different font rendering methods are now
+	better abstracted, using the Lisp_Font_Class structure
+
+	(get-font-typed, font-type-exists-p, font-type): new functions,
+	allows a font to be loaded from a type+name combination,
+	instead of just a name, which may be ambiguous when multiple
+	renderers are being used
+
+	Current types are "xlfd" for traditional X fonts, and "Xft" for
+	Xft client-side rendered fonts. The old get-font function
+	always tries to load xlfd fonts, for backwards compatibility
+
+	For now, Xft fonts can be used like this:
+
+	(when (and (boundp 'font-type-exists-p)
+		   (font-type-exists-p "Xft"))
+	  (setq default-font (get-font-typed "Xft" "Trebuchet MS-11")))
+
+2002-11-02  John Harper  <jsh@unfactored.org>
+
 	* fonts.c (x_draw_string): now takes an explicit foreground
 	color parameter, instead of using the one in the gc
 
