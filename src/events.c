@@ -41,6 +41,9 @@ Time last_event_time;
 XEvent *current_x_event;
 static bool current_event_updated_mouse;
 
+/* We need a ButtonRelease on this fp. */
+static struct frame_part *clicked_frame_part;
+
 DEFSYM(visibility_notify_hook, "visibility-notify-hook");
 DEFSYM(destroy_notify_hook, "destroy-notify-hook");
 DEFSYM(map_notify_hook, "map-notify-hook");
@@ -154,9 +157,17 @@ handle_fp_click (struct frame_part *fp, XEvent *ev)
 {
     int old_clicked = fp->clicked;
     if (ev->type == ButtonPress)
-	fp->clicked++;
+    {
+	fp->clicked = 1;
+	if (clicked_frame_part != 0)
+	    unclick_current_fp ();
+	clicked_frame_part = fp;
+    }
     else if (ev->type == ButtonRelease)
-	fp->clicked--;
+    {
+	fp->clicked = 0;
+	clicked_frame_part = 0;
+    }
     if ((old_clicked && !fp->clicked)
 	|| (!old_clicked && fp->clicked))
     {
@@ -164,6 +175,20 @@ handle_fp_click (struct frame_part *fp, XEvent *ev)
 	set_frame_part_bg (fp);
 	if (w->id != 0)
 	    set_frame_part_fg (fp);
+    }
+}
+
+void
+unclick_current_fp (void)
+{
+    if (clicked_frame_part != 0 && clicked_frame_part->clicked != 0)
+    {
+	Lisp_Window *w = clicked_frame_part->win;
+	clicked_frame_part->clicked = 0;
+	set_frame_part_bg (clicked_frame_part);
+	if (w->id != 0)
+	    set_frame_part_fg (clicked_frame_part);
+	clicked_frame_part = 0;
     }
 }
 
@@ -449,22 +474,8 @@ enter_notify (XEvent *ev)
 static void
 leave_notify (XEvent *ev)
 {
-    struct frame_part *fp;
     if (ev->xcrossing.window == root_window)
 	Fcall_hook (Qleave_notify_hook, Fcons (Qroot, Qnil), Qnil);
-    else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
-    {
-	/* safety net in case clicked didn't get decremented when
-	   it should have */
-	if (fp->clicked != 0)
-	{
-	    Lisp_Window *w = fp->win;
-	    fp->clicked = 0;
-	    set_frame_part_bg (fp);
-	    if (w->id != 0)
-		set_frame_part_fg (fp);
-	}
-    }
     else
     {
 	Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
@@ -706,14 +717,14 @@ handle_sync_input (int fd)
 
 /* Lisp functions */
 
-DEFUN("query-pointer", Fquery_pointer, Squery_pointer, (void), rep_Subr0) /*
+DEFUN("query-pointer", Fquery_pointer, Squery_pointer, (repv get), rep_Subr1) /*
 ::doc:Squery-pointer::
-query-pointer
+query-pointer [GET-FROM-SERVER]
 
 Returns (MOUSE-X . MOUSE-Y)
 ::end:: */
 {
-    if (current_x_event == 0 || !current_event_updated_mouse)
+    if (get != Qnil || current_x_event == 0 || !current_event_updated_mouse)
     {
 	Window tmpw;
 	int tmp;
@@ -763,6 +774,15 @@ query-pointer-window
 	return w ? rep_VAL(w) : Qnil;
     }
     return Qnil;
+}
+
+DEFUN("accept-x-input", Faccept_x_input, Saccept_x_input, (repv mask), rep_Subr1) /*
+::doc:Saccept-x-input::
+accept-x-input [EVENT-MASK]
+::end:: */
+{
+    handle_input_mask (rep_INTP(mask) ? rep_INT(mask) : 0);
+    return Qt;
 }
 
 
@@ -832,6 +852,7 @@ events_init (void)
     rep_ADD_SUBR(Squery_pointer);
     rep_ADD_SUBR(Squery_last_pointer);
     rep_ADD_SUBR(Squery_pointer_window);
+    rep_ADD_SUBR(Saccept_x_input);
 
     rep_INTERN(visibility_notify_hook);
     rep_INTERN(destroy_notify_hook);
