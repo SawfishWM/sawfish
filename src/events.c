@@ -35,8 +35,9 @@ static long event_masks[LASTEvent];
 /* Most recent known mouse position relative to the root window */
 static int current_mouse_x, current_mouse_y;
 
-/* ..and the position at the last button-press */
+/* ..and the position (and window) at the last button-press */
 static int button_press_mouse_x = -1, button_press_mouse_y = -1;
+static Window button_press_window;
 
 /* Most recently seen server timestamp. May be CurrentTime if we
    haven't seen a timestamp recently */
@@ -121,7 +122,7 @@ record_event_time (XEvent *ev)
 }
 
 static void
-record_mouse_position (int x, int y, int event_type)
+record_mouse_position (int x, int y, int event_type, Window w)
 {
     current_mouse_x = x;
     current_mouse_y = y;
@@ -130,6 +131,7 @@ record_mouse_position (int x, int y, int event_type)
     case ButtonPress:
 	button_press_mouse_x = x;
 	button_press_mouse_y = y;
+	button_press_window = w;
 	break;
 
     case MotionNotify:
@@ -137,11 +139,13 @@ record_mouse_position (int x, int y, int event_type)
 	{
 	    button_press_mouse_x = x;
 	    button_press_mouse_y = y;
+	    button_press_window = w;
 	}
 	break;
 
     case ButtonRelease:
 	button_press_mouse_x = button_press_mouse_y = -1;
+	button_press_window = 0;
     }
     current_event_updated_mouse = TRUE;
 }
@@ -183,7 +187,7 @@ colormap_notify (XEvent *ev)
 static void
 key_press (XEvent *ev)
 {
-    record_mouse_position (ev->xkey.x_root, ev->xkey.y_root, ev->type);
+    record_mouse_position (ev->xkey.x_root, ev->xkey.y_root, ev->type, 0);
 
     /* Don't look for a context map, frame parts are never focused */
     eval_input_event (Qnil);
@@ -233,6 +237,7 @@ synthesize_button_release (void)
 {
     unclick_current_fp ();
     button_press_mouse_x = button_press_mouse_y = -1;
+    button_press_window = 0;
 }
 
 static void
@@ -242,7 +247,8 @@ button_press (XEvent *ev)
     Lisp_Window *w = 0;
     repv context_map = Qnil;
 
-    record_mouse_position (ev->xbutton.x_root, ev->xbutton.y_root, ev->type);
+    record_mouse_position (ev->xbutton.x_root, ev->xbutton.y_root,
+			   ev->type, ev->xany.window);
 
     fp = find_frame_part_by_window (ev->xbutton.window);
     if (fp != 0)
@@ -272,7 +278,10 @@ button_press (XEvent *ev)
     }
 
     if (ev->type == ButtonRelease)
+    {
 	button_press_mouse_x = button_press_mouse_y = -1;
+	button_press_window = 0;
+    }
 
     XAllowEvents (dpy, ev->type == ButtonPress ? SyncPointer : AsyncPointer,
 		  last_event_time);
@@ -281,7 +290,6 @@ button_press (XEvent *ev)
 static void
 motion_notify (XEvent *ev)
 {
-    struct frame_part *fp;
     repv context_map = Qnil;
 
     Window tmpw;
@@ -298,12 +306,18 @@ motion_notify (XEvent *ev)
     if(XQueryPointer(dpy, ev->xmotion.window,
 		     &tmpw, &tmpw, &x, &y, &tmp, &tmp, &tmp))
     {
-	record_mouse_position (x, y, ev->type);
+	record_mouse_position (x, y, ev->type, ev->xmotion.window);
     }
 
-    fp = find_frame_part_by_window (ev->xmotion.window);
-    if (fp != 0)
-	context_map = get_keymap_for_frame_part (fp);
+    /* Only look for a frame part map if the current window is the
+       same as where the button was originally pressed; this is
+       more intuitive for most uses.. */
+    if (button_press_window == ev->xmotion.window)
+    {
+	struct frame_part *fp = find_frame_part_by_window (ev->xmotion.window);
+	if (fp != 0)
+	    context_map = get_keymap_for_frame_part (fp);
+    }
 
     eval_input_event (context_map);
 
@@ -951,7 +965,7 @@ the server, otherwise it's taken from the current event (if possible).
 	if(XQueryPointer(dpy, root_window, &tmpw, &tmpw,
 			 &x, &y, &tmp, &tmp, &tmp))
 	{
-	    record_mouse_position (x, y, -1);
+	    record_mouse_position (x, y, -1, 0);
 	}
 	emit_pending_destroys ();
     }
@@ -975,6 +989,29 @@ the root window at the last button-press event.
     }
     else
 	return Qnil;
+}
+
+DEFUN("query-button-press-window", Fquery_button_press_window,
+      Squery_button_press_window, (void), rep_Subr0) /*
+::doc:query-button-press-window::
+query-button-press-window
+
+Returns the window that the mouse was in when the button was pressed.
+::end:: */
+{
+    Lisp_Window *w;
+    struct frame_part *fp;
+    if (button_press_window == 0)
+	return Qnil;
+    if (button_press_window == root_window)
+	return Qroot;
+    w = find_window_by_id (button_press_window);
+    if (w != 0)
+	return rep_VAL(w);
+    fp = find_frame_part_by_window (button_press_window);
+    if (fp != 0)
+	return rep_VAL(fp->win);
+    return rep_MAKE_INT(button_press_window);
 }
 
 DEFUN("query-pointer-window", Fquery_pointer_window, Squery_pointer_window, (void), rep_Subr0) /*
@@ -1200,6 +1237,7 @@ events_init (void)
 
     rep_ADD_SUBR(Squery_pointer);
     rep_ADD_SUBR(Squery_button_press_pointer);
+    rep_ADD_SUBR(Squery_button_press_window);
     rep_ADD_SUBR(Squery_pointer_window);
     rep_ADD_SUBR(Saccept_x_input);
     rep_ADD_SUBR(Scurrent_event_window);
