@@ -1,3 +1,18 @@
+1999-09-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* server.jl (server-eval): function to evaluate a string to a
+	result string
+	(server-net-init, server-net-exit): functions to enable/disable
+	the X property based server, disabled by default
+
+	* auto-raise.jl: in the focus-out-hook as well now, disable any
+	pending timer
+
+	* workspace.jl (workspace-names): new variable, not yet
+	customizable
+	* gnome.jl (gnome-set-workspace): set _WIN_WORKSPACE_NAMES if
+	necessary
+
 1999-09-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* customize.jl (customize-group-opt, customize-args): new

@@ -63,6 +63,7 @@ extern Window root_window, no_focus_window;
 extern Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols,
     xa_wm_delete_window, xa_wm_colormap_windows, xa_wm_take_focus;
 extern int shape_event_base, shape_error_base;
+extern repv Qdisplay_name, Qcanonical_display_name;
 extern bool sys_init (char *program_name);
 extern void sys_kill (void);
 extern repv x_atom_symbol (Atom atom);
@@ -222,6 +223,10 @@ extern int main (int argc, char **argv);
 extern repv Fquit (void);
 extern repv Frestart (void);
 extern void add_hook (repv sym, repv fun);
+
+/* from server.c */
+extern void server_init (void);
+extern void server_kill (void);
 
 /* from session.c */
 extern repv Qsm_save_yourself;

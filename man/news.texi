@@ -14,6 +14,10 @@ they occurred between. For more detailed information see the
 @item Added a new theme: @code{microGUI} by Ryan Lovett
 @email{ryan@@ocf.berkeley.edu}, based on the QNX Photon screenshots
 
+@item Network server is disabled by default (since it can provide a
+security hole if X access control is disabled); re-enabled the old unix
+domain socket code (see the FAQ for more details)
+
 @item Only give the input focus to windows that actually want it
 
 @item New option to keep transient windows above their parents
@@ -31,6 +35,9 @@ doing any session management)
 
 @item Fix bug where a window is destroyed/unmapped while it's being
 resized or moved
+
+@item Fix bug where window can still be auto-raised even if it's been
+defocused
 
 @end itemize
 

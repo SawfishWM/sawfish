@@ -43,6 +43,29 @@ Outstanding bugs
 General tasks
 =============
 
+  + option to never automatically create new workspaces
+
+  + allow workspaces to be named?
+
+    this is done, set the workspace-names variable to a list of
+    strings; but it's not yet customizable through the ui
+
+  + remember last focused window on each workspace?
+
+  + features for the gnome/redhat guys:
+
+    * code to read the gnome apps menu, then replace apps-menu
+
+    * remove restart/quit/[about?] from the root menu
+
+    * launch capplet instead of standalone config tool
+
+    * 2x2 workspaces (see below `viewport based workspaces')
+
+    there will be a new lisp module (`gnome-int'?) that has these
+    things as options (enabled by default). It will also require
+    'gnome.
+
   + add capplet desktop entries to share/gnome/apps/Settings as well as
     the control center tree
 
@@ -52,8 +75,6 @@ General tasks
     i.e. the `customization' root sub-menu wouldn't match the menu in
     the gnome `settings' tree. this would be bad since the user may not
     discover the dynamic menu and thus miss many of the options..
-
-  + code to read the gnome apps menu, then replace apps-menu
 
   + Ability to execute commands (like select-workspace:X) while
     moving/resizing.

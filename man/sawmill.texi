@@ -172,7 +172,12 @@ defining the red, green and blue components of the color, either eight
 or sixteen bits in hexadecimal, i.e. @samp{#RRGGBB} or
 @samp{#RRRRGGGGBBBB}.
 
-Signals an error if no color named @var{name} is available.
+Signals an error if no known color has the name @var{name}.
+@end defun
+
+@defun get-color-rgb red green blue
+Return the color object representing the color with RGB components as
+specified (each component ranging from 0 to 65535).
 @end defun
 
 Given a color object, it's possible to find both the originally
@@ -346,6 +351,19 @@ pixels adjacent to that edge that @emph{will not} be scaled.
 
 @defun set-image-border image left right top bottom
 Sets the border of @var{image}.
+@end defun
+
+The shape of the image may also be specified, this defines which pixels
+are treated as being transparent. Each image may define a single color
+as marking transparent pixels.
+
+@defun image-shape-color image
+Return the color marking transparent pixels in @var{image}, or
+@code{nil} if no such color has been specified.
+@end defun
+
+@defun set-image-shape-color image color
+Specify that @var{color} marks transparent pixels in @var{image}.
 @end defun
 
 It's also possible to define @dfn{color modifiers} for each image.

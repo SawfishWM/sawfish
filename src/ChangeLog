@@ -1,3 +1,28 @@
+1999-09-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* client.c: added back the old unix domain code, if this can't
+	make a connection, then try the X property based server
+	* server.c, server.h: reprieved, enabled by default now, but
+	write sockets as ~/.sawmill/.unix-CANONICAL-DISPLAY
+
+	* display.c (Qcanonical_display_name): new variable, display
+	name with fq hostname and screen number
+
+	* functions.c (Fget_x_text_property, Fset_x_text_property): new
+	functions
+
+	* events.c (property_notify): for WM_NAME and WM_ICON_NAME
+	properties, only refresh the frame or call the hook if the
+	value of the property _actually changed_
+
+	* sawmill.h (Lisp_Color): removed the `name' field
+
+	* colors.c (Fget_color_rgb): new function; get a color
+	specified by its RGB values
+
+	* images.c (Fget_image_shape_color, Fset_image_shape_color):
+	new functions, gets/sets the color of the transparent pixels
+
 1999-09-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c (search_keymap): allow things like `Any-C-x' to work;
