@@ -170,8 +170,9 @@ specified by the user."
       (setq y (if (< warp-to-window-y-offset 0)
 		  warp-to-window-y-offset
 		(quotient (* (cdr dims) warp-to-window-y-offset) 100))))
-    (warp-cursor (+ x (car coords) (- (car foff)))
-		 (+ y (cdr coords) (- (cdr foff))))))
+    (warp-cursor
+     (max 0 (min (1- (screen-width)) (+ x (car coords) (- (car foff)))))
+     (max 0 (min (1- (screen-height)) (+ y (cdr coords) (- (cdr foff))))))))
 
 (defun resize-window-with-hints (w cols rows &optional hints)
   "Resize window W to COLS x ROWS, using the window's size hints to define
