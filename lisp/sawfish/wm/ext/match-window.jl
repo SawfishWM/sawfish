@@ -111,12 +111,7 @@
 			       (cddr sub)))) match-window-properties)))
     `(match-window ,props ,match-window-x-properties)))
 
-;; use this so the single widget expands properly
-(defun match-window-group-widget (group spec)
-  (car spec))
-
 (put 'match-window 'custom-widget match-window-widget)
-(put 'match-window 'custom-group-widget match-window-group-widget)
 
 ;;;###autoload (defgroup match-window "Matched Windows" :layout single :require match-window)
 
