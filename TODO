@@ -10,17 +10,14 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
-  ! Resize is non-intuitive
-
   ! Is it possible for the pointer not to be ungrabbed after moving a
     window? From looking at the source I can't see how, but it has
-    happened a couple of times..
+    happened a couple of times.. [not recently though]
 
   ! Sometimes switching workspaces gives me an error about a nil arg,
     doesn't seem to make any difference though
 
-  ! raise-lower-window doesn't recognize that a window is at the top of
-    the stack if it's overlapping the edge of the screen
+  ! Raising a window can cause a flicker of other windows
 
 
 General tasks
@@ -55,12 +52,7 @@ General tasks
 
   + Icons (?)
 
-  + More seamless ``theming''
-
-    Possibly define a `load-theme' function and lay down some interface
-    requirements..?
-
-    Load compressed tarballs?
+  + Load tarred/compressed themes
 
   + Export more Imlib functions
 
@@ -216,9 +208,9 @@ Long term ideas
     just parse the rc files for the default style (font, colours, and
     any background pixmaps)
 
-    Actually, it's not necessary to parse the rc files manually. Just
-    write a program linked to gtk that queries the default style and
-    writes an s-expression description to stdout
+    Actually, it's probably not necessary to parse the rc files
+    manually. Just write a program linked to gtk that queries the
+    default style and writes an s-expression description to stdout
 
     Note that all this stuff would require the "custom frame parts"
     idea above to be implemented

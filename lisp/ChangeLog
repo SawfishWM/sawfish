@@ -1,3 +1,26 @@
+1999-08-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* menus.jl (window-ops-menu): added some more sub-menus
+
+	* frames.jl: create commands to set the frame of a window to
+	each of the possible window types
+	(set-frame-for-window): new optional arg TYPE
+	
+
+	* customize.jl (customize): require all the custom-require
+	features
+
+	* stacking.jl (window-on-top-p): new function
+
+	* move-resize.jl: resizing now chooses the direction to resize
+	in by the initial position of the pointer in relation to the
+	window frame. The window is divided into a 3x3 grid, the
+	pointer must be in one of the outer rectangles for the window
+	to resize in that direction
+
+	* server.jl, gnome.jl: only initialise these if not running in
+	batch-mode
+
 1999-08-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.jl (user-theme-directory, system-theme-directory,

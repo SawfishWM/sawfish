@@ -33,6 +33,11 @@ directories searched when trying to load a theme. By default it
 contains two directories: @file{~/.sawmill/themes/} and
 @file{@var{prefix}/sawmill/@var{version}/themes}.
 
+@item Resizing now chooses the direction to resize the window in by the
+initial position of the pointer in relation to the window. The window
+is divided into a 3x3 grid, the pointer must be in one of the outer
+rectangles to resize in that direction
+
 @item New commands @code{select-workspace:@var{X}} for @var{X} between
 1 and 9
 
