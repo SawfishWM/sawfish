@@ -238,9 +238,66 @@ make-image-from-x-drawable ID [MASK-ID]
        return Qnil;
 
 #if defined HAVE_IMLIB
-   /* XXX Imlib currently ignores the MASK parameter, but maybe it
-      XXX won't in the future (and pigs might fly, also) */
-   im = Imlib_create_image_from_drawable (imlib_id, d, mask, 0, 0, w, h);
+   /* Imlib ignores the MASK parameter of this function.. */
+   im = Imlib_create_image_from_drawable (imlib_id, d, 0, 0, 0, w, h);
+   if (mask != 0)
+   {
+       /* ..so do it by hand */
+       XImage *xim = XGetImage (dpy, mask, 0, 0, w, h, AllPlanes, ZPixmap);
+       if (xim != 0)
+       {
+	   u_char *pixels = im->rgb_data;
+	   int x, y;
+	   ImlibColor shape;
+
+	   /* locate a suitable shape color (one that is unused by
+	      the actual image data). */
+	   shape.r = shape.g = shape.b = 1;	/* most images include black */
+       try_again:
+	   for (y = 0; y < h; y++)
+	   {
+	       for (x = 0; x < w; x++)
+	       {
+		   u_long pixel = XGetPixel (xim, x, y);
+		   u_char *rgb = pixels + ((y * w) + x) * 3;
+		   if (pixel != 0 && rgb[0] == shape.r
+		       && rgb[1] == shape.g && rgb[2] == shape.b)
+		   {
+		       /* this color no good. */
+		       if (++shape.r == 256)
+		       {
+			   shape.r = 0;
+			   if (++shape.g == 256)
+			   {
+			       shape.g = 0;
+			       if (++shape.b == 256)
+				   goto out;	/* no possible shape color */
+			   }
+		       }
+		       goto try_again;
+		   }
+	       }
+	   }
+	   /* SHAPE now has a color unused by the image data */
+	   Imlib_set_image_shape (imlib_id, im, &shape);
+	   for (y = 0; y < h; y++)
+	   {
+	       for (x = 0; x < w; x++)
+	       {
+		   if (XGetPixel (xim, x, y) == 0)
+		   {
+		       u_char *rgb = pixels + ((y * w) + x) * 3;
+		       rgb[0] = shape.r;
+		       rgb[1] = shape.g;
+		       rgb[2] = shape.b;
+		   }
+	       }
+	   }
+	   Imlib_changed_image (imlib_id, im);
+       out:
+	   XDestroyImage (xim);
+       }
+   }
 #elif defined HAVE_GDK_PIXBUF
    im = gdk_pixbuf_xlib_get_from_drawable (0, d, image_cmap, image_visual,
 					   0, 0, 0, 0, w, h);
