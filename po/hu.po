@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish CVS\n"
-"POT-Creation-Date: 2002-06-01 12:40+0200\n"
-"PO-Revision-Date: 2002-10-18 16:43+0200\n"
+"POT-Creation-Date: 2002-11-02 23:33-0800\n"
+"PO-Revision-Date: 2003-07-11 12:08+0200\n"
 "Last-Translator: DOMA Peter <zelin@pointernet.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -79,6 +79,7 @@ msgstr "Kép tulajdonságai"
 
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
+#, c-format
 msgid "No matching item for %S"
 msgstr "Nem találtam illeszkedőt a következőre: %S"
 
@@ -106,6 +107,7 @@ msgid "Added frame type `%s'"
 msgstr "`%s' kerettípus hozzáadva"
 
 #. ../themer/themer.in
+#, c-format
 msgid "error while building frame: %S"
 msgstr "hiba a keret felépítésekor: %S"
 
@@ -502,7 +504,7 @@ msgstr "Elhelyezés"
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Appearance"
-msgstr "Megjelenítés"
+msgstr "Megjelenés"
 
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Workspaces"
@@ -698,10 +700,8 @@ msgstr ""
 "gombján van. (Csak az egér-hozzárendelések értékelődnek ki ebben a táblában.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr ""
-"Az alapértelmezett ablakkezelő gyorsbillentyűkhöz használt módosító billentyű"
-"(k)."
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Az alapértelmezett gyorsbillentyűkhöz használt módosító billentyű(k)."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -1331,7 +1331,8 @@ msgstr "Előző ablak"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Select the previous window, cycling through all possible workspaces."
-msgstr "Válaszd az előző ablakot, az összes lehetséges munkaterületen végigfutva."
+msgstr ""
+"Válaszd az előző ablakot, az összes lehetséges munkaterületen végigfutva."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Describe symbol"
@@ -2222,7 +2223,7 @@ msgstr "Feladat"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Host"
-msgstr "Gépnév"
+msgstr "Gép"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Locale"
@@ -2461,6 +2462,82 @@ msgstr "Összes mentett ablak előzmény elfelejtése."
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
 msgstr "_Előzmények"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace down"
+msgstr "Munkaterület le"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace below the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace up"
+msgstr "Munkaterület fel"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace above the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace left"
+msgstr "Munkaterület balra"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace to the left of the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace right"
+msgstr "Munkaterület jobbra"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace to the right of the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace down"
+msgstr "Küldés munkaterületre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace below the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace up"
+msgstr "Küldés munkaterületre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace above the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace left"
+msgstr "Küldés munkaterületre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace right"
+msgstr "Küldés munkaterületre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
