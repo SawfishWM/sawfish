@@ -338,6 +338,16 @@
     (setq last-interesting-workspace max-w)
     (cons min-w max-w)))
 
+(defun workspace-id-to-logical (space &optional limits)
+  (unless limits
+    (setq limits (workspace-limits)))
+  (- space (car limits)))
+
+(defun workspace-id-from-logical (offset &optional limits)
+  (unless limits
+    (setq limits (workspace-limits)))
+  (+ offset (car limits)))
+
 ;; renormalize the interesting workspaces so they begin at index zero
 (defun ws-normalize-indices ()
   (let*
@@ -553,9 +563,10 @@
     (if (window-workspaces w)
 	(let
 	    ((spaces (window-workspaces w))
-	     (first (car (workspace-limits))))
+	     (limits (workspace-limits)))
 	  (mapc (lambda (space)
-		  (ws-add-window-to-space w (- space first))) spaces))
+		  (ws-add-window-to-space
+		   w (workspace-id-from-logical space limits))) spaces))
       (let
 	  (parent)
 	(if (and transients-on-parents-workspace
@@ -769,18 +780,15 @@ previous workspace."
   (ws-move-workspace current-workspace (- (or count 1))))
 
 (defun select-workspace-from-first (count)
-  (let
-      ((first (car (workspace-limits))))
-    (select-workspace (+ count first))))
+  (select-workspace (workspace-id-from-logical count)))
 
 (defun send-window-to-workspace-from-first (w count &optional copy)
   (let*
-      ((first (car (workspace-limits)))
-       (was-focused (eq (input-focus) w))
+      ((was-focused (eq (input-focus) w))
        (orig-space (if (window-in-workspace-p w current-workspace)
 		       current-workspace
 		     (car (window-workspaces w))))
-       (new-space (+ count first)))
+       (new-space (workspace-id-from-logical count)))
     (when orig-space
       (ws-copy-window w orig-space new-space was-focused)
       (select-workspace new-space was-focused)
@@ -851,10 +859,12 @@ instance remaining, then delete the actual window."
 (defun ws-saved-state (w)
   (unless (window-get w 'sticky)
     (let
-	((first (car (workspace-limits)))
+	((limits (workspace-limits))
 	 (spaces (window-workspaces w)))
       (when spaces
-	`((workspaces . ,(mapcar (lambda (space) (- space first)) spaces)))))))
+	`((workspaces . ,(mapcar (lambda (space)
+				   (workspace-id-to-logical space limits))
+				 spaces)))))))
 
 (defun ws-load-state (w alist)
   (cond ((cdr (assq 'workspaces alist))
