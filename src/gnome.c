@@ -204,9 +204,9 @@ rep_dl_init(repv file_name)
     rep_INTERN(sticky_window_names);
     rep_INTERN(ignored);
 
-    if (rep_VOIDP(rep_SYM(Qignored_window_names))->value)
+    if (rep_VOIDP(rep_SYM(Qignored_window_names)->value))
 	rep_SYM(Qignored_window_names)->value = Qnil;
-    if (rep_VOIDP(rep_SYM(Qsticky_window_names))->value)
+    if (rep_VOIDP(rep_SYM(Qsticky_window_names)->value))
 	rep_SYM(Qsticky_window_names)->value = Qnil;
 
     rep_SYM(Qignored_window_names)->value
