@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.50 2000/01/27 08:39:24 john Exp $
+;; $Id: sawmill-ui.jl,v 1.51 2000/01/27 18:39:58 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -991,14 +991,16 @@ exec rep "$0" "$@"
   (let*
       ((x-properties (get-key spec ':x-properties))
        (properties (get-key spec ':properties))
+       bool-props
        (window (gtk-window-new 'dialog))
        (vbox (gtk-vbox-new nil 0))
+       (vbox-2 (gtk-vbox-new nil 0))
        (hbox-2 (gtk-hbutton-box-new))
        (ok (gtk-button-new-with-label (_ "OK")))
        (cancel (gtk-button-new-with-label (_ "Cancel")))
        (frame (gtk-frame-new (_ "Actions")))
        (frame-1 (gtk-frame-new (_ "Matchers")))
-       (table (gtk-table-new (length properties) 2 nil))
+       table table-2
        (table-1 (gtk-table-new ui-match-window-max-matchers 3 nil))
        (match-widget-alist nil)
        (prop-widget-alist nil)
@@ -1078,12 +1080,13 @@ exec rep "$0" "$@"
       (setq cell (cons (list (cons 'WM_NAME "")) nil)))
 
     ;; move boolean properties to head of list for best effect
-    (setq properties (nconc (filter (lambda (p)
-				      (eq (nth 1 p) 'boolean))
-				    properties)
-			    (filter (lambda (p)
-				      (not (eq (nth 1 p) 'boolean)))
-				    properties)))
+    (setq bool-props (filter (lambda (p)
+			       (eq (nth 1 p) 'boolean)) properties))
+    (setq properties (delete-if (lambda (p)
+				  (eq (nth 1 p) 'boolean)) properties))
+
+    (setq table (gtk-table-new (1+ (/ (length bool-props) 3)) 3 nil))
+    (setq table-2 (gtk-table-new (length properties) 2 nil))
 
     (gtk-window-set-title window (_ "Match window properties"))
     (gtk-widget-set-name window (_ "Match window properties"))
@@ -1095,6 +1098,9 @@ exec rep "$0" "$@"
     (gtk-table-set-col-spacings table ui-box-spacing)
     (gtk-table-set-row-spacings table ui-box-spacing)
     (gtk-container-border-width table ui-box-border)
+    (gtk-table-set-col-spacings table-2 ui-box-spacing)
+    (gtk-table-set-row-spacings table-2 ui-box-spacing)
+    (gtk-container-border-width table-2 ui-box-border)
     (gtk-table-set-col-spacings table-1 ui-box-spacing)
     (gtk-table-set-row-spacings table-1 ui-box-spacing)
     (gtk-container-border-width table-1 ui-box-border)
@@ -1144,31 +1150,37 @@ exec rep "$0" "$@"
     (gtk-box-pack-start vbox frame-1)
     (gtk-container-add vbox frame)
     (gtk-box-pack-end vbox hbox-2)
-    (gtk-container-add frame table)
+    (gtk-container-add frame vbox-2)
+    (gtk-box-pack-start vbox-2 table)
+    (gtk-box-pack-start vbox-2 table-2)
     (gtk-container-add frame-1 table-1)
     (gtk-container-add hbox-2 ok)
     (gtk-container-add hbox-2 cancel)
 
-    (let*
-	((i 0)
-	 (use-rhs nil))
+    (let
+	((i 0))
+      (mapc (lambda (prop)
+	      (let
+		  ((current (cdr (assq (car prop) (cdr cell))))
+		   (widget (gtk-check-button-new-with-label
+			    (symbol-name (car prop))))
+		   (row (/ i 3))
+		   (col (mod i 3)))
+		(when current
+		  (gtk-toggle-button-set-state widget t))
+		(gtk-table-attach-defaults
+		 table widget col (1+ col) row (1+ row))
+		(setq i (1+ i))
+		(setq prop-widget-alist (cons (cons (car prop) widget)
+					      prop-widget-alist))))
+	    bool-props))
+
+    (let
+	((i 0))
       (mapc (lambda (prop)
 	      (let
 		  ((current (cdr (assq (car prop) (cdr cell)))))
 		(cond
-		 ((eq (nth 1 prop) 'boolean)
-		  (let
-		      ((widget (gtk-check-button-new-with-label
-				(symbol-name (car prop)))))
-		    (when current
-		      (gtk-toggle-button-set-state widget t))
-		    (if (not use-rhs)
-			(gtk-table-attach-defaults table widget 0 1 i (1+ i))
-		      (setq i (1- i))
-		      (gtk-table-attach-defaults table widget 1 2 i (1+ i)))
-		    (setq use-rhs (not use-rhs))
-		    (setq prop-widget-alist (cons (cons (car prop) widget)
-						  prop-widget-alist))))
 		 ((eq (nth 1 prop) 'number)
 		  (let*
 		      ((entry (gtk-entry-new))
@@ -1176,25 +1188,23 @@ exec rep "$0" "$@"
 		    (if current
 			(gtk-entry-set-text entry (format nil "%d" current))
 		      (gtk-entry-set-text entry ""))
-		    (attach-label table label 0 1 i (1+ i))
-		    (gtk-table-attach-defaults table entry 1 2 i (1+ i))
+		    (attach-label table-2 label 0 1 i (1+ i))
+		    (gtk-table-attach-defaults table-2 entry 1 2 i (1+ i))
 		    (setq prop-widget-alist (cons (cons (car prop) entry)
-						  prop-widget-alist))
-		    (setq use-rhs nil)))
+						  prop-widget-alist))))
 		 ((eq (nth 1 prop) 'symbol)
 		  (let
 		      ((combo (gtk-combo-new))
 		       (label (gtk-label-new (symbol-name (car prop)))))
-		    (attach-label table label 0 1 i (1+ i))
-		    (gtk-table-attach-defaults table combo 1 2 i (1+ i))
+		    (attach-label table-2 label 0 1 i (1+ i))
+		    (gtk-table-attach-defaults table-2 combo 1 2 i (1+ i))
 		    (gtk-combo-set-popdown-strings
 		     combo (cons "" (mapcar symbol-name (nth 2 prop))))
 		    (gtk-entry-set-text (gtk-combo-entry combo)
 					(if current
 					    (symbol-name current) ""))
 		    (setq prop-widget-alist (cons (cons (car prop) combo)
-						  prop-widget-alist))
-		    (setq use-rhs nil)))
+						  prop-widget-alist))))
 		 ((eq (nth 1 prop) 'pair)
 		  (let
 		      ((entry-1 (gtk-entry-new))
@@ -1210,12 +1220,11 @@ exec rep "$0" "$@"
 		       entry-1 (format nil "%d" (car current)))
 		      (gtk-entry-set-text
 		       entry-2 (format nil "%d" (cdr current))))
-		    (attach-label table label 0 1 i (1+ i))
-		    (gtk-table-attach-defaults table hbox 1 2 i (1+ i))
+		    (attach-label table-2 label 0 1 i (1+ i))
+		    (gtk-table-attach-defaults table-2 hbox 1 2 i (1+ i))
 		    (setq prop-widget-alist (cons (cons (car prop)
 							(cons entry-1 entry-2))
-						  prop-widget-alist))
-		    (setq use-rhs nil))))
+						  prop-widget-alist)))))
 		(setq i (1+ i))))
 	    properties))
     (setq prop-widget-alist (nreverse prop-widget-alist))
