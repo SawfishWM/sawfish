@@ -1,5 +1,14 @@
 2000-03-08  John Harper  <john@dcs.warwick.ac.uk>
 
+	* move-resize.jl (move-resize-update-edges): new function,
+	updates the list of window edges for snapping
+	(move-resize-window): arrange for move-resize-update-edges to
+	be called after switching workspace or viewport
+
+	* keymaps.jl (custom-get-keymap, custom-set-keymap): filter out
+	and then restore bindings to non-symbol commands (avoids trying
+	to parse commands with unreadable printed representations)
+
 	* configure.jl (configure-request-handler): use fixed-position
 	property to decide whether or not to clamp window within the
 	workspace boundaries
