@@ -1,6 +1,17 @@
-1999-09-01  John Harper  <john@dcs.warwick.ac.uk>
+1999-09-02  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.4
+
+	* gtk-style.c: helper program for `gtk' theme. Outputs the
+	default GTK style as an s-expression
+
+	* frames.c (refresh_frame_parts): new function
+
+	* windows.c (Frebuild_frame): new function
+
+	* images.c (Fclear_image): new function
+
+1999-09-01  John Harper  <john@dcs.warwick.ac.uk>
 
 	* images.c (Fmake_sized_image): replaced the three pixel colors
 	by one color object

@@ -22,6 +22,12 @@ function called with args @code{(@var{image} @var{state})}; it should
 draw a background into @var{image} for the specified state (@code{nil},
 @code{focused}, @code{highlighted} or @code{clicked})
 
+@item New theme @code{gtk}. This reads the default GTK style and uses
+the associated colors and pixmaps to decorate windows. It doesn't try
+to handle engine-based themes. Nor does it automatically detect when
+the default style changes (yet). Do `sawmill-client -c
+gtk-reload-style' at the shell to reload the style
+
 @item Functions for drawing color gradients and bevels into images. The
 new @code{gradient} theme uses these and on-the-fly rendering to do
 @code{afterstep}-like window titles
