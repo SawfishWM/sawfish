@@ -394,6 +394,23 @@ add_hook (repv sym, repv fun)
     Fset (sym, val);
 }
 
+/* in rep 0.11 and earlier the gaol was broken, it was possible to read
+   non-exported special variables; this was fixed in rep 0.12, so we
+   need to read some symbols from a non-gaolled module */
+repv
+global_symbol_value (repv sym)
+{
+    repv value;
+#if rep_INTERFACE >= 9
+    repv tem = rep_push_structure ("sawmill");
+#endif
+    value = Fsymbol_value (sym, Qt);
+#if rep_INTERFACE >= 9
+    rep_pop_structure (tem);
+#endif
+    return value;
+}
+
 
 /* rep compatibility */
 
