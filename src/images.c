@@ -664,7 +664,7 @@ TYPE may be one of nil, red, green, blue. returned modifier is
     ImlibColorModifier modifier;
     void (*fun)(ImlibData *, ImlibImage *, ImlibColorModifier *);
     rep_DECLARE1(img, IMAGEP);
-    rep_DECLARE2(type, rep_SYMBOLP);
+    rep_DECLARE(2, type, type == Qnil || rep_SYMBOLP (type));
     fun = (type == Qred ? Imlib_get_image_red_modifier
 	   : type == Qgreen ? Imlib_get_image_green_modifier
 	   : type == Qblue ? Imlib_get_image_blue_modifier
@@ -692,7 +692,7 @@ CONTRAST). These are integers ranging from 0 to 255.
     ImlibColorModifier modifier;
     void (*fun)(ImlibData *, ImlibImage *, ImlibColorModifier *);
     rep_DECLARE1(img, IMAGEP);
-    rep_DECLARE2(type, rep_SYMBOLP);
+    rep_DECLARE(2, type, type == Qnil || rep_SYMBOLP (type));
     if (!rep_CONSP(mod) || !rep_CONSP(rep_CDR(mod))
 	|| !rep_CONSP(rep_CDR(rep_CDR(mod))))
     {
