@@ -1,4 +1,4 @@
-# Makefile.in for nokogiri subdirectory
+# Makefile.in for sawfish.gtk subdirectory
 
 # $Id$
 
@@ -22,7 +22,7 @@
 
 include ../../../Makedefs
 
-top_builddir=..
+top_builddir=../../../
 top_srcdir=@top_srcdir@
 srcdir=@srcdir@
 VPATH=@srcdir@:@top_srcdir@
@@ -30,79 +30,65 @@ VPATH=@srcdir@:@top_srcdir@
 REP_GTK_GNOME=@REP_GTK_GNOME@
 REP_ENVIRON:=$(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp
 
-ifeq ($(REP_GTK_GNOME),yes)
- GNOME:=
-else
- GNOME:=gtk/
-endif
+SRCS :=	color-preview.jl	\
+	stock.jl		\
+	widget.jl		\
+	widget-dialog.jl	\
+	widget-test.jl
 
-SRCS :=	apply.jl		\
-	config.jl		\
-	group.jl		\
-	i18n.jl			\
-	layout.jl		\
-	main.jl			\
-	shell.jl		\
-	slot.jl			\
-	user-level.jl		\
-	wm.jl
-
-W_SRCS := widgets/command.jl	\
-	widgets/event.jl	\
-	widgets/frame-style.jl	\
-	widgets/keymap.jl	\
-	widgets/match-window.jl \
-	widgets/$(GNOME)workspace-geometry.jl \
-	widgets/$(GNOME)icon.jl
-
-L_SRCS := layouts/keymaps.jl
+W_SRCS := widgets/alist.jl	\
+	widgets/color.jl	\
+	widgets/file.jl		\
+	widgets/font.jl		\
+	widgets/list.jl		\
+	widgets/pair.jl		\
+	widgets/program.jl
 
 OBJS := $(SRCS:.jl=.jlc)
 W_OBJS := $(W_SRCS:.jl=.jlc)
-L_OBJS := $(L_SRCS:.jl=.jlc)
 
-ALL_SRCS := $(SRCS) $(W_SRCS) $(L_SRCS)
-ALL_OBJS := $(OBJS) $(W_OBJS) $(L_OBJS)
+ALL_SRCS := $(SRCS) $(W_SRCS)
+ALL_OBJS := $(OBJS) $(W_OBJS)
 
-SUBSTS := -e "s|__nokogiridir__|$(lispdir)|" 
+ifeq ($(REP_GTK_GNOME),yes)
+STOCK_SRC := stock.jl.gnome
+else
+STOCK_SRC := stock.jl.gtk
+endif
 
 %.jlc : %.jl
 	$(REP_ENVIRON) rep compiler -f compile-batch $<
 
 all : $(ALL_SRCS) $(ALL_OBJS)
 
-%.jl : %.jl.in ./Makefile
-	sed $(SUBSTS) $< >$@
+stock.jl : $(STOCK_SRC)
+	ln -s $^ $@
 
 install : all installdirs
 	set -e; for p in $(SRCS) $(OBJS); do \
-	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/ui; \
+	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/gtk; \
 	done
 	set -e; for p in $(W_SRCS) $(W_OBJS); do \
-	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/ui/widgets; \
+	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/gtk/widgets; \
 	done
-	set -e; for p in $(L_SRCS) $(L_OBJS); do \
-	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/ui/layouts; \
-	done
-	$(INSTALL_DATA) monitor.png $(DESTDIR)${lispdir}/..
-	$(INSTALL_SCRIPT) main.jlc $(DESTDIR)${bindir}/sawfish-ui
 
 uninstall :
-	rm -rf $(DESTDIR)${lispdir}/sawfish/ui
-	rm -f $(DESTDIR)${lispdir}/../monitor.png
-	rm -f $(DESTDIR)${bindir}/sawfish-ui
+	for p in $(SRCS) $(OBJS); do \
+	  rm -f $(DESTDIR)${lispdir}/sawfish/gtk/$$p; \
+	done
+	for p in $(W_SRCS) $(W_OBJS); do \
+	  rm -f $(DESTDIR)${lispdir}/sawfish/gtk/widgets/$$p; \
+	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(lispdir)/sawfish/ui \
-	  $(DESTDIR)$(lispdir)/sawfish/ui/widgets \
-	  $(DESTDIR)$(lispdir)/sawfish/ui/layouts $(DESTDIR)$(bindir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(lispdir)/sawfish/gtk \
+	  $(DESTDIR)$(lispdir)/sawfish/gtk/widgets
 
 clean : 
 	rm -f *.jlc *~ core
 	rm -f widgets/*~ widgets/*.jlc
-	rm -f layouts/*~ layouts/*.jlc
 
 realclean distclean : clean
-	rm -f Makefile main.jl
+	rm -f Makefile stock.jl
 
 .PHONY: all install uninstall clean realclean distclean

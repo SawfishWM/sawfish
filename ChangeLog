@@ -1,3 +1,11 @@
+2000-09-01  John Harper  <john@dcs.warwick.ac.uk>
+
+	* configure.in: don't build `nokogiri' subdirectory, do
+	`sawfish/ui' and `sawfish/gtk' instead
+
+	* configure.in: check for gdk-pixbuf by default now, then fall
+	back to checking for Imlib if that fails
+
 2000-08-29    <john@dcs.warwick.ac.uk>
 
 	* sawfish.spec.in: sawfish-themer requires exactly @version@ of

@@ -37,6 +37,8 @@ SAWFISH_LISP_DIRS := sawfish/wm
 
 INSTALL_FILES := *.jl *.jlc
 
+SUBDIRS := sawfish/gtk sawfish/ui
+
 INSTALL_DIRS := \
 	sawfish sawfish/wm sawfish/wm/ext \
 	sawfish/wm/placement \
@@ -45,9 +47,12 @@ INSTALL_DIRS := \
 	sawfish/wm/commands sawfish/wm/session
 
 all : lisp
+	set -e; for d in $(SUBDIRS); do \
+	  ( cd  $$d && $(MAKE) $@ ); \
+	done
 
 lisp : $(SAWFISH_LISP_FILES)
-	for d in $(SAWFISH_LISP_DIRS); do \
+	set -e; for d in $(SAWFISH_LISP_DIRS); do \
 	  $(COMPILE_ENV) $(sawfish_prog) compiler -f compile-lib-batch $$d; \
 	done
 
@@ -55,7 +60,10 @@ sawfish/wm.jlc : sawfish/wm.jl
 	$(COMPILE_ENV) $(sawfish_prog) compiler -f compile-batch $^
 
 install : all installdirs
-	for d in $(INSTALL_DIRS); do \
+	set -e; for d in $(SUBDIRS); do \
+	  ( cd $$d && $(MAKE) $@ ); \
+	done
+	set -e; for d in $(INSTALL_DIRS); do \
 	  for f in $(foreach x,$(INSTALL_FILES),$$d/$(x)); do \
 	    $(INSTALL_DATA) $$f $(DESTDIR)$(lispdir)/$$d; \
 	  done \
@@ -66,6 +74,9 @@ installdirs : mkinstalldirs
 	$(SHELL) $< $(foreach x,$(INSTALL_DIRS),$(DESTDIR)$(lispdir)/$(x))
 
 uninstall :
+	set -e; for d in $(SUBDIRS); do \
+	  ( cd $$d && $(MAKE) $@ ); \
+	done
 	for d in $(INSTALL_DIRS); do \
 	  for f in $(foreach x,$(INSTALL_FILES),$$d/$(x)); do \
 	    rm -f $(DESTDIR)$(lispdir)/$$f; \
@@ -73,9 +84,15 @@ uninstall :
 	done
 
 clean :
+	set -e; for d in $(SUBDIRS); do \
+	  ( cd $$d && $(MAKE) $@ ); \
+	done
 	rm -f `find . \( -name '*.jlc' -o -name '*~' -o -name core \) -print`
 
 realclean : clean
+	set -e; for d in $(SUBDIRS); do \
+	  ( cd $$d && $(MAKE) $@ ); \
+	done
 	rm -f Makefile
 
 .PHONY : all lisp install uninstall clean realclean

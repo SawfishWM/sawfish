@@ -94,21 +94,16 @@ Module hierarchy
 	describe
 	move-cursor
 
-    nokogiri
+    ui
       ...
 
-    widgets
-      ...
-
-    util
+    gtk
+      widget
       color-preview
       stock
 
 Notes
 =====
-
- - separate nokogiri-widget.jl and nokogiri-widgets into their own
-   top-level entry `widgets'. Eventually use this in the themer
 
  - put sawfish-specific widgets somewhere else?
 
