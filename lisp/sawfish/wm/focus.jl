@@ -26,15 +26,28 @@
 focus is only changed when a top-level window is entered, never when the
 root window is entered.")
 
+(defvar raise-windows-on-focus nil
+  "When non-nil, windows are raised after receiving focus.")
+
+(defvar raise-window-timeout 500
+  "Time in microseconds until windows are raised if raise-windows-on-focus
+is set.")
+
 (defun focus-enter-fun (w)
   (if (eq w 'root)
       (unless sloppy-focus
 	(set-input-focus nil))
-    (set-input-focus w)))
+    (set-input-focus w)
+    (when raise-windows-on-focus
+      (focus-raise w))))
 
 (defun focus-leave-fun (w)
   (unless sloppy-focus
     (set-input-focus nil)))
+
+(defun focus-raise (w)
+  (sit-for 0 raise-window-timeout)
+  (raise-window w))
 
 (add-hook 'enter-notify-hook 'focus-enter-fun t)
 (add-hook 'leave-notify-hook 'focus-leave-fun t)
