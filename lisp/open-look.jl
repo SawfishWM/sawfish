@@ -58,4 +58,4 @@
     (unless (eq type orig-type)
       (window-put w 'type type))))
 
-(add-hook 'add-window-hook 'ol-add-window)
+(add-hook 'before-add-window-hook 'ol-add-window)
