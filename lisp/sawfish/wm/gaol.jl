@@ -45,4 +45,13 @@
 (unless batch-mode
   (mapc 'gaol-add-function sawmill-safe-functions)
   (mapc 'gaol-add-special sawmill-safe-specials)
-  (mapc 'gaol-add-feature sawmill-safe-features))
+  (mapc 'gaol-add-feature sawmill-safe-features)
+
+  (eval-after-load
+   "gradient"
+   '(progn
+      (mapc 'gaol-add-function
+	    '(draw-vertical-gradient
+	      draw-horizontal-gradient
+	      draw-diagonal-gradient))
+      (gaol-rebuild-environment))))
