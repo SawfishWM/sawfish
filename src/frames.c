@@ -83,6 +83,7 @@ DEFSYM(removed_classes, "removed-classes");
 DEFSYM(frame_part_classes, "frame-part-classes");
 DEFSYM(override_frame_part_classes, "override-frame-part-classes");
 DEFSYM(below_client, "below-client");
+DEFSYM(scale_foreground, "scale-foreground");
 
 static repv state_syms[fps_MAX];
 
@@ -218,6 +219,7 @@ fp_sweep (void)
 	cursor . CURSOR-OR-CURSOR-DEF
 
 	below-client . t
+	scale-foreground . t
 
    STATE's are one of: inactive, focused, highlighted, clicked,
    inactive-highlighted, inactive-clicked.
@@ -603,8 +605,16 @@ set_frame_part_fg (struct frame_part *fp)
 
 	if (IMAGEP(fg))
 	{
-	    width = image_width (VIMAGE(fg));
-	    height = image_height (VIMAGE(fg));
+	    if (fp->scale_foreground)
+	    {
+		width = fp->width;
+		height = fp->height;
+	    }
+	    else
+	    {
+		width = image_width (VIMAGE(fg));
+		height = image_height (VIMAGE(fg));
+	    }
 	}
 	else
 	{
@@ -670,8 +680,7 @@ set_frame_part_fg (struct frame_part *fp)
 		set_frame_part_bg (fp);
 	    }
 
-	    image_render (VIMAGE(fg),
-			  image_width (VIMAGE(fg)), image_height (VIMAGE(fg)),
+	    image_render (VIMAGE(fg), width, height,
 			  &fg_pixmap, &fg_mask);
 
 	    /* Some of the Imlib_ functions call XSync on our display. In turn
@@ -682,9 +691,6 @@ set_frame_part_fg (struct frame_part *fp)
 
 	    if (fg_pixmap)
 	    {
-		int width = image_width (VIMAGE(fg));
-		int height = image_height (VIMAGE(fg));
-
 		if (fg_mask)
 		{
 		    gcv.clip_mask = fg_mask;
@@ -922,7 +928,7 @@ get_integer_prop (struct frame_part *fp, repv prop, repv class, repv ov_class)
 	    tem = rep_CDR(tem);
 	else
 	    tem = call_protectedly_1 (rep_CDR(tem), rep_VAL(fp->win), Qnil);
-	return (tem && rep_INTP(tem)) ? tem : Qnil;
+	return rep_INTP(tem) ? tem : Qnil;
     }
     else
 	return Qnil;
@@ -942,8 +948,6 @@ get_pattern_prop (struct frame_part *fp, repv *data, repv (*conv)(repv data),
 	    tem = call_protectedly_1 (rep_CDR(tem), rep_VAL(fp->win), Qnil);
 	else
 	    tem = rep_CDR(tem);
-	if (!tem)
-	    return FALSE;
 	if (!rep_CONSP(tem))
 	{
 	    /* single value pattern */
@@ -998,12 +1002,7 @@ get_pattern_prop (struct frame_part *fp, repv *data, repv (*conv)(repv data),
 	for (i = 0; i < fps_MAX; i++)
 	{
 	    if (rep_STRINGP(data[i]))
-	    {
-		repv tem = call_protectedly (conv, data[i], Qnil);
-		if (tem == rep_NULL)
-		    return FALSE;
-		data[i] = tem;
-	    }
+		data[i] = call_protectedly (conv, data[i], Qnil);
 	}
 
 	/* now fill any gaps in the state table */
@@ -1076,6 +1075,8 @@ build_frame_part (struct frame_part *fp)
 
     tem = fp_assq (fp, Qbelow_client, class_elt, ov_class_elt);
     fp->below_client = (tem && tem != Qnil);
+    tem = fp_assq (fp, Qscale_foreground, class_elt, ov_class_elt);
+    fp->scale_foreground = (tem && tem != Qnil);
 
     /* get text label */
     tem = fp_assq (fp, Qtext, class_elt, ov_class_elt);
@@ -1089,8 +1090,7 @@ build_frame_part (struct frame_part *fp)
 	tem = rep_CDR(tem);
 	if (Ffunctionp (tem) != Qnil)
 	    tem = call_protectedly_1 (tem, rep_VAL(w), Qnil);
-	if (tem != rep_NULL)
-	    fp->x_justify = tem;
+	fp->x_justify = tem;
     }
     else
 	fp->x_justify = Qnil;
@@ -1100,8 +1100,7 @@ build_frame_part (struct frame_part *fp)
 	tem = rep_CDR(tem);
 	if (Ffunctionp (tem) != Qnil)
 	    tem = call_protectedly_1 (tem, rep_VAL(w), Qnil);
-	if (tem != rep_NULL)
-	    fp->y_justify = tem;
+	fp->y_justify = tem;
     }
     else
 	fp->y_justify = Qnil;
@@ -1112,9 +1111,11 @@ build_frame_part (struct frame_part *fp)
     if (tem != Qnil)
     {
 	tem = rep_CDR(tem);
+	if (Ffunctionp (tem) != Qnil)
+	    tem = call_protectedly_1 (tem, rep_VAL (w), Qnil);
 	if (!CURSORP(tem) && tem != Qnil)
 	    tem = call_protectedly (Fget_cursor, tem, Qnil);
-	if (tem && CURSORP(tem))
+	if (CURSORP(tem))
 	    fp->cursor = tem;
     }
 
@@ -1818,6 +1819,7 @@ frames_init (void)
     rep_INTERN(removable);
     rep_INTERN(removed_classes);
     rep_INTERN(below_client);
+    rep_INTERN(scale_foreground);
 
     rep_INTERN_SPECIAL(frame_part_classes);
     rep_INTERN_SPECIAL(override_frame_part_classes);
