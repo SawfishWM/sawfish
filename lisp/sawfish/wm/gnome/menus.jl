@@ -124,8 +124,11 @@
 		   (setq type (expand-last-match "\\1")))))
 	(close-file file))
       (cond ((string= (file-name-nondirectory filename) ".directory")
-	     `(,(or name filename) ,@(gnome-menu-read-directory
-				      (file-name-directory filename))))
+	     (let
+		 ((menus (gnome-menu-read-directory
+			  (file-name-directory filename))))
+	       (when menus
+		 `(,(or name filename) ,@menus))))
 	    ((and exec (or (not tryexec) (gnome-exec-in-path tryexec)))
 	     ;; create a menu item
 	     `(,(or name exec)
@@ -158,8 +161,10 @@
      ((file-directory-p file)
       (if (file-exists-p (expand-file-name ".directory" file))
 	  (gnome-menu-read-desktop-entry (expand-file-name ".directory" file))
-	(cons (file-name-nondirectory file)
-	      (gnome-menu-read-directory file)))))))
+	(let
+	    ((menus (gnome-menu-read-directory file)))
+	  (when menus
+	    (cons (file-name-nondirectory file) menus))))))))
 
 (defun gnome-menu-read-directory (dirname)
   (let
@@ -177,10 +182,11 @@
 	      (when (setq item (gnome-menu-read-item dirname file))
 		(setq unordered (cons item unordered)))))
 	  (directory-files dirname))
-    (nconc (nreverse menus)
-	   (sort unordered (lambda (x y)
-			     (string-lessp (car x) (car y)))))))
-
+    (when (or menus unordered)
+      (nconc (nreverse menus)
+	     (sort unordered (lambda (x y)
+			       (string-lessp (car x) (car y))))))))
+  
 (defun gnome-menus-merge-dups (menus)
   (let
       (ptr inner-ptr item tem)
