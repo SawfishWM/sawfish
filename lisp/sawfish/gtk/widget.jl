@@ -258,7 +258,7 @@
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (gtk-entry-set-text widget x)))
+		   (gtk-entry-set-text widget (or x ""))))
 	  ((clear) (lambda ()
 		     (gtk-entry-set-text widget "")))
 	  ((ref) (lambda () (gtk-entry-get-text widget)))
