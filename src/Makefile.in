@@ -38,15 +38,15 @@ LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
 
 override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMLIB_CFLAGS) $(X11_CFLAGS)
 
-all : sawmill sawmill-client $(DL_OBJS) $(LISP_OBJS) gtk-style
+all : sawmill sawmill-client libclient.o $(DL_OBJS) $(LISP_OBJS) gtk-style
 
 sawmill : $(OBJS) $(LIBOBJS)
 	$(rep_LIBTOOL) $(CC) -export-dynamic $(LDFLAGS) \
 	  -o sawmill $(OBJS) $(LIBOBJS) $(REP_LIBS) \
 	  $(IMLIB_LIBS) $(X11_LIBS) $(LIBS)
 
-sawmill-client : client.o
-	$(CC) $(LDFLAGS) -o $@ $< $(LIBOBJS) $(X11_LIBS) $(LIBS)
+sawmill-client : client.o libclient.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBOBJS) $(X11_LIBS) $(LIBS)
 
 lib%.la : %.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $<
