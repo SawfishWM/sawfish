@@ -21,28 +21,84 @@
 
 (provide 'place-window)
 
-(defvar place-window-modes '(random interactive first-fit best-fit
-			     first-fit-or-interactive centered
-			     centered-on-parent under-pointer none))
+(defvar placement-modes nil
+  "List containing all symbols naming window placement modes.")
 
 (defcustom place-window-mode 'best-fit
   "Method of selecting the position of a freshly-mapped window."
   :type symbol
   :group placement)
 
-(custom-set-property 'place-window-mode ':options place-window-modes)
-
 (defcustom place-transient-mode 'random
   "Method of selecting the position of a freshly-mapped transient window."
   :type symbol
   :group placement)
 
-(custom-set-property 'place-transient-mode ':options place-window-modes)
-
 (defcustom ignore-program-positions nil
   "Ignore program-specified window positions."
   :type boolean
   :group placement)
+
+
+;; utility functions
+
+(defun define-placement-mode (name fun)
+  "Define a new window placement mode called NAME (a symbol). The function FUN
+will be called with a single argument when a window should be placed using
+this mode. The single argument is the window to be placed."
+  (unless (memq name placement-modes)
+    (setq placement-modes (nconc placement-modes (list name))))
+  (custom-set-property 'place-window-mode ':options placement-modes)
+  (custom-set-property 'place-transient-mode ':options placement-modes)
+  (put name 'placement-mode fun))
+
+(defun adjust-window-for-gravity (w grav)
+  (let
+      ((coords (window-position w))
+       (dims (window-dimensions w))
+       (fdims (window-frame-dimensions w))
+       (off (window-frame-offset w)))
+    (if (eq grav 'static)
+	(progn
+	  ;; static gravity is relative to the original
+	  ;; client window position
+	  (rplaca coords (+ (car coords) (car off)))
+	  (rplacd coords (+ (cdr coords) (cdr off))))
+      (when (memq grav '(east south-east north-east))
+	;; relative to the right of the frame
+	(rplaca coords (- (car coords) (- (car fdims) (car dims))
+			  (* -2 (window-border-width w)))))
+      (when (memq grav '(south south-east south-west))
+	;; relative to the bottom of the frame
+	(rplacd coords (- (cdr coords) (- (cdr fdims) (cdr dims))
+			  (* -2 (window-border-width w))))))
+    (move-window-to w (car coords) (cdr coords))))
+
+;; called from the place-window-hook
+(defun place-window (w)
+  (let
+      ((hints (window-size-hints w)))
+    (if (or (cdr (assq 'user-position hints))
+	    (and (not (window-get w 'ignore-program-position))
+		 (not ignore-program-positions)
+		 (cdr (assq 'program-position hints))))
+	(let
+	    ((gravity (or (window-get w 'gravity)
+			  (cdr (assq 'window-gravity hints)))))
+	  (when gravity
+	    (adjust-window-for-gravity w gravity)))
+      (let
+	  ((mode (or (window-get w 'place-mode)
+		     (if (window-transient-p w)
+			 place-transient-mode
+		       place-window-mode))))
+	((or (get mode 'placement-mode) place-window-randomly) w)
+	t))))
+
+(add-hook 'place-window-hook place-window t)
+
+
+;; standard placement modes
 
 (defun place-window-randomly (w)
   (let
@@ -100,58 +156,9 @@
 			(max 0 (- (cdr coords) (/ (cdr dims) 2)))))
     (move-window-to w (car coords) (cdr coords))))
 
-(defun adjust-window-for-gravity (w grav)
-  (let
-      ((coords (window-position w))
-       (dims (window-dimensions w))
-       (fdims (window-frame-dimensions w))
-       (off (window-frame-offset w)))
-    (if (eq grav 'static)
-	(progn
-	  ;; static gravity is relative to the original
-	  ;; client window position
-	  (rplaca coords (+ (car coords) (car off)))
-	  (rplacd coords (+ (cdr coords) (cdr off))))
-      (when (memq grav '(east south-east north-east))
-	;; relative to the right of the frame
-	(rplaca coords (- (car coords) (- (car fdims) (car dims))
-			  (* -2 (window-border-width w)))))
-      (when (memq grav '(south south-east south-west))
-	;; relative to the bottom of the frame
-	(rplacd coords (- (cdr coords) (- (cdr fdims) (cdr dims))
-			  (* -2 (window-border-width w))))))
-    (move-window-to w (car coords) (cdr coords))))
-
-;; called from the place-window-hook
-(defun place-window (w)
-  (let
-      ((hints (window-size-hints w)))
-    (if (or (cdr (assq 'user-position hints))
-	    (and (not (window-get w 'ignore-program-position))
-		 (not ignore-program-positions)
-		 (cdr (assq 'program-position hints))))
-	(let
-	    ((gravity (or (window-get w 'gravity)
-			  (cdr (assq 'window-gravity hints)))))
-	  (when gravity
-	    (adjust-window-for-gravity w gravity)))
-      (let
-	  ((mode (or (window-get w 'place-mode)
-		     (if (window-transient-p w)
-			 place-transient-mode
-		       place-window-mode))))
-	((or (get mode 'placement-mode) place-window-randomly) w)
-	t))))
-
-(put 'interactive 'placement-mode place-window-interactively)
-(put 'random 'placement-mode place-window-randomly)
-(put 'first-fit 'placement-mode place-window-first-fit)
-(put 'best-fit 'placement-mode place-window-best-fit)
-(put 'first-fit-or-interactive 'placement-mode
-     place-window-first-fit-or-interactive)
-(put 'centered 'placement-mode place-window-centered)
-(put 'centered-on-parent 'placement-mode place-window-centered-on-parent)
-(put 'under-pointer 'placement-mode place-window-under-pointer)
-(put 'none 'placement-mode nop)
-
-(add-hook 'place-window-hook place-window t)
+(define-placement-mode 'randomly place-window-randomly)
+(define-placement-mode 'interactively place-window-interactively)
+(define-placement-mode 'centered place-window-centered)
+(define-placement-mode 'centered-on-parent place-window-centered-on-parent)
+(define-placement-mode 'under-pointer place-window-under-pointer)
+(define-placement-mode 'none nop)
