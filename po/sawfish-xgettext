@@ -29,6 +29,35 @@ exec rep "$0" "$@"
 (define (exit n) (throw 'quit n))
 
 
+;; random hackery
+
+;; from sawfish.ui.widgets.match-window
+(define (beautify-symbol-name symbol)
+  (cond ((stringp symbol) symbol)
+	((not (symbolp symbol)) (format "%s" symbol))
+	(t
+	 (let ((name (copy-sequence (symbol-name symbol))))
+	   (while (string-match "[-:]" name)
+	     (setq name (concat (substring name 0 (match-start))
+				?  (substring name (match-end)))))
+	   (aset name 0 (char-upcase (aref name 0)))
+	   name))))
+
+;; from sawfish.ui.layouts.keymaps
+(define (beautify-keymap-name symbol)
+  (cond ((stringp symbol) symbol)
+	((not (symbolp symbol)) (format "%s" symbol))
+	(t
+	 (let ((name (copy-sequence (symbol-name symbol))))
+	   (when (string-match "-keymap" name)
+	     (setq name (substring name 0 (match-start))))
+	   (while (string-match "[-:]" name)
+	     (setq name (concat (substring name 0 (match-start))
+				?  (substring name (match-end)))))
+	   (aset name 0 (char-upcase (aref name 0)))
+	   name))))
+
+
 ;; helper function that groks sawfish specific forms
 
 (define (get-key key args) (and (listp args) (memq key args)))
@@ -36,7 +65,8 @@ exec rep "$0" "$@"
 (define (helper form)
   (case (car form)
     ((defcustom)
-     (let ((doc (nth 3 form))
+     (let ((variable (nth 1 form))
+	   (doc (nth 3 form))
 	   (keys (nthcdr 4 form)))
        (let ((tooltip (cadr (get-key ':tooltip keys))))
 	 (when tooltip
@@ -45,17 +75,20 @@ exec rep "$0" "$@"
 	 (when type*
 	   (scan type*)))
        (let ((options (cadr (get-key ':options keys))))
+	 ;; extract `:options (foo bar..)' strings
 	 (when (listp options)
 	   (mapc (lambda (s)
 		   (when s
 		     (register (symbol-name s)))) options)))
        (let ((type (cadr (get-key ':type keys))))
-	 (when (and (listp type)
-		    (symbolp (car type))
-		    (equal (car type) 'choice))
+	 ;; extract `:type (choice foo bar..)' strings
+	 (when (eq (car type) 'choice)
 	   (mapc (lambda (s)
 		   (when (symbolp s)
-		     (register (symbol-name s)))) (cdr type))))
+		     (register (symbol-name s)))) (cdr type)))
+	 ;; extract keymap names
+	 (when (eq type 'keymap)
+	   (register (beautify-keymap-name (symbol-name variable)))))
        (when (stringp doc)
 	 (register doc))))
 
@@ -68,7 +101,9 @@ exec rep "$0" "$@"
      (let ((name (nth 1 form))
 	   (def (nth 2 form))
 	   (keys (nthcdr 3 form)))
-       ;; XXX beautify name and add it?
+       (when (and (eq (car name) 'quote)
+		  (symbolp (cadr name)))
+	 (register (beautify-symbol-name (cadr name))))
        (if (get-key #:doc keys)
 	   (register (cadr (get-key #:doc keys)))
 	 (let ((key (or (cadr (get-key #:doc-key keys))
@@ -82,6 +117,29 @@ exec rep "$0" "$@"
        (let ((type (car (cdr (get-key #:type keys)))))
 	 (when type
 	   (scan type)))))
+
+    ((i18n-defvar i18n-define)
+     (let ((name (cadr form))
+	   (value (caddr form)))
+       (case name
+	 ((match-window-properties)
+	  (mapc (lambda (x)
+		  (mapc (lambda (y)
+			  (register (beautify-symbol-name (car y)))) (cddr x)))
+		;; remove a `(backquote X)'
+		(nth 1 value)))
+
+	 ((match-window-x-properties)
+	  (mapc (lambda (x)
+		  (register (cdr x)))
+		;; strip a `(quote X)'
+		(nth 1 value))))
+
+       ;; always rescan as normal, to be sure not to miss anything
+       (scan (cons (if (eq (car form) 'i18n-defvar)
+		       'defvar
+		     'define)
+		   (cdr form)))))
 
     (t (scan-list form))))
 
