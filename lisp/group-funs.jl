@@ -48,7 +48,7 @@
 (defvar auto-group-alist nil
   "Alist mapping window names to group ids.")
 
-(defvar undeletable-group-ids nil
+(defvar persistent-group-ids nil
   "List of group ids that always exist, even when they have no members.")
 
 ;; return the id of the group that window W is a member of
@@ -83,7 +83,7 @@
 ;; return list of all group ids
 (defun window-group-ids ()
   (let
-      ((ids (copy-sequence undeletable-group-ids))
+      ((ids (copy-sequence persistent-group-ids))
        id)
     (mapc #'(lambda (w)
 	      (setq id (window-actual-group-id w))
