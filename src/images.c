@@ -240,8 +240,12 @@ Return the value of the property named PROPERTY (a symbol) of IMAGE.
     plist = VIMAGE(win)->plist;
     while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
     {
-	if (rep_CAR(plist) == prop)
+	if (rep_CAR(plist) == prop
+	    || (!rep_SYMBOLP(prop)
+		&& rep_value_cmp (rep_CAR(plist), prop) == 0))
+	{
 	    return rep_CAR(rep_CDR(plist));
+	}
 	plist = rep_CDR(rep_CDR(plist));
     }
     return Qnil;
@@ -260,7 +264,9 @@ Set the value of the property named PROPERTY (a symbol) of IMAGE to VALUE.
     plist = VIMAGE(win)->plist;
     while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
     {
-	if (rep_CAR(plist) == prop)
+	if (rep_CAR(plist) == prop
+	    || (!rep_SYMBOLP(prop)
+		&& rep_value_cmp (rep_CAR(plist), prop) == 0))
 	{
 	    rep_CAR(rep_CDR(plist)) = val;
 	    return val;

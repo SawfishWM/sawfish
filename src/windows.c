@@ -498,8 +498,12 @@ Note that these are Lisp properties not X properties.
     plist = VWIN(win)->plist;
     while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
     {
-	if (rep_CAR(plist) == prop)
+	if (rep_CAR(plist) == prop
+	    || (!rep_SYMBOLP(prop)
+		&& rep_value_cmp (rep_CAR(plist), prop) == 0))
+	{
 	    return rep_CAR(rep_CDR(plist));
+	}
 	plist = rep_CDR(rep_CDR(plist));
     }
     return Qnil;
@@ -520,7 +524,9 @@ Note that these are Lisp properties not X properties.
     plist = VWIN(win)->plist;
     while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
     {
-	if (rep_CAR(plist) == prop)
+	if (rep_CAR(plist) == prop
+	    || (!rep_SYMBOLP(prop)
+		&& rep_value_cmp (rep_CAR(plist), prop) == 0))
 	{
 	    if (prop == Qkeymap && VWIN(win)->id != 0)
 	    {
