@@ -586,6 +586,7 @@ previous workspace."
 	  ((space (window-get w 'workspace)))
 	(when space
 	  (select-workspace space))
+	(move-viewport-to-window w)
 	(uniconify-window w)
 	(when (and unshade-selected-windows (window-get w 'shaded))
 	  (unshade-window w))

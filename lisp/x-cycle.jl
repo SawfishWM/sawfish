@@ -172,6 +172,7 @@
       (setq x-cycle-current win)
       (when (window-get win 'workspace)
 	(select-workspace (window-get win 'workspace)))
+      (move-viewport-to-window win)
       (when (window-get win 'iconified)
 	(show-window win))
       (when cycle-raise-windows
