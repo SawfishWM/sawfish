@@ -459,6 +459,8 @@ property_notify (XEvent *ev)
 	    if (w->wmhints != 0)
 		XFree (w->wmhints);
 	    w->wmhints = XGetWMHints (dpy, w->id);
+	    w->icon_image = rep_NULL;
+	    need_refresh = TRUE;
 	    break;
 
 	case XA_WM_NORMAL_HINTS:
