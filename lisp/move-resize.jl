@@ -71,7 +71,7 @@
 (defcustom move-lock-when-maximized t
   "Lock window geometry while the window is maximized."
   :type boolean
-  :group move)
+  :group maximize)
 
 (defvar move-resize-map (bind-keys (make-keymap)
 			  "Any-Off" 'move-resize-finished
