@@ -1,3 +1,20 @@
+1999-10-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (Qhighlight_when_unfocused): new option, only
+	highlight frame parts in unfocused windows when this is set
+	non-nil
+
+	* display.c, libclient.c (canonical_display): handle unix:0
+	displays
+	(canonical_host): map host name to lowercase
+
+	* keys.c (translate_event_to_x_key): handle shifted keys (i.e
+	things like C-C) correctly
+
+	* colors.c (Fget_color_rgb): fix bug when scanning list of
+	previously allocated colors (accepting non-matching color)
+	(Fget_color): use XParseColor instead of XLookupColor
+
 1999-10-11  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.12.2

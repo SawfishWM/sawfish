@@ -1,3 +1,20 @@
+1999-10-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.jl (highlight-when-unfocused): declare this option
+
+	* viewport.jl (window-outside-workspace-p): fix bug
+
+	* workspace.jl (ws-move-window): only move a window if it's not
+	already on the destination workspace
+
+	* viewport.jl (window-viewport): new function
+
+	* gnome.jl: use _WIN_AREA properties on windows to preserve
+	window->viewport mapping during restart
+
+	* viewport.jl (viewport-before-exiting): add this to the
+	before-exit-hook instead of an anonymous function
+
 1999-10-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.12
