@@ -269,22 +269,26 @@
 
 ;; usually called from the add-window-hook
 (defun ws-add-window (w)
-  (unless (or (window-get w 'sticky)
-	      (window-get w 'workspace))
-    (let
-	(parent)
-      (if (and transients-on-parents-workspace
-	       (window-transient-p w)
-	       (setq parent (get-window-by-id (window-transient-p w)))
-	       (window-get parent 'workspace)
-	       (/= (window-get parent 'workspace) current-workspace))
-	  ;; put the window on its parents workspace
-	  (ws-add-window-to-space w (window-get parent 'workspace))
-	(window-put w 'workspace current-workspace)
-	(unless (window-visible-p w)
-	  (show-window w))
-	(call-window-hook 'add-to-workspace-hook w))
-      (call-hook 'workspace-state-change-hook))))
+  (unless (window-get w 'sticky)
+    (if (window-get w 'workspace)
+	(let
+	    ((space (window-get w 'workspace)))
+	  (window-put w 'workspace nil)
+	  (ws-add-window-to-space w space))
+      (let
+	  (parent)
+	(if (and transients-on-parents-workspace
+		 (window-transient-p w)
+		 (setq parent (get-window-by-id (window-transient-p w)))
+		 (window-get parent 'workspace)
+		 (/= (window-get parent 'workspace) current-workspace))
+	    ;; put the window on its parents workspace
+	    (ws-add-window-to-space w (window-get parent 'workspace))
+	  (window-put w 'workspace current-workspace)
+	  (unless (window-visible-p w)
+	    (show-window w))
+	  (call-window-hook 'add-to-workspace-hook w)
+	  (call-hook 'workspace-state-change-hook))))))
 
 ;; called from the map-notify hook
 (defun ws-window-mapped (w)
