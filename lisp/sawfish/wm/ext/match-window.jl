@@ -236,6 +236,13 @@
 
 ;;; matcher code
 
+  (define (safe-string-match re . args)
+    (condition-case data
+	(apply string-match re args)
+      (regexp-error
+       (format standard-error
+	       "regexp error in match-window: %s, %s" re (car data)))))
+
   (define (match-window w)
     (let ((prop-cache '()))
 
@@ -268,9 +275,9 @@
 		 (if (vectorp prop)
 		     (do ((i 0 (1+ i)))
 			 ((= i (length prop)) nil)
-		       (when (string-match input (aref prop i))
+		       (when (safe-string-match input (aref prop i))
 			 (throw 'out t)))
-		   (string-match input prop)))
+		   (safe-string-match input prop)))
 		((and (numberp input) (numberp prop))
 		 (= input prop))
 		(t (equal input prop)))))
