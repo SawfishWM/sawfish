@@ -79,7 +79,8 @@ workspaces.")
 		    (when (string-match r (window-name w))
 		      (throw 'foo t))) sticky-window-names)
 	  nil)
-    (window-put w 'sticky t)))
+    (window-put w 'sticky t)
+    (window-put w 'fixed-position t)))
 
 (defun transient-map-window (w)
   (let
