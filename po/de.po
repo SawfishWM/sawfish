@@ -26,13 +26,13 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sawfish 1.x\n"
+"Project-Id-Version: sawfish 2.0.x\n"
 "POT-Creation-Date: 2002-06-01 12:40+0200\n"
-"PO-Revision-Date: 2001-11-15 10:12+0100\n"
-"Last-Translator: Karl Eichwalder <ke@suse.de>\n"
-"Language-Team: deutsch <gnome-de@gnome.org>\n"
+"PO-Revision-Date: 2002-08-29 23:19+0100\n"
+"Last-Translator: Christian Neumair <christian-neumair@web.de>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ../scripts/sawfish-about.jl
@@ -628,8 +628,8 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the root window\n"
 "(or when no window is focused)."
 msgstr ""
-"Tastenbelegung mit Tastenkombinationen, die aktiv sind, wenn der Zeiger "
-"über dem Hintergrundfenster ist (oder kein Fenster fokussiert ist)."
+"Tastenbelegung mit Tastenkombinationen, die aktiv sind, wenn der Zeiger über "
+"dem Hintergrundfenster ist (oder kein Fenster fokussiert ist)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
@@ -1610,6 +1610,8 @@ msgid ""
 "Whether to bump into fully obscured windows when growing or packing\n"
 "windows."
 msgstr ""
+"Ob es sich beim Wachsen oder Packen mit einem vollständig verdeckten\n"
+"Fenster überschneiden soll."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
@@ -1617,10 +1619,15 @@ msgid ""
 "windows.\n"
 "`maybe' means only avoided windows in other depths."
 msgstr ""
+"Ob es sich beim Wachsen oder Packen mit einem Fenster unterschiedlicher\n"
+"Tiefe überschneiden soll.\n"
+"»vielleicht« heißt nur gemiedene Fenster in anderen Tiefen."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether to bump into ignored windows when growing or packing."
 msgstr ""
+"Ob es sich beim Wachsen oder Packen mit einem ignorierten Fenster\n"
+"überschneiden soll."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
@@ -1659,6 +1666,14 @@ msgid ""
 "by\n"
 "window or pixels instead."
 msgstr ""
+"Vergrößert das Fenster nach oben, bis sich dieses mit einem\n"
+"anderen Fenster überschneidet.\n"
+"Falls die Oberkannte untehalb des Bildschirmrands war, wird es\n"
+"zurück nach innen gebracht.\n"
+"Mit einem universellen Präfix-Argument wird es stattdessen\n"
+"maximal nach oben vergrößert.\n"
+"Mit einem numerischen Präfix-Argumen wird es stattdessen\n"
+"um so viele Pixel nach oben vergrößert."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
@@ -1707,6 +1722,14 @@ msgid ""
 "With a universal prefix arg, move upwards maximally instead.\n"
 "With a numeric prefix arg, move upwards by that many pixels instead."
 msgstr ""
+"Verschiebt das Fenster nach oben, bis sich dieses mit einem\n"
+"anderen Fenster überschneidet.\n"
+"Falls die Oberkannte untehalb des Bildschirmrands war, wird es\n"
+"zurück nach innen verschoben.\n"
+"Mit einem universellen Präfix-Argument wird es stattdessen\n"
+"maximal nach oben verschoben.\n"
+"Mit einem numerischen Präfix-Argumen wird es stattdessen\n"
+"um so viele Pixel nach oben verschoben."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
@@ -1774,8 +1797,7 @@ msgstr "Hilfe: Info"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Number of pixels to move pointer in `move-cursor-' commands."
-msgstr ""
-"Anzahl von Pixeln beim Bewegen des Zeigers in »move-cursor-«-Befehlen."
+msgstr "Anzahl von Pixeln beim Bewegen des Zeigers in »move-cursor-«-Befehlen."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor right"
@@ -1858,8 +1880,8 @@ msgid ""
 msgstr ""
 "Abstand in Pixeln bevor sich die Fensterkanten gegenseitig ausrichten.\n"
 "\n"
-"Wenn ein Fenster bewegt wird, lässt die Option eines seiner Kanten mit "
-"einer Kante eines anderen Fensters ausrichten gegenseitig ausrichten."
+"Wenn ein Fenster bewegt wird, lässt die Option eines seiner Kanten mit einer "
+"Kante eines anderen Fensters ausrichten gegenseitig ausrichten."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -2180,8 +2202,7 @@ msgstr "Kantenblättern"
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Select the next desktop when the pointer hits screen edge."
 msgstr ""
-"Nächsten Arbeitsplatz wählen, wenn der Mauszeiger den Bildschirmrand "
-"berührt."
+"Nächsten Arbeitsplatz wählen, wenn der Mauszeiger den Bildschirmrand berührt."
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "viewport"
@@ -2480,8 +2501,7 @@ msgstr "Fensterchronik vergessen"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Forget any persistent state associated with the current window."
 msgstr ""
-"Jegliche dauerhaften Statusinformationen über das aktuelle Fenster "
-"vergessen."
+"Jegliche dauerhaften Statusinformationen über das aktuelle Fenster vergessen."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history clear"
@@ -3175,373 +3195,3 @@ msgstr "_Einstellungen"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Themen"
-
-#~ msgid "Protect the sawfish"
-#~ msgstr "Schützt den Sägefisch"
-
-#~ msgid "Revert"
-#~ msgstr "Zurücknehmen"
-
-#~ msgid "Minimizing"
-#~ msgstr "Minimieren"
-
-#~ msgid "Maximizing"
-#~ msgstr "Maximieren"
-
-#~ msgid ""
-#~ "Frame type fallbacks:\n"
-#~ "\n"
-#~ "Associate frame types with type to try if the theme doesn't implement the "
-#~ "requested type."
-#~ msgstr ""
-#~ "Rahmentypen-Notnägel:\n"
-#~ "\n"
-#~ "Rahmentypen mit dem Typ verknüpfen, der ausprobiert werden soll, wenn "
-#~ "das Thema den verlangten Typ nicht implementiert."
-
-#~ msgid "Bevel intensity: \\wpercent."
-#~ msgstr "Stärke des Schrägungseffekts: \\wpercent."
-
-#~ msgid "Motion threshold for mouse pointer: \\wpixels"
-#~ msgstr "Bewegungsschwelle für Mauszeiger: \\wpixels"
-
-#~ msgid "Display key-binding information in menu items."
-#~ msgstr "Information über Tastenkombinationen in Menüeinträgen anzeigen"
-
-#~ msgid "_Left"
-#~ msgstr "_Links"
-
-#~ msgid "_Right"
-#~ msgstr "_Rechts"
-
-#~ msgid "_Up"
-#~ msgstr "_Oben"
-
-#~ msgid "_Down"
-#~ msgstr "_Unten"
-
-#~ msgid "Ignore program-specified window placements."
-#~ msgstr "Vom Programm geforderte Fensteranordnung ignorieren."
-
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Fenster werden in das aktuelle Sichtfeld wiederhergestellt."
-
-#~ msgid "Move the window to the viewport above."
-#~ msgstr "Das Fenster in das Sichtfeld oberhalb verschieben."
-
-#~ msgid "Move the window to the viewport below."
-#~ msgstr "Das Fenster in das Sichtfeld unterhalb verschieben."
-
-#~ msgid "The default window animation mode: \\w"
-#~ msgstr "Standard-Fensteranimationsmodus: \\w"
-
-#~ msgid ""
-#~ "Give focus to windows even when they haven't asked for it.\n"
-#~ "\n"
-#~ "Windows should set the `accepts input' hint in their WM_HINTS property to "
-#~ "show if they require the focus or not."
-#~ msgstr ""
-#~ "Fenstern den Fokus geben, auch wenn sie ihn nicht angefordert haben.\n"
-#~ "\n"
-#~ "Fenster sollten den Hint `akzeptiert Eingabe' in ihrer WM_HINTS-"
-#~ "Eigenschaft setzen, um klarzustellen, ob sie den Fokus brauchen oder "
-#~ "nicht."
-
-#~ msgid ""
-#~ "Offset (%) from left window edge when warping pointer.\n"
-#~ "\n"
-#~ "A negative number means outside the left window edge."
-#~ msgstr ""
-#~ "Abstand (%) von linker Fensterkante beim Herumschicken des Zeigers.\n"
-#~ "\n"
-#~ "Eine negative Zahl bedeutet einen Ort außerhalb der linken Fensterkante."
-
-#~ msgid ""
-#~ "Offset (%) from top window edge when warping pointer.\n"
-#~ "\n"
-#~ "A negative number means outside the top window edge."
-#~ msgstr ""
-#~ "Abstand (%) von oberer Fensterkante beim Herumschicken des Zeigers.\n"
-#~ "\n"
-#~ "Eine negative Zahl bedeutet einen Ort außerhalb der oberen Fensterkante."
-
-#~ msgid ""
-#~ "Format to create unique window names.\n"
-#~ "\n"
-#~ "Has two arguments (NAME INDEX) applied to it."
-#~ msgstr ""
-#~ "Format, um eindeutige Fensternamen zu erzeugen.\n"
-#~ "\n"
-#~ "Hierauf werden zwei Argumente (NAME, INDEX) angewendet."
-
-#~ msgid "Virtual desktop configuration."
-#~ msgstr "Konfiguration virtueller Arbeitsplätze."
-
-#~ msgid "stop"
-#~ msgstr "stopp"
-
-#~ msgid "wrap-around"
-#~ msgstr "zyklisch"
-
-#~ msgid "keep-going"
-#~ msgstr "weitermachen"
-
-#~ msgid "When passing the first or last workspace: \\w"
-#~ msgstr "Beim Passieren der ersten oder letzten Arbeitsfläche: \\w"
-
-#~ msgid "When passing the first or last workspace, while moving a window: \\w"
-#~ msgstr ""
-#~ "Beim Passieren der ersten oder letzten Arbeitsfläche, während ein "
-#~ "Fenster verschoben wird: \\w"
-
-#~ msgid "Workspaces are deleted when their last window closes."
-#~ msgstr ""
-#~ "Arbeitsflächen werden gelöscht, wenn ihr letztes Fenster geschlossen "
-#~ "wird."
-
-#~ msgid "Preserve empty workspaces in pager."
-#~ msgstr "Leere Arbeitsflächen im Pager halten."
-
-#~ msgid "Dialogs appear on the same workspace as their application."
-#~ msgstr "Dialoge erscheinen auf derselben Arbeitsfläche wie ihre Anwendung."
-
-#~ msgid "Whether growing an already grown window grows it again."
-#~ msgstr ""
-#~ "Führt Aufweiten eines aufgeweiteten Fensters zu erneutem Aufweiten?"
-
-#~ msgid "Grows window upwards until it `bumps into' another window."
-#~ msgstr "Fenster nach oben aufweiten, bis es an ein anderes stößt."
-
-#~ msgid "Moves window upwards until it `bumps into' another window."
-#~ msgstr "Fenster nach oben verschieben, bis es an ein anderes stößt."
-
-#~ msgid "opaque"
-#~ msgstr "opak"
-
-#~ msgid "box"
-#~ msgstr "Rahmen"
-
-#~ msgid "How windows being moved are animated: \\w"
-#~ msgstr "So werden Fenster beim Verschieben animiert: \\w"
-
-#~ msgid "How windows being resized are animated: \\w"
-#~ msgstr "So werden Fenster bei Größenänderung animiert: \\w"
-
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr ""
-#~ "Fenster anheben, wenn sie verschoben oder in der Größe geändert werden."
-
-#~ msgid "region"
-#~ msgstr "Region"
-
-#~ msgid "border"
-#~ msgstr "Rahmen"
-
-#~ msgid "grab"
-#~ msgstr "zupacken"
-
-#~ msgid "border-grab"
-#~ msgstr "an Kante zupacken"
-
-#~ msgid "How to choose window edges when resizing: \\w"
-#~ msgstr "Fensterkanten bei Größenänderung so auswählen: \\w"
-
-#~ msgid "Snap window position to edges of other windows while moving."
-#~ msgstr ""
-#~ "Fensterposition beim Verschieben an Kanten anderer Fenster einrasten "
-#~ "lassen."
-
-#~ msgid "Proximity in pixels before snapping to a window edge."
-#~ msgstr "Annäherung in Pixeln vor Einrasten an einer Fensterkante."
-
-#~ msgid "magnetism"
-#~ msgstr "Magnetismus"
-
-#~ msgid "resistance"
-#~ msgstr "Abstoßung"
-
-#~ msgid "attraction"
-#~ msgstr "Anziehung"
-
-#~ msgid "How to snap together window edges: \\w"
-#~ msgstr "Fensterkanten so aneinander einrasten lassen: \\w"
-
-#~ msgid "Snap to otherwise-ignored windows."
-#~ msgstr "An sonst ignorierte Fenster einrasten lassen."
-
-#~ msgid "Only update window contents after it has stopped moving."
-#~ msgstr "Fensterinhalt erst aktualisieren, wenn Verschieben beendet ist."
-
-#~ msgid ""
-#~ "Default increment for size-window commands (when the window doesn't\n"
-#~ "specify it's own increments)."
-#~ msgstr ""
-#~ "Standard-Schrittweite für Fenstergrößen-Änderungen (sofern das\n"
-#~ "Fenster sie nicht selbst festlegt)."
-
-#~ msgid "Number of pixels to move window in `slide-' commands."
-#~ msgstr ""
-#~ "Schrittweite in Pixeln beim Bewegen des Fensters in `slide-' Befehlen."
-
-#~ msgid "Display window icons while cycling through windows."
-#~ msgstr "Icons der Fenster beim Blättern anzeigen."
-
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Beim Blättern die Fenster anheben, die kurzzeitig gewählt sind."
-
-#~ msgid "Warp the mouse pointer to windows as they're temporarily selected."
-#~ msgstr ""
-#~ "Den Mauszeiger in die Fenster holen, wenn sie kurzzeitig ausgewählt "
-#~ "werden."
-
-#~ msgid "Focus windows when they're temporarily selected during cycling."
-#~ msgstr ""
-#~ "Beim Blättern die Fenster fokussieren, die kurzfristig gewählt sind."
-
-#~ msgid "Disable auto-raising while temporarily selecting windows."
-#~ msgstr ""
-#~ "Automatisches Anheben der Fenster beim temporären Auswählen abschalten."
-
-#~ msgid "Play sound effects for unmanaged windows."
-#~ msgstr "Klangeffekte für nicht verwaltete Fenster abspielen."
-
-#~ msgid "The hierarchical window menu raises singleton submenus."
-#~ msgstr "Das hierarchische Fenstermenü öffnet einteilige Untermenüs."
-
-#~ msgid "Milliseconds to delay before flipping: \\w"
-#~ msgstr "Millisekunden an Verzögerung vor Blättern: \\w"
-
-#~ msgid "Warp pointer to opposite screen edge when flipping."
-#~ msgstr ""
-#~ "Mauszeiger beim Blättern zur gegenüberliegenden Bilschirmkante schicken."
-
-#~ msgid "Remove tooltips after a period of time."
-#~ msgstr "Minihilfen nach einer gewissen Zeit verschwinden lassen."
-
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Diese Anzahl Millisekunden warten, bis Minihilfen angezeigt werden."
-
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Diese Anzahl Millisekunden warten, bis Minihilfen verschwinden."
-
-#~ msgid "Font used to display tooltips."
-#~ msgstr "Schriftart in den Minihilfen."
-
-#~ msgid "Color used for the tooltips background"
-#~ msgstr "Farbe für den Hintergrund in den Minihilfen"
-
-#~ msgid "Color used for the tooltips foreground"
-#~ msgstr "Farbe für den Vordergrund in den Minihilfen"
-
-#~ msgid "Invoke the GNOME control center from the `Customize' menu."
-#~ msgstr "Das GNOME-Kontrollzentrum aus dem Menü `Anpassen' heraus starten."
-
-#~ msgid ""
-#~ "Try to leave at least this many pixels between window edges in first/best-"
-#~ "fit."
-#~ msgstr ""
-#~ "Bei first-fit/best-fit mindestens so viele Pixel Raum zwischen Fenstern "
-#~ "lassen."
-
-#~ msgid "Automatically select window gravity from position on screen."
-#~ msgstr ""
-#~ "Automatisch die Fenstergravitation anhand der Position auf dem Bildschirm "
-#~ "wählen."
-
-#~ msgid "Ignore requests from applications to change window stacking."
-#~ msgstr ""
-#~ "Anfragen von Anwendungen, die Fensterschichtung zu ändern, ignorieren."
-
-#~ msgid "Windows are focused after being uniconified."
-#~ msgstr "Fenster nach dem Wiederherstellen fokussieren."
-
-#~ msgid "Windows are raised after being uniconified."
-#~ msgstr "Fenster nach dem Wiederherstellen anheben."
-
-#~ msgid "Unmanaged windows may be iconified."
-#~ msgstr "Nicht verwaltete Fenster können minimiert werden."
-
-#~ msgid "Windows uniconify to the current workspace."
-#~ msgstr "Fenster in die aktuelle Arbeitsfläche wiederherstellen."
-
-#~ msgid "Iconifying a window also iconifies the: \\w"
-#~ msgstr "Minimieren eines Fensters minimiert auch: \\w"
-
-#~ msgid "Uniconifying a window also uniconifies the: \\w"
-#~ msgstr "Wiederherstellen eines Fensters stellt auch wieder her: \\w"
-
-#~ msgid "Iconify the window."
-#~ msgstr "Das Fenster minimieren."
-
-#~ msgid "Toggle single window mode"
-#~ msgstr "Einzelfenster-Modus ein/aus"
-
-#~ msgid ""
-#~ "Maximizing a window in one dimension must increase the size of that "
-#~ "dimension."
-#~ msgstr ""
-#~ "Maximieren eines Fensters in einer Richtung muss das Maß in dieser "
-#~ "Richtung immer vergrößern."
-
-#~ msgid "Raise windows when they are maximized."
-#~ msgstr "Fenster anheben, wenn sie maximiert werden."
-
-#~ msgid "Let unmanaged windows be overlapped when filling windows."
-#~ msgstr ""
-#~ "Nicht verwaltete Fenster überlappen lassen, wenn mit Fenstern "
-#~ "ausgefüllt wird."
-
-#~ msgid "Don't cover `avoided' windows when maximizing."
-#~ msgstr "`Vermiedene' Fenster beim Maximieren nicht verdecken."
-
-#~ msgid "Dialog windows inherit the focus from their parent."
-#~ msgstr "Dialogfenster erben den Fokus von ihrem übergeordneten Fenster."
-
-#~ msgid "Decorate dialog windows similarly to application windows."
-#~ msgstr "Dialogfenster wie Anwendungsfenster dekorieren."
-
-#~ msgid "Windows uniconify to the current workspace when they are selected."
-#~ msgstr ""
-#~ "Fenster in die aktuelle Arbeitsfläche wiederherstellen, wenn sie gew�"
-#~ "�hlt werden."
-
-#~ msgid "Raise selected windows (normally by the Windows menu)."
-#~ msgstr ""
-#~ "Ausgewählte Fenster anheben (normalerweise über das Fenstermenü)."
-
-#~ msgid "Warp the pointer to selected windows."
-#~ msgstr "Den Mauszeiger in ausgewählte Fenster holen."
-
-#~ msgid "Group transient windows with their parents."
-#~ msgstr ""
-#~ "Vergängliche Fenster mit ihren übergeordneten zusammen gruppieren."
-
-#~ msgid "Persistent group ids"
-#~ msgstr "Beständige Gruppenkennungen"
-
-#~ msgid "novice"
-#~ msgstr "grünschnäbelige"
-
-#~ msgid "intermediate"
-#~ msgstr "fortgeschrittene"
-
-#~ msgid "expert"
-#~ msgstr "erfahrene"
-
-#~ msgid "Show options suitable for \\w users."
-#~ msgstr "Für \\w Benutzer geeignete Optionen anzeigen."
-
-#~ msgid "ok"
-#~ msgstr "OK"
-
-#~ msgid "revert/cancel/ok"
-#~ msgstr "Zurücknehmen/Abbrechen/OK"
-
-#~ msgid "apply/revert/cancel/ok"
-#~ msgstr "Ausprobieren/Zurücknehmen/Abbrechen/OK"
-
-#~ msgid "Buttons shown in configurator: \\w"
-#~ msgstr "Im Konfigurator angezeigte Knöpfe: \\w"
-
-#~ msgid "Show variable names of each customization option."
-#~ msgstr "Variablennamen von jeder Konfigurationsoption zeigen."
