@@ -62,6 +62,11 @@
   :type number
   :range (0 . 64))
 
+(defcustom move-snap-ignored-windows nil
+  "Snap to otherwise-ignored windows."
+  :group move
+  :type boolean)
+
 (defvar move-resize-map (bind-keys (make-keymap)
 			  "Any-Off" 'move-resize-finished
 			  "Any-Move" 'move-resize-motion))
@@ -126,7 +131,8 @@
 			       (progn
 				 (require 'edges)
 				 (get-visible-window-edges
-				  ':with-ignored-windows nil
+				  ':with-ignored-windows
+				  move-snap-ignored-windows
 				  ':windows-to-ignore (list w)
 				  ':include-root t))))
        (move-resize-last-outline nil)
