@@ -110,13 +110,13 @@
 		      (vector (+ (window-get w 'depth) WIN_LAYER_NORMAL))
 		      'CARDINAL 32))))
 
-;; XXX handle _WIN_AREA
 (defun gnome-honour-client-state (w)
   (let
       ((state (get-x-property w '_WIN_STATE))
        (hints (get-x-property w '_WIN_HINTS))
        (layer (get-x-property w '_WIN_LAYER))
        (space (get-x-property w '_WIN_WORKSPACE))
+       (area (get-x-property w '_WIN_AREA))
        bits)
     (when (eq (car state) 'CARDINAL)
       (setq bits (aref (nth 2 state) 0))
@@ -139,7 +139,10 @@
       (setq layer (aref (nth 2 layer) 0))
       (set-window-depth w (- layer WIN_LAYER_NORMAL)))
     (when space
-      (window-put w 'workspace (aref (nth 2 space) 0)))))
+      (window-put w 'workspace (aref (nth 2 space) 0)))
+    (when area
+      (set-window-viewport w (aref (nth 2 area) 0) (aref (nth 2 area) 1))
+      (delete-x-property w '_WIN_AREA))))
 
 (defun gnome-client-message-handler (w type data)
   (cond ((eq type '_WIN_WORKSPACE)
@@ -250,7 +253,15 @@
   (delete-x-property 'root '_WIN_PROTOCOLS)
   (delete-x-property 'root '_WIN_AREA)
   (delete-x-property 'root '_WIN_AREA_COUNT)
-  (delete-x-property 'root '_WIN_UNIFIED_AREA))
+  (delete-x-property 'root '_WIN_UNIFIED_AREA)
+  (mapc #'(lambda (w)
+	    (if (window-get w 'fixed-position)
+		(delete-x-property w '_WIN_AREA)
+	      (let
+		  ((port (window-viewport w)))
+		(set-x-property w '_WIN_AREA (vector (car port) (cdr port))
+				'CARDINAL 32))))
+	(managed-windows)))
 
 (unless (or gnome-window-id batch-mode)
   (gnome-init))
