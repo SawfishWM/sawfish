@@ -20,6 +20,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
+#include "server.h"
 #include <X11/Xlib.h>
 
 #include <stdio.h>
@@ -27,15 +28,117 @@
 #include <limits.h>
 #include <string.h>
 
+#ifdef HAVE_UNIX
+# include <sys/types.h>
+# include <sys/socket.h>
+# include <sys/un.h>
+# include <pwd.h>
+# include <netdb.h>
+
+# ifdef HAVE_FCNTL_H
+#  include <fcntl.h>
+# endif
+
+# ifdef HAVE_UNISTD_H
+#  include <unistd.h>
+# endif
+
+# ifdef HAVE_SYS_UTSNAME_H
+#  include <sys/utsname.h>
+# endif
+
+# ifndef PATH_MAX
+#  define PATH_MAX 256
+# endif
+#endif /* HAVE_UNIX */
+
 int opt_quiet = 0;		/* don't print results */
-int opt_nowait = 0;
+
+void (*close_fun)(void);
+u_long (*eval_fun)(char *form);
+
+
+
+
+/* copied from src/unix_main.c */
+static char *
+system_name(void)
+{
+    u_char buf[256];
+    struct hostent *h;
+
+    static char *system_name;
+    if(system_name)
+	return system_name;
+
+#ifdef HAVE_GETHOSTNAME
+    if(gethostname(buf, 256))
+	return rep_NULL;
+#else
+    {
+	struct utsname uts;
+	uname(&uts);
+	strncpy(buf, uts.nodename, 256);
+    }
+#endif
+    h = gethostbyname(buf);
+    if(h)
+    {
+	if(!strchr(h->h_name, '.'))
+	{
+	    /* The official name is not fully qualified. Try looking
+	       through the list of alternatives. */
+	    char **aliases = h->h_aliases;
+	    while(*aliases && !strchr(*aliases, '.'))
+		aliases++;
+	    system_name = strdup(*aliases ? *aliases : h->h_name);
+	}
+	else
+	    system_name = strdup((u_char *)h->h_name);
+    }
+    else
+	system_name = strdup(buf);
+    return system_name;
+}
+
+static char *
+canonical_display (char *name)
+{
+    static char buf[256];
+    char *ptr = buf;
+    if (*name == ':')
+    {
+	char *host = system_name ();
+	if (host != 0)
+	    strcpy (ptr, host);
+	else
+	    *ptr = 0;
+	ptr += strlen (ptr);
+    }
+    else
+    {
+	while (*name && *name != ':')
+	    *ptr++ = *name++;
+    }
+    *ptr++ = *name++;
+    while (*name && *name != '.')
+	*ptr++ = *name++;
+    if (*name == 0)
+	strcpy (ptr, ".0");
+    else
+	strcpy (ptr, name);
+    return buf;
+}
+
+
+/* using the X based server io */
 
 Atom xa_sawmill_request, xa_sawmill_request_win;
 Window portal, request_win;
 Display *dpy;
 
 static u_long
-eval_lisp_form(char *form)
+net_server_eval (char *form)
 {
     u_char *data = 0;
     u_long nitems;
@@ -90,13 +193,146 @@ eval_lisp_form(char *form)
 }
 
 static void
+net_server_close (void)
+{
+    XDestroyWindow (dpy, portal);
+    XCloseDisplay (dpy);
+}
+
+/* returns 0 if ok, <0 if error, >0 if server doesn't exist */
+static int
+net_server_init (char *display)
+{
+    Atom type;
+    int format;
+    u_long bytes_after, nitems;
+    u_char *data;
+
+    dpy = XOpenDisplay (display);
+    if (dpy == 0)
+	return 1;
+
+    xa_sawmill_request = XInternAtom (dpy, "_SAWMILL_REQUEST", False);
+    xa_sawmill_request_win = XInternAtom (dpy, "_SAWMILL_REQUEST_WIN", False);
+
+    if (XGetWindowProperty (dpy, DefaultRootWindow (dpy),
+			    xa_sawmill_request_win, 0, 1, False,
+			    XA_CARDINAL, &type, &format, &nitems,
+			    &bytes_after, &data) != Success
+        || type != XA_CARDINAL || format != 32 || nitems != 1)
+    {
+	return 1;
+    }
+
+    request_win = *(Window *) data;
+    portal = XCreateSimpleWindow (dpy, DefaultRootWindow (dpy),
+				  -100, -100, 10, 10, 0, 0, 0);
+    XSelectInput (dpy, portal, PropertyChangeMask);
+
+    eval_fun = net_server_eval;
+    close_fun = net_server_close;
+
+    return 0;
+}
+
+
+/* unix domain socket server */
+
+#ifdef HAVE_UNIX
+
+int socket_fd = -1;
+
+static u_long
+unix_server_eval (char *form)
+{
+    /* Protocol is; >req_eval:1, >FORM-LEN:4, >FORM:?, <RES-LEN:4, <RES:?
+       in the local byte-order. */
+    u_char req = !opt_quiet ? req_eval : req_eval_async;
+    u_long len = strlen(form);
+    char *result;
+
+    if(write(socket_fd, &req, 1) != 1
+       || write(socket_fd, &len, sizeof(u_long)) != sizeof(u_long)
+       || write(socket_fd, form, len) != len
+       || (req != req_eval_async
+	   && read(socket_fd, &len, sizeof(u_long)) != sizeof(u_long)))
+    {
+	perror("eval_req");
+	return 10;
+    }
+    if(req != req_eval_async)
+    {
+	if(len > 0)
+	{
+	    result = malloc(len);
+	    if(result == 0 || read(socket_fd, result, len) != len)
+	    {
+		perror("eval_req");
+		return 10;
+	    }
+	    fwrite (result, len, 1, stdout);
+	    fputc ('\n', stdout);
+	}
+    }
+    return 0;
+}
+
+static void
+unix_server_close (void)
+{
+    close(socket_fd);
+}
+
+/* returns 0 if ok, <0 if error, >0 if server doesn't exist */
+static int
+unix_server_init (char *display)
+{
+    struct passwd *pwd = getpwuid(getuid());
+    if(pwd && pwd->pw_dir)
+    {
+	struct sockaddr_un addr;
+	char *end;
+	strcpy(addr.sun_path, pwd->pw_dir);
+	end = addr.sun_path + strlen(addr.sun_path);
+	if(end[-1] != '/')
+	    *end++ = '/';
+	sprintf(end, SAWMILL_SOCK_NAME, display);
+	addr.sun_family = AF_UNIX;
+
+	if(access(addr.sun_path, F_OK) != 0)
+	    return 1;
+
+	socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
+	if(socket_fd >= 0)
+	{
+	    if(connect(socket_fd, (struct sockaddr *)&addr,
+		       sizeof(addr.sun_family) + strlen(addr.sun_path)) == 0)
+	    {
+		eval_fun = unix_server_eval;
+		close_fun = unix_server_close;
+		return 0;
+	    }
+	    else
+		return 1;
+	}
+	else
+	    perror ("socket");
+    }
+    else
+	perror ("getpwuid");
+    return -1;
+}
+
+#endif /* HAVE_UNIX */
+
+
+
+static void
 usage(char *prog_name)
 {
     fprintf(stderr, "usage: %s OPTIONS...\n\n\
 where OPTIONS are any of:\n\n\
 	-display X	Connect to the window manager on display X\n\
-        -w              Don't wait for server if not already running,\n\
-                         return with exit code 1\n\
 	-q		Be quiet (perform commands asynchronously)\n\
 	-f FUNCTION	Call Lisp function FUNCTION on the server\n\
 	-c COMMAND	Call the interactive Lisp function COMMAND\n\
@@ -115,11 +351,6 @@ main(int argc, char *argv[])
     char *display = 0;
     long result = 0;
     int i;
-    Atom type;
-    int format;
-    u_long bytes_after, nitems;
-    u_char *data;
-    int done_message = 0;
 
     argc--; argv++;
 
@@ -127,8 +358,6 @@ main(int argc, char *argv[])
     {
 	if (strcmp ("-display", argv[i]) == 0 && i + 1 < argc)
 	    display = argv[i+1];
-	if (strcmp ("-w", argv[i]) == 0)
-	    opt_nowait = 1;
 	else if (strcmp ("-?", argv[i]) == 0 || strcmp ("-h", argv[i]) == 0)
 	{
 	    usage (prog_name);
@@ -136,44 +365,26 @@ main(int argc, char *argv[])
 	}
     }
 
-    dpy = XOpenDisplay (display);
-    if (dpy == 0)
+    if (display == 0)
+	display = getenv ("DISPLAY");
+    if (display == 0)
     {
-	fprintf (stderr, "can't open display: `%s'\n", display ? display : "");
+	fprintf (stderr, "no display specified\n");
 	return 5;
     }
 
-    xa_sawmill_request = XInternAtom (dpy, "_SAWMILL_REQUEST", False);
-    xa_sawmill_request_win = XInternAtom (dpy, "_SAWMILL_REQUEST_WIN", False);
+    display = canonical_display (display);
 
-again:
-    if (XGetWindowProperty (dpy, DefaultRootWindow (dpy),
-			    xa_sawmill_request_win, 0, 1, False,
-			    XA_CARDINAL, &type, &format, &nitems,
-			    &bytes_after, &data) != Success
-        || type != XA_CARDINAL || format != 32 || nitems != 1)
+#ifdef HAVE_UNIX
+    i = unix_server_init (display);
+    if (i > 0)
+#endif
+	i = net_server_init (display);
+    if (i != 0)
     {
-	if (!opt_nowait)
-	{
-	    if (!done_message)
-	    {
-		fprintf(stderr, "server not running, waiting...\n");
-		done_message = 1;
-	    }
-	    sleep (1);
-	    goto again;
-	}
-	else
-	{
-	    fprintf(stderr, "server not running\n");
-	    return 5;
-	}
+	fprintf (stderr, "can't connect to display: %s\n", display);
+	return 10;
     }
-
-    request_win = *(Window *) data;
-    portal = XCreateSimpleWindow (dpy, DefaultRootWindow (dpy),
-				  -100, -100, 10, 10, 0, 0, 0);
-    XSelectInput (dpy, portal, PropertyChangeMask);
 
     while(result == 0 && argc > 0)
     {
@@ -204,7 +415,7 @@ again:
 		buf[0] = '(';
 		strcpy(buf + 1, argv[1]);
 		strcat(buf, ")");
-		result = eval_lisp_form(buf);
+		result = (*eval_fun) (buf);
 		argc--; argv++;
 		break;
 
@@ -214,14 +425,14 @@ again:
 		strcpy(buf, "(call-command '");
 		strcat(buf, argv[1]);
 		strcat(buf, ")");
-		result = eval_lisp_form(buf);
+		result = (*eval_fun) (buf);
 		argc--; argv++;
 		break;
 
 	    case 'e':			/* -e FORM */
 		if(argc < 2)
 		    goto opt_error;
-		result = eval_lisp_form(argv[1]);
+		result = (*eval_fun) (argv[1]);
 		argc--; argv++;
 		break;
 
@@ -232,7 +443,7 @@ again:
 		    if(fgets(buf, sizeof(buf), stdin) == 0)
 			result = 10;
 		    else
-			result = eval_lisp_form(buf);
+			result = (*eval_fun) (buf);
 		} while(result == 0);
 		argc--; argv++;
 		break;
@@ -271,7 +482,7 @@ again:
 		    {
 			input_buf[bufuse] = ')';
 			input_buf[bufuse+1] = 0;
-			result = eval_lisp_form(input_buf);
+			result = (*eval_fun) (input_buf);
 			free(input_buf);
 		    }
 		}
@@ -287,7 +498,7 @@ again:
 	}
     }
 
-    XDestroyWindow (dpy, portal);
-    XCloseDisplay (dpy);
+    (*close_fun) ();
+
     return result;
 }
