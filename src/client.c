@@ -77,7 +77,7 @@ completion_generator (char *word, int state)
 	last_buffer = client_eval (form, 0, &len);
 	if (last_buffer != 0)
 	{
-	    if (strcmp (last_buffer, "nil") == 0)
+	    if (len == 3 && memcmp (last_buffer, "nil", 3) == 0)
 	    {
 		free (last_buffer);
 		last_buffer = 0;
