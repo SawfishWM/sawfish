@@ -272,12 +272,13 @@
   (when (and delete-workspaces-when-empty
 	     (workspace-empty-p space))
     ;; workspace is now empty
-    (ws-remove-workspace space)
-    (ws-normalize-indices)
-    (let
-	((limits (workspace-limits)))
-      (when (and (= current-workspace (cdr limits))
-		 (/= (car limits) (cdr limits)))
+    (let*
+	((limits (workspace-limits))
+	 (need-to-move (and (= current-workspace (cdr limits))
+			    (/= current-workspace (car limits)))))
+      (ws-remove-workspace space)
+      (ws-normalize-indices)
+      (when need-to-move
 	(select-workspace (1- current-workspace))))))
 
 ;; called when window W is destroyed
@@ -322,7 +323,8 @@
        (with-server-grabbed
 	(mapc (lambda (w)
 		(when (and (window-get w 'workspace)
-			   (= (window-get w 'workspace) current-workspace))
+			   (= (window-get w 'workspace) current-workspace)
+			   (window-get w 'placed))
 		  (hide-window w)))
 	      (managed-windows))))
      (setq current-workspace space)
@@ -331,7 +333,8 @@
 	(mapc (lambda (w)
 		(when (and (window-get w 'workspace)
 			   (= (window-get w 'workspace) current-workspace)
-			   (not (window-get w 'iconified)))
+			   (not (window-get w 'iconified))
+			   (window-get w 'placed))
 		  (show-window w)))
 	      (managed-windows)))
        (unless (or dont-focus (eq focus-mode 'enter-exit))
