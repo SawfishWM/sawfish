@@ -24,7 +24,7 @@
 ;; Suppress annoying compiler warnings
 (eval-when-compile (require 'timers))
 
-;;;###autoload (setq custom-required (cons 'menu custom-required))
+;;;###autoload (setq custom-required (cons 'menus custom-required))
 
 (defvar menu-program (expand-file-name "sawmill-menu" sawmill-exec-directory)
   "Location of the program implementing sawmill's menu interface.")
