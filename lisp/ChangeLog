@@ -1,3 +1,24 @@
+1999-09-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome.jl (gnome-client-message-handler): only handle
+	WIN_STATE and WIN_LAYER if we actually have a window object to
+	act on
+
+	* smart-placement.jl (place-window-best-fit): first attempt at
+	best-fit placement (cost function is still not right)
+	* place-window.jl: added best-fit option
+
+	* sawmill.jl: move setting a fallback frame style to outside
+	the condition-case
+
+	* x-cycle.jl: remove windows from stack when iconified
+
+	* workspace.jl (focus-windows-on-uniconify): new defcustom
+
+	* focus.jl (focus-click): since XAllowEvents () ignores passive
+	grabs when it replays events, manually search for a binding of
+	the focus-inducing click
+
 1999-09-19  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.7

@@ -32,29 +32,44 @@ Outstanding bugs
   ! don't allow windows to be totally moved out of the viewport (or
     give a method for bringing them back in)
 
-  ! Alt-Tab switching window refresh is sometimes slow, significantly
-    slower than raising via click-to-focus or autoraise. Odd enough, it
-    sometimes doesn't differ at all
-
   ! While moving or resizing, when you release button and move mouse
     out of frame very fast, frame remains in highlighted state
-
-  ! Uniconified window doesn't get focus immediately, you have to pick
-    it from sawmill-menu or via pager once again. Maybe this could fix
-    the no-way-to-ever-focus-uniconified-windows-with-click-to-focus
-    bug as a side effect
-
-    [ I think this is a feature, not a bug --jsh ]
-
-  ! replaying click-to-focus event only works to the client, not back
-    to sawmill if we regrab the button
 
   ! latency when starting menu subprocesses can be annoying (pointer
     events are handled unintuitively)
 
+  ! possible for first-fit to place windows off-screen?
+
 
 General tasks
 =============
+
+  + add capplet desktop entries to share/gnome/apps/Settings as well as
+    the control center tree
+
+  + code to read the gnome apps menu
+
+  + Ability to execute commands (like select-workspace:X) while
+    moving/resizing.
+
+    Could solve this by specifying a keymap to the
+    grab-pointer/grab-keyboard functions, then evaluate the other type
+    of events as normal
+
+    Would this introduce other problems..? What if the outer command
+    has the server grabbed (e.g. rubber-banding in progress)
+
+    Also, what protection is there against the user doing something
+    "foolish"? (like switching desktops while resizing a window)
+
+  + option to maximize with frame outside the root boundaries?
+
+  + option to disable moving/resizing in maximized state
+
+    Why? I think that the user should always be able to manipulate the
+    window if they wish to do so
+
+  + regexp to re-include windows when snapping?
 
   + tooltips in frame parts describing their keymaps
 
@@ -65,6 +80,9 @@ General tasks
 
   + when grabbing keymaps in windows grab in all subwindows of the
     client?
+
+    this is unfeasible: how do we know when new subwindows are added?
+    how do other wms handle this?
 
   + change edge snapping to use resistance instead of magnetism?
 
@@ -101,8 +119,7 @@ General tasks
 
   + Smart placement
 
-    I've done first-fit placement, now just need to think of a cost
-    function for best-fit placement..
+    How can the best-fit cost function be improved?
 
   + Handle window groups
 

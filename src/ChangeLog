@@ -1,3 +1,10 @@
+1999-09-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c (event_proxy_fun): deleted
+	(lookup_event_binding): new function, used by eval_input_event
+	and Flookup_event_binding, it finds the window to search in,
+	then calls lookup_binding
+
 1999-09-19  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.7
