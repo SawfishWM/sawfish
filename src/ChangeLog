@@ -1,3 +1,9 @@
+2000-06-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (Fwindow_size_hints): do some sanity checking of
+	the fields in the size hints structure (e.g. ignore negative
+	values)
+
 2000-06-06  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill.h: moved all Imlib code behind `#ifdef IMLIB'
