@@ -47,6 +47,8 @@
 	   sawfish.wm.util.compat)
      (set-binds))
 
+  (setq *user-structure* 'user)
+
   ;; frame-style loaded if user hasn't set their own
   (define fallback-frame-style 'microGUI)
 
