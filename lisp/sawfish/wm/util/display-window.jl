@@ -41,6 +41,7 @@
   (defcustom display-window:uniconify-to-current-workspace t
     "Windows uniconify to the current workspace when they are selected."
     :type boolean
+    :user-level expert
     :group (min-max iconify))
 
   (defcustom unshade-selected-windows nil
