@@ -45,7 +45,6 @@
 static int server_grabs;
 
 DEFSYM(root, "root");
-DEFSYM(fixed_position, "fixed-position");
 
 DEFUN("restack-windows", Frestack_windows, Srestack_windows,
       (repv list), rep_Subr1) /*
@@ -1078,58 +1077,6 @@ Note that newlines in TEXT are ignored. This may change in the future.
 }
 
 
-/* virtual areas */
-
-static u_long x_offset, y_offset;
-
-DEFUN("set-viewport", Fset_viewport, Sset_viewport,
-      (repv x_, repv y_), rep_Subr2) /*
-::doc:Sset-viewport::
-set-viewport X Y
-
-Defines the origin of the viewport into the virtual workspace as (X, Y).
-All windows without the `fixed-position' property are moved accordingly.
-::end:: */
-{
-    u_long x, y;
-    rep_DECLARE1(x_, rep_INTP);
-    rep_DECLARE2(y_, rep_INTP);
-    x = rep_INT(x_);
-    y = rep_INT(y_);
-
-    if (x != x_offset || y != y_offset)
-    {
-	Lisp_Window *w;
-	for (w = window_list; w != 0; w = w->next)
-	{
-	    if (w->id != 0
-		&& Fwindow_get (rep_VAL(w), Qfixed_position) == Qnil)
-	    {
-		w->attr.x = (w->attr.x + x_offset) - x;
-		w->attr.y = (w->attr.y + y_offset) - y;
-		XMoveWindow (dpy, w->reparented ? w->frame : w->id,
-			     w->attr.x, w->attr.y);
-		send_synthetic_configure (w);
-	    }
-	}
-	x_offset = x;
-	y_offset = y;
-    }
-    return Qt;
-}
-
-DEFUN("get-viewport", Fget_viewport, Sget_viewport, (void), rep_Subr0) /*
-::doc:Sget-viewport::
-get-viewport
-
-Return `(X . Y)' defining the current origin of the viewport into the
-virtual workspace.
-::end:: */
-{
-    return Fcons (rep_MAKE_INT(x_offset), rep_MAKE_INT(y_offset));
-}
-
-
 /* initialisation */
 
 void
@@ -1166,10 +1113,7 @@ functions_init (void)
     rep_ADD_SUBR(Sx_atom_name);
     rep_ADD_SUBR(Sgetpid);
     rep_ADD_SUBR(Sshow_message);
-    rep_ADD_SUBR(Sset_viewport);
-    rep_ADD_SUBR(Sget_viewport);
     rep_INTERN(root);
-    rep_INTERN(fixed_position);
 
     rep_mark_static (&message.text);
     rep_mark_static (&message.fg);
@@ -1182,6 +1126,4 @@ functions_kill (void)
 {
     if (message_win != 0)
 	XDestroyWindow (dpy, message_win);
-    if (x_offset != 0 || y_offset != 0)
-	Fset_viewport (rep_MAKE_INT(0), rep_MAKE_INT(0));
 }
