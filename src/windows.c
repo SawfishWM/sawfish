@@ -21,7 +21,6 @@
 
 #include "sawmill.h"
 #include <X11/extensions/shape.h>
-#include <X11/Xproto.h>
 
 Lisp_Window *window_list;
 int window_type;

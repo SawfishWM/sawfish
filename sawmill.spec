@@ -39,5 +39,5 @@ make install
 %{_prefix}/bin/sawmill-menu
 %{_prefix}/bin/sawmill-ui
 %{_prefix}/share/sawmill/%{ver}
-%{_prefix}/libexec/sawmill/%{ver}
+%{_prefix}/libexec/sawmill/%{ver}/%{_host}
 %{_prefix}/share/gnome/wm-properties/Sawmill.desktop
