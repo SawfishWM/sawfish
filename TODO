@@ -16,9 +16,9 @@ Before next release
 Outstanding bugs
 ================
 
-  ! :user-level attribute isn't implemented in command list
-
   + put together a (good) default configuration; include a new theme?
+
+  ! sawfish-themer preview broken (race condition?)
 
   ! click-to-focus mode; cycle from a shade-hovered window to a normal
     window, hideous flicker ensues
@@ -55,10 +55,6 @@ Outstanding bugs
     little weak), my whole sawfish configuration is erased and replaced
     with the default settings. Btw, the 'new' system time becomes
     01/01/1977 after the reset. [gnome #14623]
-
-  ! raise-groups-on-focus is commented out
-
-    should raise transient groups, but this may have the same problem..?
 
   ! running multiple instances of the wm loses
 
@@ -146,6 +142,9 @@ Window manager tasks
   ! when drawing into frame parts manually, no way to set shape
 
   ! should save increment-relative dimensions (not pixel relative)
+
+  + commands to forward buttons 4&5 (mouse wheel) to the focused
+    window. My first attempt at this doesn't work..
 
   + make command list hierarchical?
 
