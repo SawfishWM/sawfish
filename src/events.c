@@ -477,7 +477,7 @@ property_notify (XEvent *ev)
     if (w != 0 && ev->xproperty.window == w->id)
     {
 	bool need_refresh = FALSE, changed = TRUE;
-	repv changed_states = Qnil;
+	repv changed_states = Qnil, prop;
 	rep_GC_root gc_w, gc_changed_states;
 
 	switch (ev->xproperty.atom)
@@ -595,6 +595,9 @@ property_notify (XEvent *ev)
 	rep_PUSHGC (gc_w, w_);
 	rep_PUSHGC (gc_changed_states, changed_states);
 
+	prop = x_atom_symbol (ev->xproperty.atom);
+	property_cache_invalidate (w_, prop);
+
 	if (need_refresh && w->reparented
 	    && w->property_change != 0 && !WINDOW_IS_GONE_P (w))
 	{
@@ -604,8 +607,7 @@ property_notify (XEvent *ev)
 	if (changed)
 	{
 	    Fcall_window_hook (Qproperty_notify_hook, rep_VAL(w),
-			       rep_list_2 (x_atom_symbol (ev->xproperty.atom),
-					   ev->xproperty.state
+			       rep_list_2 (prop, ev->xproperty.state
 					   == PropertyNewValue
 					   ? Qnew_value : Qdeleted), Qnil);
 	}
@@ -676,6 +678,7 @@ destroy_notify (XEvent *ev)
     if (w == 0 || ev->xdestroywindow.window != w->saved_id)
 	return;
     remove_window (w, Qt, Qnil);
+    property_cache_invalidate_window (rep_VAL (w));
     emit_pending_destroys ();
 }
 

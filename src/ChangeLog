@@ -1,3 +1,22 @@
+2002-09-28  John Harper  <jsh@unfactored.org>
+
+	Some performance optimizations, especially avoiding server
+	round trips:
+
+	* property-cache.c: new file, cache results of
+	[gs]et-x-property (doesn't do [gs]et-x-text-property yet)
+
+	* functions.c, frames.c, events.c: use/maintain the property
+	cache
+
+	* frames.c (apply_mask, configure_frame_part): turn off
+	graphics exposure events in GCs
+	* functions.c (refresh_message_window): same
+	* images.c (paste_image_to_drawable): same
+
+	* frames.c (set_frame_part_bg): don't reshape frames every time
+	we redraw the background, too expensive
+
 2002-09-21  John Harper  <jsh@unfactored.org>
 
 	* stacking-list.c: replaced assert () instances by non-terminal
