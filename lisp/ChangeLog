@@ -1,3 +1,27 @@
+2002-03-09  John Harper  <jsh@pixelslut.com>
+
+	* sawfish/wm/state/wm-spec.jl (supported-atoms): updated to
+	include all atoms we recognize, not just top-level things
+
+	* sawfish/wm/state/maximize.jl (window-maximized-fullscreen-p,
+	maximize-window-fullscreen, maximize-window-fullscreen-toggle):
+	support a new type of maximization, called `fullscreen'. In
+	this mode the window's borders are removed and it fills the
+	entire area of the head (even if it's size hints would dictate
+	otherwise)
+
+	* sawfish/wm/state/wm-spec.jl: support _NET_WM_STATE_FULLSCREEN
+
+	(the above two changes fix #73970)
+
+	* sawfish/wm/util/ping.jl: actually tested this code (Gtk+ 2
+	supports the protocol). Fixed some bugs. Don't use X server
+	timestamps as the unique id anymore (since they may not be
+	unique), use a unique sequence number instead
+
+	(ping-window): TIMEOUT-MSECS is now optional and defaults to
+	one second
+
 2002-03-03  John Harper  <jsh@pixelslut.com>
 
 	* sawfish/wm/placement/off-center.jl (workarea-for): replaced
