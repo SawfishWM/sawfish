@@ -1,3 +1,16 @@
+2000-12-18  John Harper  <jsh@eazel.com>
+
+	* keys.c (direct_modifiers): only substitute physical for
+	virtual modifiers if the physical modifiers actually exist.
+	Otherwise just preserve the virtual bits
+
+	(translate_event_to_x_button, translate_event_to_x_key): if
+	after translating modifiers, any virtual modifiers still exist,
+	don't accept the event
+
+	* keys.h (EV_VIRT_MOD_MASK): new definition, the bits
+	representing virtual (non X-native) modifiers
+
 2000-12-05  John Harper  <jsh@eazel.com>
 
 	* keys.c (lookup_event): reject events if they're button events

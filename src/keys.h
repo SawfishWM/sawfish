@@ -67,6 +67,7 @@ enum {
 
     EV_TYPE_MASK  = 0x000f0000,
     EV_MOD_MASK   = 0x0ff0ffff,
+    EV_VIRT_MOD_MASK = 0x0ff00000,
 };
 
 

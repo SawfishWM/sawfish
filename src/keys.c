@@ -110,16 +110,16 @@ static u_long
 direct_modifiers (u_long mods)
 {
     /* Do this first, since it may contain other indirect mods */
-    if (mods & EV_MOD_WM)
+    if (wm_mod != 0 && (mods & EV_MOD_WM))
 	mods = (mods & ~EV_MOD_WM) | wm_mod;
 
-    if (mods & EV_MOD_META)
+    if (meta_mod != 0 && (mods & EV_MOD_META))
 	mods = (mods & ~EV_MOD_META) | meta_mod;
-    if (mods & EV_MOD_ALT)
+    if (alt_mod != 0 && (mods & EV_MOD_ALT))
 	mods = (mods & ~EV_MOD_ALT) | alt_mod;
-    if (mods & EV_MOD_HYPER)
+    if (hyper_mod != 0 && (mods & EV_MOD_HYPER))
 	mods = (mods & ~EV_MOD_HYPER) | hyper_mod;
-    if (mods & EV_MOD_SUPER)
+    if (super_mod != 0 && (mods & EV_MOD_SUPER))
 	mods = (mods & ~EV_MOD_SUPER) | super_mod;
 
     return mods;
@@ -301,6 +301,9 @@ translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
 	if (s == EV_MOD_ANY)
 	    s = AnyModifier;
 
+	if ((s & EV_VIRT_MOD_MASK) != 0)
+	    return FALSE;
+
 	*state = s;
 	*keycode = k;
 	return TRUE;
@@ -338,9 +341,12 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 		s = direct_modifiers (mods & EV_MOD_MASK);
 		if (s == EV_MOD_ANY)
 		    s = AnyModifier;
-		*button = buttons[i].button;
-		*state = s;
-		return buttons[i].mask;
+		if ((s & EV_VIRT_MOD_MASK) == 0)
+		{
+		    *button = buttons[i].button;
+		    *state = s;
+		    return buttons[i].mask;
+		}
 	    }
 	}
 	/* no actual button specified. if mod_any is set, then just

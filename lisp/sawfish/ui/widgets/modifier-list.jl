@@ -47,6 +47,7 @@
 
   (define (validp x)
     (and (listp x)
+	 (not (null x))
 	 (let loop ((rest x))
 	   (cond ((null rest) t)
 		 ((not (memq (car rest) modifiers)) nil)
