@@ -40,6 +40,18 @@
   :range (0 . nil)
   :group tooltips)
 
+(defvar tooltips-displayed nil)
+
+(defun tooltips-cleanup ()
+  (when (in-hook-p 'pre-command-hook tooltips-cleanup)
+    (remove-hook 'pre-command-hook tooltips-cleanup))
+  (when tooltips-displayed
+    (display-message nil)
+    (setq tooltips-displayed nil))
+  (when tooltips-timer
+    (delete-timer tooltips-timer)
+    (setq tooltips-timer nil)))
+
 (defun tooltips-display (win class)
   (let
       ((text (make-string-output-stream))
@@ -59,33 +71,12 @@
     (setq text (get-output-stream-string text))
     (rplaca pos (pos-fn (car pos) (screen-width) 0))
     (rplacd pos (pos-fn (cdr pos) (screen-height) 16))
-    (when (grab-pointer win (frame-part-get win class 'cursor))
-      (unwind-protect
-	  (let
-	      ((override-keymap '(keymap))
-	       (unbound-key-hook
-		(list (lambda ()
-			(let*
-			    ((override-keymap nil)
-			     (ev (current-event))
-			     (cmd (lookup-event-binding ev))
-			     (name (event-name ev)))
-			  (display-message nil)
-			  (when cmd
-			    (call-command cmd))
-			  (when (string-match
-				 "Button\\d-(Click\\d|Move)$" name)
-			    ;; if this event is the start of a mouse
-			    ;; click sequence, _don't_ ungrab it!
-			    (setq need-ungrab nil))
-			  (throw 'tooltips-done t))))))
-	    (display-message text `((position . ,pos)
-				    (x-justify . left)
-				    (spacing . 2)))
-	    (catch 'tooltips-done
-	      (recursive-edit)))
-	(when need-ungrab
-	  (ungrab-pointer))))))
+    (display-message text `((position . ,pos)
+			    (x-justify . left)
+			    (spacing . 2)))
+    (setq tooltips-displayed t)
+    (unless (in-hook-p 'pre-command-hook tooltips-cleanup)
+      (add-hook 'pre-command-hook tooltips-cleanup))))
 
 (defun tooltips-fp-enter (win class)
   (when tooltips-enabled
@@ -100,10 +91,5 @@
 				       (/ tooltips-delay 1000)
 				       (mod tooltips-delay 1000))))))
 
-(defun tooltips-fp-leave (win class)
-  (when tooltips-timer
-    (delete-timer tooltips-timer)
-    (setq tooltips-timer nil)))
-
 (add-hook 'enter-frame-part-hook tooltips-fp-enter)
-(add-hook 'leave-frame-part-hook tooltips-fp-leave)
+(add-hook 'leave-frame-part-hook tooltips-cleanup)
