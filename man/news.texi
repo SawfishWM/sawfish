@@ -11,17 +11,15 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item Added stack-based window cycling, bound to @kbd{M-TAB} by
+default. Hold @key{Meta}, keep pressing @key{TAB} until the correct
+window is reached, then let go of @key{Meta}.
+
 @item Completed first stage of workspace rewrite---shouldn't go
 ballistic when windows are removed anymore
 
 @item Added @code{override-frame-part-classes} variable---allows all
 frame properties to be overridden on a per-class basis
-
-@item Fix bug when handling shaped frame parts---it was possible to go
-into a long enter-, leave-notify loop when the old shape was cleared
-
-@item Fix bug where opaque resizing with snap-to-edges on moved the
-window as well as resizing it
 
 @item Click-to-focus now accepts any button and any modifiers
 
@@ -29,6 +27,23 @@ window as well as resizing it
 
 @item Added an @code{auto-window-type-alist} variable mapping window
 names to border types
+
+@item New variables @code{eval-modifier-events} and
+@code{eval-key-release-events} to allow catching these types of
+keyboard events, disabled by default
+
+@item Added functions for actively grabbing the keyboard
+
+@item Removed the long names of the keyboard modifiers, only the single
+character modifiers are left
+
+@item Fix bug when handling shaped frame parts---it was possible to go
+into a long enter-, leave-notify loop when the old shape was cleared
+
+@item Fix bug where opaque resizing with snap-to-edges on moved the
+window as well as resizing it
+
+@item Fix bug when raising the only managed window
 
 @end itemize
 

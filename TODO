@@ -154,6 +154,11 @@ General tasks
     add a new prefix `T' for text string, then use the original string
     as the rest of the key
 
+    This needs to be in rep really. Add a (gettext ID STRING) macro
+    that interprets to STRING. The compiler adds STRING to the doc file
+    under key ID, inserts code to fetch it back [how can we lose the
+    annoying ID parameter?]
+
     Also, what about the "%1$s" style printf formatting. rep's format
     function should be extended to handle this syntax
 
