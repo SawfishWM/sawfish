@@ -223,7 +223,7 @@ they inherit.")
 (mapc #'(lambda (type)
 	  (fset (intern (concat "set-frame:" (symbol-name type)))
 		`(lambda (w)
-		   (interactive "W")
+		   (interactive "%W")
 		   (set-frame-for-window w t ',type))))
       '(default transient shaped shaped-transient unframed))
 

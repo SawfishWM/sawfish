@@ -295,13 +295,13 @@
 ;;;###autoload
 (defun move-window-interactively (w)
   "Move the window interactively using the mouse."
-  (interactive "W")
+  (interactive "%W")
   (move-resize-window w 'move))
 
 ;;;###autoload
 (defun resize-window-interactively (w)
   "Resize the window interactively using the mouse."
-  (interactive "W")
+  (interactive "%W")
   (move-resize-window w 'resize))
 
 ;;;###autoload

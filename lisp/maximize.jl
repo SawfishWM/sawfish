@@ -46,7 +46,7 @@
 ;;;###autoload
 (defun maximize-window (w &optional direction)
   "Maximize the dimensions of the window."
-  (interactive "W")
+  (interactive "%W")
   (let
       ((coords (window-position w))
        (dims (window-dimensions w))
@@ -68,7 +68,7 @@
 ;;;###autoload
 (defun unmaximize-window (w &optional direction)
   "Restore the dimensions of the window to its original, unmaximized, state."
-  (interactive "W")
+  (interactive "%W")
   (let
       ((geom (window-get w 'unmaximized-geometry))
        (coords (window-position w))
@@ -93,19 +93,19 @@
 ;;;###autoload
 (defun maximize-window-vertically (w)
   "Maximize the vertical dimension of the window."
-  (interactive "W")
+  (interactive "%W")
   (maximize-window w 'vertical))
 
 ;;;###autoload
 (defun maximize-window-horizontally (w)
   "Maximize the horizontal dimension of the window."
-  (interactive "W")
+  (interactive "%W")
   (maximize-window w 'horizontal))
 
 ;;;###autoload
 (defun maximize-window-toggle (w &optional direction)
   "Toggle the state of the window between maximized and unmaximized."
-  (interactive "W")
+  (interactive "%W")
   (if (window-maximized-p w)
       (unmaximize-window w direction)
     (maximize-window w direction)))
@@ -114,14 +114,14 @@
 (defun maximize-window-vertically-toggle (w)
   "Toggle the state of the window between vertically maximized and
 unmaximized."
-  (interactive "W")
+  (interactive "%W")
   (maximize-window-toggle w 'vertical))
 
 ;;;###autoload
 (defun maximize-window-horizontally-toggle (w)
   "Toggle the state of the window between horizontally maximized and
 unmaximized."
-  (interactive "W")
+  (interactive "%W")
   (maximize-window-toggle w 'horizontal))
 
 

@@ -378,7 +378,7 @@
 (defun send-to-next-workspace (window)
   "Move the window to the next workspace. If no next workspace exists, one
 will be created."
-  (interactive "f")
+  (interactive "%f")
   (let
       ((space (window-get window 'workspace)))
     (when space
@@ -393,7 +393,7 @@ will be created."
 (defun send-to-previous-workspace (window)
   "Move the window to the previous workspace. If no such workspace exists, one
 will be created."
-  (interactive "f")
+  (interactive "%f")
   (let
       ((space (window-get window 'workspace)))
     (when space
@@ -483,7 +483,7 @@ previous workspace."
 
 (defun iconify-window (w)
   "Iconify the window."
-  (interactive "f")
+  (interactive "%f")
   (unless (window-get w 'iconified)
     (window-put w 'iconified t)
     (when (window-visible-p w)
@@ -493,7 +493,7 @@ previous workspace."
 
 (defun uniconify-window (w)
   "Return the window from its iconified state."
-  (interactive "f")
+  (interactive "%f")
   (when (window-get w 'iconified)
     (window-put w 'iconified nil)
     (cond ((or (not (window-get w 'workspace))
@@ -509,7 +509,7 @@ previous workspace."
 
 (defun display-window (w)
   "Display the workspace containing the window W, then focus on W."
-  (interactive "f")
+  (interactive "%f")
   (when w
     (if (and (window-get w 'iconified)
 	     (or uniconify-to-current-workspace
@@ -531,7 +531,7 @@ previous workspace."
 (defun toggle-window-sticky (w)
   "Toggle the `stickiness' of the window--whether or not it is a member of
 all workspaces."
-  (interactive "f")
+  (interactive "%f")
   (if (window-get w 'sticky)
       (progn
 	(window-put w 'sticky nil)

@@ -37,7 +37,7 @@
     "Any-Click1" 'focus-click))
 
 (defun focus-click (w)
-  (interactive "w")
+  (interactive "%w")
   (set-input-focus w)
   (window-put w 'keymap window-keymap)
   (when (or (window-get w 'focus-proxy-click) focus-proxy-click)

@@ -112,7 +112,7 @@ stacking level to place them in.")
 
 (defun lower-window (w)
   "Lower the window to the bottom of its stacking level."
-  (interactive "W")
+  (interactive "%W")
   (let
       ((order (stacking-order))
        (depth (window-get w 'depth))
@@ -126,7 +126,7 @@ stacking level to place them in.")
 
 (defun raise-window (w)
   "Raise the window to the top of its stacking level."
-  (interactive "W")
+  (interactive "%W")
   (let
       ((order (stacking-order))
        (depth (window-get w 'depth))
@@ -145,19 +145,19 @@ stacking level to place them in.")
 (defun raise-lower-window (w)
   "If the window is the highest window in its stacking level, lower it to the
 bottom of this level, otherwise raise it to the top of its level."
-  (interactive "W")
+  (interactive "%W")
   (if (window-on-top-p w)
       (lower-window w)
     (raise-window w)))
 
 (defun lower-window-depth (w)
   "Put the window in the stacking level beneath its current level."
-  (interactive "W")
+  (interactive "%W")
   (set-window-depth w (1- (window-get w 'depth))))
 
 (defun raise-window-depth (w)
   "Put the window in the stacking level above its current level."
-  (interactive "W")
+  (interactive "%W")
   (set-window-depth w (1+ (window-get w 'depth))))
 
 (add-hook 'add-window-hook 'stacking-add-window t)
