@@ -677,7 +677,7 @@ enter_notify (XEvent *ev)
 	if (tem && rep_CONSP(tem) && w->id != 0)
 	{
 	    Fcall_window_hook (Qenter_frame_part_hook, rep_VAL(w),
-			       Fcons (rep_CDR(tem), Qnil), Qnil);
+			       Fcons (rep_VAL(fp), Qnil), Qnil);
 	}
     }
     else
@@ -716,7 +716,7 @@ leave_notify (XEvent *ev)
 	if (tem && rep_CONSP(tem) && w->id != 0)
 	{
 	    Fcall_window_hook (Qleave_frame_part_hook, rep_VAL(w),
-			       Fcons (rep_CDR(tem), Qnil), Qnil);
+			       Fcons (rep_VAL(fp), Qnil), Qnil);
 	}
     }
     else
@@ -1225,32 +1225,7 @@ DEFUN("x-events-queued", Fx_events_queued, Sx_events_queued, (void), rep_Subr0)
 DEFUN("clicked-frame-part", Fclicked_frame_part,
       Sclicked_frame_part, (void), rep_Subr0)
 {
-    return (clicked_frame_part != 0) ? clicked_frame_part->alist : Qnil;
-}
-
-DEFUN("clicked-frame-part-offset", Fclicked_frame_part_offset,
-      Sclicked_frame_part_offset, (void), rep_Subr0)
-{
-    if (clicked_frame_part != 0)
-    {
-	struct frame_part *fp = clicked_frame_part;
-	return Fcons (rep_MAKE_INT(fp->x - fp->win->frame_x),
-		      rep_MAKE_INT(fp->y - fp->win->frame_y));
-    }
-    else
-	return Qnil;
-}
-
-DEFUN("clicked-frame-part-dimensions", Fclicked_frame_part_dimensions,
-      Sclicked_frame_part_dimensions, (void), rep_Subr0)
-{
-    if (clicked_frame_part != 0)
-    {
-	struct frame_part *fp = clicked_frame_part;
-	return Fcons (rep_MAKE_INT(fp->width), rep_MAKE_INT(fp->height));
-    }
-    else
-	return Qnil;
+    return (clicked_frame_part != 0) ? rep_VAL (clicked_frame_part) : Qnil;
 }
 
 
@@ -1363,8 +1338,6 @@ events_init (void)
     rep_ADD_SUBR(Sx_server_timestamp);
     rep_ADD_SUBR(Sx_events_queued);
     rep_ADD_SUBR(Sclicked_frame_part);
-    rep_ADD_SUBR(Sclicked_frame_part_offset);
-    rep_ADD_SUBR(Sclicked_frame_part_dimensions);
 
     rep_INTERN_SPECIAL(visibility_notify_hook);
     rep_INTERN_SPECIAL(destroy_notify_hook);
