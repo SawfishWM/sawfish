@@ -21,6 +21,23 @@
 
 (provide 'frames)
 
+;; Commentary:
+
+;; This sets the following window properties:
+
+;;	frame-style		If set, the _user-chosen_ frame style
+;;	current-frame-style	The current frame style
+;;	type			The notional window type, defining
+;;				 which parts of the frame are included
+
+;; The different window types are:
+
+;;	default			title bar and border
+;;	transient		border only
+;;	shaped			title-bar only
+;;	shaped-transient	border-like title-bar only
+;;	unframed		no frame at all
+
 (put 'frame-style 'custom-set 'custom-set-frame-style)
 (put 'frame-style 'custom-widget 'custom-make-frame-style-widget)
 
@@ -53,6 +70,9 @@
 (defvar frame-styles nil
   "List of (NAME . FUNCTION) defining all loaded frame styles.")
 
+(defvar auto-frame-style-alist nil
+  "List of (REGEXP . STYLE) associating window names with frame styles.")
+
 ;; used when decorate-transients is non-nil, map transient window
 ;; types to type to pass to frame style function
 (defvar transient-normal-frame-alist '((transient . default)
@@ -70,27 +90,48 @@
     (unless default-frame-style
       (setq default-frame-style name))))
 
-(defun set-frame-style (name)
+(defun check-frame-availability (name)
   (unless (assq name frame-styles)
     (load-frame-style name)
-    (or (assq name frame-styles) (error "No such frame style: %s" name)))
+    (or (assq name frame-styles) (error "No such frame style: %s" name))))
+
+(defun set-frame-style (name)
+  (check-frame-availability name)
   (setq default-frame-style name)
   (when always-update-frames
     (reframe-all-windows)))
 
+(defun set-window-frame-style (w style &optional type from-user)
+  (let
+      (tem)
+    (check-frame-availability style)
+    (unless type
+      (setq type (window-type w))
+      (when (and decorate-transients (window-transient-p w)
+		 (setq tem (cdr (assq type transient-normal-frame-alist))))
+	(setq type tem)))
+    (window-put w 'type type)
+    (window-put w 'current-frame-style style)
+    (when from-user
+      (window-put w 'frame-style style))      
+    (setq fun (cdr (assq style frame-styles)))
+    (set-window-frame w (or (funcall fun w type) default-frame))))
+
 (defun set-frame-for-window (w &optional override type)
   (when (or override (not (window-frame w)))
     (let*
-	((style (or (window-get w 'frame-style) default-frame-style))
+	((style (window-get w 'frame-style))
 	 fun tem)
-      (unless type
-	(setq type (window-type w))
-	(when (and decorate-transients (window-transient-p w)
-		   (setq tem (cdr (assq type transient-normal-frame-alist))))
-	  (setq type tem)))
-      (window-put w 'type type)
-      (setq fun (cdr (assq style frame-styles)))
-      (set-window-frame w (or (funcall fun w type) default-frame)))))
+      (unless style
+	(setq style (cdr (assoc-regexp
+			  (window-name w) auto-frame-style-alist)))
+	(if style
+	    (progn
+	      (unless (assq style frame-styles)
+		(load-frame-style style))
+	      (window-put w 'frame-style style))
+	  (setq style default-frame-style)))
+      (set-window-frame-style w style type))))
 
 (add-hook 'add-window-hook 'set-frame-for-window t)
 
@@ -103,14 +144,6 @@
 
 
 ;; kludge different window decors by modifying the assumed window type
-
-;; The different window types are:
-
-;;	default			title bar and border
-;;	transient		border only
-;;	shaped			title-bar only
-;;	shaped-transient	border-like title-bar only
-;;	unframed		no frame at all
 
 (defun window-type (w)
   (or (window-get w 'type)
@@ -220,3 +253,12 @@
 		      (directory-files dir))))
 	  theme-load-path)
     (mapcar 'intern list)))
+
+(defun frame-style-menu ()
+  (let
+      ((styles (find-all-frame-styles)))
+    (mapcar #'(lambda (s)
+		(list (symbol-name s)
+		      `(lambda ()
+			 (set-window-frame-style (input-focus) ',s nil t))))
+	    styles)))
