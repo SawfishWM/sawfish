@@ -85,15 +85,12 @@
   `(> (- (min ,end (nth 2 ,edge)) (max ,start (nth 1 ,edge))) 0))
 
 (defun maximize-avoided-windows ()
-  (let
-      ((windows (managed-windows)))
-    (if maximize-avoided-windows-re
-	(delete-if-not #'(lambda (w)
-			   (or (window-get w 'maximize-avoid)
-			       (string-match
-				maximize-avoided-windows-re (window-name w))))
-		   windows)
-      windows)))
+  (and maximize-avoided-windows-re
+       (delete-if-not #'(lambda (w)
+			  (or (window-get w 'maximize-avoid)
+			      (string-match
+			       maximize-avoided-windows-re (window-name w))))
+		      (managed-windows))))
 
 (defun maximize-expand-edges (start end min max perp-1 perp-2 edges)
   (mapc #'(lambda (edge)
