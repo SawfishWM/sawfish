@@ -26,7 +26,9 @@ top_srcdir=@top_srcdir@
 # also in themes/Makefile.in
 sawmill_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/libgradient.la \
 		../src/sawmill --batch --no-rc
-COMPILE_ENV = SAWMILLLISPDIR=. SAWMILLDOCFILE=../DOC
+COMPILE_ENV = SAWMILLLISPDIR=. \
+	      SAWMILLEXECDIR=$(top_builddir)/src/.libs \
+	      SAWMILLDOCFILE=../DOC
 
 INSTALL_FILES := *.jl *.jlc
 

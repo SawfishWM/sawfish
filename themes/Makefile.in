@@ -29,7 +29,9 @@ themedir := ${sawmilldir}/${version}/themes
 # also in lisp/Makefile.in
 sawmill_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/libgradient.la \
 		../src/sawmill --batch --no-rc
-COMPILE_ENV = SAWMILLLISPDIR=../lisp SAWMILLDOCFILE=../DOC
+COMPILE_ENV = SAWMILLLISPDIR=../lisp \
+	      SAWMILLEXECDIR=$(top_builddir)/src/.libs \
+	      SAWMILLDOCFILE=../DOC
 
 THEMES := absolute-e brushed-metal gradient gtk microGUI mono simple smaker
 
