@@ -607,6 +607,7 @@ refresh_frame_part (struct frame_part *fp)
 	set_frame_part_bg (fp);
 	if (w->id != 0)
 	    set_frame_part_fg (fp);
+	fp->pending_refresh = 0;
     }
     else
 	fp->pending_refresh = 1;
@@ -670,8 +671,12 @@ frame_part_exposer (XExposeEvent *ev, struct frame_part *fp)
 {
     if (ev->count == 0)
     {
+	/* expose events override the drawing mutex.. */
+	bool old_mutex = frame_draw_mutex;
+	frame_draw_mutex = FALSE;
 	fp->drawn.bg = rep_NULL;
 	refresh_frame_part (fp);
+	frame_draw_mutex = old_mutex;
     }
 }
 
@@ -1378,10 +1383,7 @@ set to nil any pending redraws will take place.
 		for (fp = w->frame_parts; fp != 0; fp = fp->next)
 		{
 		    if (fp->pending_refresh)
-		    {
 			refresh_frame_part (fp);
-			fp->pending_refresh = 0;
-		    }
 		}
 	    }
 	}
