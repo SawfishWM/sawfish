@@ -88,6 +88,16 @@
   :group cycle
   :type boolean)
 
+(defcustom cycle-warp-pointer t
+  "Warp the mouse pointer to windows as they're temporarily selected."
+  :group cycle
+  :type boolean)
+
+(defcustom cycle-focus-windows t
+  "Focus windows when they're temporarily selected during cycling."
+  :group cycle
+  :type boolean)
+
 
 ;; variables
 
@@ -178,13 +188,13 @@
       (when cycle-raise-windows
 	(setq x-cycle-stacking (stacking-order))
 	(raise-window win))
-      (when warp-to-selected-windows
+      (when cycle-warp-pointer
 	(warp-cursor-to-window win))
       (when cycle-show-window-names
 	(show-message (concat (and (window-get win 'iconified) ?[)
 			      (window-name win)
 			      (and (window-get win 'iconified) ?]))))
-      (when (window-wants-input-p win)
+      (when (and cycle-focus-windows (window-wants-input-p win))
 	(set-input-focus win)))))
 
 (defun x-cycle-exit ()
