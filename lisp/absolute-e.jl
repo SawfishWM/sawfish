@@ -1,5 +1,5 @@
 ;; absolute-e.jl
-;; $Id: absolute-e.jl,v 1.2 1999/07/25 14:42:37 john Exp $
+;; $Id: absolute-e.jl,v 1.3 1999/07/26 20:45:01 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -141,6 +141,49 @@
     (bottom-edge . -4)
     (height . 4))))
 
+(defvar absolute-e-shaped-frame (make-frame "absolute-e-shaped"))
+
+(set-frame-generator absolute-e-shaped-frame
+ `(;; iconify button
+   ((background . ,absolute-e-bar-images)
+    (left-edge . 0)
+    (width . 16)
+    (top-edge . -16)
+    (height . 16)
+    (keymap . menu-button-keymap))
+   ;; title bar
+   ((background . ,absolute-e-bar-images)
+    (foreground . "white")
+    (text . window-name)
+    (x-justify . center)
+    (y-justify . center)
+    (left-edge . 16)
+    (width . absolute-e-title-width)
+    (top-edge . -16)
+    (keymap . title-keymap)
+    (cursor . hand2))
+   ;; rhs bit of title
+   ((background . ,absolute-e-bar-images)
+    (left-edge . (lambda (w)
+		   (+ (absolute-e-title-width w) 16)))
+    (right-edge . 0)
+    (top-edge . -4)
+    (height . 4)
+    (keymap . title-keymap)
+    (cursor . hand2))
+   ;; top-left corner
+   ((background . ,absolute-e-bar-images)
+    (left-edge . -4)
+    (width . 4)
+    (top-edge . -4)
+    (height . 4))
+   ;; top-right corner
+   ((background . ,absolute-e-bar-images)
+    (right-edge . -4)
+    (width . 4)
+    (top-edge . -4)
+    (height . 4))))
+
 (defvar absolute-e-transient-frame (make-frame "absolute-e-transient"))
 
 (set-frame-generator absolute-e-transient-frame
@@ -197,5 +240,31 @@
     (bottom-edge . -4)
     (height . 4))))
 
+(defvar absolute-e-shaped-transient-frame
+  (make-frame "absolute-e-shaped-transient"))
+
+(set-frame-generator absolute-e-shaped-transient-frame
+ `(((background . ,absolute-e-bar-images)
+    (left-edge . 0)
+    (right-edge . 0)
+    (top-edge . -4)
+    (height . 4)
+    (keymap . title-keymap)
+    (cursor . hand2))
+   ;; top-right corner
+   ((background . ,absolute-e-bar-images)
+    (right-edge . -4)
+    (width . 4)
+    (top-edge . -4)
+    (height . 4))
+   ;; top-left corner
+   ((background . ,absolute-e-bar-images)
+    (left-edge . -4)
+    (width . 4)
+    (top-edge . -4)
+    (height . 4))))
+
 (setq default-frame absolute-e-frame)
+(setq shaped-frame absolute-e-shaped-frame)
 (setq transient-frame absolute-e-transient-frame)
+(setq shaped-transient-frame absolute-e-shaped-transient-frame)
