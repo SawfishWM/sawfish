@@ -34,14 +34,14 @@
   (define (make-color-item changed-callback)
     (let* ((value default-color)
 	   (button (button-new-with-color value)))
-      (gtk-signal-connect
+      (g-signal-connect
        button "clicked"
        (lambda ()
 	 (let ((colorsel (gtk-color-selection-dialog-new (_ "Select color"))))
 	   (gtk-color-selection-set-color-interp
 	    (gtk-color-selection-dialog-colorsel colorsel)
 	    (gdk-color-parse-interp value))
-	   (gtk-signal-connect
+	   (g-signal-connect
 	    (gtk-color-selection-dialog-ok-button colorsel) "clicked"
 	    (lambda ()
 	      (let ((color (gtk-color-selection-get-color-interp
@@ -53,10 +53,10 @@
 		(set-button-color button value)
 		(call-callback changed-callback)
 		(gtk-widget-destroy colorsel))))
-	   (gtk-signal-connect
+	   (g-signal-connect
 	    (gtk-color-selection-dialog-cancel-button colorsel) "clicked"
 	    (lambda () (gtk-widget-destroy colorsel)))
-	   (gtk-signal-connect colorsel "delete_event"
+	   (g-signal-connect colorsel "delete_event"
 			       (lambda () (gtk-widget-destroy colorsel)))
 	   (gtk-widget-hide (gtk-color-selection-dialog-help-button colorsel))
 	   (gtk-widget-show colorsel)

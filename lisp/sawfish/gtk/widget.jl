@@ -196,7 +196,7 @@
 			 last (_ (or (cadar rest) (symbol-name (car rest)))))))
 	    (gtk-menu-shell-append menu button)
 	    (gtk-widget-show button)
-	    (gtk-signal-connect button "toggled"
+	    (g-signal-connect button "toggled"
 				(lambda (w)
 				  (when (gtk-check-menu-item-active w)
 				    (setq value (or (caar rest) (car rest)))
@@ -227,7 +227,7 @@
 	(gtk-combo-set-popdown-strings
 	 widget (cons "" (mapcar symbol-name options))))
       (when changed-callback
-	(gtk-signal-connect
+	(g-signal-connect
 	 (gtk-combo-entry widget)
 	 "changed" (make-signal-callback changed-callback)))
       (gtk-widget-show widget)
@@ -250,7 +250,7 @@
   (define (make-string-item changed-callback)
     (let ((widget (gtk-entry-new)))
       (when changed-callback
-	(gtk-signal-connect
+	(g-signal-connect
 	 widget "changed" (make-signal-callback changed-callback)))
       (gtk-widget-show widget)
       (lambda (op)
@@ -272,7 +272,7 @@
     (let ((widget (gtk-spin-button-new-with-range (or minimum 0)
 						  (or maximum 65535) 1)))
       (when changed-callback
-	(gtk-signal-connect
+	(g-signal-connect
 	 widget "changed" (make-signal-callback changed-callback)))
       (gtk-widget-show widget)
       (lambda (op)
@@ -298,7 +298,7 @@
       (when label
 	(gtk-label-set-justify (car (gtk-container-get-children widget)) 'left))
       (when changed-callback
-	(gtk-signal-connect
+	(g-signal-connect
 	 widget "toggled" (make-signal-callback changed-callback)))
       (gtk-widget-show widget)
       (lambda (op)
@@ -346,7 +346,7 @@
 	      (refresh-item))))
       (do ((i 0 (1+ i)))
 	  ((= i (length items)))
-	(gtk-signal-connect (nth i checks) "toggled" (lambda ()
+	(g-signal-connect (nth i checks) "toggled" (lambda ()
 						       (toggle-fun i)))
 	(gtk-box-pack-start box (nth i hboxes))
 	(gtk-box-pack-start (nth i hboxes) (nth i checks))
@@ -453,7 +453,7 @@
       (setq item (make-widget item changed-callback))
       (gtk-box-pack-start box check)
       (gtk-box-pack-start box (widget-gtk-widget item))
-      (gtk-signal-connect
+      (g-signal-connect
        check "toggled"
        (lambda ()
 	 (set-widget-enabled item (gtk-toggle-button-get-active check))

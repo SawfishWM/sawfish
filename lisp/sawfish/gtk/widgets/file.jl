@@ -35,23 +35,23 @@
       (gtk-box-pack-start box entry)
       (gtk-box-pack-start box button)
       (when changed-callback
-	(gtk-signal-connect
+	(g-signal-connect
 	 entry "changed" (make-signal-callback changed-callback)))
-      (gtk-signal-connect
+      (g-signal-connect
        button "clicked"
        (lambda ()
 	 (let ((filesel (gtk-file-selection-new (_ "Select file"))))
 	   (gtk-file-selection-set-filename filesel (gtk-entry-get-text entry))
-	   (gtk-signal-connect
+	   (g-signal-connect
 	    (gtk-file-selection-ok-button filesel) "clicked"
 	    (lambda ()
 	      (gtk-entry-set-text
 	       entry (gtk-file-selection-get-filename filesel))
 	      (gtk-widget-destroy filesel)))
-	   (gtk-signal-connect
+	   (g-signal-connect
 	    (gtk-file-selection-cancel-button filesel) "clicked"
 	    (lambda () (gtk-widget-destroy filesel)))
-	   (gtk-signal-connect filesel "delete_event"
+	   (g-signal-connect filesel "delete_event"
 			       (lambda () (gtk-widget-destroy filesel)))
 	   (gtk-widget-show filesel)
 	   (gtk-grab-add filesel))))

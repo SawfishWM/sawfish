@@ -43,7 +43,7 @@
 	(widget-set widget initial-value))
       (let ((window (gtk-window-new 'toplevel)))
 	(gtk-container-add window (widget-gtk-widget widget))
-	(gtk-signal-connect window "delete_event"
+	(g-signal-connect window "delete_event"
 			    (lambda () (throw 'done t)))
 	(gtk-widget-show-all window)
 	(unwind-protect

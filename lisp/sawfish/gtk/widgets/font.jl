@@ -36,24 +36,24 @@
       (gtk-box-pack-start box entry t t)
       (gtk-box-pack-start box button)
       (when changed-callback
-	(gtk-signal-connect
+	(g-signal-connect
 	 entry "changed" (make-signal-callback changed-callback)))
-      (gtk-signal-connect
+      (g-signal-connect
        button "clicked"
        (lambda ()
 	 (let ((fontsel (gtk-font-selection-dialog-new (_ "Select font"))))
 	   (gtk-font-selection-dialog-set-font-name
 	    fontsel (gtk-entry-get-text entry))
-	   (gtk-signal-connect
+	   (g-signal-connect
 	    (gtk-font-selection-dialog-ok-button fontsel) "clicked"
 	    (lambda ()
 	      (gtk-entry-set-text
 	       entry (gtk-font-selection-dialog-get-font-name fontsel))
 	      (gtk-widget-destroy fontsel)))
-	   (gtk-signal-connect
+	   (g-signal-connect
 	    (gtk-font-selection-dialog-cancel-button fontsel) "clicked"
 	    (lambda () (gtk-widget-destroy fontsel)))
-	   (gtk-signal-connect fontsel "delete_event"
+	   (g-signal-connect fontsel "delete_event"
 			       (lambda () (gtk-widget-destroy fontsel)))
 	   (gtk-widget-show fontsel)
 	   (gtk-grab-add fontsel))))
