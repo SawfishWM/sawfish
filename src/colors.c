@@ -38,9 +38,14 @@ get-color-rgb RED GREEN BLUE
     rep_DECLARE3(blue, rep_INTP);
 
     f = color_list;
-    while (f != 0 && f->red != rep_INT(red)
-	   && f->green != rep_INT(green) && f->blue != rep_INT(blue))
+    while (f != 0)
     {
+	if (f->red == rep_INT(red)
+	    && f->green == rep_INT(green)
+	    && f->blue == rep_INT(blue))
+	{
+	    break;
+	}
 	f = f->next;
     }
     if (f == 0)
@@ -72,11 +77,10 @@ Return the color object representing the color named NAME, a standard
 X11 color specifier.
 ::end:: */
 {
-    XColor screen_col, exact_col;
+    XColor exact_col;
     rep_DECLARE1(name, rep_STRINGP);
 
-    if (XLookupColor (dpy, screen_cmap, rep_STR(name),
-		      &exact_col, &screen_col) != 0)
+    if (XParseColor (dpy, screen_cmap, rep_STR(name), &exact_col) != 0)
     {
 	return Fget_color_rgb (rep_MAKE_INT(exact_col.red),
 			       rep_MAKE_INT(exact_col.green),
