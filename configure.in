@@ -33,9 +33,6 @@ output_files="src/Makefile lisp/Makefile themes/Makefile\
 SUBDIRS="src lisp themes sounds man po"
 AC_SUBST(SUBDIRS)
 
-GNOMEDIRS="/ /usr /usr/local /opt /gnome /opt/gnome"
-AC_SUBST(GNOMEDIRS)
-
 add_subdir () {
   sub=$1; shift
   SUBDIRS="$SUBDIRS $sub"
@@ -214,10 +211,18 @@ fi
 
 dnl Check for GNOME location
 AC_ARG_WITH(gnome_prefix,
- [  --with-gnome-prefix=DIR Root of GNOME installation],
- [if test -d $with_gnome_prefix; then
-   GNOMEDIRS="$with_gnome_prefix";
- fi])
+ [  --with-gnome-prefix=DIR Root of GNOME installation], [],
+ [ with_gnome_prefix="" ])
+AC_MSG_CHECKING([for GNOME prefix])
+if test "x$with_gnome_prefix" = "x"; then
+  with_gnome_prefix=`gnome-config --prefix 2>&1`
+  if test $? -ne 0; then
+    gnome_prefix='${prefix}'
+  fi
+fi
+AC_MSG_RESULT([$with_gnome_prefix])
+GNOMEDIR=$with_gnome_prefix
+AC_SUBST(GNOMEDIR)
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
