@@ -477,9 +477,14 @@ gnome_sound_play (const char * filename)
   g_snprintf(buf, sizeof(buf), "%d-%d", getpid(), rand());
   sample = gnome_sound_sample_load (buf, filename);
 
-  esd_sample_play(gnome_sound_connection, sample);
-  fsync (gnome_sound_connection);
-  esd_sample_free(gnome_sound_connection, sample);
+  if (sample >= 0)
+  {
+      esd_sample_play(gnome_sound_connection, sample);
+      fsync (gnome_sound_connection);
+      esd_sample_free(gnome_sound_connection, sample);
+  }
+  else
+      g_warning ("can't load sample: %s\n", filename);
 #endif
 }
 
