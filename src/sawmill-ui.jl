@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.36 1999/11/19 14:54:24 john Exp $
+;; $Id: sawmill-ui.jl,v 1.37 1999/11/25 23:34:05 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -1161,7 +1161,7 @@ exec rep "$0" "$@"
     (setq ui-socket-id (read-from-string tem))))
 
 (when ui-socket-id
-  (set-input-handler standard-input 'ui-capplet-input))
+  (set-input-handler standard-input ui-capplet-input))
 
 (show-ui (ui-get-spec))
 
