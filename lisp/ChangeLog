@@ -1,5 +1,17 @@
 2001-12-04  Federico Mena Quintero  <federico@ximian.com>
 
+	* sawfish/wm/viewport.jl
+	(move-window-to-viewport-and-move-viewport): New function that
+	generalizes move-window-left and friends.  Also raises the window
+	in its layer so that it doesn't appear occluded when flipping the
+	viewport.  Sticks/unsticks the window to avoid flashing, as well.
+	(move-window-left): Use move-window-to-viewport-and-move-viewport.
+	(move-window-right): Likewise.
+	(move-window-down): Likewise.
+	(move-window-up): Likewise.
+
+2001-12-04  Federico Mena Quintero  <federico@ximian.com>
+
 	* sawfish/wm/viewport.jl (set-viewport): Grab the server while we
 	move the windows.
 

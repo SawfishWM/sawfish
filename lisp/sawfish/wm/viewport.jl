@@ -251,25 +251,33 @@
     "Move the viewport one screen up."
     (move-viewport 0 -1))
 
+  ;; Moves the window by the specified offsets and then flips to the
+  ;; viewport that is relative those offsets to the current viewport.
+  (define (move-window-to-viewport-and-move-viewport window col row)
+    (require 'sawfish.wm.stacking)
+    (let ((sticky-viewport (window-get window 'sticky-viewport)))
+      (window-put window 'sticky-viewport t)
+      (with-server-grabbed
+       (raise-window window)
+       (move-viewport col row))
+      (unless sticky-viewport
+	(window-put window 'sticky-viewport nil))))
+
   (define (move-window-left w)
-    "Move the window to the viewport on the left."
-    (move-window-viewport w -1 0)
-    (move-viewport-left))
+    "Move the window to the viewport on the left, and switch to that viewport."
+    (move-window-to-viewport-and-move-viewport w -1 0))
 
   (define (move-window-right w)
-    "Move the window to the viewport on the right."
-    (move-window-viewport w 1 0)
-    (move-viewport-right))
+    "Move the window to the viewport on the right, and switch to that viewport."
+    (move-window-to-viewport-and-move-viewport w 1 0))
 
   (define (move-window-down w)
-    "Move the window to the viewport below."
-    (move-window-viewport w 0 1)
-    (move-viewport-down))
+    "Move the window to the viewport below, and switch to that viewport."
+    (move-window-to-viewport-and-move-viewport w 0 1))
 
   (define (move-window-up w)
-    "Move the window to the viewport above."
-    (move-window-viewport w 0 -1)
-    (move-viewport-up))
+    "Move the window to the viewport above, and switch to that viewport."
+    (move-window-to-viewport-and-move-viewport w 0 -1))
 
   (define-command 'move-viewport-right move-viewport-right)
   (define-command 'move-viewport-left move-viewport-left)
