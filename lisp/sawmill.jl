@@ -88,7 +88,7 @@
   (load-all s (lambda (f) (load f nil t))))
 
 ;; all rep-based programs should do this
-(sawfish-load-all "autoload.jl")
+(sawfish-load-all "autoload")
 (sawfish-load-all (concat "os-" (symbol-name operating-system)))
 
 ;; this will autoload, but it can be overridden
