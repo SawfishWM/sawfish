@@ -50,3 +50,14 @@
   (if (window-get w 'ignored)
       (make-window-not-ignored w)
     (make-window-ignored w)))
+
+;;;###autoload
+(defun toggle-window-never-focus (w)
+  "Toggle whether a window is focusable or not."
+  (interactive "%W")
+  (if (window-get w 'never-focus)
+      (window-put w 'never-focus nil)
+    (window-put w 'never-focus t))
+  (when (eq (input-focus) w)
+    (window-order-focus-most-recent))
+  (call-window-hook 'window-state-change-hook w (list '(never-focus))))
