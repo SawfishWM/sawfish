@@ -62,6 +62,8 @@ static void grab_all_keylist_events (repv map, bool grab);
 /* Called for unbound events */
 bool (*event_proxy_fun)(XEvent *ev, long code, long mods);
 
+static int all_buttons[5] = { Button1, Button2, Button3, Button4, Button5 };
+static int all_lock_combs[4] = { 0, LockMask, 0, LockMask };
 
 /* Translate from X events to Lisp events */
 
@@ -195,6 +197,14 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 		    *state = AnyModifier;
 		return TRUE;
 	    }
+	}
+	/* no actual button specified. if mod_any is set, then just
+	   return this; hope the caller does the Right Thing */
+	if (mods & EV_MOD_ANY)
+	{
+	    *state = AnyModifier;
+	    *button = buttons[0].button;	/* anything.. */
+	    return TRUE;
 	}
     }
     return FALSE;
@@ -997,36 +1007,52 @@ grab_event (Window grab_win, repv ev)
     switch (rep_INT(EVENT_MODS(ev)) & EV_TYPE_MASK)
     {
 	u_int code, state;
+	int i;
 
     case EV_TYPE_KEY:
 	if (translate_event_to_x_key (ev, &code, &state))
 	{
-	    XGrabKey (dpy, code, state, grab_win,
-		      False, GrabModeSync, GrabModeSync);
-	    XGrabKey (dpy, code, state | LockMask, grab_win,
-		      False, GrabModeSync, GrabModeSync);
-	    XGrabKey (dpy, code, state | num_lock_mod, grab_win,
-		      False, GrabModeSync, GrabModeSync);
-	    XGrabKey (dpy, code, state | LockMask | num_lock_mod, grab_win,
-		      False, GrabModeSync, GrabModeSync);
+	    if (state != AnyModifier)
+	    {
+		for (i = 0; i < 4; i++)
+		{
+		    XGrabKey (dpy, code, state | all_lock_combs[i], grab_win,
+			      False, GrabModeSync, GrabModeSync);
+		}
+	    }
+	    else
+	    {
+		XGrabKey (dpy, code, state, grab_win,
+			  False, GrabModeSync, GrabModeSync);
+	    }
 	}
 	break;
 
     case EV_TYPE_MOUSE:
 	if (translate_event_to_x_button (ev, &code, &state))
 	{
-	    XGrabButton (dpy, code, state, grab_win,
-			 False, ButtonPressMask | ButtonReleaseMask,
-			 GrabModeSync, GrabModeSync, None, None);
-	    XGrabButton (dpy, code, state | LockMask, grab_win,
-			 False, ButtonPressMask | ButtonReleaseMask,
-			 GrabModeSync, GrabModeSync, None, None);
-	    XGrabButton (dpy, code, state | num_lock_mod, grab_win,
-			 False, ButtonPressMask | ButtonReleaseMask,
-			 GrabModeSync, GrabModeSync, None, None);
-	    XGrabButton (dpy, code, state | LockMask | num_lock_mod, grab_win,
-			 False, ButtonPressMask | ButtonReleaseMask,
-			 GrabModeSync, GrabModeSync, None, None);
+	    if (state != AnyModifier)
+	    {
+		for (i = 0; i < 4; i++)
+		{
+		    XGrabButton (dpy, code, state | all_lock_combs[i],
+				 grab_win, False,
+				 ButtonPressMask | ButtonReleaseMask,
+				 GrabModeSync, GrabModeSync, None, None);
+		}
+	    }
+	    else
+	    {
+		/* sawmill treats mouse buttons as modifiers, not as
+		   codes, so for us AnyModifier includes all buttons.. */
+		for (i = 0; i < 5; i++)
+		{
+		    XGrabButton (dpy, all_buttons[i], AnyModifier,
+				 grab_win, False, ButtonPressMask
+				 | ButtonReleaseMask, GrabModeSync,
+				 GrabModeSync, None, None);
+		}
+	    }
 	}
     }
 }
@@ -1037,24 +1063,37 @@ ungrab_event (Window grab_win, repv ev)
     switch (rep_INT(EVENT_MODS(ev)) & EV_TYPE_MASK)
     {
 	u_int code, state;
+	int i;
 
     case EV_TYPE_KEY:
 	if (translate_event_to_x_key (ev, &code, &state))
 	{
-	    XUngrabKey (dpy, code, state, grab_win);
-	    XUngrabKey (dpy, code, state | LockMask, grab_win);
-	    XUngrabKey (dpy, code, state | num_lock_mod, grab_win);
-	    XUngrabKey (dpy, code, state | LockMask | num_lock_mod, grab_win);
+	    if (state != AnyModifier)
+	    {
+		for (i = 0; i < 4; i++)
+		XUngrabKey (dpy, code, state | all_lock_combs[i], grab_win);
+	    }
+	    else
+		XUngrabKey (dpy, code, state, grab_win);
 	}
 	break;
 
     case EV_TYPE_MOUSE:
 	if (translate_event_to_x_button (ev, &code, &state))
 	{
-	    XUngrabButton (dpy, code, state, grab_win);
-	    XUngrabButton (dpy, code, state | LockMask, grab_win);
-	    XUngrabButton (dpy, code, state | num_lock_mod, grab_win);
-	    XUngrabButton (dpy, code, state | LockMask | num_lock_mod, grab_win);
+	    if (state != AnyModifier)
+	    {
+		for (i = 0; i < 4; i++)
+		{
+		    XUngrabButton (dpy, code,
+				   state | all_lock_combs[i], grab_win);
+		}
+	    }
+	    else
+	    {
+		for (i = 0; i < 5; i++)
+		    XUngrabButton (dpy, all_buttons[i], AnyModifier, grab_win);
+	    }
 	}
     }
 }
@@ -1177,4 +1216,7 @@ keys_init(void)
 
     if (rep_SYM(Qbatch_mode)->value == Qnil)
 	find_meta ();
+
+    all_lock_combs[2] |= num_lock_mod;
+    all_lock_combs[3] |= num_lock_mod;
 }
