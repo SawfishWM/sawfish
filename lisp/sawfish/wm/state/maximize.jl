@@ -120,23 +120,50 @@
 	     (managed-windows)))
 
 (defun maximize-expand-edges (start end min max perp-1 perp-2 edges)
-  (mapc #'(lambda (edge)
-	    ;; EDGE is (PERP START END OPEN-P)
-	    (if (nth 3 edge)
-		(when (and (< (car edge) max)
-			   (or (not maximize-always-expands)
-			       (>= (car edge) perp-2))
-			   (> (car edge) min)
-			   (maximize-edges-touching start end edge))
-		  (setq max (car edge)))
-	      (when (and (> (car edge) min)
-			 (or (not maximize-always-expands)
-			     (<= (car edge) perp-1))
-			 (< (car edge) max)
-			 (maximize-edges-touching start end edge))
-		(setq min (car edge)))))
-	edges)
-  (cons min max))
+  (if maximize-always-expands
+      (progn
+	(mapc #'(lambda (edge)
+		  ;; EDGE is (PERP START END OPEN-P)
+		  (if (nth 3 edge)
+		      (when (and (< (car edge) max)
+				 (>= (car edge) perp-2)
+				 (> (car edge) min)
+				 (maximize-edges-touching start end edge))
+			(setq max (car edge)))
+		    (when (and (> (car edge) min)
+			       (<= (car edge) perp-1)
+			       (< (car edge) max)
+			       (maximize-edges-touching start end edge))
+		      (setq min (car edge)))))
+	      edges)
+	(cons min max))
+    (let
+	((opening (sort (mapcar 'car (filter #'(lambda (e)
+						 (and (nth 3 e)
+						      (maximize-edges-touching
+						       start end e)))
+					     edges))))
+	 (closing (sort (mapcar 'car (filter #'(lambda (e)
+						 (and (not (nth 3 e))
+						      (maximize-edges-touching
+						       start end e)))
+					     edges))))
+	 max-perp
+	 (max-size 0))
+      ;; find the maximum gap between a closing and an opening edge which
+      ;; doesn't include any other opening edges
+      (while (and opening closing)
+	(while (and opening (<= (car opening) (car closing)))
+	  (setq opening (cdr opening)))
+	(when (and (> (- (or (car opening) max) (car closing)) max-size)
+		   (or (not (nth 1 closing))
+		       (>= (nth 1 closing) (or (car opening) max))))
+	  (setq max-perp (car closing))
+	  (setq max-size (- (car opening) (car closing))))
+	(setq closing (cdr closing)))
+      (if max-perp
+	  (cons max-perp (+ max-perp max-size))
+	(cons perp-1 perp-2)))))
 
 (defun maximize-do-horizontal (w edges coords dims fdims)
   (let
