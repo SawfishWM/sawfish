@@ -133,6 +133,13 @@ list of strings DIRS."
 	   (window-get w 'ignore-window-input-hint)
 	   (window-wants-input-p w))))
 
+(defun window-class (w)
+  "Return the class that window W belongs to, as a string. Returns `nil' if W
+has no associated class."
+  (let
+      ((prop (get-x-text-property w 'WM_CLASS)))
+    (and prop (aref prop 1))))
+
 (defun uniquify-list (lst)
   "Remove all duplicates from list, tests using eq, order is lost."
   (let
