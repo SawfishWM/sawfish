@@ -1,3 +1,17 @@
+2000-08-29    <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/state/maximize.jl (do-horizontal, do-vertical):
+	fixed for non-zero current-head offsets
+
+	* sawfish/wm/state/maximize.jl (window-unmaximized-position,
+	window-unmaximized-dimensions): new functions, unused yet
+
+	* sawfish/wm/util/edges.jl (get-visible-window-edges): removed
+	`#:include-root' keyword, added `#:include-heads LIST-OR-t' and
+	`#:include-screen t' giving more control over what gets added
+
+	Changed all callers.
+
 2000-08-26    <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/misc.jl (current-head-dimensions): if no current
