@@ -178,13 +178,12 @@ that overrides settings set elsewhere.")
 	  (setq style default-frame-style)))
       (set-window-frame-style w style type))))
 
-(add-hook 'add-window-hook 'set-frame-for-window t)
+(defun reframe-one-window (w)
+  (when (and (windowp w) (not (window-get w 'ignored)))
+    (set-frame-for-window w t (window-get w 'type))))
 
 (defun reframe-all-windows ()
-  (mapc #'(lambda (w)
-	    (when (and (windowp w) (not (window-get w 'ignored)))
-	      (set-frame-for-window w t (window-get w 'type))))
-	(managed-windows)))
+  (mapc 'reframe-one-window (managed-windows)))
 
 
 ;; kludge different window decors by modifying the assumed window type
@@ -407,5 +406,8 @@ that overrides settings set elsewhere.")
 
 
 ;; initialisation
+
+(add-hook 'add-window-hook 'set-frame-for-window t)
+(add-hook 'shape-notify-hook 'reframe-one-window t)
 
 (sm-add-saved-properties 'type 'ignored 'frame-style)
