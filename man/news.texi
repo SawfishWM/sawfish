@@ -18,6 +18,9 @@ they occurred between. For more detailed information see the
 
 @item Use spin-buttons in the configurator to enter numbers
 
+@item Switched the default @code{Button1} and @code{Button2} bindings
+in window borders (but not in the title)
+
 @item Add option @code{focus-proxy-click} controlling whether to pass
 the focus-inducing button-press event to the underlying window (in
 click-to-focus mode)
@@ -46,6 +49,9 @@ didn't focus the activated window
 
 @item Fix bug where initiating a resize in the middle of the window
 didn't allow any of the edges to be moved
+
+@item Fix bug where changing the ``decorate transients'' option didn't
+alter any existing transient windows
 
 @end itemize
 

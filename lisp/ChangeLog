@@ -1,4 +1,14 @@
+1999-09-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keymaps.jl (border-keymap): new keymap
+
+	* frames.jl (frame-part-class-alist, fp-class): method of
+	associating frame part types with general bits of their plist
+
 1999-09-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.jl (set-window-frame-style): don't set the window's
+	`type' property if it's implicitly defined
 
 	* shading.jl: new file, implements window shading (displaying
 	only the title bar)

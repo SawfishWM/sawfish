@@ -1,5 +1,10 @@
 1999-09-09  John Harper  <john@dcs.warwick.ac.uk>
 
+	* keys.c, keys.h: added `click3' event
+
+	* frames.c (frame_part_destroyer): if any of the frame parts
+	are clicked, make sure that clicked_frame_part gets cleared
+
 	* frames.c, windows.c: added a new window property
 	`hide-client', when non-nil the client window won't be visible
 	(call rebuild-frame after setting for it to take effect)
