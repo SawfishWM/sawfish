@@ -125,7 +125,7 @@
     (unless group-list
       (custom-declare-group group)
       (setq group-list (assq group custom-groups)))
-    (rplacd group-list (nconc (cdr group-list) (list symbol)))))
+    (rplacd group-list (nconc (delq symbol (cdr group-list)) (list symbol)))))
 
 (defun custom-set-variable (symbol value &optional require)
   (when require
