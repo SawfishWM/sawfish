@@ -760,6 +760,8 @@ client windows.
 	    if (w != 0)
 		ret = Fcons (rep_VAL(w), ret);
 	}
+	if (children != 0)
+	    XFree (children);
 	rep_PUSHGC(gc_ret, ret);
 	emit_pending_destroys ();
 	rep_POPGC;
