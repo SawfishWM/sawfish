@@ -179,7 +179,6 @@
   (define (gtkrc-handle-client-msg w type data)
     (declare (unused data))
     (when (and (eq w gtkrc-dummy-window) (eq type '_GTK_READ_RCFILES))
-      (format standard-error "reloading style\n")
       (gtkrc-reload-style)
       ;; XXX make conditional
       (require 'sawfish.wm.menus)
