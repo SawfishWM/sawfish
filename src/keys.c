@@ -38,6 +38,9 @@ static Time last_click;
 static u_long last_click_button;
 static int click_count;
 
+/* These control which types of keyboard events we actually evaluate */
+static bool eval_modifier_events = FALSE, eval_key_release_events = FALSE;
+
 DEFSYM(global_keymap, "global-keymap");
 DEFSYM(root_window_keymap, "root-window-keymap");
 DEFSYM(override_keymap, "override-keymap");
@@ -68,13 +71,21 @@ static int all_lock_combs[4] = { 0, LockMask, 0, LockMask };
 /* Translate from X events to Lisp events */
 
 /* Translate the X key or button event XEV to *CODE and *MODS */
-static void
+static bool
 translate_event(u_long *code, u_long *mods, XEvent *xev)
 {
+    bool ret = FALSE;
     switch(xev->type)
     {
+    case KeyRelease:
+	if (!eval_key_release_events)
+	    break;
+	/* FALL THROUGH */
+
     case KeyPress:
 	*mods = xev->xkey.state & ~(LockMask | num_lock_mod);
+	if (xev->type == KeyRelease)
+	    *mods |= EV_MOD_RELEASE;
 	if(*mods & ShiftMask)
 	{
 	    /* Some keys don't have keysym at index 1, if not treat it as
@@ -88,8 +99,12 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	}
 	else
 	    *code = XKeycodeToKeysym(xev->xany.display, xev->xkey.keycode, 0);
-	if((*code != NoSymbol) && !IsModifierKey(*code))
+	if(*code != NoSymbol
+	   && (eval_modifier_events || !IsModifierKey (*code)))
+	{
 	    *mods |= EV_TYPE_KEY;
+	    ret = TRUE;
+	}
 	break;
 
     case ButtonPress:
@@ -140,14 +155,17 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	    *mods |= Button5Mask;
 	    break;
 	}
+	ret = TRUE;
 	break;
 
     case MotionNotify:
 	*code = EV_CODE_MOUSE_MOVE;
 	*mods = xev->xmotion.state & ~(LockMask | num_lock_mod);
 	*mods |= EV_TYPE_MOUSE;
+	ret = TRUE;
 	break;
     }
+    return ret;
 }
 
 /* Translate the Lisp key event EV to X keycode *KEYCODE and modifier
@@ -157,10 +175,17 @@ translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
 {
     if (rep_INT(EVENT_MODS(ev)) & EV_TYPE_KEY)
     {
+	u_int s = rep_INT(EVENT_MODS(ev)) & EV_MOD_MASK;
+	if (s & EV_MOD_META)
+	    s = (s & ~EV_MOD_META) | meta_mod;
+	if (s & EV_MOD_ALT)
+	    s = (s & ~EV_MOD_ALT) | alt_mod;
+	if (s & EV_MOD_RELEASE)
+	    s &= ~EV_MOD_RELEASE;
+	if (s == EV_MOD_ANY)
+	    s = AnyModifier;
+	*state = s;
 	*keycode = XKeysymToKeycode (dpy, rep_INT(EVENT_CODE(ev)));
-	*state = rep_INT(EVENT_MODS(ev)) & EV_MOD_MASK;
-	if (*state == EV_MOD_ANY)
-	    *state = AnyModifier;
 	return TRUE;
     }
     else
@@ -190,11 +215,17 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 	{
 	    if (mods & buttons[i].mask)
 	    {
-		*button = buttons[i].button;
+		u_int s;
 		mods &= ~buttons[i].mask;
-		*state = mods & EV_MOD_MASK;
-		if (*state == EV_MOD_ANY)
-		    *state = AnyModifier;
+		s = mods & EV_MOD_MASK;
+		if (s & EV_MOD_META)
+		    s = (s & ~EV_MOD_META) | meta_mod;
+		if (s & EV_MOD_ALT)
+		    s = (s & ~EV_MOD_ALT) | alt_mod;
+		if (s == EV_MOD_ANY)
+		    s = AnyModifier;
+		*button = buttons[i].button;
+		*state = s;
 		return TRUE;
 	    }
 	}
@@ -303,7 +334,8 @@ eval_input_event(repv context_map)
     repv result = Qnil, cmd;
     Lisp_Window *w = focus_window;
 
-    translate_event (&code, &mods, current_x_event);
+    if (!translate_event (&code, &mods, current_x_event))
+	return Qnil;
 
     current_event[0] = code;
     current_event[1] = mods;
@@ -352,15 +384,9 @@ struct key_def {
 
 static struct key_def default_mods[] = {
     { "S",	  ShiftMask },
-    { "Shift",    ShiftMask },
-    { "SFT",      ShiftMask },
     { "C",        ControlMask },
-    { "Ctrl",     ControlMask },
-    { "Control",  ControlMask },
     { "M",        EV_MOD_META },
-    { "Meta",     EV_MOD_META },
     { "A",        EV_MOD_ALT },
-    { "Alt",      EV_MOD_ALT },
     { "Mod1",     Mod1Mask },
     { "Mod2",     Mod2Mask },
     { "Mod3",     Mod3Mask },
@@ -371,35 +397,25 @@ static struct key_def default_mods[] = {
     { "Button4",  Button4Mask },
     { "Button5",  Button5Mask },
     { "Any",      EV_MOD_ANY },
+    { "Release",  EV_MOD_RELEASE },
     { 0, 0 }
 };
 
 static struct key_def default_codes[] = {
     { "Click1",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK1 },
+    { "Click",    EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK1 },
     { "Click2",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK2 },
     { "Click3",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK3 },
     { "Off",      EV_TYPE_MOUSE, EV_CODE_MOUSE_UP },
-    { "PointerUp", EV_TYPE_MOUSE, EV_CODE_MOUSE_UP },
     { "Move",     EV_TYPE_MOUSE, EV_CODE_MOUSE_MOVE },
-    { "PointerMove", EV_TYPE_MOUSE, EV_CODE_MOUSE_MOVE },
 
     { "SPC",      EV_TYPE_KEY, XK_space },
     { "Space",    EV_TYPE_KEY, XK_space },
-    { "Spacebar", EV_TYPE_KEY, XK_space },
     { "TAB",      EV_TYPE_KEY, XK_Tab },
     { "RET",      EV_TYPE_KEY, XK_Return },
-    { "Return",   EV_TYPE_KEY, XK_Return },
     { "ESC",      EV_TYPE_KEY, XK_Escape },
-    { "Escape",   EV_TYPE_KEY, XK_Escape },
     { "BS",       EV_TYPE_KEY, XK_BackSpace },
-    { "Backspace", EV_TYPE_KEY, XK_BackSpace },
     { "DEL",      EV_TYPE_KEY, XK_Delete },
-    { "Delete",   EV_TYPE_KEY, XK_Delete },
-    { "Help",     EV_TYPE_KEY, XK_Help },
-    { "Up",       EV_TYPE_KEY, XK_Up },
-    { "Down",     EV_TYPE_KEY, XK_Down },
-    { "Right",    EV_TYPE_KEY, XK_Right },
-    { "Left",     EV_TYPE_KEY, XK_Left },
 
     /* X defines lots of long names for these simple keys...  */
     { " ",        EV_TYPE_KEY, XK_space },
@@ -934,6 +950,23 @@ Returns t if the ARG is an input event.
     return EVENTP(arg) ? Qt : Qnil;
 }
 
+DEFUN("eval-key-release-events", Veval_key_release_events,
+      Seval_key_release_events, (repv arg), rep_Var)
+{
+    if (arg != rep_NULL)
+	eval_key_release_events = (arg != Qnil);
+    return eval_key_release_events ? Qt : Qnil;
+}
+
+DEFUN("eval-modifier-events", Veval_modifier_events,
+      Seval_modifier_events, (repv arg), rep_Var)
+{
+    if (arg != rep_NULL)
+	eval_modifier_events = (arg != Qnil);
+    return eval_modifier_events ? Qt : Qnil;
+}
+
+
 
 /* Find the lisp modifier mask used by the meta and alt keys. This code
    shamelessly stolen from Emacs 19. :-) */
@@ -1204,6 +1237,9 @@ keys_init(void)
     rep_ADD_SUBR(Ssearch_keymap);
     rep_ADD_SUBR(Skeymapp);
     rep_ADD_SUBR(Seventp);
+
+    rep_ADD_SUBR(Seval_key_release_events);
+    rep_ADD_SUBR(Seval_modifier_events);
 
     rep_INTERN(async_pointer);
     rep_INTERN(async_keyboard);
