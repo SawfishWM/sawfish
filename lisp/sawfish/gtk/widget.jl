@@ -21,23 +21,9 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-widget
+(require 'nokogiri-interfaces)
 
-    (export define-widget-type
-	    widget-type-constructor
-	    make-widget
-	    widget-ref
-	    widget-set
-	    widget-clear
-	    widget-gtk-widget
-	    widget-valid-p
-	    call-callback
-	    make-signal-callback
-	    set-widget-enabled
-	    enable-widget
-	    disable-widget
-	    box-spacing
-	    box-border)
+(define-structure nokogiri-widget nokogiri-widget-interface
 
     (open rep
 	  gtk)
@@ -76,7 +62,14 @@
 		(require module-name)
 		(get name 'nokogiri-widget-constructor))
 	    (error (widget-type-constructor 'unknown))))))
-  
+
+  (define (widget-accepts-doc-string name)
+    (put name 'nokogiri-widget-accepts-doc-string t))
+
+  (define (widget-accepts-doc-string-p name)
+    (widget-type-constructor name)
+    (get name 'nokogiri-widget-accepts-doc-string))
+
   ;; stack `and' items horizontally by default
   (define and-direction (make-fluid 'horizontal))
 
@@ -99,13 +92,15 @@
   ;; create a new item of type defined by CELL, either a list (TYPE ARGS...)
   ;; or a single symbol TYPE. CALLBACK is a function to be called whenever
   ;; the item's value changes
-  (define (make-widget cell &optional callback)
+  (define (make-widget cell &optional callback doc-string)
     (let*
 	((type (or (car cell) cell))
 	 (maker (or (widget-type-constructor type)
 		    (widget-type-constructor 'unknown))))
       (if maker
-	  (apply maker callback (cdr cell))
+	  (if (and doc-string (widget-accepts-doc-string-p type))
+	      (apply maker callback doc-string (cdr cell))
+	    (apply maker callback (cdr cell)))
 	(error "No widget of type %s" type))))
 
   (define (widget-ref item) ((item 'ref)))
@@ -266,6 +261,7 @@
 	  ((validp) (lambda () t))))))
 
   (define-widget-type 'boolean make-boolean-item)
+  (widget-accepts-doc-string 'boolean)
 
 
 ;;; ``Meta'' widgets
