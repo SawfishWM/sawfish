@@ -46,7 +46,7 @@ property_cache_ref (repv id, repv prop)
     u_int h, i;
 
     if (cache_vec == rep_NULL)
-	return Qnil;
+	return rep_NULL;
 
     h = CACHE_HASH (id, prop) * CACHE_ASSOC;
 
