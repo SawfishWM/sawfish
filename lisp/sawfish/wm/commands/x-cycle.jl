@@ -365,11 +365,54 @@ Any extra arguments are passed to each call to define-command."
 			     (lambda (x) (equal (window-class x) class)))))
 			#:spec "%W"))
 
-;;###autoload (autoload-command 'cycle-windows 'sawfish.wm.commands.x-cycle)
-;;###autoload (autoload-command 'cycle-windows-backwards 'sawfish.wm.commands.x-cycle)
-;;###autoload (autoload-command 'cycle-group 'sawfish.wm.commands.x-cycle)
-;;###autoload (autoload-command 'cycle-group-backwards 'sawfish.wm.commands.x-cycle)
-;;###autoload (autoload-command 'cycle-prefix 'sawfish.wm.commands.x-cycle)
-;;###autoload (autoload-command 'cycle-prefix-backwards 'sawfish.wm.commands.x-cycle)
-;;###autoload (autoload-command 'cycle-class 'sawfish.wm.commands.x-cycle)
-;;###autoload (autoload-command 'cycle-class-backwards 'sawfish.wm.commands.x-cycle)
+#| autoload cookies:
+
+###autoload (autoload-command 'cycle-windows 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-windows-backwards 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-group 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-group-backwards 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-prefix 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-prefix-backwards 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-class 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-class-backwards 'sawfish.wm.commands.x-cycle)
+
+|#
+
+#| doc strings for the cycle commands:
+
+::doc:sawfish.wm.commands.x-cycle#cycle-windows::
+Cycle through all windows in order of recent selections.
+::end::
+
+::doc:sawfish.wm.commands.x-cycle#cycle-windows-backwards::
+Cycle through all windows in reverse order of recent selections.
+::end::
+
+::doc:sawfish.wm.commands.x-cycle#cycle-group::
+Cycle through all windows in the same group as the current window.
+::end::
+
+::doc:sawfish.wm.commands.x-cycle#cycle-group-backwards::
+Reverse cycle through all windows in the same group as the current window.
+::end::
+
+::doc:sawfish.wm.commands.x-cycle#cycle-prefix::
+Cycle through all windows whose names match the leading colon-delimited
+prefix of the current window.
+::end::
+
+::doc:sawfish.wm.commands.x-cycle#cycle-prefix-backwards::
+Reverse cycle through all windows whose names match the leading
+colon-delimited prefix of the current window.
+::end::
+
+::doc:sawfish.wm.commands.x-cycle#cycle-class::
+Cycle through all windows with the same class as the current window.
+::end::
+
+::doc:sawfish.wm.commands.x-cycle#cycle-class-backwards::
+Reverse cycle through all windows with the same class as the current
+window.
+::end::
+
+|#
