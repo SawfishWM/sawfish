@@ -1,3 +1,18 @@
+2000-08-26    <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/misc.jl (current-head-dimensions): if no current
+	head, return (screen-dimensions)
+	(current-head-offset): if no current head, return '(0 . 0)
+
+2000-08-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/custom.jl (defcustom): don't (erroneously) rely on
+	defvar evaluating the DEFAULT-VALUE form
+
+2000-08-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/gaol.jl: added x-gc-set-dashes
+
 2000-08-18  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/commands.jl (define-command): spec and type args

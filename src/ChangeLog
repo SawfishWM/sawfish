@@ -1,3 +1,19 @@
+2000-08-26    <john@dcs.warwick.ac.uk>
+
+	* functions.c (Ffind_head): this was totally broken
+
+2000-08-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* main.c (inner_main): call rep_top_level_recursive_edit ()
+	instead of Frecursive_edit ()
+
+2000-08-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x.c: Integrated patch from Ryan Pavlik <rpav@mythosource.org>
+	to support a load more GC attributes, plus a new function
+	x-gc-set-dashes. Cleaned the whole file to match my usual
+	coding style
+
 2000-08-16  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-menu.jl: use #!optional and #!rest instead of
