@@ -1,4 +1,20 @@
+2000-06-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* groups.jl (send-group-to-workspace): remember to tell
+	ws-move-window which workspace to move _from_. Also, don't try
+	to move sticky windows
+
 2000-06-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* match-window.jl (match-window-grab-x-property): tidied up,
+	should handle non-string properties now
+
+	* place-window.jl (place-window-centered,
+	place-window-centered-on-parent, place-window-under-pointer):
+	clamp the placement position into the current workarea (as
+	defined by the windows that must not be covered)
+
+	* functions.jl (clamp, clamp*): new functions
 
 	* x-cycle.jl, workspace.jl, wm-spec.jl, viewport.jl,
 	transient.jl, place-window.jl, nokogiri-sawfish.jl,

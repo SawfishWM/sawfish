@@ -212,4 +212,5 @@
 (defgroup shade-hover "Shade Hover" :group focus :require shade-hover)
 (defgroup cycle "Window Cycling" :group focus :require x-cycle)
 (autoload 'cycle-class "x-cycle" t)
+(autoload 'maximize-find-workarea "maximize")
 ;;; ::autoload-end::

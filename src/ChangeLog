@@ -1,3 +1,11 @@
+2000-06-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* images.c (Fmake_image_from_x_drawable): fixed memory leak in
+	gdk-pixbuf case
+
+	* libclient.c (unix_server_init): removed call to access (),
+	rely on connect () failing to tell us when sockets don't exist
+
 2000-06-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-ui.jl, Makefile.in: deleted sawmill-ui.jl
