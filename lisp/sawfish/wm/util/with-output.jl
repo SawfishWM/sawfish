@@ -49,3 +49,10 @@ emitted text will be display on the screen."
   "Evaluate FORMS. Any data they print to standard-output will be
 displayed on the screen after they return."
   `(call-with-output-to-screen (lambda () ,@forms)))
+
+;;;###autoload
+(defmacro define-command-to-screen (new old spec)
+  `(defun ,new args
+     (interactive ,@(and spec (list spec)))
+     (with-output-to-screen
+      (apply ,old args))))
