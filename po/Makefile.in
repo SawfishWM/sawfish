@@ -29,7 +29,7 @@ MO_FILES=$(LINGUAS:%=%.mo)
 all : $(MO_FILES) sawmill.pot
 
 sawmill.pot :
-	rep-xgettext ../lisp/*.jl ../themes/*/theme.jl >$@
+	./.make-pot
 
 ifneq ($(MO_FILES),)
 install : $(MO_FILES) installdirs
