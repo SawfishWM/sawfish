@@ -35,11 +35,6 @@
 (defvar dont-avoid-ignored t)
 (defvar avoid-by-default nil)
 
-(defcustom transients-are-group-members t
-  "Transient windows are in the same group as their parent."
-  :type boolean
-  :group misc)
-
 (defvar xterm-program "xterm")
 (defvar xterm-args nil)
 
@@ -105,6 +100,9 @@
 		(setq out (cons x out)))) list)
     out))
 
+
+;; avoided (i.e. non-overlapped) windows
+
 (defun window-avoided-p (w)
   (cond ((or (not (window-mapped-p w))
 	     (not (window-visible-p w)))
@@ -123,31 +121,3 @@
 		 (or (eq w window) (not (window-avoided-p w))))
 	     (managed-windows)))
 
-(defun windows-in-group (w)
-  (let
-      ((windows (managed-windows))
-       group-id group tem)
-    (setq group-id (or (window-group-id w)
-		       (and transients-are-group-members
-			    (window-transient-p w)
-			    (setq tem (get-window-by-id
-				       (window-transient-p w) windows))
-			    (or (window-group-id tem) (window-id tem)))
-		       (window-id w)))
-    (setq group (filter  #'(lambda (x)
-			     (eq (or (window-group-id x)
-				     (window-id x)) group-id)) 
-				 windows))
-    (when transients-are-group-members
-      (mapc #'(lambda (w)
-		(when (window-transient-p w)
-		  (let
-		      ((parent (get-window-by-id
-				(window-transient-p w) windows)))
-		    (when (and parent (memq parent group) (not (memq w group)))
-		      (setq group (cons w group))))))
-	    windows))
-    group))
-
-(defun map-window-group (fun w)
-  (mapc fun (windows-in-group w)))
