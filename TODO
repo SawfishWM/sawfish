@@ -27,9 +27,15 @@ Outstanding bugs
   ! It's not possible to compile sawmill-ui.jl without an X connection
     (it requires 'gtk, which then calls gtk_init (), ...)
 
+  ! Move functions.c:Fgetpid () to librep
+
+  ! Session management doesn't record workspace info
+
 
 General tasks
 =============
+
+  + Option to pre-allocate X workspaces at startup
 
   + Allow text-entry commands in bindings dialog?
 
@@ -99,14 +105,6 @@ General tasks
 
     Also, _key_ bindings in frame parts don't work (since they're not
     grabbed and the frame part is never actually focused)
-
-  - Session management
-
-    What needs to be done?
-
-    Do we just have to connect with the sm, then save the state of
-    windows when asked (i.e. geometry, sticky, maximized, ...) and have
-    a facility for reloading this information when asked?
 
   - Custom frame parts
 

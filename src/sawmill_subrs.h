@@ -201,13 +201,23 @@ extern repv Qsawmill_directory, Qsawmill_lisp_lib_directory,
 extern repv Qwindow_error, Qinvalid_pos, Qbad_event_desc;
 extern repv Qbefore_exit_hook;
 extern int main (int argc, char **argv);
+extern repv Fquit (void);
+extern repv Frestart (void);
 extern void add_hook (repv sym, repv fun);
+
+/* from session.c */
+extern repv Qsave_session;
+extern repv Vsm_client_id (repv arg);
+extern repv Fsm_set_property (repv prop, repv value);
+extern repv Fsm_delete_property (repv prop);
+extern void session_init (void);
+extern void session_kill (void);
 
 /* from windows.c */
 extern Lisp_Window *window_list;
 extern int window_type;
 extern Lisp_Window *focus_window;
-extern repv Qadd_window_hook, Qplace_window_hook;
+extern repv Qadd_window_hook, Qbefore_add_window_hook, Qplace_window_hook;
 extern bool mapped_not_override_p (Window id);
 extern void focus_on_window (Lisp_Window *w);
 extern void fix_window_size (Lisp_Window *w);

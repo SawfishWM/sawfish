@@ -1,3 +1,15 @@
+1999-09-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sm-save.jl, sm-load.jl, sm-init.jl, sm-common.jl: the Lisp
+	portion of the session management code. Allows arbitrary Lisp
+	modules to save and reload their state as well as the standard
+	stuff
+	* sawmill.jl: require 'sm-init
+
+	* custom.jl: moved the custom file from ~/.sawmill-custom to
+	~/.sawmill/custom. The old file will be renamed at startup if
+	possible
+
 1999-09-02  John Harper  <john@dcs.warwick.ac.uk>
 
 	* workspace.jl (uniconify-to-current-workspace): improved the

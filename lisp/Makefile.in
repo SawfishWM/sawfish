@@ -30,7 +30,8 @@ LISP_SRCS := auto-raise.jl cursors.jl custom.jl customize.jl edges.jl \
 	     focus.jl frames.jl functions.jl gnome.jl keymaps.jl \
 	     maximize.jl menus.jl move-resize.jl mwm.jl open-look.jl \
 	     place-window.jl sawmill.jl select-window.jl server.jl \
-	     stacking.jl transient.jl workspace.jl
+	     sm-common.jl sm-init.jl sm-save.jl sm-load.jl stacking.jl \
+	     transient.jl workspace.jl
 LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
 INSTALL_FILES := $(LISP_SRCS) $(LISP_OBJS) autoload.jl sawmill-defaults.jl
 

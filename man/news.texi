@@ -11,6 +11,12 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item Now does (extensible) session management
+
+@item Changed the custom file to @file{~/.sawmill/custom} instead of
+@file{~/.sawmill-custom}. The old file will be moved to the new
+location if it exists
+
 @item Workaround the flicker when raising windows
 
 @item Changed most of the @code{menus} and @code{custom} customize
@@ -38,8 +44,8 @@ draw a background into @var{image} for the specified state (@code{nil},
 the associated colors and pixmaps to decorate windows. It doesn't try
 to handle engine-based themes. It should automatically detect when the
 default style changes (if changed by the GNOME control center). Do
-`sawmill-client -c gtk-reload-style' in the shell to reload the style
-manually
+@samp{sawmill-client -c gtk-reload-style} in the shell to reload the
+style manually
 
 @item Functions for drawing color gradients and bevels into images. The
 new @code{gradient} theme uses these and on-the-fly rendering to do

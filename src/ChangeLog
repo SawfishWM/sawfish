@@ -1,3 +1,23 @@
+1999-09-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (add_window): only call place-window-hook if (as
+	well as not being in initialisation) the `placed' property of
+	the window isn't set
+	(Fwindow_group_id): check that w->wmhints isn't a null pointer
+
+	* session.c: the C portion of session management -- very minimal
+	* sawmill.h (enum exit_codes): new member `ec_session_died'
+
+	* main.c (Qsaved_command_line_args): new variable, contains the
+	pristine command line arguments. Provides the arguments to
+	exec() when restarting
+
+	* functions.c (Fgetpid): new function, should be in librep,
+	needed for session management
+
+	* main.c (Qsaved_command_line_args): new variable, a list
+	containing the unmodified args
+
 1999-09-02  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.c (Fx_raise_window): wrapper for XRaiseWindow ()

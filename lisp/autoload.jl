@@ -39,4 +39,6 @@
 (autoload 'maximize-window-toggle "maximize" t)
 (autoload 'maximize-window-vertically-toggle "maximize" t)
 (autoload 'maximize-window-horizontally-toggle "maximize" t)
+(autoload 'load-session "sm-load")
+(autoload 'save-session "sm-save")
 ;;; ::autoload-end::
