@@ -113,7 +113,7 @@
 	(sawfish-load-all "site-init")
 
 	;; then the users rep configuration, or site-wide defaults
-	(or (load (concat (user-home-directory) ".reprc") t t)
+	(or (load (concat (user-home-directory) ".reprc") t t t)
 	    (load "rep-defaults" t))
 
 	(unless batch-mode
@@ -132,9 +132,9 @@
 
 	    ;; then the sawmill specific user configuration
 	    (cond ((rc-file-exists-p "~/.sawfishrc")
-		   (load "~/.sawfishrc" t t))
+		   (load "~/.sawfishrc" t t t))
 		  ((rc-file-exists-p "~/.sawmillrc")
-		   (load "~/.sawmillrc" t t))))))
+		   (load "~/.sawmillrc" t t t))))))
     (error
      (format (stderr-file) "error in local config--> %S\n" error-data))))
 
