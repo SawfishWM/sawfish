@@ -27,7 +27,6 @@
 	  gui.gtk
 	  rep.regexp
 	  sawfish.gtk.widget
-	  sawfish.ui.user-level
 	  sawfish.ui.wm)
 
   (define all-commands)
@@ -37,16 +36,10 @@
   (define (command-type command)
     (and (listp command) (cadr (memq #:type command))))
 
-  (define (command-user-level command)
-    (or (and (listp command) (cadr (memq #:user-level command)))
-	'intermediate))
-
   (define (get-command name)
     (or (memq name all-commands) (assq name all-commands)))
 
-  (define (filter-command-list)
-    (filter (lambda (x) (user-level-is-appropriate-p (command-user-level x)))
-	    all-commands))
+  (define (filter-command-list) all-commands)
 
   (define (command-item x) (list (beautify-symbol-name (command-name x))))
 

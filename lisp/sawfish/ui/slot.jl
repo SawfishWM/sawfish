@@ -26,7 +26,6 @@
     (export slot-name
 	    slot-widget
 	    slot-old-value
-	    slot-user-level
 	    slot-gtk-widget
 	    slot-doc slot-flags
 	    slot-layout set-slot-layout
@@ -46,10 +45,9 @@
 	  sawfish.ui.wm)
 
   (define-record-type :slot
-    (create-slot name user-level old-value flags)
+    (create-slot name old-value flags)
     ;; [no predicate]
     (name slot-name)			;name of config item
-    (user-level slot-user-level)	;user-level of slot, a symbol
     (widget slot-widget slot-widget-set) ;associated lisp widget
     (layout slot-layout set-slot-layout) ;gtk widget if the slot is displayed
     (old-value slot-old-value)		;original value of slot's config
@@ -66,8 +64,6 @@
   (define dependence-table (make-table symbol-hash eq))
 
   (defvar *nokogiri-slot-changed-hook* '())
-
-  (define default-user-level 'intermediate)	;XXX should be a constant
 
 
 ;;; slot creation, data structure mgmt
@@ -94,9 +90,8 @@
 
   (define (slot-gtk-widget slot) (widget-gtk-widget (slot-widget slot)))
 
-  (define (make-slot #!key name value type doc depends widget-flags
-		     (user-level default-user-level))
-    (let ((slot (create-slot name user-level value widget-flags)))
+  (define (make-slot #!key name value type doc depends widget-flags)
+    (let ((slot (create-slot name value widget-flags)))
       (table-set slot-table (slot-name slot) slot)
 
       ;; install dependendences

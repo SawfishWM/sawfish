@@ -39,10 +39,7 @@
 	  sawfish.ui.slot
 	  sawfish.ui.apply
 	  sawfish.ui.layout
-	  sawfish.ui.user-level
 	  sawfish.ui.config)
-
-  (defvar *nokogiri-buttons* nil)
 
   (defvar *nokogiri-flatten-groups* nil)
   (defvar *nokogiri-single-level* nil)
@@ -54,9 +51,7 @@
   (define active-slots '())
 
   (define ok-widget)
-  (define apply-widget)
   (define revert-widget)
-  (define cancel-widget)
 
   (define (initialize-shell #!optional socket-id)
     (let ((vbox (gtk-vbox-new nil box-spacing))
@@ -105,9 +100,7 @@
 
       (unless socket-id
 	(setq ok-widget (stock-button 'ok))
-	(setq apply-widget (stock-button 'apply))
 	(setq revert-widget (stock-button 'revert))
-	(setq cancel-widget (stock-button 'cancel))
 	(gtk-window-set-title main-window (_ "Sawfish configurator"))
 	(gtk-widget-set-name main-window (_ "Sawfish configurator"))
 	(gtk-window-set-wmclass main-window "main" "Nokogiri"))
@@ -119,13 +112,9 @@
 	(gtk-button-box-set-layout hbox 'end)
 	(gtk-box-pack-end vbox hbox)
 	(gtk-signal-connect ok-widget "clicked" on-ok)
-	(gtk-signal-connect apply-widget "clicked" on-apply)
-	(gtk-signal-connect cancel-widget "clicked" on-cancel)
 	(gtk-signal-connect revert-widget "clicked" on-revert)
-	(gtk-container-add hbox apply-widget)
 	(gtk-container-add hbox revert-widget)
-	(gtk-container-add hbox ok-widget)
-	(gtk-container-add hbox cancel-widget))
+	(gtk-container-add hbox ok-widget))
 
       (gtk-container-add root-container vbox)
       (gtk-widget-show-all main-window)
@@ -150,9 +139,7 @@
       (setq group-tree-widget nil)
       (setq slot-box-widget nil)
       (setq ok-widget nil)
-      (setq apply-widget nil)
-      (setq revert-widget nil)
-      (setq cancel-widget nil)))
+      (setq revert-widget nil)))
 
   (define (on-quit)
     (destroy-shell)
@@ -175,30 +162,16 @@
     (set-button-states))
 
   (define (set-button-states)
-    (define (show-hide w state)
-      ((if state gtk-widget-show gtk-widget-hide) w))
-    (when apply-widget
-      (show-hide apply-widget (eq *nokogiri-buttons* 'apply/revert/cancel/ok))
-      (gtk-widget-set-sensitive apply-widget (changes-to-apply-p)))
     (when revert-widget
-      (show-hide revert-widget (memq *nokogiri-buttons*
-				     '(revert/cancel/ok
-				       apply/revert/cancel/ok)))
       (gtk-widget-set-sensitive revert-widget (changes-to-revert-p)))
     (when ok-widget
-      (gtk-widget-set-sensitive ok-widget (or (eq *nokogiri-buttons* 'ok)
-					      (changes-to-apply-p)
-					      (changes-to-revert-p))))
-    (when cancel-widget
-      (show-hide cancel-widget (memq *nokogiri-buttons*
-				     '(revert/cancel/ok
-				       apply/revert/cancel/ok)))))
+      (gtk-widget-set-sensitive ok-widget t)))
 
 ;;; displaying custom groups
 
   (define (get-slots group)
     (fetch-group group)
-    (filter slot-is-appropriate-p (group-slots group)))
+    (group-slots group))
 
   (define (display-flattened group)
 
@@ -242,6 +215,7 @@
     (update-all-dependences))
 
   (define (remove-group-widgets group)
+    (declare (unused group))
     (mapc (lambda (s)
 	    (let ((w (slot-gtk-widget s)))
 	      (when (gtk-widget-parent w)
@@ -261,14 +235,6 @@
   (add-hook '*nokogiri-slot-changed-hook* set-button-states t)
   (add-hook '*nokogiri-group-selected-hook* add-group-widgets)
   (add-hook '*nokogiri-group-deselected-hook* remove-group-widgets)
-
-  (define-config-item 'nokogiri-buttons
-		      '*nokogiri-buttons*
-		      (lambda ()
-			(set-button-states)
-			(setq *nokogiri-apply-immediately*
-			      (memq *nokogiri-buttons*
-				    '(ok revert/cancel/ok)))))
 
 ;;; capplet interfacing
 
