@@ -33,14 +33,25 @@
 ;; intermittently normalised to start with index zero
 
 ;; Inserting and deleting workspaces just involves shuffling the
-;; workspace index of each window (stored in the `workspace' property,
-;; nil for sticky windows)
+;; workspace index of each window
 
 ;; The intention is that whatever structure the user wants to see (e.g.
 ;; grid, cube, ...) is built on top of the underlying 1d structure
 
-;; If a window is added with its `workspace' property set, then it's
-;; added to that (logical) space
+;; Each window can be a member of any (positive) number of workspaces;
+;; the `workspaces' property contains a list of workspace ids. Sticky
+;; windows appear on all workspaces, and have their `sticky' property
+;; set (with a null `workspaces' property)
+
+;; When a window appears on more than one workspaces most of it's
+;; properties are swapped in and out on demand when the current
+;; workspace is changed. Use the `workspace-local-properties' and the
+;; `workspace-swap-{in,out}-hook' variables
+
+;; If a window is added with its `workspaces' property set, then it's
+;; added to those (logical) spaces
+
+;; Private functions are prefixed by ws-
 
 
 ;; Options and variables
@@ -143,80 +154,219 @@
 (defconst NormalState 1)
 (defconst IconicState 3)
 
+;; window properties whose values may differ on different workspaces
+(defvar workspace-local-properties
+  '(type frame-style current-frame-style shaded shaded-old-type
+    maximized-horizontally maximized-vertically unmaximized-geometry
+    hide-client depth order iconified))
+
+(defvar workspace-swap-in-hook nil)
+(defvar workspace-swap-out-hook nil)
+
+
+;; Workspace ``swapping''
+
+;; Property swapping is done on demand, and for each window
+;; individually. This ensures that only the minimum required data is
+;; ever swapped
+
+;; Each window has a `swapped-in' property and may have a `swapped'
+;; property. `swapped-in' is a workspace id defining which of the
+;; window's configurations is stored in the window itself (as if there
+;; was no swapping). The `swapped' property is an alist associating
+;; workspace ids with an alist of swapped attributes 
+
+;; this doesn't need to be called explicitly for every switch, just to
+;; fork the data
+(defun ws-swap-out (w space)
+  (let
+      ((alist (apply nconc (mapcar (lambda (fun)
+				     (fun w space)) workspace-swap-out-hook)))
+       (swapped (assq space (window-get w 'swapped))))
+    (if swapped
+	(rplacd swapped alist)
+      (window-put w 'swapped (cons (cons space alist)
+				   (window-get w 'swapped))))))
+
+;; swap in data for workspace id SPACE to window W
+(defun ws-swap-in (w space)
+  (let
+      ((current (window-get w 'swapped-in)))
+    (unless (eq current space)
+      (when current
+	;; swap out the current data
+	(ws-swap-out w current))
+      (let
+	  ((alist (assq space (window-get w 'swapped))))
+	(when alist
+	  (call-hook 'workspace-swap-in-hook (list w space (cdr alist)))
+	  (window-put w 'swapped (delq alist (window-get w 'swapped))))
+	(window-put w 'swapped-in space)))))
+
 
 ;; Low level functions
 
+;; return list of all workspaces containing window W
+(defmacro window-workspaces (w)
+  `(window-get ,w 'workspaces))
+
+;; set list of all workspaces containing window W to LST
+(defmacro ws-window-set-workspaces (w lst)
+  `(window-put ,w 'workspaces ,lst))
+
+;; return t if window W is a member of workspace SPACE
+(defmacro window-in-workspace-p (w space)
+  `(memq ,space (window-get ,w 'workspaces)))
+
+;; map FUN over all workspace ids containing window W
+(defmacro map-window-workspaces (fun w)
+  `(mapc ,fun (window-workspaces ,w)))
+
+(defmacro window-appears-in-workspace-p (w space)
+  `(or (window-get ,w 'sticky) (window-in-workspace-p ,w ,space)))
+
+;; add window W to those in workspace SPACE
+(defun window-add-to-workspace (w space)
+  (ws-window-set-workspaces w (cons space (delq space (window-workspaces w))))
+  (cond ((= space current-workspace)
+	 (ws-swap-in w space))
+	((and (window-get w 'swapped-in)
+	      (/= (window-get w 'swapped-in) space))
+	 ;; write out the current state for when we switch
+	 (ws-swap-out w space))
+	(t
+	 (window-put w 'swapped-in space))))
+
+;; remove window W from those in workspace SPACE
+(defun window-remove-from-workspace (w space)
+  (ws-window-set-workspaces w (delq space (window-workspaces w)))
+  (window-put w 'swapped (delete-if (lambda (cell)
+				      (= (car cell) space))
+				    (window-get w 'swapped)))
+  (when (eq (window-get w 'swapped-in) space)
+    (window-put w 'swapped-in nil)))
+
+;; FUN is a function transforming an old workspace id to a new id.
+;; Run this function over all workspaces that window W is a member of.
+(defun transform-window-workspaces (fun w)
+  (let
+      ((workspaces (window-get w 'workspaces))
+       (swapped (window-get w 'swapped))
+       (swapped-in (window-get w 'swapped-in))
+       (new-workspaces '())
+       (new-swapped '()))
+    (while workspaces
+      (let*
+	  ((space (car workspaces))
+	   (swap (assq space swapped))
+	   (new (fun space)))
+	(unless (memq new new-workspaces)
+	  (setq new-workspaces (cons new new-workspaces))
+	  (when swap
+	    (setq new-swapped (cons (cons new (cdr swap)) new-swapped))))
+	(when (eq swapped-in space)
+	  (window-put w 'swapped-in new))
+	(setq workspaces (cdr workspaces))))
+    (ws-window-set-workspaces w (nreverse new-workspaces))
+    (window-put w 'swapped (nreverse new-swapped))))
+
+;; return t if workspace SPACE contains zero (non-sticky) windows
 (defun workspace-empty-p (space)
   (catch 'out
-    (mapc (lambda (w)
-	    (when (equal (window-get w 'workspace) space)
-	      (throw 'out nil)))
-	  (managed-windows))
+    (map-windows (lambda (w)
+		   (when (window-in-workspace-p w space)
+		     (throw 'out nil))))
     t))
 
-(defun window-in-workspace-p (w space)
-  (let
-      ((w-space (window-get w 'workspace)))
-    (or (not w-space) (= w-space space))))
-
+;; return t if windows W-1 and W-2 both appear on the same workspace
 (defun windows-share-workspace-p (w-1 w-2)
+  (if (or (window-get w-1 'sticky) (window-get w-2 'sticky))
+      t
+    (let
+	((spaces-1 (window-workspaces w-1))
+	 (spaces-2 (window-workspaces w-2)))
+      (catch 'out
+	(mapc (lambda (space)
+		(when (memq space spaces-2)
+		  (throw 'out t))) spaces-1)
+	nil))))
+
+;; return a list of all workspace indices that contain windows
+(defun all-workspaces ()
   (let
-      ((space-1 (window-get w-1 'workspace))
-       (space-2 (window-get w-2 'workspace)))
-    (or (not space-1)
-	(not space-2)
-	(= space-1 space-2))))
+      (spaces)
+    (map-windows
+     (lambda (w)
+       (map-window-workspaces (lambda (space)
+				(unless (memq space spaces)
+				  (setq spaces (cons space spaces)))) w)))
+    spaces))
+
+;; return the nearest workspace to SPACE that contains window W
+(defun nearest-workspace-with-window (w space)
+  (if (window-get w 'sticky)
+      space
+    (let
+	((all (window-workspaces w))
+	 (min-diff 10000)
+	 (min-space nil)
+	 tem)
+      (while all
+	(setq tem (max (- space (car all)) (- (car all) space)))
+	(when (< tem min-diff)
+	  (setq min-diff tem)
+	  (setq min-space (car all)))
+	(setq all (cdr all)))
+      min-space)))
 
 ;; returns (FIRST-INDEX . LAST-INDEX) defining the subset of the
 ;; continuum that is `interesting' to the user
 (defun workspace-limits ()
-  (let
-      ((max-w (if (and lock-first-workspace last-interesting-workspace)
+  (let*
+      ((all-spaces (all-workspaces))
+       (max-w (if (and lock-first-workspace last-interesting-workspace)
 		  (max last-interesting-workspace current-workspace)
 		current-workspace))
        (min-w (if (and lock-first-workspace first-interesting-workspace)
 		  (min first-interesting-workspace current-workspace)
-		current-workspace))
-       tem)
-    (mapc (lambda (w)
-	    (when (setq tem (window-get w 'workspace))
-	      (when (> tem max-w)
-		(setq max-w tem))
-	      (when (< tem min-w)
-		(setq min-w tem)))) (managed-windows))
+		current-workspace)))
+    (cond ((cdr all-spaces)
+	   (setq max-w (max max-w (apply max all-spaces)))
+	   (setq min-w (min min-w (apply min all-spaces))))
+	  (all-spaces
+	   (setq max-w (max max-w (car all-spaces)))
+	   (setq min-w (min min-w (car all-spaces)))))
     (setq max-w (max max-w (1- (+ preallocated-workspaces min-w))))
     (setq first-interesting-workspace min-w)
     (setq last-interesting-workspace max-w)
     (cons min-w max-w)))
 
-;; renormalize the interesting workspaces so they being at index zero
+;; renormalize the interesting workspaces so they begin at index zero
 (defun ws-normalize-indices ()
-  (let
-      ((limits (workspace-limits))
-       tem)
-    (mapc (lambda (w)
-	    (when (setq tem (window-get w 'workspace))
-	      (window-put w 'workspace (- tem (car limits)))))
-	  (managed-windows))
-    (setq current-workspace (- current-workspace (car limits)))
+  (let*
+      ((first-space (car (workspace-limits))))
+    (map-windows (lambda (w)
+		   (transform-window-workspaces (lambda (space)
+						  (- space first-space)) w)))
+    (setq current-workspace (- current-workspace first-space))
     (when first-interesting-workspace
       (setq first-interesting-workspace
-	    (- first-interesting-workspace (car limits))))
+	    (- first-interesting-workspace first-space)))
     (when last-interesting-workspace
       (setq last-interesting-workspace
-	    (- last-interesting-workspace (car limits))))))
+	    (- last-interesting-workspace first-space)))))
 
 ;; insert a new workspace (returning its index) so that the workspace
 ;; before it has index BEFORE
 (defun ws-insert-workspace (&optional before)
   (unless before
     (setq before (1+ current-workspace)))
-  (mapc (lambda (w)
-	  (let
-	      ((space (window-get w 'workspace)))
-	    (when (and space (> space before))
-	      (window-put w 'workspace (1+ space)))))
-	(managed-windows))
+  (map-windows
+   (lambda (w)
+     (transform-window-workspaces (lambda (space)
+				    (if (> space before)
+					(1+ space)
+				      space)) w)))
   (when (> current-workspace before)
     (setq current-workspace (1+ current-workspace)))
   (call-hook 'workspace-state-change-hook)
@@ -228,153 +378,170 @@
     (setq index current-workspace))
   (when (> current-workspace index)
     (setq current-workspace (1- current-workspace)))
-  (when (and first-interesting-workspace
-	     (> first-interesting-workspace index))
+  (when (and first-interesting-workspace (> first-interesting-workspace index))
     (setq first-interesting-workspace (1- first-interesting-workspace)))
-  (when (and last-interesting-workspace
-	     (> last-interesting-workspace index))
+  (when (and last-interesting-workspace (> last-interesting-workspace index))
     (setq last-interesting-workspace (1- last-interesting-workspace)))
-  (mapc (lambda (w)
-	  (let
-	      ((space (window-get w 'workspace)))
-	    (when space
-	      (when (> space index)
-		(setq space (1- space))
-		(window-put w 'workspace space))
-	      (when (and (= space current-workspace)
-			 (not (window-get w 'iconified)))
-		(show-window w)))))
-	(managed-windows))
+  (map-windows
+   (lambda (w)
+     (transform-window-workspaces (lambda (space)
+				    (if (> space index)
+					(1- space)
+				      space)) w)
+     (when (and (window-in-workspace-p w current-workspace)
+		(not (window-get w 'iconified)))
+       (show-window w))))
   (call-hook 'workspace-state-change-hook))
 
 ;; move workspace INDEX COUNT positions forwards (+ve or -ve)
 (defun ws-move-workspace (index count)
-  (let
-      ((windows (managed-windows)))
-    (while (> count 0)
-      (mapc (lambda (w)
-	      (let
-		  ((space (window-get w 'workspace)))
-		(when space
-		  (cond ((= space index)
-			 (window-put w 'workspace (1+ space)))
-			((= space (1+ index))
-			 (window-put w 'workspace index))))))
-	    windows)
-      (when (= current-workspace index)
-	(setq current-workspace (1+ current-workspace)))
-      (setq count (1- count))
-      (setq index (1+ index)))
-    (while (< count 0)
-      (mapc (lambda (w)
-	      (let
-		  ((space (window-get w 'workspace)))
-		(when space
-		  (cond ((= space index)
-			 (window-put w 'workspace (1- space)))
-			((= space (1- index))
-			 (window-put w 'workspace index))))))
-	    windows)
-      (when (= current-workspace index)
-	(setq current-workspace (1- current-workspace)))
-      (setq count (1+ count))
-      (setq index (1- index)))
-    (call-hook 'workspace-state-change-hook)))
+  (cond ((> count 0)
+	 (map-windows
+	  (lambda (w)
+	    (transform-window-workspaces (lambda (space)
+					   (cond ((< space index)
+						  space)
+						 ((= space index)
+						  (+ space count))
+						 ((> space index)
+						  (1- space)))) w)))
+	 (cond ((= current-workspace index)
+		(setq current-workspace (+ current-workspace count)))
+	       ((> current-workspace index)
+		(setq current-workspace (1- current-workspace)))))
+	((< count 0)
+	 (map-windows
+	  (lambda (w)
+	    (transform-window-workspaces (lambda (space)
+					   (cond ((> space index)
+						  space)
+						 ((= space index)
+						  (+ space count))
+						 ((< space index)
+						  (1+ space)))) w)))
+	 (cond ((= current-workspace index)
+		(setq current-workspace (+ current-workspace count)))
+	       ((< current-workspace index)
+		(setq current-workspace (1+ current-workspace))))))
+  (call-hook 'workspace-state-change-hook))
 
-(defun ws-after-removing-window (w space)
-  (when (and delete-workspaces-when-empty
-	     (workspace-empty-p space))
+;; called when workspace with id SPACE may contain no windows
+(defun ws-workspace-may-be-empty (space)
+  (when (and delete-workspaces-when-empty (workspace-empty-p space))
     ;; workspace is now empty
     (let*
 	((limits (workspace-limits))
 	 (need-to-move (and (= current-workspace (cdr limits))
 			    (/= current-workspace (car limits)))))
       (ws-remove-workspace space)
-      (ws-normalize-indices)
       (when need-to-move
-	(select-workspace (1- current-workspace))))))
+	(select-workspace (1- current-workspace)))
+      (ws-normalize-indices))))
 
 ;; called when window W is destroyed
 (defun ws-remove-window (w &optional dont-hide)
   (let
-      ((space (window-get w 'workspace)))
-    (when space
-      (window-put w 'workspace nil)
-      (ws-after-removing-window w space)
-      (when (and (not dont-hide) (windowp w))
-	(hide-window w))
-      (call-hook 'workspace-state-change-hook))))
+      ((spaces (window-workspaces w)))
+    (mapc (lambda (space)
+	    (window-remove-from-workspace w space)) spaces)
+    (mapc (lambda (space)
+	    (ws-workspace-may-be-empty space)) (sort spaces >))
+    (when (and (not dont-hide) (windowp w))
+      (hide-window w))
+    (call-hook 'workspace-state-change-hook)))
 
-;; move window W to workspace index NEW
-(defun ws-move-window (w new &optional was-focused)
-  (let
-      ((space (window-get w 'workspace)))
-    (cond
-     ((null space)
-      (ws-add-window-to-space w new))
-     ((/= new space)
-      (window-put w 'workspace new)
-      (cond ((= space current-workspace)
-	     (hide-window w))
-	    ((and (= new current-workspace) (not (window-get w 'iconified)))
-	     (show-window w)))
-      (ws-after-removing-window w space)
-      ;; the window may lose the focus when switching spaces
-      (when (and was-focused (window-visible-p w))
-	(set-input-focus w))
-      (call-hook 'workspace-state-change-hook)))))
+;; move window W from workspace id OLD to workspace NEW
+;; this _must_ take the same parameters as ws-copy-window!
+(defun ws-move-window (w old new &optional was-focused dont-hide)
+  (or (window-in-workspace-p w old)
+      (error
+       "ws-move-window--window isn't in original workspace: %s, %s" w old))
+  (if (window-in-workspace-p w new)
+      ;; just remove from the source workspace
+      (window-remove-from-workspace w old)
+    ;; need to move it..
+    (transform-window-workspaces (lambda (space)
+				   (if (= space old)
+				       new
+				     space)) w)
+    (cond ((and (not dont-hide) (= old current-workspace))
+	   (hide-window w))
+	  ((and (= new current-workspace) (not (window-get w 'iconified)))
+	   (show-window w))))
+  (ws-workspace-may-be-empty old)
+  ;; the window may lose the focus when switching spaces
+  (when (and was-focused (window-visible-p w))
+    (set-input-focus w))
+  (call-hook 'workspace-state-change-hook))
 
-;; display workspace index SPACE
+;; arrange it so that window W appears on both OLD and NEW workspaces
+;; this _must_ take the same parameters as ws-move-window!
+(defun ws-copy-window (w old new &optional was-focused)
+  (or (window-in-workspace-p w old)
+      (error
+       "ws-copy-window--window isn't in original workspace: %s, %s" w old))
+  (unless (window-in-workspace-p w new)
+    (window-add-to-workspace w new))
+  (when (and (= new current-workspace) (not (window-get w 'iconified)))
+    (show-window w))
+  ;; the window may lose the focus when switching spaces
+  (when (and was-focused (window-visible-p w))
+    (set-input-focus w))
+  (call-hook 'workspace-state-change-hook))
+
+;; switch to workspace with id SPACE
 (defun select-workspace (space &optional dont-focus)
   "Activate workspace number SPACE (from zero)."
   (interactive "p")
   (unless (= current-workspace space)
-     (when current-workspace
-       (call-hook 'leave-workspace-hook (list current-workspace))
-       ;; the server grabs are just for optimisation (each call to
-       ;; show-window or hide-window may also grab the server semaphore)
-       (with-server-grabbed
-	(mapc (lambda (w)
-		(when (and (window-get w 'workspace)
-			   (= (window-get w 'workspace) current-workspace)
-			   (window-get w 'placed))
-		  (hide-window w)))
-	      (managed-windows))))
-     (setq current-workspace space)
-     (when current-workspace
-       (with-server-grabbed
-	(mapc (lambda (w)
-		(when (and (window-get w 'workspace)
-			   (= (window-get w 'workspace) current-workspace)
-			   (not (window-get w 'iconified))
-			   (window-get w 'placed))
-		  (show-window w)))
-	      (managed-windows)))
-       (unless (or dont-focus (eq focus-mode 'enter-exit))
-	 (window-order-focus-most-recent))
-       (call-hook 'enter-workspace-hook (list current-workspace))
-       (call-hook 'workspace-state-change-hook))))
+    (when current-workspace
+      (call-hook 'leave-workspace-hook (list current-workspace))
+      ;; the server grabs are just for optimisation (each call to
+      ;; show-window or hide-window may also grab the server semaphore)
+      (with-server-grabbed
+       (map-windows
+	(lambda (w)
+	  (when (and (not (window-get w 'sticky))
+		     (window-in-workspace-p w current-workspace)
+		     (not (window-in-workspace-p w space))
+		     (window-get w 'placed))
+	    (hide-window w))))))
+    (setq current-workspace space)
+    (when current-workspace
+      (with-server-grabbed
+       (map-windows
+	(lambda (w)
+	  (when (and (not (window-get w 'sticky))
+		     (window-in-workspace-p w current-workspace)
+		     (window-get w 'placed))
+	    (ws-swap-in w current-workspace)
+	    (if (window-get w 'iconified)
+		(hide-window w)
+	      (show-window w))))))
+      (unless (or dont-focus (eq focus-mode 'enter-exit))
+	(window-order-focus-most-recent))
+      (call-hook 'enter-workspace-hook (list current-workspace))
+      (call-hook 'workspace-state-change-hook))))
 
 ;; return a list of all windows on workspace index SPACE
 (defun workspace-windows (space &optional include-iconified)
-  (filter (lambda (w)
-	    (and (equal (window-get w 'workspace) space)
-		 (or include-iconified
-		     (not (window-get w 'iconified)))))
-	  (managed-windows)))
-
-
-;; slightly higher level
+  (delete-if-not
+   (lambda (w)
+     (and (window-in-workspace-p w space)
+	  (or include-iconified (not (window-get w 'iconified)))))
+   (managed-windows)))
 
 ;; add window W to workspace index SPACE; window shouldn't be in any
 ;; workspace
 (defun ws-add-window-to-space (w space)
-  (unless (or (window-get w 'sticky) (window-get w 'workspace))
-    (window-put w 'workspace space)
-    (if (and (= space current-workspace) (not (window-get w 'iconified)))
-	(show-window w)
-      (hide-window w))
-    (call-window-hook 'add-to-workspace-hook w)
+  (unless (window-get w 'sticky)
+    (window-add-to-workspace w space)
+    (cond ((and (= space current-workspace)
+		(not (window-get w 'iconified)))
+	   (show-window w))
+	  ((not (window-in-workspace-p w current-workspace))
+	   (hide-window w)))
+    (call-window-hook 'add-to-workspace-hook w (list space))
     (call-hook 'workspace-state-change-hook)))
 
 ;; usually called from the add-window-hook; adds window W to the
@@ -382,28 +549,26 @@
 (defun ws-add-window (w)
   (if (window-get w 'sticky)
       (progn
-	(window-put w 'workspace nil)
+	(ws-window-set-workspaces w nil)
 	(show-window w))
-    (if (window-get w 'workspace)
+    (if (window-workspaces w)
 	(let
-	    ((space (- (window-get w 'workspace) (car (workspace-limits)))))
-	  (window-put w 'workspace nil)
-	  (ws-add-window-to-space w space))
+	    ((spaces (window-workspaces w))
+	     (first (car (workspace-limits))))
+	  (mapc (lambda (space)
+		  (ws-add-window-to-space w (- space first))) spaces))
       (let
 	  (parent)
 	(if (and transients-on-parents-workspace
 		 (window-transient-p w)
 		 (setq parent (get-window-by-id (window-transient-p w)))
-		 (window-get parent 'workspace)
-		 (/= (window-get parent 'workspace) current-workspace))
-	    ;; put the window on its parents workspace
-	    (ws-add-window-to-space w (window-get parent 'workspace))
-	  (window-put w 'workspace current-workspace)
-	  (if (not (window-get w 'iconified))
-	      (show-window w)
-	    (hide-window w))
-	  (call-window-hook 'add-to-workspace-hook w)
-	  (call-hook 'workspace-state-change-hook))))))
+		 (not (window-get parent 'sticky)))
+	    ;; put the window on its parents workspaces
+	    (mapc (lambda (space)
+		    (ws-add-window-to-space w space))
+		  (window-workspaces parent))
+	  ;; add it to the current workspace
+	  (ws-add-window-to-space w current-workspace))))))
 
 ;; called from the unmap-notify hook
 (defun ws-window-unmapped (w)
@@ -412,8 +577,7 @@
 
 ;; called from the map-notify-hook
 (defun ws-window-mapped (w)
-  (unless (or (window-get w 'sticky)
-	      (window-get w 'workspace))
+  (unless (or (window-get w 'sticky) (window-workspaces w))
     (ws-add-window w)))
 
 
@@ -447,7 +611,7 @@
        menu name)
     (while (<= i (cdr limits))
       (mapc (lambda (w)
-	      (when (and (equal (window-get w 'workspace) i)
+	      (when (and (window-in-workspace-p w i)
 			 (window-mapped-p w)
 			 (not (window-get w 'ignored)))
 		(setq name (window-name w))
@@ -460,7 +624,7 @@
 					(and (window-get w 'iconified)  ?\])
 					(and (eq (input-focus) w) " *"))
 				       `(display-window
-					 (get-window-by-id ,(window-id w))))
+					 (get-window-by-id ,(window-id w)) ,i))
 				 menu))))
 	    windows)
       (unless (or (= i (cdr limits)) (null (car menu)))
@@ -470,8 +634,7 @@
     (let
 	(extra)
       (mapc (lambda (w)
-	      (when (and (window-get w 'iconified)
-			 (not (window-get w 'workspace)))
+	      (when (and (window-get w 'iconified) (window-get w 'sticky))
 		(setq extra (cons (list (concat ?[ (window-name w) ?])
 					`(display-window
 					  (get-window-by-id ,(window-id w))))
@@ -508,48 +671,67 @@
   (interactive "p")
   (ws-call-with-workspace select-workspace count workspace-boundary-mode))
 
-(defun send-to-next-workspace (window count)
-  "Move the window to the next workspace. If no next workspace exists, one
-will be created."
-  (interactive "%W\np")
-  (ws-call-with-workspace (lambda (space)
-			    (let
-				((was-focused (eq window (input-focus))))
-			      (select-workspace space was-focused)
-			      (ws-move-window
-			       window current-workspace was-focused)))
-			  count workspace-send-boundary-mode))
-
-(defun append-workspace-and-send (window)
-  "Create a new workspace at the end of the list, and move the window to it."
-  (interactive "%W")
-  (let
-      ((limits (workspace-limits))
-       (was-focused (eq (input-focus) window)))
-    (when (window-get window 'workspace)
-      (select-workspace (1+ (cdr limits)) was-focused)
-      (ws-move-window window current-workspace was-focused))))
-
 (defun previous-workspace (count)
   "Display the previous workspace."
   (interactive "p")
   (next-workspace (- count)))
 
-(defun send-to-previous-workspace (window count)
+(defun send-to-next-workspace (w count &optional copy)
+  "Move the window to the next workspace. If no next workspace exists, one
+will be created."
+  (interactive "%W\np")
+  (ws-call-with-workspace (lambda (space)
+			    (let
+				((was-focused (eq w (input-focus)))
+				 (orig-space (if (window-in-workspace-p
+						  w current-workspace)
+						 current-workspace
+					       (car (window-workspaces w)))))
+			      (when orig-space
+				((if copy ws-copy-window ws-move-window)
+				 w orig-space space was-focused t)
+				(select-workspace space was-focused))))
+			  count workspace-send-boundary-mode))
+
+(defun send-to-previous-workspace (w count &optional copy)
   "Move the window to the previous workspace. If no such workspace exists, one
 will be created."
   (interactive "%W\np")
-  (send-to-next-workspace window (- count)))
+  (send-to-next-workspace w (- count) copy))
 
-(defun prepend-workspace-and-send (window)
+(defun copy-to-next-workspace (w count)
+  (interactive "%W\np")
+  (send-to-next-workspace w count t))
+
+(defun copy-to-previous-workspace (w count)
+  (interactive "%W\np")
+  (send-to-previous-workspace w count t))
+
+(defun append-workspace-and-send (w)
+  "Create a new workspace at the end of the list, and move the window to it."
+  (interactive "%W")
+  (let
+      ((limits (workspace-limits))
+       (was-focused (eq (input-focus) w))
+       (orig-space (if (window-in-workspace-p w current-workspace)
+		       current-workspace
+		     (car (window-workspaces w)))))
+    (when orig-space
+      (select-workspace (1+ (cdr limits)) was-focused)
+      (ws-move-window w orig-space current-workspace was-focused))))
+
+(defun prepend-workspace-and-send (w)
   "Create a new workspace at the start of the list, and move the window to it."
   (interactive "%W")
   (let
       ((limits (workspace-limits))
-       (was-focused (eq (input-focus) window)))
-    (when (window-get window 'workspace)
+       (was-focused (eq (input-focus) w))
+       (orig-space (if (window-in-workspace-p w current-workspace)
+		       current-workspace
+		     (car (window-workspaces w)))))
+    (when orig-space
       (select-workspace (1- (car limits)) was-focused)
-      (ws-move-window window current-workspace was-focused))))
+      (ws-move-window w orig-space current-workspace was-focused))))
 
 (defun merge-next-workspace ()
   "Delete the current workspace. Its member windows are relocated to the next
@@ -587,15 +769,19 @@ previous workspace."
 
 (defun select-workspace-from-first (count)
   (let
-      ((limits (workspace-limits)))
-    (select-workspace (+ count (car limits)))))
+      ((first (car (workspace-limits))))
+    (select-workspace (+ count first))))
 
-(defun send-window-to-workspace-from-first (window count)
+(defun send-window-to-workspace-from-first (w count)
   (let
-      ((limits (workspace-limits))
-       (was-focused (eq (input-focus) window)))
-    (select-workspace (+ count (car limits)) was-focused)
-    (ws-move-window window current-workspace was-focused)))
+      ((first (car (workspace-limits)))
+       (was-focused (eq (input-focus) w))
+       (orig-space (if (window-in-workspace-p w current-workspace)
+		       current-workspace
+		     (car (window-workspaces w)))))
+    (when orig-space
+      (select-workspace (+ count first) was-focused)
+      (ws-move-window w orig-space current-workspace was-focused))))
 
 (defun delete-empty-workspaces ()
   "Delete any workspaces that don't contain any windows."
@@ -648,8 +834,8 @@ previous workspace."
   (interactive "%W")
   (when (window-get w 'iconified)
     (window-put w 'iconified nil)
-    (cond ((or (not (window-get w 'workspace))
-	       (= (window-get w 'workspace) current-workspace))
+    (cond ((or (window-get w 'sticky)
+	       (window-in-workspace-p w current-workspace))
 	   (show-window w))
 	  (uniconify-to-current-workspace
 	   (ws-remove-window w)
@@ -663,29 +849,30 @@ previous workspace."
     (when uniconify-whole-group
       (uniconify-group w))))
 
-(defun display-window (w)
+(defun display-window (w &optional preferred-space)
   "Display the workspace containing the window W, then focus on W."
   (interactive "%W")
   (when w
     (if (and (window-get w 'iconified)
-	     (or uniconify-to-current-workspace
-		 (not (window-get w 'workspace))))
+	     (or uniconify-to-current-workspace (window-get w 'sticky)))
 	(uniconify-window w)
-      (let
-	  ((space (window-get w 'workspace)))
-	(when space
-	  (select-workspace space))
-	(move-viewport-to-window w)
-	(uniconify-window w)
-	(when (and unshade-selected-windows (window-get w 'shaded))
-	  (unshade-window w))
-	(when raise-selected-windows
-	  (raise-window w))
-	(when warp-to-selected-windows
-	  (warp-cursor-to-window w))
-	(when (window-really-wants-input-p w)
-	  (set-input-focus w))
-	(window-order-push w)))))
+      (when (or (not preferred-space)
+		(not (window-in-workspace-p w preferred-space)))
+	(setq preferred-space
+	      (nearest-workspace-with-window w current-workspace)))
+      (when preferred-space
+	(select-workspace preferred-space))
+      (move-viewport-to-window w)
+      (uniconify-window w)
+      (when (and unshade-selected-windows (window-get w 'shaded))
+	(unshade-window w))
+      (when raise-selected-windows
+	(raise-window w))
+      (when warp-to-selected-windows
+	(warp-cursor-to-window w))
+      (when (window-really-wants-input-p w)
+	(set-input-focus w))
+      (window-order-push w))))
 
 (defun make-window-sticky (w)
   (interactive "%W")
@@ -737,17 +924,65 @@ all workspaces."
 ;; session management
 
 (defun ws-saved-state (w)
-  (let
-      ((limits (workspace-limits))
-       (space (window-get w 'workspace)))
-    (when space
-      `((workspace . ,(- space (car limits)))))))
+  (unless (window-get w 'sticky)
+    (let
+	((first (car (workspace-limits)))
+	 (spaces (window-workspaces w)))
+      (when spaces
+	`((workspaces . ,(mapcar (lambda (space) (- space first)) spaces)))))))
 
 (defun ws-load-state (w alist)
+  (cond ((cdr (assq 'workspaces alist))
+	 (ws-window-set-workspaces w (cdr (assq 'workspaces alist))))
+	((cdr (assq 'workspace alist))
+	 ;; backwards compatibility..
+	 (ws-window-set-workspaces w (list (cdr (assq 'workspace alist)))))))
+
+
+;; default swappers
+
+(defun workspace-swap-out (w space)
   (let
-      ((space (cdr (assq 'workspace alist))))
-    (when space
-      (window-put w 'workspace space))))
+      ((props (mapcar (lambda (prop)
+			(cons prop (window-get w prop)))
+		      workspace-local-properties)))
+    ;; meta properties
+    (list (cons 'position (window-absolute-position w))
+	  (cons 'viewport (window-viewport w))
+	  (cons 'dimensions (window-dimensions w))
+	  (cons 'properties props))))
+
+(defun workspace-swap-in (w space alist)
+  (let
+      ((position (cdr (assq 'position alist)))
+       (viewport (cdr (assq 'viewport alist)))
+       (dimensions (cdr (assq 'dimensions alist)))
+       (properties (cdr (assq 'properties alist)))
+       (old-type (window-get w 'type))
+       (old-frame-style (window-get w 'current-frame-style)))
+    (when dimensions
+      (resize-window-to w (car dimensions) (cdr dimensions)))
+    (when (and position viewport)
+      (move-window-to w (+ (car position)
+			   (* (car viewport) (screen-width))
+			   (- viewport-x-offset))
+		      (+ (cdr position)
+			 (* (cdr viewport) (screen-height))
+			 (- viewport-y-offset))))
+    (mapc (lambda (cell)
+	    (when (and (eq (car cell) 'depth) (null (cdr cell)))
+	      (format standard-error "setting depth of %s to nil\n" (window-name w))
+	      (backtrace standard-error)
+	      (write standard-error ?\n))
+	    (window-put w (car cell) (cdr cell))) properties)
+    (unless (and (eq (window-get w 'type) old-type)
+		 (eq (window-get w 'current-frame-style) old-frame-style))
+      (set-window-frame-style w (or (window-get w 'current-frame-style)
+				    default-frame-style)
+			      (window-get w 'type)))))
+
+(add-hook 'workspace-swap-in-hook workspace-swap-in)
+(add-hook 'workspace-swap-out-hook workspace-swap-out)
 
 
 ;; Initialisation
