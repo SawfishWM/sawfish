@@ -76,7 +76,9 @@
 					((string-equal (car x) "Xft")
 					 (xft-description->face (cdr x)))
 					((string-equal (car x) "xlfd")
-					 (xlfd-description->face (cdr x))))))
+					 (xlfd-description->face (cdr x)))
+					((string-equal (car x) "pango")
+					 (pango-description->face (cdr x))))))
 			    (when face
 			      (gtk-entry-set-text
 			       entry (face->pango-description face)))))
