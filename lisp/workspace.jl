@@ -19,6 +19,7 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'window-order)
 (provide 'workspace)
 
 ;; Commentary:
@@ -268,7 +269,7 @@ that window on (counting from zero).")
       (call-hook 'workspace-state-change-hook))))
 
 ;; move window W to workspace index NEW
-(defun ws-move-window (w new)
+(defun ws-move-window (w new &optional was-focused)
   (let
       ((space (window-get w 'workspace)))
     (if (null space)
@@ -279,10 +280,13 @@ that window on (counting from zero).")
 	    ((and (= new current-workspace) (not (window-get w 'iconified)))
 	     (show-window w)))
       (ws-after-removing-window w space)
+      ;; the window may lose the focus when switching spaces
+      (when was-focused
+	(set-input-focus w))
       (call-hook 'workspace-state-change-hook))))
 
 ;; display workspace index SPACE
-(defun select-workspace (space)
+(defun select-workspace (space &optional dont-focus)
   "Activate workspace number SPACE (from zero)."
   (interactive "p")
   (unless (= current-workspace space)
@@ -301,6 +305,8 @@ that window on (counting from zero).")
 			   (not (window-get w 'iconified)))
 		  (show-window w)))
 	    (managed-windows))
+      (unless dont-focus
+	(window-order-focus-most-recent))
       (call-hook 'enter-workspace-hook (list current-workspace))
       (call-hook 'workspace-state-change-hook))))
 
@@ -474,18 +480,22 @@ that window on (counting from zero).")
 will be created."
   (interactive "%W\np")
   (ws-call-with-workspace #'(lambda (space)
-			      (select-workspace space)
-			      (ws-move-window window current-workspace))
+			      (let
+				  ((was-focused (eq window (input-focus))))
+				(select-workspace space was-focused)
+				(ws-move-window
+				 window current-workspace was-focused)))
 			  count workspace-send-boundary-mode))
 
 (defun append-workspace-and-send (window)
   "Create a new workspace at the end of the list, and move the window to it."
   (interactive "%W")
   (let
-      ((limits (ws-workspace-limits)))
+      ((limits (ws-workspace-limits))
+       (was-focused (eq (input-focus) window)))
     (when (window-get window 'workspace)
-      (select-workspace (1+ (cdr limits)))
-      (ws-move-window window current-workspace))))
+      (select-workspace (1+ (cdr limits)) was-focused)
+      (ws-move-window window current-workspace was-focused))))
 
 (defun previous-workspace (count)
   "Display the previous workspace."
@@ -502,10 +512,11 @@ will be created."
   "Create a new workspace at the start of the list, and move the window to it."
   (interactive "%W")
   (let
-      ((limits (ws-workspace-limits)))
+      ((limits (ws-workspace-limits))
+       (was-focused (eq (input-focus) window)))
     (when (window-get window 'workspace)
-      (select-workspace (1- (car limits)))
-      (ws-move-window window current-workspace))))
+      (select-workspace (1- (car limits)) was-focused)
+      (ws-move-window window current-workspace was-focused))))
 
 (defun merge-next-workspace ()
   "Delete the current workspace. Its member windows are relocated to the next
@@ -548,9 +559,10 @@ previous workspace."
 
 (defun send-window-to-workspace-from-first (window count)
   (let
-      ((limits (ws-workspace-limits)))
-    (select-workspace (+ count (car limits)))
-    (ws-move-window window current-workspace)))
+      ((limits (ws-workspace-limits))
+       (was-focused (eq (input-focus) window)))
+    (select-workspace (+ count (car limits)) was-focused)
+    (ws-move-window window current-workspace was-focused)))
 
 
 ;; some commands for moving directly to a workspace
@@ -622,7 +634,8 @@ previous workspace."
 	(when warp-to-selected-windows
 	  (warp-cursor-to-window w))
 	(when (window-really-wants-input-p w)
-	  (set-input-focus w))))))
+	  (set-input-focus w))
+	(window-order-push w)))))
 
 (defun toggle-window-sticky (w)
   "Toggle the `stickiness' of the window--whether or not it is a member of
