@@ -155,7 +155,9 @@ set_frame_part_bg (struct frame_part *fp)
 					     Unsorted);
 
 		    XShapeCombineMask (dpy, fp->win->frame, ShapeBounding,
-				       fp->x, fp->y, bg_mask, ShapeUnion);
+				       fp->x - fp->win->frame_x,
+				       fp->y - fp->win->frame_y,
+				       bg_mask, ShapeUnion);
 		    if (tiled)
 		    {
 			/* The pixmap will be tiled automatically. But
@@ -166,7 +168,10 @@ set_frame_part_bg (struct frame_part *fp)
 			    do {
 				XShapeCombineMask (dpy, fp->win->frame,
 						   ShapeBounding,
-						   fp->x + x, fp->y + y,
+						   (fp->x
+						    - fp->win->frame_x + x),
+						   (fp->y
+						    - fp->win->frame_y + y),
 						   bg_mask, ShapeUnion);
 				x += image->image->rgb_width;
 			    } while (x < fp->width);
@@ -193,8 +198,8 @@ set_frame_part_bg (struct frame_part *fp)
     }
     else
     {
-	/* No background. Set it to transparent. */
-	XSetWindowBackgroundPixmap (dpy, fp->id, ParentRelative);
+	/* No background. Set it to white. */
+	XSetWindowBackground (dpy, fp->id, WhitePixel (dpy, screen_num));
     }
 
     /* background won't be updated until the window is cleared.. */
