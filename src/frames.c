@@ -650,6 +650,7 @@ frame_part_destroyer (Lisp_Window *w)
 	    bool old_mutex = frame_draw_mutex;
 	    frame_draw_mutex = TRUE;
 	    unclick_current_fp ();
+	    XUngrabPointer (dpy, last_event_time);
 	    frame_draw_mutex = old_mutex;
 	}
 
@@ -1447,7 +1448,7 @@ frame-part-get WINDOW CLASS PROPERTY
 	if (fp_class && rep_CDR(fp_class) == class)
 	{
 	    repv ret = x_fp_assq (prop, fp);
-	    return ret ? rep_CDR(ret) : Qnil;
+	    return (ret != Qnil) ? rep_CDR(ret) : Qnil;
 	}
     }
     return Qnil;
