@@ -43,6 +43,7 @@ Time last_event_time;
 /* Current XEvent or a null pointer */
 XEvent *current_x_event;
 static bool current_event_updated_mouse;
+static repv current_event_window;
 
 /* We need a ButtonRelease on this fp. */
 struct frame_part *clicked_frame_part;
@@ -833,6 +834,7 @@ handle_input_mask(long mask)
 	record_event_time (&xev);
 	current_x_event = &xev;
 	current_event_updated_mouse = FALSE;
+	current_event_window = rep_NULL;
 	if (xev.type < LASTEvent && event_handlers[xev.type] != 0)
 	    event_handlers[xev.type] (&xev);
 	else if (xev.type == shape_event_base + ShapeNotify)
@@ -840,6 +842,7 @@ handle_input_mask(long mask)
 	else
 	    fprintf (stderr, "warning: unhandled event: %d\n", xev.type);
 	current_x_event = 0;
+	current_event_window = Qnil;
 	XFlush (dpy);
     }
     /* in case a function is invoked from outside the event loop
@@ -938,6 +941,38 @@ matching this numeric value are handled (see <X11/X.h>).
 {
     handle_input_mask (rep_INTP(mask) ? rep_INT(mask) : 0);
     return Qt;
+}
+
+DEFUN("current-event-window", Fcurrent_event_window, Scurrent_event_window,
+      (repv win), rep_Subr1) /*
+::doc:Scurrent-event-window::
+current-event-window
+
+Return the window that received the current event, or the symbol
+`root', or nil if no such window.
+::end:: */
+{
+    if (WINDOWP(win))
+	current_event_window = win;
+    if (current_event_window == rep_NULL)
+    {
+	struct frame_part *fp;
+	Lisp_Window *w = find_window_by_id (current_x_event->xany.window);
+	if (w == 0)
+	{
+	    fp = find_frame_part_by_window (current_x_event->xany.window);
+	    if (fp != 0)
+		w = fp->win;
+	}
+	if (w != 0)
+	    current_event_window = rep_VAL(w);
+	else if (current_x_event->xany.window == root_window)
+	    current_event_window = Qroot;
+	else
+	    current_event_window = Qnil;
+    }
+
+    return current_event_window;
 }
 
 
@@ -1045,6 +1080,7 @@ events_init (void)
     rep_ADD_SUBR(Squery_last_pointer);
     rep_ADD_SUBR(Squery_pointer_window);
     rep_ADD_SUBR(Saccept_x_input);
+    rep_ADD_SUBR(Scurrent_event_window);
 
     rep_INTERN(visibility_notify_hook);
     rep_INTERN(destroy_notify_hook);
@@ -1064,6 +1100,8 @@ events_init (void)
     rep_INTERN(deleted);
     rep_INTERN(raise_window);
     rep_INTERN(lower_window);
+
+    rep_mark_static (&current_event_window);
 }
 
 void
