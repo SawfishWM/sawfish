@@ -7,6 +7,62 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
 
+@unnumberedsec 0.30.2
+
+@itemize @bullet
+
+@item Window cycling now forwards terminating events to external
+applications as well as internal bindings (e.g. @kbd{M-TAB M-w} closes
+an activated Netscape window)
+
+@item @code{quote-event} command now works with applications that
+ignore synthetic events (adapted from code by Timo Korvola)
+
+@item Reorganized frame style and window type management. New function
+@code{define-frame-type-mapper} allows modules to affect the mapping
+from window type to frame type. E.g. the shading module uses this.
+(fixes the bug that changing the frame type of a shaded window didn't
+work)
+
+@item Added function @code{variable-customized-p}; use this to avoid
+redefining user-modified options
+
+@item Do type-directed deep conversion of values when converting
+to/from readable representations. This fixes the bug that options with
+@code{:type (optional color)} weren't being converted when passed
+between the wm and the configurator, leading to reader errors
+
+A side-effect of this is that updated custom files will not be
+compatible with previous versions of the wm (though old custom files
+will work with new versions)
+
+@item Translation updates: no (Kjartan Maraas), de (Kai Lahmann), nl
+(Dennis Smit), sl (Andraz Tori)
+
+@item Added primitives @code{map-windows} and @code{filter-windows}
+
+@item Fixed bug of not retaining focus on startup when originally in
+PointerRoot mode and moving to click-to-focus mode (Brad Thompson)
+
+@item Ensure that apps get sent a synthetic ConfigureNotify event after
+ConfigureRequest events are handled (fixes bug where menus in Java apps
+can appear at wrong position until window is moved)
+
+@item When referencing known variables from subroutines, make sure that
+restricted environment doesn't prevent the variable being accessed
+(fixes bug where @code{default-bevel-percent} was being ignored)
+
+@item When creating transient groups, don't compare null group ids
+(fixes xfmail related bugs)
+
+@item Fixed @code{move-window-to-viewport} command to correct for
+1@dots{} indexing
+
+@item Fixed non-gnome workspace widget in configurator
+
+@end itemize
+
+
 @unnumberedsec 0.30
 
 @itemize @bullet
