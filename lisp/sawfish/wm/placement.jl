@@ -133,7 +133,7 @@ this mode. The single argument is the window to be placed."
 
   (define (place-window-randomly w)
     (let* ((dims (window-frame-dimensions w))
-	   (max-rect (calculate-workarea #:window w))
+	   (max-rect (calculate-workarea #:window w #:head (current-head)))
 	   (rect-dims (cons (- (nth 2 max-rect) (nth 0 max-rect))
 			    (- (nth 3 max-rect) (nth 1 max-rect))))
 	   (rect-pos (cons (nth 0 max-rect) (nth 1 max-rect)))
@@ -166,7 +166,7 @@ this mode. The single argument is the window to be placed."
     (let ((dims (window-frame-dimensions w))
 	  (h-dims (current-head-dimensions))
 	  (h-off (current-head-offset))
-	  (screen (calculate-workarea #:window w)))
+	  (screen (calculate-workarea #:window w #:head (current-head))))
       (move-window-to w
 		      (clamp* (+ (car h-off)
 				 (quotient (- (car h-dims) (car dims)) 2))
@@ -188,7 +188,7 @@ this mode. The single argument is the window to be placed."
 	(let ((dims (window-frame-dimensions w))
 	      (pdims (window-frame-dimensions parent))
 	      (coords (window-position parent))
-	      (screen (calculate-workarea #:window w)))
+	      (screen (calculate-workarea #:window w #:head (current-head parent))))
 	  (rplaca coords (clamp* (+ (car coords)
 				    (quotient (- (car pdims) (car dims)) 2))
 				 (car dims) (nth 0 screen) (nth 2 screen)))
