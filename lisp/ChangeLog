@@ -1,5 +1,11 @@
 1999-09-30  John Harper  <john@dcs.warwick.ac.uk>
 
+	* gnome.jl (gnome-exit): delete _WIN_AREA and _WIN_AREA_COUNT
+	from the root window
+
+	* keymaps.jl (global-keymap): removed the C-Up and C-Down
+	bindings
+
 	* viewport.jl: new file, support virtual workspaces
 	* workspace.jl: deleted the workspace-columns hack, set
 	fixed-position property of sticky windows

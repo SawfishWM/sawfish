@@ -32,7 +32,6 @@
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include <setjmp.h>
 #include <X11/Xlib.h>
 #include <Imlib.h>
 

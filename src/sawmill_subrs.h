@@ -214,7 +214,7 @@ extern void grab_keymap_events (Window grab_win, repv keymap, bool grab);
 extern void keys_init (void);
 
 /* from main.c */
-extern jmp_buf clean_exit_jmp_buf;
+extern int exit_code;
 extern repv Qsawmill_directory, Qsawmill_lisp_lib_directory,
     Qsawmill_site_lisp_directory, Qsawmill_exec_directory;
 extern repv Qwindow_error, Qinvalid_pos, Qbad_event_desc;

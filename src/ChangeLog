@@ -1,5 +1,9 @@
 1999-09-30  John Harper  <john@dcs.warwick.ac.uk>
 
+	* main.c (exit_code): variable replacing the old jmp_buf exit
+	method; set the variable to an exit code then call Fquit ()
+	* session.c (die): use the new exit method
+
 	* frames.c (set_frame_part_fg): remember to tell the event loop
 	that there may be X events read but not handled (Imlib..)
 
