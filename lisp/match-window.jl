@@ -113,6 +113,21 @@
   :group match-window
   :require match-window)
 
+;; used by sawmill-ui when grabbing property values
+(defun match-window-grab-x-property (prop-name)
+  (let
+      ((real-prop (or (car (rassoc prop-name match-window-x-properties))
+		      (intern prop-name)))
+       (window (select-window))
+       prop)
+    (when window
+      (setq prop (get-x-text-property window real-prop))
+      (when prop
+	(if (get real-prop 'match-window-formatter)
+	    (setq prop ((get real-prop 'match-window-formatter) prop))
+	  (setq prop (aref prop 0)))))
+    prop))
+
 
 ;; main entry point
 
