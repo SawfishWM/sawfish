@@ -27,10 +27,11 @@
 
     (open rep
 	  gtk
-	  nokogiri-widget
-	  nokogiri-dialog)
+	  nokogiri-gnome
+	  nokogiri-widget)
 
-  (define (widget-dialog title spec callback &optional initial-value)
+  (define (widget-dialog title spec callback
+			 &optional initial-value main-window)
 
     (let* ((widget (make-widget spec))
 	   (hbox (gtk-hbox-new nil box-spacing)))
@@ -41,5 +42,6 @@
       (gtk-box-pack-start hbox (gtk-label-new title))
       (gtk-container-add hbox (widget-gtk-widget widget))
       (gtk-widget-show-all hbox)
-      (ok-cancel-dialog hbox title (lambda ()
-				     (callback (widget-ref widget)))))))
+      (simple-dialog title hbox
+		     (lambda () (callback (widget-ref widget)))
+		     main-window))))
