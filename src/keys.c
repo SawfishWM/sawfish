@@ -239,7 +239,7 @@ search_keymap(repv km, u_long code, u_long mods, bool (*callback)(repv key))
 /* Search for a binding of CODE&MODS.  */
 static repv
 lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
-	       repv context_keymap)
+	       repv context_keymap, Lisp_Window *current_window)
 {
     repv k = rep_NULL;
 
@@ -255,10 +255,10 @@ lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
 	    /* 2. if event from root, search the root-window-keymap */
 	    k = search_keymap (Qroot_window_keymap, code, mods, callback);
 
-	if (!k && focus_window)
+	if (!k && current_window)
 	{
-	    /* 2. search focused window keymap property */
-	    tem = Fwindow_get (rep_VAL(focus_window), Qkeymap);
+	    /* 2. search focused/pointer window keymap property */
+	    tem = Fwindow_get (rep_VAL(current_window), Qkeymap);
 	    if (tem && tem != Qnil)
 		k = search_keymap(tem, code, mods, callback);
 	}
@@ -277,12 +277,28 @@ eval_input_event(repv context_map)
 {
     u_long code, mods;
     repv result = Qnil, cmd;
+    Lisp_Window *w = focus_window;
 
     translate_event (&code, &mods, current_x_event);
 
     current_event[0] = code;
     current_event[1] = mods;
-    cmd = lookup_binding(code, mods, 0, context_map);
+    if (mods & EV_TYPE_MOUSE)
+    {
+	/* If a mouse event, look for bindings in the window that
+	   the pointer is in, not where the input focus is. */
+	Lisp_Window *tem = find_window_by_id (current_x_event->xany.window);
+	if (tem != 0)
+	    w = tem;
+	else
+	{
+	    struct frame_part *fp
+		= find_frame_part_by_window (current_x_event->xany.window);
+	    if (fp != 0)
+		w = fp->win;
+	}
+    }
+    cmd = lookup_binding(code, mods, 0, context_map, w);
     if(cmd != rep_NULL)
     {
 	/* Found a binding for this event; evaluate it. */
@@ -790,7 +806,14 @@ current-event-window
 {
     if (current_x_event != 0)
     {
+	struct frame_part *fp;
 	Lisp_Window *w = find_window_by_id (current_x_event->xany.window);
+	if (w == 0)
+	{
+	    fp = find_frame_part_by_window (current_x_event->xany.window);
+	    if (fp != 0)
+		w = fp->win;
+	}
 	if (w != 0)
 	    return rep_VAL(w);
 	else if (current_x_event->xany.window == root_window)
@@ -885,9 +908,9 @@ Return the command currently associated with the event EVENT.
     if(!EVENTP(ev))
 	return(rep_signal_arg_error(ev, 1));
 
-    /* XXX replace Qnil by context-sensitive keymap.. */
+    /* XXX replace Qnil by context-sensitive keymap, and define window.. */
     res = lookup_binding(rep_INT(EVENT_CODE(ev)),
-			 rep_INT(EVENT_MODS(ev)), 0, Qnil);
+			 rep_INT(EVENT_MODS(ev)), 0, Qnil, 0);
     return res ? res : Qnil;
 }
 
