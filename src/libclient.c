@@ -23,6 +23,7 @@
 #include "server.h"
 #include "libclient.h"
 #include <X11/Xlib.h>
+#include <X11/Xatom.h>
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -22,6 +22,7 @@
 #include "sawmill.h"
 #include <string.h>
 #include <X11/Xlocale.h>
+#include <ctype.h>
 
 static Lisp_Font *font_list;
 int font_type;

@@ -24,9 +24,11 @@
 #include <X11/Xutil.h>
 #include <X11/cursorfont.h>
 #include <X11/keysym.h>
+#include <X11/extensions/shape.h>
 #include <string.h>
 #include <assert.h>
 #include <stdarg.h>
+#include <ctype.h>
 
 #ifdef HAVE_UNIX
 # ifdef HAVE_FCNTL_H
