@@ -29,7 +29,7 @@
 ;;;###autoload
 (defun select-window ()
   (allow-events 'async-pointer)
-  (when (grab-pointer nil (get-cursor select-window-cursor-shape))
+  (when (grab-pointer nil select-window-cursor-shape)
     (unwind-protect
 	(let
 	    ((override-keymap select-window-map))

@@ -186,8 +186,8 @@
 	  (allow-events 'async-pointer)
 	  ;; ensure that we catch _all_ mouse events
 	  (when (grab-pointer
-		 nil (get-cursor (if (eq move-resize-function 'move)
-				     move-cursor-shape resize-cursor-shape)))
+		 nil (if (eq move-resize-function 'move)
+			 move-cursor-shape resize-cursor-shape))
 	    (unwind-protect
 		(progn
 		  (grab-keyboard w)	;this may fail
