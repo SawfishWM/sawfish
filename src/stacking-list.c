@@ -36,10 +36,35 @@ assert_constraints (Lisp_Window *w)
     assert (highest_window == 0 || WINDOWP (rep_VAL (highest_window)));
 }
 
+void
+assert_window_in_stacking_list (Lisp_Window *w)
+{
+    Lisp_Window *ptr;
+    for (ptr = lowest_window; ptr != 0; ptr = ptr->above)
+    {
+	if (ptr == w)
+	    return;
+    }
+    abort ();
+}
+
+void
+assert_window_not_in_stacking_list (Lisp_Window *w)
+{
+    Lisp_Window *ptr;
+    for (ptr = lowest_window; ptr != 0; ptr = ptr->above)
+    {
+	if (ptr == w)
+	    abort ();
+    }
+}
+
 /* Remove window W from the stacking list */
 void
 remove_from_stacking_list (Lisp_Window *w)
 {
+    assert_window_in_stacking_list (w);
+
     /* divert the links around W */
 
     if (w->above != 0)
@@ -64,6 +89,7 @@ void
 insert_in_stacking_list_above_all (Lisp_Window *w)
 {
     assert (w->below == 0 && w->above == 0);
+    assert_window_not_in_stacking_list (w);
 
     w->above = 0;
     w->below = highest_window;
@@ -81,6 +107,7 @@ void
 insert_in_stacking_list_below_all (Lisp_Window *w)
 {
     assert (w->below == 0 && w->above == 0);
+    assert_window_not_in_stacking_list (w);
 
     w->below = 0;
     w->above = lowest_window;
@@ -99,6 +126,7 @@ insert_in_stacking_list_above (Lisp_Window *w, Lisp_Window *x)
 {
     assert (highest_window != 0 && lowest_window != 0);
     assert (w->below == 0 && w->above == 0);
+    assert_window_not_in_stacking_list (w);
 
     if (x->above != 0)
 	x->above->below = w;
@@ -118,6 +146,7 @@ void
 insert_in_stacking_list_below (Lisp_Window *w, Lisp_Window *x)
 {
     assert (highest_window != 0 && lowest_window != 0);
+    assert_window_not_in_stacking_list (w);
 
     if (x->below != 0)
 	x->below->above = w;
@@ -145,6 +174,9 @@ restack_window (Lisp_Window *w)
 {
     XWindowChanges wc;
     u_int mask = 0;
+
+    assert_window_in_stacking_list (w);
+    assert (w->id != 0);
 
     if (w->above != 0)
     {

@@ -344,6 +344,8 @@ extern void windows_init (void);
 extern void windows_kill (void);
 
 /* from window-list.c */
+extern void assert_window_in_stacking_list (Lisp_Window *w);
+extern void assert_window_not_in_stacking_list (Lisp_Window *w);
 extern void remove_from_stacking_list (Lisp_Window *w);
 extern void insert_in_stacking_list_above_all (Lisp_Window *w);
 extern void insert_in_stacking_list_below_all (Lisp_Window *w);

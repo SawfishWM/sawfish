@@ -1381,6 +1381,7 @@ window_sweep (void)
 	Lisp_Window *w = *ptr;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
 	{
+	    assert_window_not_in_stacking_list (w);
 	    destroy_window_frame (w, FALSE);
 	    if (w->wmhints != 0)
 		XFree (w->wmhints);
