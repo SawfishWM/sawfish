@@ -516,11 +516,7 @@
 
 ;;; utility functions
 
-  (define (string->symbol string)
-    (condition-case nil
-	(let ((data (read-from-string string)))
-	  (and (symbolp data) data))
-      (error)))
+  (define string->symbol intern)
 
   (define (list-index lst x)
     (let loop ((i 0) (rest lst))
