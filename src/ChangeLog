@@ -1,5 +1,8 @@
 1999-09-26  John Harper  <john@dcs.warwick.ac.uk>
 
+	* display.c (sys_init): set the display-name variable to the
+	display we opened (or a null string if in batch-mode)
+
 	* events.c (map_notify): check if the window set its
 	override_redirect attribute to True while it was unmapped, if
 	so un-adopt the window

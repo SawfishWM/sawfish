@@ -23,13 +23,13 @@
 
 ;; Commentary:
 
-;; Sawmill's workspace are organised as an infinite 1-dimensional
-;; continuum, from -infinity to +infinity. Normally the user only sees
-;; a small part of this continuum, from the first non-empty workspace
-;; to the last non-empty workspace
+;; Sawmill's workspace are organised as a 1-dimensional continuum, from
+;; -infinity to +infinity. Normally the user only sees a small part of
+;; this continuum, from the first non-empty workspace to the last
+;; non-empty workspace
 
-;; So that we never run out of workspace ids (yeah right) the non-empty
-;; portion is intermittently normalised to start with index zero
+;; So that we never run out of workspace ids the non-empty portion is
+;; intermittently normalised to start with index zero
 
 ;; Inserting and deleting workspaces just involves shuffling the
 ;; workspace index of each window (stored in the `workspace' property,
