@@ -21,10 +21,12 @@
 
 (define-structure sawfish.wm.state.iconify
 
-    (export iconify-window
+    (export window-iconified-p
+	    iconify-window
 	    uniconify-window
 	    toggle-window-iconified
 	    iconify-workspace-windows
+	    window-sticky-p
 	    make-window-sticky
 	    make-window-unsticky
 	    toggle-window-sticky
@@ -40,7 +42,8 @@
 	  sawfish.wm.stacking
 	  sawfish.wm.viewport
 	  sawfish.wm.util.groups
-	  sawfish.wm.commands.groups)
+	  sawfish.wm.commands.groups
+	  sawfish.wm.menus)
   
   ;; Commentary:
 
@@ -80,6 +83,8 @@
     "Uniconifying a window also uniconifies the: \\w"
     :type (choice none transients group)
     :group (min-max iconify))
+
+  (define (window-iconified-p w) (window-get w 'iconified))
 
   (define (iconify-window w)
     "Iconify the window."
@@ -136,6 +141,9 @@
 
 
 ;;; sticky-ness, could be in a separate file..
+
+  (define (window-sticky-p w)
+    (or (window-get w 'sticky) (window-get w 'sticky-viewport)))
 
   (define (make-window-sticky w)
     (unless (and (window-get w 'sticky) (window-get w 'sticky-viewport))
@@ -211,4 +219,6 @@ all workspaces."
   (add-hook 'client-message-hook ws-client-msg-handler)
   (add-hook 'before-add-window-hook ws-honour-client-state)
   (add-hook 'map-notify-hook ws-set-client-state t)
-  (call-after-state-changed '(iconified) ws-set-client-state))
+  (call-after-state-changed '(iconified) ws-set-client-state)
+
+  (add-window-menu-toggle (_ "_Sticky") 'toggle-window-sticky window-sticky-p))

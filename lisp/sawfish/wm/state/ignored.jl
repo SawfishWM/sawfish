@@ -24,16 +24,21 @@
 
 (define-structure sawfish.wm.state.ignored
 
-    (export make-window-ignored
+    (export window-ignored-p
+	    make-window-ignored
 	    make-window-not-ignored
 	    toggle-window-ignored
+	    window-never-focus-p
 	    toggle-window-never-focus)
 
     (open rep
 	  sawfish.wm.windows
 	  sawfish.wm.commands
 	  sawfish.wm.util.window-order
-	  sawfish.wm.frames)
+	  sawfish.wm.frames
+	  sawfish.wm.menus)
+
+  (define (window-ignored-p w) (window-get w 'ignored))
 
   (define (make-window-ignored w)
     "Ignore the window."
@@ -71,4 +76,9 @@
   (define-command 'make-window-ignored make-window-ignored #:spec "%W")
   (define-command 'make-window-not-ignored make-window-not-ignored #:spec "%W")
   (define-command 'toggle-window-ignored toggle-window-ignored #:spec "%W")
-  (define-command 'toggle-window-never-focus toggle-window-never-focus #:spec "%W"))
+  (define-command 'toggle-window-never-focus toggle-window-never-focus #:spec "%W")
+
+  (add-window-menu-toggle (_ "_Ignored") 'toggle-window-ignored
+			  window-ignored-p)
+  (add-window-menu-toggle (_ "_Focusable") 'toggle-window-never-focus
+			  (lambda (w) (not (window-get w 'never-focus)))))

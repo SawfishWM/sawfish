@@ -21,7 +21,8 @@
 
 (define-structure sawfish.wm.state.shading
 
-    (export shade-window
+    (export window-shaded-p
+	    shade-window
 	    unshade-window
 	    toggle-window-shaded)
 
@@ -32,7 +33,8 @@
 	  sawfish.wm.frames
 	  sawfish.wm.session.init
 	  sawfish.wm.workspace
-	  sawfish.wm.stacking)
+	  sawfish.wm.stacking
+	  sawfish.wm.menus)
 
   (define-structure-alias shading sawfish.wm.state.shading)
 
@@ -40,6 +42,8 @@
     "Raise windows when they are unshaded."
     :group misc
     :type boolean)
+
+  (define (window-shaded-p w) (window-get w 'shaded))
 
   (define (shade-window w)
     "Display only the title bar of the window."
@@ -95,4 +99,6 @@ state."
 
   (add-hook 'add-window-hook shading-add-window t)
   (sm-add-saved-properties 'shaded)
-  (add-swapped-properties 'shaded))
+  (add-swapped-properties 'shaded)
+
+  (add-window-menu-toggle (_ "S_haded") 'toggle-window-shaded window-shaded-p))

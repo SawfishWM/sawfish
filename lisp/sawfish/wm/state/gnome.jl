@@ -37,6 +37,7 @@
 	  sawfish.wm.windows
 	  sawfish.wm.events
 	  sawfish.wm.misc
+	  sawfish.wm.menus
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
 	  sawfish.wm.stacking
@@ -332,4 +333,7 @@
 
   (unless (or gnome-window-id batch-mode)
     (gnome-init)
-    (require 'sawfish.wm.gnome.match-window)))
+    (require 'sawfish.wm.gnome.match-window))
+
+  (add-window-menu-toggle (_ "In _window list") 'gnome-toggle-skip-winlist)
+  (add-window-menu-toggle (_ "In _task list") 'gnome-toggle-skip-tasklist))
