@@ -153,12 +153,12 @@
 
 (define (window-history-position-snapshotter w)
   (when (and window-history-auto-save-position
-	     (not (window-get w 'fixed-position)))
+	     (not (window-get w 'client-set-position)))
     (window-history-snapshotter w 'position)))
 
 (define (window-history-dimensions-snapshotter w)
   (when (and window-history-auto-save-dimensions
-	     (not (window-get w 'fixed-position)))
+	     (not (window-get w 'client-set-position)))
     (window-history-snapshotter w 'dimensions)))
 
 (define (window-history-state-snapshotter w states)

@@ -98,7 +98,7 @@
 			       (configure-choose-gravity w))
 			  (cdr (assq 'window-gravity (window-size-hints w)))
 			  (and configure-auto-gravity
-			       (not (window-get w 'fixed-position))
+			       (not (window-get w 'client-set-position))
 			       (configure-choose-gravity w)))))
 
 	  ;; anchor the window to the point specified by the gravity
@@ -121,11 +121,11 @@
     (when (setq tem (cdr (assq 'position alist)))
       (setq coords tem)
       ;; if the program is setting its position, best not to interfere..
-      (window-put w 'fixed-position t))
+      (window-put w 'client-set-position t))
     (move-resize-window-to w (car coords) (cdr coords) (car dims) (cdr dims))
 
     ;; force the window to be somewhere in the virtual workspace..
-    (when (and (not (window-get w 'fixed-position))
+    (when (and (not (window-get w 'client-set-position))
 	       (window-outside-workspace-p w))
       (move-window-to-current-viewport w))))
 
