@@ -21,8 +21,6 @@
 
 #include "sawmill.h"
 
-DEFSYM(flippers, "flippers");
-
 static Window edge_left, edge_right, edge_top, edge_bottom;
 
 DEFSYM(left, "left");
@@ -132,11 +130,12 @@ create_flipper (Window parent, int x, int y, int width, int height)
 repv
 rep_dl_init (void)
 {
+    repv tem = rep_push_structure ("sawfish.wm.util.flippers");
+
     rep_ADD_SUBR(Senable_flippers);
     rep_ADD_SUBR(Sdisable_flippers);
     rep_ADD_SUBR(Sflippers_after_restacking);
 
-    rep_INTERN (flippers);
     rep_INTERN (left);
     rep_INTERN (right);
     rep_INTERN (top);
@@ -156,5 +155,6 @@ rep_dl_init (void)
 	add_hook (Qafter_restacking_hook, rep_VAL(&Sflippers_after_restacking));
 	Fenable_flippers ();
     }
-    return Qflippers;
+
+    return rep_pop_structure (tem);
 }

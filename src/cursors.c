@@ -242,6 +242,7 @@ cursor_sweep (void)
 void
 cursors_init (void)
 {
+    repv tem = rep_push_structure ("sawfish.wm.cursors");
     cursor_type = rep_register_new_type ("cursor", cursor_cmp, cursor_prin,
 					 cursor_prin, cursor_sweep,
 					 cursor_mark, 0, 0, 0, 0, 0, 0, 0);
@@ -253,6 +254,7 @@ cursors_init (void)
 	Fdefault_cursor (Fget_cursor (rep_MAKE_INT (XC_left_ptr)));
     rep_mark_static (&default_cursor);
     rep_INTERN(cursor_shape);
+    rep_pop_structure (tem);
 }
 
 void

@@ -371,8 +371,8 @@ add_window (Window id)
 	    create_window_frame (w);
 	    install_window_frame (w);
 
-           /* this grabs bound events in the subwindow */
-           grab_window_events (w, TRUE);
+	    /* this grabs bound events in the subwindow */
+	    grab_window_events (w, TRUE);
 
 	    Fungrab_server ();
 	}
@@ -1389,10 +1389,13 @@ manage_windows (void)
 void
 windows_init (void)
 {
+    repv tem;
     window_type = rep_register_new_type ("window", window_cmp, window_prin,
 					 window_prin, window_sweep,
 					 window_mark, window_mark_type,
 					 0, 0, 0, 0, 0, 0);
+
+    tem = rep_push_structure ("sawfish.wm.windows.subrs");
     rep_ADD_SUBR(Swindow_get);
     rep_ADD_SUBR(Smap_window_properties);
     rep_ADD_SUBR(Swindow_put);
@@ -1429,6 +1432,7 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_icon_image);
     rep_ADD_SUBR(Smap_windows);
     rep_ADD_SUBR(Sfilter_windows);
+    rep_pop_structure (tem);
 
     rep_INTERN_SPECIAL(before_add_window_hook);
     rep_INTERN_SPECIAL(add_window_hook);

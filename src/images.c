@@ -1532,6 +1532,7 @@ image_sweep (void)
 void
 images_init (void)
 {
+    repv tem;
     image_type = rep_register_new_type ("image", image_cmp, image_prin,
 					image_prin, image_sweep, image_mark,
 					0, 0, 0, 0, 0, 0, 0);
@@ -1552,6 +1553,8 @@ images_init (void)
 	image_depth = xlib_rgb_get_depth ();
 #endif
     }
+
+    tem = rep_push_structure ("sawfish.wm.images");
     rep_ADD_SUBR(Smake_image);
     rep_ADD_SUBR(Smake_image_from_x_drawable);
     rep_ADD_SUBR(Scopy_image);
@@ -1576,6 +1579,7 @@ images_init (void)
     rep_ADD_SUBR(Simage_set);
     rep_ADD_SUBR(Simage_map);
     rep_ADD_SUBR(Simage_fill);
+    rep_pop_structure (tem);
 
     rep_INTERN_SPECIAL(image_directory);
     Fset (Qimage_directory,

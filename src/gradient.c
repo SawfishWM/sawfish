@@ -21,8 +21,6 @@
 
 #include "sawmill.h"
 
-DEFSYM(gradient, "gradient");
-
 DEFUN("draw-vertical-gradient", Fdraw_vertical_gradient,
       Sdraw_vertical_gradient, (repv img, repv from_, repv to_), rep_Subr3)
 {
@@ -164,9 +162,11 @@ DEFUN("draw-diagonal-gradient", Fdraw_diagonal_gradient,
 repv
 rep_dl_init (void)
 {
+    repv tem = rep_push_structure ("sawfish.wm.util.gradient");
+    /* ::alias:gradient sawfish.wm.util.gradient:: */
+    rep_alias_structure ("gradient");
     rep_ADD_SUBR(Sdraw_vertical_gradient);
     rep_ADD_SUBR(Sdraw_horizontal_gradient);
     rep_ADD_SUBR(Sdraw_diagonal_gradient);
-    rep_INTERN (gradient);
-    return Qgradient;
+    return rep_pop_structure (tem);
 }

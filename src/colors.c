@@ -194,6 +194,7 @@ color_sweep (void)
 void
 colors_init (void)
 {
+    repv tem = rep_push_structure ("sawfish.wm.colors");
     color_type = rep_register_new_type ("color", color_cmp, color_prin,
 					color_prin, color_sweep, 0,
 					0, 0, 0, 0, 0, 0, 0);
@@ -206,6 +207,7 @@ colors_init (void)
     rep_INTERN_SPECIAL(default_foreground);
     if (!batch_mode_p ())
 	Fset (Qdefault_foreground, Fget_color (rep_string_dup("black")));
+    rep_pop_structure (tem);
 }
 
 void

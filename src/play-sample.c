@@ -525,8 +525,6 @@ gnome_sound_shutdown(void)
 
 /* sawmill code */
 
-DEFSYM (play_sample, "play-sample");
-
 DEFUN("primitive-play-sample", Fprimitive_play_sample,
       Sprimitive_play_sample, (repv filename), rep_Subr1)
 {
@@ -538,11 +536,11 @@ DEFUN("primitive-play-sample", Fprimitive_play_sample,
 repv
 rep_dl_init (void)
 {
+    repv tem = rep_push_structure ("sawfish.wm.util.play-sample");
     if (!batch_mode_p ())
 	gnome_sound_init ("");
-    rep_INTERN (play_sample);
     rep_ADD_SUBR (Sprimitive_play_sample);
-    return Qplay_sample;
+    return rep_pop_structure (tem);
 }
 
 void

@@ -143,7 +143,7 @@ Deletes the session manager property called PROPERTY-NAME (a string).
 static void
 save_yourself_2 (SmcConn conn, SmPointer data)
 {
-    repv ret = rep_call_lisp0 (Fsymbol_value (Qsm_save_yourself, Qt));
+    repv ret = rep_call_lisp0 (global_symbol_value (Qsm_save_yourself));
     SmcSaveYourselfDone (conn, (ret && ret != Qnil) ? True : False);
 }
 
@@ -264,11 +264,13 @@ DEFUN("sm-disconnect", Fsm_disconnect, Ssm_disconnect, (void), rep_Subr0)
 void
 session_init (void)
 {
+    repv tem = rep_push_structure ("sawfish.wm.session.util");
     rep_ADD_SUBR(Ssm_set_property);
     rep_ADD_SUBR(Ssm_delete_property);
     rep_ADD_SUBR(Ssm_connect);
     rep_ADD_SUBR(Ssm_disconnect);
     rep_INTERN(sm_save_yourself);
+    rep_pop_structure (tem);
 }
 
 void

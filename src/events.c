@@ -569,6 +569,7 @@ destroy_notify (XEvent *ev)
 void
 map_request (XEvent *ev)
 {
+    DEFSTRING (iconify_mod, "sawfish.wm.state.iconify");
     Window id = ev->xmaprequest.window;
     Lisp_Window *w = find_window_by_id (id);
     if (w == 0)
@@ -576,12 +577,12 @@ map_request (XEvent *ev)
 	w = add_window (id);
 	if (w == 0)
 	    return;
-	w->mapped = TRUE;
 
 	if (w->wmhints && w->wmhints->flags & StateHint
 	    && w->wmhints->initial_state == IconicState)
 	{
-	    rep_call_lisp1 (Fsymbol_value (Qiconify_window, Qt), rep_VAL(w));
+	    rep_call_lisp1 (module_symbol_value (rep_VAL (&iconify_mod),
+						 Qiconify_window), rep_VAL(w));
 	}
     }
     else
@@ -594,7 +595,8 @@ map_request (XEvent *ev)
 	    Fungrab_server ();
 	}
 	w->mapped = TRUE;
-	rep_call_lisp1 (Fsymbol_value (Quniconify_window, Qt), rep_VAL(w));
+	rep_call_lisp1 (module_symbol_value (rep_VAL (&iconify_mod),
+					     Quniconify_window), rep_VAL(w));
     }
 
     if (!w->client_unmapped)
@@ -1366,6 +1368,8 @@ DEFUN("clicked-frame-part", Fclicked_frame_part,
 void
 events_init (void)
 {
+    repv tem;
+
     event_handlers[VisibilityNotify] = visibility_notify;
     event_handlers[ColormapNotify] = colormap_notify;
     event_handlers[KeyPress] = key_press;
@@ -1462,6 +1466,7 @@ events_init (void)
     event_masks[ClientMessage] = 0;
     event_masks[MappingNotify] = StructureNotifyMask | SubstructureNotifyMask;
 
+    tem = rep_push_structure ("sawfish.wm.events");
     rep_ADD_SUBR(Squery_pointer);
     rep_ADD_SUBR(Squery_button_press_pointer);
     rep_ADD_SUBR(Squery_button_press_window);
@@ -1472,6 +1477,7 @@ events_init (void)
     rep_ADD_SUBR(Sx_events_queued);
     rep_ADD_SUBR(Sclicked_frame_part);
     rep_ADD_SUBR(Ssynthetic_configure_mutex);
+    rep_pop_structure (tem);
 
     rep_INTERN_SPECIAL(visibility_notify_hook);
     rep_INTERN_SPECIAL(destroy_notify_hook);

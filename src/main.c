@@ -80,8 +80,8 @@ DEFSTRING(err_bad_event_desc, "Invalid event description");
 DEFSTRING(version_string, SAWFISH_VERSION);
 
 DEFSYM(saved_command_line_args, "saved-command-line-args");
-DEFSYM(rep, "rep");
 DEFSYM(fonts_are_fontsets, "fonts-are-fontsets");
+DEFSYM(sawfish_wm, "sawfish.wm");
 
 static rep_bool
 on_idle (int since_last)
@@ -131,6 +131,8 @@ Restart the sawfish process.
 static void
 sawfish_symbols (void)
 {
+    repv tem;
+
     rep_INTERN_SPECIAL(sawfish_directory);
     if(getenv("SAWFISHDIR") != 0)
 	Fset (Qsawfish_directory, rep_string_dup(getenv("SAWFISHDIR")));
@@ -190,6 +192,7 @@ sawfish_symbols (void)
     rep_INTERN(window_error); rep_ERROR(window_error);
     rep_INTERN(invalid_pos); rep_ERROR(invalid_pos);
     rep_INTERN(bad_event_desc); rep_ERROR(bad_event_desc);
+    rep_INTERN(sawfish_wm);
 
     rep_on_idle_fun = on_idle;
     rep_on_termination_fun = on_termination;
@@ -201,8 +204,10 @@ sawfish_symbols (void)
     rep_INTERN_SPECIAL(fonts_are_fontsets);
     Fset (Qfonts_are_fontsets, Qt);
 
+    tem = rep_push_structure ("sawfish.wm.misc");
     rep_ADD_SUBR_INT(Squit);
     rep_ADD_SUBR_INT(Srestart);
+    rep_pop_structure (tem);
 }
 
 static void
@@ -272,17 +277,31 @@ usage (void)
 static repv
 inner_main (repv arg)
 {
-    repv res = rep_load_environment(rep_string_dup ("sawmill"));
+    repv res = rep_load_environment (Qnil);
     if (res != rep_NULL)
     {
-	if(!batch_mode_p ())
-	{
-	    /* final initialisation.. */
-	    manage_windows ();
+	/* C modules that have also Lisp code in the filing system. */
+	static const char *init[] = {
+	    "sawfish.wm.misc",
+	    "sawfish.wm.cursors",
+	    "sawfish.wm",
+	    0
+	};
+	const char **ptr;
 
-	    /* then jump into the event loop.. */
-	    res = Frecursive_edit ();
+	for (ptr = init; res != rep_NULL && *ptr != 0; ptr++)
+	{
+	    res = rep_bootstrap_structure (*ptr);
 	}
+    }
+
+    if (res != rep_NULL && !batch_mode_p ())
+    {
+	/* final initialisation.. */
+	manage_windows ();
+
+	/* then jump into the event loop.. */
+	res = Frecursive_edit ();
     }
     return res;
 }
@@ -313,10 +332,7 @@ main(int argc, char **argv)
 	return 0;
     }
 
-    rep_push_structure ("sawfish");
-    rep_structure_exports_all (rep_structure, rep_TRUE);
-    rep_INTERN (rep);
-    Frequire (Qrep);
+    rep_push_structure ("sawfish.wm");
 
     if (sys_init(prog_name))
     {
@@ -343,7 +359,6 @@ main(int argc, char **argv)
 	cursors_init ();
 	frames_init ();
 	windows_init ();
-	commands_init ();
 	keys_init ();
 	functions_init ();
 	server_init ();
@@ -384,15 +399,21 @@ add_hook (repv sym, repv fun)
     Fset (sym, val);
 }
 
+repv
+module_symbol_value (repv mod, repv sym)
+{
+    repv value;
+    repv tem = rep_push_structure_name (mod);
+    value = Fsymbol_value (sym, Qt);
+    rep_pop_structure (tem);
+    return value;
+}
+
 /* in rep 0.11 and earlier the gaol was broken, it was possible to read
    non-exported special variables; this was fixed in rep 0.12, so we
    need to read some symbols from a non-gaolled module */
 repv
 global_symbol_value (repv sym)
 {
-    repv value;
-    repv tem = rep_push_structure ("sawfish");
-    value = Fsymbol_value (sym, Qt);
-    rep_pop_structure (tem);
-    return value;
+    return module_symbol_value (Qsawfish_wm, sym);
 }

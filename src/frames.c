@@ -1798,10 +1798,12 @@ DEFUN("refresh-window", Frefresh_window,
 void
 frames_init (void)
 {
+    repv tem;
     frame_part_type = rep_register_new_type ("frame-part", fp_cmp, fp_prin,
 					     fp_prin, fp_sweep, fp_mark, 0,
 					     0, 0, 0, 0, 0, 0);
 
+    tem = rep_push_structure ("sawfish.wm.frames.subrs");
     rep_ADD_SUBR(Sframe_draw_mutex);
     rep_ADD_SUBR(Sframe_state_mutex);
     rep_ADD_SUBR(Sframe_part_get);
@@ -1814,7 +1816,11 @@ frames_init (void)
     rep_ADD_SUBR(Smap_frame_parts);
     rep_ADD_SUBR(Srefresh_frame_part);
     rep_ADD_SUBR(Srebuild_frame_part);
+    rep_pop_structure (tem);
+
+    tem = rep_push_structure ("sawfish.wm.windows.subrs");
     rep_ADD_SUBR(Srefresh_window);
+    rep_pop_structure (tem);
 
     rep_INTERN(internal);
     rep_INTERN(tiled);

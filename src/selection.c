@@ -29,8 +29,6 @@
 
 static Atom sawmill_selection;
 
-DEFSYM (selection, "selection");
-
 static inline Atom
 symbol_to_atom (repv sym)
 {
@@ -130,12 +128,14 @@ If the selection currently has no value, nil is returned.
 repv
 rep_dl_init (void)
 {
+    repv tem = rep_push_structure ("sawfish.wm.util.selection");
+    /* ::alias:selection sawfish.wm.util.selection:: */
+    rep_alias_structure ("selection");
     rep_ADD_SUBR (Sx_selection_active_p);
     rep_ADD_SUBR (Sx_get_selection);
 
     if (dpy != 0)
 	sawmill_selection = XInternAtom (dpy, "SAWMILL_SELECTION", False);
 
-    rep_INTERN (selection);
-    return Qselection;
+    return rep_pop_structure (tem);
 }

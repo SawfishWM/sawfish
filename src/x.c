@@ -1149,9 +1149,15 @@ x_window_sweep (void)
 repv
 rep_dl_init (void)
 {
+    repv tem;
     x_gc_type = rep_register_new_type ("x-gc", x_gc_cmp, x_gc_prin, x_gc_prin,
 				       x_gc_sweep, x_gc_mark,
 				       0, 0, 0, 0, 0, 0, 0);
+
+    tem = rep_push_structure ("sawfish.wm.util.x");
+    /* ::alias:x sawfish.wm.util.x:: */
+    rep_alias_structure ("x");
+
     rep_ADD_SUBR(Sx_create_gc);
     rep_ADD_SUBR(Sx_create_root_xor_gc);
     rep_ADD_SUBR(Sx_change_gc);
@@ -1217,5 +1223,5 @@ rep_dl_init (void)
     }
 #endif
 
-    return Qx;
+    return rep_pop_structure (tem);
 }

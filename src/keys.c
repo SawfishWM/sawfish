@@ -57,6 +57,11 @@ DEFSYM(override_keymap, "override-keymap");
 DEFSYM(unbound_key_hook, "unbound-key-hook");
 DEFSYM(keymap, "keymap");
 
+DEFSYM(this_command, "this-command");
+DEFSYM(last_command, "last-command");
+DEFSYM(prefix_arg, "prefix-arg");
+DEFSYM(current_prefix_arg, "current-prefix-arg");
+
 DEFSYM(async_pointer, "async-pointer");
 DEFSYM(async_keyboard, "async-keyboard");
 DEFSYM(sync_pointer, "sync-pointer");
@@ -67,6 +72,7 @@ DEFSYM(sync_both, "sync-both");
 DEFSYM(async_both, "async-both");
 
 DEFSYM(display_message, "display-message");
+DEFSYM(call_command, "call-command");
 
 static repv next_keymap_path;
 
@@ -520,7 +526,7 @@ eval_input_event(repv context_map)
     if(cmd != rep_NULL)
     {
 	/* Found a binding for this event; evaluate it. */
-	result = Fcall_command(cmd, Qnil);
+	result = rep_call_lisp1 (Fsymbol_value (Qcall_command, Qt), cmd);
     }
     else if(next_keymap_path != rep_NULL)
     {
@@ -1642,6 +1648,8 @@ grab_window_events (Lisp_Window *w, bool grab)
 void
 keys_init(void)
 {
+    repv tem;
+
     rep_INTERN_SPECIAL(global_keymap);
     rep_INTERN_SPECIAL(root_window_keymap);
     rep_INTERN_SPECIAL(override_keymap);
@@ -1652,6 +1660,7 @@ keys_init(void)
     Fset (Qeval_modifier_events, Qnil);
     rep_INTERN(keymap);
 
+    tem = rep_push_structure ("sawfish.wm.events");
     rep_ADD_SUBR(Smake_keymap);
     rep_ADD_SUBR(Sbind_keys);
     rep_ADD_SUBR(Sunbind_keys);
@@ -1672,6 +1681,7 @@ keys_init(void)
     rep_ADD_SUBR(Sx_lookup_keysym);
     rep_ADD_SUBR(Sx_keysym_name);
     rep_ADD_SUBR(Ssynthesize_event);
+    rep_pop_structure (tem);
 
     rep_INTERN(async_pointer);
     rep_INTERN(async_keyboard);
@@ -1693,7 +1703,17 @@ keys_init(void)
     rep_INTERN_SPECIAL(multi_click_delay);
     Fset (Qmulti_click_delay, rep_MAKE_INT(DEFAULT_DOUBLE_CLICK_TIME));
 
+    rep_INTERN_SPECIAL(this_command);
+    rep_INTERN_SPECIAL(last_command);
+    rep_INTERN_SPECIAL(prefix_arg);
+    rep_INTERN_SPECIAL(current_prefix_arg);
+    Fset (Qthis_command, Qnil);
+    Fset (Qlast_command, Qnil);
+    Fset (Qprefix_arg, Qnil);
+    Fset (Qcurrent_prefix_arg, Qnil);
+
     rep_INTERN(display_message);
+    rep_INTERN(call_command);
 
     rep_mark_static(&next_keymap_path);
 

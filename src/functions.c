@@ -1292,15 +1292,21 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 void
 functions_init (void)
 {
+    repv tem;
+
+    tem = rep_push_structure ("sawfish.wm.windows.subrs");
     rep_ADD_SUBR(Srestack_windows);
     rep_ADD_SUBR(Sx_raise_window);
     rep_ADD_SUBR(Sx_lower_window);
-    rep_ADD_SUBR(Sx_kill_client);
     rep_ADD_SUBR_INT(Sdestroy_window);
-    rep_ADD_SUBR(Swarp_cursor);
     rep_ADD_SUBR(Smove_window_to);
     rep_ADD_SUBR(Sresize_window_to);
     rep_ADD_SUBR(Smove_resize_window_to);
+    rep_pop_structure (tem);
+
+    tem = rep_push_structure ("sawfish.wm.misc");
+    rep_ADD_SUBR(Sx_kill_client);
+    rep_ADD_SUBR(Swarp_cursor);
     rep_ADD_SUBR(Sgrab_server);
     rep_ADD_SUBR(Sungrab_server);
     rep_ADD_SUBR(Sserver_grabbed_p);
@@ -1327,6 +1333,8 @@ functions_init (void)
     rep_ADD_SUBR(Shead_dimensions);
     rep_ADD_SUBR(Shead_offset);
     rep_ADD_SUBR(Sdisplay_message);
+    rep_pop_structure (tem);
+
     rep_INTERN(root);
     rep_INTERN_SPECIAL(after_restacking_hook);
     rep_INTERN(position);
