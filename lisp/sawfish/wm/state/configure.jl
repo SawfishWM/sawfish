@@ -32,6 +32,7 @@
        (dims (window-dimensions w))
        (fdims (window-frame-dimensions w))
        tem)
+
     (when (setq tem (cdr (assq 'stack alist)))
       (cond ((eq tem 'below)
 	     (lower-window w))
@@ -39,15 +40,19 @@
 	     ;; for the old GNOME pager's benefit..
 	     (uniconify-window w)
 	     (raise-window w))))
-    (when (and (setq tem (cdr (assq 'dimensions alist)))
-	       ;; no point in this case
-	       (not (assq 'position alist)))
-      (let*
-	  ((hints (window-size-hints w))
-	   (gravity (or (window-get w 'gravity)
-			(cdr (assq 'window-gravity hints)))))
-	(cond
-	 (gravity
+
+    (when (setq tem (cdr (assq 'dimensions alist)))
+      (when (not (assq 'position alist))
+	(let
+	    ((gravity (or (window-get w 'gravity)
+			  (and (window-get w 'auto-gravity)
+			       (configure-choose-gravity w))
+			  (cdr (assq 'window-gravity (window-size-hints w)))
+			  (and configure-auto-gravity
+			       (not (window-get w 'fixed-position))
+			       (configure-choose-gravity w)))))
+
+	  ;; anchor the window to the point specified by the gravity
 	  (when (memq gravity '(east south-east north-east))
 	    ;; [x] placed relative to the right of the frame
 	    (rplaca coords (- (car coords) (- (car tem) (car dims)))))
@@ -57,62 +62,58 @@
 	  (when (memq gravity '(south south-east south-west))
 	    ;; [y] placed relative to the bottom of the frame
 	    (rplacd coords (- (cdr coords) (- (cdr tem) (cdr dims)))))
-	  (when (memq gravity '(north center south))
+	  (when (memq gravity '(east center west))
 	    ;; [y] placed relative to the center
-	    (rplacd coords (- (cdr coords) (/ (- (cdr tem) (cdr dims)) 2)))))
-	 
-	 ;; I confess: I used Mathematica to find these identities. s
-	 ;; is the screen size, l and r the left and right offsets from
-	 ;; the screen edges, and c the window width. Capitalised
-	 ;; values are after the resize.
-	 ;;
-	 ;; In[1]:= Solve[{s==l+r+c, s==L+R+C, l/r == L/R}, {L,R}]
-	 ;;
-	 ;;                -(C l) + l s         r (C - s)
-	 ;; Out[1]= {{L -> ------------, R -> -(---------)}}
-	 ;;                   l + r               l + r
-	 ((or configure-auto-gravity (window-get w 'auto-gravity))
-	  (let ((xoff (- (car fdims) (car dims)))
-		(lhs (car coords))
-		(rhs (- (screen-width) (car coords) (car fdims))))
-	    (cond
-	     ((and (< lhs 0) (>= rhs 0))
-	      ;; lhs of window off-screen, right hand side on
-	      (rplaca coords (min 0 (+ (car coords)
-				       (- (car dims) (car tem))))))
-	     ((= (screen-width) (car fdims))
-	      ;; window width = screen width
-	      (rplaca coords (+ (car coords) (/ (- (car dims) (car tem)) 2))))
-	     ((and (< rhs 0) (>= lhs 0))
-	      ;; right off, left on
-	      (rplaca coords (max (car coords) (- (screen-width)
-						  (+ (car tem) xoff)))))
-	     (t
-	      (rplaca coords (/ (+ (- (* (+ xoff (car tem)) (car coords)))
-				   (* (car coords) (screen-width)))
-				(- (screen-width) (car fdims)))))))
-	  (let ((yoff (- (cdr fdims) (cdr dims)))
-		(top (cdr coords))
-		(bottom (- (screen-height) (cdr coords) (cdr fdims))))
-	    (cond
-	     ((and (< top 0) (>= bottom 0))
-	      ;; top of window off-screen, bottom on screen
-	      (rplacd coords (min 0 (+ (cdr coords)
-				       (- (cdr dims) (cdr tem))))))
-	     ((= (screen-height) (cdr fdims))
-	      ;; window height = screen height
-	      (rplacd coords (+ (cdr coords) (/ (- (cdr dims) (cdr tem)) 2))))
-	     ((and (< bottom 0) (>= top 0))
-	      ;; bottom off, top on
-	      (rplacd coords (max (cdr coords) (- (screen-height)
-						  (+ (cdr tem) yoff)))))
-	     (t
-	      (rplacd coords (/ (+ (- (* (+ yoff (cdr tem)) (cdr coords)))
-				   (* (cdr coords) (screen-height)))
-				(- (screen-height) (cdr fdims)))))))))
-	(setq dims tem)))
+	    (rplacd coords (- (cdr coords) (/ (- (cdr tem) (cdr dims)) 2))))))
+      (setq dims tem))
+
     (when (setq tem (cdr (assq 'position alist)))
-      (setq coords tem))
-    (move-resize-window-to w (car coords) (cdr coords) (car dims) (cdr dims))))
+      (setq coords tem)
+      ;; if the program is setting its position, best not to interfere..
+      (window-put w 'fixed-position t))
+    (move-resize-window-to w (car coords) (cdr coords) (car dims) (cdr dims))
+
+    ;; force the window to be somewhere in the virtual workspace..
+    (when (window-outside-workspace-p w)
+      (move-window-to-current-viewport w))))
+
+;; decide which gravity to use to resize window W
+(defun configure-choose-gravity (w)
+  (let*
+      ((abs (lambda (x)
+	      (max x (- x))))
+       (delta (lambda (x-1 y-1 x-2 y-2)
+		;; no sqrt function...
+		(+ (* (abs (- x-2 x-1)) (abs (- x-2 x-1)))
+		   (* (abs (- y-2 y-1)) (abs (- y-2 y-1))))))
+       (width (screen-width))
+       (height (screen-height))
+       (dims (window-frame-dimensions w))
+       (coords (window-absolute-position w))
+       (min-delta 1000000)
+       (min-i 1)
+       (min-j 1)
+       i j)
+    ;; divide the window into quarters; for each vertex find the
+    ;; distance to the same vertex of the screen. The minimum
+    ;; distance found gives the vertex to anchor the window to
+    (setq i 0)
+    (while (< i 3)
+      (setq j 0)
+      (while (< j 3)
+	(let
+	    ((d (delta (+ (* i (/ (car dims) 2)) (car coords))
+		       (+ (* j (/ (cdr dims) 2)) (cdr coords))
+		       (* i (/ width 2))
+		       (* j (/ height 2)))))
+	  (when (< d min-delta)
+	    (setq min-delta d)
+	    (setq min-i i)
+	    (setq min-j j)))
+	(setq j (1+ j)))
+      (setq i (1+ i)))
+    (aref (aref [[north-west north north-east]
+		 [west center east]
+		 [south-west south south-east]] min-j) min-i)))
 
 (add-hook 'configure-request-hook configure-request-handler)
