@@ -39,8 +39,8 @@
 
       (define (type op)
 	(case op
-	  ((print) (lambda (x) (list (prin1-to-string (car x))
-				     (prin1-to-string (cdr x)))))
+	  ((print) (lambda (x) (list (format nil "%s" (car x))
+				     (format nil "%s" (cdr x)))))
 	  ((dialog) (lambda (title callback #!key value for)
 		      (widget-dialog title spec callback value for)))
 	  ((validp) ((make-widget spec) 'validp))))
