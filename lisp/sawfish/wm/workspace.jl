@@ -787,7 +787,7 @@ previous workspace."
   (define (select-workspace-from-first count)
     (select-workspace (workspace-id-from-logical count)))
 
-  (define (send-window-to-workspace-from-first w count #!optional copy)
+  (define (send-window-to-workspace-from-first w count #!optional copy select)
     (let* ((was-focused (eq (input-focus) w))
 	   (orig-space (if (window-in-workspace-p w current-workspace)
 			   current-workspace
@@ -795,7 +795,8 @@ previous workspace."
 	   (new-space (workspace-id-from-logical count)))
       (when (and orig-space (/= orig-space new-space))
 	(copy-window-to-workspace w orig-space new-space was-focused)
-	(select-workspace new-space was-focused)
+	(when select
+	  (select-workspace new-space was-focused))
 	(unless copy
 	  (move-window-to-workspace w orig-space new-space was-focused)))))
 

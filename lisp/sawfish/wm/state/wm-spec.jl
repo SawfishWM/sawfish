@@ -473,7 +473,7 @@
 		 (make-window-sticky/workspace w)
 	       ;; changing the desktop
 	       (make-window-unsticky/workspace w)
-	       (send-window-to-workspace-from-first w desktop)))))
+	       (send-window-to-workspace-from-first w desktop nil)))))
 
 	(t (setq handled nil)))
       handled))
