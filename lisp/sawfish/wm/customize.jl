@@ -57,6 +57,7 @@
 ;; ui
 
 (defun customize-symbol-spec (symbol)
+  (require 'lisp-doc)
   (let
       ((type (or (get symbol 'custom-type) 'boolean))
        (doc (or (documentation symbol) (symbol-name symbol)))

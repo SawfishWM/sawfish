@@ -96,11 +96,9 @@ inherited from the plist of the type of the variable.
 custom-set and custom-get may be used to translate data types to the
 string representation required by some widget types. custom-widget may
 construct the widget definition passed to the ui backend."
-  (list 'defvar
-	symbol
-	(list 'custom-declare-variable
-	      (list 'quote symbol) value (custom-quote-keys keys))
-	doc))
+  `(defvar ,symbol (custom-declare-variable
+		    ',symbol ,value ,(custom-quote-keys keys))
+	   ,doc))
 
 (defmacro defgroup (symbol doc &rest keys)
   "Declare a new custom group called SYMBOL, with English name DOC. The
@@ -110,8 +108,7 @@ property list KEYS may contain the following key-value items:
 	:widget WIDGET-FUNCTION
 
 Note that the value of the `:group' key is not evaluated."
-  (list 'custom-declare-group (list 'quote symbol)
-	doc (custom-quote-keys keys)))
+  `(custom-declare-group ',symbol ,doc ,(custom-quote-keys keys)))
 
 (defun custom-declare-variable (symbol value keys)
   (let
@@ -169,18 +166,20 @@ Note that the value of the `:group' key is not evaluated."
     (cons 'list (nreverse out))))
 
 (defmacro custom-set-property (sym prop value)
-  "Set the custom key PROP for defcustom'd symbol SYM to value." 
-  `(let
-       ((__prop__ (cdr (assq ,prop custom-option-alist))))
-     (when __prop__
-       (put ,sym __prop__ ,value))))
+  "Set the custom key PROP for defcustom'd symbol SYM to value."
+  (let ((tem (gensym)))
+    `(let
+	 ((,tem (cdr (assq ,prop custom-option-alist))))
+       (when ,tem
+	 (put ,sym ,tem ,value)))))
 
 (defmacro custom-set-group-property (group prop value)
-  "Set the custom key PROP for defgroup'd symbol SYM to value." 
-  `(let
-       ((__prop__ (cdr (assq ,prop custom-group-option-alist))))
-     (when __prop__
-       (put ,group __prop__ ,value))))
+  "Set the custom key PROP for defgroup'd symbol SYM to value."
+  (let ((tem (gensym)))
+    `(let
+	 ((,tem (cdr (assq ,prop custom-group-option-alist))))
+       (when ,tem
+	 (put ,group ,tem ,value)))))
 
 (defmacro custom-add-option (sym option)
   "Assuming that defcustom'd symbol SYM is of type `symbol', add the

@@ -128,7 +128,9 @@
 		     (doc)
 		   (if (and tooltips-show-doc-strings command
 			    (symbolp command)
-			    (setq doc (documentation command)))
+			    (progn
+			      (require 'lisp-doc)
+			      (setq doc (documentation command))))
 		       (_ doc)
 		     (format nil "%S" command)))))
        items)

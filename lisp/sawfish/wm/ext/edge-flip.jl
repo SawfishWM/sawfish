@@ -24,10 +24,9 @@
 (defgroup edge-flip "Edge Flipping")
 
 ;; for the compiler's benefit
-(eval-when-compile (progn
-		     (require 'move-resize)
-		     (require 'flippers)
-		     (require 'timers)))
+(eval-when-compile (require 'move-resize))
+(eval-when-compile (require 'flippers))
+(eval-when-compile (require 'timers))
 
 (defcustom edge-flip-enabled nil
   "Flip to next viewport/workspace when pointer hits screen edge."
