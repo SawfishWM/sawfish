@@ -303,8 +303,28 @@ will be created."
   (interactive)
   (let
       ((windows (filter 'window-visible-p (cdr ws-current-workspace))))
-    (set-input-focus (or (nth 1 (memq (input-focus) windows))
-			 (car windows)))))
+    (display-window (or (nth 1 (memq (input-focus) windows))
+			(car windows)))))
+
+(defun next-window ()
+  "Focus on the next window, cycling through all possible workspaces."
+  (interactive)
+  (catch 'out
+    (let*
+	((space ws-current-workspace)
+	 (windows (filter 'window-visible-p (cdr space)))
+	 (win (nth 1 (memq (input-focus) windows))))
+      (while (not win)
+	(setq space (or (nth 1 (memq space ws-workspaces))
+			(car ws-workspaces)))
+	(when (or (not space) (eq space ws-current-workspace))
+	  (throw 'out nil))
+	(setq windows (filter #'(lambda (w)
+				  (not (window-get w 'iconified)))
+			      (cdr space)))
+	(setq win (car windows)))
+      (when win
+	(display-window win)))))
 
 (defun select-workspace (index)
   "Activate workspace number INDEX (from zero)."
@@ -333,7 +353,6 @@ workspace."
   (interactive)
   (ws-switch-workspace (ws-insert-workspace)))
 
-
 ;; Iconification (but without icons)
 
 ;; If iconified, a window has its `iconified' property set to t
