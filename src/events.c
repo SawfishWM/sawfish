@@ -1092,6 +1092,11 @@ configure_request (XEvent *ev)
 }
 
 static void
+gravity_notify (XEvent *ev)
+{
+}
+
+static void
 configure_notify (XEvent *ev)
 {
 }
@@ -1554,6 +1559,7 @@ events_init (void)
     event_handlers[FocusIn] = focus_in;
     event_handlers[FocusOut] = focus_out;
     event_handlers[ConfigureRequest] = configure_request;
+    event_handlers[GravityNotify] = gravity_notify;
     event_handlers[ConfigureNotify] = configure_notify;
     event_handlers[ReparentNotify] = reparent_notify;
     event_handlers[CreateNotify] = create_notify;
