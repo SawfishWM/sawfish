@@ -21,46 +21,53 @@
 
 (provide 'edges)
 
-;; returns (X-EDGES . Y-EDGES), X-EDGES is a list of (X Y1 Y2), and
-;; Y-EDGES is a list of (Y X1 X2)
+;; returns (X-EDGES . Y-EDGES), X-EDGES is a list of (X Y1 Y2 OPEN-P), and
+;; Y-EDGES is a list of (Y X1 X2 OPEN-P). OPEN-P is t if the edge is
+;; left or top edge of a window. For the root window, the meaning of
+;; OPEN-P is reversed
 
 ;; keywords:
 ;;	:with-ignored-windows t
 ;;	:windows-to-ignore LIST
+;;	:windows LIST
 ;;	:include-root t
 
 (defun get-visible-window-edges (&rest args)
   (let
       ((with-ignored-windows (car (cdr (memq ':with-ignored-windows args))))
        (windows-to-ignore (car (cdr (memq ':windows-to-ignore args))))
+       (windows (car (cdr (memq ':windows args))))
        x-edges y-edges)
     (mapc #'(lambda (w)
 	      (when (and (window-visible-p w)
 			 (or with-ignored-windows
 			     (not (window-get w 'ignored)))
-			 (not (memq w windows-to-ignore)))
+			 (not (memq w windows-to-ignore))
+			 (or (null windows) (memq w windows)))
 		(let
 		    ((dims (window-frame-dimensions w))
 		     (coords (window-position w)))
 		  (setq x-edges (cons (list (car coords) (cdr coords)
-					    (+ (cdr coords) (cdr dims)))
+					    (+ (cdr coords) (cdr dims)) t)
 				      (cons (list (+ (car coords) (car dims))
 						  (cdr coords)
-						  (+ (cdr coords) (cdr dims)))
+						  (+ (cdr coords) (cdr dims))
+						  nil)
 					    x-edges)))
 		  (setq y-edges (cons (list (cdr coords) (car coords)
-					    (+ (car coords) (car dims)))
+					    (+ (car coords) (car dims)) t)
 				      (cons (list (+ (cdr coords) (cdr dims))
 						  (car coords)
-						  (+ (car coords) (car dims)))
+						  (+ (car coords) (car dims))
+						  nil)
 					    y-edges))))))
 	  (managed-windows))
     (when (car (cdr (memq ':include-root args)))
-      (setq x-edges (cons (list 0 0 (screen-height))
-			  (cons (list (screen-width) 0 (screen-height))
+      (setq x-edges (cons (list 0 0 (screen-height) nil)
+			  (cons (list (screen-width) 0 (screen-height) t)
 				x-edges)))
-      (setq y-edges (cons (list 0 0 (screen-width))
-			  (cons (list (screen-height) 0 (screen-width))
+      (setq y-edges (cons (list 0 0 (screen-width) nil)
+			  (cons (list (screen-height) 0 (screen-width) t)
 				y-edges))))
     (cons x-edges y-edges)))
 
