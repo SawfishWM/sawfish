@@ -1554,18 +1554,30 @@ list_frame_generator (Lisp_Window *w)
 
     /* create the child-of-root frame window, or if it already exists,
        configure it to the correct size.. */
+
     if (w->frame == 0)
     {
-	/* create the frame */
+	int depth = image_depth;
+	Visual *visual = image_visual;
+	Colormap colormap = image_cmap;
+
+	/* If window is using an ARGB visual, the frame also should. */
+	if (w->attr.depth == 32)
+	{
+	    depth = 32;
+	    visual = w->attr.visual;
+	    colormap = w->attr.colormap;
+	}
+
 	wa.override_redirect = True;
-	wa.save_under = w->attr.save_under;
-	wa.colormap = image_cmap;
+	wa.colormap = colormap;
 	wa.border_pixel = BlackPixel (dpy, screen_num);
+	wa.save_under = w->attr.save_under;
 	wamask = CWOverrideRedirect | CWColormap | CWBorderPixel | CWSaveUnder;
+
 	w->frame = XCreateWindow (dpy, root_window, w->attr.x, w->attr.y,
-				  w->frame_width, w->frame_height,
-				  0, image_depth, InputOutput,
-				  image_visual, wamask, &wa);
+				  w->frame_width, w->frame_height, 0,
+				  depth, InputOutput, visual, wamask, &wa);
     }
     else
     {

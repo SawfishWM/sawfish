@@ -1087,6 +1087,19 @@ Return t if WINDOW has been reparented to a frame window.
     return VWIN(win)->reparented ? Qt : Qnil;
 }
 
+DEFUN("window-frame-id", Fwindow_frame_id, Swindow_frame_id,
+      (repv win), rep_Subr1) /*
+::doc:sawfish.wm.windows.subrs#window-frame-id::
+window-frame-id WINDOW
+
+Return the numeric id of the framing window associated with object
+WINDOW. Returns nil if the client window has no frame.
+::end:: */
+{
+    rep_DECLARE1(win, WINDOWP);
+    return VWIN(win)->frame ? rep_MAKE_INT (VWIN(win)->frame) : Qnil;
+}
+
 DEFUN("window-id", Fwindow_id, Swindow_id, (repv win), rep_Subr1) /*
 ::doc:sawfish.wm.windows.subrs#window-id::
 window-id WINDOW
@@ -1551,6 +1564,7 @@ windows_init (void)
     rep_ADD_SUBR(Sshow_window);
     rep_ADD_SUBR(Swindow_visible_p);
     rep_ADD_SUBR(Swindow_framed_p);
+    rep_ADD_SUBR(Swindow_frame_id);
     rep_ADD_SUBR(Swindow_id);
     rep_ADD_SUBR(Swindow_group_id);
     rep_ADD_SUBR(Swindow_size_hints);

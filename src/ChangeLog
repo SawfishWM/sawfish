@@ -1,3 +1,13 @@
+2005-02-11  John Harper  <jsh@unfactored.org>
+
+	* windows.c (Fwindow_frame_id): new function to return the
+	window id of the window's frame (adapted from patch from Philip
+	Langdale <philipl@mail.utexas.edu>)
+
+	* frames.c (list_frame_generator): integrated patch from Amit
+	Gurdasani <amitg@alumni.cmu.edu> to detect windows with ARGB
+	visuals and use that for the frame window as well
+
 2005-02-06  John Harper  <jsh@unfactored.org>
 
 	* functions.c (Fsync_server): added optional arg WAIT (when
