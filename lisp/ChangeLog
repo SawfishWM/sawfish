@@ -1,5 +1,8 @@
 2000-10-25  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/focus.jl (focus-click): the logic to ungrab the
+	pointer in non-click-through mode was reversed (i.e. broken)
+
 	* sawfish/wm/workspace.jl (ws-add-window): set swapped-in
 	property of sticky windows, otherwise they don't get swapped
 	out the first time a new workspace is selected
