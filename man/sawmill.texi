@@ -1547,24 +1547,29 @@ either a cursor object, or the argument to @code{get-cursor} to create
 the required cursor object.
 
 @item (removable . @var{value})
-When specified and @var{value} is non-nil, this frame part may be
-removed from the frame without being detrimental to the overall
+When specified and @var{value} is non-@code{nil}, this frame part may
+be removed from the frame without being detrimental to the overall
 appearance of the frame. This is only important for button classes,
 which may sometimes be removed at the request of the client window.
 
 @item (below-client . @var{value})
-When specified and @var{value} is non-nil, then this frame part will be
-displayed beneath the client window. The default action is for frame
-parts to be stacked above the client window.
+When specified and @var{value} is non-@code{nil}, then this frame part
+will be displayed beneath the client window. The default action is for
+frame parts to be stacked above the client window.
+
+@item (hidden . @var{value})
+When specified and @var{value} is non-@code{nil}, don't display this
+frame part.
+
 @end table
 
 The values specified for the @code{background}, @code{foreground},
 @code{render-scale}, @code{font}, @code{left-edge}, @code{right-edge},
-@code{top-edge}, @code{bottom-edge}, @code{width} and @code{height}
-attributes may actually be functions. In which case the function will
-be called (with a single argument, the window object) when the frame is
-constructed, the value returned will be used as the actual value of the
-attribute.
+@code{top-edge}, @code{bottom-edge}, @code{width}, @code{height},
+@code{cursor}, @code{below-client} and @code{hidden} attributes may
+actually be functions. In which case the function will be called (with
+a single argument, the window object) when the frame is constructed,
+the value returned will be used as the actual value of the attribute.
 
 The coordinate system used for specifying the part's position is
 relative to the window edge that the position is defined against.
