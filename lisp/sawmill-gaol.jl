@@ -51,6 +51,11 @@
 (defvar sawmill-safe-features '(gtkrc gradient make-theme))
 
 (unless batch-mode
+  ;; for backwards compatibility, / is integer division in themes, use
+  ;; `divide' for real division
+  (setq gaol-safe-functions (delq '/ gaol-safe-functions))
+  (gaol-replace-function 'divide '/)
+  (gaol-replace-function '/ 'quotient)
   (mapc gaol-add-function sawmill-safe-functions)
   (mapc gaol-add-special sawmill-safe-specials)
   (mapc gaol-add-feature sawmill-safe-features))
