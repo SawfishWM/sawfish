@@ -147,7 +147,7 @@
 ;;; group widgetry
 
   (define (make-tree-item parent-name name real-name)
-    (let ((item (gtk-tree-item-new-with-label real-name)))
+    (let ((item (gtk-tree-item-new-with-label (_ real-name))))
       (gtk-signal-connect
        item "select" (group-selected parent-name name))
       (gtk-signal-connect
