@@ -1,3 +1,13 @@
+1999-11-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (Fget_window_by_id): new function
+
+1999-11-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (Fset_input_focus): call focus_on_window (0) before
+	focusing the given window, seems to help transfer the focus
+	when called after grabbing the keyboard
+
 1999-11-04  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-ui.jl (build-pages): if a notebook, make it

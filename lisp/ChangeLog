@@ -1,3 +1,45 @@
+1999-11-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gtkrc.jl: moved some code back to the gtk theme, since it's
+	pretty non-reusable; don't load bg pixmaps unless asked to by
+	the theme; new variable gtkrc-base
+
+1999-11-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* group-funs.jl: added a third type of group id: symbols for
+	user defined named groups, only these are session-managed
+	(auto-group-alist, persistent-group-ids): new variables
+
+	* functions.jl (get-window-by-id): deleted, now a subr
+
+	* group-funs.jl: moved all window groups functions froms
+	functions.jl to this new file. Added support for user-defined
+	groups--the `group' property may define the group-id of a
+	window (so far always an integer, but eq is okay)
+	* sawmill.jl: require 'group-funs
+
+	* menus.jl (window-ops-menu): slightly reorganised, added a
+	submenu for the window's group
+
+1999-11-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x-cycle.jl (cycle-group): new command, cycle through all
+	windows in the group of the current window
+
+	* x-cycle.jl (x-cycle-next): abort immediately if there's no
+	windows to cycle through
+
+	* place-window.jl: placement modes are now defined by symbols
+	having the `placement-mode' property--a function to call
+
+	* smart-placement.jl (place-window-first-fit-or-interactive):
+	new placement mode, fall back to interactive placement if
+	there's not enough space for the window
+
+	* move-resize.jl (move-cursor-shape, resize-cursor-shape): new
+	variables
+	* select-window.jl (select-window-cursor-shape): new variable
+
 1999-11-04  John Harper  <john@dcs.warwick.ac.uk>
 
 	* workspace.jl (iconify-whole-group, uniconify-whole-group):

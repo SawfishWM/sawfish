@@ -7,6 +7,56 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.16
+
+@itemize @bullet
+
+@item Support window groups, both as defined by applications, and
+defined by the user (either interactively through the window's menu, or
+via the @code{auto-group-alist} and @code{persistent-group-ids}
+variables).
+
+For most commands working on single windows, there's also one operating
+on the group that the current window is a member of. (With the notable
+exception currently of moving windows.) There's also options
+controlling whether (de)iconification operates on windows or groups
+
+@item Improved GNOME menu support---merge duplicate sub-menus, scan
+PATH for @code{gnome-share-directory}, also look in
+@file{/etc/X11/applnk} for menu entries
+
+@item Option to control whether edge-flipping flips viewports or
+workspaces (@code{edge-flip-type})
+
+@item New hook @code{after-framing-hook}: called whenever a window's
+frame is changed or recalibrated
+
+@item New window placement mode: @code{first-fit-or-interactive}
+
+@item Variables specifying common cursor shapes:
+(@code{move-cursor-shape}, @code{resize-cursor-shape},
+@code{select-window-cursor-shape})
+
+@item Fix interactive placement
+
+@item Fix problem of window losing focus when @code{cycle-windows} only
+finds a single window; also, abort immediately if there's no windows to
+cycle through at all
+
+@item Fix how the @code{WM_NORMAL_HINTS} property is read after it's
+been updated
+
+@item Fix @code{maximize-fill} functions to respect the
+@code{maximize-ignore-when-filling} option
+
+@item Fix interactive move/resize aborting if keyboard is already
+grabbed
+
+@item Ungrab the keyboard as well as the pointer before popping menus
+
+@end itemize
+
+
 @unnumberedsec 0.15
 
 @itemize @bullet

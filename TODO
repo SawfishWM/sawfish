@@ -26,15 +26,6 @@ Outstanding bugs
   ! ICCCM says we should not passive grab on the client windows, but on
     our frames instead
 
-  ! Every once in a while (haven't figured out a pattern yet), the
-    mouse cursor locks up, and won't move at all.  After I press a
-    mouse button, it goes back to normal again.
-
-    (this could be due to grabbing in SyncPointer mode, but
-    XAllowEvents should always be called..?)
-
-    [ 24/10: has this been seen recently? I think it may be fixed..? ]
-
   ! xv/java-apps get weird placement [apps being non-ICCCM compliant?]
 
   ! (getpid) has been obsoleted by rep's (process-id)
@@ -45,8 +36,6 @@ Outstanding bugs
   ! the gnome _WIN_MAXIMIZED_ hints are ignored when the window is
     mapped, since it's not possible to maximize the window at that
     point (until the frame has been created)
-
-  ! cycle-windows with only one window temporarily unfocuses the window
 
   ! Num_Lock is filtered, but not Scroll_Lock
 
@@ -81,12 +70,6 @@ Outstanding bugs
 General tasks
 =============
 
-  + allow user to define/modify window groups
-
-  + placement fall-back options?
-
-    maybe just define a fit-or-interactive placement mode
-
   + option: when switching workspace, display the workspace name
 
   + add option send-window-to-workspace won't select workspace
@@ -94,8 +77,6 @@ General tasks
   + follow size hints (increments) when maximizing (?)
 
   + "styles" -- mimic different environments through custom files?
-
-  + allow cursors to be customized (i.e. when moving/resizing/..)
 
   + support for synthesizing events
 
@@ -183,10 +164,6 @@ General tasks
 
     How can the best-fit cost function be improved/optimised?
 
-  + better transient handling
-
-    When moving a window to another workspace, also move any transients (?)
-
   + Pixmap cursors / cursor recolouring
 
   + Icons (?)
@@ -195,7 +172,8 @@ General tasks
 
   + Support the KDE hints
 
-    Where are they defined?
+    [ Apparently there's no definition of kde-wm interactive except for
+    the kwm sources, which are supposed to be ``heavily commented'' ]
 
   + clone some ctwm functions:
 
@@ -222,6 +200,9 @@ General tasks
 
     Allow text to be rendered at angles (in multiples of 90 degrees?).
     This could be useful for the sides of windows
+
+    [ scp found a library for doing this with Xlib.. imlib2 will
+    support rotated text? ]
 
   - GTK theme
 
