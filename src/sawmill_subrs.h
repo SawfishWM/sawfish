@@ -75,11 +75,12 @@ extern repv Qvisibility_notify_hook, Qdestroy_notify_hook, Qmap_notify_hook,
     Qunmap_notify_hook, Qenter_notify_hook, Qleave_notify_hook,
     Qfocus_in_hook, Qfocus_out_hook, Qclient_message_hook;
 extern repv Qiconify_window, Quniconify_window;
+extern void unclick_current_fp (void);
 extern void map_request (XEvent *ev);
 extern void send_synthetic_configure (Lisp_Window *w);
 extern void handle_input_mask(long mask);
 extern void handle_sync_input(int fd);
-extern repv Fquery_pointer (void);
+extern repv Fquery_pointer (repv get);
 extern repv Fquery_last_pointer (void);
 extern repv Fquery_pointer_window (void);
 extern void events_init (void);

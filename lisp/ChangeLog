@@ -1,3 +1,23 @@
+1999-08-23  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.3a
+
+	* move-resize.jl: query the _current_ mouse position, not the
+	last seen in an event
+
+	* menus.jl: menus now work asynchronously, some hackery to get
+	the focus back before calling the selected command
+
+	* maximize.jl (unmaximize-window): optional arg DIRECTION as
+	with maximize-window, allows selective unmaximization
+
+	* gnome.jl: support the MAXIMIZED window states
+
+	* server.jl: for asynchronous requests delete the property
+	after reading it (so the client knows when it can continue)
+
+	* edges.jl (snap-window-position-to-edges): minor fix
+
 1999-08-22  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.3

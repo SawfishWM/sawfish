@@ -1,3 +1,24 @@
+1999-08-23  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.3a
+
+	* functions.c (Fgrab_pointer): remove the hack choosing which
+	window to grab in
+	(Fungrab_pointer): if we're waiting for a ButtonRelease on a
+	frame-part, unclick it
+
+	* events.c: changes to how frame-part "clicking" is handled
+	(Fquery_pointer): optional arg GET, to force a round-trip to
+	the server
+	(Faccept_x_input): new function, process any available X events
+
+	* sawmill-ui.jl (keymap-shell): this now has a new key
+	`:doc-path' giving the list of documentation databases. This is
+	used to display the doc-string of the selected command
+
+	* client.c: after sending the event, _always_ wait for a
+	PropertyNotify event, not just for synchronous requests
+
 1999-08-22  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.3
