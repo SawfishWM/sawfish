@@ -492,6 +492,32 @@ defines the color of its pixels.
     return Qnil;
 }
 
+DEFUN("tile-image", Ftile_image, Stile_image, (repv dst, repv src), rep_Subr2) /*
+::doc:Stile-image::
+tile-image DEST-IMAGE SOURCE-IMAGE
+
+Tile SOURCE-IMAGE into DEST-IMAGE.
+::end:: */
+{
+    ImlibImage *src_im, *dst_im;
+    int x, y;
+    rep_DECLARE1(dst, IMAGEP);
+    rep_DECLARE2(src, IMAGEP);
+    src_im = VIMAGE(src)->image;
+    dst_im = VIMAGE(dst)->image;
+    for (y = 0; y < dst_im->rgb_height; y++)
+    {
+	for (x = 0; x < dst_im->rgb_width; x += src_im->rgb_width)
+	{
+	    memcpy (dst_im->rgb_data + y*dst_im->rgb_width*3 + x*3,
+		    src_im->rgb_data + y*src_im->rgb_width*3,
+		    MIN (dst_im->rgb_width - x, src_im->rgb_width) * 3);
+	}
+    }
+    Imlib_changed_image (imlib_id, dst_im);
+    return dst;
+}
+    
 
 /* type hooks */
 
@@ -569,6 +595,7 @@ images_init (void)
     rep_ADD_SUBR(Smake_sized_image);
     rep_ADD_SUBR(Sbevel_image);
     rep_ADD_SUBR(Sclear_image);
+    rep_ADD_SUBR(Stile_image);
     rep_INTERN(image_directory);
     rep_SYM(Qimage_directory)->value
 	= rep_concat2 (rep_STR(rep_SYM(Qsawmill_directory)->value), "/images");
