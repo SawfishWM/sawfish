@@ -1,3 +1,16 @@
+2000-01-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* functions.c (Fdisplay_message): fixed specifying foreground
+	colours using strings; abort when Fget_color returns rep_NULL;
+	update the background pixel of any existing message window to
+	the new color (from Matt Kraai <kraai@ghs.com>)
+
+	* events.c (handle_fp_click, unclick_current_fp): protection
+	against refreshing stale frame parts
+
+	* frames.c (list_frame_generator): fixed stupid gc-protection
+	bug when building new frames
+
 2000-01-12  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c: frame parts are now first-class lisp objects
