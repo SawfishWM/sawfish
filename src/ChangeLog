@@ -1,3 +1,16 @@
+1999-08-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (Fcall_window_hook): new function, similar to
+	call-hook, but first hook argument is always a window. Before
+	evaluating the symbol value, look for a property of the same
+	name in the window
+	* events.c, display.c, windows.c: where appropriate use
+	Fcall_window_hook instead of Fcall_hook
+
+	* gnome.c (rep_dl_init): if ignored-window-names or
+	sticky-window-names are void, set them to nil before consing on
+	the gnome window names
+
 1999-08-01  John Harper  <john@dcs.warwick.ac.uk>
 
 	* gnome.c (Fgnome_set_workspace): if no workspace is active,

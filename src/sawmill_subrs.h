@@ -203,6 +203,8 @@ extern repv Fshow_window (repv win);
 extern repv Fwindow_visible_p (repv win);
 extern repv Fwindow_id (repv win);
 extern repv Fwindow_group_id (repv win);
+extern repv Fwindow_size_hints (repv win);
+extern repv Fcall_window_hook (repv hook, repv win, repv args, repv type);
 extern void manage_windows (void);
 extern void windows_init (void);
 extern void windows_kill (void);
