@@ -60,16 +60,23 @@
     (set-x-property 'root '_WIN_CLIENT_LIST vec 'CARDINAL 32)))
 
 (defvar gnome-current-workspace nil)
-(defvar gnome-current-workspace-count nil)
+(defvar gnome-current-workspace-count 0)
 (defvar gnome-current-workspace-names nil)
 (defvar gnome-current-area nil)
 (defvar gnome-current-area-count nil)
 
 (defun gnome-set-workspace ()
-  (let
+  (let*
       ((limits (workspace-limits))
        (port (screen-viewport))
-       (port-size (cons viewport-columns viewport-rows)))
+       (port-size (cons viewport-columns viewport-rows))
+       (total-workspaces (1+ (- (cdr limits) (car limits)))))
+    ;; apparently some pagers don't like it if we place windows
+    ;; on (temporarily) non-existent workspaces
+    (when (< gnome-current-workspace-count total-workspaces)
+      (setq gnome-current-workspace-count total-workspaces)
+      (set-x-property 'root '_WIN_WORKSPACE_COUNT
+		      (vector gnome-current-workspace-count) 'CARDINAL 32))
     (mapc (lambda (w)
 	    (let
 		;; XXX the gnome-wm standard sucks..
@@ -91,9 +98,8 @@
       (setq gnome-current-workspace (- current-workspace (car limits)))
       (set-x-property 'root '_WIN_WORKSPACE
 		      (vector gnome-current-workspace) 'CARDINAL 32))
-    (unless (equal gnome-current-workspace-count
-		   (1+ (- (cdr limits) (car limits))))
-      (setq gnome-current-workspace-count (1+ (- (cdr limits) (car limits))))
+    (when (> gnome-current-workspace-count total-workspaces)
+      (setq gnome-current-workspace-count total-workspaces)
       (set-x-property 'root '_WIN_WORKSPACE_COUNT
 		      (vector gnome-current-workspace-count) 'CARDINAL 32))
     (unless (equal gnome-current-workspace-names workspace-names)
