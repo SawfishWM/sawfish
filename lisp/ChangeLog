@@ -1,3 +1,10 @@
+2000-07-23  John Harper  <john@dcs.warwick.ac.uk>
+
+	* stacking.jl (make-constraint): check for 'transients-above
+	property on the window, else use global value
+	* match-window.jl (match-window-properties): added
+	'transients-above property
+
 2000-07-19  John Harper  <john@dcs.warwick.ac.uk>
 
 	* shading.jl (shading-add-window): reinstate code to set

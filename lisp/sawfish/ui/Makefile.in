@@ -127,6 +127,6 @@ clean :
 	rm -f nokogiri-layouts/*~ nokogiri-layouts/*.jlc
 
 realclean distclean : clean
-	rm -f Makefile nokogiri-main.jl.in
+	rm -f Makefile nokogiri-main.jl nokogiri-interfaces.jl
 
 .PHONY: all install uninstall clean realclean distclean
