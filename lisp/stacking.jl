@@ -47,13 +47,15 @@
 	       (>= depth (window-get (car below) 'depth)))))))
 
 (define (stacking-constraint:transients-above-parent w)
-  (let ((parent (and (window-transient-p w)
-		     (get-window-by-id (window-transient-p w))))
+  (let ((parents (transient-parents w))
 	(children (delete-if-not (lambda (x)
-				   (eql (window-transient-p x) (window-id w)))
-				 (managed-windows))))
+				   (transient-of-p x w)) (managed-windows))))
     (lambda (above below)
-      (and (or (null parent) (not (memq parent above)))
+      (and (or (null parents)
+	       (let loop ((rest parents))
+		 (cond ((null rest) t)
+		       ((memq (car rest) above) nil)
+		       (t (loop (cdr rest))))))
 	   (or (null children)
 	       (let loop ((rest children))
 		 (cond ((null rest) t)
@@ -308,11 +310,20 @@ lowest possible position. Otherwise raise it as far as allowed."
 ;; stacking groups of windows
 
 (defun raise-windows (w order)
+  ;; why am I doing this twice, when raise-window is non-trivial..?
+  ;; otherwise either (1) the stacking order of the windows in ORDER
+  ;; is lost, or (2) some windows aren't raised as high as possible..
+  ;; XXX need less brute force and ignorance here, is there a solution?
+  ;; ``When in doubt, use brute force'' -- Ken Thompson
   (mapc raise-window order)
+  (mapc raise-window (reverse order))
   (raise-window w))
 
 (defun lower-windows (w order)
-  (mapc lower-window (nreverse order))
+  ;; it's not currently necessary to do this twice, but since the
+  ;; stacking constraints are extensible, best to be sure..
+  (mapc lower-window (reverse order))
+  (mapc lower-window order)
   (lower-window w))
 
 (defun raise-lower-windows (w order)
