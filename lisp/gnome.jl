@@ -217,13 +217,33 @@
   (when (and (current-event) (eq (current-event-window) 'root))
     (let
 	((event (event-name (current-event))))
-      ;; XXX should check that there's no binding of the
-      ;; XXX corresponding event in the root-window-keymap or
-      ;; XXX the global-keymap
-      (when (string-match "-(Click1|Off)$" event)
-	;; send with SubstructureNotifyMask
-	(proxy-current-event gnome-window-id (lsh 1 19))
-	t))))
+      ;; only proxy Click1 or Off events, and only if we don't have
+      ;; a binding for an event that may follow in the same grab
+      (cond ((and (string-match "^(.*)-Click1$" event)
+		  (let
+		      ((mirror (lookup-event (expand-last-match "\\1-Off"))))
+		    (not (or (search-keymap mirror global-keymap)
+			     (search-keymap mirror root-window-keymap)))))
+	     ;; send with SubstructureNotifyMask
+	     (proxy-current-event gnome-window-id (lsh 1 19))
+	     t)
+	    ((and (string-match "^(.*)-Off$" event)
+		  (let
+		      ((mirrors
+			(mapcar (lambda (x)
+				  (lookup-event
+				   (concat (expand-last-match "\\1-") x)))
+				'("Click1" "Click2" "Click3" "Move"))))
+		    (catch 'out
+		      (mapc (lambda (ev)
+			      (when (or (search-keymap ev global-keymap)
+					(search-keymap ev root-window-keymap))
+				(throw 'out nil)))
+			    mirrors)
+		      t)))
+	     ;; send with SubstructureNotifyMask
+	     (proxy-current-event gnome-window-id (lsh 1 19))
+	     t)))))
 
 
 ;; initialisation
