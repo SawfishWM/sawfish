@@ -180,16 +180,6 @@ bottom of this level, otherwise raise it to the top of its level."
   (interactive "%W")
   (set-window-depth w (1+ (window-get w 'depth))))
 
-(defun raise-window-and-pass-through-click (w)
-  "Raise the window that received the current event, then replay any pointer
-events that invoked the command."
-  (interactive "%w")
-  (when (windowp w)
-    (raise-window w))
-  (allow-events 'replay-pointer)
-  (unless (clicked-frame-part)
-    (forget-button-press)))
-
 (add-hook 'after-initialization-hook restack-by-depth)
 (add-hook 'add-window-hook stacking-add-window t)
 (add-hook 'map-notify-hook stacking-after-map t)
