@@ -209,10 +209,14 @@
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'avoid t)
 	       (window-put w 'no-history t)
+	       (window-put w 'never-iconify t)
+	       (window-put w 'never-maximize t)
 	       ;; XXX see gnome.jl for why this is needed..
 	       (window-put w 'placed t))
 	      ((string= (aref class 1) "gmc-desktop-icon")
-	       (window-put w 'never-focus t)))))
+	       (window-put w 'never-focus t)
+	       (window-put w 'never-iconify t)
+	       (window-put w 'never-maximize t)))))
 
     (let ((space (get-x-property w '_NET_WM_DESKTOP)))
       (when space

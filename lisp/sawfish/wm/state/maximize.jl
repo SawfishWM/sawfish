@@ -275,21 +275,23 @@
 ;;; size hints stuff
 
   (define (window-maximizable-p w #!optional direction hints)
-    (unless hints
-      (setq hints (window-size-hints w)))
-    (let ((max-width (cdr (assq 'max-width hints)))
-	  (max-height (cdr (assq 'max-height hints)))
-	  (dims (window-dimensions w)))
-      (catch 'out
-	(when (and (or (null direction) (eq direction 'horizontal))
-		   max-width
-		   (>= (car dims) max-width))
-	  (throw 'out nil))
-	(when (and (or (null direction) (eq direction 'vertical))
-		   max-height
-		   (>= (cdr dims) max-height))
-	  (throw 'out nil))
-	t)))
+    (if (window-get w 'never-maximize)
+	nil
+      (unless hints
+	(setq hints (window-size-hints w)))
+      (let ((max-width (cdr (assq 'max-width hints)))
+	    (max-height (cdr (assq 'max-height hints)))
+	    (dims (window-dimensions w)))
+	(catch 'out
+	  (when (and (or (null direction) (eq direction 'horizontal))
+		     max-width
+		     (>= (car dims) max-width))
+	    (throw 'out nil))
+	  (when (and (or (null direction) (eq direction 'vertical))
+		     max-height
+		     (>= (cdr dims) max-height))
+	    (throw 'out nil))
+	  t))))
 
   (define (maximize-truncate-dims w dims #!optional direction hints)
     (unless hints

@@ -43,7 +43,8 @@
 	  sawfish.wm.commands
 	  sawfish.wm.util.groups
 	  sawfish.wm.workspace
-	  sawfish.wm.state.maximize)
+	  sawfish.wm.state.maximize
+	  sawfish.wm.state.iconify)
 
   (define-structure-alias menus sawfish.wm.menus)
 
@@ -79,11 +80,16 @@ unused before killing it.")
   (define menu-timer nil)
 
   (defvar window-ops-menu
-    `((,(_ "Minimize") iconify-window)
+    `((,(_ "Minimize") iconify-window
+       (insensitive . ,(lambda (w)
+			 (not (window-iconifiable-p w)))))
       (,(lambda (w)
 	  (if (window-maximized-p w)
 	      (_ "Unmaximize")
-	    (_ "Maximize"))) maximize-window-toggle)
+	    (_ "Maximize"))) maximize-window-toggle
+       (insensitive . ,(lambda (w)
+			 (not (or (window-maximized-p w)
+				  (window-maximizable-p w))))))
       (,(_ "_Close") delete-window)
       ()
       (,(_ "_Toggle") . window-ops-toggle-menu)

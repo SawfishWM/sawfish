@@ -188,6 +188,8 @@
 	       ;; XXX I don't think the GNOME hints specify these things...
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'no-history t)
+	       (window-put w 'never-iconify t)
+	       (window-put w 'never-maximize t)
 	       ;; XXX the panel should set this, but sometimes it fails..?
 	       (window-put w 'avoid t)
 	       ;; XXX the panel is broken, in that it doesn't check
@@ -201,6 +203,8 @@
 	      ((string= (aref class 1) "gmc-desktop-icon")
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'never-focus t)
+	       (window-put w 'never-iconify t)
+	       (window-put w 'never-maximize t)
 	       ;; XXX same reason as above
 	       (window-put w 'placed t))
 	      ((and (string= (aref class 1) "Nautilus")

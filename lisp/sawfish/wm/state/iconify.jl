@@ -22,6 +22,7 @@
 (define-structure sawfish.wm.state.iconify
 
     (export window-iconified-p
+	    window-iconifiable-p
 	    iconify-window
 	    uniconify-window
 	    toggle-window-iconified
@@ -87,10 +88,15 @@
 
   (define (window-iconified-p w) (window-get w 'iconified))
 
+  (define (window-iconifiable-p w)
+    (and (not (window-get w 'never-iconify))
+	 (not (window-get w 'iconified))
+	 (not (desktop-window-p w))
+	 (or iconify-ignored (not (window-get w 'ignored)))))
+
   (define (iconify-window w)
     "Iconify the window."
-    (when (and (not (window-get w 'iconified))
-	       (or iconify-ignored (not (window-get w 'ignored))))
+    (when (window-iconifiable-p w)
       (window-put w 'iconified t)
       (when (window-visible-p w)
 	(hide-window w))

@@ -1,3 +1,22 @@
+2000-12-06  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/util/groups.jl (persistent-group-ids): use `nil'
+	instead of `""' to denote a null doc string
+
+	* sawfish/wm/state/iconify.jl (window-iconifiable-p): new
+	function, the old logic plus it checks for `never-iconify'
+	property
+
+	* sawfish/wm/state/maximize.jl (window-maximizable-p): check
+	for `never-maximize' property
+
+	* sawfish/wm/state/wm-spec.jl, sawfish/wm/state/gnome.jl: set
+	never-iconify and never-maximize properties of panel/gmc-icon
+	windows
+
+	* sawfish/wm/menus.jl (window-ops-menu): set `insensitive'
+	properties of iconify and maximize menus when appropriate
+
 2000-12-04  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/frames.jl (frame-style-directory): check if the
