@@ -105,6 +105,21 @@ grid."
   `(* (- (nth 2 ,rect) (nth 0 ,rect))
       (- (nth 3 ,rect) (nth 1 ,rect))))
 
+(defun spans-heads-p (point dims)
+  "Return t if rectangle RECT appears on more than one of the screens heads."
+  (let ((corners
+	 (lambda ()
+	   (list point
+		 (cons (car point) (+ (cdr point) (cdr dims)))
+		 (cons (+ (car point) (car dims)) (cdr point))
+		 (cons (+ (car point) (car dims))
+		       (+ (cdr point) (cdr dims)))))))
+    (or (< (car point) 0)
+	(< (cdr point) 0)
+	(>= (+ (car point) (car dims)) (screen-width))
+	(>= (+ (cdr point) (cdr dims)) (screen-height))
+	(apply /= (mapcar find-head (corners))))))
+
 
 ;; overlap
 
