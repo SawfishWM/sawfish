@@ -86,7 +86,5 @@
 
   (define (wm-documentation symbol)
     (wm-eval
-     `(progn
-	(require 'lisp-doc)
-	(let ((doc (documentation ',symbol)))
-	  (and doc (_ doc)))) t)))
+     `(let ((doc (command-documentation ',symbol)))
+	(and doc (_ doc))) t)))
