@@ -1,4 +1,4 @@
-# Makefile.in for sawmill's Lisp files
+# Makefile.in for sawmill's themes
 # $Id$
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
@@ -19,36 +19,39 @@
 # along with sawmill; see the file COPYING.  If not, write to
 # the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-include ../../Makedefs
+include ../Makedefs
 
 top_srcdir=@top_srcdir@
 
-sawmill_prog = ../../src/sawmill --batch --no-rc
-COMPILE_ENV = SAWMILLLISPDIR=.. SAWMILLDOCFILE=../../DOC
+themedir := ${sawmilldir}/${version}/themes
 
-LISP_SRCS := absolute-e.jl brushed-metal.jl simple.jl
-LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
-INSTALL_FILES := $(LISP_SRCS) $(LISP_OBJS)
+sawmill_prog = ../src/sawmill --batch --no-rc
+COMPILE_ENV = SAWMILLLISPDIR=../lisp SAWMILLDOCFILE=../DOC
 
-%.jlc : %.jl
-	$(COMPILE_ENV) $(sawmill_prog) compiler -f compile-batch $<
+THEMES := absolute-e brushed-metal simple
 
-all : $(LISP_OBJS)
+all :
+	for d in $(THEMES); do \
+	  $(COMPILE_ENV) $(sawmill_prog) compiler -f compile-lib-batch $$d; \
+	done
 
 install : all installdirs
-	for f in $(INSTALL_FILES); do \
-	  $(INSTALL_DATA) $$f $(lispdir)/themes; \
+	for d in $(THEMES); do \
+	  cp -af $$d $(themedir)/$$d; \
 	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(lispdir)/themes
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(themedir)
 
 uninstall :
-	for f in $(INSTALL_FILES); do \
-	  rm -f $(lispdir)/themes/$$f; \
+	for d in $(THEMES); do \
+	  rm -rf $(themedir)/$$d; \
 	done
 
 clean :
+	for d in $(THEMES); do \
+	  rm -f $$d/*.jlc $$d/*~; \
+	done
 	rm -f *.jlc *.jld *~
 
 realclean : clean

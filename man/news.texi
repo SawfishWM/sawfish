@@ -22,6 +22,17 @@ each group to be customized separately, either through a new set of
 root-submenus or the commands @code{customize:@var{group}} for each
 @var{group}.
 
+@item Changed the way that ``themes'' are organised, each theme now
+gets its own directory, which must include a @file{theme.jl} or
+@file{theme.jlc} script to initialise a frame-style of the same name as
+the directory. While this script is being evaluated the image path is
+set so that the theme can load any images stored in its directory.
+
+Also created the variable @code{theme-load-path} containing the list of
+directories searched when trying to load a theme. By default it
+contains two directories: @file{~/.sawmill/themes/} and
+@file{@var{prefix}/sawmill/@var{version}/themes}.
+
 @item New commands @code{select-workspace:@var{X}} for @var{X} between
 1 and 9
 

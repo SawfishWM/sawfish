@@ -38,13 +38,6 @@ make install
 %{_prefix}/bin/sawmill-client
 %{_prefix}/bin/sawmill-menu
 %{_prefix}/bin/sawmill-ui
-%{_prefix}/share/sawmill/images/absolute-e/*.png
-%{_prefix}/share/sawmill/images/brushed-metal/*.png
-%{_prefix}/share/sawmill/images/misc/*.png
-%{_prefix}/share/sawmill/%{ver}/lisp/themes/*.jl
-%{_prefix}/share/sawmill/%{ver}/lisp/themes/*.jlc
-%{_prefix}/share/sawmill/%{ver}/lisp/*.jl
-%{_prefix}/share/sawmill/%{ver}/lisp/*.jlc
-%{_prefix}/share/sawmill/%{ver}/DOC.*
-%{_prefix}/libexec/sawmill/%{ver}/%{_host}/
+%{_prefix}/share/sawmill/%{ver}
+%{_prefix}/libexec/sawmill/%{ver}
 %{_prefix}/share/gnome/wm-properties/Sawmill.desktop

@@ -1,4 +1,4 @@
-;; simple.jl
+;; simple/theme.jl
 ;; $Id$
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
@@ -37,16 +37,11 @@
 	       (when always-update-frames
 		 (reframe-all-windows))))
 
-(let
-    ((image-load-path (cons (expand-file-name "misc" image-directory)
-			    image-load-path)))
-  ;; 15x15
-  (defvar simple-minimize (list (make-image "as_min.png")
-				nil nil
-				(make-image "as_min-b.png")))
-  (defvar simple-close (list (make-image "as_close.png")
-			     nil nil
-			     (make-image "as_close-b.png"))))
+;; 15x15
+(defvar simple-minimize (list (make-image "as_min.png")
+			      nil nil (make-image "as_min-b.png")))
+(defvar simple-close (list (make-image "as_close.png")
+			   nil nil (make-image "as_close-b.png")))
 
 (defun simple-frame-colors ()
   (list simple-normal-color simple-active-color))

@@ -1,4 +1,4 @@
-;; absolute-e.jl
+;; absolute-e/theme.jl
 ;; $Id$
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
@@ -41,21 +41,14 @@
 
 ;;    Date: July 19 1999.
 
-(provide 'absolute-e)
-
-(let
-    ((image-load-path (cons (expand-file-name "absolute-e" image-directory)
-			    image-load-path)))
-  ;; 100x16
-  (defvar absolute-e-bar-images
-    (mapcar #'(lambda (i)
-		(when i
-		  (set-image-border i 4 4 4 4))
-		i)
-	    (list (make-image "bar_normal.png")
-		  (make-image "bar_normal_active.png")
-		  (make-image "bar_hilited_active.png")
-		  (make-image "bar_clicked_active.png")))))
+;; 100x16
+(defvar absolute-e-bar-images
+  (mapcar #'(lambda (i)
+	      (set-image-border i 4 4 4 4))
+	  (list (make-image "bar_normal.png")
+		(make-image "bar_normal_active.png")
+		(make-image "bar_hilited_active.png")
+		(make-image "bar_clicked_active.png"))))
 
 (defun absolute-e-title-width (w)
   (let
