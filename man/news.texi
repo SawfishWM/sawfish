@@ -6,6 +6,29 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+
+@unnumberedsec 0.28.1
+
+@itemize @bullet
+
+@item New options @samp{--visual=@var{TYPE}} and
+@samp{--depth=@var{DEPTH}}. These tell the window manager to use a
+different visual than the default
+
+@item Made the @code{window-history} module behave more sanely (don't
+save iconified or shaded state; include window name when generating
+keys for transient windows)
+
+@item Made @code{beos-window-module} the standard window menu (require
+@code{old-window-menu} to get the original version). Also made this
+display the windows' class names
+
+@item Updated translations: es (Iñaki García Etxebarria), tr (Fatih
+Demir)
+
+@end itemize
+
+
 @unnumberedsec 0.28
 
 @itemize @bullet
