@@ -72,6 +72,8 @@ DEFSYM(client_message_hook, "client-message-hook");
 DEFSYM(window_moved_hook, "window-moved-hook");
 DEFSYM(window_resized_hook, "window-resized-hook");
 DEFSYM(shape_notify_hook, "shape-notify-hook");
+DEFSYM(enter_frame_part_hook, "enter-frame-part-hook");
+DEFSYM(leave_frame_part_hook, "leave-frame-part-hook");
 
 /* for enter/leave-notify-hook */
 DEFSYM(root, "root");
@@ -599,7 +601,9 @@ enter_notify (XEvent *ev)
 	Fcall_hook (Qenter_notify_hook, Fcons (Qroot, Qnil), Qnil);
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
     {
+	repv tem;
 	bool refresh = FALSE;
+	Lisp_Window *w = fp->win;
 	if (!fp->highlighted && !frame_state_mutex)
 	{
 	    fp->highlighted = 1;
@@ -612,6 +616,13 @@ enter_notify (XEvent *ev)
 	}
 	if (refresh)
 	    refresh_frame_part (fp);
+
+	tem = Fassq (Qclass, fp->alist);
+	if (tem && rep_CONSP(tem) && w->id != 0)
+	{
+	    Fcall_window_hook (Qenter_frame_part_hook, rep_VAL(w),
+			       Fcons (rep_CDR(tem), Qnil), Qnil);
+	}
     }
     else
     {
@@ -629,7 +640,9 @@ leave_notify (XEvent *ev)
 	Fcall_hook (Qleave_notify_hook, Fcons (Qroot, Qnil), Qnil);
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
     {
+	repv tem;
 	bool refresh = FALSE;
+	Lisp_Window *w = fp->win;
 	if (fp->highlighted && !frame_state_mutex)
 	{
 	    fp->highlighted = 0;
@@ -642,6 +655,13 @@ leave_notify (XEvent *ev)
 	}
 	if (refresh)
 	    refresh_frame_part (fp);
+
+	tem = Fassq (Qclass, fp->alist);
+	if (tem && rep_CONSP(tem) && w->id != 0)
+	{
+	    Fcall_window_hook (Qleave_frame_part_hook, rep_VAL(w),
+			       Fcons (rep_CDR(tem), Qnil), Qnil);
+	}
     }
     else
     {
@@ -896,8 +916,11 @@ handle_input_mask(long mask)
     /* Read all events in the input queue. */
     while(rep_throw_value == rep_NULL)
     {
-	XEvent xev;
+	XEvent xev, *old_current_event = current_x_event;
+	repv old_current_window = current_event_window;
+	rep_GC_root gc_old_current_window;
 	void (*handler)(XEvent *);
+
 	if (mask == 0)
 	{
 	    if(XEventsQueued(dpy, QueuedAfterReading) <= 0)
@@ -910,7 +933,9 @@ handle_input_mask(long mask)
 		break;
 	}
 
+	rep_PUSHGC(gc_old_current_window, old_current_window);
 	emit_pending_destroys ();
+	rep_POPGC;
 
 	if (xev.type == NoExpose || xev.type == GraphicsExpose)
 	    continue;
@@ -924,6 +949,7 @@ handle_input_mask(long mask)
 	current_event_updated_mouse = FALSE;
 	current_event_window = rep_NULL;
 
+	rep_PUSHGC(gc_old_current_window, old_current_window);
 	handler = window_event_handler (xev.xany.window);
 	if (handler != 0)
 	    (*handler) (&xev);
@@ -933,9 +959,10 @@ handle_input_mask(long mask)
 	    shape_notify (&xev);
 	else
 	    fprintf (stderr, "warning: unhandled event: %d\n", xev.type);
+	rep_POPGC;
 
-	current_x_event = 0;
-	current_event_window = Qnil;
+	current_x_event = old_current_event;
+	current_event_window = old_current_window;
 	XFlush (dpy);
     }
 
@@ -1074,18 +1101,23 @@ Return the window that received the current event, or the symbol
 	current_event_window = win;
     if (current_event_window == rep_NULL)
     {
-	struct frame_part *fp;
-	Lisp_Window *w = find_window_by_id (current_x_event->xany.window);
-	if (w == 0)
+	if (current_x_event != 0)
 	{
-	    fp = find_frame_part_by_window (current_x_event->xany.window);
-	    if (fp != 0)
-		w = fp->win;
+	    struct frame_part *fp;
+	    Lisp_Window *w = find_window_by_id (current_x_event->xany.window);
+	    if (w == 0)
+	    {
+		fp = find_frame_part_by_window (current_x_event->xany.window);
+		if (fp != 0)
+		    w = fp->win;
+	    }
+	    if (w != 0)
+		current_event_window = rep_VAL(w);
+	    else if (current_x_event->xany.window == root_window)
+		current_event_window = Qroot;
+	    else
+		current_event_window = Qnil;
 	}
-	if (w != 0)
-	    current_event_window = rep_VAL(w);
-	else if (current_x_event->xany.window == root_window)
-	    current_event_window = Qroot;
 	else
 	    current_event_window = Qnil;
     }
@@ -1267,6 +1299,8 @@ events_init (void)
     rep_INTERN_SPECIAL(window_moved_hook);
     rep_INTERN_SPECIAL(window_resized_hook);
     rep_INTERN_SPECIAL(shape_notify_hook);
+    rep_INTERN_SPECIAL(enter_frame_part_hook);
+    rep_INTERN_SPECIAL(leave_frame_part_hook);
 
     rep_INTERN(iconify_window);
     rep_INTERN(uniconify_window);
