@@ -101,15 +101,20 @@ this mode. The single argument is the window to be placed."
 ;; standard placement modes
 
 (defun place-window-randomly (w)
-  (let
+  (require 'maximize)
+  (let*
       ((dims (window-frame-dimensions w))
-       x y)
-    (if (< (car dims) (screen-width))
-	(setq x (random (- (screen-width) (car dims))))
-      (setq x 0))
-    (if (< (cdr dims) (screen-height))
-	(setq y (random (- (screen-height) (cdr dims))))
-      (setq y 0))
+       (max-rect (maximize-find-workarea w))
+       (x (cond ((and max-rect (< (car dims) (nth 2 max-rect)))
+		 (+ (nth 0 max-rect) (random (- (nth 2 max-rect) (car dims)))))
+		((< (car dims) (screen-width))
+		 (random (- (screen-width) (car dims))))
+		(t 0)))
+       (y (cond ((and max-rect (< (cdr dims) (nth 3 max-rect)))
+		 (+ (nth 1 max-rect) (random (- (nth 3 max-rect) (cdr dims)))))
+		((< (cdr dims) (screen-height))
+		 (random (- (screen-height) (cdr dims))))
+		(t 0))))
     (move-window-to w x y)))
 
 (defun place-window-interactively (w)
