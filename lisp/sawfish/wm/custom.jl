@@ -36,6 +36,7 @@
 ;;	:allow-nil t
 ;;	:set FUNCTION
 ;;	:get FUNCTION
+;;	:after-set FUNCTION
 
 ;; TYPE may be `boolean', `number', `string', `(set SYMBOLS..)',
 ;; `file-name', `program-name', `font', `color'
@@ -83,7 +84,9 @@
 	    ((eq tem ':set)
 	     (put symbol 'custom-set (car keys)))
 	    ((eq tem ':get)
-	     (put symbol 'custom-get (car keys))))
+	     (put symbol 'custom-get (car keys)))
+	    ((eq tem ':after-set)
+	     (put symbol 'custom-after-set (car keys))))
       (setq keys (cdr keys)))
     (when (symbolp type)
       (when (and (not (get symbol 'custom-get))
@@ -114,7 +117,9 @@
 (defun custom-set-variable (symbol value &optional require)
   (when require
     (require require))
-  (set symbol value))
+  (set symbol value)
+  (when (get symbol 'custom-after-set)
+    (funcall (get symbol 'custom-after-set) symbol)))
 
 
 ;; support for font and color primitive types
