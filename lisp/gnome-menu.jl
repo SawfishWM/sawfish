@@ -115,8 +115,8 @@
 	  (let
 	      (order tem)
 	    (while (setq tem (read-line file))
-	      (when (string-match "\\s+$" tem)
-		(setq tem (substring tem 0 (match-start))))
+	      (when (string-match "\\S+" tem)
+		(setq tem (substring tem (match-start) (match-end))))
 	      (setq order (cons tem order)))
 	    (nreverse order))
 	(close-file file)))))
