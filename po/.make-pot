@@ -1,2 +1,17 @@
 #!/bin/sh
-rep-xgettext ../src/*.jl ../lisp/*.jl ../themes/*/theme.jl >sawmill.pot
+
+REP_SRCS="../src/*.jl ../themer/themer.in ../lisp/*.jl ../themes/*/theme.jl"
+GLADE_SRCS="../themer/themer.glade"
+
+rm -f sawmill.pot
+
+lisp_pot=.$$.lisp.pot
+glade_pot=.$$.glade.pot
+
+rep-xgettext $REP_SRCS >$lisp_pot
+libglade-xgettext -p $GLADE_SRCS  >$glade_pot
+
+msghack -o sawmill.pot --append $lisp_pot $glade_pot
+
+rm -f $lisp_pot $glade_pot
+
