@@ -1,5 +1,11 @@
 1999-08-02  John Harper  <john@dcs.warwick.ac.uk>
 
+	* workspace.jl (toggle-window-sticky): new command
+	(ws-remove-window): new optional argument DONT-HIDE
+
+	* keymaps.jl (window-keymap): bind "M-Button2" to
+	popup-window-menu
+
 	* workspace.jl: where appropriate use call-window-hook instead
 	of call-hook
 
