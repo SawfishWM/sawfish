@@ -1,3 +1,18 @@
+1999-12-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gradient.c (Fdraw_diagonal_gradient): the gradient now scales
+	linearly for all lines parallel to that connecting the top-left
+	and bottom-left corners (from Chris Hanson <cph@zurich.ai.mit.edu>)
+
+	* images.c (Fbevel_pixel): new optional parameter BEVEL-PERCENT
+	(from Chris Hanson <cph@zurich.ai.mit.edu>)
+	(Qdefault_bevel_percent): new variable, default for above
+	parameter
+
+	* events.c (map_request): reinstate the code to iconify a
+	window if it's initial state is IconicState (why did I ever
+	remove it!?)
+
 1999-12-08  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c (Fforget_button_press): new function, forgets about
