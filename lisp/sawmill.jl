@@ -72,8 +72,7 @@
      (format (stderr-file) "error in local config--> %S\n" error-data))))
 
 ;; If we connected with a session manager, initialise our state
-(when sm-client-id
-  (require 'sm-init))
+(require 'sm-init)
 
 ;; Use all arguments which are left.
 (let
