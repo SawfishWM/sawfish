@@ -65,6 +65,8 @@ DEFSYM(root, "root");
 DEFSYM(after_restacking_hook, "after-restacking-hook");
 DEFSYM(position, "position");
 DEFSYM(spacing, "spacing");
+DEFSYM(window, "window");
+DEFSYM(head, "head");
 
 DEFUN("restack-windows", Frestack_windows, Srestack_windows,
       (repv list), rep_Subr1) /*
@@ -1206,24 +1208,60 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	{
 	    char *ptr = rep_STR(text);
 	    int max_width = 0, rows = 0;
+	    repv head = Qnil;
+	    int head_width, head_height;
+	    int head_xoff, head_yoff;
 	    while (*ptr != 0)
 	    {
 		int text_width;
 		char *end = strchr (ptr, '\n');
 		if (end == 0)
-		    end = ptr + strlen (ptr);
+		  end = ptr + strlen (ptr);
 		text_width = x_text_width (message.font, ptr, end - ptr);
 		max_width = MAX(max_width, text_width);
 		rows++;
 		ptr = end;
 		if (*ptr == '\n')
-		    ptr++;
+		  ptr++;
 	    }
 	    message.width = max_width + MSG_PAD_X * 2;
 	    height = ((rep_INT(Ffont_height (message.font)) + message.spacing)
 		      * rows + MSG_PAD_Y * 2);
-	    x = (screen_width - message.width) / 2;
-	    y = (screen_height - height) / 2;
+
+	    /* Find the head to put the message on. */
+	    tem = Fassq (Qhead, attrs);
+	    if (tem && rep_CONSP (tem) && rep_INTP (rep_CDR (tem)))
+		head = rep_CDR (tem);
+	    if (!head || head == Qnil)
+		head = Ffind_head (Fquery_pointer (Qnil), Qnil);
+
+	    if (head && head != Qnil)
+	    {
+		/* We have a head to centre on. */
+
+		tem = Fhead_dimensions (head);
+		if (!tem)
+		    goto no_head;
+		head_width = rep_INT (rep_CAR (tem));
+		head_height = rep_INT (rep_CDR (tem));
+
+		tem = Fhead_offset (head);
+		if (!tem)
+		    goto no_head;
+		head_xoff = rep_INT (rep_CAR (tem));
+		head_yoff = rep_INT (rep_CDR (tem));
+	    }
+	    else
+	    {
+		/* No head, just centre on the screen. */
+	    no_head:
+		head_xoff = head_yoff = 0;
+		head_width = screen_width;
+		head_height = screen_height;
+	    }
+
+	    x = head_xoff + ((head_width - message.width) / 2);
+	    y = head_yoff + ((head_height - height) / 2);
 	}
 
 	tem = Fassq (Qposition, attrs);
@@ -1352,6 +1390,7 @@ functions_init (void)
     rep_INTERN_SPECIAL(after_restacking_hook);
     rep_INTERN(position);
     rep_INTERN(spacing);
+    rep_INTERN(head);
 
     rep_mark_static (&message.text);
     rep_mark_static (&message.fg);
