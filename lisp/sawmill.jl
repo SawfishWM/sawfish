@@ -56,6 +56,7 @@
 (require 'place-window)
 (require 'server)
 (require 'compat)
+(require 'group-funs)
 
 ;; Load site specific initialisation. Errors here are trapped since
 ;; they're probably not going to leave us in an unusable state
