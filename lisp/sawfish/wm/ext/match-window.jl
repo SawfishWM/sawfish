@@ -64,6 +64,7 @@
     (focus-when-mapped boolean)
     (ungrouped boolean)
     (unique-name boolean)
+    (auto-gravity boolean)
     (group symbol ,(lambda ()
 		     (delete-if-not symbolp (window-group-ids))))
     (place-mode symbol ,(lambda ()
