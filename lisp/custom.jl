@@ -109,7 +109,8 @@
     (when (eq (car type) 'set)
       ;; backwards compatibility
       (put symbol 'custom-options (cdr type))
-      (setq type 'symbol))
+      (setq type 'symbol)
+      (put symbol 'custom-type type))
     (when (and type (symbolp type))
       (when (and (not (get symbol 'custom-get)) (get type 'custom-get))
 	(put symbol 'custom-get (get type 'custom-get)))
