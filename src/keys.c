@@ -189,8 +189,11 @@ translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
     {
 	u_int s = rep_INT(EVENT_MODS(ev)) & EV_MOD_MASK;
 	KeySym sym = rep_INT(EVENT_CODE(ev));
-	u_int k = XKeysymToKeycode (dpy, sym);
 	KeySym normal, shifted;
+	u_int k = XKeysymToKeycode (dpy, sym);
+
+	if (k == 0)
+	    return FALSE;
 
 	if (s & EV_MOD_META)
 	    s = (s & ~EV_MOD_META) | meta_mod;
