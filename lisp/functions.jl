@@ -21,6 +21,9 @@
 
 (provide 'functions)
 
+(defvar xterm-program "xterm")
+(defvar xterm-args nil)
+
 ;; return a window called NAME, or nil
 (defun get-window-by-name (name)
   (catch 'foo
@@ -62,3 +65,9 @@
       (while (not (file-exists-p (expand-file-name ".." tem)))
 	(setq tem (expand-file-name ".." tem)))
       (make-directory tem))))
+
+(defun xterm ()
+  "Start a new xterm."
+  (interactive)
+  (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
+		  xterm-program (or xterm-args ""))))
