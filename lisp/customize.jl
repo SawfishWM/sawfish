@@ -196,6 +196,7 @@
 
 (defun customize-write-user-file ()
   (when customize-dirty-user-file
+    (make-directory-recursively (file-name-directory custom-user-file))
     (let
 	((file (open-file custom-user-file 'write)))
       (when file

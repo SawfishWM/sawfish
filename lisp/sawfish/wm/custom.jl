@@ -211,6 +211,7 @@
   (when (file-exists-p custom-old-user-file)
     (if (file-exists-p custom-user-file)
 	(write standard-error "warning: both ~/.sawmill-custom and ~/.sawmill/custom exist!\n")
+      (make-directory-recursively (file-name-directory custom-user-file))
       (rename-file custom-old-user-file custom-user-file)))
   (when (file-exists-p custom-user-file)
     (load custom-user-file t t t)))
