@@ -285,7 +285,7 @@ main(int argc, char **argv)
 	functions_init ();
 	server_init ();
 
-	res = Fload(rep_string_dup ("sawmill"), Qnil, Qnil, Qnil);
+	res = Fload(rep_string_dup ("sawmill"), Qnil, Qnil, Qnil, Qnil);
 	if (res != rep_NULL)
 	{
 	    repv tv;
