@@ -70,20 +70,19 @@
   (define (rw-on-focus w)
     (unless disable-auto-raise
       (if (or (window-get w 'raise-on-focus) raise-windows-on-focus)
-	  (if (<= raise-window-timeout 0)
-	      (progn
-		(rw-raise-window w)
-		(rw-disable-timer))
-	    (setq rw-window w)
-	    (if rw-timer
-		(set-timer rw-timer)
-	      (let
-		  ((timer-callback (lambda ()
+	  (setq rw-window w)
+	(if rw-timer
+	    (set-timer rw-timer)
+	  (let
+	      ((timer-callback (lambda (timer)
+				 (if (not disable-auto-raise)
 				     (rw-raise-window rw-window)
-				     (setq rw-timer nil))))
-		(setq rw-timer (make-timer timer-callback
-					   (quotient raise-window-timeout 1000)
-					   (mod raise-window-timeout 1000))))))
+				   (set-timer timer))
+				 (setq rw-timer nil)))
+	       (delay (max 1 raise-window-timeout)))
+	    (setq rw-timer (make-timer timer-callback
+				       (quotient delay 1000)
+				       (mod delay 1000)))))
 	(rw-disable-timer))))
 
   (define (rw-out-focus w)
