@@ -141,6 +141,11 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     :user-level expert
     :type keymap)
 
+  (defcustom pointer-motion-threshold 2
+    "Motion threshold for mouse pointer: \\wpixels"
+    :group misc
+    :type (number 0))
+
 
 ;;; Arrange for window-keymap to be set in each window
 
