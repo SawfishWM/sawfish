@@ -1,3 +1,18 @@
+1999-10-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* transient.jl (transient-layer-delta): new variable
+	(transient-map-window): don't only raise windows with parents
+
+	* Makefile.in: use old method of compiling lisp files, just
+	call compile-lib-batch
+
+	* compat.jl: new file, provide some compatibility for obsolete
+	functions
+	* sawmill.jl: require 'compat
+
+	* workspace.jl: renamed ws-workspace-limits as workspace-limits
+	and ws-workspace-empty-p as workspace-empty-p
+
 1999-10-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* smart-placement.jl (sp-max-queued-events): new variable, acts
