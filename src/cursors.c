@@ -116,7 +116,7 @@ X11 cursor font, or an image object.
 	else if (rep_VECTORP(data) && rep_VECT_LEN (data) >= 4)
 	{
 	    cursor = make_bm_cursor (rep_VECTI(data, 0), rep_VECTI(data, 1),
-				     rep_VECTI(data, 2), rep_VECTI(data, 2));
+				     rep_VECTI(data, 2), rep_VECTI(data, 3));
 	}
 	if (cursor != 0)
 	{
