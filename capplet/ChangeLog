@@ -1,3 +1,11 @@
+2000-04-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-capplet.c (ui_output_callback): code `g' means that
+	sawmill-ui couldn't find the group we asked for
+
+	* sawmill-capplet.c (sawmill_setup): don't link stderr to the
+	parent process, causes problems with GTK errors
+
 2000-03-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-capplet.c: don't assume atomic I/O (pointed out by

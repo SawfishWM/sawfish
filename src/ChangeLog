@@ -1,4 +1,13 @@
+2000-04-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl (ui-get-spec): look for errors in the output,
+	if found, print a message or tell the capplet
+
 2000-04-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (call_protectedly, call_protectedly_1): functions to
+	call other [lisp] functions with error protection in place.
+	Used to catch errors while creating frames
 
 	* windows.c (Fmap_window_properties): new function
 
