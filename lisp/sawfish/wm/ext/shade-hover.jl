@@ -59,7 +59,7 @@
   (define shade-hover-timer nil)
 
   (define (shade-hover-leave w)
-    (unless (eq w 'root)
+    (unless (desktop-window-p w)
       (when shade-hover-timer
 	(delete-timer shade-hover-timer)
 	(setq shade-hover-timer nil))
