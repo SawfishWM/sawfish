@@ -52,6 +52,7 @@ enum {
        it's replaced by the actual meta value */
     EV_MOD_META   = 0x00100000,
     EV_MOD_ALT    = 0x00200000,
+    EV_MOD_HYPER  = 0x01000000,
 
     /* Matches any of the modifiers */
     EV_MOD_ANY    = 0x00400000,
@@ -60,7 +61,7 @@ enum {
     EV_MOD_RELEASE= 0x00800000,
 
     EV_TYPE_MASK  = 0x000f0000,
-    EV_MOD_MASK   = 0x00f0ffff,
+    EV_MOD_MASK   = 0x0ff0ffff,
 };
 
 #define EV_MOD_BUTTON_MASK \

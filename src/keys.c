@@ -56,11 +56,12 @@ DEFSYM(replay_keyboard, "replay-keyboard");
 DEFSYM(sync_both, "sync-both");
 DEFSYM(async_both, "async-both");
 
-/* The X modifiers being used for Meta and Alt */
-static u_long meta_mod, alt_mod, num_lock_mod;
+/* The X modifiers being used for Meta, Alt, and Hyper */
+static u_long meta_mod, alt_mod, hyper_mod, num_lock_mod;
 
 DEFSYM(meta_keysyms, "meta-keysyms");
 DEFSYM(alt_keysyms, "alt-keysyms");
+DEFSYM(hyper_keysyms, "hyper-keysyms");
 
 static void grab_keymap_event (repv km, long code, long mods, bool grab);
 static void grab_all_keylist_events (repv map, bool grab);
@@ -195,6 +196,8 @@ translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
 	    s = (s & ~EV_MOD_META) | meta_mod;
 	if (s & EV_MOD_ALT)
 	    s = (s & ~EV_MOD_ALT) | alt_mod;
+	if (s & EV_MOD_HYPER)
+	    s = (s & ~EV_MOD_HYPER) | hyper_mod;
 
 	/* Check if we need a shift modifier */
 	normal = XKeycodeToKeysym (dpy, k, 0);
@@ -244,6 +247,8 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 		    s = (s & ~EV_MOD_META) | meta_mod;
 		if (s & EV_MOD_ALT)
 		    s = (s & ~EV_MOD_ALT) | alt_mod;
+		if (s & EV_MOD_HYPER)
+		    s = (s & ~EV_MOD_HYPER) | alt_mod;
 		if (s == EV_MOD_ANY)
 		    s = AnyModifier;
 		*button = buttons[i].button;
@@ -417,6 +422,7 @@ static struct key_def default_mods[] = {
     { "C",        ControlMask },
     { "M",        EV_MOD_META },
     { "A",        EV_MOD_ALT },
+    { "H",        EV_MOD_HYPER },
     { "Mod1",     Mod1Mask },
     { "Mod2",     Mod2Mask },
     { "Mod3",     Mod3Mask },
@@ -521,6 +527,8 @@ lookup_event(u_long *code, u_long *mods, u_char *desc)
 	*mods = (*mods & ~EV_MOD_META) | meta_mod;
     if (*mods & EV_MOD_ALT)
 	*mods = (*mods & ~EV_MOD_ALT) | alt_mod;
+    if (*mods & EV_MOD_HYPER)
+	*mods = (*mods & ~EV_MOD_HYPER) | hyper_mod;
 
     /* Then go for the code itself */
     {
@@ -567,6 +575,8 @@ lookup_event_name(u_char *buf, u_long code, u_long mods)
 	mods = (mods & ~meta_mod) | EV_MOD_META;
     if(mods & alt_mod)
 	mods = (mods & ~alt_mod) | EV_MOD_ALT;
+    if(mods & hyper_mod)
+	mods = (mods & ~hyper_mod) | EV_MOD_HYPER;
     mods &= EV_MOD_MASK;
 
     for(i = 0; i < 32 && mods != 0; i++)	/* magic numbers!? */
@@ -991,6 +1001,8 @@ DEFSTRING(meta_l, "Meta_L");
 DEFSTRING(meta_r, "Meta_R");
 DEFSTRING(alt_l, "Alt_L");
 DEFSTRING(alt_r, "Alt_R");
+DEFSTRING(hyper_l, "Hyper_L");
+DEFSTRING(hyper_r, "Hyper_R");
 
 static void
 find_meta(void)
@@ -999,7 +1011,7 @@ find_meta(void)
     KeySym *syms;
     int syms_per_code;
     XModifierKeymap *mods;
-    repv meta_syms = Qnil, alt_syms = Qnil;
+    repv meta_syms = Qnil, alt_syms = Qnil, hyper_syms = Qnil;
 
 #if defined (XlibSpecificationRelease) && XlibSpecificationRelease >= 4
     XDisplayKeycodes(dpy, &min_code, &max_code);
@@ -1042,6 +1054,13 @@ find_meta(void)
 					  : rep_VAL(&alt_r), alt_syms);
 			break;
 
+		    case XK_Hyper_L: case XK_Hyper_R:
+			hyper_mod = 1 << row;
+			hyper_syms = Fcons (sym == XK_Hyper_L
+					    ? rep_VAL(&hyper_l)
+					    : rep_VAL(&hyper_r), hyper_syms);
+			break;
+
 		    case XK_Num_Lock:
 			num_lock_mod = 1 << row;
 			break;
@@ -1054,23 +1073,39 @@ find_meta(void)
     XFree((char *)syms);
     XFreeModifiermap(mods);
 
-    if (meta_mod == 0 && alt_mod == 0)
+    if (meta_mod == 0 && alt_mod == 0 && hyper_mod == 0)
 	return;
 
     if (meta_mod == 0)
 	meta_mod = alt_mod;
+    if (meta_mod == 0)
+	meta_mod = hyper_mod;
 
     if (alt_mod == 0)
 	alt_mod = meta_mod;
+
+    if (hyper_mod == 0)
+	hyper_mod = meta_mod;
 
     if (meta_mod == alt_mod)
     {
 	meta_syms = Fnconc (rep_list_2 (meta_syms, alt_syms));
 	alt_syms = meta_syms;
     }
+    if (meta_mod == hyper_mod)
+    {
+	meta_syms = Fnconc (rep_list_2 (meta_syms, hyper_syms));
+	hyper_syms = meta_syms;
+    }
+    if (alt_mod == hyper_mod && alt_mod != meta_mod)
+    {
+	alt_syms = Fnconc (rep_list_2 (alt_syms, hyper_syms));
+	hyper_syms = alt_syms;
+    }
 
     Fset (Qmeta_keysyms, meta_syms);
     Fset (Qalt_keysyms, alt_syms);
+    Fset (Qhyper_keysyms, hyper_syms);
 }
 
 
@@ -1303,6 +1338,8 @@ keys_init(void)
     Fset (Qmeta_keysyms, Qnil);
     rep_INTERN_SPECIAL(alt_keysyms);
     Fset (Qalt_keysyms, Qnil);
+    rep_INTERN_SPECIAL(hyper_keysyms);
+    Fset (Qhyper_keysyms, Qnil);
 
     if (rep_SYM(Qbatch_mode)->value == Qnil)
 	find_meta ();
