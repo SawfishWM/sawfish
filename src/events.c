@@ -589,6 +589,8 @@ static void
 focus_in (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xfocus.window);
+    if (ev->xfocus.detail == NotifyPointer)
+	return;
     if (w != 0 && w->visible)
     {
 	XInstallColormap (dpy, w->attr.colormap);
@@ -610,6 +612,8 @@ static void
 focus_out (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xfocus.window);
+    if (ev->xfocus.detail == NotifyPointer)
+	return;
     if (w != 0 && ev->xfocus.detail != NotifyInferior)
     {
 	XUninstallColormap (dpy, w->attr.colormap);
