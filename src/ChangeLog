@@ -1,3 +1,9 @@
+2000-06-22  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (configure_request): when we know nonthing about the
+	window, propagate the stacking-related fields of the event
+	structure to the call to XConfigureWindow
+
 2000-06-21  John Harper  <john@dcs.warwick.ac.uk>
 
 	* fonts.c (generalize_xlfd): don't assume that snprintf (0, ..)

@@ -1,4 +1,22 @@
+2000-06-22  John Harper  <john@dcs.warwick.ac.uk>
+
+	* stacking.jl (restack-window): new function, given a window,
+	ensure that it has a consistent place in the stacking order
+	(stacking-after-map): don't call raise-window, just use
+	restack-window to ensure consistency
+
+	* functions.jl (member-if): new function
+
 2000-06-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (ws-add-window): if the window has a non-null
+	set of workspaces, clear it before adding the window to each of
+	these spaces, in case (/= logical-id actual-id)
+
+	* match-window.jl: in `workspace' setter, use
+	ws-window-set-workspaces not window-add-to-workspace; also the
+	`workspaces' property must contain logical workspace ids before
+	the add-window-hook has been run
 
 	* window-history.jl: moved customizations to `placement' group.
 	Changed menu items to be `Remember foo' not `Save foo'
