@@ -20,6 +20,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
+#include <X11/extensions/shape.h>
 
 Lisp_Window *window_list;
 int window_type;
@@ -132,6 +133,37 @@ find_window_by_id (Window id)
 }
 
 void
+set_window_shape (Lisp_Window *w)
+{
+    if (w->frame)
+    {
+	if (w->shaped)
+	{
+	    XRectangle rect;
+	    rect.x = -w->frame_x;
+	    rect.y = -w->frame_y;
+	    rect.width = w->attr.width;
+	    rect.height = w->attr.height;
+	    XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
+				     &rect, 1, ShapeSubtract, Unsorted);
+	    XShapeCombineShape (dpy, w->frame, ShapeBounding,
+				-w->frame_x, -w->frame_y, w->id,
+				ShapeBounding, ShapeUnion);
+	}
+	else
+	{
+	    XRectangle rect;
+	    rect.x = -w->frame_x;
+	    rect.y = -w->frame_y;
+	    rect.width = w->frame_width;
+	    rect.height = w->frame_height;
+	    XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
+				     &rect, 1, ShapeUnion, Unsorted);
+	}
+    }
+}
+
+void
 install_window_frame (Lisp_Window *w)
 {
     DB(("install_window_frame (%s)\n", w->name));
@@ -147,6 +179,7 @@ install_window_frame (Lisp_Window *w)
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	w->reparented = TRUE;
 	w->reparenting = TRUE;
+	set_window_shape (w);
 	DB(("  reparented to %lx [%dx%d%+d%+d]\n",
 	    w->frame, w->frame_width, w->frame_height,
 	    w->frame_x, w->frame_y));
@@ -209,6 +242,17 @@ add_window (Window id)
 	if (!XGetWMNormalHints (dpy, w->id, &w->hints, &supplied))
 	    w->hints.flags = 0;
 	get_window_protocols (w);
+
+	{
+	    /* Is the window shaped? */
+	    int xws, yws, xbs, ybs;
+	    u_int wws, hws, wbs, hbs;
+	    int bounding, clip;
+	    XShapeSelectInput (dpy, w->id, ShapeNotifyMask);
+	    XShapeQueryExtents (dpy, w->id, &bounding, &xws, &yws, &wws, &hws,
+				&clip, &xbs, &ybs, &wbs, &hbs);
+	    w->shaped = bounding ? 1 : 0;
+	}
 
 	if (w->name == 0)
 	    w->name = "";
@@ -546,6 +590,16 @@ window-transient-p WINDOW
 	    ? rep_MAKE_INT(tem) : Qnil);
 }
 
+DEFUN("window-shaped-p", Fwindow_shaped_p, Swindow_shaped_p,
+      (repv win), rep_Subr1) /*
+::doc:Swindow-shaped-p::
+window-shaped-p WINDOW
+::end:: */
+{
+    rep_DECLARE1(win, WINDOWP);
+    return VWIN(win)->shaped ? Qt : Qnil;
+}
+
 DEFUN("hide-window", Fhide_window, Shide_window, (repv win), rep_Subr1) /*
 ::doc:Shide-window::
 hide-window WINDOW
@@ -762,6 +816,7 @@ windows_init (void)
     rep_ADD_SUBR(Smanaged_windows);
     rep_ADD_SUBR(Swindow_visibility);
     rep_ADD_SUBR(Swindow_transient_p);
+    rep_ADD_SUBR(Swindow_shaped_p);
     rep_ADD_SUBR(Shide_window);
     rep_ADD_SUBR(Sshow_window);
     rep_ADD_SUBR(Swindow_visible_p);
