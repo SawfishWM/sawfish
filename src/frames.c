@@ -55,6 +55,7 @@ DEFSYM(cursor, "cursor");
 DEFSYM(focused, "focused");
 DEFSYM(highlighted, "highlighted");
 DEFSYM(clicked, "clicked");
+DEFSYM(hide_client, "hide-client");
 
 static repv state_syms[fps_MAX];
 
@@ -435,10 +436,23 @@ list_frame_generator (Lisp_Window *w)
     repv win = rep_VAL(w);
     bool regen;				/* are we resizing the frame */
     int nparts = 0;
+    bool hide_client = FALSE;
 
     /* bounding box of frame */
-    int left_x = 0, top_y = 0;
-    int right_x = w->attr.width, bottom_y = w->attr.height;
+    int left_x, top_y, right_x, bottom_y;
+
+    tem = Fwindow_get (rep_VAL(w), Qhide_client);
+    if (tem && tem != Qnil)
+	hide_client = TRUE;
+
+    left_x = top_y = 0;
+    if (!hide_client)
+    {
+	right_x = w->attr.width;
+	bottom_y = w->attr.height;
+    }
+    else
+	right_x = bottom_y = 0;
 
     DB(("list_frame_generator(%s)\n", w->name));
 
@@ -773,7 +787,7 @@ list_frame_generator (Lisp_Window *w)
 	    rects[i].width = fp->width;
 	    rects[i].height = fp->height;
 	}
-	if (!w->shaped)
+	if (!hide_client && !w->shaped)
 	{
 	    rects[i].x = -w->frame_x;
 	    rects[i].y = -w->frame_y;
@@ -783,7 +797,7 @@ list_frame_generator (Lisp_Window *w)
 	}
 	XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
 				 rects, i, ShapeSet, Unsorted);
-	if (w->shaped)
+	if (!hide_client && w->shaped)
 	{
 	    XShapeCombineShape (dpy, w->frame, ShapeBounding,
 				-w->frame_x, -w->frame_y, w->id,
@@ -1007,6 +1021,7 @@ frames_init (void)
     rep_INTERN(focused);
     rep_INTERN(highlighted);
     rep_INTERN(clicked);
+    rep_INTERN(hide_client);
 
     state_syms[fps_normal] = Qnil;
     state_syms[fps_focused] = Qfocused;

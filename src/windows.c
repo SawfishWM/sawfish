@@ -164,7 +164,8 @@ x_find_window_by_id (Window id)
 void
 set_window_shape (Lisp_Window *w)
 {
-    if (w->frame)
+    repv tem = Fwindow_get (rep_VAL(w), Qhide_client);
+    if ((!tem || tem == Qnil) && w->frame != 0)
     {
 	if (w->shaped)
 	{
