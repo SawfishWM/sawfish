@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.14 1999/08/27 10:58:44 john Exp $
+;; $Id: sawmill-ui.jl,v 1.15 1999/08/29 16:19:32 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -491,7 +491,7 @@ fi
     (gtk-container-add vbox delete)
     (mapc #'(lambda (cell)
 	      (gtk-clist-append clist (vector (cdr cell)
-					      (symbol-name (car cell)))))
+					      (format nil "%S" (car cell)))))
 	  (cdr (get-key spec ':value)))
     (setq spec (nconc spec (list ':shell ui-keymap-shell
 				 ':clist clist
@@ -512,7 +512,7 @@ fi
 
 (defun build-keymap:select-row (spec)
   (let*
-      ((row (or (get-key spec ':selection) 0))
+      ((row (get-key spec ':selection))
        (shell (get-key spec ':shell))
        (binding (nth row (cdr (get-key spec ':value)))))
     (if binding
@@ -550,7 +550,7 @@ fi
       (gtk-clist-set-text (get-key spec ':clist)
 			  index 0 (cdr cell))
       (gtk-clist-set-text (get-key spec ':clist)
-			  index 1 (symbol-name (car cell))))))
+			  index 1 (format nil "%S" (car cell))))))
 
 (put 'keymap-shell 'builder 'build-keymap-shell)
 (defun build-keymap-shell (spec)
@@ -592,15 +592,14 @@ fi
 				 ':entry entry
 				 ':doc-frame doc-frame
 				 ':doc-label doc-label
-				 ':active-map 0
-				 ':active-cmd 0)))
+				 ':active-map 0)))
 
     ;; 1. the key and command editing widget
     (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
     (gtk-widget-set-usize scroller 200 100)
     (gtk-container-add scroller cmd-clist)
     (gtk-clist-set-column-auto-resize cmd-clist 0 t)
-    (gtk-clist-set-selection-mode cmd-clist 'browse)
+    ;(gtk-clist-set-selection-mode cmd-clist 'browse)
     (mapc #'(lambda (c)
 	      (gtk-clist-append cmd-clist (vector (symbol-name c))))
 	  (get-key spec ':commands))
@@ -641,6 +640,12 @@ fi
 
     vbox))
 
+(defun build-keymap-shell:current-binding (spec)
+  (let*
+      ((map (aref (get-key spec ':maps) (get-key spec ':active-map)))
+       (binding (get-key (aref map 1) ':selection)))
+    (nth binding (cdr (get-key (aref map 1) ':value)))))
+
 (defun build-keymap-shell:select-map (spec maps row)
   (let
       ((frame (get-key spec ':frame)))
@@ -652,13 +657,15 @@ fi
     (build-keymap:select-row (aref (aref maps row) 1))))
 
 (defun build-keymap-shell:set-binding (spec event command)
-  (let*
-      ((commands (get-key spec ':commands))
-       (c-row (- (length commands) (length (memq command commands)))))
-    (gtk-clist-select-row (get-key spec ':cmd-clist) c-row 0)
-    (gtk-clist-moveto (get-key spec ':cmd-clist) c-row 0 nil 0)
-    (gtk-entry-set-text (get-key spec ':entry) event)
-    (build-keymap-shell:update-doc spec)))
+  (if (symbolp command)
+      (let*
+	  ((commands (get-key spec ':commands))
+	   (c-row (- (length commands) (length (memq command commands)))))
+	(gtk-clist-select-row (get-key spec ':cmd-clist) c-row 0)
+	(gtk-clist-moveto (get-key spec ':cmd-clist) c-row 0 nil 0))
+    (gtk-clist-unselect-all (get-key spec ':cmd-clist)))
+  (gtk-entry-set-text (get-key spec ':entry) event)
+  (build-keymap-shell:update-doc spec))
 
 (defun build-keymap-shell:set-event (spec)
   (let*
@@ -672,25 +679,33 @@ fi
     
 (defun build-keymap-shell:set-command (spec)
   (let*
-      ((command (nth (get-key spec ':active-cmd) (get-key spec ':commands)))
+      ((command (and (get-key spec ':active-cmd)
+		     (nth (get-key spec ':active-cmd)
+			  (get-key spec ':commands))))
        (map (aref (get-key spec ':maps) (get-key spec ':active-map)))
        (binding (get-key (aref map 1) ':selection))
        (value (nth binding (cdr (get-key (aref map 1) ':value)))))
-    (when value
-      (setq value (cons command (cdr value)))
-      (ui-bind-key (aref map 1) binding value))
+    (when (and value command)
+      (setq value (cons command (cdr value))))
+    (ui-bind-key (aref map 1) binding value)
     (build-keymap-shell:update-doc spec)))
 
 (defun build-keymap-shell:update-doc (spec)
   (let*
-      ((command (nth (get-key spec ':active-cmd) (get-key spec ':commands)))
-       (doc (documentation command))
-       (frame (get-key spec ':doc-frame))
-       (label (get-key spec ':doc-label)))
-    (gtk-frame-set-label frame (symbol-name command))
-    (gtk-label-set label (if doc
-			     (flatten-doc-string doc)
-			   "Undocumented"))))
+      ((frame (get-key spec ':doc-frame))
+       (label (get-key spec ':doc-label))
+       (command (car (build-keymap-shell:current-binding spec))))
+    (when (consp command)
+      (setq command (car command)))
+    (if (and command (symbolp command))
+	(let
+	    ((doc (documentation command)))
+	  (gtk-frame-set-label frame (symbol-name command))
+	  (gtk-label-set label (if doc
+				   (flatten-doc-string doc)
+				 "Undocumented")))
+      (gtk-frame-set-label frame "")
+      (gtk-label-set label ""))))
       
 
 ;; building the frame for the element tree
