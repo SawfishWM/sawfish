@@ -289,8 +289,10 @@ that window on (counting from zero).")
 (defun ws-move-window (w new &optional was-focused)
   (let
       ((space (window-get w 'workspace)))
-    (if (null space)
-	(ws-add-window-to-space w new)
+    (cond
+     ((null space)
+      (ws-add-window-to-space w new))
+     ((/= new space)
       (window-put w 'workspace new)
       (cond ((= space current-workspace)
 	     (hide-window w))
@@ -300,7 +302,7 @@ that window on (counting from zero).")
       ;; the window may lose the focus when switching spaces
       (when was-focused
 	(set-input-focus w))
-      (call-hook 'workspace-state-change-hook))))
+      (call-hook 'workspace-state-change-hook)))))
 
 ;; display workspace index SPACE
 (defun select-workspace (space &optional dont-focus)
