@@ -6,6 +6,67 @@ This lists the user-visible changes made to Sawmill, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
+@unnumberedsec 0.27
+
+@itemize
+
+@item Changed the name from @samp{sawmill} to @samp{sawfish}; all
+user-visible binaries have been renamed appropriately, the old programs
+will still work for now@dots{}
+
+@item Added support for accelerators in menu definitions (this requires
+a new rep-gtk package) (Richard Kilgore). Added accelerators to many of
+the standard menu items
+
+@item Added some (untested) support for Xinerama: @code{current-head},
+@code{current-head-dimensions}, @code{current-head-offset}. Some
+placement modes should handle multiple heads sensibly
+
+@item New functions @code{map-window-properties} (me),
+@code{window-icon-image} (Bruce Miller)
+
+@item Changed behaviour of @code{raise-group} and @code{lower-group} to
+preserve the stacking of the group, then change the selected window.
+Added new command @code{raise-lower-group}
+
+@item New option @code{raise-groups-on-focus}
+
+@item Updated translations: de (Hubert Nachbaur), es (Iñaki García
+Etxebarria), gl (Jesus Bravo Alvarez), ko
+(Man-Yong Lee), tr (Fatih Demir)
+
+@item Try to handle errors more gracefully when creating window frames
+
+@item Better handling of errors in the control center applet
+
+@item Fixed the @code{below-client} frame-part attribute
+
+@item Fixed the disappearing items in the match-windows dialog
+
+@item Fixed the non-beautified entries in the keymaps dialog
+
+@item Fixed interactive placement mode (Timo Korvola)
+
+@item Invoke audio playing program asynchronously, may avoid deadlocks
+
+@item Fixed @code{workspace-menu} to add the focus-marking asterisk
+(John N S Gill)
+
+@item Fixed menu-obscuring bug after auto-raising windows
+
+@item Ensure that @code{WM_STATE} property is set each time a window is
+mapped, not just the first time
+
+@item Fixed bug when discarding grab in click-to-focus mode, even
+though successive events may be in the window's keymap
+
+@item Only focus windows when they're mapped when they're visible
+
+@item Fixed click-to-focus problems when unmapping transient windows
+
+@end itemize
+
+
 @unnumberedsec 0.26
 
 @itemize @bullet

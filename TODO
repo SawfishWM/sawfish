@@ -11,6 +11,16 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
+  ! running multiple instances of the wm loses
+
+    (because they share the same ~/.sawmill/custom file)
+
+  ! keeping unshown windows unmapped isn't so great
+
+    (because the app may withdraw the window by unmapping it, but
+    sawmill won't notice.. perhaps reparent the window+frame into a
+    ``pseudo'' root window that is unmapped?)
+    
   ! cancel the GNOME logout dialog, window decorations aren't redrawn
 
     [ after looking at the X event trace, I don't think it's a sawmill

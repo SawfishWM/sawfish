@@ -286,4 +286,23 @@ WM_HINTS(WM_HINTS):
 @end example
 
 
+@item Why doesn't the GNOME desk-guide / tasklist show the true state
+of my desktop?
+
+It seems that there is a problem with these applets that only occurs
+after restarting sawfish--they seem to lose track of the current window
+states.
+
+The simplest way to correct this is to execute the following shell
+commands:
+
+@example
+$ save-session
+$ killall panel
+@end example
+
+@noindent
+(assuming you have a session manager to restart the panel afterwards!)
+
+
 @end enumerate

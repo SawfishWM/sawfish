@@ -148,6 +148,7 @@
 (autoload 'encode-event "decode-events")
 (autoload 'string->keysym "decode-events")
 (autoload 'modifier->keysyms "decode-events")
+(autoload 'should-grab-button-event-p "decode-events")
 (autoload 'size-window-add-row "size-window" t)
 (autoload 'size-window-subtract-row "size-window" t)
 (autoload 'size-window-add-column "size-window" t)
