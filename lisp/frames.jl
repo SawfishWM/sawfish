@@ -212,11 +212,14 @@ that overrides settings set elsewhere.")
       (fun)
     (check-frame-availability style)
     (if type
-	(window-put w 'type type)
+	(progn
+	  (window-put w 'type type)
+	  (call-window-hook 'window-state-change-hook w (list '(type))))
       (setq type (window-type w)))
     (window-put w 'current-frame-style style)
     (when from-user
-      (window-put w 'frame-style style))      
+      (window-put w 'frame-style style)
+      (call-window-hook 'window-state-change-hook w (list '(frame-style))))
     (setq fun (cdr (assq style frame-styles)))
     (set-window-frame w (or (funcall fun w type) default-frame))))
 
@@ -408,10 +411,13 @@ that overrides settings set elsewhere.")
 			   `(set-window-frame-style
 			     (current-event-window) ',s nil t)))
 		   styles)
-	   `(() (,(_ "Default") (let
-			       ((w (current-event-window)))
-			     (window-put w 'frame-style nil)
-			     (set-frame-for-window w t)))))))
+	   `(() (,(_ "Default")
+		 (let
+		     ((w (current-event-window)))
+		   (window-put w 'frame-style nil)
+		   (set-frame-for-window w t)
+		   (call-window-hook
+		    'window-state-change-hook w (list '(frame-style)))))))))
 
 
 ;; removing frame parts
