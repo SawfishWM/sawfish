@@ -220,8 +220,7 @@ translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
 static bool
 translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 {
-    if (rep_INT(EVENT_MODS(ev)) & EV_TYPE_MOUSE
-	&& rep_INT(EVENT_CODE(ev)) == EV_CODE_MOUSE_CLICK1)
+    if (rep_INT(EVENT_MODS(ev)) & EV_TYPE_MOUSE)
     {
 	u_long mods = rep_INT(EVENT_MODS(ev));
 	static struct { u_int button; u_int mask; } buttons[] = {
@@ -1117,8 +1116,7 @@ grab_event (Window grab_win, repv ev)
 		for (i = 0; i < 4; i++)
 		{
 		    XGrabButton (dpy, code, state | all_lock_combs[i],
-				 grab_win, False,
-				 ButtonPressMask | ButtonReleaseMask,
+				 grab_win, False, POINTER_GRAB_EVENTS,
 				 GrabModeSync, GrabModeSync, None, None);
 		}
 	    }
@@ -1129,9 +1127,8 @@ grab_event (Window grab_win, repv ev)
 		for (i = 0; i < 5; i++)
 		{
 		    XGrabButton (dpy, all_buttons[i], AnyModifier,
-				 grab_win, False, ButtonPressMask
-				 | ButtonReleaseMask, GrabModeSync,
-				 GrabModeSync, None, None);
+				 grab_win, False, POINTER_GRAB_EVENTS,
+				 GrabModeSync, GrabModeSync, None, None);
 		}
 	    }
 	}
