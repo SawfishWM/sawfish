@@ -22,8 +22,7 @@
 
 (provide 'beos-window-menu)
 
-(defvar beos-window-menu-group-delimeter-re "\\s*([[:]|-\\s)")
-
+;;;###autoload
 (define (beos-window-menu)
 
   (define (abbreviate name &optional len)
@@ -49,15 +48,10 @@
   (define (group-name id)
     (cond ((symbolp id) (symbol-name id))
 	  ((integerp id)
-	   (let ((name (and (> id 0) (nth 2 (get-x-property id 'WM_NAME)))))
-	     (unless name
-	       (setq name (window-name (car (windows-by-group id)))))
-	     (unless name
-	       (setq name "Unnamed"))
-	     ;; X has no way to get a name for the entire group, but many
-	     ;; apps do `Foo: CONTEXT' so check for this
-	     (when (string-match beos-window-menu-group-delimeter-re name)
-	       (setq name (substring name 0 (match-start))))
+	   (let ((name (or (window-class id)
+			   (and (> id 0) (nth 2 (get-x-property id 'WM_NAME)))
+			   (window-class (car (windows-by-group id)))
+			   "Unnamed")))
 	     (abbreviate name)))))
 
   (define (make-group-item id)
