@@ -124,10 +124,6 @@
 (defvar workspace-names nil
   "List of workspace names.")
 
-(defvar auto-workspace-alist nil
-  "List of `(REGEXP . INDEX)' mapping window names to the workspace to open
-that window on (counting from zero).")
-
 ;; Currently active workspace, an integer
 (defvar current-workspace 0)
 
@@ -372,11 +368,6 @@ that window on (counting from zero).")
       (progn
 	(window-put w 'workspace nil)
 	(show-window w))
-    (unless (window-get w 'workspace)
-      (let
-	  ((tem (assoc-regexp (window-name w) auto-workspace-alist)))
-	(when tem
-	  (window-put w 'workspace (cdr tem)))))
     (if (window-get w 'workspace)
 	(let
 	    ((space (- (window-get w 'workspace) (car (workspace-limits)))))

@@ -21,18 +21,6 @@
 
 (provide 'transient)
 
-(defcustom ignored-windows-re nil
-  "Regular expression matching windows to ignore."
-  :group misc
-  :type string
-  :allow-nil t)
-
-(defcustom sticky-windows-re nil
-  "Regular expression matching windows to make sticky by default."
-  :group misc
-  :type string
-  :allow-nil t)
-
 (defcustom focus-windows-when-mapped nil
   "Focus each window when first displayed."
   :type boolean
@@ -45,17 +33,6 @@
 
 
 ;; hooks
-
-;; called from the add-window-hook
-(defun transient-add-window (w)
-  (when (and ignored-windows-re
-	     (string-match ignored-windows-re (window-name w)))
-    (window-put w 'ignored t)
-    (set-window-frame w nil-frame))
-  (when (and sticky-windows-re
-	     (string-match sticky-windows-re (window-name w)))
-    (window-put w 'sticky t)
-    (window-put w 'fixed-position t)))
 
 (defun transient-map-window (w)
   (let
@@ -93,7 +70,6 @@
       (when (or (null parent) (window-really-wants-input-p parent))
 	(set-input-focus parent)))))
 
-(add-hook 'before-add-window-hook transient-add-window)
 (add-hook 'map-notify-hook transient-map-window)
 (add-hook 'unmap-notify-hook transient-unmap-window)
 (add-hook 'iconify-window-hook transient-unmap-window)

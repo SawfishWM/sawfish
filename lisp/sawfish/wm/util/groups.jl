@@ -45,9 +45,6 @@
   :type boolean
   :group misc)
 
-(defvar auto-group-alist nil
-  "Alist mapping window names to group ids.")
-
 (defvar persistent-group-ids nil
   "List of group ids that always exist, even when they have no members.")
 
@@ -157,15 +154,3 @@
 
 (add-hook 'sm-window-save-functions group-saved-state)
 (add-hook 'sm-restore-window-hook group-load-state)
-
-
-;; hooks
-
-(defun group-window-add (w)
-  (unless (window-get w 'group)
-    (let
-	((group (cdr (assoc-regexp (window-name w) auto-group-alist))))
-      (when group
-	(add-window-to-group w group)))))
-
-(add-hook 'before-add-window-hook group-window-add t)
