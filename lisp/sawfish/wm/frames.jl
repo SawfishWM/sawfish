@@ -96,6 +96,51 @@
 	(managed-windows)))
 
 
+;; kludge different window decors by modifying the assumed window type
+
+(defun window-type (w)
+  (or (window-get w 'type)
+      (if (window-transient-p w)
+	  (if (window-shaped-p w)
+	      'shaped-transient
+	    'transient)
+	(if (window-shaped-p w)
+	    'shaped
+	  'default))))
+
+(defun window-type-remove-title (type)
+  (cond ((eq type 'default)
+	 'transient)
+	((eq type 'shaped)
+	 'shaped-transient)
+	(t
+	 type)))
+
+(defun window-type-remove-border (type)
+  (cond ((eq type 'default)
+	 'shaped)
+	((eq type 'transient)
+	 'shaped-transient)
+	(t
+	 type)))
+
+(defun window-type-add-title (type)
+  (cond ((eq type 'transient)
+	 'default)
+	((eq type 'shaped-transient)
+	 'shaped)
+	(t
+	 type)))
+
+(defun window-type-add-border (type)
+  (cond ((eq type 'shaped)
+	 'default)
+	((eq type 'shaped-transient)
+	 'transient)
+	(t
+	 type)))
+
+
 ;; custom support
 
 (defun custom-set-frame-style (symbol value &rest args)
