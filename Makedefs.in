@@ -41,6 +41,7 @@ sawmillexecdir=@sawmillexecdir@
 host_type=@host@
 
 CC=@CC@
+MAKEDEP=@MAKEDEP@
 CPPFLAGS=-DHAVE_CONFIG_H -DSAWMILL -I. -I.. @CPPFLAGS@
 CFLAGS=@CFLAGS@
 LDFLAGS=@LDFLAGS@
@@ -74,5 +75,5 @@ include $(repexecdir)/rules.mk
 
 # This rule builds dependancy files from C source files.
 .%.d : %.c
-	$(SHELL) -ec '$(CC) -MM $(CPPFLAGS) $(CFLAGS) $< \
+	$(SHELL) -ec '$(MAKEDEP) $(CPPFLAGS) $(CFLAGS) $< \
 	| sed '\''s/$*\.o/& $*.lo .$*\.d/g'\'' > $@'

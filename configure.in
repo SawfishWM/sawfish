@@ -116,6 +116,27 @@ AC_CHECK_FUNCS(gethostname socket snprintf getpagesize)
 
 dnl Custom tests
 
+dnl How do we get dependency lines in the Makefile?
+if test "x${GCC}" = "xyes"; then
+  MAKEDEP='$(CC) -MM -MG'
+else
+  case ${host} in
+    *-dec-*)
+      # works on Tru64
+      MAKEDEP='$(CC) -M'
+      ;;
+    *-sun-solaris*)
+      # works on Solaris
+      MAKEDEP='$(CPP) -M'
+      ;;
+    *)
+      # disable dependences?
+      MAKEDEP='true'
+      ;;
+  esac
+fi
+AC_SUBST(MAKEDEP)
+
 dnl If using GCC and it doesn't look as though the cflags have been
 dnl set explicitly, add some warning options. Turn off implicit-int
 dnl warnings since the X11 includes on Solaris generate a lot of these
