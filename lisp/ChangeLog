@@ -1,5 +1,9 @@
 2000-11-15  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/keymaps.jl (window-keymap): deleted C-M-Left and
+	C-M-Right bindings (send window to previous/next workspace).
+	They can be confusing when hit by mistake
+
 	* sawfish/wm/ext/error-handler.jl: expanded this to stash all
 	errors in a ring buffer. Functions `retrieve-errors' and
 	`display-errors' to access this buffer. Also added an option
