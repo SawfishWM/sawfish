@@ -7,6 +7,55 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.20
+
+@itemize @bullet
+
+@item Rewrote workspace handling---windows can now appear on multiple
+workspaces, with each instance having different properties (position,
+size, whatever@dots{}) 
+
+Create new window instances by using the @code{copy-to-next-workspace},
+@code{copy-to-previous-workspace}, and @code{copy-to-workspace:@var{n}}
+commands. Merge instances by moving them to the same workspace, or
+using the @code{delete-window-instance} command
+
+@item Added linear-viewport commands---indexing two-dimensional virtual
+workspace areas by one-dimensional values (adapted from code by Eric
+Kidd)
+
+@item Rewrote tooltips; especially how they're removed (also, don't
+show null keymaps)
+
+@item Translation additions/updates: da (Wandy Christiansen), en_GB
+(me), es (Iñaki García Etxebarria), fr (Christian Gillot), gl (Jesus
+Bravo Alvarez)
+
+@item Fixed bug of not refocusing unshaded windows
+
+@item Fixed bug of not notifying windows of their actual position after
+placing them
+
+@item Fixed bug when grabbing Hyper-modified buttons
+
+@item Fixed the focus-flickering when moving windows opaquely
+
+@item Fixed the @code{commandp} function when applied to autoload stubs
+
+@item Fixed typo in @code{gnome-logout} command (Jens Finke)
+
+@item Fixed @code{raise-window-and-pass-through-click} command (again)
+to pass @key{click2}, etc, events through to frame parts
+
+@item Fixed infinite-regress bug when reading GNOME menu entries
+(@samp{Type=directory}, but actually a file)
+
+@item Fixed bug when showing window-move position with snapped movement
+(adapted from merlin@@merlin.org)
+
+@end itemize
+
+
 @unnumberedsec 0.19
 
 @itemize @bullet
