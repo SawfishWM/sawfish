@@ -244,7 +244,6 @@ of choices."
     (iterate full-group custom-groups)))
 
 (defun custom-add-to-group (cell full-group &optional tail)
-  (require 'sort)
   (when (and (symbolp full-group) (not (null full-group)))
     (setq full-group (list full-group)))
   (letrec
