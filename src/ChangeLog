@@ -1,3 +1,15 @@
+2000-04-27  John Harper  <john@dcs.warwick.ac.uk>
+
+	* functions.c (regrab_server): new function, to be called after
+	the server may have been ungrabbed too soon
+
+	* images.c (Fwindow_icon_image): new function, return an image
+	representing a windows icon (adapted from Bruce Miller
+	<docmad@md.prestige.net>)
+
+	* functions.c (Fhead_count, Ffind_head, Fhead_offset,
+	Fhead_dimensions): Xinerama support (untested)
+
 2000-04-25  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill_subrs.h, sawmill-ui.jl, main.c, images.c, display.c,

@@ -160,6 +160,7 @@ extern repv Fmove_resize_window_to (repv win, repv x, repv y, repv w, repv h);
 extern repv Fgrab_server (void);
 extern repv Fungrab_server (void);
 extern repv Fserver_grabbed_p (void);
+extern void regrab_server (void);
 extern repv Fgrab_pointer (repv win, repv cursor, repv ptr_sync,
 			   repv kbd_sync, repv confine_to);
 extern repv Fungrab_pointer (void);
@@ -187,6 +188,7 @@ extern ImlibData *imlib_id;
 extern Pixmap make_bitmap (repv file, int *widthp, int *heightp,
 			   int *x_hotp, int *y_hotp);
 extern repv Fmake_image (repv file, repv plist);
+extern repv Fwindow_icon_image (repv win);
 extern repv Fcopy_image (repv source);
 extern repv Fimage_get (repv image, repv prop);
 extern repv Fimage_put (repv image, repv prop, repv value);

@@ -1,3 +1,33 @@
+2000-04-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* functions.jl (current-head): use focused window to determine
+	current head, only use pointer position if no focused window
+
+2000-04-27  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-gaol.jl: added window-icon-image to list
+
+	* rectangles.jl (rectangle-area, rect-1d-overlap): changed from
+	macros to functions
+	(rectangle-from-coords, rectangle-corners): new functions
+	(rectangle-heads): return the number of screen heads that a
+	given rectangle appears on
+
+	* smart-placement.jl (sp-least-overlap): ignore points where
+	the window appear on more than one screen head
+
+	* edges.jl (get-visible-window-edges): when :include-root
+	option is given, include edges of all the screen's heads
+
+	* place-window.jl (place-window-randomly,
+	place-window-centered): support multi-headed screens
+
+	* functions.jl (current-head, current-head-dimensions,
+	current-head-offset): convenience functions (uses pointer
+	position to define current head)
+
+	* functions.jl (screen-dimensions): new function
+
 2000-04-26  John Harper  <john@dcs.warwick.ac.uk>
 
 	* edge-flip.jl: moved `edge-flip' group under `workspaces'

@@ -20,13 +20,10 @@ Outstanding bugs
 
   ! play-sample.c doesn't seem to work on solaris (esdplay does)
 
-  ! Xinerama issues
-
-    (placing windows in `dead' space; placing windows across monitor
-    boundaries..?)
-
   ! anim-outline just guesses where windows will be iconified to, so it
     usually gets it wrong
+
+    [ the new GNOME/KDE wm hints have support for this ]
 
   ! timestamp ordering code falls over with machines that vary their
     clock rate..
@@ -132,8 +129,6 @@ Window manager tasks
     somehow?
 
   + handle language codes better in gnome-menu
-
-  + add a function to turn icons into lisp images
 
   + add a (destroyed . FUN) attribute to display-message
 
