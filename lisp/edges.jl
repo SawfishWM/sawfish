@@ -26,6 +26,8 @@
 ;; left or top edge of a window. For the root window, the meaning of
 ;; OPEN-P is reversed
 
+;; the returned lists may contain duplicates, and are unsorted
+
 ;; keywords:
 ;;	:with-ignored-windows t
 ;;	:windows-to-ignore LIST
@@ -72,8 +74,8 @@
     (cons x-edges y-edges)))
 
 (defun grid-from-edges (x-edges y-edges)
-  (cons (mapcar 'car x-edges)
-	(mapcar 'car y-edges)))
+  (cons (uniquify-list (mapcar 'car x-edges))
+	(uniquify-list (mapcar 'car y-edges))))
 
 (defmacro edges-abs (x)
   `(max x (- x)))
