@@ -19,6 +19,8 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'workspace)
+(require 'viewport)
 (require 'maximize)
 (provide 'gnome)
 
@@ -55,10 +57,14 @@
 (defvar gnome-current-workspace nil)
 (defvar gnome-current-workspace-count nil)
 (defvar gnome-current-workspace-names nil)
+(defvar gnome-current-area nil)
+(defvar gnome-current-area-count nil)
 
 (defun gnome-set-workspace ()
   (let
-      ((limits (ws-workspace-limits)))
+      ((limits (ws-workspace-limits))
+       (port (screen-viewport))
+       (port-size (cons viewport-columns viewport-rows)))
     (mapc #'(lambda (w)
 	      (when (window-get w 'workspace)
 		(set-x-property w '_WIN_WORKSPACE
@@ -78,7 +84,16 @@
     (unless (equal gnome-current-workspace-names workspace-names)
       (setq gnome-current-workspace-names workspace-names)
       (set-x-text-property 'root '_WIN_WORKSPACE_NAMES
-			   (apply 'vector workspace-names)))))
+			   (apply 'vector workspace-names)))
+    (unless (equal gnome-current-area port)
+      (setq gnome-current-area port)
+      (set-x-property 'root '_WIN_AREA (vector (car port) (cdr port))
+		      'CARDINAL 32))
+    (unless (equal gnome-current-area-count port-size)
+      (setq gnome-current-area-count port-size)
+      (set-x-property 'root '_WIN_AREA_COUNT (vector (car port-size)
+						     (cdr port-size))
+		      'CARDINAL 32))))
 
 (defun gnome-set-client-state (w)
   (let
@@ -97,6 +112,7 @@
 		      (vector (+ (window-get w 'depth) WIN_LAYER_NORMAL))
 		      'CARDINAL 32))))
 
+;; XXX handle _WIN_AREA
 (defun gnome-honour-client-state (w)
   (let
       ((state (get-x-property w '_WIN_STATE))
@@ -106,7 +122,8 @@
     (when (eq (car state) 'CARDINAL)
       (setq bits (aref (nth 2 state) 0))
       (unless (zerop (logand bits WIN_STATE_STICKY))
-	(window-put w 'sticky t))
+	(window-put w 'sticky t)
+	(window-put w 'fixed-position t))
       (unless (zerop (logand bits WIN_STATE_SHADED))
 	(window-put w 'shaded t))
       (unless (zerop (logand bits WIN_STATE_MAXIMIZED_VERT))
@@ -129,6 +146,8 @@
 	     ((limits (ws-workspace-limits)))
 	   (select-workspace (+ (aref data 0) (car limits)))
 	   t))
+	((eq type '_WIN_AREA)
+	 (set-screen-viewport (aref data 0) (aref data 1)))
 	((and (eq type '_WIN_STATE) (windowp w))
 	 (let
 	     ((mask (aref data 0))
@@ -139,7 +158,9 @@
 	     (if (or (and (not tem)
 			  (not (zerop (logand values WIN_STATE_STICKY))))
 		     (and tem (zerop (logand values WIN_STATE_STICKY))))
-		 (toggle-window-sticky w)))
+		 (toggle-window-sticky w))
+	     (window-put w 'fixed-position
+			 (not (window-get w 'fixed-position))))
 	   (unless (zerop (logand mask WIN_STATE_SHADED))
 	     (setq tem (window-get w 'shaded))
 	     (if (or (and (not tem)
@@ -192,11 +213,18 @@
   (set-x-property 'root '_WIN_PROTOCOLS
 		  gnome-supported-protocols 'ATOM 32)
 
-  (set-x-property 'root '_WIN_AREA (vector 0 0) 'CARDINAL 32)
-  (set-x-property 'root '_WIN_AREA_COUNT (vector 1 1) 'CARDINAL 32)
+  (let
+      ((port (screen-viewport)))
+    (set-x-property 'root '_WIN_AREA
+		    (vector (car port) (cdr port)) 'CARDINAL 32)
+    (set-x-property 'root '_WIN_AREA_COUNT
+		    (vector viewport-columns viewport-rows) 'CARDINAL 32))
+
   (delete-x-property 'root '_WIN_WORKSPACE_NAMES)
 
   (add-hook 'workspace-state-change-hook 'gnome-set-workspace)
+  (add-hook 'screen-viewport-resized-hook 'gnome-set-workspace)
+  (add-hook 'screen-viewport-moved-hook 'gnome-set-workspace)
 
   (add-hook 'add-window-hook 'gnome-add-window)
 
