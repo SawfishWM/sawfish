@@ -191,7 +191,7 @@ AC_CHECK_FUNC(malloc_set_state, , doug_lea_malloc=no)
 if test "$doug_lea_malloc" = "no"; then
   case ${host} in
     *-dec-osf*)
-      # dlmalloc is broken on Tru64
+      dnl dlmalloc is broken on Tru64
       AC_DEFINE(LIBC_MALLOC)
       ;;
     *)
@@ -253,19 +253,19 @@ dnl Custom tests
 
 dnl How do we get dependency lines in the Makefile?
 if test "x${GCC}" = "xyes"; then
-  MAKEDEP='$(CC) -MM -MG'
+  MAKEDEP='$(CC) -MM'
 else
   case ${host} in
     *-dec-osf*)
-      # works on Tru64
+      dnl works on Tru64
       MAKEDEP='$(CC) -M'
       ;;
     *-sun-solaris*)
-      # works on Solaris
+      dnl works on Solaris
       MAKEDEP='/usr/lib/cpp -M'
       ;;
     *)
-      # disable dependences?
+      dnl disable dependences?
       MAKEDEP='true'
       ;;
   esac
