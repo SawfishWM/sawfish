@@ -1225,17 +1225,13 @@ list_frame_generator (Lisp_Window *w)
 	int unmap_client = (!w->visible || w->client_hidden);
 	if (w->client_unmapped != unmap_client)
 	{
+	    before_local_map (w);
 	    if (unmap_client)
-	    {
 		XUnmapWindow (dpy, w->id);
-		w->local_unmaps++;
-	    }
 	    else
-	    {	    
 		XMapWindow (dpy, w->id);
-		w->local_maps++;
-	    }
 	    w->client_unmapped = unmap_client;
+	    after_local_map (w);
 	}
     }
 
