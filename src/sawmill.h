@@ -65,16 +65,16 @@ typedef struct lisp_window {
     /* Is the client window reparented to the frame? */
     int reparented : 1;
 
-    /* Are we between reparenting the window and receiving
-       a ReparentNotify event? */
-    int reparenting : 1;
-
     /* Is the client window shaped? */
     int shaped : 1;
 
     /* The WM protocols understood by the client */
     int does_wm_take_focus : 1;
     int does_wm_delete_window : 1;
+
+    /* Are we between reparenting the window and receiving
+       a ReparentNotify event? */
+    int reparenting;
 
     /* The position and dimensions of `attr' is always maintained. */
     XWindowAttributes attr;
