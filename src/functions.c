@@ -313,6 +313,18 @@ Return t if the server is currently grabbed.
     return (server_grabs > 0) ? Qt : Qnil;
 }
 
+/* Call this when the server may have been ungrabbed prematurely (imlib
+   lossage) */
+void
+regrab_server (void)
+{
+    if (server_grabs > 0)
+    {
+	server_grabs--;
+	Fgrab_server ();
+    }
+}
+
 DEFUN("grab-pointer", Fgrab_pointer, Sgrab_pointer,
       (repv win, repv cursor, repv ptr_sync, repv kbd_sync, repv confine_to),
       rep_Subr5) /*
