@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.52 2000/02/10 18:19:21 john Exp $
+;; $Id: sawmill-ui.jl,v 1.53 2000/02/24 19:16:46 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -95,6 +95,12 @@ exec rep "$0" "$@"
 (defvar ui-color-preview-height 16)
 
 (defvar ui-hack-activate-tree nil)
+
+
+;; compatibility
+
+(unless (boundp 'quotient)
+  (setq quotient /))
 
 
 ;; wm communication
@@ -1086,7 +1092,7 @@ exec rep "$0" "$@"
     (setq properties (delete-if (lambda (p)
 				  (eq (nth 1 p) 'boolean)) properties))
 
-    (setq table (gtk-table-new (1+ (/ (length bool-props) 3)) 3 nil))
+    (setq table (gtk-table-new (1+ (quotient (length bool-props) 3)) 3 nil))
     (setq table-2 (gtk-table-new (length properties) 2 nil))
 
     (gtk-window-set-title window (_ "Match window properties"))
@@ -1165,7 +1171,7 @@ exec rep "$0" "$@"
 		  ((current (cdr (assq (car prop) (cdr cell))))
 		   (widget (gtk-check-button-new-with-label
 			    (symbol-name (car prop))))
-		   (row (/ i 3))
+		   (row (quotient i 3))
 		   (col (mod i 3)))
 		(when current
 		  (gtk-toggle-button-set-state widget t))
@@ -1613,9 +1619,9 @@ exec rep "$0" "$@"
        i)
     (setq i 0)
     (while (< i ui-color-preview-width)
-      (aset buf (* i 3) (/ (gdk-color-red color) 256))
-      (aset buf (1+ (* i 3)) (/ (gdk-color-green color) 256))
-      (aset buf (+ 2 (* i 3)) (/ (gdk-color-blue color) 256))
+      (aset buf (* i 3) (quotient (gdk-color-red color) 256))
+      (aset buf (1+ (* i 3)) (quotient (gdk-color-green color) 256))
+      (aset buf (+ 2 (* i 3)) (quotient (gdk-color-blue color) 256))
       (setq i (1+ i)))
     (setq i 0)
     (while (< i ui-color-preview-height)

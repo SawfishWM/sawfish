@@ -197,6 +197,12 @@ exec rep "$0" "$@"
   '(patterns-alist frames-alist mapping-alist theme-name))
 
 
+;; compatibility
+
+(unless (boundp 'quotient)
+  (setq quotient /))
+
+
 ;; macros
 
 (defmacro mapseq (fun minimum maximum)
@@ -1667,9 +1673,9 @@ through a GUI.\n" version))
        i)
     (setq i 0)
     (while (< i color-preview-width)
-      (aset buf (* i 3) (/ (gdk-color-red color) 256))
-      (aset buf (1+ (* i 3)) (/ (gdk-color-green color) 256))
-      (aset buf (+ 2 (* i 3)) (/ (gdk-color-blue color) 256))
+      (aset buf (* i 3) (quotient (gdk-color-red color) 256))
+      (aset buf (1+ (* i 3)) (quotient (gdk-color-green color) 256))
+      (aset buf (+ 2 (* i 3)) (quotient (gdk-color-blue color) 256))
       (setq i (1+ i)))
     (setq i 0)
     (while (< i color-preview-height)
