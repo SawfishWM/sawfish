@@ -71,6 +71,10 @@
 				y-edges))))
     (cons x-edges y-edges)))
 
+(defun grid-from-edges (x-edges y-edges)
+  (cons (mapcar 'car x-edges)
+	(mapcar 'car y-edges)))
+
 (defmacro edges-abs (x)
   `(max x (- x)))
 
