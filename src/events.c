@@ -67,6 +67,7 @@ DEFSYM(uniconify_window, "uniconify-window");
 DEFSYM(client_message_hook, "client-message-hook");
 DEFSYM(window_moved_hook, "window-moved-hook");
 DEFSYM(window_resized_hook, "window-resized-hook");
+DEFSYM(shape_notify_hook, "shape-notify-hook");
 
 /* for enter/leave-notify-hook */
 DEFSYM(root, "root");
@@ -761,6 +762,7 @@ shape_notify (XEvent *ev)
     {
 	w->shaped = sev->shaped ? 1 : 0;
 	set_frame_shapes (w, TRUE);
+	Fcall_window_hook (Qshape_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
@@ -1146,6 +1148,7 @@ events_init (void)
     rep_INTERN(client_message_hook);
     rep_INTERN(window_moved_hook);
     rep_INTERN(window_resized_hook);
+    rep_INTERN(shape_notify_hook);
 
     rep_INTERN(iconify_window);
     rep_INTERN(uniconify_window);
