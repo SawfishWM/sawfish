@@ -1,3 +1,21 @@
+2000-03-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x.c (drawable_from_arg): don't automatically look for back
+	buffers in windows, require this to be done explicitly
+	(Fx_create_root_xor_gc): hacky function to create a gc for
+	doing xor drawing on the root window
+
+	* functions.c (Fdraw_window_outline, Ferase_window_outline):
+	deleted, now in lisp code
+
+	* selection.c (Fx_selection_active_p, Fx_get_selection): new
+	plugin, functions for retrieving X selections. Adapted from
+	patch by Mark Probst <schani@mips.complang.tuwien.ac.at>,
+	which was in turn adapted from Jade's selection handling
+
+	* keys.c (Fsynthesize_event): fixed the relative pointer
+	position calculation
+
 2000-03-20  John Harper  <john@dcs.warwick.ac.uk>
 
 	* windows.c (focus_on_window): don't focus on windows whose

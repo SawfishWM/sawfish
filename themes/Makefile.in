@@ -27,7 +27,7 @@ sitethemedir := ${sawmilldir}/themes
 themedir := ${sawmilldir}/${version}/themes
 
 # also in lisp/Makefile.in
-sawmill_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/libgradient.la \
+sawmill_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/gradient.la \
 		../src/sawmill --batch --no-rc
 COMPILE_ENV = SAWMILLLISPDIR=../lisp \
 	      SAWMILLEXECDIR=$(top_builddir)/src/.libs \

@@ -1,3 +1,31 @@
+2000-03-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* window-outline.jl (draw-window-outline,
+	erase-window-outline): these are now implemented in lisp
+
+	* iconify.jl (make-window-sticky): when sticking a window not
+	on the current viewport, move it to the current viewport (from
+	merlin@merlin.org)
+
+	* shading.jl (raise-windows-when-unshaded): new option
+	* shade-hover.jl (shade-hover-enter): use
+	raise-windows-when-unshaded to implement the shade-hover-raise
+	option
+
+	* sawmill-gaol.jl: added safe `x' plugin functions (e.g. no
+	window creation). Also workaround some rep versions not
+	including the case special form
+
+	* gtkrc.jl (gtkrc-light, gtkrc-dark, gtkrc-mid): new color list
+	variables
+
+	* iconify.jl (display-window): split into two functions, this
+	and display-window-without-focusing
+
+	* maximize.jl (maximize-window): call display-window-without-focusing
+	on the window before maximizing it (fixes the bug of sometimes
+	changing the window's viewport)
+
 2000-03-20  John Harper  <john@dcs.warwick.ac.uk>
 
 	* tooltips.jl (tooltips-background-color): made into a defcustom

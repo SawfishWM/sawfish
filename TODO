@@ -11,9 +11,6 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
-  ! maximizing window on non-current viewport moves it to the current
-    viewport
-
   ! timestamp ordering code falls over with machines that vary their
     clock rate..
 
@@ -84,17 +81,15 @@ Outstanding bugs
 
     (use this when switching workspaces, but focus must be preserved)
 
-  + update to build foo.la not libfoo.la when rep 0.11 is sure to be used
-
 
 
 Window manager tasks
 ====================
 
-  + {draw,erase}-window-outline should be in lisp
+  + optional animation for iconifying windows
 
-    (hack x_gc_parse_attrs () to recognize the necessary properties,
-    how to handle the use of pixel values, add color-x-pixel function?)
+    (how to find where the window is docked to? really need to find the
+    panel with the tasklist applet)
 
   + drag-and-drop to configure window appearance?
 
@@ -282,8 +277,6 @@ sawmill-ui tasks
 
 sawmill-themer tasks
 ====================
-
-  ! freeze clists while updating their contents
 
   ! only the `default' window type may be previewed
 
