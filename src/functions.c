@@ -971,14 +971,13 @@ refresh_message_window ()
 		offset = MSG_PAD_X;
 	    else
 	    {
-		int width = XmbTextEscapement (VFONT(message.font)->font,
-					       ptr, end - ptr);
+		int width = x_text_width (message.font, ptr, end - ptr);
 		if (message.justify == Qright)
 		    offset = message.width - (width + MSG_PAD_X);
 		else
 		    offset = (message.width - width) / 2;
 	    }
-	    XmbDrawString (dpy, message_win, VFONT(message.font)->font,
+	    x_draw_string (message_win, message.font,
 			   message.gc, offset,
 			   MSG_PAD_Y
 			   + row * (VFONT(message.font)->ascent
@@ -1100,8 +1099,7 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 		char *end = strchr (ptr, '\n');
 		if (end == 0)
 		    end = ptr + strlen (ptr);
-		text_width = XmbTextEscapement (VFONT(message.font)->font,
-						ptr, end - ptr);
+		text_width = x_text_width (message.font, ptr, end - ptr);
 		max_width = MAX(max_width, text_width);
 		rows++;
 		ptr = end;

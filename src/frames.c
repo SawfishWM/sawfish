@@ -579,8 +579,7 @@ set_frame_part_fg (struct frame_part *fp)
 		length = rep_STRING_LEN(result);
 	    }
 
-	    width = XmbTextEscapement (VFONT(font)->font, rep_STR(string),
-				       length);
+	    width = x_text_width (font, rep_STR(string), length);
 	    height = VFONT(font)->ascent + VFONT(font)->descent;
 	}
 
@@ -696,8 +695,8 @@ set_frame_part_fg (struct frame_part *fp)
 	    }
 
 	    XChangeGC (dpy, fp->gc, gcv_mask, &gcv);
-	    XmbDrawString (dpy, fp->id, VFONT(font)->font, fp->gc, x,
-			   y + VFONT(font)->ascent, rep_STR(string), length);
+	    x_draw_string (fp->id, font, fp->gc, x, y + VFONT(font)->ascent,
+			   rep_STR(string), length);
 
 	    fp->drawn.text = string;
 	}
