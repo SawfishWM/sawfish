@@ -888,6 +888,10 @@ Set the dimensions of the client window associated with object
 @var{window} to (@var{width}, @var{height}).
 @end defun
 
+@defun move-resize-window-to window x y width height
+A combination of the previous two functions.
+@end defun
+
 @defun resize-window-with-hints window cols rows &optional hints
 Resize the window associated with object @var{window} so that it has
 @var{cols} columns and @var{rows} rows. The @var{hints} parameters is

@@ -155,6 +155,7 @@ extern repv Fx_raise_window (repv win);
 extern repv Fwarp_cursor (repv x, repv y);
 extern repv Fmove_window_to (repv win, repv x, repv y);
 extern repv Fresize_window_to (repv win, repv x, repv y);
+extern repv Fmove_resize_window_to (repv win, repv x, repv y, repv w, repv h);
 extern repv Fgrab_server (void);
 extern repv Fungrab_server (void);
 extern repv Fserver_grabbed_p (void);
