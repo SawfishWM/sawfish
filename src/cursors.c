@@ -161,13 +161,15 @@ recolor-cursor CURSOR FG BG
     return cursor;
 }
 
-DEFUN("default-cursor", Vdefault_cursor, Sdefault_cursor, (repv arg), rep_Var) /*
+DEFUN("default-cursor", Fdefault_cursor, Sdefault_cursor, (repv arg), rep_Subr1) /*
 ::doc:default-cursor::
+default-cursor [NEW-VALUE]
+
 The cursor object displayed in the root window, and in frame parts which
 have no other cursor specified.
 ::end:: */
 {
-    if (arg && CURSORP(arg))
+    if (CURSORP(arg))
     {
 	default_cursor = arg;
 	XDefineCursor (dpy, root_window, VCURSOR(default_cursor)->cursor);
@@ -245,7 +247,7 @@ cursors_init (void)
     rep_ADD_SUBR(Sdefault_cursor);
     rep_ADD_SUBR(Scursorp);
     if (rep_SYM(Qbatch_mode)->value == Qnil)
-	Vdefault_cursor (Fget_cursor (rep_MAKE_INT (XC_left_ptr)));
+	Fdefault_cursor (Fget_cursor (rep_MAKE_INT (XC_left_ptr)));
     rep_mark_static (&default_cursor);
     rep_INTERN(cursor_shape);
 }

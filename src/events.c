@@ -933,26 +933,24 @@ send_synthetic_configure (Lisp_Window *w)
 }
 
 DEFUN("synthetic-configure-mutex", Vsynthetic_configure_mutex,
-      Ssynthetic_configure_mutex, (repv arg), rep_Var) /*
+      Ssynthetic_configure_mutex, (repv arg), rep_Subr1) /*
 ::doc:synthetic-configure-mutex::
 While this variable is non-nil no synthetic ConfigureNotify events will
 be sent to windows.
 ::end:: */
 {
-    if (arg != 0)
+    repv ret = synthetic_configure_mutex ? Qt : Qnil;
+    synthetic_configure_mutex = (arg != Qnil);
+    if (!synthetic_configure_mutex)
     {
-	synthetic_configure_mutex = (arg != Qnil);
-	if (!synthetic_configure_mutex)
+	Lisp_Window *w;
+	for (w = window_list; w != 0; w = w->next)
 	{
-	    Lisp_Window *w;
-	    for (w = window_list; w != 0; w = w->next)
-	    {
-		if (w->pending_configure && w->id != 0)
-		    send_synthetic_configure (w);
-	    }
+	    if (w->pending_configure && w->id != 0)
+		send_synthetic_configure (w);
 	}
     }
-    return synthetic_configure_mutex ? Qt : Qnil;
+    return ret;
 }
 	
 long
