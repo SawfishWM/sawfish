@@ -9,9 +9,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sawmill 0.22\n"
-"POT-Creation-Date: 2000-01-30 13:59+0100\n"
-"PO-Revision-Date: 2000-01-30 14:51+0100\n"
+"Project-Id-Version: sawmill 0.25.2\n"
+"POT-Creation-Date: 2000-03-23 19:01+0100\n"
+"PO-Revision-Date: 2000-03-23 19:17+0100\n"
 "Last-Translator: Jesús Bravo Álvarez <jba@pobox.com>\n"
 "Language-Team: Galician <gpul-traduccion@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -68,10 +68,6 @@ msgstr "Comandos"
 #. ../src/sawmill-ui.jl
 msgid "Undocumented"
 msgstr "Non documentado"
-
-#. ../src/sawmill-ui.jl
-msgid "Details"
-msgstr "Detalles"
 
 #. ../src/sawmill-ui.jl
 msgid "OK"
@@ -227,10 +223,11 @@ msgstr "Eleva-las fiestras ó seren enfocadas."
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr "Retardo en milisegundos ata que as fiestras enfocadas sexan elevadas."
 
-#. ../lisp/customize.jl
-msgid "Location of the program implementing sawmill's configuration interface."
+#. ../lisp/configure.jl
+msgid "Automatically select window gravity from position on screen."
 msgstr ""
-"Lugar onde se atopa o programa coa interfaz de configuración do sawmill."
+"Escoller automáticamente a gravidade da fiestra pola súa posición na "
+"pantalla."
 
 #. ../lisp/customize.jl
 msgid "Show variable names of each customization option."
@@ -284,16 +281,6 @@ msgid "Invoke the user-customization system."
 msgstr "Arrinca-lo sistema de configuración de usuario."
 
 #. ../lisp/custom.jl
-msgid "List of features to load before running customize."
-msgstr ""
-"Lista de características a cargar antes de executa-la configuración do "
-"usuario."
-
-#. ../lisp/custom.jl
-msgid "File used to store user's configuration settings."
-msgstr "Ficheiro usado para garda-los axustes de configuración do usuario."
-
-#. ../lisp/custom.jl
 msgid "Main"
 msgstr "Principal"
 
@@ -336,8 +323,12 @@ msgid "Bindings"
 msgstr "Atallos"
 
 #. ../lisp/custom.jl
-msgid "Iconifying"
-msgstr "Iconificar"
+msgid "Minimizing/Maximizing"
+msgstr "Minimizar/Maximizar"
+
+#. ../lisp/custom.jl
+msgid "Minimizing"
+msgstr "Minimizar"
 
 #. ../lisp/custom.jl
 msgid "Maximizing"
@@ -378,6 +369,10 @@ msgstr ""
 "pantalla."
 
 #. ../lisp/edge-flip.jl
+msgid "Only flip when interactively moving a window."
+msgstr "Só saltar ó mover unha fiestra interactivamente."
+
+#. ../lisp/edge-flip.jl
 msgid "What hitting the screen edge actually flips."
 msgstr "Que saltar ó chegar ó eixo da pantalla."
 
@@ -398,22 +393,6 @@ msgid "Does click-to-focus mode pass the click through to the window."
 msgstr "O modo premer-para enfocar pásalle o click á fiestra."
 
 #. ../lisp/frames.jl
-msgid ""
-"Alist of (CLASS . ALIST) associating classes of frame parts with state\n"
-"they inherit."
-msgstr ""
-"Alist de (CLASE . ALIST) que asocia clases de partes dos marcos co estado "
-"que herdan."
-
-#. ../lisp/frames.jl
-msgid ""
-"Alist of (CLASS . ALIST) associating classes of frame parts with state\n"
-"that overrides settings set elsewhere."
-msgstr ""
-"Alist de (CLASE . ALIST) que asocia clases de partes dos marcos co estado "
-"que prevalece sobre calquera configuración."
-
-#. ../lisp/frames.jl
 msgid "Default frame style (theme)."
 msgstr "Estilo de marco (tema) por defecto."
 
@@ -430,37 +409,6 @@ msgstr ""
 #. ../lisp/frames.jl
 msgid "Automatically reload themes when they are updated."
 msgstr "Recargar automáticamente os temas se son actualizados."
-
-#. ../lisp/frames.jl
-msgid "Number of seconds between checking if theme files have been modified."
-msgstr ""
-"Número de segundos a agardar antes de comprobar de novo se se modificaron os "
-"ficheiros do tema."
-
-#. ../lisp/frames.jl
-msgid "Directory containing user-local themes."
-msgstr "Directory cos temas locais de usuario."
-
-#. ../lisp/frames.jl
-msgid "Directory containing themes from the current sawmill version."
-msgstr "Directorio cos temas da versión actual do sawmill."
-
-#. ../lisp/frames.jl
-msgid "Directory containing system-wide themes."
-msgstr "Directorio cos temas do sistema."
-
-#. ../lisp/frames.jl
-msgid "List of directories from which themes may be loaded."
-msgstr "Lista de directorios dende os que se poden cargar temas."
-
-#. ../lisp/frames.jl
-msgid "List of (NAME . FUNCTION) defining all loaded frame styles."
-msgstr ""
-"Lista de (NOME . FUNCIÓN) definindo tódolos estilos de marcos cargados."
-
-#. ../lisp/frames.jl
-msgid "When non-nil themes are assumed to be malicious."
-msgstr "Cando asumir que os temas non baleiros son maliciosos."
 
 #. ../lisp/frames.jl
 msgid "Default"
@@ -493,13 +441,18 @@ msgid "Start a new xterm."
 msgstr "Iniciar unha nova xterm."
 
 #. ../lisp/functions.jl
+msgid "Force the current window to have a unique title."
+msgstr "Forzar que a fiestra actual teña un único título."
+
+#. ../lisp/functions.jl
 msgid "Delete the window."
 msgstr "Pecha-la fiestra."
 
 #. ../lisp/functions.jl
 msgid "Delete the window, or beep if the window can't be closed safely."
-msgstr "Pecha-la fiestra, ou dar un pitido se a fiestra non se pode "
-"pechar con seguridade."
+msgstr ""
+"Pecha-la fiestra, ou dar un pitido se a fiestra non se pode pechar con "
+"seguridade."
 
 #. ../lisp/gnome-commands.jl
 msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
@@ -525,27 +478,58 @@ msgstr "Activa-lo estado SKIP_TASKLIST de GNOME para esta fiestra."
 msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
 msgstr "Desactiva-lo estado SKIP_TASKLIST de GNOME para esta fiestra."
 
-#. ../lisp/gnome-menu.jl
-msgid "Language code used when constructing GNOME menus."
-msgstr "Código de lingua usado ó construi-los menús de GNOME."
-
-#. ../lisp/gnome-menu.jl
-msgid "List of directories to read GNOME menu entries from."
-msgstr "Lista de directorios dos que le-las entradas de menú de GNOME."
-
 #. ../lisp/group-funs.jl
 msgid "Group transient windows with their parents."
 msgstr "Agrupa-las fiestras temporais coas súas nais."
 
 #. ../lisp/group-funs.jl
-msgid "List of group ids that always exist, even when they have no members."
-msgstr ""
-"Lista de identificadores de grupo que existen sempre, aínda que non teñan "
-"membros."
-
-#. ../lisp/group-funs.jl
 msgid "New group"
 msgstr "Novo grupo"
+
+#. ../lisp/grow-pack.jl
+msgid "Whether growing an already grown window grows it again."
+msgstr "Crecer unha fiestra que xa foi crecida faina crecer de novo."
+
+#. ../lisp/grow-pack.jl
+msgid ""
+"Whether growing is considered to be maximization.  When you turn\n"
+"this on, you can use `unmaximize-window' or something similar to get\n"
+"back to the original size."
+msgstr ""
+"Crecer considérase maximizar.  Cando se activa isto, pódese usar\n"
+"`unmaximize-window', ou algo semellante, para voltar ó tamaño orixinal."
+
+#. ../lisp/grow-pack.jl
+msgid "Grows window to the left until it `bumps into' another window."
+msgstr "Crece a fiestra para esquerda ata que peta con outra fiestra."
+
+#. ../lisp/grow-pack.jl
+msgid "Grows window to the right until it `bumps into' another window."
+msgstr "Crece a fiestra para a dereita ata que peta con outra fiestra."
+
+#. ../lisp/grow-pack.jl
+msgid "Grows window upwards until it `bumps into' another window."
+msgstr "Crece a fiestra para arriba ata que peta con outra fiestra."
+
+#. ../lisp/grow-pack.jl
+msgid "Grows window downwards until it `bumps into' another window."
+msgstr "Crece a fiestra para abaixo ata que peta con outra fiestra."
+
+#. ../lisp/grow-pack.jl
+msgid "Moves window to the left until it `bumps into' another window."
+msgstr "Move a fiestra para a esquerda ata que peta con outra fiestra."
+
+#. ../lisp/grow-pack.jl
+msgid "Moves window to the right until it `bumps into' another window."
+msgstr "Move a fiestra para a dereita ata que peta con outra fiestra."
+
+#. ../lisp/grow-pack.jl
+msgid "Moves window upwards until it `bumps into' another window."
+msgstr "Move a fiestra para arriba ata que peta con outra fiestra."
+
+#. ../lisp/grow-pack.jl
+msgid "Moves window downwards until it `bumps into' another window."
+msgstr "Move a fiestra para abaixo ata que peta con outra fiestra."
 
 #. ../lisp/gtkrc.jl
 msgid "Reload the gtkrc settings."
@@ -558,6 +542,10 @@ msgstr "Iconifica-la fiestra."
 #. ../lisp/iconify.jl
 msgid "Return the window from its iconified state."
 msgstr "Restaura-la fiestra do seu estado iconificado."
+
+#. ../lisp/iconify.jl
+msgid "Display the workspace/viewport containing the window W."
+msgstr "Amosa-lo escritorio/área virtual que contén a fiestra W."
 
 #. ../lisp/iconify.jl
 msgid "Display the workspace containing the window W, then focus on W."
@@ -588,52 +576,22 @@ msgid "Toggle whether a window is focusable or not."
 msgstr "Trocar se unha fiestra pode te-lo foco ou non."
 
 #. ../lisp/keymap.jl
-msgid ""
-"When nil, the map-keymap function will only map over the first level of\n"
-"keymaps, i.e. all prefix keys are ignored."
+msgid "Prompt for a key sequence, then print its binding."
 msgstr ""
-"Cando está baleiro, a función map-keymap só asocia co primeiro nivel de "
-"mapas de teclado, isto é, tódalas teclas prefixo son ignoradas."
-
-#. ../lisp/keymap.jl
-msgid ""
-"Map FUNCTION over all key bindings under the keymap or list of\n"
-"keymaps KEYMAP. FUNCTION is called as (FUNCTION KEY), where KEY is a\n"
-"cons cell (COMMAND . EVENT)."
-msgstr ""
-"Asociar FUNCIÓN a tódolos atallos de teclado do mapa ou lista de mapas de "
-"teclado KEYMAP. FUNCIÓN chámase coma (FUNCIÓN CHAVE), onde CHAVE é unha cons "
-"cell (COMANDO . EVENTO)."
-
-#. ../lisp/keymap.jl
-msgid ""
-"Substitute all occurrences of the command OLDDEF for the command NEWDEF\n"
-"in the keybindings under the keymap or list of keymaps KEYMAP."
-msgstr ""
-"Sustituir tódalas aparicións do comando OLDDEF polo comando NEWDEF en "
-"tódalas asociacións de teclado do mapa ou lista de mapas de teclado KEYMAP."
-
-#. ../lisp/keymap.jl
-msgid ""
-"Substitute all occurrences of the event OLD-EV for the event NEW-EV\n"
-"in the keybindings under the keymap or list of keymaps KEYMAP."
-msgstr ""
-"Sustituir tódalas aparicións do evento OLD-EV polo evento NEW-EV en tódalas "
-"asociacións de teclado do mapa ou lista de mapas de teclado KEYMAP."
-
-#. ../lisp/keymap.jl
-msgid ""
-"Install the list of BINDINGS in KEYMAP, assuming that KEYMAP is available\n"
-"once FEATURE has been provided. If FEATURE has not yet been loaded, arrange\n"
-"for the bindings to be installed if and when it is."
-msgstr ""
-"Instala-la lista de BINDINGS no KEYMAP, asumindo que KEYMAP está disponible "
-"unha vez que se deu FEATURE. Se aínda non se cargou FEATURE, arranxalo para "
-"que os atallos estean instalados cando está cargada."
+"Preguntar por unha secuencia de teclas, entón escribi-lo\n"
+"comando ó que está asociado."
 
 #. ../lisp/keymap.jl
 msgid "Press key..."
 msgstr "Premer tecla..."
+
+#. ../lisp/keymap.jl
+msgid "Read a single event and send it to the focused window."
+msgstr "Ler un evento simple e enviarllo á fiestra enfocada."
+
+#. ../lisp/keymap.jl
+msgid "[Quote]"
+msgstr "[Quote]"
 
 #. ../lisp/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
@@ -788,20 +746,6 @@ msgid ""
 msgstr ""
 "Troca-lo estado da fiestra entre maximizada-recheada horizontalmente e non "
 "maximizada."
-
-#. ../lisp/menus.jl
-msgid "Location of the program implementing sawmill's menu interface."
-msgstr "Lugar do programa coa interfaz de menús do sawmill."
-
-#. ../lisp/menus.jl
-msgid ""
-"When non-nil, the user-interface program is never stopped. If a number,\n"
-"then this is taken as the number of seconds to let the process hang around\n"
-"unused before killing it."
-msgstr ""
-"Cando non é baleiro, o programa de interfaz de usuario nunca para. Se é un "
-"número, tómase como o número de segundos que o programa pode estar sen usar "
-"antes de matalo."
 
 #. ../lisp/menus.jl
 msgid "Iconify"
@@ -1028,17 +972,6 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr "Move-lo cursor un punto para abaixo."
 
 #. ../lisp/move-resize.jl
-msgid "Choose resized window edges by border-part, not by mouse position."
-msgstr ""
-"Escolle-los eixos de redimensionamento da fiestra pola posición do borde, "
-"non pola posición do rato."
-
-#. ../lisp/move-resize.jl
-msgid "Allow other window edges to be grabbed while resizing interactively."
-msgstr ""
-"Ó redimensionar interactivamente, permitir usa-los outros eixos das fiestras."
-
-#. ../lisp/move-resize.jl
 msgid "The method of drawing windows being moved interactively."
 msgstr "Método de debuxa-las fiestras ó movelas interactivamente."
 
@@ -1061,6 +994,13 @@ msgstr ""
 
 #. ../lisp/move-resize.jl
 msgid ""
+"The method of choosing which window edges are moved while resizing with\n"
+"the mouse."
+msgstr ""
+"O método para escoller qué eixos mover da fiestra ó redimensionala co rato."
+
+#. ../lisp/move-resize.jl
+msgid ""
 "Snap window position to edges of other windows when interactively moving."
 msgstr ""
 "Axusta-la posición das fiestras ós eixos das outras ó mover interactivamente."
@@ -1070,12 +1010,22 @@ msgid "Proximity in pixels before snapping to a window edge."
 msgstr "Proximidade en puntos antes de axustar ó eixo dunha fiestra."
 
 #. ../lisp/move-resize.jl
+msgid "Method of deciding when to snap together two window edges."
+msgstr "Método para decidir cando xuntar os eixos de dúas fiestras."
+
+#. ../lisp/move-resize.jl
 msgid "Snap to otherwise-ignored windows."
 msgstr "Axustar ás fiestras ignoradas."
 
 #. ../lisp/move-resize.jl
 msgid "Lock window geometry while the window is maximized."
 msgstr "Bloquea-las dimensións das fiestras mentres estean maximizadas."
+
+#. ../lisp/move-resize.jl
+msgid ""
+"Only update window contents after it has been moved to its final position."
+msgstr ""
+"Redibuxa-los contidos da fiestra só cando sexa movida á súa posición final."
 
 #. ../lisp/move-resize.jl
 msgid "Move the window interactively using the mouse."
@@ -1111,6 +1061,72 @@ msgstr "Método de escolle-la posición dunha fiestra temporal recén creada."
 msgid "Ignore program-specified window positions."
 msgstr "Ignora-las posicións das fiestras indicadas polos programas."
 
+#. ../lisp/prompt.jl
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr ""
+"Mapa de teclado que contén os atallos activos ó ler unha cadea do usuario."
+
+#. ../lisp/prompt.jl
+msgid "Cancel string input."
+msgstr "Cancela-la entrada da cadea."
+
+#. ../lisp/prompt.jl
+msgid "End input and accept current string."
+msgstr "Finaliza-la entrada e acepta-la cadea actual."
+
+#. ../lisp/prompt.jl
+msgid "Clear input buffer."
+msgstr "Limpa-lo buffer de entrada."
+
+#. ../lisp/prompt.jl
+msgid "Remove previous character from buffer."
+msgstr "Borrar o carácter anterior do buffer."
+
+#. ../lisp/prompt.jl
+msgid "Delete rest of line."
+msgstr "Borra-lo resto da liña."
+
+#. ../lisp/prompt.jl
+msgid "Move to next non-word character."
+msgstr "Mover ó seguinte carácter non-palabra."
+
+#. ../lisp/prompt.jl
+msgid "Move to previous non-word character."
+msgstr "Mover ó anterior carácter non-palabra."
+
+#. ../lisp/prompt.jl
+msgid "Move forward one character."
+msgstr "Mover un carácter para adiante."
+
+#. ../lisp/prompt.jl
+msgid "Move backward one character."
+msgstr "Mover un carácter para atrás."
+
+#. ../lisp/prompt.jl
+msgid "Move to beginning of line."
+msgstr "Mover ó inicio da liña."
+
+#. ../lisp/prompt.jl
+msgid "Move to end of line."
+msgstr "Mover á fin da liña."
+
+#. ../lisp/prompt-wm.jl
+msgid "Window:"
+msgstr "Fiestra:"
+
+#. ../lisp/prompt-wm.jl
+#,  c-format
+msgid "Workspace %d"
+msgstr "Escritorio %d"
+
+#. ../lisp/prompt-wm.jl
+msgid "Workspace:"
+msgstr "Escritorio:"
+
+#. ../lisp/prompt-wm.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Preguntar por un escritorio e cambiar a el."
+
 #. ../lisp/raise-commands.jl
 msgid ""
 "Raise the window that received the current event, then replay any pointer\n"
@@ -1143,6 +1159,7 @@ msgstr ""
 msgid "Delay in milliseconds before unshading windows."
 msgstr "Retardo en milisegundos antes de desenrola-las fiestras."
 
+#. ../lisp/shading.jl
 #. ../lisp/shade-hover.jl
 msgid "Raise windows when they are unshaded."
 msgstr "Eleva-las fiestras ó seren desenroladas."
@@ -1164,6 +1181,31 @@ msgid ""
 "Toggle the shaded (only the title bar is displayed) state of the window."
 msgstr ""
 "Troca-lo estado de enrolamento (só se amosa a barra de título) da fiestra."
+
+#. ../lisp/size-window.jl
+msgid ""
+"Default increment for size-window commands (when the window doesn't specify\n"
+"it's own increments)."
+msgstr ""
+"Incremento por defecto para os comandos de tamaño de fiestra (cando esta "
+"non\n"
+"indica os seus propios incrementos)."
+
+#. ../lisp/size-window.jl
+msgid "Increase the size of the current window by one row."
+msgstr "Incrementar unha ringleira o tamaño da fiestra actual."
+
+#. ../lisp/size-window.jl
+msgid "Decrease the size of the current window by one row."
+msgstr "Decrementar unha ringleira o tamaño da fiestra actual."
+
+#. ../lisp/size-window.jl
+msgid "Increase the size of the current window by one column."
+msgstr "Incrementar unha columna o tamaño da fiestra actual."
+
+#. ../lisp/size-window.jl
+msgid "Decrease the size of the current window by one column."
+msgstr "Decrementar unha ringleira o tamaño da fiestra actual."
 
 #. ../lisp/slide-window.jl
 msgid "Number of pixels to move window in `slide-' commands."
@@ -1211,46 +1253,6 @@ msgstr ""
 "Tentar deixar polo menos este número de puntos entre os eixos das fiestras "
 "nos modos first/best-fit."
 
-#. ../lisp/smart-placement.jl
-msgid ""
-"Weighting between future usefulness and edge alignment in best-fit mode.\n"
-"A value between 0 and 1023 inclusive."
-msgstr ""
-"Función de peso entre a utilidade e o aliñamento de eixo no modo best-fit. "
-"Pode ser un valor entre 0 e 1023 inclusive."
-
-#. ../lisp/sm-init.jl
-msgid "A string identifying the current session."
-msgstr "Unha cadea identificando a sesión actual."
-
-#. ../lisp/sm-init.jl
-msgid "List of window properties saved with the session."
-msgstr "Lista de propiedades de fiestras gardadas coa sesión."
-
-#. ../lisp/sm-init.jl
-msgid ""
-"List of functions called when the state of each window is saved. Each\n"
-"function should return a list of alist elements that will be saved in\n"
-"the state file."
-msgstr ""
-"Lista de funcións a chamar ó garda-lo estado de cada fiestra. Cada función "
-"devolve unha lista de elementos alist que serán gardados no ficheiro de "
-"estado."
-
-#. ../lisp/sm-init.jl
-msgid ""
-"List of functions called when the state of a window is restored. Each is\n"
-"called with args (WINDOW ALIST), where ALIST defines the state saved for\n"
-"the window."
-msgstr ""
-"Lista de funcións a chamar ó restaura-lo estado de cada fiestra. Cada unha "
-"chámase cos argumentos (FIESTRA ALIST), onde ALIST define o estado gardado "
-"para a fiestra."
-
-#. ../lisp/sm-init.jl
-msgid "Hook called after loading a saved session."
-msgstr "Extensión a chamar despois de cargar unha sesión gardada."
-
 #. ../lisp/stacking.jl
 msgid "Keep transient windows stacked above."
 msgstr "Mante-las fiestras temporais nunha capa superior."
@@ -1292,12 +1294,28 @@ msgid "Remove tooltips after a period of time."
 msgstr "Quita-los tooltips despois dun periodo de tempo."
 
 #. ../lisp/tooltips.jl
+msgid "Show full documentation in tooltips."
+msgstr "Amosa-la documentación completa nos tooltips."
+
+#. ../lisp/tooltips.jl
 msgid "Number of milliseconds before displaying tooltips."
 msgstr "Número de milisegundos antes de amosa-los tooltips."
 
 #. ../lisp/tooltips.jl
 msgid "Number of milliseconds before removing tooltips."
 msgstr "Número de milisegundos antes de quita-los tooltips."
+
+#. ../lisp/tooltips.jl
+msgid "Font used to display tooltips."
+msgstr "Fonte usada para amosa-los tooltips."
+
+#. ../lisp/tooltips.jl
+msgid "Color used for the tooltips background"
+msgstr "Cor usada para o fondo dos tooltips"
+
+#. ../lisp/tooltips.jl
+msgid "Color used for the tooltips foreground"
+msgstr "Cor usada para o texto dos tooltips"
 
 #. ../lisp/transient.jl
 msgid "Focus each window when first displayed."
@@ -1351,6 +1369,10 @@ msgstr "Move-la fiestra á área virtual de debaixo."
 msgid "Move the window to the viewport above."
 msgstr "Move-la fiestra á área virtual de enriba."
 
+#. ../lisp/with-output.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "Preguntar por un comando, executalo, e escribir a saída na pantalla."
+
 #. ../lisp/workspace.jl
 msgid "Action when passing the first or last workspace when moving."
 msgstr "Acción ó pasar do primeiro ou do último escritorio ó mover."
@@ -1384,9 +1406,8 @@ msgid "Windows are focused after being uniconified."
 msgstr "Enfoca-las fiestras ó seren restauradas."
 
 #. ../lisp/workspace.jl
-msgid ""
-"Transient windows are opened on the same workspace as their parent window."
-msgstr "Abri-las fiestras temporais no mesmo escritorio que a súa fiestra nai."
+msgid "Transient windows are opened on the same workspace as their parent."
+msgstr "Abri-las fiestras temporais no mesmo escritorio que a súa nai."
 
 #. ../lisp/workspace.jl
 msgid "Windows selected (normally by the Windows menu) are raised."
@@ -1410,10 +1431,6 @@ msgid ""
 "Uniconifying a window that's a member of a group restores the whole group."
 msgstr ""
 "Restaurar unha fiestra que é membro dun grupo, fai restaurar o grupo enteiro."
-
-#. ../lisp/workspace.jl
-msgid "List of workspace names."
-msgstr "Lista cos nomes dos escritorio."
 
 #. ../lisp/workspace.jl
 msgid "Insert workspace"
@@ -1469,16 +1486,20 @@ msgid "Display the previous workspace."
 msgstr "Amosa-lo escritorio anterior."
 
 #. ../lisp/workspace.jl
-msgid ""
-"Move the window to the next workspace. If no next workspace exists, one\n"
-"will be created."
-msgstr "Move-la fiestra ó seguinte escritorio. Se non existe, crearase un."
+msgid "Move the window to the next workspace."
+msgstr "Move-la fiestra ó seguinte escritorio."
 
 #. ../lisp/workspace.jl
-msgid ""
-"Move the window to the previous workspace. If no such workspace exists, one\n"
-"will be created."
-msgstr "Move-la fiestra ó escritorio anterior. Se non existe, crearase un."
+msgid "Move the window to the previous workspace."
+msgstr "Move-la fiestra ó escritorio anterior."
+
+#. ../lisp/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "Copia-la fiestra ó seguinte escritorio."
+
+#. ../lisp/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "Copia-la fiestra ó escritorio anterior."
 
 #. ../lisp/workspace.jl
 msgid ""
@@ -1571,6 +1592,22 @@ msgstr "Desactiva-la auto-elevación ó escolle-las fiestras temporalmente."
 #. ../lisp/x-cycle.jl
 msgid "Cycle through all windows in order of recent selections."
 msgstr "Circular por tódalas fiestras na orde das seleccións recientes."
+
+#. ../lisp/x-cycle.jl
+msgid "Cycle through all windows in the same group as the current window."
+msgstr "Circular por tódalas fiestras do mesmo grupo que a actual."
+
+#. ../lisp/x-cycle.jl
+msgid ""
+"Cycle through all windows whose names match the leading colon-delimited\n"
+"prefix of the current window."
+msgstr ""
+"Circular por tódalas fiestras tais que o seu nome encaixe co prefixo\n"
+"delimitado polos dous puntos da fiestra actual."
+
+#. ../lisp/x-cycle.jl
+msgid "Cycle through all windows with the same class as the current window."
+msgstr "Circular por tódalas fiestras coa mesma clase que a actual."
 
 #. ../themes/gradient/theme.jl
 msgid "Gradient Theme"
@@ -1705,6 +1742,10 @@ msgstr "Premido"
 #. ../themer/themer.glade:1048
 msgid "Copy..."
 msgstr "Copiar..."
+
+#. ../themer/themer.glade:494
+msgid "Details"
+msgstr "Detalles"
 
 #. ../themer/themer.glade:442
 msgid "Directory:"
