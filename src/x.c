@@ -22,6 +22,24 @@
    along with sawmill; see the file COPYING.   If not, write to
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
+/* AIX requires this to be the first thing in the file.  */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+#ifndef __GNUC__
+# if HAVE_ALLOCA_H
+#  include <alloca.h>
+# else
+#  ifdef _AIX
+ #pragma alloca
+#  else
+#   ifndef alloca /* predefined by HP cc +Olibcalls */
+   char *alloca ();
+#   endif
+#  endif
+# endif
+#endif
+   
 #include "sawmill.h"
 #include <X11/Xresource.h>
 
@@ -63,6 +81,8 @@ DEFSYM(y, "y");
 DEFSYM(border_width, "border-width");
 DEFSYM(border_color, "border-color");
 DEFSYM(expose, "expose");
+DEFSYM(convex, "convex");
+DEFSYM(non_convex, "non-convex");
 
 static Window
 window_from_arg (repv arg)
@@ -656,6 +676,50 @@ indicate clockwise motion.
     return Qt;
 }
 
+DEFUN("x-fill-polygon", Fx_fill_polygon, Sx_fill_polygon, (repv window, repv gc, repv points, repv mode_), rep_Subr4) /*
+::doc:x-fill-arc::
+x-fill-arc WINDOW GC POINTS [MODE]
+
+Draws a single filled polygon in WINDOW using GC. Each point is `(X . Y)'.
+::end:: */
+{
+    Window id = window_from_arg (window);
+    repv npoints;
+    XPoint *xpoints;
+    int i, mode;
+
+    rep_DECLARE(1, window, id != 0);
+    rep_DECLARE(2, gc, X_VALID_GCP (gc, id));
+    rep_DECLARE(3, points, rep_LISTP (points));
+
+    if (mode_ == Qconvex)
+	mode = Convex;
+    else if (mode_ == Qnon_convex)
+	mode = Nonconvex;
+    else
+	mode = Complex;
+
+    npoints = Flength (points);
+    if (!npoints)
+	return rep_NULL;
+
+    npoints = rep_INT (npoints);
+    xpoints = alloca (sizeof (XPoint) * npoints);
+    for (i = 0; i < npoints; i++)
+    {
+	if (!rep_CONSP (points) || !rep_CONSP (rep_CAR (points))
+	    || !rep_INTP (rep_CAAR (points)) || !rep_INTP (rep_CDAR (points)))
+	    return rep_signal_arg_error (points, 3);
+	xpoints[i].x = rep_INT (rep_CAAR (points));
+	xpoints[i].y = rep_INT (rep_CDAR (points));
+	points = rep_CDR (points);
+    }
+
+    XFillPolygon (dpy, id, VX_GC(gc)->gc, xpoints,
+		  npoints, mode, CoordModeOrigin);
+    return Qt;
+}
+
 DEFUN("x-copy-area", Fx_copy_area, Sx_copy_area, (repv window, repv gc, repv xy, repv wh, repv dest), rep_Subr5) /*
 ::doc:x-fill-rectangle::
 x-fill-rectangle WINDOW GC (X . Y) (WIDTH . HEIGHT) (DEST-X . DEST-Y)
@@ -852,6 +916,7 @@ rep_dl_init (void)
     rep_ADD_SUBR(Sx_fill_rectangle);
     rep_ADD_SUBR(Sx_draw_arc);
     rep_ADD_SUBR(Sx_fill_arc);
+    rep_ADD_SUBR(Sx_fill_polygon);
     rep_ADD_SUBR(Sx_copy_area);
     rep_ADD_SUBR(Sx_draw_image);
 
@@ -860,6 +925,8 @@ rep_dl_init (void)
     rep_INTERN(border_width);
     rep_INTERN(border_color);
     rep_INTERN(expose);
+    rep_INTERN(convex);
+    rep_INTERN(non_convex);
 
     return Qx;
 }
