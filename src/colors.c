@@ -53,11 +53,9 @@ get-color-rgb RED GREEN BLUE
     }
     if (f == 0)
     {
-	int x_red = rep_INT(red) / 256;
-	int x_green = rep_INT(green) / 256;
-	int x_blue = rep_INT(blue) / 256;
-	int pixel = Imlib_best_color_match (imlib_id, &x_red,
-					    &x_green, &x_blue);
+	int pixel = best_color_match (rep_INT(red) / 256,
+				      rep_INT(green) / 256,
+				      rep_INT(blue) / 256);
 
 	f = rep_ALLOC_CELL(sizeof(Lisp_Color));
 	rep_data_after_gc += sizeof (Lisp_Color);

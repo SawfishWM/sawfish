@@ -27,7 +27,7 @@ DEFUN("draw-vertical-gradient", Fdraw_vertical_gradient,
       Sdraw_vertical_gradient, (repv img, repv from_, repv to_), rep_Subr3)
 {
     u_char from[3], to[3];
-    int width, height;
+    int width, height, stride, channels;
     int x, y;
     u_char *data;
 
@@ -35,9 +35,12 @@ DEFUN("draw-vertical-gradient", Fdraw_vertical_gradient,
     rep_DECLARE2(from_, COLORP);
     rep_DECLARE3(to_, COLORP);
 
-    data = VIMAGE(img)->image->rgb_data;
-    width = VIMAGE(img)->image->rgb_width;
-    height = VIMAGE(img)->image->rgb_height;
+    data = image_pixels (VIMAGE(img));
+    width = image_width (VIMAGE(img));
+    height = image_height (VIMAGE(img));
+    stride = image_row_stride (VIMAGE(img));
+    channels = image_channels (VIMAGE(img));
+
     from[0] = VCOLOR(from_)->red / 256;
     from[1] = VCOLOR(from_)->green / 256;
     from[2] = VCOLOR(from_)->blue / 256;
@@ -49,16 +52,16 @@ DEFUN("draw-vertical-gradient", Fdraw_vertical_gradient,
     {
 	for (x = 0; x < width; x++)
 	{
-	    data[y*width*3+x*3+0] = (from[0]
-				     + (to[0] - from[0]) * y / height);
-	    data[y*width*3+x*3+1] = (from[1]
-				     + (to[1] - from[1]) * y / height);
-	    data[y*width*3+x*3+2] = (from[2]
-				     + (to[2] - from[2]) * y / height);
+	    data[y*stride+x*channels+0] = (from[0] + (to[0] - from[0])
+					   * y / height);
+	    data[y*stride+x*channels+1] = (from[1] + (to[1] - from[1])
+					   * y / height);
+	    data[y*stride+x*channels+2] = (from[2] + (to[2] - from[2])
+					   * y / height);
 	}
     }
 
-    Imlib_changed_image (imlib_id, VIMAGE(img)->image);
+    image_changed (VIMAGE (img));
     return img;
 }
 
@@ -66,7 +69,7 @@ DEFUN("draw-horizontal-gradient", Fdraw_horizontal_gradient,
       Sdraw_horizontal_gradient, (repv img, repv from_, repv to_), rep_Subr3)
 {
     u_char from[3], to[3];
-    int width, height;
+    int width, height, stride, channels;
     int x, y;
     u_char *data;
 
@@ -74,9 +77,12 @@ DEFUN("draw-horizontal-gradient", Fdraw_horizontal_gradient,
     rep_DECLARE2(from_, COLORP);
     rep_DECLARE3(to_, COLORP);
 
-    data = VIMAGE(img)->image->rgb_data;
-    width = VIMAGE(img)->image->rgb_width;
-    height = VIMAGE(img)->image->rgb_height;
+    data = image_pixels (VIMAGE(img));
+    width = image_width (VIMAGE(img));
+    height = image_height (VIMAGE(img));
+    stride = image_row_stride (VIMAGE(img));
+    channels = image_channels (VIMAGE(img));
+
     from[0] = VCOLOR(from_)->red / 256;
     from[1] = VCOLOR(from_)->green / 256;
     from[2] = VCOLOR(from_)->blue / 256;
@@ -88,16 +94,16 @@ DEFUN("draw-horizontal-gradient", Fdraw_horizontal_gradient,
     {
 	for (x = 0; x < width; x++)
 	{
-	    data[y*width*3+x*3+0] = (from[0]
-				     + (to[0] - from[0]) * x / width);
-	    data[y*width*3+x*3+1] = (from[1]
-				     + (to[1] - from[1]) * x / width);
-	    data[y*width*3+x*3+2] = (from[2]
-				     + (to[2] - from[2]) * x / width);
+	    data[y*stride+x*channels+0] = (from[0] + (to[0] - from[0])
+					   * x / width);
+	    data[y*stride+x*channels+1] = (from[1] + (to[1] - from[1])
+					   * x / width);
+	    data[y*stride+x*channels+2] = (from[2] + (to[2] - from[2])
+					   * x / width);
 	}
     }
 
-    Imlib_changed_image (imlib_id, VIMAGE(img)->image);
+    image_changed (VIMAGE (img));
     return img;
 }
 
@@ -105,7 +111,7 @@ DEFUN("draw-diagonal-gradient", Fdraw_diagonal_gradient,
       Sdraw_diagonal_gradient, (repv img, repv from_, repv to_), rep_Subr3)
 {
     double from[3], to[3];
-    int width, height;
+    int width, height, stride, channels;
     int x, y;
     u_char *data;
 
@@ -113,9 +119,12 @@ DEFUN("draw-diagonal-gradient", Fdraw_diagonal_gradient,
     rep_DECLARE2(from_, COLORP);
     rep_DECLARE3(to_, COLORP);
 
-    data = VIMAGE(img)->image->rgb_data;
-    width = VIMAGE(img)->image->rgb_width;
-    height = VIMAGE(img)->image->rgb_height;
+    data = image_pixels (VIMAGE(img));
+    width = image_width (VIMAGE(img));
+    height = image_height (VIMAGE(img));
+    stride = image_row_stride (VIMAGE(img));
+    channels = image_channels (VIMAGE(img));
+
     from[0] = VCOLOR(from_)->red / 256;
     from[1] = VCOLOR(from_)->green / 256;
     from[2] = VCOLOR(from_)->blue / 256;
@@ -127,25 +136,25 @@ DEFUN("draw-diagonal-gradient", Fdraw_diagonal_gradient,
     {
 	for (x = 0; x < width; x++)
 	{
-	    data[y*width*3+x*3+0] = ((from[0]
-				      + ((to[0] - from[0]) / 2.0)
-				      * (((double) x / (double) width)
-					 + ((double) y / (double) height)))
-				     + 0.5);
-	    data[y*width*3+x*3+1] = ((from[1]
-				      + ((to[1] - from[1]) / 2.0)
-				      * (((double) x / (double) width)
-					 + ((double) y / (double) height)))
-				     + 0.5);
-	    data[y*width*3+x*3+2] = ((from[2]
-				      + ((to[2] - from[2]) / 2.0)
-				      * (((double) x / (double) width)
-					 + ((double) y / (double) height)))
-				     + 0.5);
+	    data[y*stride+x*channels+0] = ((from[0]
+					    + ((to[0] - from[0]) / 2.0)
+					    * (((double) x / (double) width)
+					       + ((double) y / (double) height)))
+					   + 0.5);
+	    data[y*stride+x*channels+1] = ((from[1]
+					    + ((to[1] - from[1]) / 2.0)
+					    * (((double) x / (double) width)
+					       + ((double) y / (double) height)))
+					   + 0.5);
+	    data[y*stride+x*channels+2] = ((from[2]
+					    + ((to[2] - from[2]) / 2.0)
+					    * (((double) x / (double) width)
+					       + ((double) y / (double) height)))
+					   + 0.5);
 	}
     }
 
-    Imlib_changed_image (imlib_id, VIMAGE(img)->image);
+    image_changed (VIMAGE (img));
     return img;
 }
 

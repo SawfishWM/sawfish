@@ -422,11 +422,11 @@ window is created unmapped.
     attributesMask = x_window_parse_attributes (&attributes, attrs);
     attributes.override_redirect = True;
     attributes.event_mask = ExposureMask;
-    attributes.colormap = screen_cmap;
+    attributes.colormap = image_cmap;
     attributesMask |= CWOverrideRedirect | CWEventMask | CWColormap;
 
     id = XCreateWindow (dpy, root_window, _x, _y, _w, _h, _bw,
-                        screen_depth, InputOutput, screen_visual,
+                        image_depth, InputOutput, image_visual,
                         attributesMask, &attributes);
 
     w = create_x_drawable (id, _w, _h);
@@ -1022,13 +1022,14 @@ otherwise it is drawn using its natural dimensions.
 
     x = rep_INT (rep_CAR (xy));
     y = rep_INT (rep_CDR (xy));
-    w = (wh == Qnil) ? VIMAGE(img)->image->rgb_width : rep_INT (rep_CAR (wh));
-    h = (wh == Qnil) ? VIMAGE(img)->image->rgb_height : rep_INT (rep_CDR (wh));
+    w = ((wh == Qnil)
+	 ? image_width (VIMAGE(img))
+	 : rep_INT (rep_CAR (wh)));
+    h = ((wh == Qnil)
+	 ? image_height (VIMAGE(img))
+	 : rep_INT (rep_CDR (wh)));
 
-    Imlib_paste_image (imlib_id, VIMAGE(img)->image, id, x, y, w, h);
-
-    /* Imlib sometimes calls XSync (), which could hide events */
-    rep_mark_input_pending (ConnectionNumber(dpy));
+    paste_image_to_drawable (VIMAGE(img), id, x, y, w, h);
 
     return Qt;
 }

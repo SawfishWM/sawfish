@@ -1,7 +1,7 @@
 /* frames.c -- window frame manipulation
    $Id$
 
-   Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+   Copyright (C) 1999, 2000 John Harper <john@dcs.warwick.ac.uk>
 
    This file is part of sawmill.
 
@@ -338,6 +338,10 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
     for (fp = w->frame_parts; fp != 0 && w->id != 0; fp = fp->next)
     {
 	Pixmap pixmap, mask;
+
+	if (fp->width <= 0 || fp->height <= 0)
+	    continue;
+
 	if (IMAGEP(fp->bg[0]))
 	{
 	    bool tiled = FALSE;
@@ -350,15 +354,13 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 
 	    if (tiled)
 	    {
-		Imlib_render (imlib_id, image->image,
-			      image->image->rgb_width,
-			      image->image->rgb_height);
+		image_render (image, image_width (image), image_height (image),
+			      &pixmap, &mask);
 	    }
 	    else
-		Imlib_render (imlib_id, image->image, fp->width, fp->height);
-
-	    pixmap = Imlib_move_image (imlib_id, image->image);
-	    mask = Imlib_move_mask (imlib_id, image->image);
+	    {
+		image_render (image, fp->width, fp->height, &pixmap, &mask);
+	    }
 
 	    if (mask != 0)
 	    {
@@ -367,7 +369,9 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 				   mask, ShapeUnion);
 		if (tiled)
 		{
-		    int x = image->image->rgb_width, y = 0;
+		    int width = image_width (image);
+		    int height = image_height (image);
+		    int x = width, y = 0;
 		    while (y < fp->height)
 		    {
 			while (x < fp->width)
@@ -376,9 +380,9 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 					       fp->x - w->frame_x + x,
 					       fp->y - w->frame_y + y,
 					       mask, ShapeUnion);
-			    x += image->image->rgb_width;
+			    x += width;
 			}
-			y += image->image->rgb_height;
+			y += height;
 			x = 0;
 		    }
 		}
@@ -391,8 +395,7 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 		rects[nrects].height = fp->height;
 		nrects++;
 	    }
-	    if (pixmap != 0)
-		Imlib_free_pixmap (imlib_id, pixmap);
+	    image_free_pixmaps (image, pixmap, mask);
 	}
 	else
 	{
@@ -472,17 +475,14 @@ set_frame_part_bg (struct frame_part *fp)
 
 	if (tiled)
 	{
-	    Imlib_render (imlib_id, image->image,
-			  image->image->rgb_width,
-			  image->image->rgb_height);
+	    image_render (image, image_width (image), image_height (image),
+			  &bg_pixmap, &bg_mask);
 	}
 	else
 	{
-	    Imlib_render (imlib_id, image->image, fp->width, fp->height);
+	    image_render (image, fp->width, fp->height, &bg_pixmap, &bg_mask);
 	}
 
-	bg_pixmap = Imlib_move_image (imlib_id, image->image);
-	bg_mask = Imlib_move_mask (imlib_id, image->image);
 
 	/* Some of the Imlib_ functions call XSync on our display. In turn
 	   this can cause the error handler to run if a window has been
@@ -521,19 +521,20 @@ set_frame_part_bg (struct frame_part *fp)
 	    while (y < fp->height)
 	    {
 		int x = 0;
+		int width = image_width (image);
+		int height = image_height (image);
 		while (x < fp->width)
 		{
-		    XCopyArea (dpy, bg_pixmap, fp->id, fp->gc, 0, 0,
-			       image->image->rgb_width,
-			       image->image->rgb_height, x, y);
+		    XCopyArea (dpy, bg_pixmap, fp->id, fp->gc,
+			       0, 0, width, height, x, y);
 		    if (bg_mask)
 		    {
 			XShapeCombineMask (dpy, tem, ShapeBounding,
 					   x, y, bg_mask, ShapeUnion);
 		    }
-		    x += image->image->rgb_width;
+		    x += width;
 		}
-		y += image->image->rgb_height;
+		y += height;
 	    }
 	    if (bg_mask)
 	    {
@@ -542,7 +543,7 @@ set_frame_part_bg (struct frame_part *fp)
 		XDestroyWindow (dpy, tem);
 	    }
 	}
-	Imlib_free_pixmap (imlib_id, bg_pixmap);
+	image_free_pixmaps (image, bg_pixmap, bg_mask);
 
 	/* Imlib sometimes calls XSync (), which could hide events
 	   from select () */
@@ -593,8 +594,8 @@ set_frame_part_fg (struct frame_part *fp)
 
 	if (IMAGEP(fg))
 	{
-	    width = VIMAGE(fg)->image->rgb_width;
-	    height = VIMAGE(fg)->image->rgb_width;
+	    width = image_width (VIMAGE(fg));
+	    height = image_height (VIMAGE(fg));
 	}
 	else
 	{
@@ -660,11 +661,9 @@ set_frame_part_fg (struct frame_part *fp)
 		set_frame_part_bg (fp);
 	    }
 
-	    Imlib_render (imlib_id, VIMAGE(fg)->image,
-			  VIMAGE(fg)->image->rgb_width,
-			  VIMAGE(fg)->image->rgb_height);
-	    fg_pixmap = Imlib_move_image (imlib_id, VIMAGE(fg)->image);
-	    fg_mask = Imlib_move_mask (imlib_id, VIMAGE(fg)->image);
+	    image_render (VIMAGE(fg),
+			  image_width (VIMAGE(fg)), image_height (VIMAGE(fg)),
+			  &fg_pixmap, &fg_mask);
 
 	    /* Some of the Imlib_ functions call XSync on our display. In turn
 	       this can cause the error handler to run if a window has been
@@ -674,6 +673,9 @@ set_frame_part_fg (struct frame_part *fp)
 
 	    if (fg_pixmap)
 	    {
+		int width = image_width (VIMAGE(fg));
+		int height = image_height (VIMAGE(fg));
+
 		if (fg_mask)
 		{
 		    gcv.clip_mask = fg_mask;
@@ -683,10 +685,9 @@ set_frame_part_fg (struct frame_part *fp)
 		}
 
 		XChangeGC (dpy, fp->gc, gcv_mask, &gcv);
-		XCopyArea (dpy, fg_pixmap, fp->id, fp->gc, 0, 0,
-			   MIN(fp->width, VIMAGE(fg)->image->rgb_width),
-			   MIN(fp->height, VIMAGE(fg)->image->rgb_height),
-			   x, y);
+		XCopyArea (dpy, fg_pixmap, fp->id, fp->gc,
+			   0, 0, MIN(fp->width, width),
+			   MIN(fp->height, height), x, y);
 		if (fg_mask)
 		{
 		    gcv.clip_mask = None;
@@ -695,7 +696,7 @@ set_frame_part_fg (struct frame_part *fp)
 		    XChangeGC (dpy, fp->gc, GCClipMask | GCClipXOrigin
 			       | GCClipYOrigin, &gcv);
 		}
-		Imlib_free_pixmap (imlib_id, fg_pixmap);
+		image_free_pixmaps (VIMAGE(fg), fg_pixmap, fg_mask);
 	    }
 	    /* Imlib sometimes calls XSync (), which could hide events
 	       from select () */
@@ -1149,8 +1150,8 @@ build_frame_part (struct frame_part *fp)
     {
 	if (IMAGEP(fp->bg[i]))
 	{
-	    fp->width = VIMAGE(fp->bg[i])->image->rgb_width;
-	    fp->height = VIMAGE(fp->bg[i])->image->rgb_height;
+	    fp->width = image_width (VIMAGE(fp->bg[i]));
+	    fp->height = image_height (VIMAGE(fp->bg[i]));
 	    break;
 	}
     }
@@ -1260,12 +1261,13 @@ configure_frame_part (struct frame_part *fp)
 	    XGCValues gcv;
 	    wa.win_gravity = StaticGravity;
 	    wa.bit_gravity = StaticGravity;
-	    wamask = CWWinGravity | CWBitGravity;
+	    wa.colormap = image_cmap;
+	    wamask = CWWinGravity | CWBitGravity | CWColormap;
 	    fp->id = XCreateWindow (dpy, w->frame,
 				    fp->x - w->frame_x, fp->y - w->frame_y,
 				    fp->width, fp->height,
-				    0, screen_depth, InputOutput,
-				    screen_visual, wamask, &wa);
+				    0, image_depth, InputOutput,
+				    image_visual, wamask, &wa);
 	    fp->gc = XCreateGC (dpy, fp->id, 0, &gcv);
 	    XSelectInput (dpy, fp->id, FP_EVENTS);
 
