@@ -1,3 +1,9 @@
+1999-12-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* images.c (image_sweep): use Imlib_kill_image () instead of
+	Imlib_destroy_image () (turns off image caching, but not
+	image sharing)
+
 1999-12-17  John Harper  <john@dcs.warwick.ac.uk>
 
 	* commands.c (Fcommandp): fixed for current autoload format
