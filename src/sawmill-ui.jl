@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.38 1999/11/27 14:36:21 john Exp $
+;; $Id: sawmill-ui.jl,v 1.39 1999/12/01 11:23:33 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -23,9 +23,9 @@ exec rep "$0" "$@"
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;(setq print-length 5)
-;(setq print-depth 3)
-;(setq debug-on-error t)
+(setq print-length 5)
+(setq print-depth 3)
+(setq debug-on-error t)
 
 (require 'gtk)
 
@@ -81,6 +81,8 @@ exec rep "$0" "$@"
 
 ;; may be list, radio, or menu
 (defvar ui-set-style 'menu)
+
+(defvar ui-match-window-max-matchers 3)
 
 
 ;; wm communication
@@ -931,6 +933,323 @@ exec rep "$0" "$@"
       (gtk-label-set (get-key spec ':readme) ""))))
 
 
+;; customizing window matchers
+
+(defun match-window:edit (spec cell &optional callback)
+  (let*
+      ((x-properties (get-key spec ':x-properties))
+       (properties (get-key spec ':properties))
+       (window (gtk-window-new 'dialog))
+       (vbox (gtk-vbox-new nil 0))
+       (hbox-2 (gtk-hbutton-box-new))
+       (ok (gtk-button-new-with-label "OK"))
+       (cancel (gtk-button-new-with-label "Cancel"))
+       (frame (gtk-frame-new "Actions:"))
+       (frame-1 (gtk-frame-new "Matchers:"))
+       (table (gtk-table-new (length properties) 2 nil))
+       (table-1 (gtk-table-new ui-match-window-max-matchers 2 nil))
+       (match-widget-alist nil)
+       (prop-widget-alist nil)
+
+       (make-cell
+	(lambda ()
+	  (catch 'out
+	    (let
+		(matchers actions tem)
+
+	      (mapc (lambda (cell)
+		      (let
+			  ((atom (gtk-entry-get-text
+				  (gtk-combo-entry (car cell))))
+			   (re (gtk-entry-get-text (cdr cell))))
+			(unless (or (string= atom "")
+				    (string= re ""))
+			  (setq atom (or (car (rassoc atom x-properties))
+					 (intern atom)))
+			  (setq matchers (cons (cons atom re) matchers)))))
+		    match-widget-alist)
+	      (unless matchers
+		(throw 'out nil))
+
+	      (mapc (lambda (cell)
+		      (cond ((gtk-check-button-p (cdr cell))
+			     ;; boolean
+			     (when (gtk-toggle-button-active (cdr cell))
+			       (setq actions (cons
+					      (cons (car cell) t) actions))))
+			    ((gtk-entry-p (cdr cell))
+			     ;; number
+			     (setq tem (gtk-entry-get-text (cdr cell)))
+			     (when (string-match "^\\d+$" tem)
+			       (setq actions
+				     (cons (cons (car cell)
+						 (read-from-string tem))
+					   actions))))
+			    ((gtk-combo-p (cdr cell))
+			     ;; symbol
+			     (setq tem (gtk-entry-get-text
+					(gtk-combo-entry (cdr cell))))
+			     (unless (string= tem "")
+			       (setq actions
+				     (cons (cons (car cell) (intern tem))
+					   actions))))
+			    (t
+			     (error "Unknown widget type"))))
+		    prop-widget-alist)
+
+	      (cons (nreverse matchers) (nreverse actions)))))))
+
+    (unless cell
+      (setq cell (cons (list (cons 'WM_NAME "")) nil)))
+
+    ;; move boolean properties to head of list for best effect
+    (setq properties (nconc (filter (lambda (p)
+				      (eq (nth 1 p) 'boolean))
+				    properties)
+			    (filter (lambda (p)
+				      (not (eq (nth 1 p) 'boolean)))
+				    properties)))
+
+    (gtk-box-set-spacing hbox-2 ui-box-spacing)
+    (gtk-container-border-width hbox-2 ui-box-border)
+    (gtk-box-set-spacing vbox ui-box-spacing)
+    (gtk-container-border-width vbox ui-box-border)
+    (gtk-table-set-col-spacings table ui-box-spacing)
+    (gtk-table-set-row-spacings table ui-box-spacing)
+    (gtk-container-border-width table ui-box-border)
+    (gtk-table-set-col-spacings table-1 ui-box-spacing)
+    (gtk-table-set-row-spacings table-1 ui-box-spacing)
+    (gtk-container-border-width table-1 ui-box-border)
+    (gtk-button-box-set-layout hbox-2 'end)
+
+    (let
+	((i 0))
+      (while (< i ui-match-window-max-matchers)
+	(let
+	    ((combo (gtk-combo-new))
+	     (entry (gtk-entry-new)))
+	  (gtk-combo-set-popdown-strings
+	   combo (cons "" (mapcar cdr x-properties)))
+	  (gtk-table-attach-defaults table-1 combo 0 1 i (1+ i))
+	  (gtk-table-attach-defaults table-1 entry 1 2 i (1+ i))
+	  (setq match-widget-alist (cons (cons combo entry)
+					 match-widget-alist))
+	  (setq i (1+ i))))
+      (setq match-widget-alist (nreverse match-widget-alist))
+      (setq i 0)
+      (mapc (lambda (matcher)
+	      (gtk-entry-set-text (gtk-combo-entry
+				   (car (nth i match-widget-alist)))
+				  (or (cdr (assq (car matcher) x-properties))
+				      (symbol-name (car matcher))))
+	      (gtk-entry-set-text (cdr (nth i match-widget-alist))
+				  (cdr matcher))
+	      (setq i (1+ i)))
+	    (car cell)))
+
+    (gtk-container-add window vbox)
+    (gtk-box-pack-start vbox frame-1)
+    (gtk-container-add vbox frame)
+    (gtk-box-pack-end vbox hbox-2)
+    (gtk-container-add frame table)
+    (gtk-container-add frame-1 table-1)
+    (gtk-container-add hbox-2 ok)
+    (gtk-container-add hbox-2 cancel)
+
+    (let*
+	((i 0)
+	 (use-rhs nil))
+      (mapc (lambda (prop)
+	      (let
+		  ((current (cdr (assq (car prop) (cdr cell)))))
+		(cond
+		 ((eq (nth 1 prop) 'boolean)
+		  (let
+		      ((widget (gtk-check-button-new-with-label
+				(symbol-name (car prop)))))
+		    (when current
+		      (gtk-toggle-button-set-state widget t))
+		    (if (not use-rhs)
+			(gtk-table-attach-defaults table widget 0 1 i (1+ i))
+		      (setq i (1- i))
+		      (gtk-table-attach-defaults table widget 1 2 i (1+ i)))
+		    (setq use-rhs (not use-rhs))
+		    (setq prop-widget-alist (cons (cons (car prop) widget)
+						  prop-widget-alist))))
+		 ((eq (nth 1 prop) 'number)
+		  (let*
+		      ((entry (gtk-entry-new))
+		       (label (gtk-label-new (symbol-name (car prop)))))
+		    (if current
+			(gtk-entry-set-text entry (format nil "%d" current))
+		      (gtk-entry-set-text entry ""))
+		    (gtk-label-set-justify label 'right)
+		    (gtk-table-attach-defaults table label 0 1 i (1+ i))
+		    (gtk-table-attach-defaults table entry 1 2 i (1+ i))
+		    (setq prop-widget-alist (cons (cons (car prop) entry)
+						  prop-widget-alist))
+		    (setq use-rhs nil)))
+		 ((eq (nth 1 prop) 'symbol)
+		  (let
+		      ((combo (gtk-combo-new))
+		       (label (gtk-label-new (symbol-name (car prop)))))
+		    (gtk-label-set-justify label 'right)
+		    (gtk-table-attach-defaults table label 0 1 i (1+ i))
+		    (gtk-table-attach-defaults table combo 1 2 i (1+ i))
+		    (gtk-combo-set-popdown-strings
+		     combo (cons "" (mapcar symbol-name (nth 2 prop))))
+		    (gtk-entry-set-text (gtk-combo-entry combo)
+					(if current
+					    (symbol-name current) ""))
+		    (setq prop-widget-alist (cons (cons (car prop) combo)
+						  prop-widget-alist))
+		    (setq use-rhs nil))))
+		(setq i (1+ i))))
+	    properties))
+    (setq prop-widget-alist (nreverse prop-widget-alist))
+
+    (gtk-signal-connect ok "clicked" (lambda ()
+				       (let
+					   ((item (make-cell)))
+					 (when (and callback item)
+					   (callback item)))
+				       (gtk-grab-remove window)
+				       (gtk-widget-destroy window)))
+    (gtk-signal-connect cancel "clicked" (lambda ()
+					   (gtk-grab-remove window)
+					   (gtk-widget-destroy window)))
+    (gtk-signal-connect window "delete_event" (lambda ()
+						(gtk-grab-remove window)))
+
+    (gtk-widget-show-all window)
+    (gtk-grab-add window)
+    window))
+
+(defun build-match-window (spec)
+  (let*
+      ((vbox (gtk-vbox-new nil 0))
+       (hbox (gtk-hbox-new nil 0))
+       (scroller (gtk-scrolled-window-new))
+       (label (gtk-label-new (get-key spec ':doc)))
+       (clist (gtk-clist-new-with-titles ["Matchers" "Actions"]))
+       (add-b (gtk-button-new-with-label "Add..."))
+       (delete-b (gtk-button-new-with-label "Delete"))
+       (edit-b (gtk-button-new-with-label "Edit..."))
+
+       (x-properties (get-key spec ':x-properties))
+       (properties (get-key spec ':properties))
+
+       (selection nil)
+       (select-row-callback (lambda (w row col)
+			      (setq selection row)))
+
+       (format-cell
+	(lambda (cell)
+	  (let
+	      ((matchers nil)
+	       (actions nil))
+	    (mapc (lambda (match)
+		    (when matchers
+		      (setq matchers (cons ", " matchers)))
+		    (let
+			((string (format nil "%s=%s"
+					 (or (cdr (assq (car match)
+							x-properties))
+					     (car match)) (cdr match))))
+		      (setq matchers (cons string matchers))))
+		  (car cell))
+	    (mapc (lambda (action)
+		    (when actions
+		      (setq actions (cons ", " actions)))
+		    (let
+			((string (format nil "%s=%s"
+					 (car action) (cdr action))))
+		      (when (string-match "=t$" string)
+			(setq string (substring string 0 (match-start))))
+		      (setq actions (cons string actions))))
+		  (cdr cell))
+	    (vector (apply concat (nreverse matchers))
+		    (apply concat (nreverse actions))))))
+
+       (add-callback
+	(lambda ()
+	  (match-window:edit
+	   spec nil
+	   (lambda (cell)
+	     (let
+		 ((value (get-key spec ':value)))
+	       (setq value (append value (list cell)))
+	       (gtk-clist-append clist (format-cell cell))
+	       (ui-set spec (get-key spec ':variable value) value))))))
+
+       (delete-callback
+	(lambda ()
+	  (let*
+	      ((value (get-key spec ':value))
+	       (item (nth selection value)))
+	    (setq value (delq item (copy-sequence value)))
+	    (gtk-clist-remove clist selection)
+	    (when (>= selection (length value))
+	      (setq selection (1- (length value))))
+	    (ui-set spec (get-key spec ':variable value) value))))
+
+       (edit-callback
+	(lambda ()
+	  (let
+	      ((old-item (nth selection (get-key spec ':value))))
+	    (match-window:edit spec old-item
+	     (lambda (new-item)
+	       (let*
+		   ((value (copy-sequence (get-key spec ':value)))
+		    (ptr value)
+		    (vec (format-cell new-item)))
+		 (while (and ptr (not (eq (car ptr) old-item)))
+		   (setq ptr (cdr ptr)))
+		 (rplaca ptr new-item)
+		 (ui-set spec (get-key spec ':variable) value)
+		 (gtk-clist-set-text clist selection 0 (aref vec 0))
+		 (gtk-clist-set-text clist selection 1 (aref vec 1)))))))))
+
+    (gtk-box-set-spacing vbox ui-box-spacing)
+    (gtk-container-border-width vbox ui-box-border)
+    (gtk-box-set-spacing hbox ui-box-spacing)
+    (gtk-container-border-width hbox ui-box-border)
+
+    (gtk-clist-set-column-auto-resize clist 0 t)
+    (gtk-clist-set-column-auto-resize clist 1 t)
+    (gtk-clist-set-selection-mode clist 'browse)
+
+    (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
+    (gtk-widget-set-usize scroller 500 200)
+
+    (gtk-box-pack-start vbox label)
+    (gtk-box-pack-end vbox hbox)
+    (gtk-container-add hbox add-b)
+    (gtk-container-add hbox edit-b)
+    (gtk-container-add hbox delete-b)
+    (gtk-container-add vbox scroller)
+    (gtk-container-add scroller clist)
+
+    (mapc (lambda (item)
+	    (gtk-clist-append clist (format-cell item)))
+	  (get-key spec ':value))
+
+;   (setq spec (nconc spec (list ':clist clist
+;				 ':selection 0)))
+
+    (gtk-signal-connect add-b "clicked" add-callback)
+    (gtk-signal-connect delete-b "clicked" delete-callback)
+    (gtk-signal-connect edit-b "clicked" edit-callback)
+    (gtk-signal-connect clist "select_row" select-row-callback)
+    (gtk-signal-connect clist "button_press_event"
+			(lambda (w ev)
+			  (when (eq (gdk-event-type ev) '2button-press)
+			    (edit-callback))))
+    vbox))
+
+(put 'match-window 'builder build-match-window)
+    
+
 ;; building the frame for the element tree
 
 (defun show-ui (spec)
@@ -946,7 +1265,7 @@ exec rep "$0" "$@"
        (vbox (gtk-vbox-new nil 0))
        (hbox (gtk-hbutton-box-new))
        ui-ok-widget ui-apply-widget ui-revert-widget refresh cancel)
-    (gtk-window-set-policy ui-window t t nil)
+    (gtk-window-set-policy ui-window nil t nil)
     (unless ui-socket-id
       (setq ui-ok-widget (gtk-button-new-with-label "OK"))
       (setq ui-apply-widget (gtk-button-new-with-label "Try"))
