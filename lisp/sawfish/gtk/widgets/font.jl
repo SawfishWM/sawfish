@@ -72,10 +72,10 @@
 		   (cond ((stringp x)
 			  (gtk-entry-set-text entry x))
 			 ((consp x)
-			  (let ((face (case (car x)
-					(("Xft")
+			  (let ((face (cond
+					((string-equal (car x) "Xft")
 					 (xft-description->face (cdr x)))
-					(("xlfd")
+					((string-equal (car x) "xlfd")
 					 (xlfd-description->face (cdr x))))))
 			    (when face
 			      (gtk-entry-set-text
