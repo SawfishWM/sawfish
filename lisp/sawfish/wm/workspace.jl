@@ -460,6 +460,9 @@
 	    (ws-workspace-may-be-empty space)) (sort spaces >))
     (when (and (not dont-hide) (windowp w))
       (hide-window w))
+    (mapc (lambda (space)
+	    (call-window-hook
+	     'remove-from-workspace-hook w (list space))) spaces)
     (call-hook 'workspace-state-change-hook)))
 
 ;; move window W from workspace id OLD to workspace NEW
@@ -469,7 +472,9 @@
        "ws-move-window--window isn't in original workspace: %s, %s" w old))
   (if (window-in-workspace-p w new)
       ;; just remove from the source workspace
-      (window-remove-from-workspace w old)
+      (progn
+	(window-remove-from-workspace w old)
+	(call-window-hook 'remove-from-workspace-hook w (list old)))
     ;; need to move it..
     (transform-window-workspaces (lambda (space)
 				   (if (= space old)
@@ -483,6 +488,7 @@
   ;; the window may lose the focus when switching spaces
   (when (and was-focused (window-visible-p w))
     (set-input-focus w))
+  (call-window-hook 'add-to-workspace-hook w (list new))
   (call-hook 'workspace-state-change-hook))
 
 ;; arrange it so that window W appears on both OLD and NEW workspaces
@@ -497,6 +503,7 @@
   ;; the window may lose the focus when switching spaces
   (when (and was-focused (window-visible-p w))
     (set-input-focus w))
+  (call-window-hook 'add-to-workspace-hook w (list new))
   (call-hook 'workspace-state-change-hook))
 
 ;; switch to workspace with id SPACE
@@ -841,6 +848,7 @@ instance remaining, then delete the actual window."
 	  (when (= space current-workspace)
 	    (hide-window w))
 	  (ws-workspace-may-be-empty space)
+	  (call-window-hook 'remove-from-workspace-hook w (list space))
 	  (call-hook 'workspace-state-change-hook))
       (delete-window w))))
 
