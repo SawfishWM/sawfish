@@ -926,6 +926,7 @@ send_synthetic_configure (Lisp_Window *w)
 	ev.xconfigure.above = w->reparented ? w->frame : root_window;
 	ev.xconfigure.override_redirect = False;
 	XSendEvent (dpy, w->id, False, StructureNotifyMask, &ev);
+	w->pending_configure = 0;
     }
     else
 	w->pending_configure = 1;
