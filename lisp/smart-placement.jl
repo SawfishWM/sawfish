@@ -81,10 +81,10 @@ A value between 0 and 1023 inclusive.")
 (defun sp-prune-points (points maximum)
   (let*
       ((total (length points))
-       (cutoff (* (- total maximum) 100)))
+       (cutoff (* (max 0 (- total maximum)) 100)))
     (setq total (* total 100))
     (delete-if (lambda (x)
-		 (> (random total) cutoff)) points)))
+		 (< (random total) cutoff)) points)))
 
 ;; returns the list of windows to compare with when overlapping, by
 ;; default windows with their `ignored' property set are dropped
