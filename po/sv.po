@@ -3,14 +3,14 @@
 # Andreas Persenius <ndap@swipnet.se>, 2000.
 # Johan Dahlin <zilch.am@home.se>, 2000.
 # Richard Hult <rhult@codefactory.se>, 2000.
-# Martin Norbäck <d95mback@dtek.chalmers.se>, 2000.
+# Martin Norbäck <d95mback@dtek.chalmers.se>, 2000-2001.
 #
 # $Id$
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish 0.30.3\n"
-"POT-Creation-Date: 2000-11-24 12:35+0100\n"
+"POT-Creation-Date: 2001-01-24 11:46+0100\n"
 "PO-Revision-Date: 2000-07-16 09:53+0200\n"
 "Last-Translator: Richard Hult <rhult@codefactory.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -106,6 +106,28 @@ msgstr "Öppna"
 msgid "Preferences"
 msgstr "Egenskaper"
 
+#. ../themes/Crux/theme.jl
+msgid "Crux Theme"
+msgstr "Crux-tema"
+
+#. ../themes/Crux/theme.jl
+msgid ""
+"Accent color for focused windows (if unset uses the GTK+ selection color)."
+msgstr ""
+"Accentfärg för fokuserade fönster (om det inte är satt, använd GTK+:s markeringsfärg)."
+
+#. ../themes/Crux/theme.jl
+msgid "Display the window's icon in its menu button."
+msgstr "Visa fönstrets ikon i dess menyknapp."
+
+#. ../themes/Crux/theme.jl
+msgid "Display title buttons to mimic: \\w"
+msgstr "Visa titelknappar för att härma: \\w"
+
+#. ../themes/gradient/theme.jl
+msgid "Gradient Theme"
+msgstr "Färgskaletema"
+
 #. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
 msgstr "Riktning på färgskala i ramstilen \"gradient\"."
@@ -133,9 +155,13 @@ msgstr ""
 "kvalitén."
 
 #. ../themes/mono/theme.jl
+msgid "Mono Theme"
+msgstr "Mono-tema"
+
+#. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
 msgstr ""
-"Färg på inaktiva ramar (om det inte är satt, använd GTK+ bakgrundsfärg)."
+"Färg på inaktiva ramar (om det inte är satt, använd GTK+:s bakgrundsfärg)."
 
 #. ../themes/mono/theme.jl
 msgid "Color of active frames."
@@ -146,12 +172,20 @@ msgid "Text is \\w justified in window titles."
 msgstr "Hur text \\w justeras  i fönstertitlar."
 
 #. ../themes/simple/theme.jl
+msgid "Simple Theme"
+msgstr "Enkelt tema"
+
+#. ../themes/simple/theme.jl
 msgid "Color of inactive frames in `simple' frame style."
 msgstr "Färg på inaktiva ramar i ramstilen \"simple\"."
 
 #. ../themes/simple/theme.jl
 msgid "Color of active frames in `simple' frame style."
 msgstr "Färg på aktiva ramar i ramstilen \"simple\"."
+
+#. ../themes/smaker/theme.jl
+msgid "SMaker Theme"
+msgstr "SMaker-tema"
 
 #. ../themes/smaker/theme.jl
 msgid "Use black-on-white button images."
@@ -295,9 +329,83 @@ msgstr "Rader:"
 msgid "Index:"
 msgstr "Innehållsförteckning:"
 
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Window Cycling"
+msgstr "Fönsterväxling"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Sound"
+msgstr "Ljud"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Edge Flipping"
+msgstr "Kantvändning"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Matched Windows"
+msgstr "Matchade fönster"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Shade Hover"
+msgstr "Skuggsvävning"
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tooltips"
+msgstr "Verktygstips"
+
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command:"
 msgstr "Kommando:"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Focus"
+msgstr "Fokus"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Förflyttning/Storleksändring"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Placement"
+msgstr "Placering"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Appearance"
+msgstr "Utseende"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "Skrivbord"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "Bindningar"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing/Maximizing"
+msgstr "Minimering/Maximering"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing"
+msgstr "Minimering"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Maximizing"
+msgstr "Maximering"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "Diverse"
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -308,8 +416,8 @@ msgid "Does click-to-focus mode pass the click through to the window."
 msgstr "Skickar \"click-to-focus\"-läget vidare klicket till fönstret."
 
 #. ../lisp/sawfish/wm/frames.jl
-msgid "Default frame style (theme)."
-msgstr "Standard-ramstil (tema)."
+msgid "Default frame style:"
+msgstr "Standardramstil:"
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Automatically reload themes when they are updated."
@@ -323,7 +431,8 @@ msgid ""
 "requested type."
 msgstr ""
 "Ramstilsreträtt:\n"
-"Associera ramtyper med typ som ska provas om temat inte stödjer den efterfrågade typen."
+"Associera ramtyper med typ som ska provas om temat inte stödjer den "
+"efterfrågade typen."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
@@ -423,8 +532,24 @@ msgstr ""
 "menyknapp. (Endast musbindningar fungerar här.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Tangentbindning vars bindningar är aktiva när pekaren är på ett fönsters\n"
+"skuggknapp. (Endast musbindningar fungerar här.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Motion threshold for mouse pointer: \\wpixels"
 msgstr "Rörelsetröskel för muspekaren: \\wpixels"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Modifier key(s) used for default window manager shortcuts."
+msgstr "Modifierartangent(er) som ska användas för standardkortkommandon i fönsterhanteraren."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display key-binding information in menu items."
+msgstr "Visa tangentbindningsinformation i menyval."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -605,7 +730,8 @@ msgid ""
 msgstr ""
 "Ge fokus till fönster även om de inte bett om det.\n"
 "\n"
-"Fönster ska sätta tipset \"accepts input\" i sin WM_HINTS-egenskapslista för att visa huruvida de kräver fokus."
+"Fönster ska sätta tipset \"accepts input\" i sin WM_HINTS-egenskapslista för "
+"att visa huruvida de kräver fokus."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid ""
@@ -632,7 +758,8 @@ msgid ""
 "Format to create unique window names.\n"
 "\n"
 "Has two arguments (NAME INDEX) applied to it."
-msgstr "Format att skapa unika fönsternamn.\n"
+msgstr ""
+"Format att skapa unika fönsternamn.\n"
 "\n"
 "Tar två argument (NAME INDEX)."
 
@@ -811,6 +938,10 @@ msgid "Display window names while cycling through windows."
 msgstr "Visa fönsternamn vid fönsterväxling."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Display window icons while cycling through windows."
+msgstr "Visa fönsterikoner vid fönsterväxling."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Include iconified windows when cycling."
 msgstr "Inkludera minimerade fönster vid växling."
 
@@ -841,8 +972,7 @@ msgstr "Stäng av auto-höjning när fönster väljs tillfälligt."
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid ""
 "Keymap containing bindings active only during window cycling operations."
-msgstr ""
-"Tangentbindning vars bindningar är aktiva under fönsterväxling."
+msgstr "Tangentbindning vars bindningar är aktiva under fönsterväxling."
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "The program launched by the `xterm' command."
@@ -901,6 +1031,10 @@ msgid "Warp pointer to opposite screen edge when flipping."
 msgstr "Flytta pekare till motsatta skärmkanten vid överflippning."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Error Handling"
+msgstr "Felhantering"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Emit a beeping sound when errors occur."
 msgstr "Avge ett pipljud när fel uppstår."
 
@@ -911,18 +1045,6 @@ msgstr "Var felmeddelanden ska visas: \\w"
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "No errors."
 msgstr "Inga fel."
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Placement"
-msgstr "Placering"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Focus"
-msgstr "Fokus"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Appearance"
-msgstr "Utseende"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
@@ -1125,8 +1247,8 @@ msgid "S_haded"
 msgstr "_Skuggad"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid "Focus windows when they are first displayed."
-msgstr "Fokusera varje fönster när det först visas."
+msgid "Focus on application windows when they first appear."
+msgstr "Fokusera programfönster när de först visas."
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Dialog windows inherit the focus from their parent."
@@ -1464,9 +1586,6 @@ msgstr "_Tema"
 
 #~ msgid "Display the main menu."
 #~ msgstr "Visar huvudmenyn."
-
-#~ msgid "Display the applications menu."
-#~ msgstr "Visar programmenyn."
 
 #~ msgid ""
 #~ "Raise the window to its highest allowed position in the stacking order."
@@ -1972,47 +2091,8 @@ msgstr "_Tema"
 #~ "Skickar nästa tangenthändelse direkt till det fokuserade klientfönstret,\n"
 #~ "och ignorerar alla fönsterhanterarbindning som den kanske har."
 
-#~ msgid "Sound"
-#~ msgstr "Ljud"
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Kantvändning"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Matchade fönster"
-
-#~ msgid "Tooltips"
-#~ msgstr "Verktygstips"
-
-#~ msgid "Shade Hover"
-#~ msgstr "Skuggsvävning"
-
-#~ msgid "Window Cycling"
-#~ msgstr "Fönsterväxling"
-
 #~ msgid "Main"
 #~ msgstr "Huvuddel"
-
-#~ msgid "Move/Resize"
-#~ msgstr "Förflyttning/Storleksändring"
-
-#~ msgid "Workspaces"
-#~ msgstr "Skrivbord"
-
-#~ msgid "Bindings"
-#~ msgstr "Bindningar"
-
-#~ msgid "Minimizing/Maximizing"
-#~ msgstr "Minimering/Maximering"
-
-#~ msgid "Minimizing"
-#~ msgstr "Minimering"
-
-#~ msgid "Maximizing"
-#~ msgstr "Maximering"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Diverse"
 
 #~ msgid "Update all windows when the default frame style is changed."
 #~ msgstr "Uppdatera alla fönster när standard-ramstilen ändras."
@@ -2128,15 +2208,3 @@ msgstr "_Tema"
 
 #~ msgid "Image Properties"
 #~ msgstr "Bildegenskaper"
-
-#~ msgid "Gradient Theme"
-#~ msgstr "Färgskaletema"
-
-#~ msgid "Mono Theme"
-#~ msgstr "Mono-tema"
-
-#~ msgid "Simple Theme"
-#~ msgstr "Enkelt tema"
-
-#~ msgid "SMaker Theme"
-#~ msgstr "SMaker-tema"
