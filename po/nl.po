@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish 1\n"
 "POT-Creation-Date: 2002-04-21 23:09-0700\n"
-"PO-Revision-Date: 2002-06-17 21:13+0200\n"
+"PO-Revision-Date: 2002-06-25 12:31+0200\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,12 +32,12 @@ msgstr "Sawfish Web-pagina"
 # ../themer/themer.in
 #. ../themer/themer.in
 msgid "Reload themes in window manager after saving."
-msgstr "Herlaad thema's in Sawfish na bewaren."
+msgstr "Herlaad thema's in Sawfish na opslaan."
 
 # ../themer/themer.in
 #. ../themer/themer.in
 msgid "Remove unused definitions when saving."
-msgstr "Verwijder ongebruikte definities bij het bewaren."
+msgstr "Verwijder ongebruikte definities bij het opslaan."
 
 # ../lisp/menus.jl
 #. ../themer/themer.in
@@ -70,7 +70,7 @@ msgstr "Kies kleur"
 #. ../lisp/sawfish/gtk/widgets/file.jl
 #. ../themer/themer.in
 msgid "Browse..."
-msgstr "Blader..."
+msgstr "Bladeren..."
 
 # ../src/sawmill-ui.jl
 #. ../lisp/sawfish/gtk/widgets/font.jl
@@ -136,7 +136,7 @@ msgstr "fout bij bouwen van vensterrand: %S"
 #. ../themer/themer.in
 #, c-format
 msgid "Saved as `%s'"
-msgstr "Bewaard als `%s'"
+msgstr "Opgeslagen als `%s'"
 
 # ../themer/themer.in
 #. ../themer/themer.in
@@ -153,7 +153,7 @@ msgstr "Lees thema van `%s'"
 # ../themer/themer.in
 #. ../themer/themer.in
 msgid "Theme Directory"
-msgstr "Thema map"
+msgstr "Thema-map"
 
 # ../themer/themer.in
 #. ../themer/themer.in
@@ -180,7 +180,7 @@ msgstr ""
 # ../lisp/menus.jl
 #. ../themes/Crux/theme.jl
 msgid "Display the window's icon in its menu button."
-msgstr "Toon het venstericoon in de menuknop"
+msgstr "Toon het vensterpictogram in de menuknop"
 
 #. ../themes/Crux/theme.jl
 msgid "Display title buttons to mimic: \\w"
@@ -456,7 +456,7 @@ msgstr "Grijpen..."
 # ../src/sawmill-ui.jl
 #. ../lisp/sawfish/ui/widgets/icon.jl
 msgid "Select Icon"
-msgstr "Kies icoon"
+msgstr "Kies pictogram"
 
 # ../lisp/keymaps.jl
 # ../lisp/custom.jl
@@ -779,7 +779,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the iconify\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Toetstabel met bindingen die werken als het pijltje op de iconificeer knop\n"
+"Toetstabel met bindingen die werken als het pijltje op de minimaliseerknop\n"
 "van een venster staat. (Alleen muisbindingen werken hier.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -1239,9 +1239,8 @@ msgstr ""
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Focus desktop"
-msgstr "Manier van aandacht geven"
+msgstr "Werkblad invoeraandacht geven"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Transfer input focus to the desktop window (if one exists)."
@@ -1896,13 +1895,13 @@ msgid "Grow window left"
 msgstr "Groei venster naar links"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Grows window to the left until it `bumps into' another window.\n"
 "See `grow-window-up'."
 msgstr ""
-"Laat venster aan de linker kant groeien totdat hij tegen een ander venster "
-"aanbotst"
+"Venster aan de linkerkant laten groeien tot hij tegen een ander venster "
+"aanbotst.\n"
+"Zie 'Groei naar boven'."
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1910,12 +1909,11 @@ msgid "Grow window right"
 msgstr "Groei venster naar rechts"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Grows window to the right until it `bumps into' another window.\n"
 "See `grow-window-up'."
 msgstr ""
-"Laat venster aan de rechter kant groeien totdat hij tegen een ander venster "
+"at venster aan de rechter kant groeien totdat hij tegen een ander venster "
 "aanbotst"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1930,19 +1928,24 @@ msgid ""
 "With a numeric prefix arg, grow upwards by that many increments specified by\n"
 "window or pixels instead."
 msgstr ""
+"Venster naar boven laten groeien totdat hij tegen een ander venster "
+"aanbotst.\nAls de bovenkant zich buiten het scherm bevond, dan wordt deze "
+"naar binnen gehaald.\n"
+"Met een \"universal prefix\" argument wordt gemaximaliseerd i.p.v. gegroeid.\n"
+"Met een \"muneric prefix\" argument wordt er gegroeid met de aangegeven "
+"hoveelheid pixels."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Groei naar beneden"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Grows window downwards until it `bumps into' another window.\n"
 "See `grow-window-up'."
 msgstr ""
-"Laat venster aan de onderkant groeien totdat hij tegen een ander venster "
-"aanbotst"
+"Venster naar beneden laten groeien tot hij tegen een ander venster aanbotst.\n"
+"Zie 'groei naar boven'."
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1950,12 +1953,12 @@ msgid "Pack window left"
 msgstr "Samenpersen naar links"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Moves window to the left until it `bumps into' another window.\n"
 "See `pack-window-up'."
 msgstr ""
-"Verplaatst venster naar links totdat hij tegen een ander venster aanbotst."
+"Venster naar links verplaatsen tot hij tegen een ander venster aanbotst.\n"
+"Zie 'Samenpersen naar boven'."
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1964,12 +1967,12 @@ msgstr "Samenpersen naar rechts"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Moves window to the right until it `bumps into' another window.\n"
 "See `pack-window-up'."
 msgstr ""
-"Verplaatst venster naar rechts totdat hij tegen een ander venster aanbotst."
+"Venster naar rechts verplaatsen tot hij tegen een ander venster aanbotst.\n"
+"Zie 'Samenpersen naar boven'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window up"
@@ -1982,18 +1985,25 @@ msgid ""
 "With a universal prefix arg, move upwards maximally instead.\n"
 "With a numeric prefix arg, move upwards by that many pixels instead."
 msgstr ""
+"Venster naar boven verplaatsen totdat hij tegen een ander venster aanbotst.\n"
+"Als de bovenkant zich buiten het scherm bevond, dan wordt deze naar binnen "
+"gehaald.\n"
+"Met een \"universal prefix\" argument wordt de maximale hoeveelheid "
+"verplaatst.\n"
+"Met een \"numeric prefix\" argument wordt er verplaatst met de aangegeven "
+"hoveelheid pixels."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "Samenpersen naar beneden"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Moves window downwards until it `bumps into' another window.\n"
 "See `pack-window-up'."
 msgstr ""
-"Verplaatst venster naar beneden totdat hij tegen een ander venster aanbotst."
+"Venster naar beneden verplaatsen tot hij tegen een ander venster aanbotst.\n"
+"Zie 'Samenpersen naar boven'."
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -2152,6 +2162,11 @@ msgid ""
 "When moving a window, this option lets you align one of its edges with an "
 "edge of another window."
 msgstr ""
+"Afstand in pixels voordat vensterrand wordt uitgelijnd met het andere "
+"venster.\n"
+"\n"
+"Bij het verplaatsen van vensters geeft deze optie de mogelijkheid om de "
+"randen uit te lijnen met de randen van een ander venster."
 
 # ../lisp/move-resize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -2426,9 +2441,9 @@ msgstr "Verplaats venster naar blikveld:"
 
 # ../lisp/x-cycle.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-#, fuzzy
 msgid "Display window names and icons while cycling through windows."
-msgstr "Venstericoontjes weergeven bij doorlopen vensterlijst. "
+msgstr ""
+"Vensternamen en pictogrammen weergeven bij doorlopen van vensterlijst. "
 
 # ../lisp/x-cycle.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -2465,7 +2480,6 @@ msgid "The program launched by the `xterm' command."
 msgstr "Het programma wat wordt gestart door de 'xterm' opdracht."
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
-#, fuzzy
 msgid "Arguments given to the `xterm' command."
 msgstr "Optionele argumenten voor de opdracht voor 'xterm'."
 
@@ -2548,9 +2562,8 @@ msgid "Error Handling"
 msgstr "Foutafhandeling"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-#, fuzzy
 msgid "Beep when errors occur."
-msgstr "Geef een piepgeluid bij fouten."
+msgstr "Een piep produceren bij fouten."
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/error-handler.jl
@@ -2563,12 +2576,11 @@ msgstr "scherm"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "standard-error"
-msgstr "standaard-fout"
+msgstr "standaardfout"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-#, fuzzy
 msgid "Display error messages to: \\w"
-msgstr "Waar foutmeldingen weergegeven worden: \\w"
+msgstr "Foutmeldingen weergeven op: \\w"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "No errors."
@@ -2592,7 +2604,7 @@ msgstr "Klasse"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Icon Name"
-msgstr "Icoonnaam"
+msgstr "Pictogramnaam"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Role"
@@ -2818,7 +2830,7 @@ msgstr "Onthoud de details van dialoogvensters niet."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save position"
-msgstr "Venstergeschiedenis positie bewaren"
+msgstr "Venstergeschiedenis positie opslaan"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/ext/window-history.jl
@@ -2827,7 +2839,7 @@ msgstr "Onthoud de huidige positie van het huidige venster."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save dimensions"
-msgstr "Venstergeschiedenis afmetingen bewaren"
+msgstr "Venstergeschiedenis afmetingen opslaan"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/ext/window-history.jl
@@ -2836,7 +2848,7 @@ msgstr "Onthoud de huidige afmetingen van het huidige venster."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save attributes"
-msgstr "Venstergeschiedenis attributen bewaren"
+msgstr "Venstergeschiedenis attributen opslaan"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember the current attributes of the focused window."
@@ -2900,14 +2912,12 @@ msgid "group"
 msgstr "groep"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid "Minimizing a window also removes its: \\w"
-msgstr "Bij het optillen van vensters, til dan ook de: \\w op."
+msgstr "Minimaliseren van een venster verwijdert ook zijn: \\w"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid "Unminimizing a window also restores its: \\w"
-msgstr "Bij het optillen van vensters, til dan ook de: \\w op."
+msgstr "Formaat herstellen van een venster herstelt ook zijn: \\w"
 
 # ../lisp/iconify.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2916,9 +2926,8 @@ msgstr "Minimaliseer venster"
 
 # ../lisp/ignore-window.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid "Minimize the window."
-msgstr "Negeer het venster niet meer."
+msgstr "Minimaliseer het venster."
 
 # ../lisp/iconify.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2927,9 +2936,8 @@ msgstr "Herstel vensterformaat"
 
 # ../lisp/iconify.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid "Restore the window from its minimized state."
-msgstr "Haal het venster terug uit geiconificeerde toestand."
+msgstr "Vensterafmetingen herstellen uit geminimaliseerde stand."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window iconified"
@@ -2946,7 +2954,6 @@ msgstr "Minimaliseer vensters in werkruimte"
 
 # ../lisp/cycle.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid "Minimize all windows on the current workspace."
 msgstr "Minimaliseer alle vensters in de huidige werkruimte."
 
@@ -3209,13 +3216,11 @@ msgstr ""
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize window fullscreen"
-msgstr "Venster maximaliseren omschakelen"
+msgstr "Venster maximaliseren"
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize window fullscreen toggle"
 msgstr "Venster maximaliseren omschakelen"
 
@@ -3554,7 +3559,7 @@ msgstr "Eigenschappen"
 
 #. ../themer/themer.glade:120
 msgid "Save Theme _As..."
-msgstr "Thema bewaren _Als..."
+msgstr "Thema opslaan _Als..."
 
 #. ../themer/themer.glade:23
 msgid "Sawfish Theme Builder"
@@ -3591,7 +3596,7 @@ msgstr "[vensterrand-deel-tabel]"
 
 #. ../themer/themer.glade:1766
 msgid "[place holder]"
-msgstr "[plaatsbewaarder]"
+msgstr "[plaats bezet]"
 
 #. ../themer/themer.glade:1786 ../themer/themer.glade:1876
 msgid "[title]"
