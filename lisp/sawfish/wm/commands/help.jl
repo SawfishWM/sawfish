@@ -41,7 +41,7 @@
     (while (string-match " " node)
       (setq node (concat (substring node 0 (match-start)) ?_
 			 (substring node (match-end)))))
-    (system (format nil "gnome-help-browser 'info:%s#%s' >/dev/null 2>&1 </dev/null &"
+    (system (format nil "gnome-help 'info:%s#%s' >/dev/null 2>&1 </dev/null &"
 		    document node)))
 
   (defvar help-display-info-function help-call-info)

@@ -100,7 +100,7 @@
 
   (define (gnome-help-browser)
     "Launch the GNOME help browser."
-    (system "gnome-help-browser >/dev/null 2>&1 </dev/null &"))
+    (system "gnome-help >/dev/null 2>&1 </dev/null &"))
 
   (define (gnome-about)
     "Launch the GNOME about dialog."
