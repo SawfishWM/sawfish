@@ -161,23 +161,23 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
 
   (unless batch-mode
     (bind-keys title-keymap
-      "Button3-Off" 'raise-lower-window-and-transients
+      "Button3-Off" 'raise-lower-window
       "Button2-Move" 'resize-window-interactively
       "Button1-Click2" 'toggle-window-shaded
       "Button1-Move" 'move-window-interactively)
 
     (bind-keys border-keymap
-      "Button3-Off" 'raise-lower-window-and-transients
+      "Button3-Off" 'raise-lower-window
       "Button2-Move" 'move-window-interactively
       "Button1-Move" 'resize-window-interactively)
     
     (bind-keys window-keymap
-      "C-M-Up" 'raise-window-and-transients
-      "C-M-Down" 'lower-window-and-transients
+      "C-M-Up" 'raise-window
+      "C-M-Down" 'lower-window
       "C-M-Left" 'send-to-previous-workspace
       "C-M-Right" 'send-to-next-workspace
       "C-M-q" 'quote-event
-      "M-Button3-Click1" 'raise-lower-window-and-transients
+      "M-Button3-Click1" 'raise-lower-window
       "M-Button2-Click1" 'popup-window-menu
       "M-Button1-Move" 'move-window-interactively)
     
