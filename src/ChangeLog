@@ -1,5 +1,8 @@
 1999-07-28  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c (add_window): set frame_style to nil not
+	default-frame initially
+
 	* frames.c: remove the frame data type, now frames are just
 	lists, a null list is a null frame. Also, a window's frame may
 	be specified as a symbol, in this case the plist of the symbol

@@ -90,15 +90,7 @@ extern void fonts_init (void);
 extern void fonts_kill (void);
 
 /* from frames.c */
-extern int frame_type;
 extern repv Qdefault_frame, Qnil_frame;
-extern repv Fget_frame (repv name);
-extern repv Fmake_frame (repv name, repv plist);
-extern repv Fframe_get (repv frame, repv prop);
-extern repv Fframe_put (repv frame, repv prop, repv value);
-extern repv Fframep (repv arg);
-extern repv Fframe_generator (repv frame);
-extern repv Fset_frame_generator (repv frame, repv gen);
 extern void set_frame_part_bg (struct frame_part *fp);
 extern void set_frame_part_fg (struct frame_part *fp);
 extern void create_window_frame (Lisp_Window *w);
