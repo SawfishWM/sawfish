@@ -91,7 +91,7 @@
 	      ;; no .sawmillrc file)
 	      (unless (or (rc-file-exists-p "~/.sawfishrc")
 			  (rc-file-exists-p "~/.sawmillrc"))
-		(load "sawmill/wm/defaults" t))
+		(load "sawfish/wm/defaults" t))
 
 	      ;; then the customized options
 	      (custom-load-user-file)
