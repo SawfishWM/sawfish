@@ -57,6 +57,10 @@
        "sawfish" (expand-file-name "../locale" sawfish-lisp-lib-directory))
       (textdomain "sawfish"))))
 
+;; add ~/.sawfish/lisp to load-path for user-code (canonicalize it
+;; now to avoid calling tilde file-handler multiple times)
+(setq load-path (cons (canonical-file-name "~/.sawfish/lisp") load-path))
+
 ;; load standard libraries
 (require 'custom)
 (require 'functions)
