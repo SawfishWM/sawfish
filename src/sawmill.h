@@ -187,7 +187,7 @@ struct frame_part {
        function to call to render the contents of rendered_image
        to the current state. */
     repv renderer, rendered_image;
-    int rendered_state;
+    int render_scale, rendered_state;
 
     repv cursor;
 };
