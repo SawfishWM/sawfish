@@ -82,7 +82,8 @@
 	 img (if state
 		 (list gradient:active-from-color gradient:active-to-color)
 	       (list gradient:normal-from-color gradient:normal-to-color)))
-  (bevel-image img 1 (not (eq state 'clicked)))
+  (when (> (cdr (image-dimensions img)) 4)
+    (bevel-image img 1 (not (eq state 'clicked))))
   (set-image-border img 1 1 1 1))
 
 (defun gradient:scale ()
