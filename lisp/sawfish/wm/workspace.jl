@@ -98,6 +98,9 @@
 	    add-swapped-properties
 	    workspace-local-properties
 	    set-number-of-workspaces
+	    show-desktop
+	    hide-desktop
+	    showing-desktop-p
 
 	    ;; XXX rename these..?
 	    ws-remove-window
@@ -165,6 +168,9 @@ window, one of `stop', `keep-going', `wrap-around'")
   ;; window properties whose values may differ on different workspaces
   (define workspace-local-properties '())
 
+  ;; true when in "show desktop" mode
+  (define showing-desktop nil)
+
 
 ;;; Workspace ``swapping''
 
@@ -207,23 +213,29 @@ window, one of `stop', `keep-going', `wrap-around'")
 ;;; Low level functions
 
   ;; return list of all workspaces containing window W
-  (defmacro window-workspaces (w)
-    `(window-get ,w 'workspaces))
+  (define (window-workspaces w)
+    (window-get w 'workspaces))
 
   ;; set list of all workspaces containing window W to LST
-  (defmacro set-window-workspaces (w lst)
-    `(window-put ,w 'workspaces ,lst))
+  (define (set-window-workspaces w lst)
+    (window-put w 'workspaces lst))
 
   ;; return t if window W is a member of workspace SPACE
-  (defmacro window-in-workspace-p (w space)
-    `(memq ,space (window-get ,w 'workspaces)))
+  (define (window-in-workspace-p w space)
+    (memq space (window-get w 'workspaces)))
 
   ;; map FUN over all workspace ids containing window W
-  (defmacro map-window-workspaces (fun w)
-    `(mapc ,fun (window-workspaces ,w)))
+  (define (map-window-workspaces fun w)
+    (mapc fun (window-workspaces w)))
 
-  (defmacro window-appears-in-workspace-p (w space)
-    `(or (window-get ,w 'sticky) (window-in-workspace-p ,w ,space)))
+  (define (window-viewable-p w)
+    (if showing-desktop
+	(or (desktop-window-p w) (dock-window-p w))
+      (not (window-get w 'iconified))))
+
+  (define (window-appears-in-workspace-p w space)
+    (and (window-viewable-p w)
+	 (or (window-get w 'sticky) (window-in-workspace-p w space))))
 
   ;; add window W to those in workspace SPACE
   (define (window-add-to-workspace w space)
@@ -408,7 +420,7 @@ window, one of `stop', `keep-going', `wrap-around'")
 					  (1- space)
 					space)) w)
        (when (and (window-in-workspace-p w current-workspace)
-		  (not (window-get w 'iconified)))
+		  (window-viewable-p w))
 	 (show-window w))))
     (call-hook 'workspace-state-change-hook))
 
@@ -476,7 +488,7 @@ window, one of `stop', `keep-going', `wrap-around'")
 					      space)) w)))
       (cond ((= old current-workspace)
 	     (hide-window w))
-	    ((and (= new current-workspace) (not (window-get w 'iconified)))
+	    ((and (= new current-workspace) (window-viewable-p w))
 	     (show-window w)))
       ;; the window may lose the focus when switching spaces
       (when (and was-focused (window-visible-p w))
@@ -492,7 +504,7 @@ window, one of `stop', `keep-going', `wrap-around'")
     (unless (= old new)
       (unless (window-in-workspace-p w new)
 	(window-add-to-workspace w new))
-      (when (and (= new current-workspace) (not (window-get w 'iconified)))
+      (when (and (= new current-workspace) (window-viewable-p w))
 	(show-window w))
       ;; the window may lose the focus when switching spaces
       (when (and was-focused (window-visible-p w))
@@ -501,13 +513,12 @@ window, one of `stop', `keep-going', `wrap-around'")
       (call-hook 'workspace-state-change-hook)))
 
   ;; switch to workspace with id SPACE
-  (define (select-workspace space #!optional dont-focus inner-thunk)
+  (define (select-workspace* space #!key dont-focus inner-thunk force)
     "Activate workspace number SPACE (from zero)."
-    (unless (= current-workspace space)
+    (when (or force (/= current-workspace space))
       (when current-workspace
 	(call-hook 'leave-workspace-hook (list current-workspace)))
-      (let ((old-space current-workspace)
-	    (order (stacking-order)))
+      (let ((order (stacking-order)))
 
 	;; install the new workspace id
 	(setq current-workspace space)
@@ -524,22 +535,19 @@ window, one of `stop', `keep-going', `wrap-around'")
 
 	 ;; first map new windows top-to-bottom
 	 (mapc (lambda (w)
-		 (when (or (window-get w 'sticky)
-			   (window-in-workspace-p w current-workspace))
+		 (when (window-appears-in-workspace-p w current-workspace)
 		   (swap-in w current-workspace))
-		 (when (and (not (window-get w 'sticky))
-			    (window-in-workspace-p w current-workspace)
+		 (when (and (window-in-workspace-p w current-workspace)
 			    (window-get w 'placed))
-		   (if (window-get w 'iconified)
-		       (hide-window w)
-		     (show-window w))))
+		   (if (window-viewable-p w)
+		       (show-window w)
+		     (hide-window w))))
 	       order)
 
 	 ;; then unmap old-windows bottom-to-top
 	 (mapc (lambda (w)
-		 (when (and (not (window-get w 'sticky))
-			    (window-in-workspace-p w old-space)
-			    (not (window-in-workspace-p w current-workspace))
+		 (when (and (not (window-appears-in-workspace-p
+				  w current-workspace))
 			    (window-get w 'placed))
 		   (hide-window w)))
 	       (nreverse order)))
@@ -554,6 +562,9 @@ window, one of `stop', `keep-going', `wrap-around'")
 	  (call-hook 'enter-workspace-hook (list current-workspace)))
 	(call-hook 'workspace-state-change-hook))))
 
+  (define (select-workspace space #!optional dont-focus inner-thunk)
+    (select-workspace* space dont-focus inner-thunk))
+
   ;; return a list of all windows on workspace index SPACE
   (define (workspace-windows
 	   #!optional (space current-workspace) include-iconified)
@@ -567,7 +578,7 @@ window, one of `stop', `keep-going', `wrap-around'")
   (define (ws-add-window-to-space w space)
     (unless (window-get w 'sticky)
       (window-add-to-workspace w space)
-      (cond ((window-get w 'iconified)
+      (cond ((not (window-viewable-p w))
 	     (hide-window w))
 	    ((= space current-workspace)
 	     (show-window w))
@@ -583,9 +594,9 @@ window, one of `stop', `keep-going', `wrap-around'")
 	(progn
 	  (set-window-workspaces w nil)
 	  (window-put w 'swapped-in current-workspace)
-	  (if (window-get w 'iconified)
-	      (hide-window w)
-	    (show-window w)))
+	  (if (window-viewable-p w)
+	      (show-window w)
+	    (hide-window w)))
       (if (window-workspaces w)
 	  (let ((spaces (window-workspaces w))
 		(limits (workspace-limits)))
@@ -842,6 +853,25 @@ last instance remaining, then delete the actual window."
 	(delete-window w))))
 
   (define-command 'delete-window-instance delete-window-instance #:spec "%W")
+
+  (define (show-desktop)
+    "Hide all windows except the desktop window."
+    (unless showing-desktop
+      (setq showing-desktop t)
+      (select-workspace* current-workspace #:force t)))
+
+  (define (hide-desktop)
+    "Undoes the effect of the `show-desktop' command."
+    (when showing-desktop
+      (setq showing-desktop nil)
+      (select-workspace* current-workspace #:force t)))
+
+  (define (showing-desktop-p)
+    "Returns true when in `showing desktop' mode."
+    showing-desktop)
+
+  (define-command 'show-desktop show-desktop)
+  (define-command 'hide-desktop hide-desktop)
 
 
 ;; some commands for moving directly to a workspace

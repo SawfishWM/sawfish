@@ -82,6 +82,7 @@
      _NET_DESKTOP_VIEWPORT
      _NET_NUMBER_OF_DESKTOPS
      _NET_PROTOCOLS
+     _NET_SHOWING_DESKTOP
      _NET_SUPPORTED
      _NET_SUPPORTING_WM_CHECK
      _NET_WORKAREA
@@ -156,13 +157,15 @@
   (define last-area nil)
   (define last-area-count nil)
   (define last-workarea nil)
+  (define last-showing-desktop nil)
 
   (define (update-workspace-hints)
     (let* ((limits (workspace-limits))
 	   (port (screen-viewport))
 	   (port-size viewport-dimensions)
 	   (total-workspaces (1+ (- (cdr limits) (car limits))))
-	   (workarea (make-vector (* 4 total-workspaces))))
+	   (workarea (make-vector (* 4 total-workspaces)))
+	   (showing-desktop (showing-desktop-p)))
 
       (define (set-ws-hints)
 	;; _NET_NUMBER_OF_DESKTOPS
@@ -207,7 +210,13 @@
 	;; _NET_WORKAREA
 	(unless (equal last-workarea workarea)
 	  (set-x-property 'root '_NET_WORKAREA workarea 'CARDINAL 32)
-	  (setq last-workarea workarea)))
+	  (setq last-workarea workarea))
+
+	;; _NET_SHOWING_DESKTOP
+	(unless (equal showing-desktop last-showing-desktop)
+	  (set-x-property 'root '_NET_SHOWING_DESKTOP
+			  (vector (if showing-desktop 1 0)) 'CARDINAL 32)
+	  (setq last-showing-desktop showing-desktop)))
 
       (define (set-window-hints w)
 	(let ((vec (if (window-sticky-p/workspace w)
@@ -471,6 +480,11 @@
 	((_NET_CLOSE_WINDOW)
 	 (when (windowp w)
 	   (delete-window w)))
+
+	((_NET_SHOWING_DESKTOP)
+	 (if (= (aref data 0) 1)
+	     (show-desktop)
+	   (hide-desktop)))
 
 	((_NET_WM_MOVERESIZE)
 	 (when (and (windowp w) (window-mapped-p w))
