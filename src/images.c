@@ -510,17 +510,19 @@ Tile SOURCE-IMAGE into DEST-IMAGE.
 ::end:: */
 {
     ImlibImage *src_im, *dst_im;
-    int x, y;
+    int x, src_y, dst_y;
     rep_DECLARE1(dst, IMAGEP);
     rep_DECLARE2(src, IMAGEP);
     src_im = VIMAGE(src)->image;
     dst_im = VIMAGE(dst)->image;
-    for (y = 0; y < dst_im->rgb_height; y++)
+    for (dst_y = src_y = 0; dst_y < dst_im->rgb_height; dst_y++, src_y++)
     {
+	if (src_y >= src_im->rgb_height)
+	    src_y = 0;
 	for (x = 0; x < dst_im->rgb_width; x += src_im->rgb_width)
 	{
-	    memcpy (dst_im->rgb_data + y*dst_im->rgb_width*3 + x*3,
-		    src_im->rgb_data + y*src_im->rgb_width*3,
+	    memcpy (dst_im->rgb_data + dst_y*dst_im->rgb_width*3 + x*3,
+		    src_im->rgb_data + src_y*src_im->rgb_width*3,
 		    MIN (dst_im->rgb_width - x, src_im->rgb_width) * 3);
 	}
     }
