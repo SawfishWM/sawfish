@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.61 2000/05/08 18:11:36 john Exp $
+;; $Id: sawmill-ui.jl,v 1.62 2000/05/16 00:08:28 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -610,10 +610,10 @@ exec rep "$0" "$@"
 	    (setq history i))
 	  (gtk-widget-show (aref buttons i))
 	  (gtk-signal-connect (aref buttons i) "toggled"
-			      (make-closure
-			       `(lambda (w)
+			      (let ((i i))
+				(lambda (w)
 				  (when (gtk-check-menu-item-active w)
-				    (build-symbol:select-row spec ,i)))))
+				    (build-symbol:select-row spec i)))))
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	(gtk-option-menu-set-menu omenu menu)
@@ -648,10 +648,10 @@ exec rep "$0" "$@"
 	    (gtk-toggle-button-set-state (aref buttons i) t))
 	  (gtk-box-pack-start box (aref buttons i) nil nil)
 	  (gtk-signal-connect (aref buttons i) "toggled"
-			      (make-closure
-			       `(lambda (w)
+			      (let ((i i))
+				(lambda (w)
 				  (when (gtk-toggle-button-active w)
-				    (build-symbol:select-row spec ,i)))))
+				    (build-symbol:select-row spec i)))))
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	box)))))
