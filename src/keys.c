@@ -845,9 +845,12 @@ allow-events MODE
 	x_mode = SyncPointer;
     else if (mode == Qsync_keyboard)
 	x_mode = SyncKeyboard;
-    else if (mode == Qreplay_pointer)
+    else if (mode == Qreplay_pointer) {
 	x_mode = ReplayPointer;
-    else if (mode == Qreplay_keyboard)
+	/* replaying the pointer event may generate spurious double-
+	   click events (since we now grab on the window frame..?) */
+	last_click = 0;
+    } else if (mode == Qreplay_keyboard)
 	x_mode = ReplayKeyboard;
     else if (mode == Qsync_both)
 	x_mode = SyncBoth;
