@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.60 2000/05/03 22:02:05 john Exp $
+;; $Id: sawmill-ui.jl,v 1.61 2000/05/08 18:11:36 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -1134,6 +1134,7 @@ exec rep "$0" "$@"
 
     (gtk-window-set-title window (_ "Match window properties"))
     (gtk-widget-set-name window (_ "Match window properties"))
+    (gtk-window-set-wmclass window "sawmill-ui" "match-window-properties")
 
     (gtk-box-set-spacing hbox-2 ui-box-spacing)
     (gtk-container-border-width hbox-2 ui-box-border)
@@ -1442,7 +1443,8 @@ exec rep "$0" "$@"
 			 (gtk-button-new-with-label (_ "Refresh"))))
       (setq cancel (gtk-button-new-with-label (_ "Cancel")))
       (gtk-window-set-title ui-window (_ "Sawfish configurator"))
-      (gtk-widget-set-name ui-window (_ "Sawfish configurator")))
+      (gtk-widget-set-name ui-window (_ "Sawfish configurator"))
+      (gtk-window-set-wmclass ui-window "sawmill-ui" "main"))
     (gtk-signal-connect ui-window "delete_event" ui-quit)
     (gtk-container-add ui-window vbox)
     (gtk-box-set-spacing vbox ui-box-spacing)
