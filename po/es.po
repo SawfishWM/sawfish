@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.24\n"
-"POT-Creation-Date: 2000-07-02 19:19+0200\n"
+"POT-Creation-Date: 2000-07-24 18:45+0100\n"
 "PO-Revision-Date: 2000-04-10 21:04+0100\n"
 "Last-Translator: Iñaki García Etxebarria\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -29,6 +29,14 @@ msgstr "Activar los efectos sonoros para todas las ventanas."
 #. ../lisp/audio-events.jl
 msgid "Map window events to sound files."
 msgstr "Asociar eventos a ficheros de sonido."
+
+#. ../lisp/audio-events.jl
+msgid "Event"
+msgstr "Evento"
+
+#. ../lisp/audio-events.jl
+msgid "Sample"
+msgstr "Sonido"
 
 #. ../lisp/auto-raise.jl
 msgid "Raise windows when they are focused."
@@ -190,10 +198,6 @@ msgid "Update all windows when the default frame style is changed."
 msgstr "Actualizar las ventanas cuando el estilo cambia."
 
 #. ../lisp/frames.jl
-msgid "Decorate dialog windows similarly to application windows."
-msgstr "Decorar los diálogos del mismo modo que el resto."
-
-#. ../lisp/frames.jl
 msgid "Automatically reload themes when they are updated."
 msgstr "Releer temas automáticamente cuando son actualizados."
 
@@ -264,6 +268,16 @@ msgstr "Ejecutar el comando shell indicado."
 #. ../lisp/functions.jl
 msgid "Command:"
 msgstr "Comando:"
+
+#. ../lisp/functions.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Invocar la lista de comandos, uno a uno."
+
+#. ../nokogiri/nokogiri-widgets/keymap.jl
+#. ../nokogiri/nokogiri-widgets/command.jl
+#. ../lisp/functions.jl
+msgid "Command"
+msgstr "Comando"
 
 #. ../lisp/functions.jl
 msgid "Force the current window to have a unique title."
@@ -395,6 +409,14 @@ msgid "Unmanaged windows may be iconified."
 msgstr "Las ventanas no manejadas pueden ser iconificadas."
 
 #. ../lisp/iconify.jl
+msgid "Iconifying a window also iconifies the: \\w"
+msgstr "Iconificar una ventana también iconifica el: \\w"
+
+#. ../lisp/iconify.jl
+msgid "Uniconifying a window also uniconifies the: \\w"
+msgstr "Restaurar una ventana también restaura el: \\w"
+
+#. ../lisp/iconify.jl
 msgid "Iconify the window."
 msgstr "Iconificar la ventana."
 
@@ -449,8 +471,12 @@ msgid "Press key..."
 msgstr "Pulse una tecla..."
 
 #. ../lisp/keymap.jl
-msgid "Read a single event and send it to the focused window."
-msgstr "Leer un único evento y enviarlo a la ventana con el foco."
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
+msgstr ""
+"Envía el siguiente evento de teclado directamente a la ventana con el\n"
+"foco, ignorando cualquier atajo del gestor de ventanas que tenga."
 
 #. ../lisp/keymap.jl
 msgid "[Quote]"
@@ -1036,6 +1062,14 @@ msgstr ""
 
 #. ../lisp/raise-commands.jl
 msgid ""
+"Raise the window that received the current event and any transients it has,\n"
+"then replay any pointer events that invoked the command."
+msgstr ""
+"Poner la ventana y sus ventanas transitorias en primer plano, después\n"
+"repetir los eventos de puntero que causaron el comando."
+
+#. ../lisp/raise-commands.jl
+msgid ""
 "Raise the window that received the current event (if it's focused), then\n"
 "replay any pointer events that invoked the command."
 msgstr ""
@@ -1216,9 +1250,32 @@ msgstr "Las ventanas nuevas obtienen el foco."
 msgid "Dialog windows inherit the focus from their parent."
 msgstr "Los diálogos heredan el foco de su padre."
 
-#. ../lisp/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr "Número de columnas y filas para cada escritorio virtual: \\w"
+#. ../lisp/transient.jl
+msgid "Decorate dialog windows similarly to application windows."
+msgstr "Decorar los diálogos del mismo modo que el resto."
+
+#. ../lisp/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr "Poner la ventana y sus transitorias al valor más alto de pila."
+
+#. ../lisp/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr "Mover la ventana y sus transitorias al fondo de su nivel de pila."
+
+#. ../lisp/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
+msgstr ""
+"Si la ventana es la más alta de la pila, moverla a lo más bajo\n"
+"de otro modo, subirla al estado más alto. También modifica sus\n"
+"ventanas transitorias."
 
 #. ../lisp/viewport.jl
 msgid "Windows uniconify to the current viewport."
@@ -1227,6 +1284,22 @@ msgstr "Las ventanas son restauradas al punto de vista actual."
 #. ../lisp/viewport.jl
 msgid "Select the specified viewport."
 msgstr "Seleccionar el punto de vista especificado."
+
+#. ../lisp/viewport.jl
+msgid "Column:"
+msgstr "Columna:"
+
+#. ../lisp/viewport.jl
+msgid "Row:"
+msgstr "Fila:"
+
+#. ../lisp/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Seleccionar la columna de punto de vista especificada."
+
+#. ../lisp/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Seleccionar la fila de punto de vista especificada."
 
 #. ../lisp/viewport.jl
 msgid "Move the current window to the specified viewport."
@@ -1311,6 +1384,10 @@ msgstr ""
 "en pantalla."
 
 #. ../lisp/workspace.jl
+msgid "Virtual desktop configuration."
+msgstr "Configuración del escritorio virtual."
+
+#. ../lisp/workspace.jl
 msgid "When passing the first or last workspace: \\w"
 msgstr "Acción cuando pasamos del primer o último escritorio: \\w"
 
@@ -1322,10 +1399,6 @@ msgstr ""
 #. ../lisp/workspace.jl
 msgid "Workspaces are deleted when their last window closes."
 msgstr "Eliminar el escritorio cuando su última ventana es cerrada."
-
-#. ../lisp/workspace.jl
-msgid "Minimum number of workspaces: \\w"
-msgstr "Mínimo número de escritorios: \\w"
 
 #. ../lisp/workspace.jl
 msgid "Preserve empty workspaces in pager."
@@ -1349,7 +1422,7 @@ msgid "Windows are focused after being uniconified."
 msgstr "Dar el foco después de restaurar."
 
 #. ../lisp/workspace.jl
-msgid "Dialog windows are opened on the same workspace as their application."
+msgid "Dialogs appear on the same workspace as their application."
 msgstr "Los diálogos son abiertas en el mismo escritorio que sus padres."
 
 #. ../lisp/workspace.jl
@@ -1367,16 +1440,12 @@ msgid "Warp the pointer to selected windows."
 msgstr "Llevar el puntero a la ventana seleccionada."
 
 #. ../lisp/workspace.jl
-msgid "Iconifying a window iconifies its whole group."
-msgstr "Minimizar una ventana minimiza todo su grupo."
-
-#. ../lisp/workspace.jl
-msgid "Uniconifying a window uniconifies its whole group."
-msgstr "Restaurar una ventana restaura todo su grupo."
-
-#. ../lisp/workspace.jl
 msgid "Workspace names."
 msgstr "Nombres de los escritorios."
+
+#. ../lisp/workspace.jl
+msgid "Name"
+msgstr "Nombre"
 
 #. ../lisp/workspace.jl
 msgid "Insert workspace"
@@ -1569,23 +1638,53 @@ msgstr ""
 msgid "Cycle through all windows with the same class as the current window."
 msgstr "Rotar a través de las ventanas de la misma clase que la actual."
 
-#. ../nokogiri/nokogiri-shell.jl
-#. ../nokogiri/nokogiri-dialog.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+#. ../nokogiri/nokogiri-gnome.jl
+msgid "Revert"
+msgstr "Restaurar"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
 msgid "OK"
 msgstr "Aceptar"
 
-#. ../nokogiri/nokogiri-shell.jl
-#. ../nokogiri/nokogiri-dialog.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
 msgid "Cancel"
 msgstr "Cancelar"
 
-#. ../nokogiri/nokogiri-shell.jl
-msgid "Try"
-msgstr "Probar"
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Apply"
+msgstr "Aplicar"
 
-#. ../nokogiri/nokogiri-shell.jl
-msgid "Revert"
-msgstr "Restaurar"
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Yes"
+msgstr "Sí"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "No"
+msgstr "No"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Close"
+msgstr "Cerrar"
+
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Help"
+msgstr "Ayuda"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Workspaces:"
+msgstr "Escritorios:"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Columns:"
+msgstr "Columnas:"
+
+#. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
+#. ../nokogiri/nokogiri-no-gnome.jl
+msgid "Rows:"
+msgstr "Filas:"
 
 #. ../nokogiri/nokogiri-shell.jl
 msgid "Sawfish configurator"
@@ -1610,6 +1709,19 @@ msgstr "Valor"
 msgid "Select color"
 msgstr "Selecciona color"
 
+#. ../nokogiri/nokogiri-widgets/command.jl
+msgid "Undocumented"
+msgstr "Sin documentar"
+
+#. ../nokogiri/nokogiri-widgets/match-window.jl
+#. ../nokogiri/nokogiri-widgets/event.jl
+msgid "Grab..."
+msgstr "Capturar..."
+
+#. ../nokogiri/nokogiri-widgets/event.jl
+msgid "Key:"
+msgstr "Tecla:"
+
 #. ../themer/themer.in
 #. ../nokogiri/nokogiri-widgets/font.jl
 #. ../nokogiri/nokogiri-widgets/file.jl
@@ -1625,26 +1737,13 @@ msgstr "Selecciona fichero"
 msgid "Select font"
 msgstr "Selecciona fuente"
 
+#. ../nokogiri/nokogiri-widgets/icon.jl
+msgid "Select Icon"
+msgstr "Selecciona Icono"
+
 #. ../nokogiri/nokogiri-widgets/keymap.jl
 msgid "Edit binding"
 msgstr "Editar atajo"
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Command"
-msgstr "Comando"
-
-#. ../nokogiri/nokogiri-widgets/match-window.jl
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Grab..."
-msgstr "Capturar..."
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Undocumented"
-msgstr "Sin documentar"
-
-#. ../nokogiri/nokogiri-widgets/keymap.jl
-msgid "Key:"
-msgstr "Tecla:"
 
 #. ../nokogiri/nokogiri-widgets/list.jl
 msgid "Insert..."
@@ -1978,10 +2077,6 @@ msgstr "Mapear: "
 #. ../themer/themer.glade:1492
 msgid "Mapping"
 msgstr "Mapeado"
-
-#. ../themer/themer.glade:527 ../themer/themer.glade:775
-msgid "Name"
-msgstr "Nombre"
 
 #. ../themer/themer.glade:86
 msgid "New Theme"
