@@ -31,7 +31,12 @@
 			  (cons (car cell) (event-name (cdr cell))))
 			(cdr (symbol-value symbol)))))
 
-(defun custom-set-keymap (symbol value &rest args)
+;; can't just call out to custom-set-variable since we side-effect VALUE
+(defun custom-set-keymap (symbol value &optional req)
+  (when req
+    (require req))
+  (when (get symbol 'custom-before-set)
+    (funcall (get symbol 'custom-before-set) symbol))
   (when (eq (car value) 'keymap)
     (let
 	((old-value (and (boundp symbol) (symbol-value symbol)))
@@ -44,11 +49,10 @@
 				     (cdr value)))))
       (if (and old-value (eq (car old-value) 'keymap))
 	  ;; hijack the old keymap to preserve eq-ness
-	  (progn
-	    (rplacd old-value new-tail)
-	    (setq value old-value))
-	(setq value (cons 'keymap new-tail)))
-      (apply custom-set-variable symbol value args))))
+	  (rplacd old-value new-tail)
+	(set symbol (cons 'keymap new-tail)))))
+  (when (get symbol 'custom-after-set)
+    (funcall (get symbol 'custom-after-set) symbol)))
 
 (defun custom-keymap-widget (symbol value doc)
   `(keymap :variable ,symbol
