@@ -1,3 +1,8 @@
+2000-04-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* main.c (main): if rep has modules, create a `sawmill' module
+	that will be the wm's global namespace, it imports `rep'
+
 2000-04-03  John Harper  <john@dcs.warwick.ac.uk>
 
 	* fonts.c (Fget_font): set f->descent to the correct value,

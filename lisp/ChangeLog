@@ -1,3 +1,17 @@
+2000-04-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.jl: don't load sawmill-gaol until all functions it
+	exports have been defined; set *root-structure* and
+	*user-structure* to suitable values; support load-all variants;
+	try to decide when to `load' and when to `require' command line
+	arguments
+
+	* sawmill-gaol.jl: should now support both rep 0.12+ and
+	0.11- gaols
+
+	* tooltips.jl, edge-flip.jl, customize.jl, custom.jl: minor
+	tweaks to work with modularized rep
+
 2000-03-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* gnome-menu.jl (gnome-menu-read-desktop-entry): use
