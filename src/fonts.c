@@ -20,12 +20,17 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
+#include <X11/Xlocale.h>
 
 static Lisp_Font *font_list;
 int font_type;
 
 DEFSYM(default_font, "default-font");
 DEFSYM(fonts_are_fontsets, "fonts-are-fontsets");
+
+static XFontSet x_create_font_set (char *xlfd, char ***missing,
+				   int *nmissing, char **def_string);
+
 
 DEFUN("get-font", Fget_font, Sget_font, (repv name), rep_Subr1) /*
 ::doc:get-font::
@@ -56,9 +61,10 @@ font specifier string).
 
 	if (tem != Qnil)
 	{
-	    font_set = XCreateFontSet (dpy, rep_STR(name),
-				       &missing_charset_list,
-				       &num_missing_charset_list, &def_string);
+	    font_set = x_create_font_set (rep_STR(name),
+					  &missing_charset_list,
+					  &num_missing_charset_list,
+					  &def_string);
 	}
 	if (font_set != 0)
 	{
@@ -270,6 +276,162 @@ default-font).
 	font = Fsymbol_value (Qdefault_font, Qt);
     rep_DECLARE1(font, FONTP);
     return rep_MAKE_INT(VFONT(font)->descent);
+}
+
+
+/* XLFD pattern matching */
+
+/* Return a pointer to the first occurrence of string PTN in STR ignoring
+   character case differences, or a null pointer if there is no such
+   occurrence. PTN itself must be lower case. */
+static const char *
+strstr_i (const char *str, const char *ptn)
+{
+    const char *s2, *p2;
+    for (; *str; str++)
+    {
+	s2 = str; p2 = ptn;
+	while (1)
+	{
+	    if (*p2 == 0)
+		return str;
+	    if (tolower (*s2) != *p2)
+		break;
+	    s2++; p2++;
+	}
+    }
+    return 0;
+}
+
+static char *
+xlfd_match_element (const char *xlfd, ...)
+{
+    const char *p, *v;
+    va_list va;
+
+    va_start (va, xlfd);
+    while ((v = va_arg (va, char *)) != 0)
+    {
+	p = strstr_i (xlfd, v);
+	if (p != 0)
+	{
+	    const char *end = strchr (p + 1, '-');
+	    char *buf;
+	    size_t len;
+	    if (end == 0)
+		end = p + strlen (p);
+	    len = end - (p + 1);
+	    buf = malloc (len);
+	    memcpy (buf, p + 1, len);
+	    buf[len] = 0;
+	    va_end (va);
+	    return buf;
+	}
+    }
+    va_end (va);
+    return 0;
+}
+
+static char *
+xlfd_get_element (const char *xlfd, int index)
+{
+    const char *p = xlfd;
+    while (*p != 0)
+    {
+	if (*p == '-' && --index == 0)
+	{
+	    const char *end = strchr (p + 1, '-');
+	    char *buf;
+	    size_t len;
+	    if (end == 0)
+		end = p + strlen (p);
+	    len = end - (p + 1);
+	    buf = malloc (len);
+	    memcpy (buf, p + 1, len);
+	    buf[len] = 0;
+	    return buf;
+	}
+	p++;
+    }
+    return 0;
+}
+
+static char *
+generalize_xlfd (const char *xlfd)
+{
+    char *weight = xlfd_match_element (xlfd, "-medium-", "-bold-",
+				       "-demibold-", "-regular-", 0);
+    char *slant = xlfd_match_element (xlfd, "-r-", "-i-", "-o-",
+				      "-ri-", "-ro-", 0);
+    char *pxlsz = xlfd_get_element (xlfd, 7);	/* 7 dashes before pxlsz */
+
+    char *buf;
+    int len;
+
+    if (weight == 0)
+	weight = strdup ("*");
+    if (slant == 0)
+	slant = strdup ("*");
+    if (pxlsz == 0)
+	pxlsz = strdup ("*");
+
+    len = snprintf (0, 0, "%s,-*-*-%s-%s-*-*-%s-*-*-*-*-*-*-*,"
+		    "-*-*-*-*-*-*-%s-*-*-*-*-*-*-*,*",
+		    xlfd, weight, slant, pxlsz, pxlsz);
+    buf = malloc (len + 1);
+    snprintf (buf, len + 1, "%s,-*-*-%s-%s-*-*-%s-*-*-*-*-*-*-*,"
+	      "-*-*-*-*-*-*-%s-*-*-*-*-*-*-*,*",
+	      xlfd, weight, slant, pxlsz, pxlsz);
+
+    free (pxlsz);
+    free (slant);
+    free (weight);
+
+    return buf;
+}
+
+static XFontSet
+x_create_font_set (char *xlfd, char ***missing,
+		   int *nmissing, char **def_string)
+{
+    XFontSet fs = XCreateFontSet (dpy, xlfd, missing, nmissing, def_string);
+
+    if (fs != 0 && *nmissing == 0)
+	return fs;
+
+    /* for non-iso8859-1 language and iso8859-1 specification
+       (this fontset is only for pattern analysis) */
+
+    if (fs == 0)
+    {
+	char *old_locale = setlocale (LC_CTYPE, 0);
+	if (*nmissing != 0)
+	    XFreeStringList(*missing);
+	setlocale (LC_CTYPE, "C");
+	fs = XCreateFontSet (dpy, xlfd, missing, nmissing, def_string);
+	setlocale(LC_CTYPE, old_locale);
+    }
+
+    /* make XLFD font name for pattern analysis */
+    if (fs != 0)
+    {
+	XFontStruct **fontstructs;
+	char **fontnames;
+	if (XFontsOfFontSet (fs, &fontstructs, &fontnames) > 0)
+	    xlfd = fontnames[0];
+    }
+
+    xlfd = generalize_xlfd (xlfd);
+
+    if (*nmissing != 0)
+	XFreeStringList (*missing);
+    if (fs != 0)
+	XFreeFontSet (dpy, fs);
+
+    fs = XCreateFontSet (dpy, xlfd, missing, nmissing, def_string);
+
+    free (xlfd);
+    return fs;
 }
 
 
