@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
-"POT-Creation-Date: 2002-03-02 20:19-0800\n"
-"PO-Revision-Date: 2002-03-17 15:58+0200\n"
+"POT-Creation-Date: 2002-04-21 23:09-0700\n"
+"PO-Revision-Date: 2002-04-26 21:47+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -309,6 +309,14 @@ msgstr "Lisa:"
 msgid "Edit:"
 msgstr "Muuda:"
 
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "Yes"
+msgstr "Jah"
+
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "No"
+msgstr "Ei"
+
 #. ../lisp/sawfish/gtk/widget.jl
 msgid "** unknown widget **  "
 msgstr "** tundmatu vidin **  "
@@ -382,13 +390,12 @@ msgid "Actions"
 msgstr "Tegevused"
 
 #. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match window properties"
+msgid "not"
 msgstr ""
 
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Index:"
-msgstr "Indeks:"
+#. ../lisp/sawfish/ui/widgets/match-window.jl
+msgid "Match window properties"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -400,25 +407,20 @@ msgstr "Akende vahetamine"
 msgid "Sound"
 msgstr "Heli"
 
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Edge Flipping"
-msgstr "Üle ääre hüppamine"
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Matched Windows"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Shade Hover"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Tooltips"
 msgstr "Vihjed"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Index:"
+msgstr "Indeks:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
@@ -507,16 +509,8 @@ msgid "Bindings"
 msgstr "Seosed"
 
 #. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing/Maximizing"
-msgstr "Minimeerimine/maksimeerimine"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing"
-msgstr "Minimeerimine"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Maximizing"
-msgstr "Maksimeerimine"
+msgid "Minimizing and Maximizing"
+msgstr "Minimeerimine ja maksimeerimine"
 
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Miscellaneous"
@@ -535,8 +529,8 @@ msgid "When does the mouse pointer affect the input focus."
 msgstr "Millal mõjutab hiirekursor sisestusfookust."
 
 #. ../lisp/sawfish/wm/focus.jl
-msgid "Does click-to-focus mode pass the click through to the window."
-msgstr "click-to-focus annab klõpsu aknale edasi."
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Click-to-focus annab klõpsu rakendusele edasi."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default frame style:"
@@ -547,20 +541,8 @@ msgid "Automatically reload themes when they are updated."
 msgstr "Kui teemasid uuendatakse, lae need automaatselt uuesti."
 
 #. ../lisp/sawfish/wm/frames.jl
-msgid ""
-"Frame type fallbacks:\n"
-"\n"
-"Associate frame types with type to try if the theme doesn't implement the "
-"requested type."
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Vaikimisi kirjatüüp: \\w"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Bevel intensity: \\wpercent."
-msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -695,16 +677,8 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Motion threshold for mouse pointer: \\wpixels"
-msgstr "Hiirekursori liigutuste lävi: \\wpikslit"
-
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default window manager shortcuts."
 msgstr "Aknahalduri vaikimisi kiirklahvidega kasutatavad muuteklahvid."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display key-binding information in menu items."
-msgstr "Näita klahviseoste infot menüüelementides."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -766,6 +740,7 @@ msgstr "_Üles"
 msgid "_Down"
 msgstr "_Alla"
 
+#. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Stacking"
 msgstr "Virnastamine"
@@ -877,10 +852,6 @@ msgstr "Akende paigutamise meetod: \\w"
 msgid "Method of placing dialog windows: \\w"
 msgstr "Dialoogiakende paigutamise meetod: \\w"
 
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Ignore program-specified window placements."
-msgstr "Ignoreeri programmide määratud akende paigutusi."
-
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "all"
 msgstr "kõik"
@@ -942,10 +913,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Put the window in the stacking level beneath its current level."
-msgstr ""
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Windows uniconify to the current viewport."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -1054,39 +1021,6 @@ msgstr "Liiguta aken alla"
 msgid "Move the window to the viewport below, and switch to that viewport."
 msgstr "Liiguta aken all asuvasse vaateavasse ja aktiveeri see vaateava."
 
-#. ../lisp/sawfish/wm/window-anim.jl
-msgid "The default window animation mode: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Give focus to windows even when they haven't asked for it.\n"
-"\n"
-"Windows should set the `accepts input' hint in their WM_HINTS property to "
-"show if they require the focus or not."
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Offset (%) from left window edge when warping pointer.\n"
-"\n"
-"A negative number means outside the left window edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Offset (%) from top window edge when warping pointer.\n"
-"\n"
-"A negative number means outside the top window edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Format to create unique window names.\n"
-"\n"
-"Has two arguments (NAME INDEX) applied to it."
-msgstr ""
-
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Focus desktop"
 msgstr ""
@@ -1117,42 +1051,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Force the current window to have a unique title."
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Virtual desktop configuration."
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "stop"
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "wrap-around"
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "keep-going"
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "When passing the first or last workspace: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "When passing the first or last workspace, while moving a window: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspaces are deleted when their last window closes."
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Preserve empty workspaces in pager."
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Dialogs appear on the same workspace as their application."
 msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
@@ -1284,8 +1182,7 @@ msgid ""
 "Delete the current workspace. Its member windows are relocated to the next\n"
 "workspace."
 msgstr ""
-"Aktiivne töötsoon kustutatakse, selles asuvad aknad liigutatakse "
-"järgmisse\n"
+"Aktiivne töötsoon kustutatakse, selles asuvad aknad liigutatakse järgmisse\n"
 "töötsooni."
 
 #. ../lisp/sawfish/wm/workspace.jl
@@ -1604,7 +1501,7 @@ msgid "Delete all windows in the group that the current window is a member of."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether growing an already grown window grows it again."
+msgid "Growing and packing of windows"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1615,11 +1512,11 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "maybe"
+msgid "always"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "always"
+msgid "maybe"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1640,11 +1537,30 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Whether to bump into fully obscured windows when growing or packing\n"
+"windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Whether to bump into windows on a different depth when growing or packing\n"
+"windows.\n"
+"`maybe' means only avoided windows in other depths."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into ignored windows when growing or packing."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window to the left until it `bumps into' another window."
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1652,7 +1568,9 @@ msgid "Grow window right"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window to the right until it `bumps into' another window."
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1660,7 +1578,13 @@ msgid "Grow window up"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window upwards until it `bumps into' another window."
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1668,7 +1592,9 @@ msgid "Grow window down"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window downwards until it `bumps into' another window."
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1676,7 +1602,9 @@ msgid "Pack window left"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window to the left until it `bumps into' another window."
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1684,7 +1612,9 @@ msgid "Pack window right"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window to the right until it `bumps into' another window."
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1692,7 +1622,11 @@ msgid "Pack window up"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window upwards until it `bumps into' another window."
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1700,7 +1634,43 @@ msgid "Pack window down"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window downwards until it `bumps into' another window."
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow left"
+msgstr "Kasva vasakule"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow right"
+msgstr "Kasva paremale"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow up"
+msgstr "Kasva üles"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow down"
+msgstr "Kasva alla"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Pack left"
+msgstr "vasakule"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Pack right"
+msgstr "paremale"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack down"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/help.jl
@@ -1792,26 +1762,6 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "opaque"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "box"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How windows being moved are animated: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How windows being resized are animated: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Raise windows when they are moved or resized."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Show current position of windows while moving."
 msgstr ""
 
@@ -1820,55 +1770,11 @@ msgid "Show current dimensions of windows while resizing."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "region"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "border"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "grab"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "border-grab"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How to choose window edges when resizing: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Snap window position to edges of other windows while moving."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Proximity in pixels before snapping to a window edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "magnetism"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "resistance"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "attraction"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How to snap together window edges: \\w"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Snap to otherwise-ignored windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Only update window contents after it has stopped moving."
+msgid ""
+"Distance in pixels before window edges align with each other.\n"
+"\n"
+"When moving a window, this option lets you align one of its edges with an "
+"edge of another window."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -1954,12 +1860,6 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
-msgid ""
-"Default increment for size-window commands (when the window doesn't\n"
-"specify it's own increments)."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
 msgstr ""
 
@@ -1989,10 +1889,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Decrease the size of the current window by one column."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Number of pixels to move window in `slide-' commands."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
@@ -2100,11 +1996,7 @@ msgid "Set window viewport linear"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window names while cycling through windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window icons while cycling through windows."
+msgid "Display window names and icons while cycling through windows."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -2120,22 +2012,6 @@ msgid "Include windows on all viewports when cycling."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Warp the mouse pointer to windows as they're temporarily selected."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Focus windows when they're temporarily selected during cycling."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Disable auto-raising while temporarily selecting windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "cycle-keymap"
 msgstr ""
 
@@ -2145,11 +2021,15 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Terminal"
+msgstr "Terminal"
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "The program launched by the `xterm' command."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Optional arguments given to the `xterm' command."
+msgid "Arguments given to the `xterm' command."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
@@ -2169,16 +2049,16 @@ msgid "Play sound effects for window events."
 msgstr "Mängi aknasündmustele heliefekte."
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Play sound effects for unmanaged windows."
-msgstr "Mängi heliefekte haldamata akendele."
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Event"
 msgstr "Sündmus"
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Audio file"
 msgstr "Helifail"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+msgid "Auto-Raise"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Raise windows when they are focused."
@@ -2188,9 +2068,9 @@ msgstr "Tõsta aknad fokuseerimisel."
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr "Viivitus enne akende tõstmist (millisekundites)."
 
-#. ../lisp/sawfish/wm/ext/beos-window-menu.jl
-msgid "The hierarchical window menu raises singleton submenus."
-msgstr ""
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Edge Flipping"
+msgstr "Üle ääre hüppamine"
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Select the next desktop when the pointer hits screen edge."
@@ -2212,20 +2092,12 @@ msgstr "Ekraani ääreni jõudmine valib järgmise: \\w"
 msgid "Only flip when interactively moving a window."
 msgstr "Vaheta töölauda ainult interaktiivsel akna liigutamisel."
 
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Milliseconds to delay before flipping: \\w"
-msgstr "Viivitus enne vahetamist (millisekundit): \\w"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Warp pointer to opposite screen edge when flipping."
-msgstr "Vahetamisel liiguta hiirekursor ekraani vastasserva."
-
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Error Handling"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Emit a beeping sound when errors occur."
+msgid "Beep when errors occur."
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
@@ -2241,20 +2113,20 @@ msgid "standard-error"
 msgstr "standardses veaväljundis"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Where to display error messages: \\w"
+msgid "Display error messages to: \\w"
 msgstr "Kus näidata veateateid: \\w"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "No errors."
-msgstr ""
+msgstr "Veateateid pole."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display errors"
-msgstr ""
+msgstr "Näita veateateid"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display all errors that have occurred to the screen."
-msgstr ""
+msgstr "Näita kõigi toimunud vigade kohta teateid ekraanil."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
@@ -2405,6 +2277,10 @@ msgid "Other"
 msgstr "Muu"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Shade Hover"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid ""
 "Enable shade-hover mode.\n"
 "\n"
@@ -2415,7 +2291,6 @@ msgstr ""
 msgid "Delay in milliseconds before unshading windows."
 msgstr ""
 
-#. ../lisp/sawfish/wm/state/shading.jl
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Raise windows when they are unshaded."
 msgstr ""
@@ -2425,32 +2300,8 @@ msgid "Display tooltips for window frames."
 msgstr "Näita akende raamidele vihjeid."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Remove tooltips after a period of time."
-msgstr "Eemalda vihjed mõne aja möödudes."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Show full documentation in tooltips."
 msgstr "Näita vihjetes täit dokumentatsiooni."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Mitme millisekundi möödudes vihjet näidata."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Mitme millisekundi möödudes vihje eemaldada."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Font used to display tooltips."
-msgstr "Vihjete näitamisel kasutatav kirjatüüp."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips background"
-msgstr "Vihjete taustavärv."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips foreground"
-msgstr "Vihjete tekstivärv."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _position"
@@ -2467,6 +2318,10 @@ msgstr "Jäta a_tribuudid meelde"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "_Unusta meeldejäetud olek"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "History"
+msgstr "Ajalugu"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2529,10 +2384,6 @@ msgid "_History"
 msgstr "_Ajalugu"
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "Invoke the GNOME control center from the `Customize' menu."
-msgstr ""
-
-#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "_GNOMEi abiinfo..."
 
@@ -2548,43 +2399,13 @@ msgstr "GNOMEi info..."
 msgid "Gnome menus update"
 msgstr ""
 
-#. ../lisp/sawfish/wm/placement/smart.jl
-msgid ""
-"Try to leave at least this many pixels between window edges in "
-"first/best-fit."
-msgstr ""
-
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/configure.jl
-msgid "Automatically select window gravity from position on screen."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/configure.jl
-msgid "Ignore requests from applications to change window stacking."
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/gnome.jl
 msgid "In GNOME _task list"
 msgstr "GNOME _teguminimekirjas"
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows are focused after being uniconified."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows are raised after being uniconified."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Unmanaged windows may be iconified."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows uniconify to the current workspace."
-msgstr ""
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2597,11 +2418,11 @@ msgid "group"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconifying a window also iconifies the: \\w"
+msgid "Minimizing a window also removes its: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Uniconifying a window also uniconifies the: \\w"
+msgid "Unminimizing a window also restores its: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2609,16 +2430,16 @@ msgid "Iconify window"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconify the window."
-msgstr ""
+msgid "Minimize the window."
+msgstr "Minimeeri aken."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Uniconify window"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Return the window from its iconified state."
-msgstr ""
+msgid "Restore the window from its minimized state."
+msgstr "Taasta aken minimeeritud olekust."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window iconified"
@@ -2633,8 +2454,8 @@ msgid "Iconify workspace windows"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconify all windows on the current workspace."
-msgstr ""
+msgid "Minimize all windows on the current workspace."
+msgstr "Minimeeri aktiivses töötsoonis kõik aknad."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Make window sticky"
@@ -2652,10 +2473,6 @@ msgstr ""
 msgid ""
 "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Toggle single window mode"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2725,24 +2542,6 @@ msgstr ""
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
 msgstr "_Akende nimekirjas"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Maximizing a window in one dimension must increase the size of that "
-"dimension."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Raise windows when they are maximized."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Let unmanaged windows be overlapped when filling windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Don't cover `avoided' windows when maximizing."
-msgstr ""
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Lock position and size while windows are maximized."
@@ -2862,9 +2661,17 @@ msgid ""
 "unmaximized."
 msgstr ""
 
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window fullscreen"
+msgstr "Maksimeeri aken täisekraanile"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window fullscreen toggle"
+msgstr ""
+
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
-msgstr ""
+msgstr "Keri aken kokku"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Display only the title bar of the window."
@@ -2872,7 +2679,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Unshade window"
-msgstr ""
+msgstr "Keri aken lahti"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid ""
@@ -2895,14 +2702,6 @@ msgstr "Kokku k_eritud"
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Focus on application windows when they first appear."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid "Dialog windows inherit the focus from their parent."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid "Decorate dialog windows similarly to application windows."
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/transient.jl
@@ -2938,19 +2737,7 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Windows uniconify to the current workspace when they are selected."
-msgstr ""
-
-#. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Unshade selected windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Raise selected windows (normally by the Windows menu)."
-msgstr ""
-
-#. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Warp the pointer to selected windows."
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
@@ -2967,14 +2754,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display the workspace containing the window W, then focus on W."
-msgstr ""
-
-#. ../lisp/sawfish/wm/util/groups.jl
-msgid "Group transient windows with their parents."
-msgstr ""
-
-#. ../lisp/sawfish/wm/util/groups.jl
-msgid "Persistent group ids"
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/groups.jl
@@ -3013,42 +2792,6 @@ msgstr ""
 msgid ""
 "Sends the next key event directly to the focused client window, ignoring\n"
 "any window manager bindings that it may have."
-msgstr ""
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "novice"
-msgstr "algajatele"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "intermediate"
-msgstr "edasijõudnutele"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "expert"
-msgstr "ekspertidele"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Show options suitable for \\w users."
-msgstr "Näita \\w kohaseid valikuid."
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "ok"
-msgstr "olgu"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "revert/cancel/ok"
-msgstr "taasta/loobu/olgu"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "apply/revert/cancel/ok"
-msgstr "rakenda/taasta/loobu/olgu"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Buttons shown in configurator: \\w"
-msgstr "Konfiguraatoris näidatavad nupud: \\w"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Show variable names of each customization option."
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
@@ -3283,3 +3026,69 @@ msgstr "_Sätted"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Teemad"
+
+#~ msgid "Minimizing"
+#~ msgstr "Minimeerimine"
+
+#~ msgid "Maximizing"
+#~ msgstr "Maksimeerimine"
+
+#~ msgid "Motion threshold for mouse pointer: \\wpixels"
+#~ msgstr "Hiirekursori liigutuste lävi: \\wpikslit"
+
+#~ msgid "Display key-binding information in menu items."
+#~ msgstr "Näita klahviseoste infot menüüelementides."
+
+#~ msgid "Ignore program-specified window placements."
+#~ msgstr "Ignoreeri programmide määratud akende paigutusi."
+
+#~ msgid "Play sound effects for unmanaged windows."
+#~ msgstr "Mängi heliefekte haldamata akendele."
+
+#~ msgid "Milliseconds to delay before flipping: \\w"
+#~ msgstr "Viivitus enne vahetamist (millisekundit): \\w"
+
+#~ msgid "Warp pointer to opposite screen edge when flipping."
+#~ msgstr "Vahetamisel liiguta hiirekursor ekraani vastasserva."
+
+#~ msgid "Remove tooltips after a period of time."
+#~ msgstr "Eemalda vihjed mõne aja möödudes."
+
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "Mitme millisekundi möödudes vihjet näidata."
+
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "Mitme millisekundi möödudes vihje eemaldada."
+
+#~ msgid "Font used to display tooltips."
+#~ msgstr "Vihjete näitamisel kasutatav kirjatüüp."
+
+#~ msgid "Color used for the tooltips background"
+#~ msgstr "Vihjete taustavärv."
+
+#~ msgid "Color used for the tooltips foreground"
+#~ msgstr "Vihjete tekstivärv."
+
+#~ msgid "novice"
+#~ msgstr "algajatele"
+
+#~ msgid "intermediate"
+#~ msgstr "edasijõudnutele"
+
+#~ msgid "expert"
+#~ msgstr "ekspertidele"
+
+#~ msgid "Show options suitable for \\w users."
+#~ msgstr "Näita \\w kohaseid valikuid."
+
+#~ msgid "ok"
+#~ msgstr "olgu"
+
+#~ msgid "revert/cancel/ok"
+#~ msgstr "taasta/loobu/olgu"
+
+#~ msgid "apply/revert/cancel/ok"
+#~ msgstr "rakenda/taasta/loobu/olgu"
+
+#~ msgid "Buttons shown in configurator: \\w"
+#~ msgstr "Konfiguraatoris näidatavad nupud: \\w"
