@@ -20,10 +20,13 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
+#include <alloca.h>
 
 /* Number of outstanding server grabs made; only when this is zero is
    the server ungrabbed. */
 static int server_grabs;
+
+DEFSYM(root, "root");
 
 DEFUN_INT("raise-window", Fraise_window, Sraise_window, (repv win), rep_Subr1, "f") /*
 ::doc:Sraise-window::
@@ -87,8 +90,10 @@ DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1
 delete-window WINDOW
 ::end:: */
 {
-    rep_DECLARE1(win, WINDOWP);
-    send_client_message (VWIN(win)->id, xa_wm_delete_window, last_event_time);
+    Window w = x_win_from_arg (win);
+    if (w == 0)
+	return rep_signal_arg_error (win, 1);
+    send_client_message (w, xa_wm_delete_window, last_event_time);
     return win;
 }
 
@@ -97,8 +102,12 @@ DEFUN_INT("destroy-window", Fdestroy_window, Sdestroy_window, (repv win), rep_Su
 destroy-window WINDOW
 ::end:: */
 {
-    rep_DECLARE1(win, WINDOWP);
-    XKillClient (dpy, VWIN(win)->id);
+    if (WINDOWP(win))
+	XKillClient (dpy, VWIN(win)->id);
+    else if (rep_INTP(win))
+	XDestroyWindow (dpy, rep_INT(win));
+    else
+	return rep_signal_arg_error (win, 1);
     return win;
 }
 
@@ -341,6 +350,276 @@ sync-server
     return Qt;
 }
 
+DEFUN("delete-x-property", Fdelete_x_property, Sdelete_x_property,
+      (repv win, repv atom), rep_Subr2) /*
+::doc:Sdelete-x-property::
+delete-x-property WINDOW ATOM
+::end:: */
+{
+    Window w = x_win_from_arg (win);
+    if (w == 0)
+	return rep_signal_arg_error (win, 1);
+    rep_DECLARE2(atom, rep_SYMBOLP);
+    XDeleteProperty (dpy, w,
+		     XInternAtom (dpy, rep_STR(rep_SYM(atom)->name), False));
+    return atom;
+}
+
+DEFUN("list-x-properties", Flist_x_properties, Slist_x_properties,
+      (repv win), rep_Subr1) /*
+::doc:Slist-x-properties::
+list-x-properties WINDOW
+::end:: */
+{
+    Window w;
+    Atom *atoms;
+    int count;
+    repv ret = Qnil;
+
+    w = x_win_from_arg (win);
+    if (w == 0)
+	return rep_signal_arg_error (win, 1);
+    atoms = XListProperties (dpy, w, &count);
+    if (atoms != 0)
+    {
+	char **names = alloca (sizeof (char *) * count);
+	if (XGetAtomNames (dpy, atoms, count, names) != 0)
+	{
+	    int i;
+	    for (i = 0; i < count; i++)
+	    {
+		ret = Fcons (Fintern (rep_string_dup (names[i]),
+				      rep_obarray), ret);
+		XFree (names[i]);
+	    }
+	}
+	XFree (atoms);
+    }
+    return Fnreverse (ret);
+}
+
+DEFUN("get-x-property", Fget_x_property, Sget_x_property,
+      (repv win, repv prop), rep_Subr2) /*
+::doc:Sget-x-property::
+get-x-property WINDOW PROPERTY
+::end:: */
+{
+    Window w;
+    Atom a_prop;
+    Atom type;
+    int format;
+    u_long nitems;
+    u_char *data = 0;
+    repv type_sym, ret_data = Qnil;
+
+    w = x_win_from_arg (win);
+    if (w == 0)
+	return rep_signal_arg_error (win, 1);
+    rep_DECLARE2(prop, rep_SYMBOLP);
+    a_prop = XInternAtom (dpy, rep_STR(rep_SYM(prop)->name), False);
+
+    /* First read the data.. */
+    {
+	long long_length = 32;
+	u_long bytes_after;
+	while (1)
+	{
+	    if (data != 0)
+		XFree (data);
+	    if (XGetWindowProperty (dpy, w, a_prop, 0, long_length, False,
+				    AnyPropertyType, &type, &format,
+				    &nitems, &bytes_after, &data) != Success)
+		return Qnil;
+	    if (bytes_after == 0)
+		break;
+	    long_length += (bytes_after / 4) + 1;
+	}
+    }
+
+    /* Convert the type to a symbol */
+    type_sym = x_atom_symbol (type);
+    
+    /* Then convert the contents to a vector or string */
+    switch (format)
+    {
+	/* XXX assumes 32 bit ints, 16 bit shorts.. */
+	u_short *s_data;
+	u_long *l_data;
+	int i;
+
+    case 8:
+	ret_data = rep_string_dupn (data, nitems);
+	break;
+
+    case 16:
+	ret_data = Fmake_vector (rep_MAKE_INT(nitems), Qnil);
+	s_data = (u_short *)data;
+	for (i = 0; i < nitems; i++)
+	    rep_VECTI(ret_data, i) = rep_MAKE_INT(s_data[i]);
+	break;
+
+    case 32:
+	ret_data = Fmake_vector (rep_MAKE_INT(nitems), Qnil);
+	l_data = (u_long *)data;
+	for (i = 0; i < nitems; i++)
+	{
+	    repv name;
+	    if (type == XA_ATOM && (name = x_atom_symbol (l_data[i])) != Qnil)
+		rep_VECTI(ret_data, i) = name;
+	    else
+		rep_VECTI(ret_data, i) = rep_MAKE_INT(l_data[i]);
+	}
+	break;
+    }
+    XFree (data);
+
+    return rep_list_3 (type_sym, rep_MAKE_INT(format), ret_data);
+}
+
+DEFUN("set-x-property", Fset_x_property, Sset_x_property,
+      (repv win, repv prop, repv data, repv type, repv format), rep_Subr5) /*
+::doc:Sset-x-property::
+set-x-property WINDOW PROPERTY DATA TYPE FORMAT
+::end:: */
+{
+    Window w;
+    Atom a_prop, a_type;
+    u_long nitems;
+    u_char *c_data = 0;
+
+    w = x_win_from_arg (win);
+    if (w == 0)
+	return rep_signal_arg_error (win, 1);
+    rep_DECLARE2(prop, rep_SYMBOLP);
+    a_prop = XInternAtom (dpy, rep_STR(rep_SYM(prop)->name), False);
+    rep_DECLARE(3, data, rep_VECTORP(data) || rep_STRINGP(data));
+    rep_DECLARE4(type, rep_SYMBOLP);
+    a_type = XInternAtom (dpy, rep_STR(rep_SYM(type)->name), False);
+    rep_DECLARE5(format, rep_INTP);
+
+    /* Convert to data array */
+
+    if (rep_STRINGP(data))
+	nitems = rep_STRING_LEN(data);
+    else
+	nitems = rep_VECT_LEN(data);
+
+    switch (rep_INT(format))
+    {
+	int i;
+	u_short *s_data;
+	u_long *l_data;
+
+    case 8:
+	if (rep_STRINGP(data))
+	    c_data = rep_STR (data);
+	else
+	{
+	    c_data = alloca (nitems);
+	    for (i = 0; i < nitems; i++)
+		c_data[i] = rep_STR(data)[i];
+	}
+	break;
+
+    case 16:
+	if (rep_STRINGP(data))
+	    return rep_signal_arg_error (data, 3);
+	c_data = alloca (nitems * 2);
+	s_data = (u_short *)c_data;
+	for (i = 0; i < nitems; i++)
+	    s_data[i] = rep_INT(rep_VECTI(data, i));
+	break;
+
+    case 32:
+	if (rep_STRINGP(data))
+	    return rep_signal_arg_error (data, 3);
+	c_data = alloca (nitems * 4);
+	l_data = (u_long *)c_data;
+	for (i = 0; i < nitems; i++)
+	{
+	    if (a_type == XA_ATOM && rep_SYMBOLP(rep_VECTI(data, i)))
+		l_data[i] = XInternAtom (dpy, rep_STR(rep_SYM(rep_VECTI(data, i))->name), False);
+	    else
+		l_data[i] = rep_INT(rep_VECTI(data, i));
+	}
+	break;
+    }
+
+    /* Overwrite property */
+    XChangeProperty (dpy, w, a_prop, a_type, rep_INT(format),
+		     PropModeReplace, c_data, nitems);
+    return prop;
+}
+
+DEFUN("send-client-message", Fsend_client_message, Ssend_client_message,
+      (repv win, repv atom), rep_Subr2) /*
+::doc:Ssend-client-message::
+send-client-message WINDOW ATOM
+
+Send an X ClientMessage event to WINDOW (a window object or the symbol
+`root'). It will contain the atom ATOM.
+::end:: */
+{
+    /* XXX add option to control timestamp? */
+    Window w = x_win_from_arg (win);
+    if (w == 0)
+	return rep_signal_arg_error (win, 1);
+    rep_DECLARE2(atom, rep_SYMBOLP);
+    send_client_message (w, XInternAtom (dpy, rep_STR(rep_SYM(atom)->name),
+					 False), CurrentTime);
+    return atom;
+}
+
+DEFUN("create-window", Fcreate_window, Screate_window,
+      (repv parent, repv x, repv y, repv width, repv height), rep_Subr5) /*
+::doc:Screate-window::
+create-window PARENT-WINDOW X Y WIDTH HEIGHT
+
+Create an unmapped window that is a child of PARENT-WINDOW (a window object,
+an integer window id, or the symbol `root'), with the specified dimensions.
+
+Returns the window id of the new window.
+::end:: */
+{
+    Window parent_w = x_win_from_arg (parent);
+    Window id;
+    if (parent_w == 0)
+	return rep_signal_arg_error (parent, 1);
+    rep_DECLARE2(x, rep_INTP);
+    rep_DECLARE3(y, rep_INTP);
+    rep_DECLARE4(width, rep_INTP);
+    rep_DECLARE5(height, rep_INTP);
+    id = XCreateSimpleWindow (dpy, parent_w, rep_INT(x), rep_INT(y),
+			      rep_INT(width), rep_INT(height),
+			      0, BlackPixel (dpy, screen_num),
+			      WhitePixel (dpy, screen_num));
+    return id ? rep_MAKE_INT(id) : Qnil;
+}
+
+DEFUN("x-atom", Fx_atom, Sx_atom, (repv symbol), rep_Subr1) /*
+::doc:Sx-atom::
+x-atom SYMBOL
+
+Return the integer identifying the X atom with the same name as SYMBOL.
+::end:: */
+{
+    rep_DECLARE1(symbol, rep_SYMBOLP);
+    return rep_MAKE_INT (XInternAtom (dpy, rep_STR(rep_SYM(symbol)->name),
+				      False));
+}
+
+DEFUN("x-atom-name", Fx_atom_name, Sx_atom_name, (repv atom), rep_Subr1) /*
+::doc:Sx-atom-name::
+x-atom-name ATOM
+
+Return the symbol with the same name as the X atom identified by the
+integer ATOM.
+::end:: */
+{
+    rep_DECLARE1(atom, rep_INTP);
+    return x_atom_symbol (rep_INT(atom));
+}
+
 
 /* initialisation */
 
@@ -367,4 +646,13 @@ functions_init (void)
     rep_ADD_SUBR(Sscreen_width);
     rep_ADD_SUBR(Sscreen_height);
     rep_ADD_SUBR(Ssync_server);
+    rep_ADD_SUBR(Sdelete_x_property);
+    rep_ADD_SUBR(Slist_x_properties);
+    rep_ADD_SUBR(Sget_x_property);
+    rep_ADD_SUBR(Sset_x_property);
+    rep_ADD_SUBR(Ssend_client_message);
+    rep_ADD_SUBR(Screate_window);
+    rep_ADD_SUBR(Sx_atom);
+    rep_ADD_SUBR(Sx_atom_name);
+    rep_INTERN(root);
 }
