@@ -109,7 +109,7 @@ font specifier string).
 	f->name = name;
 	f->plist = Qnil;
 	f->ascent = ascent;
-	f->descent = 0;
+	f->descent = descent;
 	if (font_set != 0)
 	    f->font.set = font_set;
 	else
