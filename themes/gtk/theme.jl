@@ -138,8 +138,7 @@
     (right-edge . 0)
     (top-edge . -21)
     (height . 21)
-    (keymap . title-keymap)
-    (cursor . hand2))
+    ,@(fp-class 'title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)
@@ -164,8 +163,7 @@
     (right-edge . 0)
     (bottom-edge . -4)
     (height . 4)
-    (keymap . title-keymap)
-    (cursor . hand2))
+    ,@(fp-class 'bottom-border))
    ;; bottom frame
    ((background . "black")
     (left-edge . 0)
@@ -176,12 +174,12 @@
    ((background . ,gtk-minimize)
     (left-edge . 4)
     (top-edge . -18)
-    (keymap . iconify-button-keymap))
+    ,@(fp-class 'iconify))
    ;; close button
    ((background . ,gtk-close)
     (right-edge . 4)
     (top-edge . -18)
-    (keymap . close-button-keymap))))
+    ,@(fp-class 'close))))
 (put 'gtk-frame 'unshaped t)
 
 (defvar gtk-shaped-frame
@@ -195,8 +193,7 @@
     (right-edge . 0)
     (top-edge . -22)
     (height . 21)
-    (keymap . title-keymap)
-    (cursor . hand2))
+    ,@(fp-class 'title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)
@@ -225,12 +222,12 @@
    ((background . ,gtk-minimize)
     (left-edge . 5)
     (top-edge . -19)
-    (keymap . iconify-button-keymap))
+    ,@(fp-class 'iconify))
    ;; close button
    ((background . ,gtk-close)
     (right-edge . 5)
     (top-edge . -19)
-    (keymap . close-button-keymap))))
+    ,@(fp-class 'close))))
 (put 'gtk-shaped-frame 'unshaped t)
 
 (defvar gtk-transient-frame
@@ -240,8 +237,7 @@
     (right-edge . 0)
     (top-edge . -4)
     (height . 4)
-    (keymap . title-keymap)
-    (cursor . hand2))
+    ,@(fp-class 'title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)
@@ -267,8 +263,7 @@
     (right-edge . 0)
     (bottom-edge . -4)
     (height . 4)
-    (keymap . title-keymap)
-    (cursor . hand2))
+    ,@(fp-class 'bottom-border))
    ;; bottom frame
    ((background . "black")
     (left-edge . 0)
@@ -284,8 +279,7 @@
     (right-edge . 0)
     (top-edge . -5)
     (height . 4)
-    (keymap . title-keymap)
-    (cursor . hand2))
+    ,@(fp-class 'title))
    ;; title frame
    ((background . "black")
     (left-edge . 0)

@@ -88,7 +88,7 @@
    ((background . ,brushed-metal-menu-images)
     (top-edge . -15)
     (left-edge . 0)
-    (keymap . menu-button-keymap))
+    ,@(fp-class 'menu))
 
    ;; title bar
    ((background . ,brushed-metal-title-images)
@@ -99,58 +99,53 @@
     (left-edge . 21)
     (right-edge . 45)
     (top-edge . -15)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'title))
 
    ;; iconify button
    ((background . ,brushed-metal-iconify-images)
     (right-edge . 28)
     (top-edge . -15)
-    (keymap . iconify-button-keymap))
+    ,@(fp-class 'iconify))
 
    ;; maximize button
    ((background . ,brushed-metal-maximize-images)
     (right-edge . 14)
     (top-edge . -15)
-    (keymap . maximize-button-keymap))
+    ,@(fp-class 'maximize))
 
    ;; delete button
    ((background . ,brushed-metal-close-images)
     (right-edge . 0)
     (top-edge . -15)
-    (keymap . close-button-keymap))
+    ,@(fp-class 'close))
 
    ;; left border
    ((background . ,brushed-metal-left-images)
     (left-edge . -4)
     (top-edge . -15)
     (bottom-edge . 0)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'left-border))
 
    ;; right border
    ((background . ,brushed-metal-right-images)
     (right-edge . -4)
     (top-edge . -15)
     (bottom-edge . 0)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'right-border))
 
    ;; top border
    ((background . ,brushed-metal-top-images)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -19)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'top-border))
 
    ;; bottom border
    ((background . ,brushed-metal-bottom-images)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'bottom-border))
 
    ;; top-left corner
    ((background . ,brushed-metal-top-left-images)
@@ -178,7 +173,7 @@
    ((background . ,brushed-metal-menu-images)
     (top-edge . -19)
     (left-edge . 0)
-    (keymap . menu-button-keymap))
+    ,@(fp-class 'menu))
 
    ;; title bar
    ((background . ,brushed-metal-title-images)
@@ -189,58 +184,53 @@
     (left-edge . 21)
     (right-edge . 45)
     (top-edge . -19)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'title))
 
    ;; iconify button
    ((background . ,brushed-metal-iconify-images)
     (right-edge . 28)
     (top-edge . -19)
-    (keymap . iconify-button-keymap))
+    ,@(fp-class 'iconify))
 
    ;; maximize button
    ((background . ,brushed-metal-maximize-images)
     (right-edge . 14)
     (top-edge . -19)
-    (keymap . maximize-button-keymap))
+    ,@(fp-class 'maximize))
 
    ;; delete button
    ((background . ,brushed-metal-close-images)
     (right-edge . 0)
     (top-edge . -19)
-    (keymap . close-button-keymap))
+    ,@(fp-class 'close))
 
    ;; top border
    ((background . ,brushed-metal-top-images)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -23)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'top-border))
 
    ;; bottom border
    ((background . ,brushed-metal-bottom-images)
     (left-edge . 0)
     (right-edge . 0)
     (top-edge . -4)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'bottom-border))
 
    ;; left border
    ((background . ,brushed-metal-left-images)
     (left-edge . -4)
     (top-edge . -19)
     (height . 15)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'left-border))
 
    ;; right border
    ((background . ,brushed-metal-right-images)
     (right-edge . -4)
     (top-edge . -19)
     (height . 15)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'right-border))
 
    ;; top-left corner
    ((background . ,brushed-metal-top-left-images)
@@ -269,32 +259,28 @@
      (left-edge . 0)
      (right-edge . 0)
      (top-edge . -4)
-     (cursor . hand2)
-     (keymap . title-keymap))
+     ,@(fp-class 'title))
 
     ;; bottom
     ((background . ,brushed-metal-bottom-images)
      (left-edge . 0)
      (right-edge . 0)
      (bottom-edge . -4)
-     (cursor . hand2)
-     (keymap . title-keymap))
+     ,@(fp-class 'bottom-border))
 
    ;; left border
    ((background . ,brushed-metal-left-images)
     (left-edge . -4)
     (top-edge . -4)
     (bottom-edge . 0)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'left-border))
 
    ;; right border
    ((background . ,brushed-metal-right-images)
     (right-edge . -4)
     (top-edge . -4)
     (bottom-edge . 0)
-    (cursor . hand2)
-    (keymap . title-keymap))
+    ,@(fp-class 'right-border))
 
    ;; top-left corner
    ((background . ,brushed-metal-top-left-images)
