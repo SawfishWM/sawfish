@@ -241,9 +241,7 @@ that overrides settings set elsewhere.")
 
 (defun custom-make-frame-style-widget (symbol value doc)
   (let
-      ((styles (find-all-frame-styles)))
-    (setq styles (sort styles #'(lambda (x y)
-				  (< (symbol-name x) (symbol-name y)))))
+      ((styles (find-all-frame-styles t)))
     `(frame-style ,styles
 		  :variable ,symbol
 		  :value ,value
@@ -276,7 +274,7 @@ that overrides settings set elsewhere.")
 	  theme-load-path)
     nil))
 
-(defun find-all-frame-styles ()
+(defun find-all-frame-styles (&optional sorted)
   (let
       (list)
     (mapc #'(lambda (dir)
@@ -288,11 +286,13 @@ that overrides settings set elsewhere.")
 			    (setq list (cons t-dir list))))
 		      (directory-files dir))))
 	  theme-load-path)
+    (when sorted
+      (setq list (sort list)))
     (mapcar 'intern list)))
 
 (defun frame-style-menu ()
   (let
-      ((styles (find-all-frame-styles)))
+      ((styles (find-all-frame-styles t)))
     (nconc (mapcar #'(lambda (s)
 		       (list (symbol-name s)
 			     `(lambda ()
