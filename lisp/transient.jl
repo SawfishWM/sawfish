@@ -30,6 +30,18 @@
 
 (defvar default-frameset fallback-frameset)
 
+(defcustom ignored-windows-re nil
+  "Regular expression matching windows to ignore."
+  :group misc
+  :type string
+  :allow-nil t)
+
+(defcustom sticky-windows-re nil
+  "Regular expression matching windows to make sticky by default."
+  :group misc
+  :type string
+  :allow-nil t)
+
 (defvar ignored-window-names nil
   "A list of regular expressions matching windows that don't get a frame.")
 
@@ -37,9 +49,11 @@
   "A list of regular expressions matching window names that exist across
 workspaces.")
 
-(defvar transients-get-focus t
-  "When non-nil, mapping a transient window whose parent is currently focused
-transfers the input focus to the transient window.")
+(defcustom transients-get-focus t
+  "Mapping a transient window whose parent is currently focused transfers
+the input focus to the transient window."
+  :group misc
+  :type boolean)
 
 (defun window-type (w)
   (if (window-transient-p w)
@@ -53,6 +67,9 @@ transfers the input focus to the transient window.")
 ;; called from the add-window-hook
 (defun transient-add-window (w)
   (when (catch 'foo
+	  (when (and ignored-windows-re
+		     (string-match ignored-windows-re (window-name w)))
+	    (throw 'foo t))
 	  (mapc #'(lambda (r)
 		    (when (string-match r (window-name w))
 		      (throw 'foo t))) ignored-window-names)
@@ -60,6 +77,9 @@ transfers the input focus to the transient window.")
     (window-put w 'ignored t)
     (set-window-frame w 'nil-frame))
   (when (catch 'foo
+	  (when (and sticky-windows-re
+		     (string-match sticky-windows-re (window-name w)))
+	    (throw 'foo t))
 	  (mapc #'(lambda (r)
 		    (when (string-match r (window-name w))
 		      (throw 'foo t))) sticky-window-names)

@@ -22,13 +22,20 @@
 (require 'timers)
 (provide 'auto-raise)
 
-(defvar raise-windows-on-focus t
-  "When non-nil, windows are raised after receiving focus. If a string,
-windows are only raised if their name matches this regular expression.")
+;;;###autoload (setq custom-required (cons 'auto-raise custom-required))
 
-(defvar raise-window-timeout 500
-  "Time in milliseconds until windows are raised if raise-windows-on-focus
-is set.")
+;; if a string, windows are only raised if their name matches this
+;; regular expression.
+(defcustom raise-windows-on-focus nil
+  "Raise windows when they get the keyboard focus."
+  :type boolean
+  :require auto-raise
+  :group focus)
+
+(defcustom raise-window-timeout 500
+  "Delay in milliseconds until focused windows are raised."
+  :type number
+  :group focus)
 
 (defvar rw-timer nil)
 (defvar rw-window nil)

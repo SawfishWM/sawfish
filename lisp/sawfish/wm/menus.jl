@@ -24,13 +24,20 @@
 ;; Suppress annoying compiler warnings
 (eval-when-compile (require 'timers))
 
-(defvar menu-program "sawmill-ui"
-  "Name of the program implementing sawmill's high-level user-interface.")
+;;;###autoload (setq custom-required (cons 'menu custom-required))
 
-(defvar menu-program-stays-running 60
+(defcustom menu-program "sawmill-menu"
+  "Location of the program implementing sawmill's menu interface."
+  :type program-name
+  :group menus)
+
+(defcustom menu-program-stays-running 60
   "When non-nil, the user-interface program is never stopped. If a number,
 then this is taken as the number of seconds to let the process hang around
-unused before killing it.")
+unused before killing it."
+  :type number
+  :group menus
+  :allow-nil t)
 
 ;; the active user interface process
 (defvar menu-process nil)
@@ -62,6 +69,7 @@ unused before killing it.")
   '(("Workspaces" . workspace-menu)
     ("Windows" . window-menu)
     (apps-menu)
+    ("Customize" customize)
     ()
     ("Restart" restart)
     ("Quit" quit)))

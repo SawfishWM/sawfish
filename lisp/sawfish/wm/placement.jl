@@ -21,11 +21,15 @@
 
 (provide 'place-window)
 
-(defvar place-window-mode 'random
-  "Method of selecting the position of a freshly-mapped window.")
+(defcustom place-window-mode 'random
+  "Method of selecting the position of a freshly-mapped window."
+  :type (set random interactive smart)
+  :group placement)
 
-(defvar ignore-program-positions nil
-  "When non-nil the PPosition size hint is ignored.")
+(defcustom ignore-program-positions nil
+  "Ignore program-specified window positions."
+  :type boolean
+  :group placement)
 
 ;; called from the place-window-hook
 (defun place-window (w)

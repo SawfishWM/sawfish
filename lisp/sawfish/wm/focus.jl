@@ -21,10 +21,11 @@
 
 (provide 'focus)
 
-(defvar sloppy-focus nil
-  "When non-nil, and the usual focus-follows-mouse behaviour is in use, the
-focus is only changed when a top-level window is entered, never when the
-root window is entered.")
+(defcustom sloppy-focus nil
+  "Focus is only changed when a top-level window is entered, never when the
+root window is entered."
+  :type boolean
+  :group focus)
 
 (defun focus-enter-fun (w)
   (if (eq w 'root)

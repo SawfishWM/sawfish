@@ -25,15 +25,22 @@
 ;;  * obey the aspect ratio size hints
 ;;  * resize has truly bizarre behaviour
 
-(defvar move-outline-mode 'opaque
-  "The method of drawing windows being moved interactively.")
+;;;###autoload (setq custom-required (cons 'move-resize custom-required))
 
-(defvar resize-outline-mode 'opaque
-  "The method of drawing windows being resized interactively.")
+(defcustom move-outline-mode 'opaque
+  "The method of drawing windows being moved interactively."
+  :type (set opaque box)
+  :group move)
 
-(defvar move-resize-raise-window nil
-  "When non-nil, any window being moved or resized interactively is first
-raised to the top of the display stack.")
+(defcustom resize-outline-mode 'opaque
+  "The method of drawing windows being resized interactively."
+  :type (set opaque box)
+  :group move)
+
+(defcustom move-resize-raise-window nil
+  "Raise windows being moved or resized interactively."
+  :group move
+  :type boolean)
 
 (defvar move-resize-map (bind-keys (make-sparse-keymap)
 			  "Any-PointerUp" 'move-resize-finished
