@@ -64,12 +64,6 @@
   :after-set (lambda ()
 	       (call-hook 'workspace-state-change-hook)))
 
-(defcustom workspace-columns 2
-  "Number of workspaces in a conceptual row."
-  :type number
-  :range (1 . nil)
-  :group workspace)
-
 (defcustom uniconify-to-current-workspace t
   "Windows are uniconified onto the current workspace."
   :type boolean
@@ -520,16 +514,6 @@ previous workspace."
   (interactive)
   (ws-move-workspace current-workspace (- (or count 1))))
 
-(defun next-workspace-row (count)
-  "Move to the next workspace row."
-  (interactive "p")
-  (next-workspace (* count workspace-columns)))
-    
-(defun previous-workspace-row (count)
-  "Move to the previous workspace row."
-  (interactive "p")
-  (previous-workspace (* count workspace-columns)))
-
 (defun select-workspace-from-first (count)
   (let
       ((limits (ws-workspace-limits)))
@@ -619,9 +603,11 @@ all workspaces."
   (if (window-get w 'sticky)
       (progn
 	(window-put w 'sticky nil)
+	(window-put w 'fixed-position nil)
 	(ws-add-window w))
     (ws-remove-window w t)
-    (window-put w 'sticky t))
+    (window-put w 'sticky t)
+    (window-put w 'fixed-position t))
   (call-window-hook 'window-state-change-hook w))
 
 (defun ws-client-msg-handler (w atom data)
