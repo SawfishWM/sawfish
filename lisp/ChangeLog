@@ -1,5 +1,11 @@
 2000-11-27  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/state/wm-spec.jl: removed the evil hardcoded list
+	of properties in update-client-state by a `get' method in each
+	state function. Also added a PSEUDO keyword arg to
+	define-wm-spec-window-state for properties that should be not
+	set in the _NET_WM_STATE property
+
 	* sawfish/wm/ext/window-history.jl: save and restore
 	`maximized' state of windows. Fixes #4790
 
@@ -21,7 +27,7 @@
 	(remove-message): new function
 
 	The above two changes from a patch by Unai Uribarri
-	<unaiur@telecable.es>, with minor changes
+	<unaiur@telecable.es>, with minor changes. Fixes #4265
 
 	* sawfish/wm/frames.jl, sawfish/wm/workspace.jl,
 	sawfish/wm/ext/audio-events.jl, sawfish/wm/util/groups.jl:

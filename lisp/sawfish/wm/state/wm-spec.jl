@@ -40,6 +40,10 @@
   ;; - _NET_WM_STRUT
   ;; - _NET_WM_ICON
 
+  ;; maybe add some state extensions for things the spec doesn't
+  ;; cover but existed in the old GNOME spec; e.g. _GNOME_WM_STATE_FOO
+  ;; for FOO being DO_NOT_COVER, SKIP_FOCUS, ..?
+
 
 ;;; constants
 
@@ -177,20 +181,14 @@
 
 ;;; setting the window state hints
 
-  ;; XXX this shouldn't hard code the supported states
   (define (update-client-state w)
-    (let ((state (filter (lambda (x) (not (memq x supported-states)))
+    (let ((state (filter (lambda (x) (not (supported-state-p x)))
 			 (window-get w 'wm-spec-last-states))))
-      (when (window-get w 'sticky-viewport)
-	(setq state (cons '_NET_WM_STATE_STICKY state)))
-      (when (window-get w 'shaded)
-	(setq state (cons '_NET_WM_STATE_SHADED state)))
-      (when (window-maximized-vertically-p w)
-	(setq state (cons '_NET_WM_STATE_MAXIMIZED_VERT state)))
-      (when (window-maximized-horizontally-p w)
-	(setq state (cons '_NET_WM_STATE_MAXIMIZED_HORIZ state)))
-      (when (window-get w 'window-list-skip)
-	(setq state (cons '_NET_WM_STATE_SKIP_PAGER state)))
+      (mapc (lambda (x)
+	      (when (and (not (pseudo-state-p x))
+			 (call-state-fun w x 'get))
+		(setq state (cons x state))))
+	    supported-states)
       (set-x-property w '_NET_WM_STATE (apply vector state) 'ATOM 32)
       (window-put w 'wm-spec-last-states state)))
 
@@ -250,12 +248,15 @@
 
   (define (define-wm-spec-window-type x fun) (put x 'wm-spec-type fun))
 
-  (define (define-wm-spec-window-state x fun)
-    (put x 'wm-spec-type fun)
+  (define (define-wm-spec-window-state x fun #!key pseudo)
+    (put x 'wm-spec-state fun)
     (unless (memq x supported-states)
-      (setq supported-states (cons x supported-states))))
+      (setq supported-states (cons x supported-states)))
+    (when pseudo
+      (put x 'wm-spec-pseudo-state t)))
 
   (define (supported-state-p x) (get x 'wm-spec-state))
+  (define (pseudo-state-p x) (get x 'wm-spec-pseudo-state))
 
   (define (call-state-fun w state mode)
     (let ((fun (get state 'wm-spec-state)))
@@ -288,17 +289,14 @@
    (lambda (w mode)
      (require 'sawfish.wm.state.iconify)
      (case mode
-       ((init)
-	(window-put w 'sticky-viewport t))
-       ((remove)
-	(window-put w 'sticky-viewport nil))
-       ((add)
-	(window-put w 'sticky-viewport t))
-       ((toggle)
-	(window-put w 'sticky-viewport
-		    (not (window-get w 'sticky-viewport)))))
-     (unless (memq mode '(init pred))
-       (call-window-hook w 'window-state-change-hook (list '(sticky))))))
+       ((init)   (window-put w 'sticky-viewport t))
+       ((remove) (window-put w 'sticky-viewport nil))
+       ((add)    (window-put w 'sticky-viewport t))
+       ((toggle) (window-put w 'sticky-viewport
+			     (not (window-get w 'sticky-viewport))))
+       ((get)    (window-get w 'sticky-viewport)))
+     (unless (memq mode '(init get))
+       (call-window-hook 'window-state-change-hook w (list '(sticky))))))
 
   (define (wm-spec-maximize-handler direction)
     (lambda (w mode)
@@ -308,42 +306,42 @@
 	 (window-put w (if (eq direction 'vertical)
 			   'queued-vertical-maximize
 			 'queued-horizontal-maximize) t))
-	((remove)
-	 (unmaximize-window w direction))
-	((add)
-	 (maximize-window w direction))
-	((toggle)
-	 (maximize-window-toggle w direction)))))
+	((remove) (unmaximize-window w direction))
+	((add)    (maximize-window w direction))
+	((toggle) (maximize-window-toggle w direction))
+	((get)    (case direction
+		    ((vertical) (window-maximized-vertically-p w))
+		    ((horizontal) (window-maximized-horizontally-p w))
+		    (t (window-maximized-p w)))))))
 
   (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED_VERT
 			       (wm-spec-maximize-handler 'vertical))
   (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED_HORIZ
 			       (wm-spec-maximize-handler 'horizontal))
   (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED
-			       (wm-spec-maximize-handler nil))
+			       (wm-spec-maximize-handler nil)
+			       #:pseudo t)
 
   (define-wm-spec-window-state
    '_NET_WM_STATE_SHADED
    (lambda (w mode)
      (require 'sawfish.wm.state.shading)
      (case mode
-       ((init)
-	(window-put w 'shaded t))
-       ((add)
-	(shade-window w))
-       ((remove)
-	(unshade-window w))
-       ((toggle)
-	(toggle-window-shaded w)))))
+       ((init)   (window-put w 'shaded t))
+       ((add)    (shade-window w))
+       ((remove) (unshade-window w))
+       ((toggle) (toggle-window-shaded w))
+       ((get)    (window-get w 'shaded)))))
 
   (define-wm-spec-window-state
    '_NET_WM_STATE_SKIP_PAGER
    (lambda (w mode)
      (case mode
        ((init add) (window-put w 'window-list-skip t))
-       ((remove) (window-put w 'window-list-skip nil))
-       ((toggle) (window-put w 'window-list-skip
-			     (not (window-get w 'window-list-skip)))))))
+       ((remove)   (window-put w 'window-list-skip nil))
+       ((toggle)   (window-put w 'window-list-skip
+			       (not (window-get w 'window-list-skip))))
+       ((get)      (window-get w 'window-list-skip)))))
 
 
 ;;; client messages
