@@ -428,12 +428,13 @@
     ;; workspace is now empty
     (let*
 	((limits (workspace-limits))
-	 (need-to-move (and (= current-workspace (cdr limits))
-			    (/= current-workspace (car limits)))))
+	 (need-to-move (and (= space current-workspace)
+			    (/= space (car limits))
+			    (= space (cdr limits)))))
       (ws-remove-workspace space)
+      (ws-normalize-indices)
       (when need-to-move
-	(select-workspace (1- current-workspace)))
-      (ws-normalize-indices))))
+	(select-workspace (1- current-workspace))))))
 
 ;; called when window W is destroyed
 (defun ws-remove-window (w &optional dont-hide)
@@ -448,8 +449,7 @@
     (call-hook 'workspace-state-change-hook)))
 
 ;; move window W from workspace id OLD to workspace NEW
-;; this _must_ take the same parameters as ws-copy-window!
-(defun ws-move-window (w old new &optional was-focused dont-hide)
+(defun ws-move-window (w old new &optional was-focused)
   (or (window-in-workspace-p w old)
       (error
        "ws-move-window--window isn't in original workspace: %s, %s" w old))
@@ -461,7 +461,7 @@
 				   (if (= space old)
 				       new
 				     space)) w)
-    (cond ((and (not dont-hide) (= old current-workspace))
+    (cond ((= old current-workspace)
 	   (hide-window w))
 	  ((and (= new current-workspace) (not (window-get w 'iconified)))
 	   (show-window w))))
@@ -472,7 +472,6 @@
   (call-hook 'workspace-state-change-hook))
 
 ;; arrange it so that window W appears on both OLD and NEW workspaces
-;; this _must_ take the same parameters as ws-move-window!
 (defun ws-copy-window (w old new &optional was-focused)
   (or (window-in-workspace-p w old)
       (error
@@ -685,9 +684,11 @@ will be created."
 						 current-workspace
 					       (car (window-workspaces w)))))
 			      (when orig-space
-				((if copy ws-copy-window ws-move-window)
-				 w orig-space space was-focused t)
-				(select-workspace space was-focused))))
+				(ws-copy-window w orig-space space was-focused)
+				(select-workspace space was-focused)
+				(unless copy
+				  (ws-move-window
+				   w orig-space space was-focused)))))
 			  count workspace-send-boundary-mode))
 
 (defun send-to-previous-workspace (w count &optional copy)
@@ -769,16 +770,19 @@ previous workspace."
       ((first (car (workspace-limits))))
     (select-workspace (+ count first))))
 
-(defun send-window-to-workspace-from-first (w count)
-  (let
+(defun send-window-to-workspace-from-first (w count &optional copy)
+  (let*
       ((first (car (workspace-limits)))
        (was-focused (eq (input-focus) w))
        (orig-space (if (window-in-workspace-p w current-workspace)
 		       current-workspace
-		     (car (window-workspaces w)))))
+		     (car (window-workspaces w))))
+       (new-space (+ count first)))
     (when orig-space
-      (select-workspace (+ count first) was-focused)
-      (ws-move-window w orig-space current-workspace was-focused))))
+      (ws-copy-window w orig-space new-space was-focused)
+      (select-workspace new-space was-focused)
+      (unless copy
+	(ws-move-window w orig-space new-space was-focused)))))
 
 (defun delete-empty-workspaces ()
   "Delete any workspaces that don't contain any windows."
@@ -828,7 +832,11 @@ instance remaining, then delete the actual window."
 	  (define-value (fn "send-to-workspace")
 			(lambda (w)
 			  (interactive "%W")
-			  (send-window-to-workspace-from-first w index))))))
+			  (send-window-to-workspace-from-first w index)))
+	  (define-value (fn "copy-to-workspace")
+			(lambda (w)
+			  (interactive "%W")
+			  (send-window-to-workspace-from-first w index t))))))
      (i 0))
   (while (< i 9)
     (define-commands i)
