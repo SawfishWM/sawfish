@@ -102,14 +102,15 @@ this mode. The single argument is the window to be placed."
 		   (not ignore-program-positions)
 		   (cdr (assq 'program-position hints))
 		   (or (window-get w 'ignored)
-		       (acceptable-placement w (window-position w)))))
+		       (acceptable-placement w (window-position w))))
+	      (window-get w 'fixed-position))
 	  (adjust-window-for-gravity w (window-gravity w))
 	(let ((mode (or (window-get w 'place-mode)
 			(if (window-transient-p w)
 			    place-transient-mode
 			  place-window-mode))))
-	  ((or (placement-mode mode) place-window-randomly) w)
-	  t))))
+	  ((or (placement-mode mode) place-window-randomly) w)))
+      t))
 
   (define (unplace-window w)
     (adjust-window-for-gravity w (window-gravity w) t))
