@@ -86,6 +86,11 @@
   :type boolean
   :group maximize)
 
+(defcustom move-resize-inhibit-configure nil
+  "Only redraw window contents after the move/resize has finished."
+  :type boolean
+  :group (move advanced))
+
 (defvar move-resize-map (bind-keys (make-keymap)
 			  "Any-Off" 'move-resize-finished
 			  "Any-Move" 'move-resize-motion
@@ -184,7 +189,7 @@
        (move-resize-directions move-resize-directions)
        (frame-draw-mutex (not (eq move-resize-mode 'opaque)))
        (frame-state-mutex 'clicked)
-       (synthetic-configure-mutex t)
+       (synthetic-configure-mutex move-resize-inhibit-configure)
        server-grabbed)
     (when (and move-resize-raise-window (eq move-resize-mode 'opaque))
       ;; only raise window initially if the display will get updated
