@@ -1,5 +1,19 @@
 2000-02-20  John Harper  <john@dcs.warwick.ac.uk>
 
+	* configure.jl (configure-request-handler): avoid
+	divide-by-zero errors
+
+	* edges.jl (edges-within-epsilon): support three modes of
+	snapping now: `magnetism' (snap in and out), `resistance' (snap
+	inwards), and `attraction' (snap outwards)
+	(snap-window-position-to-edges): two extra parameters, the
+	snapping mode, and the move deltas since the last call
+
+	* move-resize.jl (move-snap-mode): new option
+	(move-resize-motion): handle the new snapping methods,
+	including saving the previous pointer position
+	(move-resize-pos): removed this function
+
 	* sawmill.jl: changed the load order (again). Load all
 	libraries _before_ loading autoloads now
 
