@@ -641,7 +641,7 @@ interpreted based on the value of the string TYPE.
     for (f = font_list; f != NULL; f = f->next)
     {
 	if (strcmp (rep_STR(name), rep_STR(f->name)) == 0
-	    && strcmp (rep_STR (type), rep_STR (f->name)) == 0)
+	    && strcmp (rep_STR (type), rep_STR (f->type)) == 0)
 	{
 	    return rep_VAL (f);
 	}
