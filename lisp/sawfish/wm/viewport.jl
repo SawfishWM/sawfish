@@ -177,6 +177,23 @@
 
 ;; commands
 
+(defun activate-viewport (x y)
+  "Select the specified viewport."
+  (interactive "NX:\nNY:")
+  (set-screen-viewport (1- x) (1- y)))
+
+(define-command-args 'activate-viewport '(and (labelled "X:" (number 1))
+					      (labelled "Y:" (number 1))))
+
+(defun move-window-to-viewport (x y)
+  "Move the current window to the specified viewport."
+  (interactive "NX:\nNY:")
+  (move-window-viewport (current-event-window) x y))
+
+(define-command-args 'move-window-to-viewport
+		     '(and (labelled "X:" (number 1))
+			   (labelled "Y:" (number 1))))
+
 (defun move-viewport-right ()
   "Move the viewport one screen to the right."
   (interactive)
