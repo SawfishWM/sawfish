@@ -159,12 +159,14 @@ sawmill_revert (void)
 static void
 sawmill_ok (void)
 {
+    gtk_container_remove (GTK_CONTAINER (capplet), ui_socket);
     ui_command ("ok\n");
 }
 
 static void
 sawmill_cancel (void)
 {
+    gtk_container_remove (GTK_CONTAINER (capplet), ui_socket);
     ui_command ("cancel\n");
 }
 
