@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.48 1999/12/12 11:55:00 john Exp $
+;; $Id: sawmill-ui.jl,v 1.49 2000/01/11 18:40:21 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -94,6 +94,8 @@ exec rep "$0" "$@"
 (defvar ui-color-preview-width 28)
 (defvar ui-color-preview-height 16)
 
+(defvar ui-hack-activate-tree nil)
+
 
 ;; wm communication
 
@@ -125,6 +127,8 @@ exec rep "$0" "$@"
 
 ;; elements may be:
 
+;; (tree . SUBTREE)
+;;   SUBTREE -> (NAME ELEMENT (SUBTREES...))
 ;; (pages (LABEL ELEMENT)...)
 ;; (hbox ELEMENTS...)
 ;; (vbox ELEMENTS...)
@@ -173,11 +177,57 @@ exec rep "$0" "$@"
       (nconc spec (list key value)))))
 
 (defun build-ui (spec)
+  (if (null spec)
+      (gtk-label-new "[empty]")
+    (let
+	((fun (get (car spec) 'builder)))
+      (if fun
+	  (fun spec)
+	(error "Unknown ui element: %S" spec)))))
+
+(defun build-tree (spec)
   (let
-      ((fun (get (car spec) 'builder)))
-    (if fun
-	(fun spec)
-      (error "Unknown ui element: %S" spec))))
+      ((hbox (gtk-hpaned-new))
+       (tree (gtk-tree-new))
+       (frame (gtk-frame-new)))
+    (gtk-container-border-width hbox ui-box-border)
+    (gtk-paned-add1 hbox tree)
+    (gtk-paned-add2 hbox frame)
+    (gtk-tree-set-selection-mode tree 'browse)
+    (setq spec (nconc spec (list ':tree tree
+				 ':frame frame)))
+    (letrec
+	((iterator
+	  (lambda (tree tree-widget)
+	    (let
+		((item (gtk-tree-item-new-with-label (nth 0 tree)))
+		 (widget (build-ui (nth 1 tree))))
+	      (gtk-tree-append tree-widget item)
+	      (gtk-widget-show-all item)
+	      (gtk-container-add hbox widget)
+	      (gtk-signal-connect
+	       item "select"
+	       (lambda ()
+		 (mapc (lambda (w)
+			 (gtk-container-remove frame w))
+		       (gtk-container-children frame))
+		 (gtk-widget-show-all widget)
+		 (gtk-container-add frame widget)))
+	      (when (nth 2 tree)
+		(let
+		    ((subtree (gtk-tree-new)))
+		  (gtk-tree-set-selection-mode subtree 'browse)
+		  (gtk-tree-item-set-subtree item subtree)
+		  (mapc (lambda (x)
+			  (iterator x subtree)) (nth 2 tree))))))))
+      (iterator (cdr spec) tree))
+    (gtk-widget-show-all hbox)
+    (let
+	((tem (car (gtk-container-children tree))))
+      (gtk-tree-item-expand tem)
+      (setq ui-hack-activate-tree tem))
+    hbox))
+(put 'tree 'builder build-tree)
 
 (defun build-pages (spec)
   (cond ((eq ui-pages-style 'notebook)
@@ -595,7 +645,7 @@ exec rep "$0" "$@"
     (gtk-clist-set-column-auto-resize clist 1 t)
     (gtk-clist-set-selection-mode clist 'browse)
     (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
-    (gtk-widget-set-usize scroller 200 100)
+    (gtk-widget-set-usize scroller 300 150)
     (gtk-container-add hbox scroller)
     (gtk-box-pack-end hbox vbox)
     (gtk-container-add scroller clist)
@@ -723,7 +773,7 @@ exec rep "$0" "$@"
 
     ;; 1. the key and command editing widget
     (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
-    (gtk-widget-set-usize scroller 200 100)
+    (gtk-widget-set-usize scroller 300 150)
     (gtk-container-add scroller cmd-clist)
     (gtk-clist-set-column-auto-resize cmd-clist 0 t)
     ;(gtk-clist-set-selection-mode cmd-clist 'browse)
@@ -749,7 +799,7 @@ exec rep "$0" "$@"
     (gtk-scrolled-window-set-policy scroller-2 'automatic 'automatic)
     (gtk-clist-set-column-auto-resize map-clist 0 t)
     (gtk-clist-set-selection-mode map-clist 'browse)
-    (gtk-widget-set-usize scroller-2 100 100)
+    (gtk-widget-set-usize scroller-2 150 150)
     (gtk-container-add scroller-2 map-clist)
     (gtk-container-add hbox-1 scroller-2)
     (gtk-container-add hbox-1 vbox-2)
@@ -1325,6 +1375,8 @@ exec rep "$0" "$@"
        (hbox (gtk-hbutton-box-new))
        ui-ok-widget ui-apply-widget ui-revert-widget refresh cancel)
     (gtk-window-set-policy ui-window nil t nil)
+    (when (and (not ui-socket-id) (eq ui-group t))
+      (gtk-widget-set-usize ui-window 600 500))
     (unless ui-socket-id
       (setq ui-ok-widget (gtk-button-new-with-label (_ "OK")))
       (setq ui-apply-widget (gtk-button-new-with-label (_ "Try")))
@@ -1358,6 +1410,8 @@ exec rep "$0" "$@"
     (gtk-container-add vbox ui-root)
     (ui-set-button-states)
     (gtk-widget-show-all ui-window)
+    (when ui-hack-activate-tree
+      (gtk-tree-item-select ui-hack-activate-tree))
     (while ui-window
       (gtk-main))))
 
@@ -1586,7 +1640,7 @@ exec rep "$0" "$@"
 (let
     (tem)
   (when (setq tem (get-command-line-option "--group" t))
-    (setq ui-group (intern tem)))
+    (setq ui-group (read-from-string tem)))
   (when (get-command-line-option "--notebook")
     (setq ui-pages-style 'notebook))
   (when (setq tem (get-command-line-option "--socket-id" t))
