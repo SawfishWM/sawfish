@@ -57,6 +57,12 @@ a window."
   :group bindings
   :type keymap)
 
+(defcustom border-keymap (make-keymap)
+  "Keymap containing bindings active when the pointer is in the border of
+a window."
+  :group bindings
+  :type keymap)
+
 (defcustom close-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the close button
 of a window."
@@ -99,6 +105,11 @@ of a window."
     "Button1-Move" 'move-window-interactively
     "Button2-Move" 'resize-window-interactively
     "Button1-Click2" 'toggle-window-shaded)
+
+  (bind-keys border-keymap
+    "Button3-Off" 'raise-lower-window
+    "Button2-Move" 'move-window-interactively
+    "Button1-Move" 'resize-window-interactively)
 
   (bind-keys window-keymap
     "C-M-Up" 'raise-window
