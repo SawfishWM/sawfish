@@ -1,5 +1,7 @@
 2000-09-01  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawfish/wm/defaults.jl: aliased to sawmill-defaults
+
 	* sawfish/wm/keymaps.jl (pointer-motion-threshold): declare
 	this built-in customization option
 
@@ -20,7 +22,7 @@
 	sawfish/wm/frames.jl, sawfish/wm/util/groups.jl: use closures
 	instead of bare code in menu items
 
-2000-08-30    <john@dcs.warwick.ac.uk>
+2000-08-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	Some work to help the desktop-in-a-window approach work
 	properly, as used by nautilus:
@@ -45,7 +47,7 @@
 	* sawfish/wm/commands/x-cycle.jl (next): don't include windows
 	that are desktop-window-p in the list to be selected from
 
-2000-08-29    <john@dcs.warwick.ac.uk>
+2000-08-29  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/placement.jl (adjust-window-for-gravity): new
 	optional arg UNADJUST, passed to adjust-position-for-gravity
@@ -75,7 +77,7 @@
 
 	Changed all callers.
 
-2000-08-26    <john@dcs.warwick.ac.uk>
+2000-08-26  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/misc.jl (current-head-dimensions): if no current
 	head, return (screen-dimensions)
