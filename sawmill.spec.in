@@ -37,7 +37,7 @@ center applet
 %setup
 
 %build
-./configure --enable-capplet --prefix %{_prefix} %{_host}
+./configure --enable-capplet --with-readline --prefix %{_prefix} %{_host}
 make CFLAGS="$RPM_OPT_FLAGS"
 
 %install
