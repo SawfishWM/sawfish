@@ -833,6 +833,18 @@ Return t if WINDOW is currently visible (i.e. not hidden, see `hide-window').
     return VWIN(win)->visible ? Qt : Qnil;
 }
 
+DEFUN("window-framed-p", Fwindow_framed_p, Swindow_framed_p,
+      (repv win), rep_Subr1) /*
+::doc:Swindow-framed-p::
+window-framed-p WINDOW
+
+Return t if WINDOW has been reparented to a frame window.
+::end:: */
+{
+    rep_DECLARE1(win, WINDOWP);
+    return VWIN(win)->reparented ? Qt : Qnil;
+}
+
 DEFUN("window-id", Fwindow_id, Swindow_id, (repv win), rep_Subr1) /*
 ::doc:Swindow-id::
 window-id WINDOW
@@ -1085,6 +1097,7 @@ windows_init (void)
     rep_ADD_SUBR(Shide_window);
     rep_ADD_SUBR(Sshow_window);
     rep_ADD_SUBR(Swindow_visible_p);
+    rep_ADD_SUBR(Swindow_framed_p);
     rep_ADD_SUBR(Swindow_id);
     rep_ADD_SUBR(Swindow_group_id);
     rep_ADD_SUBR(Swindow_size_hints);
