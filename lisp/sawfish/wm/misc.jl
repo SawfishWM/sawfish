@@ -68,6 +68,12 @@ to grab the keyboard then THUNK won't be called."
       (when (zerop (setq grab-counter (1- grab-counter)))
 	(ungrab-keyboard)))))
 
+(define (call-with-error-handler thunk)
+  (condition-case data
+      (thunk)
+    (error
+     (error-handler-function (car data) (cdr data)))))
+
 (define (make-directory-recursively dir)
   "Try to create dir and all nonexistent parent dirs (like mkdir -p)."
   (while (not (file-exists-p dir))
@@ -163,7 +169,7 @@ the label of a menu item."
 ;; exports
 
 (export-bindings '(with-server-grabbed call-with-server-ungrabbed
-		   call-with-keyboard-grabbed
+		   call-with-keyboard-grabbed call-with-error-handler
 		   make-directory-recursively locate-file
 		   clamp clamp* uniquify-list screen-dimensions
 		   pointer-head current-head current-head-dimensions
