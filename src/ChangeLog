@@ -1,3 +1,11 @@
+2000-04-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* images.c (find_image_file): use global_symbol_value () to
+	dereference Qimage_load_path (it's not in the theme's gaol)
+
+	* main.c (global_symbol_value): new function, calls
+	Fsymbol_value () from the `sawmill' module
+
 2000-04-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-menu.jl: added support for menu accelerators flagged

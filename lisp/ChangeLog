@@ -1,4 +1,19 @@
+2000-04-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-gaol.jl (sawmill-safe-functions): added
+	custom-option-alist and custom-group-option-alist
+
+	* custom.jl (custom-groups, custom-required,
+	custom-quoted-keys, custom-option-alist,
+	custom-group-option-alist): these are now lexically bound
+
 2000-04-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* play-audio.jl (play-sample): run audio playing programs
+	asynchronously so they can't block the wm
+
+	* menus.jl (popup-menu): only set the frame-draw-mutex if
+	there's a clicked frame part. This is still a kludge..
 
 	* menus.jl: added some underscores marking menu accelerators
 
