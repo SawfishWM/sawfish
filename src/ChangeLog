@@ -1,3 +1,15 @@
+2000-02-15  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (install_colormaps): new function, install all
+	colormaps associated with a given window (including colormaps
+	of it's associated windows)
+	(property_notify): watch for WM_COLORMAP_WINDOWS changing
+
+	* sawmill.h (Lisp_Window): added cmap_windows and
+	n_cmap_windows fields
+	* windows.c (add_window): initialise cmap_windows fields
+	(window_sweep): free cmap_windows
+
 2000-02-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.24
