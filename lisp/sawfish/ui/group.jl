@@ -40,7 +40,7 @@
 	    redisplay-group)
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.system
 	  rep.data.records
 	  rep.data.tables

@@ -26,8 +26,8 @@
 (define-structure sawfish.ui.widgets.icon ()
 
     (open rep
-	  gui.gtk
-	  gui.gnome.ui
+	  gui.gtk-2.gtk
+	  gui.gtk-2.gnome-ui
 	  rep.io.files
 	  sawfish.gtk.widget)
 

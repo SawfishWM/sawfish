@@ -24,7 +24,7 @@
 (define-structure sawfish.ui.widgets.match-window ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.regexp
 	  sawfish.gtk.widget
 	  sawfish.gtk.stock

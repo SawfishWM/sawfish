@@ -24,7 +24,7 @@
 (define-structure sawfish.ui.widgets.command ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.regexp
 	  sawfish.gtk.widget
 	  sawfish.ui.user-level

@@ -32,7 +32,7 @@
     (open rep
 	  rep.system
 	  rep.data.tables
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  sawfish.gtk.widget
 	  sawfish.gtk.stock
 	  sawfish.ui.slot

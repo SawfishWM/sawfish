@@ -24,7 +24,7 @@
 (define-structure sawfish.ui.widgets.frame-style ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.regexp
 	  rep.io.files
 	  sawfish.gtk.widget

@@ -28,7 +28,7 @@
 	    run-shell)
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.system
 	  rep.regexp
 	  rep.io.files

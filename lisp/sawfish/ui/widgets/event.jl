@@ -25,7 +25,7 @@
 
     (open rep
 	  rep.regexp
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  sawfish.gtk.widget
 	  sawfish.ui.wm)
 
