@@ -141,4 +141,6 @@
 (autoload 'move-cursor-down-fine "move-cursor" t)
 (autoload 'decode-event "decode-events")
 (autoload 'encode-event "decode-events")
+(autoload 'string->keysym "decode-events")
+(autoload 'modifier->keysyms "decode-events")
 ;;; ::autoload-end::
