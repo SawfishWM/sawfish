@@ -739,7 +739,7 @@ shape_notify (XEvent *ev)
     if (w != 0 && sev->window == w->id && sev->kind == ShapeBounding)
     {
 	w->shaped = sev->shaped ? 1 : 0;
-	set_window_shape (w);
+	set_frame_shapes (w, TRUE);
     }
 }
 
