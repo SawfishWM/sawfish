@@ -287,9 +287,16 @@ set_frame_part_bg (struct frame_part *fp)
     int state = current_state (fp);
     repv bg = fp->bg[state];
     Lisp_Window *win = fp->win;
+    struct rep_Call lc;
 
-    if (fp->id == 0)
+    if (fp->id == 0 || !rep_FUNARGP(win->frame_style))
 	return;
+
+    lc.fun = Qnil;
+    lc.args = Qnil;
+    lc.args_evalled_p = Qnil;
+    rep_PUSH_CALL(lc);
+    rep_USE_FUNARG(win->frame_style);
 
     if (fp->renderer != Qnil && IMAGEP(fp->rendered_image))
     {
@@ -303,7 +310,7 @@ set_frame_part_bg (struct frame_part *fp)
     }
 
     if (win->id == 0)
-	return;
+	goto out;
 
     if (COLORP(bg))
     {
@@ -328,7 +335,7 @@ set_frame_part_bg (struct frame_part *fp)
 	    && fp->drawn.width == fp->width
 	    && fp->drawn.height == fp->height)
 	{
-	    return;
+	    goto out;
 	}
 
 	tem = Fimage_get (rep_VAL(image), Qtiled);
@@ -353,7 +360,7 @@ set_frame_part_bg (struct frame_part *fp)
 	   this can cause the error handler to run if a window has been
 	   deleted. This then invalidates the window we're updating */
 	if (win->id == 0)
-	    return;
+	    goto out;
 
 	if (!tiled)
 	{
@@ -412,6 +419,9 @@ set_frame_part_bg (struct frame_part *fp)
     }
     else
 	fp->drawn.bg = Qnil;
+
+out:
+    rep_POP_CALL(lc);
 }
 
 /* Draw the foreground pixels in frame-part FP. */
@@ -425,9 +435,16 @@ set_frame_part_fg (struct frame_part *fp)
     repv string = rep_NULL;
     int length = 0, width, height, x, y;
     Lisp_Window *win = fp->win;
+    struct rep_Call lc;
 
-    if (fp->id == 0)
+    if (fp->id == 0 || !rep_FUNARGP(win->frame_style))
 	return;
+
+    lc.fun = Qnil;
+    lc.args = Qnil;
+    lc.args_evalled_p = Qnil;
+    rep_PUSH_CALL(lc);
+    rep_USE_FUNARG(win->frame_style);
 
     if (IMAGEP(fg) || fp->text != Qnil)
     {
@@ -452,7 +469,7 @@ set_frame_part_fg (struct frame_part *fp)
 	    {
 		repv result = rep_call_lisp1 (fp->text, rep_VAL(fp->win));
 		if (!result || !rep_STRINGP(result))
-		    return;
+		    goto out;
 		string = result;
 		length = rep_STRING_LEN(result);
 	    }
@@ -497,7 +514,7 @@ set_frame_part_fg (struct frame_part *fp)
 		&& fp->drawn.x_justify == fp->x_justify
 		&& fp->drawn.y_justify == fp->y_justify)
 	    {
-		return;
+		goto out;
 	    }
 	    else if (fp->drawn.fg != rep_NULL)
 	    {
@@ -517,7 +534,7 @@ set_frame_part_fg (struct frame_part *fp)
 	       this can cause the error handler to run if a window has been
 	       deleted. This then invalidates the window we're updating */
 	    if (win->id == 0)
-		return;
+		goto out;
 
 	    if (fg_pixmap)
 	    {
@@ -560,7 +577,7 @@ set_frame_part_fg (struct frame_part *fp)
 		&& fp->drawn.x_justify == fp->x_justify
 		&& fp->drawn.y_justify == fp->y_justify)
 	    {
-		return;
+		goto out;
 	    }
  	    else if (fp->drawn.fg != rep_NULL)
 	    {
@@ -595,6 +612,9 @@ set_frame_part_fg (struct frame_part *fp)
     fp->drawn.fg = fg;
     fp->drawn.x_justify = fp->x_justify;
     fp->drawn.y_justify = fp->y_justify;
+
+out:
+    rep_POP_CALL(lc);
 }
 
 /* Redraw FP. */
@@ -764,9 +784,23 @@ list_frame_generator (Lisp_Window *w)
     repv win = rep_VAL(w);
     bool regen;				/* are we resizing the frame */
     int nparts = 0;
+    struct rep_Call lc;
 
     /* bounding box of frame */
     int left_x, top_y, right_x, bottom_y;
+
+    lc.fun = Qnil;
+    lc.args = Qnil;
+    lc.args_evalled_p = Qnil;
+    rep_PUSH_CALL(lc);
+
+    if (rep_FUNARGP(gen_list))
+    {
+	rep_USE_FUNARG(gen_list);
+	gen_list = Fclosure_function (gen_list);
+    }
+    else
+	gen_list = Qnil;
 
     tem = Fwindow_get (rep_VAL(w), Qhide_client);
     if (tem && tem != Qnil)
@@ -1271,6 +1305,7 @@ list_frame_generator (Lisp_Window *w)
     }
 
     rep_POPGC;
+    rep_POP_CALL(lc);
 }
 
 /* Return the keymap associated with this frame part, or nil */
@@ -1437,7 +1472,7 @@ frames_init (void)
     rep_SYM(Qdefault_frame)->value = Qnil;
 
     rep_INTERN_SPECIAL(nil_frame);
-    rep_SYM(Qnil_frame)->value = Qnil;
+    rep_SYM(Qnil_frame)->value = Fmake_closure (Qnil);
 
     rep_ADD_SUBR(Sframe_draw_mutex);
     rep_ADD_SUBR(Sframe_state_mutex);
