@@ -175,4 +175,7 @@
   ;; XXX rep 0.11+
   (autoload-macro 'lazy-bind-keys "keymap")
   (autoload-macro 'with-output-to-screen "with-output"))
+(autoload 'prompt-for-window "prompt-wm")
+(autoload 'prompt-for-workspace "prompt-wm")
+(autoload 'select-workspace-interactively "prompt-wm" t)
 ;;; ::autoload-end::

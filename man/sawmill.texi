@@ -445,10 +445,10 @@ Change the colors of the cursor object @var{cursor} to @var{fg} and
 @var{bg} (either color objects or the names of colors).
 @end defun
 
-@defvar default-cursor
-The cursor object displayed in the root window, and in parts of window
-frames that have no other cursor specified.
-@end defvar
+@defun default-cursor cursor
+Set the cursor object displayed in the root window, and in parts of
+window frames that have no other cursor specified, to @var{cursor}.
+@end defun
 
 So that the integer indices of glyphs in the X11 cursor font do not
 have to be remembered, the @code{cursor-shape} properties of the
