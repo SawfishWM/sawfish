@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.42 1999/12/02 18:43:54 john Exp $
+;; $Id: sawmill-ui.jl,v 1.43 1999/12/02 22:11:38 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -90,6 +90,9 @@ exec rep "$0" "$@"
 		       (if (string-match "^([^_.]+)_.*" ui-lang)
 			   (expand-last-match "\\1")
 			 ui-lang)))
+
+(defvar ui-color-preview-width 32)
+(defvar ui-color-preview-height 16)
 
 
 ;; wm communication
@@ -395,7 +398,8 @@ exec rep "$0" "$@"
     (gtk-signal-connect fontsel
      "delete_event" (lambda (w)
 		      (gtk-widget-destroy fontsel)))
-    (gtk-widget-show fontsel)))
+    (gtk-widget-show fontsel)
+    (gtk-grab-add fontsel)))
 
 (defun build-font:abbrev (font-name)
   (if (string-match "-[^-]+-([^-]+)-" font-name)
@@ -404,11 +408,7 @@ exec rep "$0" "$@"
 
 (defun build-color (spec)
   (let
-      ((button (gtk-button-new-with-label (or (get-key spec ':value) ""))))
-    (mapc (lambda (w)
-	    (when (gtk-label-p w)
-	      (gtk-label-set-line-wrap w t)))
-	  (gtk-container-children button))
+      ((button (ui-button-new-with-color (get-key spec ':value))))
     (unless (key-exists-p spec ':value)
       (set-key spec ':value nil))
     (gtk-signal-connect button "clicked"
@@ -438,7 +438,7 @@ exec rep "$0" "$@"
 				     (gdk-color-blue color)))))
 	 (when (or name (get-key spec ':allow-nil))
 	   (ui-set spec (get-key spec ':variable) name)
-	   (ui-set-button-label (get-key spec ':widget) name))
+	   (ui-set-button-color (get-key spec ':widget) name))
 	 (gtk-widget-destroy colorsel))))
     (gtk-signal-connect
      (gtk-color-selection-dialog-cancel-button colorsel)
@@ -448,7 +448,8 @@ exec rep "$0" "$@"
      "delete_event" (lambda (w)
 		      (gtk-widget-destroy colorsel)))
     (gtk-widget-hide (gtk-color-selection-dialog-help-button colorsel))
-    (gtk-widget-show colorsel)))
+    (gtk-widget-show colorsel)
+    (gtk-grab-add colorsel)))
 
 (defun build-file (spec)
   (let
@@ -1165,13 +1166,9 @@ exec rep "$0" "$@"
 					   ((item (make-cell)))
 					 (when (and callback item)
 					   (callback item)))
-				       (gtk-grab-remove window)
 				       (gtk-widget-destroy window)))
     (gtk-signal-connect cancel "clicked" (lambda ()
-					   (gtk-grab-remove window)
 					   (gtk-widget-destroy window)))
-    (gtk-signal-connect window "delete_event" (lambda ()
-						(gtk-grab-remove window)))
 
     (gtk-widget-show-all window)
     (gtk-grab-add window)
@@ -1532,6 +1529,47 @@ exec rep "$0" "$@"
 	 (concat file ?. ui-lang-base))
 	(t
 	 file)))
+
+
+;; color previews
+
+(defun ui-set-preview-color (preview color)
+  (let
+      ((buf (make-string (* ui-color-preview-width 3)))
+       i)
+    (setq i 0)
+    (while (< i ui-color-preview-width)
+      (aset buf (* i 3) (/ (gdk-color-red color) 256))
+      (aset buf (1+ (* i 3)) (/ (gdk-color-green color) 256))
+      (aset buf (+ 2 (* i 3)) (/ (gdk-color-blue color) 256))
+      (setq i (1+ i)))
+    (setq i 0)
+    (while (< i ui-color-preview-height)
+      (gtk-preview-draw-row preview buf 0 i 32)
+      (setq i (1+ i)))))
+
+(defun ui-button-new-with-color (color-name)
+  (let
+      ((button (gtk-button-new))
+       (preview (gtk-preview-new 'color))
+       (color (and color-name (gdk-color-parse-interp color-name)))
+       i)
+    (gtk-preview-size preview ui-color-preview-width ui-color-preview-height)
+    (when color
+      (ui-set-preview-color preview color))
+    (gtk-container-border-width button ui-box-border)
+    (gtk-container-add button preview)
+    button))
+
+(defun ui-set-button-color (button color-name)
+  (let
+      ((color (and color-name (gdk-color-parse-interp color-name))))
+    (when color
+      (mapc (lambda (w)
+	      (when (gtk-preview-p w)
+		(ui-set-preview-color w color)
+		(gtk-widget-draw-interp w)))
+	    (gtk-container-children button)))))
 
 
 ;; entry point
