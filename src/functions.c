@@ -28,61 +28,29 @@ static int server_grabs;
 
 DEFSYM(root, "root");
 
-DEFUN_INT("raise-window", Fraise_window, Sraise_window, (repv win), rep_Subr1, "W") /*
-::doc:Sraise-window::
-raise-window WINDOW
+DEFUN("restack-windows", Frestack_windows, Srestack_windows,
+      (repv list), rep_Subr1) /*
+::doc:Srestack-windows::
+restack-windows LIST
 ::end:: */
 {
-    rep_DECLARE1(win, WINDOWP);
-    if (VWIN(win)->mapped)
-	XRaiseWindow (dpy, VWIN(win)->frame);
-    return win;
-}
-
-DEFUN_INT("lower-window", Flower_window, Slower_window, (repv win), rep_Subr1, "W") /*
-::doc:Slower-window::
-lower-window WINDOW
-::end:: */
-{
-    rep_DECLARE1(win, WINDOWP);
-    if (VWIN(win)->mapped)
-	XLowerWindow (dpy, VWIN(win)->frame);
-    return win;
-}
-
-DEFUN_INT("circulate-up", Fcirculate_up, Scirculate_up, (void), rep_Subr0, "") /*
-::doc:Scirculate-up::
-circulate-up
-::end:: */
-{
-    XCirculateSubwindowsUp (dpy, root_window);
-    return Qt;
-}
-
-DEFUN_INT("circulate-down", Fcirculate_down, Scirculate_down, (void), rep_Subr0, "") /*
-::doc:Scirculate-down::
-circulate-down
-::end:: */
-{
-    XCirculateSubwindowsDown (dpy, root_window);
-    return Qt;
-}
-
-DEFUN_INT("raise-lower-window", Fraise_lower_window, Sraise_lower_window,
-	  (repv win), rep_Subr1, "W") /*
-::doc:Sraise-lower-window::
-raise-lower-window WINDOW
-::end:: */
-{
-    rep_DECLARE1(win, WINDOWP);
-    if (VWIN(win)->mapped)
+    int len, i, j;
+    Window *frames;
+    rep_DECLARE1(list, rep_LISTP);
+    len = rep_INT(Flength (list));
+    frames = alloca (len * sizeof (Window));
+    for (i = j = 0; i < len; i++)
     {
-	if (VWIN(win)->frame_vis == VisibilityUnobscured)
-	    XLowerWindow (dpy, VWIN(win)->frame);
-	else
-	    XRaiseWindow (dpy, VWIN(win)->frame);
+	repv w = rep_CAR(list);
+	if (WINDOWP(w) && (VWIN(w)->frame != 0 || VWIN(w)->id != 0))
+	{
+	    frames[j++] = (VWIN(w)->reparented
+			   ? VWIN(w)->frame : VWIN(w)->id);
+	}
+	list = rep_CDR(list);
     }
-    return win;
+    XRestackWindows (dpy, frames, j);
+    return Qt;
 }
 
 DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1, "W") /*
@@ -668,11 +636,7 @@ integer ATOM.
 void
 functions_init (void)
 {
-    rep_ADD_SUBR_INT(Sraise_window);
-    rep_ADD_SUBR_INT(Slower_window);
-    rep_ADD_SUBR_INT(Scirculate_up);
-    rep_ADD_SUBR_INT(Scirculate_down);
-    rep_ADD_SUBR_INT(Sraise_lower_window);
+    rep_ADD_SUBR(Srestack_windows);
     rep_ADD_SUBR_INT(Sdelete_window);
     rep_ADD_SUBR_INT(Sdestroy_window);
     rep_ADD_SUBR(Swarp_cursor);
