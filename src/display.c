@@ -35,6 +35,9 @@
 # ifdef HAVE_UNISTD_H
 #  include <unistd.h>
 # endif
+# ifdef HAVE_SYS_UTSNAME_H
+#  include <sys/utsname.h>
+# endif
 #endif
 
 char *prog_name;
@@ -50,6 +53,7 @@ Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols, xa_wm_delete_window,
     xa_wm_colormap_windows, xa_wm_take_focus;
 
 DEFSYM(display_name, "display-name");
+DEFSYM(canonical_display_name, "canonical-display-name");
 
 
 /* X error handlers */
@@ -110,6 +114,37 @@ error_other_wm (Display *dpy, XErrorEvent *ev)
 
 
 
+static char *
+canonical_display (char *name)
+{
+    static char buf[256];
+    char *ptr = buf;
+    if (*name == ':')
+    {
+	repv host = Fsystem_name ();
+	if (host && rep_STRINGP(host))
+	    strcpy (ptr, rep_STR(host));
+	else
+	    *ptr = 0;
+	ptr += strlen (ptr);
+    }
+    else
+    {
+	while (*name && *name != ':')
+	    *ptr++ = *name++;
+    }
+    *ptr++ = *name++;
+    while (*name && *name != '.')
+	*ptr++ = *name++;
+    if (*name == 0)
+	strcpy (ptr, ".0");
+    else
+	strcpy (ptr, name);
+    return buf;
+}
+
+
+
 static void
 redisplay (void)
 {
@@ -139,7 +174,9 @@ sys_init(char *program_name)
 	prog_name = strdup (rep_STR(opt));
 
     rep_INTERN(display_name);
+    rep_INTERN(canonical_display_name);
     Fset (Qdisplay_name, rep_null_string ());
+    Fset (Qcanonical_display_name, rep_null_string ());
 
     if(rep_SYM(Qbatch_mode)->value == Qnil)
     {
@@ -153,6 +190,8 @@ sys_init(char *program_name)
 	if(dpy != 0)
 	{
 	    Fset (Qdisplay_name, rep_string_dup (display_name));
+	    Fset (Qcanonical_display_name,
+		  rep_string_dup (canonical_display (display_name)));
 	    rep_register_input_fd (ConnectionNumber(dpy), handle_sync_input);
 	    screen_num = DefaultScreen(dpy);
 	    root_window = RootWindow(dpy, screen_num);
