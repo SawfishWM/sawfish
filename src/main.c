@@ -282,7 +282,7 @@ inner_main (repv arg)
 	manage_windows ();
 
 	/* then jump into the event loop.. */
-	res = Frecursive_edit ();
+	res = rep_top_level_recursive_edit ();
     }
     return res;
 }
