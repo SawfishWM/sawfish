@@ -26,7 +26,7 @@
 
 (defgroup tooltips "Tooltips")
 
-(defcustom tooltips-enabled t
+(defcustom tooltips-enabled nil
   "Display tooltips for window frames."
   :type boolean
   :group tooltips
