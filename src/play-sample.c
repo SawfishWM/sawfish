@@ -14,7 +14,6 @@
 # define g_free free
 # define g_new0(a,b) calloc(b, sizeof (a))
 # define g_warning printf
-# define g_snprintf snprintf
 #endif /* GLIB_MAJOR_VERSION */
 
 int gnome_sound_sample_load(const char *sample_name, const char *filename);
@@ -474,7 +473,11 @@ gnome_sound_play (const char * filename)
   if(gnome_sound_connection < 0) return;
 
   srand(time(NULL));
-  g_snprintf(buf, sizeof(buf), "%d-%d", getpid(), rand());
+#ifdef HAVE_SNPRINTF
+  snprintf(buf, sizeof(buf), "%d-%d", getpid(), rand());
+#else
+  sprintf(buf, "%d-%d", getpid(), rand());
+#endif
   sample = gnome_sound_sample_load (buf, filename);
 
   if (sample >= 0)

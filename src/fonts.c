@@ -329,7 +329,11 @@ generalize_xlfd (const char *xlfd)
     len = strlen (xlfd) + strlen (weight) + strlen (slant) +
           strlen (pxlsz) + strlen (pxlsz) + strlen (XLFD_FORMAT);
     buf = malloc (len + 1);
+#ifdef HAVE_SNPRINTF
     snprintf (buf, len + 1, XLFD_FORMAT, xlfd, weight, slant, pxlsz, pxlsz);
+#else
+    sprintf (buf, XLFD_FORMAT, xlfd, weight, slant, pxlsz, pxlsz);
+#endif
 
     free (pxlsz);
     free (slant);
