@@ -28,8 +28,8 @@
 ;;(setq debug-on-error '(bad-arg missing-arg void-value invalid-function))
 
 ;; so modularised rep knows where to inherit specials and load from
-(setq *root-structure* 'sawfish.wm)
-(setq *user-structure* 'user)
+;; this will be changed to 'user later
+(setq *user-structure* 'sawfish.wm)
 
 ;; load always-present session-manager stuff
 (require 'sawfish.wm.session.init)
