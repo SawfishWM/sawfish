@@ -572,17 +572,17 @@
 			    (not (window-in-workspace-p w current-workspace))
 			    (window-get w 'placed))
 		   (hide-window w)))
-	       (nreverse order))
+	       (nreverse order)))
 
-	 ;; focus the correct window in the new workspace
-	 (unless (or dont-focus (eq focus-mode 'enter-exit))
-	   (require 'sawfish.wm.util.window-order)
-	   (window-order-focus-most-recent))
+	;; focus the correct window in the new workspace
+	(unless (or dont-focus (eq focus-mode 'enter-exit))
+	  (require 'sawfish.wm.util.window-order)
+	  (window-order-focus-most-recent))
 
-	 ;; and call some hooks
-	 (when current-workspace
-	   (call-hook 'enter-workspace-hook (list current-workspace)))
-	 (call-hook 'workspace-state-change-hook)))))
+	;; and call some hooks
+	(when current-workspace
+	  (call-hook 'enter-workspace-hook (list current-workspace)))
+	(call-hook 'workspace-state-change-hook))))
 
   ;; return a list of all windows on workspace index SPACE
   (define (workspace-windows space #!optional include-iconified)
@@ -670,6 +670,7 @@
   (define (popup-window-list)
     "Display the menu of all managed windows."
     (require 'sawfish.wm.menus)
+    (declare (special window-menu))
     (popup-menu (window-menu)))
 
   (define-command 'popup-workspace-list popup-workspace-list)
