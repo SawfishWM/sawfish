@@ -118,6 +118,11 @@ extern void fonts_kill (void);
 extern repv Qdefault_frame, Qnil_frame;
 extern repv Qfocused, Qhighlighted, Qclicked;
 extern repv Qhide_client, Qclass, Qframe_part_classes;
+extern repv Qinternal, Qtiled, Qcenter, Qright, Qleft, Qtop, Qbottom;
+extern repv Qtext, Qx_justify, Qy_justify, Qbackground, Qforeground;
+extern repv Qrenderer, Qrender_scale, Qfont, Qwidth, Qheight;
+extern repv Qleft_edge, Qtop_edge, Qright_edge, Qbottom_edge;
+extern repv Qcursor, Qfocused, Qhighlighted, Qclicked;
 extern bool frame_state_mutex;
 extern void set_frame_shapes (Lisp_Window *w, bool atomic);
 extern void set_frame_part_bg (struct frame_part *fp);
@@ -169,7 +174,7 @@ extern repv Fcreate_window (repv parent, repv x, repv y,
 			    repv width, repv height);
 extern repv Fx_atom (repv symbol);
 extern repv Fx_atom_name (repv atom);
-extern repv Fshow_message (repv text, repv font, repv fg, repv bg, repv pos);
+extern repv Fdisplay_message (repv text, repv attrs);
 extern void functions_init (void);
 extern void functions_kill (void);
 
