@@ -93,14 +93,14 @@ DEFSYM(lower_window, "lower-window");
 static long
 subtract_timestamps (Time t2, Time t1)
 {
-    u_long diff = ((t2 > t1)
+    u_long diff = ((t2 >= t1)
 		   ? (t2 - t1)
-		   : (ULONG_MAX - (t1 - t2)));
+		   : (ULONG_MAX - (t1 - t2) + 1));
 
     if (diff > ULONG_MAX / 2)
     {
 	/* too big, assume it's negative */
-	diff = ULONG_MAX - diff;
+	diff = ULONG_MAX - diff + 1;
     }
 
     assert (diff < LONG_MAX);
@@ -174,8 +174,12 @@ record_mouse_position (int x, int y, int event_type, Window w)
 	break;
 
     case ButtonRelease:
-	button_press_mouse_x = x;
-	button_press_mouse_y = y;
+	if (button_press_mouse_x == -1)
+	{
+	    button_press_mouse_x = x;
+	    button_press_mouse_y = y;
+	    button_press_window = w;
+	}
 	break;
     }
     current_event_updated_mouse = TRUE;
