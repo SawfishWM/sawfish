@@ -30,11 +30,13 @@
 (defvar custom-user-file "~/.sawmill/custom"
   "File used to store user's configuration settings.")
 
-(defvar custom-unquoted-keys '(:group :require :type :allow-nil :range))
+(defvar custom-unquoted-keys
+  '(:group :require :type :options :allow-nil :range))
 
 (defvar custom-option-alist '((:group . custom-group)
 			      (:require . custom-require)
 			      (:type . custom-type)
+			      (:options . custom-options)
 			      (:allow-nil . custom-allow-nil)
 			      (:set . custom-set)
 			      (:get . custom-get)
@@ -56,6 +58,7 @@
 ;;	:group GROUP
 ;;	:require FEATURE
 ;;	:type TYPE
+;;	:options OPTIONS
 ;;	:allow-nil t
 ;;	:set FUNCTION
 ;;	:get FUNCTION
@@ -63,7 +66,7 @@
 ;;	:after-set FUNCTION
 ;;	:range (MIN . MAX)		for number type
 
-;; TYPE may be `boolean', `number', `string', `(set SYMBOLS..)',
+;; TYPE may be `boolean', `number', `string', `symbol',
 ;; `file-name', `program-name', `font', `color'
 
 ;; Each defcustom'd variable may have several special properties
@@ -103,6 +106,10 @@
     (custom-add-to-group symbol (or (get symbol 'custom-group)
 				    (error "No :group attribute: %s" symbol)))
     (setq type (get symbol 'custom-type))
+    (when (eq (car type) 'set)
+      ;; backwards compatibility
+      (put symbol 'custom-options (cdr type))
+      (setq type 'symbol))
     (when (and type (symbolp type))
       (when (and (not (get symbol 'custom-get)) (get type 'custom-get))
 	(put symbol 'custom-get (get type 'custom-get)))
@@ -153,6 +160,13 @@
        ((__prop__ (cdr (assq ,prop custom-group-option-alist))))
      (when __prop__
        (put ,group __prop__ ,value))))
+
+(defmacro custom-add-option (sym option)
+  `(put ,sym 'custom-options
+	(nconc (get ,sym 'custom-options) (list ,option))))
+
+(defmacro custom-get-options (sym)
+  `(get ,sym 'custom-options))
 
 (defun custom-add-to-group (symbol group)
   (let
