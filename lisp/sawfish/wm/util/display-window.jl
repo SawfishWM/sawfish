@@ -50,7 +50,8 @@
 	   w #!optional preferred-space #!key will-refocus)
     "Display the workspace/viewport containing the window W."
     (when w
-      (uniconify-window w)
+      (when (window-iconified-p w)
+	(uniconify-window w))
       (when (or (not preferred-space)
 		(not (window-in-workspace-p w preferred-space)))
 	(setq preferred-space
@@ -73,11 +74,7 @@
       (display-window-without-focusing
        w preferred-space
        #:will-refocus (window-really-wants-input-p w))
-      (raise-window* w)
-      (when (window-really-wants-input-p w)
-	(set-input-focus w))
-      (warp-pointer-if-necessary w)
-      (window-order-push w)))
+      (activate-window w)))
 
   (define-command 'display-window display-window
     #:spec (lambda ()

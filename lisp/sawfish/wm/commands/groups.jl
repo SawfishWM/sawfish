@@ -160,11 +160,11 @@
 
   ;;###autoload
   (define-command 'raise-group raise-group
-    #:spec "%W" #:user-level 'expert)
+    #:spec "%W" #:advanced t)
   (define-command 'lower-group lower-group
-    #:spec "%W" #:user-level 'expert)
+    #:spec "%W" #:advanced t)
   (define-command 'raise-lower-group raise-lower-group
-    #:spec "%W" #:user-level 'expert)
+    #:spec "%W" #:advanced t)
   (define-command 'raise-group-depth raise-group-depth #:spec "%W")
   (define-command 'lower-group-depth lower-group-depth #:spec "%W")
 

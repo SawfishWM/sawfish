@@ -35,6 +35,7 @@
 	     window-in-cycle-p
 	     window-class
 	     warp-cursor-to-window
+	     activate-window
 	     constrain-dimension-to-hints
 	     resize-window-with-hints
 	     resize-window-with-hints*
@@ -62,17 +63,15 @@
 	  sawfish.wm.misc
 	  sawfish.wm.commands)
 
-  (defcustom ignore-window-input-hint nil
-    "Give focus to windows even when they haven't asked for it."
-    :tooltip "Windows should set the `accepts input' hint in their WM_HINTS \
-property to show if they require the focus or not."
-    :type boolean
-    :user-level expert
-    :group focus)
+  (defvar ignore-window-input-hint nil
+    "Give focus to windows even when they haven't asked for it.")
 
   (defvar warp-to-window-offset (cons -1 -1)
     "Offset (%) from window edges when warping pointer. A negative number
 means outside the left window edge.")
+
+  (defvar warp-to-window-enabled nil
+    "When false, disable warping the cursor to windows.")
  
   (defvar dont-avoid-ignored t
     "When non-nil, ignored windows aren't avoided by default.")
@@ -176,21 +175,32 @@ associated with object WINDOW.
 
 If X and Y are nil, then the pointer is moved to a default position, as
 specified by the user."
-    (let ((coords (window-position w))
-	  (foff (window-frame-offset w))
-	  (dims (window-dimensions w)))
-      (unless x
-	(setq x
-	      (if (< (car warp-to-window-offset) 0)
-		  (car warp-to-window-offset)
-		(quotient (* (car dims) (car warp-to-window-offset)) 100))))
-      (unless y
-	(setq y (if (< (cdr warp-to-window-offset) 0)
-		    (cdr warp-to-window-offset)
-		  (quotient (* (cdr dims) (cdr warp-to-window-offset)) 100))))
-      (warp-cursor
-       (max 0 (min (1- (screen-width)) (+ x (car coords) (- (car foff)))))
-       (max 0 (min (1- (screen-height)) (+ y (cdr coords) (- (cdr foff))))))))
+    (when warp-to-window-enabled
+      (let ((coords (window-position w))
+	    (foff (window-frame-offset w))
+	    (dims (window-dimensions w)))
+	(unless x
+	  (setq x
+		(if (< (car warp-to-window-offset) 0)
+		    (car warp-to-window-offset)
+		  (quotient (* (car dims) (car warp-to-window-offset)) 100))))
+	(unless y
+	  (setq y (if (< (cdr warp-to-window-offset) 0)
+		      (cdr warp-to-window-offset)
+		    (quotient (* (cdr dims) (cdr warp-to-window-offset)) 100))))
+	(warp-cursor
+	 (max 0 (min (1- (screen-width)) (+ x (car coords) (- (car foff)))))
+	 (max 0 (min (1- (screen-height)) (+ y (cdr coords) (- (cdr foff)))))))))
+
+  (define (activate-window w)
+    (require 'sawfish.wm.focus)
+    (require 'sawfish.wm.util.stacking)
+    (require 'sawfish.wm.util.window-order)
+    (raise-window* w)
+    (when (window-really-wants-input-p w)
+      (set-input-focus w))
+    (warp-pointer-if-necessary w)
+    (window-order-push w))
 
 
 ;;; resizing windows in accordance with their size hints

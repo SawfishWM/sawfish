@@ -114,7 +114,6 @@
     "Keymap containing bindings active when the pointer is in the root window
 (or when no window is focused)."
     :group bindings
-    :user-level expert
     :type keymap)
 
   (defcustom title-keymap (bind-keys (make-keymap)
@@ -134,7 +133,6 @@ a window. (Only mouse-bindings are evaluated in this map.)"
     "Keymap containing bindings active when the pointer is in the border of
 a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
-    :user-level expert
     :type keymap)
 
   (defcustom close-button-keymap (bind-keys (make-keymap)
@@ -144,7 +142,6 @@ a window. (Only mouse-bindings are evaluated in this map.)"
     "Keymap containing bindings active when the pointer is in the close button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
-    :user-level expert
     :type keymap)
 
   (defcustom iconify-button-keymap (bind-keys (make-keymap)
@@ -153,7 +150,6 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "Keymap containing bindings active when the pointer is in the iconify
 button of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
-    :user-level expert
     :type keymap)
 
   (defcustom maximize-button-keymap (bind-keys (make-keymap)
@@ -163,7 +159,6 @@ button of a window. (Only mouse-bindings are evaluated in this map.)"
     "Keymap containing bindings active when the pointer is in the maximize
 button of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
-    :user-level expert
     :type keymap)
 
   (defcustom menu-button-keymap (bind-keys (make-keymap)
@@ -172,7 +167,6 @@ button of a window. (Only mouse-bindings are evaluated in this map.)"
     "Keymap containing bindings active when the pointer is in the menu button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
-    :user-level expert
     :type keymap)
 
   (defcustom shade-button-keymap (bind-keys (make-keymap)
@@ -180,7 +174,6 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "Keymap containing bindings active when the pointer is in the shade button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
-    :user-level expert
     :type keymap)
 
   (defcustom pointer-motion-threshold 2
@@ -192,7 +185,6 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "Modifier key(s) used for default window manager shortcuts."
     :group bindings
     :type modifier-list
-    :user-level novice
     :after-set (lambda ()
 		 (ungrab-keymap global-keymap)
 		 (ungrab-keymap window-keymap)

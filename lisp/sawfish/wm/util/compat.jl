@@ -95,7 +95,6 @@
   (mapc (lambda (x)
 	  (put x 'custom-obsolete t))
 	'(viewport-columns viewport-rows viewport-dimensions
-
 	  preallocated-workspaces iconify-whole-group
 	  uniconify-whole-group always-update-frames
 	  cycle-disable-auto-raise cycle-show-window-icons
@@ -119,8 +118,11 @@
 	  raise-windows-when-unshaded persistent-group-ids
 	  delete-workspaces-when-empty transients-on-parents-workspace
 	  edge-flip-delay audio-for-ignored-windows
-
-	  ))
+	  size-window-def-increment slide-window-increment
+	  default-bevel-percent sp-padding nokogiri-user-level
+	  nokogiri-buttons workspace-boundary-mode
+	  workspace-send-boundary-mode lock-first-workspace
+	  ignore-window-input-hint))
 
 ;;; obsolete custom setters
 

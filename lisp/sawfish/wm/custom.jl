@@ -31,6 +31,7 @@
 	    custom-quote-keys
 	    define-custom-setter
 	    custom-set-property
+	    custom-get-property
 	    custom-set-group-property
 	    custom-get-group-property
 	    custom-add-option
@@ -85,6 +86,7 @@
 				(:type* . custom-type)
 				(:options . custom-options)
 				(:depends . custom-depends)
+				;; XXX not used anymore
 				(:user-level . custom-user-level)
 				(:set . custom-set)
 				(:get . custom-get)
@@ -115,7 +117,6 @@ KEYS is a property-list containing any of the following:
 	:type TYPE
 	:options OPTIONS
 	:depends SYMBOL
-	:user-level LEVEL		novice, intermediate, expert
 	:range (MIN . MAX)		for `number' type
 	:set FUNCTION
 	:get FUNCTION
@@ -127,8 +128,8 @@ TYPE may be `boolean', `number', `string', `symbol', `file-name',
 `program-name', `font', `color'.
 
 Note that the values of the `:group', `:require', `:type', `:options',
-`:depends', `:user-level' and `:range' keys are not evaluated. All
-other key values are evaluated.
+`:depends' and `:range' keys are not evaluated. All other key values are
+evaluated.
 
 Each defcustom'd symbol may have several special properties
 
@@ -233,12 +234,15 @@ Note that the value of the `:group' key is not evaluated."
     (or (table-ref custom-setter-table name)
 	(error "No such custom setter: %s" name)))
       
-  (defmacro custom-set-property (sym prop value)
+  (define (custom-set-property sym prop value)
     "Set the custom key PROP for defcustom'd symbol SYM to value."
-    (let ((tem (gensym)))
-      `(let ((,tem (cdr (assq ,prop custom-option-alist))))
-	 (when ,tem
-	   (put ,sym ,tem ,value)))))
+    (let ((key (cdr (assq prop custom-option-alist))))
+      (when key
+	(put sym key value))))
+
+  (define (custom-get-property sym prop)
+    (let ((key (cdr (assq prop custom-option-alist))))
+      (and key (get sym key))))
 
   (define (custom-set-group-property group prop value)
     "Set the custom key PROP for defgroup'd symbol SYM to value."

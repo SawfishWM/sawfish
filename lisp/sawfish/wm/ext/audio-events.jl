@@ -41,7 +41,6 @@
   (defcustom audio-events-enabled nil
     "Play sound effects for window events."
     :type boolean
-    :user-level novice
     :require sawfish.wm.ext.audio-events
     :group audio)
 

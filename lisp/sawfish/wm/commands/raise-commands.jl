@@ -94,8 +94,8 @@ has, then replay any pointer events that invoked the command."
 
   ;;###autoload
   (define-command 'raise-window-and-pass-through-click
-    window-and-pass-through-click #:spec "%w" #:user-level 'expert)
+    window-and-pass-through-click #:spec "%w" #:advanced t)
   (define-command 'raise-group-and-pass-through-click
-    group-and-pass-through-click #:spec "%w" #:user-level 'expert)
+    group-and-pass-through-click #:spec "%w" #:advanced t)
   (define-command 'raise-transients-and-pass-through-click
-    transients-and-pass-through-click #:spec "%w" #:user-level 'expert))
+    transients-and-pass-through-click #:spec "%w" #:advanced t))

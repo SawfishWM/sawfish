@@ -44,7 +44,6 @@
   (defcustom error-destination 'standard-error
     "Display error messages to: \\w"
     :type (choice nowhere screen standard-error)
-    :user-level expert
     :group (misc error-handling))
 
   ;; ring buffer for containing error messages

@@ -33,7 +33,6 @@
   (defcustom raise-windows-on-focus nil
     "Raise windows when they are focused."
     :type boolean
-    :user-level novice
     :require sawfish.wm.ext.auto-raise
     :group focus)
 

@@ -39,23 +39,11 @@
 	  sawfish.wm.util.keymap
 	  sawfish.wm.ext.match-window)
 
-
-;;; meta customizations
-
-  (defcustom nokogiri-user-level 'intermediate
-    "Show options suitable for \\w users."
-    :type (choice novice intermediate expert)
-    :user-level novice
-    :group ())
-
-  (defcustom nokogiri-buttons 'ok
-    "Buttons shown in configurator: \\w"
-    :type (choice ok revert/cancel/ok apply/revert/cancel/ok)
-    :user-level expert
-    :group ())
-
   (defvar customize-show-symbols nil
     "Show variable names of each customization option.")
+
+  (defvar customize-show-advanced-commands nil
+    "Include more hackerish commands in the key bindigs panel.")
 
 
 ;;; interfaces
@@ -68,7 +56,6 @@
 	   (value (if (get symbol 'custom-get)
 		      ((get symbol 'custom-get) symbol)
 		    (custom-serialize (symbol-value symbol) type)))
-	   (user-level (get symbol 'custom-user-level))
 	   (widget-flags (get symbol 'custom-widget-flags)))
       (when (stringp doc)
 	(setq doc (_ doc))
@@ -96,7 +83,6 @@
 		   #:value value)
 	     (and dep (list #:depends dep))
 	     (and doc (list #:doc doc))
-	     (and user-level (list #:user-level user-level))
 	     (and widget-flags (list #:widget-flags widget-flags)))))
 
   (define (nokogiri-report-slots names)
@@ -123,15 +109,12 @@
 
   (define (nokogiri-report-commands)
     (mapcar (lambda (sym)
-	      (let ((params (command-type sym))
-		    (user-level (command-user-level sym)))
-		(if (or params user-level)
-		    (nconc (list sym)
-			   (and params (list #:type params))
-			   (and user-level (list #:user-level user-level)))
+	      (let ((params (command-type sym)))
+		(if params
+		    (list sym #:type params)
 		  sym)))
 	    (sort (apropos "" (lambda (x)
-				(and (commandp x)
+				(and (commandp x #:allow-advanced customize-show-advanced-commands)
 				     (not (get x 'deprecated-command))))))))
 
   (define (nokogiri-grab-key) (event-name (read-event)))

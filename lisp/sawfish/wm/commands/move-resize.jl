@@ -52,14 +52,12 @@
     "How windows being moved are animated: \\w"
     :type symbol
     :options (opaque box)
-    :user-level novice
     :group move)
   
   (defcustom resize-outline-mode 'opaque
     "How windows being resized are animated: \\w"
     :type symbol
     :options (opaque box)
-    :user-level novice
     :group move)
   
   (defcustom move-resize-raise-window nil
@@ -80,7 +78,6 @@
   (defcustom resize-edge-mode 'border-grab
     "How to choose window edges when resizing: \\w"
     :type (choice region border grab border-grab)
-    :user-level expert
     :group move)
   
   (defcustom move-snap-epsilon 12

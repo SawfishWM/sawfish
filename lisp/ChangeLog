@@ -1,5 +1,36 @@
 2002-04-20  John Harper  <jsh@unfactored.org>
 
+	More slash and burning. Removed user levels (a failed
+	experiment). Removed more options, etc
+
+	* sawfish/wm/workspace.jl, sawfish/wm/windows.jl,
+	sawfish/wm/stacking.jl, sawfish/wm/placement.jl,
+	sawfish/wm/keymaps.jl, sawfish/wm/frames.jl,
+	sawfish/wm/focus.jl, sawfish/wm/custom.jl,
+	sawfish/wm/commands.jl, sawfish/wm/autoload.jl: 
+
+	* sawfish/wm/commands/xterm.jl, sawfish/wm/commands/x-cycle.jl,
+	sawfish/wm/commands/slide-window.jl,
+	sawfish/wm/commands/size-window.jl,
+	sawfish/wm/commands/raise-commands.jl,
+	sawfish/wm/commands/move-resize.jl,
+	sawfish/wm/commands/groups.jl, sawfish/wm/commands/describe.jl:
+
+	* sawfish/wm/ext/window-history.jl, sawfish/wm/ext/tooltips.jl,
+	sawfish/wm/ext/shade-hover.jl, sawfish/wm/ext/error-handler.jl,
+	sawfish/wm/ext/edge-flip.jl, sawfish/wm/ext/auto-raise.jl,
+	sawfish/wm/ext/audio-events.jl, sawfish/wm/ext/3d-hack.jl: 
+
+	* sawfish/wm/placement/top-left.jl,
+	sawfish/wm/placement/smart.jl: 
+
+	* sawfish/wm/state/transient.jl, sawfish/wm/state/iconify.jl: 
+
+	* sawfish/wm/util/play-audio.jl, sawfish/wm/util/nokogiri.jl,
+	sawfish/wm/util/display-window.jl, sawfish/wm/util/compat.jl: 
+
+2002-04-20  John Harper  <jsh@unfactored.org>
+
 	Removed a lot of dead wood. Deleted some options altogether,
 	made a lot more into standard variables (i.e. they can still be
 	set using setq, but don't appear in the configurator). Also got

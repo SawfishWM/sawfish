@@ -110,7 +110,7 @@
       (when raise-windows-on-uniconify
 	(raise-window w))
       (when (and focus-windows-on-uniconify (window-really-wants-input-p w))
-	(set-input-focus w))
+	(activate-window w))
       (call-window-hook 'uniconify-window-hook w)
       (call-window-hook 'window-state-change-hook w (list '(iconified)))))
 

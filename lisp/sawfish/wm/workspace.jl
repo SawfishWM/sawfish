@@ -118,38 +118,26 @@
   (defcustom workspace-geometry '(1 . (1 . 1))
     "Virtual desktop configuration."
     :type workspace-geometry
-    :user-level novice
     :group workspace
     :after-set (lambda () (call-hook 'workspace-geometry-changed)))
 
-  (defcustom workspace-boundary-mode 'stop
-    "When passing the first or last workspace: \\w"
-    :type symbol
-    :options (stop wrap-around keep-going)
-    :user-level expert
-    :group workspace)
+  (defvar workspace-boundary-mode 'stop
+    "How to act when passing the first or last workspace, one of `stop',
+`wrap-around' or `keep-going'")
 
-  (defcustom workspace-send-boundary-mode 'keep-going
-    "When passing the first or last workspace, while moving a window: \\w"
-    :type symbol
-    :options (stop wrap-around keep-going)
-    :user-level expert
-    :group workspace)
+  (defvar workspace-send-boundary-mode 'stop
+    "How to act when passing the first or last workspace, while moving a
+window, one of `stop', `keep-going', `wrap-around'")
 
   (defvar preallocated-workspaces 1
     "Minimum number of workspaces.")
 
-  (defcustom lock-first-workspace t
-    "Preserve empty workspaces in pager."
-    :type boolean
-    :group workspace
-    :user-level expert
-    :after-set (lambda () (call-hook 'workspace-state-change-hook)))
+  (defvar lock-first-workspace t
+    "Preserve empty workspaces in pager.")
 
   (defcustom workspace-names nil
     nil
     :type* `(list string ,(_ "Workspace names"))
-    :widget-flags (expand-vertically)
     :group workspace)
 
   ;; Currently active workspace, an integer
@@ -739,9 +727,9 @@
 	   w orig-space (1- (car limits)) was-focused)))))
 
   (define-command 'append-workspace-and-send append-workspace-and-send
-    #:spec "%W\nt" #:user-level 'expert)
+    #:spec "%W\nt" #:advanced t)
   (define-command 'prepend-workspace-and-send prepend-workspace-and-send
-    #:spec "%W\nt" #:user-level 'expert)
+    #:spec "%W\nt" #:advanced t)
 
   (define (merge-next-workspace)
     "Delete the current workspace. Its member windows are relocated to the next
@@ -754,9 +742,9 @@ previous workspace."
     (remove-workspace (1- current-workspace)))
 
   (define-command 'merge-next-workspace merge-next-workspace
-    #:user-level 'expert)
+    #:advanced t)
   (define-command 'merge-previous-workspace merge-previous-workspace
-    #:user-level 'expert)
+    #:advanced t)
 
   (define (insert-workspace-after)
     "Create a new workspace following the current workspace."
@@ -769,9 +757,9 @@ previous workspace."
     (select-workspace (- current-workspace 2)))
 
   (define-command 'insert-workspace-after insert-workspace-after
-    #:user-level 'expert)
+    #:advanced t)
   (define-command 'insert-workspace-before insert-workspace-before
-    #:user-level 'expert)
+    #:advanced t)
 
   (define (move-workspace-forwards #!optional count)
     "Move the current workspace one place to the right."
@@ -782,9 +770,9 @@ previous workspace."
     (move-workspace current-workspace (- (or count 1))))
 
   (define-command 'move-workspace-forwards move-workspace-forwards
-    #:user-level 'expert)
+    #:advanced t)
   (define-command 'move-workspace-backwards move-workspace-backwards
-    #:user-level 'expert)
+    #:advanced t)
 
   (define (select-workspace-from-first count)
     (select-workspace (workspace-id-from-logical count)))
@@ -823,7 +811,7 @@ previous workspace."
 	(setq first-interesting-workspace last-interesting-workspace))))
 
   (define-command 'delete-empty-workspaces delete-empty-workspaces
-    #:user-level 'expert)
+    #:advanced t)
 
   (define (delete-window-instance w)
     "Remove the copy of the window on the current workspace. If this is the

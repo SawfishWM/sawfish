@@ -37,11 +37,8 @@
 	  sawfish.wm.commands
 	  sawfish.wm.util.groups)
 
-  (defcustom slide-window-increment 16
-    "Number of pixels to move window in `slide-' commands."
-    :group misc
-    :type (number 1)
-    :user-level expert)
+  (defvar slide-window-increment 16
+    "Number of pixels to move window in `slide-' commands.")
 
   (define (slide-window w right down)
     (unless (window-get w 'fixed-position)

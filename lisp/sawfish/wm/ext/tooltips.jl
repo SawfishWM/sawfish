@@ -51,7 +51,6 @@
     "Display tooltips for window frames."
     :type boolean
     :group (misc tooltips)
-    :user-level novice
     :require sawfish.wm.ext.tooltips)
 
   (defcustom tooltips-show-doc-strings nil

@@ -43,7 +43,6 @@
     "The program used to play audio samples. If unset, built-in support for \
 ESD is used."
     :type (optional program)
-    :user-level expert
     :group audio)
 
   ;; currently running audio process

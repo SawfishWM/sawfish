@@ -134,14 +134,12 @@ that overrides settings set elsewhere.")
     "Default frame style:"
     :type frame-style
     :widget-flags (expand-vertically)
-    :user-level novice
     :group appearance
     :after-set (lambda () (after-setting-default-frame)))
 
   (defcustom reload-themes-when-changed t
     "Automatically reload themes when they are updated."
     :type boolean
-    :user-level expert
     :group misc)
 
   (defvar frame-type-fallback-alist
@@ -206,15 +204,10 @@ deciding which frame type to ask a theme to generate.")
     :group appearance
     :type font
     :widget-flags (expand-horizontally)
-    :user-level novice
     :after-set (lambda () (after-setting-frame-option)))
 
-  (defcustom default-bevel-percent nil
-    "Bevel intensity: \\wpercent."
-    :group appearance
-    :type (number 0 100)
-    :user-level expert
-    :after-set (lambda () (after-setting-frame-option)))
+  (defvar default-bevel-percent nil
+    "Bevel intensity as a percentage.")
 
 
 ;;; managing frame types

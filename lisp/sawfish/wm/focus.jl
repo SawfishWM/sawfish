@@ -47,26 +47,24 @@
   (defcustom focus-mode 'click
     "When does the mouse pointer affect the input focus."
     :type symbol
-    :user-level novice
     :group focus
     :before-set (lambda () (focus-mode-changed 'before))
     :after-set (lambda () (focus-mode-changed 'after)))
 
   (defcustom focus-click-through t
-    "Does click-to-focus mode pass the click through to the window."
+    "Click-to-focus mode passes the click through to the application."
     :type boolean
-    :user-level expert
     :group focus)
 
   (defvar focus-dont-push nil
-    "When t, focusing a window doesn't change it's position in the stack of
+    "When true, focusing a window doesn't change it's position in the stack of
 most-recently focused windows.")
 
   (defvar focus-ignore-pointer-events nil
-    "When t, pointer in/out events don't cause focus changes.")
+    "When true, pointer in/out events don't cause focus changes.")
 
   (define focus-within-click-event (make-fluid nil)
-    "When non-nil, the current command is being called from within a
+    "When true, the current command is being called from within a
 click-to-focus button press event.")
 
 
@@ -158,7 +156,7 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	((pointer-in)
 	 (when (window-really-wants-input-p w)
 	   (set-input-focus w)))
-	((warp-pointer-if-necessary)
+	((warp-if-necessary)
 	 (let ((current (query-pointer-window)))
 	   (unless (or (eq current w) (desktop-window-p current))
 	     (warp-cursor-to-window w)))))))

@@ -48,7 +48,6 @@
   (defcustom edge-flip-enabled nil
     "Select the next desktop when the pointer hits screen edge."
     :type boolean
-    :user-level novice
     :require sawfish.wm.ext.edge-flip
     :group (workspace edge-flip)
     :after-set (lambda () (edge-flip-enable)))

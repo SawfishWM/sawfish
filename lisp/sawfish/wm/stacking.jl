@@ -56,8 +56,7 @@
   (defcustom transients-above 'parents
     "Keep transient windows stacked above: \\w"
     :group (misc stacking)
-    :type (choice all parents none)
-    :user-level expert)
+    :type (choice all parents none))
 
   (defmacro save-stacking-order (#!rest forms)
     "Execute FORMS, then reinstall the original stacking order."
@@ -354,11 +353,11 @@ lowest possible position. Otherwise raise it as far as allowed."
     (set-window-depth w (1+ (window-depth w))))
 
   (define-command 'raise-single-window raise-window
-    #:spec "%W" #:user-level 'expert)
+    #:spec "%W" #:advanced t)
   (define-command 'lower-single-window lower-window
-    #:spec "%W" #:user-level 'expert)
+    #:spec "%W" #:advanced t)
   (define-command 'raise-lower-single-window raise-lower-window
-    #:spec "%W" #:user-level 'expert)
+    #:spec "%W" #:advanced t)
   (define-command 'raise-window-depth raise-window-depth #:spec "%W")
   (define-command 'lower-window-depth lower-window-depth #:spec "%W")
 

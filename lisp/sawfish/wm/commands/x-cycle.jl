@@ -125,7 +125,6 @@
   (defcustom cycle-keymap (make-keymap)
     "Keymap containing bindings active only during window cycling operations."
     :group bindings
-    :user-level expert
     :type keymap)
 
 

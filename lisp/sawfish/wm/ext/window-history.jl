@@ -111,8 +111,7 @@
   (defcustom window-history-ignore-transients t
     "Don't automatically remember details of transient windows."
     :group (misc window-history)
-    :type boolean
-    :user-level expert)
+    :type boolean)
 
 
 ;;; matching windows
