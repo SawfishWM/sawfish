@@ -34,9 +34,8 @@
 				   (and (not allow-iconified)
 					(window-get w 'iconified))
 				   (and workspace
-					(window-get w 'workspace)
-					(not (equal (window-get w 'workspace)
-						    workspace)))))
+					(not (window-in-workspace-p
+					      w workspace)))))
 			     windows))
     (unless all-viewports
       (setq windows (delete-if window-outside-viewport-p windows)))

@@ -81,12 +81,10 @@
   (or (eq (window-visibility w) 'unobscured)
       (let*
 	  ((depth (window-get w 'depth))
-	   (space (or (window-get w 'workspace) current-workspace))
 	   (order (delete-if
 		   (lambda (x)
 		     (or (/= (window-get x 'depth) depth)
-			 (and (window-get x 'workspace)
-			      (not (eq (window-get x 'workspace) space)))))
+			 (not (windows-share-workspace-p w x))))
 		   (stacking-order))))
 	(eq (car order) w))))
 

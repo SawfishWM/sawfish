@@ -186,9 +186,8 @@
       (throw 'x-cycle-exit t))
     (if x-cycle-current
 	(when (or (window-get x-cycle-current 'iconified)
-		  (and (window-get x-cycle-current 'workspace)
-		       (not (equal (window-get x-cycle-current 'workspace)
-				   current-workspace))))
+		  (not (window-in-workspace-p
+			x-cycle-current current-workspace)))
 	  (hide-window x-cycle-current))
       ;; first call, push the currently focused window onto
       ;; the top of the stack

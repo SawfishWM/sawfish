@@ -94,10 +94,7 @@ A value between 0 and 1023 inclusive.")
 		   (and (window-get x 'ignored)
 			(not (window-avoided-p x)))
 		   (window-get x 'iconified)
-		   (/= (or (window-get x 'workspace)
-			   current-workspace)
-		       (or (window-get w 'workspace)
-			   current-workspace))))
+		   (not (windows-share-workspace-p x w))))
 	     (managed-windows)))
 
 
