@@ -326,39 +326,41 @@ static void
 client_message (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xclient.window);
-    if (w != 0 || ev->xclient.window == root_window)
+    repv type, data, args;
+    type = x_atom_symbol (ev->xclient.message_type);
+    switch (ev->xclient.format)
     {
-	repv type, data, args;
-	type = x_atom_symbol (ev->xclient.message_type);
-	switch (ev->xclient.format)
-	{
-	    int i;
+	int i;
 
-	case 8:
-	    data = rep_string_dupn (ev->xclient.data.b, 20);
-	    break;
+    case 8:
+	data = rep_string_dupn (ev->xclient.data.b, 20);
+	break;
 
-	case 16:
-	    data = Fmake_vector (rep_MAKE_INT(10), Qnil);
-	    for (i = 0; i < 10; i++)
-		rep_VECTI(data,i) = rep_MAKE_INT (ev->xclient.data.s[i]);
-	    break;
+    case 16:
+	data = Fmake_vector (rep_MAKE_INT(10), Qnil);
+	for (i = 0; i < 10; i++)
+	    rep_VECTI(data,i) = rep_MAKE_INT (ev->xclient.data.s[i]);
+	break;
 
-	case 32:
-	    data = Fmake_vector (rep_MAKE_INT(5), Qnil);
-	    for (i = 0; i < 5; i++)
-		rep_VECTI(data,i) = rep_MAKE_INT (ev->xclient.data.l[i]);
-	    break;
+    case 32:
+	data = Fmake_vector (rep_MAKE_INT(5), Qnil);
+	for (i = 0; i < 5; i++)
+	    rep_VECTI(data,i) = rep_MAKE_INT (ev->xclient.data.l[i]);
+	break;
 
-	default:
-	    data = Qnil;
-	}
-	args = rep_list_2 (type, data);
+    default:
+	data = Qnil;
+    }
+    args = rep_list_2 (type, data);
 
-	if (w != 0)
-	    Fcall_window_hook (Qclient_message_hook, rep_VAL(w), args, Qor);
-	else
-	    Fcall_hook (Qclient_message_hook, Fcons (Qroot, args), Qor);
+    if (w != 0)
+	Fcall_window_hook (Qclient_message_hook, rep_VAL(w), args, Qor);
+    else
+    {
+	Fcall_hook (Qclient_message_hook,
+		    Fcons ((ev->xclient.window == root_window)
+			   ? Qroot : rep_MAKE_INT(ev->xclient.window), args),
+		    Qor);
     }
 }
 
