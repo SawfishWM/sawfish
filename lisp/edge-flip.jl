@@ -21,7 +21,8 @@
 
 (provide 'edge-flip)
 
-(defgroup edge-flip "Edge Flipping")
+(defgroup edge-flip "Edge Flipping"
+  :group workspace)
 
 ;; for the compiler's benefit
 (eval-when-compile (require 'move-resize))
@@ -32,26 +33,26 @@
   "Flip to next viewport/workspace when pointer hits screen edge."
   :type boolean
   :require edge-flip
-  :group edge-flip
+  :group (workspace edge-flip)
   :after-set (lambda () (edge-flip-enable)))
 
 (defcustom edge-flip-only-when-moving nil
   "Only flip when interactively moving a window."
   :type boolean
-  :group edge-flip
+  :group (workspace edge-flip)
   :after-set (lambda () (edge-flip-enable)))
 
 (defcustom edge-flip-type 'viewport
   "What hitting the screen edge actually flips."
   :type symbol
   :options (viewport workspace)
-  :group edge-flip)
+  :group (workspace edge-flip))
 
 (defcustom edge-flip-delay 250
   "Number of milliseconds to wait after pointer hits screen edge before
 flipping."
   :type number
-  :group edge-flip
+  :group (workspace edge-flip)
   :range (0 . 1000))
 
 (defvar ef-current-edge nil)
