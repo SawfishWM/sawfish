@@ -187,10 +187,13 @@ handle_fp_click (struct frame_part *fp, XEvent *ev)
 void
 unclick_current_fp (void)
 {
-    if (clicked_frame_part != 0 && clicked_frame_part->clicked != 0)
+    if (clicked_frame_part != 0)
     {
-	clicked_frame_part->clicked = 0;
-	refresh_frame_part (clicked_frame_part);
+	if (clicked_frame_part->clicked)
+	{
+	    clicked_frame_part->clicked = 0;
+	    refresh_frame_part (clicked_frame_part);
+	}
 	clicked_frame_part = 0;
     }
 }
@@ -207,11 +210,13 @@ button_press (XEvent *ev)
     fp = find_frame_part_by_window (ev->xbutton.window);
     if (fp != 0)
     {
-	repv tem;
 	w = fp->win;
-	tem = Fassq (Qkeymap, fp->alist);
-	if (tem && tem != Qnil)
-	    context_map = rep_CDR(tem);
+	if (fp->clicked)
+	{
+	    repv tem = Fassq (Qkeymap, fp->alist);
+	    if (tem && tem != Qnil)
+		context_map = rep_CDR(tem);
+	}
 
 	if (ev->type == ButtonPress)
 	    handle_fp_click (fp, ev);
@@ -469,8 +474,25 @@ unmap_notify (XEvent *ev)
 static void
 enter_notify (XEvent *ev)
 {
+    struct frame_part *fp;
     if (ev->xcrossing.window == root_window)
 	Fcall_hook (Qenter_notify_hook, Fcons (Qroot, Qnil), Qnil);
+    else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
+    {
+	bool refresh = FALSE;
+	if (!fp->highlighted)
+	{
+	    fp->highlighted = 1;
+	    refresh = TRUE;
+	}
+	if (clicked_frame_part == fp)
+	{
+	    fp->clicked = 1;
+	    refresh = TRUE;
+	}
+	if (refresh)
+	    refresh_frame_part (fp);
+    }
     else
     {
 	Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
@@ -482,8 +504,25 @@ enter_notify (XEvent *ev)
 static void
 leave_notify (XEvent *ev)
 {
+    struct frame_part *fp;
     if (ev->xcrossing.window == root_window)
 	Fcall_hook (Qleave_notify_hook, Fcons (Qroot, Qnil), Qnil);
+    else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
+    {
+	bool refresh = FALSE;
+	if (fp->highlighted)
+	{
+	    fp->highlighted = 0;
+	    refresh = TRUE;
+	}
+	if (clicked_frame_part == fp)
+	{
+	    fp->clicked = 0;
+	    refresh = TRUE;
+	}
+	if (refresh)
+	    refresh_frame_part (fp);
+    }
     else
     {
 	Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
