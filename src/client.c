@@ -20,10 +20,16 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "libclient.h"
+#include <config.h>
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#ifdef HAVE_LIBREADLINE
+# include <readline/readline.h>
+# include <readline/history.h>
+#endif
 
 int opt_quiet = 0;		/* don't print results */
 
@@ -67,6 +73,9 @@ main(int argc, char *argv[])
     char *display = 0;
     long result = 0;
     int i;
+#ifdef HAVE_LIBREADLINE
+    char *user_input = 0;
+#endif
 
     argc--; argv++;
 
@@ -141,11 +150,28 @@ main(int argc, char *argv[])
 	    case 0:
 		do {
 		    if(isatty(0))
-			printf("sawmill%% "), fflush(stdout);
-		    if(fgets(buf, sizeof(buf), stdin) == 0)
+#ifdef HAVE_LIBREADLINE
+  		        user_input = readline("sawmill% ");
+		    if (user_input == 0)
+#else
+		    {
+			printf("sawmill%% ");
+			fflush(stdout);
+		    }
+		    if(fgets(buf, sizeof(buf), stdin) == 0) 
+#endif
 			result = 10;
 		    else
+		    {
+#ifdef HAVE_LIBREADLINE
+			strcpy(buf, user_input);
+			add_history(user_input);
+#endif
 			result = do_eval (buf);
+		    }     
+#ifdef HAVE_LIBREADLINE
+		    free (user_input);
+#endif
 		} while(result == 0);
 		argc--; argv++;
 		break;
