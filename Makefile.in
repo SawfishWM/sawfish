@@ -44,13 +44,8 @@ install : all installdirs
 	for f in ./DOC*; do \
 	  $(INSTALL_DATA) $$f $(DESTDIR)$(sawfishdir)/$(version); \
 	done
-	-set -e; for d in $(prefix) $(DESTDIR)$(GNOMEDIRS); do \
-	  if [ -d $$d/share/gnome/wm-properties ]; then \
-	    rm -f $(DESTDIR)$$d/share/gnome/wm-properties/Sawmill.desktop; \
-	    $(INSTALL_DATA) Sawfish.desktop $(DESTDIR)$$d/share/gnome/wm-properties; \
-	    break; \
-	  fi \
-	done
+	rm -f $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties/Sawmill.desktop
+	$(INSTALL_DATA) Sawfish.desktop $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties
 	-set -e; for f in $(OLD_BINARIES); do \
 	  if [ -x $(DESTDIR)$(bindir)/$$f ]; then \
 	    rm -f $(DESTDIR)$(bindir)/$$f; \
@@ -59,7 +54,7 @@ install : all installdirs
 	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(sawfishdir)/$(version) $(DESTDIR)$(bindir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(sawfishdir)/$(version) $(DESTDIR)$(bindir) $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties
 
 uninstall :
 	set -e; for dir in $(SUBDIRS); do \
