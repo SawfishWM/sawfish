@@ -1,5 +1,14 @@
 1999-08-02  John Harper  <john@dcs.warwick.ac.uk>
 
+	* workspace.jl (transients-on-parents-workspace): new variable
+	(merge-next-workspace, merge-previous-workspace,
+	insert-workspace): new commands, in the workspace menu
+	(popup-workspace-list, popup-window-list): new commands
+
+	* transient.jl (transients-get-focus): new variable, when t
+	mapping transient windows whose parent is focused passes the
+	focus to the transient
+
 	* place-window.jl (place-window): fix a missing
 	close-parenthesis
 
