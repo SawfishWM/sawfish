@@ -1140,7 +1140,7 @@ build_lock_mods (void)
 	    all_lock_combs[i] |= LockMask;
 	if (i & 2)
 	    all_lock_combs[i] |= num_lock_mod ? num_lock_mod : scroll_lock_mod;
-	if (i & 3)
+	if (i & 4)
 	    all_lock_combs[i] |= scroll_lock_mod;
     }
     all_lock_mask = LockMask | num_lock_mod | scroll_lock_mod;
