@@ -879,6 +879,7 @@ exec rep "$0" "$@"
       (gtk-clist-remove patterns-clist row))))
 
 (defun on-patterns-clist-select-row (widget row col)
+  (declare (unused widget col))
   (unless (eq patterns-selection row)
     (let
 	((cell (nth row patterns-alist)))
@@ -989,6 +990,7 @@ exec rep "$0" "$@"
       (gtk-clist-remove frames-name-clist row))))
 
 (defun on-frames-name-clist-select (w row col)
+  (declare (unused w col))
   (unless (eq frame-selection row)
     (setq frame-selection row)
     (gtk-frame-set-label frames-frame (car (current-frame)))
@@ -1039,17 +1041,16 @@ exec rep "$0" "$@"
        frames-part-clist frame-part-selection 1 (aref vec 1)))))
 
 (defun on-frames-part-clist-select (w row col)
+  (declare (unused w col))
   (unless (eq frame-part-selection row)
     (setq frame-part-selection row)
     (update-frame-part-table)
     (set-widget-enabled frames-part-table-viewport t)))
 
 (defun on-frames-part-clist-unselect ()
-  (let
-      ((row frame-part-selection))
-    (setq frame-part-selection nil)
-    (clear-frame-part-table)
-    (set-widget-enabled frames-part-table-viewport nil)))
+  (setq frame-part-selection nil)
+  (clear-frame-part-table)
+  (set-widget-enabled frames-part-table-viewport nil))
 
 (defun on-frames-add-part ()
   (let
@@ -1189,6 +1190,7 @@ exec rep "$0" "$@"
       (gtk-clist-set-text mapping-clist mapping-selection 1 (cdr cell)))))
 
 (defun on-mapping-clist-select (w row col)
+  (declare (unused w col))
   (setq mapping-selection row)
   (set-widget-enabled mapping-combo-hbox t)
   (gtk-entry-set-text
