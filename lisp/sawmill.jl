@@ -24,6 +24,10 @@
 ;; frame-style loaded if user hasn't set their own
 (defvar fallback-frame-style 'microGUI)
 
+;; regexp matching languages to use FontSets for. Please send me
+;; patches adding to this as required
+(defvar fontset-languages-re "\\bja\\b")
+
 ;; quiet autoloading
 (setq autoload-verbose nil)
 
@@ -45,13 +49,19 @@
 ;; load i18n support when necessary
 (unless batch-mode
   (let
-      ((lang (or (getenv "LC_ALL") (getenv "LC_MESSAGES") (getenv "LANG"))))
-    (when (and (not (get-command-line-option "--disable-nls"))
-	       lang (not (string= lang "C")))
+      ((lang (or (getenv "LC_ALL") (getenv "LANG") (getenv "LANGUAGE")))
+       (disable-nls (get-command-line-option "--disable-nls")))
+
+    (when (and lang (not disable-nls) (not (string= lang "C")))
       (require 'gettext)
       (bindtextdomain
        "sawmill" (expand-file-name "../locale" sawmill-lisp-lib-directory))
-      (textdomain "sawmill"))))
+      (textdomain "sawmill"))
+
+    ;; XFree86 servers don't like using FontSets to draw Latin1
+    ;; characters it seems.. :-(
+    (setq fonts-are-fontsets
+	  (and lang (string-match fontset-languages-re lang nil t)))))
 
 ;; load standard libraries
 (require 'custom)
