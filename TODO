@@ -216,5 +216,9 @@ Long term ideas
     just parse the rc files for the default style (font, colours, and
     any background pixmaps)
 
+    Actually, it's not necessary to parse the rc files manually. Just
+    write a program linked to gtk that queries the default style and
+    writes an s-expression description to stdout
+
     Note that all this stuff would require the "custom frame parts"
     idea above to be implemented
