@@ -3,12 +3,12 @@
 This is sawmill, a highly configurable window manager for X11. It is
 known to compile on at least Solaris/sparc and Linux/ix86; it is
 released under the terms of the GNU GPL, copyright John Harper
-<john@dcs.warwick.ac.uk>
+<jsh@sawmill.sourceforge.net>
 
 It should be considered alpha quality, but seems stable in my
 environment. For more details, see the url:
 
-	http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
+	http://sawmill.sourceforge.net/
 
 
 Manifesto
@@ -55,9 +55,9 @@ To compile this distribution you'll need GNU make, Imlib, my librep
 Lisp interpreter, and the rep-gtk binding installed. Sources for some
 of these are:
 
-	ftp://ftp.enlightenment.org/e/enlightenment/		[for imlib]
-	http://www.dcs.warwick.ac.uk/~john/sw/librep.html
-	http://www.dcs.warwick.ac.uk/~john/sw/rep-gtk.html
+	http://librep.sourceforge.net/
+	http://rep-gtk.sourceforge.net/
+	ftp://ftp.gnome.org/pub/GNOME/sources/imlib/
 
 After making sure that Imlib, librep, and rep-gtk are installed, do
 something similar to the following in the root of the unpacked sawmill
@@ -81,84 +81,14 @@ Please read the TODO list, and send me any feedback. Bug reports are
 especially welcome :-)
 
 
-Default Bindings
-****************
-
-The keymaps.jl script loads some initial event bindings, these include:
-
-Anywhere at all:
-
-	C-Left		previous-workspace
-	C-Right		next-workspace
-	M-TAB		cycle-windows
-
-In any managed window:
-
-	C-M-Up		raise-window
-	C-M-Down	lower-window
-	C-M-Left	send-to-previous-workspace
-	C-M-Right	send-to-next-workspace
-	M-Button1	move-window-interactively
-	M-Button2	popup-window-menu
-	M-Button3	raise-lower-window
-
-In the root window:
-
-	Button2		popup-root-menu
-
-In the window title bar:
-
-	Button1-Move	move-window-interactively
-	Button2-Move	resize-window-interctively
-	Button3		raise-lower-window
-	Button1-Click2	toggle-window-shaded [click2 = double-clicked]
-
-In the window borders:
-
-	Button1-Move	resize-window-interactively
-	Button2-Move	move-window-interactively
-	Button3		raise-lower-window
-
-In the menu button: [ this is the only button in the default
-`absolute-e' theme ]
-
-	Button1		popup-window-menu
-	Button3		close-window
-
-In the window close button:
-
-	Button1		close-window
-	Button3		popup-window-menu
-
-In the iconify button:
-
-	Button1		iconify-window
-	Button3		popup-window-menu
-
-In the maximize button:
-
-	Button1		maximize-window-toggle
-	Button2		maximize-window-verically-toggle
-	Button3		maximize-window-horizontally-toggle
-
-[ C- is the control key, M- is the meta key; other modifiers include
-`S-' (shift) and `A-' (alt) ]
-
-
 Notes
 *****
 
-Workspaces are a bit different to the usual virtual desktops. They are
-created and deleted on demand. Send a window to a new workspace to
-create one, remove all windows to delete it.
-
-Minimal GNOME compliance can be obtained by requiring the `gnome'
-module, i.e. put "(require 'gnome)" in your .sawmillrc file.
-
-Sawmill is fully session managed. If the environment variable
-SESSION_MANAGER is set, the window manager will attempt to connect to
-it. All window state is saved and reloaded; Lisp modules may register
-their own session-manager functions for any window state that they add.
+Sawmill is fully session managed using the X11R6 protocols. If the
+environment variable SESSION_MANAGER is set, the window manager will
+attempt to connect to it. All window state is saved and reloaded; Lisp
+modules may register their own session-manager functions for any window
+state that they add.
 
 To dump all Lisp documentation strings execute the following in the
 shell:
@@ -177,13 +107,5 @@ in the `~/.sawmillrc' file, a Lisp script that is executed at startup
 (after loading the GUI customizations). If this script exists, it
 prevents the `sawmill-defaults.jl' script being evaluated.
 
-Themes are loaded from directories in the `theme-path' variable,
-user-local themes may be stored in `~/.sawmill/themes/'. Each theme
-gets its own directory, which must include a `theme.jl' or `theme.jlc'
-script to initialise a frame-style of the same name as the directory.
-While this script is being evaluated the image path is set so that the
-theme can load any images stored in its directory.
-
-For a description of the structures defining window frame parts, see
-the Info manual (node `Window Frames')
+There is an Info manual (sawmill.info) documenting the lisp interface.
 

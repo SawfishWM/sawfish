@@ -197,7 +197,7 @@
 	    (list 'label (format nil (_ "\
 Sawmill %s (rep %s)
 
-Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+Copyright (C) 1999 John Harper <jsh@sawmill.sourceforge.net>
 
 This is free software -- you are welcome to redistribute it and/or \
 modify it under the terms of the GNU General Public License as \
@@ -209,6 +209,5 @@ WITHOUT ANY WARRANTY; without even the implied warranty of \
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the \
 GNU General Public License for more details.
 
-Visit the Sawmill homepage at http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
-")
+Visit the Sawmill homepage at http://sawmill.sourceforge.net/")
 				 sawmill-version rep-version))))
