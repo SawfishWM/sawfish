@@ -217,7 +217,12 @@
     (set-x-property 'root '_WIN_AREA
 		    (vector (car port) (cdr port)) 'CARDINAL 32)
     (set-x-property 'root '_WIN_AREA_COUNT
-		    (vector viewport-columns viewport-rows) 'CARDINAL 32))
+		    (vector viewport-columns viewport-rows) 'CARDINAL 32)
+
+    ;; XXX I'm using this property to tell desk-guide to move
+    ;; XXX the current area on all desktops at once
+    ;; XXX This is totally non-standard and may change..
+    (set-x-property 'root '_WIN_UNIFIED_AREA (vector 1) 'CARDINAL 32))
 
   (delete-x-property 'root '_WIN_WORKSPACE_NAMES)
 
@@ -243,7 +248,8 @@
   (delete-x-property 'root '_WIN_SUPPORTING_WM_CHECK)
   (delete-x-property 'root '_WIN_PROTOCOLS)
   (delete-x-property 'root '_WIN_AREA)
-  (delete-x-property 'root '_WIN_AREA_COUNT))
+  (delete-x-property 'root '_WIN_AREA_COUNT)
+  (delete-x-property 'root '_WIN_UNIFIED_AREA))
 
 (unless (or gnome-window-id batch-mode)
   (gnome-init))
