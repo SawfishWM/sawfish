@@ -129,8 +129,6 @@
   (if (eq function 'move)
       (call-window-hook 'before-move-hook w)
     (call-window-hook 'before-resize-hook w))
-  (when move-resize-raise-window
-    (raise-window w))
   (let*
       ((from-motion-event (and (current-event)
 			       (string-match "-Move$" (event-name
@@ -177,6 +175,9 @@
        (frame-draw-mutex (not (eq move-resize-mode 'opaque)))
        (frame-state-mutex 'clicked)
        server-grabbed)
+    (when (and move-resize-raise-window (eq move-resize-mode 'opaque))
+      ;; only raise window initially if the display will get updated
+      (raise-window w))
     (unless (eq move-resize-mode 'opaque)
       ;; prevent any other programs drawing on the display
       (grab-server)
@@ -212,6 +213,8 @@
       (when server-grabbed
 	(ungrab-server))
       (display-message nil))
+    (when (and move-resize-raise-window (not (eq move-resize-mode 'opaque)))
+      (raise-window w))
     (if (eq function 'move)
 	(call-window-hook 'after-move-hook w (list move-resize-directions))
       (call-window-hook
