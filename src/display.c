@@ -77,7 +77,7 @@ error_handler (Display *dpy, XErrorEvent *ev)
     {
 	DB(("error_handler (%s)\n", w->name));
 	if (w == focus_window)
-	    focus_on_window (0);
+	    focus_window = 0;
 	if (w->id)
 	    remove_window (w, Qt);
 	/* the window isn't windowp anymore */

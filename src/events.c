@@ -305,7 +305,7 @@ destroy_notify (XEvent *ev)
     if (w == 0 || ev->xdestroywindow.window != w->id)
 	return;
     if (w == focus_window)
-	focus_on_window (0);
+	focus_window = 0;
     if (w->id)
 	remove_window (w, Qt);
     /* the window isn't windowp anymore.. */
@@ -357,15 +357,18 @@ static void
 reparent_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xreparent.window);
-    if (w != 0 && ev->xreparent.window == w->id)
+    if (w != 0 && ev->xreparent.window == w->id
+	&& ev->xreparent.event == w->id)
+    {
 	w->reparenting = FALSE;
+    }
 }
 
 static void
 map_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xmap.window);
-    if (w != 0 && ev->xmap.window == w->id)
+    if (w != 0 && ev->xmap.window == w->id && ev->xmap.event == w->id)
     {
 	w->mapped = TRUE;
 	if (!w->reparenting && w->frame != 0)
@@ -382,7 +385,7 @@ static void
 unmap_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xunmap.window);
-    if (w != 0 && ev->xunmap.window == w->id)
+    if (w != 0 && ev->xunmap.window == w->id && ev->xunmap.event == w->id)
     {
 	if (!w->reparenting && w->frame != 0)
 	{
@@ -464,7 +467,8 @@ focus_out (XEvent *ev)
     if (w != 0 && ev->xfocus.detail != NotifyInferior)
     {
 	XUninstallColormap (dpy, w->attr.colormap);
-	focus_window = 0;
+	if (focus_window == w)
+	    focus_window = 0;
 	if (w->focus_change != 0)
 	{
 	    DB (("  calling focus change %p on %s\n",
@@ -646,7 +650,7 @@ handle_input_mask(long mask)
 	else
 	    fprintf (stderr, "warning: unhandled event: %d\n", xev.type);
 	current_x_event = 0;
-	XSync (dpy, False);
+	XFlush (dpy);
     }
 }
 
