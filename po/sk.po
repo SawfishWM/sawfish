@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.37\n"
-"POT-Creation-Date: 2001-03-02 15:10+0100\n"
-"PO-Revision-Date: 2001-03-02 15:23CET\n"
+"POT-Creation-Date: 2001-03-12 15:48-0800\n"
+"PO-Revision-Date: 2001-03-21 13:26CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@rak.isternet.sk>\n"
 "MIME-Version: 1.0\n"
@@ -54,15 +54,38 @@ msgstr "[hore]"
 msgid "[bottom]"
 msgstr "[dole]"
 
+#. ../lisp/sawfish/gtk/widgets/color.jl
+#. ../themer/themer.in
+msgid "Select color"
+msgstr "Vyberte farbu"
+
 #. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
 #. ../themer/themer.in
 msgid "Browse..."
 msgstr "Prechádza»..."
 
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../themer/themer.in
+msgid "Select font"
+msgstr "Vyberte písmo"
+
 #. ../themer/themer.in
 msgid "Properties..."
 msgstr "Vlastnosti..."
+
+#. ../themer/themer.in
+msgid "Select Image"
+msgstr "Vyberte obrázok"
+
+#. ../themer/themer.in
+msgid "Image Properties"
+msgstr "Vlastnosti obrázku"
+
+#. ../lisp/sawfish/gtk/widget.jl
+#. ../themer/themer.in
+msgid "No matching item for %S"
+msgstr "Niè neodpovedá %S"
 
 #. ../themer/themer.in
 #, c-format
@@ -265,6 +288,10 @@ msgstr "Klávesa"
 msgid "Value"
 msgstr "Hodnota"
 
+#. ../lisp/sawfish/gtk/widgets/file.jl
+msgid "Select file"
+msgstr "Vyberte súbor"
+
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
 msgstr "Prida»..."
@@ -310,6 +337,21 @@ msgstr "Chyba Sawfish"
 msgid "Sawfish configurator"
 msgstr "Nastavenie sawfish"
 
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Pracovné plochy:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Ståpce:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Riadky:"
+
 #. ../lisp/sawfish/wm/commands.jl
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 #. ../lisp/sawfish/ui/widgets/command.jl
@@ -348,18 +390,6 @@ msgstr "Akcie"
 #. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Match window properties"
 msgstr "Porovna» vlastnosti okna"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Pracovné plochy:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Ståpce:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Riadky:"
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -611,6 +641,14 @@ msgstr "Zobrazi» informáciu o klávesových skratkách v polo¾kách menu."
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
 msgstr "Minimalizova»"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Unmaximize"
+msgstr "Odmaximalizova»"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Maximize"
+msgstr "Maximalizova»"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
@@ -2077,6 +2115,10 @@ msgid "Prompt for a key sequence, then print its binding."
 msgstr "Vyzva» k zadaniu postupnosti kláves a potom vytlaèi» ich klávesové skratky."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Press key..."
+msgstr "Stlaète kláves..."
+
+#. ../lisp/sawfish/wm/util/keymap.jl
 msgid "[Quote]"
 msgstr "[Apostrof]"
 
@@ -2135,6 +2177,11 @@ msgstr ""
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Okno:"
+
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+#, c-format
+msgid "Workspace %d"
+msgstr "Plocha %d"
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
