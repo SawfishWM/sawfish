@@ -172,7 +172,17 @@ button_press (XEvent *ev)
     eval_input_event (context_map);
 
     if (fp != 0 && ev->type == ButtonRelease)
+    {
+	/* In case the event binding threw a non-local-exit, fake
+	   an unwind-protect thing */
+	repv old_throw = rep_throw_value;
+	rep_GC_root gc_old_throw;
+	rep_throw_value = rep_NULL;
+	rep_PUSHGC(gc_old_throw, old_throw);
 	handle_fp_click (fp, ev);
+	rep_POPGC;
+	rep_throw_value = old_throw;
+    }
 }
 
 static void
