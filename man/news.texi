@@ -7,6 +7,72 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
 
+@heading 0.37
+
+@itemize @bullet
+
+@item New command line option @samp{--window-history-file=@var{file}}
+
+@item Search for user's rc file in this order: @file{~/.sawfishrc},
+@file{~/.sawfish/rc}, @file{~/.sawmillrc}
+
+@item New option @code{configure-ignore-stacking-requests} and a
+similarly-named window property. When set stacking requests from
+windows are ignored (Matt Tucker)
+
+@item When restarting sawfish, reselect the previously selected
+workspace
+
+@item Added a function that can recolour multiple image channels
+simultaneously
+
+@item New function @code{exit-type} -- returns the type of exit in
+progress
+
+@item Translation updates: ja (Sato Satoru), sk (Stanislav Visnovsky),
+es (Iñaki García Etxebarria), hu (Robert Vanyi), tr (Fatih Demir), ro
+(Tutu Valentin), no (Kjartan Maraas), it (Michele Campeotto), pl
+(Daniel Koc)
+
+@item Fixed bugs:
+
+@itemize @minus
+
+@item Fixed focus-handling in enter-only mode on window close and
+viewport switch
+
+@item Fixed overflow error in the image recolouring module (Simon
+Budig)
+
+@item Session management always uses a unique session file (Timo
+Korvola, me)
+
+@item Fixed bug in random placement mode where windows could sometimes
+be placed off-screen
+
+@item Fixed some auto-raise problems by reverting a misguided bug fix
+
+@item Fixed bugs with aborted session saves
+
+@item Cache stacking order of windows locally -- this allows us to keep
+the order consistent, especially after window reparenting operations
+
+@item Don't call @code{XParseColor} unless we actually @emph{have} a
+display connection (merlin)
+
+@item Merged two calls to @code{setlocale} to avoid trashing the locale
+preferences
+
+@item Check for presence of Xinerama extension before trying to use it
+-- removes the annoying error message at startup
+
+@item Added some more X server timestamp logic to correct for the
+timestamp discontinuities after APM resume
+
+@end itemize
+@end itemize
+
+
 @heading 0.36
 
 @itemize @bullet
