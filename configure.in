@@ -30,7 +30,8 @@ subversion=""
 
 output_files="src/Makefile lisp/Makefile scripts/Makefile themes/Makefile\
  lisp/sawfish/ui/Makefile lisp/sawfish/gtk/Makefile sounds/Makefile\
- man/Makefile po/Makefile Makedefs Makefile sawfish.spec"
+ man/Makefile po/Makefile Makedefs Makefile sawfish.spec\
+ lisp/sawfish/gtk/widgets/font.jl"
 
 SUBDIRS="src lisp scripts themes sounds man po"
 AC_SUBST(SUBDIRS)
@@ -124,8 +125,9 @@ PKG_CHECK_MODULES(PANGO, pango >= 1.2.0,
   [if $PKG_CONFIG --exists pangoxft; then
      AC_DEFINE(HAVE_PANGO_XFT, 1)
      PANGO_MODULES="pangoxft pangox"
-   elif $PKG_CONFIG --exists pangox; then
-     PANGO_MODULES="pangox"
+     dnl for sawfish.gtk.widgets.font
+     have_pango_xft=yes
+     AC_SUBST(have_pango_xft)
    fi
    if test "x$PANGO_MODULES" != x; then
      AC_DEFINE(HAVE_PANGO, 1)
