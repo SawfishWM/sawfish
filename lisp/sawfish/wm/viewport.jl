@@ -153,8 +153,10 @@
 (defun window-absolute-position (w)
   (let
       ((position (window-position w)))
-    (cons (mod (+ (car position) viewport-x-offset) (screen-width))
-	  (mod (+ (cdr position) viewport-y-offset) (screen-height)))))
+    (if (window-outside-viewport-p w)
+	(cons (mod (+ (car position) viewport-x-offset) (screen-width))
+	      (mod (+ (cdr position) viewport-y-offset) (screen-height)))
+      position)))
 
 (defun viewport-size-changed ()
   (let
