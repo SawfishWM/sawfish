@@ -41,6 +41,7 @@
 #include <X11/Xutil.h>
 #include <X11/Xresource.h>
 #include <X11/extensions/shape.h>
+#include <assert.h>
 
 static XID window_fp_context;
 
@@ -124,25 +125,28 @@ fp_prin (repv stream, repv win)
 static void
 fp_mark (repv obj)
 {
-    int i;
-    struct frame_part *fp = VPART(obj);
-    rep_MARKVAL(fp->alist);
-    rep_MARKVAL(rep_VAL(fp->win));
-    for (i = 0; i < fps_MAX; i++)
+    struct frame_part *fp;
+    for (fp = VPART(obj); fp != 0; fp = fp->next)
     {
-	rep_MARKVAL(fp->font[i]);
-	rep_MARKVAL(fp->fg[i]);
-	rep_MARKVAL(fp->bg[i]);
+	int i;
+	rep_MARKVAL(fp->alist);
+	rep_MARKVAL(rep_VAL(fp->win));
+	for (i = 0; i < fps_MAX; i++)
+	{
+	    rep_MARKVAL(fp->font[i]);
+	    rep_MARKVAL(fp->fg[i]);
+	    rep_MARKVAL(fp->bg[i]);
+	}
+	rep_MARKVAL(rep_VAL(fp->cursor));
+	rep_MARKVAL(rep_VAL(fp->renderer));
+	rep_MARKVAL(rep_VAL(fp->rendered_image));
+	rep_MARKVAL(fp->drawn.font);
+	rep_MARKVAL(fp->drawn.text);
+	rep_MARKVAL(fp->drawn.x_justify);
+	rep_MARKVAL(fp->drawn.y_justify);
+	rep_MARKVAL(fp->drawn.fg);
+	rep_MARKVAL(fp->drawn.bg);
     }
-    rep_MARKVAL(rep_VAL(fp->cursor));
-    rep_MARKVAL(rep_VAL(fp->renderer));
-    rep_MARKVAL(rep_VAL(fp->rendered_image));
-    rep_MARKVAL(fp->drawn.font);
-    rep_MARKVAL(fp->drawn.text);
-    rep_MARKVAL(fp->drawn.x_justify);
-    rep_MARKVAL(fp->drawn.y_justify);
-    rep_MARKVAL(fp->drawn.fg);
-    rep_MARKVAL(fp->drawn.bg);
 }
 
 static void
@@ -154,7 +158,12 @@ fp_sweep (void)
     {
 	struct frame_part *next = fp->next_alloc;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(fp)))
+	{
+	    assert (fp->next == 0);
+	    assert (fp->id == 0);
+	    assert (fp->win == 0);
 	    rep_FREE_CELL(fp);
+	}
 	else
 	{
 	    fp->next_alloc = allocated_parts;
@@ -699,8 +708,9 @@ refresh_frame_part (struct frame_part *fp)
 	if (fp->drawn.width != fp->width || fp->drawn.height != fp->height)
 	    fp->drawn.bg = rep_NULL;
 
-	set_frame_part_bg (fp);
-	if (w->id != 0)
+	if (w->id != 0 && fp->id != 0)
+	    set_frame_part_bg (fp);
+	if (w->id != 0 && fp->id != 0)
 	    set_frame_part_fg (fp);
 
 	fp->drawn.width = fp->width;
@@ -716,12 +726,8 @@ void
 refresh_frame_parts (Lisp_Window *w)
 {
     struct frame_part *fp;
-    for (fp = w->frame_parts; fp != 0; fp = fp->next)
-    {
+    for (fp = w->frame_parts; w->id != 0 && fp != 0; fp = fp->next)
 	refresh_frame_part (fp);
-	if (w->id == 0)
-	    break;
-    }
 }
 
 /* Find the frame-part that is drawn in window ID */
@@ -999,6 +1005,7 @@ list_frame_generator (Lisp_Window *w)
     {
 	ptr = gen_list;
 	last_fp = &w->frame_parts;
+	assert (w->frame_parts == 0);
 	regen = FALSE;
     }
     else
@@ -1017,16 +1024,18 @@ list_frame_generator (Lisp_Window *w)
 	rep_GC_root gc_class, gc_class_elt, gc_ov_class_elt, gc_fp;
 	bool had_left_edge = FALSE, had_top_edge = FALSE;
 	bool had_right_edge = FALSE, had_bottom_edge = FALSE;
-	repv fp_ = rep_VAL(fp);
+	repv fp_;
 
 	rep_PUSHGC(gc_class, class);
 	rep_PUSHGC(gc_class_elt, class_elt);
 	rep_PUSHGC(gc_ov_class_elt, ov_class_elt);
-	rep_PUSHGC(gc_fp, fp_);
 
 	if (!regen)
 	    fp = fp_new (w, rep_CAR (ptr));
 	elt = fp->alist;
+
+	fp_ = rep_VAL(fp);
+	rep_PUSHGC(gc_fp, fp_);
 
 	fp->width = fp->height = -1;
 	for (i = 0; i < fps_MAX; i++)
@@ -1077,12 +1086,24 @@ list_frame_generator (Lisp_Window *w)
 	    fp->text = Qnil;
 	tem = fp_assq (Qx_justify, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
-	    fp->x_justify = rep_CDR(tem);
+	{
+	    tem = rep_CDR(tem);
+	    if (Ffunctionp (tem) != Qnil)
+		tem = rep_call_lisp1 (tem, rep_VAL(w));
+	    if (tem != rep_NULL)
+		fp->x_justify = tem;
+	}
 	else
 	    fp->x_justify = Qnil;
 	tem = fp_assq (Qy_justify, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
-	    fp->y_justify = rep_CDR(tem);
+	{
+	    tem = rep_CDR(tem);
+	    if (Ffunctionp (tem) != Qnil)
+		tem = rep_call_lisp1 (tem, rep_VAL(w));
+	    if (tem != rep_NULL)
+		fp->y_justify = tem;
+	}
 	else
 	    fp->y_justify = Qnil;
 
