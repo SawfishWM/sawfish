@@ -181,17 +181,31 @@ unused before killing it.")
 (defun popup-menu (spec)
   (if (and menu-active menu-process (process-in-use-p menu-process))
       (error "Menu already active")
-    (setq menu-active (or (current-event-window) (input-focus)))
-    (menu-start-process)
-    ;; This function is probably called from a ButtonPress event,
-    ;; so cancel the implicit pointer grab (to allow the menu's grab
-    ;; to succeed)
-    (ungrab-pointer)
-    (sync-server)
-    (when (functionp spec)
-      (setq spec (funcall spec)))
-    (format menu-process "(popup-menu %S %S)\n"
-	    (mapcar 'menu-preprocessor spec) (x-server-timestamp))))
+    (let
+	((part (clicked-frame-part))
+	 (offset (clicked-frame-part-offset))
+	 (dims (clicked-frame-part-dimensions)))
+      (setq menu-active (or (current-event-window) (input-focus)))
+      (menu-start-process)
+      ;; This function is probably called from a ButtonPress event,
+      ;; so cancel the implicit pointer grab (to allow the menu's grab
+      ;; to succeed)
+      (ungrab-pointer)
+      (sync-server)
+      (when (functionp spec)
+	(setq spec (funcall spec)))
+      ;; XXX this is a hack, but I want menus to appear under buttons
+      (if (and part (setq part (cdr (assq 'class part)))
+	       (windowp menu-active)
+	       (string-match "-button$" (symbol-name part)))
+	  (progn
+	    (rplaca offset (+ (car offset)
+			      (car (window-position menu-active))))
+	    (rplacd offset (+ (cdr offset) (cdr dims)
+			      (cdr (window-position menu-active)))))
+	(setq offset nil))
+      (format menu-process "(popup-menu %S %S %S)\n"
+	      (mapcar 'menu-preprocessor spec) (x-server-timestamp) offset))))
 
 ;;;###autoload
 (defun popup-window-menu ()
