@@ -259,20 +259,22 @@ by client window W."
   "Return the screen dimensions in pixels as a cons cell `(WIDTH . HEIGHT)'."
   (cons (screen-width) (screen-height)))
 
-(defun current-head ()
+(defun current-head (&optional w)
   "Return the ID of the `current' head."
-  (if (input-focus)
-      (let ((point (window-position (input-focus)))
-	    (dims (window-dimensions (input-focus))))
+  (unless w
+    (setq w (input-focus)))
+  (if w
+      (let ((point (window-position w))
+	    (dims (window-dimensions w)))
 	(find-head (+ (car point) (quotient (car dims) 2))
 		   (+ (cdr point) (quotient (cdr dims) 2))))
     (find-head (query-pointer))))
 
-(defun current-head-dimensions ()
-  (head-dimensions (current-head)))
+(defun current-head-dimensions (&optional w)
+  (head-dimensions (current-head w)))
 
-(defun current-head-offset ()
-  (head-offset (current-head)))
+(defun current-head-offset (&optional w)
+  (head-offset (current-head w)))
 
 
 ;; property and window-state changed interface
