@@ -54,8 +54,6 @@ static repv current_event_window;
 /* We need a ButtonRelease on this fp. */
 struct frame_part *clicked_frame_part;
 
-static repv current_context_map;
-
 static XID event_handler_context;
 
 static Atom xa_sawmill_timestamp;
@@ -104,6 +102,8 @@ DEFSYM(dimensions, "dimensions");
 DEFSYM(normal, "normal");
 DEFSYM(grab, "grab");
 DEFSYM(ungrab, "ungrab");
+
+DEFSYM(ignore_fp_keymap, "ignore-fp-keymap");
 
 repv Fsynthetic_configure_mutex (repv);
 
@@ -323,6 +323,25 @@ synthesize_button_release (void)
     button_press_window = 0;
 }
 
+static repv
+current_context_map (void)
+{
+    repv map = Qnil;
+
+    if (clicked_frame_part
+	&& clicked_frame_part->clicked
+	&& clicked_frame_part->win != 0
+	&& clicked_frame_part->win->visible)
+    {
+	repv tem = Fwindow_get (rep_VAL (clicked_frame_part->win),
+				Qignore_fp_keymap);
+	if (tem == Qnil)
+	    map = get_keymap_for_frame_part (clicked_frame_part);
+    }
+
+    return map;
+}
+
 static void
 button_press (XEvent *ev)
 {
@@ -338,19 +357,12 @@ button_press (XEvent *ev)
 	w = fp->win;
 
 	if (ev->type == ButtonPress)
-	{
 	    handle_fp_click (fp, ev);
-	    current_context_map = get_keymap_for_frame_part (fp);
-	}
     }
 
     /* Only use the context map if the frame part is currently clicked,
        and it's window is visible (i.e. not iconified) */
-    eval_input_event ((clicked_frame_part
-		       && clicked_frame_part->clicked
-		       && clicked_frame_part->win != 0
-		       && clicked_frame_part->win->visible)
-		      ? current_context_map : Qnil);
+    eval_input_event (current_context_map ());
 
     if (fp != 0 && w->id != 0 && ev->type == ButtonRelease)
     {
@@ -369,7 +381,6 @@ button_press (XEvent *ev)
     {
 	button_press_mouse_x = button_press_mouse_y = -1;
 	button_press_window = 0;
-	current_context_map = Qnil;
 	/* The pointer is _always_ ungrabbed after a button-release */
 	XUngrabPointer (dpy, last_event_time);
     }
@@ -398,7 +409,7 @@ motion_notify (XEvent *ev)
     }
 
     if (pointer_in_motion)
-	eval_input_event (current_context_map);
+	eval_input_event (current_context_map ());
 
     XAllowEvents (dpy, SyncPointer, last_event_time);
 }
@@ -1576,9 +1587,9 @@ events_init (void)
     rep_INTERN(grab);
     rep_INTERN(ungrab);
 
+    rep_INTERN(ignore_fp_keymap);
+
     rep_mark_static (&current_event_window);
-    current_context_map = Qnil;
-    rep_mark_static (&current_context_map);
 
     event_handler_context = XUniqueContext ();
 
