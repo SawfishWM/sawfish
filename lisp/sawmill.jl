@@ -22,7 +22,7 @@
 (provide 'sawmill)
 
 ;; frame-style loaded if user hasn't set their own
-(defvar fallback-frame-style 'absolute-e)
+(defvar fallback-frame-style 'microGUI)
 
 ;; quiet autoloading
 (setq autoload-verbose nil)
