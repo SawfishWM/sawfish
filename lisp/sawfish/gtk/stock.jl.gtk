@@ -89,7 +89,7 @@
 
   (define-widget-type 'workspace-geometry
     (lambda (changed)
-      (make-widget `(pair (labelled ,(_ "Workspaces:"))
+      (make-widget `(pair (labelled ,(_ "Workspaces:") (number 1))
 			  (pair (labelled ,(_ "X:") (number 1))
 				(labelled ,(_ "Y:") (number 1))) t)
 		   changed)))
