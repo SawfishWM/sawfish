@@ -38,6 +38,9 @@
 ;; The intention is that whatever structure the user wants to see (e.g.
 ;; grid, cube, ...) is built on top of the underlying 1d structure
 
+;; If a window is added with its `workspace' property set, then it's
+;; added to that (logical) space
+
 
 ;; Options and variables
 
@@ -102,6 +105,10 @@
 ;; XXX should be a defcustom, need a string-list type
 (defvar workspace-names nil
   "List of workspace names.")
+
+(defvar auto-workspace-alist nil
+  "List of `(REGEXP . INDEX)' mapping window names to the workspace to open
+that window on (counting from zero).")
 
 ;; Currently active workspace, an integer
 (defvar current-workspace 0)
@@ -311,9 +318,14 @@
 ;; current workspace (or wherever else it should go)
 (defun ws-add-window (w)
   (unless (window-get w 'sticky)
+    (unless (window-get w 'workspace)
+      (let
+	  ((tem (assoc-regexp (window-name w) auto-workspace-alist)))
+	(when tem
+	  (window-put w 'workspace (cdr tem)))))
     (if (window-get w 'workspace)
 	(let
-	    ((space (window-get w 'workspace)))
+	    ((space (- (window-get w 'workspace) (car (ws-workspace-limits)))))
 	  (window-put w 'workspace nil)
 	  (ws-add-window-to-space w space))
       (let
@@ -566,7 +578,7 @@ previous workspace."
 	   (show-window w))
 	  (uniconify-to-current-workspace
 	   (ws-remove-window w)
-	   (ws-add-window w)))
+	   (ws-add-window-to-space w current-workspace)))
     (when raise-windows-on-uniconify
       (raise-window w))
     (when (and focus-windows-on-uniconify (window-wants-input-p w))
@@ -605,7 +617,7 @@ all workspaces."
       (progn
 	(window-put w 'sticky nil)
 	(window-put w 'fixed-position nil)
-	(ws-add-window w))
+	(ws-add-window-to-space w current-workspace))
     (ws-remove-window w t)
     (window-put w 'sticky t)
     (window-put w 'fixed-position t))
