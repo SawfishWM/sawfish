@@ -271,8 +271,8 @@
 
   (define (3d-hack)
     (let ((thrower (lambda ()
-		     (let
-			 ((event (decode-event (current-event))))
+		     (let ((event (and (current-event)
+				       (decode-event (current-event)))))
 		       (when (and (eq (car event) 'key)
 				  (not (memq 'release (cadr event))))
 			 (throw '3d-out nil))))))
