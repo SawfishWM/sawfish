@@ -317,7 +317,10 @@ that window on (counting from zero).")
 ;; usually called from the add-window-hook; adds window W to the
 ;; current workspace (or wherever else it should go)
 (defun ws-add-window (w)
-  (unless (window-get w 'sticky)
+  (if (window-get w 'sticky)
+      (progn
+	(window-put w 'workspace nil)
+	(show-window w))
     (unless (window-get w 'workspace)
       (let
 	  ((tem (assoc-regexp (window-name w) auto-workspace-alist)))
