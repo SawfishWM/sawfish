@@ -21,21 +21,41 @@
 
 (provide 'focus)
 
-(defcustom sloppy-focus nil
-  "Focus is only changed when a top-level window is entered, never when the
-root window is entered."
-  :type boolean
-  :group focus)
+(defcustom focus-mode 'enter-exit
+  "How does the mouse pointer affect the input focus."
+  :type (set enter-exit enter-only click)
+  :group focus
+  :after-set focus-mode-changed)
+
+(defvar click-to-focus-keymap
+  (bind-keys (make-sparse-keymap)
+    "Button1-Click1" '(set-input-focus (current-event-window))))
 
 (defun focus-enter-fun (w)
   (if (eq w 'root)
-      (unless sloppy-focus
+      (when (eq focus-mode 'enter-exit)
 	(set-input-focus nil))
-    (set-input-focus w)))
+    (unless (eq focus-mode 'click)
+      (set-input-focus w))))
 
-(defun focus-leave-fun (w)
-  (unless sloppy-focus
-    (set-input-focus nil)))
+(defun focus-in-fun (w)
+  (unless (eq (window-get w 'keymap) window-keymap)
+    (window-put w 'keymap window-keymap)))
+
+(defun focus-out-fun (w)
+  (when (eq focus-mode 'click)
+    (window-put w 'keymap click-to-focus-keymap)))
+
+(defun focus-mode-changed ()
+  (if (eq focus-mode 'click)
+      (mapc #'(lambda (w)
+		(window-put w 'keymap (if (eq (input-focus) w)
+					  window-keymap
+					click-to-focus-keymap)))
+	    (managed-windows))
+    (mapc #'(lambda (w)
+	      (window-put w 'keymap window-keymap)) (managed-windows))))
 
 (add-hook 'enter-notify-hook 'focus-enter-fun t)
-(add-hook 'leave-notify-hook 'focus-leave-fun t)
+(add-hook 'focus-in-hook 'focus-in-fun t)
+(add-hook 'focus-out-hook 'focus-out-fun t)
