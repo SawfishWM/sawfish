@@ -1214,33 +1214,57 @@ WINDOW. Returns the symbol `nil' if no such image.
 
    if (VWIN (win)->icon_image == rep_NULL)
    {
-       if (VWIN (win)->wmhints == 0)
-	   VWIN (win)->icon_image = Qnil;
-       else
-       {
-	   repv id, mask_id;
-	   repv ret = Qnil;
+       Window pixmap_id = 0, mask_id = 0;
 
+       if (VWIN (win)->wmhints != 0)
+       {
 	   if (VWIN (win)->wmhints->flags & IconPixmapHint
 	       && VWIN (win)->wmhints->icon_pixmap != 0)
 	   {
-	       id = rep_MAKE_INT (VWIN (win)->wmhints->icon_pixmap);
+	       pixmap_id = VWIN (win)->wmhints->icon_pixmap;
 	   }
-	   else
-	       id = Qnil;
 
 	   if (VWIN (win)->wmhints->flags & IconMaskHint
 	       && VWIN (win)->wmhints->icon_mask != 0)
 	   {
-	       mask_id = rep_MAKE_INT (VWIN (win)->wmhints->icon_mask);
+	       mask_id = VWIN (win)->wmhints->icon_mask;
 	   }
-	   else
-	       mask_id = Qnil;
+       }
 
-	   if (id != Qnil)
-	       ret = Fmake_image_from_x_drawable (id, mask_id);
+       if (pixmap_id == 0 && VWIN (win)->id != 0)
+       {
+	   Atom actual_type;
+	   int actual_format;
+	   long nitems, bytes_after;
+	   u_long *data = 0;
 
-	   VWIN (win)->icon_image = ret;
+	   static Atom kwm_win_icon = 0;
+
+	   if (kwm_win_icon == 0)
+	       kwm_win_icon = XInternAtom (dpy, "KWM_WIN_ICON", False);
+
+	   if (XGetWindowProperty (dpy, VWIN (win)->id, kwm_win_icon,
+				   0, 2, False, kwm_win_icon,
+				   &actual_type, &actual_format,
+				   &nitems, &bytes_after,
+				   (u_char **) &data) == Success
+	       && actual_type == kwm_win_icon
+	       && bytes_after == 0)
+	   {
+	       pixmap_id = data[0];
+	       mask_id = data[1];
+	   }
+	   if (data != 0)
+	       XFree (data);
+       }
+
+       VWIN (win)->icon_image = Qnil;
+
+       if (pixmap_id != 0)
+       {
+	   VWIN (win)->icon_image = (Fmake_image_from_x_drawable
+				     (rep_MAKE_INT (pixmap_id),
+				      mask_id ? rep_MAKE_INT (mask_id) : Qnil));
        }
    }
 

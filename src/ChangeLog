@@ -1,5 +1,9 @@
 2001-01-09  John Harper  <jsh@eazel.com>
 
+	* windows.c (Fwindow_icon_image): added support for icons
+	stored on the KWM_WIN_ICON property (aka `mini icons'). Only
+	used when there's no icon in WM_HINTS
+
 	* images.c (Fcrop_image): fix typo when checking validity of
 	HEIGHT parameter (patch from martin@whoever.com)
 
