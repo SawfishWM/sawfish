@@ -57,9 +57,11 @@
 
 ;;;###autoload
 (defun send-group-to-workspace (w send-group-dest-space)
-  (map-window-group (lambda (x)
-		      (ws-move-window
-		       x send-group-dest-space (eq x (input-focus)))) w))
+  (map-window-group
+   (lambda (x)
+     (unless (window-get x 'sticky)
+       (ws-move-window x (nearest-workspace-with-window x current-workspace)
+		       send-group-dest-space (eq x (input-focus))))) w))
 
 ;;;###autoload
 (defun send-group-to-current-workspace (w)
