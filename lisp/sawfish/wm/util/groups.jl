@@ -77,6 +77,13 @@
 (defun map-window-group (fun w)
   (mapc fun (windows-in-group w)))
 
+(defun map-other-window-groups (fun w)
+  (let
+      ((group (windows-in-group w)))
+    (map-windows (lambda (x)
+		   (unless (memq x group)
+		     (fun x))))))
+
 ;; return list of all group ids
 (defun window-group-ids ()
   (let
