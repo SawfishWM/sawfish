@@ -162,9 +162,14 @@
       (when (and class (>= (length class) 2))
 	(cond ((and (string= (aref class 1) "Panel")
 		    (string= (aref class 0) "panel"))
-	       ;; XXX I don't think the GNOME hints specify these things
+	       ;; XXX I don't think the GNOME hints specify these things...
 	       (window-put w 'focus-click-through t)
-	       (window-put w 'avoid t)))))
+	       (window-put w 'avoid t))
+	      ((and (string= (aref class 1) "Nautilus")
+		    (string= (aref class 0) "desktop_window"))
+	       ;; XXX ...or these
+	       (window-put w 'desktop t)
+	       (window-put w 'keymap root-window-keymap)))))
     (let ((state (get-x-property w '_WIN_STATE))
 	  (hints (get-x-property w '_WIN_HINTS))
 	  (layer (get-x-property w '_WIN_LAYER))
