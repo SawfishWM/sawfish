@@ -166,6 +166,7 @@ the level of any transient windows it has."
 		(window-transient-p w)
 		(window-really-wants-input-p w)
 		(window-visible-p w)
+		(input-focus)
 		(transient-of-p w (input-focus)))
 	   (set-input-focus w))
 	  (and (or (and focus-windows-when-mapped
