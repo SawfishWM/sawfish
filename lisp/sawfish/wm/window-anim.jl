@@ -31,6 +31,8 @@
 	  sawfish.wm.custom
 	  rep.util.autoloader)
 
+  (define-structure-alias window-anim sawfish.wm.ext.window-anim)
+
   (define window-animators nil
     "List of all possible window animation types.")
 
