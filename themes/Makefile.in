@@ -23,6 +23,7 @@ include ../Makedefs
 
 top_srcdir=@top_srcdir@
 
+sitethemedir := ${sawmilldir}/themes
 themedir := ${sawmilldir}/${version}/themes
 
 # also in lisp/Makefile.in
@@ -47,7 +48,8 @@ install : all installdirs
 	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(themedir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs \
+	  $(DESTDIR)$(themedir) $(DESTDIR)$(sitethemedir)
 
 uninstall :
 	for d in $(THEMES); do \
