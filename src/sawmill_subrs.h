@@ -114,13 +114,9 @@ extern void frames_kill (void);
 
 /* from functions.c */
 extern repv Qroot;
-extern repv Fraise_window (repv win);
-extern repv Flower_window (repv win);
-extern repv Fraise_lower_window (repv win);
-extern repv Fcirculate_up (void);
-extern repv Fcirculate_down (void);
 extern repv Fdelete_window (repv win);
 extern repv Fdestroy_window (repv win);
+extern repv Frestack_windows (repv list);
 extern repv Fwarp_cursor (repv x, repv y);
 extern repv Fwarp_cursor_to_window (repv win, repv x, repv y);
 extern repv Fmove_window_to (repv win, repv x, repv y);
@@ -224,6 +220,7 @@ extern repv Fwindowp (repv win);
 extern repv Fset_input_focus (repv win);
 extern repv Finput_focus (void);
 extern repv Fmanaged_windows (void);
+extern repv Fstacking_order (void);
 extern repv Fwindow_visibility (repv win);
 extern repv Fwindow_transient_p (repv win);
 extern repv Fwindow_shaped_p (repv win);

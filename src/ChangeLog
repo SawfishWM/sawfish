@@ -1,5 +1,13 @@
 1999-08-25  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c (Fstacking_order): new function
+
+	* functions.c (Fraise_window, Flower_window,
+	Fraise_lower_window, Fcirculate_up, Fcirculate_down): deleted
+	(Frestack_windows): new function
+
+	* events.c: replace calls to XMapRaised by XMapWindow
+
 	* display.c (error_handler): don't report BadWindow errors that
 	we've already handled
 
