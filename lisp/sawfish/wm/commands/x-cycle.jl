@@ -115,6 +115,7 @@
 
 (defvar x-cycle-current nil)
 (defvar x-cycle-stacking nil)
+(defvar x-cycle-windows t)
 
 ;; associate modifier names with their keys
 (defvar x-cycle-modifier-alist `(("A" ,@alt-keysyms)
@@ -157,14 +158,21 @@
     (when (grab-keyboard)
       (unwind-protect
 	  (progn
-	    ;; do the first step
-	    (x-cycle-next)
 	    (catch 'x-cycle-exit
+	      ;; do the first step
+	      (x-cycle-next)
 	      (recursive-edit))
 	    (when x-cycle-current
 	      (display-window x-cycle-current)))
 	(show-message nil)
 	(ungrab-keyboard)))))
+
+;;;###autoload
+(defun cycle-group (event w)
+  (interactive "e\n%W")
+  (let
+      ((x-cycle-windows (windows-in-group w)))
+    (cycle-windows event)))
 
 (defun x-cycle-next ()
   (interactive)
@@ -173,42 +181,46 @@
 			      nil
 			    current-workspace)
 			  cycle-include-iconified cycle-all-viewports)))
-    (when win
-      (if x-cycle-current
-	  (when (or (window-get x-cycle-current 'iconified)
-		    (and (window-get x-cycle-current 'workspace)
-			 (not (equal (window-get x-cycle-current 'workspace)
-				     current-workspace))))
-	    (hide-window x-cycle-current))
-	;; first call, push the currently focused window onto
-	;; the top of the stack
-	(when (input-focus)
-	  (setq x-cycle-current (input-focus))
-	  (window-order-push x-cycle-current)
-	  (setq win (cons x-cycle-current (delq x-cycle-current win)))))
-      (when x-cycle-stacking
-	(restack-windows x-cycle-stacking)
-	(setq x-cycle-stacking nil))
-      (when x-cycle-current
-	(setq win (or (cdr (memq x-cycle-current win)) win)))
-      (setq win (car win))
-      (setq x-cycle-current win)
-      (when (window-get win 'workspace)
-	(select-workspace (window-get win 'workspace)))
-      (move-viewport-to-window win)
-      (when (window-get win 'iconified)
-	(show-window win))
-      (when cycle-raise-windows
-	(setq x-cycle-stacking (stacking-order))
-	(raise-window win))
-      (when cycle-warp-pointer
-	(warp-cursor-to-window win))
-      (when cycle-show-window-names
-	(show-message (concat (and (window-get win 'iconified) ?[)
-			      (window-name win)
-			      (and (window-get win 'iconified) ?]))))
-      (when (and cycle-focus-windows (window-really-wants-input-p win))
-	(set-input-focus win)))))
+    (unless (eq x-cycle-windows t)
+      (setq win (delete-if #'(lambda (w)
+			       (not (memq w x-cycle-windows))) win)))
+    (unless win
+      (throw 'x-cycle-exit t))
+    (if x-cycle-current
+	(when (or (window-get x-cycle-current 'iconified)
+		  (and (window-get x-cycle-current 'workspace)
+		       (not (equal (window-get x-cycle-current 'workspace)
+				   current-workspace))))
+	  (hide-window x-cycle-current))
+      ;; first call, push the currently focused window onto
+      ;; the top of the stack
+      (when (input-focus)
+	(setq x-cycle-current (input-focus))
+	(window-order-push x-cycle-current)
+	(setq win (cons x-cycle-current (delq x-cycle-current win)))))
+    (when x-cycle-stacking
+      (restack-windows x-cycle-stacking)
+      (setq x-cycle-stacking nil))
+    (when x-cycle-current
+      (setq win (or (cdr (memq x-cycle-current win)) win)))
+    (setq win (car win))
+    (setq x-cycle-current win)
+    (when (window-get win 'workspace)
+      (select-workspace (window-get win 'workspace)))
+    (move-viewport-to-window win)
+    (when (window-get win 'iconified)
+      (show-window win))
+    (when cycle-raise-windows
+      (setq x-cycle-stacking (stacking-order))
+      (raise-window win))
+    (when cycle-warp-pointer
+      (warp-cursor-to-window win))
+    (when cycle-show-window-names
+      (show-message (concat (and (window-get win 'iconified) ?[)
+			    (window-name win)
+			    (and (window-get win 'iconified) ?]))))
+    (when (and cycle-focus-windows (window-really-wants-input-p win))
+      (set-input-focus win))))
 
 (defun x-cycle-exit ()
   (interactive)
