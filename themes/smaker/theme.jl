@@ -1,5 +1,5 @@
-;; smaker/theme.jl
-;; $Id: theme.jl,v 1.2 1999/09/25 01:01:00 john Exp $
+;; smaker/theme.jl -- somewhat windowmaker like theme, heavily customizable
+;; $Id: theme.jl,v 1.3 1999/09/25 12:58:37 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -57,11 +57,28 @@
   :type file-name
   :after-set smaker:load-images)
 
+(defcustom smaker:bar-dimension 16
+  "Height of title bar."
+  :group smaker-frame
+  :type number
+  :range (14 . nil)
+  :after-set smaker:rebuild)
+
+(defcustom smaker:border-dimension 4
+  "Width of window border."
+  :group smaker-frame
+  :type number
+  :range (1 . nil)
+  :after-set smaker:rebuild)
+
 (defcustom smaker:image-border 4
   "Border width of bar images."
   :group smaker-frame
   :type number
   :after-set smaker:rebuild)
+
+
+;; image loading
 
 (defvar smaker:install-dir (file-name-as-directory (car image-load-path)))
 
@@ -91,6 +108,9 @@
 (defun smaker:rebuild ()
   (mapc 'rebuild-frame (managed-windows)))
 
+
+;; functions used to dynamically define frame part attributes
+
 (defun smaker:close-button ()
   (if smaker:inverted-buttons smaker:close-inv-image smaker:close-image))
 
@@ -103,16 +123,34 @@
 (defun smaker:foreground ()
   smaker:fg-color)
 
+(defun smaker:bar-dimension ()
+  smaker:bar-dimension)
+
+(defun smaker:-bar-dimension ()
+  (- smaker:bar-dimension))
+
+(defun smaker:title-offset ()
+  (- smaker:bar-dimension smaker:border-dimension))
+
+(defun smaker:border-dimension ()
+  smaker:border-dimension)
+
+(defun smaker:-border-dimension ()
+  (- smaker:border-dimension))
+
+
+;; frame definitions
+
 (defvar smaker:frame
   '(;; left button
     ((background . smaker:bar-images)
      (foreground . smaker:minimize-button)
      (x-justify . center)
      (y-justify . center)
-     (left-edge . -4)
-     (width . 16)
-     (top-edge . -16)
-     (height . 16)
+     (left-edge . smaker:-border-dimension)
+     (width . smaker:bar-dimension)
+     (top-edge . smaker:-bar-dimension)
+     (height . smaker:bar-dimension)
      (class . iconify-button))
     ;; title bar
     ((background . smaker:bar-images)
@@ -120,32 +158,32 @@
      (text . window-name)
      (x-justify . center)
      (y-justify . center)
-     (left-edge . 12)
-     (right-edge . 12)
-     (top-edge . -16)
-     (height . 16)
+     (left-edge . smaker:title-offset)
+     (right-edge . smaker:title-offset)
+     (top-edge . smaker:-bar-dimension)
+     (height . smaker:bar-dimension)
      (class . title))
     ;; right button
     ((background . smaker:bar-images)
      (foreground . smaker:close-button)
      (x-justify . center)
      (y-justify . center)
-     (right-edge . -4)
-     (width . 16)
-     (top-edge . -16)
-     (height . 16)
+     (right-edge . smaker:-border-dimension)
+     (width . smaker:bar-dimension)
+     (top-edge . smaker:-bar-dimension)
+     (height . smaker:bar-dimension)
      (class . close-button))
     ;; left frame
     ((background . smaker:bar-images)
-     (right-edge . -4)
-     (width . 4)
+     (right-edge . smaker:-border-dimension)
+     (width . smaker:border-dimension)
      (top-edge . 0)
      (bottom-edge . 0)
      (class . right-border))
     ;; right frame
     ((background . smaker:bar-images)
-     (left-edge . -4)
-     (width . 4)
+     (left-edge . smaker:-border-dimension)
+     (width . smaker:border-dimension)
      (top-edge . 0)
      (bottom-edge . 0)
      (class . left-border))
@@ -153,22 +191,22 @@
     ((background . smaker:bar-images)
      (left-edge . 0)
      (right-edge . 0)
-     (bottom-edge . -4)
-     (height . 4)
+     (bottom-edge . smaker:-border-dimension)
+     (height . smaker:border-dimension)
      (class . bottom-border))
     ;; bottom-left corner
     ((background . smaker:bar-images)
-     (left-edge . -4)
-     (width . 4)
-     (bottom-edge . -4)
-     (height . 4)
+     (left-edge . smaker:-border-dimension)
+     (width . smaker:border-dimension)
+     (bottom-edge . smaker:-border-dimension)
+     (height . smaker:border-dimension)
      (class . bottom-left-corner))
     ;; bottom-right corner
     ((background . smaker:bar-images)
-     (right-edge . -4)
-     (width . 4)
-     (bottom-edge . -4)
-     (height . 4)
+     (right-edge . smaker:-border-dimension)
+     (width . smaker:border-dimension)
+     (bottom-edge . smaker:-border-dimension)
+     (height . smaker:border-dimension)
      (class . bottom-right-corner))))
 
 (defvar smaker:shaped-frame
@@ -177,10 +215,10 @@
      (foreground . smaker:minimize-button)
      (x-justify . center)
      (y-justify . center)
-     (left-edge . -4)
-     (width . 16)
-     (top-edge . -16)
-     (height . 16)
+     (left-edge . smaker:-border-dimension)
+     (width . smaker:bar-dimension)
+     (top-edge . smaker:-bar-dimension)
+     (height . smaker:bar-dimension)
      (class . iconify-button))
     ;; title bar
     ((background . smaker:bar-images)
@@ -188,84 +226,87 @@
      (text . window-name)
      (x-justify . center)
      (y-justify . center)
-     (left-edge . 12)
-     (right-edge . 12)
-     (top-edge . -16)
-     (height . 16)
+     (left-edge . smaker:title-offset)
+     (right-edge . smaker:title-offset)
+     (top-edge . smaker:-bar-dimension)
+     (height . smaker:bar-dimension)
      (class . title))
     ;; right button
     ((background . smaker:bar-images)
      (foreground . smaker:close-button)
      (x-justify . center)
      (y-justify . center)
-     (right-edge . -4)
-     (width . 16)
-     (top-edge . -16)
-     (height . 16)
+     (right-edge . smaker:-border-dimension)
+     (width . smaker:bar-dimension)
+     (top-edge . smaker:-bar-dimension)
+     (height . smaker:bar-dimension)
      (class . close-button))))
 
 (defvar smaker:transient-frame
  '(((background . smaker:bar-images)
     (left-edge . 0)
     (right-edge . 0)
-    (top-edge . -4)
-    (height . 4)
+    (top-edge . smaker:-border-dimension)
+    (height . smaker:border-dimension)
     (class . title))
    ((background . smaker:bar-images)
     (left-edge . 0)
     (right-edge . 0)
-    (bottom-edge . -4)
-    (height . 4)
+    (bottom-edge . smaker:-border-dimension)
+    (height . smaker:border-dimension)
     (class . bottom-border))
    ((background . smaker:bar-images)
-    (left-edge . -4)
-    (width . 4)
+    (left-edge . smaker:-border-dimension)
+    (width . smaker:border-dimension)
     (top-edge . 0)
     (bottom-edge . 0)
     (class . left-border))
    ((background . smaker:bar-images)
-    (right-edge . -4)
-    (width . 4)
+    (right-edge . smaker:-border-dimension)
+    (width . smaker:border-dimension)
     (top-edge . 0)
     (bottom-edge . 0)
     (class . right-border))
    ;; top-right corner
    ((background . smaker:bar-images)
-    (right-edge . -4)
-    (width . 4)
-    (top-edge . -4)
-    (height . 4)
+    (right-edge . smaker:-border-dimension)
+    (width . smaker:border-dimension)
+    (top-edge . smaker:-border-dimension)
+    (height . smaker:border-dimension)
     (class . top-right-corner))
    ;; top-left corner
    ((background . smaker:bar-images)
-    (left-edge . -4)
-    (width . 4)
-    (top-edge . -4)
-    (height . 4)
+    (left-edge . smaker:-border-dimension)
+    (width . smaker:border-dimension)
+    (top-edge . smaker:-border-dimension)
+    (height . smaker:border-dimension)
     (class . top-left-corner))
    ;; bottom-left corner
    ((background . smaker:bar-images)
-    (left-edge . -4)
-    (width . 4)
-    (bottom-edge . -4)
-    (height . 4)
+    (left-edge . smaker:-border-dimension)
+    (width . smaker:border-dimension)
+    (bottom-edge . smaker:-border-dimension)
+    (height . smaker:border-dimension)
     (class . bottom-left-corner))
    ;; bottom-right corner
    ((background . smaker:bar-images)
-    (right-edge . -4)
-    (width . 4)
-    (bottom-edge . -4)
-    (height . 4)
+    (right-edge . smaker:-border-dimension)
+    (width . smaker:border-dimension)
+    (bottom-edge . smaker:-border-dimension)
+    (height . smaker:border-dimension)
     (class . bottom-right-corner))))
 
 (defvar smaker:shaped-transient-frame
  '(((background . smaker:bar-images)
     (left-edge . 0)
     (right-edge . 0)
-    (top-edge . -4)
-    (height . 4)
+    (top-edge . smaker:-border-dimension)
+    (height . smaker:border-dimension)
     (class . title))))
 
+
+
+;; called to produce a frame definition for window W (of type TYPE)
 (defun smaker:frame-style (w type)
   (cond ((eq type 'shaped)
 	 'smaker:shaped-frame)
@@ -277,6 +318,9 @@
 	 'nil-frame)
 	(t
 	 'smaker:frame)))
+
+
+;;  initialisation
 
 (add-frame-style 'smaker 'smaker:frame-style)
 
