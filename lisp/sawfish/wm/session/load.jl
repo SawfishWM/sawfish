@@ -40,10 +40,10 @@
 
   (define restored-session nil)
 
-  (define (load-session id)
+  (define (load-session filename)
     (setq restored-session nil)
-    (when (file-exists-p (sm-find-file id))
-      (let ((file (open-file (sm-find-file id) 'read)))
+    (when (file-exists-p filename)
+      (let ((file (open-file filename 'read)))
 	(when file
 	  (unwind-protect
 	      (condition-case nil

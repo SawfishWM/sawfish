@@ -1,5 +1,9 @@
 2001-01-28  John Harper  <jsh@eazel.com>
 
+	* main.c (Fexit_type): new function, returns the type of exit
+	currently in progress, one of the symbols: `user-quit',
+	`user-restart', `session-quit' (or nil if no exit in progress)
+
 	* events.c (save_timestamp): (try to) be more intelligent when
 	detecting out of order timestamps. Instead of just discarding
 	them, fetch the real time from the X server, then set

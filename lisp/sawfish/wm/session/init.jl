@@ -22,7 +22,6 @@
 (define-structure sawfish.wm.session.init
 
     (export sm-find-file
-	    delete-session
 	    sm-add-saved-properties
 	    sm-get-window-prop
 	    sm-save-yourself
@@ -37,8 +36,11 @@
 	  sawfish.wm.windows
 	  sawfish.wm.session.util)
 
-  (defvar sm-client-id nil
+  (define sm-client-id nil
     "A string identifying the current session.")
+
+  (define sm-prefix nil
+    "A string used to uniquify the session file.")
 
   ;; this is before both the panel and gmc..?
   (defconst sm-gsm-priority 30)
@@ -63,13 +65,11 @@ the window.")
 
 ;;; utilities
 
-  (define (sm-find-file id)
-    (expand-file-name id sm-save-directory))
-
-  (define (delete-session id)
-    (let ((file (sm-find-file id)))
-      (when (file-exists-p file)
-	(delete-file file))))
+  ;; PREFIX may be null
+  (define (sm-find-file id prefix)
+    (if prefix
+	(expand-file-name (format nil "%s-%s" prefix id) sm-save-directory)
+      (expand-file-name id sm-save-directory)))
 
   (define (sm-add-saved-properties #!rest props)
     (mapc (lambda (p)
@@ -93,45 +93,79 @@ the window.")
 			     ((window-transient-p w)))))
 	  (and leader (nth 2 (get-x-property leader prop))))))
 
+  (define (make-unique-prefix) (number->string (current-utime) 36))
+
 ;; callback
 
   (define (sm-save-yourself)
     (require 'sawfish.wm.session.save)
-    (save-session sm-client-id))
+
+    ;; We're not allowed to reuse the files used to save sessions.
+    ;; So generate a new name each time.
+    (setq sm-prefix (make-unique-prefix))
+
+    (save-session (sm-find-file sm-client-id sm-prefix))
+    (set-restart-command)
+    (set-discard-command))
+
+  ;; But the session manager doesn't delete files that we
+  ;; leave around when we exit normally..
+
+  (define (before-exit)
+    (unless (or (eq (exit-type) 'session-quit)
+		(not sm-client-id))
+      (remove-sm-options)
+      (let ((file (sm-find-file sm-client-id sm-prefix)))
+	(when (file-exists-p file)
+	  (delete-file file)))))
+
+  (add-hook 'before-exit-hook before-exit)
 
 ;;; initialisation
 
-  (define (sm-init id)
-    (when (setq sm-client-id (sm-connect id))
-      ;; 1. setup all session manager properties
+  (define (remove-sm-options)
+    ;; remove any sm options from saved-command-line-args
+    (let loop ((args saved-command-line-args))
+      (when (cdr args)
+	(if (string-match "^(--sm-client-id|-clientId|--sm-prefix)" (cadr args))
+	    (progn
+	      (if (string-match "=" (cadr args))
+		  (rplacd args (cddr args))
+		(rplacd args (cdddr args)))
+	      (loop args))
+	  (loop (cdr args))))))
 
-      ;; remove any --sm-client-id option from saved-command-line-args
-      (let ((args saved-command-line-args)
-	    tem)
-	(while (cdr args)
-	  (when (string-match "^(--sm-client-id|-clientId)" (car (cdr args)))
-	    (setq tem (car (cdr args)))
-	    (rplacd args (cdr (cdr args)))
-	    (unless (string-match "^(--sm-client-id|-clientId)=" tem)
-	      (rplacd args (cdr (cdr args)))))
-	  (setq args (cdr args))))
+  (define (set-discard-command)
+    (sm-set-property
+     "DiscardCommand"
+     (list "rm" "-f" (local-file-name (sm-find-file sm-client-id sm-prefix)))))
+
+  (define (set-restart-command)
+    (remove-sm-options)
+    (if sm-prefix
+	(rplacd saved-command-line-args (list* "--sm-client-id" sm-client-id
+					       "--sm-prefix" sm-prefix
+					       (cdr saved-command-line-args)))
+      (rplacd saved-command-line-args (list* "--sm-client-id" sm-client-id
+					     (cdr saved-command-line-args))))
+    (sm-set-property "RestartCommand" saved-command-line-args))
+
+  (define (sm-init id prefix)
+    (when (setq sm-client-id (sm-connect id))
+
+      ;; 1. setup all session manager properties
+      (setq sm-prefix prefix)
 
       ;; XXX should I set this to SmRestartImmediately (2) instead
       ;; XXX of SmRestartIfRunning (0) ?
       (sm-set-property "RestartStyleHint" 0)
 
+      (remove-sm-options)
       (sm-set-property "CloneCommand" saved-command-line-args)
 
-      ;; fix saved-command-line-args to include the client-id
-      (rplacd saved-command-line-args (list* "--sm-client-id" sm-client-id
-					     (cdr saved-command-line-args)))
-
-      (sm-set-property "RestartCommand" saved-command-line-args)
+      (set-restart-command)
 
       (sm-set-property "CurrentDirectory" default-directory)
-      (sm-set-property
-       "DiscardCommand" (list "rm" "-f" (local-file-name
-					 (sm-find-file sm-client-id))))
       (sm-set-property "ProcessId" (format nil "%d" (process-id)))
       (sm-set-property "Program" (car saved-command-line-args))
       (sm-set-property "UserId" (user-login-name))
@@ -140,6 +174,8 @@ the window.")
       (sm-set-property "_GSM_Priority" sm-gsm-priority)
 
       ;; 2. load the session if it exists
-      (when (file-exists-p (sm-find-file sm-client-id))
-	(require 'sawfish.wm.session.load)
-	(load-session sm-client-id)))))
+      (let ((file (sm-find-file sm-client-id sm-prefix)))
+	(when (file-exists-p file)
+	  (require 'sawfish.wm.session.load)
+	  (load-session file)
+	  (set-discard-command))))))

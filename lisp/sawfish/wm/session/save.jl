@@ -61,10 +61,10 @@
 	      alist)
 	(write stream "\)\n\n"))))
 
-  (define (save-session id)
-    (unless (file-exists-p sm-save-directory)
-      (make-directory-recursively sm-save-directory))
-    (let ((file (open-file (sm-find-file id) 'write)))
+  (define (save-session filename)
+    (unless (file-exists-p (file-name-directory filename))
+      (make-directory-recursively (file-name-directory filename)))
+    (let ((file (open-file filename 'write)))
       (when file
 	(unwind-protect
 	    (progn

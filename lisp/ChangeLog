@@ -1,3 +1,24 @@
+2001-01-28  John Harper  <jsh@eazel.com>
+
+	Work to fix bug 5758 (session management doesn't work in `don't
+	automatically save' mode).
+
+	Most of the credit goes to Timo Korvola
+	<tkorvola@e.math.helsinki.fi> for working out what was wrong
+	and providing the initial implementation
+
+	* sawfish/wm/session/init.jl: lots of rewriting. The end result
+	is that we never overwrite session files when saving data.
+	Instead we use a unique prefix (the time in us in base 36) to
+	the client id. (This is how XSM is supposed to work)
+
+	* sawfish/wm/session/save.jl, sawfish/wm/session/load.jl
+	(save-session, load-session): these functions now accept a
+	filename argument instead of the client id
+
+	* sawfish/wm.jl: check for --sm-prefix option, and pass it to
+	sm-init when found
+
 2001-01-27  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/state/configure.jl

@@ -289,7 +289,8 @@ struct frame_part {
 
 /* codes for the clean_exit_jmp_buf */
 enum exit_codes {
-    ec_exit = 1,
+    ec_no_exit = 0,
+    ec_exit,
     ec_restart,
     ec_session_died
 };
