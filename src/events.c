@@ -773,6 +773,10 @@ unmap_notify (XEvent *ev)
 
 	focus_off_window (w);
 	XDeleteProperty (dpy, w->id, xa_wm_state);
+
+	/* Changed the window-handling model, don't let windows exist
+	   while they're withdrawn */
+	remove_window (w, Qnil, Qnil);
     }
 }
 
