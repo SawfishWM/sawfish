@@ -180,7 +180,9 @@
       (when warp-to-selected-windows
 	(warp-cursor-to-window win))
       (when cycle-show-window-names
-	(show-message (window-name win)))
+	(show-message (concat (and (window-get win 'iconified) ?[)
+			      (window-name win)
+			      (and (window-get win 'iconified) ?]))))
       (set-input-focus win))))
 
 (defun x-cycle-exit ()
