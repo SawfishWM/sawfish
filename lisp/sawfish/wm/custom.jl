@@ -201,6 +201,7 @@
 (defgroup workspace "Workspaces")
 (defgroup viewport "Viewports")
 (defgroup bindings "Bindings")
+(defgroup iconify "Iconifying")
 (defgroup maximize "Maximizing")
 (defgroup misc "Miscellaneous")
 
