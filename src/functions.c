@@ -805,9 +805,9 @@ DEFSTRING(white, "white");
 DEFSTRING(black, "black");
 
 DEFUN("show-message", Fshow_message, Sshow_message,
-      (repv text, repv font, repv fg, repv bg), rep_Subr4) /*
+      (repv text, repv font, repv fg, repv bg, repv pos), rep_Subr5) /*
 ::doc:Sshow-message::
-show-message [TEXT] [FONT] [FG] [BG]
+show-message [TEXT] [FONT] [FG] [BG] [POSITION]
 
 Display the string TEXT in the center of the screen. If TEXT is not
 specified then any string previously displayed is removed. Returns the
@@ -817,6 +817,10 @@ is displayed.
 FONT defines the font to use, if undefined the `default-font' variable
 provides this value. FG and BG define the color of the text and its
 background respectively. If undefined they are black and white.
+
+POSITION is a cons cell `(X . Y)'. X and Y are integers or nil (for
+centered display). If negative they count in from the left and bottom
+edges respectively.
 
 Note that newlines in TEXT are ignored. This may change in the future.
 ::end:: */
@@ -866,6 +870,22 @@ Note that newlines in TEXT are ignored. This may change in the future.
 	height = rep_INT(Ffont_height (font)) + MSG_PAD_Y * 2;
 	x = (screen_width - width) / 2;
 	y = (screen_height - height) / 2;
+
+	if (rep_CONSP(pos))
+	{
+	    if (rep_INTP(rep_CAR(pos)))
+	    {
+		x = rep_INT(rep_CAR(pos));
+		if (x < 0)
+		    x += screen_width - width;
+	    }
+	    if (rep_INTP(rep_CDR(pos)))
+	    {
+		y = rep_INT(rep_CDR(pos));
+		if (y < 0)
+		    y += screen_height - height;
+	    }
+	}
 
 	if (message_win == 0)
 	{
