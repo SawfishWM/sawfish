@@ -1,0 +1,164 @@
+/* gradient.c -- draw Afterstep-like gradients in images
+   $Id$ 
+
+   Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+
+   This file is part of sawmill.
+
+   sawmill is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   sawmill is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with sawmill; see the file COPYING.   If not, write to
+   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
+
+#include "sawmill.h"
+
+DEFSYM(gradient, "gradient");
+
+DEFUN("draw-vertical-gradient", Fdraw_vertical_gradient,
+      Sdraw_vertical_gradient, (repv img, repv from_, repv to_), rep_Subr3)
+{
+    u_char from[3], to[3];
+    int width, height;
+    int x, y;
+    u_char *data;
+
+    rep_DECLARE1(img, IMAGEP);
+    rep_DECLARE2(from_, COLORP);
+    rep_DECLARE3(to_, COLORP);
+
+    data = VIMAGE(img)->image->rgb_data;
+    width = VIMAGE(img)->image->rgb_width;
+    height = VIMAGE(img)->image->rgb_height;
+    from[0] = VCOLOR(from_)->color.red / 256;
+    from[1] = VCOLOR(from_)->color.green / 256;
+    from[2] = VCOLOR(from_)->color.blue / 256;
+    to[0] = VCOLOR(to_)->color.red / 256;
+    to[1] = VCOLOR(to_)->color.green / 256;
+    to[2] = VCOLOR(to_)->color.blue / 256;
+
+    for (y = 0; y < height; y++)
+    {
+	for (x = 0; x < width; x++)
+	{
+	    data[y*width*3+x*3+0] = (from[0]
+				     + (to[0] - from[0]) * y / height);
+	    data[y*width*3+x*3+1] = (from[1]
+				     + (to[1] - from[1]) * y / height);
+	    data[y*width*3+x*3+2] = (from[2]
+				     + (to[2] - from[2]) * y / height);
+	}
+    }
+
+    Imlib_changed_image (imlib_id, VIMAGE(img)->image);
+    return img;
+}
+
+DEFUN("draw-horizontal-gradient", Fdraw_horizontal_gradient,
+      Sdraw_horizontal_gradient, (repv img, repv from_, repv to_), rep_Subr3)
+{
+    u_char from[3], to[3];
+    int width, height;
+    int x, y;
+    u_char *data;
+
+    rep_DECLARE1(img, IMAGEP);
+    rep_DECLARE2(from_, COLORP);
+    rep_DECLARE3(to_, COLORP);
+
+    data = VIMAGE(img)->image->rgb_data;
+    width = VIMAGE(img)->image->rgb_width;
+    height = VIMAGE(img)->image->rgb_height;
+    from[0] = VCOLOR(from_)->color.red / 256;
+    from[1] = VCOLOR(from_)->color.green / 256;
+    from[2] = VCOLOR(from_)->color.blue / 256;
+    to[0] = VCOLOR(to_)->color.red / 256;
+    to[1] = VCOLOR(to_)->color.green / 256;
+    to[2] = VCOLOR(to_)->color.blue / 256;
+
+    for (y = 0; y < height; y++)
+    {
+	for (x = 0; x < width; x++)
+	{
+	    data[y*width*3+x*3+0] = (from[0]
+				     + (to[0] - from[0]) * x / width);
+	    data[y*width*3+x*3+1] = (from[1]
+				     + (to[1] - from[1]) * x / width);
+	    data[y*width*3+x*3+2] = (from[2]
+				     + (to[2] - from[2]) * x / width);
+	}
+    }
+
+    Imlib_changed_image (imlib_id, VIMAGE(img)->image);
+    return img;
+}
+
+DEFUN("draw-diagonal-gradient", Fdraw_diagonal_gradient,
+      Sdraw_diagonal_gradient, (repv img, repv from_, repv to_), rep_Subr3)
+{
+    u_char from[3], to[3];
+    int width, height;
+    int x, y;
+    u_char *data;
+
+    rep_DECLARE1(img, IMAGEP);
+    rep_DECLARE2(from_, COLORP);
+    rep_DECLARE3(to_, COLORP);
+
+    data = VIMAGE(img)->image->rgb_data;
+    width = VIMAGE(img)->image->rgb_width;
+    height = VIMAGE(img)->image->rgb_height;
+    from[0] = VCOLOR(from_)->color.red / 256;
+    from[1] = VCOLOR(from_)->color.green / 256;
+    from[2] = VCOLOR(from_)->color.blue / 256;
+    to[0] = VCOLOR(to_)->color.red / 256;
+    to[1] = VCOLOR(to_)->color.green / 256;
+    to[2] = VCOLOR(to_)->color.blue / 256;
+
+    for (y = 0; y < height; y++)
+    {
+	for (x = 0; x < width; x++)
+	{
+	    data[y*width*3+x*3+0] = (from[0]
+				     + (to[0] - from[0])
+				     * (x * y) / (width * height));
+	    data[y*width*3+x*3+1] = (from[1]
+				     + (to[1] - from[1])
+				     * (x * y) / (width *height));
+	    data[y*width*3+x*3+2] = (from[2]
+				     + (to[2] - from[2])
+				     * (x * y) / (width *height));
+	}
+    }
+
+    Imlib_changed_image (imlib_id, VIMAGE(img)->image);
+    return img;
+}
+
+
+/* DL hooks */
+
+rep_xsubr *rep_dl_subrs[] = {
+    &Sdraw_vertical_gradient,
+    &Sdraw_horizontal_gradient,
+    &Sdraw_diagonal_gradient,
+    0
+};
+
+repv rep_dl_feature;
+
+repv
+rep_dl_init (void)
+{
+    rep_INTERN (gradient);
+    rep_dl_feature = Qgradient;
+    return Qt;
+}
