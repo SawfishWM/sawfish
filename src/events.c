@@ -627,15 +627,7 @@ focus_out (XEvent *ev)
     {
 	XUninstallColormap (dpy, w->attr.colormap);
 	if (focus_window == w)
-	{
 	    focus_window = 0;
-	    /* The idea here is that we don't want to override
-	       any other attempt to set the focus, only if it's
-	       not set at all. It seems to work.. I'm not quite
-	       sure why.. */
-	    XSetInputFocus (dpy, no_focus_window,
-			    RevertToNone, actual_last_event_time);
-	}
 	if (w->focus_change != 0)
 	{
 	    DB (("  calling focus change %p on %s\n",
