@@ -39,6 +39,11 @@ the input focus to the transient window."
   :group focus
   :type boolean)
 
+(defcustom focus-windows-when-mapped nil
+  "Mapping a window gives it the focus."
+  :type boolean
+  :group focus)
+
 (defvar ignored-window-names nil
   "A list of regular expressions matching windows that don't get a frame.")
 
@@ -84,11 +89,15 @@ workspaces.")
     (window-put w 'sticky t)))
 
 (defun transient-map-window (w)
-  (when (window-transient-p w)
-    (let
-	((parent (get-window-by-id (window-transient-p w))))
-      (when (and parent transients-get-focus (eq (input-focus) parent))
-	(set-input-focus w)))))
+  (catch 'out
+    (when (window-transient-p w)
+      (let
+	  ((parent (get-window-by-id (window-transient-p w))))
+	(when (and parent transients-get-focus (eq (input-focus) parent))
+	  (set-input-focus w)
+	  (throw 'out t))))
+    (when focus-windows-when-mapped
+      (set-input-focus w))))
 
 ;; If a transient window gets unmapped that currently has the input
 ;; focus, pass it (the focus) to its parent
