@@ -367,7 +367,7 @@
 ;; before it has index BEFORE
 (defun ws-insert-workspace (&optional before)
   (unless before
-    (setq before (1+ current-workspace)))
+    (setq before current-workspace))
   (map-windows
    (lambda (w)
      (transform-window-workspaces (lambda (space)
