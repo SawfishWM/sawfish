@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
-"POT-Creation-Date: 2002-03-02 20:19-0800\n"
-"PO-Revision-Date: 2002-03-26 10:13+0200\n"
+"POT-Creation-Date: 2002-06-01 12:40+0200\n"
+"PO-Revision-Date: 2002-07-02 11:30+0200\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -305,6 +305,14 @@ msgstr "Додати:"
 msgid "Edit:"
 msgstr "Змінити:"
 
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "Yes"
+msgstr "Так"
+
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "No"
+msgstr "Ні"
+
 #. ../lisp/sawfish/gtk/widget.jl
 msgid "** unknown widget **  "
 msgstr "** невідомий віджет **  "
@@ -378,13 +386,12 @@ msgid "Actions"
 msgstr "Дії"
 
 #. ../lisp/sawfish/ui/widgets/match-window.jl
+msgid "not"
+msgstr ""
+
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Match window properties"
 msgstr "Співпадіння властивостей вікна"
-
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Index:"
-msgstr "Індекс:"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -396,25 +403,20 @@ msgstr "Циклічна зміна вікон"
 msgid "Sound"
 msgstr "Звук"
 
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Edge Flipping"
-msgstr "Відзеркалення країв"
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Matched Windows"
 msgstr "Співпалі вікна"
 
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Shade Hover"
-msgstr "Ширяюча тінь"
-
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Tooltips"
 msgstr "Підказки"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Index:"
+msgstr "Індекс:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
@@ -503,16 +505,8 @@ msgid "Bindings"
 msgstr "Комбінації"
 
 #. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing/Maximizing"
-msgstr "Мінімізація/Максимізація"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing"
-msgstr "Мінімізація"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Maximizing"
-msgstr "Маскимізація"
+msgid "Minimizing and Maximizing"
+msgstr "Мінімізація і максимізація"
 
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Miscellaneous"
@@ -531,7 +525,8 @@ msgid "When does the mouse pointer affect the input focus."
 msgstr "Коли вказівник миші впливає на фокеус вводу."
 
 #. ../lisp/sawfish/wm/focus.jl
-msgid "Does click-to-focus mode pass the click through to the window."
+#, fuzzy
+msgid "Click-to-focus mode passes the click through to the application."
 msgstr "Передавати клацання вікну в режимі клацання для фокусування."
 
 #. ../lisp/sawfish/wm/frames.jl
@@ -543,22 +538,8 @@ msgid "Automatically reload themes when they are updated."
 msgstr "Автоматично перевантажити теми: коли їх буде поновлено."
 
 #. ../lisp/sawfish/wm/frames.jl
-msgid ""
-"Frame type fallbacks:\n"
-"\n"
-"Associate frame types with type to try if the theme doesn't implement the requested type."
-msgstr ""
-"Заміщення типів рамок:\n"
-"\n"
-"Вкажіть заміщення типів рамок на інші типи (це буде використано у випадку, якщо тема не визначає якийсь тип рамок)"
-
-#. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Типовий шрифт: \\w"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Bevel intensity: \\wpercent."
-msgstr "Інтенсивність скосів: \\wpercent."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -609,11 +590,9 @@ msgid "root-window-keymap"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
+msgid "Keymap containing bindings active when the pointer is in the root window\n"
 "(or when no window is focused)."
-msgstr ""
-"Комбінації активні коли вказівник у головному вікні.\n"
+msgstr "Комбінації активні коли вказівник у головному вікні.\n"
 "(або жодного вікна не сфокусовано)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -621,11 +600,9 @@ msgid "title-keymap"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
+msgid "Keymap containing bindings active when the pointer is in the title of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Комбінації активні коли вказівник на заголовку вікна.\n"
+msgstr "Комбінації активні коли вказівник на заголовку вікна.\n"
 "(Допускаються лише події миші)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -634,11 +611,9 @@ msgid "border-keymap"
 msgstr "рамка"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
+msgid "Keymap containing bindings active when the pointer is in the border of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Комбінації активні коли вказівник на рамці вікна.\n"
+msgstr "Комбінації активні коли вказівник на рамці вікна.\n"
 "(Допускаються лише події миші)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -646,11 +621,9 @@ msgid "close-button-keymap"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
+msgid "Keymap containing bindings active when the pointer is in the close button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Комбінації активні коли вказівник на кнопці закриття вікна.\n"
+msgstr "Комбінації активні коли вказівник на кнопці закриття вікна.\n"
 "(Допускаються лише події миші)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -658,11 +631,9 @@ msgid "iconify-button-keymap"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
+msgid "Keymap containing bindings active when the pointer is in the iconify\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Комбінації активні коли вказівник на кнопці мінімізації вікна.\n"
+msgstr "Комбінації активні коли вказівник на кнопці мінімізації вікна.\n"
 "(Допускаються лише події миші)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -670,11 +641,9 @@ msgid "maximize-button-keymap"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
+msgid "Keymap containing bindings active when the pointer is in the maximize\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Комбінації активні коли вказівник на кнопці максимізації вікна.\n"
+msgstr "Комбінації активні коли вказівник на кнопці максимізації вікна.\n"
 "(Допускаються лише події миші)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -682,11 +651,9 @@ msgid "menu-button-keymap"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
+msgid "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Комбінації активні коли вказівник на кнопці меню вікна.\n"
+msgstr "Комбінації активні коли вказівник на кнопці меню вікна.\n"
 "(Допускаються лише події миші)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -694,24 +661,14 @@ msgid "shade-button-keymap"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
+msgid "Keymap containing bindings active when the pointer is in the shade button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Комбінації активні коли вказівник на кнопці згортання вікна.\n"
+msgstr "Комбінації активні коли вказівник на кнопці згортання вікна.\n"
 "(Допускаються лише події миші)."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Motion threshold for mouse pointer: \\wpixels"
-msgstr "Поріг переміщення для вказівника миші (в пікселях): \\w"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default window manager shortcuts."
 msgstr "Клавіші-модифікатори, що використовуються в якості типового модифікатора віконного менеджера."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display key-binding information in menu items."
-msgstr "Показувати інформацію про комбінації клавіш у пунктах меню."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -757,22 +714,7 @@ msgstr "Скопіювати попередній"
 msgid "Copy to next"
 msgstr "Скопіювати на наступний"
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Left"
-msgstr "Ліворуч"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Right"
-msgstr "Праворуч"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Up"
-msgstr "Вгору"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Down"
-msgstr "Вниз"
-
+#. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Stacking"
 msgstr "Порядок"
@@ -884,10 +826,6 @@ msgstr "Метод розміщення вікон: \\w"
 msgid "Method of placing dialog windows: \\w"
 msgstr "Метод розміщення діалогових вікон: \\w"
 
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Ignore program-specified window placements."
-msgstr "Іґнорувати визначене в програмі розміщення вікна."
-
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "all"
 msgstr "всі"
@@ -930,11 +868,9 @@ msgstr "Підняти/опустити одне вікно"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
+msgid "If the window is at its highest possible position, then lower it to its\n"
 "lowest possible position. Otherwise raise it as far as allowed."
-msgstr ""
-"Якщо вікно у найвищий позиції, то опустити його у найнижчу.\n"
+msgstr "Якщо вікно у найвищий позиції, то опустити його у найнижчу.\n"
 "А інакше, підняти його на найвищу допустиму позицію."
 
 #. ../lisp/sawfish/wm/stacking.jl
@@ -952,10 +888,6 @@ msgstr "Опустити вікно"
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Put the window in the stacking level beneath its current level."
 msgstr "Помістити вікно в стос під його поточним рівнем."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Windows uniconify to the current viewport."
-msgstr "Демінімізовувати вікна у поточну ділянку перегляду."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
@@ -1067,49 +999,6 @@ msgstr "Перемістити вікно на"
 msgid "Move the window to the viewport below, and switch to that viewport."
 msgstr "Перенести вікно у ділянку перегляду ліворуч."
 
-#. ../lisp/sawfish/wm/window-anim.jl
-msgid "The default window animation mode: \\w"
-msgstr "Типовий режим анімації вікна: \\w"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Give focus to windows even when they haven't asked for it.\n"
-"\n"
-"Windows should set the `accepts input' hint in their WM_HINTS property to show if they require the focus or not."
-msgstr ""
-"Надавати фокус вікнам, навіть якщо вони його не просили.\n"
-"\n"
-"Вікна мають встановлювати ознаку \"accepts input\" у властивості WM_HINTS, щоб повідомити, чи потрібний їм фоус."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Offset (%) from left window edge when warping pointer.\n"
-"\n"
-"A negative number means outside the left window edge."
-msgstr ""
-"Зміщення (у %%) від лівого краю вікна під час перекидання вказівника.\n"
-"\n"
-"Від'ємне число означає внутрішню сторону лівого краю вікна."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Offset (%) from top window edge when warping pointer.\n"
-"\n"
-"A negative number means outside the top window edge."
-msgstr ""
-"Зміщення (у %%) від верхнього краю вікна під час перекидання вказівника.\n"
-"\n"
-"Від'ємне число означає внутрішню сторону верхнього краю вікна."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Format to create unique window names.\n"
-"\n"
-"Has two arguments (NAME INDEX) applied to it."
-msgstr ""
-"Формат для створення унікальних назв вікон.\n"
-"Має два арґументи (НАЗВА та ІНДЕКС), що застосовуються до нього."
-
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
 msgid "Focus desktop"
@@ -1143,42 +1032,6 @@ msgstr ""
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Force the current window to have a unique title."
 msgstr "Примусове використання унікального заголовка поточним окном."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Virtual desktop configuration."
-msgstr "Конфіґурація віртуальної стільниці."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "stop"
-msgstr "зупинятись"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "wrap-around"
-msgstr "завертатись"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "keep-going"
-msgstr "продовжувати рух"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "When passing the first or last workspace: \\w"
-msgstr "Під час передачі на перше чи останнє робоче місце: \\w"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "When passing the first or last workspace, while moving a window: \\w"
-msgstr "Під час передачі на перше чи останнє робоче місце під час пересування вікна: \\w"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspaces are deleted when their last window closes."
-msgstr "Стирати робочі місця, коли їхнє останнє вікно буде закрито."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Preserve empty workspaces in pager."
-msgstr "Тримати пусті робочі місця в пайджері."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Dialogs appear on the same workspace as their application."
-msgstr "Діалоґи з'являються на тому ж місці, що й їхні прогами."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace names"
@@ -1305,11 +1158,9 @@ msgid "Merge next workspace"
 msgstr "Злити з наступним робочим місцем"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the next\n"
+msgid "Delete the current workspace. Its member windows are relocated to the next\n"
 "workspace."
-msgstr ""
-"Стерти поточне робоче місце. Всі вікна в ньому перемістити на наступне\n"
+msgstr "Стерти поточне робоче місце. Всі вікна в ньому перемістити на наступне\n"
 "робоче місце."
 
 #. ../lisp/sawfish/wm/workspace.jl
@@ -1317,11 +1168,9 @@ msgid "Merge previous workspace"
 msgstr "Злити з попереднім робочим місцем"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the\n"
+msgid "Delete the current workspace. Its member windows are relocated to the\n"
 "previous workspace."
-msgstr ""
-"Стерти поточне робоче місце. Всі вікна в ньому перемістити на попереднє\n"
+msgstr "Стерти поточне робоче місце. Всі вікна в ньому перемістити на попереднє\n"
 "робоче місце."
 
 #. ../lisp/sawfish/wm/workspace.jl
@@ -1372,11 +1221,9 @@ msgid "Delete window instance"
 msgstr "Стерти вікно."
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Remove the copy of the window on the current workspace. If this is the\n"
+msgid "Remove the copy of the window on the current workspace. If this is the\n"
 "last instance remaining, then delete the actual window."
-msgstr ""
-"Видалити копію вікна на поточному робочому місці. Якщо це остання копія,\n"
+msgstr "Видалити копію вікна на поточному робочому місці. Якщо це остання копія,\n"
 "видалити вікно."
 
 #. ../lisp/sawfish/wm/workspace.jl
@@ -1640,8 +1487,8 @@ msgid "Delete all windows in the group that the current window is a member of."
 msgstr "Стерти всі вікна з групи, членом якої є поточне вікно."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether growing an already grown window grows it again."
-msgstr "Чи збільшувати розмір вже збільшеного вікна."
+msgid "Growing and packing of windows"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
@@ -1654,12 +1501,12 @@ msgstr ""
 "розміру."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "maybe"
-msgstr "можливо"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "always"
 msgstr "завжди"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr "можливо"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "never"
@@ -1688,11 +1535,29 @@ msgstr ""
 "\"ніколи\" означає, що вказівник не переміщується."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into fully obscured windows when growing or packing\n"
+"windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Whether to bump into windows on a different depth when growing or packing\n"
+"windows.\n"
+"`maybe' means only avoided windows in other depths."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into ignored windows when growing or packing."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
 msgstr "Розтягнути вікно до лівого краю"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window to the left until it `bumps into' another window."
+#, fuzzy
+msgid "Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr "Розширити вікно ліворуч, доки воно не досягне іншого."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1700,7 +1565,9 @@ msgid "Grow window right"
 msgstr "Розтягнути вікно до правого краю"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window to the right until it `bumps into' another window."
+#, fuzzy
+msgid "Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr "Розширити вікно праворуч, доки воно не досягне іншого."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1708,15 +1575,22 @@ msgid "Grow window up"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window upwards until it `bumps into' another window."
-msgstr "Розширити вікно вгору, доки воно не досягне іншого."
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified by\n"
+"window or pixels instead."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window downwards until it `bumps into' another window."
+#, fuzzy
+msgid "Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr "Розширити вікно вниз, доки воно не досягне іншого."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1724,7 +1598,9 @@ msgid "Pack window left"
 msgstr "Перенести вікно до лівого краю"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window to the left until it `bumps into' another window."
+#, fuzzy
+msgid "Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr "Перенести вікно ліворуч, доки воно не досягне іншого."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1732,7 +1608,9 @@ msgid "Pack window right"
 msgstr "Перенести вікно до правого краю"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window to the right until it `bumps into' another window."
+#, fuzzy
+msgid "Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr "Перенести вікно праворуч, доки воно не досягне іншого."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1740,16 +1618,61 @@ msgid "Pack window up"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window upwards until it `bumps into' another window."
-msgstr "Перенести вікно вгору, доки воно не досягне іншого."
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window downwards until it `bumps into' another window."
+#, fuzzy
+msgid "Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr "Перенести вікно вниз, доки воно не досягне іншого."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow left"
+msgstr "Розтягнути вікно до лівого краю"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow right"
+msgstr "Розтягнути вікно до правого краю"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow up"
+msgstr "Група"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow down"
+msgstr "Розтягнути вікно до лівого краю"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Pack left"
+msgstr "Перенести вікно до лівого краю"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Pack right"
+msgstr "Перенести вікно до правого краю"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Pack down"
+msgstr "Перенести вікно до лівого краю"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show faq"
@@ -1841,26 +1764,6 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr "Посунути курсор на один піксель вниз."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "opaque"
-msgstr "показувати вміст"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "box"
-msgstr "показувати рамку"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How windows being moved are animated: \\w"
-msgstr "Як буде анімуватися перенесення вікна: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How windows being resized are animated: \\w"
-msgstr "Як буде анімуватися зміна розміру вікна: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Raise windows when they are moved or resized."
-msgstr "Піднімати вікна при переміщенні чи зміні розміру."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Show current position of windows while moving."
 msgstr "Показувати поточну позицію вікна під час його пересування."
 
@@ -1869,56 +1772,11 @@ msgid "Show current dimensions of windows while resizing."
 msgstr "Показувати поточні розміри вікна під час зміни його розмірів."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "region"
-msgstr "ділянка"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "border"
-msgstr "рамка"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "grab"
+msgid ""
+"Distance in pixels before window edges align with each other.\n"
+"\n"
+"When moving a window, this option lets you align one of its edges with an edge of another window."
 msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "border-grab"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How to choose window edges when resizing: \\w"
-msgstr "Як вибирати краї вікна під час зміни розмірів: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Snap window position to edges of other windows while moving."
-msgstr "Вирівнювати позицію вікна до країв інших вікон при переміщенні."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Proximity in pixels before snapping to a window edge."
-msgstr "Відстань в пікселях перед притягуванням до краю вікна."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "magnetism"
-msgstr "магнетизм"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "resistance"
-msgstr "опір"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "attraction"
-msgstr "притягування"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How to snap together window edges: \\w"
-msgstr "Приєднання країв вікон: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Snap to otherwise-ignored windows."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Only update window contents after it has stopped moving."
-msgstr "Оновлювати вміст вікна лише після завершення переміщення."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -1957,11 +1815,9 @@ msgid "Raise and pass through click"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the window that received the current event, then replay any pointer\n"
+msgid "Raise the window that received the current event, then replay any pointer\n"
 "events that invoked the command."
-msgstr ""
-"Підняти вікно, що отримало поточну подію, а потім повторити події\n"
+msgstr "Підняти вікно, що отримало поточну подію, а потім повторити події\n"
 "вказівника, що викликали цю команду."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
@@ -1969,11 +1825,9 @@ msgid "Raise and pass through click if focused"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the window that received the current event (if it's focused), then\n"
+msgid "Raise the window that received the current event (if it's focused), then\n"
 "replay any pointer events that invoked the command."
-msgstr ""
-"Підняти вікно, що отримало поточну подію (якщо воно має фокус),\n"
+msgstr "Підняти вікно, що отримало поточну подію (якщо воно має фокус),\n"
 "а потім повторити події вказівника, що викликали цю команду."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
@@ -1989,11 +1843,9 @@ msgid "Raise group and pass through click"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the group of windows that received the current event, then replay\n"
+msgid "Raise the group of windows that received the current event, then replay\n"
 "any pointer events that invoked the command."
-msgstr ""
-"Підняти групу вікон, що отримала поточну подію, а потім повторити\n"
+msgstr "Підняти групу вікон, що отримала поточну подію, а потім повторити\n"
 "події вказівника, що викликали цю команду."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
@@ -2001,20 +1853,10 @@ msgid "Raise transients and pass through click"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the window that received the current event and any transients it\n"
+msgid "Raise the window that received the current event and any transients it\n"
 "has, then replay any pointer events that invoked the command."
-msgstr ""
-"Підняти вікно і всі його тимчасові вікна, що отримали поточну подію,\n"
+msgstr "Підняти вікно і всі його тимчасові вікна, що отримали поточну подію,\n"
 "а потім повторити події вказівника, що викликали цю команду."
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid ""
-"Default increment for size-window commands (when the window doesn't\n"
-"specify it's own increments)."
-msgstr ""
-"Типовий крок для команд зміни розміру вікна (якщо вікно не має вказаного\n"
-"власного кроку)."
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
@@ -2047,10 +1889,6 @@ msgstr "Зменшити розмір вікна по горизонталі"
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Decrease the size of the current window by one column."
 msgstr "Зменшити розмір поточного вікна на один стовпчик."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Number of pixels to move window in `slide-' commands."
-msgstr "Кількість пікселів для пересування вікна в командах зсуву."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window left"
@@ -2158,12 +1996,9 @@ msgid "Set window viewport linear"
 msgstr "Перенести вікно у ділянку перегляду вище."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window names while cycling through windows."
+#, fuzzy
+msgid "Display window names and icons while cycling through windows."
 msgstr "Показувати назви вікон в процесі їх перебору."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window icons while cycling through windows."
-msgstr "Показувати піктограми вікон в процесі їх перебору."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Include iconified windows when cycling."
@@ -2178,22 +2013,6 @@ msgid "Include windows on all viewports when cycling."
 msgstr "Включати вікна у всіх ділянках перегляду в перебір."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Піднімати вікна коли вони тимчасово вибрані в процесі перебору."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Warp the mouse pointer to windows as they're temporarily selected."
-msgstr "Перекидати вказівник миші у вікна, коли їх тимчасово вибрано."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Focus windows when they're temporarily selected during cycling."
-msgstr "Фокусувати вікна коли їх тимчасово вибрано в процесі перебору."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Disable auto-raising while temporarily selecting windows."
-msgstr "Вимкнути автопіднімання для тимчасового вибору вікон."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "cycle-keymap"
 msgstr ""
 
@@ -2202,11 +2021,17 @@ msgid "Keymap containing bindings active only during window cycling operations."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
+#, fuzzy
+msgid "Terminal"
+msgstr "вертикальна"
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "The program launched by the `xterm' command."
 msgstr "Програма, що запускається командою \"xterm\"."
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Optional arguments given to the `xterm' command."
+#, fuzzy
+msgid "Arguments given to the `xterm' command."
 msgstr "Додаткові арґументи, що передаються команді \"xterm\"."
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
@@ -2226,16 +2051,17 @@ msgid "Play sound effects for window events."
 msgstr "Увімкнути звукові ефекти для подій вікон."
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Play sound effects for unmanaged windows."
-msgstr "Увімкнути звукові ефекти для некерованих вікон."
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Event"
 msgstr "Подія"
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Audio file"
 msgstr "Аудіофайл"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+#, fuzzy
+msgid "Auto-Raise"
+msgstr "Підняти"
 
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Raise windows when they are focused."
@@ -2245,9 +2071,9 @@ msgstr "Піднімати вікна коли вони потрапляють �
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr "Затримка в мілісекундах перед підйомом вікна, що отримало фокус."
 
-#. ../lisp/sawfish/wm/ext/beos-window-menu.jl
-msgid "The hierarchical window menu raises singleton submenus."
-msgstr "Ієрархічні меню вікон відкривають одинарні підменю."
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Edge Flipping"
+msgstr "Відзеркалення країв"
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Select the next desktop when the pointer hits screen edge."
@@ -2269,20 +2095,13 @@ msgstr "Торкання до межі екрану вибирає наступ�
 msgid "Only flip when interactively moving a window."
 msgstr "Відзеркалювати лише під час інтерактивного пересування вікна."
 
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Milliseconds to delay before flipping: \\w"
-msgstr "Затримка перед відзеркаленням у мілісекундах: \\w"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Warp pointer to opposite screen edge when flipping."
-msgstr "Перекидати вказівник на протилежний край екрану на відзеркаленні."
-
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Error Handling"
 msgstr "Обробка помилок"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Emit a beeping sound when errors occur."
+#, fuzzy
+msgid "Beep when errors occur."
 msgstr "Видавати звуковий сиґнал в разі помилки."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
@@ -2298,7 +2117,8 @@ msgid "standard-error"
 msgstr "стандартна помилка"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Where to display error messages: \\w"
+#, fuzzy
+msgid "Display error messages to: \\w"
 msgstr "Куди відображати повідомлення про помилки: \\w"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
@@ -2465,6 +2285,10 @@ msgid "Other"
 msgstr "Інше"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Shade Hover"
+msgstr "Ширяюча тінь"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid ""
 "Enable shade-hover mode.\n"
 "\n"
@@ -2475,7 +2299,6 @@ msgstr ""
 msgid "Delay in milliseconds before unshading windows."
 msgstr "Затримка у мілісекундах перед розгортанням вікон."
 
-#. ../lisp/sawfish/wm/state/shading.jl
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Raise windows when they are unshaded."
 msgstr "Піднімати вікна під час розгортання."
@@ -2485,32 +2308,8 @@ msgid "Display tooltips for window frames."
 msgstr "Показувати підказки для рамок вікна."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Remove tooltips after a period of time."
-msgstr "Видаляти підказки через вказаний час."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Show full documentation in tooltips."
 msgstr "Показувати повну документацію у підказках."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Кількість мілісекунд перед відображенням підказок."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Кількість мілісекунд перед прибиранням підказок."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Font used to display tooltips."
-msgstr "Шрифт відображення підказок."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips background"
-msgstr "Колір тла підказок"
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips foreground"
-msgstr "Колір переднього плану підказок"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _position"
@@ -2527,6 +2326,11 @@ msgstr "Запам'ятати атрибути"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "Забути збережений стан"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "History"
+msgstr "Історія"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2589,10 +2393,6 @@ msgid "_History"
 msgstr "Історія"
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "Invoke the GNOME control center from the `Customize' menu."
-msgstr "Викликати \"Центр керування GNOME\" з меню \"Установки\"."
-
-#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "Довідка GNOME..."
 
@@ -2608,41 +2408,13 @@ msgstr "Про GNOME..."
 msgid "Gnome menus update"
 msgstr "Оновити меню GNOME"
 
-#. ../lisp/sawfish/wm/placement/smart.jl
-msgid "Try to leave at least this many pixels between window edges in first/best-fit."
-msgstr ""
-
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
 msgstr ""
 
-#. ../lisp/sawfish/wm/state/configure.jl
-msgid "Automatically select window gravity from position on screen."
-msgstr "Автоматичний вибір ґравітації вікна в залежності від положення на екрані."
-
-#. ../lisp/sawfish/wm/state/configure.jl
-msgid "Ignore requests from applications to change window stacking."
-msgstr "Іґноруванти вимоги програм змінити позицію вікна вікна в стосі."
-
 #. ../lisp/sawfish/wm/state/gnome.jl
 msgid "In GNOME _task list"
 msgstr "В списку завдань GNOME"
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows are focused after being uniconified."
-msgstr "Вікна отримують фокус після демінімізації."
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows are raised after being uniconified."
-msgstr "Вікна піднімаються після демінімізації."
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Unmanaged windows may be iconified."
-msgstr "Некеровані вікна можуть бути мінімізовані."
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows uniconify to the current workspace."
-msgstr "Вікна демінімізуються на поточне робоче місце."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2655,27 +2427,31 @@ msgid "group"
 msgstr "група"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconifying a window also iconifies the: \\w"
-msgstr "Мінімізація вікна також призводить до мінімізації: \\w"
+#, fuzzy
+msgid "Minimizing a window also removes its: \\w"
+msgstr "В разі піднімання вікна, піднімати його: \\w"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Uniconifying a window also uniconifies the: \\w"
-msgstr "Відновлення вікна також призводить до відновлення: \\w"
+#, fuzzy
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "В разі піднімання вікна, піднімати його: \\w"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconify window"
 msgstr "Мінімізувати вікно"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconify the window."
-msgstr "Мінімізувати вікно."
+#, fuzzy
+msgid "Minimize the window."
+msgstr "Вимикнути іґнорування вікна."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Uniconify window"
 msgstr "Демінімізувати вікно"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Return the window from its iconified state."
+#, fuzzy
+msgid "Restore the window from its minimized state."
 msgstr "Повернути вікно з мінімізованого стану."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2691,7 +2467,8 @@ msgid "Iconify workspace windows"
 msgstr "Мінімізувати вікна робочого місця"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconify all windows on the current workspace."
+#, fuzzy
+msgid "Minimize all windows on the current workspace."
 msgstr "Мінімізувати всі вікна на поточному робочому місці."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2707,13 +2484,8 @@ msgid "Toggle window sticky"
 msgstr "Перемикнути липкість вікна"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid ""
-"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+msgid "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
-msgstr ""
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Toggle single window mode"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2785,22 +2557,6 @@ msgid "In _window list"
 msgstr "В списку вікон"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Maximizing a window in one dimension must increase the size of that dimension."
-msgstr "Максимізація вікна в одному вимірі має збільшити його розмір в цьому вимірі."
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Raise windows when they are maximized."
-msgstr "Піднімати максимізовані викна."
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Let unmanaged windows be overlapped when filling windows."
-msgstr "Дозволити перекривання некерованих вікон під час максимізації вікон."
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Don't cover `avoided' windows when maximizing."
-msgstr "Не зачіпати \"уникнутих\" вікон під час максимізації."
-
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Lock position and size while windows are maximized."
 msgstr "Фіксувати положення і розмір вікон при максимізації."
 
@@ -2849,11 +2605,9 @@ msgid "Maximize window horizontally toggle"
 msgstr "Перемикнути вертикальну максимізацію вікна"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between horizontally maximized and\n"
+msgid "Toggle the state of the window between horizontally maximized and\n"
 "unmaximized."
-msgstr ""
-"Перемикнути стан вікна між горизонтально максимізованим та\n"
+msgstr "Перемикнути стан вікна між горизонтально максимізованим та\n"
 "немаксимізованим."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
@@ -2861,11 +2615,9 @@ msgid "Maximize window vertically toggle"
 msgstr "Перемикнути горизонтальну максимізацію вікна"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized and\n"
+msgid "Toggle the state of the window between vertically maximized and\n"
 "unmaximized."
-msgstr ""
-"Перемикнути стан вікна між вертикально максимізованим та\n"
+msgstr "Перемикнути стан вікна між вертикально максимізованим та\n"
 "немаксимізованим."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
@@ -2905,11 +2657,9 @@ msgid "Maximize fill window horizontally toggle"
 msgstr "Перемикнути горизонтальну максимізацію вікна без перекриття інших"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between horizontally maximized-filled and\n"
+msgid "Toggle the state of the window between horizontally maximized-filled and\n"
 "unmaximized."
-msgstr ""
-"Перемикнути стан вікна між горизонтально максимізованим-заповненим і\n"
+msgstr "Перемикнути стан вікна між горизонтально максимізованим-заповненим і\n"
 "немаксимізованим."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
@@ -2917,12 +2667,20 @@ msgid "Maximize fill window vertically toggle"
 msgstr "Перемикнути вертикальну максимізацію вікна без перекриття інших"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized-filled and\n"
+msgid "Toggle the state of the window between vertically maximized-filled and\n"
 "unmaximized."
-msgstr ""
-"Перемикнути стан вікна між вертикально максимізованим-заповненим і\n"
+msgstr "Перемикнути стан вікна між вертикально максимізованим-заповненим і\n"
 "немаксимізованим."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullscreen"
+msgstr "Перемикнути маскимізацію вікна"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullscreen toggle"
+msgstr "Перемикнути маскимізацію вікна"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
@@ -2937,8 +2695,7 @@ msgid "Unshade window"
 msgstr "Розгорнути вікно"
 
 #. ../lisp/sawfish/wm/state/shading.jl
-msgid ""
-"If the window is shaded (see `shade-window'), restore it to it's usual\n"
+msgid "If the window is shaded (see `shade-window'), restore it to it's usual\n"
 "state."
 msgstr "Якщо вікно згорнуте, повернути його до звичайного стану."
 
@@ -2959,20 +2716,11 @@ msgid "Focus on application windows when they first appear."
 msgstr "Ставити фокус на вікно, що з'являється вперше."
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid "Dialog windows inherit the focus from their parent."
-msgstr "Діалогові вікна успадковують фокус від батьків."
-
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid "Decorate dialog windows similarly to application windows."
-msgstr "Декорації діалога схожі до декорацій вікна програми."
-
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise window and transients"
 msgstr "Підняти вікно і його діалоги"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"Raise the current window to its highest allowed position in the stacking\n"
+msgid "Raise the current window to its highest allowed position in the stacking\n"
 "order. Also raise any transient windows that it has."
 msgstr ""
 
@@ -2981,8 +2729,7 @@ msgid "Lower window and transients"
 msgstr "Лпустити вікно і його діалоги"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"Lower the current window to its lowest allowed position in the stacking\n"
+msgid "Lower the current window to its lowest allowed position in the stacking\n"
 "order. Also lower any transient windows that it has."
 msgstr ""
 
@@ -2998,20 +2745,8 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Windows uniconify to the current workspace when they are selected."
-msgstr "Вікна демінімізуються на поточне робоче місце коли їх вибрано."
-
-#. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Unshade selected windows."
 msgstr "Розгорнути вибрані вікна."
-
-#. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Raise selected windows (normally by the Windows menu)."
-msgstr "Підняти вибрані вікна (зазвичай за допомогою меню \"Вікна\")."
-
-#. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Warp the pointer to selected windows."
-msgstr "Перекидати вказівник у вибрані вікна."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window without focusing"
@@ -3028,14 +2763,6 @@ msgstr "Показати вікно"
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display the workspace containing the window W, then focus on W."
 msgstr "Показати робоче місце, що містить вікно W, тоді сфокусувати W."
-
-#. ../lisp/sawfish/wm/util/groups.jl
-msgid "Group transient windows with their parents."
-msgstr "Групувати тимчасові вікна з їхніми батьками."
-
-#. ../lisp/sawfish/wm/util/groups.jl
-msgid "Persistent group ids"
-msgstr "Стійкі ідентифікатори груп"
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -3070,46 +2797,9 @@ msgid "Quote event"
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/keymap.jl
-msgid ""
-"Sends the next key event directly to the focused client window, ignoring\n"
+msgid "Sends the next key event directly to the focused client window, ignoring\n"
 "any window manager bindings that it may have."
 msgstr ""
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "novice"
-msgstr "новачок"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "intermediate"
-msgstr "середній"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "expert"
-msgstr "експерт"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Show options suitable for \\w users."
-msgstr "Пораметри, що показуються для користувачів типу \\w."
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "ok"
-msgstr "гаразд"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "revert/cancel/ok"
-msgstr "відновити/відмінити/гаразд"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "apply/revert/cancel/ok"
-msgstr "застосувати/відновити/відмінити/гаразд"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Buttons shown in configurator: \\w"
-msgstr "Кнопки, що показуються у конфіґураторі: \\w"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Show variable names of each customization option."
-msgstr "Показувати назви змінних кожного параметру налаштування."
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
 msgid "The program used to play audio samples. If unset, built-in support for ESD is used."
@@ -3230,19 +2920,15 @@ msgid "Inactive"
 msgstr "Неактивне"
 
 #. ../themer/themer.glade:702 ../themer/themer.glade:843
-msgid ""
-"Inactive-\n"
+msgid "Inactive-\n"
 "Clicked"
-msgstr ""
-"Неактивне\n"
+msgstr "Неактивне\n"
 "вибране"
 
 #. ../themer/themer.glade:649 ../themer/themer.glade:816
-msgid ""
-"Inactive-\n"
+msgid "Inactive-\n"
 "Highlighted"
-msgstr ""
-"Неактивне\n"
+msgstr "Неактивне\n"
 "підсвічене"
 
 #. ../themer/themer.glade:1266
