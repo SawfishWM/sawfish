@@ -1,3 +1,20 @@
+1999-11-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c, session.c, main.c, keys.c, images.c, functions.c,
+	frames.c, fonts.c, events.c, cursors.c, commands.c, colors.c:
+	changed embedded doc strings
+
+	* functions.c (Fdisplay_message): new function, replaces
+	Fshow_message, only takes two args a (multi-line) string, and
+	an alist of attributes
+	(Fshow_message): deleted, now in lisp
+
+	* events.c (map_request): if the window isn't visible, then
+	call map-notify-hook manually
+	(unmap_notify): recognize synthetic unmap events (for when the
+	window isn't currently visible), and delete WM_STATE property
+	afterwards
+
 1999-11-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* windows.c (remove_window): check that the focus hasn't got
