@@ -60,24 +60,24 @@
   ;; If iconified, a window has its `iconified' property set to t
 
   (defvar focus-windows-on-uniconify nil
-    "Windows are focused after being uniconified.")
+    "Windows are focused after being minimized.")
 
   (defvar raise-windows-on-uniconify t
-    "Windows are raised after being uniconified.")
+    "Windows are raised after being unminimized.")
 
   (defvar uniconify-to-current-workspace t
-    "Move windows to the current workspace when they are uniconified.")
+    "Move windows to the current workspace when they are unminimized.")
 
   (defvar iconify-ignored nil
     "Unmanaged windows may be iconified.")
 
   (defcustom iconify-group-mode 'transients
-    "Iconifying a window also iconifies the: \\w"
+    "Minimizing a window also removes its: \\w"
     :type (choice none transients group)
     :group min-max)
 
   (defcustom uniconify-group-mode 'transients
-    "Uniconifying a window also uniconifies the: \\w"
+    "Unminimizing a window also restores its: \\w"
     :type (choice none transients group)
     :group min-max)
 
@@ -130,11 +130,11 @@
       (t (list w))))
 
   (define (iconify-window w)
-    "Iconify the window."
+    "Minimize the window."
     (mapc iconify-window-1 (windows-to-change w iconify-group-mode)))
 
   (define (uniconify-window w)
-    "Return the window from its iconified state."
+    "Restore the window from its minimized state."
     (mapc uniconify-window-1 (windows-to-change w uniconify-group-mode)))
 
   (define (toggle-window-iconified w)
@@ -148,7 +148,7 @@
   (define-command 'toggle-window-iconified toggle-window-iconified #:spec "%W")
 
   (define (iconify-workspace-windows)
-    "Iconify all windows on the current workspace."
+    "Minimize all windows on the current workspace."
     (map-windows (lambda (w)
 		   (when (and (not (window-get w 'ignored))
 			      (window-in-workspace-p w current-workspace))

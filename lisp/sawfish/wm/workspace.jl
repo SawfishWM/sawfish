@@ -50,7 +50,7 @@
 
 ;; Private functions are prefixed by ws-
 
-(eval-when-compile '(require 'sawfish.wm.menus))
+(eval-when-compile (require 'sawfish.wm.menus))
 
 (define-structure sawfish.wm.workspace
 
@@ -115,12 +115,6 @@
 
 ;;; Options and variables
 
-  (defcustom workspace-geometry '(1 . (1 . 1))
-    "Virtual desktop configuration."
-    :type workspace-geometry
-    :group workspace
-    :after-set (lambda () (call-hook 'workspace-geometry-changed)))
-
   (defvar workspace-boundary-mode 'stop
     "How to act when passing the first or last workspace, one of `stop',
 `wrap-around' or `keep-going'")
@@ -129,16 +123,15 @@
     "How to act when passing the first or last workspace, while moving a
 window, one of `stop', `keep-going', `wrap-around'")
 
-  (defvar preallocated-workspaces 1
-    "Minimum number of workspaces.")
-
-  (defvar lock-first-workspace t
-    "Preserve empty workspaces in pager.")
-
   (defcustom workspace-names nil
     nil
     :type* `(list string ,(_ "Workspace names"))
-    :group workspace)
+    :group workspace
+    :widget-flags (expand-vertically)
+    :after-set (lambda () (workspace-names-changed)))
+
+  (defvar lock-first-workspace t
+    "Preserve outermost empty workspaces in the pager.")
 
   ;; Currently active workspace, an integer
   (define current-workspace 0)
@@ -337,7 +330,7 @@ window, one of `stop', `keep-going', `wrap-around'")
 	    (all-spaces
 	     (setq max-w (max max-w (car all-spaces)))
 	     (setq min-w (min min-w (car all-spaces)))))
-      (setq max-w (max max-w (1- (+ preallocated-workspaces min-w))))
+      (setq max-w (max max-w (1- (+ (length workspace-names) min-w))))
       (setq first-interesting-workspace min-w)
       (setq last-interesting-workspace max-w)
       (cons min-w max-w)))
@@ -899,15 +892,13 @@ last instance remaining, then delete the actual window."
 
 ;;; configuration
 
-  (add-hook 'workspace-geometry-changed
-	    (lambda ()
-	      (setq preallocated-workspaces (car workspace-geometry))
-	      ;; XXX this isn't ideal, but it's better than getting
-	      ;; XXX workspaces that aren't deleted as the total
-	      ;; XXX number of workspaces is decreased...
-	      (setq first-interesting-workspace nil)
-	      (setq last-interesting-workspace nil)
-	      (call-hook 'workspace-state-change-hook)))
+  (define (workspace-names-changed)
+    ;; XXX this isn't ideal, but it's better than getting
+    ;; XXX workspaces that aren't deleted as the total
+    ;; XXX number of workspaces is decreased...
+    (setq first-interesting-workspace nil)
+    (setq last-interesting-workspace nil)
+    (call-hook 'workspace-state-change-hook))
 
 
 ;;; Initialisation

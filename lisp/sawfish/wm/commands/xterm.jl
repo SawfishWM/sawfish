@@ -30,8 +30,6 @@
 	  sawfish.wm.custom
 	  sawfish.wm.commands)
 
-  ;;###autoload (defgroup xterm "Terminal" :group misc :require sawfish.wm.commands.xterm)
-
   (defgroup xterm "Terminal"
     :group misc
     :require sawfish.wm.commands.xterm)

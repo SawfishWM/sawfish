@@ -59,7 +59,7 @@
       (set-window-and-viewport w (car prevs) (cdr prevs))))
 
   ;;###autoload
-  (define-command 'move-viewport-next move-viewport-next)
-  (define-command 'move-viewport-previous move-viewport-previous)
-  (define-command 'move-window-previous move-window-previous #:spec "%W")
-  (define-command 'move-window-next move-window-next #:spec "%W"))
+  (define-command 'move-viewport-next move-viewport-next #:class 'viewport)
+  (define-command 'move-viewport-previous move-viewport-previous #:class 'viewport)
+  (define-command 'move-window-previous move-window-previous #:spec "%W" #:class 'viewport)
+  (define-command 'move-window-next move-window-next #:spec "%W" #:class 'viewport))

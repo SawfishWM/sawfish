@@ -31,8 +31,6 @@
 
   (define-structure-alias shade-hover sawfish.wm.ext.shade-hover)
 
-;;;###autoload (defgroup shade-hover "Shade Hover" :group focus :require sawfish.wm.ext.shade-hover)
-
   (defgroup shade-hover "Shade Hover"
     :group focus
     :require sawfish.wm.ext.shade-hover)

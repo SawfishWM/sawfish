@@ -124,7 +124,9 @@
 	  default-bevel-percent sp-padding nokogiri-user-level
 	  nokogiri-buttons workspace-boundary-mode
 	  workspace-send-boundary-mode lock-first-workspace
-	  ignore-window-input-hint default-window-animator))
+	  ignore-window-input-hint default-window-animator
+	  resize-edge-mode move-outline-mode resize-outline-mode
+	  move-resize-raise-window workspace-geometry))
 
 ;;; obsolete custom setters
 

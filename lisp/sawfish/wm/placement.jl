@@ -29,8 +29,7 @@
 
     (open rep
 	  rep.system
-	  ;; XXX needed until rep updates..
-	  sawfish.wm.util.autoloader
+	  rep.util.autoloader
 	  sawfish.wm.state.maximize
 	  sawfish.wm.misc
 	  sawfish.wm.events
@@ -59,30 +58,35 @@
 
 ;;; utility functions
 
-  (define (add-to sym name)
-    (let ((current (custom-get-property sym ':options)))
-      (custom-set-property sym ':options
-			   (nconc (delq name current) (list name)))))
+  ;; autoload handling
+  (define (getter symbol) (get symbol 'placement-mode))
+  (define (setter symbol value)
+    (unless (memq symbol placement-modes)
+      (setq placement-modes (nconc placement-modes (list symbol))))
+    (put symbol 'placement-mode value))
+  (define autoloader (make-autoloader getter setter))
+  (define placement-mode (autoloader-ref getter))
 
-  (define (define-placement-mode name fun #!key for-normal for-dialogs)
-    "Define a new window placement mode called NAME (a symbol). The function
-FUN will be called with a single argument when a window should be placed using
-this mode. The single argument is the window to be placed."
-    (unless (memq name placement-modes)
-      (setq placement-modes (nconc placement-modes (list name))))
+  (define (apply-keys name #!key for-normal for-dialogs)
+    (define (add-to sym name)
+      (let ((current (custom-get-property sym ':options)))
+	(custom-set-property sym ':options
+			     (nconc (delq name current) (list name)))))
     (when for-normal
       (add-to 'place-window-mode name))
     (when for-dialogs
-      (add-to 'place-transient-mode name))
-    (put name 'placement-mode fun))
+      (add-to 'place-transient-mode name)))
 
-  ;; autoload handling
-  (define (getter symbol) (get symbol 'placement-mode))
+  (define (define-placement-mode name fun . keys)
+    "Define a new window placement mode called NAME (a symbol). The function
+FUN will be called with a single argument when a window should be placed using
+this mode. The single argument is the window to be placed."
+    (setter name fun)
+    (apply apply-keys name keys))
 
-  (define autoload-placement-mode
-    (make-autoloader getter define-placement-mode))
-
-  (define placement-mode (autoloader-ref getter))
+  (define (autoload-placement-mode name module . keys)
+    (autoloader name module)
+    (apply apply-keys name keys))
 
   (define (adjust-window-for-gravity w grav #!optional unadjust)
     (let ((coords (adjust-position-for-gravity

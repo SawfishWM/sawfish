@@ -48,22 +48,14 @@
   ;; todo:
   ;;  * obey the aspect ratio size hints
 
-  (defcustom move-outline-mode 'opaque
-    "How windows being moved are animated: \\w"
-    :type symbol
-    :options (opaque box)
-    :group move)
+  (defvar move-outline-mode 'opaque
+    "How windows being moved are animated, either `opaque' or `box'")
   
-  (defcustom resize-outline-mode 'opaque
-    "How windows being resized are animated: \\w"
-    :type symbol
-    :options (opaque box)
-    :group move)
+  (defvar resize-outline-mode 'opaque
+    "How windows being resized are animated, either `opaque' or `box'")
   
-  (defcustom move-resize-raise-window nil
-    "Raise windows when they are moved or resized."
-    :group move
-    :type boolean)
+  (defvar move-resize-raise-window nil
+    "Raise windows when they are moved or resized.")
   
   (defcustom move-show-position nil
     "Show current position of windows while moving."
@@ -75,17 +67,15 @@
     :group move
     :type boolean)
   
-  (defcustom resize-edge-mode 'border-grab
-    "How to choose window edges when resizing: \\w"
-    :type (choice region border grab border-grab)
-    :group move)
+  (defvar resize-edge-mode 'border-grab
+    "How to choose window edges when resizing. One of `region', `border',
+`grab', `border-grab'")
   
   (defcustom move-snap-epsilon 12
     "Distance in pixels before window edges align with each other."
     :group move
     :type (number 0 64)
-    :tooltip "When moving a window, this option lets you align one of its
-edges with an edge of another window.")
+    :tooltip "When moving a window, this option lets you align one of its edges with an edge of another window.")
   
   (defvar move-snap-mode 'resistance
     "How to snap together window edges, one of `magnetism', `resistance', or

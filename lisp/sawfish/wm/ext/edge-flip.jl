@@ -52,7 +52,7 @@
     :group (workspace edge-flip)
     :after-set (lambda () (edge-flip-enable)))
 
-  (defcustom edge-flip-type 'viewport
+  (defcustom edge-flip-type 'workspace
     "Hitting the screen edge selects the next: \\w"
     :type (choice viewport workspace)
     :depends edge-flip-enabled
@@ -194,5 +194,3 @@
 
   (unless batch-mode
     (edge-flip-enable)))
-
-;;;###autoload (defgroup edge-flip "Edge Flipping" :group workspace :require sawfish.wm.ext.edge-flip)
