@@ -30,7 +30,7 @@ SRCS :=	colors.c commands.c cursors.c display.c events.c fonts.c frames.c \
 	functions.c images.c keys.c main.c windows.c
 OBJS := $(SRCS:.c=.o)
 
-DL_SRCS := server.c
+DL_SRCS := 
 DL_OBJS := $(DL_SRCS:%.c=lib%.la)
 
 LISP_SRCS := sawmill-ui.jl sawmill-menu.jl
@@ -46,7 +46,7 @@ sawmill : $(OBJS) $(LIBOBJS)
 	  $(IMLIB_LIBS) $(X11_LIBS) $(LIBS)
 
 sawmill-client : client.o
-	$(CC) $(LDFLAGS) -o $@ $< $(LIBOBJS) $(LIBS)
+	$(CC) $(LDFLAGS) -o $@ $< $(LIBOBJS) $(X11_LIBS) $(LIBS)
 
 lib%.la : %.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $<
@@ -65,7 +65,7 @@ install : all installdirs
 	$(INSTALL_PROGRAM) sawmill-menu.jlc $(bindir)/sawmill-menu
 
 uninstall :
-	for p in sawmill; do \
+	for p in sawmill sawmill-client; do \
 	  $(rep_LIBTOOL) rm ${bindir}/$$p; \
 	done
 	for p in $(DL_OBJS); do \

@@ -1,5 +1,11 @@
 1999-08-22  John Harper  <john@dcs.warwick.ac.uk>
 
+	* version 0.3
+
+	* client.c: new client-server protocol, using X properties to
+	allow inter-host communications
+	* server.h, server.c: deleted, the server is now Lisp code
+
 	* windows.c (x_find_window_by_id): try harder to find a window
 	object for an id, possibly returning an invalidated object
 	(remove_window): even if the window has been invalidated, try

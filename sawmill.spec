@@ -46,6 +46,5 @@ make install
 %{_prefix}/share/sawmill/%{ver}/lisp/*.jl
 %{_prefix}/share/sawmill/%{ver}/lisp/*.jlc
 %{_prefix}/share/sawmill/%{ver}/DOC.*
-%{_prefix}/libexec/sawmill/%{ver}/%{_host}/lib*.so*
-%{_prefix}/libexec/sawmill/%{ver}/%{_host}/lib*.la
+%{_prefix}/libexec/sawmill/%{ver}/%{_host}/
 %{_prefix}/share/gnome/wm-properties/Sawmill.desktop
