@@ -24,6 +24,8 @@
     (export window-maximized-p
 	    window-maximized-horizontally-p
 	    window-maximized-vertically-p
+	    window-unmaximized-position
+	    window-unmaximized-dimensions
 	    window-maximizable-p
 	    maximize-truncate-dims
 	    maximize-find-workarea
@@ -99,6 +101,24 @@
 
   (define (window-maximized-vertically-p w)
     (window-get w 'maximized-vertically))
+
+  (define (window-unmaximized-position w)
+    (let ((coords (window-position w))
+	  (old-geom (window-get w 'unmaximized-geometry)))
+      (when (window-maximized-horizontally-p w)
+	(rplaca coords (nth 0 old-geom)))
+      (when (window-maximized-vertically-p w)
+	(rplaca coords (nth 1 old-geom)))
+      coords))
+
+  (define (window-unmaximized-dimensions w)
+    (let ((dims (window-dimensions w))
+	  (old-geom (window-get w 'unmaximized-geometry)))
+      (when (window-maximized-horizontally-p w)
+	(rplaca dims (nth 2 old-geom)))
+      (when (window-maximized-vertically-p w)
+	(rplacd dims (nth 3 old-geom)))
+      dims))
 
   (define (maximize-discard w #!optional horizontally vertically)
     (when horizontally
@@ -179,26 +199,30 @@
 	  (cons perp-1 perp-2)))))
 
   (define (do-horizontal w edges coords dims fdims)
-    (let ((x-span (expand-edges (cdr coords) (+ (cdr coords) (cdr fdims))
-				(car (current-head-offset w))
-				(car (current-head-dimensions w))
-				(car coords) (+ (car coords) (car fdims))
-				(car edges))))
-      (rplaca coords (car x-span))
-      (rplaca dims (- (- (cdr x-span) (car x-span))
-		      (- (car fdims) (car dims))))
-      w))
+    (let ((head-offset (current-head-offset w))
+	  (head-dims (current-head-dimensions w)))
+      (let ((x-span (expand-edges (cdr coords) (+ (cdr coords) (cdr fdims))
+				  (car head-offset)
+				  (+ (car head-offset) (car head-dims))
+				  (car coords) (+ (car coords) (car fdims))
+				  (car edges))))
+	(rplaca coords (car x-span))
+	(rplaca dims (- (- (cdr x-span) (car x-span))
+			(- (car fdims) (car dims))))
+	w)))
 
   (define (do-vertical w edges coords dims fdims)
-    (let ((y-span (expand-edges (car coords) (+ (car coords) (car fdims))
-				(cdr (current-head-offset w))
-				(cdr (current-head-dimensions w))
-				(cdr coords) (+ (cdr coords) (cdr fdims))
-				(cdr edges))))
-      (rplacd coords (car y-span))
-      (rplacd dims (- (- (cdr y-span) (car y-span))
-		      (- (cdr fdims) (cdr dims))))
-      w))
+    (let ((head-offset (current-head-offset w))
+	  (head-dims (current-head-dimensions w)))
+      (let ((y-span (expand-edges (car coords) (+ (car coords) (car fdims))
+				  (cdr head-offset)
+				  (+ (cdr head-offset) (cdr head-dims))
+				  (cdr coords) (+ (cdr coords) (cdr fdims))
+				  (cdr edges))))
+	(rplacd coords (car y-span))
+	(rplacd dims (- (- (cdr y-span) (car y-span))
+			(- (cdr fdims) (cdr dims))))
+	w)))
 
 
 ;;; 2D packing
@@ -293,9 +317,10 @@
     "Return the rectangle representing the largest rectangle on the screen that
 doesn't overlap any avoided windows, or nil."
     (let* ((avoided (avoided-windows w))
-	   (edges (get-visible-window-edges #:with-ignored-windows t
-					    #:windows avoided
-					    #:include-root t)))
+	   (edges (get-visible-window-edges
+		   #:with-ignored-windows t
+		   #:windows avoided
+		   #:include-heads (list (current-head)))))
       (find-max-rectangle avoided edges (current-head w))))
 
 
@@ -310,9 +335,10 @@ doesn't overlap any avoided windows, or nil."
 	   (fdims (window-frame-dimensions w))
 	   (hints (window-size-hints w))
 	   (avoided (and maximize-avoid-avoided (avoided-windows w)))
-	   (edges (get-visible-window-edges #:with-ignored-windows t
-					    #:windows avoided
-					    #:include-root t)))
+	   (edges (get-visible-window-edges
+		   #:with-ignored-windows t
+		   #:windows avoided
+		   #:include-heads (list (current-head)))))
       (when (window-maximizable-p w direction hints)
 	(unless (window-get w 'unmaximized-geometry)
 	  (window-put w 'unmaximized-geometry (list (car coords) (cdr coords)
