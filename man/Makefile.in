@@ -65,7 +65,7 @@ installdirs : mkinstalldirs
 
 uninstall :
 	rm -f $(DESTDIR)$(infodir)/sawfish.info*
-	-install-info --delete sawfish.info $(DESTDIR)$(infodir)/dir
+	-install-info --remove --info-dir=$(DESTDIR)$(infodir)/dir sawfish.info
 
 clean :
 	rm -f *~ sawfish.info* sawfish.?? sawfish.???
