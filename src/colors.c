@@ -27,15 +27,18 @@ int color_type;
 DEFSYM(default_foreground, "default-foreground");
 
 DEFUN("get-color-rgb", Fget_color_rgb, Sget_color_rgb,
-      (repv red, repv green, repv blue), rep_Subr3) /*
+      (repv red, repv green, repv blue, repv alpha), rep_Subr4) /*
 ::doc:sawfish.wm.colors#get-color-rgb::
-get-color-rgb RED GREEN BLUE
+get-color-rgb RED GREEN BLUE [ALPHA]
 ::end:: */
 {
     Lisp_Color *f;
+
     rep_DECLARE1(red, rep_INTP);
     rep_DECLARE2(green, rep_INTP);
     rep_DECLARE3(blue, rep_INTP);
+    if (!rep_INTP (alpha))
+	alpha = rep_MAKE_INT (65535);
 
     if (dpy == 0)
 	return Qnil;
@@ -45,7 +48,8 @@ get-color-rgb RED GREEN BLUE
     {
 	if (f->red == rep_INT(red)
 	    && f->green == rep_INT(green)
-	    && f->blue == rep_INT(blue))
+	    && f->blue == rep_INT(blue)
+	    && f->alpha == rep_INT(alpha))
 	{
 	    break;
 	}
@@ -66,14 +70,15 @@ get-color-rgb RED GREEN BLUE
 	f->red = rep_INT(red);
 	f->green = rep_INT(green);
 	f->blue = rep_INT(blue);
+	f->alpha = rep_INT(alpha);
 	f->pixel = pixel;
     }
     return rep_VAL(f);
 }
     
-DEFUN("get-color", Fget_color, Sget_color, (repv name), rep_Subr1) /*
+DEFUN("get-color", Fget_color, Sget_color, (repv name, repv alpha), rep_Subr2) /*
 ::doc:sawfish.wm.colors#get-color::
-get-color NAME
+get-color NAME [ALPHA]
 
 Return the color object representing the color named NAME, a standard
 X11 color specifier.
@@ -89,7 +94,8 @@ X11 color specifier.
     {
 	return Fget_color_rgb (rep_MAKE_INT(exact_col.red),
 			       rep_MAKE_INT(exact_col.green),
-			       rep_MAKE_INT(exact_col.blue));
+			       rep_MAKE_INT(exact_col.blue),
+			       alpha);
     }
     else
     {
@@ -117,30 +123,32 @@ DEFUN("color-rgb", Fcolor_rgb, Scolor_rgb, (repv color), rep_Subr1) /*
 ::doc:sawfish.wm.colors#color-rgb::
 color-rgb COLOR
 
-Returns a list of integers (RED GREEN BLUE) representing the actual
-color values of the color represented by object COLOR. The individual
-values range from zero to 65535.
+Returns a list of integers (RED GREEN BLUE ALPHA) representing the
+actual color values of the color represented by object COLOR. The
+individual values range from zero to 65535.
 ::end:: */
 {
     rep_DECLARE1(color, COLORP);
-    return rep_list_3 (rep_MAKE_INT(VCOLOR(color)->red),
+    return rep_list_4 (rep_MAKE_INT(VCOLOR(color)->red),
 		       rep_MAKE_INT(VCOLOR(color)->green),
-		       rep_MAKE_INT(VCOLOR(color)->blue));
+		       rep_MAKE_INT(VCOLOR(color)->blue),
+		       rep_MAKE_INT(VCOLOR(color)->alpha));
 }
 
 DEFUN("color-rgb-8", Fcolor_rgb_8, Scolor_rgb_8, (repv color), rep_Subr1) /*
 ::doc:sawfish.wm.colors#color-rgb::
 color-rgb-8 COLOR
 
-Returns a list of integers (RED GREEN BLUE) representing the actual
-color values of the color represented by object COLOR. The individual
-values range from zero to 255.
+Returns a list of integers (RED GREEN BLUE ALPHA) representing the
+actual color values of the color represented by object COLOR. The
+individual values range from zero to 255.
 ::end:: */
 {
     rep_DECLARE1(color, COLORP);
-    return rep_list_3 (rep_MAKE_INT(VCOLOR(color)->red / 256),
+    return rep_list_4 (rep_MAKE_INT(VCOLOR(color)->red / 256),
 		       rep_MAKE_INT(VCOLOR(color)->green / 256),
-		       rep_MAKE_INT(VCOLOR(color)->blue / 256));
+		       rep_MAKE_INT(VCOLOR(color)->blue / 256),
+		       rep_MAKE_INT(VCOLOR(color)->alpha / 256));
 }
 
 DEFUN("colorp", Fcolorp, Scolorp, (repv win), rep_Subr1) /*
@@ -210,7 +218,8 @@ colors_init (void)
     rep_INTERN_SPECIAL(default_foreground);
     if (!batch_mode_p ())
     {
-	repv black = Fget_color (rep_string_dup("#000000"));
+	DEFSTRING (name, "#000000");
+	repv black = Fget_color (rep_VAL (&name), Qnil);
 	if (black == rep_NULL)
 	    black = Qnil;
 	Fset (Qdefault_foreground, black);

@@ -189,7 +189,7 @@ typedef struct lisp_font {
 typedef struct lisp_color {
     repv car;
     struct lisp_color *next;
-    int red, green, blue;		/* each 16 bits */
+    int red, green, blue, alpha;	/* each 16 bits */
     int pixel;				/* somewhere in the screen's cmap */
 } Lisp_Color;
 

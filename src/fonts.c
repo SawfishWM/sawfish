@@ -370,7 +370,7 @@ xft_draw (Lisp_Font *f, u_char *string, size_t length,
     xft_color.color.red = fg->red;
     xft_color.color.green = fg->green;
     xft_color.color.blue = fg->blue;
-    xft_color.color.alpha = 65535;	/* FIXME: */
+    xft_color.color.alpha = fg->alpha;
 
     XftDrawString8 (draw, &xft_color, f->font,
 		    x, y, string, length);
