@@ -206,4 +206,5 @@
 (autoload 'beos-window-menu "beos-window-menu")
 (autoload 'place-window-stagger "stagger-placement")
 (define-placement-mode 'stagger place-window-stagger)
+(autoload 'raise-group-and-pass-through-click "raise-commands" t)
 ;;; ::autoload-end::
