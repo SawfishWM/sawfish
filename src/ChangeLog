@@ -1,13 +1,20 @@
 2000-06-14  John Harper  <john@dcs.warwick.ac.uk>
 
-	Work to support non-default visuals and color depths
-
-	* main.c (usage): updated for new options
+	Work to support non-default visuals and color depths:
 
 	* display.c: support options --visual=TYPE and --depth=DEPTH
 	for specifying the preferred visual type and color depth. Also
 	removed the screen_{cmap,visual,depth} variables. Replaced by
 	preferred_{visual,depth}
+
+	* frames.c: use XCreateWindow instead of XCreateSimpleWindow;
+	ensure that we never default to CopyFromParent for any
+	parameters (since parent may be different depth/visual)
+
+	* x.c (Fx_create_window): ensure that border_pixel is always
+	set to something
+
+	* main.c (usage): updated for new options
 
 	* frames.c, flippers.c, colors.c, images.c, x.c: no longer use
 	screen_{cmap,visual,depth}
