@@ -20,6 +20,7 @@
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (require 'prompt)
+(provide 'prompt-wm)
 
 ;;;###autoload
 (defun prompt-for-window (&optional title)
@@ -39,7 +40,7 @@
            (names-matching
             (lambda (re names)
               (when names
-                (if (string-match re (car names) nil t)
+                (if (string-match re (car names))
                     (cons (car names) (names-matching re (cdr names)))
                   (names-matching re (cdr names))))))
            (prompt-completion-fun
