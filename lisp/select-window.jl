@@ -22,13 +22,14 @@
 (defvar select-window-map (bind-keys (make-keymap)
 			    "Any-Click1" 'select-window-finished))
 
+(defvar select-window-cursor-shape 'crosshair)
+
 ;; this function waits for the user to select a client window, then
 ;; returns that window
 ;;;###autoload
 (defun select-window ()
   (allow-events 'async-pointer)
-  (when (grab-pointer (or (input-focus) (car (managed-windows)))
-		      (get-cursor 'crosshair))
+  (when (grab-pointer nil (get-cursor select-window-cursor-shape))
     (unwind-protect
 	(let
 	    ((override-keymap select-window-map))
