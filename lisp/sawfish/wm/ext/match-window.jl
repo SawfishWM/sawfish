@@ -139,10 +139,10 @@
 
   (put 'match-window 'custom-widget match-window-widget)
 
-  ;;###autoload (defgroup match-window "Matched Windows" :layout single :require match-window)
+  ;;###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
   (defgroup match-window "Matched Windows"
     :layout single
-    :require match-window)
+    :require sawfish.wm.ext.match-window)
 
   ;; List of (MATCH-ELTS . ACTION-ELTS)
   ;; Each MATCH-ELT is (PROP . REGEXP or NUMBER or SYMBOL)
@@ -151,7 +151,7 @@
     nil
     :type match-window
     :group match-window
-    :require match-window)
+    :require sawfish.wm.ext.match-window)
 
   ;; used by sawmill-ui when grabbing property values
   (define (match-window-grab-x-property prop-name)
