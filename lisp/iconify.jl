@@ -121,6 +121,7 @@ all workspaces."
   (interactive "%W")
   (let
       ((iconify-whole-group nil)
+       (raise-windows-on-uniconify nil)
        fun)
     (map-other-window-groups
      (lambda (x)
