@@ -886,6 +886,8 @@ instance remaining, then delete the actual window."
        (old-type (window-type w))
        (old-frame-style (window-get w 'current-frame-style))
        new-frame-style)
+    (mapc (lambda (cell)
+	    (window-put w (car cell) (cdr cell))) properties)
     (when dimensions
       (resize-window-to w (car dimensions) (cdr dimensions)))
     (when (and position viewport)
@@ -895,8 +897,6 @@ instance remaining, then delete the actual window."
 		      (+ (cdr position)
 			 (* (cdr viewport) (screen-height))
 			 (- viewport-y-offset))))
-    (mapc (lambda (cell)
-	    (window-put w (car cell) (cdr cell))) properties)
     ;; special case this to help switching the default theme
     (setq new-frame-style (or (window-get w 'frame-style) default-frame-style))
     (unless (and (eq old-frame-style new-frame-style)
