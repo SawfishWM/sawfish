@@ -30,6 +30,8 @@
 ;; XXX backwards compatibility, remove at some point
 (unless (boundp 'define-value)
   (setq define-value set))
+(unless (boundp 'quotient)
+  (setq quotient /))
 
 ;; hack to load setenv etc before autoloads are defined
 (load "environ")
