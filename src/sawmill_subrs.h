@@ -179,6 +179,8 @@ extern void functions_kill (void);
 /* from images.c */
 extern int image_type;
 extern ImlibData *imlib_id;
+extern Pixmap make_bitmap (repv file, int *widthp, int *heightp,
+			   int *x_hotp, int *y_hotp);
 extern repv Fmake_image (repv file, repv plist);
 extern repv Fcopy_image (repv source);
 extern repv Fimage_get (repv image, repv prop);
