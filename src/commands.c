@@ -203,7 +203,7 @@ any entered arg is given to the invoked COMMAND.
 	    while(1)
 	    {
 		c = *spec_str;
-		if (c != '%' && !isalnum(c))
+		if (c != 0 && c != '%' && !isalnum(c))
 		{
 		    /* check for flags.. */
 

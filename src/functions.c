@@ -19,9 +19,26 @@
    along with sawmill; see the file COPYING.   If not, write to
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
+/* AIX requires this to be the first thing in the file.  */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+#ifndef __GNUC__
+# if HAVE_ALLOCA_H
+#  include <alloca.h>
+# else
+#  ifdef _AIX
+ #pragma alloca
+#  else
+#   ifndef alloca /* predefined by HP cc +Olibcalls */
+   char *alloca ();
+#   endif
+#  endif
+# endif
+#endif
+   
 #include "sawmill.h"
 #include <X11/Xproto.h>
-#include <alloca.h>
 
 /* Number of outstanding server grabs made; only when this is zero is
    the server ungrabbed. */

@@ -28,7 +28,7 @@ VPATH=@top_srcdir@/src:.
 
 SRCS :=	colors.c commands.c cursors.c display.c events.c fonts.c frames.c \
 	functions.c images.c keys.c main.c session.c windows.c
-OBJS := $(SRCS:.c=.o)
+OBJS := $(SRCS:.c=.o) $(ALLOCA)
 
 DL_SRCS := gradient.c
 DL_OBJS := $(DL_SRCS:%.c=lib%.la)
