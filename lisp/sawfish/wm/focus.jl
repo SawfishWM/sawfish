@@ -123,13 +123,15 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 ;;; modes
 
   (define-focus-mode 'enter-exit
-    (lambda (w action)
+    (lambda (w action . args)
       (case action
 	((pointer-in)
 	 (when (window-really-wants-input-p w)
 	   (set-input-focus w)))
 	((pointer-out)
-	 (set-input-focus nil))
+	 ;; ignore grab/ungrab leave events
+	 (when (eq (car args) 'normal)
+	   (set-input-focus nil)))
 	((enter-root)
 	 ;; ensure that any desktop window gets focused
 	 (set-input-focus w)))))
@@ -199,17 +201,17 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 
 ;;; hooks
 
-  (define (focus-enter-fun w)
+  (define (focus-enter-fun w mode)
     (cond ((desktop-window-p w)
-	   (focus-invoke-mode w 'enter-root))
+	   (focus-invoke-mode w 'enter-root mode))
 	  ((windowp w)
-	   (focus-invoke-mode w 'pointer-in))))
+	   (focus-invoke-mode w 'pointer-in mode))))
 
-  (define (focus-leave-fun w)
+  (define (focus-leave-fun w mode)
     (cond ((desktop-window-p w)
-	   (focus-invoke-mode w 'leave-root))
+	   (focus-invoke-mode w 'leave-root mode))
 	  ((windowp w)
-	   (focus-invoke-mode w 'pointer-out))))
+	   (focus-invoke-mode w 'pointer-out mode))))
 
   (define (focus-in-fun w)
     (focus-invoke-mode w 'focus-in)
