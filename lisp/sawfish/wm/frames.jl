@@ -170,9 +170,8 @@ that overrides settings set elsewhere.")
       (shaded-transient . shaped-transient)
       (icon . shaped-transient)
       (dock . icon))
-    "Frame type fallbacks."
-    :tooltip "Associate frame types with type to try if the theme doesn't \
-implement the requested type."
+    "Associate frame types with type to try if the theme doesn't implement the
+requested type."
     :type (alist ((symbol default shaped transient
 			  shaped-transient icon doc) "From")
 		 ((symbol default shaped transient
@@ -236,7 +235,7 @@ deciding which frame type to ask a theme to generate.")
     :after-set (lambda () (after-setting-frame-option)))
 
   (defcustom default-bevel-percent nil
-    "Bevel intensity: \\wpercent."
+    "Intensity of bevels: \\wpercent."
     :group appearance
     :type (number 0 100)
     :user-level expert

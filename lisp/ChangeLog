@@ -1,40 +1,7 @@
-2000-09-26  John Harper  <john@dcs.warwick.ac.uk>
-
-	* sawfish/wm/commands/x-cycle.jl: don't pass EVENT parameter
-	between commands. Export cycle-next function
-
-	* sawfish/wm/commands/x-cycle.jl: the reverse key is now used
-	to cycle one step `backwards'. The cycle-windows function now
-	has a keyword arg STEP defining the direction (and magnitude)
-	of cycle steps
-
-	* sawfish/wm/util/decode-events.jl (modifier-keysym-p): new
-	function
-
-	* sawfish/wm/commands/x-cycle.jl (cycle-windows): add the
-	modifiers of the invoking event to the cycle-reverse-event when
-	creating its binding
-
-	* sawfish/wm/util/decode-events.jl (decode-event): use a `do'
-	statement instead of while and setq
-
 2000-09-25  John Harper  <john@dcs.warwick.ac.uk>
-
-	* sawfish/wm/commands/x-cycle.jl (cycle-reverse-event): new
-	option, the name of the event that causes cycling to reverse
-	direction. (My rationale is that this is less fiddly to use
-	than, e.g., making M-S-TAB go backwards, and also is cleaner to
-	implement)
 
 	* sawfish/wm/misc.jl (current-head): fall back to checking the
 	pointer position if no head is found for the window
-
-	* sawfish/wm/windows.jl, sawfish/wm/frames.jl,
-	sawfish/wm/ext/shade-hover.jl: added some :tooltip's
-
-	* sawfish/wm/custom.jl (defcustom): new keyword `:tooltip
-	STRING'. Embed it into the doc string (following a `\n\n'
-	marker)
 
 2000-09-23  John Harper  <john@dcs.warwick.ac.uk>
 

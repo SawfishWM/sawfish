@@ -68,8 +68,7 @@
     (export cycle-windows
 	    cycle-group
 	    cycle-prefix
-	    cycle-class
-	    cycle-next)
+	    cycle-class)
 
     (open rep
 	  rep.system
@@ -97,13 +96,6 @@
 
   ;;###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
   (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-
-  (defcustom cycle-reverse-event "SPC"
-    "Reversal key: \\w"
-    :tooltip "The key used to cycle in the reverse direction. Has the active \
-modifiers added to it."
-    :group (focus cycle)
-    :type event)
 
   (defcustom cycle-show-window-names t
     "Display window names while cycling through windows."
@@ -152,34 +144,14 @@ modifiers added to it."
 
 ;; variables
 
-  ;; the current window
   (define x-cycle-current (make-fluid))
-
-  ;; the original stacking order
   (define x-cycle-stacking (make-fluid))
-
-  ;; the list of windows being cycled through
   (define x-cycle-windows (make-fluid))
 
 
 ;;; code
 
-  (define (forwards lst elt count)
-    (let ((total (length lst))
-	  (current (let loop ((rest lst) (i 0))
-		     (cond ((null rest) 0)
-			   ((eq (car rest) elt) i)
-			   (t (loop (cdr rest) (1+ i)))))))
-      (nth (mod (+ current count) total) lst)))
-
-  (define (merge-unsorted x y)
-    (let loop ((rest y)
-	       (out x))
-      (cond ((null rest) out)
-	    ((memq (car rest) out) (loop (cdr rest) out))
-	    (t (loop (cdr rest) (cons (car rest) out))))))
-
-  (define ((cycle-next count))
+  (define (next)
     (let ((win (window-order (if cycle-all-workspaces
 				 nil
 			       current-workspace)
@@ -205,9 +177,9 @@ modifiers added to it."
       (when (fluid x-cycle-stacking)
 	(restack-windows (fluid x-cycle-stacking))
 	(fluid-set x-cycle-stacking nil))
-      (if (fluid x-cycle-current)
-	  (setq win (forwards win (fluid x-cycle-current) count))
-	(setq win (car win)))
+      (when (fluid x-cycle-current)
+	(setq win (or (cdr (memq (fluid x-cycle-current) win)) win)))
+      (setq win (car win))
       (fluid-set x-cycle-current win)
       (when (not (window-get win 'sticky))
 	(select-workspace (nearest-workspace-with-window
@@ -230,14 +202,13 @@ modifiers added to it."
 
   (define (x-cycle-exit) (throw 'x-cycle-exit t))
 
-  (define (cycle-windows #!optional windows (step +1))
+  (define (cycle-windows event #!optional windows)
     "Cycle through all windows in order of recent selections."
     (let ((tail-command nil))
       (let-fluids ((x-cycle-current nil)
 		   (x-cycle-stacking nil)
 		   (x-cycle-windows (or windows t)))
-	(let* ((event (current-event))
-	       (decoded (decode-event event))
+	(let* ((decoded (decode-event event))
 	       (modifier-keys (apply append (mapcar modifier->keysyms
 						    (nth 1 decoded))))
 	       (eval-modifier-events t)
@@ -264,8 +235,7 @@ modifiers added to it."
 	       (unbound-key-hook
 		(list (lambda ()
 			(let ((ev (decode-event (current-event))))
-			  (unless (or (memq 'release (nth 1 ev))
-				      (modifier-keysym-p (nth 2 ev)))
+			  (unless (memq 'release (nth 1 ev))
 			    ;; want to search the usual keymaps
 			    (setq override-keymap nil)
 			    (setq tail-command (lookup-event-binding
@@ -282,21 +252,7 @@ modifiers added to it."
 		   this-command))
 
 	  ;; Use the event that invoked us to contruct the keymap
-	  (bind-keys override-keymap event (cycle-next step))
-
-	  ;; add the reverse key
-	  (when cycle-reverse-event
-	    (condition-case nil
-		;; merge the modifiers of the cycle-reverse-event
-		;; and the decoded current-event
-		(let* ((in (decode-event (lookup-event cycle-reverse-event)))
-		       (out (encode-event (list (car in)
-						(merge-unsorted (cadr in)
-								(cadr decoded))
-						(caddr in)))))
-		  (bind-keys override-keymap out (cycle-next (- step))))
-	      (error nil)))
-
+	  (bind-keys override-keymap event next)
 	  (mapc (lambda (k)
 		  (bind-keys override-keymap
 		    (encode-event `(key (release any) ,k)) x-cycle-exit))
@@ -308,7 +264,7 @@ modifiers added to it."
 		(progn
 		  (catch 'x-cycle-exit
 		    ;; do the first step
-		    ((cycle-next step))
+		    (next)
 		    (recursive-edit))
 		  (when (fluid x-cycle-current)
 		    (display-window (fluid x-cycle-current))))
@@ -324,13 +280,13 @@ modifiers added to it."
 
 ;;; variants
 
-  (define (cycle-group w #!optional (step +1))
+  (define (cycle-group event w)
     "Cycle through all windows in the same group as the current window."
     (let ((windows (windows-in-group w)))
       (when windows
-	(cycle-windows windows step))))
+	(cycle-windows event windows))))
 
-  (define (cycle-prefix w #!optional (step +1))
+  (define (cycle-prefix event w)
     "Cycle through all windows whose names match the leading colon-delimited
 prefix of the current window."
     (when (string-match "^([^:]+)\\s*:" (window-name w))
@@ -340,18 +296,18 @@ prefix of the current window."
 		       (lambda (x)
 			 (string-match re (window-name x))))))
 	(when windows
-	  (cycle-windows windows step)))))
+	  (cycle-windows event windows)))))
 
-  (define (cycle-class w #!optional (step +1))
+  (define (cycle-class event w)
     "Cycle through all windows with the same class as the current window."
     (let ((class (window-class w)))
       (let ((windows (filter-windows (lambda (x)
 				       (equal (window-class x) class)))))
 	(when windows
-	  (cycle-windows windows step)))))
+	  (cycle-windows event windows)))))
 
   ;;###autoload
-  (define-command 'cycle-windows cycle-windows)
-  (define-command 'cycle-group cycle-group #:spec "%W")
-  (define-command 'cycle-prefix cycle-prefix #:spec "%W")
-  (define-command 'cycle-class cycle-class #:spec "%W"))
+  (define-command 'cycle-windows cycle-windows #:spec "e")
+  (define-command 'cycle-group cycle-group #:spec "e\n%W")
+  (define-command 'cycle-prefix cycle-prefix #:spec "e\n%W")
+  (define-command 'cycle-class cycle-class #:spec "e\n%W"))

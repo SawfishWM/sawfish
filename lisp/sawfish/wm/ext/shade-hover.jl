@@ -38,8 +38,8 @@
     :require sawfish.wm.ext.shade-hover)
 
   (defcustom shade-hover-mode nil
-    "Enable shade-hover mode."
-    :tooltip "(Temporarily unshades windows while the mouse pointer is over them.)"
+    "Enable shade-hover mode.
+(Temporarily unshade windows while pointer is over them.)"
     :group (focus shade-hover)
     :type boolean
     :user-level novice

@@ -37,7 +37,8 @@
   (define (make-keymap-item changed-callback)
 
     (define (print x)
-      (let ((command (car x)))
+      (let ((command (car x))
+	    (key (cdr x)))
 	(list (cdr x)
 	      (if (consp command)
 		  (concat (beautify-symbol-name (command-name command))
@@ -81,8 +82,7 @@
 ;;; widget for editing individual bindings
 
   (define (make-keymap:binding-item changed-callback)
-    (make-widget `(pair command (labelled ,(_ "Key:") event) t t)
-		 changed-callback))
+    (make-widget '(pair command event t t) changed-callback))
 
   (define-widget-type 'keymap:binding make-keymap:binding-item)
 

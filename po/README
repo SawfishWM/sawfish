@@ -5,31 +5,3 @@ gnome-i18n/extra-po/sawfish directory on cvs.gnome.org
 
 (I try to synchronize with that before each release)
 
-
-Notes about strings
-===================
-
-Sawfish uses some embedded control codes in strings (mostly in the
-configurator labels):
-
-`\\w'
-
-Marks where the widget will be inserted into the string. Often used
-with entry box and popup menu widgets to put the selected phrase in the
-middle of the label. If no `\\w' token exists the label is put before
-the widget.
-
-`\n\n'
-
-A double newline separates a widget's label from its (optional)
-tooltip. Be sure to preserve both newline characters!
-
-In po files this is usually formatted like:
-
-	msgid ""
-	"Label.\n"
-	"\n"
-	"Tooltip."
-	msgstr ""
-
-

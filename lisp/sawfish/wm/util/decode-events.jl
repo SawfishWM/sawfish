@@ -25,7 +25,6 @@
 	    encode-event
 	    string->keysym
 	    modifier->keysyms
-	    modifier-keysym-p
 	    should-grab-button-event-p)
 
     (open rep
@@ -41,14 +40,15 @@ cell). The symbolic description has the form `(TYPE MODIFIER-LIST ACTION)'."
 
 	   (decode-mods
 	    (lambda ()
-	      (let ((out '()))
-		(do ((i 0 (1+ i)))
-		    ((= i 13))
+	      (let (i out)
+		(setq i 0)
+		(while (< i 13)
 		  (when (not (zerop (logand mods (lsh 1 i))))
 		    (setq out (cons (aref [shift lock control mod-1 mod-2
 						 mod-3 mod-4 mod-5 button-1
 						 button-2 button-3 button-4
-						 button-5] i) out))))
+						 button-5] i) out)))
+		  (setq i (1+ i)))
 		(when (not (zerop (logand mods (lsh 1 20))))
 		  (setq out (cons 'meta out)))
 		(when (not (zerop (logand mods (lsh 1 21))))
@@ -124,14 +124,6 @@ representing the X11 keysyms that may generate the modifier."
 	  ((eq modifier 'control)
 	   '(Control_L Control_R))
 	  (t (error "Unknown modifier: %s" modifier))))
-
-  (define (modifier-keysym-p keysym)
-    "Returns true if KEYSYM is a modifier keysym."
-    (or (memq keysym '(Shift_L Shift_R Control_L Control_R))
-	(member (symbol-name keysym) alt-keysyms)
-	(member (symbol-name keysym) meta-keysyms)
-	(member (symbol-name keysym) hyper-keysyms)
-	(member (symbol-name keysym) super-keysyms)))
 
   (define (should-grab-button-event-p event keymap)
     (let* ((decoded (decode-event event))
