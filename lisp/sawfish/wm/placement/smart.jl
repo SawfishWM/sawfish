@@ -43,6 +43,7 @@
 ;; options/variables
 
 (defvar sp-avoided-windows-weight 10)
+(defvar sp-normal-windows-weight 1)
 
 (defcustom sp-padding 4
   "Try to leave at least this many pixels between window edges in first/best-fit."
@@ -291,9 +292,11 @@ A value between 0 and 1023 inclusive.")
 	 (rects (rectangles-from-windows
 		 windows
 		 (lambda (x)
-		   (if (window-avoided-p x)
-		       sp-avoided-windows-weight
-		     (window-get x 'placement-weight)))))
+		   (cond ((window-avoided-p x)
+			  sp-avoided-windows-weight)
+			 ((window-get x 'placement-weight))
+			 (t
+			  sp-normal-windows-weight)))))
 	 (grid (sp-make-grid rects t))
 	 (dims (window-frame-dimensions w))
 	 point)
