@@ -63,11 +63,15 @@
       default-font default-frame nil-frame frame-part-classes
       decorate-transients batch-mode))
 
-  (define safe-features '(gtkrc x))
+  (define safe-features '(sawfish.wm.util.gtkrc
+			  sawfish.wm.util.x
+			  ;; compatibility
+			  gtkrc x))
   (define fully-safe-features '(rep.io.timers rep.data.tables
 				rep.data.records rep.data.ring
 				rep.data.queues rep.data.symbol-table
 				sawfish.wm.util.gradient
+				sawfish.wm.util.recolor-image
 				sawfish.wm.theming.make-theme
 				;; compatibility
 				timers gradient make-theme))

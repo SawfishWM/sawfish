@@ -1,3 +1,20 @@
+2001-01-19  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/user.jl (fallback-frame-style): changed this to
+	`Crux' theme
+
+	* sawfish/wm/frames.jl (frame-part-classes): added shade-button
+	frame part class
+	* sawfish/wm/keymaps.jl (shade-button-keymap): new keymap
+
+	* sawfish/wm/util/recolor-image.jl (make-image-recolorer): new
+	module, exports this function. A factory for creating functions
+	that recolour images based on a white -> <color> -> black
+	gradient. Abstracted this code out of the new `Crux' theme
+
+	* sawfish/wm/gaol.jl (fully-safe-features): added
+	sawfish.wm.util.recolor-image
+
 2001-01-18  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/ext/hide-dialogs.jl: new module, hide dialog

@@ -51,7 +51,7 @@
   (setq *user-structure* 'user)
 
   ;; frame-style loaded if user hasn't set their own
-  (define fallback-frame-style 'microGUI)
+  (define fallback-frame-style 'Crux)
 
   ;; initialize the special variable pointing at this structure
   (structure () (open rep rep.structures)

@@ -142,6 +142,13 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     :user-level expert
     :type keymap)
 
+  (defcustom shade-button-keymap (make-keymap)
+    "Keymap containing bindings active when the pointer is in the shade button
+of a window. (Only mouse-bindings are evaluated in this map.)"
+    :group bindings
+    :user-level expert
+    :type keymap)
+
   (defcustom pointer-motion-threshold 2
     "Motion threshold for mouse pointer: \\wpixels"
     :group misc
@@ -227,4 +234,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     (bind-keys maximize-button-keymap
       "Button3-Off" 'maximize-window-horizontally-toggle
       "Button2-Off" 'maximize-window-vertically-toggle
-      "Button1-Off" 'maximize-window-toggle)))
+      "Button1-Off" 'maximize-window-toggle)
+
+    (bind-keys shade-button-keymap
+      "Button1-Off" 'toggle-window-shaded)))

@@ -124,6 +124,7 @@
       (close-button . ((keymap . close-button-keymap)))
       (iconify-button . ((keymap . iconify-button-keymap)))
       (maximize-button . ((keymap . maximize-button-keymap)))
+      (shade-button . ((keymap . shade-button-keymap)))
       (top-border . ((cursor . top_side)
 		     (keymap . border-keymap)))
       (left-border . ((cursor . left_side)
