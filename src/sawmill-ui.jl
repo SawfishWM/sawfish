@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.24 1999/09/23 13:37:18 john Exp $
+;; $Id: sawmill-ui.jl,v 1.25 1999/09/23 13:53:03 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -615,15 +615,14 @@ exec rep "$0" "$@"
 (defun ui-bind-key (spec index new)
   (let*
       ((map (copy-sequence (get-key spec ':value)))
-       (cell (nth index (cdr map))))
-    (unless (equal cell new)
-      (rplaca cell (car new))
-      (rplacd cell (cdr new))
+       (cell (nthcdr (get-key spec ':selection) (cdr map))))
+    (unless (equal (car cell) new)
+      (rplaca cell (cons (car new) (cdr new)))
       (ui-set spec (get-key spec ':variable) map)
       (gtk-clist-set-text (get-key spec ':clist)
-			  index 0 (cdr cell))
+			  index 0 (cdr new))
       (gtk-clist-set-text (get-key spec ':clist)
-			  index 1 (format nil "%S" (car cell))))))
+			  index 1 (format nil "%S" (car new))))))
 
 (put 'keymap-shell 'builder 'build-keymap-shell)
 (defun build-keymap-shell (spec)
