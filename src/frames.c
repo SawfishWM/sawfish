@@ -658,7 +658,7 @@ list_frame_generator (Lisp_Window *w)
 	tem = Qnil;
     if (tem == Qnil)
     {
-	XRectangle *rects = alloca (sizeof (XRectangle) * nparts);
+	XRectangle *rects = alloca (sizeof (XRectangle) * nparts + 1);
 	int i;
 	for (i = 0, fp = w->frame_parts; i < nparts; i++, fp = fp->next)
 	{
@@ -667,8 +667,22 @@ list_frame_generator (Lisp_Window *w)
 	    rects[i].width = fp->width;
 	    rects[i].height = fp->height;
 	}
+	if (!w->shaped)
+	{
+	    rects[i].x = -w->frame_x;
+	    rects[i].y = -w->frame_y;
+	    rects[i].width = w->frame_width;
+	    rects[i].height = w->frame_height;
+	    i++;
+	}
 	XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
-				 rects, nparts, ShapeSet, Unsorted);
+				 rects, i, ShapeSet, Unsorted);
+	if (w->shaped)
+	{
+	    XShapeCombineShape (dpy, w->frame, ShapeBounding,
+				-w->frame_x, -w->frame_y, w->id,
+				ShapeBounding, ShapeUnion);
+	}
     }
 
     /* create/update windows for each part */
