@@ -1,3 +1,18 @@
+2000-09-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/window-anim.jl, sawfish/wm/animation/outline.jl:
+	added structure aliases
+
+	* sawfish/wm/animation/outline.jl (anim-outline-entry): check
+	the 'icon-position property of the window before looking at
+	anim-outline-icon-coords
+
+	* sawfish/wm/custom.jl (custom-set-variable,
+	custom-set-typed-variable): use user-require to load :require'd
+	modules (in case they're bare code)
+
+	* sawfish/wm/misc.jl (user-require): new function
+
 2000-09-04  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/commands.jl (define-command): new keyword args DOC
