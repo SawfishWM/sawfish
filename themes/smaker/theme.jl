@@ -1,5 +1,5 @@
 ;; smaker/theme.jl -- somewhat windowmaker like theme, heavily customizable
-;; $Id: theme.jl,v 1.8 1999/12/05 17:58:49 john Exp $
+;; $Id: theme.jl,v 1.9 2000/01/27 08:39:38 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -270,16 +270,11 @@
 
   (add-frame-style 'smaker
 		   (lambda (w type)
-		     (cond ((eq type 'shaped)
-			    shaped-frame)
-			   ((eq type 'transient)
-			    transient-frame)
-			   ((eq type 'shaped-transient)
-			    shaped-transient-frame)
-			   ((eq type 'unframed)
-			    nil-frame)
-			   (t
-			    frame))))
+		     (case type
+		       ((default) frame)
+		       ((transient) transient-frame)
+		       ((shaped) shaped-frame)
+		       ((shaped-transient) shaped-transient-frame))))
   (unless batch-mode
     (load-images))
 

@@ -219,13 +219,8 @@
 
   (add-frame-style 'simple
 		   (lambda (w type)
-		     (cond ((eq type 'shaped)
-			    shaped-frame)
-			   ((eq type 'transient)
-			    transient-frame)
-			   ((eq type 'shaped-transient)
-			    shaped-transient-frame)
-			   ((eq type 'unframed)
-			    nil-frame)
-			   (t
-			    frame)))))
+		     (case type
+		       ((default) frame)
+		       ((transient) transient-frame)
+		       ((shaped) shaped-frame)
+		       ((shaped-transient) shaped-transient-frame)))))

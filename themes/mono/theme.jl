@@ -1,5 +1,5 @@
 ;; mono/theme.jl
-;; $Id: theme.jl,v 1.5 2000/01/14 15:05:46 john Exp $
+;; $Id: theme.jl,v 1.6 2000/01/27 08:39:37 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -304,15 +304,10 @@
 
   (add-frame-style 'mono
 		   (lambda (w type)
-		     (cond ((eq type 'shaped)
-			    shaped-frame)
-			   ((eq type 'transient)
-			    transient-frame)
-			   ((eq type 'shaped-transient)
-			    shaped-transient-frame)
-			   ((eq type 'unframed)
-			    nil-frame)
-			   (t
-			    frame))))
+		     (case type
+		       ((default) frame)
+		       ((transient) transient-frame)
+		       ((shaped) shaped-frame)
+		       ((shaped-transient) shaped-transient-frame))))
   (rebuild)
   (custom-set-property 'mono:gtk-background-color ':after-set rebuild))
