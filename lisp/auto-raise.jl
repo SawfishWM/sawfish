@@ -24,7 +24,7 @@
 
 (defvar raise-windows-on-focus t
   "When non-nil, windows are raised after receiving focus. If a string,
-windows are only raised if there name matches this regular expression.")
+windows are only raised if their name matches this regular expression.")
 
 (defvar raise-window-timeout 500
   "Time in milliseconds until windows are raised if raise-windows-on-focus
