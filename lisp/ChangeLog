@@ -1,3 +1,18 @@
+2000-06-19  John Harper  <john@dcs.warwick.ac.uk>
+
+	* window-history.jl: ensure that our addition to
+	before-add-window-hook is added at the end of the hook (i.e.
+	after the session-management function)
+
+2000-06-18  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.jl, sawmill-gaol.jl, describe.jl: remove any
+	rep-compatibility cruft, we require 0.12 now
+
+	* window-history.jl: set the options to automatically save
+	dimensions and state to nil (since the module may sometimes
+	misidentify the `same' window)
+
 2000-06-16  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.28.1

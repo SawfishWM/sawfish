@@ -1,3 +1,14 @@
+ 2000-06-19  John Harper  <john@dcs.warwick.ac.uk>
+ 
+       * play-sample.c (gnome_sound_play): check if
+       gnome_sound_sample_load returns negative, if so print a message
+       instead of trying to play the negative id
+ 
+2000-06-18  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.h, main.c, keys.c, events.c, commands.c: remove any
+	rep-compatibility cruft, we require 0.12 now
+
 2000-06-16  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.28.1
