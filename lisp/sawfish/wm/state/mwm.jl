@@ -88,7 +88,7 @@
     (let* ((hints (get-x-property w '_MOTIF_WM_HINTS))
 	   (type (window-type w))
 	   data)
-      ;; XXX act on functions and input-mode hints...
+      ;; XXX act on input-mode hints...
       (when hints
 	(setq data (nth 2 hints))
 	(unless (zerop (logand (aref data mwm-window-hint-flags)
@@ -107,7 +107,18 @@
 		    (remove-frame-class w 'iconify-button))
 		  (when (zerop (logand decor mwm-decor-maximize))
 		    (remove-frame-class w 'maximize-button)))
-	      (setq type 'default)))))
+	      (setq type 'default))))
+	(unless (zerop (logand (aref data mwm-window-hint-flags)
+			       mwm-flag-functions))
+	  ;; function hints supplied
+	  (let ((func (aref data mwm-window-hint-functions)))
+	    (when (zerop (logand func mwm-func-all))
+	      (when (zerop (logand func mwm-func-minimize))
+		(remove-frame-class w 'iconify-button))
+	      (when (zerop (logand func mwm-func-maximize))
+		(remove-frame-class w 'maximize-button))
+	      (when (zerop (logand func mwm-func-close))
+		(remove-frame-class w 'close-button))))))
       (set-window-type w type)))
 
   (add-hook 'before-add-window-hook mwm-add-window))
