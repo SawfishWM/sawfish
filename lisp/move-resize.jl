@@ -85,6 +85,8 @@
 			       (string-match "-Move$" (event-name
 						       (current-event)))))
        (override-keymap move-resize-map)
+       ;; don't want any complications..
+       (unbound-key-hook nil)
        (move-resize-window w)
        (move-resize-function function)
        (move-resize-old-x (car (window-position w)))
@@ -116,30 +118,32 @@
 				  ':with-ignored-windows nil
 				  ':windows-to-ignore (list w)
 				  ':include-root t))))
-       (move-resize-last-outline nil))
+       (move-resize-last-outline nil)
+       server-grabbed)
     (unless (eq move-resize-mode 'opaque)
       ;; prevent any other programs drawing on the display
-      (grab-server))
+      (grab-server)
+      (setq server-grabbed t))
     (unwind-protect
 	(progn
 	  ;; ensure that we catch _all_ mouse events
-	  (grab-pointer w)
-	  (unwind-protect
-	      (progn
-		(unless (eq move-resize-mode 'opaque)
-		  (setq move-resize-last-outline
-			(list move-resize-mode
-			      move-resize-x move-resize-y
-			      (+ move-resize-width (car move-resize-frame))
-			      (+ move-resize-height (cdr move-resize-frame))))
-		  (apply 'draw-window-outline move-resize-last-outline))
-		(catch 'move-resize-done
-		  (when from-motion-event
-		    (move-resize-motion))
-		  (recursive-edit))))
-	  (ungrab-pointer)))
-    (unless (eq move-resize-mode 'opaque)
-      (ungrab-server))))
+	  (when (grab-pointer w (get-cursor 'hand2))
+	    (unwind-protect
+		(progn
+		  (unless (eq move-resize-mode 'opaque)
+		    (setq move-resize-last-outline
+			  (list move-resize-mode
+				move-resize-x move-resize-y
+				(+ move-resize-width (car move-resize-frame))
+				(+ move-resize-height (cdr move-resize-frame))))
+		    (apply 'draw-window-outline move-resize-last-outline))
+		  (catch 'move-resize-done
+		    (when from-motion-event
+		      (move-resize-motion))
+		    (recursive-edit)))
+	      (ungrab-pointer))))
+      (when server-grabbed
+	(ungrab-server)))))
 
 ;; round up a window dimension X in increments of INC, with minimum
 ;; value BASE
