@@ -1,5 +1,5 @@
 # Makefile.in -- input for the capplet directory's Makefile
-# $Id: Makefile.in,v 1.9 2000/01/03 00:00:03 john Exp $
+# $Id: Makefile.in,v 1.10 2000/02/27 11:58:01 john Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -45,9 +45,9 @@ install : all installdirs
 	  if [ -d $(DESTDIR)$$d/$(G_CC_INFIX) ]; then \
 	    rm -rf $(DESTDIR)$$d/$(G_CC_INFIX)/Sawmill; \
 	    mkdir $(DESTDIR)$$d/$(G_CC_INFIX)/Sawmill; \
-	    cp desktop-entries/.directory $(DESTDIR)$$d/$(G_CC_INFIX)/Sawmill/; \
+	    $(INSTALL_DATA) desktop-entries/.directory $(DESTDIR)$$d/$(G_CC_INFIX)/Sawmill/; \
 	    for f in desktop-entries/*.desktop; do \
-	      cp $$f $(DESTDIR)$$d/$(G_CC_INFIX)/Sawmill/; \
+	      $(INSTALL_DATA) $$f $(DESTDIR)$$d/$(G_CC_INFIX)/Sawmill/; \
 	    done; \
 	    break; \
 	  fi \
@@ -56,9 +56,9 @@ install : all installdirs
 	  if [ -d $(DESTDIR)$$d/$(G_MENU_INFIX) ]; then \
 	    rm -rf $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawmill; \
 	    mkdir $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawmill; \
-	    cp desktop-entries/.directory $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawmill/; \
+	    $(INSTALL_DATA) desktop-entries/.directory $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawmill/; \
 	    for f in desktop-entries/*.desktop; do \
-	      cp $$f $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawmill/; \
+	      $(INSTALL_DATA) $$f $(DESTDIR)$$d/$(G_MENU_INFIX)/Sawmill/; \
 	    done; \
 	    break; \
 	  fi \
