@@ -714,19 +714,20 @@ lookup_event(u_long *code, u_long *mods, u_char *desc)
 	    }
 	    x++;
 	}
-	if ((*mods & ShiftMask) && islower (desc[0]) && desc[1] == 0)
-	{
-	    /* canonify `S-x' to `X' */
-	    char tem[2];
-	    *mods &= ~ShiftMask;
-	    tem[0] = toupper (desc[0]);
-	    tem[1] = 0;
-	    ks = XStringToKeysym (tem);
-	}
-	else
-	    ks = XStringToKeysym(desc);
+	ks = XStringToKeysym(desc);
 	if(ks != NoSymbol)
 	{
+	    if (*mods & ShiftMask)
+	    {
+		KeySym lower, upper;
+		XConvertCase (ks, &lower, &upper);
+		if (ks == lower)
+		{
+		    /* canonify `S-x' to `X' */
+		    *mods &= ~ShiftMask;
+		    ks = upper;
+		}
+	    }
 	    *mods |= EV_TYPE_KEY;
 	    *code = ks;
 	    return TRUE;
