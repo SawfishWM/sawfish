@@ -141,15 +141,18 @@ key_press (XEvent *ev)
 
     record_mouse_position (ev->xkey.x_root, ev->xkey.y_root);
 
-    fp = find_frame_part_by_window (ev->xkey.window);
-    if (fp != 0)
+    if (ev->type == KeyPress)
     {
-	repv tem = Fassq (Qkeymap, fp->alist);
-	if (tem && tem != Qnil)
-	    context_map = rep_CDR(tem);
-    }
+	fp = find_frame_part_by_window (ev->xkey.window);
+	if (fp != 0)
+	{
+	    repv tem = Fassq (Qkeymap, fp->alist);
+	    if (tem && tem != Qnil)
+		context_map = rep_CDR(tem);
+	}
 
-    eval_input_event (context_map);
+	eval_input_event (context_map);
+    }
 }
 
 static void
