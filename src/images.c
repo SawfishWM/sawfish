@@ -174,6 +174,49 @@ string). PLIST defines the property list of the image.
     return Fsignal (Qerror, rep_list_2(rep_string_dup("no such image"), file));
 }
 
+DEFUN("window-icon-image", Fwindow_icon_image,
+      Swindow_icon_image, (repv win), rep_Subr1) /*
+::doc:window-icon-image::
+window-icon-image WINDOW
+
+Returns an image object representing the icon currently associated with
+WINDOW. Returns the symbol `nil' if no such image.
+::end:: */
+{
+   Drawable d;
+   Pixmap mask;
+   Window root;
+   int x, y, w, h, bdr, dp;
+   ImlibImage *im;
+
+   rep_DECLARE1 (win, WINDOWP);
+
+   if (VWIN(win)->wmhints->flags & IconPixmapHint)
+       d = VWIN(win)->wmhints->icon_pixmap;
+   else if (VWIN(win)->wmhints->flags & IconWindowHint)
+       /* XXX not sure if this is a good idea..? */
+       d = VWIN(win)->wmhints->icon_window;
+   else
+       return Qnil;
+
+   /* XXX Imlib currently ignores the MASK parameter, but maybe it
+      XXX won't in the future (and pigs might fly, also) */
+   if (VWIN(win)->wmhints->flags & IconMaskHint)
+       mask = VWIN(win)->wmhints->icon_mask;
+   else
+       mask = 0;
+
+   if (!XGetGeometry (dpy, d, &root, &x, &y, &w, &h, &bdr, &dp))
+       return Qnil;
+
+   im = Imlib_create_image_from_drawable (imlib_id, d, mask, 0, 0, w, h);
+
+   /* Imlib documentation says that server grab is lost in the above call */
+   regrab_server ();
+
+   return im ? make_image (im, Qnil) : Qnil;
+}
+
 DEFUN("copy-image", Fcopy_image, Scopy_image, (repv source), rep_Subr1) /*
 ::doc:copy-image::
 copy-image SOURCE-IMAGE
@@ -712,6 +755,7 @@ images_init (void)
 	imlib_id = Imlib_init_with_params (dpy, &params);
     }
     rep_ADD_SUBR(Smake_image);
+    rep_ADD_SUBR(Swindow_icon_image);
     rep_ADD_SUBR(Scopy_image);
     rep_ADD_SUBR(Sflip_image_horizontally);
     rep_ADD_SUBR(Sflip_image_vertically);
