@@ -96,10 +96,13 @@
     (let ((commands '*undefined*))
       (lambda ()
 	(unless (listp commands)
-	  (setq commands (wm-eval '(sort (apropos "" commandp)) t)))
+	  (init-server)
+	  (setq commands (wm-eval '(nokogiri-report-commands) t)))
 	commands)))
 
   (define (wm-documentation symbol)
     (wm-eval
-     `(let ((doc (documentation ',symbol)))
-	(and doc (_ doc))) t)))
+     `(progn
+	(require 'lisp-doc)
+	(let ((doc (documentation ',symbol)))
+	  (and doc (_ doc)))) t)))
