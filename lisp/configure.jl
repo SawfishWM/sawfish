@@ -22,7 +22,7 @@
 (provide 'configure)
 
 (defcustom configure-auto-gravity t
-  "Automatically choose window gravity by position on screen."
+  "Automatically select window gravity from position on screen."
   :type boolean
   :group (move advanced))
 

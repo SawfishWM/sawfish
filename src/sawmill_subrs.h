@@ -147,7 +147,7 @@ extern void frames_init (void);
 extern void frames_kill (void);
 
 /* from functions.c */
-extern repv Qroot, Qafter_restacking_hook;
+extern repv Qroot, Qafter_restacking_hook, Qposition, Qspacing;
 extern repv Fdelete_window (repv win);
 extern repv Fdestroy_window (repv win);
 extern repv Frestack_windows (repv list);

@@ -627,7 +627,7 @@ are @code{min-height}, @code{max-height}, @code{min-width},
 @code{max-width}, @code{height-inc}, @code{width-inc},
 @code{min-aspect}, @code{max-aspect}, @code{base-height},
 @code{base-width}, @code{user-position}, @code{program-position},
-@code{user-size}, @code{program-size}.
+@code{user-size}, @code{program-size}, @code{window-gravity}.
 @end defun
 
 @defun window-visibility window
@@ -2698,6 +2698,12 @@ been destroyed as is possible.
 Called with a single window argument, analogous to the X events of the
 same names.
 
+@item configure-request-hook
+Called with two arguments @code{(@var{window} @var{alist})} when an X
+@code{ConfigureRequest} event is received. @var{alist} may include
+items @code{(stack . above)}, @code{(stack . below)}, @code{(position .
+@var{coordinates})}, @code{(dimensions . @var{dimensions})}.
+
 @item enter-frame-part-hook
 @itemx leave-frame-part-hook
 Called with two arguments, the window and the frame part class
@@ -2883,6 +2889,12 @@ Has the window been placed in a position yet? The
 
 @item iconified
 Is the window iconified? @xref{Iconifying Windows}.
+
+@item gravity
+When set, overrides the window gravity field of the window's size
+hints. May be one of the symbols: @code{north-west}, @code{north},
+@code{north-east}, @code{west}, @code{center}, @code{east},
+@code{south-west}, @code{south}, @code{south-east}.
 
 @end vtable
 

@@ -56,7 +56,8 @@
   :type boolean)
 
 (defcustom resize-edge-mode 'border
-  "The method choosing which window edges are moved while resizing with the mouse."
+  "The method of choosing which window edges are moved while resizing with
+the mouse."
   :type symbol
   :options (region border grab)
   :group (move advanced))
