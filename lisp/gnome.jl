@@ -72,13 +72,20 @@
        (port-size (cons viewport-columns viewport-rows)))
     (mapc (lambda (w)
 	    (let
-		;; XXX the gnome-wm standard sucks :-)
+		;; XXX the gnome-wm standard sucks..
 		((space (and (not (window-get w 'sticky))
-			     (window-get w 'swapped-in))))
+			     (window-get w 'swapped-in)))
+		 (w-port (and (not (window-get w 'viewport-sticky))
+			      (window-viewport w))))
 	      (if space
 		  (set-x-property w '_WIN_WORKSPACE
 				  (vector (- space (car limits))) 'CARDINAL 32)
-		(delete-x-property w '_WIN_WORKSPACE))))
+		(delete-x-property w '_WIN_WORKSPACE))
+	      (if w-port
+		  (set-x-property w '_WIN_AREA
+				  (vector (car w-port) (cdr w-port))
+				  'CARDINAL 32)
+		(delete-x-property w '_WIN_AREA))))
 	  (managed-windows))
     (unless (equal gnome-current-workspace (- current-workspace (car limits)))
       (setq gnome-current-workspace (- current-workspace (car limits)))
