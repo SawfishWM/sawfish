@@ -934,7 +934,7 @@ instance remaining, then delete the actual window."
 (sm-add-saved-properties 'sticky 'iconified)
 
 ;; some of these should really be added by other files
-(add-swapped-properties 'frame-style 'type 'hide-client 'iconified 'order)
+(add-swapped-properties 'frame-style 'type 'hide-client 'iconified)
 
 (add-hook 'add-window-hook ws-add-window)
 (add-hook 'map-notify-hook ws-window-mapped)
