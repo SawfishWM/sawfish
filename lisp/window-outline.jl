@@ -29,10 +29,18 @@
        (y-step (/ height 3)))
     (letrec
 	((loop (lambda (i)
-		 (x-draw-line 'root gc (cons x (floor (+ y (* y-step i))))
-			      (cons (+ x width) (ceiling (+ y (* y-step i)))))
-		 (x-draw-line 'root gc (cons (floor (+ x (* x-step i))) y)
-			      (cons (ceiling (+ x (* x-step i))) (+ y height)))
+		 (x-draw-line 'root gc
+			      (cons x (inexact->exact
+				       (floor (+ y (* y-step i)))))
+			      (cons (+ x width)
+				    (inexact->exact
+				     (ceiling (+ y (* y-step i))))))
+		 (x-draw-line 'root gc
+			      (cons (inexact->exact
+				     (floor (+ x (* x-step i)))) y)
+			      (cons (inexact->exact
+				     (ceiling (+ x (* x-step i))))
+				    (+ y height)))
 		 (unless (= i 3)
 		   (loop (1+ i))))))
       (loop 0))
