@@ -61,7 +61,7 @@ stacking level to place them in.")
 ;; Commands
 
 (defun lower-window (w)
-  "Raise the window to the bottom of its stacking level."
+  "Lower the window to the bottom of its stacking level."
   (interactive "W")
   (let
       ((order (stacking-order))
