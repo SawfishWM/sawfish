@@ -227,6 +227,9 @@ set_frame_part_bg (struct frame_part *fp)
 	    }
 	    Imlib_free_pixmap (imlib_id, bg_pixmap);
 	}
+	/* Imlib sometimes calls XSync (), which could hide events
+	   from select () */
+	rep_mark_input_pending (ConnectionNumber(dpy));
     }
     else
     {
@@ -381,7 +384,6 @@ frame_part_destroyer (Lisp_Window *w)
 	rep_free (fp);
     }
     w->frame_parts = 0;
-    XDestroyWindow (dpy, w->frame);
 }
 
 /* Handle the expose event EV for the frame part FP. */
@@ -449,7 +451,10 @@ list_frame_generator (Lisp_Window *w)
     rep_PUSHGC(gc_win, win);
 
     /* construct the component list, and find the bounding box */
-    if (w->frame == 0)
+
+    /* if w->destroy_frame is set then we're rebuilding an existing
+       frame */
+    if (w->destroy_frame == 0)
     {
 	ptr = gen_list;
 	last_fp = &w->frame_parts;
@@ -733,7 +738,9 @@ list_frame_generator (Lisp_Window *w)
     DB(("  bounding box: x=%d y=%d width=%d height=%d\n",
 	w->frame_x, w->frame_y, w->frame_width, w->frame_height));
 
-    if (!regen)
+    /* create the child-of-root frame window, or if it already exists,
+       configure it to the correct size.. */
+    if (w->frame == 0)
     {
 	/* create the frame */
 	wa.background_pixel = WhitePixel (dpy, screen_num);
@@ -755,12 +762,7 @@ list_frame_generator (Lisp_Window *w)
     w->rebuild_frame = list_frame_generator;
     w->property_change = frame_part_prop_change;
 
-    /* if shaped, make the initial frame shape */
-    if (rep_SYMBOLP(w->frame_style))
-	tem = Fget (w->frame_style, Qunshaped);
-    else
-	tem = Qnil;
-    if (tem == Qnil || w->shaped)
+    /* make the initial frame shape */
     {
 	XRectangle *rects = alloca (sizeof (XRectangle) * (nparts + 1));
 	int i;
@@ -879,13 +881,13 @@ reset_frame_parts (Lisp_Window *w)
 
 /* creating window frames */
 
-/* Create a frame for window W. Called with the server grabbed */
+/* Create a frame for window W. Called with the server grabbed. If
+   w->frame is non-zero, then we'll use this window to construct the
+   frame in, otherwise w->frame will be initialised with a new window */
 void
 create_window_frame (Lisp_Window *w)
 {
     DB(("create_window_frame (%s)\n", w->name));
-    if (w->frame != 0)
-	destroy_window_frame (w);
     w->destroy_frame = 0;
     w->focus_change = 0;
     w->rebuild_frame = 0;
@@ -893,18 +895,21 @@ create_window_frame (Lisp_Window *w)
     list_frame_generator (w);
 }
 
-/* Destroy the frame of window W */
+/* Destroy the frame of window W. If LEAVE-FRAME-WIN is non-zero, then
+   w->frame won't be destroyed */
 void
-destroy_window_frame (Lisp_Window *w)
+destroy_window_frame (Lisp_Window *w, bool leave_frame_win)
 {
     if (w->frame != 0)
     {
 	if (w->destroy_frame != 0)
 	    w->destroy_frame (w);
-	else if (w->frame != 0)
+	if (!leave_frame_win && w->frame != 0)
+	{
 	    XDestroyWindow (dpy, w->frame);
+	    w->frame = 0;
+	}
     }
-    w->frame = 0;
 }
 
 
