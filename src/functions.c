@@ -204,6 +204,29 @@ Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
     return win;
 }
 
+DEFUN("move-resize-window-to", Fmove_resize_window_to, Smove_resize_window_to,
+      (repv win, repv x, repv y, repv width, repv height), rep_Subr5) /*
+::doc:move-resize-window-to::
+move-resize-window-to X Y WINDOW WIDTH HEIGHT
+
+Reconfigure the geometry of window object WINDOW as specified.
+::end:: */
+{
+    rep_DECLARE1(win, WINDOWP);
+    rep_DECLARE2(x, rep_INTP);
+    rep_DECLARE3(y, rep_INTP);
+    rep_DECLARE4(width, rep_INTP);
+    rep_DECLARE5(height, rep_INTP);
+    VWIN(win)->attr.x = rep_INT(x);
+    VWIN(win)->attr.y = rep_INT(y);
+    VWIN(win)->attr.width = rep_INT(width);
+    VWIN(win)->attr.height = rep_INT(height);
+    fix_window_size (VWIN(win));
+    Fcall_window_hook (Qwindow_moved_hook, win, Qnil, Qnil);
+    Fcall_window_hook (Qwindow_resized_hook, win, Qnil, Qnil);
+    return win;
+}
+
 DEFUN("grab-server", Fgrab_server, Sgrab_server, (void), rep_Subr0) /*
 ::doc:grab-server::
 grab-server
@@ -1157,6 +1180,7 @@ functions_init (void)
     rep_ADD_SUBR(Swarp_cursor);
     rep_ADD_SUBR(Smove_window_to);
     rep_ADD_SUBR(Sresize_window_to);
+    rep_ADD_SUBR(Smove_resize_window_to);
     rep_ADD_SUBR(Sgrab_server);
     rep_ADD_SUBR(Sungrab_server);
     rep_ADD_SUBR(Sserver_grabbed_p);
