@@ -349,4 +349,37 @@ enum exit_codes {
 # define DB(x) printf x
 #endif
 
+#ifndef NDEBUG
+# define return_if_fail(x)					\
+    do {							\
+	if (!(x)) {						\
+	    fprintf (stderr, "%s:%d: assertion failed: %s\n",	\
+		     __FILE__, __LINE__, #x);			\
+	    return;						\
+	}							\
+    } while (0)
+
+# define return_val_if_fail(x, v)				\
+    do {							\
+	if (!(x)) {						\
+	    fprintf (stderr, "%s:%d: assertion failed: %s\n",	\
+		     __FILE__, __LINE__, #x);			\
+	    return (v);						\
+	}							\
+    } while (0)
+
+#define nonterminal_assert(x)					\
+    do {							\
+	if (!(x)) {						\
+	    fprintf (stderr, "%s:%d: assertion failed: %s\n",	\
+		     __FILE__, __LINE__, #x);			\
+	}							\
+    } while (0)
+	
+#else
+# define return_if_fail(x) do {} while (0)
+# define return_val_if_fail(x, v) do {} while (0)
+# define nonterminal_assert(x) do {} while (0)
+#endif
+
 #endif /* SAWMILL_H */

@@ -1,5 +1,12 @@
 2002-09-21  John Harper  <jsh@unfactored.org>
 
+	* stacking-list.c: replaced assert () instances by non-terminal
+	macros, i.e. they'll print a message but not abort the program.
+	Lame-ass way of "fixing" #81027
+
+	* sawmill.h (return_if_fail, return_val_if_fail,
+	nonterminal_assert): new macros
+
 	* windows.c (Fwindow_size_hints): accept min size == 0 and set
 	it to one, should fix #77639
 
