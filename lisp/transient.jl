@@ -52,18 +52,6 @@ the input focus to the transient window."
 workspaces.")
 
 
-;; utility functions
-
-(defun window-type (w)
-  (if (window-transient-p w)
-      (if (window-shaped-p w)
-	  'shaped-transient
-	'transient)
-    (if (window-shaped-p w)
-	'shaped
-      'default)))
-
-
 ;; hooks
 
 ;; called from the add-window-hook
