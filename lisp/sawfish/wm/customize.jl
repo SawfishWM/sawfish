@@ -35,7 +35,6 @@
     "Location of the program implementing sawfish's configuration interface.")
 
   (defvar customize-group-opt "--group")
-  (defvar customize-args nil)
 
   (define customize-user-forms nil)
   (define customize-user-file-read nil)
@@ -46,9 +45,10 @@
 
   (define (customize &optional group)
     "Invoke the user-customization system."
-    (system (format nil "%s %s %s '%S' >/dev/null 2>&1 </dev/null &"
-		    customize-program customize-args
-		    (and group customize-group-opt) (or group ""))))
+    (system (format nil "%s %s '%S' >/dev/null 2>&1 </dev/null &"
+		    customize-program
+		    (and group customize-group-opt)
+		    (or group ""))))
 
   ;;###autoload
   (define-command 'customize customize)
