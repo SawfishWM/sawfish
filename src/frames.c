@@ -546,7 +546,11 @@ set_frame_part_fg (struct frame_part *fp)
 	if (!COLORP(fg) && !IMAGEP(fg))
 	    fg = Fsymbol_value (Qdefault_foreground, Qt);
 	if (!FONTP(font))
+	{
 	    font = Fsymbol_value (Qdefault_font, Qt);
+	    if (!FONTP(font))
+		goto out;
+	}
 
 	if (IMAGEP(fg))
 	{
@@ -692,7 +696,7 @@ set_frame_part_fg (struct frame_part *fp)
 	    fp->drawn.text = string;
 	}
     }
-
+out:
     fp->drawn.font = font;
     fp->drawn.fg = fg;
     fp->drawn.x_justify = fp->x_justify;
