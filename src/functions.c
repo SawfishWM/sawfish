@@ -43,6 +43,13 @@
    the server ungrabbed. */
 static int server_grabs;
 
+static int xinerama_heads;
+
+#ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
+# include <X11/extensions/Xinerama.h>
+  static XineramaScreenInfo *xinerama_head_info;
+#endif
+
 DEFSYM(root, "root");
 DEFSYM(after_restacking_hook, "after-restacking-hook");
 DEFSYM(position, "position");
@@ -909,6 +916,89 @@ integer ATOM.
 }
 
 
+/* xinerama support */
+
+DEFUN ("head-count", Fhead_count, Shead_count, (void), rep_Subr0)
+{
+    return rep_MAKE_INT (MAX (1, xinerama_heads));
+}
+
+DEFUN ("find-head", Ffind_head, Sfind_head, (repv x, repv y), rep_Subr2)
+{
+    int i;
+    if (rep_CONSP (x) && y == Qnil)
+    {
+	y = rep_CDR (x);
+	x = rep_CAR (x);
+    }
+    rep_DECLARE (1, x, rep_INTP (x));
+    rep_DECLARE (2, y, rep_INTP (y));
+
+    rep_DECLARE (1, x, rep_INT (x) >= 0 && rep_INT (x) < screen_width);
+    rep_DECLARE (2, y, rep_INT (y) >= 0 && rep_INT (y) < screen_height);
+
+#ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
+    for (i = 0; i < xinerama_heads; i++)
+    {
+	if ((xinerama_head_info[i].x_org >= rep_INT (x))
+	    && (xinerama_head_info[i].y_org >= rep_INT (y))
+	    && (xinerama_head_info[i].x_org
+		+ xinerama_head_info[i].width < rep_INT (y))
+	    && (xinerama_head_info[i].y_org
+		+ xinerama_head_info[i].height < rep_INT (y)))
+	{
+	    return rep_MAKE_INT (i);
+	}
+    }
+#endif    
+    return rep_MAKE_INT (0);
+}
+
+DEFUN ("head-dimensions", Fhead_dimensions,
+       Shead_dimensions, (repv id), rep_Subr1)
+{
+    rep_DECLARE (1, id, rep_INTP (id));
+
+    if (xinerama_heads == 0 && rep_INT (id) == 0)
+    {
+	return Fcons (rep_MAKE_INT (screen_width),
+		      rep_MAKE_INT (screen_height));
+    }
+    else
+    {
+	rep_DECLARE (1, id, rep_INT (id) >= 0
+		     && rep_INT (id) < xinerama_heads);
+#ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
+	return Fcons (rep_MAKE_INT (xinerama_head_info[rep_INT(id)].width),
+		      rep_MAKE_INT (xinerama_head_info[rep_INT(id)].height));
+#else
+	abort ();
+#endif
+    }
+}
+
+DEFUN ("head-offset", Fhead_offset, Shead_offset, (repv id), rep_Subr1)
+{
+    rep_DECLARE (1, id, rep_INTP (id));
+
+    if (xinerama_heads == 0 && rep_INT (id) == 0)
+    {
+	return Fcons (rep_MAKE_INT (0), rep_MAKE_INT (0));
+    }
+    else
+    {
+	rep_DECLARE (1, id, rep_INT (id) >= 0
+		     && rep_INT (id) < xinerama_heads);
+#ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
+	return Fcons (rep_MAKE_INT (xinerama_head_info[rep_INT(id)].x_org),
+		      rep_MAKE_INT (xinerama_head_info[rep_INT(id)].y_org));
+#else
+	abort ();
+#endif
+    }
+}
+
+
 /* Displaying a `message' window */
 
 static Window message_win;
@@ -1203,6 +1293,10 @@ functions_init (void)
     rep_ADD_SUBR(Screate_window);
     rep_ADD_SUBR(Sx_atom);
     rep_ADD_SUBR(Sx_atom_name);
+    rep_ADD_SUBR(Shead_count);
+    rep_ADD_SUBR(Sfind_head);
+    rep_ADD_SUBR(Shead_dimensions);
+    rep_ADD_SUBR(Shead_offset);
     rep_ADD_SUBR(Sdisplay_message);
     rep_INTERN(root);
     rep_INTERN_SPECIAL(after_restacking_hook);
@@ -1214,6 +1308,11 @@ functions_init (void)
     rep_mark_static (&message.bg);
     rep_mark_static (&message.font);
     rep_mark_static (&message.justify);
+
+#ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
+    if (dpy != 0)
+	xinerama_head_info = XineramaQueryScreens (dpy, &xinerama_heads);
+#endif
 }
 
 void
