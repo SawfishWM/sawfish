@@ -1,5 +1,6 @@
 ;; grow-pack.jl -- window resize and movement
-;; Id: grow-pack.jl,v 1.6 2000/02/22 16:50:18 grossjoh Exp 
+;; $Id$
+;; Id: grow-pack.jl,v 1.9 2000/08/04 16:42:43 grossjoh Exp 
 
 ;; Copyright (C) 2000 Kai Grossjohann <Kai.Grossjohann@CS.Uni-Dortmund.DE>
 
@@ -39,6 +40,7 @@
 
     (open rep
 	  sawfish.wm.windows
+	  sawfish.wm.events
 	  sawfish.wm.misc
 	  sawfish.wm.util.rects
 	  sawfish.wm.state.maximize
@@ -62,6 +64,19 @@ this on, you can use `unmaximize-window' or something similar to get
 back to the original size."
     :type boolean
     :group (min-max maximize))
+
+  (defcustom pack-warp-pointer 'maybe
+    "Whether and how to move the pointer when packing windows.
+
+`maybe' means that the pointer is moved along with the window, if the
+pointer was within the window area before packing.
+
+`always' warps the pointer to the center of the window if it isn't
+already in the window, then does like `maybe'.
+
+`never' means not to warp the pointer."
+    :type (choice maybe always never)
+    :group (move))
 
   ;; Entry points.
 
@@ -256,12 +271,22 @@ back to the original size."
 	   (sleft      (nth 0 surround))
 	   (stop       (nth 1 surround))
 	   (sright     (nth 2 surround))
-	   (sbottom    (nth 3 surround)))
+	   (sbottom    (nth 3 surround))
+	   (wpointer   (query-pointer-window))
+	   (xpointer   (car (query-pointer)))
+	   (ypointer   (cdr (query-pointer)))
+	   (xoffset    (- xpointer wleft))
+	   (yoffset    (- ypointer wtop)))
       (when (eq direction 'left) (setq wleft sright))
       (when (eq direction 'up) (setq wtop sbottom))
       (when (eq direction 'right) (setq wleft (- sleft wwidth)))
       (when (eq direction 'down) (setq wtop (- stop wheight)))
       (move-window-to w wleft wtop)
+      (cond ((eq pack-warp-pointer 'always)
+	     (warp-cursor-to-window w))
+	    ((eq pack-warp-pointer 'maybe)
+	     (when (equal wpointer w)
+	       (warp-cursor (+ wleft xoffset) (+ wtop yoffset)))))
       (call-window-hook 'after-move-hook w
 			(list (list (if (memq direction '(left right))
 					'horizontal 'vertical)))))))
