@@ -95,7 +95,7 @@ unused before killing it.")
 (defvar root-menu
   `((,(_ "Windows") . ,(lambda () (window-menu)))
     (,(_ "Workspaces") . ,(lambda () (workspace-menu)))
-    (apps-menu)
+    (,(_ "Programs") . apps-menu)
     (,(_ "Customize") . ,(lambda () (custom-menu)))
     (,(_ "About...") (customize 'about))
     ()
@@ -103,8 +103,7 @@ unused before killing it.")
     (,(_ "Quit") quit)))
 
 (defvar apps-menu
-  `(,(_ "Applications")
-    ("xterm" (system "xterm &"))
+  `(("xterm" (system "xterm &"))
     ("Emacs" (system "emacs &"))
     ("Netscape" (system "netscape &"))
     ("The GIMP" (system "gimp &"))
@@ -162,14 +161,21 @@ unused before killing it.")
 	   (setq menu-process nil)))))
 
 (defun menu-preprocessor (cell)
+  ;; XXX deprecated; will be removed
   (when (and cell (symbolp (car cell)) (not (functionp cell)))
+    (write standard-error "warning: variables as menu items are deprecated\n")
     (setq cell (symbol-value (car cell))))
   (when cell
     (let
 	((label (car cell)))
-      (if (functionp (cdr cell))
-	  (setq cell (funcall (cdr cell)))
-	(setq cell (cdr cell)))
+      (cond ((functionp (cdr cell))
+	     (setq cell (funcall (cdr cell))))
+	    ((and (symbolp (cdr cell)) (not (null (cdr cell))))
+	     (setq cell (symbol-value (cdr cell)))
+	     (when (functionp cell)
+	       (setq cell (funcall cell))))
+	    (t
+	     (setq cell (cdr cell))))
       (when (and (consp (car cell)) (stringp (car (car cell))))
 	(setq cell (mapcar menu-preprocessor cell)))
       (cons label cell))))
