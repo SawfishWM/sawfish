@@ -27,6 +27,8 @@
 	    define-command-args
 	    autoload-command
 	    command-ref
+	    command-type
+	    command-user-level
 	    apply-command
 	    call-command
 	    prefix-numeric-argument
@@ -74,12 +76,7 @@ evaluated.")
   (define autoloader (make-autoloader getter setter))
   (define real-getter (autoloader-ref getter))
 
-  (define (define-command name fun #!key spec type doc doc-key)
-    "Define a window managed command called NAME (a symbol). The
-function FUN will be called to execute the command. SPEC and TYPE may
-be used to define the arguments expected by the command. (an
-interactive specification and a custom-type specification respectively)."
-    (setter name fun)
+  (define (apply-command-keys name #!key spec type doc doc-key user-level)
     (when spec
       (put name 'command-spec spec))
     (when type
@@ -87,18 +84,27 @@ interactive specification and a custom-type specification respectively)."
     (when doc
       (put name 'dommand-doc doc))
     (when doc-key
-      (put name 'command-doc-key doc-key)))
+      (put name 'command-doc-key doc-key))
+    (when user-level
+      (put name 'command-user-level user-level)))
+
+  (define (define-command name fun . keys)
+    "Define a window managed command called NAME (a symbol). The
+function FUN will be called to execute the command. SPEC and TYPE may
+be used to define the arguments expected by the command. (an
+interactive specification and a custom-type specification respectively)."
+    (setter name fun)
+    (apply apply-command-keys name keys))
 
   ;; obsolete, use define-command
   (define (define-command-args name spec)
     (put name 'custom-command-args spec))
 
-  (define (autoload-command name module #!key type)
+  (define (autoload-command name module . keys)
     "Record that loading the module called MODULE (a symbol) will provde a
 command called NAME (optionally whose arguments have custom-type TYPE)."
     (autoloader name module)
-    (when type
-      (define-command-args name type)))
+    (apply apply-command-keys name keys))
 
   ;; return the function associated with command NAME, or nil
   (define (command-ref name)
@@ -111,6 +117,9 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
   (define (command-spec name)
     (or (get name 'command-spec)
 	(cadr (function-spec (command-ref name)))))
+
+  (define (command-type name) (get name 'custom-command-args))
+  (define (command-user-level name) (get name 'command-user-level))
 
   (define (commandp arg)
     "Return t if ARG names a command."
