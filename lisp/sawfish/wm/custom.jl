@@ -214,14 +214,26 @@
     (funcall (get symbol 'custom-after-set) symbol)))
 
 (defun custom-menu ()
-  `((,(_ "All settings") customize)
-    ()
-    ,@(mapcar (lambda (sub)
-		(list (_ (cadr sub))
-		      `(customize ',(car sub))))
-	      (filter consp (cddr custom-groups)))
-    ,@(and (frame-style-editable-p default-frame-style)
-	   (list nil `(,(_"Edit theme...") edit-frame-style)))))
+  (letrec
+      ((iterator
+	(lambda (tree group)
+	  (let
+	      ((subtrees (filter consp (cddr tree))))
+	    (if (null subtrees)
+		(list (_ (cadr tree)) `(customize ',group))
+	      (list* (_ (cadr tree))
+		     (list (_ "Main") `(customize ',group))
+		     (mapcar (lambda (sub)
+			       (iterator
+				sub (append group (list (car sub)))))
+			     subtrees)))))))
+    `((,(_ "All settings") customize)
+      ()
+      ,@(mapcar (lambda (sub)
+		  (iterator sub (list (car sub))))
+		(filter consp (cddr custom-groups)))
+      ,@(and (frame-style-editable-p default-frame-style)
+	     (list nil `(,(_"Edit theme...") edit-frame-style))))))
 
 (defun custom-add-required (feature)
   (unless (memq feature custom-required)
