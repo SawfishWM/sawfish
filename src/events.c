@@ -28,6 +28,9 @@ void (*event_handlers[LASTEvent])(XEvent *ev);
 /* Map events to their names for debugging */
 static char *event_names[LASTEvent];
 
+/* Map events to the mask selecting them */
+static long event_masks[LASTEvent];
+
 /* Most recent known mouse position relative to the root window */
 static int current_mouse_x, current_mouse_y;
 
@@ -48,6 +51,8 @@ DEFSYM(visibility_notify_hook, "visibility-notify-hook");
 DEFSYM(destroy_notify_hook, "destroy-notify-hook");
 DEFSYM(map_notify_hook, "map-notify-hook");
 DEFSYM(unmap_notify_hook, "unmap-notify-hook");
+DEFSYM(reparent_notify_hook, "reparent-notify-hook");
+DEFSYM(property_notify_hook, "property-notify-hook");
 DEFSYM(enter_notify_hook, "enter-notify-hook");
 DEFSYM(leave_notify_hook, "leave-notify-hook");
 DEFSYM(focus_in_hook, "focus-in-hook");
@@ -58,6 +63,10 @@ DEFSYM(client_message_hook, "client-message-hook");
 
 /* for enter/leave-notify-hook */
 DEFSYM(root, "root");
+
+/* for property-notify-hook */
+DEFSYM(new_value, "new-value");
+DEFSYM(deleted, "deleted");
 
 /* Where possible record the timestamp from event EV */
 static void
@@ -172,12 +181,7 @@ handle_fp_click (struct frame_part *fp, XEvent *ev)
 	clicked_frame_part = 0;
     }
     if (fp->clicked != old_clicked)
-    {
-	Lisp_Window *w = fp->win;
-	set_frame_part_bg (fp);
-	if (w->id != 0)
-	    set_frame_part_fg (fp);
-    }
+	refresh_frame_part (fp);
 }
 
 void
@@ -185,11 +189,8 @@ unclick_current_fp (void)
 {
     if (clicked_frame_part != 0 && clicked_frame_part->clicked != 0)
     {
-	Lisp_Window *w = clicked_frame_part->win;
 	clicked_frame_part->clicked = 0;
-	set_frame_part_bg (clicked_frame_part);
-	if (w->id != 0)
-	    set_frame_part_fg (clicked_frame_part);
+	refresh_frame_part (clicked_frame_part);
 	clicked_frame_part = 0;
     }
 }
@@ -266,7 +267,6 @@ motion_notify (XEvent *ev)
     eval_input_event (context_map);
 }
 
-/* XXX call a hook for at least wm-name and wm-icon-name props */
 static void
 property_notify (XEvent *ev)
 {
@@ -304,6 +304,11 @@ property_notify (XEvent *ev)
 	}
 	if (w->reparented && w->property_change != 0 && w->id != 0)
 	    w->property_change (w);
+
+	Fcall_window_hook (Qproperty_notify_hook, rep_VAL(w),
+			   rep_list_2 (x_atom_symbol (ev->xproperty.atom),
+				       ev->xproperty.state == PropertyNewValue
+				       ? Qnew_value : Qdeleted), Qnil);
     }
 }
 
@@ -417,6 +422,7 @@ reparent_notify (XEvent *ev)
 	&& ev->xreparent.event == w->id)
     {
 	w->reparenting = FALSE;
+	Fcall_window_hook (Qreparent_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
@@ -667,6 +673,14 @@ send_synthetic_configure (Lisp_Window *w)
     XSendEvent (dpy, w->id, False, StructureNotifyMask, &ev);
 }
 
+long
+get_event_mask (int type)
+{
+    if (type >= 0 && type < LASTEvent)
+	return event_masks[type];
+    else
+	return 0;
+}
 
 
 /* Event loop */
@@ -851,6 +865,43 @@ events_init (void)
     event_names[ClientMessage] = "ClientMessage";
     event_names[MappingNotify] = "MappingNotify";
 
+    event_masks[KeyPress] = KeyPressMask;
+    event_masks[KeyRelease] = KeyReleaseMask;
+    event_masks[ButtonPress] = ButtonPressMask;
+    event_masks[ButtonRelease] = ButtonReleaseMask;
+    event_masks[EnterNotify] = EnterWindowMask;
+    event_masks[LeaveNotify] = LeaveWindowMask;
+    event_masks[MotionNotify] = (PointerMotionMask | PointerMotionHintMask
+				| Button1MotionMask | Button2MotionMask
+				| Button3MotionMask | Button4MotionMask
+				| Button5MotionMask | ButtonMotionMask);
+    event_masks[FocusIn] = FocusChangeMask;
+    event_masks[FocusOut] = FocusChangeMask;
+    event_masks[KeymapNotify] = KeymapStateMask;
+    event_masks[Expose] = ExposureMask;
+    event_masks[GraphicsExpose] = 0;
+    event_masks[NoExpose] = 0;
+    event_masks[VisibilityNotify] = VisibilityChangeMask;
+    event_masks[CreateNotify] = SubstructureNotifyMask;
+    event_masks[DestroyNotify] = StructureNotifyMask | SubstructureNotifyMask;
+    event_masks[UnmapNotify] = StructureNotifyMask | SubstructureNotifyMask;
+    event_masks[MapNotify] = StructureNotifyMask | SubstructureNotifyMask;
+    event_masks[MapRequest] = 0;
+    event_masks[ReparentNotify] = StructureNotifyMask | SubstructureNotifyMask;
+    event_masks[ConfigureNotify] = StructureNotifyMask | SubstructureNotifyMask;
+    event_masks[ConfigureRequest] = 0;
+    event_masks[GravityNotify] = StructureNotifyMask | SubstructureNotifyMask;
+    event_masks[ResizeRequest] = 0;
+    event_masks[CirculateNotify] = StructureNotifyMask | SubstructureNotifyMask;
+    event_masks[CirculateRequest] = StructureNotifyMask | SubstructureNotifyMask;
+    event_masks[PropertyNotify] = PropertyChangeMask;
+    event_masks[SelectionClear] = 0;
+    event_masks[SelectionRequest] = 0;
+    event_masks[SelectionNotify] = 0;
+    event_masks[ColormapNotify] = ColormapChangeMask;
+    event_masks[ClientMessage] = 0;
+    event_masks[MappingNotify] = StructureNotifyMask | SubstructureNotifyMask;
+
     rep_ADD_SUBR(Squery_pointer);
     rep_ADD_SUBR(Squery_last_pointer);
     rep_ADD_SUBR(Squery_pointer_window);
@@ -860,6 +911,8 @@ events_init (void)
     rep_INTERN(destroy_notify_hook);
     rep_INTERN(map_notify_hook);
     rep_INTERN(unmap_notify_hook);
+    rep_INTERN(reparent_notify_hook);
+    rep_INTERN(property_notify_hook);
     rep_INTERN(enter_notify_hook);
     rep_INTERN(leave_notify_hook);
     rep_INTERN(focus_in_hook);
@@ -868,6 +921,8 @@ events_init (void)
     rep_INTERN(iconify_window);
     rep_INTERN(uniconify_window);
     rep_INTERN(root);
+    rep_INTERN(new_value);
+    rep_INTERN(deleted);
 }
 
 void
