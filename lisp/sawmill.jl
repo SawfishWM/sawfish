@@ -104,8 +104,8 @@
 (unless batch-mode
   (let
       ((lang (or (getenv "LC_ALL") (getenv "LC_MESSAGES") (getenv "LANG"))))
-    (when (and lang (not (string= lang "C"))
-	       (not (get-command-line-option "--disable-nls")))
+    (when (and (not (get-command-line-option "--disable-nls"))
+	       lang (not (string= lang "C")))
       (require 'gettext)
       (bindtextdomain
        "sawmill" (expand-file-name "../locale" sawmill-lisp-lib-directory))
@@ -114,7 +114,9 @@
 ;; now connect with the session manager; gsm requires that apps don't
 ;; connect until they're ready to handle the later priority levels
 (let
-    ((tem (get-command-line-option "--sm-client-id" t)))
+    ((tem (or (get-command-line-option "--sm-client-id" t)
+	      ;; may be passed through from the default GNOME session
+	      (get-command-line-option "-clientId" t))))
   (when (and (not batch-mode) (getenv "SESSION_MANAGER"))
     (sm-init tem)))
 
