@@ -896,6 +896,17 @@ circulate_notify (XEvent *ev)
 }
 
 static void
+mapping_notify (XEvent *ev)
+{
+    if (ev->xmapping.request == MappingModifier
+	|| ev->xmapping.request == MappingKeyboard)
+    {
+	XRefreshKeyboardMapping (&ev->xmapping);
+	update_keyboard_mapping ();
+    }
+}
+
+static void
 shape_notify (XEvent *ev)
 {
     XShapeEvent *sev = (XShapeEvent *)ev;
@@ -1311,6 +1322,7 @@ events_init (void)
     event_handlers[ReparentNotify] = reparent_notify;
     event_handlers[CreateNotify] = create_notify;
     event_handlers[CirculateNotify] = circulate_notify;
+    event_handlers[MappingNotify] = mapping_notify;
 
     event_names[KeyPress] = "KeyPress";
     event_names[KeyRelease] = "KeyRelease";
