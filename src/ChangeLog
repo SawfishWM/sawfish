@@ -1,3 +1,19 @@
+2000-06-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* main.c, fonts.c: (setq fonts-are-fontsets nil) if setlocale
+	() returns null, "C", or "POSIX". This should avoid the problem
+	when trying to render 8-bit characters in a 7-bit locale (they
+	don't). This is still experimental. Added under guidance from
+	Tomohiro KUBOTA
+
+	* windows.c (manage_windows): preserve focus while reparenting
+	the windows
+
+	* events.c (focus_in, focus_out): track the window we last
+	received focus-in/out on, and only handle the new event if it
+	makes a difference (e.g. avoids generating spurious focus-in
+	hook calls when keyboard grab is manipulated)
+
 2000-05-31  John Harper  <john@dcs.warwick.ac.uk>
 
 	* fonts.c (generalize_xlfd): don't bother pattern matching

@@ -237,7 +237,7 @@ extern int exit_code;
 extern repv Qsawfish_directory, Qsawfish_lisp_lib_directory,
     Qsawfish_site_lisp_directory, Qsawfish_exec_directory;
 extern repv Qwindow_error, Qinvalid_pos, Qbad_event_desc;
-extern repv Qbefore_exit_hook;
+extern repv Qbefore_exit_hook, Qfonts_are_fontsets;
 extern bool batch_mode_p (void);
 extern int main (int argc, char **argv);
 extern repv Fquit (void);
