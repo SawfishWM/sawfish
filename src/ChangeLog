@@ -1,5 +1,15 @@
 1999-10-03  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c (focus_on_window): use RevertToNone instead of
+	RevertToParent
+
+	* frames.c (reset_frame_parts): redraw any frame parts whose
+	state changes
+
+	* events.c (Fcurrent_event_window): moved here from keys.c,
+	this now takes an (undocumented) optional argument, the window
+	to return for the duration of evaluating this event
+
 	* events.c (reparent_notify): handle case where we're not doing
 	the reparenting--unadopt the window and reissue the reparent
 	request

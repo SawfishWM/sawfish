@@ -1,5 +1,12 @@
 1999-10-03  John Harper  <john@dcs.warwick.ac.uk>
 
+	* menus.jl: instead of saving and restoring the _focused_
+	window while the menu is popped, save the window that gave us
+	the current event, then reinstate it when dispatching the
+	selected command
+
+	* workspace.jl: replace all %f interactive decls by %W
+
 	* keymaps.jl: noted in doc strings that certain keymaps are
 	only useful for mouse-bindings
 

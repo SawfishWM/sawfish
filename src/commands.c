@@ -258,10 +258,10 @@ any entered arg is given to the invoked COMMAND.
 			    arg = Finput_focus ();
 			    break;
 			case 'w':
-			    arg = Fcurrent_event_window ();
+			    arg = Fcurrent_event_window (Qnil);
 			    break;
 			case 'W':
-			    arg = Fcurrent_event_window ();
+			    arg = Fcurrent_event_window (Qnil);
 			    if (arg == Qnil || arg == Qroot)
 				arg = Finput_focus ();
 			    break;

@@ -93,6 +93,7 @@ extern void handle_sync_input(int fd);
 extern repv Fquery_pointer (repv get);
 extern repv Fquery_last_pointer (void);
 extern repv Fquery_pointer_window (void);
+extern repv Fcurrent_event_window (repv win);
 extern void events_init (void);
 extern void events_kill (void);
 
@@ -199,7 +200,6 @@ extern repv Fgrab_keymap (repv map);
 extern repv Fungrab_keymap (repv map);
 extern repv Fcurrent_event_string (void);
 extern repv Fcurrent_event (void);
-extern repv Fcurrent_event_window (void);
 extern repv Fproxy_current_event (repv win, repv mask, repv prop);
 extern repv Fallow_events (repv mode);
 extern repv Flast_event (void);
