@@ -29,6 +29,8 @@
 #include <X11/Xutil.h>
 #include <alloca.h>
 
+#define WIN_STATE_STICKY (1 << 0)
+
 DEFSYM(gnome, "gnome");
 DEFSYM(enter_workspace_hook, "enter-workspace-hook");
 DEFSYM(add_workspace_hook, "add-workspace-hook");
@@ -41,13 +43,16 @@ DEFSYM(select_workspace, "select-workspace");
 DEFSYM(ignored_window_names, "ignored-window-names");
 DEFSYM(sticky_window_names, "sticky-window-names");
 DEFSYM(ignored, "ignored");
+DEFSYM(sticky, "sticky");
+DEFSYM(toggle_window_sticky, "toggle-window-sticky");
 
 DEFSTRING(gnome_windows, "^(gmc|panel)$");
 
 static Window gnome_id_win;
 
 static Atom xa_win_supporting_wm_check, xa_win_client_list, xa_win_protocols,
-    xa_win_workspace, xa_win_workspace_count, xa_win_desktop_button_proxy;
+    xa_win_workspace, xa_win_workspace_count, xa_win_desktop_button_proxy,
+    xa_win_state;
 
 
 /* client list support */
@@ -128,19 +133,82 @@ DEFUN("gnome-set-workspace", Fgnome_set_workspace,
 }
 
 
+/* client state support */
+
+DEFUN("gnome-set-client-state", Fgnome_set_client_state,
+      Sgnome_set_client_state, (repv win), rep_Subr1)
+{
+    u_int state = 0;
+    repv tem;
+    rep_DECLARE1(win, WINDOWP);
+
+    tem = Fwindow_get (win, Qsticky);
+    if (tem != Qnil)
+	state |= WIN_STATE_STICKY;
+
+    XChangeProperty (dpy, VWIN(win)->id, xa_win_state, XA_CARDINAL,
+		     32, PropModeReplace, (u_char *)&state, 1);
+    return win;
+}
+
+DEFUN("gnome-honour-client-state", Fgnome_honour_client_state,
+      Sgnome_honour_client_state, (repv win), rep_Subr1)
+{
+    Atom actual_type;
+    int format;
+    u_long nitems, bytes_after;
+    u_char *prop = 0;
+    rep_DECLARE1(win, WINDOWP);
+    if (XGetWindowProperty (dpy, VWIN(win)->id, xa_win_state, 0, 1,
+			    False, XA_CARDINAL, &actual_type,
+			    &format, &nitems, &bytes_after, &prop) != None
+        && format == 32 && actual_type == XA_CARDINAL)
+    {
+	u_int state = *(u_int *)prop;
+	repv tem;
+	if (state & WIN_STATE_STICKY)
+	{
+	    tem = Fwindow_get (win, Qsticky);
+	    if (tem == Qnil)
+		rep_call_lisp1 (Qtoggle_window_sticky, win);
+	}
+    }
+    if (prop != 0)
+	XFree (prop);
+    return win;
+}
+	
+
 /* GNOME client message handling */
 
 DEFUN("gnome-client-message-handler", Fgnome_client_message_handler,
       Sgnome_client_message_handler, (repv win), rep_Subr1)
 {
     /* current_x_event is the event that was actually received */
+    Lisp_Window *w;
     if (current_x_event == 0)
 	return Qnil;
+    w = find_window_by_id (current_x_event->xclient.window);
     if (current_x_event->xclient.message_type == xa_win_workspace)
     {
 	int desk = current_x_event->xclient.data.l[0];
 	rep_call_lisp1 (Qselect_workspace, rep_MAKE_INT(desk));
 	return Qt;
+    }
+    else if (w != 0 && current_x_event->xclient.message_type == xa_win_state)
+    {
+	u_int mask = current_x_event->xclient.data.l[0];
+	u_int values = current_x_event->xclient.data.l[1];
+	if (mask & WIN_STATE_STICKY)
+	{
+	    repv tem = Fwindow_get (rep_VAL(w), Qsticky);
+	    if ((tem == Qnil && (values & WIN_STATE_STICKY))
+		|| (tem != Qnil && !(values & WIN_STATE_STICKY)))
+	    {
+		rep_call_lisp1 (Qtoggle_window_sticky, rep_VAL(w));
+	    }
+	}
+	Fgnome_set_client_state (rep_VAL(w));
     }
     return Qnil;
 }
@@ -174,21 +242,11 @@ rep_xsubr *rep_dl_subrs[] = {
     0
 };
 
-static void
-add_hook (repv sym, repv fun)
-{
-    repv val = Fsymbol_value (sym, Qt);
-    if (rep_VOIDP(val))
-	val = Qnil;
-    val = Fcons (fun, val);
-    Fset (sym, val);
-}
-
 repv
 rep_dl_init(repv file_name)
 {
     u_int val;
-    Atom prot[3];
+    Atom prot[4];
 
     rep_INTERN(gnome);
     rep_dl_feature = Qgnome;
@@ -203,6 +261,8 @@ rep_dl_init(repv file_name)
     rep_INTERN(ignored_window_names);
     rep_INTERN(sticky_window_names);
     rep_INTERN(ignored);
+    rep_INTERN(sticky);
+    rep_INTERN(toggle_window_sticky);
 
     if (rep_VOIDP(rep_SYM(Qignored_window_names)->value))
 	rep_SYM(Qignored_window_names)->value = Qnil;
@@ -222,6 +282,7 @@ rep_dl_init(repv file_name)
     xa_win_workspace = XInternAtom (dpy, "_WIN_WORKSPACE", False);
     xa_win_workspace_count = XInternAtom (dpy, "_WIN_WORKSPACE_COUNT", False);
     xa_win_desktop_button_proxy = XInternAtom (dpy, "_WIN_DESKTOP_BUTTON_PROXY", False);
+    xa_win_state = XInternAtom (dpy, "_WIN_STATE", False);
 
     gnome_id_win = XCreateSimpleWindow (dpy, root_window,
 					-200, -200, 5, 5, 0, 0, 0);
@@ -239,8 +300,9 @@ rep_dl_init(repv file_name)
     prot[0] = xa_win_client_list;
     prot[1] = xa_win_workspace;
     prot[2] = xa_win_workspace_count;
+    prot[3] = xa_win_state;
     XChangeProperty (dpy, root_window, xa_win_protocols,
-		     XA_ATOM, 32, PropModeReplace, (u_char *)prot, 3);
+		     XA_ATOM, 32, PropModeReplace, (u_char *)prot, 4);
 
     rep_ADD_SUBR(Sgnome_set_client_list);
     rep_ADD_SUBR(Sgnome_set_workspace);
@@ -256,6 +318,8 @@ rep_dl_init(repv file_name)
     add_hook (Qmap_notify_hook, rep_VAL(&Sgnome_set_client_list));
     add_hook (Qunmap_notify_hook, rep_VAL(&Sgnome_set_client_list));
     add_hook (Qclient_message_hook, rep_VAL(&Sgnome_client_message_handler));
+    add_hook (Qwindow_state_change_hook, rep_VAL(&Sgnome_set_client_state));
+    add_hook (Qadd_window_hook, rep_VAL(&Sgnome_honour_client_state));
     event_proxy_fun = event_proxy;
 
     return Qt;
