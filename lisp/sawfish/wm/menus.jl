@@ -200,10 +200,10 @@ unused before killing it.")
 (defun popup-menu (spec)
   (if (and menu-active menu-process (process-in-use-p menu-process))
       (error "Menu already active")
-    (let
+    (let*
 	((part (clicked-frame-part))
-	 (offset (clicked-frame-part-offset))
-	 (dims (clicked-frame-part-dimensions)))
+	 (offset (and part (frame-part-position part)))
+	 (dims (and part (frame-part-dimensions part))))
       (setq menu-active (or (current-event-window) (input-focus)))
       (menu-start-process)
       ;; prevent any depressed button being redrawn until the menu
@@ -218,7 +218,7 @@ unused before killing it.")
       (when (functionp spec)
 	(setq spec (spec)))
       ;; XXX this is a hack, but I want menus to appear under buttons
-      (if (and part (setq part (cdr (assq 'class part)))
+      (if (and part (setq part (frame-part-get part 'class))
 	       (windowp menu-active)
 	       (string-match "-button$" (symbol-name part)))
 	  (progn

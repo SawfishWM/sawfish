@@ -65,10 +65,10 @@
     (delete-timer tooltips-timer)
     (setq tooltips-timer nil)))
 
-(defun tooltips-display (win class)
+(defun tooltips-display (win fp)
   (let
       ((text (make-string-output-stream))
-       (keymap (frame-part-get win class 'keymap))
+       (keymap (frame-part-get fp 'keymap))
        (pos (query-pointer))
        (pos-fn (lambda (in size inc)
 		 (if (< in (/ size 2))
@@ -96,13 +96,13 @@
       (unless (in-hook-p 'pre-command-hook tooltips-cleanup)
 	(add-hook 'pre-command-hook tooltips-cleanup)))))
 
-(defun tooltips-fp-enter (win class)
+(defun tooltips-fp-enter (win fp)
   (when tooltips-enabled
     (let
 	((callback (lambda ()
 		     (setq tooltips-timer nil)
 		     (unless (clicked-frame-part)
-		       (tooltips-display win class)))))
+		       (tooltips-display win fp)))))
       (when tooltips-timer
 	(delete-timer tooltips-timer))
       (setq tooltips-timer (make-timer callback

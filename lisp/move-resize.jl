@@ -359,7 +359,8 @@
     (let
 	(tem)
       (if (and resize-by-frame-class
-	       (setq tem (cdr (assq 'class (clicked-frame-part))))
+	       (clicked-frame-part)
+	       (setq tem (frame-part-get (clicked-frame-part) 'class))
 	       (setq tem (cdr (assq tem move-resize-fp-edges-alist))))
 	  (setq move-resize-moving-edges (copy-sequence tem))
 	(cond ((<= (- move-resize-old-ptr-x move-resize-old-x)
