@@ -20,6 +20,7 @@
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (defun shade-window (w)
+  "Display only the title bar of the window."
   (interactive "W")
   (unless (window-get w 'shaded)
     (window-put w 'shaded t)
@@ -37,6 +38,8 @@
       (call-window-hook 'window-state-change-hook w))))
 
 (defun unshade-window (w)
+  "If the window is shaded (see `shade-window'), restore it to it's usual
+state."
   (interactive "W")
   (when (window-get w 'shaded)
     (window-put w 'shaded nil)
@@ -48,6 +51,7 @@
     (call-window-hook 'window-state-change-hook w)))
 
 (defun toggle-window-shaded (w)
+  "Toggle the shaded (only the title bar is displayed) state of the window."
   (interactive "W")
   (if (window-get w 'shaded)
       (unshade-window w)
