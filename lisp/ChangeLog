@@ -1,3 +1,13 @@
+2000-07-18  John Harper  <john@dcs.warwick.ac.uk>
+
+	* custom.jl (custom-convert): fixed some stupid bugs when
+	recursing into `list', `pair' and `and' types
+
+2000-07-17  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome-menu.jl: require 'menus when compiling (otherwise when
+	setting apps-menu, don't know that it's special)
+
 2000-07-16  John Harper  <john@dcs.warwick.ac.uk>
 
 	* wm-spec.jl: set 'fixed-position and 'never-focus properties
