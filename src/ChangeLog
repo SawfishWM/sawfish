@@ -1,3 +1,9 @@
+1999-07-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (list_frame_generator): handle propagating the shape
+	of the client to the frame here since it's a lot less ugly
+	* windows.c: don't call set_window_shape in so many places
+
 1999-07-29  John Harper  <john@dcs.warwick.ac.uk>
 
 	* windows.c (add_window): set WM_STATE of client windows
