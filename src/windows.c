@@ -173,8 +173,8 @@ install_window_frame (Lisp_Window *w)
 		      ButtonPressMask | ButtonReleaseMask
 		      | KeyPressMask | ButtonMotionMask | PointerMotionHintMask
 		      | EnterWindowMask | LeaveWindowMask
-		      | ExposureMask | VisibilityChangeMask
-		      | FocusChangeMask | SubstructureRedirectMask);
+		      | ExposureMask | FocusChangeMask
+		      | SubstructureRedirectMask);
 
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	w->reparented = TRUE;
@@ -230,7 +230,7 @@ add_window (Window id)
 	/* ..now do the X11 stuff */
 
 	XSelectInput (dpy, id, PropertyChangeMask | StructureNotifyMask
-		      | ColormapChangeMask);
+		      | ColormapChangeMask | VisibilityChangeMask);
 	XGetWindowAttributes (dpy, id, &w->attr);
 	DB(("  orig: width=%d height=%d x=%d y=%d\n",
 	    w->attr.width, w->attr.height, w->attr.x, w->attr.y));
@@ -440,8 +440,6 @@ window-frame WINDOW FRAME
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
-    if (frame != Qnil)
-	rep_DECLARE2(frame, FRAMEP);
     Fgrab_server ();
     if (VWIN(win)->frame != 0)
     {
