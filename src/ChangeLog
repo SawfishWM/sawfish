@@ -1,4 +1,35 @@
+1999-08-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* main.c (Qbefore_exit_hook): new hook; called before exiting
+
+	* keys.c (Fcurrent_event_window): as well as returning a window
+	object, this might instead return the symbol `root' or the
+	integer id of an unmanaged window
+	(Fproxy_current_event): send the current event on to a
+	specified window
+
+	* gnome.c: deleted, this is now done in lisp
+
+	* functions.c (Fdelete_window): accept integer window ids
+	(Fdestroy_window): if an integer window id, use XDestroyWindow,
+	not XKillClient
+	(Fsend_client_message): new function
+	(Fcreate_window): new function (so I can do gnome-wm in lisp)
+	(x-atom, x-atom-name): translate between symbols<->atoms
+
+	* events.c (client_message): now pass _all_ the data in the
+	event to the hook, format is (WINDOW TYPE-ATOM DATA-ARRAY).
+	DATA-ARRAY is a string (8-bit format) or vector of integers
+
+	* display.c (x_atom_symbol, x_win_from_arg): new functions
+
 1999-08-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* functions.c (Flist_x_properties, Fdelete_x_property,
+	Fset_x_property, Fget_x_property): new functions
+
+	* client.c (eval_lisp_form): don't use puts () to output the
+	result string since it could contain zero bytes
 
 	* windows.c (remove_window): a new argument FROM-ERROR. If
 	non-nil then we're being called from the error handler, and

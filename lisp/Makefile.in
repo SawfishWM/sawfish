@@ -29,14 +29,15 @@ sawmill_prog = ../src/sawmill --batch --no-rc
 COMPILE_ENV = SAWMILLLISPDIR=. SAWMILLDOCFILE=../DOC
 
 LISP_SRCS := auto-raise.jl cursors.jl custom.jl customize.jl edges.jl \
-	     focus.jl frames.jl functions.jl keymaps.jl menus.jl \
+	     focus.jl frames.jl functions.jl gnome.jl keymaps.jl menus.jl \
 	     move-resize.jl place-window.jl sawmill.jl \
 	     select-window.jl transient.jl workspace.jl
 LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
 INSTALL_FILES := $(LISP_SRCS) $(LISP_OBJS) autoload.jl sawmill-defaults.jl
 
 %.jlc : %.jl
-	$(COMPILE_ENV) $(sawmill_prog) compiler -f compile-batch $<
+	$(COMPILE_ENV) $(sawmill_prog) compiler -f compile-batch \
+	  --write-docs $<
 
 all : $(LISP_OBJS)
 	set -e; for dir in $(SUBDIRS); do \

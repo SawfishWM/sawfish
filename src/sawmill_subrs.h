@@ -134,7 +134,7 @@ extern repv Flist_x_properties (repv win);
 extern repv Fget_x_property (repv win, repv prop);
 extern repv Fset_x_property (repv win, repv prop, repv data,
 			     repv type, repv format);
-extern repv Fsend_client_message (repv win, repv atom);
+extern repv Fsend_client_message (repv win, repv type, repv data, repv format);
 extern repv Fcreate_window (repv parent, repv x, repv y,
 			    repv width, repv height);
 extern repv Fx_atom (repv symbol);
