@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sawmill 0.18\n"
-"POT-Creation-Date: 1999-12-16 15:36%z\n"
-"PO-Revision-Date: 1999-12-14 22:35+0100\n"
+"Project-Id-Version: sawmill 0.20\n"
+"POT-Creation-Date: 1999-12-22 22:28+0000\n"
+"PO-Revision-Date: 1999-12-21 01:15+0100\n"
 "Last-Translator: Angel Utiel Creus <utiel@retemail.es>Language-Team: Spanish "
 "<es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -389,6 +389,24 @@ msgstr "Nuevo grupo"
 msgid "Reload the gtkrc settings."
 msgstr "Reiniciar la configuración gtkrc"
 
+# ../lisp/iconify.jl
+msgid "Iconify the window."
+msgstr "Iconificar la ventana."
+
+# ../lisp/iconify.jl
+msgid "Return the window from its iconified state."
+msgstr "Restaurar ventana."
+
+# ../lisp/iconify.jl
+msgid "Display the workspace containing the window W, then focus on W."
+msgstr "Mostrar el escritorio que contiene la ventana W, y darle foco."
+
+# ../lisp/iconify.jl
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
+msgstr "Invertir estado de `pegado/stickiness' de la ventana."
+
 # ../lisp/ignore-window.jl
 msgid "Ignore the window."
 msgstr "Ignorar la ventana."
@@ -614,14 +632,6 @@ msgstr ""
 "antes de matarlo."
 
 # ../lisp/menus.jl
-msgid "Move"
-msgstr "Mover"
-
-# ../lisp/menus.jl
-msgid "Resize"
-msgstr "Cambiar tamaño"
-
-# ../lisp/menus.jl
 msgid "Iconify"
 msgstr "Minimizar"
 
@@ -682,12 +692,12 @@ msgid "Next workspace"
 msgstr "Siguiente escritorio"
 
 # ../lisp/menus.jl
-msgid "Copy to previous workspace"
-msgstr "Copiar al escritorio anterior"
+msgid "Copy to previous"
+msgstr "Copiar al anterior"
 
 # ../lisp/menus.jl
-msgid "Copy to next workspace"
-msgstr "Copiar al escritorio siguiente"
+msgid "Copy to next"
+msgstr "Copiar al siguiente"
 
 # ../lisp/menus.jl
 msgid "Left"
@@ -1031,7 +1041,17 @@ msgid "Display tooltips for window frames."
 msgstr "Mostrar ayudas en los marcos."
 
 # ../lisp/tooltips.jl
-msgid "Number of milliseconds to wait before displaying tooltip."
+msgid "Remove tooltips after a period of time."
+msgstr ""
+
+# ../lisp/tooltips.jl
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Número de milisegundos antes de mostrar la ayuda."
+
+# ../lisp/tooltips.jl
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
 msgstr "Número de milisegundos antes de mostrar la ayuda."
 
 # ../lisp/transient.jl
@@ -1266,24 +1286,12 @@ msgid "Delete any workspaces that don't contain any windows."
 msgstr "Borrar todos los escritorios sin ventanas."
 
 # ../lisp/workspace.jl
-msgid "Iconify the window."
-msgstr "Minimizar la ventana."
-
-# ../lisp/workspace.jl
-msgid "Return the window from its iconified state."
-msgstr "Devuelve a su estado normal la ventana."
-
-# ../lisp/workspace.jl
-msgid "Display the workspace containing the window W, then focus on W."
-msgstr "Muestra el espacio conteniendo la ventana W, después selecciona W."
-
-# ../lisp/workspace.jl
 msgid ""
-"Toggle the `stickiness' of the window--whether or not it is a member of\n"
-"all workspaces."
+"Remove the copy of the window on the current workspace. If this is the last\n"
+"instance remaining, then delete the actual window."
 msgstr ""
-"Cambia el estado de pegado `stickiness' - si pertenece o no a todos los\n"
-"escritorios."
+"Quitar la copia de la ventana del escritorio. Si es la última "
+"instanciaentonces cerrar la ventana."
 
 # ../lisp/x-cycle.jl
 msgid "Window Cycling"
