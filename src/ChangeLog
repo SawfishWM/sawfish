@@ -1,3 +1,27 @@
+1999-09-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (Fframe_state_mutex): when this variable is non-nil,
+	entering or leaving a frame-part's window won't affect its
+	state. As a hack, if you set this to `clicked' the frame part's
+	state will be set clicked (this is needed because LeaveNotify
+	events seem to be able arrive before the MotionNotify events
+	causing them)
+
+	* events.c (enter_notify, leave_notify): don't change
+	frame-part state if frame_state_mutex is set
+
+	* keys.c (Fallow_events): new function, wrapper for
+	XAllowEvents
+	(grab_event): all active grabs now use GrabModeSync
+
+	* events.c (button_press, key_press): call XAllowEvents
+	with AsyncPointer or AsyncKeyboard after handling the event,
+	since active grabs are now synchronous
+
+	* events.c (focus_in): only handle the event if the window is visible
+
+	* windows.c (find_window_by_id): print less debugging info
+
 1999-09-05  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.5

@@ -1,3 +1,25 @@
+1999-09-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* move-resize.jl (move-resize-window): set frame-state-mutex to
+	`clicked' while dragging the window
+
+	* select-window.jl, move-resize.jl: call (allow-events
+	'async-pointer) since active-grabs are now done with
+	synchronous event handling
+
+	* gnome.jl (gnome-add-window): new function, set
+	focus-proxy-click to t in panel and gmc icons
+
+	* focus.jl (focus-proxy-click): new option, the same symbol can
+	also be set in a window's plist
+	(focus-in-fun): when in click-to-focus mode, ensure that all
+	non-focused windows have the click-to-focus keymap set
+
+	* focus.jl: map focus-add-window over all existing windows at
+	startup
+
+	* workspace.jl (display-window): focus the window
+
 1999-09-05  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.5

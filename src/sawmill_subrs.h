@@ -81,6 +81,7 @@ extern repv Qvisibility_notify_hook, Qdestroy_notify_hook, Qmap_notify_hook,
     Qunmap_notify_hook, Qreparent_notify_hook, Qenter_notify_hook,
     Qleave_notify_hook, Qfocus_in_hook, Qfocus_out_hook, Qclient_message_hook;
 extern repv Qiconify_window, Quniconify_window;
+extern struct frame_part *clicked_frame_part;
 extern void unclick_current_fp (void);
 extern void map_request (XEvent *ev);
 extern void send_synthetic_configure (Lisp_Window *w);
@@ -109,6 +110,7 @@ extern void fonts_kill (void);
 /* from frames.c */
 extern repv Qdefault_frame, Qnil_frame;
 extern repv Qfocused, Qhighlighted, Qclicked;
+extern bool frame_state_mutex;
 extern void set_frame_part_bg (struct frame_part *fp);
 extern void set_frame_part_fg (struct frame_part *fp);
 extern void refresh_frame_part (struct frame_part *fp);
@@ -120,6 +122,7 @@ extern void frame_part_exposer (XExposeEvent *ev, struct frame_part *fp);
 extern void mark_frame_parts (Lisp_Window *w);
 extern void reset_frame_parts (Lisp_Window *w);
 extern repv Vframe_draw_mutex (repv arg);
+extern repv Vframe_state_mutex (repv arg);
 extern void frames_init (void);
 extern void frames_kill (void);
 
