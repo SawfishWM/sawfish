@@ -338,8 +338,9 @@ lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
 	/* 1. search keymap for active window decoration */
 	k = search_keymap(context_keymap, code, mods, callback);
 
-	if (!k && (current_x_event->xany.window == root_window
-		   || current_x_event->xany.window == no_focus_window))
+	if (!k && (current_x_event != 0
+		   && (current_x_event->xany.window == root_window
+		       || current_x_event->xany.window == no_focus_window)))
 	    /* 2. if event from root, search the root-window-keymap */
 	    k = search_keymap (Qroot_window_keymap, code, mods, callback);
 
