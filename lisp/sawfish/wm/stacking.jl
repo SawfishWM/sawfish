@@ -264,30 +264,30 @@ they are stacked within the layer (top to bottom)."
 
 (define (window-on-top-p w)
   "Return t if window W is as high as it can legally go in the stacking order."
-  (or (eq (window-visibility w) 'unobscured)
-      (let* ((constraint (make-constraint w))
-	     (order (delete-if-not
-		     ;; XXX doesn't handle viewports..
-		     (let ((space (nearest-workspace-with-window
-				   w current-workspace)))
-		       (lambda (x)
-			 (window-appears-in-workspace-p x space)))
-		     (stacking-order)))
-	     (old-posn (- (length order) (length (memq w order))))
-	     (stack (cons '() (delq w order))))
-	(let loop ()
-	  (if (or (constraint (car stack) (cdr stack))
-		  (null (cdr stack)))
-	      ;; found highest position
-	      (= (length (car stack)) old-posn)
-	    (stack-rotate-downwards stack)
-	    (loop))))))
+  (let* ((constraint (make-constraint w))
+	 (order (delete-if-not
+		 ;; XXX doesn't handle viewports..
+		 (let ((space (nearest-workspace-with-window
+			       w current-workspace)))
+		   (lambda (x)
+		     (window-appears-in-workspace-p x space)))
+		 (stacking-order)))
+	 (old-posn (- (length order) (length (memq w order))))
+	 (stack (cons '() (delq w order))))
+    (let loop ()
+      (if (or (constraint (car stack) (cdr stack))
+	      (null (cdr stack)))
+	  ;; found highest position
+	  (= (length (car stack)) old-posn)
+	(stack-rotate-downwards stack)
+	(loop)))))
 
 (defun raise-lower-window (w)
   "If the window is at its highest possible position, then lower it to its
 lowest possible position. Otherwise raise it as far as allowed."
   (interactive "%W")
-  (if (window-on-top-p w)
+  (if (or (eq (window-visibility w) 'unobscured)
+	  (window-on-top-p w))
       (lower-window w)
     (raise-window w)))
 
