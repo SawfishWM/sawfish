@@ -574,6 +574,11 @@ create_notify (XEvent *ev)
 }
 
 static void
+circulate_notify (XEvent *ev)
+{
+}
+
+static void
 shape_notify (XEvent *ev)
 {
     XShapeEvent *sev = (XShapeEvent *)ev;
@@ -740,6 +745,7 @@ events_init (void)
     event_handlers[ConfigureNotify] = configure_notify;
     event_handlers[ReparentNotify] = reparent_notify;
     event_handlers[CreateNotify] = create_notify;
+    event_handlers[CirculateNotify] = circulate_notify;
 
     event_names[KeyPress] = "KeyPress";
     event_names[KeyRelease] = "KeyRelease";
