@@ -49,6 +49,7 @@
 	(mapc (lambda (w)
 		(when (and (window-in-workspace-p w i)
 			   (window-mapped-p w)
+			   (not (window-get w 'window-list-skip))
 			   (or (not (window-get w 'ignored))
 			       (window-get w 'iconified)))
 		  (setq menu (cons (list (make-label w)
@@ -64,7 +65,9 @@
       ;; search for any iconified windows that aren't anywhere else in the menu
       (let (extra)
 	(mapc (lambda (w)
-		(when (and (window-get w 'iconified) (window-get w 'sticky))
+		(when (and (not (window-get w 'window-list-skip))
+			   (window-get w 'iconified)
+			   (window-get w 'sticky))
 		  (setq extra (cons (list (make-label w)
 					  `(display-window
 					    (get-window-by-id ,(window-id w))))

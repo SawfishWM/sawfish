@@ -80,6 +80,7 @@
       (if (null windows)
 	  (cons (group-name id) (nreverse menu))
 	(if (and (window-mapped-p (car windows))
+		 (not (window-get (car windows) 'window-list-skip))
 		 (not (window-get (car windows) 'ignored)))
 	    (loop (cons (make-item (car windows)) menu) (cdr windows))
 	  (loop menu (cdr windows))))))
