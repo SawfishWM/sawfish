@@ -77,12 +77,15 @@
   (cons (/ viewport-x-offset (screen-width))
 	(/ viewport-y-offset (screen-height))))
 
+;; returns t if it actually moved the viewport
 (defun set-screen-viewport (col row)
   (when (and (>= col 0) (< col viewport-columns)
 	     (>= row 0) (< row viewport-rows))
     (set-viewport (* col (screen-width))
-		  (* row (screen-height)))))
+		  (* row (screen-height)))
+    t))
   
+;; returns t if it actually moved the viewport
 (defun move-viewport (right down)
   (let
       ((port (screen-viewport)))
