@@ -40,6 +40,8 @@
   :range (0 . nil)
   :group tooltips)
 
+(defvar tooltips-background-color "lightyellow2")
+
 (defvar tooltips-displayed nil)
 
 (defun tooltips-cleanup ()
@@ -68,14 +70,16 @@
 			  (event-name (cdr cell)) (car cell)))
 		keymap)
     (setq text (get-output-stream-string text))
-    (rplaca pos (pos-fn (car pos) (screen-width) 0))
-    (rplacd pos (pos-fn (cdr pos) (screen-height) 16))
-    (display-message text `((position . ,pos)
-			    (x-justify . left)
-			    (spacing . 2)))
-    (setq tooltips-displayed t)
-    (unless (in-hook-p 'pre-command-hook tooltips-cleanup)
-      (add-hook 'pre-command-hook tooltips-cleanup))))
+    (unless (string= text "")
+      (rplaca pos (pos-fn (car pos) (screen-width) 0))
+      (rplacd pos (pos-fn (cdr pos) (screen-height) 16))
+      (display-message text `((position . ,pos)
+			      (background . ,tooltips-background-color)
+			      (x-justify . left)
+			      (spacing . 2)))
+      (setq tooltips-displayed t)
+      (unless (in-hook-p 'pre-command-hook tooltips-cleanup)
+	(add-hook 'pre-command-hook tooltips-cleanup)))))
 
 (defun tooltips-fp-enter (win class)
   (when tooltips-enabled
@@ -88,7 +92,9 @@
 	(delete-timer tooltips-timer))
       (setq tooltips-timer (make-timer callback
 				       (/ tooltips-delay 1000)
-				       (mod tooltips-delay 1000))))))
+				       (mod tooltips-delay 1000)))
+      (unless (in-hook-p 'pre-command-hook tooltips-cleanup)
+	(add-hook 'pre-command-hook tooltips-cleanup)))))
 
 (add-hook 'enter-frame-part-hook tooltips-fp-enter)
 (add-hook 'leave-frame-part-hook tooltips-cleanup)
