@@ -1279,26 +1279,30 @@ WINDOW. Returns the symbol `nil' if no such image.
 	   Atom actual_type;
 	   int actual_format;
 	   long nitems, bytes_after;
-	   u_long *data = 0;
+	   union {
+	       u_long *l;
+	       u_char *c;
+	   } data;
 
 	   static Atom kwm_win_icon = 0;
 
 	   if (kwm_win_icon == 0)
 	       kwm_win_icon = XInternAtom (dpy, "KWM_WIN_ICON", False);
 
+	   data.l = 0;
 	   if (XGetWindowProperty (dpy, VWIN (win)->id, kwm_win_icon,
 				   0, 2, False, kwm_win_icon,
 				   &actual_type, &actual_format,
 				   &nitems, &bytes_after,
-				   (u_char **) &data) == Success
+				   &data.c) == Success
 	       && actual_type == kwm_win_icon
 	       && bytes_after == 0)
 	   {
-	       pixmap_id = data[0];
-	       mask_id = data[1];
+	       pixmap_id = data.l[0];
+	       mask_id = data.l[1];
 	   }
-	   if (data != 0)
-	       XFree (data);
+	   if (data.l != 0)
+	       XFree (data.l);
        }
 
        VWIN (win)->icon_image = Qnil;

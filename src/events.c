@@ -1254,9 +1254,13 @@ deregister_event_handler (Window w)
 static inline void *
 window_event_handler (Window w)
 {
-    void *fun;
+    union {
+	void *v;
+	XPointer p;
+    } fun;
+
     return XFindContext (dpy, w, event_handler_context,
-			 (XPointer *)&fun) ? 0 : fun;
+			 &fun.p) ? 0 : fun.v;
 }
 
 

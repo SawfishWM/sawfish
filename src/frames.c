@@ -869,8 +869,12 @@ refresh_frame_parts (Lisp_Window *w)
 struct frame_part *
 find_frame_part_by_window (Window id)
 {
-    struct frame_part *fp;
-    return XFindContext (dpy, id, window_fp_context, (XPointer *)&fp) ? 0 : fp;
+    union {
+	struct frame_part *f;
+	XPointer p;
+    } fp;
+
+    return XFindContext (dpy, id, window_fp_context, &fp.p) ? 0 : fp.f;
 }
 
 /* Destroy the window frame of W, assuming it's a frame-part derived frame */
@@ -1553,9 +1557,10 @@ list_frame_generator (Lisp_Window *w)
     {
 	/* create the frame */
 	wa.override_redirect = True;
+	wa.save_under = w->attr.save_under;
 	wa.colormap = image_cmap;
 	wa.border_pixel = BlackPixel (dpy, screen_num);
-	wamask = CWOverrideRedirect | CWColormap | CWBorderPixel;
+	wamask = CWOverrideRedirect | CWColormap | CWBorderPixel | CWSaveUnder;
 	w->frame = XCreateWindow (dpy, root_window, w->attr.x, w->attr.y,
 				  w->frame_width, w->frame_height,
 				  0, image_depth, InputOutput,

@@ -157,9 +157,13 @@ DEFSYM (set, "set");
 static inline repv
 x_window_from_id (Window id)
 {
-    repv win;
+    union {
+	repv r;
+	XPointer p;
+    } win;
+
     return XFindContext (dpy, id, x_drawable_context,
-			 (XPointer *) &win) ? Qnil : win;
+			 &win.p) ? Qnil : win.r;
 }
 
 #ifdef HAVE_X11_EXTENSIONS_XDBE_H

@@ -1,3 +1,12 @@
+2003-07-17  John Harper  <jsh@unfactored.org>
+
+	* x.c, windows.c, frames.c, events.c: fixed gcc 3.3 type
+	punning warnings
+
+	* frames.c (list_frame_generator): propagate save-under setting
+	from client window to its frame (patch from Michal Maru¹ka
+	<mmc@maruska.dyndns.org>)
+
 2003-05-06  John Harper  <jsh@unfactored.org>
 
 	* fonts.c (x_draw_string): don't try to return a void value,
