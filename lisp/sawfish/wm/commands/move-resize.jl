@@ -296,6 +296,16 @@
     (setq move-resize-moving-edges '(bottom right))))
 
 
+;; hook functions
+
+(defun move-resize-lost-window (w)
+  (when (eq move-resize-window w)
+    (move-resize-finished)))
+
+(add-hook 'unmap-notify-hook 'move-resize-lost-window)
+(add-hook 'destroy-notify-hook 'move-resize-lost-window)
+
+
 ;; Entry points
 
 ;;;###autoload
