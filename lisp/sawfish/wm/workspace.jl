@@ -69,7 +69,9 @@
     ("Previous" previous-workspace)
     ("Insert" insert-workspace)
     ("Merge next" merge-next-workspace)
-    ("Merge previous" merge-previous-workspace)))
+    ("Merge previous" merge-previous-workspace)
+    ("Move right" move-workspace-forwards)
+    ("Move left" move-workspace-backwards)))
 
 
 ;; Low level functions
@@ -83,7 +85,8 @@
 	       (eq space ws-current-workspace)
 	       (not (window-get w 'iconified)))
       (show-window w))
-    (call-window-hook 'add-to-workspace-hook w)))
+    (call-window-hook 'add-to-workspace-hook w)
+    (call-hook 'workspace-state-change-hook)))
 
 ;; usually called from the add-window-hook
 (defun ws-add-window (w)
@@ -108,7 +111,8 @@
 	(window-put w 'workspace ws-current-workspace)
 	(unless (window-visible-p w)
 	  (show-window w))
-	(call-window-hook 'add-to-workspace-hook w)))))
+	(call-window-hook 'add-to-workspace-hook w))
+      (call-hook 'workspace-state-change-hook))))
 
 ;; called from the map-notify hook
 (defun ws-window-mapped (w)
@@ -144,7 +148,8 @@
       (window-put w 'workspace nil)
       (call-window-hook 'remove-from-workspace-hook w (list space))
       (when (and (not dont-hide) (windowp w))
-	(hide-window w)))))
+	(hide-window w))
+      (call-hook 'workspace-state-change-hook))))
 
 (defun ws-add-workspace (at-end)
   (let
@@ -162,6 +167,8 @@
 	((space (list 'workspace))
 	 (join (memq ws-current-workspace ws-workspaces)))
       (rplacd join (cons space (cdr join)))
+      (call-hook 'add-workspace-hook (list space))
+      (call-hook 'workspace-state-change-hook)
       space)))
 
 (defun ws-find-next-workspace (&optional cycle)
@@ -189,7 +196,8 @@
       (mapc #'(lambda (w)
 		(unless (window-get w 'iconified)
 		  (show-window w))) (cdr ws-current-workspace))
-      (call-hook 'enter-workspace-hook (list ws-current-workspace)))))
+      (call-hook 'enter-workspace-hook (list ws-current-workspace))
+      (call-hook 'workspace-state-change-hook))))
 
 (defun ws-merge-workspaces (src dest)
   ;; XXX doing this causes a nasty flicker of windows that
@@ -202,7 +210,23 @@
       (ws-remove-window w)
       (ws-add-window-to-space w dest)))
   (setq ws-workspaces (delq src ws-workspaces))
-  (call-hook 'delete-workspace-hook (list src)))
+  (call-hook 'delete-workspace-hook (list src))
+  (call-hook 'workspace-state-change-hook))
+
+(defun ws-move-workspace (space count)
+  (let*
+      ((current (- (length ws-workspaces)
+		   (length (memq space ws-workspaces))))
+       (desired (min (max 0 (+ current count)) (1- (length ws-workspaces))))
+       tem)
+    (unless (= current desired)
+      (setq ws-workspaces (delq space ws-workspaces))
+      (if (zerop desired)
+	  (setq ws-workspaces (cons space ws-workspaces))
+	(setq tem (nthcdr (1- desired) ws-workspaces))
+	(rplacd tem (cons space (cdr tem))))
+      (call-hook 'move-workspace-hook (list space))
+      (call-hook 'workspace-state-change-hook))))
 
 
 ;; Menu constructors
@@ -355,6 +379,17 @@ previous workspace."
   (interactive)
   (ws-switch-workspace (ws-insert-workspace)))
 
+(defun move-workspace-forwards (&optional count)
+  "Move the current workspace one place to the right."
+  (interactive)
+  (ws-move-workspace ws-current-workspace (or count 1)))
+
+(defun move-workspace-backwards (&optional count)
+  "Move the current workspace one place to the left."
+  (interactive)
+  (ws-move-workspace ws-current-workspace (- (or count 1))))
+
+
 ;; Iconification (but without icons)
 
 ;; If iconified, a window has its `iconified' property set to t
