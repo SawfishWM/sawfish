@@ -27,6 +27,7 @@
 	  gui.gtk-2.gtk
 	  rep.regexp
 	  rep.io.files
+	  rep.io.timers
 	  sawfish.gtk.widget
 	  sawfish.ui.i18n)
 
@@ -39,7 +40,18 @@
 	  (readme-text-view (gtk-text-view-new))
 	  (readme-scroller (gtk-scrolled-window-new))
 	  (value (car options))
-	  (last-value nil))
+	  (last-value nil)
+	  (timer nil))
+
+      (define (timer-callback)
+	(setq timer nil)
+	(setq value (intern (gtk-entry-get-text (gtk-combo-entry combo))))
+	;; ugh. the gtk2 combo seems pretty fucked; this
+	;; didn't used to be necessary
+	(when (and (not (eq value last-value)) (memq value options))
+	  (setq last-value value)
+	  (update-readme value readme-text-view path)
+	  (call-callback changed-callback)))
 
       (gtk-box-set-spacing hbox box-spacing)
       (gtk-box-set-spacing vbox box-spacing)
@@ -59,16 +71,10 @@
 	(gtk-entry-set-text (gtk-combo-entry combo) (symbol-name value)))
 
       (g-signal-connect (gtk-combo-entry combo) "changed"
-			  (lambda ()
-			    (setq value (intern (gtk-entry-get-text
-						 (gtk-combo-entry combo))))
-			    ;; ugh. the gtk2 combo seems pretty fucked; this
-			    ;; didn't used to be necessary
-			    (when (and (not (eq value last-value))
-				       (memq value options))
-			      (setq last-value value)
-			      (update-readme value readme-text-view path)
-			      (call-callback changed-callback))))
+			(lambda ()
+			  (if timer
+			      (set-timer timer)
+			    (setq timer (make-timer timer-callback nil 200)))))
 
       (update-readme value readme-text-view path)
       (gtk-widget-show-all vbox)

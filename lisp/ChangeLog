@@ -1,3 +1,27 @@
+2002-05-29  John Harper  <jsh@unfactored.org>
+
+	* more merging:
+
+	2002-05-28  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/commands/move-resize.jl (motion): when displaying
+	logical size, use (or base 0) not 1 to get the correct result.
+	Patch from merlin <merlin@merlin.org>
+
+	2002-05-26  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/placement/stagger.jl: respects workarea now. Fixes
+	#74307
+
+	2002-05-24  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/state/wm-spec.jl (client-message-handler): don't
+	select the new desktop when moving window after _NET_WM_DESKTOP
+
+	* sawfish/wm/workspace.jl
+	(send-window-to-workspace-from-first): added optional SELECT
+	param
+
 2002-05-21  John Harper  <jsh@unfactored.org>
 
 	* More merging from HEAD:
