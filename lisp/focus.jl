@@ -34,7 +34,7 @@
 
 (defvar click-to-focus-keymap
   (bind-keys (make-keymap)
-    "Button1-Click1" 'focus-click))
+    "Any-Click1" 'focus-click))
 
 (defun focus-click (w)
   (interactive "w")
