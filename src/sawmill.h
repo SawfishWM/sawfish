@@ -91,7 +91,7 @@ typedef struct lisp_window {
     XSizeHints hints;
     XWMHints *wmhints;
     Window transient_for_hint;
-    char *full_name, *name, *icon_name;
+    repv full_name, name, icon_name;
     int frame_vis;
 
     /* Frame data */
