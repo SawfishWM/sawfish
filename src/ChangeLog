@@ -1,5 +1,9 @@
 1999-11-28  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c (remove_window): check that the focus hasn't got
+	lost somehow; if it has refocus the last-focused window, or the
+	invisible input window
+
 	* version 0.17
 
 1999-11-27  John Harper  <john@dcs.warwick.ac.uk>
