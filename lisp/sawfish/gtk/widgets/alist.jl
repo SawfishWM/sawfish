@@ -25,7 +25,6 @@
 
     (open rep
 	  gui.gtk
-	  rep.io.streams
 	  sawfish.gtk.widget
 	  sawfish.gtk.widget-dialog)
 

@@ -40,7 +40,6 @@
     (open rep
 	  rep.system
 	  rep.regexp
-	  rep.io.streams
 	  rep.util.autoloader
 	  rep.lang.doc
 	  sawfish.wm.misc

@@ -32,7 +32,6 @@
 
     (open rep
 	  rep.system
-	  rep.io.streams
 	  rep.io.timers
 	  sawfish.wm.events
 	  sawfish.wm.util.x

@@ -1,3 +1,27 @@
+2000-09-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* slot.jl, shell.jl, main.jl.in, group.jl, ChangeLog: 
+	* layouts/keymaps.jl: 
+	* widgets/match-window.jl, widgets/keymap.jl,
+	widgets/frame-style.jl, widgets/command.jl: 
+
+	No need to explicitly open `rep.io.streams' anymore
+
+2000-09-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* slot.jl, shell.jl, main.jl.in, layout.jl, i18n.jl, group.jl,
+	apply.jl: 
+
+	* layouts/keymaps.jl: 
+
+	* widgets/workspace-geometry.jl, widgets/match-window.jl,
+	widgets/keymap.jl, widgets/icon.jl, widgets/frame-style.jl,
+	widgets/command.jl: 
+
+	Open the necessary modules that aren't included in `rep'
+	structure anymore (rep.regexp, rep.system, rep.io.streams,
+	rep.io.files, rep.io.file-handlers)
+
 2000-09-04  John Harper  <john@dcs.warwick.ac.uk>
 
 	* main.jl.in: /bin/sh on solaris 8 doesn't like to pass

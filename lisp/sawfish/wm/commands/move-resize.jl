@@ -29,7 +29,6 @@
     (open rep
 	  rep.system
 	  rep.regexp
-	  rep.io.streams
 	  sawfish.wm.windows
 	  sawfish.wm.frames
 	  sawfish.wm.misc

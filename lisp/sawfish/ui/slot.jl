@@ -40,7 +40,6 @@
     (open rep
 	  gui.gtk
 	  rep.system
-	  rep.io.streams
 	  rep.data.tables
 	  rep.data.records
 	  sawfish.gtk.widget

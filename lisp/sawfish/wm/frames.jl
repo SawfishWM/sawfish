@@ -55,7 +55,6 @@
 	  rep.regexp
 	  rep.io.files
 	  rep.io.timers
-	  rep.io.streams
 	  sawfish.wm.frames.subrs
 	  sawfish.wm.windows.subrs
 	  sawfish.wm.misc

@@ -33,7 +33,6 @@
 
     (open rep
 	  rep.io.files
-	  rep.io.streams
 	  sawfish.wm.colors
 	  sawfish.wm.cursors
 	  sawfish.wm.events
@@ -79,7 +78,7 @@
 
   (defun gaol:require (feature)
     (cond ((memq feature fully-safe-features) (gaol-open feature))
-	  ((memq feature safe-features) (require feature))
+	  ((memq feature safe-features) (load-module feature))
 	  (t (error "Gaolled code trying to require %s" feature))))
 
 ;;; initialize the gaol envrironment

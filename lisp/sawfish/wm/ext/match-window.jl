@@ -50,7 +50,6 @@
     (open rep
 	  rep.system
 	  rep.regexp
-	  rep.io.streams
 	  sawfish.wm.custom
 	  sawfish.wm.frames
 	  sawfish.wm.windows

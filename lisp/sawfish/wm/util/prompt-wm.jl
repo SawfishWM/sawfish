@@ -23,7 +23,6 @@
 
 (require 'sawfish.wm.workspace)
 (require 'sawfish.wm.windows)
-(require 'rep.io.streams)
 
 (define (prompt-for-window #!optional title)
   "Prompt for a window title, return the window associated with that title."

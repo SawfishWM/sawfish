@@ -28,7 +28,6 @@
     (open rep
 	  gui.gtk
 	  rep.system
-	  rep.io.streams
 	  sawfish.gtk.widget)
 
   (define (test-widget spec #!optional initial-value)

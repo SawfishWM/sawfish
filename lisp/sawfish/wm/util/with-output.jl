@@ -25,7 +25,6 @@
 	    with-output-to-screen)
 
     (open rep
-	  rep.io.streams
 	  rep.regexp
 	  sawfish.wm.misc)
 

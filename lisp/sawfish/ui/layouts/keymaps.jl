@@ -26,7 +26,6 @@
     (open rep
 	  gui.gtk
 	  rep.regexp
-	  rep.io.streams
 	  sawfish.ui.slot
 	  sawfish.ui.wm
 	  sawfish.ui.layout

@@ -28,7 +28,6 @@
 
     (open rep
 	  rep.system
-	  rep.io.streams
 	  rep.io.files
 	  sawfish.wm.commands
 	  sawfish.wm.custom

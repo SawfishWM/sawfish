@@ -27,7 +27,6 @@
 
     (open rep
 	  rep.lang.doc
-	  rep.io.streams
 	  sawfish.wm.commands)
 
   (define-structure-alias describe sawfish.wm.commands.describe)

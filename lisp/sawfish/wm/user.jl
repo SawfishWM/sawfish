@@ -39,7 +39,6 @@
     ((open rep
 	   rep.regexp
 	   rep.system
-	   rep.io.streams
 	   rep.io.files
 	   rep.io.processes
 	   sawfish.wm

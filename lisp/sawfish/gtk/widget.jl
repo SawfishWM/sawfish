@@ -44,8 +44,7 @@
 
     ((open rep
 	   gui.gtk
-	   rep.system
-	   rep.io.streams)
+	   rep.system)
      (access rep.structures))
 
   (defconst box-spacing 4)

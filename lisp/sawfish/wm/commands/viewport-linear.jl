@@ -32,7 +32,6 @@
 	    define-linear-viewport-commands)
 
     (open rep
-	  rep.io.streams
 	  sawfish.wm.events
 	  sawfish.wm.commands
 	  sawfish.wm.viewport)

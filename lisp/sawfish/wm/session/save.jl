@@ -26,7 +26,6 @@
     (open rep
 	  rep.system
 	  rep.io.files
-	  rep.io.streams
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.session.init
