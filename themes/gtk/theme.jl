@@ -228,10 +228,7 @@
 			      x))
 			  gtkrc-background))))
 	(construct-frame-defs)
-	(mapc (lambda (w)
-		(when (eq (window-get w 'current-frame-style) 'gtk)
-		  (set-window-frame-style w 'gtk)))
-	      (managed-windows)))))
+	(reframe-windows-with-style 'gtk))))
 
   (unless batch-mode
     (rebuild-frames)
