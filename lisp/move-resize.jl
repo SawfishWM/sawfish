@@ -187,9 +187,11 @@
        (move-resize-last-outline nil)
        (move-resize-moving-edges move-resize-moving-edges)
        (move-resize-directions move-resize-directions)
-       (frame-draw-mutex (not (eq move-resize-mode 'opaque)))
-       (frame-state-mutex 'clicked)
-       (synthetic-configure-mutex move-resize-inhibit-configure)
+       (old-frame-draw-mutex
+	(frame-draw-mutex (not (eq move-resize-mode 'opaque))))
+       (old-frame-state-mutex (frame-state-mutex 'clicked))
+       (old-synthetic-configure-mutex
+	(synthetic-configure-mutex move-resize-inhibit-configure))
        server-grabbed)
     (when (and move-resize-raise-window (eq move-resize-mode 'opaque))
       ;; only raise window initially if the display will get updated
@@ -228,7 +230,10 @@
 	      (ungrab-pointer))))
       (when server-grabbed
 	(ungrab-server))
-      (display-message nil))
+      (display-message nil)
+      (frame-draw-mutex old-frame-draw-mutex)
+      (frame-state-mutex old-frame-state-mutex)
+      (synthetic-configure-mutex old-synthetic-configure-mutex))
     (when (and move-resize-raise-window (not (eq move-resize-mode 'opaque)))
       (raise-window w))
     (if (eq function 'move)
