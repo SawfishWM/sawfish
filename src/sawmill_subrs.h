@@ -145,6 +145,7 @@ extern repv Fbind_keys (repv args);
 extern repv Funbind_keys (repv args);
 extern repv Fcurrent_event_string (void);
 extern repv Fcurrent_event (void);
+extern repv Fcurrent_event_window (void);
 extern repv Flast_event (void);
 extern repv Fevent_name (repv ev);
 extern repv Flookup_event (repv name);
@@ -152,7 +153,8 @@ extern repv Flookup_event_binding (repv ev);
 extern repv Fsearch_keymap (repv ev, repv km);
 extern repv Fkeymapp (repv arg);
 extern repv Feventp (repv arg);
-extern void grab_window_events (Lisp_Window *w);
+extern void grab_window_events (Lisp_Window *w, bool grab);
+extern void grab_keymap_events (Window grab_win, repv keymap, bool grab);
 extern void keys_init (void);
 
 /* from main.c */

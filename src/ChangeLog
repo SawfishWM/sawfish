@@ -1,5 +1,13 @@
 1999-07-29  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c (add_window): set WM_STATE of client windows
+	(Fwindow_put): when the `keymap' property changes, ungrab the
+	old keymap, then grab the new one
+
+	* keys.c (Fbind_keys, Funbind_keys): grab/ungrab events in
+	client windows if binding to the `global-keymap' or a window's
+	`keymap' property
+
 	* frames.c (list_frame_generator): indirect through multiple
 	symbols in frame_style
 
