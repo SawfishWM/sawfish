@@ -37,7 +37,10 @@
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (gnome-icon-entry-set-icon widget x)))
+		   (if x
+		       (gnome-icon-entry-set-icon widget x)
+		     (gtk-entry-set-text
+		      (gnome-icon-entry-gtk-entry widget) ""))))
 	  ((clear) (lambda ()
 		     (gtk-entry-set-text
 		      (gnome-icon-entry-gtk-entry widget) "")))
