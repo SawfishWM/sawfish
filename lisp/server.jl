@@ -40,11 +40,7 @@
 ;;	after it has read it. If no result is required, it will delete
 ;;	the property after having read it.
 
-(defvar server-window (let
-			  ((win (create-window 'root -100 -100 10 10)))
-			(set-x-property 'root '_SAWMILL_REQUEST_WIN
-					(vector win) 'CARDINAL 32)
-			win))
+(defvar server-window nil)
 
 (defun server-client-message-handler (w type data)
   (when (and (eq w 'root) (eq type '_SAWMILL_REQUEST))
@@ -75,9 +71,19 @@
 	   (delete-x-property window prop))))
       t)))
 
+(defun server-init ()
+  (unless server-window
+    (setq server-window (create-window 'root -100 -100 10 10))
+    (set-x-property 'root '_SAWMILL_REQUEST_WIN
+		    (vector server-window) 'CARDINAL 32)))
 (defun server-exit ()
-  (delete-x-property 'root '_SAWMILL_REQUEST_WIN)
-  (destroy-window server-window))
+  (when server-window
+    (delete-x-property 'root '_SAWMILL_REQUEST_WIN)
+    (destroy-window server-window)))
 
+
+;; initialisation
+
+(server-init)
 (add-hook 'client-message-hook 'server-client-message-handler)
 (add-hook 'before-exit-hook 'server-exit)
