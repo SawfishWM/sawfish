@@ -38,8 +38,9 @@
     (setq root-menu (delq (last root-menu) root-menu))))
 
 ;; invoke the GNOME control-center to configure sawmill
-;(setq customize-program "sawmill-capplet")
-;(setq customize-group-opt "--sawmill-group")
+(setq customize-program "sawmill-capplet")
+(setq customize-group-opt "--sawmill-group")
+(setq custom-menu-includes-all-settings nil)
 
 ;; invoke the GNOME terminal instead of xterm
 (setq xterm-program "gnome-terminal")
