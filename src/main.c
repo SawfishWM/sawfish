@@ -60,6 +60,8 @@ DEFSYM(bad_event_desc, "bad-event-desc");
 DEFSTRING(err_bad_event_desc, "Invalid event description");
 DEFSTRING(version_string, SAWMILL_VERSION);
 
+DEFSYM(before_exit_hook, "before-exit-hook");
+
 static rep_bool
 on_idle (int since_last)
 {
@@ -159,6 +161,8 @@ sawmill_symbols (void)
 
     rep_ADD_SUBR_INT(Squit);
     rep_ADD_SUBR_INT(Srestart);
+
+    rep_INTERN(before_exit_hook);
 }    
 
 int
@@ -194,6 +198,8 @@ main(int argc, char **argv)
 	    res = Fload(rep_string_dup ("sawmill"), Qnil, Qnil, Qnil);
 	    if (res != rep_NULL)
 	    {
+		repv tv;
+		rep_GC_root gc_tv;
 		rc = 0;
 
 		/* final initialisation.. */
@@ -203,6 +209,13 @@ main(int argc, char **argv)
 		/* then jump into the event loop.. */
 		if(rep_SYM(Qbatch_mode)->value == Qnil)
 		    res = Frecursive_edit ();
+
+		tv = rep_throw_value;
+		rep_throw_value = rep_NULL;
+		rep_PUSHGC(gc_tv, tv);
+		Fcall_hook (Qbefore_exit_hook, Qnil, Qnil);
+		rep_POPGC;
+		rep_throw_value = tv;
 	    }
 	    else if(rep_throw_value && rep_CAR(rep_throw_value) == Qquit)
 	    {
