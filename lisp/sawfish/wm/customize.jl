@@ -164,20 +164,26 @@ Visit the Sawmill homepage at http://sawmill.sourceforge.net/")
 
 (defun customize-read-user-file ()
   (unless customize-user-file-read
-    (setq customize-user-forms nil)
-    (when (file-exists-p custom-user-file)
-      (let
-	  ((file (open-file custom-user-file 'read)))
-	(unwind-protect
-	    (condition-case nil
-		(while t
-		  (setq customize-user-forms (cons (read file)
-						   customize-user-forms)))
-	      (end-of-stream))
-	  (close-file file))
-	(setq customize-user-forms (nreverse customize-user-forms))))
-    (setq customize-user-file-read t)
-    (setq customize-user-file-dirty nil)))
+    (let
+	((filename
+	  (if (file-exists-p custom-user-file)
+	      custom-user-file
+	    (or (locate-file (concat custom-default-file ".jl") load-path)
+		(error "Can't find custom-default-file")))))
+      (setq customize-user-forms nil)
+      (when (file-exists-p filename)
+	(let
+	    ((file (open-file filename 'read)))
+	  (unwind-protect
+	      (condition-case nil
+		  (while t
+		    (setq customize-user-forms (cons (read file)
+						     customize-user-forms)))
+		(end-of-stream))
+	    (close-file file))
+	  (setq customize-user-forms (nreverse customize-user-forms))))
+      (setq customize-user-file-read t)
+      (setq customize-user-file-dirty nil))))
 
 (defun customize-write-user-file ()
   (when customize-user-file-dirty
