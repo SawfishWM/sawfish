@@ -305,6 +305,7 @@ main(int argc, char **argv)
 	rep_throw_value = rep_NULL;
 
 	/* call all exit funcs... */
+	functions_kill ();
 	windows_kill ();
 	frames_kill ();
 	cursors_kill ();
