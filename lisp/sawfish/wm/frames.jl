@@ -219,11 +219,18 @@ frame of the requested type. If no entry, then the `unframed' style is used.")
     (reframe-all-windows)))
 
 (defun find-frame-definition (w style type)
-  (if (eq type 'unframed)
-      nil-frame
-    (or (style w type)
-	(find-frame-definition
-	 w style (or (cdr (assq type frame-type-fallback-alist)) 'unframed)))))
+  (letrec ((iter
+	    (lambda (type seen)
+	      (cond
+	       ((eq type 'unframed) nil-frame)
+	       ((style w type))
+	       (t (let ((next (or (cdr (assq type frame-type-fallback-alist))
+				  'unframed)))
+		    (if (memq next seen)
+			;; been here before..
+			nil-frame
+		      (iter next (cons next seen)))))))))
+    (iter type (list type))))
 
 (defun set-window-frame-style (w style &optional type from-user)
   (check-frame-availability style)
