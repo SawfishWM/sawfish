@@ -368,7 +368,7 @@ doesn't overlap any avoided windows, or nil."
 
   ;; does all unmaximizing except for changing the window properties and
   ;; calling the hooks
-  (define (unmaximize-window-1 w #!optional direction)
+  (define (unmaximize-window-1 w #!optional direction before)
     (let ((geom (window-get w 'unmaximized-geometry))
 	  (coords (window-position w))
 	  (dims (window-dimensions w)))
@@ -379,19 +379,22 @@ doesn't overlap any avoided windows, or nil."
 	(when (or (null direction) (eq direction 'vertical))
 	  (rplacd coords (nth 1 geom))
 	  (rplacd dims (nth 3 geom)))
+	(when before
+	  (before))
 	(move-resize-window-to w (car coords) (cdr coords)
 			       (car dims) (cdr dims)))))
 
   (define (unmaximize-window w #!optional direction)
     "Restore the dimensions of the window to its original, unmaximized, state."
-    (unmaximize-window-1 w direction)
-    (when (or (null direction) (eq direction 'horizontal))
-      (window-put w 'maximized-horizontally nil))
-    (when (or (null direction) (eq direction 'vertical))
-      (window-put w 'maximized-vertically nil))
-    (when (and (not (window-maximized-vertically-p w))
-	       (not (window-maximized-horizontally-p w)))
-      (window-put w 'unmaximized-geometry nil))
+    (unmaximize-window-1 w direction
+     (lambda ()
+       (when (or (null direction) (eq direction 'horizontal))
+	 (window-put w 'maximized-horizontally nil))
+       (when (or (null direction) (eq direction 'vertical))
+	 (window-put w 'maximized-vertically nil))
+       (when (and (not (window-maximized-vertically-p w))
+		  (not (window-maximized-horizontally-p w)))
+	 (window-put w 'unmaximized-geometry nil))))
     (call-window-hook 'window-unmaximized-hook w (list direction))
     (call-window-hook 'window-state-change-hook w (list '(maximized))))
 

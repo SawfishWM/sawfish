@@ -6,6 +6,14 @@
 
 2000-11-14  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/state/maximize.jl (unmaximize-window-1): added an
+	optional arg BEFORE, a thunk to call immediately before doing
+	the resize
+	(unmaximize-window): use the new BEFORE param to ensure that
+	the window's properties get updated before it's resized. This
+	way the theme will get the correct values of window-maximized-p
+	when it rebuilds the frame
+
 	* sawfish/wm/util/window-order.jl (on-viewport-change):
 	reinstated this function; this time it removes ordering
 	information from all viewport-sticky windows in the current
