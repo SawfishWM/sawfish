@@ -78,17 +78,17 @@
 (defcustom uniconify-to-current-workspace t
   "Windows are uniconified onto the current workspace."
   :type boolean
-  :group workspace)
+  :group iconify)
 
 (defcustom raise-windows-on-uniconify t
   "Windows are raised after being uniconified."
   :type boolean
-  :group misc)
+  :group iconify)
 
 (defcustom focus-windows-on-uniconify nil
   "Windows are focused after being uniconified."
   :type boolean
-  :group focus)
+  :group iconify)
 
 (defcustom transients-on-parents-workspace nil
   "Transient windows are opened on the same workspace as their parent window."
@@ -109,6 +109,16 @@
   "Warp the mouse pointer to selected windows."
   :type boolean
   :group misc)
+
+(defcustom iconify-whole-group nil
+  "Iconifying a window that's a member of a group removes the whole group."
+  :type boolean
+  :group iconify)
+
+(defcustom uniconify-whole-group nil
+  "Uniconifying a window that's a member of a group restores the whole group."
+  :type boolean
+  :group iconify)
 
 ;; XXX should be a defcustom, need a string-list type
 (defvar workspace-names nil
@@ -300,7 +310,7 @@ that window on (counting from zero).")
 	     (show-window w)))
       (ws-after-removing-window w space)
       ;; the window may lose the focus when switching spaces
-      (when was-focused
+      (when (and was-focused (window-visible-p w))
 	(set-input-focus w))
       (call-hook 'workspace-state-change-hook)))))
 
@@ -630,7 +640,9 @@ previous workspace."
     (when (window-visible-p w)
       (hide-window w))
     (call-window-hook 'iconify-window-hook w)
-    (call-window-hook 'window-state-change-hook w)))
+    (call-window-hook 'window-state-change-hook w)
+    (when iconify-whole-group
+      (iconify-group w))))
 
 (defun uniconify-window (w)
   "Return the window from its iconified state."
@@ -648,7 +660,9 @@ previous workspace."
     (when (and focus-windows-on-uniconify (window-really-wants-input-p w))
       (set-input-focus w))
     (call-window-hook 'uniconify-window-hook w)
-    (call-window-hook 'window-state-change-hook w)))
+    (call-window-hook 'window-state-change-hook w)
+    (when uniconify-whole-group
+      (uniconify-group w))))
 
 (defun display-window (w)
   "Display the workspace containing the window W, then focus on W."
@@ -674,19 +688,29 @@ previous workspace."
 	  (set-input-focus w))
 	(window-order-push w)))))
 
+(defun make-window-sticky (w)
+  (interactive "%W")
+  (unless (window-get w 'sticky)
+    (ws-remove-window w t)
+    (window-put w 'sticky t)
+    (window-put w 'fixed-position t)
+    (call-window-hook 'window-state-change-hook w)))
+  
+(defun make-window-unsticky (w)
+  (interactive "%W")
+  (when (window-get w 'sticky)
+    (window-put w 'sticky nil)
+    (window-put w 'fixed-position nil)
+    (ws-add-window-to-space w current-workspace)
+    (call-window-hook 'window-state-change-hook w)))
+  
 (defun toggle-window-sticky (w)
   "Toggle the `stickiness' of the window--whether or not it is a member of
 all workspaces."
   (interactive "%W")
   (if (window-get w 'sticky)
-      (progn
-	(window-put w 'sticky nil)
-	(window-put w 'fixed-position nil)
-	(ws-add-window-to-space w current-workspace))
-    (ws-remove-window w t)
-    (window-put w 'sticky t)
-    (window-put w 'fixed-position t))
-  (call-window-hook 'window-state-change-hook w))
+      (make-window-unsticky w)
+    (make-window-sticky w)))
 
 (defun ws-client-msg-handler (w atom data)
   (cond ((and (windowp w)
