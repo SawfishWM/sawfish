@@ -46,6 +46,11 @@
   :type (set stop wrap-around keep-going)
   :group workspace)
 
+(defcustom workspace-send-boundary-mode 'keep-going
+  "Action when passing the first or last workspace when moving windows."
+  :type (set stop wrap-around keep-going)
+  :group workspace)
+
 (defcustom delete-workspaces-when-empty nil
   "Workspaces are merged with the next when their last window is removed."
   :type boolean
@@ -424,32 +429,33 @@
 
 ;; Commands
 
-(defun next-workspace (count)
-  "Display the next workspace."
-  (interactive "p")
+(defun ws-call-with-workspace (fun count mode)
   (let
       ((limits (ws-workspace-limits))
        (target (+ current-workspace count)))
     (if (and (>= target (car limits)) (<= target (cdr limits)))
-	(select-workspace target)
-      (cond ((eq workspace-boundary-mode 'stop))
-	    ((eq workspace-boundary-mode 'wrap-around)
-	     (select-workspace
-	      (+ (car limits)
-		 (mod (- target (car limits))
-		      (1+ (- (cdr limits) (car limits)))))))
-	    ((eq workspace-boundary-mode 'keep-going)
-	     (select-workspace target))))))
+	(funcall fun target)
+      (cond ((eq mode 'stop))
+	    ((eq mode 'wrap-around)
+	     (funcall fun (+ (car limits)
+			     (mod (- target (car limits))
+				  (1+ (- (cdr limits) (car limits)))))))
+	    ((eq mode 'keep-going)
+	     (funcall fun target))))))
 
-(defun send-to-next-workspace (window)
+(defun next-workspace (count)
+  "Display the next workspace."
+  (interactive "p")
+  (ws-call-with-workspace 'select-workspace count workspace-boundary-mode))
+
+(defun send-to-next-workspace (window count)
   "Move the window to the next workspace. If no next workspace exists, one
 will be created."
-  (interactive "%f")
-  (let
-      ((space (window-get window 'workspace)))
-    (when space
-      (select-workspace (1+ space))
-      (ws-move-window window current-workspace))))
+  (interactive "%f\np")
+  (ws-call-with-workspace #'(lambda (space)
+			      (select-workspace space)
+			      (ws-move-window window current-workspace))
+			  count workspace-send-boundary-mode))
 
 (defun append-workspace-and-send (window)
   "Create a new workspace at the end of the list, and move the window to it."
@@ -465,15 +471,11 @@ will be created."
   (interactive "p")
   (next-workspace (- count)))
 
-(defun send-to-previous-workspace (window)
+(defun send-to-previous-workspace (window count)
   "Move the window to the previous workspace. If no such workspace exists, one
 will be created."
-  (interactive "%f")
-  (let
-      ((space (window-get window 'workspace)))
-    (when space
-      (select-workspace (1- space))
-      (ws-move-window window current-workspace))))
+  (interactive "%f\np")
+  (send-to-next-workspace window (- count)))
 
 (defun prepend-workspace-and-send (window)
   "Create a new workspace at the start of the list, and move the window to it."
@@ -533,6 +535,12 @@ previous workspace."
       ((limits (ws-workspace-limits)))
     (select-workspace (+ count (car limits)))))
 
+(defun send-window-to-workspace-from-first (window count)
+  (let
+      ((limits (ws-workspace-limits)))
+    (select-workspace (+ count (car limits)))
+    (ws-move-window window current-workspace)))
+
 
 ;; some commands for moving directly to a workspace
 
@@ -543,6 +551,10 @@ previous workspace."
 	  `(lambda ()
 	     (interactive)
 	     (select-workspace-from-first ,(1- i))))
+    (fset (intern (format nil "send-to-workspace:%s" i))
+	  `(lambda (w)
+	     (interactive "%f")
+	     (send-window-to-workspace-from-first w ,(1- i))))
     (setq i (1+ i))))
 
 
