@@ -121,9 +121,12 @@
 
   (define (nokogiri-report-commands)
     (mapcar (lambda (sym)
-	      (let ((params (get sym 'custom-command-args)))
-		(if params
-		    (list sym params)
+	      (let ((params (command-type sym))
+		    (user-level (command-user-level sym)))
+		(if (and params user-level)
+		    (nconc (list sym)
+			   (and params (list #:type params))
+			   (and user-level (list #:user-level user-level)))
 		  sym)))
 	    (sort (apropos "" (lambda (x)
 				(and (commandp x)
