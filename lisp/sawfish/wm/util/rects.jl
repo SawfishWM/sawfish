@@ -28,12 +28,13 @@
 
 ;; rectangles
 
-(defun rectangles-from-grid (x-points y-points &optional pred)
+(defun rectangles-from-grid (x-points orig-y-points &optional pred)
   (let
-      (rects left-x right-x top-y bottom-y tem-x tem-y rect)
+      (rects left-x right-x top-y bottom-y y-points tem-x tem-y rect)
     (while x-points
       (setq left-x (car x-points))
       (setq x-points (cdr x-points))
+      (setq y-points orig-y-points)
       (while y-points
 	(setq top-y (car y-points))
 	(setq y-points (cdr y-points))
@@ -48,7 +49,7 @@
 	    (setq rect (list left-x top-y right-x bottom-y))
 	    (when (or (not pred) (funcall pred rect))
 	      (setq rects (cons rect rects)))))))
-    rects))
+    (nreverse rects)))
 
 ;; returns a list of (LEFT TOP RIGHT BOTTOM [OVERLAP-WEIGHT])
 (defun rectangles-from-windows (windows &optional weight-alist)
