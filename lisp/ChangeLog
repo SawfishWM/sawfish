@@ -1,4 +1,35 @@
+2000-07-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/custom.jl (define-custom-setter, custom-setter):
+	kludged to use structure- functions
+
+	* sawfish/wm/user.jl: configure this structure so that setq
+	binds unbound variables
+
+	* sawfish/wm.jl: removed obsolete reference to autoload-verbose
+
+2000-07-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/workspace.jl: export ws-copy-window
+
+	* sawfish/wm/custom.jl (custom-set-variable,
+	custom-set-typed-variable): convert values which are the symbol
+	`nil' to boolean false (let's hope nothing actually uses the
+	symbol `nil'!)
+
+	* sawfish/wm.jl, sawfish/wm/user.jl, sawfish/wm/defaults.jl:
+	user module is now called `user', not `sawfish.wm.user'
+
+	* sawfish/wm/customize.jl (customize-args): deleted this
+	variable
+
 2000-07-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/ext/audio-events.jl (audio-event-handler): export
+	this function
+
+	* sawfish/wm/ext/tooltips.jl (display-tooltip, remove-tooltip):
+	public interface of this module
 
 	* sawfish/wm/state/maximize.jl (maximize-avoid-avoided): new
 	option, when nil, avoided windows are covered when maximizing
