@@ -176,10 +176,8 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
-  (defcustom pointer-motion-threshold 2
-    "Motion threshold for mouse pointer: \\wpixels"
-    :group misc
-    :type (number 0))
+  (defvar pointer-motion-threshold 2
+    "Distance in pixels pointer must move before generating motion events.")
 
   (defcustom wm-modifier-value (wm-modifier)
     "Modifier key(s) used for default window manager shortcuts."

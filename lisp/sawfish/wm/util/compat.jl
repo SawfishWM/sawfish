@@ -126,7 +126,8 @@
 	  workspace-send-boundary-mode lock-first-workspace
 	  ignore-window-input-hint default-window-animator
 	  resize-edge-mode move-outline-mode resize-outline-mode
-	  move-resize-raise-window workspace-geometry))
+	  move-resize-raise-window workspace-geometry
+	  pointer-motion-threshold ignore-program-positions))
 
 ;;; obsolete custom setters
 

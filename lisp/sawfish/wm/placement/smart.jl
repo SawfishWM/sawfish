@@ -422,7 +422,7 @@ the proposed placement to the center of the screen."
 ;;; init
 
   ;;###autoload
-  (define-placement-mode 'first-fit place-window-first-fit)
-  (define-placement-mode 'best-fit place-window-best-fit #:for-normal t)
+  (define-placement-mode 'first-fit place-window-first-fit #:for-normal t)
+  (define-placement-mode 'best-fit place-window-best-fit)
   (define-placement-mode 'best-fit-group place-window-best-fit-group)
   (define-placement-mode 'first-fit-or-interactive place-window-first-fit-or-interactive))

@@ -47,10 +47,8 @@
     :type symbol
     :group placement)
 
-  (defcustom ignore-program-positions nil
-    "Ignore program-specified window placements."
-    :type boolean
-    :group placement)
+  (defvar ignore-program-positions t
+    "Ignore program-specified window placements.")
 
   (defvar placement-modes '()
     "List of names of all placement modes.")
