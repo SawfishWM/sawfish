@@ -69,6 +69,28 @@
     (move-window-to w (/ (max 0 (- (screen-width) (car dims))) 2)
 		    (/ (max 0 (- (screen-height) (cdr dims))) 2))))
 
+(defun adjust-window-for-gravity (w grav)
+  (let
+      ((coords (window-position w))
+       (dims (window-dimensions w))
+       (fdims (window-frame-dimensions w))
+       (off (window-frame-offset w)))
+    (if (eq grav 'static)
+	(progn
+	  ;; static gravity is relative to the original
+	  ;; client window position
+	  (rplaca coords (+ (car coords) (car off)))
+	  (rplacd coords (+ (cdr coords) (cdr off))))
+      (when (memq grav '(east south-east north-east))
+	;; relative to the right of the frame
+	(rplaca coords (- (car coords) (- (car fdims) (car dims))
+			  (* -2 (window-border-width w)))))
+      (when (memq grav '(south south-east south-west))
+	;; relative to the bottom of the frame
+	(rplacd coords (- (cdr coords) (- (cdr fdims) (cdr dims))
+			  (* -2 (window-border-width w))))))
+    (move-window-to w (car coords) (cdr coords))))
+
 ;; called from the place-window-hook
 (defun place-window (w)
   (let
@@ -77,7 +99,10 @@
 	    (and (not (window-get w 'ignore-program-position))
 		 (not ignore-program-positions)
 		 (cdr (assq 'program-position hints))))
-	nil
+	(let
+	    ((gravity (cdr (assq 'window-gravity hints))))
+	  (when gravity
+	    (adjust-window-for-gravity w gravity)))
       (let
 	  ((mode (or (window-get w 'place-mode)
 		     (if (window-transient-p w)
