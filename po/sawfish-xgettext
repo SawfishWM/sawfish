@@ -31,12 +31,14 @@ exec rep "$0" "$@"
 
 ;; helper function that groks sawfish specific forms
 
+(define (get-key key args) (and (listp args) (memq key args)))
+
 (define (helper form)
   (case (car form)
     ((defcustom)
      (let ((doc (nth 3 form))
 	   (keys (nthcdr 4 form)))
-       (let ((tooltip (cadr (memq ':tooltip keys))))
+       (let ((tooltip (cadr (get-key ':tooltip keys))))
 	 (when tooltip
 	   (setq doc (concat doc "\n\n" tooltip))))
        (when (stringp doc)
@@ -52,9 +54,9 @@ exec rep "$0" "$@"
 	   (def (nth 2 form))
 	   (keys (nthcdr 3 form)))
        ;; XXX beautify name and add it?
-       (if (memq #:doc keys)
-	   (register (cadr (memq #:doc keys)))
-	 (let ((key (or (cadr (memq #:doc-key keys))
+       (if (get-key #:doc keys)
+	   (register (cadr (get-key #:doc keys)))
+	 (let ((key (or (cadr (get-key #:doc-key keys))
 			(and (symbolp def)
 			     (doc-file-value-key
 			      def (fluid current-module))))))
@@ -62,7 +64,7 @@ exec rep "$0" "$@"
 	     (let ((doc (doc-file-ref key)))
 	       (when doc
 		 (register doc))))))
-       (let ((type (car (cdr (memq #:type keys)))))
+       (let ((type (car (cdr (get-key #:type keys)))))
 	 (when type
 	   (scan type)))))
 
