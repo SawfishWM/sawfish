@@ -280,7 +280,7 @@
 		 (get-visible-window-edges
 		  #:with-ignored-windows move-snap-ignored-windows
 		  #:windows-to-ignore (list move-resize-window)
-		  #:include-root t)))))
+		  #:include-heads t)))))
 
   ;; called each pointer motion event during move/resize
   (define (motion)
