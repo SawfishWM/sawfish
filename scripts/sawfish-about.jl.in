@@ -52,12 +52,9 @@ exec rep "$0" "$@"
   (define logo "sawfish-logo.png")
 
   (let* ((hbox (gtk-hbox-new t 0))
-	 (ref1 (make-url-widget "http://iwc.org/volunteers/archives/Oct98/spec_pg0.htm"
-				(_ "Protect the sawfish")))
-	 (ref2 (make-url-widget "http://sawmill.sourceforge.net/"
+	 (ref (make-url-widget "http://sawmill.sourceforge.net/"
 				(_ "Sawfish homepage"))))
-    (gtk-box-pack-start hbox ref2)
-    (gtk-box-pack-start hbox ref1)
+    (gtk-box-pack-start hbox ref)
     (gtk-widget-show-all hbox)
     (let ((widget (about-dialog title version copyright
 				authors comments
