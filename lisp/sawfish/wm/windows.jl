@@ -85,7 +85,7 @@ means outside the left window edge.")
   (defvar dock-window-properties
     '(window-list-skip cycle-skip fixed-position focus-click-through
       avoid no-history never-iconify never-maximize sticky
-      stick-viewport placed)
+      sticky-viewport placed)
     "List of properties set (to true) on windows marked as docks.")
 
 
