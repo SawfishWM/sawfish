@@ -1,0 +1,597 @@
+;; -*- lisp -*-
+
+;; OPTIONS
+;; =======
+
+;; This file lists all of sawfish's low-level configuration options,
+;; including both those that can be set through the UI can those that
+;; can't. For most options it also shows their default value, or how
+;; that value is initially computed.
+
+;; To use this file, either copy it to ~/.sawfishrc and uncomment and
+;; change the lines containing the options you want to modify, or just
+;; use it as a reference when editing your own .sawfishrc
+
+;; Note that some of the pages of options start with a commented out
+;; "require" statement. If you change any of those options you'll also
+;; need to uncomment that require statement, to ensure that the module
+;; implementing the options gets loaded.
+
+;; Please send any comments to the sawfish mailing list:
+;; <sawfish@lists.eazel.com>
+
+;; Good luck!
+
+;; $Id$
+
+
+;; window animation options
+
+;;  (define-special-variable default-window-animator 'none
+;;    "The default window animation mode")
+
+;;  (define-special-variable anim-outline-icon-coords
+;;    (cons (screen-width) (screen-height))
+;;    "A cons cell giving the coordinates of where the minimization animations
+;;should appear to minimize the window to.")
+
+;;  (define-special-variable anim-outline-steps 16)
+;;  (define-special-variable anim-outline-delay 20)
+
+
+;; customization options
+
+;;  (define-special-variable customize-program "sawfish-ui"
+;;    "Location of the program implementing sawfish's configuration
+;;interface.")
+
+;;  (define-special-variable customize-group-opt "--group")
+
+;;  (define-special-variable customize-show-symbols nil
+;;    "Show variable names of each customization option.")
+
+;;  (define-special-variable customize-command-classes '(default)
+;;    "Also include commands of these classes the key bindings panel.")
+ 
+
+;; focus options
+
+;;  (define-special-variable focus-mode 'click
+;;     "When does the mouse pointer affect the input focus.")
+
+;;  (define-special-variable focus-click-through t
+;;    "Click-to-focus mode passes the click through to the application.")
+
+;;  (define-special-variable focus-dont-push nil
+;;    "When true, focusing a window doesn't change it's position in the
+;;stack of most-recently focused windows.")
+
+;;  (define-special-variable focus-ignore-pointer-events nil
+;;    "When true, pointer in/out events don't cause focus changes.")
+
+;;  (define-special-variable focus-windows-when-mapped t
+;;    "Focus application windows when they first appear.")
+
+;;  (define-special-variable ignore-window-input-hint nil
+;;    "Give focus to windows even when they haven't asked for it.")
+
+
+;; window frame (theme) options
+
+;;  (define-special-variable default-frame-style nil
+;;    "Default frame style")
+
+;;  (define-special-variable reload-themes-when-changed t
+;;    "Automatically reload themes when they are updated.")
+
+;;  (define-special-variable frame-type-fallback-alist
+;;    '((transient . default)
+;;      (shaped . default)
+;;      (shaped-transient . shaped)
+;;      (shaded . shaped)
+;;      (shaded-transient . shaped-transient)
+;;      (icon . shaped-transient)
+;;      (dock . icon))
+;;    "Frame type fallbacks.")
+
+;;  (define-special-variable decorate-transients nil
+;;    "Decorate dialog windows similarly to application windows.")
+
+;;  (define-special-variable theme-update-interval 60
+;;    "Number of seconds between checking if theme files have been modified.")
+
+;;  (define-special-variable user-theme-directory "~/.sawfish/themes"
+;;    "Directory containing user-local themes.")
+
+;;  (define-special-variable system-theme-directory (expand-file-name
+;;				  "../themes" sawfish-lisp-lib-directory)
+;;    "Directory containing themes from the current sawfish version.")
+
+;;  (define-special-variable site-theme-directory (expand-file-name
+;;				"../../themes" sawfish-lisp-lib-directory)
+;;    "Directory containing system-wide themes.")
+
+;;  (define-special-variable theme-load-path (list user-theme-directory
+;;				site-theme-directory
+;;				system-theme-directory)
+
+;;  (define-special-variable themes-are-gaolled t
+;;    "When non-nil themes are assumed to be malicious.")
+
+;;  (define-special-variable sawfish-themer-program "sawfish-themer")
+
+;;  (define-special-variable default-font nil
+;;    "Default font.")
+
+;;  (define-special-variable default-bevel-percent nil
+;;    "Bevel intensity as a percentage.")
+
+
+;; menu options
+
+;;  (define-special-variable menus-include-shortcuts nil
+;;    "Display key-binding information in menu items.")
+
+;;  (define-special-variable menu-program
+;;    (expand-file-name "sawfish-menu" sawfish-exec-directory)
+;;    "Location of the program implementing sawfish's menu interface.")
+
+;;  (define-special-variable menu-program-stays-running t
+;;    "When non-nil, the menu program is never stopped. If a number,
+;;then this is taken as the number of seconds to let the process hang
+;;around unused before killing it.")
+
+;;  (define-special-variable window-ops-menu)
+;;  (define-special-variable window-ops-toggle-menu)
+;;  (define-special-variable window-menu)
+;;  (define-special-variable root-menu)
+;;  (define-special-variable apps-menu)
+
+;;  (define-special-variable custom-menu-includes-all-settings t
+;;    "When non-nil, the custom menu includes the `All settings' item.")
+
+
+;; window placement options
+
+;;  (define-special-variable place-window-mode 'top-left
+;;    "Method of placing windows")
+
+;;  (define-special-variable place-transient-mode 'centered-on-parent
+;;    "Method of placing dialog windows")
+
+;;  (define-special-variable ignore-program-positions t
+;;    "Ignore program-specified window placements.")
+
+
+;; window stacking options
+
+
+;; viewport options
+
+;;  (define-special-variable viewport-dimensions '(1 . 1)
+;;    "Size of each virtual workspace.")
+
+;;  (define-special-variable uniconify-to-current-viewport t
+;;    "Windows uniconify to the current viewport.")
+
+;;  (define-special-variable workspace-boundary-mode 'stop
+;;    "How to act when passing the first or last workspace, one of
+;;`stop', `wrap-around' or `keep-going'")
+
+
+;; workspace options
+
+;;  (define-special-variable workspace-send-boundary-mode 'stop
+;;    "How to act when passing the first or last workspace, while
+;;moving a window, one of `stop', `keep-going', `wrap-around'")
+
+;;  (define-special-variable workspace-names '()
+;;    "List of all workspace names. Defines the initial number of workspaces.")
+
+;;  (define-special-variable lock-first-workspace t
+;;    "Preserve outermost empty workspaces in the pager.")
+
+;;  (define-special-variable static-workspace-menus)
+
+
+;; grow/pack options
+
+;;  (define-special-variable grow-is-maximize t
+;;    "Whether growing is considered to be maximization.  When you turn
+;;this on, you can use `unmaximize-window' or something similar to get
+;;back to the original size.")
+
+;;  (define-special-variable pack-warp-pointer 'maybe
+;;    "Whether and how to move the pointer when packing windows.
+;;`maybe' means that the pointer is moved along with the window, if the
+;;pointer was within the window area before packing. `always' warps the
+;;pointer to the center of the window if it isn't already in the
+;;window, then does like `maybe'.  `never' means not to warp the
+;;pointer.")
+
+;;  (define-special-variable grow-pack-bump-obscured nil
+;;    "Whether to bump into fully obscured windows when growing or
+;;packing windows.")
+
+;;  (defcustom grow-pack-bump-other-depth 'always
+;;    "Whether to bump into windows on a different depth when growing
+;;or packing windows. `maybe' means only avoided windows in other
+;;depths.")
+
+;;  (define-special-variable grow-pack-bump-ignored t
+;;    "Whether to bump into ignored windows when growing or packing.")
+
+;;  (define-special-variable grow-pack-menu)
+
+
+;; window cycling options
+
+;;  (define-special-variable cycle-show-window-names t
+;;    "Display window names and icons while cycling through windows.")
+
+;;  (define-special-variable cycle-include-iconified t
+;;    "Include iconified windows when cycling.")
+
+;;  (define-special-variable cycle-all-workspaces nil
+;;    "Include windows on all workspaces when cycling.")
+
+;;  (define-special-variable cycle-all-viewports nil
+;;    "Include windows on all viewports when cycling.")
+
+;;  (define-special-variable cycle-raise-windows t
+;;    "Raise windows while they're temporarily selected during cycling.")
+
+
+;; move/resize options
+
+;;  (define-special-variable move-outline-mode 'opaque
+;;    "How windows being moved are animated, either `opaque' or `box'")
+
+;;  (define-special-variable resize-outline-mode 'opaque
+;;    "How windows being resized are animated, either `opaque' or `box'")
+
+;;  (define-special-variable move-resize-raise-window nil
+;;    "Raise windows when they are moved or resized.")
+
+;;  (define-special-variable move-show-position nil
+;;    "Show current position of windows while moving.")
+
+;;  (define-special-variable resize-show-dimensions t
+;;    "Show current dimensions of windows while resizing.")
+
+;;  (define-special-variable resize-edge-mode 'border-grab
+;;    "How to choose window edges when resizing. One of `region',
+;;`border', `grab', `border-grab'")
+
+;;  (define-special-variable move-snap-epsilon 12
+;;    "Distance in pixels before window edges align with each other.")
+
+;;  (define-special-variable move-snap-mode 'resistance
+;;    "How to snap together window edges, one of `magnetism',
+;;`resistance', or `attraction'.")
+
+;;  (define-special-variable move-snap-ignored-windows nil
+;;    "Snap to otherwise-ignored windows.")
+
+;;  (define-special-variable move-resize-inhibit-configure nil
+;;    "Only update window contents after it has stopped moving.")
+
+;;  (define-special-variable move-cursor-shape (default-cursor))
+;;  (define-special-variable resize-cursor-shape (default-cursor))
+
+
+;; audio options
+
+;;  (define-special-variable audio-events-enabled nil
+;;    "Play sound effects for window events.")
+
+;;  (define-special-variable audio-for-ignored-windows nil
+;;    "Play sound effects for unmanaged windows.")
+
+;;  (define-special-variable audio-events-alist)
+
+;;  (define-special-variable audio-load-path
+;;    (list "~/.sawfish/sounds"
+;;	  (or (getenv "SAWFISHSOUNDSDIR")
+;;	      (expand-file-name "../sounds" sawfish-lisp-lib-directory))
+;;	  (or (getenv "SAWFISHSITESOUNDSDIR")
+;;	      (expand-file-name "../../sounds" sawfish-lisp-lib-directory))
+;;	  ".")
+;;    "List of directories to search for sound samples.")
+
+;;  (define-special-variable play-sample-program nil
+;;    "The program used to play audio samples. If unset, built-in
+;;support for ESD is used.")
+
+
+;; edge flip options
+
+;;  (require 'sawfish.wm.ext.edge-flip)
+
+;;  (define-special-variable edge-flip-enabled nil
+;;    "Select the next desktop when the pointer hits screen edge.")
+
+;;  (define-special-variable edge-flip-type 'workspace
+;;    "Control what hitting the screen edge selects, workspace or viewport.")
+
+;;  (define-special-variable edge-flip-only-when-moving nil
+;;    "Only flip when interactively moving a window.")
+
+;;  (define-special-variable edge-flip-delay 250
+;;    "Milliseconds to delay before edge flipping.")
+
+
+;; error handling options
+
+;;  (require 'sawfish.wm.ext.error-handler)
+
+;;  (define-special-variable error-handler-beep t
+;;    "Beep when errors occur.")
+
+;;  (define-special-variable error-destination 'standard-error
+;;    "Where to display error messages; one of nowhere, screen, or
+;;standard-error")
+
+
+;; tooltips options
+
+;;  (require 'sawfish.wm.ext.tooltips)
+
+;;  (define-special-variable tooltips-enabled nil
+;;    "Display tooltips for window frames.")
+
+;;  (define-special-variable tooltips-show-doc-strings nil
+;;    "Show full documentation in tooltips.")
+
+;;  (define-special-variable tooltips-delay 500
+;;    "Number of milliseconds before displaying tooltips.")
+
+;;  (define-special-variable tooltips-timeout-delay 5000
+;;    "Number of milliseconds before removing tooltips.")
+
+;;  (define-special-variable tooltips-font nil
+;;    "Font used to display tooltips, or nil for default.")
+
+;;  (define-special-variable tooltips-background-color "grey85"
+;;    "Color used for the tooltips background")
+
+;;  (define-special-variable tooltips-foreground-color "black"
+;;    "Color used for the tooltips foreground")
+
+
+;; window history options
+
+;;  (require 'sawfish.wm.ext.window-history)
+
+;;  (define-special-variable window-history-file "~/.sawfish/window-history"
+;;    "Name of the file used to store persistent window state.")
+
+;;  (define-special-variable window-history-states
+;;    '(sticky ignored never-focus type maximized frame-style
+;;      cycle-skip window-list-skip)
+;;    "List of states in window-state-change-hook that should be tracked.")
+;;  
+;;  (define-special-variable window-history-key-property 'WM_CLASS
+;;    "Window property matched on.")
+
+;;  (define-special-variable window-history-menu)
+
+;;  (define-special-variable window-history-auto-save-position t
+;;    "Automatically remember window positions.")
+
+;;  (define-special-variable window-history-auto-save-dimensions nil
+;;    "Automatically remember window sizes.")
+
+;;  (define-special-variable window-history-auto-save-state nil
+;;    "Automatically remember other window attributes.")
+
+;;  (define-special-variable window-history-ignore-transients t
+;;    "Don't automatically remember details of transient windows.")
+
+
+;; auto raise optiosn
+
+;;  (require 'sawfish.wm.ext.auto-raise)
+
+;;  (define-special-variable raise-windows-on-focus nil
+;;    "Raise windows when they are focused.")
+
+;;  (define-special-variable raise-window-timeout 500
+;;    "Delay in milliseconds until focused windows are raised.")
+
+
+;; shade-hover options
+
+;;  (require 'sawfish.wm.ext.shade-hover)
+
+;;  (define-special-variable shade-hover-mode nil
+;;    "Enable shade-hover mode.")
+
+;;  (define-special-variable shade-hover-delay 250
+;;    "Delay in milliseconds before unshading windows.")
+
+;;  (defcustom shade-hover-raise nil
+;;    "Raise windows when they are unshaded.")
+
+
+;; gnome menus options
+
+;;  (require 'sawfish.wm.gnome.menus)
+
+;;  (define-special-variable gnome-menu-lang '()
+;;    "List of language codes used when constructing GNOME menus.")
+
+;;  (define-special-variable gnome-menu-roots (list (expand-file-name
+;;				  "apps" gnome-share-directory)
+;;				 "/etc/X11/applnk"	;on RedHat systems
+;;				 "~/.gnome/apps")
+;;    "List of directories to read GNOME menu entries from.")
+
+
+;; smart placement modes
+
+;;  (define-special-variable sp-avoided-windows-weight 100)
+;;  (define-special-variable sp-normal-windows-weight 1)
+
+;;  (define-special-variable sp-padding 4
+;;    "Try to leave at least this many pixels between window edges in
+;;first/best-fit.")
+
+;;  (define-special-variable sp-max-points 10
+;;    "The maximum number of points to keep in each grid dimension.")
+
+;;  (define-special-variable sp-max-queued-events 256
+;;    "Only when there's fewer X events than this pending do we try to
+;;do smart placement.")
+
+
+;; configure-request handler
+
+;;  (define-special-variable configure-auto-gravity t
+;;    "Automatically select window gravity from position on screen.")
+
+;;  (define-special-variable configure-ignore-stacking-requests nil
+;;    "Ignore requests from applications to change window stacking.")
+
+
+;; original (obsolete) gnome hints
+
+;;  ;; this is needed since the gnome tasklist applet doesn't honour
+;;  ;; the _WIN_HIDDEN property (?)
+;;  (define-special-variable gnome-ignored-windows-in-client-list t)
+
+
+;; iconify options
+
+;;  (define-special-variable focus-windows-on-uniconify nil
+;;    "Windows are focused after being minimized.")
+
+;;  (define-special-variable raise-windows-on-uniconify t
+;;    "Windows are raised after being unminimized.")
+
+;;  (define-special-variable uniconify-to-current-workspace t
+;;    "Move windows to the current workspace when they are unminimized.")
+
+;;  (define-special-variable iconify-ignored nil
+;;    "Unmanaged windows may be iconified.")
+
+;;  (define-special-variable iconify-group-mode 'transients
+;;    "When minimizing a window also remove these. One of none,
+;;transients, or group")
+
+;;  (define-special-variable uniconify-group-mode 'transients
+;;    "When unminimizing a window also restore these. One of none,
+;;transients, or group.")
+
+;;  (define-special-variable raise-windows-when-unshaded nil
+;;    "Raise windows when they are unshaded.")
+
+;;  (defcustom unshade-selected-windows nil
+;;    "Unshade selected windows.")
+
+
+;; maximize options
+
+;;  (define-special-variable maximize-always-expands nil
+;;    "Maximizing a window in one dimension must increase the size of
+;;that dimension.")
+
+;;  (define-special-variable maximize-raises t
+;;    "Raise windows when they are maximized.")
+
+;;  (define-special-variable maximize-ignore-when-filling t
+;;    "Let unmanaged windows be overlapped when filling windows.")
+
+;;  (define-special-variable maximize-avoid-avoided t
+;;    "Don't cover `avoided' windows when maximizing.")
+
+;;  (define-special-variable move-lock-when-maximized t
+;;    "Lock position and size while windows are maximized.")
+
+
+;; Miscellaneous options
+
+;;  (define-special-variable transients-above 'parents
+;;    "Keep transient windows stacked above")
+
+;;  (define-special-variable dont-avoid-ignored t
+;;    "When non-nil, ignored windows aren't avoided by default.")
+
+;;  (define-special-variable avoid-by-default nil
+;;    "When non-nil, any unspecified windows are avoided by default.")
+
+;;  (define-special-variable move-cursor-increment 16
+;;    "Number of pixels to move pointer in `move-cursor-' commands.")
+
+;;  (define-special-variable size-window-def-increment 16
+;;    "Default increment for size-window commands (when the window
+;;doesn't specify it's own increments).")
+
+;;  (define-special-variable slide-window-increment 16
+;;    "Number of pixels to move window in `slide-' commands.")
+
+;;  (define-special-variable warp-to-window-offset (cons -1 -1)
+;;    "Offset (%) from window edges when warping pointer. A negative
+;;number means outside the left window edge.")
+
+;;  (define-special-variable warp-to-window-enabled nil
+;;    "When false, disable warping the cursor to windows.")
+;;  (define-special-variable uniquify-name-format "%s [%d]"
+;;    "Format to create unique window names.")
+
+;;  (define-special-variable dock-window-properties
+;;    '(window-list-skip cycle-skip fixed-position focus-click-through
+;;      avoid no-history never-iconify never-maximize sticky
+;;      stick-viewport placed)
+;;    "List of properties set (to true) on windows marked as docks.")
+
+;;  (define-special-variable select-window-cursor-shape 'crosshair
+;;    "Cursor used by select-window function.")
+
+;;  (define-special-variable pointer-motion-threshold 2
+;;    "Distance in pixels pointer must move before generating motion events.")
+
+;;  (define-special-variable wm-modifier-value (wm-modifier)
+;;    "Modifier key(s) used for default window manager shortcuts.")
+
+;;  (define-special-variable transients-are-group-members t
+;;    "Group transient windows with their parents.")
+
+;;  (define-special-variable persistent-group-ids '()
+;;    "List of symbols naming window groups that always exist.")
+
+;;  (define-special-variable xterm-program "xterm"
+;;    "The program launched by the `xterm' command."(
+
+;;  (define-special-variable xterm-args ""
+;;    "Arguments given to the `xterm' command.")
+
+;;  (define-special-variable display-url-command
+;;    "( netscape -remote 'openUrl(%s)' || netscape '%s' ) &"
+;;    "Shell command used to direct a web browser to load a url. Any
+;;`%s' substrings will be replaced by the name of the url.")
+
+
+;; prompt options
+
+;;  (define-special-variable prompt-max-display 20
+;;    "Maximum number of completions to display under the input string.")
+
+;;  (define-special-variable prompt-word-regexp "[0-9a-z_]"
+;;    "Regexp that determines which characters are to be considered
+;;part of a word when moving.")
+
+;;  (define-special-variable prompt-file-exclude
+;;    "\\.(o|jlc|x)$|~$|^#.*#$|^\\.\\.?$"
+;;    "A regexp, if it matches the file being considered for
+;;completion, the file is rejected.")
+
+;;  (define-special-variable prompt-list-fold-case nil
+;;    "Whether prompt-from-list should ignore case.")
+
+;;  (define-special-variable prompt-window-position
+;;    (cons (- (quotient (screen-width) 2) 200) -200)
+;;    "A cons cell defining the screen position at which the `prompt'
+;;window is displayed. See the `display-message' function for more
+;;details.")
+
