@@ -46,6 +46,15 @@ DEFSYM(override_keymap, "override-keymap");
 DEFSYM(unbound_key_hook, "unbound-key-hook");
 DEFSYM(keymap, "keymap");
 
+DEFSYM(async_pointer, "async-pointer");
+DEFSYM(async_keyboard, "async-keyboard");
+DEFSYM(sync_pointer, "sync-pointer");
+DEFSYM(sync_keyboard, "sync-keyboard");
+DEFSYM(replay_pointer, "replay-pointer");
+DEFSYM(replay_keyboard, "replay-keyboard");
+DEFSYM(sync_both, "sync-both");
+DEFSYM(async_both, "async-both");
+
 /* The X modifiers being used for Meta and Alt */
 static u_long meta_mod, alt_mod, num_lock_mod;
 
@@ -853,13 +862,42 @@ grab will be released first.
 	long e_mask = (rep_INTP(mask) ? rep_INT(mask)
 		       : get_event_mask (current_x_event->type));
 	if (current_x_event->type == ButtonPress)
-	    XUngrabPointer (dpy, CurrentTime);
+	    XUngrabPointer (dpy, last_event_time);
 	XSendEvent (dpy, w, prop == Qnil ? False : True,
 		    e_mask, current_x_event);
 	return Qt;
     }
     else
 	return Qnil;
+}
+
+DEFUN("allow-events", Fallow_events, Sallow_events, (repv mode), rep_Subr1) /*
+::doc:Sallow-events::
+allow-events MODE
+::end:: */
+{
+    int x_mode;
+    if (mode == Qasync_pointer)
+	x_mode = AsyncPointer;
+    else if (mode == Qasync_keyboard)
+	x_mode = AsyncKeyboard;
+    else if (mode == Qsync_pointer)
+	x_mode = SyncPointer;
+    else if (mode == Qsync_keyboard)
+	x_mode = SyncKeyboard;
+    else if (mode == Qreplay_pointer)
+	x_mode = ReplayPointer;
+    else if (mode == Qreplay_keyboard)
+	x_mode = ReplayKeyboard;
+    else if (mode == Qsync_both)
+	x_mode = SyncBoth;
+    else if (mode == Qasync_both)
+	x_mode = AsyncBoth;
+    else
+	return rep_signal_arg_error (mode, 1);
+
+    XAllowEvents (dpy, x_mode, last_event_time);
+    return Qt;
 }
 
 DEFUN("last-event", Flast_event, Slast_event, (void), rep_Subr0) /*
@@ -1042,13 +1080,13 @@ grab_event (Window grab_win, repv ev)
 	if (translate_event_to_x_key (ev, &code, &state))
 	{
 	    XGrabKey (dpy, code, state, grab_win,
-		      False, GrabModeAsync, GrabModeAsync);
+		      False, GrabModeSync, GrabModeSync);
 	    XGrabKey (dpy, code, state | LockMask, grab_win,
-		      False, GrabModeAsync, GrabModeAsync);
+		      False, GrabModeSync, GrabModeSync);
 	    XGrabKey (dpy, code, state | num_lock_mod, grab_win,
-		      False, GrabModeAsync, GrabModeAsync);
+		      False, GrabModeSync, GrabModeSync);
 	    XGrabKey (dpy, code, state | LockMask | num_lock_mod, grab_win,
-		      False, GrabModeAsync, GrabModeAsync);
+		      False, GrabModeSync, GrabModeSync);
 	}
 	break;
 
@@ -1057,16 +1095,16 @@ grab_event (Window grab_win, repv ev)
 	{
 	    XGrabButton (dpy, code, state, grab_win,
 			 False, ButtonPressMask | ButtonReleaseMask,
-			 GrabModeAsync, GrabModeAsync, None, None);
+			 GrabModeSync, GrabModeSync, None, None);
 	    XGrabButton (dpy, code, state | LockMask, grab_win,
 			 False, ButtonPressMask | ButtonReleaseMask,
-			 GrabModeAsync, GrabModeAsync, None, None);
+			 GrabModeSync, GrabModeSync, None, None);
 	    XGrabButton (dpy, code, state | num_lock_mod, grab_win,
 			 False, ButtonPressMask | ButtonReleaseMask,
-			 GrabModeAsync, GrabModeAsync, None, None);
+			 GrabModeSync, GrabModeSync, None, None);
 	    XGrabButton (dpy, code, state | LockMask | num_lock_mod, grab_win,
 			 False, ButtonPressMask | ButtonReleaseMask,
-			 GrabModeAsync, GrabModeAsync, None, None);
+			 GrabModeSync, GrabModeSync, None, None);
 	}
     }
 }
@@ -1203,6 +1241,7 @@ keys_init(void)
     rep_ADD_SUBR(Scurrent_event);
     rep_ADD_SUBR(Scurrent_event_window);
     rep_ADD_SUBR(Sproxy_current_event);
+    rep_ADD_SUBR(Sallow_events);
     rep_ADD_SUBR(Slast_event);
     rep_ADD_SUBR(Sevent_name);
     rep_ADD_SUBR(Slookup_event);
@@ -1210,6 +1249,15 @@ keys_init(void)
     rep_ADD_SUBR(Ssearch_keymap);
     rep_ADD_SUBR(Skeymapp);
     rep_ADD_SUBR(Seventp);
+
+    rep_INTERN(async_pointer);
+    rep_INTERN(async_keyboard);
+    rep_INTERN(sync_pointer);
+    rep_INTERN(sync_keyboard);
+    rep_INTERN(replay_pointer);
+    rep_INTERN(replay_keyboard);
+    rep_INTERN(sync_both);
+    rep_INTERN(async_both);
 
     if (rep_SYM(Qbatch_mode)->value == Qnil)
 	find_meta ();
