@@ -162,9 +162,10 @@ extern repv Fmove_resize_window_to (repv win, repv x, repv y, repv w, repv h);
 extern repv Fgrab_server (void);
 extern repv Fungrab_server (void);
 extern repv Fserver_grabbed_p (void);
-extern repv Fgrab_pointer (repv win, repv cursor);
+extern repv Fgrab_pointer (repv win, repv cursor, repv ptr_sync,
+			   repv kbd_sync, repv confine_to);
 extern repv Fungrab_pointer (void);
-extern repv Fgrab_keyboard (repv win);
+extern repv Fgrab_keyboard (repv win, repv ptr_sync, repv kbd_sync);
 extern repv Fungrab_keyboard (void);
 extern repv Fdraw_window_outline (repv mode, repv x, repv y,
 				  repv width, repv height);
