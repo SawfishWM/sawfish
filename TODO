@@ -24,9 +24,6 @@ Outstanding bugs
     unfocused, but without any other window (or our no_focus_window)
     being focused afterwards.. ]
 
-  ! It's not possible to compile sawmill-ui.jl without an X connection
-    (it requires 'gtk, which then calls gtk_init (), ...)
-
   ! ICCCM says we should not passive grab on the client windows, but on
     our frames instead
 
@@ -81,6 +78,11 @@ Outstanding bugs
   ! automatic workspace merging doesn't seem to work. when i remove the
     last window in a workspace, i am taken to another with windows in
     it, but the empty workspace is not removed
+
+  ! if i press M-button1 (move-window-interactively) but not move the
+    window and _hold_ button1, it gets raised, but the window
+    decoration is not drawn, only if i move the window or release the
+    button
 
   + features can't be both enabled via customization and demand-loaded
 
@@ -243,30 +245,8 @@ General tasks
 
   - Internationalisation
 
-    This should be quite easy, since most strings are stored in the
-    documentation databases anyway. So we just need to provide multiple
-    DOC files, and some tool to aid in the translation/construction
-    process (something like PACE's HMCL parser?) We could probably make
-    this tool compatible with the usual .po files
-
-    There are still some strings that aren't already handled as doc
-    strings (i.e. menu labels, errors, a few things in sawmill-ui).
-    These can also be stored in the DOC file. All keys in the DOC file
-    currently start with either `S' (subr) or `V' (variable). So just
-    add a new prefix `T' for text string, then use the original string
-    as the rest of the key
-
-    This needs to be in rep really. Add a (gettext ID STRING) macro
-    that interprets to STRING. The compiler adds STRING to the doc file
-    under key ID, inserts code to fetch it back [how can we lose the
-    annoying ID parameter?]
-
-    Another option is to have `(defstring VAR STRING)' which resolves
-    all strings when the module is loaded, but then you have to declare
-    all strings up-front, which would be _really_ annoying
-
-    Also, what about the "%1$s" style printf formatting. rep's format
-    function should be extended to handle this syntax
+    support is mostly there, just need to handle message catalogues and
+    require gettext when necessary (i.e. $LANG is set and not `C')
 
 
 Long term ideas

@@ -1,3 +1,17 @@
+1999-11-17  John Harper  <john@dcs.warwick.ac.uk>
+
+	* Makefile.in: set REP_GTK_DONT_INITIALIZE=1 when compiling
+	scripts
+
+	* events.c (map_request): only map the client window if it's
+	client_unmapped bit is clear
+
+	* windows.c (Fhide_window, Fshow_window): only map/unmap the
+	frame if it exists
+
+	* keys.c (lookup_event_binding): if a mouse event, _never_
+	look in the focus window by default
+
 1999-11-15  John Harper  <john@dcs.warwick.ac.uk>
 
 	* windows.c (Fset_window_frame): each window frame must be a

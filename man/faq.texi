@@ -59,6 +59,12 @@ binds the event @kbd{C-M-ESC} to the Lisp code to start an @code{xterm}
 subprocess
 
 
+@item How do I make clicking on a window raise the window?
+
+Bind the event @kbd{Button1-Click1} in the @code{window-keymap} to the
+@code{raise-window-and-pass-through-click} command
+
+
 @item How do I redefine the @samp{Applications} menu?
 
 See the @samp{Popup Menus} node in the Info manual (@pxref{Popup
