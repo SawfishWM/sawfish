@@ -897,21 +897,13 @@ configure_request (XEvent *ev)
 		alist = Fcons (Fcons (Qstack, stack_data), alist);
 	    }
 	}
-	if ((mask & CWX) || (mask & CWY))
+	if ((mask & CWX) && (mask & CWY))
 	{
-	    int x = w->attr.x, y = w->attr.y;
-	    if (mask & CWX)
-		x = (ev->xconfigurerequest.x
-		     + (w->reparented ? w->frame_x : 0));
-	    if (ev->xconfigurerequest.value_mask & CWY)
-		y = (ev->xconfigurerequest.y
-		     + (w->reparented ? w->frame_y : 0));
-	    if (x != w->attr.x || y != w->attr.y)
-	    {
-		alist = Fcons (Fcons (Qposition,
-				      Fcons (rep_MAKE_INT (x),
-					     rep_MAKE_INT (y))), alist);
-	    }
+	    int x = ev->xconfigurerequest.x;
+	    int y = ev->xconfigurerequest.y;
+	    alist = Fcons (Fcons (Qposition,
+				  Fcons (rep_MAKE_INT (x),
+					 rep_MAKE_INT (y))), alist);
 	}
 	if ((mask & CWWidth) || (mask & CWHeight))
 	{
