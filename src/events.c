@@ -166,6 +166,8 @@ key_press (XEvent *ev)
 
 	eval_input_event (context_map);
     }
+
+    XAllowEvents (dpy, AsyncKeyboard, last_event_time);
 }
 
 static void
@@ -241,6 +243,8 @@ button_press (XEvent *ev)
 	rep_POPGC;
 	rep_throw_value = old_throw;
     }
+
+    XAllowEvents (dpy, AsyncPointer, last_event_time);
 }
 
 static void
@@ -550,7 +554,7 @@ static void
 focus_in (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xfocus.window);
-    if (w != 0)
+    if (w != 0 && w->visible)
     {
 	XInstallColormap (dpy, w->attr.colormap);
 	focus_window = w;
