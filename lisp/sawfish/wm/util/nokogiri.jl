@@ -93,12 +93,12 @@
 	((program-name)
 	 (setq type 'program)))
       
-      (nconc (list ':name symbol
-		   ':spec type
-		   ':value value)
-	     (and dep (list ':depends dep))
-	     (and doc (list ':doc doc))
-	     (and user-level (list ':user-level user-level)))))
+      (nconc (list #:name symbol
+		   #:type type
+		   #:value value)
+	     (and dep (list #:depends dep))
+	     (and doc (list #:doc doc))
+	     (and user-level (list #:user-level user-level)))))
 
   (define (nokogiri-report-slots names)
     (mapcar nokogiri-report-slot names))
@@ -113,7 +113,7 @@
 			     (if (atom x)
 				 x
 			       (list (car x) (cadr x)))) (cddr group)))
-	     (and layout (list ':layout layout)))))
+	     (and layout (list #:layout layout)))))
 
   (define (nokogiri-apply-changes changes)
     (mapc (lambda (cell)
