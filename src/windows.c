@@ -38,6 +38,7 @@ DEFSYM(place_window_hook, "place-window-hook");
 DEFSYM(placed, "placed");
 DEFSYM(after_framing_hook, "after-framing-hook");
 DEFSYM(after_initialization_hook, "after-initialization-hook");
+DEFSYM(remove_window_hook, "remove-window-hook");
 
 /* for visibility-notify-hook */
 DEFSYM(fully_obscured, "fully-obscured");
@@ -379,10 +380,10 @@ add_window (Window id)
 	else
 	    emit_pending_destroys ();
 
-	if (w->id != 0 && !initialising)
+	if (w->id != 0)
 	{
 	    repv tem = Fwindow_get (rep_VAL(w), Qplaced);
-	    if (tem && tem == Qnil)
+	    if (initialising || (tem && tem == Qnil))
 	    {
 		/* ..then the place-window-hook.. */
 		rep_PUSHGC(gc_win, win);
@@ -421,6 +422,9 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 	{
 	    grab_window_events (w, FALSE);
 	    remove_window_frame (w);
+
+	    /* Restore original border width of the client */
+	    XSetWindowBorderWidth (dpy, w->id, w->attr.border_width);
 	}
 
 	if (from_error == Qnil)
@@ -474,7 +478,6 @@ emit_pending_destroys (void)
 	{
 	    if (w->id == 0 && !w->destroyed)
 	    {
-		pending_destroys--;
 		w->destroyed = 1;
 		Fcall_window_hook (Qdestroy_notify_hook,
 				   rep_VAL(w), Qnil, Qnil);
@@ -488,6 +491,7 @@ emit_pending_destroys (void)
 	    }
 	}
     }
+    pending_destroys = 0;
 }
 
 
@@ -1441,6 +1445,7 @@ windows_init (void)
     rep_INTERN(placed);
     rep_INTERN_SPECIAL(after_framing_hook);
     rep_INTERN_SPECIAL(after_initialization_hook);
+    rep_INTERN_SPECIAL(remove_window_hook);
 
     rep_INTERN(fully_obscured);
     rep_INTERN(partially_obscured);
@@ -1490,9 +1495,14 @@ void
 windows_kill (void)
 {
     Lisp_Window *w = window_list;
+    repv next;
+    rep_GC_root gc_next;
+    rep_PUSHGC (gc_next, next);
     while (w != 0)
     {
+	next = rep_VAL (w->next);
+	Fcall_window_hook (Qremove_window_hook, rep_VAL (w), Qnil, Qnil);
 	remove_window (w, Qnil, Qnil);
-	w = w->next;
+	w = VWIN (next);
     }
 }
