@@ -1397,12 +1397,17 @@ restack_frame_parts (Lisp_Window *w)
 void
 create_window_frame (Lisp_Window *w)
 {
+    bool need_to_grab = !w->frame;
+
     DB(("create_window_frame (%s)\n", rep_STR(w->name)));
     w->destroy_frame = 0;
     w->focus_change = 0;
     w->rebuild_frame = 0;
     w->property_change = 0;
     list_frame_generator (w);
+
+    if (need_to_grab)
+	grab_window_events (w, TRUE);
 }
 
 /* Destroy the frame of window W. If LEAVE-FRAME-WIN is non-zero, then
