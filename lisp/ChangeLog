@@ -1,3 +1,13 @@
+2000-10-24  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/focus.jl (focus-click): call forget-button-press
+	after either replaying or ungrabbing pointer events (otherwise
+	following events are marked as click2, which won't trigger the
+	bindings in the click-to-focus-map)
+
+	* sawfish/wm/state/gnome.jl (gnome-honour-client-state):
+	magically set never-focus property of gmc-desktop-icon windows
+
 2000-10-23  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/focus.jl: added a hack to the idle-hook to check

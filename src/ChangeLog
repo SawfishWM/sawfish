@@ -1,3 +1,10 @@
+2000-10-24  John Harper  <jsh@eazel.com>
+
+	* events.c: only call leave-notify-hook or enter-notify-hook
+	for NotifyNormal events (i.e. ignore Grab/Ungrab events since
+	they don't really represent the pointer crossing window
+	boundaries)
+
 2000-10-22  John Harper  <jsh@eazel.com>
 
 	* functions.c (Fdisplay_message): new attribute `head . ID'
