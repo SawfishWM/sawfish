@@ -341,7 +341,6 @@ extern repv Fmanaged_windows (void);
 extern repv Fget_window_by_id (repv id);
 extern repv Fstacking_order (void);
 extern repv Fwindow_visibility (repv win);
-extern repv Fwindow_transient_p (repv win);
 extern repv Fwindow_shaped_p (repv win);
 extern repv Fhide_window (repv win);
 extern repv Fshow_window (repv win);

@@ -421,8 +421,6 @@ add_window (Window id)
 	if (!XGetWMNormalHints (dpy, w->id, &w->hints, &supplied))
 	    w->hints.flags = 0;
 	get_window_protocols (w);
-	if (!XGetTransientForHint (dpy, w->id, &w->transient_for_hint))
-	    w->transient_for_hint = 0;
 	if (!XGetWMColormapWindows (dpy, w->id,
 				    &w->cmap_windows, &w->n_cmap_windows))
 	{
@@ -971,20 +969,6 @@ symbols are `fully-obscured', `partially-obscured' or `unobscured'.
 	break;
     }
     return sym;
-}
-
-DEFUN("window-transient-p", Fwindow_transient_p, Swindow_transient_p,
-      (repv win), rep_Subr1) /*
-::doc:sawfish.wm.windows.subrs#window-transient-p::
-window-transient-p WINDOW
-
-Return non-nil if WINDOW is a transient window. The returned value will
-then be the numeric id of its parent window.
-::end:: */
-{
-    rep_DECLARE1(win, WINDOWP);
-    return (VWIN(win)->transient_for_hint
-	    ? rep_MAKE_INT(VWIN(win)->transient_for_hint) : Qnil);
 }
 
 DEFUN("window-urgent-p", Fwindow_urgent_p, Swindow_urgent_p,
@@ -1546,7 +1530,6 @@ windows_init (void)
     rep_ADD_SUBR(Sget_window_by_id);
     rep_ADD_SUBR(Sstacking_order);
     rep_ADD_SUBR(Swindow_visibility);
-    rep_ADD_SUBR(Swindow_transient_p);
     rep_ADD_SUBR(Swindow_urgent_p);
     rep_ADD_SUBR(Swindow_shaped_p);
     rep_ADD_SUBR(Shide_window);
