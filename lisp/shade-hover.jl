@@ -36,7 +36,7 @@
   "Delay in milliseconds before unshading windows."
   :group (focus shade-hover)
   :type number
-  :range (1 . 5000))
+  :range (0 . 5000))
 
 (defcustom shade-hover-raise nil
   "Raise windows when they are unshaded."
