@@ -343,6 +343,10 @@
 
 ;;; init
 
+  (let ((tem (get-command-line-option "--window-history-file" t)))
+    (when tem
+      (setq window-history-file tem)))
+
   (add-hook 'before-add-window-hook window-history-match t)
   (add-hook 'after-move-hook window-history-position-snapshotter)
   (add-hook 'after-resize-hook window-history-dimensions-snapshotter)
