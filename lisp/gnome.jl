@@ -283,7 +283,7 @@
   (add-hook 'unmap-notify-hook gnome-set-client-list)
   (add-hook 'workspace-state-change-hook gnome-set-client-list)
 
-  (add-hook 'before-add-window-hook gnome-honour-client-state t)
+  (add-hook 'before-add-window-hook gnome-honour-client-state)
   (add-hook 'add-window-hook gnome-set-client-state)
   (call-after-state-changed '(sticky shaded maximized ignored stacking)
 			    gnome-set-client-state)
