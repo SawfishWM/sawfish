@@ -38,12 +38,9 @@ DL_DSTS = sawfish/wm/util/gradient.la sawfish/wm/util/flippers.la \
 	  sawfish/wm/util/play-sample.la
 DL_DIRS = sawfish/wm/util
 
-LISP_SRCS := sawmill-menu.jl sawfish-client.jl
-LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
-
 override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(ESD_CFLAGS)
 
-all : sawfish libclient.o $(DL_OBJS) .libexec $(LISP_OBJS) gtk-style
+all : sawfish libclient.o $(DL_OBJS) .libexec gtk-style
 
 sawfish : $(OBJS) $(LIBOBJS)
 	$(rep_LIBTOOL) --mode=link $(CC) -export-dynamic $(LDFLAGS) \
@@ -62,9 +59,6 @@ libclient_.lo : libclient.c
 client.la : client.lo libclient_.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $^ $(X11_LIBS) $(REP_LIBS) $(LIBS)
 
-%.jlc : %.jl
-	$(REP_ENVIRON) rep compiler -f compile-batch $<
-
 gtk-style : gtk-style.c
 	$(CC) $(CPPFLAGS) $(GTK_CFLAGS) $(LDFLAGS) -o $@ $< $(GTK_LIBS) $(LIBS)
 
@@ -73,8 +67,6 @@ install : all installdirs
 	  $(rep_LIBTOOL) --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)${bindir}; \
 	done
 	$(rep_DL_INSTALL) gtk-style $(DESTDIR)${sawfishexecdir}
-	$(INSTALL_SCRIPT) sawmill-menu.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-menu
-	$(INSTALL_SCRIPT) sawfish-client.jlc $(DESTDIR)$(bindir)/sawfish-client
 	$(foreach x,$(DL_DSTS),\
 	  $(rep_LIBTOOL) --mode=install $(INSTALL_PROGRAM) \
 	  $(notdir $(x)) $(DESTDIR)$(sawfishexecdir)/$(dir $(x));)
@@ -87,7 +79,6 @@ uninstall :
 	done
 	rm -f $(DESTDIR)$(bindir)/sawfish-client
 	$(rep_DL_UNINSTALL) $(DESTDIR)${sawfishexecdir}/gtk-style
-	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-menu
 	for dl in $(DL_DSTS); do \
 	  $(rep_LIBTOOL) rm $(DESTDIR)${sawfishexecdir}/$$dl; \
 	done
@@ -104,7 +95,7 @@ clean :
 	rm -f *~ *.o *.lo *.la *.jlc build.h core
 
 realclean : clean
-	rm -f .*.d sawfish sawfish-client Makefile gtk-style
+	rm -f .*.d sawfish sawfish-about.jl Makefile gtk-style
 	rm -rf .libs
 
 -include $(SRCS:%.c=.%.d) $(DL_SRCS:%.c=.%.d)

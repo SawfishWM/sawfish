@@ -1,0 +1,66 @@
+# Makefile.in
+# $Id$
+#
+# Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+#
+# This file is part of sawmill.
+#
+# sawmill is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# sawmill is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with sawmill; see the file COPYING.  If not, write to
+# the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+include ../Makedefs
+
+top_builddir=..
+top_srcdir=@top_srcdir@
+srcdir=@srcdir@
+VPATH=@srcdir@:@top_srcdir@
+
+LISP_SRCS := sawfish-menu.jl sawfish-client.jl sawfish-about.jl
+LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
+
+REP_ENVIRON := $(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp
+
+SUBSTS := -e "s|__lispdir__|$(lispdir)|" \
+	  -e "s|__version__|$(version)|"
+
+G_PIXMAP_DIR = $(GNOMEDIR)/share/pixmaps
+
+%.jlc : %.jl
+	$(REP_ENVIRON) rep compiler -f compile-batch $<
+
+all : $(LISP_OBJS)
+
+sawfish-about.jl : sawfish-about.jl.in
+	sed $(SUBSTS) $< >$@
+
+install :
+	$(INSTALL_SCRIPT) sawfish-menu.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-menu
+	$(INSTALL_SCRIPT) sawfish-client.jlc $(DESTDIR)$(bindir)/sawfish-client
+	$(INSTALL_SCRIPT) sawfish-about.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-about
+	$(INSTALL_DATA) sawfish.png $(DESTDIR)$(G_PIXMAP_DIR)
+
+uninstall :
+	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-menu
+	rm -f $(DESTDIR)${bindir}/sawfish-client
+	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-about
+	rm -f $(DESTDIR)$(G_PIXMAP_DIR)/sawfish.png
+
+installdirs : mkinstalldirs
+	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)/$(sawfishexecdir)
+
+clean :
+	rm -f *~ *.jlc core
+
+realclean : clean
+	rm -f sawfish-about.jl Makefile

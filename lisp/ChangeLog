@@ -1,5 +1,16 @@
 2000-09-01  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawfish/wm/gnome/integration.jl: when adding to the `Help'
+	menu, add an `About GNOME' item
+
+	* sawfish/wm/menus.jl (root-menu): add an `About Sawfish' item
+
+	* sawfish/wm/commands/help.jl (help:about): new command,
+	launches the new `sawfish-about' script
+
+	* sawfish/wm/commands/gnome.jl (gnome-about): new command,
+	launches the `gnome-about' program
+
 	* sawfish/wm/workspace.jl, sawfish/wm/util/groups.jl: tweaked a
 	few doc strings
 

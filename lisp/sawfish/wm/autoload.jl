@@ -182,4 +182,6 @@
 (autoload-command (quote describe-key) (quote sawfish.wm.util.keymap))
 (autoload-command (quote describe-key-to-screen) (quote sawfish.wm.util.keymap))
 (autoload-command (quote quote-event) (quote sawfish.wm.util.keymap))
+(autoload-command (quote gnome-about) (quote sawfish.wm.commands.gnome))
+(autoload-command (quote help:about) (quote sawfish.wm.commands.help))
 ;;; ::autoload-end::
