@@ -253,7 +253,7 @@
 
 ;; commit the current state of the move or resize
 (defun move-resize-apply ()
-  (if (not move-snap-edges)
+  (if (or (eq move-resize-function 'resize) (not move-snap-edges))
       (unless (and (= move-resize-old-x move-resize-x)
 		   (= move-resize-old-y move-resize-y))
 	(move-window-to move-resize-window move-resize-x move-resize-y))
