@@ -63,6 +63,8 @@ extern Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols,
 extern int shape_event_base, shape_error_base;
 extern bool sys_init (char *program_name);
 extern void sys_kill (void);
+extern repv x_atom_symbol (Atom atom);
+extern Window x_win_from_arg (repv arg);
 extern void send_client_message (Window w, Atom a, Time time);
 
 /* from events.c */
@@ -107,6 +109,7 @@ extern void frames_init (void);
 extern void frames_kill (void);
 
 /* from functions.c */
+extern repv Qroot;
 extern repv Fraise_window (repv win);
 extern repv Flower_window (repv win);
 extern repv Fraise_lower_window (repv win);
@@ -126,6 +129,16 @@ extern repv Fdraw_window_outline (repv mode, repv x, repv y,
 				  repv width, repv height);
 extern repv Ferase_window_outline (repv mode, repv x, repv y,
 				   repv width, repv height);
+extern repv Fdelete_x_property (repv win, repv prop);
+extern repv Flist_x_properties (repv win);
+extern repv Fget_x_property (repv win, repv prop);
+extern repv Fset_x_property (repv win, repv prop, repv data,
+			     repv type, repv format);
+extern repv Fsend_client_message (repv win, repv atom);
+extern repv Fcreate_window (repv parent, repv x, repv y,
+			    repv width, repv height);
+extern repv Fx_atom (repv symbol);
+extern repv Fx_atom_name (repv atom);
 extern void functions_init (void);
 
 /* from images.c */
@@ -154,6 +167,7 @@ extern repv Fungrab_keymap (repv map);
 extern repv Fcurrent_event_string (void);
 extern repv Fcurrent_event (void);
 extern repv Fcurrent_event_window (void);
+extern repv Fproxy_current_event (repv win);
 extern repv Flast_event (void);
 extern repv Fevent_name (repv ev);
 extern repv Flookup_event (repv name);
@@ -170,6 +184,7 @@ extern jmp_buf clean_exit_jmp_buf;
 extern repv Qsawmill_directory, Qsawmill_lisp_lib_directory,
     Qsawmill_site_lisp_directory, Qsawmill_exec_directory;
 extern repv Qwindow_error, Qinvalid_pos, Qbad_event_desc;
+extern repv Qbefore_exit_hook;
 extern int main (int argc, char **argv);
 extern void add_hook (repv sym, repv fun);
 
