@@ -74,3 +74,8 @@
 (put 'preallocated-workspaces 'custom-obsolete t)
 (put 'iconify-whole-group 'custom-obsolete t)
 (put 'uniconify-whole-group 'custom-obsolete t)
+
+(define (custom-set-color var value &optional req)
+  (custom-set-typed-variable var value 'color req))
+(define (custom-set-font var value &optional req)
+  (custom-set-typed-variable var value 'font req))
