@@ -50,9 +50,10 @@ enum {
     /* this is used as a placeholder when translating events<->strings,
        it's replaced by the actual meta value */
     EV_MOD_META   = 0x00100000,
+    EV_MOD_ALT    = 0x00200000,
 
     /* Matches any of the modifiers */
-    EV_MOD_ANY    = 0x00200000,
+    EV_MOD_ANY    = 0x00400000,
 
     EV_TYPE_MASK  = 0x000f0000,
     EV_MOD_MASK   = 0x00f0ffff,
