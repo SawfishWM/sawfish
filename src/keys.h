@@ -37,8 +37,10 @@ enum {
     EV_CODE_MOUSE_CLICK1 = 1,
     EV_CODE_MOUSE_CLICK2,
     EV_CODE_MOUSE_MOVE,
-    EV_CODE_MOUSE_UP,
+    EV_CODE_MOUSE_UP1,
     EV_CODE_MOUSE_CLICK3,
+    EV_CODE_MOUSE_UP2,
+    EV_CODE_MOUSE_UP3,
 };
 
 /* The low 16 bits of the MODS is the standard X modifier mask. Bits

@@ -210,6 +210,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
         }
 	else
 	    click_count = 1;
+
 	switch (click_count)
 	{
 	case 2:
@@ -228,7 +229,20 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	goto button;
 
     case ButtonRelease:
-	*code = EV_CODE_MOUSE_UP;
+	switch (click_count)
+	{
+	case 2:
+	    *code = EV_CODE_MOUSE_UP2;
+	    break;
+
+	case 3:
+	    *code = EV_CODE_MOUSE_UP3;
+	    break;
+
+	default:
+	    *code = EV_CODE_MOUSE_UP1;
+	}
+
     button:
 	*mods = xev->xbutton.state & ~all_lock_mask;
 	*mods |= EV_TYPE_MOUSE;
@@ -659,11 +673,14 @@ static struct key_def default_mods[] = {
 };
 
 static struct key_def default_codes[] = {
-    { "Click1",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK1 },
     { "Click",    EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK1 },
+    { "Click1",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK1 },
     { "Click2",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK2 },
     { "Click3",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK3 },
-    { "Off",      EV_TYPE_MOUSE, EV_CODE_MOUSE_UP },
+    { "Off",      EV_TYPE_MOUSE, EV_CODE_MOUSE_UP1 },
+    { "Off1",     EV_TYPE_MOUSE, EV_CODE_MOUSE_UP1 },
+    { "Off2",     EV_TYPE_MOUSE, EV_CODE_MOUSE_UP2 },
+    { "Off3",     EV_TYPE_MOUSE, EV_CODE_MOUSE_UP3 },
     { "Move",     EV_TYPE_MOUSE, EV_CODE_MOUSE_MOVE },
 
     { "SPC",      EV_TYPE_KEY, XK_space },
