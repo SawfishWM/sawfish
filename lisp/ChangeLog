@@ -1,3 +1,11 @@
+2000-03-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (ws-move-window): don't remove the window if
+	source and destination are the same (from Rob Hodges)
+
+	* smart-placement.jl (sp-prune-points): fixed this function
+	(patch from Dan Winship <danw@helixcode.com>)
+
 2000-03-06  John Harper  <john@dcs.warwick.ac.uk>
 
 	* viewport.jl (move-viewport-to-window): only flip viewports if
