@@ -64,9 +64,6 @@ distribution:
 	$ make all
 	$ make install
 
-If you're compiling from a CVS snapshot add `aclocal ; autoconf' before
-configuring.
-
 Before running the window manager, look at the lisp/sawmill-defaults.jl
 script. If you make any changes, copy the final version to ~/.sawmillrc
 
@@ -132,14 +129,6 @@ Workspaces are a bit different to the usual virtual desktops. They are
 created and deleted on demand. Send a window to a new workspace to
 create one, remove all windows to delete it.
 
-The `sloppy-focus' variable controls whether the focus is preserved
-when the root window is entered. Currently there's no click-to-focus
-option.
-
-The `move-outline-mode' and `resize-outline-mode' variables control the
-window update modes. Currently the only options are `nil' (twm-like
-rubber banding) and `opaque' (the default).
-
 The list of hooks currently called is:
 
 	pre-command-hook	called before and after each command
@@ -156,7 +145,8 @@ The list of hooks currently called is:
 	leave-notify-hook
 	focus-in-hook
 	focus-out-hook
-	client-message-hook
+
+	client-message-hook	called with (WINDOW TYPE DATA-ARRAY)
 
 	add-workspace-hook	each is called with a single parameter,
 	enter-workspace-hook	the workspace whose state has changed
@@ -170,6 +160,8 @@ The list of hooks currently called is:
 	iconify-window-hook	called with the window as parameter
 	uniconifiy-window-hook
 	window-state-change-hook
+
+	before-exit-hook	called immediately before exiting
 
 For a description of the structures defining window frame parts, see
 src/frames.c. Search for a comment starting ``building frames from

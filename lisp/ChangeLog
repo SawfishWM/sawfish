@@ -1,5 +1,11 @@
 1999-08-21  John Harper  <john@dcs.warwick.ac.uk>
 
+	* focus.jl (focus-mode): new variable, replaces sloppy-focus.
+	Implemented click-to-focus mode
+
+	* move-resize.jl (move-window-interactively,
+	resize-window-interactively): use the `W' interactive decl
+
 	* workspace.jl (ws-client-msg-handler): handle WM_CHANGE_STATE
 	messages (i.e. iconification requests)
 

@@ -1,5 +1,21 @@
 1999-08-21  John Harper  <john@dcs.warwick.ac.uk>
 
+	* functions.c (Fraise_window, Flower_window,
+	Fraise_lower_window, Fdelete_window, Fdestroy_window): these
+	now use the `W' interactive decl
+
+	* keys.c (Fcurrent_event_window): check if the window is a
+	frame part
+	(lookup_binding): new arg, CURRENT-WINDOW, the window whose
+	`keymap' property is to be scanned
+	(eval_input_event): if the event is a pointer event, look for a
+	binding in the window that received the event, not the window
+	with the input focus
+
+	* commands.c (Fcall_command): new interactive specs, `w', the
+	window that received the current event, and `W', either the
+	same as `w' or the focused window
+
 	* main.c (Qbefore_exit_hook): new hook; called before exiting
 
 	* keys.c (Fcurrent_event_window): as well as returning a window

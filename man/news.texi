@@ -11,6 +11,20 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item Removed the @code{sloppy-focus} variable, it's replaced by
+@code{focus-mode}. This can currently be one of @code{enter-exit}
+(normal focus follows pointer), @code{enter-only} (``sloppy'' focus) or
+@code{click} (click to focus).
+
+@item When resolving pointer events, scan the @code{keymap} property of
+the window under the pointer, not the focused window (as with keypress
+events)
+
+@item New hook @code{before-exit-hook}, called immediately before
+shutting down
+
+@item Rewrote the GNOME support as a Lisp module
+
 @item Added support for snapping to window edges when interactively
 moving windows (@code{move-snap-edges} and @code{move-snap-epsilon})
 
