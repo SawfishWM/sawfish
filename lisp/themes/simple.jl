@@ -19,20 +19,41 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defvar simple-frame-colors '("lightsteelblue4" "lightsteelblue2"))
+(defgroup simple "Simple frame")
+
+(defcustom simple-normal-color "lightsteelblue4"
+  "Color of inactive frames in `simple' frame style."
+  :type color
+  :group simple
+  :after-set  (lambda ()
+	       (when always-update-frames
+		 (reframe-all-windows))))
+
+(defcustom simple-active-color "goldenrod"
+  "Color of active frames in `simple' frame style."
+  :type color
+  :group simple
+  :after-set  (lambda ()
+	       (when always-update-frames
+		 (reframe-all-windows))))
 
 (let
     ((image-load-path (cons (expand-file-name "misc" image-directory)
 			    image-load-path)))
   ;; 15x15
-  (defvar simple-minimize (make-image "as_min.png"))
-  (defvar simple-minimize-clicked (make-image "as_min-b.png"))
-  (defvar simple-close (make-image "as_close.png"))
-  (defvar simple-close-clicked (make-image "as_close-b.png")))
+  (defvar simple-minimize (list (make-image "as_min.png")
+				nil
+				(make-image "as_min-b.png")))
+  (defvar simple-close (list (make-image "as_close.png")
+			     nil
+			     (make-image "as_close-b.png"))))
+
+(defun simple-frame-colors ()
+  (list simple-normal-color simple-active-color))
 
 (defvar simple-frame
  `(;; title bar
-   ((background . ,simple-frame-colors)
+   ((background . simple-frame-colors)
     (foreground . "black")
     (text . window-name)
     (x-justify . 30)
@@ -41,7 +62,8 @@
     (right-edge . 0)
     (top-edge . -21)
     (height . 21)
-    (keymap . title-keymap))
+    (keymap . title-keymap)
+    (cursor . hand2))
    ;; title frame
    ((background . "black")
     (left-edge . 0)
@@ -61,12 +83,13 @@
     (top-edge . -22)
     (bottom-edge . -5))
    ;; bottom bar
-   ((background . ,simple-frame-colors)
+   ((background . simple-frame-colors)
     (left-edge . 0)
     (right-edge . 0)
     (bottom-edge . -4)
     (height . 4)
-    (keymap . title-keymap))
+    (keymap . title-keymap)
+    (cursor . hand2))
    ;; bottom frame
    ((background . "black")
     (left-edge . 0)
@@ -74,20 +97,152 @@
     (bottom-edge . -5)
     (height . 1))
    ;; minimize button
-   ((background . ,(list simple-minimize simple-minimize
-			 simple-minimize-clicked simple-minimize-clicked))
+   ((background . ,simple-minimize)
     (left-edge . 5)
     (top-edge . -18)
     (keymap . iconify-button-keymap))
    ;; close button
-   ((background . ,(list simple-close simple-close
-			 simple-close-clicked simple-close-clicked))
+   ((background . ,simple-close)
     (right-edge . 5)
     (top-edge . -18)
     (keymap . close-button-keymap))))
 (put 'simple-frame 'unshaped t)
 
+(defvar simple-shaped-frame
+ `(;; title bar
+   ((background . simple-frame-colors)
+    (foreground . "black")
+    (text . window-name)
+    (x-justify . 30)
+    (y-justify . center)
+    (left-edge . 0)
+    (right-edge . 0)
+    (top-edge . -22)
+    (height . 21)
+    (keymap . title-keymap)
+    (cursor . hand2))
+   ;; title frame
+   ((background . "black")
+    (left-edge . 0)
+    (right-edge . 0)
+    (top-edge . -23)
+    (height . 1))
+   ;; left frame
+   ((background . "black")
+    (left-edge . -1)
+    (width . 1)
+    (top-edge . -23)
+    (height . 23))
+   ;; right frame
+   ((background . "black")
+    (right-edge . -1)
+    (width . 1)
+    (top-edge . -23)
+    (height . 23))
+   ;; bottom frame
+   ((background . "black")
+    (left-edge . 0)
+    (right-edge . 0)
+    (top-edge . -1)
+    (height . 1))
+   ;; minimize button
+   ((background . ,simple-minimize)
+    (left-edge . 5)
+    (top-edge . -19)
+    (keymap . iconify-button-keymap))
+   ;; close button
+   ((background . ,simple-close)
+    (right-edge . 5)
+    (top-edge . -19)
+    (keymap . close-button-keymap))))
+(put 'simple-shaped-frame 'unshaped t)
+
+(defvar simple-transient-frame
+ `(;; title bar
+   ((background . simple-frame-colors)
+    (left-edge . 0)
+    (right-edge . 0)
+    (top-edge . -4)
+    (height . 4)
+    (keymap . title-keymap)
+    (cursor . hand2))
+   ;; title frame
+   ((background . "black")
+    (left-edge . 0)
+    (right-edge . 0)
+    (top-edge . -5)
+    (height . 1))
+   ;; left frame
+   ((background . "black")
+    (left-edge . -1)
+    (width . 1)
+    (top-edge . -5)
+    (bottom-edge . -5))
+   ;; right frame
+   ((background . "black")
+    (right-edge . -1)
+    (width . 1)
+    (top-edge . -5)
+    (bottom-edge . -5))
+   ;; bottom bar
+   ((background . simple-frame-colors)
+    (left-edge . 0)
+    (right-edge . 0)
+    (bottom-edge . -4)
+    (height . 4)
+    (keymap . title-keymap)
+    (cursor . hand2))
+   ;; bottom frame
+   ((background . "black")
+    (left-edge . 0)
+    (right-edge . 0)
+    (bottom-edge . -5)
+    (height . 1))))
+(put 'simple-transient-frame 'unshaped t)
+
+(defvar simple-shaped-transient-frame
+ `(;; title bar
+   ((background . simple-frame-colors)
+    (left-edge . 0)
+    (right-edge . 0)
+    (top-edge . -5)
+    (height . 4)
+    (keymap . title-keymap)
+    (cursor . hand2))
+   ;; title frame
+   ((background . "black")
+    (left-edge . 0)
+    (right-edge . 0)
+    (top-edge . -6)
+    (height . 1))
+   ;; left frame
+   ((background . "black")
+    (left-edge . -1)
+    (width . 1)
+    (top-edge . -6)
+    (height . 6))
+   ;; right frame
+   ((background . "black")
+    (right-edge . -1)
+    (width . 1)
+    (top-edge . -6)
+    (height . 6))
+   ;; bottom frame
+   ((background . "black")
+    (left-edge . 0)
+    (right-edge . 0)
+    (top-edge . -1)
+    (height . 1))))
+(put 'simple-transient-shaped-frame 'unshaped t)
+
 (defun simple-frame-style (w type)
-  simple-frame)
+  (cond ((eq type 'shaped)
+	 'simple-shaped-frame)
+	((eq type 'transient)
+	 'simple-transient-frame)
+	((eq type 'shaped-transient)
+	 'simple-shaped-transient-frame)
+	(t
+	 'simple-frame)))
 
 (add-frame-style 'simple 'simple-frame-style)
