@@ -1,5 +1,8 @@
 2000-03-06  John Harper  <john@dcs.warwick.ac.uk>
 
+	* viewport.jl (move-viewport-to-window): only flip viewports if
+	the window is not actually on the current viewport (from merlin)
+
 	* version 0.25.1
 
 	* configure.jl (configure-request-handler): only force the
