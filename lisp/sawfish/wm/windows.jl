@@ -320,7 +320,7 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
 	    (t x))))
 
   (define (adjust-position-for-gravity/y w grav y #!key inverse)
-    (let* ((tl-off (window-frame-offset w))
+    (let* ((tl-off (cdr (window-frame-offset w)))
 	   (br-off (- (cdr (window-frame-dimensions w))
 		      (cdr (window-dimensions w))))
 	   (sign (if inverse -1 +1)))
