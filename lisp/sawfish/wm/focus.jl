@@ -80,9 +80,11 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
   (define autoload-focus-mode (make-autoloader getter define-focus-mode))
   (define focus-mode-ref (autoloader-ref getter))
 
+  (define (window-focus-mode w)
+    (or (and w (windowp w) (window-get w 'focus-mode)) focus-mode))
+
   (define (focus-invoke-mode w . args)
-    (let* ((mode (or (and w (windowp w) (window-get w 'focus-mode))
-		     focus-mode))
+    (let* ((mode (window-focus-mode w))
 	   (fun (focus-mode-ref mode)))
       (when fun
 	(apply fun w args))))
@@ -221,4 +223,26 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
   (add-hook 'focus-out-hook focus-out-fun t)
   (add-hook 'after-add-window-hook focus-add-window)
 
-  (sm-add-saved-properties 'never-focus 'focus-mode))
+  (sm-add-saved-properties 'never-focus 'focus-mode)
+
+
+;; bug prevention
+
+  ;; XXX Pavel reported this bug (windows becoming unfocusable in
+  ;; XXX click-to-focus mode). I can't see why it happens, hence this
+  ;; XXX kludge for now..
+
+  (define (scan-windows-for-bugs)
+    (map-windows (lambda (w)
+		   (when (eq (window-focus-mode w) 'click)
+		     ;; check that the correct keymaps are in place
+		     (unless (or (eq (input-focus) w)
+				 (eq (window-get w 'keymap)
+				     click-to-focus-map))
+		       (format standard-error
+			       "Window lost focus keymap: %s, %s\n"
+			       (window-name w) (window-get w 'keymap))
+		       (beep) (beep)
+		       (window-put w 'keymap click-to-focus-map))))))
+
+  (add-hook 'idle-hook scan-windows-for-bugs))
