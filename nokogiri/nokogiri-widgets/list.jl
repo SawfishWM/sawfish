@@ -34,7 +34,7 @@
   ;; if a functional spec is passed, these operations will be used:
 
   ;; - ((SPEC 'print) VALUE) => LIST-OF-STRINGS
-  ;; - ((SPEC 'dialog) TITLE CALLBACK [VALUE]
+  ;; - ((SPEC 'dialog) TITLE CALLBACK [VALUE])
   ;; - ((SPEC 'validp) ARG) => BOOL
 
   ;; CALLBACK is a function that will be called with the new value
@@ -71,14 +71,15 @@
 
       (define (insert-item)
 	(let ((callback (lambda (new)
-			  (if (not selection)
-			      (progn
-				(setq value (nconc value (list new)))
-				(gtk-clist-append clist (print-value new)))
-			    (setq value (insert-into new value selection))
-			    (gtk-clist-insert
-			     clist selection (print-value new))
-			    (gtk-clist-select-row clist (1+ selection) 0))
+			  (with-clist-frozen clist
+			    (if (not selection)
+				(progn
+				  (setq value (nconc value (list new)))
+				  (gtk-clist-append clist (print-value new)))
+			      (setq value (insert-into new value selection))
+			      (gtk-clist-insert
+			       clist selection (print-value new))
+			      (gtk-clist-select-row clist (1+ selection) 0)))
 			  (call-callback changed-callback))))
 	  (if (functionp spec)
 	      ((spec 'dialog) (_ "Insert:") callback)
@@ -91,10 +92,11 @@
 		(setq value (cdr value))
 	      (rplacd (nthcdr (1- selection) value)
 		      (nthcdr (1+ selection) value)))
-	    (gtk-clist-remove clist selection)
-	    (if (> (gtk-clist-rows clist) orig-sel)
-		(gtk-clist-select-row clist orig-sel 0)
-	      (set-selection nil))
+	    (with-clist-frozen clist
+	      (gtk-clist-remove clist selection)
+	      (if (> (gtk-clist-rows clist) orig-sel)
+		  (gtk-clist-select-row clist orig-sel 0)
+		(set-selection nil)))
 	    (call-callback changed-callback))))
 
       (define (edit-item)
@@ -103,10 +105,11 @@
 		 (cell (nthcdr orig-sel value))
 		 (callback (lambda (new)
 			     (rplaca cell new)
-			     (gtk-clist-remove clist orig-sel)
-			     (gtk-clist-insert
-			      clist orig-sel (print-value new))
-			     (gtk-clist-select-row clist orig-sel 0)
+			     (with-clist-frozen clist
+			       (gtk-clist-remove clist orig-sel)
+			       (gtk-clist-insert
+				clist orig-sel (print-value new))
+			       (gtk-clist-select-row clist orig-sel 0))
 			     (call-callback changed-callback))))
 	    (if (functionp spec)
 		((spec 'dialog) (_ "Edit:") callback (car cell))
@@ -134,6 +137,7 @@
 
       (gtk-clist-set-shadow-type clist 'none)
       (gtk-clist-set-column-width clist 0 100)
+      (gtk-clist-set-selection-mode clist 'browse)
       (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
       (gtk-scrolled-window-add-with-viewport scroller clist)
       (gtk-widget-set-usize scroller list-width list-height)
@@ -179,4 +183,11 @@
 	(cons x lst)
       (let ((cell (nthcdr (1- idx) lst)))
 	(rplacd cell (cons x (cdr cell)))
-	lst))))
+	lst)))
+
+  (defmacro with-clist-frozen (clist . body)
+    `(progn
+       (gtk-clist-freeze ,clist)
+       (unwind-protect
+	   (progn ,@body)
+	 (gtk-clist-thaw ,clist)))))
