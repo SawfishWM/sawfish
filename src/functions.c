@@ -544,14 +544,18 @@ Return the height of the root window (in pixels).
     return rep_MAKE_INT(screen_height);
 }
 
-DEFUN("sync-server", Fsync_server, Ssync_server, (void), rep_Subr0) /*
+DEFUN("sync-server", Fsync_server, Ssync_server, (repv wait), rep_Subr0) /*
 ::doc:sawfish.wm.misc#sync-server::
-sync-server
+sync-server [WAIT]
 
-Flush all pending X requests, don't wait for them to finish.
+Flush all pending X requests, don't wait for them to finish, unless WAIT
+is true.
 ::end:: */
 {
-    XFlush (dpy);
+    if (wait == Qnil)
+	XFlush (dpy);
+    else
+	XSync (dpy, False);
     return Qt;
 }
 

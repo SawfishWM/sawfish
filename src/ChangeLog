@@ -1,3 +1,8 @@
+2005-02-06  John Harper  <jsh@unfactored.org>
+
+	* functions.c (Fsync_server): added optional arg WAIT (when
+	true, calls Xsync not XFlush)
+
 2005-01-04  John Harper  <jsh@unfactored.org>
 
 	* sawmill_subrs.h, main.c, display.c: cleaned up some global
