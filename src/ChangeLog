@@ -1,3 +1,12 @@
+2000-02-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (key_press, button_press, motion_notify): always
+	call XAllowEvents () with Sync{Keyboard,Pointer}, not Async
+
+	* functions.c (Fgrab_window, Fgrab_pointer): more parameters to
+	allow finer grab control (event modes, pointer confinement).
+	Patch from Timo Korvola <tkorvola@e.math.helsinki.fi>
+
 2000-02-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* gradient.c, flippers.c: don't use rep_dl_subrs or
