@@ -72,9 +72,11 @@
 
 (defun window-order-focus-most-recent ()
   (let
-      ((win (car (window-order current-workspace nil))))
-    (when win
-      (set-input-focus win))))
+      ((windows (window-order current-workspace nil)))
+    (while (and windows (window-get (car windows) 'never-focus))
+      (setq windows (cdr windows)))
+    (when windows
+      (set-input-focus (car windows)))))
 
 ;; The problem is that any sticky windows that have been focused once
 ;; will _always_ rise to the top of the order when switching workspaces
