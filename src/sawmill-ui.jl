@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.12 1999/08/25 11:23:13 john Exp $
+;; $Id: sawmill-ui.jl,v 1.13 1999/08/25 23:08:06 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -410,7 +410,8 @@ fi
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	(gtk-option-menu-set-menu omenu menu)
-	(gtk-option-menu-set-history omenu history)
+	(when history
+	  (gtk-option-menu-set-history omenu history))
 	omenu))
      ((eq type 'list)
       (let
