@@ -1,5 +1,12 @@
 2000-07-23  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill.jl: don't require 'define. Also, only load "environ"
+	when (< rep-interface-id 10) (cvs rep correctly autoloads this
+	from a different location)
+
+	* custom.jl (custom-add-to-group): don't require 'sort, it's
+	not necessary and fails in cvs rep
+
 	* window-outline.jl (draw-box-outline): ensure numbers are
 	exact after rounding
 
