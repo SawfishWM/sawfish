@@ -138,9 +138,6 @@ for the bindings to be installed if and when it is."
 
 ;; grab the next key event
 
-(defun read-event-callback ()
-  (throw 'read-event (current-event)))
-
 ;;;###autoload
 (defun read-event (&optional prompt)
   (call-with-keyboard-grabbed
@@ -148,14 +145,34 @@ for the bindings to be installed if and when it is."
      (unwind-protect
 	 (let
 	     ((override-keymap '(keymap))
-	      (unbound-key-hook (list read-event-callback)))
+	      (unbound-key-hook (list (lambda ()
+					(throw 'read-event (current-event))))))
 	   (display-message (or prompt (_ "Press key...")))
 	   (catch 'read-event
 	     (recursive-edit)))
        (display-message nil)))))
 
 ;;;###autoload
-(defun quote-event (window)
-  "Read a single event and send it to the focused window."
-  (interactive "%W")
-  (synthesize-event (read-event (_ "[Quote]")) window))
+(defun quote-event ()
+  "Sends the next key event directly to the focused client window, ignoring
+any window manager bindings that it may have."
+  (interactive)
+  (let ((override-keymap '(keymap))
+	(unbound-key-hook (list (lambda ()
+				  (let ((ev (decode-event (current-event))))
+				    (if (eq 'key (car ev))
+					(progn
+					  (allow-events 'replay-keyboard)
+					  (throw 'quote-event))
+				      (allow-events 'sync-keyboard)))))))
+    ;; grab on the client window, so that the events get replayed
+    ;; to that window, not to our frame (thus avoiding any passive
+    ;; grabs on the window)
+    (when (grab-keyboard (window-id (input-focus)) nil t)
+      (unwind-protect
+	  (catch 'quote-event
+	    (allow-events 'sync-keyboard)
+	    (display-message (_ "[Quote]"))
+	    (recursive-edit))
+	(display-message nil)
+	(ungrab-keyboard)))))
