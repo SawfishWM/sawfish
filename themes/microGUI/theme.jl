@@ -32,10 +32,10 @@
 ;; 7x19
 (defvar microGUI:top-right-images (make-image "top_right.png"))
 
-;; 25x25
+;; 6x6
 (defvar microGUI:bottom-left-images (make-image "bl.png"))
 
-;; 25x25
+;; 6x6
 (defvar microGUI:bottom-right-images (make-image "br.png"))
 
 ;; 17x16
@@ -141,7 +141,7 @@
    ((background . ,microGUI:left-images)
     (left-edge . -6)
     (top-edge . 8)
-    (bottom-edge . 19)
+    (bottom-edge . 0)
     (class . left-border))
 
    ;; top-right corner
@@ -159,8 +159,8 @@
 
    ;; bottom border
    ((background . ,microGUI:bottom-images)
-    (left-edge . 17)
-    (right-edge . 19)
+    (left-edge . 0)
+    (right-edge . 0)
     (bottom-edge . -6)
     (class . bottom-border))
 
