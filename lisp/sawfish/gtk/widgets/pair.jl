@@ -29,8 +29,8 @@
 
   ;; (pair CAR-SPEC CDR-SPEC)
 
-  (define (make-pair-item changed-callback left right)
-    (let ((hbox (gtk-hbox-new nil box-spacing))
+  (define (make-pair-item changed-callback left right &optional use-vbox)
+    (let ((hbox ((if use-vbox gtk-vbox-new gtk-hbox-new) nil box-spacing))
 	  (left-widget (make-widget left changed-callback))
 	  (right-widget (make-widget right changed-callback)))
 
