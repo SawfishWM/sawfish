@@ -259,13 +259,14 @@
 				  (+ move-resize-width
 				     (car move-resize-frame))
 				  (+ move-resize-height
-				     (cdr move-resize-frame))))
-		      (apply draw-window-outline move-resize-last-outline))
+				     (cdr move-resize-frame)))))
 		    (if (eq move-resize-function 'resize)
 			(unless (eq resize-edge-mode 'grab)
 			  (infer-anchor))
 		      (infer-directions))
 		    (when (viable-move-resize-p)
+		      (unless (eq move-resize-mode 'opaque)
+			(apply draw-window-outline move-resize-last-outline))
 		      (setq was-successful
 			    (catch 'move-resize-done
 			      (when from-motion-event

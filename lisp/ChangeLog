@@ -1,3 +1,10 @@
+2001-06-04  John Harper  <jsh@pixelslut.com>
+
+	* sawfish/wm/commands/move-resize.jl (do-move-resize): move the
+	call to draw-window-outline to immediately before entering the
+	recursive event loop (avoids drawing and not erasing it on a
+	non-viable drag)
+
 2001-05-04  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/state/gnome.jl (gnome-event-proxyer): support
