@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.58 2000/04/12 14:01:44 john Exp $
+;; $Id: sawmill-ui.jl,v 1.59 2000/04/24 23:55:03 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -1131,8 +1131,8 @@ exec rep "$0" "$@"
     ;; move boolean properties to head of list for best effect
     (setq bool-props (filter (lambda (p)
 			       (eq (nth 1 p) 'boolean)) properties))
-    (setq properties (delete-if (lambda (p)
-				  (eq (nth 1 p) 'boolean)) properties))
+    (setq properties (filter (lambda (p)
+			       (not (eq (nth 1 p) 'boolean))) properties))
 
     (setq table (gtk-table-new (1+ (quotient (length bool-props) 3)) 3 nil))
     (setq table-2 (gtk-table-new (length properties) 2 nil))
