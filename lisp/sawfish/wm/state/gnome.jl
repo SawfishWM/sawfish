@@ -186,8 +186,7 @@
 	      ((and (string= (aref class 1) "Nautilus")
 		    (string= (aref class 0) "desktop_window"))
 	       ;; XXX ...or these
-	       (window-put w 'desktop t)
-	       (window-put w 'keymap root-window-keymap)))))
+	       (mark-window-as-desktop w)))))
     (let ((state (get-x-property w '_WIN_STATE))
 	  (hints (get-x-property w '_WIN_HINTS))
 	  (layer (get-x-property w '_WIN_LAYER))
