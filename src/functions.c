@@ -71,6 +71,8 @@ windows isn't affected.
 	    frames[j++] = (VWIN(w)->reparented
 			   ? VWIN(w)->frame : VWIN(w)->id);
 	}
+	else
+	    frames[j++] = x_win_from_arg (w);
 	list = rep_CDR(list);
     }
     XRestackWindows (dpy, frames, j);
@@ -86,12 +88,19 @@ x-raise-window WINDOW
 Bring WINDOW to the top of the display.
 ::end:: */
 {
-    rep_DECLARE1(win, WINDOWP);
-    if (VWIN(win)->reparented)
+    if (WINDOWP(win))
     {
-       XRaiseWindow (dpy, VWIN(win)->frame);
-       Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
+	if (VWIN(win)->reparented)
+	    XRaiseWindow (dpy, VWIN(win)->frame);
     }
+    else
+    {
+	Window w = x_win_from_arg (win);
+	if (w == 0)
+	    return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
+	XRaiseWindow (dpy, w);
+    }
+    Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
     return win;
 }
 
