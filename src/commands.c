@@ -389,7 +389,7 @@ Returns the numeric value of the raw prefix argument ARG.
     return(arg);
 }
 
-DEFUN("interactive", Finteractive, Sinteractive, (repv arg_list), rep_SF) /*
+/*
 ::doc:interactive::
 interactive CALLING-SPEC
 
@@ -435,9 +435,6 @@ can be either,
 
     A null line produces an argument of nil.
 ::end:: */
-{
-    return(Qnil);
-}
 
 DEFUN("commandp", Fcommandp, Scommandp, (repv cmd), rep_Subr1) /*
 ::doc:commandp::
@@ -523,6 +520,5 @@ commands_init(void)
 
     rep_ADD_SUBR(Scall_command);
     rep_ADD_SUBR(Sprefix_numeric_argument);
-    rep_ADD_SUBR(Sinteractive);
     rep_ADD_SUBR(Scommandp);
 }
