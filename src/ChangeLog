@@ -1,5 +1,16 @@
 1999-08-02  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c (Fset_client_state): set the WM_STATE property of a
+	window
+
+	* main.c (add_hook): new function
+
+	* gnome.c: support the _WIN_STATE hint (but only the sticky
+	attribute)
+
+	* events.c (configure_request): raising a window uniconify's
+	it, so that the GNOME pager can uniconify windows (!?)
+
 	* cursors.c (Fget_cursor): if a symbol, dereference it's
 	cursor-shape property _before_ scanning the list for an
 	existing cursor

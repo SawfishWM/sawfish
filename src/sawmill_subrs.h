@@ -71,6 +71,7 @@ extern XEvent *current_x_event;
 extern repv Qvisibility_notify_hook, Qdestroy_notify_hook, Qmap_notify_hook,
     Qunmap_notify_hook, Qenter_notify_hook, Qleave_notify_hook,
     Qfocus_in_hook, Qfocus_out_hook, Qclient_message_hook;
+extern repv Qiconify_window, Quniconify_window;
 extern void record_event_time (XEvent *ev);
 extern void map_request (XEvent *ev);
 extern void send_synthetic_configure (Lisp_Window *w);
@@ -164,12 +165,14 @@ extern repv Qsawmill_directory, Qsawmill_lisp_lib_directory,
     Qsawmill_site_lisp_directory, Qsawmill_exec_directory;
 extern repv Qwindow_error, Qinvalid_pos, Qbad_event_desc;
 extern int main (int argc, char **argv);
+extern void add_hook (repv sym, repv fun);
 
 /* from windows.c */
 extern Lisp_Window *window_list;
 extern int window_type;
 extern Lisp_Window *focus_window;
-extern repv Qadd_window_hook, Qplace_window_hook;
+extern repv Qadd_window_hook, Qplace_window_hook, Qwindow_state_change_hook;
+extern repv Qiconified;
 extern bool mapped_not_override_p (Window id);
 extern void focus_on_window (Lisp_Window *w);
 extern void fix_window_size (Lisp_Window *w);
@@ -205,6 +208,7 @@ extern repv Fwindow_id (repv win);
 extern repv Fwindow_group_id (repv win);
 extern repv Fwindow_size_hints (repv win);
 extern repv Fcall_window_hook (repv hook, repv win, repv args, repv type);
+extern repv Fset_client_state (repv win);
 extern void manage_windows (void);
 extern void windows_init (void);
 extern void windows_kill (void);
