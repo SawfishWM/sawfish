@@ -30,7 +30,7 @@ SRCS :=	colors.c commands.c cursors.c display.c events.c fonts.c frames.c \
 	functions.c images.c keys.c main.c server.c session.c windows.c
 OBJS := $(SRCS:.c=.o)
 
-DL_SRCS := gradient.c flippers.c
+DL_SRCS := gradient.c flippers.c x.c
 DL_OBJS := $(DL_SRCS:%.c=lib%.la)
 
 LISP_SRCS := sawmill-ui.jl sawmill-menu.jl
