@@ -125,21 +125,40 @@
 		      (scale rows y-base y-inc y-max))))
 
 
-;; property changed interface
+;; property and window-state changed interface
 
 (let
     (prop-changes)
 
+  ;; PROP may be single X property name, or list of names
   (defun call-after-property-changed (prop fun)
-    (or (closurep fun) (error "Non-closure to call-after-property-changed"))
-    (setq prop-changes (cons (cons prop fun) prop-changes)))
-
+    (setq prop-changes (cons (cons (if (listp prop)
+				       prop
+				     (list prop)) fun) prop-changes)))
+  
   (add-hook 'property-notify-hook
 	    (lambda (w prop state)
 	      (mapc (lambda (cell)
-		      (when (eq (car cell) prop)
-			(funcall (cdr cell) w prop state)))
+                      (when (memq prop (car cell))
+			((cdr cell) w prop state)))
 		    prop-changes))))
+
+(let
+    (state-changes)
+  
+  (defun call-after-state-changed (states fun)
+    (setq state-changes (cons (cons states fun) state-changes)))
+  
+  (add-hook
+   'window-state-change-hook
+   (lambda (w states)
+     (mapc (lambda (cell)
+	     (let
+		  ((relevant (filter (lambda (state)
+					(memq state (car cell))) states)))
+	       (when relevant
+		 ((cdr cell) w relevant))))
+	    state-changes))))
 
 
 ;; avoided (i.e. non-overlapped) windows
