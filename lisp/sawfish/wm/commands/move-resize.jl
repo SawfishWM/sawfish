@@ -210,7 +210,7 @@
 	      (ungrab-pointer))))
       (when server-grabbed
 	(ungrab-server))
-      (show-message nil))
+      (display-message nil))
     (if (eq function 'move)
 	(call-window-hook 'after-move-hook w (list move-resize-directions))
       (call-window-hook
@@ -238,7 +238,8 @@
 	     (setq move-resize-y (+ move-resize-old-y
 				    (- ptr-y move-resize-old-ptr-y))))
 	   (when move-show-position
-	     (show-message (format nil "%+d%+d" move-resize-x move-resize-y))))
+	     (display-message
+	      (format nil "%+d%+d" move-resize-x move-resize-y))))
 	  ((eq move-resize-function 'resize)
 	   (let
 	       ((x-base (or (cdr (or (assq 'base-width move-resize-hints)
@@ -280,11 +281,11 @@
 				    (- move-resize-height
 				       move-resize-old-height)))))
 	     (when resize-show-dimensions
-	       (show-message (format nil "%dx%d"
-				     (/ (- move-resize-width
-					   x-base) x-inc)
-				     (/ (- move-resize-height
-					   y-base) y-inc)))))))
+	       (display-message (format nil "%dx%d"
+					(/ (- move-resize-width
+					      x-base) x-inc)
+					(/ (- move-resize-height
+					      y-base) y-inc)))))))
     (call-window-hook (if (eq move-resize-function 'move)
 			  'while-moving-hook
 			'while-resizing-hook) move-resize-window)

@@ -165,7 +165,7 @@
 	      (recursive-edit))
 	    (when x-cycle-current
 	      (display-window x-cycle-current)))
-	(show-message nil)
+	(display-message nil)
 	(ungrab-keyboard)))))
 
 ;;;###autoload
@@ -217,9 +217,9 @@
     (when cycle-warp-pointer
       (warp-cursor-to-window win))
     (when cycle-show-window-names
-      (show-message (concat (and (window-get win 'iconified) ?[)
-			    (window-name win)
-			    (and (window-get win 'iconified) ?]))))
+      (display-message (concat (and (window-get win 'iconified) ?[)
+			       (window-name win)
+			       (and (window-get win 'iconified) ?]))))
     (when (and cycle-focus-windows (window-really-wants-input-p win))
       (set-input-focus win))))
 
