@@ -129,7 +129,7 @@ font specifier string).
 }
 
 DEFUN("font-get", Ffont_get, Sfont_get, (repv win, repv prop), rep_Subr2) /*
-::doc:sawfish.wm.fonts#:Sfont-get::
+::doc:sawfish.wm.fonts#font-get::
 font-get FONT PROPERTY
 
 Return the property PROPERTY (a symbol) associated with FONT.

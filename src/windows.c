@@ -499,7 +499,7 @@ emit_pending_destroys (void)
 
 DEFUN("window-get", Fwindow_get, Swindow_get,
       (repv win, repv prop), rep_Subr2) /*
-::doc:sawfish.wm.windows.subrs#:window-get::
+::doc:sawfish.wm.windows.subrs#window-get::
 window-get WINDOW PROPERTY
 
 Return the value of the property named PROPERTY (a symbol) of WINDOW.

@@ -140,7 +140,7 @@ X11 cursor font, or an image object.
 
 DEFUN("recolor-cursor", Frecolor_cursor, Srecolor_cursor,
       (repv cursor, repv fg, repv bg), rep_Subr3) /*
-::doc:sawfish.wm.cursors#Srecolor-cursor::
+::doc:sawfish.wm.cursors#recolor-cursor::
 recolor-cursor CURSOR FG BG
 ::end:: */
 {

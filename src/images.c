@@ -474,7 +474,7 @@ the bottom right of the image.
 }
 
 DEFUN("image-get", Fimage_get, Simage_get, (repv win, repv prop), rep_Subr2) /*
-::doc:sawfish.wm.images#:Simage-get::
+::doc:sawfish.wm.images#image-get::
 image-get IMAGE PROPERTY
 
 Return the value of the property named PROPERTY (a symbol) of IMAGE.
