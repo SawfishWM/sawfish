@@ -59,6 +59,7 @@
       (when preferred-space
 	(select-workspace preferred-space will-refocus))
       (move-viewport-to-window w)
+      (move-window-to-current-viewport w)
       (when (and unshade-selected-windows (window-get w 'shaded))
 	(unshade-window w))))
 
