@@ -114,21 +114,15 @@
   (unless (and (boundp 'window-menu) window-menu)
     (require 'sawfish.wm.ext.beos-window-menu))
 
-  ;; might it be useful to load the GNOME support?
+  ;; load the new WM-spec code by default now
+  (load-module 'sawfish.wm.state.wm-spec)
+
+  ;; might it be useful to load the old GNOME support?
   (unless batch-mode
     (catch 'out
       (mapc (lambda (prop)
 	      (when (string-match "^GNOME_" (symbol-name prop))
 		(load-module 'sawfish.wm.state.gnome)
-		(throw 'out t)))
-	    (list-x-properties 'root))))
-
-  ;; or the new WM-spec code?
-  (unless batch-mode
-    (catch 'out
-      (mapc (lambda (prop)
-	      (when (string-match "^_KDE_" (symbol-name prop))
-		(load-module 'sawfish.wm.state.wm-spec)
 		(throw 'out t)))
 	    (list-x-properties 'root))))
 

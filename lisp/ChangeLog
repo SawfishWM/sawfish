@@ -1,3 +1,18 @@
+2001-01-04  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/focus.jl (focus-click): before exiting, reinstall
+	the click-to-focus-map if the window isn't actually focused
+
+2001-01-03  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/transient.jl (transient-map-window): altered
+	semantics of focus-windows-when-mapped option to only apply to
+	non-transient windows (or transient windows whose parent is the
+	root window)
+
+	* sawfish/wm/user.jl: load sawfish.wm.state.wm-spec by default
+	(instead of only if KDE2 is being used)
+
 2000-12-31  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/windows.jl (window-supports-wm-protocol-p): new

@@ -172,7 +172,9 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	      ;; pass the event through to the client window unless we
 	      ;; need to keep the grab for the events that would follow
 	      (allow-events 'replay-pointer)
-	      (forget-button-press)))))))
+	      (forget-button-press)))))
+    (unless (eq (input-focus) w)
+      (focus-push-map w click-to-focus-map))))
 
   (defvar click-to-focus-map
     (bind-keys (make-keymap)
