@@ -1,0 +1,1073 @@
+/* frames.c -- window frame manipulation
+   $Id$ */
+
+#include "sawmill.h"
+#include <X11/Xutil.h>
+#include <X11/Xresource.h>
+#include <alloca.h>
+
+static Lisp_Frame *frame_list;
+int frame_type;
+
+static XID window_fp_context;
+
+DEFSYM(default_frame, "default-frame");
+DEFSYM(nil_frame, "nil-frame");
+DEFSYM(internal, "internal");
+DEFSYM(tiled, "tiled");
+DEFSYM(unshaped, "unshaped");
+DEFSYM(center, "center");
+DEFSYM(right, "right");
+DEFSYM(left, "left");
+DEFSYM(top, "right");
+DEFSYM(bottom, "left");
+DEFSYM(text, "text");
+DEFSYM(x_justify, "x-justify");
+DEFSYM(y_justify, "y-justify");
+DEFSYM(background, "background");
+DEFSYM(foreground, "foreground");
+DEFSYM(font, "font");
+DEFSYM(width, "width");
+DEFSYM(height, "height");
+DEFSYM(left_edge, "left-edge");
+DEFSYM(top_edge, "top-edge");
+DEFSYM(right_edge, "right-edge");
+DEFSYM(bottom_edge, "bottom-edge");
+DEFSYM(cursor, "cursor");
+
+DEFUN("get-frame", Fget_frame, Sget_frame, (repv name), rep_Subr1) /*
+::doc:Sget-frame::
+get-frame NAME
+::end:: */
+{
+    Lisp_Frame *f;
+    rep_DECLARE1(name, rep_STRINGP);
+
+    f = frame_list;
+    while (f != 0 && strcmp (rep_STR(name), rep_STR(f->name)) != 0)
+	f = f->next;
+    return (f == 0) ? Qnil : rep_VAL(f);
+}
+
+DEFUN("make-frame", Fmake_frame, Smake_frame,
+      (repv name, repv plist), rep_Subr2) /*
+::doc:Smake-frame::
+make-frame NAME [PLIST]
+::end:: */
+{
+    Lisp_Frame *f;
+    rep_DECLARE1(name, rep_STRINGP);
+    f = rep_ALLOC_CELL(sizeof(Lisp_Frame));
+    f->car = frame_type;
+    f->next = frame_list;
+    frame_list = f;
+    f->name = name;
+    f->plist = plist;
+    f->type = f_nil;
+    return rep_VAL(f);
+}
+
+DEFUN("frame-get", Fframe_get, Sframe_get, (repv win, repv prop), rep_Subr2) /*
+::doc::Sframe-get::
+frame-get FRAME PROPERTY
+::end:: */
+{
+    repv plist;
+    rep_DECLARE1(win, FRAMEP);
+    plist = VFRAME(win)->plist;
+    while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
+    {
+	if (rep_CAR(plist) == prop)
+	    return rep_CAR(rep_CDR(plist));
+	plist = rep_CDR(rep_CDR(plist));
+    }
+    return Qnil;
+}
+
+DEFUN("frame-put", Fframe_put, Sframe_put,
+      (repv win, repv prop, repv val), rep_Subr3) /*
+::doc:Sframe-put::
+frame-put FRAME PROPERTY VALUE
+::end:: */
+{
+    repv plist;
+    rep_DECLARE1(win, FRAMEP);
+    plist = VFRAME(win)->plist;
+    while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
+    {
+	if (rep_CAR(plist) == prop)
+	{
+	    if (!rep_CONS_WRITABLE_P(rep_CDR(plist)))
+	    {
+		/* Can't write into a dumped cell; need to cons
+		   onto the head. */
+		break;
+	    }
+	    rep_CAR(rep_CDR(plist)) = val;
+	    return val;
+	}
+	plist = rep_CDR(rep_CDR(plist));
+    }
+    plist = Fcons(prop, Fcons(val, VFRAME(win)->plist));
+    if (plist != rep_NULL)
+	VFRAME(win)->plist = plist;
+    return val;
+}
+
+DEFUN("framep", Fframep, Sframep, (repv arg), rep_Subr1) /*
+::doc:Sframep::
+framep ARG
+::end:: */
+{
+    return FRAMEP(arg) ? Qt : Qnil;
+}
+
+DEFUN("frame-generator", Fframe_generator, Sframe_generator,
+      (repv frame), rep_Subr1) /*
+::doc:Sframe-generator::
+frame-generator FRAME
+::end:: */
+{
+    rep_DECLARE1(frame, FRAMEP);
+    switch (VFRAME(frame)->type)
+    {
+    case f_list:
+	return VFRAME(frame)->generator.list;
+
+    case f_function:
+	return Qinternal;
+
+    default:
+	return Qnil;
+    }
+}
+
+DEFUN("set-frame-generator", Fset_frame_generator, Sset_frame_generator,
+      (repv frame, repv gen), rep_Subr2) /*
+::doc:Sset-frame-generator::
+set-frame-generator FRAME GENERATOR
+::end:: */
+{
+    rep_DECLARE1(frame, FRAMEP);
+    if (gen == Qnil)
+	VFRAME(frame)->type = f_nil;
+    else
+    {
+	rep_DECLARE2(gen, rep_CONSP);
+	VFRAME(frame)->type = f_list;
+	VFRAME(frame)->generator.list = gen;
+    }
+    return gen;
+}
+
+
+/* standard decoration */
+
+static long def_title_height = 10, def_border_color, def_title_bg;
+
+static void
+default_frame_destroyer (Lisp_Window *w)
+{
+    XDestroyWindow (dpy, w->frame);
+}
+
+static void
+default_frame_focuser (Lisp_Window *w)
+{
+    XSetWindowAttributes wa;
+    wa.background_pixel = (WINDOW_FOCUSED_P(w)
+			   ? def_border_color : def_title_bg);
+    XChangeWindowAttributes (dpy, w->frame, CWBackPixel, &wa);
+    XClearWindow (dpy, w->frame);
+}
+
+static void
+default_frame_rebuilder (Lisp_Window *w)
+{
+    w->frame_width = w->attr.width + 4;
+    w->frame_height = def_title_height + w->attr.height + 4;
+    XResizeWindow (dpy, w->frame, w->frame_width, w->frame_height);
+}
+
+static void
+default_frame_generator (Lisp_Window *w)
+{
+    XSetWindowAttributes wa;
+    wa.background_pixel = def_title_bg;
+    wa.border_pixel = def_border_color;
+    wa.colormap = screen_cmap;
+    w->frame_width = w->attr.width + 4;
+    w->frame_height = def_title_height + w->attr.height + 4;
+    w->frame_x = -2;
+    w->frame_y = -def_title_height - 2;
+    w->frame = XCreateWindow (dpy, root_window, w->attr.x, w->attr.y,
+			      w->frame_width, w->frame_height,
+			      w->attr.border_width, screen_depth,
+			      InputOutput, screen_visual,
+			      CWBackPixel | CWBorderPixel | CWColormap, &wa);
+    w->destroy_frame = default_frame_destroyer;
+    w->focus_change = default_frame_focuser;
+    w->rebuild_frame = default_frame_rebuilder;
+}
+
+
+/* nil decoration */
+
+static void
+nil_frame_rebuilder (Lisp_Window *w)
+{
+    w->frame_width = w->attr.width;
+    w->frame_height = w->attr.height;
+    XResizeWindow (dpy, w->frame, w->frame_width, w->frame_height);
+}
+
+static void
+nil_frame_generator (Lisp_Window *w)
+{
+    XSetWindowAttributes wa;
+    DB(("  making nil frame\n"));
+    wa.background_pixel = def_title_bg;
+    wa.border_pixel = def_border_color;
+    wa.colormap = screen_cmap;
+    w->frame = w->id;
+    w->frame_width = w->attr.width;
+    w->frame_height = w->attr.height;
+    w->frame_x = 0;
+    w->frame_y = 0;
+    w->frame = XCreateWindow (dpy, root_window, w->attr.x, w->attr.y,
+			      w->frame_width, w->frame_height,
+			      w->attr.border_width, screen_depth,
+			      InputOutput, screen_visual,
+			      CWBackPixel | CWBorderPixel | CWColormap,
+			      &wa);
+    w->rebuild_frame = nil_frame_rebuilder;
+}
+
+
+/* building frames from component lists
+
+   build the frame from the list of components. Each element
+   in the list is an alist representing one component of the
+   frame, possible tags include:
+
+	background . IMAGE-OR-COLOR
+	background . (NORMAL FOCUSED CLICKED FOCUSED-CLICKED)
+	foreground . COLOR
+	foreground . (NORMAL FOCUSED CLICKED FOCUSED-CLICKED)
+
+	text . STRING-OR-FUNCTION-OR-NIL
+	x-justify . left OR right OR center OR NUMBER
+	y-justify . top OR bottom OR center OR NUMBER
+
+	font . FONT
+	font . (NORMAL FOCUSED CLICKED FOCUSED-CLICKED)
+
+	left-edge . POSITION-REL-LEFT
+	right-edge . POSITION-REL-RIGHT
+	top-edge . POSITION-REL-TOP
+	bottom-edge . POSITION-REL-BOTTOM
+	height . PIXELS
+	width . PIXELS
+
+	keymap . KEYMAP
+	cursor . CURSOR-OR-CURSOR-DEF
+
+   Note that all numeric quantities may be defined dynamically by
+   substituting a function */
+
+static inline int
+current_state (struct frame_part *fp)
+{
+    if (fp->win == focus_window)
+	return fp->clicked ? fps_focused_clicked : fps_focused;
+    else
+	return fp->clicked ? fps_clicked : fps_normal;
+}
+
+/* Set the background of the frame-part FP. This is either a solid color
+   or an image (scaled or tiled) */
+void
+set_frame_part_bg (struct frame_part *fp)
+{
+    int state = current_state (fp);
+    repv bg = fp->bg[state];
+
+    if (fp->id == 0)
+	return;
+
+    if (COLORP(bg))
+    {
+	XSetWindowBackground (dpy, fp->id, VCOLOR(bg)->color.pixel);
+    }
+    else if (IMAGEP(bg))
+    {
+	Lisp_Image *image = VIMAGE(bg);
+	Pixmap bg_pixmap;
+	bool tiled = FALSE, shaped = TRUE;
+	repv tem;
+
+	tem = Fimage_get (rep_VAL(image), Qtiled);
+	if (tem && tem != Qnil)
+	    tiled = TRUE;
+	tem = Fframe_get (fp->win->frame_style, Qunshaped);
+	if (tem && tem != Qnil)
+	    shaped = FALSE;
+
+	if (tiled)
+	{
+	    Imlib_render (imlib_id, image->image,
+			  image->image->rgb_width,
+			  image->image->rgb_height);
+	}
+	else
+	{
+	    Imlib_render (imlib_id, image->image, fp->width, fp->height);
+	}
+
+	bg_pixmap = Imlib_move_image (imlib_id, image->image);
+	if (bg_pixmap)
+	{
+	    XSetWindowBackgroundPixmap (dpy, fp->id, bg_pixmap);
+	    if (shaped)
+	    {
+		Pixmap bg_mask = Imlib_move_mask (imlib_id, image->image);
+		if (bg_mask)
+		{
+		    XRectangle rect;
+		    rect.x = fp->x - fp->win->frame_x;
+		    rect.y = fp->y - fp->win->frame_y;
+		    rect.width = fp->width;
+		    rect.height = fp->height;
+		    XShapeCombineRectangles (dpy, fp->win->frame,
+					     ShapeBounding, 0, 0,
+					     &rect, 1, ShapeSubtract,
+					     Unsorted);
+
+		    XShapeCombineMask (dpy, fp->win->frame, ShapeBounding,
+				       fp->x, fp->y, bg_mask, ShapeUnion);
+		    if (tiled)
+		    {
+			/* The pixmap will be tiled automatically. But
+			   we still need to tile the shape-mask manually */
+			int x = image->image->rgb_width;
+			int y = 0;
+			do {
+			    do {
+				XShapeCombineMask (dpy, fp->win->frame,
+						   ShapeBounding,
+						   fp->x + x, fp->y + y,
+						   bg_mask, ShapeUnion);
+				x += image->image->rgb_width;
+			    } while (x < fp->width);
+			    x = 0;
+			    y += image->image->rgb_height;
+			} while (y < fp->height);
+		    }
+		    /* freeing the pixmap below also frees the mask */
+		}
+		else
+		{
+		    XRectangle rect;
+		    rect.x = fp->x - fp->win->frame_x;
+		    rect.y = fp->y - fp->win->frame_y;
+		    rect.width = fp->width;
+		    rect.height = fp->height;
+		    XShapeCombineRectangles (dpy, fp->win->frame,
+					     ShapeBounding, 0, 0,
+					     &rect, 1, ShapeUnion, Unsorted);
+		}
+	    }
+	    Imlib_free_pixmap (imlib_id, bg_pixmap);
+	}
+    }
+    else
+    {
+	/* No background. Set it to transparent. */
+	XSetWindowBackgroundPixmap (dpy, fp->id, ParentRelative);
+    }
+
+    /* background won't be updated until the window is cleared.. */
+}
+
+/* Draw the foreground pixels in frame-part FP. */
+void
+set_frame_part_fg (struct frame_part *fp)
+{
+    int state = current_state (fp);
+    repv font = fp->font[state], fg = fp->fg[state];
+
+    if (fp->id == 0)
+	return;
+
+    XClearWindow (dpy, fp->id);
+
+    if (fp->text == Qnil)
+	return;
+
+    if (!COLORP(fg))
+	fg = Fsymbol_value (Qdefault_foreground, Qt);
+    if (!FONTP(font))
+	font = Fsymbol_value (Qdefault_font, Qt);
+    if (COLORP(fg) && FONTP(font))
+    {
+	u_char *string = 0;
+	int length, width, height, x, y;
+	XGCValues gcv;
+
+	if (rep_STRINGP(fp->text))
+	{
+	    string = rep_STR(fp->text);
+	    length = rep_STRING_LEN(fp->text);
+	}
+	else if (fp->text == Qnil)
+	    return;
+	else
+	{
+	    repv result = rep_call_lisp1 (fp->text, rep_VAL(fp->win));
+	    if (!result || !rep_STRINGP(result))
+		return;
+	    string = rep_STR(result);
+	    length = rep_STRING_LEN(result);
+	}
+
+	width = XTextWidth (VFONT(font)->font, string, length);
+	if (fp->x_justify == Qcenter)
+	    x = MAX(0, (fp->width - width) / 2);
+	else if (fp->x_justify == Qright)
+	    x = MAX(0, fp->width - width);
+	else if (rep_INTP(fp->x_justify))
+	{
+	    x = rep_INT(fp->x_justify);
+	    if (x < 0)
+		x = MAX(0, fp->width + x - width);
+	}
+	else
+	    x = 0;
+
+	height = VFONT(font)->font->ascent + VFONT(font)->font->descent;
+	if (fp->y_justify == Qcenter)
+	    y = MAX(0, (fp->height - height) / 2);
+	else if (fp->y_justify == Qbottom)
+	    y = MAX(0, fp->height - height);
+	else if (rep_INTP(fp->y_justify))
+	{
+	    y = rep_INT(fp->y_justify);
+	    if (y < 0)
+		y = MAX(0, fp->height + y - height);
+	}
+	else
+	    y = 0;
+
+	if (fp->gc == 0)
+	{
+	    gcv.font = VFONT(font)->font->fid;
+	    gcv.foreground = VCOLOR(fg)->color.pixel;
+	    gcv.function = GXcopy;
+	    fp->gc = XCreateGC (dpy, fp->id,
+				GCFunction | GCForeground | GCFont, &gcv);
+	}
+	else
+	{
+	    gcv.font = VFONT(font)->font->fid;
+	    gcv.foreground = VCOLOR(fg)->color.pixel;
+	    XChangeGC (dpy, fp->gc, GCForeground | GCFont, &gcv);
+	}
+	XDrawString (dpy, fp->id, fp->gc, x,
+		     y + VFONT(font)->font->ascent, string, length);
+    }
+}
+
+/* Find the frame-part that is drawn in window ID */
+struct frame_part *
+find_frame_part_by_window (Window id)
+{
+    struct frame_part *fp;
+    return XFindContext (dpy, id, window_fp_context,
+			 (XPointer *)&fp) ? 0 : fp;
+}
+
+/* Destroy the window frame of W, assuming it's a frame-part derived frame */
+static void
+frame_part_destroyer (Lisp_Window *w)
+{
+    struct frame_part *fp, *next;
+    for (fp = w->frame_parts; fp != 0; fp = next)
+    {
+	if (fp->gc)
+	    XFreeGC (dpy, fp->gc);
+
+	next = fp->next;
+	rep_free (fp);
+    }
+    w->frame_parts = 0;
+    XDestroyWindow (dpy, w->frame);
+}
+
+/* Called when the focus state of window W has changed, assuming a
+   frame-part derived frame */
+static void
+frame_part_focuser (Lisp_Window *w)
+{
+    struct frame_part *fp;
+    for (fp = w->frame_parts; fp != 0; fp = fp->next)
+    {
+	set_frame_part_bg (fp);
+	set_frame_part_fg (fp);
+    }
+}
+
+/* Handle the expose event EV for the frame part FP. */
+void
+frame_part_exposer (XExposeEvent *ev, struct frame_part *fp)
+{
+    if (ev->count == 0)
+	set_frame_part_fg (fp);
+}
+
+/* Called when a window property changes */
+static void
+frame_part_prop_change (Lisp_Window *w)
+{
+    struct frame_part *fp;
+    for (fp = w->frame_parts; fp != 0; fp = fp->next)
+	set_frame_part_fg (fp);
+}
+
+static repv
+get_integer_prop (Lisp_Window *w, repv prop, repv elt)
+{
+    repv tem = Fassq (prop, elt);
+    if (tem && tem != Qnil)
+    {
+	if (rep_INTP(rep_CDR(tem)))
+	    tem = rep_CDR(tem);
+	else
+	    tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
+	return  (tem && rep_INTP(tem)) ? tem : Qnil;
+    }
+    else
+	return Qnil;
+}
+
+/* Generate a frame-part frame for window W. If called for a window that
+   already has a frame, it will be rebuilt to the current window size. */
+static void
+list_frame_generator (Lisp_Window *w)
+{
+    repv gen_list = VFRAME(w->frame_style)->generator.list;
+    repv ptr = rep_NULL, tem;
+    struct frame_part **last_fp = 0;
+    struct frame_part *fp = 0;
+    XSetWindowAttributes wa;
+    u_long wamask;
+    int i;
+    rep_GC_root gc_win;
+    repv win = rep_VAL(w);
+    bool regen;				/* are we resizing the frame */
+    int nparts = 0;
+
+    /* bounding box of frame */
+    int left_x = 0, top_y = 0;
+    int right_x = w->attr.width, bottom_y = w->attr.height;
+
+    DB(("list_frame_generator(%s)\n", w->name));
+
+    rep_PUSHGC(gc_win, win);
+
+    /* construct the component list, and find the bounding box */
+    if (w->frame_parts == 0)
+    {
+	ptr = gen_list;
+	last_fp = &w->frame_parts;
+	regen = FALSE;
+    }
+    else
+    {
+	fp = w->frame_parts;
+	regen = TRUE;
+    }
+
+    /* This loop is a bit weird. If we're building the frame from scratch
+       we loop over the Lisp list of frame part specs. Otherwise we loop
+       over the _actual_ list of frame parts */
+    while ((!regen && rep_CONSP(ptr))
+	   || (regen && fp != 0))
+    {
+	repv elt;
+	bool had_left_edge = FALSE, had_top_edge = FALSE;
+
+	if (!regen)
+	{
+	    fp = rep_alloc (sizeof (struct frame_part));
+	    memset (fp, 0, sizeof (struct frame_part));
+	    fp->win = w;
+	    fp->alist = rep_CAR(ptr);
+	}
+	elt = fp->alist;
+
+	fp->width = fp->height = -1;
+	for (i = 0; i < fps_MAX; i++)
+	    fp->fg[i] = fp->bg[i] = fp->font[i] = Qnil;
+
+	/* get text label */
+	tem = Fassq (Qtext, elt);
+	if (tem && tem != Qnil)
+	    fp->text = rep_CDR(tem);
+	else
+	    fp->text = Qnil;
+	tem = Fassq (Qx_justify, elt);
+	if (tem && tem != Qnil)
+	    fp->x_justify = rep_CDR(tem);
+	else
+	    fp->x_justify = Qnil;
+	tem = Fassq (Qy_justify, elt);
+	if (tem && tem != Qnil)
+	    fp->y_justify = rep_CDR(tem);
+	else
+	    fp->y_justify = Qnil;
+
+	/* get cursor */
+	fp->cursor = Qnil;
+	tem = Fassq (Qcursor, elt);
+	if (tem && tem != Qnil)
+	{
+	    if (rep_SYMBOLP(rep_CDR(tem)))
+		tem = Fget_cursor (rep_CDR(tem));
+	    else
+		tem = rep_CDR(tem);
+	    if (tem && CURSORP(tem))
+		fp->cursor = tem;
+	}
+
+	/* get background images or colors */
+	tem = Fassq (Qbackground, elt);
+	if (tem && tem != Qnil)
+	{
+	    if (IMAGEP(rep_CDR(tem))
+		|| COLORP(rep_CDR(tem))
+		|| rep_STRINGP(rep_CDR(tem)))
+	    {
+		fp->bg[0] = rep_CDR(tem);
+		for (i = 1; i < fps_MAX; i++)
+		    fp->bg[i] = fp->bg[0];
+	    }
+	    else if (rep_CONSP(rep_CDR(tem)))
+	    {
+		tem = rep_CDR(tem);
+		for (i = 0; i < fps_MAX; i++)
+		{
+		    fp->bg[i] = ((IMAGEP(rep_CAR(tem))
+				  || COLORP(rep_CAR(tem))
+				  || rep_STRINGP(rep_CAR(tem)))
+				 ? rep_CAR(tem) : fp->bg[i-1]);
+		    if (rep_CONSP(rep_CDR(tem)))
+			tem = rep_CDR(tem);
+		}
+	    }
+	    for (i = 0; i < fps_MAX; i++)
+	    {
+		if (IMAGEP(fp->bg[i]))
+		{
+		    fp->width = VIMAGE(fp->bg[fps_normal])->image->rgb_width;
+		    fp->height = VIMAGE(fp->bg[fps_normal])->image->rgb_height;
+		    break;
+		}
+	    }
+	}
+
+	/* get foreground colors */
+	tem = Fassq (Qforeground, elt);
+	if (tem && tem != Qnil)
+	{
+	    if (COLORP(rep_CDR(tem)) || rep_STRINGP(rep_CDR(tem)))
+	    {
+		fp->fg[0] = rep_CDR(tem);
+		for (i = 1; i < fps_MAX; i++)
+		    fp->fg[i] = fp->fg[0];
+	    }
+	    else if (rep_CONSP(rep_CDR(tem)))
+	    {
+		tem = rep_CDR(tem);
+		for (i = 0; i < fps_MAX; i++)
+		{
+		    fp->font[i] = ((COLORP(rep_CAR(tem))
+				    || rep_STRINGP(rep_CAR(tem)))
+				   ? rep_CAR(tem) : fp->fg[i-1]);
+		    if (rep_CONSP(rep_CDR(tem)))
+			tem = rep_CDR(tem);
+		}
+	    }
+	}
+
+	/* get fonts */
+	tem = Fassq (Qfont, elt);
+	if (tem && tem != Qnil)
+	{
+	    if (FONTP(rep_CDR(tem)) || rep_STRINGP(rep_CDR(tem)))
+	    {
+		fp->font[0] = rep_CDR(tem);
+		for (i = 1; i < fps_MAX; i++)
+		    fp->font[i] = fp->font[0];
+	    }
+	    else if (rep_CONSP(rep_CDR(tem)))
+	    {
+		tem = rep_CDR(tem);
+		for (i = 0; i < fps_MAX; i++)
+		{
+		    fp->font[i] = ((FONTP(rep_CAR(tem))
+				    || rep_STRINGP(rep_CAR(tem)))
+				   ? rep_CAR(tem) : fp->font[i-1]);
+		    if (rep_CONSP(rep_CDR(tem)))
+			tem = rep_CDR(tem);
+		}
+	    }
+	}
+
+	for (i = 0; i < fps_MAX; i++)
+	{
+	    if (rep_STRINGP(fp->fg[i]))
+		fp->fg[i] = Fget_color (fp->fg[i]);
+	    if (fp->fg[i] != Qnil && !COLORP(fp->fg[i]))
+		goto next_part;
+	    if (rep_STRINGP(fp->bg[i]))
+		fp->bg[i] = Fget_color (fp->bg[i]);
+	    if (fp->bg[i] != Qnil && !IMAGEP(fp->bg[i]) && !COLORP(fp->bg[i]))
+		goto next_part;
+	    if (rep_STRINGP(fp->font[i]))
+		fp->font[i] = Fget_font (fp->font[i]);
+	    if (fp->font[i] != Qnil && !FONTP(fp->font[i]))
+		goto next_part;
+	}
+
+	/* get dimensions.. */
+	tem = get_integer_prop (w, Qwidth, elt);
+	if (tem != Qnil)
+	    fp->width = rep_INT(tem);
+	tem = get_integer_prop (w, Qheight, elt);
+	if (tem != Qnil)
+	    fp->height = rep_INT(tem);
+	tem = get_integer_prop (w, Qleft_edge, elt);
+	if (tem != Qnil)
+	{
+	    fp->x = rep_INT(tem);
+	    had_left_edge = TRUE;
+	}
+	tem = get_integer_prop (w, Qtop_edge, elt);
+	if (tem != Qnil)
+	{
+	    fp->y = rep_INT(tem);
+	    had_top_edge = TRUE;
+	}
+	tem = get_integer_prop (w, Qright_edge, elt);
+	if (tem != Qnil)
+	{
+	    if (had_left_edge)
+		fp->width = w->attr.width - rep_INT(tem) - fp->x;
+	    else
+		fp->x = w->attr.width - rep_INT(tem) - fp->width;
+	}
+	tem = get_integer_prop (w, Qbottom_edge, elt);
+	if (tem != Qnil)
+	{
+	    if (had_top_edge)
+		fp->height = w->attr.height - rep_INT(tem) - fp->y;
+	    else
+		fp->y = w->attr.height - rep_INT(tem) - fp->height;
+	}
+	if (fp->width < 0)
+	    fp->width = right_x - fp->x;
+	if (fp->height < 0)
+	    fp->height = bottom_y - fp->y;
+
+	DB(("  part: x=%d y=%d width=%d height=%d\n",
+	    fp->x, fp->y, fp->width, fp->height));
+
+	/* expand frame bounding box */
+	left_x = MIN(left_x, fp->x);
+	right_x = MAX(right_x, fp->x + fp->width);
+	top_y = MIN(top_y, fp->y);
+	bottom_y = MAX(bottom_y, fp->y + fp->height);
+
+	if (!regen)
+	{
+	    /* link in fp */
+	    *last_fp = fp;
+	    last_fp = &fp->next;
+	}
+
+	nparts++;
+
+    next_part:
+	if (!regen)
+	    ptr = rep_CDR(ptr);
+	else
+	    fp = fp->next;
+    }
+
+    /* now we can find the size and offset of the frame. */
+    w->frame_width = right_x - left_x;
+    w->frame_height = bottom_y - top_y;
+    w->frame_x = left_x;
+    w->frame_y = top_y;
+
+    DB(("  bounding box: x=%d y=%d width=%d height=%d\n",
+	w->frame_x, w->frame_y, w->frame_width, w->frame_height));
+
+    if (!regen)
+    {
+	/* create the frame */
+	wa.background_pixel = WhitePixel (dpy, screen_num);
+	wamask = CWBackPixel;
+	w->frame = XCreateWindow (dpy, root_window, w->attr.x, w->attr.y,
+				  w->frame_width, w->frame_height,
+				  0, screen_depth, InputOutput,
+				  screen_visual, wamask, &wa);
+    }
+    else
+	XResizeWindow (dpy, w->frame, w->frame_width, w->frame_height);
+
+    w->destroy_frame = frame_part_destroyer;
+    w->focus_change = frame_part_focuser;
+    w->rebuild_frame = list_frame_generator;
+    w->property_change = frame_part_prop_change;
+
+    /* if shaped, make the initial frame shape */
+    tem = Fframe_get (w->frame_style, Qunshaped);
+    if (tem == Qnil)
+    {
+	XRectangle *rects = alloca (sizeof (XRectangle) * nparts + 1);
+	int i;
+	rects[0].x = -w->frame_x;
+	rects[0].y = -w->frame_y;
+	rects[0].width = w->attr.width;
+	rects[0].height = w->attr.height;
+	for (i = 0, fp = w->frame_parts; i < nparts; i++, fp = fp->next)
+	{
+	    rects[i+1].x = fp->x - w->frame_x;
+	    rects[i+1].y = fp->y - w->frame_y;
+	    rects[i+1].width = fp->width;
+	    rects[i+1].height = fp->height;
+	}
+	XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
+				 rects, nparts + 1, ShapeSet, Unsorted);
+    }
+
+    /* create/update windows for each part */
+    for (fp = w->frame_parts; fp != 0; fp = fp->next)
+    {
+	if (fp->id == 0)
+	{
+	    if (fp->width > 0 && fp->height > 0)
+	    {
+		wamask = 0;
+		fp->id = XCreateWindow (dpy, w->frame,
+					fp->x - w->frame_x, fp->y - w->frame_y,
+					fp->width, fp->height,
+					0, screen_depth, InputOutput,
+					screen_visual, wamask, &wa);
+		XSelectInput (dpy, fp->id,
+			      ButtonPressMask | ButtonReleaseMask
+			      | ButtonMotionMask | PointerMotionHintMask
+			      | KeyPressMask | ExposureMask);
+		XMapWindow (dpy, fp->id);
+
+		/* stash the fp in the window */
+		XSaveContext (dpy, fp->id, window_fp_context, (XPointer)fp);
+	    }
+	}
+	else
+	{
+	    if (fp->width > 0 && fp->height > 0)
+	    {
+		XWindowChanges attr;
+		attr.x = fp->x - w->frame_x;
+		attr.y = fp->y - w->frame_y;
+		attr.width = fp->width;
+		attr.height = fp->height;
+		XConfigureWindow (dpy, fp->id,
+				  CWX | CWY | CWWidth | CWHeight, &attr);
+	    }
+	    else
+	    {
+		XDestroyWindow (dpy, fp->id);
+		fp->id = 0;
+	    }
+	}
+	if (fp->id != 0)
+	{
+	    XDefineCursor (dpy, fp->id, (fp->cursor != Qnil)
+			   ? VCURSOR(fp->cursor)->cursor : None);
+	    set_frame_part_bg (fp);
+	}
+    }
+    rep_POPGC;
+}
+
+/* Mark all frame-parts of window W for gc. */
+void
+mark_frame_parts (Lisp_Window *w)
+{
+    struct frame_part *fp;
+    for (fp = w->frame_parts; fp != 0; fp = fp->next)
+    {
+	int i;
+	rep_MARKVAL(fp->alist);
+	rep_MARKVAL(rep_VAL(fp->win));
+	for (i = 0; i < fps_MAX; i++)
+	{
+	    rep_MARKVAL(fp->font[i]);
+	    rep_MARKVAL(fp->fg[i]);
+	    rep_MARKVAL(fp->bg[i]);
+	}
+	rep_MARKVAL(rep_VAL(fp->cursor));
+    }
+}
+
+
+/* creating window frames */
+
+/* Create a frame for window W. Called with the server grabbed */
+void
+create_window_frame (Lisp_Window *w)
+{
+    DB(("create_window_frame (%s)\n", w->name));
+    w->destroy_frame = 0;
+    w->focus_change = 0;
+    w->rebuild_frame = 0;
+    w->property_change = 0;
+    if (!FRAMEP(w->frame_style))
+	w->frame_style = Fsymbol_value (Qnil_frame, Qt);
+    if (!FRAMEP(w->frame_style) || VFRAME(w->frame_style)->type == f_nil)
+    {
+	nil_frame_generator (w);
+    }
+    else if (VFRAME(w->frame_style)->type == f_function)
+    {
+	DB(("  calling frame generator function %p\n",
+	    VFRAME(w->frame_style)->generator.function));
+	VFRAME(w->frame_style)->generator.function (w);
+    }
+    else if (VFRAME(w->frame_style)->type == f_list)
+    {
+	list_frame_generator (w);
+    }
+}
+
+/* Destroy the frame of window W */
+void
+destroy_window_frame (Lisp_Window *w)
+{
+    if (w->frame != 0)
+    {
+	if (w->destroy_frame != 0)
+	    w->destroy_frame (w);
+	else if (w->frame != 0)
+	    XDestroyWindow (dpy, w->frame);
+    }
+    w->frame = 0;
+    w->frame_data = 0;
+}
+
+
+/* type hooks */
+
+static void
+frame_prin (repv stream, repv obj)
+{
+    char buf[256];
+    sprintf (buf, "#<frame %s>", rep_STR(VFRAME(obj)->name));
+    rep_stream_puts (stream, buf, -1, FALSE);
+}
+
+static void
+frame_mark (repv obj)
+{
+    rep_MARKVAL(VFRAME(obj)->name);
+    rep_MARKVAL(VFRAME(obj)->plist);
+    if (VFRAME(obj)->type == f_list)
+	rep_MARKVAL(VFRAME(obj)->generator.list);
+}
+
+static void
+frame_sweep (void)
+{
+    Lisp_Frame *w = frame_list;
+    frame_list = 0;
+    while (w != 0)
+    {
+	Lisp_Frame *next = w->next;
+	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
+	{
+	    rep_FREE_CELL(w);
+	}
+	else
+	{
+	    rep_GC_CLR_CELL(rep_VAL(w));
+	    w->next = frame_list;
+	    frame_list = w;
+	}
+	w = next;
+    }
+}
+
+
+/* initialisation */
+
+void
+frames_init (void)
+{
+    repv def;
+    frame_type = rep_register_new_type ("frame", 0, frame_prin, frame_prin,
+					 frame_sweep, frame_mark,
+					 0, 0, 0, 0, 0, 0, 0);
+    rep_ADD_SUBR(Sget_frame);
+    rep_ADD_SUBR(Smake_frame);
+    rep_ADD_SUBR(Sframe_get);
+    rep_ADD_SUBR(Sframe_put);
+    rep_ADD_SUBR(Sframep);
+    rep_ADD_SUBR(Sframe_generator);
+    rep_ADD_SUBR(Sset_frame_generator);
+
+    rep_INTERN(default_frame);
+    def = Fmake_frame (rep_string_dup ("default"), Qnil);
+    VFRAME(def)->type = f_function;
+    VFRAME(def)->generator.function = default_frame_generator;
+    rep_SYM(Qdefault_frame)->value = def;
+
+    rep_INTERN(nil_frame);
+    def = Fmake_frame (rep_string_dup ("nil"), Qnil);
+    VFRAME(def)->type = f_nil;
+    rep_SYM(Qnil_frame)->value = def;
+
+    rep_INTERN(internal);
+    rep_INTERN(tiled);
+    rep_INTERN(unshaped);
+    rep_INTERN(center);
+    rep_INTERN(right);
+    rep_INTERN(left);
+    rep_INTERN(top);
+    rep_INTERN(bottom);
+    rep_INTERN(text);
+    rep_INTERN(x_justify);
+    rep_INTERN(y_justify);
+    rep_INTERN(background);
+    rep_INTERN(foreground);
+    rep_INTERN(font);
+    rep_INTERN(width);
+    rep_INTERN(height);
+    rep_INTERN(left_edge);
+    rep_INTERN(top_edge);
+    rep_INTERN(right_edge);
+    rep_INTERN(bottom_edge);
+    rep_INTERN(cursor);
+
+    def_border_color = BlackPixel (dpy, screen_num);
+    def_title_bg = WhitePixel (dpy, screen_num);
+
+    window_fp_context = XUniqueContext ();
+}
+
+void
+frames_kill (void)
+{
+}

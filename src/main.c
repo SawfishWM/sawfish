@@ -1,0 +1,195 @@
+/* main.c -- Entry point for sawmill
+   $Id$ */
+
+#include "sawmill.h"
+#include "build.h"
+#include <string.h>
+#include <limits.h>
+
+jmp_buf clean_exit_jmp_buf;
+
+static char *prog_name;
+
+DEFSYM(sawmill_directory, "sawmill-directory");
+DEFSYM(sawmill_lisp_lib_directory, "sawmill-lisp-lib-directory");
+DEFSYM(sawmill_site_lisp_directory, "sawmill-site-lisp-directory");
+DEFSYM(sawmill_exec_directory, "sawmill-exec-directory"); /*
+::doc:Vsawmill-directory::
+The directory in which all of sawmill's installed data files live.
+::end::
+::doc:Vsawmill-lisp-lib-directory::
+The name of the directory in which the standard lisp files live.
+::end::
+::doc:Vsawmill-site-lisp-directory::
+The name of the directory in which site-specific Lisp files are stored.
+::end::
+::doc:Vsawmill-exec-directory::
+The name of the directory containing sawmill's architecture specific files.
+::end:: */
+
+/* some errors */
+DEFSYM(window_error, "window-error");
+DEFSTRING(err_window_error, "Window error");
+DEFSYM(invalid_pos, "invalid-pos");
+DEFSTRING(err_invalid_pos, "Invalid position");
+DEFSYM(bad_event_desc, "bad-event-desc");
+DEFSTRING(err_bad_event_desc, "Invalid event description");
+
+static rep_bool
+on_idle (int since_last)
+{
+    return rep_FALSE;
+}
+
+static void
+on_termination (void)
+{
+}
+
+static void
+sawmill_symbols (void)
+{
+    rep_INTERN(sawmill_directory);
+    if(getenv("SAWMILLDIR") != 0)
+	rep_SYM(Qsawmill_directory)->value = rep_string_dup(getenv("SAWMILLDIR"));
+    else
+	rep_SYM(Qsawmill_directory)->value = rep_string_dup(SAWMILL_DIR);
+
+    rep_INTERN(sawmill_lisp_lib_directory);
+    if(getenv("SAWMILLLISPDIR") != 0)
+	rep_SYM(Qsawmill_lisp_lib_directory)->value
+	    = rep_string_dup(getenv("SAWMILLLISPDIR"));
+    else
+	rep_SYM(Qsawmill_lisp_lib_directory)->value
+	    = rep_string_dup(SAWMILL_LISPDIR);
+
+    rep_INTERN(sawmill_site_lisp_directory);
+    if(getenv("SAWMILLSITELISPDIR") != 0)
+	rep_SYM(Qsawmill_site_lisp_directory)->value
+	    = rep_string_dup(getenv("SAWMILLSITELISPDIR"));
+    else
+	rep_SYM(Qsawmill_site_lisp_directory)->value
+	    = rep_concat2(rep_STR(rep_SYM(Qsawmill_directory)->value),
+			  "/site-lisp");
+
+    rep_INTERN(sawmill_exec_directory);
+    if(getenv("SAWMILLEXECDIR") != 0)
+	rep_SYM(Qsawmill_exec_directory)->value
+	    = rep_string_dup(getenv("SAWMILLEXECDIR"));
+    else
+	rep_SYM(Qsawmill_exec_directory)->value = rep_string_dup(SAWMILL_EXECDIR);
+
+    if(getenv("SAWMILLDOCFILE") != 0)
+	rep_SYM(Qdocumentation_file)->value
+	    = rep_string_dup(getenv("SAWMILLDOCFILE"));
+    else
+	rep_SYM(Qdocumentation_file)->value
+	    = rep_concat2(rep_STR(rep_SYM(Qsawmill_directory)->value),
+			  "/" SAWMILL_VERSION "/DOC");
+
+    rep_SYM(Qdocumentation_files)->value
+	= Fcons(rep_SYM(Qdocumentation_file)->value,
+		rep_SYM(Qdocumentation_files)->value);
+
+    rep_SYM(Qload_path)->value
+	= Fcons(rep_SYM(Qsawmill_lisp_lib_directory)->value,
+		Fcons(rep_SYM(Qsawmill_site_lisp_directory)->value,
+		      rep_SYM(Qload_path)->value));
+
+    rep_SYM(Qdl_load_path)->value = Fcons(rep_SYM(Qsawmill_exec_directory)->value,
+					  rep_SYM(Qdl_load_path)->value);
+
+    rep_INTERN(window_error); rep_ERROR(window_error);
+    rep_INTERN(invalid_pos); rep_ERROR(invalid_pos);
+    rep_INTERN(bad_event_desc); rep_ERROR(bad_event_desc);
+
+    rep_on_idle_fun = on_idle;
+    rep_on_termination_fun = on_termination;
+}    
+
+int
+main(int argc, char **argv)
+{
+    volatile int rc = 5;
+
+    prog_name = *argv++; argc--;
+    rep_init (prog_name, &argc, &argv, 0, 0);
+
+    if (sys_init(prog_name))
+    {
+	repv res;
+
+	sawmill_symbols();
+
+	/* call all init funcs... */
+	events_init ();
+	colors_init ();
+	images_init ();
+	fonts_init ();
+	cursors_init ();
+	frames_init ();
+	windows_init ();
+	commands_init ();
+	keys_init ();
+	functions_init ();
+
+	if (!setjmp (clean_exit_jmp_buf))
+	{
+	    res = Fload(rep_string_dup ("sawmill"), Qnil, Qnil, Qnil);
+	    if (res != rep_NULL)
+	    {
+		rc = 0;
+
+		/* final initialisation.. */
+		if(rep_SYM(Qbatch_mode)->value == Qnil)
+		    manage_windows ();
+
+		/* then jump into the event loop.. */
+		if(rep_SYM(Qbatch_mode)->value == Qnil)
+		    res = Frecursive_edit ();
+	    }
+	    else if(rep_throw_value && rep_CAR(rep_throw_value) == Qquit)
+	    {
+		if(rep_INTP(rep_CDR(rep_throw_value)))
+		    rc = rep_INT(rep_CDR(rep_throw_value));
+		else
+		    rc = 0;
+		rep_throw_value = 0;
+	    }
+
+	    if(rep_throw_value && rep_CAR(rep_throw_value) == Qerror)
+	    {
+		/* If quitting due to an error, print the error cell if
+		   at all possible. */
+		repv stream = Fstderr_file();
+		repv old_tv = rep_throw_value;
+		rep_GC_root gc_old_tv;
+		rep_PUSHGC(gc_old_tv, old_tv);
+		rep_throw_value = rep_NULL;
+		if(stream && rep_FILEP(stream))
+		{
+		    fputs("error--> ", stderr);
+		    Fprin1(rep_CDR(old_tv), stream);
+		    fputc('\n', stderr);
+		}
+		else
+		    fputs("sawmill: error in initialisation\n", stderr);
+		rep_throw_value = old_tv;
+		rep_POPGC;
+	    }
+	}
+
+	/* call all exit funcs... */
+	windows_kill ();
+	frames_kill ();
+	cursors_kill ();
+	fonts_kill ();
+	images_kill ();
+	colors_kill ();
+	events_kill ();
+
+	sys_kill();
+	rep_kill();
+    }
+    return rc;
+}

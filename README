@@ -1,0 +1,151 @@
+-*- text -*-
+
+This is sawmill 0.0, a highly configurable window manager for X11. It
+is known to compile on at least Solaris/sparc and Linux/ix86; it is
+released under the terms of the GNU GPL, copyright John Harper
+<john@dcs.warwick.ac.uk>
+
+
+Manifesto
+*********
+
+Sawmill is an extensible window manager using an Emacs Lisp-like
+scripting language--all window decorations are configurable, the basic
+idea is to have as much user-interface policy as possible controlled
+through the Lisp language. This is no layer on top of twm, but a wholly
+new architecture.
+
+Despite this extensibility its policy is currently very minimal
+compared to most window managers---no icons, menus, desktop
+backgrounds, sliding windows, or whatever visual tricks are currently
+flavour of the month. (Menus will be added later using a separate
+process and GTK+, iconification will probably also be added).
+
+All high-level wm functions are implemented in Lisp for future
+extensibility or redefinition. Currently this includes interactive
+window moving and resizing, virtual workspaces, focus/transient window
+policies and frame theme definitions.
+
+Also, most received events are exported to the Lisp environment through
+``key-bindings'' similar to in Emacs. These events include pointer
+behaviour and many internal X11 events (enter/leave,
+focus-in/focus-out, map/unmap, etc..)
+
+Several themes are included, most mimic the window frames of particular
+Enlightenment themes (and this is where the images originated), for
+more details grep the lisp subdirectory for "make-frame".
+
+As yet there is no further documentation, see the source code for
+more details...
+
+
+Installing
+**********
+
+This is a snapshot of the CVS repository:
+
+        http://sprite.dcs.warwick.ac.uk:8080/cgi-bin/cvsweb
+
+It should be considered alpha quality, but seems to be reasonably
+stable in my environment. For more details, and the latest news, see the
+url:
+
+	http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
+
+To compile this snapshot you'll need GNU Autoconf, GNU make, Imlib, and
+my librep Lisp interpreter installed. The GTK+ binding for librep may
+also be useful. Sources for some of these are:
+
+	http://www.enlightenment.org/				[ full path? ]
+	http://www.dcs.warwick.ac.uk/~john/sw/librep.html
+	http://www.dcs.warwick.ac.uk/~john/sw/rep-gtk.html
+
+After making sure that Imlib and librep are installed, do something
+similar to the following in the root of the unpacked sawmill
+distribution:
+
+	$ aclocal ; autoconf
+	$ ./configure [USUAL-CONFIGURE-OPTIONS..]
+	$ make all
+	$ make install
+
+Before running the window manager, look at the lisp/sawmill-defaults.jl
+script. If you make any changes, copy the final version to ~/.sawmillrc
+
+
+Default Bindings
+****************
+
+The lisp/keymaps.jl script loads some initial event bindings, these
+include:
+
+In the window title bar (or the rest of the frame):
+
+	Button1-Move	move-window-interactively
+	Button2-Move	resize-window-interctively
+	Button3		raise-lower-window
+
+In the window close button:
+
+	Button1		close-window
+	Button3		destroy-window
+
+In the iconify button:
+
+	Button1		iconify-window		[unimplemented]
+	Button3		delete-window
+
+[ this is the only button in the `absolute-e' theme ]
+
+In any managed window:
+
+	C-M-Up		raise-window
+	C-M-Down	lower-window
+	M-Button1	move-window-interactively
+	M-Button3	raise-lower-window
+
+Anywhere at all:
+
+	C-Left		previous-workspace
+	C-Right		next-workspace
+	C-M-Left	send-to-previous-workspace
+	C-M-Right	send-to-next-workspace
+	C-M-ESC		exit
+
+[ C- is the control key, M- is the meta key ]
+
+Notes
+*****
+
+Workspaces are a bit different to the usual virtual desktops. They are
+created and deleted on demand. Send a window to a new workspace to
+create one, remove all windows to delete it.
+
+The `sloppy-focus' variable controls whether the focus is preserved
+when the root window is entered. Currently there's no click-to-focus
+option.
+
+The list of hooks currently called is:
+
+	pre-command-hook	called before and after each command
+	post-command-hook	is executed
+	unbound-key-hook	called when a keyboard/pointer event
+				is unbound
+
+	add-window-hook		these all relate to X events, they're
+	destroy-notify-hook	called with a single parameter, the
+	visibility-notify-hook	window in question
+	map-notify-hook
+	unmap-notify-hook
+	enter-notify-hook
+	leave-notify-hook
+	focus-in-hook
+	focus-out-hook
+
+	add-workspace-hook	each is called with a single parameter,
+	enter-workspace-hook	the workspace whose state has changed
+	leave-workspace-hook
+
+For a description of the structures defining window frame parts, see
+src/frames.c. Search for a comment starting ``building frames from
+component lists''

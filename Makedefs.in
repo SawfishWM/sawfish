@@ -1,0 +1,78 @@
+# Makedefs.in -- input for the common Makefile definitions
+# Copyright (C) 1998 John Harper <john@dcs.warwick.ac.uk>
+# $Id$
+#
+# This file is part of Jade.
+#
+# Jade is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# Jade is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Jade; see the file COPYING.  If not, write to
+# the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+version=@version@
+version_major=@version_major@
+version_minor=@version_minor@
+rep_version=@rep_version@
+SHELL=/bin/sh
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+datadir=@datadir@
+bindir=@bindir@
+includedir=@includedir@
+infodir=@infodir@
+libdir=@libdir@
+libexecdir=@libexecdir@
+localstatedir=@localstatedir@
+mandir=@mandir@
+sharedstatedir=@sharedstatedir@
+
+sawmilldir=@sawmilldir@
+lispdir=@lispdir@
+sawmillexecdir=@sawmillexecdir@
+host_type=@host@
+windowsys=@windowsys@
+
+CC=@CC@
+LIBTOOL=@LIBTOOL@
+CPPFLAGS=-DHAVE_CONFIG_H -DSAWMILL -I. -I.. @CPPFLAGS@
+CFLAGS=@CFLAGS@
+LDFLAGS=@LDFLAGS@
+LIBS=@LIBS@
+LIBOBJS=@LIBOBJS@ @ALLOCA@
+X11_CFLAGS=@X_CFLAGS@
+X11_LIBS=@X_PRE_LIBS@ -lX11 @X_LIBS@ @X_EXTRA_LIBS@
+IMLIB_CFLAGS=@IMLIB_CFLAGS@
+IMLIB_LIBS=@IMLIB_LIBS@
+
+INSTALL=@INSTALL@
+INSTALL_DATA=@INSTALL_DATA@
+INSTALL_PROGRAM=@INSTALL_PROGRAM@
+
+HAVE_X11=@HAVE_X11@
+HAVE_UNIX=@HAVE_UNIX@
+
+.PHONY: clean realclean install
+
+repexecdir=@repexecdir@
+include $(repexecdir)/rules.mk
+
+%.o : %.c
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
+
+% : %.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LIBS)
+
+# This rule builds dependancy files from C source files.
+.%.d : %.c
+	$(SHELL) -ec '$(CC) -MM $(CPPFLAGS) $(CFLAGS) $< \
+	| sed '\''s/$*\.o/& $*.lo .$*\.d/g'\'' > $@'

@@ -1,0 +1,76 @@
+# Makefile.in for Jade version 4
+# Copyright (C) 1998 John Harper <john@dcs.warwick.ac.uk>
+# $Id$
+#
+# This file is part of Jade.
+#
+# Jade is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# Jade is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Jade; see the file COPYING.  If not, write to
+# the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+include ./Makedefs
+
+top_builddir=.
+top_srcdir=@top_srcdir@
+
+SUBDIRS = src lisp man
+
+all : build.h DOC.dir
+	set -e; for dir in $(SUBDIRS); do \
+	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
+ 	done
+
+# this depends on config.status so it's rebuilt if configure is re-run
+build.h : build-info config.status
+	$(SHELL) $< $(host_type) $(version) $(version_major) $(version_minor) \
+	  '$(sawmilldir)' '$(lispdir)' '$(sawmillexecdir)'
+
+install : all installdirs
+	set -e; for dir in $(SUBDIRS); do \
+	  ( cd $$dir && $(MAKE) $@ ); \
+	done
+	$(INSTALL_DATA) ./DOC.* $(sawmilldir)/$(version)
+
+installdirs : $(top_srcdir)/mkinstalldirs
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(sawmilldir)/$(version) $(bindir)
+
+uninstall :
+	set -e; for dir in $(SUBDIRS); do \
+	  ( cd $$dir && $(MAKE) $@ ); \
+	done
+	rm -rf $(sawmilldir)/$(version)
+
+DOC.dir :
+	repdoc DOC `find . -name '*.c' -print`
+
+NEWS : man/news.texi
+	(cd man && $(MAKE) ../NEWS )
+
+clean :
+	-set -e; for dir in $(SUBDIRS); do \
+	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
+	done
+	rm -f *~ NEWS DOC.* TAGS build.h
+
+realclean :
+	-set -e; for dir in $(SUBDIRS); do \
+	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
+	done
+	rm -f config.cache config.h config.log config.status Makedefs Makefile
+	rm -f *~ NEWS DOC.* TAGS build.h libtool
+
+TAGS :
+	etags --language=c `find . -name '*.[ch]' -print` \
+	      --language=lisp `find . -name '*.jl' -print`
+
+.PHONY: install uninstall tar nobak clean realclean TAGS
