@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.5 1999/08/14 11:02:18 john Exp $
+;; $Id: sawmill-ui.jl,v 1.6 1999/08/15 15:04:55 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -502,6 +502,8 @@ fi
        (entry (gtk-entry-new))
        (map-clist (gtk-clist-new-with-titles ["Keymaps"]))
        (frame (gtk-frame-new))
+       (doc-frame (gtk-frame-new))
+       (doc-label (gtk-label-new ""))
        (cmd-clist (gtk-clist-new-with-titles ["Commands"]))
        (scroller (gtk-scrolled-window-new))
        (scroller-2 (gtk-scrolled-window-new))
@@ -515,11 +517,20 @@ fi
     (gtk-box-set-spacing vbox ui-box-spacing)
     (gtk-container-border-width vbox ui-box-border)
 
+    (when (get-key spec ':doc-path)
+      (setq documentation-files (get-key spec ':doc-path)))
+
+    (gtk-container-add doc-frame doc-label)
+    (gtk-label-set-justify doc-label 'left)
+    (gtk-label-set-line-wrap doc-label t)
+
     (rplacd spec (nthcdr 2 spec))
     (setq spec (nconc spec (list ':maps maps
 				 ':frame frame
 				 ':cmd-clist cmd-clist
 				 ':entry entry
+				 ':doc-frame doc-frame
+				 ':doc-label doc-label
 				 ':active-map 0
 				 ':active-cmd 0)))
 
@@ -565,6 +576,7 @@ fi
 
     (gtk-container-add vbox frame)
     (gtk-container-add vbox hbox-1)
+    (gtk-container-add vbox doc-frame)
 
     vbox))
 
@@ -584,7 +596,8 @@ fi
        (c-row (- (length commands) (length (memq command commands)))))
     (gtk-clist-select-row (get-key spec ':cmd-clist) c-row 0)
     (gtk-clist-moveto (get-key spec ':cmd-clist) c-row 0)
-    (gtk-entry-set-text (get-key spec ':entry) event)))
+    (gtk-entry-set-text (get-key spec ':entry) event)
+    (build-keymap-shell:update-doc spec)))
 
 (defun build-keymap-shell:set-event (spec)
   (let*
@@ -604,8 +617,18 @@ fi
        (value (nth binding (cdr (get-key (aref map 1) ':value)))))
     (when value
       (setq value (cons command (cdr value)))
-      (ui-bind-key (aref map 1) binding value))))
+      (ui-bind-key (aref map 1) binding value))
+    (build-keymap-shell:update-doc spec)))
 
+(defun build-keymap-shell:update-doc (spec)
+  (let*
+      ((command (nth (get-key spec ':active-cmd) (get-key spec ':commands)))
+       (doc (documentation command))
+       (frame (get-key spec ':doc-frame))
+       (label (get-key spec ':doc-label)))
+    (gtk-frame-set-label frame (symbol-name command))
+    (gtk-label-set label (or doc "Undocumented"))))
+      
 
 ;; building the frame for the element tree
 
