@@ -26,7 +26,7 @@
 	  rep.io.timers
 	  sawfish.wm.windows
 	  sawfish.wm.custom
-	  sawfish.wm.stacking)
+	  sawfish.wm.util.stacking)
 
   (define-structure-alias auto-raise sawfish.wm.ext.auto-raise)
 
@@ -43,12 +43,6 @@
     :depends raise-windows-on-focus
     :group focus)
 
-  ;XXX this thing is hosed
-  ;(defcustom raise-groups-on-focus t
-  ;  "Raise entire group after focusing a window (when auto-raise is enabled)."
-  ;  :type boolean
-  ;  :group (focus advanced))
-
   (defvar disable-auto-raise nil)
 
   (define rw-timer nil)
@@ -59,13 +53,6 @@
       (setq rw-window nil)
       (delete-timer rw-timer)
       (setq rw-timer nil)))
-
-  (define (rw-raise-window w) (raise-window w))
-
-  ;(defun rw-raise-window (w)
-  ;  (if raise-groups-on-focus
-  ;      (raise-group w)
-  ;    (raise-window w)))
 
   (define (rw-on-focus w)
     (unless disable-auto-raise
@@ -78,7 +65,7 @@
 				      (if disable-auto-raise
 					  (set-timer timer)
 					(setq rw-timer nil)
-					(rw-raise-window rw-window))))
+					(raise-window* rw-window))))
 		    (delay (max 1 raise-window-timeout)))
 		(setq rw-timer (make-timer timer-callback
 					   (quotient delay 1000)

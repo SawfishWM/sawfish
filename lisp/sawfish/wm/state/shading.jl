@@ -34,7 +34,7 @@
 	  sawfish.wm.frames
 	  sawfish.wm.session.init
 	  sawfish.wm.workspace
-	  sawfish.wm.stacking
+	  sawfish.wm.util.stacking
 	  sawfish.wm.menus)
 
   (define-structure-alias shading sawfish.wm.state.shading)
@@ -65,7 +65,7 @@ state."
       (call-window-hook 'window-state-change-hook w (list '(shaded)))
       (reframe-window w)
       (when raise-windows-when-unshaded
-	(raise-window w))))
+	(raise-window* w))))
 
   (define (toggle-window-shaded w)
     "Toggle the shaded (only the title bar is displayed) state of the window."

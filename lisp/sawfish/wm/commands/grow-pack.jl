@@ -47,7 +47,7 @@
 	  sawfish.wm.custom
 	  sawfish.wm.commands
 	  sawfish.wm.workspace
-	  sawfish.wm.stacking)
+	  sawfish.wm.util.stacking)
 
   (define-structure-alias grow-pack sawfish.wm.commands.grow-pack)
 
@@ -252,7 +252,7 @@ already in the window, then does like `maybe'.
 	    (window-put w 'maximized-horizontally t)
 	  (window-put w 'maximzed-vertically t)))
       (move-resize-window-to w wleft wtop nwidth nheight)
-      (when maximize-raises (raise-window w))
+      (when maximize-raises (raise-window* w))
       (when grow-is-maximize
 	(call-window-hook 'window-maximized-hook w
 			  (list (if (member direction '(left right))

@@ -36,7 +36,7 @@
 	  sawfish.wm.commands
 	  sawfish.wm.custom
 	  sawfish.wm.events
-	  sawfish.wm.stacking
+	  sawfish.wm.util.stacking
 	  sawfish.wm.util.edges)
 
   (define-structure-alias move-resize sawfish.wm.commands.move-resize)
@@ -218,7 +218,7 @@
 
       (when (and move-resize-raise-window (eq move-resize-mode 'opaque))
 	;; only raise window initially if the display will get updated
-	(raise-window w))
+	(raise-window* w))
 
       (update-edges)
       (unless (eq move-resize-mode 'opaque)
@@ -269,7 +269,7 @@
 	(remove-hook 'viewport-moved-hook update-edges))
 
       (when (and move-resize-raise-window (not (eq move-resize-mode 'opaque)))
-	(raise-window w))
+	(raise-window* w))
       (if (eq function 'move)
 	  (call-window-hook 'after-move-hook w (list move-resize-directions))
 	(call-window-hook 'after-resize-hook w

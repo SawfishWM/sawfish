@@ -33,6 +33,7 @@
 	  sawfish.wm.custom
 	  sawfish.wm.workspace
 	  sawfish.wm.stacking
+	  sawfish.wm.util.stacking
 	  sawfish.wm.viewport)
 
   (defcustom configure-auto-gravity t
@@ -83,24 +84,24 @@
 	      (sibling (car (cdr tem))))
 	  (case relation
 	    ((above)
-	     (if sibling (stack-window-above w sibling) (raise-window w)))
+	     (if sibling (stack-window-above w sibling) (raise-window* w)))
 	    ((below)
-	     (if sibling (stack-window-below w sibling) (lower-window w)))
+	     (if sibling (stack-window-below w sibling) (lower-window* w)))
 	    ((top-if)
 	     (if (window-occludes-p w (if sibling (list sibling)
 					(stacking-order)) t)
-		 (raise-window w)))
+		 (raise-window* w)))
 	    ((bottom-if)
 	     (if (window-occludes-p w (if sibling (list sibling)
 					(stacking-order)))
-		 (lower-window w)))
+		 (lower-window* w)))
 	    ((opposite)
 	     (cond ((window-occludes-p w (if sibling (list sibling)
 					   (stacking-order)) t)
-		    (raise-window w))
+		    (raise-window* w))
 		   ((window-occludes-p w (if sibling (list sibling)
 					   (stacking-order)))
-		    (lower-window w))))
+		    (lower-window* w))))
 	    (t (error "Bad stacking relation: %s" relation)))))
 
       (when (setq tem (cdr (assq 'dimensions alist)))

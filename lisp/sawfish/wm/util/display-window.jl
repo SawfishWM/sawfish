@@ -32,7 +32,7 @@
 	  sawfish.wm.custom
 	  sawfish.wm.commands
 	  sawfish.wm.viewport
-	  sawfish.wm.stacking
+	  sawfish.wm.util.stacking
 	  sawfish.wm.state.shading
 	  sawfish.wm.state.iconify
 	  sawfish.wm.windows
@@ -88,7 +88,7 @@
     (when w
       (display-window-without-focusing w preferred-space)
       (when raise-selected-windows
-	(raise-window w))
+	(raise-window* w))
       (when warp-to-selected-windows
 	(warp-cursor-to-window w))
       (when (window-really-wants-input-p w)

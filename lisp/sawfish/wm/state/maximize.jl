@@ -54,7 +54,7 @@
 	  sawfish.wm.session.init
 	  sawfish.wm.workspace
 	  sawfish.wm.util.display-window
-	  sawfish.wm.stacking
+	  sawfish.wm.util.stacking
 	  sawfish.wm.misc)
 
   (define-structure-alias maximize sawfish.wm.state.maximize)
@@ -361,7 +361,7 @@ doesn't overlap any avoided windows, or nil."
 	(move-resize-window-to w (car coords) (cdr coords)
 			       (car dims) (cdr dims))
 	(when maximize-raises
-	  (raise-window w))
+	  (raise-window* w))
 	(call-window-hook 'window-maximized-hook w (list direction))
 	(call-window-hook 'window-state-change-hook w (list '(maximized))))))
 

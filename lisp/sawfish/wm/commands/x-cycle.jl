@@ -79,7 +79,7 @@
 	  sawfish.wm.custom
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
-	  sawfish.wm.stacking
+	  sawfish.wm.util.stacking
 	  sawfish.wm.events
 	  sawfish.wm.util.decode-events
 	  sawfish.wm.util.groups
@@ -220,7 +220,7 @@
 	(show-window win))
       (when cycle-raise-windows
 	(fluid-set x-cycle-stacking (stacking-order))
-	(raise-window win))
+	(raise-window* win))
       (when cycle-warp-pointer
 	(warp-cursor-to-window win))
       (when cycle-show-window-names
