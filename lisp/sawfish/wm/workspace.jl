@@ -66,7 +66,7 @@
   :after-set (lambda ()
 	       (when (< total-workspaces preallocated-workspaces)
 		 (setq total-workspaces preallocated-workspaces))
-	       (call-hook workspace-state-change-hook)))
+	       (call-hook 'workspace-state-change-hook)))
 
 (defcustom raise-windows-on-uniconify t
   "Windows are raised after being uniconified."
