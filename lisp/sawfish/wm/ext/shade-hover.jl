@@ -26,13 +26,18 @@
 
 (defvar shade-hover-timer nil)
 
+(defvar shade-hover-hooks nil)
+
 (defun shade-hover-fp-leave (w fp)
   (when shade-hover-timer
     (delete-timer shade-hover-timer)
     (setq shade-hover-timer nil))
   (when (window-get w 'shade-hover-unshaded)
     (window-put w 'shade-hover-unshaded nil)
-    (shade-window w)))
+    (shade-window w))
+  (while shade-hover-hooks
+    (setq pre-command-hook (delq (car shade-hover-hooks) pre-command-hook))
+    (setq shade-hover-hooks (cdr shade-hover-hooks))))
 
 (defun shade-hover-fp-enter (w fp)
   (when (window-get w 'shaded)
@@ -53,7 +58,8 @@
       (setq shade-hover-timer (make-timer callback
 					  (/ shade-hover-delay 1000)
 					  (mod shade-hover-delay 1000)))
-      (add-hook 'pre-command-hook pre-command-callback))))
+      (add-hook 'pre-command-hook pre-command-callback)
+      (setq shade-hover-hooks (cons pre-command-callback shade-hover-hooks)))))
 
 (add-hook 'enter-frame-part-hook shade-hover-fp-enter)
 (add-hook 'leave-frame-part-hook shade-hover-fp-leave)
