@@ -148,15 +148,15 @@
 		(loop (1+ i)))))))
 
       (define (set-window-hints w)
-	(let
-	    ;; XXX the gnome-wm standard sucks..!
-	    ((space (and (not (window-sticky-p/workspace w))
-			 (window-get w 'swapped-in))))
-	  (if space
-	      (set-x-property w '_NET_WM_DESKTOP
-			      (vector (- space (car limits))) 'CARDINAL 32)
-	    (set-x-property w '_NET_WM_DESKTOP
-			    (vector #xffffffff) 'CARDINAL 32))))
+	(cond ((window-sticky-p/workspace w)
+	       (set-x-property w '_NET_WM_DESKTOP
+			       (vector #xffffffff) 'CARDINAL 32))
+	      ((window-get w 'swapped-in)
+	       ;; XXX the gnome-wm standard sucks..!
+	       (let ((space (window-get w 'swapped-in)))
+		 (set-x-property w '_NET_WM_DESKTOP
+				 (vector (- space (car limits)))
+				 'CARDINAL 32)))))
 		 
       ;; apparently some pagers don't like it if we place windows
       ;; on (temporarily) non-existent workspaces
