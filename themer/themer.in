@@ -219,6 +219,13 @@ exec rep "$0" "$@"
 	 (progn ,@forms)
        (gtk-entry-set-text ,entry __save_entry_text__))))
 
+(defmacro with-clist-frozen (clist &rest forms)
+  `(progn
+     (gtk-clist-freeze ,clist)
+     (unwind-protect
+	 (progn ,@forms)
+       (gtk-clist-thaw ,clist))))
+
 
 ;; ``items'', encapsulated widgets
 
@@ -836,23 +843,23 @@ exec rep "$0" "$@"
 		 pattern-attrs)))
 
 (defun patterns-update-all ()
-  (clist-delete-all patterns-clist)
-  (mapc (lambda (cell)
-	  ;; fix relative filenames in images
-	  (mapc (lambda (elt)
-		  ;; ELT is (STATE . VALUE)
-		  (let
-		      ((name (car (cdr elt))))
-		    (when (and (stringp name)
-			       (not (file-name-absolute-p name))
-			       current-filename)
-		      (rplaca (cdr elt)
-			      (expand-file-name
-			       name (file-name-directory
-				     current-filename))))))
-		(cdr cell))
-	  (gtk-clist-append patterns-clist (patterns-format-list cell)))
-	patterns-alist))
+  (with-clist-frozen patterns-clist
+    (mapc (lambda (cell)
+	    ;; fix relative filenames in images
+	    (mapc (lambda (elt)
+		    ;; ELT is (STATE . VALUE)
+		    (let
+			((name (car (cdr elt))))
+		      (when (and (stringp name)
+				 (not (file-name-absolute-p name))
+				 current-filename)
+			(rplaca (cdr elt)
+				(expand-file-name
+				 name (file-name-directory
+				       current-filename))))))
+		  (cdr cell))
+	    (gtk-clist-append patterns-clist (patterns-format-list cell)))
+	  patterns-alist)))
 
 (defun on-patterns-add ()
   (let*
@@ -947,11 +954,13 @@ exec rep "$0" "$@"
 (defun frames-update-all ()
   (setq frame-selection nil)
   (setq frame-part-selection nil)
-  (clist-delete-all frames-name-clist)
-  (clist-delete-all frames-part-clist)
-  (mapc (lambda (cell)
-	  (gtk-clist-append frames-name-clist
-			    (vector (car cell)))) frames-alist))
+  (with-clist-frozen frames-name-clist
+    (with-clist-frozen frames-part-clist
+      (clist-delete-all frames-name-clist)
+      (clist-delete-all frames-part-clist)
+      (mapc (lambda (cell)
+	      (gtk-clist-append frames-name-clist
+				(vector (car cell)))) frames-alist))))
 
 (defun on-frames-add ()
   (let
@@ -989,10 +998,11 @@ exec rep "$0" "$@"
   (unless (eq frame-selection row)
     (setq frame-selection row)
     (gtk-frame-set-label frames-frame (car (current-frame)))
-    (clist-delete-all frames-part-clist)
-    (mapc (lambda (part)
-	    (gtk-clist-append frames-part-clist (frame-part-columns part)))
-	  (cdr (current-frame)))
+    (with-clist-frozen frames-part-clist
+      (clist-delete-all frames-part-clist)
+      (mapc (lambda (part)
+	      (gtk-clist-append frames-part-clist (frame-part-columns part)))
+	    (cdr (current-frame))))
     (set-widget-enabled frames-frame t)))
 
 (defun on-frames-name-clist-unselect ()
@@ -1000,17 +1010,19 @@ exec rep "$0" "$@"
       ((i (1- (length (cdr (current-frame))))))
     (setq frame-selection nil)
     (gtk-frame-set-label frames-frame "")
-    (while (>= i 0)
-      (gtk-clist-remove frames-part-clist i)
-      (setq i (1- i)))
+    (with-clist-frozen frames-part-clist
+      (while (>= i 0)
+	(gtk-clist-remove frames-part-clist i)
+	(setq i (1- i))))
     (set-widget-enabled frames-frame nil)))
 
 (defun update-frame-names-clist ()
   (let
       ((i 0))
-    (mapc (lambda (frame)
-	    (gtk-clist-set-text frames-name-clist i 0 (car frame))
-	    (setq i (1+ i))) frames-alist)))
+    (with-clist-frozen frames-name-clist
+      (mapc (lambda (frame)
+	      (gtk-clist-set-text frames-name-clist i 0 (car frame))
+	      (setq i (1+ i))) frames-alist))))
 
 (defun frame-part-columns (part)
   (let
@@ -1137,11 +1149,12 @@ exec rep "$0" "$@"
 ;; mappings
 
 (defun mappings-update-all ()
-  (clist-delete-all mapping-clist)
-  (mapc (lambda (cell)
-	  (gtk-clist-append mapping-clist
-			    (vector (symbol-name (car cell)) (cdr cell))))
-	mapping-alist))
+  (with-clist-frozen mapping-clist
+    (clist-delete-all mapping-clist)
+    (mapc (lambda (cell)
+	    (gtk-clist-append mapping-clist
+			      (vector (symbol-name (car cell)) (cdr cell))))
+	  mapping-alist)))
 
 (defun on-mapping-add ()
   (let
@@ -1370,9 +1383,12 @@ exec rep "$0" "$@"
     (sawmill-eval-async `(reload-frame-style ',theme-name))))
 
 (defun new-theme ()
-  (clist-delete-all patterns-clist)
-  (clist-delete-all frames-name-clist)
-  (clist-delete-all mapping-clist)
+  (with-clist-frozen patterns-clist
+    (clist-delete-all patterns-clist))
+  (with-clist-frozen frames-name-clist
+    (clist-delete-all frames-name-clist))
+  (with-clist-frozen mapping-clist
+    (clist-delete-all mapping-clist))
   (mapc (lambda (sym)
 	  (set sym nil)) saved-variables)
   (setq theme-name 'unnamed)
