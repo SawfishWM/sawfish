@@ -33,7 +33,7 @@
   :group move)
 
 (defcustom resize-add-edges t
-  "Grab other window edges while resizing interactively."
+  "Allow other window edges to be grabbed while resizing interactively."
   :type boolean
   :group move)
 
