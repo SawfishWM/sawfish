@@ -450,7 +450,7 @@ DEFUN ("x-create-pixmap", Fx_create_pixmap, Sx_create_pixmap, (repv wh), rep_Sub
     _w = rep_INT (rep_CAR (wh));
     _h = rep_INT (rep_CDR (wh));
 
-    id = XCreatePixmap (dpy, root_window, _w, _h, screen_depth);
+    id = XCreatePixmap (dpy, root_window, _w, _h, image_depth);
     w = create_x_drawable (id, _w, _h);
     w->is_pixmap = 1;
 

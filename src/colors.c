@@ -82,7 +82,7 @@ X11 color specifier.
     XColor exact_col;
     rep_DECLARE1(name, rep_STRINGP);
 
-    if (XParseColor (dpy, screen_cmap, rep_STR(name), &exact_col) != 0)
+    if (XParseColor (dpy, image_cmap, rep_STR(name), &exact_col) != 0)
     {
 	return Fget_color_rgb (rep_MAKE_INT(exact_col.red),
 			       rep_MAKE_INT(exact_col.green),

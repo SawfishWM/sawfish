@@ -119,7 +119,7 @@ create_flipper (Window parent, int x, int y, int width, int height)
     XSetWindowAttributes wa;
     wa.override_redirect = True;
     w = XCreateWindow (dpy, parent, x, y, width, height, 0, 0,
-		       InputOnly, screen_visual, CWOverrideRedirect, &wa);
+		       InputOnly, preferred_visual, CWOverrideRedirect, &wa);
     if (w != 0)
     {
 	XSelectInput (dpy, w, EnterWindowMask | LeaveWindowMask

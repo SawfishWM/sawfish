@@ -967,7 +967,7 @@ images_init (void)
     {
 #if defined (HAVE_IMLIB)
 	ImlibInitParams params;
-	params.visualid = screen_visual->visualid;
+	params.visualid = preferred_visual->visualid;
 	params.flags = PARAMS_VISUALID;
 	imlib_id = Imlib_init_with_params (dpy, &params);
 	image_cmap = Imlib_get_colormap (imlib_id);

@@ -1440,8 +1440,8 @@ list_frame_generator (Lisp_Window *w)
 	wamask = CWOverrideRedirect;
 	w->frame = XCreateWindow (dpy, root_window, w->attr.x, w->attr.y,
 				  w->frame_width, w->frame_height,
-				  0, screen_depth, InputOutput,
-				  screen_visual, wamask, &wa);
+				  0, image_depth, InputOutput,
+				  image_visual, wamask, &wa);
     }
     else
     {
