@@ -299,6 +299,16 @@ set_frame_part_fg (struct frame_part *fp)
     }
 }
 
+/* Redraw FP. */
+void
+refresh_frame_part (struct frame_part *fp)
+{
+    Lisp_Window *w = fp->win;
+    set_frame_part_bg (fp);
+    if (w->id != 0)
+	set_frame_part_fg (fp);
+}
+
 /* Find the frame-part that is drawn in window ID */
 struct frame_part *
 find_frame_part_by_window (Window id)
@@ -338,13 +348,11 @@ frame_part_focuser (Lisp_Window *w)
     struct frame_part *fp;
     for (fp = w->frame_parts; fp != 0 && w->id != 0; fp = fp->next)
     {
-	set_frame_part_bg (fp);
+	refresh_frame_part (fp);
 
 	/* set_frame_part_bg may trigger the error handler */
 	if (w->id == 0)
 	    break;
-
-	set_frame_part_fg (fp);
     }
 }
 
