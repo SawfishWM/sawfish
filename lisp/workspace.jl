@@ -60,13 +60,14 @@ their parent window.")
 
 ;; window shouldn't be in any workspace
 (defun ws-add-window-to-space (w space)
-  (rplacd space (nconc (cdr space) (list w)))
-  (window-put w 'workspace space)
-  (when (and ws-current-workspace
-	     (eq space ws-current-workspace)
-	     (not (window-get w 'iconified)))
-    (show-window w))
-  (call-window-hook 'add-to-workspace-hook w))
+  (unless (window-get w 'sticky)
+    (rplacd space (nconc (cdr space) (list w)))
+    (window-put w 'workspace space)
+    (when (and ws-current-workspace
+	       (eq space ws-current-workspace)
+	       (not (window-get w 'iconified)))
+      (show-window w))
+    (call-window-hook 'add-to-workspace-hook w)))
 
 ;; usually called from the add-window-hook
 (defun ws-add-window (w)
