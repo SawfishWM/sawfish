@@ -120,10 +120,16 @@
 		      'CARDINAL 32))))
 
 (defun gnome-honour-client-state (w)
-  (when (string= (window-name w) "panel")
-    ;; XXX I don't think the GNOME hints specify these things
-    (window-put w 'focus-click-through t)
-    (window-put w 'avoid t))
+  (let
+      ((class (get-x-text-property w 'WM_CLASS)))
+    (when (and class (>= (length class) 2))
+      (cond ((and (string= (aref class 1) "Panel")
+		  (string= (aref class 0) "panel"))
+	     ;; XXX I don't think the GNOME hints specify these things
+	     (window-put w 'focus-click-through t)
+	     (window-put w 'avoid t))
+	    ((string= (aref class 1) "gmc-desktop-icon")
+	     (window-put w 'never-focus t)))))
   (let
       ((state (get-x-property w '_WIN_STATE))
        (hints (get-x-property w '_WIN_HINTS))
