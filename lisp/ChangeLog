@@ -1,5 +1,12 @@
 1999-12-09  John Harper  <john@dcs.warwick.ac.uk>
 
+	* gnome-menu.jl (gnome-menu-read-directory): sort entries whose
+	order wasn't specified by a `.order' file
+
+	* keymaps.jl (custom-set-keymap): ensure that we ungrab the
+	keymap _before_ destructively modifying the original value, not
+	afterwards
+
 	* workspace.jl (ws-set-client-state): WM_STATE property should
 	have two values, not only one
 
