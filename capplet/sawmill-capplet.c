@@ -51,14 +51,7 @@ static int ui_stdout[2];
 static guint ui_handler_id;
 
 static char *group;
-
-char *ui_argv[] = { "sawfish-ui",
-		    "--flatten",
-		    "--socket-id", 0,
-		    "--group", 0,
-		    0 };
-#define UI_ARGV_SOCKET_SLOT 3
-#define UI_ARGV_GROUP_SLOT 5
+static gboolean no_flatten = FALSE;
 
 
 /* communicating with sawfish-ui */
@@ -218,6 +211,8 @@ sawmill_setup (void)
     switch (ui_pid = fork ())
     {
 	char buf[64];
+	char *argv[10];
+	int i;
 
     case -1:
 	exit (5);
@@ -230,12 +225,21 @@ sawmill_setup (void)
 	close (ui_stdout[0]);
 	close (ui_stdout[1]);
 	sprintf (buf, "%ld", (long)GDK_WINDOW_XWINDOW (ui_socket->window));
-	ui_argv[UI_ARGV_SOCKET_SLOT] = buf;
-	if (group != 0)
-	    ui_argv[UI_ARGV_GROUP_SLOT] = group;
+	i = 0;
+	argv[i++] = "sawfish-ui";
+	if (!no_flatten)
+	    argv[i++] = "--flatten";
 	else
-	    ui_argv[UI_ARGV_GROUP_SLOT-1] = 0;
-	execvp (ui_argv[0], ui_argv);
+	    argv[i++] = "--single-level";
+	argv[i++] = "--socket-id";
+	argv[i++] = buf;
+	if (group != 0)
+	{
+	    argv[i++] = "--group";
+	    argv[i++] = group;
+	}
+	argv[i++] = 0;
+	execvp (argv[0], argv);
 	exit (10);
 
     default:				/* parent */
@@ -263,6 +267,8 @@ main (int argc, char **argv)
 	  0, "Sawfish customization group", "GROUP" },
 	{ "sawfish-group", 0, POPT_ARG_STRING, &group,
 	  0, "Sawfish customization group", "GROUP" },
+	{ "sawfish-no-flatten", 0, POPT_ARG_NONE, &no_flatten,
+	  0, "Don't flatten group trees", 0 },
 	{ 0, 0, 0, 0, 0 }
     };
 
