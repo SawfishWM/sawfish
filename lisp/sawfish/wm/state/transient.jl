@@ -24,6 +24,7 @@
     (export transient-of-p
 	    indirect-transient-of-p
 	    transient-parents
+	    transient-children
 	    transient-group
 	    map-transient-group
 	    raise-window-and-transients
@@ -67,9 +68,11 @@
       (and x-for
 	   (or (eql x-for (window-id y))
 	       ;; windows that set WM_TRANSIENT_FOR to the root window are
-	       ;; transients for their entire group (de facto standard)
+	       ;; transients for their entire group (de facto standard).
+	       ;; This only makes sense for non-transient windows
 	       (and (eql x-for (root-window-id))
 		    (window-group-id x)
+		    (not (window-transient-p y))
 		    (eql (window-group-id x) (window-group-id y)))))))
 
   (define (indirect-transient-of-p x y)
@@ -89,6 +92,14 @@
 			   ((if indirectly
 				indirect-transient-of-p
 			      transient-of-p) w x)))))
+
+  (define (transient-children w #!optional indirectly)
+    "Return the list of windows which are transients of window W."
+    (filter-windows (lambda (x)
+		      (and (window-mapped-p x)
+			   ((if indirectly
+				indirect-transient-of-p
+			      transient-of-p) x w)))))
 
   (define (transient-group w #!optional by-depth)
     "Return the list of windows which is either a transient window for window
