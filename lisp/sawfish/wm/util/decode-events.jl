@@ -59,7 +59,7 @@ cell). The symbolic description has the form `(TYPE MODIFIER-LIST ACTION)'."
 	   (list 'mouse (decode-mods)
 		 (aref [click-1 click-2 move off click-3] (1- code))))
 	  (t
-	   ((error "Unknown event type"))))))
+	   (error "Unknown event type")))))
 
 ;;;###autoload
 (defun encode-event (event)
