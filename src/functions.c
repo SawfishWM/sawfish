@@ -19,6 +19,9 @@
    along with sawmill; see the file COPYING.   If not, write to
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
+/* Define this to fake two side-by-side Xinerama style heads */
+#undef TEST_XINERAMA
+
 /* AIX requires this to be the first thing in the file.  */
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -49,6 +52,13 @@ static int xinerama_heads;
 #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
 # include <X11/extensions/Xinerama.h>
   static XineramaScreenInfo *xinerama_head_info;
+# ifdef TEST_XINERAMA
+   static XineramaScreenInfo debug_heads[2] = {
+     { 0, 0, 0, 512, 768 },
+     { 0, 512, 0, 512, 768 }
+   };
+   int debug_nheads = 2;
+# endif
 #endif
 
 DEFSYM(root, "root");
@@ -1347,8 +1357,13 @@ functions_init (void)
     rep_mark_static (&message.justify);
 
 #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
+# ifndef TEST_XINERAMA
     if (dpy != 0)
 	xinerama_head_info = XineramaQueryScreens (dpy, &xinerama_heads);
+# else
+    xinerama_head_info = debug_heads;
+    xinerama_heads = debug_nheads;
+# endif
 #endif
 }
 
