@@ -164,7 +164,7 @@ struct frame_part {
     Window id;
     GC gc;
 
-    int clicked;
+    int clicked : 1;
 
     repv text;			/* may be nil, a string, or a function */
     repv x_justify, y_justify;
