@@ -129,61 +129,105 @@ void
 server_init (void)
 {
     char namebuf[256];
-    repv name;
+    repv user, name;
 
     rep_INTERN(server_eval);
+    rep_mark_static (&socket_name);
 
     if (rep_SYM(Qbatch_mode)->value != Qnil)
 	return;
 
     name = Fsymbol_value (Qcanonical_display_name, Qt);
+    user = Fuser_login_name ();
 
-    if(!name || !rep_STRINGP(name))
+    if(!name || !user || !rep_STRINGP(name) || !rep_STRING(user))
 	return;
 
 #ifdef HAVE_SNPRINTF
-    snprintf(namebuf, sizeof(namebuf), SAWMILL_SOCK_NAME, rep_STR(name));
+    snprintf (namebuf, sizeof(namebuf), SAWMILL_SOCK_DIR, rep_STR(user));
 #else
-    sprintf(namebuf, SAWMILL_SOCK_NAME, rep_STR(name));
+    sprintf (namebuf, SAWMILL_SOCK_DIR, rep_STR(user));
 #endif
-    name = Flocal_file_name(rep_string_dup(namebuf));
 
-    if(name && rep_STRINGP(name))
+    /* Make the socket directory trying to ensure that it hasn't
+       been compromised. */
+    if (mkdir (namebuf, 0700) != 0)
     {
-	if(access(rep_STR(name), F_OK) == 0)
+	if (errno == EEXIST)
 	{
-	    /* Socket already exists. Delete it */
-	    unlink(rep_STR(name));
-	}
-	socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
-	if(socket_fd >= 0)
-	{
-	    struct sockaddr_un addr;
-	    addr.sun_family = AF_UNIX;
-	    strcpy(addr.sun_path, rep_STR(name));
-	    if(bind(socket_fd, (struct sockaddr *)&addr,
-		    sizeof(addr.sun_family) + strlen(addr.sun_path) + 1) == 0)
+	    struct stat st;
+	    if (stat (namebuf, &st) == 0)
 	    {
-		chmod (rep_STR(name), S_IRWXU);
-		if(listen(socket_fd, 5) == 0)
+		if (st.st_uid != getuid ())
 		{
-		    rep_unix_set_fd_nonblocking(socket_fd);
-		    rep_register_input_fd(socket_fd, server_accept_connection);
-
-		    socket_name = name;
+		    fprintf (stderr, "Owner of %s is not the current user\n",
+			     namebuf);
 		    return;
 		}
-		else
-		    perror ("listen");
+		if (st.st_mode & (S_IRWXG | S_IRWXO))
+		{
+		    fprintf (stderr, "Permissions for %s are too lax\n",
+			     namebuf);
+		    return;
+		}
 	    }
 	    else
-		perror ("bind");
-	    close(socket_fd);
+	    {
+		perror (namebuf);
+		return;
+	    }
 	}
 	else
-	    perror ("socket");
-	socket_fd = -1;
+	{
+	    perror (namebuf);
+	    return;
+	}
     }
+
+    /* Add the socket name */
+    strcat (namebuf, "/");
+    strcat (namebuf, rep_STR(name));
+
+    /* Delete the socket if it exists */
+    if(access(namebuf, F_OK) == 0)
+    {
+	/* Socket already exists. Delete it */
+	unlink(namebuf);
+
+	if (access (namebuf, F_OK) == 0)
+	{
+	    fprintf (stderr, "Can't delete %s\n", namebuf);
+	    return;
+	}
+    }
+
+    socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
+    if(socket_fd >= 0)
+    {
+	struct sockaddr_un addr;
+	addr.sun_family = AF_UNIX;
+	strcpy(addr.sun_path, namebuf);
+	if(bind(socket_fd, (struct sockaddr *)&addr,
+		sizeof(addr.sun_family) + strlen(addr.sun_path) + 1) == 0)
+	{
+	    if(listen(socket_fd, 5) == 0)
+	    {
+		rep_unix_set_fd_nonblocking(socket_fd);
+		rep_register_input_fd(socket_fd, server_accept_connection);
+
+		socket_name = rep_string_dup (namebuf);
+		return;
+	    }
+	    else
+		perror ("listen");
+	}
+	else
+	    perror ("bind");
+	close(socket_fd);
+    }
+    else
+	perror ("socket");
+    socket_fd = -1;
 }
 
 void

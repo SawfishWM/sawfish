@@ -172,6 +172,19 @@ canonical_display (char *name)
     return buf;
 }
 
+static char *
+user_login_name (void)
+{
+    char *tmp = getlogin ();
+    if(tmp == 0)
+    {
+	struct passwd *pwd = getpwuid(geteuid());
+	if (pwd != 0)
+	    tmp = pwd->pw_name;
+    }
+    return tmp;
+}
+
 
 /* using the X based server io */
 
@@ -335,10 +348,11 @@ static int
 unix_server_init (char *display)
 {
     struct sockaddr_un addr;
-    sprintf(addr.sun_path, SAWMILL_SOCK_NAME, display);
+    sprintf(addr.sun_path, SAWMILL_SOCK_DIR "/%s",
+	    user_login_name (), display);
     addr.sun_family = AF_UNIX;
 
-    if(access(addr.sun_path, F_OK) != 0)
+    if(access(addr.sun_path, R_OK) != 0)
 	return 1;
 
     socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
