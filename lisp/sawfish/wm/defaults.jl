@@ -21,13 +21,6 @@
 
 ;; Most of these settings can be overridden through customize
 
-;; open the server, use the sawmill-client program to connect to the
-;; running window manager
-(server-open)
-
-;; use sloppy-focus
-(setq sloppy-focus t)
-
 ;; the font to use for otherwise unspecified text
 (setq default-font (get-font "-*-lucida-medium-r-*-*-10-*-*-*-*-*-*-*"))
 
