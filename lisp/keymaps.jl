@@ -168,6 +168,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "C-M-Down" 'lower-window
     "C-M-Left" 'send-to-previous-workspace
     "C-M-Right" 'send-to-next-workspace
+    "C-M-q" 'quote-event
     "M-Button3-Click1" 'raise-lower-window
     "M-Button2-Click1" 'popup-window-menu
     "M-Button1-Move" 'move-window-interactively)
