@@ -29,12 +29,12 @@
 	  sawfish.gtk.widget
 	  sawfish.wm.util.font)
 
-  (defconst default-font "fixed")
-
   ;; FIXME: this is broken, in that only if Xrender is present
   ;; does gdk use Xft. But, it's the best I can do..
   (define use-xft (let ((x (getenv "GDK_USE_XFT")))
-		    (and x (/= (string->number x) 0))))
+		    (or (not x) (/= (string->number x) 0))))
+
+  (define default-font (if use-xft "Sans" "fixed"))
 
   (define (make-font-item changed-callback)
     (let* ((box (gtk-hbox-new nil box-spacing))
