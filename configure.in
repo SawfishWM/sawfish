@@ -95,13 +95,13 @@ dnl Check for librep
 AM_PATH_REP(0.13)
 
 rep_gtk_function=gtk-main-iteration-do
-rep_gtk_version=0.13
+rep_gtk_version=0.14
 
 AC_MSG_CHECKING([for correct rep-gtk version])
 cat >conftest <<EOF
 (condition-case nil
     (progn
-      (require 'gtk)
+      (require 'gui.gtk.gtk)
       $rep_gtk_function
       (throw 'quit 0))
   (error
