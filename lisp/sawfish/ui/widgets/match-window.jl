@@ -192,7 +192,8 @@
 
   (define (make-match-window-item changed-callback properties x-properties)
 
-    (define (print-matcher match) (cdr match))
+    (define (print-matcher match)
+      (if (stringp (cdr match)) (cdr match) "?"))
 
     (define (print-action action)
       (if (eq (cdr action) t)
