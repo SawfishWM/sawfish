@@ -188,18 +188,18 @@
   (define (make-choice-item changed-callback . options)
     (let ((omenu (gtk-option-menu-new))
 	  (menu (gtk-menu-new))
-	  (value (car options)))
+	  (value (or (caar options) (car options))))
       (let loop ((rest options)
 		 (last nil))
 	(when rest
 	  (let ((button (gtk-radio-menu-item-new-with-label-from-widget
-			 last (_ (symbol-name (car rest))))))
+			 last (_ (or (cadar rest) (symbol-name (car rest)))))))
 	    (gtk-menu-append menu button)
 	    (gtk-widget-show button)
 	    (gtk-signal-connect button "toggled"
 				(lambda (w)
 				  (when (gtk-check-menu-item-active w)
-				    (setq value (car rest))
+				    (setq value (or (caar rest) (car rest)))
 				    (call-callback changed-callback))))
 	    (loop (cdr rest) button))))
       (gtk-option-menu-set-menu omenu menu)
@@ -208,7 +208,7 @@
 	(case op
 	  ((set) (lambda (x)
 		   (setq value x)
-		   (let ((idx (list-index options x)))
+		   (let ((idx (option-index options x)))
 		     (gtk-option-menu-set-history omenu idx)
 		     (do ((i 0 (1+ i))
 			  (rest (gtk-container-children menu) (cdr rest)))
@@ -217,7 +217,7 @@
 	  ((clear) nop)
 	  ((ref) (lambda () value))
 	  ((gtk-widget) omenu)
-	  ((validp) (lambda (x) (memq x options)))))))
+	  ((validp) (lambda (x) (option-index options x)))))))
 
   (define-widget-type 'choice make-choice-item)
 
@@ -520,8 +520,8 @@
 
   (define string->symbol intern)
 
-  (define (list-index lst x)
+  (define (option-index lst x)
     (let loop ((i 0) (rest lst))
       (cond ((null rest) nil)
-	    ((eq (car rest) x) i)
+	    ((eq (or (caar rest) (car rest)) x) i)
 	    (t (loop (1+ i) (cdr rest)))))))
