@@ -281,7 +281,7 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 
 /* Draw the background of the frame-part FP. This is either a solid color
    or an image (scaled or tiled) */
-void
+static void
 set_frame_part_bg (struct frame_part *fp)
 {
     int state = current_state (fp);
@@ -324,12 +324,8 @@ set_frame_part_bg (struct frame_part *fp)
 	bool tiled = FALSE;
 	repv tem;
 
-	if (fp->drawn.bg == bg
-	    && fp->drawn.width == fp->width
-	    && fp->drawn.height == fp->height)
-	{
+	if (fp->drawn.bg == bg)
 	    return;
-	}
 
 	tem = Fimage_get (rep_VAL(image), Qtiled);
 	if (tem && tem != Qnil)
@@ -355,15 +351,6 @@ set_frame_part_bg (struct frame_part *fp)
 	if (win->id == 0)
 	    return;
 
-	if (bg_mask)
-	{
-	    XGCValues gcv;
-	    gcv.clip_mask = bg_mask;
-	    gcv.clip_x_origin = 0;
-	    gcv.clip_y_origin = 0;
-	    XChangeGC (dpy, fp->gc, GCClipMask | GCClipXOrigin
-		       | GCClipYOrigin, &gcv);
-	}
 	if (!tiled)
 	{
 	    XCopyArea (dpy, bg_pixmap, fp->id, fp->gc, 0, 0,
@@ -380,18 +367,23 @@ set_frame_part_bg (struct frame_part *fp)
 	    int y = 0;
 	    if (bg_mask != 0)
 	    {
+		XRectangle rect;
 		tem = XCreateSimpleWindow (dpy, win->frame,
 					   -100, -100,
 					   fp->width, fp->height,
 					   0, BlackPixel (dpy, screen_num),
 					   BlackPixel (dpy, screen_num));
+		rect.x = rect.y = 0;
+		rect.width = fp->width;
+		rect.height = fp->height;
+		XShapeCombineRectangles (dpy, tem, ShapeBounding, 0, 0,
+					 &rect, 1, ShapeSubtract, Unsorted);
 	    }
 	    while (y < fp->height)
 	    {
 		int x = 0;
 		while (x < fp->width)
 		{
-		    XSetClipOrigin (dpy, fp->gc, x, y);
 		    XCopyArea (dpy, bg_pixmap, fp->id, fp->gc, 0, 0,
 			       image->image->rgb_width,
 			       image->image->rgb_height, x, y);
@@ -406,16 +398,10 @@ set_frame_part_bg (struct frame_part *fp)
 	    }
 	    if (bg_mask)
 	    {
-		XShapeCombineShape (dpy, tem, ShapeBounding, 0, 0,
-				    fp->id, ShapeBounding, ShapeSet);
+		XShapeCombineShape (dpy, fp->id, ShapeBounding, 0, 0,
+				    tem, ShapeBounding, ShapeSet);
 		XDestroyWindow (dpy, tem);
 	    }
-	}
-	if (bg_mask)
-	{
-	    XGCValues gcv;
-	    gcv.clip_mask = None;
-	    XChangeGC (dpy, fp->gc, GCClipMask, &gcv);
 	}
 	Imlib_free_pixmap (imlib_id, bg_pixmap);
 
@@ -431,7 +417,7 @@ set_frame_part_bg (struct frame_part *fp)
 }
 
 /* Draw the foreground pixels in frame-part FP. */
-void
+static void
 set_frame_part_fg (struct frame_part *fp)
 {
     int state = current_state (fp);
@@ -508,8 +494,6 @@ set_frame_part_fg (struct frame_part *fp)
 	    Pixmap fg_pixmap, fg_mask;
 
 	    if (fp->drawn.fg == fg
-		&& fp->drawn.width == fp->width
-		&& fp->drawn.height == fp->height
 		&& fp->drawn.x_justify == fp->x_justify
 		&& fp->drawn.y_justify == fp->y_justify)
 	    {
@@ -571,8 +555,6 @@ set_frame_part_fg (struct frame_part *fp)
 	    if ((fp->drawn.text == string
 		 || Fequal (fp->drawn.text, string) != Qnil)
 		&& fp->drawn.font == font && fp->drawn.fg == fg
-		&& fp->drawn.width == fp->width
-		&& fp->drawn.height == fp->height
 		&& fp->drawn.x_justify == fp->x_justify
 		&& fp->drawn.y_justify == fp->y_justify)
 	    {
@@ -605,8 +587,6 @@ set_frame_part_fg (struct frame_part *fp)
 	}
     }
 
-    fp->drawn.width = fp->width;
-    fp->drawn.height = fp->height;
     fp->drawn.font = font;
     fp->drawn.fg = fg;
     fp->drawn.x_justify = fp->x_justify;
@@ -620,9 +600,16 @@ refresh_frame_part (struct frame_part *fp)
     if (!frame_draw_mutex)
     {
 	Lisp_Window *w = fp->win;
+
+	if (fp->drawn.width != fp->width || fp->drawn.height != fp->height)
+	    fp->drawn.bg = rep_NULL;
+
 	set_frame_part_bg (fp);
 	if (w->id != 0)
 	    set_frame_part_fg (fp);
+
+	fp->drawn.width = fp->width;
+	fp->drawn.height = fp->height;
 	fp->pending_refresh = 0;
     }
     else
