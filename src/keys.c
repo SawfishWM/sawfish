@@ -992,6 +992,13 @@ DEFUN("eval-modifier-events", Veval_modifier_events,
     return eval_modifier_events ? Qt : Qnil;
 }
 
+DEFUN("forget-button-press", Fforget_button_press,
+      Sforget_button_press, (void), rep_Subr0)
+{
+    last_click = 0;
+    return Qt;
+}
+
 
 
 /* Find the lisp modifier mask used by the meta and alt keys. This code
@@ -1321,6 +1328,7 @@ keys_init(void)
     rep_ADD_SUBR(Ssearch_keymap);
     rep_ADD_SUBR(Skeymapp);
     rep_ADD_SUBR(Seventp);
+    rep_ADD_SUBR(Sforget_button_press);
 
     rep_ADD_SUBR(Seval_key_release_events);
     rep_ADD_SUBR(Seval_modifier_events);
