@@ -315,11 +315,11 @@ of choices."
      `(quote ,(custom-convert (cadr value) (cadr type))))
 
     ((pair)
-     (cons (custom-convert (car value) (car type))
-	   (custom-convert (cdr value) (cdr type))))
+     (cons (custom-convert (car value) (cadr type))
+	   (custom-convert (cdr value) (caddr type))))
 
     ((list)
-     (mapcar (lambda (x) (custom-convert x type)) value))
+     (mapcar (lambda (x) (custom-convert x (cadr type))) value))
 
     ((alist)
      (let ((k-type (or (car (cadr type)) (cadr type)))
@@ -330,7 +330,7 @@ of choices."
 
     ((and v-and h-and)
      (do ((values value (cdr values))
-	  (types type (cdr types))
+	  (types (cdr type) (cdr types))
 	  (out '() (cons (custom-convert (car values) (car types)) out)))
 	 ((or (null types) (null values))
 	  (nreverse out))))
