@@ -40,7 +40,8 @@ install : all installdirs
 	-set -e; for dir in $(SUBDIRS); do \
 	  ( cd $$dir && $(MAKE) $@ ); \
 	done
-	$(INSTALL_DATA) ./DOC.* $(DESTDIR)$(sawmilldir)/$(version)
+	$(INSTALL_DATA) ./DOC.dir $(DESTDIR)$(sawmilldir)/$(version)
+	$(INSTALL_DATA) ./DOC.pag $(DESTDIR)$(sawmilldir)/$(version)
 	-set -e; for d in $(prefix) $(DESTDIR)$(GNOME_DIRS); do \
 	  if [ -d $$d/share/gnome/wm-properties ]; then \
 	    $(INSTALL_DATA) Sawmill.desktop $(DESTDIR)$$d/share/gnome/wm-properties; \
