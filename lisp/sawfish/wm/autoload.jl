@@ -166,6 +166,7 @@
 (autoload-command (quote make-window-not-ignored) (quote sawfish.wm.state.ignored))
 (autoload-command (quote toggle-window-ignored) (quote sawfish.wm.state.ignored))
 (autoload-command (quote toggle-window-never-focus) (quote sawfish.wm.state.ignored))
+(autoload-command (quote toggle-window-cycle-skip) (quote sawfish.wm.state.ignored))
 (autoload-command (quote maximize-window) (quote sawfish.wm.state.maximize))
 (autoload-command (quote unmaximize-window) (quote sawfish.wm.state.maximize))
 (autoload-command (quote maximize-window-vertically) (quote sawfish.wm.state.maximize))
