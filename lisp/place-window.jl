@@ -23,8 +23,14 @@
 
 (defcustom place-window-mode 'random
   "Method of selecting the position of a freshly-mapped window."
-; :type (set random interactive smart)
-  :type (set random interactive)
+; :type (set random interactive smart none)
+  :type (set random interactive none)
+  :group placement)
+
+(defcustom place-transient-mode 'random
+  "Method of selecting the position of a freshly-mapped transient window."
+; :type (set random interactive smart none)
+  :type (set random interactive none)
   :group placement)
 
 (defcustom ignore-program-positions nil
@@ -36,13 +42,15 @@
 (defun place-window (w)
   (let
       ((hints (window-size-hints w)))
-    (if (or (window-transient-p w)
-	    (cdr (assq 'user-position hints))
+    (if (or (cdr (assq 'user-position hints))
 	    (and (not ignore-program-positions)
 		 (cdr (assq 'program-position hints))))
 	nil
       (let
-	  ((mode (or (window-get w 'place-mode) place-window-mode)))
+	  ((mode (or (window-get w 'place-mode)
+		     (if (window-transient-p w)
+			 place-transient-mode
+		       place-window-mode))))
 	(cond ((eq mode 'smart)
 	       ;; XXX implement this..
 	       (setq mode 'random))
