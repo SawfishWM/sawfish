@@ -37,7 +37,8 @@ all :
 
 install : all installdirs
 	for d in $(THEMES); do \
-	  cp -af $$d $(themedir)/$$d; \
+	  rm -rf $(themedir)/$$d; \
+	  cp -af $$d $(themedir); \
 	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
