@@ -1,3 +1,9 @@
+2002-04-03  John Harper  <jsh@unfactored.org>
+
+	* display.c (error_handler): only interpret BadWindow and
+	BadDrawable errors as meaning that a window died. May fix
+	#74799
+
 2002-04-02  John Harper  <jsh@unfactored.org>
 
 	* events.c (Fx_server_timestamp): added another arg STORE. When
