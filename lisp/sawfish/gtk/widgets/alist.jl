@@ -26,7 +26,8 @@
     (open rep
 	  gtk
 	  nokogiri-widget
-	  nokogiri-widget-dialog)
+	  nokogiri-widget-dialog
+	  nokogiri-shell)
 
   ;; (alist (KEY-SPEC "KEY-TITLE") (VALUE-SPEC "VALUE-TITLE"))
 
@@ -41,7 +42,8 @@
 		     ((print) (lambda (x) (list (prin1-to-string (car x))
 						(prin1-to-string (cdr x)))))
 		     ((dialog) (lambda (title callback &optional value)
-				 (widget-dialog title spec callback value)))
+				 (widget-dialog title spec callback
+						value main-window)))
 		     ((validp) ((make-widget spec) 'validp))))))
 
       (make-widget `(list ,type ,title) changed-callback)))

@@ -26,7 +26,8 @@
     (open rep
 	  gtk
 	  nokogiri-widget
-	  nokogiri-widget-dialog)
+	  nokogiri-widget-dialog
+	  nokogiri-shell)
 
   ;; (list SPEC-OR-FUNCTION [TITLE])
 
@@ -81,19 +82,20 @@
 			  (call-callback changed-callback))))
 	  (if (functionp spec)
 	      ((spec 'dialog) (_ "Insert:") callback)
-	    (widget-dialog (_ "Insert:") spec callback))))
+	    (widget-dialog (_ "Insert:") spec callback nil main-window))))
 
       (define (delete-item)
 	(when selection
-	  (if (zerop selection)
-	      (setq value (cdr value))
-	    (rplacd (nthcdr (1- selection) value)
-		    (nthcdr (1+ selection) value)))
-	  (gtk-clist-remove clist selection)
-	  (if (> (gtk-clist-rows clist) selection)
-	      (gtk-clist-select-row clist selection 0)
-	    (set-selection nil))
-	  (call-callback changed-callback)))
+	  (let ((orig-sel selection))
+	    (if (zerop selection)
+		(setq value (cdr value))
+	      (rplacd (nthcdr (1- selection) value)
+		      (nthcdr (1+ selection) value)))
+	    (gtk-clist-remove clist selection)
+	    (if (> (gtk-clist-rows clist) orig-sel)
+		(gtk-clist-select-row clist orig-sel 0)
+	      (set-selection nil))
+	    (call-callback changed-callback))))
 
       (define (edit-item)
 	(when selection
@@ -107,7 +109,8 @@
 			     (call-callback changed-callback))))
 	    (if (functionp spec)
 		((spec 'dialog) (_ "Edit:") callback (car cell))
-	      (widget-dialog (_ "Edit:") spec callback (car cell))))))
+	      (widget-dialog (_ "Edit:") spec callback
+			     (car cell) main-window)))))
 
       (define (clear)
 	(gtk-clist-clear clist)

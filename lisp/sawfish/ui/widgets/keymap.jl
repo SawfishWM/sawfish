@@ -25,9 +25,10 @@
 
     (open rep
 	  gtk
-	  nokogiri-dialog
+	  nokogiri-gnome
 	  nokogiri-wm
-	  nokogiri-widget)
+	  nokogiri-widget
+	  nokogiri-shell)
 
 ;;; widget for representing keymaps
 
@@ -51,8 +52,9 @@
       (let ((widget (make-widget `(keymap:binding ,(wm-command-list)))))
 	(when value
 	  (widget-set widget value))
-	(ok-cancel-dialog (widget-gtk-widget widget) (_ "Edit binding")
-			  (lambda () (callback (widget-ref widget))))))
+	(simple-dialog (_ "Edit binding") (widget-gtk-widget widget)
+		       (lambda () (callback (widget-ref widget)))
+		       main-window)))
 
     (define (validp x) (and (consp x) (symbolp (car x)) (stringp (cdr x))))
 

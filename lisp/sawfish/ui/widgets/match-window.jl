@@ -26,9 +26,9 @@
     (open rep
 	  gtk
 	  nokogiri-widget
-	  nokogiri-widget-dialog
 	  nokogiri-wm
-	  nokogiri-dialog)
+	  nokogiri-gnome
+	  nokogiri-shell)
 
   (defconst matcher-count 3)
 
@@ -216,10 +216,11 @@
 	  (widget-set action-widget (cdr value)))
 	(gtk-widget-show vbox)
 
-	(ok-cancel-dialog vbox (_ "Match window properties")
-			  (lambda ()
-			    (callback (cons (widget-ref matcher-widget)
-					    (widget-ref action-widget)))))))
+	(simple-dialog (_ "Match window properties") vbox
+		       (lambda ()
+			 (callback (cons (widget-ref matcher-widget)
+					 (widget-ref action-widget))))
+		       main-window)))
 
     (define (validp x) (and (consp x) (listp (car x)) (listp (cdr x))))
 
