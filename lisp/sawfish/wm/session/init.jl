@@ -23,8 +23,7 @@
 
 (defvar sm-save-directory "~/.sawmill/sessions")
 
-(defvar sm-saved-window-properties '(depth type sticky ignored iconified
-				     unmaximized-geometry frame-style)
+(defvar sm-saved-window-properties nil
   "List of window properties saved with the session.")
 
 (defvar sm-window-save-functions nil
@@ -45,6 +44,12 @@ the window.")
       ((file (sm-find-file id)))
     (when (file-exists-p file)
       (delete-file file))))
+
+(defun sm-add-saved-properties (&rest props)
+  (mapc #'(lambda (p)
+	    (setq sm-saved-window-properties
+		  (cons p sm-saved-window-properties)))
+	props))
 
 
 ;; initialisation
