@@ -717,7 +717,7 @@ all workspaces."
   (set-x-property w 'WM_STATE
 		  (vector (if (window-get w 'iconified)
 			      IconicState
-			    NormalState))
+			    NormalState) 0)
 		  'WM_STATE 32))
 
 
