@@ -50,17 +50,18 @@
 	 (needs-result (/= (aref data 2) 0))
 	 (form-data (get-x-property window prop))
 	 form value)
+      (unless needs-result
+	(delete-x-property window prop))
       (condition-case error-data
 	  (progn
 	    (setq form (read-from-string (nth 2 form-data) 0))
 	    (setq value (eval form))
-	    (if needs-result
-		(set-x-property window prop
-				(let
-				    ((print-escape t))
-				  (format nil "%S" value))
-				'STRING 8)
-	      (delete-x-property window prop)))
+	    (when needs-result
+	      (set-x-property window prop
+			      (let
+				  ((print-escape t))
+				(format nil "%S" value))
+			      'STRING 8)))
 	(error
 	 (if needs-result
 	     (set-x-property window prop
