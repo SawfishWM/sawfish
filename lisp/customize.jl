@@ -66,7 +66,8 @@
 
 (defun customize-stop-process ()
   (when customize-process
-    (kill-process customize-process)
+    (when (process-in-use-p customize-process)
+      (kill-process customize-process))
     (setq customize-process nil)
     (customize-write-user-file)))
 
