@@ -21,6 +21,7 @@
 
 #include "sawmill.h"
 #include <X11/extensions/shape.h>
+#include <X11/Xresource.h>
 
 /* Lookup table of event handlers */
 void (*event_handlers[LASTEvent])(XEvent *ev);
@@ -51,6 +52,8 @@ static repv current_event_window;
 
 /* We need a ButtonRelease on this fp. */
 struct frame_part *clicked_frame_part;
+
+static XID event_handler_context;
 
 DEFSYM(visibility_notify_hook, "visibility-notify-hook");
 DEFSYM(destroy_notify_hook, "destroy-notify-hook");
@@ -403,8 +406,6 @@ expose (XEvent *ev)
     struct frame_part *fp = find_frame_part_by_window (ev->xexpose.window);
     if (fp != 0)
 	frame_part_exposer (&ev->xexpose, fp);
-    else if (message_win != 0 && ev->xexpose.window == message_win)
-	refresh_message_window ();
 }
 
 static void
@@ -804,6 +805,32 @@ get_event_mask (int type)
 }
 
 
+/* Window-local event handlers */
+
+/* Register that FUN should be called for any events received from
+   the window with id W. */
+void
+register_event_handler (Window w, void (*fun)(XEvent *ev))
+{
+    XSaveContext (dpy, w, event_handler_context, (XPointer) fun);
+}
+
+/* Remove any event handler associated with window id W. */
+void
+deregister_event_handler (Window w)
+{
+    XDeleteContext (dpy, w, event_handler_context);
+}
+
+static inline void *
+window_event_handler (Window w)
+{
+    void *fun;
+    return XFindContext (dpy, w, event_handler_context,
+			 (XPointer *)&fun) ? 0 : fun;
+}
+
+
 /* Event loop */
 
 /* Handle all available X events matching event mask MASK. Or any events
@@ -815,6 +842,7 @@ handle_input_mask(long mask)
     while(rep_throw_value == rep_NULL)
     {
 	XEvent xev;
+	void (*handler)(XEvent *);
 	if (mask == 0)
 	{
 	    if(XEventsQueued(dpy, QueuedAfterReading) <= 0)
@@ -835,16 +863,22 @@ handle_input_mask(long mask)
 	DB(("** Event: %s (win %lx)\n",
 	    xev.type < LASTEvent ? event_names[xev.type] : "unknown",
 	    (long)xev.xany.window));
+
 	record_event_time (&xev);
 	current_x_event = &xev;
 	current_event_updated_mouse = FALSE;
 	current_event_window = rep_NULL;
-	if (xev.type < LASTEvent && event_handlers[xev.type] != 0)
+
+	handler = window_event_handler (xev.xany.window);
+	if (handler != 0)
+	    (*handler) (&xev);
+	else if (xev.type < LASTEvent && event_handlers[xev.type] != 0)
 	    event_handlers[xev.type] (&xev);
 	else if (xev.type == shape_event_base + ShapeNotify)
 	    shape_notify (&xev);
 	else
 	    fprintf (stderr, "warning: unhandled event: %d\n", xev.type);
+
 	current_x_event = 0;
 	current_event_window = Qnil;
 	XFlush (dpy);
@@ -1159,6 +1193,8 @@ events_init (void)
     rep_INTERN(lower_window);
 
     rep_mark_static (&current_event_window);
+
+    event_handler_context = XUniqueContext ();
 }
 
 void
