@@ -105,6 +105,23 @@ font-put FONT PROPERTY VALUE
     return val;
 }
 
+DEFUN("font-name", Ffont_name, Sfont_name, (repv font), rep_Subr1) /*
+::doc:Sfont-name::
+font-name FONT
+::end:: */
+{
+    rep_DECLARE1(font, FONTP);
+    return VFONT(font)->name;
+}
+
+DEFUN("fontp", Ffontp, Sfontp, (repv win), rep_Subr1) /*
+::doc:Sfontp::
+fontp ARG
+::end:: */
+{
+    return FONTP(win) ? Qt : Qnil;
+}
+
 
 /* type hooks */
 
@@ -158,6 +175,8 @@ fonts_init (void)
     rep_ADD_SUBR(Sget_font);
     rep_ADD_SUBR(Sfont_get);
     rep_ADD_SUBR(Sfont_put);
+    rep_ADD_SUBR(Sfont_name);
+    rep_ADD_SUBR(Sfontp);
     rep_INTERN(default_font);
     rep_SYM(Qdefault_font)->value = Fget_font (rep_string_dup("fixed"));
 }
