@@ -20,8 +20,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37\n"
-"POT-Creation-Date: 2001-04-20 10:46-0700\n"
-"PO-Revision-Date: 2001-04-25 22:19+02:00\n"
+"POT-Creation-Date: 2001-06-04 13:43-0700\n"
+"PO-Revision-Date: 2001-07-12 12:10+02:00\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish/Dansk <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -35,10 +35,6 @@ msgstr "og mange andre..."
 #. ../scripts/sawfish-about.jl
 msgid "Sawfish manages your windows extensibly."
 msgstr "Sawfish håndterer dine vinduer intensivt."
-
-#. ../scripts/sawfish-about.jl
-msgid "Protect the sawfish"
-msgstr "Beskyt savfisken"
 
 #. ../scripts/sawfish-about.jl
 msgid "Sawfish homepage"
@@ -419,7 +415,7 @@ msgstr "Vinduesgennemgang"
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Sound"
-msgstr "Lyd"
+msgstr "Lydeffekter"
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -495,14 +491,15 @@ msgstr "Kald kommando hvor uddata bliver sendt til skærmen"
 msgid "Prompt for a command, execute it, and print any output to the screen."
 msgstr "Spørg efter en kommando, udfør den, og udskriv uddata på skærmen."
 
+# forsøg på at koordinere med capplet-tingesterne
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Focus"
-msgstr "Fokus"
+msgstr "Fokusopførsel"
 
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Move/Resize"
-msgstr "Flyt/Ændr"
+msgstr "Flytning/størrelsesændring"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
@@ -518,14 +515,15 @@ msgstr "Udseende"
 msgid "Workspaces"
 msgstr "Arbejdsområder"
 
+# ditto
 #. ../lisp/sawfish/wm/keymaps.jl
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Bindings"
-msgstr "Bindinger"
+msgstr "Genveje"
 
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Minimizing/Maximizing"
-msgstr "Maksi-/minimering"
+msgstr "Maksimering/minimering"
 
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Minimizing"
@@ -557,7 +555,7 @@ msgstr "Videregiver 'klik for fokus'-klikket til vinduet."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default frame style:"
-msgstr "Standard-rammestil:"
+msgstr "Automatisk valgt rammestil:"
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Automatically reload themes when they are updated."
@@ -2136,6 +2134,38 @@ msgstr "Flyt gruppen nedad"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Flyt vinduesgruppen `slide-window-increment' punkter nedad."
 
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move viewport next"
+msgstr "Flyt til næste visningsområde"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the next viewport."
+msgstr "Flyt til det næste visningsområde."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move viewport previous"
+msgstr "Flyt til forrige visningsområde"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the previous viewport."
+msgstr "Flyt til det forrige visningsområde."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move window previous"
+msgstr "Flyt vindue til forrige visningsområde"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the previous viewport."
+msgstr "Flyt vinduet til det forrige visningsområde."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move window next"
+msgstr "Flyt vindue til næste visningsområde"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the next viewport."
+msgstr "Flyt vinduet til det næste visningsområde."
+
 # håber dette er rigtigt
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 msgid "Set viewport linear"
@@ -2208,38 +2238,6 @@ msgstr "X-terminal"
 #. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "Start a new xterm."
 msgstr "Start en ny X-terminal."
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move viewport next"
-msgstr "Flyt til næste visningsområde"
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move to the next viewport."
-msgstr "Flyt til det næste visningsområde."
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move viewport previous"
-msgstr "Flyt til forrige visningsområde"
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move to the previous viewport."
-msgstr "Flyt til det forrige visningsområde."
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move window previous"
-msgstr "Flyt vindue til forrige visningsområde"
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move the window to the previous viewport."
-msgstr "Flyt vinduet til det forrige visningsområde."
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move window next"
-msgstr "Flyt vindue til næste visningsområde"
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move the window to the next viewport."
-msgstr "Flyt vinduet til det næste visningsområde."
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -2623,7 +2621,7 @@ msgstr "_Gnome hjælp..."
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "GNOME WWW..."
-msgstr "Gnome netsted..."
+msgstr "Gnomes netsted..."
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "About GNOME..."
@@ -2735,7 +2733,7 @@ msgstr "Fjern vinduets klæbrighed"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window sticky"
-msgstr "Skift mellem at vinduet er klæbrigt"
+msgstr "Skift mellem om vinduet er klæbrigt"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid ""
@@ -3394,8 +3392,11 @@ msgstr "_Gem tema"
 
 #. ../themer/themer.glade:175
 msgid "_Settings"
-msgstr "Ind_stillinger"
+msgstr "_Indstillinger"
 
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Temaer"
+
+#~ msgid "Protect the sawfish"
+#~ msgstr "Beskyt savfisken"
