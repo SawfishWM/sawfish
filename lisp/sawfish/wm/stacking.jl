@@ -193,4 +193,6 @@ events that invoked the command."
 (add-hook 'after-initialization-hook restack-by-depth)
 (add-hook 'add-window-hook stacking-add-window t)
 (add-hook 'map-notify-hook stacking-after-map t)
+
 (sm-add-saved-properties 'depth)
+(add-swapped-properties 'depth)

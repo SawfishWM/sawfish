@@ -430,3 +430,4 @@ that overrides settings set elsewhere.")
 (add-hook 'shape-notify-hook reframe-one-window t)
 
 (sm-add-saved-properties 'type 'ignored 'frame-style)
+(add-swapped-properties 'frame-active-color 'frame-inactive-color)

@@ -66,3 +66,4 @@ state."
 
 (add-hook 'add-window-hook shading-add-window t)
 (sm-add-saved-properties 'shaded 'shaded-old-type)
+(add-swapped-properties 'shaded 'shaded-old-type)

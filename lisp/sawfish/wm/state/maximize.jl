@@ -401,6 +401,8 @@ unmaximized."
 
 (sm-add-saved-properties
  'unmaximized-geometry 'maximized-vertically 'maximized-horizontally)
+(add-swapped-properties
+ 'unmaximized-geometry 'maximized-vertically 'maximized-horizontally)
 
 (add-hook 'after-move-hook maximize-discard-move)
 (add-hook 'after-resize-hook maximize-discard-resize)

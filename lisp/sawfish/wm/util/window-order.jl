@@ -94,5 +94,6 @@
 (add-hook 'leave-workspace-hook window-order-pop-low-sticky-windows)
 
 (sm-add-saved-properties 'order)
+
 (add-hook 'sm-after-restore-hook window-order-compress)
 (add-hook 'iconify-window-hook window-order-pop)
