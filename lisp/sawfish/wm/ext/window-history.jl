@@ -54,6 +54,7 @@
 	  sawfish.wm.workspace
 	  rep.data.tables
 	  sawfish.wm.menus
+	  sawfish.wm.state.maximize
 	  sawfish.wm.ext.match-window)
 
   (define-structure-alias window-history sawfish.wm.ext.window-history)
@@ -70,7 +71,7 @@
   (define window-history-dirty nil)
 
   ;; list of states in window-state-change-hook that should be tracked
-  (defvar window-history-states '(sticky ignored never-focus type
+  (defvar window-history-states '(sticky ignored never-focus type maximized
 				  frame-style cycle-skip window-list-skip))
   
   ;; property matched on
@@ -177,6 +178,16 @@
   (put 'position 'window-history-snapshotter window-absolute-position)
   (put 'dimensions 'window-history-snapshotter window-dimensions)
 
+  (put 'maximized 'window-history-snapshotter
+       (lambda (w)
+	 (if (window-maximized-horizontally-p w)
+	     (if (window-maximized-vertically-p w)
+		 'both
+	       'horizontal)
+	   (if (window-maximized-vertically-p w)
+	       'vertical
+	     nil))))
+
   (define (window-history-position-snapshotter w)
     (when (and window-history-auto-save-position
 	       (not (window-get w 'client-set-position)))
@@ -259,9 +270,19 @@
     (mapc (lambda (sym)
 	    (let ((tem (cdr (assq sym alist))))
 	      (when tem
-		(window-put w sym tem))))
+		(let ((setter (get sym 'window-history-setter)))
+		  (if setter
+		      (setter w tem)
+		    (window-put w sym tem))))))
 	  window-history-states)
     (call-window-hook 'sm-restore-window-hook w (list alist)))
+
+  (put 'maximized 'window-history-setter
+       (lambda (w value)
+	 (when (memq value '(both vertical))
+	   (window-put w 'queued-vertical-maximize t))
+	 (when (memq value '(both horizontal))
+	   (window-put w 'queued-horizontal-maximize t))))
 
 
 ;;; saving and loading state

@@ -1,5 +1,12 @@
 2000-11-27  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/ext/window-history.jl: save and restore
+	`maximized' state of windows. Fixes #4790
+
+	* sawfish/wm/ext/window-history.jl (window-history-apply): when
+	setting properties, check for `window-history-setter'
+	properties - a function to call to set the property
+
 	* sawfish/wm/ext/match-window.jl: added `maximized' pseudo
 	property. Fixes #4808
 
