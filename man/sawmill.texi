@@ -1212,9 +1212,10 @@ The @code{boolean} type assures a value of either @code{nil} or
 symbols in the list.
 
 @item :require @var{feature}
-Denotes that the feature @var{feature} must be loaded before the
-variable may be set. This is necessary because customization options
-are loaded on startup, possibly before the modules that define them.
+Denotes that the feature @var{feature} must be loaded if the variable
+is set to a non-@code{nil} value by user customizations. This is
+necessary because customization options are loaded on startup, possibly
+before the modules that define them.
 
 @item :allow-nil @var{bool}
 Specifies whether the variable may be @code{nil}, instead of a member

@@ -1,7 +1,19 @@
+2000-02-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* move-resize.jl, menus.jl: fixed for variables becoming
+	functions
+
+	* custom.jl (custom-default-file): new variable
+	(custom-load-user-file): if no custom-user-file, then load
+	custom-default-file (if it's non-nil)
+	* custom-defaults.jl: new file
+
+	* match-window.jl (match-window-features): new variable, map
+	properties to features to load when they're set
+
 2000-02-01  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-defaults.jl: don't (setq tooltips-enabled t)
-	* tooltips.jl (tooltips-enabled): defaults to t
 
 	* move-resize.jl (move-resize-inhibit-configure): new option
 
