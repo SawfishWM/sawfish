@@ -40,8 +40,11 @@
      (close (list (make-image "as_close.png") nil
 		  nil (make-image "as_close-b.png")))
 
-     (frame-colors (lambda ()
-		     (list simple:normal-color simple:active-color)))
+     (frame-colors (lambda (w)
+		     (list (or (window-get w 'frame-inactive-color)
+			       simple:normal-color)
+			   (or (window-get w 'frame-active-color)
+			       simple:active-color))))
 
      (frame `(((background . ,frame-colors)
 	       (foreground . "black")
