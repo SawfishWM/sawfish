@@ -45,7 +45,7 @@
 (defvar sawmill-safe-specials
   '(default-foreground display-name canonical-display-name
     default-font default-frame nil-frame frame-part-classes
-    decorate-transients))
+    decorate-transients batch-mode))
 
 (defvar sawmill-safe-features '(gtkrc gradient make-theme x))
 

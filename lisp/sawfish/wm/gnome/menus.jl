@@ -42,11 +42,21 @@
     nil))
 
 (defvar gnome-menu-lang (let
-			    ((lang (or (getenv "LC_ALL") (getenv "LANG"))))
-			  (when (string= lang "en")
-			    (setq lang nil))
-			  lang)
-  "Language code used when constructing GNOME menus.")
+			    ((lang (or (getenv "LANGUAGE")
+				       (getenv "LC_ALL")
+				       (getenv "LC_MESSAGES")
+				       (getenv "LANG")))
+			     (all '()))
+			  (when (and lang (not (string= lang "en")))
+			    (setq all (cons lang all))
+			    (when (string-match "[.@]" lang)
+			      (setq lang (substring lang 0 (match-start)))
+			      (setq all (cons lang all)))
+			    (when (string-match "_" lang)
+			      (setq lang (substring lang 0 (match-start)))
+			      (setq all (cons lang all))))
+			  all)
+  "List of language codes used when constructing GNOME menus.")
 
 (defvar gnome-menu-roots (list (expand-file-name
 				"apps" gnome-share-directory)
@@ -104,9 +114,8 @@
 			(string-looking-at "Name=(.*)\n" line 0 t))
 		   (setq name (expand-last-match "\\1")))
 		  ((and (eq section 'desktop-entry) gnome-menu-lang
-			(string-looking-at
-			 "Name\\[([^]]+)\\]=(.*)\n" line 0 t)
-			(string= gnome-menu-lang (expand-last-match "\\1")))
+			(string-looking-at "Name\\[([^]]+)\\]=(.*)\n" line 0 t)
+			(member (expand-last-match "\\1") gnome-menu-lang))
 		   (setq name (expand-last-match "\\2")))
 		  ((and (eq section 'desktop-entry)
 			(string-looking-at "Exec=(.*)\n" line 0 t))
