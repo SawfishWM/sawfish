@@ -43,6 +43,7 @@
 
 ;; load always-present session-manager stuff
 (require 'sm-init)
+(require 'workspace)
 
 ;; load libraries that may affect window state _after_ sm-init
 (require 'mwm)
@@ -50,7 +51,6 @@
 (require 'focus)
 (require 'transient)
 (require 'frames)
-(require 'workspace)
 (require 'viewport)
 (require 'shading)
 (require 'stacking)
