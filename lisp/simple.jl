@@ -19,9 +19,6 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defvar simple-frame (make-frame "simple"))
-(frame-put simple-frame 'unshaped t)
-
 (defvar simple-frame-colors '("lightsteelblue4" "lightsteelblue2"))
 
 (let
@@ -33,7 +30,7 @@
   (defvar simple-close (make-image "as_close.png"))
   (defvar simple-close-clicked (make-image "as_close-b.png")))
 
-(set-frame-generator simple-frame
+(defvar simple-frame
  `(;; title bar
    ((background . ,simple-frame-colors)
     (foreground . "black")
@@ -88,5 +85,7 @@
     (right-edge . 5)
     (top-edge . -18)
     (keymap . close-button-keymap))))
+(frame-put simple-frame 'unshaped t)
 
-(setq default-frame simple-frame)
+;; XXX get rid of this
+(setq default-frame 'simple-frame)

@@ -89,10 +89,8 @@
 
 ;; frame layout
 
-(defvar brushed-metal-frame (make-frame "brushed-metal"))
-(frame-put brushed-metal-frame 'unshaped t)
-
-(set-frame-generator brushed-metal-frame
+(put 'brushed-metal-frame 'unshaped t)
+(defvar brushed-metal-frame
  `(;; menu button
    ((background . (,bm-menu-image ,bm-menu-hl-image
 		   ,bm-menu-clicked-image ,bm-menu-hl-clicked-image))
@@ -185,4 +183,7 @@
     (right-edge . -4)
     (bottom-edge . -4))))
 
-(setq default-frame brushed-metal-frame)
+(defvar brushed-metal-frames '((default . brushed-metal-frame)))
+
+;; XXX get rid of this
+(setq default-frame 'brushed-metal-frame)
