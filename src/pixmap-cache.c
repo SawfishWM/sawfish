@@ -36,7 +36,7 @@
 
 #include "sawmill.h"
 
-static u_long cached_pixels, max_cached_pixels = 256 * 1024;
+static u_long cached_pixels, max_cached_pixels = 64 * 1024;
 static u_long hits, misses;
 
 #ifdef NEED_PIXMAP_CACHE
