@@ -88,6 +88,9 @@
   (load-all "autoload.jl")
   (load-all (concat "os-" (symbol-name operating-system))))
 
+;; this will autoload, but it can be overridden
+(define window-menu beos-window-menu)
+
 (require 'sawmill-gaol)
 
 ;; ensure that the things people usually like doing show up in the
