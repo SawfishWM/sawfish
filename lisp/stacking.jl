@@ -38,6 +38,7 @@
 
 ;; Resort the stacking order to ensure that the windows' depth attributes
 ;; are adhered to. No change is made to windows in the same depth
+;; Note that this can be flickery, try to avoid calling this function
 (defun restack-by-depth ()
   (let*
       ((old-order (stacking-order))
@@ -65,7 +66,12 @@
   (let
       ((old (window-get w 'depth)))
     (window-put w 'depth depth)
-    (restack-by-depth)
+    (cond ((> old depth)
+	   ;; window's going downwards
+	   (raise-window w))
+	  ((< old depth)
+	   ;; window's going upwards
+	   (lower-window w)))
     (call-window-hook 'window-depth-change-hook w (list depth))
     (call-window-hook 'window-state-change-hook w (list '(stacking)))))
 
@@ -92,38 +98,26 @@
 ;; window ABOVE
 (defun stack-window-below (below above)
   (when (= (window-get above 'depth) (window-get below 'depth))
-    (restack-windows (list above below))))
+    (x-lower-window below above)))
 
 ;; Change stacking of window ABOVE so that it is immediately above
 ;; window BELOW
 (defun stack-window-above (above below)
   (when (= (window-get above 'depth) (window-get below 'depth))
-    (let
-	((order (stacking-order)))
-      (if (eq (car order) below)
-	  (x-raise-window above)
-	(setq order (delete-if (lambda (x)
-				 (/= (window-get x 'depth)
-				     (window-get above 'depth))) order))
-	(while (and (cdr order) (not (eq (car (cdr order)) below)))
-	  (setq order (cdr order)))
-	(restack-windows (list (car order) above))))))
+    (x-raise-window above below)))
 
 (defun stacking-after-map (w)
+  (raise-window w)
   ;; if a transient window, maybe put it in a higher layer
-  (if (window-transient-p w)
-      (let
-	  ((parent (get-window-by-id (window-transient-p w))))
-	(if (or (eq transients-above 'all)
+  (when (window-transient-p w)
+    (let
+	((parent (get-window-by-id (window-transient-p w))))
+      (when (or (eq transients-above 'all)
 		(and (eq transients-above 'parents) parent))
-	    (set-window-depth w (if parent
-				    (max (1+ (window-get parent 'depth))
-					 transient-depth)
-				  transient-depth))
-	  (restack-by-depth)))
-    (restack-by-depth))
-  ;; raise the window within its layer
-  (raise-window w))
+	(set-window-depth w (if parent
+				(max (1+ (window-get parent 'depth))
+				     transient-depth)
+			      transient-depth))))))
 
 
 ;; Commands
@@ -132,35 +126,33 @@
   "Lower the window to the bottom of its stacking level."
   (interactive "%W")
   (let
-      ((order (stacking-order))
-       (depth (window-get w 'depth))
-       tem)
-    (setq tem (memq w order))
-    (while (and (cdr tem) (= (window-get (car (cdr tem)) 'depth) depth))
-      (rplaca tem (car (cdr tem)))
-      (rplaca (cdr tem) w)
-      (setq tem (cdr tem)))
-    (restack-windows order)))
+      ((depth (window-get w 'depth)))
+    (catch 'out
+      ;; find the first window below W's layer
+      (mapc (lambda (x)
+	      (unless (eq x w)
+		(when (< (window-get x 'depth) depth)
+		  (x-raise-window w x)
+		  (throw 'out))))
+	    (stacking-order))
+      ;; nothing below W
+      (x-lower-window w))))
 
 (defun raise-window (w)
   "Raise the window to the top of its stacking level."
   (interactive "%W")
   (let
-      ((order (stacking-order))
-       (depth (window-get w 'depth))
-       tem)
-    (setq order (delq w order))
-    (cond ((null order))		;no other windows
-	  ((<= (window-get (car order) 'depth) depth)
-	   ;; no windows above DEPTH, so just raise to the top
-	   ;; of the global stack
-	   (x-raise-window w))
-	  (t
-	   (setq tem order)
-	   (while (and (cdr tem) (> (window-get (car (cdr tem)) 'depth) depth))
-	     (setq tem (cdr tem)))
-	   (rplacd tem (cons w (cdr tem)))
-	   (restack-windows order)))))
+      ((depth (window-get w 'depth)))
+    (catch 'out
+      ;; find the last window above W's layer
+      (mapc (lambda (x)
+	      (unless (eq x w)
+		(when (> (window-get x 'depth) depth)
+		  (x-lower-window w x)
+		  (throw 'out))))
+	    (nreverse (stacking-order)))
+      ;; nothing above W
+      (x-raise-window w))))
 
 (defun raise-lower-window (w)
   "If the window is the highest window in its stacking level, lower it to the
