@@ -1,5 +1,5 @@
 ;; mono/theme.jl
-;; $Id: theme.jl,v 1.7 2000/05/15 16:37:52 john Exp $
+;; $Id: theme.jl,v 1.8 2000/06/28 15:53:06 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -166,38 +166,38 @@
 		      (y-justify . center)
 		      (left-edge . 0)
 		      (right-edge . 0)
-		      (top-edge . -22)
+		      (top-edge . -21)
 		      (height . 21)
 		      (class . title))
 		      
 		     ((background . "black")
 		      (left-edge . 0)
 		      (right-edge . 0)
-		      (top-edge . -23)
+		      (top-edge . -22)
 		      (height . 1))
 		      
 		     ((background . "black")
 		      (left-edge . -1)
 		      (width . 1)
-		      (top-edge . -23)
+		      (top-edge . -22)
 		      (height . 23))
 		      
 		     ((background . "black")
 		      (right-edge . -1)
 		      (width . 1)
-		      (top-edge . -23)
+		      (top-edge . -22)
 		      (height . 23))
 		      
 		     ((background . "black")
 		      (left-edge . 0)
 		      (right-edge . 0)
-		      (top-edge . -1)
+		      (top-edge . 0)
 		      (height . 1))
 	       
 		     ((background . ,frame-colors)
 		      (foreground . ,menu)
 		      (left-edge . 4)
-		      (top-edge . -19)
+		      (top-edge . -18)
 		      (width . 16)
 		      (height . 16)
 		      (class . menu-button)
@@ -206,7 +206,7 @@
 		     ((background . ,frame-colors)
 		      (foreground . ,minimize)
 		      (right-edge . 35)
-		      (top-edge . -19)
+		      (top-edge . -18)
 		      (width . 16)
 		      (height . 16)
 		      (class . iconify-button)
@@ -215,7 +215,7 @@
 		     ((background . ,frame-colors)
 		      (foreground . ,maximize-restore)
 		      (right-edge . 19)
-		      (top-edge . -19)
+		      (top-edge . -18)
 		      (width . 16)
 		      (height . 16)
 		      (class . maximize-button)
@@ -224,7 +224,7 @@
 		     ((background . ,frame-colors)
 		      (foreground . ,close)
 		      (right-edge . 0)
-		      (top-edge . -19)
+		      (top-edge . -18)
 		      (width . 19)
 		      (height . 16)
 		      (class . close-button)
