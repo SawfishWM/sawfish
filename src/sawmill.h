@@ -75,6 +75,10 @@ typedef int bool;
 		      | EnterWindowMask | LeaveWindowMask | ExposureMask \
 		      | FocusChangeMask | SubstructureRedirectMask)
 
+/* Events selected in pointer/button grabs */
+#define POINTER_GRAB_EVENTS (ButtonPressMask | ButtonReleaseMask \
+			     | ButtonMotionMask | PointerMotionHintMask)
+
 
 /* Type defs */
 
