@@ -21,44 +21,59 @@
 
 (provide 'group-funs)
 
+;; Commentary:
+
+;; Each window may only be a member of a single group, each group is
+;; defined by its group id, either an integer or a symbol. Positive
+;; integers are used for application-defined groups (window ids, as
+;; returned by window-group-id), negative integers are used for
+;; user-defined anonymous groups, symbols are used for user-defined
+;; named groups.
+
+;; To put a window in a different group to which its application
+;; originally put it, set its `group' property (preferably by calling
+;; the add-window-to-group function)
+
+;; Only named groups are saved when saving sessions (anything else may
+;; not work properly when the windows are reopened, and therefore their
+;; ids change)
+
+;; See groups.jl for the commands that manipulate groups of windows
+
 (defcustom transients-are-group-members t
-  "Transient windows are in the same group as their parent."
+  "Transient windows are always in the same group as their parent."
   :type boolean
   :group misc)
 
+(defvar auto-group-alist nil
+  "Alist mapping window names to group ids.")
+
+(defvar undeletable-group-ids nil
+  "List of group ids that always exist, even when they have no members.")
+
+;; return the id of the group that window W is a member of
 (defun window-real-group-id (w)
-  (or (window-get w 'group)
-      (window-group-id w)
-      (window-id w)))
+  (let
+      (tem)
+    (or (window-get w 'group)
+	(window-group-id w)
+	(and transients-are-group-members
+	     (window-transient-p w)
+	     (setq tem (get-window-by-id (window-transient-p w)))
+	     (or (window-get tem 'group) (window-group-id tem)))
+	(window-id w))))
 
 ;; return the list of windows in the group with id GROUP-ID
 (defun windows-by-group (group-id)
-  (let*
-      ((windows (managed-windows))
-       (group (filter  #'(lambda (x)
-			   (eq (window-real-group-id x) group-id))
-		       windows)))
-    (when transients-are-group-members
-      (mapc #'(lambda (w)
-		(when (window-transient-p w)
-		  (let
-		      ((parent (get-window-by-id
-				(window-transient-p w) windows)))
-		    (when (and parent (memq parent group) (not (memq w group)))
-		      (setq group (cons w group))))))
-	    windows))
-    group))
+  (delete-if-not #'(lambda (x)
+		     (eq (window-real-group-id x) group-id))
+		 (managed-windows)))
 
 ;; return the list of windows in the same group as window W
 (defun windows-in-group (w)
   (let
       (group-id tem)
     (setq group-id (window-real-group-id w))
-    (when (and (eq group-id (window-id w))
-	       transients-are-group-members
-	       (window-transient-p w)
-	       (setq tem (get-window-by-id (window-transient-p w))))
-      (setq group-id (window-real-group-id w)))
     (windows-by-group group-id)))
 
 ;; map FUN over all windows in the same group as window W
@@ -68,7 +83,8 @@
 ;; return list of all group ids
 (defun window-group-ids ()
   (let
-      (ids id)
+      ((ids (copy-sequence undeletable-group-ids))
+       id)
     (mapc #'(lambda (w)
 	      (setq id (window-real-group-id w))
 	      (unless (memq id ids)
@@ -103,7 +119,9 @@
     (setq group-ids (cons group-id (delq group-id group-ids)))
     (setq menus (mapcar #'(lambda (id)
 			    (let
-				((name (cdr (assq id group-names))))
+				((name (if (symbolp id)
+					   (symbol-name id)
+					 (cdr (assq id group-names)))))
 			      (when (> (length name) 20)
 				(setq name (concat
 					    (substring name 0 20) "...")))
@@ -123,6 +141,31 @@
 		      (get-window-by-id ,(window-id w))))))))
 
 
-;; initialisation
+;; session management -- only save group-ids that are _symbols_
 
-(sm-add-saved-properties 'group)
+(defun group-saved-state (w)
+  (let
+      ((group-id (window-get w 'group)))
+    (when (and group-id (symbolp group-id))
+      `((group . ,group-id)))))
+
+(defun group-load-state (w alist)
+  (let
+      ((group-id (cdr (assq 'group alist))))
+    (when group-id
+      (add-window-to-group w group-id))))
+
+(add-hook 'sm-window-save-functions 'group-saved-state)
+(add-hook 'sm-restore-window-hook 'group-load-state)
+
+
+;; hooks
+
+(defun group-window-add (w)
+  (unless (window-get w 'group)
+    (let
+	((group (cdr (assoc-regexp (window-name w) auto-group-alist))))
+      (when group
+	(add-window-to-group w group)))))
+
+(add-hook 'before-add-window-hook 'group-window-add t)
