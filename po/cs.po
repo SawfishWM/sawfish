@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.37.3\n"
-"POT-Creation-Date: 2002-06-01 12:40+0200\n"
-"PO-Revision-Date: 2002-09-25 23:18+0200\n"
+"POT-Creation-Date: 2002-11-02 23:33-0800\n"
+"PO-Revision-Date: 2002-11-11 19:43+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -80,6 +80,7 @@ msgstr "Vlastnosti obrázku"
 
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
+#, c-format
 msgid "No matching item for %S"
 msgstr "Žádná položka neodpovídá %S"
 
@@ -107,6 +108,7 @@ msgid "Added frame type `%s'"
 msgstr "Přidán typ rámu `%s'"
 
 #. ../themer/themer.in
+#, c-format
 msgid "error while building frame: %S"
 msgstr "chyba při vytváření rámu: %S"
 
@@ -144,7 +146,9 @@ msgstr "Téma Crux"
 #. ../themes/Crux/theme.jl
 msgid ""
 "Accent color for focused windows (if unset uses the GTK+ selection color)."
-msgstr "Barva zvýraznění aktivních oken (jestliže není nastavena, použije se barva výběru GTK+)."
+msgstr ""
+"Barva zvýraznění aktivních oken (jestliže není nastavena, použije se barva "
+"výběru GTK+)."
 
 #. ../themes/Crux/theme.jl
 msgid "Display the window's icon in its menu button."
@@ -200,11 +204,14 @@ msgstr "Téma Mono"
 
 #. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
-msgstr "Barva neaktivních rámů (jestliže není nastavena, použije se barva pozadí GTK+)."
+msgstr ""
+"Barva neaktivních rámů (jestliže není nastavena, použije se barva pozadí GTK"
+"+)."
 
 #. ../themes/mono/theme.jl
 msgid "Color of active frames (if unset use GTK+ selection color)."
-msgstr "Barva aktivních rámů (jestliže není nastavena, použije se barva výběru GTK+)."
+msgstr ""
+"Barva aktivních rámů (jestliže není nastavena, použije se barva výběru GTK+)."
 
 #. ../themes/mono/theme.jl
 msgid "left"
@@ -685,8 +692,8 @@ msgstr ""
 "(Použijí se jen zkratky s myší)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr "Modifikátor(y) používané pro standardní zkratky manažera oken."
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Modifikátor(y) používané pro implicitní zkratky."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -1809,7 +1816,8 @@ msgid ""
 msgstr ""
 "Vzdálenost v pixelech, než se zarovnají okraje okna.\n"
 "\n"
-"Při přesunu okna vám tato možnost umožňuje zarovnat jeden z jeho okrajů s okrajem jiného okna."
+"Při přesunu okna vám tato možnost umožňuje zarovnat jeden z jeho okrajů s "
+"okrajem jiného okna."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -1843,7 +1851,8 @@ msgstr "Změnit velikost vybraného okna"
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid ""
 "Wait for the user to select a window, then interactively resize that window."
-msgstr "Počkat, až uživatel vybere okno, a pak interaktivně změnit jeho velikost."
+msgstr ""
+"Počkat, až uživatel vybere okno, a pak interaktivně změnit jeho velikost."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
@@ -2427,6 +2436,70 @@ msgstr "Zapomenout historii všech uložených oken"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
 msgstr "_Historie"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace down"
+msgstr "Pracovní plocha dolů"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Zobrazit pracovní plochu pod aktuální plochou"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace up"
+msgstr "Pracovní plocha nahoru"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Zobrazit pracovní plochu nad aktuální plochou"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace left"
+msgstr "Pracovní plocha vlevo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Zobrazit pracovní plochu vlevo od aktuální plochy"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace right"
+msgstr "Pracovní plocha vpravo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Zobrazit pracovní plochu vpravo od aktuální plochy"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace down"
+msgstr "Poslat na plochu dole"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Poslat okno na pracovní plochu pod aktuální plochou"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace up"
+msgstr "Poslat na plochu nahoře"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Poslat okno na pracovní plochu nad aktuální plochou"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace left"
+msgstr "Poslat na plochu vlevo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Poslat okno na pracovní plochu vlevo od aktuální plochy"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace right"
+msgstr "Poslat na plochu vpravo"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Poslat okno na pracovní plochu vpravo od aktuální plochy"
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
