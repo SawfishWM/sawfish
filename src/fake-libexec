@@ -1,0 +1,25 @@
+#! /bin/sh
+
+# fake the module hierarchy for uninstalled shared objects
+
+libdir="`pwd`/.libs"
+libexecdir="./.libexec"
+
+libs="\
+ sawfish.wm.util.flippers\
+ sawfish.wm.util.gradient\
+ sawfish.wm.util.play-sample\
+ sawfish.wm.util.selection\
+ sawfish.wm.util.x"
+
+for f in $libs; do
+  g=`echo $f | tr . /`
+  src=$libdir
+  dest=$libexecdir/`dirname $g`
+  for b in `( cd $libdir && echo \`basename $g\`.* )`; do
+    rm -f $dest/$b
+    echo "$src/$b -> $dest/$b"
+    ../mkinstalldirs $dest
+    ln -s $src/$b $dest/$b
+  done
+done
