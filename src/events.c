@@ -20,6 +20,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
+#include <X11/extensions/shape.h>
 
 /* Lookup table of event handlers */
 void (*event_handlers[LASTEvent])(XEvent *ev);
@@ -485,6 +486,16 @@ configure_request (XEvent *ev)
 	    else if (ev->xconfigurerequest.detail == Below)
 		XLowerWindow (dpy, w->frame);
 	}
+	{
+	    /* Is the window shaped? */
+	    int xws, yws, xbs, ybs;
+	    u_int wws, hws, wbs, hbs;
+	    int bounding, clip;
+	    XShapeSelectInput (dpy, w->id, ShapeNotifyMask);
+	    XShapeQueryExtents (dpy, w->id, &bounding, &xws, &yws, &wws, &hws,
+				&clip, &xbs, &ybs, &wbs, &hbs);
+	    w->shaped = bounding ? 1 : 0;
+	}
 	if ((mask & CWX) || (mask & CWY))
 	{
 	    int old_x = w->attr.x, old_y = w->attr.y;
@@ -521,6 +532,18 @@ static void
 configure_notify (XEvent *ev)
 {
     /* XXX Fill this space */
+}
+
+static void
+shape_notify (XEvent *ev)
+{
+    XShapeEvent *sev = (XShapeEvent *)ev;
+    Lisp_Window *w = find_window_by_id (sev->window);
+    if (sev->kind == ShapeBounding)
+    {
+	w->shaped = sev->shaped ? 1 : 0;
+	set_window_shape (w);
+    }
 }
 
 
@@ -570,11 +593,14 @@ handle_sync_input(int fd)
 	XNextEvent(dpy, &xev);
 
 	DB(("** Event: %s (win %lx)\n",
-	    event_names[xev.type], (long)xev.xany.window));
+	    xev.type < LASTEvent ? event_names[xev.type] : "unknown",
+	    (long)xev.xany.window));
 	record_event_time (&xev);
 	current_x_event = &xev;
-	if (event_handlers[xev.type] != 0)
+	if (xev.type < LASTEvent && event_handlers[xev.type] != 0)
 	    event_handlers[xev.type] (&xev);
+	else if (xev.type == shape_event_base + ShapeNotify)
+	    shape_notify (&xev);
 	else
 	    fprintf (stderr, "warning: unhandled event: %d\n", xev.type);
 	current_x_event = 0;
