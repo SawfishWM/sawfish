@@ -138,6 +138,7 @@
        (override-keymap (make-keymap))
        (focus-dont-push t)
        (disable-auto-raise cycle-disable-auto-raise)
+       (tooltips-enabled nil)
        (x-cycle-current nil)
        (x-cycle-stacking nil)
        modifier tem)
