@@ -19,9 +19,12 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'maximize)
 (provide 'gnome)
 
 (defconst WIN_STATE_STICKY 1)
+(defconst WIN_STATE_MAXIMIZED_VERT 4)
+(defconst WIN_STATE_MAXIMIZED_HORIZ 8)
 
 (defvar gnome-window-names "^(gmc|panel)$")
 
@@ -61,15 +64,27 @@
       ((state 0))
     (when (window-get w 'sticky)
       (setq state (logior state WIN_STATE_STICKY)))
+    (when (window-maximized-vertically-p w)
+      (setq state (logior state WIN_STATE_MAXIMIZED_VERT)))
+    (when (window-maximized-horizontally-p w)
+      (setq state (logior state WIN_STATE_MAXIMIZED_HORIZ)))
     (set-x-property w '_WIN_STATE (vector state) 'CARDINAL 32)))
 
 (defun gnome-honour-client-state (w)
   (let
-      ((state (get-x-property w '_WIN_STATE)))
+      ((state (get-x-property w '_WIN_STATE))
+       bits)
     (when (eq (car state) 'CARDINAL)
-      (unless (zerop (logand (aref (nth 2 state) 0) WIN_STATE_STICKY))
+      (setq bits (aref (nth 2 state) 0))
+      (unless (zerop (logand bits WIN_STATE_STICKY))
 	(unless (window-get w 'sticky)
-	  (toggle-window-sticky w))))
+	  (toggle-window-sticky w)))
+      (unless (zerop (logand bits WIN_STATE_MAXIMIZED_VERT))
+	(unless (window-maximized-vertically-p w)
+	  (maximize-window-vertically w)))
+      (unless (zerop (logand bits WIN_STATE_MAXIMIZED_HORIZ))
+	(unless (window-maximized-horizontally-p w)
+	  (maximize-window-horizontally w))))
     w))
 
 (defun gnome-client-message-handler (w type data)
@@ -86,7 +101,17 @@
 	     (if (or (and (not tem)
 			  (not (zerop (logand values WIN_STATE_STICKY))))
 		     (and tem (zerop (logand values WIN_STATE_STICKY))))
-		 (toggle-window-sticky w))))
+		 (toggle-window-sticky w)))
+	   (unless (zerop (logand mask WIN_STATE_MAXIMIZED_VERT))
+	     (setq tem (window-maximized-vertically-p w))
+	     (if (or (and (not tem) (not (zerop (logand values WIN_STATE_MAXIMIZED_VERT))))
+		     (and tem (zerop (logand values WIN_STATE_MAXIMIZED_VERT))))
+		 (maximize-window-vertically-toggle w)))
+	   (unless (zerop (logand mask WIN_STATE_MAXIMIZED_HORIZ))
+	     (setq tem (window-maximized-horizontally-p w))
+	     (if (or (and (not tem) (not (zerop (logand values WIN_STATE_MAXIMIZED_HORIZ))))
+		     (and tem (zerop (logand values WIN_STATE_MAXIMIZED_HORIZ))))
+		 (maximize-window-horizontally-toggle w))))
 	 t)))
 
 (defun gnome-event-proxyer ()
@@ -136,13 +161,12 @@
   (add-hook 'map-notify-hook 'gnome-set-client-list)
   (add-hook 'umap-notify-hook 'gnome-set-client-list)
 
-  (add-hook 'client-message-hook 'gnome-client-message-handler)
-
   (add-hook 'window-state-change-hook 'gnome-set-client-state)
   (add-hook 'add-window-hook 'gnome-honour-client-state)
+  (add-hook 'add-window-hook 'gnome-set-client-state t)
 
+  (add-hook 'client-message-hook 'gnome-client-message-handler)
   (add-hook 'unbound-key-hook 'gnome-event-proxyer)
-
   (add-hook 'before-exit-hook 'gnome-exit))
 
 (defun gnome-exit ()
