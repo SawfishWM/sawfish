@@ -163,5 +163,5 @@ bottom of this level, otherwise raise it to the top of its level."
   (set-window-depth w (1+ (window-get w 'depth))))
 
 (add-hook 'add-window-hook 'stacking-add-window t)
-(add-hook 'reparent-notify-hook 'restack-by-depth t)
+(add-hook 'map-notify-hook 'restack-by-depth t)
 (sm-add-saved-properties 'depth)
