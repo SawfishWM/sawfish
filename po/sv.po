@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
-"POT-Creation-Date: 2001-06-04 13:43-0700\n"
-"PO-Revision-Date: 2002-01-27 02:00+0100\n"
+"POT-Creation-Date: 2002-04-30 13:09+0200\n"
+"PO-Revision-Date: 2002-05-01 00:01+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -318,13 +318,17 @@ msgstr "Lägg till:"
 msgid "Edit:"
 msgstr "Redigera:"
 
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "Yes"
+msgstr "Ja"
+
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "No"
+msgstr "Nej"
+
 #. ../lisp/sawfish/gtk/widget.jl
 msgid "** unknown widget **  "
 msgstr "** okänd widget **  "
-
-#. ../lisp/sawfish/gtk/stock.jl
-msgid "Revert"
-msgstr "Återställ"
 
 #. ../lisp/sawfish/ui/layouts/keymaps.jl
 msgid "Context:"
@@ -395,13 +399,12 @@ msgid "Actions"
 msgstr "Händelser"
 
 #. ../lisp/sawfish/ui/widgets/match-window.jl
+msgid "not"
+msgstr "inte"
+
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Match window properties"
 msgstr "Matcha fönsteregenskaper"
-
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Index:"
-msgstr "Index:"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -413,25 +416,20 @@ msgstr "Fönsterväxling"
 msgid "Sound"
 msgstr "Ljud"
 
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Edge Flipping"
-msgstr "Kantskrivbordsbyte"
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Matched Windows"
 msgstr "Matchade fönster"
 
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Shade Hover"
-msgstr "Skuggsvävning"
-
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Tooltips"
 msgstr "Verktygstips"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Index:"
+msgstr "Index:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
@@ -480,6 +478,10 @@ msgid "Kill client"
 msgstr "Döda klient"
 
 #. ../lisp/sawfish/wm/commands.jl
+msgid "No operation"
+msgstr "Ingen handling"
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Call command with output to screen"
 msgstr "Anropa kommando med utdata på skärmen"
 
@@ -516,16 +518,8 @@ msgid "Bindings"
 msgstr "Bindningar"
 
 #. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing/Maximizing"
-msgstr "Minimering/Maximering"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing"
-msgstr "Minimering"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Maximizing"
-msgstr "Maximering"
+msgid "Minimizing and Maximizing"
+msgstr "Minimering och maximering"
 
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Miscellaneous"
@@ -544,8 +538,9 @@ msgid "When does the mouse pointer affect the input focus."
 msgstr "När påverkar muspekaren inmatningsfokus?"
 
 #. ../lisp/sawfish/wm/focus.jl
-msgid "Does click-to-focus mode pass the click through to the window."
-msgstr "Skickar \"click-to-focus\"-läget vidare klicket till fönstret?"
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr ""
+"Klicka-för-att-fokusera-läget skickar vidare klicket till programmet."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default frame style:"
@@ -556,24 +551,8 @@ msgid "Automatically reload themes when they are updated."
 msgstr "Läs om teman automatiskt när de uppdateras."
 
 #. ../lisp/sawfish/wm/frames.jl
-msgid ""
-"Frame type fallbacks:\n"
-"\n"
-"Associate frame types with type to try if the theme doesn't implement the "
-"requested type."
-msgstr ""
-"Ramstilsreträtt:\n"
-"\n"
-"Associera ramtyper med typ som ska provas om temat inte stöder den "
-"efterfrågade typen."
-
-#. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Standardtypsnitt: \\w"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Bevel intensity: \\wpercent."
-msgstr "Intensitet på kanter: \\w %."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -717,18 +696,10 @@ msgstr ""
 "skuggknapp. (Endast musbindningar fungerar här)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Motion threshold for mouse pointer: \\wpixels"
-msgstr "Rörelsetröskel för muspekaren: \\w bildpunkter"
-
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default window manager shortcuts."
 msgstr ""
 "Modifierartangent(er) som ska användas för standardkortkommandon i "
 "fönsterhanteraren."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display key-binding information in menu items."
-msgstr "Visa tangentbindningsinformation i menyval."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -790,6 +761,7 @@ msgstr "_Upp"
 msgid "_Down"
 msgstr "_Ner"
 
+#. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Stacking"
 msgstr "Lager"
@@ -901,10 +873,6 @@ msgstr "Metod att placera fönster: \\w"
 msgid "Method of placing dialog windows: \\w"
 msgstr "Metod att placera dialogrutor: \\w"
 
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Ignore program-specified window placements."
-msgstr "Ignorera programangivna fönsterpositioner."
-
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "all"
 msgstr "alla"
@@ -969,10 +937,6 @@ msgstr "Sänk fönster i djupled"
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Put the window in the stacking level beneath its current level."
 msgstr "Flytta ned fönstret ett lager."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Windows uniconify to the current viewport."
-msgstr "Fönster återställs i den aktuella skrivbordsvyn."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
@@ -1051,78 +1015,50 @@ msgid "Move window right"
 msgstr "Flytta fönstret åt höger"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport on the right."
-msgstr "Flytta fönstret till skrivbordsvyn till höger."
+msgid ""
+"Move the window to the viewport on the right, and switch to that viewport."
+msgstr ""
+"Flytta fönstret till skrivbordsvyn till höger, och byt till den "
+"skrivbordsvyn."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window left"
 msgstr "Flytta fönstret åt vänster"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport on the left."
-msgstr "Flytta fönstret till skrivbordsvyn till vänster."
+msgid ""
+"Move the window to the viewport on the left, and switch to that viewport."
+msgstr ""
+"Flytta fönstret till skrivbordsvyn till vänster, och byt till den "
+"skrivbordsvyn."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window up"
 msgstr "Flytta fönstret uppåt"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport above."
-msgstr "Flytta fönstret till skrivbordsvyn ovanför."
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr ""
+"Flytta fönstret till skrivbordsvyn ovanför, och byt till den "
+"skrivbordsvyn."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
 msgstr "Flytta fönstret nedåt"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport below."
-msgstr "Flytta fönstret till skrivbordsvyn nedanför."
-
-#. ../lisp/sawfish/wm/window-anim.jl
-msgid "The default window animation mode: \\w"
-msgstr "Standardläge för fönsteranimering: \\w"
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr ""
+"Flytta fönstret till skrivbordsvyn nedanför, och byt till den "
+"skrivbordsvyn."
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Give focus to windows even when they haven't asked for it.\n"
-"\n"
-"Windows should set the `accepts input' hint in their WM_HINTS property to "
-"show if they require the focus or not."
-msgstr ""
-"Ge fokus till fönster även om de inte bett om det.\n"
-"\n"
-"Fönster ska ge tipset \"accepts input\" i sin WM_HINTS-egenskapslista för "
-"att visa huruvida de kräver fokus."
+msgid "Focus desktop"
+msgstr "Fokusera skrivbord"
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Offset (%) from left window edge when warping pointer.\n"
-"\n"
-"A negative number means outside the left window edge."
-msgstr ""
-"Avstånd i procent från vänstra fönsterkanten vid teleportering.\n"
-"\n"
-"Ett negativt tal betyder utanför den vänstra fönsterkanten."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Offset (%) from top window edge when warping pointer.\n"
-"\n"
-"A negative number means outside the top window edge."
-msgstr ""
-"Avstånd i procent från övre fönsterkanten vid teleportering.\n"
-"\n"
-"Ett negativt tal betyder ovanför den övre fönsterkanten."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid ""
-"Format to create unique window names.\n"
-"\n"
-"Has two arguments (NAME INDEX) applied to it."
-msgstr ""
-"Format för att skapa unika fönsternamn.\n"
-"\n"
-"Tar två argument (NAMN INDEX)."
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "Överför inmatningsfokus till skrivbordsfönstret (om sådant finns)."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window"
@@ -1147,44 +1083,6 @@ msgstr "Gör fönsternamnet unikt"
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Force the current window to have a unique title."
 msgstr "Tvinga det aktuella fönstret att ha en unik titel."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Virtual desktop configuration."
-msgstr "Konfiguration av virtuella skrivbord."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "stop"
-msgstr "stanna"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "wrap-around"
-msgstr "snurra runt"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "keep-going"
-msgstr "fortsätt"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "When passing the first or last workspace: \\w"
-msgstr "Vid passage av den första eller sista arbetsytan: \\w"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "When passing the first or last workspace, while moving a window: \\w"
-msgstr ""
-"Vid passage av den första eller sista arbetsytan under "
-"fönsterförflyttning: \\w"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspaces are deleted when their last window closes."
-msgstr "Arbetsytor slås samman med nästa när deras sista fönster stängs."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Preserve empty workspaces in pager."
-msgstr "Behåll tomma arbetsytor i skrivbordsväljaren."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Dialogs appear on the same workspace as their application."
-msgstr "Dialogrutor på samma arbetsyta som deras program."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace names"
@@ -1634,9 +1532,8 @@ msgid "Delete all windows in the group that the current window is a member of."
 msgstr "Ta bort alla fönster i gruppen som det aktuella fönstret är med i."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether growing an already grown window grows it again."
-msgstr ""
-"Huruvida ett fönster som redan har växt ska kunna växas igen eller inte."
+msgid "Growing and packing of windows"
+msgstr "Växande och packande av fönster"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
@@ -1649,12 +1546,12 @@ msgstr ""
 "till originalstorleken."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "maybe"
-msgstr "kanske"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "always"
 msgstr "alltid"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr "kanske"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "never"
@@ -1683,76 +1580,176 @@ msgstr ""
 "\"aldrig\" betyder att pekaren aldrig flyttas."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Whether to bump into fully obscured windows when growing or packing\n"
+"windows."
+msgstr ""
+"Huruvida helt obskyra fönster ska krockas med vid växande eller packande\n"
+"av fönster."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Whether to bump into windows on a different depth when growing or packing\n"
+"windows.\n"
+"`maybe' means only avoided windows in other depths."
+msgstr ""
+"Huruvida fönster på ett annat djup ska krockas med vid växande eller\n"
+"packande av fönster.\n"
+"\"kanske\" betyder endast undvikna fönster på andra djup."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into ignored windows when growing or packing."
+msgstr ""
+"Huruvida ignorerade fönster ska krockas med vid växande eller packande."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
 msgstr "Låt fönster växa åt vänster"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window to the left until it `bumps into' another window."
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
-"Låter fönstret växa till vänster tills det \"krockar\" med ett annat fönster."
+"Låter fönstret växa till vänster tills det \"krockar\" med ett annat "
+"fönster.\n"
+"Se \"grow-window-up\"."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window right"
 msgstr "Låt fönster växa åt höger"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window to the right until it `bumps into' another window."
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
-"Låter fönstret växa till höger tills det \"krockar\" med ett annat fönster."
+"Låter fönstret växa till höger tills det \"krockar\" med ett annat "
+"fönster.\n"
+"Se \"grow-window-up\"."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window up"
 msgstr "Låt fönster växa uppåt"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window upwards until it `bumps into' another window."
-msgstr "Låter fönstret växa uppåt tills det \"krockar\" med ett annat fönster."
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
+msgstr ""
+"Låter fönstret växa uppåt tills det \"krockar\" med ett annat fönster.\n"
+"Om den översta kanten var utanför skärmkanten kommer den att tas in "
+"igen.\n"
+"Med ett globalt prefixargument maximeras uppåt istället.\n"
+"Med ett numeriskt prefixargument växes istället uppåt med det antal\n"
+"ökningar som är angivet i fönstret eller bildpunkter."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Låt fönster växa nedåt"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grows window downwards until it `bumps into' another window."
-msgstr "Låter fönstret växa nedåt tills det \"krockar\" med ett annat fönster."
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Låter fönstret växa nedåt tills det \"krockar\" med ett annat fönster.\n"
+"Se \"grow-window-up\"."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window left"
 msgstr "Packa fönster åt vänster"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window to the left until it `bumps into' another window."
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
-"Flyttar fönstret till vänster tills det \"krockar\" med ett annat fönster."
+"Flyttar fönstret till vänster tills det \"krockar\" med ett annat "
+"fönster.\n"
+"Se \"pack-window-up\"."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window right"
 msgstr "Packa fönster åt höger"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window to the right until it `bumps into' another window."
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
-"Flyttar fönstret till höger tills det \"krockar\" med ett annat fönster."
+"Flyttar fönstret till höger tills det \"krockar\" med ett annat fönster.\n"
+"Se \"pack-window-up\"."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window up"
 msgstr "Packa fönster uppåt"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window upwards until it `bumps into' another window."
-msgstr "Flyttar fönstret uppåt tills det \"krockar\" med ett annat fönster."
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
+msgstr ""
+"Flyttar fönstret uppåt tills det \"krockar\" med ett annat fönster.\n"
+"Om den översta kanten var utanför skärmkanten kommer den att tas in "
+"igen.\n"
+"Med ett globalt prefixargument maximeras uppåt istället.\n"
+"Med ett numeriskt prefixargument flyttas istället uppåt med det antalet\n"
+"bildpunkter."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "Packa fönster nedåt"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Moves window downwards until it `bumps into' another window."
-msgstr "Flyttar fönstret nedåt tills det \"krockar\" med ett annat fönster."
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Flyttar fönstret nedåt tills det \"krockar\" med ett annat fönster.\n"
+"Se \"pack-window-up\"."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow left"
+msgstr "Väx åt vänster"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow right"
+msgstr "Väx åt höger"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow up"
+msgstr "Väx uppåt"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow down"
+msgstr "Väx nedåt"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack left"
+msgstr "Packa åt vänster"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack right"
+msgstr "Packa åt höger"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack up"
+msgstr "Packa uppåt"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack down"
+msgstr "Packa nedåt"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show faq"
-msgstr "Visa faq"
+msgstr "Visa frågor och svar"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show news"
@@ -1839,26 +1836,6 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr "Flytta pekaren en bildpunkt nedåt."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "opaque"
-msgstr "fylld"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "box"
-msgstr "ruta"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How windows being moved are animated: \\w"
-msgstr "Hur fönster som flyttas ska animeras: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How windows being resized are animated: \\w"
-msgstr "Hur fönster som ändrar storlek ska animeras: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Raise windows when they are moved or resized."
-msgstr "Höj fönster när de flyttas eller storleksändras."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Show current position of windows while moving."
 msgstr "Visa den aktuella fönsterpositionen vid förflyttning."
 
@@ -1867,56 +1844,16 @@ msgid "Show current dimensions of windows while resizing."
 msgstr "Visa de aktuella fönsterdimensionerna vid storleksändring."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "region"
-msgstr "region"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "border"
-msgstr "kant"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "grab"
-msgstr "ta tag"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "border-grab"
-msgstr "ta tag i kanten"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How to choose window edges when resizing: \\w"
-msgstr "Hur fönsterkanter ska väljas vid storleksändring: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Snap window position to edges of other windows while moving."
-msgstr "Fäst fönsterkanter vid andra fönster under förflyttning."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Proximity in pixels before snapping to a window edge."
-msgstr "Närhet i bildpunkter innan fönsterkanter fäster."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "magnetism"
-msgstr "magnetism"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "resistance"
-msgstr "motstånd"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "attraction"
-msgstr "dragningskraft"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "How to snap together window edges: \\w"
-msgstr "Hur fönsterkanter ska fästas tillsammans: \\w"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Snap to otherwise-ignored windows."
-msgstr "Fäst vid annars ignorerade fönster."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Only update window contents after it has stopped moving."
-msgstr "Rita om fönstret först när förflyttningen/storleksändringen är klar."
+msgid ""
+"Distance in pixels before window edges align with each other.\n"
+"\n"
+"When moving a window, this option lets you align one of its edges with an "
+"edge of another window."
+msgstr ""
+"Avstånd i bildpunkter innan fönsterkanter justeras mot varandra.\n"
+"\n"
+"När ett fönster flyttas låter detta alternativ dig justera ett av dess "
+"kanter med ett annat fönster."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -2013,14 +1950,6 @@ msgstr ""
 "det har, återspela sedan pekarhändelserna som anropade kommandot."
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
-msgid ""
-"Default increment for size-window commands (when the window doesn't\n"
-"specify it's own increments)."
-msgstr ""
-"Standardökning för fönsterstorlekskommandon (när ett fönster inte\n"
-"anger egna ökningar)."
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
 msgstr "Storleksändra fönster lägg till rad"
 
@@ -2051,10 +1980,6 @@ msgstr "Storleksändra fönster ta bort rad"
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Decrease the size of the current window by one column."
 msgstr "Minska storleken på det aktuella fönstret med en kolumn."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Number of pixels to move window in `slide-' commands."
-msgstr "Antal bildpunkter att flytta fönstret i \"glid\"-kommandon."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window left"
@@ -2094,8 +2019,7 @@ msgstr "Glid grupp åt vänster"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels to the left."
-msgstr ""
-"Flytta fönstergruppen \"glid-fönster-ökning\" bildpunkter åt vänster."
+msgstr "Flytta fönstergruppen \"glid-fönster-ökning\" bildpunkter åt vänster."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group right"
@@ -2162,12 +2086,8 @@ msgid "Set window viewport linear"
 msgstr "Ställ in fönster skrivbordsvy linjär"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window names while cycling through windows."
-msgstr "Visa fönsternamn under fönsterväxling."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window icons while cycling through windows."
-msgstr "Visa fönsterikoner under fönsterväxling."
+msgid "Display window names and icons while cycling through windows."
+msgstr "Visa fönsternamn och fönsterikoner under fönsterväxling."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Include iconified windows when cycling."
@@ -2182,22 +2102,6 @@ msgid "Include windows on all viewports when cycling."
 msgstr "Inkludera fönster på alla skrivbordsvyer vid växling."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Höj fönster när de är tillfälligt valda vid växling."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Warp the mouse pointer to windows as they're temporarily selected."
-msgstr "Teleportera muspekaren till fönster när de är tillfälligt valda."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Focus windows when they're temporarily selected during cycling."
-msgstr "Fokusera fönster när de är tillfälligt valda vid växling."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Disable auto-raising while temporarily selecting windows."
-msgstr "Stäng av automatisk höjning när fönster väljs tillfälligt."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "cycle-keymap"
 msgstr "växlingstangentbindning"
 
@@ -2207,12 +2111,16 @@ msgid ""
 msgstr "Tangentbindning vars bindningar är aktiva under fönsterväxling."
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Terminal"
+msgstr "Terminal"
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "The program launched by the `xterm' command."
 msgstr "Programmet som startas av kommandot \"xterm\"."
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Optional arguments given to the `xterm' command."
-msgstr "Extra argument till kommandot \"xterm\"."
+msgid "Arguments given to the `xterm' command."
+msgstr "Argument som ges till kommandot \"xterm\"."
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "Xterm"
@@ -2231,16 +2139,16 @@ msgid "Play sound effects for window events."
 msgstr "Spela upp ljudeffekter för fönsterhändelser."
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Play sound effects for unmanaged windows."
-msgstr "Spela upp ljudeffekter för ignorerade fönster."
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Event"
 msgstr "Händelse"
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Audio file"
 msgstr "Ljudfil"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+msgid "Auto-Raise"
+msgstr "Höj automatiskt"
 
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Raise windows when they are focused."
@@ -2250,9 +2158,9 @@ msgstr "Höj fönster när de fokuseras."
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr "Fördröjning i millisekunder innan fokuserade fönster höjs."
 
-#. ../lisp/sawfish/wm/ext/beos-window-menu.jl
-msgid "The hierarchical window menu raises singleton submenus."
-msgstr "Den hierarkiska fönstermenyn höjer enstaka undermenyer."
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Edge Flipping"
+msgstr "Kantskrivbordsbyte"
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Select the next desktop when the pointer hits screen edge."
@@ -2274,21 +2182,13 @@ msgstr "Om kanten av skärmen träffas väljs nästa: \\w"
 msgid "Only flip when interactively moving a window."
 msgstr "Byt skrivbord endast när ett fönster flyttas interaktivt."
 
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Milliseconds to delay before flipping: \\w"
-msgstr "Fördröjning i millisekunder innan skrivbordsbyte: \\w"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Warp pointer to opposite screen edge when flipping."
-msgstr "Flytta pekare till motsatta skärmkanten vid skrivbordsbyte."
-
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Error Handling"
 msgstr "Felhantering"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Emit a beeping sound when errors occur."
-msgstr "Avge ett pipljud när fel uppstår."
+msgid "Beep when errors occur."
+msgstr "Pip när fel uppstår."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "nowhere"
@@ -2303,8 +2203,8 @@ msgid "standard-error"
 msgstr "standard-fel"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-msgid "Where to display error messages: \\w"
-msgstr "Var felmeddelanden ska visas: \\w"
+msgid "Display error messages to: \\w"
+msgstr "Visa felmeddelanden på: \\w"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "No errors."
@@ -2467,6 +2367,10 @@ msgid "Other"
 msgstr "Annat"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Shade Hover"
+msgstr "Skuggsvävning"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid ""
 "Enable shade-hover mode.\n"
 "\n"
@@ -2480,7 +2384,6 @@ msgstr ""
 msgid "Delay in milliseconds before unshading windows."
 msgstr "Fördröjning i millisekunder innan fönster avskuggas."
 
-#. ../lisp/sawfish/wm/state/shading.jl
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Raise windows when they are unshaded."
 msgstr "Höj fönster när de avskuggas."
@@ -2490,32 +2393,8 @@ msgid "Display tooltips for window frames."
 msgstr "Visa verktygstips för fönsterramar."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Remove tooltips after a period of time."
-msgstr "Göm verktygstips efter en viss tidsperiod."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Show full documentation in tooltips."
 msgstr "Visa all dokumentation i verktygstipsen."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Antal millisekunder innan verktygstips visas."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Antal millisekunder innan verktygstips göms."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Font used to display tooltips."
-msgstr "Typsnitt för visning av verktygstips."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips background"
-msgstr "Färg som används för verktygstipsens bakgrund"
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips foreground"
-msgstr "Färg som används för verktygstipsens förgrund"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _position"
@@ -2532,6 +2411,10 @@ msgstr "Kom ihåg _attribut"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "_Glöm sparat läge"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "History"
+msgstr "Historik"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2595,10 +2478,6 @@ msgid "_History"
 msgstr "_Historik"
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "Invoke the GNOME control center from the `Customize' menu."
-msgstr "Starta GNOME:s kontrollpanel från menyn \"Anpassa\"."
-
-#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "_GNOME-hjälp..."
 
@@ -2614,45 +2493,13 @@ msgstr "Om GNOME..."
 msgid "Gnome menus update"
 msgstr "Gnome-menyer uppdatera"
 
-#. ../lisp/sawfish/wm/placement/smart.jl
-msgid ""
-"Try to leave at least this many pixels between window edges in "
-"first/best-fit."
-msgstr ""
-"Försök att lämna åtminstone så här många bildpunkter mellan fönsterkanterna "
-"i lägena första-/bästapassning."
-
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
 msgstr "Avstånd mellan successiva placeringar i placeringsläget \"stagger\"."
 
-#. ../lisp/sawfish/wm/state/configure.jl
-msgid "Automatically select window gravity from position on screen."
-msgstr "Välj fönstergravitet automatiskt från position på skärmen."
-
-#. ../lisp/sawfish/wm/state/configure.jl
-msgid "Ignore requests from applications to change window stacking."
-msgstr "Ignorera förfrågningar från program om att ändra fönsterlagring."
-
 #. ../lisp/sawfish/wm/state/gnome.jl
 msgid "In GNOME _task list"
 msgstr "I GNOME:s _fönsterlista"
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows are focused after being uniconified."
-msgstr "Fönster får fokus efter återställning."
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows are raised after being uniconified."
-msgstr "Fönster höjs efter återställning."
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Unmanaged windows may be iconified."
-msgstr "Ickehanterade fönster tillåts bli minimerade."
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Windows uniconify to the current workspace."
-msgstr "Fönster återställs på den aktuella arbetsytan."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2665,19 +2512,19 @@ msgid "group"
 msgstr "grupp"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconifying a window also iconifies the: \\w"
-msgstr "Minimering av ett fönster minimerar också: \\w"
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Minimering av ett fönster tar också bort dess: \\w"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Uniconifying a window also uniconifies the: \\w"
-msgstr "Återställning av ett fönster återställer även: \\w"
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Återställning av ett fönster återställer även dess: \\w"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconify window"
 msgstr "Minimera fönster"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconify the window."
+msgid "Minimize the window."
 msgstr "Minimera fönstret."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2685,8 +2532,8 @@ msgid "Uniconify window"
 msgstr "Återställ fönster"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Return the window from its iconified state."
-msgstr "Återställ fönstret från dess minimerade läge."
+msgid "Restore the window from its minimized state."
+msgstr "Återställ fönstret från dess minimerade tillstånd."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window iconified"
@@ -2701,7 +2548,7 @@ msgid "Iconify workspace windows"
 msgstr "Minimera arbetsytefönster"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Iconify all windows on the current workspace."
+msgid "Minimize all windows on the current workspace."
 msgstr "Minimerar alla fönster på den aktuella arbetsytan."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2723,10 +2570,6 @@ msgid ""
 msgstr ""
 "Växla fönstrets \"klistrighet\" -- huruvida det är en medlem av alla\n"
 "arbetsytor eller inte."
-
-#. ../lisp/sawfish/wm/state/iconify.jl
-msgid "Toggle single window mode"
-msgstr "Växla enstaka fönster-läge"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
@@ -2795,25 +2638,6 @@ msgstr "_Växlingsbart"
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
 msgstr "I _fönsterlista"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Maximizing a window in one dimension must increase the size of that "
-"dimension."
-msgstr ""
-"Maximering av en fönsterdimension ökar alltid storleken på den dimensionen."
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Raise windows when they are maximized."
-msgstr "Höj fönster när de maximeras."
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Let unmanaged windows be overlapped when filling windows."
-msgstr "Låt ignorerade fönster täckas över när fönster fylls."
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Don't cover `avoided' windows when maximizing."
-msgstr "Täck inte över \"undvikna\" fönster vid maximering."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Lock position and size while windows are maximized."
@@ -2933,7 +2757,16 @@ msgstr "Maximera fyll fönster vertikalt-växel"
 msgid ""
 "Toggle the state of the window between vertically maximized-filled and\n"
 "unmaximized."
-msgstr "Växla fönsterläge mellan fyllnadsmaximerad och avmaximerad vertikalt."
+msgstr ""
+"Växla fönsterläge mellan fyllnadsmaximerad och avmaximerad vertikalt."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window fullscreen"
+msgstr "Maximera fönster till helskärmsläge"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window fullscreen toggle"
+msgstr "Maximera fönster helskärm-växel"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
@@ -2971,14 +2804,6 @@ msgstr "_Skuggat"
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Focus on application windows when they first appear."
 msgstr "Fokusera programfönster när de först visas."
-
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid "Dialog windows inherit the focus from their parent."
-msgstr "Dialogrutor ärver fokusering från sina föräldrar."
-
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid "Decorate dialog windows similarly to application windows."
-msgstr "Dekorera dialogrutor likadant som vanliga fönster."
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise window and transients"
@@ -3020,20 +2845,8 @@ msgstr ""
 "tillfälliga fönster som fönstret har."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Windows uniconify to the current workspace when they are selected."
-msgstr "Fönster återställs på den aktuella arbetsytan när de väljs."
-
-#. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Unshade selected windows."
 msgstr "Avskugga valda fönster."
-
-#. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Raise selected windows (normally by the Windows menu)."
-msgstr "Fönster som väljs (normalt via Fönster-menyn) höjs."
-
-#. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Warp the pointer to selected windows."
-msgstr "Teleportera pekaren till valda fönster."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window without focusing"
@@ -3050,14 +2863,6 @@ msgstr "Visa fönster"
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display the workspace containing the window W, then focus on W."
 msgstr "Visa arbetsytan som innehåller fönstret F, fokusera sedan på F."
-
-#. ../lisp/sawfish/wm/util/groups.jl
-msgid "Group transient windows with their parents."
-msgstr "Gruppera tillfälliga fönster tillsammans med sina föräldrar."
-
-#. ../lisp/sawfish/wm/util/groups.jl
-msgid "Persistent group ids"
-msgstr "Kvarvarande grupp-ID"
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -3098,42 +2903,6 @@ msgid ""
 msgstr ""
 "Skickar nästa tangenthändelse direkt till det fokuserade klientfönstret,\n"
 "och ignorerar alla fönsterhanterarbindningar som den kanske har."
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "novice"
-msgstr "nybörjare"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "intermediate"
-msgstr "normalanvändare"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "expert"
-msgstr "experter"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Show options suitable for \\w users."
-msgstr "Visa inställningar som är lämpliga för \\w"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "ok"
-msgstr "ok"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "revert/cancel/ok"
-msgstr "återgå/avbryt/ok"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "apply/revert/cancel/ok"
-msgstr "verkställ/återgå/avbryt/ok"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Buttons shown in configurator: \\w"
-msgstr "Knappar som ska visas i konfigurationsprogrammet: \\w"
-
-#. ../lisp/sawfish/wm/util/nokogiri.jl
-msgid "Show variable names of each customization option."
-msgstr "Visa variabelnamn för konfigurationsalternativen."
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
 msgid ""
@@ -3375,6 +3144,342 @@ msgstr "_Inställningar"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Teman"
+
+#~ msgid "Revert"
+#~ msgstr "Återställ"
+
+#~ msgid "Minimizing"
+#~ msgstr "Minimering"
+
+#~ msgid "Maximizing"
+#~ msgstr "Maximering"
+
+#~ msgid ""
+#~ "Frame type fallbacks:\n"
+#~ "\n"
+#~ "Associate frame types with type to try if the theme doesn't implement the "
+#~ "requested type."
+#~ msgstr ""
+#~ "Ramstilsreträtt:\n"
+#~ "\n"
+#~ "Associera ramtyper med typ som ska provas om temat inte stöder den "
+#~ "efterfrågade typen."
+
+#~ msgid "Bevel intensity: \\wpercent."
+#~ msgstr "Intensitet på kanter: \\w %."
+
+#~ msgid "Motion threshold for mouse pointer: \\wpixels"
+#~ msgstr "Rörelsetröskel för muspekaren: \\w bildpunkter"
+
+#~ msgid "Display key-binding information in menu items."
+#~ msgstr "Visa tangentbindningsinformation i menyval."
+
+#~ msgid "Ignore program-specified window placements."
+#~ msgstr "Ignorera programangivna fönsterpositioner."
+
+#~ msgid "Windows uniconify to the current viewport."
+#~ msgstr "Fönster återställs i den aktuella skrivbordsvyn."
+
+#~ msgid "Move the window to the viewport above."
+#~ msgstr "Flytta fönstret till skrivbordsvyn ovanför."
+
+#~ msgid "Move the window to the viewport below."
+#~ msgstr "Flytta fönstret till skrivbordsvyn nedanför."
+
+#~ msgid "The default window animation mode: \\w"
+#~ msgstr "Standardläge för fönsteranimering: \\w"
+
+#~ msgid ""
+#~ "Give focus to windows even when they haven't asked for it.\n"
+#~ "\n"
+#~ "Windows should set the `accepts input' hint in their WM_HINTS property to "
+#~ "show if they require the focus or not."
+#~ msgstr ""
+#~ "Ge fokus till fönster även om de inte bett om det.\n"
+#~ "\n"
+#~ "Fönster ska ge tipset \"accepts input\" i sin WM_HINTS-egenskapslista för "
+#~ "att visa huruvida de kräver fokus."
+
+#~ msgid ""
+#~ "Offset (%) from left window edge when warping pointer.\n"
+#~ "\n"
+#~ "A negative number means outside the left window edge."
+#~ msgstr ""
+#~ "Avstånd i procent från vänstra fönsterkanten vid teleportering.\n"
+#~ "\n"
+#~ "Ett negativt tal betyder utanför den vänstra fönsterkanten."
+
+#~ msgid ""
+#~ "Offset (%) from top window edge when warping pointer.\n"
+#~ "\n"
+#~ "A negative number means outside the top window edge."
+#~ msgstr ""
+#~ "Avstånd i procent från övre fönsterkanten vid teleportering.\n"
+#~ "\n"
+#~ "Ett negativt tal betyder ovanför den övre fönsterkanten."
+
+#~ msgid ""
+#~ "Format to create unique window names.\n"
+#~ "\n"
+#~ "Has two arguments (NAME INDEX) applied to it."
+#~ msgstr ""
+#~ "Format för att skapa unika fönsternamn.\n"
+#~ "\n"
+#~ "Tar två argument (NAMN INDEX)."
+
+#~ msgid "Virtual desktop configuration."
+#~ msgstr "Konfiguration av virtuella skrivbord."
+
+#~ msgid "stop"
+#~ msgstr "stanna"
+
+#~ msgid "wrap-around"
+#~ msgstr "snurra runt"
+
+#~ msgid "keep-going"
+#~ msgstr "fortsätt"
+
+#~ msgid "When passing the first or last workspace: \\w"
+#~ msgstr "Vid passage av den första eller sista arbetsytan: \\w"
+
+#~ msgid "When passing the first or last workspace, while moving a window: \\w"
+#~ msgstr ""
+#~ "Vid passage av den första eller sista arbetsytan under "
+#~ "fönsterförflyttning: \\w"
+
+#~ msgid "Workspaces are deleted when their last window closes."
+#~ msgstr "Arbetsytor slås samman med nästa när deras sista fönster stängs."
+
+#~ msgid "Preserve empty workspaces in pager."
+#~ msgstr "Behåll tomma arbetsytor i skrivbordsväljaren."
+
+#~ msgid "Dialogs appear on the same workspace as their application."
+#~ msgstr "Dialogrutor på samma arbetsyta som deras program."
+
+#~ msgid "Whether growing an already grown window grows it again."
+#~ msgstr ""
+#~ "Huruvida ett fönster som redan har växt ska kunna växas igen eller inte."
+
+#~ msgid "Grows window upwards until it `bumps into' another window."
+#~ msgstr ""
+#~ "Låter fönstret växa uppåt tills det \"krockar\" med ett annat fönster."
+
+#~ msgid "Moves window upwards until it `bumps into' another window."
+#~ msgstr "Flyttar fönstret uppåt tills det \"krockar\" med ett annat fönster."
+
+#~ msgid "opaque"
+#~ msgstr "fylld"
+
+#~ msgid "box"
+#~ msgstr "ruta"
+
+#~ msgid "How windows being moved are animated: \\w"
+#~ msgstr "Hur fönster som flyttas ska animeras: \\w"
+
+#~ msgid "How windows being resized are animated: \\w"
+#~ msgstr "Hur fönster som ändrar storlek ska animeras: \\w"
+
+#~ msgid "Raise windows when they are moved or resized."
+#~ msgstr "Höj fönster när de flyttas eller storleksändras."
+
+#~ msgid "region"
+#~ msgstr "region"
+
+#~ msgid "border"
+#~ msgstr "kant"
+
+#~ msgid "grab"
+#~ msgstr "ta tag"
+
+#~ msgid "border-grab"
+#~ msgstr "ta tag i kanten"
+
+#~ msgid "How to choose window edges when resizing: \\w"
+#~ msgstr "Hur fönsterkanter ska väljas vid storleksändring: \\w"
+
+#~ msgid "Snap window position to edges of other windows while moving."
+#~ msgstr "Fäst fönsterkanter vid andra fönster under förflyttning."
+
+#~ msgid "Proximity in pixels before snapping to a window edge."
+#~ msgstr "Närhet i bildpunkter innan fönsterkanter fäster."
+
+#~ msgid "magnetism"
+#~ msgstr "magnetism"
+
+#~ msgid "resistance"
+#~ msgstr "motstånd"
+
+#~ msgid "attraction"
+#~ msgstr "dragningskraft"
+
+#~ msgid "How to snap together window edges: \\w"
+#~ msgstr "Hur fönsterkanter ska fästas tillsammans: \\w"
+
+#~ msgid "Snap to otherwise-ignored windows."
+#~ msgstr "Fäst vid annars ignorerade fönster."
+
+#~ msgid "Only update window contents after it has stopped moving."
+#~ msgstr ""
+#~ "Rita om fönstret först när förflyttningen/storleksändringen är klar."
+
+#~ msgid ""
+#~ "Default increment for size-window commands (when the window doesn't\n"
+#~ "specify it's own increments)."
+#~ msgstr ""
+#~ "Standardökning för fönsterstorlekskommandon (när ett fönster inte\n"
+#~ "anger egna ökningar)."
+
+#~ msgid "Number of pixels to move window in `slide-' commands."
+#~ msgstr "Antal bildpunkter att flytta fönstret i \"glid\"-kommandon."
+
+#~ msgid "Display window names while cycling through windows."
+#~ msgstr "Visa fönsternamn under fönsterväxling."
+
+#~ msgid "Raise windows while they're temporarily selected during cycling."
+#~ msgstr "Höj fönster när de är tillfälligt valda vid växling."
+
+#~ msgid "Warp the mouse pointer to windows as they're temporarily selected."
+#~ msgstr "Teleportera muspekaren till fönster när de är tillfälligt valda."
+
+#~ msgid "Focus windows when they're temporarily selected during cycling."
+#~ msgstr "Fokusera fönster när de är tillfälligt valda vid växling."
+
+#~ msgid "Disable auto-raising while temporarily selecting windows."
+#~ msgstr "Stäng av automatisk höjning när fönster väljs tillfälligt."
+
+#~ msgid "Play sound effects for unmanaged windows."
+#~ msgstr "Spela upp ljudeffekter för ignorerade fönster."
+
+#~ msgid "The hierarchical window menu raises singleton submenus."
+#~ msgstr "Den hierarkiska fönstermenyn höjer enstaka undermenyer."
+
+#~ msgid "Milliseconds to delay before flipping: \\w"
+#~ msgstr "Fördröjning i millisekunder innan skrivbordsbyte: \\w"
+
+#~ msgid "Warp pointer to opposite screen edge when flipping."
+#~ msgstr "Flytta pekare till motsatta skärmkanten vid skrivbordsbyte."
+
+#~ msgid "Remove tooltips after a period of time."
+#~ msgstr "Göm verktygstips efter en viss tidsperiod."
+
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "Antal millisekunder innan verktygstips visas."
+
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "Antal millisekunder innan verktygstips göms."
+
+#~ msgid "Font used to display tooltips."
+#~ msgstr "Typsnitt för visning av verktygstips."
+
+#~ msgid "Color used for the tooltips background"
+#~ msgstr "Färg som används för verktygstipsens bakgrund"
+
+#~ msgid "Color used for the tooltips foreground"
+#~ msgstr "Färg som används för verktygstipsens förgrund"
+
+#~ msgid "Invoke the GNOME control center from the `Customize' menu."
+#~ msgstr "Starta GNOME:s kontrollpanel från menyn \"Anpassa\"."
+
+#~ msgid ""
+#~ "Try to leave at least this many pixels between window edges in first/best-"
+#~ "fit."
+#~ msgstr ""
+#~ "Försök att lämna åtminstone så här många bildpunkter mellan "
+#~ "fönsterkanterna i lägena första-/bästapassning."
+
+#~ msgid "Automatically select window gravity from position on screen."
+#~ msgstr "Välj fönstergravitet automatiskt från position på skärmen."
+
+#~ msgid "Ignore requests from applications to change window stacking."
+#~ msgstr "Ignorera förfrågningar från program om att ändra fönsterlagring."
+
+#~ msgid "Windows are focused after being uniconified."
+#~ msgstr "Fönster får fokus efter återställning."
+
+#~ msgid "Windows are raised after being uniconified."
+#~ msgstr "Fönster höjs efter återställning."
+
+#~ msgid "Unmanaged windows may be iconified."
+#~ msgstr "Ickehanterade fönster tillåts bli minimerade."
+
+#~ msgid "Windows uniconify to the current workspace."
+#~ msgstr "Fönster återställs på den aktuella arbetsytan."
+
+#~ msgid "Iconifying a window also iconifies the: \\w"
+#~ msgstr "Minimering av ett fönster minimerar också: \\w"
+
+#~ msgid "Uniconifying a window also uniconifies the: \\w"
+#~ msgstr "Återställning av ett fönster återställer även: \\w"
+
+#~ msgid "Iconify the window."
+#~ msgstr "Minimera fönstret."
+
+#~ msgid "Toggle single window mode"
+#~ msgstr "Växla enstaka fönster-läge"
+
+#~ msgid ""
+#~ "Maximizing a window in one dimension must increase the size of that "
+#~ "dimension."
+#~ msgstr ""
+#~ "Maximering av en fönsterdimension ökar alltid storleken på den "
+#~ "dimensionen."
+
+#~ msgid "Raise windows when they are maximized."
+#~ msgstr "Höj fönster när de maximeras."
+
+#~ msgid "Let unmanaged windows be overlapped when filling windows."
+#~ msgstr "Låt ignorerade fönster täckas över när fönster fylls."
+
+#~ msgid "Don't cover `avoided' windows when maximizing."
+#~ msgstr "Täck inte över \"undvikna\" fönster vid maximering."
+
+#~ msgid "Dialog windows inherit the focus from their parent."
+#~ msgstr "Dialogrutor ärver fokusering från sina föräldrar."
+
+#~ msgid "Decorate dialog windows similarly to application windows."
+#~ msgstr "Dekorera dialogrutor likadant som vanliga fönster."
+
+#~ msgid "Windows uniconify to the current workspace when they are selected."
+#~ msgstr "Fönster återställs på den aktuella arbetsytan när de väljs."
+
+#~ msgid "Raise selected windows (normally by the Windows menu)."
+#~ msgstr "Fönster som väljs (normalt via Fönster-menyn) höjs."
+
+#~ msgid "Warp the pointer to selected windows."
+#~ msgstr "Teleportera pekaren till valda fönster."
+
+#~ msgid "Group transient windows with their parents."
+#~ msgstr "Gruppera tillfälliga fönster tillsammans med sina föräldrar."
+
+#~ msgid "Persistent group ids"
+#~ msgstr "Kvarvarande grupp-ID"
+
+#~ msgid "novice"
+#~ msgstr "nybörjare"
+
+#~ msgid "intermediate"
+#~ msgstr "normalanvändare"
+
+#~ msgid "expert"
+#~ msgstr "experter"
+
+#~ msgid "Show options suitable for \\w users."
+#~ msgstr "Visa inställningar som är lämpliga för \\w"
+
+#~ msgid "ok"
+#~ msgstr "ok"
+
+#~ msgid "revert/cancel/ok"
+#~ msgstr "återgå/avbryt/ok"
+
+#~ msgid "apply/revert/cancel/ok"
+#~ msgstr "verkställ/återgå/avbryt/ok"
+
+#~ msgid "Buttons shown in configurator: \\w"
+#~ msgstr "Knappar som ska visas i konfigurationsprogrammet: \\w"
+
+#~ msgid "Show variable names of each customization option."
+#~ msgstr "Visa variabelnamn för konfigurationsalternativen."
 
 #~ msgid "Protect the sawfish"
 #~ msgstr "Skydda svärdfisken"
