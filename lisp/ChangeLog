@@ -1,3 +1,24 @@
+1999-10-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* viewport.jl (window-outside-viewport-p): new function
+
+	* window-order.jl (window-order): new optional arg ALL-VIEWPORTS
+
+	* x-cycle.jl (cycle-all-viewports): new option
+
+	* workspace.jl (lock-first-workspace): this option now locks
+	the last interesting workspace as well as the first
+	(ws-normalize-indices): normalise the first- and
+	last-interesting-workspace variables
+	(ws-load-state): don't treat saved workspace indices as logical
+	indices (this could merge workspaces)
+
+	* frames.jl (frame-style-menu): affect the current-event-window
+	instead of the input-focus
+
+	* gnome.jl: map _WIN_HINTS_SKIP_FOCUS to our ignored property,
+	remove hack of matching window names
+
 1999-10-06  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.jl (window-type-remove-title,

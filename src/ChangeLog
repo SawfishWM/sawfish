@@ -1,3 +1,16 @@
+1999-10-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c, display.c (destroy_notify, error_handler): don't
+	set focus_window = 0, if the current window is destroyed,
+	instead let remove_window () or emit_pending_destroys () call
+	focus_on_window (0) when necessary
+	* windows.c (remove_window, emit_pending_destroys): call
+	focus_on_window (0) when we think the destroyed window is
+	currently focused
+
+	* server.c (server_init): when binding, add one to the size of
+	the address (for the terminating null character)
+
 1999-10-05  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill.h (struct frame_part): new bit `below_client'
