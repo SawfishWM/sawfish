@@ -7,6 +7,51 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.21
+
+@itemize @bullet
+
+@item Frame pattern definitions (foreground, background, font) may now
+take alists as well as the old single object, or list of four objects.
+Possible states are @code{inactive}, @code{focused},
+@code{highlighted}, @code{clicked}, @code{inactive-highlighted},
+@code{inactive-clicked}. (Last two are new)
+
+@item New program @code{sawmill-themer}. A GUI for creating simple
+themes (those without any parts defined by functions)
+
+@item New module @code{gnome-int}, loaded by @code{sawmill-defaults} if
+GNOME is around, sets up some GNOME'ish things
+
+@item New command @code{toggle-single-window-mode}
+
+@item Translation updates/additions: de (Christoph Rauch), es (Iñaki
+García Etxebarria), nl (Han-Wen Nienhuys)
+
+@item Optional removal of tooltips after time period (Morgan Schweers)
+
+@item @kbd{Any-RET} completes interactive move or resize
+
+@item Work around Imlib's annoying image caching, @code{make-image} now
+@emph{always} returns a new image
+
+@item Fixed gc bug when building window frames
+
+@item Fixed X property handling on Alpha's (George Lebl)
+
+@item Make @code{call-command} accept closures
+
+@item Make @code{(cursor . nil)} work correctly in frame definitions
+
+@item Grab on frame window, not client window (ICCCM compliant)
+
+@item Fixed the ``uniconify to current workspace'' option
+
+@item Added window-maximization predicates to the gaol
+
+@end itemize
+
+
 @unnumberedsec 0.20
 
 @itemize @bullet
