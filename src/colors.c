@@ -60,6 +60,23 @@ get-color NAME
     return rep_VAL(f);
 }
 
+DEFUN("color-name", Fcolor_name, Scolor_name, (repv color), rep_Subr1) /*
+::doc:Scolor-name::
+color-name COLOR
+::end:: */
+{
+    rep_DECLARE1(color, COLORP);
+    return VCOLOR(color)->name;
+}
+
+DEFUN("colorp", Fcolorp, Scolorp, (repv win), rep_Subr1) /*
+::doc:Scolorp::
+colorp ARG
+::end:: */
+{
+    return COLORP(win) ? Qt : Qnil;
+}
+
 
 /* type hooks */
 
@@ -110,6 +127,8 @@ colors_init (void)
 					color_sweep, color_mark,
 					0, 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR(Sget_color);
+    rep_ADD_SUBR(Scolor_name);
+    rep_ADD_SUBR(Scolorp);
     rep_INTERN(default_foreground);
     rep_SYM(Qdefault_foreground)->value = Fget_color (rep_string_dup("black"));
 }
