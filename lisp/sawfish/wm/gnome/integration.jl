@@ -74,5 +74,6 @@
   (let ((menu (assoc (_ "_Help") root-menu)))
     (when menu
       (nconc menu `(()
-		    (,(_ "_GNOME Help") gnome-help-browser)
-		    (,(_ "GNOME WWW") gnome-www-page))))))
+		    (,(_ "_GNOME Help...") gnome-help-browser)
+		    (,(_ "GNOME WWW...") gnome-www-page)
+		    (,(_ "About GNOME...") gnome-about))))))
