@@ -66,7 +66,7 @@ where OPTIONS are any of:
 	(write standard-output (sawfish-client-eval form t))
 	(write standard-output #\newline)))
 	
-    (let loop ((args command-line-args))
+    (let loop ((args (or command-line-args '("-"))))
       (cond ((null args))
 
 	    ((string= (car args) "-q")
