@@ -88,6 +88,15 @@ DEFSYM(before_exit_hook, "before-exit-hook");
 static rep_bool
 on_idle (int since_last)
 {
+    if (since_last == 0 && rep_recurse_depth == 0)
+    {
+	/* XXX There have been reports of sawmill locking the display,
+	   XXX I've never seen it, but this may help, and shouldn't hurt.. */
+	last_event_time = get_server_timestamp ();
+	XUngrabPointer (dpy, last_event_time);
+	XUngrabKeyboard (dpy, last_event_time);
+	XFlush (dpy);
+    }
     return rep_FALSE;
 }
 
