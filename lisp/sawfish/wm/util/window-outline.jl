@@ -37,6 +37,7 @@
 		   (loop (1+ i))))))
       (loop 0))
     (x-destroy-gc gc)))
+(put 'box 'draw-window-outline draw-box-outline)
 
 ;; this is quite flickery.. double buffering doesn't work either..
 (defun draw-solid-outline (x y width height)
@@ -44,6 +45,7 @@
       ((gc (x-create-root-xor-gc)))
     (x-fill-rectangle 'root gc (cons x y) (cons width height))
     (x-destroy-gc gc)))
+(put 'solid 'draw-window-outline draw-solid-outline)
 
 ;;;###autoload
 (defun draw-window-outline (mode x y width height)
@@ -56,10 +58,10 @@ only be `box' for a 3x3 grid.
 Use the `erase-window-outline' to erase the grid. Also note that since
 these functions draw directly on the root window the server should be
 grabbed until the outline is erased."
-  ((case mode
-     ((solid) draw-solid-outline)
-     (t draw-box-outline))
-   x y width height))
+  (let
+      ((fun (get mode 'draw-window-outline)))
+    (when fun
+      (fun x y width height))))
 
 ;;;###autoload
 (defun erase-window-outline (mode x y width height)
@@ -68,7 +70,4 @@ at position (X, Y) relative to the root window. See `draw-window-outline'.
 
 MODE is a symbol defining the type of outline drawn, currently it may
 only be `box' for a 3x3 grid."
-  ((case mode
-     ((solid) draw-solid-outline)
-     (t draw-box-outline))
-   x y width height))
+  (draw-window-outline mode x y width height))
