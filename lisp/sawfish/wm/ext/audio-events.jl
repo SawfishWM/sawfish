@@ -78,7 +78,7 @@
 			    switch-workspace move-viewport
 			    focused unfocused) ,(_ "Event"))
 		   (file ,(_ "Audio file")))
-    :widget-flags (expand)
+    :widget-flags (expand-vertically)
     :depends audio-events-enabled
     :group audio)
 

@@ -151,8 +151,9 @@ that overrides settings set elsewhere.")
     "Frame definition used for unframed windows.")
 
   (defcustom default-frame-style nil
-    "Default frame style (theme)."
+    "Default frame style:"
     :type frame-style
+    :widget-flags (expand-vertically)
     :user-level novice
     :group appearance
     :after-set (lambda () (after-setting-default-frame)))
@@ -178,7 +179,7 @@ implement the requested type."
 			  shaped-transient icon doc) "From")
 		 ((symbol default shaped transient
 			  shaped-transient icon doc) "To"))
-    :widget-flags (expand framed)
+    :widget-flags (expand-vertically framed)
     :group appearance
     :user-level expert
     :after-set (lambda () (after-setting-frame-option)))
@@ -234,6 +235,7 @@ deciding which frame type to ask a theme to generate.")
     "Default font: \\w"
     :group appearance
     :type font
+    :widget-flags (expand-horizontally)
     :user-level novice
     :after-set (lambda () (after-setting-frame-option)))
 

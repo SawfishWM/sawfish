@@ -160,7 +160,7 @@
   (defcustom workspace-names nil
     ""
     :type* `(list string ,(_ "Workspace names"))
-    :widget-flags (expand)
+    :widget-flags (expand-vertically)
     :group workspace)
 
   ;; Currently active workspace, an integer
