@@ -38,7 +38,7 @@
 		       (quotient index (car viewport-dimensions))))
 
 (define-command-args 'set-viewport-linear
-		     `(and (labellled `(_ "Index:") (number 0))))
+		     `(and (labelled ,(_ "Index:") (number 0))))
 
 ;; Move window to viewport INDEX using linear addressing
 ;;;###autoload
