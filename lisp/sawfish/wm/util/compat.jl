@@ -42,3 +42,28 @@
 (define sawmill-site-lisp-directory sawfish-site-lisp-directory)
 (define sawmill-exec-directory sawfish-exec-directory)
 (define sawmill-version sawfish-version)
+
+(let
+    ((define-commands
+      (lambda (index)
+	(let
+	    ((fn (lambda (base)
+		   (intern (format nil "%s:%d" base (1+ index))))))
+	  (define-value (fn "select-workspace")
+			(lambda ()
+			  (interactive)
+			  (select-workspace-from-first index)))
+	  (define-value (fn "send-to-workspace")
+			(lambda (w)
+			  (interactive "%W")
+			  (send-window-to-workspace-from-first w index)))
+	  (define-value (fn "copy-to-workspace")
+			(lambda (w)
+			  (interactive "%W")
+			  (send-window-to-workspace-from-first w index t)))
+	  (put (fn "select-workspace") 'deprecated-command t)
+	  (put (fn "send-to-workspace") 'deprecated-command t)
+	  (put (fn "copy-to-workspace") 'deprecated-command t)))))
+  (do ((i 0 (1+ i)))
+      ((= i 9))
+    (define-commands i)))

@@ -528,7 +528,6 @@
 ;; switch to workspace with id SPACE
 (defun select-workspace (space &optional dont-focus)
   "Activate workspace number SPACE (from zero)."
-  (interactive "p")
   (unless (= current-workspace space)
     (when current-workspace
       (call-hook 'leave-workspace-hook (list current-workspace))
@@ -839,28 +838,29 @@ instance remaining, then delete the actual window."
 
 ;; some commands for moving directly to a workspace
 
-(let
-    ((define-commands
-      (lambda (index)
-	(let
-	    ((fn (lambda (base)
-		   (intern (format nil "%s:%d" base (1+ index))))))
-	  (define-value (fn "select-workspace")
-			(lambda ()
-			  (interactive)
-			  (select-workspace-from-first index)))
-	  (define-value (fn "send-to-workspace")
-			(lambda (w)
-			  (interactive "%W")
-			  (send-window-to-workspace-from-first w index)))
-	  (define-value (fn "copy-to-workspace")
-			(lambda (w)
-			  (interactive "%W")
-			  (send-window-to-workspace-from-first w index t))))))
-     (i 0))
-  (while (< i 9)
-    (define-commands i)
-    (setq i (1+ i))))
+(defun activate-workspace (n)
+  "Select the N'th workspace."
+  (interactive "NWorkspace:")
+  (select-workspace-from-first (1- n)))
+
+(define-command-args 'activate-workspace
+		     `(and (labelled ,(_ "Workspace:") (number 1))))
+
+(defun send-to-workspace (n)
+  "Move the current window to the N'th workspace."
+  (interactive "NWorkspace:")
+  (send-window-to-workspace-from-first (current-event-window) (1- n)))
+
+(define-command-args 'send-to-workspace
+		     `(and (labelled ,(_ "Workspace:") (number 1))))
+
+(defun copy-to-workspace (n)
+  "Copy the current window to the N'th workspace."
+  (interactive "NWorkspace:")
+  (send-window-to-workspace-from-first (current-event-window) (1- n) t))
+
+(define-command-args 'copy-to-workspace
+		     `(and (labelled ,(_ "Workspace:") (number 1))))
 
 
 ;; session management
