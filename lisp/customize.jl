@@ -30,13 +30,6 @@
   :group misc
   :type boolean)
 
-;; the active user interface process
-(defvar customize-process nil)
-
-;; output from the user-interface process that's received but not
-;; yet processed
-(defvar customize-pending nil)
-
 (defvar customize-user-forms nil)
 (defvar customize-read-user-file nil)
 (defvar customize-dirty-user-file nil)
@@ -48,46 +41,6 @@
   "Font used for text which doesn't have a font explicitly specified."
   :group appearance
   :type font)
-
-
-;; subprocess handling
-
-(defun customize-start-process ()
-  (unless (and customize-process (process-in-use-p customize-process))
-    (when customize-process
-      (kill-process customize-process))
-    (setq customize-process (make-process 'customize-filter
-					  'customize-sentinel))
-    (set-process-error-stream customize-process nil)
-    (or (start-process customize-process customize-program "--backend")
-	(error "Can't start customize backend: %s" customize-program))))
-
-(defun customize-stop-process ()
-  (when customize-process
-    (when (process-in-use-p customize-process)
-      (kill-process customize-process))
-    (setq customize-process nil)
-    (customize-write-user-file)))
-
-(defun customize-filter (output)
-  (setq output (concat customize-pending output))
-  (setq customize-pending nil)
-  (condition-case nil
-      (let
-	  ((result (read-from-string output)))
-	(cond ((eq (car result) 'ui-exit)
-	       (customize-stop-process))
-	      ((eq (car result) 'ui-refresh)
-	       (format customize-process "%S\n" (customize-ui-spec)))
-	      (t
-	       (eval result))))
-    (end-of-stream
-     (setq customize-pending output))))
-
-(defun customize-sentinel (process)
-  (when (and customize-process (not (process-in-use-p customize-process)))
-    (setq customize-process nil)
-    (customize-write-user-file)))
 
 
 ;; ui
@@ -144,35 +97,28 @@
 	 (get (car group-list) 'custom-group-widget) (car group-list) spec)
       (list* 'vbox spec))))
 
-(defun customize-ui-spec ()
-  (list*
-   'pages
-   (mapcar #'(lambda (group-list)
-	       (let
-		   ((group (car group-list)))
+(defun customize-ui-spec (&optional group)
+  (mapc 'require custom-required)
+  (if (or (null group) (eq group t))
+      (list*
+       'pages
+       (mapcar #'(lambda (group-list)
+		   (let
+		       ((group (car group-list)))
 		 (list (or (get group 'custom-group-doc)
 			   (symbol-name group))
 		       (customize-group-spec group-list))))
-	   custom-groups)))
+	       custom-groups))
+    (customize-group-spec (assq group custom-groups))))
 
 ;;;###autoload
 (defun customize (&optional group)
   "Invoke the user-customization system."
   (interactive)
-  (if customize-process
-      (error "Customize already active")
-    (customize-start-process)
-    (mapc 'require custom-required)
-    (if (null group)
-	(format customize-process "%S\n" (customize-ui-spec))
-      (let
-	  ((tem (assq group custom-groups)))
-	(unless tem
-	  (customize-stop-process)
-	  (error "No customize group: %s" group))
-	(setq tem (customize-group-spec tem))
-	(setq tem `(vbox ,tem (hsep)))
-	(format customize-process "%S\n" tem)))))
+  (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
+		  customize-program (if group
+					(format nil "--group %s" group)
+				      ""))))
 
 
 ;; setting variables
