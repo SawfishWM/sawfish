@@ -37,7 +37,7 @@ all : build.h DOC NEWS FAQ
 # this depends on config.status so it's rebuilt if configure is re-run
 build.h : build-info config.status
 	$(SHELL) $< $(host_type) $(version) \
-	  '$(sawfishdir)' '$(lispdir)' '$(sawfishexecdir)'
+	  '$(sawfishdir)' '$(lispdir)' '$(sawfishexecdir)' '$(localedir)'
 
 install : all installdirs
 	set -e; for dir in $(SUBDIRS); do \

@@ -7,6 +7,7 @@ version="$2"
 sawfishdir="$3"
 lispdir="$4"
 sawfishexecdir="$5"
+localedir="$6"
 
 [ -n "$HOSTNAME" ] \
     || HOSTNAME=`hostname` \
@@ -34,6 +35,7 @@ cat >build.h <<EOF
 #define SAWFISH_DIR "$sawfishdir"
 #define SAWFISH_LISPDIR "$lispdir"
 #define SAWFISH_EXECDIR "$sawfishexecdir"
+#define SAWFISH_LOCALEDIR "$localedir"
 
 #define HOST_TYPE "$host_type"
 
