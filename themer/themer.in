@@ -23,8 +23,6 @@ exec rep "$0" "$@"
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'libglade)
-
 ;; todo
 ;; * warn when unsaved changes would be lost
 ;; * allow all frame types to be previewed
@@ -35,6 +33,15 @@ exec rep "$0" "$@"
 (defvar version "__version__")
 (defvar glade-file "__sawmilldir__/__version__/themer.glade")
 (defvar locale-dir "__locale_dir__")
+
+(when (and (not (get-command-line-option "--disable-nls"))
+	   (file-directory-p locale-dir))
+  (require 'gettext)
+  (bindtextdomain "sawmill" locale-dir)
+  (textdomain "sawmill"))
+
+;; load this after gettext
+(require 'libglade)
 
 
 ;; configuration
@@ -1719,12 +1726,6 @@ through a GUI.\n" version))
 
 ;; entry point
 
-(when (and (not (get-command-line-option "--disable-nls"))
-	   (file-directory-p locale-dir))
-  (require 'gettext)
-  (bindtextdomain "sawmill" locale-dir)
-  (textdomain "sawmill"))
-
 (load-preferences)
 
 (update-theme-name)
@@ -1747,6 +1748,7 @@ through a GUI.\n" version))
   (do-open (car command-line-args))
   (setq command-line-args (cdr command-line-args)))
 
+(setq interrupt-mode 'exit)
 (recursive-edit)
 
 ;; Local variables:
