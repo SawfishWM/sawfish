@@ -174,16 +174,6 @@ record_mouse_position (int x, int y, int event_type, Window w)
     case MotionNotify:
 	if (button_press_mouse_x == -1)
 	    update_press = TRUE;
-	else if (!pointer_in_motion)
-	{
-	    int delta_x = x - button_press_mouse_x;
-	    int delta_y = y - button_press_mouse_y;
-	    repv tem = Fsymbol_value (Qpointer_motion_threshold, Qt);
-	    int threshold = rep_INTP (tem) ? rep_INT (tem) : 0;
-
-	    if (ABS (delta_x) > threshold || ABS (delta_y) > threshold)
-		pointer_in_motion = TRUE;
-	}
 	break;
 
     case ButtonRelease:
@@ -203,6 +193,17 @@ record_mouse_position (int x, int y, int event_type, Window w)
     current_mouse_x = x;
     current_mouse_y = y;
     current_event_updated_mouse = TRUE;
+
+    if (event_type == MotionNotify && !pointer_in_motion)
+    {
+	int delta_x = x - button_press_mouse_x;
+	int delta_y = y - button_press_mouse_y;
+	repv tem = Fsymbol_value (Qpointer_motion_threshold, Qt);
+	int threshold = rep_INTP (tem) ? rep_INT (tem) : 0;
+	
+	if (ABS (delta_x) > threshold || ABS (delta_y) > threshold)
+	    pointer_in_motion = TRUE;
+    }
 }
 
 static void
