@@ -103,6 +103,8 @@ do_raise_lower (repv win, repv sib, u_int mode)
 	sib_id = x_win_from_arg (sib);
     if (win_id == 0)
 	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
+    if (sib_id == win_id)
+	return rep_signal_arg_error (sib, 2);
 
     wc.stack_mode = mode;
     wc_mask |= CWStackMode;
