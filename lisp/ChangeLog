@@ -1,3 +1,18 @@
+2002-10-20    <jsh@unfactored.org>
+
+	* sawfish/wm/windows.jl (window-transient-p,
+	mark-window-as-transient): new functions. window-transient-p
+	used to be in C code
+
+	* sawfish/wm/state/wm-spec.jl: _TYPE_DIALOG now marks the
+	window as transients of the root window, this means that
+	windows with this type pick up all facets of transient window
+	behaviour, not just their frame type. (E.g., it stops
+	_TYPE_DIALOG windows being placed like application windows)
+
+	* sawfish/wm/frames.jl: import sawfish.wm.windows, not
+	sawfish.wm.windows.subrs, to get window-transient-p
+
 2002-10-19  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/state/wm-spec.jl (set-window-hints): handle

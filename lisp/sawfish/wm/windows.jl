@@ -28,6 +28,8 @@
      (export get-window-by-name
 	     get-window-by-name-re
 	     window-really-wants-input-p
+	     window-transient-p
+	     mark-window-as-transient
 	     desktop-window-p
 	     mark-window-as-desktop
 	     dock-window-p
@@ -121,6 +123,22 @@ Returns nil if no such window is found."
 	 (or ignore-window-input-hint
 	     (window-get w 'ignore-window-input-hint)
 	     (window-wants-input-p w))))
+
+  (define (window-transient-p w)
+    "Return non-nil if WINDOW is a transient window. The returned value will
+then be the numeric id of its parent window."
+    (or (window-get w 'transient-for)
+	(let ((prop (get-x-property w 'WM_TRANSIENT_FOR)))
+	  (when (and prop (eq (car prop) 'WINDOW)
+		     (eql (cadr prop) 32) (>= (length (caddr prop)) 1))
+	    (aref (caddr prop) 0)))))
+
+  (define (mark-window-as-transient w)
+    "Mark that window W is a dialog window of some sort."
+    (require 'sawfish.wm.frames)
+    (unless (window-transient-p w)
+      (window-put w 'transient-for (root-window-id)))
+    (set-window-type w 'transient))
 
   (define (desktop-window-p arg)
     "Return true if ARG represents a desktop window."

@@ -60,7 +60,7 @@
 	  rep.io.files
 	  rep.io.timers
 	  sawfish.wm.frames.subrs
-	  sawfish.wm.windows.subrs
+	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.custom
 	  sawfish.wm.commands

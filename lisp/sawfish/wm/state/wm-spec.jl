@@ -347,8 +347,7 @@
 
   (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_DIALOG
    (lambda (w)
-     (require 'sawfish.wm.frames)
-     (set-window-type w 'transient)))
+     (mark-window-as-transient w)))
 
   (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_UTILITY
    (lambda (w)
