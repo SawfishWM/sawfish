@@ -1,3 +1,9 @@
+2002-02-21  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/stacking.jl (stacking-add-window): don't put
+	windows below the default depth just because their parent is.
+	Fixes #67978
+
 2002-02-17  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/commands/move-resize.jl (move-resize-map): added
