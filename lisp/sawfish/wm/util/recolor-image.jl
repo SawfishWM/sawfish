@@ -121,6 +121,6 @@ stored, and then used as the basis for any future recoloring."
 	(setq i (1+ i)))
       (while (< i 256)
 	(aset lut i (inexact->exact
-		     (round (+ mid (* (/ (- 256. mid) 128.) (- i 128.))))))
+		     (round (+ mid (* (/ (- 255. mid) 128.) (- i 128.))))))
 	(setq i (1+ i)))
       lut)))

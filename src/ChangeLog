@@ -1,4 +1,13 @@
+2001-02-06  John Harper  <jsh@eazel.com>
+
+	* functions.c (functions_init): call XineramaQueryExtension
+	before XineramaQueryScreens (in case the extension isn't
+	present)
+
 2001-01-28  John Harper  <jsh@eazel.com>
+
+	* session.c (shutdown_cancelled): if we've not already, send a
+	SaveYourselfDone message (required by the XSM protocol)
 
 	* main.c (Fexit_type): new function, returns the type of exit
 	currently in progress, one of the symbols: `user-quit',

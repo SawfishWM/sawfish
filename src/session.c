@@ -140,6 +140,8 @@ Deletes the session manager property called PROPERTY-NAME (a string).
 
 #ifdef HAVE_X11_SM_SMLIB_H
 
+static bool outstanding_save_done;
+
 static void
 save_yourself_2 (SmcConn conn, SmPointer data)
 {
@@ -152,7 +154,10 @@ save_yourself (SmcConn conn, SmPointer data, int save_type, Bool shutdown,
 	       int interact_style, Bool fast)
 {
     if (save_type == SmSaveLocal || save_type == SmSaveBoth)
+    {
+	outstanding_save_done = TRUE;
 	SmcRequestSaveYourselfPhase2 (conn, &save_yourself_2, 0);
+    }
     else
 	SmcSaveYourselfDone (conn, True);
 }
@@ -178,6 +183,11 @@ save_complete (SmcConn conn, SmPointer data)
 static void
 shutdown_cancelled (SmcConn conn, SmPointer data)
 {
+    if (outstanding_save_done)
+    {
+	SmcSaveYourselfDone (conn, True);
+	outstanding_save_done = FALSE;
+    }
 }
 
 #endif /* HAVE_X11_SM_SMLIB_H */

@@ -49,6 +49,8 @@ static int server_grabs;
 
 static int xinerama_heads;
 
+static int xinerama_event_base, xinerama_error_base;
+
 #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
 # include <X11/extensions/Xinerama.h>
   static XineramaScreenInfo *xinerama_head_info;
@@ -1387,7 +1389,13 @@ functions_init (void)
 #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
 # ifndef TEST_XINERAMA
     if (dpy != 0)
-	xinerama_head_info = XineramaQueryScreens (dpy, &xinerama_heads);
+    {
+	if (XineramaQueryExtension (dpy, &xinerama_event_base,
+				    &xinerama_error_base))
+	{
+	    xinerama_head_info = XineramaQueryScreens (dpy, &xinerama_heads);
+	}
+    }
 # else
     xinerama_head_info = debug_heads;
     xinerama_heads = debug_nheads;

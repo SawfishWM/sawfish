@@ -205,7 +205,12 @@ the level of any transient windows it has."
 	  ;; mode) or the window under the pointer otherwise
 	  (if (eq focus-mode 'click)
 	      (setq parent nil)
-	    (setq parent (query-pointer-window)))
+	    (setq parent (query-pointer-window))
+	    (when (and (eq focus-mode 'enter-only)
+		       parent (desktop-window-p parent))
+	      ;; in sloppy-focus mode, don't want to focus on the
+	      ;; desktop window just because the pointer is under it
+	      (setq parent nil)))
 	  (unless (or parent (eq focus-mode 'enter-exit))
 	    (setq parent (window-order-most-recent))))
 	(when (or (null parent) (window-really-wants-input-p parent))

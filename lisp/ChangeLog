@@ -1,3 +1,15 @@
+2001-02-06  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/transient.jl (transient-unmap-window): in
+	sloppy focus mode avoid focusing on the desktop window just
+	because the pointer is over it
+
+2001-02-05  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/util/recolor-image.jl (make-lut): subtract
+	mid-point from 255 not 256. Pointed out by Simon Budig
+	<Simon.Budig@unix-ag.org>
+
 2001-01-28  John Harper  <jsh@eazel.com>
 
 	Work to fix bug 5758 (session management doesn't work in `don't
