@@ -33,9 +33,6 @@
   :type symbol
   :options (all parents none))
 
-(defvar transient-depth 2
-  "Minimum depth of transient windows.")
-
 
 ;; constraint mechanics (predicates actually..)
 
@@ -157,10 +154,12 @@ the empty list."
 
 ;; stacking functions
 
-(define (raise-window-1 w order)
+(defun raise-window (w)
+  "Raise the window to its highest allowed position in the stacking order."
+  (interactive "%W")
   ;; work downwards from top
   (let ((constraint (make-constraint w))
-	(stack (cons '() (delq w order))))
+	(stack (cons '() (delq w (stacking-order)))))
     (let loop ()
       (cond ((constraint (car stack) (cdr stack))
 	     (if (car stack)
@@ -172,11 +171,6 @@ the empty list."
 	    (t
 	     (stack-rotate-downwards stack)
 	     (loop))))))
-
-(defun raise-window (w)
-  "Raise the window to its highest allowed position in the stacking order."
-  (interactive "%W")
-  (raise-window-1 w (stacking-order)))
 
 (defun lower-window (w)
   "Lower the window to its lowest allowed position in the stacking order."
@@ -242,18 +236,9 @@ window W as appropriate."
   (let ((constraint (make-constraint w))
 	(stack (break-window-list (stacking-order) w)))
     (unless (constraint (car stack) (cdr stack))
-      (raise-window w))))
-
-(define (restack-by-depth)
-  "Reconfigure the stacking order to ensure that the windows' depth attributes
-are adhered to. Note that this can be flickery and may modify the current
-stacking order needlessly, try to avoid calling this function."
-  (let loop ((todo (managed-windows)))
-    (when todo
-      (raise-window-1 (car todo)
-		      (delete-if (lambda (x)
-				   (memq x todo)) (stacking-order)))
-      (loop (cdr todo)))))
+      (if (< (length (car stack)) (length (cdr stack)))
+	  (raise-window w)
+	(lower-window w)))))
 
 (define (stacking-order-by-depth depth)
   "Return a list of windows containing only those in depth DEPTH, in the order
@@ -280,12 +265,23 @@ they are stacked within the layer (top to bottom)."
 (define (window-on-top-p w)
   "Return t if window W is as high as it can legally go in the stacking order."
   (or (eq (window-visibility w) 'unobscured)
-      (let ((constraint (make-constraint w))
-	    (stack (break-window-list (stacking-order) w)))
-	(if (null (car stack))
-	    t
-	  (stack-rotate-upwards stack)
-	  (not (constraint (car stack) (cdr stack)))))))
+      (let* ((constraint (make-constraint w))
+	     (order (delete-if-not
+		     ;; XXX doesn't handle viewports..
+		     (let ((space (nearest-workspace-with-window
+				   w current-workspace)))
+		       (lambda (x)
+			 (window-appears-in-workspace-p x space)))
+		     (stacking-order)))
+	     (old-posn (- (length order) (length (memq w order))))
+	     (stack (cons '() (delq w order))))
+	(let loop ()
+	  (if (or (constraint (car stack) (cdr stack))
+		  (null (cdr stack)))
+	      ;; found highest position
+	      (= (length (car stack)) old-posn)
+	    (stack-rotate-downwards stack)
+	    (loop))))))
 
 (defun raise-lower-window (w)
   "If the window is at its highest possible position, then lower it to its
@@ -313,9 +309,8 @@ lowest possible position. Otherwise raise it as far as allowed."
   (unless (window-get w 'depth)
     (window-put w 'depth 0)))
 
-(add-hook 'after-initialization-hook restack-by-depth)
 (add-hook 'add-window-hook stacking-add-window t)
-(add-hook 'map-notify-hook restack-window t)
+(add-hook 'after-add-window-hook restack-window t)
 
 (sm-add-saved-properties 'depth)
 (add-swapped-properties 'depth)
