@@ -19,11 +19,28 @@
    along with sawmill; see the file COPYING.   If not, write to
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
+/* AIX requires this to be the first thing in the file.  */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+#ifndef __GNUC__
+# if HAVE_ALLOCA_H
+#  include <alloca.h>
+# else
+#  ifdef _AIX
+ #pragma alloca
+#  else
+#   ifndef alloca /* predefined by HP cc +Olibcalls */
+   char *alloca ();
+#   endif
+#  endif
+# endif
+#endif
+   
 #include "sawmill.h"
 #include <X11/Xutil.h>
 #include <X11/Xresource.h>
 #include <X11/extensions/shape.h>
-#include <alloca.h>
 
 static XID window_fp_context;
 
@@ -185,24 +202,43 @@ set_frame_part_bg (struct frame_part *fp)
 	    {
 		if (bg_mask)
 		{
-		    XRectangle rect;
-		    rect.x = fp->x - win->frame_x;
-		    rect.y = fp->y - win->frame_y;
-		    rect.width = fp->width;
-		    rect.height = fp->height;
-		    XShapeCombineRectangles (dpy, win->frame,
-					     ShapeBounding, 0, 0,
-					     &rect, 1, ShapeSubtract,
-					     Unsorted);
+		    Window tem = XCreateSimpleWindow (dpy, win->frame,
+						      -100, -100,
+						      win->frame_width,
+						      win->frame_height,
+						      0, BlackPixel
+						      (dpy, screen_num),
+						      BlackPixel
+						      (dpy, screen_num));
 
+		    /* The frame shape must always retain the union
+		       of its old and new shapes. Otherwise enter- and
+		       leave-notify events may be generated..
+
+		       F = frame shape, I = image shape */
+
+		    /* 1. C = copy (F) */
+		    XShapeCombineShape (dpy, tem, ShapeBounding,
+					0, 0, win->frame, ShapeBounding,
+					ShapeSet);
+
+		    /* 2. F' = F \cup I */
 		    XShapeCombineMask (dpy, win->frame, ShapeBounding,
 				       fp->x - win->frame_x,
 				       fp->y - win->frame_y,
 				       bg_mask, ShapeUnion);
+
+		    /* 3. C' = C - I */
+		    XShapeCombineMask (dpy, tem, ShapeBounding,
+				       fp->x - win->frame_x,
+				       fp->y - win->frame_y,
+				       bg_mask, ShapeSubtract);
+
 		    if (tiled)
 		    {
 			/* The pixmap will be tiled automatically. But
-			   we still need to tile the shape-mask manually */
+			   we still need to tile the shape-mask manually
+			   so repeat steps (2) and (3) as needed.. */
 			int x = image->image->rgb_width;
 			int y = 0;
 			do {
@@ -212,12 +248,37 @@ set_frame_part_bg (struct frame_part *fp)
 						   fp->x - win->frame_x + x,
 						   fp->y - win->frame_y + y,
 						   bg_mask, ShapeUnion);
+				XShapeCombineMask (dpy, tem,
+						   ShapeBounding,
+						   fp->x - win->frame_x + x,
+						   fp->y - win->frame_y + y,
+						   bg_mask, ShapeSubtract);
 				x += image->image->rgb_width;
 			    } while (x < fp->width);
 			    x = 0;
 			    y += image->image->rgb_height;
 			} while (y < fp->height);
 		    }
+
+		    /* 4. C'' = C' \cap full_shape_of_size (I) */
+		    {
+			XRectangle rect;
+			rect.x = fp->x - win->frame_x;
+			rect.y = fp->y - win->frame_y;
+			rect.width = fp->width;
+			rect.height = fp->height;
+			XShapeCombineRectangles (dpy, tem, ShapeBounding,
+						 0, 0, &rect, 1,
+						 ShapeIntersect, Unsorted);
+		    }
+
+		    /* 5. F'' = F' - C'' */
+		    XShapeCombineShape (dpy, win->frame, ShapeBounding,
+					0, 0, tem, ShapeBounding,
+					ShapeSubtract);
+
+		    XDestroyWindow (dpy, tem);
+
 		    /* freeing the pixmap below also frees the mask */
 		}
 		else
