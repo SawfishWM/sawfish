@@ -59,7 +59,8 @@
 (defcustom move-snap-epsilon 8
   "Proximity in pixels before snapping to a window edge."
   :group move
-  :type number)
+  :type number
+  :range (0 . 64))
 
 (defvar move-resize-map (bind-keys (make-sparse-keymap)
 			  "Any-PointerUp" 'move-resize-finished

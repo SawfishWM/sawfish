@@ -61,6 +61,7 @@
 (defcustom preallocated-workspaces 1
   "The number of workspaces that are allocated automatically at startup."
   :type number
+  :range (1 . nil)
   :group workspace
   :after-set (lambda ()
 	       (while (< (length workspace-list) preallocated-workspaces)
