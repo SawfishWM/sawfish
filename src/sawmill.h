@@ -204,7 +204,8 @@ enum frame_part_states {
 
 /* one component of a frame */
 struct frame_part {
-    struct frame_part *next;
+    repv car;
+    struct frame_part *next, *next_alloc;
     repv alist;				/* the generator alist */
 
     Lisp_Window *win;
@@ -240,6 +241,9 @@ struct frame_part {
 	repv fg, bg;
     } drawn;
 };
+
+#define PARTP(v)	rep_CELL16_TYPEP(v, frame_part_type)
+#define VPART(v)	((struct frame_part *) rep_PTR (v))
 
 /* codes for the clean_exit_jmp_buf */
 enum exit_codes {
