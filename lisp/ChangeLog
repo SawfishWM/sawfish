@@ -1,3 +1,13 @@
+2001-09-19  John Harper  <jsh@unfactored.org>
+
+	Fixed bug of window flicker when switching workspaces:
+
+	* sawfish/wm/workspace.jl (select-workspace): don't remove all
+	windows not in the new space, then add all windows in the new
+	space. Instead add all windows in the new space in
+	top-to-bottom order, then remove unneeded windows
+	bottom-to-top. This always generates the minimum exposed area
+
 2001-09-17  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/commands.jl (apply-command-keys): fixed type of

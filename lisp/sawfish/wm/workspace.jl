@@ -535,39 +535,54 @@
     "Activate workspace number SPACE (from zero)."
     (unless (= current-workspace space)
       (when current-workspace
-	(call-hook 'leave-workspace-hook (list current-workspace))
+	(call-hook 'leave-workspace-hook (list current-workspace)))
+      (let ((old-space current-workspace)
+	    (order (stacking-order)))
+
+	;; install the new workspace id
+	(setq current-workspace space)
+
+	;; this used to be called between unmapping old windows and
+	;; mapping new windows, but we don't do that anymore. This
+	;; should be ok though..
+	(when inner-thunk
+	  (inner-thunk))
+
 	;; the server grabs are just for optimisation (each call to
 	;; show-window or hide-window may also grab the server semaphore)
 	(with-server-grabbed
-	 (map-windows
-	  (lambda (w)
-	    (when (and (not (window-get w 'sticky))
-		       (window-in-workspace-p w current-workspace)
-		       (not (window-in-workspace-p w space))
-		       (window-get w 'placed))
-	      (hide-window w))))))
-      (setq current-workspace space)
-      (when inner-thunk
-	(inner-thunk))
-      (when current-workspace
-	(with-server-grabbed
-	 (map-windows
-	  (lambda (w)
-	    (when (or (window-get w 'sticky)
-		      (window-in-workspace-p w current-workspace))
-	      (swap-in w current-workspace))
-	    (when (and (not (window-get w 'sticky))
-		       (window-in-workspace-p w current-workspace)
-		       (window-get w 'placed))
-	      (if (window-get w 'iconified)
-		  (hide-window w)
-		(show-window w))))))
-	(unless (or dont-focus (eq focus-mode 'enter-exit))
-	  (require 'sawfish.wm.util.window-order)
-	  (window-order-focus-most-recent))
-	(when current-workspace
-	  (call-hook 'enter-workspace-hook (list current-workspace)))
-	(call-hook 'workspace-state-change-hook))))
+
+	 ;; first map new windows top-to-bottom
+	 (mapc (lambda (w)
+		 (when (or (window-get w 'sticky)
+			   (window-in-workspace-p w current-workspace))
+		   (swap-in w current-workspace))
+		 (when (and (not (window-get w 'sticky))
+			    (window-in-workspace-p w current-workspace)
+			    (window-get w 'placed))
+		   (if (window-get w 'iconified)
+		       (hide-window w)
+		     (show-window w))))
+	       order)
+
+	 ;; then unmap old-windows bottom-to-top
+	 (mapc (lambda (w)
+		 (when (and (not (window-get w 'sticky))
+			    (window-in-workspace-p w old-space)
+			    (not (window-in-workspace-p w current-workspace))
+			    (window-get w 'placed))
+		   (hide-window w)))
+	       (nreverse order))
+
+	 ;; focus the correct window in the new workspace
+	 (unless (or dont-focus (eq focus-mode 'enter-exit))
+	   (require 'sawfish.wm.util.window-order)
+	   (window-order-focus-most-recent))
+
+	 ;; and call some hooks
+	 (when current-workspace
+	   (call-hook 'enter-workspace-hook (list current-workspace)))
+	 (call-hook 'workspace-state-change-hook)))))
 
   ;; return a list of all windows on workspace index SPACE
   (define (workspace-windows space #!optional include-iconified)
