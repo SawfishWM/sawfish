@@ -183,15 +183,17 @@ eval_lisp_form(int sock_fd, char *form)
     {
 	if(len > 0)
 	{
-	    result = malloc(len + 1);
+	    result = malloc(len);
 	    if(result == 0 || read(sock_fd, result, len) != len)
 	    {
 		perror("eval_req");
 		return 10;
 	    }
-	    result[len] = 0;
 	    if(!opt_quiet)
-		puts(result);
+	    {
+		fwrite (result, len, 1, stdout);
+		fputc ('\n', stdout);
+	    }
 	}
 	else
 	    printf("%s\n---> error\n", form);
