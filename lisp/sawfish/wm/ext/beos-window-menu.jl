@@ -29,6 +29,7 @@
 	  sawfish.wm.misc
 	  sawfish.wm.custom
 	  sawfish.wm.workspace
+	  sawfish.wm.viewport
 	  sawfish.wm.util.groups
 	  sawfish.wm.util.display-window
 	  sawfish.wm.menus)
@@ -48,14 +49,15 @@
       name))
 
   (define (make-label w)
-    (let ((name (window-name w)))
+    (let ((name (window-name w))
+	  (would-switch (or (not (window-appears-in-workspace-p
+				  w current-workspace))
+			    (window-outside-viewport-p w))))
       (quote-menu-item (concat (cond ((window-get w 'iconified) ?\[)
-				     ((not (window-appears-in-workspace-p
-					    w current-workspace)) ?\())
+				     (would-switch ?\())
 			       (abbreviate name)
 			       (cond ((window-get w 'iconified)  ?\])
-				     ((not (window-appears-in-workspace-p
-					    w current-workspace)) ?\)))))))
+				     (would-switch ?\)))))))
 
   (define windows-left (make-fluid))
 
