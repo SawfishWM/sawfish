@@ -532,8 +532,9 @@
 (defun ws-add-window-to-space (w space)
   (unless (window-get w 'sticky)
     (window-add-to-workspace w space)
-    (cond ((and (= space current-workspace)
-		(not (window-get w 'iconified)))
+    (cond ((window-get w 'iconified)
+	   (hide-window w))
+	  ((= space current-workspace)
 	   (show-window w))
 	  ((not (window-in-workspace-p w current-workspace))
 	   (hide-window w)))
@@ -546,7 +547,9 @@
   (if (window-get w 'sticky)
       (progn
 	(ws-window-set-workspaces w nil)
-	(show-window w))
+	(if (window-get w 'iconified)
+	    (hide-window w)
+	  (show-window w)))
     (if (window-workspaces w)
 	(let
 	    ((spaces (window-workspaces w))
