@@ -48,6 +48,12 @@
       (bindtextdomain "sawfish" sawfish-locale-directory)
       (textdomain "sawfish"))))
 
+;; used to mark variable declarations that need special attention
+;; from the sawfish-xgettext script
+(defmacro i18n-defvar args (cons 'defvar args))
+(defmacro i18n-define args (cons 'define args))
+(export-bindings '(i18n-defvar i18n-define))
+
 ;; add ~/.sawfish/lisp to load-path for user-code (canonicalize it
 ;; now to avoid calling tilde file-handler multiple times)
 (setq load-path (cons (canonical-file-name "~/.sawfish/lisp") load-path))

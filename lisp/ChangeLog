@@ -1,3 +1,17 @@
+2001-04-20  John Harper  <jsh@eazel.com>
+
+	Extra i18n work. Adapted from a patch by Vlad Harchev
+	<hvv@hippo.ru>
+
+	* sawfish/wm.jl (i18n-defvar, i18n-define): new macros, expand
+	to a `defvar' or `define'. Just used to mark variables that
+	need special attention when extracting translatable strings
+
+	* sawfish/wm/ext/match-window.jl: import sawfish.wm instead of
+	a bunch of specific modules, so we get i18n-defvar. Then use it
+	when declaring match-window-x-properties and
+	match-window-properties
+
 2001-04-17  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/ext/beos-window-menu.jl (make-label): surround the

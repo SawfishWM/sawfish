@@ -50,13 +50,7 @@
     (open rep
 	  rep.system
 	  rep.regexp
-	  sawfish.wm.custom
-	  sawfish.wm.frames
-	  sawfish.wm.windows
-	  sawfish.wm.workspace
-	  sawfish.wm.viewport
-	  sawfish.wm.focus
-	  sawfish.wm.misc
+	  sawfish.wm
 	  sawfish.wm.util.groups)
 
   (define-structure-alias match-window sawfish.wm.ext.match-window)
@@ -64,7 +58,7 @@
 
 ;;; configuration and customize stuff
 
-  (defvar match-window-x-properties
+  (i18n-defvar match-window-x-properties
     '((WM_NAME . "Name")
       (WM_CLASS . "Class")
       (WM_ICON_NAME . "Icon Name")
@@ -73,7 +67,7 @@
       (WM_COMMAND . "Command")
       (WM_LOCALE_NAME . "Locale")))
 
-  (defvar match-window-properties
+  (i18n-defvar match-window-properties
     `((placement ,(_ "Placement")
        (avoid boolean)
        (ignore-program-position boolean)
