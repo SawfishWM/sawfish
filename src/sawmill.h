@@ -191,6 +191,12 @@ struct frame_part {
     repv cursor;
 };
 
+/* codes for the clean_exit_jmp_buf */
+enum exit_codes {
+    ec_exit = 1,
+    ec_restart
+};
+
 
 /* bring in prototypes */
 
