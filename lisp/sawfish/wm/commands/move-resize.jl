@@ -32,6 +32,11 @@
   :type boolean
   :group move)
 
+(defcustom resize-add-edges t
+  "Grab other window edges while resizing interactively."
+  :type boolean
+  :group move)
+
 (defcustom move-outline-mode 'opaque
   "The method of drawing windows being moved interactively."
   :type symbol
@@ -244,7 +249,8 @@
 		(y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1))
 		(x-max (cdr (assq 'max-width move-resize-hints)))
 		(y-max (cdr (assq 'max-height move-resize-hints))))
-	     (move-resize-add-edges ptr-x ptr-y)
+	     (when resize-add-edges
+	       (move-resize-add-edges ptr-x ptr-y))
 	     (cond
 	      ((memq 'right move-resize-moving-edges)
 	       (setq move-resize-width
