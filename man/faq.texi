@@ -233,4 +233,21 @@ Recompile GTK+ using the @samp{--disable-xim} option to configure
 @end enumerate
 
 
+@item Why don't some windows ever get focused?
+
+If you don't have the option `give focus to windows even when they
+haven't asked for it' checked (group Focus/Advanced), then windows that
+don't ask for focus don't get it.
+
+Windows ask to receive focus by setting their WM_HINTS property
+appropriately; for example if I xprop a gnome-terminal:
+
+@example
+WM_HINTS(WM_HINTS):
+                Client accepts input or input focus: True
+                Initial state is Normal State.
+                window id # of group leader: 0x5c00001
+@end example
+
+
 @end enumerate
