@@ -174,7 +174,7 @@ unused before killing it.")
 
 ;;;###autoload
 (defun popup-menu (spec)
-  (if menu-active
+  (if (and menu-active menu-process (process-in-use-p menu-process))
       (error "Menu already active")
     (setq menu-active (input-focus))
     (menu-start-process)
