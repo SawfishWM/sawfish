@@ -23,6 +23,11 @@
 
 ;; This file provides defaults for users without .sawmillrc files
 
+;; ensure that the things people usually like doing show up in the
+;; customization interface
+(mapc custom-add-required '(edge-flip match-window move-resize
+			    tooltips auto-raise))
+
 ;; if it looks like GNOME is the desktop environment, then load the
 ;; extra GNOME integration module
 (unless batch-mode
