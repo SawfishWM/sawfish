@@ -67,7 +67,6 @@
 			    (when (and (not (eq value last-value))
 				       (memq value options))
 			      (setq last-value value)
-			      (format standard-error "changed: %s\n" value)
 			      (update-readme value readme-text-view path)
 			      (call-callback changed-callback))))
 

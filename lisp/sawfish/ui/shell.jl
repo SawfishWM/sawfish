@@ -200,6 +200,38 @@
     (fetch-group group)
     (filter slot-is-appropriate-p (group-slots group)))
 
+  (define (display-book-tree group)
+
+    (define (iter group slots)
+      (let ((group-page (and slots (layout-slots (group-layout group) slots))))
+	(setq active-slots (nconc active-slots slots))
+	(when (and group-page (gtk-container-p group-page))
+	  (gtk-container-set-border-width group-page box-border))
+	(if (group-sub-groups group)
+	    (let ((book (gtk-notebook-new)))
+	      (gtk-notebook-set-scrollable book t)
+	      (gtk-notebook-popup-enable book t)
+	      (when group-page
+		(gtk-notebook-append-page
+		 book group-page (gtk-label-new (_ (group-real-name group)))))
+	      (mapc (lambda (sub)
+		      (fetch-group sub)
+		      (let ((slots (get-slots sub)))
+			(when (or slots (group-sub-groups sub))
+			  (let ((page (iter sub slots)))
+			    (when page
+			      (gtk-notebook-append-page
+			       book page (gtk-label-new
+					  (_ (group-real-name sub)))))))))
+		    (get-sub-groups group))
+	      (gtk-widget-show book)
+	      book)
+	  group-page)))
+
+    (let ((page (iter group (get-slots group))))
+      (when page
+	(gtk-container-add slot-box-widget page))))
+
   (define (display-flattened group)
 
     (define (iter book group slots)
@@ -237,7 +269,8 @@
 
   (define (add-group-widgets group)
     (if (and *nokogiri-flatten-groups* (group-sub-groups group))
-	(display-flattened group)
+	;;(display-flattened group)
+	(display-book-tree group)
       (display-unflattened group))
     (update-all-dependences))
 
