@@ -28,6 +28,7 @@
 
 ;; rectangles
 
+;; assumes that X-POINTS and Y-POINTS are both sorted smallest->largest
 (defun rectangles-from-grid (x-points orig-y-points &optional pred)
   (let
       (rects left-x right-x top-y bottom-y y-points tem-x tem-y rect)
