@@ -1,3 +1,14 @@
+1999-08-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* colors.c (Fcolor_rgb): new function
+
+	* fonts.c (Ftext_width, Ffont_height): new functions
+
+	* sawmill-ui.jl (build-keymap-shell:set-binding): align the
+	clist flush left when scrolling to the selected command
+
+	* events.c (key_press): ignore KeyRelease events
+
 1999-08-23  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c (list_frame_generator): was making the rectangle of

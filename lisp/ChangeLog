@@ -1,3 +1,13 @@
+1999-08-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* customize.jl (customize): passing this function a group name
+	makes it customize that group only
+	* custom.jl (custom-menu): menu constructor including all
+	customize groups
+	(custom-declare-group): create an interactive function
+	`customize:FOO' for each group FOO
+	* menus.jl: use custom-menu for the customize menu
+
 1999-08-23  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.jl: (window-type-remove-title, window-type-remove-border,
