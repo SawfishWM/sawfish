@@ -244,7 +244,8 @@ specified by the user."
     (when (window-really-wants-input-p w)
       (set-input-focus w))
     (warp-pointer-if-necessary w)
-    (window-order-push w))
+    (window-order-push w)
+    (call-window-hook 'activate-window-hook w))
 
 
 ;;; resizing windows in accordance with their size hints

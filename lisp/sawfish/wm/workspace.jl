@@ -590,6 +590,7 @@ window, one of `stop', `keep-going', `wrap-around'")
   ;; usually called from the add-window-hook; adds window W to the
   ;; current workspace (or wherever else it should go)
   (define (ws-add-window w)
+    (ws-window-activated w)
     (if (window-get w 'sticky)
 	(progn
 	  (set-window-workspaces w nil)
@@ -616,6 +617,11 @@ window, one of `stop', `keep-going', `wrap-around'")
   (define (ws-window-mapped w)
     (unless (or (window-get w 'sticky) (window-workspaces w))
       (ws-add-window w)))
+
+  (define (ws-window-activated w)
+    (when (and showing-desktop
+	       (not (or (desktop-window-p w) (dock-window-p w))))
+      (hide-desktop)))
 
 
 ;;; Menu constructors
@@ -959,6 +965,7 @@ last instance remaining, then delete the actual window."
 
   (add-hook 'add-window-hook ws-add-window)
   (add-hook 'map-notify-hook ws-window-mapped)
+  (add-hook 'activate-window-hook ws-window-activated)
   (add-hook 'unmap-notify-hook ws-window-unmapped)
   (add-hook 'destroy-notify-hook ws-remove-window)
   (add-hook 'sm-window-save-functions ws-saved-state)

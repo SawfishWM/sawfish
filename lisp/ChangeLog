@@ -1,5 +1,11 @@
 2003-03-26  John Harper  <jsh@unfactored.org>
 
+	* sawfish/wm/workspace.jl: activating or creating a window
+	means we leave "show desktop" mode
+
+	* sawfish/wm/windows.jl (activate-window): call
+	activate-window-hook before returning
+
 	* sawfish/wm/workspace.jl (select-workspace*): don't forget to
 	show sticky windows when coming out of "show desktop" mode
 
