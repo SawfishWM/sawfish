@@ -39,7 +39,7 @@
 				(cdr (symbol-value symbol))))))
 
 ;; can't just call out to custom-set-variable since we side-effect VALUE
-(defun custom-set-keymap (symbol value &optional req)
+(defun custom-set-keymap (symbol value)
   (custom-set
    (lambda ()
      (when (eq (car value) 'keymap)
@@ -62,7 +62,7 @@
 	     ;; hijack the old keymap to preserve eq-ness
 	     (rplacd old-value new-tail)
 	   (set symbol (cons 'keymap new-tail))))))
-   symbol req))
+   symbol))
 
 (put 'keymap 'custom-set custom-set-keymap)
 (put 'keymap 'custom-get custom-get-keymap)
