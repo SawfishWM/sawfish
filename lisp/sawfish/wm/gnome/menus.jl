@@ -137,7 +137,7 @@
       ((order (and (file-exists-p (expand-file-name ".order" dirname))
 		   (gnome-menu-read-order
 		    (expand-file-name ".order" dirname))))
-       menus item)
+       menus unordered item)
     (mapc (lambda (file)
 	    (when (file-exists-p (expand-file-name dirname file))
 	      (when (setq item (gnome-menu-read-item dirname file))
@@ -146,9 +146,11 @@
     (mapc (lambda (file)
 	    (unless (or (= (aref file 0) ?.) (member file order))
 	      (when (setq item (gnome-menu-read-item dirname file))
-		(setq menus (cons item menus)))))
+		(setq unordered (cons item unordered)))))
 	  (directory-files dirname))
-    (nreverse menus)))
+    (nconc (nreverse menus)
+	   (sort unordered (lambda (x y)
+			     (string-lessp (car x) (car y)))))))
 
 (defun gnome-menus-merge-dups (menus)
   (let
@@ -168,7 +170,7 @@
 	    (nconc item (cdr tem)))))
       (setq ptr (cdr ptr)))
     ;; now we've uniqued the top-level, recurse through any sub-menus
-    ;(setq ptr menus)
+    (setq ptr menus)
     (while ptr
       (setq item (car ptr))
       (setq ptr (cdr ptr))
