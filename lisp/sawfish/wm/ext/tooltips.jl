@@ -59,7 +59,15 @@
  :type font
  :group tooltips)
 
-(defvar tooltips-background-color "lightyellow2")
+(defcustom tooltips-background-color "grey85"
+  "Color used for the tooltips background"
+  :group tooltips
+  :type color)
+
+(defcustom tooltips-foreground-color "black"
+  "Color used for the tooltips foreground"
+  :group tooltips
+  :type color)
 
 ;; the window it's displayed for
 (defvar tooltips-displayed nil)
@@ -136,6 +144,7 @@
       (display-message (tooltips-format (nreverse items))
 		       `((position . ,pos)
 			 (background . ,tooltips-background-color)
+			 (foreground . ,tooltips-foreground-color)
 			 (x-justify . left)
 			 (spacing . 2)
 			 (font . ,tooltips-font)))
