@@ -113,7 +113,6 @@ this mode. The single argument is the window to be placed."
 ;; standard placement modes
 
 (defun place-window-randomly (w)
-  (require 'maximize)
   (let*
       ((dims (window-frame-dimensions w))
        (max-rect (maximize-find-workarea w))
@@ -150,13 +149,17 @@ this mode. The single argument is the window to be placed."
 
 (defun place-window-centered (w)
   (let
-      ((dims (window-frame-dimensions w)))
-    (move-window-to w (+ (car (current-head-offset))
-			 (quotient (max 0 (- (car (current-head-dimensions))
-					     (car dims))) 2))
-		    (+ (cdr (current-head-offset))
-		       (quotient (max 0 (- (cdr (current-head-dimensions))
-					   (cdr dims))) 2)))))
+      ((dims (window-frame-dimensions w))
+       (h-dims (current-head-dimensions))
+       (h-off (current-head-offset))
+       (screen (maximize-find-workarea w)))
+    (move-window-to w
+		    (clamp* (+ (car h-off)
+			       (quotient (- (car h-dims) (car dims)) 2))
+			    (car dims) (nth 0 screen) (nth 2 screen))
+		    (clamp* (+ (cdr h-off)
+			       (quotient (- (cdr h-dims) (cdr dims)) 2))
+			    (cdr dims) (nth 1 screen) (nth 3 screen)))))
 
 (defun place-window-centered-on-parent (w)
   (let
@@ -166,22 +169,25 @@ this mode. The single argument is the window to be placed."
       (let
 	  ((dims (window-frame-dimensions w))
 	   (pdims (window-frame-dimensions parent))
-	   (coords (window-position parent)))
-	(rplaca coords (max 0 (+ (car coords)
-				 (quotient (- (car pdims) (car dims)) 2))))
-	(rplacd coords (max 0 (+ (cdr coords)
-				 (quotient (- (cdr pdims) (cdr dims)) 2))))
+	   (coords (window-position parent))
+	   (screen (maximize-find-workarea w)))
+	(rplaca coords (clamp* (+ (car coords)
+				  (quotient (- (car pdims) (car dims)) 2))
+			       (car dims) (nth 0 screen) (nth 2 screen)))
+	(rplacd coords (clamp* (+ (cdr coords)
+				  (quotient (- (cdr pdims) (cdr dims)) 2))
+			       (cdr dims) (nth 1 screen) (nth 3 screen)))
 	(move-window-to w (car coords) (cdr coords))))))
 
-;; XXX fix for Xinerama
 (defun place-window-under-pointer (w)
   (let
       ((dims (window-frame-dimensions w))
-       (coords (query-pointer)))
-    (rplaca coords (min (- (screen-width) (car dims))
-			(max 0 (- (car coords) (quotient (car dims) 2)))))
-    (rplacd coords (min (- (screen-height) (cdr dims))
-			(max 0 (- (cdr coords) (quotient (cdr dims) 2)))))
+       (coords (query-pointer))
+       (screen (maximize-find-workarea w)))
+    (rplaca coords (clamp* (- (car coords) (quotient (car dims) 2))
+			   (car dims) (nth 0 screen) (nth 2 screen)))
+    (rplacd coords (clamp* (- (cdr coords) (quotient (cdr dims) 2))
+			   (cdr dims) (nth 1 screen) (nth 3 screen)))
     (move-window-to w (car coords) (cdr coords))))
 
 (define-placement-mode 'randomly place-window-randomly)
