@@ -137,10 +137,7 @@
        (eval-key-release-events t)
        (override-keymap (make-keymap))
        (focus-dont-push t)
-       (raise-windows-on-focus (if cycle-disable-auto-raise
-				   nil
-				 (and (boundp 'raise-windows-on-focus)
-				      raise-windows-on-focus)))
+       (disable-auto-raise cycle-disable-auto-raise)
        (x-cycle-current nil)
        (x-cycle-stacking nil)
        modifier tem)

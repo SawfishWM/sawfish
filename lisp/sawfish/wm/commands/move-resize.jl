@@ -138,6 +138,7 @@
        (override-keymap move-resize-map)
        ;; don't want any complications..
        (unbound-key-hook nil)
+       (disable-auto-raise t)
        (move-resize-window w)
        (move-resize-function function)
        (move-resize-old-x (car (window-position w)))
