@@ -42,7 +42,7 @@
     default-font default-frame nil-frame frame-part-classes
     decorate-transients))
 
-(defvar sawmill-safe-features '(gtkrc gradient))
+(defvar sawmill-safe-features '(gtkrc gradient make-theme))
 
 (unless batch-mode
   (mapc gaol-add-function sawmill-safe-functions)
