@@ -40,6 +40,7 @@ displayed. See the `display-message' function for more details.")
 (defvar prompt-completion-fun nil)
 (defvar prompt-validation-fun nil)
 (defvar prompt-abbrev-fun nil)
+(defvar prompt-display-fun nil)
 (defvar prompt-position 0)
 (defvar prompt-completion-position nil)
 (defvar prompt-completions nil)
@@ -68,6 +69,8 @@ displayed. See the `display-message' function for more details.")
              "C-e" 'prompt-end-of-line
              "TAB" 'prompt-complete
              "RET" 'prompt-accept
+	     "Up" 'prompt-previous
+	     "Down" 'prompt-next
 	     "M-n" 'prompt-next
 	     "M-p" 'prompt-previous
 	     "A-n" 'prompt-next
@@ -87,28 +90,30 @@ displayed. See the `display-message' function for more details.")
 		 (prompt-validation-fun prompt-result))))
     (if result
 	(progn
-	  (unless (equal (get-from-ring prompt-history 1) prompt-result)
+	  (unless (or (null prompt-history)
+		      (equal (get-from-ring prompt-history 1) prompt-result))
 	    (add-to-ring prompt-history prompt-result))
 	  (throw 'prompt-exit result))
       (beep))))
 
 (defun prompt-next (count)
   (interactive "p")
-  (setq count (- prompt-history-pos count))
-  (if (zerop count)
-      (progn
-	(setq prompt-result prompt-saved)
-	(setq prompt-history-pos count))
-    (let
-	((string (get-from-ring prompt-history count)))
-      (when string
-	(when (zerop prompt-history-pos)
-	  (setq prompt-saved prompt-result))
-	(setq prompt-result string)
-	(setq prompt-history-pos count))))
-  (prompt-changed)
-  (prompt-end-of-line)
-  (prompt-update-display))
+  (when prompt-history
+    (setq count (- prompt-history-pos count))
+    (if (zerop count)
+	(progn
+	  (setq prompt-result prompt-saved)
+	  (setq prompt-history-pos count))
+      (let
+	  ((string (get-from-ring prompt-history count)))
+	(when string
+	  (when (zerop prompt-history-pos)
+	    (setq prompt-saved prompt-result))
+	  (setq prompt-result string)
+	  (setq prompt-history-pos count))))
+    (prompt-changed)
+    (prompt-end-of-line)
+    (prompt-update-display)))
 
 (defun prompt-previous (count)
   (interactive "p")
@@ -243,13 +248,16 @@ displayed. See the `display-message' function for more details.")
 	      continued))))
 
 (defun prompt-update-display ()
-  (display-message (concat (prompt-format-completions)
-			   "\n\n"
-			   prompt-prompt
-			   (substring prompt-result 0 prompt-position)
-			   ?|
-			   (substring prompt-result prompt-position))
-		   `((position . ,prompt-window-position))))
+  (let
+      ((result (if prompt-display-fun
+		   (prompt-display-fun prompt-result)
+		 prompt-result)))
+    (display-message (concat (prompt-format-completions)
+			     "\n\n"
+			     prompt-prompt
+			     (substring result 0 prompt-position)
+			     ?| (substring result prompt-position))
+		     `((position . ,prompt-window-position)))))
 
 ;;; Insert all unbound keys to result.
 (defun prompt-unbound-callback ()
@@ -260,33 +268,33 @@ displayed. See the `display-message' function for more details.")
 		  (substring prompt-result prompt-position)))
     (setq prompt-position (+ prompt-position (length key)))
     (prompt-changed)
-    (prompt-update-display)))
+    (prompt-update-display)
+    t))
 
 ;;;###autoload
 (defun prompt (&optional title start)
   "Prompt the user for a string."
-    (unless (stringp title)
-      (setq title "Enter string:"))
-    (unless (string-match " $" title)
-      (setq title (concat title ? )))
-  (when (grab-keyboard)
-    (unwind-protect
-        (let* ((override-keymap prompt-keymap)
-	       (prompt-result (or start ""))
-	       (prompt-prompt title)
-	       (prompt-position (length prompt-result))
-	       (prompt-history-pos 0)
-	       (prompt-saved nil)
-	       (prompt-completion-position nil)
-	       (prompt-completions nil)
-	       (prompt-completions-outdated t))
-	  (prompt-update-display)
-          (add-hook 'unbound-key-hook prompt-unbound-callback)
-	  (catch 'prompt-exit
-	    (recursive-edit)))
-      (remove-hook 'unbound-key-hook prompt-unbound-callback)
-      (display-message nil)
-      (ungrab-keyboard))))
+  (unless (stringp title)
+    (setq title "Enter string:"))
+  (unless (string-match " $" title)
+    (setq title (concat title ? )))
+  (call-with-keyboard-grabbed
+   (lambda ()
+     (unwind-protect
+	 (let* ((override-keymap prompt-keymap)
+		(prompt-result (or start ""))
+		(prompt-prompt title)
+		(prompt-position (length prompt-result))
+		(prompt-history-pos 0)
+		(prompt-saved nil)
+		(prompt-completion-position nil)
+		(prompt-completions nil)
+		(prompt-completions-outdated t)
+		(unbound-key-hook (list prompt-unbound-callback)))
+	   (prompt-update-display)
+	   (catch 'prompt-exit
+	     (recursive-edit)))
+       (display-message nil)))))
 
 ;;;###autoload
 (defun prompt-for-symbol (&optional title predicate validator)
