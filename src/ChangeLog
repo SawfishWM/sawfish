@@ -1,4 +1,16 @@
+1999-08-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl (build-set): sets can now be displayed as
+	option menus, clists, as well as the old radio buttons,
+	controlled by the ui-set-style var, or the :widget key
+
 1999-08-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* display.c (beep): new function, hooked into rep_beep_fun
+
+	* functions.c (Fdelete_window): only send WM_DELETE_WINDOW
+	message if window has said it can handle it, otherwise
+	XKillClient
 
 	* windows.c (Fstacking_order): new function
 

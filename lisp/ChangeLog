@@ -1,4 +1,16 @@
+1999-08-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* place-window.jl (place-transient-mode): new variable
+
+	* customize.jl (customize-symbol-spec): propagate the :widget
+	attribute to `set' elements
+
 1999-08-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.jl (reframe-all-windows): preserve the original
+	stacking order
+
+	* functions.jl (save-stacking-order): new macro
 
 	* stacking.jl: new file, implements `depth' of windows
 	* gnome.jl: support the _WIN_LAYER hints
