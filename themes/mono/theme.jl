@@ -1,5 +1,5 @@
 ;; mono/theme.jl
-;; $Id: theme.jl,v 1.1 1999/12/05 11:34:19 john Exp $
+;; $Id: theme.jl,v 1.2 1999/12/05 17:58:44 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -46,6 +46,10 @@
 		  nil (make-image "close-c.png")))
      (maximize (list (make-image "max.png") nil
 		     nil (make-image "max-c.png")))
+     (restore (list (make-image "restore.png") nil
+		     nil (make-image "restore-c.png")))
+     (maximize-restore (lambda (w)
+			 (if (window-maximized-p w) restore maximize)))
      (menu (list (make-image "menu.png") nil
 		 nil (make-image "menu-c.png")))
 
@@ -128,7 +132,7 @@
 	       (removable . t))
 	       
 	      ((background . ,frame-colors)
-	       (foreground . ,maximize)
+	       (foreground . ,maximize-restore)
 	       (right-edge . 19)
 	       (top-edge . -18)
 	       (width . 16)
@@ -199,7 +203,7 @@
 		      (removable . t))
 		     
 		     ((background . ,frame-colors)
-		      (foreground . ,maximize)
+		      (foreground . ,maximize-restore)
 		      (right-edge . 19)
 		      (top-edge . -19)
 		      (width . 16)
