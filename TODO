@@ -14,8 +14,6 @@ Outstanding bugs
   ! problem with the timestamp sanity checking, if you turn the
     system clock backwards, it discards all events..!
 
-  ! maximizing a window when the pointer is outside it loses focus?
-
   ! Snap to edge does not work if I'm switching viewport while dragging
     the window around.
 
@@ -59,10 +57,6 @@ Outstanding bugs
     (ie. I can type in it), but the frame is drawn in the unfocused
     style.
 
-  ! when you switch viewports, sawmill will sometimes get confused as
-    to which windows were where, and leave windows on seemingly random
-    viewports [I'm not convinced, could this be the desk-guide thing?]
-
   ! edge-flipping while interactively placing a window can leave
     rubber-band traces [this is hard to fix..]
 
@@ -74,7 +68,8 @@ Outstanding bugs
   + features can't be both enabled via customization and demand-loaded
 
   + write documentation: workspaces, viewports, window groups, alist
-    frame patterns, frame parts as objects...
+    frame patterns, frame parts as objects, placement, focus modes,
+    symbolic event structures...
 
   + allow enter/leave-notify events to be suppressed?
 
@@ -98,8 +93,6 @@ Window manager tasks
     make sawmill-ui extract defcustom decls straight from lisp files
     somehow?
 
-  + add property take-focus (focus when window appears)
-
   + handle language codes better in gnome-menu
 
   + add a function to turn icons into lisp images
@@ -114,10 +107,6 @@ Window manager tasks
     imlib's caching?)
 
   + add option to prevent workspace switching while cycling
-
-  + option: when switching workspace, display the workspace name
-
-  + add option send-window-to-workspace won't select workspace
 
   + support for synthesizing events
 
@@ -152,13 +141,9 @@ Window manager tasks
 
     What are the issues? Multiple root windows, and..?
 
-    [ use `Xnest -scrns N' to simulate mulit-heading ]
+    [ use `Xnest -scrns N' to simulate multi-heading ]
 
   + Add checked and radio menu item support
-
-  + Smart placement
-
-    How can the best-fit cost function be improved/optimised?
 
   + Icons (?)
 

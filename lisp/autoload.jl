@@ -49,6 +49,9 @@
 (autoload 'place-window-first-fit "smart-placement")
 (autoload 'place-window-best-fit "smart-placement")
 (autoload 'place-window-first-fit-or-interactive "smart-placement")
+(define-placement-mode 'first-fit place-window-first-fit)
+(define-placement-mode 'best-fit place-window-best-fit)
+(define-placement-mode 'first-fit-or-interactive place-window-first-fit-or-interactive)
 (autoload 'iconify-group "groups" t)
 (autoload 'uniconify-group "groups" t)
 (autoload 'make-group-sticky "groups" t)
@@ -143,4 +146,8 @@
 (autoload 'encode-event "decode-events")
 (autoload 'string->keysym "decode-events")
 (autoload 'modifier->keysyms "decode-events")
+(autoload 'size-window-add-row "size-window" t)
+(autoload 'size-window-subtract-row "size-window" t)
+(autoload 'size-window-add-column "size-window" t)
+(autoload 'size-window-subtract-column "size-window" t)
 ;;; ::autoload-end::

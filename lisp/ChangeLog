@@ -1,3 +1,27 @@
+2000-02-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.jl: changed the load order (again). Load all
+	libraries _before_ loading autoloads now
+
+2000-02-19  John Harper  <john@dcs.warwick.ac.uk>
+
+	* place-window.jl (define-placement-mode): new function, used
+	for defining placement modes
+	* smart-placement.jl: use define-placement-mode
+
+	* focus.jl: reorganized, focus modes are now implemented
+	modularly, each mode as a single function. Also enable focus
+	modes to be defined on a per-window basis
+	(define-focus-mode): new function
+
+	* match-window.jl (match-window-properties): allow focus-mode
+	to be settable
+
+	* size-window.jl (size-window-vertically-plus,
+	size-window-vertically-minus, size-window-horizontally-plus,
+	size-window-horizontally-minus): new commands, to resizing as
+	slide-window is to moving
+
 2000-02-18  John Harper  <john@dcs.warwick.ac.uk>
 
 	* smart-placement.jl (sp-prune-points): use a better medthod of
