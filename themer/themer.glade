@@ -10,25 +10,11 @@
   <language>C</language>
   <gnome_support>False</gnome_support>
   <gettext_support>True</gettext_support>
-  <use_widget_names>False</use_widget_names>
-  <output_main_file>True</output_main_file>
-  <output_support_files>True</output_support_files>
-  <output_build_files>True</output_build_files>
-  <backup_source_files>True</backup_source_files>
-  <main_source_file>interface.c</main_source_file>
-  <main_header_file>interface.h</main_header_file>
-  <handler_source_file>callbacks.c</handler_source_file>
-  <handler_header_file>callbacks.h</handler_header_file>
-  <support_source_file>support.c</support_source_file>
-  <support_header_file>support.h</support_header_file>
-  <translatable_strings_file></translatable_strings_file>
 </project>
 
 <widget>
   <class>GtkWindow</class>
   <name>top-level-window</name>
-  <width>500</width>
-  <height>600</height>
   <signal>
     <name>delete_event</name>
     <handler>on-quit</handler>
@@ -38,6 +24,8 @@
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
+  <default_width>500</default_width>
+  <default_height>600</default_height>
   <allow_shrink>False</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
@@ -1614,23 +1602,6 @@ Clicked</label>
     <spacing>0</spacing>
 
     <widget>
-      <class>GtkLabel</class>
-      <name>about-label</name>
-      <label>[about text]</label>
-      <justify>GTK_JUSTIFY_LEFT</justify>
-      <wrap>True</wrap>
-      <xalign>0.5</xalign>
-      <yalign>0.5</yalign>
-      <xpad>0</xpad>
-      <ypad>0</ypad>
-      <child>
-	<padding>4</padding>
-	<expand>True</expand>
-	<fill>True</fill>
-      </child>
-    </widget>
-
-    <widget>
       <class>GtkHBox</class>
       <child_name>Dialog:action_area</child_name>
       <name>dialog-action_area1</name>
@@ -1674,6 +1645,23 @@ Clicked</label>
 	</widget>
       </widget>
     </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>about-label</name>
+      <label>[about text]</label>
+      <justify>GTK_JUSTIFY_LEFT</justify>
+      <wrap>True</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+      <child>
+	<padding>4</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+    </widget>
   </widget>
 </widget>
 
@@ -1701,36 +1689,6 @@ Clicked</label>
     <name>foo-vbox</name>
     <homogeneous>False</homogeneous>
     <spacing>0</spacing>
-
-    <widget>
-      <class>GtkVBox</class>
-      <name>props-vbox</name>
-      <border_width>4</border_width>
-      <homogeneous>False</homogeneous>
-      <spacing>4</spacing>
-      <child>
-	<padding>0</padding>
-	<expand>True</expand>
-	<fill>True</fill>
-      </child>
-
-      <widget>
-	<class>GtkLabel</class>
-	<name>label38</name>
-	<label>[place holder]</label>
-	<justify>GTK_JUSTIFY_CENTER</justify>
-	<wrap>False</wrap>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-      </widget>
-    </widget>
 
     <widget>
       <class>GtkHBox</class>
@@ -1789,6 +1747,36 @@ Clicked</label>
 	</widget>
       </widget>
     </widget>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>props-vbox</name>
+      <border_width>4</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>4</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label38</name>
+	<label>[place holder]</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>False</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+    </widget>
   </widget>
 </widget>
 
@@ -1811,52 +1799,6 @@ Clicked</label>
     <name>dialog-vbox2</name>
     <homogeneous>False</homogeneous>
     <spacing>0</spacing>
-
-    <widget>
-      <class>GtkHBox</class>
-      <name>hbox2</name>
-      <border_width>4</border_width>
-      <homogeneous>False</homogeneous>
-      <spacing>4</spacing>
-      <child>
-	<padding>4</padding>
-	<expand>False</expand>
-	<fill>False</fill>
-      </child>
-
-      <widget>
-	<class>GtkLabel</class>
-	<name>string-dialog-label</name>
-	<label>[title]</label>
-	<justify>GTK_JUSTIFY_CENTER</justify>
-	<wrap>False</wrap>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
-	</child>
-      </widget>
-
-      <widget>
-	<class>GtkEntry</class>
-	<name>string-dialog-entry</name>
-	<can_focus>True</can_focus>
-	<has_focus>True</has_focus>
-	<editable>True</editable>
-	<text_visible>True</text_visible>
-	<text_max_length>0</text_max_length>
-	<text></text>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-      </widget>
-    </widget>
 
     <widget>
       <class>GtkHBox</class>
@@ -1913,6 +1855,52 @@ Clicked</label>
 	  </signal>
 	  <label>Cancel</label>
 	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox2</name>
+      <border_width>4</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>4</spacing>
+      <child>
+	<padding>4</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>string-dialog-label</name>
+	<label>[title]</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>False</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkEntry</class>
+	<name>string-dialog-entry</name>
+	<can_focus>True</can_focus>
+	<has_focus>True</has_focus>
+	<editable>True</editable>
+	<text_visible>True</text_visible>
+	<text_max_length>0</text_max_length>
+	<text></text>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
       </widget>
     </widget>
   </widget>
