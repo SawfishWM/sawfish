@@ -313,42 +313,109 @@ CONTRAST).
     return img;
 }
 
-#if 0
-/* I don't this function is widespread yet.. */
+static inline void
+bevel_pixel (u_char *data, bool up)
+{
+    double pix[3];
+    pix[0] = ((double)data[0]) / 256.0;
+    pix[1] = ((double)data[1]) / 256.0;
+    pix[2] = ((double)data[2]) / 256.0;
+    if (up)
+    {
+	pix[0] = pix[0] + (1.0 - pix[0]) * 0.5;
+	pix[1] = pix[1] + (1.0 - pix[1]) * 0.5;
+	pix[2] = pix[2] + (1.0 - pix[2]) * 0.5;
+	data[0] = pix[0] * 256.0;
+	data[1] = pix[1] * 256.0;
+	data[2] = pix[2] * 256.0;
+    }
+    else
+    {
+	pix[0] = pix[0] - pix[0] * 0.5;
+	pix[1] = pix[1] - pix[1] * 0.5;
+	pix[2] = pix[2] - pix[2] * 0.5;
+	data[0] = pix[0] * 256.0;
+	data[1] = pix[1] * 256.0;
+	data[2] = pix[2] * 256.0;
+    }
+}
+
+static inline void
+bevel_horizontally (u_char *data, int width, int height,
+		    int border, bool top, bool up)
+{
+    int rows;
+    up = top ? up : !up;
+    for (rows = 0; rows < border; rows++)
+    {
+	u_char *ptr = data;
+	int x;
+	if (top)
+	    ptr += rows * 3;
+	else
+	    ptr += width * (height - (rows + 1)) * 3;
+	for (x = rows; x < width - (rows + 1); x++)
+	{
+	    bevel_pixel (ptr, up);
+	    ptr += 3;
+	}
+    }
+}
+
+static inline void
+bevel_vertically (u_char *data, int width, int height,
+		  int border, bool top, bool up)
+{
+    int cols;
+    up = top ? up : !up;
+    for (cols = 0; cols < border; cols++)
+    {
+	u_char *ptr = data;
+	int y;
+	if (top)
+	    ptr += cols * 3;
+	else
+	    ptr += (width - (cols + 1)) * 3;
+	for (y = cols; y < height - (cols + 1); y++)
+	{
+	    bevel_pixel (ptr, up);
+	    ptr += width * 3;
+	}
+    }
+}
+
 DEFUN("bevel-image", Fbevel_image, Sbevel_image,
-      (repv img, repv border, repv up), rep_Subr3) /*
+      (repv image, repv border, repv up), rep_Subr3) /*
 ::doc:Sbevel-image::
 bevel-image IMAGE BORDER UP
 
-Draw a bevelled edge outline onto IMAGE. BORDER is (LEFT RIGHT TOP BOTTOM)
-defining the size of the bevel. If UP is non-nil the bevel is raised.
+Draw a bevelled edge outline onto IMAGE. BORDER is an integer defining
+the width of the bevel. If UP is non-nil the bevel is raised.
 ::end:: */
 {
-    ImlibBorder bord;
-    rep_DECLARE1(img, IMAGEP);
-    rep_DECLARE2(border, rep_LISTP);
-    if (rep_CONSP(border))
-    {
-	bord.left = rep_CAR(border);
-	border = rep_CDR(border);
-	if (rep_CONSP(border))
-	{
-	    bord.right = rep_CAR(border);
-	    border = rep_CDR(border);
-	    if (rep_CONSP(border))
-	    {
-		bord.top = rep_CAR(border);
-		border = rep_CDR(border);
-		if (rep_CONSP(border))
-		    bord.bottom = rep_CAR(border);
-	    }
-	}
-    }
-    Imlib_bevel_image (imlib_id, VIMAGE(img)->image, &bord, up != Qnil);
-    Imlib_changed_image (imlib_id, VIMAGE(img)->image);
-    return img;
+    rep_DECLARE1(image, IMAGEP);
+    rep_DECLARE2(border, rep_INTP);
+
+    bevel_horizontally (VIMAGE(image)->image->rgb_data,
+			VIMAGE(image)->image->rgb_width,
+			VIMAGE(image)->image->rgb_height,
+			rep_INT(border), TRUE, up != Qnil);
+    bevel_horizontally (VIMAGE(image)->image->rgb_data,
+			VIMAGE(image)->image->rgb_width,
+			VIMAGE(image)->image->rgb_height,
+			rep_INT(border), FALSE, up != Qnil);
+    bevel_vertically (VIMAGE(image)->image->rgb_data,
+		      VIMAGE(image)->image->rgb_width,
+		      VIMAGE(image)->image->rgb_height,
+		      rep_INT(border), TRUE, up != Qnil);
+    bevel_vertically (VIMAGE(image)->image->rgb_data,
+		      VIMAGE(image)->image->rgb_width,
+		      VIMAGE(image)->image->rgb_height,
+		      rep_INT(border), FALSE, up != Qnil);
+
+    Imlib_changed_image (imlib_id, VIMAGE(image)->image);
+    return image;
 }
-#endif
 
 /* XXX stubs for suitable Imlib functions... */
 
@@ -459,9 +526,7 @@ images_init (void)
     rep_ADD_SUBR(Simage_modifier);
     rep_ADD_SUBR(Sset_image_modifier);
     rep_ADD_SUBR(Smake_sized_image);
-#if 0
     rep_ADD_SUBR(Sbevel_image);
-#endif
     rep_INTERN(image_directory);
     rep_SYM(Qimage_directory)->value
 	= rep_concat2 (rep_STR(rep_SYM(Qsawmill_directory)->value), "/images");
