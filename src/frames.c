@@ -1107,7 +1107,7 @@ list_frame_generator (Lisp_Window *w)
 			      | ButtonMotionMask | PointerMotionHintMask
 			      | EnterWindowMask | LeaveWindowMask
 			      | KeyPressMask | ExposureMask);
-		XMapWindow (dpy, fp->id);
+		XMapRaised (dpy, fp->id);
 
 		/* stash the fp in the window */
 		XSaveContext (dpy, fp->id, window_fp_context, (XPointer)fp);
@@ -1122,8 +1122,9 @@ list_frame_generator (Lisp_Window *w)
 		attr.y = fp->y - w->frame_y;
 		attr.width = fp->width;
 		attr.height = fp->height;
-		XConfigureWindow (dpy, fp->id,
-				  CWX | CWY | CWWidth | CWHeight, &attr);
+		attr.stack_mode = Above;
+		XConfigureWindow (dpy, fp->id, CWX | CWY | CWWidth
+				  | CWHeight | CWStackMode, &attr);
 	    }
 	    else
 	    {
