@@ -165,6 +165,16 @@ has no associated class."
 	((fun (car lst)) lst)
 	(t (member-if fun (cdr lst)))))
 
+(defun clamp (x lower upper)
+  (cond ((< x lower) lower)
+	((> x upper) upper)
+	(t x)))
+
+(defun clamp* (x w lower upper)
+  (cond ((< x lower) lower)
+	((> (+ x w) upper) (- upper w))
+	(t x)))
+
 (defun uniquify-list (lst)
   "Remove all duplicates from list, tests using eq, order is lost."
   (let
