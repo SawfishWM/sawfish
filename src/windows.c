@@ -187,48 +187,6 @@ x_find_window_by_id (Window id)
     return w;
 }
 
-/* Note that frames.c:list_frame_generator also does this itself */
-void
-set_window_shape (Lisp_Window *w)
-{
-    repv tem = Fwindow_get (rep_VAL(w), Qhide_client);
-    if ((!tem || tem == Qnil) && w->frame != 0)
-    {
-	if (w->shaped)
-	{
-	    if (w->frame_parts != 0)
-	    {
-		XRectangle rect;
-		rect.x = -w->frame_x;
-		rect.y = -w->frame_y;
-		rect.width = w->attr.width;
-		rect.height = w->attr.height;
-		XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
-					 &rect, 1, ShapeSubtract, Unsorted);
-		XShapeCombineShape (dpy, w->frame, ShapeBounding,
-				    -w->frame_x, -w->frame_y, w->id,
-				    ShapeBounding, ShapeUnion);
-	    }
-	    else
-	    {
-		XShapeCombineShape (dpy, w->frame, ShapeBounding,
-				    -w->frame_x, -w->frame_y, w->id,
-				    ShapeBounding, ShapeSet);
-	    }
-	}
-	else
-	{
-	    XRectangle rect;
-	    rect.x = -w->frame_x;
-	    rect.y = -w->frame_y;
-	    rect.width = w->frame_width;
-	    rect.height = w->frame_height;
-	    XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
-				     &rect, 1, ShapeUnion, Unsorted);
-	}
-    }
-}
-
 void
 install_window_frame (Lisp_Window *w)
 {
