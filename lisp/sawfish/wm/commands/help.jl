@@ -58,13 +58,22 @@ substrings will be replaced by the name of the url.")
   ;; Commands
 
   (define (show-faq) (help-display-info-function "sawfish" "FAQ"))
+
   (define (show-news) (help-display-info-function "sawfish" "News"))
+
   (define (show-programmer-manual)
     (help-display-info-function "sawfish" "Top"))
+
   (define (show-homepage) (display-url "http://sawmill.sourceforge.net/"))
+
+  (define (show-about)
+    (system (format nil "%s >/dev/null 2>&1 </dev/null &"
+		    (expand-file-name "sawfish-about"
+				      sawfish-exec-directory))))
 
   ;;###autoload
   (define-command 'help:show-faq show-faq)
   (define-command 'help:show-news show-news)
   (define-command 'help:show-programmer-manual show-programmer-manual)
-  (define-command 'help:show-homepage show-homepage))
+  (define-command 'help:show-homepage show-homepage)
+  (define-command 'help:about show-about))
