@@ -298,7 +298,7 @@ string `uniquify-name-format' to generate unique names."
      (vector (uniquify-name (window-name w)
 			    (mapcar window-name (delq w (managed-windows)))))))
 
-  (define-command 'uniquuify-window-name uniquify-window-name #:spec "%W")
+  (define-command 'uniquify-window-name uniquify-window-name #:spec "%W")
 
 
 ;; selecting a single window
