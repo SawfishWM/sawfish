@@ -60,18 +60,17 @@
 	     (or (window-get tem 'group) (window-group-id tem)))
 	(window-id w))))
 
-(defun windows-by-group (group-id)
-  "Return the list of windows in the group with id GROUP-ID."
+(defun windows-by-group (group-id &optional by-depth)
+  "Return the list of windows in the group with id GROUP-ID. If BY-DEPTH is
+non-nil, then return the windows in order of stacking, from topmost to
+bottommost."
   (delete-if-not (lambda (x)
 		   (eq (window-actual-group-id x) group-id))
-		 (managed-windows)))
+		 (if by-depth (stacking-order) (managed-windows))))
 
-(defun windows-in-group (w)
+(defun windows-in-group (w &optional by-depth)
   "Return the list of windows in the same group as window W."
-  (let
-      (group-id tem)
-    (setq group-id (window-actual-group-id w))
-    (windows-by-group group-id)))
+  (windows-by-group (window-actual-group-id w) by-depth))
 
 (defun map-window-group (fun w)
   "Map the single argument function FUN over all windows in the same group as
