@@ -80,6 +80,7 @@ typedef struct lisp_window {
     XWindowAttributes attr;
     XSizeHints hints;
     XWMHints *wmhints;
+    Window transient_for_hint;
     char *full_name, *name, *icon_name;
     int frame_vis;
 
