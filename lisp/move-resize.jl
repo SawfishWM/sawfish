@@ -261,12 +261,6 @@
 		':windows-to-ignore (list move-resize-window)
 		':include-root t)))))
 
-;; round up a window dimension X in increments of INC, with minimum
-;; value BASE
-(defsubst move-resize-roundup (x inc base &optional maximum)
-  (min (+ base (max 0 (* (1+ (quotient (1- (- x base)) inc)) inc)))
-       (or maximum 65535)))
-
 ;; called each pointer motion event during move/resize
 (defun move-resize-motion ()
   (interactive)
@@ -310,28 +304,32 @@
 	     (cond
 	      ((memq 'right move-resize-moving-edges)
 	       (setq move-resize-width
-		     (move-resize-roundup
+		     (constrain-dimension-to-hints
 		      (+ move-resize-old-width
-			 (- ptr-x move-resize-old-ptr-x)) x-inc x-base x-max)))
+			 (- ptr-x move-resize-old-ptr-x))
+		      'x move-resize-hints)))
 	      ((memq 'left move-resize-moving-edges)
 	       (setq move-resize-width
-		     (move-resize-roundup
+		     (constrain-dimension-to-hints
 		      (+ move-resize-old-width
-			 (- move-resize-old-ptr-x ptr-x)) x-inc x-base x-max))
+			 (- move-resize-old-ptr-x ptr-x))
+		      'x move-resize-hints))
 	       (setq move-resize-x (- move-resize-old-x
 				      (- move-resize-width
 					 move-resize-old-width)))))
 	     (cond
 	      ((memq 'bottom move-resize-moving-edges)
 	       (setq move-resize-height
-		     (move-resize-roundup
+		     (constrain-dimension-to-hints
 		      (+ move-resize-old-height
-			 (- ptr-y move-resize-old-ptr-y)) y-inc y-base y-max)))
+			 (- ptr-y move-resize-old-ptr-y))
+		      'y move-resize-hints)))
 	      ((memq 'top move-resize-moving-edges)
 	       (setq move-resize-height
-		     (move-resize-roundup
+		     (constrain-dimension-to-hints
 		      (+ move-resize-old-height
-			 (- move-resize-old-ptr-y ptr-y)) y-inc y-base y-max))
+			 (- move-resize-old-ptr-y ptr-y))
+		      'y move-resize-hints))
 	       (setq move-resize-y (- move-resize-old-y
 				      (- move-resize-height
 					 move-resize-old-height)))))
