@@ -21,17 +21,38 @@
 
 ;; Commentary:
 
-;; This only does first-fit placement currently. I need to work out an
-;; optimization function to do best-fit placement.
+;; This implements two different algorithms: first-fit and best-fit. 
 
-(defcustom sp-non-ignored-windows nil
+;; Both use the same inner core -- they scan for the position to place
+;; the window where it overlaps the smallest area with other windows
+
+;; The two algorithms differ where more than one position has this
+;; smallest overlap area. The first-fit algorithm takes the first such
+;; position found, while the best-fit algorithm tries to choose the
+;; best such position.
+
+;; The cost function used for the best-fit currently tries to combine
+;; two factors: the future ``usefulness'' of the chosen space, and the
+;; number (and size) of the window edges the window will abut when
+;; placed in the position
+
+
+;; options/variables
+
+(defcustom sp-important-windows nil
   "Regular expression matching windows not to overlap in first/best-fit modes."
   :group placement
   :type string
   :allow-nil t)
 
+(defcustom sp-padding 4
+  "Try to leave at least this many pixels between window edges."
+  :group placement
+  :type number
+  :range (0 . 64))
+
 (defcustom sp-area-weight 512
-  "Weighting between used area and edge alignment in best-fit mode."
+  "Weighting between future usefulness and edge alignment in best-fit mode."
   :group placement
   :type number
   :range (0 . 1024))
@@ -67,33 +88,58 @@
 	(setq tem (cdr tem))))
     (cons x-edges y-edges)))
 
-;; returns a list of (LEFT TOP RIGHT BOTTOM)
+;; returns a list of (LEFT TOP RIGHT BOTTOM [OVERLAP-WEIGHT])
 (defun sp-make-rects (windows)
   (mapcar #'(lambda (w)
 	      (let
 		  ((dims (window-frame-dimensions w))
 		   (pos (window-position w)))
-		(list (car pos) (cdr pos)
-		      (+ (car pos) (car dims))
-		      (+ (cdr pos) (cdr dims)))))
+		(list* (car pos) (cdr pos)
+		       (+ (car pos) (car dims))
+		       (+ (cdr pos) (cdr dims))
+		       (and sp-important-windows
+			    (string-match
+			     sp-important-windows (window-name w))
+			    (list 1000)))))
 	  windows))
 
-(defun sp-screen-rects ()
-  (list (list (- (screen-width)) 0 0 (screen-height))
-	(list (screen-width) 0 (* 2 (screen-width)) (screen-height))
-	(list 0 (- (screen-height)) (screen-width) 0)
-	(list 0 (screen-height) (screen-width) (* 2 (screen-height)))))
+;; returns the list of windows to compare with when overlapping, by
+;; default windows with their `ignored' property set are dropped
+(defun sp-get-windows (w)
+  (delete-if #'(lambda (x)
+		 (or (eq x w)
+		     (and (window-get x 'ignored)
+			  (or (not (stringp sp-important-windows))
+			      (not (string-match sp-important-windows
+						 (window-name x)))))
+		     (window-get x 'iconified)
+		     (/= (or (window-get x 'workspace)
+			     current-workspace)
+			 (or (window-get w 'workspace)
+			     current-workspace))))
+	     (managed-windows)))
 
+
+;; calculating overlaps
+
+;; returns the overlap between two 1d line segments, A-1 to A-2, and
+;; B-1 to B-2
 (defmacro sp-1d-overlap (a-1 a-2 b-1 b-2)
   `(max 0 (- (min ,a-2 ,b-2) (max ,a-1 ,b-1))))
 
+;; returns the overlap between two rectangles, one defined as having
+;; dimensions DIMS and origin POINT, while the other is defined
+;; by RECT
 (defun sp-2d-overlap (dims point rect)
   (* (sp-1d-overlap (car point) (+ (car point) (car dims))
 		    (car rect) (nth 2 rect))
      (sp-1d-overlap (cdr point) (+ (cdr point) (cdr dims))
-		    (nth 1 rect) (nth 3 rect))))
+		    (nth 1 rect) (nth 3 rect))
+     ;; include the weight of the rectangle if it has one
+     (or (nth 4 rect) 1)))
 
-;; returns zero if a rectangle of size DIMS doesn't overlap any of RECTS
+;; returns the total area of the overlap between a rectangle defined by
+;; DIMS and POINT, and the list of rectangles RECTS
 ;; when placed at POINT
 (defun sp-total-overlap (dims point rects)
   (let
@@ -103,7 +149,9 @@
 	  rects)
     total))
 
-;; returns (POINT . OVERLAP)
+;; returns (POINT . OVERLAP), find the alignment of the rectangle
+;; of dimensions DIMS at POINT with the least overlap compared to
+;; RECTS
 (defun sp-least-overlap (dims point rects)
   (let
       ((screen-rect (list 0 0 (screen-width) (screen-height)))
@@ -124,20 +172,6 @@
 	  (list '(0 . 0) (cons 0 (- (cdr dims))) (cons (- (car dims)) 0)
 		(cons (- (car dims)) (- (cdr dims)))))
     (and min-point (cons min-point min-overlap))))
-
-(defun sp-get-windows (w)
-  (delete-if #'(lambda (x)
-		 (or (eq x w)
-		     (and (window-get x 'ignored)
-			  (or (not (stringp sp-non-ignored-windows))
-			      (not (string-match sp-non-ignored-windows
-						 (window-name x)))))
-		     (window-get x 'iconified)
-		     (/= (or (window-get x 'workspace)
-			     current-workspace)
-			 (or (window-get w 'workspace)
-			     current-workspace))))
-	     (managed-windows)))
 
 
 ;; first-fit search
@@ -167,9 +201,10 @@
 
 ;; best-fit search
 
-(defmacro sp-edges-adjacent-p (align-1 start-1 end-1 align-2 start-2 end-2)
-  `(and (= ,align-1 ,align-2)
-	(or (> ,start-1 ,end-2) (< ,end-1 ,start-2))))
+(defmacro sp-edges-adjacent (align-1 start-1 end-1 align-2 start-2 end-2)
+  `(if (= ,align-1 ,align-2)
+       (sp-1d-overlap ,start-1 ,end-1 ,start-2 ,end-2)
+     0))
 
 ;; This is the crux of the problem -- this function must assign a value
 ;; to placing a window of DIMS at POINT. GRID defines the grid from which
@@ -178,77 +213,88 @@
 ;; values better placements
 (defun sp-cost (point dims grid rects)
   (let
-      ((rect-left (car point))
-       (rect-top (cdr point))
-       (rect-right (+ (car point) (car dims)))
-       (rect-bottom (+ (cdr point) (cdr dims)))
+      ((win-left (car point))
+       (win-top (cdr point))
+       (win-right (+ (car point) (car dims)))
+       (win-bottom (+ (cdr point) (cdr dims)))
        (edges (make-vector 4 0))
+       (x-cross 0)
+       (y-cross 0)
+       (x-total 0)
+       (y-total 0)
        tem)
 
-    ;; try to find the width and height of the containing rectangle.
-    ;; this is wrong since the rectangles are pretty meaningless in
-    ;; this context..
+    ;; count the number of grid lines this position crosses
+    ;; the idea is to maximize this, since it's likely that it
+    ;; will use up the annoying small parts of the screen
+    (mapc #'(lambda (x)
+	      (when (and (>= x win-left) (<= x win-right))
+		(setq x-cross (1+ x-cross)))
+	      (setq x-total (1+ x-total)))
+	  (car grid))
+    (mapc #'(lambda (y)
+	      (when (and (>= y win-top) (<= y win-bottom))
+		(setq y-cross (1+ y-cross)))
+	      (setq y-total (1+ y-total)))
+	  (cdr grid))
 
-    (when (setq tem (cdr (memq rect-left (car grid))))
-      (while (and tem (< (car tem) (+ rect-left (car dims))))
-	(setq tem (cdr tem)))
-      (setq rect-right (car tem)))
-    (unless rect-right
-      (setq rect-right (screen-width)))
-
-    (when (setq tem (cdr (memq rect-top (cdr grid))))
-      (while (and tem (< (car tem) (+ rect-top (cdr dims))))
-	(setq tem (cdr tem)))
-      (setq rect-bottom (car tem)))
-    (unless rect-bottom
-      (setq rect-bottom (screen-height)))
-
-    ;; how many window edges does this grid square abut?
+    ;; how many window edges does this position abut?
+    ;; it can save space to cluster windows as much as possible
     (mapc #'(lambda (r)
-	      (when (sp-edges-adjacent-p rect-right rect-top rect-bottom
-					 (car r) (nth 1 r) (nth 3 r))
-		(aset edges 0 1))
-	      (when (sp-edges-adjacent-p rect-left rect-top rect-bottom
-					 (nth 2 r) (nth 1 r) (nth 3 r))
-		(aset edges 1 1))
-	      (when (sp-edges-adjacent-p rect-bottom rect-left rect-right
-					 (nth 1 r) (car r) (nth 2 r))
-		(aset edges 2 1))
-	      (when (sp-edges-adjacent-p rect-top rect-left rect-right
-					 (nth 3 r) (car r) (nth 2 r))
-		(aset edges 3 1)))
+	      (aset edges 0 (max (sp-edges-adjacent
+				  win-right win-top win-bottom
+				  (car r) (nth 1 r) (nth 3 r))
+				 (aref edges 0)))
+	      (aset edges 1 (max (sp-edges-adjacent
+				  win-left win-top win-bottom
+				  (nth 2 r) (nth 1 r) (nth 3 r))
+				 (aref edges 1)))
+	      (aset edges 2 (max (sp-edges-adjacent
+				  win-bottom win-left win-right
+				  (nth 1 r) (car r) (nth 2 r))
+				 (aref edges 2)))
+	      (aset edges 3 (max (sp-edges-adjacent
+				  win-top win-left win-right
+				  (nth 3 r) (car r) (nth 2 r))
+				 (aref edges 3))))
 	  rects)
     (setq edges (+ (aref edges 0) (aref edges 1)
 		   (aref edges 2) (aref edges 3)))
 
-    ;; this function is trying to account for the unused area in
-    ;; the assigned grid rectangle, and the number of abutted edges
-    (+ (/ (* sp-area-weight
-	     (* (- rect-right rect-left) (- rect-bottom rect-top)))
-	  (* (car dims) (cdr dims)))
-       (/ (* (- sp-cost-max sp-area-weight) edges) 4))))
+    (+ (/ (* sp-area-weight (+ x-cross y-cross)) (+ x-total y-total))
+       (/ (* (- sp-cost-max sp-area-weight) edges)
+	  (+ (* 2 (car dims)) (* 2 (cdr dims)))))))
 
 (defun sp-best-fit (dims grid rects)
   (let
-      ((points nil)
-       point)
+      ((point (cons 0 0))
+       points min-overlap tem)
 
-    ;; 1. find all possible positions
-    (setq point (cons nil nil))
+    ;; 1. find the list of points with the smallest overlap
     (mapc #'(lambda (y)
 	      (rplacd point y)
 	      (mapc #'(lambda (x)
 			(rplaca point x)
-			(when (zerop (sp-total-overlap dims point rects))
-			  (setq points (cons (cons x y) points))))
+			(setq tem (sp-least-overlap dims point rects))
+			(when tem
+			  (cond ((or (not min-overlap)
+				     (< (cdr tem) min-overlap))
+				 (setq min-overlap (cdr tem))
+				 (setq points (list (car tem))))
+				((= (cdr tem) min-overlap)
+				 (setq points (cons (car tem) points))))))
 		    (car grid)))
 	  (cdr grid))
 
+    ;; 2. choose the best of these points
     (cond ((null points)
+	   ;; no choice
 	   nil)
 	  ((null (cdr points))
+	   ;; one choice
 	   (car points))
 	  (t
+	   ;; n choices
 	   (let
 	       ((max-cost 0)
 		(max-point nil))
@@ -264,25 +310,26 @@
 
 ;; entry-points
 
-;;;###autoload
-(defun place-window-first-fit (w)
+(defun sp-do-placement (w mode)
   (let*
       ((windows (sp-get-windows w))
        (rects (sp-make-rects windows))
        (grid (sp-make-grid rects t))
-       (point (sp-first-fit (window-frame-dimensions w) grid rects)))
+       (dims  (window-frame-dimensions w))
+       point)
+    (rplaca dims (+ (car dims) (* sp-padding 2)))
+    (rplacd dims (+ (cdr dims) (* sp-padding 2)))
+    (setq point (funcall (if (eq mode 'first-fit) 'sp-first-fit 'sp-best-fit)
+			 dims grid rects))
     (if point
-	(move-window-to w (car point) (cdr point))
+	(move-window-to
+	 w (+ (car point) sp-padding) (+ (cdr point) sp-padding))
       (place-window-randomly w))))
 
 ;;;###autoload
-(defun place-window-best-fit (w)
-  (place-window-first-fit w))
+(defun place-window-first-fit (w)
+  (sp-do-placement w 'first-fit))
 
-;  (let*
-;      ((windows (sp-get-windows w))
-;       (rects (sp-make-rects windows))
-;       (grid (sp-make-grid rects t))
-;    (if point
-;	(move-window-to w (car point) (cdr point))
-;      (place-window-randomly w))))
+;;;###autoload
+(defun place-window-best-fit (w)
+  (sp-do-placement w 'best-fit))
