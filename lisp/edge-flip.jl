@@ -68,7 +68,9 @@ flipping."
     (setq ef-current-edge edge)
     (if ef-timer
 	(set-timer ef-timer)
-      (setq ef-timer (make-timer 'edge-flip-callback
+      (setq ef-timer (make-timer (lambda ()
+				   (setq ef-timer nil)
+				   (edge-flip-for-edge ef-current-edge))
 				 (/ edge-flip-delay 1000)
 				 (mod edge-flip-delay 1000))))))
 
@@ -77,10 +79,6 @@ flipping."
   (when ef-timer
     (delete-timer ef-timer)
     (setq ef-timer nil)))
-
-(defun edge-flip-callback ()
-  (setq ef-timer nil)
-  (edge-flip-for-edge ef-current-edge))
 
 (defun edge-flip-for-edge (edge)
   (let
