@@ -58,17 +58,6 @@ General tasks
 
   + support for synthesizing events
 
-  + add def-frame-class macro
-
-> (def-frame-class shade-button '((cursor . foo) ...)
->   (bind-keys shade-button-keymap
->     "Button1-Off" 'toggle-window-shaded))
-> 
-> the idea being that it will only create the frame part if it doesn't
-> exist, it will add all properties from the second argument unless
-> they're already set, then create and initialise the keymap from the
-> third argument (unless a keymap is already defined)
-
   + visual cue for sticky windows?
 
   + add focus-order to smart placement weights?

@@ -1341,6 +1341,32 @@ should be self-explanatory:
 
 @noindent
 Extra classes can be created by adding to @code{frame-part-classes}.
+However, it's likely that more than one frame may need to use the same
+class, and that the user may then wish to customize any extra keymaps
+used. The @code{def-frame-class} macro should be used to add new
+classes, since it handles these situations.
+
+@defmac def-frame-class class alist-form &rest binding-forms @dots{}
+Creates a new frame part class named by the symbol @var{CLASS}.
+
+The @var{ALIST-FORM} is evaluated to give an association list defining
+attributes for the class. Each key-value pairs is only set if no
+existing value exists for that key.
+
+If @var{binding-forms} are given, they will be evaluated when no keymap
+already exists for the class. A keymap will be created, and stored in
+the variable named @samp{@var{class}-name}. This variable may then be
+used withing the @var{binding-forms}.
+@end defmac
+
+So to define a hypothetical @code{shade-button} class, the following
+might be used:
+
+@lisp
+(def-frame-class shade-button '((cursor . left_ptr))
+  (bind-keys shade-button-keymap
+    "Button1-Off" 'toggle-window-shaded))
+@end lisp
 
 In some cases it might be valuable to be able to override pre-defined
 frame part properties. For example, it might be your preference that
