@@ -51,6 +51,7 @@ msgid "Workspaces"
 msgstr "Établis"
 
 #: ../lisp/custom.jl
+#: ../lisp/keymaps.jl
 msgid "Bindings"
 msgstr "Raccourcis clavier"
 
@@ -101,9 +102,9 @@ msgstr "Sawmill %s (rep %s)"
 "\n"
 "Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>\n"
 "\n"
-"This is free software -- you are welcome to redistribute it and/or modify it under the terms of the GNU General Public License as \published by the Free Software Foundation; either version 2, or (at your option) any later version.\n"
+"This is free software -- you are welcome to redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2, or (at your option) any later version.\n"
 "\n"
-"Sawmill is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANT\ABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
+"Sawmill is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
 "\n"
 "Visitez le site internet de Sawmill à l'adresse http://www.dcs.warwick.ac.uk/~john/sw/sawmill/\n"
 ""
@@ -281,16 +282,12 @@ msgid "Install the list of BINDINGS in KEYMAP, assuming that KEYMAP is available
 "for the bindings to be installed if and when it is."
 msgstr "Installer la liste des RACCOURCIS dans MAPPE-TOUCHES, en supposant que\n"
 "MAPPE-TOUCHES est disponible une fois que FEATURE a été fourni. Si FEATURE n'a pas\n"
-"encore été chargé, se débrouiller pour que les raccourcis soient installé quand il\n
+"encore été chargé, se débrouiller pour que les raccourcis soient installé quand il\n"
 "le sera."
 
 #: ../lisp/keymap.jl
 msgid "Press key..."
 msgstr "Appuyer sur une touche..."
-
-#: ../lisp/keymaps.jl
-msgid "Bindings"
-msgstr "Raccourcis clavier"
 
 #: ../lisp/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
@@ -340,7 +337,7 @@ msgstr "Mappe-touches contenant les raccourcis quand le pointeur est au-dessus d
 "bouton maximiser d'une fenêtre. (Seuls les raccourcis souris sont évalués dans\n"
 "cette mappe.)"
 
- ../lisp/keymaps.jl
+#: ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr "Mappe-touches contenant les raccourcis quand le pointeur est au-dessus du\n"
@@ -446,7 +443,7 @@ msgstr "La méthode de dessin des fenêtres étant déplacée interactivement."
 
 #: ../lisp/move-resize.jl
 msgid "The method of drawing windows being resized interactively."
-msgstr ""La méthode de dessin des fenêtres étant redimensionner interactivement."
+msgstr "La méthode de dessin des fenêtres étant redimensionner interactivement."
 
 #: ../lisp/move-resize.jl
 msgid "Raise windows being moved or resized interactively."
@@ -493,7 +490,7 @@ msgstr "Attendre que l'utilisateur sélectionne une fenêtre, puis déplacer\n"
 #: ../lisp/move-resize.jl
 msgid "Wait for the user to select a window, then interactively resize that window."
 msgstr "Attendre que l'utilisateur sélectionne une fenêtre, puis redimensionner\n"
-"interactivement celle-ci.""
+"interactivement celle-ci."
 
 #: ../lisp/place-window.jl
 msgid "Method of selecting the position of a freshly-mapped window."
