@@ -47,7 +47,8 @@
 
   ;;###autoload
   (define-command 'set-viewport-linear set-viewport-linear
-    "NIndex:" `(and (labelled ,(_ "Index:") (number 0))))
+    #:spec "NIndex:"
+    #:type `(and (labelled ,(_ "Index:") (number 0))))
 
   ;; Move window to viewport INDEX using linear addressing
   (define (set-window-viewport-linear index)
@@ -57,7 +58,8 @@
 
   ;;###autoload
   (define-command 'set-window-viewport-linear set-window-viewport-linear
-    "NIndex:" `(and (labelled ,(_ "Index:") (number 0))))
+    #:spec "NIndex:"
+    #:type `(and (labelled ,(_ "Index:") (number 0))))
 
   (define (define-linear-viewport-commands index)
     (let ((fn (lambda (base)

@@ -79,12 +79,13 @@
   (define (sp-make-grid rects #!optional with-root)
     (let ((grid (grid-from-rectangles rects)))
       ;; XXX fix for multiple heads
-      (rplaca grid (sort (list* 0 (screen-width)
-				(sp-prune-points (car grid) sp-max-points
-						 (cons 0 (screen-width))))))
-      (rplacd grid (sort (list* 0 (screen-height)
-				(sp-prune-points (cdr grid) sp-max-points
-						 (cons 0 (screen-height))))))
+      (when with-root
+	(rplaca grid (list* 0 (screen-width) (car grid)))
+	(rplacd grid (list* 0 (screen-height) (cdr grid))))
+      (rplaca grid (sort (sp-prune-points (car grid) sp-max-points
+					  (cons 0 (screen-width)))))
+      (rplacd grid (sort (sp-prune-points (cdr grid) sp-max-points
+					  (cons 0 (screen-height)))))
       grid))
 
   (define (sp-prune-points points maximum range)
@@ -96,7 +97,7 @@
 	     ;; remove points
 	     (let ((cutoff (* (max 0 (- total maximum)) 100)))
 	       (setq total (* total 100))
-	       (delete-if (lambda (x)
+	       (delete-if (lambda (unused)
 			    (< (random total) cutoff)) points)))
 	    ((< total maximum)
 	     ;; add points
@@ -125,8 +126,7 @@
   ;; of dimensions DIMS at POINT with the least overlap compared to
   ;; RECTS
   (define (sp-least-overlap dims point rects)
-    (let ((screen-rect (list 0 0 (screen-width) (screen-height)))
-	  min-overlap min-point)
+    (let (min-overlap min-point)
       (mapc (lambda (delta)
 	      (let ((point-foo (cons (+ (car point)
 					(* (car delta) (car dims)))
@@ -309,7 +309,7 @@
 
   (define (sp-best-fit dims grid rects)
     (let ((point (cons 0 0))
-	  points min-overlap tem)
+	  points tem)
 
       ;; 1. find the list of possible placements (POINT . OVERLAP)
       (mapc (lambda (y)

@@ -71,7 +71,6 @@
 	   (value (if (get symbol 'custom-get)
 		      ((get symbol 'custom-get) symbol)
 		    (custom-serialize (symbol-value symbol) type)))
-	   (allow-nil (get symbol 'custom-allow-nil))
 	   (user-level (get symbol 'custom-user-level)))
       (when (stringp doc)
 	(setq doc (_ doc))

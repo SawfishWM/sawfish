@@ -68,7 +68,7 @@
     (call-window-hook 'window-state-change-hook w (list '(never-focus))))
 
   ;;###autoload
-  (define-command 'make-window-ignored make-window-ignored "%W")
-  (define-command 'make-window-not-ignored make-window-not-ignored "%W")
-  (define-command 'toggle-window-ignored toggle-window-ignored "%W")
-  (define-command 'toggle-window-never-focus toggle-window-never-focus "%W"))
+  (define-command 'make-window-ignored make-window-ignored #:spec "%W")
+  (define-command 'make-window-not-ignored make-window-not-ignored #:spec "%W")
+  (define-command 'toggle-window-ignored toggle-window-ignored #:spec "%W")
+  (define-command 'toggle-window-never-focus toggle-window-never-focus #:spec "%W"))

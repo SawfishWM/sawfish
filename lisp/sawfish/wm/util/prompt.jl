@@ -63,7 +63,7 @@ is rejected.")
   (defvar prompt-list-fold-case nil
     "Whether prompt-from-list should ignore case.")
 
-  (define prompt-history (make-ring 16)
+  (defvar prompt-history (make-ring 16)
     "Ring buffer containing strings most-recently entered through the `prompt'
 function.")
 
@@ -314,7 +314,7 @@ displayed. See the `display-message' function for more details.")
 				    (macrop value)
 				    (special-form-p value)))))))
 
-  (defun prompt-for-variable (#!optional title start)
+  (defun prompt-for-variable (#!optional title)
     "Prompt for a variable."
     (prompt-for-symbol (or title "Enter name of variable:") boundp))
 

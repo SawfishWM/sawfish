@@ -81,7 +81,7 @@
 
 ;;; entry points
 
-(define (prompt-for-file #!optional title existing start default history-list)
+(define (prompt-for-file #!optional title existing start default)
   "Prompt for a file, if EXISTING is t only files which exist are
 allowed to be entered."
   (unless (stringp title)
@@ -137,5 +137,5 @@ Unless DONT-VALIDATE is t, only a member of PROMPT-LIST will be returned."
 (define (pwd-prompt title)
   (let ((prompt-display-fun (lambda (string)
 			     (make-string (length string) ?*)))
-       (prompt-history nil))
+	(prompt-history nil))
     (prompt-for-string title)))

@@ -185,7 +185,7 @@
 	  (_ doc)
 	(format nil "%S" command))))
 
-  (define (display-fp-tooltip win fp)
+  (define (display-fp-tooltip fp)
     (let ((keymap (frame-part-get fp 'keymap))
 	  items)
       (when (symbolp keymap)
@@ -201,7 +201,7 @@
       (let ((callback (lambda ()
 			(setq tooltips-timer nil)
 			(unless (clicked-frame-part)
-			  (display-fp-tooltip win fp)))))
+			  (display-fp-tooltip fp)))))
 	(when tooltips-timer
 	  (delete-timer tooltips-timer))
 	(setq tooltips-timer (make-timer callback

@@ -89,7 +89,7 @@
 
   ;; act on settings in gtkrc-style alist
   (define (gtkrc-apply-style)
-    (let (tem i)
+    (let (tem)
       (setq gtkrc-background nil)
       (setq gtkrc-background-pixmaps nil)
       (setq gtkrc-base nil)

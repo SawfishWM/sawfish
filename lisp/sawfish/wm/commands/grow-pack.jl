@@ -115,14 +115,14 @@ already in the window, then does like `maybe'.
   ;; Command defs
 
   ;;###autoload
-  (define-command 'grow-window-left grow-window-left "%W")
-  (define-command 'grow-window-right grow-window-right "%W")
-  (define-command 'grow-window-up grow-window-up "%W")
-  (define-command 'grow-window-down grow-window-down "%W")
-  (define-command 'pack-window-left pack-window-left "%W")
-  (define-command 'pack-window-right pack-window-right "%W")
-  (define-command 'pack-window-up pack-window-up "%W")
-  (define-command 'pack-window-down pack-window-down "%W")
+  (define-command 'grow-window-left grow-window-left #:spec "%W")
+  (define-command 'grow-window-right grow-window-right #:spec "%W")
+  (define-command 'grow-window-up grow-window-up #:spec "%W")
+  (define-command 'grow-window-down grow-window-down #:spec "%W")
+  (define-command 'pack-window-left pack-window-left #:spec "%W")
+  (define-command 'pack-window-right pack-window-right #:spec "%W")
+  (define-command 'pack-window-up pack-window-up #:spec "%W")
+  (define-command 'pack-window-down pack-window-down #:spec "%W")
 
   ;; Convenience variable.
 

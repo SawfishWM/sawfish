@@ -278,9 +278,9 @@
 	  (and move-snap-edges
 	       (progn
 		 (get-visible-window-edges
-		 ':with-ignored-windows move-snap-ignored-windows
-		 ':windows-to-ignore (list move-resize-window)
-		 ':include-root t)))))
+		  #:with-ignored-windows move-snap-ignored-windows
+		  #:windows-to-ignore (list move-resize-window)
+		  #:include-root t)))))
 
   ;; called each pointer motion event during move/resize
   (define (motion)
@@ -315,9 +315,7 @@
 		  (x-inc (or (cdr (assq 'width-inc move-resize-hints)) 1))
 		  (y-base (or (cdr (or (assq 'base-height move-resize-hints)
 				       (assq 'min-height move-resize-hints))) 1))
-		  (y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1))
-		  (x-max (cdr (assq 'max-width move-resize-hints)))
-		  (y-max (cdr (assq 'max-height move-resize-hints))))
+		  (y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1)))
 	       (when (memq resize-edge-mode '(grab border-grab))
 		 (add-edges ptr-x ptr-y))
 	       (cond
@@ -523,7 +521,9 @@
 	(resize-window-interactively w))))
 
   ;;###autoload
-  (define-command 'move-window-interactively move-window-interactively "%W")
-  (define-command 'resize-window-interactively resize-window-interactively "%W")
+  (define-command 'move-window-interactively
+    move-window-interactively #:spec "%W")
+  (define-command 'resize-window-interactively
+    resize-window-interactively #:spec "%W")
   (define-command 'move-selected-window move-selected-window)
   (define-command 'resize-selected-window resize-selected-window))

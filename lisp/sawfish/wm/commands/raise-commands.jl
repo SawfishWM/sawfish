@@ -73,8 +73,13 @@ replay any pointer events that invoked the command."
 	(forget-button-press))))
 
   ;;###autoload
-  (define-command 'raise-window-and-pass-through-click window-and-pass-through-click "%w")
-  (define-command 'raise-group-and-pass-through-click group-and-pass-through-click "%w")
-  (define-command 'raise-transients-and-pass-through-click transients-and-pass-through-click "%w")
-  (define-command 'raise-and-pass-through-click-if-focused and-pass-through-click-if-focused "%w")
-  (define-command 'raise-or-pass-through-click or-pass-through-click "%w"))
+  (define-command 'raise-window-and-pass-through-click
+    window-and-pass-through-click #:spec "%w")
+  (define-command 'raise-group-and-pass-through-click
+    group-and-pass-through-click #:spec "%w")
+  (define-command 'raise-transients-and-pass-through-click
+    transients-and-pass-through-click #:spec "%w")
+  (define-command 'raise-and-pass-through-click-if-focused
+    and-pass-through-click-if-focused #:spec "%w")
+  (define-command 'raise-or-pass-through-click
+    or-pass-through-click #:spec "%w"))

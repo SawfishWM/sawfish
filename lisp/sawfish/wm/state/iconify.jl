@@ -121,9 +121,9 @@
 	(uniconify-window w)
       (iconify-window w)))
 
-  (define-command 'iconify-window iconify-window "%W")
-  (define-command 'uniconify-window uniconify-window "%W")
-  (define-command 'toggle-window-iconified toggle-window-iconified "%W")
+  (define-command 'iconify-window iconify-window #:spec "%W")
+  (define-command 'uniconify-window uniconify-window #:spec "%W")
+  (define-command 'toggle-window-iconified toggle-window-iconified #:spec "%W")
 
   (define (iconify-workspace-windows)
     "Iconify all windows on the current workspace."
@@ -160,15 +160,15 @@ all workspaces."
 	(make-window-unsticky w)
       (make-window-sticky w)))
 
-  (define-command 'make-window-sticky make-window-sticky "%W")
-  (define-command 'make-window-unsticky make-window-unsticky "%W")
-  (define-command 'toggle-window-sticky toggle-window-sticky "%W")
+  (define-command 'make-window-sticky make-window-sticky #:spec "%W")
+  (define-command 'make-window-unsticky make-window-unsticky #:spec "%W")
+  (define-command 'toggle-window-sticky toggle-window-sticky #:spec "%W")
 
 
 ;;; MacOS X single-window mode stuff
 
   (define (toggle-single-window-mode w)
-    (let ((iconify-whole-group nil)
+    (let ((iconify-group-mode 'none)
 	  (raise-windows-on-uniconify nil)
 	  fun)
       (map-other-window-groups
@@ -181,7 +181,8 @@ all workspaces."
 			 iconify-window)))
 	   (fun x))) w)))
 
-  (define-command 'toggle-single-window-mode toggle-single-window-mode "%W")
+  (define-command 'toggle-single-window-mode
+    toggle-single-window-mode #:spec "%W")
 
 
 ;;; hooks

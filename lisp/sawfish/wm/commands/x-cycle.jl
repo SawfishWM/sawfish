@@ -301,12 +301,12 @@ prefix of the current window."
     "Cycle through all windows with the same class as the current window."
     (let ((class (window-class w)))
       (let ((windows (filter-windows (lambda (x)
-				       (equal (window-class w) class)))))
+				       (equal (window-class x) class)))))
 	(when windows
 	  (cycle-windows event windows)))))
 
   ;;###autoload
-  (define-command 'cycle-windows cycle-windows "e")
-  (define-command 'cycle-group cycle-group "e\n%W")
-  (define-command 'cycle-prefix cycle-prefix "e\n%W")
-  (define-command 'cycle-class cycle-class "e\n%W"))
+  (define-command 'cycle-windows cycle-windows #:spec "e")
+  (define-command 'cycle-group cycle-group #:spec "e\n%W")
+  (define-command 'cycle-prefix cycle-prefix #:spec "e\n%W")
+  (define-command 'cycle-class cycle-class #:spec "e\n%W"))

@@ -67,10 +67,10 @@
     (slide-window w 0 slide-window-increment))
 
   ;;###autoload
-  (define-command 'slide-window-left slide-window-left "%W")
-  (define-command 'slide-window-right slide-window-right "%W")
-  (define-command 'slide-window-up slide-window-up "%W")
-  (define-command 'slide-window-down slide-window-down "%W")
+  (define-command 'slide-window-left slide-window-left #:spec "%W")
+  (define-command 'slide-window-right slide-window-right #:spec "%W")
+  (define-command 'slide-window-up slide-window-up #:spec "%W")
+  (define-command 'slide-window-down slide-window-down #:spec "%W")
 
 
 ;; group commands
@@ -92,7 +92,7 @@
     (map-window-group slide-window-down w))
 
   ;;###autoload
-  (define-command 'slide-group-left slide-group-left "%W")
-  (define-command 'slide-group-right slide-group-right "%W")
-  (define-command 'slide-group-up slide-group-up "%W")
-  (define-command 'slide-group-down slide-group-down "%W"))
+  (define-command 'slide-group-left slide-group-left #:spec "%W")
+  (define-command 'slide-group-right slide-group-right #:spec "%W")
+  (define-command 'slide-group-up slide-group-up #:spec "%W")
+  (define-command 'slide-group-down slide-group-down #:spec "%W"))

@@ -174,7 +174,7 @@
 	(when (and (eq edge-flip-type 'workspace)
 		   (/= original-space current-workspace)
 		   (not (window-get w 'sticky)))
-	  (ws-move-window w original-space current-workspace t)))))
+	  (move-window-to-workspace w original-space current-workspace t)))))
 
   (add-hook 'enter-flipper-hook edge-flip-enter)
   (add-hook 'leave-flipper-hook edge-flip-leave)

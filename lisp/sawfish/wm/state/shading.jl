@@ -68,9 +68,9 @@ state."
 	(unshade-window w)
       (shade-window w)))
 
-  (define-command 'shade-window shade-window "%W")
-  (define-command 'unshade-window unshade-window "%W")
-  (define-command 'toggle-window-shaded toggle-window-shaded "%W")
+  (define-command 'shade-window shade-window #:spec "%W")
+  (define-command 'unshade-window unshade-window #:spec "%W")
+  (define-command 'toggle-window-shaded toggle-window-shaded #:spec "%W")
 
 
 ;;; displaying

@@ -33,7 +33,8 @@
 
   (define-structure-alias edges sawfish.wm.util.edges)
 
-  (define (get-visible-window-edges . args)
+  (define (get-visible-window-edges #!key with-ignored-windows
+				    windows-to-ignore (windows t) include-root)
     "Returns (X-EDGES . Y-EDGES), X-EDGES is a list of (X Y1 Y2 OPEN-P),
 and Y-EDGES is a list of (Y X1 X2 OPEN-P). OPEN-P is t if the edge is
 the left or top edge of a window. For the root window, the meaning of
@@ -43,15 +44,12 @@ The returned lists may contain duplicates, and are unsorted.
 
 The possible keyword arguments to this function are:
 
-	:with-ignored-windows t
-	:windows-to-ignore LIST
-	:windows LIST
-	:include-root t"
+	#:with-ignored-windows t
+	#:windows-to-ignore LIST
+	#:windows LIST
+	#:include-root t"
 
-    (let ((with-ignored-windows (car (cdr (memq ':with-ignored-windows args))))
-	  (windows-to-ignore (car (cdr (memq ':windows-to-ignore args))))
-	  (windows (cdr (memq ':windows args)))
-	  x-edges y-edges)
+    (let (x-edges y-edges)
       (map-windows
        (lambda (w)
 	 (when (and (window-mapped-p w)
@@ -60,7 +58,7 @@ The possible keyword arguments to this function are:
 		    (or with-ignored-windows
 			(not (window-get w 'ignored)))
 		    (not (memq w windows-to-ignore))
-		    (or (null windows) (memq w (car windows))))
+		    (or (not (listp windows)) (memq w windows)))
 	 (let ((dims (window-frame-dimensions w))
 	       (coords (window-position w)))
 	   (setq x-edges (cons (list (car coords) (cdr coords)
@@ -77,7 +75,7 @@ The possible keyword arguments to this function are:
 					   (+ (car coords) (car dims))
 					   nil)
 				     y-edges)))))))
-      (when (car (cdr (memq ':include-root args)))
+      (when include-root
 	(do ((i 0 (1+ i)))
 	    ((= i (head-count)))
 	  (let ((dims (head-dimensions i))

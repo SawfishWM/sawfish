@@ -69,8 +69,7 @@
     (let ((client-id (sm-get-window-prop w 'SM_CLIENT_ID))
 	  (role (nth 2 (get-x-property w 'WM_WINDOW_ROLE)))
 	  (class (sm-get-window-prop w 'WM_CLASS))
-	  (command (sm-get-window-prop w 'WM_COMMAND))
-	  (machine (sm-get-window-prop w 'WM_CLIENT_MACHINE)))
+	  (command (sm-get-window-prop w 'WM_COMMAND)))
       (catch 'out
 	(when (not (eq (not (cdr (assq 'client-id alist))) (not client-id)))
 	  ;; one has a client-id, the other doesn't -- no match

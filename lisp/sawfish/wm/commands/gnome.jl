@@ -81,9 +81,12 @@
     (gnome-clear-hint w WIN_HINTS_SKIP_WINLIST))
 
   ;;###autoload
-  (define-command 'gnome-toggle-skip-winlist gnome-toggle-skip-winlist "%W")
-  (define-command 'gnome-set-skip-winlist gnome-set-skip-winlist "%W")
-  (define-command 'gnome-clear-skip-winlist gnome-clear-skip-winlist "%W")
+  (define-command 'gnome-toggle-skip-winlist gnome-toggle-skip-winlist
+    #:spec "%W")
+  (define-command 'gnome-set-skip-winlist gnome-set-skip-winlist
+    #:spec "%W")
+  (define-command 'gnome-clear-skip-winlist gnome-clear-skip-winlist
+    #:spec "%W")
 
   (define (gnome-toggle-skip-tasklist w)
     "Toggle the GNOME SKIP_TASKLIST hint of the window."
@@ -98,9 +101,12 @@
     (gnome-clear-hint w WIN_HINTS_SKIP_TASKLIST))
 
   ;;###autoload
-  (define-command 'gnome-toggle-skip-tasklist gnome-toggle-skip-tasklist "%W")
-  (define-command 'gnome-set-skip-tasklist gnome-set-skip-tasklist "%W")
-  (define-command 'gnome-clear-skip-tasklist gnome-clear-skip-tasklist "%W")
+  (define-command 'gnome-toggle-skip-tasklist gnome-toggle-skip-tasklist
+    #:spec "%W")
+  (define-command 'gnome-set-skip-tasklist gnome-set-skip-tasklist
+    #:spec "%W")
+  (define-command 'gnome-clear-skip-tasklist gnome-clear-skip-tasklist
+    #:spec "%W")
 
 
 ;; extras

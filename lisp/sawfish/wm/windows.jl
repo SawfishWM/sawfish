@@ -233,13 +233,13 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
      (safely (beep))
      (t (x-kill-client w))))
 
-  (define-command 'delete-window delete-window "%W")
+  (define-command 'delete-window delete-window #:spec "%W")
 
   (define (delete-window-safely w)
     "Delete the window, or beep if the window can't be closed safely."
     (delete-window w t))
 
-  (define-command 'delete-window-safely delete-window-safely "%W")
+  (define-command 'delete-window-safely delete-window-safely #:spec "%W")
 
 
 ;;; making window names unique
@@ -263,7 +263,7 @@ string `uniquify-name-format' to generate unique names."
      (vector (uniquify-name (window-name w)
 			    (mapcar window-name (delq w (managed-windows)))))))
 
-  (define-command 'uniquuify-window-name uniquify-window-name "%W")
+  (define-command 'uniquuify-window-name uniquify-window-name #:spec "%W")
 
 
 ;; selecting a single window

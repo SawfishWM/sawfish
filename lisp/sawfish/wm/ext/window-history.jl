@@ -202,13 +202,13 @@
     (window-history-set w nil))
 
   (define-command 'window-history-save-position
-    window-history-save-position "%W")
+    window-history-save-position #:spec "%W")
   (define-command 'window-history-save-dimensions
-    window-history-save-dimensions "%W")
+    window-history-save-dimensions #:spec "%W")
   (define-command 'window-history-save-attributes
-    window-history-save-attributes "%W")
+    window-history-save-attributes #:spec "%W")
   (define-command 'window-history-forget
-    window-history-forget "%W")
+    window-history-forget #:spec "%W")
 
 
 ;;; restoring attributes

@@ -104,7 +104,7 @@
 
 ;;; custom support
 
-  (define (custom-make-frame-style-widget symbol)
+  (define (custom-make-frame-style-widget)
     `(frame-style ,(find-all-frame-styles t) ,theme-load-path))
 
   (put 'frame-style 'custom-widget custom-make-frame-style-widget)
@@ -362,7 +362,7 @@ deciding which frame type to ask a theme to generate.")
 	(let ((dir (find-frame-style style)))
 	  (when dir
 	    (system (format nil "%s %s &" sawfish-themer-program dir))))))
-    (lambda () (list default-frame-style)))
+    #:spec (lambda () (list default-frame-style)))
 
 
 ;;; kludge different window decors by modifying the assumed window type
@@ -410,7 +410,7 @@ deciding which frame type to ask a theme to generate.")
   ;; create some commands for setting the window type
   (mapc (lambda (type)
 	  (define-command (intern (concat "set-frame:" (symbol-name type)))
-	    (lambda (w) (set-window-type w type)) "%W"))
+	    (lambda (w) (set-window-type w type)) #:spec "%W"))
 	'(default transient shaped shaped-transient unframed))
 
 

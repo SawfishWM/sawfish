@@ -72,24 +72,12 @@
 	  ((memq feature safe-features) (require feature))
 	  (t (error "Gaolled code trying to require %s" feature))))
 
-  (unless (boundp 'gaol-define)
-    (define gaol-define gaol-replace-function))
-
-  (unless (boundp 'gaol-open)
-    (define (gaol-open struct)))
-
-  (unless (boundp 'gaol-define-special)
-    (define gaol-define-special gaol-add-special))
-
 ;;; initialize the gaol envrironment
 
   ;; for backwards compatibility, / is integer division in themes, use
   ;; `divide' for real division
   (gaol-define 'divide /)
   (gaol-define '/ quotient)
-
-  ;; left out in 0.12.2 and below
-  (gaol-define 'define-value define-value)
 
   ;; use safe version of require
   (gaol-define 'require gaol:require)

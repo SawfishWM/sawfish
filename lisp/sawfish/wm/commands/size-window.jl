@@ -86,7 +86,11 @@ size of each row or column is taken from `size-window-def-increment.'"
     (size-window w -1 0))
 
   ;;###autoload
-  (define-command 'size-window-add-row size-window-add-row "%W")
-  (define-command 'size-window-subtract-row size-window-subtract-row "%W")
-  (define-command 'size-window-add-column size-window-add-column "%W")
-  (define-command 'size-window-subtract-column size-window-subtract-column "%W"))
+  (define-command 'size-window-add-row size-window-add-row
+    #:spec "%W")
+  (define-command 'size-window-subtract-row size-window-subtract-row
+    #:spec "%W")
+  (define-command 'size-window-add-column size-window-add-column
+    #:spec "%W")
+  (define-command 'size-window-subtract-column size-window-subtract-column
+    #:spec "%W"))

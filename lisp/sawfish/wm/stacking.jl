@@ -332,11 +332,11 @@ lowest possible position. Otherwise raise it as far as allowed."
     "Put the window in the stacking level above its current level."
     (set-window-depth w (1+ (window-get w 'depth))))
 
-  (define-command 'raise-window raise-window "%W")
-  (define-command 'lower-window lower-window "%W")
-  (define-command 'raise-lower-window raise-lower-window "%W")
-  (define-command 'raise-window-depth raise-window-depth "%W")
-  (define-command 'lower-window-depth lower-window-depth "%W")
+  (define-command 'raise-window raise-window #:spec "%W")
+  (define-command 'lower-window lower-window #:spec "%W")
+  (define-command 'raise-lower-window raise-lower-window #:spec "%W")
+  (define-command 'raise-window-depth raise-window-depth #:spec "%W")
+  (define-command 'lower-window-depth lower-window-depth #:spec "%W")
 
 
 ;;; stacking groups of windows

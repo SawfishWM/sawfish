@@ -47,7 +47,6 @@
 	  (viewport (cdr (assq 'viewport alist)))
 	  (dimensions (cdr (assq 'dimensions alist)))
 	  (properties (cdr (assq 'properties alist)))
-	  (old-type (window-type w))
 	  (old-frame-style (window-get w 'current-frame-style)))
       (mapc (lambda (cell)
 	      (window-put w (car cell) (cdr cell))) properties)

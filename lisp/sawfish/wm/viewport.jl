@@ -186,29 +186,33 @@
     (set-screen-viewport (1- x) (1- y)))
 
   (define-command 'activate-viewport activate-viewport
-    "NX:\nNY:" `(and (labelled ,(_ "Column:") (number 1))
-		     (labelled ,(_ "Row:") (number 1))))
+    #:spec "NX:\nNY:"
+    #:type `(and (labelled ,(_ "Column:") (number 1))
+		 (labelled ,(_ "Row:") (number 1))))
 
   (define (activate-viewport-column x)
     "Select the specified viewport column."
     (set-screen-viewport (1- x) (cdr (screen-viewport))))
 
   (define-command 'activate-viewport-column activate-viewport-column
-    "NX:" `(and (labelled ,(_ "Column:") (number 1))))
+    #:spec "NX:"
+    #:type `(and (labelled ,(_ "Column:") (number 1))))
 
   (define (activate-viewport-row y)
     "Select the specified viewport row."
     (set-screen-viewport (car (screen-viewport)) (1- y)))
 
   (define-command 'activate-viewport-row activate-viewport-row
-    "NY:" `(and (labelled ,(_ "Row:") (number 1))))
+    #:spec "NY:"
+    #:type `(and (labelled ,(_ "Row:") (number 1))))
 
   (define (move-window-to-viewport x y)
     "Move the current window to the specified viewport."
     (move-window-viewport (current-event-window) (1- x) (1- y)))
 
   (define-command 'move-window-to-viewport move-window-to-viewport
-    "NX:\nNY:" '(and (labelled "X:" (number 1)) (labelled "Y:" (number 1))))
+    #:spec "NX:\nNY:"
+    #:type '(and (labelled "X:" (number 1)) (labelled "Y:" (number 1))))
 
   (define (move-viewport-right)
     "Move the viewport one screen to the right."

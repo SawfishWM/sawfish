@@ -71,8 +71,7 @@
       (let* ((window (aref data 1))
 	     (prop (x-atom-name (aref data 2)))
 	     (needs-result (/= (aref data 3) 0))
-	     (form-data (get-x-property window prop))
-	     form value)
+	     (form-data (get-x-property window prop)))
 	(if needs-result
 	    (set-x-property
 	     window prop (server-eval (nth 2 form-data)) 'STRING 8)

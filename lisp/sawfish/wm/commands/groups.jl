@@ -65,10 +65,10 @@
   (define (iconify-transient-group w) (map-transient-group iconify-window w))
   (define (uniconify-transient-group w) (map-transient-group uniconify-window w))
 
-  (define-command 'iconify-group iconify-group "%W")
-  (define-command 'uniconify-group uniconify-group "%W")
-  (define-command 'iconify-transient-group iconify-transient-group "%W")
-  (define-command 'uniconify-transientgroup uniconify-transient-group "%W")
+  (define-command 'iconify-group iconify-group #:spec "%W")
+  (define-command 'uniconify-group uniconify-group #:spec "%W")
+  (define-command 'iconify-transient-group iconify-transient-group #:spec "%W")
+  (define-command 'uniconify-transientgroup uniconify-transient-group #:spec "%W")
   
   ;; sticky
 
@@ -81,9 +81,9 @@
       (make-group-sticky w)))
 
   ;;###autoload
-  (define-command 'make-group-sticky make-group-sticky "%W")
-  (define-command 'make-group-unsticky make-group-unsticky "%W")
-  (define-command 'toggle-group-sticky toggle-group-sticky "%W")
+  (define-command 'make-group-sticky make-group-sticky #:spec "%W")
+  (define-command 'make-group-unsticky make-group-unsticky #:spec "%W")
+  (define-command 'toggle-group-sticky toggle-group-sticky #:spec "%W")
 
   ;; workspaces
 
@@ -91,8 +91,9 @@
     (map-window-group
      (lambda (x)
        (unless (window-get x 'sticky)
-	 (ws-move-window x (nearest-workspace-with-window x current-workspace)
-			 send-group-dest-space (eq x (input-focus))))) w))
+	 (move-window-to-workspace
+	  x (nearest-workspace-with-window x current-workspace)
+	  send-group-dest-space (eq x (input-focus))))) w))
 
   (define (send-group-to-current-workspace w)
     (send-group-to-workspace w current-workspace))
@@ -107,9 +108,12 @@
     (send-group-to-next-workspace w (- count)))
 
   ;;###autoload
-  (define-command 'send-group-to-current-workspace send-group-to-current-workspace "%W")
-  (define-command 'send-group-to-next-workspace send-group-to-next-workspace "%W\np")
-  (define-command 'send-group-to-previous-workspace send-group-to-previous-workspace "%W\np")
+  (define-command 'send-group-to-current-workspace
+    send-group-to-current-workspace #:spec "%W")
+  (define-command 'send-group-to-next-workspace
+    send-group-to-next-workspace #:spec "%W\np")
+  (define-command 'send-group-to-previous-workspace
+    send-group-to-previous-workspace #:spec "%W\np")
 
   ;; viewports
 
@@ -128,13 +132,13 @@
 
   ;;###autoload
   (define-command 'move-group-to-current-viewport
-    move-group-to-current-viewport "%W")
+    move-group-to-current-viewport #:spec "%W")
 
   ;;###autoload
-  (define-command 'move-group-left move-group-left "%W")
-  (define-command 'move-group-right move-group-right "%W")
-  (define-command 'move-group-up move-group-up "%W")
-  (define-command 'move-group-down move-group-down "%W")
+  (define-command 'move-group-left move-group-left #:spec "%W")
+  (define-command 'move-group-right move-group-right #:spec "%W")
+  (define-command 'move-group-up move-group-up #:spec "%W")
+  (define-command 'move-group-down move-group-down #:spec "%W")
 
   ;; stacking
 
@@ -145,11 +149,11 @@
   (define (lower-group-depth w) (map-window-group lower-window-depth w))
 
   ;;###autoload
-  (define-command 'raise-group raise-group "%W")
-  (define-command 'lower-group lower-group "%W")
-  (define-command 'raise-lower-group raise-lower-group "%W")
-  (define-command 'raise-group-depth raise-group-depth "%W")
-  (define-command 'lower-group-depth lower-group-depth "%W")
+  (define-command 'raise-group raise-group #:spec "%W")
+  (define-command 'lower-group lower-group #:spec "%W")
+  (define-command 'raise-lower-group raise-lower-group #:spec "%W")
+  (define-command 'raise-group-depth raise-group-depth #:spec "%W")
+  (define-command 'lower-group-depth lower-group-depth #:spec "%W")
 
   ;; framing
 

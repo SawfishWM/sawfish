@@ -677,8 +677,8 @@
     "Display the previous workspace."
     (next-workspace (- count)))
 
-  (define-command 'next-workspace next-workspace "p")
-  (define-command 'previous-workspace previous-workspace "p")
+  (define-command 'next-workspace next-workspace #:spec "p")
+  (define-command 'previous-workspace previous-workspace #:spec "p")
 
   (define (send-to-next-workspace w count #!optional copy select)
     "Move the window to the next workspace."
@@ -701,8 +701,10 @@
     "Move the window to the previous workspace."
     (send-to-next-workspace w (- count) copy select))
 
-  (define-command 'send-to-next-workspace send-to-next-workspace "%W\np\n\nt")
-  (define-command 'send-to-previous-workspace send-to-previous-workspace "%W\np\n\nt")
+  (define-command 'send-to-next-workspace send-to-next-workspace
+    #:spec "%W\np\n\nt")
+  (define-command 'send-to-previous-workspace send-to-previous-workspace
+    #:spec "%W\np\n\nt")
 
   (define (copy-to-next-workspace w count select)
     "Copy the window to the next workspace."
@@ -712,8 +714,10 @@
     "Copy the window to the previous workspace."
     (send-to-previous-workspace w count t select))
 
-  (define-command 'copy-to-next-workspace copy-to-next-workspace "%W\np\nt")
-  (define-command 'copy-to-previous-workspace copy-to-previous-workspace "%W\np\nt")
+  (define-command 'copy-to-next-workspace copy-to-next-workspace
+    #:spec "%W\np\nt")
+  (define-command 'copy-to-previous-workspace copy-to-previous-workspace
+    #:spec "%W\np\nt")
 
   (define (append-workspace-and-send w #!optional select)
     "Create a new workspace at the end of the list, and move the window to it."
@@ -747,8 +751,10 @@
 	  (move-window-to-workspace
 	   w orig-space (1- (car limits)) was-focused)))))
 
-  (define-command 'append-workspace-and-send append-workspace-and-send "%W\nt")
-  (define-command 'prepend-workspace-and-send prepend-workspace-and-send "%W\nt")
+  (define-command 'append-workspace-and-send append-workspace-and-send
+    #:spec "%W\nt")
+  (define-command 'prepend-workspace-and-send prepend-workspace-and-send
+    #:spec "%W\nt")
 
   (define (merge-next-workspace)
     "Delete the current workspace. Its member windows are relocated to the next
@@ -842,7 +848,7 @@ last instance remaining, then delete the actual window."
 	    (call-hook 'workspace-state-change-hook))
 	(delete-window w))))
 
-  (define-command 'delete-window-instance delete-window-instance "%W")
+  (define-command 'delete-window-instance delete-window-instance #:spec "%W")
 
 
 ;; some commands for moving directly to a workspace
@@ -852,21 +858,24 @@ last instance remaining, then delete the actual window."
     (select-workspace-from-first (1- n)))
 
   (define-command 'activate-workspace activate-workspace
-    "NWorkspace:" `(and (labelled ,(_ "Workspace:") (number 1))))
+    #:spec "NWorkspace:"
+    #:type `(and (labelled ,(_ "Workspace:") (number 1))))
 
   (define (send-to-workspace n)
     "Move the current window to the N'th workspace."
     (send-window-to-workspace-from-first (current-event-window) (1- n)))
 
   (define-command 'send-to-workspace send-to-workspace
-    "NWorkspace:" `(and (labelled ,(_ "Workspace:") (number 1))))
+    #:spec "NWorkspace:"
+    #:type `(and (labelled ,(_ "Workspace:") (number 1))))
 
   (define (copy-to-workspace n)
     "Copy the current window to the N'th workspace."
     (send-window-to-workspace-from-first (current-event-window) (1- n) t))
 
   (define-command 'copy-to-workspace copy-to-workspace
-    "NWorkspace:" `(and (labelled ,(_ "Workspace:") (number 1))))
+    #:spec "NWorkspace:"
+    #:type `(and (labelled ,(_ "Workspace:") (number 1))))
 
   (define (select-workspace-interactively)
     "Prompt for a workspace and switch to it."
@@ -876,7 +885,7 @@ last instance remaining, then delete the actual window."
 	(select-workspace-from-first ws))))
 
   (define-command 'select-workspace-interactively
-    select-workspace-interactively "%S")
+    select-workspace-interactively #:spec "%S")
 
 
 ;;; session management

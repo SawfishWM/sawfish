@@ -79,9 +79,9 @@
 
   (define-command 'display-window-without-focusing
     display-window-without-focusing
-    (lambda ()
-      (require 'sawfish.wm.util.prompt)
-      (list (prompt-for-window))))
+    #:spec (lambda ()
+	     (require 'sawfish.wm.util.prompt)
+	     (list (prompt-for-window))))
 
   (define (display-window w #!optional preferred-space)
     "Display the workspace containing the window W, then focus on W."
@@ -96,6 +96,6 @@
       (window-order-push w)))
 
   (define-command 'display-window display-window
-    (lambda ()
-      (require 'sawfish.wm.util.prompt)
-      (list (prompt-for-window)))))
+    #:spec (lambda ()
+	     (require 'sawfish.wm.util.prompt)
+	     (list (prompt-for-window)))))

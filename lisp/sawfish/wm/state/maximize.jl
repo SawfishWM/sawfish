@@ -293,9 +293,9 @@
     "Return the rectangle representing the largest rectangle on the screen that
 doesn't overlap any avoided windows, or nil."
     (let* ((avoided (avoided-windows w))
-	   (edges (get-visible-window-edges ':with-ignored-windows t
-					    ':windows avoided
-					    ':include-root t)))
+	   (edges (get-visible-window-edges #:with-ignored-windows t
+					    #:windows avoided
+					    #:include-root t)))
       (find-max-rectangle avoided edges (current-head w))))
 
 
@@ -310,9 +310,9 @@ doesn't overlap any avoided windows, or nil."
 	   (fdims (window-frame-dimensions w))
 	   (hints (window-size-hints w))
 	   (avoided (and maximize-avoid-avoided (avoided-windows w)))
-	   (edges (get-visible-window-edges ':with-ignored-windows t
-					    ':windows avoided
-					    ':include-root t)))
+	   (edges (get-visible-window-edges #:with-ignored-windows t
+					    #:windows avoided
+					    #:include-root t)))
       (when (window-maximizable-p w direction hints)
 	(unless (window-get w 'unmaximized-geometry)
 	  (window-put w 'unmaximized-geometry (list (car coords) (cdr coords)
@@ -389,13 +389,13 @@ unmaximized."
       (maximize-window w 'horizontal)))
 
   ;;###autoload
-  (define-command 'maximize-window maximize-window "%W")
-  (define-command 'unmaximize-window unmaximize-window "%W")
-  (define-command 'maximize-window-vertically maximize-window-vertically "%W")
-  (define-command 'maximize-window-horizontally maximize-window-horizontally "%W")
-  (define-command 'maximize-window-toggle maximize-window-toggle "%W")
-  (define-command 'maximize-window-horizontally-toggle maximize-window-horizontally-toggle "%W")
-  (define-command 'maximize-window-vertically-toggle maximize-window-vertically-toggle "%W")
+  (define-command 'maximize-window maximize-window #:spec "%W")
+  (define-command 'unmaximize-window unmaximize-window #:spec "%W")
+  (define-command 'maximize-window-vertically maximize-window-vertically #:spec "%W")
+  (define-command 'maximize-window-horizontally maximize-window-horizontally #:spec "%W")
+  (define-command 'maximize-window-toggle maximize-window-toggle #:spec "%W")
+  (define-command 'maximize-window-horizontally-toggle maximize-window-horizontally-toggle #:spec "%W")
+  (define-command 'maximize-window-vertically-toggle maximize-window-vertically-toggle #:spec "%W")
 
 
 ;;; fill commands
@@ -436,12 +436,12 @@ unmaximized."
       (maximize-fill-window w 'horizontal)))
 
   ;;###autoload
-  (define-command 'maximize-fill-window maximize-fill-window "%W")
-  (define-command 'maximize-fill-window-vertically maximize-fill-window-vertically "%W")
-  (define-command 'maximize-fill-window-horizontally maximize-fill-window-horizontally "%W")
-  (define-command 'maximize-fill-window-toggle maximize-fill-window-toggle "%W")
-  (define-command 'maximize-fill-window-horizontally-toggle maximize-fill-window-horizontally-toggle "%W")
-  (define-command 'maximize-fill-window-vertically-toggle maximize-fill-window-vertically-toggle "%W")
+  (define-command 'maximize-fill-window maximize-fill-window #:spec "%W")
+  (define-command 'maximize-fill-window-vertically maximize-fill-window-vertically #:spec "%W")
+  (define-command 'maximize-fill-window-horizontally maximize-fill-window-horizontally #:spec "%W")
+  (define-command 'maximize-fill-window-toggle maximize-fill-window-toggle #:spec "%W")
+  (define-command 'maximize-fill-window-horizontally-toggle maximize-fill-window-horizontally-toggle #:spec "%W")
+  (define-command 'maximize-fill-window-vertically-toggle maximize-fill-window-vertically-toggle #:spec "%W")
 
 
 ;;; initialisation

@@ -107,7 +107,7 @@
 		    (open-file filename 'read)
 		  (file-error nil)))
 	  (section nil)
-	  name exec tryexec terminal type
+	  name exec tryexec terminal
 	  line)
       (when file
 	(unwind-protect
@@ -133,10 +133,7 @@
 			  (string-looking-at "Terminal=(.*)\n" line 0 t))
 		     (setq terminal (expand-last-match "\\1"))
 		     (setq terminal (not (string-match
-					  "^0|false$" terminal 0 t))))
-		    ((and (eq section 'desktop-entry)
-			  (string-looking-at "Type=(.*)\n" line 0 t))
-		     (setq type (expand-last-match "\\1")))))
+					  "^0|false$" terminal 0 t))))))
 	  (close-file file))
 	(cond ((string= (file-name-nondirectory filename) ".directory")
 	       (let ((menus (gnome-menu-read-directory
