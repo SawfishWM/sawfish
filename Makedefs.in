@@ -20,9 +20,7 @@
 # the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 version=@version@
-version_major=@version_major@
-version_minor=@version_minor@
-rep_version=@rep_version@
+rep_version=@REP_VERSION@
 SHELL=/bin/sh
 
 prefix=@prefix@
@@ -41,7 +39,6 @@ sawmilldir=@sawmilldir@
 lispdir=@lispdir@
 sawmillexecdir=@sawmillexecdir@
 host_type=@host@
-windowsys=@windowsys@
 
 CC=@CC@
 CPPFLAGS=-DHAVE_CONFIG_H -DSAWMILL -I. -I.. @CPPFLAGS@
@@ -63,9 +60,6 @@ GNOME_CC_LIBS=@GNOME_CC_LIBS@
 INSTALL=@INSTALL@
 INSTALL_DATA=@INSTALL_DATA@
 INSTALL_PROGRAM=@INSTALL_PROGRAM@
-
-HAVE_X11=@HAVE_X11@
-HAVE_UNIX=@HAVE_UNIX@
 
 .PHONY: clean realclean install
 
