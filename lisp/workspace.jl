@@ -480,7 +480,7 @@ previous workspace."
     (call-window-hook 'window-state-change-hook w)))
 
 (defun display-window (w)
-  "Display the workspace containing the window."
+  "Display the workspace containing the window W, then focus on W."
   (interactive "f")
   (when w
     (if (and (window-get w 'iconified) uniconify-to-current-workspace)
@@ -493,7 +493,8 @@ previous workspace."
 	(when raise-selected-windows
 	  (raise-window w))
 	(when warp-to-selected-windows
-	  (warp-cursor-to-window w))))))
+	  (warp-cursor-to-window w))
+	(set-input-focus w)))))
 
 (defun toggle-window-sticky (w)
   "Toggle the `stickiness' of the window--whether or not it is a member of
