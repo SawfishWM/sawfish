@@ -208,13 +208,17 @@
 		     0))))
       (mapc (lambda (state)
 	      (case state
-		((window-list-skip)
-		 (setq hints (logior (logand
-				      hints (lognot WIN_HINTS_SKIP_WINLIST))
-				     (if (window-get w 'window-list-skip)
-					 WIN_HINTS_SKIP_WINLIST 0)
-				     (if (window-get w 'avoid)
-					 WIN_HINTS_DO_NOT_COVER 0))))))
+		((window-list-skip task-list-skip)
+		 (setq hints (logior
+			      (logand
+			       hints (lognot (logior WIN_HINTS_SKIP_WINLIST
+						     WIN_HINTS_SKIP_TASKLIST)))
+			      (if (window-get w 'window-list-skip)
+				  WIN_HINTS_SKIP_WINLIST 0)
+			      (if (window-get w 'task-list-skip)
+				  WIN_HINTS_SKIP_TASKLIST 0)
+			      (if (window-get w 'avoid)
+				  WIN_HINTS_DO_NOT_COVER 0))))))
 	    states)
       (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
 
@@ -264,6 +268,8 @@
 	  (window-put w 'cycle-skip t))
 	(unless (zerop (logand bits WIN_HINTS_SKIP_WINLIST))
 	  (window-put w 'window-list-skip t))
+	(unless (zerop (logand bits WIN_HINTS_SKIP_TASKLIST))
+	  (window-put w 'task-list-skip t))
 	(unless (zerop (logand bits WIN_HINTS_DO_NOT_COVER))
 	  (window-put w 'avoid t)))
       (when layer
@@ -314,6 +320,9 @@
 	     (unless (zerop (logand mask WIN_HINTS_SKIP_WINLIST))
 	       (window-put w 'window-list-skip
 			   (not (zerop (logand bits WIN_HINTS_SKIP_WINLIST)))))
+	     (unless (zerop (logand mask WIN_HINTS_SKIP_TASKLIST))
+	       (window-put w 'task-list-skip
+			   (not (zerop (logand bits WIN_HINTS_SKIP_TASKLIST)))))
 	     (unless (zerop (logand mask WIN_HINTS_DO_NOT_COVER))
 	       (window-put w 'avoid
 			   (not (zerop (logand bits WIN_HINTS_DO_NOT_COVER)))))))
@@ -420,7 +429,8 @@
     (add-hook 'add-window-hook gnome-set-client-state)
     (call-after-state-changed '(sticky shaded maximized ignored stacking)
 			      gnome-set-client-state)
-    (call-after-state-changed '(window-list-skip) gnome-set-client-hints)
+    (call-after-state-changed '(window-list-skip task-list-skip)
+			      gnome-set-client-hints)
 
     (add-hook 'client-message-hook gnome-client-message-handler)
     (add-hook 'property-notify-hook gnome-property-handler)
@@ -438,8 +448,4 @@
 
   (unless (or gnome-window-id batch-mode)
     (gnome-init)
-    (require 'sawfish.wm.gnome.match-window))
-
-  (add-window-menu-toggle (_ "In GNOME _task list")
-			  'gnome-toggle-skip-tasklist
-			  (lambda (w) (not (gnome-hint-set-p w WIN_HINTS_SKIP_TASKLIST)))))
+    (require 'sawfish.wm.gnome.match-window)))

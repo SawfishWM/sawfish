@@ -1,3 +1,18 @@
+2003-02-19  John Harper  <jsh@unfactored.org>
+
+	Added support for task-list-skip property. Adapted from a patch
+	sent to sawfish mailing list originally by Chris Boyle:
+
+	* sawfish/wm/state/wm-spec.jl: support SKIP_TASKBAR state
+
+	* sawfish/wm/state/ignored.jl (toggle-task-list-skip): new
+	function and command
+
+	* sawfish/wm/state/gnome.jl: support task-list-skip property
+	instead of ad hoc hint setting
+
+	* sawfish/wm/ext/match-window.jl: added task-list-skip property
+
 2003-02-06  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/commands/gnome.jl (gnome-logout): save-session got
