@@ -146,7 +146,13 @@
 				    (setq x-cycle-grab-win nil)
 				    (or (grab-keyboard)
 					(throw 'x-cycle-exit nil))))
-				unmap-notify-hook)))
+				unmap-notify-hook))
+       (enter-workspace-hook (cons (lambda (space)
+				     (when x-cycle-grab-win
+				       (setq x-cycle-grab-win nil)
+				       (or (grab-keyboard)
+					   (throw 'x-cycle-exit nil))))
+				   enter-workspace-hook)))
 
     (unless (and (eq 'key (car decoded)) (nth 1 decoded))
       (error "%s must be bound to a key event with modifiers." this-command))
