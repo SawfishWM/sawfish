@@ -255,10 +255,10 @@
   (define-command 'move-viewport-left move-viewport-left)
   (define-command 'move-viewport-up move-viewport-up)
   (define-command 'move-viewport-down move-viewport-down)
-  (define-command 'move-window-right move-window-right)
-  (define-command 'move-window-left move-window-left)
-  (define-command 'move-window-up move-window-up)
-  (define-command 'move-window-down move-window-down)
+  (define-command 'move-window-right move-window-right #:spec "%W")
+  (define-command 'move-window-left move-window-left #:spec "%W")
+  (define-command 'move-window-up move-window-up #:spec "%W")
+  (define-command 'move-window-down move-window-down #:spec "%W")
 
 
 ;;; session management, config
