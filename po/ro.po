@@ -3,7 +3,17 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 #
 # Tutu Valentin <GiantELF@home.ro>, ianuarie 2001.
+# Marius Andreiana <mandreiana@yahoo.com>, 2001.
 #
+#############################################################
+#linia "When passing the first or last workspace: \\w" si 
+#urmatoarea imi apar netraduse in sawfish!!!
+#
+#aceeasi problema:
+#msgstr "Pastreaza spatiile de lucru goale in pager."
+#
+#tot meniul "Stacking" imi apare netradus (click dreapta pe ferestra)
+#############################################################
 #
 #. ../lisp/sawfish/wm/util/groups.jl
 #. ../lisp/sawfish/wm/ext/audio-events.jl
@@ -13,59 +23,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish-0.34 \n"
 "POT-Creation-Date: 2000-03-16 03:24+0200\n"
-"PO-Revision-Date: 2001-01-23 10:24+0200\n"
+"PO-Revision-Date: 2001-02-23 10:24+0200\n"
 "Last-Translator: Marius Andreiana <mandreiana@yahoo.com>\n"
 "Language-Team: Românã <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#############################################################
-#############################################################
-#
-# INAINTE DE FIECARE LOC IN CARE NU AM TRADUS EXISTA CATE 
-# 3 LINII CU ##############
-#
-#
-#
-#
-# FIXME:  bevel, warping, am scris dezumbrire (era desumbrire?)
-# Frame type fallbacks:
-#
-# title bar = bara de titlu ?
-#
-#
-# Bar image for highlighted parts. == ? (imagine barei(?) pentru partile ... ?) 
-# Bar image for clicked parts.
-#
-#
-# "Proximity in pixels before snapping to a window edge."
-#
-#
-#"Sends the next key event directly to the focused client window, ignoring\n"
-#"any window manager bindings that it may have."
-#msgstr ""
-#"Trimite urmatorul eveniment de la tastatura catre fereastra client cu focus,\n"
-#"ignorand orice legaturi ale managerului de ferestre."
-# ??????????????????????????? suna prea ciudat
-#
-#
-#  pe la sfarsit au ramas ~4-5 linii de tradus din programul de facut teme
-#  pe care nu il am si nu imi dau seama exact ce trebuie scris
-#
-#linia "When passing the first or last workspace: \\w" si 
-#urmatoarea imi apar netraduse in sawfish!!!
-#
-#
-#aceeasi problema:
-#msgstr "Pastreaza spatiile de lucru goale in pager."
-#
-#
-#tot meniul "Stacking" imi apare netradus (click dreapta pe ferestra)
-#############################################################
-#############################################################
-
-
 
 #. ../scripts/sawfish-about.jl
 msgid "and many others..."
@@ -389,13 +352,9 @@ msgstr "Invocã sistemul de personalizare al utilizatorului."
 msgid "When does the mouse pointer affect the input focus."
 msgstr "Când pointerul mouse-ului afecteazã focusul pentru intrare."
 
-
-######################
-######################
-######################
 #. ../lisp/sawfish/wm/focus.jl
 msgid "Does click-to-focus mode pass the click through to the window."
-msgstr ""
+msgstr "Modul click-pentru-focus paseazã clickul la fereastrã"
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default frame style:"
@@ -405,16 +364,13 @@ msgstr "Stilul de cadru implicit:"
 msgid "Automatically reload themes when they are updated."
 msgstr "Reîncarcã temele automat când sunt modificate."
 
-##########################
-########################## Frame type fallbacks
-##########################
 #. ../lisp/sawfish/wm/frames.jl
 msgid ""
 "Frame type fallbacks:\n"
 "\n"
 "Associate frame types with type to try if the theme doesn't implement the "
 "requested type."
-msgstr "Frame type fallbacks:\n"
+msgstr "Tipuri de cadre de rezervã:\n"
 "\n"
 "Asociazã tipurile de cadre cu tipurile de încercat pentru cazul în care tema nu implementeazã tipul cerut."
 
@@ -449,10 +405,6 @@ msgstr "Marginea de sus"
 #. ../lisp/sawfish/wm/frames.jl
 msgid "None"
 msgstr "Nimic"
-######################################
-### era mai bine cu niciunul/niciuna dar
-### nu stiu genul :(
-######################################
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
@@ -467,69 +419,62 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the root window\n"
 "(or when no window is focused)."
 msgstr ""
-"Combinaþiile de taste sunt active când cursorul este deasupra ferestrei-radacinã\n"
+"Combinaþiile de taste sunt active când cursorul este deasupra ferestrei-rãdãcinã\n"
 "(sau când nici o fereastrã nu are focus)."
 
-###########################
-###########################
-###########################
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the title of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în titlul unei ferestre.\n"
+"(Doar setãrile mouse-ului sunt evaluate)"
 
-###########################
-###########################
-###########################
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the border of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în chenarul unei ferestre.\n"
+"(Doar setãrile mouse-ului sunt evaluate)"
 
-###########################
-###########################
-###########################
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the close button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în butonul de închidere\n"
+"al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
 
-###########################
-###########################
-###########################
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the iconify\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în butonul de iconificare\n"
+"al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
+"Combinaþiile de taste sunt active când cursorul este în unei ferestre.\n"
+"(Doar setãrile mouse-ului sunt evaluate)"
 
-###########################
-###########################
-###########################
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the maximize\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în butonul de maximizare\n"
+"al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
 
-###########################
-###########################
-###########################
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în butonul de meniu\n"
+"al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
 
-###########################
-###########################
-###########################
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Motion threshold for mouse pointer: \\wpixels"
-msgstr ""
+msgstr "Nivel miºcare pentru cursor mouse: \\wpixels"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default window manager shortcuts."
@@ -869,9 +814,6 @@ msgstr "Dialogurile apar în acelaºi spaþiu de lucru ca ºi aplicaþia lor."
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace names"
 msgstr "Numele spaþiilor de lucru"
-############################################
-#### are ":"  ? am incercat si cu si fara...
-############################################
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace"
@@ -1204,34 +1146,22 @@ msgstr "Aratã dimensiunea curentã a ferestrelor în timpul redimensionãrii."
 msgid "How to choose window edges when resizing: \\w"
 msgstr "Cum sã aleg marginile ferestrei când redimensionez: \\w"
 
-#######################
-#######################
-#######################
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Snap window position to edges of other windows while moving."
-msgstr ""
+msgstr "Potriveºte poziþia ferestrei la capetele celorlalte ferestre când este mutatã"
 
 
-##################
-##################
-##################
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Proximity in pixels before snapping to a window edge."
-msgstr ""
+msgstr "Proximitatea în pixeli înainte de a potrivi la un capãt de fereastrã."
 
-#################
-#################
-#################
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to snap together window edges: \\w"
-msgstr ""
+msgstr "Cum sã potrivesc împreunã capetele ferestrei: \\w"
 
-#################
-#################
-#################
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Snap to otherwise-ignored windows."
-msgstr ""
+msgstr "Potriveºte la ferestre care erau ignorate altfel."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Lock position and size while windows are maximized."
@@ -1261,41 +1191,37 @@ msgid ""
 msgstr ""
 "Aºteaptã utilizatorul sã selecteze o fereastrã, apoi redimensioneazã interactiv acea fereastrã."
 
-##############
-##############
-##############
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid ""
 "Raise the window that received the current event, then replay any pointer\n"
 "events that invoked the command."
 msgstr ""
+"Ridicã ferestra care a primit evenimentul curent, apoi re-executã orice evenimente\n"
+"ale cursorului care au invocat comanda."
 
-##############
-##############
-##############
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid ""
 "Raise the window that received the current event (if it's focused), then\n"
 "replay any pointer events that invoked the command."
 msgstr ""
+"Ridicã ferestra care a primit evenimentul curent (dacã are focus), apoi re-executã\n"
+"orice evenimente ale cursorului care au invocat comanda."
 
-##############
-##############
-##############
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid ""
 "Raise the group of windows that received the current event, then replay\n"
 "any pointer events that invoked the command."
 msgstr ""
+"Ridicã grupul de ferestre care a primit evenimentul curent (dacã are focus), apoi re-executã\n"
+"orice evenimente ale cursorului care au invocat comanda."
 
-##############
-##############
-##############
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid ""
 "Raise the window that received the current event and any transients it\n"
 "has, then replay any pointer events that invoked the command."
 msgstr ""
+"Ridicã ferestra care a primit evenimentul curent ºi orice ferestre tranziente pe care\n"
+"le are, apoi re-executã orice evenimente ale cursorului care au invocat comanda."
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid ""
@@ -1393,13 +1319,10 @@ msgstr "Cedeazã ferestrelor focusul când sunt selectate temporar în timpul ciclã
 msgid "Disable auto-raising while temporarily selecting windows."
 msgstr "Dezactiveazã auto-ridicarea cât timp selectez temporar ferestre."
 
-###############
-###############
-###############
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid ""
 "Keymap containing bindings active only during window cycling operations."
-msgstr ""
+msgstr "Maparea tastelor care conþine scurtãturile este activã doar când se cicleazã ferestrele."
 
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
@@ -1438,12 +1361,9 @@ msgstr "Ridicã ferestrele când au focus."
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr "Timpul în milisecunde pânã când ferestrele cu focus sunt ridicate."
 
-################
-################
-################
 #. ../lisp/sawfish/wm/ext/beos-window-menu.jl
 msgid "The hierarchical window menu raises singleton submenus."
-msgstr ""
+msgstr "Meniul ierarhic al ferestrei ridicã submeniurile diferite."
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Select the next desktop when the pointer hits screen edge."
@@ -1499,12 +1419,9 @@ msgid "State"
 msgstr "Stare"
 
 
-#############
-############# alta/altceva ?
-#############
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
-msgstr ""
+msgstr "Altele"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid ""
@@ -1976,12 +1893,9 @@ msgstr ""
 msgid "Window:"
 msgstr "Fereastra:"
 
-##################
-##################
-##################
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
-msgstr ""
+msgstr "Maparea tastelor conþinând scurtãturile activã când se citeºte un ºir de la utilizator."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 msgid "When raising a window, also raise its: \\w"
@@ -2016,12 +1930,9 @@ msgstr "Anuleazã"
 msgid "Class"
 msgstr "Clasa"
 
-##################
-##################
-##################
 #. ../themer/themer.glade:675 ../themer/themer.glade:829
 msgid "Clicked"
-msgstr ""
+msgstr "Click-at"
 
 #. ../themer/themer.glade:892
 msgid "Copy"
@@ -2051,12 +1962,9 @@ msgstr "Cu focus"
 msgid "Frame"
 msgstr "Cadru"
 
-###################
-###################
-###################
 #. ../themer/themer.glade:238
 msgid "Frame Part _Definitions"
-msgstr ""
+msgstr "_Definiþii parte cadru"
 
 
 #. ../themer/themer.glade:226
@@ -2067,41 +1975,33 @@ msgstr "_Clasele cadrelor"
 msgid "Frames"
 msgstr "Cadre"
 
-###################
-###################
-###################
 #. ../themer/themer.glade:622
 msgid "HIghlighted"
-msgstr ""
+msgstr "ILuminat"
 
-###################
-###################
-###################
 #. ../themer/themer.glade:802
 msgid "Highlighted"
-msgstr ""
+msgstr "Iluminat"
 
 #. ../themer/themer.glade:570 ../themer/themer.glade:776
 msgid "Inactive"
 msgstr "Inactiv"
 
-###################
-###################
-###################
 #. ../themer/themer.glade:702 ../themer/themer.glade:843
 msgid ""
 "Inactive-\n"
 "Clicked"
 msgstr ""
+"Inactiv-\n"
+"Click-at"
 
-###################
-###################
-###################
 #. ../themer/themer.glade:649 ../themer/themer.glade:816
 msgid ""
 "Inactive-\n"
 "Highlighted"
 msgstr ""
+"Inactiv-\n"
+"Iluminat"
 
 #. ../themer/themer.glade:1266
 msgid "Map: "
@@ -2164,19 +2064,13 @@ msgstr "Cadrele _ferestrelor"
 msgid "[about text]"
 msgstr "[textul despre autor]"
 
-######################
-######################
-######################
 #. ../themer/themer.glade:1106
 msgid "[frame-part-table]"
-msgstr ""
+msgstr "[frame-part-table]"
 
-######################
-######################
-######################
 #. ../themer/themer.glade:1766
 msgid "[place holder]"
-msgstr ""
+msgstr "[deþinãtor loc]"
 
 #. ../themer/themer.glade:1786 ../themer/themer.glade:1876
 msgid "[title]"
