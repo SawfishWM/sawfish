@@ -37,7 +37,6 @@
 
   ;; todo:
 
-  ;; - _NET_WM_NAME		-- needs to be in C code?
   ;; - _NET_WM_ICON
 
   ;; 1.1 additions:
@@ -582,7 +581,7 @@
 		    (vector wm-spec-window-id) 'WINDOW 32)
     (set-x-property wm-spec-window-id '_NET_SUPPORTING_WM_CHECK
 		    (vector wm-spec-window-id) 'WINDOW 32)
-    (set-x-property wm-spec-window-id '_NET_WM_NAME "Sawfish" 'STRING 8)
+    (set-x-property wm-spec-window-id '_NET_WM_NAME "Sawfish" 'UTF8_STRING 8)
 
     (set-x-property 'root '_NET_SUPPORTED supported-atoms 'ATOM 32)
 
