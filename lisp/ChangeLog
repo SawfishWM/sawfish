@@ -1,5 +1,13 @@
 1999-08-24  John Harper  <john@dcs.warwick.ac.uk>
 
+	* gnome.jl (gnome-init): use the new
+	`workspace-state-change-hook' instead of all the individual
+	hooks
+
+	* workspace.jl (move-workspace-forwards,
+	move-workspace-backwards): new commands, slide the current
+	workspace along the list of all workspaces
+
 	* customize.jl (customize): passing this function a group name
 	makes it customize that group only
 	* custom.jl (custom-menu): menu constructor including all
