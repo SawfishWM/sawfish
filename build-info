@@ -2,13 +2,23 @@
 # build-info -- Generate header file containing build details
 # $Id$
 
-sys_name="`hostname`.`domainname`"
-user_name="$LOGNAME"
 host_type="$1"
 version="$2"
 sawfishdir="$3"
 lispdir="$4"
 sawfishexecdir="$5"
+
+[ -n "$HOSTNAME" ] \
+    || HOSTNAME=`hostname` \
+    || HOSTNAME=unknown
+
+[ -n "$LOCALDOMAIN" ] \
+    || LOCALDOMAIN=`dnsdomainname` \
+    || LOCALDOMAIN=`domainname` \
+    || LOCALDOMAIN=unknown
+
+sys_name="$HOSTNAME.$LOCALDOMAIN"
+user_name="$LOGNAME"
 
 build_date="`date +'%a %b %e %Y'`"
 build_time="`date +'%T %Z'`"
