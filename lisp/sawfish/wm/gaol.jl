@@ -14,13 +14,12 @@
     set-image-border image-shape-color set-image-shape-color
     image-modifier set-image-modifier make-sized-image bevel-image
     clear-image tile-image make-keymap bind-keys unbind-keys keymapp
-    eventp window-get window-put window-name window-full-name
-    window-icon-name window-mapped-p window-frame set-window-frame
-    rebuild-frame window-position window-dimensions
-    window-frame-dimensions windowp managed-windows get-window-by-id
-    stacking-order window-visibility window-transient-p window-shaped-p
-    window-visible-p window-framed-p window-id window-group-id
-    window-size-hints call-window-hook
+    eventp window-get window-name window-full-name window-icon-name
+    window-mapped-p window-frame set-window-frame rebuild-frame
+    window-position window-dimensions window-frame-dimensions windowp
+    managed-windows get-window-by-id stacking-order window-visibility
+    window-transient-p window-shaped-p window-visible-p window-framed-p
+    window-id window-group-id window-size-hints call-window-hook
 
     add-frame-style check-frame-availability set-window-frame-style
     set-frame-for-window reframe-one-window reframe-all-windows
