@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.2\n"
-"POT-Creation-Date: 2002-06-01 12:40+0200\n"
-"PO-Revision-Date: 2002-06-01 12:46+0200\n"
+"POT-Creation-Date: 2002-11-02 23:33-0800\n"
+"PO-Revision-Date: 2002-11-19 08:53+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -79,6 +79,7 @@ msgstr "Egenskaper for bilde"
 
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
+#, c-format
 msgid "No matching item for %S"
 msgstr "Ingen lik oppføring for %S"
 
@@ -106,6 +107,7 @@ msgid "Added frame type `%s'"
 msgstr "Lagt til rammetype '%s'"
 
 #. ../themer/themer.in
+#, c-format
 msgid "error while building frame: %S"
 msgstr "feil under oppbygging av ramme: %S"
 
@@ -687,8 +689,8 @@ msgstr ""
 "skygge-knappen på et vindu. (Kun musbindinger evalueres i dette kartet.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr "Endringstast(er) brukt som standard snarveier for vindushåndterer."
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Endringstast(er) som brukes som standard snarveier."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -1216,7 +1218,7 @@ msgstr "Sett inn arbeidsområde før"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Create a new workspace before the current workspace."
-msgstr "Opprett et nytt arbeidsområd før aktivt arbeidsområde."
+msgstr "Opprett et nytt arbeidsområde før aktivt arbeidsområde."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace forwards"
@@ -1617,7 +1619,8 @@ msgstr ""
 "Øker vinduet oppover til det «dunker inn i» et annet vindu.\n"
 "Hvis den øverste kanten var utenfor skjermens kant hentes den inn igjen.\n"
 "Hvis et universelt prefiksargument oppgis, maksimeres det oppover i stedet.\n"
-"Med et numerisk prefiksargument økes det oppover med antall steg som oppgis for\n"
+"Med et numerisk prefiksargument økes det oppover med antall steg som oppgis "
+"for\n"
 "vinduer eller piksler i stedet."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1822,7 +1825,8 @@ msgid ""
 msgstr ""
 "Avstand i piksler før vinduets kanter justeres i forhold til hverandre.\n"
 "\n"
-"Når et vindu flyttes lar dette alternativet deg justere en av dets kanter med kanten på et annet vindu."
+"Når et vindu flyttes lar dette alternativet deg justere en av dets kanter "
+"med kanten på et annet vindu."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -2443,6 +2447,70 @@ msgstr "Glem all lagret vindushistorikk."
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
 msgstr "_Historikk"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace down"
+msgstr "Arbeidsområde ned"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Vis arbeidsområdet nedenfor aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace up"
+msgstr "Arbeidsområde opp"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Vis arbeidsområdet over aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace left"
+msgstr "Arbeidsområde til venstre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Vis arbeidsområdet til venstre for aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace right"
+msgstr "Arbeidsområde til høyre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Vis arbeidsområdet til høyre for aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace down"
+msgstr "Send til arbeidsområde nedenfor"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Send vindu til arbeidsområde nedenfor aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace up"
+msgstr "Send til arbeidsområde over"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Send vindu til arbeidsområde over aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace left"
+msgstr "Send til arbeidsområde til venstre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Send vindu til arbeidsområde til venstre for aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace right"
+msgstr "Send til arbeidsområde til høyre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Send vindu til arbeidsområde til høyre for aktivt arbeidsområde."
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
@@ -3120,349 +3188,3 @@ msgstr "Inn_stillinger"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Temaer"
-
-#~ msgid "_Left"
-#~ msgstr "_Venstre"
-
-#~ msgid "_Right"
-#~ msgstr "Høy_re"
-
-#~ msgid "_Up"
-#~ msgstr "_Opp"
-
-#~ msgid "_Down"
-#~ msgstr "Ne_d"
-
-#~ msgid "Revert"
-#~ msgstr "Forkast"
-
-#~ msgid "Minimizing"
-#~ msgstr "Minimering"
-
-#~ msgid "Maximizing"
-#~ msgstr "Maksimering"
-
-#~ msgid ""
-#~ "Frame type fallbacks:\n"
-#~ "\n"
-#~ "Associate frame types with type to try if the theme doesn't implement the "
-#~ "requested type."
-#~ msgstr ""
-#~ "Utgangsverdier for rammetype:\n"
-#~ "\n"
-#~ "Assosier rammetyper med type som skal prøves hvis tema ikke "
-#~ "implementerer\n"
-#~ "den forespurte typen."
-
-#~ msgid "Bevel intensity: \\wpercent."
-#~ msgstr "Intensitet for kant: \\wprosent."
-
-#~ msgid "Motion threshold for mouse pointer: \\wpixels"
-#~ msgstr "Bevegelsesterskel for muspeker: \\wpiksler"
-
-#~ msgid "Display key-binding information in menu items."
-#~ msgstr "Vis informasjon om tastaturbindinger i menyoppføringene."
-
-#~ msgid "Ignore program-specified window placements."
-#~ msgstr "Ignorer programspesifiserte vindusplasseringer."
-
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Vinduer avikonifiseres til aktivt visningsområde."
-
-#~ msgid "Move the window to the viewport above."
-#~ msgstr "Flytt vinduet til visningsområdet over."
-
-#~ msgid "Move the window to the viewport below."
-#~ msgstr "Flytt vinduet til visningsområdet under."
-
-#~ msgid "The default window animation mode: \\w"
-#~ msgstr "Forvalgt animeringsmodus for vinduer: \\w"
-
-#~ msgid ""
-#~ "Give focus to windows even when they haven't asked for it.\n"
-#~ "\n"
-#~ "Windows should set the `accepts input' hint in their WM_HINTS property to "
-#~ "show if they require the focus or not."
-#~ msgstr ""
-#~ "Gi fokus til vinduer selv om de ikke har bedt om det.\n"
-#~ "\n"
-#~ "Vinduer skal sette `aksepterer inndata' hintet i sine WM_HINTS for å vise "
-#~ "om de krever fokus eller ikke."
-
-#~ msgid ""
-#~ "Offset (%) from left window edge when warping pointer.\n"
-#~ "\n"
-#~ "A negative number means outside the left window edge."
-#~ msgstr ""
-#~ "Avstand (%) fra venstre vinduskant når pekeren flyttes.\n"
-#~ "\n"
-#~ "Et negativt tall betyr utenfor venstre vinduskant."
-
-#~ msgid ""
-#~ "Offset (%) from top window edge when warping pointer.\n"
-#~ "\n"
-#~ "A negative number means outside the top window edge."
-#~ msgstr ""
-#~ "Avstand (%) fra øverste vinduskant når peker flyttes.\n"
-#~ "\n"
-#~ "Et negativt tall betyr utenfor øverste vinduskant."
-
-#~ msgid ""
-#~ "Format to create unique window names.\n"
-#~ "\n"
-#~ "Has two arguments (NAME INDEX) applied to it."
-#~ msgstr ""
-#~ "Format for oppretting av unike vindusnavn.\n"
-#~ "\n"
-#~ "Har to argumenter (NAVN INDEKS) som blir brukt."
-
-#~ msgid "Virtual desktop configuration."
-#~ msgstr "Konfigurasjon av virtuelt skrivebord."
-
-#~ msgid "stop"
-#~ msgstr "stopp"
-
-#~ msgid "wrap-around"
-#~ msgstr "bryt rundt"
-
-#~ msgid "keep-going"
-#~ msgstr "hold gående"
-
-#~ msgid "When passing the first or last workspace: \\w"
-#~ msgstr "Ved passering av første eller siste arbeidsområde: \\w"
-
-#~ msgid "When passing the first or last workspace, while moving a window: \\w"
-#~ msgstr ""
-#~ "Ved passering av første eller siste arbeidsområde under flytting: \\w"
-
-#~ msgid "Workspaces are deleted when their last window closes."
-#~ msgstr "Arbeidsområder slettes når deres siste vindu lukkes."
-
-#~ msgid "Preserve empty workspaces in pager."
-#~ msgstr "Behold tomme arbeidsområder i velgeren."
-
-#~ msgid "Dialogs appear on the same workspace as their application."
-#~ msgstr "Dialoger vises på samme arbeidsområde som sine applikasjoner."
-
-#~ msgid "Whether growing an already grown window grows it again."
-#~ msgstr "Om øking av størrelsen for et vindu andre gang skal øke den igjen."
-
-#~ msgid "Grows window upwards until it `bumps into' another window."
-#~ msgstr ""
-#~ "Øker størrelsen på vinduet oppover til det 'treffer' et annet vindu."
-
-#~ msgid "Moves window upwards until it `bumps into' another window."
-#~ msgstr "Flytter vinduet oppover til det 'treffer' et annet vindu."
-
-#~ msgid "opaque"
-#~ msgstr "ugjennomsiktig"
-
-#~ msgid "box"
-#~ msgstr "boks"
-
-#~ msgid "How windows being moved are animated: \\w"
-#~ msgstr "Hvordan vinduene animeres under flytting: \\w"
-
-#~ msgid "How windows being resized are animated: \\w"
-#~ msgstr "Hvordan vinduer animeres ved endring av størrelse: \\w"
-
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Hev vinduer når de flyttes eller endrer størrelse."
-
-#~ msgid "region"
-#~ msgstr "region"
-
-#~ msgid "border"
-#~ msgstr "kant"
-
-#~ msgid "grab"
-#~ msgstr "hent"
-
-#~ msgid "border-grab"
-#~ msgstr "hent kant"
-
-#~ msgid "How to choose window edges when resizing: \\w"
-#~ msgstr "Hvordan vinduskanter velges ved endring av størrelse: \\w"
-
-#~ msgid "Snap window position to edges of other windows while moving."
-#~ msgstr "Fest vindusposisjonen til kanten av andre vinduer under flytting."
-
-#~ msgid "Proximity in pixels before snapping to a window edge."
-#~ msgstr "Nærhet i piksler før festing til en vinduskant."
-
-#~ msgid "magnetism"
-#~ msgstr "magnetisme"
-
-#~ msgid "resistance"
-#~ msgstr "motstand"
-
-#~ msgid "attraction"
-#~ msgstr "tiltrekning"
-
-#~ msgid "How to snap together window edges: \\w"
-#~ msgstr "Hvordan festes vinduskanter sammen: \\w"
-
-#~ msgid "Snap to otherwise-ignored windows."
-#~ msgstr "Fest til ellers ignorerte vinduer."
-
-#~ msgid "Only update window contents after it has stopped moving."
-#~ msgstr "Kun oppdater vindusinnhold etter at det har sluttet å bevege seg."
-
-#~ msgid ""
-#~ "Default increment for size-window commands (when the window doesn't\n"
-#~ "specify it's own increments)."
-#~ msgstr ""
-#~ "Standard stegvise verdi for kommandoer for å endre størrelse på vinduet "
-#~ "(når vinduet ikke spesifiserer sin egen verdi)."
-
-#~ msgid "Number of pixels to move window in `slide-' commands."
-#~ msgstr "Antall piksler vinduet skal flyttes i `slide-' kommandoer."
-
-#~ msgid "Display window names while cycling through windows."
-#~ msgstr "Vis vindusnavn under skifting av vinduer."
-
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Hev vinduer når de er midlertidig valgt under bytting."
-
-#~ msgid "Warp the mouse pointer to windows as they're temporarily selected."
-#~ msgstr "Flytt muspekeren til vinduer når de er midlertidig valgt."
-
-#~ msgid "Focus windows when they're temporarily selected during cycling."
-#~ msgstr "Fokuser vinduer når de er midlertidig valgt under bytting."
-
-#~ msgid "Disable auto-raising while temporarily selecting windows."
-#~ msgstr "Slå av auto-heving ved midlertidig valg av vinduer."
-
-#~ msgid "Play sound effects for unmanaged windows."
-#~ msgstr "Spill lydeffekter for ikke-håndterte vinduer."
-
-#~ msgid "The hierarchical window menu raises singleton submenus."
-#~ msgstr "Hierarkisk vindusmeny hever enkelte undermenyer."
-
-#~ msgid "Milliseconds to delay before flipping: \\w"
-#~ msgstr "Millisekunder ventetid før vending: \\w"
-
-#~ msgid "Warp pointer to opposite screen edge when flipping."
-#~ msgstr "Flytt peker til motsatt skjermkant ved vending."
-
-#~ msgid "Remove tooltips after a period of time."
-#~ msgstr "Fjern verktøystips etter en tid."
-
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Antall millisekunder før verktøytips vises."
-
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Antall millisekunder før verktøytips fjernes."
-
-#~ msgid "Font used to display tooltips."
-#~ msgstr "Skrifttype som brukes for verktøytips."
-
-#~ msgid "Color used for the tooltips background"
-#~ msgstr "Bakgrunnsfarge for verktøytips."
-
-#~ msgid "Color used for the tooltips foreground"
-#~ msgstr "Forgrunnsfarge for verktøytips."
-
-#~ msgid "Invoke the GNOME control center from the `Customize' menu."
-#~ msgstr "Start GNOME kontrollsenter fra `Tilpass'-menyen."
-
-#~ msgid ""
-#~ "Try to leave at least this many pixels between window edges in first/best-"
-#~ "fit."
-#~ msgstr ""
-#~ "Prøv å la det være minst så mange piksler mellom vinduskanter ved første/"
-#~ "beste tilpasning."
-
-#~ msgid "Automatically select window gravity from position on screen."
-#~ msgstr "Velg vindustyngde automatisk fra posisjon på skjermen."
-
-#~ msgid "Ignore requests from applications to change window stacking."
-#~ msgstr "Ignorer forespørsler fra applikasjoner om å endre vidusstabling."
-
-#~ msgid "Windows are focused after being uniconified."
-#~ msgstr "Vinduer fokuseres etter avikonifisering."
-
-#~ msgid "Windows are raised after being uniconified."
-#~ msgstr "Vinduer er hevet etter å avikonifiseres."
-
-#~ msgid "Unmanaged windows may be iconified."
-#~ msgstr "Ikke-håndterte vinduer kan minimeres."
-
-#~ msgid "Windows uniconify to the current workspace."
-#~ msgstr "Vinduer avikonifiseres til aktivt arbeidsområde."
-
-#~ msgid "Iconifying a window also iconifies the: \\w"
-#~ msgstr "Minimering av et vindu minimerer også: \\w"
-
-#~ msgid "Uniconifying a window also uniconifies the: \\w"
-#~ msgstr "Avikonifisering av et vindu avikonifiserer også: \\w"
-
-#~ msgid "Iconify the window."
-#~ msgstr "Minimer vinduet."
-
-#~ msgid "Toggle single window mode"
-#~ msgstr "Aktiver enkeltvindumodus"
-
-#~ msgid ""
-#~ "Maximizing a window in one dimension must increase the size of that "
-#~ "dimension."
-#~ msgstr ""
-#~ "Maksimering av et vindu i én dimensjon må øke størrelsen av den "
-#~ "dimensjonen."
-
-#~ msgid "Raise windows when they are maximized."
-#~ msgstr "Hev vinduer når de maksimeres."
-
-#~ msgid "Let unmanaged windows be overlapped when filling windows."
-#~ msgstr "La ikke-håndterte vinduer overlappe ved fylling av vinduer."
-
-#~ msgid "Don't cover `avoided' windows when maximizing."
-#~ msgstr "Ikke overskygg `ungåtte' vinduer under maksimering."
-
-#~ msgid "Dialog windows inherit the focus from their parent."
-#~ msgstr "Dialogvinduer arver fokus fra sitt opphav."
-
-#~ msgid "Decorate dialog windows similarly to application windows."
-#~ msgstr "Dekorer dialogvinduer likt som applikasjonsvinduer."
-
-#~ msgid "Windows uniconify to the current workspace when they are selected."
-#~ msgstr "Vinduer avikonifiseres til aktivt arbeidsområde når de velges."
-
-#~ msgid "Raise selected windows (normally by the Windows menu)."
-#~ msgstr "Hev valgte vinduer (normalt gjennom vindusmenyen)."
-
-#~ msgid "Warp the pointer to selected windows."
-#~ msgstr "Flytt pekeren til valgt vindu."
-
-#~ msgid "Group transient windows with their parents."
-#~ msgstr "Grupper transiente vinduer med sine opphav."
-
-#~ msgid "Persistent group ids"
-#~ msgstr "Varige gruppe-id'er"
-
-#~ msgid "novice"
-#~ msgstr "nybegynner"
-
-#~ msgid "intermediate"
-#~ msgstr "viderekommen"
-
-#~ msgid "expert"
-#~ msgstr "ekspert"
-
-#~ msgid "Show options suitable for \\w users."
-#~ msgstr "Vis alternativer som passer for \\w brukere."
-
-#~ msgid "ok"
-#~ msgstr "ok"
-
-#~ msgid "revert/cancel/ok"
-#~ msgstr "forkast/avbryt/ok"
-
-#~ msgid "apply/revert/cancel/ok"
-#~ msgstr "bruk/forkast/avbryt/ok"
-
-#~ msgid "Buttons shown in configurator: \\w"
-#~ msgstr "Knapper som vises i konfigurator: \\w"
-
-#~ msgid "Show variable names of each customization option."
-#~ msgstr "Vis variable navn for hvert egendefineringsvalg."
