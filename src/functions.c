@@ -20,6 +20,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
+#include <X11/Xproto.h>
 #include <alloca.h>
 
 /* Number of outstanding server grabs made; only when this is zero is
@@ -416,9 +417,8 @@ get-x-property WINDOW PROPERTY
     /* Then convert the contents to a vector or string */
     switch (format)
     {
-	/* XXX assumes 32 bit ints, 16 bit shorts.. */
-	u_short *s_data;
-	u_long *l_data;
+	CARD16 *s_data;
+	CARD32 *l_data;
 	int i;
 
     case 8:
@@ -427,14 +427,14 @@ get-x-property WINDOW PROPERTY
 
     case 16:
 	ret_data = Fmake_vector (rep_MAKE_INT(nitems), Qnil);
-	s_data = (u_short *)data;
+	s_data = (CARD16 *)data;
 	for (i = 0; i < nitems; i++)
 	    rep_VECTI(ret_data, i) = rep_MAKE_INT(s_data[i]);
 	break;
 
     case 32:
 	ret_data = Fmake_vector (rep_MAKE_INT(nitems), Qnil);
-	l_data = (u_long *)data;
+	l_data = (CARD32 *)data;
 	for (i = 0; i < nitems; i++)
 	{
 	    repv name;
@@ -481,8 +481,8 @@ set-x-property WINDOW PROPERTY DATA TYPE FORMAT
     switch (rep_INT(format))
     {
 	int i;
-	u_short *s_data;
-	u_long *l_data;
+	CARD16 *s_data;
+	CARD32 *l_data;
 
     case 8:
 	if (rep_STRINGP(data))
@@ -499,7 +499,7 @@ set-x-property WINDOW PROPERTY DATA TYPE FORMAT
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
 	c_data = alloca (nitems * 2);
-	s_data = (u_short *)c_data;
+	s_data = (CARD16 *)c_data;
 	for (i = 0; i < nitems; i++)
 	    s_data[i] = rep_INT(rep_VECTI(data, i));
 	break;
@@ -508,7 +508,7 @@ set-x-property WINDOW PROPERTY DATA TYPE FORMAT
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
 	c_data = alloca (nitems * 4);
-	l_data = (u_long *)c_data;
+	l_data = (CARD32 *)c_data;
 	for (i = 0; i < nitems; i++)
 	{
 	    if (a_type == XA_ATOM && rep_SYMBOLP(rep_VECTI(data, i)))
