@@ -160,6 +160,12 @@
 (defvar workspace-swap-in-hook nil)
 (defvar workspace-swap-out-hook nil)
 
+(defvar enter-workspace-hook nil)
+(defvar leave-workspace-hook nil)
+(defvar workspace-state-change-hook nil)
+(defvar add-to-workspace-hook nil)
+(defvar remove-from-workspace-hook nil)
+
 
 ;; Workspace ``swapping''
 
