@@ -48,7 +48,9 @@
 
 (defun gnome-menu-read-desktop-entry (filename)
   (let
-      ((file (open-file filename 'read))
+      ((file (condition-case nil
+		 (open-file filename 'read)
+	       (file-error nil)))
        (section nil)
        name exec terminal type
        line)
@@ -86,7 +88,9 @@
 
 (defun gnome-menu-read-order (filename)
   (let
-      ((file (open-file filename 'read)))
+      ((file (condition-case nil
+		 (open-file filename 'read)
+	       (file-error nil))))
     (when file
       (unwind-protect
 	  (let
