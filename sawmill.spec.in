@@ -14,6 +14,7 @@ Source: ftp://ftp.dcs.warwick.ac.uk/people/John.Harper/sawmill/sawmill-%{ver}.ta
 URL: http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
 Packager: John Harper <john@dcs.warwick.ac.uk>
 Buildroot: /var/tmp/%{nam}-root
+BuildPrereq: rep-gtk-libglade control-center-devel gmp-devel
 PreReq: /sbin/install-info
 
 %description
