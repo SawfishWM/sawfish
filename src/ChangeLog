@@ -1,5 +1,12 @@
 2000-01-27  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c, images.c, fonts.c (Fwindow_put, Fwindow_get,
+	Fimage_put, Fimage_get, Ffont_put, Ffont_get): use equal test
+	on property names, not eq
+
+	* sawmill-ui.jl (build-tree): put the root tree in a scrolled
+	window
+
 	* sawmill-ui.jl: new widget `tree'
 
 2000-01-26  John Harper  <john@dcs.warwick.ac.uk>

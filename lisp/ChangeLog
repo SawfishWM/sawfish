@@ -1,5 +1,22 @@
 2000-01-27  John Harper  <john@dcs.warwick.ac.uk>
 
+	* smart-placement.jl (sp-normal-windows-weight): new variable
+
+	* custom.jl (custom-declare-group): don't set custom-group-doc
+	of group, it's not used anywhere and is redundant
+
+	* functions.jl (warp-to-window-x-offset,
+	warp-to-window-y-offset): customization options for
+	warp-cursor-to-window (patch from Kai Groﬂjohann
+	<Kai.Grossjohann@CS.Uni-Dortmund.DE>)
+
+	* viewport.jl (window-absolute-position): if the window is in
+	the current viewport, return the _actual_ position, in case its
+	top or left edges are off the screen
+
+	* workspace.jl (ws-move-workspace): fixed this function
+	(realized that there are four cases to the id transforms)
+
 	* gnome-int.jl: don't use the gnome cc to invoke the
 	configurator for now, they're are some issues to be resolved
 
