@@ -22,6 +22,10 @@
 (define-structure sawfish.wm.util.compat
 
     (export show-message
+	    ws-copy-window
+	    ws-move-window
+	    ws-insert-workspace
+	    ws-remove-workspace
 	    sawmill-directory
 	    sawmill-lisp-lib-directory
 	    sawmill-site-lisp-directory
@@ -51,6 +55,11 @@
 	(setq attrs (cons (cons 'position position) attrs)))
       (display-message text attrs)))
 
+  (define ws-copy-window copy-window-to-workspace)
+  (define ws-move-window move-window-to-workspace)
+  (define ws-insert-workspace insert-workspace)
+  (define ws-remove-workspace remove-workspace)
+
 ;;; obsolete variables
 
   (define sawmill-directory sawfish-directory)
@@ -77,6 +86,9 @@
   (do ((i 0 (1+ i)))
       ((= i 9))
     (define-commands i))
+
+  (define-command 'insert-workspace (command-ref 'insert-workspace-after))
+  (put 'insert-workspace 'deprecated-command t)
 
 ;;; obsolete options
 
