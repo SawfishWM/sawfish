@@ -610,8 +610,8 @@ void
 x_draw_string (Window id, repv font, GC gc, Lisp_Color *fg_color,
 	       int x, int y, u_char *string, size_t len)
 {
-    return (*VFONT (font)->class->draw) (VFONT (font), string, len,
-					 id, gc, fg_color, x, y);
+    (*VFONT (font)->class->draw) (VFONT (font), string, len,
+				  id, gc, fg_color, x, y);
 }
 
 DEFUN("text-width", Ftext_width, Stext_width, (repv string, repv font), rep_Subr2) /*
