@@ -1,3 +1,18 @@
+1999-12-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (window-in-workspace-p,
+	windows-share-workspace-p): new functions, first attempt at
+	abstracting workspace interface; only gnome.jl groks the
+	`workspace' property now (though others use it as a black box)
+
+	* x-cycle.jl, window-order.jl, stacking.jl, smart-placement.jl:
+	use window-in-workspace-p and windows-share-workspace-p
+
+	* select-window.jl, move-resize.jl: the foo-cursor-shape
+	variables may now contain actual cursor objects
+
+	* custom.jl (custom-menu): gettextized a string
+
 1999-12-09  John Harper  <john@dcs.warwick.ac.uk>
 
 	* gnome-menu.jl (gnome-menu-read-directory): sort entries whose

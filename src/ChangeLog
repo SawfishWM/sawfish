@@ -1,3 +1,15 @@
+1999-12-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* cursors.c (Fget_cursor): can now create cursors from two
+	normal X bitmaps (image and mask) and two colours. Call with an
+	argument [IMAGE-NAME MASK-NAME FG BG]
+	(Frecolor_cursor): new function
+
+	* images.c (make_bitmap): new function (scans image-load-path)
+
+	* functions.c (Fgrab_pointer): if the CURSOR argument is
+	non-nil, but not a cursor, call Fget_cursor () on it
+
 1999-12-09  John Harper  <john@dcs.warwick.ac.uk>
 
 	* gradient.c (Fdraw_diagonal_gradient): the gradient now scales
