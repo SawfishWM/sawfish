@@ -869,8 +869,6 @@ As noted above (@pxref{Window Attributes}), the
 @code{window-dimensions} and @code{window-position} functions return
 the current configuration of a window.
 
-Two analogous functions exist for modifying this configuration:
-
 @defun move-window-to window x y
 Move the top-left corner of the window frame of @var{window} to
 (@var{x}, @var{y}).
@@ -879,6 +877,14 @@ Move the top-left corner of the window frame of @var{window} to
 @defun resize-window-to window width height
 Set the dimensions of the client window associated with object
 @var{window} to (@var{width}, @var{height}).
+@end defun
+
+@defun resize-window-with-hints window cols rows &optional hints
+Resize the window associated with object @var{window} so that it has
+@var{cols} columns and @var{rows} rows. The @var{hints} parameters is
+either the size hints alist to use, or @code{nil} in which case the
+@code{window-size-hints} function is used to retrieve the window's
+hints.
 @end defun
 
 Usually, however, it is left to the user to configure windows. The
@@ -2343,6 +2349,11 @@ further events it must call @code{allow-events}. See the interactive
 move and resize functions for an example.
 @end defun
 
+@defun forget-button-press
+Cause the next button press to be treated as a single click event, no
+matter how soon it occurs after the prevous button-press event.
+@end defun
+
 @defun accept-x-input &optional mask
 Handle any X events received. If @var{mask} is non-nil then only events
 matching this numeric value are handled (see the X header files for
@@ -2771,6 +2782,9 @@ window is passed through to the client window.
 @item ignore-window-input-hint
 When set the value of the window's input hint is ignored, i.e. the
 focus @emph{will} be given to the window when appropriate
+
+@item never-focus
+When set the window will @emph{never} be given the input focus
 
 @item ignore-program-position
 When set the window's program-position property is ignored, use this

@@ -1,5 +1,26 @@
 1999-12-08  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill.jl: recognize -clientId as a synonym for
+	--sm-client-id; always look for --disable-nls option
+
+	* menus.jl (window-ops-toggle-menu): into a separate variable
+
+	* match-window.jl: added `never-focus'; added `size' pseudo
+	property; negative `position' components count in from the
+	right/bottom
+
+	* gnome.jl (gnome-honour-client-state): recognize panel and gmc
+	icons by WM_CLASS. Set `never-focus' property of icons
+
+	* gnome-commands.jl (gnome-logout): new command
+
+	* functions.jl (window-really-wants-input-p): look for a
+	property `never-focus'
+	(resize-window-with-hints): resize window by increments
+
+	* focus.jl: add `never-focus' to the properties saved with the
+	session
+
 	* stacking.jl (raise-window-and-pass-through-click): call
 	forget-button-press so that double-clicks pass through okay
 
