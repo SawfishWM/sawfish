@@ -22,7 +22,21 @@
 (require 'timers)
 (provide 'shade-hover)
 
-(defvar shade-hover-delay 250)
+(defgroup shade-hover "Shade Hover"
+  :group focus)
+
+(defcustom shade-hover-mode nil
+  "Enable shade-hover mode. (Temporarily unshade windows
+while pointer is over them.)"
+  :group (focus shade-hover)
+  :type boolean
+  :require shade-hover)
+
+(defcustom shade-hover-delay 250
+  "Delay in microseconds before unshading windows."
+  :group (focus shade-hover)
+  :type number
+  :range (1 . 5000))
 
 (defvar shade-hover-timer nil)
 
@@ -35,7 +49,7 @@
       (window-put w 'shade-hover-unshaded nil)
       (shade-window w))
     (when (in-hook-p 'pre-command-hook shade-hover-before)
-    (remove-hook 'pre-command-hook shade-hover-before))))
+      (remove-hook 'pre-command-hook shade-hover-before))))
 
 (defun shade-hover-before ()
   (let
@@ -45,7 +59,7 @@
       (shade-hover-leave w))))
 
 (defun shade-hover-enter (w)
-  (unless (eq w 'root)
+  (when (and shade-hover-mode (not (eq w 'root)))
     (when (window-get w 'shaded)
       (let
 	  ((callback
@@ -54,9 +68,11 @@
 	      (unshade-window w))))
 	(when shade-hover-timer
 	  (delete-timer shade-hover-timer))
-	(setq shade-hover-timer (make-timer callback
-					    (/ shade-hover-delay 1000)
-					    (mod shade-hover-delay 1000)))
+	(if (zerop shade-hover-delay)
+	    (callback)
+	  (setq shade-hover-timer (make-timer callback
+					      (/ shade-hover-delay 1000)
+					      (mod shade-hover-delay 1000))))
 	(unless (in-hook-p 'pre-command-hook shade-hover-before)
 	  (add-hook 'pre-command-hook shade-hover-before))))))
 
