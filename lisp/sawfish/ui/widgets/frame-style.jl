@@ -27,6 +27,7 @@
 	  gui.gtk
 	  rep.regexp
 	  rep.io.files
+	  rep.io.timers
 	  sawfish.gtk.widget
 	  sawfish.ui.i18n)
 
@@ -38,7 +39,14 @@
 	  (doc-label (gtk-label-new doc))
 	  (readme-text (gtk-text-new))
 	  (readme-scroller (gtk-scrolled-window-new))
-	  (value (car options)))
+	  (value (car options))
+	  (timer nil))
+
+      (define (timer-callback)
+	(setq timer nil)
+	(setq value (intern (gtk-entry-get-text (gtk-combo-entry combo))))
+	(update-readme value readme-text path)
+	(call-callback changed-callback))
 
       (gtk-box-set-spacing hbox box-spacing)
       (gtk-box-set-spacing vbox box-spacing)
@@ -59,10 +67,10 @@
 
       (gtk-signal-connect (gtk-combo-entry combo) "changed"
 			  (lambda ()
-			    (setq value (intern (gtk-entry-get-text
-						 (gtk-combo-entry combo))))
-			    (update-readme value readme-text path)
-			    (call-callback changed-callback)))
+			    (if timer
+				(set-timer timer)
+			      (setq timer (make-timer
+					   timer-callback nil 200)))))
 
       (update-readme value readme-text path)
       (gtk-widget-show-all vbox)
