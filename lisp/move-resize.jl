@@ -63,8 +63,8 @@
   :range (0 . 64))
 
 (defvar move-resize-map (bind-keys (make-keymap)
-			  "Any-PointerUp" 'move-resize-finished
-			  "Any-PointerMove" 'move-resize-motion))
+			  "Any-Off" 'move-resize-finished
+			  "Any-Move" 'move-resize-motion))
 
 ;; specials
 (defvar move-resize-window nil)
