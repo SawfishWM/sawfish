@@ -63,6 +63,8 @@
   (defconst _NET_WM_MOVERESIZE_SIZE_BOTTOMLEFT 6)
   (defconst _NET_WM_MOVERESIZE_SIZE_LEFT 7)
   (defconst _NET_WM_MOVERESIZE_MOVE 8)
+  (defconst _NET_WM_MOVERESIZE_SIZE_KEYBOARD 9)
+  (defconst _NET_WM_MOVERESIZE_MOVE_KEYBOARD 10)
 
   (defconst _NET_WM_STATE_REMOVE 0)
   (defconst _NET_WM_STATE_ADD 1)
@@ -95,6 +97,8 @@
      _NET_WM_MOVERESIZE_SIZE_TOP
      _NET_WM_MOVERESIZE_SIZE_TOPLEFT
      _NET_WM_MOVERESIZE_SIZE_TOPRIGHT
+     _NET_WM_MOVERESIZE_SIZE_KEYBOARD
+     _NET_WM_MOVERESIZE_MOVE_KEYBOARD
      _NET_WM_PING
      _NET_WM_STATE
      _NET_WM_STATE_ABOVE
@@ -467,7 +471,8 @@
 	   (let ((mode (aref data 2)))
 	     ;; don't want grabs failing, sigh
 	     (x-server-timestamp t t)
-	     (if (eq mode _NET_WM_MOVERESIZE_MOVE)
+	     (if (or (eq mode _NET_WM_MOVERESIZE_MOVE)
+		     (eq mode _NET_WM_MOVERESIZE_MOVE_KEYBOARD))
 		 (move-window-interactively w)
 	       (let ((move-resize-moving-edges
 		      (cond ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPLEFT) '(top left))
