@@ -124,7 +124,12 @@
     "Launch the GNOME help browser."
     (system "gnome-help-browser >/dev/null 2>&1 </dev/null &"))
 
+  (define (gnome-about)
+    "Launch the GNOME about dialog."
+    (system "gnome-about >/dev/null 2>&1 </dev/null &"))
+
   ;;###autoload
   (define-command 'gnome-logout gnome-logout)
   (define-command 'gnome-www-page gnome-www-page)
-  (define-command 'gnome-help-browser gnome-help-browser))
+  (define-command 'gnome-help-browser gnome-help-browser)
+  (define-command 'gnome-about gnome-about))
