@@ -38,9 +38,6 @@
 (autoload 'substitute-keymap-event "keymap")
 (autoload 'where-is "keymap")
 (autoload 'read-event "keymap")
-(when (boundp 'autoload-macro)
-  ;; XXX rep 0.11+
-  (autoload-macro 'lazy-bind-keys "keymap"))
 (autoload 'quote-event "keymap" t)
 (autoload 'next-workspace-window "cycle" t)
 (autoload 'previous-workspace-window "cycle" t)
@@ -174,4 +171,8 @@
 (autoload 'prompt-for-string "prompt-extras")
 (autoload 'prompt-for-number "prompt-extras")
 (autoload 'pwd-prompt "prompt-extras")
+(when (boundp 'autoload-macro)
+  ;; XXX rep 0.11+
+  (autoload-macro 'lazy-bind-keys "keymap")
+  (autoload-macro 'with-output-to-screen "with-output"))
 ;;; ::autoload-end::
