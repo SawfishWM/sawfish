@@ -57,7 +57,8 @@
 				  (- (+ (cdr pos) viewport-y-offset) y)))))
 	  (managed-windows))
     (setq viewport-x-offset x)
-    (setq viewport-y-offset y)))
+    (setq viewport-y-offset y)
+    (call-hook 'viewport-moved-hook)))
 
 (add-hook 'before-exit-hook
 	  #'(lambda ()
@@ -75,8 +76,7 @@
   (when (and (>= col 0) (< col viewport-columns)
 	     (>= row 0) (< row viewport-rows))
     (set-viewport (* col (screen-width))
-		  (* row (screen-height)))
-    (call-hook 'viewport-moved-hook (list col row))))
+		  (* row (screen-height)))))
   
 (defun move-viewport (right down)
   (let
