@@ -95,6 +95,9 @@
 ;; called to initiate a move or resize on window W. FUNCTION is either
 ;; `move' or `resize'
 (defun move-resize-window (w function)
+  (if (eq function 'move)
+      (call-window-hook 'before-move-hook w)
+    (call-window-hook 'before-resize-hook w))
   (when move-resize-raise-window
     (raise-window w))
   (let*
@@ -174,12 +177,16 @@
 	      (ungrab-pointer))))
       (when server-grabbed
 	(ungrab-server))
-      (show-message nil))))
+      (show-message nil))
+    (if (eq function 'move)
+	(call-window-hook 'after-move-hook w)
+      (call-window-hook
+       'after-resize-hook w (list move-resize-moving-edges)))))
 
 ;; round up a window dimension X in increments of INC, with minimum
 ;; value BASE
-(defsubst move-resize-roundup (x inc base)
-  (+ base (max 0 (* (1+ (/ (1- (- x base)) inc)) inc))))
+(defsubst move-resize-roundup (x inc base &optional max)
+  (min (+ base (max 0 (* (1+ (/ (1- (- x base)) inc)) inc))) (or max 65535)))
 
 ;; called each pointer motion event during move/resize
 (defun move-resize-motion ()
@@ -203,18 +210,20 @@
 		(x-inc (or (cdr (assq 'width-inc move-resize-hints)) 1))
 		(y-base (or (cdr (or (assq 'base-height move-resize-hints)
 				     (assq 'min-height move-resize-hints))) 1))
-		(y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1)))
+		(y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1))
+		(x-max (cdr (assq 'max-width move-resize-hints)))
+		(y-max (cdr (assq 'max-height move-resize-hints))))
 	     (cond
 	      ((memq 'right move-resize-moving-edges)
 	       (setq move-resize-width
 		     (move-resize-roundup
 		      (+ move-resize-old-width
-			 (- ptr-x move-resize-old-ptr-x)) x-inc x-base)))
+			 (- ptr-x move-resize-old-ptr-x)) x-inc x-base x-max)))
 	      ((memq 'left move-resize-moving-edges)
 	       (setq move-resize-width
 		     (move-resize-roundup
 		      (+ move-resize-old-width
-			 (- move-resize-old-ptr-x ptr-x)) x-inc x-base))
+			 (- move-resize-old-ptr-x ptr-x)) x-inc x-base x-max))
 	       (setq move-resize-x (- move-resize-old-x
 				      (- move-resize-width
 					 move-resize-old-width)))))
@@ -223,12 +232,12 @@
 	       (setq move-resize-height
 		     (move-resize-roundup
 		      (+ move-resize-old-height
-			 (- ptr-y move-resize-old-ptr-y)) y-inc y-base)))
+			 (- ptr-y move-resize-old-ptr-y)) y-inc y-base y-max)))
 	    ((memq 'top move-resize-moving-edges)
 	     (setq move-resize-height
 		   (move-resize-roundup
 		    (+ move-resize-old-height
-		       (- move-resize-old-ptr-y ptr-y)) y-inc y-base))
+		       (- move-resize-old-ptr-y ptr-y)) y-inc y-base y-max))
 	     (setq move-resize-y (- move-resize-old-y
 				    (- move-resize-height
 				       move-resize-old-height)))))
