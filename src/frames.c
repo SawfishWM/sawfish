@@ -78,6 +78,7 @@ DEFSYM(removable, "removable");
 DEFSYM(removed_classes, "removed-classes");
 DEFSYM(frame_part_classes, "frame-part-classes");
 DEFSYM(override_frame_part_classes, "override-frame-part-classes");
+DEFSYM(below_client, "below-client");
 
 static repv state_syms[fps_MAX];
 
@@ -117,6 +118,8 @@ bool frame_state_mutex;
 
 	keymap . KEYMAP
 	cursor . CURSOR-OR-CURSOR-DEF
+
+	below-client . t
 
    Note that all numeric quantities may be defined dynamically by
    substituting a function */
@@ -806,6 +809,9 @@ list_frame_generator (Lisp_Window *w)
 	    }
 	}
 
+	tem = fp_assq (Qbelow_client, elt, class_elt, ov_class_elt);
+	fp->below_client = (tem && tem != Qnil);
+
 	/* get text label */
 	tem = fp_assq (Qtext, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
@@ -1151,6 +1157,12 @@ list_frame_generator (Lisp_Window *w)
 	}
     }
 
+    /* Client window is always left _underneath_ any overlapping frame
+       parts; this may not always be ideal, but we have to choose 
+       either over or under, and this will probably be more useful.. */
+    if (w->reparented)
+	XLowerWindow (dpy, w->id);
+
     /* create/update windows for each part */
     for (fp = w->frame_parts; fp != 0; fp = fp->next)
     {
@@ -1165,7 +1177,14 @@ list_frame_generator (Lisp_Window *w)
 					0, screen_depth, InputOutput,
 					screen_visual, wamask, &wa);
 		XSelectInput (dpy, fp->id, FP_EVENTS);
-		XMapRaised (dpy, fp->id);
+
+		if (!fp->below_client)
+		    XMapRaised (dpy, fp->id);
+		else
+		{
+		    XMapWindow (dpy, fp->id);
+		    XLowerWindow (dpy, fp->id);
+		}
 
 		/* stash the fp in the window */
 		XSaveContext (dpy, fp->id, window_fp_context, (XPointer)fp);
@@ -1183,7 +1202,7 @@ list_frame_generator (Lisp_Window *w)
 		attr.y = fp->y - w->frame_y;
 		attr.width = fp->width;
 		attr.height = fp->height;
-		attr.stack_mode = Above;
+		attr.stack_mode = fp->below_client ? Below : Above;
 		XConfigureWindow (dpy, fp->id, CWX | CWY | CWWidth
 				  | CWHeight | CWStackMode, &attr);
 	    }
@@ -1219,12 +1238,6 @@ list_frame_generator (Lisp_Window *w)
 	    w->client_unmapped = unmap_client;
 	}
     }
-
-    /* Client window is always left _underneath_ any overlapping frame
-       parts; this may not always be ideal, but we have to choose 
-       either over or under, and this will probably be more useful.. */
-    if (w->reparented)
-	XLowerWindow (dpy, w->id);
 
     rep_POPGC;
 }
@@ -1417,6 +1430,7 @@ frames_init (void)
     rep_INTERN(class);
     rep_INTERN(removable);
     rep_INTERN(removed_classes);
+    rep_INTERN(below_client);
 
     rep_INTERN(frame_part_classes);
     rep_INTERN(override_frame_part_classes);
