@@ -22,6 +22,14 @@ Broken during modularization
 Outstanding bugs
 ================
 
+  ! workspace names don't change as workspaces are added/deleted
+
+    solution: use an alist mapping workspace ids to workspace names,
+    transform-window-workspaces also transforms the alist..?
+
+  ! in xdvi with emulate3buttons, press and hold right, then press
+    left, the wm root menu appears?!
+
   ! `:type (or ...)' doesn't get serialized
 
   ! Everytime my system's hardware clock get's resetted (this happens
