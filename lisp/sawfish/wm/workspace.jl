@@ -67,6 +67,11 @@
 	    workspace-limits
 	    workspace-id-to-logical
 	    workspace-id-from-logical
+	    move-window-to-workspace
+	    copy-window-to-workspace
+	    insert-workspace
+	    remove-workspace
+	    move-workspace
 	    select-workspace
 	    workspace-windows
 	    workspace-menu
@@ -80,8 +85,8 @@
 	    copy-to-previous-workspace
 	    merge-next-workspace
 	    merge-previous-workspace
-	    insert-workspace
 	    insert-workspace-before
+	    insert-workspace-after
 	    move-workspace-forwards
 	    move-workspace-backwards
 	    select-workspace-from-first
@@ -92,12 +97,8 @@
 	    workspace-local-properties
 
 	    ;; XXX rename these..?
-	    ws-insert-workspace
-	    ws-remove-workspace
 	    ws-remove-window
 	    ws-add-window-to-space
-	    ws-move-window
-	    ws-copy-window
 	    ws-call-with-workspace)
 
     (open rep
@@ -165,7 +166,7 @@
   (define last-interesting-workspace nil)
 
   (defvar static-workspace-menus
-    `((,(_ "Insert workspace") insert-workspace)
+    `((,(_ "Insert workspace") insert-workspace-after)
       (,(_ "Select next workspace") next-workspace)
       (,(_ "Select previous workspace") previous-workspace)
       (,(_ "Merge with next") merge-next-workspace)
@@ -386,7 +387,7 @@
 
   ;; insert a new workspace (returning its index) so that the workspace
   ;; before it has index BEFORE
-  (define (ws-insert-workspace &optional before)
+  (define (insert-workspace &optional before)
     (unless before
       (setq before current-workspace))
     (map-windows
@@ -401,7 +402,7 @@
     (1+ before))
 
   ;; merge workspace INDEX with workspace INDEX+1
-  (define (ws-remove-workspace &optional index)
+  (define (remove-workspace &optional index)
     (unless index
       (setq index current-workspace))
     (when (> current-workspace index)
@@ -422,7 +423,7 @@
     (call-hook 'workspace-state-change-hook))
 
   ;; move workspace INDEX COUNT positions forwards (+ve or -ve)
-  (define (ws-move-workspace index count)
+  (define (move-workspace index count)
     (cond ((> count 0)
 	   (map-windows
 	    (lambda (w)
@@ -463,7 +464,7 @@
 	     (need-to-move (and (= space current-workspace)
 				(/= space (car limits))
 				(= space (cdr limits)))))
-	(ws-remove-workspace space)
+	(remove-workspace space)
 	(normalize-indices)
 	(when need-to-move
 	  (select-workspace (1- current-workspace))))))
@@ -483,10 +484,10 @@
       (call-hook 'workspace-state-change-hook)))
 
   ;; move window W from workspace id OLD to workspace NEW
-  (define (ws-move-window w old new &optional was-focused)
+  (define (move-window-to-workspace w old new &optional was-focused)
     (or (window-in-workspace-p w old)
 	(error
-	 "ws-move-window--window isn't in original workspace: %s, %s" w old))
+	 "move-window-to-workspace--window isn't in original workspace: %s, %s" w old))
     (unless (= old new)
       (cond ((window-in-workspace-p w new)
 	     ;; just remove from the source workspace
@@ -510,10 +511,10 @@
       (call-hook 'workspace-state-change-hook)))
 
   ;; arrange it so that window W appears on both OLD and NEW workspaces
-  (define (ws-copy-window w old new &optional was-focused)
+  (define (copy-window-to-workspace w old new &optional was-focused)
     (or (window-in-workspace-p w old)
 	(error
-	 "ws-copy-window--window isn't in original workspace: %s, %s" w old))
+	 "copy-window-to-workspace--window isn't in original workspace: %s, %s" w old))
     (unless (= old new)
       (unless (window-in-workspace-p w new)
 	(window-add-to-workspace w new))
@@ -526,7 +527,7 @@
       (call-hook 'workspace-state-change-hook)))
 
   ;; switch to workspace with id SPACE
-  (define (select-workspace space &optional dont-focus)
+  (define (select-workspace space &optional dont-focus inner-thunk)
     "Activate workspace number SPACE (from zero)."
     (unless (= current-workspace space)
       (when current-workspace
@@ -542,6 +543,8 @@
 		       (window-get w 'placed))
 	      (hide-window w))))))
       (setq current-workspace space)
+      (when inner-thunk
+	(inner-thunk))
       (when current-workspace
 	(with-server-grabbed
 	 (map-windows
@@ -556,7 +559,8 @@
 	(unless (or dont-focus (eq focus-mode 'enter-exit))
 	  (require 'sawfish.wm.util.window-order)
 	  (window-order-focus-most-recent))
-	(call-hook 'enter-workspace-hook (list current-workspace))
+	(when current-workspace
+	  (call-hook 'enter-workspace-hook (list current-workspace)))
 	(call-hook 'workspace-state-change-hook))))
 
   ;; return a list of all windows on workspace index SPACE
@@ -686,11 +690,11 @@
 			     current-workspace
 			   (car (window-workspaces w)))))
 	 (when orig-space
-	   (ws-copy-window w orig-space space was-focused)
+	   (copy-window-to-workspace w orig-space space was-focused)
 	   (when select
 	     (select-workspace space was-focused))
 	   (unless copy
-	     (ws-move-window w orig-space space was-focused)))))
+	     (move-window-to-workspace w orig-space space was-focused)))))
      count workspace-send-boundary-mode))
 
   (define (send-to-previous-workspace w count &optional copy select)
@@ -722,8 +726,10 @@
 	(if select
 	    (progn
 	      (select-workspace (1+ (cdr limits)) was-focused)
-	      (ws-move-window w orig-space current-workspace was-focused))
-	  (ws-move-window w orig-space (1+ (cdr limits)) was-focused)))))
+	      (move-window-to-workspace
+	       w orig-space current-workspace was-focused))
+	  (move-window-to-workspace
+	   w orig-space (1+ (cdr limits)) was-focused)))))
 
   (define (prepend-workspace-and-send w &optional select)
     "Create a new workspace at the start of the list, and move the window to it."
@@ -736,8 +742,10 @@
 	(if select
 	    (progn
 	      (select-workspace (1- (car limits)) was-focused)
-	      (ws-move-window w orig-space current-workspace was-focused))
-	  (ws-move-window w orig-space (1- (car limits)) was-focused)))))
+	      (move-window-to-workspace
+	       w orig-space current-workspace was-focused))
+	  (move-window-to-workspace
+	   w orig-space (1- (car limits)) was-focused)))))
 
   (define-command 'append-workspace-and-send append-workspace-and-send "%W\nt")
   (define-command 'prepend-workspace-and-send prepend-workspace-and-send "%W\nt")
@@ -745,36 +753,36 @@
   (define (merge-next-workspace)
     "Delete the current workspace. Its member windows are relocated to the next
 workspace."
-    (ws-remove-workspace current-workspace))
+    (remove-workspace current-workspace))
 
   (define (merge-previous-workspace)
     "Delete the current workspace. Its member windows are relocated to the
 previous workspace."
-    (ws-remove-workspace (1- current-workspace)))
+    (remove-workspace (1- current-workspace)))
 
   (define-command 'merge-next-workspace merge-next-workspace)
   (define-command 'merge-previous-workspace merge-previous-workspace)
 
-  (define (insert-workspace)
+  (define (insert-workspace-after)
     "Create a new workspace following the current workspace."
-    (ws-insert-workspace current-workspace)
+    (insert-workspace current-workspace)
     (select-workspace (1+ current-workspace)))
 
   (define (insert-workspace-before)
     "Create a new workspace before the current workspace."
-    (ws-insert-workspace (1- current-workspace))
+    (insert-workspace (1- current-workspace))
     (select-workspace (- current-workspace 2)))
 
-  (define-command 'insert-workspace insert-workspace)
+  (define-command 'insert-workspace-after insert-workspace-after)
   (define-command 'insert-workspace-before insert-workspace-before)
 
   (define (move-workspace-forwards &optional count)
     "Move the current workspace one place to the right."
-    (ws-move-workspace current-workspace (or count 1)))
+    (move-workspace current-workspace (or count 1)))
 
   (define (move-workspace-backwards &optional count)
     "Move the current workspace one place to the left."
-    (ws-move-workspace current-workspace (- (or count 1))))
+    (move-workspace current-workspace (- (or count 1))))
 
   (define-command 'move-workspace-forwards move-workspace-forwards)
   (define-command 'move-workspace-backwards move-workspace-backwards)
@@ -789,10 +797,10 @@ previous workspace."
 			 (car (window-workspaces w))))
 	   (new-space (workspace-id-from-logical count)))
       (when orig-space
-	(ws-copy-window w orig-space new-space was-focused)
+	(copy-window-to-workspace w orig-space new-space was-focused)
 	(select-workspace new-space was-focused)
 	(unless copy
-	  (ws-move-window w orig-space new-space was-focused)))))
+	  (move-window-to-workspace w orig-space new-space was-focused)))))
 
   (define (delete-empty-workspaces)
     "Delete any workspaces that don't contain any windows."
@@ -809,7 +817,7 @@ previous workspace."
 		     (setq last-interesting-workspace (1- space)))
 		   (setq space (1+ space)))
 		  (t
-		   (ws-remove-workspace space)
+		   (remove-workspace space)
 		   (setq limits (workspace-limits))))
 	  (setq space (1+ space))))
       (when (> first-interesting-workspace last-interesting-workspace)
