@@ -73,6 +73,12 @@ the mouse."
   :type number
   :range (0 . 64))
 
+(defcustom move-snap-mode 'resistance
+  "Method of deciding when to snap together two window edges."
+  :group (move advanced)
+  :type symbol
+  :options (magnetism resistance attraction))
+
 (defcustom move-snap-ignored-windows nil
   "Snap to otherwise-ignored windows."
   :group (move advanced)
@@ -127,6 +133,7 @@ the mouse."
 (defvar move-resize-old-height nil)
 (defvar move-resize-old-ptr-x nil)
 (defvar move-resize-old-ptr-y nil)
+(defvar move-resize-last-ptr nil)
 (defvar move-resize-mode nil)
 (defvar move-resize-hints nil)
 (defvar move-resize-frame nil)
@@ -159,12 +166,11 @@ the mouse."
        (move-resize-y move-resize-old-y)
        (move-resize-width move-resize-old-width)
        (move-resize-height move-resize-old-height)
-       (move-resize-old-ptr-x (car (if from-motion-event
-				       (query-button-press-pointer)
-				     (query-pointer t))))
-       (move-resize-old-ptr-y (cdr (if from-motion-event
-				       (query-button-press-pointer)
-				     (query-pointer))))
+       (move-resize-last-ptr  (if from-motion-event
+				  (query-button-press-pointer)
+				(query-pointer t)))
+       (move-resize-old-ptr-x (car move-resize-last-ptr))
+       (move-resize-old-ptr-y (cdr move-resize-last-ptr))
        (move-resize-hints (window-size-hints w))
        (move-resize-frame (cons (- (car (window-frame-dimensions w))
 				   move-resize-old-width)
@@ -245,21 +251,13 @@ the mouse."
   (min (+ base (max 0 (* (1+ (/ (1- (- x base)) inc)) inc)))
        (or maximum 65535)))
 
-;; compute move-resize position
-(defun move-resize-pos ()
-  (if (and (eq move-resize-function 'move) move-snap-edges)
-      (snap-window-position-to-edges move-resize-window
-				     (cons move-resize-x move-resize-y)
-				     move-snap-epsilon move-resize-edges)
-    (cons move-resize-x move-resize-y)))
-
 ;; called each pointer motion event during move/resize
 (defun move-resize-motion ()
   (interactive)
-  (let
-      ((ptr-x (car (query-pointer)))
-       (ptr-y (cdr (query-pointer)))
-       m-pos)
+  (let*
+      ((this-ptr (query-pointer))
+       (ptr-x (car this-ptr))
+       (ptr-y (cdr this-ptr)))
     (unless (eq move-resize-mode 'opaque)
       (apply erase-window-outline move-resize-last-outline))
     (cond ((eq move-resize-function 'move)
@@ -268,7 +266,18 @@ the mouse."
 				    (- ptr-x move-resize-old-ptr-x))))
 	   (when (memq 'vertical move-resize-directions)
 	     (setq move-resize-y (+ move-resize-old-y
-				    (- ptr-y move-resize-old-ptr-y)))))
+				    (- ptr-y move-resize-old-ptr-y))))
+	   (when move-snap-edges
+	     (let
+		 ((coords (snap-window-position-to-edges
+			   move-resize-window (cons move-resize-x
+						    move-resize-y)
+			   (cons (- ptr-x (car move-resize-last-ptr))
+				 (- ptr-y (cdr move-resize-last-ptr)))
+			   move-snap-epsilon move-resize-edges
+			   move-snap-mode)))
+	       (setq move-resize-x (car coords))
+	       (setq move-resize-y (cdr coords)))))
 	  ((eq move-resize-function 'resize)
 	   (let
 	       ((x-base (or (cdr (or (assq 'base-width move-resize-hints)
@@ -315,21 +324,21 @@ the mouse."
 					      x-base) x-inc)
 					(/ (- move-resize-height
 					      y-base) y-inc)))))))
-    (setq m-pos (move-resize-pos))
     (when (and (eq move-resize-function 'move) move-show-position)
-      (display-message (format nil "%+d%+d" (car m-pos) (cdr m-pos))))
+      (display-message (format nil "%+d%+d" move-resize-x move-resize-y)))
     (call-window-hook (if (eq move-resize-function 'move)
 			  'while-moving-hook
 			'while-resizing-hook) move-resize-window)
     (if (eq move-resize-mode 'opaque)
-	(move-resize-apply m-pos)
+	(move-resize-apply)
       (let
 	  ((m-dim-x (+ move-resize-width (car move-resize-frame)))
 	   (m-dim-y (+ move-resize-height (cdr move-resize-frame))))
 	(setq move-resize-last-outline (list move-resize-mode
-					     (car m-pos) (cdr m-pos)
+					     move-resize-x move-resize-y
 					     m-dim-x m-dim-y))
-	(apply draw-window-outline move-resize-last-outline)))))
+	(apply draw-window-outline move-resize-last-outline)))
+    (setq move-resize-last-ptr this-ptr)))
 
 ;; called when the move/resize finished (i.e. button-release event)
 (defun move-resize-finished ()
@@ -349,21 +358,21 @@ the mouse."
   (throw 'move-resize-done nil))
 
 ;; commit the current state of the move or resize
-(defun move-resize-apply (&optional m-pos)
-  (unless m-pos
-    (setq m-pos (move-resize-pos)))
+(defun move-resize-apply ()
   (cond
-   ((>= (car m-pos) (screen-width))
-    (rplaca m-pos (1- (screen-width))))
-   ((<= (car m-pos) (- (+ move-resize-width (car move-resize-frame))))
-    (rplaca m-pos (1+ (- (+ move-resize-width (car move-resize-frame)))))))
+   ((>= move-resize-x (screen-width))
+    (setq move-resize-x (1- (screen-width))))
+   ((<= move-resize-x (- (+ move-resize-width (car move-resize-frame))))
+    (setq move-resize-x (1+ (- (+ move-resize-width
+				  (car move-resize-frame)))))))
   (cond
-   ((>= (cdr m-pos) (screen-height))
-    (rplacd m-pos (1- (screen-height))))
-   ((<= (cdr m-pos) (- (+ move-resize-height (cdr move-resize-frame))))
-    (rplacd m-pos (1+ (- (+ move-resize-height (cdr move-resize-frame)))))))
+   ((>= move-resize-y (screen-height))
+    (setq move-resize-y (1- (screen-height))))
+   ((<= move-resize-y (- (+ move-resize-height (cdr move-resize-frame))))
+    (setq move-resize-y (1+ (- (+ move-resize-height
+				  (cdr move-resize-frame)))))))
   (move-resize-window-to move-resize-window
-			 (car m-pos) (cdr m-pos)
+			 move-resize-x move-resize-y
 			 move-resize-width move-resize-height))
 
 ;; called when moving, tries to decide which edges to move, which to stick
