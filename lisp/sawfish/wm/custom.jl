@@ -53,6 +53,7 @@
 	  rep.io.files
 	  rep.data.tables
 	  rep.structures
+	  rep.system
 	  sawfish.wm.commands
 	  sawfish.wm.gaol
 	  sawfish.wm.colors
@@ -462,6 +463,10 @@ of choices."
 
 
 ;;; gaol init
+
+  (let ((tem (get-command-line-option "--custom-file" t)))
+    (when tem
+      (setq custom-user-file tem)))
 
   (gaol-add defcustom defgroup custom-declare-variable custom-declare-group
 	    custom-quote-keys custom-set-property custom-set-group-property
