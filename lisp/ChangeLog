@@ -1,3 +1,12 @@
+2000-01-18  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome-match.jl: new file, adds skip-winlist and skip-tasklist
+	properties to window matching (from Ben Liblit
+	<liblit@cs.berkeley.edu>)
+	* gnome.jl: if match-window has already been loaded, load
+	gnome-match, otherwise arrange for gnome-match to be loaded
+	immediately after match-window
+
 2000-01-15  John Harper  <john@dcs.warwick.ac.uk>
 
 	* iconify.jl (uniconify-window): when removing a window to put
