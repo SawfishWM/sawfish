@@ -24,6 +24,7 @@
     (export set-viewport
 	    screen-viewport
 	    set-screen-viewport
+	    select-workspace-and-viewport
 	    move-viewport
 	    move-viewport-to-window
 	    window-outside-workspace-p
@@ -92,6 +93,10 @@
       (set-viewport (* col (screen-width))
 		    (* row (screen-height)))
       t))
+
+  (define (select-workspace-and-viewport space col row)
+    (select-workspace space nil (lambda ()
+				  (set-screen-viewport col row))))
   
   ;; returns t if it actually moved the viewport
   (define (move-viewport right down)
