@@ -1029,8 +1029,8 @@ list_frame_generator (Lisp_Window *w)
 
 	    if (rep_STRINGP(fp->font[i]))
 		fp->font[i] = Fget_font (fp->font[i]);
-	    if (fp->font[i] && fp->font[i] != Qnil && !FONTP(fp->font[i]))
-		goto next_part;
+	    if (!fp->font[i] || !FONTP(fp->font[i]))
+		fp->font[i] = Qnil;
 	}
 
 	/* If we have a background image for this part, take it as
