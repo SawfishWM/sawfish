@@ -21,6 +21,28 @@
 
 (provide 'workspace)
 
+;; Commentary:
+
+;; Sawmill's workspace are organised as a dynamic 1-dimensional
+;; structure. Workspaces are added and deleted as required (subject to
+;; the options defined below)
+
+;; If you want to approximate the common N-by-N grid approach to
+;; virtual desktops, then you could set `preallocated-workspaces' to
+;; NxN and add something like the following to your .sawmillrc:
+
+;; (defvar workspace-grid-width 2)
+
+;; (bind-keys global-keymap
+;;   "C-Down" '(select-workspace (+ (workspace-index) workspace-grid-width))
+;;   "C-Up" '(select-workspace (- (workspace-index) workspace-grid-width)))
+
+;; substituting the 2 for suitable values of N. This won't change the
+;; way that the GNOME hints portray the workspace list, but it's a start..
+
+
+;; Options and variables
+
 (defcustom cycle-through-workspaces nil
   "Moving through workspaces is cyclical."
   :type boolean
@@ -248,7 +270,9 @@
       (call-hook 'move-workspace-hook (list space))
       (call-hook 'workspace-state-change-hook))))
 
-(defun ws-index (space)
+(defun workspace-index (&optional space)
+  (unless space
+    (setq space current-workspace))
   (- (length workspace-list) (length (memq space workspace-list))))
 
 
@@ -378,10 +402,11 @@ will be created."
 (defun select-workspace (index)
   "Activate workspace number INDEX (from zero)."
   (interactive "p")
-  (let
-      ((space (nth index workspace-list)))
-    (when (and space (not (eq space current-workspace)))
-      (ws-switch-workspace space))))
+  (when (>= index 0)
+    (let
+	((space (nth index workspace-list)))
+      (when (and space (not (eq space current-workspace)))
+	(ws-switch-workspace space)))))
 
 (defun merge-next-workspace ()
   "Delete the current workspace. Its member windows are relocated to the next
@@ -503,7 +528,7 @@ all workspaces."
   (let
       ((space (window-get w 'workspace)))
     (when space
-      `((workspace . ,(ws-index space))))))
+      `((workspace . ,(workspace-index space))))))
 
 (defun ws-restore-session (w alist)
   (let
