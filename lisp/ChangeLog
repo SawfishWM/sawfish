@@ -1,12 +1,16 @@
 1999-09-16  John Harper  <john@dcs.warwick.ac.uk>
 
+	* workspace.jl (select-workspace): only select the workspace if
+	it's not the current workspace
+
 	* workspace.jl: removed cycling functions
 	(ws-workspace-windows): renamed workspace-windows
 
 	* cycle.jl: new file, old cycle functions plus `previous'
 	variants
 
-	* x-cycle.jl: new file, win-3.1 like cycling
+	* x-cycle.jl: new file, stack-based window cycling
+	* keymaps.jl (global-keymap): bound M-TAB to cycle-windows
 
 1999-09-15  John Harper  <john@dcs.warwick.ac.uk>
 

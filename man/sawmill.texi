@@ -1752,20 +1752,19 @@ key itself. The standard X modifier names are provided, as well as two
 special modifiers @key{Meta} and @key{Alt} that are mapped to the
 keysyms of the same name.
 
-There are a variety of ways that each modifier may be entered, as shown
-by the following table:
+The following table lists the possible modifier prefixes:
 
 @table @kbd
-@item Meta
-@itemx M
+@item C
+The control modifier
+
+@item M
 The meta modifier
 
-@item Alt
-@itemx A
+@item A
 The alt modifier
 
-@item Shift
-@itemx S
+@item S
 The shift modifier
 
 @item Mod@var{k}
@@ -1774,6 +1773,10 @@ The standard X modifiers, for @var{k} between 1 and 5
 @item Button@var{k}
 The @var{k}'th mouse button is currently pressed
 @end table
+
+There are two special modifiers: the @samp{Any} prefix matches any set
+of modifiers; the @samp{Release} modifiers matches key-release events
+instead of the default key-presses.
 
 Generally keys have the same names as their X keysyms, there are
 several specially defined keys:
@@ -2047,8 +2050,20 @@ Perform the usual binding lookup for the event object @var{object}.
 Returns the command found, or @code{nil} if no binding exists.
 @end defun
 
-While a command is being evaluated, information about the current event
-may be found:
+By default, both key-press events, and events that are bound to
+modifier keys (e.g. @key{Control_L}), are ignored. However, this
+behavior may be changed:
+
+@defvar eval-modifier-events
+When non-nil, key events bound to modifier keys are evaluated.
+@end defvar
+
+@defvar eval-key-release-events
+When non-nil, key-release events are evaluated.
+@end defvar
+
+While a command is being evaluated, information about the event that
+caused it may be found:
 
 @defun current-event
 Return the event which caused the current command to be invoked
@@ -2165,6 +2180,18 @@ Returns @code{y} if the grab succeeded.
 
 @defun ungrab-pointer
 Release the grab on the mouse pointer.
+@end defun
+
+@defun grab-keyboard &optional window
+Grab the keyboard and direct all keyboard events to window object
+@var{window}. If @var{window} is @code{nil}, or unviewable, the grab
+will be made on the root window.
+
+Returns non-nil if the grab succeeded.
+@end defun
+
+@defun ungrab-keyboard
+Release the grab on the keyboard.
 @end defun
 
 @defun get-window-by-id xid

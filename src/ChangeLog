@@ -1,12 +1,15 @@
 1999-09-16  John Harper  <john@dcs.warwick.ac.uk>
 
+	* keys.c: added Mod5 to list of accepted modifiers
+
 	* events.c (key_press): evaluate KeyRelease events again
 
 	* functions.c (Fgrab_keyboard, Fungrab_keyboard): new functions
 
 	* keys.h: EV_MOD_RELEASE extra modifier bit to mark KeyRelease
 	events from KeyPress events
-	* keys.c (Veval_modifier_events, Veval_key_release_events): new
+	* keys.c: removed the long methods of specifying modifiers
+	(Veval_modifier_events, Veval_key_release_events): new 
 	options, control whether we evaluate these abnormal events
 
 	* functions.c (Fwarp_cursor_to_window): unless coordinates are
