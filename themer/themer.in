@@ -38,24 +38,20 @@ exec rep "$0" "$@"
 
 ;; configuration
 
-;; location of sawmill-client
 (defvar sawmill-client-program "sawmill-client")
+
+;; preferences
+(defvar reload-themes-after-saving t)
+(defvar filter-when-saving nil)
 
 ;; function to call for online help, set later
 (defvar help-launcher nil)
 
-;; object representing the widget hierarchy of the main window
-(defvar xml (or (and (file-exists-p glade-file)
-		     (glade-xml-new glade-file "top-level-window"))
-		;; allow themer.in to run uninstalled to aid hacking
-		(let
-		    ((file (expand-file-name
-			    "themer.glade"
-			    (file-name-directory load-filename))))
-		  (when (file-exists-p file)
-		    (setq glade-file file)
-		    (glade-xml-new glade-file "top-level-window")))
-		(error "can't open file themer.glade")))
+(defvar preferences-attrs
+  '((reload-themes-after-saving
+     (boolean "Reload themes in window manager after saving."))
+    (filter-when-saving
+     (boolean "Remove unused definitions when saving."))))
 
 ;; list of all frame part classes
 (defvar frame-part-classes '(title menu-button close-button iconify-button
@@ -79,7 +75,7 @@ exec rep "$0" "$@"
     (text (or (symbol window-name window-icon-name) string))
     (x-justify (or (symbol left right center) number))
     (y-justify (or (symbol top bottom center) number))
-    (cursor symbol)
+    (cursor (optional symbol))
     (removable boolean)
     (below-client boolean)))
 
@@ -111,6 +107,19 @@ exec rep "$0" "$@"
 ;; variables
 
 (defvar current-filename nil)
+
+;; object representing the widget hierarchy of the main window
+(defvar xml (or (and (file-exists-p glade-file)
+		     (glade-xml-new glade-file "top-level-window"))
+		;; allow themer.in to run uninstalled to aid hacking
+		(let
+		    ((file (expand-file-name
+			    "themer.glade"
+			    (file-name-directory load-filename))))
+		  (when (file-exists-p file)
+		    (setq glade-file file)
+		    (glade-xml-new glade-file "top-level-window")))
+		(error "can't open file themer.glade")))
 
 ;; details data
 
@@ -317,9 +326,11 @@ exec rep "$0" "$@"
 	     numberp)))))
 (put 'number 'item-maker make-number-item)
 
-(defun make-boolean-item (changed-callback)
+(defun make-boolean-item (changed-callback &optional label)
   (let
-      ((widget (gtk-check-button-new)))
+      ((widget (if label
+		   (gtk-check-button-new-with-label label)
+		 (gtk-check-button-new))))
     (gtk-signal-connect widget "toggled" changed-callback)
     (lambda (op)
       (cond ((eq op 'set)
@@ -507,14 +518,14 @@ exec rep "$0" "$@"
      p-button "clicked"
      (lambda ()
        (let*
-	   ((props-xml (glade-xml-new glade-file "image-props-dialog"))
-	    (window (glade-xml-get-widget props-xml "image-props-dialog"))
-	    (vbox (glade-xml-get-widget props-xml "image-props-vbox"))
+	   ((props-xml (glade-xml-new glade-file "props-dialog"))
+	    (window (glade-xml-get-widget props-xml "props-dialog"))
+	    (vbox (glade-xml-get-widget props-xml "props-vbox"))
 	    (table (gtk-table-new (length image-attrs) 2 nil))
 	    (items (mapcar (lambda (cell)
 			     (cons (car cell)
 				   (make-item (nth 1 cell) nop))) image-attrs))
-	    (on-image-props-ok
+	    (on-props-ok
 	     (lambda ()
 	       (setq properties (mapcar (lambda (x)
 					  (cons (car x) (((cdr x) 'get))))
@@ -525,7 +536,7 @@ exec rep "$0" "$@"
 		   (setq properties (delq tem properties))))
 	       (changed-callback)
 	       (gtk-widget-destroy window)))
-	    (on-image-props-cancel
+	    (on-props-cancel
 	     (lambda ()
 	       (gtk-widget-destroy window))))
 	 (glade-xml-signal-autoconnect props-xml)
@@ -533,6 +544,7 @@ exec rep "$0" "$@"
 		 (when (gtk-label-p w)
 		   (gtk-container-remove vbox w)))
 	       (gtk-container-children vbox))
+	 (gtk-window-set-title window "Image Properties")
 	 (gtk-box-pack-start vbox table t t)
 	 (gtk-table-set-col-spacings table 4)
 	 (gtk-table-set-row-spacings table 4)
@@ -1330,16 +1342,21 @@ exec rep "$0" "$@"
   (unless (file-exists-p dir)
     (make-directory dir))
   (set-current-filename (expand-file-name "theme.jl" dir))
-;; XXX don't do this for now
-;; (setq frames-alist (filter-unused-frames frames-alist mapping-alist))
-;; (setq patterns-alist (filter-unused-patterns patterns-alist frames-alist))
+  (when filter-when-saving
+    (setq frames-alist (filter-unused-frames frames-alist mapping-alist))
+    (setq patterns-alist (filter-unused-patterns patterns-alist frames-alist)))
   (let
       ((patterns-alist (generate-patterns patterns-alist dir)))
     (save-to-file current-filename))
   (write-readme-file dir)
-  (message (format nil "Generated theme in directory `%s'" dir)))
+  (message (format nil "Generated theme in directory `%s'" dir))
+  (when reload-themes-after-saving
+    (sawmill-eval-async `(reload-frame-style ',theme-name))))
 
 (defun new-theme ()
+  (clist-delete-all patterns-clist)
+  (clist-delete-all frames-name-clist)
+  (clist-delete-all mapping-clist)
   (mapc (lambda (sym)
 	  (set sym nil)) saved-variables)
   (setq theme-name 'unnamed)
@@ -1382,23 +1399,77 @@ exec rep "$0" "$@"
     (when dir
       (generate-theme dir))))
 
+(defun do-open (file)
+  (when (file-directory-p file)
+    (if (file-exists-p (expand-file-name "theme.jl" file))
+	(setq file (expand-file-name "theme.jl" file))
+      (error "Can only load from directories with theme.jl files")))
+  (condition-case data
+      (progn
+	(load-from-file file))
+    (error
+     (message (format nil "%S" data)))))
+
 (defun on-open ()
   (let
       ((file (file-dialog (_ "Open") current-filename)))
     (when file
-      (when (file-directory-p file)
-	(if (file-exists-p (expand-file-name "theme.jl" file))
-	    (setq file (expand-file-name "theme.jl" file))
-	  (error "Can only load from directories with theme.jl files")))
-      (condition-case data
-	  (progn
-	    (load-from-file file))
-	(error
-	 (message (format nil "%S" data)))))))
+      (do-open file))))
 
 (defun on-new-theme ()
   (set-current-filename nil)
   (new-theme))
+
+
+;; Preferences
+
+(defun save-preferences ()
+  (unless (file-exists-p "~/.sawmill")
+    (make-directory "~/.sawmill"))
+  (let
+      ((file (open-file "~/.sawmill/themer-prefs" 'write)))
+    (when file
+      (unwind-protect
+	  (mapc (lambda (x)
+		  (format file "(setq %s '%S)\n"
+			  (car x) (symbol-value (car x))))
+		preferences-attrs)
+	(close-file file)))))
+
+(defun load-preferences ()
+  (and (file-exists-p "~/.sawmill/themer-prefs")
+       (load "~/.sawmill/themer-prefs" t t t)))
+
+(defun on-settings-preferences ()
+  (let*
+      ((props-xml (glade-xml-new glade-file "props-dialog"))
+       (window (glade-xml-get-widget props-xml "props-dialog"))
+       (vbox (glade-xml-get-widget props-xml "props-vbox"))
+       (items (mapcar (lambda (cell)
+			(cons (car cell)
+			      (make-item (nth 1 cell) nop)))
+		      preferences-attrs))
+       (on-props-ok
+	(lambda ()
+	  (mapc (lambda (x)
+		  (set (car x) (((cdr x) 'get)))) items)
+	  (save-preferences)
+	  (gtk-widget-destroy window)))
+       (on-props-cancel
+	(lambda ()
+	  (gtk-widget-destroy window))))
+    (glade-xml-signal-autoconnect props-xml)
+    (gtk-container-border-width vbox 16)
+    (gtk-window-set-title window "Preferences")
+    (mapc (lambda (w)
+	    (when (gtk-label-p w)
+	      (gtk-container-remove vbox w)))
+	  (gtk-container-children vbox))
+    (mapc (lambda (x)
+	    (((cdr x) 'set) (symbol-value (car x)))
+	    (gtk-box-pack-start vbox ((cdr x) 'widget))) items)
+    (gtk-widget-show-all window)
+    (gtk-grab-add window)))
 
 
 ;; Online help
@@ -1498,6 +1569,7 @@ through a GUI.\n" version))
 		       (error "Can't create string-dialog widget")))
        (window (glade-xml-get-widget string-xml "string-dialog"))
        (entry (glade-xml-get-widget string-xml "string-dialog-entry"))
+       (label (glade-xml-get-widget string-xml "string-dialog-label"))
        (finished (lambda (x)
 		  (throw 'string-dialog-out x)))
        (on-string-dialog-ok (lambda ()
@@ -1507,6 +1579,7 @@ through a GUI.\n" version))
 
     (glade-xml-signal-autoconnect string-xml)
     (gtk-window-set-title window title)
+    (gtk-label-set label title)
     (gtk-grab-add window)
     (unwind-protect
 	(catch 'string-dialog-out
@@ -1649,6 +1722,8 @@ through a GUI.\n" version))
 
 ;; entry point
 
+(load-preferences)
+
 (update-theme-name)
 
 (create-patterns-items)
@@ -1664,6 +1739,11 @@ through a GUI.\n" version))
 (gtk-clist-set-column-auto-resize frames-part-clist 1 t)
 
 (glade-xml-signal-autoconnect xml)
+
+(when (and command-line-args (file-exists-p (car command-line-args)))
+  (do-open (car command-line-args))
+  (setq command-line-args (cdr command-line-args)))
+
 (recursive-edit)
 
 ;; Local variables:
