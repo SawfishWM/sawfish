@@ -103,10 +103,6 @@ typedef struct lisp_window {
     /* Is the client window reparented to the frame? */
     int reparented : 1;
 
-    /* Are we between reparenting the window and receiving
-       a ReparentNotify event? */
-    int reparenting : 1;
-
     /* Is the client window shaped? */
     int shaped : 1;
 
@@ -126,11 +122,6 @@ typedef struct lisp_window {
     Window transient_for_hint;
     repv full_name, name, icon_name;
     int frame_vis;
-
-    /* The number of expected MapNotify and UnmapNotify events (i.e.
-       we caused them, so they don't reflect state changes by the
-       client itself) */
-    int local_maps, local_unmaps;
 
     /* Frame data */
     Window frame;
