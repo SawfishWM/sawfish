@@ -85,6 +85,11 @@
   :group cycle
   :type boolean)
 
+(defcustom cycle-all-viewports nil
+  "Include windows on all viewports of workspaces when cycling."
+  :group cycle
+  :type boolean)
+
 (defcustom cycle-raise-windows t
   "Raise windows while they're temporarily selected during cycling."
   :group cycle
@@ -167,7 +172,7 @@
       ((win (window-order (if cycle-all-workspaces
 			      nil
 			    current-workspace)
-			  cycle-include-iconified)))
+			  cycle-include-iconified cycle-all-viewports)))
     (when win
       (if x-cycle-current
 	  (when (or (window-get x-cycle-current 'iconified)
