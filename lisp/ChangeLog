@@ -1,3 +1,17 @@
+2000-03-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-gaol.jl (sawmill-safe-functions): added input-focus
+
+	* transient.jl (transient-unmap-window): don't try to focus
+	parent windows not on the current viewport
+
+	* iconify.jl (display-window): Unconditionally uniconify the
+	window, and do it _before_ doing anything else
+
+	* sawmill.jl (fontset-languages-re): new variable. Used to test
+	if current language needs to use FontSets (i.e. multibyte
+	encoding)
+
 2000-03-08  John Harper  <john@dcs.warwick.ac.uk>
 
 	* move-resize.jl (move-resize-update-edges): new function,
