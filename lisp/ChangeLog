@@ -1,3 +1,10 @@
+2001-01-23  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/wm-spec.jl (init): check for an old value of
+	_NET_CURRENT_DESKTOP before overwriting it. If set, switch to
+	that desktop. This fixes the annoying `desktop always reset to
+	zero on restart' bug
+
 2001-01-22  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/ext/auto-raise.jl (rw-on-focus, rw-out-focus):

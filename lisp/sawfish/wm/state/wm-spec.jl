@@ -464,6 +464,12 @@
 
     (set-x-property 'root '_NET_SUPPORTED supported-protocols 'ATOM 32)
 
+    (let ((current-desktop (get-x-property 'root '_NET_CURRENT_DESKTOP)))
+      (when (and current-desktop
+		 (eq (car current-desktop) 'CARDINAL)
+		 (>= (length (caddr current-desktop)) 1))
+	(select-workspace-from-first (aref (caddr current-desktop) 0))))
+
     (update-client-list-hints)
     (update-workspace-hints)
 
