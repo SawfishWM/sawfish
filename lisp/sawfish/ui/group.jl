@@ -129,10 +129,7 @@
   ;; return a list containing the sub-groups of GROUP
   (define (get-sub-groups group)
     (mapcar (lambda (cell)
-	      (let ((g (get-group (group-name-add (group-name group)
-						  (car cell)))))
-		(fetch-group g)
-		g))
+	      (get-group (group-name-add (group-name group) (car cell))))
 	    (group-sub-groups group)))
 
   ;; return the parent group of GROUP, or nil
@@ -143,18 +140,21 @@
   ;; if the data for GROUP has been loaded, reload it and resync all state
   (define (refresh-group group)
     (when (group-loaded-p group)
-      ;; reload the group data from the wm
-      (fetch-group group #:force t)
-      (when (group-tree group)
-	;; if necessary update the sub-trees of the group
-	(let ((old (gtk-container-children (group-tree group))))
-	  (populate-branch group)
-	  (mapc (lambda (x) (gtk-tree-remove-item (group-tree group) x)) old)))
-      ;; if this is the currently displayed group, then
-      ;; make sure the display is consistent with the new state
-      (when (eq group current-group)
-	(select-group group #:force t))))
-
+      (let ((old-slots (length (group-slots group))))
+	;; reload the group data from the wm
+	(fetch-group group #:force t)
+	(when (group-tree group)
+	  ;; if necessary update the sub-trees of the group
+	  (let ((old (gtk-container-children (group-tree group))))
+	    (populate-branch group)
+	    (mapc (lambda (x)
+		    (gtk-tree-remove-item (group-tree group) x)) old)))
+	;; if this is the currently displayed group, then
+	;; make sure the display is consistent with the new state
+	(when (and (eq group current-group)
+		   (/= (length (group-slots group)) old-slots))
+	  (select-group group #:force t)))))
+    
   ;; Return the list of (unique) groups containing the list of SLOTS
   (define (locate-groups slots)
     (let ((out '()))
@@ -197,11 +197,27 @@
     (fetch-group group)
     (when (group-sub-groups group)
       (mapc (lambda (sub)
-	      (gtk-tree-append (group-tree group)
-			       (make-tree-item (group-name group)
-					       (car sub) (cadr sub))))
+	      (let ((sgroup (get-group
+			     (group-name-add (group-name group) (car sub))))
+		    (item (make-tree-item (group-name group)
+					  (car sub) (cadr sub))))
+		(gtk-tree-append (group-tree group) item)
+		(when (group-tree sgroup)
+		  ;; rebuild the sub-tree of this item
+		  (make-branch item sgroup))))
 	    (group-sub-groups group))
       (gtk-widget-show-all (group-tree group))))
+
+  ;; adds a sub-tree to ITEM representing GROUP
+  (define (make-branch item group)
+    (fetch-group group)
+    (when (group-tree group)
+      (group-tree-set group nil))
+    (when (group-sub-groups group)
+      (group-tree-set group (gtk-tree-new))
+      (populate-branch group)
+      (gtk-tree-item-set-subtree item (group-tree group))
+      (gtk-tree-item-expand item)))
 
   (define (group-selected parent-name name)
     ;; called when a tree node is selected
@@ -210,12 +226,8 @@
 	(setq current-group group)
 
 	;; fill the contents of the branch
-	(fetch-group group)
-	(when (and (group-sub-groups group) (not (group-tree group)))
-	  (group-tree-set group (gtk-tree-new))
-	  (populate-branch group)
-	  (gtk-tree-item-set-subtree item (group-tree group))
-	  (gtk-tree-item-expand item))
+	(unless (group-tree group)
+	  (make-branch item group))
 
 	;; display the slots for this group
 	(call-hook '*nokogiri-group-selected-hook* (list group)))))

@@ -209,6 +209,7 @@
 	  (gtk-notebook-append-page
 	   book layout (gtk-label-new (group-real-name group)))))
       (mapc (lambda (sub)
+	      (fetch-group sub)
 	      (let ((slots (get-slots sub)))
 		(when (or slots (group-sub-groups group))
 		  (iter book sub slots))))
