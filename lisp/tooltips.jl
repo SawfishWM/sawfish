@@ -54,14 +54,14 @@
   :range (0 . nil)
   :group tooltips)
 
-(defcustom tooltips-font
- (get-font "-*-lucidatypewriter-medium-*-*-*-10-*-*-*-*-*-*-*")
+(defcustom tooltips-font "-*-lucidatypewriter-medium-*-*-*-10-*-*-*-*-*-*-*"
  "Font used to display tooltips."
  :type font
  :group tooltips)
 
 (defvar tooltips-background-color "lightyellow2")
 
+;; the window it's displayed for
 (defvar tooltips-displayed nil)
 
 (defun tooltips-cleanup ()
@@ -139,7 +139,7 @@
 			 (x-justify . left)
 			 (spacing . 2)
 			 (font . ,tooltips-font)))
-      (setq tooltips-displayed t)
+      (setq tooltips-displayed win)
       (when tooltips-timeout-enabled 
 	(setq tooltips-timer (make-timer tooltips-cleanup
 					 (/ tooltips-timeout-delay 1000)
@@ -162,5 +162,10 @@
       (unless (in-hook-p 'pre-command-hook tooltips-cleanup)
 	(add-hook 'pre-command-hook tooltips-cleanup)))))
 
+(defun tooltips-unmapped (win)
+  (when (eq win tooltips-displayed)
+    (tooltips-cleanup)))
+
 (add-hook 'enter-frame-part-hook tooltips-fp-enter)
 (add-hook 'leave-frame-part-hook tooltips-cleanup)
+(add-hook 'unmap-notify-hook tooltips-unmapped)
