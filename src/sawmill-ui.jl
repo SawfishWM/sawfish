@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.7 1999/08/23 13:42:28 john Exp $
+;; $Id: sawmill-ui.jl,v 1.8 1999/08/23 20:46:07 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -594,7 +594,7 @@ fi
       ((commands (get-key spec ':commands))
        (c-row (- (length commands) (length (memq command commands)))))
     (gtk-clist-select-row (get-key spec ':cmd-clist) c-row 0)
-    (gtk-clist-moveto (get-key spec ':cmd-clist) c-row 0)
+    (gtk-clist-moveto (get-key spec ':cmd-clist) c-row 0 nil 0)
     (gtk-entry-set-text (get-key spec ':entry) event)
     (build-keymap-shell:update-doc spec)))
 
