@@ -37,7 +37,7 @@ be created and edited in a graphical environment.
 %setup -q
 
 %build
-%configure --with-readline
+%configure
 make host_type=%{_target_platform}
 
 %install
@@ -77,6 +77,7 @@ fi
 %{_datadir}/gnome/wm-properties/Sawfish.desktop
 %{_datadir}/pixmaps/sawfish*.png
 %{_libexecdir}/sawfish/%{version}/%{_target_platform}
+%{_libexecdir}/rep/%{_target_platform}/sawfish
 %{_infodir}/sawfish*
 
 %files themer
