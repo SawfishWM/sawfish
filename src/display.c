@@ -43,6 +43,8 @@ Visual *screen_visual;
 Colormap screen_cmap;
 Window root_window;
 
+int shape_event_base, shape_error_base;
+
 /* some atoms that may be useful.. */
 Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols, xa_wm_delete_window,
     xa_wm_colormap_windows, xa_wm_take_focus;
@@ -144,6 +146,8 @@ sys_init(char *program_name)
 	xa_wm_delete_window = XInternAtom (dpy, "WM_DELETE_WINDOW", False);
 	xa_wm_colormap_windows = XInternAtom (dpy, "WM_COLORMAP_WINDOWS", False);
 	xa_wm_take_focus = XInternAtom (dpy, "WM_TAKE_FOCUS", False);
+
+	XShapeQueryExtension (dpy, &shape_event_base, &shape_error_base);
 
 	if(rep_SYM(Qbatch_mode)->value == Qnil)
 	{
