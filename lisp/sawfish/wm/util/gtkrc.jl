@@ -170,6 +170,7 @@
     "Reload the gtkrc settings."
     (gtkrc-get-style)
     (gtkrc-apply-style)
+    (reload-gaol)
     (call-hook 'gtkrc-changed-hook))
 
   (define-command 'gtkrc-reload-style gtkrc-reload-style)
@@ -178,6 +179,7 @@
   (define (gtkrc-handle-client-msg w type data)
     (declare (unused data))
     (when (and (eq w gtkrc-dummy-window) (eq type '_GTK_READ_RCFILES))
+      (format standard-error "reloading style\n")
       (gtkrc-reload-style)
       ;; XXX make conditional
       (require 'sawfish.wm.menus)
@@ -193,6 +195,16 @@
     (setq gtkrc-funs (cons fun gtkrc-funs)))
 
   (add-hook 'gtkrc-changed-hook (lambda () (mapc funcall gtkrc-funs)))
+
+  (define (reload-gaol)
+    (gaol-define 'gtkrc-background gtkrc-background)
+    (gaol-define 'gtkrc-background-pixmaps gtkrc-background-pixmaps)
+    (gaol-define 'gtkrc-base gtkrc-base)
+    (gaol-define 'gtkrc-light gtkrc-light)
+    (gaol-define 'gtkrc-dark gtkrc-dark)
+    (gaol-define 'gtkrc-mid gtkrc-mid)
+    (gaol-define 'gtkrc-foreground gtkrc-foreground)
+    (gaol-define 'gtkrc-font gtkrc-font))
 
 
 ;;; init
@@ -210,12 +222,4 @@
   (gaol-define 'gtkrc-load-pixmaps gtkrc-load-pixmaps)
   (gaol-define 'gtkrc-reload-style gtkrc-reload-style)
   (gaol-define 'gtkrc-call-after-changed gtkrc-call-after-changed)
-
-  (gaol-define 'gtkrc-background gtkrc-background)
-  (gaol-define 'gtkrc-background-pixmaps gtkrc-background-pixmaps)
-  (gaol-define 'gtkrc-base gtkrc-base)
-  (gaol-define 'gtkrc-light gtkrc-light)
-  (gaol-define 'gtkrc-dark gtkrc-dark)
-  (gaol-define 'gtkrc-mid gtkrc-mid)
-  (gaol-define 'gtkrc-foreground gtkrc-foreground)
-  (gaol-define 'gtkrc-font gtkrc-font))
+  (reload-gaol))

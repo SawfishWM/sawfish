@@ -1,5 +1,9 @@
 2001-01-08  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/util/gtkrc.jl (reload-gaol): new function, sets
+	all the variables that are loaded into the gaol (since they
+	don't update themselves automatically, doh!). Fixes bug 5505
+
 	* sawfish/wm/commands/groups.jl (delete-group): added special
 	case so that desktop windows don't get deleted
 
