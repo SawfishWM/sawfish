@@ -390,7 +390,7 @@ map_request (XEvent *ev)
 	}
 
 	if (w->visible)
-	    XMapRaised (dpy, w->frame);
+	    XMapWindow (dpy, w->frame);
     }
     else
     {
@@ -405,7 +405,7 @@ map_request (XEvent *ev)
 	w->mapped = TRUE;
 	rep_call_lisp1 (Quniconify_window, rep_VAL(w));
 	if (w->id != 0 && w->visible)
-	    XMapRaised (dpy, w->frame);
+	    XMapWindow (dpy, w->frame);
     }
 }
 
