@@ -97,7 +97,7 @@ DEFSYM(super_keysyms, "super-keysyms");
 static void grab_keymap_event (repv km, long code, long mods, bool grab);
 static void grab_all_keylist_events (repv map, bool grab);
 
-static int all_buttons[5] = { Button1, Button2, Button3, Button4, Button5 };
+static int all_buttons[7] = { Button1, Button2, Button3, Button4, Button5, Button6, Button7 };
 
 /* locks: currently LockMask, num_lock, and scroll_lock */
 static int total_lock_combs, all_lock_mask;
@@ -249,6 +249,12 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	case Button5:
 	    *mods |= Button5Mask;
 	    break;
+	case Button6:
+	    *mods |= Button6Mask;
+	    break;
+	case Button7:
+	    *mods |= Button7Mask;
+	    break;
 	}
 	ret = TRUE;
 	break;
@@ -317,6 +323,8 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 	    { Button3, Button3Mask },
 	    { Button4, Button4Mask },
 	    { Button5, Button5Mask },
+	    { Button6, Button6Mask },
+	    { Button7, Button7Mask },
 	    { 0, 0 }
 	};
 	int i;
@@ -637,6 +645,8 @@ static struct key_def default_mods[] = {
     { "Button3",  Button3Mask },
     { "Button4",  Button4Mask },
     { "Button5",  Button5Mask },
+    { "Button6",  Button6Mask },
+    { "Button7",  Button7Mask },
     { "Any",      EV_MOD_ANY },
     { "Release",  EV_MOD_RELEASE },
     { 0, 0 }
@@ -1640,7 +1650,7 @@ grab_event (Window grab_win, repv ev)
 	    {
 		/* sawmill treats mouse buttons as modifiers, not as
 		   codes, so for us AnyModifier includes all buttons.. */
-		for (i = 0; i < 5; i++)
+		for (i = 0; i < 7; i++)
 		{
 		    XGrabButton (dpy, all_buttons[i], AnyModifier,
 				 grab_win, False, POINTER_GRAB_EVENTS,
@@ -1692,7 +1702,7 @@ ungrab_event (Window grab_win, repv ev)
 	    }
 	    else
 	    {
-		for (i = 0; i < 5; i++)
+		for (i = 0; i < 7; i++)
 		    XUngrabButton (dpy, all_buttons[i], AnyModifier, grab_win);
 	    }
 	}
