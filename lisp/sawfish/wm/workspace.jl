@@ -141,13 +141,13 @@ window, one of `stop', `keep-going', `wrap-around'")
   (define last-interesting-workspace nil)
 
   (defvar static-workspace-menus
-    `((,(_ "Insert workspace") insert-workspace-after)
-      (,(_ "Select next workspace") next-workspace)
-      (,(_ "Select previous workspace") previous-workspace)
+    `((,(_ "_Insert workspace") insert-workspace-after)
+      (,(_ "Select _next workspace") next-workspace)
+      (,(_ "Select _previous workspace") previous-workspace)
       (,(_ "Merge with next") merge-next-workspace)
       (,(_ "Merge with previous") merge-previous-workspace)
-      (,(_ "Move workspace right") move-workspace-forwards)
-      (,(_ "Move workspace left") move-workspace-backwards)))
+      (,(_ "Move workspace _right") move-workspace-forwards)
+      (,(_ "Move workspace _left") move-workspace-backwards)))
 
   ;; X constants
   (defconst NormalState 1)
