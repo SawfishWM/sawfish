@@ -320,10 +320,7 @@ Release the grab on the mouse pointer.
 ::end:: */
 {
     XUngrabPointer (dpy, last_event_time);
-    /* Ungrabbing the pointer means that we won't receive the
-       ButtonRelease event needed to unclick any associated
-       frame part, so.. */
-    unclick_current_fp ();
+    synthesize_button_release ();
     DB(("ungrab-pointer: time=%lu\n", last_event_time));
     return Qt;
 }
