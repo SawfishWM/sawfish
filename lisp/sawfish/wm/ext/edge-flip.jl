@@ -23,13 +23,22 @@
 (require 'timers)
 (provide 'edge-flip)
 
+;;;###autoload (setq custom-required (cons 'edge-flip custom-required))
+
 ;; for the compiler's benefit
 (eval-when-compile (require 'move-resize))
 
 (defgroup edge-flip "Edge Flipping")
 
+(defcustom edge-flip-enabled nil
+  "Enable viewport flipping when pointer hits edge of screen."
+  :type boolean
+  :require edge-flip
+  :group edge-flip
+  :after-set edge-flip-enable)
+
 (defcustom edge-flip-delay 250
-  "Number of milliseconds to wait after mouse hits edge of screen before
+  "Number of milliseconds to wait after pointer hits edge of screen before
 flipping to the next viewport."
   :type number
   :group edge-flip
@@ -37,6 +46,11 @@ flipping to the next viewport."
 
 (defvar ef-current-edge nil)
 (defvar ef-timer nil)
+
+(defun edge-flip-enable ()
+  (if edge-flip-enabled
+      (enable-flippers)
+    (disable-flippers)))
 
 (defun edge-flip-enter (edge)
   (if (<= edge-flip-delay 0)
@@ -81,22 +95,26 @@ flipping to the next viewport."
 ;; moving windows
 ;; XXX this probably doesn't handle the screen corners correctly
 (defun edge-flip-while-moving ()
-  (let
-      ((ptr (query-pointer))
-       edge)
-    (cond ((zerop (car ptr))
-	   (setq edge 'left))
-	  ((= (car ptr) (1- (screen-width)))
-	   (setq edge 'right))
-	  ((zerop (cdr ptr))
-	   (setq edge 'top))
-	  ((= (cdr ptr) (1- (screen-height)))
-	   (setq edge 'bottom)))
-    (unless (eq edge ef-current-edge)
-      (if edge
-	  (call-hook 'enter-flipper-hook (list edge))
-	(call-hook 'leave-flipper-hook (list ef-current-edge))))))
+  (when edge-flip-enabled
+    (let
+	((ptr (query-pointer))
+	 edge)
+      (cond ((zerop (car ptr))
+	     (setq edge 'left))
+	    ((= (car ptr) (1- (screen-width)))
+	     (setq edge 'right))
+	    ((zerop (cdr ptr))
+	     (setq edge 'top))
+	    ((= (cdr ptr) (1- (screen-height)))
+	     (setq edge 'bottom)))
+      (unless (eq edge ef-current-edge)
+	(if edge
+	    (call-hook 'enter-flipper-hook (list edge))
+	  (call-hook 'leave-flipper-hook (list ef-current-edge)))))))
 
 (add-hook 'enter-flipper-hook 'edge-flip-enter)
 (add-hook 'leave-flipper-hook 'edge-flip-leave)
 (add-hook 'while-moving-hook 'edge-flip-while-moving)
+
+(unless batch-mode
+  (edge-flip-enable))
