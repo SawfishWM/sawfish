@@ -88,7 +88,7 @@
    ((background . ,brushed-metal-menu-images)
     (top-edge . -15)
     (left-edge . 0)
-    (class . menu))
+    (class . menu-button))
 
    ;; title bar
    ((background . ,brushed-metal-title-images)
@@ -105,19 +105,19 @@
    ((background . ,brushed-metal-iconify-images)
     (right-edge . 28)
     (top-edge . -15)
-    (class . iconify))
+    (class . iconify-button))
 
    ;; maximize button
    ((background . ,brushed-metal-maximize-images)
     (right-edge . 14)
     (top-edge . -15)
-    (class . maximize))
+    (class . maximize-button))
 
    ;; delete button
    ((background . ,brushed-metal-close-images)
     (right-edge . 0)
     (top-edge . -15)
-    (class . close))
+    (class . close-button))
 
    ;; left border
    ((background . ,brushed-metal-left-images)
@@ -177,7 +177,7 @@
    ((background . ,brushed-metal-menu-images)
     (top-edge . -19)
     (left-edge . 0)
-    (class . menu))
+    (class . menu-button))
 
    ;; title bar
    ((background . ,brushed-metal-title-images)
@@ -194,19 +194,19 @@
    ((background . ,brushed-metal-iconify-images)
     (right-edge . 28)
     (top-edge . -19)
-    (class . iconify))
+    (class . iconify-button))
 
    ;; maximize button
    ((background . ,brushed-metal-maximize-images)
     (right-edge . 14)
     (top-edge . -19)
-    (class . maximize))
+    (class . maximize-button))
 
    ;; delete button
    ((background . ,brushed-metal-close-images)
     (right-edge . 0)
     (top-edge . -19)
-    (class . close))
+    (class . close-button))
 
    ;; top border
    ((background . ,brushed-metal-top-images)

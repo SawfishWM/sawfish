@@ -89,13 +89,13 @@
    ((background . ,simple-minimize)
     (left-edge . 4)
     (top-edge . -18)
-    (class . iconify)
+    (class . iconify-button)
     (removable . t))
    ;; close button
    ((background . ,simple-close)
     (right-edge . 4)
     (top-edge . -18)
-    (class . close)
+    (class . close-button)
     (removable . t))))
 (put 'simple-frame 'unshaped t)
 
@@ -139,13 +139,13 @@
    ((background . ,simple-minimize)
     (left-edge . 5)
     (top-edge . -19)
-    (class . iconify)
+    (class . iconify-button)
     (removable . t))
    ;; close button
    ((background . ,simple-close)
     (right-edge . 5)
     (top-edge . -19)
-    (class . close)
+    (class . close-button)
     (removable . t))))
 (put 'simple-shaped-frame 'unshaped t)
 

@@ -137,13 +137,13 @@
    ((background . ,gradient-minimize)
     (left-edge . 4)
     (top-edge . -18)
-    (class . iconify)
+    (class . iconify-button)
     (removable . t))
    ;; close button
    ((background . ,gradient-close)
     (right-edge . 4)
     (top-edge . -18)
-    (class . close)
+    (class . close-button)
     (removable . t))))
 (put 'gradient-frame 'unshaped t)
 
@@ -188,13 +188,13 @@
    ((background . ,gradient-minimize)
     (left-edge . 5)
     (top-edge . -19)
-    (class . iconify)
+    (class . iconify-button)
     (removable . t))
    ;; close button
    ((background . ,gradient-close)
     (right-edge . 5)
     (top-edge . -19)
-    (class . close)
+    (class . close-button)
     (removable . t))))
 (put 'gradient-shaped-frame 'unshaped t)
 

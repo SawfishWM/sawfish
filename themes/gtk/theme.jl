@@ -222,13 +222,13 @@
 	 ((background . ,gtk-minimize)
 	  (left-edge . 4)
 	  (top-edge . -18)
-	  (class . iconify)
+	  (class . iconify-button)
 	  (removable . t))
 	 ;; close button
 	 ((background . ,gtk-close)
 	  (right-edge . 4)
 	  (top-edge . -18)
-	  (class . close)
+	  (class . close-button)
 	  (removable . t))))
 
   (setq gtk-shaped-frame
@@ -271,13 +271,13 @@
 	 ((background . ,gtk-minimize)
 	  (left-edge . 5)
 	  (top-edge . -19)
-	  (class . iconify)
+	  (class . iconify-button)
 	  (removable . t))
 	 ;; close button
 	 ((background . ,gtk-close)
 	  (right-edge . 5)
 	  (top-edge . -19)
-	  (class . close)
+	  (class . close-button)
 	  (removable . t))))
 
   (setq gtk-transient-frame

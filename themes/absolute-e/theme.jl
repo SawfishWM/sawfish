@@ -62,7 +62,7 @@
      (width . 16)
      (top-edge . -16)
      (height . 16)
-     (class . menu))
+     (class . menu-button))
     ;; title bar
     ((background . ,absolute-e-bar-images)
      (foreground . "white")
@@ -138,7 +138,7 @@
     (width . 16)
     (top-edge . -16)
     (height . 16)
-    (class . menu))
+    (class . menu-button))
    ;; title bar
    ((background . ,absolute-e-bar-images)
     (foreground . "white")
