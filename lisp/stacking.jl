@@ -132,15 +132,17 @@ stacking level to place them in.")
        (depth (window-get w 'depth))
        tem)
     (setq order (delq w order))
-    (if (<= (window-get (car order) 'depth) depth)
-	;; no windows above DEPTH, so just raise to the top
-	;; of the global stack
-	(x-raise-window w)
-      (setq tem order)
-      (while (and (cdr tem) (> (window-get (car (cdr tem)) 'depth) depth))
-	(setq tem (cdr tem)))
-      (rplacd tem (cons w (cdr tem)))
-      (restack-windows order))))
+    (cond ((null order))		;no other windows
+	  ((<= (window-get (car order) 'depth) depth)
+	   ;; no windows above DEPTH, so just raise to the top
+	   ;; of the global stack
+	   (x-raise-window w))
+	  (t
+	   (setq tem order)
+	   (while (and (cdr tem) (> (window-get (car (cdr tem)) 'depth) depth))
+	     (setq tem (cdr tem)))
+	   (rplacd tem (cons w (cdr tem)))
+	   (restack-windows order)))))
 
 (defun raise-lower-window (w)
   "If the window is the highest window in its stacking level, lower it to the
