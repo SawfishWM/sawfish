@@ -768,7 +768,7 @@ Set the input focus to WINDOW. If WINDOW is nil, then no window will
 have the focus.
 ::end:: */
 {
-    if (win != Qnil)
+    if (win != Qnil && win != Qroot)
     {
 	rep_DECLARE1(win, WINDOWP);
 	focus_on_window (VWIN(win));
