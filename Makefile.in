@@ -23,8 +23,7 @@ include ./Makedefs
 top_builddir=.
 top_srcdir=@top_srcdir@
 
-SUBDIRS = src capplet lisp themes man po
-GNOME_DIRS := / /usr /usr/local /opt /gnome /opt/gnome
+SUBDIRS = @SUBDIRS@
 
 all : build.h DOC.dir NEWS FAQ
 	set -e; for dir in $(SUBDIRS); do \
@@ -42,7 +41,7 @@ install : all installdirs
 	done
 	$(INSTALL_DATA) ./DOC.dir $(DESTDIR)$(sawmilldir)/$(version)
 	$(INSTALL_DATA) ./DOC.pag $(DESTDIR)$(sawmilldir)/$(version)
-	-set -e; for d in $(prefix) $(DESTDIR)$(GNOME_DIRS); do \
+	-set -e; for d in $(prefix) $(DESTDIR)$(GNOMEDIRS); do \
 	  if [ -d $$d/share/gnome/wm-properties ]; then \
 	    $(INSTALL_DATA) Sawmill.desktop $(DESTDIR)$$d/share/gnome/wm-properties; \
 	    break; \
