@@ -1328,6 +1328,20 @@ reset_frame_parts (Lisp_Window *w)
     }
 }
 
+/* Make sure stacking in frame is as desired after reparenting
+   the client into the frame */
+void
+restack_frame_parts (Lisp_Window *w)
+{
+    struct frame_part *fp;
+    XLowerWindow (dpy, w->id);
+    for (fp = w->frame_parts; fp != 0; fp = fp->next)
+    {
+	if (fp->id != 0 && fp->below_client)
+	    XLowerWindow (dpy, fp->id);
+    }
+}
+
 
 /* creating window frames */
 
