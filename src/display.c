@@ -133,38 +133,38 @@ sys_init(char *program_name)
 #endif
 
     prog_name = program_name;
-
-    if (rep_get_option ("--display", &opt))
-	display_name = strdup (rep_STR(opt));
     if (rep_get_option ("--name", &opt))
 	prog_name = strdup (rep_STR(opt));
 
-    if (display_name == 0)
-	display_name = getenv("DISPLAY");
-
-    dpy = XOpenDisplay(display_name);
-    if(dpy != 0)
+    if(rep_SYM(Qbatch_mode)->value == Qnil)
     {
-	rep_register_input_fd (ConnectionNumber(dpy), handle_sync_input);
-	screen_num = DefaultScreen(dpy);
-	root_window = RootWindow(dpy, screen_num);
-	screen_depth = DefaultDepth(dpy, screen_num);
-	screen_visual = DefaultVisual(dpy, screen_num);
-	screen_width = DisplayWidth(dpy, screen_num);
-	screen_height = DisplayHeight(dpy, screen_num);
-	screen_cmap = DefaultColormap(dpy, screen_num);
+	if (rep_get_option ("--display", &opt))
+	    display_name = strdup (rep_STR(opt));
 
-	xa_wm_state = XInternAtom (dpy, "WM_STATE", False);
-	xa_wm_change_state = XInternAtom (dpy, "WM_CHANGE_STATE", False);
-	xa_wm_protocols = XInternAtom (dpy, "WM_PROTOCOLS", False);
-	xa_wm_delete_window = XInternAtom (dpy, "WM_DELETE_WINDOW", False);
-	xa_wm_colormap_windows = XInternAtom (dpy, "WM_COLORMAP_WINDOWS", False);
-	xa_wm_take_focus = XInternAtom (dpy, "WM_TAKE_FOCUS", False);
+	if (display_name == 0)
+	    display_name = getenv("DISPLAY");
 
-	XShapeQueryExtension (dpy, &shape_event_base, &shape_error_base);
-
-	if(rep_SYM(Qbatch_mode)->value == Qnil)
+	dpy = XOpenDisplay(display_name);
+	if(dpy != 0)
 	{
+	    rep_register_input_fd (ConnectionNumber(dpy), handle_sync_input);
+	    screen_num = DefaultScreen(dpy);
+	    root_window = RootWindow(dpy, screen_num);
+	    screen_depth = DefaultDepth(dpy, screen_num);
+	    screen_visual = DefaultVisual(dpy, screen_num);
+	    screen_width = DisplayWidth(dpy, screen_num);
+	    screen_height = DisplayHeight(dpy, screen_num);
+	    screen_cmap = DefaultColormap(dpy, screen_num);
+
+	    xa_wm_state = XInternAtom (dpy, "WM_STATE", False);
+	    xa_wm_change_state = XInternAtom (dpy, "WM_CHANGE_STATE", False);
+	    xa_wm_protocols = XInternAtom (dpy, "WM_PROTOCOLS", False);
+	    xa_wm_delete_window = XInternAtom (dpy, "WM_DELETE_WINDOW", False);
+	    xa_wm_colormap_windows = XInternAtom (dpy, "WM_COLORMAP_WINDOWS", False);
+	    xa_wm_take_focus = XInternAtom (dpy, "WM_TAKE_FOCUS", False);
+
+	    XShapeQueryExtension (dpy, &shape_event_base, &shape_error_base);
+
 	    XSetErrorHandler (error_other_wm);
 	    XSelectInput (dpy, root_window,
 			  SubstructureRedirectMask | SubstructureNotifyMask
@@ -173,49 +173,54 @@ sys_init(char *program_name)
 			  | EnterWindowMask | LeaveWindowMask);
 	    XSync (dpy, False);
 	    XSetErrorHandler (error_handler);
-	}
 
+	    {
+		/* Create the mapped-but-invisible window that is given
+		   the focus when no other window has it. */
+		XSetWindowAttributes attr;
+		attr.event_mask = KeyPressMask;
+		attr.override_redirect = True;
+		no_focus_window = XCreateWindow (dpy, root_window,
+						 -10, -10, 10, 10, 0, 0,
+						 InputOnly, CopyFromParent,
+						 CWEventMask
+						 | CWOverrideRedirect,
+						 &attr);
+		XMapWindow (dpy, no_focus_window);
+	    }
+
+	    if (rep_get_option ("--sync", 0))
+		XSynchronize (dpy, True);
+
+	    /* If I don't do this all the events that are created by
+	       the window initialiation are ignored until the next
+	       new event arrives (because of the XSync calls above) */
+	    rep_mark_input_pending (ConnectionNumber(dpy));
+
+	    rep_redisplay_fun = redisplay;
+	    rep_beep_fun = beep;
+	    return TRUE;
+	}
+	else
 	{
-	    /* Create the mapped-but-invisible window that is given
-	       the focus when no other window has it. */
-	    XSetWindowAttributes attr;
-	    attr.event_mask = KeyPressMask;
-	    attr.override_redirect = True;
-	    no_focus_window = XCreateWindow (dpy, root_window,
-					     -10, -10, 10, 10, 0, 0,
-					     InputOnly, CopyFromParent,
-					     CWEventMask | CWOverrideRedirect,
-					     &attr);
-	    XMapWindow (dpy, no_focus_window);
+	    fprintf(stderr, "sawmill: Can't open display: %s\n",
+		    display_name ? display_name : "");
+	    return FALSE;
 	}
-
-	if (rep_get_option ("--sync", 0))
-	    XSynchronize (dpy, True);
-
-	/* If I don't do this all the events that are created by
-	   the window initialiation are ignored until the next
-	   new event arrives (because of the XSync calls above) */
-        rep_mark_input_pending (ConnectionNumber(dpy));
-
-	rep_redisplay_fun = redisplay;
-	rep_beep_fun = beep;
-
-	return TRUE;
     }
     else
-    {
-	fprintf(stderr, "sawmill: Can't open display: %s\n",
-		display_name ? display_name : "");
-	return FALSE;
-    }
+	return TRUE;
 }
 
 void
 sys_kill (void)
 {
-    XSetInputFocus (dpy, PointerRoot, 0, last_event_time);
-    XDestroyWindow (dpy, no_focus_window);
-    XCloseDisplay (dpy);
+    if(rep_SYM(Qbatch_mode)->value == Qnil)
+    {
+	XSetInputFocus (dpy, PointerRoot, 0, last_event_time);
+	XDestroyWindow (dpy, no_focus_window);
+	XCloseDisplay (dpy);
+    }
 }
 
 
