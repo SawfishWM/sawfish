@@ -699,7 +699,7 @@ all workspaces."
       ((limits (ws-workspace-limits))
        (space (window-get w 'workspace)))
     (when space
-      `((workspace . ,(- (car limits) space))))))
+      `((workspace . ,(- space (car limits)))))))
 
 (defun ws-load-state (w alist)
   (let
