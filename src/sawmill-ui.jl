@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.40 1999/12/01 19:10:45 john Exp $
+;; $Id: sawmill-ui.jl,v 1.41 1999/12/01 23:27:35 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -23,9 +23,9 @@ exec rep "$0" "$@"
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(setq print-length 5)
-(setq print-depth 3)
-(setq debug-on-error t)
+;(setq print-length 5)
+;(setq print-depth 3)
+;(setq debug-on-error t)
 
 (require 'gtk)
 
@@ -83,6 +83,13 @@ exec rep "$0" "$@"
 (defvar ui-set-style 'menu)
 
 (defvar ui-match-window-max-matchers 3)
+
+;; for i18n
+(defvar ui-lang (or (getenv "LC_ALL") (getenv "LC_MESSAGES") (getenv "LANG")))
+(defvar ui-lang-base (when ui-lang
+		       (if (string-match "^([^_.]+)_.*" ui-lang)
+			   (expand-last-match "\\1")
+			 ui-lang)))
 
 
 ;; wm communication
@@ -914,7 +921,7 @@ exec rep "$0" "$@"
 			      '("%s" "%s.tar#tar/%s" "%s.tar.gz#tar/%s"
 			       "%s.tar.Z#tar/%s" "%s.tar.bz2#tar/%s"))
 			nil)
-		  (setq full (expand-file-name "README" full))
+		  (setq full (i18n-filename (expand-file-name "README" full)))
 		  (if (file-exists-p full)
 		      (let
 			  ((text (make-string-output-stream))
@@ -980,7 +987,7 @@ exec rep "$0" "$@"
 			    ((gtk-entry-p (cdr cell))
 			     ;; number
 			     (setq tem (gtk-entry-get-text (cdr cell)))
-			     (when (string-match "^\\d+$" tem)
+			     (when (string-match "^[+-]?\\d+$" tem)
 			       (setq actions
 				     (cons (cons (car cell)
 						 (read-from-string tem))
@@ -1232,11 +1239,11 @@ exec rep "$0" "$@"
     (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
     (gtk-widget-set-usize scroller 400 200)
 
+    (gtk-box-pack-start vbox scroller t t)
     (gtk-box-pack-end vbox hbox)
     (gtk-container-add hbox add-b)
     (gtk-container-add hbox edit-b)
     (gtk-container-add hbox delete-b)
-    (gtk-container-add vbox scroller)
     (gtk-container-add scroller clist)
 
     (mapc (lambda (item)
@@ -1478,8 +1485,21 @@ exec rep "$0" "$@"
 	((doc (documentation ',symbol ',is-var)))
       (and doc (_ doc))) t))
 
+;; for a file called FILE, look for one with a .LC extension LC is
+;; the language code for the current language
+(defun i18n-filename (file)
+  (cond ((and ui-lang (file-exists-p (concat file ?. ui-lang)))
+	 (concat file ?. lang))
+	((and ui-lang-base (file-exists-p (concat file ?. ui-lang-base)))
+	 (concat file ?. ui-lang-base))
+	(t
+	 file)))
+
 
 ;; entry point
+
+(when (boundp 'gtk-set-locale)
+  (gtk-set-locale))
 
 (let
     (tem)
