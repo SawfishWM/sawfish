@@ -132,6 +132,7 @@ find_window_by_id (Window id)
     return w;
 }
 
+/* Note that frames.c:list_frame_generator also does this itself */
 void
 set_window_shape (Lisp_Window *w)
 {
@@ -179,7 +180,6 @@ install_window_frame (Lisp_Window *w)
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	w->reparented = TRUE;
 	w->reparenting = TRUE;
-	set_window_shape (w);
 	DB(("  reparented to %lx [%dx%d%+d%+d]\n",
 	    w->frame, w->frame_width, w->frame_height,
 	    w->frame_x, w->frame_y));
@@ -339,7 +339,6 @@ fix_window_size (Lisp_Window *w)
     XResizeWindow (dpy, w->id, w->attr.width, w->attr.height);
     if (w->frame != 0 && w->rebuild_frame != 0)
 	w->rebuild_frame (w);
-    set_window_shape (w);
     Fungrab_server ();
 }
 
