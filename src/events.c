@@ -89,6 +89,9 @@ DEFSYM(deleted, "deleted");
 DEFSYM(stack, "stack");
 DEFSYM(above, "above");
 DEFSYM(below, "below");
+DEFSYM(top_if, "top-if");
+DEFSYM(bottom_if, "bottom-if");
+DEFSYM(opposite, "opposite");
 DEFSYM(dimensions, "dimensions");
 
 /* `Time' will always be 32-bits, due to underlying wire protocol (?) */
@@ -855,10 +858,42 @@ configure_request (XEvent *ev)
 	}
 	if (mask & CWStackMode)
 	{
-	    if (ev->xconfigurerequest.detail == Above)
-		alist = Fcons (Fcons (Qstack, Qabove), alist);
-	    else if (ev->xconfigurerequest.detail == Below)
-		alist = Fcons (Fcons (Qstack, Qbelow), alist);
+	    Window above_win;
+	    repv relation = Qnil, sibling = Qnil;
+
+	    above_win = ev->xconfigurerequest.above;
+	    if (above_win != 0)
+	    {
+		Lisp_Window *tem = find_window_by_id (above_win);
+		if (tem != 0)
+		    sibling = rep_VAL (tem);
+	    }
+
+	    switch (ev->xconfigurerequest.detail)
+	    {
+	    case Above:
+		relation = Qabove;
+		break;
+	    case Below:
+		relation = Qbelow;
+		break;
+	    case TopIf:
+		relation = Qtop_if;
+		break;
+	    case BottomIf:
+		relation = Qbottom_if;
+		break;
+	    case Opposite:
+		relation = Qopposite;
+		break;
+	    }
+
+	    if (relation != Qnil)
+	    {
+		repv stack_data;
+		stack_data = Fcons (relation, Fcons (sibling, Qnil));
+		alist = Fcons (Fcons (Qstack, stack_data), alist);
+	    }
 	}
 	if ((mask & CWX) || (mask & CWY))
 	{
@@ -1455,6 +1490,9 @@ events_init (void)
     rep_INTERN(stack);
     rep_INTERN(above);
     rep_INTERN(below);
+    rep_INTERN(bottom_if);
+    rep_INTERN(top_if);
+    rep_INTERN(opposite);
     rep_INTERN(dimensions);
 
     rep_mark_static (&current_event_window);
