@@ -30,6 +30,13 @@
 
 (defvar default-frameset fallback-frameset)
 
+(defvar ignored-window-names nil
+  "A list of regular expressions matching windows that don't get a frame.")
+
+(defvar sticky-window-names nil
+  "A list of regular expressions matching window names that exist across
+workspaces.")
+
 (defun window-type (w)
   (if (window-transient-p w)
       (if (window-shaped-p w)
@@ -41,6 +48,19 @@
 
 ;; called from the add-window-hook
 (defun transient-add-window (w)
+  (when (catch 'foo
+	  (mapc #'(lambda (r)
+		    (when (string-match r (window-name w))
+		      (throw 'foo t))) ignored-window-names)
+	  nil)
+    (window-put w 'ignored t)
+    (set-window-frame w 'nil-frame))
+  (when (catch 'foo
+	  (mapc #'(lambda (r)
+		    (when (string-match r (window-name w))
+		      (throw 'foo t))) sticky-window-names)
+	  nil)
+    (window-put w 'sticky t))
   (unless (window-frame w)
     (let
 	((type (window-type w))
@@ -49,4 +69,5 @@
 			      (cdr (assq type fallback-frameset))
 			      default-frame)))))
 
-(add-hook 'add-window-hook 'transient-add-window t)
+;; add the above function into the `add-window-hook' hook
+(add-hook 'add-window-hook 'transient-add-window)
