@@ -368,8 +368,7 @@ lookup_event_binding (u_long code, u_long mods, repv context_map)
 	{
 	    struct frame_part *fp
 		= find_frame_part_by_window (current_x_event->xany.window);
-	    if (fp != 0)
-		w = fp->win;
+	    w = fp ? fp->win : 0;
 	}
     }
     return lookup_binding(code, mods, 0, context_map, w);
