@@ -56,8 +56,8 @@ server_handle_request(int fd)
     u_char req;
     if(read(fd, &req, 1) != 1)
 	goto disconnect;
-    /* XXX this is a bit lame */
-    last_event_time = CurrentTime;
+    /* Need this in case the client code tries to execute a grab */
+    last_event_time = get_server_timestamp ();
     switch(req)
     {
 	u_long len;
