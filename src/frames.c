@@ -1207,9 +1207,13 @@ reset_frame_parts (Lisp_Window *w)
     struct frame_part *fp;
     for (fp = w->frame_parts; fp != 0; fp = fp->next)
     {
+	int old_state = current_state (fp), new_state;
 	if (fp->clicked)
 	    unclick_current_fp ();
 	fp->highlighted = 0;
+	new_state = current_state (fp);
+	if (new_state != old_state)
+	    refresh_frame_part (fp);
     }
 }
 
