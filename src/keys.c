@@ -65,7 +65,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
     switch(xev->type)
     {
     case KeyPress:
-	*mods = xev->xkey.state;
+	*mods = xev->xkey.state & ~LockMask;
 	if(*mods & ShiftMask)
 	{
 	    /* Some keys don't have keysym at index 1, if not treat it as
