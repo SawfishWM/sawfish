@@ -1,5 +1,16 @@
 2000-11-14  John Harper  <jsh@eazel.com>
 
+	* windows.c (register_property_monitor, Fwindow_put): a general
+	interface for getting notification when the value of a window
+	property is changed
+
+	* keys.c (keymap_prop_change): property change handler for
+	Qkeymap (used to be embedded into Fwindow_put)
+
+	* events.c (ignore_fp_prop_change): called when the
+	ignore-fp-keymap property is changed, if a context map is
+	cached, recompute it (really fixes #4708)
+
 	* events.c (current_context_map): cache the context map across
 	calls
 	(flush_current_context_map): new function
