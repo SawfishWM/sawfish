@@ -110,10 +110,10 @@ CPPFLAGS="${_cppflags}"
 dnl Check for librep
 AM_PATH_REP(0.14)
 
-rep_gtk_function=gtk-main-iteration-do
-rep_gtk_version=0.14
+rep_gtk_function=gtk-widget-set-size-request
+rep_gtk_version=0.17
 
-AC_MSG_CHECKING([for correct rep-gtk version])
+AC_MSG_CHECKING([for rep-gtk >= $rep_gtk_version])
 cat >conftest <<EOF
 (condition-case nil
     (progn
@@ -228,7 +228,7 @@ AC_ARG_ENABLE(themer,
 if test "$enable_themer" = yes; then
   dnl configure redirects &5 to config.log
   AC_MSG_CHECKING([for rep-gtk libglade wrapper])
-  if REP_GTK_DONT_INITIALIZE=1 rep --batch -l libglade 2>&5; then 
+  if REP_GTK_DONT_INITIALIZE=1 rep --batch -l gui.gtk.libglade 2>&5; then 
     AC_MSG_RESULT([yes])
     add_subdir "themer"
   else 
@@ -240,11 +240,11 @@ fi
 AC_ARG_ENABLE(gnome-widgets,
  [  --enable-gnome-widgets  Use GNOME widgets in places [default]
   --disable-gnome-widgets Don't use GNOME widgets], [],
- [enable_gnome_widgets=maybe])
+ [enable_gnome_widgets=no])
 
 if test "$enable_gnome_widgets" != "no"; then
   AC_MSG_CHECKING([for rep-gtk GNOME wrappers])
-  if REP_GTK_DONT_INITIALIZE=1 rep --batch -l gnomeui -l gdk-pixbuf -l gnome-canvas-pixbuf 2>&5; then 
+  if REP_GTK_DONT_INITIALIZE=1 rep --batch -l gui.gtk-2.gnome-ui 2>&5; then 
     AC_MSG_RESULT([yes])
     REP_GTK_GNOME=yes
   else 
