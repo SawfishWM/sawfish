@@ -66,7 +66,7 @@
   (defvar sp-avoided-windows-weight 100)
   (defvar sp-normal-windows-weight 1)
 
-  (defvar sp-padding 4
+  (defvar sp-padding 0
     "Try to leave at least this many pixels between window edges in first/best-fit.")
 
   ;; the maximum number of points to keep in each grid dimension
