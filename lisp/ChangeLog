@@ -1,5 +1,15 @@
 1999-09-25  John Harper  <john@dcs.warwick.ac.uk>
 
+	* workspace.jl: remove the requirement that workspace indices
+	are always >= 0. This makes moving beyond the first inhabited
+	workspace a lot easier. Also removed the total-workspaces
+	variable, there's now a ws-workspace-limits function that
+	returns the first and last workspaces. Various other minor
+	changes..
+
+	* keymaps.jl, gnome.jl, cycle.jl: small changes for modified
+	workspace.jl
+
 	* customize.jl (customize-symbol-spec): file-name type now has
 	its own widget
 

@@ -21,7 +21,8 @@ image instead of a piece of text
 
 @item New theme @code{smaker}, uses the foreground images capability to
 do a somewhat WindowMaker-like theme (with the absolute-e images). This
-theme is extensively customizable---all images, colors, etc@dots{}
+theme is extensively customizable---all images, colors, dimensions,
+etc@dots{}
 
 @item Use Imlib's fuzzy color matching for all color allocation; this
 should help on @code{PseudoColor} visuals
@@ -31,8 +32,13 @@ should help on @code{PseudoColor} visuals
 @item Improved the bindings customization widget layout; added a
 @samp{Copy} button to insert a copy of the current binding
 
-@item Added @code{jump-workspaces-forwards} (and similar
-@code{backwards}) command. Can be used to mimic a 2d desktop
+@item Added @code{next-workspace-row} and @code{previous-workspace-row}
+commands. Together with the @code{workspace-columns} variable these
+mimic a 2d desktop
+
+@item Removed the @code{cycle-through-workspaces} option, there's now
+@code{workspace-boundary-mode}---one of @code{stop}, @code{wrap-around}
+or @code{keep-going}
 
 @item Added option to include ignored windows when edge snapping
 (@code{move-snap-ignored-windows})

@@ -21,23 +21,23 @@ subprocess
 
 @item How do I get a grid of desktops?
 
-This isn't fully possibly at the moment. But you can approximate an
-@var{n}-by-@var{m} grid by doing the following:
+This isn't completely possibly at the moment. But you can closely
+approximate an @var{n}-by-@var{m} grid by doing the following:
 
 @enumerate
 @item Turn off the @samp{delete workspaces when empty} option
 
-@item Set the number of preallocated workspaces to @var{n} times @var{m}
+@item Set the minimum number of workspaces to @var{n} times @var{m}
 
-@item Set the @code{workspace-jump-distance} variable to @var{n}
+@item Set the @code{workspace-columns} variable to @var{n}
 
-@item Use the @code{jump-workspaces-forwards} and
-@code{jump-workspaces-backwards} commands to move up and down (bound to
+@item Use the @code{next-workspace-row} and
+@code{previous-workspace-row} commands to move up and down (bound to
 @kbd{C-Down} and @kbd{C-Up} by default)
-@end enumerate
 
-The pager will still show a vector of workspaces, but it will feel more
-like a grid@dots{}
+@item If you're using the GNOME pager, then you should set the
+@samp{Rows of pagers} option to @var{m}
+@end enumerate
 
 
 @item How do I redefine the @samp{Applications} menu?
