@@ -79,11 +79,7 @@ error_handler (Display *dpy, XErrorEvent *ev)
 	if (w == focus_window)
 	    focus_window = 0;
 	if (w->id != 0)
-	{
 	    remove_window (w, Qt, Qt);
-	    /* the window isn't windowp anymore */
-	    Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
-	}
 	return 0;			/* ?? */
     }
     else
