@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ "$1" = "--backend" ]; then
-  exec rep "$0" "$@"
+  shift; exec rep "$0" "$@"
 else
   sawmill-client -w -q -f customize || echo "sawmill server isn't running"
   exit
@@ -66,10 +66,12 @@ fi
 ;; (hsep)
 ;; (vsep)
 ;; (frame TEXT ELEMENTS...)
+
 ;; (toggle TEXT KEYS...)
 ;; (number KEYS...)
 ;; (string KEYS...)
 ;; (set LIST KEYS...)
+;; (font KEYS...)
 
 ;; KEYS is a plist, possible keys are:
 
@@ -140,6 +142,7 @@ fi
   (let
       ((label (gtk-label-new (nth 1 spec))))
     (gtk-label-set-justify label 'left)
+    (gtk-label-set-line-wrap label t)
     label))
 
 (put 'frame 'builder 'build-frame)
@@ -163,6 +166,7 @@ fi
       ((toggle (gtk-check-button-new-with-label (nth 1 spec))))
     (mapc #'(lambda (w)
 	      (when (gtk-label-p w)
+;		(gtk-label-set-line-wrap w t)
 		(gtk-label-set-justify w 'left)))
 	  (gtk-container-children toggle))
     (if (key-exists-p spec ':value)
@@ -198,6 +202,7 @@ fi
   (unless (get-key spec ':in-apply-hook)
     (add-hook 'ui-apply-changed-hook `(lambda ()
 					(build-entry:set ',spec)))
+    (ui-set-button-states)
     (set-key spec ':in-apply-hook nil)))
 
 (defun build-entry:set (spec)
@@ -213,7 +218,49 @@ fi
 		   (setq value nil)))
 	     (error
 	      (setq value nil)))))
+    (set-key spec ':in-apply-hook nil)
     (ui-set spec (get-key spec ':variable) value)))
+
+(put 'font 'builder 'build-font)
+(defun build-font (spec)
+  (let
+      ((button (gtk-button-new-with-label (or (get-key spec ':value) ""))))
+    (mapc #'(lambda (w)
+	      (when (gtk-label-p w)
+		(gtk-label-set-line-wrap w t)))
+	  (gtk-container-children button))
+    (unless (key-exists-p spec ':value)
+      (set-key spec ':value nil))
+    (gtk-signal-connect button "clicked"
+			`(lambda (w)
+			   (build-font:clicked ',spec)))
+    (setq spec (nconc spec (list ':widget button)))
+    button))
+
+(defun build-font:clicked (spec)
+  (let
+      ((fontsel (gtk-font-selection-dialog-new "Select font")))
+    (when (get-key spec ':value)
+      (gtk-font-selection-dialog-set-font-name fontsel (get-key spec ':value)))
+    (gtk-signal-connect
+     (gtk-font-selection-dialog-ok-button fontsel)
+     "clicked"
+     `(lambda (w)
+	(let
+	    ((value (gtk-font-selection-dialog-get-font-name ',fontsel)))
+	  (when (and (string= value "") (get-key spec ':allow-nil))
+	    (setq value nil))
+	  (ui-set ',spec (get-key ',spec ':variable) value)
+	  (ui-set-button-label ',(get-key spec ':widget) value)
+	  (gtk-widget-destroy ',fontsel))))
+    (gtk-signal-connect
+     (gtk-font-selection-dialog-cancel-button fontsel)
+     "clicked" `(lambda (w)
+		  (gtk-widget-destroy ',fontsel)))
+    (gtk-signal-connect fontsel
+     "delete_event" `(lambda (w)
+		       (gtk-widget-destroy ',fontsel)))
+    (gtk-widget-show fontsel)))
 
 (put 'set 'builder 'build-set)
 (defun build-set (spec)
@@ -234,15 +281,14 @@ fi
       (gtk-toggle-button-set-state (aref buttons i)
 				   (eq (car values) (get-key spec ':value)))
       (gtk-box-pack-start box (aref buttons i) nil nil)
-      (gtk-signal-connect (aref buttons i) "clicked"
-			  `(lambda ()
-			     (ui-set ',spec ',(get-key spec ':variable)
-				     ',(car values))))
+      (gtk-signal-connect (aref buttons i) "toggled"
+			  `(lambda (w)
+			     (when (gtk-toggle-button-active w)
+			       (ui-set ',spec ',(get-key spec ':variable)
+				       ',(car values)))))
       (setq i (1+ i))
       (setq values (cdr values)))
     box))
-
-;; XXX do radio buttons
 
 (defun show-ui (spec)
   (let
@@ -255,13 +301,11 @@ fi
        (ui-window (gtk-window-new 'toplevel))
        (ui-root (build-ui spec))
        (vbox (gtk-vbox-new nil 0))
-       (hsep (gtk-hseparator-new))
        (hbox (gtk-hbox-new nil 0))
        (ok (gtk-button-new-with-label "OK"))
-       (ui-apply (gtk-button-new-with-label "Apply"))
-;XXX reinstate these
-;       (ui-revert (gtk-button-new-with-label "Revert"))
-;       (refresh (gtk-button-new-with-label "Refresh"))
+       (ui-apply (gtk-button-new-with-label "Try"))
+       (ui-revert (gtk-button-new-with-label "Revert"))
+       (refresh (gtk-button-new-with-label "Refresh"))
        (cancel (gtk-button-new-with-label "Cancel")))
     (gtk-window-set-title ui-window "Sawmill configurator")
     (gtk-widget-set-name ui-window "Sawmill configurator")
@@ -272,46 +316,52 @@ fi
     (gtk-box-set-spacing hbox ui-box-spacing)
     (gtk-container-border-width hbox ui-box-border)
     (gtk-box-pack-end vbox hbox)
-    (gtk-box-pack-end vbox hsep)
     (gtk-signal-connect ok "clicked" 'ui-ok)
     (gtk-signal-connect ui-apply "clicked" 'ui-apply)
     (gtk-signal-connect cancel "clicked" 'ui-cancel)
-;    (gtk-signal-connect ui-revert "clicked" 'ui-revert)
-;    (gtk-signal-connect refresh "clicked" 'ui-refresh)
-    (gtk-box-pack-start hbox ok)
+    (gtk-signal-connect ui-revert "clicked" #'(lambda () (ui-revert)))
+    (gtk-signal-connect refresh "clicked" 'ui-refresh)
     (gtk-box-pack-start hbox ui-apply)
+    (gtk-box-pack-start hbox ui-revert)
+    (gtk-box-pack-start hbox ok)
     (gtk-box-pack-start hbox cancel)
-;    (gtk-box-pack-start hbox ui-revert)
-;    (gtk-box-pack-start hbox refresh)
+    (gtk-box-pack-end hbox refresh)
     (gtk-box-pack-start vbox ui-root)
     (ui-set-button-states)
     (gtk-widget-show-all ui-window)
     (gtk-main)))
 
 (defun ui-set-button-states ()
-; XXX why doesn't this work?
-;  (gtk-widget-set-state ui-apply (if (or ui-values-to-apply
-;					 ui-apply-changed-hook)
-;				     'normal
-;				   'insensitive))
-;  (gtk-widget-set-state ui-revert (if ui-changed-variables
-;				      'normal
-;				    'insensitive))
-)
+  (when ui-apply
+    (gtk-widget-set-sensitive ui-apply (or ui-values-to-apply
+					   ui-apply-changed-hook)))
+  (when ui-revert
+    (gtk-widget-set-sensitive ui-revert ui-changed-variables)))
+
+(defun ui-set-button-label (button text)
+  (mapc #'(lambda (w)
+	    (when (gtk-label-p w)
+	      (gtk-label-set w text))) (gtk-container-children button)))
 
 
 ;; acting on settings
 
 (defun ui-set (spec symbol value)
-  (unless (assq symbol ui-original-values)
-    (setq ui-original-values (cons (cons symbol (get-key spec ':value))
-				   ui-original-values)))
+  (ui-set-original spec symbol)
   (setq ui-values-to-apply (delete-if #'(lambda (x)
 					  (eq (car x) spec))
 				      ui-values-to-apply))
   (setq ui-values-to-apply (cons (cons spec value) ui-values-to-apply))
   (set-key spec ':value value)
-  (ui-set-button-states))
+  (ui-set-button-states)
+; (format standard-error "--| original %S\n--| to-apply %S\n--| changed %S\n"
+;	  ui-original-values ui-values-to-apply ui-changed-variables)
+  )
+
+(defun ui-set-original (spec symbol)
+  (unless (assq symbol ui-original-values)
+    (setq ui-original-values (cons (cons symbol (get-key spec ':value))
+				   ui-original-values))))
 
 (defun ui-quit ()
   (gtk-widget-destroy ui-window)
@@ -334,7 +384,11 @@ fi
 		ui-values-to-apply)))
     (ui-command (cons 'progn commands))
     (setq ui-values-to-apply nil)
-    (ui-set-button-states)))
+    (setq ui-apply-changed-hook nil)
+    (ui-set-button-states)
+;   (format standard-error "--| original %S\n--| to-apply %S\n--| changed %S\n"
+;	    ui-original-values ui-values-to-apply ui-changed-variables)
+    ))
 
 (defun ui-apply ()
   (call-hook 'ui-apply-changed-hook)
@@ -346,7 +400,7 @@ fi
   (ui-apply)
   (ui-quit))
 
-(defun ui-revert ()
+(defun ui-revert (&optional dont-refresh)
   (let
       ((commands
 	(mapcar #'(lambda (symbol)
@@ -355,11 +409,14 @@ fi
 		ui-changed-variables)))
     (ui-command (cons 'progn commands))
     (setq ui-values-to-apply nil)
-    (setq ui-changed-variables nil))
-    (ui-set-button-states))
+    (setq ui-changed-variables nil)
+;   (format standard-error "--| original %S\n--| to-apply %S\n--| changed %S\n"
+;	    ui-original-values ui-values-to-apply ui-changed-variables)
+    (unless dont-refresh
+      (ui-refresh))))
 
 (defun ui-cancel ()
-  (ui-revert)
+  (ui-revert t)
   (ui-quit))
 
 (defun ui-command (form)
@@ -380,6 +437,7 @@ fi
     (setq ui-original-values nil)
     (setq ui-root (build-ui spec))
     (gtk-box-pack-start vbox ui-root)
+    (gtk-widget-show-all ui-window)
     (ui-set-button-states)))
 
 
