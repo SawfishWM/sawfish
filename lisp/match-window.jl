@@ -62,6 +62,7 @@
     (ignore-window-input-hint boolean)
     (ignore-program-position boolean)
     (raise-on-focus boolean)
+    (never-focus boolean)
     (group symbol ,(lambda ()
 		     (delete-if-not symbolp (window-group-ids))))
     (place-mode symbol ,(lambda ()
@@ -71,6 +72,7 @@
     (frame-style symbol ,(lambda ()
 			   (find-all-frame-styles t)))
     (position pair)
+    (size pair)
     (workspace number)
     (viewport pair)
     (depth number)
@@ -277,8 +279,21 @@
 
   (put 'position 'match-window-setter
        (lambda (w prop value)
-	 (move-window-to w (car value) (cdr value))
-	 (window-put w 'placed t)))
+	 (let
+	     ((x (car value))
+	      (y (cdr value)))
+	   (when (< x 0)
+	     ;; XXX should change placement gravity
+	     (setq x (+ (screen-width) x)))
+	   (when (< y 0)
+	     ;; XXX should change placement gravity
+	     (setq y (+ (screen-height) y)))
+	   (move-window-to w x y)
+	   (window-put w 'placed t))))
+
+  (put 'size 'match-window-setter
+       (lambda (w prop value)
+	 (resize-window-with-hints w (car value) (cdr value))))
 
   (put 'viewport 'match-window-setter
        (lambda (w prop value)
