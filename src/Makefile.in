@@ -47,7 +47,7 @@ libserver.la : server.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $<
 
 install : all installdirs
-	for p in sawmill; do \
+	for p in sawmill sawmill-client; do \
 	  $(rep_LIBTOOL) $(INSTALL_PROGRAM) $$p ${bindir}; \
 	done
 	for p in $(DL_OBJS); do \
