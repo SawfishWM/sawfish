@@ -1,3 +1,25 @@
+2000-07-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* main.c: changed the usage printing method
+
+2000-07-27  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x.c, windows.c, session.c, selection.c, play-sample.c,
+	main.c, keys.c, images.c, gradient.c, functions.c, frames.c,
+	fonts.c, flippers.c, events.c, cursors.c, colors.c: split into
+	separate sawfish.wm. modules
+
+	* commands.c: deleted, all command handling is written in Lisp
+
+	* fake-libexec: script copied from librep to make symlinked
+	plugin tree for when compiling
+
+	* client.c: wrap libclient functions for rep code, installed as
+	sawfish.client module
+
+	* sawfish-client.jl: rewrote sawfish-client in Lisp, uses a
+	replicated repl to get fully feature front-end in `-' mode
+
 2000-07-25  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill.h: make all bitfields unsigned

@@ -8,6 +8,17 @@ and longer-term ideas are marked -
 
 
 
+Broken during modularization
+============================
+
+ ! rep-xgettext will miss commands
+
+   scan for define-command forms, then scan for just those functions
+
+ ! menus work, but too much eval-ing
+
+
+
 Outstanding bugs
 ================
 
@@ -66,17 +77,6 @@ Outstanding bugs
       own geometry (e.g. gnome-terminal); this is against the ICCCM... ]
 
   ! swapped-out window properties aren't saved with session
-
-  ! * Open Netscape
-    * Click the botton on the status-bar that brings the little
-      browser/mail/news/editor toolbar into its own window.
-    * Now iconify this window - instead of being iconfied on its own, it
-      goes back onto main netscape browser window as if it was closed
-    * Now open it again - SLAM!
-    * Suddenly the window opens and closes like mad causing the window to
-      flicker on the desktop so fast you can't click on anything to get
-      rid of it, and you have to 'kill' it (sometimes it eventually dies
-      on its own in a minute or two).
 
   ! xv/java-apps get weird placement [apps being non-ICCCM compliant?]
 

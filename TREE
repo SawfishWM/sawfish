@@ -1,0 +1,136 @@
+-*- indented-text -*-
+
+Module hierarchy
+================
+
+  sawfish
+    wm
+      windows
+      frames
+      session
+      stacking
+      workspace
+      viewport
+      commands
+      custom
+      keymaps
+      focus
+      placement
+      swapper
+      gaol
+      server
+      customize
+      cursors
+      menus
+      images
+      colors
+      fonts
+      misc
+      events
+
+      placement-modes
+      focus-modes
+      animation-modes
+      theming
+
+      state
+	shading
+	iconify
+	maximize
+	ignore-window
+	mwm
+	open-look
+	transient
+	[sticky]
+        configure
+	gnome
+	wm-spec
+
+      gnome
+	menus
+	match-window
+	integration
+
+      util
+        decode-events
+	edges
+	gtkrc
+	prompt
+	rects
+	window-order
+	window-outline
+	with-output
+	compat
+	keymap
+	groups
+
+      ext
+        beos-window-menu
+	old-window-menu
+	edge-flip
+	match-window
+	shade-hover
+	tooltips
+	window-history
+	audio-events
+	wm-spec
+	auto-raise
+	error-handler
+
+      commands
+        cycle
+	x-cycle
+	describe
+	grow-pack
+	help
+	move-resize
+	raise-commands
+	size-window
+	slide-window
+	gnome
+	groups
+	xterm
+	viewport-linear
+	describe
+	move-cursor
+
+    nokogiri
+      ...
+
+    widgets
+      ...
+
+    util
+      color-preview
+      stock
+
+Notes
+=====
+
+ - separate nokogiri-widget.jl and nokogiri-widgets into their own
+   top-level entry `widgets'. Eventually use this in the themer
+
+ - put sawfish-specific widgets somewhere else?
+
+ - sawfish.gtk.stock has nokogiri-[no-]gnome functions
+
+ - importing sawfish.wm gets the following:
+
+	sawfish.wm.colors
+	sawfish.wm.commands
+	sawfish.wm.cursors
+	sawfish.wm.custom
+	sawfish.wm.events
+	sawfish.wm.focus
+	sawfish.wm.fonts
+	sawfish.wm.frames
+	sawfish.wm.gaol
+	sawfish.wm.images
+	sawfish.wm.misc
+	sawfish.wm.placement
+	sawfish.wm.session.init
+	sawfish.wm.stacking
+	sawfish.wm.viewport
+	sawfish.wm.window-anim
+	sawfish.wm.windows
+	sawfish.wm.workspace

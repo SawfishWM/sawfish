@@ -1,3 +1,63 @@
+2000-07-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/user.jl: support --call, --load and --quit long
+	equivalents for -f, -l and -q
+
+	* sawfish/wm/util/display-window.jl
+	(display-window:uniconify-to-current-workspace): put in expert
+	user-level
+
+	* sawfish/wm/workspace.jl, sawfish/wm/state/iconify.jl
+	(uniconify-to-current-workspace, raise-windows-on-uniconify,
+	focus-windows-on-uniconify): moved from workspace to iconify,
+	raise option is put at expert user-level
+
+2000-07-27  John Harper  <john@dcs.warwick.ac.uk>
+
+	Non-trivial changes to modularize sawfish. Instead of one
+	unmaintainably huge namespace, each file gets its own module.
+	Use sawfish.wm. hierarchy for modules that only apply to the
+	wm. Other modules under sawfish. will appear soon. Modules can
+	be imported separately, or `sawfish.wm' can be imported to get
+	all core definitions
+
+	* sawfish/wm.jl: does initialization and creates the sawfish.wm
+	structure
+
+	* sawfish/wm/commands.jl: all command handling is now written
+	in Lisp. Fully compatible except for how commands are defined.
+	Since we have no unified namespace, the mapping from names ->
+	command definitions is maintained separately. define-command
+	and autoload-command add entries to this mapping.
+	define-command takes a name and a function, and optionally an
+	interactive spec and a custom-type spec. The old style of
+	defining commands still works, but only in the user module
+
+	* x-cycle.jl, workspace.jl, wm-spec.jl, with-output.jl,
+	window-outline.jl, window-order.jl, window-history.jl,
+	window-anim.jl, viewport.jl, viewport-linear.jl, transient.jl,
+	tooltips.jl, stagger-placement.jl, stacking.jl,
+	smart-placement.jl, sm-save.jl, sm-load.jl, sm-init.jl,
+	sm-common.jl, slide-window.jl, size-window.jl, shading.jl,
+	shade-hover.jl, server.jl, select-window.jl, sawmill.jl,
+	sawmill-gaol.jl, sawmill-defaults.jl, rects.jl,
+	raise-commands.jl, prompt.jl, prompt-wm.jl, prompt-extras.jl,
+	play-audio.jl, place-window.jl, open-look.jl,
+	old-window-menu.jl, nokogiri-sawfish.jl, mwm.jl,
+	move-resize.jl, move-cursor.jl, menus.jl, maximize.jl,
+	match-window.jl, make-theme.jl, make-theme-preview.jl,
+	keymaps.jl, keymap.jl, ignore-window.jl, iconify.jl, help.jl,
+	gtkrc.jl, grow-pack.jl, groups.jl, group-funs.jl, gnome.jl,
+	gnome-menu.jl, gnome-match.jl, gnome-int.jl, gnome-commands.jl,
+	functions.jl, frames.jl, focus.jl, error-handler.jl, edges.jl,
+	edge-flip.jl, describe.jl, decode-events.jl, cycle.jl,
+	customize.jl, custom.jl, custom-defaults.jl, cursors.jl,
+	configure.jl, compat.jl, beos-window-menu.jl, autoload.jl,
+	auto-raise.jl, audio-events.jl, anim-outline.jl, 3d-hack.jl:
+
+	Moved (and maybe renamed) these files under sawfish.wm module
+	hierarchy (also made most into modules)
+
 2000-07-24  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.30.3
