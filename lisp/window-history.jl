@@ -155,19 +155,22 @@
     (when position
       ;; we don't want to place two windows of the same class 
       ;; at the same position, that's just pointless
-      (let ((key (window-history-key w))
-	    (space (or (cdr (assq 'workspace alist)) current-workspace)))
-	(catch 'out
-	  (map-windows
-	   (lambda (x)
-	     (when (and (equal (window-history-key x) key)
-			(window-appears-in-workspace-p x space)
-			(equal position (window-absolute-position x)))
-	       ;; here's our match..
-	       (setq alist (filter (lambda (cell)
-				     (not (eq (car cell) 'position)))
-				   alist))
-	       (throw 'out t))))))))
+      (when (or (window-get w 'placed)
+		(catch 'out
+		  (let ((key (window-history-key w))
+			(space (or (cdr (assq 'workspace alist))
+				   current-workspace)))
+		    (map-windows
+		     (lambda (x)
+		       (when (and (equal (window-history-key x) key)
+				  (window-appears-in-workspace-p x space)
+				  (equal position
+					 (window-absolute-position x)))
+			 ;; here's our match..
+			 (throw 'out t)))))))
+	(setq alist (filter (lambda (cell)
+			      (not (eq (car cell) 'position)))
+			    alist)))))
 
   ;; the session manager code will do the right thing for the rest
   (require 'sm-load)
