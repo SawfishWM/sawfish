@@ -61,13 +61,13 @@ exec rep "$0" "$@"
 	  spec)
     menu))
 
-(defun popup-menu (spec)
+(defun popup-menu (spec &optional timestamp)
   (catch 'menu-done
     (let
 	((menu  (create-menu spec)))
       (gtk-signal-connect menu "deactivate" 'gtk-main-quit)
       (setq menu-selected nil)
-      (gtk-menu-popup-interp menu nil nil 0 0)
+      (gtk-menu-popup-interp menu nil nil 0 (or timestamp 0))
       (gtk-main)
       menu-selected)))
 
