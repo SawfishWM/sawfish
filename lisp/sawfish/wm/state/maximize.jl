@@ -163,7 +163,7 @@
 						      (car fdims))
 				      0 (screen-height)
 				      (cdr coords) (+ (cdr coords)
-							  (cdr fdims))
+						      (cdr fdims))
 				      (cdr edges))))
     (rplacd coords (car y-span))
     (rplacd dims (- (- (cdr y-span) (car y-span))
@@ -244,7 +244,7 @@
        (y-max (cdr (assq 'max-height hints)))
 
        (trunc (lambda (x inc base &optional maximum)
-		(min (+ base (max 0 (* (/ (1- (- x base)) inc) inc)))
+		(min (+ base (max 0 (- (- x base) (mod (- x base) inc))))
 		     (or maximum 65535)))))
     (when (memq direction '(nil horizontal))
       (rplaca dims (trunc (car dims) x-inc x-base x-max)))
