@@ -41,18 +41,7 @@
 
 ;; options/variables
 
-(defcustom sp-important-windows nil
-  "Regular expression matching windows not to overlap in first/best-fit modes."
-  :group placement
-  :type string
-  :allow-nil t)
-
-(defvar sp-important-windows-weight 10)
-
-(defvar sp-auto-weight-alist nil
-  "List of `(REGEXP . WEIGHT)' mapping window names to the weight to give
-their area when placing windows in best-fit and first-fit mode. Higher
-weights mean that the window is harder to cover.")
+(defvar sp-avoided-windows-weight 10)
 
 (defcustom sp-padding 4
   "Try to leave at least this many pixels between window edges in first/best-fit."
@@ -60,11 +49,9 @@ weights mean that the window is harder to cover.")
   :type number
   :range (0 . 64))
 
-(defcustom sp-area-weight 512
-  "Weighting between future usefulness and edge alignment in best-fit mode."
-  :group placement
-  :type number
-  :range (0 . 1024))
+(defvar sp-area-weight 512
+  "Weighting between future usefulness and edge alignment in best-fit mode.
+A value between 0 and 1023 inclusive.")
 
 (defconst sp-cost-max 1024)
 
@@ -103,17 +90,15 @@ weights mean that the window is harder to cover.")
 ;; default windows with their `ignored' property set are dropped
 (defun sp-get-windows (w)
   (delete-if #'(lambda (x)
-		 (or (eq x w)
-		     (and (window-get x 'ignored)
-			  (or (not (stringp sp-important-windows))
-			      (not (string-match sp-important-windows
-						 (window-name x)))))
-		     (window-get x 'iconified)
-		     (/= (or (window-get x 'workspace)
-			     current-workspace)
-			 (or (window-get w 'workspace)
-			     current-workspace))))
-	     (managed-windows)))
+                (or (eq x w)
+                    (and (window-get x 'ignored)
+			 (not (window-avoided-p x)))
+                    (window-get x 'iconified)
+                    (/= (or (window-get x 'workspace)
+                            current-workspace)
+                        (or (window-get w 'workspace)
+                            current-workspace))))
+            (managed-windows)))
 
 
 ;; calculating overlaps
@@ -291,10 +276,11 @@ weights mean that the window is harder to cover.")
     (let*
 	((windows (sp-get-windows w))
 	 (rects (rectangles-from-windows
-		 windows (nconc (and sp-important-windows
-				     (list (cons sp-important-windows
-						 sp-important-windows-weight)))
-				sp-auto-weight-alist)))
+		 windows
+		 #'(lambda (x)
+		     (if (window-avoided-p x)
+			 sp-avoided-windows-weight
+		       (window-get x 'placement-weight)))))
 	 (grid (sp-make-grid rects t))
 	 (dims (window-frame-dimensions w))
 	 point)
