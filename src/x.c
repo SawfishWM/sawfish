@@ -292,7 +292,7 @@ x-create-window (X . Y) (W . H) BW ATTRS [EVENT-HANDLER]
 Creates a new X-WINDOW with the specified position, dimensions and
 border width. ATTRS should be a list of cons cells mapping attributes
 to values. Known attributes are `background' and `border-color'. The
-window is automatically mapped and raised.
+window is created unmapped.
 ::end:: */
 {
     Lisp_X_Window *w;
@@ -365,9 +365,9 @@ DEFUN("x-configure-window", Fx_configure_window, Sx_configure_window, (repv wind
 ::doc:x-configure-window::
 x-configure-window WINDOW ATTRS
 
-Reconfigures the X-WINDOW. ATTRS should be a list of cons cells mapping
-attributes to values. Known attributes are 'x, 'y', 'width, 'height and
-'border-width. The window is automatically raised.
+Reconfigures the X-WINDOW. ATTRS should be an alist mapping attribute
+names to values. Known attributes include the symbols `x', `y',
+`width', `height' and `border-width'.
 ::end:: */
 {
     XWindowChanges changes;
@@ -377,8 +377,6 @@ attributes to values. Known attributes are 'x, 'y', 'width, 'height and
     rep_DECLARE2(attrs, rep_LISTP);
 
     changesMask = x_window_parse_changes (&changes, attrs);
-    changes.stack_mode = TopIf;
-    changesMask |= CWStackMode;
 
     if (changesMask)
       XConfigureWindow (dpy, VX_WINDOW(window)->id, changesMask, &changes);
@@ -390,8 +388,9 @@ DEFUN("x-change-window-attributes", Fx_change_window_attributes, Sx_change_windo
 ::doc:x-change-window-attributes::
 x-change-window-attributes WINDOW ATTRS
 
-Sets attributes of the X-WINDOW. ATTRS should be a list of cons cells mapping
-attributes to values. Known attributes are 'background and 'border-color.
+Sets attributes of the X-WINDOW. ATTRS should be an alist mapping
+attribute names to values. Known attributes include the symbols
+`background' and `border-color'.
 ::end:: */
 {
     XSetWindowAttributes attributes;
@@ -437,9 +436,9 @@ Return the X11 window-id (an integer) associated with X-WINDOW.
     return rep_MAKE_INT (VX_WINDOW(window)->id);
 }
 
-DEFUN("x-windowp", Fx_windowp, Sx_windowp, (repv window), rep_Subr1) /*
-::doc:x-windowp::
-x-windowp ARG
+DEFUN("x-window-p", Fx_window_p, Sx_window_p, (repv window), rep_Subr1) /*
+::doc:x-window-p::
+x-window-p ARG
 
 Return t if ARG is a X-WINDOW object.
 ::end:: */
@@ -497,6 +496,8 @@ specified font in the window associated with WINDOW.
 DEFUN("x-draw-line", Fx_draw_line, Sx_draw_line, (repv window, repv gc, repv start, repv end), rep_Subr4) /*
 ::doc:x-draw-line::
 x-draw-line WINDOW GC (X1 . Y1) (X2 . Y2)
+
+Draws a line from (X1, Y1) to (X2, Y2) in WINDOW, using GC.
 ::end:: */
 {
     Window id = window_from_arg (window);
@@ -522,6 +523,9 @@ x-draw-line WINDOW GC (X1 . Y1) (X2 . Y2)
 DEFUN("x-draw-rectangle", Fx_draw_rectangle, Sx_draw_rectangle, (repv window, repv gc, repv xy, repv wh), rep_Subr4) /*
 ::doc:x-draw-rectangle::
 x-draw-rectangle WINDOW GC (X . Y) (WIDTH . HEIGHT)
+
+Draws a rectangle with top-left corner (X1, Y1) and dimensions (WIDTH,
+HEIGHT) in WINDOW, using GC.
 ::end:: */
 {
     Window id = window_from_arg (window);
@@ -547,6 +551,9 @@ x-draw-rectangle WINDOW GC (X . Y) (WIDTH . HEIGHT)
 DEFUN("x-fill-rectangle", Fx_fill_rectangle, Sx_fill_rectangle, (repv window, repv gc, repv xy, repv wh), rep_Subr4) /*
 ::doc:x-fill-rectangle::
 x-fill-rectangle WINDOW GC (X . Y) (WIDTH . HEIGHT)
+
+Draws a filled rectangle with top-left corner (X, Y) and dimensions
+(WIDTH, HEIGHT) in WINDOW, using GC.
 ::end:: */
 {
     Window id = window_from_arg (window);
@@ -569,9 +576,126 @@ x-fill-rectangle WINDOW GC (X . Y) (WIDTH . HEIGHT)
     return Qt;
 }
 
+DEFUN("x-draw-arc", Fx_draw_arc, Sx_draw_arc, (repv window, repv gc, repv xy, repv wh, repv angle), rep_Subr5) /*
+::doc:x-draw-arc::
+x-draw-arc WINDOW GC (X . Y) (WIDTH . HEIGHT) (ANGLE1 . ANGLE2)
+
+Draws a single circular or elliptical arc. Each arc is specified by a
+rectangle and two angles.
+
+The center of the circle or ellipse is the center of the rectangle, and
+the major and minor axes are specified by the width and height. 
+Positive angles indicate counter-clockwise motion, and negative angles
+indicate clockwise motion.
+
+(See XDrawArc (3X11) for more details.)
+::end:: */
+{
+    Window id = window_from_arg (window);
+    int x = 0, y = 0;
+    int w = 0, h = 0;
+    int a1 = 0, a2 = 0;
+
+    rep_DECLARE(1, window, id != 0);
+    rep_DECLARE(2, gc, X_VALID_GCP (gc, id));
+    rep_DECLARE(3, xy, rep_CONSP (xy)
+		&& rep_INTP (rep_CAR (xy)) && rep_INTP (rep_CDR (xy)));
+    rep_DECLARE(4, wh, rep_CONSP (wh)
+		&& rep_INTP (rep_CAR (wh)) && rep_INTP (rep_CDR (wh)));
+    rep_DECLARE(5, angle, rep_CONSP (angle)
+		&& rep_INTP (rep_CAR (angle)) && rep_INTP (rep_CDR (angle)));
+
+    x = rep_INT (rep_CAR (xy));
+    y = rep_INT (rep_CDR (xy));
+    w = rep_INT (rep_CAR (wh));
+    h = rep_INT (rep_CDR (wh));
+    a1 = rep_INT (rep_CAR (angle));
+    a2 = rep_INT (rep_CDR (angle));
+
+    XDrawArc (dpy, id, VX_GC(gc)->gc, x, y, w, h, a1, a2);
+    return Qt;
+}
+
+DEFUN("x-fill-arc", Fx_fill_arc, Sx_fill_arc, (repv window, repv gc, repv xy, repv wh, repv angle), rep_Subr5) /*
+::doc:x-fill-arc::
+x-fill-arc WINDOW GC (X . Y) (WIDTH . HEIGHT) (ANGLE1 . ANGLE2)
+
+Draws a single filled circular or elliptical arc. Each arc is specified
+by a rectangle and two angles.
+
+The center of the circle or ellipse is the center of the rectangle, and
+the major and minor axes are specified by the width and height. 
+Positive angles indicate counter-clockwise motion, and negative angles
+indicate clockwise motion.
+
+(See XFillArc (3X11) for more details.)
+::end:: */
+{
+    Window id = window_from_arg (window);
+    int x = 0, y = 0;
+    int w = 0, h = 0;
+    int a1 = 0, a2 = 0;
+
+    rep_DECLARE(1, window, id != 0);
+    rep_DECLARE(2, gc, X_VALID_GCP (gc, id));
+    rep_DECLARE(3, xy, rep_CONSP (xy)
+		&& rep_INTP (rep_CAR (xy)) && rep_INTP (rep_CDR (xy)));
+    rep_DECLARE(4, wh, rep_CONSP (wh)
+		&& rep_INTP (rep_CAR (wh)) && rep_INTP (rep_CDR (wh)));
+    rep_DECLARE(5, angle, rep_CONSP (angle)
+		&& rep_INTP (rep_CAR (angle)) && rep_INTP (rep_CDR (angle)));
+
+    x = rep_INT (rep_CAR (xy));
+    y = rep_INT (rep_CDR (xy));
+    w = rep_INT (rep_CAR (wh));
+    h = rep_INT (rep_CDR (wh));
+    a1 = rep_INT (rep_CAR (angle));
+    a2 = rep_INT (rep_CDR (angle));
+
+    XFillArc (dpy, id, VX_GC(gc)->gc, x, y, w, h, a1, a2);
+    return Qt;
+}
+
+DEFUN("x-copy-area", Fx_copy_area, Sx_copy_area, (repv window, repv gc, repv xy, repv wh, repv dest), rep_Subr5) /*
+::doc:x-fill-rectangle::
+x-fill-rectangle WINDOW GC (X . Y) (WIDTH . HEIGHT) (DEST-X . DEST-Y)
+
+Copy a region of WINDOW with top-left corner (X, Y) and dimensions
+(WIDTH, HEIGHT), to the position (DEST-X, DEST-Y), using GC.
+::end:: */
+{
+    Window id = window_from_arg (window);
+    int x = 0, y = 0;
+    int w = 0, h = 0;
+    int dx = 0, dy = 0;
+
+    rep_DECLARE(1, window, id != 0);
+    rep_DECLARE(2, gc, X_VALID_GCP (gc, id));
+    rep_DECLARE(3, xy, rep_CONSP (xy)
+		&& rep_INTP (rep_CAR (xy)) && rep_INTP (rep_CDR (xy)));
+    rep_DECLARE(4, wh, rep_CONSP (wh)
+		&& rep_INTP (rep_CAR (wh)) && rep_INTP (rep_CDR (wh)));
+    rep_DECLARE(5, dest, rep_CONSP (dest)
+		&& rep_INTP (rep_CAR (dest)) && rep_INTP (rep_CDR (dest)));
+
+    x = rep_INT (rep_CAR (xy));
+    y = rep_INT (rep_CDR (xy));
+    w = rep_INT (rep_CAR (wh));
+    h = rep_INT (rep_CDR (wh));
+    dx = rep_INT (rep_CAR (dest));
+    dy = rep_INT (rep_CDR (dest));
+
+    XCopyArea (dpy, id, id, VX_GC(gc)->gc, x, y, w, h, dx, dy);
+    return Qt;
+}
+
 DEFUN("x-draw-image", Fx_draw_image, Sx_draw_image, (repv img, repv window, repv xy, repv wh), rep_Subr4) /*
 ::doc:x-draw-image::
 x-draw-image IMAGE WINDOW (X . Y) [(WIDTH . HEIGHT)]
+
+Render the image object IMAGE in WINDOW at position (X, Y). If WIDTH
+and HEIGHT are defined the image is first scaled to these dimensions,
+otherwise it is drawn using its natural dimensions.
 ::end:: */
 {
     Window id = window_from_arg (window);
@@ -718,7 +842,7 @@ rep_dl_init (void)
     rep_ADD_SUBR(Sx_configure_window);
     rep_ADD_SUBR(Sx_change_window_attributes);
     rep_ADD_SUBR(Sx_destroy_window);
-    rep_ADD_SUBR(Sx_windowp);
+    rep_ADD_SUBR(Sx_window_p);
     rep_ADD_SUBR(Sx_window_id);
 
     rep_ADD_SUBR(Sx_clear_window);
@@ -726,6 +850,9 @@ rep_dl_init (void)
     rep_ADD_SUBR(Sx_draw_line);
     rep_ADD_SUBR(Sx_draw_rectangle);
     rep_ADD_SUBR(Sx_fill_rectangle);
+    rep_ADD_SUBR(Sx_draw_arc);
+    rep_ADD_SUBR(Sx_fill_arc);
+    rep_ADD_SUBR(Sx_copy_area);
     rep_ADD_SUBR(Sx_draw_image);
 
     rep_INTERN(x);
