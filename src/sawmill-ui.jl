@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.21 1999/09/08 15:40:47 john Exp $
+;; $Id: sawmill-ui.jl,v 1.22 1999/09/08 22:33:18 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -287,7 +287,6 @@ exec rep "$0" "$@"
 			      ',spec ',(get-key spec ':variable) value))))
     toggle))
 
-(put 'number 'builder 'build-entry)
 (put 'string 'builder 'build-entry)
 (defun build-entry (spec)
   (let
@@ -301,6 +300,24 @@ exec rep "$0" "$@"
     (setq id (gtk-signal-connect entry "changed"
 				 `(lambda (w)
 				    (build-entry:changed ',spec))))
+    (setq spec (nconc spec (list ':widget entry)))
+    entry))
+
+(put 'number 'builder 'build-number-entry)
+(defun build-number-entry (spec)
+  (unless (key-exists-p spec ':value)
+    (set-key spec ':value 0))
+  (let*
+      ((range (get-key spec ':range))
+       (entry (gtk-spin-button-new (gtk-adjustment-new
+				    (get-key spec ':value)
+				    (or (car range) 0)
+				    ;; need maxint
+				    (or (cdr range) 1000000)
+				    1 16 0) 1 0)))
+    (gtk-signal-connect entry "changed"
+			`(lambda (w)
+			   (build-entry:changed ',spec)))
     (setq spec (nconc spec (list ':widget entry)))
     entry))
 
