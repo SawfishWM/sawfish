@@ -32,6 +32,16 @@
   (interactive "%W")
   (map-window-group uniconify-window w))
 
+;;;###autoload
+(defun iconify-transient-group (w)
+  (interactive "%W")
+  (map-transient-group iconify-window w))
+
+;;;###autoload
+(defun uniconify-transient-group (w)
+  (interactive "%W")
+  (map-transient-group uniconify-window w))
+
 
 ;; sticky
 
