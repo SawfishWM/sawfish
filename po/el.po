@@ -4,11 +4,12 @@
 #
 # simos: 486 messages, (unknown), initial translation.
 # simos: 501 messages, 14Feb2001, (sgpbea).
+# simos: 538 messages, 25Feb2001, (sgpbea).
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.2\n"
-"POT-Creation-Date: 2001-02-12 12:08-0800\n"
+"POT-Creation-Date: 2001-02-24 00:24-0800\n"
 "PO-Revision-Date: 2001-02-18 17:03:10+0900\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -167,6 +168,18 @@ msgid "Gradient Theme"
 msgstr "Θέμα Διαβάθμισης"
 
 #. ../themes/gradient/theme.jl
+msgid "horizontal"
+msgstr "οριζόντιο"
+
+#. ../themes/gradient/theme.jl
+msgid "vertical"
+msgstr "κάθετο"
+
+#. ../themes/gradient/theme.jl
+msgid "diagonal"
+msgstr "διαγώνιο"
+
+#. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
 msgstr "Κατεύθυνση της αντάυγειας στο στυλ πλαισίου `αντάυγεια'."
 
@@ -206,6 +219,18 @@ msgstr ""
 msgid "Color of active frames (if unset use GTK+ selection color)."
 msgstr ""
 "Χρώμα ενεργών πλαισίων (αν δεν οριστεί, χρήση του GTK+ χρώματος επιλογής)."
+
+#. ../themes/mono/theme.jl
+msgid "left"
+msgstr "αριστερά"
+
+#. ../themes/mono/theme.jl
+msgid "right"
+msgstr "δεξιά"
+
+#. ../themes/mono/theme.jl
+msgid "center"
+msgstr "κέντρο"
 
 #. ../themes/mono/theme.jl
 msgid "Text is \\w justified in window titles."
@@ -809,6 +834,20 @@ msgid "Ignore program-specified window placements."
 msgstr "Αγνόηση τοποθετήσεις παραθύρων ορισμένες από πρόγραμμα."
 
 #. ../lisp/sawfish/wm/stacking.jl
+msgid "all"
+msgstr "όλα"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "πατρικά"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "none"
+msgstr "κανένα"
+
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Keep transient windows stacked above: \\w"
 msgstr "Διατήρηση των βραχύβιων παραθύρων στοιβαγμένων πάνω από: \\w"
 
@@ -969,6 +1008,18 @@ msgstr "Επιβολή του τρέχοντος παραθύρου να έχει μοναδικό τίτλο."
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Virtual desktop configuration."
 msgstr "Ρύθμιση ιδεατού χώρου εργασίας."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "stop"
+msgstr "διακοπή"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "wrap-around"
+msgstr "περιτύλιγμα"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "keep-going"
+msgstr "συνέχιση"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "When passing the first or last workspace: \\w"
@@ -1227,6 +1278,18 @@ msgstr ""
 "παρόμοιο για να επιστρέψετε στο αρχικό μέγεθος."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr "ίσως"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "always"
+msgstr "πάντα"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "never"
+msgstr "ποτέ"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
 "Whether and how to move the pointer when packing windows.\n"
 "\n"
@@ -1329,12 +1392,20 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr "Μετακίνηση του κέρσορα 1 πίξελ προς τα κάτω."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "opaque"
+msgstr "αδιαφανής"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "box"
+msgstr "κουτί"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How windows being moved are animated: \\w"
-msgstr "Πως απεικονίζονται τα παράθυρα καθώς μετακινούνται: \\w"
+msgstr "Πώς απεικονίζονται τα παράθυρα καθώς μετακινούνται: \\w"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How windows being resized are animated: \\w"
-msgstr "Πως απεικονίζονται τα παράθυρα καθώς αλλάζουν διαστάσεις: \\w"
+msgstr "Πώς απεικονίζονται τα παράθυρα καθώς αλλάζουν διαστάσεις: \\w"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Raise windows when they are moved or resized."
@@ -1349,8 +1420,24 @@ msgid "Show current dimensions of windows while resizing."
 msgstr "Εμφάνιση τρέχοντων διαστάσεων παραθύρων καθών αλλάζουν μέγεθος."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "region"
+msgstr "περιοχή"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "border"
+msgstr "όριο"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "grab"
+msgstr "αρπαγή"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "border-grab"
+msgstr "αρπαγή-ορίου"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to choose window edges when resizing: \\w"
-msgstr "Πως να επιλέγονται οι άκρες παραθύρων καθώς αλλάζει το μέγεθος: \\w"
+msgstr "Πώς να επιλέγονται οι άκρες παραθύρων καθώς αλλάζει το μέγεθος: \\w"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Snap window position to edges of other windows while moving."
@@ -1362,8 +1449,20 @@ msgid "Proximity in pixels before snapping to a window edge."
 msgstr "Εγγύτητα σε πίξελ πριν την προσκόλληση σε άκρη παραθύρου."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "magnetism"
+msgstr "μαγνητισμός"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "resistance"
+msgstr "αντίσταση"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "attraction"
+msgstr "έλξη"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to snap together window edges: \\w"
-msgstr "Πως να προσκολλούνται μαζί οι άκρες των παραθύρων: \\w"
+msgstr "Πώς να προσκολλούνται μαζί οι άκρες των παραθύρων: \\w"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Snap to otherwise-ignored windows."
@@ -1612,6 +1711,14 @@ msgstr ""
 "οθόνης."
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "viewport"
+msgstr "θύρα όψης"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "workspace"
+msgstr "χώρος εργασίας"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Hitting the screen edge selects the next: \\w"
 msgstr "Ακουμπώντας την άκρη της οθόνης επιλέγει την επόμενη: \\w"
 
@@ -1635,6 +1742,18 @@ msgstr "Χειρισμός Σφαλμάτων"
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Emit a beeping sound when errors occur."
 msgstr "Ήχηση μπιπ όταν συμβαίνουν σφάλματα."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "nowhere"
+msgstr "πουθενά"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "screen"
+msgstr "οθόνη"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "standard-error"
+msgstr "κανονικό-σφάλμα"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Where to display error messages: \\w"
@@ -1822,6 +1941,16 @@ msgstr "Τα μη επιδεκτικά διαχείρησης παράθυρα μπορούν να εικονοποιούνται."
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Windows uniconify to the current workspace."
 msgstr "Τα παράθυρο αποεικονοποιούνται στο τρέχον χώρο εργασίας."
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "transients"
+msgstr "προσωρινά"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "group"
+msgstr "ομάδα"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconifying a window also iconifies the: \\w"
@@ -2132,8 +2261,32 @@ msgstr ""
 "παραθύρων."
 
 #. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "novice"
+msgstr "αρχάριος"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "intermediate"
+msgstr "μέσος χρήστης"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "expert"
+msgstr "ειδήμων"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
 msgid "Show options suitable for \\w users."
 msgstr "Εμφάνιση επιλογών κατάλληλες για \\w χρήστες."
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "ok"
+msgstr "εντάξει"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "revert/cancel/ok"
+msgstr "επαναφορά/ακύρωση/εντάξει"
+
+#. ../lisp/sawfish/wm/util/nokogiri.jl
+msgid "apply/revert/cancel/ok"
+msgstr "εφαρμογή/επαναφορά/ακύρωση/εντάξει"
 
 #. ../lisp/sawfish/wm/util/nokogiri.jl
 msgid "Buttons shown in configurator: \\w"
