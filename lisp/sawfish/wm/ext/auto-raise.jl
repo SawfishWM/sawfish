@@ -40,6 +40,12 @@
 (defvar rw-timer nil)
 (defvar rw-window nil)
 
+(defun rw-disable-timer ()
+  (when rw-timer
+    (setq rw-window nil)
+    (delete-timer rw-timer)
+    (setq rw-timer nil)))
+
 (defun rw-on-focus (w)
   (if (or (and (stringp raise-windows-on-focus)
 	       (string-match raise-windows-on-focus (window-name w)))
@@ -47,21 +53,22 @@
       (if (<= raise-window-timeout 0)
 	  (progn
 	    (raise-window w)
-	    (when rw-timer
-	      (delete-timer rw-timer)
-	      (setq rw-timer nil)))
+	    (rw-disable-timer))
 	(setq rw-window w)
 	(if rw-timer
 	    (set-timer rw-timer)
 	  (setq rw-timer (make-timer 'rw-timer-callback
 				     (/ raise-window-timeout 1000)
 				     (mod raise-window-timeout 1000)))))
-    (when rw-timer
-      (delete-timer rw-timer)
-      (setq rw-timer nil))))
+    (rw-disable-timer)))
+
+(defun rw-out-focus (w)
+  (when (and rw-timer (eq rw-window w))
+    (rw-disable-timer)))
 
 (defun rw-timer-callback ()
   (raise-window rw-window)
   (setq rw-timer nil))
 
 (add-hook 'focus-in-hook 'rw-on-focus)
+(add-hook 'focus-out-hook 'rw-out-focus)
