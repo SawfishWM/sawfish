@@ -177,7 +177,7 @@
    ((background . ,microGUI:top-left-images)
     (left-edge . -6)
     (top-edge . -19)
-    (height . 18)
+    (height . 19)
     (class . top-left-corner))
 
    ;; top blue
@@ -214,7 +214,7 @@
    ((background . ,microGUI:top-right-images)
     (right-edge . -6)
     (top-edge . -19)
-    (height . 18)
+    (height . 19)
     (class . top-right-corner))
 
    ;; iconify button
