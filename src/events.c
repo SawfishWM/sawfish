@@ -966,6 +966,11 @@ Return the window that received the current event, or the symbol
     return current_event_window;
 }
 
+DEFUN("x-events-queued", Fx_events_queued, Sx_events_queued, (void), rep_Subr0)
+{
+    return rep_MAKE_INT (XEventsQueued (dpy, QueuedAfterReading));
+}
+
 
 /* initialisation */
 
@@ -1072,6 +1077,7 @@ events_init (void)
     rep_ADD_SUBR(Squery_pointer_window);
     rep_ADD_SUBR(Saccept_x_input);
     rep_ADD_SUBR(Scurrent_event_window);
+    rep_ADD_SUBR(Sx_events_queued);
 
     rep_INTERN(visibility_notify_hook);
     rep_INTERN(destroy_notify_hook);
