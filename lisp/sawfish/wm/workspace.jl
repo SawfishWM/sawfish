@@ -142,7 +142,9 @@
 		(setq ws-workspaces nil)
 		(setq ws-current-workspace nil))
 	    (ws-switch-workspace (or (nth 1 (memq space ws-workspaces))
-				     (car ws-workspaces)))))
+				     ;; deleted the last workspace
+				     (nth (- (length ws-workspaces) 2)
+					  ws-workspaces)))))
 	(setq ws-workspaces (delq space ws-workspaces))
 	(call-hook 'delete-workspace-hook (list space)))
       (window-put w 'workspace nil)
