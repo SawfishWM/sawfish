@@ -1,3 +1,9 @@
+2000-01-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (workspace-swap-in): swap in the saved
+	properties before the geometry, so that state is set by the
+	time the window-moved and window-resized hooks are run
+
 2000-01-04  John Harper  <john@dcs.warwick.ac.uk>
 
 	* gnome-int.jl: new file, sets some things, deletes some menu

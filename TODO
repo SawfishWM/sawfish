@@ -81,6 +81,15 @@ Outstanding bugs
 General tasks
 =============
 
+  + reload themes when they're modified
+
+  + rewrite sawmill-ui to use ``items'' as in sawmill-themer (complex
+    widgets represented by functional data types). This would allow
+    more complex custom types, i.e. `(or number string)' etc...
+
+    also, add provisions for extensibility (i.e. adding new item types
+    at run-time)
+
   + add a function to turn icons into lisp images
 
   + add a (destroyed . FUN) attribute to display-message

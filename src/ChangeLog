@@ -1,3 +1,13 @@
+2000-01-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.h (FRAME_EVENTS): added VisibilityChangeMask (patch
+	from Matt Krai <kraii@ghs.com>)
+
+2000-01-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* server.c (server_init): chmod the socket as well as the
+	directory (for people with losing umasks)
+
 2000-01-02  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c (list_frame_generator): make `(cursor . nil)' work
