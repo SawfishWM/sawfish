@@ -73,7 +73,7 @@ completion_generator (char *word, int state)
 		*out++ = *in++;
 	    }
 	}
-	strcpy (out, "\")");
+	strcpy (out, "\" boundp)");
 	last_buffer = client_eval (form, 0, &len);
 	if (last_buffer != 0)
 	{
