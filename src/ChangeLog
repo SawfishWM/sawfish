@@ -1,3 +1,22 @@
+1999-09-27  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (remove_window_frame): only remove windows from
+	the save-set if the client window was unmapped by its owner
+
+	* display.c (error_handler): ignore errors where resourceid is
+	zero, and don't print unrecognized errors, they're just
+	annoying..
+
+	* sawmill.h (WINDOWP): now the same as XWINDOWP; i.e. we don't
+	care whether or not the client has disappeared (which was
+	causing more problems than it solved)
+
+	* windows.c (Fhide_window, Fshow_window): unmap the client
+	window when it's hidden (by law of the ICCCM)
+
+	* frames.c (list_frame_generator): raise each frame part
+	window as it's created/reconfigured
+
 1999-09-26  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.9

@@ -7,6 +7,24 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.10
+
+@itemize @bullet
+
+@item Added a new theme: @code{microGUI} by Ryan Lovett
+@email{ryan@@ocf.berkeley.edu}, based on the QNX Photon screenshots
+
+@item New option to keeps transient windows above their parents
+(@code{transients-above-parents})
+
+@item While windows are hidden, unmap the client (for ICCCM compliance)
+
+@item Slightly different method of handling destroyed clients,
+hopefully results in fewer annoying error messages
+
+@end itemize
+
+
 @unnumberedsec 0.9
 
 @itemize @bullet
