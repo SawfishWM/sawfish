@@ -26,7 +26,6 @@
 (autoload 'move-selected-window "move-resize" t)
 (autoload 'resize-selected-window "move-resize" t)
 (autoload 'select-window "select-window")
-(setq custom-required (cons 'menus custom-required))
 (autoload 'popup-menu "menus")
 (autoload 'popup-window-menu "menus" t)
 (autoload 'popup-root-menu "menus" t)
