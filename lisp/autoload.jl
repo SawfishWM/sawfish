@@ -35,4 +35,11 @@
 (autoload 'popup-root-menu "menus" t)
 (autoload 'customize "customize" t)
 (setq custom-required (cons 'auto-raise custom-required))
+(autoload 'maximize-window "maximize" t)
+(autoload 'unmaximize-window "maximize" t)
+(autoload 'maximize-window-vertically "maximize" t)
+(autoload 'maximize-window-horizontally "maximize" t)
+(autoload 'maximize-window-toggle "maximize" t)
+(autoload 'maximize-window-vertically-toggle "maximize" t)
+(autoload 'maximize-window-horizontally-toggle "maximize" t)
 ;;; ::autoload-end::

@@ -11,6 +11,11 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item Implemented window maximization
+
+@item Added support for snapping to window edges when interactively
+moving windows (@code{move-snap-edges} and @code{move-snap-epsilon})
+
 @item First attempt at handling a subset of the Motif and OpenLook
 window hints
 
@@ -27,9 +32,6 @@ events)
 shutting down
 
 @item Rewrote the GNOME support as a Lisp module
-
-@item Added support for snapping to window edges when interactively
-moving windows (@code{move-snap-edges} and @code{move-snap-epsilon})
 
 @item Placing windows interactively now works
 

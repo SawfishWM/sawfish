@@ -1,5 +1,25 @@
 1999-08-22  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c (x_find_window_by_id): try harder to find a window
+	object for an id, possibly returning an invalidated object
+	(remove_window): even if the window has been invalidated, try
+	to remove the frame when appropriate
+
+	* sawmill.h (Lisp_Window): new field `saved_id', this is
+	another copy of the window id, but isn't zeroed when the error
+	handler finds that the window has been deleted
+
+	* events.c (property_notify): between XGet.. calls, check if
+	the error handler invalidated the window
+
+	* events.c (destroy_notify): use the x_find_window_by_id
+	function to search for a window object for the destroyed window
+	(since the error handler may have invalidated it)
+
+	* keys.c: handle `Alt' similarly to `Meta' (i.e. find the
+	actual modifier bit then subsitute it)
+	* keys.h: added EV_MOD_ALT
+
 	* events.c (Fquery_pointer): only use the stored mouse position
 	if we're currently handling an event, and this event stored the
 	position

@@ -1,5 +1,24 @@
 1999-08-22  John Harper  <john@dcs.warwick.ac.uk>
 
+	* maximize.jl: new file, window maximization
+	* menus.jl (window-ops-menu): added maximize commands
+
+	* customize.jl (customize-sentinel): write out the custom
+	script when the process exits
+
+	* auto-raise.jl (rw-on-focus): handle case where timeout is
+	zero
+
+	* move-resize.jl (move-resize-window): temporarily bind
+	unbound-key-hook to nil, otherwise the gnome code may cause
+	havoc
+
+	* functions.jl (with-server-grabbed): new macro
+
+	* move-resize.jl (move-resize-window): put the call to
+	ungrab-server back into the tail of the unwind-protect where it
+	should be; also be aware that move-resize-mode may have changed
+
 	* place-window.jl (place-window): fix the `interactive'
 	placement mode
 
