@@ -95,6 +95,26 @@ AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
 dnl Check for librep
 AM_PATH_REP(0.12)
 
+rep_gtk_function=gtk-window-set-default-size
+rep_gtk_version=0.12
+
+AC_MSG_CHECKING([for correct rep-gtk version])
+cat >conftest <<EOF
+(condition-case nil
+    (progn
+      (require 'gtk)
+      $rep_gtk_function
+      (throw 'quit 0))
+  (error
+    (throw 'quit 1)))
+EOF
+if rep ./conftest 2>&5; then
+  AC_MSG_RESULT([yes])
+else
+  AC_MSG_RESULT([no])
+  AC_MSG_ERROR([You need rep-gtk version ${rep_gtk_version}+])
+fi
+
 dnl is X available?
 if test "${no_x}" != "yes"; then
   AC_DEFINE(HAVE_X11)
