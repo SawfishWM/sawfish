@@ -117,3 +117,12 @@
   (delete-if #'(lambda (w)
 		 (or (eq w window) (not (window-avoided-p w))))
 	     (managed-windows)))
+
+(defun windows-in-group (w)
+  (let
+      ((group-id (or (window-group-id w) (window-id w))))
+    (delete-if-not #'(lambda (x)
+		       (eq (window-group-id x) group-id)) (managed-windows))))
+
+(defun map-window-group (fun w)
+  (mapc fun (windows-in-group w)))
