@@ -153,9 +153,9 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
 (unless batch-mode
   (bind-keys title-keymap
     "Button3-Off" 'raise-lower-window
-    "Button1-Move" 'move-window-interactively
     "Button2-Move" 'resize-window-interactively
-    "Button1-Click2" 'toggle-window-shaded)
+    "Button1-Click2" 'toggle-window-shaded
+    "Button1-Move" 'move-window-interactively)
 
   (bind-keys border-keymap
     "Button3-Off" 'raise-lower-window
@@ -167,9 +167,9 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "C-M-Down" 'lower-window
     "C-M-Left" 'send-to-previous-workspace
     "C-M-Right" 'send-to-next-workspace
-    "M-Button1-Click1" 'move-window-interactively
+    "M-Button3-Click1" 'raise-lower-window
     "M-Button2-Click1" 'popup-window-menu
-    "M-Button3-Click1" 'raise-lower-window)
+    "M-Button1-Click1" 'move-window-interactively)
 
   (bind-keys global-keymap
     "C-Left" 'previous-workspace
@@ -181,18 +181,18 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "Button2-Off" 'nop)			;so it doesn't get proxyed
 
   (bind-keys close-button-keymap
-    "Button1-Off" 'delete-window
-    "Button3-Click1" 'popup-window-menu)
+    "Button3-Click1" 'popup-window-menu
+    "Button1-Off" 'delete-window)
 
   (bind-keys iconify-button-keymap
-    "Button1-Off" 'iconify-window
-    "Button3-Click1" 'popup-window-menu)
+    "Button3-Click1" 'popup-window-menu
+    "Button1-Off" 'iconify-window)
 
   (bind-keys menu-button-keymap
-    "Button1-Click1" 'popup-window-menu
-    "Button3-Off" 'delete-window)
+    "Button3-Off" 'delete-window
+    "Button1-Click1" 'popup-window-menu)
 
   (bind-keys maximize-button-keymap
-    "Button1-Off" 'maximize-window-toggle
+    "Button3-Off" 'maximize-window-horizontally-toggle
     "Button2-Off" 'maximize-window-vertically-toggle
-    "Button3-Off" 'maximize-window-horizontally-toggle))
+    "Button1-Off" 'maximize-window-toggle))
