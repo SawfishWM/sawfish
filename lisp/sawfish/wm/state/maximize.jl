@@ -114,7 +114,7 @@
       (when (window-maximized-horizontally-p w)
 	(rplaca coords (nth 0 old-geom)))
       (when (window-maximized-vertically-p w)
-	(rplaca coords (nth 1 old-geom)))
+	(rplacd coords (nth 1 old-geom)))
       coords))
 
   (define (window-unmaximized-dimensions w)
