@@ -98,12 +98,12 @@
     (height . 1))
    ;; minimize button
    ((background . ,simple-minimize)
-    (left-edge . 5)
+    (left-edge . 4)
     (top-edge . -18)
     (keymap . iconify-button-keymap))
    ;; close button
    ((background . ,simple-close)
-    (right-edge . 5)
+    (right-edge . 4)
     (top-edge . -18)
     (keymap . close-button-keymap))))
 (put 'simple-frame 'unshaped t)
