@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.41 1999/12/01 23:27:35 john Exp $
+;; $Id: sawmill-ui.jl,v 1.42 1999/12/02 18:43:54 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -962,7 +962,11 @@ exec rep "$0" "$@"
 	(lambda ()
 	  (catch 'out
 	    (let
-		(matchers actions tem)
+		((read-num (lambda (string)
+			     (and (string-match "^[+-]?\\d+$" string)
+				  (read-from-string string))))
+		 matchers actions tem)
+			  
 
 	      (mapc (lambda (cell)
 		      (let
@@ -986,12 +990,11 @@ exec rep "$0" "$@"
 					      (cons (car cell) t) actions))))
 			    ((gtk-entry-p (cdr cell))
 			     ;; number
-			     (setq tem (gtk-entry-get-text (cdr cell)))
-			     (when (string-match "^[+-]?\\d+$" tem)
+			     (setq tem (read-num
+					(gtk-entry-get-text (cdr cell))))
+			     (when tem
 			       (setq actions
-				     (cons (cons (car cell)
-						 (read-from-string tem))
-					   actions))))
+				     (cons (cons (car cell) tem) actions))))
 			    ((gtk-combo-p (cdr cell))
 			     ;; symbol
 			     (setq tem (gtk-entry-get-text
@@ -1000,6 +1003,20 @@ exec rep "$0" "$@"
 			       (setq actions
 				     (cons (cons (car cell) (intern tem))
 					   actions))))
+
+			    ((consp (cdr cell))
+			     ;; pair of numbers
+			     (let
+				 (x y)
+			       (setq x (read-num (gtk-entry-get-text
+						  (car (cdr cell)))))
+			       (setq y (read-num (gtk-entry-get-text
+						  (cdr (cdr cell)))))
+			       (when (and x y)
+				 (setq actions
+				       (cons (cons (car cell) (cons x y))
+					     actions)))))
+
 			    (t
 			     (error "Unknown widget type"))))
 		    prop-widget-alist)
@@ -1116,6 +1133,27 @@ exec rep "$0" "$@"
 					(if current
 					    (symbol-name current) ""))
 		    (setq prop-widget-alist (cons (cons (car prop) combo)
+						  prop-widget-alist))
+		    (setq use-rhs nil)))
+		 ((eq (nth 1 prop) 'pair)
+		  (let
+		      ((entry-1 (gtk-entry-new))
+		       (entry-2 (gtk-entry-new))
+		       (label (gtk-label-new (symbol-name (car prop))))
+		       (hbox (gtk-hbox-new t ui-box-spacing)))
+		    (gtk-widget-set-usize entry-1 10 -2)
+		    (gtk-widget-set-usize entry-2 10 -2)
+		    (gtk-box-pack-start hbox entry-1 t t)
+		    (gtk-box-pack-start hbox entry-2 t t)
+		    (when current
+		      (gtk-entry-set-text
+		       entry-1 (format nil "%d" (car current)))
+		      (gtk-entry-set-text
+		       entry-2 (format nil "%d" (cdr current))))
+		    (attach-label table label 0 1 i (1+ i))
+		    (gtk-table-attach-defaults table hbox 1 2 i (1+ i))
+		    (setq prop-widget-alist (cons (cons (car prop)
+							(cons entry-1 entry-2))
 						  prop-widget-alist))
 		    (setq use-rhs nil))))
 		(setq i (1+ i))))
