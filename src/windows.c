@@ -202,6 +202,7 @@ install_window_frame (Lisp_Window *w)
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	w->reparented = TRUE;
 	w->reparenting = TRUE;
+	reset_frame_parts (w);
 	DB(("  reparented to %lx [%dx%d%+d%+d]\n",
 	    w->frame, w->frame_width, w->frame_height,
 	    w->frame_x, w->frame_y));
@@ -679,9 +680,10 @@ hide-window WINDOW
     rep_DECLARE1(win, WINDOWP);
     if (VWIN(win)->visible)
     {
-	if (VWIN(win)->visible && VWIN(win)->mapped)
+	if (VWIN(win)->mapped)
 	    XUnmapWindow (dpy, VWIN(win)->frame);
 	VWIN(win)->visible = FALSE;
+	reset_frame_parts (VWIN(win));
     }
     return win;
 }
@@ -694,7 +696,7 @@ show-window WINDOW
     rep_DECLARE1(win, WINDOWP);
     if (!VWIN(win)->visible)
     {
-	if (!VWIN(win)->visible && VWIN(win)->mapped)
+	if (VWIN(win)->mapped)
 	    XMapWindow (dpy, VWIN(win)->frame);
 	VWIN(win)->visible = TRUE;
     }
