@@ -167,10 +167,10 @@ this mode. The single argument is the window to be placed."
 	  ((dims (window-frame-dimensions w))
 	   (pdims (window-frame-dimensions parent))
 	   (coords (window-position parent)))
-	(rplaca coords (+ (car coords)
-			  (quotient (- (car pdims) (car dims)) 2)))
-	(rplacd coords (+ (cdr coords)
-			  (quotient (- (cdr pdims) (cdr dims)) 2)))
+	(rplaca coords (max 0 (+ (car coords)
+				 (quotient (- (car pdims) (car dims)) 2))))
+	(rplacd coords (max 0 (+ (cdr coords)
+				 (quotient (- (cdr pdims) (cdr dims)) 2))))
 	(move-window-to w (car coords) (cdr coords))))))
 
 ;; XXX fix for Xinerama
