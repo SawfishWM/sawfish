@@ -198,8 +198,8 @@
 		    (- 3d-observer 3d-horizon))))
 	(setq x (* x fact))
 	(setq y (* y fact))
-	(cons (truncate (+ (* x 100) 200))
-	      (truncate (+ (* y 100) 200)))))
+	(cons (inexact->exact (truncate (+ (* x 100) 200)))
+	      (inexact->exact (truncate (+ (* y 100) 200))))))
 
     (aset 3d-rot 0 (trunc (+ (aref 3d-rot 0) (aref 3d-rot-speed 0))))
     (aset 3d-rot 1 (trunc (+ (aref 3d-rot 1) (aref 3d-rot-speed 1))))
