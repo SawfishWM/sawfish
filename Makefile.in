@@ -25,7 +25,7 @@ top_srcdir=@top_srcdir@
 
 SUBDIRS = @SUBDIRS@
 
-all : build.h DOC.dir NEWS FAQ
+all : build.h DOC NEWS FAQ
 	set -e; for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
  	done
@@ -39,8 +39,9 @@ install : all installdirs
 	-set -e; for dir in $(SUBDIRS); do \
 	  ( cd $$dir && $(MAKE) $@ ); \
 	done
-	$(INSTALL_DATA) ./DOC.dir $(DESTDIR)$(sawmilldir)/$(version)
-	$(INSTALL_DATA) ./DOC.pag $(DESTDIR)$(sawmilldir)/$(version)
+	for f in ./DOC*; do \
+	  $(INSTALL_DATA) $$f $(DESTDIR)$(sawmilldir)/$(version); \
+	done
 	-set -e; for d in $(prefix) $(DESTDIR)$(GNOMEDIRS); do \
 	  if [ -d $$d/share/gnome/wm-properties ]; then \
 	    $(INSTALL_DATA) Sawmill.desktop $(DESTDIR)$$d/share/gnome/wm-properties; \
@@ -57,7 +58,7 @@ uninstall :
 	done
 	rm -rf $(DESTDIR)$(sawmilldir)/$(version)
 
-DOC.dir :
+DOC :
 	repdoc DOC `find . -name '*.c' -print`
 
 NEWS : man/news.texi
@@ -70,14 +71,14 @@ clean :
 	-set -e; for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
 	done
-	rm -f *~ NEWS DOC.* TAGS build.h
+	rm -f *~ NEWS DOC* TAGS build.h
 
 realclean :
 	-set -e; for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
 	done
 	rm -f config.cache config.h config.log config.status Makedefs Makefile
-	rm -f *~ NEWS DOC.* TAGS build.h sawmill.spec
+	rm -f *~ NEWS DOC* TAGS build.h sawmill.spec
 
 TAGS :
 	etags --language=c `find . -name '*.[ch]' -print` \
