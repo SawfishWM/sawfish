@@ -321,13 +321,4 @@ enum exit_codes {
 # define DB(x) printf x
 #endif
 
-
-/* rep compatibility */
-
-#if rep_INTERFACE < 8
-# define rep_INTEGERP(x) (rep_INTP(x) || rep_LONG_INTP(x))
-  extern u_long rep_get_long_uint (repv x);
-  extern repv rep_make_long_uint (u_long x);
-#endif
-
 #endif /* SAWMILL_H */

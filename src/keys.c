@@ -448,20 +448,9 @@ eval_input_callback(repv key)
 	    {
 		/* An autoload, try to load it. */
 		rep_GC_root gc_key;
-#if rep_INTERFACE >= 9
 		rep_PUSHGC (gc_key, key);
 		cmd = rep_call_with_closure (cmd, rep_load_autoload, cmd);
 		rep_POPGC;
-#else
-		struct rep_Call lc;
-		lc.fun = lc.args = lc.args_evalled_p = Qnil;
-		rep_PUSH_CALL(lc);
-		rep_USE_FUNARG(cmd);
-		rep_PUSHGC(gc_key, key);
-		cmd = rep_load_autoload(cmd);
-		rep_POPGC;
-		rep_POP_CALL(lc);
-#endif
 		if(cmd == rep_NULL)
 		    return FALSE;
 	    }

@@ -1119,14 +1119,8 @@ handle_input_mask(long mask)
 	current_event_window = rep_NULL;
 
 	rep_PUSHGC(gc_old_current_window, old_current_window);
-
-#if rep_INTERFACE >= 8
 	rep_call_with_barrier (inner_handle_input, rep_VAL (&xev),
 			       rep_TRUE, 0, 0, 0);
-#else
-	inner_handle_input (rep_VAL (&xev));
-#endif
-
 	rep_POPGC;
 
 	current_x_event = old_current_event;

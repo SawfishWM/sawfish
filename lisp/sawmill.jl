@@ -79,12 +79,8 @@
 
 ;; all rep-based programs should do this
 (let
-    ((load-all (if (>= rep-interface-id 9)
-		   (lambda (s)
-		     (load-all s (lambda (f)
-				   (load f nil t))))
-		 (lambda (s)
-		   (load-all s)))))
+    ((load-all (lambda (s)
+		 (load-all s (lambda (f) (load f nil t))))))
   (load-all "autoload.jl")
   (load-all (concat "os-" (symbol-name operating-system))))
 

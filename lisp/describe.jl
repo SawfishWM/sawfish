@@ -25,15 +25,9 @@
 (defun describe-symbol (fun)
   (interactive "SSymbol:")
   "Display the documentation of a specified symbol."
-  (if (boundp 'describe-value)
-      ;; rep 0.12+ only
-      (progn
-	(describe-value (symbol-value fun t) fun)
-	(format standard-output "\n%s\n" (or (documentation
-					      fun (symbol-value fun t))
-					     "Undocumented.")))
-    ;; should work with rep 0.11
-    (describe-function fun)))
+  (describe-value (symbol-value fun t) fun)
+  (format standard-output "\n%s\n" (or (documentation fun (symbol-value fun t))
+				       "Undocumented.")))
 
 (defun apropos-output (symbols)
   (let
@@ -48,8 +42,7 @@
   (interactive "sApropos functions:\nP")
   (format standard-output "Apropos %s `%s':\n\n"
 	  (if all-functions "function" "command") regexp)
-  (apropos-output (apropos regexp (if (or all-functions
-					  (not (boundp 'commandp)))
+  (apropos-output (apropos regexp (if all-functions
 				      (lambda (s)
 					(and (boundp s)
 					     (functionp (symbol-value s))))

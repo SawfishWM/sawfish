@@ -55,22 +55,17 @@
   (require feature)
   (gaol-rebuild-environment))
 
-(when (>= rep-interface-id 9)
-  ;; compatibility kludge..
-  (defun gaol-add-function (sym)
-    (gaol-replace-function sym (symbol-value sym))))
+;; compatibility kludge..
+(defun gaol-add-function (sym)
+  (gaol-replace-function sym (symbol-value sym)))
 
 ;; for backwards compatibility, / is integer division in themes, use
 ;; `divide' for real division
-(cond ((>= rep-interface-id 9)
-       (gaol-replace-function 'divide /)
-       (gaol-replace-function '/ quotient)
-       (gaol-replace-function 'require gaol:require))
-      (t
-       (setq gaol-safe-functions (delq '/ gaol-safe-functions))
-       (gaol-replace-function 'divide '/)
-       (gaol-replace-function '/ 'quotient)
-       (gaol-replace-function 'require 'gaol:require)))
+(gaol-replace-function 'divide /)
+(gaol-replace-function '/ quotient)
+
+;; use safe version of require
+(gaol-replace-function 'require gaol:require)
 
 (mapc gaol-add-function sawmill-safe-functions)
 (mapc gaol-add-special sawmill-safe-specials)

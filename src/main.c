@@ -80,15 +80,7 @@ DEFSTRING(err_bad_event_desc, "Invalid event description");
 DEFSTRING(version_string, SAWFISH_VERSION);
 
 DEFSYM(saved_command_line_args, "saved-command-line-args");
-
-#if (rep_INTERFACE < 8)
-DEFSYM(before_exit_hook, "before-exit-hook");
-#endif
-
-#if rep_INTERFACE >= 9
 DEFSYM(rep, "rep");
-#endif
-
 DEFSYM(fonts_are_fontsets, "fonts-are-fontsets");
 
 static rep_bool
@@ -211,10 +203,6 @@ sawfish_symbols (void)
 
     rep_ADD_SUBR_INT(Squit);
     rep_ADD_SUBR_INT(Srestart);
-
-#if (rep_INTERFACE < 8)
-    rep_INTERN_SPECIAL(before_exit_hook);
-#endif
 }
 
 static void
@@ -287,11 +275,6 @@ inner_main (repv arg)
     repv res = rep_load_environment(rep_string_dup ("sawmill"));
     if (res != rep_NULL)
     {
-#if (rep_INTERFACE < 8)
-	repv tv;
-	rep_GC_root gc_tv;
-#endif
-
 	if(!batch_mode_p ())
 	{
 	    /* final initialisation.. */
@@ -300,15 +283,6 @@ inner_main (repv arg)
 	    /* then jump into the event loop.. */
 	    res = Frecursive_edit ();
 	}
-
-#if (rep_INTERFACE < 8)
-	tv = rep_throw_value;
-	rep_throw_value = rep_NULL;
-	rep_PUSHGC(gc_tv, tv);
-	Fcall_hook (Qbefore_exit_hook, Qnil, Qnil);
-	rep_POPGC;
-	rep_throw_value = tv;
-#endif
     }
     return res;
 }
@@ -339,12 +313,10 @@ main(int argc, char **argv)
 	return 0;
     }
 
-#if rep_INTERFACE >= 9
     rep_push_structure ("sawfish");
     rep_structure_exports_all (rep_structure, rep_TRUE);
     rep_INTERN (rep);
     Frequire (Qrep);
-#endif
 
     if (sys_init(prog_name))
     {
@@ -374,11 +346,7 @@ main(int argc, char **argv)
 	functions_init ();
 	server_init ();
 
-#if rep_INTERFACE >= 8
 	rep_call_with_barrier (inner_main, Qnil, rep_TRUE, 0, 0, 0);
-#else
-	inner_main (Qnil);
-#endif
 	rc = rep_top_level_exit ();
 
 	/* call all exit funcs... */
@@ -421,37 +389,8 @@ repv
 global_symbol_value (repv sym)
 {
     repv value;
-#if rep_INTERFACE >= 9
     repv tem = rep_push_structure ("sawfish");
-#endif
     value = Fsymbol_value (sym, Qt);
-#if rep_INTERFACE >= 9
     rep_pop_structure (tem);
-#endif
     return value;
 }
-
-
-/* rep compatibility */
-
-#if rep_INTERFACE < 8
-u_long
-rep_get_long_uint (repv x)
-{
-    if (rep_INTP (x))
-	return rep_INT (x);
-    else if (rep_LONG_INTP (x))
-	return rep_LONG_INT (x);
-    else
-	return 0;
-}
-
-repv
-rep_make_long_uint (u_long x)
-{
-    if (x <= rep_LISP_MAX_INT && x >= rep_LISP_MIN_INT)
-	return rep_MAKE_INT (x);
-    else
-	return rep_MAKE_LONG_INT (x);
-}
-#endif
