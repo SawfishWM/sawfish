@@ -78,7 +78,7 @@
 	(if (zerop shade-hover-delay)
 	    (callback)
 	  (setq shade-hover-timer (make-timer callback
-					      (/ shade-hover-delay 1000)
+					      (quotient shade-hover-delay 1000)
 					      (mod shade-hover-delay 1000))))
 	(unless (in-hook-p 'pre-command-hook shade-hover-before)
 	  (add-hook 'pre-command-hook shade-hover-before))))))

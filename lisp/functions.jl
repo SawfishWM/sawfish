@@ -152,11 +152,11 @@ specified by the user."
       (setq x
             (if (< warp-to-window-x-offset 0)
 		warp-to-window-x-offset
-	      (/ (* (car dims) warp-to-window-x-offset) 100))))
+	      (quotient (* (car dims) warp-to-window-x-offset) 100))))
     (unless y
       (setq y (if (< warp-to-window-y-offset 0)
 		  warp-to-window-y-offset
-		(/ (* (cdr dims) warp-to-window-y-offset) 100))))
+		(quotient (* (cdr dims) warp-to-window-y-offset) 100))))
     (warp-cursor (+ x (car coords) (- (car foff)))
 		 (+ y (cdr coords) (- (cdr foff))))))
 

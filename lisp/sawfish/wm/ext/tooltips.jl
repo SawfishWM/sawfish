@@ -142,7 +142,7 @@
       (setq tooltips-displayed win)
       (when tooltips-timeout-enabled 
 	(setq tooltips-timer (make-timer tooltips-cleanup
-					 (/ tooltips-timeout-delay 1000)
+					 (quotient tooltips-timeout-delay 1000)
 					 (mod tooltips-timeout-delay 1000))))
       (unless (in-hook-p 'pre-command-hook tooltips-cleanup)
 	(add-hook 'pre-command-hook tooltips-cleanup)))))
@@ -157,7 +157,7 @@
       (when tooltips-timer
 	(delete-timer tooltips-timer))
       (setq tooltips-timer (make-timer callback
-				       (/ tooltips-delay 1000)
+				       (quotient tooltips-delay 1000)
 				       (mod tooltips-delay 1000)))
       (unless (in-hook-p 'pre-command-hook tooltips-cleanup)
 	(add-hook 'pre-command-hook tooltips-cleanup)))))

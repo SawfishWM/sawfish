@@ -59,7 +59,7 @@
 				   (raise-window rw-window)
 				   (setq rw-timer nil))))
 	      (setq rw-timer (make-timer timer-callback
-					 (/ raise-window-timeout 1000)
+					 (quotient raise-window-timeout 1000)
 					 (mod raise-window-timeout 1000))))))
       (rw-disable-timer))))
 

@@ -74,8 +74,8 @@
 ;; screen sized viewport handling
 
 (defun screen-viewport ()
-  (cons (/ viewport-x-offset (screen-width))
-	(/ viewport-y-offset (screen-height))))
+  (cons (quotient viewport-x-offset (screen-width))
+	(quotient viewport-y-offset (screen-height))))
 
 ;; returns t if it actually moved the viewport
 (defun set-screen-viewport (col row)
@@ -97,8 +97,8 @@
       ((pos (window-position window)))
     (rplaca pos (+ (car pos) viewport-x-offset))
     (rplacd pos (+ (cdr pos) viewport-y-offset))
-    (set-screen-viewport (/ (car pos) (screen-width))
-			 (/ (cdr pos) (screen-height)))))
+    (set-screen-viewport (quotient (car pos) (screen-width))
+			 (quotient (cdr pos) (screen-height)))))
 
 (defun window-outside-workspace-p (window)
   (let
@@ -139,16 +139,16 @@
   (let
       ((pos (window-position window)))
     (set-window-viewport window
-			 (+ (/ (+ (car pos) viewport-x-offset)
-			       (screen-width)) col)
-			 (+ (/ (+ (cdr pos) viewport-y-offset)
-			       (screen-height)) row))))
+			 (+ (quotient (+ (car pos) viewport-x-offset)
+				      (screen-width)) col)
+			 (+ (quotient (+ (cdr pos) viewport-y-offset)
+				      (screen-height)) row))))
 
 (defun window-viewport (w)
   (let
       ((position (window-position w)))
-    (cons (/ (+ (car position) viewport-x-offset) (screen-width))
-	  (/ (+ (cdr position) viewport-y-offset) (screen-height)))))
+    (cons (quotient (+ (car position) viewport-x-offset) (screen-width))
+	  (quotient (+ (cdr position) viewport-y-offset) (screen-height)))))
 
 (defun window-absolute-position (w)
   (let

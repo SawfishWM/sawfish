@@ -58,13 +58,15 @@
 	    (rplaca coords (- (car coords) (- (car tem) (car dims)))))
 	  (when (memq gravity '(north center south))
 	    ;; [x] placed relative to the center
-	    (rplaca coords (- (car coords) (/ (- (car tem) (car dims)) 2))))
+	    (rplaca coords (- (car coords) (quotient (- (car tem)
+							(car dims)) 2))))
 	  (when (memq gravity '(south south-east south-west))
 	    ;; [y] placed relative to the bottom of the frame
 	    (rplacd coords (- (cdr coords) (- (cdr tem) (cdr dims)))))
 	  (when (memq gravity '(east center west))
 	    ;; [y] placed relative to the center
-	    (rplacd coords (- (cdr coords) (/ (- (cdr tem) (cdr dims)) 2))))))
+	    (rplacd coords (- (cdr coords) (quotient (- (cdr tem)
+							(cdr dims)) 2))))))
       (setq dims tem))
 
     (when (setq tem (cdr (assq 'position alist)))
@@ -84,8 +86,7 @@
 	      (max x (- x))))
        (delta (lambda (x-1 y-1 x-2 y-2)
 		;; no sqrt function...
-		(+ (* (abs (- x-2 x-1)) (abs (- x-2 x-1)))
-		   (* (abs (- y-2 y-1)) (abs (- y-2 y-1))))))
+		(+ (* (- x-2 x-1) (- x-2 x-1)) (* (- y-2 y-1) (- y-2 y-1)))))
        (width (screen-width))
        (height (screen-height))
        (dims (window-frame-dimensions w))

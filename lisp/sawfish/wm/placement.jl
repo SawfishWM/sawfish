@@ -123,15 +123,15 @@ this mode. The single argument is the window to be placed."
     ;; XXX the ButtonRelease can get caught by move-window-int..
     ;; XXX (try double clicking on a gmc icon)
     (accept-x-input)
-    (move-window-to w (- (car ptr) (/ (car dims) 2))
-		    (- (cdr ptr) (/ (cdr dims) 2)))
+    (move-window-to w (- (car ptr) (quotient (car dims) 2))
+		    (- (cdr ptr) (quotient (cdr dims) 2)))
     (move-window-interactively w)))
 
 (defun place-window-centered (w)
   (let
       ((dims (window-frame-dimensions w)))
-    (move-window-to w (/ (max 0 (- (screen-width) (car dims))) 2)
-		    (/ (max 0 (- (screen-height) (cdr dims))) 2))))
+    (move-window-to w (quotient (max 0 (- (screen-width) (car dims))) 2)
+		    (quotient (max 0 (- (screen-height) (cdr dims))) 2))))
 
 (defun place-window-centered-on-parent (w)
   (let
@@ -142,8 +142,10 @@ this mode. The single argument is the window to be placed."
 	  ((dims (window-frame-dimensions w))
 	   (pdims (window-frame-dimensions parent))
 	   (coords (window-position parent)))
-	(rplaca coords (+ (car coords) (/ (- (car pdims) (car dims)) 2)))
-	(rplacd coords (+ (cdr coords) (/ (- (cdr pdims) (cdr dims)) 2)))
+	(rplaca coords (+ (car coords)
+			  (quotient (- (car pdims) (car dims)) 2)))
+	(rplacd coords (+ (cdr coords)
+			  (quotient (- (cdr pdims) (cdr dims)) 2)))
 	(move-window-to w (car coords) (cdr coords))))))
 
 (defun place-window-under-pointer (w)
@@ -151,9 +153,9 @@ this mode. The single argument is the window to be placed."
       ((dims (window-frame-dimensions w))
        (coords (query-pointer)))
     (rplaca coords (min (- (screen-width) (car dims))
-			(max 0 (- (car coords) (/ (car dims) 2)))))
+			(max 0 (- (car coords) (quotient (car dims) 2)))))
     (rplacd coords (min (- (screen-height) (cdr dims))
-			(max 0 (- (cdr coords) (/ (cdr dims) 2)))))
+			(max 0 (- (cdr coords) (quotient (cdr dims) 2)))))
     (move-window-to w (car coords) (cdr coords))))
 
 (define-placement-mode 'randomly place-window-randomly)

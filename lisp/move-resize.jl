@@ -250,7 +250,7 @@ the mouse."
 ;; round up a window dimension X in increments of INC, with minimum
 ;; value BASE
 (defsubst move-resize-roundup (x inc base &optional maximum)
-  (min (+ base (max 0 (* (1+ (/ (1- (- x base)) inc)) inc)))
+  (min (+ base (max 0 (* (1+ (quotient (1- (- x base)) inc)) inc)))
        (or maximum 65535)))
 
 ;; called each pointer motion event during move/resize
@@ -322,10 +322,10 @@ the mouse."
 				       move-resize-old-height)))))
 	     (when resize-show-dimensions
 	       (display-message (format nil "%dx%d"
-					(/ (- move-resize-width
-					      x-base) x-inc)
-					(/ (- move-resize-height
-					      y-base) y-inc)))))))
+					(quotient (- move-resize-width
+						     x-base) x-inc)
+					(quotient (- move-resize-height
+						     y-base) y-inc)))))))
     (when (and (eq move-resize-function 'move) move-show-position)
       (display-message (format nil "%+d%+d" move-resize-x move-resize-y)))
     (call-window-hook (if (eq move-resize-function 'move)

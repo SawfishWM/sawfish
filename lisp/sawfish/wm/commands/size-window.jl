@@ -46,7 +46,7 @@ size of each row or column is taken from `size-window-def-increment.'"
        (scale (lambda (x base inc maximum)
 		(min (+ base (* inc (max 0 x))) (or maximum 65535))))
        (descale (lambda (x base inc)
-		  (/ (- x base) inc))))
+		  (quotient (- x base) inc))))
     ;; use the configure-request handler (to handle gravity)
     (call-window-hook
      'configure-request-hook w

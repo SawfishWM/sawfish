@@ -76,7 +76,7 @@ flipping."
       (setq ef-timer (make-timer (lambda ()
 				   (setq ef-timer nil)
 				   (edge-flip-for-edge ef-current-edge))
-				 (/ edge-flip-delay 1000)
+				 (quotient edge-flip-delay 1000)
 				 (mod edge-flip-delay 1000))))))
 
 (defun edge-flip-leave (edge)

@@ -34,13 +34,13 @@
 ;;;###autoload
 (defun set-viewport-linear (index)
   (set-screen-viewport
-   (mod index viewport-columns) (/ index viewport-columns)))
+   (mod index viewport-columns) (quotient index viewport-columns)))
 
 ;; Move window to viewport INDEX using linear addressing
 ;;;###autoload
 (defun set-window-viewport-linear (window index)
   (set-window-viewport
-   window (mod index viewport-columns) (/ index viewport-columns)))
+   window (mod index viewport-columns) (quotient index viewport-columns)))
 
 ;;;###autoload
 (defun define-linear-viewport-commands (index)
