@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish 1\n"
-"POT-Creation-Date: 2002-04-21 23:09-0700\n"
-"PO-Revision-Date: 2002-06-25 12:31+0200\n"
+"POT-Creation-Date: 2002-11-02 23:33-0800\n"
+"PO-Revision-Date: 2002-11-05 12:20+0100\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -96,6 +96,7 @@ msgstr "Afbeeldingseigenschappen"
 # ../themer/themer.in
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
+#, c-format
 msgid "No matching item for %S"
 msgstr "Geen overeenkomstig item voor %S"
 
@@ -129,6 +130,7 @@ msgstr "Toegevoegde vensterrand `%s'"
 
 # ../themer/themer.in
 #. ../themer/themer.in
+#, c-format
 msgid "error while building frame: %S"
 msgstr "fout bij bouwen van vensterrand: %S"
 
@@ -234,8 +236,8 @@ msgstr "`Naar' kleur van actieve vensterranden in `gradiënt' opmaak."
 #. ../themes/gradient/theme.jl
 msgid "Use less memory when creating gradients, possibly affecting quality."
 msgstr ""
-"Gebruik minder geheugen bij creëren van een kleurverloop (mogelijk met gevolg "
-"voor kwaliteit)."
+"Gebruik minder geheugen bij creëren van een kleurverloop (mogelijk met "
+"gevolg voor kwaliteit)."
 
 # ../themes/mono/theme.jl
 #. ../themes/mono/theme.jl
@@ -822,8 +824,8 @@ msgstr ""
 "venster staat. (Alleen muisbindingen werken hier)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr "Extra toets(en) om te gebruiken voor standaard vensterbeheer toetsen."
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Extra toets(en) om te gebruiken voor standaard toetsbindingen."
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/menus.jl
@@ -878,26 +880,6 @@ msgstr "Kopieer naar vorige"
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Copy to next"
 msgstr "Kopieer naar volgende"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Left"
-msgstr "_Links"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Right"
-msgstr "_Rechts"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Up"
-msgstr "_Omhoog"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Down"
-msgstr "O_mlaag"
 
 #. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
@@ -2874,6 +2856,88 @@ msgstr "Vergeet alle opgeslagen informatie over alle vensters."
 msgid "_History"
 msgstr "_Geschiedenis"
 
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace down"
+msgstr "Werkruimte omlaag"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Bekijk de werkruimte onder de huidige werkruimte."
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace up"
+msgstr "Werkruimte omhoog"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Bekijk de werkruimte boven de huidige werkruimte."
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace left"
+msgstr "Werkruimte naar links"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Bekijk de werkruimte links van de huidige werkruimte."
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace right"
+msgstr "Werkruimte naar rechts"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Bekijk de werkruimte rechts van de huidige werkruimte."
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace down"
+msgstr "Een werkruimte naar beneden sturen"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Het venster een werkruimte naar beneden sturen"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace up"
+msgstr "Een werkruimte naar boven sturen"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Het venster een werkruimte naar boven sturen"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace left"
+msgstr "Een werkruimte naar links sturen"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Het venster een werkruimte naar links sturen"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace right"
+msgstr "Een werkruimte naar rechts sturen"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Het venster een werkruimte naar rechts sturen"
+
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "_GNOME Hulp..."
@@ -3635,6 +3699,22 @@ msgstr "_Instellingen"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Thema's"
+
+# ../lisp/menus.jl
+#~ msgid "_Left"
+#~ msgstr "_Links"
+
+# ../lisp/menus.jl
+#~ msgid "_Right"
+#~ msgstr "_Rechts"
+
+# ../lisp/menus.jl
+#~ msgid "_Up"
+#~ msgstr "_Omhoog"
+
+# ../lisp/menus.jl
+#~ msgid "_Down"
+#~ msgstr "O_mlaag"
 
 # ../src/sawmill-ui.jl
 #~ msgid "Revert"
