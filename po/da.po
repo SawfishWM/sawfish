@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawmill 0.19\n"
 "POT-Creation-Date: 2000-06-12 23:09+0000\n"
-"PO-Revision-Date: 2000-09-10 01:59+01:00\n"
+"PO-Revision-Date: 2000-09-30 01:59+01:00\n"
 "Last-Translator: Kenneth Christiansen <kenneth@gnome.org>\n"
 "Language-Team: Danish/Dansk <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -27,15 +27,13 @@ msgid "Play sound effects for window events."
 msgstr "Spil lydeffekter til vindueshåndterings-hændelser"
 
 #. ../lisp/audio-events.jl
-#, fuzzy
 msgid "Play sound effects for unmanaged windows."
-msgstr "Aktivér lydeffekter til vindueshåndterings-hændelser"
+msgstr "Spil lydeffekter for ikke-håndterede vinduer."
 
 # ../lisp/match-window.jl
 #. ../lisp/audio-events.jl
-#, fuzzy
 msgid "Map window events to sound files."
-msgstr "Match vinduer til egenskaber."
+msgstr "Kobl vindushændelser til lydfiler."
 
 #. ../lisp/audio-events.jl
 msgid "Event"
@@ -188,13 +186,12 @@ msgstr "Vælg det forrige vindue, gennemgå alle mulige skriveborde."
 
 # ../lisp/edge-flip.jl
 #. ../lisp/edge-flip.jl
-#, fuzzy
 msgid "Select the next desktop when the pointer hits screen edge."
-msgstr "Spring til næste visport/skrivebord, når markør rammer skærmkant."
+msgstr "Vælg næste skrivebord når pegeren rammer skærmkanten."
 
 #. ../lisp/edge-flip.jl
 msgid "Hitting the screen edge selects the next: \\w"
-msgstr ""
+msgstr "Når skærmkanten rammes vælges næste: \\w"
 
 #. ../lisp/edge-flip.jl
 msgid "Only flip when interactively moving a window."
@@ -202,7 +199,7 @@ msgstr "Spring kun under interaktiv flytning af vinduer."
 
 #. ../lisp/edge-flip.jl
 msgid "Milliseconds to delay before flipping: \\w"
-msgstr ""
+msgstr "Millisekunder ventetid før vending: \\w"
 
 #. ../lisp/edge-flip.jl
 msgid "Warp pointer to opposite screen edge when flipping."
@@ -238,17 +235,18 @@ msgid ""
 "Associate frame types with type to try if the theme doesn't implement the\n"
 "requested type."
 msgstr ""
+"Associér rammetyper med type som skal prøves hvis tema ikke implementerer\n"
+"den forespurgte type."
 
 # ../lisp/frames.jl
 #. ../lisp/frames.jl
 msgid "Default font: \\w"
-msgstr "Standard strifttype: \\w"
+msgstr "Standard skrifttype: \\w"
 
 # ../lisp/customize.jl
 #. ../lisp/frames.jl
-#, fuzzy
 msgid "Intensity of bevels: \\wpercent."
-msgstr "Skrånings intensitet (procentvis)."
+msgstr "Intensitet for kanter: \\wprocent."
 
 # ../lisp/frames.jl
 #. ../lisp/frames.jl
@@ -261,36 +259,36 @@ msgid "Give focus to windows even when they haven't asked for it."
 msgstr "Giv fokus til vinduer selvom de ikke har bedt om det."
 
 #. ../lisp/functions.jl
-#, fuzzy
 msgid ""
 "Offset (%) from left window edge when warping pointer.\n"
 "A negative number means outside the left window edge."
 msgstr ""
-"Afstanden i procent fra venstre vindueskant, ved warpning\n"
-"Et negativt tal betyder warp til yderkanten af venstre vindue."
+"Afstand (%) fra venstre vindueskant når pegeren flyttes.\n"
+"Et negativt tal betyder udenfor venstre vindueskant."
 
 #. ../lisp/functions.jl
-#, fuzzy
 msgid ""
 "Offset (%) from top window edge when warping pointer.\n"
 "A negative number means outside the top window edge."
 msgstr ""
-"Afstanden i procent fra top vindueskanten, ved warpning\n"
-"Et negativt tal betyder warp til yderkanten af top-vinduet."
+"Afstand (%) fra øverste vindueskant når peger flyttes.\n"
+"Et negativt tal betyder udenfor øverste vindueskant."
 
 #. ../lisp/functions.jl
 msgid "The program launched by the `xterm' command."
-msgstr ""
+msgstr "Programmet som startes af 'xterm' kommandoen."
 
 #. ../lisp/functions.jl
 msgid "Optional arguments given to the `xterm' command."
-msgstr ""
+msgstr "Alternative argumenter givet til 'xterm' kommandoen."
 
 #. ../lisp/functions.jl
 msgid ""
 "Format to create unique window names. Has two arguments (NAME INDEX)\n"
 "applied to it."
 msgstr ""
+"Format for opretelse af unike vinduesnavn. Har to argumenter (NAVN INDEKS)\n"
+"som bliver brugt."
 
 # ../lisp/functions.jl
 #. ../lisp/functions.jl
@@ -299,7 +297,7 @@ msgstr "Start en ny xterm."
 
 #. ../lisp/functions.jl
 msgid "Execute the given shell command."
-msgstr ""
+msgstr "Kør opgivet skalkommando."
 
 # ../src/sawmill-ui.jl
 #. ../lisp/functions.jl
@@ -308,7 +306,7 @@ msgstr "Kommando:"
 
 #. ../lisp/functions.jl
 msgid "Invoke the list of commands, one by one."
-msgstr ""
+msgstr "Start listen med kommandoer, en efter en."
 
 # ../src/sawmill-ui.jl
 #. ../nokogiri/nokogiri-widgets/keymap.jl
@@ -370,7 +368,7 @@ msgstr "Start Gnome hjælpevejlederen"
 
 #. ../lisp/gnome-int.jl
 msgid "Invoke the GNOME control center from the `Customize' menu."
-msgstr ""
+msgstr "Start GNOME kontrolcenter fra `Tilpas'-menuen."
 
 #. ../lisp/menus.jl
 #. ../lisp/gnome-int.jl
@@ -393,6 +391,7 @@ msgstr "Gruppér gennemsigtige vinduer med deres forældre"
 #. ../lisp/group-funs.jl
 msgid "List of group ids that always exist, even when they have no members."
 msgstr ""
+"Liste med gruppe-IDer som altid eksisterer, selv når de ikke har medlemmer."
 
 # ../lisp/group-funs.jl
 #. ../lisp/group-funs.jl
@@ -455,19 +454,16 @@ msgstr "Genindlæs gtkrc indstillinger."
 
 #. ../lisp/iconify.jl
 msgid "Unmanaged windows may be iconified."
-msgstr ""
+msgstr "Ikke-håndterede vinduer kan minimeres."
 
 #. ../lisp/iconify.jl
 msgid "Iconifying a window also iconifies the: \\w"
-msgstr ""
+msgstr "Minimering af et vindue minimerer også: \\w"
 
 # ../lisp/workspace.jl
 #. ../lisp/iconify.jl
-#, fuzzy
 msgid "Uniconifying a window also uniconifies the: \\w"
-msgstr ""
-"Deikonificering af et vindue som er medlem af en gruppe, gendanner hele "
-"gruppen."
+msgstr "Afikonificering af et vindue afikonificerer også: \\w"
 
 # ../lisp/workspace.jl
 #. ../lisp/iconify.jl
@@ -495,9 +491,8 @@ msgstr "Vis skrivebordet indeholdende vinduet W, fokusér derefter på W."
 
 # ../lisp/cycle.jl
 #. ../lisp/iconify.jl
-#, fuzzy
 msgid "Iconify all windows on the current workspace."
-msgstr "Vælg næste vindue på nuværende skrivebord."
+msgstr "Ikonificér alle vinduer i aktivt arbejdsområde."
 
 # ../lisp/workspace.jl
 #. ../lisp/iconify.jl
@@ -542,6 +537,8 @@ msgid ""
 "Sends the next key event directly to the focused client window, ignoring\n"
 "any window manager bindings that it may have."
 msgstr ""
+"Send den næste taste-hændelse direkte til klient-vinduet i fokus, idet\n"
+"enhver vindues-håndterings-binding som det må have, ignoreres."
 
 #. ../lisp/keymap.jl
 msgid "[Quote]"
@@ -623,33 +620,30 @@ msgstr ""
 
 #. ../lisp/match-window.jl
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 # ../src/sawmill-ui.jl
 #. ../lisp/match-window.jl
-#, fuzzy
 msgid "Other"
-msgstr "Matchere"
+msgstr "Andre"
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
-#, fuzzy
 msgid ""
 "Maximizing a window in one dimension must increase the size of that "
 "dimension."
-msgstr "Maksimering af et vindues dimension øger altid dimensionsstørrelsen."
+msgstr ""
+"Maksimering af et vindue i én dimension skal øge størrelsen af den dimension."
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
-#, fuzzy
 msgid "Raise windows when they are maximized."
-msgstr "Løft vinduer, når de er maksimerede."
+msgstr "Hæv vinduer når de maksimeres."
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
-#, fuzzy
 msgid "Let unmanaged windows be overlapped when filling windows."
-msgstr "Lad ignorerede vinduer blive overlappet, når vinduer placeres."
+msgstr "Lad ikke-håndterede vinduer overlappe ved fyldning af vinduer."
 
 # ../lisp/maximize.jl
 #. ../lisp/maximize.jl
@@ -1030,43 +1024,36 @@ msgstr "Flyt markøren én piksel nedad."
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
-#, fuzzy
 msgid "How windows being moved are animated: \\w"
-msgstr "Løft vinduer, som flyttes eller forstørres/-mindskes interaktivt."
+msgstr "Hvordan vinduerne animeres under flytning: \\w"
 
 #. ../lisp/move-resize.jl
 msgid "How windows being resized are animated: \\w"
-msgstr ""
+msgstr "Hvordan vinduer animeres ved ændring af størrelse: \\w"
 
 # ../lisp/maximize.jl
 #. ../lisp/move-resize.jl
-#, fuzzy
 msgid "Raise windows when they are moved or resized."
-msgstr "Løft vinduer, når de har fokus."
+msgstr "Hæv vinduer når de flyttes eller ændrer størrelse."
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
-#, fuzzy
 msgid "Show current position of windows while moving."
-msgstr "Vis den nuværende position når vinduer flyttes interaktivt."
+msgstr "Vis nuværende position for vinduerne ved flytning."
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
-#, fuzzy
 msgid "Show current dimensions of windows while resizing."
-msgstr ""
-"Vis den nuværende dimension når vinduer forstørres/-mindskes interaktivt."
+msgstr "Vis nuværende dimensioner for vinduet ved ændring af størrelse."
 
 #. ../lisp/move-resize.jl
 msgid "How to choose window edges when resizing: \\w"
-msgstr ""
+msgstr "Hvordan vinduskanter vælges ved ændring af størrelse: \\w"
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
-#, fuzzy
 msgid "Snap window position to edges of other windows while moving."
-msgstr ""
-"Fæstn vinduesposition til kanter på andre vinduer under interaktivt flytning."
+msgstr "Fæstn vinduesposition til kanter fra andre vinduer ved flytning."
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
@@ -1074,9 +1061,8 @@ msgid "Proximity in pixels before snapping to a window edge."
 msgstr "Antal piksler før fæstning til vinduets kant."
 
 #. ../lisp/move-resize.jl
-#, fuzzy
 msgid "How to snap together window edges: \\w"
-msgstr "Metode til at bestemme hvornår to vindueskanter skal fæstnes sammen."
+msgstr "Hvordan vindueskanter skal fæstnes sammen: \\w"
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
@@ -1085,15 +1071,12 @@ msgstr "Fæstn til ellers-ignorerede vinduer."
 
 # ../lisp/move-resize.jl
 #. ../lisp/move-resize.jl
-#, fuzzy
 msgid "Lock position and size while windows are maximized."
-msgstr "Lås vinduesgeometri, mens vinduet er maksimeret."
+msgstr "Lås position og størrelse mens vinduer er maksimeret."
 
 #. ../lisp/move-resize.jl
-#, fuzzy
 msgid "Only update window contents after it has stopped moving."
-msgstr ""
-"Opdatér først vinduesindholdet når vinduet er flyttet til dets nye position."
+msgstr "Opdatér kun vinduesindhold efter at det har sluttet med at bevæge sig."
 
 # ../lisp/maximize.jl
 #. ../lisp/move-resize.jl
@@ -1120,11 +1103,11 @@ msgstr ""
 
 #. ../lisp/nokogiri-sawfish.jl
 msgid "Show options suitable for \\w users."
-msgstr ""
+msgstr "Vis alternativer som passer for \\w brugere."
 
 #. ../lisp/nokogiri-sawfish.jl
 msgid "Buttons shown in configurator: \\w"
-msgstr ""
+msgstr "Knapper som vises i konfigurator: \\w"
 
 # ../lisp/customize.jl
 #. ../lisp/nokogiri-sawfish.jl
@@ -1133,17 +1116,16 @@ msgstr "Vis variablenavne til hver egendefineringspunkt."
 
 #. ../lisp/place-window.jl
 msgid "Method of placing windows: \\w"
-msgstr ""
+msgstr "Metode for placering af vinduer: \\w"
 
 #. ../lisp/place-window.jl
 msgid "Method of placing dialog windows: \\w"
-msgstr ""
+msgstr "Metode for placering af dialogvinduer: \\w"
 
 # ../lisp/place-window.jl
 #. ../lisp/place-window.jl
-#, fuzzy
 msgid "Ignore program-specified window placements."
-msgstr "Ignorér program-specifikke vinduespositioner."
+msgstr "Ignorér programspecificerede vinduesplaceringer."
 
 #. ../lisp/play-audio.jl
 msgid ""
@@ -1236,23 +1218,23 @@ msgstr ""
 
 # ../lisp/stacking.jl
 #. ../lisp/raise-commands.jl
-#, fuzzy
 msgid ""
 "Raise the group of windows that received the current event, then replay any\n"
 "pointer events that invoked the command."
 msgstr ""
-"Løft vinduet som modtog den nuværende handling, derefter genspil enhver\n"
+"Løft den gruppe af vinduer som modtog den nuværende handling, derefter "
+"genspil enhver\n"
 "markørhandling som startede kommandoen."
 
 # ../lisp/stacking.jl
 #. ../lisp/raise-commands.jl
-#, fuzzy
 msgid ""
 "Raise the window that received the current event and any transients it has,\n"
 "then replay any pointer events that invoked the command."
 msgstr ""
-"Løft vinduet som modtog den nuværende handling, derefter genspil enhver\n"
-"markørhandling som startede kommandoen."
+"Løft vinduet som modtog den nuværende handling og enhver gennemsigtige som "
+"det har,\n"
+"derefter genspil enhver markørhandling som startede kommandoen."
 
 #. ../lisp/raise-commands.jl
 msgid ""
@@ -1382,31 +1364,27 @@ msgstr ""
 
 # ../lisp/stacking.jl
 #. ../lisp/stacking.jl
-#, fuzzy
 msgid "Keep transient windows stacked above: \\w"
-msgstr "Behold gennemsigtige vinduer øverst."
+msgstr "Hold gennemsigtige vinduer stakket øverst: \\w"
 
 # ../lisp/stacking.jl
 #. ../lisp/stacking.jl
-#, fuzzy
 msgid "Raise the window to its highest allowed position in the stacking order."
-msgstr "Løft vinduet til toppen af stablingsniveauet."
+msgstr "Løft vinduet til den højste tilladte position i stakordenen."
 
 # ../lisp/stacking.jl
 #. ../lisp/stacking.jl
-#, fuzzy
 msgid "Lower the window to its lowest allowed position in the stacking order."
-msgstr "Sænk vinduet til bunden af stablingsniveauet."
+msgstr "Sænk vinduet til den laveste tilladte position i stakordenen."
 
 # ../lisp/stacking.jl
 #. ../lisp/stacking.jl
-#, fuzzy
 msgid ""
 "If the window is at its highest possible position, then lower it to its\n"
 "lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
-"Hvis vinduet er det øverste vindue i dets stablingsniveau, sænk det da til\n"
-"bunden af dette niveau, ellers løft det til toppen af dets niveau."
+"Hvis vinduet er på sin højest mulige position, så sænk det til dens\n"
+"lavest mulige position. Ellers løft det så langt som tilladt."
 
 # ../lisp/stacking.jl
 #. ../lisp/stacking.jl
@@ -1420,7 +1398,7 @@ msgstr "Placér vinduet i stablingsniveauet over dets nuværende niveau."
 
 #. ../lisp/stagger-placement.jl
 msgid "Distance between successive placements in `stagger' placement mode."
-msgstr ""
+msgstr "Afstand mellem sucessive placeringer i 'stagger' placerings modus."
 
 # ../lisp/tooltips.jl
 #. ../lisp/tooltips.jl
@@ -1461,33 +1439,36 @@ msgstr "Farve brugt til forgrund for værktøjstips"
 
 # ../lisp/transient.jl
 #. ../lisp/transient.jl
-#, fuzzy
 msgid "Focus windows when they are first displayed."
-msgstr "Fokusér hvert vindue når det vises første gang."
+msgstr "Fokusér vinduer når de vises første gang."
 
 # ../lisp/transient.jl
 #. ../lisp/transient.jl
-#, fuzzy
 msgid "Dialog windows inherit the focus from their parent."
-msgstr "Gennemsigtige vinduer arver fokus fra deres forældre."
+msgstr "Dialogvinduer arver fokus fra deres ophav."
 
 # ../lisp/frames.jl
 #. ../lisp/transient.jl
-#, fuzzy
 msgid "Decorate dialog windows similarly to application windows."
-msgstr "Dekorér gennemsigtige vinduer på samme måde som top-niveau vinduer."
+msgstr "Dekorér dialogvinduer ligesom applikationsvinduer."
 
 #. ../lisp/transient.jl
 msgid ""
 "Raise the current window to its highest allowed position in the stacking\n"
 "order. Also raise any transient windows that it has."
 msgstr ""
+"Løft det nuværende vindue til dets højeste tilladte position i "
+"stakkeordenen.\n"
+"Løft også ethvert gennemsigtigt vindue som det har."
 
 #. ../lisp/transient.jl
 msgid ""
 "Lower the current window to its lowest allowed position in the stacking\n"
 "order. Also lower any transient windows that it has."
 msgstr ""
+"Sænk det nuværende vindue til dets laveste tilladte position i "
+"stakkeordenen.\n"
+"Sænk også ethvert gennemsigtigt vindue som det har."
 
 #. ../lisp/transient.jl
 msgid ""
@@ -1496,38 +1477,39 @@ msgid ""
 "changes\n"
 "the level of any transient windows it has."
 msgstr ""
+"Hvis vinduet er på dets højest mulige position, så sænk det til dets\n"
+"lavest mulige position. Ellers løft det så langt som tilladt. Ændrer også\n"
+"niveauet for ethvert gennemsigtigt vindue, det har."
 
 # ../lisp/viewport.jl
 #. ../lisp/viewport.jl
-#, fuzzy
 msgid "Windows uniconify to the current viewport."
-msgstr "Vinduer er afikonificeret til nuværende visport."
+msgstr "Vinduer afikonificeres til aktivt visningsområde."
 
 #. ../lisp/viewport.jl
 msgid "Select the specified viewport."
-msgstr ""
+msgstr "Vælg specificeret visningsport."
 
 #. ../lisp/viewport.jl
 msgid "Column:"
-msgstr ""
+msgstr "Kolonne:"
 
 #. ../lisp/viewport.jl
 msgid "Row:"
-msgstr ""
+msgstr "Række:"
 
 #. ../lisp/viewport.jl
 msgid "Select the specified viewport column."
-msgstr ""
+msgstr "Vælg angivet kolonne i visningsport."
 
 #. ../lisp/viewport.jl
 msgid "Select the specified viewport row."
-msgstr ""
+msgstr "Vælg angivet række i visningsport."
 
 # ../lisp/viewport.jl
 #. ../lisp/viewport.jl
-#, fuzzy
 msgid "Move the current window to the specified viewport."
-msgstr "Flyt vinduet til nedre visport."
+msgstr "Flyt dette vindue til specificeret visningsområde."
 
 # ../lisp/viewport.jl
 #. ../lisp/viewport.jl
@@ -1570,24 +1552,20 @@ msgid "Move the window to the viewport above."
 msgstr "Flyt vinduet til øvre visport."
 
 #. ../lisp/window-anim.jl
-#, fuzzy
 msgid "The default window animation mode: \\w"
-msgstr "Forvalgt vindues-animationstilstand"
+msgstr "Forvalgt animeringsmodus for vinduer: \\w"
 
 #. ../lisp/window-history.jl
-#, fuzzy
 msgid "Remember _position"
-msgstr "Gem _position"
+msgstr "Husk _position"
 
 #. ../lisp/window-history.jl
-#, fuzzy
 msgid "Remember _dimensions"
-msgstr "Gem _dimensioner"
+msgstr "Husk størrelser"
 
 #. ../lisp/window-history.jl
-#, fuzzy
 msgid "Remember _attributes"
-msgstr "Gem _attributter"
+msgstr "Husk _attributter"
 
 #. ../lisp/window-history.jl
 msgid "_Forget saved state"
@@ -1620,30 +1598,26 @@ msgstr "Spørg efter en kommando, udfør den, og udskriv uddataene til skærmen."
 
 #. ../lisp/workspace.jl
 msgid "Virtual desktop configuration."
-msgstr ""
+msgstr "Konfiguration af virtuelt skrivebord."
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "When passing the first or last workspace: \\w"
-msgstr "Handling ved passage af første/sidste skrivebord ved flytning."
+msgstr "Ved passering af første eller sidste arbejdsområde: \\w"
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "When passing the first or last workspace, while moving a window: \\w"
-msgstr ""
-"Handling ved passage af første/sidste skrivebord ved flytning af vinduer."
+msgstr "Ved passering af første eller sidste arbejdsområde under flytning: \\w"
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "Workspaces are deleted when their last window closes."
-msgstr "Skriveborde fusioneres med det næste, når deres sidste vindue lukkes."
+msgstr "Arbejdsområder slettes når deres sidste vindue lukkes."
 
 #. ../lisp/workspace.jl
 msgid "Preserve empty workspaces in pager."
-msgstr ""
+msgstr "Behold tomme arbejdsområder i vælgeren."
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
@@ -1667,15 +1641,13 @@ msgstr "Vinduer får fokus efter deikonifikation."
 
 # ../lisp/transient.jl
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "Dialogs appear on the same workspace as their application."
-msgstr "Gennemsigtige vinduer åbnes på samme skrivebord som deres forældre."
+msgstr "Dialoger kommer på det samme skrivebord som deres anvendelse."
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "Raise selected windows (normally by the Windows menu)."
-msgstr "Valgte vinduer (normalt af vinduesmenuen) bliver løftet."
+msgstr "Løft valgte vinduer (normalt via vindues-menuen)."
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
@@ -1684,15 +1656,13 @@ msgstr "Nedrul valgte vinduer"
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "Warp the pointer to selected windows."
-msgstr "Lad musemarkøren springe til valgt vindue."
+msgstr "Warp pegeren til valgte vinduer."
 
 # ../lisp/custom.jl
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "Workspace names."
-msgstr "Skriveborde"
+msgstr "Navn på arbejdsområder."
 
 #. ../lisp/workspace.jl
 msgid "Name"
@@ -1851,21 +1821,18 @@ msgstr ""
 
 # ../lisp/workspace.jl
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "Select the N'th workspace."
-msgstr "Vælg næste skrivebord"
+msgstr "Vælg n'te arbejdsområde."
 
 # ../lisp/viewport.jl
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "Move the current window to the N'th workspace."
-msgstr "Flyt vinduet til næste arbejdsplads."
+msgstr "Flyt aktivt vindue til n'te arbejdsområde."
 
 # ../lisp/cycle.jl
 #. ../lisp/workspace.jl
-#, fuzzy
 msgid "Copy the current window to the N'th workspace."
-msgstr "Kopiér vinduet til næste arbejdsplads."
+msgstr "Kopier aktivt vindue til n'te arbejdsområde."
 
 # ../lisp/x-cycle.jl
 #. ../lisp/x-cycle.jl
@@ -1948,46 +1915,41 @@ msgstr "Annullér"
 
 #. ../nokogiri/nokogiri-no-gnome.jl
 msgid "Apply"
-msgstr ""
+msgstr "Brug"
 
 #. ../nokogiri/nokogiri-no-gnome.jl
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 # ../lisp/menus.jl
 #. ../nokogiri/nokogiri-no-gnome.jl
-#, fuzzy
 msgid "No"
-msgstr "Ingen"
+msgstr "Nej"
 
 #. ../nokogiri/nokogiri-no-gnome.jl
-#, fuzzy
 msgid "Close"
-msgstr "Klasse"
+msgstr "Luk"
 
 #. ../nokogiri/nokogiri-no-gnome.jl
-#, fuzzy
 msgid "Help"
-msgstr "_Hjælp"
+msgstr "Hjælp"
 
 # ../lisp/custom.jl
 #. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
 #. ../nokogiri/nokogiri-no-gnome.jl
-#, fuzzy
 msgid "Workspaces:"
-msgstr "Skriveborde"
+msgstr "Arbejdsområder:"
 
 # ../src/sawmill-ui.jl
 #. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
 #. ../nokogiri/nokogiri-no-gnome.jl
-#, fuzzy
 msgid "Columns:"
-msgstr "Kommandoer"
+msgstr "Kolonner:"
 
 #. ../nokogiri/nokogiri-widgets/workspace-geometry.jl
 #. ../nokogiri/nokogiri-no-gnome.jl
 msgid "Rows:"
-msgstr ""
+msgstr "Rækker:"
 
 # ../src/sawmill-ui.jl
 #. ../nokogiri/nokogiri-shell.jl
@@ -2008,7 +1970,7 @@ msgstr "Tast"
 
 #. ../nokogiri/nokogiri-widgets/alist.jl
 msgid "Value"
-msgstr ""
+msgstr "Værdi"
 
 # ../src/sawmill-ui.jl
 #. ../themer/themer.in
@@ -2029,9 +1991,8 @@ msgstr "Fang..."
 
 # ../src/sawmill-ui.jl
 #. ../nokogiri/nokogiri-widgets/event.jl
-#, fuzzy
 msgid "Key:"
-msgstr "Tast"
+msgstr "Tast:"
 
 # ../themer/themer.in
 #. ../themer/themer.in
@@ -2053,21 +2014,18 @@ msgstr "Vælg skrifttype"
 
 # ../src/sawmill-ui.jl
 #. ../nokogiri/nokogiri-widgets/icon.jl
-#, fuzzy
 msgid "Select Icon"
-msgstr "Vælg skrifttype"
+msgstr "Vælg ikon"
 
 # ../lisp/keymaps.jl
 #. ../nokogiri/nokogiri-widgets/keymap.jl
-#, fuzzy
 msgid "Edit binding"
-msgstr "Bindinger"
+msgstr "Redigér binding"
 
 # ../src/sawmill-ui.jl
 #. ../nokogiri/nokogiri-widgets/list.jl
-#, fuzzy
 msgid "Insert..."
-msgstr "Indsæt"
+msgstr "Indsæt..."
 
 # ../lisp/menus.jl
 # ../src/sawmill-ui.jl
@@ -2082,15 +2040,13 @@ msgstr "Redigér..."
 
 # ../src/sawmill-ui.jl
 #. ../nokogiri/nokogiri-widgets/list.jl
-#, fuzzy
 msgid "Insert:"
-msgstr "Indsæt"
+msgstr "Indsæt:"
 
 # ../src/sawmill-ui.jl
 #. ../nokogiri/nokogiri-widgets/list.jl
-#, fuzzy
 msgid "Edit:"
-msgstr "Redigér..."
+msgstr "Redigér:"
 
 # ../src/sawmill-ui.jl
 #. ../nokogiri/nokogiri-widgets/match-window.jl
@@ -2109,9 +2065,8 @@ msgstr "Match vinduesegenskaber"
 
 # ../lisp/menus.jl
 #. ../nokogiri/nokogiri-layouts/keymaps.jl
-#, fuzzy
 msgid "Context:"
-msgstr "Kopiér til næste"
+msgstr "Kontekst:"
 
 # ../themer/themer.in
 #. ../themer/themer.in
@@ -2267,9 +2222,8 @@ msgstr "Mono-tema"
 
 # ../themes/simple/theme.jl
 #. ../themes/mono/theme.jl
-#, fuzzy
 msgid "Color of inactive frames (if unset use GTK+ background color)."
-msgstr "Farve på den inaktive ramme i `simpel' rammestil."
+msgstr "Farve på inaktive rammer (hvis ikke sat brug GTK+ baggrundsfarve)."
 
 # ../themes/simple/theme.jl
 #. ../themes/mono/theme.jl
@@ -2277,9 +2231,8 @@ msgid "Color of active frames."
 msgstr "Farve på aktive rammer."
 
 #. ../themes/mono/theme.jl
-#, fuzzy
 msgid "Text is \\w justified in window titles."
-msgstr "Metode for justering af tekst i vindues-titlerne."
+msgstr "Tekst er \\w-justeret i vinduestitler."
 
 # ../themes/simple/theme.jl
 #. ../themes/simple/theme.jl
@@ -2557,140 +2510,3 @@ msgstr "Ind_stillinger"
 #. ../themer/themer.glade:262
 msgid "_Themes"
 msgstr "_Temaer"
-
-# ../lisp/keymap.jl
-#~ msgid "Grab key..."
-#~ msgstr "Tryk på tast..."
-
-# ../src/sawmill-ui.jl
-#~ msgid "Keymaps"
-#~ msgstr "Tastaturer"
-
-# ../src/sawmill-ui.jl
-#~ msgid "Try"
-#~ msgstr "Prøv"
-
-# ../src/sawmill-ui.jl
-#~ msgid "Refresh"
-#~ msgstr "Genopfrisk"
-
-#~ msgid "Play audio effects for windows that are usually ignored."
-#~ msgstr "Afspil lydeffekter for vinduer som normalt er ignorerede."
-
-# ../lisp/customize.jl
-#~ msgid "Font used by default."
-#~ msgstr "Standard skrifttype."
-
-# ../lisp/customize.jl
-#~ msgid ""
-#~ "Sawfish %s (rep %s)\n"
-#~ "\n"
-#~ "Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>\n"
-#~ "\n"
-#~ "This is free software -- you are welcome to redistribute it and/or modify it "
-#~ "under the terms of the GNU General Public License as published by the Free "
-#~ "Software Foundation; either version 2, or (at your option) any later "
-#~ "version.\n"
-#~ "\n"
-#~ "Sawfish is distributed in the hope that it will be useful, but WITHOUT ANY "
-#~ "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-#~ "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-#~ "details.\n"
-#~ "\n"
-#~ "Visit the Sawfish homepage at http://sawmill.sourceforge.net/"
-#~ msgstr ""
-#~ "Sawfish %s (rep %s)\n"
-#~ "\n"
-#~ "Ophavsret (C) 1999 John Harper <jsh@users.sourceforge.net>\n"
-#~ "\n"
-#~ "Dette er frit programmel -- du er velkommen til at redistribuere eller "
-#~ "modificere det i overensstemmelse med reglerne givet i GNU General Public "
-#~ "License (GPL) som udgivet af Free Software Foundation; enten version 2 eller "
-#~ "(hvis du foretrækker det) enhver senere version.\n"
-#~ "\n"
-#~ "Sawfish er distribueret i håb at den vil være anvendelig, men UDEN NOGEN "
-#~ "FORM FOR GARANTI; end ikke for SALGBARHED eller EGNETHED TIL NOGET BESTEMT "
-#~ "FORMÅL. Læs GNU General Public License for yderligere detaljer.\n"
-#~ "\n"
-#~ "Besøg Sawfish's engelske hjemmeside på: http://sawmill.sourceforge.net/"
-
-#~ msgid "Advanced"
-#~ msgstr "Avanceret"
-
-# ../lisp/edge-flip.jl
-#~ msgid "What hitting the screen edge actually flips."
-#~ msgstr "Hvad får skærmen til at skifte, når det rører kanten?"
-
-# ../lisp/edge-flip.jl
-#~ msgid ""
-#~ "Number of milliseconds to wait after pointer hits screen edge before\n"
-#~ "flipping."
-#~ msgstr ""
-#~ "Antal millisekunders ventetid efter markør rører skærmkanten\n"
-#~ "før skærmskift"
-
-#~ msgid "Read a single event and send it to the focused window."
-#~ msgstr "Læs en enkelt handling og send den til det fokuserede vindue."
-
-# ../lisp/move-resize.jl
-#~ msgid "The method of drawing windows being moved interactively."
-#~ msgstr "Metoden, hvorpå vinduer der flyttes interaktivt, tegnes."
-
-# ../lisp/move-resize.jl
-#~ msgid "The method of drawing windows being resized interactively."
-#~ msgstr "Metoden, hvorpå vinduer der forstørres/-mindskes, tegnes."
-
-#~ msgid ""
-#~ "The method of choosing which window edges are moved while resizing with\n"
-#~ "the mouse."
-#~ msgstr ""
-#~ "Metoden til at vælge hvilken vindueskant som flyttes under "
-#~ "forstørrelse/mindskelse\n"
-#~ "med musen"
-
-# ../lisp/place-window.jl
-#~ msgid "Method of selecting the position of a freshly-mapped window."
-#~ msgstr "Metode til at vælge positionen på nye vinduer."
-
-# ../lisp/place-window.jl
-#~ msgid ""
-#~ "Method of selecting the position of a freshly-mapped transient window."
-#~ msgstr "Metode til at vælge positionen på nye gennemsigtige vinduer."
-
-# ../lisp/viewport.jl
-#~ msgid "Number of columns in each virtual workspace."
-#~ msgstr "Antal kolonner på hvert virtuel skrivebord."
-
-# ../lisp/viewport.jl
-#~ msgid "Number of rows in each virtual workspace."
-#~ msgstr "Antal rækker på hvert virtuel skrivebord."
-
-# ../lisp/menus.jl
-#~ msgid "Window History"
-#~ msgstr "Vindueshistorie"
-
-# ../lisp/workspace.jl
-#~ msgid "The minimum number of workspaces that may exist."
-#~ msgstr "Minimum antal skriveborde der kan eksistere."
-
-# ../lisp/workspace.jl
-#~ msgid "Empty workspaces before or after the active workspace aren't hidden."
-#~ msgstr "Tomme skriveborde før eller efter det aktive, er ikke skjulte."
-
-# ../lisp/workspace.jl
-#~ msgid ""
-#~ "Iconifying a window that's a member of a group removes the whole group."
-#~ msgstr ""
-#~ "Ikonificering af et vindue som er medlem af en gruppe, skjuler hele gruppen."
-
-# ../lisp/workspace.jl
-#~ msgid "Activate workspace number SPACE (from zero)."
-#~ msgstr "Aktivér skrivebordsnummer SPACE (fra nul)."
-
-# ../themes/mono/theme.jl
-#~ msgid "Use the GTK+ background color for inactive frames."
-#~ msgstr "Anvend gtk+ baggrundsfarve for inaktive rammer."
-
-# ../themes/simple/theme.jl
-#~ msgid "Color of inactive frames. (When the above option is unset.)"
-#~ msgstr "Farve på inaktive rammer. (Når ovenstående flag ikke er sat.)"
