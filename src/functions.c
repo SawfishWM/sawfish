@@ -552,22 +552,61 @@ set-x-property WINDOW PROPERTY DATA TYPE FORMAT
 }
 
 DEFUN("send-client-message", Fsend_client_message, Ssend_client_message,
-      (repv win, repv atom), rep_Subr2) /*
+      (repv win, repv type, repv data, repv format), rep_Subr4) /*
 ::doc:Ssend-client-message::
-send-client-message WINDOW ATOM
+send-client-message WINDOW TYPE DATA FORMAT
 
 Send an X ClientMessage event to WINDOW (a window object or the symbol
-`root'). It will contain the atom ATOM.
+`root'). It will be of the type TYPE (a symbol), contain the array of
+integers DATA (i.e. a vector or a string), and it will be transferred as
+FORMAT sized quantities (8, 16 or 32).
 ::end:: */
 {
-    /* XXX add option to control timestamp? */
+    XClientMessageEvent ev;
     Window w = x_win_from_arg (win);
+
     if (w == 0)
 	return rep_signal_arg_error (win, 1);
-    rep_DECLARE2(atom, rep_SYMBOLP);
-    send_client_message (w, XInternAtom (dpy, rep_STR(rep_SYM(atom)->name),
-					 False), CurrentTime);
-    return atom;
+    rep_DECLARE2(type, rep_SYMBOLP);
+    rep_DECLARE(3, data, rep_STRINGP(data) || rep_VECTORP(data));
+    rep_DECLARE4(format, rep_INTP);
+
+    ev.type = ClientMessage;
+    ev.window = w;
+    ev.message_type = XInternAtom (dpy, rep_STR(rep_SYM(type)->name), False);
+    ev.format = rep_INT(format);
+
+    switch (rep_INT(format))
+    {
+	int i;
+
+    case 8:
+	if (rep_STRINGP(data))
+	    memcpy (rep_STR(data), ev.data.b, MAX(rep_STRING_LEN(data), 20));
+	else
+	{
+	    for (i = 0; i < rep_VECT_LEN(data) && i < 20; i++)
+		ev.data.b[0] = rep_INT(rep_VECTI(data, i));
+	}
+	break;
+
+    case 16:
+	if (rep_STRINGP(data))
+	    return rep_signal_arg_error (data, 3);
+	for (i = 0; i < rep_VECT_LEN(data) && i < 10; i++)
+	    ev.data.s[0] = rep_INT(rep_VECTI(data, i));
+	break;
+
+    case 32:
+	if (rep_STRINGP(data))
+	    return rep_signal_arg_error (data, 3);
+	for (i = 0; i < rep_VECT_LEN(data) && i < 5; i++)
+	    ev.data.l[0] = rep_INT(rep_VECTI(data, i));
+	break;
+    }
+
+    XSendEvent (dpy, w, False, 0L, (XEvent *) &ev);
+    return win;
 }
 
 DEFUN("create-window", Fcreate_window, Screate_window,
