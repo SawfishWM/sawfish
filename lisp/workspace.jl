@@ -32,7 +32,7 @@
   :group workspace)
 
 (defcustom uniconify-to-current-workspace t
-  "Windows that are uniconified appear on the current workspace."
+  "Windows are uniconified onto the current workspace."
   :type boolean
   :group workspace)
 
