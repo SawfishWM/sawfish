@@ -108,6 +108,7 @@ unused before killing it."
     (when menu-process
       (kill-process menu-process))
     (setq menu-process (make-process 'menu-filter 'menu-sentinel))
+    (set-process-error-stream menu-process nil)
     (or (start-process menu-process menu-program)
 	(error "Can't start menu backend: %s" menu-program))))
 
