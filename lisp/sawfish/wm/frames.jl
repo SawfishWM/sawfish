@@ -453,7 +453,11 @@ deciding which frame type to ask a theme to generate.")
       (when dir
 	(let ((image-load-path (cons dir image-load-path)))
 	  (if themes-are-gaolled
-	      (gaol-load (expand-file-name "theme.jl" dir) (make-gaol))
+	      (let ((gaol (make-gaol)))
+		(gaol-load (expand-file-name "theme.jl" dir) gaol)
+		(define-gaol-structure (intern (concat "themes."
+						       (symbol-name name)))
+				       gaol))
 	    (load (expand-file-name "theme" dir) nil t))))))
 
   (define (find-all-frame-styles #!optional sorted)
