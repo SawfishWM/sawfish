@@ -61,7 +61,8 @@
 
 (defun custom-keymap-group-widget (group spec)
   (let
-      ((names (mapcar symbol-name (cdr (assq 'bindings custom-groups)))))
+      ((names (mapcar symbol-name
+		      (cddr (assq 'bindings (cddr custom-groups))))))
     `(keymap-shell ,(mapcar (lambda (item)
 			      (list (car (prog1 names
 					   (setq names (cdr names))))
