@@ -51,12 +51,6 @@
   :type number
   :range (0 . 64))
 
-(defvar sp-area-weight 512
-  "Weighting between future usefulness and edge alignment in best-fit mode.
-A value between 0 and 1023 inclusive.")
-
-(defconst sp-cost-max 1024)
-
 ;; the maximum number of points to keep in each grid dimension
 (defvar sp-max-points 10)
 
@@ -176,24 +170,15 @@ A value between 0 and 1023 inclusive.")
        (rect-1d-overlap ,start-1 ,end-1 ,start-2 ,end-2)
      0))
 
-;; This is the crux of the problem -- this function must assign a value
-;; to placing a window of DIMS at POINT. GRID defines the grid from which
-;; POINT was chosen, RECTS defines all other windows on the screen.
-;; The returned value must be between zero and sp-cost-max, with higher
-;; values better placements
-(defun sp-cost (point dims grid rects)
-  (let
-      ((win-left (car point))
-       (win-top (cdr point))
-       (win-right (+ (car point) (car dims)))
-       (win-bottom (+ (cdr point) (cdr dims)))
-       (edges (make-vector 4 0))
-       (x-cross 0)
-       (y-cross 0)
-       (x-total 0)
-       (y-total 0)
-       tem)
-
+(defun sp-cost:grid-lines (point dims grid rects)
+  (let ((win-left (car point))
+	(win-top (cdr point))
+	(win-right (+ (car point) (car dims)))
+	(win-bottom (+ (cdr point) (cdr dims)))
+	(x-cross 0)
+	(y-cross 0)
+	(x-total 0)
+	(y-total 0))
     ;; count the number of grid lines this position crosses
     ;; the idea is to maximize this, since it's likely that it
     ;; will use up the annoying small parts of the screen
@@ -207,7 +192,14 @@ A value between 0 and 1023 inclusive.")
 	      (setq y-cross (1+ y-cross)))
 	    (setq y-total (1+ y-total)))
 	  (cdr grid))
+    (/ (* x-cross y-cross) (* x-total y-total))))
 
+(defun sp-cost:aligned-edges (point dims grid rects)
+  (let ((win-left (car point))
+	(win-top (cdr point))
+	(win-right (+ (car point) (car dims)))
+	(win-bottom (+ (cdr point) (cdr dims)))
+	(edges (make-vector 4 0)))
     ;; how many window edges does this position abut?
     ;; it can save space to cluster windows as much as possible
     (mapc (lambda (r)
@@ -228,14 +220,45 @@ A value between 0 and 1023 inclusive.")
 				(nth 3 r) (car r) (nth 2 r))
 			       (aref edges 3))))
 	  rects)
-    (setq edges (+ (aref edges 0) (aref edges 1)
-		   (aref edges 2) (aref edges 3)))
+    (/ (+ (aref edges 0) (aref edges 1)
+	  (aref edges 2) (aref edges 3))
+       (+ (* 2 (car dims)) (* 2 (cdr dims))))))
 
-    ;; factor in the two quantities scaled upto sp-cost-max by sp-area-weight
-    (+ (/ (* sp-area-weight (* x-cross y-cross))
-	  (* x-total y-total))
-       (/ (* (- sp-cost-max sp-area-weight) edges)
-	  (+ (* 2 (car dims)) (* 2 (cdr dims)))))))
+(defun sp-cost-from-distance (point-1 point-2)
+  (/ (sqrt (+ (expt (- (screen-width) (- (car point-2) (car point-1))) 2)
+	      (expt (- (screen-height) (- (cdr point-2) (cdr point-1))) 2)))
+     (sqrt (+ (expt (screen-width) 2) (expt (screen-height) 2)))))
+
+(defun sp-cost:pointer-locality (point dims grid rects)
+  (sp-cost-from-distance (rectangle-center* point dims) (query-pointer)))
+
+(defun sp-cost:focus-locality (point dims grid rects)
+  (let ((focus (input-focus)))
+    (if focus
+	(sp-cost-from-distance (rectangle-center* point dims)
+			       (rectangle-center* (window-position focus)
+						  (window-dimensions focus)))
+      1)))
+
+(defvar sp-cost-components (list (cons 1/4 sp-cost:aligned-edges)
+				 (cons 1/4 sp-cost:grid-lines)
+				 (cons 1/2 sp-cost:focus-locality)))
+
+;; This is the crux of the problem -- this function must assign a value
+;; to placing a window of DIMS at POINT. GRID defines the grid from which
+;; POINT was chosen, RECTS defines all other windows on the screen.
+;; The returned value must be between zero and sp-cost-max, with higher
+;; values better placements
+(defun sp-cost (point dims grid rects)
+  (let ((total 0))
+    (mapc (lambda (cell)
+	    (let ((this ((cdr cell) point dims grid rects)))
+	      (format standard-error
+		      "%s --> %d * %d\n" (cdr cell) (car cell) this)
+	      (setq total (+ total (* (car cell) this)))))
+	  sp-cost-components)
+    (format standard-error " ** total = %d\n" total)
+    total))
 
 (defun sp-best-fit (dims grid rects)
   (let
