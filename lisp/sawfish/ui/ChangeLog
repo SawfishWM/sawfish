@@ -1,3 +1,9 @@
+2000-11-21  John Harper  <jsh@eazel.com>
+
+	* widgets/command.jl (update-params): when ref'ing commands
+	without arguments, remember to use command-name to remove any
+	keywords in the command definition. Fixes #4827
+
 2000-11-17  John Harper  <jsh@eazel.com>
 
 	* main.jl.in: don't initialize backtrace-on-error

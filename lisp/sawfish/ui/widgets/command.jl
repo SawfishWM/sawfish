@@ -153,7 +153,7 @@
 		   (if params-widget
 		       (cons (command-name (nth selection commands))
 			     (widget-ref params-widget))
-		     (nth selection commands))))
+		     (command-name (nth selection commands)))))
 	  ((validp) (lambda (x)
 		      ;; XXX check params
 		      (memq (command-name (car x)) commands)))))))
