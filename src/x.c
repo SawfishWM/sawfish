@@ -263,7 +263,7 @@ static void
 x_window_event_handler (XEvent *ev)
 {
     repv win = x_window_from_id (ev->xany.window);
-    if (VX_WINDOW (win)->event_handler != Qnil)
+    if (win != Qnil && VX_WINDOW (win)->event_handler != Qnil)
     {
 	repv type = Qnil, args = Qnil;
 	if (win != Qnil)
@@ -859,6 +859,7 @@ rep_dl_init (void)
     rep_INTERN(y);
     rep_INTERN(border_width);
     rep_INTERN(border_color);
+    rep_INTERN(expose);
 
     return Qx;
 }
