@@ -43,13 +43,14 @@
 # include <netdb.h>
 #endif
 
-char *prog_name;
+char *prog_name, *visual_name;
 Display *dpy;
-int screen_num, screen_width, screen_height, screen_depth;
-Visual *screen_visual;
-Colormap screen_cmap;
+int screen_num, screen_width, screen_height;
 Window root_window, no_focus_window;
 int shape_event_base, shape_error_base;
+
+Visual *preferred_visual;
+int preferred_depth;
 
 /* some atoms that may be useful.. */
 Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols, xa_wm_delete_window,
@@ -203,6 +204,80 @@ beep(void)
     XBell(dpy, 0);
 }
 
+static void
+choose_visual (void)
+{
+    int id = 0;
+    if (visual_name != 0)
+    {
+	if (!strcasecmp ("StaticGray", visual_name))
+	    id = StaticGray;
+	else if (!strcasecmp ("StaticColor", visual_name))
+	    id = StaticColor;
+	else if (!strcasecmp ("TrueColor", visual_name))
+	    id = TrueColor;
+	else if (!strcasecmp ("GrayScale", visual_name)
+		 || !strcasecmp ("GreyScale", visual_name))
+	    id = GrayScale;
+	else if (!strcasecmp ("PseudoColor", visual_name))
+	    id = PseudoColor;
+	else if (!strcasecmp ("DirectColor", visual_name))
+	    id = DirectColor;
+    }
+    if (id != 0)
+    {
+	XVisualInfo in, *out;
+	int n_out;
+	in.class = id;
+	in.screen = screen_num;
+	out = XGetVisualInfo (dpy, VisualClassMask
+			      | VisualScreenMask, &in, &n_out);
+	if (out != 0)
+	{
+	    int i, best = -1;
+	    if (preferred_depth > 0)
+	    {
+		/* Look for a visual with the preferred depth. */
+		for (i = 0; i < n_out; i++)
+		{
+		    if (out[i].depth == preferred_depth
+			&& (best < 0
+			    || out[i].colormap_size > out[best].colormap_size))
+		    {
+			best = i;
+		    }
+		}
+	    }
+	    if (best < 0)
+	    {
+		/* Else find the deepest visual of this type. */
+		for (i = 0, best = 0; i < n_out; i++)
+		{
+		    if (out[i].depth > out[best].depth
+			|| (out[i].depth == out[best].depth
+			    && out[i].colormap_size > out[best].colormap_size))
+		    {
+			best = i;
+		    }
+		}
+	    }
+	    if (best >= 0 && best < n_out)
+	    {
+		preferred_visual = out[best].visual;
+		preferred_depth = out[best].depth;
+	    }
+	    XFree (out);
+	}
+    }
+    if (preferred_visual == 0)
+    {
+	if (visual_name != 0)
+	    fprintf (stderr, "warning: using default visual\n");
+	preferred_visual = DefaultVisual (dpy, screen_num);
+	preferred_depth = DefaultDepth (dpy, screen_num);
+    }
+}
+
 /* Called from main(). */
 bool
 sys_init(char *program_name)
@@ -228,6 +303,10 @@ sys_init(char *program_name)
     {
 	if (rep_get_option ("--display", &opt))
 	    display_name = strdup (rep_STR(opt));
+	if (rep_get_option ("--visual", &opt))
+	    visual_name = strdup (rep_STR(opt));
+	if (rep_get_option ("--depth", &opt))
+	    preferred_depth = atoi (rep_STR (opt));
 
 	if (display_name == 0)
 	    display_name = getenv("DISPLAY");
@@ -241,11 +320,9 @@ sys_init(char *program_name)
 	    rep_register_input_fd (ConnectionNumber(dpy), handle_sync_input);
 	    screen_num = DefaultScreen(dpy);
 	    root_window = RootWindow(dpy, screen_num);
-	    screen_depth = DefaultDepth(dpy, screen_num);
-	    screen_visual = DefaultVisual(dpy, screen_num);
 	    screen_width = DisplayWidth(dpy, screen_num);
 	    screen_height = DisplayHeight(dpy, screen_num);
-	    screen_cmap = DefaultColormap(dpy, screen_num);
+	    choose_visual ();
 
 	    xa_wm_state = XInternAtom (dpy, "WM_STATE", False);
 	    xa_wm_change_state = XInternAtom (dpy, "WM_CHANGE_STATE", False);
