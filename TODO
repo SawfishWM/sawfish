@@ -48,13 +48,7 @@ Outstanding bugs
   ! in xdvi with emulate3buttons, press and hold right, then press
     left, the wm root menu appears?!
 
-  ! `:type (or ...)' doesn't get serialized
-
-  ! Everytime my system's hardware clock get's resetted (this happens
-    from time to time because my motherboard's battery has become a
-    little weak), my whole sawfish configuration is erased and replaced
-    with the default settings. Btw, the 'new' system time becomes
-    01/01/1977 after the reset. [gnome #14623]
+  ! `:type (or ...)' doesn't get serialized (and can't be)
 
   ! running multiple instances of the wm loses
 
@@ -72,13 +66,6 @@ Outstanding bugs
     [ I have a patch to do this, and it totally breaks the workspace
       handling of desk-guide and the tasklist ]
 
-  ! cancel the GNOME logout dialog, window decorations aren't redrawn
-
-    [ after looking at the X event trace, I don't think it's a sawmill
-      bug, since sawmill receives _no_ events after the iris effect is
-      removed, until it finally redraws everything. Unless sawmill is
-      somehow not recognizing that events are available..? ]
-
   ! play-sample.c doesn't seem to work on solaris (esdplay does)
 
   ! anim-outline just guesses where windows will be iconified to, so it
@@ -88,13 +75,6 @@ Outstanding bugs
 
   ! timestamp ordering code falls over with machines that vary their
     clock rate..
-
-  ! loading theme `Ganymede' into themer wedges it
-
-  ! loading a session shifts window positions by the frame offset
-
-    [ this only happens with apps that try to save and restore their
-      own geometry (e.g. gnome-terminal); this is against the ICCCM... ]
 
   ! swapped-out window properties aren't saved with session
 
@@ -136,12 +116,43 @@ Outstanding bugs
 
 
 
+Resolved Bugs
+=============
+
+  ! loading theme `Ganymede' into themer wedges it
+
+    -- the Ganymede theme contains a stupidly-large README file,
+    maybe that's the reason. (Maybe a bug in the themer?) (28/10/2000)
+
+  ! cancel the GNOME logout dialog, window decorations aren't redrawn
+
+    [ after looking at the X event trace, I don't think it's a sawmill
+      bug, since sawmill receives _no_ events after the iris effect is
+      removed, until it finally redraws everything. Unless sawmill is
+      somehow not recognizing that events are available..? ]
+
+    -- I can't reproduce this anymore (28/10/2000)
+
+  ! Everytime my system's hardware clock get's resetted (this happens
+    from time to time because my motherboard's battery has become a
+    little weak), my whole sawfish configuration is erased and replaced
+    with the default settings. Btw, the 'new' system time becomes
+    01/01/1977 after the reset. [gnome #14623]
+
+    -- I set my system clock to 1977-1-1 but my settings still get
+    reloaded, and I can't imagine how the date could affect this..
+    (28/10/2000)
+
+
+
 Window manager tasks
 ====================
 
   ! when drawing into frame parts manually, no way to set shape
 
   ! should save increment-relative dimensions (not pixel relative)
+
+  + allow unused themes to be garbage-collected? (custom options?)
 
   + commands to forward buttons 4&5 (mouse wheel) to the focused
     window. My first attempt at this doesn't work..
