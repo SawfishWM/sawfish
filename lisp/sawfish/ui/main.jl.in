@@ -50,6 +50,9 @@ exec rep "$0" "$@"
   (when (get-command-line-option "--flatten")
     (setq *nokogiri-flatten-groups* t))
 
+  (when (get-command-line-option "--single-level")
+    (setq *nokogiri-single-level* t))
+
   (let ((id (get-command-line-option "--socket-id" t)))
     (when id
       (setq socket-id (string->number id))))
