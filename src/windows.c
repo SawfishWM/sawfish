@@ -89,16 +89,12 @@ focus_on_window (Lisp_Window *w)
 	}
 	else
 	    focus = w->frame;
-	DB(("  XSetInputFocus (%lx, RevertToNone, %ld)\n", focus,
-	    last_event_time));
 	XSetInputFocus (dpy, focus, RevertToNone, last_event_time);
 	focus_window = w;
     }
     else
     {
 	DB(("focus_on_window (nil)\n"));
-	DB(("  XSetInputFocus (None, no_focus_window, %ld)\n",
-	    last_event_time));
 	XSetInputFocus (dpy, no_focus_window, RevertToNone, last_event_time);
 	focus_window = 0;
     }
@@ -823,6 +819,8 @@ Prevent WINDOW from being displayed. See `show-window'.
 	}
 	VWIN(win)->visible = 0;
 	reset_frame_parts (VWIN(win));
+	if (focus_window == VWIN(win))
+	    focus_on_window (0);
     }
     return win;
 }
