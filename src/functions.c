@@ -46,6 +46,7 @@ static int server_grabs;
 
 DEFSYM(root, "root");
 DEFSYM(after_restacking_hook, "after-restacking-hook");
+DEFSYM(position, "position");
 
 DEFUN("restack-windows", Frestack_windows, Srestack_windows,
       (repv list), rep_Subr1) /*
@@ -922,7 +923,8 @@ static Window message_win;
 
 static struct {
     GC gc;
-    repv text, fg, bg, font;
+    repv text, fg, bg, font, justify;
+    int width;
 } message;
 
 #define MSG_PAD_X 20
@@ -935,6 +937,9 @@ refresh_message_window ()
     {
 	XGCValues values;
 	u_long mask;
+	char *ptr;
+	int row = 0;
+
 	values.foreground = VCOLOR(message.fg)->pixel;
 	values.background = VCOLOR(message.bg)->pixel;
 	values.font = VFONT(message.font)->font->fid;
@@ -946,9 +951,35 @@ refresh_message_window ()
 	    XChangeGC (dpy, message.gc, mask, &values);
 
 	XClearWindow (dpy, message_win);
-	XDrawString (dpy, message_win, message.gc, MSG_PAD_X,
-		     MSG_PAD_Y + VFONT(message.font)->font->ascent,
-		     rep_STR(message.text), rep_STRING_LEN(message.text));
+
+	ptr = rep_STR(message.text);
+	while (*ptr != 0)
+	{
+	    char *end = strchr (ptr, '\n');
+	    int offset;
+	    if (end == 0)
+		end = ptr + strlen (ptr);
+	    if (message.justify == Qleft)
+		offset = MSG_PAD_X;
+	    else
+	    {
+		int width = XTextWidth (VFONT(message.font)->font,
+					ptr, end - ptr);
+		if (message.justify == Qright)
+		    offset = message.width - (width + MSG_PAD_X);
+		else
+		    offset = (message.width - width) / 2;
+	    }
+	    XDrawString (dpy, message_win, message.gc, offset,
+			 MSG_PAD_Y
+			 + row * (VFONT(message.font)->font->ascent
+				  + VFONT(message.font)->font->descent)
+			 + VFONT(message.font)->font->ascent, ptr, end - ptr);
+	    row++;
+	    ptr = end;
+	    if (*ptr == '\n')
+		ptr++;
+	}
     }
 }
 
@@ -962,26 +993,8 @@ message_event_handler (XEvent *ev)
 DEFSTRING(white, "white");
 DEFSTRING(black, "black");
 
-DEFUN("show-message", Fshow_message, Sshow_message,
-      (repv text, repv font, repv fg, repv bg, repv pos), rep_Subr5) /*
-::doc:Sshow-message::
-show-message [TEXT] [FONT] [FG] [BG] [POSITION]
-
-Display the string TEXT in the center of the screen. If TEXT is not
-specified then any string previously displayed is removed. Returns the
-numeric id of the window displaying the message, or nil if no message
-is displayed.
-
-FONT defines the font to use, if undefined the `default-font' variable
-provides this value. FG and BG define the color of the text and its
-background respectively. If undefined they are black and white.
-
-POSITION is a cons cell `(X . Y)'. X and Y are integers or nil (for
-centered display). If negative they count in from the left and bottom
-edges respectively.
-
-Note that newlines in TEXT are ignored. This may change in the future.
-::end:: */
+DEFUN("display-message", Fdisplay_message, Sdisplay_message,
+      (repv text, repv attrs), rep_Subr2)
 {
     if (text == Qnil)
     {
@@ -1001,48 +1014,86 @@ Note that newlines in TEXT are ignored. This may change in the future.
     }
     else
     {
-	int width, height, x, y;
+	int height, x, y;
+	repv tem;
 
 	rep_DECLARE1(text, rep_STRINGP);
-
-	if (!FONTP(font))
-	    font = Fsymbol_value (Qdefault_font, Qt);
-	if (!FONTP(font))
-	    return rep_signal_arg_error (font, 1);
-
-	if (!COLORP(fg))
-	    fg = Fget_color (rep_VAL(&black));
-	if (!COLORP(fg))
-	    return rep_signal_arg_error (fg, 1);
-
-	if (!COLORP(bg))
-	    bg = Fget_color (rep_VAL(&white));
-	if (!COLORP(bg))
-	    return rep_signal_arg_error (bg, 1);
+	rep_DECLARE2(attrs, rep_LISTP);
 
 	message.text = text;
-	message.font = font;
-	message.fg = fg;
-	message.bg = bg;
+	message.font = message.fg = message.bg = Qnil;
+	message.justify = Qleft;
 
-	width = rep_INT(Ftext_width (text, font)) + MSG_PAD_X * 2;
-	height = rep_INT(Ffont_height (font)) + MSG_PAD_Y * 2;
-	x = (screen_width - width) / 2;
-	y = (screen_height - height) / 2;
+	tem = Fassq (Qfont, attrs);
+	if (tem && rep_CONSP(tem))
+	    message.font = rep_CDR(tem);
+	if (!FONTP(message.font))
+	    message.font = Fsymbol_value (Qdefault_font, Qt);
+	if (!FONTP(message.font))
+	    return rep_signal_arg_error (Qfont, 1);
 
-	if (rep_CONSP(pos))
+	tem = Fassq (Qforeground, attrs);
+	if (tem && rep_CONSP(tem))
+	    message.fg = rep_CDR(tem);
+	if (!COLORP(message.fg))
+	    message.fg = Fget_color (rep_VAL(&black));
+	if (!COLORP(message.fg))
+	    return rep_signal_arg_error (Qforeground, 1);
+
+	tem = Fassq (Qbackground, attrs);
+	if (tem && rep_CONSP(tem))
+	    message.bg = rep_CDR(tem);
+	if (!COLORP(message.bg))
+	    message.bg = Fget_color (rep_VAL(&white));
+	if (!COLORP(message.bg))
+	    return rep_signal_arg_error (Qbackground, 1);
+
+	tem = Fassq (Qx_justify, attrs);
+	if (tem && rep_CONSP(tem))
+	    message.justify = rep_CDR(tem);
+
 	{
-	    if (rep_INTP(rep_CAR(pos)))
+	    char *ptr = rep_STR(text);
+	    int max_width = 0, rows = 0;
+	    while (*ptr != 0)
 	    {
-		x = rep_INT(rep_CAR(pos));
-		if (x < 0)
-		    x += screen_width - width;
+		int text_width;
+		char *end = strchr (ptr, '\n');
+		if (end == 0)
+		    end = ptr + strlen (ptr);
+		text_width = XTextWidth (VFONT(message.font)->font,
+					 ptr, end - ptr);
+		max_width = MAX(max_width, text_width);
+		rows++;
+		ptr = end;
+		if (*ptr == '\n')
+		    ptr++;
 	    }
-	    if (rep_INTP(rep_CDR(pos)))
+	    message.width = max_width + MSG_PAD_X * 2;
+	    height = (rep_INT(Ffont_height (message.font))
+		      * rows + MSG_PAD_Y * 2);
+	    x = (screen_width - message.width) / 2;
+	    y = (screen_height - height) / 2;
+	}
+
+	tem = Fassq (Qposition, attrs);
+	if (tem && rep_CONSP(tem))
+	{
+	    tem = rep_CDR(tem);
+	    if (rep_CONSP(tem))
 	    {
-		y = rep_INT(rep_CDR(pos));
-		if (y < 0)
-		    y += screen_height - height;
+		if (rep_INTP(rep_CAR(tem)))
+		{
+		    x = rep_INT(rep_CAR(tem));
+		    if (x < 0)
+			x += screen_width - message.width;
+		}
+		if (rep_INTP(rep_CDR(tem)))
+		{
+		    y = rep_INT(rep_CDR(tem));
+		    if (y < 0)
+			y += screen_height - height;
+		}
 	    }
 	}
 
@@ -1052,13 +1103,14 @@ Note that newlines in TEXT are ignored. This may change in the future.
 	       down opaque window moves.. */
 	    XSetWindowAttributes attr;
 	    attr.override_redirect = True;
-	    attr.background_pixel = VCOLOR(bg)->pixel;
+	    attr.background_pixel = VCOLOR(message.bg)->pixel;
 	    attr.border_pixel = BlackPixel(dpy, screen_num);
 	    attr.event_mask = ExposureMask;
 	    attr.colormap = screen_cmap;
 	    message_win = XCreateWindow (dpy, root_window, x, y,
-					 width, height, 1, screen_depth,
-					 InputOutput, screen_visual,
+					 message.width, height, 1,
+					 screen_depth, InputOutput,
+					 screen_visual,
 					 CWBackPixel | CWBorderPixel
 					 | CWOverrideRedirect | CWEventMask
 					 | CWColormap, &attr);
@@ -1072,7 +1124,7 @@ Note that newlines in TEXT are ignored. This may change in the future.
 	    XWindowChanges attr;
 	    attr.x = x;
 	    attr.y = y;
-	    attr.width = width;
+	    attr.width = message.width;
 	    attr.height = height;
 	    attr.stack_mode = TopIf;
 	    XConfigureWindow (dpy, message_win,
@@ -1119,14 +1171,16 @@ functions_init (void)
     rep_ADD_SUBR(Screate_window);
     rep_ADD_SUBR(Sx_atom);
     rep_ADD_SUBR(Sx_atom_name);
-    rep_ADD_SUBR(Sshow_message);
+    rep_ADD_SUBR(Sdisplay_message);
     rep_INTERN(root);
     rep_INTERN_SPECIAL(after_restacking_hook);
+    rep_INTERN(position);
 
     rep_mark_static (&message.text);
     rep_mark_static (&message.fg);
     rep_mark_static (&message.bg);
     rep_mark_static (&message.font);
+    rep_mark_static (&message.justify);
 }
 
 void
