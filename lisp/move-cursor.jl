@@ -34,48 +34,48 @@
 
 ;;;###autoload
 (defun move-cursor-left ()
-  "Move the window `move-cursor-increment' pixels to the left."
+  "Move the cursor `move-cursor-increment' pixels to the left."
   (interactive)
   (move-cursor (- move-cursor-increment) 0))
 
 ;;;###autoload
 (defun move-cursor-right ()
-  "Move the window `move-cursor-increment' pixels to the right."
+  "Move the cursor `move-cursor-increment' pixels to the right."
   (interactive)
   (move-cursor move-cursor-increment 0))
 
 ;;;###autoload
 (defun move-cursor-up ()
-  "Move the window `move-cursor-increment' pixels upwards."
+  "Move the cursor `move-cursor-increment' pixels upwards."
   (interactive)
   (move-cursor 0 (- move-cursor-increment)))
 
 ;;;###autoload
 (defun move-cursor-down ()
-  "Move the window `move-cursor-increment' pixels downwards."
+  "Move the cursor `move-cursor-increment' pixels downwards."
   (interactive)
   (move-cursor 0 move-cursor-increment))
 
 ;;;###autoload
 (defun move-cursor-left-fine ()
-  "Move the window 1 pixel to the left."
+  "Move the cursor 1 pixel to the left."
   (interactive)
   (move-cursor -1 0))
 
 ;;;###autoload
 (defun move-cursor-right-fine ()
-  "Move the window 1 pixel to the right."
+  "Move the cursor 1 pixel to the right."
   (interactive)
   (move-cursor 1 0))
 
 ;;;###autoload
 (defun move-cursor-up-fine ()
-  "Move the window 1 pixel upwards."
+  "Move the cursor 1 pixel upwards."
   (interactive)
   (move-cursor 0 -1))
 
 ;;;###autoload
 (defun move-cursor-down-fine ()
-  "Move the window 1 pixel downwards."
+  "Move the cursor 1 pixel downwards."
   (interactive)
   (move-cursor 0 1))
