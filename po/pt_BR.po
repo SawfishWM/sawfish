@@ -1,9 +1,14 @@
+# Sawfish translation for Brazilian Portuguese.
+# Copyright (C) 2000-2001 Free Software Foundation, Inc.
+# Douglas Moura Ferreira <douglas@conectiva.com.br>, 2000
+# Francisco Petrúcio Cavalcante Junior <fpcj@impa.br>, 2001
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: sawmill 0.20\n"
+"Project-Id-Version: sawfish 1.0.1\n"
 "POT-Creation-Date: 2001-06-04 13:43-0700\n"
-"PO-Revision-Date: 2001-10-29 11:06-02:00\n"
-"Last-Translator: Douglas Moura Ferreira <douglas@conectiva.com.br>\n"
+"PO-Revision-Date: 2001-11-20 22:11-0200\n"
+"Last-Translator: Francisco Petrúcio Cavancante Junior <fpcj@impa.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -1276,24 +1281,22 @@ msgstr ""
 "mostrar se elas requerem foco ou não."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid ""
 "Offset (%) from left window edge when warping pointer.\n"
 "\n"
 "A negative number means outside the left window edge."
 msgstr ""
-"Deslocamento (%) da borda esquerda da janela ao virar o ponteiro.\n"
+"Deslocamento (%) da borda esquerda da janela passar para outra área.\n"
 "\n"
 "Um valor negativo significa fora da borda esquerda da janela."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid ""
 "Offset (%) from top window edge when warping pointer.\n"
 "\n"
 "A negative number means outside the top window edge."
 msgstr ""
-"Offset (%) da borda superior da janela quando virar o ponteiro.\n"
+"Deslocamento (%) da borda superior da janela ao passar para outra área.\n"
 "\n"
 "Um valor negativo significa fora da borda superior da janela."
 
@@ -1348,12 +1351,11 @@ msgstr "parar"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "wrap-around"
-msgstr ""
+msgstr "recomeçar"
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "keep-going"
-msgstr ""
+msgstr "continuar"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
@@ -1732,11 +1734,11 @@ msgstr "Exibir a documentação de um símbolo dado."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Apropos function"
-msgstr ""
+msgstr "Descrever função"
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Apropos variable"
-msgstr ""
+msgstr "Descrever variável"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome toggle skip winlist"
@@ -1956,7 +1958,6 @@ msgid "never"
 msgstr "nunca"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Whether and how to move the pointer when packing windows.\n"
 "\n"
@@ -1968,12 +1969,12 @@ msgid ""
 "\n"
 "`never' means not to warp the pointer."
 msgstr ""
-"Quando e como mover o ponteiro do mouse ao empacotar janelas\n"
+"Quando e como mover o ponteiro do mouse ao organizar janelas.\n"
 "\n"
 "talvez: o ponteiro é movido juntamente com a janela, se já estava nela\n"
-"antes do empacotamento.\n"
+"antes.\n"
 "sempre: move o ponteiro para o centro da janela, se ele não estivesse\n"
-"na janela, e depois faz como em 'talvez'\n"
+"na janela\n"
 "nunca: não mover o ponteiro."
 
 # ../lisp/menus.jl
@@ -2211,11 +2212,11 @@ msgstr "borda"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "grab"
-msgstr ""
+msgstr "capturar"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "border-grab"
-msgstr ""
+msgstr "capturar-borda"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to choose window edges when resizing: \\w"
@@ -2868,7 +2869,7 @@ msgstr "Auto gravidade"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
-msgstr ""
+msgstr "Sombrear especial"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Transients above"
@@ -2888,13 +2889,12 @@ msgid "Other"
 msgstr "Outros"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
-#, fuzzy
 msgid ""
 "Enable shade-hover mode.\n"
 "\n"
 "(Temporarily unshades windows while the mouse pointer is over them.)"
 msgstr ""
-"Habilitar o modo shade-hover.\n"
+"Habilitar o modo sobrear especial.\n"
 "\n"
 "(Clareia temporariamente as janelas enquanto o mouse está sobre elas.)"
 
