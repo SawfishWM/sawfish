@@ -431,7 +431,7 @@ msgstr "П╕дказки"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-msgstr ""
+msgstr "Викликати команду NAME з необов'язковим преф╕ксним ар╜ументом PFX-ARG."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
@@ -520,6 +520,10 @@ msgid ""
 "Associate frame types with type to try if the theme doesn't implement the "
 "requested type."
 msgstr ""
+"Зам╕щення тип╕в рамок:\n"
+"\n"
+"Вкаж╕ть зам╕щення тип╕в рамок на ╕нш╕ типи (це буде використано у випадку, "
+"якщо тема не визнача╓ якийсь тип рамок)"
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
@@ -631,11 +635,11 @@ msgstr "Пор╕г перем╕щення для вказ╕вника миш╕ (в п╕кселях): \\w"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr ""
+msgstr "Клав╕ш╕-модиф╕катори, що використовуються в якост╕ типового модиф╕катора в╕конного менеджера."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Display key-binding information in menu items."
-msgstr ""
+msgstr "Показувати ╕нформац╕ю про комб╕нац╕╖ клав╕ш у пунктах меню."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
@@ -827,12 +831,12 @@ msgstr "Лишати пром╕жков╕ в╕кна з╕браними над: \\w"
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise the window to its highest allowed position in the stacking order."
-msgstr ""
+msgstr "П╕дняти в╕кно до найвищо╖ допустимо╖ позиц╕╖ в стос╕."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower the window to its lowest allowed position in the stacking order."
-msgstr ""
+msgstr "Опустити в╕кно до найнажчо╖ допустимо╖ позиц╕╖ в стос╕."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
@@ -840,14 +844,16 @@ msgid ""
 "If the window is at its highest possible position, then lower it to its\n"
 "lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
+"Якщо в╕кно у найвищий позиц╕╖, то опустити його у найнижчу.\n"
+"А ╕накше, п╕дняти його на найвищу допустиму позиц╕ю."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Put the window in the stacking level above its current level."
-msgstr ""
+msgstr "Пом╕стити в╕кно в стос над його поточним р╕внем."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Put the window in the stacking level beneath its current level."
-msgstr ""
+msgstr "Пом╕стити в╕кно в стос п╕д його поточним р╕внем."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Windows uniconify to the current viewport."
@@ -920,6 +926,10 @@ msgid ""
 "Windows should set the `accepts input' hint in their WM_HINTS property to "
 "show if they require the focus or not."
 msgstr ""
+"Надавати фокус в╕кнам, нав╕ть якщо вони його не просили.\n"
+"\n"
+"В╕кна мають встановлювати ознаку \"accepts input\" у властивост╕ WM_HINTS, "
+"щоб пов╕домити, чи потр╕бний ╖м фоус."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid ""
@@ -927,6 +937,9 @@ msgid ""
 "\n"
 "A negative number means outside the left window edge."
 msgstr ""
+"Зм╕щення (у %%) в╕д л╕вого краю в╕кна п╕д час перекидання вказ╕вника.\n"
+"\n"
+"В╕д'╓мне число означа╓ внутр╕шню сторону л╕вого краю в╕кна."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid ""
@@ -934,6 +947,9 @@ msgid ""
 "\n"
 "A negative number means outside the top window edge."
 msgstr ""
+"Зм╕щення (у %%) в╕д верхнього краю в╕кна п╕д час перекидання вказ╕вника.\n"
+"\n"
+"В╕д'╓мне число означа╓ внутр╕шню сторону верхнього краю в╕кна."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid ""
@@ -1277,22 +1293,28 @@ msgstr "Перенести в╕кно вниз, доки воно не досягне ╕ншого."
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Number of pixels to move pointer in `move-cursor-' commands."
 msgstr ""
+"К╕льк╕сть точок растру для перем╕щення вказ╕вника командою \"перем╕стити "
+"вказ╕вник\"."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the right."
 msgstr ""
+"Перем╕стити вказ╕вник на \"крок перем╕щення курсору\" точок растру праворуч."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the left."
 msgstr ""
+"Перем╕стити вказ╕вник на \"крок перем╕щення курсору\" точок растру л╕воруч."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels upwards."
 msgstr ""
+"Перем╕стити вказ╕вник на \"крок перем╕щення курсору\" точок растру вгору."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels downwards."
 msgstr ""
+"Перем╕стити вказ╕вник на \"крок перем╕щення курсору\" точок растру вниз."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move the cursor 1 pixel to the right."
