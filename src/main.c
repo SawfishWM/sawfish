@@ -42,6 +42,9 @@
 #include <string.h>
 #include <limits.h>
 #include <X11/Xlocale.h>		/* for setlocale () */
+#ifdef HAVE_GDK_PIXBUF
+#include <glib-object.h>
+#endif
 
 /* one of the ec_ values */
 int exit_code = ec_no_exit;
@@ -338,6 +341,10 @@ main(int argc, char **argv)
     multihead_init (&argc, &argv);
     old_argv = argv;
     old_argc = argc;
+
+#ifdef HAVE_GDK_PIXBUF
+    g_type_init();
+#endif
 
     prog_name = *argv++; argc--;
     lang = setlocale(LC_ALL, "");

@@ -24,7 +24,7 @@
 (define-structure sawfish.ui.widgets.keymap ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.regexp
 	  sawfish.gtk.stock
 	  sawfish.gtk.widget)
@@ -47,10 +47,11 @@
 		(beautify-symbol-name command)))))
 
     (define (dialog title callback #!key for value)
+      (declare (unused title))
       (let ((widget (make-widget `(keymap:binding))))
 	(when value
 	  (widget-set widget value))
-	(simple-dialog (_ "Edit binding") (widget-gtk-widget widget)
+	(simple-dialog (_ "Edit Binding") (widget-gtk-widget widget)
 		       (lambda () (callback (widget-ref widget)))
 		       for)))
 
@@ -81,7 +82,8 @@
 ;;; widget for editing individual bindings
 
   (define (make-keymap:binding-item changed-callback)
-    (make-widget `(pair command (labelled ,(_ "Key:") event) t t)
+    (make-widget `(pair command (labelled ,(_ "Key:") event)
+			t t (start . middle))
 		 changed-callback))
 
   (define-widget-type 'keymap:binding make-keymap:binding-item)

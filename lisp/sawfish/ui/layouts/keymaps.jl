@@ -24,7 +24,7 @@
 (define-structure sawfish.ui.layouts.keymaps ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.regexp
 	  sawfish.ui.slot
 	  sawfish.ui.wm
@@ -58,9 +58,9 @@
 	    (let* ((slot (car rest))
 		   (button (gtk-radio-menu-item-new-with-label-from-widget
 			    last (beautify-keymap-name (slot-name slot)))))
-	      (gtk-menu-append menu button)
+	      (gtk-menu-shell-append menu button)
 	      (gtk-widget-show button)
-	      (gtk-signal-connect button "toggled"
+	      (g-signal-connect button "toggled"
 				  (lambda (w)
 				    (when (gtk-check-menu-item-active w)
 				      (when active

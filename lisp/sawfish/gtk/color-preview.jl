@@ -27,7 +27,7 @@
 	    set-button-color)
 
     (open rep
-	  gui.gtk)
+	  gui.gtk-2.gtk)
 
   (defconst color-preview-width 28)
   (defconst color-preview-height 16)
@@ -63,4 +63,4 @@
 		(when (gtk-preview-p w)
 		  (set-preview-color w color)
 		  (gtk-widget-draw-interp w)))
-	      (gtk-container-children button))))))
+	      (gtk-container-get-children button))))))

@@ -24,34 +24,34 @@
 (define-structure sawfish.gtk.widgets.file ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  sawfish.gtk.widget)
 
   (define (make-file-item changed-callback)
     (let* ((box (gtk-hbox-new nil box-spacing))
 	   (entry (gtk-entry-new))
 	   (button (gtk-button-new-with-label (_ "Browse..."))))
-      (gtk-container-border-width box box-border)
+      (gtk-container-set-border-width box box-border)
       (gtk-box-pack-start box entry)
       (gtk-box-pack-start box button)
       (when changed-callback
-	(gtk-signal-connect
+	(g-signal-connect
 	 entry "changed" (make-signal-callback changed-callback)))
-      (gtk-signal-connect
+      (g-signal-connect
        button "clicked"
        (lambda ()
 	 (let ((filesel (gtk-file-selection-new (_ "Select file"))))
 	   (gtk-file-selection-set-filename filesel (gtk-entry-get-text entry))
-	   (gtk-signal-connect
+	   (g-signal-connect
 	    (gtk-file-selection-ok-button filesel) "clicked"
 	    (lambda ()
 	      (gtk-entry-set-text
 	       entry (gtk-file-selection-get-filename filesel))
 	      (gtk-widget-destroy filesel)))
-	   (gtk-signal-connect
+	   (g-signal-connect
 	    (gtk-file-selection-cancel-button filesel) "clicked"
 	    (lambda () (gtk-widget-destroy filesel)))
-	   (gtk-signal-connect filesel "delete_event"
+	   (g-signal-connect filesel "delete_event"
 			       (lambda () (gtk-widget-destroy filesel)))
 	   (gtk-widget-show filesel)
 	   (gtk-grab-add filesel))))

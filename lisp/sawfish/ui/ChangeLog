@@ -1,20 +1,54 @@
+2002-11-10  John Harper  <jsh@unfactored.org>
+
+	* shell.jl (add-active-slots): new function, used to add slots
+	into the active-slots list. Ensures that slots aren't added
+	more than once (which was the cause of #88718 and other similar
+	bugs)
+
 2002-11-09  John Harper  <jsh@unfactored.org>
 
 	* version 1.2
 
+2002-11-03  John Harper  <jsh@unfactored.org>
+
+	* widgets/match-window.jl, widgets/keymap.jl: 
+
+	* shell.jl, widgets/match-window.jl, widgets/keymap.jl: some
+	small UI tweaks
+
+2002-11-02  John Harper  <jsh@unfactored.org>
+
+	* widgets/keymap.jl (make-keymap:binding-item): fix packing of
+	"Grab" button
+
+	* widgets/command.jl (make-command-item): set minimum size of
+	text and clist widgets
+
 2002-05-29  John Harper  <jsh@unfactored.org>
+
+	* more merging:
+
+	2002-05-29  John Harper  <jsh@unfactored.org>
 
 	* widgets/frame-style.jl (make-frame-style-item): added a 200ms
 	delay before installing new themes, avoids overloading X when
 	dragging over the combo box menu. Should fix #81723
 
-2002-05-06  John Harper  <jsh@unfactored.org>
+2002-05-21  John Harper  <jsh@unfactored.org>
+
+	* Merged changes from HEAD:
+
+	2002-05-06  John Harper  <jsh@unfactored.org>
 
 	* i18n.jl: patch from Christophe Fergeau
 	<teuf@users.sourceforge.net> to call bindtextdomaincodeset
 	function. Modified to only call it if it exists
 
-2002-04-20  John Harper  <jsh@unfactored.org>
+2002-04-21  John Harper  <jsh@unfactored.org>
+
+	* Merged changes from HEAD:
+
+	2002-04-20  John Harper  <jsh@unfactored.org>
 
 	Removed user levels, button configuration:
 
@@ -23,10 +57,49 @@
 
 	* widgets/command.jl: 
 
-2002-04-18  John Harper  <jsh@unfactored.org>
+	2002-04-18  John Harper  <jsh@unfactored.org>
 
 	* widgets/match-window.jl: use optional scheme-boolean widgets
 	to display booleans. Adapted from merlin <merlin@merlin.org>
+
+2002-04-01  John Harper  <jsh@unfactored.org>
+
+	* shell.jl, group.jl, layouts/keymaps.jl,
+	widgets/match-window.jl, widgets/icon.jl,
+	widgets/frame-style.jl, widgets/event.jl, widgets/command.jl:
+	s/gtk-signal-/g-signal-/
+
+2002-03-03  John Harper  <jsh@pixelslut.com>
+
+	* shell.jl: display using a tree of notebook pages for now
+
+	* widgets/frame-style.jl (make-frame-style-item): removed
+	debugging spew
+
+2002-02-13  John Harper  <jsh@unfactored.org>
+
+	* widgets/frame-style.jl (make-frame-style-item): go to great
+	lengths to avoid picking up fucked changes from the combo's
+	entry widget
+
+2002-02-12  John Harper  <jsh@unfactored.org>
+
+	* slot.jl, shell.jl, main.jl.in, layout.jl, group.jl: 
+	* layouts/keymaps.jl: 
+	* widgets/match-window.jl, widgets/keymap.jl,
+	widgets/frame-style.jl, widgets/command.jl: 
+
+	Ported to current gnome2 rep-gtk
+
+2002-01-29  John Harper  <jsh@unfactored.org>
+
+	* slot.jl, shell.jl, layout.jl, group.jl, apply.jl: 
+	* layouts/keymaps.jl: 
+	* widgets/workspace-geometry.jl, widgets/match-window.jl,
+	widgets/keymap.jl, widgets/icon.jl, widgets/frame-style.jl,
+	widgets/event.jl, widgets/command.jl: 
+
+	Changed module names for gnome2 rep-gtk
 
 2001-09-07  John Harper  <jsh@pixelslut.com>
 

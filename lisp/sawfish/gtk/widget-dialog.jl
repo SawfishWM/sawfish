@@ -26,7 +26,7 @@
     (export widget-dialog)
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  sawfish.gtk.stock
 	  sawfish.gtk.widget)
 

@@ -29,24 +29,25 @@
 	    make-url-widget)
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  sawfish.gtk.widget)
 
+  ;; same as in gnome now
   (define (stock-button type)
-    (gtk-button-new-with-label
+    (gtk-button-new-from-stock
      (case type
-       ((ok) (_ "OK"))
-       ((cancel) (_ "Cancel"))
-       ((revert) (_ "Revert"))
-       ((apply) (_ "Apply"))
-       ((yes) (_ "Yes"))
-       ((no) (_ "No"))
-       ((close) (_ "Close"))
-       ((help) (_ "Help")))))
+       ((ok) "gtk-ok")
+       ((cancel) "gtk-cancel")
+       ((revert) "gtk-revert-to-saved")
+       ((apply) "gtk-apply")
+       ((yes) "gtk-yes")
+       ((no) "gtk-no")
+       ((close) "gtk-close")
+       ((help) "gtk-help"))))
 
   (define (simple-dialog title widget #!optional ok-callback main-window)
 
-    (let ((window (gtk-window-new 'dialog))
+    (let ((window (gtk-window-new 'toplevel))
 	  (vbox (gtk-vbox-new nil box-spacing))
 	  (hbbox (gtk-hbutton-box-new))
 	  (ok (stock-button 'ok))
@@ -61,14 +62,15 @@
 	  
       (gtk-window-set-title window title)
       (gtk-window-set-wmclass window "ok_cancel_dialog" "Nokogiri")
-      (gtk-container-border-width window box-border)
+      (gtk-container-set-border-width window box-border)
       (when main-window
 	(gtk-window-set-transient-for window main-window))
 
+      (gtk-box-set-spacing hbbox button-box-spacing)
       (gtk-button-box-set-layout hbbox 'end)
-      (gtk-box-pack-start hbbox ok)
       (when cancel
 	(gtk-box-pack-end hbbox cancel))
+      (gtk-box-pack-end hbbox ok)
       (gtk-box-pack-end vbox hbbox)
       (gtk-container-add window vbox)
       (gtk-widget-show-all vbox)
@@ -76,9 +78,9 @@
       (gtk-container-add vbox widget)
 
       (when cancel
-	(gtk-signal-connect cancel "clicked" on-cancel))
-      (gtk-signal-connect ok "clicked" (if ok-callback on-ok on-cancel))
-      (gtk-signal-connect window "delete_event" on-cancel)
+	(g-signal-connect cancel "clicked" on-cancel))
+      (g-signal-connect ok "clicked" (if ok-callback on-ok on-cancel))
+      (g-signal-connect window "delete_event" on-cancel)
 
       (gtk-widget-show window)
       (gtk-window-set-modal window t)
@@ -88,17 +90,20 @@
 
   (define (about-dialog title version copyright
 			authors comments #!key logo extra)
-    (let ((box (gtk-vbox-new nil 4))
-	  (text (gtk-text-new)))
+    (declare (unused logo))
+    (let* ((box (gtk-vbox-new nil 4))
+	   (text-view (gtk-text-view-new))
+	   (text-buffer (gtk-text-view-get-buffer text-view)))
       (define (insert s)
-	(gtk-text-insert text nil nil nil s (length s)))
+	(gtk-text-buffer-insert-at-cursor text-buffer s (length s)))
       (insert (format nil "%s %s\n" title version))
       (insert (format nil "%s\n\n" copyright))
       (when authors
 	(insert "Authors:\n")
 	(mapc (lambda (x) (insert (format nil "    %s\n" x))) authors))
       (insert (format nil "\n%s\n" comments))
-      (gtk-container-add box text)
+      (gtk-text-view-set-editable text-view nil)
+      (gtk-container-add box text-view)
       (when extra
 	(gtk-box-pack-end box extra))
       (gtk-widget-show-all box)

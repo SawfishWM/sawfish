@@ -26,10 +26,9 @@
 (define-structure sawfish.ui.widgets.workspace-geometry ()
 
     (open rep
-	  gui.gtk
-	  gui.gnome.canvas
-	  gui.gnome.canvas-pixbuf
-	  gui.gtk.gdk-pixbuf
+	  gui.gtk-2.gtk
+	  gui.gtk-2.gnome-canvas
+	  gui.gtk-2.gdk-pixbuf
 	  rep.io.files
 	  sawfish.gtk.widget
 	  sawfish.ui.layout)

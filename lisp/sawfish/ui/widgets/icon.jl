@@ -26,15 +26,15 @@
 (define-structure sawfish.ui.widgets.icon ()
 
     (open rep
-	  gui.gtk
-	  gui.gnome.ui
+	  gui.gtk-2.gtk
+	  gui.gtk-2.gnome-ui
 	  rep.io.files
 	  sawfish.gtk.widget)
 
   (define (make-icon-item changed-callback)
     (let* ((widget (gnome-icon-entry-new "IconEntry" (_ "Select Icon"))))
       (when changed-callback
-	(gtk-signal-connect (gnome-icon-entry-gtk-entry widget) "changed"
+	(g-signal-connect (gnome-icon-entry-gtk-entry widget) "changed"
 			    (make-signal-callback changed-callback)))
       (gtk-widget-show widget)
       (lambda (op)

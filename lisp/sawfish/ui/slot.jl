@@ -37,7 +37,7 @@
 	    custom-symbol-value)
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.system
 	  rep.data.tables
 	  rep.data.records
@@ -81,6 +81,7 @@
 
   (define (update-all-dependences)
     (table-walk (lambda (dep slots)
+		  (declare (unused slots))
 		  (update-dependences (get-slot dep))) dependence-table))
 
   ;; called when the value of SLOT changes

@@ -4,15 +4,39 @@
 
 2002-11-03  John Harper  <jsh@unfactored.org>
 
-	* widgets/font.jl (make-font-item): minimal changes to accept
-	new typed font descriptions (though we just assume it's always
-	xlfd, which is pretty harmless)
+	* widgets/font.jl (make-font-item): use XLFD fonts when
+	GDK_USE_XFT isn't set. (I couldn't test this, since the GTK
+	font selector totally fails to work for me when this
+	environment variable isn't set)
 
-2002-05-14  John Harper  <jsh@unfactored.org>
+2002-11-03  John Harper  <jsh@unfactored.org>
+
+	* widgets/font.jl (make-font-item): support for new typed font
+	descriptions. Convert the Xft description to and from the Pango
+	descriptions used by GtkFontSelection. Needs some work to
+	handle XLFD fonts as well when $GDK_USE_XFT isn't set
+
+	* widget.jl, stock.jl.gtk: fixed some button-box issues
+
+2002-11-02  John Harper  <jsh@unfactored.org>
+
+	* widgets/pair.jl (make-pair-item): added another (!) optional
+	arg, PACKING. It defines how the widgets are packed into their
+	containing box
+
+2002-05-21  John Harper  <jsh@unfactored.org>
+
+	* Merged from HEAD:
+
+	2002-05-14  John Harper  <jsh@unfactored.org>
 
 	* widgets/font.jl (make-font-item): made entry uneditable
 
-2002-04-18  John Harper  <jsh@unfactored.org>
+2002-04-21  John Harper  <jsh@unfactored.org>
+
+	* Merged changes from HEAD
+
+	2002-04-18  John Harper  <jsh@unfactored.org>
 
 	* widgets/scheme-boolean.jl, Makefile.in: new widget, a boolean
 	but returns #f and #t (though it accepts nil and t still).
@@ -21,6 +45,42 @@
 
 	* widget.jl (make-choice-item): if IDX is null, select the
 	first item. Patch from merlin <merlin@merlin.org>
+
+2002-04-14  John Harper  <jsh@unfactored.org>
+
+	* widgets/list.jl: return false from button_press_event and
+	key_press_event handlers, fixes #75866
+
+2002-04-13  John Harper  <jsh@unfactored.org>
+
+	* stock.jl.gtk, stock.jl.gnome: s/gtk-signal-/g-signal/
+
+2002-04-01  John Harper  <jsh@unfactored.org>
+
+	* widget.jl, widget-test.jl: 
+	* widgets/list.jl, widgets/font.jl, widgets/file.jl,
+	widgets/color.jl: s/gtk-signal-/g-signal-/
+
+2002-02-13  John Harper  <jsh@unfactored.org>
+
+	* stock.jl.gtk, stock.jl.gnome (stock-button): new
+	gtk-button-new-from-stock in both cases now
+
+2002-02-12  John Harper  <jsh@unfactored.org>
+
+	* widget.jl, stock.jl.gtk, color-preview.jl: 
+	* widgets/list.jl, widgets/file.jl: 
+
+	Ported to current gnome2 rep-gtk
+
+2002-01-29  John Harper  <jsh@unfactored.org>
+
+	* widget.jl, widget-test.jl, widget-dialog.jl, stock.jl.gtk,
+	stock.jl.gnome, color-preview.jl: 
+	* widgets/pair.jl, widgets/list.jl, widgets/font.jl,
+	widgets/file.jl, widgets/color.jl, widgets/alist.jl: 
+
+	Changed module names for gnome2 rep-gtk
 
 2001-01-05  John Harper  <jsh@eazel.com>
 

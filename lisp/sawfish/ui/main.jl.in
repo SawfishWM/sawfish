@@ -59,7 +59,8 @@ where OPTIONS are any of:\n
       (setq group (read-from-string group))
       (set-top-group (if (listp group) group `(root ,group)))))
 
-  (when (get-command-line-option "--flatten")
+  ;; XXX remove the "or t" when trees work again
+  (when (or t (get-command-line-option "--flatten"))
     (setq *nokogiri-flatten-groups* t))
 
   (when (get-command-line-option "--single-level")

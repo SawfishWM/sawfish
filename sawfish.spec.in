@@ -2,8 +2,8 @@ Summary: An extensible window manager for the X Window System.
 Name: sawfish
 Version: @version@
 Release: 1
-Requires: librep >= 0.14, rep-gtk >= 0.14, rep-gtk-gnome
-License: GPL
+Requires: librep >= 0.16, rep-gtk >= 0.16
+Copyright: GPL
 Group: User Interface/Desktops
 Source: http://download.sourceforge.net/sawfish/sawfish-%{version}.tar.gz
 URL: http://sawmill.sourceforge.net/
@@ -21,17 +21,6 @@ basic idea is to have as much user-interface policy as possible
 controlled through the Lisp language.  Configuration can be
 accomplished by writing Lisp code in a personal .sawfishrc file, or
 using a GTK+ interface.  Sawfish is mostly GNOME compliant
-
-%package themer
-Summary: A GUI for creating sawfish window manager themes.
-Group: User Interface/Desktops
-Requires: %{name} = @version@, rep-gtk-libglade
-Obsoletes: sawmill-themer
-
-%description themer
-The sawfish-themer package contains an optional theme builder for the
-sawfish window manager. sawfish-themer allows static window themes to
-be created and edited in a graphical environment.
 
 %prep
 %setup -q
@@ -71,33 +60,22 @@ fi
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644,root,root,755)
+%defattr(-,root,root)
 %doc README NEWS FAQ THANKS BUGS TODO
 %doc po/sawfish.pot lisp/sawfish/ui/WIDGETS lisp/sawfish/ui/WISHLIST
-%attr(755,root,root) %{_bindir}/sawfish
-%attr(755,root,root) %{_bindir}/sawfish-client
-%attr(755,root,root) %{_bindir}/sawfish-ui
-%attr(755,root,root) %{_bindir}/sawfish-capplet
+%{_bindir}/sawfish
+%{_bindir}/sawfish-client
+%{_bindir}/sawfish-ui
 %{_datadir}/sawfish/%{version}
 %{_datadir}/locale
-%{_datadir}/control-center/Sawfish
-%{_datadir}/gnome/apps/Settings/Sawfish
+%{_datadir}/control-center-2.0/capplets
 %{_datadir}/gnome/wm-properties/Sawfish.desktop
 %{_datadir}/pixmaps/sawfish*.png
 %{_libexecdir}/sawfish/%{version}/%{_target_platform}
 %{_libexecdir}/rep/%{_target_platform}/sawfish
 %{_infodir}/sawfish*
 
-%files themer
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/sawfish-themer
-%{_datadir}/sawfish/%{version}/themer.glade
-
 %changelog
-* Sat Jun 29 2002 Rui M. Seabra <rms@1407.org>
-- Install with correct file permissions.
-- Correct common mistaken usage of 'Copyrigh:' into License.
-
 * Tue Jun 12 2000 John Harper <john@dcs.warwick.ac.uk>
 - merged differences from RH spec file
 

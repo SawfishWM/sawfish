@@ -95,10 +95,6 @@ print_strings (char *name, char **x, int n)
 void
 print_rc_style (GtkRcStyle *rc, GtkStyle *style)
 {
-    if (rc->font_name != 0)
-	printf ("(font . \"%s\")\n", rc->font_name);
-    if (rc->fontset_name != 0)
-	printf ("(fontset . \"%s\")\n", rc->fontset_name);
     if (print_rc_colors ("fg", rc->fg, 5, rc->color_flags, GTK_RC_FG))
     	print_colors ("fg", style->fg, 5);
     if (print_rc_colors ("bg", rc->bg, 5, rc->color_flags, GTK_RC_BG))

@@ -26,7 +26,7 @@ AC_CONFIG_AUX_DIR(etc)
 
 dnl Release versioning info
 version="1.2"
-subversion="-gtk1"
+subversion=""
 
 output_files="src/Makefile lisp/Makefile scripts/Makefile themes/Makefile\
  lisp/sawfish/ui/Makefile lisp/sawfish/gtk/Makefile sounds/Makefile\
@@ -91,33 +91,45 @@ CPPFLAGS="${CPPFLAGS} ${X_CFLAGS}"
 
 AC_CHECK_HEADERS(X11/SM/SMlib.h X11/extensions/Xdbe.h)
 
+dnl Checks for X extensions/libraries
 XINERAMA_LIBS=""
+XFT_LIBS=""
+XFT_CFLAGS=""
+
 AC_SUBST(XINERAMA_LIBS)
+AC_SUBST(XFT_LIBS)
+AC_SUBST(XFT_CFLAGS)
+
 AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
 	     [XINERAMA_LIBS="-lXinerama"
 	      AC_CHECK_HEADERS(X11/extensions/Xinerama.h)],
 	     [],[$X_LIBS -lX11 -lXext])
 
-XFT_LIBS=""
-AC_SUBST(XFT_LIBS)
-AC_CHECK_LIB(Xft, XftDrawCreate,
-	     [XFT_LIBS="-lXft -lXrender"
-	     AC_CHECK_HEADERS(X11/Xft/Xft.h)],
-	     [], [$X_LIBS -lX11 -lXext])
+dnl Try using pkg-config first, since it looks like Xft2 may fail our
+dnl hand-crafted tests
+PKG_CHECK_MODULES(XFT, xft >= 1.0,
+ [_cppflags=$CPPFLAGS
+  CPPFLAGS="$CPPFLAGS $XFT_CFLAGS"
+  AC_CHECK_HEADERS(X11/Xft/Xft.h)
+  CPPFLAGS=$_cppflags],
+ [AC_CHECK_LIB(Xft, XftDrawCreate,
+	       [XFT_LIBS="-lXft -lXrender"
+	       AC_CHECK_HEADERS(X11/Xft/Xft.h)],
+	       [], [$X_LIBS -lX11 -lXext])])
 
 CPPFLAGS="${_cppflags}"
 
 dnl Check for librep
 AM_PATH_REP(0.14)
 
-rep_gtk_function=gtk-main-iteration-do
-rep_gtk_version=0.14
+rep_gtk_function=gtk-widget-set-size-request
+rep_gtk_version=0.17
 
-AC_MSG_CHECKING([for correct rep-gtk version])
+AC_MSG_CHECKING([for rep-gtk >= $rep_gtk_version])
 cat >conftest <<EOF
 (condition-case nil
     (progn
-      (require 'gui.gtk.gtk)
+      (require 'gui.gtk-2.gtk)
       $rep_gtk_function
       (throw 'quit 0))
   (error
@@ -142,17 +154,11 @@ dnl Check for image handling libraries
 AC_ARG_WITH(gdk-pixbuf,
  [  --with-gdk-pixbuf	  Use gdk-pixbuf for image management
   --without-gdk-pixbuf	  Use Imlib1 instead], [],
- [with_gdk_pixbuf=no])
+ [with_gdk_pixbuf=yes])
 if test "$with_gdk_pixbuf" != "no"; then
   AC_MSG_CHECKING([for gdk_pixbuf (xlib version)])
-  dnl gnome-config is the most broken shell script I've ever
-  dnl encountered. It often returns true even if it can't
-  dnl find the named module..!
-  if gnome-config gdk_pixbuf_xlib --cflags >/dev/null 2>&1; then
-    GDK_PIXBUF_VERSION=`gnome-config gdk_pixbuf_xlib --modversion`
-    AC_MSG_RESULT($GDK_PIXBUF_VERSION)
-    GDK_PIXBUF_CFLAGS=`gnome-config gdk_pixbuf_xlib --cflags`
-    GDK_PIXBUF_LIBS=`gnome-config gdk_pixbuf_xlib --libs`
+    PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= 1.3.12)
+    GDK_PIXBUF_VERSION=`pkg-config --modversion gdk-pixbuf-xlib-2.0`
     AC_SUBST(GDK_PIXBUF_VERSION)
     AC_SUBST(GDK_PIXBUF_CFLAGS)
     AC_SUBST(GDK_PIXBUF_LIBS)
@@ -168,76 +174,62 @@ if test "$with_gdk_pixbuf" != "no"; then
     else
       with_gdk_pixbuf=no
     fi
-  fi
 fi
 if test "$with_gdk_pixbuf" = "no"; then
-  AM_PATH_IMLIB
-  if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then true; else
-    AC_MSG_ERROR([imlib must be built with support for png images])
+  AC_PATH_PROG(IMLIB_CONFIG, imlib-config, no)
+  AC_MSG_CHECKING([for Imlib])
+  if test "$IMLIB_CONFIG" = "no"; then
+    AC_MSG_RESULT([no])
+    AC_MSG_ERROR([can't find imlib-config])
+  else
+    IMLIB_VERSION=`$IMLIB_CONFIG --version`
+    dnl XXX do version check..
+    AC_MSG_RESULT([version $IMLIB_VERSION])
+    IMLIB_CFLAGS=`$IMLIB_CONFIG --cflags`
+    IMLIB_LIBS=`$IMLIB_CONFIG --libs`
+    if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then true; else
+      AC_MSG_ERROR([imlib must be built with support for png images])
+    fi
+    AC_DEFINE(HAVE_IMLIB,1)
+    IMAGE_LIBS='${IMLIB_LIBS}'
+    IMAGE_CFLAGS='${IMLIB_CFLAGS}'
+    AC_SUBST(IMLIB_VERSION)
+    AC_SUBST(IMLIB_CFLAGS)
+    AC_SUBST(IMLIB_LIBS)
   fi
-  AC_DEFINE(HAVE_IMLIB,1)
-  IMAGE_LIBS='${IMLIB_LIBS}'
-  IMAGE_CFLAGS='${IMLIB_CFLAGS}'
 fi
 AC_SUBST(IMAGE_LIBS)
 AC_SUBST(IMAGE_CFLAGS)
 
-AM_PATH_GTK(1.2.0)
+AM_PATH_GTK_2_0(1.3.12)
 
 AC_ARG_WITH(audiofile,
  [  --with-audiofile	  Use libaudiofile for sound manipulation
   --without-audiofile], [], [with_audiofile=yes])
 if test "$with_audiofile" = "yes"; then
-  AC_MSG_CHECKING([for audiofile library])
-  AUDIOFILE_VERSION="`audiofile-config --version`"
-  if test $? -eq 0; then
-    AUDIOFILE_LIBS="`audiofile-config --libs`"
-    AUDIOFILE_CFLAGS="`audiofile-config --cflags`"
-    AC_MSG_RESULT([$AUDIOFILE_VERSION])
+    PKG_CHECK_MODULES(AUDIOFILE, audiofile >= 0.2.3)
     AC_SUBST(AUDIOFILE_LIBS)
     AC_SUBST(AUDIOFILE_CFLAGS)
     AC_DEFINE(HAVE_LIBAUDIOFILE)
-  else
-    AC_MSG_RESULT([no])
-  fi
 fi
 
 AC_ARG_WITH(esd,
  [  --with-esd		  Use the Enlightened Sound Daemon
   --without-esd], [], [with_esd=yes])
 if test "$with_esd" = "yes"; then
-  AC_MSG_CHECKING([for enlightened sound daemon])
-  ESD_VERSION="`esd-config --version`"
-  if test $? -eq 0; then
-    ESD_LIBS="`esd-config --libs`"
-    ESD_CFLAGS="`esd-config --cflags`"
-    AC_MSG_RESULT([$ESD_VERSION])
+    PKG_CHECK_MODULES(ESD, esound >= 0.2.23)
     AC_SUBST(ESD_LIBS)
     AC_SUBST(ESD_CFLAGS)
     AC_DEFINE(HAVE_ESD)
-  else
-    AC_MSG_RESULT([no])
-  fi
 fi
 
 AC_ARG_ENABLE(capplet,
  [  --enable-capplet	  Build the sawfish GNOME capplet [default]
   --disable-capplet	  Don't built the capplet], [],
- [enable_capplet=yes])
+ [enable_capplet=no])
 
 if test "$enable_capplet" = "yes"; then
-  AC_MSG_CHECKING([for GNOME control center config])
-  GNOME_CC_CFLAGS="`(gnome-config --cflags gnome gnomeui capplet) 2>/dev/null`"
-  GNOME_CC_LIBS="`(gnome-config --libs gnome gnomeui capplet) 2>/dev/null`"
-  if test $? -ne 0; then
-    AC_MSG_RESULT([no])
-    AC_MSG_WARN([Can't run "gnome-config capplet", not building capplet])
-  else
-    AC_MSG_RESULT([yes])
-    AC_SUBST(GNOME_CC_CFLAGS)
-    AC_SUBST(GNOME_CC_LIBS)
-    add_subdir "capplet"
-  fi
+  add_subdir "capplet"
 fi
 
 AC_ARG_ENABLE(themer,
@@ -248,7 +240,7 @@ AC_ARG_ENABLE(themer,
 if test "$enable_themer" = yes; then
   dnl configure redirects &5 to config.log
   AC_MSG_CHECKING([for rep-gtk libglade wrapper])
-  if REP_GTK_DONT_INITIALIZE=1 rep --batch -l libglade 2>&5; then 
+  if REP_GTK_DONT_INITIALIZE=1 rep --batch -l gui.gtk.libglade 2>&5; then 
     AC_MSG_RESULT([yes])
     add_subdir "themer"
   else 
@@ -260,11 +252,11 @@ fi
 AC_ARG_ENABLE(gnome-widgets,
  [  --enable-gnome-widgets  Use GNOME widgets in places [default]
   --disable-gnome-widgets Don't use GNOME widgets], [],
- [enable_gnome_widgets=maybe])
+ [enable_gnome_widgets=no])
 
 if test "$enable_gnome_widgets" != "no"; then
   AC_MSG_CHECKING([for rep-gtk GNOME wrappers])
-  if REP_GTK_DONT_INITIALIZE=1 rep --batch -l gnomeui -l gdk-pixbuf -l gnome-canvas-pixbuf 2>&5; then 
+  if REP_GTK_DONT_INITIALIZE=1 rep --batch -l gui.gtk-2.gnome-ui 2>&5; then 
     AC_MSG_RESULT([yes])
     REP_GTK_GNOME=yes
   else 
@@ -297,10 +289,7 @@ AC_ARG_WITH(gnome_prefix,
  [ with_gnome_prefix="" ])
 AC_MSG_CHECKING([for GNOME prefix])
 if test "x$with_gnome_prefix" = "x"; then
-  with_gnome_prefix=`(gnome-config --prefix) 2>/dev/null`
-  if test $? -ne 0; then
-    with_gnome_prefix='${prefix}'
-  fi
+  with_gnome_prefix='${prefix}'
 fi
 AC_MSG_RESULT([$with_gnome_prefix])
 GNOMEDIR=$with_gnome_prefix

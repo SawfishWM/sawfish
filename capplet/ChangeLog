@@ -1,23 +1,51 @@
-2002-05-06  John Harper  <jsh@unfactored.org>
+2002-05-31  John Harper  <jsh@unfactored.org>
 
-	* sawmill-capplet.c: patch from Christophe Fergeau
-	<teuf@users.sourceforge.net> to call bindtextdomaincodeset
-	function
+	* desktop-entries/workspace-properties.desktop,
+	desktop-entries/sound-properties.desktop,
+	desktop-entries/placement-properties.desktop,
+	desktop-entries/move-properties.desktop,
+	desktop-entries/misc-properties.desktop,
+	desktop-entries/maximize-properties.desktop,
+	desktop-entries/match-properties.desktop,
+	desktop-entries/focus-properties.desktop,
+	desktop-entries/bindings-properties.desktop,
+	desktop-entries/appearance-properties.desktop: in categories
+	line, s/Sawfish/X-GNOME-Sawfish/ as recommended by George
 
-2002-04-20  John Harper  <jsh@unfactored.org>
+2002-04-26 Dennis Cranston <dennis_cranston@yahoo.com>
+
+	Fixed 77772 (sawfish capplets should be in preferences->advanced
+	->sawfish instead of preferences->advanced):
+
+	* desktop-entries/*.desktop: added Sawfish keyword to the
+	Categories definition.
+
+2002-03-20 JeyaSudha <jeyasudha.duraipandy@wipro.com>
+
+	* Makefile.in:  Change in the path where sawfish configurator 
+	desktop files are installed in gnome2.
+
+2002-03-03  John Harper  <jsh@pixelslut.com>
+
+	* desktop-entries/workspace-properties.desktop,
+	desktop-entries/sound-properties.desktop,
+	desktop-entries/placement-properties.desktop,
+	desktop-entries/move-properties.desktop,
+	desktop-entries/misc-properties.desktop,
+	desktop-entries/maximize-properties.desktop,
+	desktop-entries/match-properties.desktop,
+	desktop-entries/focus-properties.desktop,
+	desktop-entries/bindings-properties.desktop,
+	desktop-entries/appearance-properties.desktop: updated for
+	gnome2
 
 	* desktop-entries/meta-properties.desktop,
-	desktop-entries/.order: removed meta capplet
+	desktop-entries/.order, desktop-entries/.directory: removed
 
-2002-01-24  John Harper  <jsh@unfactored.org>
-
-	Fixed 62643 (Sawfish-capplet segfaults while configuring via
-	gnomecc):
-
-	* sawmill-capplet.c (display_error): only destroy ui_socket if
-	GTK_IS_OBJECT returns true on it
-
-	Patch is from Mikael Hallendal <micke@codefactory.se>
+2002-03-02 JeyaSudha <jeyasudha.duraipandy@wipro.com>
+	
+	* Makefile.in: remove sawmill-capplet and just use sawfish-ui.
+	Also, don't install .desktop files in the menu directory
 
 2001-08-31  John Harper  <jsh@pixelslut.com>
 

@@ -29,15 +29,21 @@
 	    make-url-widget)
 
     (open rep
-	  gui.gtk
-	  gui.gnome.ui)
+	  gui.gtk-2.gtk
+	  gui.gtk-2.gnome-ui)
 
+  ;; same as in gtk now
   (define (stock-button type)
-    (case type
-      ((ok cancel yes no close apply help)
-       (gnome-stock-button type))
-      ((revert)
-       (gtk-button-new-with-label (_ "Revert")))))
+    (gtk-button-new-from-stock
+     (case type
+       ((ok) "gtk-ok")
+       ((cancel) "gtk-cancel")
+       ((revert) "gtk-revert-to-saved")
+       ((apply) "gtk-apply")
+       ((yes) "gtk-yes")
+       ((no) "gtk-no")
+       ((close) "gtk-close")
+       ((help) "gtk-help"))))
 
   (define (simple-dialog title widget #!optional ok-callback main-window)
 
@@ -50,12 +56,12 @@
 	(gnome-dialog-set-parent window main-window))
       (gtk-container-add (gnome-dialog-vbox window) widget)
 
-      (gtk-signal-connect window "clicked"
-			  (lambda (w button)
-			    (if (and (= button 0) ok-callback)
-				(ok-callback))
-			    (gtk-widget-destroy w)))
-      (gtk-signal-connect window "delete_event" gtk-widget-destroy)
+      (g-signal-connect window "clicked"
+			(lambda (w button)
+			  (if (and (= button 0) ok-callback)
+			      (ok-callback))
+			  (gtk-widget-destroy w)))
+      (g-signal-connect window "delete_event" gtk-widget-destroy)
 
       (gtk-widget-show window)
       (gtk-window-set-modal window t)

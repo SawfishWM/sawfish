@@ -30,7 +30,7 @@
 	    make-label)
 
     ((open rep
-	   gui.gtk
+	   gui.gtk-2.gtk
 	   rep.regexp
 	   sawfish.ui.slot
 	   sawfish.gtk.widget)
@@ -55,6 +55,7 @@
 ;;; basic layout styles
 
   (define (layout-single style slots)
+    (declare (unused style))
     (cond ((null slots)
 	   (let ((placeholder (gtk-vbox-new nil 0)))
 	     (gtk-widget-show placeholder)
@@ -86,7 +87,7 @@
   (define (layout-frame style slots)
     (let ((frame (gtk-frame-new (cadr style)))
 	  (vbox (layout-slots 'vbox slots)))
-      (gtk-container-border-width frame box-border)
+      (gtk-container-set-border-width frame box-border)
       (gtk-container-add frame vbox)
       (gtk-widget-show frame)
       frame))

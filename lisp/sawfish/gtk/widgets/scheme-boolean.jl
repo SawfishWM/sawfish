@@ -24,19 +24,19 @@
 (define-structure sawfish.gtk.widgets.scheme-boolean ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  sawfish.gtk.widget
 	  sawfish.gtk.widget-dialog)
 
   (define (make-item changed-callback)
     (let ((widget (gtk-toggle-button-new-with-label (_ "Yes"))))
       (define (update-label)
-	(gtk-label-set (car (gtk-container-children widget))
-		       (if (gtk-toggle-button-active widget)
-			   (_ "Yes") (_ "No"))))
-      (gtk-label-set-justify (car (gtk-container-children widget)) 'left)
-      (gtk-toggle-button-set-state widget t)
-      (gtk-signal-connect
+	(gtk-label-set-text (car (gtk-container-get-children widget))
+			    (if (gtk-toggle-button-get-active widget)
+				(_ "Yes") (_ "No"))))
+      (gtk-label-set-justify (car (gtk-container-get-children widget)) 'left)
+      (gtk-toggle-button-set-active widget t)
+      (g-signal-connect
        widget "toggled"
        (lambda ()
 	 (update-label)
@@ -47,11 +47,11 @@
 	(case op
 	  ((set) (lambda (x)
 		   (let ((state (not (memq x '(() #f)))))
-		     (gtk-toggle-button-set-state widget state))))
+		     (gtk-toggle-button-set-active widget state))))
 	  ((clear) (lambda ()
-		     (gtk-toggle-button-set-state widget nil)))
+		     (gtk-toggle-button-set-active widget nil)))
 	  ((ref) (lambda ()
-		   (if (gtk-toggle-button-active widget) '#t '#f)))
+		   (if (gtk-toggle-button-get-active widget) '#t '#f)))
 	  ((gtk-widget) widget)
 	  ((validp) (lambda () t))))))
 

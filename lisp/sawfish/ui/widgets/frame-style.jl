@@ -24,7 +24,7 @@
 (define-structure sawfish.ui.widgets.frame-style ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.regexp
 	  rep.io.files
 	  rep.io.timers
@@ -37,42 +37,46 @@
 	  (hbox (gtk-hbox-new nil 0))
 	  (combo (gtk-combo-new))
 	  (doc-label (gtk-label-new doc))
-	  (readme-text (gtk-text-new))
+	  (readme-text-view (gtk-text-view-new))
 	  (readme-scroller (gtk-scrolled-window-new))
 	  (value (car options))
+	  (last-value nil)
 	  (timer nil))
 
       (define (timer-callback)
 	(setq timer nil)
 	(setq value (intern (gtk-entry-get-text (gtk-combo-entry combo))))
-	(update-readme value readme-text path)
-	(call-callback changed-callback))
+	;; ugh. the gtk2 combo seems pretty fucked; this
+	;; didn't used to be necessary
+	(when (and (not (eq value last-value)) (memq value options))
+	  (setq last-value value)
+	  (update-readme value readme-text-view path)
+	  (call-callback changed-callback)))
 
       (gtk-box-set-spacing hbox box-spacing)
       (gtk-box-set-spacing vbox box-spacing)
-      (gtk-container-add readme-scroller readme-text)
+      (gtk-container-add readme-scroller readme-text-view)
       (gtk-box-pack-start hbox doc-label)
       (gtk-box-pack-start hbox combo t t)
       (gtk-box-pack-start vbox readme-scroller t t)
       (gtk-box-pack-start vbox hbox nil nil)
       (gtk-label-set-justify doc-label 'left)
-      ;;(gtk-text-set-word-wrap readme-text 1)
-      (gtk-editable-set-editable readme-text nil)
-      (gtk-entry-set-editable (gtk-combo-entry combo) nil)
+      ;;(gtk-text-view-set-wrap-mode readme-text-view 'word)
+      (gtk-text-view-set-editable readme-text-view nil)
+      (gtk-editable-set-editable (gtk-combo-entry combo) nil)
       (gtk-scrolled-window-set-policy readme-scroller 'automatic 'automatic)
 
       (gtk-combo-set-popdown-strings combo (mapcar symbol-name options))
       (when value
 	(gtk-entry-set-text (gtk-combo-entry combo) (symbol-name value)))
 
-      (gtk-signal-connect (gtk-combo-entry combo) "changed"
-			  (lambda ()
-			    (if timer
-				(set-timer timer)
-			      (setq timer (make-timer
-					   timer-callback nil 200)))))
+      (g-signal-connect (gtk-combo-entry combo) "changed"
+			(lambda ()
+			  (if timer
+			      (set-timer timer)
+			    (setq timer (make-timer timer-callback nil 200)))))
 
-      (update-readme value readme-text path)
+      (update-readme value readme-text-view path)
       (gtk-widget-show-all vbox)
 
       (lambda (op)
@@ -88,13 +92,14 @@
   (define-widget-type 'frame-style make-frame-style-item)
   (widget-accepts-doc-string 'frame-style)
 
-  (define (gtk-text-set widget string)
-    (gtk-text-set-point widget 0)
-    (gtk-text-forward-delete widget (gtk-text-get-length widget))
-    (gtk-text-insert widget nil nil nil string (length string))
-    (gtk-text-set-point widget 0))
+  (define (text-view-set view string)
+    (let ((buffer (gtk-text-view-get-buffer view))
+	  (iter (gtk-text-iter-new)))
+      (gtk-text-buffer-set-text buffer string (length string))
+      (gtk-text-buffer-get-start-iter buffer iter)
+      (gtk-text-buffer-place-cursor buffer iter)))
 
-  (define (update-readme value text-widget theme-path)
+  (define (update-readme value text-view theme-path)
     (catch 'out
       (let ((theme (symbol-name value)))
 	(mapc (lambda (dir)
@@ -121,9 +126,9 @@
 				(setq text (get-output-stream-string text))
 				(when (string-match "\\s+$" text)
 				  (setq text (substring text 0 (match-start))))
-				(gtk-text-set text-widget text))
+				(text-view-set text-view text))
 			    (close-file file)))
-		      (gtk-text-set text-widget ""))
+		      (text-view-set text-view ""))
 		    (throw 'out t))))
 	      theme-path)
-	(gtk-text-set text-widget "")))))
+	(text-view-set text-view "")))))

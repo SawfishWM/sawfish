@@ -41,26 +41,8 @@
     (when (null (last root-menu))
       (setq root-menu (delq (last root-menu) root-menu))))
 
-  ;; invoke the GNOME control-center to configure sawfish
-  (defcustom gnome-use-capplet nil
-    "Invoke the GNOME control center from the `Customize' menu."
-    :type boolean
-    :group misc
-    :require sawfish.wm.gnome.integration
-    :after-set (lambda () (gnome-use-capplet-changed)))
-
-  (defun gnome-use-capplet-changed ()
-    (require 'sawfish.wm.customize)
-    (if gnome-use-capplet
-	(progn
-	  (setq customize-program "sawfish-capplet")
-	  (setq customize-group-opt "--sawfish-group")
-	  (setq custom-menu-includes-all-settings nil))
-      (setq customize-program "sawfish-ui")
-      (setq customize-group-opt "--group")
-      (setq custom-menu-includes-all-settings t)))
-
-  (gnome-use-capplet-changed)
+  ;; this option was removed for gnome2
+  (put 'gnome-use-capplet 'custom-obsolete t)
 
   ;; invoke the GNOME terminal instead of xterm
   (unless (variable-customized-p 'xterm-program)

@@ -1,122 +1,226 @@
-2002-12-03  John Harper  <jsh@unfactored.org>
+2003-01-12  John Harper  <jsh@unfactored.org>
 
-	* man/sawmill.texi: removed description of
-	check-frame-availability function, since it doesn't do what it
-	says it does, and isn't exported. Reported by Ezequiel Martín
-	<ezequielmartin@yahoo.com>
+	* merged all differences between gnome-2 and HEAD branches back
+	onto HEAD. All future development will be on HEAD for gtk2 only
+
+	* configure.in: capplet defaults to off
+
+2002-11-10  Ole Laursen  <olau@hardworking.dk>
+
+	* po/da.po: Updated Danish translation.
 
 2002-11-09  John Harper  <jsh@unfactored.org>
 
 	* configure.in: version 1.2
 
+2002-11-08  John Harper  <jsh@unfactored.org>
+
+	* configure.in, Makedefs.in: use pkg-config to look for xft.pc
+	before searching by hand. This is because Xft2 (which has the
+	xft.pc may not be recognized by the hand-crafted tests)
+
+2002-11-03  John Harper  <jsh@unfactored.org>
+
+	* po/sawfish.pot: rebuilt
+
 2002-11-02  John Harper  <jsh@unfactored.org>
 
+	* configure.in: disabled --enable-gnome-widgets by default, it
+	probably doesn't work anyway. Also be smarter when testing for
+	rep-gtk plugins
+
 	* configure.in, config.h.in, Makedefs.in: check for Xft
-	libraries and headers
+	libraries and headers (merged from HEAD)
 
-2002-02-29  Rui M. Seabra <rms@1407.org>
+2002-09-26  Stanislav Brabec  <sbrabec@suse.cz>
 
-	* sawfish.spec.in: Install with correct file permissions.
-        Correct common mistaken usage of 'Copyrigh:' into License.
-
-2002-06-30  John Harper  <jsh@unfactored.org>
-
-	* OPTIONS: new text file, describes all configuration options
+	* po/cs.po: Updated Czech translation from Miloslav Trmac
+	<mitr@volny.cz>.
 
 2002-06-28  John Harper  <jsh@unfactored.org>
 
-	* configure.in: version 1.1 (gtk1)
+	* configure.in: version 1.1
 
-2002-06-12  Andrew V. Samoilov  <kai@cmail.ru>
+	The "version 2.0" below was a mistake
 
-	* po/ru.po: Fix typos.
-	* po/uk.po: Likewise.
+	* sawfish.spec.in: updated (untested)
 
-2002-05-24  Duarte Loreto <happyguy_pt@hotmail.com>
+2002-06-21  Federico Mena Quintero  <federico@ximian.com>
 
-        * pt.po: Updated Portuguese translation.
+	Released version 2.0.
 
-2002-05-21  Carlos Perello Marin <carlos@gnome-db.org>
-	
-	* po/pt_BR.po: Updated by Francisco Petrúcio Cavalcante Junior
-	<fpcj@impa.br>
-	
-2002-05-18  Kjartan Maraas  <kmaraas@gnome.org>
+	* configure.in: Bumped version number to 2.0.
+
+2002-06-21  Changwoo Ryu  <cwryu@debian.org>
+
+	* po/ko.po: Updated Korean translation from Michelle Kim
+	<mkim@brisbane.redhat.com>.
+
+2002-06-02  Carlos Perelló Marín <carlos@gnome-db.org>
+
+	* po/es.po: Recoded as UTF-8
+
+2002-06-01  Tõivo Leedjärv  <toivo@linux.ee>
+
+	* po/et.po: Updated Estonian translation.
+
+2002-06-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
-	* po/sawfish.pot: Updated this.
+	* po/sawfish.pot: Updated.
 	
-2002-04-25  Duarte Loreto <happyguy_pt@hotmail.com>
+2002-05-17  Abel Cheung  <maddog@linux.org.hk>
 
-        * pt.po: Updated Portuguese translation.
+	* po/zh_TW.po: Converted to UTF-8.
+
+2002-05-11  Ole Laursen  <olau@hardworking.dk>
+
+	* po/da.po: Updated Danish translation and converted it to UTF-8.
+
+2002-05-07  Duarte Loreto <happyguy_pt@hotmail.com>
+
+        * po/pt.po: Updated Portuguese translation and converted to UTF-8.
+
+2002-05-01  Christian Rose  <menthos@menthos.com>
+
+	* po/sv.po: Updated Swedish translation.
+
+2002-04-30  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* po/no.po: Updated Norwegian (bokmål) translation.
+	
+2002-04-26  Tõivo Leedjärv  <toivo@linux.ee>
+
+	* po/et.po: Updated Estonian translation.
 
 2002-04-21  John Harper  <jsh@unfactored.org>
+
+	* Merged changes from HEAD:
+
+	2002-04-21  John Harper  <jsh@unfactored.org>
 
 	* configure.in, Makedefs.in: don't AC_SUBST(LIBOBJS), doesn't
 	work on autoconf 2.53
 
-2002-04-21  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* po/no.po: Updated Norwegian (bokmål) translation.
-	
-2002-04-20  John Harper  <jsh@unfactored.org>
-
-	* po/sawfish.pot: updated
-
-2002-04-13  John Harper  <jsh@unfactored.org>
+	2002-04-13  John Harper  <jsh@unfactored.org>
 
 	* man/Makefile.in: use --info-dir option to install-info, works
 	with install-info on debian systems. Patch from Kai Großjohann
 	<Kai.Grossjohann@CS.Uni-Dortmund.DE>
 
-2002-03-28  John Harper  <jsh@unfactored.org>
+	2002-03-28  John Harper  <jsh@unfactored.org>
 
 	* themes/Crux/theme.jl (make-button): added removable property
 	to buttons
 
-2002-03-24  John Harper  <jsh@unfactored.org>
+2002-03-19  John Harper  <jsh@unfactored.org>
 
-	* configure.in: fixed gnomecc check when gnomeui etc are in a
-	different prefix
+	* Merged changes from HEAD:
 
-2002-03-17  Tõivo Leedjärv  <toivo@linux.ee>
+	2002-03-17  Tõivo Leedjärv  <toivo@linux.ee>
 
 	* po/et.po: Updated Estonian translation.
 
-2002-03-17  Tõivo Leedjärv  <toivo@linux.ee>
+	2002-03-17  Tõivo Leedjärv  <toivo@linux.ee>
 
 	* po/et.po: Added Estonian translation from gnome-2 branch.
 
-2002-03-15  Valek Filippov  <frob@df.ru>
+	2002-03-15  Valek Filippov  <frob@df.ru>
 
 	* ru.po: updated russian translation.
 
-2002-02-28  Hasbullah Bin Pit <sebol@ikhlas.com>
+	2002-02-28  Hasbullah Bin Pit <sebol@ikhlas.com>
 
 	* po/ms.po: Added Malay Translation from gnome-2 branch
 
-2002-02-20  John Harper  <jsh@unfactored.org>
+	2002-02-20  John Harper  <jsh@unfactored.org>
 
 	* configure.in: don't ever compile our own dlmalloc, it breaks
 	on too many platforms
 
-2002-02-01  Kjartan Maraas  <kmaraas@gnome.org>
+	2002-02-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
 	
-2002-01-31  Simos Xenitellis  <simos@hellug.gr>
+	2002-01-31  Simos Xenitellis  <simos@hellug.gr>
 
 	* po/el.po: Updated Greek translation.
 
-2002-01-23  Peteris Krisjanis <peteris.krisjanis@ttc.lv>
+	2002-01-23  Peteris Krisjanis <peteris.krisjanis@ttc.lv>
 
 	* po/lv.po: Updated Latvian translation.
 
-2002-01-15  Wang Jian  <lark@linux.net.cn>
+	2002-01-15  Wang Jian  <lark@linux.net.cn>
 
 	* po/zh_CN.po: Updated Simplified Chinese translation by
 	Wang Li <charlesw1234@163.com>.
 	
+2002-03-17  Tõivo Leedjärv  <toivo@linux.ee>
+
+	* po/et.po: Updated Estonian translation.
+
+2002-03-03  John Harper  <jsh@pixelslut.com>
+
+	* po/sawfish.pot: updated
+
+2002-03-02  JeyaSudha <jeyasudha.duraipandy@wipro.com>
+	
+	* configure.in: No need for checking the cflags and libs for 
+	gnome capplets as sawfish-ui is used instead of sawfish-capplet
+	
+2002-03-02  John Harper  <jsh@pixelslut.com>
+
+	* configure.in: readded the --with-gnome-prefix option that
+	someone had removed
+
+2002-02-28  Tõivo Leedjärv  <leedjarv@interest.ee>
+
+        * po/et.po: Added Estonian translation.
+
+2002-02-26  Hasbullah Bin Pit <sebol@ikhlas.com>
+
+	* po/ms.po: Added Malay Translation.
+
+2002-02-12  John Harper  <jsh@unfactored.org>
+
+	* po/sawfish.pot: committed an updated version
+
+	* configure.in: don't use AM_PATH_IMLIB to detect Imlib, do it
+	by hand (but no version check, which shouldn't be too
+	important). Also added a (bogus?) fix for the capplet
+
+	Status of port: sawfish-ui mostly works (in non-tree mode).
+	Some problems with appearance pop-down list?
+
+2002-02-12  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* po/no.po: Updated Norwegian (bokmål) translation.
+	
+2002-02-03  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* po/no.po: Updated Norwegian (bokmål) translation.
+	
+2002-02-01  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* po/no.po: Updated Norwegian (bokmål) translation.
+	
+2002-01-29  John Harper  <jsh@unfactored.org>
+
+	* configure.in: Fix imlib mess. Add -gnome2-n prefix to the
+	version string. Check for the gnome2 rep-gtk
+
+2002-01-27  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* po/no.po: Updated this a bit.
+	
+2002-01-27  Christian Rose  <menthos@menthos.com>
+
+	* po/sv.po: Converted to UTF-8.
+
+2002-01-10  Sander Vesik <sander.vesik@sun.com>
+
+	* configure.in: move from using gnome-config to pkg-config
+
 2002-01-04  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* configure.in: Added "eu" to ALL_LINGUAS

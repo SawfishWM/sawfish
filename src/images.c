@@ -88,7 +88,7 @@ load_image (char *file)
     else
 	return 0;
 #elif defined HAVE_GDK_PIXBUF
-    return gdk_pixbuf_new_from_file (file);
+    return gdk_pixbuf_new_from_file (file, NULL);
 #endif
 }
 

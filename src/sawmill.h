@@ -1,5 +1,5 @@
 /* sawmill.h -- Main include file, brings in all the rest
-   $Id: sawmill.h,v 1.2 1999/07/25 15:02:21 john Exp
+   $Id$
 
    Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -37,7 +37,7 @@
 #if defined (HAVE_IMLIB)
 # include <Imlib.h>
 #elif defined (HAVE_GDK_PIXBUF)
-# include <gdk-pixbuf/gdk-pixbuf-xlib.h>
+# include <gdk-pixbuf-xlib/gdk-pixbuf-xlib.h>
 #else
 # error "Need an image handling library!"
 #endif

@@ -28,7 +28,7 @@
 	    run-shell)
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.system
 	  rep.regexp
 	  rep.io.files
@@ -66,7 +66,7 @@
 	  (progn
 	    (gtk-window-set-default-size main-window 400 300)
 	    (setq root-container main-window))
-	(gtk-window-set-policy main-window nil t nil)
+	(gtk-window-set-resizable main-window t)
 	(gtk-window-set-default-size main-window 550 400)
 	(setq root-container (gtk-frame-new))
 	(gtk-frame-set-shadow-type root-container 'out)
@@ -74,8 +74,8 @@
 
       (setq slot-box-widget (gtk-vbox-new nil box-spacing))
 
-      (gtk-container-border-width vbox box-border)
-      (gtk-container-border-width slot-box-widget box-border)
+      (gtk-container-set-border-width vbox box-border)
+      (gtk-container-set-border-width slot-box-widget box-border)
       (when s-scroller
 	(gtk-scrolled-window-set-policy s-scroller 'automatic 'automatic)
 	(gtk-scrolled-window-add-with-viewport s-scroller slot-box-widget))
@@ -88,7 +88,7 @@
 	    (let ((paned (gtk-hpaned-new))
 		  (g-scroller (gtk-scrolled-window-new)))
 	      (setq group-tree-widget (make-group-tree (get-group top-group)))
-	      (gtk-container-border-width group-tree-widget box-border)
+	      (gtk-container-set-border-width group-tree-widget box-border)
 	      (gtk-scrolled-window-set-policy g-scroller 'automatic 'automatic)
 	      (gtk-container-add vbox paned)
 	      (gtk-paned-add1 paned g-scroller)
@@ -99,20 +99,21 @@
 	  (gtk-container-add vbox (or s-scroller slot-box-widget))))
 
       (unless socket-id
-	(setq ok-widget (stock-button 'ok))
+	(setq ok-widget (stock-button 'close))
 	(setq revert-widget (stock-button 'revert))
-	(gtk-window-set-title main-window (_ "Sawfish configurator"))
-	(gtk-widget-set-name main-window (_ "Sawfish configurator"))
+	(gtk-window-set-title main-window (_ "Sawfish Configurator"))
+	(gtk-widget-set-name main-window (_ "Sawfish Configurator"))
 	(gtk-window-set-wmclass main-window "main" "Nokogiri"))
 
-      (gtk-signal-connect main-window "delete_event"
+      (g-signal-connect main-window "delete_event"
 			  (if (not socket-id) on-quit capplet-delete-event))
 
       (unless socket-id
+	(gtk-box-set-spacing hbox button-box-spacing)
 	(gtk-button-box-set-layout hbox 'end)
 	(gtk-box-pack-end vbox hbox)
-	(gtk-signal-connect ok-widget "clicked" on-ok)
-	(gtk-signal-connect revert-widget "clicked" on-revert)
+	(g-signal-connect ok-widget "clicked" on-ok)
+	(g-signal-connect revert-widget "clicked" on-revert)
 	(gtk-container-add hbox revert-widget)
 	(gtk-container-add hbox ok-widget))
 
@@ -129,7 +130,7 @@
 	  (progn
 	    (gtk-tree-select-item group-tree-widget 0)
 	    (mapc gtk-tree-item-expand
-		  (gtk-container-children group-tree-widget)))
+		  (gtk-container-get-children group-tree-widget)))
 	(select-group (get-group top-group)))))
 
   (define (destroy-shell)
@@ -173,18 +174,55 @@
     (fetch-group group)
     (group-slots group))
 
+  (define (add-active-slots slots)
+    (setq active-slots (nconc active-slots
+			      (filter (lambda (x)
+					(not (memq x active-slots))) slots))))
+
+  (define (display-book-tree group)
+
+    (define (iter group slots)
+      (let ((group-page (and slots (layout-slots (group-layout group) slots))))
+	(add-active-slots slots)
+	(when (and group-page (gtk-container-p group-page))
+	  (gtk-container-set-border-width group-page box-border))
+	(if (group-sub-groups group)
+	    (let ((book (gtk-notebook-new)))
+	      (gtk-notebook-set-scrollable book t)
+	      (gtk-notebook-popup-enable book t)
+	      (when group-page
+		(gtk-notebook-append-page
+		 book group-page (gtk-label-new (_ (group-real-name group)))))
+	      (mapc (lambda (sub)
+		      (fetch-group sub)
+		      (let ((slots (get-slots sub)))
+			(when (or slots (group-sub-groups sub))
+			  (let ((page (iter sub slots)))
+			    (when page
+			      (gtk-notebook-append-page
+			       book page (gtk-label-new
+					  (_ (group-real-name sub)))))))))
+		    (get-sub-groups group))
+	      (gtk-widget-show book)
+	      book)
+	  group-page)))
+
+    (let ((page (iter group (get-slots group))))
+      (when page
+	(gtk-container-add slot-box-widget page))))
+
   (define (display-flattened group)
 
     (define (iter book group slots)
       (when slots
 	(let ((layout (layout-slots (group-layout group) slots)))
-	  (setq active-slots (nconc active-slots slots))
+	  (add-active-slots slots)
 	  (if (not *nokogiri-single-level*)
 	      (gtk-notebook-append-page
 	       book layout (gtk-label-new (_ (group-real-name group))))
 	    (gtk-box-pack-start book layout))
 	  (when (gtk-container-p layout)
-	    (gtk-container-border-width layout box-border))))
+	    (gtk-container-set-border-width layout box-border))))
       (mapc (lambda (sub)
 	      (fetch-group sub)
 	      (let ((slots (get-slots sub)))
@@ -206,11 +244,12 @@
     (let* ((slots (get-slots group)))
       (gtk-container-add
        slot-box-widget (layout-slots (group-layout group) slots))
-      (setq active-slots (nconc active-slots slots))))
+      (add-active-slots slots)))
 
   (define (add-group-widgets group)
     (if (and *nokogiri-flatten-groups* (group-sub-groups group))
-	(display-flattened group)
+	;;(display-flattened group)
+	(display-book-tree group)
       (display-unflattened group))
     (update-all-dependences))
 
@@ -224,7 +263,7 @@
     (setq active-slots '())
     (mapc (lambda (w)
 	    (gtk-container-remove slot-box-widget w))
-	  (gtk-container-children slot-box-widget)))
+	  (gtk-container-get-children slot-box-widget)))
 
   (define (run-shell #!optional socket-id)
     (initialize-configs)

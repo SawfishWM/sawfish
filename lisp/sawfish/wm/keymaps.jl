@@ -180,7 +180,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "Distance in pixels pointer must move before generating motion events.")
 
   (defcustom wm-modifier-value (wm-modifier)
-    "Modifier key(s) used for default window manager shortcuts."
+    "Modifier key(s) used for default shortcuts."
     :group bindings
     :type modifier-list
     :after-set (lambda ()

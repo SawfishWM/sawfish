@@ -24,7 +24,7 @@
 (define-structure sawfish.ui.widgets.match-window ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.regexp
 	  sawfish.gtk.widget
 	  sawfish.gtk.stock
@@ -57,7 +57,7 @@
 	  (gtk-table-attach-defaults table combo 0 1 i (1+ i))
 	  (gtk-table-attach-defaults table entry 1 2 i (1+ i))
 	  (gtk-table-attach-defaults table button 2 3 i (1+ i))
-	  (gtk-signal-connect button "clicked"
+	  (g-signal-connect button "clicked"
 	   (lambda ()
 	     (let* ((string (gtk-entry-get-text (gtk-combo-entry combo)))
 		    (x-prop (and string (car (rassoc string
@@ -69,7 +69,7 @@
 					       "")))))))
 	  (setq widgets (nconc widgets (list (cons combo entry))))))
       (gtk-container-add frame table)
-      (gtk-container-border-width table box-border)
+      (gtk-container-set-border-width table box-border)
       (gtk-table-set-row-spacings table box-spacing)
       (gtk-table-set-col-spacings table box-spacing)
       (gtk-widget-show-all frame)
@@ -148,7 +148,7 @@
        properties)
 
       (setq widgets (nreverse widgets))
-      (gtk-container-border-width book box-border)
+      (gtk-container-set-border-width book box-border)
       (gtk-container-add frame book)
       (gtk-widget-show-all frame)
 
@@ -228,7 +228,7 @@
 	  (widget-set action-widget (cdr value)))
 	(gtk-widget-show vbox)
 
-	(simple-dialog (_ "Match window properties") vbox
+	(simple-dialog (_ "Match Window Properties") vbox
 		       (lambda ()
 			 (callback (cons (widget-ref matcher-widget)
 					 (widget-ref action-widget))))

@@ -24,7 +24,7 @@
 (define-structure sawfish.ui.widgets.command ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.regexp
 	  sawfish.gtk.widget
 	  sawfish.ui.wm)
@@ -50,7 +50,7 @@
     
     (let ((commands (filter-command-list))
 	  (clist (gtk-clist-new-with-titles (list (_ "Command"))))
-	  (text (gtk-text-new))
+	  (text-view (gtk-text-view-new))
 	  (vbox (gtk-vbox-new nil box-spacing))
 	  (scroller (gtk-scrolled-window-new))
 	  (scroller-2 (gtk-scrolled-window-new))
@@ -63,11 +63,12 @@
 	(let ((doc (remove-newlines
 		    (or (wm-documentation
 			 (command-name (nth selection commands)))
-			(_ "Undocumented")))))
-	  (gtk-text-set-point text 0)
-	  (gtk-text-forward-delete text (gtk-text-get-length text))
-	  (gtk-text-insert text nil nil nil doc (length doc))
-	  (gtk-text-set-point text 0)))
+			(_ "Undocumented"))))
+	      (buffer (gtk-text-view-get-buffer text-view))
+	      (iter (gtk-text-iter-new)))
+	  (gtk-text-buffer-set-text buffer doc (length doc))
+	  (gtk-text-buffer-get-start-iter buffer iter)
+	  (gtk-text-buffer-place-cursor buffer iter)))
 
       (define (update-params)
 	(let ((new-spec (command-type (nth selection commands))))
@@ -86,33 +87,34 @@
       (mapc (lambda (c)
 	      (gtk-clist-append clist (command-item c))) commands)
 
-      (gtk-signal-connect clist "select_row"
+      (g-signal-connect clist "select_row"
 			  (lambda (w row col)
+			    (declare (unused w col))
 			    (setq selection row)
 			    (update-params)
 			    (update-doc)
 			    (call-callback changed)))
 
       ;; seems you have to `moveto' _after_ the widget is realized..
-      (gtk-signal-connect clist "map"
+      (g-signal-connect clist "map"
 			  (lambda ()
 			    (gtk-clist-moveto clist selection 0)))
 
-      (gtk-text-set-word-wrap text 1)
-      (gtk-editable-set-editable text nil)
-      (gtk-widget-set-usize text -2 50)
+      (gtk-text-view-set-wrap-mode text-view 'word)
+      (gtk-text-view-set-editable text-view nil)
+      (gtk-widget-set-size-request text-view -1 50)
       (gtk-clist-set-selection-mode clist 'browse)
       (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
       (gtk-scrolled-window-set-policy scroller-2 'automatic 'automatic)
       (gtk-container-add scroller clist)
-      (gtk-container-add scroller-2 text)
+      (gtk-container-add scroller-2 text-view)
       (gtk-box-pack-end vbox scroller-2)
       (gtk-container-add vbox scroller)
       (gtk-box-pack-end vbox params-hbox)
       (gtk-widget-show-all vbox)
       (unless params-widget
 	(gtk-widget-hide params-hbox))
-      (gtk-widget-set-usize vbox 350 350)
+      (gtk-widget-set-size-request vbox 350 350)
       (update-doc)
 
       (lambda (op)

@@ -119,8 +119,7 @@ display_error (const char *message)
     if (ui_socket != 0)
     {
 	gtk_container_remove (GTK_CONTAINER (capplet), ui_socket);
-	if (GTK_IS_OBJECT (ui_socket))
-	    gtk_object_destroy (GTK_OBJECT (ui_socket));
+	gtk_object_destroy (GTK_OBJECT (ui_socket));
 	ui_socket = 0;
     }
 
@@ -301,7 +300,6 @@ main (int argc, char **argv)
 
 #if 0
     bindtextdomain (PACKAGE, GNOMELOCALEDIR);
-    bind_textdomain_codeset (PACKAGE, "UTF-8");
     textdomain (PACKAGE);
 #endif
 
