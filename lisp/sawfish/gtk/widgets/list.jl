@@ -137,6 +137,10 @@
 			  (lambda (w ev)
 			    (when (eq (gdk-event-type ev) '2button-press)
 			      (edit-item))))
+      (gtk-signal-connect clist "key_press_event"
+			  (lambda (w ev)
+			    (when (string= (gdk-event-string ev) "\r")
+			      (edit-item))))
 
       (gtk-clist-set-shadow-type clist 'none)
       (gtk-clist-set-column-width clist 0 100)
