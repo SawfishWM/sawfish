@@ -184,7 +184,9 @@ AC_MSG_CHECKING(for languages to install)
 dnl Redhat lang.sh always sets LINGUAS, so unconditionally install
 dnl all message sets for now...
 dnl if test "x$LINGUAS" = x; then
-  LINGUAS="`find po -name '*.po' -print | sed -e 's/^po\/\(.*\)\.po$/\1/'`"
+  LINGUAS="`find po -name '*.po' -print \
+      | sed -e 's/^po\/\(.*\)\.po$/\1/' \
+      | tr '\n' ' '`"
 dnl fi
 AC_MSG_RESULT($LINGUAS)
 AC_SUBST(LINGUAS)
