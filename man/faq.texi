@@ -4,6 +4,25 @@
 
 @enumerate
 
+@item I installed Sawmill but it's not working!  All I see when I
+start X is the default stipple background: no programs, no menus, no
+pager.
+
+This is exactly what it's supposed to do. Sawmill is a @emph{window
+manager} and as such is not responsible for setting the background,
+starting programs or displaying a pager---these can all be done using
+separate applications (e.g. by using a desktop environment such as
+GNOME).
+
+The default menu binding is somewhat obscure; you must middle-click on
+the background to bring up the menus. (If you have a two-button mouse,
+try clicking both buttons simultaneously)
+
+If, after reading this, you still think that sawmill isn't working,
+please send mail describing the problem to the sawmill mailing list
+@email{sawmill@@aarg.net}
+
+
 @item How do I add customizations?
 
 There are several files controlling this:
