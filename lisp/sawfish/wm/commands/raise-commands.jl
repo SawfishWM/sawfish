@@ -42,6 +42,17 @@ pointer events that invoked the command."
     (forget-button-press)))
 
 ;;;###autoload
+(defun raise-transients-and-pass-through-click (w)
+  "Raise the window that received the current event and any transients it has,
+then replay any pointer events that invoked the command."
+  (interactive "%w")
+  (when (windowp w)
+    (raise-window-and-transients w))
+  (allow-events 'replay-pointer)
+  (unless (clicked-frame-part)
+    (forget-button-press)))
+
+;;;###autoload
 (defun raise-and-pass-through-click-if-focused (w)
   "Raise the window that received the current event (if it's focused), then
 replay any pointer events that invoked the command."
