@@ -37,10 +37,16 @@
   :group placement)
 
 (defun place-window-randomly (w)
-  (move-window-to w (random (max 0 (- (screen-width)
-				      (car (window-frame-dimensions w)))))
-		  (random (max 0 (- (screen-height)
-				    (cdr (window-frame-dimensions w)))))))
+  (let
+      ((dims (window-frame-dimensions w))
+       x y)
+    (if (< (car dims) (screen-width))
+	(setq x (random (- (screen-width) (car dims))))
+      (setq x 0))
+    (if (< (cdr dims) (screen-height))
+	(setq y (random (- (screen-height) (cdr dims))))
+      (setq y 0))
+    (move-window-to w x y)))
 
 (defun place-window-interactively (w)
   (require 'move-resize)
@@ -57,7 +63,8 @@
   (let
       ((hints (window-size-hints w)))
     (if (or (cdr (assq 'user-position hints))
-	    (and (not ignore-program-positions)
+	    (and (not (window-get w 'ignore-program-position))
+		 (not ignore-program-positions)
 		 (cdr (assq 'program-position hints))))
 	nil
       (let
