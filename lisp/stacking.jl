@@ -40,6 +40,12 @@ stacking level to place them in.")
 			(> (window-get x 'depth) (window-get y 'depth))))))
     (restack-windows order)))
 
+(defun stacking-order-by-depth (depth)
+  (let
+      ((order (stacking-order)))
+    (delete-if #'(lambda (x)
+		   (/= (window-get x 'depth) depth)) order)))
+
 ;; Set the stacking depth of W to DEPTH
 (defun set-window-depth (w depth)
   (let
@@ -71,6 +77,27 @@ stacking level to place them in.")
 		   (stacking-order))))
 	(eq (car order) w))))
 
+;; Change stacking of window BELOW so that it is immediately below
+;; window ABOVE
+(defun stack-window-below (below above)
+  (when (= (window-get above 'depth) (window-get below 'depth))
+    (restack-windows (list above below))))
+
+;; Change stacking of window ABOVE so that it is immediately above
+;; window BELOW
+(defun stack-window-above (above below)
+  (when (= (window-get above 'depth) (window-get below 'depth))
+    (let
+	((order (stacking-order)))
+      (if (eq (car order) below)
+	  (x-raise-window above)
+	(setq order (delete-if #'(lambda (x)
+				   (/= (window-get x 'depth)
+				       (window-get above 'depth))) order))
+	(while (and (cdr order) (not (eq (car (cdr order)) below)))
+	  (setq order (cdr order)))
+	(restack-windows (list (car order) above))))))
+
 
 ;; Commands
 
@@ -97,12 +124,14 @@ stacking level to place them in.")
        tem)
     (setq order (delq w order))
     (if (<= (window-get (car order) 'depth) depth)
-	(setq order (cons w order))
+	;; no windows above DEPTH, so just raise to the top
+	;; of the global stack
+	(x-raise-window w)
       (setq tem order)
       (while (and (cdr tem) (> (window-get (car (cdr tem)) 'depth) depth))
 	(setq tem (cdr tem)))
-      (rplacd tem (cons w (cdr tem))))
-    (restack-windows order)))
+      (rplacd tem (cons w (cdr tem)))
+      (restack-windows order))))
 
 (defun raise-lower-window (w)
   "If the window is the highest window in its stacking level, lower it to the
