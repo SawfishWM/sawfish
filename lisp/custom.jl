@@ -45,6 +45,7 @@
 ;;	:get FUNCTION
 ;;	:before-set FUNCTION
 ;;	:after-set FUNCTION
+;;	:range (MIN . MAX)		for number type
 
 ;; TYPE may be `boolean', `number', `string', `(set SYMBOLS..)',
 ;; `file-name', `program-name', `font', `color'
@@ -98,7 +99,9 @@
 	    ((eq tem ':after-set)
 	     (put symbol 'custom-after-set (car keys)))
 	    ((eq tem ':before-set)
-	     (put symbol 'custom-before-set (car keys))))
+	     (put symbol 'custom-before-set (car keys)))
+	    ((eq tem ':range)
+	     (put symbol 'custom-range (car keys))))
       (setq keys (cdr keys)))
     (when (symbolp type)
       (when (and (not (get symbol 'custom-get))
