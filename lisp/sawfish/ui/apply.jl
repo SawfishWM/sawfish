@@ -80,9 +80,11 @@
 	    ;; this may fail if the string contains #<..>
 	    (setq ex (read-from-string (cadr ex)))
 	  (error nil)))
-      (format nil "While updating %s:\n\n%s: %s"
-	      (mapconcat (lambda (x)
-			   (format nil "`%s'" (slot-name x))) slots ", ")
+      (format nil "%s\n\n%s: %s"
+	      (format nil (_ "While updating %s:")
+		      (mapconcat (lambda (x)
+				   (format nil "`%s'" (slot-name x)))
+				 slots ", "))
 	      (or (get (car ex) 'error-message) (car ex))
 	      (mapconcat (lambda (x) (format nil "%s" x)) (cdr ex) ", ")))
 
