@@ -1596,11 +1596,16 @@ void
 create_window_frame (Lisp_Window *w)
 {
     DB(("create_window_frame (%s)\n", rep_STR(w->name)));
-    w->destroy_frame = 0;
-    w->focus_change = 0;
-    w->rebuild_frame = 0;
-    w->property_change = 0;
-    list_frame_generator (w);
+    if (w->frame_parts == 0)
+    {
+	w->destroy_frame = 0;
+	w->focus_change = 0;
+	w->rebuild_frame = 0;
+	w->property_change = 0;
+	list_frame_generator (w);
+    }
+    else
+	fprintf (stderr, "warning: reframing framed window: %lx\n", (long) w->id);
 }
 
 /* Destroy the frame of window W. If LEAVE-FRAME-WIN is non-zero, then
@@ -1611,7 +1616,10 @@ destroy_window_frame (Lisp_Window *w, bool leave_frame_win)
     if (w->frame != 0)
     {
 	if (w->destroy_frame != 0)
+	{
 	    w->destroy_frame (w);
+	    w->destroy_frame = 0;
+	}
 	if (!leave_frame_win && w->frame != 0)
 	{
 	    XDestroyWindow (dpy, w->frame);
