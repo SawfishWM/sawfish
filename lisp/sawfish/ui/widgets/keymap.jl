@@ -31,9 +31,21 @@
 
 ;;; widget for representing keymaps
 
+  (define (command-name command)
+    (or (car command) command))
+
   (define (make-keymap-item changed-callback)
 
-    (define (print x) (list (cdr x) (beautify-symbol-name (car x))))
+    (define (print x)
+      (let ((command (car x))
+	    (key (cdr x)))
+	(list (cdr x)
+	      (if (consp command)
+		  (concat (beautify-symbol-name (command-name command))
+			  ": "
+			  (mapconcat (lambda (x) (format nil "%s" x))
+				     (cdr command) ", "))
+		(beautify-symbol-name command)))))
 
     (define (dialog title callback &optional value)
       (let ((widget (make-widget `(keymap:binding ,(wm-command-list)))))
@@ -78,19 +90,38 @@
 	  (vbox (gtk-vbox-new nil box-spacing))
 	  (scroller (gtk-scrolled-window-new))
 	  (scroller-2 (gtk-scrolled-window-new))
-	  (selection 0))
+	  (params-hbox (gtk-hbox-new nil box-spacing))
+	  (selection 0)
+	  (params-spec nil)
+	  (params-widget nil))
 
       (define (update-doc)
 	(let ((doc (remove-newlines
-		    (or (wm-documentation (nth selection commands))
+		    (or (wm-documentation
+			 (command-name (nth selection commands)))
 			(_ "Undocumented")))))
 	  (gtk-text-set-point text 0)
 	  (gtk-text-forward-delete text (gtk-text-get-length text))
 	  (gtk-text-insert text nil nil nil doc (length doc))
 	  (gtk-text-set-point text 0)))
 
+      (define (update-params)
+	(let ((new-spec (cadr (nth selection commands))))
+	  (unless (equal new-spec params-spec)
+	    (when params-widget
+	      (gtk-container-remove params-hbox (widget-gtk-widget
+						 params-widget))
+	      (setq params-widget nil))
+	    (setq params-spec new-spec)
+	    (if (null params-spec)
+		(gtk-widget-hide params-hbox)
+	      (setq params-widget (make-widget params-spec changed-callback))
+	      (gtk-container-add params-hbox (widget-gtk-widget params-widget))
+	      (gtk-widget-show params-hbox)))))
+
       (mapc (lambda (c)
-	      (gtk-clist-append clist (list (beautify-symbol-name c))))
+	      (gtk-clist-append
+	       clist (list (beautify-symbol-name (command-name c)))))
 	    commands)
 
       (gtk-signal-connect entry "changed"
@@ -98,6 +129,7 @@
       (gtk-signal-connect clist "select_row"
 			  (lambda (w row col)
 			    (setq selection row)
+			    (update-params)
 			    (update-doc)
 			    (call-callback changed-callback)))
       (gtk-signal-connect grab "clicked"
@@ -122,27 +154,41 @@
       (gtk-container-add scroller-2 text)
       (gtk-box-pack-end vbox scroller-2)
       (gtk-container-add vbox scroller)
-      (gtk-widget-set-usize scroller 350 350)
+      (gtk-box-pack-end vbox params-hbox)
       (gtk-widget-show-all vbox)
+      (unless params-widget
+	(gtk-widget-hide params-hbox))
+      (gtk-widget-set-usize vbox 350 400)
       (update-doc)
 
       (lambda (op)
 	(case op
 	  ((gtk-widget) vbox)
 	  ((clear) (lambda ()
+		     (when params-widget
+		       (widget-clear params-widget))
 		     (gtk-entry-set-text entry "")
 		     (gtk-clist-select-row 0 0)
 		     (gtk-clist-moveto clist 0 0)))
 	  ((set) (lambda (x)
-		   (let ((index (or (list-index commands (car x)) 0)))
+		   (let ((index (or (command-index
+				     commands (command-name (car x))) 0)))
+		     (setq selection index)
 		     (gtk-entry-set-text entry (cdr x))
 		     (gtk-clist-select-row clist index 0)
-		     (gtk-clist-moveto clist index 0))))
+		     (gtk-clist-moveto clist index 0)
+		     (when (cdar x)
+		       (update-params)
+		       (widget-set params-widget (cdar x))))))
 	  ((ref) (lambda ()
-		   (cons (nth selection commands)
+		   (cons (if params-widget
+			     (cons (car (nth selection commands))
+				   (widget-ref params-widget))
+			   (nth selection commands))
 			 (gtk-entry-get-text entry))))
 	  ((validp) (lambda (x)
-		      (and (memq (car x) commands)
+		      (and (memq (command-name (car x)) commands)
+			   ;; XXX check params
 			   (stringp (cdr x)))))))))
 
   (define-widget-type 'keymap:binding make-keymap:binding-item)
@@ -168,7 +214,8 @@
 		(list* #\space (substring string point (match-start)) out))
 	(apply concat (nreverse (cons (substring string point) out))))))
 
-  (define (list-index lst x)
-    (do ((i 0 (1+ i))
-	 (rest lst (cdr rest)))
-	((eq (car rest) x) i))))
+  (define (command-index lst x)
+    (let loop ((i 0) (rest lst))
+      (cond ((null rest) nil)
+	    ((eq (or (caar rest) (car rest)) x) i)
+	    (t (loop (1+ i) (cdr rest)))))))
