@@ -397,7 +397,6 @@ lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
 
     if(nkp == rep_NULL || nkp == Qglobal_keymap)
     {
-
 	repv tem = global_symbol_value (Qoverride_keymap);
 	if (tem != Qnil && !rep_VOIDP(tem))
 	    k = search_keymap (tem, code, mods, callback);
@@ -417,13 +416,13 @@ lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
 
 	    if (!k && current_window)
 	    {
-		/* 2. search focused/pointer window keymap property */
+		/* 3. search focused/pointer window keymap property */
 		tem = Fwindow_get (rep_VAL(current_window), Qkeymap);
 		if (tem && tem != Qnil)
 		    k = search_keymap(tem, code, mods, callback);
 	    }
 	    if(!k)
-		/* 3. search global-keymap */
+		/* 4. search global-keymap */
 		k = search_keymap(Qglobal_keymap, code, mods, callback);
 	}
     }

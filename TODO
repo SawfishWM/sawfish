@@ -3,7 +3,9 @@
 
 IMPORTANT:
 
-This file is probably out of date. Use bugzilla.eazel.com instead.
+This file is probably out of date. Use bugzilla.eazel.com instead. See
+the file `BUGS' for instructions on reporting sawfish bugs.
+
 
 --
 
@@ -33,10 +35,6 @@ Outstanding bugs
 
     [ I added some code with high kludge-quotient, but still need a
       real solution ]
-
-  ! bindings in frame-part maps can override click-to-focus map
-
-  ! edge-flip-delay is ignored when flipping while dragging windows
 
   ! uses a really kludgey method of getting command documentation
 
@@ -84,8 +82,6 @@ Outstanding bugs
     [ this also means that a window in different viewports in different
       workspaces will get saved in the single swapped-in viewport ]
 
-  ! java-apps get weird placement [apps being non-ICCCM compliant?]
-
   ! turn off mouse warping options, put cursor in window in center of
     screen (under message window), M-TAB, and the pointer leaving the
     message window will refocus the original window
@@ -112,41 +108,6 @@ Outstanding bugs
   + allow enter/leave-notify events to be suppressed?
 
     (use this when switching workspaces, but focus must be preserved)
-
-
-
-Resolved Bugs
-=============
-
-  ! loading theme `Ganymede' into themer wedges it
-
-    -- the Ganymede theme contains a stupidly-large README file,
-    maybe that's the reason. (Maybe a bug in the themer?) (28/10/2000)
-
-  ! cancel the GNOME logout dialog, window decorations aren't redrawn
-
-    [ after looking at the X event trace, I don't think it's a sawmill
-      bug, since sawmill receives _no_ events after the iris effect is
-      removed, until it finally redraws everything. Unless sawmill is
-      somehow not recognizing that events are available..? ]
-
-    -- I can't reproduce this anymore (28/10/2000)
-
-  ! Everytime my system's hardware clock get's resetted (this happens
-    from time to time because my motherboard's battery has become a
-    little weak), my whole sawfish configuration is erased and replaced
-    with the default settings. Btw, the 'new' system time becomes
-    01/01/1977 after the reset. [gnome #14623]
-
-    -- I set my system clock to 1977-1-1 but my settings still get
-    reloaded, and I can't imagine how the date could affect this..
-    (28/10/2000)
-
-  ! error in sawfish-ui -> sawfish-capplet livelocks
-
-  ! the gnome _WIN_MAXIMIZED_ hints are ignored when the window is
-    mapped, since it's not possible to maximize the window at that
-    point (until the frame has been created)
 
 
 

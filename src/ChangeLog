@@ -1,3 +1,11 @@
+2000-11-10  John Harper  <jsh@eazel.com>
+
+	* events.c (current_context_map): new function, replaces the
+	variable of the same name (the context map may now change
+	depending on the environment, so it's not cachable). If the
+	window's ignore-fp-keymap property is set, give a null context
+	keymap
+
 2000-11-08  John Harper  <jsh@eazel.com>
 
 	* version 0.33

@@ -594,6 +594,7 @@ Note that these are Lisp properties not X properties.
 		grab_keymap_events (VWIN(win)->id,
 				    rep_CAR(rep_CDR(plist)), FALSE);
 		grab_keymap_events (VWIN(win)->id, val, TRUE);
+
 	    }
 	    rep_CAR(rep_CDR(plist)) = val;
 	    return val;

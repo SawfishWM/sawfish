@@ -7,6 +7,27 @@
 	(#4698). Patch from Unai Uribarri Rodríguez
 	<unaiur@telecable.es>
 
+2000-11-12  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/ext/beos-window-menu.jl: fixed the code that was
+	supposed to add `unused' windows. It now also includes
+	iconified windows (even if they wouldn't normally be in the
+	menu)
+
+	* sawfish/wm/ext/beos-window-menu.jl (make-label): abbreviate
+	menu items the default amount (so that they match the parent
+	items if they get moved up a level)
+
+2000-11-10  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/focus.jl (focus-push-map, focus-pop-map): set the
+	ignore-fp-keymap property of windows to t while they have the
+	click-to-focus keymap. Fixes #4233
+
+	* sawfish/wm/focus.jl: add a function to the
+	after-initialization-hook to call focus-add-window on all
+	windows (map-notify-hook doesn't get called for these windows)
+
 2000-11-08  John Harper  <jsh@eazel.com>
 
 	* version 0.33
