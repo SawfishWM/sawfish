@@ -75,7 +75,7 @@ error_handler (Display *dpy, XErrorEvent *ev)
     w = x_find_window_by_id (ev->resourceid);
     if (w != 0)
     {
-	DB(("error_handler (%s)\n", w->name));
+	DB(("error_handler (%s)\n", rep_STR(w->name)));
 	if (w == focus_window)
 	    focus_window = 0;
 	if (w->id != 0)
