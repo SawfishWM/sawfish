@@ -27,15 +27,22 @@ AC_CONFIG_AUX_DIR(etc)
 dnl Release versioning info
 version="0.10"
 
-sawmilldir='${datadir}/sawmill'
-lispdir='${sawmilldir}/${version}/lisp'
-sawmillexecdir='${libexecdir}/sawmill/${version}/${host_type}'
-
 output_files="src/Makefile lisp/Makefile capplet/Makefile\
  themes/Makefile man/Makefile Makedefs Makefile sawmill.spec"
 
 dnl Find the system type
 AC_CANONICAL_HOST
+
+dnl Remove trailing slash in $prefix if necessary
+case "${prefix}" in
+  */)
+    prefix=`echo ${prefix} | sed -e 's/^\(.*\)\/$/\1/'`
+    ;;
+esac
+
+sawmilldir='${datadir}/sawmill'
+lispdir='${sawmilldir}/${version}/lisp'
+sawmillexecdir='${libexecdir}/sawmill/${version}/${host_type}'
 
 dnl Checks for programs.
 AC_PROG_CC
