@@ -53,6 +53,7 @@ enum {
     EV_MOD_META   = 0x00100000,
     EV_MOD_ALT    = 0x00200000,
     EV_MOD_HYPER  = 0x01000000,
+    EV_MOD_SUPER  = 0x02000000,
 
     /* Matches any of the modifiers */
     EV_MOD_ANY    = 0x00400000,
