@@ -19,6 +19,8 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'window-order)
+
 ;; Commentary:
 
 ;; Cycles through windows in MRU order. Whichever key is used to invoke
@@ -101,9 +103,6 @@
 
 ;; variables
 
-;; window order high-water-mark
-(defvar x-cycle-highest 1)
-
 (defvar x-cycle-current nil)
 (defvar x-cycle-stacking nil)
 
@@ -125,6 +124,7 @@
        (eval-modifier-events t)
        (eval-key-release-events t)
        (override-keymap (make-keymap))
+       (focus-dont-push t)
        (x-cycle-current nil)
        (x-cycle-stacking nil)
        mod tem)
@@ -148,7 +148,6 @@
 	    (catch 'x-cycle-exit
 	      (recursive-edit))
 	    (when x-cycle-current
-	      (x-cycle-push x-cycle-current)
 	      (display-window x-cycle-current)))
 	(show-message nil)
 	(ungrab-keyboard)))))
@@ -156,10 +155,10 @@
 (defun x-cycle-next ()
   (interactive)
   (let
-      ((win (x-cycle-order (if cycle-all-workspaces
-			       nil
-			     current-workspace)
-			   cycle-include-iconified)))
+      ((win (window-order (if cycle-all-workspaces
+			      nil
+			    current-workspace)
+			  cycle-include-iconified)))
     (when win
       (if x-cycle-current
 	  (when (or (window-get x-cycle-current 'iconified)
@@ -171,7 +170,7 @@
 	;; the top of the stack
 	(when (input-focus)
 	  (setq x-cycle-current (input-focus))
-	  (x-cycle-push x-cycle-current)
+	  (window-order-push x-cycle-current)
 	  (setq win (cons x-cycle-current (delq x-cycle-current win)))))
       (when x-cycle-stacking
 	(restack-windows x-cycle-stacking)
@@ -200,49 +199,3 @@
 (defun x-cycle-exit ()
   (interactive)
   (throw 'x-cycle-exit t))
-
-;; return windows to cycle through in MRU order
-(defun x-cycle-order (&optional workspace allow-iconified)
-  (let
-      ((windows (managed-windows)))
-    (setq windows (delete-if #'(lambda (w)
-				 (or (not (window-mapped-p w))
-				     (window-get w 'ignored)
-				     (and (not allow-iconified)
-					  (window-get w 'iconified))
-				     (and workspace
-					  (window-get w 'workspace)
-					  (not (equal (window-get w 'workspace)
-						      workspace)))))
-			     windows))
-    (sort windows #'(lambda (x y)
-		      (setq x (window-get x 'x-cycle-order))
-		      (setq y (window-get y 'x-cycle-order))
-		      (cond ((and x y)
-			     (> x y))
-			    (x t)
-			    (t nil))))))
-
-;; push window W onto the top of the cycle stack
-(defun x-cycle-push (w)
-  (window-put w 'x-cycle-order x-cycle-highest)
-  (setq x-cycle-highest (1+ x-cycle-highest))
-  (when (> x-cycle-highest 1000000)			;arbitrary big number
-    (x-cycle-compress)))
-
-;; remove window W from the cycle stack
-(defun x-cycle-pop (w)
-  (window-put w 'x-cycle-order nil))
-
-;; compress the cycle stack
-(defun x-cycle-compress ()
-  (let
-      ((order (nreverse (x-cycle-order nil t)))		;all windows
-       (i 1))
-    (mapc #'(lambda (w)
-	      (when (window-get w 'x-cycle-order)
-		(window-put w 'x-cycle-order i)
-		(setq i (1+ i)))) order)
-    (setq x-cycle-highest i)))
-
-(add-hook 'iconify-window-hook 'x-cycle-pop)
