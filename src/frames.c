@@ -48,8 +48,6 @@ static XID window_fp_context;
 int frame_part_type;
 static struct frame_part *allocated_parts;
 
-DEFSYM(default_frame, "default-frame");
-DEFSYM(nil_frame, "nil-frame");
 DEFSYM(internal, "internal");
 DEFSYM(tiled, "tiled");
 DEFSYM(center, "center");
@@ -1758,12 +1756,6 @@ frames_init (void)
     frame_part_type = rep_register_new_type ("frame-part", fp_cmp, fp_prin,
 					     fp_prin, fp_sweep, fp_mark, 0,
 					     0, 0, 0, 0, 0, 0);
-
-    rep_INTERN_SPECIAL(default_frame);
-    Fset (Qdefault_frame, Qnil);
-
-    rep_INTERN_SPECIAL(nil_frame);
-    Fset (Qnil_frame, Qnil);
 
     rep_ADD_SUBR(Sframe_draw_mutex);
     rep_ADD_SUBR(Sframe_state_mutex);
