@@ -78,7 +78,7 @@
        (ignore-program-position boolean)
        (place-mode ,(lambda () `(choice ,@placement-modes)))
        (position (pair number number))
-       (size (pair (number 1) (number 1)))
+       (dimensions (pair (number 1) (number 1)))
        (workspace (number 1))
        (viewport (pair (number 1) (number 1)))
        (depth (number -16 16))
