@@ -106,6 +106,24 @@ A negative number means warp to outside the top window edge."
 	      (setq out (cons x out)))) lst)
     out))
 
+;; uniquify IN from the list EXISTING, i.e. find the first `foo<N>'
+(defun uniquify-name (in existing)
+  (letrec
+      ((again (lambda (i)
+		(if (member (format nil "%s<%d>" in i) existing)
+		    (again (1+ i))
+		  (format nil "%s<%d>" in i)))))
+    (if (member in existing)
+	(again 2)
+      in)))
+
+(defun uniquify-window-name (w)
+  (interactive "%W")
+  (set-x-text-property
+   w 'WM_NAME
+   (vector (uniquify-name (window-name w)
+			  (mapcar window-name (managed-windows))))))
+
 ;; Move the mouse pointer to position (X, Y) relative to the client
 ;; window associated with object WINDOW.
 ;; If X and Y are nil, then they are taken as the top-left corner of
