@@ -1041,7 +1041,7 @@ Modify DEST-IMAGE by compositing SRC-IMAGE onto its current contents,
 at position (X, Y), or (0, 0) if no position is given.
 ::end:: */
 {
-    int w1, h1, w2, h2;
+    int w1, h1, w2, h2, copy_w, copy_h;
 
     rep_DECLARE1 (img1, IMAGEP);
     rep_DECLARE2 (img2, IMAGEP);
@@ -1061,20 +1061,39 @@ at position (X, Y), or (0, 0) if no position is given.
     w2 = image_width (VIMAGE (img2));
     h2 = image_height (VIMAGE (img2));
 
-    w2 = MAX (w2, w1 - rep_INT (x));
-    h2 = MAX (h2, h1 - rep_INT (y));
+    copy_w = MAX (w2, w1 - rep_INT (x));
+    copy_h = MAX (h2, h1 - rep_INT (y));
     
 #if defined HAVE_IMLIB
-    /* XXX implement me */
-    fprintf (stderr, "image compositing is unimplemented for Imlib\n");
-#elif defined HAVE_GDK_PIXBUF
     {
-	GdkPixbuf *out = VIMAGE (img1)->image;
-	gdk_pixbuf_composite (VIMAGE (img2)->image, out,
-			      rep_INT (x), rep_INT (y),
-			      w1, h1, 0.0, 0.0, 1.0, 1.0,
-			      interp_type, 255);
+	u_char *img1_rgb = image_pixels (VIMAGE (img1));
+	u_char *img2_rgb = image_pixels (VIMAGE (img2));
+	int row, col;
+	ImlibColor shape;
+	Imlib_get_image_shape (imlib_id, VIMAGE (img2)->image, &shape);
+	for (row = 0; row < copy_h; row++)
+	{
+	    for (col = 0; col < copy_w; col++)
+	    {
+		u_char *img2_pixel = img2_rgb + (row * w2 + col) * 3;
+		if (img2_pixel[0] != shape.r
+		    || img2_pixel[1] != shape.g
+		    || img2_pixel[2] != shape.b)
+		{
+		    u_char *img1_pixel;
+		    img1_pixel = img1_rgb + (((rep_INT (y) + row) * w1)
+					     + (rep_INT (x) + col)) * 3;
+		    /* constant size, so should be inlined */
+		    memcpy (img2_pixel, img1_pixel, 3);
+		}
+	    }
+	}
     }
+#elif defined HAVE_GDK_PIXBUF
+    gdk_pixbuf_composite (VIMAGE (img2)->image, VIMAGE (img1)->image,
+			  rep_INT (x), rep_INT (y),
+			  copy_w, copy_h, 0.0, 0.0, 1.0, 1.0,
+			  interp_type, 255);
 #endif
 
     image_changed (VIMAGE (img1));
