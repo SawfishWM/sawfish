@@ -122,7 +122,7 @@
   (when (string= (window-name w) "panel")
     ;; XXX I don't think the GNOME hints specify these things
     (window-put w 'focus-proxy-click t)
-    (window-put w 'maximize-avoid t))
+    (window-put w 'avoid t))
   (let
       ((state (get-x-property w '_WIN_STATE))
        (hints (get-x-property w '_WIN_HINTS))
