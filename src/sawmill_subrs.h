@@ -165,10 +165,6 @@ extern repv Fgrab_pointer (repv win, repv cursor, repv ptr_sync,
 extern repv Fungrab_pointer (void);
 extern repv Fgrab_keyboard (repv win, repv ptr_sync, repv kbd_sync);
 extern repv Fungrab_keyboard (void);
-extern repv Fdraw_window_outline (repv mode, repv x, repv y,
-				  repv width, repv height);
-extern repv Ferase_window_outline (repv mode, repv x, repv y,
-				   repv width, repv height);
 extern repv Fdelete_x_property (repv win, repv prop);
 extern repv Flist_x_properties (repv win);
 extern repv Fget_x_property (repv win, repv prop);

@@ -179,4 +179,6 @@
 (autoload 'prompt-for-window "prompt-wm")
 (autoload 'prompt-for-workspace "prompt-wm")
 (autoload 'select-workspace-interactively "prompt-wm" t)
+(autoload 'draw-window-outline "window-outline")
+(autoload 'erase-window-outline "window-outline")
 ;;; ::autoload-end::
