@@ -27,6 +27,7 @@
 (defconst WIN_STATE_STICKY 1)
 (defconst WIN_STATE_MAXIMIZED_VERT 4)
 (defconst WIN_STATE_MAXIMIZED_HORIZ 8)
+(defconst WIN_STATE_HIDDEN 16)
 (defconst WIN_STATE_SHADED 32)
 
 (defconst WIN_LAYER_NORMAL 4)
@@ -40,12 +41,17 @@
 				   _WIN_WORKSPACE_COUNT _WIN_STATE
 				   _WIN_LAYER])
 
+;; this is needed since the gnome tasklist applet doesn't honour
+;; the _WIN_HIDDEN property (?)
+(defvar gnome-ignored-windows-in-client-list t)
+
 (defun gnome-set-client-list ()
   (let
       (clients vec)
     (mapc #'(lambda (w)
 	      (when (and (windowp w) (window-mapped-p w)
-			 (not (window-get w 'ignored)))
+			 (or gnome-ignored-windows-in-client-list
+			     (not (window-get w 'ignored))))
 		(setq clients (cons (window-id w) clients))))
 	  (managed-windows))
     (setq vec (apply 'vector clients))
@@ -104,6 +110,8 @@
       (setq state (logior state WIN_STATE_MAXIMIZED_VERT)))
     (when (window-maximized-horizontally-p w)
       (setq state (logior state WIN_STATE_MAXIMIZED_HORIZ)))
+    (when (window-get w 'ignored)
+      (setq state (logior state WIN_STATE_HIDDEN)))
     (set-x-property w '_WIN_STATE (vector state) 'CARDINAL 32)
     (when (window-get w 'depth)
       (set-x-property w '_WIN_LAYER
@@ -116,7 +124,6 @@
        (hints (get-x-property w '_WIN_HINTS))
        (layer (get-x-property w '_WIN_LAYER))
        (space (get-x-property w '_WIN_WORKSPACE))
-       (area (get-x-property w '_WIN_AREA))
        bits)
     (when (eq (car state) 'CARDINAL)
       (setq bits (aref (nth 2 state) 0))
@@ -139,10 +146,7 @@
       (setq layer (aref (nth 2 layer) 0))
       (set-window-depth w (- layer WIN_LAYER_NORMAL)))
     (when space
-      (window-put w 'workspace (aref (nth 2 space) 0)))
-    (when area
-      (set-window-viewport w (aref (nth 2 area) 0) (aref (nth 2 area) 1))
-      (delete-x-property w '_WIN_AREA))))
+      (window-put w 'workspace (aref (nth 2 space) 0)))))
 
 (defun gnome-client-message-handler (w type data)
   (cond ((eq type '_WIN_WORKSPACE)
@@ -240,8 +244,9 @@
   (add-hook 'map-notify-hook 'gnome-set-client-list)
   (add-hook 'unmap-notify-hook 'gnome-set-client-list)
 
-  (add-hook 'window-state-change-hook 'gnome-set-client-state)
   (add-hook 'before-add-window-hook 'gnome-honour-client-state t)
+  (add-hook 'add-window-hook 'gnome-set-client-state)
+  (add-hook 'window-state-change-hook 'gnome-set-client-state)
 
   (add-hook 'client-message-hook 'gnome-client-message-handler)
   (add-hook 'unbound-key-hook 'gnome-event-proxyer)
@@ -253,15 +258,7 @@
   (delete-x-property 'root '_WIN_PROTOCOLS)
   (delete-x-property 'root '_WIN_AREA)
   (delete-x-property 'root '_WIN_AREA_COUNT)
-  (delete-x-property 'root '_WIN_UNIFIED_AREA)
-  (mapc #'(lambda (w)
-	    (if (window-get w 'fixed-position)
-		(delete-x-property w '_WIN_AREA)
-	      (let
-		  ((port (window-viewport w)))
-		(set-x-property w '_WIN_AREA (vector (car port) (cdr port))
-				'CARDINAL 32))))
-	(managed-windows)))
+  (delete-x-property 'root '_WIN_UNIFIED_AREA))
 
 (unless (or gnome-window-id batch-mode)
   (gnome-init))
