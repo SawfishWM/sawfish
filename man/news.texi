@@ -6,6 +6,50 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+@heading 1.3
+
+@itemize @bullet
+
+@item Implemented EMWH "show desktop" mode
+
+@item Set client window gravity to @code{StaticGravity} while
+reparenting windows (Michal Maru¹ka)
+
+@item Support EWMH @code{SKIP_TASKBAR} state (Chris Boyle, me)
+
+@item Window history keys may have multiple properties (not enabled by
+default for backwards compatibility, see @code{window-history-key}
+variable)
+
+@item More placement modes are now multihead-aware (Steve Hill)
+
+@item Translation updates: el (Simos Xenitellis, Kostas Papadimas), de
+(Christian Neumair), no (Kjartan Maraas), pt_BR (Alexandre Folle de
+Menezes), am (Daniel Yacob), es (German Poo Caaman~o), uk (Maxim
+Dzumanenko), sk (Stanislav Visnovsky)
+
+@item Bug fixes:
+
+@itemize @minus
+
+@item compile with Gtk 2.2
+
+@item don't try to unfocus windows within the X error handler
+
+@item don't cache frame objects while clicking in windows, they may get
+garbage collected -- fixes "crash on shading" bug
+
+@item set @code{_NET_WM_NAME} as @code{UTF8_STRING} type (Christian
+Krause)
+
+@item @file{save-session} is now called @file{gnome-session-save};
+fallback to looking in @file{/usr/gnome} for menus
+
+@item fixed typo in @code{adjust-position-for-gravity/y}
+@end itemize
+@end itemize
+
+
 @heading 1.2
 
 @itemize @bullet
