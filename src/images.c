@@ -659,10 +659,10 @@ images_init (void)
     rep_ADD_SUBR(Sbevel_image);
     rep_ADD_SUBR(Sclear_image);
     rep_ADD_SUBR(Stile_image);
-    rep_INTERN(image_directory);
+    rep_INTERN_SPECIAL(image_directory);
     rep_SYM(Qimage_directory)->value
 	= rep_concat2 (rep_STR(rep_SYM(Qsawmill_directory)->value), "/images");
-    rep_INTERN(image_load_path);
+    rep_INTERN_SPECIAL(image_load_path);
     rep_SYM(Qimage_load_path)->value
 	= rep_list_2 (rep_string_dup("."), rep_SYM(Qimage_directory)->value);
 

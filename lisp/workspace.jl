@@ -419,8 +419,7 @@ that window on (counting from zero).")
 				 (format nil "space %d%s"
 					 (1+ (- i (car limits)))
 					 (if (= i current-workspace) " *" "")))
-			     `(lambda ()
-				(select-workspace ,i)))
+			     `(select-workspace ,i))
 		       menu))
       (setq i (1+ i)))
     (nconc (nreverse menu) (list nil) static-workspace-menus)))
@@ -450,10 +449,8 @@ that window on (counting from zero).")
 					    name)
 					  (and (window-get w 'iconified)  ?\])
 					  (and (eq (input-focus) w) " *"))
-					 `(lambda ()
-					    (display-window
-					     (get-window-by-id
-					      ,(window-id w)))))
+					 `(display-window
+					   (get-window-by-id ,(window-id w))))
 				   menu))))
 	    windows)
       (unless (or (= i (cdr limits)) (null (car menu)))
@@ -466,10 +463,8 @@ that window on (counting from zero).")
 		(when (and (window-get w 'iconified)
 			   (not (window-get w 'workspace)))
 		  (setq extra (cons (list (concat ?[ (window-name w) ?])
-					  `(lambda ()
-					     (display-window
-					      (get-window-by-id
-					       ,(window-id w)))))
+					  `(display-window
+					    (get-window-by-id ,(window-id w))))
 				    extra))))
 	    windows)
       (when extra
@@ -612,13 +607,13 @@ previous workspace."
     ((i 1))
   (while (< i 10)
     (fset (intern (format nil "select-workspace:%s" i))
-	  `(lambda ()
-	     (interactive)
-	     (select-workspace-from-first ,(1- i))))
+	  (make-closure `(lambda ()
+			   (interactive)
+			   (select-workspace-from-first ,(1- i)))))
     (fset (intern (format nil "send-to-workspace:%s" i))
-	  `(lambda (w)
-	     (interactive "%W")
-	     (send-window-to-workspace-from-first w ,(1- i))))
+	  (make-closure `(lambda (w)
+			   (interactive "%W")
+			   (send-window-to-workspace-from-first w ,(1- i)))))
     (setq i (1+ i))))
 
 

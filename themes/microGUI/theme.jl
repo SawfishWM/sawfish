@@ -115,7 +115,7 @@
     (y-justify . center)
     (top-edge . -19)
     (left-edge . 19)
-    (width . (lambda (w) (+ (microGUI:title-width w) 13)))
+    (width . ,#'(lambda (w) (+ (microGUI:title-width w) 13)))
     (class . title))
 
    ;; menu button
@@ -126,14 +126,14 @@
 
    ;; top curves
    ((background . ,microGUI:top-curves-images)
-    (left-edge . (lambda (w) (+ (microGUI:title-width w) 32)))
+    (left-edge . ,#'(lambda (w) (+ (microGUI:title-width w) 32)))
     (top-edge . -19)
     (class . title))
 
    ;; top grey
    ((background . ,microGUI:top-grey-images)
     (top-edge . -19)
-    (left-edge . (lambda (w) (+ (microGUI:title-width w) 44)))
+    (left-edge . ,#'(lambda (w) (+ (microGUI:title-width w) 44)))
     (right-edge . 52)
     (class . title))
 
@@ -212,7 +212,7 @@
     (y-justify . center)
     (top-edge . -19)
     (left-edge . 19)
-    (width . (lambda (w) (+ (microGUI:title-width w) 13)))
+    (width . ,#'(lambda (w) (+ (microGUI:title-width w) 13)))
     (class . title))
 
    ;; menu button
@@ -223,14 +223,14 @@
 
    ;; top curves
    ((background . ,microGUI:top-curves-images)
-    (left-edge . (lambda (w) (+ (microGUI:title-width w) 32)))
+    (left-edge . ,#'(lambda (w) (+ (microGUI:title-width w) 32)))
     (top-edge . -19)
     (class . title))
 
    ;; top grey
    ((background . ,microGUI:top-grey-images)
     (top-edge . -19)
-    (left-edge . (lambda (w) (+ (microGUI:title-width w) 44)))
+    (left-edge . ,#'(lambda (w) (+ (microGUI:title-width w) 44)))
     (right-edge . 52)
     (class . title))
 

@@ -107,7 +107,9 @@
 
 ;; menu constructor
 
-(defun window-group-menu (w)
+(defun window-group-menu (&optional w)
+  (unless w
+    (setq w (or (current-event-window) (input-focus))))
   (let
       ((group-id (window-actual-group-id w))
        (group-names (mapcar #'(lambda (x)
@@ -128,17 +130,15 @@
 			      (when (eq id group-id)
 				(setq name (concat name " *")))
 			      (list name
-				    `(lambda ()
-				       (add-window-to-group
-					(get-window-by-id
-					 ,(window-id w)) ',id)))))
+				    `(add-window-to-group
+				      (get-window-by-id
+				       ,(window-id w)) ',id))))
 			group-ids))
     (rplacd menus (cons '() (cdr menus)))
     `(,@menus
       ()
-      ("New group" (lambda ()
-		     (add-window-to-new-group
-		      (get-window-by-id ,(window-id w))))))))
+      ("New group" (add-window-to-new-group
+		    (get-window-by-id ,(window-id w)))))))
 
 
 ;; session management -- only save group-ids that are _symbols_

@@ -185,7 +185,7 @@ colors_init (void)
     rep_ADD_SUBR(Scolor_name);
     rep_ADD_SUBR(Scolor_rgb);
     rep_ADD_SUBR(Scolorp);
-    rep_INTERN(default_foreground);
+    rep_INTERN_SPECIAL(default_foreground);
     if (rep_SYM(Qbatch_mode)->value == Qnil)
 	rep_SYM(Qdefault_foreground)->value = Fget_color (rep_string_dup("black"));
 }

@@ -151,7 +151,7 @@ that overrides settings set elsewhere.")
 
 (defun set-window-frame-style (w style &optional type from-user)
   (let
-      (tem)
+      (fun)
     (check-frame-availability style)
     (if type
 	(window-put w 'type type)
@@ -240,9 +240,9 @@ that overrides settings set elsewhere.")
 ;; create some commands for setting the window type
 (mapc #'(lambda (type)
 	  (fset (intern (concat "set-frame:" (symbol-name type)))
-		`(lambda (w)
-		   (interactive "%W")
-		   (set-frame-for-window w t ',type))))
+		(make-closure `(lambda (w)
+				 (interactive "%W")
+				 (set-frame-for-window w t ',type)))))
       '(default transient shaped shaped-transient unframed))
 
 
@@ -327,15 +327,13 @@ that overrides settings set elsewhere.")
       ((styles (find-all-frame-styles t)))
     (nconc (mapcar #'(lambda (s)
 		       (list (symbol-name s)
-			     `(lambda ()
-				(set-window-frame-style
-				 (current-event-window) ',s nil t))))
+			     `(set-window-frame-style
+			       (current-event-window) ',s nil t)))
 		   styles)
-	   `(() ("Default" (lambda ()
-			     (let
-				 ((w (current-event-window)))
-			       (window-put w 'frame-style nil)
-			       (set-frame-for-window w t))))))))
+	   `(() ("Default" (let
+			       ((w (current-event-window)))
+			     (window-put w 'frame-style nil)
+			     (set-frame-for-window w t)))))))
 
 
 ;; removing frame parts

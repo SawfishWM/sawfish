@@ -75,8 +75,8 @@
      (class . title))
     ;; rhs bit of title
     ((background . ,absolute-e:bar-images)
-     (left-edge . (lambda (w)
-		    (+ (absolute-e:title-width w) 16)))
+     (left-edge . ,#'(lambda (w)
+		       (+ (absolute-e:title-width w) 16)))
      (right-edge . 0)
      (top-edge . -4)
      (height . 4)
@@ -151,8 +151,8 @@
     (class . title))
    ;; rhs bit of title
    ((background . ,absolute-e:bar-images)
-    (left-edge . (lambda (w)
-		   (+ (absolute-e:title-width w) 16)))
+    (left-edge . ,#'(lambda (w)
+		      (+ (absolute-e:title-width w) 16)))
     (right-edge . 0)
     (top-edge . -4)
     (height . 4)

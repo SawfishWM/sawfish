@@ -1259,10 +1259,10 @@ grab_window_events (Lisp_Window *w, bool grab)
 void
 keys_init(void)
 {
-    rep_INTERN(global_keymap);
-    rep_INTERN(root_window_keymap);
-    rep_INTERN(override_keymap);
-    rep_INTERN(unbound_key_hook);
+    rep_INTERN_SPECIAL(global_keymap);
+    rep_INTERN_SPECIAL(root_window_keymap);
+    rep_INTERN_SPECIAL(override_keymap);
+    rep_INTERN_SPECIAL(unbound_key_hook);
     rep_INTERN(keymap);
 
     rep_ADD_SUBR(Smake_keymap);
@@ -1294,9 +1294,9 @@ keys_init(void)
     rep_INTERN(sync_both);
     rep_INTERN(async_both);
 
-    rep_INTERN(meta_keysyms);
+    rep_INTERN_SPECIAL(meta_keysyms);
     Fset (Qmeta_keysyms, Qnil);
-    rep_INTERN(alt_keysyms);
+    rep_INTERN_SPECIAL(alt_keysyms);
     Fset (Qalt_keysyms, Qnil);
 
     if (rep_SYM(Qbatch_mode)->value == Qnil)

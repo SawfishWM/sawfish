@@ -1433,10 +1433,10 @@ altered when the pointer enters or leaves its window.
 void
 frames_init (void)
 {
-    rep_INTERN(default_frame);
+    rep_INTERN_SPECIAL(default_frame);
     rep_SYM(Qdefault_frame)->value = Qnil;
 
-    rep_INTERN(nil_frame);
+    rep_INTERN_SPECIAL(nil_frame);
     rep_SYM(Qnil_frame)->value = Qnil;
 
     rep_ADD_SUBR(Sframe_draw_mutex);
@@ -1473,9 +1473,9 @@ frames_init (void)
     rep_INTERN(removed_classes);
     rep_INTERN(below_client);
 
-    rep_INTERN(frame_part_classes);
-    rep_INTERN(override_frame_part_classes);
-    rep_INTERN(highlight_when_unfocused);
+    rep_INTERN_SPECIAL(frame_part_classes);
+    rep_INTERN_SPECIAL(override_frame_part_classes);
+    rep_INTERN_SPECIAL(highlight_when_unfocused);
 
     state_syms[fps_normal] = Qnil;
     state_syms[fps_focused] = Qfocused;

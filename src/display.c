@@ -215,8 +215,8 @@ sys_init(char *program_name)
     if (rep_get_option ("--name", &opt))
 	prog_name = strdup (rep_STR(opt));
 
-    rep_INTERN(display_name);
-    rep_INTERN(canonical_display_name);
+    rep_INTERN_SPECIAL(display_name);
+    rep_INTERN_SPECIAL(canonical_display_name);
     Fset (Qdisplay_name, rep_null_string ());
     Fset (Qcanonical_display_name, rep_null_string ());
 

@@ -146,8 +146,8 @@ rep_dl_init (void)
     rep_INTERN (right);
     rep_INTERN (top);
     rep_INTERN (bottom);
-    rep_INTERN (enter_flipper_hook);
-    rep_INTERN (leave_flipper_hook);
+    rep_INTERN_SPECIAL (enter_flipper_hook);
+    rep_INTERN_SPECIAL (leave_flipper_hook);
 
     if (rep_SYM(Qbatch_mode)->value == Qnil)
     {

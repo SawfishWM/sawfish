@@ -100,11 +100,9 @@
 			(file-name-directory filename))))
 	    (exec
 	     ;; create a menu item
-	     `(,name (lambda ()
-		       (system (concat ,(if terminal
-					    (concat "xterm -e " exec)
-					  exec)
-				       " &")))))))))
+	     `(,name (system ,(concat (if terminal
+					  (concat "xterm -e " exec)
+					exec) " &"))))))))
 
 (defun gnome-menu-read-order (filename)
   (let

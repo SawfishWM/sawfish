@@ -1160,12 +1160,12 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_size_hints);
     rep_ADD_SUBR(Scall_window_hook);
 
-    rep_INTERN(before_add_window_hook);
-    rep_INTERN(add_window_hook);
-    rep_INTERN(place_window_hook);
+    rep_INTERN_SPECIAL(before_add_window_hook);
+    rep_INTERN_SPECIAL(add_window_hook);
+    rep_INTERN_SPECIAL(place_window_hook);
     rep_INTERN(placed);
-    rep_INTERN(after_framing_hook);
-    rep_INTERN(after_initialization_hook);
+    rep_INTERN_SPECIAL(after_framing_hook);
+    rep_INTERN_SPECIAL(after_initialization_hook);
 
     rep_INTERN(fully_obscured);
     rep_INTERN(partially_obscured);

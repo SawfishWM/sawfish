@@ -36,7 +36,7 @@ exec rep "$0" "$@"
     (mapc #'(lambda (cell)
 	      (let
 		  (label item)
-		(when (and cell (symbolp (car cell)) (not (functionp cell)))
+		(when (and cell (symbolp (car cell)))
 		  (setq cell (symbol-value (car cell))))
 		(if (null cell)
 		    (setq item (gtk-menu-item-new))
@@ -44,19 +44,17 @@ exec rep "$0" "$@"
 		  (if (functionp (cdr cell))
 		      (setq cell (funcall (cdr cell)))
 		    (setq cell (cdr cell)))
-		  (if (and (consp (car cell)) (not (functionp (car cell))))
+		  (if (and (consp (car cell)) (stringp (car (car cell))))
 		      (let
 			  ((sub (create-menu cell)))
 			(setq item (gtk-menu-item-new-with-label label))
 			(gtk-menu-item-set-submenu item sub))
 		    (setq item (gtk-menu-item-new-with-label label))
-		    (gtk-signal-connect item "activate"
-					`(lambda ()
-					   (setq menu-selected
-						 ',(car cell))))))
+		    (gtk-signal-connect
+		     item "activate" #'(lambda ()
+					 (setq menu-selected (car cell))))))
 		(when item
-		  (when (fboundp 'gtk-widget-lock-accelerators)
-		    (gtk-widget-lock-accelerators item))
+		  (gtk-widget-lock-accelerators item)
 		  (funcall (if bar 'gtk-menu-bar-append
 			     'gtk-menu-append) menu item)
 		  (gtk-widget-show item))))

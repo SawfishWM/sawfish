@@ -65,11 +65,12 @@
   (list 'defvar
 	symbol
 	(list 'custom-declare-variable
-	      (list 'quote symbol) value (list 'quote keys))
+	      (list 'quote symbol) value (custom-quote-keys keys))
 	doc))
 
 (defmacro defgroup (symbol doc &rest keys)
-  (list 'custom-declare-group (list 'quote symbol) doc (list 'quote keys)))
+  (list 'custom-declare-group (list 'quote symbol)
+	doc (custom-quote-keys keys)))
 
 (defun custom-declare-variable (symbol value keys)
   (let
@@ -127,9 +128,15 @@
       (setq keys (cdr keys)))
     ;; declare a command to customize this group
     (fset (intern (concat "customize:" (symbol-name group)))
-	  `(lambda ()
-	     (interactive)
-	     (customize ',group)))))
+	  (make-closure `(lambda ()
+			   (interactive)
+			   (customize ',group))))))
+
+(defun custom-quote-keys (keys)
+  (cons 'list (mapcar #'(lambda (x)
+			  (if (eq (car x) 'lambda)
+			      (list 'function x)
+			    (list 'quote x))) keys)))
 
 (defun custom-add-to-group (symbol group)
   (let
@@ -155,8 +162,7 @@
    (mapcar #'(lambda (group-list)
 	       (list (or (get (car group-list) 'custom-group-doc)
 			 (symbol-name (car group-list)))
-		     `(lambda ()
-			(customize ',(car group-list))))) custom-groups)))
+		     `(customize ',(car group-list)))) custom-groups)))
 
 
 ;; support for font and color primitive types

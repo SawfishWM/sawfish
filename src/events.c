@@ -1212,20 +1212,20 @@ events_init (void)
     rep_ADD_SUBR(Sclicked_frame_part_offset);
     rep_ADD_SUBR(Sclicked_frame_part_dimensions);
 
-    rep_INTERN(visibility_notify_hook);
-    rep_INTERN(destroy_notify_hook);
-    rep_INTERN(map_notify_hook);
-    rep_INTERN(unmap_notify_hook);
-    rep_INTERN(reparent_notify_hook);
-    rep_INTERN(property_notify_hook);
-    rep_INTERN(enter_notify_hook);
-    rep_INTERN(leave_notify_hook);
-    rep_INTERN(focus_in_hook);
-    rep_INTERN(focus_out_hook);
-    rep_INTERN(client_message_hook);
-    rep_INTERN(window_moved_hook);
-    rep_INTERN(window_resized_hook);
-    rep_INTERN(shape_notify_hook);
+    rep_INTERN_SPECIAL(visibility_notify_hook);
+    rep_INTERN_SPECIAL(destroy_notify_hook);
+    rep_INTERN_SPECIAL(map_notify_hook);
+    rep_INTERN_SPECIAL(unmap_notify_hook);
+    rep_INTERN_SPECIAL(reparent_notify_hook);
+    rep_INTERN_SPECIAL(property_notify_hook);
+    rep_INTERN_SPECIAL(enter_notify_hook);
+    rep_INTERN_SPECIAL(leave_notify_hook);
+    rep_INTERN_SPECIAL(focus_in_hook);
+    rep_INTERN_SPECIAL(focus_out_hook);
+    rep_INTERN_SPECIAL(client_message_hook);
+    rep_INTERN_SPECIAL(window_moved_hook);
+    rep_INTERN_SPECIAL(window_resized_hook);
+    rep_INTERN_SPECIAL(shape_notify_hook);
 
     rep_INTERN(iconify_window);
     rep_INTERN(uniconify_window);

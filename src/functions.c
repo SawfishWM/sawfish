@@ -1132,7 +1132,7 @@ functions_init (void)
     rep_ADD_SUBR(Sgetpid);
     rep_ADD_SUBR(Sshow_message);
     rep_INTERN(root);
-    rep_INTERN(after_restacking_hook);
+    rep_INTERN_SPECIAL(after_restacking_hook);
 
     rep_mark_static (&message.text);
     rep_mark_static (&message.fg);

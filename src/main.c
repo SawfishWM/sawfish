@@ -116,13 +116,13 @@ Restart the sawmill process.
 static void
 sawmill_symbols (void)
 {
-    rep_INTERN(sawmill_directory);
+    rep_INTERN_SPECIAL(sawmill_directory);
     if(getenv("SAWMILLDIR") != 0)
 	Fset (Qsawmill_directory, rep_string_dup(getenv("SAWMILLDIR")));
     else
 	Fset (Qsawmill_directory, rep_string_dup(SAWMILL_DIR));
 
-    rep_INTERN(sawmill_lisp_lib_directory);
+    rep_INTERN_SPECIAL(sawmill_lisp_lib_directory);
     if(getenv("SAWMILLLISPDIR") != 0)
     {
 	Fset (Qsawmill_lisp_lib_directory,
@@ -131,7 +131,7 @@ sawmill_symbols (void)
     else
 	Fset (Qsawmill_lisp_lib_directory, rep_string_dup(SAWMILL_LISPDIR));
 
-    rep_INTERN(sawmill_site_lisp_directory);
+    rep_INTERN_SPECIAL(sawmill_site_lisp_directory);
     if(getenv("SAWMILLSITELISPDIR") != 0)
     {
 	Fset (Qsawmill_site_lisp_directory,
@@ -144,7 +144,7 @@ sawmill_symbols (void)
 			  "/site-lisp"));
     }
 
-    rep_INTERN(sawmill_exec_directory);
+    rep_INTERN_SPECIAL(sawmill_exec_directory);
     if(getenv("SAWMILLEXECDIR") != 0)
 	Fset (Qsawmill_exec_directory, rep_string_dup(getenv("SAWMILLEXECDIR")));
     else
@@ -169,7 +169,7 @@ sawmill_symbols (void)
     Fset (Qdl_load_path, Fcons(rep_SYM(Qsawmill_exec_directory)->value,
 			       rep_SYM(Qdl_load_path)->value));
 
-    rep_INTERN(sawmill_version);
+    rep_INTERN_SPECIAL(sawmill_version);
     Fset (Qsawmill_version, rep_VAL(&version_string));
 
     rep_INTERN(window_error); rep_ERROR(window_error);
@@ -186,7 +186,7 @@ sawmill_symbols (void)
     rep_ADD_SUBR_INT(Squit);
     rep_ADD_SUBR_INT(Srestart);
 
-    rep_INTERN(before_exit_hook);
+    rep_INTERN_SPECIAL(before_exit_hook);
 }    
 
 static void
@@ -203,7 +203,7 @@ stash_argv (int argc, char **argv)
 	argc--;
 	argv++;
     }
-    rep_INTERN(saved_command_line_args);
+    rep_INTERN_SPECIAL(saved_command_line_args);
     Fset (Qsaved_command_line_args, head);
 }
 

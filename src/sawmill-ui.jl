@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.32 1999/10/29 23:22:41 john Exp $
+;; $Id: sawmill-ui.jl,v 1.33 1999/11/04 22:18:10 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -199,9 +199,9 @@ exec rep "$0" "$@"
 		       (aset contents row (cons (car page) widget))))
 		 (cdr spec))
 	   (gtk-signal-connect clist "select_row"
-			       `(lambda (clist row col)
-				  (build-pages:select-row
-				   ,contents row ,frame)))
+			       #'(lambda (clist row col)
+				   (build-pages:select-row
+				    contents row frame)))
 	   (gtk-clist-select-row clist 0 0)
 	   hbox))))
 
@@ -283,11 +283,10 @@ exec rep "$0" "$@"
 	  (gtk-button-clicked toggle))
       (set-key spec ':value nil))
     (gtk-signal-connect toggle "clicked"
-			`(lambda (w)
-			   (let
-			       ((value (not (get-key ',spec ':value))))
-			     (ui-set
-			      ',spec ',(get-key spec ':variable) value))))
+			#'(lambda (w)
+			    (let
+				((value (not (get-key spec ':value))))
+			      (ui-set spec (get-key spec ':variable) value))))
     toggle))
 
 (put 'string 'builder 'build-entry)
@@ -301,8 +300,8 @@ exec rep "$0" "$@"
 				    (get-key spec ':value)))
       (set-key spec ':value nil))
     (setq id (gtk-signal-connect entry "changed"
-				 `(lambda (w)
-				    (build-entry:changed ',spec))))
+				 #'(lambda (w)
+				     (build-entry:changed spec))))
     (setq spec (nconc spec (list ':widget entry)))
     entry))
 
@@ -319,15 +318,15 @@ exec rep "$0" "$@"
 				    (or (cdr range) 1000000)
 				    1 16 0) 1 0)))
     (gtk-signal-connect entry "changed"
-			`(lambda (w)
-			   (build-entry:changed ',spec)))
+			#'(lambda (w)
+			    (build-entry:changed spec)))
     (setq spec (nconc spec (list ':widget entry)))
     entry))
 
 (defun build-entry:changed (spec)
   (unless (get-key spec ':in-apply-hook)
-    (ui-add-apply-hook `(lambda ()
-			  (build-entry:set ',spec)))
+    (ui-add-apply-hook #'(lambda ()
+			   (build-entry:set spec)))
     (ui-set-button-states)
     (set-key spec ':in-apply-hook nil)))
 
@@ -359,8 +358,8 @@ exec rep "$0" "$@"
     (unless (key-exists-p spec ':value)
       (set-key spec ':value nil))
     (gtk-signal-connect button "clicked"
-			`(lambda (w)
-			   (build-font:clicked ',spec)))
+			#'(lambda (w)
+			    (build-font:clicked spec)))
     (setq spec (nconc spec (list ':widget button)))
     button))
 
@@ -372,22 +371,22 @@ exec rep "$0" "$@"
     (gtk-signal-connect
      (gtk-font-selection-dialog-ok-button fontsel)
      "clicked"
-     `(lambda (w)
-	(let
-	    ((value (gtk-font-selection-dialog-get-font-name ',fontsel)))
-	  (when (and (string= value "") (get-key spec ':allow-nil))
-	    (setq value nil))
-	  (ui-set ',spec (get-key ',spec ':variable) value)
-	  (ui-set-button-label ',(get-key spec ':widget)
-			       (build-font:abbrev value))
-	  (gtk-widget-destroy ',fontsel))))
+     #'(lambda (w)
+	 (let
+	     ((value (gtk-font-selection-dialog-get-font-name ',fontsel)))
+	   (when (and (string= value "") (get-key spec ':allow-nil))
+	     (setq value nil))
+	   (ui-set spec (get-key spec ':variable) value)
+	   (ui-set-button-label (get-key spec ':widget)
+				(build-font:abbrev value))
+	   (gtk-widget-destroy fontsel))))
     (gtk-signal-connect
      (gtk-font-selection-dialog-cancel-button fontsel)
-     "clicked" `(lambda (w)
-		  (gtk-widget-destroy ',fontsel)))
+     "clicked" #'(lambda (w)
+		   (gtk-widget-destroy fontsel)))
     (gtk-signal-connect fontsel
-     "delete_event" `(lambda (w)
-		       (gtk-widget-destroy ',fontsel)))
+     "delete_event" #'(lambda (w)
+			(gtk-widget-destroy fontsel)))
     (gtk-widget-show fontsel)))
 
 (defun build-font:abbrev (font-name)
@@ -406,8 +405,8 @@ exec rep "$0" "$@"
     (unless (key-exists-p spec ':value)
       (set-key spec ':value nil))
     (gtk-signal-connect button "clicked"
-			`(lambda (w)
-			   (build-color:clicked ',spec)))
+			#'(lambda (w)
+			    (build-color:clicked spec)))
     (setq spec (nconc spec (list ':widget button)))
     button))
 
@@ -421,25 +420,25 @@ exec rep "$0" "$@"
     (gtk-signal-connect
      (gtk-color-selection-dialog-ok-button colorsel)
      "clicked"
-     `(lambda (w)
-	(let*
-	    ((color (gtk-color-selection-get-color-interp
-		     ',(gtk-color-selection-dialog-colorsel colorsel)))
-	     (name (and color (format nil "#%04x%04x%04x"
-				      (gdk-color-red color)
-				      (gdk-color-green color)
-				      (gdk-color-blue color)))))
-	  (when (or name (get-key ',spec ':allow-nil))
-	    (ui-set ',spec (get-key ',spec ':variable) name)
-	    (ui-set-button-label ',(get-key spec ':widget) name))
-	  (gtk-widget-destroy ',colorsel))))
+     #'(lambda (w)
+	 (let*
+	     ((color (gtk-color-selection-get-color-interp
+		      (gtk-color-selection-dialog-colorsel colorsel)))
+	      (name (and color (format nil "#%04x%04x%04x"
+				       (gdk-color-red color)
+				       (gdk-color-green color)
+				       (gdk-color-blue color)))))
+	   (when (or name (get-key spec ':allow-nil))
+	     (ui-set spec (get-key spec ':variable) name)
+	     (ui-set-button-label (get-key spec ':widget) name))
+	   (gtk-widget-destroy colorsel))))
     (gtk-signal-connect
      (gtk-color-selection-dialog-cancel-button colorsel)
-     "clicked" `(lambda (w)
-		  (gtk-widget-destroy ',colorsel)))
+     "clicked" #'(lambda (w)
+		   (gtk-widget-destroy colorsel)))
     (gtk-signal-connect colorsel
-     "delete_event" `(lambda (w)
-		       (gtk-widget-destroy ',colorsel)))
+     "delete_event" #'(lambda (w)
+			(gtk-widget-destroy colorsel)))
     (gtk-widget-hide (gtk-color-selection-dialog-help-button colorsel))
     (gtk-widget-show colorsel)))
 
@@ -455,8 +454,8 @@ exec rep "$0" "$@"
     (unless (key-exists-p spec ':value)
       (set-key spec ':value nil))
     (gtk-signal-connect button "clicked"
-			`(lambda (w)
-			   (build-file:clicked ',spec)))
+			#'(lambda (w)
+			    (build-file:clicked spec)))
     (setq spec (nconc spec (list ':widget button)))
     button))
 
@@ -468,22 +467,22 @@ exec rep "$0" "$@"
     (gtk-signal-connect
      (gtk-file-selection-ok-button filesel)
      "clicked"
-     `(lambda (w)
-	(let
-	    ((value (gtk-file-selection-get-filename ',filesel)))
-	  (when (and (string= value "") (get-key spec ':allow-nil))
-	    (setq value nil))
-	  (ui-set ',spec (get-key ',spec ':variable) value)
-	  (ui-set-button-label ',(get-key spec ':widget)
-			       (file-name-nondirectory value))
-	  (gtk-widget-destroy ',filesel))))
+     #'(lambda (w)
+	 (let
+	     ((value (gtk-file-selection-get-filename filesel)))
+	   (when (and (string= value "") (get-key spec ':allow-nil))
+	     (setq value nil))
+	   (ui-set spec (get-key spec ':variable) value)
+	   (ui-set-button-label (get-key spec ':widget)
+				(file-name-nondirectory value))
+	   (gtk-widget-destroy filesel))))
     (gtk-signal-connect
      (gtk-file-selection-cancel-button filesel)
-     "clicked" `(lambda (w)
-		  (gtk-widget-destroy ',filesel)))
+     "clicked" #'(lambda (w)
+		   (gtk-widget-destroy filesel)))
     (gtk-signal-connect filesel
-     "delete_event" `(lambda (w)
-		       (gtk-widget-destroy ',filesel)))
+     "delete_event" #'(lambda (w)
+			(gtk-widget-destroy filesel)))
     (gtk-widget-show filesel)))
 
 (put 'set 'builder 'build-set)
@@ -512,9 +511,10 @@ exec rep "$0" "$@"
 	    (setq history i))
 	  (gtk-widget-show (aref buttons i))
 	  (gtk-signal-connect (aref buttons i) "toggled"
-			      `(lambda (w)
-				 (when (gtk-check-menu-item-active w)
-				   (build-set:select-row ',spec ,i))))
+			      (make-closure
+			       `(lambda (w)
+				  (when (gtk-check-menu-item-active w)
+				    (build-set:select-row spec ,i)))))
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	(gtk-option-menu-set-menu omenu menu)
@@ -534,8 +534,8 @@ exec rep "$0" "$@"
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	(gtk-signal-connect clist "select_row"
-			    `(lambda (clist row col)
-			       (build-set:select-row ',spec row)))
+			    #'(lambda (clist row col)
+				(build-set:select-row spec row)))
 	(setq spec (nconc spec (list ':clist clist)))
 	clist))
      ((eq type 'radio)
@@ -549,9 +549,10 @@ exec rep "$0" "$@"
 	    (gtk-toggle-button-set-state (aref buttons i) t))
 	  (gtk-box-pack-start box (aref buttons i) nil nil)
 	  (gtk-signal-connect (aref buttons i) "toggled"
-			      `(lambda (w)
-				 (when (gtk-toggle-button-active w)
-				   (build-set:select-row ',spec ,i))))
+			      (make-closure
+			       `(lambda (w)
+				  (when (gtk-toggle-button-active w)
+				    (build-set:select-row spec ,i)))))
 	  (setq i (1+ i))
 	  (setq values (cdr values)))
 	box)))))
@@ -600,16 +601,15 @@ exec rep "$0" "$@"
     (setq spec (nconc spec (list ':shell ui-keymap-shell
 				 ':clist clist
 				 ':selection 0)))
-    (gtk-signal-connect copy "clicked" `(lambda ()
-					  (build-keymap:copy ',spec)))
-    (gtk-signal-connect insert "clicked" `(lambda ()
-					    (build-keymap:insert ',spec)))
-    (gtk-signal-connect delete "clicked" `(lambda ()
-					    (build-keymap:delete ',spec)))
-    (gtk-signal-connect clist "select_row" `(lambda (w row col)
-					      (set-key ',spec ':selection row)
-					      (build-keymap:select-row
-					       ',spec)))
+    (gtk-signal-connect copy "clicked" #'(lambda ()
+					   (build-keymap:copy spec)))
+    (gtk-signal-connect insert "clicked" #'(lambda ()
+					     (build-keymap:insert spec)))
+    (gtk-signal-connect delete "clicked" #'(lambda ()
+					     (build-keymap:delete spec)))
+    (gtk-signal-connect clist "select_row" #'(lambda (w row col)
+					       (set-key spec ':selection row)
+					       (build-keymap:select-row spec)))
     (gtk-box-pack-start vbox-2 label)
     (gtk-label-set-justify label 'left)
     (gtk-container-add vbox-2 hbox)
@@ -727,15 +727,15 @@ exec rep "$0" "$@"
     (gtk-box-pack-start vbox-2 entry-hbox)
     (gtk-container-add vbox-2 scroller)
     (gtk-signal-connect cmd-clist "select_row"
-			`(lambda (w row col)
-			   (set-key ',spec ':active-cmd row)
-			   (build-keymap-shell:set-command ',spec)))
+			#'(lambda (w row col)
+			    (set-key spec ':active-cmd row)
+			    (build-keymap-shell:set-command spec)))
     (gtk-signal-connect entry "changed"
-			`(lambda (w)
-			   (build-keymap-shell:set-event ',spec)))
+			#'(lambda (w)
+			    (build-keymap-shell:set-event spec)))
     (gtk-signal-connect entry-button "clicked"
-			`(lambda ()
-			   (build-keymap-shell:grab ',spec)))
+			#'(lambda ()
+			    (build-keymap-shell:grab spec)))
 
     ;; 2. the keymap selection widget
     (gtk-scrolled-window-set-policy scroller-2 'automatic 'automatic)
@@ -754,8 +754,8 @@ exec rep "$0" "$@"
 		(gtk-widget-show-all (aref (aref maps row) 2))))
 	  pages)
     (gtk-signal-connect map-clist "select_row"
-			`(lambda (w row col)
-			   (build-keymap-shell:select-map ',spec ',maps row)))
+			#'(lambda (w row col)
+			    (build-keymap-shell:select-map spec maps row)))
     (gtk-clist-select-row map-clist 0 0)
 
     (gtk-box-pack-start vbox frame t t)
@@ -876,9 +876,10 @@ exec rep "$0" "$@"
 	(setq history i))
       (gtk-widget-show button)
       (gtk-signal-connect button "toggled"
-			  `(lambda (w)
-			     (when (gtk-check-menu-item-active w)
-			       (build-frame-style:set ',spec ',(car values)))))
+			  (make-closure
+			   `(lambda (w)
+			      (when (gtk-check-menu-item-active w)
+				(build-frame-style:set spec ',(car values))))))
       (setq i (1+ i))
       (setq values (cdr values))
       (setq last button))
@@ -910,7 +911,7 @@ exec rep "$0" "$@"
 					(setq full dir)
 					(throw 'out t))))
 				'("%s" "%s.tar#tar/%s" "%s.tar.gz#tar/%s"
-				 "%s.tar.Z#tar/%s" "%s.tar.bz2#tar/%s"))
+				  "%s.tar.Z#tar/%s" "%s.tar.bz2#tar/%s"))
 			  nil)
 		    (setq full (expand-file-name "README" full))
 		    (if (file-exists-p full)
