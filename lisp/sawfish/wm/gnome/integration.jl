@@ -30,9 +30,6 @@
 
   (define-structure-alias gnome-int sawfish.wm.gnome.integration)
 
-  (eval-when-compile (require 'sawfish.wm.commands.xterm))
-  (eval-when-compile (require 'sawfish.wm.customize))
-
   ;; delete the `Restart' and `Quit' items from the root menu
   (let ((restart (rassoc '(restart) root-menu))
 	(quit (rassoc '(quit) root-menu)))
@@ -52,6 +49,7 @@
     :after-set (lambda () (gnome-use-capplet-changed)))
 
   (defun gnome-use-capplet-changed ()
+    (require 'sawfish.wm.customize)
     (if gnome-use-capplet
 	(progn
 	  (setq customize-program "sawfish-capplet")
@@ -65,6 +63,7 @@
 
   ;; invoke the GNOME terminal instead of xterm
   (unless (variable-customized-p 'xterm-program)
+    (require 'sawfish.wm.commands.xterm)
     (setq xterm-program "gnome-terminal"))
 
   ;; use the GNOME help browser and url launcher

@@ -119,7 +119,7 @@
       (top-border . shaped-transient)
       (none . unframed)))
 
-  (define (match-window-widget symbol)
+  (define (match-window-widget)
     (let ((props (mapcar
 		  (lambda (sub)
 		    (cons (cadr sub)

@@ -174,7 +174,7 @@ Note that the value of the `:group' key is not evaluated."
       value))
 
   (define (custom-declare-group group &optional doc keys)
-    (let (container tem)
+    (let (container)
       (while keys
 	(case (car keys)
 	  ((:group)
@@ -271,7 +271,7 @@ of choices."
 	      (or (assq (car group) (cddr parent))
 		  (error "No such group: %S" full-group))))))
 
-  (define (custom-add-to-group cell full-group &optional tail)
+  (define (custom-add-to-group cell full-group)
     (when (and (symbolp full-group) (not (null full-group)))
       (setq full-group (list full-group)))
     (let loop ((group full-group)

@@ -43,7 +43,7 @@ LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
 
 override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(ESD_CFLAGS)
 
-all : sawfish libclient.o $(DL_OBJS) $(LISP_OBJS) gtk-style .libexec
+all : sawfish libclient.o $(DL_OBJS) .libexec $(LISP_OBJS) gtk-style
 
 sawfish : $(OBJS) $(LIBOBJS)
 	$(rep_LIBTOOL) --mode=link $(CC) -export-dynamic $(LDFLAGS) \
