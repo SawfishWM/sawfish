@@ -11,6 +11,8 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
+  ! `:type (or ...)' doesn't get serialized
+
   ! Everytime my system's hardware clock get's resetted (this happens
     from time to time because my motherboard's battery has become a
     little weak), my whole sawfish configuration is erased and replaced
@@ -27,12 +29,18 @@ Outstanding bugs
 
     (because they share the same ~/.sawmill/custom file)
 
-  ! keeping unshown windows unmapped isn't so great
+  ! keeping unshown windows unmapped isn't so great?
 
-    (because the app may withdraw the window by unmapping it, but
-    sawmill won't notice.. perhaps reparent the window+frame into a
-    ``pseudo'' root window that is unmapped?)
-    
+    the ICCCM says that to go to Withdrawn state a window must send a
+    synthetic UnmapNotify, so this is not a problem. But it also says:
+    `NormalState - the client's top-level window is viewable'
+
+    one option is to set all hidden windows to IconicState. But this
+    would probably confuse the tasklist applet..
+
+    [ I have a patch to do this, and it totally breaks the workspace
+      handling of desk-guide and the tasklist ]
+
   ! cancel the GNOME logout dialog, window decorations aren't redrawn
 
     [ after looking at the X event trace, I don't think it's a sawmill

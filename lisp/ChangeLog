@@ -1,4 +1,57 @@
+2000-07-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	Work to correct the problem that defcustom's with secondary
+	types that need converting to-from strings weren't being
+	converted, since only the outer type was being looked at:
+
+	* custom.jl (custom-serialize, custom-deserialize,
+	define-custom-serializer, define-custom-deserializer):
+	functions to do deep conversions across (type, value) pairs
+
+	(custom-set-typed-variable): similar to custom-set-variable,
+	but with an extra arg, the type of the variable. This will
+	slowly replace c-s-v in `custom' files. The type allows the
+	conversion to work even if the variable has not yet been
+	defined
+
+	(variable-type): new function
+
+	(custom-set-color, custom-set-font): removed, just conversion
+	functions now. Compatibility functions in compat.jl
+
+	* customize.jl (customize-set): emitted forms call
+	custom-set-typed-variable not custom-set-variable and include
+	type of variable (unless variable has a custom-set property)
+
+	* nokogiri-sawfish.jl (nokogiri-report-slot): serialize the
+	value to something that's printable (unless it has a custom-get
+	property)
+
+2000-07-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* match-window.jl: removed unused group-widget definition
+
+	* wm-spec.jl, gnome.jl: use ws-set-window-workspaces instead of
+	window-add-to-workspaces when honouring _WIN_WORKSPACE and
+	_NET_WM_DESKTOP properties
+
+	* gnome-int.jl: only redefine xterm-program if it's not been
+	customized
+
 2000-07-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* menus.jl (popup-menu): when writing the menu spec across the
+	pipe, format it to a string, then write that. This only does a
+	single system call
+
+	* custom.jl (custom-set): new function, wraps a thunk to do the
+	actual variable setting in the necessary pre- and post-fix
+	code. Also sets a property 'custom-user-value on all variables
+	that have been customized
+	(variable-customized-p): new function
+	(custom-set-variable): now in terms of custom-set
+
+	* keymaps.jl (custom-set-keymap): now in terms of custom-set
 
 	* viewport.jl (move-window-to-viewport): remember to correct
 	for 1.. to vs 0.. indexing

@@ -1,3 +1,10 @@
+2000-07-13  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x.c, server.c, keys.c, images.c, functions.c, frames.c,
+	fonts.c: use global_symbol_value () instead of Fsymbol_value ()
+	in places where the symbol is constant, and it may be called
+	from gaolled code
+
 2000-07-12  John Harper  <john@dcs.warwick.ac.uk>
 
 	* events.c (configure_request): ensure that one (and only one)
