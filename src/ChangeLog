@@ -1,5 +1,10 @@
 1999-10-03  John Harper  <john@dcs.warwick.ac.uk>
 
+	* version 0.10
+
+	* windows.c (Fhide_window): if the hidden window has the focus,
+	call focus_on_window (0)
+
 	* windows.c (focus_on_window): use RevertToNone instead of
 	RevertToParent
 

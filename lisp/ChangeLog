@@ -1,5 +1,20 @@
 1999-10-03  John Harper  <john@dcs.warwick.ac.uk>
 
+	* version 0.10
+
+	* workspace.jl (auto-workspace-alist): new variable, maps
+	window names to the workspace they should start on
+
+	* gnome.jl (gnome-honour-client-state): when _WIN_WORKSPACE is
+	set, just set the window's `workspace' property
+
+	* smart-placement.jl (sp-important-windows-weight): new
+	variable, also, changed the weight from 1000 to 10
+	(sp-auto-weight-alist): new variable, map window names to
+	overlap weights
+	(sp-do-placement): truncate the window's dimensions to those of
+	the screen
+
 	* menus.jl: instead of saving and restoring the _focused_
 	window while the menu is popped, save the window that gave us
 	the current event, then reinstate it when dispatching the
