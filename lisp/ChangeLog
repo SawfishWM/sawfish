@@ -1,3 +1,13 @@
+2000-02-22  John Harper  <john@dcs.warwick.ac.uk>
+
+	* configure.jl (configure-choose-gravity): new method of
+	choosing gravity from window geometry
+	(configure-request-handler): deleted the equal-ratio thing,
+	it's too complex, too many grey areas and special cases
+
+	* grow-pack.jl: new file implements ctwm-like pack and grow
+	functions, from Kai Grossjohann
+
 2000-02-21  John Harper  <john@dcs.warwick.ac.uk>
 
 	* edges.jl (get-visible-window-edges): don't include edges from

@@ -153,4 +153,12 @@
 (autoload 'size-window-subtract-row "size-window" t)
 (autoload 'size-window-add-column "size-window" t)
 (autoload 'size-window-subtract-column "size-window" t)
+(autoload 'grow-window-left "grow-pack" t)
+(autoload 'grow-window-right "grow-pack" t)
+(autoload 'grow-window-up "grow-pack" t)
+(autoload 'grow-window-down "grow-pack" t)
+(autoload 'pack-window-left "grow-pack" t)
+(autoload 'pack-window-right "grow-pack" t)
+(autoload 'pack-window-up "grow-pack" t)
+(autoload 'pack-window-down "grow-pack" t)
 ;;; ::autoload-end::

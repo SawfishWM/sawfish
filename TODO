@@ -11,6 +11,9 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
+  ! with panel `keep below' and `autohide' options, windows are
+    restacked needlessly causing flickers
+
   ! problem with the timestamp sanity checking, if you turn the
     system clock backwards, it discards all events..!
 
@@ -148,13 +151,6 @@ Window manager tasks
     the kwm sources, which are supposed to be ``heavily commented'' ]
 
   + clone some ctwm functions:
-
-       f.pack string
-               Where string is either : "right", "left", "top" or
-               "bottom" The current window is moved in the speci
-               fied  direction  until  it  reaches  an   obstacle
-               (either another window, or the screen border). The
-               pointer follows the window.
 
        f.bottomzoom
                This function is similar to the  f.fullzoom  func
