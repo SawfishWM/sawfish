@@ -536,6 +536,14 @@ all workspaces."
 	 (iconify-window w)
 	 t)))
 
+(defun ws-honour-client-state (w)
+  (let
+      ((state (get-x-property w 'WM_STATE)))
+    (when state
+      (setq state (aref (nth 2 state) 0))
+      (when (eq state IconicState)
+	(window-put w 'iconified t)))))
+
 (defun ws-set-client-state (w)
   (set-x-property w 'WM_STATE
 		  (vector (if (window-get w 'iconified)
@@ -566,9 +574,11 @@ all workspaces."
   (add-hook 'destroy-notify-hook 'ws-remove-window t)
   (add-hook 'map-notify-hook 'ws-window-mapped t)
   (add-hook 'client-message-hook 'ws-client-msg-handler t)
+  (add-hook 'before-add-window-hook 'ws-honour-client-state)
   (add-hook 'add-window-hook 'ws-set-client-state t)
   (add-hook 'window-state-change-hook 'ws-set-client-state t)
   (add-hook 'sm-window-save-functions 'ws-save-session)
   (add-hook 'sm-restore-window-hook 'ws-restore-session)
   (sm-add-saved-properties 'sticky 'iconified)
+  (mapc 'ws-honour-client-state (managed-windows))
   (mapc 'ws-add-window (managed-windows)))
