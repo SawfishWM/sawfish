@@ -73,6 +73,7 @@
 			 sawfish.wm.state.transient
 			 sawfish.wm.state.shading
 			 sawfish.wm.state.iconify
+			 sawfish.wm.state.ignored
 			 sawfish.wm.server))
 
 ;; create the exports from sawfish.wm
@@ -97,7 +98,8 @@
 		   sawfish.wm.workspace
 		   sawfish.wm.state.iconify
 		   sawfish.wm.state.shading
-		   sawfish.wm.state.transient))
+		   sawfish.wm.state.transient
+		   sawfish.wm.state.ignored))
 
 (export-bindings (parse-interface
 		  '(compound-interface
@@ -122,7 +124,8 @@
 		    (structure-interface sawfish.wm.workspace)
 		    (structure-interface sawfish.wm.state.iconify)
 		    (structure-interface sawfish.wm.state.shading)
-		    (structure-interface sawfish.wm.state.transient))))
+		    (structure-interface sawfish.wm.state.transient)
+		    (structure-interface sawfish.wm.state.ignored))))
 
 (let ((sawfish-load-all (lambda (s)
 			  ;; ensure files are loaded in the correct structure
