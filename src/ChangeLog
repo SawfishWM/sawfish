@@ -1,5 +1,14 @@
 2000-02-29  John Harper  <john@dcs.warwick.ac.uk>
 
+	* functions.c (Fdisplay_message): clicking the pointer on the
+	message window now removes it
+
+	* commands.c (Fcall_command): re-enabled the following
+	interactive codes: `a' (function), `C' (command), `D'
+	(directory), `f' (existing file), `F' (file), `k' (event), `n'
+	(number), `N' (prefix or number), `s' (string), `S' (symbol),
+	`v' (variable)
+
 	* events.c (key_press, button_press, motion_notify): always
 	call XAllowEvents () with Sync{Keyboard,Pointer}, not Async
 

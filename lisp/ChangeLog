@@ -1,3 +1,17 @@
+2000-02-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keymaps.jl (global-keymap): bind A-x to cc-with-output-to-screen
+
+	* with-output.jl (call-with-output-to-screen,
+	call-command-with-output-to-screen): new functions
+
+	* prompt.jl: Method of requesting user input, with completion,
+	validation, etc. From Topi Paavola <tjp@cc.jyu.fi> with a bunch
+	of my dirty hacks to make it act moslty like Jade's `prompt'
+
+	* prompt-extras.jl: Some functions ported from Jade to do more
+	esoteric prompting (files, directories, from a list, etc..)
+
 2000-02-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* shade-hover.jl (shade-hover-enter): allow shade-hover to be

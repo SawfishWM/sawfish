@@ -171,4 +171,6 @@
 (autoload 'prompt-from-list "prompt-extras")
 (autoload 'call-with-output-to-screen "with-output")
 (autoload 'call-command-with-output-to-screen "with-output" t)
+(autoload 'prompt-for-string "prompt-extras")
+(autoload 'prompt-for-number "prompt-extras")
 ;;; ::autoload-end::
