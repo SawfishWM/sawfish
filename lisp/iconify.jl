@@ -114,6 +114,25 @@ all workspaces."
     (make-window-sticky w)))
 
 
+;; MacOS X single-window mode stuff
+
+;;;###autoload
+(defun toggle-single-window-mode (w)
+  (interactive "%W")
+  (let
+      ((iconify-whole-group nil)
+       fun)
+    (map-other-window-groups
+     (lambda (x)
+       (when (and (windows-share-workspace-p w x)
+		  (not (window-get x 'ignored)))
+	 (unless fun
+	   (setq fun (if (window-get x 'iconified)
+			 uniconify-window
+		       iconify-window)))
+	 (fun x))) w)))
+
+
 ;; hooks
 
 (defun ws-client-msg-handler (w prop data)
