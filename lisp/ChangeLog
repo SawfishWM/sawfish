@@ -1,3 +1,27 @@
+1999-08-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (raise-selected-windows,
+	warp-to-selected-windows): new variables
+
+	* custom.jl: new file, inspired by Emacs' customize system.
+	This file allows Lisp libraries to declare their configurable
+	settings (and their types)
+
+	* customize.jl: new file, this uses the defcustom information
+	to present the user a graphical configuration interface. These
+	settings are stored in ~/.sawmill-custom and loaded on
+	initialisation
+
+	* workspace.jl, transient.jl, place-window.jl, move-resize.jl,
+	menus.jl, focus.jl, auto-raise.jl: changed some defvar's to
+	suitable defcustom's
+
+	* sawmill.jl: load custom settings
+
+1999-08-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (display-window): raise the chosen window
+
 1999-08-03  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.1

@@ -1,3 +1,14 @@
+1999-08-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* main.c (sawmill_symbols): set interrupt-mode and error-mode
+	to top-level; try to stop the wm getting hung in a
+	recursive-edit
+
+1999-08-04  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome.c (rep_dl_init): delete some properties from the root
+	window that other wm's may have set but not removed
+
 1999-08-03  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.1
