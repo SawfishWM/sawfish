@@ -41,7 +41,9 @@
        (windows (cdr (memq ':windows args)))
        x-edges y-edges)
     (mapc (lambda (w)
-	    (when (and (window-visible-p w)
+	    (when (and (window-mapped-p w)
+		       (window-visible-p w)
+		       (not (window-outside-viewport-p w))
 		       (or with-ignored-windows
 			   (not (window-get w 'ignored)))
 		       (not (memq w windows-to-ignore))
