@@ -44,40 +44,45 @@
 	  ((hints (window-size-hints w))
 	   (gravity (or (window-get w 'gravity)
 			(cdr (assq 'window-gravity hints)))))
-	(when (memq gravity '(east south-east north-east))
-	  ;; [x] placed relative to the right of the frame
-	  (rplaca coords (- (car coords) (- (car tem) (car dims)))))
-	(when (memq gravity '(north center south))
-	  ;; [x] placed relative to the center
-	  (rplaca coords (- (car coords) (/ (- (car tem) (car dims)) 2))))
-	(when (memq gravity '(south south-east south-west))
-	  ;; [y] placed relative to the bottom of the frame
-	  (rplacd coords (- (cdr coords) (- (cdr tem) (cdr dims)))))
-	(when (memq gravity '(north center south))
-	  ;; [y] placed relative to the center
-	  (rplacd coords (- (cdr coords) (/ (- (cdr tem) (cdr dims)) 2))))
+	(cond
+	 (gravity
+	  (when (memq gravity '(east south-east north-east))
+	    ;; [x] placed relative to the right of the frame
+	    (rplaca coords (- (car coords) (- (car tem) (car dims)))))
+	  (when (memq gravity '(north center south))
+	    ;; [x] placed relative to the center
+	    (rplaca coords (- (car coords) (/ (- (car tem) (car dims)) 2))))
+	  (when (memq gravity '(south south-east south-west))
+	    ;; [y] placed relative to the bottom of the frame
+	    (rplacd coords (- (cdr coords) (- (cdr tem) (cdr dims)))))
+	  (when (memq gravity '(north center south))
+	    ;; [y] placed relative to the center
+	    (rplacd coords (- (cdr coords) (/ (- (cdr tem) (cdr dims)) 2)))))
+
+	 ;; I confess: I used Mathematica to find these identities. s
+	 ;; is the screen size, l and r the left and right offsets from
+	 ;; the screen edges, and c the window width. Capitalised
+	 ;; values are after the resize.
+	 ;;
+	 ;; In[1]:= Solve[{s==l+r+c, s==L+R+C, l/r == L/R}, {L,R}]
+	 ;;
+	 ;;                -(C l) + l s         r (C - s)
+	 ;; Out[1]= {{L -> ------------, R -> -(---------)}}
+	 ;;                   l + r               l + r
+	 ((or configure-auto-gravity (window-get w 'auto-gravity))
+	  (let
+	      ;; XXX assumes constant frame size
+	      ((ftem (cons (+ (car tem) (- (car fdims) (car dims)))
+			   (+ (cdr tem) (- (cdr fdims) (cdr dims))))))
+	    (rplaca coords (/ (+ (- (* (car ftem) (car coords)))
+				 (* (car coords) (screen-width)))
+			      (- (screen-width) (car fdims))))
+	    (rplacd coords (/ (+ (- (* (cdr ftem) (cdr coords)))
+				 (* (cdr coords) (screen-height)))
+			      (- (screen-height) (cdr fdims)))))))
 	(setq dims tem)))
     (when (setq tem (cdr (assq 'position alist)))
       (setq coords tem))
     (move-resize-window-to w (car coords) (cdr coords) (car dims) (cdr dims))))
 
-(defun choose-window-gravity-by-position (w)
-  (let
-      ((coords (window-position w))
-       (dims (window-frame-dimensions w))
-       i)
-    (rplaca coords (+ (car coords) (/ (car dims) 2)))
-    (rplacd coords (+ (cdr coords) (/ (cdr dims) 2)))
-    (setq i (+ (max 0 (min 2 (/ (car coords) (/ (screen-width) 3))))
-	       (max 0 (min 6 (* 3 (/ (cdr coords) (/ (screen-height) 3)))))))
-    (window-put w 'gravity (aref [north-west north north-east
-				  west center east
-				  south-west south south-east] i))))
-
-(defun choose-window-gravity-callback (w)
-  (when configure-auto-gravity
-    (choose-window-gravity-by-position w)))
-
 (add-hook 'configure-request-hook configure-request-handler)
-(add-hook 'after-add-window-hook choose-window-gravity-callback)
-(add-hook 'window-moved-hook choose-window-gravity-callback)
