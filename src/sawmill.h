@@ -44,8 +44,13 @@ typedef int bool;
 
 /* Uncomment the following line to get reams of debugging data. But
    redirect it to a non-X terminal (otherwise we can't printf when
-   the server is grabbed => deadlock) */
-/* #define DEBUG */
+   the server is grabbed => deadlock)
+
+   You can also define it to zero to store the debugging output in
+   one of rep's buffers. Send the sawmill process a SIGUSR2 to print
+   the last 4k or so to stderr. */
+
+/* #define DEBUG 1 */
 
 
 /* Type defs */
@@ -216,10 +221,12 @@ enum exit_codes {
 # define FALSE 0
 #endif
 
-#ifdef DEBUG
-# define DB(x) printf x
-#else
+#if !defined (DEBUG)
 # define DB(x) do { ; } while (0)
+#elif DEBUG == 0
+# define DB(x) db_printf x
+#else
+# define DB(x) printf x
 #endif
 
 #endif /* SAWMILL_H */
