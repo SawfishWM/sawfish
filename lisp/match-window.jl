@@ -61,6 +61,7 @@
     (focus-click-through boolean)
     (ignore-window-input-hint boolean)
     (ignore-program-position boolean)
+    (raise-on-focus boolean)
     (group symbol ,(lambda ()
 		     (delete-if-not symbolp (window-group-ids))))
     (place-mode symbol ,(lambda ()
