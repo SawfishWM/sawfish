@@ -190,8 +190,6 @@
 	       (window-put w 'no-history t)
 	       (window-put w 'never-iconify t)
 	       (window-put w 'never-maximize t)
-	       ;; XXX the panel should set this, but sometimes it fails..?
-	       (window-put w 'avoid t)
 	       ;; XXX the panel is broken, in that it doesn't check
 	       ;; XXX that the wm gave it the position that it wanted.
 	       ;; XXX (The wm is under no obligation; the panel should
@@ -280,6 +278,19 @@
 		       (and tem (zerop (logand values WIN_STATE_MAXIMIZED_HORIZ))))
 		   (maximize-window-horizontally-toggle w))))
 	   t)
+	  ((and (eq type '_WIN_HINTS) (windowp w))
+	   (let ((mask (aref data 0))
+		 (bits (aref data 1))
+		 tem)
+	     (unless (zerop (logand mask WIN_HINTS_SKIP_FOCUS))
+	       (window-put w 'cycle-skip
+			   (not (zerop (logand bits WIN_HINTS_SKIP_FOCUS)))))
+	     (unless (zerop (logand mask WIN_HINTS_SKIP_WINLIST))
+	       (window-put w 'window-list-skip
+			   (not (zerop (logand bits WIN_HINTS_SKIP_WINLIST)))))
+	     (unless (zerop (logand mask WIN_HINTS_DO_NOT_COVER))
+	       (window-put w 'avoid
+			   (not (zerop (logand bits WIN_HINTS_DO_NOT_COVER)))))))
 	  ((and (eq type '_WIN_LAYER) (windowp w))
 	   (set-window-depth w (- (aref data 0) WIN_LAYER_NORMAL))
 	   t)))

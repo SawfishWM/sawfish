@@ -1,3 +1,13 @@
+2000-12-19  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/gnome.jl (gnome-client-message-handler):
+	handle a _WIN_HINTS client message type, format is similar to
+	_WIN_STATE message
+
+	* sawfish/wm/state/gnome.jl (gnome-window-class-hacks): removed
+	the hardcoding of the `avoid' property for the panel. (George
+	Lebl asked me to)
+
 2000-12-18  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/menus.jl (menus-include-shortcuts): new option,
