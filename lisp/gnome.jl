@@ -115,7 +115,7 @@
 	 t)))
 
 (defun gnome-event-proxyer ()
-  (when (eq (current-event-window) 'root)
+  (when (and (current-event) (eq (current-event-window) 'root))
     (let
 	((event (event-name (current-event))))
       ;; XXX should check that there's no binding of the
@@ -150,11 +150,7 @@
   (delete-x-property 'root '_WIN_AREA_COUNT)
   (delete-x-property 'root '_WIN_WORKSPACE_NAMES)
 
-  (add-hook 'enter-workspace-hook 'gnome-set-workspace)
-  (add-hook 'add-workspace-hook 'gnome-set-workspace)
-  (add-hook 'delete-workspace-hook 'gnome-set-workspace)
-  (add-hook 'add-to-workspace-hook 'gnome-set-workspace)
-  (add-hook 'remove-from-workspace-hook 'gnome-set-workspace)
+  (add-hook 'workspace-state-change-hook 'gnome-set-workspace)
 
   (add-hook 'add-window-hook 'gnome-set-client-list)
   (add-hook 'destroy-notify-hook 'gnome-set-client-list)
