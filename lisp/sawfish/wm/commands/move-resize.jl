@@ -305,11 +305,9 @@
 		 (setq move-resize-y (cdr coords)))))
 	    ((eq move-resize-function 'resize)
 	     (let
-		 ((x-base (or (cdr (or (assq 'base-width move-resize-hints)
-				       (assq 'min-width move-resize-hints))) 0))
+		 ((x-base (or (cdr (assq 'base-width move-resize-hints)) 0))
 		  (x-inc (or (cdr (assq 'width-inc move-resize-hints)) 1))
-		  (y-base (or (cdr (or (assq 'base-height move-resize-hints)
-				       (assq 'min-height move-resize-hints))) 0))
+		  (y-base (or (cdr (assq 'base-height move-resize-hints)) 0))
 		  (y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1)))
 	       (when (memq resize-edge-mode '(grab border-grab))
 		 (add-edges ptr-x ptr-y))
