@@ -161,6 +161,7 @@ main(int argc, char *argv[])
     char *user_input = 0;
 
     rl_completion_entry_function = (void *)completion_generator;
+    rl_basic_quote_characters = "\"";
 #endif
 
     argc--; argv++;
