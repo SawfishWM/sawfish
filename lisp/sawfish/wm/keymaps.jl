@@ -157,13 +157,20 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
 
 (defun custom-set-keymap (symbol value &rest args)
   (when (eq (car value) 'keymap)
-    (apply 'custom-set-variable symbol
-	   (cons 'keymap
-		 (delq nil (mapcar #'(lambda (cell)
-				       (let
-					   ((ev (lookup-event (cdr cell))))
-					 (and ev (cons (car cell) ev))))
-				   (cdr value)))) args)))
+    (let
+	((old-value (and (boundp symbol) (symbol-value symbol)))
+	 (new-tail (delq nil (mapcar #'(lambda (cell)
+					 (let
+					     ((ev (lookup-event (cdr cell))))
+					   (and ev (cons (car cell) ev))))
+				     (cdr value)))))
+      (if (and old-value (eq (car old-value) 'keymap))
+	  ;; hijack the old keymap to preserve eq-ness
+	  (progn
+	    (rplacd old-value new-tail)
+	    (setq value old-value))
+	(setq value (cons 'keymap new-tail)))
+      (apply 'custom-set-variable symbol value args))))
 
 (defun custom-keymap-widget (symbol value doc)
   `(keymap :variable ,symbol
