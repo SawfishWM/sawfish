@@ -49,13 +49,13 @@ install : all installdirs
 	$(INSTALL_SCRIPT) sawfish-menu.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-menu
 	$(INSTALL_SCRIPT) sawfish-client.jlc $(DESTDIR)$(bindir)/sawfish-client
 	$(INSTALL_SCRIPT) sawfish-about.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-about
-	$(INSTALL_DATA) sawfish.png $(DESTDIR)$(G_PIXMAP_DIR)
+	$(INSTALL_DATA) sawfish.png $(DESTDIR)$(G_PIXMAP_DIR)/sawfish-logo.png
 
 uninstall :
 	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-menu
 	rm -f $(DESTDIR)${bindir}/sawfish-client
 	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-about
-	rm -f $(DESTDIR)$(G_PIXMAP_DIR)/sawfish.png
+	rm -f $(DESTDIR)$(G_PIXMAP_DIR)/sawfish-logo.png
 
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir) \
