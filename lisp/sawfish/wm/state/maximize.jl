@@ -545,7 +545,9 @@ unmaximized."
   (add-swapped-properties
    'unmaximized-geometry 'maximized-vertically 'maximized-horizontally)
 
-  (add-hook 'after-move-hook maximize-discard-move)
+  ;; This is now disabled - it doesn't really make sense for moving..
+  ;; (add-hook 'after-move-hook maximize-discard-move)
+
   (add-hook 'after-resize-hook maximize-discard-resize)
 
   (gaol-add window-maximized-p window-maximized-horizontally-p

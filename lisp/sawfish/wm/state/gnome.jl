@@ -300,8 +300,10 @@
 	((_WIN_WORKSPACE)                       
 	  (let ((space (get-x-property w '_WIN_WORKSPACE)))
 	    (when (and space (eq (car space) 'CARDINAL))
-	      (send-window-to-workspace-from-first
-	       w (aref (nth 2 space) 0))))))))
+	      (let ((count (aref (nth 2 space) 0)))
+		(unless (window-appears-in-workspace-p
+			 w (workspace-id-from-logical count))
+		  (send-window-to-workspace-from-first w count)))))))))
 
   (define (gnome-event-proxyer)
     (when (and (current-event) (eq (current-event-window) 'root))
