@@ -91,6 +91,7 @@
     (left-edge . 21)
     (right-edge . 45)
     (top-edge . -15)
+    (cursor . hand2)
     (keymap . title-keymap))
 
    ;; iconify button
@@ -118,25 +119,33 @@
    ((background . (,bm-left-image ,bm-left-hl-image))
     (left-edge . -4)
     (top-edge . -15)
-    (bottom-edge . 0))
+    (bottom-edge . 0)
+    (cursor . hand2)
+    (keymap . title-keymap))
 
    ;; right border
    ((background . (,bm-right-image ,bm-right-hl-image))
     (right-edge . -4)
     (top-edge . -15)
-    (bottom-edge . 0))
+    (bottom-edge . 0)
+    (cursor . hand2)
+    (keymap . title-keymap))
 
    ;; top border
    ((background . (,bm-top-image ,bm-top-hl-image))
     (left-edge . 0)
     (right-edge . 0)
-    (top-edge . -19))
+    (top-edge . -19)
+    (cursor . hand2)
+    (keymap . title-keymap))
 
    ;; bottom border
    ((background . (,bm-bottom-image ,bm-bottom-hl-image))
     (left-edge . 0)
     (right-edge . 0)
-    (bottom-edge . -4))
+    (bottom-edge . -4)
+    (cursor . hand2)
+    (keymap . title-keymap))
 
    ;; top-left corner
    ((background . (,bm-top-left-image ,bm-top-left-hl-image))
