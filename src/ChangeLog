@@ -1,3 +1,9 @@
+2001-04-22  John Harper  <jsh@eazel.com>
+
+	* colors.c (colors_init): use `#000000' instead of `black'.
+	This will still work even if rgb.txt doesn't exist. Also check
+	for Fget_color () throwing an exception
+
 2001-04-11  John Harper  <jsh@eazel.com>
 
 	Fixed bug 6970 (X plugin doesn't update width and height of

@@ -209,7 +209,12 @@ colors_init (void)
     rep_ADD_SUBR(Scolorp);
     rep_INTERN_SPECIAL(default_foreground);
     if (!batch_mode_p ())
-	Fset (Qdefault_foreground, Fget_color (rep_string_dup("black")));
+    {
+	repv black = Fget_color (rep_string_dup("#000000"));
+	if (black == rep_NULL)
+	    black = Qnil;
+	Fset (Qdefault_foreground, black);
+    }
     rep_pop_structure (tem);
 }
 
