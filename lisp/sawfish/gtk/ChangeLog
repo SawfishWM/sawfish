@@ -1,5 +1,10 @@
 2002-11-03  John Harper  <jsh@unfactored.org>
 
+	* widgets/font.jl (make-font-item): support for new typed font
+	descriptions. Convert the Xft description to and from the Pango
+	descriptions used by GtkFontSelection. Needs some work to
+	handle XLFD fonts as well when $GDK_USE_XFT isn't set
+
 	* widget.jl, stock.jl.gtk: fixed some button-box issues
 
 2002-11-02  John Harper  <jsh@unfactored.org>

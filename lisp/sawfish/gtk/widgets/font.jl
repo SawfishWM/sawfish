@@ -24,8 +24,10 @@
 (define-structure sawfish.gtk.widgets.font ()
 
     (open rep
+	  rep.system
 	  gui.gtk-2.gtk
-	  sawfish.gtk.widget)
+	  sawfish.gtk.widget
+	  sawfish.wm.util.font)
 
   (defconst default-font "fixed")
 
@@ -62,10 +64,23 @@
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (gtk-entry-set-text entry (and (stringp x) x))))
+		   (cond ((stringp x)
+			  (gtk-entry-set-text entry x))
+			 ((and (consp x)
+			       (string-equal (car x) "Xft"))
+			  ;; FIXME: should also handle XLFD here
+			  (let ((face (xft-description->face (cdr x))))
+			    (when face
+			      (gtk-entry-set-text
+			       entry (face->pango-description face)))))
+			 (t (gtk-entry-set-text entry default-font)))))
 	  ((clear) (lambda ()
 		     (gtk-entry-set-text entry default-font)))
-	  ((ref) (lambda () (gtk-entry-get-text entry)))
+	  ((ref) (lambda ()
+		   ;; FIXME: Assumes we'll always be using Xft..
+		   (let* ((pango-name (gtk-entry-get-text entry))
+			  (face (pango-description->face pango-name)))
+		     (and face (cons "Xft" (face->xft-description face))))))
 	  ((gtk-widget) box)
 	  ((validp) (lambda (x) (stringp x)))))))
 
