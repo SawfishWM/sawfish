@@ -1,95 +1,116 @@
-;; sawmill-gaol.jl -- protected environment for themes
-;; $Id$
+#| gaol.jl -- protected environment for themes
 
-(require 'gaol)
-(provide 'sawmill-gaol)
+   $Id$
 
-(defvar sawmill-safe-functions
-  '(get-color-rgb get-color color-name color-rgb colorp get-cursor
-    cursorp get-font font-name fontp text-width font-height
-    screen-width screen-height get-x-property get-x-text-property
-    list-x-properties x-atom x-atom-name make-image copy-image
-    flip-image-horizontally flip-image-vertically flip-image-diagonally
-    frame-part-get frame-part-put frame-part-window frame-part-x-window
-    frame-part-position frame-part-dimensions frame-part-state map-frame-parts
-    refresh-frame-part refresh-window rebuild-frame-part image-get
-    image-put imagep image-dimensions image-border set-image-border
-    image-shape-color set-image-shape-color image-modifier
-    set-image-modifier make-sized-image bevel-image clear-image
-    tile-image make-keymap bind-keys unbind-keys keymapp eventp
-    window-get window-name window-full-name window-icon-name
-    window-mapped-p window-frame set-window-frame rebuild-frame
-    window-position window-dimensions window-frame-dimensions windowp
-    managed-windows get-window-by-id stacking-order window-visibility
-    window-transient-p window-shaped-p window-visible-p window-framed-p
-    window-id window-group-id window-size-hints call-window-hook
-    window-maximized-p window-maximized-horizontally-p
-    window-maximized-vertically-p input-focus window-icon-image
-    image-ref image-set image-map image-fill color-rgb-8
+   Copyright (C) 1999, 2000 John Harper <john@dcs.warwick.ac.uk>
 
-    add-frame-style check-frame-availability reframe-window
-    rebuild-frames-with-style reframe-windows-with-style
-    reframe-all-windows window-type def-frame-class define-frame-class
-    after-setting-frame-option mark-frame-style-editable
+   This file is part of sawmill.
 
-    defcustom defgroup custom-declare-variable custom-declare-group
-    custom-quote-keys custom-set-property custom-set-group-property
-    custom-option-alist custom-group-option-alist
+   sawmill is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
 
-    window-actual-group-id windows-by-group windows-in-group
-    map-window-group window-group-ids
+   sawmill is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-    map-windows filter-windows
-    get-window-by-name save-stacking-order uniquify-list
-    call-after-property-changed call-after-state-changed))
+   You should have received a copy of the GNU General Public License
+   along with sawmill; see the file COPYING.  If not, write to
+   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+|#
 
-(defvar sawmill-safe-specials
-  '(default-foreground display-name canonical-display-name
-    default-font default-frame nil-frame frame-part-classes
-    decorate-transients batch-mode))
+(define-structure sawfish.wm.gaol
 
-(defvar sawmill-safe-features '(gtkrc gradient make-theme x))
+    (export make-gaol
+	    gaol-load
+	    gaol-eval
+	    gaol-add
+	    gaol-define
+	    gaol-define-special)
 
-(defun gaol:require (feature)
-  (unless (memq feature sawmill-safe-features)
-    (error "Gaolled code trying to require %s" feature))
-  (require feature)
-  (gaol-rebuild-environment))
+    (open rep
+	  sawfish.wm.colors
+	  sawfish.wm.cursors
+	  sawfish.wm.events
+	  sawfish.wm.fonts
+	  sawfish.wm.images
+	  sawfish.wm.misc
+	  rep.util.gaol)
 
-;; compatibility kludge..
-(defun gaol-add-function (sym)
-  (gaol-replace-function sym (symbol-value sym)))
+  ;; safe functions in the core module
+  (define safe-functions
+    '(get-color-rgb get-color color-name color-rgb colorp get-cursor
+      cursorp get-font font-name fontp text-width font-height
+      screen-width screen-height get-x-property get-x-text-property
+      list-x-properties x-atom x-atom-name make-image copy-image
+      flip-image-horizontally flip-image-vertically
+      flip-image-diagonally image-get
+      image-put imagep image-dimensions image-border set-image-border
+      image-shape-color set-image-shape-color image-modifier
+      set-image-modifier make-sized-image bevel-image clear-image
+      tile-image make-keymap bind-keys unbind-keys keymapp eventp
+      image-ref image-set image-map image-fill color-rgb-8 uniquify-list))
 
-;; for backwards compatibility, / is integer division in themes, use
-;; `divide' for real division
-(gaol-replace-function 'divide /)
-(gaol-replace-function '/ quotient)
+  (define safe-specials
+    '(default-foreground display-name canonical-display-name
+      default-font default-frame nil-frame frame-part-classes
+      decorate-transients batch-mode))
 
-;; left out in 0.12.2 and below
-(gaol-add-function 'define-value)
+  (define safe-features '(gtkrc x))
+  (define fully-safe-features '(timers gradient make-theme))
 
-;; use safe version of require
-(gaol-replace-function 'require gaol:require)
+;;; functions
 
-(mapc gaol-add-function sawmill-safe-functions)
-(mapc gaol-add-special sawmill-safe-specials)
+  (defmacro gaol-add vars
+    `(mapc (lambda (x) (gaol-define x (symbol-value x))) ',vars))
 
-(eval-after-load
- "gradient" '(mapc gaol-add-function '(draw-vertical-gradient
-				       draw-horizontal-gradient
-				       draw-diagonal-gradient)))
+  (defun gaol:require (feature)
+    (cond ((memq feature fully-safe-features) (gaol-open feature))
+	  ((memq feature safe-features) (require feature))
+	  (t (error "Gaolled code trying to require %s" feature))))
 
-(eval-after-load
- "x" '(mapc gaol-add-function '(x-create-gc x-change-gc x-destroy-gc x-gc-p
-				x-create-pixmap x-create-bitmap
-				x-change-window-attributes x-window-p
-				x-destroy-drawable x-drawable-p
-				x-pixmap-p x-bitmap-p x-drawable-id
-				x-drawable-width x-drawable-height
-				x-window-id x-window-back-buffer
-				x-window-swap-buffers x-clear-window
-				x-draw-string x-draw-line
-				x-draw-rectangle x-fill-rectangle
-				x-draw-arc x-fill-arc x-fill-polygon
-				x-copy-area x-draw-image
-				x-grab-image-from-drawable)))
+  (unless (boundp 'gaol-define)
+    (define gaol-define gaol-replace-function))
+
+  (unless (boundp 'gaol-open)
+    (define (gaol-open struct)))
+
+  (unless (boundp 'gaol-define-special)
+    (define gaol-define-special gaol-add-special))
+
+;;; initialize the gaol envrironment
+
+  ;; for backwards compatibility, / is integer division in themes, use
+  ;; `divide' for real division
+  (gaol-define 'divide /)
+  (gaol-define '/ quotient)
+
+  ;; left out in 0.12.2 and below
+  (gaol-define 'define-value define-value)
+
+  ;; use safe version of require
+  (gaol-define 'require gaol:require)
+
+  ;; add standard bindings
+  (mapc (lambda (x)
+	  (if (boundp x)
+	      (gaol-define x (symbol-value x))
+	    (format standard-error "warning: %s unbound\n" x))) safe-functions)
+  (mapc gaol-define-special safe-specials)
+
+  ;; a plugin, so easier to do this here..
+  (call-after-load "sawfish.wm.util.x"
+   (lambda ()
+     (require 'sawfish.wm.util.x)
+     (mapc (lambda (x) (gaol-define x (symbol-value x)))
+	   '(x-create-gc x-change-gc x-destroy-gc x-gc-p
+	     x-create-pixmap x-create-bitmap x-change-window-attributes
+	     x-window-p x-destroy-drawable x-drawable-p
+	     x-pixmap-p x-bitmap-p x-drawable-id x-drawable-width
+	     x-drawable-height x-window-id x-window-back-buffer
+	     x-window-swap-buffers x-clear-window x-draw-string
+	     x-draw-line x-draw-rectangle x-fill-rectangle
+	     x-draw-arc x-fill-arc x-fill-polygon x-copy-area
+	     x-draw-image x-grab-image-from-drawable)))))

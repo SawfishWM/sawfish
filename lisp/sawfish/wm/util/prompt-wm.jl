@@ -19,11 +19,12 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'prompt)
-(provide 'prompt-wm)
+(declare (in-module sawfish.wm.util.prompt))
 
-;;;###autoload
-(defun prompt-for-window (&optional title)
+(require 'sawfish.wm.workspace)
+(require 'sawfish.wm.windows)
+
+(define (prompt-for-window &optional title)
   "Prompt for a window title, return the window associated with that title."
   (letrec ((show-in-list-p
             (lambda (w)
@@ -53,8 +54,7 @@
 					   (cons (window-name w) w))
 					 (managed-windows))))))))
 
-;;;###autoload
-(defun prompt-for-workspace (&optional title)
+(define (prompt-for-workspace &optional title)
   "Prompt for a workspace title, return the workspace number."
   (letrec ((make-workspace-list
             (lambda (ws)
@@ -80,11 +80,3 @@
         (let ((where (member ws-title wsl)))
           (when where
             (- (length wsl) (length where))))))))
-
-;;;###autoload
-(defun select-workspace-interactively ()
-  "Prompt for a workspace and switch to it."
-  (interactive)
-  (let ((ws (prompt-for-workspace)))
-    (when ws
-      (select-workspace-from-first ws))))

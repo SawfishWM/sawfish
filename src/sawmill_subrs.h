@@ -257,6 +257,7 @@ extern int main (int argc, char **argv);
 extern repv Fquit (void);
 extern repv Frestart (void);
 extern void add_hook (repv sym, repv fun);
+extern repv module_symbol_value (repv mod, repv sym);
 extern repv global_symbol_value (repv sym);
 
 /* from pixmap-cache.c */

@@ -19,63 +19,84 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'compat)
+(define-structure sawfish.wm.util.compat
 
-(define ws-workspace-limits workspace-limits)
-(define ws-workspace-empty-p workspace-empty-p)
+    (export show-message
+	    sawmill-directory
+	    sawmill-lisp-lib-directory
+	    sawmill-site-lisp-directory
+	    sawmill-exec-directory
+	    sawmill-version
+	    custom-set-color
+	    custom-set-font
+	    custom-set-frame-style)
 
-(defun show-message (&optional text font fg bg position)
-  (let
-      ((attrs nil))
-    (when font
-      (setq attrs (cons (cons 'font font) attrs)))
-    (when fg
-      (setq attrs (cons (cons 'fg fg) attrs)))
-    (when bg
-      (setq attrs (cons (cons 'bg bg) attrs)))
-    (when position
-      (setq attrs (cons (cons 'position position) attrs)))
-    (display-message text attrs)))
+    (open rep
+	  sawfish.wm.misc
+	  sawfish.wm.custom
+	  sawfish.wm.commands
+	  sawfish.wm.workspace)
 
-(define sawmill-directory sawfish-directory)
-(define sawmill-lisp-lib-directory sawfish-lisp-lib-directory)
-(define sawmill-site-lisp-directory sawfish-site-lisp-directory)
-(define sawmill-exec-directory sawfish-exec-directory)
-(define sawmill-version sawfish-version)
+;;; obsolete functions
 
-(let
-    ((define-commands
-      (lambda (index)
-	(let
-	    ((fn (lambda (base)
-		   (intern (format nil "%s:%d" base (1+ index))))))
-	  (define-value (fn "select-workspace")
-			(lambda ()
-			  (interactive)
-			  (select-workspace-from-first index)))
-	  (define-value (fn "send-to-workspace")
-			(lambda (w)
-			  (interactive "%W")
-			  (send-window-to-workspace-from-first w index)))
-	  (define-value (fn "copy-to-workspace")
-			(lambda (w)
-			  (interactive "%W")
-			  (send-window-to-workspace-from-first w index t)))
-	  (put (fn "select-workspace") 'deprecated-command t)
-	  (put (fn "send-to-workspace") 'deprecated-command t)
-	  (put (fn "copy-to-workspace") 'deprecated-command t)))))
+  (define (show-message &optional text font fg bg position)
+    (let ((attrs nil))
+      (when font
+	(setq attrs (cons (cons 'font font) attrs)))
+      (when fg
+	(setq attrs (cons (cons 'fg fg) attrs)))
+      (when bg
+	(setq attrs (cons (cons 'bg bg) attrs)))
+      (when position
+	(setq attrs (cons (cons 'position position) attrs)))
+      (display-message text attrs)))
+
+;;; obsolete variables
+
+  (define sawmill-directory sawfish-directory)
+  (define sawmill-lisp-lib-directory sawfish-lisp-lib-directory)
+  (define sawmill-site-lisp-directory sawfish-site-lisp-directory)
+  (define sawmill-exec-directory sawfish-exec-directory)
+  (define sawmill-version sawfish-version)
+
+;;; obsolete commands
+
+  (define (define-commands index)
+    (let ((fn (lambda (base)
+		(intern (format nil "%s:%d" base (1+ index))))))
+      (define-command (fn "select-workspace")
+	(lambda () (select-workspace-from-first index)))
+      (define-command (fn "send-to-workspace")
+	(lambda (w) (send-window-to-workspace-from-first w index)) "%W")
+      (define-command (fn "copy-to-workspace")
+	(lambda (w) (send-window-to-workspace-from-first w index t)) "%W")
+      (put (fn "select-workspace") 'deprecated-command t)
+      (put (fn "send-to-workspace") 'deprecated-command t)
+      (put (fn "copy-to-workspace") 'deprecated-command t)))
+
   (do ((i 0 (1+ i)))
       ((= i 9))
-    (define-commands i)))
+    (define-commands i))
 
-(put 'viewport-columns 'custom-obsolete t)
-(put 'viewport-rows 'custom-obsolete t)
-(put 'viewport-dimensions 'custom-obsolete t)
-(put 'preallocated-workspaces 'custom-obsolete t)
-(put 'iconify-whole-group 'custom-obsolete t)
-(put 'uniconify-whole-group 'custom-obsolete t)
+;;; obsolete options
 
-(define (custom-set-color var value &optional req)
-  (custom-set-typed-variable var value 'color req))
-(define (custom-set-font var value &optional req)
-  (custom-set-typed-variable var value 'font req))
+  (put 'viewport-columns 'custom-obsolete t)
+  (put 'viewport-rows 'custom-obsolete t)
+  (put 'viewport-dimensions 'custom-obsolete t)
+  (put 'preallocated-workspaces 'custom-obsolete t)
+  (put 'iconify-whole-group 'custom-obsolete t)
+  (put 'uniconify-whole-group 'custom-obsolete t)
+  (put 'always-update-frames 'custom-obsolete t)
+
+;;; obsolete custom setters
+
+  (define (custom-set-color var value &optional req)
+    (custom-set-typed-variable var value 'color req))
+  (define (custom-set-font var value &optional req)
+    (custom-set-typed-variable var value 'font req))
+  (define (custom-set-frame-style var value &optional req)
+    (custom-set-typed-variable var value 'frame-style req))
+
+  (define-custom-setter 'custom-set-color custom-set-color)
+  (define-custom-setter 'custom-set-font custom-set-font)
+  (define-custom-setter 'custom-set-frame-style custom-set-frame-style))

@@ -23,36 +23,57 @@ include ../Makedefs
 
 top_builddir=..
 top_srcdir=@top_srcdir@
+VPATH=@srcdir@:@top_srcdir@
 
 # also in themes/Makefile.in
 sawfish_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/gradient.la \
 		../src/sawfish --batch --no-rc
 COMPILE_ENV = SAWFISHLISPDIR=. \
-	      SAWFISHEXECDIR=$(top_builddir)/src/.libs \
+	      SAWFISHEXECDIR=$(top_builddir)/src/.libexec \
 	      SAWFISHDOCFILE=../DOC
+
+SAWFISH_LISP_FILES := sawfish/wm.jlc
+SAWFISH_LISP_DIRS := sawfish/wm
 
 INSTALL_FILES := *.jl *.jlc
 
+INSTALL_DIRS := \
+	sawfish sawfish/wm sawfish/wm/ext \
+	sawfish/wm/placement \
+	sawfish/wm/animation sawfish/wm/theming \
+	sawfish/wm/state sawfish/wm/gnome sawfish/wm/util \
+	sawfish/wm/commands sawfish/wm/session
+
 all : lisp
 
-lisp :
-	$(COMPILE_ENV) $(sawfish_prog) compiler -f compile-lib-batch .
-
-install : all installdirs
-	for f in $(INSTALL_FILES); do \
-	  $(INSTALL_DATA) $$f $(DESTDIR)$(lispdir); \
+lisp : $(SAWFISH_LISP_FILES)
+	for d in $(SAWFISH_LISP_DIRS); do \
+	  $(COMPILE_ENV) $(sawfish_prog) compiler -f compile-lib-batch $$d; \
 	done
 
-installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(lispdir)
+sawfish/wm.jlc : sawfish/wm.jl
+	$(COMPILE_ENV) $(sawfish_prog) compiler -f compile-batch $^
+
+install : all installdirs
+	for d in $(INSTALL_DIRS); do \
+	  for f in $(foreach x,$(INSTALL_FILES),$$d/$(x)); do \
+	    $(INSTALL_DATA) $$f $(DESTDIR)$(lispdir)/$$d; \
+	  done \
+	done
+	$(rep_INSTALL_ALIASES) -l . $(DESTDIR)$(lispdir)
+
+installdirs : mkinstalldirs
+	$(SHELL) $< $(foreach x,$(INSTALL_DIRS),$(DESTDIR)$(lispdir)/$(x))
 
 uninstall :
-	for f in $(INSTALL_FILES); do \
-	  rm -f $(DESTDIR)$(lispdir)/$$f; \
+	for d in $(INSTALL_DIRS); do \
+	  for f in $(foreach x,$(INSTALL_FILES),$$d/$(x)); do \
+	    rm -f $(DESTDIR)$(lispdir)/$$f; \
+	  done \
 	done
 
 clean :
-	rm -f *.jlc *.jld *~
+	rm -f `find . \( -name '*.jlc' -or -name '*~' -or -name core \) -print`
 
 realclean : clean
 	rm -f Makefile
