@@ -31,6 +31,8 @@
 (require 'frames)
 (require 'workspace)
 (require 'place-window)
+(require 'mwm)
+(require 'open-look)
 
 (load-all "autoload.jl" t)
 (load-all (concat "os-" (symbol-name operating-system)) t)
