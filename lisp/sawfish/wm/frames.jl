@@ -143,11 +143,7 @@ that overrides settings set elsewhere.")
     (check-frame-availability style)
     (if type
 	(window-put w 'type type)
-      (setq type (window-type w))
-      (when (and decorate-transients (window-transient-p w)
-		 (not (window-get w 'type))
-		 (setq tem (cdr (assq type transient-normal-frame-alist))))
-	(setq type tem)))
+      (setq type (window-type w)))
     (window-put w 'current-frame-style style)
     (when from-user
       (window-put w 'frame-style style))      
@@ -184,13 +180,19 @@ that overrides settings set elsewhere.")
 (defun window-type (w)
   (or (window-get w 'type)
       (cdr (assoc-regexp (window-name w) auto-window-type-alist))
-      (if (window-transient-p w)
-	  (if (window-shaped-p w)
-	      'shaped-transient
-	    'transient)
-	(if (window-shaped-p w)
-	    'shaped
-	  'default))))
+      (let
+	  ((type (if (window-transient-p w)
+		     (if (window-shaped-p w)
+			 'shaped-transient
+		       'transient)
+		   (if (window-shaped-p w)
+		       'shaped
+		     'default)))
+	   tem)
+	(when (and decorate-transients (window-transient-p w)
+		   (setq tem (cdr (assq type transient-normal-frame-alist))))
+	  (setq type tem))
+	type)))
 
 (defun window-type-remove-title (type)
   (cond ((eq type 'default)
