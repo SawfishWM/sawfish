@@ -469,12 +469,12 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 	w->id = 0;
 	pending_destroys++;
 
+	remove_from_stacking_list (w);
+
 	/* gc will do the rest... */
     }
     else if (w->frame != 0 && from_error == Qnil)
 	destroy_window_frame (w, FALSE);
-
-    remove_from_stacking_list (w);
 
     /* We can lose the focus sometimes, notably after a was-focused
        window is closed while a keyboard grab exists.. (netscape) */
