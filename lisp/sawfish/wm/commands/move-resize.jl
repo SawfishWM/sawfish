@@ -84,7 +84,7 @@ the mouse."
   :group maximize)
 
 (defcustom move-resize-inhibit-configure nil
-  "Only redraw window contents after the move/resize has finished."
+  "Only update window contents after it has been moved to its final position."
   :type boolean
   :group (move advanced))
 
