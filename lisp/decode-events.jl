@@ -74,9 +74,9 @@ event description EVENT, a list `(TYPE MODIFIER-LIST ACTION)'."
 			 (mod-2 . 16) (mod-3 . 32) (mod-4 . 64) (mod-5 . 128)
 			 (button-1 . 256) (button-2 . 512) (button-3 . 1024)
 			 (button-4 . 2048) (button-5 . 4096)
-			 (meta . 0x100000) (alt . 0x200000)
-			 (hyper . 0x1000000) (super . 0x2000000)
-			 (any . 0x400000) (release . 0x800000)))
+			 (meta . #x100000) (alt . #x200000)
+			 (hyper . #x1000000) (super . #x2000000)
+			 (any . #x400000) (release . #x800000)))
 
        (mods (apply + (mapcar (lambda (m)
 				(cdr (assq m encode-mod-map))) (cadr event)))))

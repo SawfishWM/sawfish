@@ -197,7 +197,7 @@
   (let ((space (get-x-property w '_NET_WM_DESKTOP)))
     (when space
       (setq space (aref (nth 2 space) 0))
-      (cond ((equal space 0xffffffff)
+      (cond ((equal space #xffffffff)
 	     (window-put w 'sticky t))
 	    ((integerp space)
 	     (window-add-to-workspace w space)))))
