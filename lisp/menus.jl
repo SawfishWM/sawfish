@@ -57,19 +57,28 @@ unused before killing it."
 (defvar window-ops-menu
   '(("Move" move-window-interactively)
     ("Resize" resize-window-interactively)
-    ("Raise" raise-window)
-    ("Lower" lower-window)
     ("Iconify" iconify-window)
     ("Delete" delete-window)
     ("Destroy" destroy-window)
     ("Send left" send-to-previous-workspace)
     ("Send right" send-to-next-workspace)
-    ("Sticky" toggle-window-sticky)
+    ("Toggle sticky" toggle-window-sticky)
+    ("Depth"
+     ("Raise" raise-window)
+     ("Lower" lower-window)
+     ("Upper layer" raise-window-depth)
+     ("Lower layer" lower-window-depth))
     ("Maximize"
      ("Vertically" maximize-window-vertically)
      ("Horizontally" maximize-window-horizontally)
      ("Both" maximize-window))
-    ("Un-maximize" unmaximize-window)))
+    ("Un-maximize" unmaximize-window)
+    ("Frame"
+     ("Normal" set-frame:default)
+     ("Title-only" set-frame:shaped)
+     ("Border-only" set-frame:transient)
+     ("Top-border" set-frame:shaped-transient)
+     ("None" set-frame:unframed))))
 
 (defvar root-menu
   '(("Workspaces" . workspace-menu)
