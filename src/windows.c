@@ -348,9 +348,6 @@ add_window (Window id)
 	    create_window_frame (w);
 	    install_window_frame (w);
 
-	    /* this grabs bound events in the subwindow */
-	    grab_window_events (w, TRUE);
-
 	    Fungrab_server ();
 	}
 	else
@@ -392,10 +389,7 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
     if (w->id != 0)
     {
 	if (destroyed == Qnil && from_error == Qnil)
-	{
-	    grab_window_events (w, FALSE);
 	    remove_window_frame (w);
-	}
 
 	if (from_error == Qnil)
 	{
@@ -505,12 +499,12 @@ Note that these are Lisp properties not X properties.
     {
 	if (rep_CAR(plist) == prop)
 	{
-	    if (prop == Qkeymap && VWIN(win)->id)
+	    if (prop == Qkeymap && VWIN(win)->frame != 0)
 	    {
 		/* A bit of a hack */
-		grab_keymap_events (VWIN(win)->id,
+		grab_keymap_events (VWIN(win)->frame,
 				    rep_CAR(rep_CDR(plist)), FALSE);
-		grab_keymap_events (VWIN(win)->id, val, TRUE);
+		grab_keymap_events (VWIN(win)->frame, val, TRUE);
 	    }
 	    rep_CAR(rep_CDR(plist)) = val;
 	    return val;
