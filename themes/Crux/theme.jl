@@ -16,7 +16,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id: theme.jl,v 1.3 2001/01/27 21:22:29 jsh Exp $
+   $Id: theme.jl,v 1.4 2001/02/06 20:56:18 jsh Exp $
 
    Authors: John Harper <jsh@eazel.com>
 |#
@@ -366,7 +366,9 @@
 (define (button-theme type)
   (case Crux:button-theme
     ((platinum)
-     '((close-button) . (maximize-button shade-button)))
+     (if (eq type 'transient)
+	 '((close-button) . ())
+       '((close-button) . (maximize-button shade-button))))
     ((macos-x)
      '((close-button maximize-button iconify-button) . ()))
     ((windows)
