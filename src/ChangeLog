@@ -1,3 +1,8 @@
+2001-02-26  John Harper  <jsh@eazel.com>
+
+	* keys.c (wm_mod): changed default value from EV_MOD_META to
+	ControlMask. Part of my fix to bug 7073
+
 2001-02-19  John Harper  <jsh@eazel.com>
 
 	* version 0.37.3
@@ -31,7 +36,7 @@
 	* sawmill.h (WINDOW_IS_GONE_P): new macro, evaluates to true
 	when the window object no longer has an associated client
 	window
-
+      	
 	* windows.c, frames.c, display.c, keys.c: use the above macro
 	instead of `w->id == 0'
 

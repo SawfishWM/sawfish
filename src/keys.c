@@ -84,7 +84,7 @@ static u_long meta_mod, alt_mod, hyper_mod, super_mod;
 
 /* The user-customizable modifier; used for default key bindings. This
    shouldn't include any bits that don't have a fixed meaning. */
-static u_long wm_mod = EV_MOD_META;
+static u_long wm_mod = ControlMask;
 
 /* The X modifiers bound to the Num_Lock and Scroll_Lock keysyms */
 static u_long num_lock_mod, scroll_lock_mod;
