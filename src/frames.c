@@ -706,6 +706,8 @@ refresh_frame_part (struct frame_part *fp)
     if (!frame_draw_mutex)
     {
 	Lisp_Window *w = fp->win;
+	if (w == 0)			/* XXX why is this needed? */
+	    return;
 
 	if (fp->drawn.width != fp->width || fp->drawn.height != fp->height)
 	    fp->drawn.bg = rep_NULL;
