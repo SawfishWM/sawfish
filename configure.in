@@ -98,6 +98,13 @@ AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
 	      AC_CHECK_HEADERS(X11/extensions/Xinerama.h)],
 	     [],[$X_LIBS -lX11 -lXext])
 
+XFT_LIBS=""
+AC_SUBST(XFT_LIBS)
+AC_CHECK_LIB(Xft, XftDrawCreate,
+	     [XFT_LIBS="-lXft -lXrender"
+	     AC_CHECK_HEADERS(X11/Xft/Xft.h)],
+	     [], [$X_LIBS -lX11 -lXext])
+
 CPPFLAGS="${_cppflags}"
 
 dnl Check for librep
