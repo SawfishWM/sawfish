@@ -30,6 +30,9 @@
 (defvar custom-user-file "~/.sawmill/custom"
   "File used to store user's configuration settings.")
 
+(defvar custom-default-file "custom-defaults"
+  "Lisp library storing default customization settings.")
+
 (defvar custom-unquoted-keys
   '(:group :require :type :options :allow-nil :range))
 
@@ -297,5 +300,7 @@
 ;; loading user's customisations
 
 (defun custom-load-user-file ()
-  (when (file-exists-p custom-user-file)
-    (load custom-user-file t t t)))
+  (cond ((file-exists-p custom-user-file)
+	 (load custom-user-file t t t))
+	(custom-default-file
+	 (load custom-default-file t"))))
