@@ -97,11 +97,14 @@
       ((fun (get symbol 'custom-set))
        form)
     (if fun
-	(setq fun (or (cdr (assq fun custom-set-alist)) 'custom-set-variable))
-      (setq fun 'custom-set-variable))
+	(setq fun (or (cdr (assq fun custom-set-alist))
+		      'custom-set-typed-variable))
+      (setq fun 'custom-set-typed-variable))
     (setq form `(,fun ',symbol ',value
-		,@(and (get symbol 'custom-require)
-		       (list (list 'quote (get symbol 'custom-require))))))
+		 ,@(and (eq fun 'custom-set-typed-variable)
+			(list (list 'quote (variable-type symbol))))
+		 ,@(and (get symbol 'custom-require)
+			(list (list 'quote (get symbol 'custom-require))))))
     (catch 'done
       (mapc (lambda (f)
 	      (when (eq (nth 1 (nth 1 f)) symbol)
