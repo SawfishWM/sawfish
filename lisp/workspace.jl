@@ -81,16 +81,21 @@ workspace.")
   (let
       ((space (window-get w 'workspace)))
     (when space
-      (call-hook 'remove-from-workspace-hook (list w))
       (rplacd space (delq w (cdr space)))
       (when (and delete-workspaces-when-empty (null (cdr space)))
 	;; workspace is now empty
-	(call-hook 'delete-workspace-hook (list space))
 	(when (eq ws-current-workspace space)
-	  (ws-switch-workspace (or (nth 1 (memq space ws-workspaces))
-				   (car ws-workspaces))))
-	(setq ws-workspaces (delq space ws-workspaces)))
+	  (if (= (length ws-workspaces) 1)
+	      ;; deleting the sole workspace!
+	      (progn
+		(setq ws-workspaces nil)
+		(setq ws-current-workspace nil))
+	    (ws-switch-workspace (or (nth 1 (memq space ws-workspaces))
+				     (car ws-workspaces)))))
+	(setq ws-workspaces (delq space ws-workspaces))
+	(call-hook 'delete-workspace-hook (list space)))
       (window-put w 'workspace nil)
+      (call-hook 'remove-from-workspace-hook (list w space))
       (when (windowp w)
 	(hide-window w)))))
 
