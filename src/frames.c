@@ -383,22 +383,6 @@ frame_part_destroyer (Lisp_Window *w)
     XDestroyWindow (dpy, w->frame);
 }
 
-/* Called when the focus state of window W has changed, assuming a
-   frame-part derived frame */
-static void
-frame_part_focuser (Lisp_Window *w)
-{
-    struct frame_part *fp;
-    for (fp = w->frame_parts; fp != 0 && w->id != 0; fp = fp->next)
-    {
-	refresh_frame_part (fp);
-
-	/* set_frame_part_bg may trigger the error handler */
-	if (w->id == 0)
-	    break;
-    }
-}
-
 /* Handle the expose event EV for the frame part FP. */
 void
 frame_part_exposer (XExposeEvent *ev, struct frame_part *fp)
@@ -766,7 +750,7 @@ list_frame_generator (Lisp_Window *w)
     }
 
     w->destroy_frame = frame_part_destroyer;
-    w->focus_change = frame_part_focuser;
+    w->focus_change = refresh_frame_parts;
     w->rebuild_frame = list_frame_generator;
     w->property_change = frame_part_prop_change;
 
