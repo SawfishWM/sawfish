@@ -143,9 +143,13 @@ Visit the Sawmill homepage at http://sawmill.sourceforge.net/")
 
 (defun customize-ui-spec (&optional group)
   (mapc require custom-required)
-  (if (or (null group) (eq group t))
-      (cons 'tree (customize-spec custom-groups))
-    (cadr (customize-spec (custom-find-group group)))))
+  (let
+      ((groups (if (or (null group) (eq group t))
+		   custom-groups
+		 (custom-find-group group))))
+    (if (filter consp groups)
+	(cons 'tree (customize-spec groups))
+      (list 'vbox (cadr (customize-spec groups))))))
 
 ;;;###autoload
 (defun customize (&optional group)
