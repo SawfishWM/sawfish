@@ -298,14 +298,12 @@ add_window (Window id)
 		{
 		    if (count > 0)
 			w->name = rep_string_dup (list[0]);
-		    else
-			w->name = rep_null_string ();
 		    XFreeStringList (list);
 		}
 	    }
 	    XFree (prop.value);
 	}
-	else
+	if (w->name == 0)
 	    w->name = rep_null_string ();
 	w->full_name = w->name;
 	if (XGetIconName (dpy, id, &tem))
