@@ -28,7 +28,7 @@
 	  nokogiri-i18n
 	  nokogiri-widget)
 
-  (define (make-frame-style-item changed-callback options path doc)
+  (define (make-frame-style-item changed-callback doc options path)
 
     (let ((vbox (gtk-vbox-new nil 0))
 	  (hbox (gtk-hbox-new nil 0))
@@ -77,6 +77,7 @@
 	  ((validp) (lambda (x) (memq x options)))))))
 
   (define-widget-type 'frame-style make-frame-style-item)
+  (widget-accepts-doc-string 'frame-style)
 
   (define (gtk-text-set widget string)
     (gtk-text-set-point widget 0)
