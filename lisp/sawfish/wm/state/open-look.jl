@@ -34,9 +34,14 @@
     (when (setq prop (get-x-property w '_OL_WIN_ATTR))
       (setq data (nth 2 prop))
       (let
-	  ((ol-type (if (= (length data) 3)
-			(aref data 0)
-		      (aref data 1))))
+	  ((ol-type (cond ((= (length data) 3)
+			   (aref data 0))
+			  ((= (length data) 5)
+			   (aref data 1))
+			  ((> (length data) 0)
+			   ;; wordperfect gives us [_OL_WT_OTHER]
+			   ;; i.e. a _single_ atom
+			   (aref data 0)))))
 	(when (memq ol-type '(_OL_WT_NOTICE _OL_WT_OTHER))
 	  (setq type (window-type-remove-title type)))))
     (when (setq prop (get-x-property w '_OL_DECOR_ADD))
