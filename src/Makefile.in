@@ -30,7 +30,7 @@ SRCS :=	colors.c commands.c cursors.c display.c events.c fonts.c frames.c \
 	functions.c images.c keys.c main.c server.c session.c windows.c
 OBJS := $(SRCS:.c=.o)
 
-DL_SRCS := gradient.c flippers.c x.c selection.c
+DL_SRCS := gradient.c flippers.c x.c selection.c play-sample.c
 DL_OBJS := $(DL_SRCS:%.c=%.la)
 
 LISP_SRCS := sawmill-ui.jl sawmill-menu.jl
@@ -50,6 +50,9 @@ sawmill-client : client.o libclient.o
 
 %.la : %.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $<
+
+play-sample.la : play-sample.lo
+	$(rep_DL_LD) $(LDFLAGS) -o $@ $< $(ESD_LIBS) $(AUDIOFILE_LIBS)
 
 %.jlc : %.jl
 	REP_GTK_DONT_INITIALIZE=1 rep compiler -f compile-batch $<
