@@ -54,6 +54,7 @@ make CFLAGS="$RPM_OPT_FLAGS"
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome/wm-properties
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/control-center
+mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/gnome/apps/Settings
 make prefix=$RPM_BUILD_ROOT%{_prefix} install
 gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawmill*
 
@@ -79,6 +80,7 @@ fi
 %defattr(-,root,root)
 %{_prefix}/bin/sawmill-capplet
 %{_prefix}/share/control-center/Sawmill
+%{_prefix}/share/gnome/apps/Settings/Sawmill
 %{_prefix}/share/gnome/wm-properties/Sawmill.desktop
 
 %files themer

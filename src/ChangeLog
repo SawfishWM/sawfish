@@ -1,3 +1,17 @@
+2000-03-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.25
+
+2000-03-04  John Harper  <john@dcs.warwick.ac.uk>
+
+	* main.c (on_idle): after being idle for one second in the
+	outermost event loop, ungrab the pointer and keyboard. This may
+	unfreeze the intermittent lockups reported by some people
+
+	* keys.c (Qmulti_click_delay): new variable, the maximum delay
+	between successive button press events to count as a click2 or
+	click3 (from Martin Blais <blais@iro.umontreal.ca>)
+
 2000-03-02  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-ui.jl: separate the keymap shell using a vpaned

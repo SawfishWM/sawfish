@@ -7,6 +7,105 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.25
+
+@itemize @bullet
+
+@item New plugin @code{x}, a basic Xlib binding for creating and
+drawing in windows (Merlin, me)
+
+@item Added a method of reading textual input from the user from
+completion. Provision for completing functions, variables, commands,
+files, directories, etc@dots{}. Also supports reading passwords. (Topi
+Paavola, me)
+
+@item Re-enabled the following interactive codes: @samp{a} (function),
+@samp{C} (command), @samp{D} (directory), @samp{f} (existing file),
+@samp{F} (file), @samp{k} (event), @samp{n} (number), @samp{N} (prefix
+or number), @samp{s} (string), @samp{S} (symbol), @samp{v} (variable)
+
+@item Support prefix keys in bindings (binding an event to a keymap, or
+the name of a keymap, marks that event as a prefix key for the
+associated keymap)
+
+@item New command @code{call-command-with-output-to-screen}, prompts
+for and invokes a command, then displays any output it emitted (bound
+to @kbd{A-x} in default keymaps)
+
+@item New variable @code{multi-click-delay}, maximum time in
+milliseconds between button presses to count as @kbd{click2} or
+@kbd{click3} events (Martin Blais)
+
+@item New option @code{edge-flip-only-when-moving} (Yaron M. Minsky)
+
+@item New window cycling commands @code{cycle-prefix},
+@code{cycle-class} (Kai Groﬂjohann); can now be bound to events with
+more than one modifier (Timo Korvola)
+
+@item New command @code{uniquify-window-name}; new property
+@code{unique-name}. Forces the window to have a unique name
+
+@item New commands @code{size-window-add-column},
+@code{size-window-subtract-column}, @code{size-window-add-row},
+@code{size-window-subtract-row}
+
+@item Window edge snapping now has three variants: @code{magnetism}
+(the old method), @code{attraction} and @code{resistance}. (Merlin, me)
+
+@item New commands @code{grow-window-@{left,right,up,down@}} and
+@code{pack-window-@{left,right,up,down@}} (Kai Groﬂjohann)
+
+@item Support the @code{WM_COLORMAP_WINDOWS} protocol
+
+@item New functions @code{synthesize-event}, @code{font-ascent},
+@code{font-descent}, @code{call-with-keyboard-grabbed}
+
+@item New functions @code{define-placement-mode} and
+@code{define-focus-mode}---make defining these things easier. Focus
+modes are now settable for each window individually
+
+@item Made the tree-organised customization groups work better with the
+GNOME control center. Add the sawmill capplet desktop entries to the
+GNOME programs menu (under Settings). Also, beautify the names
+displayed in the bindings widget
+
+@item When applicable, load the GNOME applications menu when the wm is
+first idle, reduces the latency of displaying the first root menu
+
+@item Translation updates: de (Hubert Nachbaur), es (IÒaki GarcÌa
+Etxebarria), ja (Sato Satoru), sv (Andreas Persenius)
+
+@item Fix bug of not noticing when the keyboard / pointer / modifier
+mappings change
+
+@item Fixed @code{current-event-string} function
+
+@item Better method of reconfiguring frames when they're resized (helps
+opaque resizing)
+
+@item Added some kludges to try and break the intermittent lockups some
+people have seen
+
+@item Made the auto-gravity option work a lot better (John N S Gill,
+me)
+
+@item Fixed bug where unmapped windows were being included in the
+snapping calculation
+
+@item Fixed bug when uniconifying windows and merging workspaces
+
+@item Fixed bug of warp-cursor-to-window trying to put the pointer
+outside the screen boundaries (Merlin)
+
+@item Fixed bug of losing keyboard grab when originally focused window
+is deleted during @code{x-cycle} command
+
+@item Fixed bug of trying to focus unviewable parent windows when
+focused window is unmapped
+
+@end itemize
+
+
 @unnumberedsec 0.24
 
 @itemize @bullet

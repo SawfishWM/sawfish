@@ -1,3 +1,18 @@
+2000-03-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.25
+
+	* transient.jl (transient-unmap-window): don't try to focus
+	parent windows if they're not mapped and visible
+
+2000-03-04  John Harper  <john@dcs.warwick.ac.uk>
+
+	* customize.jl (customize-ui-spec): don't put single widgets
+	into vboxes (they don't expand properly)
+
+	* x-cycle.jl (cycle-windows): if the window that the original
+	keyboard grab was made on is unmapped, grab on the root window
+
 2000-03-02  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.jl (warp-cursor-to-window): clamp the warp
