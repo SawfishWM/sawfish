@@ -34,7 +34,7 @@
   (define preview-type 'default)
   (define preview-theme nil)
 
-  (add-hook 'before-add-window-hook
+  (add-hook 'after-add-window-hook
 	    (lambda (w)
 	      (let
 		  ((class (get-x-text-property w 'WM_CLASS)))
