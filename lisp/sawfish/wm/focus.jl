@@ -257,10 +257,10 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 				 (not (window-really-wants-input-p w))
 				 (eq (window-get w 'keymap)
 				     click-to-focus-map))
-		       (format standard-error
-			       "Window lost focus keymap: %s, %s\n"
-			       (window-name w) (window-get w 'keymap))
-		       (beep) (beep)
+;		       (format standard-error
+;			       "Window lost focus keymap: %s, %s\n"
+;			       (window-name w) (window-get w 'keymap))
+;		       (beep) (beep)
 		       (focus-push-map w click-to-focus-map))))))
 
   (add-hook 'idle-hook scan-windows-for-bugs))
