@@ -9,10 +9,8 @@
 
 2000-05-12  John Harper  <john@dcs.warwick.ac.uk>
 
-	* events.c (enter_notify, leave_notify): ignore events which
-	aren't NotifyNormal
-	(enter_notify): also ignore NotifyInferior events (entering
-	from inner window), leave_notify has always done this
+	* events.c (enter_notify): ignore NotifyInferior events
+	(entering from inner window), leave_notify has always done this
 
 2000-05-09  John Harper  <john@dcs.warwick.ac.uk>
 
