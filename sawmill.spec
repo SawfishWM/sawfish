@@ -32,9 +32,6 @@ Requires: %{nam}
 GNOME support for sawmill. Includes a wm-entries spec, and a control
 center applet
 
-%changelog
-1999/09/10 (jsh): Split into two packages, sawmill and sawmill-gnome
-
 %prep
 %setup
 

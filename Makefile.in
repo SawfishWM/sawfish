@@ -23,7 +23,7 @@ include ./Makedefs
 top_builddir=.
 top_srcdir=@top_srcdir@
 
-SUBDIRS = src capplet lisp themes
+SUBDIRS = src capplet lisp themes man
 
 all : build.h DOC.dir NEWS
 	set -e; for dir in $(SUBDIRS); do \

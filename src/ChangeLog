@@ -1,3 +1,14 @@
+1999-09-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.6
+
+	* windows.c (pending_destroys): new variable, the number of
+	destroyed windows whose hooks haven't been called
+	* windows.c, functions.c, events.c, display.c: call
+	emit_pending_destroys () after round-trip X requests, try to
+	minimize the time between a window dieing and its
+	destroy-notify-hook being called
+
 1999-09-11  John Harper  <john@dcs.warwick.ac.uk>
 
 	* cursors.c (Fcursorp): new function

@@ -34,9 +34,7 @@ MAKEINFOFLAGS =
 TEXI2DVI = texi2dvi
 DVIPS = dvips
 
-#all : sawmill.info ../NEWS
-
-all :
+all : sawmill.info ../NEWS
 
 ../NEWS : news.texi
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-headers $< -o ../NEWS

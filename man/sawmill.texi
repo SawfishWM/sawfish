@@ -1,0 +1,2350 @@
+\input texinfo  @c -*-Texinfo-*-
+@setfilename sawmill.info
+@settitle sawmill Programming Manual
+@footnotestyle end
+
+@set EDITION 0.1
+@set VERSION 0.6
+@set UPDATED 12 September 1999
+@set UPDATE-MONTH September 1999
+
+@ifinfo
+@noindent
+START-INFO-DIR-ENTRY@*
+* sawmill: (sawmill).		sawmill programming manual
+END-INFO-DIR-ENTRY
+
+This is Edition @value{EDITION}, last updated @value{UPDATED}, of
+@cite{The sawmill Programming Manual}, for sawmill, Version
+@value{VERSION}.
+
+Copyright 1999 John Harper.
+
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+@ignore
+Permission is granted to process this file through TeX and print the
+results, provided the printed document carries copying permission
+notice identical to this one except for the removal of this paragraph
+(this paragraph not being relevant to the printed manual).
+@end ignore
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the entire
+resulting derived work is distributed under the terms of a permission
+notice identical to this one.
+@end ifinfo
+
+@titlepage
+@title sawmill
+@subtitle An Extensible X11 Window Manager
+@subtitle Programming Manual
+@subtitle Edition @value{EDITION}
+@subtitle @value{UPDATE-MONTH}
+@author John Harper
+@page
+@vskip 0pt plus 1filll
+Copyright @copyright{} 1999 John Harper.
+
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the entire
+resulting derived work is distributed under the terms of a permission
+notice identical to this one.
+@end titlepage
+
+@node Top, Copying, (dir), (dir)
+
+@ifnottex
+This document describes the Lisp programming interface to
+@code{sawmill}, an extensible X11 window manager.
+
+This is Edition @value{EDITION} of its documentation,
+last updated @value{UPDATED} for Sawmill version @value{VERSION}.
+@end ifnottex
+
+@menu
+* Copying::                     Distribution conditions
+* Introduction::                Brief introduction to sawmill
+* News::                        Feature history
+
+* Colors::			Color type
+* Fonts::			Font type
+* Images::			Image type
+* Cursors::			Cursor type
+* Windows::			Window type
+* Customization::		Supporting user-configuration
+
+* Window Frames::		Decorating windows
+* Workspaces::			Multiple desktop areas
+* Popup Menus::			Displaying menus
+* Events::			Input event types
+* Commands::
+* Keymaps::			Bindings events to actions
+* Event Loop::			Handling input events
+* Miscellaneous Functions::	Useful features
+* Standard Hooks::		Hooking into wm actions
+* Session Management::		Saving state across sessions
+
+* Function Index::              Menu of all documented functions
+* Variable Index::              All variables which have been mentioned
+* Concept Index::               Main index, references to all sections
+@end menu
+
+@node Copying, Introduction, Top, Top
+@chapter Copying
+@cindex Copying
+
+Sawmill is released under the terms of the GNU General Public License,
+copyright (C) 1999 John Harper. See the included file @file{COPYING}
+for the full text of the license.
+
+@quotation
+This is free software -- you are welcome to redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2, or
+(at your option) any later version.
+
+Sawmill is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+@end quotation
+
+
+@node Introduction, News, Copying, Top
+@chapter Introduction
+@cindex Introduction
+
+Sawmill is a lisp-extensible window manager for X11. Its aim is to
+allow all areas of window management (decoration, manipulation) to be
+customized as far as is possible, yet still remain as fast or faster
+than existing window managers.
+
+Despite this extensibility its policy is very minimal compared to most
+window managers. It does not implement desktop backgrounds,
+applications docks, or other things that may be achieved through
+separate applications.
+
+All high-level window management functions are implemented in Lisp for
+future extensibility or redefinition. Also, most received events are
+exported to the Lisp environment through key-bindings and hooks,
+similar to in Emacs. These events include pointer behavior and many
+internal X11 events.
+
+Sawmill uses the librep Lisp environment (@pxref{(librep)}), this is a
+run-time library implementing a language similar to Emacs Lisp
+(@pxref{(elisp)}), but with many extensions. This manual assumes at
+least a basic knowledge of the language.
+
+Incidentally, there is no meaning to the name ``Sawmill'', the author
+grepped @file{/usr/dict/words} for something containing ``wm''.
+
+
+@node News, Colors, Introduction, Top
+@cindex News
+
+@include news.texi
+
+
+@node Colors, Fonts, News, Top
+@chapter Colors
+@cindex Colors
+
+Sawmill provides a primitive type allowing colors to be represented.
+
+@defun colorp arg
+Returns @code{t} when @var{arg} is a member of the color type.
+@end defun
+
+@defun get-color name
+Returns the color object representing the color specified by the string
+@var{name}. This is according to the standard X11 color specifiers,
+either a named color from the @file{rgb.txt} database, or a string
+defining the red, green and blue components of the color, either eight
+or sixteen bits in hexadecimal, i.e. @samp{#RRGGBB} or
+@samp{#RRRRGGGGBBBB}.
+
+Signals an error if no color named @var{name} is available.
+@end defun
+
+Given a color object, it's possible to find both the originally
+specified name of the color, and the actual rgb values:
+
+@defun color-name color
+Return the string defining the X11 name of the color object
+@var{color}.
+@end defun
+
+@defun color-rgb color
+Return a list of integers @code{(@var{red} @var{green} @var{blue})} the
+actual color values of the color represented by object COLOR. The
+individual values range from 0 to 65535.
+@end defun
+
+Where a color object is used to define the foreground color of a piece
+of text, the @code{default-foreground} color provides the default value
+used if no actual color is specified.
+
+@defvar default-foreground
+The color used for text where no other color is defined.
+@end defvar
+
+
+@node Fonts, Images, Colors, Top
+@chapter Fonts
+@cindex Fonts
+
+As with the color type, the font type allows X11 fonts to be
+manipulated by Lisp code.
+
+@defun fontp arg
+Returns @code{t} if @var{arg} is a font object.
+@end defun
+
+@defun get-font name
+Return a font object representing the X11 font specified by the string
+
+Signals an error if no font named @var{name} is available.
+@end defun
+
+Several functions allow details of a font object to be found.
+
+@defun font-name font
+Returns the name of the X11 font represented by object @var{font} (a
+string).
+@end defun
+
+@defun font-height font
+Returns the height of glyphs in the font @var{font}.
+@end defun
+
+@defun text-width string &optional font
+Returns the number of horizontal pixels that would be required to
+display the text @var{string} using font object @var{font} (or the
+value of the @code{default-font} variable if @var{font} is undefined).
+@end defun
+
+As with colors, a default font may be specified, to be used where no
+other font is specified.
+
+@defvar default-font
+Font object used when no other font has been specified.
+@end defvar
+
+Fonts can have Lisp properties associated with them (similar to the
+property lists associated with symbols). Currently these aren't
+actually used by the window manager.
+
+@defun font-put font property value
+Associate the lisp object @var{value} with the property named by the
+symbol @var{property} of the font object @var{font}.
+@end defun
+
+@defun font-get font property
+Return the value of the property named by the symbol @var{property} of
+the font @var{font}, or @code{nil} if no such property exists.
+@end defun
+
+
+@node Images, Cursors, Fonts, Top
+@chapter Images
+@cindex Images
+
+The image type allows arbitrary 24-bit images to be manipulated by the
+window manager. Images may be both loaded from files, and rendered
+dynamically.
+
+@defun imagep arg
+Returns @code{t} when @var{arg} is a member of the image type.
+@end defun
+
+@defun make-image @var{file-name}
+Creates and returns an image object containing the image defined by the
+contents of a file named @var{file-name} (a string). The
+@code{image-load-path} directory provides the search path used while
+trying to find a directory containing the file named @var{file-name}.
+
+All common image formats will likely be able to be loaded. But PNG,
+JPEG and XPM should always be supported.
+
+Signals an error if file called @var{file-name} may be found, or if an
+image may not be constructed from the file.
+@end defun
+
+@defvar image-load-path
+A list of directory names. This defines the search path used when
+loading images.
+@end defvar
+
+@defun make-sized-image width height &optional color
+Create and return a new image, of size @var{width},  @var{height}. If
+@var{color} is defined it specifies the color of all pixels in the
+image. If undefined, all pixels will be black.
+@end defun
+
+@defun copy-image image
+Returns a newly allocated image object, an exact copy of the image
+object @var{image}.
+@end defun
+
+@defun image-dimensions image
+Returns a cons-cell @code{(@var{width} . @var{height})} defining the
+dimensions of the image represented by @var{image}.
+@end defun
+
+@defun flip-image-horizontally image
+Flip the contents of @var{image} about the vertical axis.
+@end defun
+
+@defun flip-image-vertically image
+Flip the contents of @var{image} about the horizontal axis.
+@end defun
+
+@defun flip-image-diagonally image
+Flip the contents of @var{image} about an axis running from the
+top-left corner to the bottom-right corner of the image.
+@end defun
+
+As with many of the other types, arbitrary state may be associated with
+image objects.
+
+@defun image-put image property value
+Set the property named @var{property} (a symbol) of @var{image} to
+@var{value}.
+@end defun
+
+@defun image-get image property
+Return the property named @var{property} of @var{image}, or @code{nil}
+if no such property exists.
+@end defun
+
+The only predefined property is the symbol @code{tiled}, used when an
+image is displayed in a window decoration. When set to a non-nil value
+the image is not scaled to the size of the decoration (the default),
+but is tiled across the decoration.
+
+When images are scaled across border decorations the pixels that are
+actually scaled are defined by the @dfn{border} of the image. The
+border defines the outer rectangle of pixels that are left as-is, and
+the inner rectangle which is scaled.
+
+@defun image-border image
+Returns a list of integers @code{(@var{left} @var{right} @var{top}
+@var{bottom})}, the border of the image object @var{image}.
+
+The number associated with each edge of the image defines the number of
+pixels adjacent to that edge that @emph{will not} be scaled.
+@end defun
+
+@defun set-image-border image left right top bottom
+Sets the border of @var{image}.
+@end defun
+
+It's also possible to define @dfn{color modifiers} for each image.
+These define the transformation applied to the value of each pixel when
+it is displayed. Four different modifiers exist for each image, one for
+each color component, and one for the image as a whole.
+
+@defun image-modifier image type
+Return the modifier defined by the symbol @var{type} of @var{image}, a
+list of integers @code{(@var{gamma} @var{brightness} @var{contrast})}.
+
+The four types are @code{red}, @code{green}, @code{blue} and @code{nil}
+(all colors).
+@end defun
+
+@defun set-image-modifier image type gamma brightness contrast
+Set the image modifier of @var{image} defined by @var{type}.
+@end defun
+
+
+@node Cursors, Windows, Images, Top
+@chapter Cursors
+@cindex Cursors
+
+Cursors define the shape and hot-spot of the mouse pointer's image. A
+lisp type is provided for manipulating these objects.
+
+@defun cursorp arg
+Returns @code{t} if @var{arg} is a member of the cursor type.
+@end defun
+
+@defun get-cursor data
+Returns the cursor object representing the cursor defined by
+@var{data}. If @var{data} is a symbol, it's replaced by its
+@code{cursor-shape} property.
+
+Possible @var{data} values are an integer representing a glyph in the
+standard X11 cursor font, or an image object.
+@end defun
+
+Note that as of yet (version 0.6), image-derived cursors are still
+unimplemented.
+
+@defvar default-cursor
+The cursor object displayed in the root window, and in parts of window
+frames that have no other cursor specified.
+@end defvar
+
+So that the integer indices of glyphs in the X11 cursor font do not
+have to be remembered, the @code{cursor-shape} properties of the
+following symbols are automatically set:
+
+@noindent
+@code{X_cursor}, @code{arrow}, @code{based_arrow_down},
+@code{based_arrow_up}, @code{boat}, @code{bogosity},
+@code{bottom_left_corner}, @code{bottom_right_corner},
+@code{bottom_side}, @code{bottom_tee}, @code{box_spiral},
+@code{center_ptr}, @code{circle}, @code{clock}, @code{coffee_mug},
+@code{cross}, @code{cross_reverse}, @code{crosshair},
+@code{diamond_cross}, @code{dot}, @code{dotbox}, @code{double_arrow},
+@code{draft_large}, @code{draft_small}, @code{draped_box},
+@code{exchange}, @code{fleur}, @code{gobbler}, @code{gumby},
+@code{hand1}, @code{hand2}, @code{heart}, @code{icon},
+@code{iron_cross}, @code{left_ptr}, @code{left_side}, @code{left_tee},
+@code{leftbutton}, @code{ll_angle}, @code{lr_angle}, @code{man},
+@code{middlebutton}, @code{mouse}, @code{pencil}, @code{pirate},
+@code{plus}, @code{question_arrow}, @code{right_ptr},
+@code{right_side}, @code{right_tee}, @code{rightbutton},
+@code{rtl_logo}, @code{sailboat}, @code{sb_down_arrow},
+@code{sb_h_double_arrow}, @code{sb_left_arrow}, @code{sb_right_arrow},
+@code{sb_up_arrow}, @code{sb_v_double_arrow}, @code{shuttle},
+@code{sizing}, @code{spider}, @code{spraycan}, @code{star},
+@code{target}, @code{tcross}, @code{top_left_arrow},
+@code{top_left_corner}, @code{top_right_corner}, @code{top_side},
+@code{top_tee}, @code{trek}, @code{ul_angle}, @code{umbrella},
+@code{ur_angle}, @code{watch}, @code{xterm}.
+
+The glyphs associated with these names are shown in Appendix I, of
+Volume Two, @cite{Xlib Reference Manual}.
+
+
+@node Windows, Customization, Cursors, Top
+@chapter Windows
+@cindex Windows
+
+One of the most important data types in sawmill is the window type. All
+managed client windows have a single window object associated with
+them.
+
+@defun windowp arg
+Returns @code{t} if @var{arg} is a member of the window type, and has a
+client window associated with it.
+@end defun
+
+@defun managed-windows
+Returns a list containing all managed window objects, in no particular
+order.
+@end defun
+
+@menu
+* Window Attributes::
+* Input Focus::
+* X Properties::
+* Window Stacking::
+* Moving and Resizing Windows::
+* Showing and Hiding Windows::
+* Destroying Windows::
+* Shading Windows::
+* Iconifying Windows::
+* Maximizing Windows::
+@end menu
+
+
+@node Window Attributes, Input Focus, , Windows
+@section Window Attributes
+@cindex Window attributes
+@cindex Attributes, of windows
+@cindex Windows, attributes of
+
+@defun window-put window property value
+Set the lisp property named @var{property} (a symbol) of @var{window}
+to @var{value}.
+@end defun
+
+@defun window-get window property
+Return the window property named @var{property} of @var{window}, or
+@code{nil} if no such property exists.
+@end defun
+
+@defun window-name window
+Return the name associated with @var{window}.
+@end defun
+
+@defun window-full-name window
+Return the full-name associated with @var{window}. This may or may not
+be the same as the normal name.
+@end defun
+
+@defun window-icon-name window
+Return the icon name associated with @var{window}.
+@end defun
+
+@defun window-mapped-p window
+Return @code{t} if the client window associated with object
+@var{window} is mapped. (Note that this doesn't necessarily mean that
+it is visible.)
+@end defun
+
+@defun window-transient-p window
+Returns @code{nil} if @var{window} isn't marked as a transient window.
+Otherwise returns an integer, the xid of the parent window.
+@end defun
+
+@defun window-shaped-p window
+Return @code{t} if @var{window} is shaped (possibly not rectangular).
+@end defun
+
+@defun window-id window
+Return an integer, the xid of the client window associated with
+@var{window}.
+@end defun
+
+@defun window-group-id window
+Return an integer defining the xid of the leader of the group that
+@var{window} is a member of, or @code{nil} if @var{window} is not a
+member of a group.
+@end defun
+
+@defun window-dimensions window
+Returns a cons cell @code{(@var{width} . @var{height})} defining the
+dimensions of the client window associated with object @var{window}.
+@end defun
+
+@defun window-position window
+Returns a cons-cell @code{(@var{x} . @var{y})} defining the position
+relative to the root window of @var{window}.
+@end defun
+
+@defun window-size-hints window
+Return an alist defining the size-hints structure specified by the
+client window associated with @var{window}. Possible keys in the alist
+are @code{min-height}, @code{max-height}, @code{min-width},
+@code{max-width}, @code{height-inc}, @code{width-inc},
+@code{min-aspect}, @code{max-aspect}, @code{base-height},
+@code{base-width}, @code{user-position}, @code{program-position},
+@code{user-size}, @code{program-size}.
+@end defun
+
+@defun window-visibility window
+Returns a symbol defining the current visibility of @var{window}.
+Possible returned symbols are @code{fully-obscured},
+@code{partially-obscured} or @code{unobscured}.
+@end defun
+
+
+@node Input Focus, X Properties, Window Attributes, Windows
+@section Input Focus
+@cindex Input focus
+@cindex Keyboard focus
+@cindex Focus, input
+@cindex Windows, input focus
+
+The input focus defines exactly which client window will receive events
+generated by the keyboard.
+
+@defun input-focus
+Returns the window object of the currently focused window, or
+@code{nil} if no window is focused.
+@end defun
+
+@defun set-input-focus window
+Sets the focus to the client window associated with @var{window}.
+@end defun
+
+@defvar focus-mode
+Defines the current method of using the mouse to assign the input
+focus. Possible values are @code{enter-exit}, @code{enter-only} and
+@code{click}.
+@end defvar
+
+@defvar focus-proxy-click
+When in click-to-focus mode, the focus-assigning click is only passed
+through to the client window if this variable is non-@code{nil}.
+
+This option may be set on a per-window basis by setting the
+@code{focus-proxy-click} property of the window (using the
+@code{window-put} function).
+@end defvar
+
+
+@node X Properties, Window Stacking, Input Focus, Windows
+@section X Properties
+@cindex X properties
+@cindex Properties, X
+@cindex Windows, X properties
+
+The X window system associates properties with windows (these are
+totally separate to the properties that sawmill associates with window
+@emph{objects}). Most inter-client communication is performed through
+manipulation of these properties.
+
+All functions defined below, that operate on X properties, accept their
+@var{window} parameter as either a window object (denoting the
+associated client window), the numeric xid of a window, or the symbol
+@code{root} denoting the root window.
+
+Sawmill represents X atoms (both the names and data types of  X
+properties) as symbols. There is an exact correspondence between the
+names of atoms and the name of the symbol representing them. For
+example, the X atom @samp{STRING} is represented by the lisp symbol
+@code{STRING}.
+
+@defun list-x-properties window
+Return a list of symbols defining the X properties set on @var{window}.
+@end defun
+
+@defun delete-x-property window property
+Deletes the X property named @var{property} (a symbol) associated with
+@var{window}.
+@end defun
+
+@defun get-x-property window property
+Returns a list @code{(@var{type} @var{format} @var{data})} representing
+the X property @var{property} of @var{window}. If no such property
+exists, return nil.
+
+@var{type} is the atom defining the type of the property. @var{format}
+is an integer, either 8, 16 or 32, defining the number of bits in each
+of the data items. @var{data} is an array, either a string for an 8-bit
+format property, or a vector of integers otherwise.
+
+If @var{type} is @code{ATOM} and @var{format} is 32, then @var{data}
+will be a vector of symbols, representing the atoms read.
+@end defun
+
+@defun set-x-property window property data type format
+Set the X property @var{property} of @var{window} to the array
+@var{data}, either a string or a vector of integers.
+
+@var{type} is a symbol representing the atom defining the type of the
+property; @var{format} is either 8, 16 or 32 defining the number of
+bits in the data values.
+
+If @var{type} is @code{ATOM} and @var{format} is 32, then any symbols
+in @var{data} will be converted to their numeric X atoms.
+@end defun
+
+It's also possible to detect when the value of any property associated
+with a managed window changes, using the @code{property-notify-hook}.
+@xref{Standard Hooks}.
+
+
+@node Window Stacking, Moving and Resizing Windows, X Properties, Windows
+@section Window Stacking
+@cindex Window stacking
+@cindex Stacking, of windows
+@cindex Windows, stacking
+
+The stacking order of the display defines the order in which windows
+are shown, from top-most to bottom-most.
+
+@defun stacking-order
+Return a list of window objects defining the current stacking order of
+all client windows, from top-most to bottom-most.
+@end defun
+
+@defun restack-windows list
+Restack all client windows specified in the list of window objects
+@var{list} in the order they occur in the list (from top to bottom).
+The stacking order of any unspecified windows isn't affected.
+@end defun
+
+@defun x-raise-window window
+Raise the client window associated with object @var{window} to the top
+of the display.
+@end defun
+
+Sawmill allows the stacking order to be managed as a sequence of
+layers, with windows being assigned a particular depth within the
+order. For any given window with depth @var{d}, it will be above all
+windows with depth less than @var{d}, and below all windows with depth
+greater than @var{d}. It may be above or below any other windows with
+depth @var{d}.
+
+The @code{depth} property of each window is used to store this depth. A
+depth of zero is ``normal'', with negative depths being below, and
+positive depths stacked above.
+
+@defun stacking-order-by-depth depth
+Similar to @code{stacking-order}, but only returns windows with depth
+@var{depth}.
+@end defun
+
+@defun set-window-depth window depth
+Set the stacking depth of @var{window} to @var{depth}, then restacks
+the windows to reflect this change.
+@end defun
+
+@defun window-on-top-p window
+Returns @code{t} if @var{window} is at the top of its stacking depth.
+@end defun
+
+@defun stack-window-below below above
+Change stacking order of window @var{below} so that it is immediately
+below window @var{above}.
+@end defun
+
+@defun stack-window-above above below
+Change stacking order of window @var{above} so that it is immediately
+above window @var{below}.
+@end defun
+
+@defmac save-stacking-order &rest forms
+Evaluate @var{forms} in an implicit @code{progn}, then restore the
+original window stacking order, returning the value of the
+@code{progn}.
+@end defmac
+
+As windows are created their stacking depth may be automatically set
+through the contents of the @code{auto-depth-alist} variable.
+
+@defvar auto-depth-alist
+An alist associating regular expressions with integer depths. If the
+name of a newly created window matches one of the regular expressions
+it is given the associated depth.
+@end defvar
+
+For the following functions, when called interactively they all operate
+on the window that received the current event, or alternatively the
+currently focused window.
+
+@deffn Command lower-window window
+Lower @var{window} to the bottom of its stacking depth.
+@end deffn
+
+@deffn Command raise-window window
+Raise @var{window} to the bottom of its stacking depth.
+@end deffn
+
+@deffn Command raise-lower-window window
+If @var{window} is the highest in its stacking level, lower it to the
+bottom of this level, otherwise raise it to the top of its level.
+@end deffn
+
+@deffn Command lower-window-depth window
+Decrement the stacking depth of @var{window}.
+@end deffn
+
+@deffn Command raise-window-depth window
+Increment the stacking depth of @var{window}.
+@end deffn
+
+
+@node Moving and Resizing Windows, Showing and Hiding Windows, Window Stacking, Windows
+@section Moving and Resizing Windows
+@cindex Moving and resizing windows
+@cindex Resizing and moving windows
+@cindex Windows, moving and resizing
+
+As noted above (@pxref{Window Attributes}), the
+@code{window-dimensions} and @code{window-position} functions return
+the current configuration of a window.
+
+Two analogous functions exist for modifying this configuration:
+
+@defun move-window-to window x y
+Move the top-left corner of the window frame of @var{window} to
+(@var{x}, @var{y}).
+@end defun
+
+@defun resize-window-to window width height
+Set the dimensions of the client window associated with object
+@var{window} to (@var{width}, @var{height}).
+@end defun
+
+Usually, however, it is left to the user to configure windows. The
+following functions may be called interactively: their sole argument is
+then either the window that received the current event or the currently
+focused window.
+
+@deffn Command move-window-interactively window
+Move @var{window} interactively using the mouse. Releasing any mouse
+button places the window at its current position.
+@end deffn
+
+@deffn Command resize-window-interactively window
+Resize @var{window} interactively using the mouse. Releasing any mouse
+button places the window at its current position.
+
+Note that this function selects the edge or edges of the window to move
+from the current position of the mouse when the resizing begins. The
+window is divided into a three-by-three grid; the rectangle containing
+the mouse pointer gives the direction to resize in. If the pointer is
+in the central rectangle the bottom and right edges are moved.
+@end deffn
+
+@deffn Command move-selected-window
+Wait for the user to select a window using the mouse, then
+interactively move that window.
+@end deffn
+
+@deffn Command resize-selected-window
+Wait for the user to select a window with the mouse, then interactively
+resize that window.
+@end deffn
+
+
+@node Showing and Hiding Windows, Destroying Windows, Moving and Resizing Windows, Windows
+@section Showing and Hiding Windows
+@cindex Showing and hiding windows
+@cindex Hiding and showing windows
+@cindex Windows, showing and hiding
+
+Sawmill provides two low-level functions for withdrawing client windows
+from the display. These are used to implement both virtual workspaces
+(@pxref{Workspaces}) and iconification (@pxref{Iconifying Windows}).
+
+@defun hide-window window
+Prevent object @var{window} from being displayed.
+@end defun
+
+@defun show-window window
+Ensure that @var{window} (if it has been mapped, and is within the
+screen boundary) is visible.
+@end defun
+
+@defun window-visible-p window
+Returns @code{t} if object @var{window} has not been hidden by the
+@code{hide-window} function.
+@end defun
+
+
+@node Destroying Windows, Shading Windows, Showing and Hiding Windows, Windows
+@section Destroying Windows
+@cindex Destroying windows
+@cindex Windows, destroying
+
+There are two methods of deleting a client window from the display. The
+first asks the owner of the window to delete it if possible, while the
+second destroys the window immediately.
+
+@deffn Command delete-window window
+Delete @var{window}, i.e. send a @code{WM_DELETE_WINDOW} client-message
+if possible, or just delete the window if not.
+
+@var{window} may be a window object or a numeric window id.
+@end deffn
+
+@deffn Command destroy-window window
+Destroy @var{window} without giving the owning application any warning.
+
+@var{window} may be a window object or a numeric window id.
+@end deffn
+
+When a managed window is destroyed, the @code{destroy-notify-hook} will
+subsequently be invoked (@pxref{Standard Hooks}).
+
+
+@node Shading Windows, Iconifying Windows, Destroying Windows, Windows
+@section Shading Windows
+@cindex Shading windows
+@cindex Windows, shading
+
+Many window managers allow a window to be @dfn{shaded}; when in this
+state only the title bar of the window is visible.
+
+@deffn Command shade-window window
+Arrange for only the title bar of @var{window} to be visible.
+@end deffn
+
+@deffn Command unshade-window window
+If the window is shaded, restore it to it's original state.
+@end deffn
+
+@deffn Command toggle-window-shaded
+Toggle the shaded state of the window.
+@end deffn
+
+The @code{shaded} property of a window is set to @code{t} when the
+window is shaded. If a window is added with this property already set,
+then the window will appear in its shaded state.
+
+
+@node Iconifying Windows, Maximizing Windows, Shading Windows, Windows
+@section Iconifying Windows
+@cindex Iconifying windows
+@cindex Windows, iconifying
+
+X defines an iconic state for windows, often windows in this state are
+displayed as small icons. Sawmill does not display these icons, instead
+iconified windows are shown slightly differently in the menu of all
+windows.
+
+@deffn Command iconify-window window
+Iconify the window associated with object @var{window}.
+@end deffn
+
+@deffn Command uniconify-window window
+Return the window associated with @var{window} from its iconified state.
+@end deffn
+
+A window's iconic state may be tested through examination of its
+@code{iconified} property---when @code{t} the window is iconified.
+
+
+@node Maximizing Windows, , Iconifying Windows, Windows
+@section Maximizing Windows
+@cindex Maximizing windows
+@cindex Windows, maximizing
+
+The dimensions of a window may be temporarily @dfn{maximized}.
+
+@deffn Command maximize-window window &optional direction
+Maximize both dimensions of @var{window}
+
+If defined, @var{direction} may be either @code{vertical} or
+@code{horizontal}.
+@end deffn
+
+@deffn Command maximize-window-vertically window
+Maximize the vertical dimension of @var{window}.
+@end deffn
+
+@deffn Command maximize-window-horizontally window
+Maximize the horizontal dimension of @var{window}.
+@end deffn
+
+@deffn Command unmaximize-window window &optional direction
+Restore the dimensions of @var{window} to its original, unmaximized,
+state.
+
+If defined, @var{direction} may be either @code{vertical} or
+@code{horizontal}.
+@end deffn
+
+@deffn Command maximize-window-toggle window
+Toggle the state of @var{window} between maximized and unmaximized.
+
+If defined, @var{direction} may be either @code{vertical} or
+@code{horizontal}.
+@end deffn
+
+@deffn Command maximize-window-vertically-toggle window
+Toggle the state of @var{window} between vertically maximized and
+unmaximized.
+@end deffn
+
+@deffn Command maximize-window-horizontally-toggle window
+Toggle the state of @var{window} between horizontally maximized and
+unmaximized.
+@end deffn
+
+@defun window-maximized-p window
+Return @code{t} when @var{window} is in the maximized state.
+@end defun
+
+@defun window-maximized-vertically-p window
+Return @code{t} when @var{window} is vertically maximized.
+@end defun
+
+@defun window-maximized-horizontally-p window
+Return @code{t} when @var{window} is horizontally maximized.
+@end defun
+
+
+@node Customization, Window Frames, Windows, Top
+@chapter Customization
+@cindex Customization
+
+Sawmill provides two levels of configuration:
+
+@enumerate
+@item @dfn{customization}: setting variables to change the behavior of
+existing features of the window manager, and,
+
+@item @dfn{extensibility}: the ability to add entirely new features to
+the window manager through the creation of new Lisp modules.
+@end enumerate
+
+Obviously the first of these requires a lot less specialized knowledge
+than the second. But even then, the user has to edit startup files
+containing the Lisp forms setting the variables. To remove this need
+for hand-editing, Sawmill has a specialized system allowing all
+customizations to be made through a GUI, and then automatically
+reloaded each time that the window manager is started.
+
+@deffn Command customize &optional group
+Invoke the user-customization GUI. @var{group} defines the class of
+customization variables to configure, or all classes if @var{group} is
+undefined.
+@end deffn
+
+The @file{sawmill-ui} program can also be used to invoke the GUI; if
+GNOME is being used, then the GNOME Control Center can also be used to
+customize certain classes.
+
+In order to provide these customization options however, an extra
+requirement is placed on the Lisp programmer. Instead of just using the
+@code{defvar} special form to declare variables, the @code{defcustom}
+macro must be used. This augments the variable with extra information
+for the GUI, including such things as its required data type. Also,
+customization options are organized into groups.
+
+@defmac defgroup group real-name &rest keys
+Declares a new customization group whose name is defined by the symbol
+@var{group}. The string @var{real-name} is the title of the group as
+seen by the user.
+
+@var{keys} is a list, defining the properties of the group. The members
+of the list are grouped into pairs of elements, the first element names
+the property, the second defines its value. Currently the only property
+is @code{:widget}, defining a function to create the group's UI widget.
+
+This macro also creates an interactive function named
+@code{customize:@var{group}} allowing the GUI to be invoked for the new
+group.
+@end defmac
+
+@defmac defcustom variable value documentation &rest keys
+The first three arguments are analogous to the @code{defvar} special
+form, they declare a special variable stored in the symbol
+@var{variable}, whose value is set to @var{value} if the variable is
+currently unbound, with a documentation string @var{documentation}.
+
+All other parameters are key-value pairs as with @code{defgroup}. The
+possible pairs are as follows:
+
+@table @code
+@item :group @var{group}
+Specifies the customization group that this variable is a member of.
+
+@item :type @var{type}
+Specifies the required type of the variable. The current possibilities
+are @code{boolean}, @code{number}, @code{string}, @code{file-name},
+@code{program-name}, @code{font}, @code{color}, @code{frame-style},
+@code{keymap} and @code{(set @var{symbols}@dots{})}.
+
+The @code{boolean} type assures a value of either @code{nil} or
+@code{t}, the @code{set} type allows the user to choose from one of the
+symbols in the list.
+
+@item :require @var{feature}
+Denotes that the feature @var{feature} must be loaded before the
+variable may be set. This is necessary because customization options
+are loaded on startup, possibly before the modules that define them.
+
+@item :allow-nil @var{bool}
+Specifies whether the variable may be @code{nil}, instead of a member
+of its actual type. This is only supported by the @code{set},
+@code{font} and @code{color} types.
+
+@item :set @var{function}
+Specifies that the variable must be set by calling @var{function}
+instead of the default @code{custom-set-variable}. The function should
+accept three arguments: @code{(@var{variable} @var{value} &optional
+@var{require})}.
+
+The usual action of this function is to translate the value into the
+correct type, then call @code{custom-set-variable}. This translation is
+necessary since many of the UI widgets accept strings representing more
+complex types (i.e. a color's name, instead of the actual object)
+
+@item :get @var{function}
+Provides a function for reading the current value of the variable.
+Should return a value that's acceptable to the UI widget associated
+with the variable. Called with a single argument, the symbol containing
+the variable.
+
+@item :before-set @var{function}
+@itemx :after-set @var{function}
+Functions called both immediately before and after setting the value of
+the variable. Called with a single parameter: the variable itself.
+
+@item :range (@var{min} . @var{max})
+The allowed range for numeric variables. If @var{min} is @code{nil} the
+the default minimum allowed value is zero; if @var{max} is @code{nil}
+then the default maximum is unbounded.
+
+@end table
+@end defmac
+
+Note that where necessary the types themselves define default
+@code{:set}, @code{:get} and @code{:widget} values that may be
+overridden by values in the @code{defcustom} call. Usually, however,
+this will not be necessary.
+
+Consider the following example:
+
+@lisp
+(defgroup move "Move/Resize")
+
+(defcustom move-outline-mode 'opaque
+  "The method of drawing windows being moved interactively."
+  :type (set opaque box)
+  :group move)
+
+(defcustom move-snap-epsilon 8
+  "Proximity in pixels before snapping to a window edge."
+  :group move
+  :type number
+  :range (0 . 64))
+@end lisp
+
+@noindent
+This defines a group and two customization options.
+
+
+@node Window Frames, Workspaces, Customization, Top
+@chapter Window Frames
+@cindex Window frames
+@cindex Frames, of windows
+
+Perhaps one of the most important features of a window manager is its
+ability to decorate client windows, typically seen as an added border,
+and then to allow the window to be manipulated through user input on
+the border.
+
+Sawmill provides an extremely flexible method of decorating windows,
+the look and feel of the border may be specified completely. Also, no
+limits are placed on which windows are given which borders, if
+necessary a completely different border could be dynamically created
+for each window!
+
+@menu
+* Frame Basics::
+* Frame Part Classes::
+* Frame Part Definition::
+* Frame Functions::
+* Frame Types::
+* Frame Styles::
+* Themes::
+* Removing Frame Parts::
+@end menu
+
+@node Frame Basics, Frame Part Classes, , Window Frames
+@section Frame Basics
+@cindex Frame basics
+@cindex Window frames, basics
+
+The @dfn{frame} of a client window is defined as all decorations added
+by the window manager. Usually these decorations will be immediately
+adjacent to the outer edges of the window, but there is no requirement
+to use this model.
+
+In Sawmill, each window frame is constructed from a list of @dfn{frame
+parts}, conceptually rectangular objects with a specified position
+relative to the edges of the client window. When shaped images are used
+to define frame parts, they are still thought of as being rectangular,
+just with some pixels missing from the display.
+
+Each frame part has a list of attributes associated with it, these
+include items defining the background of the part (i.e. a color or an
+image), and items defining the foreground of the part (i.e. probably
+some kind of text, with a color, font, etc@dots{}). Non-visual
+attributes may also be defined, such as, for example, the keymap
+mapping events occurring in the part to Lisp commands to execute
+(@pxref{Keymaps}).
+
+So a window frame is defined in Lisp as a list of frame part
+definitions (@pxref{Frame Part Definition}). These frame parts are
+added to the client window (in the order they are defined, so later
+frame parts are above earlier parts at the same position), to produce
+the entire window frame.
+
+
+@node Frame Part Classes, Frame Part Definition, Frame Basics, Window Frames
+@section Frame Part Classes
+@cindex Frame part classes
+@cindex Window frames, frame part classes
+@cindex Classes, of frame parts
+
+Although one of the aims of Sawmill is to provide as much flexibility
+as possible, this can sometimes be detrimental to the overall
+experience. For example, it would be easier for the user if all themes
+use consistent keymaps and cursor images in conceptually similar parts
+of window frames. That is, it would be better if all close buttons had
+the same mouse button bindings and the same mouse cursor displayed when
+the pointer is over them.
+
+To achieve this, Sawmill defines a number of @dfn{classes} of frame
+parts, each with several default attributes. When defining a window
+frame, the definitions of each part then specifies which class it is a
+member of, and inherits the associated default attributes (provided
+that it hasn't explicitly specified values for these attributes).
+
+@defvar frame-part-classes
+This variable is an association list, associating symbols naming frame
+part classes with an association list of default attributes for that
+class.
+@end defvar
+
+The names of the pre-defined classes are as follows, their meanings
+should be self-explanatory:
+
+@code{title}, @code{menu-button}, @code{close-button},
+@code{iconify-button}, @code{maximize-button}, @code{top-border},
+@code{left-border}, @code{right-border}, @code{bottom-border},
+@code{top-left-corner}, @code{top-right-corner},
+@code{bottom-left-corner}, @code{bottom-right-corner}.
+
+@noindent
+Extra classes can be created by adding to @code{frame-part-classes}.
+
+
+@node Frame Part Definition, Frame Functions, Frame Part Classes, Window Frames
+@section Frame Part Definitions
+@cindex Frame part definitions
+@cindex Window frames, frame part definitions
+
+Each frame part is defined as an association list (or alist), a list of
+cons cells, the car of each cell defines the attribute, the cdr defines
+the value given to that attribute. So, for example, the alist
+@code{((foo . 1) (bar . 2))} specifies to attributes: @code{foo} with
+value @code{1}, and @code{bar} with value @code{2}.
+@xref{(librep)Association Lists}.
+
+The attributes that may be defined are as follows:
+
+@table @code
+@item (class . @var{class})
+Specifies the frame part class of the part.
+
+@item (background . @var{data})
+@itemx (background . (@var{normal} @var{focused} @var{highlighted} @var{clicked}))
+Specifies the background of the part. May be a color, an image, or a
+string naming a color. If a single element, then it is used for all
+states of the part, otherwise if a list, then each of the four elements
+defines the background for that particular state.
+
+@item (foreground . @var{color})
+@itemx (foreground . (@var{normal} @var{focused} @var{highlighted} @var{clicked}))
+Specifies the foreground color of the frame part, either for all
+states, or for each individual state.
+
+@item (font . @var{font})
+@itemx (font . (@var{normal} @var{focused} @var{highlighted} @var{clicked}))
+Specifies the font(s) of the part.
+
+@item (text . @var{value})
+Specifies the string to draw in the foreground of the frame part.
+Either a string, or a function, that will be called each time that the
+part is refreshed, that will return the string to draw.
+
+@item (x-justify . @var{value})
+Defines the horizontal position of the text in the part. May be one of
+the symbols @code{left}, @code{right} or @code{center}, or a number. If
+a number it defines the number of pixels from the left edge if
+positive, or the right edge if negative.
+
+@item (y-justify . @var{value})
+Similar to @code{x-justify}, but the accepted symbols are @code{top},
+@code{bottom} or @code{center} instead.
+
+@item (renderer . @var{function})
+This attribute may be used instead of the @code{background} attribute.
+When the part needs to be drawn @var{function} will be called with an
+image in which to render the background, and the current state of the
+part, a symbol @code{focused}, @code{highlighted}, @code{clicked}, or
+@code{nil} (for the normal state).
+
+@item (render-scale . @var{value})
+This attribute causes the size of the image used with the
+@code{renderer} property to be reduced by a factor of @var{value}, an
+integer.
+
+@item (left-edge . @var{value})
+Defines the position of the left edge of the part, in relation to the
+left edge of the client window.
+
+@item (right-edge . @var{value})
+Defines the position of the right edge of the part, in relation to the
+right edge of the client window.
+
+@item (top-edge . @var{value})
+Defines the position of the top edge of the part, in relation to the
+top edge of the client window.
+
+@item (bottom-edge . @var{value})
+Defines the position of the bottom edge of the part, in relation to the
+bottom edge of the client window.
+
+@item (width . @var{value})
+Defines the width of the frame part.
+
+@item (height . @var{value})
+Defines the height of the frame part.
+
+@item (keymap . @var{value})
+Defines the keymap to use when evaluating events originating in this
+frame part.
+
+@item (cursor . @var{cursor})
+Defines the cursor to display when the mouse is in this part. May be
+either a cursor object, or the argument to @code{get-cursor} to create
+the required cursor object.
+
+@item (removable . @var{value})
+When specified and @var{value} is non-nil, this frame part may be
+removed from the frame without being detrimental to the overall
+appearance of the frame. This is only important for button classes,
+which may sometimes be removed at the request of the client window.
+@end table
+
+The values specified for the @code{background}, @code{foreground},
+@code{render-scale}, @code{font}, @code{left-edge}, @code{right-edge},
+@code{top-edge}, @code{bottom-edge}, @code{width} and @code{height}
+attributes may actually be functions. In which case the function will
+be called (with a single argument, the window object) when the frame is
+constructed, the value returned will be used as the actual value of the
+attribute.
+
+The coordinate system used for specifying the part's position is
+relative to the window edge that the position is defined against.
+Positive values count in from the window edge towards the center of the
+window, while negative values count out from the edge, away from the
+center of the window.
+
+Consider the following example, a solid black title bar that is twenty
+pixels high, directly above the client window:
+
+@lisp
+((background . "black")
+ (foreground . "white")
+ (text . window-name)
+ (x-justify . 30)
+ (y-justify . center)
+ (left-edge . 0)
+ (right-edge . 0)
+ (top-edge . -20)
+ (height . 20)
+ (class . title))
+@end lisp
+
+@noindent
+Note how the @code{window-name} function is used to dynamically specify
+the string drawn in the foreground. The window manager will
+automatically refresh the foreground of all frame parts of a window
+whenever any X property of that window changes.
+
+
+@node Frame Functions, Frame Types, Frame Part Definition, Window Frames
+@section Frame Functions
+@cindex Frame functions
+@cindex Window frames, functions
+
+@defun set-window-frame window frame-def
+Sets the frame of the client window associated with the object
+@var{window} to that defined by the list of frame part definitions
+@var{frame-def}. If the window is mapped the old frame will be
+destroyed and a new frame constructed.
+@end defun
+
+@defun window-frame window
+Return the list of frame part definitions defining the frame associated
+with @var{window}.
+@end defun
+
+@defun rebuild-frame window
+Recreates the window frame associated with @var{window}, from the
+previously defined frame definition. All frame parts are reinitialized
+and recalibrated.
+@end defun
+
+@defun window-frame-dimensions window
+Return a cons cell @code{(@var{width} . @var{height})} defining the
+dimensions of the frame associated with @var{window}. These will always
+be greater than or equal to the dimensions of the client window.
+@end defun
+
+@defun window-frame-offset window
+Return a cons cell @code{(@var{x} . @var{y})} defining the offset from
+the origin of the client window associated with @var{window} to the
+origin of its frame.
+@end defun
+
+
+@node Frame Types, Frame Styles, Frame Functions, Window Frames
+@section Frame Types
+@cindex Frame types
+@cindex Window frames, types
+
+In order to visually differentiate between different types of windows,
+several predefined types of window frame exist. These types currently
+include the following:
+
+@table @code
+@item default
+The normal frame type. Includes all decorations, both borders and the
+title bar.
+
+@item transient
+The frame for a transient window. This usually does not include a title
+bar, but does have all four borders.
+
+@item shaped
+Shaped windows are normally decorated with only a title-bar, since
+their boundary is not rectangular it makes no sense to surround them
+with a rectangular border.
+
+@item shaped-transient
+A combination of the @code{shaped} and @code{transient} types, normally
+just a very small title border with no text.
+
+@item unframed
+No frame at all, just the client window itself.
+@end table
+
+The type of frame that would ideally be given to a window is stored in
+the window's @code{type} property. It should usually be accessed
+through the @code{window-type} function:
+
+@defun window-type window
+Returns a symbol naming the frame type currently associated with
+@var{window}.
+@end defun
+
+
+@node Frame Styles, Themes, Frame Types, Window Frames
+@section Frame Styles
+@cindex Frame styles
+@cindex Styles, frame
+@cindex Window frames, styles
+
+Frame styles are used to encapsulate frames of the different types that
+have a single visual appearance. Each frame style associates a name
+with a function that creates a frame definition for a particular window
+and frame type combination.
+
+@defun add-frame-style name function
+Defines a new frame style called @var{name} (a symbol). When a frame of
+this style is required for a particular window, @var{function} is
+called with two arguments, the window itself and a symbol defining the
+frame type to create (@pxref{Frame Types}).
+
+If no default frame style exists, the new style will be made the
+default.
+@end defun
+
+@defvar default-frame-style
+A symbol naming the frame style to use for windows where no other style
+is explicitly specified.
+@end defvar
+
+@defun check-frame-availability name
+Returns @code{t} if a frame style called @var{name} exists. Will try to
+load such a frame from the filing system if necessary.
+@end defun
+
+@defun set-window-frame-style window style &optional type from-user
+Sets the frame of @var{window} to the style named by the symbol
+@var{style}. If @var{type} is defined then it names the frame type to
+use, otherwise the default type for this window is used.
+
+If @var{from-user} is non-nil then the user chose this frame style for
+the window explicitly (i.e. it's not just the default choice for a new
+window).
+@end defun
+
+@defun set-frame-for-window window &optional force type
+If @var{window} has no frame style associated with it, then chooses the
+default value for this window, either a value from
+@code{auto-frame-style-alist} or the value of
+@code{default-frame-style}.
+
+If @var{force} is non-nil then the style is always re-chosen, even if
+the window already has a chosen default style.
+
+If @var{type} is non-nil it defines the frame type to give the window,
+otherwise the current default for the window is used.
+@end defun
+
+@defvar auto-frame-style-alist
+Alist associating regular expressions with frame style names. If the
+name of a new window matches one of the regular expressions, it's given
+the associated frame style.
+@end defvar
+
+@defun reframe-all-windows
+Forcibly reselect all window frame styles. Only windows with a user
+specified style are not changed to the current defaults.
+@end defun
+
+Several window properties are used while choosing frame styles:
+
+@defvr {Window Property} frame-style
+The user-chosen frame style of the window, or @code{nil}.
+@end defvr
+
+@defvr {Window Property} current-frame-style
+The current frame style of the window.
+@end defvr
+
+@defvr {Window Property} ignored
+When set, the window is not given a frame.
+@end defvr
+
+
+@node Themes, Removing Frame Parts, Frame Styles, Window Frames
+@section Themes
+@cindex Themes
+@cindex Window frames, themes
+
+Themes and frame styles are currently almost synonymous, the slight
+difference being that themes provide a mechanism for loading frame
+styles from the filing system as they are required. Although it is
+possible that themes may include other user-interface settings in a
+later version, at the moment it seems unlikely.
+
+When a frame style is requested, if it is not already available (i.e.
+if the @code{add-frame-style} function hasn't been called for that
+style) then the window manager will attempt to load a theme of the same
+name from the filing system.
+
+Each theme is stored in a directory; this directory must have the same
+name as the name of the theme itself. Within this directory there must
+be a Lisp script named @file{theme.jl} or @file{theme.jlc}. This script
+will be evaluated, it should provide a frame style of the same name as
+the theme (by calling @code{add-frame-style}).
+
+While the theme script is evaluating the @code{image-load-path}
+variable is set to include the theme directory as its first element.
+This ensures that any image files stored in the directory can be loaded
+using the @code{make-image} function.
+
+Since rep has no module system, any variables defined within the theme
+must be prefixed by the name of the theme to ensure their uniqueness.
+For example, in the theme @code{foo}, a variable @code{bar} would
+actually be called @code{foo:bar}.
+
+@defvar theme-load-path
+A list of directory names, provides the search path for locating theme
+directories. By default this includes the user's theme directory and
+the system theme directory.
+@end defvar
+
+@defvar user-theme-path
+The name of the user's theme directory, by default
+@file{~/.sawmill/themes}.
+@end defvar
+
+@defvar system-theme-path
+The name of the system theme directory.
+@end defvar
+
+
+@node Removing Frame Parts, , Themes, Window Frames
+@section Removing Frame Parts
+@cindex Removing frame parts
+@cindex Frame parts, removing
+@cindex Window frames, removing frame parts
+
+It is often useful to be able to disable certain parts of a window's
+frame. For example, a window may hint to the window manager that it
+doesn't want a maximize button. Sawmill allows all parts of a
+particular class to be disabled or enabled on a window by window basis.
+However, not all frame styles will support this (it depends on the
+frame part's @code{removable} property, @ref{Frame Part Definition}).
+
+@defun remove-frame-class window class
+Disable all frame parts that are a member of @var{class} in
+@var{window} where possible.
+@end defun
+
+@defun add-frame-class window class
+Enable all frame parts that are a member of @var{class} in
+@var{window}.
+@end defun
+
+
+@node Workspaces, Popup Menus, Window Frames, Top
+@chapter Workspaces
+@cindex Workspaces
+@cindex Desktop workspaces
+
+XXX what do I want to say here?
+
+
+@node Popup Menus, Events, Workspaces, Top
+@chapter Popup Menus
+@cindex Popup menus
+@cindex Menus, popup
+
+Popup menus are one of the two main methods that the user make invoke
+Lisp code (the other is via keymaps, @pxref{Keymaps}). The
+@code{popup-menu} function is invoked with a list of menu item
+definitions and the associated Lisp function to call for each item.
+This starts a subprocess to display the menu, then at a later date the
+chosen menu item is received and evaluated.
+
+Each menu item is specified by a list, the first element of which is a
+string providing the label for the menu item, the second element is a
+function to be called if that item is selected by the user. If this
+function has an interactive specification it will be invoked using the
+@code{call-command} function, otherwise @code{funcall} will be used.
+So, for example, a single-level menu could be defined by:
+
+@lisp
+(("Item 1" function-1)
+ ("Item 2" function-2)
+ ()
+ ("Item 3" function-3))
+@end lisp
+
+@noindent
+The null item will create a separator line in the displayed menu.
+
+If the first element of any item is a symbol, then the whole item is
+replaced by the contents of the named variable. If the cdr of the first
+element is a symbol, then the rest of the item is defined by the result
+of calling the named function.
+
+Consider the following definition:
+
+@lisp
+(("Workspaces" . workspace-menu)
+ ("Windows" . window-menu)
+ (apps-menu)
+ ("Customize" . custom-menu)
+ ("About..." (lambda () (customize 'about)))
+ ()
+ ("Restart" restart)
+ ("Quit" quit))
+@end lisp
+
+@noindent
+This is the definition of Sawmill's root menu. We can see that three
+submenus are created dynamically by calling functions
+(@code{workspace-menu}, @code{window-menu} and @code{custom-menu}),
+while one submenu is stored in a separate variable (@code{apps-menu}).
+
+The @code{apps-menu} variable can thus be used to redefine the
+applications menu. The default definition is as follows:
+
+@lisp
+("Applications"
+ ("xterm" (lambda () (system "xterm &")))
+ ("Emacs" (lambda () (system "emacs &")))
+ ("Netscape" (lambda () (system "netscape &")))
+ ("The GIMP" (lambda () (system "gimp &")))
+ ("XFIG" (lambda () (system "xfig &")))
+ ("GV" (lambda () (system "gv &")))
+ ("xcalc" (lambda () (system "xcalc &"))))
+@end lisp
+
+@noindent
+Anonymous functions (@pxref{(librep)Anonymous Functions}) are used to
+execute the commands, using librep's @code{system} function
+(@pxref{(librep)Shell Commands}).
+
+@defun popup-menu spec
+Displays a menu defined by the list of item definitions @var{spec}.
+@end defun
+
+@defun popup-window-menu
+Display the menu listing all window operations.
+@end defun
+
+@defun popup-root-menu
+Display the main menu.
+@end defun
+
+@defvar apps-menu
+The variable containing the definition of the applications submenu of
+the root menu.
+@end defvar
+
+Since the overhead of starting the menu subprocess may be noticeable on
+some systems, it is possible to leave it running between menu requests.
+
+@defvar menu-program-stays-running
+This variable defines if, and for how long, the menu subprocess is
+allowed to remain executing for after the last menu has completed. If
+@code{nil}, the program is terminated immediately, if @code{t} it is
+left running indefinitely, if an integer then the program will run for
+that many seconds (unless another menu is displayed).
+@end defvar
+
+
+@node Events, Commands, Popup Menus, Top
+@chapter Events
+@cindex Events
+
+Events refer to input events from X that the window manager receives,
+either for the root window, the window frames it creates, or grabbed
+from the client windows themselves. Each event induced by the mouse or
+keyboard has a Lisp representation.
+
+Each input event is represented by a cons cell containing two integers,
+these integers encode the actual input event. The encoding is opaque;
+the only way to access an event meaningfully is via the functions
+provided.
+
+@defun eventp object
+This function returns @code{t} if its argument is an input event.
+@end defun
+
+Each event has a name, a string. This string contains zero or more
+modifier descriptions separated by hyphens, and then the name of the
+key itself. The standard X modifier names are provided, as well as two
+special modifiers @key{Meta} and @key{Alt} that are mapped to the
+keysyms of the same name.
+
+There are a variety of ways that each modifier may be entered, as shown
+by the following table:
+
+@table @kbd
+@item Meta
+@itemx M
+The meta modifier
+
+@item Alt
+@itemx A
+The alt modifier
+
+@item Shift
+@itemx S
+The shift modifier
+
+@item Mod@var{k}
+The standard X modifiers, for @var{k} between 1 and 5
+
+@item Button@var{k}
+The @var{k}'th mouse button is currently pressed
+@end table
+
+Generally keys have the same names as their X keysyms, there are
+several specially defined keys:
+
+@samp{SPC}, @samp{TAB}, @samp{RET}, @samp{ESC}, @samp{BS}, @samp{DEL},
+@samp{Up}, @samp{Down}, @samp{Left}, @samp{Right}.
+
+@noindent
+Also, there are several pseudo-keys for describing mouse events:
+
+@samp{Click1}, @samp{Click2}, @samp{Click3}, @samp{Off}, @samp{Move}.
+
+@noindent
+So, for example, a single click of the left mouse button with the
+@key{Meta} key held would be described as @kbd{M-Button1-Click1}, while
+pressing the @key{RET} key with @key{Shift} held would be described as
+@kbd{S-RET}.
+
+Functions are available to convert between the name of an event and the
+actual event itself, and vice versa.
+
+@defun lookup-event event-name
+Create and return a new input event whose name is @var{event-name}.
+
+@lisp
+(lookup-event "C-x")
+    @result{} (120 . 65540)
+
+(lookup-event "C-M-Button1-Click1")
+    @result{} (1 . 131340)
+@end lisp
+@end defun
+
+@defun event-name event
+This function returns a string naming the input event @var{event}.
+
+@lisp
+(event-name (lookup-event "C-x"))
+    @result{} "C-x"
+@end lisp
+@end defun
+
+
+@node Commands, Keymaps, Events, Top
+@chapter Commands
+@cindex Commands
+
+A @dfn{command} is a Lisp function which may be called interactively,
+that is, either as a result of being bound to an input event.
+
+Commands are defined in the same way as functions (using @code{defun}),
+but the body forms of the command must contain an @dfn{interactive
+declaration}. This marks that the function may be called interactively
+and tells the @code{call-command} function how to compute the argument
+values to apply to the command.
+
+The interactive declaration looks like a call to the special form
+@code{interactive}, in actual fact this special form always returns
+@code{nil} and has no side-effects. The only effect of this form is to
+show the @code{call-command} function that the function definition may
+be called interactively. The second element of the declaration form
+(after the @code{interactive} symbol) defines how the argument values
+applied to the command are computed.
+
+The structure of an interactive declaration, then, is:
+
+@lisp
+(interactive [@var{calling-spec}])
+@end lisp
+
+When a command is defined this is how it includes the interactive
+declaration:
+
+@lisp
+(defun some-command (arg1)
+  "Optional documentation string."
+  (interactive @dots{})
+  @dots{}
+@end lisp
+
+The @var{calling-spec} form defines the argument values applied to the
+command when it is called interactively, it may be one of,
+
+@itemize @bullet
+@item
+@code{nil} or undefined (i.e. @code{(interactive)}); no arguments are
+given to the command, this type of interactive declaration just shows
+that the function may be called interactively.
+
+@item A string; zero or more lines (each separated by a newline
+character), each line defines how to compute one argument value. The
+first character of each line is a code letter defining exactly how to
+compute the argument, the rest of the line is an optional argument
+which some code letters may use.
+
+The currently available code letters are,
+
+@table @samp
+@item e
+The event which caused this command to be invoked.
+
+@item E
+The event which caused this command, cooked into a string.
+
+@item f
+The window which currently has the input focus, or @code{nil} if no
+window is focused.
+
+@item p
+The prefix argument as a number, this will be 1 if no prefix argument
+has been entered.
+
+@item P
+The raw prefix argument.
+
+@item t
+The symbol @code{t}.
+
+@item w
+The result of calling the @code{current-event-window} function.
+
+@item W
+The result of calling the @code{current-event-window} function, or if
+this returns @code{nil} or @code{root}, the currently focused window.
+@end table
+
+A null line produces an argument value of @code{nil}.
+
+@item
+Anything else; the form is evaluated and expected to return a @emph{list}
+of arguments to apply to the command.
+@end itemize
+
+When a command is to be invoked, the @code{call-command} function is
+used. This builds a list of argument values to apply to the command
+(using its interactive declaration) then calls the command.
+
+@defun commandp @var{object}
+This function returns @code{t} if its argument may be called interactively.
+If @var{object} is a function (i.e. a symbol or a lambda-expression) it
+is a command if it contains an interactive declaration
+
+The only other object which is a command is a function call form; the
+use of these types of commands is discouraged but they can be useful
+sometimes.
+@end defun
+
+@defun call-command command &optional prefix-arg
+This function calls the command @var{command} interactively. See the
+documentation of @code{commandp} above for what constitutes a command.
+
+If the @var{prefix-argument} is non-nil it defines the value of the
+@code{current-prefix-arg} variable for this command, normally the value
+of this variable would be taken from the global @code{prefix-arg}
+variable.
+@end defun
+
+
+@node Keymaps, Event Loop, Commands, Top
+@chapter Keymaps
+@cindex Keymaps
+
+Keymaps are used to associate events with commands. When an event
+occurs, the associated command is found and evaluated. A keymap is
+simply a list whose first element is the symbol @code{keymap}.
+
+@defun keymapp arg
+Returns @code{t} if @var{arg} may be used as a keymap.
+@end defun
+
+@defun make-keymap
+Returns a newly-created empty keymap.
+@end defun
+
+@defun bind-keys keymap &rest bindings
+Installs zero or more key bindings into the keymap @var{keymap}, then
+returns @var{keymap}.
+
+Each binding is defined by two elements in the list of @var{bindings},
+the first defines the name of the input event (or the event itself) and
+the second defines the command to be associated with the event.
+
+For example to bind two keys in the keymap @var{keymap}; the event
+@kbd{C-f} to the command @code{foo} and the event @kbd{C-b} to the
+command @code{bar} the following form would be used,
+
+@lisp
+(bind-keys @var{keymap}
+ "C-f" 'foo
+ "C-b" 'bar)
+@end lisp
+@end defun
+
+@defun unbind-keys @var{keymap} &rest @var{keys}
+Removes the bindings of the events @var{keys} (these may be the names
+of the events or the event objects themselves) from the keymap
+@var{keymap}.
+@end defun
+
+@defun search-keymap event keymap
+Search for a binding of the event @var{event} in @var{keymap}. If a
+binding is found a cons cell @code{(@var{command} . @var{event})} is
+returned.
+@end defun
+
+There are several pre-defined keymaps that are always available:
+
+@table @code
+@item global-keymap
+Keymap containing bindings active anywhere.
+
+@item window-keymap
+Keymap containing bindings active when a client window is focused.
+
+@item root-window-keymap
+Keymap containing bindings active when the pointer is in the root
+window.
+
+@item title-keymap
+@itemx border-keymap
+Keymaps active in the title and borders of window frames.
+
+@item close-button-keymap
+@itemx iconify-button-keymap
+@itemx maximize-button-keymap
+@itemx menu-button-keymap
+Keymaps active in the standard window frame buttons.
+@end table
+
+
+@node Event Loop, Miscellaneous Functions, Keymaps, Top
+@chapter Event Loop
+@cindex Event loop
+
+The event loop reads all X events received on any of the windows that
+Sawmill is aware off. Many of these events invoke hooks, as described
+in @ref{Standard Hooks}. Keyboard and pointer events are translated to
+their Lisp equivalents (@pxref{Events}) and then used to scan all
+active keymaps for a binding. If a binding is found, the associated
+command is invoked through the @code{call-command} function.
+
+The active keymaps are determined as follows:
+
+@itemize @bullet
+@item If the variable @code{override-keymap} is non-nil, then this is
+the only keymap searched
+
+@item Otherwise three keymaps are searched:
+
+@enumerate
+@item the @code{keymap} property of the currently ``clicked'' frame
+part if there is one,
+
+@item the @code{keymap} property of the currently focused window
+
+@item the contents of the variable @code{global-keymap}.
+@end enumerate
+@end itemize
+
+Note that for @code{ButtonRelease} events, the frame part's keymap is
+only searched if the pointer is actually within the frame part when the
+release event occurs.
+
+If no binding may be found in any of the active keymaps, then the
+@code{unbound-key-hook} hook is called. This is an @code{or} type
+hook---the first function that returns non-nil will terminate the hook
+call.
+
+@defun lookup-event-binding event
+Perform the usual binding lookup for the event object @var{object}.
+Returns the command found, or @code{nil} if no binding exists.
+@end defun
+
+While a command is being evaluated, information about the current event
+may be found:
+
+@defun current-event
+Return the event which caused the current command to be invoked
+@end defun
+
+@defun current-event-string
+Returns the string which the current event would usually insert.
+@end defun
+
+@defun current-event-window
+Return the window that received the current event, or the symbol
+@code{root}, or @code{nil} if no such window.
+@end defun
+
+@defun last-event
+Return the previous event which occurred.
+@end defun
+
+@defun proxy-current-event window &optional mask propagate
+Send the current X event to @var{window}, either a window object, a
+numeric window id, or the symbol @code{root}. If a @code{ButtonPress}
+event the pointer grab will be released first.
+
+@var{mask} may be an integer defining the X event mask to pass to the
+@code{XSendEvent} function. If not defined, a mask is chosen that would
+usually be used to select the type of event being proxied.
+@end defun
+
+@defun allow-events mode
+This is a wrapper for the @code{XAllowEvents} function. The @var{mode}
+parameter may be one of the following symbols: @code{async-pointer},
+@code{async-keyboard}, @code{sync-pointer}, @code{sync-keyboard},
+@code{replay-pointer}, @code{replay-keyboard}, @code{async-both},
+@code{sync-both}.
+
+Events that have to be grabbed to be received (i.e. all bindings in the
+@code{global-keymap} and the @code{window-keymap}) are grabbed
+synchronously. This means that no more events will be received until
+either the command returns, or @code{allow-events} is called.
+
+This is normally not important, but if the command expects to receive
+further events it must call @code{allow-events}. See the interactive
+move and resize functions for an example.
+@end defun
+
+@defun accept-x-input &optional mask
+Handle any X events received. If @var{mask} is non-nil then only events
+matching this numeric value are handled (see the X header files for
+details).
+@end defun
+
+
+@node Miscellaneous Functions, Standard Hooks, Event Loop, Top
+@chapter Miscellaneous Functions
+@cindex Miscellaneous functions
+
+@defun query-pointer &optional from-server
+Returns a cons cell @code{(@var{x} . @var{y})} representing the current
+mouse pointer position, relative to the origin of the root window.
+
+If @var{from-server} is non-nil then the position is read directly from
+the server, otherwise it's taken from the current event (if possible).
+@end defun
+
+@defun query-pointer-window
+Returns the top-level window under the mouse pointer, or @code{nil} if
+the cursor is in the root window.
+@end defun
+
+@defun query-last-pointer
+Returns a cons cell @code{(@var{x} . @var{y})} representing the second
+most recent mouse pointer position, relative to the root window.
+@end defun
+
+@defun warp-cursor x y
+Move the mouse pointer to position (@var{x}, @var{y}) relative to the
+origin of the root window.
+@end defun
+
+@defun warp-cursor-to-window window &optional x y
+Move the mouse pointer to position (@var{x}, @var{y}) (or (0, 0) if
+undefined) relative to the origin of window object @var{window}.
+@end defun
+
+@defun grab-server
+Prevent any other clients from accessing the X server.
+@end defun
+
+@defun ungrab-server
+After a call to @code{grab-server} this will allow other clients to
+access the X server again.
+
+Note that calls to @code{grab-server} and @code{ungrab-server}
+@emph{nest}.
+@end defun
+
+@defmac with-server-grabbed &rest forms
+Evaluate forms with the server grabbed. Releases the grab afterwards.
+@end defmac
+
+@defun grab-pointer window &optional cursor
+Grab the mouse pointer and direct all pointer events to window object
+@var{window}. If @var{cursor} is defined and a cursor object, display
+this while the pointer is grabbed.
+
+Returns @code{y} if the grab succeeded.
+@end defun
+
+@defun ungrab-pointer
+Release the grab on the mouse pointer.
+@end defun
+
+@defun get-window-by-id xid
+Return a window object with id @var{xid}, or @code{nil}.
+@end defun
+
+@defun get-window-by-name name
+Return a window object with name @var{name}, or @code{nil}.
+@end defun
+
+@defun screen-width
+Return the width of the root window.
+@end defun
+
+@defun screen-height
+Return the height of the root window.
+@end defun
+
+@defun sync-server
+Flush all pending X requests, don't wait for them to finish.
+@end defun
+
+@defun send-client-message window type data format
+Send an X @code{ClientMessage} event to @var{window} (a window object,
+the symbol @code{root} or a numeric xid).
+
+The event will be of the type @var{type} (a symbol), contain the array
+of integers @var{data} (i.e. a vector or a string), and will be
+transferred as @var{format} sized quantities (8, 16 or 32).
+@end defun
+
+@defun create-window parent x y width height
+Create an unmapped window that is a child of @var{parent} (a window
+object, an integer window id, or the symbol @code{root}), with the
+specified dimensions.
+
+Returns the window id of the new window.
+@end defun
+
+@defun x-atom symbol
+Return the integer identifying the X atom with the same name as
+@var{symbol}.
+@end defun
+
+@defun x-atom-name integer
+Return the symbol with the same name as the X atom identified by the
+integer @var{integer}.
+@end defun
+
+@defun getpid
+Return the process-id of the running Lisp interpreter.
+@end defun
+
+@defun draw-window-outline mode x y width height
+Draw an outline of a window of dimensions (@var{width}, @var{height})
+at position (@var{x}, @var{y}) relative to the root window.
+
+@var{mode} is a symbol defining the type of outline drawn, currently it
+may only be @code{box} for a 3x3 grid.
+
+Use the @code{erase-window-outline} to erase the grid. Also note that
+since these functions draw directly on the root window the server
+should be grabbed until the outline is erased.
+@end defun
+
+@defun erase-window-outline mode x y width height
+Erase a previously drawn outline of a window of dimensions
+(@var{width}, @var{height}) at position (@var{x}, @var{y}) relative to
+the root window.
+
+@var{mode} is a symbol defining the type of outline drawn, currently it
+may only be @code{box} for a 3x3 grid.
+@end defun
+
+@defun show-message &optional text font fg bg
+Display the string @var{text} in the center of the screen. If
+@var{text} is @code{nil} then any string previously displayed is
+removed. Returns the numeric id of the window displaying the message,
+or @code{nil} if no message is displayed.
+
+@var{font} defines the font to use, if undefined the
+@code{default-font} variable provides this value. @var{fg} and @var{bg}
+define the color of the text and its background respectively. If
+undefined they are black and white.
+
+Note that newlines in @var{text} are ignored. This may change in the
+future.
+@end defun
+
+
+@node Standard Hooks, Session Management, Miscellaneous Functions, Top
+@chapter Standard Hooks
+@cindex Standard hooks
+@cindex Hooks, standard
+
+Sawmill provides many hooks to allow extension of previously defined
+functions. Also, many X events are exported to the Lisp environment via
+the hooks mechanism. For more details on the hooks mechanism see
+@ref{(librep)Normal Hooks}.
+
+As well as using the standard @code{call-hook} function, sawmill also
+provides the @code{call-window-hook} function. This is used to invoke
+hooks which refer to a single window. If the hook has a local value
+defined in the window's property list then this value is used, before
+the default value defined by the actual variable.
+
+@defun call-window-hook hook window &optional args hook-type
+Call @var{hook} for @var{window} with further arguments @var{args}. See
+@code{call-hook} for a description of @var{hook-type}. Each function in
+the hook is called with arguments @code{(@var{window} . @var{args})}.
+@end defun
+
+The following table describes all standard hooks called by Sawmill, and
+the arguments they are called with:
+
+@vtable @code
+@item pre-command-hook
+Called before each command is evaluated.
+
+@item post-command-hook
+Called after each command is evaluated.
+
+@item unbound-key-hook
+Called when an key or pointer event has been received which there is no
+binding for.
+
+@item before-add-window-hook
+@itemx add-window-hook
+Called with a single window when the window is first adopted by the
+window manager. @code{before-add-window-hook} is called first, it
+should only set properties of the window.
+
+@item destroy-notify-hook
+Called when the window is destroyed. Note that this may be called
+asynchronously to the normal event loop. In general, the window manager
+will attempt to call this hook as soon after it knows the window has
+been destroyed as is possible.
+
+@item map-notify-hook
+@itemx unmap-notify-hook
+@itemx reparent-notify-hook
+@itemx enter-notify-hook
+@itemx leave-notify-hook
+@itemx focus-in-hook
+@itemx focus-out-hook
+Called with a single window argument, analogous to the X events of the
+same names.
+
+@item visbility-notify-hook
+Called with two arguments, the window, and a symbol, one of:
+@code{fully-obscured}, @code{partially-obscured}, @code{unobscured}.
+
+@item property-notify-hook
+Called with arguments @code{(@var{window} @var{atom-name} @var{type})}
+where @var{type} is @code{new-value} or @code{deleted}.
+
+@item client-message-hook
+An @code{or} type hook. Called with arguments @code{(@var{window}
+@var{type} @var{data-array})}.
+
+@item add-workspace-hook
+@itemx enter-workspace-hook
+@itemx leave-workspace-hook
+@itemx delete-workspace-hook
+@itemx workspace-state-change-hook
+Called with a single argument: the workspace.
+
+@item add-to-workspace-hook
+@itemx remove-from-workspace-hook
+Called with a single argument: the window.
+
+@item place-window-hook
+An @code{or} type hook. Called the first a window is mapped.
+
+@item window-state-change-hook
+@itemx iconify-window-hook
+@itemx uniconify-window-hook
+@itemx shade-window-hook
+@itemx unshade-window-hook
+@itemx window-maximized-hook
+@itemx window-unmaximized-hook
+Called with a single window.
+
+@item before-exit-hook
+Called immediately before exiting.
+
+@item sm-window-save-functions
+@itemx sm-restore-window-hook
+Session management hooks, @ref{Session Management}.
+@end vtable
+
+
+@node Session Management, Function Index, Standard Hooks, Top
+@chapter Session Management
+@cindex Session management
+
+Sawmill has fully integrated support for the X session management
+protocols. Also, this support is extensible to allow all Lisp modules
+to save and reload their own window state.
+
+There are two methods of doing this. If the module only wants to save
+and restore the values of properties in each window's property list
+(i.e. those values set via @code{window-put}), then the following
+function may be used:
+
+@defun sm-add-saved-properties &rest properties
+Arrange for all symbols @var{properties} to be saved and loaded with
+the session.
+@end defun
+
+If a Lisp module chooses to use this method it may add a function to
+the @code{add-window-hook} to act on the reloaded properties when the
+session is reloaded.
+
+For more complex window properties that can't be saved straight from
+the window's plist two hooks are available:
+
+@defvar sm-window-save-functions
+A list of functions, each of which is called when the state of each
+window is saved. Each function is called with a single argument (the
+window) and should return a list of alist elements that will be saved
+in the state file. (As such, only values with valid read syntaxes may
+be included.)
+@end defvar
+
+@defvar sm-restore-window-hook
+List of functions called when the state of a window is restored. Each
+is called with arguments @code{(@var{window} @var{alist})}, where
+@var{alist} defines the state saved for the window.
+
+Each function should look for the properties it saved, and then take
+any action dependent on the values.
+@end defvar
+
+
+@node Function Index, Variable Index, Session Management, Top
+@unnumbered Function Index
+
+@printindex fn
+
+
+@node Variable Index, Concept Index, Function Index, Top
+@unnumbered Variable Index
+
+@printindex vr
+
+
+@node Concept Index, , Variable Index, Top
+@unnumbered Concept Index
+
+@printindex cp
+
+
+@contents
+@bye

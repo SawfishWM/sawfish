@@ -1,5 +1,5 @@
 # Makefile.in -- input for the capplet directory's Makefile
-# $Id: Makefile.in,v 1.2 1999/09/08 19:55:19 john Exp $
+# $Id: Makefile.in,v 1.3 1999/09/12 21:47:19 john Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -26,6 +26,9 @@ top_srcdir=@top_srcdir@
 srcdir=@srcdir@
 VPATH=@top_srcdir@/src:.
 
+override CFLAGS += $(GNOME_CC_CFLAGS)
+override LIBS += $(GNOME_CC_LIBS)
+
 build_capplet=@build_capplet@
 
 ifneq ($(build_capplet),0)
@@ -33,8 +36,7 @@ ifneq ($(build_capplet),0)
 all : sawmill-capplet
 
 sawmill-capplet : sawmill-capplet.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(GNOME_CC_CFLAGS) \
-	  $(LDFLAGS) $(LIBS) $(GNOME_CC_LIBS) \
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $(LIBS) \
 	  -o sawmill-capplet sawmill-capplet.c
 
 install : all installdirs
