@@ -317,8 +317,6 @@
     (or (cdr (assq name cycle-commands))
 	(car (rassq name cycle-commands))))
 
-;;; public entry point
-
   (define (define-cycle-command forward-name reverse-name selector . rest)
     "Create a pair of commands for cycling through windows. The command named
 FORWARD-NAME cycles forwards, while the command named REVERSE-NAME cycles
@@ -340,6 +338,7 @@ Any extra arguments are passed to each call to define-command."
       (setq cycle-commands (cons (cons forward-name reverse-name)
 				 cycle-commands))))
 
+
 ;;; commands
 
   (define-cycle-command 'cycle-windows 'cycle-windows-backwards (lambda () t))
@@ -365,6 +364,7 @@ Any extra arguments are passed to each call to define-command."
 			     (lambda (x) (equal (window-class x) class)))))
 			#:spec "%W"))
 
+
 #| autoload cookies:
 
 ###autoload (autoload-command 'cycle-windows 'sawfish.wm.commands.x-cycle)
