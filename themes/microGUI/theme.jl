@@ -111,17 +111,17 @@
    ((background . ,microGUI:top-blue-images)
     (foreground . "black")
     (text . window-name)
-    (x-justify . 23)
+    (x-justify . 4)
     (y-justify . center)
     (top-edge . -19)
-    (left-edge . 0)
-    (width . (lambda (w) (+ (microGUI:title-width w) 32)))
+    (left-edge . 19)
+    (width . (lambda (w) (+ (microGUI:title-width w) 13)))
     (class . title))
 
    ;; menu button
    ((background . ,microGUI:menu-images)
-    (top-edge . -17)
-    (left-edge . -1)
+    (top-edge . -19)
+    (left-edge . 0)
     (class . menu-button))
 
    ;; top curves
@@ -134,7 +134,7 @@
    ((background . ,microGUI:top-grey-images)
     (top-edge . -19)
     (left-edge . (lambda (w) (+ (microGUI:title-width w) 44)))
-    (right-edge . 1)
+    (right-edge . 52)
     (class . title))
 
    ;; left border
@@ -179,19 +179,19 @@
    ;; iconify button
    ((background . ,microGUI:iconify-images)
     (right-edge . 35)
-    (top-edge . -17)
+    (top-edge . -19)
     (class . iconify-button))
 
    ;; maximize button
    ((background . ,microGUI:maximize-images)
-    (right-edge . 19)
-    (top-edge . -17)
+    (right-edge . 18)
+    (top-edge . -19)
     (class . maximize-button))
 
    ;; delete button
    ((background . ,microGUI:close-images)
     (right-edge . 1)
-    (top-edge . -17)
+    (top-edge . -19)
     (class . close-button))
 ))
 
@@ -208,17 +208,17 @@
    ((background . ,microGUI:top-blue-images)
     (foreground . "black")
     (text . window-name)
-    (x-justify . 23)
+    (x-justify . 4)
     (y-justify . center)
     (top-edge . -19)
-    (left-edge . 0)
-    (width . (lambda (w) (+ (microGUI:title-width w) 32)))
+    (left-edge . 19)
+    (width . (lambda (w) (+ (microGUI:title-width w) 13)))
     (class . title))
 
    ;; menu button
    ((background . ,microGUI:menu-images)
-    (top-edge . -17)
-    (left-edge . -1)
+    (top-edge . -19)
+    (left-edge . 0)
     (class . menu-button))
 
    ;; top curves
@@ -231,7 +231,7 @@
    ((background . ,microGUI:top-grey-images)
     (top-edge . -19)
     (left-edge . (lambda (w) (+ (microGUI:title-width w) 44)))
-    (right-edge . 1)
+    (right-edge . 52)
     (class . title))
 
    ;; top-right corner
@@ -244,19 +244,19 @@
    ;; iconify button
    ((background . ,microGUI:iconify-images)
     (right-edge . 35)
-    (top-edge . -17)
+    (top-edge . -19)
     (class . iconify-button))
 
    ;; maximize button
    ((background . ,microGUI:maximize-images)
-    (right-edge . 19)
-    (top-edge . -17)
+    (right-edge . 18)
+    (top-edge . -19)
     (class . maximize-button))
 
    ;; delete button
    ((background . ,microGUI:close-images)
     (right-edge . 1)
-    (top-edge . -17)
+    (top-edge . -19)
     (class . close-button))
 ))
 
