@@ -280,11 +280,11 @@
 	  (max-height (cdr (assq 'max-height hints)))
 	  (dims (window-dimensions w)))
       (catch 'out
-	(when (and (memq direction '(nil horizontal))
+	(when (and (or (null direction) (eq direction 'horizontal))
 		   max-width
 		   (>= (car dims) max-width))
 	  (throw 'out nil))
-	(when (and (memq direction '(nil vertical))
+	(when (and (or (null direction) (eq direction 'vertical))
 		   max-height
 		   (>= (cdr dims) max-height))
 	  (throw 'out nil))
@@ -305,9 +305,9 @@
 	  (trunc (lambda (x inc base #!optional maximum)
 		   (min (+ base (max 0 (- (- x base) (mod (- x base) inc))))
 			(or maximum 65535)))))
-      (when (memq direction '(nil horizontal))
+      (when (or (null direction) (eq direction 'horizontal))
 	(rplaca dims (trunc (car dims) x-inc x-base x-max)))
-      (when (memq direction '(nil vertical))
+      (when (or (null direction) (eq direction 'vertical))
 	(rplacd dims (trunc (cdr dims) y-inc y-base y-max)))
       dims))
 
