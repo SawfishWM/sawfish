@@ -94,4 +94,6 @@
 (autoload 'gnome-toggle-skip-tasklist "gnome-commands" t)
 (autoload 'gnome-set-skip-tasklist "gnome-commands" t)
 (autoload 'gnome-clear-skip-tasklist "gnome-commands" t)
+(autoload 'add-window-matcher "match-window")
+(autoload 'remove-window-matcher "match-window")
 ;;; ::autoload-end::

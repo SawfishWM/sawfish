@@ -1,8 +1,17 @@
+1999-11-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* match-window.jl: new file, a method of matching windows (by
+	their X properties) to sawmill window properties without the
+	need for custom hook functions. Will get a GUI at some point
+
 1999-11-29  John Harper  <john@dcs.warwick.ac.uk>
 
 	* functions.jl (warp-cursor-to-window): rewritten in lisp; also
 	when given no position it focuses on the inside top-left corner
 	of the frame, should overlay more frame styles
+
+	* maximize.jl (maximize-expand-edges): fix typos from updates
+	for single namespace (Gérard Milmeister <gemi@bluewin.ch>)
 
 	* workspace.jl: reworked the map-notify and unmap-notify hook
 	functions; they work again now
