@@ -170,8 +170,6 @@
 (defun maximize-do-both (window avoided edges coords dims fdims)
   (let*
       ((grid (grid-from-edges (car edges) (cdr edges)))
-       (center (cons (+ (car coords) (/ (car fdims) 2))
-		     (+ (cdr coords) (/ (cdr fdims) 2))))
        rects)
     (setq rects (rectangles-from-grid
 		 (car grid) (cdr grid)
@@ -215,7 +213,7 @@
       ((coords (window-position w))
        (dims (window-dimensions w))
        (fdims (window-frame-dimensions w))
-       (avoided (maximize-avoided-windows))
+       (avoided (delq w (maximize-avoided-windows)))
        (edges (get-visible-window-edges ':with-ignored-windows t
 					':windows avoided
 					':include-root t)))
