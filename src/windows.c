@@ -140,6 +140,20 @@ find_window_by_id (Window id)
     return w;
 }
 
+/* This is different to the above in that it could return a window
+   that doesn't have a client window. */
+Lisp_Window *
+x_find_window_by_id (Window id)
+{
+    Lisp_Window *w;
+    DB(("x_find_window_by_id (%lx)\n", id));
+    w = window_list;
+    while (w != 0 && w->saved_id != id && w->frame != id)
+	w = w->next;
+    DB(("  --> %p (%s)\n", w, (w != 0) ? w->name : ""));
+    return w;
+}
+
 /* Note that frames.c:list_frame_generator also does this itself */
 void
 set_window_shape (Lisp_Window *w)
@@ -232,6 +246,7 @@ add_window (Window id)
 	window_list = w;
 	w->car = window_type;
 	w->id = id;
+	w->saved_id = id;
 	w->plist = Qnil;
 	w->frame_style = Qnil;;
 
@@ -333,10 +348,12 @@ remove_window (Lisp_Window *w, repv destroyed, repv from_error)
 	    XRemoveFromSaveSet (dpy, w->id);
 	}
 	if (from_error == Qnil)
-	destroy_window_frame (w);
+	    destroy_window_frame (w);
 	w->id = 0;
 	/* gc will do the rest... */
     }
+    else if (w->frame != 0 && from_error == Qnil)
+	destroy_window_frame (w);
 }
 
 void
