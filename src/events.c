@@ -131,8 +131,22 @@ subtract_timestamps (Time t2, Time t1)
 void
 save_timestamp (Time t)
 {
-    if (subtract_timestamps (t, last_event_time) > 0)
+    if (subtract_timestamps (t, last_event_time) >= 0)
 	last_event_time = t;
+    else
+    {
+	Time real = get_server_timestamp ();
+
+	/* If the difference between T and the real server time is
+	   less than that between LAST-EVENT-TIME and the server time,
+	   then set LAST-EVENT-TIME to T. */
+
+	if (labs (subtract_timestamps (real, t))
+	    < labs (subtract_timestamps (real, last_event_time)))
+	{
+	    last_event_time = t;
+	}
+    }
 
     DB(("  last_event_time=%lu\n", last_event_time));
 }

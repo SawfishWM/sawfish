@@ -1,3 +1,14 @@
+2001-01-28  John Harper  <jsh@eazel.com>
+
+	* events.c (save_timestamp): (try to) be more intelligent when
+	detecting out of order timestamps. Instead of just discarding
+	them, fetch the real time from the X server, then set
+	`last_event_time' to the timestamp closest to the current
+	server time.
+
+	This avoids sometimes dropping valid timestamps (e.g. after an
+	APM resume, focus changes could be lost for a short time)
+
 2001-01-20  John Harper  <jsh@eazel.com>
 
 	* version 0.36
