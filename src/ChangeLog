@@ -1,3 +1,10 @@
+1999-08-19  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c, events.c: it's possible for Imlib_render to trigger
+	the X error handler, and possibly invalidate the window that's
+	currently being manipulated. So test that `w->id != 0' in
+	suitable places
+
 1999-08-16  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.2
