@@ -169,16 +169,25 @@ set_window_shape (Lisp_Window *w)
     {
 	if (w->shaped)
 	{
-	    XRectangle rect;
-	    rect.x = -w->frame_x;
-	    rect.y = -w->frame_y;
-	    rect.width = w->attr.width;
-	    rect.height = w->attr.height;
-	    XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
-				     &rect, 1, ShapeSubtract, Unsorted);
-	    XShapeCombineShape (dpy, w->frame, ShapeBounding,
-				-w->frame_x, -w->frame_y, w->id,
-				ShapeBounding, ShapeUnion);
+	    if (w->frame_parts != 0)
+	    {
+		XRectangle rect;
+		rect.x = -w->frame_x;
+		rect.y = -w->frame_y;
+		rect.width = w->attr.width;
+		rect.height = w->attr.height;
+		XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
+					 &rect, 1, ShapeSubtract, Unsorted);
+		XShapeCombineShape (dpy, w->frame, ShapeBounding,
+				    -w->frame_x, -w->frame_y, w->id,
+				    ShapeBounding, ShapeUnion);
+	    }
+	    else
+	    {
+		XShapeCombineShape (dpy, w->frame, ShapeBounding,
+				    -w->frame_x, -w->frame_y, w->id,
+				    ShapeBounding, ShapeSet);
+	    }
 	}
 	else
 	{
