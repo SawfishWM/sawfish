@@ -286,7 +286,7 @@ main(int argc, char **argv)
 	functions_init ();
 	server_init ();
 
-	res = Fload(rep_string_dup ("sawmill"), Qnil, Qnil, Qnil, Qnil);
+	res = rep_load_environment(rep_string_dup ("sawmill"));
 	if (res != rep_NULL)
 	{
 	    repv tv;
@@ -308,37 +308,8 @@ main(int argc, char **argv)
 	    rep_POPGC;
 	    rep_throw_value = tv;
 	}
-	else if(rep_throw_value && rep_CAR(rep_throw_value) == Qquit)
-	{
-	    if(rep_INTP(rep_CDR(rep_throw_value)))
-		rc = rep_INT(rep_CDR(rep_throw_value));
-	    else
-		rc = 0;
-	    rep_throw_value = 0;
-	}
 
-	if(rep_throw_value && rep_CAR(rep_throw_value) == Qerror)
-	{
-	    /* If quitting due to an error, print the error cell if
-	       at all possible. */
-	    repv stream = Fstderr_file();
-	    repv old_tv = rep_throw_value;
-	    rep_GC_root gc_old_tv;
-	    rep_PUSHGC(gc_old_tv, old_tv);
-	    rep_throw_value = rep_NULL;
-	    if(stream && rep_FILEP(stream))
-	    {
-		fputs("error--> ", stderr);
-		Fprin1(rep_CDR(old_tv), stream);
-		fputc('\n', stderr);
-	    }
-	    else
-		fputs("sawmill: error in initialisation\n", stderr);
-	    rep_throw_value = old_tv;
-	    rep_POPGC;
-	}
-
-	rep_throw_value = rep_NULL;
+	rc = rep_top_level_exit ();
 
 	/* call all exit funcs... */
 	server_kill ();
