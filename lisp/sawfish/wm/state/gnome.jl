@@ -184,7 +184,7 @@
     (let ((class (get-x-text-property w 'WM_CLASS)))
       (when (and class (>= (length class) 2))
 	(cond ((and (string= (aref class 1) "Panel")
-		    (string= (aref class 0) "panel"))
+		    (string= (aref class 0) "panel_window"))
 	       ;; XXX I don't think the GNOME hints specify these things...
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'no-history t)

@@ -1,5 +1,11 @@
 2001-02-13  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/state/gnome.jl (gnome-window-class-hacks): 
+	* sawfish/wm/state/wm-spec.jl (wm-class-hacks): 
+	Look for `Panel/panel_window' instead of `Panel/panel'. This
+	may not work well immediately, but it will with the forthcoming
+	gnome-core release
+
 	* sawfish/wm/ext/window-history.jl: new command line option
 	`--window-history-file=FILE' to specify where to load and store
 	the history information

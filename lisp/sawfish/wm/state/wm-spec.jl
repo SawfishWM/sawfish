@@ -203,7 +203,7 @@
     (let ((class (get-x-text-property w 'WM_CLASS)))
       (when (and class (>= (length class) 2))
 	(cond ((or (and (string= (aref class 1) "Panel")
-			(string= (aref class 0) "panel"))
+			(string= (aref class 0) "panel_window"))
 		   (and (string= (aref class 1) "kicker")
 			(string= (aref class 0) "Panel")))
 	       (window-put w 'focus-click-through t)
