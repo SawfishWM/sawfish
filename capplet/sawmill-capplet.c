@@ -25,8 +25,8 @@
 #include <config.h>
 #endif
 
-#include <build.h>
-#include <libclient.h>
+#include "../build.h"
+#include "../src/libclient.h"
 
 #include <stdio.h>
 #ifdef HAVE_UNISTD_H
@@ -169,9 +169,11 @@ sawmill_setup (void)
 
     case 0:				/* child */
 	dup2 (ui_stdin[0], 0);
-	close (ui_stdin[1]);
 	dup2 (ui_stdout[1], 1);
+	close (ui_stdin[0]);
+	close (ui_stdin[1]);
 	close (ui_stdout[0]);
+	close (ui_stdout[1]);
 	sprintf (buf, "%ld", (long)GDK_WINDOW_XWINDOW (ui_socket->window));
 	ui_argv[UI_ARGV_SOCKET_SLOT] = buf;
 	if (group != 0)
