@@ -181,14 +181,7 @@ the mouse."
        (move-resize-mode (if (eq function 'move)
 			     move-outline-mode
 			   resize-outline-mode))
-       (move-resize-edges (and move-snap-edges
-			       (progn
-				 (require 'edges)
-				 (get-visible-window-edges
-				  ':with-ignored-windows
-				  move-snap-ignored-windows
-				  ':windows-to-ignore (list w)
-				  ':include-root t))))
+       (move-resize-edges nil)
        (move-resize-last-outline nil)
        (move-resize-moving-edges move-resize-moving-edges)
        (move-resize-directions move-resize-directions)
@@ -201,10 +194,13 @@ the mouse."
     (when (and move-resize-raise-window (eq move-resize-mode 'opaque))
       ;; only raise window initially if the display will get updated
       (raise-window w))
+    (move-resize-update-edges)
     (unless (eq move-resize-mode 'opaque)
       ;; prevent any other programs drawing on the display
       (grab-server)
       (setq server-grabbed t))
+    (add-hook 'enter-workspace-hook move-resize-update-edges)
+    (add-hook 'viewport-moved-hook move-resize-update-edges)
     (unwind-protect
 	(progn
 	  (allow-events 'async-pointer)
@@ -239,13 +235,25 @@ the mouse."
       (display-message nil)
       (frame-draw-mutex old-frame-draw-mutex)
       (frame-state-mutex old-frame-state-mutex)
-      (synthetic-configure-mutex old-synthetic-configure-mutex))
+      (synthetic-configure-mutex old-synthetic-configure-mutex)
+      (remove-hook 'enter-workspace-hook move-resize-update-edges)
+      (remove-hook 'viewport-moved-hook move-resize-update-edges))
     (when (and move-resize-raise-window (not (eq move-resize-mode 'opaque)))
       (raise-window w))
     (if (eq function 'move)
 	(call-window-hook 'after-move-hook w (list move-resize-directions))
       (call-window-hook
        'after-resize-hook w (list move-resize-moving-edges)))))
+
+(defun move-resize-update-edges ()
+  (setq move-resize-edges
+	(and move-snap-edges
+	     (progn
+	       (require 'edges)
+	       (get-visible-window-edges
+		':with-ignored-windows move-snap-ignored-windows
+		':windows-to-ignore (list move-resize-window)
+		':include-root t)))))
 
 ;; round up a window dimension X in increments of INC, with minimum
 ;; value BASE
