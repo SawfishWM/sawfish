@@ -10,8 +10,6 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
-  ! when un-adopting a window, ungrab all passive grabs
-
   ! Without GMC you can press button1 on root window, and holding it
     move over frame, and that frame gets clicked and action bound to
     this frame is taken
@@ -72,6 +70,8 @@ Outstanding bugs
 General tasks
 =============
 
+  + make librep use libtool's dlopen wrapper
+
   + do the virtual-workspace edge-flipping thing?
 
   + option to re-place windows when they move workspaces/viewports?
@@ -89,11 +89,6 @@ General tasks
 
     this is done, set the workspace-names variable to a list of
     strings; but it's not yet customizable through the ui
-
-  + remember last focused window on each workspace?
-
-    perhaps generalize the x-cycle-order property to be ever-present,
-    then use it for this as well?
 
   + features for the gnome/redhat guys:
 

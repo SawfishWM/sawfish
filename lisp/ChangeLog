@@ -1,5 +1,25 @@
 1999-10-05  John Harper  <john@dcs.warwick.ac.uk>
 
+	* x-cycle.jl (cycle-disable-auto-raise): new option
+
+	* x-cycle.jl: use the new window-order code for maintaining the
+	stack
+
+	* workspace.jl (ws-move-window): new optional arg, WAS-FOCUSED,
+	when t the window is refocused when moved to the new space
+	(select-workspace): new optional arg DONT-FOCUS, if nil the
+	most recently used window on the new workspace is focused
+
+	* workspace.jl: when moving windows, try to preserve focus
+	where desirable
+
+	* window-order.jl: new file, generalize interface to the stack
+	of most recently used windows kept by the cycle-windows
+	function
+
+	* focus.jl (focus-in-fun): unless focus-dont-push is set, add
+	the focused window to the top of the order stack
+
 	* version 0.11
 
 	* workspace.jl (lock-first-workspace): new option

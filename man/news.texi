@@ -7,6 +7,26 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.12
+
+@itemize @bullet
+
+@item Remember most recently focused windows on each workspace,
+activate that window after changing workspaces; also, try to preserve
+focus when moving windows between workspaces
+
+@item Option to disable auto-raise while cycling through windows
+(@code{cycle-disable-auto-raise})
+
+@item Added readline support to the client program, pass
+@samp{--with-readline} option to configure (from Christopher P Goller
+@email{goller@@eng.utah.edu})
+
+@item Release passive grabs when unadopting windows
+
+@end itemize
+
+
 @unnumberedsec 0.11
 
 @itemize @bullet
