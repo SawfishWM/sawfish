@@ -26,7 +26,7 @@
 #include <X11/keysym.h>
 #include <X11/Xutil.h>
 
-/* max number of milliseconds between double-clicks */
+/* max number of milliseconds between successive-clicks */
 #define DOUBLE_CLICK_TIME 250
 
 /* current_event holds the event we're processing (or 0s), last_event
@@ -36,6 +36,7 @@ static u_long current_event[2], last_event[2];
 /* Data for testing double-clicks */
 static Time last_click;
 static u_long last_click_button;
+static int click_count;
 
 DEFSYM(global_keymap, "global-keymap");
 DEFSYM(root_window_keymap, "root-window-keymap");
@@ -93,10 +94,23 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	if(xev->xbutton.button == last_click_button
 	   && xev->xbutton.time < (last_click + DOUBLE_CLICK_TIME))
 	{
-	    *code = EV_CODE_MOUSE_CLICK2;
+	    click_count++;
 	}
 	else
+	    click_count = 1;
+	switch (click_count)
+	{
+	case 2:
+	    *code = EV_CODE_MOUSE_CLICK2;
+	    break;
+
+	case 3:
+	    *code = EV_CODE_MOUSE_CLICK3;
+	    break;
+
+	default:
 	    *code = EV_CODE_MOUSE_CLICK1;
+	}
 	last_click = xev->xbutton.time;
 	last_click_button = xev->xbutton.button;
 	goto button;
@@ -353,6 +367,7 @@ static struct key_def default_mods[] = {
 static struct key_def default_codes[] = {
     { "Click1",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK1 },
     { "Click2",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK2 },
+    { "Click3",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK3 },
     { "Off",      EV_TYPE_MOUSE, EV_CODE_MOUSE_UP },
     { "PointerUp", EV_TYPE_MOUSE, EV_CODE_MOUSE_UP },
     { "Move",     EV_TYPE_MOUSE, EV_CODE_MOUSE_MOVE },
