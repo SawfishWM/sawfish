@@ -23,7 +23,7 @@
 #include "gtk/gtk.h"
 
 char *states[] = {
-    "normal", "prelight", "active", "insensitive", "selected"
+    "normal", "active", "prelight", "selected", "insensitive"
 };
 
 void
