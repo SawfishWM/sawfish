@@ -142,8 +142,9 @@ find_window_by_id (Window id)
 	w = 0;
     if (w != 0)
     {
-	DB(("find_window_by_id (%lx) --> %s\n",
-	    id, (w != 0) ? (char *) rep_STR(w->name) : ""));
+	DB(("find_window_by_id (%lx) --> %s\n", id,
+	    (w->name && rep_STRINGP(w->name))
+	    ? (char *) rep_STR(w->name) : ""));
     }
     return w;
 }
@@ -159,8 +160,9 @@ x_find_window_by_id (Window id)
 	w = w->next;
     if (w != 0)
     {
-	DB(("x_find_window_by_id (%lx) --> %s\n",
-	    id, (w != 0) ? (char *) rep_STR(w->name) : ""));
+	DB(("x_find_window_by_id (%lx) --> %s\n", id,
+	    (w->name && rep_STRINGP(w->name))
+	    ? (char *) rep_STR(w->name) : ""));
     }
     return w;
 }
