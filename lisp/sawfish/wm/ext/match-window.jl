@@ -301,7 +301,8 @@
       (mapc (lambda (cell)
 	      (when (catch 'out
 		      (mapc (lambda (match)
-			      (let ((prop (get-prop (car match))))
+			      (let ((prop (and (symbolp (car match))
+					       (get-prop (car match)))))
 				(when (or (not prop)
 					  (not (match-prop (nth 2 prop)
 							   (cdr match))))
