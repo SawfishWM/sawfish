@@ -810,10 +810,20 @@ previous workspace."
        (space (car limits)))
     (while (<= space (cdr limits))
       (if (workspace-empty-p space)
-	  (progn
-	    (ws-remove-workspace space)
-	    (setq limits (workspace-limits)))
-	(setq space (1+ space))))))
+	  (cond ((= space (car limits))
+		 (when (= first-interesting-workspace space)
+		   (setq first-interesting-workspace (1+ space)))
+		 (setq space (1+ space)))
+		((= space (cdr limits))
+		 (when (= last-interesting-workspace space)
+		   (setq last-interesting-workspace (1- space)))
+		 (setq space (1+ space)))
+		(t
+		 (ws-remove-workspace space)
+		 (setq limits (workspace-limits))))
+	(setq space (1+ space))))
+    (when (> first-interesting-workspace last-interesting-workspace)
+      (setq first-interesting-workspace last-interesting-workspace))))
 
 (defun delete-window-instance (w)
   "Remove the copy of the window on the current workspace. If this is the last
