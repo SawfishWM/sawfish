@@ -264,6 +264,7 @@ main(int argc, char **argv)
 	commands_init ();
 	keys_init ();
 	functions_init ();
+	server_init ();
 
 	if ((exit_code = setjmp (clean_exit_jmp_buf)) == 0)
 	{
@@ -323,6 +324,7 @@ main(int argc, char **argv)
 	rep_throw_value = rep_NULL;
 
 	/* call all exit funcs... */
+	server_kill ();
 	functions_kill ();
 	windows_kill ();
 	frames_kill ();
