@@ -54,7 +54,7 @@
 		i)
 	    (list (make-image "bar_normal.png")
 		  (make-image "bar_normal_active.png")
-		  nil
+		  (make-image "bar_hilited_active.png")
 		  (make-image "bar_clicked_active.png")))))
 
 (defun absolute-e-title-width (w)

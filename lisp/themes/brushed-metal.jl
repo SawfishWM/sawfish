@@ -59,7 +59,7 @@
   ;; 21x15
   (defvar bm-menu-images (list (make-image "t1-.png")
 			       (make-image "t1.png")
-			       (make-image "t1-b.png")
+			       nil
 			       (make-image "t1b.png")))
 
   ;; 150x15
@@ -71,19 +71,19 @@
   ;; 17x15
   (defvar bm-iconify-images (list (make-image "t3-.png")
 				  (make-image "t3.png")
-				  (make-image "t3-b.png")
+				  nil
 				  (make-image "t3b.png")))
 
   ;; 14x15
   (defvar bm-maximize-images (list (make-image "t4-.png")
 				   (make-image "t4.png")
-				   (make-image "t4-b.png")
+				   nil
 				   (make-image "t4b.png")))
 
   ;; 14x15
   (defvar bm-close-images (list (make-image "t5-.png")
 				(make-image "t5.png")
-				(make-image "t5-b.png")
+				nil
 				(make-image "t5b.png"))))
 
 

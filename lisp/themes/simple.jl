@@ -42,10 +42,10 @@
 			    image-load-path)))
   ;; 15x15
   (defvar simple-minimize (list (make-image "as_min.png")
-				nil
+				nil nil
 				(make-image "as_min-b.png")))
   (defvar simple-close (list (make-image "as_close.png")
-			     nil
+			     nil nil
 			     (make-image "as_close-b.png"))))
 
 (defun simple-frame-colors ()
