@@ -26,10 +26,6 @@
 ;; frame-style loaded if user hasn't set their own
 (define fallback-frame-style 'microGUI)
 
-;; regexp matching languages to use FontSets for. Please send me
-;; patches adding to this as required
-(define fontset-languages-re "\\b(ja|ko|zh)(\\b|_)")
-
 ;; quiet autoloading
 (setq autoload-verbose nil)
 
@@ -57,12 +53,7 @@
       (require 'gettext)
       (bindtextdomain
        "sawfish" (expand-file-name "../locale" sawfish-lisp-lib-directory))
-      (textdomain "sawfish"))
-
-    ;; XFree86 servers don't like using FontSets to draw Latin1
-    ;; characters it seems.. :-(
-    (setq fonts-are-fontsets
-	  (and lang (string-match fontset-languages-re lang nil t)))))
+      (textdomain "sawfish"))))
 
 ;; load standard libraries
 (require 'custom)
