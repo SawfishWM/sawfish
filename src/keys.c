@@ -1486,6 +1486,10 @@ find_meta(void)
     max_code = dpy->max_keycode;
 #endif
 
+    /* reset to default values. */
+    meta_mod = alt_mod = hyper_mod = super_mod = 0;
+    num_lock_mod = scroll_lock_mod = 0;
+
     Fset (Qmeta_keysyms, Qnil);
     Fset (Qalt_keysyms, Qnil);
     Fset (Qhyper_keysyms, Qnil);
@@ -1592,6 +1596,7 @@ build_lock_mods (void)
 {
     int i;
     total_lock_combs = 2 * (num_lock_mod ? 2 : 1) * (scroll_lock_mod ? 2 : 1);
+    memset (all_lock_combs, 0, sizeof (all_lock_combs));
     for (i = 0; i < total_lock_combs; i++)
     {
 	if (i & 1)
