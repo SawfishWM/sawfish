@@ -101,9 +101,6 @@
 (defun sm-apply-to-window (w alist)
   (let
       (tem)
-    (when (setq tem (cdr (assq 'position alist)))
-      (move-window-to w (car tem) (cdr tem))
-      (window-put w 'placed t))
     (when (setq tem (cdr (assq 'dimensions alist)))
       (resize-window-to w (car tem) (cdr tem)))
     (mapc #'(lambda (sym)

@@ -39,7 +39,6 @@
 
     ;; some standard items
     (setq alist `((name . ,(window-name w))
-		  (position . ,(window-position w))
 		  (dimensions . ,(window-dimensions w))
 		  (client-id . ,(sm-get-window-prop w 'SM_CLIENT_ID))
 		  (role . ,(nth 2 (get-x-property w 'WM_WINDOW_ROLE)))
