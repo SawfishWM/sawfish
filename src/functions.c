@@ -1037,7 +1037,15 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 
 	tem = Fassq (Qfont, attrs);
 	if (tem && rep_CONSP(tem))
+	{
 	    message.font = rep_CDR(tem);
+	    if (!FONTP(message.font))
+	    {
+		message.font = Fget_font (message.font);
+		if (!message.font)
+		    return rep_NULL;
+	    }
+	}
 	if (!FONTP(message.font))
 	    message.font = Fsymbol_value (Qdefault_font, Qt);
 	if (!FONTP(message.font))
