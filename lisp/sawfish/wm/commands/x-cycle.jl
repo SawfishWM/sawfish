@@ -97,9 +97,10 @@
   ;;###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
   (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
 
-  (defcustom cycle-reverse-event "M-SPC"
+  (defcustom cycle-reverse-event "SPC"
     "Reversal key: \\w"
-    :tooltip "The key used to reverse direction when cycling through windows."
+    :tooltip "The key used to reverse direction when cycling through windows.
+Has the active modifiers added to it."
     :group (focus cycle)
     :type event)
 
@@ -176,6 +177,13 @@
 	(cond ((null (cdr rest)) (car lst))
 	      ((eq (cadr rest) elt) (car rest))
 	      (t (loop (cdr rest)))))))
+
+  (define (merge-unsorted x y)
+    (let loop ((rest y)
+	       (out x))
+      (cond ((null rest) out)
+	    ((memq (car rest) out) (loop (cdr rest) out))
+	    (t (loop (cdr rest) (cons (car rest) out))))))
 
   (define (next)
     (let ((win (window-order (if cycle-all-workspaces
@@ -288,7 +296,16 @@
 
 	  ;; add the reverse key
 	  (when cycle-reverse-event
-	    (bind-keys override-keymap cycle-reverse-event x-cycle-reverse))
+	    (condition-case nil
+		;; merge the modifiers of the cycle-reverse-event
+		;; and the decoded current-event
+		(let* ((in (decode-event (lookup-event cycle-reverse-event)))
+		       (out (encode-event (list (car in)
+						(merge-unsorted (cadr in)
+								(cadr decoded))
+						(caddr in)))))
+		  (bind-keys override-keymap out x-cycle-reverse))
+	      (error nil)))
 
 	  (mapc (lambda (k)
 		  (bind-keys override-keymap
