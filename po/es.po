@@ -1,5 +1,6 @@
 # Sawmill in Spanish / El gestor de ventanas Sawmill en castellano.
 # Copyright (C) 1999 Angel Utiel Creus <utiel@retemail.es>
+# Copyright (C) 2000 Iñaki García Etxebarria <garetxe@euskalnet.net>
 #
 #: ../themer/themer.glade:353 ../themer/themer.glade:397
 #: ../themer/themer.glade:472 ../themer/themer.glade:562
@@ -9,10 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawmill 0.20\n"
-"POT-Creation-Date: 2000-01-09 13:19+0000\n"
+"POT-Creation-Date: 2000-01-10 21:51+0000\n"
 "PO-Revision-Date: 1999-12-21 01:15+0100\n"
-"Last-Translator: Angel Utiel Creus <utiel@retemail.es>Language-Team: Spanish "
-"<es@li.org>\n"
+"Last-Translator: Iñaki García Etxebarria Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,7 +47,7 @@ msgstr "Cerrar"
 
 # ../src/sawmill-ui.jl
 msgid "Key"
-msgstr "Tecla/Clave"
+msgstr "Tecla"
 
 # ../src/sawmill-ui.jl
 msgid "Command"
@@ -128,100 +128,95 @@ msgstr "Configuración de Sawmill"
 
 # ../themer/themer.in
 msgid "Reload themes in window manager after saving."
-msgstr ""
+msgstr "Cargar los temas en el gestor de ventanas tras guardar."
 
 # ../themer/themer.in
 msgid "Remove unused definitions when saving."
-msgstr ""
+msgstr "Eliminar definiciones inútiles al salvar."
 
 # ../lisp/menus.jl
-#, fuzzy
 msgid "[left]"
-msgstr "Izquierda"
+msgstr "[izquierda]"
 
 # ../lisp/menus.jl
-#, fuzzy
 msgid "[right]"
-msgstr "Derecha"
+msgstr "[derecha]"
 
 # ../themer/themer.in
 msgid "[top]"
-msgstr ""
+msgstr "[encima]"
 
 # ../themer/themer.in
 msgid "[bottom]"
-msgstr ""
+msgstr "[fondo]"
 
 # ../themer/themer.in
 msgid "Browse..."
-msgstr ""
+msgstr "Buscar..."
 
 # ../themer/themer.in
 msgid "Properties..."
-msgstr ""
+msgstr "Propiedades"
 
 # ../src/sawmill-ui.jl
-#, fuzzy
 msgid "Select Image"
 msgstr "Selecciona fichero"
 
 # ../themer/themer.in
 msgid "Image Properties"
-msgstr ""
+msgstr "Propiedades de la imagen"
 
 # ../themer/themer.in
 msgid "No matching item for %S"
-msgstr ""
+msgstr "Ningún elemento concuerda con %S"
 
 # ../themer/themer.in
 msgid "Added pattern `%s'"
-msgstr ""
+msgstr "Añadido `%s'"
 
 # ../lisp/menus.jl
-#, fuzzy
 msgid "Frame name"
-msgstr "Tipo de marco"
+msgstr "Nombre del marco"
 
 # ../themer/themer.in
 msgid "Added frame `%s'"
-msgstr ""
+msgstr "Añadido marco `%s'"
 
 # ../lisp/menus.jl
-#, fuzzy
 msgid "<none>"
-msgstr "Ninguno"
+msgstr "<ninguno>"
 
 # ../themer/themer.in
 msgid "Added frame type `%s'"
-msgstr ""
+msgstr "Añadido tipo de marco `%s'"
 
 # ../themer/themer.in
 msgid "error while building frame: %S"
-msgstr ""
+msgstr "error al construir marco: %S"
 
 # ../themer/themer.in
 msgid "Saved as `%s'"
-msgstr ""
+msgstr "Guardado como `%s'"
 
 # ../themer/themer.in
 msgid "Generated theme in directory `%s'"
-msgstr ""
+msgstr "Generado tema en el directorio `%s'"
 
 # ../themer/themer.in
 msgid "Read theme from `%s'"
-msgstr ""
+msgstr "Leer tema de `%s'"
 
 # ../themer/themer.in
 msgid "Theme Directory"
-msgstr ""
+msgstr "Directorio de temas"
 
 # ../themer/themer.in
 msgid "Open"
-msgstr ""
+msgstr "Abrir"
 
 # ../themer/themer.in
 msgid "Preferences"
-msgstr ""
+msgstr "Preferencias"
 
 # ../lisp/auto-raise.jl
 msgid "Raise windows when they are focused."
@@ -369,7 +364,7 @@ msgstr ""
 
 # ../lisp/edge-flip.jl
 msgid "What hitting the screen edge actually flips."
-msgstr "Lo que cambia al pulsar el borde de la pantalla."
+msgstr "Qué cambia llegar al borde de la pantalla."
 
 # ../lisp/edge-flip.jl
 msgid ""
@@ -402,24 +397,23 @@ msgstr ""
 
 # ../lisp/frames.jl
 msgid "Default frame style (theme)."
-msgstr "Tema."
+msgstr "Tema por defecto."
 
 # ../lisp/frames.jl
 msgid "Update all windows when the default frame style is changed."
 msgstr "Actualizar las ventanas cuando el estilo cambia."
 
 # ../lisp/frames.jl
-#, fuzzy
 msgid "Decorate transient windows similarly to top-level windows."
 msgstr "Decorar del mismo modo todas las ventanas (transitorias o no)."
 
 # ../lisp/frames.jl
 msgid "Automatically reload themes when they are updated."
-msgstr ""
+msgstr "Releer temas automáticamente cuando son actualizados."
 
 # ../lisp/frames.jl
 msgid "Number of seconds between checking if theme files have been modified."
-msgstr ""
+msgstr "Segundos entre comprobaciones sucesivas de modificación de temas."
 
 # ../lisp/frames.jl
 msgid "Directory containing user-local themes."
@@ -1161,12 +1155,10 @@ msgid "Remove tooltips after a period of time."
 msgstr ""
 
 # ../lisp/tooltips.jl
-#, fuzzy
 msgid "Number of milliseconds before displaying tooltips."
 msgstr "Número de milisegundos antes de mostrar la ayuda."
 
 # ../lisp/tooltips.jl
-#, fuzzy
 msgid "Number of milliseconds before removing tooltips."
 msgstr "Número de milisegundos antes de mostrar la ayuda."
 
@@ -1552,210 +1544,203 @@ msgstr "Anchura de la imágenes de la barra de título."
 
 #: ../themer/themer.glade:1327
 msgid " to: "
-msgstr ""
+msgstr " a:"
 
 # ../lisp/customize.jl
 #: ../themer/themer.glade:424
-#, fuzzy
 msgid "About:"
-msgstr "Acerca de"
+msgstr "Acerca de:"
 
 # ../src/sawmill-ui.jl
 #: ../themer/themer.glade:891 ../themer/themer.glade:1225
 #: ../themer/themer.glade:1470
-#, fuzzy
 msgid "Add"
 msgstr "Añadir"
 
 #: ../themer/themer.glade:1188
 msgid "Attributes"
-msgstr ""
+msgstr "Atributos"
 
 #: ../themer/themer.glade:1175
 msgid "Class"
-msgstr ""
+msgstr "Clase"
 
 #: ../themer/themer.glade:687 ../themer/themer.glade:841
 msgid "Clicked"
-msgstr ""
+msgstr "Pulsado"
 
 # ../src/sawmill-ui.jl
 #: ../themer/themer.glade:1048
-#, fuzzy
 msgid "Copy..."
-msgstr "Copiar"
+msgstr "Copiar..."
 
 #: ../themer/themer.glade:442
 msgid "Directory:"
-msgstr ""
+msgstr "Directorio:"
 
 #: ../themer/themer.glade:178
 msgid "E_xit"
-msgstr ""
+msgstr "_Salir"
 
 # ../lisp/custom.jl
 #: ../themer/themer.glade:608 ../themer/themer.glade:801
-#, fuzzy
 msgid "Focused"
 msgstr "Foco/Selección"
 
 # ../lisp/menus.jl
 #: ../themer/themer.glade:999 ../themer/themer.glade:1434
-#, fuzzy
 msgid "Frame"
-msgstr "Tipo de marco"
+msgstr "Marco"
 
 #: ../themer/themer.glade:250
 msgid "Frame Part _Definitions"
-msgstr ""
+msgstr "_Definiciones de partes del marco"
 
 # ../lisp/menus.jl
 #: ../themer/themer.glade:238
-#, fuzzy
 msgid "Frame _Classes"
-msgstr "Estilo de marco"
+msgstr "_Clases de Marco"
 
 # ../lisp/menus.jl
 #: ../themer/themer.glade:1249
-#, fuzzy
 msgid "Frames"
-msgstr "Estilo de marco"
+msgstr "Marcos"
 
 #: ../themer/themer.glade:634
 msgid "HIghlighted"
-msgstr ""
+msgstr "Iluminado"
 
 #: ../themer/themer.glade:814
 msgid "Highlighted"
-msgstr ""
+msgstr "Iluminado"
 
 #: ../themer/themer.glade:582 ../themer/themer.glade:788
 msgid "Inactive"
-msgstr ""
+msgstr "Inactivo"
 
 #: ../themer/themer.glade:714 ../themer/themer.glade:855
 msgid ""
 "Inactive-\n"
 "Clicked"
 msgstr ""
+"Inactivo-\n"
+"Pulsado"
 
 #: ../themer/themer.glade:661 ../themer/themer.glade:828
 msgid ""
 "Inactive-\n"
 "Highlighted"
 msgstr ""
+"Inactivo-\n"
+"Iluminado"
 
 #: ../themer/themer.glade:1278
 msgid "Map: "
-msgstr ""
+msgstr "Mapear: "
 
 #: ../themer/themer.glade:1492
 msgid "Mapping"
-msgstr ""
+msgstr "Mapeado"
 
 #: ../themer/themer.glade:527 ../themer/themer.glade:775
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: ../themer/themer.glade:86
 msgid "New Theme"
-msgstr ""
+msgstr "Nuevo Tema"
 
 # ../src/sawmill-ui.jl
 #: ../themer/themer.glade:926
-#, fuzzy
 msgid "Patterns"
-msgstr "Comparadores"
+msgstr "Patrones"
 
 #: ../themer/themer.glade:1688
 msgid "Properties"
-msgstr ""
+msgstr "Propiedades"
 
 #: ../themer/themer.glade:132
 msgid "Save Theme _As..."
-msgstr ""
+msgstr "Guardar Tema _Como..."
 
 #: ../themer/themer.glade:37
 msgid "Sawmill Theme Builder"
-msgstr ""
+msgstr "Constructor de Temas de Sawmill"
 
 #: ../themer/themer.glade:1524
 msgid "Sawmill Themer Preview"
-msgstr ""
+msgstr "Previsualización del tema"
 
 #: ../themer/themer.glade:318
 msgid "Theme name: "
-msgstr ""
+msgstr "Nombre del tema: "
 
 #: ../themer/themer.glade:1543
 msgid "This window previews the current theme."
-msgstr ""
+msgstr "Esta ventana muestra el tema actual."
 
 #: ../themer/themer.glade:1421
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 # ../lisp/menus.jl
 #: ../themer/themer.glade:226
-#, fuzzy
 msgid "Window _Frames"
-msgstr "Ventanas"
+msgstr "_Bordes de ventana"
 
 #: ../themer/themer.glade:1619
 msgid "[about text]"
-msgstr ""
+msgstr "[texto acerca de]"
 
 #: ../themer/themer.glade:1118
 msgid "[frame-part-table]"
-msgstr ""
+msgstr "[tabla-partes-marco]"
 
 #: ../themer/themer.glade:1720
 msgid "[place holder]"
-msgstr ""
+msgstr "[guarda sitio]"
 
 #: ../themer/themer.glade:1798 ../themer/themer.glade:1830
 msgid "[title]"
-msgstr ""
+msgstr "[título]"
 
 # ../lisp/customize.jl
 #: ../themer/themer.glade:280
-#, fuzzy
 msgid "_About"
-msgstr "Acerca de"
+msgstr "_Acerca de"
 
 #: ../themer/themer.glade:71
 msgid "_File"
-msgstr ""
+msgstr "_Fichero"
 
 #: ../themer/themer.glade:211
 msgid "_Help"
-msgstr ""
+msgstr "A_yuda"
 
 #: ../themer/themer.glade:103
 msgid "_Open Theme.."
-msgstr ""
+msgstr "_Abrir Tema..."
 
 #: ../themer/themer.glade:202
 msgid "_Preferences..."
-msgstr ""
+msgstr "_Preferencias..."
 
 #: ../themer/themer.glade:155
 msgid "_Preview"
-msgstr ""
+msgstr "_Previsualizar"
 
 #: ../themer/themer.glade:120
 msgid "_Save Theme"
-msgstr ""
+msgstr "_Guardar Tema"
 
 # ../lisp/custom.jl
 #: ../themer/themer.glade:187
-#, fuzzy
 msgid "_Settings"
-msgstr "Todo"
+msgstr "_Opciones"
 
 #: ../themer/themer.glade:262
 msgid "_Themes"
-msgstr ""
+msgstr "_Temas"
 
 # ../lisp/frames.jl
 #~ msgid "Highlight window borders even when the window is unfocused."
