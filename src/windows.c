@@ -971,7 +971,7 @@ window_mark_type (void)
     Lisp_Window *w = window_list;
     while (w != 0)
     {
-	if (w->id != 0)
+	if (w->id != 0 || !w->destroyed)
 	    rep_MARKVAL(rep_VAL(w));
 	w = w->next;
     }
