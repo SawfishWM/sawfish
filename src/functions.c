@@ -1128,6 +1128,15 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	    }
 	}
 
+	if (x + message.width > screen_width)
+	    x = MAX (0, screen_width - message.width - 4);
+	else if (x < 4)
+	    x = 4;
+	if (y + height > screen_height)
+	    y = MAX (0, screen_height - height - 4);
+	else if (y < 4)
+	    y = 4;
+
 	if (message_win == 0)
 	{
 	    /* I tried setting save_under in here, but it just slows
