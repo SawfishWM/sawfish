@@ -36,6 +36,12 @@
   :group edge-flip
   :after-set (lambda () (edge-flip-enable)))
 
+(defcustom edge-flip-only-when-moving nil
+  "Only flip when interactively moving a window."
+  :type boolean
+  :group edge-flip
+  :after-set (lambda () (edge-flip-enable)))
+
 (defcustom edge-flip-type 'viewport
   "What hitting the screen edge actually flips."
   :type symbol
@@ -53,7 +59,7 @@ flipping."
 (defvar ef-timer nil)
 
 (defun edge-flip-enable ()
-  (if edge-flip-enabled
+  (if (and edge-flip-enabled (not edge-flip-only-when-moving))
       (progn
 	(require 'flippers)
 	(require 'timers)
