@@ -1,29 +1,18 @@
 # Finnish translations for Sawfish.
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Antti Ahvensalmi <aahven@mbnet.fi>, 2000.
-#
+# http://gnome-fi.sourceforge.net
 #. ../themer/themer.glade:353 ../themer/themer.glade:397
 #. * ../themer/themer.glade:472 ../themer/themer.glade:562
 #. * ../themer/themer.glade:1070 ../themer/themer.glade:1300
 #. * ../themer/themer.glade:1320 ../themer/themer.glade:1349
 #. * ../themer/themer.glade:1369 ../themer/themer.glade:1852
 # 
-# Ongelmia
-#
-#	Intensity of bevels (percentage) - Miten vaikuttaa?
-#	Cycling windows - Hyvä käännös tarvitaan.
-#	Workspace/Viewport - Näitä sanoja esiintyy paikoissa,
-#			     mitä ei voi kääntää. Pitäisikö ne
-#			     jättää kokonaan pois? 
-#
-#	Ja paljon muuta. Lukemattomia todella "huonoja" suomennoksia.
-#	
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish\n"
 "POT-Creation-Date: 2000-05-19 01:02+0100\n"
-"PO-Revision-Date: 2000-05-28 11:19+00:00\n"
+"PO-Revision-Date: 2000-06-05 16:11+00:00\n"
 "Last-Translator: Antti Ahvensalmi <aahven@mbnet.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +66,6 @@ msgid "Commands"
 msgstr "Komennot"
 
 #. ../src/sawmill-ui.jl
-#, fuzzy
 msgid "Undocumented"
 msgstr "Ei dokumentoitu"
 
@@ -91,7 +79,7 @@ msgstr "Peruuta"
 
 #. ../src/sawmill-ui.jl
 msgid "Actions"
-msgstr "Asetukset"
+msgstr "Ikkunan asetukset"
 
 #. ../src/sawmill-ui.jl
 msgid "Matchers"
@@ -99,7 +87,7 @@ msgstr "Ominaisuus"
 
 #. ../src/sawmill-ui.jl
 msgid "Match window properties"
-msgstr "Yhteiset ominaisuudet"
+msgstr "Tunnistettavat ominaisuudet"
 
 #. ../src/sawmill-ui.jl
 msgid "Grab..."
@@ -131,7 +119,7 @@ msgstr "Sawfishin hallinta"
 
 #. ../themer/themer.in
 msgid "Reload themes in window manager after saving."
-msgstr "Lue teemat uudelleen ikkunointiohjelmassa tallennuksen jälkeen."
+msgstr "Lue teemat uudelleen tallennuksen jälkeen."
 
 #. ../themer/themer.in
 msgid "Remove unused definitions when saving."
@@ -217,7 +205,7 @@ msgstr "Lue teema kohteesta `%s'"
 
 #. ../themer/themer.in
 msgid "Theme Directory"
-msgstr "Teemahakemisto"
+msgstr "Teeman tallennus"
 
 #. ../themer/themer.in
 msgid "Open"
@@ -234,11 +222,11 @@ msgstr "Äänet"
 
 #. ../lisp/audio-events.jl
 msgid "Enable audio effects for window manager events."
-msgstr "Aseta ääniefektit päälle."
+msgstr "Ääniefektit."
 
 #. ../lisp/audio-events.jl
 msgid "Play audio effects for windows that are usually ignored."
-msgstr "Soita ääniefektit myös muuten ohitettaville ikkunoille."
+msgstr "Ääniefektit myös ohitettaville ikkunoille."
 
 #. ../lisp/auto-raise.jl
 msgid "Raise windows when they are focused."
@@ -246,7 +234,7 @@ msgstr "Nosta ikkunat kohdistuksen yhteydessä."
 
 #. ../lisp/auto-raise.jl
 msgid "Delay in milliseconds until focused windows are raised."
-msgstr "Millisekunnin viive ennen kohdistetun ikkunan nostamista."
+msgstr "Kohdistetun ikkunan nostamista edeltävä viive (ms)."
 
 #. ../lisp/configure.jl
 msgid "Automatically select window gravity from position on screen."
@@ -262,7 +250,7 @@ msgstr "Kaikki asetukset"
 
 #. ../lisp/custom.jl
 msgid "Edit theme..."
-msgstr "Teemanmuokkaus..."
+msgstr "Teemamuokkain..."
 
 #. ../lisp/custom.jl
 msgid "Focus"
@@ -291,7 +279,7 @@ msgstr "Työpöydät"
 #. ../lisp/keymaps.jl
 #. ../lisp/custom.jl
 msgid "Bindings"
-msgstr "Näppäimet"
+msgstr "Oikotiet"
 
 #. ../lisp/custom.jl
 msgid "Minimizing/Maximizing"
@@ -315,14 +303,14 @@ msgstr "Näytä jokaisen asetuksen muuttujanimi."
 
 #. ../lisp/customize.jl
 msgid "Font used by default."
-msgstr "Oletuskirjasin."
+msgstr "Kirjasinlaji."
 
 #. ../lisp/customize.jl
 msgid "Intensity of bevels (percentage)."
 msgstr ""
 
 #. ../lisp/customize.jl
-#, c-format
+#, c-format, fuzzy
 msgid ""
 "Sawfish %s (rep %s)\n"
 "\n"
@@ -340,6 +328,17 @@ msgid ""
 "\n"
 "Visit the Sawfish homepage at http://sawmill.sourceforge.net/"
 msgstr ""
+"Sawfish %s (rep %s)\n"
+"\n"
+"Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>\n"
+"\n"
+"Tämä on vapaa ohjelmisto -- saat vapaasti levittää sitä ja/tai muokata sitä noudattaen Free Software Foundationin GNU GPL-lisenssin version 2 tai (halutessasi) minkä tahansa uudemman version sääntöjen mukaisesti.\n"
+"\n"
+"Sawfishiä levitetään siinä toivossa, että se on hyödyllinen, mutta ILMAN MINKÄÄNLAISTA TAKUUTA. Katso GNU GPL:stä tarkemmat tiedot.\n"
+"\n"
+"Vieraile Sawfishin kotisivuilla osoitteessa http://sawmill.sourceforge.net/\n"
+"\n"
+"Käännös: http://gnome-fi.sourceforge.net"
 
 #. ../lisp/customize.jl
 msgid "Invoke the user-customization system."
@@ -376,14 +375,13 @@ msgstr "Vaihda vain ikkunaa siirrettäessä."
 
 #. ../lisp/edge-flip.jl
 msgid "What hitting the screen edge actually flips."
-msgstr "Mitä ruudun reunaan osuminen itseasiassa vaihtaa."
+msgstr "Mitä reunaan osuminen vaihtaa."
 
 #. ../lisp/edge-flip.jl
 msgid ""
 "Number of milliseconds to wait after pointer hits screen edge before\n"
 "flipping."
-msgstr ""
-"Reunavaihtoa edeltävä viive."
+msgstr "Reunavaihtoa edeltävä viive (ms)."
 
 #. ../lisp/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -452,27 +450,27 @@ msgstr "Poista ikkuna, tai anna äänimerkki mikäli ikkunaa ei voida sulkea "
 
 #. ../lisp/gnome-commands.jl
 msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-msgstr ""
+msgstr "Aseta päälle/pois näkyvyys ikkunalistalla."
 
 #. ../lisp/gnome-commands.jl
 msgid "Set the GNOME SKIP_WINLIST hint of the window."
-msgstr ""
+msgstr "Piilota ikkuna ikkunalistalta (GNOME)."
 
 #. ../lisp/gnome-commands.jl
 msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-msgstr ""
+msgstr "Näytä ikkuna ikkunalistalla (GNOME)."
 
 #. ../lisp/gnome-commands.jl
 msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-msgstr ""
+msgstr "Aseta päälle/pois näkyvyys tehtävälistalla."
 
 #. ../lisp/gnome-commands.jl
 msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-msgstr ""
+msgstr "Piilota ikkuna tehtävälistalta (GNOME)."
 
 #. ../lisp/gnome-commands.jl
 msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-msgstr ""
+msgstr "Näytä ikkuna tehtävälistalla (GNOME)."
 
 #. ../lisp/group-funs.jl
 msgid "Group transient windows with their parents."
@@ -483,8 +481,9 @@ msgid "New group"
 msgstr "Uusi ryhmä"
 
 #. ../lisp/grow-pack.jl
+#, fuzzy
 msgid "Whether growing an already grown window grows it again."
-msgstr ""
+msgstr "Jos kasvatetaan jo kasvanutta ikkunaa, se kasvaa taas."
 
 #. ../lisp/grow-pack.jl
 msgid ""
@@ -492,7 +491,7 @@ msgid ""
 "this on, you can use `unmaximize-window' or something similar to get\n"
 "back to the original size."
 msgstr ""
-"Mikäli kasvattaminen vastaa suurentamista, voit käyttää palauta-toimintoa"
+"Mikäli kasvattaminen vastaa maksimoimista, voit käyttää palauta-toimintoa"
 "saadaksesi ikkunan alkuperäisen koon takaisin."
 
 #. ../lisp/grow-pack.jl
@@ -552,10 +551,11 @@ msgid "Display the workspace containing the window W, then focus on W."
 msgstr "Näytä työpöytä joka sisältää ikkunan W, sitten kohdista W."
 
 #. ../lisp/iconify.jl
+#, fuzzy
 msgid ""
 "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
-msgstr ""
+msgstr "'Kiinnitä' ikkuna, vaikka se olisi kaikkien työpöytien jäsen."
 
 #. ../lisp/ignore-window.jl
 msgid "Ignore the window."
@@ -654,13 +654,16 @@ msgid "Matched Windows"
 msgstr "Erikoiskäsittely"
 
 #. ../lisp/match-window.jl
+#, fuzzy
 msgid "Match windows to properties."
-msgstr ""
+msgstr "Vertaa ikkunoiden ominaisuuksia."
 
 #. ../lisp/maximize.jl
+#, fuzzy
 msgid ""
 "Maximizing a window dimension always increases the size of that dimension."
 msgstr ""
+"Ikkunan suunnan maksimoiminen kasvattaa kyseistä suuntaa aina."
 
 #. ../lisp/maximize.jl
 msgid "Raise windows when they're maximized."
@@ -768,11 +771,11 @@ msgstr "_Molemmissa"
 
 #. ../lisp/menus.jl
 msgid "Fill vertically"
-msgstr "Täytä pystysuunta"
+msgstr "Täytä pystysuunnassa"
 
 #. ../lisp/menus.jl
 msgid "Fill horizontally"
-msgstr "Täytä leveyssuunta"
+msgstr "Täytä leveyssuunnassa"
 
 #. ../lisp/menus.jl
 msgid "Fill both"
@@ -788,7 +791,7 @@ msgstr "_Ryhmässä"
 
 #. ../lisp/menus.jl
 msgid "_Send window to"
-msgstr "_Lähetä ikkuna"
+msgstr "_Lähetä"
 
 #. ../lisp/menus.jl
 msgid "_Previous workspace"
@@ -936,19 +939,19 @@ msgstr "Siirrettävien pikselien määrä \"siirrä-osoitinta\"-toiminnoissa."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the left."
-msgstr ""
+msgstr "Siirrä osoitinta vasemmalle."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the right."
-msgstr ""
+msgstr "Siirrä osoitinta oikealle.."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels upwards."
-msgstr ""
+msgstr "Siirrä osoitinta ylöspäin."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels downwards."
-msgstr ""
+msgstr "Siirrä osoitinta alaspäin."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel to the left."
@@ -991,7 +994,7 @@ msgid ""
 "The method of choosing which window edges are moved while resizing with\n"
 "the mouse."
 msgstr ""
-"Peruste minkä mukaan valitaan muutettavissa olevat suunnat, kun ikkunan"
+"Peruste minkä mukaan päätetään muutettavissa olevat suunnat, kun ikkunan "
 "kokoa muutetaan\nhiirellä."
 
 #. ../lisp/move-resize.jl
@@ -1059,8 +1062,7 @@ msgid ""
 "The program used to play audio samples. If unset, built-in support for ESD "
 "is used."
 msgstr ""
-"Äänien soittamiseen käytettävä ohjelma. Jos ei asetettu, käytetään "
-"sisäänrakennettua ESD-tukea."
+"Äänien soittamiseen käytettävä ohjelma. Oletus on sisäänrakennettu ESD-tuki."
 
 #. ../lisp/prompt-wm.jl
 msgid "Window:"
@@ -1076,12 +1078,14 @@ msgid "Workspace:"
 msgstr "Työpöytä:"
 
 #. ../lisp/prompt-wm.jl
+#, fuzzy
 msgid "Prompt for a workspace and switch to it."
-msgstr ""
+msgstr "Pyydä käyttäjältä työpöytä ja siirry sinne."
 
 #. ../lisp/prompt.jl
+#, fuzzy
 msgid "Keymap containing bindings active when reading a string from the user."
-msgstr ""
+msgstr "Näppäinkartta, joka on käytössä käyttäjän syöttäessä tekstiä."
 
 #. ../lisp/prompt.jl
 msgid "Cancel string input."
@@ -1291,23 +1295,23 @@ msgstr "Näytä vinkeissä perusteellinen ohjeistus."
 
 #. ../lisp/tooltips.jl
 msgid "Number of milliseconds before displaying tooltips."
-msgstr "Vihjeet tulevat esiin näin monen millisekunnin jälkeen."
+msgstr "Vinkit tulevat esiin näin monen millisekunnin jälkeen."
 
 #. ../lisp/tooltips.jl
 msgid "Number of milliseconds before removing tooltips."
-msgstr "Vihjeet poistuvat näkyvistä näin monen millisekunnin jälkeen."
+msgstr "Vinkit poistuvat näkyvistä näin monen millisekunnin jälkeen."
 
 #. ../lisp/tooltips.jl
 msgid "Font used to display tooltips."
-msgstr "Vihjeissä käytettävä kirjasin."
+msgstr "Vinkkien kirjasinlaji."
 
 #. ../lisp/tooltips.jl
 msgid "Color used for the tooltips background"
-msgstr "Vihjeiden taustaväri"
+msgstr "Vinkkien taustaväri"
 
 #. ../lisp/tooltips.jl
 msgid "Color used for the tooltips foreground"
-msgstr "Vihjeiden tekstin väri."
+msgstr "Vinkkien tekstin väri."
 
 #. ../lisp/transient.jl
 msgid "Focus each window when first displayed."
@@ -1315,15 +1319,15 @@ msgstr "Kohdista uusi ikkuna automaattisesti."
 
 #. ../lisp/transient.jl
 msgid "Transient windows inherit focus from their parent."
-msgstr "Lapsi-ikkunat perivät kohdistuksen vanhemmaltaan."
+msgstr "Ali-ikkunat perivät kohdistuksen vanhemmaltaan."
 
 #. ../lisp/viewport.jl
 msgid "Number of columns in each virtual workspace."
-msgstr "Sarakkeiden määrä yhtä työpöytää kohti (alityöpöydät)."
+msgstr "Sarakkeiden määrä yhtä työpöytää kohti (alityöpöydät/viewports)."
 
 #. ../lisp/viewport.jl
 msgid "Number of rows in each virtual workspace."
-msgstr "Rivien määrä yhtä työpöytää kohti (alityöpöydät)."
+msgstr "Rivien määrä yhtä työpöytää kohti (alityöpöydät/viewports)."
 
 #. ../lisp/viewport.jl
 msgid "Windows are uniconified to the current viewport."
@@ -1363,7 +1367,7 @@ msgstr "Siirrä ikkuna alapuolella olevalle alityöpöydälle."
 
 #. ../lisp/window-anim.jl
 msgid "The default window animation mode."
-msgstr "Ikkunan oletuksellinen animointitapa."
+msgstr "Ikkunoiden animointitapa."
 
 #. ../lisp/window-history.jl
 msgid "Window History"
@@ -1436,7 +1440,7 @@ msgstr "Ikkunat nostetaan valittaessa (yleensä \"Ikkunat\"-valikosta)."
 
 #. ../lisp/workspace.jl
 msgid "Unshade selected windows."
-msgstr "Avaa valittujen ikkunoiden rullaus."
+msgstr "Rullaus avataan valittaessa."
 
 #. ../lisp/workspace.jl
 msgid "Warp the mouse pointer to selected windows."
@@ -1580,39 +1584,39 @@ msgstr ""
 
 #. ../lisp/x-cycle.jl
 msgid "Window Cycling"
-msgstr ""
+msgstr "Ikkunoiden kierrätys"
 
 #. ../lisp/x-cycle.jl
 msgid "Display window names while cycling through windows."
-msgstr ""
+msgstr "Näytä ikkunoiden nimet kierrättäessä."
 
 #. ../lisp/x-cycle.jl
 msgid "Include iconified windows when cycling."
-msgstr ""
+msgstr "Huomioi myös piilotetut ikkunat kierrätyksessä."
 
 #. ../lisp/x-cycle.jl
 msgid "Include windows on all workspaces when cycling."
-msgstr ""
+msgstr "Huomioi kaikkien työpöytien ikkunat kierrätyksessä."
 
 #. ../lisp/x-cycle.jl
 msgid "Include windows on all viewports when cycling."
-msgstr ""
+msgstr "Huomioi kaikkien alityöpöytien (viewports) ikkunat kierrätyksessä."
 
 #. ../lisp/x-cycle.jl
 msgid "Raise windows while they're temporarily selected during cycling."
-msgstr ""
+msgstr "Nosta ikkunat kun ne väliaikaisesti valitaan kierrättäessä."
 
 #. ../lisp/x-cycle.jl
 msgid "Warp the mouse pointer to windows as they're temporarily selected."
-msgstr ""
+msgstr "Siirrä hiiren osoitin ikkunoihin kun ne valitaan kierrättäessä."
 
 #. ../lisp/x-cycle.jl
 msgid "Focus windows when they're temporarily selected during cycling."
-msgstr ""
+msgstr "Kohdista ikkunat kierrättäessä."
 
 #. ../lisp/x-cycle.jl
 msgid "Disable auto-raising while temporarily selecting windows."
-msgstr ""
+msgstr "Poista automaattinosto käytöstä ikkunoita valitessa."
 
 #. ../lisp/x-cycle.jl
 msgid "Cycle through all windows in order of recent selections."
@@ -1620,7 +1624,7 @@ msgstr ""
 
 #. ../lisp/x-cycle.jl
 msgid "Cycle through all windows in the same group as the current window."
-msgstr ""
+msgstr "Kierrätä senhetkisen ikkunan kanssa samassa ryhmässä olevia ikkunoita."
 
 #. ../lisp/x-cycle.jl
 msgid ""
@@ -1706,19 +1710,19 @@ msgstr "Tekstin väri."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for unfocused windows."
-msgstr "Kehyskuva kohdistamattomille ikkinoille."
+msgstr "Kehyskuvio kohdistamattomille ikkunoille."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for focused windows."
-msgstr "Kehyskuva kohdistetuille ikkunoille."
+msgstr "Kehyskuvio kohdistetuille ikkunoille."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for highlighted parts."
-msgstr ""
+msgstr "Kehyskuvio korostetuille osille-"
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for clicked parts."
-msgstr ""
+msgstr "Kehyskuvio painetuille osille."
 
 #. ../themes/smaker/theme.jl
 msgid "Height of title bar."
@@ -1726,7 +1730,7 @@ msgstr "Otsikon korkeus."
 
 #. ../themes/smaker/theme.jl
 msgid "Width of window border."
-msgstr ""
+msgstr "Ikkunan reunan leveys."
 
 #. ../themes/smaker/theme.jl
 msgid "Border width of bar images."
@@ -1734,7 +1738,7 @@ msgstr ""
 
 #. ../themer/themer.glade:1327
 msgid " to: "
-msgstr ""
+msgstr " Kehys: "
 
 #. ../themer/themer.glade:1599
 msgid "About"
@@ -1787,7 +1791,7 @@ msgstr "Kehys"
 
 #. ../themer/themer.glade:250
 msgid "Frame Part _Definitions"
-msgstr ""
+msgstr "Kehyksen _osat"
 
 #. ../themer/themer.glade:238
 msgid "Frame _Classes"
@@ -1799,11 +1803,11 @@ msgstr "Kehykset"
 
 #. ../themer/themer.glade:634
 msgid "HIghlighted"
-msgstr ""
+msgstr "KOrostettu"
 
 #. ../themer/themer.glade:814
 msgid "Highlighted"
-msgstr ""
+msgstr "Korostettu"
 
 #. ../themer/themer.glade:582 ../themer/themer.glade:788
 msgid "Inactive"
@@ -1825,7 +1829,7 @@ msgstr ""
 
 #. ../themer/themer.glade:1278
 msgid "Map: "
-msgstr "Kartta: "
+msgstr "Tyyppi: "
 
 #. ../themer/themer.glade:1492
 msgid "Mapping"
@@ -1841,7 +1845,7 @@ msgstr "Uusi teema"
 
 #. ../themer/themer.glade:926
 msgid "Patterns"
-msgstr ""
+msgstr "Kuviot"
 
 #. ../themer/themer.glade:1688
 msgid "Properties"
@@ -1853,11 +1857,11 @@ msgstr "Tallenna teema _nimellä..."
 
 #. ../themer/themer.glade:37
 msgid "Sawfish Theme Builder"
-msgstr "Sawfish teemanmuokkain"
+msgstr "Sawfish teemamuokkain"
 
 #. ../themer/themer.glade:1524
 msgid "Sawfish Themer Preview"
-msgstr ""
+msgstr "Teeman esikatselu"
 
 #. ../themer/themer.glade:318
 msgid "Theme name: "
@@ -1865,7 +1869,7 @@ msgstr "Teeman nimi: "
 
 #. ../themer/themer.glade:1543
 msgid "This window previews the current theme."
-msgstr ""
+msgstr "Tämä on teeman esikatseluikkuna."
 
 #. ../themer/themer.glade:1421
 msgid "Type"
@@ -1877,7 +1881,7 @@ msgstr "Ikkunan _kehykset"
 
 #. ../themer/themer.glade:1619
 msgid "[about text]"
-msgstr ""
+msgstr "[tietoja]"
 
 #. ../themer/themer.glade:1118
 msgid "[frame-part-table]"
@@ -1901,7 +1905,7 @@ msgstr "_Tiedosto"
 
 #. ../themer/themer.glade:211
 msgid "_Help"
-msgstr "_Apua"
+msgstr "_Ohje"
 
 #. ../themer/themer.glade:103
 msgid "_Open Theme.."
