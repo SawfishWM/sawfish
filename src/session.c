@@ -151,7 +151,10 @@ static void
 save_yourself (SmcConn conn, SmPointer data, int save_type, Bool shutdown,
 	       int interact_style, Bool fast)
 {
-    SmcRequestSaveYourselfPhase2 (conn, &save_yourself_2, 0);
+    if (save_type == SmSaveLocal || save_type == SmSaveBoth)
+	SmcRequestSaveYourselfPhase2 (conn, &save_yourself_2, 0);
+    else
+	SmcSaveYourselfDone (conn, True);
 }
 
 static void
