@@ -29,13 +29,17 @@
 	  gtk
 	  nokogiri-widget)
 
-  (define (test-widget spec)
+  (define (test-widget spec &optional initial-value)
     (let (widget)
       (setq widget (make-widget spec (lambda ()
 				       (when widget
 					 (format standard-output
 						 "changed: %s\n"
 						 (widget-ref widget))))))
+      (when initial-value
+	(or (widget-valid-p widget initial-value)
+	    (error "Value is not suitable for widget: %s" initial-value))
+	(widget-set widget initial-value))
       (let ((window (gtk-window-new 'toplevel)))
 	(gtk-container-add window (widget-gtk-widget widget))
 	(gtk-signal-connect window "delete_event"
