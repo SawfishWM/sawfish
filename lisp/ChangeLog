@@ -1,5 +1,10 @@
 2000-10-24  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/swapper.jl (workspace-swap-out,
+	workspace-swap-in): don't swap non-plist attributes of sticky
+	windows (this means that sticky geometry is fixed, probably as
+	it should be)
+
 	* sawfish/wm/util/window-order.jl: made the `order' property
 	workspace-local once more (there's a remark earlier in this
 	ChangeLog about that being non-intuitive, but it's better that
