@@ -50,6 +50,7 @@ DEFSYM(keymap, "keymap");
 static u_long meta_mod;
 
 static void grab_keymap_event (repv km, long code, long mods, bool grab);
+static void grab_all_keylist_events (repv map, repv tem, bool grab);
 
 /* Called for unbound events */
 bool (*event_proxy_fun)(XEvent *ev, long code, long mods);
@@ -472,9 +473,9 @@ lookup_event_name(u_char *buf, u_long code, u_long mods)
 
     if(mods & meta_mod)
 	mods = (mods & ~meta_mod) | EV_MOD_META;
-    mods &= ~EV_TYPE_MASK;
+    mods &= EV_MOD_MASK;
 
-    for(i = 0; i < 16 && mods != 0; i++)	/* magic numbers!? */
+    for(i = 0; i < 32 && mods != 0; i++)	/* magic numbers!? */
     {
 	u_long mask = 1 << i;
 	if(mods & mask)
@@ -701,6 +702,46 @@ unbind-keys KEY-MAP EVENT-DESCRIPTION...
 	res = Qt;
 end:
     return(res);
+}
+
+DEFUN("grab-keymap", Fgrab_keymap, Sgrab_keymap, (repv map), rep_Subr1) /*
+::doc:Sgrab-keymap::
+grab-keymap KEYMAP
+
+Grab any events in KEYMAP that need to be grabbed so that bindings in
+KEYMAP may be serviced.
+::end:: */
+{
+    repv tem = map;
+    if (rep_CONSP(tem))
+	grab_all_keylist_events (map, rep_CDR(map), TRUE);
+    else if (rep_VECTORP(map))
+    {
+	int i;
+	for (i = 0; i < rep_VECT_SIZE(map); i++)
+	    grab_all_keylist_events (map, rep_VECTI(map, i), TRUE);
+    }
+    return map;
+}
+
+DEFUN("ungrab-keymap", Fungrab_keymap, Sungrab_keymap, (repv map), rep_Subr1)/*
+::doc:Sungrab-keymap::
+ungrab-keymap KEYMAP
+
+Ungrab any events in KEYMAP that would have been grabbed so that bindings in
+KEYMAP may be serviced.
+::end:: */
+{
+    repv tem = map;
+    if (rep_CONSP(tem))
+	grab_all_keylist_events (map, rep_CDR(map), FALSE);
+    else if (rep_VECTORP(map))
+    {
+	int i;
+	for (i = 0; i < rep_VECT_SIZE(map); i++)
+	    grab_all_keylist_events (map, rep_VECTI(map, i), FALSE);
+    }
+    return map;
 }
 
 DEFSTRING(not_in_handler, "Not in event handler");
@@ -974,14 +1015,31 @@ grab_keymap_event (repv km, long code, long mods, bool grab)
     Lisp_Window *w;
     repv ev = MAKE_EVENT(rep_MAKE_INT(code), rep_MAKE_INT(mods));
     repv global = Fsymbol_value (Qglobal_keymap, Qt);
+    if (rep_SYMBOLP(km))
+	km = Fsymbol_value (km, Qt);
     for (w = window_list; w != 0; w = w->next)
     {
 	if (w->id != 0)
 	{
 	    repv tem = Fwindow_get (rep_VAL(w), Qkeymap);
+	    if (rep_SYMBOLP(tem) && tem != Qnil)
+		tem = Fsymbol_value (tem, Qt);
 	    if (km == global || tem == km)
 		(grab ? grab_event : ungrab_event) (w->id, ev);
 	}
+    }
+}
+
+static void
+grab_all_keylist_events (repv map, repv tem, bool grab)
+{
+    while (rep_CONSP(tem) && !rep_INTERRUPTP)
+    {
+	repv key = KEY_EVENT(rep_CAR(tem));
+	grab_keymap_event (map, rep_INT(EVENT_CODE(key)),
+			   rep_INT(EVENT_MODS(key)), grab);
+	tem = rep_CDR(tem);
+	rep_TEST_INT;
     }
 }
 
@@ -1049,6 +1107,8 @@ keys_init(void)
     rep_ADD_SUBR(Smake_sparse_keymap);
     rep_ADD_SUBR(Sbind_keys);
     rep_ADD_SUBR(Sunbind_keys);
+    rep_ADD_SUBR(Sgrab_keymap);
+    rep_ADD_SUBR(Sungrab_keymap);
     rep_ADD_SUBR(Scurrent_event_string);
     rep_ADD_SUBR(Scurrent_event);
     rep_ADD_SUBR(Scurrent_event_window);
