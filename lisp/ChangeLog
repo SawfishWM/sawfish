@@ -1,5 +1,12 @@
 1999-08-31  John Harper  <john@dcs.warwick.ac.uk>
 
+	* workspace.jl, sawmill.jl, keymaps.jl: if batch-mode is
+	non-nil, don't do anything that would access the display when
+	initialising or shutting down
+
+	* workspace.jl: added symbolic NormalState and IconicState
+	constants
+
 	* workspace.jl (ws-set-client-state): new function, in
 	window-state-change-hook and add-window-hook
 

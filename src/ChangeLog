@@ -1,5 +1,15 @@
 1999-08-31  John Harper  <john@dcs.warwick.ac.uk>
 
+	* windows.c, main.c, keys.c, images.c, functions.c, frames.c,
+	fonts.c, events.c, cursors.c, colors.c: added doc strings for
+	built-in functions
+
+	* display.c (sys_init): don't connect to display if batch-mode
+	is non-nil
+	* keys.c, images.c, frames.c, fonts.c, cursors.c, colors.c: if
+	batch-mode is non-nil, don't do anything that would access the
+	display when initialising or shutting down
+
 	* windows.c (Fset_client_state): deleted
 
 	* functions.c (Fget_x_property, Fset_x_property): use CARD16

@@ -186,3 +186,13 @@ Minimal GNOME compliance can be obtained by requiring the `gnome'
 module, i.e. put "(require 'gnome)" in your .sawmillrc file. This is
 still a bit basic, but it does most things and will get better..
 
+To dump all Lisp documentation strings execute the following in the
+shell:
+
+	$ sawmill --batch --no-rc rep -f rep <<EOF
+	> (apropos-function "" t)
+	> (apropos-variable "")
+	> EOF
+
+You probably want to redirect this to a file since it's about 150k in
+size. Also it contains many functions documented in the librep manual.
