@@ -34,8 +34,8 @@
 ;; (defvar workspace-grid-width 2)
 
 ;; (bind-keys global-keymap
-;;   "C-Down" '(select-workspace (+ (workspace-index) workspace-grid-width))
-;;   "C-Up" '(select-workspace (- (workspace-index) workspace-grid-width)))
+;;   "C-Down" '(select-workspace (+ current-workspace workspace-grid-width))
+;;   "C-Up" '(select-workspace (- current-workspace workspace-grid-width)))
 
 ;; substituting the 2 for suitable values of N. This won't change the
 ;; way that the GNOME hints portray the workspace list, but it's a start..
