@@ -68,7 +68,7 @@
   (define (group-name id)
     (cond ((symbolp id) (symbol-name id))
 	  ((integerp id)
-	   (let ((name (or (window-class id)
+	   (let ((name (or (and (> id 0) (window-class id))
 			   (and (> id 0) (nth 2 (get-x-property id 'WM_NAME)))
 			   (window-class (car (windows-by-group id)))
 			   "Unnamed")))
