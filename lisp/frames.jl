@@ -90,10 +90,11 @@
 (add-hook 'add-window-hook 'set-frame-for-window t)
 
 (defun reframe-all-windows ()
-  (mapc #'(lambda (w)
-	    (when (and (windowp w) (not (window-get w 'ignored)))
-	      (set-frame-for-window w t)))
-	(managed-windows)))
+  (save-stacking-order
+    (mapc #'(lambda (w)
+	      (when (and (windowp w) (not (window-get w 'ignored)))
+		(set-frame-for-window w t)))
+	  (managed-windows))))
 
 
 ;; kludge different window decors by modifying the assumed window type
