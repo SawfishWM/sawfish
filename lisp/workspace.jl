@@ -209,6 +209,9 @@ that window on (counting from zero).")
     (setq index current-workspace))
   (when (> current-workspace index)
     (setq current-workspace (1- current-workspace)))
+  (when (and first-interesting-workspace
+	     (> first-interesting-workspace index))
+    (setq first-interesting-workspace (1- first-interesting-workspace)))
   (when (and last-interesting-workspace
 	     (> last-interesting-workspace index))
     (setq last-interesting-workspace (1- last-interesting-workspace)))
@@ -377,8 +380,9 @@ that window on (counting from zero).")
 	    ;; put the window on its parents workspace
 	    (ws-add-window-to-space w (window-get parent 'workspace))
 	  (window-put w 'workspace current-workspace)
-	  (unless (window-visible-p w)
-	    (show-window w))
+	  (if (not (window-get w 'iconified))
+	      (show-window w)
+	    (hide-window w))
 	  (call-window-hook 'add-to-workspace-hook w)
 	  (call-hook 'workspace-state-change-hook))))))
 
