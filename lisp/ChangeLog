@@ -1,5 +1,13 @@
 2000-05-14  John Harper  <john@dcs.warwick.ac.uk>
 
+	* window-history.jl: various enhancements, including: only save
+	state file if data needs updating, window-history-forget
+	command to remove saved state for a window, customizations
+	controlling what gets saved (position, size, or other)
+
+	* frames.jl (set-window-frame-style, frame-style-menu): call
+	window-state-changed-hook, with states `frame-style' and `type'
+
 	* auto-raise.jl (raise-groups-on-focus): commented out this
 	option, it causes window groups to flicker (sometimes
 	repeatedly) in certain cases due to the extra focus events it
