@@ -297,10 +297,15 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 
     if (atomic)
     {
-	shape_win = XCreateSimpleWindow (dpy, root_window, -100, -100,
-					 w->frame_width, w->frame_height,
-					 0, BlackPixel (dpy, screen_num),
-					 BlackPixel (dpy, screen_num));
+	XSetWindowAttributes wa;
+	int wamask;
+	wa.colormap = image_cmap;
+	wa.border_pixel = BlackPixel (dpy, screen_num);
+	wamask = CWColormap | CWBorderPixel;
+	shape_win = XCreateWindow (dpy, root_window, -100, -100,
+				   w->frame_width, w->frame_height,
+				   0, image_depth, InputOutput,
+				   image_visual, wamask, &wa);
     }
     else
 	shape_win = w->frame;
@@ -507,11 +512,15 @@ set_frame_part_bg (struct frame_part *fp)
 	    if (bg_mask != 0)
 	    {
 		XRectangle rect;
-		tem = XCreateSimpleWindow (dpy, win->frame,
-					   -100, -100,
-					   fp->width, fp->height,
-					   0, BlackPixel (dpy, screen_num),
-					   BlackPixel (dpy, screen_num));
+		XSetWindowAttributes wa;
+		int wamask;
+		wa.colormap = image_cmap;
+		wa.border_pixel = BlackPixel (dpy, screen_num);
+		wamask = CWColormap | CWBorderPixel;
+		tem = XCreateWindow (dpy, win->frame, -100, -100,
+				     fp->width, fp->height,
+				     0, image_depth, InputOutput,
+				     image_visual, wamask, &wa);
 		rect.x = rect.y = 0;
 		rect.width = fp->width;
 		rect.height = fp->height;
@@ -1262,7 +1271,8 @@ configure_frame_part (struct frame_part *fp)
 	    wa.win_gravity = StaticGravity;
 	    wa.bit_gravity = StaticGravity;
 	    wa.colormap = image_cmap;
-	    wamask = CWWinGravity | CWBitGravity | CWColormap;
+	    wa.border_pixel = BlackPixel (dpy, screen_num);
+	    wamask = CWWinGravity | CWBitGravity | CWColormap | CWBorderPixel;
 	    fp->id = XCreateWindow (dpy, w->frame,
 				    fp->x - w->frame_x, fp->y - w->frame_y,
 				    fp->width, fp->height,
@@ -1437,7 +1447,9 @@ list_frame_generator (Lisp_Window *w)
     {
 	/* create the frame */
 	wa.override_redirect = True;
-	wamask = CWOverrideRedirect;
+	wa.colormap = image_cmap;
+	wa.border_pixel = BlackPixel (dpy, screen_num);
+	wamask = CWOverrideRedirect | CWColormap | CWBorderPixel;
 	w->frame = XCreateWindow (dpy, root_window, w->attr.x, w->attr.y,
 				  w->frame_width, w->frame_height,
 				  0, image_depth, InputOutput,
