@@ -1,3 +1,14 @@
+1999-08-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* customize.jl (customize-stop-process): only kill the process
+	when it's actually running
+
+	* custom.jl (defcustom): new tag :after-set defines a function
+	to call after setting the variable
+
+	* frames.jl (decorate-transients): controls whether transient
+	windows get reduced or normal frames
+
 1999-08-09  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-defaults.jl: remove some settings that are normally
