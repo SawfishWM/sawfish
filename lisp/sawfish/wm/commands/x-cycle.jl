@@ -161,7 +161,8 @@
 	;; the top of the stack
 	(when (input-focus)
 	  (setq x-cycle-current (input-focus))
-	  (x-cycle-push x-cycle-current)))
+	  (x-cycle-push x-cycle-current)
+	  (setq win (cons x-cycle-current (delq x-cycle-current win)))))
       (when x-cycle-stacking
 	(restack-windows x-cycle-stacking)
 	(setq x-cycle-stacking nil))
