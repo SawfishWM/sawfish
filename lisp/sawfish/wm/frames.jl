@@ -296,8 +296,10 @@ deciding which frame type to ask a theme to generate.")
 ;; applying frame styles to windows
 
 (defun reframe-window (w)
-  (when (and (windowp w)
-	     (not (window-get w 'ignored)))
+  (if (window-get w 'ignored)
+      (progn
+	(window-put w 'current-frame-style nil)
+	(set-window-frame w nil-frame))
     (let ((style (or (window-get w 'frame-style)
 		     default-frame-style)))
       (check-frame-availability style)
