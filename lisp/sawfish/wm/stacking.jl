@@ -163,16 +163,22 @@ BELOW. If the two windows aren't at the same depth, improvise."
   (let
       ((depth (window-get w 'depth)))
     (letrec
-	((iter (lambda (order)
+	((iter (lambda (order pred)
 		 (cond ((null order)
-			;; nothing above W
-			(x-raise-window w))
+			;; nothing above W; instead of raising to the
+			;; absolute top of the stack, try only to raise
+			;; to immediately above the highest managed
+			;; window. Otherwise we may obscure
+			;; override_redirect windows that should be
+			;; left on top (e.g. gtk menus, xscreensaver
+			;; virtual root)
+			(x-raise-window w pred))
 		       ((> (window-get (car order) 'depth) depth)
 			;; found the last window above W
 			(x-lower-window w (car order)))
 		       (t
-			(iter (cdr order)))))))
-      (iter (nreverse (stacking-order))))))
+			(iter (cdr order) (car order)))))))
+      (iter (nreverse (stacking-order)) nil))))
 
 (defun raise-lower-window (w)
   "If the window is the highest window in its stacking level, lower it to the
