@@ -268,7 +268,9 @@ call_protectedly (repv (*fun)(repv), repv arg, repv error_return)
         if (stream != rep_NULL)
         {
 	    rep_stream_puts (stream, "frame error: ", -1, rep_FALSE);
-            rep_print_val (stream, rep_CDR(throw));
+	    if (rep_CAR (throw) == Qerror)
+		throw = rep_CDR (throw);
+            rep_print_val (stream, throw);
             rep_stream_putc (stream, '\n');
         }
 	result = error_return;
