@@ -104,13 +104,15 @@ the window.")
     (sm-set-property "ProcessId" (format nil "%d" (getpid)))
     (sm-set-property "Program" (car saved-command-line-args))
     (sm-set-property "UserId" (user-login-name))
-    (sm-set-property
-     "Environment" (apply 'nconc
-			  (mapcar #'(lambda (e)
-				      (when (string-match "=" e)
-					(list (substring e 0 (match-start))
-					      (substring e (match-end)))))
-				  process-environment)))
+
+    ;; XXX is this necessary?
+;   (sm-set-property
+;     "Environment" (apply 'nconc
+;			  (mapcar #'(lambda (e)
+;				      (when (string-match "=" e)
+;					(list (substring e 0 (match-start))
+;					      (substring e (match-end)))))
+;				  process-environment)))
 
     ;; we need to start before gmc, otherwise it won't hint its icons
     (sm-set-property "_GSM_Priority" sm-gsm-priority)
