@@ -40,34 +40,45 @@ A negative number means warp to outside the top window edge."
   :range (-65536 . 65535)
   :group (focus advanced))
  
-(defvar dont-avoid-ignored t)
-(defvar avoid-by-default nil)
+(defvar dont-avoid-ignored t
+  "When non-nil, ignored windows aren't avoided by default.")
 
-(defvar xterm-program "xterm")
-(defvar xterm-args nil)
+(defvar avoid-by-default nil
+  "When non-nil, any unspecified windows are avoided by default.")
 
-;; return a window called NAME, or nil
+(defvar xterm-program "xterm"
+  "The name of the program launched by the `xterm' command.")
+(defvar xterm-args nil
+  "Either a string defining the list of arguments given to the `xterm' command,
+or the symbol `nil'.")
+
+(defvar uniquify-name-format "%s [%d]"
+  "Format string used to give windows unique names. Has two arguments (NAME
+INDEX) applied to it.")
+
 (defun get-window-by-name (name &optional lst)
+  "Find a window object whose window-name is NAME. If LST is non-nil, then it
+is the list of windows to search. Returns nil if no such window is found."
   (catch 'foo
     (mapc (lambda (w)
 	    (when (string= (window-name w) name)
 	      (throw 'foo w))) (or lst (managed-windows)))
     nil))
 
-;; map FUN over all managed windows
 (defmacro map-windows (fun)
+  "Map the single-parameter function FUN over all existing windows."
   `(mapc ,fun (managed-windows)))
 
-;; execute FORMS with the server grabbed
 (defmacro with-server-grabbed (&rest forms)
+  "Execute FORMS with the server grabbed."
   `(progn
      (grab-server)
      (unwind-protect
 	 (progn ,@forms)
        (ungrab-server))))
 
-;; execute FORMS, then reinstall the original stacking order
 (defmacro save-stacking-order (&rest forms)
+  "Execute FORMS, then reinstall the original stacking order."
   (let
       ((tem (gensym)))
     `(let
@@ -76,8 +87,8 @@ A negative number means warp to outside the top window edge."
 	   (progn ,@forms)
 	 (restack-windows ,tem)))))
 
-;; try to create dir and all nonexistent parent dirs (like mkdir -p)
 (defun make-directory-recursively (dir)
+  "Try to create dir and all nonexistent parent dirs (like mkdir -p)."
   (while (not (file-exists-p dir))
     (let
 	((tem dir))
@@ -92,13 +103,14 @@ A negative number means warp to outside the top window edge."
 		  xterm-program (or xterm-args ""))))
 
 (defun window-really-wants-input-p (w)
+  "Return nil if window W should never be focused."
   (and (not (window-get w 'never-focus))
        (or ignore-window-input-hint
 	   (window-get w 'ignore-window-input-hint)
 	   (window-wants-input-p w))))
 
-;; remove all duplicates from list, tests using eq, order is lost
 (defun uniquify-list (lst)
+  "Remove all duplicates from list, tests using eq, order is lost."
   (let
       (out)
     (mapc (lambda (x)
@@ -106,29 +118,32 @@ A negative number means warp to outside the top window edge."
 	      (setq out (cons x out)))) lst)
     out))
 
-;; uniquify IN from the list EXISTING, i.e. find the first `foo<N>'
 (defun uniquify-name (in existing)
+  "Uniquify the string IN from the list of strings EXISTING. Uses the format
+string `uniquify-name-format' to generate unique names."
   (letrec
       ((again (lambda (i)
-		(if (member (format nil "%s<%d>" in i) existing)
+		(if (member (format nil uniquify-name-format in i) existing)
 		    (again (1+ i))
-		  (format nil "%s<%d>" in i)))))
+		  (format nil uniquify-name-format in i)))))
     (if (member in existing)
 	(again 2)
       in)))
 
 (defun uniquify-window-name (w)
+  "Force the current window to have a unique title."
   (interactive "%W")
   (set-x-text-property
    w 'WM_NAME
    (vector (uniquify-name (window-name w)
 			  (mapcar window-name (delq w (managed-windows)))))))
 
-;; Move the mouse pointer to position (X, Y) relative to the client
-;; window associated with object WINDOW.
-;; If X and Y are nil, then they are taken as the top-left corner of
-;; the window frame.
 (defun warp-cursor-to-window (w &optional x y)
+  "Move the mouse pointer to position (X, Y) relative to the client window
+associated with object WINDOW.
+
+If X and Y are nil, then the pointer is moved to a default position, as
+specified by the user."
   (let
       ((coords (window-position w))
        (foff (window-frame-offset w))
@@ -146,6 +161,11 @@ A negative number means warp to outside the top window edge."
 		 (+ y (cdr coords) (- (cdr foff))))))
 
 (defun resize-window-with-hints (w cols rows &optional hints)
+  "Resize window W to COLS x ROWS, using the window's size hints to define
+the row and column size, and the minimum possible size.
+
+If HINTS is non-nil, then it is the size hints structure to use. Otherwise
+(window-size-hints W) is used."
   (unless hints
     (setq hints (window-size-hints w)))
   (let
@@ -163,6 +183,8 @@ A negative number means warp to outside the top window edge."
 		      (scale rows y-base y-inc y-max))))
 
 (defun get-window-wm-protocols (w)
+  "Return a list of symbols defining the X11 window manager protocols supported
+by client window W."
   (let*
       ((prop (get-x-property w 'WM_PROTOCOLS))
        (data (and prop (eq (car prop) 'ATOM) (nth 2 prop))))
@@ -197,8 +219,10 @@ A negative number means warp to outside the top window edge."
 (let
     (prop-changes)
 
-  ;; PROP may be single X property name, or list of names
   (defun call-after-property-changed (prop fun)
+    "Arrange for function FUN to be called with arguments (WINDOW PROPERTY
+STATE) when the X11 property named PROP (a symbol) changes. PROP may also
+be a list of property names to monitor."
     (setq prop-changes (cons (cons (if (listp prop)
 				       prop
 				     (list prop)) fun) prop-changes)))
@@ -214,7 +238,12 @@ A negative number means warp to outside the top window edge."
     (state-changes)
   
   (defun call-after-state-changed (states fun)
-    (setq state-changes (cons (cons states fun) state-changes)))
+    "Arrange for function FUN to be called with arguments (WINDOW CHANGED-STATES)
+when one of the states defined by the list of symbols STATES has been changed.
+STATES may also be a single symbol."
+    (setq state-changes (cons (cons (if (listp states)
+					states
+				      (list states)) fun) state-changes)))
   
   (add-hook
    'window-state-change-hook
@@ -231,6 +260,8 @@ A negative number means warp to outside the top window edge."
 ;; avoided (i.e. non-overlapped) windows
 
 (defun window-avoided-p (w)
+  "Return t if window W should be kept unobscured by other windows wherever
+possible."
   (cond ((or (not (window-mapped-p w))
 	     (not (window-visible-p w)))
 	 nil)
@@ -242,6 +273,9 @@ A negative number means warp to outside the top window edge."
 	 avoid-by-default)))
 
 (defun avoided-windows (&optional window)
+  "Returns a list of all windows that should be left unobscured where possible.
+If WINDOW is defined, then it defines a window that will be never returned
+in the list."
   (delete-if (lambda (w)
 	       (or (eq w window) (not (window-avoided-p w))))
 	     (managed-windows)))
