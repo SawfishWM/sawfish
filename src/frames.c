@@ -382,8 +382,11 @@ list_frame_generator (Lisp_Window *w)
 
     DB(("list_frame_generator(%s)\n", w->name));
 
-    if (rep_SYMBOLP(gen_list))
+    while (gen_list != Qnil && rep_SYMBOLP(gen_list) && !rep_INTERRUPTP)
+    {
 	gen_list = Fsymbol_value (gen_list, Qt);
+	rep_TEST_INT;
+    }
 
     rep_PUSHGC(gc_win, win);
 
