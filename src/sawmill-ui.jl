@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.34 1999/11/10 17:22:14 john Exp $
+;; $Id: sawmill-ui.jl,v 1.35 1999/11/11 18:24:41 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -1144,7 +1144,10 @@ exec rep "$0" "$@"
 
 ;; redefine this to get documentation from the wm process
 (defun documentation (symbol &optional is-var)
-  (sawmill-eval `(documentation ',symbol ',is-var) t))
+  (sawmill-eval
+   `(let
+	((doc (documentation ',symbol ',is-var)))
+      (and doc (_ doc))) t))
 
 
 ;; entry point
