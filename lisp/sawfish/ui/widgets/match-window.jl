@@ -69,7 +69,7 @@
 					       "")))))))
 	  (setq widgets (nconc widgets (list (cons combo entry))))))
       (gtk-container-add frame table)
-      (gtk-container-border-width table box-border)
+      (gtk-container-set-border-width table box-border)
       (gtk-table-set-row-spacings table box-spacing)
       (gtk-table-set-col-spacings table box-spacing)
       (gtk-widget-show-all frame)
@@ -150,7 +150,7 @@
        properties)
 
       (setq widgets (nreverse widgets))
-      (gtk-container-border-width book box-border)
+      (gtk-container-set-border-width book box-border)
       (gtk-container-add frame book)
       (gtk-widget-show-all frame)
 

@@ -58,7 +58,7 @@
 	    (let* ((slot (car rest))
 		   (button (gtk-radio-menu-item-new-with-label-from-widget
 			    last (beautify-keymap-name (slot-name slot)))))
-	      (gtk-menu-append menu button)
+	      (gtk-menu-shell-append menu button)
 	      (gtk-widget-show button)
 	      (gtk-signal-connect button "toggled"
 				  (lambda (w)

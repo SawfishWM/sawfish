@@ -145,7 +145,7 @@
 	(fetch-group group #:force t)
 	(when (group-tree group)
 	  ;; if necessary update the sub-trees of the group
-	  (let ((old (gtk-container-children (group-tree group))))
+	  (let ((old (gtk-container-get-children (group-tree group))))
 	    (populate-branch group)
 	    (mapc (lambda (x)
 		    (gtk-tree-remove-item (group-tree group) x)) old)))
@@ -159,6 +159,7 @@
   (define (locate-groups slots)
     (let ((out '()))
       (table-walk (lambda (name group)
+		    (declare (unused name))
 		    (when (unionq slots (group-slots group))
 		      (setq out (cons group out))))
 		  group-table)
@@ -234,6 +235,7 @@
 
   (define (group-deselected parent-name name)
     (lambda (item)
+      (declare (unused item))
       (let ((group (get-group (group-name-add parent-name name))))
 	(call-hook '*nokogiri-group-deselected-hook* (list group))
 	(setq current-group nil))))

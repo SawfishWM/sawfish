@@ -47,6 +47,7 @@
 		(beautify-symbol-name command)))))
 
     (define (dialog title callback #!key for value)
+      (declare (unused title))
       (let ((widget (make-widget `(keymap:binding))))
 	(when value
 	  (widget-set widget value))

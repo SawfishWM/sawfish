@@ -71,7 +71,7 @@
 	  (progn
 	    (gtk-window-set-default-size main-window 400 300)
 	    (setq root-container main-window))
-	(gtk-window-set-policy main-window nil t nil)
+	(gtk-window-set-resizable main-window t)
 	(gtk-window-set-default-size main-window 550 400)
 	(setq root-container (gtk-frame-new))
 	(gtk-frame-set-shadow-type root-container 'out)
@@ -79,8 +79,8 @@
 
       (setq slot-box-widget (gtk-vbox-new nil box-spacing))
 
-      (gtk-container-border-width vbox box-border)
-      (gtk-container-border-width slot-box-widget box-border)
+      (gtk-container-set-border-width vbox box-border)
+      (gtk-container-set-border-width slot-box-widget box-border)
       (when s-scroller
 	(gtk-scrolled-window-set-policy s-scroller 'automatic 'automatic)
 	(gtk-scrolled-window-add-with-viewport s-scroller slot-box-widget))
@@ -93,7 +93,7 @@
 	    (let ((paned (gtk-hpaned-new))
 		  (g-scroller (gtk-scrolled-window-new)))
 	      (setq group-tree-widget (make-group-tree (get-group top-group)))
-	      (gtk-container-border-width group-tree-widget box-border)
+	      (gtk-container-set-border-width group-tree-widget box-border)
 	      (gtk-scrolled-window-set-policy g-scroller 'automatic 'automatic)
 	      (gtk-container-add vbox paned)
 	      (gtk-paned-add1 paned g-scroller)
@@ -140,7 +140,7 @@
 	  (progn
 	    (gtk-tree-select-item group-tree-widget 0)
 	    (mapc gtk-tree-item-expand
-		  (gtk-container-children group-tree-widget)))
+		  (gtk-container-get-children group-tree-widget)))
 	(select-group (get-group top-group)))))
 
   (define (destroy-shell)
@@ -211,7 +211,7 @@
 	       book layout (gtk-label-new (_ (group-real-name group))))
 	    (gtk-box-pack-start book layout))
 	  (when (gtk-container-p layout)
-	    (gtk-container-border-width layout box-border))))
+	    (gtk-container-set-border-width layout box-border))))
       (mapc (lambda (sub)
 	      (fetch-group sub)
 	      (let ((slots (get-slots sub)))
@@ -242,6 +242,7 @@
     (update-all-dependences))
 
   (define (remove-group-widgets group)
+    (declare (unused group))
     (mapc (lambda (s)
 	    (let ((w (slot-gtk-widget s)))
 	      (when (gtk-widget-parent w)
@@ -250,7 +251,7 @@
     (setq active-slots '())
     (mapc (lambda (w)
 	    (gtk-container-remove slot-box-widget w))
-	  (gtk-container-children slot-box-widget)))
+	  (gtk-container-get-children slot-box-widget)))
 
   (define (run-shell #!optional socket-id)
     (initialize-configs)

@@ -85,6 +85,7 @@
 
   (define (update-all-dependences)
     (table-walk (lambda (dep slots)
+		  (declare (unused slots))
 		  (update-dependences (get-slot dep))) dependence-table))
 
   ;; called when the value of SLOT changes
