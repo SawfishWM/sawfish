@@ -1,3 +1,16 @@
+1999-10-04  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c, functions.c: when using the x_win_from_arg function,
+	being unable to find a window xid is only an error if we
+	weren't passed a window object (gracefully handle windows being
+	closed while their handles are in use)
+
+	* sawmill.h (struct frame_part): added a field `drawn'; a
+	structure defining the last-drawn contents
+	* frames.c: try to optimize frame-part redisplay as much as
+	possible, only update fg/bg when they're different to the
+	currently displayed data
+
 1999-10-03  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.10
