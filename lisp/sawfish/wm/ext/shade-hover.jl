@@ -58,24 +58,34 @@
     :type boolean)
 
   (define shade-hover-timer nil)
+  (define shade-hover-window nil)
+
+  (define (clean-up)
+    (when shade-hover-timer
+      (delete-timer shade-hover-timer)
+      (setq shade-hover-timer nil))
+    (setq shade-hover-window nil)
+    (when (in-hook-p 'pre-command-hook shade-hover-before)
+      (remove-hook 'pre-command-hook shade-hover-before)))
 
   (define (shade-hover-leave w)
-    (unless (desktop-window-p w)
-      (when shade-hover-timer
-	(delete-timer shade-hover-timer)
-	(setq shade-hover-timer nil))
+    (when (eq shade-hover-window w)
+      (clean-up)
       (when (window-get w 'shade-hover-unshaded)
 	(window-put w 'shade-hover-unshaded nil)
-	(shade-window w))
-      (when (in-hook-p 'pre-command-hook shade-hover-before)
-	(remove-hook 'pre-command-hook shade-hover-before))))
+	(shade-window w))))
 
   (define (shade-hover-before)
-    (let ((command (and (current-event)
-			(lookup-event-binding (current-event))))
-	  (w (current-event-window)))
-      (when (and (eq command 'toggle-window-shaded) w)
-	(shade-hover-leave w))))
+    (let ((w (current-event-window)))
+      (when (and w (window-get w 'shade-hover-unshaded))
+	(case this-command
+	  ((toggle-window-shaded unshade-window)
+	   ;; don't want window to shade then unshade
+	   (clean-up)
+	   (window-put w 'shade-hover-unshaded nil)
+	   (setq this-command nil))
+	  ((shade-window)
+	   (clean-up))))))
 
   (define (shade-hover-enter w)
     (when (and (windowp w)
@@ -89,6 +99,7 @@
 		   (unshade-window w)))))
 	  (when shade-hover-timer
 	    (delete-timer shade-hover-timer))
+	  (setq shade-hover-window w)
 	  (if (zerop shade-hover-delay)
 	      (callback)
 	    (setq shade-hover-timer
@@ -99,4 +110,5 @@
 	    (add-hook 'pre-command-hook shade-hover-before))))))
 
   (add-hook 'enter-notify-hook shade-hover-enter)
-  (add-hook 'leave-notify-hook shade-hover-leave))
+  (add-hook 'leave-notify-hook shade-hover-leave)
+  (add-hook 'focus-out-hook shade-hover-leave))
