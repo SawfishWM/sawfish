@@ -60,7 +60,8 @@
 (gnome-use-capplet-changed)
 
 ;; invoke the GNOME terminal instead of xterm
-(setq xterm-program "gnome-terminal")
+(unless (variable-customized-p 'xterm-program)
+  (setq xterm-program "gnome-terminal"))
 
 ;; use the GNOME help browser and url launcher
 (require 'help)
