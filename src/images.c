@@ -80,21 +80,36 @@ string). PLIST defines the property list of the image.
 	    rep_GC_root gc_all;
 	    rep_PUSHGC(gc_all, all);
 	    tem = Ffile_regular_p (all);
-	    rep_POPGC;
 	    if (tem && tem != Qnil)
 	    {
+		ImlibImage *im = 0;
+		bool delete = FALSE;
 		file = Flocal_file_name (all);
-		if (file && rep_STRINGP(file))
+		if (file == Qnil)
 		{
-		    ImlibImage *im = Imlib_load_image (imlib_id,
-						       rep_STR(file));
-		    if (im != 0)
+		    /* Non-local file; try to copy to temp file */
+		    repv temp = Fmake_temp_name ();
+		    rep_GC_root gc_temp;
+		    rep_PUSHGC(gc_temp, temp);
+		    tem = Fcopy_file (all, temp);
+		    rep_POPGC;
+		    if (tem && tem != Qnil)
 		    {
-			rep_POPGC; rep_POPGC; rep_POPGC;
-			return make_image (im, plist);
+			file = temp;
+			delete = TRUE;
 		    }
 		}
+		if (file && rep_STRINGP(file))
+		    im = Imlib_load_image (imlib_id, rep_STR(file));
+		if (delete)
+		    Fdelete_file (file);
+		if (im != 0)
+		{
+		    rep_POPGC; rep_POPGC; rep_POPGC; rep_POPGC;
+		    return make_image (im, plist);
+		}
 	    }
+	    rep_POPGC;
 	}
 	path = rep_CDR(path);
     }
