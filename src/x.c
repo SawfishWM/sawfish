@@ -66,13 +66,21 @@ typedef struct lisp_x_gc {
 typedef struct lisp_x_window {
     repv car;
     struct lisp_x_window *next;
-    Window id;
+    Drawable id;
     repv event_handler;
+    int is_window : 1;
+    int is_pixmap : 1;
+    int is_bitmap : 1;			/* depth == 1 */
+    int width, height;
 } Lisp_X_Window;
 
-#define X_XWINDOWP(v) rep_CELL16_TYPEP(v, x_window_type)
-#define X_WINDOWP(v)  (X_XWINDOWP(v) && VX_WINDOW(v)->id != 0)
-#define VX_WINDOW(v)  ((Lisp_X_Window *)rep_PTR(v))
+#define X_XDRAWABLEP(v) rep_CELL16_TYPEP(v, x_window_type)
+#define X_DRAWABLEP(v)  (X_XDRAWABLEP(v) && VX_DRAWABLE(v)->id != 0)
+#define VX_DRAWABLE(v)  ((Lisp_X_Window *)rep_PTR(v))
+
+#define X_WINDOWP(v)	(X_DRAWABLEP (v) && VX_DRAWABLE (v)->is_window)
+#define X_PIXMAPP(v)	(X_DRAWABLEP (v) && VX_DRAWABLE (v)->is_pixmap)
+#define X_BITMAPP(v)	(X_DRAWABLEP (v) && VX_DRAWABLE (v)->is_bitmap)
 
 static Lisp_X_GC *x_gc_list = NULL;
 int x_gc_type;
@@ -80,7 +88,7 @@ int x_gc_type;
 static Lisp_X_Window *x_window_list = NULL;
 int x_window_type;
 
-static XID x_window_context, x_dbe_context;
+static XID x_drawable_context, x_dbe_context;
 
 DEFSYM(x, "x");
 DEFSYM(y, "y");
@@ -94,7 +102,7 @@ static inline repv
 x_window_from_id (Window id)
 {
     repv win;
-    return XFindContext (dpy, id, x_window_context,
+    return XFindContext (dpy, id, x_drawable_context,
 			 (XPointer *) &win) ? Qnil : win;
 }
 
@@ -116,7 +124,7 @@ window_from_arg (repv arg)
     if (rep_INTEGERP (arg))
 	id = rep_get_long_uint (arg);
     else if (X_WINDOWP (arg))
-	id = VX_WINDOW(arg)->id;
+	id = VX_DRAWABLE(arg)->id;
     else if (WINDOWP(arg) && VWIN(arg)->id != 0)
 	id = VWIN(arg)->id;
     else if (PARTP(arg) && VPART(arg)->id != 0)
@@ -132,7 +140,11 @@ window_from_arg (repv arg)
 static inline Drawable
 drawable_from_arg (repv arg)
 {
-    Drawable id = window_from_arg (arg);
+    Drawable id;
+    if (X_DRAWABLEP (arg))
+	id = VX_DRAWABLE(arg)->id;
+    else
+	id = window_from_arg (arg);
     return id;
 }
 
@@ -340,7 +352,7 @@ static void
 x_window_event_handler (XEvent *ev)
 {
     repv win = x_window_from_id (ev->xany.window);
-    if (win != Qnil && VX_WINDOW (win)->event_handler != Qnil)
+    if (win != Qnil && VX_DRAWABLE (win)->event_handler != Qnil)
     {
 	repv type = Qnil, args = Qnil;
 	if (win != Qnil)
@@ -357,9 +369,25 @@ x_window_event_handler (XEvent *ev)
 	if (type != Qnil)
 	{
 	    args = Fcons (type, args);
-	    rep_funcall (VX_WINDOW(win)->event_handler, args, rep_FALSE);
+	    rep_funcall (VX_DRAWABLE(win)->event_handler, args, rep_FALSE);
 	}
     }
+}
+
+static Lisp_X_Window *
+create_x_drawable (Drawable id, int width, int height)
+{
+    Lisp_X_Window *w = rep_ALLOC_CELL (sizeof (Lisp_X_Window));
+    rep_data_after_gc += sizeof (Lisp_X_Window);
+    w->car = x_window_type;
+    w->next = x_window_list;
+    x_window_list = w;
+    w->id = id;
+    w->width = width;
+    w->height = height;
+    w->is_window = w->is_pixmap = w->is_bitmap = 0;
+    XSaveContext (dpy, id, x_drawable_context, (XPointer) w);
+    return w;
 }
 
 DEFUN("x-create-window", Fx_create_window, Sx_create_window, (repv xy, repv wh, repv bw, repv attrs, repv ev), rep_Subr5) /*
@@ -401,16 +429,49 @@ window is created unmapped.
                         screen_depth, InputOutput, screen_visual,
                         attributesMask, &attributes);
 
-    w = rep_ALLOC_CELL(sizeof(Lisp_X_Window));
-    rep_data_after_gc += sizeof (Lisp_X_Window);
-    w->car = x_window_type;
-    w->next = x_window_list;
-    x_window_list = w;
-    w->id = id;
+    w = create_x_drawable (id, _w, _h);
     w->event_handler = ev;
+    w->is_window = 1;
 
     register_event_handler (id, x_window_event_handler);
-    XSaveContext (dpy, id, x_window_context, (XPointer) w);
+
+    return rep_VAL (w);
+}
+
+DEFUN ("x-create-pixmap", Fx_create_pixmap, Sx_create_pixmap, (repv wh), rep_Subr1)
+{
+    Lisp_X_Window *w;
+    Pixmap id;
+    int _w, _h;
+
+    rep_DECLARE(1, wh, rep_CONSP (wh)
+		&& rep_INTP (rep_CAR (wh)) && rep_INTP (rep_CDR (wh)));
+
+    _w = rep_INT (rep_CAR (wh));
+    _h = rep_INT (rep_CDR (wh));
+
+    id = XCreatePixmap (dpy, root_window, _w, _h, screen_depth);
+    w = create_x_drawable (id, _w, _h);
+    w->is_pixmap = 1;
+
+    return rep_VAL (w);
+}
+
+DEFUN ("x-create-bitmap", Fx_create_bitmap, Sx_create_bitmap, (repv wh), rep_Subr1)
+{
+    Lisp_X_Window *w;
+    Pixmap id;
+    int _w, _h;
+
+    rep_DECLARE(1, wh, rep_CONSP (wh)
+		&& rep_INTP (rep_CAR (wh)) && rep_INTP (rep_CDR (wh)));
+
+    _w = rep_INT (rep_CAR (wh));
+    _h = rep_INT (rep_CDR (wh));
+
+    id = XCreatePixmap (dpy, root_window, _w, _h, 1);
+    w = create_x_drawable (id, _w, _h);
+    w->is_bitmap = 1;
 
     return rep_VAL (w);
 }
@@ -422,9 +483,9 @@ x-map-window X-WINDOW [UNRAISED]
 {
     rep_DECLARE1(win, X_WINDOWP);
     if (unraised == Qnil)
-	XMapRaised (dpy, VX_WINDOW(win)->id);
+	XMapRaised (dpy, VX_DRAWABLE(win)->id);
     else
-	XMapWindow (dpy, VX_WINDOW(win)->id);
+	XMapWindow (dpy, VX_DRAWABLE(win)->id);
     return Qt;
 }
 
@@ -434,7 +495,7 @@ x-unmap-window X-WINDOW
 ::end:: */
 {
     rep_DECLARE1(win, X_WINDOWP);
-    XUnmapWindow (dpy, VX_WINDOW(win)->id);
+    XUnmapWindow (dpy, VX_DRAWABLE(win)->id);
     return Qt;
 }
 
@@ -456,7 +517,7 @@ names to values. Known attributes include the symbols `x', `y',
     changesMask = x_window_parse_changes (&changes, attrs);
 
     if (changesMask)
-      XConfigureWindow (dpy, VX_WINDOW(window)->id, changesMask, &changes);
+      XConfigureWindow (dpy, VX_DRAWABLE(window)->id, changesMask, &changes);
 
     return Qt;
 }
@@ -479,7 +540,29 @@ attribute names to values. Known attributes include the symbols
     attributesMask = x_window_parse_attributes (&attributes, attrs);
 
     if (attributesMask)
-      XChangeWindowAttributes (dpy, VX_WINDOW(window)->id, attributesMask, &attributes);
+      XChangeWindowAttributes (dpy, VX_DRAWABLE(window)->id, attributesMask, &attributes);
+
+    return Qt;
+}
+
+DEFUN("x-destroy-drawable", Fx_destroy_drawable, Sx_destroy_drawable, (repv drawable), rep_Subr1) /*
+::doc:x-destroy-drawable::
+x-destroy-drawable DRAWABLE
+
+Destroys the X-DRAWABLE.
+::end:: */
+{
+    rep_DECLARE1(drawable, X_DRAWABLEP);
+
+    XDeleteContext (dpy, VX_DRAWABLE(drawable)->id, x_drawable_context);
+    if (X_WINDOWP (drawable))
+    {
+	deregister_event_handler (VX_DRAWABLE(drawable)->id); 
+	XDestroyWindow (dpy, VX_DRAWABLE(drawable)->id);
+    }
+    else if (X_PIXMAPP (drawable) || X_BITMAPP (drawable))
+	XFreePixmap (dpy, VX_DRAWABLE(drawable)->id);
+    VX_DRAWABLE(drawable)->id = 0;
 
     return Qt;
 }
@@ -491,14 +574,46 @@ x-destroy-window WINDOW
 Destroys the X-WINDOW.
 ::end:: */
 {
-    rep_DECLARE1(window, X_WINDOWP);
+    return Fx_destroy_drawable (window);
+}
 
-    XDeleteContext (dpy, VX_WINDOW(window)->id, x_window_context);
-    deregister_event_handler (VX_WINDOW(window)->id); 
-    XDestroyWindow (dpy, VX_WINDOW(window)->id);
-    VX_WINDOW(window)->id = 0;
+DEFUN("x-drawable-id", Fx_drawable_id,
+      Sx_drawable_id, (repv drawable), rep_Subr1) /*
+::doc:x-drawable-id::
+x-drawable-id DRAWABLE
 
-    return Qt;
+Return the X11 drawable-id (an integer) associated with X-DRAWABLE.
+::end:: */
+{
+    rep_DECLARE1(drawable, X_DRAWABLEP);
+
+    return rep_MAKE_INT (VX_DRAWABLE(drawable)->id);
+}
+
+DEFUN("x-drawable-width", Fx_drawable_width,
+      Sx_drawable_width, (repv drawable), rep_Subr1) /*
+::doc:x-drawable-width::
+x-drawable-width DRAWABLE
+
+Return the width in pixels of X-DRAWABLE.
+::end:: */
+{
+    rep_DECLARE1(drawable, X_DRAWABLEP);
+
+    return rep_MAKE_INT (VX_DRAWABLE(drawable)->width);
+}
+
+DEFUN("x-drawable-height", Fx_drawable_height,
+      Sx_drawable_height, (repv drawable), rep_Subr1) /*
+::doc:x-drawable-height::
+x-drawable-height DRAWABLE
+
+Return the height in pixels of X-DRAWABLE.
+::end:: */
+{
+    rep_DECLARE1(drawable, X_DRAWABLEP);
+
+    return rep_MAKE_INT (VX_DRAWABLE(drawable)->height);
 }
 
 DEFUN("x-window-id", Fx_window_id, Sx_window_id, (repv window), rep_Subr1) /*
@@ -508,9 +623,17 @@ x-window-id WINDOW
 Return the X11 window-id (an integer) associated with X-WINDOW.
 ::end:: */
 {
-    rep_DECLARE1(window, X_WINDOWP);
+    return Fx_drawable_id (window);
+}
 
-    return rep_MAKE_INT (VX_WINDOW(window)->id);
+DEFUN("x-drawable-p", Fx_drawable_p, Sx_drawable_p, (repv window), rep_Subr1) /*
+::doc:x-drawable-p::
+x-drawable-p ARG
+
+Return t if ARG is a X-DRAWABLE object.
+::end:: */
+{
+    return X_DRAWABLEP(window) ? Qt : Qnil;
 }
 
 DEFUN("x-window-p", Fx_window_p, Sx_window_p, (repv window), rep_Subr1) /*
@@ -521,6 +644,26 @@ Return t if ARG is a X-WINDOW object.
 ::end:: */
 {
     return X_WINDOWP(window) ? Qt : Qnil;
+}
+
+DEFUN("x-pixmap-p", Fx_pixmap_p, Sx_pixmap_p, (repv pixmap), rep_Subr1) /*
+::doc:x-pixmap-p::
+x-pixmap-p ARG
+
+Return t if ARG is a X-PIXMAP object.
+::end:: */
+{
+    return X_PIXMAPP(pixmap) ? Qt : Qnil;
+}
+
+DEFUN("x-bitmap-p", Fx_bitmap_p, Sx_bitmap_p, (repv bitmap), rep_Subr1) /*
+::doc:x-bitmap-p::
+x-bitmap-p ARG
+
+Return t if ARG is a X-BITMAP object.
+::end:: */
+{
+    return X_BITMAPP(bitmap) ? Qt : Qnil;
 }
 
 DEFUN("x-window-back-buffer", Fx_window_back_buffer,
@@ -890,6 +1033,16 @@ otherwise it is drawn using its natural dimensions.
     return Qt;
 }
 
+DEFUN ("x-grab-image-from-drawable", Fx_grab_image_from_drawable,
+       Sx_grab_image_from_drawable, (repv drawable, repv mask), rep_Subr2)
+{
+    Drawable d = drawable_from_arg (drawable);
+    Drawable m = drawable_from_arg (mask);
+    rep_DECLARE(1, drawable, d != 0);
+    return Fmake_image_from_x_drawable (rep_MAKE_INT (d),
+					m == 0 ? Qnil : rep_MAKE_INT (m));
+}
+
 
 /* gc type hooks */
 
@@ -949,14 +1102,14 @@ static void
 x_window_prin (repv stream, repv obj)
 {
     char buf[256];
-    sprintf (buf, "#<x-window 0x%lx>", VX_WINDOW(obj)->id);
+    sprintf (buf, "#<x-drawable 0x%lx>", VX_DRAWABLE(obj)->id);
     rep_stream_puts (stream, buf, -1, FALSE);
 }
 
 static void
 x_window_mark (repv obj)
 {
-    rep_MARKVAL (VX_WINDOW (obj)->event_handler);
+    rep_MARKVAL (VX_DRAWABLE (obj)->event_handler);
 }
 
 static void
@@ -998,19 +1151,28 @@ rep_dl_init (void)
     rep_ADD_SUBR(Sx_destroy_gc);
     rep_ADD_SUBR(Sx_gc_p);
 
-    x_window_context = XUniqueContext ();
+    x_drawable_context = XUniqueContext ();
 
     x_window_type = rep_register_new_type ("x-window", x_window_cmp,
 					   x_window_prin, x_window_prin,
 				           x_window_sweep, x_window_mark,
 				           0, 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR(Sx_create_window);
+    rep_ADD_SUBR(Sx_create_pixmap);
+    rep_ADD_SUBR(Sx_create_bitmap);
     rep_ADD_SUBR(Sx_map_window);
     rep_ADD_SUBR(Sx_unmap_window);
     rep_ADD_SUBR(Sx_configure_window);
     rep_ADD_SUBR(Sx_change_window_attributes);
+    rep_ADD_SUBR(Sx_destroy_drawable);
     rep_ADD_SUBR(Sx_destroy_window);
+    rep_ADD_SUBR(Sx_drawable_p);
     rep_ADD_SUBR(Sx_window_p);
+    rep_ADD_SUBR(Sx_pixmap_p);
+    rep_ADD_SUBR(Sx_bitmap_p);
+    rep_ADD_SUBR(Sx_drawable_id);
+    rep_ADD_SUBR(Sx_drawable_width);
+    rep_ADD_SUBR(Sx_drawable_height);
     rep_ADD_SUBR(Sx_window_id);
     rep_ADD_SUBR(Sx_window_back_buffer);
     rep_ADD_SUBR(Sx_window_swap_buffers);
@@ -1025,6 +1187,8 @@ rep_dl_init (void)
     rep_ADD_SUBR(Sx_fill_polygon);
     rep_ADD_SUBR(Sx_copy_area);
     rep_ADD_SUBR(Sx_draw_image);
+
+    rep_ADD_SUBR(Sx_grab_image_from_drawable);
 
     rep_INTERN(x);
     rep_INTERN(y);
