@@ -99,6 +99,7 @@ where OPTIONS are any of:\n
                          return with exit code 1
 	-q		Be quiet (perform commands asynchronously)
 	-f FUNCTION	Call Lisp function FUNCTION on the server
+	-c COMMAND	Call the interactive Lisp function COMMAND
 	-e FORM		Evaluate Lisp form FORM on the server
 	-		Read lines of input until EOF, evaluating each
 			 one as it is read
@@ -202,6 +203,16 @@ again:
 		    goto opt_error;
 		buf[0] = '(';
 		strcpy(buf + 1, argv[1]);
+		strcat(buf, ")");
+		result = eval_lisp_form(buf);
+		argc--; argv++;
+		break;
+
+	    case 'c':			/* -c COMMAND */
+		if(argc < 2)
+		    goto opt_error;
+		strcpy(buf, "(call-command '");
+		strcat(buf, argv[1]);
 		strcat(buf, ")");
 		result = eval_lisp_form(buf);
 		argc--; argv++;
