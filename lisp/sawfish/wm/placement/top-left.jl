@@ -67,7 +67,8 @@
   (define (windows-around point)
     (filter-windows
      (lambda (w)
-       (and (window-in-workspace-p w current-workspace)
+       (and (window-get w 'placed)
+	    (window-in-workspace-p w current-workspace)
 	    (not (window-outside-viewport-p w))
 	    (window-mapped-p w)
 	    (not (window-iconified-p w))
