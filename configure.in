@@ -93,7 +93,7 @@ AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
 	     [],[$X_LIBS -lX11 -lXext])
 
 dnl Check for librep
-AM_PATH_REP(0.12)
+AM_PATH_REP(0.13)
 
 rep_gtk_function=gtk-main-iteration-do
 rep_gtk_version=0.13
@@ -260,26 +260,6 @@ if test "$doug_lea_malloc" = "no"; then
 else
   AC_DEFINE(DOUG_LEA_MALLOC)
   AC_DEFINE(LIBC_MALLOC)
-fi
-
-dnl Check for readline
-AC_ARG_WITH(readline,
- [  --with-readline         Support readline input editing], [],
- [with_readline=maybe])
-
-dnl Only look if explicitly asked for..
-if test "$with_readline" = "yes"; then
-  READLINE_LIBS=""
-  AC_SUBST(READLINE_LIBS)
-  AC_CHECK_LIB(ncurses, tparm, TERMLIB=-lncurses,
-   AC_CHECK_LIB(termcap, tgetent, TERMLIB=-ltermcap))
-  saved_LIBS="$LIBS"
-  LIBS="$LIBS $TERMLIB"
-  AC_CHECK_LIB(readline, readline,
-   [AC_CHECK_HEADER(readline/readline.h,
-    [READLINE_LIBS="-lreadline $TERMLIB"
-     AC_DEFINE(HAVE_LIBREADLINE)])])
-  LIBS="$saved_LIBS"
 fi
 
 dnl Check for GNOME location
