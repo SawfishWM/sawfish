@@ -67,3 +67,8 @@
   (do ((i 0 (1+ i)))
       ((= i 9))
     (define-commands i)))
+
+(put 'viewport-columns 'custom-obsolete t)
+(put 'viewport-rows 'custom-obsolete t)
+(put 'viewport-dimensions 'custom-obsolete t)
+(put 'preallocated-workspaces 'custom-obsolete t)
