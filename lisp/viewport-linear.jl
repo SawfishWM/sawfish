@@ -33,14 +33,23 @@
 ;; Set the viewport using linear addressing
 ;;;###autoload
 (defun set-viewport-linear (index)
-  (set-screen-viewport
-   (mod index viewport-columns) (quotient index viewport-columns)))
+  (interactive "NIndex:")
+  (set-screen-viewport (mod index (car viewport-dimensions))
+		       (quotient index (car viewport-dimensions))))
+
+(define-command-args 'set-viewport-linear
+		     `(and (labellled `(_ "Index:") (number 0))))
 
 ;; Move window to viewport INDEX using linear addressing
 ;;;###autoload
-(defun set-window-viewport-linear (window index)
-  (set-window-viewport
-   window (mod index viewport-columns) (quotient index viewport-columns)))
+(defun set-window-viewport-linear (index)
+  (interactive "NIndex:")
+  (set-window-viewport (current-event-window)
+		       (mod index (car viewport-dimensions))
+		       (quotient index (car viewport-dimensions))))
+
+(define-command-args 'set-window-viewport-linear
+		     `(and (labelled ,(_ "Index:") (number 0))))
 
 ;;;###autoload
 (defun define-linear-viewport-commands (index)
@@ -57,11 +66,11 @@
      (fn "set-window-viewport-linear")
      (lambda (window)
        "Move the current window to the specified linear viewport."
-       (interactive "%W")
-       (set-window-viewport-linear window index)))))
+       (interactive)
+       (set-window-viewport-linear index)))
+    (put (fn "set-viewport-linear") 'deprecated-command t)
+    (put (fn "set-window-viewport-linear") 'deprecated-command t)))
 
-(let
-    ((i 0))
-  (while (< i viewport-linear-last)
-    (define-linear-viewport-commands i)
-    (setq i (1+ i))))
+(do ((i 0 (1+ i)))
+    ((= i viewport-linear-last))
+  (define-linear-viewport-commands i))
