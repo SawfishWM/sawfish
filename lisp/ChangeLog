@@ -1,4 +1,39 @@
+1999-10-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* move-resize.jl (move-lock-when-maximized): new option, lock
+	geometry on x/y/both axes depending how the window is maximized
+
+	* maximize.jl: discard/update maximized window state when
+	window is moved or resized
+
+	* move-resize.jl: call hooks before-move-hook, after-move-hook,
+	before-resize-hook, and after-resize-hook
+
+	* maximize.jl (maximize-avoided-windows-re): new option,
+	controls which windows shouldn't be obscured when maximizing.
+	Also added `maximize-fill' commands, these maximize a window
+	without obscuring any other windows. 2D maximization is treated
+	as two 1D maximizations, this is sub-optimal..
+	* menus.jl (window-ops-menu): added maximize-fill menus
+
+	* edges.jl (get-visible-window-edges): new arg :windows,
+	supplies the list of windows to include. The edge structure is
+	now (X Y1 Y2 OPEN-P) or equiv. where OPEN-P defines if the edge
+	opens or closes a window
+
+1999-10-19  John Harper  <john@dcs.warwick.ac.uk>
+
+	* move-resize.jl (move-resize-roundup): take an optional MAX
+	argument, from the window's size hints
+
+	* place-window.j: added `centered' placement style
+
+	* menus.jl (popup-menu): if the spec is a function, call it
+
 1999-10-18  John Harper  <john@dcs.warwick.ac.uk>
+
+	* viewport.jl: added window-order-focus-most-recent to the
+	viewport-moved-hook
 
 	* gtkrc.jl (gtkrc-apply-style): fall back to default-font if
 	the gtk style font isn't available
