@@ -119,6 +119,14 @@ of the rectangle RECT."
 	(cons (nth 2 rect) (nth 1 rect))
 	(cons (nth 2 rect) (nth 3 rect))))
 
+(defun rectangle-center (rect)
+  (cons (+ (nth 0 rect) (/ (- (nth 2 rect) (nth 0 rect)) 2))
+	(+ (nth 1 rect) (/ (- (nth 3 rect) (nth 1 rect)) 2))))
+
+(defun rectangle-center* (point dims)
+  (cons (+ (car point) (/ (car dims) 2))
+	(+ (cdr point) (/ (cdr dims) 2))))
+
 
 ;; overlap
 
