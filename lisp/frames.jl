@@ -206,6 +206,18 @@ that overrides settings set elsewhere.")
   (when (and (windowp w) (not (window-get w 'ignored)))
     (set-frame-for-window w t (window-get w 'type))))
 
+(defun rebuild-frames-with-style (style)
+  (mapc (lambda (w)
+	  (when (eq (window-get w 'current-frame-style) style)
+	    (rebuild-frame w)))
+	(managed-windows)))
+
+(defun reframe-windows-with-style (style)
+  (mapc (lambda (w)
+	  (when (eq (window-get w 'current-frame-style) style)
+	    (reframe-one-window w)))
+	(managed-windows)))
+
 (defun reframe-all-windows ()
   (mapc reframe-one-window (managed-windows)))
 
