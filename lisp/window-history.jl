@@ -52,8 +52,7 @@
 (define window-history-dirty nil)
 
 ;; list of states in window-state-change-hook that should be tracked
-(define window-history-states '(sticky ignored never-focus
-				shaded type frame-style))
+(define window-history-states '(sticky ignored never-focus type frame-style))
 
 ;; property matched on
 (define window-history-key-property 'WM_CLASS)
@@ -205,9 +204,14 @@
 			      (not (eq (car cell) 'position)))
 			    alist)))))
 
-  ;; the session manager code will do the right thing for the rest
-  (require 'sm-load)
-  (sm-apply-to-window w alist))
+  ;; borrowed from sm-load.jl
+  (let (tem)
+    (when (setq tem (cdr (assq 'dimensions alist)))
+      (resize-window-to w (car tem) (cdr tem)))
+    (mapc (lambda (sym)
+	    (when (setq tem (cdr (assq sym alist)))
+	      (window-put w sym tem))) window-history-states)
+    (call-window-hook 'sm-restore-window-hook w (list alist))))
 
 
 ;; saving and loading state
