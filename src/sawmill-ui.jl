@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.53 2000/02/24 19:16:46 john Exp $
+;; $Id: sawmill-ui.jl,v 1.54 2000/02/25 12:03:04 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -195,34 +195,34 @@ exec rep "$0" "$@"
   (let
       ((hbox (gtk-hpaned-new))
        (tree (gtk-tree-new))
-       (frame (gtk-frame-new))
+       (vbox (gtk-vbox-new nil 0))
        (scroller (gtk-scrolled-window-new)))
     (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
     (gtk-container-border-width hbox ui-box-border)
     (gtk-paned-add1 hbox scroller)
     (gtk-scrolled-window-add-with-viewport scroller tree)
     (gtk-widget-set-usize scroller 120 -2)
-    (gtk-paned-add2 hbox frame)
+    (gtk-paned-add2 hbox vbox)
     (gtk-tree-set-selection-mode tree 'browse)
-    (setq spec (nconc spec (list ':tree tree
-				 ':frame frame)))
+    (gtk-container-border-width vbox 16)
     (letrec
 	((iterator
 	  (lambda (tree tree-widget)
 	    (let
 		((item (gtk-tree-item-new-with-label (nth 0 tree)))
+		 (t-vbox (gtk-vbox-new nil 0))
 		 (widget (build-ui (nth 1 tree))))
 	      (gtk-tree-append tree-widget item)
 	      (gtk-widget-show-all item)
-	      (gtk-container-add hbox widget)
 	      (gtk-signal-connect
 	       item "select"
 	       (lambda ()
 		 (mapc (lambda (w)
-			 (gtk-container-remove frame w))
-		       (gtk-container-children frame))
-		 (gtk-widget-show-all widget)
-		 (gtk-container-add frame widget)))
+			 (gtk-container-remove vbox w))
+		       (gtk-container-children vbox))
+		 (gtk-widget-show-all t-vbox)
+		 (gtk-container-add vbox t-vbox)))
+	      (gtk-box-pack-start t-vbox widget)
 	      (when (nth 2 tree)
 		(let
 		    ((subtree (gtk-tree-new)))
@@ -235,9 +235,37 @@ exec rep "$0" "$@"
     (let
 	((tem (car (gtk-container-children tree))))
       (gtk-tree-item-expand tem)
-      (setq ui-hack-activate-tree tem))
+      (setq ui-hack-activate-tree tree))
     hbox))
 (put 'tree 'builder build-tree)
+
+;; used by --flatten option
+(defun build-tree-as-list (spec)
+  (letrec
+      ((scroller (gtk-scrolled-window-new))
+       (top-vbox (gtk-vbox-new nil ui-box-spacing))
+       (iterator (lambda (tree &optional top-level)
+		   (let
+		       ((root-spec (cadr tree))
+			(sub-specs (caddr tree)))
+		     (when root-spec
+		       (let*
+			   ((frame (or top-level (gtk-frame-new (car tree))))
+			    (vbox (gtk-vbox-new nil 0)))
+			 (if top-level
+			     (gtk-container-add top-vbox vbox)
+			   (gtk-container-add top-vbox frame)
+			   (gtk-container-add frame vbox))
+			 (gtk-box-pack-start vbox (build-ui root-spec))))
+		     (mapc iterator sub-specs)))))
+    (iterator (cdr spec) t)
+    (gtk-container-border-width top-vbox ui-box-border)
+    (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
+    (gtk-widget-set-usize scroller 500 300)
+    (gtk-scrolled-window-add-with-viewport scroller top-vbox)
+    (gtk-viewport-set-shadow-type (gtk-widget-parent top-vbox) 'none)
+    (gtk-widget-show-all scroller)
+    scroller))
 
 (defun build-pages (spec)
   (cond ((eq ui-pages-style 'notebook)
@@ -1431,7 +1459,7 @@ exec rep "$0" "$@"
     (ui-set-button-states)
     (gtk-widget-show-all ui-window)
     (when ui-hack-activate-tree
-      (gtk-tree-item-select ui-hack-activate-tree))
+      (gtk-tree-select-item ui-hack-activate-tree 0))
     (while ui-window
       (gtk-main))))
 
@@ -1663,6 +1691,8 @@ exec rep "$0" "$@"
     (setq ui-group (read-from-string tem)))
   (when (get-command-line-option "--notebook")
     (setq ui-pages-style 'notebook))
+  (when (get-command-line-option "--flatten")
+    (put 'tree 'builder build-tree-as-list))
   (when (setq tem (get-command-line-option "--socket-id" t))
     (setq ui-socket-id (read-from-string tem))))
 
