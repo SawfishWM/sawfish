@@ -25,6 +25,9 @@
 
 (declare (in-module user))
 
+;; magic comment to get an alias installed
+;; (define-structure-alias sawmill-defaults sawfish.wm.defaults)
+
 ;; if it looks like GNOME is the desktop environment, then load the
 ;; extra GNOME integration module
 (unless batch-mode
