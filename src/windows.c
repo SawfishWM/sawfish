@@ -704,15 +704,13 @@ Set the input focus to WINDOW. If WINDOW is nil, then no window will
 have the focus.
 ::end:: */
 {
-    /* Always unfocus, this seems to help where we've just grabbed the
-       keyboard (thus focus has been hijacked) before calling this
-       function..!? */
-    focus_on_window (0);
     if (win != Qnil)
     {
 	rep_DECLARE1(win, WINDOWP);
 	focus_on_window (VWIN(win));
     }
+    else
+	focus_on_window (0);
     return win;
 }
 
