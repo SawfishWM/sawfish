@@ -69,6 +69,12 @@ button of a window."
   :group bindings
   :type keymap)
 
+(defcustom maximize-button-keymap (make-sparse-keymap)
+  "Keymap containing bindings active when the pointer is in the maximize
+button of a window."
+  :group bindings
+  :type keymap)
+
 (defcustom menu-button-keymap (make-sparse-keymap)
   "Keymap containing bindings active when the pointer is in the menu button
 of a window."
@@ -121,6 +127,11 @@ of a window."
 (bind-keys menu-button-keymap
   "Button1-Off" 'popup-window-menu
   "Button3-Off" 'delete-window)
+
+(bind-keys maximize-button-keymap
+  "Button1-Off" 'maximize-window-toggle
+  "Button2-Off" 'maximize-window-vertically-toggle
+  "Button3-Off" 'maximize-window-horizontally-toggle)
 
 
 ;; customize support
