@@ -128,7 +128,7 @@
       (error "%s must be bound to a singly-modified event" this-command))
     (mapc #'(lambda (k)
 	      (bind-keys override-keymap
-		(concat mod "-Release-" k) 'x-cycle-exit)) tem)
+		(concat "Any-Release-" k) 'x-cycle-exit)) tem)
 
     (when (grab-keyboard)
       (unwind-protect
