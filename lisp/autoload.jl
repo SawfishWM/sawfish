@@ -204,4 +204,6 @@
 (autoload 'gnome-help-browser "gnome-commands" t)
 (autoload 'old-window-menu "old-window-menu")
 (autoload 'beos-window-menu "beos-window-menu")
+(autoload 'place-window-stagger "stagger-placement")
+(define-placement-mode 'stagger place-window-stagger)
 ;;; ::autoload-end::

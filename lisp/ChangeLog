@@ -1,4 +1,22 @@
+2000-06-20  John Harper  <john@dcs.warwick.ac.uk>
+
+	* window-history.jl (window-history-apply): ignore `dimensions'
+	attribute if the size-hints has a `user-size' property
+
+	* stagger-placement.jl: new placement mode
+
+	* smart-placement.jl (sp-best-fit): don't discard possible
+	placement with more than the minimum overlap, keep all points,
+	but add a cost component function sp-cost:overlap that includes
+	the overlap. Currently overlap is weighted to 75%, pointer and
+	focus locality combine to give the other 25%
+
+	* place-window.jl (place-window-centered-on-parent): ensure
+	that the chosen position is never negative
+
 2000-06-19  John Harper  <john@dcs.warwick.ac.uk>
+
+	* wm-spec.jl, decode-events.jl: s/0x/#x/
 
 	* window-history.jl: ensure that our addition to
 	before-add-window-hook is added at the end of the hook (i.e.
