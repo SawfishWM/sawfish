@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.26 1999/09/23 19:02:28 john Exp $
+;; $Id: sawmill-ui.jl,v 1.27 1999/09/25 12:57:49 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -677,6 +677,8 @@ exec rep "$0" "$@"
        (vbox-2 (gtk-vbox-new nil 0))
        (vbox (gtk-vbox-new nil 0))
        (entry (gtk-entry-new))
+       (entry-hbox (gtk-hbox-new nil 0))
+       (entry-button (gtk-button-new-with-label "Grab key..."))
        (map-clist (gtk-clist-new-with-titles ["Keymaps"]))
        (frame (gtk-frame-new))
        (doc-frame (gtk-frame-new))
@@ -718,7 +720,9 @@ exec rep "$0" "$@"
     (mapc #'(lambda (c)
 	      (gtk-clist-append cmd-clist (vector (symbol-name c))))
 	  (get-key spec ':commands))
-    (gtk-container-add vbox-2 entry)
+    (gtk-container-add entry-hbox entry)
+    (gtk-box-pack-end entry-hbox entry-button)
+    (gtk-container-add vbox-2 entry-hbox)
     (gtk-container-add vbox-2 scroller)
     (gtk-signal-connect cmd-clist "select_row"
 			`(lambda (w row col)
@@ -727,6 +731,9 @@ exec rep "$0" "$@"
     (gtk-signal-connect entry "changed"
 			`(lambda (w)
 			   (build-keymap-shell:set-event ',spec)))
+    (gtk-signal-connect entry-button "clicked"
+			`(lambda ()
+			   (build-keymap-shell:grab ',spec)))
 
     ;; 2. the keymap selection widget
     (gtk-scrolled-window-set-policy scroller-2 'automatic 'automatic)
@@ -819,7 +826,13 @@ exec rep "$0" "$@"
 	  (gtk-label-set label (or doc "Undocumented")))
       (gtk-frame-set-label frame "")
       (gtk-label-set label ""))))
-      
+
+(defun build-keymap-shell:grab (spec)
+  (let
+      ((event (sawmill-eval '(event-name (read-event)) t)))
+    (gtk-entry-set-text (get-key spec ':entry) event)
+    (build-keymap-shell:set-event spec)))
+
 
 ;; customizing frame styles
 
