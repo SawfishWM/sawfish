@@ -57,7 +57,10 @@ DEFSYM(sync_both, "sync-both");
 DEFSYM(async_both, "async-both");
 
 /* The X modifiers being used for Meta, Alt, and Hyper */
-static u_long meta_mod, alt_mod, hyper_mod, num_lock_mod;
+static u_long meta_mod, alt_mod, hyper_mod;
+
+/* The X modifiers bound to the Num_Lock and Scroll_Lock keysyms */
+static u_long num_lock_mod, scroll_lock_mod;
 
 DEFSYM(meta_keysyms, "meta-keysyms");
 DEFSYM(alt_keysyms, "alt-keysyms");
@@ -67,7 +70,10 @@ static void grab_keymap_event (repv km, long code, long mods, bool grab);
 static void grab_all_keylist_events (repv map, bool grab);
 
 static int all_buttons[5] = { Button1, Button2, Button3, Button4, Button5 };
-static int all_lock_combs[4] = { 0, LockMask, 0, LockMask };
+
+/* locks: currently LockMask, num_lock, and scroll_lock */
+static int total_lock_combs, all_lock_mask;
+static int all_lock_combs[2*2*2];
 
 
 /* Translate from X events to Lisp events */
@@ -85,7 +91,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	/* FALL THROUGH */
 
     case KeyPress:
-	*mods = xev->xkey.state & ~(LockMask | num_lock_mod);
+	*mods = xev->xkey.state & ~all_lock_mask;
 	if (xev->type == KeyRelease)
 	    *mods |= EV_MOD_RELEASE;
 	if(*mods & ShiftMask)
@@ -147,7 +153,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
     case ButtonRelease:
 	*code = EV_CODE_MOUSE_UP;
     button:
-	*mods = xev->xbutton.state & ~(LockMask | num_lock_mod);
+	*mods = xev->xbutton.state & ~all_lock_mask;
 	*mods |= EV_TYPE_MOUSE;
 	switch(xev->xbutton.button)
 	{
@@ -172,7 +178,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 
     case MotionNotify:
 	*code = EV_CODE_MOUSE_MOVE;
-	*mods = xev->xmotion.state & ~(LockMask | num_lock_mod);
+	*mods = xev->xmotion.state & ~all_lock_mask;
 	*mods |= EV_TYPE_MOUSE;
 	ret = TRUE;
 	break;
@@ -1075,6 +1081,10 @@ find_meta(void)
 		    case XK_Num_Lock:
 			num_lock_mod = 1 << row;
 			break;
+
+		    case XK_Scroll_Lock:
+			scroll_lock_mod = 1 << row;
+			break;
 		    }
 		}
 	    }
@@ -1119,6 +1129,23 @@ find_meta(void)
     Fset (Qhyper_keysyms, hyper_syms);
 }
 
+static void
+build_lock_mods (void)
+{
+    int i;
+    total_lock_combs = 2 * (num_lock_mod ? 2 : 1) * (scroll_lock_mod ? 2 : 1);
+    for (i = 0; i < total_lock_combs; i++)
+    {
+	if (i & 1)
+	    all_lock_combs[i] |= LockMask;
+	if (i & 2)
+	    all_lock_combs[i] |= num_lock_mod ? num_lock_mod : scroll_lock_mod;
+	if (i & 3)
+	    all_lock_combs[i] |= scroll_lock_mod;
+    }
+    all_lock_mask = LockMask | num_lock_mod | scroll_lock_mod;
+}
+
 
 /* Key and button grabbing */
 
@@ -1135,7 +1162,7 @@ grab_event (Window grab_win, repv ev)
 	{
 	    if (state != AnyModifier)
 	    {
-		for (i = 0; i < 4; i++)
+		for (i = 0; i < total_lock_combs; i++)
 		{
 		    XGrabKey (dpy, code, state | all_lock_combs[i], grab_win,
 			      False, GrabModeSync, GrabModeSync);
@@ -1154,7 +1181,7 @@ grab_event (Window grab_win, repv ev)
 	{
 	    if (state != AnyModifier)
 	    {
-		for (i = 0; i < 4; i++)
+		for (i = 0; i < total_lock_combs; i++)
 		{
 		    XGrabButton (dpy, code, state | all_lock_combs[i],
 				 grab_win, False, POINTER_GRAB_EVENTS,
@@ -1195,8 +1222,11 @@ ungrab_event (Window grab_win, repv ev)
 	{
 	    if (state != AnyModifier)
 	    {
-		for (i = 0; i < 4; i++)
-		XUngrabKey (dpy, code, state | all_lock_combs[i], grab_win);
+		for (i = 0; i < total_lock_combs; i++)
+		{
+		    XUngrabKey (dpy, code, state | all_lock_combs[i],
+				grab_win);
+		}
 	    }
 	    else
 		XUngrabKey (dpy, code, state, grab_win);
@@ -1208,10 +1238,10 @@ ungrab_event (Window grab_win, repv ev)
 	{
 	    if (state != AnyModifier)
 	    {
-		for (i = 0; i < 4; i++)
+		for (i = 0; i < total_lock_combs; i++)
 		{
-		    XUngrabButton (dpy, code,
-				   state | all_lock_combs[i], grab_win);
+		    XUngrabButton (dpy, code, state | all_lock_combs[i],
+				   grab_win);
 		}
 	    }
 	    else if (code != 0)
@@ -1354,8 +1384,8 @@ keys_init(void)
     Fset (Qhyper_keysyms, Qnil);
 
     if (rep_SYM(Qbatch_mode)->value == Qnil)
+    {
 	find_meta ();
-
-    all_lock_combs[2] |= num_lock_mod;
-    all_lock_combs[3] |= num_lock_mod;
+	build_lock_mods ();
+    }
 }
