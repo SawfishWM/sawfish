@@ -36,6 +36,7 @@
 	  sawfish.gtk.widget
 	  sawfish.gtk.stock
 	  sawfish.ui.slot
+	  sawfish.ui.group
 	  sawfish.ui.wm)
 
   ;; list of slots that have changed since last apply
@@ -73,7 +74,9 @@
     (define (do-apply)
       (wm-apply-changes (mapcar (lambda (slot)
 				  (cons (slot-name slot) (getter slot)))
-				slots)))
+				slots))
+      (refresh-groups-for-slots slots))
+
     (define (format-error ex)
       (when (eq (car ex) 'remote-sawfish)
 	(condition-case nil

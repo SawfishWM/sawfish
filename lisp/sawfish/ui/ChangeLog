@@ -1,3 +1,20 @@
+2000-11-02  John Harper  <jsh@eazel.com>
+
+	* group.jl (fetch-group, select-group): added keyword parameter
+	FORCE that overrides certain checks
+
+	(refresh-groups-for-slots): new exported function; given a list
+	of slots it will resync any groups that contain any of these
+	slots
+
+	* apply.jl (do-apply): call refresh-groups-for-slots after
+	committing any changes
+
+2000-11-01  John Harper  <jsh@eazel.com>
+
+	* group.jl: some internal reorganization (may help reloading
+	group info..)
+
 2000-10-26  John Harper  <jsh@eazel.com>
 
 	* widgets/command.jl: now supports #:user-level's in commands
