@@ -103,6 +103,7 @@ fp_new (Lisp_Window *win, repv alist)
     fp->car = frame_part_type;
     fp->win = win;
     fp->alist = alist;
+    fp->local_alist = Qnil;
     fp->next_alloc = allocated_parts;
     allocated_parts = fp;
     return fp;
@@ -130,6 +131,7 @@ fp_mark (repv obj)
     {
 	int i;
 	rep_MARKVAL(fp->alist);
+	rep_MARKVAL(fp->local_alist);
 	rep_MARKVAL(rep_VAL(fp->win));
 	for (i = 0; i < fps_MAX; i++)
 	{
@@ -792,23 +794,38 @@ frame_part_exposer (XExposeEvent *ev, struct frame_part *fp)
 }
 
 static repv
-fp_assq (repv prop, repv alist, repv class_alist, repv ov_class_alist)
+fp_assq (struct frame_part *fp, repv prop,
+	 repv class_alist, repv ov_class_alist)
 {
     repv tem;
+
+    tem = Fassq (prop, fp->local_alist);
+    if (tem && tem != Qnil)
+	return tem;
+
     tem = Fassq (prop, ov_class_alist);
-    if (tem && tem == Qnil)
-	tem = Fassq (prop, alist);
-    if (tem && tem == Qnil)
-	tem = Fassq (prop, class_alist);
-    if (!tem)
-	tem = Qnil;
-    return tem;
+    if (tem && tem != Qnil)
+	return tem;
+
+    tem = Fassq (prop, fp->alist);
+    if (tem && tem != Qnil)
+	return tem;
+
+    tem = Fassq (prop, class_alist);
+    if (tem && tem != Qnil)
+	return tem;
+    
+    return Qnil;
 }
 
 static repv
-x_fp_assq (repv prop, struct frame_part *fp)
+x_fp_assq (struct frame_part *fp, repv prop)
 {
     repv ret = Qnil, class, tem;
+
+    ret = Fassq (prop, fp->local_alist);
+    if (ret && ret != Qnil)
+	return ret;
 
     class = Fassq (Qclass, fp->alist);
     if (class && class != Qnil)
@@ -837,22 +854,20 @@ x_fp_assq (repv prop, struct frame_part *fp)
 		ret = Fassq (prop, rep_CDR(tem));
 	}
     }
-    if (!ret)
-	ret = Qnil;
-    return ret;
+
+    return ret ? ret : Qnil;
 }
 
 static repv
-get_integer_prop (Lisp_Window *w, repv prop, repv elt,
-		  repv class, repv ov_class)
+get_integer_prop (struct frame_part *fp, repv prop, repv class, repv ov_class)
 {
-    repv tem = fp_assq (prop, elt, class, ov_class);
+    repv tem = fp_assq (fp, prop, class, ov_class);
     if (tem && tem != Qnil)
     {
 	if (rep_INTP(rep_CDR(tem)))
 	    tem = rep_CDR(tem);
 	else
-	    tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
+	    tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(fp->win));
 	return (tem && rep_INTP(tem)) ? tem : Qnil;
     }
     else
@@ -860,17 +875,17 @@ get_integer_prop (Lisp_Window *w, repv prop, repv elt,
 }
 
 static bool
-get_pattern_prop (Lisp_Window *w, repv *data, repv (*conv)(repv data),
-		  repv prop, repv elt, repv class, repv ov_class)
+get_pattern_prop (struct frame_part *fp, repv *data, repv (*conv)(repv data),
+		  repv prop, repv class, repv ov_class)
 {
     int i;
     repv tem;
 
-    tem = fp_assq (prop, elt, class, ov_class);
+    tem = fp_assq (fp, prop, class, ov_class);
     if (tem != Qnil)
     {
 	if (Ffunctionp (rep_CDR(tem)) != Qnil)
-	    tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(w));
+	    tem = rep_call_lisp1 (rep_CDR(tem), rep_VAL(fp->win));
 	else
 	    tem = rep_CDR(tem);
 	if (!tem)
@@ -952,6 +967,305 @@ get_pattern_prop (Lisp_Window *w, repv *data, repv (*conv)(repv data),
     return TRUE;
 }
 
+static bool
+build_frame_part (struct frame_part *fp)
+{
+    Lisp_Window *w = fp->win;
+    repv class = Qnil, class_elt = Qnil, ov_class_elt = Qnil, tem;
+    rep_GC_root gc_class, gc_class_elt, gc_ov_class_elt;
+    bool had_left_edge = FALSE, had_top_edge = FALSE;
+    bool had_right_edge = FALSE, had_bottom_edge = FALSE;
+    bool ret = FALSE;
+    int i;
+
+    rep_PUSHGC(gc_class, class);
+    rep_PUSHGC(gc_class_elt, class_elt);
+    rep_PUSHGC(gc_ov_class_elt, ov_class_elt);
+
+    fp->width = fp->height = -1;
+    for (i = 0; i < fps_MAX; i++)
+	fp->fg[i] = fp->bg[i] = fp->font[i] = Qnil;
+
+    /* find the class of the part, and the alists of class-local state */
+    tem = Fassq (Qclass, fp->alist);
+    if (tem && tem != Qnil)
+    {
+	class = rep_CDR(tem);
+	tem = Fsymbol_value (Qframe_part_classes, Qt);
+	if (rep_CONSP(tem))
+	{
+	    tem = Fassq (class, tem);
+	    if (tem && tem != Qnil)
+		class_elt = rep_CDR(tem);
+	}
+	tem = Fsymbol_value (Qoverride_frame_part_classes, Qt);
+	if (rep_CONSP(tem))
+	{
+	    tem = Fassq (class, tem);
+	    if (tem && tem != Qnil)
+		ov_class_elt = rep_CDR(tem);
+	}
+    }
+
+    /* do we ignore this part? */
+    tem = Fassq (Qremovable, fp->alist);
+    if (tem && tem != Qnil && rep_CDR(tem) != Qnil)
+    {
+	tem = Fwindow_get (rep_VAL(w), Qremoved_classes);	/* XXX hoist */
+	if (tem && rep_CONSP(tem))
+	{
+	    tem = Fmemq (class, tem);
+	    if (tem && tem != Qnil)
+		goto next_part;
+	}
+    }
+
+    tem = fp_assq (fp, Qbelow_client, class_elt, ov_class_elt);
+    fp->below_client = (tem && tem != Qnil);
+
+    /* get text label */
+    tem = fp_assq (fp, Qtext, class_elt, ov_class_elt);
+    if (tem != Qnil)
+	fp->text = rep_CDR(tem);
+    else
+	fp->text = Qnil;
+    tem = fp_assq (fp, Qx_justify, class_elt, ov_class_elt);
+    if (tem != Qnil)
+    {
+	tem = rep_CDR(tem);
+	if (Ffunctionp (tem) != Qnil)
+	    tem = rep_call_lisp1 (tem, rep_VAL(w));
+	if (tem != rep_NULL)
+	    fp->x_justify = tem;
+    }
+    else
+	fp->x_justify = Qnil;
+    tem = fp_assq (fp, Qy_justify, class_elt, ov_class_elt);
+    if (tem != Qnil)
+    {
+	tem = rep_CDR(tem);
+	if (Ffunctionp (tem) != Qnil)
+	    tem = rep_call_lisp1 (tem, rep_VAL(w));
+	if (tem != rep_NULL)
+	    fp->y_justify = tem;
+    }
+    else
+	fp->y_justify = Qnil;
+
+    /* get cursor */
+    fp->cursor = Qnil;
+    tem = fp_assq (fp, Qcursor, class_elt, ov_class_elt);
+    if (tem != Qnil)
+    {
+	tem = rep_CDR(tem);
+	if (!CURSORP(tem) && tem != Qnil)
+	    tem = Fget_cursor (tem);
+	if (tem && CURSORP(tem))
+	    fp->cursor = tem;
+    }
+
+    /* get renderer function */
+    tem = fp_assq (fp, Qrenderer, class_elt, ov_class_elt);
+    if (tem != Qnil && Ffunctionp (rep_CDR(tem)) != Qnil)
+    {
+	fp->renderer = rep_CDR(tem);
+	tem = get_integer_prop (fp, Qrender_scale, class_elt, ov_class_elt);
+	if (tem != Qnil && rep_INT(tem) > 0)
+	    fp->render_scale = rep_INT(tem);
+	else
+	    fp->render_scale = 1;
+    }
+    else
+	fp->renderer = Qnil;
+
+    /* get background images or colors */
+    if (!get_pattern_prop (fp, fp->bg, Fget_color,
+			   Qbackground, class_elt, ov_class_elt))
+    {
+	goto next_part;
+    }
+
+    /* get foreground colors or images */
+    if (!get_pattern_prop (fp, fp->fg, Fget_color,
+			   Qforeground, class_elt, ov_class_elt))
+    {
+	goto next_part;
+    }
+
+    /* get fonts */
+    if (!get_pattern_prop (fp, fp->font, Fget_font,
+			   Qfont, class_elt, ov_class_elt))
+    {
+	goto next_part;
+    }
+
+    /* If we have a background image for this part, take it as
+       the provisional dimensions of the part */
+    for (i = 0; i < fps_MAX; i++)
+    {
+	if (IMAGEP(fp->bg[i]))
+	{
+	    fp->width = VIMAGE(fp->bg[i])->image->rgb_width;
+	    fp->height = VIMAGE(fp->bg[i])->image->rgb_height;
+	    break;
+	}
+    }
+
+    /* get dimensions.. */
+    tem = get_integer_prop (fp, Qwidth, class_elt, ov_class_elt);
+    if (tem != Qnil)
+	fp->width = rep_INT(tem);
+    tem = get_integer_prop (fp, Qheight, class_elt, ov_class_elt);
+    if (tem != Qnil)
+	fp->height = rep_INT(tem);
+    tem = get_integer_prop (fp, Qleft_edge, class_elt, ov_class_elt);
+    if (tem != Qnil)
+    {
+	fp->x = rep_INT(tem);
+	had_left_edge = TRUE;
+    }
+    tem = get_integer_prop (fp, Qtop_edge, class_elt, ov_class_elt);
+    if (tem != Qnil)
+    {
+	fp->y = rep_INT(tem);
+	had_top_edge = TRUE;
+    }
+    tem = get_integer_prop (fp, Qright_edge, class_elt, ov_class_elt);
+    if (tem != Qnil)
+    {
+	had_right_edge = TRUE;
+	if (had_left_edge)
+	    fp->width = w->attr.width - rep_INT(tem) - fp->x;
+	else
+	    fp->x = w->attr.width - rep_INT(tem) - fp->width;
+    }
+    tem = get_integer_prop (fp, Qbottom_edge, class_elt, ov_class_elt);
+    if (tem != Qnil)
+    {
+	had_bottom_edge = TRUE;
+	if (had_top_edge)
+	    fp->height = w->attr.height - rep_INT(tem) - fp->y;
+	else
+	    fp->y = w->attr.height - rep_INT(tem) - fp->height;
+    }
+
+    if (fp->width < 0)
+	fp->width = 0;
+    if (fp->height < 0)
+	fp->height = 0;
+
+    /* try to remove edges sticking out of small windows. if a part
+       specified by only one edge sticks out of the other edge, then
+       truncate it */
+
+    if (had_right_edge && !had_left_edge && fp->x < 0)
+    {
+	fp->width += fp->x;
+	fp->x = 0;
+    }
+    else if (had_left_edge && !had_right_edge
+	     && fp->x + fp->width > w->attr.width)
+    {
+	fp->width = w->attr.width - fp->x;
+    }
+
+    if (had_bottom_edge && !had_top_edge && fp->y < 0)
+    {
+	fp->height += fp->y;
+	fp->y = 0;
+    }
+    else if (had_top_edge && !had_bottom_edge
+	     && fp->y + fp->height > w->attr.height)
+    {
+	fp->height = w->attr.height - fp->y;
+    }
+
+    /* if we have a renderer function, create the image to
+       render into. */
+    if (fp->renderer != Qnil)
+    {
+	fp->rendered_image
+	     = Fmake_sized_image (rep_MAKE_INT(fp->width / fp->render_scale),
+				  rep_MAKE_INT(fp->height / fp->render_scale),
+				  Qnil);
+	fp->rendered_state = fps_none;
+    }
+    else
+	fp->rendered_image = Qnil;
+
+    DB(("  part: x=%d y=%d width=%d height=%d\n",
+	fp->x, fp->y, fp->width, fp->height));
+
+    ret = TRUE;
+
+next_part:
+    rep_POPGC; rep_POPGC; rep_POPGC;
+    return ret;
+}
+
+static void
+configure_frame_part (struct frame_part *fp)
+{
+    Lisp_Window *w = fp->win;
+    XSetWindowAttributes wa;
+    u_long wamask;
+    if (fp->id == 0)
+    {
+	if (fp->width > 0 && fp->height > 0)
+	{
+	    XGCValues gcv;
+	    wamask = 0;
+	    fp->id = XCreateWindow (dpy, w->frame,
+				    fp->x - w->frame_x, fp->y - w->frame_y,
+				    fp->width, fp->height,
+				    0, screen_depth, InputOutput,
+				    screen_visual, wamask, &wa);
+	    fp->gc = XCreateGC (dpy, fp->id, 0, &gcv);
+	    XSelectInput (dpy, fp->id, FP_EVENTS);
+
+	    if (!fp->below_client)
+		XMapRaised (dpy, fp->id);
+	    else
+	    {
+		XMapWindow (dpy, fp->id);
+		XLowerWindow (dpy, fp->id);
+	    }
+
+	    /* stash the fp in the window */
+	    XSaveContext (dpy, fp->id, window_fp_context, (XPointer)fp);
+
+	    fp->drawn.fg = rep_NULL;
+	    fp->drawn.bg = rep_NULL;
+	}
+    }
+    else
+    {
+	if (fp->width > 0 && fp->height > 0)
+	{
+	    XWindowChanges attr;
+	    attr.x = fp->x - w->frame_x;
+	    attr.y = fp->y - w->frame_y;
+	    attr.width = fp->width;
+	    attr.height = fp->height;
+	    attr.stack_mode = fp->below_client ? Below : Above;
+	    XConfigureWindow (dpy, fp->id, CWX | CWY | CWWidth
+			      | CWHeight | CWStackMode, &attr);
+	}
+	else
+	{
+	    XDestroyWindow (dpy, fp->id);
+	    fp->id = 0;
+	    XFreeGC (dpy, fp->gc);
+	    fp->gc = 0;
+	}
+    }
+    if (fp->id != 0)
+    {
+	XDefineCursor (dpy, fp->id, (fp->cursor != Qnil)
+		       ? VCURSOR(fp->cursor)->cursor : None);
+    }
+}
+
 /* Generate a frame-part frame for window W. If called for a window that
    already has a frame, it will be rebuilt to the current window size. */
 static void
@@ -961,13 +1275,12 @@ list_frame_generator (Lisp_Window *w)
     repv ptr = rep_NULL, tem;
     struct frame_part **last_fp = 0;
     struct frame_part *fp = 0;
-    XSetWindowAttributes wa;
-    u_long wamask;
-    int i;
-    rep_GC_root gc_win;
+    rep_GC_root gc_win, gc_ptr;
     repv win = rep_VAL(w);
     bool regen;				/* are we resizing the frame */
     int nparts = 0;
+    XSetWindowAttributes wa;
+    u_long wamask;
 
     /* bounding box of frame */
     int left_x, top_y, right_x, bottom_y;
@@ -1017,264 +1330,42 @@ list_frame_generator (Lisp_Window *w)
     /* This loop is a bit weird. If we're building the frame from scratch
        we loop over the Lisp list of frame part specs. Otherwise we loop
        over the _actual_ list of frame parts */
+    rep_PUSHGC(gc_ptr, ptr);
     while ((!regen && rep_CONSP(ptr))
 	   || (regen && fp != 0))
     {
-	repv elt, class = Qnil, class_elt = Qnil, ov_class_elt = Qnil;
-	rep_GC_root gc_class, gc_class_elt, gc_ov_class_elt, gc_fp;
-	bool had_left_edge = FALSE, had_top_edge = FALSE;
-	bool had_right_edge = FALSE, had_bottom_edge = FALSE;
+	rep_GC_root gc_fp;
 	repv fp_;
-
-	rep_PUSHGC(gc_class, class);
-	rep_PUSHGC(gc_class_elt, class_elt);
-	rep_PUSHGC(gc_ov_class_elt, ov_class_elt);
-
 	if (!regen)
 	    fp = fp_new (w, rep_CAR (ptr));
-	elt = fp->alist;
-
 	fp_ = rep_VAL(fp);
+
 	rep_PUSHGC(gc_fp, fp_);
-
-	fp->width = fp->height = -1;
-	for (i = 0; i < fps_MAX; i++)
-	    fp->fg[i] = fp->bg[i] = fp->font[i] = Qnil;
-
-	/* find the class of the part, and the alists of class-local state */
-	tem = Fassq (Qclass, elt);
-	if (tem && tem != Qnil)
+	if (build_frame_part (fp))
 	{
-	    class = rep_CDR(tem);
-	    tem = Fsymbol_value (Qframe_part_classes, Qt);
-	    if (rep_CONSP(tem))
+	    /* expand frame bounding box */
+	    left_x = MIN(left_x, fp->x);
+	    right_x = MAX(right_x, fp->x + fp->width);
+	    top_y = MIN(top_y, fp->y);
+	    bottom_y = MAX(bottom_y, fp->y + fp->height);
+
+	    if (!regen)
 	    {
-		tem = Fassq (class, tem);
-		if (tem && tem != Qnil)
-		    class_elt = rep_CDR(tem);
+		/* link in fp */
+		*last_fp = fp;
+		last_fp = &fp->next;
 	    }
-	    tem = Fsymbol_value (Qoverride_frame_part_classes, Qt);
-	    if (rep_CONSP(tem))
-	    {
-		tem = Fassq (class, tem);
-		if (tem && tem != Qnil)
-		    ov_class_elt = rep_CDR(tem);
-	    }
-	}
 
-	/* do we ignore this part? */
-	tem = Fassq (Qremovable, elt);
-	if (tem && tem != Qnil && rep_CDR(tem) != Qnil)
-	{
-	    tem = Fwindow_get (rep_VAL(w), Qremoved_classes);	/* XXX hoist */
-	    if (tem && rep_CONSP(tem))
-	    {
-		tem = Fmemq (class, tem);
-		if (tem && tem != Qnil)
-		    goto next_part;
-	    }
+	    nparts++;
 	}
+	rep_POPGC;			/* fp */
 
-	tem = fp_assq (Qbelow_client, elt, class_elt, ov_class_elt);
-	fp->below_client = (tem && tem != Qnil);
-
-	/* get text label */
-	tem = fp_assq (Qtext, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
-	    fp->text = rep_CDR(tem);
-	else
-	    fp->text = Qnil;
-	tem = fp_assq (Qx_justify, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
-	{
-	    tem = rep_CDR(tem);
-	    if (Ffunctionp (tem) != Qnil)
-		tem = rep_call_lisp1 (tem, rep_VAL(w));
-	    if (tem != rep_NULL)
-		fp->x_justify = tem;
-	}
-	else
-	    fp->x_justify = Qnil;
-	tem = fp_assq (Qy_justify, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
-	{
-	    tem = rep_CDR(tem);
-	    if (Ffunctionp (tem) != Qnil)
-		tem = rep_call_lisp1 (tem, rep_VAL(w));
-	    if (tem != rep_NULL)
-		fp->y_justify = tem;
-	}
-	else
-	    fp->y_justify = Qnil;
-
-	/* get cursor */
-	fp->cursor = Qnil;
-	tem = fp_assq (Qcursor, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
-	{
-	    tem = rep_CDR(tem);
-	    if (!CURSORP(tem) && tem != Qnil)
-		tem = Fget_cursor (tem);
-	    if (tem && CURSORP(tem))
-		fp->cursor = tem;
-	}
-
-	/* get renderer function */
-	tem = fp_assq (Qrenderer, elt, class_elt, ov_class_elt);
-	if (tem != Qnil && Ffunctionp (rep_CDR(tem)) != Qnil)
-	{
-	    fp->renderer = rep_CDR(tem);
-	    tem = get_integer_prop (w, Qrender_scale, elt,
-				    class_elt, ov_class_elt);
-	    if (tem != Qnil && rep_INT(tem) > 0)
-		fp->render_scale = rep_INT(tem);
-	    else
-		fp->render_scale = 1;
-	}
-	else
-	    fp->renderer = Qnil;
-
-	/* get background images or colors */
-	if (!get_pattern_prop (w, fp->bg, Fget_color, Qbackground,
-			       elt, class_elt, ov_class_elt))
-	{
-	    goto next_part;
-	}
-
-	/* get foreground colors or images */
-	if (!get_pattern_prop (w, fp->fg, Fget_color, Qforeground,
-			       elt, class_elt, ov_class_elt))
-	{
-	    goto next_part;
-	}
-
-	/* get fonts */
-	if (!get_pattern_prop (w, fp->font, Fget_font, Qfont,
-			       elt, class_elt, ov_class_elt))
-	{
-	    goto next_part;
-	}
-
-	/* If we have a background image for this part, take it as
-	   the provisional dimensions of the part */
-	for (i = 0; i < fps_MAX; i++)
-	{
-	    if (IMAGEP(fp->bg[i]))
-	    {
-		fp->width = VIMAGE(fp->bg[i])->image->rgb_width;
-		fp->height = VIMAGE(fp->bg[i])->image->rgb_height;
-		break;
-	    }
-	}
-
-	/* get dimensions.. */
-	tem = get_integer_prop (w, Qwidth, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
-	    fp->width = rep_INT(tem);
-	tem = get_integer_prop (w, Qheight, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
-	    fp->height = rep_INT(tem);
-	tem = get_integer_prop (w, Qleft_edge, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
-	{
-	    fp->x = rep_INT(tem);
-	    had_left_edge = TRUE;
-	}
-	tem = get_integer_prop (w, Qtop_edge, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
-	{
-	    fp->y = rep_INT(tem);
-	    had_top_edge = TRUE;
-	}
-	tem = get_integer_prop (w, Qright_edge, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
-	{
-	    had_right_edge = TRUE;
-	    if (had_left_edge)
-		fp->width = w->attr.width - rep_INT(tem) - fp->x;
-	    else
-		fp->x = w->attr.width - rep_INT(tem) - fp->width;
-	}
-	tem = get_integer_prop (w, Qbottom_edge, elt, class_elt, ov_class_elt);
-	if (tem != Qnil)
-	{
-	    had_bottom_edge = TRUE;
-	    if (had_top_edge)
-		fp->height = w->attr.height - rep_INT(tem) - fp->y;
-	    else
-		fp->y = w->attr.height - rep_INT(tem) - fp->height;
-	}
-
-	if (fp->width < 0)
-	    fp->width = right_x - fp->x;
-	if (fp->height < 0)
-	    fp->height = bottom_y - fp->y;
-
-	/* try to remove edges sticking out of small windows. if a part
-	   specified by only one edge sticks out of the other edge, then
-	   truncate it */
-
-	if (had_right_edge && !had_left_edge && fp->x < 0)
-	{
-	    fp->width += fp->x;
-	    fp->x = 0;
-	}
-	else if (had_left_edge && !had_right_edge
-		 && fp->x + fp->width > w->attr.width)
-	{
-	    fp->width = w->attr.width - fp->x;
-	}
-
-	if (had_bottom_edge && !had_top_edge && fp->y < 0)
-	{
-	    fp->height += fp->y;
-	    fp->y = 0;
-	}
-	else if (had_top_edge && !had_bottom_edge
-		 && fp->y + fp->height > w->attr.height)
-	{
-	    fp->height = w->attr.height - fp->y;
-	}
-
-	/* if we have a renderer function, create the image to
-	   render into. */
-	if (fp->renderer != Qnil)
-	{
-	    fp->rendered_image = Fmake_sized_image (rep_MAKE_INT(fp->width / fp->render_scale),
-						    rep_MAKE_INT(fp->height / fp->render_scale),
-						    Qnil);
-	    fp->rendered_state = fps_none;
-	}
-	else
-	    fp->rendered_image = Qnil;
-	
-
-	DB(("  part: x=%d y=%d width=%d height=%d\n",
-	    fp->x, fp->y, fp->width, fp->height));
-
-	/* expand frame bounding box */
-	left_x = MIN(left_x, fp->x);
-	right_x = MAX(right_x, fp->x + fp->width);
-	top_y = MIN(top_y, fp->y);
-	bottom_y = MAX(bottom_y, fp->y + fp->height);
-
-	if (!regen)
-	{
-	    /* link in fp */
-	    *last_fp = fp;
-	    last_fp = &fp->next;
-	}
-
-	nparts++;
-
-    next_part:
 	if (!regen)
 	    ptr = rep_CDR(ptr);
 	else
 	    fp = fp->next;
-
-	rep_POPGC; rep_POPGC; rep_POPGC; rep_POPGC;
     }
+    rep_POPGC;				/* ptr */
 
     /* now we can find the size and offset of the frame. */
     w->frame_width = right_x - left_x;
@@ -1319,63 +1410,7 @@ list_frame_generator (Lisp_Window *w)
 
     /* create/update windows for each part */
     for (fp = w->frame_parts; fp != 0; fp = fp->next)
-    {
-	if (fp->id == 0)
-	{
-	    if (fp->width > 0 && fp->height > 0)
-	    {
-		XGCValues gcv;
-		wamask = 0;
-		fp->id = XCreateWindow (dpy, w->frame,
-					fp->x - w->frame_x, fp->y - w->frame_y,
-					fp->width, fp->height,
-					0, screen_depth, InputOutput,
-					screen_visual, wamask, &wa);
-		fp->gc = XCreateGC (dpy, fp->id, 0, &gcv);
-		XSelectInput (dpy, fp->id, FP_EVENTS);
-
-		if (!fp->below_client)
-		    XMapRaised (dpy, fp->id);
-		else
-		{
-		    XMapWindow (dpy, fp->id);
-		    XLowerWindow (dpy, fp->id);
-		}
-
-		/* stash the fp in the window */
-		XSaveContext (dpy, fp->id, window_fp_context, (XPointer)fp);
-
-		fp->drawn.fg = rep_NULL;
-		fp->drawn.bg = rep_NULL;
-	    }
-	}
-	else
-	{
-	    if (fp->width > 0 && fp->height > 0)
-	    {
-		XWindowChanges attr;
-		attr.x = fp->x - w->frame_x;
-		attr.y = fp->y - w->frame_y;
-		attr.width = fp->width;
-		attr.height = fp->height;
-		attr.stack_mode = fp->below_client ? Below : Above;
-		XConfigureWindow (dpy, fp->id, CWX | CWY | CWWidth
-				  | CWHeight | CWStackMode, &attr);
-	    }
-	    else
-	    {
-		XDestroyWindow (dpy, fp->id);
-		fp->id = 0;
-		XFreeGC (dpy, fp->gc);
-		fp->gc = 0;
-	    }
-	}
-	if (fp->id != 0)
-	{
-	    XDefineCursor (dpy, fp->id, (fp->cursor != Qnil)
-			   ? VCURSOR(fp->cursor)->cursor : None);
-	}
-    }
+	configure_frame_part (fp);
 
     /* ICCCM says we must unmap the client window when it's hidden */
     {
@@ -1394,14 +1429,14 @@ list_frame_generator (Lisp_Window *w)
 	}
     }
 
-    rep_POPGC;
+    rep_POPGC;				/* win */
 }
 
 /* Return the keymap associated with this frame part, or nil */
 repv
 get_keymap_for_frame_part (struct frame_part *fp)
 {
-    repv tem = x_fp_assq (Qkeymap, fp);
+    repv tem = x_fp_assq (fp, Qkeymap);
     if (tem != Qnil)
 	tem = rep_CDR(tem);
     return tem;
@@ -1542,7 +1577,7 @@ frame-part-get PART PROPERTY
     repv tem;
     rep_DECLARE1 (part, PARTP);
     rep_DECLARE2 (prop, rep_SYMBOLP);
-    tem = x_fp_assq (prop, VPART(part));
+    tem = x_fp_assq (VPART(part), prop);
     return (tem != Qnil) ? rep_CDR(tem) : Qnil;
 }
 
@@ -1552,14 +1587,14 @@ DEFUN("frame-part-put", Fframe_part_put, Sframe_part_put,
     repv tem;
     rep_DECLARE1(part, PARTP);
     rep_DECLARE2(prop, rep_SYMBOLP);
-    tem = Fassq (prop, VPART(part)->alist);
+    tem = Fassq (prop, VPART(part)->local_alist);
     if (tem != rep_NULL)
     {
 	if (tem != Qnil)
 	    rep_CDR (tem) = value;
 	else
-	    VPART(part)->alist = Fcons (Fcons (prop, value),
-					VPART(part)->alist);
+	    VPART(part)->local_alist = Fcons (Fcons (prop, value),
+					      VPART(part)->local_alist);
     }
     return value;
 }
@@ -1632,6 +1667,22 @@ DEFUN("refresh-frame-part", Frefresh_frame_part,
     return Qt;
 }
 
+DEFUN("rebuild-frame-part", Frebuild_frame_part,
+      Srebuild_frame_part, (repv part), rep_Subr1)
+{
+    rep_GC_root gc_part;
+    rep_DECLARE1(part, PARTP);
+    rep_PUSHGC(gc_part, part);
+    if (build_frame_part (VPART(part)))
+    {
+	/* XXX what about reconfiguring the container window..? */
+	configure_frame_part (VPART(part));
+	set_frame_shapes (VPART(part)->win, TRUE);
+    }
+    rep_POPGC;
+    return Qt;
+}
+
 DEFUN("refresh-window", Frefresh_window,
       Srefresh_window, (repv win), rep_Subr1)
 {
@@ -1668,6 +1719,7 @@ frames_init (void)
     rep_ADD_SUBR(Sframe_part_state);
     rep_ADD_SUBR(Smap_frame_parts);
     rep_ADD_SUBR(Srefresh_frame_part);
+    rep_ADD_SUBR(Srebuild_frame_part);
     rep_ADD_SUBR(Srefresh_window);
 
     rep_INTERN(internal);
