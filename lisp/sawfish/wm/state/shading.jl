@@ -34,6 +34,8 @@
 	  sawfish.wm.workspace
 	  sawfish.wm.stacking)
 
+  (define-structure-alias shading sawfish.wm.state.shading)
+
   (defcustom raise-windows-when-unshaded nil
     "Raise windows when they are unshaded."
     :group misc

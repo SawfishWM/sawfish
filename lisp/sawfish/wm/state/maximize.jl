@@ -54,6 +54,8 @@
 	  sawfish.wm.stacking
 	  sawfish.wm.misc)
 
+  (define-structure-alias maximize sawfish.wm.state.maximize)
+
   ;; This sets the window property `unmaximized-geometry' of each
   ;; currently maximize window to `(X Y W H)', the saved geometry.
 
