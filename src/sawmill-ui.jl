@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.1 1999/08/10 16:19:20 john Exp $
+;; $Id: sawmill-ui.jl,v 1.2 1999/08/11 16:19:10 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -59,6 +59,9 @@ fi
 
 ;; XXX this may be confusing?
 (defvar ui-enable-refresh nil)
+
+;; may be list or notebook
+(defvar ui-pages-style 'list)
 
 
 ;; ui builder
@@ -110,13 +113,44 @@ fi
 
 (put 'pages 'builder 'build-pages)
 (defun build-pages (spec)
-  (let
-      ((book (gtk-notebook-new)))
-    (mapc #'(lambda (page)
-	      (gtk-notebook-append-page book (build-ui (car (cdr page)))
-					(gtk-label-new (car page))))
-	  (cdr spec))
-    book))
+  (cond ((eq ui-pages-style 'notebook)
+	 (let
+	     ((book (gtk-notebook-new)))
+	   (mapc #'(lambda (page)
+		     (gtk-notebook-append-page book (build-ui (car (cdr page)))
+					       (gtk-label-new (car page))))
+		 (cdr spec))
+	   book))
+	((eq ui-pages-style 'list)
+	 (let
+	     ((hbox (gtk-hbox-new nil 0))
+	      (clist (gtk-clist-new 1))
+	      (frame (gtk-frame-new))
+	      (contents (make-vector (length (cdr spec)))))
+	   (gtk-clist-set-column-auto-resize clist 0 t)
+	   (gtk-container-add hbox clist)
+	   (gtk-container-add hbox frame)
+	   (gtk-clist-set-selection-mode clist 'browse)
+	   (mapc #'(lambda (page)
+		     (let
+			 ((row (gtk-clist-append clist (vector (car page))))
+			  (widget (build-ui (nth 1 page))))
+		       ;; (LABEL . WIDGET)
+		       (gtk-widget-show-all widget)
+		       (aset contents row (cons (car page) widget))))
+		 (cdr spec))
+	   (gtk-signal-connect clist "select_row"
+			       `(lambda (clist row col)
+				  (build-pages:select-row
+				   ,contents row ,frame)))
+	   (gtk-clist-select-row clist 0 0)
+	   hbox))))
+
+(defun build-pages:select-row (contents row frame)
+  (mapc #'(lambda (w)
+	    (gtk-container-remove frame w)) (gtk-container-children frame))
+  (gtk-frame-set-label frame (car (aref contents row)))
+  (gtk-container-add frame (cdr (aref contents row))))
 
 (put 'vbox 'builder 'build-box)
 (put 'hbox 'builder 'build-box)
@@ -269,6 +303,53 @@ fi
 		       (gtk-widget-destroy ',fontsel)))
     (gtk-widget-show fontsel)))
 
+(put 'color 'builder 'build-color)
+(defun build-color (spec)
+  (let
+      ((button (gtk-button-new-with-label (or (get-key spec ':value) ""))))
+    (mapc #'(lambda (w)
+	      (when (gtk-label-p w)
+		(gtk-label-set-line-wrap w t)))
+	  (gtk-container-children button))
+    (unless (key-exists-p spec ':value)
+      (set-key spec ':value nil))
+    (gtk-signal-connect button "clicked"
+			`(lambda (w)
+			   (build-color:clicked ',spec)))
+    (setq spec (nconc spec (list ':widget button)))
+    button))
+
+(defun build-color:clicked (spec)
+  (let
+      ((colorsel (gtk-color-selection-dialog-new "Select color")))
+    (when (get-key spec ':value)
+      (gtk-color-selection-set-color-interp
+       (gtk-color-selection-dialog-colorsel colorsel)
+       (gdk-color-parse-interp (get-key spec ':value))))
+    (gtk-signal-connect
+     (gtk-color-selection-dialog-ok-button colorsel)
+     "clicked"
+     `(lambda (w)
+	(let*
+	    ((color (gtk-color-selection-get-color-interp
+		     ',(gtk-color-selection-dialog-colorsel colorsel)))
+	     (name (and color (format nil "#%02x%02x%02x"
+				      (gdk-color-red color)
+				      (gdk-color-green color)
+				      (gdk-color-blue color)))))
+	  (when (or name (get-key ',spec ':allow-nil))
+	    (ui-set ',spec (get-key ',spec ':variable) name)
+	    (ui-set-button-label ',(get-key spec ':widget) name))
+	  (gtk-widget-destroy ',colorsel))))
+    (gtk-signal-connect
+     (gtk-color-selection-dialog-cancel-button colorsel)
+     "clicked" `(lambda (w)
+		  (gtk-widget-destroy ',colorsel)))
+    (gtk-signal-connect colorsel
+     "delete_event" `(lambda (w)
+		       (gtk-widget-destroy ',colorsel)))
+    (gtk-widget-show colorsel)))
+
 (put 'set 'builder 'build-set)
 (defun build-set (spec)
   (let*
@@ -338,7 +419,7 @@ fi
     (gtk-container-add hbox cancel)
     (when ui-enable-refresh
       (gtk-container-add hbox refresh))
-    (gtk-box-pack-start vbox ui-root)
+    (gtk-container-add vbox ui-root)
     (ui-set-button-states)
     (gtk-widget-show-all ui-window)
     (gtk-main)))
