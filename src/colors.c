@@ -37,6 +37,9 @@ get-color-rgb RED GREEN BLUE
     rep_DECLARE2(green, rep_INTP);
     rep_DECLARE3(blue, rep_INTP);
 
+    if (dpy == 0)
+	return Qnil;
+
     f = color_list;
     while (f != 0)
     {

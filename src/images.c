@@ -158,6 +158,8 @@ string). PLIST defines the property list of the image.
     bool delete;
     rep_GC_root gc_plist;
     rep_DECLARE1(file, rep_STRINGP);
+    if (dpy == 0)
+	return Qnil;
     rep_PUSHGC(gc_plist, plist);
     file = find_image_file (file, &delete);
     rep_POPGC;

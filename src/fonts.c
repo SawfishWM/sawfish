@@ -37,6 +37,9 @@ font specifier string).
     Lisp_Font *f;
     rep_DECLARE1(name, rep_STRINGP);
 
+    if (dpy == 0)
+	return Qnil;
+
     f = font_list;
     while (f != 0 && strcmp (rep_STR(name), rep_STR(f->name)) != 0)
 	f = f->next;

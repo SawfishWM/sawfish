@@ -95,6 +95,9 @@ X11 cursor font, or an image object.
 {
     Lisp_Cursor *f;
 
+    if (dpy == 0)
+	return Qnil;
+
     if (rep_SYMBOLP(data))
 	data = Fget (data, Qcursor_shape);
 
