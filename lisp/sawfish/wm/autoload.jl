@@ -145,7 +145,7 @@
 (autoload-command (quote 3d-hack) (quote sawfish.wm.ext.3d-hack))
 (defgroup audio "Sound" :require sawfish.wm.ext.audio-events)
 (defgroup edge-flip "Edge Flipping" :group workspace :require sawfish.wm.ext.edge-flip)
-(defgroup match-window "Matched Windows" :layout single :require match-window)
+(defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
 (defgroup shade-hover "Shade Hover" :group focus :require sawfish.wm.ext.shade-hover)
 (defgroup tooltips "Tooltips" :group misc :require sawfish.wm.ext.tooltips)
 (autoload-placement-mode 'first-fit 'sawfish.wm.placement.smart)
