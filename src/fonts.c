@@ -44,6 +44,8 @@
 
 #ifdef HAVE_X11_XFT_XFT_H
 # include <X11/Xft/Xft.h>
+#else
+# undef HAVE_PANGO
 #endif
 
 #ifdef HAVE_PANGO
@@ -402,7 +404,7 @@ static const Lisp_Font_Class xft_class = {
 
 /* Pango fonts */
 
-#if defined (HAVE_PANGO) && defined (HAVE_X11_XFT_XFT_H)
+#ifdef HAVE_PANGO
 
 static PangoContext *pango_context;
 
@@ -574,7 +576,7 @@ static const Lisp_Font_Class pango_class = {
     pango_measure, pango_draw,
 };
 
-#endif /* HAVE_PANGO && HAVE_XFT */
+#endif /* HAVE_PANGO */
 
 
 /* All classes */
@@ -963,10 +965,11 @@ fonts_init (void)
 
 	if (use_xft ())
 	{
+#ifdef HAVE_PANGO
 	    font = Fget_font_typed (rep_VAL (&pango_type),
 				    rep_VAL (&pango_name));
-
 	    if (font == rep_NULL || !FONTP (font))
+#endif
 	    {
 		font = Fget_font_typed (rep_VAL (&xft_type),
 					rep_VAL (&xft_name));
