@@ -230,6 +230,7 @@ extern repv Fkeymapp (repv arg);
 extern repv Feventp (repv arg);
 extern void grab_window_events (Lisp_Window *w, bool grab);
 extern void grab_keymap_events (Window grab_win, repv keymap, bool grab);
+extern void update_keyboard_mapping (void);
 extern void keys_init (void);
 
 /* from main.c */

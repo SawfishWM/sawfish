@@ -1,5 +1,9 @@
 2000-02-25  John Harper  <john@dcs.warwick.ac.uk>
 
+	* keys.c (update_keyboard_mapping): new function, updates the
+	modifier data
+	* events.c (mapping_notify): new event handler
+
 	* sawmill-ui.jl: use `quotient' instead of `/' where
 	appropriate. Define `quotient' to `/' if unbound
 
