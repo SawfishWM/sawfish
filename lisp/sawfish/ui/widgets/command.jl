@@ -31,8 +31,13 @@
 
   (define commands)
 
-  (define (command-name command)
-    (or (car command) command))
+  (define (command-name command) (or (car command) command))
+
+  (define (command-type command)
+    (and (listp command) (cadr (memq #:type command))))
+
+  (define (command-user-level command)
+    (and (listp command) (cadr (memq #:user-level command))))
 
   (define (make-command-item changed)
 
