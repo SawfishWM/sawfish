@@ -21,13 +21,25 @@
 
 (provide 'sawmill)
 
+;; frame-style loaded if user hasn't set their own
+(defvar fallback-frame-style 'absolute-e)
+
 ;; load standard libraries
 (require 'custom)
 (require 'functions)
 (require 'cursors)
+(require 'keymaps)
+
+;; all rep-based programs should do this
+(load-all "autoload.jl" t)
+(load-all (concat "os-" (symbol-name operating-system)) t)
+
+;; If we connected with a session manager, initialise our state
+(require 'sm-init)
+
+;; load libraries that may affect window state _after_ sm-init
 (require 'mwm)
 (require 'open-look)
-(require 'keymaps)
 (require 'focus)
 (require 'transient)
 (require 'frames)
@@ -36,9 +48,6 @@
 (require 'stacking)
 (require 'place-window)
 (require 'server)
-
-(load-all "autoload.jl" t)
-(load-all (concat "os-" (symbol-name operating-system)) t)
 
 ;; Load site specific initialisation. Errors here are trapped since
 ;; they're probably not going to leave us in an unusable state
@@ -68,12 +77,9 @@
 
 	  ;; use a default theme if none given
 	  (unless default-frame-style
-	    (set-frame-style 'absolute-e))))
+	    (set-frame-style fallback-frame-style))))
     (error
      (format (stderr-file) "error in local config--> %S\n" error-data))))
-
-;; If we connected with a session manager, initialise our state
-(require 'sm-init)
 
 ;; Use all arguments which are left.
 (let
