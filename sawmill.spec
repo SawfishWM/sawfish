@@ -1,6 +1,6 @@
 
 %define nam	sawmill
-%define ver	0.6
+%define ver	0.7
 %define rel	1
 
 Summary: a highly configurable and extensible X11 window manager
