@@ -19,6 +19,7 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'maximize)
 (provide 'move-resize)
 
 ;; todo:
@@ -67,6 +68,11 @@
   :group move
   :type boolean)
 
+(defcustom move-lock-when-maximized t
+  "Lock window geometry while the window is maximized."
+  :type boolean
+  :group move)
+
 (defvar move-resize-map (bind-keys (make-keymap)
 			  "Any-Off" 'move-resize-finished
 			  "Any-Move" 'move-resize-motion
@@ -91,6 +97,7 @@
 (defvar move-resize-edges nil)
 (defvar move-resize-last-outline nil)
 (defvar move-resize-moving-edges nil)
+(defvar move-resize-directions nil)
 
 ;; called to initiate a move or resize on window W. FUNCTION is either
 ;; `move' or `resize'
@@ -140,7 +147,8 @@
 				  ':windows-to-ignore (list w)
 				  ':include-root t))))
        (move-resize-last-outline nil)
-       (move-resize-moving-edges nil)
+       (move-resize-moving-edges move-resize-moving-edges)
+       (move-resize-directions move-resize-directions)
        (frame-draw-mutex (not (eq move-resize-mode 'opaque)))
        (frame-state-mutex 'clicked)
        server-grabbed)
@@ -167,8 +175,9 @@
 					 (cdr move-resize-frame))))
 			  (apply 'draw-window-outline
 				 move-resize-last-outline))
-			(when (eq move-resize-function 'resize)
-			  (move-resize-infer-anchor))
+			(if (eq move-resize-function 'resize)
+			    (move-resize-infer-anchor)
+			  (move-resize-infer-directions))
 			(catch 'move-resize-done
 			  (when from-motion-event
 			    (move-resize-motion))
@@ -179,7 +188,7 @@
 	(ungrab-server))
       (show-message nil))
     (if (eq function 'move)
-	(call-window-hook 'after-move-hook w)
+	(call-window-hook 'after-move-hook w (list move-resize-directions))
       (call-window-hook
        'after-resize-hook w (list move-resize-moving-edges)))))
 
@@ -197,10 +206,12 @@
     (unless (eq move-resize-mode 'opaque)
       (apply 'erase-window-outline move-resize-last-outline))
     (cond ((eq move-resize-function 'move)
-	   (setq move-resize-x (+ move-resize-old-x
-				  (- ptr-x move-resize-old-ptr-x)))
-	   (setq move-resize-y (+ move-resize-old-y
-				  (- ptr-y move-resize-old-ptr-y)))
+	   (when (memq 'horizontal move-resize-directions)
+	     (setq move-resize-x (+ move-resize-old-x
+				    (- ptr-x move-resize-old-ptr-x))))
+	   (when (memq 'vertical move-resize-directions)
+	     (setq move-resize-y (+ move-resize-old-y
+				    (- ptr-y move-resize-old-ptr-y))))
 	   (when move-show-position
 	     (show-message (format nil "%+d%+d" move-resize-x move-resize-y))))
 	  ((eq move-resize-function 'resize)
@@ -302,24 +313,43 @@
 
 ;; called when moving, tries to decide which edges to move, which to stick
 (defun move-resize-infer-anchor ()
-  (cond ((<= (- move-resize-old-ptr-x move-resize-old-x)
-	    (/ move-resize-old-width 3))
-	 (setq move-resize-moving-edges
-	       (cons 'left move-resize-moving-edges)))
-	((>= (- move-resize-old-ptr-x move-resize-old-x)
-	     (* (/ move-resize-old-width 3) 2))
-	 (setq move-resize-moving-edges
-	       (cons 'right move-resize-moving-edges))))
-  (cond ((<= (- move-resize-old-ptr-y move-resize-old-y)
-	    (/ move-resize-old-height 3))
-	 (setq move-resize-moving-edges
-	       (cons 'top move-resize-moving-edges)))
-	((>= (- move-resize-old-ptr-y move-resize-old-y)
-	     (* (/ move-resize-old-height 3) 2))
-	 (setq move-resize-moving-edges
-	       (cons 'bottom move-resize-moving-edges))))
+  (unless move-resize-moving-edges
+    (cond ((<= (- move-resize-old-ptr-x move-resize-old-x)
+	       (/ move-resize-old-width 3))
+	   (setq move-resize-moving-edges
+		 (cons 'left move-resize-moving-edges)))
+	  ((>= (- move-resize-old-ptr-x move-resize-old-x)
+	       (* (/ move-resize-old-width 3) 2))
+	   (setq move-resize-moving-edges
+		 (cons 'right move-resize-moving-edges))))
+    (cond ((<= (- move-resize-old-ptr-y move-resize-old-y)
+	       (/ move-resize-old-height 3))
+	   (setq move-resize-moving-edges
+		 (cons 'top move-resize-moving-edges)))
+	  ((>= (- move-resize-old-ptr-y move-resize-old-y)
+	       (* (/ move-resize-old-height 3) 2))
+	   (setq move-resize-moving-edges
+		 (cons 'bottom move-resize-moving-edges)))))
   (when (null move-resize-moving-edges)
-    (setq move-resize-moving-edges '(bottom right))))
+    (setq move-resize-moving-edges '(bottom right)))
+  (when move-lock-when-maximized
+    (when (window-maximized-vertically-p move-resize-window)
+      (setq move-resize-moving-edges
+	    (delq 'top
+		  (delq 'bottom move-resize-moving-edges))))
+    (when (window-maximized-horizontally-p move-resize-window)
+      (setq move-resize-moving-edges
+	    (delq 'left
+		  (delq 'right move-resize-moving-edges))))))
+
+(defun move-resize-infer-directions ()
+  (unless move-resize-directions
+    (setq move-resize-directions (list 'vertical 'horizontal)))
+  (when move-lock-when-maximized
+    (when (window-maximized-horizontally-p move-resize-window)
+      (setq move-resize-directions (delq 'horizontal move-resize-directions)))
+    (when (window-maximized-vertically-p move-resize-window)
+      (setq move-resize-directions (delq 'vertical move-resize-directions)))))
 
 
 ;; hook functions
