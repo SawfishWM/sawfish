@@ -211,6 +211,7 @@
 		       (cond ((and (stringp input)
 				   (or (stringp prop)
 				       (and (vectorp prop)
+					    (> (length prop) 0)
 					    (stringp (aref prop 0)))))
 			      ;; regexp match
 			      (if (vectorp prop)
