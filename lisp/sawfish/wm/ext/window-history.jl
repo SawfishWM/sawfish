@@ -104,6 +104,12 @@
     :type boolean
     :require sawfish.wm.ext.window-history)
 
+  (defcustom window-history-ignore-transients t
+    "Don't automatically remember details of transient windows."
+    :group placement
+    :type boolean
+    :user-level expert)
+
 
 ;;; matching windows
 
@@ -153,7 +159,8 @@
 ;;; recording attributes
 
   (define (window-history-snapshotter w state)
-    (unless (window-get w 'no-history)
+    (unless (or (window-get w 'no-history)
+		(and window-history-ignore-transients (window-transient-p w)))
       (let* ((alist (window-history-ref w))
 	     (value (if (get state 'window-history-snapshotter)
 			((get state 'window-history-snapshotter) w)
@@ -190,12 +197,15 @@
 ;;; manual state recording
 
   (defun window-history-save-position (w)
+    "Remember the current position of the focused window."
     (window-history-snapshotter w 'position))
 
   (defun window-history-save-dimensions (w)
+    "Remember the current dimensions of the focused window."
     (window-history-snapshotter w 'dimensions))
 
   (defun window-history-save-attributes (w)
+    "Remember the current attributes of the focused window."
     (mapc (lambda (state)
 	    (window-history-snapshotter w state))
 	  window-history-states))
@@ -291,6 +301,13 @@
 			    window-history-state)
 		(setq window-history-dirty nil))
 	    (close-file file))))))
+
+  (define (window-history-clear)
+    "Forget all saved window history."
+    (setq window-history-state (make-table equal-hash equal))
+    (setq window-history-dirty t))
+
+  (define-command 'window-history-clear window-history-clear)
 
   (define (print-alist stream alist)
     (if (null alist)
