@@ -81,7 +81,8 @@ of a window.")
   "C-M-ESC" 'quit)
 
 (bind-keys root-window-keymap
-  "Button1-Click1" 'popup-root-menu)
+  "Button2-Click1" 'popup-root-menu
+  "Button2-Off" 'nop)			;so it doesn't get proxyed
 
 (bind-keys close-button-keymap
   "Button1-Off" 'delete-window
