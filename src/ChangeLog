@@ -1,5 +1,16 @@
 1999-09-09  John Harper  <john@dcs.warwick.ac.uk>
 
+	* frames.c, windows.c: added a new window property
+	`hide-client', when non-nil the client window won't be visible
+	(call rebuild-frame after setting for it to take effect)
+
+	* keys.c: removed hashed keymaps (vectors), just lists of
+	bindings now
+	(Fbind_key, Funbind_key): bindings no longer nest
+
+	* sawmill-ui.jl (build-number-entry): use spin-buttons for
+	entering numbers
+
 	* events.c (property_notify): fixed this function
 
 1999-09-08  John Harper  <john@dcs.warwick.ac.uk>

@@ -41,4 +41,11 @@
 (autoload 'maximize-window-horizontally-toggle "maximize" t)
 (autoload 'load-session "sm-load")
 (autoload 'save-session "sm-save")
+(autoload 'map-keymap "keymap")
+(autoload 'substitute-key-definition "keymap")
+(autoload 'lazy-bind-keys "keymap")
+(autoload 'where-is "keymap")
+(autoload 'shade-window "shading" t)
+(autoload 'unshade-window "shading" t)
+(autoload 'toggle-window-shaded "shading" t)
 ;;; ::autoload-end::

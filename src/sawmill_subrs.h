@@ -110,6 +110,7 @@ extern void fonts_kill (void);
 /* from frames.c */
 extern repv Qdefault_frame, Qnil_frame;
 extern repv Qfocused, Qhighlighted, Qclicked;
+extern repv Qhide_client;
 extern bool frame_state_mutex;
 extern void set_frame_part_bg (struct frame_part *fp);
 extern void set_frame_part_fg (struct frame_part *fp);

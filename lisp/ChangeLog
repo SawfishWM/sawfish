@@ -1,3 +1,26 @@
+1999-09-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* shading.jl: new file, implements window shading (displaying
+	only the title bar)
+	* menus.jl (window-ops-menu): add a toggle-shaded item
+	* keymaps.jl (title-keymap): bind button1-click2 to toggle
+	shading
+	* workspace.jl (display-window): unshade the window if necessary
+	* gnome.jl: support WIN_STATE_SHADED
+
+	* keymap.jl: new file, some keymap utility functions
+
+	* select-window.jl, move-resize.jl, focus.jl: change
+	make-sparse-keymap to make-keymap
+
+	* custom.jl (defcustom): new option `:range (MIN . MAX)' for
+	number type, either MIN or MAX may be nil, defaults to 0 and
+	unlimited respectively
+	* customize.jl (customize-symbol-spec): propagate :range option
+
+	* workspace.jl, move-resize.jl: specify ranges in numeric
+	options
+
 1999-09-08  John Harper  <john@dcs.warwick.ac.uk>
 
 	* server.jl (server-init): set the _SAWMILL_SERVER_WIN property
