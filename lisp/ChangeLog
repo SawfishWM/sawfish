@@ -1,3 +1,18 @@
+1999-12-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl: rewritten to use a cleaner set of abstractions,
+	but more importantly to allow windows to appear on multiple
+	workspaces (and to have different properties on each)
+
+	* x-cycle.jl, window-order.jl, smart-placement.jl, menus.jl,
+	match-window.jl, gnome.jl: updated to use the new workspace
+	interface
+
+	* viewport.jl (window-absolute-position): new function
+
+	* functions.jl (map-windows): new macro, map a function over
+	all windows
+
 1999-12-13  John Harper  <john@dcs.warwick.ac.uk>
 
 	* gnome-menu.jl (gnome-menu-read-desktop-entry): recurse into
