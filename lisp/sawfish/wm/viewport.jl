@@ -52,10 +52,8 @@
   (defvar viewport-dimensions '(1 . 1)
     "Size of each virtual workspace.")
 
-  (defcustom uniconify-to-current-viewport t
-    "Windows uniconify to the current viewport."
-    :type boolean
-    :group (min-max iconify))
+  (defvar uniconify-to-current-viewport t
+    "Windows uniconify to the current viewport.")
 
 
 ;;; raw viewport handling
@@ -209,7 +207,8 @@
   (define-command 'activate-viewport activate-viewport
     #:spec "NX:\nNY:"
     #:type `(and (labelled ,(_ "Column:") (number 1))
-		 (labelled ,(_ "Row:") (number 1))))
+		 (labelled ,(_ "Row:") (number 1)))
+    #:class 'viewport)
 
   (define (activate-viewport-column x)
     "Select the specified viewport column."
@@ -217,7 +216,8 @@
 
   (define-command 'activate-viewport-column activate-viewport-column
     #:spec "NX:"
-    #:type `(and (labelled ,(_ "Column:") (number 1))))
+    #:type `(and (labelled ,(_ "Column:") (number 1)))
+    #:class 'viewport)
 
   (define (activate-viewport-row y)
     "Select the specified viewport row."
@@ -225,7 +225,8 @@
 
   (define-command 'activate-viewport-row activate-viewport-row
     #:spec "NY:"
-    #:type `(and (labelled ,(_ "Row:") (number 1))))
+    #:type `(and (labelled ,(_ "Row:") (number 1)))
+    #:class 'viewport)
 
   (define (move-window-to-viewport x y)
     "Move the current window to the specified viewport."
@@ -233,7 +234,8 @@
 
   (define-command 'move-window-to-viewport move-window-to-viewport
     #:spec "NX:\nNY:"
-    #:type '(and (labelled "X:" (number 1)) (labelled "Y:" (number 1))))
+    #:type '(and (labelled "X:" (number 1)) (labelled "Y:" (number 1)))
+    #:class 'viewport)
 
   (define (move-viewport-right)
     "Move the viewport one screen to the right."
@@ -279,14 +281,14 @@
     "Move the window to the viewport above, and switch to that viewport."
     (move-window-to-viewport-and-move-viewport w 0 -1))
 
-  (define-command 'move-viewport-right move-viewport-right)
-  (define-command 'move-viewport-left move-viewport-left)
-  (define-command 'move-viewport-up move-viewport-up)
-  (define-command 'move-viewport-down move-viewport-down)
-  (define-command 'move-window-right move-window-right #:spec "%W")
-  (define-command 'move-window-left move-window-left #:spec "%W")
-  (define-command 'move-window-up move-window-up #:spec "%W")
-  (define-command 'move-window-down move-window-down #:spec "%W")
+  (define-command 'move-viewport-right move-viewport-right #:class 'viewport)
+  (define-command 'move-viewport-left move-viewport-left #:class 'viewport)
+  (define-command 'move-viewport-up move-viewport-up #:class 'viewport)
+  (define-command 'move-viewport-down move-viewport-down #:class 'viewport)
+  (define-command 'move-window-right move-window-right #:spec "%W" #:class 'viewport)
+  (define-command 'move-window-left move-window-left #:spec "%W" #:class 'viewport)
+  (define-command 'move-window-up move-window-up #:spec "%W" #:class 'viewport)
+  (define-command 'move-window-down move-window-down #:spec "%W" #:class 'viewport)
 
 
 ;;; session management, config
@@ -322,10 +324,5 @@
   (define (viewport-window-uniconified w)
     (when uniconify-to-current-viewport
       (move-window-to-current-viewport w)))
-
-  (add-hook 'workspace-geometry-changed
-	    (lambda ()
-	      (setq viewport-dimensions (cdr workspace-geometry))
-	      (viewport-size-changed)))
 
   (add-hook 'uniconify-window-hook viewport-window-uniconified))

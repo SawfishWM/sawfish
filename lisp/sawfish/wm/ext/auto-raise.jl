@@ -30,18 +30,19 @@
 
   (define-structure-alias auto-raise sawfish.wm.ext.auto-raise)
 
+  (defgroup auto-raise "Auto-Raise" :group focus)
+
   (defcustom raise-windows-on-focus nil
     "Raise windows when they are focused."
     :type boolean
-    :user-level novice
     :require sawfish.wm.ext.auto-raise
-    :group focus)
+    :group (focus auto-raise))
 
   (defcustom raise-window-timeout 500
     "Delay in milliseconds until focused windows are raised."
     :type number
     :depends raise-windows-on-focus
-    :group focus)
+    :group (focus auto-raise))
 
   (defvar disable-auto-raise nil)
 
@@ -55,6 +56,7 @@
       (setq rw-timer nil)))
 
   (define (rw-on-focus w mode)
+    (declare (unused mode))
     (when (not disable-auto-raise)
       (if (or (window-get w 'raise-on-focus) raise-windows-on-focus)
 	  (progn
@@ -73,6 +75,7 @@
 	(rw-disable-timer))))
 
   (define (rw-out-focus w mode)
+    (declare (unused mode))
     (when (and rw-timer (eq rw-window w))
       (rw-disable-timer)))
 

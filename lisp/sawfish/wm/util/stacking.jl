@@ -44,7 +44,7 @@
   (defcustom user-raise-type 'transients
     "When raising a window, also raise its: \\w"
     :type (choice none transients group)
-    :group misc)
+    :group (misc stacking))
 
   (define (raise-window* w)
     "Raise the window to its highest allowed position in the stacking order."

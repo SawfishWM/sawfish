@@ -51,56 +51,28 @@
     "Display tooltips for window frames."
     :type boolean
     :group (misc tooltips)
-    :user-level novice
     :require sawfish.wm.ext.tooltips)
 
-  (defcustom tooltips-timeout-enabled nil
-    "Remove tooltips after a period of time."
-    :type boolean
-    :depends tooltips-enabled
-    :group (misc tooltips))
-
-  (defcustom tooltips-show-doc-strings t
+  (defcustom tooltips-show-doc-strings nil
     "Show full documentation in tooltips."
     :type boolean
     :depends tooltips-enabled
     :group (misc tooltips))
 
-  (defcustom tooltips-delay 500
-    "Number of milliseconds before displaying tooltips."
-    :type number
-    :range (1)
-    :depends tooltips-enabled
-    :group (misc tooltips))
+  (defvar tooltips-delay 500
+    "Number of milliseconds before displaying tooltips.")
 
-  (defcustom tooltips-timeout-delay 5000
-    "Number of milliseconds before removing tooltips."
-    :type number
-    :user-level expert
-    :range (1)
-    :depends tooltips-enabled
-    :group (misc tooltips))
+  (defvar tooltips-timeout-delay 5000
+    "Number of milliseconds before removing tooltips.")
 
-  (defcustom tooltips-font "-*-lucidatypewriter-medium-*-*-*-10-*-*-*-*-*-*-*"
-    "Font used to display tooltips."
-    :type font
-    :user-level expert
-    :depends tooltips-enabled
-    :group (misc tooltips))
+  (defvar tooltips-font nil
+    "Font used to display tooltips, or nil for default.")
 
-  (defcustom tooltips-background-color "grey85"
-    "Color used for the tooltips background"
-    :group (misc tooltips)
-    :user-level expert
-    :depends tooltips-enabled
-    :type color)
+  (defvar tooltips-background-color "grey85"
+    "Color used for the tooltips background")
 
-  (defcustom tooltips-foreground-color "black"
-    "Color used for the tooltips foreground"
-    :group (misc tooltips)
-    :user-level expert
-    :depends tooltips-enabled
-    :type color)
+  (defvar tooltips-foreground-color "black"
+    "Color used for the tooltips foreground")
 
 ;;; displaying tooltips
 
@@ -121,13 +93,12 @@
 			 (foreground . ,tooltips-foreground-color)
 			 (x-justify . left)
 			 (spacing . 2)
-			 (font . ,tooltips-font)))
+			 ,@(and tooltips-font tooltips-font)))
       (setq tooltips-displayed (or win t))
-      (when tooltips-timeout-enabled 
-	(setq tooltips-timer
-	      (make-timer remove-tooltip
-			  (quotient tooltips-timeout-delay 1000)
-			  (mod tooltips-timeout-delay 1000))))
+      (setq tooltips-timer
+	    (make-timer remove-tooltip
+			(quotient tooltips-timeout-delay 1000)
+			(mod tooltips-timeout-delay 1000)))
       (unless (in-hook-p 'pre-command-hook remove-tooltip)
 	(add-hook 'pre-command-hook remove-tooltip))))
 

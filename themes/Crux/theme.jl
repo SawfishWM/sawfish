@@ -16,7 +16,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id: theme.jl,v 1.6 2001/03/01 04:35:00 jsh Exp $
+   $Id$
 
    Authors: John Harper <jsh@eazel.com>
 |#
@@ -398,7 +398,8 @@
       (y-justify . 2)
       (,edge . ,point)
       (top-edge . -19)
-      (class . ,class)))
+      (class . ,class)
+      (removable . t)))
 
   (do ((rest spec (cdr rest))
        (point -1 (+ point 18))

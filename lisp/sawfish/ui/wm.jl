@@ -52,7 +52,7 @@
 ;;; stub functions
 
   ;; returns a list of keyworded items. Keywords include:
-  ;; #:name, #:depends, #:user-level, #:value, #:type, #:doc
+  ;; #:name, #:depends, #:value, #:type, #:doc
   (define (wm-load-slots names)
     (init-server)
     (wm-eval `(nokogiri-report-slots ',names) t))

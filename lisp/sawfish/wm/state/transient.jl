@@ -49,16 +49,8 @@
     :type boolean
     :group focus)
 
-  (defcustom transients-get-focus t
-    "Dialog windows inherit the focus from their parent."
-    :group focus
-    :type boolean)
-
-  (defcustom decorate-transients nil
-    "Decorate dialog windows similarly to application windows."
-    :type boolean
-    :group appearance
-    :after-set after-setting-frame-option)
+  (defvar decorate-transients nil
+    "Decorate dialog windows similarly to application windows.")
 
 
 ;;; functions
@@ -144,11 +136,11 @@ the level of any transient windows it has."
     (raise-lower-windows w (transient-group w t)))
 
   (define-command 'raise-window-and-transients
-    raise-window-and-transients #:spec "%W" #:user-level 'expert)
+    raise-window-and-transients #:spec "%W" #:class 'advanced)
   (define-command 'lower-window-and-transients
-    lower-window-and-transients #:spec "%W" #:user-level 'expert)
+    lower-window-and-transients #:spec "%W" #:class 'advanced)
   (define-command 'raise-lower-window-and-transients
-    raise-lower-window-and-transients #:spec "%W" #:user-level 'expert)
+    raise-lower-window-and-transients #:spec "%W" #:class 'advanced)
 
 
 ;;; displaying
@@ -167,13 +159,12 @@ the level of any transient windows it has."
 ;;; hooks
 
   (define (transient-map-window w)
-    (cond ((and transients-get-focus
-		(window-transient-p w)
+    (cond ((and (window-transient-p w)
 		(window-really-wants-input-p w)
 		(window-visible-p w)
 		(input-focus)
 		(transient-of-p w (input-focus) #:allow-root t))
-	   (set-input-focus w))
+	   (activate-window w))
 	  ((and (or (and focus-windows-when-mapped
 			 (not (window-get w 'never-focus)))
 		    (window-get w 'focus-when-mapped))
@@ -181,7 +172,7 @@ the level of any transient windows it has."
 		    (eql (window-transient-p w) (root-window-id)))
 		(window-really-wants-input-p w)
 		(window-visible-p w))
-	   (set-input-focus w))))
+	   (activate-window w))))
 
   ;; If a transient window gets unmapped that currently has the input
   ;; focus, pass it (the focus) to its parent. Otherwise, pass the focus
@@ -214,7 +205,7 @@ the level of any transient windows it has."
 	  (unless (or parent (eq focus-mode 'enter-exit))
 	    (setq parent (window-order-most-recent))))
 	(when (or (null parent) (window-really-wants-input-p parent))
-	  (set-input-focus parent)))))
+	  (activate-window parent)))))
 
   (add-hook 'map-notify-hook transient-map-window)
   (add-hook 'unmap-notify-hook transient-unmap-window)

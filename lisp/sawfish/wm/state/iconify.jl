@@ -36,8 +36,7 @@
 	    window-sticky-p
 	    make-window-sticky
 	    make-window-unsticky
-	    toggle-window-sticky
-	    toggle-single-window-mode)
+	    toggle-window-sticky)
 
     (open rep
 	  rep.system
@@ -60,38 +59,27 @@
 
   ;; If iconified, a window has its `iconified' property set to t
 
-  (defcustom focus-windows-on-uniconify nil
-    "Windows are focused after being uniconified."
-    :type boolean
-    :group (min-max iconify))
+  (defvar focus-windows-on-uniconify nil
+    "Windows are focused after being minimized.")
 
-  (defcustom raise-windows-on-uniconify t
-    "Windows are raised after being uniconified."
-    :type boolean
-    :user-level expert
-    :group (min-max iconify))
+  (defvar raise-windows-on-uniconify t
+    "Windows are raised after being unminimized.")
 
-  (defcustom iconify-ignored nil
-    "Unmanaged windows may be iconified."
-    :type boolean
-    :user-level expert
-    :group (min-max iconify))
+  (defvar uniconify-to-current-workspace t
+    "Move windows to the current workspace when they are unminimized.")
 
-  (defcustom uniconify-to-current-workspace t
-    "Windows uniconify to the current workspace."
-    :type boolean
-    :user-level expert
-    :group (min-max iconify))
+  (defvar iconify-ignored nil
+    "Unmanaged windows may be iconified.")
 
   (defcustom iconify-group-mode 'transients
-    "Iconifying a window also iconifies the: \\w"
+    "Minimizing a window also removes its: \\w"
     :type (choice none transients group)
-    :group (min-max iconify))
+    :group min-max)
 
   (defcustom uniconify-group-mode 'transients
-    "Uniconifying a window also uniconifies the: \\w"
+    "Unminimizing a window also restores its: \\w"
     :type (choice none transients group)
-    :group (min-max iconify))
+    :group min-max)
 
   (define (window-iconified-p w) (window-get w 'iconified))
 
@@ -122,7 +110,7 @@
       (when raise-windows-on-uniconify
 	(raise-window w))
       (when (and focus-windows-on-uniconify (window-really-wants-input-p w))
-	(set-input-focus w))
+	(activate-window w))
       (call-window-hook 'uniconify-window-hook w)
       (call-window-hook 'window-state-change-hook w (list '(iconified)))))
 
@@ -142,11 +130,11 @@
       (t (list w))))
 
   (define (iconify-window w)
-    "Iconify the window."
+    "Minimize the window."
     (mapc iconify-window-1 (windows-to-change w iconify-group-mode)))
 
   (define (uniconify-window w)
-    "Return the window from its iconified state."
+    "Restore the window from its minimized state."
     (mapc uniconify-window-1 (windows-to-change w uniconify-group-mode)))
 
   (define (toggle-window-iconified w)
@@ -160,7 +148,7 @@
   (define-command 'toggle-window-iconified toggle-window-iconified #:spec "%W")
 
   (define (iconify-workspace-windows)
-    "Iconify all windows on the current workspace."
+    "Minimize all windows on the current workspace."
     (map-windows (lambda (w)
 		   (when (and (not (window-get w 'ignored))
 			      (window-in-workspace-p w current-workspace))
@@ -237,26 +225,6 @@ all workspaces."
   (define-command 'make-window-sticky make-window-sticky #:spec "%W")
   (define-command 'make-window-unsticky make-window-unsticky #:spec "%W")
   (define-command 'toggle-window-sticky toggle-window-sticky #:spec "%W")
-
-
-;;; MacOS X single-window mode stuff
-
-  (define (toggle-single-window-mode w)
-    (let ((iconify-group-mode 'none)
-	  (raise-windows-on-uniconify nil)
-	  fun)
-      (map-other-window-groups
-       (lambda (x)
-	 (when (and (windows-share-workspace-p w x)
-		    (not (window-get x 'ignored)))
-	   (unless fun
-	     (setq fun (if (window-get x 'iconified)
-			   uniconify-window
-			 iconify-window)))
-	   (fun x))) w)))
-
-  (define-command 'toggle-single-window-mode
-    toggle-single-window-mode #:spec "%W")
 
 
 ;;; hooks

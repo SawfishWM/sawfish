@@ -19,6 +19,8 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(eval-when-compile (require 'sawfish.wm.commands.xterm))
+
 (define-structure sawfish.wm.gnome.integration ()
 
     (open rep
@@ -45,7 +47,6 @@
 
   ;; invoke the GNOME terminal instead of xterm
   (unless (variable-customized-p 'xterm-program)
-    (require 'sawfish.wm.commands.xterm)
     (setq xterm-program "gnome-terminal"))
 
   ;; use the GNOME help browser and url launcher

@@ -50,7 +50,7 @@
 
 ;; Private functions are prefixed by ws-
 
-(eval-when-compile '(require 'sawfish.wm.menus))
+(eval-when-compile (require 'sawfish.wm.menus))
 
 (define-structure sawfish.wm.workspace
 
@@ -115,53 +115,23 @@
 
 ;;; Options and variables
 
-  (defcustom workspace-geometry '(1 . (1 . 1))
-    "Virtual desktop configuration."
-    :type workspace-geometry
-    :user-level novice
-    :group workspace
-    :after-set (lambda () (call-hook 'workspace-geometry-changed)))
+  (defvar workspace-boundary-mode 'stop
+    "How to act when passing the first or last workspace, one of `stop',
+`wrap-around' or `keep-going'")
 
-  (defcustom workspace-boundary-mode 'stop
-    "When passing the first or last workspace: \\w"
-    :type symbol
-    :options (stop wrap-around keep-going)
-    :user-level expert
-    :group workspace)
-
-  (defcustom workspace-send-boundary-mode 'keep-going
-    "When passing the first or last workspace, while moving a window: \\w"
-    :type symbol
-    :options (stop wrap-around keep-going)
-    :user-level expert
-    :group workspace)
-
-  (defcustom delete-workspaces-when-empty nil
-    "Workspaces are deleted when their last window closes."
-    :type boolean
-    :user-level expert
-    :group workspace)
-
-  (defvar preallocated-workspaces 1
-    "Minimum number of workspaces.")
-
-  (defcustom lock-first-workspace t
-    "Preserve empty workspaces in pager."
-    :type boolean
-    :group workspace
-    :user-level expert
-    :after-set (lambda () (call-hook 'workspace-state-change-hook)))
-
-  (defcustom transients-on-parents-workspace nil
-    "Dialogs appear on the same workspace as their application."
-    :type boolean
-    :group workspace)
+  (defvar workspace-send-boundary-mode 'stop
+    "How to act when passing the first or last workspace, while moving a
+window, one of `stop', `keep-going', `wrap-around'")
 
   (defcustom workspace-names nil
     nil
     :type* `(list string ,(_ "Workspace names"))
+    :group workspace
     :widget-flags (expand-vertically)
-    :group workspace)
+    :after-set (lambda () (workspace-names-changed)))
+
+  (defvar lock-first-workspace t
+    "Preserve outermost empty workspaces in the pager.")
 
   ;; Currently active workspace, an integer
   (define current-workspace 0)
@@ -360,7 +330,7 @@
 	    (all-spaces
 	     (setq max-w (max max-w (car all-spaces)))
 	     (setq min-w (min min-w (car all-spaces)))))
-      (setq max-w (max max-w (1- (+ preallocated-workspaces min-w))))
+      (setq max-w (max max-w (1- (+ (length workspace-names) min-w))))
       (setq first-interesting-workspace min-w)
       (setq last-interesting-workspace max-w)
       (cons min-w max-w)))
@@ -460,26 +430,11 @@
 		  (setq current-workspace (1+ current-workspace))))))
     (call-hook 'workspace-state-change-hook))
 
-  ;; called when workspace with id SPACE may contain no windows
-  (define (ws-workspace-may-be-empty space)
-    (when (and delete-workspaces-when-empty (workspace-empty-p space))
-      ;; workspace is now empty
-      (let* ((limits (workspace-limits))
-	     (need-to-move (and (= space current-workspace)
-				(/= space (car limits))
-				(= space (cdr limits)))))
-	(remove-workspace space)
-	(normalize-indices)
-	(when need-to-move
-	  (select-workspace (1- current-workspace))))))
-
   ;; called when window W is destroyed
   (define (ws-remove-window w #!optional dont-hide)
     (let ((spaces (window-workspaces w)))
       (mapc (lambda (space)
 	      (window-remove-from-workspace w space)) spaces)
-      (mapc (lambda (space)
-	      (ws-workspace-may-be-empty space)) (sort spaces >))
       (when (and (not dont-hide) (windowp w))
 	(hide-window w))
       (mapc (lambda (space)
@@ -507,7 +462,6 @@
 	     (hide-window w))
 	    ((and (= new current-workspace) (not (window-get w 'iconified)))
 	     (show-window w)))
-      (ws-workspace-may-be-empty old)
       ;; the window may lose the focus when switching spaces
       (when (and was-focused (window-visible-p w))
 	(set-input-focus w))
@@ -622,17 +576,8 @@
 	    (mapc (lambda (space)
 		    (ws-add-window-to-space
 		     w (workspace-id-from-logical space limits))) spaces))
-	(let (parent)
-	  (if (and transients-on-parents-workspace
-		   (window-transient-p w)
-		   (setq parent (get-window-by-id (window-transient-p w)))
-		   (not (window-get parent 'sticky)))
-	      ;; put the window on its parents workspaces
-	      (mapc (lambda (space)
-		      (ws-add-window-to-space w space))
-		    (window-workspaces parent))
-	    ;; add it to the current workspace
-	    (ws-add-window-to-space w current-workspace))))))
+	;; add it to the current workspace
+	(ws-add-window-to-space w current-workspace))))
 
   ;; called from the unmap-notify hook
   (define (ws-window-unmapped w)
@@ -775,9 +720,9 @@
 	   w orig-space (1- (car limits)) was-focused)))))
 
   (define-command 'append-workspace-and-send append-workspace-and-send
-    #:spec "%W\nt" #:user-level 'expert)
+    #:spec "%W\nt" #:class 'advanced)
   (define-command 'prepend-workspace-and-send prepend-workspace-and-send
-    #:spec "%W\nt" #:user-level 'expert)
+    #:spec "%W\nt" #:class 'advanced)
 
   (define (merge-next-workspace)
     "Delete the current workspace. Its member windows are relocated to the next
@@ -790,9 +735,9 @@ previous workspace."
     (remove-workspace (1- current-workspace)))
 
   (define-command 'merge-next-workspace merge-next-workspace
-    #:user-level 'expert)
+    #:class 'advanced)
   (define-command 'merge-previous-workspace merge-previous-workspace
-    #:user-level 'expert)
+    #:class 'advanced)
 
   (define (insert-workspace-after)
     "Create a new workspace following the current workspace."
@@ -805,9 +750,9 @@ previous workspace."
     (select-workspace (- current-workspace 2)))
 
   (define-command 'insert-workspace-after insert-workspace-after
-    #:user-level 'expert)
+    #:class 'advanced)
   (define-command 'insert-workspace-before insert-workspace-before
-    #:user-level 'expert)
+    #:class 'advanced)
 
   (define (move-workspace-forwards #!optional count)
     "Move the current workspace one place to the right."
@@ -818,9 +763,9 @@ previous workspace."
     (move-workspace current-workspace (- (or count 1))))
 
   (define-command 'move-workspace-forwards move-workspace-forwards
-    #:user-level 'expert)
+    #:class 'advanced)
   (define-command 'move-workspace-backwards move-workspace-backwards
-    #:user-level 'expert)
+    #:class 'advanced)
 
   (define (select-workspace-from-first count)
     (select-workspace (workspace-id-from-logical count)))
@@ -859,7 +804,7 @@ previous workspace."
 	(setq first-interesting-workspace last-interesting-workspace))))
 
   (define-command 'delete-empty-workspaces delete-empty-workspaces
-    #:user-level 'expert)
+    #:class 'advanced)
 
   (define (delete-window-instance w)
     "Remove the copy of the window on the current workspace. If this is the
@@ -873,7 +818,6 @@ last instance remaining, then delete the actual window."
 	    (window-remove-from-workspace w space)
 	    (when (= space current-workspace)
 	      (hide-window w))
-	    (ws-workspace-may-be-empty space)
 	    (call-window-hook 'remove-from-workspace-hook w (list space))
 	    (call-hook 'workspace-state-change-hook))
 	(delete-window w))))
@@ -948,15 +892,13 @@ last instance remaining, then delete the actual window."
 
 ;;; configuration
 
-  (add-hook 'workspace-geometry-changed
-	    (lambda ()
-	      (setq preallocated-workspaces (car workspace-geometry))
-	      ;; XXX this isn't ideal, but it's better than getting
-	      ;; XXX workspaces that aren't deleted as the total
-	      ;; XXX number of workspaces is decreased...
-	      (setq first-interesting-workspace nil)
-	      (setq last-interesting-workspace nil)
-	      (call-hook 'workspace-state-change-hook)))
+  (define (workspace-names-changed)
+    ;; XXX this isn't ideal, but it's better than getting
+    ;; XXX workspaces that aren't deleted as the total
+    ;; XXX number of workspaces is decreased...
+    (setq first-interesting-workspace nil)
+    (setq last-interesting-workspace nil)
+    (call-hook 'workspace-state-change-hook))
 
 
 ;;; Initialisation

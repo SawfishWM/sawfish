@@ -37,9 +37,6 @@
 	  sawfish.wm.util.groups
 	  sawfish.wm.custom)
 
-  (defvar placement-modes nil
-    "List containing all symbols naming window placement modes.")
-
   (defcustom place-window-mode 'top-left
     "Method of placing windows: \\w"
     :type symbol
@@ -50,31 +47,44 @@
     :type symbol
     :group placement)
 
-  (defcustom ignore-program-positions nil
-    "Ignore program-specified window placements."
-    :type boolean
-    :group placement)
+  (defvar ignore-program-positions t
+    "Ignore program-specified window placements.")
+
+  (defvar placement-modes '()
+    "List of names of all placement modes.")
 
 
 ;;; utility functions
 
-  (define (define-placement-mode name fun)
+  ;; autoload handling
+  (define (getter symbol) (get symbol 'placement-mode))
+  (define (setter symbol value)
+    (unless (memq symbol placement-modes)
+      (setq placement-modes (nconc placement-modes (list symbol))))
+    (put symbol 'placement-mode value))
+  (define autoloader (make-autoloader getter setter))
+  (define placement-mode (autoloader-ref getter))
+
+  (define (apply-keys name #!key for-normal for-dialogs)
+    (define (add-to sym name)
+      (let ((current (custom-get-property sym ':options)))
+	(custom-set-property sym ':options
+			     (nconc (delq name current) (list name)))))
+    (when for-normal
+      (add-to 'place-window-mode name))
+    (when for-dialogs
+      (add-to 'place-transient-mode name)))
+
+  (define (define-placement-mode name fun . keys)
     "Define a new window placement mode called NAME (a symbol). The function
 FUN will be called with a single argument when a window should be placed using
 this mode. The single argument is the window to be placed."
-    (unless (memq name placement-modes)
-      (setq placement-modes (nconc placement-modes (list name)))
-      (custom-set-property 'place-window-mode ':options placement-modes)
-      (custom-set-property 'place-transient-mode ':options placement-modes))
-    (put name 'placement-mode fun))
+    (setter name fun)
+    (apply apply-keys name keys))
 
-  ;; autoload handling
-  (define (getter symbol) (get symbol 'placement-mode))
-
-  (define autoload-placement-mode
-    (make-autoloader getter define-placement-mode))
-
-  (define placement-mode (autoloader-ref getter))
+  (define (autoload-placement-mode name module . keys)
+    (autoloader name module)
+    (apply apply-keys name keys))
 
   (define (adjust-window-for-gravity w grav #!optional unadjust)
     (let ((coords (adjust-position-for-gravity
@@ -202,9 +212,9 @@ this mode. The single argument is the window to be placed."
 			     (cdr dims) (nth 1 screen) (nth 3 screen)))
       (move-window-to w (car coords) (cdr coords))))
 
-  (define-placement-mode 'randomly place-window-randomly)
-  (define-placement-mode 'interactively place-window-interactively)
-  (define-placement-mode 'centered place-window-centered)
-  (define-placement-mode 'centered-on-parent place-window-centered-on-parent)
-  (define-placement-mode 'under-pointer place-window-under-pointer)
-  (define-placement-mode 'none nop))
+  (define-placement-mode 'randomly place-window-randomly #:for-normal t #:for-dialogs t)
+  (define-placement-mode 'interactively place-window-interactively #:for-normal t)
+  (define-placement-mode 'centered place-window-centered #:for-normal t #:for-dialogs t)
+  (define-placement-mode 'centered-on-parent place-window-centered-on-parent #:for-dialogs t)
+  (define-placement-mode 'under-pointer place-window-under-pointer #:for-dialogs t)
+  (define-placement-mode 'none nop #:for-normal t #:for-dialogs t))

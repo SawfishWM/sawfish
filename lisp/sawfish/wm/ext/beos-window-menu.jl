@@ -36,12 +36,6 @@
 
   (define-structure-alias beos-window-menu sawfish.wm.ext.beos-window-menu)
 
-  (defcustom beos-window-menu-simplifies t
-    "The hierarchical window menu raises singleton submenus."
-    :type boolean
-    :group misc
-    :user-level expert)
-
   (define (abbreviate name #!optional len)
     (unless len (setq len 20))
     (if (> (length name) len)
@@ -145,9 +139,6 @@
 	    (rplaca rest (cadar rest)))
 	  (loop next rest)))))
 
-  (define (beos-window-menu)
-    (if beos-window-menu-simplifies
-	(simplify (make-menu))
-      (nreverse (make-menu))))
+  (define (beos-window-menu) (simplify (make-menu)))
 
   (setq window-menu beos-window-menu))

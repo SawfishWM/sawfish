@@ -209,7 +209,7 @@
 	  ((set) (lambda (x)
 		   (setq value x)
 		   (let ((idx (option-index options x)))
-		     (gtk-option-menu-set-history omenu idx)
+		     (gtk-option-menu-set-history omenu (or idx 0))
 		     (do ((i 0 (1+ i))
 			  (rest (gtk-container-get-children menu) (cdr rest)))
 			 ((null rest))

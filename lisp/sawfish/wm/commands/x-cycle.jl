@@ -78,6 +78,7 @@
 	  sawfish.wm.util.keymap
 	  sawfish.wm.commands
 	  sawfish.wm.custom
+	  sawfish.wm.focus
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
 	  sawfish.wm.util.stacking
@@ -99,15 +100,8 @@
   (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
 
   (defcustom cycle-show-window-names t
-    "Display window names while cycling through windows."
+    "Display window names and icons while cycling through windows."
     :group (focus cycle)
-    :type boolean)
-
-  (defcustom cycle-show-window-icons t
-    "Display window icons while cycling through windows."
-    :group (focus cycle)
-    :user-level expert
-    :depends cycle-show-window-names
     :type boolean)
 
   (defcustom cycle-include-iconified t
@@ -125,33 +119,12 @@
     :group (focus cycle)
     :type boolean)
 
-  (defcustom cycle-raise-windows t
-    "Raise windows while they're temporarily selected during cycling."
-    :group (focus cycle)
-    :user-level expert
-    :type boolean)
-
-  (defcustom cycle-warp-pointer t
-    "Warp the mouse pointer to windows as they're temporarily selected."
-    :group (focus cycle)
-    :type boolean)
-
-  (defcustom cycle-focus-windows t
-    "Focus windows when they're temporarily selected during cycling."
-    :group (focus cycle)
-    :user-level expert
-    :type boolean)
-
-  (defcustom cycle-disable-auto-raise nil
-    "Disable auto-raising while temporarily selecting windows."
-    :group (focus cycle)
-    :user-level expert
-    :type boolean)
+  (defvar cycle-raise-windows t
+    "Raise windows while they're temporarily selected during cycling.")
 
   (defcustom cycle-keymap (make-keymap)
     "Keymap containing bindings active only during window cycling operations."
     :group bindings
-    :user-level expert
     :type keymap)
 
 
@@ -184,22 +157,12 @@
       (nth (mod (+ current count) total) lst)))
 
   (define (cycle-display-message)
-    (let ((win (fluid x-cycle-current)))
-      (if cycle-show-window-icons
-	  (progn
-	    (require 'sawfish.wm.util.display-wininfo)
-	    (display-wininfo win))
-	(display-message (concat (and (window-get win 'iconified) ?[)
-				 (window-name win)
-				 (and (window-get win 'iconified) ?]))
-			 (list (cons 'head (current-head win)))))))
+    (require 'sawfish.wm.util.display-wininfo)
+    (display-wininfo (fluid x-cycle-current)))
 
   (define (remove-message)
-    (if cycle-show-window-icons
-	(progn
-	  (require 'sawfish.wm.util.display-wininfo)
-	  (display-wininfo nil))
-      (display-message nil)))
+    (require 'sawfish.wm.util.display-wininfo)
+    (display-wininfo nil))
 
   (define (cycle-next windows count)
     (fluid-set x-cycle-windows windows)
@@ -207,10 +170,8 @@
 				 nil
 			       current-workspace)
 			     cycle-include-iconified cycle-all-viewports)))
-      (unless (eq windows t)
-	(setq win (delete-if (lambda (w)
-			       (not (memq w windows))) win)))
-      (setq win (delete-if-not window-in-cycle-p win))
+      (setq win (delete-if (lambda (w)
+			     (not (memq w windows))) win))
       (unless win
 	(throw 'x-cycle-exit t))
       (if (fluid x-cycle-current)
@@ -241,11 +202,9 @@
       (when cycle-raise-windows
 	(fluid-set x-cycle-stacking (stacking-order))
 	(raise-window* win))
-      (when cycle-warp-pointer
-	(warp-cursor-to-window win))
       (when cycle-show-window-names
 	(cycle-display-message))
-      (when (and cycle-focus-windows (window-really-wants-input-p win))
+      (when (window-really-wants-input-p win)
 	(set-input-focus win))
       (allow-events 'sync-keyboard)))
 
@@ -306,7 +265,7 @@
 	       (eval-key-release-events t)
 	       (override-keymap (make-keymap))
 	       (focus-dont-push t)
-	       (disable-auto-raise cycle-disable-auto-raise)
+	       (disable-auto-raise t)
 	       (tooltips-enabled nil)
 	       (unmap-notify-hook (cons unmap-fun unmap-notify-hook))
 	       (enter-workspace-hook (cons enter-fun enter-workspace-hook))
@@ -366,18 +325,22 @@ Any extra arguments are passed to each call to define-command."
 	    (if (fluid x-cycle-active)
 		(cycle-next windows step)
 	      (cycle-begin windows step))))))
-    (apply define-cycle-command forward-name (command-body +1) rest)
-    (apply define-cycle-command reverse-name (command-body -1) rest))
+    (when forward-name
+      (apply define-cycle-command forward-name (command-body +1) rest))
+    (when reverse-name
+      (apply define-cycle-command reverse-name (command-body -1) rest)))
 
 
 ;;; commands
 
   (define-cycle-command-pair
-   'cycle-windows 'cycle-windows-backwards (lambda () t))
+   'cycle-windows 'cycle-windows-backwards
+   (lambda () (filter-windows window-in-cycle-p)))
 
   (define-cycle-command-pair
    'cycle-group 'cycle-group-backwards
-   (lambda (w) (windows-in-group w))
+   (lambda (w)
+     (delete-if-not window-in-cycle-p (windows-in-group w)))
    #:spec "%W")
 
   (define-cycle-command-pair
@@ -386,17 +349,19 @@ Any extra arguments are passed to each call to define-command."
      (when (string-match "^([^:]+)\\s*:" (window-name w))
        (let* ((prefix (expand-last-match "\\1"))
 	      (re (concat ?^ (quote-regexp prefix) "\\s*:")))
-	 (filter-windows
-	  (lambda (x)
-	    (string-match re (window-name x)))))))
+	 (delete-if-not window-in-cycle-p
+			(filter-windows
+			 (lambda (x)
+			   (string-match re (window-name x))))))))
    #:spec "%W")
 
   (define-cycle-command-pair
    'cycle-class 'cycle-class-backwards
    (lambda (w)
      (let ((class (window-class w)))
-       (filter-windows
-	(lambda (x) (equal (window-class x) class)))))
+       (delete-if-not window-in-cycle-p
+		      (filter-windows
+		       (lambda (x) (equal (window-class x) class))))))
    #:spec "%W")
 
   (define-cycle-command-pair
@@ -405,7 +370,13 @@ Any extra arguments are passed to each call to define-command."
      (if (fluid x-cycle-active)
 	 (fluid x-cycle-windows)
        (error "%s must be bound to a key event in the cycle keymap."
-	      this-command)))))
+	      this-command))))
+
+  (define-cycle-command-pair
+   'cycle-dock 'cycle-dock-backwards
+   (lambda ()
+     (delete-if-not (lambda (x) (window-in-cycle-p x #:ignore-cycle-skip t))
+		    (filter-windows dock-window-p)))))
 
 
 #| autoload cookies:
@@ -418,6 +389,8 @@ Any extra arguments are passed to each call to define-command."
 ###autoload (autoload-command 'cycle-prefix-backwards 'sawfish.wm.commands.x-cycle)
 ###autoload (autoload-command 'cycle-class 'sawfish.wm.commands.x-cycle)
 ###autoload (autoload-command 'cycle-class-backwards 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-dock 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-dock-backwards 'sawfish.wm.commands.x-cycle)
 
 |#
 

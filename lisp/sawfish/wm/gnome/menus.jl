@@ -147,10 +147,7 @@
 	       ;; create a menu item
 	       `(,(or name exec)
 		 (system ,(concat (if terminal
-				      (progn
-					(require 'sawfish.wm.commands.xterm)
-					;; XXX hope that this supports `-e'
-					(concat xterm-program " -e " exec))
+				      (concat "gnome-terminal -e " exec)
 				    exec) " &"))))))))
 
   (define (gnome-menu-read-order filename)

@@ -32,12 +32,9 @@
 	  sawfish.wm.commands
 	  sawfish.wm.custom)
 
-  (defcustom size-window-def-increment 16
+  (defvar size-window-def-increment 16
     "Default increment for size-window commands (when the window doesn't
-specify it's own increments)."
-    :group move
-    :user-level expert
-    :type (number 1))
+specify it's own increments).")
 
   (define (size-window w cols rows)
     "Increase the size of window W by COLS columns and ROWS rows (each of which

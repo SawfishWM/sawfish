@@ -27,6 +27,7 @@
 	    set-focus-mode
 	    focus-push-map
 	    focus-pop-map
+	    warp-pointer-if-necessary
 	    focus-within-click-event)
 
     (open rep
@@ -43,29 +44,27 @@
   (defvar focus-modes nil
     "List containing all symbols naming focus modes.")
 
-  (defcustom focus-mode 'enter-exit
+  (defcustom focus-mode 'click
     "When does the mouse pointer affect the input focus."
     :type symbol
-    :user-level novice
     :group focus
     :before-set (lambda () (focus-mode-changed 'before))
     :after-set (lambda () (focus-mode-changed 'after)))
 
   (defcustom focus-click-through t
-    "Does click-to-focus mode pass the click through to the window."
+    "Click-to-focus mode passes the click through to the application."
     :type boolean
-    :user-level expert
     :group focus)
 
   (defvar focus-dont-push nil
-    "When t, focusing a window doesn't change it's position in the stack of
+    "When true, focusing a window doesn't change it's position in the stack of
 most-recently focused windows.")
 
   (defvar focus-ignore-pointer-events nil
-    "When t, pointer in/out events don't cause focus changes.")
+    "When true, pointer in/out events don't cause focus changes.")
 
   (define focus-within-click-event (make-fluid nil)
-    "When non-nil, the current command is being called from within a
+    "When true, the current command is being called from within a
 click-to-focus button press event.")
 
 
@@ -127,6 +126,10 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	(window-put w 'keymap saved)
 	(window-put w 'focus-saved-keymap nil))))
 
+  ;; W is the focused window. Warp to it if a good idea
+  (define (warp-pointer-if-necessary #!optional (w (input-focus)))
+    (focus-invoke-mode w 'warp-if-necessary))
+
 
 ;;; modes
 
@@ -142,14 +145,21 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	   (set-input-focus nil)))
 	((enter-root)
 	 ;; ensure that any desktop window gets focused
-	 (set-input-focus w)))))
+	 (set-input-focus w))
+	((warp-if-necessary)
+	 (unless (eq (query-pointer-window) w)
+	   (warp-cursor-to-window w))))))
 
   (define-focus-mode 'enter-only
     (lambda (w action)
       (case action
 	((pointer-in)
 	 (when (window-really-wants-input-p w)
-	   (set-input-focus w))))))
+	   (set-input-focus w)))
+	((warp-if-necessary)
+	 (let ((current (query-pointer-window)))
+	   (unless (or (eq current w) (desktop-window-p current))
+	     (warp-cursor-to-window w)))))))
 
   (define (focus-click)
     (let ((w (current-event-window))

@@ -1,3 +1,153 @@
+2002-04-21  John Harper  <jsh@unfactored.org>
+
+	* Merged changes from HEAD:
+
+	2002-04-21  John Harper  <jsh@unfactored.org>
+
+	More reorganization. Removed all mentions of viewports and
+	viewport commands from the configurator, simplified workspace
+	configuration, etc..
+
+	* sawfish/wm/workspace.jl, sawfish/wm/viewport.jl,
+	sawfish/wm/placement.jl, sawfish/wm/autoload.jl: 
+
+	* sawfish/wm/commands/xterm.jl,
+	sawfish/wm/commands/viewport-linear.jl,
+	sawfish/wm/commands/viewport-extras.jl,
+	sawfish/wm/commands/move-resize.jl,
+	sawfish/wm/commands/groups.jl: 
+
+	* sawfish/wm/ext/shade-hover.jl,
+	sawfish/wm/ext/hide-dialogs.jl, sawfish/wm/ext/edge-flip.jl,
+	sawfish/wm/ext/auto-raise.jl: 
+
+	* sawfish/wm/gnome/menus.jl, sawfish/wm/gnome/integration.jl: 
+
+	* sawfish/wm/state/iconify.jl: 
+
+	* sawfish/wm/util/compat.jl, sawfish/wm/util/autoloader.jl: 
+
+	2002-04-20  John Harper  <jsh@unfactored.org>
+
+	More slash and burning. Removed user levels (a failed
+	experiment). Removed more options, etc
+
+	* sawfish/wm/workspace.jl, sawfish/wm/windows.jl,
+	sawfish/wm/stacking.jl, sawfish/wm/placement.jl,
+	sawfish/wm/keymaps.jl, sawfish/wm/frames.jl,
+	sawfish/wm/focus.jl, sawfish/wm/custom.jl,
+	sawfish/wm/commands.jl, sawfish/wm/autoload.jl: 
+
+	* sawfish/wm/commands/xterm.jl, sawfish/wm/commands/x-cycle.jl,
+	sawfish/wm/commands/slide-window.jl,
+	sawfish/wm/commands/size-window.jl,
+	sawfish/wm/commands/raise-commands.jl,
+	sawfish/wm/commands/move-resize.jl,
+	sawfish/wm/commands/groups.jl, sawfish/wm/commands/describe.jl:
+
+	* sawfish/wm/ext/window-history.jl, sawfish/wm/ext/tooltips.jl,
+	sawfish/wm/ext/shade-hover.jl, sawfish/wm/ext/error-handler.jl,
+	sawfish/wm/ext/edge-flip.jl, sawfish/wm/ext/auto-raise.jl,
+	sawfish/wm/ext/audio-events.jl, sawfish/wm/ext/3d-hack.jl: 
+
+	* sawfish/wm/placement/top-left.jl,
+	sawfish/wm/placement/smart.jl: 
+
+	* sawfish/wm/state/transient.jl, sawfish/wm/state/iconify.jl: 
+
+	* sawfish/wm/util/play-audio.jl, sawfish/wm/util/nokogiri.jl,
+	sawfish/wm/util/display-window.jl, sawfish/wm/util/compat.jl: 
+
+	2002-04-20  John Harper  <jsh@unfactored.org>
+
+	Removed a lot of dead wood. Deleted some options altogether,
+	made a lot more into standard variables (i.e. they can still be
+	set using setq, but don't appear in the configurator). Also got
+	rid of all warp-pointer type options, this is now part of the
+	focus mode -- click to focus doesn't warp, focus follows mouse
+	does
+
+	Still to do: remove user levels, more pruning of move-resize
+	and workspace groups
+
+	* sawfish/wm/workspace.jl, sawfish/wm/windows.jl,
+	sawfish/wm/viewport.jl, sawfish/wm/stacking.jl,
+	sawfish/wm/menus.jl, sawfish/wm/keymaps.jl,
+	sawfish/wm/frames.jl, sawfish/wm/focus.jl,
+	sawfish/wm/defaults.jl, sawfish/wm/custom.jl,
+	sawfish/wm/custom-defaults.jl, sawfish/wm/autoload.jl: 
+
+	* sawfish/wm/commands/xterm.jl, sawfish/wm/commands/x-cycle.jl,
+	sawfish/wm/commands/move-resize.jl,
+	sawfish/wm/commands/grow-pack.jl: 
+
+	* sawfish/wm/ext/window-history.jl, sawfish/wm/ext/tooltips.jl,
+	sawfish/wm/ext/error-handler.jl, sawfish/wm/ext/edge-flip.jl,
+	sawfish/wm/ext/beos-window-menu.jl,
+	sawfish/wm/ext/auto-raise.jl, sawfish/wm/ext/audio-events.jl: 
+
+	* sawfish/wm/state/transient.jl, sawfish/wm/state/shading.jl,
+	sawfish/wm/state/maximize.jl, sawfish/wm/state/iconify.jl,
+	sawfish/wm/state/configure.jl: 
+
+	* sawfish/wm/util/stacking.jl, sawfish/wm/util/nokogiri.jl,
+	sawfish/wm/util/groups.jl, sawfish/wm/util/display-window.jl,
+	sawfish/wm/util/compat.jl: 
+
+	2002-04-14  Kai Groﬂjohann  <Kai.Grossjohann@CS.Uni-Dortmund.DE>
+
+	* sawfish/wm/commands/grow-pack.jl (grow-pack): New group, parent
+	is `misc'.
+	(grow-is-maximize, pack-warp-pointer, grow-pack-bump-obscured)
+	(grow-pack-bump-other-depth, grow-pack-bump-ignored): Use the new
+	group for the customization options.
+	Suggestion from John Harper.
+
+	2002-04-11  Kai Groﬂjohann  <Kai.Grossjohann@CS.Uni-Dortmund.DE>
+
+	* sawfish/wm/commands/grow-pack.jl (grow-pack-bump-ignored): New
+	user option.  Suggestion from Markus Holmberg.
+	(bump-distance): Optionally ignore ignored windows.
+
+	2002-04-18  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/ext/match-window.jl: accept #f for false in
+	options. Adapted from merlin <merlin@merlin.org>
+
+	* sawfish/wm/ext/edge-flip.jl (edge-flip-warp-pointer): made
+	the description a bit clearer (hopefully). #77668
+
+	* sawfish/wm/windows.jl (mark-window-as-dock): set
+	fixed-position property. Should fix #78582
+
+	2002-04-10  John Harper  <jsh@unfactored.org>
+
+	Fixed #70071:
+
+	* sawfish/wm/windows.jl (mark-window-as-dock, dock-window-p):
+	new functions
+	* sawfish/wm/state/gnome.jl (gnome-window-class-hacks): call
+	mark-window-as-dock
+	* sawfish/wm/state/wm-spec.jl (wm-class-hacks, DOCK type): call
+	mark-window-as-dock
+	* sawfish/wm/commands/x-cycle.jl (cycle-dock,
+	cycle-dock-backwards): new commands. Also made it so that the
+	selection functions have to call window-in-cycle-p themselves
+	* sawfish/wm/windows.jl (window-in-cycle-p): new keyword arg
+	IGNORE-CYCLE-skip
+
+	2002-04-02  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/state/wm-spec.jl (client-message-handler): before
+	doing move-resize requests, fetch and save a timestamp so that
+	grabs don't fail. Fixes #77041
+
+	2002-03-24  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/animation/outline.jl: add error handling around
+	calls to the window-outline drawing code. Ungrab the server on
+	an error. Band-aid for #75984
+
 2002-04-12  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/commands/help.jl, sawfish/wm/commands/gnome.jl:

@@ -142,13 +142,13 @@
 
   ;;###autoload
   (define-command 'move-group-to-current-viewport
-    move-group-to-current-viewport #:spec "%W")
+    move-group-to-current-viewport #:spec "%W" #:class 'viewport)
 
   ;;###autoload
-  (define-command 'move-group-left move-group-left #:spec "%W")
-  (define-command 'move-group-right move-group-right #:spec "%W")
-  (define-command 'move-group-up move-group-up #:spec "%W")
-  (define-command 'move-group-down move-group-down #:spec "%W")
+  (define-command 'move-group-left move-group-left #:spec "%W" #:class 'viewport)
+  (define-command 'move-group-right move-group-right #:spec "%W" #:class 'viewport)
+  (define-command 'move-group-up move-group-up #:spec "%W" #:class 'viewport)
+  (define-command 'move-group-down move-group-down #:spec "%W" #:class 'viewport)
 
   ;; stacking
 
@@ -160,11 +160,11 @@
 
   ;;###autoload
   (define-command 'raise-group raise-group
-    #:spec "%W" #:user-level 'expert)
+    #:spec "%W" #:class 'advanced)
   (define-command 'lower-group lower-group
-    #:spec "%W" #:user-level 'expert)
+    #:spec "%W" #:class 'advanced)
   (define-command 'raise-lower-group raise-lower-group
-    #:spec "%W" #:user-level 'expert)
+    #:spec "%W" #:class 'advanced)
   (define-command 'raise-group-depth raise-group-depth #:spec "%W")
   (define-command 'lower-group-depth lower-group-depth #:spec "%W")
 

@@ -48,12 +48,11 @@
   (defcustom edge-flip-enabled nil
     "Select the next desktop when the pointer hits screen edge."
     :type boolean
-    :user-level novice
     :require sawfish.wm.ext.edge-flip
     :group (workspace edge-flip)
     :after-set (lambda () (edge-flip-enable)))
 
-  (defcustom edge-flip-type 'viewport
+  (defcustom edge-flip-type 'workspace
     "Hitting the screen edge selects the next: \\w"
     :type (choice viewport workspace)
     :depends edge-flip-enabled
@@ -66,19 +65,8 @@
     :group (workspace edge-flip)
     :after-set (lambda () (edge-flip-enable)))
 
-  (defcustom edge-flip-delay 250
-    "Milliseconds to delay before flipping: \\w"
-    :type (number 0 1000)
-    :depends edge-flip-enabled
-    :group (workspace edge-flip))
-
-  (defcustom edge-flip-warp-pointer t
-    "Warp pointer to opposite screen edge when flipping."
-    :type boolean
-    :user-level expert
-    :depends edge-flip-enabled
-    :group (workspace edge-flip)
-    :after-set (lambda () (edge-flip-enable)))
+  (defvar edge-flip-delay 250
+    "Milliseconds to delay before edge flipping.")
 
   (define ef-current-edge nil)
   (define ef-timer nil)
@@ -132,8 +120,8 @@
 		  ((eq edge 'bottom)
 		   (when (move-viewport 0 1)
 		     (rplacd ptr 1))))
-	    (when edge-flip-warp-pointer
-	      (warp-cursor (car ptr) (cdr ptr))))
+	    ;; always warp the pointer to keep it logically static
+	    (warp-cursor (car ptr) (cdr ptr)))
 	(let ((orig current-workspace))
 	  (cond ((eq edge 'left)
 		 (previous-workspace 1)
@@ -147,8 +135,7 @@
 		((eq edge 'bottom)
 		 (next-workspace 1)
 		 (rplacd ptr 1)))
-	  (unless (or (= current-workspace orig)
-		      (not edge-flip-warp-pointer))
+	  (unless (= current-workspace orig)
 	    (warp-cursor (car ptr) (cdr ptr)))))
       (call-hook 'after-edge-flip-hook)))
 
@@ -207,5 +194,3 @@
 
   (unless batch-mode
     (edge-flip-enable)))
-
-;;;###autoload (defgroup edge-flip "Edge Flipping" :group workspace :require sawfish.wm.ext.edge-flip)

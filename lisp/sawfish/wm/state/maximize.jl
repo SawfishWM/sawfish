@@ -69,33 +69,22 @@
   ;; This sets the window property `unmaximized-geometry' of each
   ;; currently maximize window to `(X Y W H)', the saved geometry.
 
-  (defcustom maximize-always-expands nil
-    "Maximizing a window in one dimension must increase the size of that dimension."
-    :group (min-max maximize)
-    :user-level expert
-    :type boolean)
+  (defvar maximize-always-expands nil
+    "Maximizing a window in one dimension must increase the size of that dimension.")
 
-  (defcustom maximize-raises t
-    "Raise windows when they are maximized."
-    :group (min-max maximize)
-    :type boolean)
+  (defvar maximize-raises t
+    "Raise windows when they are maximized.")
 
-  (defcustom maximize-ignore-when-filling t
-    "Let unmanaged windows be overlapped when filling windows."
-    :group (min-max maximize)
-    :user-level expert
-    :type boolean)
+  (defvar maximize-ignore-when-filling t
+    "Let unmanaged windows be overlapped when filling windows.")
 
-  (defcustom maximize-avoid-avoided t
-    "Don't cover `avoided' windows when maximizing."
-    :group (min-max maximize)
-    :user-level expert
-    :type boolean)
+  (defvar maximize-avoid-avoided t
+    "Don't cover `avoided' windows when maximizing.")
 
   (defcustom move-lock-when-maximized t
     "Lock position and size while windows are maximized."
     :type boolean
-    :group (min-max maximize))
+    :group min-max)
   
   ;; called when a window is maximized, args (W #!optional DIRECTION)
   (defvar window-maximized-hook nil)

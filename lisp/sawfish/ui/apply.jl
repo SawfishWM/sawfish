@@ -54,7 +54,7 @@
 
   (define (slot-change-handlers slot) (table-ref change-handler-table slot))
 
-  (defvar *nokogiri-apply-immediately* nil)
+  (defvar *nokogiri-apply-immediately* t)
 
 ;;; applying changes
 
@@ -132,4 +132,4 @@
   (define (changes-to-apply-p) changed-slots)
 
   (define (changes-to-revert-p)
-    (> (length changed-slots-ever) (length changed-slots))))
+    (> (length changed-slots-ever) 0)))

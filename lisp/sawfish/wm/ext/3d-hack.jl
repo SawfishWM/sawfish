@@ -292,4 +292,4 @@
 	    (3d-destroy))))))
 
   ;;###autoload
-  (define-command '3d-hack 3d-hack #:user-level 'expert))
+  (define-command '3d-hack 3d-hack #:class 'advanced))

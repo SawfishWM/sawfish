@@ -28,6 +28,7 @@
     (open rep
 	  rep.system
 	  sawfish.wm.misc
+	  sawfish.wm.events
 	  sawfish.wm.windows
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
@@ -250,7 +251,9 @@
 	       (window-put w 'sticky t)
 	       (window-put w 'sticky-viewport t)
 	       ;; XXX see gnome.jl for why this is needed..
-	       (window-put w 'placed t))
+	       (window-put w 'placed t)
+	       ;; probably superfluous
+	       (mark-window-as-dock w))
 	      ((string= (aref class 1) "gmc-desktop-icon")
 	       (window-put w 'never-focus t)
 	       (window-put w 'never-iconify t)
@@ -328,8 +331,7 @@
    (lambda (w)
      (require 'sawfish.wm.stacking)
      (set-window-depth w dock-layer)
-     (window-put w 'window-list-skip t)
-     (window-put w 'cycle-skip t)))
+     (mark-window-as-dock w)))
 
   (define-wm-spec-window-type
    '_NET_WM_WINDOW_TYPE_DIALOG
@@ -418,6 +420,8 @@
 	 (when (and (windowp w) (window-mapped-p w))
 	   (require 'sawfish.wm.commands.move-resize)
 	   (let ((mode (aref data 2)))
+	     ;; don't want grabs failing, sigh
+	     (x-server-timestamp t t)
 	     (if (eq mode _NET_WM_MOVERESIZE_MOVE)
 		 (move-window-interactively w)
 	       (let ((move-resize-moving-edges

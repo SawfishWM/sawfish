@@ -131,15 +131,13 @@
 		(props (cdr sub) (cdr props)))
 	       ((null props))
 	     (let* ((prop (car props))
-		    (is-boolean (eq (cadr prop) 'boolean))
 		    (widget (make-widget
-			     (if is-boolean
-				 `(boolean ,(beautify-symbol-name (car prop)))
+			     (if (eq (cadr prop) 'boolean)
+				 `(optional scheme-boolean)
 			       `(optional ,(cadr prop))))))
-	       (unless is-boolean
-		 (gtk-table-attach-defaults
-		  table (make-left-label (beautify-symbol-name (car prop)))
-		  0 1 i (1+ i)))
+	       (gtk-table-attach-defaults
+		table (make-left-label (beautify-symbol-name (car prop)))
+		0 1 i (1+ i))
 	       (gtk-table-attach-defaults
 		table (widget-gtk-widget widget) 1 2 i (1+ i))
 	       (setq widgets (cons (cons (car prop) widget) widgets))))
@@ -206,9 +204,11 @@
       (if (stringp (cdr match)) (cdr match) "?"))
 
     (define (print-action action)
-      (if (eq (cdr action) t)
-	  (format nil "%s" (car action))
-	(format nil "%s=%s" (car action) (cdr action))))
+      (cond ((memq (cdr action) '(t #t))
+	     (format nil "%s" (car action)))
+	    ((eq (cdr action) '#f)
+	     (format nil "%s %s" (_ "not") (car action)))
+	    (t (format nil "%s=%s" (car action) (cdr action)))))
 
     (define (print x)
       (list (mapconcat print-matcher (car x) ", ")

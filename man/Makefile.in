@@ -58,14 +58,14 @@ install : sawfish.info installdirs
 	for f in sawfish.info*; do \
  	  $(INSTALL_DATA) $$f $(DESTDIR)$(infodir); \
 	done
-	-install-info sawfish.info $(DESTDIR)$(infodir)/dir
+	-install-info --info-dir=$(DESTDIR)$(infodir) sawfish.info
 
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(infodir)
 
 uninstall :
 	rm -f $(DESTDIR)$(infodir)/sawfish.info*
-	-install-info --delete sawfish.info $(DESTDIR)$(infodir)/dir
+	-install-info --remove --info-dir=$(DESTDIR)$(infodir) sawfish.info
 
 clean :
 	rm -f *~ sawfish.info* sawfish.?? sawfish.???

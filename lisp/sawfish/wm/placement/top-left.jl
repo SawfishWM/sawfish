@@ -127,4 +127,4 @@
 	  ((placement-mode 'randomly) w)))))
 
   ;;###autoload
-  (define-placement-mode 'top-left place-window-top-left))
+  (define-placement-mode 'top-left place-window-top-left #:for-normal t))
