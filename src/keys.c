@@ -480,7 +480,7 @@ static repv
 lookup_event_binding (u_long code, u_long mods, repv context_map)
 {
     Lisp_Window *w = 0;
-    if (current_x_event && mods & EV_TYPE_MOUSE)
+    if (current_x_event && (mods & EV_TYPE_MOUSE))
     {
 	/* If a mouse event, look for bindings in the window that
 	   the button was pressed in, not where the input focus is. */
