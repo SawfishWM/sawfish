@@ -30,6 +30,7 @@
 (require 'transient)
 (require 'frames)
 (require 'workspace)
+(require 'stacking)
 (require 'place-window)
 (require 'mwm)
 (require 'open-look)
