@@ -89,6 +89,15 @@
 (unless (or batch-mode default-frame-style)
   (set-frame-style fallback-frame-style))
 
+;; might it be useful to load the GNOME support?
+(unless batch-mode
+  (catch 'out
+    (mapc #'(lambda (prop)
+	      (when (string-match "^GNOME_" (symbol-name prop))
+		(require 'gnome)
+		(throw 'out t)))
+	  (list-x-properties 'root))))
+
 ;; now connect with the session manager; gsm requires that apps don't
 ;; connect until they're ready to handle the later priority levels
 (let
