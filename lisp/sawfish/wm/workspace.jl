@@ -83,6 +83,11 @@
   :type boolean
   :group misc)
 
+(defcustom unshade-selected-windows nil
+  "Unshade selected windows."
+  :type boolean
+  :group misc)
+
 (defcustom warp-to-selected-windows t
   "Warp the mouse pointer to selected windows."
   :type boolean
@@ -215,7 +220,7 @@
 
 (defun ws-workspace-windows (space &optional include-iconified)
   (filter #'(lambda (w)
-	      (and (= (window-get w 'workspace) space)
+	      (and (equal (window-get w 'workspace) space)
 		   (or include-iconified
 		       (not (window-get w 'iconified)))))
 	  (managed-windows)))
@@ -513,7 +518,7 @@ previous workspace."
 	(when (and space (not (= space current-workspace)))
 	  (ws-switch-workspace space))
 	(uniconify-window w)
-	(when (window-get w 'shaded)
+	(when (and unshade-selected-windows (window-get w 'shaded))
 	  (unshade-window w))
 	(when raise-selected-windows
 	  (raise-window w))
@@ -560,7 +565,6 @@ all workspaces."
 
 (unless (or batch-mode (memq 'ws-add-window add-window-hook))
   (add-hook 'add-window-hook 'ws-add-window t)
-  (add-hook 'destroy-notify-hook 'ws-remove-window t)
   (add-hook 'map-notify-hook 'ws-window-mapped t)
   (add-hook 'client-message-hook 'ws-client-msg-handler t)
   (add-hook 'before-add-window-hook 'ws-honour-client-state)
