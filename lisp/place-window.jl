@@ -23,13 +23,11 @@
 
 (defcustom place-window-mode 'random
   "Method of selecting the position of a freshly-mapped window."
-; :type (set random interactive smart none)
   :type (set random interactive none)
   :group placement)
 
 (defcustom place-transient-mode 'random
   "Method of selecting the position of a freshly-mapped transient window."
-; :type (set random interactive smart none)
   :type (set random interactive none)
   :group placement)
 
@@ -37,6 +35,22 @@
   "Ignore program-specified window positions."
   :type boolean
   :group placement)
+
+(defun place-window-randomly (w)
+  (move-window-to w (random (max 0 (- (screen-width)
+				      (car (window-frame-dimensions w)))))
+		  (random (max 0 (- (screen-height)
+				    (cdr (window-frame-dimensions w)))))))
+
+(defun place-window-interactively (w)
+  (require 'move-resize)
+  (let
+      ((move-outline-mode nil)
+       (ptr (query-pointer))
+       (dims (window-frame-dimensions w)))
+    (move-window-to w (- (car ptr) (/ (car dims) 2))
+		    (- (cdr ptr) (/ (cdr dims) 2)))
+    (move-window-interactively w)))
 
 ;; called from the place-window-hook
 (defun place-window (w)
@@ -51,25 +65,10 @@
 		     (if (window-transient-p w)
 			 place-transient-mode
 		       place-window-mode))))
-	(cond ((eq mode 'smart)
-	       ;; XXX implement this..
-	       (setq mode 'random))
-	      ((eq mode 'interactive)
-	       (require 'move-resize)
-	       (let
-		   ((move-outline-mode nil)
-		    (ptr (query-pointer))
-		    (dims (window-frame-dimensions w)))
-		 (move-window-to w (- (car ptr) (/ (car dims) 2))
-				 (- (cdr ptr) (/ (cdr dims) 2)))
-		 (move-window-interactively w)))
+	(cond ((eq mode 'interactive)
+	       (place-window-interactively w))
 	      ((eq mode 'random)
-	       (move-window-to
-		w
-		(random (max 0 (- (screen-width)
-				  (car (window-frame-dimensions w)))))
-		(random (max 0 (- (screen-height)
-				  (cdr (window-frame-dimensions w))))))))
+	       (place-window-randomly w)))
 	t))))
 
 (add-hook 'place-window-hook 'place-window t)
