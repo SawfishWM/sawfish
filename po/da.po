@@ -1,27 +1,28 @@
-# Translation of Sawfish strings
+# Danish translation of Sawfish strings.
 # Copyright (C) 1999, 2000, 2001 Free Software Foundation, Inc.
 # Kenneth Christiansen <kenneth@gnome.org>, 1999, 2000.
 # Birger Langkjer <birger.langkjer@image.dk>, 1999.
 # Keld Simonsen <keld@dkuug.dk>, 2000
 # Ole Laursen <olau@hardworking.dk>, 2001.
 #
-# Kontakt dansk@klid.dk før du ændrer i denne fil.
-#
 # Konventioner:
-#   viewport -> visningsområde
-#   workspace -> arbejdsområde (kan indeholde flere visningsområder)
-#   delete (a window) -> fjerne (et vindue)
-#   destroy (a window) -> dræbe (et vindue)
-#   stacking -> stabling
-#   keymap -> tastekombinationsliste
-#   iconify -> minimere (ikke ikonificere da vinduerne ikke bliver til ikoner)
-#   pass through click -> videresend klik
+#
+# viewport -> visningsområde
+# workspace -> arbejdsområde (kan indeholde flere visningsområder)
+# delete (a window) -> fjerne (et vindue)
+# destroy (a window) -> dræbe (et vindue)
+# stacking -> stabling
+# keymap -> tastekombinationsliste
+# iconify -> minimere (ikke ikonificere da vinduerne ikke bliver til ikoner)
+# pass through click -> videresend klik
+# transient -> midlertidigt [under]vindue
+# dialog -> meddelelsesvindue
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37\n"
 "POT-Creation-Date: 2001-06-04 13:43-0700\n"
-"PO-Revision-Date: 2001-07-12 12:10+02:00\n"
+"PO-Revision-Date: 2001-08-27 01:04+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish/Dansk <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +39,7 @@ msgstr "Sawfish håndterer dine vinduer intensivt."
 
 #. ../scripts/sawfish-about.jl
 msgid "Sawfish homepage"
-msgstr "Sawfish netsted"
+msgstr "Sawfish's hjemmeside"
 
 #. ../themer/themer.in
 msgid "Reload themes in window manager after saving."
@@ -915,7 +916,7 @@ msgstr "Metode til placering af vinduer: \\w"
 
 #. ../lisp/sawfish/wm/placement.jl
 msgid "Method of placing dialog windows: \\w"
-msgstr "Metode til placering af dialogvinduer: \\w"
+msgstr "Metode til placering af meddelelsesvinduer: \\w"
 
 #. ../lisp/sawfish/wm/placement.jl
 msgid "Ignore program-specified window placements."
@@ -1200,7 +1201,7 @@ msgstr "Behold tomme arbejdsområder i skrivebordsguiden."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Dialogs appear on the same workspace as their application."
-msgstr "Dialoger fremkommer på samme arbejdsområde som deres program."
+msgstr "Meddelelsesvinduer fremkommer på samme arbejdsområde som deres program."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace names"
@@ -2633,11 +2634,11 @@ msgstr "Opdatér Gnome menuer"
 
 #. ../lisp/sawfish/wm/placement/smart.jl
 msgid ""
-"Try to leave at least this many pixels between window edges in "
-"first/best-fit."
+"Try to leave at least this many pixels between window edges in first/best-"
+"fit."
 msgstr ""
-"Forsøg at sørge for mindst dette antal punkter mellem vindueskanter i "
-"første/bedste-tilpasning."
+"Forsøg at sørge for mindst dette antal punkter mellem vindueskanter i første/"
+"bedste-tilpasning."
 
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
@@ -2993,11 +2994,11 @@ msgstr "Giv fokus til programvinduer når de vises første gang."
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Dialog windows inherit the focus from their parent."
-msgstr "Dialogvinduer arver fokus fra deres ophav."
+msgstr "Meddelelsesvinduer arver fokus fra deres ophav."
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Decorate dialog windows similarly to application windows."
-msgstr "Dekorér dialogvinduer ligesom programvinduer."
+msgstr "Dekorér meddelelsesvinduer på samme måde som programvinduer."
 
 # se næste tekst for forklaring
 #. ../lisp/sawfish/wm/state/transient.jl
@@ -3162,8 +3163,8 @@ msgid ""
 "The program used to play audio samples. If unset, built-in support for ESD "
 "is used."
 msgstr ""
-"Program til lydafspilning. Hvis ikke angivet, benyttes indbygget "
-"ESD-understøttelse "
+"Program til lydafspilning. Hvis ikke angivet, benyttes indbygget ESD-"
+"understøttelse "
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
