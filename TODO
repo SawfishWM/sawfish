@@ -26,6 +26,10 @@ Outstanding bugs
 General tasks
 =============
 
+  + Handle multiple-screen displays
+
+    What are the issues? Multiple root windows, and..?
+
   + Preserve workspace information during restart (using GNOME hints?)
 
   + When no workspaces exist the workspace submenu is empty; is this a
@@ -189,3 +193,28 @@ Long term ideas
     This way you should be able to drag from both netscape and the file
     manager to activate a theme
 
+  - Write a "GTK" frame style
+
+    This would involve parsing a gtkrc file then trying to apply the
+    settings to the window frame.
+
+    Pixmap/color based rc files would be pretty straightforward (would
+    require a set of gtk-like window-button pixmaps), but how could
+    engine-based gtk themes be handled? What's the engine API? Could it
+    be (ab)used by the window manager..?
+
+    This may be best done by a separate plugin, there's probably a yacc
+    grammar for gtkrc files lying around somewhere..?
+
+    Looking at the gtk code there's no grammar, just a custom built
+    parser. Also the engines need to be linked into the standard gtk
+    environment (gtk/gdk/glib) and all drawing is done through gdk
+
+    So maybe ignore the engines (unless it's possible to use some kind
+    of multi-process architecture: the wm communicates to the gtk
+    process that it would like a particular frame-part window drawn),
+    just parse the rc files for the default style (font, colours, and
+    any background pixmaps)
+
+    Note that all this stuff would require the "custom frame parts"
+    idea above to be implemented
