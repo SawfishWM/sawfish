@@ -603,6 +603,29 @@ managed-windows
     return list;
 }
 
+DEFUN("stacking-order", Fstacking_order, Sstacking_order, (void), rep_Subr0) /*
+::doc:Sstacking-order::
+stacking-order
+::end:: */
+{
+    Window root, parent, *children;
+    u_int nchildren;
+    if (XQueryTree (dpy, root_window, &root, &parent, &children, &nchildren))
+    {
+	int i;
+	repv ret = Qnil;
+	for (i = 0; i < nchildren; i++)
+	{
+	    Lisp_Window *w = find_window_by_id (children[i]);
+	    if (w != 0)
+		ret = Fcons (rep_VAL(w), ret);
+	}
+	return ret;
+    }
+    else
+	return Qnil;
+}
+
 DEFUN("window-visibility", Fwindow_visibility, Swindow_visibility,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-visibility::
@@ -918,6 +941,7 @@ windows_init (void)
     rep_ADD_SUBR(Sset_input_focus);
     rep_ADD_SUBR(Sinput_focus);
     rep_ADD_SUBR(Smanaged_windows);
+    rep_ADD_SUBR(Sstacking_order);
     rep_ADD_SUBR(Swindow_visibility);
     rep_ADD_SUBR(Swindow_transient_p);
     rep_ADD_SUBR(Swindow_shaped_p);
