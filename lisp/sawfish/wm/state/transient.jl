@@ -41,6 +41,7 @@
 	  sawfish.wm.stacking
 	  sawfish.wm.viewport
 	  sawfish.wm.util.window-order
+	  sawfish.wm.util.groups
 	  sawfish.wm.frames)
 
   (defcustom focus-windows-when-mapped nil
@@ -186,7 +187,12 @@ the level of any transient windows it has."
   (define (transient-unmap-window w)
     (when (eq (input-focus) w)
       (let ((parent (and (window-transient-p w)
-			 (get-window-by-id (window-transient-p w)))))
+			 ;; for transient windows, look for the most
+			 ;; recently focused window in its group, or
+			 ;; fall back to its parent window
+			 (or (window-order-most-recent
+			      #:windows (delq w (windows-in-group w)))
+			     (get-window-by-id (window-transient-p w))))))
 	(when (or (not parent)
 		  (not (window-mapped-p parent))
 		  (not (window-visible-p parent))

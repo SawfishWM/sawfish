@@ -1,3 +1,14 @@
+2000-10-30  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/transient.jl (transient-unmap-window): when
+	unmapping a transient, before deciding to focus on its parent,
+	look for the most recently focused window in the same group.
+	This may well be more intuitive in some circumstances
+
+	* sawfish/wm/util/window-order.jl (window-order-most-recent):
+	new keyword arg WINDOWS, a list of windows to restrict the
+	returned value to
+
 2000-10-29  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/placement/smart.jl (sp-make-grid): don't add root

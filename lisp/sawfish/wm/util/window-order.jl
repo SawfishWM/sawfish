@@ -83,11 +83,16 @@
 	      (setq i (1+ i))) order)
       (setq window-order-highest i)))
 
-  (define (window-order-most-recent)
-    (let ((windows (window-order current-workspace nil)))
-      (while (and windows (window-get (car windows) 'never-focus))
-	(setq windows (cdr windows)))
-      (car windows)))
+  (define (window-order-most-recent #!key (windows 0))
+    "Return the most-recently focused window in the current workspace. If the
+WINDOWS argument is given it should be a list of windows, in this case the
+function will restrict its search to the elements of this list."
+    (let loop ((rest (window-order current-workspace nil)))
+      (cond ((null rest) nil)
+	    ((or (window-get (car rest) 'never-focus)
+		 (and (listp windows) (not (memq (car rest) windows))))
+	     (loop (cdr rest)))
+	    (t (car rest)))))
 
   (define (window-order-focus-most-recent)
     (set-input-focus (window-order-most-recent)))
