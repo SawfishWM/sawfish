@@ -1,5 +1,19 @@
 2000-10-24  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/util/window-order.jl: made the `order' property
+	workspace-local once more (there's a remark earlier in this
+	ChangeLog about that being non-intuitive, but it's better that
+	way for sticky windows)
+	(window-order-pop-low-sticky-windows): removed this hack, it's
+	not required now order is workspace-local
+
+	* sawfish/wm/workspace.jl (select-workspace): swap-in data for
+	all sticky windows as well as normal windows in the new
+	workspace
+
+	* sawfish/wm/ext/match-window.jl: fixed :require fields to use
+	sawfish.wm.ext.match-window instead of just match-window
+
 	* sawfish/wm/focus.jl (focus-enter-fun, focus-leave-fun):
 	accept an extra MODE parameter		
 	(enter-exit mode): pointer-leave events only cause focus to be
