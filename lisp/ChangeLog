@@ -1,3 +1,18 @@
+2000-01-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* window-order.jl (window-order-focus-most-recent): ignore
+	windows with their `never-focus' property set
+
+	* ignore-window.jl (toggle-window-never-focus): new command
+	* menus.jl (window-ops-toggle-menu): added `Focusable' item
+
+	* edge-flip.jl (edge-flip-while-moving): only move non-sticky
+	windows to the new workspace when flipping
+
+	* move-resize.jl, menus.jl, frames.jl: removed all uses of
+	`beep' to signal user errors, either ignore the error, or
+	signal a real error
+
 2000-01-20  John Harper  <john@dcs.warwick.ac.uk>
 
 	* workspace.jl (window-menu): include iconified windows, even

@@ -129,4 +129,5 @@
 (autoload 'maximize-window-vertically-toggle "maximize" t)
 (autoload 'maximize-window-horizontally-toggle "maximize" t)
 (autoload 'toggle-single-window-mode "iconify" t)
+(autoload 'toggle-window-never-focus "ignore-window" t)
 ;;; ::autoload-end::
