@@ -1,5 +1,8 @@
 2000-02-06  John Harper  <john@dcs.warwick.ac.uk>
 
+	* functions.c (Fdisplay_message): if possible, keep the message
+	window wholly on screen
+
 	* main.c (main): run in a dynamic root
 	* events.c (handle_input_mask): run all handlers in dynamic
 	roots
