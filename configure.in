@@ -100,7 +100,15 @@ else
   AC_MSG_ERROR([You need X11 for sawfish])
 fi
 
+dnl Check for image handling libraries
 AM_PATH_IMLIB
+AC_DEFINE(HAVE_IMLIB,1)
+IMAGE_LIBS='${IMLIB_LIBS}'
+IMAGE_CFLAGS='${IMLIB_CFLAGS}'
+
+AC_SUBST(IMAGE_LIBS)
+AC_SUBST(IMAGE_CFLAGS)
+
 AM_PATH_GTK(1.2.0)
 
 AC_MSG_CHECKING([for audiofile library])
