@@ -25,7 +25,7 @@ AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR(etc)
 
 dnl Release versioning info
-version="0.11"
+version="0.12"
 
 output_files="src/Makefile lisp/Makefile capplet/Makefile\
  themes/Makefile man/Makefile Makedefs Makefile sawmill.spec"
@@ -104,6 +104,32 @@ else
 fi
 AC_DEFINE(DOUG_LEA_MALLOC)
 
+dnl Check for readline
+AC_ARG_WITH(readline,
+ [  --with-readline         support fancy command input editing], [],
+ [with_readline=maybe])
+
+dnl Only look if explicitly asked for..
+if test "$with_readline" = "yes"; then
+  AC_MSG_CHECKING([for readline])
+  READLINE_LIBS=""
+  AC_SUBST(READLINE_LIBS)
+  AC_CHECK_LIB(ncurses, tparm, TERMLIB=-lncurses,
+   AC_CHECK_LIB(termcap, tgetent, TERMLIB=-ltermcap))
+  saved_LIBS="$LIBS"
+  LIBS="$LIBS $TERMLIB"
+  AC_CHECK_LIB(readline, readline,
+   [AC_CHECK_HEADER(readline/readline.h,
+    [READLINE_LIBS="-lreadline $TERMLIB"
+     AC_DEFINE(HAVE_LIBREADLINE)])])
+  LIBS="$saved_LIBS"
+  if test "x$READLINE_LIBS" != "x" ; then
+    AC_MSG_RESULT([yes])
+  else
+    AC_MSG_RESULT([no])
+  fi
+fi
+
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 AC_C_INLINE
@@ -121,7 +147,7 @@ if test "x${GCC}" = "xyes"; then
   MAKEDEP='$(CC) -MM -MG'
 else
   case ${host} in
-    *-dec-*)
+    *-dec-osf*)
       # works on Tru64
       MAKEDEP='$(CC) -M'
       ;;
