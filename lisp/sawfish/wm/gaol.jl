@@ -28,7 +28,8 @@
 	    gaol-eval
 	    gaol-add
 	    gaol-define
-	    gaol-define-special)
+	    gaol-define-special
+	    define-gaol-structure)
 
     (open rep
 	  sawfish.wm.colors
@@ -51,7 +52,8 @@
       image-put imagep image-dimensions image-border set-image-border
       image-shape-color set-image-shape-color image-modifier
       set-image-modifier make-sized-image bevel-image clear-image
-      tile-image make-keymap bind-keys unbind-keys keymapp eventp
+      tile-image scale-image composite-images crop-image
+      make-keymap bind-keys unbind-keys keymapp eventp
       image-ref image-set image-map image-fill color-rgb-8 uniquify-list))
 
   (define safe-specials
@@ -60,7 +62,13 @@
       decorate-transients batch-mode))
 
   (define safe-features '(gtkrc x))
-  (define fully-safe-features '(timers gradient make-theme))
+  (define fully-safe-features '(rep.io.timers rep.data.tables
+				rep.data.records rep.data.ring
+				rep.data.queues rep.data.symbol-table
+				sawfish.wm.util.gradient
+				sawfish.wm.theming.make-theme
+				;; compatibility
+				timers gradient make-theme))
 
 ;;; functions
 
