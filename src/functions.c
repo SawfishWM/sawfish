@@ -316,6 +316,52 @@ Release the grab on the mouse pointer.
     return Qt;
 }
 
+DEFUN("grab-keyboard", Fgrab_keyboard, Sgrab_keyboard, (repv win), rep_Subr1) /*
+::doc:Sgrab-keyboard::
+grab-keyboard [WINDOW]
+
+Grab the keyboard and direct all keyboard events to window object
+WINDOW.
+
+If WINDOW is nil, or unviewable, the grab will be made on the root
+window.
+
+Returns non-nil if the grab succeeded.
+::end:: */
+{
+    Window g_win;
+    int ret;
+
+    if (WINDOWP(win) && VWIN(win)->visible)
+	g_win = VWIN(win)->frame;
+    else
+	g_win = root_window;
+
+again:
+    ret = XGrabKeyboard (dpy, g_win, False, GrabModeAsync,
+			 GrabModeAsync, last_event_time);
+    if (ret == GrabNotViewable && g_win != root_window)
+    {
+	/* fall back to the root window. */
+	g_win = root_window;
+	goto again;
+    }
+
+    return (ret == GrabSuccess) ? Qt : Qnil;
+}
+    
+DEFUN("ungrab-keyboard", Fungrab_keyboard,
+      Sungrab_keyboard, (void), rep_Subr0) /*
+::doc:Sungrab-keyboard::
+ungrab-keyboard
+
+Release the grab on the keyboard.
+::end:: */
+{
+    XUngrabKeyboard (dpy, last_event_time);
+    return Qt;
+}
+
 
 /* Drawing window outlines */
 
@@ -977,6 +1023,8 @@ functions_init (void)
     rep_ADD_SUBR(Sungrab_server);
     rep_ADD_SUBR(Sgrab_pointer);
     rep_ADD_SUBR(Sungrab_pointer);
+    rep_ADD_SUBR(Sgrab_keyboard);
+    rep_ADD_SUBR(Sungrab_keyboard);
     rep_ADD_SUBR(Sdraw_window_outline);
     rep_ADD_SUBR(Serase_window_outline);
     rep_ADD_SUBR(Sscreen_width);
