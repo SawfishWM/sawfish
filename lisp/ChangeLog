@@ -1,3 +1,39 @@
+2001-12-02  Daniel Pfeiffer  <occitan@esperanto.org>
+
+	* grow-pack.jl: This fixes some bugs:
+
+	- If a window was less than width-inc or height-inc away from the
+	next window, that next window was also ignored for packing.
+	- The variable grow-window-repeat did not serve it's purpose.
+	Instead it influenced whether width-inc or height-inc were
+	respected, which is an error (or at least a hacker option :-), no
+	matter what the variable is called.
+	- Typo preventing vertical growing to behave as maximize (maximzed).
+	- The underlying functions of the commands were not exported,
+	making them inaccessible to lisp and their documentation strings
+	somewhat useless.
+
+	One esthetical bug remains: depending on focus-mode neither
+	frame-draw/state-mutex nor focus-ignore-pointer-events prevent two
+	flickering frame highlights.  When moving, focus leaves the window
+	if it moves beyond pointer, when warping it goes back.  Any ideas?
+
+	And adds a few features:
+
+	- Optionally separate layers/depths (as discussed on the
+	mailing-list some time ago).  I found this to also have to handle
+	avoided windows (panel may be on its own depth).
+	<http://lists.eazel.com/pipermail/sawfish/2001-August/001634.html>
+	- Optionally ignore totally obscured windows.
+	- Optionally grow or pack by given amount of pixels.  To be useful
+	requires a prefix setter.  Until that makes it into sawfish 1.0.2,
+	get a patch.
+	http://dapfy.bei.t-online.de/sawfish/move-viewport/
+	- Optionally maximize in one direction.
+	- Do i18n on menu.  (Eight new strings to be done by translators.)
+
+	Despite added functionality the new code is both smaller and faster.
+
 2001-12-17  Federico Mena Quintero  <federico@ximian.com>
 
 	Fixes GNOME bug #67138.  However, the rest of smart.jl seems to be
