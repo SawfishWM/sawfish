@@ -41,6 +41,11 @@
   :range (1 . nil)
   :after-set viewport-size-changed)
 
+(defcustom uniconify-to-current-viewport t
+  "Windows are uniconified to the current viewport."
+  :type boolean
+  :group workspace)
+
 
 ;; raw viewport handling
 
@@ -152,6 +157,13 @@
     (call-hook 'viewport-resized-hook)))
 
 
+;; misc
+
+(defun viewport-window-uniconified (w)
+  (when uniconify-to-current-viewport
+    (move-window-to-current-viewport w)))
+
+
 ;; commands
 
 (defun move-viewport-right ()
@@ -232,3 +244,4 @@
 ;; initialisation
 
 (add-hook 'viewport-moved-hook 'window-order-focus-most-recent)
+(add-hook 'uniconify-window-hook 'viewport-window-uniconified)
