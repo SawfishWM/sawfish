@@ -1,3 +1,11 @@
+1999-10-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* session.c (save_yourself): ignore SmSaveGlobal requests
+
+	* events.c (handle_input_mask): don't set last_event_time to
+	CurrentTime before exiting (this may cause server
+	race-conditions when using recursive edits)
+
 1999-10-13  John Harper  <john@dcs.warwick.ac.uk>
 
 	* main.c (main): handle --version option; provide usage
