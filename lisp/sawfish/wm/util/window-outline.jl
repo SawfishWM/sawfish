@@ -24,7 +24,7 @@
     (export draw-window-outline
 	    erase-window-outline
 	    define-window-outliner
-	    autoload-window-outline)
+	    autoload-window-outliner)
 
     (open rep
 	  rep.util.autoloader)
