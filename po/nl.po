@@ -1,7 +1,9 @@
-# SOME DESCRIPTIVE TITLE.
+# This is an extremely puristic translation of Sawmill
+# Dit is een extreem puristische vertaling van Zaagmolen
+
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Han-Wen Nienhuys <hanwen@cs.uu.nl>, 1999.
-#
+
 #, fuzzy
 msgid ""
 msgstr ""
@@ -53,7 +55,7 @@ msgstr "Vang toets..."
 
 #: ../src/sawmill-ui.jl
 msgid "Keymaps"
-msgstr "Toetssjabloon" #urg.
+msgstr "Toetsindex" #urg.
 
 #: ../src/sawmill-ui.jl
 msgid "Commands"
@@ -255,7 +257,8 @@ msgstr "Wat  de schermrand raken werkelijk omslaat"
 #: ../lisp/edge-flip.jl
 msgid "Number of milliseconds to wait after pointer hits screen edge before\n"
 "flipping."
-msgstr "Aantal miliseconden voor het omslaan nadat het pijltje de rand raakt"
+msgstr "Aantal miliseconden te wachten voor het omslaan nadat het pijltje de\n"
+"rand raakt."
 
 #: ../lisp/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -263,17 +266,17 @@ msgstr "Wanneer beinvloedt het wijsapparaat de invoer-aandacht."
 
 #: ../lisp/focus.jl
 msgid "Does click-to-focus mode pass the click through to the window."
-msgstr "Geeft klik-voor-aandacht de klik door aan het venster."
+msgstr "Geef de klik door aan het venster bij klik-voor-aandacht."
 
 #: ../lisp/frames.jl
 msgid "Alist of (CLASS . ALIST) associating classes of frame parts with state\n"
 "they inherit."
-msgstr "Associatie lijst (alist) van (KLASSE . ALIST) die klasses van kozijn delen associeert met staat die ze erven."
+msgstr "Associatie lijst (alist) van (KLASSE . ALIST) die klasses van kozijn delen associeert met toestand die ze erven."
 
 #: ../lisp/frames.jl
 msgid "Alist of (CLASS . ALIST) associating classes of frame parts with state\n"
 "that overrides settings set elsewhere."
-msgstr "Associatielijst van (KLASSE . ALIST) die klasses van kozijndelen associeert met staat die instellingen ergens anders overreed."
+msgstr "Associatielijst van (KLASSE . ALIST) die klasses van kozijndelen associeert met toestand die instellingen ergens anders overreed."
 
 #: ../lisp/frames.jl
 msgid "Default frame style (theme)."
@@ -285,7 +288,7 @@ msgstr "Ververs alle vensters als de standaard kozijn stijl is gewijzigd."
 
 #: ../lisp/frames.jl
 msgid "Decorate transient windows in the same way as non-transient windows."
-msgstr "Versier transiente vensters op dezelfde wijze als niet-transiente vensters"  # UGH.
+msgstr "Versier tijdelijke vensters op dezelfde wijze als permanente vensters"
 
 #: ../lisp/frames.jl
 msgid "Highlight window borders even when the window is unfocused."
@@ -357,11 +360,11 @@ msgstr "Taal code voor het maken van GNOME menu's"
 
 #: ../lisp/gnome-menu.jl
 msgid "List of directories to read GNOME menu entries from."
-msgstr "Lijst van mappen om GNOME menu [entry]s uit te lezen."
+msgstr "Lijst van mappen waaruit GNOME menuregels worden gelezen."
 
 #: ../lisp/group-funs.jl
 msgid "Group transient windows with their parents."
-msgstr "Groepeer transiente vensters met hun ouders."
+msgstr "Groepeer tijdelijke vensters met hun ouders."
 
 #: ../lisp/group-funs.jl
 msgid "List of group ids that always exist, even when they have no members."
@@ -381,372 +384,379 @@ msgstr "Ikonficeer het venster."
 
 #: ../lisp/iconify.jl
 msgid "Return the window from its iconified state."
-msgstr "Haal het venster terug uit geikonificeerde staat."
+msgstr "Haal het venster terug uit geikonificeerde toestand."
 
 #: ../lisp/iconify.jl
 msgid "Display the workspace containing the window W, then focus on W."
-msgstr ""
+msgstr "Toon de werkruimte die het venster W bevat, en geef de aandacht aan W."
 
 #: ../lisp/iconify.jl
 msgid "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
-msgstr ""
+msgstr "Schakel de plakkerigheid van het venster--deel van alle werkruimtes of niet."
 
 #: ../lisp/ignore-window.jl
 msgid "Ignore the window."
-msgstr ""
+msgstr "Negeer het venster"
 
 #: ../lisp/ignore-window.jl
 msgid "Unignore the window."
-msgstr ""
+msgstr "Stop met venster negeren"
 
 #: ../lisp/ignore-window.jl
 msgid "Toggle whether a window is ignored or not."
-msgstr ""
+msgstr "Schakel om of het venster wordt genegeerd"
 
 #: ../lisp/keymap.jl
 msgid "When nil, the map-keymap function will only map over the first level of\n"
 "keymaps, i.e. all prefix keys are ignored."
-msgstr ""
+msgstr "Als nil, zal de toets-index functie alleen over alleen het eerste\n"
+"nivo van knop-afbeelding afbeelden, m.aw. alle prefix toetsen worden genegeerd."
 
 #: ../lisp/keymap.jl
 msgid "Map FUNCTION over all key bindings under the keymap or list of\n"
 "keymaps KEYMAP. FUNCTION is called as (FUNCTION KEY), where KEY is a\n"
 "cons cell (COMMAND . EVENT)."
-msgstr ""
+msgstr "Pas FUNCTION toe op alle bindingen in een toets-index of lijst van\n"
+"toets-afbeeldingen KEYMAP. FUNCTION wordt aangeroepen als (FUNCTION SLEUTEL).\n"
+"Hierin is sleutel een cel (COMMANDO . GEBEURTENIS). "
 
 #: ../lisp/keymap.jl
 msgid "Substitute all occurrences of the command OLDDEF for the command NEWDEF\n"
 "in the keybindings under the keymap or list of keymaps KEYMAP."
-msgstr ""
+msgstr "Vervang het commando OLDDEF door NEWDEF in de bindingen in de \n"
+"toets-index of lijst van toets-index KEYMAP." 
 
 #: ../lisp/keymap.jl
 msgid "Substitute all occurrences of the event OLD-EV for the event NEW-EV\n"
 "in the keybindings under the keymap or list of keymaps KEYMAP."
-msgstr ""
+msgstr "Vervang OLD-EV door NEW-EV in de bindingen in de \n"
+"toets-index of lijst van toets-index KEYMAP."
 
 #: ../lisp/keymap.jl
 msgid "Install the list of BINDINGS in KEYMAP, assuming that KEYMAP is available\n"
 "once FEATURE has been provided. If FEATURE has not yet been loaded, arrange\n"
 "for the bindings to be installed if and when it is."
-msgstr ""
+msgstr "Installeer de lijst van bindingen BINDINGS in de toets-afbeelding \n"
+"KEYMAP, in de veronderstelling dat KEYMAP beschikbaar is.  Wacht hiermee\n"
+"totdat FEATURE geladen is."
 
 #: ../lisp/keymap.jl
 msgid "Press key..."
-msgstr ""
+msgstr "Druk op de toets..."
 
 #: ../lisp/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
-msgstr ""
+msgstr "Toetsindex met bindingen die overal werken"
 
 #: ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when a client window is focused."
-msgstr ""
+msgstr "Toetsindex met bindingen die werken als een venster aandacht heef."
 
 #: ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when the pointer is in the root window\n"
 "(or when no window is focused)."
-msgstr ""
+msgstr "Toetsindex met bindingen als het pijltje in het achtergrond venster is."
 
 #: ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when the pointer is in the title of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Toetsindex met bindingen die werken als het pijltje in de titelbalk van een venster staat.  (Allen muisbindingen werken hier.)"
 
 #: ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when the pointer is in the border of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Toetsindex met bindingen die werken als het pijltje op de rand van een venster staat. (Alleen muisbindingen werken hier.)"
 
 #: ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when the pointer is in the close button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Toetsindex met bindingen die werken als het pijltje op Sluit knop van een venster staat. (Alleen muisbindingen werken hier.)"
 
 #: ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when the pointer is in the iconify\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Toetsindex met bindingen die werken als het pijltje op de iconificeer knop van een venster staat. (Alleen muisbindingen werken hier.)"
 
 #: ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when the pointer is in the maximize\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Toetsindex met bindingen die werken als het pijltje op de maximaliseer knop van een venster staat. (Alleen muisbindingen werken hier.)"
 
 #: ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Toetsindex met bindingen die werken als het pijltje op de menu knop van een venster staat. (Alleen muisbindingen werken hier.)"
 
 #: ../lisp/match-window.jl
 msgid "Matched Windows"
-msgstr ""
+msgstr "Passende vensters"
 
 #: ../lisp/match-window.jl
 msgid "Match windows to properties."
-msgstr ""
+msgstr "Vind vensters bij eigenschappen"
 
 #: ../lisp/maximize.jl
 msgid "Maximizing a window dimension always increases the size of that dimension."
-msgstr ""
+msgstr "Maximaliseren van een venster in een richting zal altijd de grootte in die richting vergroten."
 
 #: ../lisp/maximize.jl
 msgid "Raise windows when they're maximized."
-msgstr ""
+msgstr "Verhoog vensters als ze maximaliseerd zijn."
 
 #: ../lisp/maximize.jl
 msgid "Let ignored windows be overlapped when filling windows."
-msgstr ""
+msgstr "Genegeerde vensters worden overschreven bij het vullen van vensters."
 
 #: ../lisp/maximize.jl
 msgid "Maximize the dimensions of the window."
-msgstr ""
+msgstr "Maximaliseer de afmetingen van het venster."
 
 #: ../lisp/maximize.jl
 msgid "Restore the dimensions of the window to its original, unmaximized, state."
-msgstr ""
+msgstr "Herstel de afmetingen van het venster naar zijn niet-gemaximaliseerde toestand."
 
 #: ../lisp/maximize.jl
 msgid "Maximize the vertical dimension of the window."
-msgstr ""
+msgstr "Maximaliseer de verticale afmetingen van het venster"
 
 #: ../lisp/maximize.jl
 msgid "Maximize the horizontal dimension of the window."
-msgstr ""
+msgstr "Maximaliseer de horizontale afmetingen van het venster"
 
 #: ../lisp/maximize.jl
 msgid "Toggle the state of the window between maximized and unmaximized."
-msgstr ""
+msgstr "Schakel de toestand van het venster om tussen maximaal en minimaal."
 
 #: ../lisp/maximize.jl
 msgid "Toggle the state of the window between vertically maximized and\n"
 "unmaximized."
-msgstr ""
+msgstr "Schakel de toestand van venster om tussen verticaal maximaal en minimaal"
 
 #: ../lisp/maximize.jl
 msgid "Toggle the state of the window between horizontally maximized and\n"
 "unmaximized."
-msgstr ""
+msgstr "Schakel de toestand van venster om tussen horizontaal maximaal en minimaal"
 
 #: ../lisp/maximize.jl
 msgid "Maximize the window without obscuring any other windows."
-msgstr ""
+msgstr "Maximaliseer het venster zonder andere vensters te bedekken."
 
 #: ../lisp/maximize.jl
 msgid "Maximize the window vertically without obscuring any other windows."
-msgstr ""
+msgstr "Maximaliseer het vensters verticaal zonder andere vensters te bedekken"
 
 #: ../lisp/maximize.jl
 msgid "Toggle the state of the window between maximized-filled and unmaximized."
-msgstr ""
+msgstr "Schakel het venster tussen maximaal-gevuld en niet-gemaximaliseerd."
 
 #: ../lisp/maximize.jl
 msgid "Toggle the state of the window between vertically maximized-filled and\n"
 "unmaximized."
-msgstr ""
+msgstr "Schakel het venster tussen verticaal maximaal-gevuld en niet-gemaximaliseerd."
 
 #: ../lisp/maximize.jl
 msgid "Toggle the state of the window between horizontally maximized-filled and\n"
 "unmaximized."
-msgstr ""
+msgstr "Schakel het venster tussen horizontaal maximaal-gevuld en niet-gemaximaliseerd."
 
 #: ../lisp/menus.jl
 msgid "Location of the program implementing sawmill's menu interface."
-msgstr ""
+msgstr "Plaats van het programma dat de menus van Zaagmolen implementeert."
 
 #: ../lisp/menus.jl
 msgid "When non-nil, the user-interface program is never stopped. If a number,\n"
 "then this is taken as the number of seconds to let the process hang around\n"
 "unused before killing it."
-msgstr ""
+msgstr "Als niet-nil, dan wordt het menu-programma nooit gestopt. Als het een getal is, wacht dan zoveel seconden voor het proces wordt gedood."
 
 #: ../lisp/menus.jl
 msgid "Iconify"
-msgstr ""
+msgstr "Ikonificeer"
 
 #: ../lisp/menus.jl
 msgid "Destroy"
-msgstr ""
+msgstr "Vernietig"
 
 #: ../lisp/menus.jl
 msgid "Toggle"
-msgstr ""
+msgstr "Omschakelen"
 
 #: ../lisp/menus.jl
 msgid "Maximize"
-msgstr ""
+msgstr "Maximaliseer"
 
 #: ../lisp/menus.jl
 msgid "Vertically"
-msgstr ""
+msgstr "Verticaal"
 
 #: ../lisp/menus.jl
 msgid "Horizontally"
-msgstr ""
+msgstr "Horizontaal"
 
 #: ../lisp/menus.jl
 msgid "Both"
-msgstr ""
+msgstr "Beide"
 
 #: ../lisp/menus.jl
 msgid "Fill vertically"
-msgstr ""
+msgstr "Vul verticaal"
 
 #: ../lisp/menus.jl
 msgid "Fill horizontally"
-msgstr ""
+msgstr "Vul horizontaal"
 
 #: ../lisp/menus.jl
 msgid "Fill both"
-msgstr ""
+msgstr "Vul beide"
 
 #: ../lisp/menus.jl
 msgid "Un-maximize"
-msgstr ""
+msgstr "De-maximaliseer"
 
 #: ../lisp/menus.jl
 msgid "In group"
-msgstr ""
+msgstr "Naar groep"
 
 #: ../lisp/menus.jl
 msgid "Send window to"
-msgstr ""
+msgstr "Stuur venster naar"
 
 #: ../lisp/menus.jl
 msgid "Previous workspace"
-msgstr ""
+msgstr "Vorige werkruimte"
 
 #: ../lisp/menus.jl
 msgid "Next workspace"
-msgstr ""
+msgstr "Volgende werkruimte"
 
 #: ../lisp/menus.jl
 msgid "Copy to previous"
-msgstr ""
+msgstr "Kopieer naar vorige"
 
 #: ../lisp/menus.jl
 msgid "Copy to next"
-msgstr ""
+msgstr "Kopieer naar volgende"
 
 #: ../lisp/menus.jl
 msgid "Left"
-msgstr ""
+msgstr "Links"
 
 #: ../lisp/menus.jl
 msgid "Right"
-msgstr ""
+msgstr "Rechts"
 
 #: ../lisp/menus.jl
 msgid "Up"
-msgstr ""
+msgstr "Omhoog"
 
 #: ../lisp/menus.jl
 msgid "Down"
-msgstr ""
+msgstr "Omlaag"
 
 #: ../lisp/menus.jl
 msgid "Depth"
-msgstr ""
+msgstr "Diepte"
 
 #: ../lisp/menus.jl
 msgid "Raise"
-msgstr ""
+msgstr "Verhoog"
 
 #: ../lisp/menus.jl
 msgid "Lower"
-msgstr ""
+msgstr "Verlaag"
 
 #: ../lisp/menus.jl
 msgid "Upper layer"
-msgstr ""
+msgstr "Bovenste laag"
 
 #: ../lisp/menus.jl
 msgid "Lower layer"
-msgstr ""
+msgstr "Onderste laag"
 
 #: ../lisp/menus.jl
 msgid "Frame type"
-msgstr ""
+msgstr "Kozijn type"
 
 #: ../lisp/menus.jl
 msgid "Normal"
-msgstr ""
+msgstr "Normaal"
 
 #: ../lisp/menus.jl
 msgid "Title-only"
-msgstr ""
+msgstr "Alleen titel"
 
 #: ../lisp/menus.jl
 msgid "Border-only"
-msgstr ""
+msgstr "Alleen rand"
 
 #: ../lisp/menus.jl
 msgid "Top-border"
-msgstr ""
+msgstr "Bovenrand"
 
 #: ../lisp/menus.jl
 msgid "None"
-msgstr ""
+msgstr "Geen"
 
 #: ../lisp/menus.jl
 msgid "Frame style"
-msgstr ""
+msgstr "Kozijnstijl"
 
 #: ../lisp/menus.jl
 msgid "Sticky"
-msgstr ""
+msgstr "Kleverig"
 
 #: ../lisp/menus.jl
 msgid "Shaded"
-msgstr ""
+msgstr "Opgetrokken"
 
 #: ../lisp/menus.jl
 msgid "Ignored"
-msgstr ""
+msgstr "Genegeerd"
 
 #: ../lisp/menus.jl
 msgid "In window list"
-msgstr ""
+msgstr "In vensterlijst"
 
 #: ../lisp/menus.jl
 msgid "In task list"
-msgstr ""
+msgstr "In taaklijst"
 
 #: ../lisp/menus.jl
 msgid "Windows"
-msgstr ""
+msgstr "Vensters"
 
 #: ../lisp/menus.jl
 msgid "Programs"
-msgstr ""
+msgstr "Programma's"
 
 #: ../lisp/menus.jl
 msgid "Customize"
-msgstr ""
+msgstr "Aanpassen"
 
 #: ../lisp/menus.jl
 msgid "About..."
-msgstr ""
+msgstr "Over..."
 
 #: ../lisp/menus.jl
 msgid "Restart"
-msgstr ""
+msgstr "Herstart"
 
 #: ../lisp/menus.jl
 msgid "Quit"
-msgstr ""
+msgstr "Stop"
 
 #: ../lisp/menus.jl
 msgid "Display the menu listing all window operations."
-msgstr ""
+msgstr "Toon een menu met alle vensterhandelingen"
 
 #: ../lisp/menus.jl
 msgid "Display the main menu."
-msgstr ""
+msgstr "Toon het hoofdmenu"
 
 #: ../lisp/menus.jl
 msgid "Display the applications menu."
-msgstr ""
+msgstr "Toon het toepassingen-menu"
 
 #: ../lisp/move-resize.jl
 msgid "Choose resized window edges by border-part, not by mouse position."
@@ -754,128 +764,129 @@ msgstr ""
 
 #: ../lisp/move-resize.jl
 msgid "Allow other window edges to be grabbed while resizing interactively."
-msgstr ""
+msgstr "Laat andere vensterranden gepakt worden tijdens het interactieve vergroten."
 
 #: ../lisp/move-resize.jl
 msgid "The method of drawing windows being moved interactively."
-msgstr ""
+msgstr "Hoe vensters te tekeningen tijdens  interactieve verplaatsing"
 
 #: ../lisp/move-resize.jl
 msgid "The method of drawing windows being resized interactively."
-msgstr ""
+msgstr "Hoe vensters te tekeningen tijdens  interactieve vergroten."
 
 #: ../lisp/move-resize.jl
 msgid "Raise windows being moved or resized interactively."
-msgstr ""
+msgstr "Verhoog vensters die interactief worden verplaatst of vergroten."
 
 #: ../lisp/move-resize.jl
 msgid "Show the current position while moving windows interactively."
-msgstr ""
+msgstr "Laat de huidige plek zien onder het verplaaten"
 
 #: ../lisp/move-resize.jl
 msgid "Show the current dimensions while resizing windows interactively."
-msgstr ""
+msgstr "Laat de huidige afmetingen zien onder het vergroten."
 
 #: ../lisp/move-resize.jl
 msgid "Snap window position to edges of other windows when interactively moving."
-msgstr ""
+msgstr "Schiet naar randen van andere vensters onder het verplaatsen."
 
 #: ../lisp/move-resize.jl
 msgid "Proximity in pixels before snapping to a window edge."
-msgstr ""
+msgstr "Afstand in puntjes voor naar een vensterrand te schieten."
 
 #: ../lisp/move-resize.jl
 msgid "Snap to otherwise-ignored windows."
-msgstr ""
+msgstr "Schiet ook naar anders genegeerde vensters. "
 
 #: ../lisp/move-resize.jl
 msgid "Lock window geometry while the window is maximized."
-msgstr ""
+msgstr "Vergrendel de venster afmetingen als het venster is gemaximalizeerd"
 
 #: ../lisp/move-resize.jl
 msgid "Move the window interactively using the mouse."
-msgstr ""
+msgstr "Verplaats het venster interactief met de muis."
 
 #: ../lisp/move-resize.jl
 msgid "Resize the window interactively using the mouse."
-msgstr ""
+msgstr "Vergroot het venster interactief met de muis"
 
 #: ../lisp/move-resize.jl
 msgid "Wait for the user to select a window, then interactively move that window."
-msgstr ""
+msgstr "Laat de gebruiker een venster selecteren, en verplaats het dan interactief"
 
 #: ../lisp/move-resize.jl
 msgid "Wait for the user to select a window, then interactively resize that window."
-msgstr ""
+msgstr "Laat de gebruiker een venster selecteren, en vergroot het dan interactief"
 
 #: ../lisp/place-window.jl
 msgid "Method of selecting the position of a freshly-mapped window."
-msgstr ""
+msgstr "Hoe de positie van een nieuw venster te kiezen."
 
 #: ../lisp/place-window.jl
 msgid "Method of selecting the position of a freshly-mapped transient window."
-msgstr ""
+msgstr "Hoe de positie van een nieuw tijdelijke venster te kiezen."
 
 #: ../lisp/place-window.jl
 msgid "Ignore program-specified window positions."
-msgstr ""
+msgstr "Negeer de vensterplek die het programma aangeeft."
 
 #: ../lisp/shading.jl
 msgid "Display only the title bar of the window."
-msgstr ""
+msgstr "Toon slechts de titelbalk van het venster"
 
 #: ../lisp/shading.jl
 msgid "If the window is shaded (see `shade-window'), restore it to it's usual\n"
 "state."
-msgstr ""
+msgstr "Als het venster is opgetrokken, herstel dan de normale toestand."
 
 #: ../lisp/shading.jl
 msgid "Toggle the shaded (only the title bar is displayed) state of the window."
-msgstr ""
+msgstr "Venster op- en neertrekken."
 
 #: ../lisp/slide-window.jl
 msgid "Number of pixels to move window in `slide-' commands."
-msgstr ""
+msgstr "Aantal puntjes het venster te verplaatsen met de `slide-' commandos."
 
 #: ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels to the left."
-msgstr ""
+msgstr "Verplaats het venster `slide-window-increment' puntjes naar links"
 
 #: ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels to the right."
-msgstr ""
+msgstr "Verplaats het venster `slide-window-increment' puntjes naar rechts."
 
 #: ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels upwards."
-msgstr ""
+msgstr "Verplaats het venster `slide-window-increment' puntjes naar boven"
 
 #: ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels downwards."
-msgstr ""
+msgstr "Verplaats het venster `slide-window-increment' puntjes naar beneden"
 
 #: ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels to the left."
-msgstr ""
+msgstr "Verplaats de venstergroep `slide-window-increment' puntjes naar links."
 
 #: ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels to the right."
-msgstr ""
+msgstr "Verplaats de venstergroep `slide-window-increment' puntjes naar rechts."
 
 #: ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels upwards."
-msgstr ""
+msgstr "Verplaats de venstergroep `slide-window-increment' puntjes naar boven"
 
 #: ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels downwards."
-msgstr ""
+msgstr "Verplaats de venstergroep `slide-window-increment' puntjes naar beneden"
+
 
 #: ../lisp/sm-init.jl
 msgid "A string identifying the current session."
-msgstr ""
+msgstr "De naam van de huidige sessie."
 
 #: ../lisp/sm-init.jl
 msgid "List of window properties saved with the session."
-msgstr ""
+msgstr "Lijst van venstereigenschappen die met de sessie zijn opgeslagen."
 
 #: ../lisp/sm-init.jl
 msgid "List of functions called when the state of each window is saved. Each\n"
@@ -891,409 +902,419 @@ msgstr ""
 
 #: ../lisp/sm-init.jl
 msgid "Hook called after loading a saved session."
-msgstr ""
+msgstr "Functiehaak (`hook') aan te roepen na het laden van een eerdere sessie"
 
 #: ../lisp/smart-placement.jl
 msgid "Try to leave at least this many pixels between window edges in first/best-fit."
-msgstr ""
+msgstr "Probeer ten minste zoveel puntjes tussen vensters te laten in eerst/best-passend."
 
 #: ../lisp/smart-placement.jl
 msgid "Weighting between future usefulness and edge alignment in best-fit mode.\n"
 "A value between 0 and 1023 inclusive."
-msgstr ""
+msgstr "Gewicht tussen toekomstig nut en rand plaatsing in `best-passend' (0 t/m 1023)."
 
 #: ../lisp/stacking.jl
 msgid "Keep transient windows stacked above."
-msgstr ""
+msgstr "Hou tijdelijke vensters bovenop."
 
+# ?
 #: ../lisp/stacking.jl
 msgid "Lower the window to the bottom of its stacking level."
-msgstr ""
+msgstr "Verlaag het venster naar de onderkant van zijn stapelingsnivo."
 
 #: ../lisp/stacking.jl
 msgid "Raise the window to the top of its stacking level."
-msgstr ""
+msgstr "Til het venster naar de bovenkant van zijn stapelingsnivo."
 
 #: ../lisp/stacking.jl
 msgid "If the window is the highest window in its stacking level, lower it to the\n"
 "bottom of this level, otherwise raise it to the top of its level."
-msgstr ""
+msgstr "Als het venster het bovenste venster in zijn stapelingsnivo is,\n"
+"duw het dan onderop dit nivo. Til het anders naar de bovenkant van zijn nivo."
 
 #: ../lisp/stacking.jl
 msgid "Put the window in the stacking level beneath its current level."
-msgstr ""
+msgstr "Zet dit venster in het stapelingsnivo onder het huidige."
 
 #: ../lisp/stacking.jl
 msgid "Put the window in the stacking level above its current level."
-msgstr ""
+msgstr "Zet dit venster in het stapelingsnivo boven het huidige."
 
 #: ../lisp/stacking.jl
 msgid "Raise the window that received the current event, then replay any pointer\n"
 "events that invoked the command."
-msgstr ""
+msgstr "Til het venster dat het huidige `event' ontving naarboven, en speel muis-`events'\n"
+"opnieuw af."
 
 #: ../lisp/tooltips.jl
 msgid "Tooltips"
-msgstr ""
+msgstr "Knoptips"
+
+# ugh.
 
 #: ../lisp/tooltips.jl
 msgid "Display tooltips for window frames."
-msgstr ""
+msgstr "Laat knoptips"
 
 #: ../lisp/tooltips.jl
 msgid "Number of milliseconds to wait before displaying tooltip."
-msgstr ""
+msgstr "Aantal miliseconden te wachten voor de knoptip wordt afgebeeld."
 
 #: ../lisp/transient.jl
 msgid "Focus each window when first displayed."
-msgstr ""
+msgstr "Geef ieder nieuw venster de invoeraandacht."
 
 #: ../lisp/transient.jl
 msgid "Transient windows inherit focus from their parent."
-msgstr ""
+msgstr "Tijdelijke vensters erven de aandacht van hun ouders."
 
 #: ../lisp/viewport.jl
 msgid "Number of columns in each virtual workspace."
-msgstr ""
+msgstr "Aantal kolommen in elke virtuele werkruimte."
 
 #: ../lisp/viewport.jl
 msgid "Number of rows in each virtual workspace."
-msgstr ""
+msgstr "Aantal rijen in elke virtuele werkruimte."
 
 #: ../lisp/viewport.jl
 msgid "Windows are uniconified to the current viewport."
-msgstr ""
+msgstr "Vensters zijn ongeikonificeerd in het huidige blikveld."
 
 #: ../lisp/viewport.jl
 msgid "Move the viewport one screen to the right."
-msgstr ""
+msgstr "Verschuif het blikveld een scherm naar rechts."
 
 #: ../lisp/viewport.jl
 msgid "Move the viewport one screen to the left."
-msgstr ""
+msgstr "Verschuif het blikveld een scherm naar links."
 
 #: ../lisp/viewport.jl
 msgid "Move the viewport one screen down."
-msgstr ""
+msgstr "Verschuif het blikveld een scherm naar beneden."
+
 
 #: ../lisp/viewport.jl
 msgid "Move the viewport one screen up."
-msgstr ""
+msgstr "Verschuif het blikveld een scherm naar boven."
 
 #: ../lisp/viewport.jl
 msgid "Move the window to the viewport on the left."
-msgstr ""
+msgstr "Verplaats het venster naar het blikveld links."
 
 #: ../lisp/viewport.jl
 msgid "Move the window to the viewport on the right."
-msgstr ""
+msgstr "Verplaats het venster naar het blikveld rechts."
 
 #: ../lisp/viewport.jl
 msgid "Move the window to the viewport below."
-msgstr ""
+msgstr "Verplaats het venster naar het blikveld beneden."
 
 #: ../lisp/viewport.jl
 msgid "Move the window to the viewport above."
-msgstr ""
+msgstr "Verplaats het venster naar het blikveld boven."
 
 #: ../lisp/workspace.jl
 msgid "Action when passing the first or last workspace when moving."
-msgstr ""
+msgstr "Wat te doen als de eerste of laatste werkruimte tegenkomen tijdens het verplaatsen."
 
 #: ../lisp/workspace.jl
 msgid "Action when passing the first or last workspace when moving windows."
-msgstr ""
+msgstr "Wat te doen als de eerste of laatste werkruimte tegenkomen tijdens het verplaatsen van vensters."
 
 #: ../lisp/workspace.jl
 msgid "Workspaces are merged with the next when their last window is closed."
-msgstr ""
+msgstr "Werkruimtes worden samengevoegd met de volgende als het laatste venster wordt gesloten."
 
 #: ../lisp/workspace.jl
 msgid "The minimum number of workspaces that may exist."
-msgstr ""
+msgstr "Het minimum aantal werkruimtes dat bestaat."
 
 #: ../lisp/workspace.jl
 msgid "Empty workspaces before or after the active workspace aren't hidden."
-msgstr ""
+msgstr "Lege werkruimtes voor of na de huidige werkruimte worden niet verborgen."
 
 #: ../lisp/workspace.jl
 msgid "Windows are uniconified onto the current workspace."
-msgstr ""
+msgstr "Vensters worden gedeikonificeerd naar de huidige werkruimte."
 
 #: ../lisp/workspace.jl
 msgid "Windows are raised after being uniconified."
-msgstr ""
+msgstr "Vensters worden opgetild na deikonificeren."
 
 #: ../lisp/workspace.jl
 msgid "Windows are focused after being uniconified."
-msgstr ""
+msgstr "Vensters krijgen de aandacht na deikonificeren."
 
 #: ../lisp/workspace.jl
 msgid "Transient windows are opened on the same workspace as their parent window."
-msgstr ""
+msgstr "Tijdelijke vensters worden op dezelfde werkruimte geopend als hun ouders."
 
 #: ../lisp/workspace.jl
 msgid "Windows selected (normally by the Windows menu) are raised."
-msgstr ""
+msgstr "Geselecteerde (normaal gesproken via het Vensters menu) vensters worden opgetild."
 
 #: ../lisp/workspace.jl
 msgid "Unshade selected windows."
-msgstr ""
+msgstr "Laat de geselecteerde vensters neer."
 
 #: ../lisp/workspace.jl
 msgid "Warp the mouse pointer to selected windows."
-msgstr ""
+msgstr "Gooi het pijltje naar de geselecteerde vensters."
 
 #: ../lisp/workspace.jl
 msgid "Iconifying a window that's a member of a group removes the whole group."
-msgstr ""
+msgstr "Ikonficeren van een groepsvenster ikonificeert de hele groep."
 
 #: ../lisp/workspace.jl
 msgid "Uniconifying a window that's a member of a group restores the whole group."
-msgstr ""
+msgstr "Deikonificeren van een groepsvenster deikonificeert de hele groep."
 
 #: ../lisp/workspace.jl
 msgid "List of workspace names."
-msgstr ""
+msgstr "Som de werkruimtes op."
 
 #: ../lisp/workspace.jl
 msgid "Insert workspace"
-msgstr ""
+msgstr "Voeg werkruimte in"
 
 #: ../lisp/workspace.jl
 msgid "Select next workspace"
-msgstr ""
+msgstr "Selecteer volgende werkruimte"
 
 #: ../lisp/workspace.jl
 msgid "Select previous workspace"
-msgstr ""
+msgstr "Selecteer vorige werkruimte"
 
 #: ../lisp/workspace.jl
 msgid "Merge with next"
-msgstr ""
+msgstr "Voeg samen met volgende"
 
 #: ../lisp/workspace.jl
 msgid "Merge with previous"
-msgstr ""
+msgstr "Voeg samen met vorige"
 
 #: ../lisp/workspace.jl
 msgid "Move workspace right"
-msgstr ""
+msgstr "Ga werkruimte naar rechts"
 
 #: ../lisp/workspace.jl
 msgid "Move workspace left"
-msgstr ""
+msgstr "Ga werkruimte naar links"
 
 #: ../lisp/workspace.jl
 msgid "Activate workspace number SPACE (from zero)."
-msgstr ""
+msgstr "Activeer werkruimte nummer SPACE (tellend vanaf nul)."
 
 #: ../lisp/workspace.jl
 msgid "space %d%s"
-msgstr ""
+msgstr "ruimte %d%s"
 
 #: ../lisp/workspace.jl
 msgid "Display the menu containing the list of all workspaces."
-msgstr ""
+msgstr "Toon het menu met alle werkruimtes"
 
 #: ../lisp/workspace.jl
 msgid "Display the menu of all managed windows."
-msgstr ""
+msgstr "Toon het menu met alle beheerde vensters"
 
 #: ../lisp/workspace.jl
 msgid "Display the next workspace."
-msgstr ""
+msgstr "Toon volgende werkruimte."
 
 #: ../lisp/workspace.jl
 msgid "Display the previous workspace."
-msgstr ""
+msgstr "Toon vorige werkruimte."
 
 #: ../lisp/workspace.jl
 msgid "Move the window to the next workspace. If no next workspace exists, one\n"
 "will be created."
-msgstr ""
+msgstr "Verplaats het venster naar de volgende werkruimte. Als die niet bestaat,\n"
+"maak hem dan."
 
 #: ../lisp/workspace.jl
 msgid "Move the window to the previous workspace. If no such workspace exists, one\n"
 "will be created."
-msgstr ""
+msgstr "Verplaats het venster naar de vorige werkruimte. Als die niet bestaat,\n"
+"maak hem dan."
 
 #: ../lisp/workspace.jl
 msgid "Create a new workspace at the end of the list, and move the window to it."
-msgstr ""
+msgstr "Maak nieuwe werkruimte aan het einde van de lijst, en stuur het venster ernaartoe."
 
 #: ../lisp/workspace.jl
 msgid "Create a new workspace at the start of the list, and move the window to it."
-msgstr ""
+msgstr "Maak nieuwe werkruimte aan het begin van de lijst, en stuur het venster ernaartoe."
 
 #: ../lisp/workspace.jl
 msgid "Delete the current workspace. Its member windows are relocated to the next\n"
 "workspace."
-msgstr ""
+msgstr "Wis de huidige werkruimte. Zijn vensters worden naar de volgende verplaatst"
 
 #: ../lisp/workspace.jl
 msgid "Delete the current workspace. Its member windows are relocated to the\n"
 "previous workspace."
-msgstr ""
+msgstr "Wis de huidige werkruimte. Zijn vensters worden naar de vorige verplaatst"
 
 #: ../lisp/workspace.jl
 msgid "Create a new workspace following the current workspace."
-msgstr ""
+msgstr "Maak een nieuwe werkruimte achter de huidige werkruimte."
 
 #: ../lisp/workspace.jl
 msgid "Create a new workspace before the current workspace."
-msgstr ""
+msgstr "Maak een nieuwe werkruimte voor de huidige werkruimte."
 
 #: ../lisp/workspace.jl
 msgid "Move the current workspace one place to the right."
-msgstr ""
+msgstr "Verplaats de huidige werkruimte een plaats naar rechts."
 
 #: ../lisp/workspace.jl
 msgid "Move the current workspace one place to the left."
-msgstr ""
+msgstr "Verplaats de huidige werkruimte een plaats naar links."
 
 #: ../lisp/workspace.jl
 msgid "Delete any workspaces that don't contain any windows."
-msgstr ""
+msgstr "Wis werkruimtes die geen vensters bevatten."
 
 #: ../lisp/workspace.jl
 msgid "Remove the copy of the window on the current workspace. If this is the last\n"
 "instance remaining, then delete the actual window."
-msgstr ""
+msgstr "Wis de kopie van het venster op deze werkruimte. Als het de laatste kopie\n"
+"was, wis dan het venster zelf."
 
 #: ../lisp/x-cycle.jl
 msgid "Window Cycling"
-msgstr ""
+msgstr "Venster doorlopen."
 
 #: ../lisp/x-cycle.jl
 msgid "Display window names while cycling through windows."
-msgstr ""
+msgstr "Laat vensternamen als vensters doorlopen worden. "
 
 #: ../lisp/x-cycle.jl
 msgid "Include iconified windows when cycling."
-msgstr ""
+msgstr "Neem geikonificeerde vensters mee bij het doorlopen."
 
 #: ../lisp/x-cycle.jl
 msgid "Include windows on all workspaces when cycling."
-msgstr ""
+msgstr "Neem vensters op alle werkruimtes mee bij het doorlopen."
 
 #: ../lisp/x-cycle.jl
 msgid "Include windows on all viewports when cycling."
-msgstr ""
+msgstr "Neem vensters op alle blikvelden mee bij het doorlopen."
 
 #: ../lisp/x-cycle.jl
 msgid "Raise windows while they're temporarily selected during cycling."
-msgstr ""
+msgstr "Til vensters op als ze tijdelijk geselecteerd zijn bij het doorlopen."
 
 #: ../lisp/x-cycle.jl
 msgid "Warp the mouse pointer to windows as they're temporarily selected."
-msgstr ""
+msgstr "Gooi het pijltje naar venster die tijdelijk zijn geselecteerd."
 
 #: ../lisp/x-cycle.jl
 msgid "Focus windows when they're temporarily selected during cycling."
-msgstr ""
+msgstr "Geef vensters invoeraandacht als ze tijdelijk zijn geselecteerd."
 
 #: ../lisp/x-cycle.jl
 msgid "Disable auto-raising while temporarily selecting windows."
-msgstr ""
+msgstr "Zet automatisch optillen uit bij het tijdelijk selecteren."
 
 #: ../lisp/x-cycle.jl
 msgid "Cycle through all windows in order of recent selections."
-msgstr ""
+msgstr "Loop door alle vensters in volgorde van recent gebruik."
 
 #: ../themes/gradient/theme.jl
 msgid "Gradient frame"
-msgstr ""
+msgstr "Verlopend kozijn"
 
 #: ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
-msgstr ""
+msgstr "Richting van het kleurverloop in `gradient' kozijnstijl."
 
 #: ../themes/gradient/theme.jl
 msgid "`From' color of inactive frames in `gradient' frame style."
-msgstr ""
+msgstr "`Van' kleur van inactieve kozijnen in `gradient' kozijnstijl."
 
 #: ../themes/gradient/theme.jl
 msgid "`To' color of inactive frames in `gradient' frame style."
-msgstr ""
+msgstr "`Naar' kleur van inactieve kozijnen in `gradient' kozijnstijl."
 
 #: ../themes/gradient/theme.jl
 msgid "`From' color of active frames in `gradient' frame style."
-msgstr ""
+msgstr "`Van' kleur van actieve kozijnen in `gradient' kozijnstijl."
 
 #: ../themes/gradient/theme.jl
 msgid "`To' color of active frames in `gradient' frame style."
-msgstr ""
+msgstr "`Naar' kleur van actieve kozijnen in `gradient' kozijnstijl."
+
 
 #: ../themes/gradient/theme.jl
 msgid "Use less memory when creating gradients, possibly affecting quality."
-msgstr ""
+msgstr "Gebruik minder geheugen bij creeren van een kleurverloop (mogelijk met gevolg voor kwaliteit)."
 
 #: ../themes/mono/theme.jl
 msgid "Mono Frame"
-msgstr ""
+msgstr "Mono kozijn"
 
 #: ../themes/mono/theme.jl
 msgid "Use the GTK+ background color for inactive frames."
-msgstr ""
+msgstr "Gebruik GTK+ achtergrond kleur voor inactieve kozijnen."
 
 #: ../themes/mono/theme.jl
 msgid "Color of inactive frames. (When the above option is unset.)"
-msgstr ""
+msgstr "Kleur voor inactieve kozijnen. (Als bovenstaande optie niet is gezet.)"
 
 #: ../themes/mono/theme.jl
 msgid "Color of active frames."
-msgstr ""
+msgstr "Kleur van actieve kozijnen."
 
 #: ../themes/simple/theme.jl
 msgid "Simple Frame"
-msgstr ""
+msgstr "Simpel kozijn"
 
 #: ../themes/simple/theme.jl
 msgid "Color of inactive frames in `simple' frame style."
-msgstr ""
+msgstr "Kleur van inactieve kozijnen in `simpel' kozijnstijl."
 
 #: ../themes/simple/theme.jl
 msgid "Color of active frames in `simple' frame style."
-msgstr ""
+msgstr "Kleur van actieve kozijnen in `simpel' kozijnstijl."
 
 #: ../themes/smaker/theme.jl
 msgid "SMaker Frame"
-msgstr ""
+msgstr "SMaker kozijn"
 
 #: ../themes/smaker/theme.jl
 msgid "Use black-on-white button images."
-msgstr ""
+msgstr "Gebruik zwart-op-wit knopplaatjes."
 
 #: ../themes/smaker/theme.jl
 msgid "Color to use when drawing text."
-msgstr ""
+msgstr "Tekstkleur."
 
 #: ../themes/smaker/theme.jl
 msgid "Bar image for unfocused windows."
-msgstr ""
+msgstr "Balkplaatje voor aandachtsloze vensters."
 
 #: ../themes/smaker/theme.jl
 msgid "Bar image for focused windows."
-msgstr ""
+msgstr "Balkplaatje voor vensters met aandacht."
 
 #: ../themes/smaker/theme.jl
 msgid "Bar image for highlighted parts."
-msgstr ""
+msgstr "Balkplaatje voor beschenen delen."
 
 #: ../themes/smaker/theme.jl
 msgid "Bar image for clicked parts."
-msgstr ""
+msgstr "Balkplaatje voor aangeklikte delen"
 
 #: ../themes/smaker/theme.jl
 msgid "Height of title bar."
-msgstr ""
+msgstr "Hoogte van de titelbalk."
 
 #: ../themes/smaker/theme.jl
 msgid "Width of window border."
-msgstr ""
+msgstr "Breedte van de titelbalk."
 
 #: ../themes/smaker/theme.jl
 msgid "Border width of bar images."
-msgstr ""
+msgstr "Randbreedte van balkplaatjes."
 
