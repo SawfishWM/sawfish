@@ -77,12 +77,13 @@
 (require 'server)
 (require 'compat)
 
+(define (sawfish-load-all s)
+  ;; ensure that files are loaded in the correct structure
+  (load-all s (lambda (f) (load f nil t))))
+
 ;; all rep-based programs should do this
-(let
-    ((load-all (lambda (s)
-		 (load-all s (lambda (f) (load f nil t))))))
-  (load-all "autoload.jl")
-  (load-all (concat "os-" (symbol-name operating-system))))
+(sawfish-load-all "autoload.jl")
+(sawfish-load-all (concat "os-" (symbol-name operating-system)))
 
 ;; this will autoload, but it can be overridden
 (define window-menu beos-window-menu)
@@ -108,7 +109,7 @@
 	  (message "Created .sawmill symlink (delete if unwanted)"))
 
 	;; First the site-wide stuff
-	(load-all "site-init")
+	(sawfish-load-all "site-init")
 
 	;; then the users rep configuration, or site-wide defaults
 	(or (load (concat (user-home-directory) ".reprc") t t)
