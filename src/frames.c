@@ -444,6 +444,9 @@ set_frame_part_fg (struct frame_part *fp)
 
 	    Imlib_free_pixmap (imlib_id, fg_pixmap);
 	}
+	/* Imlib sometimes calls XSync (), which could hide events
+	   from select () */
+	rep_mark_input_pending (ConnectionNumber(dpy));
     }
     if (COLORP(fg) && FONTP(font))
     {
