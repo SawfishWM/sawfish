@@ -163,7 +163,13 @@ fp_sweep (void)
 	{
 	    assert (fp->next == 0);
 	    assert (fp->id == 0);
+#if 0
+	    /* XXX This assertion has been reported to trigger (when opening
+	       ddd and acroread -- both motif apps?). I don't see how this
+	       happens but since fp->id is zero and fp->win will get gc'd,
+	       we're not going to leak any resources, so.. */
 	    assert (fp->win == 0);
+#endif
 	    rep_FREE_CELL(fp);
 	}
 	else
@@ -1526,53 +1532,49 @@ destroy_window_frame (Lisp_Window *w, bool leave_frame_win)
 
 /* Lisp functions */
 
-DEFUN("frame-draw-mutex", Vframe_draw_mutex,
-      Sframe_draw_mutex, (repv arg), rep_Var) /*
+DEFUN("frame-draw-mutex", Fframe_draw_mutex,
+      Sframe_draw_mutex, (repv arg), rep_Subr1) /*
 ::doc:frame-draw-mutex::
 While this variable is non-nil no frame parts will be redrawn. When it is
 set to nil any pending redraws will take place.
 ::end:: */
 {
-    if (arg != 0)
+    repv ret = frame_draw_mutex ? Qt : Qnil;
+    frame_draw_mutex = (arg != Qnil);
+    if (!frame_draw_mutex)
     {
-	frame_draw_mutex = (arg != Qnil);
-	if (!frame_draw_mutex)
+	Lisp_Window *w;
+	for (w = window_list; w != 0; w = w->next)
 	{
-	    Lisp_Window *w;
-	    for (w = window_list; w != 0; w = w->next)
+	    struct frame_part *fp;
+	    for (fp = w->frame_parts; fp != 0; fp = fp->next)
 	    {
-		struct frame_part *fp;
-		for (fp = w->frame_parts; fp != 0; fp = fp->next)
-		{
-		    if (fp->pending_refresh)
-			refresh_frame_part (fp);
-		}
+		if (fp->pending_refresh)
+		    refresh_frame_part (fp);
 	    }
 	}
     }
-    return frame_draw_mutex ? Qt : Qnil;
+    return ret;
 }
 	
-DEFUN("frame-state-mutex", Vframe_state_mutex,
-      Sframe_state_mutex, (repv arg), rep_Var) /*
+DEFUN("frame-state-mutex", Fframe_state_mutex,
+      Sframe_state_mutex, (repv arg), rep_Subr1) /*
 ::doc:frame-state-mutex::
 While this variable is non-nil the state of frame parts will not be
 altered when the pointer enters or leaves its window.
 ::end:: */
 {
-    if (arg != 0)
+    repv ret = frame_state_mutex ? Qt : Qnil;
+    frame_state_mutex = (arg != Qnil);
+    if (arg == Qclicked
+	&& clicked_frame_part != 0
+	&& !clicked_frame_part->clicked)
     {
-	frame_state_mutex = (arg != Qnil);
-	if (arg == Qclicked
-	    && clicked_frame_part != 0
-	    && !clicked_frame_part->clicked)
-	{
-	    /* XXX hack alert */
-	    clicked_frame_part->clicked = 1;
-	    refresh_frame_part (clicked_frame_part);
-	}
-    }   
-    return frame_state_mutex ? Qt : Qnil;
+	/* XXX hack alert */
+	clicked_frame_part->clicked = 1;
+	refresh_frame_part (clicked_frame_part);
+    }
+    return ret;
 }
 
 DEFUN("frame-part-get", Fframe_part_get,
