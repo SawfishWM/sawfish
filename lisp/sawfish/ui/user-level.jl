@@ -23,7 +23,8 @@
 
 (define-structure sawfish.ui.user-level
 
-    (export slot-is-appropriate-p)
+    (export user-level-is-appropriate-p
+	    slot-is-appropriate-p)
 
     (open rep
 	  sawfish.ui.config
@@ -36,10 +37,13 @@
   (put 'intermediate 'nokogiri-user-level 1)
   (put 'expert 'nokogiri-user-level 2)
 
+  (define (user-level-is-appropriate-p level)
+    (>= (get *nokogiri-user-level* 'nokogiri-user-level)
+	(get level 'nokogiri-user-level)))
+
   ;; return t if SLOT should be shown
   (define (slot-is-appropriate-p slot)
-    (>= (get *nokogiri-user-level* 'nokogiri-user-level)
-	(get (slot-user-level slot) 'nokogiri-user-level)))
+    (user-level-is-appropriate-p (slot-user-level slot)))
 
   (define (user-level-changed) (redisplay-group))
 
