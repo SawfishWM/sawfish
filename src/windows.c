@@ -627,8 +627,13 @@ surrounding WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
-    return Fcons (rep_MAKE_INT(VWIN(win)->frame_width),
-		  rep_MAKE_INT(VWIN(win)->frame_height));
+    if (VWIN(win)->reparented)
+    {
+	return Fcons (rep_MAKE_INT(VWIN(win)->frame_width),
+		      rep_MAKE_INT(VWIN(win)->frame_height));
+    }
+    else
+	return Fwindow_dimensions (win);
 }
 
 DEFUN("window-frame-offset", Fwindow_frame_offset,
@@ -880,11 +885,12 @@ DEFUN("window-id", Fwindow_id, Swindow_id, (repv win), rep_Subr1) /*
 ::doc:Swindow-id::
 window-id WINDOW
 
-Return the numeric id of the client window associated with object WINDOW.
+Return the numeric id of the client window associated with object
+WINDOW. Returns nil if the client window has been deleted.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
-    return rep_MAKE_INT (VWIN(win)->id);
+    return VWIN(win)->id ? rep_MAKE_INT (VWIN(win)->id) : Qnil;
 }
 
 DEFUN("window-group-id", Fwindow_group_id, Swindow_group_id,
