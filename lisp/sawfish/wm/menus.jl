@@ -283,7 +283,7 @@ before killing it.")
 	      ;; to succeed)
 	      (ungrab-pointer)
 	      (ungrab-keyboard)
-	      (sync-server)
+	      (sync-server t)
 	      (when (functionp spec)
 		(setq spec (spec)))
 	      ;; XXX this is a hack, but I want menus to appear under buttons
