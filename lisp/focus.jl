@@ -41,8 +41,16 @@
   (set-input-focus w)
   (window-put w 'keymap window-keymap)
   (when (or (window-get w 'focus-proxy-click) focus-proxy-click)
-    ;; pass the event through to the client window
-    (allow-events 'replay-pointer)))
+    ;; there's a problem here. allow-events called with replay-pointer
+    ;; ignores any passive grabs on the window, thus if the wm has a
+    ;; binding in the window's keymap, it would be ignored. So search
+    ;; manually..
+    (let
+	((command (lookup-event-binding (current-event))))
+      (if command
+	  (call-command command)
+	;; pass the event through to the client window
+	(allow-events 'replay-pointer)))))
 
 (defun focus-enter-fun (w)
   (if (eq w 'root)
