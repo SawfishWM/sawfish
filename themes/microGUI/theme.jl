@@ -341,7 +341,7 @@
 (defun microGUI:title-width (w)
   (let
       ((w-width (car (window-dimensions w))))
-    (min (- w-width 100) (text-width (window-name w)))))
+    (max 0 (min (- w-width 100) (text-width (window-name w))))))
 
 (defun microGUI:init ()
   (add-hook 'property-notify-hook 'microGUI:update-text-width))
