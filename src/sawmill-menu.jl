@@ -50,13 +50,13 @@ exec rep "$0" "$@"
 			(setq item (gtk-menu-item-new-with-label label))
 			(gtk-menu-item-set-submenu item sub))
 		    (setq item (gtk-menu-item-new-with-label label))
-		    (when (fboundp 'gtk-widget-lock-accelerators)
-		      (gtk-widget-lock-accelerators item))
 		    (gtk-signal-connect item "activate"
 					`(lambda ()
 					   (setq menu-selected
 						 ',(car cell))))))
 		(when item
+		  (when (fboundp 'gtk-widget-lock-accelerators)
+		    (gtk-widget-lock-accelerators item))
 		  (funcall (if bar 'gtk-menu-bar-append
 			     'gtk-menu-append) menu item)
 		  (gtk-widget-show item))))
