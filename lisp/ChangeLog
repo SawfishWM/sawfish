@@ -1,3 +1,17 @@
+2000-07-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keymap.jl (quote-event): new implementation that uses event
+	replaying to forward the events, so that it works with clients
+	that don't accept synthesized events. Adapted from code posted
+	to the mailing list by Timo Korvola in March (but without the
+	complexity of also grabbing the pointer)
+
+	* x-cycle.jl (cycle-windows): grab the keyboard synchronously,
+	then if the M-TAB sequence is terminated by a non-release event
+	that doesn't have a wm binding, replay it to the focused client
+	window. Also, when calling any tail commands, ensure that
+	current-event-window returns the newly-focused window
+
 2000-07-09  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.30
