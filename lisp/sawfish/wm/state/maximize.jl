@@ -328,12 +328,14 @@
   (define (maximize-find-workarea #!optional w #!key head)
     "Return the rectangle representing the largest rectangle on the screen that
 doesn't overlap any avoided windows, or nil."
+    (unless head
+      (setq head (current-head w)))
     (let* ((avoided (avoided-windows w))
 	   (edges (get-visible-window-edges
 		   #:with-ignored-windows t
 		   #:windows avoided
-		   #:include-heads (list (or head (current-head))))))
-      (find-max-rectangle avoided edges (current-head w))))
+		   #:include-heads (list head))))
+      (find-max-rectangle avoided edges head)))
 
   (define (frame-part-movable-p w part)
     (if (not move-lock-when-maximized)
@@ -362,7 +364,7 @@ doesn't overlap any avoided windows, or nil."
 	   (edges (get-visible-window-edges
 		   #:with-ignored-windows t
 		   #:windows avoided
-		   #:include-heads (list (current-head)))))
+		   #:include-heads (list (current-head w)))))
       (when (window-maximizable-p w direction hints)
 	(unless (window-get w 'unmaximized-geometry)
 	  (window-put w 'unmaximized-geometry (list (car coords) (cdr coords)
