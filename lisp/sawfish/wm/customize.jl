@@ -155,6 +155,7 @@
 
 ;;;###autoload
 (defun customize ()
+  "Invoke the user-customization system."
   (interactive)
   (if customize-process
       (error "Customize already active")
