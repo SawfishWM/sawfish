@@ -21,6 +21,12 @@
 
 (provide 'sm-init)
 
+(defvar sm-client-id nil
+  "A string identifying the current session.")
+
+;; this is before both the panel and gmc..?
+(defvar sm-gsm-priority 30)
+
 (defvar sm-save-directory "~/.sawmill/sessions")
 
 (defvar sm-saved-window-properties nil
@@ -35,6 +41,9 @@ the state file.")
   "List of functions called when the state of a window is restored. Each is
 called with args (WINDOW ALIST), where ALIST defines the state saved for
 the window.")
+
+
+;; utilities
 
 (defun sm-find-file (id)
   (expand-file-name id sm-save-directory))
@@ -52,50 +61,60 @@ the window.")
 	props))
 
 
+;; callback
+
+(defun sm-save-yourself ()
+  (save-session sm-client-id))
+
+
 ;; initialisation
 
-(when (and (not batch-mode) sm-client-id)
-  ;; 1. setup all session manager properties
+(defun sm-init (id)
+  (when (setq sm-client-id (sm-connect id))
+    ;; 1. setup all session manager properties
 
-  ;; remove any --sm-client-id option from saved-command-line-args
-  (let
-      ((args saved-command-line-args)
-       tem)
-    (while (cdr args)
-      (when (string-match "^--sm-client-id" (car (cdr args)))
-	(setq tem (car (cdr args)))
-	(rplacd args (cdr (cdr args)))
-	(unless (string-match "^--sm-client-id=" tem)
-	  (rplacd args (cdr (cdr args)))))
-      (setq args (cdr args))))
+    ;; remove any --sm-client-id option from saved-command-line-args
+    (let
+	((args saved-command-line-args)
+	 tem)
+      (while (cdr args)
+	(when (string-match "^--sm-client-id" (car (cdr args)))
+	  (setq tem (car (cdr args)))
+	  (rplacd args (cdr (cdr args)))
+	  (unless (string-match "^--sm-client-id=" tem)
+	    (rplacd args (cdr (cdr args)))))
+	(setq args (cdr args))))
 
-  ;; XXX should I set this to SmRestartImmediately (2) instead
-  ;; XXX of SmRestartIfRunning (0) ?
-  (sm-set-property "RestartStyleHint" 0)
+    ;; XXX should I set this to SmRestartImmediately (2) instead
+    ;; XXX of SmRestartIfRunning (0) ?
+    (sm-set-property "RestartStyleHint" 0)
 
-  (sm-set-property "CloneCommand" saved-command-line-args)
+    (sm-set-property "CloneCommand" saved-command-line-args)
 
-  ;; fix saved-command-line-args to include the client-id
-  (rplacd saved-command-line-args (list* "--sm-client-id" sm-client-id
-					 (cdr saved-command-line-args)))
+    ;; fix saved-command-line-args to include the client-id
+    (rplacd saved-command-line-args (list* "--sm-client-id" sm-client-id
+					   (cdr saved-command-line-args)))
 
-  (sm-set-property "RestartCommand" saved-command-line-args)
+    (sm-set-property "RestartCommand" saved-command-line-args)
 
-  (sm-set-property "CurrentDirectory" default-directory)
-  (sm-set-property
-   "DiscardCommand" (list "rm" "-f" (local-file-name
-				     (sm-find-file sm-client-id))))
-  (sm-set-property "ProcessId" (format nil "%d" (getpid)))
-  (sm-set-property "Program" (car saved-command-line-args))
-  (sm-set-property "UserId" (user-login-name))
-  (sm-set-property
-   "Environment" (apply 'nconc
-			(mapcar #'(lambda (e)
-				    (when (string-match "=" e)
-				      (list (substring e 0 (match-start))
-					    (substring e (match-end)))))
-				process-environment)))
+    (sm-set-property "CurrentDirectory" default-directory)
+    (sm-set-property
+     "DiscardCommand" (list "rm" "-f" (local-file-name
+				       (sm-find-file sm-client-id))))
+    (sm-set-property "ProcessId" (format nil "%d" (getpid)))
+    (sm-set-property "Program" (car saved-command-line-args))
+    (sm-set-property "UserId" (user-login-name))
+    (sm-set-property
+     "Environment" (apply 'nconc
+			  (mapcar #'(lambda (e)
+				      (when (string-match "=" e)
+					(list (substring e 0 (match-start))
+					      (substring e (match-end)))))
+				  process-environment)))
 
-  ;; 2. load the session if it exists
-  (when (file-exists-p (sm-find-file sm-client-id))
-    (load-session sm-client-id)))
+    ;; we need to start before gmc, otherwise it won't hint its icons
+    (sm-set-property "_GSM_Priority" sm-gsm-priority)
+
+    ;; 2. load the session if it exists
+    (when (file-exists-p (sm-find-file sm-client-id))
+      (load-session sm-client-id))))
