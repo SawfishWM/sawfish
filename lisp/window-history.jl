@@ -58,9 +58,9 @@
 (define window-history-key-property 'WM_CLASS)
 
 (define window-history-menu
-  `((,(_ "Save _position") window-history-save-position)
-    (,(_ "Save _dimensions") window-history-save-dimensions)
-    (,(_ "Save _attributes") window-history-save-attributes)
+  `((,(_ "Remember _position") window-history-save-position)
+    (,(_ "Remember _dimensions") window-history-save-dimensions)
+    (,(_ "Remember _attributes") window-history-save-attributes)
     ()
     (,(_ "_Forget saved state") window-history-forget)))
 
@@ -71,19 +71,19 @@
 
 (defcustom window-history-auto-save-position t
   "Automatically remember window positions."
-  :group (workspace window-history)
+  :group placement
   :type boolean
   :require window-history)
 
 (defcustom window-history-auto-save-dimensions nil
   "Automatically remember window sizes."
-  :group (workspace window-history)
+  :group placement
   :type boolean
   :require window-history)
 
 (defcustom window-history-auto-save-state nil
   "Automatically remember other window attributes."
-  :group (workspace window-history)
+  :group placement
   :type boolean
   :require window-history)
 
