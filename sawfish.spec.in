@@ -3,7 +3,7 @@ Name: sawfish
 Version: @version@
 Release: 1
 Requires: librep >= 0.14, rep-gtk >= 0.14, rep-gtk-gnome
-Copyright: GPL
+License: GPL
 Group: User Interface/Desktops
 Source: http://download.sourceforge.net/sawfish/sawfish-%{version}.tar.gz
 URL: http://sawmill.sourceforge.net/
@@ -71,13 +71,13 @@ fi
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %doc README NEWS FAQ THANKS BUGS TODO
 %doc po/sawfish.pot lisp/sawfish/ui/WIDGETS lisp/sawfish/ui/WISHLIST
-%{_bindir}/sawfish
-%{_bindir}/sawfish-client
-%{_bindir}/sawfish-ui
-%{_bindir}/sawfish-capplet
+%attr(755,root,root) %{_bindir}/sawfish
+%attr(755,root,root) %{_bindir}/sawfish-client
+%attr(755,root,root) %{_bindir}/sawfish-ui
+%attr(755,root,root) %{_bindir}/sawfish-capplet
 %{_datadir}/sawfish/%{version}
 %{_datadir}/locale
 %{_datadir}/control-center/Sawfish
@@ -89,11 +89,15 @@ fi
 %{_infodir}/sawfish*
 
 %files themer
-%defattr(-,root,root)
-%{_bindir}/sawfish-themer
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/sawfish-themer
 %{_datadir}/sawfish/%{version}/themer.glade
 
 %changelog
+* Sat Jun 29 2002 Rui M. Seabra <rms@1407.org>
+- Install with correct file permissions.
+- Correct common mistaken usage of 'Copyrigh:' into License.
+
 * Tue Jun 12 2000 John Harper <john@dcs.warwick.ac.uk>
 - merged differences from RH spec file
 
