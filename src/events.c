@@ -20,6 +20,8 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
 #include "sawmill.h"
+#include <limits.h>
+#include <assert.h>
 #include <X11/extensions/shape.h>
 #include <X11/Xresource.h>
 
@@ -39,12 +41,8 @@ static int current_mouse_x, current_mouse_y;
 static int button_press_mouse_x = -1, button_press_mouse_y = -1;
 static Window button_press_window;
 
-/* Most recently seen server timestamp. May be CurrentTime if we
-   haven't seen a timestamp recently */
+/* Most recently seen server timestamp. */
 Time last_event_time;
-
-/* The actual most-recently-seen server timestamp */
-static Time actual_last_event_time;
 
 /* Current XEvent or a null pointer */
 XEvent *current_x_event;
@@ -57,6 +55,8 @@ struct frame_part *clicked_frame_part;
 static repv current_context_map;
 
 static XID event_handler_context;
+
+static Atom xa_sawmill_timestamp;
 
 DEFSYM(visibility_notify_hook, "visibility-notify-hook");
 DEFSYM(destroy_notify_hook, "destroy-notify-hook");
@@ -87,42 +87,68 @@ DEFSYM(deleted, "deleted");
 DEFSYM(raise_window, "raise-window");
 DEFSYM(lower_window, "lower-window");
 
+/* Return the value of T2 - T1, compensating for clock wrap-arounds.
+   If the difference is greater than half the possible range, assumes
+   that T2 is _less_ than T1, returning a negative value */
+static long
+subtract_timestamps (Time t2, Time t1)
+{
+    u_long diff = ((t2 > t1)
+		   ? (t2 - t1)
+		   : (ULONG_MAX - (t1 - t2)));
+
+    if (diff > ULONG_MAX / 2)
+    {
+	/* too big, assume it's negative */
+	diff = ULONG_MAX - diff;
+    }
+
+    assert (diff < LONG_MAX);
+    return diff;
+}
+
 /* Where possible record the timestamp from event EV */
 static void
 record_event_time (XEvent *ev)
 {
+    Time new_time = CurrentTime;
     switch (ev->type)
     {
     case KeyPress:
     case KeyRelease:
-	last_event_time = ev->xkey.time;
-	actual_last_event_time = last_event_time;
+	new_time = ev->xkey.time;
 	break;
 
     case ButtonPress:
     case ButtonRelease:
-	last_event_time = ev->xbutton.time;
-	actual_last_event_time = last_event_time;
+	new_time = ev->xbutton.time;
 	break;
 
     case MotionNotify:
-	last_event_time = ev->xmotion.time;
-	actual_last_event_time = last_event_time;
+	new_time = ev->xmotion.time;
 	break;
 
     case EnterNotify:
     case LeaveNotify:
-	last_event_time = ev->xcrossing.time;
-	actual_last_event_time = last_event_time;
+	new_time = ev->xcrossing.time;
 	break;
 
     case PropertyNotify:
-	last_event_time = ev->xproperty.time;
-	actual_last_event_time = last_event_time;
+	new_time = ev->xproperty.time;
 	break;
     }
-    DB(("  last_event_time=%lu actual_last_event_time=%lu\n",
-	last_event_time, actual_last_event_time));
+
+    if (new_time != CurrentTime)
+    {
+	long diff = subtract_timestamps (new_time, last_event_time);
+	if (diff < 0)
+	    fprintf (stderr, "huh!? time's going backwards (%lu -> %lu)\n",
+		     last_event_time, new_time);
+	else
+	    last_event_time = new_time;
+    }
+
+    DB(("  last_event_time=%lu\n", last_event_time));
 }
 
 static void
@@ -875,6 +901,24 @@ get_event_mask (int type)
 	return 0;
 }
 
+/* Fetch a recent timestamp from the server. */
+Time
+get_server_timestamp (void)
+{
+    XEvent ev;
+    Window w = no_focus_window;			/* XXX abuse */
+
+    /* XXX There must be an easier method.. */
+    while (XCheckWindowEvent (dpy, w, PropertyChangeMask, &ev)) ;
+    XSelectInput (dpy, w, PropertyChangeMask);
+    XChangeProperty (dpy, w, xa_sawmill_timestamp,
+		     XA_STRING, 8, PropModeReplace, "foo", 3);
+    XSelectInput (dpy, w, 0);
+    XWindowEvent (dpy, w, PropertyChangeMask, &ev);
+
+    return ev.xproperty.time;
+}
+
 
 /* Window-local event handlers */
 
@@ -1122,14 +1166,21 @@ Return the window that received the current event, or the symbol
 }
 
 DEFUN("x-server-timestamp", Fx_server_timestamp, Sx_server_timestamp,
-      (void), rep_Subr0) /*
+      (repv from_server), rep_Subr1) /*
 ::doc:x-server-timestamp::
-x-server-timestamp
+x-server-timestamp [FROM-SERVER]
 
-Return the most recently seen X server timestamp, as a cons cell.
+Return a recent X server timestamp, as a cons cell containing two
+integers.
+
+If FROM-SERVER is non-nil the timestamp is read directly from the
+server, otherwise the most recent timestamp seen by the window manager
+(i.e. from an event) is returned.
 ::end:: */
 {
-    return rep_MAKE_LONG_INT (actual_last_event_time);
+    Time time = ((from_server == Qnil)
+		 ? last_event_time : get_server_timestamp ());
+    return rep_MAKE_LONG_INT (time);
 }
 
 DEFUN("x-events-queued", Fx_events_queued, Sx_events_queued, (void), rep_Subr0)
@@ -1311,6 +1362,9 @@ events_init (void)
     rep_mark_static (&current_context_map);
 
     event_handler_context = XUniqueContext ();
+
+    xa_sawmill_timestamp = XInternAtom (dpy, "_SAWMILL_TIMESTAMP", False);
+    last_event_time = get_server_timestamp ();
 }
 
 void
