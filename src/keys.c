@@ -65,11 +65,9 @@ DEFSYM(alt_keysyms, "alt-keysyms");
 static void grab_keymap_event (repv km, long code, long mods, bool grab);
 static void grab_all_keylist_events (repv map, bool grab);
 
-/* Called for unbound events */
-bool (*event_proxy_fun)(XEvent *ev, long code, long mods);
-
 static int all_buttons[5] = { Button1, Button2, Button3, Button4, Button5 };
 static int all_lock_combs[4] = { 0, LockMask, 0, LockMask };
+
 
 /* Translate from X events to Lisp events */
 
@@ -328,21 +326,11 @@ lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
     return (k != rep_NULL && KEYP(k)) ? KEY_COMMAND(k) : rep_NULL;
 }
 
-/* Process the event CODE+MODS. OS-INPUT-MSG is the raw input event
-   from the window-system, this is only used to cook a string from.  */
-repv
-eval_input_event(repv context_map)
+static repv
+lookup_event_binding (u_long code, u_long mods, repv context_map)
 {
-    u_long code, mods;
-    repv result = Qnil, cmd;
     Lisp_Window *w = focus_window;
-
-    if (!translate_event (&code, &mods, current_x_event))
-	return Qnil;
-
-    current_event[0] = code;
-    current_event[1] = mods;
-    if (mods & EV_TYPE_MOUSE)
+    if (current_x_event && mods & EV_TYPE_MOUSE)
     {
 	/* If a mouse event, look for bindings in the window that
 	   the pointer is in, not where the input focus is. */
@@ -357,19 +345,36 @@ eval_input_event(repv context_map)
 		w = fp->win;
 	}
     }
-    cmd = lookup_binding(code, mods, 0, context_map, w);
+    return lookup_binding(code, mods, 0, context_map, w);
+}
+
+/* Process the event CODE+MODS. OS-INPUT-MSG is the raw input event
+   from the window-system, this is only used to cook a string from.  */
+repv
+eval_input_event(repv context_map)
+{
+    u_long code, mods;
+    repv result = Qnil, cmd;
+
+    if (!translate_event (&code, &mods, current_x_event))
+	return Qnil;
+
+    current_event[0] = code;
+    current_event[1] = mods;
+
+    cmd = lookup_event_binding (code, mods, context_map);
+
     if(cmd != rep_NULL)
     {
 	/* Found a binding for this event; evaluate it. */
 	result = Fcall_command(cmd, Qnil);
     }
-    else if (event_proxy_fun && event_proxy_fun (current_x_event, code, mods))
-	;
     else
     {
 	/* An unbound key with no prefix keys. */
 	result = Fcall_hook(Qunbound_key_hook, Qnil, Qor);
     }
+
     last_event[0] = current_event[0];
     last_event[1] = current_event[1];
     current_event[0] = current_event[1] = 0;
@@ -907,15 +912,30 @@ DEFUN("lookup-event-binding", Flookup_event_binding, Slookup_event_binding, (rep
 lookup-event-binding EVENT
 
 Return the command currently associated with the event EVENT.
+
+Note that `currently associated' means that the currently active set of
+keymaps is used to resolve the binding. This means the window and
+frame-part that received the current event for pointer events, or the
+currently focused window for keyboard events.
 ::end:: */
 {
-    repv res;
+    repv res, context = Qnil;
+    u_long code, mods;
+
     if(!EVENTP(ev))
 	return(rep_signal_arg_error(ev, 1));
 
-    /* XXX replace Qnil by context-sensitive keymap, and define window.. */
-    res = lookup_binding(rep_INT(EVENT_CODE(ev)),
-			 rep_INT(EVENT_MODS(ev)), 0, Qnil, 0);
+    code = rep_INT(EVENT_CODE(ev));
+    mods = rep_INT(EVENT_MODS(ev));
+
+    if (mods & EV_TYPE_MOUSE)
+    {
+	/* look for a context map */
+	if (clicked_frame_part != 0 && clicked_frame_part->clicked)
+	    context = get_keymap_for_frame_part (clicked_frame_part);
+    }
+
+    res = lookup_event_binding(code, mods, context);
     return res ? res : Qnil;
 }
 
