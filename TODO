@@ -10,8 +10,6 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
-  ! vertically maximize a window, restart, then window is twice as high
-
   ! multiple viewports, gnome tasklist only shows windows when on
     viewport (0,0), but then shows all windows on the workspace
 
@@ -27,10 +25,6 @@ Outstanding bugs
 
   ! It's not possible to compile sawmill-ui.jl without an X connection
     (it requires 'gtk, which then calls gtk_init (), ...)
-
-  ! install-sh script isn't found from subdirectories?
-
-    [workaround: install GNU fileutils]
 
   ! ICCCM says we should not passive grab on the client windows, but on
     our frames instead
@@ -48,6 +42,10 @@ Outstanding bugs
 
   ! without gmc, click on root, drag over window title, drag window,
     release button, move back onto root, title still highlighted
+
+  ! the gnome _WIN_MAXIMIZED_ hints are ignored when the window is
+    mapped, since it's not possible to maximize the window at that
+    point (until the frame has been created)
 
 
 General tasks
@@ -152,6 +150,8 @@ General tasks
   + Icons (?)
 
   + Load tarred/compressed themes?
+
+    [ 17/10: this has been added now, but it requires rep 0.7 ]
 
   + Support the KDE hints
 
