@@ -1,3 +1,8 @@
+2000-05-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* display.c (redisplay): if XPending () returns non-zero, mark
+	that there is input pending on the display
+
 2000-05-25  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c, commands.c: use rep_call_with_closure () if it's
