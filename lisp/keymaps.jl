@@ -177,8 +177,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "M-Tab" 'cycle-windows)
 
   (bind-keys root-window-keymap
-    "Button2-Click1" 'popup-root-menu
-    "Button2-Off" 'nop)			;so it doesn't get proxyed
+    "Button2-Click1" 'popup-root-menu)
 
   (bind-keys close-button-keymap
     "Button3-Click1" 'popup-window-menu
