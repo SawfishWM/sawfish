@@ -748,7 +748,15 @@ lookup_event(u_long *code, u_long *mods, u_char *desc)
 	    {
 		*mods |= x->mods;
 		*code = x->code;
-		return TRUE;
+		if ((x->mods == EV_TYPE_MOUSE)
+		    && (*mods & (EV_MOD_BUTTON_MASK | EV_MOD_ANY)) == 0)
+		{
+		    /* Button events must include at least one of the button
+		       modifiers (otherwise they can never be generated) */
+		    return FALSE;
+		}
+		else
+		    return TRUE;
 	    }
 	    x++;
 	}

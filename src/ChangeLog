@@ -1,3 +1,9 @@
+2000-12-05  John Harper  <jsh@eazel.com>
+
+	* keys.c (lookup_event): reject events if they're button events
+	but don't have at least one button modifier (or the `Any'
+	modifier) set. Fixes #4983
+
 2000-12-04  John Harper  <jsh@eazel.com>
 
 	* keys.c: support Button6 and Button7
