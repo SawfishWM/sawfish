@@ -1,3 +1,8 @@
+2000-03-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (set_frame_part_bg): remember to mark fg as lost
+	when calling a function to draw bg
+
 2000-03-21  John Harper  <john@dcs.warwick.ac.uk>
 
 	* x.c (drawable_from_arg): don't automatically look for back

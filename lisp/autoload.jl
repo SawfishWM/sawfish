@@ -181,4 +181,8 @@
 (autoload 'select-workspace-interactively "prompt-wm" t)
 (autoload 'draw-window-outline "window-outline")
 (autoload 'erase-window-outline "window-outline")
+(autoload 'wireframe-animator "anim-outline")
+(autoload 'solid-animator "anim-outline")
+(define-window-animator 'wireframe wireframe-animator)
+(define-window-animator 'solid solid-animator)
 ;;; ::autoload-end::
