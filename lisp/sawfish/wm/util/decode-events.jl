@@ -25,6 +25,7 @@
 	    encode-event
 	    string->keysym
 	    modifier->keysyms
+	    modifier-keysym-p
 	    should-grab-button-event-p)
 
     (open rep
@@ -123,6 +124,14 @@ representing the X11 keysyms that may generate the modifier."
 	  ((eq modifier 'control)
 	   '(Control_L Control_R))
 	  (t (error "Unknown modifier: %s" modifier))))
+
+  (define (modifier-keysym-p keysym)
+    "Returns true if KEYSYM is a modifier keysym."
+    (or (memq keysym '(Shift_L Shift_R Control_L Control_R))
+	(member (symbol-name keysym) alt-keysyms)
+	(member (symbol-name keysym) meta-keysyms)
+	(member (symbol-name keysym) hyper-keysyms)
+	(member (symbol-name keysym) super-keysyms)))
 
   (define (should-grab-button-event-p event keymap)
     (let* ((decoded (decode-event event))
