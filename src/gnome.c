@@ -96,7 +96,7 @@ DEFUN("gnome-set-workspace", Fgnome_set_workspace,
 {
     repv spaces = Fsymbol_value (Qws_workspaces, Qt);
     repv current = Fsymbol_value (Qws_current_workspace, Qt);
-    int total = 0, active = -1;
+    int total = 0, active = 0;
 
     while (rep_CONSP(spaces) && !rep_INTERRUPTP)
     {
