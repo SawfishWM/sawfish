@@ -113,17 +113,16 @@ for the bindings to be installed if and when it is."
 
 ;;;###autoload
 (defun read-event (&optional prompt)
-  (when (grab-keyboard)
-    (unwind-protect
-	(let
-	    ((override-keymap '(keymap)))
-	  (display-message (or prompt (_ "Press key...")))
-	  (add-hook 'unbound-key-hook read-event-callback)
-	  (catch 'read-event
-	    (recursive-edit)))
-      (remove-hook 'unbound-key-hook read-event-callback)
-      (display-message nil)
-      (ungrab-keyboard))))
+  (call-with-keyboard-grabbed
+   (lambda ()
+     (unwind-protect
+	 (let
+	     ((override-keymap '(keymap))
+	      (unbound-key-hook (list read-event-callback)))
+	   (display-message (or prompt (_ "Press key...")))
+	   (catch 'read-event
+	     (recursive-edit)))
+       (display-message nil)))))
 
 ;;;###autoload
 (defun quote-event (window)
