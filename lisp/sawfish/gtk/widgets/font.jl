@@ -62,7 +62,11 @@
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (gtk-entry-set-text entry (and (stringp x) x))))
+		   (cond ((stringp x)
+			  (gtk-entry-set-text entry x))
+			 ((consp x)
+			  ;; FIXME: this is (TYPE . NAME)
+			  (gtk-entry-set-text entry (cdr x))))))
 	  ((clear) (lambda ()
 		     (gtk-entry-set-text entry default-font)))
 	  ((ref) (lambda () (gtk-entry-get-text entry)))
