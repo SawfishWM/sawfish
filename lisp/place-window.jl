@@ -131,7 +131,7 @@ this mode. The single argument is the window to be placed."
 (defun place-window-interactively (w)
   (require 'move-resize)
   (let
-      ((move-outline-mode nil)
+      ((move-outline-mode 'box)
        (ptr (query-pointer))
        (dims (window-frame-dimensions w)))
     ;; XXX hacktastic! I don't know why the next thing is needed,
