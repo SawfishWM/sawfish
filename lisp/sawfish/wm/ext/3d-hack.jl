@@ -28,7 +28,11 @@
 
     (export 3d-init
 	    3d-destroy
-	    3d-hack)
+	    3d-hack
+
+	    ;; the available objects
+	    3d-make-cube
+	    3d-make-saw)
 
     (open rep
 	  rep.system
