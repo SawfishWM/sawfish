@@ -58,6 +58,8 @@
 	  sawfish.wm.fonts
 	  sawfish.wm.misc)
 
+  (define-structure-alias custom sawfish.wm.custom)
+
   ;; list associating groups with the list of variables in that group
   (define custom-groups (list 'root "Sawfish"))
 

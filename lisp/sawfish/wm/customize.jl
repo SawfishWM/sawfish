@@ -31,6 +31,8 @@
 	  sawfish.wm.custom
 	  sawfish.wm.misc)
 
+  (define-structure-alias customize sawfish.wm.customize)
+
   (defvar customize-program "sawfish-ui"
     "Location of the program implementing sawfish's configuration interface.")
 
