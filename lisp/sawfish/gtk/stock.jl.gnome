@@ -42,13 +42,6 @@
 					      '(ok cancel)
 					    '(ok)))))
 
-      (define (on-cancel)
-	(gtk-widget-destroy window))
-
-      (define (on-ok)
-	(ok-callback)
-	(gtk-widget-destroy window))
-	  
       (gtk-window-set-wmclass window "ok_cancel_dialog" "Nokogiri")
       (when main-window
 	(gnome-dialog-set-parent window main-window))
