@@ -29,6 +29,7 @@
 	    stack-window-below
 	    restack-window
 	    stacking-order-by-depth
+	    window-depth
 	    set-window-depth
 	    window-on-top-p
 	    raise-lower-window

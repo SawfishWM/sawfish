@@ -40,6 +40,13 @@
   ;; - _NET_WM_NAME		-- needs to be in C code?
   ;; - _NET_WM_ICON
 
+  ;; 1.1 additions:
+  ;;  - _NET_WM_ALLOWED_ACTIONS
+  ;;  - _STATE_HIDDEN?
+  ;;  - _NET_WM_MOVERESIZE changes
+  ;;  - _NET_SHOWING_DESKTOP?
+  ;;  - _NET_MOVERESIZE_WINDOW
+
   ;; maybe add some state extensions for things the spec doesn't
   ;; cover but existed in the old GNOME spec; e.g. _GNOME_WM_STATE_FOO
   ;; for FOO being DO_NOT_COVER, SKIP_FOCUS, ..?
@@ -56,6 +63,8 @@
   (defconst _NET_WM_MOVERESIZE_SIZE_BOTTOMLEFT 6)
   (defconst _NET_WM_MOVERESIZE_SIZE_LEFT 7)
   (defconst _NET_WM_MOVERESIZE_MOVE 8)
+  (defconst _NET_WM_MOVERESIZE_SIZE_KEYBOARD 9)
+  (defconst _NET_WM_MOVERESIZE_MOVE_KEYBOARD 10)
 
   (defconst _NET_WM_STATE_REMOVE 0)
   (defconst _NET_WM_STATE_ADD 1)
@@ -88,9 +97,13 @@
      _NET_WM_MOVERESIZE_SIZE_TOP
      _NET_WM_MOVERESIZE_SIZE_TOPLEFT
      _NET_WM_MOVERESIZE_SIZE_TOPRIGHT
+     _NET_WM_MOVERESIZE_SIZE_KEYBOARD
+     _NET_WM_MOVERESIZE_MOVE_KEYBOARD
      _NET_WM_PING
      _NET_WM_STATE
+     _NET_WM_STATE_ABOVE
      _NET_WM_STATE_ADD
+     _NET_WM_STATE_BELOW
      _NET_WM_STATE_FULLSCREEN
      _NET_WM_STATE_MAXIMIZED
      _NET_WM_STATE_MAXIMIZED_HORZ
@@ -104,10 +117,14 @@
      _NET_WM_WINDOW_TYPE
      _NET_WM_WINDOW_TYPE_DESKTOP
      _NET_WM_WINDOW_TYPE_DIALOG
-     _NET_WM_WINDOW_TYPE_DOCK])
+     _NET_WM_WINDOW_TYPE_DOCK
+     _NET_WM_WINDOW_TYPE_TOOLBAR
+     _NET_WM_WINDOW_TYPE_MENU
+     _NET_WM_WINDOW_TYPE_UTILITY
+     _NET_WM_WINDOW_TYPE_SPLASH])
   
-  (defconst desktop-layer -4)
-  (defconst dock-layer +4)
+  (defvar wm-spec-below-depth +2)
+  (defvar wm-spec-above-depth +2)
 
   (define supported-states '())
 
@@ -192,15 +209,16 @@
 	  (setq last-workarea workarea)))
 
       (define (set-window-hints w)
-	(cond ((window-sticky-p/workspace w)
-	       (set-x-property w '_NET_WM_DESKTOP
-			       (vector #xffffffff) 'CARDINAL 32))
-	      ((window-get w 'swapped-in)
-	       ;; XXX the gnome-wm standard sucks..!
-	       (let ((space (window-get w 'swapped-in)))
-		 (set-x-property w '_NET_WM_DESKTOP
-				 (vector (- space (car limits)))
-				 'CARDINAL 32)))))
+	(let ((vec (if (window-sticky-p/workspace w)
+		       (vector #xffffffff)
+		     (let ((space (or (window-get w 'swapped-in)
+				      (car (window-workspaces w)))))
+		       (and space (vector (- space (car limits))))))))
+	  (unless (equal vec (window-get w 'wm-spec/last-workspace))
+	    (if vec
+		(set-x-property w '_NET_WM_DESKTOP vec 'CARDINAL 32)
+	      (delete-x-property w '_NET_WM_DESTOP))
+	    (window-put w 'wm-spec/last-workspace vec))))
 
       ;; calculate workareas
       (do ((i 0 (1+ i)))
@@ -299,7 +317,10 @@
 
 ;;; helper functions
 
-  (define (define-wm-spec-window-type x fun) (put x 'wm-spec-type fun))
+  (define (define-wm-spec-window-type x fun)
+    (if (listp x)
+	(mapc (lambda (y) (define-wm-spec-window-type y fun)) x)
+      (put x 'wm-spec-type fun)))
 
   (define (define-wm-spec-window-state x fun #!key pseudo)
     (put x 'wm-spec-state fun)
@@ -316,33 +337,40 @@
       (when fun
 	(fun w mode))))
 
-  (define-wm-spec-window-type
-   '_NET_WM_WINDOW_TYPE_DESKTOP
+  (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_DESKTOP
    (lambda (w)
-     (require 'sawfish.wm.stacking)
-     (mark-window-as-desktop w)
-     (window-put w 'fixed-position t)
-     ;; I thought these would be set by the application, but KDE doesn't..
-     (window-put w 'type 'unframed)
-     (window-put w 'sticky t)
-     (window-put w 'sticky-viewport t)
-     (set-window-depth w desktop-layer)))
+     (mark-window-as-desktop w)))
 
-  (define-wm-spec-window-type
-   '_NET_WM_WINDOW_TYPE_DOCK
+  (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_DOCK
    (lambda (w)
-     (require 'sawfish.wm.stacking)
-     (set-window-depth w dock-layer)
      (mark-window-as-dock w)))
 
-  (define-wm-spec-window-type
-   '_NET_WM_WINDOW_TYPE_DIALOG
+  (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_DIALOG
+   (lambda (w)
+     (mark-window-as-transient w)))
+
+  (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_UTILITY
    (lambda (w)
      (require 'sawfish.wm.frames)
-     (set-window-type w 'transient)))
+     (set-window-type w 'utility)))
 
-  (define-wm-spec-window-state
-   '_NET_WM_STATE_STICKY
+  (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_TOOLBAR
+   (lambda (w)
+     (require 'sawfish.wm.frames)
+     (set-window-type w 'toolbar)))
+
+  (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_MENU
+   (lambda (w)
+     (require 'sawfish.wm.frames)
+     (set-window-type w 'menu)))
+
+  (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_SPLASH
+   (lambda (w)
+     (require 'sawfish.wm.frames)
+     (set-window-type w 'splash)
+     (window-put w 'place-mode 'centered)))
+
+  (define-wm-spec-window-state '_NET_WM_STATE_STICKY
    (lambda (w mode)
      (case mode
        ((init)   (window-put w 'sticky-viewport t))
@@ -379,8 +407,7 @@
 			       (wm-spec-maximize-handler nil)
 			       #:pseudo t)
 
-  (define-wm-spec-window-state
-   '_NET_WM_STATE_SHADED
+  (define-wm-spec-window-state '_NET_WM_STATE_SHADED
    (lambda (w mode)
      (require 'sawfish.wm.state.shading)
      (case mode
@@ -390,8 +417,7 @@
        ((toggle) (toggle-window-shaded w))
        ((get)    (window-get w 'shaded)))))
 
-  (define-wm-spec-window-state
-   '_NET_WM_STATE_SKIP_PAGER
+  (define-wm-spec-window-state '_NET_WM_STATE_SKIP_PAGER
    (lambda (w mode)
      (case mode
        ((init add) (window-put w 'window-list-skip t))
@@ -400,8 +426,7 @@
 			       (not (window-get w 'window-list-skip))))
        ((get)      (window-get w 'window-list-skip)))))
 
-  (define-wm-spec-window-state
-   '_NET_WM_STATE_FULLSCREEN
+  (define-wm-spec-window-state '_NET_WM_STATE_FULLSCREEN
    (lambda (w mode)
      (require 'sawfish.wm.state.maximize)
      (case mode
@@ -409,6 +434,26 @@
        ((add remove) (maximize-window-fullscreen w (eq mode 'add)))
        ((toggle) (maximize-window-fullscreen-toggle w))
        ((get) (window-maximized-fullscreen-p w)))))
+
+  (define (above-below-handler depth w mode)
+    (require 'sawfish.wm.stacking)
+    (case mode
+      ((init)
+       (window-put w 'depth depth))
+      ((add remove)
+       (set-window-depth w (if (eq mode 'add) depth 0)))
+      ((toggle)
+       (set-window-depth w (if (= (window-depth w) depth) 0 depth)))
+      ((get)
+       (= (window-depth w) depth))))
+
+  (define-wm-spec-window-state '_NET_WM_STATE_BELOW
+   (lambda (w mode)
+     (above-below-handler wm-spec-below-depth w mode)))
+
+  (define-wm-spec-window-state '_NET_WM_STATE_ABOVE
+   (lambda (w mode)
+     (above-below-handler wm-spec-above-depth w mode)))
 
 
 ;;; client messages
@@ -426,7 +471,8 @@
 	   (let ((mode (aref data 2)))
 	     ;; don't want grabs failing, sigh
 	     (x-server-timestamp t t)
-	     (if (eq mode _NET_WM_MOVERESIZE_MOVE)
+	     (if (or (eq mode _NET_WM_MOVERESIZE_MOVE)
+		     (eq mode _NET_WM_MOVERESIZE_MOVE_KEYBOARD))
 		 (move-window-interactively w)
 	       (let ((move-resize-moving-edges
 		      (cond ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPLEFT) '(top left))

@@ -1,3 +1,61 @@
+2002-10-20  John Harper  <jsh@unfactored.org>
+
+	* more merging:
+
+	2002-10-20  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/windows.jl (window-transient-p,
+	mark-window-as-transient): new functions. window-transient-p
+	used to be in C code
+
+	* sawfish/wm/state/wm-spec.jl: _TYPE_DIALOG now marks the
+	window as transients of the root window, this means that
+	windows with this type pick up all facets of transient window
+	behaviour, not just their frame type. (E.g., it stops
+	_TYPE_DIALOG windows being placed like application windows)
+
+	* sawfish/wm/frames.jl: import sawfish.wm.windows, not
+	sawfish.wm.windows.subrs, to get window-transient-p
+
+	2002-10-19  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/state/wm-spec.jl (set-window-hints): handle
+	windows not on the current desktop (they may have recently
+	changed workspaces). Fixes #95158
+
+	2002-10-18  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/state/wm-spec.jl (client-message-handler):
+	half-assed implementation of _MOVERESIZE_SIZE_KEYBOARD and
+	_MOVE_KEYBOARD. Fixes #95772
+
+	2002-10-17  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/state/wm-spec.jl: support some 1.1 features:
+	_NET_WM_STATE_BELOW, _NET_WM_STATE_ABOVE, _NET_WM_TYPE_UTILITY,
+	_NET_WM_TYPE_SPLASH, _NET_WM_TYPE_MENU, _NET_WM_TYPE_TOOLBAR.
+	(Last two are actually 1.0)
+
+	* sawfish/wm/frames.jl (frame-type-fallback-alist): added more
+	types: utility, toolbar, menu, splash
+
+	* sawfish/wm/windows.jl (mark-window-as-desktop,
+	mark-window-as-dock): set more properties, including window
+	depth and type
+
+	* sawfish/wm/stacking.jl: exported window-depth function
+
+	2002-10-06  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/workspace.jl: don't add ``iconified'' as a
+	workspace-local property, it's global by nature. Fixes #94530
+
+	2002-10-03  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/misc.jl (get-x-text-property,
+	set-x-text-property): these functions now written in lisp so
+	that they use the property cache
+
 2002-09-30  John Harper  <jsh@unfactored.org>
 
 	* merged more changes from HEAD:

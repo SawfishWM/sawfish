@@ -60,7 +60,7 @@
 	  rep.io.files
 	  rep.io.timers
 	  sawfish.wm.frames.subrs
-	  sawfish.wm.windows.subrs
+	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.custom
 	  sawfish.wm.commands
@@ -87,6 +87,9 @@
   ;;	unframed		no frame at all
   ;;	icon
   ;;	dock
+  ;;	menu, toolbar
+  ;;	utility
+  ;;	splash
 
   ;; There is also a similar concept of frame types. The window type
   ;; never changes (unless the user explicitly does so). But the frame
@@ -150,7 +153,11 @@ that overrides settings set elsewhere.")
       (shaded . shaped)
       (shaded-transient . shaped-transient)
       (icon . shaped-transient)
-      (dock . icon))
+      (dock . icon)
+      (utility . transient)
+      (toolbar . utility)
+      (menu . utility)
+      (splash . unframed))
     "Frame type fallbacks.")
 
   (defvar theme-update-interval 60

@@ -166,6 +166,29 @@ _not_ import its bindings (or even make them accessible)."
 the label of a menu item."
   (string-replace "_" "__" string))
 
+(define (get-x-text-property w prop)
+  "Fetches the X property named PROP from window W and returns a
+vector of strings representing the contents of the property."
+  (let ((value (get-x-property w prop)))
+    (when (and value (stringp (caddr value)))
+      (let ((string (caddr value)))
+	;; regexp code chokes on NUL bytes, so do this the long way..
+	(let loop ((start 0)
+		   (point 0)
+		   (out '()))
+	  (cond ((= point (length string))
+		 (apply vector (nreverse (cons (substring
+						string start point) out))))
+		((= (aref string point) 0)
+		 (loop (1+ point) (1+ point)
+		       (cons (substring string start point) out)))
+		(t (loop start (1+ point) out))))))))	
+
+(define (set-x-text-property w prop seq #!optional (encoding 'STRING))
+  "Set the X property named PROP on window W to the text property obtained
+by concatenating the sequence of strings SEQ."
+  (set-x-property w prop (mapconcat identity seq 0) encoding 8))
+
 ;; exports
 
 (export-bindings '(with-server-grabbed call-with-server-ungrabbed
@@ -174,4 +197,5 @@ the label of a menu item."
 		   clamp clamp* uniquify-list screen-dimensions
 		   pointer-head current-head current-head-dimensions
 		   current-head-offset load-module eval-in
-		   user-eval user-require quote-menu-item))
+		   user-eval user-require quote-menu-item
+		   get-x-text-property set-x-text-property))
