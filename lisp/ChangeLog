@@ -1,3 +1,28 @@
+2000-08-16  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/workspace.jl, sawfish/wm/windows.jl,
+	sawfish/wm/stacking.jl, sawfish/wm/misc.jl,
+	sawfish/wm/menus.jl, sawfish/wm/frames.jl,
+	sawfish/wm/customize.jl, sawfish/wm/custom.jl,
+	sawfish/wm/commands.jl, sawfish/wm/animation/outline.jl,
+	sawfish/wm/commands/xterm.jl, sawfish/wm/commands/x-cycle.jl,
+	sawfish/wm/commands/describe.jl, sawfish/wm/ext/tooltips.jl,
+	sawfish/wm/ext/match-window.jl,
+	sawfish/wm/ext/beos-window-menu.jl,
+	sawfish/wm/ext/audio-events.jl, sawfish/wm/placement/smart.jl,
+	sawfish/wm/session/init.jl, sawfish/wm/state/transient.jl,
+	sawfish/wm/state/maximize.jl, sawfish/wm/state/configure.jl,
+	sawfish/wm/theming/make-theme-preview.jl,
+	sawfish/wm/util/with-output.jl,
+	sawfish/wm/util/window-order.jl, sawfish/wm/util/rects.jl,
+	sawfish/wm/util/prompt.jl, sawfish/wm/util/prompt-wm.jl,
+	sawfish/wm/util/prompt-extras.jl, sawfish/wm/util/keymap.jl,
+	sawfish/wm/util/groups.jl, sawfish/wm/util/edges.jl,
+	sawfish/wm/util/display-window.jl, sawfish/wm/util/compat.jl: 
+
+	use #!optional and #!rest instead of deprecated &optional and
+	&rest
+
 2000-08-15  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/workspace.jl: some renaming, ws-move-window ->
