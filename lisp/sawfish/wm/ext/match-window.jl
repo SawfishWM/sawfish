@@ -287,7 +287,8 @@
 		  (when feature
 		    (require feature)))
 		((or (get (car cell) 'match-window-setter) window-put)
-		 w (car cell) (cdr cell)))
+		 w (car cell)
+		 (if (eq (cdr cell) '#f) nil (cdr cell))))
 	      actions)
 	;; hack alert!
 	(when (assq 'position actions)
