@@ -595,6 +595,7 @@
     (if (window-get w 'sticky)
 	(progn
 	  (set-window-workspaces w nil)
+	  (window-put w 'swapped-in current-workspace)
 	  (if (window-get w 'iconified)
 	      (hide-window w)
 	    (show-window w)))
