@@ -228,7 +228,7 @@
 	  (widget-set action-widget (cdr value)))
 	(gtk-widget-show vbox)
 
-	(simple-dialog (_ "Match window properties") vbox
+	(simple-dialog (_ "Match Window Properties") vbox
 		       (lambda ()
 			 (callback (cons (widget-ref matcher-widget)
 					 (widget-ref action-widget))))

@@ -51,7 +51,7 @@
       (let ((widget (make-widget `(keymap:binding))))
 	(when value
 	  (widget-set widget value))
-	(simple-dialog (_ "Edit binding") (widget-gtk-widget widget)
+	(simple-dialog (_ "Edit Binding") (widget-gtk-widget widget)
 		       (lambda () (callback (widget-ref widget)))
 		       for)))
 

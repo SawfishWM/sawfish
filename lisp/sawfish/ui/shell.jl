@@ -99,16 +99,17 @@
 	  (gtk-container-add vbox (or s-scroller slot-box-widget))))
 
       (unless socket-id
-	(setq ok-widget (stock-button 'ok))
+	(setq ok-widget (stock-button 'close))
 	(setq revert-widget (stock-button 'revert))
-	(gtk-window-set-title main-window (_ "Sawfish configurator"))
-	(gtk-widget-set-name main-window (_ "Sawfish configurator"))
+	(gtk-window-set-title main-window (_ "Sawfish Configurator"))
+	(gtk-widget-set-name main-window (_ "Sawfish Configurator"))
 	(gtk-window-set-wmclass main-window "main" "Nokogiri"))
 
       (g-signal-connect main-window "delete_event"
 			  (if (not socket-id) on-quit capplet-delete-event))
 
       (unless socket-id
+	(gtk-box-set-spacing hbox button-box-spacing)
 	(gtk-button-box-set-layout hbox 'end)
 	(gtk-box-pack-end vbox hbox)
 	(g-signal-connect ok-widget "clicked" on-ok)
