@@ -5,13 +5,115 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawmill 0.17\n"
-"POT-Creation-Date: 1999-11-28 20:09+0000\n"
+"POT-Creation-Date: 1999-12-14 10:43%z\n"
 "PO-Revision-Date: 1999-12-07 03:24+01:00\n"
 "Last-Translator: Kenneth Christiansen <kenneth@ripen.dk>\n"
 "Language-Team: Danish/Dansk <sslug-locale@sslug.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+# ../src/sawmill-ui.jl
+msgid "Select font"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Select color"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Select file"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Insert"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Copy"
+msgstr ""
+
+# ../lisp/menus.jl
+# ../src/sawmill-ui.jl
+msgid "Delete"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Key"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Command"
+msgstr ""
+
+# ../lisp/keymap.jl
+#, fuzzy
+msgid "Grab key..."
+msgstr "Tryk på tast..."
+
+# ../src/sawmill-ui.jl
+msgid "Keymaps"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Commands"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Undocumented"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Details"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "OK"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Cancel"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Actions"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Matchers"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Match window properties"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Grab..."
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Add..."
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Edit..."
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Try"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Revert"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Refresh"
+msgstr ""
+
+# ../src/sawmill-ui.jl
+msgid "Sawmill configurator"
+msgstr ""
 
 # ../lisp/maximize.jl
 msgid "Raise windows when they are focused."
@@ -28,6 +130,10 @@ msgstr "Liste over funktioner der skal indlæses før kørsel af egendefiner."
 # ../lisp/custom.jl
 msgid "File used to store user's configuration settings."
 msgstr "Fil brugt til at gemme personlige indstillinger"
+
+# ../lisp/custom.jl
+msgid "All settings"
+msgstr ""
 
 # ../lisp/custom.jl
 msgid "Focus"
@@ -49,6 +155,10 @@ msgstr "Udseende"
 msgid "Workspaces"
 msgstr "Skriveborde"
 
+# ../lisp/keymaps.jl
+msgid "Bindings"
+msgstr "Bindinger"
+
 # ../lisp/custom.jl
 msgid "Iconifying"
 msgstr "Ikonificering"
@@ -63,7 +173,8 @@ msgstr "Diverse"
 
 # ../lisp/customize.jl
 msgid "Location of the program implementing sawmill's configuration interface."
-msgstr "Sti til programmet som implimenterer sawmills konfigurationsgrænseflade"
+msgstr ""
+"Sti til programmet som implimenterer sawmills konfigurationsgrænseflade"
 
 # ../lisp/customize.jl
 msgid "Show variable names of each customization option."
@@ -74,6 +185,10 @@ msgid "Font used by default."
 msgstr "Standard skrifttype."
 
 # ../lisp/customize.jl
+msgid "Intensity of bevels (percentage)."
+msgstr ""
+
+# ../lisp/customize.jl
 msgid "Invoke the user-customization system."
 msgstr "Start brugerindstillingssystemet."
 
@@ -82,10 +197,11 @@ msgid "About"
 msgstr "Om..."
 
 # ../lisp/customize.jl
+#, fuzzy
 msgid ""
 "Sawmill %s (rep %s)\n"
 "\n"
-"Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>\n"
+"Copyright (C) 1999 John Harper <jsh@sawmill.sourceforge.net>\n"
 "\n"
 "This is free software -- you are welcome to redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -97,8 +213,7 @@ msgid ""
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details.\n"
 "\n"
-"Visit the Sawmill homepage at "
-"http://www.dcs.warwick.ac.uk/~john/sw/sawmill/\n"
+"Visit the Sawmill homepage at http://sawmill.sourceforge.net/"
 msgstr ""
 "Sawmill %s (rep %s)\n"
 "\n"
@@ -191,7 +306,13 @@ msgid "Directory containing user-local themes."
 msgstr "Mappe som indeholder lokale brugertemaer."
 
 # ../lisp/frames.jl
-msgid "Directory containing system themes."
+#, fuzzy
+msgid "Directory containing themes from the current sawmill version."
+msgstr "Mappe som indeholder systemtemaer"
+
+# ../lisp/frames.jl
+#, fuzzy
+msgid "Directory containing system-wide themes."
 msgstr "Mappe som indeholder systemtemaer"
 
 # ../lisp/frames.jl
@@ -203,23 +324,15 @@ msgid "List of (NAME . FUNCTION) defining all loaded frame styles."
 msgstr ""
 
 # ../lisp/frames.jl
-msgid "List of (REGEXP . STYLE) associating window names with frame styles."
-msgstr ""
-
-# ../lisp/frames.jl
-msgid "List of (REGEXP . TYPE) associating window names with window types."
-msgstr ""
-
-# ../lisp/frames.jl
 msgid "When non-nil themes are assumed to be malicious."
+msgstr ""
+
+# ../lisp/frames.jl
+msgid "Default"
 msgstr ""
 
 # ../lisp/functions.jl
 msgid "Give focus to windows even when they haven't asked for it."
-msgstr ""
-
-# ../lisp/functions.jl
-msgid "Regular expression matching windows to avoid overlapping."
 msgstr ""
 
 # ../lisp/functions.jl
@@ -239,6 +352,11 @@ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
 msgstr "Fjern GNOME SKIP_WINLIST hintet for vinduet."
 
 # ../lisp/gnome-commands.jl
+#, fuzzy
+msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Skift status for GNOME SKIP_WINLIST hintet for vinduet"
+
+# ../lisp/gnome-commands.jl
 msgid "Set the GNOME SKIP_TASKLIST hint of the window."
 msgstr "Sæt GNOME SKIP_TASKLIST hintet for vinduet."
 
@@ -254,20 +372,16 @@ msgstr "Sprogkode brugt under konstruktion af GNOME menuer"
 msgid "List of directories to read GNOME menu entries from."
 msgstr "Liste af mapper hvorfra GNOME menuer læses."
 
-# ../lisp/gnome-menu.jl
-msgid "System Menus"
-msgstr "Systemmenuer"
-
 # ../lisp/group-funs.jl
 msgid "Group transient windows with their parents."
 msgstr ""
 
 # ../lisp/group-funs.jl
-msgid "Alist mapping window names to group ids."
+msgid "List of group ids that always exist, even when they have no members."
 msgstr ""
 
 # ../lisp/group-funs.jl
-msgid "List of group ids that always exist, even when they have no members."
+msgid "New group"
 msgstr ""
 
 # ../lisp/gtkrc.jl
@@ -323,10 +437,6 @@ msgid "Press key..."
 msgstr "Tryk på tast..."
 
 # ../lisp/keymaps.jl
-msgid "Bindings"
-msgstr "Bindinger"
-
-# ../lisp/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
 msgstr ""
 
@@ -374,6 +484,14 @@ msgstr ""
 msgid ""
 "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+
+# ../lisp/match-window.jl
+msgid "Matched Windows"
+msgstr ""
+
+# ../lisp/match-window.jl
+msgid "Match windows to properties."
 msgstr ""
 
 # ../lisp/maximize.jl
@@ -461,6 +579,198 @@ msgid ""
 msgstr ""
 
 # ../lisp/menus.jl
+msgid "Move"
+msgstr ""
+
+# ../lisp/custom.jl
+#, fuzzy
+msgid "Resize"
+msgstr "Flyt/Ændr"
+
+# ../lisp/custom.jl
+#, fuzzy
+msgid "Iconify"
+msgstr "Ikonificering"
+
+# ../lisp/menus.jl
+msgid "Destroy"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Toggle"
+msgstr ""
+
+# ../lisp/custom.jl
+#, fuzzy
+msgid "Maximize"
+msgstr "Maksimering"
+
+# ../lisp/menus.jl
+msgid "Vertically"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Horizontally"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Both"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Fill vertically"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Fill horizontally"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Fill both"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Un-maximize"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "In group"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Send window to"
+msgstr ""
+
+# ../lisp/workspace.jl
+#, fuzzy
+msgid "Previous workspace"
+msgstr "Vis forrige arbejdsplads"
+
+# ../lisp/custom.jl
+#, fuzzy
+msgid "Next workspace"
+msgstr "Skriveborde"
+
+# ../lisp/workspace.jl
+#, fuzzy
+msgid "Copy to previous workspace"
+msgstr "Vis forrige arbejdsplads"
+
+# ../lisp/workspace.jl
+#, fuzzy
+msgid "Copy to next workspace"
+msgstr "Vis næste arbejdsplads"
+
+# ../lisp/menus.jl
+msgid "Left"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Right"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Up"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Down"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Depth"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Raise"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Lower"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Upper layer"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Lower layer"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Frame type"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Normal"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Title-only"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Border-only"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Top-border"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "None"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Frame style"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Sticky"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Shaded"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Ignored"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "In window list"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "In task list"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Windows"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Programs"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Customize"
+msgstr ""
+
+# ../lisp/customize.jl
+#, fuzzy
+msgid "About..."
+msgstr "Om..."
+
+# ../lisp/menus.jl
+msgid "Restart"
+msgstr ""
+
+# ../lisp/menus.jl
+msgid "Quit"
+msgstr ""
+
+# ../lisp/menus.jl
 msgid "Display the menu listing all window operations."
 msgstr ""
 
@@ -474,6 +784,10 @@ msgstr ""
 
 # ../lisp/move-resize.jl
 msgid "Choose resized window edges by border-part, not by mouse position."
+msgstr ""
+
+# ../lisp/move-resize.jl
+msgid "Allow other window edges to be grabbed while resizing interactively."
 msgstr ""
 
 # ../lisp/move-resize.jl
@@ -637,12 +951,6 @@ msgid "Keep transient windows stacked above."
 msgstr ""
 
 # ../lisp/stacking.jl
-msgid ""
-"A list of (REGEXP . DEPTH) matching window names to the depth of the\n"
-"stacking level to place them in."
-msgstr ""
-
-# ../lisp/stacking.jl
 msgid "Lower the window to the bottom of its stacking level."
 msgstr ""
 
@@ -670,12 +978,16 @@ msgid ""
 "events that invoked the command."
 msgstr ""
 
-# ../lisp/transient.jl
-msgid "Regular expression matching windows to ignore."
+# ../lisp/tooltips.jl
+msgid "Tooltips"
 msgstr ""
 
-# ../lisp/transient.jl
-msgid "Regular expression matching windows to make sticky by default."
+# ../lisp/tooltips.jl
+msgid "Display tooltips for window frames."
+msgstr ""
+
+# ../lisp/tooltips.jl
+msgid "Number of milliseconds to wait before displaying tooltip."
 msgstr ""
 
 # ../lisp/transient.jl
@@ -792,10 +1104,35 @@ msgstr ""
 msgid "List of workspace names."
 msgstr ""
 
+# ../lisp/custom.jl
+#, fuzzy
+msgid "Insert workspace"
+msgstr "Skriveborde"
+
 # ../lisp/workspace.jl
-msgid ""
-"List of `(REGEXP . INDEX)' mapping window names to the workspace to open\n"
-"that window on (counting from zero)."
+#, fuzzy
+msgid "Select next workspace"
+msgstr "Vis næste arbejdsplads"
+
+# ../lisp/workspace.jl
+#, fuzzy
+msgid "Select previous workspace"
+msgstr "Vis forrige arbejdsplads"
+
+# ../lisp/workspace.jl
+msgid "Merge with next"
+msgstr ""
+
+# ../lisp/workspace.jl
+msgid "Merge with previous"
+msgstr ""
+
+# ../lisp/workspace.jl
+msgid "Move workspace right"
+msgstr ""
+
+# ../lisp/workspace.jl
+msgid "Move workspace left"
 msgstr ""
 
 # ../lisp/workspace.jl
@@ -819,6 +1156,10 @@ msgid "Display the next workspace."
 msgstr "Vis næste arbejdsplads"
 
 # ../lisp/workspace.jl
+msgid "Display the previous workspace."
+msgstr "Vis forrige arbejdsplads"
+
+# ../lisp/workspace.jl
 msgid ""
 "Move the window to the next workspace. If no next workspace exists, one\n"
 "will be created."
@@ -826,17 +1167,13 @@ msgstr ""
 
 # ../lisp/workspace.jl
 msgid ""
-"Create a new workspace at the end of the list, and move the window to it."
+"Move the window to the previous workspace. If no such workspace exists, one\n"
+"will be created."
 msgstr ""
 
 # ../lisp/workspace.jl
-msgid "Display the previous workspace."
-msgstr "Vis forrige arbejdsplads"
-
-# ../lisp/workspace.jl
 msgid ""
-"Move the window to the previous workspace. If no such workspace exists, one\n"
-"will be created."
+"Create a new workspace at the end of the list, and move the window to it."
 msgstr ""
 
 # ../lisp/workspace.jl
@@ -895,7 +1232,8 @@ msgid ""
 msgstr ""
 
 # ../lisp/x-cycle.jl
-msgid "Window cycling"
+#, fuzzy
+msgid "Window Cycling"
 msgstr "Vindues cykling"
 
 # ../lisp/x-cycle.jl
@@ -963,8 +1301,27 @@ msgid "Use less memory when creating gradients, possibly affecting quality."
 msgstr ""
 "Brug mindre hukommelse til oprettelse af gradienter, kan påvirke kvalitet."
 
+# ../themes/mono/theme.jl
+msgid "Mono Frame"
+msgstr ""
+
+# ../themes/mono/theme.jl
+msgid "Use the GTK+ background color for inactive frames."
+msgstr ""
+
 # ../themes/simple/theme.jl
-msgid "Simple frame"
+#, fuzzy
+msgid "Color of inactive frames. (When the above option is unset.)"
+msgstr "Farve af den inaktive ramme i `simple' rammestil."
+
+# ../themes/simple/theme.jl
+#, fuzzy
+msgid "Color of active frames."
+msgstr "Farve af den aktive ramme i `simple' rammestil."
+
+# ../themes/simple/theme.jl
+#, fuzzy
+msgid "Simple Frame"
 msgstr "Simpel ramme"
 
 # ../themes/simple/theme.jl
@@ -976,7 +1333,8 @@ msgid "Color of active frames in `simple' frame style."
 msgstr "Farve af den aktive ramme i `simple' rammestil."
 
 # ../themes/smaker/theme.jl
-msgid "SMaker frame"
+#, fuzzy
+msgid "SMaker Frame"
 msgstr "SMaker ramme"
 
 # ../themes/smaker/theme.jl
@@ -1014,3 +1372,7 @@ msgstr "Vinduets kantbredde."
 # ../themes/smaker/theme.jl
 msgid "Border width of bar images."
 msgstr ""
+
+# ../lisp/gnome-menu.jl
+#~ msgid "System Menus"
+#~ msgstr "Systemmenuer"
