@@ -1943,7 +1943,9 @@ Consider the following definition:
 This is the definition of Sawfish's root menu. We can see that four
 submenus are created dynamically by dereferencing variables (in fact,
 three of this variables contain functions) (@code{workspace-menu},
-@code{window-menu}, @code{apps-menu} and @code{custom-menu}).
+@code{window-menu}, @code{apps-menu} and @code{custom-menu}). Note that
+these must be special variables, i.e. initially declared using the
+@code{defvar} special form.
 
 The @code{apps-menu} variable can thus be used to redefine the
 applications menu. The default definition is as follows:
