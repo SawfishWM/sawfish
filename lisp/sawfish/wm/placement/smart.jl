@@ -264,7 +264,7 @@
 		   (aref edges 2) (aref edges 3)))
 
     ;; factor in the two quantities scaled upto sp-cost-max by sp-area-weight
-    (+ (/ (* sp-area-weight (+ x-cross y-cross)) (+ x-total y-total))
+    (+ (/ (* sp-area-weight (* x-cross y-cross)) (* x-total y-total))
        (/ (* (- sp-cost-max sp-area-weight) edges)
 	  (+ (* 2 (car dims)) (* 2 (cdr dims)))))))
 
