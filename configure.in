@@ -91,7 +91,7 @@ AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
 	     [],[$X_LIBS -lX11 -lXext])
 
 dnl Check for librep
-AM_PATH_REP(0.11)
+AM_PATH_REP(0.12)
 
 dnl is X available?
 if test "${no_x}" != "yes"; then
