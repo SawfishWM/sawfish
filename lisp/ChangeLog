@@ -1,3 +1,13 @@
+2000-02-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* configure.jl (configure-request-handler): handle all sorts of
+	weird cases for the `equal-ratio' hack (from John N S Gill
+	<jng@renre.com>, with extra cases added by me)
+
+	* edges.jl (snap-window-position-to-edges): new arg HYSTERESIS,
+	a cons cell to buffer deltas in (adapted from merlin@merlin.org)
+	* move-resize.jl (move-resize-hysteresis): new variable
+
 2000-02-20  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keymap.jl (quote-event): new command
