@@ -302,8 +302,8 @@
   (when (eq move-resize-window w)
     (move-resize-finished)))
 
-(add-hook 'unmap-notify-hook 'move-resize-lost-window)
-(add-hook 'destroy-notify-hook 'move-resize-lost-window)
+(add-hook 'unmap-notify-hook 'move-resize-lost-window t)
+(add-hook 'destroy-notify-hook 'move-resize-lost-window t)
 
 
 ;; Entry points
