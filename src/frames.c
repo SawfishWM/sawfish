@@ -841,7 +841,11 @@ list_frame_generator (Lisp_Window *w)
 				  screen_visual, wamask, &wa);
     }
     else
+    {
 	XResizeWindow (dpy, w->frame, w->frame_width, w->frame_height);
+	if (w->reparented)
+	    XMoveWindow (dpy, w->id, -w->frame_x, -w->frame_y);
+    }
 
     w->destroy_frame = frame_part_destroyer;
     w->focus_change = frame_part_focuser;
