@@ -80,10 +80,11 @@
     (apply-changes-for (list slot) slot-value))
 
   (define (revert-slot-changes)
-    (apply-changes-for changed-slots-ever slot-old-value)
     (mapc (lambda (slot)
-	    (widget-set (slot-widget slot) (slot-old-value slot)))
+	    (widget-set (slot-widget slot) (slot-old-value slot))
+	    (update-dependences slot))
 	  changed-slots-ever)
+    (apply-changes-for changed-slots-ever slot-old-value)
     (setq changed-slots-ever '()))
 
   (define (changes-to-apply-p) changed-slots)
