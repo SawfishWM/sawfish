@@ -38,6 +38,9 @@
 ;; called when a window is un-maximized, args (W &optional DIRECTION)
 (defvar window-unmaximized-hook nil)
 
+
+;; handling maximized state
+
 (defun window-maximized-p (w)
   (window-get w 'unmaximized-geometry))
 
@@ -47,10 +50,36 @@
 (defun window-maximized-vertically-p (w)
   (window-get w 'maximized-vertically))
 
-(defun maximize-discard (w)
-  (window-put w 'unmaximized-geometry nil)
-  (window-put w 'maximized-vertically nil)
-  (window-put w 'maximized-horizontally nil))
+(defun maximize-discard (w &optional horizontally vertically)
+  (when horizontally
+    (window-put w 'maximized-horizontally nil))
+  (when vertically
+    (window-put w 'maximized-vertically nil))
+  (let
+      ((dims (window-dimensions w))
+       (coords (window-position w))
+       (saved (window-get w 'unmaximized-geometry)))
+    (when saved
+      (unless (window-maximized-horizontally-p w)
+	(rplaca saved (car coords))
+	(rplaca (nthcdr 2 saved) (car dims)))
+      (unless (window-maximized-vertically-p w)
+	(rplaca (cdr saved) (cdr coords))
+	(rplaca (nthcdr 3 saved) (cdr dims))))
+    (when (and (not (window-maximized-vertically-p w))
+	       (not (window-maximized-horizontally-p w)))
+      (window-put w 'unmaximized-geometry nil))))
+
+(defun maximize-discard-move (w directions)
+  (maximize-discard w (memq 'horizontal directions)
+		    (memq 'vertical directions)))
+
+(defun maximize-discard-resize (w edges)
+  (maximize-discard w (or (memq 'left edges) (memq 'right edges))
+		    (or (memq 'top edges) (memq 'bottom edges))))
+
+
+;; packing
 
 (defmacro maximize-edges-touching (start end edge)
   `(> (- (min ,end (nth 2 ,edge)) (max ,start (nth 1 ,edge))) 0))
@@ -109,6 +138,9 @@
 		    (- (cdr fdims) (cdr dims))))
     w))
 
+
+;; commands
+
 ;;;###autoload
 (defun maximize-window (w &optional direction)
   "Maximize the dimensions of the window."
@@ -154,10 +186,8 @@
 	(window-put w 'maximized-vertically nil))
       (resize-window-to w (car dims) (cdr dims))
       (move-window-to w (car coords) (cdr coords))
-      (when (and (= (car coords) (nth 0 geom))
-		 (= (cdr coords) (nth 1 geom))
-		 (= (car dims) (nth 2 geom))
-		 (= (cdr dims) (nth 3 geom)))
+      (when (and (not (window-maximized-vertically-p w))
+		 (not (window-maximized-horizontally-p w)))
 	(window-put w 'unmaximized-geometry nil))
       (call-window-hook 'window-unmaximized-hook w (list direction))
       (call-window-hook 'window-state-change-hook w))))
@@ -247,6 +277,5 @@ unmaximized."
 (sm-add-saved-properties
  'unmaximized-geometry 'maximized-vertically 'maximized-hoizontally)
 
-;; XXX should discard maximized state of individual edges
-(add-hook 'after-move-hook 'maximize-discard)
-(add-hook 'after-resize-hook 'maximize-discard)
+(add-hook 'after-move-hook 'maximize-discard-move)
+(add-hook 'after-resize-hook 'maximize-discard-resize)
