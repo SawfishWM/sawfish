@@ -158,7 +158,7 @@
     :group workspace)
 
   (defcustom workspace-names nil
-    ""
+    nil
     :type* `(list string ,(_ "Workspace names"))
     :widget-flags (expand-vertically)
     :group workspace)
