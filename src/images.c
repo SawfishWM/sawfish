@@ -1569,7 +1569,7 @@ image-map XFORM IMAGE
 Transform the values of all pixels in IMAGE according to XFORM.
 
 XFORM is a function taking a single argument, the four element list
-representing the current pixel value (as in `pixel-ref'). If XFORM
+representing the current pixel value (as in `image-ref'). If XFORM
 returns a non-nil value it should be the new pixel value (another four
 element list).
 ::end:: */
