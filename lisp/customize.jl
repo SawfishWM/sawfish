@@ -137,30 +137,43 @@
 	     (when fun
 	       (funcall fun symbol value doc)))))))
 
+(defun customize-group-spec (group-list)
+  (let
+      ((spec (mapcar 'customize-symbol-spec (cdr group-list))))
+    (if (get (car group-list) 'custom-group-widget)
+	(funcall
+	 (get (car group-list) 'custom-group-widget) (car group-list) spec)
+      (list* 'vbox spec))))
+
 (defun customize-ui-spec ()
   (mapc 'require custom-required)
   (list*
    'pages
    (mapcar #'(lambda (group-list)
 	       (let
-		   ((group (car group-list))
-		    (spec (mapcar 'customize-symbol-spec (cdr group-list))))
+		   ((group (car group-list)))
 		 (list (or (get group 'custom-group-doc)
 			   (symbol-name group))
-		       (if (get group 'custom-group-widget)
-			   (funcall
-			    (get group 'custom-group-widget) group spec)
-			 (list* 'vbox spec)))))
+		       (customize-group-spec group-list))))
 	   custom-groups)))
 
 ;;;###autoload
-(defun customize ()
+(defun customize (&optional group)
   "Invoke the user-customization system."
   (interactive)
   (if customize-process
       (error "Customize already active")
     (customize-start-process)
-    (format customize-process "%S\n" (customize-ui-spec))))
+    (if (null group)
+	(format customize-process "%S\n" (customize-ui-spec))
+      (let
+	  ((tem (assq group custom-groups)))
+	(unless tem
+	  (customize-stop-process)
+	  (error "No customize group: %s" group))
+	(setq tem (customize-group-spec tem))
+	(setq tem `(vbox ,tem (hsep)))
+	(format customize-process "%S\n" tem)))))
 
 
 ;; setting variables
