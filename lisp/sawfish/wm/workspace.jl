@@ -633,7 +633,7 @@
 	(let ((ws-name (or (nth (- i (car limits)) workspace-names)
 			   (format nil (_ "space %d")
 				   (1+ (- i (car limits)))))))
-	  (setq menu (cons (list (format nil (_ "%s%s") ws-name
+	  (setq menu (cons (list (format nil "%s%s" ws-name
 					 (if (= i current-workspace) " *" ""))
 				 `(select-workspace ,i))
 			   menu)))
