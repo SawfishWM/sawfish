@@ -85,6 +85,10 @@ DEFSYM(saved_command_line_args, "saved-command-line-args");
 DEFSYM(before_exit_hook, "before-exit-hook");
 #endif
 
+#if rep_INTERFACE >= 9
+DEFSYM(rep, "rep");
+#endif
+
 static rep_bool
 on_idle (int since_last)
 {
@@ -325,6 +329,12 @@ main(int argc, char **argv)
 	printf ("sawmill version %s\n", SAWMILL_VERSION);
 	return 0;
     }
+
+#if rep_INTERFACE >= 9
+    rep_push_structure ("sawmill");
+    rep_INTERN (rep);
+    Frequire (Qrep);
+#endif
 
     if (sys_init(prog_name))
     {
