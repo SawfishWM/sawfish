@@ -218,6 +218,7 @@ install_window_frame (Lisp_Window *w)
 		      | SubstructureRedirectMask);
 
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
+	XLowerWindow (dpy, w->id);	/* see end of list_frame_generator */
 	XAddToSaveSet (dpy, w->id);
 	w->reparented = TRUE;
 	w->reparenting = TRUE;
