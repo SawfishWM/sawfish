@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.46 1999/12/07 17:25:57 john Exp $
+;; $Id: sawmill-ui.jl,v 1.47 1999/12/08 23:16:03 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -376,7 +376,7 @@ exec rep "$0" "$@"
 
 (defun build-font:clicked (spec)
   (let
-      ((fontsel (gtk-font-selection-dialog-new "Select font")))
+      ((fontsel (gtk-font-selection-dialog-new (_ "Select font"))))
     (when (get-key spec ':value)
       (gtk-font-selection-dialog-set-font-name fontsel (get-key spec ':value)))
     (gtk-signal-connect
@@ -420,7 +420,7 @@ exec rep "$0" "$@"
 
 (defun build-color:clicked (spec)
   (let
-      ((colorsel (gtk-color-selection-dialog-new "Select color")))
+      ((colorsel (gtk-color-selection-dialog-new (_ "Select color"))))
     (when (get-key spec ':value)
       (gtk-color-selection-set-color-interp
        (gtk-color-selection-dialog-colorsel colorsel)
@@ -470,7 +470,7 @@ exec rep "$0" "$@"
 
 (defun build-file:clicked (spec)
   (let
-      ((filesel (gtk-file-selection-new "Select file")))
+      ((filesel (gtk-file-selection-new (_ "Select file"))))
     (when (get-key spec ':value)
       (gtk-file-selection-set-filename filesel (get-key spec ':value)))
     (gtk-signal-connect
@@ -580,10 +580,10 @@ exec rep "$0" "$@"
        (vbox (gtk-hbox-new nil 0))
        (vbox-2 (gtk-vbox-new nil 0))
        (label (gtk-label-new (get-key spec ':doc)))
-       (insert (gtk-button-new-with-label "Insert"))
-       (copy (gtk-button-new-with-label "Copy"))
-       (deleteb (gtk-button-new-with-label "Delete"))
-       (clist (gtk-clist-new-with-titles ["Key" "Command"]))
+       (insert (gtk-button-new-with-label (_ "Insert")))
+       (copy (gtk-button-new-with-label (_ "Copy")))
+       (deleteb (gtk-button-new-with-label (_ "Delete")))
+       (clist (gtk-clist-new-with-titles (vector (_ "Key") (_ "Command"))))
        (scroller (gtk-scrolled-window-new)))
 
     (gtk-box-set-spacing hbox ui-box-spacing)
@@ -688,12 +688,12 @@ exec rep "$0" "$@"
        (vbox (gtk-vbox-new nil 0))
        (entry (gtk-entry-new))
        (entry-hbox (gtk-hbox-new nil 0))
-       (entry-button (gtk-button-new-with-label "Grab key..."))
-       (map-clist (gtk-clist-new-with-titles ["Keymaps"]))
+       (entry-button (gtk-button-new-with-label (_ "Grab key...")))
+       (map-clist (gtk-clist-new-with-titles (vector (_ "Keymaps"))))
        (frame (gtk-frame-new))
        (doc-frame (gtk-frame-new))
        (doc-label (gtk-label-new ""))
-       (cmd-clist (gtk-clist-new-with-titles ["Commands"]))
+       (cmd-clist (gtk-clist-new-with-titles (vector (_ "Commands"))))
        (scroller (gtk-scrolled-window-new))
        (scroller-2 (gtk-scrolled-window-new))
        ;; vector of [LABEL SPEC WIDGET] for each keymap
@@ -834,7 +834,7 @@ exec rep "$0" "$@"
 	(let
 	    ((doc (documentation command)))
 	  (gtk-frame-set-label frame (symbol-name command))
-	  (gtk-label-set label (or doc "Undocumented")))
+	  (gtk-label-set label (or doc (_ "Undocumented"))))
       (gtk-frame-set-label frame "")
       (gtk-label-set label ""))))
 
@@ -855,7 +855,7 @@ exec rep "$0" "$@"
        (menu (gtk-menu-new))
        (doc-label (gtk-label-new (get-key spec ':doc)))
        (readme-label (gtk-label-new ""))
-       (frame (gtk-frame-new "Details"))
+       (frame (gtk-frame-new (_ "Details")))
        (values (nth 1 spec))
        (i 0)
        history button previous)
@@ -864,7 +864,7 @@ exec rep "$0" "$@"
     (gtk-container-border-width hbox ui-box-border)
     (gtk-box-set-spacing vbox ui-box-spacing)
     (gtk-container-border-width vbox ui-box-border)
-    (gtk-frame-set-label frame "Details")
+    (gtk-frame-set-label frame (_ "Details"))
     (gtk-container-add frame readme-label)
     (gtk-container-add hbox omenu)
     (gtk-container-add hbox doc-label)
@@ -950,10 +950,10 @@ exec rep "$0" "$@"
        (window (gtk-window-new 'dialog))
        (vbox (gtk-vbox-new nil 0))
        (hbox-2 (gtk-hbutton-box-new))
-       (ok (gtk-button-new-with-label "OK"))
-       (cancel (gtk-button-new-with-label "Cancel"))
-       (frame (gtk-frame-new "Actions"))
-       (frame-1 (gtk-frame-new "Matchers"))
+       (ok (gtk-button-new-with-label (_ "OK")))
+       (cancel (gtk-button-new-with-label (_ "Cancel")))
+       (frame (gtk-frame-new (_ "Actions")))
+       (frame-1 (gtk-frame-new (_ "Matchers")))
        (table (gtk-table-new (length properties) 2 nil))
        (table-1 (gtk-table-new ui-match-window-max-matchers 3 nil))
        (match-widget-alist nil)
@@ -1041,8 +1041,8 @@ exec rep "$0" "$@"
 				      (not (eq (nth 1 p) 'boolean)))
 				    properties)))
 
-    (gtk-window-set-title window "Match window properties")
-    (gtk-widget-set-name window "Match window properties")
+    (gtk-window-set-title window (_ "Match window properties"))
+    (gtk-widget-set-name window (_ "Match window properties"))
 
     (gtk-box-set-spacing hbox-2 ui-box-spacing)
     (gtk-container-border-width hbox-2 ui-box-border)
@@ -1062,7 +1062,7 @@ exec rep "$0" "$@"
 	(let
 	    ((combo (gtk-combo-new))
 	     (entry (gtk-entry-new))
-	     (button (gtk-button-new-with-label "Grab...")))
+	     (button (gtk-button-new-with-label (_ "Grab..."))))
 	  (gtk-combo-set-popdown-strings
 	   combo (cons "" (mapcar cdr x-properties)))
 	  (gtk-table-attach-defaults table-1 combo 0 1 i (1+ i))
@@ -1194,10 +1194,11 @@ exec rep "$0" "$@"
       ((vbox (gtk-vbox-new nil 0))
        (hbox (gtk-hbox-new nil 0))
        (scroller (gtk-scrolled-window-new))
-       (clist (gtk-clist-new-with-titles ["Matchers" "Actions"]))
-       (add-b (gtk-button-new-with-label "Add..."))
-       (delete-b (gtk-button-new-with-label "Delete"))
-       (edit-b (gtk-button-new-with-label "Edit..."))
+       (clist (gtk-clist-new-with-titles
+	       (vector (_ "Matchers") (_ "Actions"))))
+       (add-b (gtk-button-new-with-label (_ "Add...")))
+       (delete-b (gtk-button-new-with-label (_ "Delete")))
+       (edit-b (gtk-button-new-with-label (_ "Edit...")))
 
        (x-properties (get-key spec ':x-properties))
        (properties (get-key spec ':properties))
@@ -1335,14 +1336,14 @@ exec rep "$0" "$@"
        ui-ok-widget ui-apply-widget ui-revert-widget refresh cancel)
     (gtk-window-set-policy ui-window nil t nil)
     (unless ui-socket-id
-      (setq ui-ok-widget (gtk-button-new-with-label "OK"))
-      (setq ui-apply-widget (gtk-button-new-with-label "Try"))
-      (setq ui-revert-widget (gtk-button-new-with-label "Revert"))
+      (setq ui-ok-widget (gtk-button-new-with-label (_ "OK")))
+      (setq ui-apply-widget (gtk-button-new-with-label (_ "Try")))
+      (setq ui-revert-widget (gtk-button-new-with-label (_ "Revert")))
       (setq refresh (and ui-enable-refresh
-			 (gtk-button-new-with-label "Refresh")))
-      (setq cancel (gtk-button-new-with-label "Cancel"))
-      (gtk-window-set-title ui-window "Sawmill configurator")
-      (gtk-widget-set-name ui-window "Sawmill configurator"))
+			 (gtk-button-new-with-label (_ "Refresh"))))
+      (setq cancel (gtk-button-new-with-label (_ "Cancel")))
+      (gtk-window-set-title ui-window (_ "Sawmill configurator"))
+      (gtk-widget-set-name ui-window (_ "Sawmill configurator")))
     (gtk-signal-connect ui-window "delete_event" ui-quit)
     (gtk-container-add ui-window vbox)
     (gtk-box-set-spacing vbox ui-box-spacing)
@@ -1603,6 +1604,16 @@ exec rep "$0" "$@"
 
 (when ui-socket-id
   (set-input-handler standard-input ui-capplet-input))
+
+;; initialise i18n
+(let
+    ((locale-dir (sawmill-eval
+		  '(and (featurep 'gettext)
+			(bindtextdomain "sawmill")) t)))
+  (when (and (not (get-command-line-option "--disable-nls")) locale-dir)
+    (require 'gettext)
+    (bindtextdomain "sawmill" locale-dir)
+    (textdomain "sawmill")))
 
 (show-ui (ui-get-spec))
 
