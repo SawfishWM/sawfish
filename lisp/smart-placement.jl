@@ -45,6 +45,13 @@
   :type string
   :allow-nil t)
 
+(defvar sp-important-windows-weight 10)
+
+(defvar sp-auto-weight-alist nil
+  "List of `(REGEXP . WEIGHT)' mapping window names to the weight to give
+their area when placing windows in best-fit and first-fit mode. Higher
+weights mean that the window is harder to cover.")
+
 (defcustom sp-padding 4
   "Try to leave at least this many pixels between window edges in first/best-fit."
   :group placement
@@ -93,14 +100,18 @@
   (mapcar #'(lambda (w)
 	      (let
 		  ((dims (window-frame-dimensions w))
-		   (pos (window-position w)))
+		   (pos (window-position w))
+		   tem)
 		(list* (car pos) (cdr pos)
 		       (+ (car pos) (car dims))
 		       (+ (cdr pos) (cdr dims))
-		       (and sp-important-windows
-			    (string-match
-			     sp-important-windows (window-name w))
-			    (list 1000)))))
+		       (if (and sp-important-windows
+				(string-match
+				 sp-important-windows (window-name w)))
+			    (list sp-important-windows-weight)
+			 (and (setq tem (assoc-regexp (window-name w)
+						      sp-auto-weight-alist))
+			      (list (cdr tem)))))))
 	  windows))
 
 ;; returns the list of windows to compare with when overlapping, by
@@ -320,8 +331,8 @@
        (grid (sp-make-grid rects t))
        (dims  (window-frame-dimensions w))
        point)
-    (rplaca dims (+ (car dims) (* sp-padding 2)))
-    (rplacd dims (+ (cdr dims) (* sp-padding 2)))
+    (rplaca dims (min (+ (car dims) (* sp-padding 2)) (screen-width)))
+    (rplacd dims (min (+ (cdr dims) (* sp-padding 2)) (screen-height)))
     (setq point (funcall (if (eq mode 'first-fit) 'sp-first-fit 'sp-best-fit)
 			 dims grid rects))
     (if point
