@@ -104,7 +104,7 @@ the window.")
     (sm-set-property
      "DiscardCommand" (list "rm" "-f" (local-file-name
 				       (sm-find-file sm-client-id))))
-    (sm-set-property "ProcessId" (format nil "%d" (getpid)))
+    (sm-set-property "ProcessId" (format nil "%d" (process-id)))
     (sm-set-property "Program" (car saved-command-line-args))
     (sm-set-property "UserId" (user-login-name))
 
