@@ -312,7 +312,7 @@ destroy_notify (XEvent *ev)
     if (w == focus_window)
 	focus_window = 0;
     if (w->id)
-	remove_window (w, Qt);
+	remove_window (w, Qt, Qnil);
     /* the window isn't windowp anymore.. */
     Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
 }
