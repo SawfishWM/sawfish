@@ -102,6 +102,9 @@ they inherit.")
 (defvar auto-frame-style-alist nil
   "List of (REGEXP . STYLE) associating window names with frame styles.")
 
+(defvar auto-window-type-alist nil
+  "List of (REGEXP . TYPE) associating window names with window types.")
+
 ;; used when decorate-transients is non-nil, map transient window
 ;; types to type to pass to frame style function
 (defvar transient-normal-frame-alist '((transient . default)
@@ -175,6 +178,7 @@ they inherit.")
 
 (defun window-type (w)
   (or (window-get w 'type)
+      (cdr (assoc-regexp (window-name w) auto-window-type-alist))
       (if (window-transient-p w)
 	  (if (window-shaped-p w)
 	      'shaped-transient
