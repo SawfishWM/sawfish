@@ -1,5 +1,9 @@
 2000-10-30  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/theming/make-theme-preview.jl: add the function
+	that watches for preview windows to after-add-window-hook not
+	before-add-window-hook to make sure that any given frame sticks
+
 	* sawfish/wm/state/transient.jl (transient-unmap-window): when
 	unmapping a transient, before deciding to focus on its parent,
 	look for the most recently focused window in the same group.

@@ -1,6 +1,44 @@
 
-Please report bugs to the mailing list <sawmill@aarg.net>
+BUGS
+****
 
-(or alternatively, to my sourceforge account <jsh@users.sourceforge.net>,
-but mailing list messages often get quicker responses)
+Please report bugs to the mailing list <sawmill@aarg.net>.
+
+When reporting bugs try to include as much relevant information as
+possible:
+
+ - Most importantly: a reliable method for triggering the bug. (Once
+   the bug can be reproduced it's often straightforward to fix.)
+
+ - If you hear beeping sounds while the problem manifests itself it may
+   mean that sawfish's Lisp interpreter is printing error messages to
+   the standard error stream (often stored in ~/.xsession-errors or
+   ~/.gnomerc-errors). Include any such messages in your bug report.
+
+ - If sawfish crashes it will try to print information describing the
+   position at which it did so, look for any `backtrace' messages in
+   the error output and include them
+
+ - The operating system type and version (including distribution details)
+
+ - How you installed sawfish, e.g. compiled from source, from binary
+   packages, etc.. If from packages, where did you get the packages
+   from, and what are their version numbers?
+
+ - Any other information you feel may be relevant. E.g. the values of
+   customization options that you feel may affect the problem
+
+
+See http://bugzilla.eazel.com/ for the sawfish bug database.
+
+Please don't add bugs to this database unless you _are sure_ that they
+really are bugs (and when doing so, try to avoid filing duplicates of
+existing bug reports, instead expand on existing reports).
+
+If in any doubt (e.g. perhaps the `bug' is really a configuration
+issue), don't immediately file a report in bugzilla -- send mail to the
+mailing list first.
+
+
+ - John Harper <jsh@eazel.com>
 
