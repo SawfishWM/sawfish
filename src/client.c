@@ -95,6 +95,8 @@ usage(char *prog_name)
     fprintf(stderr, "usage: %s OPTIONS...\n
 where OPTIONS are any of:\n
 	-display X	Connect to the window manager on display X
+        -w              Don't wait for server if not already running,
+                         return with exit code 1
 	-q		Be quiet (perform commands asynchronously)
 	-f FUNCTION	Call Lisp function FUNCTION on the server
 	-e FORM		Evaluate Lisp form FORM on the server
