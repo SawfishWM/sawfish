@@ -67,7 +67,11 @@ weights mean that the window is harder to cover.")
 (defconst sp-cost-max 1024)
 
 ;; the maximum number of points to keep in each grid dimension
-(defvar sp-max-points 5)
+(defvar sp-max-points 10)
+
+;; only when there's fewer X events than this pending do we try
+;; to do smart placement
+(defvar sp-max-queued-events 20)
 
 
 ;; utility functions
@@ -83,8 +87,8 @@ weights mean that the window is harder to cover.")
     (when with-root
       (setq x-edges (cons 0 (nconc x-edges (list (screen-width)))))
       (setq y-edges (cons 0 (nconc y-edges (list (screen-height))))))
-    (setq x-edges (sort (sp-prune-points x-edges sp-max-points)))
-    (setq y-edges (sort (sp-prune-points y-edges sp-max-points)))
+    (setq x-edges (sp-prune-points x-edges sp-max-points))
+    (setq y-edges (sp-prune-points y-edges sp-max-points))
     (cons x-edges y-edges)))
 
 (defun sp-prune-points (points max)
@@ -329,36 +333,43 @@ weights mean that the window is harder to cover.")
 ;; entry-points
 
 (defun sp-do-placement (w mode)
-  (let*
-      ((windows (sp-get-windows w))
-       (rects (sp-make-rects windows))
-       (grid (sp-make-grid rects t))
-       (dims (window-frame-dimensions w))
-       point)
+  (if (and sp-max-queued-events (> (x-events-queued) sp-max-queued-events))
+      ;; fitted placement can cause event tailbacks when there's
+      ;; lots of windows being opened with lots of windows already
+      ;; open
+      (place-window-randomly w)
+    (let*
+	((windows (sp-get-windows w))
+	 (rects (sp-make-rects windows))
+	 (grid (sp-make-grid rects t))
+	 (dims (window-frame-dimensions w))
+	 point)
 
-    ;; first try with padding
-    (when (and (> sp-padding 0)
-	       (<= (+ (car dims) sp-padding) (screen-width))
-	       (<= (+ (cdr dims) sp-padding) (screen-height)))
-      (rplaca dims (+ (car dims) (* sp-padding 2)))
-      (rplacd dims (+ (cdr dims) (* sp-padding 2)))
-      (setq point (funcall (if (eq mode 'first-fit) 'sp-first-fit 'sp-best-fit)
-			   dims grid rects))
-      (when point
-	(rplaca point (+ (car point) sp-padding))
-	(rplacd point (+ (cdr point) sp-padding))))
+      ;; first try with padding
+      (when (and (> sp-padding 0)
+		 (<= (+ (car dims) sp-padding) (screen-width))
+		 (<= (+ (cdr dims) sp-padding) (screen-height)))
+	(rplaca dims (+ (car dims) (* sp-padding 2)))
+	(rplacd dims (+ (cdr dims) (* sp-padding 2)))
+	(setq point (funcall (if (eq mode 'first-fit)
+				 'sp-first-fit 'sp-best-fit)
+			     dims grid rects))
+	(when point
+	  (rplaca point (+ (car point) sp-padding))
+	  (rplacd point (+ (cdr point) sp-padding))))
 
-    ;; then try without padding
-    (when (null point)
-      (setq dims (window-frame-dimensions w))
-      (rplaca dims (min (car dims) (screen-width)))
-      (rplacd dims (min (cdr dims) (screen-height)))
-      (setq point (funcall (if (eq mode 'first-fit) 'sp-first-fit 'sp-best-fit)
-			   dims grid rects)))
+      ;; then try without padding
+      (when (null point)
+	(setq dims (window-frame-dimensions w))
+	(rplaca dims (min (car dims) (screen-width)))
+	(rplacd dims (min (cdr dims) (screen-height)))
+	(setq point (funcall (if (eq mode 'first-fit)
+				 'sp-first-fit 'sp-best-fit)
+			     dims grid rects)))
 
-    (if point
-	(move-window-to w (car point) (cdr point))
-      (place-window-randomly w))))
+      (if point
+	  (move-window-to w (car point) (cdr point))
+	(place-window-randomly w)))))
 
 ;;;###autoload
 (defun place-window-first-fit (w)
