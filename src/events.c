@@ -110,13 +110,7 @@ subtract_timestamps (Time t2, Time t1)
 void
 save_timestamp (Time t)
 {
-    long diff = subtract_timestamps (t, last_event_time);
-    if (diff < 0)
-    {
-	fprintf (stderr, "huh!? time's going backwards (%lu -> %lu)\n",
-		 last_event_time, t);
-    }
-    else
+    if (subtract_timestamps (t, last_event_time) > 0)
 	last_event_time = t;
 
     DB(("  last_event_time=%lu\n", last_event_time));
