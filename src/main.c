@@ -76,6 +76,8 @@ on_termination (void)
 DEFUN_INT("quit", Fquit, Squit, (void), rep_Subr0, "") /*
 ::doc:Squit::
 quit
+
+Terminate the sawmill process.
 ::end:: */
 {
     return Fthrow (Qquit, rep_MAKE_INT(0));
@@ -84,6 +86,8 @@ quit
 DEFUN_INT("restart", Frestart, Srestart, (void), rep_Subr0, "") /*
 ::doc:Srestart::
 restart
+
+Restart the sawmill process.
 ::end:: */
 {
     longjmp (clean_exit_jmp_buf, ec_restart);

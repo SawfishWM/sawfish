@@ -31,6 +31,12 @@ DEFSYM(cursor_shape, "cursor-shape");
 DEFUN("get-cursor", Fget_cursor, Sget_cursor, (repv data), rep_Subr1) /*
 ::doc:Sget-cursor::
 get-cursor DATA
+
+Returns the cursor object representing the cursor defined by DATA.
+If DATA is a symbol, it's replaced by its `cursor-shape' property.
+
+Possible DATA values are an integer representing a glyph in the standard
+X11 cursor font, or an image object.
 ::end:: */
 {
     Lisp_Cursor *f;
@@ -69,7 +75,11 @@ get-cursor DATA
     return rep_VAL(f);
 }
 
-DEFUN("default-cursor", Vdefault_cursor, Sdefault_cursor, (repv arg), rep_Var)
+DEFUN("default-cursor", Vdefault_cursor, Sdefault_cursor, (repv arg), rep_Var) /*
+::doc:Vdefault-cursor::
+The cursor object displayed in the root window, and in frame parts which
+have no other cursor specified.
+::end:: */
 {
     if (arg && CURSORP(arg))
     {

@@ -29,6 +29,9 @@ DEFSYM(default_foreground, "default-foreground");
 DEFUN("get-color", Fget_color, Sget_color, (repv name), rep_Subr1) /*
 ::doc:Sget-color::
 get-color NAME
+
+Return the color object representing the color named NAME, a standard
+X11 color specifier.
 ::end:: */
 {
     Lisp_Color *f;
@@ -63,6 +66,8 @@ get-color NAME
 DEFUN("color-name", Fcolor_name, Scolor_name, (repv color), rep_Subr1) /*
 ::doc:Scolor-name::
 color-name COLOR
+
+Return the name of the color represented by the color object COLOR.
 ::end:: */
 {
     rep_DECLARE1(color, COLORP);
@@ -72,6 +77,10 @@ color-name COLOR
 DEFUN("color-rgb", Fcolor_rgb, Scolor_rgb, (repv color), rep_Subr1) /*
 ::doc:Scolor-rgb::
 color-rgb COLOR
+
+Returns a list of integers (RED GREEN BLUE) representing the actual
+color values of the color represented by object COLOR. The individual
+values range from zero to 65535.
 ::end:: */
 {
     rep_DECLARE1(color, COLORP);
@@ -83,6 +92,8 @@ color-rgb COLOR
 DEFUN("colorp", Fcolorp, Scolorp, (repv win), rep_Subr1) /*
 ::doc:Scolorp::
 colorp ARG
+
+Returns t if ARG is a color object.
 ::end:: */
 {
     return COLORP(win) ? Qt : Qnil;

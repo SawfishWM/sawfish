@@ -860,7 +860,11 @@ destroy_window_frame (Lisp_Window *w)
 
 
 DEFUN("frame-draw-mutex", Vframe_draw_mutex,
-      Sframe_draw_mutex, (repv arg), rep_Var)
+      Sframe_draw_mutex, (repv arg), rep_Var) /*
+::doc:Vframe-draw-mutex::
+While this variable is non-nil no frame parts will be redrawn. When it is
+set to nil any pending redraws will take place.
+::end:: */
 {
     if (arg != 0)
     {

@@ -368,6 +368,10 @@ DEFUN("window-get", Fwindow_get, Swindow_get,
       (repv win, repv prop), rep_Subr2) /*
 ::doc::Swindow-get::
 window-get WINDOW PROPERTY
+
+Return the value of the property named PROPERTY (a symbol) of WINDOW.
+
+Note that these are Lisp properties not X properties.
 ::end:: */
 {
     repv plist;
@@ -386,6 +390,10 @@ DEFUN("window-put", Fwindow_put, Swindow_put,
       (repv win, repv prop, repv val), rep_Subr3) /*
 ::doc:Swindow-put::
 window-put WINDOW PROPERTY VALUE
+
+Set the value of the property named PROPERTY (a symbol) of WINDOW to VALUE.
+
+Note that these are Lisp properties not X properties.
 ::end:: */
 {
     repv plist;
@@ -422,6 +430,8 @@ window-put WINDOW PROPERTY VALUE
 DEFUN("window-name", Fwindow_name, Swindow_name, (repv win), rep_Subr1) /*
 ::doc:Swindow-name::
 window-name WINDOW
+
+Return the name of window object WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -432,6 +442,8 @@ DEFUN("window-full-name", Fwindow_full_name, Swindow_full_name,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-full-name::
 window-full-name WINDOW
+
+Return the full name of window object WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -442,6 +454,8 @@ DEFUN("window-icon-name", Fwindow_icon_name, Swindow_icon_name,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-icon-name::
 window-icon-name WINDOW
+
+Return the name of window object WINDOW's icon.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -452,6 +466,9 @@ DEFUN("window-mapped-p", Fwindow_mapped_p, Swindow_mapped_p,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-mapped-p::
 window-mapped-p WINDOW
+
+Return t if the client window associated with object WINDOW is mapped.
+(This doesn't necessarily mean that it is visible.)
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -461,6 +478,8 @@ window-mapped-p WINDOW
 DEFUN("window-frame", Fwindow_frame, Swindow_frame, (repv win), rep_Subr1) /*
 ::doc:Swindow-frame::
 window-frame WINDOW
+
+Return the frame object (a list) associated with WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -470,7 +489,11 @@ window-frame WINDOW
 DEFUN("set-window-frame", Fset_window_frame, Sset_window_frame,
       (repv win, repv frame), rep_Subr2) /*
 ::doc:Sset-window-frame::
-window-frame WINDOW FRAME
+set-window-frame WINDOW FRAME
+
+Set the frame associated with the window object WINDOW to FRAME (a
+list). If the window is mapped the old frame will be destroyed and a
+new frame constructed as specified by FRAME.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -509,6 +532,8 @@ DEFUN("window-position", Fwindow_position, Swindow_position,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-position::
 window-position WINDOW
+
+Return (X . Y) defining the current position of WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -520,6 +545,9 @@ DEFUN("window-dimensions", Fwindow_dimensions, Swindow_dimensions,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-dimensions::
 window-dimensions WINDOW
+
+Return (WIDTH . HEIGHT) defining the current dimensions of the client
+window associated with WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -531,6 +559,9 @@ DEFUN("window-frame-dimensions", Fwindow_frame_dimensions,
       Swindow_frame_dimensions, (repv win), rep_Subr1) /*
 ::doc:Swindow-frame-dimensions::
 window-frame-dimensions WINDOW
+
+Return (WIDTH . HEIGHT) defining the current dimensions of the frame
+surrounding WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -542,6 +573,9 @@ DEFUN("window-frame-offset", Fwindow_frame_offset,
       Swindow_frame_offset, (repv win), rep_Subr1) /*
 ::doc:Swindow-frame-offset::
 window-frame-offset WINDOW
+
+Return (X . Y) defining the offset from the origin of the client window
+associated with WINDOW to its frame window.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -552,6 +586,8 @@ window-frame-offset WINDOW
 DEFUN("windowp", Fwindowp, Swindowp, (repv win), rep_Subr1) /*
 ::doc:Swindowp::
 windowp ARG
+
+Return t if ARG is a window object.
 ::end:: */
 {
     return WINDOWP(win) ? Qt : Qnil;
@@ -560,7 +596,10 @@ windowp ARG
 DEFUN("set-input-focus", Fset_input_focus, Sset_input_focus,
       (repv win), rep_Subr1) /*
 ::doc:Sset-input-focus::
-set-input-focus WINDOW-OR-NIL
+set-input-focus WINDOW
+
+Set the input focus to WINDOW. If WINDOW is nil, then no window will
+have the focus.
 ::end:: */
 {
     if (win == Qnil)
@@ -576,6 +615,8 @@ set-input-focus WINDOW-OR-NIL
 DEFUN("input-focus", Finput_focus, Sinput_focus, (void), rep_Subr0) /*
 ::doc:Sinput-focus::
 input-focus
+
+Return the window object that has the input focus, or nil if none does.
 ::end:: */
 {
     return (focus_window == 0) ? Qnil : rep_VAL(focus_window);
@@ -585,6 +626,8 @@ DEFUN("managed-windows", Fmanaged_windows, Smanaged_windows,
       (void), rep_Subr0) /*
 ::doc:Smanaged-windows::
 managed-windows
+
+Return a list of all known client window objects.
 ::end:: */
 {
     repv list = Qnil;
@@ -601,6 +644,9 @@ managed-windows
 DEFUN("stacking-order", Fstacking_order, Sstacking_order, (void), rep_Subr0) /*
 ::doc:Sstacking-order::
 stacking-order
+
+Return a list of windows defining the current stacking order of all
+client windows.
 ::end:: */
 {
     Window root, parent, *children;
@@ -625,6 +671,9 @@ DEFUN("window-visibility", Fwindow_visibility, Swindow_visibility,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-visibility::
 window-visibility WINDOW
+
+Return a symbol defining the visibility of WINDOW. Possible returned
+symbols are `fully-obscured', `partially-obscured' or `unobscured'.
 ::end:: */
 {
     repv sym = Qnil;
@@ -649,6 +698,9 @@ DEFUN("window-transient-p", Fwindow_transient_p, Swindow_transient_p,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-transient-p::
 window-transient-p WINDOW
+
+Return non-nil if WINDOW is a transient window. The returned value will
+then be the numeric id of its parent window.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -660,6 +712,8 @@ DEFUN("window-shaped-p", Fwindow_shaped_p, Swindow_shaped_p,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-shaped-p::
 window-shaped-p WINDOW
+
+Return non-nil if WINDOW is shaped.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -669,6 +723,8 @@ window-shaped-p WINDOW
 DEFUN("hide-window", Fhide_window, Shide_window, (repv win), rep_Subr1) /*
 ::doc:Shide-window::
 hide-window WINDOW
+
+Prevent WINDOW from being displayed. See `show-window'.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -685,6 +741,8 @@ hide-window WINDOW
 DEFUN("show-window", Fshow_window, Sshow_window, (repv win), rep_Subr1) /*
 ::doc:Sshow-window::
 show-window WINDOW
+
+Ensure that WINDOW (if it has been mapped) is visible. See `hide-window'.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -701,6 +759,8 @@ DEFUN("window-visible-p", Fwindow_visible_p, Swindow_visible_p,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-visible-p::
 window-visible-p WINDOW
+
+Return t if WINDOW is currently visible (i.e. not hidden, see `hide-window').
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -710,6 +770,8 @@ window-visible-p WINDOW
 DEFUN("window-id", Fwindow_id, Swindow_id, (repv win), rep_Subr1) /*
 ::doc:Swindow-id::
 window-id WINDOW
+
+Return the numeric id of the client window associated with object WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -720,6 +782,9 @@ DEFUN("window-group-id", Fwindow_group_id, Swindow_group_id,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-group-id::
 window-group-id WINDOW
+
+Return the numeric id defining the leader of the group that WINDOW is a
+member of, or nil if it is not a member of a group.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -732,6 +797,12 @@ DEFUN("window-size-hints", Fwindow_size_hints, Swindow_size_hints,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-size-hints::
 window-size-hints WINDOW
+
+Return an alist defining the size-hints specified by the client window
+associated with WINDOW. Possible keys in the alist are `min-height',
+`max-height', `min-width', `max-width', `height-inc', `width-inc',
+`min-aspect', `max-aspect', `base-height', `base-width',
+`user-position', `program-position', `user-size', `program-size'.
 ::end:: */
 {
     repv ret = Qnil;
@@ -792,6 +863,9 @@ DEFUN("call-window-hook", Fcall_window_hook, Scall_window_hook,
       (repv hook, repv win, repv args, repv type), rep_Subr4) /*
 ::doc:Scall-window-hook::
 call-window-hook HOOK WINDOW &optional ARGS HOOK-TYPE
+
+Call HOOK for WINDOW with extra arguments ARGS. See `call-hook' for a
+description of HOOK-TYPE.
 ::end:: */
 {
     repv tem;

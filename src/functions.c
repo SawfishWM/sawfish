@@ -33,6 +33,10 @@ DEFUN("restack-windows", Frestack_windows, Srestack_windows,
       (repv list), rep_Subr1) /*
 ::doc:Srestack-windows::
 restack-windows LIST
+
+Restack all windows in the list of windows LIST in the order they occur
+in the list (from top to bottom). The stacking order of any unspecified
+windows isn't affected.
 ::end:: */
 {
     int len, i, j;
@@ -57,6 +61,11 @@ restack-windows LIST
 DEFUN_INT("delete-window", Fdelete_window, Sdelete_window, (repv win), rep_Subr1, "W") /*
 ::doc:Sdelete-window::
 delete-window WINDOW
+
+Delete WINDOW, i.e. send a WM_DELETE_WINDOW client-message if possible, or
+just delete the window if not.
+
+WINDOW may be a window object or a numeric window id.
 ::end:: */
 {
     Window w = x_win_from_arg (win);
@@ -72,6 +81,10 @@ delete-window WINDOW
 DEFUN_INT("destroy-window", Fdestroy_window, Sdestroy_window, (repv win), rep_Subr1, "W") /*
 ::doc:Sdestroy-window::
 destroy-window WINDOW
+
+Destroy WINDOW with out giving the owning application any warning.
+
+WINDOW may be a window object or a numeric window id.
 ::end:: */
 {
     if (WINDOWP(win))
@@ -86,6 +99,9 @@ destroy-window WINDOW
 DEFUN("warp-cursor", Fwarp_cursor, Swarp_cursor, (repv x, repv y), rep_Subr2) /*
 ::doc:Swarp-cursor::
 warp-cursor X Y
+
+Move the mouse pointer to position (X, Y) relative to the origin of the
+root window.
 ::end:: */
 {
     rep_DECLARE1(x, rep_INTP);
@@ -105,6 +121,9 @@ DEFUN("warp-cursor-to-window", Fwarp_cursor_to_window, Swarp_cursor_to_window,
       (repv win, repv x, repv y), rep_Subr3) /*
 ::doc:Swarp-cursor-to-window::
 warp-cursor-to-window WINDOW [X Y]
+
+Move the mouse pointer to position (X, Y) (or (0, 0) if undefined) relative
+to the origin of window object WINDOW.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -126,6 +145,8 @@ DEFUN("move-window-to", Fmove_window_to, Smove_window_to,
       (repv win, repv x, repv y), rep_Subr3) /*
 ::doc:Smove-window-to::
 move-window-to WINDOW X Y
+
+Move the top-left corner of window object WINDOW to (X, Y).
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -147,6 +168,8 @@ DEFUN("resize-window-to", Fresize_window_to, Sresize_window_to,
       (repv win, repv width, repv height), rep_Subr3) /*
 ::doc:Sresize-window-to::
 resize-window-to WINDOW WIDTH HEIGHT
+
+Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -163,6 +186,8 @@ static void *saved_message_fun;
 DEFUN("grab-server", Fgrab_server, Sgrab_server, (void), rep_Subr0) /*
 ::doc:Sgrab-server::
 grab-server
+
+Prevent any other clients from accessing the X server. See `ungrab-server'.
 ::end:: */
 {
     if (server_grabs++ == 0)
@@ -179,6 +204,11 @@ grab-server
 DEFUN("ungrab-server", Fungrab_server, Sungrab_server, (void), rep_Subr0) /*
 ::doc:Sungrab-server::
 ungrab-server
+
+After a call to `grab-server' this will allow other clients to access
+the X server again.
+
+Note that calls to `grab-server' and `ungrab-server' _nest_.
 ::end:: */
 {
     if (--server_grabs == 0)
@@ -194,6 +224,12 @@ DEFUN("grab-pointer", Fgrab_pointer, Sgrab_pointer,
       (repv win, repv cursor), rep_Subr2) /*
 ::doc:Sgrab-pointer::
 grab-pointer WINDOW [CURSOR]
+
+Grab the mouse pointer and direct all pointer events to window object
+WINDOW. If CURSOR is defined and a cursor object, display this whilst
+the pointer is grabbed.
+
+Returns non-nil if the grab succeeded.
 ::end:: */
 {
     Window g_win = 0;
@@ -219,6 +255,8 @@ grab-pointer WINDOW [CURSOR]
 DEFUN("ungrab-pointer", Fungrab_pointer, Sungrab_pointer, (void), rep_Subr0) /*
 ::doc:Sungrab-pointer::
 ungrab-pointer
+
+Release the grab on the mouse pointer.
 ::end:: */
 {
     XUngrabPointer (dpy, last_event_time);
@@ -274,6 +312,16 @@ DEFUN("draw-window-outline", Fdraw_window_outline, Sdraw_window_outline,
       (repv mode, repv x, repv y, repv width, repv height), rep_Subr5) /*
 ::doc:Sdraw-window-outline::
 draw-window-outline MODE X Y WIDTH HEIGHT
+
+Draw an outline of a window of dimensions (WIDTH, HEIGHT) at position
+(X, Y) relative to the root window.
+
+MODE is a symbol defining the type of outline drawn, currently it may
+only be `box' for a 3x3 grid.
+
+Use the `erase-window-outline' to erase the grid. Also note that since
+these functions draw directly on the root window the server should be
+grabbed until the outline is erased.
 ::end:: */
 {
     rep_DECLARE2(x, rep_INTP);
@@ -288,6 +336,11 @@ DEFUN("erase-window-outline", Ferase_window_outline, Serase_window_outline,
       (repv mode, repv x, repv y, repv width, repv height), rep_Subr5) /*
 ::doc:Serase-window-outline::
 erase-window-outline MODE X Y WIDTH HEIGHT
+Erase a previously drawn outline of a window of dimensions (WIDTH, HEIGHT)
+at position (X, Y) relative to the root window. See `draw-window-outline'.
+
+MODE is a symbol defining the type of outline drawn, currently it may
+only be `box' for a 3x3 grid.
 ::end:: */
 {
     rep_DECLARE2(x, rep_INTP);
@@ -301,6 +354,8 @@ erase-window-outline MODE X Y WIDTH HEIGHT
 DEFUN("screen-width", Fscreen_width, Sscreen_width, (void), rep_Subr0) /*
 ::doc:Sscreen-width::
 screen-width
+
+Return the width of the root window (in pixels).
 ::end:: */
 {
     return rep_MAKE_INT(screen_width);
@@ -309,6 +364,8 @@ screen-width
 DEFUN("screen-height", Fscreen_height, Sscreen_height, (void), rep_Subr0) /*
 ::doc:Sscreen-height::
 screen-height
+
+Return the height of the root window (in pixels).
 ::end:: */
 {
     return rep_MAKE_INT(screen_height);
@@ -317,6 +374,8 @@ screen-height
 DEFUN("sync-server", Fsync_server, Ssync_server, (void), rep_Subr0) /*
 ::doc:Ssync-server::
 sync-server
+
+Flush all pending X requests, don't wait for them to finish.
 ::end:: */
 {
     XFlush (dpy);
@@ -327,6 +386,10 @@ DEFUN("delete-x-property", Fdelete_x_property, Sdelete_x_property,
       (repv win, repv atom), rep_Subr2) /*
 ::doc:Sdelete-x-property::
 delete-x-property WINDOW ATOM
+
+Delete the X property ATOM (a symbol) of WINDOW.
+
+WINDOW may be the symbol `root', a window object or a numeric window id.
 ::end:: */
 {
     Window w = x_win_from_arg (win);
@@ -342,6 +405,10 @@ DEFUN("list-x-properties", Flist_x_properties, Slist_x_properties,
       (repv win), rep_Subr1) /*
 ::doc:Slist-x-properties::
 list-x-properties WINDOW
+
+List all X properties (symbols) of WINDOW.
+
+WINDOW may be the symbol `root', a window object or a numeric window id.
 ::end:: */
 {
     Window w;
@@ -375,6 +442,20 @@ DEFUN("get-x-property", Fget_x_property, Sget_x_property,
       (repv win, repv prop), rep_Subr2) /*
 ::doc:Sget-x-property::
 get-x-property WINDOW PROPERTY
+
+Return (TYPE FORMAT DATA) representing the X property PROPERTY (a
+symbol) of WINDOW. If no such property exists, return nil.
+
+WINDOW may be the symbol `root', a window object or a numeric window
+id.
+
+TYPE is a symbol representing the atom defining the type of the
+property. FORMAT is an integer, either 8, 16 or 32, defining the width
+of the data items read. DATA is an array, either a string for an 8-bit
+format, or a vector of integers.
+
+If TYPE is `ATOM' and FORMAT is 32, then DATA will be a vector of
+symbols, representing the atoms read.
 ::end:: */
 {
     Window w;
@@ -454,6 +535,18 @@ DEFUN("set-x-property", Fset_x_property, Sset_x_property,
       (repv win, repv prop, repv data, repv type, repv format), rep_Subr5) /*
 ::doc:Sset-x-property::
 set-x-property WINDOW PROPERTY DATA TYPE FORMAT
+
+Set the X property PROPERTY (a symbol) of WINDOW to the array DATA.
+
+WINDOW may be the symbol `root', a window object or a numeric window
+id.
+
+TYPE is a symbol representing the atom defining the type of the
+property, FORMAT is either 8, 16 or 32 defining the width of the data
+values. DATA is either a string or a vector of integers.
+
+If TYPE is `ATOM' and FORMAT is 32, then any symbols in DATA will be
+converted to their numeric X atoms.
 ::end:: */
 {
     Window w;

@@ -51,6 +51,9 @@ DEFUN("make-image", Fmake_image, Smake_image,
       (repv file, repv plist), rep_Subr2) /*
 ::doc:Smake-image::
 make-image FILE [PLIST]
+
+Return a new image object representing the image stored in FILE (a
+string). PLIST defines the property list of the image.
 ::end:: */
 {
     repv path;
@@ -95,6 +98,8 @@ make-image FILE [PLIST]
 DEFUN("copy-image", Fcopy_image, Scopy_image, (repv source), rep_Subr1) /*
 ::doc:Scopy-image::
 copy-image SOURCE-IMAGE
+
+Return a new image object, a clone of SOURCE-IMAGE.
 ::end:: */
 {
     ImlibImage *im;
@@ -110,6 +115,8 @@ DEFUN("flip-image-horizontally", Fflip_image_horizontally,
       Sflip_image_horizontally, (repv image), rep_Subr1) /*
 ::doc:Sflip-image-horizontally::
 flip-image-horizontally IMAGE 
+
+Flip the contents of IMAGE around the vertical axis.
 ::end:: */
 {
     rep_DECLARE1(image, IMAGEP);
@@ -121,6 +128,8 @@ DEFUN("flip-image-vertically", Fflip_image_vertically,
       Sflip_image_vertically, (repv image), rep_Subr1) /*
 ::doc:Sflip-image-vertically::
 flip-image-vertically IMAGE 
+
+Flip the contents of IMAGE around the horizontal axis.
 ::end:: */
 {
     rep_DECLARE1(image, IMAGEP);
@@ -132,6 +141,9 @@ DEFUN("flip-image-diagonally", Fflip_image_diagonally,
       Sflip_image_diagonally, (repv image), rep_Subr1) /*
 ::doc:Sflip-image-diagonally::
 flip-image-diagonally IMAGE 
+
+Flip the contents of IMAGE around a diagonal axis from the top-left to
+the bottom right of the image.
 ::end:: */
 {
     rep_DECLARE1(image, IMAGEP);
@@ -142,6 +154,8 @@ flip-image-diagonally IMAGE
 DEFUN("image-get", Fimage_get, Simage_get, (repv win, repv prop), rep_Subr2) /*
 ::doc::Simage-get::
 image-get IMAGE PROPERTY
+
+Return the value of the property named PROPERTY (a symbol) of IMAGE.
 ::end:: */
 {
     repv plist;
@@ -160,6 +174,8 @@ DEFUN("image-put", Fimage_put, Simage_put,
       (repv win, repv prop, repv val), rep_Subr3) /*
 ::doc:Simage-put::
 image-put IMAGE PROPERTY VALUE
+
+Set the value of the property named PROPERTY (a symbol) of IMAGE to VALUE.
 ::end:: */
 {
     repv plist;
@@ -190,6 +206,8 @@ DEFUN("image-dimensions", Fimage_dimensions, Simage_dimensions,
       (repv img), rep_Subr1) /*
 ::doc:Simage-dimensions::
 image-dimensions IMAGE
+
+Return (WIDTH . HEIGHT) representing the dimensions in pixels of IMAGE.
 ::end:: */
 {
     rep_DECLARE1(img, IMAGEP);
@@ -200,6 +218,8 @@ image-dimensions IMAGE
 DEFUN("image-border", Fimage_border, Simage_border, (repv img), rep_Subr1) /*
 ::doc:Simage-border::
 image-border IMAGE
+
+Return (LEFT RIGHT TOP BOTTOM) representing the border (in pixels) of IMAGE.
 ::end:: */
 {
     ImlibBorder border;
@@ -213,6 +233,10 @@ DEFUN("set-image-border", Fset_image_border, Sset_image_border,
       (repv img, repv left, repv right, repv top, repv bottom), rep_Subr5) /*
 ::doc:Sset-image-border::
 set-image-border IMAGE LEFT RIGHT TOP BOTTOM
+
+Set the border of IMAGE to (LEFT RIGHT TOP BOTTOM). The border of an
+image defines how that image is scaled -- only pixels inside the border
+are resized.
 ::end:: */
 {
     ImlibBorder border;

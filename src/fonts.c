@@ -29,6 +29,9 @@ DEFSYM(default_font, "default-font");
 DEFUN("get-font", Fget_font, Sget_font, (repv name), rep_Subr1) /*
 ::doc:Sget-font::
 get-font NAME
+
+Return the font object representing the font named NAME (a standard X
+font specifier string).
 ::end:: */
 {
     Lisp_Font *f;
@@ -62,6 +65,8 @@ get-font NAME
 DEFUN("font-get", Ffont_get, Sfont_get, (repv win, repv prop), rep_Subr2) /*
 ::doc::Sfont-get::
 font-get FONT PROPERTY
+
+Return the property PROPERTY (a symbol) associated with FONT.
 ::end:: */
 {
     repv plist;
@@ -79,6 +84,8 @@ font-get FONT PROPERTY
 DEFUN("font-put", Ffont_put, Sfont_put, (repv win, repv prop, repv val), rep_Subr3) /*
 ::doc:Sfont-put::
 font-put FONT PROPERTY VALUE
+
+Set the property PROPERTY (a symbol) associated with FONT to VALUE.
 ::end:: */
 {
     repv plist;
@@ -108,6 +115,8 @@ font-put FONT PROPERTY VALUE
 DEFUN("font-name", Ffont_name, Sfont_name, (repv font), rep_Subr1) /*
 ::doc:Sfont-name::
 font-name FONT
+
+Return the name of the font represented by the font object FONT.
 ::end:: */
 {
     rep_DECLARE1(font, FONTP);
@@ -117,6 +126,8 @@ font-name FONT
 DEFUN("fontp", Ffontp, Sfontp, (repv win), rep_Subr1) /*
 ::doc:Sfontp::
 fontp ARG
+
+Return t if ARG is a font object.
 ::end:: */
 {
     return FONTP(win) ? Qt : Qnil;
@@ -125,6 +136,9 @@ fontp ARG
 DEFUN("text-width", Ftext_width, Stext_width, (repv string, repv font), rep_Subr2) /*
 ::doc:Stext-width::
 text-width STRING [FONT]
+
+Return the number of horizontal pixels that would be required to display
+the text STRING using font object FONT (or the default-font).
 ::end:: */
 {
     rep_DECLARE1(string, rep_STRINGP);
@@ -138,6 +152,9 @@ text-width STRING [FONT]
 DEFUN("font-height", Ffont_height, Sfont_height, (repv font), rep_Subr1) /*
 ::doc:Sfont-height::
 font-height [FONT]
+
+Return the bounding height of glyphs rendered using FONT (or the
+default-font).
 ::end:: */
 {
     if (font == Qnil)

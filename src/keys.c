@@ -808,6 +808,9 @@ DEFUN("current-event-window", Fcurrent_event_window, Scurrent_event_window,
       (void), rep_Subr0) /*
 ::doc:Scurrent-event-window::
 current-event-window
+
+Return the window that received the current event, or the symbol
+`root', or nil if no such window.
 ::end:: */
 {
     if (current_x_event != 0)

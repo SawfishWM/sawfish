@@ -791,7 +791,11 @@ DEFUN("query-pointer", Fquery_pointer, Squery_pointer, (repv get), rep_Subr1) /*
 ::doc:Squery-pointer::
 query-pointer [GET-FROM-SERVER]
 
-Returns (MOUSE-X . MOUSE-Y)
+Returns (MOUSE-X . MOUSE-Y) representing the current mouse pointer position,
+relative to the origin of the root window.
+
+If GET-FROM-SERVER is non-nil then the position is read directly from
+the server, otherwise it's taken from the current event (if possible).
 ::end:: */
 {
     if (get != Qnil || current_x_event == 0 || !current_event_updated_mouse)
@@ -814,7 +818,8 @@ DEFUN("query-last-pointer", Fquery_last_pointer, Squery_last_pointer,
 ::doc:Squery-last-pointer::
 query-last-pointer
 
-Returns (MOUSE-X . MOUSE-Y)
+Returns (MOUSE-X . MOUSE-Y) representing the second most recent mouse
+pointer position, relative to the root window.
 ::end:: */
 {
     return Fcons (rep_MAKE_INT(previous_mouse_x),
@@ -824,6 +829,9 @@ Returns (MOUSE-X . MOUSE-Y)
 DEFUN("query-pointer-window", Fquery_pointer_window, Squery_pointer_window, (void), rep_Subr0) /*
 ::doc:Squery-pointer-window::
 query-pointer-window
+
+Returns the top-level window under the mouse pointer, or nil if the cursor
+is in the root window.
 ::end:: */
 {
     Window child, root;
@@ -849,6 +857,9 @@ query-pointer-window
 DEFUN("accept-x-input", Faccept_x_input, Saccept_x_input, (repv mask), rep_Subr1) /*
 ::doc:Saccept-x-input::
 accept-x-input [EVENT-MASK]
+
+Handle any X events received. If EVENT-MASK is non-nil then only events
+matching this numeric value are handled (see <X11/X.h>).
 ::end:: */
 {
     handle_input_mask (rep_INTP(mask) ? rep_INT(mask) : 0);
