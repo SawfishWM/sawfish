@@ -1,0 +1,47 @@
+;; shading.jl -- window ``shading''
+;; $Id$
+
+;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+
+;; This file is part of sawmill.
+
+;; sawmill is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; sawmill is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with sawmill; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+;;;###autoload
+(defun shade-window (w)
+  (interactive "W")
+  (unless (window-get w 'shaded)
+    (window-put w 'shaded t)
+    (window-put w 'hide-client t)
+    (window-put w 'shaded-old-type (window-type w))
+    (set-window-frame-style w (window-get w 'current-frame-style)
+			    (window-type-remove-border (window-type w)) nil)))
+
+;;;###autoload
+(defun unshade-window (w)
+  (interactive "W")
+  (when (window-get w 'shaded)
+    (window-put w 'shaded nil)
+    (window-put w 'hide-client nil)
+    (set-window-frame-style w (window-get w 'current-frame-style)
+			    (window-get w 'shaded-old-type) nil)
+    (window-put w 'shaded-old-type nil)))
+
+;;;###autoload
+(defun toggle-window-shaded (w)
+  (interactive "W")
+  (if (window-get w 'shaded)
+      (unshade-window w)
+    (shade-window w)))
