@@ -25,7 +25,8 @@ AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR(etc)
 
 dnl Release versioning info
-version="2.0"
+version="1.1"
+subversion=" (gtk2)"
 
 output_files="src/Makefile lisp/Makefile scripts/Makefile themes/Makefile\
  lisp/sawfish/ui/Makefile lisp/sawfish/gtk/Makefile sounds/Makefile\
@@ -334,6 +335,7 @@ AC_SUBST(LINGUAS)
 
 dnl Nonstandard exported symbols
 AC_SUBST(version)
+AC_SUBST(subversion)
 AC_SUBST(sawfishdir)
 AC_SUBST(sawfishexecdir)
 AC_SUBST(lispdir)
