@@ -1,3 +1,17 @@
+2000-07-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (configure_request): ensure that one (and only one)
+	synthetic ConfigureNotify event is sent to the window after the
+	configure request has been handled (even if the window's state
+	doesn't change at all)
+
+	[ this fixes the bug where menus in java/swing apps appear too
+	high until the window has been moved ]
+
+	* windows.c (manage_windows): if current focus is PointerRoot,
+	query the window under the pointer, then refocus that. Patch
+	from Brad Thompson
+
 2000-07-11  John Harper  <john@dcs.warwick.ac.uk>
 
 	* windows.c (Fmap_windows, Ffilter_windows): new functions.

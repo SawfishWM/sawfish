@@ -1,3 +1,12 @@
+2000-07-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* viewport.jl (move-window-to-viewport): remember to correct
+	for 1.. to vs 0.. indexing
+
+	* transient.jl (transient-of-p): if WM_TRANSIENT_FOR is set to
+	the root window, only compare group ids if non-nil
+	(transient-parents, transient-group): ignore unmapped windows
+
 2000-07-11  John Harper  <john@dcs.warwick.ac.uk>
 
 	* menus.jl (popup-menu): catch errors and unset menu-active
