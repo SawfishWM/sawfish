@@ -69,7 +69,25 @@ Outstanding bugs
 General tasks
 =============
 
-  + make librep use libtool's dlopen wrapper
+  + rewrite fg/bg updating
+
+    1. function to form shape union of client and all parts
+
+    2. set local shape mask of each part where necessary
+
+    3. draw bg&fg in one go, but don't use the window bg
+
+       [it turns out that clearing the frame part to update the
+       bg is the performance bottleneck causing the pointer jerkyness]
+
+       this means that bg will have to be drawn in exposures, but..
+
+    4. require that frame part bg shapes are the same for all
+       images (normal, focused, etc..)
+
+       possibly, assume that having a `removable' property means that
+       the part's shape is local (i.e. that there's something else
+       beneath it)
 
   + do the virtual-workspace edge-flipping thing?
 
