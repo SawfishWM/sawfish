@@ -69,13 +69,13 @@
 		    (label ,doc))))
 
 	  ;; XXX all but the first should have their own widget types
-	  ((memq type '(string file-name program-name))
+	  ((memq type '(string program-name))
 	   `(hbox (string :variable ,symbol
 			  :value ,(if (stringp value) value "")
 			  :allow-nil ,(get symbol 'custom-allow-nil))
 		  (label ,doc)))
 
-	  ((memq type '(font color))
+	  ((memq type '(font color file-name))
 	   `(hbox (,type :variable ,symbol
 			 :value ,value
 			 :allow-nil ,(get symbol 'custom-allow-nil))
