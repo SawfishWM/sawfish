@@ -1,5 +1,10 @@
 1999-10-11  John Harper  <john@dcs.warwick.ac.uk>
 
+	* version 0.12.2
+
+	* frames.c (set_frame_part_fg): if fg needs to be updated, but
+	bg hasn't recently been redrawn, redraw bg to clear fg
+
 	* version 0.12.1
 
 	* frames.c (list_frame_generator): after freeing the gc
