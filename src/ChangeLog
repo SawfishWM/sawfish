@@ -1,3 +1,9 @@
+2000-09-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c (lookup_event): when canonifying shifted keysyms,
+	don't lose the S- modifier if the shifted and non-shifted
+	keysyms are the same (adapted from E. Jay Berkenbilt)
+
 2000-09-04  John Harper  <john@dcs.warwick.ac.uk>
 
 	* images.c (Fcomposite_images): implemented for Imlib
