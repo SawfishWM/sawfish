@@ -23,6 +23,7 @@ static Time last_click;
 static u_long last_click_button;
 
 DEFSYM(global_keymap, "global-keymap");
+DEFSYM(root_window_keymap, "root-window-keymap");
 DEFSYM(override_keymap, "override-keymap");
 DEFSYM(unbound_key_hook, "unbound-key-hook");
 DEFSYM(keymap, "keymap");
@@ -219,6 +220,11 @@ lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
     {
 	/* 1. search keymap for active window decoration */
 	k = search_keymap(context_keymap, code, mods, callback);
+
+	if (!k && current_x_event->xany.window == root_window)
+	    /* 2. if event from root, search the root-window-keymap */
+	    k = search_keymap (Qroot_window_keymap, code, mods, callback);
+
 	if (!k && focus_window)
 	{
 	    /* 2. search focused window keymap property */
@@ -926,6 +932,7 @@ void
 keys_init(void)
 {
     rep_INTERN(global_keymap);
+    rep_INTERN(root_window_keymap);
     rep_INTERN(override_keymap);
     rep_INTERN(unbound_key_hook);
     rep_INTERN(keymap);
