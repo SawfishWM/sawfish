@@ -37,6 +37,10 @@
   "A list of regular expressions matching window names that exist across
 workspaces.")
 
+(defvar transients-get-focus t
+  "When non-nil, mapping a transient window whose parent is currently focused
+transfers the input focus to the transient window.")
+
 (defun window-type (w)
   (if (window-transient-p w)
       (if (window-shaped-p w)
@@ -69,5 +73,12 @@ workspaces.")
 			      (cdr (assq type fallback-frameset))
 			      default-frame)))))
 
-;; add the above function into the `add-window-hook' hook
+(defun transient-map-window (w)
+  (when (window-transient-p w)
+    (let
+	((parent (get-window-by-id (window-transient-p w))))
+      (when (and parent transients-get-focus (eq (input-focus) parent))
+	(set-input-focus w)))))
+
 (add-hook 'add-window-hook 'transient-add-window)
+(add-hook 'map-notify-hook 'transient-map-window)
