@@ -457,6 +457,7 @@
       (error)))
 
   (define (list-index lst x)
-    (do ((i 0 (1+ i))
-	 (rest lst (cdr rest)))
-	((eq (car rest) x) i))))
+    (let loop ((i 0) (rest lst))
+      (cond ((null rest) nil)
+	    ((eq (car rest) x) i)
+	    (t (loop (1+ i) (cdr rest)))))))
