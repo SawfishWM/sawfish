@@ -25,6 +25,9 @@
 	    remove-tooltip)
 
     (open rep
+	  rep.system
+	  rep.regexp
+	  rep.io.streams
 	  rep.io.timers
 	  sawfish.wm.custom
 	  sawfish.wm.misc

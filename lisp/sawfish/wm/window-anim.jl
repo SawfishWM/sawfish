@@ -27,6 +27,7 @@
 	    record-window-animator)
 
     (open rep
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.custom
 	  rep.util.autoloader)

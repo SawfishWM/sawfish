@@ -28,6 +28,9 @@
 	    i18n-init)
 
     (open rep
+	  rep.system
+	  rep.regexp
+	  rep.io.files
 	  rep.i18n.gettext
 	  sawfish.ui.wm)
 

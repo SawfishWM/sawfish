@@ -39,6 +39,7 @@
 	    raise-lower-windows)
 
     (open rep
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.commands
 	  sawfish.wm.custom

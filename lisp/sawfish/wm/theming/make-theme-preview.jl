@@ -24,6 +24,7 @@
     (export make-theme-preview)
 
     (open rep
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.theming.make-theme

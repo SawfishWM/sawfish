@@ -31,6 +31,7 @@
 	    raise-lower-window-and-transients)
 
     (open rep
+	  rep.system
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.custom

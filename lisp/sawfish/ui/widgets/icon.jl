@@ -28,6 +28,7 @@
     (open rep
 	  gui.gtk
 	  gui.gnome.ui
+	  rep.io.files
 	  sawfish.gtk.widget)
 
   (define (make-icon-item changed-callback)

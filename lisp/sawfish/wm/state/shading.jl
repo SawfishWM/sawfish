@@ -27,6 +27,7 @@
 	    toggle-window-shaded)
 
     (open rep
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.custom
 	  sawfish.wm.commands

@@ -32,6 +32,7 @@
 	    toggle-window-never-focus)
 
     (open rep
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.commands
 	  sawfish.wm.util.window-order

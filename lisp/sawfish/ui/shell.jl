@@ -29,6 +29,10 @@
 
     (open rep
 	  gui.gtk
+	  rep.system
+	  rep.regexp
+	  rep.io.streams
+	  rep.io.files
 	  rep.io.timers
 	  sawfish.gtk.stock
 	  sawfish.gtk.widget

@@ -31,6 +31,10 @@
 	    custom-menu)
 
     (open rep
+	  rep.regexp
+	  rep.io.files
+	  rep.io.streams
+	  rep.io.processes
 	  rep.data.tables
 	  sawfish.wm.events
 	  sawfish.wm.windows

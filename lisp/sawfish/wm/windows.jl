@@ -48,6 +48,9 @@
 	     call-after-state-changed))
 
     (open rep
+	  rep.system
+	  rep.regexp
+	  rep.io.streams
 	  sawfish.wm.windows.subrs
 	  sawfish.wm.gaol
 	  sawfish.wm.custom

@@ -26,6 +26,7 @@
 	    edge-flip-while-moving)
 
     (open rep
+	  rep.system
 	  sawfish.wm.custom
 	  sawfish.wm.windows
 	  sawfish.wm.misc

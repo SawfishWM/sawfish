@@ -36,6 +36,7 @@
 	    window-absolute-position)
 
     (open rep
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.events

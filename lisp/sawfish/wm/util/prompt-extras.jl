@@ -23,6 +23,8 @@
 
 (declare (in-module sawfish.wm.util.prompt))
 
+(require 'rep.io.files)
+
 ;;; completion/validation functions
 
 (define (prompt-complete-filename word)

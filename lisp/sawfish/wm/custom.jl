@@ -50,6 +50,7 @@
 	    custom-load-user-file)
 
     (open rep
+	  rep.io.files
 	  rep.data.tables
 	  rep.structures
 	  sawfish.wm.commands

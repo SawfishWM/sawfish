@@ -32,6 +32,8 @@
 	    define-gaol-structure)
 
     (open rep
+	  rep.io.files
+	  rep.io.streams
 	  sawfish.wm.colors
 	  sawfish.wm.cursors
 	  sawfish.wm.events

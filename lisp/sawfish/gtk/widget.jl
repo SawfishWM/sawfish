@@ -43,7 +43,9 @@
 	    box-border)
 
     ((open rep
-	   gui.gtk)
+	   gui.gtk
+	   rep.system
+	   rep.io.streams)
      (access rep.structures))
 
   (defconst box-spacing 4)

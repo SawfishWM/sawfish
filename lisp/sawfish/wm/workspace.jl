@@ -104,6 +104,8 @@
 	    ws-call-with-workspace)
 
     (open rep
+	  rep.system
+	  rep.io.streams
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.events

@@ -24,6 +24,9 @@
     (export play-sample)
 
     (open rep
+	  rep.system
+	  rep.io.files
+	  rep.io.processes
 	  sawfish.wm.custom
 	  sawfish.wm.misc)
 

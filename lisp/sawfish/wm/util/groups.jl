@@ -51,6 +51,7 @@
 	    window-group-menu)
 
     (open rep
+	  rep.system
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.windows

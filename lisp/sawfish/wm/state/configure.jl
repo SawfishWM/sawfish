@@ -27,6 +27,7 @@
 	    configure-choose-gravity)
 
     (open rep
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.custom

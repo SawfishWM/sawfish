@@ -71,6 +71,8 @@
 	    cycle-class)
 
     (open rep
+	  rep.system
+	  rep.regexp
 	  sawfish.wm.misc
 	  sawfish.wm.windows
 	  sawfish.wm.util.window-order

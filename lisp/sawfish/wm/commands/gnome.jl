@@ -35,6 +35,7 @@
 	    gnome-help-browser)
 
     (open rep
+	  rep.system
 	  sawfish.wm.misc
 	  sawfish.wm.state.gnome
 	  sawfish.wm.commands)

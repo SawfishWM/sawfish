@@ -24,6 +24,7 @@
     (export custom-set-keymap)
 
     (open rep
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.events
 	  sawfish.wm.custom)

@@ -24,6 +24,7 @@
     (export make-theme)
 
     (open rep
+	  rep.regexp
 	  sawfish.wm.images
 	  sawfish.wm.colors
 	  sawfish.wm.fonts

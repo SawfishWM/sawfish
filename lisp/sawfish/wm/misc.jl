@@ -24,7 +24,9 @@
 (declare (in-module sawfish.wm.misc))
 
 (open-structures '(rep
+		   rep.regexp
 		   rep.module-system
+		   rep.io.files
 		   sawfish.wm.windows.subrs
 		   sawfish.wm.events))
 

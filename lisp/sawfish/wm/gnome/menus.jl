@@ -25,6 +25,10 @@
 	    gnome-menus)
 
     (open rep
+	  rep.system
+	  rep.regexp
+	  rep.io.files
+	  rep.io.streams
 	  sawfish.wm.commands)
 
   (define-structure-alias gnome-menu sawfish.wm.gnome.menus)

@@ -40,6 +40,8 @@
 
     (open rep
 	  gui.gtk
+	  rep.system
+	  rep.io.streams
 	  rep.data.records
 	  rep.data.tables
 	  sawfish.ui.slot

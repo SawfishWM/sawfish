@@ -27,6 +27,7 @@
 (define-structure sawfish.wm.state.open-look ()
 
     (open rep
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.frames)

@@ -28,6 +28,7 @@
 	    window-order-focus-most-recent)
 
     (open rep
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.session.init
 	  sawfish.wm.workspace

@@ -29,6 +29,7 @@
 	    focus-pop-map)
 
     (open rep
+	  rep.system
 	  rep.util.autoloader
 	  sawfish.wm.events
 	  sawfish.wm.misc

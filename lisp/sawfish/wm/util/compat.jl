@@ -36,6 +36,7 @@
 	    custom-set-frame-style)
 
     (open rep
+	  rep.io.streams
 	  sawfish.wm.misc
 	  sawfish.wm.custom
 	  sawfish.wm.commands

@@ -34,6 +34,8 @@
 	    WIN_HINTS_FOCUS_ON_CLICK)
 
     (open rep
+	  rep.regexp
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.events
 	  sawfish.wm.misc

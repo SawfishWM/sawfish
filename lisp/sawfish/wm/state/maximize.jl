@@ -44,6 +44,7 @@
 	    maximize-fill-window-horizontally-toggle)
 
     (open rep
+	  rep.system
 	  sawfish.wm.util.edges
 	  sawfish.wm.util.rects
 	  sawfish.wm.windows

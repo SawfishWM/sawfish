@@ -22,6 +22,7 @@
 (define-structure sawfish.wm.ext.shade-hover ()
 
     (open rep
+	  rep.system
 	  rep.io.timers
 	  sawfish.wm.windows
 	  sawfish.wm.custom

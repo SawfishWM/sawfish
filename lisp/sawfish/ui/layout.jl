@@ -31,6 +31,7 @@
 
     ((open rep
 	   gui.gtk
+	   rep.regexp
 	   sawfish.ui.slot
 	   sawfish.gtk.widget)
      (access rep.structures))

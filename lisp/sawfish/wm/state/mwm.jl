@@ -39,6 +39,7 @@
 (define-structure sawfish.wm.state.mwm ()
 
     (open rep
+	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.frames)

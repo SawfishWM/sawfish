@@ -31,6 +31,8 @@
 	    quote-event)
 
     (open rep
+	  rep.system
+	  rep.io.streams
 	  sawfish.wm.events
 	  sawfish.wm.commands
 	  sawfish.wm.misc

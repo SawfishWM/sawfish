@@ -30,6 +30,7 @@
 	    changes-to-revert-p)
 
     (open rep
+	  rep.system
 	  rep.data.tables
 	  sawfish.gtk.widget
 	  sawfish.ui.slot

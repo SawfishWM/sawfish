@@ -35,6 +35,11 @@
 	    gtkrc-call-after-changed)
 
     (open rep
+	  rep.system
+	  rep.regexp
+	  rep.io.files
+	  rep.io.streams
+	  rep.io.processes
 	  sawfish.wm.colors
 	  sawfish.wm.fonts
 	  sawfish.wm.images

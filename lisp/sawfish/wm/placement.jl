@@ -28,6 +28,7 @@
 	    place-window)
 
     (open rep
+	  rep.system
 	  rep.util.autoloader
 	  sawfish.wm.state.maximize
 	  sawfish.wm.misc

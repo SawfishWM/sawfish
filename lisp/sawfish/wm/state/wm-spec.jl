@@ -23,6 +23,7 @@
 (define-structure sawfish.wm.state.wm-spec ()
 
     (open rep
+	  rep.system
 	  sawfish.wm.misc
 	  sawfish.wm.windows
 	  sawfish.wm.workspace

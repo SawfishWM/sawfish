@@ -22,6 +22,8 @@
 (define-structure sawfish.wm.ext.error-handler ()
 
     (open rep
+	  rep.system
+	  rep.io.streams
 	  sawfish.wm.misc)
 
   (define-structure-alias error-handler sawfish.wm.ext.error-handler)

@@ -44,6 +44,9 @@
 	    window-history-save)
 
     (open rep
+	  rep.system
+	  rep.io.streams
+	  rep.io.files
 	  sawfish.wm.misc
 	  sawfish.wm.custom
 	  sawfish.wm.commands

@@ -32,6 +32,7 @@
 	    nokogiri-grab-match-window-property)
 
     (open rep
+	  rep.io.streams
 	  sawfish.wm.custom
 	  sawfish.wm.events
 	  sawfish.wm.customize

@@ -26,6 +26,7 @@
     (export audio-event-handler)
 
     (open rep
+	  rep.system
 	  sawfish.wm.custom
 	  sawfish.wm.windows
 	  sawfish.wm.state.maximize)

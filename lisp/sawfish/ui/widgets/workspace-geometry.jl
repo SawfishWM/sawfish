@@ -30,6 +30,7 @@
 	  gui.gnome.canvas
 	  gui.gnome.canvas-pixbuf
 	  gui.gtk.gdk-pixbuf
+	  rep.io.files
 	  sawfish.gtk.widget
 	  sawfish.ui.layout)
 

@@ -33,7 +33,10 @@
 	    prompt-for-workspace)
 
     (open rep
+	  rep.system
+	  rep.regexp
 	  rep.data.ring
+	  rep.io.streams
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.custom

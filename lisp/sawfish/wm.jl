@@ -23,7 +23,7 @@
 
 (declare (in-module sawfish.wm))
 
-(open-structures '(rep))
+(open-structures '(rep rep.system rep.io.files))
 
 ;;(setq debug-on-error '(bad-arg missing-arg void-value invalid-function))
 

@@ -26,6 +26,8 @@
     (export xterm)
 
     (open rep
+	  rep.system
+	  rep.io.streams
 	  sawfish.wm.custom
 	  sawfish.wm.commands)
 

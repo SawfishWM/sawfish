@@ -25,6 +25,9 @@
 
     (open rep
 	  gui.gtk
+	  rep.regexp
+	  rep.io.streams
+	  rep.io.files
 	  sawfish.gtk.widget
 	  sawfish.ui.i18n)
 
