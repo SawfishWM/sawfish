@@ -31,6 +31,7 @@
 	    call-command
 	    prefix-numeric-argument
 	    commandp
+	    command-documentation
 
 	    ;; autoloaded from with-output.jl
 	    call-command-with-output-to-screen
@@ -38,6 +39,7 @@
 
     (open rep
 	  rep.util.autoloader
+	  rep.lang.doc
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.windows.subrs
@@ -70,7 +72,7 @@ evaluated.")
   (define autoloader (make-autoloader getter setter))
   (define real-getter (autoloader-ref getter))
 
-  (define (define-command name fun #!key spec type)
+  (define (define-command name fun #!key spec type doc doc-key)
     "Define a window managed command called NAME (a symbol). The
 function FUN will be called to execute the command. SPEC and TYPE may
 be used to define the arguments expected by the command. (an
@@ -79,7 +81,11 @@ interactive specification and a custom-type specification respectively)."
     (when spec
       (put name 'command-spec spec))
     (when type
-      (put name 'custom-command-args type)))
+      (put name 'custom-command-args type))
+    (when doc
+      (put name 'dommand-doc doc))
+    (when doc-key
+      (put name 'command-doc-key doc-key)))
 
   ;; obsolete, use define-command
   (define (define-command-args name spec)
@@ -312,6 +318,22 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
 		    (cond ((stringp (car rest)) (loop (cdr rest)))
 			  ((eq (caar rest) 'interactive) (car rest))
 			  (t nil))))))))
+
+  (define (command-documentation name)
+    "Return the documentation associated with the command called NAME."
+    (cond ((get name 'command-doc))
+	  ((get name 'command-doc-key)
+	   (doc-file-ref (get name 'command-doc-key)))
+	  (t
+	   (let ((value (command-ref name)))
+	     ;; assume that the command has the same name as
+	     ;; the underlying function
+	     (or (documentation name nil value)
+		 ;; XXX last chance, kludge by looking for the
+		 ;; XXX name of the closure...
+		 (and (closurep value) (closure-name value)
+		      (documentation (intern (closure-name value))
+				     nil value)))))))
 
 ;;; some default commands
 
