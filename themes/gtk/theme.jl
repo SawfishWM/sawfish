@@ -91,7 +91,9 @@
 	   (setq gtk-background (mapcar #'(lambda (x)
 					    (and x (get-color x)))
 					gtk-background))))
-    (mapc 'rebuild-frame (managed-windows))))
+    (mapc #'(lambda (w)
+	      (when (eq (window-get w 'current-frame-style) 'gtk)
+		(rebuild-frame w))) (managed-windows))))
 
 (defun gtk-reload-style ()
   (interactive)
