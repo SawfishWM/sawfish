@@ -301,11 +301,13 @@ they inherit.")
 (defun remove-frame-class (w class)
   (window-put w 'removed-classes
 	      (cons class (delq class (window-get w 'removed-classes))))
-  (rebuild-frame w))
+  (when (window-framed-p w)
+    (rebuild-frame w)))
 
 (defun add-frame-class (w class)
   (window-put w 'removed-classes (delq class (window-get w 'removed-classes)))
-  (rebuild-frame w))
+  (when (window-framed-p w)
+    (rebuild-frame w)))
 
 
 ;; initialisation
