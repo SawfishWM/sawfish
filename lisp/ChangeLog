@@ -1,3 +1,14 @@
+2000-07-19  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keymaps.jl (custom-set-keymap): don't pass REQ arg to
+	custom-set, just ignore it
+
+	* custom.jl (custom-set): removed REQ parameter, has to be
+	conditional on the value of the option
+	(custom-set-variable, custom-set-typed-variable): if both REQ
+	and VALUE are non-nil, require REQ. Make SYMBOL special before
+	setting it
+
 2000-07-18  John Harper  <john@dcs.warwick.ac.uk>
 
 	* custom.jl (custom-convert): fixed some stupid bugs when
