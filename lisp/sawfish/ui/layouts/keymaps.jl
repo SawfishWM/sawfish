@@ -31,18 +31,25 @@
 	  sawfish.ui.layout
 	  sawfish.gtk.widget)
 
+  (define (keymap-slot-p slot)
+    ;; XXX so fucking evil!
+    (string-match "-keymap$" (symbol-name (slot-name slot))))
+
   (define (layout-keymaps style slots)
-    (let ((menu (gtk-menu-new))
-	  (omenu (gtk-option-menu-new))
-	  (hbox (gtk-hbox-new nil box-spacing))
-	  (vbox (gtk-vbox-new nil box-spacing))
-	  (active (car slots)))
+    (let* ((menu (gtk-menu-new))
+	   (omenu (gtk-option-menu-new))
+	   (hbox (gtk-hbox-new nil box-spacing))
+	   (vbox (gtk-vbox-new nil box-spacing))
+	   (km-vbox (gtk-vbox-new nil box-spacing))
+	   (keymap-slots (filter keymap-slot-p slots))
+	   (other-slots (filter (lambda (x) (not (keymap-slot-p x))) slots))
+	   (active (car keymap-slots)))
 
       (gtk-box-pack-start hbox (gtk-label-new (_ "Context:")))
       (gtk-box-pack-start hbox omenu)
       (gtk-box-pack-start vbox hbox)
 
-      (let loop ((rest slots)
+      (let loop ((rest keymap-slots)
 		 (last nil))
 	(when rest
 	  (let* ((slot (car rest))
@@ -55,10 +62,10 @@
 				  (when (gtk-check-menu-item-active w)
 				    (when active
 				      (gtk-container-remove
-				       vbox (slot-gtk-widget active)))
+				       km-vbox (slot-gtk-widget active)))
 				    (setq active slot)
-				    (gtk-container-add
-				     vbox (slot-gtk-widget active)))))
+				    (gtk-box-pack-start
+				     km-vbox (slot-gtk-widget active) t t))))
 	    (set-slot-layout slot (slot-gtk-widget slot))
 	    (loop (cdr rest) button))))
 
@@ -66,7 +73,10 @@
 
       (when active
 	(gtk-option-menu-set-history omenu 0)
-	(gtk-container-add vbox (slot-gtk-widget active)))
+	(gtk-box-pack-start km-vbox (slot-gtk-widget active) t t))
+
+      (gtk-box-pack-start vbox km-vbox t t)
+      (gtk-box-pack-start vbox (layout-slots 'vbox other-slots))
 
       (gtk-widget-show-all vbox)
       vbox))

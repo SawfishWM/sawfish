@@ -1,5 +1,12 @@
 2000-11-28  John Harper  <jsh@eazel.com>
 
+	* widgets/modifier-list.jl: new widget, manages a list of
+	modifier key names
+
+	* layouts/keymaps.jl: only put slots whose names end in
+	`-keymap' into the popup menu, just stack any others in the
+	vbox
+
 	* shell.jl (display-flattened): if the layout widget is a
 	container, give it a non-zero border-width
 
