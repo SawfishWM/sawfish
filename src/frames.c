@@ -641,17 +641,18 @@ list_frame_generator (Lisp_Window *w)
     repv win = rep_VAL(w);
     bool regen;				/* are we resizing the frame */
     int nparts = 0;
-    bool hide_client = FALSE;
 
     /* bounding box of frame */
     int left_x, top_y, right_x, bottom_y;
 
     tem = Fwindow_get (rep_VAL(w), Qhide_client);
     if (tem && tem != Qnil)
-	hide_client = TRUE;
+	w->client_hidden = 1;
+    else
+	w->client_hidden = 0;
 
     left_x = top_y = 0;
-    if (!hide_client)
+    if (!w->client_hidden)
     {
 	right_x = w->attr.width;
 	bottom_y = w->attr.height;
@@ -659,7 +660,7 @@ list_frame_generator (Lisp_Window *w)
     else
 	right_x = bottom_y = 0;
 
-    DB(("list_frame_generator(%s)\n", w->name));
+    DB(("list_frame_generator(%s)\n", rep_STR(w->name)));
 
     while (gen_list != Qnil && rep_SYMBOLP(gen_list) && !rep_INTERRUPTP)
     {
@@ -1074,7 +1075,7 @@ list_frame_generator (Lisp_Window *w)
 		rects[i].height = fp->height;
 	    }
 	}
-	if (!hide_client && !w->shaped)
+	if (!w->client_hidden && !w->shaped)
 	{
 	    rects[i].x = -w->frame_x;
 	    rects[i].y = -w->frame_y;
@@ -1084,7 +1085,7 @@ list_frame_generator (Lisp_Window *w)
 	}
 	XShapeCombineRectangles (dpy, w->frame, ShapeBounding, 0, 0,
 				 rects, i, ShapeSet, Unsorted);
-	if (!hide_client && w->shaped)
+	if (!w->client_hidden && w->shaped)
 	{
 	    XShapeCombineShape (dpy, w->frame, ShapeBounding,
 				-w->frame_x, -w->frame_y, w->id,
@@ -1105,11 +1106,7 @@ list_frame_generator (Lisp_Window *w)
 					fp->width, fp->height,
 					0, screen_depth, InputOutput,
 					screen_visual, wamask, &wa);
-		XSelectInput (dpy, fp->id,
-			      ButtonPressMask | ButtonReleaseMask
-			      | ButtonMotionMask | PointerMotionHintMask
-			      | EnterWindowMask | LeaveWindowMask
-			      | KeyPressMask | ExposureMask);
+		XSelectInput (dpy, fp->id, FP_EVENTS);
 		XMapRaised (dpy, fp->id);
 
 		/* stash the fp in the window */
@@ -1140,6 +1137,25 @@ list_frame_generator (Lisp_Window *w)
 	    XDefineCursor (dpy, fp->id, (fp->cursor != Qnil)
 			   ? VCURSOR(fp->cursor)->cursor : None);
 	    set_frame_part_bg (fp);
+	}
+    }
+
+    /* ICCCM says we must unmap the client window when it's hidden */
+    {
+	int unmap_client = (!w->visible || w->client_hidden);
+	if (w->client_unmapped != unmap_client)
+	{
+	    if (unmap_client)
+	    {
+		XUnmapWindow (dpy, w->id);
+		w->local_unmaps++;
+	    }
+	    else
+	    {	    
+		XMapWindow (dpy, w->id);
+		w->local_maps++;
+	    }
+	    w->client_unmapped = unmap_client;
 	}
     }
 
@@ -1206,7 +1222,7 @@ reset_frame_parts (Lisp_Window *w)
 void
 create_window_frame (Lisp_Window *w)
 {
-    DB(("create_window_frame (%s)\n", w->name));
+    DB(("create_window_frame (%s)\n", rep_STR(w->name)));
     w->destroy_frame = 0;
     w->focus_change = 0;
     w->rebuild_frame = 0;
