@@ -199,6 +199,7 @@
 (defgroup placement "Placement")
 (defgroup appearance "Appearance")
 (defgroup workspace "Workspaces")
+(defgroup viewport "Viewports")
 (defgroup bindings "Bindings")
 (defgroup maximize "Maximizing")
 (defgroup misc "Miscellaneous")
