@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish\n"
 "POT-Creation-Date: 2000-07-16 09:53+0200\n"
-"PO-Revision-Date: 2000-07-16 17:54+00:00\n"
+"PO-Revision-Date: 2000-08-11 13:45+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr "Индекс:"
 #. ../lisp/edge-flip.jl
 #. ../lisp/autoload.jl
 msgid "Edge Flipping"
-msgstr ""
+msgstr "Обращение края"
 
 #. ../lisp/match-window.jl
 #. ../lisp/autoload.jl
@@ -165,15 +165,15 @@ msgstr "Прикосновение к краю экрана выбирает следующий: \\w"
 
 #. ../lisp/edge-flip.jl
 msgid "Only flip when interactively moving a window."
-msgstr ""
+msgstr "Отражать только при интерактивном перемещении окна."
 
 #. ../lisp/edge-flip.jl
 msgid "Milliseconds to delay before flipping: \\w"
-msgstr ""
+msgstr "Задержка перед отражением в миллисекундах: \\w"
 
 #. ../lisp/edge-flip.jl
 msgid "Warp pointer to opposite screen edge when flipping."
-msgstr ""
+msgstr "Загибать указатель на противоположный край экрана при отражении."
 
 #. ../lisp/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -223,12 +223,16 @@ msgid ""
 "Offset (%) from left window edge when warping pointer.\n"
 "A negative number means outside the left window edge."
 msgstr ""
+"Смещение (%) от левого края экрана при загибании указателя.\n"
+"Отрицательное число означает внутреннюю сторону левого края окна."
 
 #. ../lisp/functions.jl
 msgid ""
 "Offset (%) from top window edge when warping pointer.\n"
 "A negative number means outside the top window edge."
 msgstr ""
+"Смещение (%) от верхнего края экрана при загибании указателя.\n"
+"Отрицательное число означает внутреннюю сторону верхнего края окна."
 
 #. ../lisp/functions.jl
 msgid "The program launched by the `xterm' command."
@@ -329,11 +333,11 @@ msgstr "GNOME WWW"
 
 #. ../lisp/group-funs.jl
 msgid "Group transient windows with their parents."
-msgstr ""
+msgstr "Группировать промежуточные окна с их родителями."
 
 #. ../lisp/group-funs.jl
 msgid "List of group ids that always exist, even when they have no members."
-msgstr ""
+msgstr "Перечислять список уже существующих идентификаторов групп, даже если в них нет членов."
 
 #. ../lisp/group-funs.jl
 msgid "New group"
@@ -352,35 +356,35 @@ msgstr ""
 
 #. ../lisp/grow-pack.jl
 msgid "Grows window to the left until it `bumps into' another window."
-msgstr ""
+msgstr "Увеличивать окно влево, пока оно не \"столкнется\" с другим окном."
 
 #. ../lisp/grow-pack.jl
 msgid "Grows window to the right until it `bumps into' another window."
-msgstr ""
+msgstr "Увеличивать окно вправо, пока оно не \"столкнется с другим окном."
 
 #. ../lisp/grow-pack.jl
 msgid "Grows window upwards until it `bumps into' another window."
-msgstr ""
+msgstr "Увеличивать окно вверх, пока оно не \"столкнется\" с другим окном."
 
 #. ../lisp/grow-pack.jl
 msgid "Grows window downwards until it `bumps into' another window."
-msgstr ""
+msgstr "Увеличивать окно вниз, пока оно не \"столкнется\" с другим окном."
 
 #. ../lisp/grow-pack.jl
 msgid "Moves window to the left until it `bumps into' another window."
-msgstr ""
+msgstr "Перемещать окно влево, пока оно не \"столкнется\" с другим окном."
 
 #. ../lisp/grow-pack.jl
 msgid "Moves window to the right until it `bumps into' another window."
-msgstr ""
+msgstr "Перемещать окно вправо, пока оно не \"столкнется\" с другим окном."
 
 #. ../lisp/grow-pack.jl
 msgid "Moves window upwards until it `bumps into' another window."
-msgstr ""
+msgstr "Перемещать окно вверх, пока оно не \"столкнется\" с другим окном."
 
 #. ../lisp/grow-pack.jl
 msgid "Moves window downwards until it `bumps into' another window."
-msgstr ""
+msgstr "Перемещать окно вниз, пока оно не \"столкнется\" с другим окном."
 
 #. ../lisp/gtkrc.jl
 msgid "Reload the gtkrc settings."
@@ -416,7 +420,7 @@ msgstr "Показать рабочее место/область просмотра содержащие окно W."
 
 #. ../lisp/iconify.jl
 msgid "Display the workspace containing the window W, then focus on W."
-msgstr ""
+msgstr "Показать рабочее место содержащее окно W, при фокусировании на W."
 
 #. ../lisp/iconify.jl
 msgid "Iconify all windows on the current workspace."
@@ -434,7 +438,7 @@ msgstr "Игнорировать окно."
 
 #. ../lisp/ignore-window.jl
 msgid "Unignore the window."
-msgstr ""
+msgstr "Откл. игнорирование окна."
 
 #. ../lisp/ignore-window.jl
 msgid "Toggle whether a window is ignored or not."
@@ -456,7 +460,7 @@ msgstr "Нажмите клавишу..."
 msgid ""
 "Sends the next key event directly to the focused client window, ignoring\n"
 "any window manager bindings that it may have."
-msgstr ""
+msgstr "Посылать следующие события клавиатуры прямо к сфокусированному клиентскому окну, игнорирую любые связи оконного диспетчера, которые он может иметь."
 
 #. ../lisp/keymap.jl
 msgid "[Quote]"
@@ -464,53 +468,53 @@ msgstr "[Кавычка]"
 
 #. ../lisp/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
-msgstr ""
+msgstr "Комбинации активные везде."
 
 #. ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when a client window is focused."
-msgstr ""
+msgstr "Комбинации активные когда сфокусированно клиентское окно."
 
 #. ../lisp/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the root window\n"
 "(or when no window is focused)."
-msgstr ""
+msgstr "Комбинации активные когда курсор находится в корневом окне (или нет сфокусированных окон)"
 
 #. ../lisp/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the title of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Комбинации активные когда указатель находится на заголовке окна. (Допустимы только события мыши)"
 
 #. ../lisp/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the border of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Комбинации активные когда указатель находится на рамке окна. (Допустимы только события мыши)"
 
 #. ../lisp/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the close button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Комбинации активные когда указатель находится на кнопке закрытия окна. (Допустимы только события мыши)"
 
 #. ../lisp/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the iconify\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Комбинации активные когда указатель находится на кнопке сворачивания окна в пиктограмму. (Допустимы только события мыши)"
 
 #. ../lisp/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the maximize\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Комбинации активные когда указатель находится на кнопке максимизации окна. (Допустимы только события мыши)"
 
 #. ../lisp/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
+msgstr "Комбинации активные когда указатель находится на кнопке меню окна. (Допустимы только события мыши)"
 
 #. ../lisp/match-window.jl
 msgid "State"
@@ -524,7 +528,7 @@ msgstr "Другое"
 msgid ""
 "Maximizing a window in one dimension must increase the size of that "
 "dimension."
-msgstr ""
+msgstr "Максимизация окна в одном измерении должна увеличить его размер в этом измерения."
 
 #. ../lisp/maximize.jl
 msgid "Raise windows when they are maximized."
@@ -532,7 +536,7 @@ msgstr "Поднимать окна при максимизации."
 
 #. ../lisp/maximize.jl
 msgid "Let unmanaged windows be overlapped when filling windows."
-msgstr ""
+msgstr "Разрешить перекрывание неуправляемых окон при заполнении окон."
 
 #. ../lisp/maximize.jl
 msgid "Maximize the dimensions of the window."
@@ -811,23 +815,23 @@ msgstr "Показать меню приложений."
 
 #. ../lisp/move-cursor.jl
 msgid "Number of pixels to move pointer in `move-cursor-' commands."
-msgstr ""
+msgstr "Число точек растра для перемещения указателя командой \"переместить указатель\"."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the left."
-msgstr ""
+msgstr "Переместить указатель на \"шаг перемещения курсора\" точек раста влево."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the right."
-msgstr ""
+msgstr "Переместить указатель на \"шаг перемещения курсора\" точек раста вправо."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels upwards."
-msgstr ""
+msgstr "Переместить указатель на \"шаг перемещения курсора\" точек раста вверх."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels downwards."
-msgstr ""
+msgstr "Переместить указатель на \"шаг перемещения курсора\" точек раста вниз."
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel to the left."
@@ -936,7 +940,7 @@ msgstr "Метод размещения диалоговых окон: \\w"
 
 #. ../lisp/place-window.jl
 msgid "Ignore program-specified window placements."
-msgstr ""
+msgstr "Игнорировать указанное программой размещение окна."
 
 #. ../lisp/play-audio.jl
 msgid ""
@@ -948,7 +952,7 @@ msgstr ""
 
 #. ../lisp/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
-msgstr ""
+msgstr "Комбинации активные при чтении строки ввода пользователя."
 
 #. ../lisp/prompt.jl
 msgid "Cancel string input."
@@ -1064,7 +1068,7 @@ msgstr ""
 #. ../lisp/shading.jl
 msgid ""
 "Toggle the shaded (only the title bar is displayed) state of the window."
-msgstr ""
+msgstr "Переключить состояние затенения окна (отображается только строка заголовка)."
 
 #. ../lisp/size-window.jl
 msgid ""
@@ -1090,71 +1094,71 @@ msgstr "Уменьшить размер текущего окна на один столбец."
 
 #. ../lisp/slide-window.jl
 msgid "Number of pixels to move window in `slide-' commands."
-msgstr ""
+msgstr "Число точек растра для перемещения окна в команде \"сдвиг-\"."
 
 #. ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels to the left."
-msgstr ""
+msgstr "Переместить окно на \"шаг сдвига окна\" точек раста влево."
 
 #. ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels to the right."
-msgstr ""
+msgstr "Переместить окно на \"шаг сдвига окна\" точек раста вправо."
 
 #. ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels upwards."
-msgstr ""
+msgstr "Переместить окно на \"шаг сдвига окна\" точек раста вверх."
 
 #. ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels downwards."
-msgstr ""
+msgstr "Переместить окно на \"шаг сдвига окна\" точек раста вниз."
 
 #. ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels to the left."
-msgstr ""
+msgstr "Переместить группу окна на \"шаг сдвига окна\" точек растра влево."
 
 #. ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels to the right."
-msgstr ""
+msgstr "Переместить группу окна на \"шаг сдвига окна\" точек растра вправо."
 
 #. ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels upwards."
-msgstr ""
+msgstr "Переместить группу окна на \"шаг сдвига окна\" точек растра вверх."
 
 #. ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels downwards."
-msgstr ""
+msgstr "Переместить группу окна на \"шаг сдвига окна\" точек растра вниз."
 
 #. ../lisp/smart-placement.jl
 msgid ""
 "Try to leave at least this many pixels between window edges in "
 "first/best-fit."
-msgstr ""
+msgstr "Пытаться оставить хотя бы это количество точек растра между краями окна в \"первое\"/\"лучшее заполнение\"."
 
 #. ../lisp/stacking.jl
 msgid "Keep transient windows stacked above: \\w"
-msgstr ""
+msgstr "Сохранять промежуточные окна собранными над: \\w"
 
 #. ../lisp/stacking.jl
 msgid "Raise the window to its highest allowed position in the stacking order."
-msgstr ""
+msgstr "Поднять окно до наивысшей допустимой позиции в стопке."
 
 #. ../lisp/stacking.jl
 msgid "Lower the window to its lowest allowed position in the stacking order."
-msgstr ""
+msgstr "Опустить окно до наинизшей допустимой позиции в стопке."
 
 #. ../lisp/stacking.jl
 msgid ""
 "If the window is at its highest possible position, then lower it to its\n"
 "lowest possible position. Otherwise raise it as far as allowed."
-msgstr ""
+msgstr "Если окно в наивысшей возможной позиции, опустить его до наинизшей возможной позиции. В противном случае поднять его как можно выше."
 
 #. ../lisp/stacking.jl
 msgid "Put the window in the stacking level beneath its current level."
-msgstr ""
+msgstr "Поместить окно в стопку под его текущим уровнем."
 
 #. ../lisp/stacking.jl
 msgid "Put the window in the stacking level above its current level."
-msgstr ""
+msgstr "Поместить окно в стопку над его текущим уровнем."
 
 #. ../lisp/stagger-placement.jl
 msgid "Distance between successive placements in `stagger' placement mode."
@@ -1209,12 +1213,16 @@ msgid ""
 "Raise the current window to its highest allowed position in the stacking\n"
 "order. Also raise any transient windows that it has."
 msgstr ""
+"Поднять текущее окно до наивысшей допустимой позиции в стопке.\n"
+"Также поднять все его промежуточные окна."
 
 #. ../lisp/transient.jl
 msgid ""
 "Lower the current window to its lowest allowed position in the stacking\n"
 "order. Also lower any transient windows that it has."
 msgstr ""
+"Опустить текущее окно до наизнизшей допустимой позиции в стопке.\n"
+"Также опустить все его промежуточные окна."
 
 #. ../lisp/transient.jl
 msgid ""
@@ -1222,7 +1230,7 @@ msgid ""
 "lowest possible position. Otherwise raise it as far as allowed. Also "
 "changes\n"
 "the level of any transient windows it has."
-msgstr ""
+msgstr "Если окно в наивысшей возможной позиции, тогда опустить его до наинизшей возможной позиции. В противном случае поднять его как можно выше. Также изменить уровень всех его промежуточных окон."
 
 #. ../lisp/viewport.jl
 msgid "Windows uniconify to the current viewport."
@@ -1318,7 +1326,7 @@ msgstr "Автоматически запоминать другие аттрибуты окна."
 
 #. ../lisp/window-history.jl
 msgid "Forget any persistent state associated with the current window."
-msgstr ""
+msgstr "Забыть все постоянные состояния связанные с текущим окном."
 
 #. ../lisp/window-history.jl
 msgid "_History"
@@ -1359,11 +1367,11 @@ msgstr "Окна разворачиваются на текущем рабочем месте когда они выбраны."
 
 #. ../lisp/workspace.jl
 msgid "Windows are raised after being uniconified."
-msgstr ""
+msgstr "Окна поднимаются после разворачивания."
 
 #. ../lisp/workspace.jl
 msgid "Windows are focused after being uniconified."
-msgstr ""
+msgstr "Окна фокусируются после разворачивания."
 
 #. ../lisp/workspace.jl
 msgid "Dialogs appear on the same workspace as their application."
@@ -1375,11 +1383,11 @@ msgstr "Поднять выбранные окна (обычно с помощью меню \"Окна\")."
 
 #. ../lisp/workspace.jl
 msgid "Unshade selected windows."
-msgstr ""
+msgstr "Снять затенение с выбранных окон."
 
 #. ../lisp/workspace.jl
 msgid "Warp the pointer to selected windows."
-msgstr ""
+msgstr "Загибать указатель в выбранных окнах."
 
 #. ../lisp/workspace.jl
 msgid "Workspace names."
@@ -1511,6 +1519,8 @@ msgid ""
 "Remove the copy of the window on the current workspace. If this is the last\n"
 "instance remaining, then delete the actual window."
 msgstr ""
+"Удалить копию окна на текущем рабочем месте. Если это последняя\n"
+"копия, то удалить окно."
 
 #. ../lisp/workspace.jl
 msgid "Select the N'th workspace."
@@ -1538,7 +1548,7 @@ msgstr "Включать окна на всех рабочих местах при переборе."
 
 #. ../lisp/x-cycle.jl
 msgid "Include windows on all viewports when cycling."
-msgstr ""
+msgstr "Включить окна во все области просмотра при переборе."
 
 #. ../lisp/x-cycle.jl
 msgid "Raise windows while they're temporarily selected during cycling."
@@ -1546,15 +1556,15 @@ msgstr "Поднимать окна когда они временно выделены при переборе."
 
 #. ../lisp/x-cycle.jl
 msgid "Warp the mouse pointer to windows as they're temporarily selected."
-msgstr ""
+msgstr "Загибать указатель мыши в окна когда они временно выбраны."
 
 #. ../lisp/x-cycle.jl
 msgid "Focus windows when they're temporarily selected during cycling."
-msgstr ""
+msgstr "Фокусировать окна когда они временно выбраны в процессе перебора."
 
 #. ../lisp/x-cycle.jl
 msgid "Disable auto-raising while temporarily selecting windows."
-msgstr ""
+msgstr "Отключить автоподнятие при временном выборе окон."
 
 #. ../lisp/x-cycle.jl
 msgid "Cycle through all windows in order of recent selections."
@@ -1568,11 +1578,11 @@ msgstr "Проход через все окна в той же группе что и у текущего окна."
 msgid ""
 "Cycle through all windows whose names match the leading colon-delimited\n"
 "prefix of the current window."
-msgstr ""
+msgstr "Цикл через все окна, чьи имена совпадают с начальной отделенной двоеточием частью имени текущего окна."
 
 #. ../lisp/x-cycle.jl
 msgid "Cycle through all windows with the same class as the current window."
-msgstr ""
+msgstr "Цикл через все окна с тем же классом что и у текущего окна."
 
 #. ../nokogiri/nokogiri-no-gnome.jl
 #. ../nokogiri/nokogiri-gnome.jl
@@ -1959,7 +1969,7 @@ msgstr "Выход"
 
 #. ../themer/themer.glade:608 ../themer/themer.glade:801
 msgid "Focused"
-msgstr ""
+msgstr "Сфокусированное"
 
 #. ../themer/themer.glade:999 ../themer/themer.glade:1434
 msgid "Frame"
@@ -2000,6 +2010,8 @@ msgid ""
 "Inactive-\n"
 "Highlighted"
 msgstr ""
+"Неактивное-\n"
+"Подсвеченное"
 
 #. ../themer/themer.glade:1278
 msgid "Map: "
