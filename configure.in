@@ -25,7 +25,7 @@ AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR(etc)
 
 dnl Release versioning info
-version="0.18"
+version="0.19"
 
 output_files="src/Makefile lisp/Makefile capplet/Makefile\
  themes/Makefile man/Makefile po/Makefile Makedefs Makefile sawmill.spec"
@@ -71,7 +71,7 @@ AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS(fcntl.h sys/time.h sys/utsname.h unistd.h memory.h X11/SM/SMlib.h)
 
 dnl Check for librep
-AM_PATH_REP(0.8)
+AM_PATH_REP(0.9)
 
 dnl is X available?
 if test "${no_x}" != "yes"; then
@@ -163,7 +163,7 @@ else
       ;;
     *-sun-solaris*)
       # works on Solaris
-      MAKEDEP='$(CPP) -M'
+      MAKEDEP='/usr/lib/cpp -M'
       ;;
     *)
       # disable dependences?
