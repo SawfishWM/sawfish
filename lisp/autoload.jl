@@ -133,4 +133,12 @@
 (autoload 'raise-window-and-pass-through-click "raise-commands" t)
 (autoload 'raise-and-pass-through-click-if-focused "raise-commands" t)
 (autoload 'raise-or-pass-through-click "raise-commands" t)
+(autoload 'move-cursor-left "move-cursor" t)
+(autoload 'move-cursor-right "move-cursor" t)
+(autoload 'move-cursor-up "move-cursor" t)
+(autoload 'move-cursor-down "move-cursor" t)
+(autoload 'move-cursor-left-fine "move-cursor" t)
+(autoload 'move-cursor-right-fine "move-cursor" t)
+(autoload 'move-cursor-up-fine "move-cursor" t)
+(autoload 'move-cursor-down-fine "move-cursor" t)
 ;;; ::autoload-end::
