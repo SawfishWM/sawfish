@@ -24,9 +24,22 @@
 
 ;; variables
 
-;; can't use gnome-config to find this, since it's in -devel pkgs
-;; perhaps search $PATH..?
-(defvar gnome-share-directory "/usr/share/gnome")
+(defvar gnome-share-directory
+  ;; search $PATH for a known GNOME binary..
+  (catch 'out
+    (let
+	((path (getenv "PATH"))
+	 (point 0)
+	 end tem)
+      (while (< point (length path))
+	(setq end (if (string-match ":" path point)
+		      (match-start)
+		    (length path)))
+	(setq tem (substring path point end))
+	(when (file-exists-p (expand-file-name "gnome-session" tem))
+	  (throw 'out (expand-file-name "../share/gnome" tem)))
+	(setq point end)))
+    nil))
 
 (defvar gnome-menu-lang (let
 			    ((lang (getenv "LANG")))
@@ -37,6 +50,7 @@
 
 (defvar gnome-menu-roots (list (expand-file-name
 				"apps" gnome-share-directory)
+			       "/etc/X11/applnk"	;on RedHat systems
 			       "~/.gnome/apps")
   "List of directories to read GNOME menu entries from.")
 
@@ -59,20 +73,26 @@
 	  (while (setq line (read-line file))
 	    (cond ((string-looking-at "\\[Desktop Entry\\]" line 0 t)
 		   (setq section 'desktop-entry))
-		  ((string-looking-at "Name=(.*)\n" line 0 t)
+		  ((string-looking-at "\\s*$" line)
+		   (setq section nil))
+		  ((and (eq section 'desktop-entry)
+			(string-looking-at "Name=(.*)\n" line 0 t))
 		   (setq name (expand-last-match "\\1")))
-		  ((and gnome-menu-lang
+		  ((and (eq section 'desktop-entry) gnome-menu-lang
 			(string-looking-at
 			 "Name\\[([a-z]+)\\]=(.*)\n" line 0 t)
 			(string= gnome-menu-lang (expand-last-match "\\1")))
 		   (setq name (expand-last-match "\\2")))
-		  ((string-looking-at "Exec=(.*)\n" line 0 t)
+		  ((and (eq section 'desktop-entry)
+			(string-looking-at "Exec=(.*)\n" line 0 t))
 		   (setq exec (expand-last-match "\\1")))
-		  ((string-looking-at "Terminal=(.*)\n" line 0 t)
+		  ((and (eq section 'desktop-entry)
+			(string-looking-at "Terminal=(.*)\n" line 0 t))
 		   (setq terminal (expand-last-match "\\1"))
 		   (setq terminal (not (string-match
 					"^0|false$" terminal 0 t))))
-		  ((string-looking-at "Type=(.*)\n" line 0 t)
+		  ((and (eq section 'desktop-entry)
+			(string-looking-at "Type=(.*)\n" line 0 t))
 		   (setq type (expand-last-match "\\1")))))
 	(close-file file))
       (cond ((and type (string-match "Directory" type 0 t))
@@ -109,33 +129,64 @@
      ((file-regular-p file)
       (gnome-menu-read-desktop-entry file))
      ((file-directory-p file)
-      (when (file-exists-p (setq file (expand-file-name ".directory" file)))
-	(gnome-menu-read-desktop-entry file))))))
+      (if (file-exists-p (expand-file-name ".directory" file))
+	  (gnome-menu-read-desktop-entry (expand-file-name ".directory" file))
+	(cons (file-name-nondirectory file)
+	      (gnome-menu-read-directory file)))))))
 
 (defun gnome-menu-read-directory (dirname)
   (let
       ((order (and (file-exists-p (expand-file-name ".order" dirname))
 		   (gnome-menu-read-order
 		    (expand-file-name ".order" dirname))))
-       menus)
+       menus item)
     (mapc #'(lambda (file)
 	      (when (file-exists-p (expand-file-name dirname file))
-		(setq menus (cons (gnome-menu-read-item dirname file) menus))))
+		(when (setq item (gnome-menu-read-item dirname file))
+		  (setq menus (cons item menus)))))
 	  order)
     (mapc #'(lambda (file)
 	      (unless (or (= (aref file 0) ?.) (member file order))
-		(setq menus (cons (gnome-menu-read-item dirname file) menus))))
+		(when (setq item (gnome-menu-read-item dirname file))
+		  (setq menus (cons item menus)))))
 	  (directory-files dirname))
     (nreverse menus)))
+
+(defun gnome-menus-merge-dups (menus)
+  (let
+      (ptr inner-ptr item tem)
+    (setq ptr menus)
+    (while ptr
+      (setq item (car ptr))
+      (when (and item (consp (cdr item)) (not (functionp (cdr item))))
+	(setq inner-ptr (cdr ptr))
+	(while inner-ptr
+	  (setq tem (car inner-ptr))
+	  (setq inner-ptr (cdr inner-ptr))
+	  (when (and tem (string= (car item) (car tem))
+		     (consp (cdr tem)) (not (functionp (cdr tem))))
+	    ;; we've found a later occurrence of this sub-menu
+	    (setq menus (delq tem menus))
+	    (nconc item (cdr tem)))))
+      (setq ptr (cdr ptr)))
+    ;; now we've uniqued the top-level, recurse through any sub-menus
+    ;(setq ptr menus)
+    (while ptr
+      (setq item (car ptr))
+      (setq ptr (cdr ptr))
+      (when (and item (consp (cdr item)) (not (functionp (cdr item))))
+	(rplacd item (gnome-menus-merge-dups (cdr item)))))
+    menus))
 
 (defun gnome-menus-update ()
   (interactive)
   (setq gnome-menus nil)
   (mapc #'(lambda (dir)
-	    (when (file-directory-p dir)
+	    (when (and (stringp dir) (file-directory-p dir))
 	      (setq gnome-menus (nconc gnome-menus
 				       (gnome-menu-read-directory dir)))))
 	gnome-menu-roots)
+  (setq gnome-menus (gnome-menus-merge-dups gnome-menus))
   gnome-menus)
 
 (defun gnome-menus ()
@@ -147,4 +198,4 @@
 ;; init
 
 (unless (boundp 'apps-menu)
-  (setq apps-menu '("Applications" . gnome-menus)))
+  (setq apps-menu '("System Menus" . gnome-menus)))
