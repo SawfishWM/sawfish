@@ -66,25 +66,41 @@
 (defun sp-make-grid (rects &optional with-root)
   (let*
       ((grid (grid-from-rectangles rects)))
+    ;; XXX fix for multiple heads
     (rplaca grid (sort (list* 0 (screen-width)
-			      (sp-prune-points (car grid) sp-max-points))))
+			      (sp-prune-points (car grid) sp-max-points
+					       (cons 0 (screen-width))))))
     (rplacd grid (sort (list* 0 (screen-height)
-			      (sp-prune-points (cdr grid) sp-max-points))))
+			      (sp-prune-points (cdr grid) sp-max-points
+					       (cons 0 (screen-height))))))
     grid))
 
-(defun sp-prune-points (points maximum)
-  (let*
-      ((total (length points))
-       (cutoff (* (max 0 (- total maximum)) 100)))
-    (setq total (* total 100))
-    (delete-if (lambda (x)
-		 (< (random total) cutoff)) points)))
-
+(defun sp-prune-points (points maximum range)
+  (setq points (delete-if-not (lambda (p)
+				(and (>= p (car range)) (< p (cdr range))))
+			      points))
+  (let* ((total (length points)))
+    (cond ((> total maximum)
+	   ;; remove points
+	   (let ((cutoff (* (max 0 (- total maximum)) 100)))
+	     (setq total (* total 100))
+	     (delete-if (lambda (x)
+			  (< (random total) cutoff)) points)))
+	  ((< total maximum)
+	   ;; add points
+	   (while (< total maximum)
+	     (setq points (cons (+ (car range)
+				   (random (- (cdr range) (car range))))
+				points))
+	     (setq total (1+ total)))))
+    points))
+	   
 ;; returns the list of windows to compare with when overlapping, by
 ;; default windows with their `ignored' property set are dropped
 (defun sp-get-windows (w)
   (delete-if (lambda (x)
 	       (or (eq x w)
+		   (not (window-mapped-p w))
 		   (and (window-get x 'ignored) (not (window-avoided-p x)))
 		   (window-get x 'iconified)
 		   (not (windows-share-workspace-p x w))))
@@ -171,6 +187,8 @@
      0))
 
 (defun sp-cost:grid-lines (point dims grid rects)
+  "Smart placement cost function. Cost is proportional to the number of grid
+lines that the proposed placement crosses."
   (let ((win-left (car point))
 	(win-top (cdr point))
 	(win-right (+ (car point) (car dims)))
@@ -195,6 +213,8 @@
     (/ (* x-cross y-cross) (* x-total y-total))))
 
 (defun sp-cost:aligned-edges (point dims grid rects)
+  "Smart placement cost function. Cost is proportional to the length of the
+edges that the proposed placement abuts."
   (let ((win-left (car point))
 	(win-top (cdr point))
 	(win-right (+ (car point) (car dims)))
@@ -224,15 +244,24 @@
 	  (aref edges 2) (aref edges 3))
        (+ (* 2 (car dims)) (* 2 (cdr dims))))))
 
+;; calculate the cost associated with the distance between POINT-1 and
+;; POINT-2. As they get nearer the cost tends to zero, as they get
+;; further apart the cost tends to one (hopefully)
 (defun sp-cost-from-distance (point-1 point-2)
-  (/ (sqrt (+ (expt (- (screen-width) (- (car point-2) (car point-1))) 2)
-	      (expt (- (screen-height) (- (cdr point-2) (cdr point-1))) 2)))
+  (/ (sqrt (+ (expt (- (screen-width)
+		       (abs (- (car point-2) (car point-1)))) 2)
+	      (expt (- (screen-height)
+		       (abs (- (cdr point-2) (cdr point-1)))) 2)))
      (sqrt (+ (expt (screen-width) 2) (expt (screen-height) 2)))))
 
 (defun sp-cost:pointer-locality (point dims grid rects)
+  "Smart placement cost function. Cost is proportional to the distance
+from the proposed placement to the current pointer position."
   (sp-cost-from-distance (rectangle-center* point dims) (query-pointer)))
 
 (defun sp-cost:focus-locality (point dims grid rects)
+  "Smart placement cost function. Cost is proportional to the distance from
+the proposed placement to the position of the currently focused window."
   (let ((focus (input-focus)))
     (if focus
 	(sp-cost-from-distance (rectangle-center* point dims)
@@ -240,20 +269,28 @@
 						  (window-dimensions focus)))
       1)))
 
-(defvar sp-cost-components (list (cons 1/4 sp-cost:aligned-edges)
-				 (cons 1/4 sp-cost:grid-lines)
-				 (cons 1/2 sp-cost:focus-locality)))
+(defun sp-cost:center-locality (point dims grid rects)
+  "Smart placement cost function. Cost is proportional to the distance from
+the proposed placement to the center of the screen."
+  (sp-cost-from-distance (rectangle-center* point dims)
+			 (cons (/ (screen-width) 2) (/ (screen-height) 2))))
+
+(defvar sp-cost-components (list (cons sp-cost:focus-locality 1/2)
+				 (cons sp-cost:pointer-locality 1/4)
+				 (cons sp-cost:grid-lines 1/4))
+  "Alist defining smart placement cost functions and their associated weights
+(multipliers).")
 
 ;; This is the crux of the problem -- this function must assign a value
 ;; to placing a window of DIMS at POINT. GRID defines the grid from which
 ;; POINT was chosen, RECTS defines all other windows on the screen.
-;; The returned value must be between zero and sp-cost-max, with higher
-;; values better placements
+;; The returned value must be non-negative, with higher values reflecting
+;; better placements
 (defun sp-cost (point dims grid rects)
   (let ((total 0))
     (mapc (lambda (cell)
-	    (setq total (+ total (* (car cell)
-				    ((cdr cell) point dims grid rects)))))
+	    (setq total (+ total (* ((car cell) point dims grid rects)
+				    (cdr cell)))))
 	  sp-cost-components)
     total))
 
