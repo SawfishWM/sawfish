@@ -1,7 +1,6 @@
-# sawmill
-# Copyright (C) 1999-2000 Free Software Foundation, Inc.
-# Hirofumi Takeda <i@kondara.org>, 2000,
-# Satoru Sato <satoru@d1.dion.ne.jp>, 2000.
+# sawfish ja.po
+# Copyright (C) 2000 Free Software Foundation, Inc.
+# SATO Satoru <ss@gnome.gr.jp>, 2000.
 #
 #. ../themer/themer.glade:353 ../themer/themer.glade:397
 #. * ../themer/themer.glade:472 ../themer/themer.glade:562
@@ -10,10 +9,10 @@
 #. * ../themer/themer.glade:1369 ../themer/themer.glade:1852
 msgid ""
 msgstr ""
-"Project-Id-Version: sawmill 0.24\n"
-"POT-Creation-Date: 2000-02-17 08:14+0000\n"
-"PO-Revision-Date: 2000-01-20 21:57+0000\n"
-"Last-Translator: Satoru Sato<satoru@d1.dion.ne.jp>\n"
+"Project-Id-Version: sawfish cvs-20000508\n"
+"POT-Creation-Date: 2000-05-08 22:59+0900\n"
+"PO-Revision-Date: 2000-05-10 23:34+0900\n"
+"Last-Translator: SATO Satoru <ss@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=euc-jp\n"
@@ -41,7 +40,6 @@ msgstr "挿入"
 msgid "Copy"
 msgstr "コピー"
 
-#. ../lisp/menus.jl
 #. ../src/sawmill-ui.jl
 msgid "Delete"
 msgstr "消去"
@@ -71,12 +69,8 @@ msgid "Undocumented"
 msgstr "記述なし"
 
 #. ../src/sawmill-ui.jl
-msgid "Details"
-msgstr "詳細"
-
-#. ../src/sawmill-ui.jl
 msgid "OK"
-msgstr "OK"
+msgstr "了解"
 
 #. ../src/sawmill-ui.jl
 msgid "Cancel"
@@ -119,8 +113,8 @@ msgid "Refresh"
 msgstr "リフレッシュ"
 
 #. ../src/sawmill-ui.jl
-msgid "Sawmill configurator"
-msgstr "Sawmill設定"
+msgid "Sawfish configurator"
+msgstr "Sawfish 設定"
 
 #. ../themer/themer.in
 msgid "Reload themes in window manager after saving."
@@ -152,7 +146,7 @@ msgstr "閲覧..."
 
 #. ../themer/themer.in
 msgid "Properties..."
-msgstr "プロパティ"
+msgstr "プロパティ..."
 
 #. ../themer/themer.in
 msgid "Select Image"
@@ -164,12 +158,12 @@ msgstr "画像のプロパティ"
 
 #. ../themer/themer.in
 msgid "No matching item for %S"
-msgstr "%Sにマッチするアイテムなし"
+msgstr "%S に一致するアイテムなし"
 
 #. ../themer/themer.in
 #, c-format
 msgid "Added pattern `%s'"
-msgstr "パターン `%s' を追加"
+msgstr "パターン %s を追加"
 
 #. ../themer/themer.in
 msgid "Frame name"
@@ -178,7 +172,7 @@ msgstr "フレーム名"
 #. ../themer/themer.in
 #, c-format
 msgid "Added frame `%s'"
-msgstr "フレーム `%s' を追加"
+msgstr "フレーム %s を追加"
 
 #. ../themer/themer.in
 msgid "<none>"
@@ -187,7 +181,7 @@ msgstr "<なし>"
 #. ../themer/themer.in
 #, c-format
 msgid "Added frame type `%s'"
-msgstr "フレームタイプ `%s' を追加"
+msgstr "フレームタイプ %s を追加"
 
 #. ../themer/themer.in
 msgid "error while building frame: %S"
@@ -196,17 +190,17 @@ msgstr "フレームをつくるときにエラーが起りました: %S"
 #. ../themer/themer.in
 #, c-format
 msgid "Saved as `%s'"
-msgstr "`%s' として保存"
+msgstr "%s として保存"
 
 #. ../themer/themer.in
 #, c-format
 msgid "Generated theme in directory `%s'"
-msgstr "ディレクトリ `%s' 内にテーマを作成"
+msgstr "ディレクトリ %s 内にテーマを生成"
 
 #. ../themer/themer.in
 #, c-format
 msgid "Read theme from `%s'"
-msgstr "`%s' からテーマを読み込む"
+msgstr "%s からテーマを読み込み"
 
 #. ../themer/themer.in
 msgid "Theme Directory"
@@ -220,13 +214,32 @@ msgstr "開く"
 msgid "Preferences"
 msgstr "設定"
 
+#. ../lisp/autoload.jl
+#. ../lisp/audio-events.jl
+msgid "Sound"
+msgstr "サウンド"
+
+#. ../lisp/audio-events.jl
+msgid "Enable audio effects for window manager events."
+msgstr "ウィンドウマネージャのイベントでサウンドを有効にする"
+
+#. ../lisp/audio-events.jl
+msgid "Play audio effects for windows that are usually ignored."
+msgstr "普段無視されるウィンドウについても効果音を鳴らす"
+
 #. ../lisp/auto-raise.jl
 msgid "Raise windows when they are focused."
-msgstr "ウィンドウをフォーカス時に前面に出す"
+msgstr "フォーカス時にウィンドウを前面に出す"
 
 #. ../lisp/auto-raise.jl
 msgid "Delay in milliseconds until focused windows are raised."
-msgstr "フォーカスされたウィンドウを前面に出すまでの遅れ時間(ミリ秒)"
+msgstr "フォーカスされたウィンドウを前面に出すまでの遅延時間(ミリ秒)"
+
+#. ../lisp/auto-raise.jl
+msgid ""
+"Raise entire group after focusing a window (when auto-raise is enabled)."
+msgstr "ウィンドウをフォーカスした後ですべてのグループを前面に出す"
+"(auto-raise が有効なとき)"
 
 #. ../lisp/configure.jl
 msgid "Automatically select window gravity from position on screen."
@@ -242,7 +255,7 @@ msgstr "すべての設定"
 
 #. ../lisp/custom.jl
 msgid "Edit theme..."
-msgstr "テーマを編集"
+msgstr "テーマを編集..."
 
 #. ../lisp/custom.jl
 msgid "Focus"
@@ -250,7 +263,7 @@ msgstr "フォーカス"
 
 #. ../lisp/custom.jl
 msgid "Advanced"
-msgstr "高度"
+msgstr "詳細"
 
 #. ../lisp/custom.jl
 msgid "Move/Resize"
@@ -264,7 +277,6 @@ msgstr "配置"
 msgid "Appearance"
 msgstr "外観"
 
-#. ../lisp/menus.jl
 #. ../lisp/custom.jl
 msgid "Workspaces"
 msgstr "ワークスペース"
@@ -275,8 +287,12 @@ msgid "Bindings"
 msgstr "ショートカット"
 
 #. ../lisp/custom.jl
-msgid "Iconifying"
-msgstr "アイコン化"
+msgid "Minimizing/Maximizing"
+msgstr "最小化/最大化"
+
+#. ../lisp/custom.jl
+msgid "Minimizing"
+msgstr "最小化"
 
 #. ../lisp/custom.jl
 msgid "Maximizing"
@@ -284,7 +300,7 @@ msgstr "最大化"
 
 #. ../lisp/custom.jl
 msgid "Miscellaneous"
-msgstr "種々雑多なもの"
+msgstr "その他の設定"
 
 #. ../lisp/customize.jl
 msgid "Show variable names of each customization option."
@@ -301,7 +317,7 @@ msgstr "べベルの度合(パーセント)"
 #. ../lisp/customize.jl
 #, c-format
 msgid ""
-"Sawmill %s (rep %s)\n"
+"Sawfish %s (rep %s)\n"
 "\n"
 "Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>\n"
 "\n"
@@ -310,16 +326,16 @@ msgid ""
 "Software Foundation; either version 2, or (at your option) any later "
 "version.\n"
 "\n"
-"Sawmill is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Sawfish is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details.\n"
 "\n"
-"Visit the Sawmill homepage at http://sawmill.sourceforge.net/"
+"Visit the Sawfish homepage at http://sawmill.sourceforge.net/"
 msgstr ""
-"Sawmill %s (rep %s)\n"
+"Sawfish %s (rep %s)\n"
 "\n"
-"Copyright (C) 1999 John Harper <jsh@sawmill.sourceforge.net>\n"
+"Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>\n"
 "\n"
 "本プログラムはフリー・ソフトウェアです。あなたは FreeSoftwareFoundation"
 "\n"
@@ -329,13 +345,13 @@ msgstr ""
 "\n"
 "本プログラムを再頒布または変更することができます。\n"
 "\n"
-"Sawmill は有用とは思いますが、頒布にあたっては、市場性及び特定目的適合性"
+"Sawfish は有用とは思いますが、頒布にあたっては、市場性及び特定目的適合性"
 "\n"
 "についての暗黙の保証を含めて、いかなる保証も行ないません。詳細については"
 "\n"
 "GNU 一般公有使用許諾書をお読みください。\n"
 "\n"
-"Sawmill のホームページは http://sawmill.sourceforge.net/ です。"
+"Sawfish のホームページは http://sawmill.sourceforge.net/ です。"
 
 #. ../lisp/customize.jl
 msgid "Invoke the user-customization system."
@@ -343,7 +359,7 @@ msgstr "ユーザ-カスタマイズシステムを実行"
 
 #. ../lisp/cycle.jl
 msgid "Select the next window of the current workspace."
-msgstr "今のワークスペースでの次のウィンドウを選択する"
+msgstr "今のワークスペースでの次のウィンドウを選択"
 
 #. ../lisp/cycle.jl
 msgid "Focus on the previous window of the current workspace."
@@ -351,19 +367,24 @@ msgstr "今のワークスペースでの前のウィンドウをフォーカスする"
 
 #. ../lisp/cycle.jl
 msgid "Select the next window, cycling through all possible workspaces."
-msgstr "可能なすべてのワークスペースを回って次のウィンドウを選択する"
+msgstr "可能なすべてのワークスペースを回って次のウィンドウを選択"
 
 #. ../lisp/cycle.jl
 msgid "Select the previous window, cycling through all possible workspaces."
-msgstr "可能なすべてのワークスペースを回って前のウィンドウを選択する"
+msgstr "可能なすべてのワークスペースを回って前のウィンドウを選択"
 
 #. ../lisp/edge-flip.jl
 msgid "Edge Flipping"
-msgstr "端でのとんぼ返り"
+msgstr "画面端での動作"
 
 #. ../lisp/edge-flip.jl
 msgid "Flip to next viewport/workspace when pointer hits screen edge."
-msgstr "画面の端に(マウス)ポインタがくると次の viewport/ワークスペースに移動"
+msgstr "画面の端に(マウス)ポインタがくると次のビューポート/ワークスペースに移動"
+
+#. ../lisp/edge-flip.jl
+msgid "Only flip when interactively moving a window."
+msgstr "対話的にウィンドウを移動するときだけ画面端でビューポート/ワークスペース"
+"を移動"
 
 #. ../lisp/edge-flip.jl
 msgid "What hitting the screen edge actually flips."
@@ -381,7 +402,7 @@ msgstr "マウスポインタの効果が入力フォーカスにいつでるか"
 
 #. ../lisp/focus.jl
 msgid "Does click-to-focus mode pass the click through to the window."
-msgstr "click-to-focus モードでクリックするとウィンドウへ透過するか"
+msgstr "click-to-focus モードでクリックするとウィンドウへ透過する"
 
 #. ../lisp/frames.jl
 msgid "Default frame style (theme)."
@@ -425,15 +446,19 @@ msgstr ""
 
 #. ../lisp/functions.jl
 msgid "Start a new xterm."
-msgstr "新しい xterm を起動"
+msgstr "新たに xterm を起動"
+
+#. ../lisp/functions.jl
+msgid "Force the current window to have a unique title."
+msgstr "ウィンドウに一意な名前のタイトルをもつように強制"
 
 #. ../lisp/functions.jl
 msgid "Delete the window."
-msgstr "ウィンドウを無視する"
+msgstr "ウィンドウを消去する"
 
 #. ../lisp/functions.jl
 msgid "Delete the window, or beep if the window can't be closed safely."
-msgstr "ウィンドウの削除,安全に閉じることができなければビープ音を鳴らす"
+msgstr "ウィンドウの削除し、安全に閉じることができなければビープ音を鳴らす"
 
 #. ../lisp/gnome-commands.jl
 msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
@@ -467,6 +492,52 @@ msgstr "一時的なウィンドウとその親(ウィンドウ)をグループ化"
 msgid "New group"
 msgstr "新しいグループ"
 
+#. ../lisp/grow-pack.jl
+msgid "Whether growing an already grown window grows it again."
+msgstr "既に拡大されたウィンドウをさらに拡大するか"
+
+#. ../lisp/grow-pack.jl
+msgid ""
+"Whether growing is considered to be maximization.  When you turn\n"
+"this on, you can use `unmaximize-window' or something similar to get\n"
+"back to the original size."
+msgstr ""
+"拡大を最大化とみなすかどうか。これを設定していれば\n"
+"`unmaximize-window' などでそのウィンドウを元の大きさに\n"
+"戻すことができる"
+
+#. ../lisp/grow-pack.jl
+msgid "Grows window to the left until it `bumps into' another window."
+msgstr "他のウィンドウにぶつかるまで左方向に拡大"
+
+#. ../lisp/grow-pack.jl
+msgid "Grows window to the right until it `bumps into' another window."
+msgstr "他のウィンドウにぶつかるまで右方向に拡大"
+
+#. ../lisp/grow-pack.jl
+msgid "Grows window upwards until it `bumps into' another window."
+msgstr "他のウィンドウにぶつかるまで上方向に拡大"
+
+#. ../lisp/grow-pack.jl
+msgid "Grows window downwards until it `bumps into' another window."
+msgstr "他のウィンドウにぶつかるまで下方向に拡大"
+
+#. ../lisp/grow-pack.jl
+msgid "Moves window to the left until it `bumps into' another window."
+msgstr "他のウィンドウにぶつかるまで左方向に移動"
+
+#. ../lisp/grow-pack.jl
+msgid "Moves window to the right until it `bumps into' another window."
+msgstr "他のウィンドウにぶつかるまで右方向に移動"
+
+#. ../lisp/grow-pack.jl
+msgid "Moves window upwards until it `bumps into' another window."
+msgstr "他のウィンドウにぶつかるまで上方向に移動"
+
+#. ../lisp/grow-pack.jl
+msgid "Moves window downwards until it `bumps into' another window."
+msgstr "他のウィンドウにぶつかるまで下方向に移動"
+
 #. ../lisp/gtkrc.jl
 msgid "Reload the gtkrc settings."
 msgstr "gtkrc の設定を再読み込み"
@@ -480,6 +551,14 @@ msgid "Return the window from its iconified state."
 msgstr "ウィンドウをアイコンから元に戻す"
 
 #. ../lisp/iconify.jl
+msgid "Toggle the iconification of window W."
+msgstr "ウィンドウ W のアイコン化状態を切替"
+
+#. ../lisp/iconify.jl
+msgid "Display the workspace/viewport containing the window W."
+msgstr "ウィンドウ W を含むワークスペース/ビューポートを表示"
+
+#. ../lisp/iconify.jl
 msgid "Display the workspace containing the window W, then focus on W."
 msgstr "ウィンドウ W を含むワークスペースを表示し、W にフォーカスする"
 
@@ -488,7 +567,7 @@ msgid ""
 "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
 msgstr ""
-"ウィンドウの`居座り'を切り替え--全ワークスペースのメンバーであるか\n"
+"ウィンドウの `居座り' を切替 -- 全ワークスペースのメンバーであるか\n"
 "どうかによらない"
 
 #. ../lisp/ignore-window.jl
@@ -501,23 +580,36 @@ msgstr "ウィンドウを無視するのをやめる"
 
 #. ../lisp/ignore-window.jl
 msgid "Toggle whether a window is ignored or not."
-msgstr "ウィンドウを無視するかどうかを切替え"
+msgstr "ウィンドウを無視するかどうかを切替"
 
 #. ../lisp/ignore-window.jl
 msgid "Toggle whether a window is focusable or not."
-msgstr "ウィンドウを無視するかどうかを切替え"
+msgstr "ウィンドウをフォーカス可能にするかどうか切替"
+
+#. ../lisp/keymap.jl
+msgid "Prompt for a key sequence, then print its binding."
+msgstr "キー入力に即座に反応し、ショートカットを表示"
 
 #. ../lisp/keymap.jl
 msgid "Press key..."
 msgstr "キーを押す..."
 
+#. ../lisp/keymap.jl
+msgid "Read a single event and send it to the focused window."
+msgstr "イベントをひとつ読み込んでフォーカスされたウィンドウに送る"
+
+#. ../lisp/keymap.jl
+msgid "[Quote]"
+msgstr "[Quote]"
+
 #. ../lisp/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
-msgstr "どこでも効力のあるショートカットを含むキーマップ"
+msgstr "どこでも有効なショートカットを含むキーマップ"
 
 #. ../lisp/keymaps.jl
 msgid "Keymap containing bindings active when a client window is focused."
-msgstr "クライアントウィンドウがフォーカスされているときに効力のあるショートカットを含むキーマップ"
+msgstr "クライアントウィンドウがフォーカスされているときに有効なショート"
+"カットを含むキーマップ"
 
 #. ../lisp/keymaps.jl
 msgid ""
@@ -525,14 +617,14 @@ msgid ""
 "(or when no window is focused)."
 msgstr ""
 "ポインタがルートウィンドウにある(あるいはどのウィンドウもフォーカス\n"
-"されていない)ときに効力のあるショートカットを含むキーマップ"
+"されていない)ときに有効なショートカットを含むキーマップ"
 
 #. ../lisp/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the title of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"ポインタがウィンドウのタイトルバーにあるときに効力のある\n"
+"ポインタがウィンドウのタイトルバーにあるときに有効な\n"
 "ショートカットを含むキーマップ(このマップでは mouse-bindings だけが評価される)"
 
 #. ../lisp/keymaps.jl
@@ -540,7 +632,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the border of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"ポインタがウィンドウの境界にあるときに効力のあるショートカットを\n"
+"ポインタがウィンドウの境界にあるときに有効なショートカットを\n"
 "含むキーマップ(このマップでは mouse-bindings だけが評価される)"
 
 #. ../lisp/keymaps.jl
@@ -548,7 +640,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the close button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"ポインタがウィンドウの閉じるボタンにあるときに効力のある\n"
+"ポインタがウィンドウの閉じるボタンにあるときに有効な\n"
 "ショートカットを含むキーマップ(このマップでは mouse-bindings だけが評価される)"
 
 #. ../lisp/keymaps.jl
@@ -556,7 +648,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the iconify\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"ポインタがウィンドウのアイコン化ボタンにあるときに効力のある\n"
+"ポインタがウィンドウのアイコン化ボタンにあるときに有効な\n"
 "ショートカットを含むキーマップ(このマップでは mouse-bindings だけが評価される)"
 
 #. ../lisp/keymaps.jl
@@ -564,7 +656,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the maximize\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"ポインタがウィンドウの最大化ボタンにあるときに効力のある\n"
+"ポインタがウィンドウの最大化ボタンにあるときに有効な\n"
 "ショートカットを含むキーマップ(このマップでは mouse-bindings だけが評価される)"
 
 #. ../lisp/keymaps.jl
@@ -572,7 +664,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"ポインタがウィンドウのメニューボタンにあるときに効力のある\n"
+"ポインタがウィンドウのメニューボタンにあるときに有効な\n"
 "ショートカットを含むキーマップ(このマップでは mouse-bindings だけが評価される)"
 
 #. ../lisp/match-window.jl
@@ -586,8 +678,7 @@ msgstr "一致するウィンドウのプロパティ"
 #. ../lisp/maximize.jl
 msgid ""
 "Maximizing a window dimension always increases the size of that dimension."
-msgstr ""
-"ウィンドウの最大化で常に大きさを大きくする"
+msgstr "ウィンドウの最大化で常に大きさを大きくする"
 
 #. ../lisp/maximize.jl
 msgid "Raise windows when they're maximized."
@@ -604,8 +695,7 @@ msgstr "ウィンドウを最大化"
 #. ../lisp/maximize.jl
 msgid ""
 "Restore the dimensions of the window to its original, unmaximized, state."
-msgstr ""
-"ウィンドウを元の最大化されていない状態に戻す"
+msgstr "ウィンドウを元の最大化されていない状態に戻す"
 
 #. ../lisp/maximize.jl
 msgid "Maximize the vertical dimension of the window."
@@ -617,7 +707,7 @@ msgstr "ウィンドウの水平方向の大きさを最大化"
 
 #. ../lisp/maximize.jl
 msgid "Toggle the state of the window between maximized and unmaximized."
-msgstr "ウィンドウの最大化されている状態とそうでない状態を切替える"
+msgstr "ウィンドウの最大化されている状態とそうでない状態を切替"
 
 #. ../lisp/maximize.jl
 msgid ""
@@ -625,7 +715,7 @@ msgid ""
 "unmaximized."
 msgstr ""
 "ウィンドウの垂直方向に最大化されている状態とそうでない状態を\n"
-"切替える"
+"切替"
 
 #. ../lisp/maximize.jl
 msgid ""
@@ -633,7 +723,7 @@ msgid ""
 "unmaximized."
 msgstr ""
 "ウィンドウの水平方向に最大化されている状態とそうでない状態を\n"
-"切替える"
+"切替"
 
 #. ../lisp/maximize.jl
 msgid "Maximize the window without obscuring any other windows."
@@ -648,7 +738,7 @@ msgid ""
 "Toggle the state of the window between maximized-filled and unmaximized."
 msgstr ""
 "ウィンドウの最大、(画面を)覆い尽くしている状態とそうでない状態を\n"
-"切替える"
+"切替"
 
 #. ../lisp/maximize.jl
 msgid ""
@@ -656,7 +746,7 @@ msgid ""
 "unmaximized."
 msgstr ""
 "ウィンドウの垂直方向に最大、(画面を)覆い尽くしている状態とそうでない\n"
-"状態を切替える"
+"状態を切替"
 
 #. ../lisp/maximize.jl
 msgid ""
@@ -664,35 +754,39 @@ msgid ""
 "unmaximized."
 msgstr ""
 "ウィンドウの水平方向に最大、(画面を)覆い尽くしている状態とそうでない\n"
-"状態を切替える"
+"状態を切替"
 
 #. ../lisp/menus.jl
-msgid "Iconify"
-msgstr "アイコン化"
+msgid "_Iconify"
+msgstr "アイコン化(_I)"
+
+#. ../lisp/menus.jl
+msgid "_Delete"
+msgstr "消去(_D)"
 
 #. ../lisp/menus.jl
 msgid "Destroy"
-msgstr "破壊"
+msgstr "強制終了"
 
 #. ../lisp/menus.jl
-msgid "Toggle"
-msgstr "切替"
+msgid "_Toggle"
+msgstr "切替(_T)"
 
 #. ../lisp/menus.jl
-msgid "Maximize"
-msgstr "最大化"
+msgid "_Maximize"
+msgstr "最大化(_M)"
 
 #. ../lisp/menus.jl
-msgid "Vertically"
-msgstr "垂直方向に"
+msgid "_Vertically"
+msgstr "垂直方向に(_V)"
 
 #. ../lisp/menus.jl
-msgid "Horizontally"
-msgstr "水平方向に"
+msgid "_Horizontally"
+msgstr "水平方向に(_H)"
 
 #. ../lisp/menus.jl
-msgid "Both"
-msgstr "両方"
+msgid "_Both"
+msgstr "両方(_B)"
 
 #. ../lisp/menus.jl
 msgid "Fill vertically"
@@ -707,24 +801,24 @@ msgid "Fill both"
 msgstr "両方向いっぱい"
 
 #. ../lisp/menus.jl
-msgid "Un-maximize"
-msgstr "元の大きさに戻す"
+msgid "_Un-maximize"
+msgstr "元の大きさに戻す(_U)"
 
 #. ../lisp/menus.jl
-msgid "In group"
-msgstr "グループ"
+msgid "In _group"
+msgstr "グループ(_g)"
 
 #. ../lisp/menus.jl
-msgid "Send window to"
-msgstr "ウィンドウを送る"
+msgid "_Send window to"
+msgstr "ウィンドウを送る(_S)"
 
 #. ../lisp/menus.jl
-msgid "Previous workspace"
-msgstr "前のワークスペース"
+msgid "_Previous workspace"
+msgstr "前のワークスペース(_P)"
 
 #. ../lisp/menus.jl
-msgid "Next workspace"
-msgstr "次のワークスペース"
+msgid "_Next workspace"
+msgstr "次のワークスペース(_N)"
 
 #. ../lisp/menus.jl
 msgid "Copy to previous"
@@ -735,20 +829,20 @@ msgid "Copy to next"
 msgstr "次のにコピー"
 
 #. ../lisp/menus.jl
-msgid "Left"
-msgstr "左"
+msgid "_Left"
+msgstr "左(_L)"
 
 #. ../lisp/menus.jl
-msgid "Right"
-msgstr "右"
+msgid "_Right"
+msgstr "右(_R)"
 
 #. ../lisp/menus.jl
-msgid "Up"
-msgstr "上"
+msgid "_Up"
+msgstr "上(_U)"
 
 #. ../lisp/menus.jl
-msgid "Down"
-msgstr "下"
+msgid "_Down"
+msgstr "下(_D)"
 
 #. ../lisp/menus.jl
 msgid "Depth"
@@ -756,19 +850,19 @@ msgstr "深さ"
 
 #. ../lisp/menus.jl
 msgid "Raise"
-msgstr "上げる"
+msgstr "前面に出す"
 
 #. ../lisp/menus.jl
 msgid "Lower"
-msgstr "下げる"
+msgstr "背面に下げる"
 
 #. ../lisp/menus.jl
 msgid "Upper layer"
-msgstr "上の階層"
+msgstr "上のレイヤ"
 
 #. ../lisp/menus.jl
 msgid "Lower layer"
-msgstr "下の階層"
+msgstr "下のレイヤ"
 
 #. ../lisp/menus.jl
 msgid "Frame type"
@@ -799,40 +893,44 @@ msgid "Frame style"
 msgstr "フレームスタイル"
 
 #. ../lisp/menus.jl
-msgid "Sticky"
-msgstr "居座る"
+msgid "_Sticky"
+msgstr "居座る(_S)"
 
 #. ../lisp/menus.jl
-msgid "Shaded"
-msgstr "シェード"
+msgid "S_haded"
+msgstr "シェード(_h)"
 
 #. ../lisp/menus.jl
-msgid "Ignored"
-msgstr "無視される"
+msgid "_Ignored"
+msgstr "無視される(_I)"
 
 #. ../lisp/menus.jl
-msgid "Focusable"
-msgstr "フォーカス"
+msgid "_Focusable"
+msgstr "フォーカス可能(_F)"
 
 #. ../lisp/menus.jl
-msgid "In window list"
-msgstr "ウィンドウリスト"
+msgid "In _window list"
+msgstr "ウィンドウリスト(_w)"
 
 #. ../lisp/menus.jl
-msgid "In task list"
-msgstr "タスクリスト"
+msgid "In _task list"
+msgstr "タスクリスト(_t)"
 
 #. ../lisp/menus.jl
-msgid "Windows"
-msgstr "ウィンドウ"
+msgid "_Windows"
+msgstr "ウィンドウ(_W)"
 
 #. ../lisp/menus.jl
-msgid "Programs"
-msgstr "プログラム"
+msgid "Work_spaces"
+msgstr "ワークスペース(_s)"
 
 #. ../lisp/menus.jl
-msgid "Customize"
-msgstr "カスタマイズ"
+msgid "_Programs"
+msgstr "プログラム(_P)"
+
+#. ../lisp/menus.jl
+msgid "_Customize"
+msgstr "カスタマイズ(_C)"
 
 #. ../lisp/menus.jl
 msgid "Restart"
@@ -844,7 +942,7 @@ msgstr "終了"
 
 #. ../lisp/menus.jl
 msgid "Display the menu listing all window operations."
-msgstr "すべてのウィンドウ操作のリストのメニューを表示"
+msgstr "すべてのウィンドウ操作リストのメニューを表示"
 
 #. ../lisp/menus.jl
 msgid "Display the main menu."
@@ -856,108 +954,112 @@ msgstr "アプリケーションメニューを表示"
 
 #. ../lisp/move-cursor.jl
 msgid "Number of pixels to move pointer in `move-cursor-' commands."
-msgstr "`slide-'コマンドでウィンドウを移動するピクセル数"
+msgstr "move-cursor- コマンドでウィンドウを移動するピクセル数"
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the left."
-msgstr "ウィンドウを`slide-window-increment'ピクセル数だけ左に移動"
+msgstr "ウィンドウを move-cursor-increment ピクセル数だけ左に移動"
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels to the right."
-msgstr "ウィンドウを`slide-window-increment'ピクセル数だけ右に移動"
+msgstr "ウィンドウを move-cursor-increment ピクセル数だけ右に移動"
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels upwards."
-msgstr "ウィンドウを`slide-window-increment'ピクセル数だけ上に移動"
+msgstr "ウィンドウを move-cursor-increment ピクセル数だけ上に移動"
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor `move-cursor-increment' pixels downwards."
-msgstr "ウィンドウを`slide-window-increment'ピクセル数だけ下に移動"
+msgstr "ウィンドウを move-cursor-increment ピクセル数だけ下に移動"
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel to the left."
-msgstr "今のワークスペースを左に一つ分移動"
+msgstr "カーソルを 1 ピクセル分左に移動"
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel to the right."
-msgstr "今のワークスペースを右に一つ分移動"
+msgstr "カーソルを 1 ピクセル分右に移動"
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel upwards."
-msgstr "ウィンドウを`slide-window-increment'ピクセル数だけ上に移動"
+msgstr "カーソルを 1 ピクセル分上に移動"
 
 #. ../lisp/move-cursor.jl
 msgid "Move the cursor 1 pixel downwards."
-msgstr "ウィンドウを`slide-window-increment'ピクセル数だけ下に移動"
+msgstr "カーソルを 1 ピクセル分下に移動"
 
 #. ../lisp/move-resize.jl
 msgid "The method of drawing windows being moved interactively."
-msgstr "インタラクティブに移動するときのウィンドウの描画方法"
+msgstr "対話的にウィンドウを移動するときの描画方法"
 
 #. ../lisp/move-resize.jl
 msgid "The method of drawing windows being resized interactively."
-msgstr "インタラクティブに大きさを変更するときのウィンドウの描画方法"
+msgstr "対話的にウィンドウの大きさを変えるときの描画方法"
 
 #. ../lisp/move-resize.jl
 msgid "Raise windows being moved or resized interactively."
-msgstr "インタラクティブに移動/大きさを変更するときにウィンドウを前面に出す"
+msgstr "対話的にウィンドウを移動/大きさを変更するときに前面に出す"
 
 #. ../lisp/move-resize.jl
 msgid "Show the current position while moving windows interactively."
-msgstr "ウィンドウをインタラクティブに移動する間に位置を表示"
+msgstr "対話的にウィンドウを移動するときに位置を表示"
 
 #. ../lisp/move-resize.jl
 msgid "Show the current dimensions while resizing windows interactively."
-msgstr "ウィンドウをインタラクティブに大きさを変更する間に大きさを表示"
+msgstr "対話的にウィンドウの大きさを変更するときに大きさを表示"
 
 #. ../lisp/move-resize.jl
 msgid ""
 "The method of choosing which window edges are moved while resizing with\n"
 "the mouse."
 msgstr ""
-"マウスでリサイズ中のウィンドウ端の移動方式を選択"
+"マウスでウィンドウの大きさを変更するときのウィンドウ端の移動方法を選択"
 
 #. ../lisp/move-resize.jl
 msgid ""
 "Snap window position to edges of other windows when interactively moving."
-msgstr ""
-"ウィンドウをインタラクティブに移動するときに他のウィンドウの端にくっつける"
+msgstr "ウィンドウを対話的に移動するときに他のウィンドウの端にくっつける"
 
 #. ../lisp/move-resize.jl
 msgid "Proximity in pixels before snapping to a window edge."
 msgstr "ウィンドウの端にくっつけるまでの接近ピクセル数"
 
 #. ../lisp/move-resize.jl
+msgid "Method of deciding when to snap together two window edges."
+msgstr "ウィンドウの端同士をくっつける方法"
+
+#. ../lisp/move-resize.jl
 msgid "Snap to otherwise-ignored windows."
-msgstr "otherwise-ignored ウィンドウへ切り替え"
+msgstr "otherwise-ignored ウィンドウへくっつける"
 
 #. ../lisp/move-resize.jl
 msgid "Lock window geometry while the window is maximized."
 msgstr "ウィンドウが最大化される間に大きさをロック"
 
 #. ../lisp/move-resize.jl
-msgid "Only redraw window contents after the move/resize has finished."
-msgstr "移動/サイズ変更完了時のみウィンドウの内容を再描画する"
+msgid ""
+"Only update window contents after it has been moved to its final position."
+msgstr "移動完了時のみウィンドウの内容を再描画する"
 
 #. ../lisp/move-resize.jl
 msgid "Move the window interactively using the mouse."
-msgstr "マウスを使ってインタラクティブにウィンドウを移動"
+msgstr "マウスを使って対話的にウィンドウを移動"
 
 #. ../lisp/move-resize.jl
 msgid "Resize the window interactively using the mouse."
-msgstr "マウスを使ってインタラクティブにウィンドウの大きさを変更"
+msgstr "マウスを使って対話的にウィンドウの大きさを変更"
 
 #. ../lisp/move-resize.jl
 msgid ""
 "Wait for the user to select a window, then interactively move that window."
 msgstr ""
-"ユーザがウィンドウを選択するのを待ち、それからインタラクティブにウィンドウを移動"
+"ユーザがウィンドウを選択するのを待ち、それから対話的にウィンドウを移動"
 
 #. ../lisp/move-resize.jl
 msgid ""
 "Wait for the user to select a window, then interactively resize that window."
 msgstr ""
-"ユーザがウィンドウを選択するのを待ち、それからインタラクティブに大きさを変更"
+"ユーザがウィンドウを選択するのを待ち、それから対話的にウィンドウの大きさを変更"
 
 #. ../lisp/place-window.jl
 msgid "Method of selecting the position of a freshly-mapped window."
@@ -971,12 +1073,85 @@ msgstr "新しく配置される一時的なウィンドウの位置の選択方法"
 msgid "Ignore program-specified window positions."
 msgstr "プログラムの指定するウィンドウの位置を無視する"
 
+#. ../lisp/play-audio.jl
+msgid ""
+"The program used to play audio samples. If unset, built-in support for ESD "
+"is used."
+msgstr ""
+"オーディオサンプルを再生するプログラム. 未設定時は組み込まれている ESD が"
+"使われる"
+
+#. ../lisp/prompt-wm.jl
+msgid "Window:"
+msgstr "ウィンドウ:"
+
+#. ../lisp/prompt-wm.jl
+#, c-format
+msgid "Workspace %d"
+msgstr "ワークスペース %d"
+
+#. ../lisp/prompt-wm.jl
+msgid "Workspace:"
+msgstr "ワークスペース:"
+
+#. ../lisp/prompt-wm.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "ワークスペース切替のためのプロンプト"
+
+#. ../lisp/prompt.jl
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr "ユーザから文字列を読み込むときに有効なショートカットを含むキーマップ"
+
+#. ../lisp/prompt.jl
+msgid "Cancel string input."
+msgstr "文字列入力を中止する"
+
+#. ../lisp/prompt.jl
+msgid "End input and accept current string."
+msgstr "文字列入力を完了する"
+
+#. ../lisp/prompt.jl
+msgid "Clear input buffer."
+msgstr "文字列入力バッファを初期化"
+
+#. ../lisp/prompt.jl
+msgid "Remove previous character from buffer."
+msgstr "文字列入力バッファの直前の文字を削除"
+
+#. ../lisp/prompt.jl
+msgid "Delete rest of line."
+msgstr "行の残りを消去"
+
+#. ../lisp/prompt.jl
+msgid "Move to next non-word character."
+msgstr "次の非ワード文字に移動"
+
+#. ../lisp/prompt.jl
+msgid "Move to previous non-word character."
+msgstr "前の非ワード文字に移動"
+
+#. ../lisp/prompt.jl
+msgid "Move forward one character."
+msgstr "次の文字に移動"
+
+#. ../lisp/prompt.jl
+msgid "Move backward one character."
+msgstr "前の文字に移動"
+
+#. ../lisp/prompt.jl
+msgid "Move to beginning of line."
+msgstr "行頭に移動"
+
+#. ../lisp/prompt.jl
+msgid "Move to end of line."
+msgstr "行末へ移動"
+
 #. ../lisp/raise-commands.jl
 msgid ""
 "Raise the window that received the current event, then replay any pointer\n"
 "events that invoked the command."
 msgstr ""
-"今のイベントを受け取ったウィンドウを上に上げ、コマンドが実行した\n"
+"今のイベントを受け取ったウィンドウを前面に出し、コマンドが実行した\n"
 "任意のマウスイベントを再実行する"
 
 #. ../lisp/raise-commands.jl
@@ -984,8 +1159,8 @@ msgid ""
 "Raise the window that received the current event (if it's focused), then\n"
 "replay any pointer events that invoked the command."
 msgstr ""
-"今のイベントを受け取ったウィンドウを上に上げ、コマンドが実行した\n"
-"任意のマウスイベントを再実行する"
+"(もしフォーカスされていれば)そのときのイベントを受け取ったウィンドウを前面に出し\n"
+"コマンドを実行した任意のマウスイベントを再実行する"
 
 #. ../lisp/shade-hover.jl
 msgid "Shade Hover"
@@ -1001,65 +1176,89 @@ msgstr ""
 
 #. ../lisp/shade-hover.jl
 msgid "Delay in milliseconds before unshading windows."
-msgstr "フォーカスされたウィンドウを前面に出すまで何ミリ秒待つか"
+msgstr "ウィンドウをシェードしていない状態にするまでの遅延時間(ミリ秒)"
 
+#. ../lisp/shading.jl
 #. ../lisp/shade-hover.jl
 msgid "Raise windows when they are unshaded."
-msgstr "ウィンドウをフォーカス時に前面に出す"
+msgstr "ウィンドウをシェードしていない状態のときに前面に出す"
 
 #. ../lisp/shading.jl
 msgid "Display only the title bar of the window."
-msgstr "ウィンドウをシェード(タイトルバーだけ表示)"
+msgstr "ウィンドウのタイトルバーだけ表示"
 
 #. ../lisp/shading.jl
 msgid ""
 "If the window is shaded (see `shade-window'), restore it to it's usual\n"
 "state."
 msgstr ""
-"もしウィンドウがシェードされていたら `shade-window' を参照)\n"
-"それを普通の状態に戻す"
+"もしウィンドウがシェードされていたら (`shade-window' を参照)\n"
+"それを元の状態に戻す"
 
 #. ../lisp/shading.jl
 msgid ""
 "Toggle the shaded (only the title bar is displayed) state of the window."
+msgstr "ウィンドウのシェード(タイトルバーだけ表示)状態を切替"
+
+#. ../lisp/size-window.jl
+msgid ""
+"Default increment for size-window commands (when the window doesn't specify\n"
+"it's own increments)."
 msgstr ""
-"ウィンドウのシェード(タイトルバーだけ表示)状態を切替える"
+"size-window コマンドのデフォルトのリサイズ単位(ウィンドウが独自に指定して\n"
+"いないとき)"
+
+#. ../lisp/size-window.jl
+msgid "Increase the size of the current window by one row."
+msgstr "そのときのウィンドウを一列分大きくする"
+
+#. ../lisp/size-window.jl
+msgid "Decrease the size of the current window by one row."
+msgstr "そのときのウィンドウを一列分小さくする"
+
+#. ../lisp/size-window.jl
+msgid "Increase the size of the current window by one column."
+msgstr "そのときのウィンドウを一行分大きくする"
+
+#. ../lisp/size-window.jl
+msgid "Decrease the size of the current window by one column."
+msgstr "そのときのウィンドウを一行分小さくする"
 
 #. ../lisp/slide-window.jl
 msgid "Number of pixels to move window in `slide-' commands."
-msgstr "`slide-'コマンドでウィンドウを移動するピクセル数"
+msgstr "slide- コマンドでウィンドウを移動するピクセル数"
 
 #. ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels to the left."
-msgstr "ウィンドウを`slide-window-increment'ピクセル数だけ左に移動"
+msgstr "ウィンドウを slide-window-increment ピクセル数だけ左に移動"
 
 #. ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels to the right."
-msgstr "ウィンドウを`slide-window-increment'ピクセル数だけ右に移動"
+msgstr "ウィンドウを slide-window-increment ピクセル数だけ右に移動"
 
 #. ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels upwards."
-msgstr "ウィンドウを`slide-window-increment'ピクセル数だけ上に移動"
+msgstr "ウィンドウを slide-window-increment ピクセル数だけ上に移動"
 
 #. ../lisp/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels downwards."
-msgstr "ウィンドウを`slide-window-increment'ピクセル数だけ下に移動"
+msgstr "ウィンドウを slide-window-increment ピクセル数だけ下に移動"
 
 #. ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels to the left."
-msgstr "ウィンドウグループを`slide-window-increment'ピクセル数だけ左に移動"
+msgstr "ウィンドウグループを slide-window-increment ピクセル数だけ左に移動"
 
 #. ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels to the right."
-msgstr "ウィンドウグループを`slide-window-increment'ピクセル数だけ右に移動"
+msgstr "ウィンドウグループを slide-window-increment ピクセル数だけ右に移動"
 
 #. ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels upwards."
-msgstr "ウィンドウグループを`slide-window-increment'ピクセル数だけ上に移動"
+msgstr "ウィンドウグループを slide-window-increment ピクセル数だけ上に移動"
 
 #. ../lisp/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels downwards."
-msgstr "ウィンドウグループを`slide-window-increment'ピクセル数だけ下に移動"
+msgstr "ウィンドウグループを slide-window-increment ピクセル数だけ下に移動"
 
 #. ../lisp/smart-placement.jl
 msgid ""
@@ -1075,55 +1274,63 @@ msgstr "一時的なウィンドウをこれの前面に出しておく"
 
 #. ../lisp/stacking.jl
 msgid "Lower the window to the bottom of its stacking level."
-msgstr "ウィンドウを積層レベルの底に下げる"
+msgstr "ウィンドウをレイヤの最背面におく"
 
 #. ../lisp/stacking.jl
 msgid "Raise the window to the top of its stacking level."
-msgstr "ウィンドウを積層レベルの一番上に上げる"
+msgstr "ウィンドウをレイヤの最前面におく"
 
 #. ../lisp/stacking.jl
 msgid ""
 "If the window is the highest window in its stacking level, lower it to the\n"
 "bottom of this level, otherwise raise it to the top of its level."
 msgstr ""
-"もし積層レベルの一番上のウィンドウならこのレベルの一番下に\n"
-"に下げ、そうでなければレベルの一番上にする"
+"もしレイヤの最前面にあるウィンドウなら最背面に\n"
+"おき、そうでなければレイヤの最前面におく"
 
 #. ../lisp/stacking.jl
 msgid "Put the window in the stacking level beneath its current level."
-msgstr "ウィンドウを今より低い積層レベルにする"
+msgstr "ウィンドウをより背面のレイヤにおく"
 
 #. ../lisp/stacking.jl
 msgid "Put the window in the stacking level above its current level."
-msgstr "ウィンドウを今より高い積層レベルにする"
+msgstr "ウィンドウをより前面のレイヤにおく"
 
 #. ../lisp/tooltips.jl
 msgid "Tooltips"
-msgstr "ツールヒント"
+msgstr "ツールチップ"
 
 #. ../lisp/tooltips.jl
 msgid "Display tooltips for window frames."
-msgstr "ウィンドウフレームのツールヒントを表示"
+msgstr "ウィンドウフレームのツールチップを表示"
 
 #. ../lisp/tooltips.jl
 msgid "Remove tooltips after a period of time."
-msgstr "一定時間後にツールヒントを消す"
+msgstr "一定時間後にツールチップを消す"
 
 #. ../lisp/tooltips.jl
 msgid "Show full documentation in tooltips."
-msgstr "ツールヒントでドキュメント全文を表示"
+msgstr "ツールチップでドキュメント全文を表示"
 
 #. ../lisp/tooltips.jl
 msgid "Number of milliseconds before displaying tooltips."
-msgstr "ツールヒントを表示するまでの待ち時間(ミリ秒)"
+msgstr "ツールチップを表示するまでの待ち時間(ミリ秒)"
 
 #. ../lisp/tooltips.jl
 msgid "Number of milliseconds before removing tooltips."
-msgstr "ツールヒントを消すまでの待ち時間(ミリ秒)"
+msgstr "ツールチップを消すまでの待ち時間(ミリ秒)"
 
 #. ../lisp/tooltips.jl
 msgid "Font used to display tooltips."
-msgstr "デフォルトで用いられるフォント"
+msgstr "ツールチップを表示するのにデフォルトで用いられるフォント"
+
+#. ../lisp/tooltips.jl
+msgid "Color used for the tooltips background"
+msgstr "ツールチップの背景色"
+
+#. ../lisp/tooltips.jl
+msgid "Color used for the tooltips foreground"
+msgstr "ツールチップの文字色"
 
 #. ../lisp/transient.jl
 msgid "Focus each window when first displayed."
@@ -1143,39 +1350,47 @@ msgstr "各仮想ワークスペースでの列数"
 
 #. ../lisp/viewport.jl
 msgid "Windows are uniconified to the current viewport."
-msgstr "ウィンドウを今の viewport でアイコンから元に戻す"
+msgstr "ウィンドウを今のビューポートでアイコンから元に戻す"
 
 #. ../lisp/viewport.jl
 msgid "Move the viewport one screen to the right."
-msgstr "右に一画面分 viewport を移動"
+msgstr "右に一画面分ビューポートを移動"
 
 #. ../lisp/viewport.jl
 msgid "Move the viewport one screen to the left."
-msgstr "左に一画面分 viewport を移動"
+msgstr "左に一画面分ビューポートを移動"
 
 #. ../lisp/viewport.jl
 msgid "Move the viewport one screen down."
-msgstr "下に一画面分 viewport を移動"
+msgstr "下に一画面分ビューポートを移動"
 
 #. ../lisp/viewport.jl
 msgid "Move the viewport one screen up."
-msgstr "上に一画面分 viewport を移動"
+msgstr "上に一画面分ビューポートを移動"
 
 #. ../lisp/viewport.jl
 msgid "Move the window to the viewport on the left."
-msgstr "左の viewport にウィンドウを移動"
+msgstr "左のビューポートにウィンドウを移動"
 
 #. ../lisp/viewport.jl
 msgid "Move the window to the viewport on the right."
-msgstr "右の viewport にウィンドウを移動"
+msgstr "右のビューポートにウィンドウを移動"
 
 #. ../lisp/viewport.jl
 msgid "Move the window to the viewport below."
-msgstr "下の viewport にウィンドウを移動"
+msgstr "下のビューポートにウィンドウを移動"
 
 #. ../lisp/viewport.jl
 msgid "Move the window to the viewport above."
-msgstr "上の viewport にウィンドウを移動"
+msgstr "上のビューポートにウィンドウを移動"
+
+#. ../lisp/window-anim.jl
+msgid "The default window animation mode."
+msgstr "デフォルトのウィンドウのアニメーションモード"
+
+#. ../lisp/with-output.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "コマンドの入力を求め、それを実行し、その結果を画面に出力する"
 
 #. ../lisp/workspace.jl
 msgid "Action when passing the first or last workspace when moving."
@@ -1210,10 +1425,8 @@ msgid "Windows are focused after being uniconified."
 msgstr "ウィンドウをアイコンから元に戻した後でフォーカスする"
 
 #. ../lisp/workspace.jl
-msgid ""
-"Transient windows are opened on the same workspace as their parent window."
-msgstr ""
-"一時的なウィンドウを親と同じワークスペースで開く"
+msgid "Transient windows are opened on the same workspace as their parent."
+msgstr "一時的なウィンドウを親と同じワークスペースで開く"
 
 #. ../lisp/workspace.jl
 msgid "Windows selected (normally by the Windows menu) are raised."
@@ -1234,8 +1447,7 @@ msgstr "グループから削除されたメンバーウィンドウをアイコン化"
 #. ../lisp/workspace.jl
 msgid ""
 "Uniconifying a window that's a member of a group restores the whole group."
-msgstr ""
-"グループに復元されたメンバーウィンドウを非アイコン化"
+msgstr "グループに戻されたメンバーウィンドウを非アイコン化"
 
 #. ../lisp/workspace.jl
 msgid "Insert workspace"
@@ -1271,8 +1483,13 @@ msgstr "SPACE (0 から)番目のワークスペースをアクティブにする"
 
 #. ../lisp/workspace.jl
 #, c-format
-msgid "space %d%s"
-msgstr "スペース %d%s"
+msgid "space %d"
+msgstr "ワークスペース %d%s"
+
+#. ../lisp/workspace.jl
+#, c-format
+msgid "%s%s"
+msgstr "%s%s"
 
 #. ../lisp/workspace.jl
 msgid "Display the menu containing the list of all workspaces."
@@ -1280,7 +1497,7 @@ msgstr "すべてのワークスペースのリストを含むメニューを表示"
 
 #. ../lisp/workspace.jl
 msgid "Display the menu of all managed windows."
-msgstr "すべての制御されたウィンドウのメニューを表示"
+msgstr "すべての制御下のウィンドウのメニューを表示"
 
 #. ../lisp/workspace.jl
 msgid "Display the next workspace."
@@ -1291,39 +1508,36 @@ msgid "Display the previous workspace."
 msgstr "前のワークスペースを表示"
 
 #. ../lisp/workspace.jl
-msgid ""
-"Move the window to the next workspace. If no next workspace exists, one\n"
-"will be created."
-msgstr ""
-"ウィンドウを次のワークスペースに移動。次のワークスペースがなかったら\n"
-"つくる"
+msgid "Move the window to the next workspace."
+msgstr "ウィンドウを次のワークスペースに移動"
 
 #. ../lisp/workspace.jl
-msgid ""
-"Move the window to the previous workspace. If no such workspace exists, one\n"
-"will be created."
-msgstr ""
-"ウィンドウを前のワークスペースに移動。次のワークスペースがなかったら\n"
-"つくる"
+msgid "Move the window to the previous workspace."
+msgstr "ウィンドウを前のワークスペースに移動"
+
+#. ../lisp/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "ウィンドウを次のワークスペースにコピー"
+
+#. ../lisp/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "ウィンドウを前のワークスペースにコピー"
 
 #. ../lisp/workspace.jl
 msgid ""
 "Create a new workspace at the end of the list, and move the window to it."
-msgstr ""
-"新しいワークスペースをリストの最後につくりウィンドウをそこへ移動"
+msgstr "新しいワークスペースをリストの最後につくりウィンドウをそこへ移動"
 
 #. ../lisp/workspace.jl
 msgid ""
 "Create a new workspace at the start of the list, and move the window to it."
-msgstr ""
-"新しいワークスペースをリストの最初につくりウィンドウをそこへ移動"
+msgstr "新しいワークスペースをリストの最初につくりウィンドウをそこへ移動"
 
 #. ../lisp/workspace.jl
 msgid ""
 "Delete the current workspace. Its member windows are relocated to the next\n"
 "workspace."
-msgstr ""
-"今のワークスペースを消し、属するウィンドウを次のワークスペース\n"
+msgstr "今のワークスペースを消し、属するウィンドウを次のワークスペース\n"
 "に再配置"
 
 #. ../lisp/workspace.jl
@@ -1380,7 +1594,7 @@ msgstr "循環するときすべてのワークスペースのウィンドウを含める"
 
 #. ../lisp/x-cycle.jl
 msgid "Include windows on all viewports when cycling."
-msgstr "循環するときすべての viewport のウィンドウを含める"
+msgstr "循環するときすべてのビューポートのウィンドウを含める"
 
 #. ../lisp/x-cycle.jl
 msgid "Raise windows while they're temporarily selected during cycling."
@@ -1400,11 +1614,26 @@ msgstr "ウィンドウを一時的に選択するときに auto-raising を無効にする"
 
 #. ../lisp/x-cycle.jl
 msgid "Cycle through all windows in order of recent selections."
-msgstr "すべてのウィンドウを循環するとき最近選択されたものから順番にする"
+msgstr "最近選択されたものから順番にウィンドウを循環する"
+
+#. ../lisp/x-cycle.jl
+msgid "Cycle through all windows in the same group as the current window."
+msgstr "同じグループのウィンドウ間を循環する"
+
+#. ../lisp/x-cycle.jl
+msgid ""
+"Cycle through all windows whose names match the leading colon-delimited\n"
+"prefix of the current window."
+msgstr ""
+"ウィンドウの名前の最初の':'までが一致するウィンドウ間を循環する"
+
+#. ../lisp/x-cycle.jl
+msgid "Cycle through all windows with the same class as the current window."
+msgstr "同じクラスのウィンドウ間を循環する"
 
 #. ../themes/gradient/theme.jl
 msgid "Gradient Theme"
-msgstr "色勾配(gradient)フレーム"
+msgstr "色勾配(gradient)テーマ"
 
 #. ../themes/gradient/theme.jl
 msgid "Direction of gradient in `gradient' frame style."
@@ -1432,7 +1661,7 @@ msgstr "(おそらく質に影響するが)色勾配をつくるときによりメモリを節約"
 
 #. ../themes/mono/theme.jl
 msgid "Mono Theme"
-msgstr "単色(mono)フレーム"
+msgstr "単色(mono) テーマ"
 
 #. ../themes/mono/theme.jl
 msgid "Use the GTK+ background color for inactive frames."
@@ -1452,7 +1681,7 @@ msgstr "ウィンドウタイトルでのテキストの調整法"
 
 #. ../themes/simple/theme.jl
 msgid "Simple Theme"
-msgstr "単純(simple)フレーム"
+msgstr "単純(simple) テーマ"
 
 #. ../themes/simple/theme.jl
 msgid "Color of inactive frames in `simple' frame style."
@@ -1464,11 +1693,11 @@ msgstr "`simple'フレームスタイルでのアクティブなフレームの色"
 
 #. ../themes/smaker/theme.jl
 msgid "SMaker Theme"
-msgstr "保存(_S)"
+msgstr "SMaker テーマ"
 
 #. ../themes/smaker/theme.jl
 msgid "Use black-on-white button images."
-msgstr "black-on-white ボタンイメージを使う"
+msgstr "black-on-white ボタン画像を使う"
 
 #. ../themes/smaker/theme.jl
 msgid "Color to use when drawing text."
@@ -1500,7 +1729,7 @@ msgstr "ウィンドウの境界の幅"
 
 #. ../themes/smaker/theme.jl
 msgid "Border width of bar images."
-msgstr "バーイメージの境界の幅"
+msgstr "バー画像の境界の幅"
 
 #. ../themer/themer.glade:1327
 msgid " to: "
@@ -1534,6 +1763,10 @@ msgstr "クリックされた"
 #. ../themer/themer.glade:1048
 msgid "Copy..."
 msgstr "コピー..."
+
+#. ../themer/themer.glade:494
+msgid "Details"
+msgstr "詳細"
 
 #. ../themer/themer.glade:442
 msgid "Directory:"
@@ -1593,7 +1826,7 @@ msgstr ""
 
 #. ../themer/themer.glade:1278
 msgid "Map: "
-msgstr "マップ:"
+msgstr "割り当て:"
 
 #. ../themer/themer.glade:1492
 msgid "Mapping"
@@ -1620,12 +1853,12 @@ msgid "Save Theme _As..."
 msgstr "名前を付けて保存(_A)"
 
 #. ../themer/themer.glade:37
-msgid "Sawmill Theme Builder"
-msgstr "Sawmill テーマビルダ"
+msgid "Sawfish Theme Builder"
+msgstr "sawfish テーマビルダ"
 
 #. ../themer/themer.glade:1524
-msgid "Sawmill Themer Preview"
-msgstr "Sawmill Themer 試写"
+msgid "Sawfish Themer Preview"
+msgstr "sawfish themer 試行"
 
 #. ../themer/themer.glade:318
 msgid "Theme name: "
@@ -1633,7 +1866,7 @@ msgstr "テーマ名:"
 
 #. ../themer/themer.glade:1543
 msgid "This window previews the current theme."
-msgstr "このウィンドウは今のテーマを試写します。"
+msgstr "選択したテーマをこのウィンドウに表示します"
 
 #. ../themer/themer.glade:1421
 msgid "Type"
@@ -1673,15 +1906,15 @@ msgstr "ヘルプ(_H)"
 
 #. ../themer/themer.glade:103
 msgid "_Open Theme.."
-msgstr "開く(_O)"
+msgstr "開く(_O)..."
 
 #. ../themer/themer.glade:202
 msgid "_Preferences..."
-msgstr "設定(_P)"
+msgstr "設定(_P)..."
 
 #. ../themer/themer.glade:155
 msgid "_Preview"
-msgstr "試写(_P)"
+msgstr "試行(_P)"
 
 #. ../themer/themer.glade:120
 msgid "_Save Theme"
