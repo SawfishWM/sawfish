@@ -618,6 +618,7 @@ list_frame_generator (Lisp_Window *w)
 	repv elt, class = Qnil, class_elt = Qnil, ov_class_elt = Qnil;
 	rep_GC_root gc_class, gc_class_elt, gc_ov_class_elt;
 	bool had_left_edge = FALSE, had_top_edge = FALSE;
+	bool had_right_edge = FALSE, had_bottom_edge = FALSE;
 
 	rep_PUSHGC(gc_class, class);
 	rep_PUSHGC(gc_class_elt, class_elt);
@@ -856,6 +857,7 @@ list_frame_generator (Lisp_Window *w)
 	tem = get_integer_prop (w, Qright_edge, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	{
+	    had_right_edge = TRUE;
 	    if (had_left_edge)
 		fp->width = w->attr.width - rep_INT(tem) - fp->x;
 	    else
@@ -864,15 +866,43 @@ list_frame_generator (Lisp_Window *w)
 	tem = get_integer_prop (w, Qbottom_edge, elt, class_elt, ov_class_elt);
 	if (tem != Qnil)
 	{
+	    had_bottom_edge = TRUE;
 	    if (had_top_edge)
 		fp->height = w->attr.height - rep_INT(tem) - fp->y;
 	    else
 		fp->y = w->attr.height - rep_INT(tem) - fp->height;
 	}
+
 	if (fp->width < 0)
 	    fp->width = right_x - fp->x;
 	if (fp->height < 0)
 	    fp->height = bottom_y - fp->y;
+
+	/* try to remove edges sticking out of small windows. if a part
+	   specified by only one edge sticks out of the other edge, then
+	   truncate it */
+
+	if (had_right_edge && !had_left_edge && fp->x < 0)
+	{
+	    fp->width += fp->x;
+	    fp->x = 0;
+	}
+	else if (had_left_edge && !had_right_edge
+		 && fp->x + fp->width > w->attr.width)
+	{
+	    fp->width = w->attr.width - fp->x;
+	}
+
+	if (had_bottom_edge && !had_top_edge && fp->y < 0)
+	{
+	    fp->height += fp->y;
+	    fp->y = 0;
+	}
+	else if (had_top_edge && !had_bottom_edge
+		 && fp->y + fp->height > w->attr.height)
+	{
+	    fp->height = w->attr.height - fp->y;
+	}
 
 	/* if we have a renderer function, create the image to
 	   render into. */
