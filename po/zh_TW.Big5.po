@@ -276,9 +276,8 @@ msgid "Border width of bar images."
 msgstr "條形圖像的邊界寬度。"
 
 #. ../lisp/sawfish/ui/layouts/keymaps.jl
-#, fuzzy
 msgid "Context:"
-msgstr "上下文："
+msgstr "應用範圍："
 
 #. ../lisp/sawfish/ui/apply.jl
 #, c-format
@@ -387,7 +386,7 @@ msgstr "忽略程式位置"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Place mode"
-msgstr "擺\放模式"
+msgstr "放置模式"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Position"
@@ -509,7 +508,7 @@ msgstr "忽略疊放的要求"
 #. ../lisp/sawfish/wm/custom.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Placement"
-msgstr "擺\放"
+msgstr "放置"
 
 #. ../lisp/sawfish/wm/custom.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -1025,16 +1024,15 @@ msgstr "插入工作區"
 msgid ""
 "The program used to play audio samples. If unset, built-in support for ESD "
 "is used."
-msgstr "用來播放音效的程式。若無設定，則使用內建的 ESD 支援。"
+msgstr "用來播放音效的程式。若無設定，則使用內置的 ESD 支援。"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Describe key"
 msgstr "描述按鍵"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
-#, fuzzy
 msgid "Prompt for a key sequence, then print its binding."
-msgstr "要求用戶提供一個組合鍵,然後印出它的鍵結定義."
+msgstr "要求用戶提供一個按鍵組合，然後印出它的按鍵結合定義。"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Press key..."
@@ -1049,11 +1047,12 @@ msgid "Quote event"
 msgstr "引用事件"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
-#, fuzzy
 msgid ""
 "Sends the next key event directly to the focused client window, ignoring\n"
 "any window manager bindings that it may have."
-msgstr "將下一個鍵事件直接送到受焦點的客戶視窗, 忽略任何其所有的視窗總管鍵結."
+msgstr ""
+"將下一個按鍵動作直接送到在焦點中的客戶視窗，\n"
+"忽略任何與視窗管理程式有關的按鍵結合。"
 
 #. ../lisp/sawfish/wm/util/gtkrc.jl
 msgid "Gtkrc reload style"
@@ -1145,7 +1144,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/util/prompt.jl
 #, fuzzy
 msgid "Keymap containing bindings active when reading a string from the user."
-msgstr "按鍵對應包含從使用者讀入一個字串時有效的鍵結."
+msgstr "按鍵對應包含從使用者讀入一個字串時有效的鍵結。"
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default frame style:"
@@ -1171,9 +1170,8 @@ msgid "Default font: \\w"
 msgstr "預設字形：\\w"
 
 #. ../lisp/sawfish/wm/frames.jl
-#, fuzzy
 msgid "Bevel intensity: \\wpercent."
-msgstr "斜面的強度：\\w%。"
+msgstr "斜面的亮度：\\w%。"
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -1520,7 +1518,7 @@ msgstr "將視窗降至最低的疊放順序。並降低所有有關的過渡視窗。"
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
-msgstr ""
+msgstr "提昇較低的視窗及其過渡視窗"
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid ""
@@ -1581,17 +1579,19 @@ msgstr "當在某個方向上最大化視窗時一定會增加該視窗那個方向的大小。"
 msgid "Raise windows when they are maximized."
 msgstr "視窗在最大化時會被提昇。"
 
+# "填充視窗時可覆蓋\不受管的視窗。"
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Let unmanaged windows be overlapped when filling windows."
-msgstr "填充視窗時可覆蓋\不受管的視窗。"
+msgstr ""
 
+# "最大化時不要蓋\到要「避開」的視窗。"
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Don't cover `avoided' windows when maximizing."
-msgstr "最大化時不要蓋\到要「避開」的視窗。"
+msgstr ""
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Lock position and size while windows are maximized."
-msgstr "當視窗被最大化後,鎖定其位置和大小."
+msgstr "當視窗被最大化後，鎖定其位置和大小。"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window"
@@ -1851,7 +1851,7 @@ msgstr "切換視窗的「固定性」─決定它是否屬於所有工作區。"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle single window mode"
-msgstr ""
+msgstr "切換單一視窗模式"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
@@ -2055,7 +2055,7 @@ msgstr "按鍵結合"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "global-keymap"
-msgstr ""
+msgstr "整體按鍵對應"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
@@ -2071,105 +2071,95 @@ msgstr "用戶視窗在焦點中時的有效按鍵對應。"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "root-window-keymap"
-msgstr ""
+msgstr "根視窗按鍵對應"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the root window\n"
 "(or when no window is focused)."
-msgstr "按鍵對應包含游標在根視窗 (或是無受焦點視窗) 時有效的鍵結"
+msgstr "游標在根視窗（或是視窗不在焦點中）時的有效按鍵對應。"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
-msgstr ""
+msgstr "標題按鍵對應"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the title of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"按鍵對應包含游標在一個視窗的標題中時有效的鍵結. (在這映射中只\n"
-"有滑鼠鍵結會被考慮.)"
+"游標在視窗標題上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被考慮。）"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
-msgstr ""
+msgstr "邊界按鍵對應"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the border of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"按鍵對應包含游標在一個視窗的邊界中時有效的鍵結. (在這映射中只\n"
-"有滑鼠鍵結會被考慮.)"
+"游標在視窗邊界上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被考慮。）"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
-msgstr ""
+msgstr "關閉按鈕按鍵對應"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the close button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"按鍵對應包含游標在一個視窗的關閉按鈕中時有效的鍵結. (在這映射\n"
-"中只有滑鼠鍵結會被考慮.)"
+"游標在視窗關閉按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
+"考慮。）"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
-msgstr ""
+msgstr "圖示化按鈕按鍵對應"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the iconify\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"按鍵對應包含游標在一個視窗的圖示化按鈕中時有效的鍵結. (在這映\n"
-"射中只有滑鼠鍵結會被考慮.)"
+"游標在視窗圖示化按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
+"考慮。）"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
-msgstr ""
+msgstr "最大化按鈕按鍵對應"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the maximize\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"按鍵對應包含游標在一個視窗的最大化按鈕中時有效的鍵結. (在這映\n"
-"射中只有滑鼠鍵結會被考慮.)"
+"游標在視窗最大化按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
+"考慮。）"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
-msgstr ""
+msgstr "選單按鈕按鍵對應"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"按鍵對應包含游標在一個視窗的選單按鈕中時有效的鍵結. (在這映射\n"
-"中只有滑鼠鍵結會被考慮.)"
+"游標在視窗選單按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
+"考慮。）"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
-msgstr ""
+msgstr "隱藏按鈕按鍵對應"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the shade button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"按鍵對應包含游標在一個視窗的關閉按鈕中時有效的鍵結. (在這映射\n"
-"中只有滑鼠鍵結會被考慮.)"
+"游標在視窗隱藏按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
+"考慮。）"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 #, fuzzy
@@ -2190,7 +2180,7 @@ msgstr "放置對話窗的方法：\\w"
 
 #. ../lisp/sawfish/wm/placement.jl
 msgid "Ignore program-specified window placements."
-msgstr "不會由程式指定擺\放視窗的位置。"
+msgstr "不會由程式指定放置視窗的位置。"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 #, fuzzy
@@ -2232,82 +2222,72 @@ msgid "Move the window to the next viewport."
 msgstr "將視窗移至下一個視區."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Number of pixels to move window in `slide-' commands."
-msgstr "在 `滑動-' 指令中移動視窗的像點數."
+msgstr "「滑動-」指令中移動視窗的像點數目。"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window left"
-msgstr ""
+msgstr "向左滑動視窗"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Move the window `slide-window-increment' pixels to the left."
-msgstr "將視窗向左移動 `滑動-視窗-增加值' 個像點。"
+msgstr "將視窗向左移動「滑動-視窗-增加值」個像點。"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window right"
-msgstr ""
+msgstr "向右滑動視窗"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Move the window `slide-window-increment' pixels to the right."
-msgstr "將視窗向右移動 `滑動-視窗-增加值' 個像點。"
+msgstr "將視窗向右移動「滑動-視窗-增加值」個像點。"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window up"
-msgstr ""
+msgstr "向上滑動視窗"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Move the window `slide-window-increment' pixels upwards."
-msgstr "將視窗向上移動 `滑動-視窗-增加值' 個像點。"
+msgstr "將視窗向上移動「滑動-視窗-增加值」個像點。"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window down"
-msgstr ""
+msgstr "向下滑動視窗"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Move the window `slide-window-increment' pixels downwards."
-msgstr "將視窗向下移動 `滑動-視窗-增加值' 個像點。"
+msgstr "將視窗向下移動「滑動-視窗-增加值」個像點。"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group left"
-msgstr ""
+msgstr "向左滑動視窗群組"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Move the window group `slide-window-increment' pixels to the left."
-msgstr "將視窗群組向左移動 `滑動-視窗-增加值' 個像點。"
+msgstr "將視窗群組向左移動「滑動-視窗-增加值」個像點。"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group right"
-msgstr ""
+msgstr "向右滑動視窗群組"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Move the window group `slide-window-increment' pixels to the right."
-msgstr "將視窗群組向右移動 `滑動-視窗-增加值' 個像點。"
+msgstr "將視窗群組向右移動「滑動-視窗-增加值」個像點。"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Slide group up"
-msgstr "新群組"
+msgstr "向上滑動視窗群組"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Move the window group `slide-window-increment' pixels upwards."
-msgstr "將視窗群組向上移動 `滑動-視窗-增加值' 個像點。"
+msgstr "將視窗群組向上移動「滑動-視窗-增加值」個像點。"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group down"
-msgstr ""
+msgstr "向下滑動視窗群組"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Move the window group `slide-window-increment' pixels downwards."
-msgstr "將視窗群組向下移動 `滑動-視窗-增加值' 個像點。"
+msgstr "將視窗群組向下移動「滑動-視窗-增加值」個像點。"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 #, fuzzy
@@ -2375,13 +2355,13 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Apropos variable"
-msgstr ""
+msgstr "Apropos 變數"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid ""
 "Default increment for size-window commands (when the window doesn't\n"
 "specify it's own increments)."
-msgstr "改變視窗大小指令的預設增加值（當視窗沒有指定其增加值時）。"
+msgstr "「改變視窗大小」指令的預設增加值（當視窗沒有指定其增加值時）。"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
@@ -2438,7 +2418,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
 msgid "Whether growing an already grown window grows it again."
-msgstr "增長一個已經增長過的視窗是否會使它再增長."
+msgstr "增長一個已經增長過的視窗是否會使它再增長。"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -2447,8 +2427,8 @@ msgid ""
 "this on, you can use `unmaximize-window' or something similar to get\n"
 "back to the original size."
 msgstr ""
-"增長是否代示最大化. 當你啟用這個選項時, 你可以用「還原視窗最大化」\n"
-"之類來返回原來的視窗大小."
+"增長是否代示最大化。當你啟用這個選項時，你可以用「還原視窗最大化」\n"
+"之類來返回原來的視窗大小。"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "maybe"
@@ -3004,9 +2984,8 @@ msgid "Set window viewport linear"
 msgstr "將視窗移到上邊的視界."
 
 #. ../lisp/sawfish/wm/window-anim.jl
-#, fuzzy
 msgid "The default window animation mode: \\w"
-msgstr "預設的視窗活動化模式：\\w"
+msgstr "預設的視窗活動模式：\\w"
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "all"
@@ -3014,7 +2993,7 @@ msgstr "全部"
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "parents"
-msgstr ""
+msgstr "主視窗"
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Keep transient windows stacked above: \\w"
@@ -3030,7 +3009,7 @@ msgstr "降低單一視窗"
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise lower single window"
-msgstr ""
+msgstr "提昇較低的單一視窗"
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
@@ -3264,11 +3243,11 @@ msgstr "邊框"
 
 #. ../themer/themer.glade:622
 msgid "HIghlighted"
-msgstr ""
+msgstr "已強調"
 
 #. ../themer/themer.glade:802
 msgid "Highlighted"
-msgstr ""
+msgstr "已強調"
 
 #. ../themer/themer.glade:570 ../themer/themer.glade:776
 msgid "Inactive"
@@ -3292,9 +3271,8 @@ msgid "Map: "
 msgstr "對映表："
 
 #. ../themer/themer.glade:1480
-#, fuzzy
 msgid "Mapping"
-msgstr "對映"
+msgstr "對應"
 
 #. ../themer/themer.glade:74
 msgid "New Theme"
