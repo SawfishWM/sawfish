@@ -1,3 +1,14 @@
+2000-05-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* focus.jl (focus-enter-fun, focus-enter-fun): generate events
+	when the root window is entered/left, enter-root and leave-root
+	(enter-exit): unfocus the window when the root window is
+	entered, as well as when the window is left
+
+	* transient.jl (transient-unmap-window): fix bug of looking for
+	window under pointer _in_ click to focus mode, it should be
+	only done when _not in_ this mode
+
 2000-05-10  John Harper  <john@dcs.warwick.ac.uk>
 
 	* window-history.jl: new file, first attempt at remembering
