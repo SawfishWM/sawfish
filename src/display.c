@@ -74,6 +74,8 @@ error_handler (Display *dpy, XErrorEvent *ev)
 #ifdef DEBUG
     print_error (ev);
 #endif
+    if (ev->resourceid == 0)		/* probably a deleted window */
+	return 0;
     w = x_find_window_by_id (ev->resourceid);
     if (w != 0)
     {
@@ -88,11 +90,11 @@ error_handler (Display *dpy, XErrorEvent *ev)
     }
     else
     {
+#if 0
+	/* I'm fed up seeing these errors! :-) */
 #ifndef DEBUG
 	print_error (ev);
 #endif
-#if 0
-	longjmp (clean_exit_jmp_buf, ec_exit);
 #endif
 	return 0;
     }
