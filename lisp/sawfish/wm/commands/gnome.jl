@@ -36,8 +36,10 @@
 
     (open rep
 	  rep.system
+	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.state.gnome
+	  sawfish.wm.state.ignored
 	  sawfish.wm.commands)
 
   (define-structure-alias gnome-commands sawfish.wm.commands.gnome)
@@ -71,15 +73,17 @@
 
   (define (gnome-toggle-skip-winlist w)
     "Toggle the GNOME SKIP_WINLIST hint of the window."
-    (gnome-toggle-hint w WIN_HINTS_SKIP_WINLIST))
+    (toggle-window-list-skip w))
 
   (define (gnome-set-skip-winlist w)
     "Set the GNOME SKIP_WINLIST hint of the window."
-    (gnome-set-hint w WIN_HINTS_SKIP_WINLIST))
+    (unless (window-get w 'window-list-skip)
+      (toggle-window-list-skip w)))
 
   (define (gnome-clear-skip-winlist w)
     "Unset the GNOME SKIP_WINLIST hint of the window."
-    (gnome-clear-hint w WIN_HINTS_SKIP_WINLIST))
+    (when (window-get w 'window-list-skip)
+      (toggle-window-list-skip w)))
 
   ;;###autoload
   (define-command 'gnome-toggle-skip-winlist gnome-toggle-skip-winlist
