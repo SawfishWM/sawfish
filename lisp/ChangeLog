@@ -1,5 +1,12 @@
 1999-12-02  John Harper  <john@dcs.warwick.ac.uk>
 
+	* match-window.jl: added pseudo-properties: position and
+	viewport
+
+	* workspace.jl, viewport.jl, gnome.jl, focus.jl: changed
+	property names: fixed-position => sticky-viewport, and
+	focus-proxy-click => focus-click-through
+
 	* menus.jl (menu-preprocessor): deprecated the ``expand
 	variables when first in list'' behaviour, it's too crufty to
 	live. Now we have lisp-1 behaviour it's possible to expand
