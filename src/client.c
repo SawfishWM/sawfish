@@ -217,6 +217,7 @@ where OPTIONS are any of:\n\n\
 	-q		Be quiet (perform commands asynchronously)\n\
 	-f FUNCTION	Call Lisp function FUNCTION on the server\n\
 	-c COMMAND	Call the interactive Lisp function COMMAND\n\
+	-r FEATURE	Require the module called FEATURE\n\
 	-e FORM		Evaluate Lisp form FORM on the server\n\
 	-		Read lines of input until EOF, evaluating each\n\
 			 one as it is read\n\
@@ -313,6 +314,16 @@ main(int argc, char *argv[])
 		strcpy(buf, "(call-command '");
 		strcat(buf, argv[1]);
 		strcat(buf, ")");
+		result = do_eval (buf);
+		argc--; argv++;
+		break;
+
+	    case 'r':			/* -r FEATURE */
+		if(argc < 2)
+		    goto opt_error;
+		strcpy (buf, "(require '");
+		strcat (buf, argv[1]);
+		strcat (buf, ")");
 		result = do_eval (buf);
 		argc--; argv++;
 		break;
