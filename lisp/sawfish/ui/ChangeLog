@@ -1,5 +1,19 @@
 2000-07-06  John Harper  <john@dcs.warwick.ac.uk>
 
+	* nokogiri-widget.jl (list-index): made this function terminate
+	even if the item isn't in the list!
+
+	* nokogiri-no-gnome.jl, nokogiri-gnome.jl (simple-dialog): new
+	function, replaces ok-cancel-dialog, uses GnomeDialog if possible
+	* nokogiri-dialog.jl: deleted
+
+	* nokogiri-widget-dialog.jl (widget-dialog): use simple-dialog,
+	new optional arg MAIN_WINDOW
+
+	* nokogiri-widgets/match-window.jl, nokogiri-widgets/list.jl,
+	nokogiri-widgets/keymap.jl, nokogiri-widgets/alist.jl: updated
+	to use simple-dialog and new widget-dialog arg
+
 	* nokogiri-widgets/list.jl: make the `insert' button insert
 	instead of appending, make `delete' preserve the selection,
 	only allow `delete' or `edit' when the selection is set
