@@ -10,11 +10,6 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
-  ! It's not possible to compile sawmill-ui.jl without an X connection
-    (it requires 'gtk, which then calls gtk_init (), ...)
-
-  ! Move functions.c:Fgetpid () to librep
-
   ! With focus-mode click, sometimes windows aren't able to get focus
 
     [ 6/9: I think I've fixed this ]
@@ -34,6 +29,22 @@ Outstanding bugs
   ! latency when starting menu subprocesses can be annoying (pointer
     events are handled unintuitively)
 
+  ! edge snapping doesn't always work correctly:
+    <37E6D428.47F0F822@casquet.inet.net.nz>
+
+  ! grabbing S-C-Left doesn't work on Linux/XFree86 systems?
+
+  ! behaviour of frame parts overlapping client window is undefined?
+
+  ! It's not possible to compile sawmill-ui.jl without an X connection
+    (it requires 'gtk, which then calls gtk_init (), ...)
+
+  ! Move functions.c:Fgetpid () to librep
+
+  ! install-sh script isn't found from subdirectories?
+
+    [workaround: install GNU fileutils]
+
   ! the configuration tool doesn't use gtk engine themes correctly (cf.
     the scrollbars)
 
@@ -42,20 +53,14 @@ Outstanding bugs
       rep_open_dl_library () but this isn't a good idea since it would
       expose the internals of all plugins to everything else..
 
-      the correct way to fix this is to fix the engine ]
+      -- gtk-engines on cvs.gnome.org has this fixed ]
 
-  ! edge snapping doesn't always work correctly:
-    <37E6D428.47F0F822@casquet.inet.net.nz>
-
-  ! install-sh script isn't found from subdirectories?
-
-    [workaround: install GNU fileutils]
-
-  ! grabbing S-C-Left doesn't work on Linux systems
 
 
 General tasks
 =============
+
+  + create a "never automatically create new workspaces" option?
 
   + allow images as foreground of frame parts?
 
