@@ -1,5 +1,9 @@
 2003-08-15  John Harper  <jsh@unfactored.org>
 
+	* sawfish/wm/frames.jl (frame-type-fallback-alist): utility
+	should degrade to default not transient (so it has controls)
+	#111970
+
 	* sawfish/wm/session/init.jl (sm-get-window-prop): ignore
 	WM_CLIENT_LEADER property set to zero, may fix #98315
 
