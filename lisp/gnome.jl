@@ -34,6 +34,11 @@
 				   _WIN_WORKSPACE_COUNT _WIN_STATE
 				   _WIN_LAYER])
 
+(defun gnome-add-window (w)
+  (when (string-match "^gmc|panel$" (window-name w))
+    (window-put w 'focus-proxy-click t))
+  (gnome-set-client-list))
+
 (defun gnome-set-client-list ()
   (let
       (clients vec)
@@ -166,7 +171,8 @@
 
   (add-hook 'workspace-state-change-hook 'gnome-set-workspace)
 
-  (add-hook 'add-window-hook 'gnome-set-client-list)
+  (add-hook 'add-window-hook 'gnome-add-window)
+
   (add-hook 'destroy-notify-hook 'gnome-set-client-list)
   (add-hook 'map-notify-hook 'gnome-set-client-list)
   (add-hook 'umap-notify-hook 'gnome-set-client-list)
