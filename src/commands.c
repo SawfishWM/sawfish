@@ -114,14 +114,19 @@ again:
 	    else if(rep_CAR(fun) == Qautoload && rep_FUNARGP(cmd))
 	    {
 		/* An autoload, load it then try again. */
+#if rep_INTERFACE >= 9
+		cmd = rep_call_with_closure (cmd, rep_load_autoload, cmd);
+#else						       
 		struct rep_Call lc;
 		lc.fun = lc.args = lc.args_evalled_p = Qnil;
 		rep_PUSH_CALL(lc);
 		rep_USE_FUNARG(cmd);
 		cmd = rep_load_autoload(cmd);
 		rep_POP_CALL(lc);
+#endif
 		if(cmd != rep_NULL)
 		    goto again;
+
 	    }
 	}
     }
