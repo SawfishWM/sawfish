@@ -186,7 +186,7 @@ this mode. The single argument is the window to be placed."
   (define (place-window-under-pointer w)
     (let ((dims (window-frame-dimensions w))
 	  (coords (query-pointer))
-	  (screen (maximize-find-workarea w)))
+	  (screen (maximize-find-workarea w #:head (pointer-head))))
       (rplaca coords (clamp* (- (car coords) (quotient (car dims) 2))
 			     (car dims) (nth 0 screen) (nth 2 screen)))
       (rplacd coords (clamp* (- (cdr coords) (quotient (cdr dims) 2))
