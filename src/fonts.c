@@ -226,7 +226,7 @@ get_font_struct (const char *name, int *typep, int *ascentp, int *descentp)
 {
     XFontStruct *font_struct;
 
-    font_struct = XLoadQueryFont (dpy, rep_STR (name));
+    font_struct = XLoadQueryFont (dpy, name);
 
     if (font_struct != 0)
     {
