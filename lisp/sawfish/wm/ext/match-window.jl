@@ -130,6 +130,8 @@
 	(if (get real-prop 'match-window-formatter)
 	    (setq prop ((get real-prop 'match-window-formatter) prop))
 	  (setq prop (aref prop 0)))))
+    (when (stringp prop)
+      (setq prop (quote-regexp prop)))
     prop))
 
 
