@@ -53,11 +53,11 @@ make install \
 gzip -9nf $RPM_BUILD_ROOT%{_infodir}/sawfish*
 
 %post
-/sbin/install-info /usr/info/sawfish.info.gz /usr/info/dir
+/sbin/install-info %{_infodir}/sawfish.info.gz %{_infodir}/dir
 
 %preun
 if [ "$1" = 0 ]; then
-    /sbin/install-info --delete /usr/info/sawfish.info.gz /usr/info/dir
+    /sbin/install-info --delete %{_infodir}/sawfish.info.gz %{_infodir}/dir
 fi
 
 %clean
