@@ -1,3 +1,13 @@
+2002-01-24  John Harper  <jsh@unfactored.org>
+
+	Fixed 62643 (Sawfish-capplet segfaults while configuring via
+	gnomecc):
+
+	* sawmill-capplet.c (display_error): only destroy ui_socket if
+	GTK_IS_OBJECT returns true on it
+
+	Patch is from Mikael Hallendal <micke@codefactory.se>
+
 2001-08-31  John Harper  <jsh@pixelslut.com>
 
 	Fixed 4235 (error in sawfish-ui -> sawfish-capplet livelocks):
