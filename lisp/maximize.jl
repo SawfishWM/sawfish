@@ -29,18 +29,18 @@
 ;; currently maximize window to `(X Y W H)', the saved geometry.
 
 (defcustom maximize-always-expands nil
-  "Maximizing a window dimension always increases the size of that dimension."
+  "Maximizing a window in one dimension must increase the size of that dimension."
   :group (min-max maximize)
   :user-level expert
   :type boolean)
 
 (defcustom maximize-raises t
-  "Raise windows when they're maximized."
+  "Raise windows when they are maximized."
   :group (min-max maximize)
   :type boolean)
 
 (defcustom maximize-ignore-when-filling t
-  "Let ignored windows be overlapped when filling windows."
+  "Let unmanaged windows be overlapped when filling windows."
   :group (min-max maximize)
   :user-level expert
   :type boolean)

@@ -22,12 +22,12 @@
 (provide 'transient)
 
 (defcustom focus-windows-when-mapped nil
-  "Focus each window when first displayed."
+  "Focus windows when they are first displayed."
   :type boolean
   :group focus)
 
 (defcustom transients-get-focus t
-  "Transient windows inherit focus from their parent."
+  "Dialog windows inherit the focus from their parent."
   :group focus
   :type boolean)
 

@@ -33,23 +33,6 @@
 (defvar customize-user-file-dirty nil)
 
 
-;; defcustom's for some built-in variables
-
-(defcustom default-font nil
-  "Font used by default."
-  :group appearance
-  :type font
-  :user-level novice
-  :after-set (lambda () (after-setting-frame-option)))
-
-(defcustom default-bevel-percent nil
-  "Intensity of bevels (percentage)."
-  :group appearance
-  :type (number 0 100)
-  :user-level expert
-  :after-set (lambda () (after-setting-frame-option)))
-
-
 ;; ui
 
 ;;;###autoload

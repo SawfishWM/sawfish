@@ -57,27 +57,27 @@
 ;; Options and variables
 
 (defcustom workspace-boundary-mode 'stop
-  "Action when passing the first or last workspace when moving."
+  "When passing the first or last workspace: \\w"
   :type symbol
   :options (stop wrap-around keep-going)
   :user-level expert
   :group workspace)
 
 (defcustom workspace-send-boundary-mode 'keep-going
-  "Action when passing the first or last workspace when moving windows."
+  "When passing the first or last workspace, while moving a window: \\w"
   :type symbol
   :options (stop wrap-around keep-going)
   :user-level expert
   :group workspace)
 
 (defcustom delete-workspaces-when-empty nil
-  "Workspaces are merged with the next when their last window is closed."
+  "Workspaces are deleted when their last window closes."
   :type boolean
   :user-level expert
   :group workspace)
 
 (defcustom preallocated-workspaces 1
-  "The minimum number of workspaces that may exist."
+  "Minimum number of workspaces: \\w"
   :type number
   :range (1 . nil)
   :user-level novice
@@ -85,7 +85,7 @@
   :after-set (lambda () (call-hook 'workspace-state-change-hook)))
 
 (defcustom lock-first-workspace t
-  "Empty workspaces before or after the active workspace aren't hidden."
+  "Preserve empty workspaces in pager."
   :type boolean
   :group workspace
   :user-level expert
@@ -112,12 +112,12 @@
   :group (min-max iconify))
 
 (defcustom transients-on-parents-workspace nil
-  "Transient windows are opened on the same workspace as their parent."
+  "Dialog windows are opened on the same workspace as their application."
   :type boolean
   :group workspace)
 
 (defcustom raise-selected-windows t
-  "Windows selected (normally by the Windows menu) are raised."
+  "Raise selected windows (normally by the Windows menu)."
   :type boolean
   :group misc)
 
@@ -127,22 +127,22 @@
   :group misc)
 
 (defcustom warp-to-selected-windows t
-  "Warp the mouse pointer to selected windows."
+  "Warp the pointer to selected windows."
   :type boolean
   :group misc)
 
 (defcustom iconify-whole-group nil
-  "Iconifying a window that's a member of a group removes the whole group."
+  "Iconifying a window iconifies its whole group."
   :type boolean
   :group (min-max iconify))
 
 (defcustom uniconify-whole-group nil
-  "Uniconifying a window that's a member of a group restores the whole group."
+  "Uniconifying a window uniconifies its whole group."
   :type boolean
   :group (min-max iconify))
 
 (defcustom workspace-names nil
-  "List of workspace names."
+  "Workspace names."
   :type (list string "Name")
   :group workspace)
 

@@ -25,17 +25,17 @@
   "List containing all symbols naming window placement modes.")
 
 (defcustom place-window-mode 'best-fit
-  "Method of selecting the position of a freshly-mapped window."
+  "Method of placing windows: \\w"
   :type symbol
   :group placement)
 
 (defcustom place-transient-mode 'centered-on-parent
-  "Method of selecting the position of a freshly-mapped transient window."
+  "Method of placing dialog windows: \\w"
   :type symbol
   :group placement)
 
 (defcustom ignore-program-positions nil
-  "Ignore program-specified window positions."
+  "Ignore program-specified window placements."
   :type boolean
   :group placement)
 

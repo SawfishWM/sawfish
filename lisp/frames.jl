@@ -91,16 +91,6 @@ they inherit.")
   "Alist of (CLASS . ALIST) associating classes of frame parts with state
 that overrides settings set elsewhere.")
 
-(defvar frame-type-fallback-alist '((transient . default)
-				    (shaped . default)
-				    (shaped-transient . shaped)
-				    (shaded . shaped)
-				    (shaded-transient . shaped-transient)
-				    (icon . shaped-transient)
-				    (dock . icon))
-  "Alist associated frame types with type to try if the style doesn't offer a
-frame of the requested type. If no entry, then the `unframed' style is used.")
-
 (defvar nil-frame nil
   "Frame definition used for unframed windows.")
 
@@ -113,10 +103,11 @@ frame of the requested type. If no entry, then the `unframed' style is used.")
 (defcustom always-update-frames t
   "Update all windows when the default frame style is changed."
   :type boolean
+  :user-level expert
   :group misc)
 
 (defcustom decorate-transients nil
-  "Decorate transient windows similarly to top-level windows."
+  "Decorate dialog windows similarly to application windows."
   :type boolean
   :group appearance
   :after-set after-setting-frame-option)
@@ -127,14 +118,28 @@ frame of the requested type. If no entry, then the `unframed' style is used.")
   :user-level expert
   :group misc)
 
+(defcustom frame-type-fallback-alist
+  '((transient . default)
+    (shaped . default)
+    (shaped-transient . shaped)
+    (shaded . shaped)
+    (shaded-transient . shaped-transient)
+    (icon . shaped-transient)
+    (dock . icon))
+  "Associate frame types with type to try if the theme doesn't implement the
+requested type."
+  :type (alist ((symbol default shaped transient
+		 shaped-transient icon doc) "From")
+	       ((symbol default shaped transient
+		 shaped-transient icon doc) "To"))
+  :group appearance
+  :user-level expert)
+
 (defvar theme-update-interval 60
   "Number of seconds between checking if theme files have been modified.")
 
-(defcustom user-theme-directory "~/.sawfish/themes"
-  "Directory containing user-local themes."
-  :type file
-  :user-level expert
-  :group misc)
+(defvar user-theme-directory "~/.sawfish/themes"
+  "Directory containing user-local themes.")
 
 (defvar system-theme-directory (expand-file-name
 				"../themes" sawfish-lisp-lib-directory)
@@ -174,6 +179,24 @@ frame of the requested type. If no entry, then the `unframed' style is used.")
   "When non-nil themes are assumed to be malicious.")
 
 (defvar sawfish-themer-program "sawfish-themer")
+
+
+
+;; defcustom's for some built-in variables
+
+(defcustom default-font nil
+  "Default font for window frames and messages."
+  :group appearance
+  :type font
+  :user-level novice
+  :after-set (lambda () (after-setting-frame-option)))
+
+(defcustom default-bevel-percent nil
+  "Intensity of bevels: \\wpercent."
+  :group appearance
+  :type (number 0 100)
+  :user-level expert
+  :after-set (lambda () (after-setting-frame-option)))
 
 
 ;; managing frame styles

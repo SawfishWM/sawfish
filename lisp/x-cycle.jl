@@ -71,7 +71,8 @@
 
 ;; customization options
 
-(defgroup cycle "Window Cycling" :group focus)
+;;;###autoload (defgroup cycle "Window Cycling" :group focus :require x-cycle)
+(defgroup cycle "Window Cycling" :group focus :require x-cycle)
 
 (defcustom cycle-show-window-names t
   "Display window names while cycling through windows."

@@ -210,4 +210,6 @@
 (defgroup match-window "Matched Windows" :layout single :require match-window)
 (defgroup tooltips "Tooltips" :group misc :require tooltips)
 (defgroup shade-hover "Shade Hover" :group focus :require shade-hover)
+(defgroup cycle "Window Cycling" :group focus :require x-cycle)
+(autoload 'cycle-class "x-cycle" t)
 ;;; ::autoload-end::

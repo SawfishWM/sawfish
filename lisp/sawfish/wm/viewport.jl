@@ -27,22 +27,15 @@
 ;; the screen dimensions. E.g. moving to the left moves all windows one
 ;; screen-width to the right. 
 
-(defcustom viewport-columns 1
-  "The number of columns in each virtual workspace."
+(defcustom viewport-dimensions '(1 . 1)
+  "Number of columns and rows in each virtual workspace: \\w"
   :group workspace
-  :type (number 1)
-  :user-level novice
-  :after-set (lambda () (viewport-size-changed)))
-
-(defcustom viewport-rows 1
-  "The number of rows in each virtual workspace."
-  :group workspace
-  :type (number 1)
+  :type (pair (number 1) (number 1))
   :user-level novice
   :after-set (lambda () (viewport-size-changed)))
 
 (defcustom uniconify-to-current-viewport t
-  "Windows are uniconified to the current viewport."
+  "Windows uniconify to the current viewport."
   :type boolean
   :group (min-max iconify))
 
@@ -79,8 +72,8 @@
 
 ;; returns t if it actually moved the viewport
 (defun set-screen-viewport (col row)
-  (when (and (>= col 0) (< col viewport-columns)
-	     (>= row 0) (< row viewport-rows))
+  (when (and (>= col 0) (< col (car viewport-dimensions))
+	     (>= row 0) (< row (cdr viewport-dimensions)))
     (set-viewport (* col (screen-width))
 		  (* row (screen-height)))
     t))
@@ -106,9 +99,11 @@
       ((pos (window-position window))
        (dims (window-frame-dimensions window))
        (left (- viewport-x-offset))
-       (right (- (* viewport-columns (screen-width)) viewport-x-offset))
+       (right (- (* (car viewport-dimensions) (screen-width))
+		 viewport-x-offset))
        (top (- viewport-y-offset))
-       (bottom (- (* viewport-rows (screen-height)) viewport-y-offset)))
+       (bottom (- (* (cdr viewport-dimensions) (screen-height))
+		  viewport-y-offset)))
     (or (>= (car pos) right) (>= (cdr pos) bottom)
 	(<= (+ (car pos) (car dims)) left) (<= (+ (cdr pos) (cdr dims)) top))))
 
@@ -131,8 +126,8 @@
 (defun set-window-viewport (window col row)
   (let
       ((pos (window-position window)))
-    (setq col (max 0 (min (1- viewport-columns) col)))
-    (setq row (max 0 (min (1- viewport-rows) row)))
+    (setq col (max 0 (min (1- (car viewport-dimensions)) col)))
+    (setq row (max 0 (min (1- (cdr viewport-dimensions)) row)))
     (setq col (+ (* col (screen-width)) (mod (car pos) (screen-width))))
     (setq row (+ (* row (screen-height)) (mod (cdr pos) (screen-height))))
     (move-window-to
@@ -164,8 +159,8 @@
 (defun viewport-size-changed ()
   (let
       ((port (screen-viewport)))
-    (set-screen-viewport (min (car port) (1- viewport-columns))
-			 (min (cdr port) (1- viewport-rows)))
+    (set-screen-viewport (min (car port) (1- (car viewport-dimensions)))
+			 (min (cdr port) (1- (cdr viewport-dimensions))))
     (mapc (lambda (w)
 	    (when (window-outside-workspace-p w)
 	      (move-window-to-current-viewport w)))

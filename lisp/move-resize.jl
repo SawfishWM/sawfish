@@ -29,43 +29,42 @@
 ;;;###autoload (custom-add-required 'move-resize)
 
 (defcustom move-outline-mode 'opaque
-  "The method of drawing windows being moved interactively."
+  "How windows being moved are animated: \\w"
   :type symbol
   :options (opaque box)
   :user-level novice
   :group move)
 
 (defcustom resize-outline-mode 'opaque
-  "The method of drawing windows being resized interactively."
+  "How windows being resized are animated: \\w"
   :type symbol
   :options (opaque box)
   :user-level novice
   :group move)
 
 (defcustom move-resize-raise-window nil
-  "Raise windows being moved or resized interactively."
+  "Raise windows when they are moved or resized."
   :group move
   :type boolean)
 
 (defcustom move-show-position nil
-  "Show the current position while moving windows interactively."
+  "Show current position of windows while moving."
   :group move
   :type boolean)
 
 (defcustom resize-show-dimensions t
-  "Show the current dimensions while resizing windows interactively."
+  "Show current dimensions of windows while resizing."
   :group move
   :type boolean)
 
 (defcustom resize-edge-mode 'border
-  "The method of choosing which window edges are moved while resizing with
-the mouse."
+  "How to choose window edges when resizing: \\w"
   :type (choice region border grab border-grab)
   :user-level expert
   :group move)
 
 (defcustom move-snap-edges t
-  "Snap window position to edges of other windows when interactively moving."
+  "Snap window position to edges of other windows while moving."
   :group move
   :type boolean)
 
@@ -77,7 +76,7 @@ the mouse."
   :user-level expert)
 
 (defcustom move-snap-mode 'resistance
-  "Method of deciding when to snap together two window edges."
+  "How to snap together window edges: \\w"
   :group move
   :depends move-snap-edges
   :type (choice magnetism resistance attraction)
@@ -91,12 +90,12 @@ the mouse."
   :type boolean)
 
 (defcustom move-lock-when-maximized t
-  "Lock window geometry while the window is maximized."
+  "Lock position and size while windows are maximized."
   :type boolean
   :group (min-max maximize))
 
 (defcustom move-resize-inhibit-configure nil
-  "Only update window contents after it has been moved to its final position."
+  "Only update window contents after it has stopped moving."
   :type boolean
   :group move
   :user-level expert)

@@ -28,15 +28,15 @@
   :group focus)
 
 (defcustom warp-to-window-x-offset -1
-  "Offset in percent from left window edge, when warping.
-A negative number means warp to outside the left window edge."
+  "Offset (%) from left window edge when warping pointer.
+A negative number means outside the left window edge."
   :type (number -65536 65535)
   :user-level expert
   :group focus)
  
 (defcustom warp-to-window-y-offset -1
-  "Offset in percent from top window edge, when warping.
-A negative number means warp to outside the top window edge."
+  "Offset (%) from top window edge when warping pointer.
+A negative number means outside the top window edge."
   :type (number -65536 65535)
   :user-level expert
   :group focus)
@@ -48,20 +48,20 @@ A negative number means warp to outside the top window edge."
   "When non-nil, any unspecified windows are avoided by default.")
 
 (defcustom xterm-program "xterm"
-  "The name of the program launched by the `xterm' command."
+  "The program launched by the `xterm' command."
   :type string
   :user-level expert
   :group misc)
-(defvar xterm-args nil
-  "Either a string defining the list of arguments given to the `xterm' command,
-or the symbol `nil'."
+
+(defcustom xterm-args nil
+  "Optional arguments given to the `xterm' command."
   :type (optional string)
   :user-level expert
   :group misc)
 
 (defcustom uniquify-name-format "%s [%d]"
-  "Format string used to give windows unique names. Has two arguments (NAME
-INDEX) applied to it."
+  "Format to create unique window names. Has two arguments (NAME INDEX)
+applied to it."
   :type string
   :user-level expert
   :group misc)

@@ -89,7 +89,7 @@
   (let*
       ((limits (workspace-limits))
        (port (screen-viewport))
-       (port-size (cons viewport-columns viewport-rows))
+       (port-size viewport-dimensions)
        (total-workspaces (1+ (- (cdr limits) (car limits)))))
 
     (define (set-ws-hints)

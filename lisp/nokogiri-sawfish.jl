@@ -25,13 +25,13 @@
 ;; meta customizations
 
 (defcustom nokogiri-user-level 'intermediate
-  "User's level of expertise is \\w"
+  "Show options suitable for \\w users."
   :type (choice novice intermediate expert)
   :user-level novice
   :group ())
 
 (defcustom nokogiri-buttons 'ok
-  "Buttons shown in configurator."
+  "Buttons shown in configurator: \\w"
   :type (choice ok revert/cancel/ok apply/revert/cancel/ok)
   :user-level expert
   :group ())

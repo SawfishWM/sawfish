@@ -29,14 +29,14 @@
 ;; XXX it would be cool to merge the customization with the GNOME sound prefs
 
 (defcustom audio-events-enabled nil
-  "Enable audio effects for window manager events."
+  "Play sound effects for window events."
   :type boolean
   :user-level novice
   :require audio-events
   :group audio)
 
 (defcustom audio-for-ignored-windows nil
-  "Play audio effects for windows that are usually ignored."
+  "Play sound effects for unmanaged windows."
   :type boolean
   :depends audio-events-enabled
   :group audio)
@@ -59,7 +59,7 @@
 				;(focused . "clicked.wav")
 				(switch-workspace . "toggled.wav")
 				(move-viewport . "toggled.wav"))
-  "Alist mapping sound events to sample names."
+  "Map window events to sound files."
   :type (alist ((symbol iconified uniconified
 			shaded unshaded
 			maximized unmaximized

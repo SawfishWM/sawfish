@@ -29,7 +29,7 @@
 ;; If iconified, a window has its `iconified' property set to t
 
 (defcustom iconify-ignored nil
-  "Allow ignored windows to be iconified."
+  "Unmanaged windows may be iconified."
   :type boolean
   :user-level expert
   :group (min-max iconify))
