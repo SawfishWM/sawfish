@@ -52,7 +52,7 @@
 (define window-history-dirty nil)
 
 ;; list of states in window-state-change-hook that should be tracked
-(define window-history-states '(iconified sticky ignored never-focus
+(define window-history-states '(sticky ignored never-focus
 				shaded type frame-style))
 
 ;; property matched on
