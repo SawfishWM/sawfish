@@ -90,6 +90,16 @@ mapped_not_override_p (Window id)
     return ((wa.map_state != IsUnmapped) && (wa.override_redirect != True));
 }
 
+/* Returns true if the window's Input hint is set (or defaults to being set) */
+static bool
+window_input_hint_p (Lisp_Window *w)
+{
+    if (w->wmhints != 0 && (w->wmhints->flags & InputHint))
+	return w->wmhints->input;
+    else
+	return TRUE;
+}
+
 /* Give the input focus to window W, or to no window if W is null */
 void
 focus_on_window (Lisp_Window *w)
@@ -99,14 +109,14 @@ focus_on_window (Lisp_Window *w)
 	Window focus;
 	DB(("focus_on_window (%s)\n", rep_STR(w->name)));
 	if (!w->client_unmapped)
-	{
+	{                              
 	    if (w->does_wm_take_focus)
 	    {
 		DB(("  sending WM_TAKE_FOCUS message\n"));
 		send_client_message (w->id, xa_wm_take_focus, last_event_time);
 
 		/* Only focus on the window if accepts-input is true */
-		if (w->wmhints == 0 || w->wmhints->input)
+		if (window_input_hint_p (w))
 		    focus = w->id;
 		else
 		    focus = 0;
@@ -810,11 +820,8 @@ that it would like to be given the input focus when applicable.
     rep_DECLARE1(win, WINDOWP);
     if (VWIN(win)->does_wm_take_focus)
 	return Qt;
-    else if (VWIN(win)->wmhints)
-	return VWIN(win)->wmhints->input ? Qt : Qnil;
     else
-	/* Default to assuming that window's want input */
-	return Qt;
+	return window_input_hint_p (VWIN (win)) ? Qt : Qnil;
 }
 
 DEFUN("managed-windows", Fmanaged_windows, Smanaged_windows,

@@ -1,3 +1,11 @@
+2000-10-28  John Harper  <jsh@eazel.com>
+
+	* windows.c (window_input_hint_p): new function
+	(focus_on_window, Fwindow_wants_input_p): use
+	window_input_hint_p. Fixes the bug where window-wants-input-p
+	wasn't checking if the InputHint flag was set before reading
+	the value
+
 2000-10-24  John Harper  <jsh@eazel.com>
 
 	* events.c: reverted last change (it breaks some focus stuff),
