@@ -73,7 +73,7 @@
 		  ((string-looking-at "Type=(.*)\n" line 0 t)
 		   (setq type (expand-last-match "\\1")))))
 	(close-file file))
-      (cond ((string-match "Directory" type 0 t)
+      (cond ((and type (string-match "Directory" type 0 t))
 	     `(,name ,@(gnome-menu-read-directory
 			(file-name-directory filename))))
 	    (exec
