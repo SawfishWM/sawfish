@@ -21,7 +21,7 @@
 
 (provide 'place-window)
 
-(defcustom place-window-mode 'random
+(defcustom place-window-mode 'best-fit
   "Method of selecting the position of a freshly-mapped window."
   :type (set random interactive first-fit best-fit none)
   :group placement)
