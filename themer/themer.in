@@ -79,11 +79,16 @@ exec rep "$0" "$@"
     (text (or (symbol window-name window-icon-name) string))
     (x-justify (or (symbol left right center) number))
     (y-justify (or (symbol top bottom center) number))
+    (cursor symbol)
     (removable boolean)
     (below-client boolean)))
 
 ;; item spec for pattern editing
 (defvar pattern-type '(or color image))
+
+;; the order of this is hardcoded into the .glade file..
+(defvar pattern-attrs `(inactive focused highlighted
+			inactive-highlighted clicked inactive-clicked))
 
 ;; frame part classes that may contain patterns
 (defvar pattern-classes '(background foreground))
@@ -125,11 +130,8 @@ exec rep "$0" "$@"
 
 ;; patterns data
 
-(defvar patterns-normal-item nil)
-(defvar patterns-focused-item nil)
-(defvar patterns-highlighted-item nil)
-(defvar patterns-clicked-item nil)
-
+;; list of (STATE . ITEM)
+(defvar patterns-item-alist nil)
 (defvar patterns-selection nil)
 
 ;; (NAME NORMAL-NAME FOCUSED-NAME HIGH-NAME CLICKED-NAME)
@@ -784,9 +786,10 @@ exec rep "$0" "$@"
 	(close-file file)))))
 
 
-;; images
+;; patterns
 
 (defun patterns-format-pattern (pattern)
+  (setq pattern (cdr pattern))
   (cond ((stringp pattern)
 	 ;; color
 	 pattern)
@@ -796,33 +799,41 @@ exec rep "$0" "$@"
 	(t
 	 "")))
 
+(defun patterns-format-list (lst)
+  (apply vector (car lst)
+	 (mapcar (lambda (attr)
+		   (let
+		       ((elt (assq attr (cdr lst))))
+		     (if elt
+			 (patterns-format-pattern elt)
+		       "")))
+		 pattern-attrs)))
+
 (defun patterns-update-all ()
   (clist-delete-all patterns-clist)
   (mapc (lambda (cell)
 	  ;; fix relative filenames in images
-	  (mapseq (lambda (i)
-		    (let
-			((name (car (nth i cell))))
-		      (when (and (stringp name)
-				 (not (file-name-absolute-p name))
-				 current-filename)
-			(rplaca (nth i cell)
-				(expand-file-name
-				 name (file-name-directory
-				       current-filename)))))) 1 5)
-	  (gtk-clist-append patterns-clist
-			    (vector (car cell)
-				    (patterns-format-pattern (nth 1 cell))
-				    (patterns-format-pattern (nth 2 cell))
-				    (patterns-format-pattern (nth 3 cell))
-				    (patterns-format-pattern (nth 4 cell)))))
+	  (mapc (lambda (elt)
+		  ;; ELT is (STATE . VALUE)
+		  (let
+		      ((name (car (cdr elt))))
+		    (when (and (stringp name)
+			       (not (file-name-absolute-p name))
+			       current-filename)
+		      (rplaca (cdr elt)
+			      (expand-file-name
+			       name (file-name-directory
+				     current-filename))))))
+		(cdr cell))
+	  (gtk-clist-append patterns-clist (patterns-format-list cell)))
 	patterns-alist))
 
 (defun on-patterns-add ()
-  (let
-      ((name (make-new-name "pattern" (mapcar car patterns-alist))))
-    (setq patterns-alist (nconc patterns-alist (list (list name nil nil nil nil))))
-    (gtk-clist-append patterns-clist (vector name "" "" "" ""))
+  (let*
+      ((name (make-new-name "pattern" (mapcar car patterns-alist)))
+       (elt (list name)))
+    (setq patterns-alist (nconc patterns-alist (list elt)))
+    (gtk-clist-append patterns-clist (patterns-format-list elt))
     (gtk-clist-select-row patterns-clist (1- (length patterns-alist)) 0)
     (call-hook 'patterns-changed-hook)
     (message (format nil (_ "Added pattern `%s'") name))))
@@ -844,20 +855,18 @@ exec rep "$0" "$@"
 	((cell (nth row patterns-alist)))
       (when cell
 	(gtk-entry-set-text patterns-name-entry (car cell))
-	((patterns-normal-item 'set) (nth 1 cell))
-	((patterns-focused-item 'set) (nth 2 cell))
-	((patterns-highlighted-item 'set) (nth 3 cell))
-	((patterns-clicked-item 'set) (nth 4 cell))
+	(mapc (lambda (attr)
+		(((cdr attr) 'set) (cdr (assq (car attr) (cdr cell)))))
+	      patterns-item-alist)
 	(set-widget-enabled patterns-table t)))
     (setq patterns-selection row)))
 
 (defun on-patterns-clist-unselect-row ()
   (setq patterns-selection nil)
   (gtk-entry-set-text patterns-name-entry "")
-  ((patterns-normal-item 'clear))
-  ((patterns-focused-item 'clear))
-  ((patterns-highlighted-item 'clear))
-  ((patterns-clicked-item 'clear))
+  (mapc (lambda (attr)
+	  (((cdr attr) 'clear)))
+	patterns-item-alist)
   (set-widget-enabled patterns-table nil))
 
 (defun on-patterns-entry-changed ()
@@ -869,37 +878,37 @@ exec rep "$0" "$@"
     (let
 	((cell (nth patterns-selection patterns-alist))
 	 (name (gtk-entry-get-text patterns-name-entry))
-	 (normal ((patterns-normal-item 'get)))
-	 (focused ((patterns-focused-item 'get)))
-	 (highlighted ((patterns-highlighted-item 'get)))
-	 (clicked ((patterns-clicked-item 'get))))
+	 (values (mapcar (lambda (attr)
+			   (cons (car attr) (((cdr attr) 'get))))
+			 patterns-item-alist)))
       (gtk-clist-set-text patterns-clist patterns-selection 0 name)
-      (gtk-clist-set-text
-       patterns-clist patterns-selection 1 (patterns-format-pattern normal))
-      (gtk-clist-set-text
-       patterns-clist patterns-selection 2 (patterns-format-pattern focused))
-      (gtk-clist-set-text
-       patterns-clist patterns-selection 3 (patterns-format-pattern highlighted))
-      (gtk-clist-set-text
-       patterns-clist patterns-selection 4 (patterns-format-pattern clicked))
+      (mapseq (lambda (i)
+		(gtk-clist-set-text
+		 patterns-clist patterns-selection (1+ i)
+		 (patterns-format-pattern (nth i values))))
+	      0 (length values))
       (when (string= name "")
 	(setq name nil))
-      (rplaca cell name)
-      (rplacd cell (list normal focused highlighted clicked)))))
+      (let
+	  (attrs)
+	(mapc (lambda (attr)
+		(when (cdr attr)
+		  (setq attrs (cons attr attrs)))) values)
+	(setq attrs (nreverse attrs))
+	(rplaca cell name)
+	(rplacd cell attrs)))))
 
 (defun create-patterns-items ()
-  (setq patterns-normal-item (make-item pattern-type patterns-update-alist))
-  (setq patterns-focused-item (make-item pattern-type patterns-update-alist))
-  (setq patterns-highlighted-item (make-item pattern-type patterns-update-alist))
-  (setq patterns-clicked-item (make-item pattern-type patterns-update-alist))
-  (gtk-table-attach-defaults
-   patterns-table (patterns-normal-item 'widget) 1 2 1 2)
-  (gtk-table-attach-defaults
-   patterns-table (patterns-focused-item 'widget) 1 2 2 3)
-  (gtk-table-attach-defaults
-   patterns-table (patterns-highlighted-item 'widget) 1 2 3 4)
-  (gtk-table-attach-defaults
-   patterns-table (patterns-clicked-item 'widget) 1 2 4 5)
+  (setq patterns-item-alist
+	(mapcar (lambda (attr)
+		  (cons attr (make-item pattern-type patterns-update-alist)))
+		pattern-attrs))
+  (mapseq (lambda (i)
+	    (gtk-table-attach-defaults
+	     patterns-table
+	     ((cdr (nth i patterns-item-alist)) 'widget)
+	     1 2 (1+ i) (+ i 2)))
+	  0 (length patterns-item-alist))
   (gtk-widget-show-all patterns-table)
   patterns-table)
 
@@ -1290,8 +1299,11 @@ exec rep "$0" "$@"
    (lambda (pat)
      (cons (car pat)
 	   (mapcar
-	    (lambda (elt)
-	      (if (consp elt)
+	    (lambda (cell)
+	      ;; CELL is (STATE . VALUE)
+	      (let
+		  ((elt (cdr cell)))
+		(when (consp elt)
 		  (let*
 		      ((from (car elt))
 		       (to (expand-file-name
@@ -1306,8 +1318,9 @@ exec rep "$0" "$@"
 		      (copy-file from to)
 		      (message
 		       (format nil "%s -> %s/%s" from to)))
-		    (cons (file-name-nondirectory to) (cdr elt)))
-		elt))
+		    (setq elt (cons (file-name-nondirectory to) (cdr elt)))
+		    (setq cell (cons (car cell) elt))))
+		cell))
 	    (cdr pat))))
    patterns))
 
