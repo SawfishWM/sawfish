@@ -211,11 +211,7 @@ sys_init(char *program_name)
 	    XShapeQueryExtension (dpy, &shape_event_base, &shape_error_base);
 
 	    XSetErrorHandler (error_other_wm);
-	    XSelectInput (dpy, root_window,
-			  SubstructureRedirectMask | SubstructureNotifyMask
-			  | ButtonPressMask | ButtonReleaseMask | KeyPressMask
-			  | ButtonMotionMask | PointerMotionHintMask
-			  | EnterWindowMask | LeaveWindowMask);
+	    XSelectInput (dpy, root_window, ROOT_EVENTS);
 	    XSync (dpy, False);
 	    XSetErrorHandler (error_handler);
 
