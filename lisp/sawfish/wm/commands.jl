@@ -26,6 +26,7 @@
     (export define-command
 	    define-command-args
 	    autoload-command
+	    command-ref
 	    apply-command
 	    call-command
 	    prefix-numeric-argument
@@ -92,7 +93,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
       (define-command-args name type)))
 
   ;; return the function associated with command NAME, or nil
-  (define (command-fun name)
+  (define (command-ref name)
     (or (real-getter name)
 	(condition-case nil
 	    (user-eval name)
@@ -101,21 +102,21 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
   ;; return the spec associated with command NAME, or nil
   (define (command-spec name)
     (or (get name 'command-spec)
-	(function-spec (command-fun name))))
+	(function-spec (command-ref name))))
 
   (define (commandp arg)
     "Return t if ARG names a command."
     (and (symbolp arg)
 	 ;; check this first to avoid loading autoloads
 	 (or (get arg 'command-fun)
-	     (let ((fun (command-fun arg)))
+	     (let ((fun (command-ref arg)))
 	       (and fun (function-spec fun))))))
 
 ;;; calling commands
 
   (define (apply-command name args)
     "Apply the list of values ARGS to the command NAME."
-    (let ((fun (command-fun name)))
+    (let ((fun (command-ref name)))
       (or (functionp fun)
 	  (error "Command has no function: %s" name))
       (apply fun args)))
@@ -133,7 +134,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
     ;; call
     (cond ((commandp name)
 	   ;; a named command
-	   (command-fun name)			;so spec is loaded
+	   (command-ref name)			;so spec is loaded
 	   (let ((spec (command-spec name))
 		 args)
 	     (when spec
