@@ -83,6 +83,7 @@
 	  sawfish.wm.events
 	  sawfish.wm.util.decode-events
 	  sawfish.wm.util.groups
+	  sawfish.wm.util.rects
 	  sawfish.wm.util.display-window)
 
   (define-structure-alias x-cycle sawfish.wm.commands.x-cycle)
@@ -179,7 +180,8 @@
     (let ((win (fluid x-cycle-current)))
       (display-message (concat (and (window-get win 'iconified) ?[)
 				    (window-name win)
-				    (and (window-get win 'iconified) ?])))))
+				    (and (window-get win 'iconified) ?]))
+		       (list (cons 'head (current-head win))))))
 
   (define (cycle-next windows count)
     (fluid-set x-cycle-windows windows)
