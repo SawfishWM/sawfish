@@ -25,7 +25,7 @@
   "List of all possible window animation types.")
 
 (defcustom default-window-animator 'none
-  "The default window animation mode."
+  "The default window animation mode: \\w"
   :type symbol
   :group appearance)
 

@@ -60,30 +60,35 @@
   "Action when passing the first or last workspace when moving."
   :type symbol
   :options (stop wrap-around keep-going)
-  :group (workspace advanced))
+  :user-level expert
+  :group workspace)
 
 (defcustom workspace-send-boundary-mode 'keep-going
   "Action when passing the first or last workspace when moving windows."
   :type symbol
   :options (stop wrap-around keep-going)
-  :group (workspace advanced))
+  :user-level expert
+  :group workspace)
 
 (defcustom delete-workspaces-when-empty nil
   "Workspaces are merged with the next when their last window is closed."
   :type boolean
-  :group (workspace advanced))
+  :user-level expert
+  :group workspace)
 
 (defcustom preallocated-workspaces 1
   "The minimum number of workspaces that may exist."
   :type number
   :range (1 . nil)
+  :user-level novice
   :group workspace
   :after-set (lambda () (call-hook 'workspace-state-change-hook)))
 
 (defcustom lock-first-workspace t
   "Empty workspaces before or after the active workspace aren't hidden."
   :type boolean
-  :group (workspace advanced)
+  :group workspace
+  :user-level expert
   :after-set (lambda () (call-hook 'workspace-state-change-hook)))
 
 (defcustom uniconify-to-current-workspace t
@@ -136,9 +141,10 @@
   :type boolean
   :group (min-max iconify))
 
-;; XXX should be a defcustom, need a string-list type
-(defvar workspace-names nil
-  "List of workspace names.")
+(defcustom workspace-names nil
+  "List of workspace names."
+  :type (list string "Name")
+  :group workspace)
 
 ;; Currently active workspace, an integer
 (defvar current-workspace 0)

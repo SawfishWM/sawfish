@@ -287,8 +287,6 @@
 			     (list `(,(_ "_History") . window-history-menu))))
 
 (if (featurep 'match-window)
-    (setq match-window-properties (nconc match-window-properties
-					 (list '(no-history boolean))))
+    (define-match-window-property 'no-history 'other 'boolean)
   (eval-after-load "match-window"
-    '(setq match-window-properties (nconc match-window-properties
-					  (list '(no-history boolean))))))
+    '(define-match-window-property 'no-history 'other 'boolean)))

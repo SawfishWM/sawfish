@@ -96,21 +96,25 @@
 (defcustom cycle-raise-windows t
   "Raise windows while they're temporarily selected during cycling."
   :group (focus cycle)
+  :user-level expert
   :type boolean)
 
 (defcustom cycle-warp-pointer t
   "Warp the mouse pointer to windows as they're temporarily selected."
   :group (focus cycle)
+  :user-level expert
   :type boolean)
 
 (defcustom cycle-focus-windows t
   "Focus windows when they're temporarily selected during cycling."
   :group (focus cycle)
+  :user-level expert
   :type boolean)
 
 (defcustom cycle-disable-auto-raise nil
   "Disable auto-raising while temporarily selecting windows."
   :group (focus cycle)
+  :user-level expert
   :type boolean)
 
 

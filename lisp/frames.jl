@@ -47,14 +47,8 @@
       (set-frame-style value)
     (apply custom-set-variable symbol value args)))
 
-(defun custom-make-frame-style-widget (symbol value doc)
-  (let
-      ((styles (find-all-frame-styles t)))
-    `(frame-style ,styles
-		  :variable ,symbol
-		  :value ,value
-		  :doc ,doc
-		  :theme-path ,theme-load-path)))
+(defun custom-make-frame-style-widget (symbol)
+  `(frame-style ,(find-all-frame-styles t) ,theme-load-path))
 
 (defun after-setting-frame-option ()
   (when always-update-frames
@@ -62,8 +56,7 @@
 
 (put 'frame-style 'custom-set custom-set-frame-style)
 (put 'frame-style 'custom-widget custom-make-frame-style-widget)
-(setq custom-set-alist (cons (cons custom-set-frame-style
-				   'custom-set-frame-style) custom-set-alist))
+(define-custom-setter 'custom-set-frame-style custom-set-frame-style)
 
 
 ;; variables etc
@@ -114,6 +107,7 @@ frame of the requested type. If no entry, then the `unframed' style is used.")
 (defcustom default-frame-style nil
   "Default frame style (theme)."
   :type frame-style
+  :user-level novice
   :group appearance)
 
 (defcustom always-update-frames t
@@ -130,13 +124,17 @@ frame of the requested type. If no entry, then the `unframed' style is used.")
 (defcustom reload-themes-when-changed t
   "Automatically reload themes when they are updated."
   :type boolean
+  :user-level expert
   :group misc)
 
 (defvar theme-update-interval 60
   "Number of seconds between checking if theme files have been modified.")
 
-(defvar user-theme-directory "~/.sawfish/themes"
-  "Directory containing user-local themes.")
+(defcustom user-theme-directory "~/.sawfish/themes"
+  "Directory containing user-local themes."
+  :type file
+  :user-level expert
+  :group misc)
 
 (defvar system-theme-directory (expand-file-name
 				"../themes" sawfish-lisp-lib-directory)

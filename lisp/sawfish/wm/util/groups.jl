@@ -43,10 +43,14 @@
 (defcustom transients-are-group-members t
   "Group transient windows with their parents."
   :type boolean
+  :user-level expert
   :group misc)
 
-(defvar persistent-group-ids nil
-  "List of group ids that always exist, even when they have no members.")
+(defcustom persistent-group-ids nil
+  "List of group ids that always exist, even when they have no members."
+  :type (list string)
+  :user-level expert
+  :group misc)
 
 (defun window-actual-group-id (w)
   "Return the id of the group that window W is a member of."

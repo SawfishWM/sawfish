@@ -24,50 +24,65 @@
 
 (defvar tooltips-timer nil)
 
+;;;###autoload (defgroup tooltips "Tooltips" :group misc :require tooltips)
+
 (defgroup tooltips "Tooltips"
-  :group misc)
+  :group misc
+  :require tooltips)
 
 (defcustom tooltips-enabled nil
   "Display tooltips for window frames."
   :type boolean
   :group (misc tooltips)
+  :user-level novice
   :require tooltips)
 
 (defcustom tooltips-timeout-enabled nil
   "Remove tooltips after a period of time."
   :type boolean
+  :depends tooltips-enabled
   :group (misc tooltips))
 
 (defcustom tooltips-show-doc-strings t
   "Show full documentation in tooltips."
   :type boolean
+  :depends tooltips-enabled
   :group (misc tooltips))
 
 (defcustom tooltips-delay 500
   "Number of milliseconds before displaying tooltips."
   :type number
   :range (0 . nil)
+  :depends tooltips-enabled
   :group (misc tooltips))
 
 (defcustom tooltips-timeout-delay 5000
   "Number of milliseconds before removing tooltips."
   :type number
+  :user-level expert
   :range (0 . nil)
+  :depends tooltips-enabled
   :group (misc tooltips))
 
 (defcustom tooltips-font "-*-lucidatypewriter-medium-*-*-*-10-*-*-*-*-*-*-*"
- "Font used to display tooltips."
- :type font
- :group (misc tooltips))
+  "Font used to display tooltips."
+  :type font
+  :user-level expert
+  :depends tooltips-enabled
+  :group (misc tooltips))
 
 (defcustom tooltips-background-color "grey85"
   "Color used for the tooltips background"
   :group (misc tooltips)
+  :user-level expert
+  :depends tooltips-enabled
   :type color)
 
 (defcustom tooltips-foreground-color "black"
   "Color used for the tooltips foreground"
   :group (misc tooltips)
+  :user-level expert
+  :depends tooltips-enabled
   :type color)
 
 ;; the window it's displayed for

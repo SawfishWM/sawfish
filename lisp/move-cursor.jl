@@ -24,8 +24,7 @@
 (defcustom move-cursor-increment 16
   "Number of pixels to move pointer in `move-cursor-' commands."
   :group misc
-  :type number
-  :range (1 . nil))
+  :type (number 1))
 
 (defun move-cursor (right down)
   (let

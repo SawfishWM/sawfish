@@ -32,12 +32,14 @@
   "The method of drawing windows being moved interactively."
   :type symbol
   :options (opaque box)
+  :user-level novice
   :group move)
 
 (defcustom resize-outline-mode 'opaque
   "The method of drawing windows being resized interactively."
   :type symbol
   :options (opaque box)
+  :user-level novice
   :group move)
 
 (defcustom move-resize-raise-window nil
@@ -45,7 +47,7 @@
   :group move
   :type boolean)
 
-(defcustom move-show-position t
+(defcustom move-show-position nil
   "Show the current position while moving windows interactively."
   :group move
   :type boolean)
@@ -58,30 +60,34 @@
 (defcustom resize-edge-mode 'border
   "The method of choosing which window edges are moved while resizing with
 the mouse."
-  :type symbol
-  :options (region border grab border-grab)
-  :group (move advanced))
+  :type (choice region border grab border-grab)
+  :user-level expert
+  :group move)
 
-(defcustom move-snap-edges nil
+(defcustom move-snap-edges t
   "Snap window position to edges of other windows when interactively moving."
-  :group (move advanced)
+  :group move
   :type boolean)
 
 (defcustom move-snap-epsilon 8
   "Proximity in pixels before snapping to a window edge."
-  :group (move advanced)
-  :type number
-  :range (0 . 64))
+  :group move
+  :depends move-snap-edges
+  :type (number 0 64)
+  :user-level expert)
 
 (defcustom move-snap-mode 'resistance
   "Method of deciding when to snap together two window edges."
-  :group (move advanced)
-  :type symbol
-  :options (magnetism resistance attraction))
+  :group move
+  :depends move-snap-edges
+  :type (choice magnetism resistance attraction)
+  :user-level expert)
 
 (defcustom move-snap-ignored-windows nil
   "Snap to otherwise-ignored windows."
-  :group (move advanced)
+  :group move
+  :depends move-snap-edges
+  :user-level expert
   :type boolean)
 
 (defcustom move-lock-when-maximized t
@@ -92,7 +98,8 @@ the mouse."
 (defcustom move-resize-inhibit-configure nil
   "Only update window contents after it has been moved to its final position."
   :type boolean
-  :group (move advanced))
+  :group move
+  :user-level expert)
 
 (defvar move-resize-map (bind-keys (make-keymap)
 			  "Any-Off" 'move-resize-finished

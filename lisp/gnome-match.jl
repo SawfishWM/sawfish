@@ -24,21 +24,19 @@
 
 ;; Originally from Ben Liblit <liblit@cs.berkeley.edu>
 
-(put 'skip-tasklist 'match-window-setter
-     (lambda (window property value)
-       ((if value
-	    gnome-set-skip-tasklist
-	  gnome-clear-skip-tasklist)
-	window)))
+(define-match-window-property 'skip-tasklist 'other 'boolean)
+(define-match-window-property 'skip-winlist 'other 'boolean)
 
-(put 'skip-winlist 'match-window-setter
-     (lambda (window property value)
-       ((if value
-	    gnome-set-skip-winlist
-	  gnome-clear-skip-winlist)
-	window)))
+(define-match-window-setter 'skip-tasklist
+ (lambda (window property value)
+   ((if value
+	gnome-set-skip-tasklist
+      gnome-clear-skip-tasklist)
+    window)))
 
-(setq match-window-properties
-      (nconc match-window-properties
-	     '((skip-tasklist boolean)
-	       (skip-winlist boolean))))
+(define-match-window-setter 'skip-winlist
+ (lambda (window property value)
+   ((if value
+	gnome-set-skip-winlist
+      gnome-clear-skip-winlist)
+    window)))

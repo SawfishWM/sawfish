@@ -21,22 +21,24 @@
 
 (provide 'audio-events)
 
-;;;###autoload (custom-add-required 'audio-events)
+;;;###autoload (defgroup audio "Sound" :require audio-events)
 
-;;;###autoload (defgroup audio "Sound")
-(defgroup audio "Sound")
+(defgroup audio "Sound"
+  :require audio-events)
 
 ;; XXX it would be cool to merge the customization with the GNOME sound prefs
 
 (defcustom audio-events-enabled nil
   "Enable audio effects for window manager events."
   :type boolean
+  :user-level novice
   :require audio-events
   :group audio)
 
 (defcustom audio-for-ignored-windows nil
   "Play audio effects for windows that are usually ignored."
   :type boolean
+  :depends audio-events-enabled
   :group audio)
 
 ;; standard events are: iconified, uniconified, shaded, unshaded,
@@ -44,20 +46,31 @@
 ;; unmapped-transient, switch-workspace, move-viewport, focused,
 ;; unfocused
 
-(defvar audio-events-alist '((iconified . "slide.wav")
-			     (uniconified . "slide.wav")
-			     (shaded . "slide.wav")
-			     (unshaded . "slide.wav")
-			     (maximized . "slide.wav")
-			     (unmaximized . "slide.wav")
-			     (mapped . "activate.wav")
-			     (unmapped . "gameover.wav")
-			     (mapped-transient . "activate.wav")
-			     (unmapped-transient . "toggled.wav")
-			     ;(focused . "clicked.wav")
-			     (switch-workspace . "toggled.wav")
-			     (move-viewport . "toggled.wav"))
-  "Alist mapping sound events to sample names.")
+(defcustom audio-events-alist '((iconified . "slide.wav")
+				(uniconified . "slide.wav")
+				(shaded . "slide.wav")
+				(unshaded . "slide.wav")
+				(maximized . "slide.wav")
+				(unmaximized . "slide.wav")
+				(mapped . "activate.wav")
+				(unmapped . "gameover.wav")
+				(mapped-transient . "activate.wav")
+				(unmapped-transient . "toggled.wav")
+				;(focused . "clicked.wav")
+				(switch-workspace . "toggled.wav")
+				(move-viewport . "toggled.wav"))
+  "Alist mapping sound events to sample names."
+  :type (alist ((symbol iconified uniconified
+			shaded unshaded
+			maximized unmaximized
+			mapped unmapped
+			mapped-transient unmapped-transient
+			switch-workspace move-viewport
+			focused unfocused) "Event")
+	       (file "Sample"))
+  :user-level expert
+  :depends audio-events-enabled
+  :group audio)
 
 (defun audio-event-handler (event &optional w)
   "Possibly play a sound sample for EVENT (a symbol) occurring on window W."

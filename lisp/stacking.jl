@@ -28,10 +28,10 @@
 ;; this level, and positive for windows above the normal level
 
 (defcustom transients-above 'none
-  "Keep transient windows stacked above."
+  "Keep transient windows stacked above: \\w"
   :group misc
-  :type symbol
-  :options (all parents none))
+  :type (choice all parents none)
+  :user-level expert)
 
 
 ;; constraint mechanics (predicates actually..)

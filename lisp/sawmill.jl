@@ -19,6 +19,8 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(setq backtrace-on-error '(bad-arg missing-arg void-value invalid-function))
+
 (provide 'sawmill)
 (provide 'sawfish)
 (require 'define)			;for old (broken?) reps
@@ -89,11 +91,6 @@
 (define window-menu beos-window-menu)
 
 (require 'sawmill-gaol)
-
-;; ensure that the things people usually like doing show up in the
-;; customization interface
-(mapc custom-add-required '(edge-flip match-window move-resize
-                            tooltips auto-raise shade-hover))
 
 ;; Load site specific initialisation. Errors here are trapped since
 ;; they're probably not going to leave us in an unusable state

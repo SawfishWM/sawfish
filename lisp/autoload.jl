@@ -20,7 +20,6 @@
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;; ::autoload-start::
-(custom-add-required 'move-resize)
 (autoload 'move-window-interactively "move-resize" t)
 (autoload 'resize-window-interactively "move-resize" t)
 (autoload 'move-selected-window "move-resize" t)
@@ -31,6 +30,7 @@
 (autoload 'popup-root-menu "menus" t)
 (autoload 'popup-apps-menu "menus" t)
 (autoload 'customize "customize" t)
+(autoload 'customize-set "customize")
 (autoload 'load-session "sm-load")
 (autoload 'save-session "sm-save")
 (autoload 'map-keymap "keymap")
@@ -185,8 +185,6 @@
 (autoload 'solid-animator "anim-outline")
 (define-window-animator 'wireframe wireframe-animator)
 (define-window-animator 'solid solid-animator)
-(custom-add-required 'audio-events)
-(defgroup audio "Sound")
 (autoload 'play-sample "play-audio")
 (autoload 'describe-symbol "describe" t)
 (autoload 'apropos-function "describe" t)
@@ -207,4 +205,9 @@
 (autoload 'place-window-stagger "stagger-placement")
 (define-placement-mode 'stagger place-window-stagger)
 (autoload 'raise-group-and-pass-through-click "raise-commands" t)
+(defgroup audio "Sound" :require audio-events)
+(defgroup edge-flip "Edge Flipping" :group workspace :require edge-flip)
+(defgroup match-window "Matched Windows" :layout single :require match-window)
+(defgroup tooltips "Tooltips" :group misc :require tooltips)
+(defgroup shade-hover "Shade Hover" :group focus :require shade-hover)
 ;;; ::autoload-end::

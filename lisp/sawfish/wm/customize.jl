@@ -31,6 +31,7 @@
 (defcustom customize-show-symbols nil
   "Show variable names of each customization option."
   :group misc
+  :user-level expert
   :type boolean)
 
 (defvar customize-user-forms nil)
@@ -44,113 +45,18 @@
   "Font used by default."
   :group appearance
   :type font
+  :user-level novice
   :after-set (lambda () (after-setting-frame-option)))
 
 (defcustom default-bevel-percent nil
   "Intensity of bevels (percentage)."
-  :group (appearance advanced)
-  :type number
-  :range (0 . 100)
+  :group appearance
+  :type (number 0 100)
+  :user-level expert
   :after-set (lambda () (after-setting-frame-option)))
 
 
 ;; ui
-
-(defun customize-symbol-spec (symbol)
-  (require 'lisp-doc)
-  (let
-      ((type (or (get symbol 'custom-type) 'boolean))
-       (doc (or (documentation symbol) (symbol-name symbol)))
-       (value (funcall (or (get symbol 'custom-get) symbol-value) symbol)))
-    (when (stringp doc)
-      (setq doc (_ doc)))
-    (when customize-show-symbols
-      (setq doc (format nil "%s\n[%s]" doc (symbol-name symbol))))
-    (cond ((eq type 'boolean)
-	   `(toggle ,doc
-		    :variable ,symbol
-		    :value ,value))
-
-	  ((eq type 'number)
-	   (let
-	       ((range (get symbol 'custom-range)))
-	     (when range
-	       (setq range (list ':range range)))
-	     `(hbox (number :variable ,symbol
-			    :value ,(if (numberp value) value 0)
-			    :allow-nil ,(get symbol 'custom-allow-nil)
-			    ,@range)
-		    (label ,doc))))
-
-	  ;; XXX all but the first should have their own widget types
-	  ((memq type '(string program-name))
-	   `(hbox (string :variable ,symbol
-			  :value ,(if (stringp value) value "")
-			  :allow-nil ,(get symbol 'custom-allow-nil))
-		  (label ,doc)))
-
-	  ((memq type '(font color file-name))
-	   `(hbox (,type :variable ,symbol
-			 :value ,value
-			 :allow-nil ,(get symbol 'custom-allow-nil))
-		  (label ,doc)))
-
-	  ((eq type 'symbol)
-	   `(hbox (symbol ,(get symbol 'custom-options)
-		       :variable ,symbol
-		       :value ,value
-		       :widget ,(get symbol 'custom-widget))
-		  (label ,doc)))
-
-	  (t
-	   (let
-	       ((fun (get symbol 'custom-widget)))
-	     (when fun
-	       (funcall fun symbol value doc)))))))
-
-(defun customize-spec (item)
-  (cond ((null item) nil)
-	((symbolp item)
-	 (customize-symbol-spec item))
-	(t
-	 (let
-	     ((items (mapcar customize-symbol-spec (filter atom (cddr item))))
-	      (subtrees (mapcar customize-spec (filter consp (cddr item)))))
-	   (list (_ (cadr item))
-		 (cond
-		  ((get (car item) 'custom-group-widget)
-		   ((get (car item) 'custom-group-widget) (car item) items))
-		  ((eq (car item) 'root)
-		   `(vbox (label ,(format nil (_ "\
-Sawfish %s (rep %s)
-
-Copyright (C) 1999 John Harper <jsh@users.sourceforge.net>
-
-This is free software -- you are welcome to redistribute it and/or \
-modify it under the terms of the GNU General Public License as \
-published by the Free Software Foundation; either version 2, or \
-(at your option) any later version.
-
-Sawfish is distributed in the hope that it will be useful, but \
-WITHOUT ANY WARRANTY; without even the implied warranty of \
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the \
-GNU General Public License for more details.
-
-Visit the Sawfish homepage at http://sawmill.sourceforge.net/")
-				     sawfish-version rep-version))))
-		  (t
-		   (cons 'vbox items)))
-		 subtrees)))))
-
-(defun customize-ui-spec (&optional group)
-  (mapc require custom-required)
-  (let
-      ((groups (if (or (null group) (eq group t))
-		   custom-groups
-		 (custom-find-group group))))
-    (if (filter consp groups)
-	(cons 'tree (customize-spec groups))
-      (cadr (customize-spec groups)))))
 
 ;;;###autoload
 (defun customize (&optional group)
@@ -203,6 +109,7 @@ Visit the Sawfish homepage at http://sawmill.sourceforge.net/")
 	  (close-file file))
 	(setq customize-user-file-dirty nil)))))
 
+;;;###autoload
 (defun customize-set (symbol value)
   (customize-read-user-file)
   (let
@@ -224,3 +131,7 @@ Visit the Sawfish homepage at http://sawmill.sourceforge.net/")
       (setq customize-user-forms (cons form customize-user-forms)))
     (setq customize-user-file-dirty t)
     (eval form)))
+
+(unless batch-mode
+  (add-hook 'idle-hook customize-write-user-file)
+  (add-hook 'before-exit-hook customize-write-user-file))

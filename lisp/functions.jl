@@ -24,21 +24,22 @@
 (defcustom ignore-window-input-hint t
   "Give focus to windows even when they haven't asked for it."
   :type boolean
-  :group (focus advanced))
+  :user-level expert
+  :group focus)
 
 (defcustom warp-to-window-x-offset -1
   "Offset in percent from left window edge, when warping.
 A negative number means warp to outside the left window edge."
-  :type number
-  :range (-65536 . 65535)
-  :group (focus advanced))
+  :type (number -65536 65535)
+  :user-level expert
+  :group focus)
  
 (defcustom warp-to-window-y-offset -1
   "Offset in percent from top window edge, when warping.
 A negative number means warp to outside the top window edge."
-  :type number
-  :range (-65536 . 65535)
-  :group (focus advanced))
+  :type (number -65536 65535)
+  :user-level expert
+  :group focus)
  
 (defvar dont-avoid-ignored t
   "When non-nil, ignored windows aren't avoided by default.")
@@ -46,15 +47,24 @@ A negative number means warp to outside the top window edge."
 (defvar avoid-by-default nil
   "When non-nil, any unspecified windows are avoided by default.")
 
-(defvar xterm-program "xterm"
-  "The name of the program launched by the `xterm' command.")
+(defcustom xterm-program "xterm"
+  "The name of the program launched by the `xterm' command."
+  :type string
+  :user-level expert
+  :group misc)
 (defvar xterm-args nil
   "Either a string defining the list of arguments given to the `xterm' command,
-or the symbol `nil'.")
+or the symbol `nil'."
+  :type (optional string)
+  :user-level expert
+  :group misc)
 
-(defvar uniquify-name-format "%s [%d]"
+(defcustom uniquify-name-format "%s [%d]"
   "Format string used to give windows unique names. Has two arguments (NAME
-INDEX) applied to it.")
+INDEX) applied to it."
+  :type string
+  :user-level expert
+  :group misc)
 
 (defun get-window-by-name (name &optional lst)
   "Find a window object whose window-name is NAME. If LST is non-nil, then it

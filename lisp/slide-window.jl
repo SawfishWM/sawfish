@@ -24,8 +24,8 @@
 (defcustom slide-window-increment 16
   "Number of pixels to move window in `slide-' commands."
   :group misc
-  :type number
-  :range (1 . nil))
+  :type (number 1)
+  :user-level expert)
 
 (defun slide-window (w right down)
   (let

@@ -28,6 +28,7 @@
 (defcustom focus-mode 'enter-exit
   "When does the mouse pointer affect the input focus."
   :type symbol
+  :user-level novice
   :group focus
   :before-set (lambda () (focus-mode-changed 'before))
   :after-set (lambda () (focus-mode-changed 'after)))
@@ -35,7 +36,8 @@
 (defcustom focus-click-through t
   "Does click-to-focus mode pass the click through to the window."
   :type boolean
-  :group (focus advanced))
+  :user-level expert
+  :group focus)
 
 (defvar focus-dont-push nil
   "When t, focusing a window doesn't change it's position in the stack of most-

@@ -24,7 +24,8 @@
 (defcustom configure-auto-gravity t
   "Automatically select window gravity from position on screen."
   :type boolean
-  :group (move advanced))
+  :user-level expert
+  :group move)
 
 ;; Returns true if window window1 and window2 intersect, false otherwise.
 (defun windows-intersect-p (window1 window2)

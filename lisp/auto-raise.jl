@@ -25,12 +25,14 @@
 (defcustom raise-windows-on-focus nil
   "Raise windows when they are focused."
   :type boolean
+  :user-level novice
   :require auto-raise
   :group focus)
 
 (defcustom raise-window-timeout 500
   "Delay in milliseconds until focused windows are raised."
   :type number
+  :depends raise-windows-on-focus
   :group focus)
 
 ;XXX this thing is hosed

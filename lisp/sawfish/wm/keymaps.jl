@@ -21,7 +21,8 @@
 
 (provide 'keymaps)
 
-(defgroup bindings "Bindings")
+(defgroup bindings "Bindings"
+  :layout keymaps)
 
 
 ;; Customize support
@@ -60,31 +61,9 @@
   (when (get symbol 'custom-after-set)
     (funcall (get symbol 'custom-after-set) symbol)))
 
-(defun custom-keymap-widget (symbol value doc)
-  `(keymap :variable ,symbol
-	   :value ,value
-	   :doc ,doc))
-
-(defun custom-keymap-group-widget (group spec)
-  (let
-      ((names (mapcar symbol-name
-		      (cddr (assq 'bindings (cddr custom-groups))))))
-    `(keymap-shell ,(mapcar (lambda (item)
-			      (list (car (prog1 names
-					   (setq names (cdr names))))
-				    item)) spec)
-		   :commands ,(sort (apropos "" commandp)
-				    (lambda (x y)
-				      (< (symbol-name x) (symbol-name y))))
-		   :doc-path ,documentation-files)))
-
 (put 'keymap 'custom-set custom-set-keymap)
 (put 'keymap 'custom-get custom-get-keymap)
-(put 'keymap 'custom-widget custom-keymap-widget)
-(setq custom-set-alist (cons (cons custom-set-keymap
-				   'custom-set-keymap) custom-set-alist))
-
-(custom-set-group-property 'bindings ':widget custom-keymap-group-widget)
+(define-custom-setter 'custom-set-keymap custom-set-keymap)
 
 
 ;; Options
@@ -107,6 +86,7 @@
   "Keymap containing bindings active when the pointer is in the root window
 (or when no window is focused)."
   :group bindings
+  :user-level expert
   :type keymap)
 
 (defcustom title-keymap (make-keymap)
@@ -119,30 +99,35 @@ a window. (Only mouse-bindings are evaluated in this map.)"
   "Keymap containing bindings active when the pointer is in the border of
 a window. (Only mouse-bindings are evaluated in this map.)"
   :group bindings
+  :user-level expert
   :type keymap)
 
 (defcustom close-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the close button
 of a window. (Only mouse-bindings are evaluated in this map.)"
   :group bindings
+  :user-level expert
   :type keymap)
 
 (defcustom iconify-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the iconify
 button of a window. (Only mouse-bindings are evaluated in this map.)"
   :group bindings
+  :user-level expert
   :type keymap)
 
 (defcustom maximize-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the maximize
 button of a window. (Only mouse-bindings are evaluated in this map.)"
   :group bindings
+  :user-level expert
   :type keymap)
 
 (defcustom menu-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the menu button
 of a window. (Only mouse-bindings are evaluated in this map.)"
   :group bindings
+  :user-level expert
   :type keymap)
 
 

@@ -22,25 +22,30 @@
 (require 'timers)
 (provide 'shade-hover)
 
+;;;###autoload (defgroup shade-hover "Shade Hover" :group focus :require shade-hover)
+
 (defgroup shade-hover "Shade Hover"
-  :group focus)
+  :group focus
+  :require shade-hover)
 
 (defcustom shade-hover-mode nil
   "Enable shade-hover mode.
 (Temporarily unshade windows while pointer is over them.)"
   :group (focus shade-hover)
   :type boolean
+  :user-level novice
   :require shade-hover)
 
 (defcustom shade-hover-delay 250
   "Delay in milliseconds before unshading windows."
   :group (focus shade-hover)
-  :type number
-  :range (0 . 5000))
+  :depends shade-hover-mode
+  :type (number 0 5000))
 
 (defcustom shade-hover-raise nil
   "Raise windows when they are unshaded."
   :group (focus shade-hover)
+  :depends shade-hover-mode
   :type boolean)
 
 (defvar shade-hover-timer nil)

@@ -19,13 +19,11 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'tables)
 (provide 'custom)
 
 ;; list associating groups with the list of variables in that group
 (define custom-groups (list 'root "Sawfish"))
-
-(define custom-required nil
-  "List of features to load before running customize.")
 
 (defvar custom-user-file "~/.sawfish/custom"
   "File used to store user's configuration settings.")
@@ -34,14 +32,15 @@
   "Lisp library storing default customization settings.")
 
 (define custom-quoted-keys
-  '(:group :require :type :options :allow-nil :range)
+  '(:group :require :type :options :range :depends :user-level :layout)
   "defcustom keys whose values are quoted by the macro expansion.")
 
 (define custom-option-alist '((:group . custom-group)
 			      (:require . custom-require)
 			      (:type . custom-type)
 			      (:options . custom-options)
-			      (:allow-nil . custom-allow-nil)
+			      (:depends . custom-depends)
+			      (:user-level . custom-user-level)
 			      (:set . custom-set)
 			      (:get . custom-get)
 			      (:widget . custom-widget)
@@ -49,7 +48,11 @@
 			      (:before-set . custom-before-set)
 			      (:range . custom-range)))
 
-(define custom-group-option-alist '((:widget . custom-group-widget)))
+(define custom-group-option-alist '((:layout . custom-group-layout)
+				    (:require . custom-group-require)))
+
+;; hash group names (lists of symbols) to alist of options 
+(define custom-group-table (make-table equal-hash equal))
 
 (defvar custom-set-alist nil
   "Alist of (CLOSURE . SYMBOL) mapping custom-set functions to their names.")
@@ -68,8 +71,9 @@ KEYS is a property-list containing any of the following:
 	:require FEATURE
 	:type TYPE
 	:options OPTIONS
+	:depends SYMBOL
+	:user-level LEVEL		novice, intermediate, expert
 	:range (MIN . MAX)		for `number' type
-	:allow-nil t
 	:set FUNCTION
 	:get FUNCTION
 	:before-set FUNCTION
@@ -80,14 +84,14 @@ TYPE may be `boolean', `number', `string', `symbol', `file-name',
 `program-name', `font', `color'.
 
 Note that the values of the `:group', `:require', `:type', `:options',
-`:allow-nil' and `:range' keys are not evaluated. All other key values
-are evaluated.
+`:depends', `:user-level' and `:range' keys are not evaluated. All
+other key values are evaluated.
 
 Each defcustom'd symbol may have several special properties
 
 	custom-set (FUNCTION SYMBOL VALUE)
 	custom-get (FUNCTION SYMBOL)
-	custom-widget (FUNCTION SYMBOL VALUE DOC)
+	custom-widget (FUNCTION SYMBOL)
 
 These functions are used while constructing and responding to the
 customisation dialog. If not set in the symbol itself they may be
@@ -105,7 +109,7 @@ construct the widget definition passed to the ui backend."
 property list KEYS may contain the following key-value items:
 
 	:group PARENT-GROUP
-	:widget WIDGET-FUNCTION
+	:layout LAYOUT-TYPE
 
 Note that the value of the `:group' key is not evaluated."
   `(custom-declare-group ',symbol ,doc ,(custom-quote-keys keys)))
@@ -139,11 +143,16 @@ Note that the value of the `:group' key is not evaluated."
   (let
       (container tem)
     (while keys
-      (if (eq (car keys) ':group)
-	  (setq container (nth 1 keys))
-	(setq tem (cdr (assq (car keys) custom-group-option-alist)))
-	(when tem
-	  (put group tem (cadr keys))))
+      (case (car keys)
+	((:group)
+	 (setq container (nth 1 keys))
+	 (unless (listp container)
+	   (setq container (list container))))
+	((:require)
+	 (custom-group-requires (append container (list group)) (cadr keys)))
+	(t
+	 (custom-set-group-property (append container (list group))
+				    (car keys) (cadr keys))))
       (setq keys (cddr keys)))
     (custom-add-to-group (list group doc) container)
     (unless container
@@ -164,6 +173,9 @@ Note that the value of the `:group' key is not evaluated."
       (setq keys (nthcdr 2 keys)))
     (cons 'list (nreverse out))))
 
+(defun define-custom-setter (name def)
+  (setq custom-set-alist (cons (cons def name) custom-set-alist)))
+
 (defmacro custom-set-property (sym prop value)
   "Set the custom key PROP for defcustom'd symbol SYM to value."
   (let ((tem (gensym)))
@@ -172,13 +184,30 @@ Note that the value of the `:group' key is not evaluated."
        (when ,tem
 	 (put ,sym ,tem ,value)))))
 
-(defmacro custom-set-group-property (group prop value)
+(defun custom-set-group-property (group prop value)
   "Set the custom key PROP for defgroup'd symbol SYM to value."
-  (let ((tem (gensym)))
-    `(let
-	 ((,tem (cdr (assq ,prop custom-group-option-alist))))
-       (when ,tem
-	 (put ,group ,tem ,value)))))
+  (unless (listp group)
+    (setq group (list group)))
+  (let* ((alist (table-ref custom-group-table group))
+	 (cell (and alist (assq prop alist))))
+    (if cell
+	(rplacd cell value)
+      (setq alist (cons (cons prop value) alist))
+      (table-set custom-group-table group alist))))
+
+(defun custom-get-group-property (group prop)
+  (unless (listp group)
+    (setq group (list group)))
+  (let ((alist (table-ref custom-group-table group)))
+    (cdr (assq prop alist))))
+
+(defun custom-group-requires (group feature)
+  (unless (listp group)
+    (setq group (list group)))
+  (custom-set-group-property
+   group ':require
+   (cons feature (delq feature
+		       (custom-get-group-property ':require group)))))
 
 (defmacro custom-add-option (sym option)
   "Assuming that defcustom'd symbol SYM is of type `symbol', add the
@@ -259,12 +288,6 @@ of choices."
       ,@(and (frame-style-editable-p default-frame-style)
 	     (list nil `(,(_"Edit theme...") edit-frame-style))))))
 
-(defun custom-add-required (feature)
-  "Add the symbol FEATURE to the list of modules required before
-running the configuration tool."
-  (unless (memq feature custom-required)
-    (setq custom-required (cons feature custom-required))))
-
 
 ;; support for font and color primitive types
 
@@ -282,8 +305,7 @@ running the configuration tool."
 
 (put 'font 'custom-get custom-get-font)
 (put 'font 'custom-set custom-set-font)
-(setq custom-set-alist (cons (cons custom-set-font 'custom-set-font)
-			     custom-set-alist))
+(define-custom-setter 'custom-set-font custom-set-font)
 
 (defun custom-set-color (symbol value &rest args)
   (apply custom-set-variable symbol (if (stringp value)
@@ -299,21 +321,16 @@ running the configuration tool."
 
 (put 'color 'custom-get custom-get-color)
 (put 'color 'custom-set custom-set-color)
-(setq custom-set-alist (cons (cons custom-set-color 'custom-set-color)
-			     custom-set-alist))
+(define-custom-setter 'custom-set-color custom-set-color)
 
 
 ;; default groups
 
-(defgroup focus "Focus")
-(defgroup advanced "Advanced" :group focus)
-(defgroup move "Move/Resize")
-(defgroup advanced "Advanced" :group move)
+(defgroup focus "Focus" :require auto-raise)
+(defgroup move "Move/Resize" :require move-resize)
 (defgroup placement "Placement")
 (defgroup appearance "Appearance")
-(defgroup advanced "Advanced" :group appearance)
 (defgroup workspace "Workspaces")
-(defgroup advanced "Advanced" :group workspace)
 (defgroup bindings "Bindings")
 (defgroup min-max "Minimizing/Maximizing")
 (defgroup iconify "Minimizing" :group min-max)

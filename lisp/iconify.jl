@@ -31,6 +31,7 @@
 (defcustom iconify-ignored nil
   "Allow ignored windows to be iconified."
   :type boolean
+  :user-level expert
   :group (min-max iconify))
 
 (defun iconify-window (w)

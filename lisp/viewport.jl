@@ -28,17 +28,17 @@
 ;; screen-width to the right. 
 
 (defcustom viewport-columns 1
-  "Number of columns in each virtual workspace."
+  "The number of columns in each virtual workspace."
   :group workspace
-  :type number
-  :range (1 . nil)
+  :type (number 1)
+  :user-level novice
   :after-set (lambda () (viewport-size-changed)))
 
 (defcustom viewport-rows 1
-  "Number of rows in each virtual workspace."
+  "The number of rows in each virtual workspace."
   :group workspace
-  :type number
-  :range (1 . nil)
+  :type (number 1)
+  :user-level novice
   :after-set (lambda () (viewport-size-changed)))
 
 (defcustom uniconify-to-current-viewport t

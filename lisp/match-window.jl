@@ -50,33 +50,39 @@
     (WM_LOCALE_NAME . "Locale")))
 
 (defvar match-window-properties
-  `((ignored boolean)
-    (iconified boolean)
-    (shaded boolean)
-    (avoid boolean)
-    (sticky boolean)
-    (sticky-viewport boolean)
-    (focus-click-through boolean)
-    (ignore-window-input-hint boolean)
-    (ignore-program-position boolean)
-    (raise-on-focus boolean)
-    (never-focus boolean)
-    (focus-when-mapped boolean)
-    (ungrouped boolean)
-    (unique-name boolean)
-    (auto-gravity boolean)
-    (shade-hover boolean)
-    (group symbol ,(lambda () (delete-if-not symbolp (window-group-ids))))
-    (place-mode symbol ,(lambda () placement-modes))
-    (focus-mode symbol ,(lambda () focus-modes))
-    (frame-type symbol ,(lambda () (mapcar car match-window-types)))
-    (frame-style symbol ,(lambda () (find-all-frame-styles t)))
-    (position pair)
-    (size pair)
-    (workspace number)
-    (viewport pair)
-    (depth number)
-    (placement-weight number)))
+  `((placement ,(_ "Placement")
+     (avoid boolean)
+     (ignore-program-position boolean)
+     (place-mode ,(lambda () `(choice ,@placement-modes)))
+     (position (pair number number))
+     (size (pair (number 1) (number 1)))
+     (workspace (number 1))
+     (viewport (pair (number 1) (number 1)))
+     (depth (number -16 16))
+     (placement-weight number))
+    (focus ,(_ "Focus")
+     (raise-on-focus boolean)
+     (focus-when-mapped boolean)
+     (never-focus boolean)
+     (focus-click-through boolean)
+     (ignore-window-input-hint boolean)
+     (focus-mode ,(lambda () `(choice ,@focus-modes))))
+    (appearance ,(_ "Appearance")
+     (frame-type ,(lambda () `(choice ,@(mapcar car match-window-types))))
+     (frame-style ,(lambda () `(symbol ,@(find-all-frame-styles t)))))
+    (state ,(_ "State")
+     (ignored boolean)
+     (iconified boolean)
+     (shaded boolean)
+     (sticky boolean)
+     (sticky-viewport boolean)
+     (group ,(lambda ()
+	       `(symbol ,@(delete-if-not symbolp (window-group-ids)))))
+     (ungrouped boolean))
+    (other ,(_ "Other")
+     (unique-name boolean)
+     (auto-gravity boolean)
+     (shade-hover boolean))))
 
 ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
 ;; libraries implementing them
@@ -91,18 +97,19 @@
     (top-border . shaped-transient)
     (none . unframed)))
 
-(defun match-window-widget (symbol value doc)
+(defun match-window-widget (symbol)
   (let
-      ((props (mapcar (lambda (prop)
-			(if (and (eq (nth 1 prop) 'symbol)
-				 (functionp (nth 2 prop)))
-			    (list (car prop) (nth 1 prop) ((nth 2 prop)))
-			  prop))
-		      match-window-properties)))
-    `(match-window :variable ,symbol
-		   :value ,value
-		   :properties ,props
-		   :x-properties ,match-window-x-properties)))
+      ((props (mapcar
+	       (lambda (sub)
+		 (cons (cadr sub)
+		       (mapcar (lambda (prop)
+				 (if (functionp (cadr prop))
+				     (list* (car prop)
+					    ((cadr prop))
+					    (cddr prop))
+				   prop))
+			       (cddr sub)))) match-window-properties)))
+    `(match-window ,props ,match-window-x-properties)))
 
 ;; use this so the single widget expands properly
 (defun match-window-group-widget (group spec)
@@ -111,13 +118,17 @@
 (put 'match-window 'custom-widget match-window-widget)
 (put 'match-window 'custom-group-widget match-window-group-widget)
 
-(defgroup match-window "Matched Windows")
+;;;###autoload (defgroup match-window "Matched Windows" :layout single :require match-window)
+
+(defgroup match-window "Matched Windows"
+  :layout single
+  :require match-window)
 
 ;; List of (MATCH-ELTS . ACTION-ELTS)
 ;; Each MATCH-ELT is (PROP . REGEXP or NUMBER or SYMBOL)
 ;; Each ACTION-ELT is (PROP . VALUE)
 (defcustom match-window-profile nil
-  "Match windows to properties."
+  nil
   :type match-window
   :group match-window
   :require match-window)
@@ -138,6 +149,26 @@
     (when (stringp prop)
       (setq prop (quote-regexp prop)))
     prop))
+
+(defun define-match-window-group (group name)
+  (unless (assq group match-window-properties)
+    (setq match-window-properties (nconc match-window-properties
+					 (list (list group name))))))
+
+(defun define-match-window-property (name group . def)
+  (let* ((group-cell (or (assq group match-window-properties)
+			 (error "Unknown match-window group: %s" group)))
+	 (item-cell (assq name (cddr group-cell))))
+    (if item-cell
+	(rplacd item-cell def)
+      (rplacd (cdr group-cell) (nconc (cddr group-cell)
+				      (list (cons name def)))))))
+
+(defun define-match-window-setter (name setter)
+  (put name 'match-window-setter setter))
+
+(defun define-match-window-formatter (name formatter)
+  (put name 'match-window-formatter formatter))
 
 
 ;; main entry point
@@ -194,8 +225,7 @@
       ((prop-cache nil)
 
        ;; Get the X property P of window W, uses a cache, will
-       ;; reformat text properties with a match-window-formatter
-       ;; property 
+       ;; reformat properties with a match-window-formatter property 
        (get-prop (lambda (p)
 		   (let
 		       ((tem (assq p prop-cache)))
@@ -203,11 +233,10 @@
 			 (cdr tem)
 		       (setq tem (get-x-property w p))
 		       (when (and tem (eq (car tem) 'STRING))
-			 (let
-			     ((vec (get-x-text-property w p)))
-			   (when (get p 'match-window-formatter)
-			     (setq vec ((get p 'match-window-formatter) vec)))
-			   (rplaca (cdr (cdr tem)) vec)))
+			 (rplaca (cddr tem) (get-x-text-property w p)))
+		       (when (and tem (get p 'match-window-formatter))
+			 (rplaca (cddr tem) ((get p 'match-window-formatter)
+					     (nth 2 tem))))
 		       (setq prop-cache (cons (cons p tem) prop-cache))
 		       tem))))
 
@@ -271,68 +300,64 @@
 
 ;; custom property formatters and setters
 
-;; ensure the functions get compiled
 (progn
-  (put 'WM_CLASS 'match-window-formatter
-       (lambda (vec)
-	 (format nil "%s/%s" (aref vec 1) (aref vec 0))))
+  (define-match-window-formatter 'WM_CLASS
+   (lambda (vec)
+     (format nil "%s/%s" (aref vec 1) (aref vec 0))))
 
-  (put 'WM_COMMAND 'match-window-formatter
-       (lambda (vec)
-	 (let
-	     ((i 0)
-	      parts)
-	   (while (< i (length vec))
-	     (when parts
-	       (setq parts (cons ?  parts)))
-	     (setq parts (cons (aref vec i) parts))
-	     (setq i (1+ i)))
-	   (apply concat (nreverse parts)))))
+  (define-match-window-formatter 'WM_COMMAND
+   (lambda (vec)
+     (let ((i 0)
+	   parts)
+       (while (< i (length vec))
+	 (when parts
+	   (setq parts (cons ?  parts)))
+	 (setq parts (cons (aref vec i) parts))
+	 (setq i (1+ i)))
+       (apply concat (nreverse parts)))))
 
-  (put 'workspace 'match-window-setter
-       (lambda (w prop value)
-	 (unless (or (window-get w 'placed) (window-workspaces w))
-	   ;; translate from 1.. to 0..
-	   (ws-window-set-workspaces w (list (1- value))))))
+  (define-match-window-setter 'workspace
+   (lambda (w prop value)
+     (unless (or (window-get w 'placed) (window-workspaces w))
+       ;; translate from 1.. to 0..
+       (ws-window-set-workspaces w (list (1- value))))))
 
-  (put 'position 'match-window-setter
-       (lambda (w prop value)
-	 (let
-	     ((x (car value))
-	      (y (cdr value)))
-	   (when (< x 0)
-	     ;; XXX should change placement gravity
-	     (setq x (+ (screen-width) x)))
-	   (when (< y 0)
-	     ;; XXX should change placement gravity
-	     (setq y (+ (screen-height) y)))
-	   (move-window-to w x y))))
+  (define-match-window-setter 'position
+   (lambda (w prop value)
+     (let ((x (car value))
+	   (y (cdr value)))
+       (when (< x 0)
+	 ;; XXX should change placement gravity
+	 (setq x (+ (screen-width) x)))
+       (when (< y 0)
+	 ;; XXX should change placement gravity
+	 (setq y (+ (screen-height) y)))
+       (move-window-to w x y))))
 
-  (put 'size 'match-window-setter
-       (lambda (w prop value)
-	 (resize-window-with-hints w (car value) (cdr value))))
+  (define-match-window-setter 'dimensions
+   (lambda (w prop value)
+     (resize-window-with-hints w (car value) (cdr value))))
 
-  (put 'viewport 'match-window-setter
-       (lambda (w prop value)
-	 (unless (window-get w 'placed)
-	   (set-screen-viewport (1- (car value)) (1- (cdr value)))
-	   (set-window-viewport w (1- (car value)) (1- (cdr value))))))
+  (define-match-window-setter 'viewport
+   (lambda (w prop value)
+     (unless (window-get w 'placed)
+       (set-screen-viewport (1- (car value)) (1- (cdr value)))
+       (set-window-viewport w (1- (car value)) (1- (cdr value))))))
 
-  (put 'frame-type 'match-window-setter
-       (lambda (w prop value)
-	 (window-put w 'type (or (cdr (assq value match-window-types))
-				 value))))
+  (define-match-window-setter 'frame-type
+   (lambda (w prop value)
+     (window-put w 'type (or (cdr (assq value match-window-types)) value))))
 
-  (put 'ungrouped 'match-window-setter
-       (lambda (w prop value)
-	 (when value
-	   (add-window-to-new-group w))))
+  (define-match-window-setter 'ungrouped
+   (lambda (w prop value)
+     (when value
+       (add-window-to-new-group w))))
 
-  (put 'unique-name 'match-window-setter
-       (lambda (w prop value)
-	 (when value
-	   (uniquify-window-name w))))
+  (define-match-window-setter 'unique-name
+    (lambda (w prop value)
+      (when value
+	(uniquify-window-name w))))
 
-  (put 'focus-mode 'match-window-setter
-       (lambda (w prop value)
-	 (set-focus-mode w value))))
+  (define-match-window-setter 'focus-mode
+   (lambda (w prop value)
+     (set-focus-mode w value))))

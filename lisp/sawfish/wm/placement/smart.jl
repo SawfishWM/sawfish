@@ -48,8 +48,8 @@
 (defcustom sp-padding 4
   "Try to leave at least this many pixels between window edges in first/best-fit."
   :group placement
-  :type number
-  :range (0 . 64))
+  :type (number 0 64)
+  :user-level expert)
 
 ;; the maximum number of points to keep in each grid dimension
 (defvar sp-max-points 10)
