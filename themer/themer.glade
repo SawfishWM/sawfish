@@ -83,7 +83,7 @@
 	      <handler>on-new-theme</handler>
 	      <last_modification_time>Thu, 30 Dec 1999 18:13:46 GMT</last_modification_time>
 	    </signal>
-	    <label>New theme</label>
+	    <label>New Theme</label>
 	    <right_justify>False</right_justify>
 	  </widget>
 
@@ -100,7 +100,7 @@
 	      <handler>on-open</handler>
 	      <last_modification_time>Sun, 26 Dec 1999 00:29:39 GMT</last_modification_time>
 	    </signal>
-	    <label>_Open...</label>
+	    <label>_Open Theme..</label>
 	    <right_justify>False</right_justify>
 	  </widget>
 
@@ -117,7 +117,7 @@
 	      <handler>on-save</handler>
 	      <last_modification_time>Sun, 26 Dec 1999 00:29:31 GMT</last_modification_time>
 	    </signal>
-	    <label>_Save</label>
+	    <label>_Save Theme</label>
 	    <right_justify>False</right_justify>
 	  </widget>
 
@@ -129,7 +129,7 @@
 	      <handler>on-save-as</handler>
 	      <last_modification_time>Sun, 26 Dec 1999 00:30:09 GMT</last_modification_time>
 	    </signal>
-	    <label>Save _As...</label>
+	    <label>Save Theme _As...</label>
 	    <right_justify>False</right_justify>
 	  </widget>
 
@@ -153,23 +153,6 @@
 	      <last_modification_time>Tue, 28 Dec 1999 00:26:14 GMT</last_modification_time>
 	    </signal>
 	    <label>_Preview</label>
-	    <right_justify>False</right_justify>
-	  </widget>
-
-	  <widget>
-	    <class>GtkMenuItem</class>
-	    <name>generate_theme1</name>
-	    <accelerator>
-	      <modifiers>GDK_CONTROL_MASK</modifiers>
-	      <key>GDK_g</key>
-	      <signal>activate</signal>
-	    </accelerator>
-	    <signal>
-	      <name>activate</name>
-	      <handler>on-generate-theme</handler>
-	      <last_modification_time>Sat, 01 Jan 2000 16:01:54 GMT</last_modification_time>
-	    </signal>
-	    <label>_Generate Theme...</label>
 	    <right_justify>False</right_justify>
 	  </widget>
 
@@ -330,7 +313,7 @@
 	      <handler>on-help-about</handler>
 	      <last_modification_time>Fri, 31 Dec 1999 21:32:39 GMT</last_modification_time>
 	    </signal>
-	    <label>_About...</label>
+	    <label>_About</label>
 	    <right_justify>False</right_justify>
 	  </widget>
 	</widget>
@@ -359,7 +342,7 @@
 	<class>GtkTable</class>
 	<name>table1</name>
 	<border_width>4</border_width>
-	<rows>2</rows>
+	<rows>3</rows>
 	<columns>2</columns>
 	<homogeneous>False</homogeneous>
 	<row_spacing>4</row_spacing>
@@ -430,8 +413,8 @@
 	  <child>
 	    <left_attach>1</left_attach>
 	    <right_attach>2</right_attach>
-	    <top_attach>1</top_attach>
-	    <bottom_attach>2</bottom_attach>
+	    <top_attach>2</top_attach>
+	    <bottom_attach>3</bottom_attach>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <xexpand>False</xexpand>
@@ -459,8 +442,8 @@
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
-	    <top_attach>1</top_attach>
-	    <bottom_attach>2</bottom_attach>
+	    <top_attach>2</top_attach>
+	    <bottom_attach>3</bottom_attach>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <xexpand>False</xexpand>
@@ -487,6 +470,56 @@
 	      <fill>False</fill>
 	    </child>
 	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>label40</name>
+	  <label>Directory:</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <left_attach>0</left_attach>
+	    <right_attach>1</right_attach>
+	    <top_attach>1</top_attach>
+	    <bottom_attach>2</bottom_attach>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <xexpand>False</xexpand>
+	    <yexpand>False</yexpand>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
+	    <xfill>False</xfill>
+	    <yfill>False</yfill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkEntry</class>
+	  <name>theme-dir-entry</name>
+	  <can_focus>True</can_focus>
+	  <editable>False</editable>
+	  <text_visible>True</text_visible>
+	  <text_max_length>0</text_max_length>
+	  <text></text>
+	  <child>
+	    <left_attach>1</left_attach>
+	    <right_attach>2</right_attach>
+	    <top_attach>1</top_attach>
+	    <bottom_attach>2</bottom_attach>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <xexpand>True</xexpand>
+	    <yexpand>False</yexpand>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
+	    <xfill>True</xfill>
+	    <yfill>False</yfill>
+	  </child>
 	</widget>
       </widget>
 

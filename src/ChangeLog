@@ -1,3 +1,33 @@
+2000-01-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (list_frame_generator): make `(cursor . nil)' work
+
+1999-12-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* commands.c (Fcall_command): accept closures as possible
+	commands
+
+	* main.c (main): use rep_load_environment () and
+	rep_top_level_exit ()
+
+	* windows.c (window_mark): always call mark_frame_parts (), not
+	just when w->frame != 0
+	(window_mark_type): call mark_frame_type
+	* frames.c (mark_frame_type): new function, marks any frame
+	parts that are being built but have not yet been added to a
+	window
+
+1999-12-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* functions.c: when reading/writing X properties, use
+	u_longs/u_shorts instead of CARD32s/CARD16s; otherwise things
+	stop working on alphas (from George <jirka@5z.com>)
+
+1999-12-22  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c, images.c, fonts.c (X_put): remove checks for
+	immutable cons cells, can't happen
+
 1999-12-20  John Harper  <john@dcs.warwick.ac.uk>
 
 	* images.c (image_sweep): use Imlib_kill_image () instead of

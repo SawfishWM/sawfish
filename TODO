@@ -10,10 +10,19 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
+  ! loading a session shifts window positions by the frame offset
+
+  ! swapped-out window properties aren't saved with session
+
+  ! (bind-keys global-keymap "KP_End" 'emacs-fg) in .sawmillrc and
+    keyboard goes dead
+
+  ! grabbing `-Off' modified events doesn't work anymore (e.g. bind
+    Button1-M-Off in window-keymap to raise-lower-window)
+
   ! menus appear too high in java/swing apps until window is moved
 
-  ! iconify a window; restartl window is no longer iconified, but wm
-    thinks it is
+    [ works okay for me.. ]
 
   ! * Open Netscape
     * Click the botton on the status-bar that brings the little
@@ -25,12 +34,6 @@ Outstanding bugs
       flicker on the desktop so fast you can't click on anything to get
       rid of it, and you have to 'kill' it (sometimes it eventually dies
       on its own in a minute or two).
-
-  ! windows uiconify back to their original workspace, even when the
-    option to prevent this is set?
-
-  ! multiple viewports, gnome tasklist thinks that all windows are in
-    the top-left viewport
 
   ! ICCCM says we should not passive grab on the client windows, but on
     our frames instead
@@ -78,6 +81,14 @@ Outstanding bugs
 General tasks
 =============
 
+  + add a function to turn icons into lisp images
+
+  + add a (destroyed . FUN) attribute to display-message
+
+    also allow multiple messages to be displayed/managed
+
+  + allow transparent backgrounds to frame parts
+
   + add option to generate rendered images on demand (can we defeat
     imlib's caching?)
 
@@ -106,22 +117,6 @@ General tasks
 
     this is done, set the workspace-names variable to a list of
     strings; but it's not yet customizable through the ui
-
-  + features for the gnome/redhat guys:
-
-    * code to read the gnome apps menu, then replace apps-menu
-      [2/10: this is pretty much done: (require 'gnome-menu)]
-
-    * remove restart/quit/[about?] from the root menu
-
-    * launch capplet instead of standalone config tool
-      [use customize-program and customize-group-opt to do this]
-
-    * 2x2 workspaces [30/9: this has been done]
-
-    there will be a new lisp module (`gnome-int'?) that has these
-    things as options (enabled by default). It will also require
-    'gnome.
 
   + add capplet desktop entries to share/gnome/apps/Settings as well as
     the control center tree
@@ -275,25 +270,3 @@ Long term ideas
 
     First write CORBA support for rep (does guile support CORBA?), then
     what? Would this be useful?
-
-  - Theme repository
-
-    Something similar to foo.themes.org, but I want to be able to load
-    themes straight from the net
-
-    They could be loaded through the remote-ftp system (would need to
-    redefine pwd-prompt somehow, GTK?), then installed in the user's
-    local theme directory, then activated (all without restarting the
-    wm)
-
-    How about a drag 'n drop target in the configurator. Load the
-    specified URI then install the theme it contains
-
-    This way you should be able to drag from both netscape and the file
-    manager to activate a theme
-
-  - Theme builder
-
-    Use the client to frame a temporary window with control over its
-    decorations (GTK interface), then output the Lisp code to build the
-    theme

@@ -1,3 +1,44 @@
+2000-01-04  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome-int.jl: new file, sets some things, deletes some menu
+	items; tries to integrate further with GNOME
+
+	* sawmill-defaults.jl: if it looks like we're running under
+	GNOME, require gnome-int
+
+2000-01-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-gaol.jl (sawmill-safe-functions): added the
+	maximization predicates
+
+	* maximize.jl (unmaximize-window): ensure that the window isn't
+	maximized-p when it's moved and resized
+
+	* make-theme-preview.jl (make-theme-preview): new optional arg TYPE
+
+	* workspace.jl (ws-add-window-to-workspace): ensure that
+	iconified windows are hidden
+	(ws-add-window): fix adding of iconified sticky	windows
+
+	* iconify.jl (uniconify-window): fix the ``uniconify to current
+	workspace'' option by reordering conditions
+
+2000-01-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* make-theme.jl: image decls now have attributes
+
+1999-12-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* make-theme.jl, make-theme-preview.jl: initial support for GUI
+	theme builder
+	* sawmill-gaol.jl: make-theme is safe to call
+
+1999-12-24  John Harper  <john@dcs.warwick.ac.uk>
+
+	* gnome.jl (gnome-set-workspace): set _WIN_AREA properties on
+	client windows; by my reading of the spec this isn't correct,
+	but the GNOME tasklist applet seems to require it
+
 1999-12-21  John Harper  <john@dcs.warwick.ac.uk>
 
 	* move-resize.jl (move-resize-map): Any-RET now completes the
