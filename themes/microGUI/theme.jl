@@ -320,6 +320,33 @@
     (class . close-button))
 ))
 
+(defvar microGUI:shaped-transient-frame
+  `(;;top-right corner
+    ((background . ,microGUI:t-top-right-images)
+     (right-edge . -18)
+     (top-edge . -5)
+     (class . top-right-corner))
+
+   ;; right border
+   ((background . ,microGUI:t-right-images)
+    (right-edge . -18)
+    (top-edge . -1)
+    (bottom-edge . -1)
+    (class . title))
+
+   ;; bottom-right corner
+   ((background . ,microGUI:t-bottom-right-images)
+    (right-edge . -18)
+    (bottom-edge . -5)
+    (class . bottom-right-corner))
+
+   ;; delete button
+   ((background . ,microGUI:t-close-images)
+    (right-edge . -18)
+    (top-edge . 1)
+    (class . close-button))
+))
+
 
 (defun microGUI:frame-style (w type)
   (cond ((eq type 'shaped)
@@ -327,7 +354,7 @@
 	((eq type 'transient)
 	 'microGUI:transient-frame)
 	((eq type 'shaped-transient)
-	 'nil-frame)
+	 'microGUI:shaped-transient-frame)
 	((eq type 'unframed)
 	 'nil-frame)
 	(t
