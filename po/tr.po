@@ -1,18 +1,19 @@
 # Turkish translation of sawfish.
-# Copyright (C) 1999-2001 Free Software Foundation, Inc.
-# Fatih Demir <kabalak@gmx.net>, 1999-2000.
+# Copyright (C) 1999-2002 Free Software Foundation, Inc.
+# Fatih Demir <kabalak@gtranslator.org>, 1999-2000.
 # Ozgur Dogan GUNES <ozgurdogan@programmer.net>, 2001.
 # Ömer Fadýl USTA <omer_fad@hotmail.com>, 1999
+# Görkem Çetin <gorkem@gelecek.com.tr>, 2002
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sawfish 1.0\n"
+"Project-Id-Version: Sawfish\n"
 "POT-Creation-Date: 2001-08-16 12:57+0200\n"
-"PO-Revision-Date: 2001-02-07 00:03+0100\n"
-"Last-Translator: Ömer Fadýl USTA <omer_fad@hotmail.com>\n"
+"PO-Revision-Date: 2002-07-28 19:25+0000\n"
+"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-9\n"
+"Content-Type: text/plain; charset=ISO-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ../scripts/sawfish-about.jl
@@ -93,7 +94,7 @@ msgstr "Resim Özellikleri"
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
 msgid "No matching item for %S"
-msgstr ""
+msgstr "%S için eþleþen öðe yok"
 
 # ../themer/themer.in
 #. ../themer/themer.in
@@ -167,8 +168,7 @@ msgstr "Crux Temasý"
 
 # ../themes/simple/theme.jl
 #. ../themes/Crux/theme.jl
-msgid ""
-"Accent color for focused windows (if unset uses the GTK+ selection color)."
+msgid "Accent color for focused windows (if unset uses the GTK+ selection color)."
 msgstr "Odaklanan pencereler için vurgu rengi."
 
 # ../lisp/menus.jl
@@ -428,7 +428,7 @@ msgstr "Sýnýf"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Icon Name"
-msgstr "Simge isimi"
+msgstr "Simge Ýsmi"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Role"
@@ -436,12 +436,12 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Host"
-msgstr ""
+msgstr "Makine"
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Locale"
-msgstr "_Lokal"
+msgstr "Dil"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Avoid"
@@ -468,11 +468,11 @@ msgstr "Boyutlar"
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
-msgstr "Çalýþmaalaný"
+msgstr "Çalýþma alaný"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Viewport"
-msgstr "Görüntünotasý"
+msgstr "Görüntü alaný"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Depth"
@@ -546,7 +546,6 @@ msgstr "Yapýþkan görüntünoktasý"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
-
 msgid "Group"
 msgstr "Grup"
 
@@ -573,7 +572,6 @@ msgid "Auto gravity"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Shade hover"
 msgstr "Gölgele"
 
@@ -713,9 +711,8 @@ msgstr "Hata oluþtuðunda kýsa süreli ses çal."
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-#, fuzzy
 msgid "nowhere"
-msgstr "Alçalt"
+msgstr "hiçbiryer"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "screen"
@@ -735,7 +732,7 @@ msgstr "Hata yok."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display errors"
-msgstr ""
+msgstr "Hatalarý göster"
 
 # ../lisp/edge-flip.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -755,9 +752,8 @@ msgstr "görümbaðlantýsý"
 # ../lisp/menus.jl
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
-#, fuzzy
 msgid "workspace"
-msgstr "Masaüstü:"
+msgstr "çalýþma alaný"
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Hitting the screen edge selects the next: \\w"
@@ -870,15 +866,13 @@ msgstr "Alçalt"
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Unmaximize"
-msgstr "Alçalt"
+msgstr "Küçült"
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Maximize"
-msgstr "Yükseltme"
+msgstr "Büyült"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
@@ -902,12 +896,12 @@ msgstr "_Pencereyi gönder"
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Previous workspace"
-msgstr "Ö_nceki masaüstüne"
+msgstr "Ö_nceki çalýþma alaný"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Next workspace"
-msgstr "_Sonraki masaüstüne"
+msgstr "_Sonraki çalýþma alaný"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
@@ -1023,15 +1017,15 @@ msgstr "Çýk"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup window menu"
-msgstr ""
+msgstr "Pencere menüsü aç"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup root menu"
-msgstr ""
+msgstr "Kök menüsü aç"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup apps menu"
-msgstr ""
+msgstr "Uygulamalar menüsü aç"
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/menus.jl
@@ -1046,8 +1040,7 @@ msgstr "Temayý düzenle..."
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Windows uniconify to the current workspace when they are selected."
-msgstr ""
-"Seçildiði zaman o anki çalýþma alanýnda pencereleri simge durumuna getir."
+msgstr "Seçildiði zaman o anki çalýþma alanýnda pencereleri simge durumuna getir."
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/util/display-window.jl
@@ -1130,7 +1123,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Press key..."
-msgstr ""
+msgstr "Tuþa basýn..."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "[Quote]"
@@ -1156,7 +1149,7 @@ msgstr "Sürekli grup id'leri"
 # ../lisp/group-funs.jl
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
-msgstr "Yeni grup."
+msgstr "Yeni grup"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
@@ -1166,16 +1159,16 @@ msgstr "Pencere:"
 # ../lisp/menus.jl
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
-#, fuzzy, c-format
+#, c-format
 msgid "Workspace %d"
-msgstr "Masaüstü:"
+msgstr "%d. Çalýþma Alaný"
 
 # ../lisp/menus.jl
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Workspace:"
-msgstr "Masaüstü:"
+msgstr "Çalýþma Alaný:"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/stacking.jl
@@ -1222,8 +1215,7 @@ msgstr ""
 # ../lisp/keymaps.jl
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
-msgstr ""
-"Tuþ haritalarýný içeren baðlar, kullanýcýdan metin alýrken etkinleþsin."
+msgstr "Tuþ haritalarýný içeren baðlar, kullanýcýdan metin alýrken etkinleþsin."
 
 # ../lisp/frames.jl
 #. ../lisp/sawfish/wm/frames.jl
@@ -1324,7 +1316,7 @@ msgstr "Ýlk ya da son çalýþma alanýna bir pencereyi taþýrken geçince: \\w"
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspaces are deleted when their last window closes."
-msgstr "Çalþma alanlarý içlerindeki son pencere kapanýnca silinsin."
+msgstr "Çalýþma alanlarý içlerindeki son pencere kapanýnca silinsin."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Preserve empty workspaces in pager."
@@ -1391,32 +1383,32 @@ msgstr "Popup Pencere listesi"
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Next workspace"
-msgstr "Sonra ki çalýþma alaný"
+msgstr "Sonraki çalýþma alaný"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Previous workspace"
-msgstr "Önce ki çalýþma alaný"
+msgstr "Önceki çalýþma alaný"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to next workspace"
-msgstr "Sonra ki çalýþma alanýna yolla"
+msgstr "Sonraki çalýþma alanýna yolla"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to previous workspace"
-msgstr "Önce ki çalýþma alanýna yolla"
+msgstr "Önceki çalýþma alanýna yolla"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to next workspace"
-msgstr "Sonra ki çalýþma alanýna kopyala"
+msgstr "Sonraki çalýþma alanýna kopyala"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to previous workspace"
-msgstr "Önce ki çalýþma alanýna kopyala"
+msgstr "Önceki çalýþma alanýna kopyala"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Append workspace and send"
@@ -1429,40 +1421,37 @@ msgstr ""
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge next workspace"
-msgstr "Sonra ki çalýþma alanýna birleþtir"
+msgstr "Sonraki çalýþma alanýna birleþtir"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
-msgstr "Önce ki çalýþma alanýna birleþtir"
+msgstr "Önceki çalýþma alanýna birleþtir"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
-msgstr "Sonradan Bir çalýþma alaný ekle"
+msgstr "Önüne bir çalýþma alaný ekle"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace before"
-msgstr "ncedenBir çalýþma alaný ekle"
+msgstr "Arkasýna bir çalýþma alaný ekle"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Move workspace forwards"
-msgstr "Çalýþma alanýný sola taþý"
+msgstr "Çalýþma alanýný ileri taþý"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Move workspace backwards"
-msgstr "Çalýþma alanýný saða taþý"
+msgstr "Çalýþma alanýný geri taþý"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Delete empty workspaces"
-msgstr "Sonraki çalýþma alanýný seç"
+msgstr "Boþ çalýþma alanlarýný sil"
 
 # ../lisp/ignore-window.jl
 #. ../lisp/sawfish/wm/workspace.jl
@@ -1472,14 +1461,13 @@ msgstr "Pencereyi sil."
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Activate workspace"
-msgstr "Sonraki çalýþma alanýný seç"
+msgstr "Çalýþma alanýný etkinleþtir"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to workspace"
-msgstr "ÇAlýþma alanýna yolla"
+msgstr "Çalýþma alanýna yolla"
 
 # ../lisp/menus.jl
 # ../lisp/custom.jl
@@ -1489,13 +1477,12 @@ msgstr "Çalýþma alanýna kopyala"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Select workspace interactively"
-msgstr "Sonraki çalýþma alanýný seç"
+msgstr "Çalýþma alanýný etkileþimli seç"
 
 #. ../lisp/sawfish/wm/gnome/menus.jl
 msgid "Gnome menus update"
-msgstr ""
+msgstr "Gnome menü güncellemesi"
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "Invoke the GNOME control center from the `Customize' menu."
@@ -1558,24 +1545,21 @@ msgstr "Ekrandaki konumuna göre pencerenin aðýrlýðýný belirle."
 
 #. ../lisp/sawfish/wm/state/configure.jl
 msgid "Ignore requests from applications to change window stacking."
-msgstr ""
-"Pencere yýðýnlamasýný deðiþtirmek için uygulamalardan gelen talepleri yoksay."
+msgstr "Pencere yýðýnlamasýný deðiþtirmek için uygulamalardan gelen talepleri yoksay."
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/state/shading.jl
-#, fuzzy
 msgid "Shade window"
-msgstr "_Pencereyi gönder"
+msgstr "Pencereyi topla"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/state/shading.jl
-#, fuzzy
 msgid "Unshade window"
-msgstr "Seçilmiþ olan pencereleri normallaþtir ."
+msgstr "Pencereyi aç"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
-msgstr ""
+msgstr "Pencereyi topla/aç"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/state/shading.jl
@@ -1603,8 +1587,7 @@ msgstr "Pencereler doldurulurken, yönetilmeyen pencereleri altta tut."
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
 msgid "Don't cover `avoided' windows when maximizing."
-msgstr ""
-"Pencerelerin arasýnda gezerken simge halindeki pencereleri de gözönüne al."
+msgstr "Pencerelerin arasýnda gezerken simge halindeki pencereleri de gözönüne al."
 
 # ../lisp/move-resize.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
@@ -1757,8 +1740,7 @@ msgstr "Bir pencere simge haline gelirse, ayný iþlemi buna da uygula: \\w"
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Uniconifying a window also uniconifies the: \\w"
-msgstr ""
-"Bir pencere simge halden çýktýðý zaman, ayný iþlemi buna da uygula: \\w"
+msgstr "Bir pencere simge halden çýktýðý zaman, ayný iþlemi buna da uygula: \\w"
 
 # ../lisp/iconify.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -1928,7 +1910,7 @@ msgstr "Baðýntýlar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "global-keymap"
-msgstr ""
+msgstr "genel tuþ haritasý"
 
 # ../lisp/keymaps.jl
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -1937,7 +1919,7 @@ msgstr "Baðlayýcýlar içeren keymap(anahtar) heryerde aktif."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "window-keymap"
-msgstr ""
+msgstr "pencere tuþ haritasý"
 
 # ../lisp/keymaps.jl
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -1960,7 +1942,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
-msgstr ""
+msgstr "baþlýk tuþ haritasý"
 
 # ../lisp/keymaps.jl
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -2274,7 +2256,7 @@ msgstr ""
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window right"
-msgstr ""
+msgstr "\t"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window up"
@@ -2639,8 +2621,7 @@ msgstr "Pencerelerin arasýnda gezinirken pencere simgelerini göster."
 # ../lisp/x-cycle.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Include iconified windows when cycling."
-msgstr ""
-"Pencerelerin arasýnda gezerken simge halindeki pencereleri de gözönüne al."
+msgstr "Pencerelerin arasýnda gezerken simge halindeki pencereleri de gözönüne al."
 
 # ../lisp/x-cycle.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -2655,8 +2636,7 @@ msgstr "Gezerken görüntü alanýndaki pencereleri gözönünde bulundur."
 # ../lisp/x-cycle.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Raise windows while they're temporarily selected during cycling."
-msgstr ""
-"Pencereler arasýnda gezerken geçici olarak seçilmiþ olan pencereleri yükselt."
+msgstr "Pencereler arasýnda gezerken geçici olarak seçilmiþ olan pencereleri yükselt."
 
 # ../lisp/x-cycle.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -2668,8 +2648,7 @@ msgstr ""
 # ../lisp/x-cycle.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Focus windows when they're temporarily selected during cycling."
-msgstr ""
-"Pencereler arasýnda gezerken geçici olarak seçilmiþ olan pencereleri odakla."
+msgstr "Pencereler arasýnda gezerken geçici olarak seçilmiþ olan pencereleri odakla."
 
 # ../lisp/x-cycle.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -2682,8 +2661,7 @@ msgstr "dönen-anahtarharitasý"
 
 # ../lisp/keymaps.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid ""
-"Keymap containing bindings active only during window cycling operations."
+msgid "Keymap containing bindings active only during window cycling operations."
 msgstr ""
 "Pencereler arasýnda gezinirken odaklanmýþ penceredeki etkin baðýntýlarý "
 "içeren tuþ haritasý."
@@ -2833,8 +2811,7 @@ msgstr "Yegane pencere ismi"
 msgid ""
 "Try to leave at least this many pixels between window edges in first/best-"
 "fit."
-msgstr ""
-"Pencereler arasýnda en azýndan sýðacaðý kadar pixel boþluðu bulunmalý."
+msgstr "Pencereler arasýnda en azýndan sýðacaðý kadar pixel boþluðu bulunmalý."
 
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
@@ -3097,3 +3074,4 @@ msgstr "_Ayarlar"
 #. ../themer/themer.glade:250
 msgid "_Themes"
 msgstr "_Temalar"
+
