@@ -416,7 +416,9 @@ that overrides settings set elsewhere.")
 	  ((map-name (intern (concat (symbol-name class) "-keymap"))))
 	(unless (boundp map-name)
 	  (set map-name (make-keymap))
-	  (setq ok-to-bind t))
+	  (setq ok-to-bind t)
+	  ;; so the theme can bind to the keymap..
+	  (gaol-add-special map-name))
 	(set-frame-part-value class 'keymap map-name)))
     ok-to-bind))
 
