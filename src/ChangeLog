@@ -1,5 +1,8 @@
 1999-08-31  John Harper  <john@dcs.warwick.ac.uk>
 
+	* functions.c (Fget_x_property, Fset_x_property): use CARD16
+	and CARD32 types to access 16- and 32-bit data respectively
+
 	* keys.c (num_lock_mod): initialised to the Num_Lock modifier,
 	ignored in events
 	(grab_event, ungrab_event): grab all combinations including
