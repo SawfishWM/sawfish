@@ -1,3 +1,9 @@
+1999-09-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (map_notify): check if the window set its
+	override_redirect attribute to True while it was unmapped, if
+	so un-adopt the window
+
 1999-09-25  John Harper  <john@dcs.warwick.ac.uk>
 
 	* events.c (handle_input_mask): ignore NoExpose and
