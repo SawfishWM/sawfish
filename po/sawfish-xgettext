@@ -48,7 +48,7 @@ exec rep "$0" "$@"
 	 (register doc))))
 
     ((defgroup)
-     (let ((real-name (nth 3 form)))
+     (let ((real-name (nth 2 form)))
        (when (stringp real-name)
 	 (register real-name))))
 
