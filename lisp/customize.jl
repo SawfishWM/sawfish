@@ -146,7 +146,10 @@
 		    (spec (mapcar 'customize-symbol-spec (cdr group-list))))
 		 (list (or (get group 'custom-group-doc)
 			   (symbol-name group))
-		       (list* 'vbox spec))))
+		       (if (get group 'custom-group-widget)
+			   (funcall
+			    (get group 'custom-group-widget) group spec)
+			 (list* 'vbox spec)))))
 	   custom-groups)))
 
 ;;;###autoload
@@ -210,3 +213,27 @@
       (setq customize-user-forms (cons form customize-user-forms)))
     (setq customize-dirty-user-file t)
     (eval form)))
+
+
+;; some blurb
+
+(defgroup about "About"
+  :widget (lambda ()
+	    (list 'label (format nil "\
+Sawmill %s
+
+Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+
+This is free software -- you are welcome to redistribute it and/or \
+modify it under the terms of the GNU General Public License as \
+published by the Free Software Foundation; either version 2, or \
+(at your option) any later version.
+
+Sawmill is distributed in the hope that it will be useful, but \
+WITHOUT ANY WARRANTY; without even the implied warranty of \
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the \
+GNU General Public License for more details.
+
+Visit the Sawmill homepage at http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
+"
+				 sawmill-version))))
