@@ -379,7 +379,6 @@ static void
 button_press (XEvent *ev)
 {
     struct frame_part *fp;
-    Lisp_Window *w = 0;
 
     /* This works for both press and release events. The desired outcome
        is that press and motion events get the context map active when
@@ -396,28 +395,30 @@ button_press (XEvent *ev)
 	|| ev->xbutton.window != root_window
 	|| ev->xbutton.subwindow == None)
     {
-	fp = find_frame_part_by_window (ev->xbutton.window);
-	if (fp != 0)
+	if (ev->type == ButtonPress)
 	{
-	    w = fp->win;
-
-	    if (ev->type == ButtonPress)
+	    fp = find_frame_part_by_window (ev->xbutton.window);
+	    if (fp != 0)
 		handle_fp_click (fp, ev);
 	}
 
 	eval_input_event (current_context_map ());
 
-	if (fp != 0 && !WINDOW_IS_GONE_P (w) && ev->type == ButtonRelease)
+	if (ev->type == ButtonRelease)
 	{
-	    /* In case the event binding threw a non-local-exit, fake
-	       an unwind-protect thing */
-	    repv old_throw = rep_throw_value;
-	    rep_GC_root gc_old_throw;
-	    rep_throw_value = rep_NULL;
-	    rep_PUSHGC(gc_old_throw, old_throw);
-	    handle_fp_click (fp, ev);
-	    rep_POPGC;
-	    rep_throw_value = old_throw;
+	    fp = find_frame_part_by_window (ev->xbutton.window);
+	    if (fp != 0 && !WINDOW_IS_GONE_P (fp->win))
+	    {
+		/* In case the event binding threw a non-local-exit, fake
+		   an unwind-protect thing */
+		repv old_throw = rep_throw_value;
+		rep_GC_root gc_old_throw;
+		rep_throw_value = rep_NULL;
+		rep_PUSHGC(gc_old_throw, old_throw);
+		handle_fp_click (fp, ev);
+		rep_POPGC;
+		rep_throw_value = old_throw;
+	    }
 	}
     }
 

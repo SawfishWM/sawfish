@@ -1,3 +1,10 @@
+2003-02-21  John Harper  <jsh@unfactored.org>
+
+	* events.c (button_press): don't cache the clicked frame part
+	while evaluating the event - it may get garbage collected.
+	Fixes valgrind errors while repeatedly shading/unshading
+	windows (which should fix #69817)
+
 2003-02-19  John Harper  <jsh@unfactored.org>
 
 	* events.c (gravity_notify): empty function to avoid warnings
