@@ -123,12 +123,13 @@ typedef struct lisp_font {
 #define FONTP(v)	rep_CELL16_TYPEP(v, font_type)
 #define VFONT(v)	((Lisp_Font *)rep_PTR(v))
 
-/* An allocated color */
+/* An allocated color (from Imlib) */
 typedef struct lisp_color {
     repv car;
     struct lisp_color *next;
     repv name;
-    XColor color;
+    int red, green, blue;		/* each 16 bits */
+    int pixel;				/* somewhere in the screen's cmap */
 } Lisp_Color;
 
 #define COLORP(v)	rep_CELL16_TYPEP(v, color_type)
