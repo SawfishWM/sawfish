@@ -102,8 +102,7 @@
 
       (gtk-text-view-set-wrap-mode text-view 'word)
       (gtk-text-view-set-editable text-view nil)
-      ;; XXX fixme
-      ;;(gtk-widget-set-usize text -2 50)
+      (gtk-widget-set-size-request text-view -1 50)
       (gtk-clist-set-selection-mode clist 'browse)
       (gtk-scrolled-window-set-policy scroller 'automatic 'automatic)
       (gtk-scrolled-window-set-policy scroller-2 'automatic 'automatic)
@@ -115,8 +114,7 @@
       (gtk-widget-show-all vbox)
       (unless params-widget
 	(gtk-widget-hide params-hbox))
-      ;; XXX fixme
-      ;;(gtk-widget-set-usize vbox 350 350)
+      (gtk-widget-set-size-request vbox 350 350)
       (update-doc)
 
       (lambda (op)

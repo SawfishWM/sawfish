@@ -82,7 +82,8 @@
 ;;; widget for editing individual bindings
 
   (define (make-keymap:binding-item changed-callback)
-    (make-widget `(pair command (labelled ,(_ "Key:") event) t t)
+    (make-widget `(pair command (labelled ,(_ "Key:") event)
+			t t (start . middle))
 		 changed-callback))
 
   (define-widget-type 'keymap:binding make-keymap:binding-item)
