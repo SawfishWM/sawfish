@@ -83,6 +83,7 @@ focus_on_window (Lisp_Window *w)
 	DB(("  XSetInputFocus (%lx, RevertToParent, %ld)\n", w->id,
 	    last_event_time));
 	XSetInputFocus (dpy, w->id, RevertToParent, last_event_time);
+	focus_window = w;
     }
     else
     {
@@ -90,6 +91,7 @@ focus_on_window (Lisp_Window *w)
 	DB(("  XSetInputFocus (None, RevertToParent, %ld)\n",
 	    last_event_time));
 	XSetInputFocus (dpy, None, RevertToParent, last_event_time);
+	focus_window = 0;
     }
 }
 
@@ -248,6 +250,8 @@ add_window (Window id)
 	if (!XGetWMNormalHints (dpy, w->id, &w->hints, &supplied))
 	    w->hints.flags = 0;
 	get_window_protocols (w);
+	if (!XGetTransientForHint (dpy, w->id, &w->transient_for_hint))
+	    w->transient_for_hint = 0;
 
 	{
 	    /* Is the window shaped? */
@@ -611,10 +615,9 @@ DEFUN("window-transient-p", Fwindow_transient_p, Swindow_transient_p,
 window-transient-p WINDOW
 ::end:: */
 {
-    Window tem;
     rep_DECLARE1(win, WINDOWP);
-    return (XGetTransientForHint (dpy, VWIN(win)->id, &tem)
-	    ? rep_MAKE_INT(tem) : Qnil);
+    return (VWIN(win)->transient_for_hint
+	    ? rep_MAKE_INT(VWIN(win)->transient_for_hint) : Qnil);
 }
 
 DEFUN("window-shaped-p", Fwindow_shaped_p, Swindow_shaped_p,
