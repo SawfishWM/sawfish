@@ -11,8 +11,6 @@ and longer-term ideas are marked -
 Outstanding bugs
 ================
 
-  ! opaque resize grabbing left border --> right border jumps around
-
   ! loading theme `Ganymede' into themer wedges it
 
   ! with panel `keep below' and `autohide' options, windows are
@@ -215,44 +213,6 @@ Window manager tasks
 
     With a bit of work the dynamically generated menus (e.g. the window
     and workspace submenus) could also be generated through the client
-
-  - Target guile instead of rep
-
-    In theory this is a good idea, probably a lot of work, but still.
-    These are some of the arguments/justifications for sticking with
-    rep:
-
-	1. The single-threadedness is not a problem for a window
-	   manager, where the flow of control pretty much follows the X
-	   event queue
-
-	2. It's lighter-weight than guile (though the effects of sharing
-	   libraries probably negates this a bit)
-
-	3. I have some half-cooked ideas about using the built-in
-	   remote-file handling to access a theme repository somewhere
-
-	4. It has lots of support (i.e. hooks, input handling) for
-	   being used as an extension language
-
-    And these are some reasons for using guile:
-
-	1. Scheme's a cleaner and more modern language than rep's Lisp
-	   dialect (one namespace, lexical scope, continuations, ...)
-
-	   [ first two are now done by rep also ]
-
-	2. More people know scheme than lisp (though the closeness to
-	   Emacs-lisp offsets this)
-
-	3. Sawmill would depend on fewer "weird" libraries (librep,
-	   rep-gtk), that someone (i.e. me) has to maintain
-
-    The main things counting against guile are that I've never used it,
-    and that I'm lazy
-
-    [ despite the above paragraphs I have no plans to move to guile
-    anymore, they're just left FYI ]
 
   - CORBA interface
 

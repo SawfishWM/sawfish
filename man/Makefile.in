@@ -57,12 +57,14 @@ install : sawmill.info installdirs
 	for f in sawmill.info*; do \
  	  $(INSTALL_DATA) $$f $(DESTDIR)$(infodir); \
 	done
+	-install-info librep.info $(DESTDIR)$(infodir)/dir
 
 installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(infodir)
 
 uninstall :
 	rm -f $(DESTDIR)$(infodir)/sawmill.info*
+	-install-info --delete librep.info $(DESTDIR)$(infodir)/dir
 
 clean :
 	rm -f *~ sawmill.info* sawmill.?? sawmill.???
