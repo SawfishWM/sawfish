@@ -82,7 +82,7 @@ evaluated.")
     (when type
       (put name 'custom-command-args type))
     (when doc
-      (put name 'dommand-doc doc))
+      (put name 'command-doc doc))
     (when doc-key
       (put name 'command-doc-key doc-key))
     (when user-level
