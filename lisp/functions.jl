@@ -35,3 +35,11 @@
     (mapc #'(lambda (w)
 	      (when (= (window-id w) id)
 		(throw 'foo w))) (managed-windows))))
+
+;; execute FORMS with the server grabbed
+(defmacro with-server-grabbed (&rest forms)
+  `(progn
+     (grab-server)
+     (unwind-protect
+	 (progn ,@forms)
+       (ungrab-server))))
