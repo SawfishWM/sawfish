@@ -1,3 +1,18 @@
+2000-03-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* configure.jl (configure-request-handler): use fixed-position
+	property to decide whether or not to clamp window within the
+	workspace boundaries
+
+	* workspace.jl (ws-move-window, ws-copy-window): ignore cases
+	where (= DEST SRC), handle other cases properly
+
+	* workspace.jl (send-to-previous-workspace,
+	send-to-next-workspace, copy-to-previous-workspace,
+	copy-to-next-workspace, append-workspace-and-send,
+	prepend-workspace-and-send): new optional arg SELECT, whether
+	the destination space is selected. t when called interactively
+
 2000-03-07  John Harper  <john@dcs.warwick.ac.uk>
 
 	* gnome.jl (gnome-set-workspace): never place windows on

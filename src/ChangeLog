@@ -1,3 +1,11 @@
+2000-03-08  John Harper  <john@dcs.warwick.ac.uk>
+
+	* functions.c (Fx_raise_window, Frestack_windows): these now
+	accept window ids as well as window objects
+
+	* x.c (x-window-back-buffer, x-window-swap-buffers): basic
+	support for the X double-buffering extension
+
 2000-03-06  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c (eval_input_event, print_event_prefix): ported code
