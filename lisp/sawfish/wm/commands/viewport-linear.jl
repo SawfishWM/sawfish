@@ -42,25 +42,26 @@
   (set-window-viewport
    window (mod index viewport-columns) (/ index viewport-columns)))
 
+;;;###autoload
+(defun define-linear-viewport-commands (index)
+  (let
+      ((fn (lambda (base)
+	     (intern (format nil "%s:%d" base (1+ index))))))
+    (define-value
+     (fn "set-viewport-linear")
+     (lambda ()
+       "Move to the specified linear viewport."
+       (interactive)
+       (set-viewport-linear index)))
+    (define-value
+     (fn "set-window-viewport-linear")
+     (lambda (window)
+       "Move the current window to the specified linear viewport."
+       (interactive "%W")
+       (set-window-viewport-linear window index)))))
+
 (let
-    ((define-commands
-      (lambda (index)
-	(let
-	    ((fn (lambda (base)
-		   (intern (format nil "%s:%d" base (1+ index))))))
-	  (define-value
-	   (fn "set-viewport-linear")
-	   (lambda ()
-	     "Move to the specified linear viewport."
-	     (interactive)
-	     (set-viewport-linear index)))
-	  (define-value
-	   (fn "set-window-viewport-linear")
-	   (lambda (window)
-	     "Move the current window to the specified linear viewport."
-	     (interactive "%W")
-	     (set-window-viewport-linear window index))))))
-     (i 0))
+    ((i 0))
   (while (< i viewport-linear-last)
-    (define-commands i)
+    (define-linear-viewport-commands i)
     (setq i (1+ i))))
