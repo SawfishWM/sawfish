@@ -39,14 +39,61 @@
 ;; makes netscape windows a lot easier to live with.
 
 
-;; configuration
+;; configuration and customize stuff
+
+(defvar match-window-x-properties
+  '((WM_NAME . "Window name")
+    (WM_CLASS . "Window class")
+    (WM_ICON_NAME . "Icon name")
+    (WM_CLIENT_MACHINE . "Host name")))
+
+(defvar match-window-properties
+  `((ignored boolean)
+    (iconified boolean)
+    (shaded boolean)
+    (avoid boolean)
+    (sticky boolean)
+    (fixed-position boolean)
+    (focus-proxy-click boolean)
+    (ignore-window-input-hint boolean)
+    (ignore-program-position boolean)
+    (workspace number)
+    (depth number)
+    (placement-weight number)
+    (group symbol ,(lambda ()
+		     (delete-if-not symbolp (window-group-ids))))
+    (place-mode symbol ,(lambda ()
+			  (custom-get-options 'place-window-mode)))
+    (type symbol ,(lambda ()
+		    '(default transient shaped shaped-transient unframed)))
+    (frame-style symbol ,(lambda ()
+			   (find-all-frame-styles t)))))
+
+(defun match-window-custom-widget (symbol value doc)
+  (let
+      ((props (mapcar (lambda (prop)
+			(if (and (eq (nth 1 prop) 'symbol)
+				 (functionp (nth 2 prop)))
+			    (list (car prop) (nth 1 prop) ((nth 2 prop)))
+			  prop))
+		      match-window-properties)))
+    `(match-window :variable ,symbol
+		   :value ,value
+		   :doc ,doc
+		   :properties ,props
+		   :x-properties ,match-window-x-properties)))
+
+(put 'match-window 'custom-widget match-window-custom-widget)
+
+(defgroup match-window "Matched windows")
 
 ;; List of (MATCH-ELTS . ACTION-ELTS)
-
 ;; Each MATCH-ELT is (PROP . REGEXP or NUMBER or SYMBOL)
 ;; Each ACTION-ELT is (PROP . VALUE)
-
-(defvar match-window-profile nil)
+(defcustom match-window-profile nil
+  "Match windows to properties."
+  :type match-window
+  :group match-window)
 
 
 ;; main entry point
