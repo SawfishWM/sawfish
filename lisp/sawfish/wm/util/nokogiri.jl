@@ -99,3 +99,23 @@
 (define (nokogiri-apply-changes changes)
   (mapc (lambda (cell)
 	  (customize-set (car cell) (cdr cell))) changes))
+
+(define (nokogiri-report-commands)
+  (mapcar (lambda (sym)
+	    (let ((params (get sym 'custom-command-args)))
+	      (if params
+		  (list sym params)
+		sym)))
+	  (sort (apropos "" (lambda (x)
+			      (and (commandp x)
+				   (not (get x 'deprecated-command))))))))
+
+
+;; ignore these commands in customizer
+
+(mapc (lambda (x) (put x 'deprecated-command t))
+      '(apropos-function apropos-variable beep call-command
+        copy-file delete-directory delete-file describe-key
+	describe-symbol focus-click garbage-collect load
+	make-directory nop rename-file set step system
+	trace untrace))
