@@ -47,43 +47,44 @@
 	       (grab-keymap window-keymap)))
 
 (defcustom root-window-keymap (make-keymap)
-  "Keymap containing bindings active when the pointer is in the root window."
+  "Keymap containing bindings active when the pointer is in the root window.
+(Only mouse-bindings are evaluated in this map.)"
   :group bindings
   :type keymap)
 
 (defcustom title-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the title of
-a window."
+a window. (Only mouse-bindings are evaluated in this map.)"
   :group bindings
   :type keymap)
 
 (defcustom border-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the border of
-a window."
+a window. (Only mouse-bindings are evaluated in this map.)"
   :group bindings
   :type keymap)
 
 (defcustom close-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the close button
-of a window."
+of a window. (Only mouse-bindings are evaluated in this map.)"
   :group bindings
   :type keymap)
 
 (defcustom iconify-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the iconify
-button of a window."
+button of a window. (Only mouse-bindings are evaluated in this map.)"
   :group bindings
   :type keymap)
 
 (defcustom maximize-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the maximize
-button of a window."
+button of a window. (Only mouse-bindings are evaluated in this map.)"
   :group bindings
   :type keymap)
 
 (defcustom menu-button-keymap (make-keymap)
   "Keymap containing bindings active when the pointer is in the menu button
-of a window."
+of a window. (Only mouse-bindings are evaluated in this map.)"
   :group bindings
   :type keymap)
 
