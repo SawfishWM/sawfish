@@ -2916,6 +2916,13 @@ hints. May be one of the symbols: @code{north-west}, @code{north},
 @code{north-east}, @code{west}, @code{center}, @code{east},
 @code{south-west}, @code{south}, @code{south-east}.
 
+@item fixed-position
+When set, the user is not allowed to change the position of this window.
+
+@item client-set-position
+When set, the program owning the window has manually moved the window
+after it was mapped.
+
 @end vtable
 
 

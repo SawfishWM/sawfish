@@ -1,3 +1,17 @@
+2000-07-16  John Harper  <john@dcs.warwick.ac.uk>
+
+	* configure.jl: renamed the 'fixed-position property as
+	'client-set-position. Changed all users
+
+	* gnome.jl: support FIXED_POSITION hint, sets the
+	'fixed-position property
+
+	* move-resize.jl, slide-window.jl: when 'fixed-position is set,
+	don't allow the window to be moved
+
+	* workspace.jl: add 'fixed-position to those saved with the
+	session data
+
 2000-07-14  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.30.2
