@@ -680,8 +680,6 @@ static void
 enter_notify (XEvent *ev)
 {
     struct frame_part *fp;
-    if (ev->xcrossing.mode != NotifyNormal)
-	return;
     if (ev->xcrossing.window == root_window)
 	Fcall_hook (Qenter_notify_hook, Fcons (Qroot, Qnil), Qnil);
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
@@ -724,8 +722,6 @@ static void
 leave_notify (XEvent *ev)
 {
     struct frame_part *fp;
-    if (ev->xcrossing.mode != NotifyNormal)
-	return;
     if (ev->xcrossing.window == root_window)
 	Fcall_hook (Qleave_notify_hook, Fcons (Qroot, Qnil), Qnil);
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
