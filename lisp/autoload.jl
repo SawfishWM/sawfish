@@ -20,9 +20,6 @@
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;; ::autoload-start::
-(autoload 'server-open-p "server")
-(autoload 'server-open "server" t)
-(autoload 'server-reply "server")
 (setq custom-required (cons 'move-resize custom-required))
 (autoload 'move-window-interactively "move-resize" t)
 (autoload 'resize-window-interactively "move-resize" t)
