@@ -28,10 +28,16 @@
 
 ;; If iconified, a window has its `iconified' property set to t
 
+(defcustom iconify-ignored nil
+  "Allow ignored windows to be iconified."
+  :type boolean
+  :group (min-max iconify))
+
 (defun iconify-window (w)
   "Iconify the window."
   (interactive "%W")
-  (unless (window-get w 'iconified)
+  (when (and (not (window-get w 'iconified))
+	     (or iconify-ignored (not (window-get w 'ignored))))
     (window-put w 'iconified t)
     (when (window-visible-p w)
       (hide-window w))
