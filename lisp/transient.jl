@@ -47,7 +47,9 @@
 	    (set-input-focus w)
 	    (setq set-focus t)))))
     (when (and (not set-focus)
-	       focus-windows-when-mapped
+	       (or (and focus-windows-when-mapped
+			(not (window-get w 'never-focus)))
+		   (window-get w 'focus-when-mapped))
 	       (window-really-wants-input-p w))
       (set-input-focus w))))
 
