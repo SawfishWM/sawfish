@@ -154,6 +154,22 @@ A value between 0 and 1023 inclusive.")
       ;; no zero overlap point, use the point with least overlap
       min-point)))
 
+(defun sp-fit-or-nil (dims grid rects)
+  (let
+      ((point (cons 0 0))
+       tem)
+    (catch 'done
+      (mapc #'(lambda (y)
+		(rplacd point y)
+		(mapc #'(lambda (x)
+			  (rplaca point x)
+			  (setq tem (sp-least-overlap dims point rects))
+			  (when (and tem (zerop (cdr tem)))
+			    (throw 'done (car tem))))
+		      (car grid)))
+	    (cdr grid))
+      nil)))
+
 
 ;; best-fit search
 
@@ -267,7 +283,7 @@ A value between 0 and 1023 inclusive.")
 
 ;; entry-points
 
-(defun sp-do-placement (w mode)
+(defun sp-do-placement (w fit-fun &optional fall-back-fun)
   (if (and sp-max-queued-events (> (x-events-queued) sp-max-queued-events))
       ;; fitted placement can cause event tailbacks when there's
       ;; lots of windows being opened with lots of windows already
@@ -291,9 +307,7 @@ A value between 0 and 1023 inclusive.")
 		 (<= (+ (cdr dims) sp-padding) (screen-height)))
 	(rplaca dims (+ (car dims) (* sp-padding 2)))
 	(rplacd dims (+ (cdr dims) (* sp-padding 2)))
-	(setq point (funcall (if (eq mode 'first-fit)
-				 'sp-first-fit 'sp-best-fit)
-			     dims grid rects))
+	(setq point (funcall fit-fun dims grid rects))
 	(when point
 	  (rplaca point (+ (car point) sp-padding))
 	  (rplacd point (+ (cdr point) sp-padding))))
@@ -303,18 +317,20 @@ A value between 0 and 1023 inclusive.")
 	(setq dims (window-frame-dimensions w))
 	(rplaca dims (min (car dims) (screen-width)))
 	(rplacd dims (min (cdr dims) (screen-height)))
-	(setq point (funcall (if (eq mode 'first-fit)
-				 'sp-first-fit 'sp-best-fit)
-			     dims grid rects)))
+	(setq point (funcall fit-fun dims grid rects)))
 
       (if point
 	  (move-window-to w (car point) (cdr point))
-	(place-window-randomly w)))))
+	(funcall (or fall-back-fun 'place-window-randomly) w)))))
 
 ;;;###autoload
 (defun place-window-first-fit (w)
-  (sp-do-placement w 'first-fit))
+  (sp-do-placement w 'sp-first-fit))
 
 ;;;###autoload
 (defun place-window-best-fit (w)
-  (sp-do-placement w 'best-fit))
+  (sp-do-placement w 'sp-best-fit))
+
+;;;###autoload
+(defun place-window-first-fit-or-interactive (w)
+  (sp-do-placement w 'sp-fit-or-nil 'place-window-interactively))
