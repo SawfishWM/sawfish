@@ -134,7 +134,8 @@
       ;; XXX corresponding event in the root-window-keymap or
       ;; XXX the global-keymap
       (when (string-match "-(Click1|Off)$" event)
-	(proxy-current-event gnome-window-id)
+	;; send with SubstructureNotifyMask
+	(proxy-current-event gnome-window-id (lsh 1 19))
 	t))))
 
 
