@@ -92,5 +92,19 @@
 
 ;;;###autoload
 (defun gnome-logout ()
+  "Logout from the current GNOME session."
   (interactive)
   (system "save-session --kill &"))
+
+;;;###autoload
+(defun gnome-www-page ()
+  (interactive)
+  "Display the WWW page of the GNOME project."
+  (require 'help)
+  (display-url "http://www.gnome.org/"))
+
+;;;###autoload
+(defun gnome-help-browser ()
+  "Launch the GNOME help browser."
+  (interactive)
+  (system "gnome-help-browser >/dev/null 2>&1 </dev/null &"))
