@@ -25,7 +25,7 @@
 ;; optimization function to do best-fit placement.
 
 (defcustom sp-non-ignored-windows nil
-  "Regular expression matching windows not to overlap in first-fit mode."
+  "Regular expression matching windows not to overlap in first/best-fit modes."
   :group placement
   :type string
   :allow-nil t)
