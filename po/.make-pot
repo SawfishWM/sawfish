@@ -13,7 +13,7 @@ glade_c=.$$.glade.c
 rep-xgettext --c $REP_XGETTEXT_FLAGS $REP_SRCS >$lisp_c
 libglade-xgettext --c $GLADE_SRCS >$glade_c
 
-xgettext -a --no-location $lisp_c $glade_c
+xgettext --add-comments -a --no-location $lisp_c $glade_c
 mv -f messages.po sawmill.pot
 
 rm -f $lisp_c $glade_c
