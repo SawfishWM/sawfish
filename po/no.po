@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.2\n"
-"POT-Creation-Date: 2001-04-22 10:11-0400\n"
-"PO-Revision-Date: 2001-04-22 11:05-04:00\n"
+"POT-Creation-Date: 2001-06-04 13:43-0700\n"
+"PO-Revision-Date: 2002-02-01 20:20+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,10 +20,6 @@ msgstr "og mange andre..."
 #. ../scripts/sawfish-about.jl
 msgid "Sawfish manages your windows extensibly."
 msgstr "Sawfish håndterer dine vinduer med mange funksjoner."
-
-#. ../scripts/sawfish-about.jl
-msgid "Protect the sawfish"
-msgstr "Beskytt sagfisken"
 
 #. ../scripts/sawfish-about.jl
 msgid "Sawfish homepage"
@@ -53,15 +49,38 @@ msgstr "[øverst]"
 msgid "[bottom]"
 msgstr "[nederst]"
 
+#. ../lisp/sawfish/gtk/widgets/color.jl
+#. ../themer/themer.in
+msgid "Select color"
+msgstr "Velg farge"
+
 #. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
 #. ../themer/themer.in
 msgid "Browse..."
 msgstr "Bla gjennom..."
 
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../themer/themer.in
+msgid "Select font"
+msgstr "Velg skrifttype"
+
 #. ../themer/themer.in
 msgid "Properties..."
 msgstr "Egenskaper..."
+
+#. ../themer/themer.in
+msgid "Select Image"
+msgstr "Velg bilde"
+
+#. ../themer/themer.in
+msgid "Image Properties"
+msgstr "Egenskaper for bilde"
+
+#. ../lisp/sawfish/gtk/widget.jl
+#. ../themer/themer.in
+msgid "No matching item for %S"
+msgstr "Ingen lik oppføring for %S"
 
 #. ../themer/themer.in
 #, c-format
@@ -265,6 +284,10 @@ msgstr "Tast"
 msgid "Value"
 msgstr "Verdi"
 
+#. ../lisp/sawfish/gtk/widgets/file.jl
+msgid "Select file"
+msgstr "Velg fil"
+
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
 msgstr "Legg til..."
@@ -310,6 +333,21 @@ msgstr "Sawfish feil"
 msgid "Sawfish configurator"
 msgstr "Sawfish konfigurator"
 
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Arbeidsområder:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Kolonner:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Rader:"
+
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/commands.jl
 #. ../lisp/sawfish/ui/widgets/keymap.jl
@@ -349,18 +387,6 @@ msgstr "Handlinger"
 #. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Match window properties"
 msgstr "Treff på vindusegenskaper"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Arbeidsområder:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Kolonner:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Rader:"
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -569,7 +595,7 @@ msgstr "Ingen"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "global-keymap"
-msgstr ""
+msgstr "global-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
@@ -577,7 +603,7 @@ msgstr "Tastaturkart som inneholder bindinger som er aktive globalt."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "window-keymap"
-msgstr ""
+msgstr "window-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap containing bindings active when a client window is focused."
@@ -587,7 +613,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "root-window-keymap"
-msgstr ""
+msgstr "root-window-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -599,7 +625,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
-msgstr ""
+msgstr "title-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -623,7 +649,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
-msgstr ""
+msgstr "close-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -635,7 +661,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
-msgstr ""
+msgstr "iconify-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -647,7 +673,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
-msgstr ""
+msgstr "maximize-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -659,7 +685,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
-msgstr ""
+msgstr "menu-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -672,7 +698,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
-msgstr ""
+msgstr "shade-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -697,6 +723,14 @@ msgstr "Vis informasjon om tastaturbindinger i menyoppføringene."
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
 msgstr "Minimer"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Unmaximize"
+msgstr "Avmaksimer"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Maximize"
+msgstr "Maksimer"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
@@ -819,7 +853,7 @@ msgstr "_Om sawfish..."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup window menu"
-msgstr ""
+msgstr "Vis vindumeny"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Display the menu listing all window operations."
@@ -827,7 +861,7 @@ msgstr "Vis menylisten med alle vindusoperasjoner."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup root menu"
-msgstr ""
+msgstr "Vis rotmeny"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Display the main menu."
@@ -835,7 +869,7 @@ msgstr "Vis hovedmenyen."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup apps menu"
-msgstr ""
+msgstr "Vis applikasjonsmeny"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Display the applications menu."
@@ -881,7 +915,7 @@ msgstr "Hold transiente vinduer stablet over: \\w"
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise single window"
-msgstr ""
+msgstr "Hev enkelt vindu"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
@@ -890,7 +924,7 @@ msgstr "Hev vinduet til sin høyeste tillatte posisjon in stablingsrekkefølgen."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower single window"
-msgstr ""
+msgstr "Senk enkelt vindu"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
@@ -899,7 +933,7 @@ msgstr "Senk vinduet til sin laveste tillatte posisjon i stablingsrekkefølgen."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise lower single window"
-msgstr ""
+msgstr "Hev enkelt nedre vindu"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
@@ -1099,7 +1133,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Uniquify window name"
-msgstr ""
+msgstr "Gjør navn på vindu unikt"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Force the current window to have a unique title."
@@ -1180,18 +1214,16 @@ msgid "space %d"
 msgstr "mellomrom %d"
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Popup workspace list"
-msgstr "Flytt arbeidsområde til venstre"
+msgstr "Vis liste over arbeidsområder"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Display the menu containing the list of all workspaces."
 msgstr "Vis meny med liste over alle arbeidsområder."
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Popup window list"
-msgstr "I _vinduslisten"
+msgstr "Vis vinduliste"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Display the menu of all managed windows."
@@ -1247,7 +1279,7 @@ msgstr "Kopier vinduet til forrige arbeidsområde."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Append workspace and send"
-msgstr ""
+msgstr "Legg til arbeidsområde til slutt og send"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid ""
@@ -1257,7 +1289,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prepend workspace and send"
-msgstr ""
+msgstr "Legg til arbeidsområde foran og send"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid ""
@@ -1477,7 +1509,7 @@ msgstr "Slå av GNOME SKIP_TASKLIST-hintet for vinduet."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome logout"
-msgstr ""
+msgstr "GNOME avlogging"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Logout from the current GNOME session."
@@ -1485,7 +1517,7 @@ msgstr "Logg ut av aktiv GNOME-sesjon."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome www page"
-msgstr ""
+msgstr "GNOME nettside"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Display the WWW page of the GNOME project."
@@ -1513,19 +1545,19 @@ msgstr "Ikonifiser gruppe"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Uniconify group"
-msgstr ""
+msgstr "Gjør gruppe unik"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify transient group"
-msgstr ""
+msgstr "Ikonifiser transientgruppe"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Uniconify transientgroup"
-msgstr ""
+msgstr "Avikonifisert transientgruppe"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Make group sticky"
-msgstr ""
+msgstr "Gjør gruppe klebrig"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Make group unsticky"
@@ -1581,11 +1613,11 @@ msgstr "Hev lavere gruppe"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Raise group depth"
-msgstr ""
+msgstr "Hev gruppedybde"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Lower group depth"
-msgstr ""
+msgstr "Senk gruppedybde"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Delete group"
@@ -1663,7 +1695,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window up"
-msgstr ""
+msgstr "Voks vindu oppover"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grows window upwards until it `bumps into' another window."
@@ -1671,25 +1703,23 @@ msgstr "Øker størrelsen på vinduet oppover til det 'treffer' et annet vindu."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
-msgstr ""
+msgstr "Voks vindu nedover"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grows window downwards until it `bumps into' another window."
 msgstr "Øker størrelsen på vinduet nedover til det 'treffer' et annet vindu."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid "Pack window left"
-msgstr "I _vinduslisten"
+msgstr "Pakk vindu mot venstre"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Moves window to the left until it `bumps into' another window."
 msgstr "Flytter vinduet til venstre til det 'treffer' et annet vindu."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid "Pack window right"
-msgstr "I _vinduslisten"
+msgstr "Pakk vindu mot høyre"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Moves window to the right until it `bumps into' another window."
@@ -1697,7 +1727,7 @@ msgstr "Flytter vinduet til høyre til det 'treffer' et annet vindu."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window up"
-msgstr ""
+msgstr "Pakk vindu oppover"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Moves window upwards until it `bumps into' another window."
@@ -1705,7 +1735,7 @@ msgstr "Flytter vinduet oppover til det 'treffer' et annet vindu."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
-msgstr ""
+msgstr "Pakk vindu nedover"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Moves window downwards until it `bumps into' another window."
@@ -1713,24 +1743,23 @@ msgstr "Flytter vinduet nedover til det 'treffer' et annet vindu."
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show faq"
-msgstr ""
+msgstr "Hjelp vis OBS"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show news"
-msgstr ""
+msgstr "Hjelp vis nyheter"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show programmer manual"
-msgstr ""
+msgstr "Hjelp vis programmeringshåndbok"
 
 #. ../lisp/sawfish/wm/commands/help.jl
-#, fuzzy
 msgid "Help show homepage"
-msgstr "Sawfish nettside"
+msgstr "Hjelp vis nettside"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
-msgstr ""
+msgstr "Hjelp om"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Number of pixels to move pointer in `move-cursor-' commands."
@@ -1885,27 +1914,24 @@ msgid "Only update window contents after it has stopped moving."
 msgstr "Kun oppdater vindusinnhold etter at det har sluttet å bevege seg."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Move window interactively"
-msgstr "Flytt vinduet interaktivt ved bruk av musen."
+msgstr "Flytt vinduet interaktivt"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move the window interactively using the mouse."
 msgstr "Flytt vinduet interaktivt ved bruk av musen."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Resize window interactively"
-msgstr "Endre størrelse på vinduet med musen."
+msgstr "Endre størrelse på vinduet interaktivt"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize the window interactively using the mouse."
 msgstr "Endre størrelse på vinduet med musen."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Move selected window"
-msgstr "Fjern skyggelegging fra valgte vinduer."
+msgstr "Flytt valgt vindu"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid ""
@@ -1913,9 +1939,8 @@ msgid ""
 msgstr "Vent til brukeren velger et vindu, flytt så dette interaktivt."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Resize selected window"
-msgstr "Fjern skyggelegging fra valgte vinduer."
+msgstr "Endre størrelse på valgt vindu"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid ""
@@ -1925,7 +1950,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
-msgstr ""
+msgstr "Hev og send klikk gjennom"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid ""
@@ -1937,7 +1962,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
-msgstr ""
+msgstr "Hev og send klikk gjennom hvis fokusert"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid ""
@@ -1949,15 +1974,15 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
-msgstr ""
+msgstr "Hev eller send klikk gjennom"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise window and pass through click"
-msgstr ""
+msgstr "Hev vindu og send klikk gjennom"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise group and pass through click"
-msgstr ""
+msgstr "Hev gruppe og send klikk gjennom"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid ""
@@ -1969,7 +1994,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
-msgstr ""
+msgstr "Hev transienter og send klikk gjennom"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid ""
@@ -2026,36 +2051,32 @@ msgid "Number of pixels to move window in `slide-' commands."
 msgstr "Antall piksler vinduet skal flyttes i `slide-' kommandoer."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Slide window left"
-msgstr "_Send vinduer til"
+msgstr "La vindu gli til venstre"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels to the left."
 msgstr "Flytt vinduet `slide-window-increment' piksler til venstre."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Slide window right"
-msgstr "_Send vinduer til"
+msgstr "La vindu gli til høyre"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels to the right."
 msgstr "Flytt vinduet `slide-window-increment' piksler til høyre."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Slide window up"
-msgstr "_Send vinduer til"
+msgstr "La vindu gli oppover"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels upwards."
 msgstr "Flytt vinduet `slide-window-increment' piksler oppover."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Slide window down"
-msgstr "_Send vinduer til"
+msgstr "La vindu gli nedover"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Move the window `slide-window-increment' pixels downwards."
@@ -2078,9 +2099,8 @@ msgid "Move the window group `slide-window-increment' pixels to the right."
 msgstr "Flytt vindusgruppen `slide-window-increment' piksler til høyre."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
-#, fuzzy
 msgid "Slide group up"
-msgstr "Ny gruppe"
+msgstr "Gli gruppe opp"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels upwards."
@@ -2088,20 +2108,51 @@ msgstr "Flytt vindusgruppen `slide-window-increment' piksler oppover."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group down"
-msgstr ""
+msgstr "Gli gruppe ned"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Flytt vindusgruppen `slide-window-increment' piksler nedover."
 
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-msgid "Set viewport linear"
-msgstr ""
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move viewport next"
+msgstr "Flytt visningsport til neste"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the next viewport."
+msgstr "Flytt til neste visningsområde."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move viewport previous"
+msgstr "Flytt visningsport til forrige"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the previous viewport."
+msgstr "Flytt til forrige visningsområde."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move window previous"
+msgstr "Flytt vindu til forrige"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the previous viewport."
+msgstr "Flytt vinduet til forrige visningsområde."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move window next"
+msgstr "Flytt vindu til neste"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the next viewport."
+msgstr "Flytt vinduet til neste visningsområde."
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
-#, fuzzy
+msgid "Set viewport linear"
+msgstr "Sett lineær visningsport"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
 msgid "Set window viewport linear"
-msgstr "Flytt vinduet til visningsområdet over."
+msgstr "Sett vinduets visningsport til lineær"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Display window names while cycling through windows."
@@ -2159,53 +2210,16 @@ msgid "Optional arguments given to the `xterm' command."
 msgstr "Alternative argumenter gitt til 'xterm' kommandoen."
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
-#, fuzzy
 msgid "Xterm"
-msgstr "Andre"
+msgstr "Xterm"
 
 #. ../lisp/sawfish/wm/commands/xterm.jl
 msgid "Start a new xterm."
 msgstr "Start en ny xterm."
 
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-#, fuzzy
-msgid "Move viewport next"
-msgstr "Flytt visningsport en skjerm opp."
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move to the next viewport."
-msgstr "Flytt til neste visningsområde."
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-#, fuzzy
-msgid "Move viewport previous"
-msgstr "Flett sammen med forrige"
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move to the previous viewport."
-msgstr "Flytt til forrige visningsområde."
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-#, fuzzy
-msgid "Move window previous"
-msgstr "Flett sammen med forrige"
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move the window to the previous viewport."
-msgstr "Flytt vinduet til forrige visningsområde."
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-#, fuzzy
-msgid "Move window next"
-msgstr "_Send vinduer til"
-
-#. ../lisp/sawfish/wm/commands/viewport-extras.jl
-msgid "Move the window to the next viewport."
-msgstr "Flytt vinduet til neste visningsområde."
-
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
-msgstr ""
+msgstr "3D-hack"
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Play sound effects for window events."
@@ -2293,7 +2307,7 @@ msgstr "Ingen feil."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display errors"
-msgstr ""
+msgstr "Vis feil"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display all errors that have occurred to the screen."
@@ -2408,18 +2422,16 @@ msgid "Group"
 msgstr "Gruppe"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Ungrouped"
-msgstr "gruppe"
+msgstr "Ikke gruppert"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Cycle skip"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Window list skip"
-msgstr "I _vinduslisten"
+msgstr "Hopp over i vinduslisten"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
@@ -2434,13 +2446,12 @@ msgid "Shade hover"
 msgstr "Overhengende skygge"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Transients above"
-msgstr "transienter"
+msgstr "Transienter over"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignore stacking requests"
-msgstr ""
+msgstr "Ignorer stabelforespørsler"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
@@ -2595,15 +2606,15 @@ msgstr "Om GNOME..."
 
 #. ../lisp/sawfish/wm/gnome/menus.jl
 msgid "Gnome menus update"
-msgstr ""
+msgstr "Oppdater GNOME meny"
 
 #. ../lisp/sawfish/wm/placement/smart.jl
 msgid ""
-"Try to leave at least this many pixels between window edges in "
-"first/best-fit."
+"Try to leave at least this many pixels between window edges in first/best-"
+"fit."
 msgstr ""
-"Prøv å la det være minst så mange piksler mellom vinduskanter ved "
-"første/beste tilpasning."
+"Prøv å la det være minst så mange piksler mellom vinduskanter ved første/"
+"beste tilpasning."
 
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
@@ -2665,36 +2676,32 @@ msgid "Iconify the window."
 msgstr "Minimer vinduet."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid "Uniconify window"
-msgstr "Minimer vinduet."
+msgstr "Avikonifiser vinduet"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Return the window from its iconified state."
 msgstr "Gjenopprett vinduet fra ikonifisert tilstand."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid "Toggle window iconified"
-msgstr "Ikke-håndterte vinduer kan minimeres."
+msgstr "Slå på/av ikonifisering av vindu"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle the iconification of window W."
 msgstr "Veksle mellom ikonifisering av windu W."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid "Iconify workspace windows"
-msgstr "Minimer vinduet."
+msgstr "Ikonifiser arbeidsområdevinduer"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconify all windows on the current workspace."
 msgstr "Ikonifiser alle vinduer i aktivt arbeidsområde."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid "Make window sticky"
-msgstr "Like vinduer"
+msgstr "Gjør vindu klebrig"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Make window unsticky"
@@ -2721,9 +2728,8 @@ msgid "_Sticky"
 msgstr "_Klebrig"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
-#, fuzzy
 msgid "Make window ignored"
-msgstr "Treff på vindusegenskaper"
+msgstr "Gjør vindu ignorert"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Ignore the window."
@@ -2812,9 +2818,8 @@ msgid "Lock position and size while windows are maximized."
 msgstr "Lås posisjon og størrelse mens vinduer er maksimert."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize window"
-msgstr "Maksimering"
+msgstr "Maksimer vindu"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize the dimensions of the window."
@@ -2834,34 +2839,31 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically"
-msgstr ""
+msgstr "Maksimer vindu vertikalt"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize the vertical dimension of the window."
 msgstr "Maksimer vinduets vertikale dimensjon."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize window horizontally"
-msgstr "Fyll horisontalt"
+msgstr "Maksimer vindu horisontalt"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize the horizontal dimension of the window."
 msgstr "Maksimer vinduets horisontale dimensjon."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize window toggle"
-msgstr "Maksimering"
+msgstr "Knapp for maksimering av vindu"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Toggle the state of the window between maximized and unmaximized."
 msgstr "Veksle tilstanden for vinduet mellom maksimert og ikke-maksimert."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize window horizontally toggle"
-msgstr "Maksimer vinduet horisontalt uten å overlappe noen andre vinduer."
+msgstr "Knapp for å maksimere vinduet horisontalt"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid ""
@@ -2872,9 +2874,8 @@ msgstr ""
 "ikke-maksimert."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize window vertically toggle"
-msgstr "Maksimer vinduet vertikalt uten å overlappe noen andre vinduer."
+msgstr "Knapp for å maksimere vinduet vertikalt"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid ""
@@ -2885,9 +2886,8 @@ msgstr ""
 "ikke-maksimert."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize fill window"
-msgstr "Maksimering"
+msgstr ""
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize the window without obscuring any other windows."
@@ -2947,18 +2947,16 @@ msgstr ""
 "ikke-maksimert."
 
 #. ../lisp/sawfish/wm/state/shading.jl
-#, fuzzy
 msgid "Shade window"
-msgstr "_Send vinduer til"
+msgstr "Skyggelegg vindu"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Display only the title bar of the window."
 msgstr "Vis kun vinduets tittellinje."
 
 #. ../lisp/sawfish/wm/state/shading.jl
-#, fuzzy
 msgid "Unshade window"
-msgstr "Fjern skyggelegging fra valgte vinduer."
+msgstr "Fjern skyggelegging fra vindu"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid ""
@@ -2994,9 +2992,8 @@ msgid "Decorate dialog windows similarly to application windows."
 msgstr "Dekorer dialogvinduer likt som applikasjonsvinduer."
 
 #. ../lisp/sawfish/wm/state/transient.jl
-#, fuzzy
 msgid "Raise window and transients"
-msgstr "Hev vinduer når de ikke er skygget."
+msgstr "Hev vindu og transienter"
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid ""
@@ -3008,7 +3005,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
-msgstr ""
+msgstr "Senk vindu og transienter"
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid ""
@@ -3052,7 +3049,7 @@ msgstr "Flytt pekeren til valgt vindu."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window without focusing"
-msgstr ""
+msgstr "Vis vindu uten å gi det fokus"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display the workspace/viewport containing the window W."
@@ -3060,7 +3057,7 @@ msgstr "Vis arbeidsomdåde/visningsområde som inneholder vindu W."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
-msgstr ""
+msgstr "Vis vindu"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display the workspace containing the window W, then focus on W."
@@ -3080,7 +3077,7 @@ msgstr "Ny gruppe"
 
 #. ../lisp/sawfish/wm/util/gtkrc.jl
 msgid "Gtkrc reload style"
-msgstr ""
+msgstr "Stil for gjenlesing av Gtkrc"
 
 #. ../lisp/sawfish/wm/util/gtkrc.jl
 msgid "Reload the gtkrc settings."
@@ -3088,11 +3085,15 @@ msgstr "Gjenles gtkrc-innstillingene."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Describe key"
-msgstr ""
+msgstr "Beskriv tast"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Prompt for a key sequence, then print its binding."
 msgstr "Spør etter en tastesekvens, og skriv så ut bindingen."
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Press key..."
+msgstr "Trykk en tast..."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "[Quote]"
@@ -3100,7 +3101,7 @@ msgstr "[Sitat]"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Quote event"
-msgstr ""
+msgstr "Siter hendelse"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid ""
@@ -3158,9 +3159,14 @@ msgstr ""
 msgid "Window:"
 msgstr "Vindu:"
 
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+#, c-format
+msgid "Workspace %d"
+msgstr "Arbeidsområde %d"
+
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
-msgstr ""
+msgstr "prompt-keymap"
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
@@ -3174,16 +3180,15 @@ msgstr "Heving av et vindu hever også: \\w"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 msgid "Raise window"
-msgstr ""
+msgstr "Hev vindu"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
-#, fuzzy
 msgid "Lower window"
-msgstr "Ignorer vinduet."
+msgstr "Senk vindu"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 msgid "Raise lower window"
-msgstr ""
+msgstr "Hev nedre vindu"
 
 #. ../themer/themer.glade:1315
 msgid " to: "
@@ -3383,29 +3388,8 @@ msgstr "Inn_stillinger"
 msgid "_Themes"
 msgstr "_Temaer"
 
-#~ msgid "Select color"
-#~ msgstr "Velg farge"
-
-#~ msgid "Select font"
-#~ msgstr "Velg skrifttype"
-
-#~ msgid "Select Image"
-#~ msgstr "Velg bilde"
-
-#~ msgid "Image Properties"
-#~ msgstr "Egenskaper for bilde"
-
-#~ msgid "No matching item for %S"
-#~ msgstr "Ingen lik oppføring for %S"
-
-#~ msgid "Select file"
-#~ msgstr "Velg fil"
-
-#~ msgid "Press key..."
-#~ msgstr "Trykk en tast..."
-
-#~ msgid "Workspace %d"
-#~ msgstr "Arbeidsområde %d"
+#~ msgid "Protect the sawfish"
+#~ msgstr "Beskytt sagfisken"
 
 #~ msgid "Color of active frames."
 #~ msgstr "Farge på aktive rammer."
@@ -3427,7 +3411,8 @@ msgstr "_Temaer"
 
 #~ msgid "List of group ids that always exist, even when they have no members."
 #~ msgstr ""
-#~ "Liste med gruppe-IDer som alltid eksisterer, selv når de ikke har medlemmer."
+#~ "Liste med gruppe-IDer som alltid eksisterer, selv når de ikke har "
+#~ "medlemmer."
 
 #~ msgid "_Delete"
 #~ msgstr "_Slett"
