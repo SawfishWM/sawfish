@@ -31,17 +31,11 @@
 (unless (boundp 'define-value)
   (setq define-value set))
 
-;; load standard libraries
-(require 'custom)
-(require 'functions)
-(require 'cursors)
-(require 'keymaps)
-(require 'configure)
-(require 'sawmill-gaol)
+;; hack to load setenv etc before autoloads are defined
+(load "environ")
 
-;; all rep-based programs should do this
-(load-all "autoload.jl" t)
-(load-all (concat "os-" (symbol-name operating-system)) t)
+;; load always-present session-manager stuff
+(require 'sm-init)
 
 ;; set $DISPLAY so that any subprocesses inherit it
 (setenv "DISPLAY" display-name)
@@ -57,24 +51,31 @@
        "sawmill" (expand-file-name "../locale" sawmill-lisp-lib-directory))
       (textdomain "sawmill"))))
 
-;; load always-present session-manager stuff
-(require 'sm-init)
+;; load standard libraries
+(require 'custom)
+(require 'functions)
+(require 'cursors)
+(require 'keymaps)
+(require 'configure)
+(require 'sawmill-gaol)
 (require 'workspace)
-
-;; load libraries that may affect window state _after_ sm-init
+(require 'viewport)
+(require 'focus)
+(require 'place-window)
+(require 'stacking)
+(require 'frames)
+(require 'group-funs)
 (require 'mwm)
 (require 'open-look)
-(require 'focus)
 (require 'transient)
-(require 'frames)
-(require 'viewport)
 (require 'iconify)
 (require 'shading)
-(require 'stacking)
-(require 'place-window)
 (require 'server)
 (require 'compat)
-(require 'group-funs)
+
+;; all rep-based programs should do this
+(load-all "autoload.jl" t)
+(load-all (concat "os-" (symbol-name operating-system)) t)
 
 ;; ensure that the things people usually like doing show up in the
 ;; customization interface
