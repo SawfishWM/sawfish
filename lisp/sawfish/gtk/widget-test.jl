@@ -26,7 +26,7 @@
     (export test-widget)
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  rep.system
 	  sawfish.gtk.widget)
 

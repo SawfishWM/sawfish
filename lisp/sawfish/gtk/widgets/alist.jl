@@ -24,7 +24,7 @@
 (define-structure sawfish.gtk.widgets.alist ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  sawfish.gtk.widget
 	  sawfish.gtk.widget-dialog)
 

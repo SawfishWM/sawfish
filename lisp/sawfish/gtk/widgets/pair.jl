@@ -24,7 +24,7 @@
 (define-structure sawfish.gtk.widgets.pair ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  sawfish.gtk.widget)
 
   ;; (pair CAR-SPEC CDR-SPEC)

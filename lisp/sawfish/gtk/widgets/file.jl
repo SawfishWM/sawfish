@@ -24,7 +24,7 @@
 (define-structure sawfish.gtk.widgets.file ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  sawfish.gtk.widget)
 
   (define (make-file-item changed-callback)

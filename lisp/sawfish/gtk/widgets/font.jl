@@ -24,7 +24,7 @@
 (define-structure sawfish.gtk.widgets.font ()
 
     (open rep
-	  gui.gtk
+	  gui.gtk-2.gtk
 	  sawfish.gtk.widget)
 
   (defconst default-font "fixed")

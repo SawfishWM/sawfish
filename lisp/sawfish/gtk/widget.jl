@@ -45,7 +45,7 @@
 	    box-border)
 
     ((open rep
-	   gui.gtk
+	   gui.gtk-2.gtk
 	   rep.system
 	   rep.regexp)
      (access rep.structures))
