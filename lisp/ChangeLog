@@ -1,3 +1,14 @@
+2000-05-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* window-history.jl: changed the option names, added a more
+	extensive menu, with commands to explicitly save state
+
+	* sawmill-defaults.jl: load window-history module
+
+	* move-resize.jl (move-resize-motion): call
+	while-{moving,resizing}-hook _before_ updating the status
+	message
+
 2000-05-30  John Harper  <john@dcs.warwick.ac.uk>
 
 	* smart-placement.jl (sp-prune-points): if the number of points
