@@ -36,6 +36,10 @@
 
 #if defined (HAVE_IMLIB)
 # include <Imlib.h>
+#elif defined (HAVE_GDK_PIXBUF)
+# include <gdk-pixbuf/gdk-pixbuf-xlib.h>
+#else
+# error "Need an image handling library!"
 #endif
 
 #ifndef rep_INTERFACE
@@ -201,6 +205,8 @@ typedef struct lisp_cursor {
 
 #if defined (HAVE_IMLIB)
 typedef ImlibImage *image_t;
+#elif defined (HAVE_GDK_PIXBUF)
+typedef GdkPixbuf *image_t;
 #endif
 
 typedef struct pixmap_cache_node_struct pixmap_cache_node;

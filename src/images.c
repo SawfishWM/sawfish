@@ -19,14 +19,34 @@
    along with sawmill; see the file COPYING.   If not, write to
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
+/* AIX requires this to be the first thing in the file.  */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+#ifndef __GNUC__
+# if HAVE_ALLOCA_H
+#  include <alloca.h>
+# else
+#  ifdef _AIX
+ #pragma alloca
+#  else
+#   ifndef alloca /* predefined by HP cc +Olibcalls */
+   char *alloca ();
+#   endif
+#  endif
+# endif
+#endif
+
 #include "sawmill.h"
 #include <assert.h>
 
 static Lisp_Image *image_list;
 int image_type;
 
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
 static ImlibData *imlib_id;
+#elif defined HAVE_GDK_PIXBUF
+GdkInterpType interp_type = GDK_INTERP_BILINEAR;
 #endif
 
 Colormap image_cmap;
@@ -43,15 +63,19 @@ DEFSYM(blue, "blue");
 DEFSYM(default_bevel_percent, "default-bevel-percent");
 
 /* A rough estimate of the memory used by a single image_t */
-#if defined (HAVE_IMLIB)
-#define IMAGE_T_SIZE(i) \
-    (sizeof (ImlibImage) + (i)->rgb_width * (i)->rgb_height * 3)
+#if defined HAVE_IMLIB
+#define IMAGE_T_SIZE(i) (sizeof (ImlibImage) \
+			 + (i)->rgb_width * (i)->rgb_height * 3)
+#elif defined HAVE_GDK_PIXBUF
+#define IMAGE_T_SIZE(i) (gdk_pixbuf_get_width (i)	\
+			 * gdk_pixbuf_get_height (i)	\
+			 * gdk_pixbuf_get_n_channels (i))
 #endif
 
 static image_t
 load_image (char *file)
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     /* Fuck. Imlib's image caching is so annoying. This is the only way
        I can think of disabling it, even though it may fragment memory.. */
     ImlibImage *im_1 = Imlib_load_image (imlib_id, file);
@@ -63,6 +87,8 @@ load_image (char *file)
     }
     else
 	return 0;
+#elif defined HAVE_GDK_PIXBUF
+    return gdk_pixbuf_new_from_file (file);
 #endif
 }
 
@@ -87,7 +113,7 @@ make_image (image_t im, repv plist)
 #if !defined (HAVE_IMLIB)
     f->border[0] = f->border[1] = f->border[2] = f->border[3] = 0;
 #endif
-#if defined (NEED_PIXMAP_CACHE)
+#if defined NEED_PIXMAP_CACHE
     f->pixmap_first = f->pixmap_last = 0;
 #endif
     f->plist = plist;
@@ -211,10 +237,37 @@ make-image-from-x-drawable ID [MASK-ID]
    if (!XGetGeometry (dpy, d, &root, &x, &y, &w, &h, &bdr, &dp))
        return Qnil;
 
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
    /* XXX Imlib currently ignores the MASK parameter, but maybe it
       XXX won't in the future (and pigs might fly, also) */
    im = Imlib_create_image_from_drawable (imlib_id, d, mask, 0, 0, w, h);
+#elif defined HAVE_GDK_PIXBUF
+   im = gdk_pixbuf_xlib_get_from_drawable (0, d, image_cmap, image_visual,
+					   0, 0, 0, 0, w, h);
+   if (mask != 0)
+   {
+       /* this code inspired by the GNOME tasklist_applet */
+       XImage *xim;
+       im = gdk_pixbuf_add_alpha (im, FALSE, 0, 0, 0);
+       xim = XGetImage (dpy, mask, 0, 0, w, h, AllPlanes, ZPixmap);
+       if (xim != 0)
+       {
+	   int rowstride = gdk_pixbuf_get_rowstride (im);
+	   int channels = gdk_pixbuf_get_n_channels (im);
+	   unsigned char *pixels = gdk_pixbuf_get_pixels (im);
+	   int x, y;
+
+	   for (y = 0; y < h; y++)
+	   {
+	       for (x = 0; x < w; x++)
+	       {
+		   int idx = y * rowstride + x * channels + 3;
+		   pixels[idx] = (XGetPixel (xim, x, y) == 0) ? 0 : 255;
+	       }
+	   }
+	   XDestroyImage (xim);
+       }
+   }
 #endif
 
    /* server grab may be lost in the above calls */
@@ -232,8 +285,10 @@ Return a new image object, a clone of SOURCE-IMAGE.
 {
     image_t im;
     rep_DECLARE1(source, IMAGEP);
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     im = Imlib_clone_image (imlib_id, VIMAGE(source)->image);
+#elif defined HAVE_GDK_PIXBUF
+    im = gdk_pixbuf_copy (VIMAGE (source)->image);
 #endif
     if (im != 0)
 	return make_image (im, Fcopy_sequence (VIMAGE(source)->plist));
@@ -250,8 +305,32 @@ Flip the contents of IMAGE around the vertical axis.
 ::end:: */
 {
     rep_DECLARE1(image, IMAGEP);
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     Imlib_flip_image_horizontal (imlib_id, VIMAGE(image)->image);
+#else
+    {
+	u_char *pixels = image_pixels (VIMAGE (image));
+	int channels = image_channels (VIMAGE (image));
+	int stride = image_row_stride (VIMAGE (image));
+	int width = image_width (VIMAGE (image));
+	int height = image_height (VIMAGE (image));
+	u_char *buf = alloca (channels);
+	int y;
+	for (y = 0; y < height; y++)
+	{
+	    u_char *left = pixels + y * stride;
+	    u_char *right = left + channels * (width - 1);
+	    while (left < right)
+	    {
+		memcpy (buf, left, channels);
+		memcpy (left, right, channels);
+		memcpy (right, buf, channels);
+		left += channels;
+		right -= channels;
+	    }
+	}
+	image_changed (VIMAGE (image));
+    }
 #endif
     return image;
 }
@@ -265,8 +344,25 @@ Flip the contents of IMAGE around the horizontal axis.
 ::end:: */
 {
     rep_DECLARE1(image, IMAGEP);
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     Imlib_flip_image_vertical (imlib_id, VIMAGE(image)->image);
+#else
+    {
+	u_char *pixels = image_pixels (VIMAGE (image));
+	int stride = image_row_stride (VIMAGE (image));
+	int height = image_height (VIMAGE (image));
+	u_char *buf = alloca (stride);
+	u_char *top = pixels, *bottom = pixels + (height - 1) * stride;
+	while (top < bottom)
+	{
+	    memcpy (buf, top, stride);
+	    memcpy (top, bottom, stride);
+	    memcpy (bottom, buf, stride);
+	    top += stride;
+	    bottom -= stride;
+	}
+	image_changed (VIMAGE (image));
+    }
 #endif
     return image;
 }
@@ -281,8 +377,37 @@ the bottom right of the image.
 ::end:: */
 {
     rep_DECLARE1(image, IMAGEP);
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     Imlib_rotate_image (imlib_id, VIMAGE(image)->image, 1);
+#elif defined HAVE_GDK_PIXBUF
+    {
+	/* adapted from Imlib */
+	GdkPixbuf *in = VIMAGE (image)->image;
+	int channels = gdk_pixbuf_get_n_channels (in);
+	int in_stride = gdk_pixbuf_get_rowstride (in);
+	int in_width = gdk_pixbuf_get_width (in);
+	int in_height = gdk_pixbuf_get_height (in);
+	u_char *in_pixels = gdk_pixbuf_get_pixels (in);
+	GdkPixbuf *out = gdk_pixbuf_new (gdk_pixbuf_get_colorspace (in),
+					 gdk_pixbuf_get_has_alpha (in),
+					 gdk_pixbuf_get_bits_per_sample (in),
+					 in_height, in_width);
+	int out_stride = gdk_pixbuf_get_rowstride (out);
+	u_char *out_pixels = gdk_pixbuf_get_pixels (out);
+	int x, y;
+	for (y = 0; y < in_height; y++)
+	{
+	    for (x = 0; x < in_width; x++)
+	    {
+		memcpy (out_pixels + x * out_stride + y * channels,
+			in_pixels  + y * in_stride  + x * channels,
+			channels);
+	    }
+	}
+	image_changed (VIMAGE (image));
+	gdk_pixbuf_unref (VIMAGE (image)->image);
+	VIMAGE (image)->image = out;
+    }
 #endif
     return image;
 }
@@ -368,7 +493,7 @@ DEFUN("image-shape-color", Fimage_shape_color,
 image-shape-color IMAGE
 ::end:: */
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     ImlibColor shape;
     rep_DECLARE1(img, IMAGEP);
     Imlib_get_image_shape (imlib_id, VIMAGE(img)->image, &shape);
@@ -378,6 +503,9 @@ image-shape-color IMAGE
 	return Fget_color_rgb (rep_MAKE_INT(shape.r * 256),
 			       rep_MAKE_INT(shape.g * 256),
 			       rep_MAKE_INT(shape.b * 256));
+#elif defined HAVE_GDK_PIXBUF
+    fprintf (stderr, "shape colors are unimplemented for gdk-pixbuf\n");
+    return Qnil;
 #endif
 }
 
@@ -387,7 +515,7 @@ DEFUN("set-image-shape-color", Fset_image_shape_color, Sset_image_shape_color,
 set-image-shape-color IMAGE TRANSPARENT-COLOR
 ::end:: */
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     ImlibColor color;
     rep_DECLARE1(img, IMAGEP);
     rep_DECLARE2(shape, COLORP);
@@ -395,6 +523,9 @@ set-image-shape-color IMAGE TRANSPARENT-COLOR
     color.g = VCOLOR(shape)->green / 256;
     color.b = VCOLOR(shape)->blue / 256;
     Imlib_set_image_shape (imlib_id, VIMAGE(img)->image, &color);
+    return img;
+#elif defined HAVE_GDK_PIXBUF
+    fprintf (stderr, "shape colors are unimplemented for gdk-pixbuf\n");
     return img;
 #endif
 }
@@ -468,7 +599,7 @@ TYPE may be one of nil, red, green, blue. returned modifier is
 (GAMMA BRIGHTNESS CONTRAST). All values range from 0 to 255.
 ::end:: */
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     ImlibColorModifier modifier;
     void (*fun)(ImlibData *, ImlibImage *, ImlibColorModifier *);
     rep_DECLARE1(img, IMAGEP);
@@ -481,6 +612,9 @@ TYPE may be one of nil, red, green, blue. returned modifier is
     return rep_list_3 (rep_MAKE_INT(modifier.gamma),
 		       rep_MAKE_INT(modifier.brightness),
 		       rep_MAKE_INT(modifier.contrast));
+#else
+    fprintf (stderr, "image modifiers are unimplemented for gdk-pixbuf\n");
+    return Qnil;
 #endif
 }
 
@@ -493,7 +627,7 @@ TYPE may be one of nil, red, green, blue. MODIFIER is (GAMMA BRIGHTNESS
 CONTRAST). These are integers ranging from 0 to 255.
 ::end:: */
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     ImlibColorModifier modifier;
     void (*fun)(ImlibData *, ImlibImage *, ImlibColorModifier *);
     rep_DECLARE1(img, IMAGEP);
@@ -511,6 +645,9 @@ CONTRAST). These are integers ranging from 0 to 255.
 	   : type == Qblue ? Imlib_set_image_blue_modifier
 	   : Imlib_set_image_modifier);
     (*fun) (imlib_id, VIMAGE(img)->image, &modifier);
+    return img;
+#elif defined HAVE_GDK_PIXBUF
+    fprintf (stderr, "image modifiers are unimplemented for gdk-pixbuf\n");
     return img;
 #endif
 }
@@ -684,6 +821,14 @@ Set all pixels in IMAGE to COLOR (or black if COLOR is undefined).
     return image;
 }
 
+#if defined HAVE_GDK_PIXBUF
+static void
+free_pixbuf_data (guchar *pixels, gpointer data)
+{
+    rep_free (pixels);
+}
+#endif
+
 DEFUN("make-sized-image", Fmake_sized_image, Smake_sized_image,
       (repv width, repv height, repv color), rep_Subr3) /*
 ::doc:make-sized-image::
@@ -717,10 +862,15 @@ defines the color of its pixels.
 	    data[i+1] = g;
 	    data[i+2] = b;
 	}
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
 	im = Imlib_create_image_from_data (imlib_id, data, 0,
 					   rep_INT(width), rep_INT(height));
 	rep_free (data);
+#elif defined HAVE_GDK_PIXBUF
+	im = gdk_pixbuf_new_from_data (data, GDK_COLORSPACE_RGB, FALSE,
+				       8, rep_INT (width), rep_INT (height),
+				       rep_INT (width) * 3,
+				       free_pixbuf_data, data);
 #endif
 	if (im != 0)
 	    return make_image (im, Qnil);
@@ -749,7 +899,7 @@ Tile SOURCE-IMAGE into DEST-IMAGE.
     dst_width = image_width (VIMAGE (dst));
     dst_height = image_height (VIMAGE (dst));
 
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     for (dst_y = src_y = 0; dst_y < dst_height; dst_y++, src_y++)
     {
 	if (src_y >= src_height)
@@ -759,6 +909,17 @@ Tile SOURCE-IMAGE into DEST-IMAGE.
 	    memcpy (dst_im->rgb_data + dst_y*dst_width*3 + x*3,
 		    src_im->rgb_data + src_y*src_width*3,
 		    MIN (dst_width - x, src_width) * 3);
+	}
+    }
+#elif defined HAVE_GDK_PIXBUF
+    for (dst_y = 0; dst_y < dst_height; dst_y += src_height)
+    {
+	for (x = 0; x < dst_width; x += src_width)
+	{
+	    gdk_pixbuf_copy_area (VIMAGE(src)->image, 0, 0,
+				  MIN (src_width, dst_width - x),
+				  MIN (src_height, dst_height - dst_y),
+				  VIMAGE(dst)->image, x, dst_y);
 	}
     }
 #endif
@@ -773,53 +934,92 @@ Tile SOURCE-IMAGE into DEST-IMAGE.
 int
 image_width (Lisp_Image *im)
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     return im->image->rgb_width;
+#elif defined HAVE_GDK_PIXBUF
+    return gdk_pixbuf_get_width (im->image);
 #endif
 }
 
 int
 image_height (Lisp_Image *im)
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     return im->image->rgb_height;
+#elif defined HAVE_GDK_PIXBUF
+    return gdk_pixbuf_get_height (im->image);
 #endif
 }
 
 u_char *
 image_pixels (Lisp_Image *im)
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     return im->image->rgb_data;
+#elif defined HAVE_GDK_PIXBUF
+    return gdk_pixbuf_get_pixels (im->image);
 #endif
 }
 
 int
 image_row_stride (Lisp_Image *im)
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     return im->image->rgb_width * 3;
+#elif defined HAVE_GDK_PIXBUF
+    return gdk_pixbuf_get_rowstride (im->image);
 #endif
 }
 
 int
 image_channels (Lisp_Image *im)
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     return 3;
+#elif defined HAVE_GDK_PIXBUF
+    return gdk_pixbuf_get_n_channels (im->image);
 #endif
 }
 
 void
 image_changed (Lisp_Image *im)
 {
-#if defined (HAVE_IMLIB)
+#if defined NEED_PIXMAP_CACHE
+    pixmap_cache_flush_image (im);
+#endif
+#if defined HAVE_IMLIB
     Imlib_changed_image (imlib_id, im->image);
 #endif
 }
 
 
 /* render functions */
+
+#if defined HAVE_GDK_PIXBUF
+static void
+do_scale (GdkPixbuf *src, int src_x, int src_y, int src_w, int src_h,
+	  GdkPixbuf *dst, int dst_x, int dst_y, int dst_w, int dst_h)
+{
+    double scale_x, scale_y;
+    double off_x, off_y;
+
+    if (src_w <= 0 || src_h <= 0 || dst_w <= 0 || dst_h <= 0)
+	return;
+
+    scale_x = dst_w / (double) src_w;
+    scale_y = dst_h / (double) src_h;
+
+    off_x = dst_x - scale_x * src_x;
+    off_y = dst_y - scale_y * src_y;
+
+    gdk_pixbuf_scale (src, dst,
+		      dst_x, dst_y,
+		      dst_w, dst_h,
+		      off_x, off_y,
+		      scale_x, scale_y,
+		      interp_type);
+}
+#endif
 
 void
 image_render (Lisp_Image *image, int width, int height,
@@ -830,12 +1030,140 @@ image_render (Lisp_Image *image, int width, int height,
     assert (width > 0);
     assert (height > 0);
 
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     Imlib_render (imlib_id, im, width, height);
     if (pixmap != 0)
 	*pixmap = Imlib_move_image (imlib_id, im);
     if (mask != 0)
 	*mask = Imlib_move_mask (imlib_id, im);
+
+#elif defined HAVE_GDK_PIXBUF
+    {
+	GdkPixbuf *scaled = im;
+	bool need_to_unref = FALSE;
+	int im_width = image_width (image), im_height = image_height (image);
+
+	if (pixmap_cache_ref (image, width, height, pixmap, mask))
+	    return;
+
+	/* XXX handle cases where combined image borders are larger
+	   XXX than the destination image.. */
+
+	if (im_width != width || im_height != height)
+	{
+	    /* need to scale to width by height */
+
+	    int border[4];
+	    border[0] = image->border[0];
+	    border[1] = image->border[1];
+	    border[2] = image->border[2];
+	    border[3] = image->border[3];
+
+	    /* truncate borders if dest image is too small */
+	    if (border[0] + border[1] > width)
+	    {
+		border[0] = MIN (border[0], width / 2);
+		border[1] = MIN (border[1], width / 2);
+	    }
+	    if (border[2] + border[3] > height
+		|| image->border[2] + image->border[3] >= im_height)
+	    {
+		border[2] = MIN (border[2], height / 2);
+		border[3] = MIN (border[3], height / 2);
+	    }
+
+	    assert (border[0] + border[1] <= width);
+	    assert (border[2] + border[3] <= height);
+
+	    /* create a new buffer */
+	    scaled = gdk_pixbuf_new (gdk_pixbuf_get_colorspace (im),
+				     gdk_pixbuf_get_has_alpha (im),
+				     gdk_pixbuf_get_bits_per_sample (im),
+				     width, height);
+	    need_to_unref = TRUE;
+
+	    /* stretch borders to fit scaled image */
+
+	    if (border[0] > 0)
+	    {
+		do_scale (im, 0, image->border[2], image->border[0],
+			  im_height - (image->border[2] + image->border[3]),
+			  scaled, 0, border[2], border[0],
+			  height - (border[2] + border[3]));
+	    }
+	    if (border[1] > 0)
+	    {
+		do_scale (im, im_width - image->border[1], image->border[2],
+			  image->border[1],
+			  im_height - (image->border[2] + image->border[3]),
+			  scaled, width - border[1], border[2], border[1],
+			  height - (border[2] + border[3]));
+	    }
+
+	    if (border[2] > 0)
+	    {
+		do_scale (im, image->border[0], 0,
+			  im_width - (image->border[0] + image->border[1]),
+			  image->border[2],
+			  scaled, border[0], 0,
+			  width - (border[0] + border[1]), border[2]);
+	    }
+	    if (border[3] > 0)
+	    {
+		do_scale (im, image->border[0], im_height - image->border[3],
+			  im_width - (image->border[0] + image->border[1]),
+			  image->border[3],
+			  scaled, border[0], height - border[3],
+			  width - (border[0] + border[1]), border[3]);
+	    }
+
+	    /* now do corner intersections between borders */
+
+	    if (border[0] > 0 && border[2] > 0)
+	    {
+		do_scale (im, 0, 0, image->border[0], image->border[2],
+			  scaled, 0, 0, border[0], border[2]);
+	    }
+	    if (border[1] > 0 && border[2] > 0)
+	    {
+		do_scale (im, im_width - image->border[1], 0,
+			  image->border[1], image->border[2],
+			  scaled, width - border[1], 0, border[1], border[2]);
+	    }
+	    if (border[0] > 0 && border[3] > 0)
+	    {
+		do_scale (im, 0, im_height - image->border[3],
+			  image->border[0], image->border[3],
+			  scaled, 0, height - border[3], border[0], border[3]);
+	    }
+	    if (border[1] > 0 && border[3] > 0)
+	    {
+		do_scale (im, im_width - image->border[1],
+			  im_height - image->border[3],
+			  image->border[1], image->border[3],
+			  scaled, width - border[1], height - border[3],
+			  border[1], border[3]);
+	    }
+
+	    /* scale the inner parts of the image */
+	    if (border[0] + border[1] < width
+		|| border[2] + border[3] < height)
+	    {
+		do_scale (im, image->border[0], image->border[2],
+			  im_width - (image->border[0] + image->border[1]),
+			  im_height - (image->border[2] + image->border[3]),
+			  scaled, border[0], border[2],
+			  width - (border[0] + border[1]),
+			  height - (border[2] + border[3]));
+	    }
+	}
+
+	gdk_pixbuf_xlib_render_pixmap_and_mask (scaled, pixmap, mask, 128);
+	if (need_to_unref)
+	    gdk_pixbuf_unref (scaled);
+
+	pixmap_cache_set (image, width, height, *pixmap, *mask);
+    }
 #endif
 
     /* Imlib sometimes calls XSync (), which could hide events */
@@ -845,10 +1173,10 @@ image_render (Lisp_Image *image, int width, int height,
 void
 image_free_pixmaps (Lisp_Image *image, Pixmap pixmap, Pixmap mask)
 {
-#if defined (NEED_PIXMAP_CACHE)
+#if defined NEED_PIXMAP_CACHE
     pixmap_cache_unref (image, pixmap, mask);
 #endif
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     Imlib_free_pixmap (imlib_id, pixmap);
 #endif
 }
@@ -856,8 +1184,10 @@ image_free_pixmaps (Lisp_Image *image, Pixmap pixmap, Pixmap mask)
 int
 best_color_match (int red, int green, int blue)
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     return Imlib_best_color_match (imlib_id, &red, &green, &blue);
+#elif defined HAVE_GDK_PIXBUF
+    return xlib_rgb_xpixel_from_rgb ((red << 16) | (green << 8) | blue);
 #endif
 }
 
@@ -865,11 +1195,28 @@ void
 paste_image_to_drawable (Lisp_Image *img, Drawable d,
 			 int x, int y, int w, int h)
 {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
     Imlib_paste_image (imlib_id, img->image, d, x, y, w, h);
 
     /* Imlib sometimes calls XSync (), which could hide events */
     rep_mark_input_pending (ConnectionNumber(dpy));
+#elif defined HAVE_GDK_PIXBUF
+    GC gc;
+    XGCValues gcv;
+    int gcmask = 0;
+    Pixmap pixmap, mask;
+    image_render (img, w, h, &pixmap, &mask);
+    if (mask != 0)
+    {
+	gcv.clip_mask = mask;
+	gcv.clip_x_origin = x;
+	gcv.clip_y_origin = y;
+	gcmask |= GCClipMask | GCClipXOrigin | GCClipYOrigin;
+    }
+    gc = XCreateGC (dpy, d, gcmask, &gcv);
+    XCopyArea (dpy, pixmap, d, gc, 0, 0, w, h, x, y);
+    XFreeGC (dpy, gc);
+    image_free_pixmaps (img, pixmap, mask);
 #endif
 }
 
@@ -906,11 +1253,13 @@ image_sweep (void)
 	Lisp_Image *next = w->next;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
 	{
-#if defined (NEED_PIXMAP_CACHE)
+#if defined NEED_PIXMAP_CACHE
 	    pixmap_cache_flush_image (w);
 #endif
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
 	    Imlib_kill_image (imlib_id, w->image);
+#elif defined HAVE_GDK_PIXBUF
+	    gdk_pixbuf_unref (w->image);
 #endif
 	    rep_FREE_CELL(w);
 	}
@@ -935,7 +1284,7 @@ images_init (void)
 					0, 0, 0, 0, 0, 0, 0);
     if (!batch_mode_p ())
     {
-#if defined (HAVE_IMLIB)
+#if defined HAVE_IMLIB
 	ImlibInitParams params;
 	params.visualid = preferred_visual->visualid;
 	params.flags = PARAMS_VISUALID;
@@ -943,6 +1292,11 @@ images_init (void)
 	image_cmap = Imlib_get_colormap (imlib_id);
 	image_visual = Imlib_get_visual (imlib_id);
 	image_depth = imlib_id->x.depth;
+#elif defined HAVE_GDK_PIXBUF
+	gdk_pixbuf_xlib_init (dpy, screen_num);
+	image_cmap = xlib_rgb_get_cmap ();
+	image_visual = xlib_rgb_get_visual ();
+	image_depth = xlib_rgb_get_depth ();
 #endif
     }
     rep_ADD_SUBR(Smake_image);
