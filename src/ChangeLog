@@ -1,3 +1,18 @@
+1999-09-10  John Harper  <john@dcs.warwick.ac.uk>
+
+	* images.c (Fimagep): new function
+	(bevel_pixel): increase the bevel multiplier from 0.5 to 0.75
+
+	* windows.c (window_mark_type): ensure that closed windows
+	which haven't had destroy-window-hook called aren't collected
+
+	* frames.c: new frame part properties: `class' and `removable',
+	new window property `removed-parts'
+	(get_keymap_for_frame_part): new function
+
+	* events.c (key_press): don't look for a frame part keymap
+	(button_press, motion_notify): call get_keymap_for_frame_part
+
 1999-09-09  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c, keys.h: added `click3' event

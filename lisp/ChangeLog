@@ -1,9 +1,18 @@
 1999-09-10  John Harper  <john@dcs.warwick.ac.uk>
 
-	* keymaps.jl (border-keymap): new keymap
+	* shading.jl: in add-window-hook, monitoring `shaded' property
 
-	* frames.jl (frame-part-class-alist, fp-class): method of
-	associating frame part types with general bits of their plist
+	* sawmill.jl: reorder module loading; always load shading
+
+	* frames.jl (frame-part-classes): alist associating frame part
+	"classes" and an alist of the properties they inherit
+	(remove-frame-class, add-frame-class): adding and removing
+	parts of frames (but only if the style allows it)
+
+	* gnome.jl (gnome-honour-client-state): don't try to act on the
+	state changes, just set the necessary window properties
+
+	* keymaps.jl (border-keymap): new keymap
 
 1999-09-09  John Harper  <john@dcs.warwick.ac.uk>
 

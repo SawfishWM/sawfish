@@ -169,6 +169,7 @@ extern repv Fmake_image (repv file, repv plist);
 extern repv Fcopy_image (repv source);
 extern repv Fimage_get (repv image, repv prop);
 extern repv Fimage_put (repv image, repv prop, repv value);
+extern repv Fimagep (repv arg);
 extern repv Fimage_dimensions (repv img);
 extern repv Fimage_border (repv img);
 extern repv Fset_image_border (repv img, repv, repv, repv, repv);

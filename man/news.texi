@@ -11,19 +11,31 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item Define the standard @dfn{classes} of frame parts (i.e. things
+like close button, title, left border, etc...) then allow the state of
+members of these classes to be set in one place (the
+@code{frame-part-classes} variable). This should ensure that different
+themes have the same feel (but a feel that may be customized by the
+user)
+
+@item Allow frame parts to be removed if possible (if they have the
+@code{removable} property). Nothing makes use of this yet
+
 @item Added window-shading, double-click button1 on the title bar
 
 @item Created a sawmill capplet for the GNOME control center. Use the
 @samp{--enable-capplet} configure option to build it
 
-@item Use spin-buttons in the configurator to enter numbers
+@item In the @code{gtk} theme, draw bevels on window decorations
 
-@item Switched the default @code{Button1} and @code{Button2} bindings
-in window borders (but not in the title)
+@item Use spin-buttons in the configurator to enter numbers
 
 @item Add option @code{focus-proxy-click} controlling whether to pass
 the focus-inducing button-press event to the underlying window (in
 click-to-focus mode)
+
+@item Changed the bindings in window borders, it's now the more usual
+button1 to resize, button2 to move
 
 @item When clicking and dragging windows, ensure that the clicked frame
 part stays clicked until the button is released
