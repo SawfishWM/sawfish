@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.51 2000/01/27 18:39:58 john Exp $
+;; $Id: sawmill-ui.jl,v 1.52 2000/02/10 18:19:21 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -908,7 +908,7 @@ exec rep "$0" "$@"
        (combo (gtk-combo-new))
        (doc-label (gtk-label-new (get-key spec ':doc)))
        (readme-label (gtk-label-new ""))
-       (frame (gtk-frame-new (_ "Details")))
+       (readme-scroller (gtk-scrolled-window-new))
        (values (nth 1 spec))
        (i 0)
        history button previous)
@@ -917,15 +917,16 @@ exec rep "$0" "$@"
     (gtk-container-border-width hbox ui-box-border)
     (gtk-box-set-spacing vbox ui-box-spacing)
     (gtk-container-border-width vbox ui-box-border)
-    (gtk-frame-set-label frame (_ "Details"))
-    (gtk-container-add frame readme-label)
+    (gtk-scrolled-window-add-with-viewport readme-scroller readme-label)
     (gtk-container-add hbox combo)
     (gtk-container-add hbox doc-label)
-    (gtk-container-add vbox frame)
+    (gtk-container-add vbox readme-scroller)
     (gtk-container-add vbox hbox)
     (gtk-label-set-justify doc-label 'left)
     (gtk-label-set-justify readme-label 'left)
     (gtk-entry-set-editable (gtk-combo-entry combo) nil)
+    (gtk-scrolled-window-set-policy readme-scroller 'automatic 'automatic)
+    (gtk-widget-set-usize readme-scroller -2 200)
 
     (unless (key-exists-p spec ':value)
       (set-key spec ':value (car values)))
