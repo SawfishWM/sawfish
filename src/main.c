@@ -46,6 +46,22 @@ on_termination (void)
 {
 }
 
+DEFUN_INT("quit", Fquit, Squit, (void), rep_Subr0, "") /*
+::doc:Squit::
+quit
+::end:: */
+{
+    return Fthrow (Qquit, rep_MAKE_INT(0));
+}
+
+DEFUN_INT("restart", Frestart, Srestart, (void), rep_Subr0, "") /*
+::doc:Srestart::
+restart
+::end:: */
+{
+    longjmp (clean_exit_jmp_buf, ec_restart);
+}
+
 static void
 sawmill_symbols (void)
 {
@@ -105,12 +121,16 @@ sawmill_symbols (void)
 
     rep_on_idle_fun = on_idle;
     rep_on_termination_fun = on_termination;
+
+    rep_ADD_SUBR_INT(Squit);
+    rep_ADD_SUBR_INT(Srestart);
 }    
 
 int
 main(int argc, char **argv)
 {
     volatile int rc = 5;
+    volatile char **old_argv = (volatile char **)argv;
 
     prog_name = *argv++; argc--;
     rep_init (prog_name, &argc, &argv, 0, 0);
@@ -118,6 +138,7 @@ main(int argc, char **argv)
     if (sys_init(prog_name))
     {
 	repv res;
+	volatile int exit_code;
 
 	sawmill_symbols();
 
@@ -133,7 +154,7 @@ main(int argc, char **argv)
 	keys_init ();
 	functions_init ();
 
-	if (!setjmp (clean_exit_jmp_buf))
+	if ((exit_code = setjmp (clean_exit_jmp_buf)) == 0)
 	{
 	    res = Fload(rep_string_dup ("sawmill"), Qnil, Qnil, Qnil);
 	    if (res != rep_NULL)
@@ -190,6 +211,9 @@ main(int argc, char **argv)
 
 	sys_kill();
 	rep_kill();
+
+	if (exit_code == ec_restart)
+	    execvp ((char *)(old_argv[0]), (char **)old_argv);
     }
     return rc;
 }
