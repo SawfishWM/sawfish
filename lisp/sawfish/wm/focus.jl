@@ -27,9 +27,23 @@
   :group focus
   :after-set focus-mode-changed)
 
+;; XXX make this work
+;(defcustom focus-proxy-click t
+;  "Does click-to-focus mode pass the click through to the window."
+;  :type boolean
+;  :group focus)
+
 (defvar click-to-focus-keymap
   (bind-keys (make-sparse-keymap)
-    "Button1-Click1" '(set-input-focus (current-event-window))))
+    "Button1-Click1" 'focus-click))
+
+(defun focus-click (w)
+  (interactive "w")
+  (set-input-focus w)
+; (window-put w 'keymap window-keymap)
+; (when (or (window-get w 'focus-proxy-click) focus-proxy-click)
+;   (proxy-current-event w))
+  )
 
 (defun focus-enter-fun (w)
   (if (eq w 'root)
@@ -56,6 +70,11 @@
     (mapc #'(lambda (w)
 	      (window-put w 'keymap window-keymap)) (managed-windows))))
 
+(defun focus-add-window (w)
+  (when (eq focus-mode 'click)
+    (window-put w 'keymap click-to-focus-keymap)))
+
 (add-hook 'enter-notify-hook 'focus-enter-fun t)
 (add-hook 'focus-in-hook 'focus-in-fun t)
 (add-hook 'focus-out-hook 'focus-out-fun t)
+(add-hook 'add-window-hook 'focus-add-window t)
