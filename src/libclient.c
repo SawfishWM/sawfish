@@ -403,6 +403,7 @@ unix_server_init (char *display)
 	    return 0;
 	}
 	close (socket_fd);
+	fprintf (stderr, "error: can't connect to socket %s\n", addr.sun_path);
 	return 1;
     }
     perror ("socket");
