@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.27 1999/09/25 12:57:49 john Exp $
+;; $Id: sawmill-ui.jl,v 1.28 1999/10/01 13:08:50 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -899,7 +899,14 @@ exec rep "$0" "$@"
 	      (let
 		  ((full (expand-file-name
 			  (symbol-name (get-key spec ':value)) dir)))
-		(when (file-directory-p full)
+		(when (catch 'out
+			(mapc #'(lambda (suf)
+				  (when (file-directory-p (concat full suf))
+				    (setq full (concat full suf))
+				    (throw 'out t)))
+			      '("" ".tar#tar" ".tar.gz#tar"
+			        ".tar.Z#tar" ".tar.bz2#tar"))
+			nil)
 		  (setq full (expand-file-name "README" full))
 		  (if (file-exists-p full)
 		      (let
