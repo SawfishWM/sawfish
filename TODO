@@ -47,9 +47,6 @@ Outstanding bugs
     (ie. I can type in it), but the frame is drawn in the unfocused
     style.
 
-  ! remove the `Any-Button1-Click1' binding from click-to-focus map,
-    when a window is unfocused button1 events aren't passed through..?
-
   ! when snapping edges while moving, position displayed may not be
     correct
 
@@ -57,8 +54,6 @@ Outstanding bugs
     directly with the "set auto response" menu item, or by changing my
     status) it works fine, but then the auto response window will not
     appear again until I restart licq
-
-  ! remove/ignore "Null" bindings from customized keymaps
 
   ! Open netscape, and now close it, but using the Exit option in the
     File menu. Now the keyboard focus is nowhere [with click-to-focus]
@@ -105,11 +100,7 @@ General tasks
 
   + follow size hints (increments) when maximizing (?)
 
-  + "styles" -- mimic different environments through custom files?
-
   + support for synthesizing events
-
-  + visual cue for sticky windows?
 
   + add focus-order to smart placement weights?
 
@@ -296,6 +287,10 @@ Long term ideas
 
     The main things counting against guile are that I've never used it,
     and that I'm lazy
+
+    [ one idea I've been toying with is to provide a scheme emulation
+    mode for rep, I'm going to implement letrec anyway at some point;
+    everything but tail-recursion and continuations should be easy.. ]
 
   - CORBA interface
 

@@ -1,3 +1,15 @@
+1999-11-27  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c (translate_event_to_x_button, grab_event,
+	ungrab_event): fixed bug when grabbing buttons with AnyModifier
+	_and_ a specific button
+
+	* client.c (completion_generator): pass the boundp predicate
+	when remotely calling apropos
+
+	* windows.c, images.c, fonts.c, cursors.c, colors.c: remember
+	to add to rep_data_after_gc after allocating lisp data
+
 1999-11-26  John Harper  <john@dcs.warwick.ac.uk>
 
 	* windows.c (Fwindow_size_hints): added window-gravity field

@@ -30,6 +30,13 @@ New option @samp{--disable-nls} to disable i18n
 to a mouse button in the @code{window-keymap} to get the ``raise window
 on click'' behaviour that seems popular 
 
+@item New commands to move windows incrementally:
+@code{slide-window-@var{x}} and @code{slide-group-@var{x}} for @var{x}
+one of: @code{left}, @code{right}, @code{up}, @code{down}
+
+@item Respect window gravity with program-specified window placement
+(@email{merlin@@merlin.org})
+
 @item Fixed a memory leak in the @code{stacking-order} function
 
 @item Fixed the @code{bevel-image} function (Scott Sams)
@@ -45,6 +52,9 @@ the first $PATH item; also accept non-alphanumeric language codes
 @item Fixed interactive window placement (again)
 
 @item Rewrote obscure documentation for some custom options
+
+@item Fixed bug when grabbing events with @code{AnyModifier} and a
+specific button
 
 @end itemize
 

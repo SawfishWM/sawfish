@@ -1546,23 +1546,29 @@ Consider the following example, a solid black title bar that is twenty
 pixels high, directly above the client window:
 
 @lisp
-((background . "black")
- (foreground . "white")
- (text . window-name)
- (x-justify . 30)
- (y-justify . center)
- (left-edge . 0)
- (right-edge . 0)
- (top-edge . -20)
- (height . 20)
- (class . title))
+`((background . "black")
+  (foreground . "white")
+  (text . ,window-name)
+  (x-justify . 30)
+  (y-justify . center)
+  (left-edge . 0)
+  (right-edge . 0)
+  (top-edge . -20)
+  (height . 20)
+  (class . title))
 @end lisp
 
 @noindent
-Note how the @code{window-name} function is used to dynamically specify
-the string drawn in the foreground. The window manager will
-automatically refresh the foreground of all frame parts of a window
-whenever any X property of that window changes.
+The backquote operator is used since the definition is only mostly
+constant, the comma operator inserts the value of the
+@code{window-name} variable (a function giving the name of a window)
+into the definition; @pxref{Backquoting, , Backquoting, librep, The
+Librep Manual}).
+
+This function is then used to dynamically specify the string drawn in
+the foreground. The window manager will automatically refresh the
+foreground of all frame parts of a window whenever any X property of
+that window changes.
 
 
 @node Frame Functions, Frame Types, Frame Part Definition, Window Frames
@@ -1572,22 +1578,14 @@ whenever any X property of that window changes.
 
 @defun set-window-frame window frame-def
 Sets the frame of the client window associated with the object
-@var{window} to that defined by the lexical closure @var{frame-def}.
-The closure should contain the list of frame part definitions. If the
-window is mapped the old frame will be destroyed and a new frame
-constructed.
-
-For example:
-
-@lisp
-(set-window-frame w (make-closure '(@dots{})))
-@end lisp
+@var{window} to that defined by the list of frame part definitions
+@var{frame-def}. If the window is mapped the old frame will be
+destroyed and a new frame constructed.
 @end defun
 
 @defun window-frame window
-Return the closure containing the list of frame part definitions
-defining the frame associated with @var{window}. (Use the
-@code{closure-function} function to dereference the closure.)
+Return the list of frame part definitions defining the frame associated
+with @var{window}.
 @end defun
 
 @defun window-framed-p window
@@ -1681,9 +1679,6 @@ Defines a new frame style called @var{name} (a symbol). When a frame of
 this style is required for a particular window, @var{function} is
 called with two arguments, the window itself and a symbol defining the
 frame type to create (@pxref{Frame Types}).
-
-@var{function} should return a lexical closure containing the list of
-frame part definitions specifying the new frame.
 
 If no default frame style exists, the new style will be made the
 default.
