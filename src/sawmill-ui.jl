@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.2 1999/08/11 16:19:10 john Exp $
+;; $Id: sawmill-ui.jl,v 1.3 1999/08/13 16:56:32 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -333,7 +333,7 @@ fi
 	(let*
 	    ((color (gtk-color-selection-get-color-interp
 		     ',(gtk-color-selection-dialog-colorsel colorsel)))
-	     (name (and color (format nil "#%02x%02x%02x"
+	     (name (and color (format nil "#%04x%04x%04x"
 				      (gdk-color-red color)
 				      (gdk-color-green color)
 				      (gdk-color-blue color)))))
