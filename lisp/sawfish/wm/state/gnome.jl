@@ -29,6 +29,7 @@
 (defconst WIN_STATE_MAXIMIZED_HORIZ 8)
 (defconst WIN_STATE_HIDDEN 16)
 (defconst WIN_STATE_SHADED 32)
+(defconst WIN_STATE_FIXED_POSITION 256)
 
 (defconst WIN_LAYER_NORMAL 4)
 
@@ -122,6 +123,8 @@
       (setq state (logior state WIN_STATE_STICKY)))
     (when (window-get w 'shaded)
       (setq state (logior state WIN_STATE_SHADED)))
+    (when (window-get w 'fixed-position)
+      (setq state (logior state WIN_STATE_FIXED_POSITION)))
     (when (window-maximized-vertically-p w)
       (setq state (logior state WIN_STATE_MAXIMIZED_VERT)))
     (when (window-maximized-horizontally-p w)
@@ -156,6 +159,8 @@
 	(window-put w 'sticky-viewport t))
       (unless (zerop (logand bits WIN_STATE_SHADED))
 	(window-put w 'shaded t))
+      (unless (zerop (logand bits WIN_STATE_FIXED_POSITION))
+	(window-put w 'fixed-position t))
 ;;; XXX this doesn't work since the frame hasn't been created yet..
 ;      (unless (zerop (logand bits WIN_STATE_MAXIMIZED_VERT))
 ;	(unless (window-maximized-vertically-p w)
@@ -193,10 +198,12 @@
 		 (make-window-unsticky w)
 	       (make-window-sticky w)))
 	   (unless (zerop (logand mask WIN_STATE_SHADED))
-	     (setq tem (window-get w 'shaded))
 	     (if (zerop (logand values WIN_STATE_SHADED))
 		 (unshade-window w)
 	       (shade-window w)))
+	   (unless (zerop (logand mask WIN_STATE_FIXED_POSITION))
+	     (window-put w 'fixed-position
+			 (/= (logand values WIN_STATE_FIXED_POSITION) 0)))
 	   (unless (zerop (logand mask WIN_STATE_MAXIMIZED_VERT))
 	     (setq tem (window-maximized-vertically-p w))
 	     (if (or (and (not tem) (not (zerop (logand values WIN_STATE_MAXIMIZED_VERT))))
