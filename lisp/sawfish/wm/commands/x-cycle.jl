@@ -98,10 +98,10 @@
 (defvar x-cycle-stacking nil)
 
 ;; associate modifier names with their keys
-(defvar x-modifier-alist '(("A" "Alt_L" "Alt_R")
-			   ("M" "Meta_L" "Meta_R")
-			   ("S" "Shift_L" "Shift_R")
-			   ("C" "Control_L" "Control_R")))
+(defvar x-cycle-modifier-alist `(("A" ,@alt-keysyms)
+				 ("M" ,@meta-keysyms)
+				 ("S" "Shift_L" "Shift_R")
+				 ("C" "Control_L" "Control_R")))
 
 
 ;; code
@@ -124,11 +124,11 @@
     (bind-keys override-keymap event-name 'x-cycle-next)
     (unless (and (string-match "(.*)-.+" event-name)
 		 (setq mod (expand-last-match "\\1"))
-		 (setq tem (assoc mod x-modifier-alist)))
+		 (setq tem (cdr (assoc mod x-cycle-modifier-alist))))
       (error "%s must be bound to a singly-modified event" this-command))
     (mapc #'(lambda (k)
 	      (bind-keys override-keymap
-		(concat mod "-Release-" k) 'x-cycle-exit)) (cdr tem))
+		(concat mod "-Release-" k) 'x-cycle-exit)) tem)
 
     (when (grab-keyboard)
       (unwind-protect
