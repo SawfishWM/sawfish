@@ -99,7 +99,7 @@
        (move-resize-height move-resize-old-height)
        (move-resize-old-ptr-x (car (if from-motion-event
 				       (query-last-pointer)
-				     (query-pointer))))
+				     (query-pointer t))))
        (move-resize-old-ptr-y (cdr (if from-motion-event
 				       (query-last-pointer)
 				     (query-pointer))))
