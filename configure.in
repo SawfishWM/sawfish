@@ -126,7 +126,6 @@ AC_ARG_WITH(readline,
 
 dnl Only look if explicitly asked for..
 if test "$with_readline" = "yes"; then
-  AC_MSG_CHECKING([for readline])
   READLINE_LIBS=""
   AC_SUBST(READLINE_LIBS)
   AC_CHECK_LIB(ncurses, tparm, TERMLIB=-lncurses,
@@ -138,11 +137,6 @@ if test "$with_readline" = "yes"; then
     [READLINE_LIBS="-lreadline $TERMLIB"
      AC_DEFINE(HAVE_LIBREADLINE)])])
   LIBS="$saved_LIBS"
-  if test "x$READLINE_LIBS" != "x" ; then
-    AC_MSG_RESULT([yes])
-  else
-    AC_MSG_RESULT([no])
-  fi
 fi
 
 dnl Checks for typedefs, structures, and compiler characteristics.
