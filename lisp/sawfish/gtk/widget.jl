@@ -223,13 +223,13 @@
 
   (define (make-symbol-item changed-callback #!rest options)
     (let ((widget (gtk-combo-new)))
+      (when options
+	(gtk-combo-set-popdown-strings
+	 widget (cons "" (mapcar symbol-name options))))
       (when changed-callback
 	(gtk-signal-connect
 	 (gtk-combo-entry widget)
 	 "changed" (make-signal-callback changed-callback)))
-      (when options
-	(gtk-combo-set-popdown-strings
-	 widget (cons "" (mapcar symbol-name options))))
       (gtk-widget-show widget)
       (lambda (op)
 	(case op

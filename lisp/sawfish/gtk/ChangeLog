@@ -1,3 +1,9 @@
+2000-11-28  John Harper  <jsh@eazel.com>
+
+	* widget.jl (make-symbol-item): connect to the changed signal
+	_after_ calling set-popdown-strings, since that can raise the
+	signal (which we don't want yet)
+
 2000-11-27  John Harper  <jsh@eazel.com>
 
 	* widget.jl (make-choice-item): `value' defaults to first item
