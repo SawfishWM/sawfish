@@ -78,7 +78,8 @@ stacking level to place them in.")
       ((depth (window-get w 'depth)))
     (unless depth
       (setq depth (or (cdr (assoc-regexp (window-name w) auto-depth-alist)) 0))
-      (window-put w 'depth depth))))
+      (window-put w 'depth depth))
+    (restack-by-depth)))
 
 ;; Return t if W is at the top of its level
 (defun window-on-top-p (w)
