@@ -25,7 +25,7 @@ AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR(etc)
 
 dnl Release versioning info
-version="1.0.1"
+version="1.0.1-gnome2-1"
 
 output_files="src/Makefile lisp/Makefile scripts/Makefile themes/Makefile\
  lisp/sawfish/ui/Makefile lisp/sawfish/gtk/Makefile sounds/Makefile\
@@ -109,7 +109,7 @@ AC_MSG_CHECKING([for correct rep-gtk version])
 cat >conftest <<EOF
 (condition-case nil
     (progn
-      (require 'gui.gtk.gtk)
+      (require 'gui.gtk-2.gtk)
       $rep_gtk_function
       (throw 'quit 0))
   (error
@@ -134,7 +134,7 @@ dnl Check for image handling libraries
 AC_ARG_WITH(gdk-pixbuf,
  [  --with-gdk-pixbuf	  Use gdk-pixbuf for image management
   --without-gdk-pixbuf	  Use Imlib1 instead], [],
- [with_gdk_pixbuf=no])
+ [with_gdk_pixbuf=yes])
 if test "$with_gdk_pixbuf" != "no"; then
   AC_MSG_CHECKING([for gdk_pixbuf (xlib version)])
     PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= 1.3.12)
@@ -156,10 +156,11 @@ if test "$with_gdk_pixbuf" != "no"; then
     fi
 fi
 if test "$with_gdk_pixbuf" = "no"; then
-  PKG_CHECK_MODULES(IMLIB, imlib >= 1.9.12)
+  AM_PATH_IMLIB
+  if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then true; else
+    AC_MSG_ERROR([imlib must be built with support for png images])
+  fi
   AC_DEFINE(HAVE_IMLIB,1)
-  AC_SUBST(IMLIB_CFLAGS)
-  AC_SUBST(IMLIB_LIBS)
   IMAGE_LIBS='${IMLIB_LIBS}'
   IMAGE_CFLAGS='${IMLIB_CFLAGS}'
 fi
