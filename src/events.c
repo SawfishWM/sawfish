@@ -21,6 +21,7 @@
 
 #include "sawmill.h"
 #include <limits.h>
+#include <time.h>
 #include <X11/extensions/shape.h>
 #include <X11/Xresource.h>
 
@@ -1055,6 +1056,17 @@ inner_handle_input (repv arg)
 void
 handle_input_mask(long mask)
 {
+    static time_t last_time;
+
+    time_t current_time = time (0);
+    if (current_time < last_time)
+    {
+	/* Hmm. Looks like the clock's been turned backwards. Refetch the
+	   server timestamp so we don't ignore any following timestamps */
+	last_event_time = get_server_timestamp ();
+    }
+    last_time = current_time;
+
     /* Read all events in the input queue. */
     while(rep_throw_value == rep_NULL)
     {
