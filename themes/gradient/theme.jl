@@ -265,17 +265,17 @@
 				(left-edge . 0)
 				(right-edge . 0)
 				(top-edge . -1)
-				(height . 1))))
+				(height . 1)))))
 
-     (add-frame-style 'gradient
-		      #'(lambda (w type)
-			  (cond ((eq type 'shaped)
-				 shaped-frame)
-				((eq type 'transient)
-				 transient-frame)
-				((eq type 'shaped-transient)
-				 shaped-transient-frame)
-				((eq type 'unframed)
-				 nil-frame)
-				(t
-				 frame))))))
+  (add-frame-style 'gradient
+		   #'(lambda (w type)
+		       (cond ((eq type 'shaped)
+			      shaped-frame)
+			     ((eq type 'transient)
+			      transient-frame)
+			     ((eq type 'shaped-transient)
+			      shaped-transient-frame)
+			     ((eq type 'unframed)
+			      nil-frame)
+			     (t
+			      frame)))))
