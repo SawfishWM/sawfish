@@ -172,7 +172,7 @@
       ((grid (grid-from-edges (car edges) (cdr edges)))
        rects)
     (setq rects (rectangles-from-grid
-		 (car grid) (cdr grid)
+		 (sort (car grid)) (sort (cdr grid))
 		 #'(lambda (rect)
 		     ;; the rectangle mustn't overlap any avoided windows
 		     (catch 'foo
