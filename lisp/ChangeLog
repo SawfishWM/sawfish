@@ -1,5 +1,23 @@
 2000-01-14  John Harper  <john@dcs.warwick.ac.uk>
 
+	* functions.jl (call-after-property-changed): can now be given
+	a _list_ of X properties to monitor
+	(call-after-state-changed): new function, monitors a list of
+	window states (i.e. things like iconified, shaded, ...) and
+	calls a function when any of them change. The
+	window-state-change-hook now has a second argument (apart from
+	the window), the list of symbolic states that changed
+	* iconify.jl, ignore-window.jl, maximize.jl, shading.jl,
+	stacking.jl: call window-state-change-hook with the list of
+	changed states
+	* iconify.jl, gnome.jl: use call-after-state-changed to prevent
+	updating X properties that don't need changing
+	* sticky.jl (make-window-sticky, make-window-unsticky): merge
+	sticky and sticky-viewport properties more correctly
+	* sawmill-gaol.jl: add call-after-state-changed to the list of
+	safe functions
+	[ these are mostly by James Antill <james@and.org> ]
+
 	* sawmill.jl: load gettext _before_ loading standard libraries,
 	otherwise many strings aren't translated up correctly
 
