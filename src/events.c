@@ -79,6 +79,7 @@ DEFSYM(shape_notify_hook, "shape-notify-hook");
 DEFSYM(enter_frame_part_hook, "enter-frame-part-hook");
 DEFSYM(leave_frame_part_hook, "leave-frame-part-hook");
 DEFSYM(configure_request_hook, "configure-request-hook");
+DEFSYM(window_state_change_hook, "window-state-change-hook");
 
 DEFSYM(pointer_motion_threshold, "pointer-motion-threshold");
 
@@ -88,6 +89,8 @@ DEFSYM(root, "root");
 /* for property-notify-hook */
 DEFSYM(new_value, "new-value");
 DEFSYM(deleted, "deleted");
+
+DEFSYM(urgency, "urgency");
 
 DEFSYM(stack, "stack");
 DEFSYM(above, "above");
@@ -399,9 +402,13 @@ static void
 property_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xproperty.window);
+    repv w_ = rep_VAL (w);		/* type alias for gc-pro'ing */
     if (w != 0 && ev->xproperty.window == w->id)
     {
 	bool need_refresh = FALSE, changed = TRUE;
+	repv changed_states = Qnil;
+	rep_GC_root gc_w, gc_changed_states;
+
 	switch (ev->xproperty.atom)
 	{
 	    u_char *prop;
@@ -409,6 +416,7 @@ property_notify (XEvent *ev)
 	    int format;
 	    long nitems, bytes_after;
 	    long supplied;
+	    bool old_urgency, new_urgency;
 
 	case XA_WM_NAME:
 	case XA_WM_ICON_NAME:
@@ -474,11 +482,15 @@ property_notify (XEvent *ev)
 	    break;
 
 	case XA_WM_HINTS:
+	    old_urgency = w->wmhints != 0 && w->wmhints->flags & XUrgencyHint;
 	    if (w->wmhints != 0)
 		XFree (w->wmhints);
 	    w->wmhints = XGetWMHints (dpy, w->id);
+	    new_urgency = w->wmhints != 0 && w->wmhints->flags & XUrgencyHint;
 	    w->icon_image = rep_NULL;
 	    need_refresh = TRUE;
+	    if (old_urgency != new_urgency)
+		changed_states = Fcons (Qurgency, changed_states);
 	    break;
 
 	case XA_WM_NORMAL_HINTS:
@@ -505,6 +517,9 @@ property_notify (XEvent *ev)
 	    }
 	}
 
+	rep_PUSHGC (gc_w, w_);
+	rep_PUSHGC (gc_changed_states, changed_states);
+
 	if (need_refresh && w->reparented
 	    && w->property_change != 0 && w->id != 0)
 	{
@@ -519,6 +534,13 @@ property_notify (XEvent *ev)
 					   == PropertyNewValue
 					   ? Qnew_value : Qdeleted), Qnil);
 	}
+	if (changed_states != Qnil)
+	{
+	    Fcall_window_hook (Qwindow_state_change_hook, rep_VAL (w),
+			       rep_LIST_1 (changed_states), Qnil);
+	}
+
+	rep_POPGC; rep_POPGC;
     }
 }
 
@@ -1503,6 +1525,7 @@ events_init (void)
     rep_INTERN_SPECIAL(enter_frame_part_hook);
     rep_INTERN_SPECIAL(leave_frame_part_hook);
     rep_INTERN_SPECIAL(configure_request_hook);
+    rep_INTERN_SPECIAL(window_state_change_hook);
 
     rep_INTERN_SPECIAL(pointer_motion_threshold);
     Fset (Qpointer_motion_threshold, rep_MAKE_INT (0));
@@ -1512,6 +1535,7 @@ events_init (void)
     rep_INTERN(root);
     rep_INTERN(new_value);
     rep_INTERN(deleted);
+    rep_INTERN(urgency);
     rep_INTERN(stack);
     rep_INTERN(above);
     rep_INTERN(below);
