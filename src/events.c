@@ -905,6 +905,19 @@ leave_notify (XEvent *ev)
 static Lisp_Window *last_focused;
 
 static void
+report_focus_change (Lisp_Window *w)
+{
+    if (w != 0
+	&& w->focus_change != 0
+	&& !WINDOW_IS_GONE_P (w))
+    {
+	DB (("  calling focus change %p on %s\n",
+	     w->focus_change, rep_STR(w->name)));
+	w->focus_change (w);
+    }
+}
+
+static void
 focus_in (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xfocus.window);
@@ -912,18 +925,16 @@ focus_in (XEvent *ev)
 	return;
     if (w != 0 && w->visible)
     {
+	Lisp_Window *old = focus_window;
 	focus_window = w;
 
 	if (last_focused != w)
 	{
 	    last_focused = w;
+	    if (old != 0)
+		report_focus_change (old);
 	    install_colormaps (w);
-	    if (w->focus_change != 0)
-	    {
-		DB (("  calling focus change %p on %s\n",
-		     w->focus_change, rep_STR(w->name)));
-		w->focus_change (w);
-	    }
+	    report_focus_change (w);
 	    if (!WINDOW_IS_GONE_P (w))
 	    {
 		Fcall_window_hook (Qfocus_in_hook, rep_VAL(w),
@@ -945,16 +956,14 @@ focus_out (XEvent *ev)
     if (w != 0 && ev->xfocus.detail != NotifyInferior)
     {
 	if (focus_window == w)
+	{
 	    focus_window = 0;
+	    report_focus_change (w);
+	}
+
 	if (last_focused == w)
 	{
 	    last_focused = 0;
-	    if (w->focus_change != 0)
-	    {
-		DB (("  calling focus change %p on %s\n",
-		     w->focus_change, rep_STR(w->name)));
-		w->focus_change (w);
-	    }
 	    if (!WINDOW_IS_GONE_P (w))
 	    {
 		Fcall_window_hook (Qfocus_out_hook, rep_VAL(w),

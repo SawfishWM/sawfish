@@ -826,13 +826,13 @@ get-x-text-property WINDOW PROPERTY
 }
 
 DEFUN("set-x-text-property", Fset_x_text_property, Sset_x_text_property, 
-      (repv win, repv prop, repv vect), rep_Subr3) /*
+      (repv win, repv prop, repv vect, repv enc), rep_Subr4) /*
 ::doc:sawfish.wm.misc#set-x-text-prooperty::
-set-x-text-property WINDOW PROPERTY STRING-VECTOR
+set-x-text-property WINDOW PROPERTY STRING-VECTOR [ENCODING-ATOM]
 ::end:: */
 {
     Window w;
-    Atom a_prop;
+    Atom a_prop, enc_atom;
     XTextProperty t_prop;
     char **strings;
     int count, i;
@@ -844,6 +844,11 @@ set-x-text-property WINDOW PROPERTY STRING-VECTOR
 	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
     a_prop = XInternAtom (dpy, rep_STR(rep_SYM(prop)->name), False);
 
+    if (rep_SYMBOLP (enc))
+	enc_atom = XInternAtom (dpy, rep_STR(rep_SYM(enc)->name), False);
+    else
+	enc_atom = 0;
+
     count = rep_VECT_LEN(vect);
     strings = alloca (sizeof (char *) * (count + 1));
     for (i = 0; i < count; i++)
@@ -854,6 +859,8 @@ set-x-text-property WINDOW PROPERTY STRING-VECTOR
     }
     if (XStringListToTextProperty (strings, count, &t_prop) != 0)
     {
+	if (enc_atom != 0)
+	    t_prop.encoding = enc_atom;
 	XSetTextProperty (dpy, w, &t_prop, a_prop);
 	XFree (t_prop.value);
     }
