@@ -225,7 +225,7 @@ add_window (Window id)
 	w->car = window_type;
 	w->id = id;
 	w->plist = Qnil;
-	w->frame_style = Fsymbol_value (Qdefault_frame, Qt);;
+	w->frame_style = Qnil;;
 
 	/* ..now do the X11 stuff */
 
