@@ -63,7 +63,7 @@
 
 (defun display-window (w &optional preferred-space)
   "Display the workspace containing the window W, then focus on W."
-  (interactive "%W")
+  (interactive (list (prompt-for-window)))
   (when w
     (uniconify-window w)
     (when (or (not preferred-space)
