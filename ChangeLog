@@ -1,3 +1,9 @@
+2002-11-08  John Harper  <jsh@unfactored.org>
+
+	* configure.in, Makedefs.in: use pkg-config to look for xft.pc
+	before searching by hand. This is because Xft2 (which has the
+	xft.pc may not be recognized by the hand-crafted tests)
+
 2002-11-03  John Harper  <jsh@unfactored.org>
 
 	* po/sawfish.pot: rebuilt
