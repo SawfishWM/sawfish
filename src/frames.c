@@ -157,7 +157,7 @@ set_frame_part_bg (struct frame_part *fp)
 
     if (COLORP(bg))
     {
-	XSetWindowBackground (dpy, fp->id, VCOLOR(bg)->color.pixel);
+	XSetWindowBackground (dpy, fp->id, VCOLOR(bg)->pixel);
     }
     else if (IMAGEP(bg))
     {
@@ -381,7 +381,7 @@ set_frame_part_fg (struct frame_part *fp)
 	if (fp->gc == 0)
 	{
 	    gcv.font = VFONT(font)->font->fid;
-	    gcv.foreground = VCOLOR(fg)->color.pixel;
+	    gcv.foreground = VCOLOR(fg)->pixel;
 	    gcv.function = GXcopy;
 	    fp->gc = XCreateGC (dpy, fp->id,
 				GCFunction | GCForeground | GCFont, &gcv);
@@ -389,7 +389,7 @@ set_frame_part_fg (struct frame_part *fp)
 	else
 	{
 	    gcv.font = VFONT(font)->font->fid;
-	    gcv.foreground = VCOLOR(fg)->color.pixel;
+	    gcv.foreground = VCOLOR(fg)->pixel;
 	    XChangeGC (dpy, fp->gc, GCForeground | GCFont, &gcv);
 	}
 	XDrawString (dpy, fp->id, fp->gc, x,
@@ -809,17 +809,20 @@ list_frame_generator (Lisp_Window *w)
 	{
 	    if (rep_STRINGP(fp->fg[i]))
 		fp->fg[i] = Fget_color (fp->fg[i]);
-	    if (fp->fg[i] != Qnil && !COLORP(fp->fg[i]))
+	    if (fp->fg[i] && fp->fg[i] != Qnil && !COLORP(fp->fg[i]))
 		goto next_part;
 
 	    if (rep_STRINGP(fp->bg[i]))
 		fp->bg[i] = Fget_color (fp->bg[i]);
-	    if (fp->bg[i] != Qnil && !IMAGEP(fp->bg[i]) && !COLORP(fp->bg[i]))
+	    if (fp->bg[i] && fp->bg[i] != Qnil
+		&& !IMAGEP(fp->bg[i]) && !COLORP(fp->bg[i]))
+	    {
 		goto next_part;
+	    }
 
 	    if (rep_STRINGP(fp->font[i]))
 		fp->font[i] = Fget_font (fp->font[i]);
-	    if (fp->font[i] != Qnil && !FONTP(fp->font[i]))
+	    if (fp->font[i] && fp->font[i] != Qnil && !FONTP(fp->font[i]))
 		goto next_part;
 	}
 
