@@ -39,21 +39,16 @@ exec rep "$0" "$@"
 (define (group-id-ref id) (table-ref (fluid group-table) id))
 
 (define (create-menu spec #!optional bar)
-  (let* ((menu (if bar (gtk-menu-bar-new) (gtk-menu-new)))
-	 ;;(accels (gtk-menu-ensure-uline-accel-group menu))
-	 )
+  (let* ((menu (if bar (gtk-menu-bar-new) (gtk-menu-new))))
 
     ;; Set the label of the menu item, handling underlined accelerators
     (define (label-menu-item item label-text #!optional shortcut)
-      (let* ((label (gtk-label-new label-text))
-	     (hbox (gtk-hbox-new nil 16))
-	     ;;(hkey (gtk-label-parse-uline label label-text))
-	     )
+      (let* ((label (gtk-label-new-with-mnemonic label-text))
+	     (hbox (gtk-hbox-new nil 16)))
 	(gtk-box-pack-start hbox label nil nil t 0)
 	(when shortcut
 	  (let ((accel (gtk-label-new shortcut)))
 	    (gtk-box-pack-end hbox accel nil nil 0)))
-	;;(gtk-widget-add-accelerator item "activate_item" accels hkey 0 0)
 	(gtk-widget-show-all hbox)
 	(gtk-container-add item hbox)))
 
