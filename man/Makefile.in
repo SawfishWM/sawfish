@@ -57,7 +57,7 @@ install : sawfish.info installdirs
 	for f in sawfish.info*; do \
  	  $(INSTALL_DATA) $$f $(DESTDIR)$(infodir); \
 	done
-	-install-info librep.info $(DESTDIR)$(infodir)/dir
+	-install-info sawfish.info $(DESTDIR)$(infodir)/dir
 
 installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(infodir)
