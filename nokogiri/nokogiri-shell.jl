@@ -41,6 +41,7 @@
   (defvar *nokogiri-buttons* nil)
 
   (defvar *nokogiri-flatten-groups* nil)
+  (defvar *nokogiri-single-level* nil)
 
   (define main-window)
   (define group-tree-widget)
@@ -81,7 +82,9 @@
 
       (let ((group (get-group top-group)))
 	(fetch-group group)
-	(if (and (not *nokogiri-flatten-groups*) (group-sub-groups group))
+	(if (and (not *nokogiri-flatten-groups*)
+		 (not *nokogiri-single-level*)
+		 (group-sub-groups group))
 	    (let ((paned (gtk-hpaned-new))
 		  (g-scroller (gtk-scrolled-window-new)))
 	      (setq group-tree-widget (make-group-tree (get-group top-group)))
