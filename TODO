@@ -53,9 +53,33 @@ Outstanding bugs
 
   ! Num_Lock is filtered, but not Scroll_Lock
 
+  ! shouldn't be able to maximize non-resizable windows
+
+  ! when I set the background of a clicked button to "white", the
+    button's foreground image switches to the inverted mode. Nothing in
+    the theme itself [smaker] seems likely to do this.
+
+  ! turn off mouse warping options, put cursor in window in center of
+    screen (under message window), M-TAB, and the pointer leaving the
+    message window will refocus the original window
+
+  ! sometimes (about 1 time in 100) that I click and drag to move a
+    window, the window warps a considerable distance away from the
+    pointer just as I click.. the window generally moves about its own
+    width and height away from its start position
+
+  ! I bring up an exmh transient, and place it so it's totally enclosed
+    by the exmh parent window.  I put my mouse in the middle of the
+    transient so it has focus (I'm using sloppy focus.)  I then move to
+    a different desktop, and back. The transient window has focus still
+    (ie. I can type in it), but the frame is drawn in the unfocused
+    style.
+
 
 General tasks
 =============
+
+  + allow cursors to be customized (i.e. when moving/resizing/..)
 
   + support for synthesizing events
 

@@ -1,3 +1,22 @@
+1999-10-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sm-load.jl (sm-match-window-to-alist): match isn't successful
+	_unless_ either SM_CLIENT_ID or WM_COMMAND matches
+
+	* move-resize.jl (move-resize-motion): call while-moving-hook
+	or while-resizing-hook in between erasing the old outline and
+	drawing the new one
+
+	* edge-flip.jl (edge-flip-while-moving): make edge flipping
+	work while dragging windows
+
+	* maximize.jl (maximize-expand-edges): fix problem with
+	immediately adjacent edges being ignored
+
+	* functions.jl (uniquify-list): new function
+	* edges.jl, rects.jl (grid-from-edges, grid-from-rectangles):
+	uniquify the grid
+
 1999-10-25  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.14.2
