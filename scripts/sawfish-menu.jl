@@ -95,8 +95,6 @@ exec rep "$0" "$@"
 
 ;; entry point, loop reading command forms, sending back results
 
-(gtk-set-locale)
-
 (condition-case nil
     (while t
       (let ((input (read standard-input)))
