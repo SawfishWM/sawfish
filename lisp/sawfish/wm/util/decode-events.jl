@@ -21,7 +21,9 @@
 
 (define-structure sawfish.wm.util.decode-events
 
-    (export decode-event
+    (export decode-modifier
+	    encode-modifier
+	    decode-event
 	    encode-event
 	    string->keysym
 	    modifier->keysyms
@@ -33,42 +35,58 @@
 
   (define-structure-alias decode-events sawfish.wm.util.decode-events)
 
+  (define (decode-modifier mods)
+    (let ((out '()))
+      (do ((i 0 (1+ i)))
+	  ((= i 13))
+	(when (not (zerop (logand mods (lsh 1 i))))
+	  (setq out (cons (aref [shift lock control mod-1 mod-2
+				       mod-3 mod-4 mod-5 button-1
+				       button-2 button-3 button-4
+				       button-5] i) out))))
+      (when (not (zerop (logand mods (lsh 1 20))))
+	(setq out (cons 'meta out)))
+      (when (not (zerop (logand mods (lsh 1 21))))
+	(setq out (cons 'alt out)))
+      (when (not (zerop (logand mods (lsh 1 24))))
+	(setq out (cons 'hyper out)))
+      (when (not (zerop (logand mods (lsh 1 25))))
+	(setq out (cons 'super out)))
+      (when (not (zerop (logand mods (lsh 1 26))))
+	(setq out (cons 'wm out)))
+      (when (not (zerop (logand mods (lsh 1 22))))
+	(setq out (cons 'any out)))
+      (when (not (zerop (logand mods (lsh 1 23))))
+	(setq out (cons 'release out)))
+      out))
+
+  (define (encode-modifier in)
+    (let ((encode-mod-map '((shift . 1) (lock . 2)
+			    (control . 4) (mod-1 . 8)
+			    (mod-2 . 16) (mod-3 . 32) (mod-4 . 64)
+			    (mod-5 . 128) (button-1 . 256)
+			    (button-2 . 512) (button-3 . 1024)
+			    (button-4 . 2048) (button-5 . 4096)
+			    (meta . #x100000) (alt . #x200000)
+			    (hyper . #x1000000) (super . #x2000000)
+			    (wm . #x4000000) (any . #x400000)
+			    (release . #x800000))))
+
+      (apply + (mapcar (lambda (m)
+			 (cdr (assq m encode-mod-map))) in))))
+
   (define (decode-event event)
     "Return a symbol description of the low-level event structure EVENT (a cons
 cell). The symbolic description has the form `(TYPE MODIFIER-LIST ACTION)'."
     (let* ((code (car event))
-	   (mods (cdr event))
-
-	   (decode-mods
-	    (lambda ()
-	      (let ((out '()))
-		(do ((i 0 (1+ i)))
-		    ((= i 13))
-		  (when (not (zerop (logand mods (lsh 1 i))))
-		    (setq out (cons (aref [shift lock control mod-1 mod-2
-						 mod-3 mod-4 mod-5 button-1
-						 button-2 button-3 button-4
-						 button-5] i) out))))
-		(when (not (zerop (logand mods (lsh 1 20))))
-		  (setq out (cons 'meta out)))
-		(when (not (zerop (logand mods (lsh 1 21))))
-		  (setq out (cons 'alt out)))
-		(when (not (zerop (logand mods (lsh 1 24))))
-		  (setq out (cons 'hyper out)))
-		(when (not (zerop (logand mods (lsh 1 25))))
-		  (setq out (cons 'super out)))
-		(when (not (zerop (logand mods (lsh 1 22))))
-		  (setq out (cons 'any out)))
-		(when (not (zerop (logand mods (lsh 1 23))))
-		  (setq out (cons 'release out)))
-		out))))
+	   (mods (cdr event)))
 
       (cond ((not (zerop (logand mods (lsh 1 16))))
 	     ;; keyboard event
-	     (list 'key (decode-mods) (x-keysym-name code)))
+	     (list 'key (decode-modifier mods) (x-keysym-name code)))
 	    ((not (zerop (logand mods (lsh 1 17))))
 	     ;; mouse event
-	     (list 'mouse (decode-mods)
+	     (list 'mouse (decode-modifier mods)
 		   (aref [click-1 click-2 move off click-3] (1- code))))
 	    (t (error "Unknown event type")))))
 
@@ -76,20 +94,7 @@ cell). The symbolic description has the form `(TYPE MODIFIER-LIST ACTION)'."
     "Return the low-level event structure (cons cell) representing the symbolic
 event description EVENT, a list `(TYPE MODIFIER-LIST ACTION)'."
     (let* ((code 0)
-
-	   (encode-mod-map '((shift . 1) (lock . 2)
-			     (control . 4) (mod-1 . 8)
-			     (mod-2 . 16) (mod-3 . 32) (mod-4 . 64)
-			     (mod-5 . 128) (button-1 . 256)
-			     (button-2 . 512) (button-3 . 1024)
-			     (button-4 . 2048) (button-5 . 4096)
-			     (meta . #x100000) (alt . #x200000)
-			     (hyper . #x1000000) (super . #x2000000)
-			     (any . #x400000) (release . #x800000)))
-
-	   (mods (apply + (mapcar (lambda (m)
-				    (cdr (assq m encode-mod-map)))
-				  (cadr event)))))
+	   (mods (encode-modifier (cadr event))))
 
       (cond ((eq (car event) 'key)
 	     (setq mods (logior mods (lsh 1 16)))
@@ -133,6 +138,12 @@ representing the X11 keysyms that may generate the modifier."
 	(member (symbol-name keysym) hyper-keysyms)
 	(member (symbol-name keysym) super-keysyms)))
 
+  (define (member-event ev lst)
+    (let loop ((rest lst))
+      (cond ((null rest) nil)
+	    ((event-match ev (car rest)) rest)
+	    (t (loop (cdr rest))))))
+
   (define (should-grab-button-event-p event keymap)
     (let* ((decoded (decode-event event))
 	   (variants (mapcar (lambda (action)
@@ -141,5 +152,5 @@ representing the X11 keysyms that may generate the modifier."
 			     '(click-2 click-3 move off))))
       (let loop ((rest (cdr keymap)))
 	(cond ((null rest) nil)
-	      ((member (cdar rest) variants) t)
+	      ((member-event (cdar rest) variants) t)
 	      (t (loop (cdr rest))))))))

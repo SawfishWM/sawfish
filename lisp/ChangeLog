@@ -1,5 +1,25 @@
 2000-11-28  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/custom-defaults.jl: changed some bindings to use
+	`W-' modifier
+
+	* sawfish/wm/util/decode-events.jl (decode-modifier,
+	encode-modifier): new functions
+	(should-grab-button-event-p): groks the `W-' modifier
+
+	* sawfish/wm/ext/match-window.jl (match-window-properties):
+	removed ignore-when-cycling property (didn't I already do
+	this?)
+
+	* sawfish/wm/keymaps.jl: changed default bindings to use the
+	new `W-' modifier, the customizable `WM' modifier
+
+	* sawfish/wm/keymaps.jl (wm-modifier-value): new option. Has
+	type `modifier-list'. Added [de]serialization for this type
+
+	* sawfish/wm/customize.jl (customize-read-user-file): fixed for
+	new format of custom-default-file
+
 	* sawfish/wm/util/ping.jl (ping-window): fixed bug whereby
 	CALLBACK would get called twice if the ping is ponged before
 	the timer fires
