@@ -415,6 +415,7 @@ that overrides settings set elsewhere.")
       (let
 	  ((map-name (intern (concat (symbol-name class) "-keymap"))))
 	(unless (boundp map-name)
+	  (make-variable-special map-name)
 	  (set map-name (make-keymap))
 	  (setq ok-to-bind t)
 	  ;; so the theme can bind to the keymap..
