@@ -23,57 +23,56 @@ exec rep "$0" "$@"
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'gtk)
+(require 'gui.gtk)
+(require 'rep.data.tables)
 
 
 ;; menus
 
 (define menu-selected nil)
 
-;; only rep-gtk 0.10+ wraps the necessary functions
-(define with-accels (boundp 'gtk-menu-ensure-uline-accel-group))
+;; map radio-group ids to the last widget
+(define group-table (make-fluid))
 
-(defun remove-underscores (string)
-  (if (string-match "_" string)
-      (remove-underscores (concat (substring string 0 (match-start))
-				  (substring string (match-end))))
-    string))
+(define (make-group-table) (make-table symbol-hash eq))
+(define (group-id-set id w) (table-set (fluid group-table) id w))
+(define (group-id-ref id) (table-ref (fluid group-table) id))
 
-(defun create-menu (spec #!optional bar)
-  (let*
-      ((menu (if bar (gtk-menu-bar-new) (gtk-menu-new)))
-       (accels (and with-accels (gtk-menu-ensure-uline-accel-group menu))))
+(define (create-menu spec #!optional bar)
+  (let* ((menu (if bar (gtk-menu-bar-new) (gtk-menu-new)))
+	 (accels (gtk-menu-ensure-uline-accel-group menu)))
     (mapc (lambda (cell)
-	    (let
-		(label item)
+	    (let (label item)
 	      (when (and cell (symbolp (car cell)))
 		(setq cell (symbol-value (car cell))))
 	      (if (null cell)
 		  (setq item (gtk-menu-item-new))
-		(setq label (if with-accels
-				(car cell)
-			      (remove-underscores (car cell))))
+		(setq label (car cell))
 		(setq cell (cdr cell))
 		(if (and (consp (car cell)) (stringp (car (car cell))))
 		    (let ((sub (create-menu cell)))
 		      (setq item (gtk-menu-item-new-with-label label))
 		      (gtk-menu-item-set-submenu item sub))
 		  (let ((options (cdr cell)))
-		    (let ((check (assq 'check options)))
-		      (if check
-			  (progn
-			    (setq item (gtk-check-menu-item-new-with-label
-					label))
-			    (gtk-check-menu-item-set-state item (cdr check)))
-			(setq item (gtk-menu-item-new-with-label label)))))
+		    (let* ((check (assq 'check options))
+			   (group (cdr (assq 'group options)))
+			   (last-widget (and group (group-id-ref group))))
+		      (cond (group
+			     (setq item (gtk-radio-menu-item-new-with-label-from-widget last-widget label))
+			     (group-id-set group item))
+			    (check
+			     (setq item (gtk-check-menu-item-new-with-label label))
+			     (gtk-check-menu-item-set-show-toggle item t))
+			    (t (setq item (gtk-menu-item-new-with-label label))))
+		      (when check
+			(gtk-check-menu-item-set-state item (cdr check)))))
 		  (gtk-signal-connect
 		   item "activate" (lambda ()
 				     (setq menu-selected (car cell)))))
-		(when with-accels
-		  (let ((hkey (gtk-label-parse-uline
-			       (car (gtk-container-children item)) label)))
-		    (gtk-widget-add-accelerator
-		     item "activate_item" accels hkey 0 0))))
+		(let ((hkey (gtk-label-parse-uline
+			     (car (gtk-container-children item)) label)))
+		  (gtk-widget-add-accelerator
+		   item "activate_item" accels hkey 0 0)))
 	      (when item
 		(gtk-widget-lock-accelerators item)
 		((if bar gtk-menu-bar-append gtk-menu-append) menu item)
@@ -81,9 +80,9 @@ exec rep "$0" "$@"
 	  spec)
     menu))
 
-(defun popup-menu (spec #!optional timestamp position)
-  (let
-      ((menu  (create-menu spec)))
+(define (popup-menu spec #!optional timestamp position)
+  (let ((menu (let-fluids ((group-table (make-group-table)))
+		(create-menu spec))))
     (gtk-signal-connect menu "deactivate" gtk-main-quit)
     (setq menu-selected nil)
     (gtk-menu-popup-interp menu nil nil 0 (or timestamp 0) position)
@@ -93,13 +92,11 @@ exec rep "$0" "$@"
 
 ;; entry point, loop reading command forms, sending back results
 
-(when (boundp 'gtk-set-locale)
-  (gtk-set-locale))
+(gtk-set-locale)
 
 (condition-case nil
     (while t
-      (let
-	  ((input (read standard-input)))
+      (let ((input (read standard-input)))
 	(format standard-output "%S\n"
 		(apply (symbol-value (car input)) (cdr input)))
 	(when (filep standard-output)
