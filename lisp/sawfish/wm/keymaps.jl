@@ -123,7 +123,8 @@ of a window."
 
   (bind-keys global-keymap
     "C-Left" 'previous-workspace
-    "C-Right" 'next-workspace)
+    "C-Right" 'next-workspace
+    "M-Tab" 'cycle-windows)
 
   (bind-keys root-window-keymap
     "Button2-Click1" 'popup-root-menu
