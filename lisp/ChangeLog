@@ -1,3 +1,24 @@
+1999-10-25  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.14.1
+
+	* maximize.jl (maximize-do-both): only choose rectangles that
+	are fully on the screen
+
+	* rects.jl (rect-wholly-visible-p): new function
+
+	* rects.jl (rectangles-from-grid): fixed this function (only
+	traversing the list of y points once)
+
+	* smart-placement.jl (sp-do-placement): fix for when
+	sp-important-windows is nil
+
+	* maximize.jl (maximize-do-both): deleted unused `center'
+	variable
+	(maximize-window): delete the window itself from the list of
+	avoided windows
+	(both from Rob Hodges <s323140@student.uq.edu.au>)
+
 1999-10-24  John Harper  <john@dcs.warwick.ac.uk>
 
 	* version 0.14
