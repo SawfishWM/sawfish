@@ -1,3 +1,10 @@
+1999-09-23  John Harper  <john@dcs.warwick.ac.uk>
+
+	* session.c (Fsm_connect, Fsm_disconnect): new functions.
+	Connection with the session manager is now removed from the
+	actual initialisation process. The lisp code will call
+	sm-connect at the right time
+
 1999-09-21  John Harper  <john@dcs.warwick.ac.uk>
 
 	* colors.c (Fget_color): allocate all colors using

@@ -219,10 +219,11 @@ extern repv Frestart (void);
 extern void add_hook (repv sym, repv fun);
 
 /* from session.c */
-extern repv Qsave_session;
-extern repv Vsm_client_id (repv arg);
+extern repv Qsm_save_yourself;
 extern repv Fsm_set_property (repv prop, repv value);
 extern repv Fsm_delete_property (repv prop);
+extern repv Fsm_connect (repv id);
+extern repv Fsm_disconnect (void);
 extern void session_init (void);
 extern void session_kill (void);
 
