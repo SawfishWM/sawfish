@@ -1,3 +1,12 @@
+2003-08-13  John Harper  <jsh@unfactored.org>
+
+	Integrated patches from Shun-ichi TAHARA <jado@flowernet.gr.jp>:
+
+	* fonts.c: check for GDK_USE_XFT and choose a different default
+	font (Xft "Sans") if it's set
+
+	* fonts.c: added `Pango' font class
+
 2003-07-17  John Harper  <jsh@unfactored.org>
 
 	* x.c, windows.c, frames.c, events.c: fixed gcc 3.3 type

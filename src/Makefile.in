@@ -38,13 +38,13 @@ DL_DSTS = sawfish/wm/util/gradient.la sawfish/wm/util/flippers.la \
 	  sawfish/wm/util/play-sample.la
 DL_DIRS = sawfish/wm/util
 
-override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(ESD_CFLAGS)
+override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(ESD_CFLAGS) $(PANGO_CFLAGS)
 
 all : sawfish libclient.o $(DL_OBJS) .libexec gtk-style
 
 sawfish : $(OBJS) $(LIBOBJS)
 	$(rep_LIBTOOL) --mode=link $(CC) -export-dynamic $(LDFLAGS) \
-	  -o sawfish $(OBJS) $(LIBOBJS) $(REP_LIBS) \
+	  -o sawfish $(OBJS) $(LIBOBJS) $(REP_LIBS) $(PANGO_LIBS) \
 	  $(IMAGE_LIBS) $(X11_LIBS) $(EXTRA_X11_LIBS) $(LIBS)
 
 %.la : %.lo

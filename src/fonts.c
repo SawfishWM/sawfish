@@ -46,6 +46,21 @@
 # include <X11/Xft/Xft.h>
 #endif
 
+#ifdef HAVE_PANGO
+# include <glib.h>
+# define PANGO_ENABLE_BACKEND
+# include <pango/pango.h>
+# undef PANGO_ENABLE_BACKEND
+# ifdef HAVE_PANGO_X
+#  include <pango/pangox.h>
+# endif
+# ifdef HAVE_PANGO_XFT
+#  define PANGO_ENABLE_ENGINE
+#  include <pango/pangoxft.h>
+#  undef PANGO_ENABLE_ENGINE
+# endif
+#endif
+
 static Lisp_Font *font_list;
 int font_type;
 
@@ -385,6 +400,183 @@ static const Lisp_Font_Class xft_class = {
 #endif /* HAVE_X11_XFT_XFT_H */
 
 
+/* Pango fonts */
+
+#if defined (HAVE_PANGO) && defined (HAVE_X11_XFT_XFT_H)
+
+static PangoContext *pango_context;
+
+static bool
+pango_load (Lisp_Font *f)
+{
+    PangoLanguage *language;
+    PangoFontDescription *fontdesc;
+    PangoFont *font;
+    PangoFontMetrics *metrics;
+
+    if (pango_context)
+    {
+	language = pango_context_get_language (pango_context);
+    }
+    else
+    {
+	char *langname, *p;
+
+#ifdef HAVE_PANGO_XFT
+	pango_context = pango_xft_get_context (dpy, screen_num);
+#else
+	pango_context = pango_x_get_context (dpy, screen_num);
+#endif
+
+	langname = g_strdup (setlocale (LC_CTYPE, NULL));
+	p = strchr (langname, '.');
+	if (p)
+	    *p = 0;
+	p = strchr (langname, '@');
+	if (p)
+	    *p = 0;
+	language = pango_language_from_string (langname);
+	pango_context_set_language (pango_context, language);
+	g_free (langname);
+    }
+
+    fontdesc = pango_font_description_from_string (rep_STR (f->name));
+
+    if (!pango_font_description_get_family (fontdesc))
+	pango_font_description_set_family (fontdesc, "Sans");
+    if (pango_font_description_get_size (fontdesc) <= 0)
+	pango_font_description_set_size (fontdesc, 12 * PANGO_SCALE);
+
+    pango_context_set_font_description (pango_context, fontdesc);
+    font = pango_context_load_font (pango_context, fontdesc);
+
+    if (!font)
+	return FALSE;
+
+    metrics = pango_font_get_metrics (font, language);
+
+    f->font = font;
+    f->ascent = metrics->ascent / PANGO_SCALE;
+    f->descent = metrics->descent / PANGO_SCALE;
+
+    pango_font_metrics_unref (metrics);
+
+    return TRUE;
+}
+
+static void
+pango_finalize (Lisp_Font *f)
+{
+    g_object_unref (f->font);
+}
+
+static int
+pango_measure (Lisp_Font *f, u_char *string, size_t length)
+{
+    gsize r, w;
+    u_char *utf8str;
+    PangoLayout *layout;
+    PangoRectangle rect;
+
+    utf8str = g_locale_to_utf8 (string, length, &r, &w, NULL);
+    if (utf8str != NULL)
+    {
+	string = utf8str;
+	length = w;
+    }
+
+    layout = pango_layout_new (pango_context);
+    pango_layout_set_text (layout, string, length);
+
+    pango_layout_get_extents (layout, NULL, &rect);
+
+    g_free (utf8str);
+    g_object_unref (layout);
+ 
+    return rect.width / PANGO_SCALE;
+}
+
+static void
+pango_draw_line (XftDraw *draw, Window id, GC gc, XftColor *xft_color,
+		 PangoLayoutLine *line, int x, int y)
+{
+    GSList *p;
+
+    for (p = line->runs; p != NULL; p = p->next)
+    {
+	PangoLayoutRun *run = p->data;
+	PangoFont *font = run->item->analysis.font;
+	PangoGlyphString *glyphs = run->glyphs;
+	PangoRectangle rect;
+
+	pango_glyph_string_extents (glyphs, font, NULL, &rect);
+#ifdef HAVE_PANGO_XFT
+	if (PANGO_XFT_IS_FONT (font))
+	    pango_xft_render (draw, xft_color, font, glyphs, x, y);
+	else
+#endif
+	    pango_x_render (dpy, id, gc, font, glyphs, x, y);
+
+	x += rect.width / PANGO_SCALE;
+    }
+}
+
+static void
+pango_draw (Lisp_Font *f, u_char *string, size_t length,
+	    Window id, GC gc, Lisp_Color *fg, int x, int y)
+{
+    static XftDraw *draw;
+    XftColor xft_color;
+    gsize r, w;
+    u_char *utf8str;
+    PangoLayout *layout;
+    PangoLayoutIter *iter;
+
+    if (draw == 0)
+	draw = XftDrawCreate (dpy, id, image_visual, image_cmap);
+    else
+	XftDrawChange (draw, id);
+
+    xft_color.pixel = fg->pixel;
+    xft_color.color.red = fg->red;
+    xft_color.color.green = fg->green;
+    xft_color.color.blue = fg->blue;
+    xft_color.color.alpha = fg->alpha;
+
+    utf8str = g_locale_to_utf8 (string, length, &r, &w, NULL);
+    if (utf8str != NULL)
+    {
+	string = utf8str;
+	length = w;
+    }
+
+    layout = pango_layout_new (pango_context);
+    pango_layout_set_text (layout, string, length);
+    iter = pango_layout_get_iter (layout);
+
+    do {
+	PangoLayoutLine *line = pango_layout_iter_get_line (iter);
+	PangoRectangle rect;
+
+	pango_layout_iter_get_line_extents (iter, NULL, &rect);
+	pango_draw_line (draw, id, gc, &xft_color,
+			 line, x + rect.x / PANGO_SCALE, y);
+    } while (pango_layout_iter_next_line (iter));
+
+    g_free (utf8str);
+    g_object_unref (layout);
+    pango_layout_iter_free (iter);
+}
+
+static const Lisp_Font_Class pango_class = {
+    "pango",
+    pango_load, pango_finalize,
+    pango_measure, pango_draw,
+};
+
+#endif /* HAVE_PANGO && HAVE_XFT */
+
+
 /* All classes */
 
 static const Lisp_Font_Class *classes[] = {
@@ -392,6 +584,9 @@ static const Lisp_Font_Class *classes[] = {
     &fontset_class,
 #ifdef HAVE_X11_XFT_XFT_H
     &xft_class,
+#endif
+#ifdef HAVE_PANGO
+    &pango_class,
 #endif
     0,
 };
@@ -761,14 +956,28 @@ fonts_init (void)
 	DEFSTRING (xlfd_name, "fixed");
 	DEFSTRING (xft_type, "Xft");
 	DEFSTRING (xft_name, "Sans");
+	DEFSTRING (pango_type, "Pango");
+	DEFSTRING (pango_name, "Sans");
 
 	repv font = Qnil;
 
 	if (use_xft ())
-	    font = Fget_font_typed (rep_VAL (&xft_type), rep_VAL (&xft_name));
+	{
+	    font = Fget_font_typed (rep_VAL (&pango_type),
+				    rep_VAL (&pango_name));
+
+	    if (font == rep_NULL || !FONTP (font))
+	    {
+		font = Fget_font_typed (rep_VAL (&xft_type),
+					rep_VAL (&xft_name));
+	    }
+	}
 
 	if (font == rep_NULL || !FONTP (font))
-	    font = Fget_font_typed (rep_VAL (&xlfd_type), rep_VAL (&xlfd_name));
+	{
+	    font = Fget_font_typed (rep_VAL (&xlfd_type),
+				    rep_VAL (&xlfd_name));
+	}
 
 	if (font == rep_NULL || !FONTP(font))
 	{
