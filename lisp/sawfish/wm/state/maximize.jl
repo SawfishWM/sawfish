@@ -27,6 +27,7 @@
 	    window-unmaximized-position
 	    window-unmaximized-dimensions
 	    window-maximizable-p
+	    frame-part-movable-p
 	    maximize-truncate-dims
 	    maximize-find-workarea
 	    maximize-window
@@ -86,6 +87,11 @@
     :user-level expert
     :type boolean)
 
+  (defcustom move-lock-when-maximized t
+    "Lock position and size while windows are maximized."
+    :type boolean
+    :group (min-max maximize))
+  
   ;; called when a window is maximized, args (W #!optional DIRECTION)
   (defvar window-maximized-hook nil)
 
@@ -326,6 +332,18 @@ doesn't overlap any avoided windows, or nil."
 		   #:windows avoided
 		   #:include-heads (list (or head (current-head))))))
       (find-max-rectangle avoided edges (current-head w))))
+
+  (define (frame-part-movable-p w part)
+    (if (not move-lock-when-maximized)
+	t
+      (let ((h-maximized (window-maximized-horizontally-p w))
+	    (v-maximized (window-maximized-vertically-p w)))
+	(case part
+	  ((top-border bottom-border) (not v-maximized))
+	  ((left-border right-border) (not h-maximized))
+	  ((top-left-corner top-right-corner
+	    bottom-left-corner bottom-right-corner title)
+	   (not (and h-maximized v-maximized)))))))
 
 
 ;;; commands

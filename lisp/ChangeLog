@@ -1,3 +1,28 @@
+2001-01-25  John Harper  <jsh@eazel.com>
+
+	Fixed bug 5984 (locked-size-when-maximized is confusing):	
+
+	* sawfish/wm/frames.jl (frame-part-classes): use calls to
+	define-frame-class to populate this alist
+
+	(cursor-for-frame-part): new function, creates functions to
+	return the correct cursor. Uses frame-part-movable-p to see
+	which cursor should be displayed 
+
+	* sawfish/wm/state/maximize.jl (frame-part-movable-p): new
+	function
+
+	* sawfish/wm/state/maximize.jl (move-lock-when-maximized):
+	moved this option here (from sawfish.wm.commands.move-resize)
+
+	* sawfish/wm/commands/move-resize.jl
+	(delete-unmovable-directions, delete-unresizable-edges): new
+	functions
+
+	(viable-move-resize-p): new function, tests if it's worth
+	starting a move/resize (only if there's something that can be
+	moved or resized)
+
 2001-01-26  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/placement.jl (place-window-randomly): fixed bug

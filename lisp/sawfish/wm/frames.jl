@@ -64,7 +64,8 @@
 	  sawfish.wm.events
 	  sawfish.wm.gaol
 	  sawfish.wm.session.init
-	  sawfish.wm.workspace)
+	  sawfish.wm.workspace
+	  sawfish.wm.state.maximize)
 
   ;; Commentary:
 
@@ -117,30 +118,7 @@
 
 ;;; variables etc
 
-  (defvar frame-part-classes
-    '((title . ((cursor . hand2)
-		(keymap . title-keymap)))
-      (menu-button . ((keymap . menu-button-keymap)))
-      (close-button . ((keymap . close-button-keymap)))
-      (iconify-button . ((keymap . iconify-button-keymap)))
-      (maximize-button . ((keymap . maximize-button-keymap)))
-      (shade-button . ((keymap . shade-button-keymap)))
-      (top-border . ((cursor . top_side)
-		     (keymap . border-keymap)))
-      (left-border . ((cursor . left_side)
-		      (keymap . border-keymap)))
-      (right-border . ((cursor . right_side)
-		       (keymap . border-keymap)))
-      (bottom-border . ((cursor . bottom_side)
-			(keymap . border-keymap)))
-      (top-left-corner . ((cursor . top_left_corner)
-			  (keymap . border-keymap)))
-      (top-right-corner . ((cursor . top_right_corner)
-			   (keymap . border-keymap)))
-      (bottom-left-corner . ((cursor . bottom_left_corner)
-			     (keymap . border-keymap)))
-      (bottom-right-corner . ((cursor . bottom_right_corner)
-			      (keymap . border-keymap))))
+  (defvar frame-part-classes nil
     "Alist of (CLASS . ALIST) associating classes of frame parts with state
 they inherit.")
 
@@ -594,8 +572,39 @@ deciding which frame type to ask a theme to generate.")
 	  (set-frame-part-value class 'keymap map-name)))
       ok-to-bind))
 
+  (define ((cursor-for-frame-part part) w)
+    (if (frame-part-movable-p w part)
+	(case part
+	  ((top-border) 'top_side)
+	  ((bottom-border) 'bottom_side)
+	  ((left-border) 'left_side)
+	  ((right-border) 'right_side)
+	  ((top-left-corner) 'top_left_corner)
+	  ((top-right-corner) 'top_right_corner)
+	  ((bottom-left-corner) 'bottom_left_corner)
+	  ((bottom-right-corner) 'bottom_right_corner)
+	  ((title) 'hand2))
+      nil))
+
 
 ;;; initialisation
+
+  (define-frame-class 'menu-button '((keymap . menu-button-keymap)))
+  (define-frame-class 'close-button '((keymap . close-button-keymap)))
+  (define-frame-class 'iconify-button '((keymap . iconify-button-keymap)))
+  (define-frame-class 'maximize-button '((keymap . maximize-button-keymap)))
+  (define-frame-class 'shade-button '((keymap . shade-button-keymap)))
+
+  (define-frame-class 'title `((keymap . title-keymap)
+			       (cursor . ,(cursor-for-frame-part 'title))))
+
+  (mapc (lambda (x)
+	  (define-frame-class x `((cursor . ,(cursor-for-frame-part x))
+				  (keymap . border-keymap))))
+	'(top-border bottom-border
+	  left-border right-border
+	  top-left-corner top-right-corner
+	  bottom-left-corner bottom-right-corner))
 
   (gaol-add add-frame-style reframe-window rebuild-frames-with-style
 	    reframe-windows-with-style reframe-all-windows window-type

@@ -108,11 +108,6 @@
     :user-level expert
     :type boolean)
   
-  (defcustom move-lock-when-maximized t
-    "Lock position and size while windows are maximized."
-    :type boolean
-    :group (min-max maximize))
-  
   (defcustom move-resize-inhibit-configure nil
     "Only update window contents after it has stopped moving."
     :type boolean
@@ -167,6 +162,22 @@
   (defvar move-resize-last-outline nil)
   (defvar move-resize-moving-edges nil)
   (defvar move-resize-directions nil)
+
+  (define (delete-unmovable-directions directions)
+    (when move-lock-when-maximized
+      (when (window-maximized-vertically-p move-resize-window)
+	(setq directions (delq 'vertical directions)))
+      (when (window-maximized-horizontally-p move-resize-window)
+	(setq directions (delq 'horizontal directions))))
+    directions)
+
+  (define (delete-unresizable-edges edges)
+    (when move-lock-when-maximized
+      (when (window-maximized-vertically-p move-resize-window)
+	(setq edges (delq 'top (delq 'bottom edges))))
+      (when (window-maximized-horizontally-p move-resize-window)
+	(setq edges (delq 'left (delq 'right edges)))))
+    edges)
 
   ;; called to initiate a move or resize on window W. FUNCTION is either
   ;; `move' or `resize'
@@ -252,10 +263,11 @@
 			(unless (eq resize-edge-mode 'grab)
 			  (infer-anchor))
 		      (infer-directions))
-		    (catch 'move-resize-done
-		      (when from-motion-event
-			(motion))
-		      (recursive-edit)))
+		    (when (viable-move-resize-p)
+		      (catch 'move-resize-done
+			(when from-motion-event
+			  (motion))
+			(recursive-edit))))
 		(ungrab-keyboard)
 		(ungrab-pointer))))
 
@@ -437,13 +449,8 @@
 		       (cons 'bottom move-resize-moving-edges)))))))
     (when (null move-resize-moving-edges)
       (setq move-resize-moving-edges '(bottom right)))
-    (when move-lock-when-maximized
-      (when (window-maximized-vertically-p move-resize-window)
-	(setq move-resize-moving-edges
-	      (delq 'top (delq 'bottom move-resize-moving-edges))))
-      (when (window-maximized-horizontally-p move-resize-window)
-	(setq move-resize-moving-edges
-	      (delq 'left (delq 'right move-resize-moving-edges))))))
+    (setq move-resize-moving-edges (delete-unresizable-edges
+				    move-resize-moving-edges)))
 
   (define (add-edges ptr-x ptr-y)
     (unless (or (and move-lock-when-maximized
@@ -481,13 +488,18 @@
 	    (if (window-get move-resize-window 'fixed-position)
 		'()
 	      (list 'vertical 'horizontal))))
-    (when move-lock-when-maximized
-      (when (window-maximized-horizontally-p move-resize-window)
-	(setq move-resize-directions
-	      (delq 'horizontal move-resize-directions)))
-      (when (window-maximized-vertically-p move-resize-window)
-	(setq move-resize-directions
-	      (delq 'vertical move-resize-directions)))))
+    (setq move-resize-directions (delete-unmovable-directions
+				  move-resize-directions)))
+
+  (define (viable-move-resize-p)
+    (if (eq move-resize-function 'move)
+	(not (null (delete-unmovable-directions
+		    (copy-sequence move-resize-directions))))
+      (not (null (delete-unresizable-edges
+		  (if (memq resize-edge-mode '(region border))
+		      ;; can't grab edges
+		      (copy-sequence move-resize-directions)
+		    (list 'top 'bottom 'left 'right)))))))
 
 
 ;;; hook functions
