@@ -33,6 +33,15 @@
    contains the previously processed event.  */
 static u_long current_event[2], last_event[2];
 
+/* print_prefix means echo all events upto the end of the key-sequence.
+   printed_this_prefix says the last event has been echoed. */
+static bool print_prefix, printed_this_prefix;
+
+/* Buffer holding the events making this key-sequence. */
+#define EVENT_BUFSIZ 20
+static u_long event_buf[EVENT_BUFSIZ]; /* one event = (code,mods) */
+static int event_index;
+
 /* Data for testing double-clicks */
 static Time last_click;
 static u_long last_click_button;
@@ -56,6 +65,8 @@ DEFSYM(replay_pointer, "replay-pointer");
 DEFSYM(replay_keyboard, "replay-keyboard");
 DEFSYM(sync_both, "sync-both");
 DEFSYM(async_both, "async-both");
+
+DEFSYM(display_message, "display-message");
 
 static repv next_keymap_path;
 
@@ -485,10 +496,24 @@ eval_input_event(repv context_map)
     if (!translate_event (&code, &mods, current_x_event))
 	return Qnil;
 
+    event_buf[event_index++] = code;
+    event_buf[event_index++] = mods;
+    if(event_index == EVENT_BUFSIZ)
+	event_index = 0;
+    printed_this_prefix = FALSE;
+
     current_event[0] = code;
     current_event[1] = mods;
 
     cmd = lookup_event_binding (code, mods, context_map);
+
+    if (next_keymap_path == rep_NULL)
+    {
+	if (print_prefix)
+	    rep_call_lisp1 (Fsymbol_value (Qdisplay_message, Qt), Qnil);
+	print_prefix = FALSE;
+	event_index = 0;
+    }
 
     if(cmd != rep_NULL)
     {
@@ -540,6 +565,9 @@ eval_input_event(repv context_map)
     last_event[0] = current_event[0];
     last_event[1] = current_event[1];
     current_event[0] = current_event[1] = 0;
+ 
+    if (print_prefix)
+	print_event_prefix ();
 
     return result;
 }
@@ -739,6 +767,45 @@ lookup_event_name(u_char *buf, u_long code, u_long mods)
 	return TRUE;
     }
     return FALSE;
+}
+
+/* If necessary, print the name of the current event prefix. Returns true
+   if in the middle of a multi-key sequence.  */
+bool
+print_event_prefix(void)
+{
+    int i;
+    u_char buf[256];
+    u_char *bufp = buf;
+
+    if (next_keymap_path == rep_NULL)
+	return FALSE;
+    else if (printed_this_prefix)
+	return TRUE;
+
+    print_prefix = TRUE;
+    for (i = 0; i < event_index; i += 2)
+    {
+	if (lookup_event_name (bufp, event_buf[i], event_buf[i+1]))
+	{
+	    bufp += strlen (bufp);
+	    *bufp++ = ' ';
+	}
+    }
+    if (next_keymap_path != rep_NULL)
+    {
+	if (bufp > buf)
+	    bufp--;			/* erase the last space */
+	*bufp++ = '.';
+	*bufp++ = '.';
+	*bufp++ = '.';
+    }
+
+    rep_call_lisp1 (Fsymbol_value (Qdisplay_message, Qt),
+		    rep_string_dupn (buf, bufp - buf));
+    printed_this_prefix = TRUE;
+
+    return TRUE;
 }
 
 
@@ -1602,6 +1669,8 @@ keys_init(void)
     Fset (Qhyper_keysyms, Qnil);
     rep_INTERN_SPECIAL(multi_click_delay);
     Fset (Qmulti_click_delay, rep_MAKE_INT(DEFAULT_DOUBLE_CLICK_TIME));
+
+    rep_INTERN(display_message);
 
     rep_mark_static(&next_keymap_path);
 
