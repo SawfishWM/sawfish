@@ -26,8 +26,7 @@ top_srcdir=@top_srcdir@
 VPATH=@srcdir@:@top_srcdir@
 
 # also in themes/Makefile.in
-sawfish_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/gradient.la \
-		../src/sawfish --batch --no-rc
+sawfish_prog = ../src/sawfish --batch --no-rc
 COMPILE_ENV = SAWFISHLISPDIR=. \
 	      SAWFISHEXECDIR=$(top_builddir)/src/.libexec \
 	      SAWFISHDOCFILE=../DOC
