@@ -1,3 +1,21 @@
+1999-09-21  John Harper  <john@dcs.warwick.ac.uk>
+
+	* colors.c (Fget_color): allocate all colors using
+	Imlib_best_color_match (); this makes no difference using
+	TrueColor or DirectColor visuals but should help on PseudoColor
+	(i.e. 8 bit) visuals
+	* sawmill.h (Lisp_Color): removed the XColor struct, just
+	inline the three rgb values and the pixel color
+
+	* main.c (main): call images_init () before colors_init (),
+	since colors.c using Imlib
+
+	* images.c, gradient.c, functions.c, frames.c: changes for new
+	color type
+
+	* frames.c (list_frame_generator): fix seg fault where either
+	Fget_font () or Fget_color () returns an error
+
 1999-09-20  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c (event_proxy_fun): deleted

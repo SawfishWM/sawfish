@@ -25,10 +25,6 @@ Outstanding bugs
 
     Move cursor very slowly over frame holding button1
 
-  ! Java applets start with a 0x0 client window
-
-    [ 15/9: seems to have fixed itself :-) ]
-
   ! don't allow windows to be totally moved out of the viewport (or
     give a method for bringing them back in)
 
@@ -38,9 +34,17 @@ Outstanding bugs
   ! latency when starting menu subprocesses can be annoying (pointer
     events are handled unintuitively)
 
+  ! the configuration tool doesn't use gtk engine themes correctly (cf.
+    the scrollbars)
+
+  ! edge snapping doesn't always work correctly:
+    <37E6D428.47F0F822@casquet.inet.net.nz>
+
 
 General tasks
 =============
+
+  + allow images as foreground of frame parts?
 
   + add capplet desktop entries to share/gnome/apps/Settings as well as
     the control center tree
