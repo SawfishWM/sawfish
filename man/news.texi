@@ -27,6 +27,9 @@ Kidd)
 @item Rewrote tooltips; especially how they're removed (also, don't
 show null keymaps)
 
+@item Added new match-window property @code{ungrouped}. Means to put
+the window in a group on its own
+
 @item Translation additions/updates: da (Wandy Christiansen), en_GB
 (me), es (Iñaki García Etxebarria), fr (Christian Gillot), gl (Jesus
 Bravo Alvarez)
@@ -44,14 +47,16 @@ placing them
 
 @item Fixed typo in @code{gnome-logout} command (Jens Finke)
 
-@item Fixed @code{raise-window-and-pass-through-click} command (again)
-to pass @key{click2}, etc, events through to frame parts
+@item Fixed @code{raise-window-and-pass-through-click} command to pass
+@key{click2}, etc, events through to frame parts
 
 @item Fixed infinite-regress bug when reading GNOME menu entries
 (@samp{Type=directory}, but actually a file)
 
 @item Fixed bug when showing window-move position with snapped movement
 (adapted from merlin@@merlin.org)
+
+@item Fixed bug when matching null text properties
 
 @end itemize
 
