@@ -22,9 +22,9 @@
 (provide 'custom)
 
 ;; list associating groups with the list of variables in that group
-(defvar custom-groups (list 'root "Sawmill"))
+(define custom-groups (list 'root "Sawmill"))
 
-(defvar custom-required nil
+(define custom-required nil
   "List of features to load before running customize.")
 
 (defvar custom-user-file "~/.sawmill/custom"
@@ -33,11 +33,11 @@
 (defvar custom-default-file "custom-defaults"
   "Lisp library storing default customization settings.")
 
-(defvar custom-quoted-keys
+(define custom-quoted-keys
   '(:group :require :type :options :allow-nil :range)
   "defcustom keys whose values are quoted by the macro expansion.")
 
-(defvar custom-option-alist '((:group . custom-group)
+(define custom-option-alist '((:group . custom-group)
 			      (:require . custom-require)
 			      (:type . custom-type)
 			      (:options . custom-options)
@@ -49,7 +49,7 @@
 			      (:before-set . custom-before-set)
 			      (:range . custom-range)))
 
-(defvar custom-group-option-alist '((:widget . custom-group-widget)))
+(define custom-group-option-alist '((:widget . custom-group-widget)))
 
 (defvar custom-set-alist nil
   "Alist of (CLOSURE . SYMBOL) mapping custom-set functions to their names.")
