@@ -29,7 +29,7 @@
   :type symbol
   :group placement)
 
-(defcustom place-transient-mode 'random
+(defcustom place-transient-mode 'centered-on-parent
   "Method of selecting the position of a freshly-mapped transient window."
   :type symbol
   :group placement)
