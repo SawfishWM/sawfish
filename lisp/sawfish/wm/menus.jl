@@ -26,18 +26,13 @@
 
 ;;;###autoload (setq custom-required (cons 'menu custom-required))
 
-(defcustom menu-program "sawmill-menu"
-  "Location of the program implementing sawmill's menu interface."
-  :type program-name
-  :group menus)
+(defvar menu-program "sawmill-menu"
+  "Location of the program implementing sawmill's menu interface.")
 
-(defcustom menu-program-stays-running 60
+(defvar menu-program-stays-running 60
   "When non-nil, the user-interface program is never stopped. If a number,
 then this is taken as the number of seconds to let the process hang around
-unused before killing it."
-  :type number
-  :group menus
-  :allow-nil t)
+unused before killing it.")
 
 ;; the active user interface process
 (defvar menu-process nil)

@@ -21,10 +21,14 @@
 
 (provide 'custom)
 
+;; list associating groups with the list of variables in that group
 (defvar custom-groups nil)
 
 (defvar custom-required nil
   "List of features to load before running customize.")
+
+(defvar custom-user-file "~/.sawmill-custom"
+  "File used to store user's configuration settings.")
 
 ;; (defcustom VARIABLE VALUE DOC &rest CUSTOM-KEYS)
 
@@ -194,16 +198,9 @@
 (defgroup workspace "Workspaces")
 (defgroup bindings "Bindings")
 (defgroup misc "Miscellaneous")
-(defgroup menus "Menus")
-(defgroup customize "Customization")
 
 
 ;; loading user's customisations
-
-(defcustom custom-user-file "~/.sawmill-custom"
-  "File used to store user's configuration settings."
-  :group customize
-  :type file-name)
 
 (defun custom-load-user-file ()
   (when (file-exists-p custom-user-file)

@@ -22,14 +22,12 @@
 (require 'custom)
 (provide 'customize)
 
-(defcustom customize-program "sawmill-ui"
-  "Location of the program implementing sawmill's configuration interface."
-  :group customize
-  :type program-name)
+(defvar customize-program "sawmill-ui"
+  "Location of the program implementing sawmill's configuration interface.")
 
 (defcustom customize-show-symbols nil
   "Show variable names of each customization option."
-  :group customize
+  :group misc
   :type boolean)
 
 ;; the active user interface process
