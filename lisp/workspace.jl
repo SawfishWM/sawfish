@@ -402,15 +402,9 @@ that window on (counting from zero).")
 (defun ws-window-mapped (w)
   (let
       (parent)
-    (when (and transients-on-parents-workspace
-	       (window-transient-p w)
-	       (not (window-get w 'sticky))
-	       (setq parent (get-window-by-id (window-transient-p w)))
-	       (window-get parent 'workspace)
-	       (/= (window-get w 'workspace) (window-get parent 'workspace)))
-      (ws-remove-window w)
-      (ws-add-window-to-space w (window-get parent 'workspace)))
-    (raise-window w)))
+    (unless (window-get w 'sticky)
+      (ws-remove-window w t)
+      (ws-add-window w))))
 
 
 ;; Menu constructors
