@@ -1,3 +1,9 @@
+2000-06-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-capplet.c (sawmill_ok, sawmill_cancel): remove the
+	socket from its container before passing the command to the
+	slave process (prevents GDK choking on X errors..?)
+
 2000-04-26  John Harper  <john@dcs.warwick.ac.uk>
 
 	* Makefile.in: don't search for GNOME prefix, just use

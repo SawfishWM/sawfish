@@ -1,3 +1,18 @@
+2000-06-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* x-cycle.jl, workspace.jl, wm-spec.jl, viewport.jl,
+	transient.jl, place-window.jl, nokogiri-sawfish.jl,
+	move-resize.jl, maximize.jl, iconify.jl, functions.jl,
+	frames.jl, edge-flip.jl, customize.jl, autoload.jl,
+	audio-events.jl: various changes to defcustom's, mostly just
+	trying to improve the descriptions
+
+	* gnome.jl (gnome-honour-client-state): set `ignored' as well
+	`never-focus' for SKIP_FOCUS windows
+
+	* stacking.jl (mapped-stacking-order): new function, used to
+	ignore unmapped windows when restacking
+
 2000-06-28  John Harper  <john@dcs.warwick.ac.uk>
 
 	* nokogiri-sawfish.jl: server-side functions for nokogiri
