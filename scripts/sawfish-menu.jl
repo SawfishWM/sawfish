@@ -55,11 +55,17 @@ exec rep "$0" "$@"
 			      (remove-underscores (car cell))))
 		(setq cell (cdr cell))
 		(if (and (consp (car cell)) (stringp (car (car cell))))
-		    (let
-			((sub (create-menu cell)))
+		    (let ((sub (create-menu cell)))
 		      (setq item (gtk-menu-item-new-with-label label))
 		      (gtk-menu-item-set-submenu item sub))
-		  (setq item (gtk-menu-item-new-with-label label))
+		  (let ((options (cdr cell)))
+		    (let ((check (assq 'check options)))
+		      (if check
+			  (progn
+			    (setq item (gtk-check-menu-item-new-with-label
+					label))
+			    (gtk-check-menu-item-set-state item (cdr check)))
+			(setq item (gtk-menu-item-new-with-label label)))))
 		  (gtk-signal-connect
 		   item "activate" (lambda ()
 				     (setq menu-selected (car cell)))))
