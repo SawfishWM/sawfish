@@ -115,8 +115,7 @@
     (when from-user
       (window-put w 'frame-style style))      
     (setq fun (cdr (assq style frame-styles)))
-    (save-stacking-order
-     (set-window-frame w (or (funcall fun w type) default-frame)))))
+    (set-window-frame w (or (funcall fun w type) default-frame))))
 
 (defun set-frame-for-window (w &optional override type)
   (when (or override (not (window-frame w)))
