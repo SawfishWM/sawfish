@@ -31,17 +31,14 @@
 
 (defconst WIN_LAYER_NORMAL 4)
 
+;; XXX support other hints
+(defconst WIN_HINTS_SKIP_FOCUS 1)
+
 (defvar gnome-window-id nil)
 
 (defvar gnome-supported-protocols [_WIN_CLIENT_LIST _WIN_WORKSPACE
 				   _WIN_WORKSPACE_COUNT _WIN_STATE
 				   _WIN_LAYER])
-
-(defun gnome-add-window (w)
-  (when (string-match "^gmc|panel$" (window-name w))
-    (window-put w 'focus-proxy-click t)
-    (window-put w 'ignored t))
-  (gnome-set-client-list))
 
 (defun gnome-set-client-list ()
   (let
@@ -117,6 +114,7 @@
 (defun gnome-honour-client-state (w)
   (let
       ((state (get-x-property w '_WIN_STATE))
+       (hints (get-x-property w '_WIN_HINTS))
        (layer (get-x-property w '_WIN_LAYER))
        (space (get-x-property w '_WIN_WORKSPACE))
        bits)
@@ -133,6 +131,10 @@
       (unless (zerop (logand bits WIN_STATE_MAXIMIZED_HORIZ))
 	(unless (window-maximized-horizontally-p w)
 	  (maximize-window-horizontally w))))
+    (when (eq (car hints) 'CARDINAL)
+      (setq bits (aref (nth 2 hints) 0))
+      (unless (zerop (logand bits WIN_HINTS_SKIP_FOCUS))
+	(window-put w 'ignored t)))
     (when layer
       (setq layer (aref (nth 2 layer) 0))
       (set-window-depth w (- layer WIN_LAYER_NORMAL)))
@@ -230,8 +232,7 @@
   (add-hook 'viewport-resized-hook 'gnome-set-workspace)
   (add-hook 'viewport-moved-hook 'gnome-set-workspace)
 
-  (add-hook 'add-window-hook 'gnome-add-window)
-
+  (add-hook 'add-window-hook 'gnome-set-client-list)
   (add-hook 'destroy-notify-hook 'gnome-set-client-list)
   (add-hook 'map-notify-hook 'gnome-set-client-list)
   (add-hook 'unmap-notify-hook 'gnome-set-client-list)
