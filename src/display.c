@@ -49,6 +49,8 @@ int shape_event_base, shape_error_base;
 Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols, xa_wm_delete_window,
     xa_wm_colormap_windows, xa_wm_take_focus;
 
+DEFSYM(display_name, "display-name");
+
 
 /* X error handlers */
 
@@ -134,6 +136,9 @@ sys_init(char *program_name)
     if (rep_get_option ("--name", &opt))
 	prog_name = strdup (rep_STR(opt));
 
+    rep_INTERN(display_name);
+    Fset (Qdisplay_name, rep_null_string ());
+
     if(rep_SYM(Qbatch_mode)->value == Qnil)
     {
 	if (rep_get_option ("--display", &opt))
@@ -145,6 +150,7 @@ sys_init(char *program_name)
 	dpy = XOpenDisplay(display_name);
 	if(dpy != 0)
 	{
+	    Fset (Qdisplay_name, rep_string_dup (display_name));
 	    rep_register_input_fd (ConnectionNumber(dpy), handle_sync_input);
 	    screen_num = DefaultScreen(dpy);
 	    root_window = RootWindow(dpy, screen_num);
@@ -204,6 +210,7 @@ sys_init(char *program_name)
 
 	    rep_redisplay_fun = redisplay;
 	    rep_beep_fun = beep;
+
 	    return TRUE;
 	}
 	else
