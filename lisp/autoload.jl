@@ -185,4 +185,7 @@
 (autoload 'solid-animator "anim-outline")
 (define-window-animator 'wireframe wireframe-animator)
 (define-window-animator 'solid solid-animator)
+(custom-add-required 'audio-events)
+(defgroup audio "Sound")
+(autoload 'play-sample "play-audio")
 ;;; ::autoload-end::
