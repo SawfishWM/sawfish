@@ -391,6 +391,7 @@ static struct key_def default_mods[] = {
     { "Mod2",     Mod2Mask },
     { "Mod3",     Mod3Mask },
     { "Mod4",     Mod4Mask },
+    { "Mod5",     Mod5Mask },
     { "Button1",  Button1Mask },
     { "Button2",  Button2Mask },
     { "Button3",  Button3Mask },
