@@ -1,5 +1,14 @@
 1999-09-07  John Harper  <john@dcs.warwick.ac.uk>
 
+	* frames.c (destroy_window_frame): new arg, whether or not to
+	delete the top-level frame window or not
+	(list_frame_generator): handle building a new frame into an old
+	top-level window
+
+	* windows.c (Fset_window_frame): don't delete the parent frame
+	window, this prevents having to reparent the client back to the
+	root, and in turn prevents all flickering
+
 	* sawmill-ui.jl (ui-quit): tell the wm to save the custom file
 	before exiting
 

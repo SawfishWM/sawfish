@@ -1,5 +1,8 @@
 1999-09-07  John Harper  <john@dcs.warwick.ac.uk>
 
+	* frames.jl (set-window-frame-style): don't bother wrapping in
+	save-stacking-order since set-window-frame preserves it anyway
+
 	* transient.jl (transient-unmap-window): if in click-to-focus
 	mode, and there's no parent window to focus, focus the topmost
 	window not the window under the pointer
