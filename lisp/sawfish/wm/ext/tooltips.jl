@@ -22,8 +22,6 @@
 (require 'timers)
 (provide 'tooltips)
 
-;;;###autoload (setq custom-required (cons 'tooltips custom-required))
-
 (defvar tooltips-timer nil)
 
 (defgroup tooltips "Tooltips")

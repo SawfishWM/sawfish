@@ -22,8 +22,6 @@
 (require 'timers)
 (provide 'auto-raise)
 
-;;;###autoload (setq custom-required (cons 'auto-raise custom-required))
-
 (defcustom raise-windows-on-focus nil
   "Raise windows when they are focused."
   :type boolean

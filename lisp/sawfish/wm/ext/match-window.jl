@@ -41,8 +41,6 @@
 
 ;; configuration and customize stuff
 
-;;;###autoload (setq custom-required (cons 'match-window custom-required))
-
 (defvar match-window-x-properties
   '((WM_NAME . "Name")
     (WM_CLASS . "Class")

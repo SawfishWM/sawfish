@@ -21,8 +21,6 @@
 
 (provide 'edge-flip)
 
-;;;###autoload (setq custom-required (cons 'edge-flip custom-required))
-
 (defgroup edge-flip "Edge Flipping")
 
 ;; for the compiler's benefit
