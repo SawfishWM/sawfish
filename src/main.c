@@ -92,56 +92,59 @@ sawmill_symbols (void)
 {
     rep_INTERN(sawmill_directory);
     if(getenv("SAWMILLDIR") != 0)
-	rep_SYM(Qsawmill_directory)->value = rep_string_dup(getenv("SAWMILLDIR"));
+	Fset (Qsawmill_directory, rep_string_dup(getenv("SAWMILLDIR")));
     else
-	rep_SYM(Qsawmill_directory)->value = rep_string_dup(SAWMILL_DIR);
+	Fset (Qsawmill_directory, rep_string_dup(SAWMILL_DIR));
 
     rep_INTERN(sawmill_lisp_lib_directory);
     if(getenv("SAWMILLLISPDIR") != 0)
-	rep_SYM(Qsawmill_lisp_lib_directory)->value
-	    = rep_string_dup(getenv("SAWMILLLISPDIR"));
+    {
+	Fset (Qsawmill_lisp_lib_directory,
+	      rep_string_dup(getenv("SAWMILLLISPDIR")));
+    }
     else
-	rep_SYM(Qsawmill_lisp_lib_directory)->value
-	    = rep_string_dup(SAWMILL_LISPDIR);
+	Fset (Qsawmill_lisp_lib_directory, rep_string_dup(SAWMILL_LISPDIR));
 
     rep_INTERN(sawmill_site_lisp_directory);
     if(getenv("SAWMILLSITELISPDIR") != 0)
-	rep_SYM(Qsawmill_site_lisp_directory)->value
-	    = rep_string_dup(getenv("SAWMILLSITELISPDIR"));
+    {
+	Fset (Qsawmill_site_lisp_directory,
+	      rep_string_dup(getenv("SAWMILLSITELISPDIR")));
+    }
     else
-	rep_SYM(Qsawmill_site_lisp_directory)->value
-	    = rep_concat2(rep_STR(rep_SYM(Qsawmill_directory)->value),
-			  "/site-lisp");
+    {
+	Fset (Qsawmill_site_lisp_directory,
+	      rep_concat2(rep_STR(rep_SYM(Qsawmill_directory)->value),
+			  "/site-lisp"));
+    }
 
     rep_INTERN(sawmill_exec_directory);
     if(getenv("SAWMILLEXECDIR") != 0)
-	rep_SYM(Qsawmill_exec_directory)->value
-	    = rep_string_dup(getenv("SAWMILLEXECDIR"));
+	Fset (Qsawmill_exec_directory, rep_string_dup(getenv("SAWMILLEXECDIR")));
     else
-	rep_SYM(Qsawmill_exec_directory)->value = rep_string_dup(SAWMILL_EXECDIR);
+	Fset (Qsawmill_exec_directory, rep_string_dup(SAWMILL_EXECDIR));
 
     if(getenv("SAWMILLDOCFILE") != 0)
-	rep_SYM(Qdocumentation_file)->value
-	    = rep_string_dup(getenv("SAWMILLDOCFILE"));
+	Fset (Qdocumentation_file, rep_string_dup(getenv("SAWMILLDOCFILE")));
     else
-	rep_SYM(Qdocumentation_file)->value
-	    = rep_concat2(rep_STR(rep_SYM(Qsawmill_directory)->value),
-			  "/" SAWMILL_VERSION "/DOC");
+    {
+	Fset (Qdocumentation_file,
+	      rep_concat2(rep_STR(rep_SYM(Qsawmill_directory)->value),
+			  "/" SAWMILL_VERSION "/DOC"));
+    }
 
-    rep_SYM(Qdocumentation_files)->value
-	= Fcons(rep_SYM(Qdocumentation_file)->value,
-		rep_SYM(Qdocumentation_files)->value);
+    Fset (Qdocumentation_files, Fcons(rep_SYM(Qdocumentation_file)->value,
+				      rep_SYM(Qdocumentation_files)->value));
 
-    rep_SYM(Qload_path)->value
-	= Fcons(rep_SYM(Qsawmill_lisp_lib_directory)->value,
-		Fcons(rep_SYM(Qsawmill_site_lisp_directory)->value,
-		      rep_SYM(Qload_path)->value));
+    Fset (Qload_path, Fcons(rep_SYM(Qsawmill_lisp_lib_directory)->value,
+			    Fcons(rep_SYM(Qsawmill_site_lisp_directory)->value,
+				  rep_SYM(Qload_path)->value)));
 
-    rep_SYM(Qdl_load_path)->value = Fcons(rep_SYM(Qsawmill_exec_directory)->value,
-					  rep_SYM(Qdl_load_path)->value);
+    Fset (Qdl_load_path, Fcons(rep_SYM(Qsawmill_exec_directory)->value,
+			       rep_SYM(Qdl_load_path)->value));
 
     rep_INTERN(sawmill_version);
-    rep_SYM(Qsawmill_version)->value = rep_VAL(&version_string);
+    Fset (Qsawmill_version, rep_VAL(&version_string));
 
     rep_INTERN(window_error); rep_ERROR(window_error);
     rep_INTERN(invalid_pos); rep_ERROR(invalid_pos);
@@ -149,6 +152,10 @@ sawmill_symbols (void)
 
     rep_on_idle_fun = on_idle;
     rep_on_termination_fun = on_termination;
+
+    /* This should stop us getting trapped in any recursive edits */
+    Fset (Qerror_mode, Qtop_level);
+    Fset (Qinterrupt_mode, Qtop_level);
 
     rep_ADD_SUBR_INT(Squit);
     rep_ADD_SUBR_INT(Srestart);
