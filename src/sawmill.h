@@ -109,7 +109,7 @@ typedef struct lisp_window {
 
 #define VWIN(v)		((Lisp_Window *)rep_PTR(v))
 #define XWINDOWP(v)	rep_CELL16_TYPEP(v, window_type)
-#define WINDOWP(v)	(XWINDOWP(v) && VWIN(v)->id != 0)
+#define WINDOWP(v)	XWINDOWP(v)
 
 #define WINDOW_FOCUSED_P(w) (focus_window == w)
 
