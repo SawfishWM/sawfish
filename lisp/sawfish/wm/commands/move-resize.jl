@@ -284,7 +284,9 @@
 	((>= (- move-resize-old-ptr-y move-resize-old-y)
 	     (* (/ move-resize-old-height 3) 2))
 	 (setq move-resize-moving-edges
-	       (cons 'bottom move-resize-moving-edges)))))
+	       (cons 'bottom move-resize-moving-edges))))
+  (when (null move-resize-moving-edges)
+    (setq move-resize-moving-edges '(bottom right))))
 
 
 ;; Entry points
