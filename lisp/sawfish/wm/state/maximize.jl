@@ -552,7 +552,14 @@ unmaximized."
       (check-if-maximizable w)))
 
   (add-hook 'property-notify-hook property-notify)
-  (add-hook 'add-window-hook check-if-maximizable)
+
+  (add-hook 'after-initialization-hook
+	    (lambda ()
+	      (map-windows check-if-maximizable)
+	      ;; Don't install this hook until after all windows have
+	      ;; initially been adopted, to avoid maximizing over
+	      ;; avoided windows
+	      (add-hook 'add-window-hook check-if-maximizable)))
 
   (sm-add-saved-properties
    'unmaximized-geometry 'maximized-vertically 'maximized-horizontally)

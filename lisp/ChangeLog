@@ -1,3 +1,14 @@
+2001-09-02  John Harper  <jsh@pixelslut.com>
+
+	Fixed 6693 (restarting sawfish with a maximized window and the
+	gnome panel will make the maximized window too big):
+
+	* ~/src/sawfish/lisp/sawfish/wm/state/maximize.jl
+	(property-notify): don't install check-if-maximizable into the
+	add-window-hook immediately. Instead use
+	after-initialization-hook to run c-i-m over all windows, then
+	install it as before
+
 2001-08-31  John Harper  <jsh@pixelslut.com>
 
 	* ~/src/sawfish/lisp/sawfish/wm/util/stacking.jl
