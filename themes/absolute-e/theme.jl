@@ -159,19 +159,7 @@
     (top-edge . -4)
     (height . 4)
     (keymap . title-keymap)
-    (cursor . hand2))
-   ;; top-left corner
-   ((background . ,absolute-e-bar-images)
-    (left-edge . -4)
-    (width . 4)
-    (top-edge . -4)
-    (height . 4))
-   ;; top-right corner
-   ((background . ,absolute-e-bar-images)
-    (right-edge . -4)
-    (width . 4)
-    (top-edge . -4)
-    (height . 4))))
+    (cursor . hand2))))
 
 (defvar absolute-e-transient-frame
  `(((background . ,absolute-e-bar-images)
@@ -229,24 +217,12 @@
 
 (defvar absolute-e-shaped-transient-frame
  `(((background . ,absolute-e-bar-images)
-    (left-edge . 4)
-    (right-edge . 4)
+    (left-edge . 0)
+    (right-edge . 0)
     (top-edge . -4)
     (height . 4)
     (keymap . title-keymap)
-    (cursor . hand2))
-   ;; top-right corner
-   ((background . ,absolute-e-bar-images)
-    (right-edge . 0)
-    (width . 4)
-    (top-edge . -4)
-    (height . 4))
-   ;; top-left corner
-   ((background . ,absolute-e-bar-images)
-    (left-edge . 0)
-    (width . 4)
-    (top-edge . -4)
-    (height . 4))))
+    (cursor . hand2))))
 
 (defun absolute-e-frame-style (w type)
   (cond ((eq type 'shaped)
