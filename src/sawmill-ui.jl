@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.55 2000/02/26 23:36:38 john Exp $
+;; $Id: sawmill-ui.jl,v 1.56 2000/03/02 19:35:29 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -784,6 +784,7 @@ exec rep "$0" "$@"
        (hbox-1 (gtk-hbox-new nil 0))
        (vbox-2 (gtk-vbox-new nil 0))
        (vbox (gtk-vbox-new nil 0))
+       (paned (gtk-vpaned-new))
        (entry (gtk-entry-new))
        (entry-hbox (gtk-hbox-new nil 0))
        (entry-button (gtk-button-new-with-label (_ "Grab key...")))
@@ -867,10 +868,11 @@ exec rep "$0" "$@"
     (gtk-clist-select-row map-clist 0 0)
 
     (gtk-box-pack-start vbox frame t t)
-    (gtk-box-pack-end vbox hbox-1 t t)
     (gtk-box-pack-end vbox doc-frame nil t)
+    (gtk-paned-add1 paned vbox)
+    (gtk-paned-add2 paned hbox-1)
 
-    vbox))
+    paned))
 (put 'keymap-shell 'builder build-keymap-shell)
 
 (defun build-keymap-shell:current-binding (spec)
