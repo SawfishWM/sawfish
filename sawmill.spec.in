@@ -7,7 +7,7 @@ Summary: a highly configurable and extensible X11 window manager
 Name: %{nam}
 Version: %{ver}
 Release: %{rel}
-Requires: librep >= 0.9, rep-gtk >= 0.7
+Requires: librep >= 0.10, rep-gtk >= 0.8
 Copyright: GPL
 Group: User Interface/Desktops
 Source: ftp://ftp.dcs.warwick.ac.uk/people/John.Harper/sawmill/sawmill-%{ver}.tar.gz
@@ -33,11 +33,20 @@ Requires: %{nam}
 Optional GNOME support for sawmill. Includes a wm-entries spec, and a
 control center applet
 
+%package themer
+Summary: GUI for creating sawmill themes
+Group: User Interface/Desktops
+Requires: %{nam} rep-gtk-libglade
+
+%description themer
+Optional theme builder for sawmill. Allows static window themes to be
+created/edited in a graphical environment.
+
 %prep
 %setup
 
 %build
-./configure --enable-capplet --with-readline --prefix %{_prefix} %{_host}
+./configure --enable-capplet --enable-themer --with-readline --with-gnome-prefix %{_prefix} --prefix %{_prefix} %{_host}
 make CFLAGS="$RPM_OPT_FLAGS"
 
 %install
@@ -60,6 +69,10 @@ gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawmill*
 %{_prefix}/bin/sawmill-capplet
 %{_prefix}/share/control-center/Sawmill
 %{_prefix}/share/gnome/wm-properties/Sawmill.desktop
+
+%files themer
+%{_prefix}/bin/sawmill-themer
+%{_prefix}/share/sawmill/%{ver}/themer.glade
 
 %changelog
 * Fri Sep 17 1999 John Harper <john@dcs.warwick.ac.uk>
