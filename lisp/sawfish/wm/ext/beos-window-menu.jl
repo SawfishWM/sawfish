@@ -20,10 +20,18 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'beos-window-menu)
+(define-structure sawfish.wm.ext.beos-window-menu
 
-;;;###autoload
-(define (beos-window-menu)
+    (export beos-window-menu)
+
+    (open rep
+	  sawfish.wm.windows
+	  sawfish.wm.misc
+	  sawfish.wm.workspace
+	  sawfish.wm.util.groups
+	  sawfish.wm.menus)
+
+  (define-structure-alias beos-window-menu sawfish.wm.ext.beos-window-menu)
 
   (define (abbreviate name &optional len)
     (unless len (setq len 20))
@@ -105,6 +113,7 @@
 		(cdr groups)
 		(delete-group-windows (car groups) windows)))))
 
-  (nreverse (make-menu)))
+  (define (beos-window-menu)
+    (nreverse (make-menu)))
 
-(define window-menu beos-window-menu)
+  (setq window-menu beos-window-menu))

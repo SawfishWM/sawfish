@@ -19,62 +19,63 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'move-cursor)
+(define-structure sawfish.wm.commands.move-cursor
 
-(defcustom move-cursor-increment 16
-  "Number of pixels to move pointer in `move-cursor-' commands."
-  :group misc
-  :type (number 1))
+    (export move-cursor)
 
-(defun move-cursor (right down)
-  (let
-      ((coords (query-pointer)))
-    (warp-cursor (+ (car coords) right) (+ (cdr coords) down))))
+    (open rep
+	  sawfish.wm.misc
+	  sawfish.wm.events
+	  sawfish.wm.custom
+	  sawfish.wm.commands)
 
-;;;###autoload
-(defun move-cursor-left ()
-  "Move the cursor `move-cursor-increment' pixels to the left."
-  (interactive)
-  (move-cursor (- move-cursor-increment) 0))
+  (defcustom move-cursor-increment 16
+    "Number of pixels to move pointer in `move-cursor-' commands."
+    :group misc
+    :type (number 1))
 
-;;;###autoload
-(defun move-cursor-right ()
-  "Move the cursor `move-cursor-increment' pixels to the right."
-  (interactive)
-  (move-cursor move-cursor-increment 0))
+  (define (move-cursor right down)
+    (let ((coords (query-pointer)))
+      (warp-cursor (+ (car coords) right) (+ (cdr coords) down))))
 
-;;;###autoload
-(defun move-cursor-up ()
-  "Move the cursor `move-cursor-increment' pixels upwards."
-  (interactive)
-  (move-cursor 0 (- move-cursor-increment)))
+  (define (move-cursor-left)
+    "Move the cursor `move-cursor-increment' pixels to the left."
+    (move-cursor (- move-cursor-increment) 0))
 
-;;;###autoload
-(defun move-cursor-down ()
-  "Move the cursor `move-cursor-increment' pixels downwards."
-  (interactive)
-  (move-cursor 0 move-cursor-increment))
+  (define (move-cursor-right)
+    "Move the cursor `move-cursor-increment' pixels to the right."
+    (move-cursor move-cursor-increment 0))
 
-;;;###autoload
-(defun move-cursor-left-fine ()
-  "Move the cursor 1 pixel to the left."
-  (interactive)
-  (move-cursor -1 0))
+  (define (move-cursor-up)
+    "Move the cursor `move-cursor-increment' pixels upwards."
+    (move-cursor 0 (- move-cursor-increment)))
 
-;;;###autoload
-(defun move-cursor-right-fine ()
-  "Move the cursor 1 pixel to the right."
-  (interactive)
-  (move-cursor 1 0))
+  (define (move-cursor-down)
+    "Move the cursor `move-cursor-increment' pixels downwards."
+    (move-cursor 0 move-cursor-increment))
 
-;;;###autoload
-(defun move-cursor-up-fine ()
-  "Move the cursor 1 pixel upwards."
-  (interactive)
-  (move-cursor 0 -1))
+  (define (move-cursor-left-fine)
+    "Move the cursor 1 pixel to the left."
+    (move-cursor -1 0))
 
-;;;###autoload
-(defun move-cursor-down-fine ()
-  "Move the cursor 1 pixel downwards."
-  (interactive)
-  (move-cursor 0 1))
+  (define (move-cursor-right-fine)
+    "Move the cursor 1 pixel to the right."
+    (move-cursor 1 0))
+
+  (define (move-cursor-up-fine)
+    "Move the cursor 1 pixel upwards."
+    (move-cursor 0 -1))
+
+  (define (move-cursor-down-fine)
+    "Move the cursor 1 pixel downwards."
+    (move-cursor 0 1))
+
+  ;;###autoload
+  (define-command 'move-cursor-right move-cursor-right)
+  (define-command 'move-cursor-left move-cursor-left)
+  (define-command 'move-cursor-up move-cursor-up)
+  (define-command 'move-cursor-down move-cursor-down)
+  (define-command 'move-cursor-right-fine move-cursor-right-fine)
+  (define-command 'move-cursor-left-fine move-cursor-left-fine)
+  (define-command 'move-cursor-up-fine move-cursor-up-fine)
+  (define-command 'move-cursor-down-fine move-cursor-down-fine))

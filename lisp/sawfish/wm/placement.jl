@@ -19,180 +19,193 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'place-window)
+(define-structure sawfish.wm.placement
 
-(defvar placement-modes nil
-  "List containing all symbols naming window placement modes.")
+    (export define-placement-mode
+	    autoload-placement-mode
+	    placement-mode
+	    acceptable-placement
+	    place-window)
 
-(defcustom place-window-mode 'best-fit
-  "Method of placing windows: \\w"
-  :type symbol
-  :group placement)
+    (open rep
+	  rep.util.autoloader
+	  sawfish.wm.state.maximize
+	  sawfish.wm.misc
+	  sawfish.wm.events
+	  sawfish.wm.windows
+	  sawfish.wm.custom)
 
-(defcustom place-transient-mode 'centered-on-parent
-  "Method of placing dialog windows: \\w"
-  :type symbol
-  :group placement)
+  (defvar placement-modes nil
+    "List containing all symbols naming window placement modes.")
 
-(defcustom ignore-program-positions nil
-  "Ignore program-specified window placements."
-  :type boolean
-  :group placement)
+  (defcustom place-window-mode 'best-fit
+    "Method of placing windows: \\w"
+    :type symbol
+    :group placement)
+
+  (defcustom place-transient-mode 'centered-on-parent
+    "Method of placing dialog windows: \\w"
+    :type symbol
+    :group placement)
+
+  (defcustom ignore-program-positions nil
+    "Ignore program-specified window placements."
+    :type boolean
+    :group placement)
 
 
-;; utility functions
+;;; utility functions
 
-(defun define-placement-mode (name fun)
-  "Define a new window placement mode called NAME (a symbol). The function FUN
-will be called with a single argument when a window should be placed using
+  (define (define-placement-mode name fun)
+    "Define a new window placement mode called NAME (a symbol). The function
+FUN will be called with a single argument when a window should be placed using
 this mode. The single argument is the window to be placed."
-  (unless (memq name placement-modes)
-    (setq placement-modes (nconc placement-modes (list name))))
-  (custom-set-property 'place-window-mode ':options placement-modes)
-  (custom-set-property 'place-transient-mode ':options placement-modes)
-  (put name 'placement-mode fun))
+    (unless (memq name placement-modes)
+      (setq placement-modes (nconc placement-modes (list name)))
+      (custom-set-property 'place-window-mode ':options placement-modes)
+      (custom-set-property 'place-transient-mode ':options placement-modes))
+    (put name 'placement-mode fun))
 
-(defun adjust-window-for-gravity (w grav)
-  (let
-      ((coords (window-position w))
-       (dims (window-dimensions w))
-       (fdims (window-frame-dimensions w))
-       (off (window-frame-offset w)))
-    (if (eq grav 'static)
-	(progn
-	  ;; static gravity is relative to the original
-	  ;; client window position
-	  (rplaca coords (+ (car coords) (car off)))
-	  (rplacd coords (+ (cdr coords) (cdr off))))
-      (when (memq grav '(east south-east north-east))
-	;; relative to the right of the frame
-	(rplaca coords (- (car coords) (- (car fdims) (car dims))
-			  (* -2 (window-border-width w)))))
-      (when (memq grav '(south south-east south-west))
-	;; relative to the bottom of the frame
-	(rplacd coords (- (cdr coords) (- (cdr fdims) (cdr dims))
-			  (* -2 (window-border-width w))))))
-    (move-window-to w (car coords) (cdr coords))))
+  ;; autoload handling
+  (define (getter symbol) (get symbol 'placement-mode))
 
-;; make sure the window doesn't overlap an avoided window
-(defun acceptable-placement (w position)
-  (require 'rects)
-  (or (window-avoided-p w)
-    (let*
-        ((avoided-windows (filter-windows window-avoided-p))
-         (rects (rectangles-from-windows avoided-windows))
-         (dims (window-frame-dimensions w)))
-      (= 0 (rect-total-overlap dims position rects)))))
+  (define autoload-placement-mode
+    (make-autoloader getter define-placement-mode))
 
-;; called from the place-window-hook
-(defun place-window (w)
-  (let
-      ((hints (window-size-hints w)))
-    (if (or (cdr (assq 'user-position hints))
-	    (and (not (window-get w 'ignore-program-position))
-		 (not ignore-program-positions)
-		 (cdr (assq 'program-position hints))
-		 (or (window-get w 'ignored)
-		     (acceptable-placement w (window-position w)))))
-	(let
-	    ((gravity (or (window-get w 'gravity)
-			  (cdr (assq 'window-gravity hints)))))
-	  (when gravity
-	    (adjust-window-for-gravity w gravity)))
-      (let
-	  ((mode (or (window-get w 'place-mode)
-		     (if (window-transient-p w)
-			 place-transient-mode
-		       place-window-mode))))
-	((or (get mode 'placement-mode) place-window-randomly) w)
-	t))))
+  (define placement-mode (autoloader-ref getter))
 
-(add-hook 'place-window-hook place-window t)
+  (define (adjust-window-for-gravity w grav)
+    (let ((coords (window-position w))
+	  (dims (window-dimensions w))
+	  (fdims (window-frame-dimensions w))
+	  (off (window-frame-offset w)))
+      (if (eq grav 'static)
+	  (progn
+	    ;; static gravity is relative to the original
+	    ;; client window position
+	    (rplaca coords (+ (car coords) (car off)))
+	    (rplacd coords (+ (cdr coords) (cdr off))))
+	(when (memq grav '(east south-east north-east))
+	  ;; relative to the right of the frame
+	  (rplaca coords (- (car coords) (- (car fdims) (car dims))
+			    (* -2 (window-border-width w)))))
+	(when (memq grav '(south south-east south-west))
+	  ;; relative to the bottom of the frame
+	  (rplacd coords (- (cdr coords) (- (cdr fdims) (cdr dims))
+			    (* -2 (window-border-width w))))))
+      (move-window-to w (car coords) (cdr coords))))
+
+  ;; make sure the window doesn't overlap an avoided window
+  (define (acceptable-placement w position)
+    (require 'sawfish.wm.util.rects)
+    (or (window-avoided-p w)
+	(let* ((avoided-windows (filter-windows window-avoided-p))
+	       (rects (rectangles-from-windows avoided-windows))
+	       (dims (window-frame-dimensions w)))
+	  (= 0 (rect-total-overlap dims position rects)))))
+
+  ;; called from the place-window-hook
+  (define (place-window w)
+    (let ((hints (window-size-hints w)))
+      (if (or (cdr (assq 'user-position hints))
+	      (and (not (window-get w 'ignore-program-position))
+		   (not ignore-program-positions)
+		   (cdr (assq 'program-position hints))
+		   (or (window-get w 'ignored)
+		       (acceptable-placement w (window-position w)))))
+	  (let ((gravity (or (window-get w 'gravity)
+			     (cdr (assq 'window-gravity hints)))))
+	    (when gravity
+	      (adjust-window-for-gravity w gravity)))
+	(let ((mode (or (window-get w 'place-mode)
+			(if (window-transient-p w)
+			    place-transient-mode
+			  place-window-mode))))
+	  ((or (placement-mode mode) place-window-randomly) w)
+	  t))))
+
+  (add-hook 'place-window-hook place-window t)
 
 
-;; standard placement modes
+;;; standard placement modes
 
-(defun place-window-randomly (w)
-  (let*
-      ((dims (window-frame-dimensions w))
-       (max-rect (maximize-find-workarea w))
-       (x (+ (cond ((and max-rect (< (car dims) (nth 2 max-rect)))
-		    (+ (nth 0 max-rect) (random (- (nth 2 max-rect)
-						   (car dims)))))
-		   ((< (car dims) (car (current-head-dimensions)))
-		    (random (- (car (current-head-dimensions)) (car dims))))
-		   (t 0))
-	     (car (current-head-offset))))
-       (y (+ (cond ((and max-rect (< (cdr dims) (nth 3 max-rect)))
-		    (+ (nth 1 max-rect) (random (- (nth 3 max-rect)
-						   (cdr dims)))))
-		   ((< (cdr dims) (cdr (current-head-dimensions)))
-		    (random (- (cdr (current-head-dimensions)) (cdr dims))))
-		   (t 0))
-	     (cdr (current-head-offset)))))
-    (move-window-to w x y)))
+  (define (place-window-randomly w)
+    (let* ((dims (window-frame-dimensions w))
+	   (max-rect (maximize-find-workarea w))
+	   (x (+ (cond
+		  ((and max-rect (< (car dims) (nth 2 max-rect)))
+		   (+ (nth 0 max-rect) (random (- (nth 2 max-rect)
+						  (car dims)))))
+		  ((< (car dims) (car (current-head-dimensions)))
+		   (random (- (car (current-head-dimensions)) (car dims))))
+		  (t 0))
+		 (car (current-head-offset))))
+	   (y (+ (cond
+		  ((and max-rect (< (cdr dims) (nth 3 max-rect)))
+		   (+ (nth 1 max-rect) (random (- (nth 3 max-rect)
+						  (cdr dims)))))
+		  ((< (cdr dims) (cdr (current-head-dimensions)))
+		   (random (- (cdr (current-head-dimensions)) (cdr dims))))
+		  (t 0))
+		 (cdr (current-head-offset)))))
+      (move-window-to w x y)))
 
-(defun place-window-interactively (w)
-  (require 'move-resize)
-  (let
-      ((move-outline-mode 'box)
-       (ptr (query-pointer))
-       (dims (window-frame-dimensions w)))
-    ;; XXX hacktastic! I don't know why the next thing is needed,
-    ;; XXX but it is -- if the window was popped by a button click
-    ;; XXX the ButtonRelease can get caught by move-window-int..
-    ;; XXX (try double clicking on a gmc icon)
-    (accept-x-input)
-    (move-window-to w (- (car ptr) (quotient (car dims) 2))
-		    (- (cdr ptr) (quotient (cdr dims) 2)))
-    (move-window-interactively w)))
+  (define (place-window-interactively w)
+    (require 'sawfish.wm.commands.move-resize)
+    (let ((move-outline-mode 'box)
+	  (ptr (query-pointer))
+	  (dims (window-frame-dimensions w)))
+      ;; XXX hacktastic! I don't know why the next thing is needed,
+      ;; XXX but it is -- if the window was popped by a button click
+      ;; XXX the ButtonRelease can get caught by move-window-int..
+      ;; XXX (try double clicking on a gmc icon)
+      (accept-x-input)
+      (move-window-to w (- (car ptr) (quotient (car dims) 2))
+		      (- (cdr ptr) (quotient (cdr dims) 2)))
+      (move-window-interactively w)))
 
-(defun place-window-centered (w)
-  (let
-      ((dims (window-frame-dimensions w))
-       (h-dims (current-head-dimensions))
-       (h-off (current-head-offset))
-       (screen (maximize-find-workarea w)))
-    (move-window-to w
-		    (clamp* (+ (car h-off)
-			       (quotient (- (car h-dims) (car dims)) 2))
-			    (car dims) (nth 0 screen) (nth 2 screen))
-		    (clamp* (+ (cdr h-off)
-			       (quotient (- (cdr h-dims) (cdr dims)) 2))
-			    (cdr dims) (nth 1 screen) (nth 3 screen)))))
+  (define (place-window-centered w)
+    (let ((dims (window-frame-dimensions w))
+	  (h-dims (current-head-dimensions))
+	  (h-off (current-head-offset))
+	  (screen (maximize-find-workarea w)))
+      (move-window-to w
+		      (clamp* (+ (car h-off)
+				 (quotient (- (car h-dims) (car dims)) 2))
+			      (car dims) (nth 0 screen) (nth 2 screen))
+		      (clamp* (+ (cdr h-off)
+				 (quotient (- (cdr h-dims) (cdr dims)) 2))
+			      (cdr dims) (nth 1 screen) (nth 3 screen)))))
 
-(defun place-window-centered-on-parent (w)
-  (let
-      ((parent (window-transient-p w)))
-    (if (or (not parent) (not (setq parent (get-window-by-id parent))))
-	(place-window-centered w)
-      (let
-	  ((dims (window-frame-dimensions w))
-	   (pdims (window-frame-dimensions parent))
-	   (coords (window-position parent))
-	   (screen (maximize-find-workarea w)))
-	(rplaca coords (clamp* (+ (car coords)
-				  (quotient (- (car pdims) (car dims)) 2))
-			       (car dims) (nth 0 screen) (nth 2 screen)))
-	(rplacd coords (clamp* (+ (cdr coords)
-				  (quotient (- (cdr pdims) (cdr dims)) 2))
-			       (cdr dims) (nth 1 screen) (nth 3 screen)))
-	(move-window-to w (car coords) (cdr coords))))))
+  (define (place-window-centered-on-parent w)
+    (let ((parent (window-transient-p w)))
+      (if (or (not parent) (not (setq parent (get-window-by-id parent))))
+	  (place-window-centered w)
+	(let ((dims (window-frame-dimensions w))
+	      (pdims (window-frame-dimensions parent))
+	      (coords (window-position parent))
+	      (screen (maximize-find-workarea w)))
+	  (rplaca coords (clamp* (+ (car coords)
+				    (quotient (- (car pdims) (car dims)) 2))
+				 (car dims) (nth 0 screen) (nth 2 screen)))
+	  (rplacd coords (clamp* (+ (cdr coords)
+				    (quotient (- (cdr pdims) (cdr dims)) 2))
+				 (cdr dims) (nth 1 screen) (nth 3 screen)))
+	  (move-window-to w (car coords) (cdr coords))))))
 
-(defun place-window-under-pointer (w)
-  (let
-      ((dims (window-frame-dimensions w))
-       (coords (query-pointer))
-       (screen (maximize-find-workarea w)))
-    (rplaca coords (clamp* (- (car coords) (quotient (car dims) 2))
-			   (car dims) (nth 0 screen) (nth 2 screen)))
-    (rplacd coords (clamp* (- (cdr coords) (quotient (cdr dims) 2))
-			   (cdr dims) (nth 1 screen) (nth 3 screen)))
-    (move-window-to w (car coords) (cdr coords))))
+  (define (place-window-under-pointer w)
+    (let ((dims (window-frame-dimensions w))
+	  (coords (query-pointer))
+	  (screen (maximize-find-workarea w)))
+      (rplaca coords (clamp* (- (car coords) (quotient (car dims) 2))
+			     (car dims) (nth 0 screen) (nth 2 screen)))
+      (rplacd coords (clamp* (- (cdr coords) (quotient (cdr dims) 2))
+			     (cdr dims) (nth 1 screen) (nth 3 screen)))
+      (move-window-to w (car coords) (cdr coords))))
 
-(define-placement-mode 'randomly place-window-randomly)
-(define-placement-mode 'interactively place-window-interactively)
-(define-placement-mode 'centered place-window-centered)
-(define-placement-mode 'centered-on-parent place-window-centered-on-parent)
-(define-placement-mode 'under-pointer place-window-under-pointer)
-(define-placement-mode 'none nop)
+  (define-placement-mode 'randomly place-window-randomly)
+  (define-placement-mode 'interactively place-window-interactively)
+  (define-placement-mode 'centered place-window-centered)
+  (define-placement-mode 'centered-on-parent place-window-centered-on-parent)
+  (define-placement-mode 'under-pointer place-window-under-pointer)
+  (define-placement-mode 'none nop))

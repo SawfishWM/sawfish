@@ -26,51 +26,90 @@
 ;; I've rewritten it to take advantage of lexical scope, and changed
 ;; some names
 
-(require 'viewport)
+(define-structure sawfish.wm.commands.viewport-linear
 
-(defvar viewport-linear-last 9)
+    (export set-viewport-linear
+	    define-linear-viewport-commands)
 
-;; Set the viewport using linear addressing
-;;;###autoload
-(defun set-viewport-linear (index)
-  (interactive "NIndex:")
-  (set-screen-viewport (mod index (car viewport-dimensions))
-		       (quotient index (car viewport-dimensions))))
+    (open rep
+	  sawfish.wm.events
+	  sawfish.wm.commands
+	  sawfish.wm.viewport)
 
-(define-command-args 'set-viewport-linear
-		     `(and (labelled ,(_ "Index:") (number 0))))
+  (define-structure-alias viewport-linear sawfish.wm.commands.viewport-linear)
 
-;; Move window to viewport INDEX using linear addressing
-;;;###autoload
-(defun set-window-viewport-linear (index)
-  (interactive "NIndex:")
-  (set-window-viewport (current-event-window)
-		       (mod index (car viewport-dimensions))
-		       (quotient index (car viewport-dimensions))))
+  (defvar viewport-linear-last 9)
 
-(define-command-args 'set-window-viewport-linear
-		     `(and (labelled ,(_ "Index:") (number 0))))
+  ;; Set the viewport using linear addressing
+  (define (set-viewport-linear index)
+    (set-screen-viewport (mod index (car viewport-dimensions))
+			 (quotient index (car viewport-dimensions))))
 
-;;;###autoload
-(defun define-linear-viewport-commands (index)
-  (let
-      ((fn (lambda (base)
-	     (intern (format nil "%s:%d" base (1+ index))))))
-    (define-value
-     (fn "set-viewport-linear")
-     (lambda ()
-       "Move to the specified linear viewport."
-       (interactive)
-       (set-viewport-linear index)))
-    (define-value
-     (fn "set-window-viewport-linear")
-     (lambda (window)
-       "Move the current window to the specified linear viewport."
-       (interactive)
-       (set-window-viewport-linear index)))
-    (put (fn "set-viewport-linear") 'deprecated-command t)
-    (put (fn "set-window-viewport-linear") 'deprecated-command t)))
+  ;;###autoload
+  (define-command 'set-viewport-linear set-viewport-linear
+    "NIndex:" `(and (labelled ,(_ "Index:") (number 0))))
 
-(do ((i 0 (1+ i)))
-    ((= i viewport-linear-last))
-  (define-linear-viewport-commands i))
+  ;; Move window to viewport INDEX using linear addressing
+  (define (set-window-viewport-linear index)
+    (set-window-viewport (current-event-window)
+			 (mod index (car viewport-dimensions))
+			 (quotient index (car viewport-dimensions))))
+
+  ;;###autoload
+  (define-command 'set-window-viewport-linear set-window-viewport-linear
+    "NIndex:" `(and (labelled ,(_ "Index:") (number 0))))
+
+  (define (define-linear-viewport-commands index)
+    (let ((fn (lambda (base)
+		(intern (format nil "%s:%d" base (1+ index))))))
+      (define-command (fn "set-viewport-linear")
+	(lambda ()
+	  "Move to the specified linear viewport."
+	  (set-viewport-linear index)))
+      (define-command (fn "set-window-viewport-linear")
+	(lambda ()
+	  "Move the current window to the specified linear viewport."
+	  (set-window-viewport-linear index)))
+      (put (fn "set-viewport-linear") 'deprecated-command t)
+      (put (fn "set-window-viewport-linear") 'deprecated-command t)))
+
+  (do ((i 0 (1+ i)))
+      ((= i viewport-linear-last))
+    (define-linear-viewport-commands i)))
+
+;;###autoload (autoload-command 'set-viewport-linear:1 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:1 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:2 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:2 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:3 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:3 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:4 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:4 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:5 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:5 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:6 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:6 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:7 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:7 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:8 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:8 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:9 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:9 'sawfish.wm.commands.viewport-linear)
+;;###autoload (put 'set-viewport-linear:1 'deprecated-command t)
+;;###autoload (put 'set-window-viewport-linear:1 'deprecated-command t)
+;;###autoload (put 'set-viewport-linear:2 'deprecated-command t)
+;;###autoload (put 'set-window-viewport-linear:2 'deprecated-command t)
+;;###autoload (put 'set-viewport-linear:3 'deprecated-command t)
+;;###autoload (put 'set-window-viewport-linear:3 'deprecated-command t)
+;;###autoload (put 'set-viewport-linear:4 'deprecated-command t)
+;;###autoload (put 'set-window-viewport-linear:4 'deprecated-command t)
+;;###autoload (put 'set-viewport-linear:5 'deprecated-command t)
+;;###autoload (put 'set-window-viewport-linear:5 'deprecated-command t)
+;;###autoload (put 'set-viewport-linear:6 'deprecated-command t)
+;;###autoload (put 'set-window-viewport-linear:6 'deprecated-command t)
+;;###autoload (put 'set-viewport-linear:7 'deprecated-command t)
+;;###autoload (put 'set-window-viewport-linear:7 'deprecated-command t)
+;;###autoload (put 'set-viewport-linear:8 'deprecated-command t)
+;;###autoload (put 'set-window-viewport-linear:8 'deprecated-command t)
+;;###autoload (put 'set-viewport-linear:9 'deprecated-command t)
+;;###autoload (put 'set-window-viewport-linear:9 'deprecated-command t)

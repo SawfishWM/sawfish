@@ -19,8 +19,6 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'server)
-
 ;; Commentary:
 
 ;; The protocol is something like:
@@ -40,50 +38,54 @@
 ;;	after it has read it. If no result is required, it will delete
 ;;	the property after having read it.
 
-(defvar server-window nil)
+(define-structure sawfish.wm.server
 
-(defun server-eval (form)
-  (let
-      ((print-escape t))
-    (condition-case error-data
-	(progn
-	  (setq form (read-from-string form))
-	  (format nil "%S" (eval form)))
-      (error
-       (format nil "error--> %S" error-data)))))
+    (export server-eval
+	    server-net-init
+	    server-net-exit)
 
-(defun server-client-message-handler (w type data)
-  (when (and server-window (eq w 'root) (eq type '_SAWMILL_REQUEST))
-    (let*
-	((window (aref data 0))
-	 (prop (x-atom-name (aref data 1)))
-	 (needs-result (/= (aref data 2) 0))
-	 (form-data (get-x-property window prop))
-	 form value)
-      (if needs-result
-	  (set-x-property
-	   window prop (server-eval (nth 2 form-data)) 'STRING 8)
-	(delete-x-property window prop)
-	(server-eval (nth 2 form-data)))
-      t)))
+    (open rep
+	  sawfish.wm.misc
+	  sawfish.wm.windows)
 
-(defun server-net-init ()
-  (unless server-window
-    (setq server-window (create-window 'root -100 -100 10 10))
-    (set-x-property 'root '_SAWMILL_REQUEST_WIN
-		    (vector server-window) 'CARDINAL 32)
-    (set-x-property server-window '_SAWMILL_REQUEST_WIN
-		    (vector server-window) 'CARDINAL 32)))
+  (define server-window nil)
 
-(defun server-net-exit ()
-  (when server-window
-    (delete-x-property 'root '_SAWMILL_REQUEST_WIN)
-    (destroy-window server-window)
-    (setq server-window nil)))
+  (define (server-eval form)
+    (let ((print-escape t))
+      (condition-case error-data
+	  (progn
+	    (setq form (read-from-string form))
+	    (format nil "%S" (user-eval form)))
+	(error
+	 (format nil "error--> %S" error-data)))))
 
-
-;; initialisation
+  (define (server-client-message-handler w type data)
+    (when (and server-window (eq w 'root) (eq type '_SAWMILL_REQUEST))
+      (let* ((window (aref data 0))
+	     (prop (x-atom-name (aref data 1)))
+	     (needs-result (/= (aref data 2) 0))
+	     (form-data (get-x-property window prop))
+	     form value)
+	(if needs-result
+	    (set-x-property
+	     window prop (server-eval (nth 2 form-data)) 'STRING 8)
+	  (delete-x-property window prop)
+	  (server-eval (nth 2 form-data)))
+	t)))
 
-(unless batch-mode
+  (define (server-net-init)
+    (unless server-window
+      (setq server-window (create-window 'root -100 -100 10 10))
+      (set-x-property 'root '_SAWMILL_REQUEST_WIN
+		      (vector server-window) 'CARDINAL 32)
+      (set-x-property server-window '_SAWMILL_REQUEST_WIN
+		      (vector server-window) 'CARDINAL 32)))
+
+  (define (server-net-exit)
+    (when server-window
+      (delete-x-property 'root '_SAWMILL_REQUEST_WIN)
+      (destroy-window server-window)
+      (setq server-window nil)))
+
   (add-hook 'client-message-hook server-client-message-handler)
   (add-hook 'before-exit-hook server-net-exit))

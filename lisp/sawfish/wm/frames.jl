@@ -19,534 +19,549 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'timers)
-(provide 'frames)
+(define-structure sawfish.wm.frames
 
-;; Commentary:
+    (compound-interface
+     (structure-interface sawfish.wm.frames.subrs)
+     (export custom-set-frame-style
+	     after-setting-frame-option
+	     define-frame-type-mapper
+	     add-frame-style
+	     reload-frame-style
+	     reframe-window
+	     reframe-all-windows
+	     rebuild-frames-with-style
+	     reframe-windows-with-style
+	     set-frame-style
+	     mark-frame-style-editable
+	     frame-style-editable-p
+	     window-type
+	     set-window-type
+	     window-type-remove-title
+	     window-type-remove-border
+	     window-type-add-title
+	     window-type-add-border
+	     find-all-frame-styles
+	     frame-style-menu
+	     remove-frame-class
+	     add-frame-class
+	     set-frame-part-value
+	     def-frame-class
+	     define-frame-class))
+	    
+    (open rep
+	  rep.io.timers
+	  sawfish.wm.frames.subrs
+	  sawfish.wm.windows.subrs
+	  sawfish.wm.misc
+	  sawfish.wm.custom
+	  sawfish.wm.commands
+	  sawfish.wm.events
+	  sawfish.wm.gaol
+	  sawfish.wm.session.init
+	  sawfish.wm.workspace)
 
-;; This sets the following window properties:
+  ;; Commentary:
 
-;;	frame-style		If set, the _user-chosen_ frame style
-;;	current-frame-style	The current frame style
-;;	type			The notional window type, defining
-;;				 which parts of the frame are included
+  ;; This sets the following window properties:
 
-;; The different window types are:
+  ;;	frame-style		If set, the _user-chosen_ frame style
+  ;;	current-frame-style	The current frame style
+  ;;	type			The notional window type, defining
+  ;;				 which parts of the frame are included
 
-;;	default			title bar and border
-;;	transient		border only
-;;	shaped			title-bar only
-;;	shaped-transient	border-like title-bar only
-;;	unframed		no frame at all
-;;	icon
-;;	dock
+  ;; The different window types are:
 
-;; There is also a similar concept of frame types. The window type
-;; never changes (unless the user explicitly does so). But the frame
-;; type may depend on the current window state. For example, if it's
-;; shaded, then it may have `shaded' or `shaded-transient' frame type.
+  ;;	default			title bar and border
+  ;;	transient		border only
+  ;;	shaped			title-bar only
+  ;;	shaped-transient	border-like title-bar only
+  ;;	unframed		no frame at all
+  ;;	icon
+  ;;	dock
 
-;; These are the types that the frame styles see. Current types include
-;; all the above window types plus:
+  ;; There is also a similar concept of frame types. The window type
+  ;; never changes (unless the user explicitly does so). But the frame
+  ;; type may depend on the current window state. For example, if it's
+  ;; shaded, then it may have `shaded' or `shaded-transient' frame type.
 
-;;	shaded			normal title bar only
-;;	shaded-transient	transient title bar only
+  ;; These are the types that the frame styles see. Current types include
+  ;; all the above window types plus:
 
-;; When framing windows the frame-type-fallback-alist variable will be
-;; used to iterate frame types until a type that the theme implements
-;; is found.
+  ;;	shaded			normal title bar only
+  ;;	shaded-transient	transient title bar only
 
-;; However, this separation of frame and window type shouldn't
-;; discourage themes from detecting other window state. For example,
-;; themes may want to display maximized windows differently from
-;; non-maximized. (In fact the frame-type != window-type scheme is
-;; largely just for compatibility)
+  ;; When framing windows the frame-type-fallback-alist variable will be
+  ;; used to iterate frame types until a type that the theme implements
+  ;; is found.
+
+  ;; However, this separation of frame and window type shouldn't
+  ;; discourage themes from detecting other window state. For example,
+  ;; themes may want to display maximized windows differently from
+  ;; non-maximized. (In fact the frame-type != window-type scheme is
+  ;; largely just for compatibility)
 
 
-;; custom support
+;;; custom support
 
-(defun custom-set-frame-style (symbol value &rest args)
-  (if (eq symbol 'default-frame-style)
-      (progn
-	(check-frame-availability value)
-	(setq default-frame-style value)
-	(when always-update-frames
-	  (reframe-all-windows)))
-    (apply custom-set-variable symbol value args)))
+  (define (custom-make-frame-style-widget symbol)
+    `(frame-style ,(find-all-frame-styles t) ,theme-load-path))
 
-(defun custom-make-frame-style-widget (symbol)
-  `(frame-style ,(find-all-frame-styles t) ,theme-load-path))
-
-(defun after-setting-frame-option ()
-  (when always-update-frames
-    (reframe-all-windows)))
-
-(put 'frame-style 'custom-set custom-set-frame-style)
-(put 'frame-style 'custom-widget custom-make-frame-style-widget)
-(define-custom-setter 'custom-set-frame-style custom-set-frame-style)
+  (put 'frame-style 'custom-widget custom-make-frame-style-widget)
 
 
-;; variables etc
+;;; variables etc
 
-(defvar frame-part-classes
-  '((title . ((cursor . hand2)
-	      (keymap . title-keymap)))
-    (menu-button . ((keymap . menu-button-keymap)))
-    (close-button . ((keymap . close-button-keymap)))
-    (iconify-button . ((keymap . iconify-button-keymap)))
-    (maximize-button . ((keymap . maximize-button-keymap)))
-    (top-border . ((cursor . top_side)
-		   (keymap . border-keymap)))
-    (left-border . ((cursor . left_side)
-		    (keymap . border-keymap)))
-    (right-border . ((cursor . right_side)
+  (defvar frame-part-classes
+    '((title . ((cursor . hand2)
+		(keymap . title-keymap)))
+      (menu-button . ((keymap . menu-button-keymap)))
+      (close-button . ((keymap . close-button-keymap)))
+      (iconify-button . ((keymap . iconify-button-keymap)))
+      (maximize-button . ((keymap . maximize-button-keymap)))
+      (top-border . ((cursor . top_side)
 		     (keymap . border-keymap)))
-    (bottom-border . ((cursor . bottom_side)
+      (left-border . ((cursor . left_side)
 		      (keymap . border-keymap)))
-    (top-left-corner . ((cursor . top_left_corner)
+      (right-border . ((cursor . right_side)
+		       (keymap . border-keymap)))
+      (bottom-border . ((cursor . bottom_side)
 			(keymap . border-keymap)))
-    (top-right-corner . ((cursor . top_right_corner)
-			 (keymap . border-keymap)))
-    (bottom-left-corner . ((cursor . bottom_left_corner)
+      (top-left-corner . ((cursor . top_left_corner)
+			  (keymap . border-keymap)))
+      (top-right-corner . ((cursor . top_right_corner)
 			   (keymap . border-keymap)))
-    (bottom-right-corner . ((cursor . bottom_right_corner)
-			    (keymap . border-keymap))))
-  "Alist of (CLASS . ALIST) associating classes of frame parts with state
+      (bottom-left-corner . ((cursor . bottom_left_corner)
+			     (keymap . border-keymap)))
+      (bottom-right-corner . ((cursor . bottom_right_corner)
+			      (keymap . border-keymap))))
+    "Alist of (CLASS . ALIST) associating classes of frame parts with state
 they inherit.")
 
-(defvar override-frame-part-classes nil
-  "Alist of (CLASS . ALIST) associating classes of frame parts with state
+  (defvar override-frame-part-classes nil
+    "Alist of (CLASS . ALIST) associating classes of frame parts with state
 that overrides settings set elsewhere.")
 
-(defvar nil-frame nil
-  "Frame definition used for unframed windows.")
+  (defvar nil-frame nil
+    "Frame definition used for unframed windows.")
 
-(defcustom default-frame-style nil
-  "Default frame style (theme)."
-  :type frame-style
-  :user-level novice
-  :group appearance)
+  (defcustom default-frame-style nil
+    "Default frame style (theme)."
+    :type frame-style
+    :user-level novice
+    :group appearance
+    :after-set (lambda () (after-setting-frame-option)))
 
-(defcustom always-update-frames t
-  "Update all windows when the default frame style is changed."
-  :type boolean
-  :user-level expert
-  :group misc)
+  (defcustom reload-themes-when-changed t
+    "Automatically reload themes when they are updated."
+    :type boolean
+    :user-level expert
+    :group misc)
 
-(defcustom reload-themes-when-changed t
-  "Automatically reload themes when they are updated."
-  :type boolean
-  :user-level expert
-  :group misc)
-
-(defcustom frame-type-fallback-alist
-  '((transient . default)
-    (shaped . default)
-    (shaped-transient . shaped)
-    (shaded . shaped)
-    (shaded-transient . shaped-transient)
-    (icon . shaped-transient)
-    (dock . icon))
-  "Associate frame types with type to try if the theme doesn't implement the
+  (defcustom frame-type-fallback-alist
+    '((transient . default)
+      (shaped . default)
+      (shaped-transient . shaped)
+      (shaded . shaped)
+      (shaded-transient . shaped-transient)
+      (icon . shaped-transient)
+      (dock . icon))
+    "Associate frame types with type to try if the theme doesn't implement the
 requested type."
-  :type (alist ((symbol default shaped transient
-		 shaped-transient icon doc) "From")
-	       ((symbol default shaped transient
-		 shaped-transient icon doc) "To"))
-  :group appearance
-  :user-level expert
-  :after-set after-setting-frame-option)
+    :type (alist ((symbol default shaped transient
+			  shaped-transient icon doc) "From")
+		 ((symbol default shaped transient
+			  shaped-transient icon doc) "To"))
+    :group appearance
+    :user-level expert
+    :after-set (lambda () (after-setting-frame-option)))
 
-(defvar theme-update-interval 60
-  "Number of seconds between checking if theme files have been modified.")
+  (defvar theme-update-interval 60
+    "Number of seconds between checking if theme files have been modified.")
 
-(defvar user-theme-directory "~/.sawfish/themes"
-  "Directory containing user-local themes.")
+  (defvar user-theme-directory "~/.sawfish/themes"
+    "Directory containing user-local themes.")
 
-(defvar system-theme-directory (expand-file-name
-				"../themes" sawfish-lisp-lib-directory)
-  "Directory containing themes from the current sawfish version.")
+  (defvar system-theme-directory (expand-file-name
+				  "../themes" sawfish-lisp-lib-directory)
+    "Directory containing themes from the current sawfish version.")
 
-(defvar site-theme-directory (expand-file-name
-			      "../../themes" sawfish-lisp-lib-directory)
-  "Directory containing system-wide themes.")
+  (defvar site-theme-directory (expand-file-name
+				"../../themes" sawfish-lisp-lib-directory)
+    "Directory containing system-wide themes.")
 
-(defvar theme-load-path (list user-theme-directory
-			      site-theme-directory
-			      system-theme-directory)
-  "List of directories from which themes may be loaded.")
+  (defvar theme-load-path (list user-theme-directory
+				site-theme-directory
+				system-theme-directory)
+    "List of directories from which themes may be loaded.")
 
-(defvar frame-styles nil
-  "List of (NAME . FUNCTION) defining all loaded frame styles.")
+  (define frame-styles nil
+    "List of (NAME . FUNCTION) defining all loaded frame styles.")
 
-;; List of (NAME FILENAME MODTIME) mapping loaded frame styles to the
-;; files they were loaded from; used to check if the theme needs reloading
-(defvar frame-style-files nil)
+  ;; List of (NAME FILENAME MODTIME) mapping loaded frame styles to the
+  ;; files they were loaded from; used to check if the theme needs reloading
+  (define frame-style-files nil)
 
-;; List of styles that can be edited using sawfish-themer
-(defvar editable-frame-styles nil)
+  ;; List of styles that can be edited using sawfish-themer
+  (define editable-frame-styles nil)
 
-(defvar frame-type-mappers '()
-  "List of functions that map (WINDOW FRAME-TYPE) -> FRAME-TYPE. Used when
+  (define frame-type-mappers '()
+    "List of functions that map (WINDOW FRAME-TYPE) -> FRAME-TYPE. Used when
 deciding which frame type to ask a theme to generate.")
 
-;; list of (REGEXP DIR-EXPAND NAME-EXPAND)
-(defvar theme-suffix-regexps
-  '(("^(.*)/(.*)\\.tar(\\.gz|\\.Z|\\.bz2|)$" "\\0#tar/\\2" "\\2")))
+  ;; list of (REGEXP DIR-EXPAND NAME-EXPAND)
+  (defvar theme-suffix-regexps
+    '(("^(.*)/(.*)\\.tar(\\.gz|\\.Z|\\.bz2|)$" "\\0#tar/\\2" "\\2")))
 
-(defvar theme-suffixes '("" ".tar" ".tar.gz" ".tar.Z" ".tar.bz2"))
+  (defvar theme-suffixes '("" ".tar" ".tar.gz" ".tar.Z" ".tar.bz2"))
 
-(defvar themes-are-gaolled t
-  "When non-nil themes are assumed to be malicious.")
+  (defvar themes-are-gaolled t
+    "When non-nil themes are assumed to be malicious.")
 
-(defvar sawfish-themer-program "sawfish-themer")
-
-
-;; defcustom's for some built-in variables
-
-(defcustom default-font nil
-  "Default font: \\w"
-  :group appearance
-  :type font
-  :user-level novice
-  :after-set (lambda () (after-setting-frame-option)))
-
-(defcustom default-bevel-percent nil
-  "Intensity of bevels: \\wpercent."
-  :group appearance
-  :type (number 0 100)
-  :user-level expert
-  :after-set (lambda () (after-setting-frame-option)))
+  (defvar sawfish-themer-program "sawfish-themer")
 
 
-;; managing frame types
+;;; defcustom's for some built-in variables
 
-(defun define-frame-type-mapper (fun)
-  (unless (memq fun frame-type-mappers)
-    (setq frame-type-mappers (cons fun frame-type-mappers))))
+  (defcustom default-font nil
+    "Default font: \\w"
+    :group appearance
+    :type font
+    :user-level novice
+    :after-set (lambda () (after-setting-frame-option)))
 
-(defun find-frame-definition (w style)
-  ;; 1. map window type to actual frame type
-  (let loop-1 ((rest frame-type-mappers)
-	       (type (window-type w)))
-    (if (null rest)
-	;; found the final frame type, so,
-	;; 2. find the closest type that the style implements to this
-	(let loop-2 ((type type)
-		     (seen (list type)))
-	  (cond ((eq type 'unframed) nil-frame)
-		((style w type))
-		(t (let ((next (or (cdr (assq type frame-type-fallback-alist))
-				   'unframed)))
-		     (if (memq next seen)
-			 ;; been here before..
-			 nil-frame
-		       (loop-2 next (cons next seen)))))))
-      ;; else, apply this transformation and keep looping
-      (loop-1 (cdr rest) ((car rest) w type)))))
+  (defcustom default-bevel-percent nil
+    "Intensity of bevels: \\wpercent."
+    :group appearance
+    :type (number 0 100)
+    :user-level expert
+    :after-set (lambda () (after-setting-frame-option)))
 
 
-;; managing frame styles
+;;; managing frame types
 
-(defun add-frame-style (name function)
-  (let
-      ((cell (assq name frame-styles)))
-    (if cell
-	(rplacd cell function)
-      (setq frame-styles (cons (cons name function) frame-styles)))
-    (when load-filename
-      (let
-	  ;; if we're loading from a tar-file, then check the
-	  ;; tar file itself, not its contents (for efficiency)
-	  ((file (if (string-match "#tar/" load-filename)
-		     (substring load-filename 0 (match-start))
-		   load-filename)))
-	(setq cell (assq name frame-style-files))
-	(if cell
-	    (rplacd cell (list file (file-modtime file)))
-	  (setq frame-style-files (cons (list name file (file-modtime file))
-					frame-style-files)))))
-    (unless default-frame-style
-      (setq default-frame-style name))))
+  (define (define-frame-type-mapper fun)
+    (unless (memq fun frame-type-mappers)
+      (setq frame-type-mappers (cons fun frame-type-mappers))))
 
-(defun check-frame-availability (name)
-  (unless (assq name frame-styles)
-    (load-frame-style name)
-    (or (assq name frame-styles) (error "No such frame style: %s" name))))
-
-(defun reload-frame-style (name)
-  (when (assq name frame-styles)
-    (load-frame-style name)
-    (reframe-windows-with-style name)))
-
-;; called periodically from a timer
-(defun frames-on-idle (timer)
-  (set-timer timer theme-update-interval)
-  (when reload-themes-when-changed
-    (mapc (lambda (cell)
-	    (let
-		((style (nth 0 cell))
-		 (file (nth 1 cell))
-		 (modtime (nth 2 cell)))
-	      (when (time-later-p (file-modtime file) modtime)
-		(reload-frame-style style))))
-	  frame-style-files)))
+  (define (find-frame-definition w style)
+    ;; 1. map window type to actual frame type
+    (let loop-1 ((rest frame-type-mappers)
+		 (type (window-type w)))
+      (if (null rest)
+	  ;; found the final frame type, so,
+	  ;; 2. find the closest type that the style implements to this
+	  (let loop-2 ((type type)
+		       (seen (list type)))
+	    (cond ((eq type 'unframed) nil-frame)
+		  ((style w type))
+		  (t (let ((next (or (cdr (assq type frame-type-fallback-alist))
+				     'unframed)))
+		       (if (memq next seen)
+			   ;; been here before..
+			   nil-frame
+			 (loop-2 next (cons next seen)))))))
+	;; else, apply this transformation and keep looping
+	(loop-1 (cdr rest) ((car rest) w type)))))
 
 
-;; applying frame styles to windows
+;;; managing frame styles
 
-(defun reframe-window (w)
-  (if (window-get w 'ignored)
-      (progn
-	(window-put w 'current-frame-style nil)
-	(set-window-frame w nil-frame))
-    (let ((style (or (window-get w 'frame-style)
-		     default-frame-style)))
-      (check-frame-availability style)
-      (let ((style-fun (cdr (assq style frame-styles))))
-	(set-window-frame w (if style-fun
-				(find-frame-definition w style-fun)
-			      nil-frame))
-	(window-put w 'current-frame-style style)))))
+  (define (add-frame-style name function)
+    (let ((cell (assq name frame-styles)))
+      (if cell
+	  (rplacd cell function)
+	(setq frame-styles (cons (cons name function) frame-styles)))
+      (when load-filename
+	(let
+	    ;; if we're loading from a tar-file, then check the
+	    ;; tar file itself, not its contents (for efficiency)
+	    ((file (if (string-match "#tar/" load-filename)
+		       (substring load-filename 0 (match-start))
+		     load-filename)))
+	  (setq cell (assq name frame-style-files))
+	  (if cell
+	      (rplacd cell (list file (file-modtime file)))
+	    (setq frame-style-files (cons (list name file (file-modtime file))
+					  frame-style-files)))))
+      (unless default-frame-style
+	(setq default-frame-style name))))
 
-(defun reframe-all-windows ()
-  (map-windows reframe-window))
+  (define (check-frame-availability name)
+    (unless (assq name frame-styles)
+      (load-frame-style name)
+      (or (assq name frame-styles) (error "No such frame style: %s" name))))
 
-(defun rebuild-frames-with-style (style)
-  (map-windows (lambda (w)
-		 (when (eq (window-get w 'current-frame-style) style)
-		   (rebuild-frame w)))))
+  (define (reload-frame-style name)
+    (when (assq name frame-styles)
+      (load-frame-style name)
+      (reframe-windows-with-style name)))
 
-(defun reframe-windows-with-style (style)
-  (map-windows (lambda (w)
-		 (when (eq (window-get w 'current-frame-style) style)
-		   (reframe-window w)))))
-
-(defun set-frame-style (w style)
-  (unless (eq (window-get w 'frame-style) style)
-    (window-put w 'frame-style style)
-    (call-window-hook 'window-state-change-hook w (list '(frame-style)))
-    (reframe-window w)))
-
-
-;; editable frame styles
-
-(defun mark-frame-style-editable (style)
-  (unless (memq style editable-frame-styles)
-    (setq editable-frame-styles (cons style editable-frame-styles))))
-
-(defun frame-style-editable-p (style)
-  (memq style editable-frame-styles))
-
-(defun edit-frame-style (style)
-  (interactive (list default-frame-style))
-  (if (not (memq style editable-frame-styles))
-      (error "Frame style isn't editable")
-    (let
-	((dir (find-frame-style style)))
-      (when dir
-	(system (format nil "%s %s &" sawfish-themer-program dir))))))
-
-
-;; kludge different window decors by modifying the assumed window type
-
-(defun window-type (w)
-  (or (window-get w 'type)
-      (if (window-transient-p w)
-	  (if (window-shaped-p w)
-	      'shaped-transient
-	    'transient)
-	(if (window-shaped-p w)
-	    'shaped
-	  'default))))
-
-(defun set-window-type (w type)
-  (unless (eq (window-get w 'type) type)
-    (window-put w 'type type)
-    (call-window-hook 'window-state-change-hook w (list '(type)))
-    (reframe-window w)))
-
-(defun window-type-remove-title (type)
-  (case type
-    ((default) 'transient)
-    ((shaped shaped-transient) 'unframed)
-    (t type)))
-
-(defun window-type-remove-border (type)
-  (case type
-    ((default) 'shaped)
-    ((transient shaped-transient) 'unframed)
-    (t type)))
-
-(defun window-type-add-title (type)
-  (case type
-    ((transient) 'default)
-    ((unframed) 'shaped)
-    (t type)))
-
-(defun window-type-add-border (type)
-  (case type
-    ((shaped) 'default)
-    ((unframed) 'transient)
-    (t type)))
-
-;; create some commands for setting the window type
-(mapc (lambda (type)
-	(define-value (intern (concat "set-frame:" (symbol-name type)))
-		      (lambda (w)
-			(interactive "%W")
-			(set-window-type w type))))
-      '(default transient shaped shaped-transient unframed))
-
-
-;; loading ``themes'' (currently just frame styles)
-
-(defun frame-style-directory (dir &optional get-name)
-  (if (and (file-directory-p dir)
-	   (or (file-exists-p (expand-file-name "theme.jl" dir))
-	       (file-exists-p (expand-file-name "theme.jlc" dir))))
-      (if get-name
-	  (file-name-nondirectory dir)
-	dir)
-    ;; try the list of suffixes
-    (catch 'out
+  ;; called periodically from a timer
+  (define (frames-on-idle timer)
+    (set-timer timer theme-update-interval)
+    (when reload-themes-when-changed
       (mapc (lambda (cell)
-	      (when (string-match (car cell) dir)
-		(throw 'out (expand-last-match (if get-name
-						   (nth 2 cell)
-						 (nth 1 cell))))))
-	    theme-suffix-regexps)
-      nil)))
-
-(defun find-frame-style (name)
-  (catch 'out
-    (mapc (lambda (dir)
-	    (mapc (lambda (suf)
-		    (let*
-			((t-dir (expand-file-name
-				 (concat (symbol-name name) suf) dir))
-			 tem)
-		      (when (file-exists-p t-dir)
-			(setq tem (frame-style-directory t-dir))
-			(when tem
-			  (throw 'out tem)))))
-		  theme-suffixes))
-	  theme-load-path)
-    nil))
-
-(defun load-frame-style (name)
-  (let
-      ((dir (find-frame-style name)))
-    (when dir
-      (let
-	  ((image-load-path (cons dir image-load-path)))
-	(if themes-are-gaolled
-	    (gaol-load (expand-file-name "theme.jl" dir) nil t t)
-	  (load (expand-file-name "theme" dir) nil t))))))
-
-(defun find-all-frame-styles (&optional sorted)
-  (let
-      (lst tem)
-    (mapc (lambda (dir)
-	    (when (file-directory-p dir)
-	      (mapc (lambda (t-dir)
-		      (when (setq tem (frame-style-directory
-				       (expand-file-name t-dir dir) t))
-			(unless (member tem lst)
-			  (setq lst (cons tem lst)))))
-		    (directory-files dir))))
-	  theme-load-path)
-    (when sorted
-      (setq lst (sort lst string-lessp)))
-    (mapcar intern lst)))
-
-(defun frame-style-menu ()
-  (let
-      ((styles (find-all-frame-styles t)))
-    (nconc (mapcar (lambda (s)
-		     (list (symbol-name s)
-			   `(set-frame-style (current-event-window) ',s)))
-		   styles)
-	   `(() (,(_ "Default")
-		 (set-frame-style (current-event-window) nil))))))
+	      (let ((style (nth 0 cell))
+		    (file (nth 1 cell))
+		    (modtime (nth 2 cell)))
+		(when (time-later-p (file-modtime file) modtime)
+		  (reload-frame-style style))))
+	    frame-style-files)))
 
 
-;; removing frame parts
+;;; applying frame styles to windows
 
-(defun remove-frame-class (w class)
-  (window-put w 'removed-classes
-	      (cons class (delq class (window-get w 'removed-classes))))
-  (when (window-framed-p w)
-    (rebuild-frame w)))
-
-(defun add-frame-class (w class)
-  (window-put w 'removed-classes (delq class (window-get w 'removed-classes)))
-  (when (window-framed-p w)
-    (rebuild-frame w)))
-
-
-;; manipulating the frame part classes variables
-
-(defun set-frame-part-value (class key value &optional override)
-  (let*
-      ((var (if override 'override-frame-part-classes 'frame-part-classes))
-       (item (assq class (symbol-value var)))
-       tem)
-    (if item
-	(if (setq tem (assq key (cdr item)))
-	    (rplacd tem value)
-	  (rplacd item (cons (cons key value) (cdr item))))
-      (set var (cons (cons class (list (cons key value)))
-		     (symbol-value var))))))
-
-;; (def-frame-class shade-button '((cursor . foo) ...)
-;;   (bind-keys shade-button-keymap
-;;     "Button1-Off" 'toggle-window-shaded))
-;; 
-;; the idea being that it will only create the frame part if it doesn't
-;; exist, it will add all properties from the second argument unless
-;; they're already set, then create and initialise the keymap from the
-;; third argument (unless a keymap is already defined)
-
-(defmacro def-frame-class (class alist &rest keymap-forms)
-  (if keymap-forms
-      `(when (define-frame-class ',class ,alist t)
-	 ,@keymap-forms)
-    `(define-frame-class ',class ,alist)))
-
-(defun define-frame-class (class alist &optional with-keymap)
-  (let
-      ((cell (assq class frame-part-classes))
-       (ok-to-bind nil))
-    (if (not cell)
+  (define (reframe-window w)
+    (if (window-get w 'ignored)
 	(progn
-	  (setq cell (cons class alist))
-	  (setq frame-part-classes (cons cell frame-part-classes)))
-      (mapc (lambda (attr)
-	      (let
-		  ((tem (assq (car attr) (cdr cell))))
-		(unless tem
-		  (rplacd cell (cons attr (cdr cell))))))
-	    alist))
-    (when with-keymap
-      (let
-	  ((map-name (intern (concat (symbol-name class) "-keymap"))))
-	(unless (boundp map-name)
-	  (make-variable-special map-name)
-	  (set map-name (make-keymap))
-	  (setq ok-to-bind t)
-	  ;; so the theme can bind to the keymap..
-	  (gaol-add-special map-name))
-	(set-frame-part-value class 'keymap map-name)))
-    ok-to-bind))
+	  (window-put w 'current-frame-style nil)
+	  (set-window-frame w nil-frame))
+      (let ((style (or (window-get w 'frame-style)
+		       default-frame-style)))
+	(check-frame-availability style)
+	(let ((style-fun (cdr (assq style frame-styles))))
+	  (set-window-frame w (if style-fun
+				  (find-frame-definition w style-fun)
+				nil-frame))
+	  (window-put w 'current-frame-style style)))))
+
+  (define (reframe-all-windows) (map-windows reframe-window))
+
+  (define after-setting-frame-option reframe-all-windows)
+
+  (define (rebuild-frames-with-style style)
+    (map-windows (lambda (w)
+		   (when (eq (window-get w 'current-frame-style) style)
+		     (rebuild-frame w)))))
+
+  (define (reframe-windows-with-style style)
+    (map-windows (lambda (w)
+		   (when (eq (window-get w 'current-frame-style) style)
+		     (reframe-window w)))))
+
+  (define (set-frame-style w style)
+    (unless (eq (window-get w 'frame-style) style)
+      (window-put w 'frame-style style)
+      (call-window-hook 'window-state-change-hook w (list '(frame-style)))
+      (reframe-window w)))
 
 
-;; initialisation
+;;; editable frame styles
 
-(add-hook 'add-window-hook reframe-window t)
-(add-hook 'shape-notify-hook reframe-window t)
+  (define (mark-frame-style-editable style)
+    (unless (memq style editable-frame-styles)
+      (setq editable-frame-styles (cons style editable-frame-styles))))
 
-(make-timer frames-on-idle theme-update-interval)
+  (define (frame-style-editable-p style) (memq style editable-frame-styles))
 
-(sm-add-saved-properties 'type 'ignored 'frame-style)
-(add-swapped-properties 'frame-active-color 'frame-inactive-color)
+  (define-command 'edit-frame-style
+    (lambda (style)
+      (if (not (memq style editable-frame-styles))
+	  (error "Frame style isn't editable")
+	(let ((dir (find-frame-style style)))
+	  (when dir
+	    (system (format nil "%s %s &" sawfish-themer-program dir))))))
+    (lambda () (list default-frame-style)))
+
+
+;;; kludge different window decors by modifying the assumed window type
+
+  (define (window-type w)
+    (or (window-get w 'type)
+	(if (window-transient-p w)
+	    (if (window-shaped-p w)
+		'shaped-transient
+	      'transient)
+	  (if (window-shaped-p w)
+	      'shaped
+	    'default))))
+
+  (define (set-window-type w type)
+    (unless (eq (window-get w 'type) type)
+      (window-put w 'type type)
+      (call-window-hook 'window-state-change-hook w (list '(type)))
+      (reframe-window w)))
+
+  (define (window-type-remove-title type)
+    (case type
+      ((default) 'transient)
+      ((shaped shaped-transient) 'unframed)
+      (t type)))
+
+  (define (window-type-remove-border type)
+    (case type
+      ((default) 'shaped)
+      ((transient shaped-transient) 'unframed)
+      (t type)))
+
+  (define (window-type-add-title type)
+    (case type
+      ((transient) 'default)
+      ((unframed) 'shaped)
+      (t type)))
+
+  (define (window-type-add-border type)
+    (case type
+      ((shaped) 'default)
+      ((unframed) 'transient)
+      (t type)))
+
+  ;; create some commands for setting the window type
+  (mapc (lambda (type)
+	  (define-command (intern (concat "set-frame:" (symbol-name type)))
+	    (lambda (w) (set-window-type w type)) "%W"))
+	'(default transient shaped shaped-transient unframed))
+
+
+;;; loading ``themes'' (currently just frame styles)
+
+  (define (frame-style-directory dir &optional get-name)
+    (if (and (file-directory-p dir)
+	     (or (file-exists-p (expand-file-name "theme.jl" dir))
+		 (file-exists-p (expand-file-name "theme.jlc" dir))))
+	(if get-name
+	    (file-name-nondirectory dir)
+	  dir)
+      ;; try the list of suffixes
+      (catch 'out
+	(mapc (lambda (cell)
+		(when (string-match (car cell) dir)
+		  (throw 'out (expand-last-match (if get-name
+						     (nth 2 cell)
+						   (nth 1 cell))))))
+	      theme-suffix-regexps)
+	nil)))
+
+  (define (find-frame-style name)
+    (catch 'out
+      (mapc (lambda (dir)
+	      (mapc (lambda (suf)
+		      (let* ((t-dir (expand-file-name
+				     (concat (symbol-name name) suf) dir))
+			     tem)
+			(when (file-exists-p t-dir)
+			  (setq tem (frame-style-directory t-dir))
+			  (when tem
+			    (throw 'out tem)))))
+		    theme-suffixes))
+	    theme-load-path)
+      nil))
+
+  (define (load-frame-style name)
+    (let ((dir (find-frame-style name)))
+      (when dir
+	(let ((image-load-path (cons dir image-load-path)))
+	  (if themes-are-gaolled
+	      (gaol-load (expand-file-name "theme.jl" dir) (make-gaol))
+	    (load (expand-file-name "theme" dir) nil t))))))
+
+  (define (find-all-frame-styles &optional sorted)
+    (let (lst tem)
+      (mapc (lambda (dir)
+	      (when (file-directory-p dir)
+		(mapc (lambda (t-dir)
+			(when (setq tem (frame-style-directory
+					 (expand-file-name t-dir dir) t))
+			  (unless (member tem lst)
+			    (setq lst (cons tem lst)))))
+		      (directory-files dir))))
+	    theme-load-path)
+      (when sorted
+	(setq lst (sort lst string-lessp)))
+      (mapcar intern lst)))
+
+  (define (frame-style-menu)
+    (let ((styles (find-all-frame-styles t)))
+      (nconc (mapcar (lambda (s)
+		       (list (symbol-name s)
+			     `(set-frame-style (current-event-window) ',s)))
+		     styles)
+	     `(() (,(_ "Default")
+		  (set-frame-style (current-event-window) nil))))))
+
+
+;;; removing frame parts
+
+  (define (remove-frame-class w class)
+    (window-put w 'removed-classes
+		(cons class (delq class (window-get w 'removed-classes))))
+    (when (window-framed-p w)
+      (rebuild-frame w)))
+
+  (define (add-frame-class w class)
+    (window-put w 'removed-classes
+		(delq class (window-get w 'removed-classes)))
+    (when (window-framed-p w)
+      (rebuild-frame w)))
+
+
+;;; manipulating the frame part classes variables
+
+  (define (set-frame-part-value class key value &optional override)
+    (let* ((var (if override 'override-frame-part-classes 'frame-part-classes))
+	   (item (assq class (symbol-value var)))
+	   tem)
+      (if item
+	  (if (setq tem (assq key (cdr item)))
+	      (rplacd tem value)
+	    (rplacd item (cons (cons key value) (cdr item))))
+	(set var (cons (cons class (list (cons key value)))
+		       (symbol-value var))))))
+
+  ;; (def-frame-class shade-button '((cursor . foo) ...)
+  ;;   (bind-keys shade-button-keymap
+  ;;     "Button1-Off" 'toggle-window-shaded))
+  ;; 
+  ;; the idea being that it will only create the frame part if it doesn't
+  ;; exist, it will add all properties from the second argument unless
+  ;; they're already set, then create and initialise the keymap from the
+  ;; third argument (unless a keymap is already defined)
+
+  (defmacro def-frame-class (class alist &rest keymap-forms)
+    (if keymap-forms
+	`(when (define-frame-class ',class ,alist t)
+	   ,@keymap-forms)
+      `(define-frame-class ',class ,alist)))
+
+  (define (define-frame-class class alist &optional with-keymap)
+    (let ((cell (assq class frame-part-classes))
+	  (ok-to-bind nil))
+      (if (not cell)
+	  (progn
+	    (setq cell (cons class alist))
+	    (setq frame-part-classes (cons cell frame-part-classes)))
+	(mapc (lambda (attr)
+		(let ((tem (assq (car attr) (cdr cell))))
+		  (unless tem
+		    (rplacd cell (cons attr (cdr cell))))))
+	      alist))
+      (when with-keymap
+	(let ((map-name (intern (concat (symbol-name class) "-keymap"))))
+	  (unless (boundp map-name)
+	    (make-variable-special map-name)
+	    (set map-name (make-keymap))
+	    (setq ok-to-bind t)
+	    ;; so the theme can bind to the keymap..
+	    (gaol-define-special map-name))
+	  (set-frame-part-value class 'keymap map-name)))
+      ok-to-bind))
+
+
+;;; initialisation
+
+  (gaol-add add-frame-style reframe-window rebuild-frames-with-style
+	    reframe-windows-with-style reframe-all-windows window-type
+	    def-frame-class define-frame-class after-setting-frame-option
+	    mark-frame-style-editable  frame-part-get frame-part-put
+	    frame-part-window frame-part-x-window frame-part-position
+	    frame-part-dimensions frame-part-state map-frame-parts
+	    refresh-frame-part refresh-window rebuild-frame-part)
+
+  (add-hook 'add-window-hook reframe-window t)
+  (add-hook 'shape-notify-hook reframe-window t)
+
+  (make-timer frames-on-idle theme-update-interval)
+
+  (sm-add-saved-properties 'type 'ignored 'frame-style)
+  (add-swapped-properties 'frame-active-color 'frame-inactive-color))

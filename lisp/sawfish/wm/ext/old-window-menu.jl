@@ -19,51 +19,55 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'old-window-menu)
+(define-structure sawfish.wm.ext.old-window-menu
 
-;;;###autoload
-(defun old-window-menu ()
-  (let*
-      ((make-label (lambda (w)
-		     (let
-			 ((name (window-name w)))
-		       (concat (and (window-get w 'iconified) ?\[)
-			       (if (> (length name) 20)
-				   (concat
-				    (substring name 0 20) "...")
-				 name)
-			       (and (window-get w 'iconified)  ?\])
-			       (and (eq (input-focus) w) " *")))))
-       (limits (workspace-limits))
-       (windows (managed-windows))
-       (i (car limits))
-       menu)
-    (while (<= i (cdr limits))
-      (mapc (lambda (w)
-	      (when (and (window-in-workspace-p w i)
-			 (window-mapped-p w)
-			 (or (not (window-get w 'ignored))
-			     (window-get w 'iconified)))
-		(setq menu (cons (list (make-label w)
-				       `(display-window
-					 (get-window-by-id ,(window-id w)) ,i))
-				 menu))))
-	    windows)
-      (unless (or (= i (cdr limits)) (null (car menu)))
-	(setq menu (cons nil menu)))
-      (setq i (1+ i)))
-    ;; search for any iconified windows that aren't anywhere else in the menu
-    (let
-	(extra)
-      (mapc (lambda (w)
-	      (when (and (window-get w 'iconified) (window-get w 'sticky))
-		(setq extra (cons (list (make-label w)
-					`(display-window
-					  (get-window-by-id ,(window-id w))))
-				  extra))))
-	    windows)
-      (when extra
-	(setq menu (if menu (nconc extra (list nil) menu) extra))))
-    (nreverse menu)))
+    (export old-window-menu)
 
-(define window-menu old-window-menu)
+    (open rep
+	  sawfish.wm.windows
+	  sawfish.wm.workspace)
+
+  (define-structure-alias old-window-menu sawfish.wm.ext.old-window-menu)
+
+  (define (make-label w)
+    (let ((name (window-name w)))
+      (concat (and (window-get w 'iconified) ?\[)
+	      (if (> (length name) 20)
+		  (concat (substring name 0 20) "...")
+		name)
+	      (and (window-get w 'iconified)  ?\])
+	      (and (eq (input-focus) w) " *"))))
+
+  (define (old-window-menu)
+    (let* ((limits (workspace-limits))
+	   (windows (managed-windows))
+	   menu)
+      (do ((i (car limits)))
+	  ((= i (cdr limits)))
+	(mapc (lambda (w)
+		(when (and (window-in-workspace-p w i)
+			   (window-mapped-p w)
+			   (or (not (window-get w 'ignored))
+			       (window-get w 'iconified)))
+		  (setq menu (cons (list (make-label w)
+					 `(display-window
+					   (get-window-by-id
+					    ,(window-id w)) ,i))
+				   menu))))
+	      windows)
+	(unless (or (= i (cdr limits)) (null (car menu)))
+	  (setq menu (cons nil menu))))
+      ;; search for any iconified windows that aren't anywhere else in the menu
+      (let (extra)
+	(mapc (lambda (w)
+		(when (and (window-get w 'iconified) (window-get w 'sticky))
+		  (setq extra (cons (list (make-label w)
+					  `(display-window
+					    (get-window-by-id ,(window-id w))))
+				    extra))))
+	      windows)
+	(when extra
+	  (setq menu (if menu (nconc extra (list nil) menu) extra))))
+      (nreverse menu)))
+
+  (setq window-menu old-window-menu))

@@ -19,82 +19,86 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'window-anim)
+(define-structure sawfish.wm.animation.outline ()
 
-(defvar anim-outline-icon-coords (cons (screen-width) (screen-height)))
+    (open rep
+	  sawfish.wm.misc
+	  sawfish.wm.events
+	  sawfish.wm.windows
+	  sawfish.wm.window-anim
+	  sawfish.wm.util.window-outline
+	  rep.io.timers)
 
-(defvar anim-outline-steps 16)
-(defvar anim-outline-delay 20)
+  (defvar anim-outline-icon-coords (cons (screen-width) (screen-height)))
 
-(define (anim-outline-run w mode initial-coords initial-dims
-			  final-coords final-dims)
-  (let
-      ((step 0)
-       (x-step (quotient (- (car final-coords) (car initial-coords))
-			 anim-outline-steps))
-       (y-step (quotient (- (cdr final-coords) (cdr initial-coords))
-			 anim-outline-steps))
-       (w-step (quotient (- (car final-dims) (car initial-dims))
-			 anim-outline-steps))
-       (h-step (quotient (- (cdr final-dims) (cdr initial-dims))
-			 anim-outline-steps))
-       (coords (cons (car initial-coords) (cdr initial-coords)))
-       (dims (cons (car initial-dims) (cdr initial-dims)))
-       timer)
+  (defvar anim-outline-steps 16)
+  (defvar anim-outline-delay 20)
 
-    (define (clear)
-      (unless (zerop step)
-	(erase-window-outline mode (car coords) (cdr coords)
-			      (car dims) (cdr dims))))
+  (define (anim-outline-run w mode initial-coords initial-dims
+			    final-coords final-dims)
+    (let ((step 0)
+	  (x-step (quotient (- (car final-coords) (car initial-coords))
+			    anim-outline-steps))
+	  (y-step (quotient (- (cdr final-coords) (cdr initial-coords))
+			    anim-outline-steps))
+	  (w-step (quotient (- (car final-dims) (car initial-dims))
+			    anim-outline-steps))
+	  (h-step (quotient (- (cdr final-dims) (cdr initial-dims))
+			    anim-outline-steps))
+	  (coords (cons (car initial-coords) (cdr initial-coords)))
+	  (dims (cons (car initial-dims) (cdr initial-dims)))
+	  timer)
 
-    (define (stop)
-      (delete-timer timer)
-      (record-window-animator w nil)
-      (ungrab-server))
+      (define (clear)
+	(unless (zerop step)
+	  (erase-window-outline mode (car coords) (cdr coords)
+				(car dims) (cdr dims))))
+      
+      (define (stop)
+	(delete-timer timer)
+	(record-window-animator w nil)
+	(ungrab-server))
 
-    (define (frame)
-      (clear)
-      (if (>= step anim-outline-steps)
-	  (stop)
-	(rplaca coords (+ (car coords) x-step))
-	(rplacd coords (+ (cdr coords) y-step))
-	(rplaca dims (+ (car dims) w-step))
-	(rplacd dims (+ (cdr dims) h-step))
-	(draw-window-outline mode (car coords) (cdr coords)
-			     (car dims) (cdr dims))
-	(setq step (1+ step))
-	(set-timer timer)))
-
-    (define (animator win op)
-      (when (eq op 'stop)
+      (define (frame)
 	(clear)
-	(stop)))
+	(if (>= step anim-outline-steps)
+	    (stop)
+	  (rplaca coords (+ (car coords) x-step))
+	  (rplacd coords (+ (cdr coords) y-step))
+	  (rplaca dims (+ (car dims) w-step))
+	  (rplacd dims (+ (cdr dims) h-step))
+	  (draw-window-outline mode (car coords) (cdr coords)
+			       (car dims) (cdr dims))
+	  (setq step (1+ step))
+	  (set-timer timer)))
 
-    ;; kludged.. there may be Expose events waiting
-    (accept-x-input)
+      (define (animator win op)
+	(when (eq op 'stop)
+	  (clear)
+	  (stop)))
 
-    (grab-server)
-    (record-window-animator w animator)
-    (setq timer (make-timer frame nil anim-outline-delay))))
+      ;; kludged.. there may be Expose events waiting
+      (accept-x-input)
 
-(define (anim-outline-entry mode w op &optional action)
-  (when (eq op 'start)
-    (case action
-      ((iconified)
-       (if (window-get w 'iconified)
-	   (anim-outline-run w mode (window-position w)
-			     (window-frame-dimensions w)
-			     anim-outline-icon-coords '(1 . 1)))))))
+      (grab-server)
+      (record-window-animator w animator)
+      (setq timer (make-timer frame nil anim-outline-delay))))
 
-;;;###autoload
-(defun wireframe-animator (w op &optional action)
-  (anim-outline-entry 'box w op action))
-(define-window-animator 'wireframe wireframe-animator)
+  (define (anim-outline-entry mode w op &optional action)
+    (when (eq op 'start)
+      (case action
+	((iconified)
+	 (if (window-get w 'iconified)
+	     (anim-outline-run w mode (window-position w)
+			       (window-frame-dimensions w)
+			       anim-outline-icon-coords '(1 . 1)))))))
 
-;;;###autoload
-(defun solid-animator (w op &optional action)
-  (anim-outline-entry 'solid w op action))
-(define-window-animator 'solid solid-animator)
+  (define (wireframe-animator w op &optional action)
+    (anim-outline-entry 'box w op action))
 
-;;;###autoload (define-window-animator 'wireframe wireframe-animator)
-;;;###autoload (define-window-animator 'solid solid-animator)
+  (define (solid-animator w op &optional action)
+    (anim-outline-entry 'solid w op action))
+
+  ;;###autoload
+  (define-window-animator 'wireframe wireframe-animator)
+  (define-window-animator 'solid solid-animator))

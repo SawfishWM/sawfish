@@ -19,156 +19,177 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'transient)
+(define-structure sawfish.wm.state.transient
 
-(defcustom focus-windows-when-mapped nil
-  "Focus windows when they are first displayed."
-  :type boolean
-  :group focus)
+    (export transient-of-p
+	    indirect-transient-of-p
+	    transient-parents
+	    transient-group
+	    map-transient-group
+	    raise-window-and-transients
+	    lower-window-and-transients
+	    raise-lower-window-and-transients)
 
-(defcustom transients-get-focus t
-  "Dialog windows inherit the focus from their parent."
-  :group focus
-  :type boolean)
+    (open rep
+	  sawfish.wm.misc
+	  sawfish.wm.events
+	  sawfish.wm.custom
+	  sawfish.wm.commands
+	  sawfish.wm.windows
+	  sawfish.wm.stacking
+	  sawfish.wm.viewport
+	  sawfish.wm.util.window-order
+	  sawfish.wm.frames)
 
-(defcustom decorate-transients nil
-  "Decorate dialog windows similarly to application windows."
-  :type boolean
-  :group appearance
-  :after-set after-setting-frame-option)
+  (defcustom focus-windows-when-mapped nil
+    "Focus windows when they are first displayed."
+    :type boolean
+    :group focus)
 
-
-;; functions
+  (defcustom transients-get-focus t
+    "Dialog windows inherit the focus from their parent."
+    :group focus
+    :type boolean)
 
-(define (transient-of-p x y)
-  "Return t if window X is directly a transient for window Y."
-  (let ((x-for (window-transient-p x)))
-    (and x-for
-	 (or (eql x-for (window-id y))
-	     ;; windows that set WM_TRANSIENT_FOR to the root window are
-	     ;; transients for their entire group (de facto standard)
-	     (and (eql x-for (root-window-id))
-		  (window-group-id x)
-		  (eql (window-group-id x) (window-group-id y)))))))
-
-(define (indirect-transient-of-p x y)
-  "Return t if window X is (directly, or indirectly) a transient for window Y."
-  (or (transient-of-p x y)
-      (let ((x-for (window-transient-p x)))
-	(and x-for
-	     (let ((x-for-w (get-window-by-id x-for)))
-	       (if x-for-w
-		   (indirect-transient-of-p x-for-w y)
-		 nil))))))
-
-(define (transient-parents w &optional indirectly)
-  "Return the list of windows that window W is a transient for."
-  (filter-windows (lambda (x)
-		    (and (window-mapped-p x)
-			 ((if indirectly
-			      indirect-transient-of-p
-			    transient-of-p) w x)))))
-
-(defun transient-group (w &optional by-depth)
-  "Return the list of windows which is either a transient window for window W,
-or a window which W is a transient for. This always includes W. The `transient
-window for' relation holds for windows which are direct or indirect transients
-of the parent window in question."
-  (delete-if-not (lambda (x)
-		   (and (window-mapped-p x)
-			(or (eq x w)
-			    (indirect-transient-of-p x w)
-			    (indirect-transient-of-p w x))))
-		 (if by-depth (stacking-order) (managed-windows))))
-
-(defun map-transient-group (fun w)
-  "Map the single argument function FUN over all windows in the same transient
-group as window W."
-  (mapc fun (transient-group w)))
+  (defcustom decorate-transients nil
+    "Decorate dialog windows similarly to application windows."
+    :type boolean
+    :group appearance
+    :after-set after-setting-frame-option)
 
 
-;; commands for raising windows with their transients
+;;; functions
 
-(defun raise-window-and-transients (w)
-  "Raise the current window to its highest allowed position in the stacking
+  (define (transient-of-p x y)
+    "Return t if window X is directly a transient for window Y."
+    (let ((x-for (window-transient-p x)))
+      (and x-for
+	   (or (eql x-for (window-id y))
+	       ;; windows that set WM_TRANSIENT_FOR to the root window are
+	       ;; transients for their entire group (de facto standard)
+	       (and (eql x-for (root-window-id))
+		    (window-group-id x)
+		    (eql (window-group-id x) (window-group-id y)))))))
+
+  (define (indirect-transient-of-p x y)
+    "Return t if window X is (directly, or indirectly) a transient for window Y."
+    (or (transient-of-p x y)
+	(let ((x-for (window-transient-p x)))
+	  (and x-for
+	       (let ((x-for-w (get-window-by-id x-for)))
+		 (if x-for-w
+		     (indirect-transient-of-p x-for-w y)
+		   nil))))))
+
+  (define (transient-parents w &optional indirectly)
+    "Return the list of windows that window W is a transient for."
+    (filter-windows (lambda (x)
+		      (and (window-mapped-p x)
+			   ((if indirectly
+				indirect-transient-of-p
+			      transient-of-p) w x)))))
+
+  (define (transient-group w &optional by-depth)
+    "Return the list of windows which is either a transient window for window
+W, or a window which W is a transient for. This always includes W. The
+`transient window for' relation holds for windows which are direct or
+indirect transients of the parent window in question."
+    (delete-if-not (lambda (x)
+		     (and (window-mapped-p x)
+			  (or (eq x w)
+			      (indirect-transient-of-p x w)
+			      (indirect-transient-of-p w x))))
+		   (if by-depth (stacking-order) (managed-windows))))
+
+  (define (map-transient-group fun w)
+    "Map the single argument function FUN over all windows in the same
+transient group as window W."
+    (mapc fun (transient-group w)))
+
+
+;;; commands for raising windows with their transients
+
+  (define (raise-window-and-transients w)
+    "Raise the current window to its highest allowed position in the stacking
 order. Also raise any transient windows that it has."
-  (interactive "%W")
-  (raise-windows w (transient-group w t)))
+    (raise-windows w (transient-group w t)))
 
-(defun lower-window-and-transients (w)
-  "Lower the current window to its lowest allowed position in the stacking
+  (define (lower-window-and-transients w)
+    "Lower the current window to its lowest allowed position in the stacking
 order. Also lower any transient windows that it has."
-  (interactive "%W")
-  (lower-windows w (transient-group w t)))
+    (lower-windows w (transient-group w t)))
 
-(defun raise-lower-window-and-transients (w)
-  "If the window is at its highest possible position, then lower it to its
+  (define (raise-lower-window-and-transients w)
+    "If the window is at its highest possible position, then lower it to its
 lowest possible position. Otherwise raise it as far as allowed. Also changes
 the level of any transient windows it has."
-  (interactive "%W")
-  (raise-lower-windows w (transient-group w t)))
+    (raise-lower-windows w (transient-group w t)))
+
+  (define-command 'raise-window-and-transients
+    raise-window-and-transients "%W")
+  (define-command 'lower-window-and-transients
+    lower-window-and-transients "%W")
+  (define-command 'raise-lower-window-and-transients
+    raise-lower-window-and-transients "%W")
 
 
-;; displaying
+;;; displaying
 
-(defun transient-frame-type (w type)
-  (if (and decorate-transients (window-transient-p w))
-      (case type
-	((transient) 'default)
-	((shaped-transient) 'shaped)
-	(t type))
+  (define (transient-frame-type w type)
+    (if (and decorate-transients (window-transient-p w))
+	(case type
+	  ((transient) 'default)
+	  ((shaped-transient) 'shaped)
+	  (t type))
       type))
 
-(define-frame-type-mapper transient-frame-type)
+  (define-frame-type-mapper transient-frame-type)
 
 
-;; hooks
+;;; hooks
 
-(defun transient-map-window (w)
-  (let
-      ((set-focus nil))
-    (when (window-transient-p w)
-      (let
-	  ((parent (get-window-by-id (window-transient-p w))))
-	(when parent
-	  (when (and transients-get-focus
-		     (eq (input-focus) parent)
-		     (window-really-wants-input-p w)
-		     (window-visible-p w))
-	    (set-input-focus w)
-	    (setq set-focus t)))))
-    (when (and (not set-focus)
-	       (or (and focus-windows-when-mapped
-			(not (window-get w 'never-focus)))
-		   (window-get w 'focus-when-mapped))
-	       (window-really-wants-input-p w)
-	       (window-visible-p w))
-      (set-input-focus w))))
+  (define (transient-map-window w)
+    (let ((set-focus nil))
+      (when (window-transient-p w)
+	(let ((parent (get-window-by-id (window-transient-p w))))
+	  (when parent
+	    (when (and transients-get-focus
+		       (eq (input-focus) parent)
+		       (window-really-wants-input-p w)
+		       (window-visible-p w))
+	      (set-input-focus w)
+	      (setq set-focus t)))))
+      (when (and (not set-focus)
+		 (or (and focus-windows-when-mapped
+			  (not (window-get w 'never-focus)))
+		     (window-get w 'focus-when-mapped))
+		 (window-really-wants-input-p w)
+		 (window-visible-p w))
+	(set-input-focus w))))
 
-;; If a transient window gets unmapped that currently has the input
-;; focus, pass it (the focus) to its parent. Otherwise, pass the focus
-;; to the topmost window if click-to-focus, otherwise the window under
-;; the mouse
-(defun transient-unmap-window (w)
-  (when (eq (input-focus) w)
-    (let
-	((parent (and (window-transient-p w)
-		      (get-window-by-id (window-transient-p w)))))
-      (when (or (not parent)
-		(not (window-mapped-p parent))
-		(not (window-visible-p parent))
-		(window-outside-viewport-p parent)
-		(not (window-really-wants-input-p parent)))
-	;; if no parent, choose the topmost window (if in click-to-focus
-	;; mode) or the window under the pointer otherwise
-	(if (eq focus-mode 'click)
-	    (setq parent nil)
-	  (setq parent (query-pointer-window)))
-	(unless (or parent (eq focus-mode 'enter-exit))
-	  (setq parent (window-order-most-recent))))
-      (when (or (null parent) (window-really-wants-input-p parent))
-	(set-input-focus parent)))))
+  ;; If a transient window gets unmapped that currently has the input
+  ;; focus, pass it (the focus) to its parent. Otherwise, pass the focus
+  ;; to the topmost window if click-to-focus, otherwise the window under
+  ;; the mouse
+  (define (transient-unmap-window w)
+    (when (eq (input-focus) w)
+      (let ((parent (and (window-transient-p w)
+			 (get-window-by-id (window-transient-p w)))))
+	(when (or (not parent)
+		  (not (window-mapped-p parent))
+		  (not (window-visible-p parent))
+		  (window-outside-viewport-p parent)
+		  (not (window-really-wants-input-p parent)))
+	  ;; if no parent, choose the topmost window (if in click-to-focus
+	  ;; mode) or the window under the pointer otherwise
+	  (if (eq focus-mode 'click)
+	      (setq parent nil)
+	    (setq parent (query-pointer-window)))
+	  (unless (or parent (eq focus-mode 'enter-exit))
+	    (setq parent (window-order-most-recent))))
+	(when (or (null parent) (window-really-wants-input-p parent))
+	  (set-input-focus parent)))))
 
-(add-hook 'map-notify-hook transient-map-window)
-(add-hook 'unmap-notify-hook transient-unmap-window)
-(add-hook 'iconify-window-hook transient-unmap-window)
+  (add-hook 'map-notify-hook transient-map-window)
+  (add-hook 'unmap-notify-hook transient-unmap-window)
+  (add-hook 'iconify-window-hook transient-unmap-window))

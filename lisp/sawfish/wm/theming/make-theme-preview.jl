@@ -19,37 +19,41 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'make-theme)
-(provide 'make-theme-preview)
+(define-structure sawfish.wm.theming.make-theme-preview
 
-(defvar make-theme-preview-window nil)
-(defvar make-theme-preview-type 'default)
-(defvar make-theme-preview-theme nil)
+    (export make-theme-preview)
 
-(add-hook 'before-add-window-hook
-	  (lambda (w)
-	    (let
-		((class (get-x-text-property w 'WM_CLASS)))
-	      (when (and (>= (length class) 2)
-			 (string= (aref class 1) "SawfishThemer")
-			 (string= (aref class 0) "preview"))
-		(setq make-theme-preview-window w)
-		(when make-theme-preview-theme
-		  (set-window-frame
-		   w (make-theme-preview-theme w make-theme-preview-type)))))))
+    (open rep
+	  sawfish.wm.windows
+	  sawfish.wm.misc
+	  sawfish.wm.theming.make-theme
+	  sawfish.wm.frames)
 
-(add-hook 'destroy-notify-hook
-	  (lambda (w)
-	    (when (eq w make-theme-preview-window)
-	      (setq make-theme-preview-window nil))))
+  (define preview-window nil)
+  (define preview-type 'default)
+  (define preview-theme nil)
 
-(defun make-theme-preview (patterns frames mappings &optional type)
-  (let
-      ((theme (make-theme patterns frames mappings)))
-    (setq make-theme-preview-theme theme)
-    (when type
-      (setq make-theme-preview-type type))
-    (when make-theme-preview-window
-      (set-window-frame make-theme-preview-window
-			(theme make-theme-preview-window
-			       make-theme-preview-type)))))
+  (add-hook 'before-add-window-hook
+	    (lambda (w)
+	      (let
+		  ((class (get-x-text-property w 'WM_CLASS)))
+		(when (and (>= (length class) 2)
+			   (string= (aref class 1) "SawfishThemer")
+			   (string= (aref class 0) "preview"))
+		  (setq preview-window w)
+		  (when preview-theme
+		    (set-window-frame w (preview-theme w preview-type)))))))
+
+  (add-hook 'destroy-notify-hook
+	    (lambda (w)
+	      (when (eq w preview-window)
+		(setq preview-window nil))))
+
+  (defun make-theme-preview (patterns frames mappings &optional type)
+    (let ((theme (make-theme patterns frames mappings)))
+      (setq preview-theme theme)
+      (when type
+	(setq preview-type type))
+      (when preview-window
+	(set-window-frame preview-window
+			  (theme preview-window preview-type))))))

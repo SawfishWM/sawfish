@@ -22,42 +22,53 @@
 ;; originally by Julian Missig <julian@linuxpower.org> (X-ViRGE), with
 ;; some extra hacking/renaming
 
-;;;###autoload
-(defun make-window-ignored (w)
-  "Ignore the window."
-  (interactive "%W")
-  (unless (window-get w 'ignored)
-    (set-window-frame w nil-frame)
-    (window-put w 'current-frame-style nil)
-    (window-put w 'ignored t)
-    (call-window-hook 'window-state-change-hook w (list '(ignored)))
-    (call-hook 'workspace-state-change-hook)))
+(define-structure sawfish.wm.state.ignored
 
-;;;###autoload
-(defun make-window-not-ignored (w)
-  "Unignore the window."
-  (interactive "%W")
-  (when (window-get w 'ignored)
-    (window-put w 'ignored nil)
-    (reframe-window w)
-    (call-window-hook 'window-state-change-hook w (list '(ignored)))
-    (call-hook 'workspace-state-change-hook)))
+    (export make-window-ignored
+	    make-window-not-ignored
+	    toggle-window-ignored
+	    toggle-window-never-focus)
 
-;;;###autoload
-(defun toggle-window-ignored (w)
-  "Toggle whether a window is ignored or not."
-  (interactive "%W")
-  (if (window-get w 'ignored)
-      (make-window-not-ignored w)
-    (make-window-ignored w)))
+    (open rep
+	  sawfish.wm.windows
+	  sawfish.wm.commands
+	  sawfish.wm.util.window-order
+	  sawfish.wm.frames)
 
-;;;###autoload
-(defun toggle-window-never-focus (w)
-  "Toggle whether a window is focusable or not."
-  (interactive "%W")
-  (if (window-get w 'never-focus)
-      (window-put w 'never-focus nil)
-    (window-put w 'never-focus t))
-  (when (eq (input-focus) w)
-    (window-order-focus-most-recent))
-  (call-window-hook 'window-state-change-hook w (list '(never-focus))))
+  (define (make-window-ignored w)
+    "Ignore the window."
+    (unless (window-get w 'ignored)
+      (set-window-frame w nil-frame)
+      (window-put w 'current-frame-style nil)
+      (window-put w 'ignored t)
+      (call-window-hook 'window-state-change-hook w (list '(ignored)))
+      (call-hook 'workspace-state-change-hook)))
+
+  (define (make-window-not-ignored w)
+    "Unignore the window."
+    (when (window-get w 'ignored)
+      (window-put w 'ignored nil)
+      (reframe-window w)
+      (call-window-hook 'window-state-change-hook w (list '(ignored)))
+      (call-hook 'workspace-state-change-hook)))
+
+  (define (toggle-window-ignored w)
+    "Toggle whether a window is ignored or not."
+    (if (window-get w 'ignored)
+	(make-window-not-ignored w)
+      (make-window-ignored w)))
+
+  (define (toggle-window-never-focus w)
+    "Toggle whether a window is focusable or not."
+    (if (window-get w 'never-focus)
+	(window-put w 'never-focus nil)
+      (window-put w 'never-focus t))
+    (when (eq (input-focus) w)
+      (window-order-focus-most-recent))
+    (call-window-hook 'window-state-change-hook w (list '(never-focus))))
+
+  ;;###autoload
+  (define-command 'make-window-ignored make-window-ignored "%W")
+  (define-command 'make-window-not-ignored make-window-not-ignored "%W")
+  (define-command 'toggle-window-ignored toggle-window-ignored "%W")
+  (define-command 'toggle-window-never-focus toggle-window-never-focus "%W"))

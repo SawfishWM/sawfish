@@ -19,60 +19,61 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;; load the GNOME-wm interaction code
-(require 'gnome)
+(define-structure sawfish.wm.gnome.integration ()
 
-;; set the apps menu to the GNOME version
-(require 'gnome-menu)
+    (open rep
+	  sawfish.wm.state.gnome
+	  sawfish.wm.gnome.menus
+	  sawfish.wm.menus
+	  sawfish.wm.custom
+	  sawfish.wm.commands.help)
 
-;; delete the `Restart' and `Quit' items from the root menu
-(require 'menus)
-(let
-    ((restart (rassoc '(restart) root-menu))
-     (quit (rassoc '(quit) root-menu)))
-  (when restart
-    (setq root-menu (delq restart root-menu)))
-  (when quit
-    (setq root-menu (delq quit root-menu)))
-  (when (null (last root-menu))
-    (setq root-menu (delq (last root-menu) root-menu))))
+  (define-structure-alias gnome-int sawfish.wm.gnome.integration)
 
-;; invoke the GNOME control-center to configure sawfish
-(eval-when-compile (require 'customize))
+  (eval-when-compile (require 'sawfish.wm.commands.xterm))
+  (eval-when-compile (require 'sawfish.wm.customize))
 
-(defcustom gnome-use-capplet nil
-  "Invoke the GNOME control center from the `Customize' menu."
-  :type boolean
-  :group misc
-  :require gnome-int
-  :after-set (lambda () (gnome-use-capplet-changed)))
+  ;; delete the `Restart' and `Quit' items from the root menu
+  (let ((restart (rassoc '(restart) root-menu))
+	(quit (rassoc '(quit) root-menu)))
+    (when restart
+      (setq root-menu (delq restart root-menu)))
+    (when quit
+      (setq root-menu (delq quit root-menu)))
+    (when (null (last root-menu))
+      (setq root-menu (delq (last root-menu) root-menu))))
 
-(defun gnome-use-capplet-changed ()
-  (if gnome-use-capplet
-      (progn
-	(setq customize-program "sawfish-capplet")
-	(setq customize-group-opt "--sawfish-group")
-	(setq custom-menu-includes-all-settings nil))
-    (setq customize-program "sawfish-ui")
-    (setq customize-group-opt "--group")
-    (setq custom-menu-includes-all-settings t)))
+  ;; invoke the GNOME control-center to configure sawfish
+  (defcustom gnome-use-capplet nil
+    "Invoke the GNOME control center from the `Customize' menu."
+    :type boolean
+    :group misc
+    :require sawfish.gnome.integration
+    :after-set (lambda () (gnome-use-capplet-changed)))
 
-(gnome-use-capplet-changed)
+  (defun gnome-use-capplet-changed ()
+    (if gnome-use-capplet
+	(progn
+	  (setq customize-program "sawfish-capplet")
+	  (setq customize-group-opt "--sawfish-group")
+	  (setq custom-menu-includes-all-settings nil))
+      (setq customize-program "sawfish-ui")
+      (setq customize-group-opt "--group")
+      (setq custom-menu-includes-all-settings t)))
 
-;; invoke the GNOME terminal instead of xterm
-(unless (variable-customized-p 'xterm-program)
-  (setq xterm-program "gnome-terminal"))
+  (gnome-use-capplet-changed)
 
-;; use the GNOME help browser and url launcher
-(require 'help)
-(setq help-display-info-function help-call-info-gnome)
-(setq display-url-command "gnome-moz-remote --newwin '%s'")
+  ;; invoke the GNOME terminal instead of xterm
+  (unless (variable-customized-p 'xterm-program)
+    (setq xterm-program "gnome-terminal"))
 
-;; add some GNOME help menus
-(let ((menu (assoc (_ "_Help") root-menu)))
-  (when menu
-    (nconc menu `(()
-		  (,(_ "_GNOME Help") gnome-help-browser)
-		  (,(_ "GNOME WWW") gnome-www-page)))))
+  ;; use the GNOME help browser and url launcher
+  (setq help-display-info-function help-call-info-gnome)
+  (setq display-url-command "gnome-moz-remote --newwin '%s'")
 
-(provide 'gnome-int)
+  ;; add some GNOME help menus
+  (let ((menu (assoc (_ "_Help") root-menu)))
+    (when menu
+      (nconc menu `(()
+		    (,(_ "_GNOME Help") gnome-help-browser)
+		    (,(_ "GNOME WWW") gnome-www-page))))))

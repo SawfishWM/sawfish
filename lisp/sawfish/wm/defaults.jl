@@ -23,15 +23,17 @@
 
 ;; This file provides defaults for users without .sawmillrc files
 
+(declare (in-module sawfish.wm.user))
+
 ;; if it looks like GNOME is the desktop environment, then load the
 ;; extra GNOME integration module
 (unless batch-mode
   (catch 'out
     (mapc (lambda (prop)
 	    (when (string-match "^GNOME_" (symbol-name prop))
-	      (require 'gnome-int)
+	      (require 'sawfish.wm.gnome.integration)
 	      (throw 'out t)))
 	  (list-x-properties 'root))))
 
 ;; this is probably good for novice users?
-(require 'window-history)
+(require 'sawfish.wm.ext.window-history)

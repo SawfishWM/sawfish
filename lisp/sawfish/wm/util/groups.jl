@@ -19,8 +19,6 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'group-funs)
-
 ;; Commentary:
 
 ;; Each window may only be a member of a single group, each group is
@@ -40,131 +38,149 @@
 
 ;; See groups.jl for the commands that manipulate groups of windows
 
-(defcustom transients-are-group-members t
-  "Group transient windows with their parents."
-  :type boolean
-  :user-level expert
-  :group misc)
+(define-structure sawfish.wm.util.groups
 
-(defcustom persistent-group-ids nil
-  "List of group ids that always exist, even when they have no members."
-  :type (list string)
-  :user-level expert
-  :group misc)
+    (export window-actual-group-id
+	    windows-by-group
+	    windows-in-group
+	    map-window-group
+	    map-other-window-groups
+	    window-group-ids
+	    add-window-to-group
+	    add-window-to-new-group
+	    window-group-menu)
 
-(defun window-actual-group-id (w)
-  "Return the id of the group that window W is a member of."
-  (let
-      (tem)
-    (or (window-get w 'group)
-	(window-group-id w)
-	(and transients-are-group-members
-	     (window-transient-p w)
-	     (setq tem (get-window-by-id (window-transient-p w)))
-	     (or (window-get tem 'group) (window-group-id tem)))
-	(window-id w))))
+    (open rep
+	  sawfish.wm.misc
+	  sawfish.wm.events
+	  sawfish.wm.windows
+	  sawfish.wm.custom
+	  sawfish.wm.gaol)
 
-(defun windows-by-group (group-id &optional by-depth)
-  "Return the list of windows in the group with id GROUP-ID. If BY-DEPTH is
+  (define-structure-alias group-funs sawfish.wm.util.groups)
+
+  (defcustom transients-are-group-members t
+    "Group transient windows with their parents."
+    :type boolean
+    :user-level expert
+    :group misc)
+
+  (defcustom persistent-group-ids nil
+    "List of group ids that always exist, even when they have no members."
+    :type (list string)
+    :user-level expert
+    :group misc)
+
+  (define (window-actual-group-id w)
+    "Return the id of the group that window W is a member of."
+    (let (tem)
+      (or (window-get w 'group)
+	  (window-group-id w)
+	  (and transients-are-group-members
+	       (window-transient-p w)
+	       (setq tem (get-window-by-id (window-transient-p w)))
+	       (or (window-get tem 'group) (window-group-id tem)))
+	  (window-id w))))
+
+  (define (windows-by-group group-id &optional by-depth)
+    "Return the list of windows in the group with id GROUP-ID. If BY-DEPTH is
 non-nil, then return the windows in order of stacking, from topmost to
 bottommost."
-  (delete-if-not (lambda (x)
-		   (eq (window-actual-group-id x) group-id))
-		 (if by-depth (stacking-order) (managed-windows))))
+    (delete-if-not (lambda (x)
+		     (eq (window-actual-group-id x) group-id))
+		   (if by-depth (stacking-order) (managed-windows))))
 
-(defun windows-in-group (w &optional by-depth)
-  "Return the list of windows in the same group as window W."
-  (windows-by-group (window-actual-group-id w) by-depth))
+  (define (windows-in-group w &optional by-depth)
+    "Return the list of windows in the same group as window W."
+    (windows-by-group (window-actual-group-id w) by-depth))
 
-(defun map-window-group (fun w)
-  "Map the single argument function FUN over all windows in the same group as
+  (define (map-window-group fun w)
+    "Map the single argument function FUN over all windows in the same group as
 window W."
-  (mapc fun (windows-in-group w)))
+    (mapc fun (windows-in-group w)))
 
-(defun map-other-window-groups (fun w)
-  "Map the single argument function FUN over all windows not in the same group
-as window W."
-  (let
-      ((group (windows-in-group w)))
-    (map-windows (lambda (x)
-		   (unless (memq x group)
-		     (fun x))))))
+  (define (map-other-window-groups fun w)
+    "Map the single argument function FUN over all windows not in the same
+group as window W."
+    (let ((group (windows-in-group w)))
+      (map-windows (lambda (x)
+		     (unless (memq x group)
+		       (fun x))))))
 
-(defun window-group-ids ()
-  "Return the list of all group ids."
-  (let
-      ((ids (copy-sequence persistent-group-ids))
-       id)
-    (map-windows (lambda (w)
-		   (setq id (window-actual-group-id w))
-		   (unless (memq id ids)
-		     (setq ids (cons id ids)))))
-    ids))
+  (define (window-group-ids)
+    "Return the list of all group ids."
+    (let ((ids (copy-sequence persistent-group-ids))
+	  id)
+      (map-windows (lambda (w)
+		     (setq id (window-actual-group-id w))
+		     (unless (memq id ids)
+		       (setq ids (cons id ids)))))
+      ids))
 
-(defun add-window-to-group (w group-id)
-  "Put window W in group with id GROUP-ID; returns GROUP-ID."
-  (window-put w 'group group-id))
+  (define (add-window-to-group w group-id)
+    "Put window W in group with id GROUP-ID; returns GROUP-ID."
+    (window-put w 'group group-id))
 
-(defun add-window-to-new-group (w)
-  "Add window W to a new group (i.e. has W as its sole member); returns the id
-of the new group."
-  (let
-      ((ids (window-group-ids))
-       (i -1))
-    (while (memq i ids)
-      (setq i (1- i)))
-    (add-window-to-group w i)))
+  (define (add-window-to-new-group w)
+    "Add window W to a new group (i.e. has W as its sole member); returns the
+id of the new group."
+    (let ((ids (window-group-ids))
+	  (i -1))
+      (while (memq i ids)
+	(setq i (1- i)))
+      (add-window-to-group w i)))
 
 
-;; menu constructor
+;;; menu constructor
 
-(defun window-group-menu (&optional w)
-  (unless w
-    (setq w (or (current-event-window) (input-focus))))
-  (let
-      ((group-id (window-actual-group-id w))
-       (group-names (mapcar (lambda (x)
-			      (cons (window-actual-group-id x)
-				    (window-name x)))
-			    (managed-windows)))
-       (group-ids (window-group-ids))
-       menus)
-    (setq group-ids (cons group-id (delq group-id group-ids)))
-    (setq menus (mapcar (lambda (id)
-			  (let
-			      ((name (if (symbolp id)
-					 (symbol-name id)
-				       (cdr (assq id group-names)))))
-			    (when (> (length name) 20)
-			      (setq name (concat
-					  (substring name 0 20) "...")))
-			    (when (eq id group-id)
-			      (setq name (concat name " *")))
-			    (list name
-				  `(add-window-to-group
-				    (get-window-by-id
-				     ,(window-id w)) ',id))))
-			group-ids))
-    (rplacd menus (cons '() (cdr menus)))
-    `(,@menus
-      ()
-      (,(_ "New group") (add-window-to-new-group
-			 (get-window-by-id ,(window-id w)))))))
+  (define (window-group-menu &optional w)
+    (unless w
+      (setq w (or (current-event-window) (input-focus))))
+    (let ((group-id (window-actual-group-id w))
+	  (group-names (mapcar (lambda (x)
+				 (cons (window-actual-group-id x)
+				       (window-name x)))
+			       (managed-windows)))
+	  (group-ids (window-group-ids))
+	  menus)
+      (setq group-ids (cons group-id (delq group-id group-ids)))
+      (setq menus (mapcar (lambda (id)
+			    (let ((name (if (symbolp id)
+					    (symbol-name id)
+					  (cdr (assq id group-names)))))
+			      (when (> (length name) 20)
+				(setq name (concat
+					    (substring name 0 20) "...")))
+			      (when (eq id group-id)
+				(setq name (concat name " *")))
+			      (list name
+				    `(add-window-to-group
+				      (get-window-by-id
+				       ,(window-id w)) ',id))))
+			  group-ids))
+      (rplacd menus (cons '() (cdr menus)))
+      `(,@menus
+        ()
+        (,(_ "New group") (add-window-to-new-group
+			   (get-window-by-id ,(window-id w)))))))
 
 
-;; session management -- only save group-ids that are _symbols_
+;;; session management -- only save group-ids that are _symbols_
 
-(defun group-saved-state (w)
-  (let
-      ((group-id (window-get w 'group)))
-    (when (and group-id (symbolp group-id))
-      `((group . ,group-id)))))
+  (define (group-saved-state w)
+    (let ((group-id (window-get w 'group)))
+      (when (and group-id (symbolp group-id))
+	`((group . ,group-id)))))
 
-(defun group-load-state (w alist)
-  (let
-      ((group-id (cdr (assq 'group alist))))
-    (when group-id
-      (add-window-to-group w group-id))))
+  (define (group-load-state w alist)
+    (let ((group-id (cdr (assq 'group alist))))
+      (when group-id
+	(add-window-to-group w group-id))))
 
-(add-hook 'sm-window-save-functions group-saved-state)
-(add-hook 'sm-restore-window-hook group-load-state)
+  (add-hook 'sm-window-save-functions group-saved-state)
+  (add-hook 'sm-restore-window-hook group-load-state)
+
+;;; gaol init
+
+  (gaol-add window-actual-group-id windows-by-group windows-in-group
+	    map-window-group window-group-ids))

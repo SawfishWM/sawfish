@@ -19,69 +19,80 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'slide-window)
+(define-structure sawfish.wm.commands.slide-window
 
-(defcustom slide-window-increment 16
-  "Number of pixels to move window in `slide-' commands."
-  :group misc
-  :type (number 1)
-  :user-level expert)
+    (export slide-window
+	    slide-window-left
+	    slide-window-right
+	    slide-window-up
+	    slide-window-down
+	    slide-group-left
+	    slide-group-right
+	    slide-group-up
+	    slide-group-down)
 
-(defun slide-window (w right down)
-  (unless (window-get w 'fixed-position)
-    (let ((coords (window-position w)))
-      (move-window-to w (+ (car coords) right) (+ (cdr coords) down)))))
+    (open rep
+	  sawfish.wm.windows
+	  sawfish.wm.custom
+	  sawfish.wm.commands
+	  sawfish.wm.util.groups)
 
-
-;; window commands
+  (defcustom slide-window-increment 16
+    "Number of pixels to move window in `slide-' commands."
+    :group misc
+    :type (number 1)
+    :user-level expert)
 
-;;;###autoload
-(defun slide-window-left (w)
-  "Move the window `slide-window-increment' pixels to the left."
-  (interactive "%W")
-  (slide-window w (- slide-window-increment) 0))
+  (define (slide-window w right down)
+    (unless (window-get w 'fixed-position)
+      (let ((coords (window-position w)))
+	(move-window-to w (+ (car coords) right) (+ (cdr coords) down)))))
 
-;;;###autoload
-(defun slide-window-right (w)
-  "Move the window `slide-window-increment' pixels to the right."
-  (interactive "%W")
-  (slide-window w slide-window-increment 0))
+;;; window commands
 
-;;;###autoload
-(defun slide-window-up (w)
-  "Move the window `slide-window-increment' pixels upwards."
-  (interactive "%W")
-  (slide-window w 0 (- slide-window-increment)))
+  (define (slide-window-left w)
+    "Move the window `slide-window-increment' pixels to the left."
+    (slide-window w (- slide-window-increment) 0))
 
-;;;###autoload
-(defun slide-window-down (w)
-  "Move the window `slide-window-increment' pixels downwards."
-  (interactive "%W")
-  (slide-window w 0 slide-window-increment))
+  (define (slide-window-right w)
+    "Move the window `slide-window-increment' pixels to the right."
+    (slide-window w slide-window-increment 0))
+
+  (define (slide-window-up w)
+    "Move the window `slide-window-increment' pixels upwards."
+    (slide-window w 0 (- slide-window-increment)))
+
+  (define (slide-window-down w)
+    "Move the window `slide-window-increment' pixels downwards."
+    (slide-window w 0 slide-window-increment))
+
+  ;;###autoload
+  (define-command 'slide-window-left slide-window-left "%W")
+  (define-command 'slide-window-right slide-window-right "%W")
+  (define-command 'slide-window-up slide-window-up "%W")
+  (define-command 'slide-window-down slide-window-down "%W")
 
 
 ;; group commands
 
-;;;###autoload
-(defun slide-group-left (w)
-  "Move the window group `slide-window-increment' pixels to the left."
-  (interactive "%W")
-  (map-window-group slide-window-left w))
+  (define (slide-group-left w)
+    "Move the window group `slide-window-increment' pixels to the left."
+    (map-window-group slide-window-left w))
 
-;;;###autoload
-(defun slide-group-right (w)
-  "Move the window group `slide-window-increment' pixels to the right."
-  (interactive "%W")
-  (map-window-group slide-window-right w))
+  (define (slide-group-right w)
+    "Move the window group `slide-window-increment' pixels to the right."
+    (map-window-group slide-window-right w))
 
-;;;###autoload
-(defun slide-group-up (w)
-  "Move the window group `slide-window-increment' pixels upwards."
-  (interactive "%W")
-  (map-window-group slide-window-up w))
+  (define (slide-group-up w)
+    "Move the window group `slide-window-increment' pixels upwards."
+    (map-window-group slide-window-up w))
 
-;;;###autoload
-(defun slide-group-down (w)
-  "Move the window group `slide-window-increment' pixels downwards."
-  (interactive "%W")
-  (map-window-group slide-window-down w))
+  (define (slide-group-down w)
+    "Move the window group `slide-window-increment' pixels downwards."
+    (map-window-group slide-window-down w))
+
+  ;;###autoload
+  (define-command 'slide-group-left slide-group-left "%W")
+  (define-command 'slide-group-right slide-group-right "%W")
+  (define-command 'slide-group-up slide-group-up "%W")
+  (define-command 'slide-group-down slide-group-down "%W"))

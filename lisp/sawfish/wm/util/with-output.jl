@@ -19,40 +19,34 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;;;###autoload
-(defun call-with-output-to-screen (thunk)
-  "Call the zero-parameter function THUNK with the `standard-output'
+(define-structure sawfish.wm.util.with-output
+
+    (export call-with-output-to-screen
+	    with-output-to-screen)
+
+    (open rep
+	  sawfish.wm.misc)
+
+  (define-structure-alias with-output sawfish.wm.util.with-output)
+
+  (define (call-with-output-to-screen thunk)
+    "Call the zero-parameter function THUNK with the `standard-output'
 stream bound so that output is collected. After THUNK returns, the
 emitted text will be display on the screen."
-  (let
-      ((standard-output (make-string-output-stream)))
-    (unwind-protect
-	(thunk)
-      (let
-	  ((out (get-output-stream-string standard-output)))
-	(unless (string= out "")
-	  ;; display-message doesn't grok TAB characters,
-	  ;; this is grossly inefficient; wtf..
-	  (while (string-match "\t" out)
-	    (setq out (concat (substring out 0 (match-start))
-			      ?  (substring out (match-end)))))
-	  (display-message out))))))
 
-;;;###autoload
-(defun call-command-with-output-to-screen (command)
-  "Prompt for a command, execute it, and print any output to the screen."
-  (interactive "CCommand:")
-  (call-with-output-to-screen (lambda () (call-command command))))
+    (let ((standard-output (make-string-output-stream)))
+      (unwind-protect
+	  (thunk)
+	(let ((out (get-output-stream-string standard-output)))
+	  (unless (string= out "")
+	    ;; display-message doesn't grok TAB characters,
+	    ;; this is grossly inefficient; wtf..
+	    (while (string-match "\t" out)
+	      (setq out (concat (substring out 0 (match-start))
+				#\space (substring out (match-end)))))
+	    (display-message out))))))
 
-;;;###autoload
-(defmacro with-output-to-screen (&rest forms)
-  "Evaluate FORMS. Any data they print to standard-output will be
+  (defmacro with-output-to-screen (&rest forms)
+    "Evaluate FORMS. Any data they print to standard-output will be
 displayed on the screen after they return."
-  `(call-with-output-to-screen (lambda () ,@forms)))
-
-;;;###autoload
-(defmacro define-command-to-screen (new old spec)
-  `(defun ,new args
-     (interactive ,@(and spec (list spec)))
-     (with-output-to-screen
-      (apply ,old args))))
+    `(call-with-output-to-screen (lambda () ,@forms))))

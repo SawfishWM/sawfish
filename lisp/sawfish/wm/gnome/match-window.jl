@@ -19,24 +19,27 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'match-window)
-(provide 'gnome-match)
+(define-structure sawfish.wm.gnome.match-window ()
 
-;; Originally from Ben Liblit <liblit@cs.berkeley.edu>
+    (open rep
+	  sawfish.wm.ext.match-window
+	  sawfish.wm.commands)
 
-(define-match-window-property 'skip-tasklist 'other 'boolean)
-(define-match-window-property 'skip-winlist 'other 'boolean)
+  (define-structure-alias gnome-match sawfish.wm.gnome.match-window)
 
-(define-match-window-setter 'skip-tasklist
- (lambda (window property value)
-   ((if value
-	gnome-set-skip-tasklist
-      gnome-clear-skip-tasklist)
-    window)))
+  ;; Originally from Ben Liblit <liblit@cs.berkeley.edu>
 
-(define-match-window-setter 'skip-winlist
- (lambda (window property value)
-   ((if value
-	gnome-set-skip-winlist
-      gnome-clear-skip-winlist)
-    window)))
+  (define-match-window-property 'skip-tasklist 'other 'boolean)
+  (define-match-window-property 'skip-winlist 'other 'boolean)
+
+  (define-match-window-setter 'skip-tasklist
+    (lambda (window property value)
+      (apply-command (if value
+			 'gnome-set-skip-tasklist
+		       'gnome-clear-skip-tasklist) (list window))))
+
+  (define-match-window-setter 'skip-winlist
+    (lambda (window property value)
+      (apply-command (if value
+			 'gnome-set-skip-winlist
+		       'gnome-clear-skip-winlist) (list window)))))

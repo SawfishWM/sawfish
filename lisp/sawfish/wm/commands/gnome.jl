@@ -19,92 +19,106 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'gnome)
+(define-structure sawfish.wm.commands.gnome
 
-(defun gnome-set-hint (w bit)
-  (let
-      ((hints (get-x-property w '_WIN_HINTS)))
-    (if hints
-	(setq hints (aref (nth 2 hints) 0))
-      (setq hints 0))
-    (setq hints (logior bit hints))
-    (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
+    (export gnome-set-hint
+	    gnome-clear-hint
+	    gnome-toggle-hint
+	    gnome-toggle-skip-winlist
+	    gnome-set-skip-winlist
+	    gnome-clear-skip-winlist
+	    gnome-toggle-skip-tasklist
+	    gnome-set-skip-tasklist
+	    gnome-clear-skip-tasklist
+	    gnome-logout
+	    gnome-www-page
+	    gnome-help-browser)
 
-(defun gnome-clear-hint (w bit)
-  (let
-      ((hints (get-x-property w '_WIN_HINTS)))
-    (if hints
-	(setq hints (aref (nth 2 hints) 0))
-      (setq hints 0))
-    (setq hints (logand (lognot bit) hints))
-    (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
+    (open rep
+	  sawfish.wm.misc
+	  sawfish.wm.state.gnome
+	  sawfish.wm.commands)
 
-(defun gnome-toggle-hint (w bit)
-  (let
-      ((hints (get-x-property w '_WIN_HINTS)))
-    (if hints
-	(setq hints (aref (nth 2 hints) 0))
-      (setq hints 0))
-    (setq hints (logxor bit hints))
-    (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
+  (define-structure-alias gnome-commands sawfish.wm.commands.gnome)
+
+  (define (gnome-set-hint w bit)
+    (let ((hints (get-x-property w '_WIN_HINTS)))
+      (if hints
+	  (setq hints (aref (nth 2 hints) 0))
+	(setq hints 0))
+      (setq hints (logior bit hints))
+      (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
+
+  (define (gnome-clear-hint w bit)
+    (let ((hints (get-x-property w '_WIN_HINTS)))
+      (if hints
+	  (setq hints (aref (nth 2 hints) 0))
+	(setq hints 0))
+      (setq hints (logand (lognot bit) hints))
+      (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
+
+  (define (gnome-toggle-hint w bit)
+    (let ((hints (get-x-property w '_WIN_HINTS)))
+      (if hints
+	  (setq hints (aref (nth 2 hints) 0))
+	(setq hints 0))
+      (setq hints (logxor bit hints))
+      (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
 
 
-;; commands
+;;; commands
 
-;;;###autoload
-(defun gnome-toggle-skip-winlist (w)
-  "Toggle the GNOME SKIP_WINLIST hint of the window."
-  (interactive "%W")
-  (gnome-toggle-hint w WIN_HINTS_SKIP_WINLIST))
+  (define (gnome-toggle-skip-winlist w)
+    "Toggle the GNOME SKIP_WINLIST hint of the window."
+    (gnome-toggle-hint w WIN_HINTS_SKIP_WINLIST))
 
-;;;###autoload
-(defun gnome-set-skip-winlist (w)
-  "Set the GNOME SKIP_WINLIST hint of the window."
-  (interactive "%W")
-  (gnome-set-hint w WIN_HINTS_SKIP_WINLIST))
+  (define (gnome-set-skip-winlist w)
+    "Set the GNOME SKIP_WINLIST hint of the window."
+    (gnome-set-hint w WIN_HINTS_SKIP_WINLIST))
 
-;;;###autoload
-(defun gnome-clear-skip-winlist (w)
-  "Unset the GNOME SKIP_WINLIST hint of the window."
-  (interactive "%W")
-  (gnome-clear-hint w WIN_HINTS_SKIP_WINLIST))
+  (define (gnome-clear-skip-winlist w)
+    "Unset the GNOME SKIP_WINLIST hint of the window."
+    (gnome-clear-hint w WIN_HINTS_SKIP_WINLIST))
 
-;;;###autoload
-(defun gnome-toggle-skip-tasklist (w)
-  "Toggle the GNOME SKIP_TASKLIST hint of the window."
-  (interactive "%W")
-  (gnome-toggle-hint w WIN_HINTS_SKIP_TASKLIST))
+  ;;###autoload
+  (define-command 'gnome-toggle-skip-winlist gnome-toggle-skip-winlist "%W")
+  (define-command 'gnome-set-skip-winlist gnome-set-skip-winlist "%W")
+  (define-command 'gnome-clear-skip-winlist gnome-clear-skip-winlist "%W")
 
-;;;###autoload
-(defun gnome-set-skip-tasklist (w)
-  "Set the GNOME SKIP_TASKLIST hint of the window."
-  (interactive "%W")
-  (gnome-set-hint w WIN_HINTS_SKIP_TASKLIST))
+  (define (gnome-toggle-skip-tasklist w)
+    "Toggle the GNOME SKIP_TASKLIST hint of the window."
+    (gnome-toggle-hint w WIN_HINTS_SKIP_TASKLIST))
 
-;;;###autoload
-(defun gnome-clear-skip-tasklist (w)
-  "Unset the GNOME SKIP_TASKLIST hint of the window."
-  (interactive "%W")
-  (gnome-clear-hint w WIN_HINTS_SKIP_TASKLIST))
+  (define (gnome-set-skip-tasklist w)
+    "Set the GNOME SKIP_TASKLIST hint of the window."
+    (gnome-set-hint w WIN_HINTS_SKIP_TASKLIST))
+
+  (define (gnome-clear-skip-tasklist w)
+    "Unset the GNOME SKIP_TASKLIST hint of the window."
+    (gnome-clear-hint w WIN_HINTS_SKIP_TASKLIST))
+
+  ;;###autoload
+  (define-command 'gnome-toggle-skip-tasklist gnome-toggle-skip-tasklist "%W")
+  (define-command 'gnome-set-skip-tasklist gnome-set-skip-tasklist "%W")
+  (define-command 'gnome-clear-skip-tasklist gnome-clear-skip-tasklist "%W")
 
 
 ;; extras
 
-;;;###autoload
-(defun gnome-logout ()
-  "Logout from the current GNOME session."
-  (interactive)
-  (system "save-session --kill &"))
+  (define (gnome-logout)
+    "Logout from the current GNOME session."
+    (system "save-session --kill &"))
 
-;;;###autoload
-(defun gnome-www-page ()
-  (interactive)
-  "Display the WWW page of the GNOME project."
-  (require 'help)
-  (display-url "http://www.gnome.org/"))
+  (define (gnome-www-page)
+    "Display the WWW page of the GNOME project."
+    (require 'sawfish.wm.commands.help)
+    (display-url "http://www.gnome.org/"))
 
-;;;###autoload
-(defun gnome-help-browser ()
-  "Launch the GNOME help browser."
-  (interactive)
-  (system "gnome-help-browser >/dev/null 2>&1 </dev/null &"))
+  (define (gnome-help-browser)
+    "Launch the GNOME help browser."
+    (system "gnome-help-browser >/dev/null 2>&1 </dev/null &"))
+
+  ;;###autoload
+  (define-command 'gnome-logout gnome-logout)
+  (define-command 'gnome-www-page gnome-www-page)
+  (define-command 'gnome-help-browser gnome-help-browser))

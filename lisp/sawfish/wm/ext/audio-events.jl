@@ -19,118 +19,124 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'audio-events)
+;;;###autoload (defgroup audio "Sound" :require sawfish.wm.ext.audio-events)
 
-;;;###autoload (defgroup audio "Sound" :require audio-events)
+(define-structure sawfish.wm.ext.audio-events ()
 
-(defgroup audio "Sound"
-  :require audio-events)
+    (open rep
+	  sawfish.wm.custom
+	  sawfish.wm.windows
+	  sawfish.wm.state.maximize)
 
-;; XXX it would be cool to merge the customization with the GNOME sound prefs
+  (define-structure-alias audio-events sawfish.wm.ext.audio-events)
 
-(defcustom audio-events-enabled nil
-  "Play sound effects for window events."
-  :type boolean
-  :user-level novice
-  :require audio-events
-  :group audio)
+  (defgroup audio "Sound"
+    :require sawfish.wm.ext.audio-events)
 
-(defcustom audio-for-ignored-windows nil
-  "Play sound effects for unmanaged windows."
-  :type boolean
-  :depends audio-events-enabled
-  :group audio)
+  ;; XXX it would be cool to merge the customization with the GNOME sound prefs
 
-;; standard events are: iconified, uniconified, shaded, unshaded,
-;; maximized, unmaximized, mapped, unmapped, mapped-transient,
-;; unmapped-transient, switch-workspace, move-viewport, focused,
-;; unfocused
+  (defcustom audio-events-enabled nil
+    "Play sound effects for window events."
+    :type boolean
+    :user-level novice
+    :require sawfish.wm.ext.audio-events
+    :group audio)
 
-(defcustom audio-events-alist '((iconified . "slide.wav")
-				(uniconified . "slide.wav")
-				(shaded . "slide.wav")
-				(unshaded . "slide.wav")
-				(maximized . "slide.wav")
-				(unmaximized . "slide.wav")
-				(mapped . "activate.wav")
-				(unmapped . "gameover.wav")
-				(mapped-transient . "activate.wav")
-				(unmapped-transient . "toggled.wav")
-				;(focused . "clicked.wav")
-				(switch-workspace . "toggled.wav")
-				(move-viewport . "toggled.wav"))
-  "Map window events to sound files."
-  :type* `(alist ((symbol iconified uniconified
-			  shaded unshaded
-			  maximized unmaximized
-			  mapped unmapped
-			  mapped-transient unmapped-transient
-			  switch-workspace move-viewport
-			  focused unfocused) ,(_ "Event"))
-		 (file ,(_ "Sample")))
-  :user-level expert
-  :depends audio-events-enabled
-  :group audio)
+  (defcustom audio-for-ignored-windows nil
+    "Play sound effects for unmanaged windows."
+    :type boolean
+    :depends audio-events-enabled
+    :group audio)
 
-(defun audio-event-handler (event &optional w)
-  "Possibly play a sound sample for EVENT (a symbol) occurring on window W."
-  (when (and audio-events-enabled
-	     (or (null w)
-		 (not (window-get w 'ignored))
-		 audio-for-ignored-windows))
-    (let
-	((sample (cdr (assq event audio-events-alist))))
-      (when sample
-	(play-sample sample)))))
+  ;; standard events are: iconified, uniconified, shaded, unshaded,
+  ;; maximized, unmaximized, mapped, unmapped, mapped-transient,
+  ;; unmapped-transient, switch-workspace, move-viewport, focused,
+  ;; unfocused
 
-
-;; hooks
+  (defcustom audio-events-alist '((iconified . "slide.wav")
+				  (uniconified . "slide.wav")
+				  (shaded . "slide.wav")
+				  (unshaded . "slide.wav")
+				  (maximized . "slide.wav")
+				  (unmaximized . "slide.wav")
+				  (mapped . "activate.wav")
+				  (unmapped . "gameover.wav")
+				  (mapped-transient . "activate.wav")
+				  (unmapped-transient . "toggled.wav")
+				  ;(focused . "clicked.wav")
+				  (switch-workspace . "toggled.wav")
+				  (move-viewport . "toggled.wav"))
+    "Map window events to sound files."
+    :type* `(alist ((symbol iconified uniconified
+			    shaded unshaded
+			    maximized unmaximized
+			    mapped unmapped
+			    mapped-transient unmapped-transient
+			    switch-workspace move-viewport
+			    focused unfocused) ,(_ "Event"))
+		   (file ,(_ "Sample")))
+    :user-level expert
+    :depends audio-events-enabled
+    :group audio)
 
-(defun audio-state-change-fun (w states)
-  (mapc (lambda (state)
-	  (case state
-	    ((iconified)
-	     (audio-event-handler (if (window-get w 'iconified)
-				      'iconified 'uniconified) w))
-	    ((shaded)
-	     (audio-event-handler (if (window-get w 'shaded)
-				      'shaded 'unshaded) w))
+  (defun audio-event-handler (event &optional w)
+    "Possibly play a sound sample for EVENT (a symbol) occurring on window W."
+    (when (and audio-events-enabled
+	       (or (null w)
+		   (not (window-get w 'ignored))
+		   audio-for-ignored-windows))
+      (let
+	  ((sample (cdr (assq event audio-events-alist))))
+	(when sample
+	  (require 'sawfish.wm.util.play-audio)
+	  (play-sample sample)))))
 
-	    ((maximized)
-	     (audio-event-handler (if (window-maximized-p w)
-				      'maximized 'unmaximized) w)))) states))
+;;; hooks
 
-(call-after-state-changed '(iconified shaded maximized) audio-state-change-fun)
+  (defun audio-state-change-fun (w states)
+    (mapc (lambda (state)
+	    (case state
+	      ((iconified)
+	       (audio-event-handler (if (window-get w 'iconified)
+					'iconified 'uniconified) w))
+	      ((shaded)
+	       (audio-event-handler (if (window-get w 'shaded)
+					'shaded 'unshaded) w))
+	      ((maximized)
+	       (audio-event-handler (if (window-maximized-p w)
+					'maximized 'unmaximized) w)))) states))
 
-(defun audio-focus-in-fun (w)
-  (audio-event-handler 'focused w))
+  (call-after-state-changed '(iconified shaded maximized)
+			    audio-state-change-fun)
 
-(add-hook 'focus-in-hook audio-focus-in-fun)
+  (defun audio-focus-in-fun (w)
+    (audio-event-handler 'focused w))
 
-(defun audio-focus-out-fun (w)
-  (audio-event-handler 'unfocused w))
+  (add-hook 'focus-in-hook audio-focus-in-fun)
 
-(add-hook 'focus-out-hook audio-focus-out-fun)
+  (defun audio-focus-out-fun (w)
+    (audio-event-handler 'unfocused w))
 
-(defun audio-mapped-fun (w)
-  (audio-event-handler (if (window-transient-p w)
-			   'mapped-transient 'mapped) w))
+  (add-hook 'focus-out-hook audio-focus-out-fun)
 
-(add-hook 'map-notify-hook audio-mapped-fun)
+  (defun audio-mapped-fun (w)
+    (audio-event-handler (if (window-transient-p w)
+			     'mapped-transient 'mapped) w))
 
-(defun audio-unmapped-fun (w)
-  (audio-event-handler (if (window-transient-p w)
-			   'unmapped-transient 'unmapped) w))
+  (add-hook 'map-notify-hook audio-mapped-fun)
 
-(add-hook 'unmap-notify-hook audio-unmapped-fun)
+  (defun audio-unmapped-fun (w)
+    (audio-event-handler (if (window-transient-p w)
+			     'unmapped-transient 'unmapped) w))
 
-(defun audio-enter-ws-fun ()
-  (audio-event-handler 'switch-workspace))
+  (add-hook 'unmap-notify-hook audio-unmapped-fun)
 
-(add-hook 'enter-workspace-hook audio-enter-ws-fun)
+  (defun audio-enter-ws-fun ()
+    (audio-event-handler 'switch-workspace))
 
-(defun audio-move-vp-fun ()
-  (audio-event-handler 'move-viewport))
+  (add-hook 'enter-workspace-hook audio-enter-ws-fun)
 
-(add-hook 'viewport-moved-hook audio-move-vp-fun)
+  (defun audio-move-vp-fun ()
+    (audio-event-handler 'move-viewport))
 
+  (add-hook 'viewport-moved-hook audio-move-vp-fun))

@@ -19,11 +19,6 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'window-order)
-(eval-when-compile (require 'auto-raise))	;we bind to disable-auto-raise
-(eval-when-compile (require 'tooltips))		;we bind to tooltips-enabled
-(provide 'x-cycle)
-
 ;; Commentary:
 
 ;; Cycles through windows in MRU order. Whichever key is used to invoke
@@ -68,226 +63,250 @@
 ;; layers of windows this wouldn't work (selected windows may not reach
 ;; the top of the stack)
 
-
-;; customization options
+(define-structure sawfish.wm.commands.x-cycle
 
-;;;###autoload (defgroup cycle "Window Cycling" :group focus :require x-cycle)
-(defgroup cycle "Window Cycling" :group focus :require x-cycle)
+    (export cycle-windows
+	    cycle-group
+	    cycle-prefix
+	    cycle-class)
 
-(defcustom cycle-show-window-names t
-  "Display window names while cycling through windows."
-  :group (focus cycle)
-  :type boolean)
+    (open rep
+	  sawfish.wm.misc
+	  sawfish.wm.windows
+	  sawfish.wm.util.window-order
+	  sawfish.wm.commands
+	  sawfish.wm.custom
+	  sawfish.wm.workspace
+	  sawfish.wm.viewport
+	  sawfish.wm.stacking
+	  sawfish.wm.events
+	  sawfish.wm.util.decode-events
+	  sawfish.wm.util.groups
+	  sawfish.wm.util.display-window)
 
-(defcustom cycle-include-iconified t
-  "Include iconified windows when cycling."
-  :group (focus cycle)
-  :type boolean)
+  (define-structure-alias x-cycle sawfish.wm.commands.x-cycle)
 
-(defcustom cycle-all-workspaces nil
-  "Include windows on all workspaces when cycling."
-  :group (focus cycle)
-  :type boolean)
+  ;; we bind to disable-auto-raise and tooltips-enabled
+  (eval-when-compile (require 'sawfish.wm.ext.auto-raise))
+  (eval-when-compile (require 'sawfish.wm.ext.tooltips))
 
-(defcustom cycle-all-viewports nil
-  "Include windows on all viewports when cycling."
-  :group (focus cycle)
-  :type boolean)
+;;; customization options
 
-(defcustom cycle-raise-windows t
-  "Raise windows while they're temporarily selected during cycling."
-  :group (focus cycle)
-  :user-level expert
-  :type boolean)
+  ;;###autoload (defgroup cycle "Window Cycling" :group focus :require x-cycle)
+  (defgroup cycle "Window Cycling" :group focus :require x-cycle)
 
-(defcustom cycle-warp-pointer t
-  "Warp the mouse pointer to windows as they're temporarily selected."
-  :group (focus cycle)
-  :user-level expert
-  :type boolean)
+  (defcustom cycle-show-window-names t
+    "Display window names while cycling through windows."
+    :group (focus cycle)
+    :type boolean)
 
-(defcustom cycle-focus-windows t
-  "Focus windows when they're temporarily selected during cycling."
-  :group (focus cycle)
-  :user-level expert
-  :type boolean)
+  (defcustom cycle-include-iconified t
+    "Include iconified windows when cycling."
+    :group (focus cycle)
+    :type boolean)
 
-(defcustom cycle-disable-auto-raise nil
-  "Disable auto-raising while temporarily selecting windows."
-  :group (focus cycle)
-  :user-level expert
-  :type boolean)
+  (defcustom cycle-all-workspaces nil
+    "Include windows on all workspaces when cycling."
+    :group (focus cycle)
+    :type boolean)
+
+  (defcustom cycle-all-viewports nil
+    "Include windows on all viewports when cycling."
+    :group (focus cycle)
+    :type boolean)
+
+  (defcustom cycle-raise-windows t
+    "Raise windows while they're temporarily selected during cycling."
+    :group (focus cycle)
+    :user-level expert
+    :type boolean)
+
+  (defcustom cycle-warp-pointer t
+    "Warp the mouse pointer to windows as they're temporarily selected."
+    :group (focus cycle)
+    :user-level expert
+    :type boolean)
+
+  (defcustom cycle-focus-windows t
+    "Focus windows when they're temporarily selected during cycling."
+    :group (focus cycle)
+    :user-level expert
+    :type boolean)
+
+  (defcustom cycle-disable-auto-raise nil
+    "Disable auto-raising while temporarily selecting windows."
+    :group (focus cycle)
+    :user-level expert
+    :type boolean)
 
 
 ;; variables
 
-(defvar x-cycle-current nil)
-(defvar x-cycle-stacking nil)
-(defvar x-cycle-windows t)
-(defvar x-cycle-grab-win nil)
+  (define x-cycle-current (make-fluid))
+  (define x-cycle-stacking (make-fluid))
+  (define x-cycle-windows (make-fluid))
 
 
-;; code
+;;; code
 
-;;;###autoload
-(defun cycle-windows (event)
-  "Cycle through all windows in order of recent selections."
-  (interactive "e")
-  (let ((tail-command nil))
-    (let*
-	((decoded (decode-event event))
-	 (modifier-keys (apply append (mapcar modifier->keysyms
-					      (nth 1 decoded))))
-	 (eval-modifier-events t)
-	 (eval-key-release-events t)
-	 (override-keymap (make-keymap))
-	 (focus-dont-push t)
-	 (disable-auto-raise cycle-disable-auto-raise)
-	 (tooltips-enabled nil)
-	 (x-cycle-current nil)
-	 (x-cycle-stacking nil)
-	 (x-cycle-grab-win (input-focus))
-	 (unmap-notify-hook (cons (lambda (w)
-				    (when (eq w x-cycle-grab-win)
-				      (setq x-cycle-grab-win nil)
-				      (or (grab-keyboard nil nil t)
-					  (throw 'x-cycle-exit nil))
-				      (allow-events 'sync-keyboard)))
-				  unmap-notify-hook))
-	 (enter-workspace-hook (cons (lambda (space)
-				       (when x-cycle-grab-win
-					 (setq x-cycle-grab-win nil)
-					 (or (grab-keyboard nil nil t)
-					     (throw 'x-cycle-exit nil))
-					 (allow-events 'sync-keyboard)))
-				     enter-workspace-hook))
-	 (unbound-key-hook
-	  (list (lambda ()
-		  (let ((ev (decode-event (current-event))))
-		    (unless (memq 'release (nth 1 ev))
-		      ;; want to search the usual keymaps
-		      (setq override-keymap nil)
-		      (setq tail-command (lookup-event-binding
-					  (current-event)))
-		      (unless tail-command
-			;; no wm binding, so forward the event to
-			;; the focused window (this is why we have
-			;; to grab the keyboard synchronously)
-			(allow-events 'replay-keyboard))
-		      (throw 'x-cycle-exit nil)))))))
-
-      (unless (and (eq 'key (car decoded)) (nth 1 decoded))
-	(error "%s must be bound to a key event with modifiers." this-command))
-
-      ;; Use the event that invoked us to contruct the keymap
-      (bind-keys override-keymap event 'x-cycle-next)
-      (mapc (lambda (k)
-	      (bind-keys override-keymap
-		(encode-event `(key (release any) ,k)) 'x-cycle-exit))
-	    modifier-keys)
-
-      ;; grab synchronously, so that event replaying works
-      (when (grab-keyboard (input-focus) nil t)
-	(unwind-protect
-	    (progn
-	      (catch 'x-cycle-exit
-		;; do the first step
-		(x-cycle-next)
-		(recursive-edit))
-	      (when x-cycle-current
-		(display-window x-cycle-current)))
-	  (display-message nil)
-	  (ungrab-keyboard))))
-
-    (when tail-command
-      ;; make sure that the command operates on the newly-focused
-      ;; window, not the window that was focused when the original
-      ;; event was received
-      (current-event-window (input-focus))
-      (call-command tail-command))))
-
-;;;###autoload
-(defun cycle-group (event w)
-  "Cycle through all windows in the same group as the current window."
-  (interactive "e\n%W")
-  (let
-      ((x-cycle-windows (windows-in-group w)))
-    (cycle-windows event)))
-
-;;;###autoload
-(defun cycle-prefix (event w)
-  "Cycle through all windows whose names match the leading colon-delimited
-prefix of the current window."
-  (interactive "e\n%W")
-  (when (string-match "^([^:]+)\\s*:" (window-name w))
-    (let*
-	((prefix (expand-last-match "\\1"))
-	 (re (concat ?^ (quote-regexp prefix) "\\s*:"))
-	 (x-cycle-windows (filter-windows
-			   (lambda (x)
-			     (string-match re (window-name x))))))
-      (cycle-windows event))))
-
-;;;###autoload
-(defun cycle-class (event w)
-  "Cycle through all windows with the same class as the current window."
-  (interactive "e\n%W")
-  (let*
-      ((class (window-class w))
-       (x-cycle-windows (filter-windows (lambda (x)
-					  (equal (window-class w) class)))))
-    (cycle-windows event)))
-
-(defun x-cycle-next ()
-  (interactive)
-  (let
-      ((win (window-order (if cycle-all-workspaces
-			      nil
-			    current-workspace)
-			  cycle-include-iconified cycle-all-viewports)))
-    (unless (eq x-cycle-windows t)
+  (define (next)
+    (let ((win (window-order (if cycle-all-workspaces
+				 nil
+			       current-workspace)
+			     cycle-include-iconified cycle-all-viewports)))
+      (unless (eq (fluid x-cycle-windows) t)
+	(setq win (delete-if (lambda (w)
+			       (not (memq w (fluid x-cycle-windows)))) win)))
       (setq win (delete-if (lambda (w)
-			     (not (memq w x-cycle-windows))) win)))
-    (setq win (delete-if (lambda (w)
-			   (window-get w 'never-focus)) win))
-    (unless win
-      (throw 'x-cycle-exit t))
-    (if x-cycle-current
-	(when (or (window-get x-cycle-current 'iconified)
-		  (not (window-appears-in-workspace-p
-			x-cycle-current current-workspace)))
-	  (hide-window x-cycle-current))
-      ;; first call, push the currently focused window onto
-      ;; the top of the stack
-      (when (input-focus)
-	(setq x-cycle-current (input-focus))
-	(window-order-push x-cycle-current)
-	(setq win (cons x-cycle-current (delq x-cycle-current win)))))
-    (when x-cycle-stacking
-      (restack-windows x-cycle-stacking)
-      (setq x-cycle-stacking nil))
-    (when x-cycle-current
-      (setq win (or (cdr (memq x-cycle-current win)) win)))
-    (setq win (car win))
-    (setq x-cycle-current win)
-    (when (not (window-get win 'sticky))
-      (select-workspace (nearest-workspace-with-window win current-workspace)))
-    (move-viewport-to-window win)
-    (when (window-get win 'iconified)
-      (show-window win))
-    (when cycle-raise-windows
-      (setq x-cycle-stacking (stacking-order))
-      (raise-window win))
-    (when cycle-warp-pointer
-      (warp-cursor-to-window win))
-    (when cycle-show-window-names
-      (display-message (concat (and (window-get win 'iconified) ?[)
-			       (window-name win)
-			       (and (window-get win 'iconified) ?]))))
-    (when (and cycle-focus-windows (window-really-wants-input-p win))
-      (set-input-focus win))
-    (allow-events 'sync-keyboard)))
+			     (window-get w 'never-focus)) win))
+      (unless win
+	(throw 'x-cycle-exit t))
+      (if (fluid x-cycle-current)
+	  (when (or (window-get (fluid x-cycle-current) 'iconified)
+		    (not (window-appears-in-workspace-p
+			  (fluid x-cycle-current) current-workspace)))
+	    (hide-window (fluid x-cycle-current)))
+	;; first call, push the currently focused window onto
+	;; the top of the stack
+	(when (input-focus)
+	  (fluid-set x-cycle-current (input-focus))
+	  (window-order-push (fluid x-cycle-current))
+	  (setq win (cons (fluid x-cycle-current)
+			  (delq (fluid x-cycle-current) win)))))
+      (when (fluid x-cycle-stacking)
+	(restack-windows (fluid x-cycle-stacking))
+	(fluid-set x-cycle-stacking nil))
+      (when (fluid x-cycle-current)
+	(setq win (or (cdr (memq (fluid x-cycle-current) win)) win)))
+      (setq win (car win))
+      (fluid-set x-cycle-current win)
+      (when (not (window-get win 'sticky))
+	(select-workspace (nearest-workspace-with-window
+			   win current-workspace)))
+      (move-viewport-to-window win)
+      (when (window-get win 'iconified)
+	(show-window win))
+      (when cycle-raise-windows
+	(fluid-set x-cycle-stacking (stacking-order))
+	(raise-window win))
+      (when cycle-warp-pointer
+	(warp-cursor-to-window win))
+      (when cycle-show-window-names
+	(display-message (concat (and (window-get win 'iconified) ?[)
+				 (window-name win)
+				 (and (window-get win 'iconified) ?]))))
+      (when (and cycle-focus-windows (window-really-wants-input-p win))
+	(set-input-focus win))
+      (allow-events 'sync-keyboard)))
 
-(defun x-cycle-exit ()
-  (interactive)
-  (throw 'x-cycle-exit t))
+  (define (x-cycle-exit) (throw 'x-cycle-exit t))
+
+  (define (cycle-windows event &optional windows)
+    "Cycle through all windows in order of recent selections."
+    (let ((tail-command nil))
+      (let-fluids ((x-cycle-current nil)
+		   (x-cycle-stacking nil)
+		   (x-cycle-windows (or windows t)))
+	(let* ((decoded (decode-event event))
+	       (modifier-keys (apply append (mapcar modifier->keysyms
+						    (nth 1 decoded))))
+	       (eval-modifier-events t)
+	       (eval-key-release-events t)
+	       (override-keymap (make-keymap))
+	       (focus-dont-push t)
+	       (disable-auto-raise cycle-disable-auto-raise)
+	       (tooltips-enabled nil)
+	       (grab-win (input-focus))
+	       (unmap-notify-hook (cons (lambda (w)
+					  (when (eq w grab-win)
+					    (setq grab-win nil)
+					    (or (grab-keyboard nil nil t)
+						(throw 'x-cycle-exit nil))
+					    (allow-events 'sync-keyboard)))
+					unmap-notify-hook))
+	       (enter-workspace-hook (cons (lambda (space)
+					     (when grab-win
+					       (setq grab-win nil)
+					       (or (grab-keyboard nil nil t)
+						   (throw 'x-cycle-exit nil))
+					       (allow-events 'sync-keyboard)))
+					   enter-workspace-hook))
+	       (unbound-key-hook
+		(list (lambda ()
+			(let ((ev (decode-event (current-event))))
+			  (unless (memq 'release (nth 1 ev))
+			    ;; want to search the usual keymaps
+			    (setq override-keymap nil)
+			    (setq tail-command (lookup-event-binding
+						(current-event)))
+			    (unless tail-command
+			      ;; no wm binding, so forward the event to
+			      ;; the focused window (this is why we have
+			      ;; to grab the keyboard synchronously)
+			      (allow-events 'replay-keyboard))
+			    (throw 'x-cycle-exit nil)))))))
+
+	  (unless (and (eq 'key (car decoded)) (nth 1 decoded))
+	    (error "%s must be bound to a key event with modifiers."
+		   this-command))
+
+	  ;; Use the event that invoked us to contruct the keymap
+	  (bind-keys override-keymap event next)
+	  (mapc (lambda (k)
+		  (bind-keys override-keymap
+		    (encode-event `(key (release any) ,k)) x-cycle-exit))
+		modifier-keys)
+
+	  ;; grab synchronously, so that event replaying works
+	  (when (grab-keyboard (input-focus) nil t)
+	    (unwind-protect
+		(progn
+		  (catch 'x-cycle-exit
+		    ;; do the first step
+		    (next)
+		    (recursive-edit))
+		  (when (fluid x-cycle-current)
+		    (display-window (fluid x-cycle-current))))
+	      (display-message nil)
+	      (ungrab-keyboard)))))
+
+      (when tail-command
+	;; make sure that the command operates on the newly-focused
+	;; window, not the window that was focused when the original
+	;; event was received
+	(current-event-window (input-focus))
+	(call-command tail-command))))
+
+;;; variants
+
+  (define (cycle-group event w)
+    "Cycle through all windows in the same group as the current window."
+    (let ((windows (windows-in-group w)))
+      (when windows
+	(cycle-windows event windows))))
+
+  (define (cycle-prefix event w)
+    "Cycle through all windows whose names match the leading colon-delimited
+prefix of the current window."
+    (when (string-match "^([^:]+)\\s*:" (window-name w))
+      (let* ((prefix (expand-last-match "\\1"))
+	     (re (concat ?^ (quote-regexp prefix) "\\s*:"))
+	     (windows (filter-windows
+		       (lambda (x)
+			 (string-match re (window-name x))))))
+	(when windows
+	  (cycle-windows event windows)))))
+
+  (define (cycle-class event w)
+    "Cycle through all windows with the same class as the current window."
+    (let ((class (window-class w)))
+      (let ((windows (filter-windows (lambda (x)
+				       (equal (window-class w) class)))))
+	(when windows
+	  (cycle-windows event windows)))))
+
+  ;;###autoload
+  (define-command 'cycle-windows cycle-windows "e")
+  (define-command 'cycle-group cycle-group "e\n%W")
+  (define-command 'cycle-prefix cycle-prefix "e\n%W")
+  (define-command 'cycle-class cycle-class "e\n%W"))

@@ -35,231 +35,233 @@
 ;;       (append window-ops-menu
 ;;               (list (cons "Grow/pack" grow-pack-menu))))
 
+(define-structure sawfish.wm.commands.grow-pack ()
+
+    (open rep
+	  sawfish.wm.windows
+	  sawfish.wm.misc
+	  sawfish.wm.util.rects
+	  sawfish.wm.state.maximize
+	  sawfish.wm.custom
+	  sawfish.wm.commands
+	  sawfish.wm.workspace
+	  sawfish.wm.stacking)
+
+  (define-structure-alias grow-pack sawfish.wm.commands.grow-pack)
 
 ;;; Code:
 
-(defcustom grow-window-repeat t
-  "Whether growing an already grown window grows it again."
-  :type boolean
-  :group (min-max maximize))
+  (defcustom grow-window-repeat t
+    "Whether growing an already grown window grows it again."
+    :type boolean
+    :group (min-max maximize))
 
-(defcustom grow-is-maximize t
-  "Whether growing is considered to be maximization.  When you turn
+  (defcustom grow-is-maximize t
+    "Whether growing is considered to be maximization.  When you turn
 this on, you can use `unmaximize-window' or something similar to get
 back to the original size."
-  :type boolean
-  :group (min-max maximize))
+    :type boolean
+    :group (min-max maximize))
 
-;; Entry points.
+  ;; Entry points.
 
-;;;###autoload
-(defun grow-window-left (w)
-  "Grows window to the left until it `bumps into' another window."
-  (interactive "%W")
-  (grow-window w 'left))
+  (defun grow-window-left (w)
+    "Grows window to the left until it `bumps into' another window."
+    (grow-window w 'left))
 
-;;;###autoload
-(defun grow-window-right (w)
-  "Grows window to the right until it `bumps into' another window."
-  (interactive "%W")
-  (grow-window w 'right))
+  (defun grow-window-right (w)
+    "Grows window to the right until it `bumps into' another window."
+    (grow-window w 'right))
 
-;;;###autoload
-(defun grow-window-up (w)
-  "Grows window upwards until it `bumps into' another window."
-  (interactive "%W")
-  (grow-window w 'up))
+  (defun grow-window-up (w)
+    "Grows window upwards until it `bumps into' another window."
+    (grow-window w 'up))
 
-;;;###autoload
-(defun grow-window-down (w)
-  "Grows window downwards until it `bumps into' another window."
-  (interactive "%W")
-  (grow-window w 'down))
+  (defun grow-window-down (w)
+    "Grows window downwards until it `bumps into' another window."
+    (grow-window w 'down))
 
-;;;###autoload
-(defun pack-window-left (w)
-  "Moves window to the left until it `bumps into' another window."
-  (interactive "%W")
-  (pack-window w 'left))
+  (defun pack-window-left (w)
+    "Moves window to the left until it `bumps into' another window."
+    (pack-window w 'left))
 
-;;;###autoload
-(defun pack-window-right (w)
-  "Moves window to the right until it `bumps into' another window."
-  (interactive "%W")
-  (pack-window w 'right))
+  (defun pack-window-right (w)
+    "Moves window to the right until it `bumps into' another window."
+    (pack-window w 'right))
 
-;;;###autoload
-(defun pack-window-up (w)
-  "Moves window upwards until it `bumps into' another window."
-  (interactive "%W")
-  (pack-window w 'up))
+  (defun pack-window-up (w)
+    "Moves window upwards until it `bumps into' another window."
+    (pack-window w 'up))
 
-;;;###autoload
-(defun pack-window-down (w)
-  "Moves window downwards until it `bumps into' another window."
-  (interactive "%W")
-  (pack-window w 'down))
+  (defun pack-window-down (w)
+    "Moves window downwards until it `bumps into' another window."
+    (pack-window w 'down))
 
-;; Convenience variable.
+  ;; Command defs
 
-(defvar grow-pack-menu
-  '(("Grow left" grow-window-left)
-    ("Grow right" grow-window-right)
-    ("Grow up" grow-window-up)
-    ("Grow down" grow-window-down)
-    ("Pack left" pack-window-left)
-    ("Pack right" pack-window-right)
-    ("Pack up" pack-window-up)
-    ("Pack down" pack-window-down))
-  "Menu of grow and pack operations.")
+  ;;###autoload
+  (define-command 'grow-window-left grow-window-left "%W")
+  (define-command 'grow-window-right grow-window-right "%W")
+  (define-command 'grow-window-up grow-window-up "%W")
+  (define-command 'grow-window-down grow-window-down "%W")
+  (define-command 'pack-window-left pack-window-left "%W")
+  (define-command 'pack-window-right pack-window-right "%W")
+  (define-command 'pack-window-up pack-window-up "%W")
+  (define-command 'pack-window-down pack-window-down "%W")
 
-;; Implementation part.
+  ;; Convenience variable.
 
-(require 'rects)
-(require 'maximize)
+  (defvar grow-pack-menu
+    '(("Grow left" grow-window-left)
+      ("Grow right" grow-window-right)
+      ("Grow up" grow-window-up)
+      ("Grow down" grow-window-down)
+      ("Pack left" pack-window-left)
+      ("Pack right" pack-window-right)
+      ("Pack up" pack-window-up)
+      ("Pack down" pack-window-down))
+    "Menu of grow and pack operations.")
 
-(defun gp-avoid-windows (w direction)
-  "Returns list of windows to avoid when growing/filling window W in DIRECTION."
-  (let* ((wpos    (window-position w))
-         (wdim    (window-frame-dimensions w))
-         (wleft   (car wpos))
-         (wtop    (cdr wpos))
-         (wright  (+ wleft (car wdim)))
-         (wbottom (+ wtop (cdr wdim)))
-         (nleft   wleft)
-         (ntop    wtop)
-         (nright  wright)
-         (nbottom wbottom))
-    (when (eq direction 'left)
-      (setq nleft 0)
-      (when grow-window-repeat
-        (setq wleft (max (- wleft 1) 0))))
-    (when (eq direction 'right)
-      (setq nright (screen-width))
-      (when grow-window-repeat
-        (setq wright (min (+ wright 1) (screen-width)))))
-    (when (eq direction 'up)
-      (setq ntop 0)
-      (when grow-window-repeat
-        (setq wtop (max (- wtop 1) 0))))
-    (when (eq direction 'down)
-      (setq nbottom (screen-height))
-      (when grow-window-repeat
-        (setq wbottom (min (+ wbottom 1) (screen-height)))))
-    (filter-windows
-     (lambda (x)
-       (let* ((xpos (window-position x))
-              (xdim (window-frame-dimensions x))
-              (xleft (car xpos))
-              (xtop (cdr xpos))
-              (xright (+ xleft (car xdim)))
-              (xbottom (+ xtop (cdr xdim))))
-               ;; If window does not overlap W but does overlap the
-               ;; larger W, then we need to avoid this window.
-         (and (window-appears-in-workspace-p x current-workspace)
-              (<= (rect-2d-overlap* (list xleft xtop xright xbottom)
-                        (list wleft wtop wright wbottom)) 0)
-              (> (rect-2d-overlap* (list xleft xtop xright xbottom)
-                                   (list nleft ntop nright nbottom)) 0)))))))
+  ;; Implementation part.
 
-(defun gp-surrounding-rect (wlist)
-  "Returns the rectangle surrounding all given windows."
-  (if wlist
-      (let* ((w (car wlist))
-             (wrest (cdr wlist))
-             (wpos (window-position w))
-             (wdim (window-frame-dimensions w))
-             (rleft (car wpos))
-             (rtop  (cdr wpos))
-             (rright (+ rleft (car wdim)))
-             (rbottom (+ rtop (cdr wdim))))
-        (mapcar
-         (lambda (x)
-           (let* ((xpos (window-position x))
-                  (xdim (window-frame-dimensions x))
-                  (xleft (car xpos))
-                  (xtop  (cdr xpos))
-                  (xright (+ xleft (car xdim)))
-                  (xbottom (+ xtop (cdr xdim))))
-             (when (< xleft rleft) (setq rleft xleft))
-             (when (< xtop  rtop) (setq rtop xtop))
-             (when (> xright rright) (setq rright xright))
-             (when (> xbottom rbottom) (setq rbottom xbottom))))
-         wrest)
-        (list rleft rtop rright rbottom))
-    (list (screen-width) (screen-height) 0 0)))
+  (defun gp-avoid-windows (w direction)
+    "Returns list of windows to avoid when growing/filling window W in DIRECTION."
+    (let* ((wpos    (window-position w))
+	   (wdim    (window-frame-dimensions w))
+	   (wleft   (car wpos))
+	   (wtop    (cdr wpos))
+	   (wright  (+ wleft (car wdim)))
+	   (wbottom (+ wtop (cdr wdim)))
+	   (nleft   wleft)
+	   (ntop    wtop)
+	   (nright  wright)
+	   (nbottom wbottom))
+      (when (eq direction 'left)
+	(setq nleft 0)
+	(when grow-window-repeat
+	  (setq wleft (max (- wleft 1) 0))))
+      (when (eq direction 'right)
+	(setq nright (screen-width))
+	(when grow-window-repeat
+	  (setq wright (min (+ wright 1) (screen-width)))))
+      (when (eq direction 'up)
+	(setq ntop 0)
+	(when grow-window-repeat
+	  (setq wtop (max (- wtop 1) 0))))
+      (when (eq direction 'down)
+	(setq nbottom (screen-height))
+	(when grow-window-repeat
+	  (setq wbottom (min (+ wbottom 1) (screen-height)))))
+      (filter-windows
+       (lambda (x)
+	 (let* ((xpos (window-position x))
+		(xdim (window-frame-dimensions x))
+		(xleft (car xpos))
+		(xtop (cdr xpos))
+		(xright (+ xleft (car xdim)))
+		(xbottom (+ xtop (cdr xdim))))
+	   ;; If window does not overlap W but does overlap the
+	   ;; larger W, then we need to avoid this window.
+	   (and (window-appears-in-workspace-p x current-workspace)
+		(<= (rect-2d-overlap* (list xleft xtop xright xbottom)
+				      (list wleft wtop wright wbottom)) 0)
+		(> (rect-2d-overlap* (list xleft xtop xright xbottom)
+				     (list nleft ntop nright nbottom)) 0)))))))
 
-(defun grow-window (w direction)
-  "Grows window W in DIRECTION."
-  (let* ((avoid-wins (gp-avoid-windows w direction))
-         (surround   (gp-surrounding-rect avoid-wins))
-         (wpos       (window-position w))
-         (wdim       (window-dimensions w))
-	 (fdim       (window-frame-dimensions w))
-         (wleft      (car wpos))
-         (wtop       (cdr wpos))
-         (wwidth     (car wdim))
-         (wheight    (cdr wdim))
-	 (nwidth     wwidth)
-	 (nheight    wheight)
-         (sleft      (nth 0 surround))
-         (stop       (nth 1 surround))
-         (sright     (nth 2 surround))
-         (sbottom    (nth 3 surround)))
-    (when (eq direction 'left)
-      (setq nwidth (- (+ wleft wwidth) sright)))
-    (when (eq direction 'up)
-      (setq nheight (- (+ wtop wheight) sbottom)))
-    (when (eq direction 'right)
-      (setq nwidth (- sleft wleft (- (car fdim) wwidth))))
-    (when (eq direction 'down)
-      (setq nheight (- stop wtop (- (cdr fdim) wheight))))
-    (let
-	((tem (cons nwidth nheight)))
-      (maximize-truncate-dims w tem)	;truncate to column/row increments
-      (setq nwidth (car tem))
-      (setq nheight (cdr tem)))
-    (when (eq direction 'left)
-      (setq wleft (- wleft (- nwidth wwidth))))
-    (when (eq direction 'up)
-      (setq wtop (- wtop (- nheight wheight))))
-    (when grow-is-maximize
-      (unless (window-get w 'unmaximized-geometry)
-        (window-put w 'unmaximized-geometry (list (car wpos) (cdr wpos)
-                                                  (car wdim) (cdr wdim))))
-      (if (memq direction '(left right))
-          (window-put w 'maximized-horizontally t)
-        (window-put w 'maximzed-vertically t)))
-    (move-resize-window-to w wleft wtop nwidth nheight)
-    (when maximize-raises (raise-window w))
-    (when grow-is-maximize
-      (call-window-hook 'window-maximized-hook w
-			(list (if (member direction '(left right))
-				  'horizontal 'vertical)))
-      (call-window-hook 'window-state-change-hook w (list '(maximized))))))
+  (defun gp-surrounding-rect (wlist)
+    "Returns the rectangle surrounding all given windows."
+    (if wlist
+	(let* ((w (car wlist))
+	       (wrest (cdr wlist))
+	       (wpos (window-position w))
+	       (wdim (window-frame-dimensions w))
+	       (rleft (car wpos))
+	       (rtop  (cdr wpos))
+	       (rright (+ rleft (car wdim)))
+	       (rbottom (+ rtop (cdr wdim))))
+	  (mapcar
+	   (lambda (x)
+	     (let* ((xpos (window-position x))
+		    (xdim (window-frame-dimensions x))
+		    (xleft (car xpos))
+		    (xtop  (cdr xpos))
+		    (xright (+ xleft (car xdim)))
+		    (xbottom (+ xtop (cdr xdim))))
+	       (when (< xleft rleft) (setq rleft xleft))
+	       (when (< xtop  rtop) (setq rtop xtop))
+	       (when (> xright rright) (setq rright xright))
+	       (when (> xbottom rbottom) (setq rbottom xbottom))))
+	   wrest)
+	  (list rleft rtop rright rbottom))
+      (list (screen-width) (screen-height) 0 0)))
 
-(defun pack-window (w direction)
-  (let* ((avoid-wins (gp-avoid-windows w direction))
-         (surround   (gp-surrounding-rect avoid-wins))
-         (wpos       (window-position w))
-         (wdim       (window-frame-dimensions w))
-         (wleft      (car wpos))
-         (wtop       (cdr wpos))
-         (wwidth     (car wdim))
-         (wheight    (cdr wdim))
-         (sleft      (nth 0 surround))
-         (stop       (nth 1 surround))
-         (sright     (nth 2 surround))
-         (sbottom    (nth 3 surround)))
-    (when (eq direction 'left) (setq wleft sright))
-    (when (eq direction 'up) (setq wtop sbottom))
-    (when (eq direction 'right) (setq wleft (- sleft wwidth)))
-    (when (eq direction 'down) (setq wtop (- stop wheight)))
-    (move-window-to w wleft wtop)
-    (call-window-hook 'after-move-hook w
-                      (list (list (if (memq direction '(left right))
-                                      'horizontal 'vertical))))))
+  (defun grow-window (w direction)
+    "Grows window W in DIRECTION."
+    (let* ((avoid-wins (gp-avoid-windows w direction))
+	   (surround   (gp-surrounding-rect avoid-wins))
+	   (wpos       (window-position w))
+	   (wdim       (window-dimensions w))
+	   (fdim       (window-frame-dimensions w))
+	   (wleft      (car wpos))
+	   (wtop       (cdr wpos))
+	   (wwidth     (car wdim))
+	   (wheight    (cdr wdim))
+	   (nwidth     wwidth)
+	   (nheight    wheight)
+	   (sleft      (nth 0 surround))
+	   (stop       (nth 1 surround))
+	   (sright     (nth 2 surround))
+	   (sbottom    (nth 3 surround)))
+      (when (eq direction 'left)
+	(setq nwidth (- (+ wleft wwidth) sright)))
+      (when (eq direction 'up)
+	(setq nheight (- (+ wtop wheight) sbottom)))
+      (when (eq direction 'right)
+	(setq nwidth (- sleft wleft (- (car fdim) wwidth))))
+      (when (eq direction 'down)
+	(setq nheight (- stop wtop (- (cdr fdim) wheight))))
+      (let
+	  ((tem (cons nwidth nheight)))
+	(maximize-truncate-dims w tem)	;truncate to column/row increments
+	(setq nwidth (car tem))
+	(setq nheight (cdr tem)))
+      (when (eq direction 'left)
+	(setq wleft (- wleft (- nwidth wwidth))))
+      (when (eq direction 'up)
+	(setq wtop (- wtop (- nheight wheight))))
+      (when grow-is-maximize
+	(unless (window-get w 'unmaximized-geometry)
+	  (window-put w 'unmaximized-geometry (list (car wpos) (cdr wpos)
+						    (car wdim) (cdr wdim))))
+	(if (memq direction '(left right))
+	    (window-put w 'maximized-horizontally t)
+	  (window-put w 'maximzed-vertically t)))
+      (move-resize-window-to w wleft wtop nwidth nheight)
+      (when maximize-raises (raise-window w))
+      (when grow-is-maximize
+	(call-window-hook 'window-maximized-hook w
+			  (list (if (member direction '(left right))
+				    'horizontal 'vertical)))
+	(call-window-hook 'window-state-change-hook w (list '(maximized))))))
 
-(provide 'grow-pack)
-
-;; grow-pack.jl ends here.
+  (defun pack-window (w direction)
+    (let* ((avoid-wins (gp-avoid-windows w direction))
+	   (surround   (gp-surrounding-rect avoid-wins))
+	   (wpos       (window-position w))
+	   (wdim       (window-frame-dimensions w))
+	   (wleft      (car wpos))
+	   (wtop       (cdr wpos))
+	   (wwidth     (car wdim))
+	   (wheight    (cdr wdim))
+	   (sleft      (nth 0 surround))
+	   (stop       (nth 1 surround))
+	   (sright     (nth 2 surround))
+	   (sbottom    (nth 3 surround)))
+      (when (eq direction 'left) (setq wleft sright))
+      (when (eq direction 'up) (setq wtop sbottom))
+      (when (eq direction 'right) (setq wleft (- sleft wwidth)))
+      (when (eq direction 'down) (setq wtop (- stop wheight)))
+      (move-window-to w wleft wtop)
+      (call-window-hook 'after-move-hook w
+			(list (list (if (memq direction '(left right))
+					'horizontal 'vertical)))))))

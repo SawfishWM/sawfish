@@ -19,144 +19,140 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-
-;; iconification
+(define-structure sawfish.wm.commands.groups
 
-;;;###autoload
-(defun iconify-group (w)
-  (interactive "%W")
-  (map-window-group iconify-window w))
+    (export iconify-group
+	    uniconify-group
+	    iconify-transient-group
+	    uniconify-transient-group
+	    make-group-sticky
+	    make-group-unsticky
+	    toggle-group-sticky
+	    send-group-to-workspace
+	    send-group-to-current-workspace
+	    send-group-to-next-workspace
+	    send-group-to-previous-workspace
+	    move-group-to-current-viewport
+	    move-group-viewport
+	    move-group-left
+	    move-group-right
+	    move-group-up
+	    move-group-down
+	    raise-group
+	    lower-group
+	    raise-lower-group
+	    raise-group-depth
+	    lower-group-depth
+	    set-group-frame-style)
 
-;;;###autoload
-(defun uniconify-group (w)
-  (interactive "%W")
-  (map-window-group uniconify-window w))
+    (open rep
+	  sawfish.wm.util.groups
+	  sawfish.wm.windows
+	  sawfish.wm.commands
+	  sawfish.wm.state.iconify
+	  sawfish.wm.state.transient
+	  sawfish.wm.workspace
+	  sawfish.wm.viewport
+	  sawfish.wm.stacking
+	  sawfish.wm.frames)
 
-;;;###autoload
-(defun iconify-transient-group (w)
-  (interactive "%W")
-  (map-transient-group iconify-window w))
+  (define-structure-alias groups sawfish.wm.commands.groups)
 
-;;;###autoload
-(defun uniconify-transient-group (w)
-  (interactive "%W")
-  (map-transient-group uniconify-window w))
+  ;; iconification
 
-
-;; sticky
+  (define (iconify-group w) (map-window-group iconify-window w))
+  (define (uniconify-group w) (map-window-group uniconify-window w))
+  (define (iconify-transient-group w) (map-transient-group iconify-window w))
+  (define (uniconify-transient-group w) (map-transient-group uniconify-window w))
 
-;;;###autoload
-(defun make-group-sticky (w)
-  (interactive "%W")
-  (map-window-group make-window-sticky w))
+  (define-command 'iconify-group iconify-group "%W")
+  (define-command 'uniconify-group uniconify-group "%W")
+  (define-command 'iconify-transient-group iconify-transient-group "%W")
+  (define-command 'uniconify-transientgroup uniconify-transient-group "%W")
+  
+  ;; sticky
 
-;;;###autoload
-(defun make-group-unsticky (w)
-  (interactive "%W")
-  (map-window-group make-window-unsticky w))
+  (define (make-group-sticky w) (map-window-group make-window-sticky w))
+  (define (make-group-unsticky w) (map-window-group make-window-unsticky w))
 
-;;;###autoload
-(defun toggle-group-sticky (w)
-  (interactive "%W")
-  (if (window-get w 'sticky)
-      (make-group-unsticky w)
-    (make-group-sticky w)))
+  (defun toggle-group-sticky (w)
+    (if (window-get w 'sticky)
+	(make-group-unsticky w)
+      (make-group-sticky w)))
 
-
-;; workspaces
+  ;;###autoload
+  (define-command 'make-group-sticky make-group-sticky "%W")
+  (define-command 'make-group-unsticky make-group-unsticky "%W")
+  (define-command 'toggle-group-sticky toggle-group-sticky "%W")
 
-;;;###autoload
-(defun send-group-to-workspace (w send-group-dest-space)
-  (map-window-group
-   (lambda (x)
-     (unless (window-get x 'sticky)
-       (ws-move-window x (nearest-workspace-with-window x current-workspace)
-		       send-group-dest-space (eq x (input-focus))))) w))
+  ;; workspaces
 
-;;;###autoload
-(defun send-group-to-current-workspace (w)
-  (interactive "%W")
-  (send-group-to-workspace w current-workspace))
+  (define (send-group-to-workspace w send-group-dest-space)
+    (map-window-group
+     (lambda (x)
+       (unless (window-get x 'sticky)
+	 (ws-move-window x (nearest-workspace-with-window x current-workspace)
+			 send-group-dest-space (eq x (input-focus))))) w))
 
-;;;###autoload
-(defun send-group-to-next-workspace (send-group-window count)
-  (interactive "%W\np")
-  (ws-call-with-workspace (lambda (space)
-			    (send-group-to-workspace send-group-window space)
-			    (select-workspace space))
-			  count workspace-send-boundary-mode))
+  (define (send-group-to-current-workspace w)
+    (send-group-to-workspace w current-workspace))
 
-;;;###autoload
-(defun send-group-to-previous-workspace (w count)
-  (interactive "%W\np")
-  (send-group-to-next-workspace w (- count)))
+  (define (send-group-to-next-workspace send-group-window count)
+    (ws-call-with-workspace (lambda (space)
+			      (send-group-to-workspace send-group-window space)
+			      (select-workspace space))
+			    count workspace-send-boundary-mode))
 
-
-;; viewports
+  (define (send-group-to-previous-workspace w count)
+    (send-group-to-next-workspace w (- count)))
 
-;;;###autoload
-(defun move-group-to-current-viewport (w)
-  (interactive "%W")
-  (map-window-group move-window-to-current-viewport w))
+  ;;###autoload
+  (define-command 'send-group-to-current-workspace send-group-to-current-workspace "%W")
+  (define-command 'send-group-to-next-workspace send-group-to-next-workspace "%W\np")
+  (define-command 'send-group-to-previous-workspace send-group-to-previous-workspace "%W\np")
 
-;;;###autoload
-(defun move-group-viewport (w col row)
-  (map-window-group (lambda (x)
-		      (move-window-viewport x col row)) w)
-  (move-viewport-to-window w))
+  ;; viewports
 
-;;;###autoload
-(defun move-group-left (w)
-  (interactive "%W")
-  (move-group-viewport w -1 0))
+  (define (move-group-to-current-viewport w)
+    (map-window-group move-window-to-current-viewport w))
 
-;;;###autoload
-(defun move-group-right (w)
-  (interactive "%W")
-  (move-group-viewport w 1 0))
+  (define (move-group-viewport w col row)
+    (map-window-group (lambda (x)
+			(move-window-viewport x col row)) w)
+    (move-viewport-to-window w))
 
-;;;###autoload
-(defun move-group-up (w)
-  (interactive "%W")
-  (move-group-viewport w 0 -1))
+  (define (move-group-left w) (move-group-viewport w -1 0))
+  (define (move-group-right w) (move-group-viewport w 1 0))
+  (define (move-group-up w) (move-group-viewport w 0 -1))
+  (define (move-group-down w) (move-group-viewport w 0 1))
 
-;;;###autoload
-(defun move-group-down (w)
-  (interactive "%W")
-  (move-group-viewport w 0 1))
+  ;;###autoload
+  (define-command 'move-group-to-current-viewport
+    move-group-to-current-viewport "%W")
 
-
-;; stacking
+  ;;###autoload
+  (define-command 'move-group-left move-group-left "%W")
+  (define-command 'move-group-right move-group-right "%W")
+  (define-command 'move-group-up move-group-up "%W")
+  (define-command 'move-group-down move-group-down "%W")
 
-;;;###autoload
-(defun raise-group (w)
-  (interactive "%W")
-  (raise-windows w (windows-in-group w t)))
+  ;; stacking
 
-;;;###autoload
-(defun lower-group (w)
-  (interactive "%W")
-  (lower-windows w (windows-in-group w t)))
+  (define (raise-group w) (raise-windows w (windows-in-group w t)))
+  (define (lower-group w) (lower-windows w (windows-in-group w t)))
+  (define (raise-lower-group w) (raise-lower-windows w (windows-in-group w t)))
+  (define (raise-group-depth w) (map-window-group raise-window-depth w))
+  (define (lower-group-depth w) (map-window-group lower-window-depth w))
 
-;;;###autoload
-(defun raise-lower-group (w)
-  (interactive "%W")
-  (raise-lower-windows w (windows-in-group w t)))
+  ;;###autoload
+  (define-command 'raise-group raise-group "%W")
+  (define-command 'lower-group lower-group "%W")
+  (define-command 'raise-lower-group raise-lower-group "%W")
+  (define-command 'raise-group-depth raise-group-depth "%W")
+  (define-command 'lower-group-depth lower-group-depth "%W")
 
-;;;###autoload
-(defun raise-group-depth (w)
-  (interactive "%W")
-  (map-window-group raise-window-depth w))
+  ;; framing
 
-;;;###autoload
-(defun lower-group-depth (w)
-  (interactive "%W")
-  (map-window-group lower-window-depth w))
-
-
-;; framing
-
-;;;###autoload
-(defun set-group-frame-style (w style)
-  (map-window-group (lambda (x)
-		      (set-frame-style x style)) w))
+  (define (set-group-frame-style w style)
+    (map-window-group (lambda (x)
+			(set-frame-style x style)) w)))

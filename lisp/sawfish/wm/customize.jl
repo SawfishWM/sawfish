@@ -19,103 +19,98 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'custom)
-(provide 'customize)
+(define-structure sawfish.wm.customize
 
-(defvar customize-program "sawfish-ui"
-  "Location of the program implementing sawfish's configuration interface.")
+    (export customize
+	    customize-read-user-file
+	    customize-write-user-file
+	    customize-set)
 
-(defvar customize-group-opt "--group")
-(defvar customize-args nil)
+    (open rep
+	  sawfish.wm.commands
+	  sawfish.wm.custom
+	  sawfish.wm.misc)
 
-(defvar customize-user-forms nil)
-(defvar customize-user-file-read nil)
-(defvar customize-user-file-dirty nil)
+  (defvar customize-program "sawfish-ui"
+    "Location of the program implementing sawfish's configuration interface.")
 
-
-;; ui
+  (defvar customize-group-opt "--group")
+  (defvar customize-args nil)
 
-;;;###autoload
-(defun customize (&optional group)
-  "Invoke the user-customization system."
-  (interactive)
-  (system (format nil "%s %s %s '%S' >/dev/null 2>&1 </dev/null &"
-		  customize-program customize-args
-		  (and group customize-group-opt) (or group ""))))
+  (define customize-user-forms nil)
+  (define customize-user-file-read nil)
+  (define customize-user-file-dirty nil)
 
 
-;; setting variables
+;;; ui
 
-(defun customize-read-user-file ()
-  (unless customize-user-file-read
-    (let
-	((filename
-	  (if (file-exists-p custom-user-file)
-	      custom-user-file
-	    (or (locate-file (concat custom-default-file ".jl") load-path)
-		(error "Can't find custom-default-file")))))
-      (setq customize-user-forms nil)
-      (when (file-exists-p filename)
-	(let
-	    ((file (open-file filename 'read)))
+  (define (customize &optional group)
+    "Invoke the user-customization system."
+    (system (format nil "%s %s %s '%S' >/dev/null 2>&1 </dev/null &"
+		    customize-program customize-args
+		    (and group customize-group-opt) (or group ""))))
+
+  ;;###autoload
+  (define-command 'customize customize)
+
+
+;;; setting variables
+
+  (define (customize-read-user-file)
+    (unless customize-user-file-read
+      (let ((filename
+	     (if (file-exists-p custom-user-file)
+		 custom-user-file
+	       (or (locate-file (concat custom-default-file ".jl") load-path)
+		   (error "Can't find custom-default-file")))))
+	(setq customize-user-forms nil)
+	(when (file-exists-p filename)
+	  (let ((file (open-file filename 'read)))
+	    (unwind-protect
+		(condition-case nil
+		    (while t
+		      (setq customize-user-forms (cons (read file)
+						       customize-user-forms)))
+		  (end-of-stream))
+	      (close-file file))
+	    (setq customize-user-forms
+		  ;; remove obsolete variables
+		  (delete-if (lambda (form)
+			       (get (cadadr form) 'custom-obsolete))
+			     (nreverse customize-user-forms)))))
+	(setq customize-user-file-read t)
+	(setq customize-user-file-dirty nil))))
+
+  (define (customize-write-user-file)
+    (when customize-user-file-dirty
+      (make-directory-recursively (file-name-directory custom-user-file))
+      (let ((file (open-file custom-user-file 'write)))
+	(when file
 	  (unwind-protect
-	      (condition-case nil
-		  (while t
-		    (setq customize-user-forms (cons (read file)
-						     customize-user-forms)))
-		(end-of-stream))
-	    (close-file file))
-	  (setq customize-user-forms
-		;; remove obsolete variables
-		(delete-if (lambda (form)
-			     (get (cadadr form) 'custom-obsolete))
-			   (nreverse customize-user-forms)))))
-      (setq customize-user-file-read t)
-      (setq customize-user-file-dirty nil))))
-
-(defun customize-write-user-file ()
-  (when customize-user-file-dirty
-    (make-directory-recursively (file-name-directory custom-user-file))
-    (let
-	((file (open-file custom-user-file 'write)))
-      (when file
-	(unwind-protect
-	    (progn
-	      (format file "\
+	      (progn
+		(format file "\
 ;; sawfish user customization -- do not edit by hand!
 ;; sawfish version %s, written %s\n\n"
-		      sawfish-version (current-time-string))
-	      (mapc (lambda (f)
-		      (format file "%S\n" f)) customize-user-forms))
-	  (close-file file))
-	(setq customize-user-file-dirty nil)))))
+			      sawfish-version (current-time-string))
+		(mapc (lambda (f)
+			(format file "%S\n" f)) customize-user-forms))
+	    (close-file file))
+	  (setq customize-user-file-dirty nil)))))
 
-;;;###autoload
-(defun customize-set (symbol value)
-  (customize-read-user-file)
-  (let
-      ((fun (get symbol 'custom-set))
-       form)
-    (if fun
-	(setq fun (or (cdr (assq fun custom-set-alist))
-		      'custom-set-typed-variable))
-      (setq fun 'custom-set-typed-variable))
-    (setq form `(,fun ',symbol ',value
-		 ,@(and (eq fun 'custom-set-typed-variable)
-			(list (list 'quote (variable-type symbol))))
-		 ,@(and (get symbol 'custom-require)
-			(list (list 'quote (get symbol 'custom-require))))))
-    (catch 'done
-      (mapc (lambda (f)
-	      (when (eq (nth 1 (nth 1 f)) symbol)
-		(setq customize-user-forms
-		      (cons form (delq f customize-user-forms)))
-		(throw 'done t)))
-	    customize-user-forms)
-      (setq customize-user-forms (cons form customize-user-forms)))
-    (setq customize-user-file-dirty t)
-    (eval form)))
+  (define (customize-set symbol value)
+    (customize-read-user-file)
+    (let ((form (make-custom-form symbol value)))
+      (catch 'done
+	(mapc (lambda (f)
+		(when (eq (nth 1 (nth 1 f)) symbol)
+		  (setq customize-user-forms
+			(cons form (delq f customize-user-forms)))
+		  (throw 'done t)))
+	      customize-user-forms)
+	(setq customize-user-forms (cons form customize-user-forms)))
+      (setq customize-user-file-dirty t)
+      (custom-eval form)))
 
-(unless batch-mode
-  (add-hook 'idle-hook customize-write-user-file)
-  (add-hook 'before-exit-hook customize-write-user-file))
+  (unless batch-mode
+    (add-hook 'idle-hook customize-write-user-file)
+    (add-hook 'before-exit-hook customize-write-user-file)))

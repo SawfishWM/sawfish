@@ -19,190 +19,178 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'workspace)
-(provide 'iconify)
+(define-structure sawfish.wm.state.iconify
 
-;; Commentary:
+    (export iconify-window
+	    uniconify-window
+	    toggle-window-iconified
+	    iconify-workspace-windows
+	    make-window-sticky
+	    make-window-unsticky
+	    toggle-window-sticky
+	    toggle-single-window-mode)
 
-;; Iconification (but without icons)
+    (open rep
+	  sawfish.wm.windows
+	  sawfish.wm.misc
+	  sawfish.wm.workspace
+	  sawfish.wm.custom
+	  sawfish.wm.commands
+	  sawfish.wm.workspace
+	  sawfish.wm.stacking
+	  sawfish.wm.viewport
+	  sawfish.wm.util.groups
+	  sawfish.wm.commands.groups)
+  
+  ;; Commentary:
 
-;; If iconified, a window has its `iconified' property set to t
+  ;; Iconification (but without icons)
 
-(defcustom iconify-ignored nil
-  "Unmanaged windows may be iconified."
-  :type boolean
-  :user-level expert
-  :group (min-max iconify))
+  ;; If iconified, a window has its `iconified' property set to t
 
-(defcustom iconify-group-mode 'transients
-  "Iconifying a window also iconifies the: \\w"
-  :type (choice none transients group)
-  :group (min-max iconify))
+  (defcustom iconify-ignored nil
+    "Unmanaged windows may be iconified."
+    :type boolean
+    :user-level expert
+    :group (min-max iconify))
 
-(defcustom uniconify-group-mode 'transients
-  "Uniconifying a window also uniconifies the: \\w"
-  :type (choice none transients group)
-  :group (min-max iconify))
+  (defcustom iconify-group-mode 'transients
+    "Iconifying a window also iconifies the: \\w"
+    :type (choice none transients group)
+    :group (min-max iconify))
 
-(defun iconify-window (w)
-  "Iconify the window."
-  (interactive "%W")
-  (when (and (not (window-get w 'iconified))
-	     (or iconify-ignored (not (window-get w 'ignored))))
-    (window-put w 'iconified t)
-    (when (window-visible-p w)
-      (hide-window w))
-    (call-window-hook 'iconify-window-hook w)
-    (call-window-hook 'window-state-change-hook w (list '(iconified)))
-    (case iconify-group-mode
-      ((transients) (iconify-transient-group w))
-      ((group) (iconify-group w)))))
+  (defcustom uniconify-group-mode 'transients
+    "Uniconifying a window also uniconifies the: \\w"
+    :type (choice none transients group)
+    :group (min-max iconify))
 
-(defun uniconify-window (w)
-  "Return the window from its iconified state."
-  (interactive "%W")
-  (when (window-get w 'iconified)
-    (window-put w 'iconified nil)
-    (cond ((window-get w 'sticky)
-	   (show-window w))
-	  ((window-in-workspace-p w current-workspace)
-	   (show-window w))
-	  (uniconify-to-current-workspace
-	   (ws-remove-window w t)
-	   (ws-add-window-to-space w current-workspace)))
-    (when raise-windows-on-uniconify
-      (raise-window w))
-    (when (and focus-windows-on-uniconify (window-really-wants-input-p w))
-      (set-input-focus w))
-    (call-window-hook 'uniconify-window-hook w)
-    (call-window-hook 'window-state-change-hook w (list '(iconified)))
-    (case uniconify-group-mode
-      ((transients) (uniconify-transient-group w))
-      ((group) (uniconify-group w)))))
+  (define (iconify-window w)
+    "Iconify the window."
+    (when (and (not (window-get w 'iconified))
+	       (or iconify-ignored (not (window-get w 'ignored))))
+      (window-put w 'iconified t)
+      (when (window-visible-p w)
+	(hide-window w))
+      (call-window-hook 'iconify-window-hook w)
+      (call-window-hook 'window-state-change-hook w (list '(iconified)))
+      (case iconify-group-mode
+	((transients) (iconify-transient-group w))
+	((group) (iconify-group w)))))
 
-(defun toggle-window-iconified (w)
-  "Toggle the iconification of window W."
-  (interactive "%W")
-  (if (window-get w 'iconified)
-      (uniconify-window w)
-    (iconify-window w)))
+  (define (uniconify-window w)
+    "Return the window from its iconified state."
+    (when (window-get w 'iconified)
+      (window-put w 'iconified nil)
+      (cond ((window-get w 'sticky)
+	     (show-window w))
+	    ((window-in-workspace-p w current-workspace)
+	     (show-window w))
+	    (uniconify-to-current-workspace
+	     (ws-remove-window w t)
+	     (ws-add-window-to-space w current-workspace)))
+      (when raise-windows-on-uniconify
+	(raise-window w))
+      (when (and focus-windows-on-uniconify (window-really-wants-input-p w))
+	(set-input-focus w))
+      (call-window-hook 'uniconify-window-hook w)
+      (call-window-hook 'window-state-change-hook w (list '(iconified)))
+      (case uniconify-group-mode
+	((transients) (uniconify-transient-group w))
+	((group) (uniconify-group w)))))
 
-(defun display-window-without-focusing (w &optional preferred-space)
-  "Display the workspace/viewport containing the window W."
-  (interactive (list (prompt-for-window)))
-  (when w
-    (let ((uniconify-to-current-workspace
-	   display-window:uniconify-to-current-workspace))
-      (uniconify-window w)
-      (when (or (not preferred-space)
-		(not (window-in-workspace-p w preferred-space)))
-	(setq preferred-space
-	      (nearest-workspace-with-window w current-workspace)))
-      (when preferred-space
-	(select-workspace preferred-space))
-      (move-viewport-to-window w)
-      (when (and unshade-selected-windows (window-get w 'shaded))
-	(unshade-window w)))))
+  (define (toggle-window-iconified w)
+    "Toggle the iconification of window W."
+    (if (window-get w 'iconified)
+	(uniconify-window w)
+      (iconify-window w)))
 
-(defun display-window (w &optional preferred-space)
-  "Display the workspace containing the window W, then focus on W."
-  (interactive (list (prompt-for-window)))
-  (when w
-    (display-window-without-focusing w preferred-space)
-    (when raise-selected-windows
-      (raise-window w))
-    (when warp-to-selected-windows
-      (warp-cursor-to-window w))
-    (when (window-really-wants-input-p w)
-      (set-input-focus w))
-    (window-order-push w)))
+  (define-command 'iconify-window iconify-window "%W")
+  (define-command 'uniconify-window uniconify-window "%W")
+  (define-command 'toggle-window-iconified toggle-window-iconified "%W")
 
-(defun iconify-workspace-windows ()
-  "Iconify all windows on the current workspace."
-  (interactive)
-  (map-windows (lambda (w)
-		 (when (and (not (window-get w 'ignored))
-			    (window-in-workspace-p w current-workspace))
-		   (iconify-window w)))))
+  (define (iconify-workspace-windows)
+    "Iconify all windows on the current workspace."
+    (map-windows (lambda (w)
+		   (when (and (not (window-get w 'ignored))
+			      (window-in-workspace-p w current-workspace))
+		     (iconify-window w)))))
+
+  (define-command 'iconify-workspace-windows iconify-workspace-windows)
 
 
-;; sticky-ness, could be in a separate file..
+;;; sticky-ness, could be in a separate file..
 
-(defun make-window-sticky (w)
-  (interactive "%W")
-  (unless (and (window-get w 'sticky) (window-get w 'sticky-viewport))
-    (ws-remove-window w t)
-    (when (window-outside-viewport-p w)
-      (move-window-to-current-viewport w))
-    (window-put w 'sticky t)
-    (window-put w 'sticky-viewport t)
-    (call-window-hook 'window-state-change-hook w (list '(sticky)))))
+  (define (make-window-sticky w)
+    (unless (and (window-get w 'sticky) (window-get w 'sticky-viewport))
+      (ws-remove-window w t)
+      (when (window-outside-viewport-p w)
+	(move-window-to-current-viewport w))
+      (window-put w 'sticky t)
+      (window-put w 'sticky-viewport t)
+      (call-window-hook 'window-state-change-hook w (list '(sticky)))))
   
-(defun make-window-unsticky (w)
-  (interactive "%W")
-  (when (or (window-get w 'sticky) (window-get w 'sticky-viewport))
-    (window-put w 'sticky nil)
-    (window-put w 'sticky-viewport nil)
-    (ws-add-window-to-space w current-workspace)
-    (call-window-hook 'window-state-change-hook w (list '(sticky)))))
+  (define (make-window-unsticky w)
+    (when (or (window-get w 'sticky) (window-get w 'sticky-viewport))
+      (window-put w 'sticky nil)
+      (window-put w 'sticky-viewport nil)
+      (ws-add-window-to-space w current-workspace)
+      (call-window-hook 'window-state-change-hook w (list '(sticky)))))
   
-(defun toggle-window-sticky (w)
-  "Toggle the `stickiness' of the window--whether or not it is a member of
+  (define (toggle-window-sticky w)
+    "Toggle the `stickiness' of the window--whether or not it is a member of
 all workspaces."
-  (interactive "%W")
-  (if (or (window-get w 'sticky) (window-get w 'sticky-viewport))
-      (make-window-unsticky w)
-    (make-window-sticky w)))
+    (if (or (window-get w 'sticky) (window-get w 'sticky-viewport))
+	(make-window-unsticky w)
+      (make-window-sticky w)))
+
+  (define-command 'make-window-sticky make-window-sticky "%W")
+  (define-command 'make-window-unsticky make-window-unsticky "%W")
+  (define-command 'toggle-window-sticky toggle-window-sticky "%W")
 
 
-;; MacOS X single-window mode stuff
+;;; MacOS X single-window mode stuff
 
-;;;###autoload
-(defun toggle-single-window-mode (w)
-  (interactive "%W")
-  (let
-      ((iconify-whole-group nil)
-       (raise-windows-on-uniconify nil)
-       fun)
-    (map-other-window-groups
-     (lambda (x)
-       (when (and (windows-share-workspace-p w x)
-		  (not (window-get x 'ignored)))
-	 (unless fun
-	   (setq fun (if (window-get x 'iconified)
-			 uniconify-window
-		       iconify-window)))
-	 (fun x))) w)))
+  (define (toggle-single-window-mode w)
+    (let ((iconify-whole-group nil)
+	  (raise-windows-on-uniconify nil)
+	  fun)
+      (map-other-window-groups
+       (lambda (x)
+	 (when (and (windows-share-workspace-p w x)
+		    (not (window-get x 'ignored)))
+	   (unless fun
+	     (setq fun (if (window-get x 'iconified)
+			   uniconify-window
+			 iconify-window)))
+	   (fun x))) w)))
 
-
-;; hooks
-
-(defun ws-client-msg-handler (w prop data)
-  (cond ((and (windowp w)
-	      (eq prop 'WM_CHANGE_STATE)
-	      (= (aref data 0) IconicState))
-	 (iconify-window w)
-	 t)))
-
-(defun ws-honour-client-state (w)
-  (let
-      ((state (get-x-property w 'WM_STATE)))
-    (when state
-      (setq state (aref (nth 2 state) 0))
-      (when (eq state IconicState)
-	(window-put w 'iconified t)))))
-
-(defun ws-set-client-state (w)
-  (set-x-property w 'WM_STATE
-		  (vector (if (window-get w 'iconified)
-			      IconicState
-			    NormalState) 0)
-		  'WM_STATE 32))
+  (define-command 'toggle-single-window-mode toggle-single-window-mode "%W")
 
 
-;; init
+;;; hooks
 
-(add-hook 'client-message-hook ws-client-msg-handler)
-(add-hook 'before-add-window-hook ws-honour-client-state)
-(add-hook 'map-notify-hook ws-set-client-state t)
-(call-after-state-changed '(iconified) ws-set-client-state)
+  (define (ws-client-msg-handler w prop data)
+    (cond ((and (windowp w)
+		(eq prop 'WM_CHANGE_STATE)
+		(= (aref data 0) IconicState))
+	   (iconify-window w)
+	   t)))
+
+  (define (ws-honour-client-state w)
+    (let ((state (get-x-property w 'WM_STATE)))
+      (when state
+	(setq state (aref (nth 2 state) 0))
+	(when (eq state IconicState)
+	  (window-put w 'iconified t)))))
+
+  (define (ws-set-client-state w)
+    (set-x-property w 'WM_STATE
+		    (vector (if (window-get w 'iconified)
+				IconicState
+			      NormalState) 0)
+		    'WM_STATE 32))
+
+  (add-hook 'client-message-hook ws-client-msg-handler)
+  (add-hook 'before-add-window-hook ws-honour-client-state)
+  (add-hook 'map-notify-hook ws-set-client-state t)
+  (call-after-state-changed '(iconified) ws-set-client-state))

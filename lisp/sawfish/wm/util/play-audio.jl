@@ -19,53 +19,57 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'play-audio)
+(define-structure sawfish.wm.util.play-audio
 
-(defvar audio-load-path (list "~/.sawfish/sounds"
-			      (or (getenv "SAWFISHSOUNDSDIR")
-				  (expand-file-name
-				   "../sounds" sawfish-lisp-lib-directory))
-			      (or (getenv "SAWFISHSITESOUNDSDIR")
-				  (expand-file-name
-				   "../../sounds" sawfish-lisp-lib-directory))
-			      ".")
-  "List of directories to search for sound samples.")
+    (export play-sample)
 
-(defcustom play-sample-program nil
-  "The program used to play audio samples. If unset, built-in support for \
+    (open rep
+	  sawfish.wm.custom
+	  sawfish.wm.misc)
+
+  (defvar audio-load-path
+    (list "~/.sawfish/sounds"
+	  (or (getenv "SAWFISHSOUNDSDIR")
+	      (expand-file-name "../sounds" sawfish-lisp-lib-directory))
+	  (or (getenv "SAWFISHSITESOUNDSDIR")
+	      (expand-file-name "../../sounds" sawfish-lisp-lib-directory))
+	  ".")
+    "List of directories to search for sound samples.")
+
+  (defcustom play-sample-program nil
+    "The program used to play audio samples. If unset, built-in support for \
 ESD is used."
-  :type (optional program)
-  :user-level expert
-  :group audio)
+    :type (optional program)
+    :user-level expert
+    :group audio)
 
-;; currently running audio process
-(define play-sample-process nil)
+  ;; currently running audio process
+  (define play-sample-process nil)
 
-;;;###autoload
-(defun play-sample (filename)
-  "Play the audio sample stored in file FILENAME."
-  (unless (file-exists-p filename)
-    (setq filename (or (locate-file filename audio-load-path)
-		       (error "No such sound sample: %s" filename))))
-  (let
-      ((real-name (local-file-name filename))
-       (delete-it nil))
-    (unless real-name
-      (setq real-name (make-temp-name))
-      (copy-file filename real-name)
-      (setq delete-it t))
-    (if play-sample-program
-	;; start programs asynchronously in case they block..
-	(let ((sentinel (lambda (proc)
-			  (when (eq play-sample-process proc)
-			    (setq play-sample-process nil))
-			  (when delete-it
-			    (delete-file real-name)))))
-	  (when play-sample-process
-	    (kill-process play-sample-process))
-	  (setq play-sample-process (make-process standard-error sentinel))
-	  (start-process play-sample-process play-sample-program real-name))
-      (require 'play-sample)
-      (primitive-play-sample real-name)
-      (when delete-it
-	(delete-file real-name)))))
+  (define (play-sample filename)
+    "Play the audio sample stored in file FILENAME."
+    (unless (file-exists-p filename)
+      (setq filename (or (locate-file filename audio-load-path)
+			 (error "No such sound sample: %s" filename))))
+    (let
+	((real-name (local-file-name filename))
+	 (delete-it nil))
+      (unless real-name
+	(setq real-name (make-temp-name))
+	(copy-file filename real-name)
+	(setq delete-it t))
+      (if play-sample-program
+	  ;; start programs asynchronously in case they block..
+	  (let ((sentinel (lambda (proc)
+			    (when (eq play-sample-process proc)
+			      (setq play-sample-process nil))
+			    (when delete-it
+			      (delete-file real-name)))))
+	    (when play-sample-process
+	      (kill-process play-sample-process))
+	    (setq play-sample-process (make-process standard-error sentinel))
+	    (start-process play-sample-process play-sample-program real-name))
+	(require 'sawfish.wm.util.play-sample)
+	(primitive-play-sample real-name)
+	(when delete-it
+	  (delete-file real-name))))))

@@ -19,69 +19,75 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(require 'timers)
-(provide 'auto-raise)
+(define-structure sawfish.wm.ext.auto-raise ()
 
-(defcustom raise-windows-on-focus nil
-  "Raise windows when they are focused."
-  :type boolean
-  :user-level novice
-  :require auto-raise
-  :group focus)
+    (open rep
+	  rep.io.timers
+	  sawfish.wm.windows
+	  sawfish.wm.custom
+	  sawfish.wm.stacking)
 
-(defcustom raise-window-timeout 500
-  "Delay in milliseconds until focused windows are raised."
-  :type number
-  :depends raise-windows-on-focus
-  :group focus)
+  (define-structure-alias auto-raise sawfish.wm.ext.auto-raise)
 
-;XXX this thing is hosed
-;(defcustom raise-groups-on-focus t
-;  "Raise entire group after focusing a window (when auto-raise is enabled)."
-;  :type boolean
-;  :group (focus advanced))
+  (defcustom raise-windows-on-focus nil
+    "Raise windows when they are focused."
+    :type boolean
+    :user-level novice
+    :require sawfish.wm.ext.auto-raise
+    :group focus)
 
-(defvar disable-auto-raise nil)
+  (defcustom raise-window-timeout 500
+    "Delay in milliseconds until focused windows are raised."
+    :type number
+    :depends raise-windows-on-focus
+    :group focus)
 
-(defvar rw-timer nil)
-(defvar rw-window nil)
+  ;XXX this thing is hosed
+  ;(defcustom raise-groups-on-focus t
+  ;  "Raise entire group after focusing a window (when auto-raise is enabled)."
+  ;  :type boolean
+  ;  :group (focus advanced))
 
-(defun rw-disable-timer ()
-  (when rw-timer
-    (setq rw-window nil)
-    (delete-timer rw-timer)
-    (setq rw-timer nil)))
+  (defvar disable-auto-raise nil)
 
-(defun rw-raise-window (w)
-  (raise-window w))
+  (define rw-timer nil)
+  (define rw-window nil)
 
-;(defun rw-raise-window (w)
-;  (if raise-groups-on-focus
-;      (raise-group w)
-;    (raise-window w)))
+  (define (rw-disable-timer)
+    (when rw-timer
+      (setq rw-window nil)
+      (delete-timer rw-timer)
+      (setq rw-timer nil)))
 
-(defun rw-on-focus (w)
-  (unless disable-auto-raise
-    (if (or (window-get w 'raise-on-focus) raise-windows-on-focus)
-	(if (<= raise-window-timeout 0)
-	    (progn
-	      (rw-raise-window w)
-	      (rw-disable-timer))
-	  (setq rw-window w)
-	  (if rw-timer
-	      (set-timer rw-timer)
-	    (let
-		((timer-callback (lambda ()
-				   (rw-raise-window rw-window)
-				   (setq rw-timer nil))))
-	      (setq rw-timer (make-timer timer-callback
-					 (quotient raise-window-timeout 1000)
-					 (mod raise-window-timeout 1000))))))
-      (rw-disable-timer))))
+  (define (rw-raise-window w) (raise-window w))
 
-(defun rw-out-focus (w)
-  (when (and rw-timer (eq rw-window w))
-    (rw-disable-timer)))
+  ;(defun rw-raise-window (w)
+  ;  (if raise-groups-on-focus
+  ;      (raise-group w)
+  ;    (raise-window w)))
 
-(add-hook 'focus-in-hook rw-on-focus)
-(add-hook 'focus-out-hook rw-out-focus)
+  (define (rw-on-focus w)
+    (unless disable-auto-raise
+      (if (or (window-get w 'raise-on-focus) raise-windows-on-focus)
+	  (if (<= raise-window-timeout 0)
+	      (progn
+		(rw-raise-window w)
+		(rw-disable-timer))
+	    (setq rw-window w)
+	    (if rw-timer
+		(set-timer rw-timer)
+	      (let
+		  ((timer-callback (lambda ()
+				     (rw-raise-window rw-window)
+				     (setq rw-timer nil))))
+		(setq rw-timer (make-timer timer-callback
+					   (quotient raise-window-timeout 1000)
+					   (mod raise-window-timeout 1000))))))
+	(rw-disable-timer))))
+
+  (define (rw-out-focus w)
+    (when (and rw-timer (eq rw-window w))
+      (rw-disable-timer)))
+
+  (add-hook 'focus-in-hook rw-on-focus)
+  (add-hook 'focus-out-hook rw-out-focus))

@@ -19,11 +19,18 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'error-handler)
+(define-structure sawfish.wm.ext.error-handler ()
 
-(defvar error-handler-beep t)
+    (open rep
+	  sawfish.wm.misc)
 
-(defun error-handler-function (err data)
-  (when error-handler-beep
-    (beep))
-  (display-message (format nil "%s: %S" err data)))
+  (define-structure-alias error-handler sawfish.wm.ext.error-handler)
+
+  (defvar error-handler-beep t)
+
+  (define (handler err data)
+    (when error-handler-beep
+      (beep))
+    (display-message (format nil "%s: %S" err data)))
+
+  (setq error-handler-function handler))

@@ -19,50 +19,52 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(provide 'help)
+(define-structure sawfish.wm.commands.help
 
-(defun help-call-info (document node)
-  (system (format nil "xterm -e info '%s' '%s' >/dev/null 2>&1 </dev/null &"
-		  document node)))
+    (export display-url
+	    help-call-info
+	    help-call-info-gnome)
 
-(defun help-call-info-gnome (document node)
-  (while (string-match " " node)
-    (setq node (concat (substring node 0 (match-start)) ?_
-		       (substring node (match-end)))))
-  (system (format nil "gnome-help-browser 'info:%s#%s' >/dev/null 2>&1 </dev/null &"
-		  document node)))
+    (open rep
+	  sawfish.wm.commands)
 
-(defvar help-display-info-function help-call-info)
+  ;; Info
 
-(defvar display-url-command
-  "( netscape -remote 'openUrl(%s)' || netscape '%s' ) &"
-  "Shell command used to direct a web browser to load a url. Any `%s'
+  (define (help-call-info document node)
+    (system (format nil "xterm -e info '%s' '%s' >/dev/null 2>&1 </dev/null &"
+		    document node)))
+
+  (define (help-call-info-gnome document node)
+    (while (string-match " " node)
+      (setq node (concat (substring node 0 (match-start)) ?_
+			 (substring node (match-end)))))
+    (system (format nil "gnome-help-browser 'info:%s#%s' >/dev/null 2>&1 </dev/null &"
+		    document node)))
+
+  (defvar help-display-info-function help-call-info)
+
+  ;; WWW
+
+  (defvar display-url-command
+    "( netscape -remote 'openUrl(%s)' || netscape '%s' ) &"
+    "Shell command used to direct a web browser to load a url. Any `%s'
 substrings will be replaced by the name of the url.")
 
-(defun display-url (url)
-  (let ((args (list url)))
-    (rplacd args args)
-    (system (apply format nil display-url-command args))))
+  (define (display-url url)
+    (let ((args (list url)))
+      (rplacd args args)
+      (system (apply format nil display-url-command args))))
 
-
-;; Commands
+  ;; Commands
 
-;;;###autoload
-(defun help:show-faq ()
-  (interactive)
-  (help-display-info-function "sawfish" "FAQ"))
+  (define (show-faq) (help-display-info-function "sawfish" "FAQ"))
+  (define (show-news) (help-display-info-function "sawfish" "News"))
+  (define (show-programmer-manual)
+    (help-display-info-function "sawfish" "Top"))
+  (define (show-homepage) (display-url "http://sawmill.sourceforge.net/"))
 
-;;;###autoload
-(defun help:show-news ()
-  (interactive)
-  (help-display-info-function "sawfish" "News"))
-
-;;;###autoload
-(defun help:show-programmer-manual ()
-  (interactive)
-  (help-display-info-function "sawfish" "Top"))
-
-;;;###autoload
-(defun help:show-homepage ()
-  (interactive)
-  (display-url "http://sawmill.sourceforge.net/"))
+  ;;###autoload
+  (define-command 'help:show-faq show-faq)
+  (define-command 'help:show-news show-news)
+  (define-command 'help:show-programmer-manual show-programmer-manual)
+  (define-command 'help:show-homepage show-homepage))

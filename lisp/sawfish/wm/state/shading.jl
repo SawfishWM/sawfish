@@ -19,62 +19,78 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defcustom raise-windows-when-unshaded nil
-  "Raise windows when they are unshaded."
-  :group misc
-  :type boolean)
+(define-structure sawfish.wm.state.shading
 
-(defun shade-window (w)
-  "Display only the title bar of the window."
-  (interactive "%W")
-  (unless (window-get w 'shaded)
-    (window-put w 'shaded t)
-    (window-put w 'hide-client t)
-    (call-window-hook 'shade-window-hook w)
-    (call-window-hook 'window-state-change-hook w (list '(shaded)))
-    (reframe-window w)))
+    (export shade-window
+	    unshade-window
+	    toggle-window-shaded)
 
-(defun unshade-window (w)
-  "If the window is shaded (see `shade-window'), restore it to it's usual
+    (open rep
+	  sawfish.wm.windows
+	  sawfish.wm.custom
+	  sawfish.wm.commands
+	  sawfish.wm.frames
+	  sawfish.wm.session.init
+	  sawfish.wm.workspace
+	  sawfish.wm.stacking)
+
+  (defcustom raise-windows-when-unshaded nil
+    "Raise windows when they are unshaded."
+    :group misc
+    :type boolean)
+
+  (define (shade-window w)
+    "Display only the title bar of the window."
+    (unless (window-get w 'shaded)
+      (window-put w 'shaded t)
+      (window-put w 'hide-client t)
+      (call-window-hook 'shade-window-hook w)
+      (call-window-hook 'window-state-change-hook w (list '(shaded)))
+      (reframe-window w)))
+
+  (define (unshade-window w)
+    "If the window is shaded (see `shade-window'), restore it to it's usual
 state."
-  (interactive "%W")
-  (when (window-get w 'shaded)
-    (window-put w 'shaded nil)
-    (window-put w 'hide-client nil)
-    (call-window-hook 'unshade-window-hook w)
-    (call-window-hook 'window-state-change-hook w (list '(shaded)))
-    (reframe-window w)
-    (when raise-windows-when-unshaded
-      (raise-window w))))
+    (when (window-get w 'shaded)
+      (window-put w 'shaded nil)
+      (window-put w 'hide-client nil)
+      (call-window-hook 'unshade-window-hook w)
+      (call-window-hook 'window-state-change-hook w (list '(shaded)))
+      (reframe-window w)
+      (when raise-windows-when-unshaded
+	(raise-window w))))
 
-(defun toggle-window-shaded (w)
-  "Toggle the shaded (only the title bar is displayed) state of the window."
-  (interactive "%W")
-  (if (window-get w 'shaded)
-      (unshade-window w)
-    (shade-window w)))
+  (define (toggle-window-shaded w)
+    "Toggle the shaded (only the title bar is displayed) state of the window."
+    (if (window-get w 'shaded)
+	(unshade-window w)
+      (shade-window w)))
 
-
-;; displaying
-
-(defun shaded-frame-type-mapper (w type)
-  (if (window-get w 'shaded)
-      (case type
-	((default shaped) 'shaded)
-	((transient shaped-transient) 'shaded-transient)
-	(t type))
-    type))
-
-(define-frame-type-mapper shaded-frame-type-mapper)
+  (define-command 'shade-window shade-window "%W")
+  (define-command 'unshade-window unshade-window "%W")
+  (define-command 'toggle-window-shaded toggle-window-shaded "%W")
 
 
-;; hooks
+;;; displaying
 
-(defun shading-add-window (w)
-  (when (window-get w 'shaded)
-    (window-put w 'shaded nil)
-    (shade-window w)))
+  (define (shaded-frame-type-mapper w type)
+    (if (window-get w 'shaded)
+	(case type
+	  ((default shaped) 'shaded)
+	  ((transient shaped-transient) 'shaded-transient)
+	  (t type))
+      type))
 
-(add-hook 'add-window-hook shading-add-window t)
-(sm-add-saved-properties 'shaded)
-(add-swapped-properties 'shaded)
+  (define-frame-type-mapper shaded-frame-type-mapper)
+
+
+;;; hooks
+
+  (define (shading-add-window w)
+    (when (window-get w 'shaded)
+      (window-put w 'shaded nil)
+      (shade-window w)))
+
+  (add-hook 'add-window-hook shading-add-window t)
+  (sm-add-saved-properties 'shaded)
+  (add-swapped-properties 'shaded))

@@ -20,26 +20,33 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defcustom stagger-placement-step 32
-  "Distance between successive placements in `stagger' placement mode."
-  :type number
-  :range (1)
-  :group placement)
+(define-structure sawfish.wm.placement.stagger ()
 
-(define place-window-stagger
-  (let ((last-x 0)
-	(last-y 0))
-    (lambda (w)
-      (let ((dims (window-frame-dimensions w)))
-	(setq last-x (+ last-x stagger-placement-step))
-	(setq last-y (+ last-y stagger-placement-step))
-	(when (>= (+ last-x (car dims)) (screen-width))
-	  (setq last-x 0))
-	(when (>= (+ last-y (cdr dims)) (screen-height))
-	  (setq last-y 0))
-	(move-window-to w last-x last-y)))))
+    (open rep
+	  sawfish.wm.windows
+	  sawfish.wm.misc
+	  sawfish.wm.events
+	  sawfish.wm.placement
+	  sawfish.wm.custom)
 
-(define-placement-mode 'stagger place-window-stagger)
+  (defcustom stagger-placement-step 32
+    "Distance between successive placements in `stagger' placement mode."
+    :type number
+    :range (1)
+    :group placement)
 
-;;;###autoload (autoload 'place-window-stagger "stagger-placement")
-;;;###autoload (define-placement-mode 'stagger place-window-stagger)
+  (define place-window-stagger
+    (let ((last-x 0)
+	  (last-y 0))
+      (lambda (w)
+	(let ((dims (window-frame-dimensions w)))
+	  (setq last-x (+ last-x stagger-placement-step))
+	  (setq last-y (+ last-y stagger-placement-step))
+	  (when (>= (+ last-x (car dims)) (screen-width))
+	    (setq last-x 0))
+	  (when (>= (+ last-y (cdr dims)) (screen-height))
+	    (setq last-y 0))
+	  (move-window-to w last-x last-y)))))
+
+  ;;###autoload
+  (define-placement-mode 'stagger place-window-stagger))
