@@ -48,6 +48,7 @@
 	     ;; windows that set WM_TRANSIENT_FOR to the root window are
 	     ;; transients for their entire group (de facto standard)
 	     (and (eql x-for (root-window-id))
+		  (window-group-id x)
 		  (eql (window-group-id x) (window-group-id y)))))))
 
 (define (indirect-transient-of-p x y)
@@ -63,9 +64,10 @@
 (define (transient-parents w &optional indirectly)
   "Return the list of windows that window W is a transient for."
   (filter-windows (lambda (x)
-		    ((if indirectly
-			 indirect-transient-of-p
-		       transient-of-p) w x))))
+		    (and (window-mapped-p x)
+			 ((if indirectly
+			      indirect-transient-of-p
+			    transient-of-p) w x)))))
 
 (defun transient-group (w &optional by-depth)
   "Return the list of windows which is either a transient window for window W,
@@ -73,9 +75,10 @@ or a window which W is a transient for. This always includes W. The `transient
 window for' relation holds for windows which are direct or indirect transients
 of the parent window in question."
   (delete-if-not (lambda (x)
-		   (or (eq x w)
-		       (indirect-transient-of-p x w)
-		       (indirect-transient-of-p w x)))
+		   (and (window-mapped-p x)
+			(or (eq x w)
+			    (indirect-transient-of-p x w)
+			    (indirect-transient-of-p w x))))
 		 (if by-depth (stacking-order) (managed-windows))))
 
 (defun map-transient-group (fun w)
