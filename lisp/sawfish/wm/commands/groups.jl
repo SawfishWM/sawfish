@@ -172,4 +172,13 @@
 
   (define (set-group-frame-style w style)
     (map-window-group (lambda (x)
-			(set-frame-style x style)) w)))
+			(set-frame-style x style)) w))
+
+  ;; deleting windows
+
+  (define (delete-group w)
+    "Delete all windows in the group that the current window is a member of."
+    (map-window-group delete-window w))
+
+  ;;###autoload
+  (define-command 'delete-group delete-group #:spec "%W"))

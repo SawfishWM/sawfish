@@ -213,6 +213,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     
     (bind-keys close-button-keymap
       "Button3-Click1" 'popup-window-menu
+      "S-Button1-Off" 'delete-group
       "Button1-Off" 'delete-window)
     
     (bind-keys iconify-button-keymap

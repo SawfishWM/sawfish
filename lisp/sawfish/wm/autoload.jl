@@ -69,6 +69,7 @@
 (autoload-command (quote raise-lower-group) (quote sawfish.wm.commands.groups) #:user-level (quote expert))
 (autoload-command (quote raise-group-depth) (quote sawfish.wm.commands.groups))
 (autoload-command (quote lower-group-depth) (quote sawfish.wm.commands.groups))
+(autoload-command (quote delete-group) (quote sawfish.wm.commands.groups))
 (autoload-command (quote grow-window-left) (quote sawfish.wm.commands.grow-pack))
 (autoload-command (quote grow-window-right) (quote sawfish.wm.commands.grow-pack))
 (autoload-command (quote grow-window-up) (quote sawfish.wm.commands.grow-pack))
