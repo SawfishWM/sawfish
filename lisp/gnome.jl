@@ -66,11 +66,12 @@
        (port (screen-viewport))
        (port-size (cons viewport-columns viewport-rows)))
     (mapc #'(lambda (w)
-	      (when (window-get w 'workspace)
-		(set-x-property w '_WIN_WORKSPACE
-				(vector (- (window-get w 'workspace)
-					   (car limits)))
-				'CARDINAL 32)))
+	      (if (window-get w 'workspace)
+		  (set-x-property w '_WIN_WORKSPACE
+				  (vector (- (window-get w 'workspace)
+					     (car limits)))
+				  'CARDINAL 32)
+		(delete-x-property w '_WIN_WORKSPACE)))
 	  (managed-windows))
     (unless (equal gnome-current-workspace (- current-workspace (car limits)))
       (setq gnome-current-workspace (- current-workspace (car limits)))
