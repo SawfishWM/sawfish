@@ -32,8 +32,10 @@
 
 (defconst WIN_LAYER_NORMAL 4)
 
-;; XXX support other hints
 (defconst WIN_HINTS_SKIP_FOCUS 1)
+(defconst WIN_HINTS_SKIP_WINLIST 2)
+(defconst WIN_HINTS_SKIP_TASKLIST 4)
+(defconst WIN_HINTS_FOCUS_ON_CLICK 16)
 
 (defvar gnome-window-id nil)
 
@@ -248,6 +250,7 @@
   (add-hook 'destroy-notify-hook gnome-set-client-list)
   (add-hook 'map-notify-hook gnome-set-client-list)
   (add-hook 'unmap-notify-hook gnome-set-client-list)
+  (add-hook 'workspace-state-change-hook gnome-set-client-list)
 
   (add-hook 'before-add-window-hook gnome-honour-client-state t)
   (add-hook 'add-window-hook gnome-set-client-state)
