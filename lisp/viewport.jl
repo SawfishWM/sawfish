@@ -103,9 +103,11 @@
 (defun window-outside-workspace-p (window)
   (let
       ((pos (window-position window))
+       (dims (window-frame-dimensions window))
        (right (- (* viewport-columns (screen-width)) viewport-x-offset))
        (bottom (- (* viewport-rows (screen-height)) viewport-y-offset)))
-    (or (>= (car pos) right) (>= (cdr pos) bottom))))
+    (or (>= (car pos) right) (>= (cdr pos) bottom)
+	(<= (+ (car pos) (car dims)) 0) (<= (+ (cdr pos) (cdr dims)) 0))))
 
 (defun window-outside-viewport-p (window)
   (let
