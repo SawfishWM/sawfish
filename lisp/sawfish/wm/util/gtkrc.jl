@@ -130,6 +130,18 @@
     t))
 
 
+;; for restricted themes
+
+(let
+    (funs)
+
+  (defun gtkrc-call-after-changed (fun)
+    (or (closurep fun) (error "Non-closure to gtkrc-call-after-changed"))
+    (setq funs (cons fun funs)))
+
+  (add-hook 'gtkrc-changed-hook #'(lambda () (mapc 'funcall funs))))
+
+
 ;; init
 
 (defun gtkrc-quit ()
@@ -140,4 +152,8 @@
   (set-x-property gtkrc-dummy-window 'WM_STATE (vector 0) 'WM_STATE 32)
   (add-hook 'client-message-hook 'gtkrc-handle-client-msg)
   (add-hook 'before-exit-hook 'gtkrc-quit)
+  (mapc 'gaol-add-function
+	'(gtkrc-load-pixmaps gtkrc-reload-style gtkrc-call-after-changed))
+  (mapc 'gaol-add-special '(gtkrc-background gtkrc-background-pixmaps
+			    gtkrc-base gtkrc-foreground gtkrc-font))
   (gtkrc-reload-style))
