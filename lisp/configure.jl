@@ -39,7 +39,9 @@
 	     ;; for the old GNOME pager's benefit..
 	     (uniconify-window w)
 	     (raise-window w))))
-    (when (setq tem (cdr (assq 'dimensions alist)))
+    (when (and (setq tem (cdr (assq 'dimensions alist)))
+	       ;; no point in this case
+	       (not (assq 'position alist)))
       (let*
 	  ((hints (window-size-hints w))
 	   (gravity (or (window-get w 'gravity)
@@ -70,19 +72,48 @@
 	 ;; Out[1]= {{L -> ------------, R -> -(---------)}}
 	 ;;                   l + r               l + r
 	 ((or configure-auto-gravity (window-get w 'auto-gravity))
-	  (let
-	      ;; XXX assumes constant frame size
-	      ((ftem (cons (+ (car tem) (- (car fdims) (car dims)))
-			   (+ (cdr tem) (- (cdr fdims) (cdr dims))))))
-	    ;; XXX do something with these weird points
-	    (when (> (- (screen-width) (car fdims)) 0)
-	      (rplaca coords (/ (+ (- (* (car ftem) (car coords)))
+	  (let* ((xoff (- (car fdims) (car dims)))
+		 (lhs (car coords))
+		 (rhs (- (screen-width) (car coords) (car fdims))))
+	    (cond
+	     ((and (< lhs 0) (>= rhs 0))
+	      ;; lhs of window off-screen, right hand side on
+	      (rplaca coords (min 0 (+ (car coords)
+				       (- (car dims) (car tem))))))
+	     ((= (screen-width) (car fdims))
+	      ;; window width = screen width
+	      (rplaca coords (+ (car coords) (/ (- (car dims) (car tem)) 2))))
+	     ((and (< rhs 0) (>= lhs 0))
+	      ;; right off, left on
+	      (rplaca coords (max (car coords) (- (screen-width)
+						  (+ (car tem) xoff)))))
+	     (t
+	      (rplaca coords (/ (+ (- (* (+ xoff (car tem)) (car coords)))
 				   (* (car coords) (screen-width)))
-				(- (screen-width) (car fdims)))))
-	    (when (> (- (screen-height) (cdr fdims)) 0)
-	      (rplacd coords (/ (+ (- (* (cdr ftem) (cdr coords)))
+				(+ (car coords) (- (screen-width)
+						   (car coords)
+						   (car fdims))))))))
+	  (let* ((yoff (- (cdr fdims) (cdr dims)))
+		 (top (cdr coords))
+		 (bottom (- (screen-height) (cdr coords) (cdr fdims))))
+	    (cond
+	     ((and (< top 0) (>= bottom 0))
+	      ;; top of window off-screen, bottom on screen
+	      (rplacd coords (min 0 (+ (cdr coords)
+				       (- (cdr dims) (cdr tem))))))
+	     ((= (screen-height) (cdr fdims))
+	      ;; window height = screen height
+	      (rplacd coords (+ (cdr coords) (/ (- (cdr dims) (cdr tem)) 2))))
+	     ((and (< bottom 0) (>= top 0))
+	      ;; bottom off, top on
+	      (rplacd coords (max (cdr coords) (- (screen-height)
+						  (+ (cdr tem) yoff)))))
+	     (t
+	      (rplacd coords (/ (+ (- (* (+ yoff (cdr tem)) (cdr coords)))
 				   (* (cdr coords) (screen-height)))
-				(- (screen-height) (cdr fdims))))))))
+				(+ (cdr coords) (- (screen-height)
+						   (cdr coords)
+						   (cdr fdims))))))))))
 	(setq dims tem)))
     (when (setq tem (cdr (assq 'position alist)))
       (setq coords tem))
