@@ -72,8 +72,8 @@
 	;; if no parent, choose the topmost window (if in click-to-focus
 	;; mode) or the window under the pointer otherwise
 	(if (eq focus-mode 'click)
-	    (setq parent (query-pointer-window))
-	  (setq parent nil))
+	    (setq parent nil)
+	  (setq parent (query-pointer-window)))
 	(unless (or parent (eq focus-mode 'enter-exit))
 	  (setq parent (window-order-most-recent))))
       (when (or (null parent) (window-really-wants-input-p parent))
