@@ -106,7 +106,9 @@
 
 (defun maximize-avoided-windows ()
   (delete-if #'(lambda (w)
-		 (cond ((and maximize-avoided-windows-re
+		 (cond ((window-get w 'maximize-avoid)
+			nil)
+		       ((and maximize-avoided-windows-re
 			     (string-match maximize-avoided-windows-re
 					   (window-name w)))
 			nil)
