@@ -76,6 +76,11 @@
 (require 'compat)
 (require 'group-funs)
 
+;; ensure that the things people usually like doing show up in the
+;; customization interface
+(mapc custom-add-required '(edge-flip match-window move-resize
+                            tooltips auto-raise shade-hover))
+
 ;; Load site specific initialisation. Errors here are trapped since
 ;; they're probably not going to leave us in an unusable state
 (unless (get-command-line-option "--no-rc")
