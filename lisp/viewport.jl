@@ -105,6 +105,25 @@
     (move-window-to window (mod (car pos) (screen-width))
 		    (mod (cdr pos) (screen-height)))))
 
+(defun set-window-viewport (window col row)
+  (let
+      ((pos (window-position window)))
+    (setq col (max 0 (min (1- viewport-columns) col)))
+    (setq row (max 0 (min (1- viewport-rows) row)))
+    (setq col (+ (* col (screen-width)) (mod (car pos) (screen-width))))
+    (setq row (+ (* row (screen-height)) (mod (cdr pos) (screen-height))))
+    (move-window-to
+     window (- col viewport-x-offset) (- row viewport-y-offset))))
+
+(defun move-window-viewport (window col row)
+  (let
+      ((pos (window-position window)))
+    (set-window-viewport window
+			 (+ (/ (+ (car pos) viewport-x-offset)
+			       (screen-width)) col)
+			 (+ (/ (+ (cdr pos) viewport-y-offset)
+			       (screen-height)) row))))
+
 (defun viewport-size-changed ()
   (let
       ((port (screen-viewport)))
@@ -138,6 +157,30 @@
   "Move the viewport one screen up."
   (interactive)
   (move-viewport 0 -1))
+
+(defun move-window-left (w)
+  "Move the window to the viewport on the left."
+  (interactive "%W")
+  (move-window-viewport w -1 0)
+  (move-viewport-left))
+
+(defun move-window-right (w)
+  "Move the window to the viewport on the right."
+  (interactive "%W")
+  (move-window-viewport w 1 0)
+  (move-viewport-right))
+
+(defun move-window-down (w)
+  "Move the window to the viewport below."
+  (interactive "%W")
+  (move-window-viewport w 0 1)
+  (move-viewport-down))
+
+(defun move-window-up (w)
+  "Move the window to the viewport above."
+  (interactive "%W")
+  (move-window-viewport w 0 -1)
+  (move-viewport-up))
 
 
 ;; session management
