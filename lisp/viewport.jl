@@ -201,7 +201,7 @@
 (defun move-window-to-viewport (x y)
   "Move the current window to the specified viewport."
   (interactive "NX:\nNY:")
-  (move-window-viewport (current-event-window) x y))
+  (move-window-viewport (current-event-window) (1- x) (1- y)))
 
 (define-command-args 'move-window-to-viewport
 		     '(and (labelled "X:" (number 1))
