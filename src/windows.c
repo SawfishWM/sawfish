@@ -528,6 +528,22 @@ new frame constructed as specified by FRAME.
     return VWIN(win)->frame_style;
 }
 
+DEFUN("rebuild-frame", Frebuild_frame, Srebuild_frame, (repv win), rep_Subr1) /*
+::doc:Srebuild-frame::
+rebuild-frame WINDOW
+
+Reinitialises and recalibrates the window frame of WINDOW.
+::end:: */
+{
+    rep_DECLARE1(win, WINDOWP);
+    if (VWIN(win)->frame != 0 && VWIN(win)->rebuild_frame != 0)
+    {
+	VWIN(win)->rebuild_frame (VWIN(win));
+	refresh_frame_parts (VWIN(win));
+    }
+    return win;
+}
+
 DEFUN("window-position", Fwindow_position, Swindow_position,
       (repv win), rep_Subr1) /*
 ::doc:Swindow-position::
@@ -990,6 +1006,7 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_mapped_p);
     rep_ADD_SUBR(Swindow_frame);
     rep_ADD_SUBR(Sset_window_frame);
+    rep_ADD_SUBR(Srebuild_frame);
     rep_ADD_SUBR(Swindow_position);
     rep_ADD_SUBR(Swindow_dimensions);
     rep_ADD_SUBR(Swindow_frame_dimensions);
