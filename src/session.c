@@ -181,7 +181,8 @@ void
 session_init (void)
 {
     if (rep_SYM(Qbatch_mode)->value == Qnil
-	&& !rep_get_option ("--sm-disable", 0))
+	&& !rep_get_option ("--sm-disable", 0)
+	&& getenv ("SESSION_MANAGER") != 0)
     {
 	SmcCallbacks call;
 	char *ret_id;
