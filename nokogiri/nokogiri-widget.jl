@@ -430,6 +430,21 @@
 
   (define-widget-type 'optional make-optional-item)
 
+  (define (make-quoted-item changed item)
+    (let ((widget (make-widget item changed)))
+      (lambda (op)
+	(case op
+	  ((ref) (lambda ()
+		   (list 'quote (widget-ref widget))))
+	  ((set) (lambda (x)
+		   (widget-set widget (cadr x))))
+	  ((validp) (lambda (x)
+		      (and (eq (car x) 'quote)
+			   (widget-valid-p widget (cadr x)))))
+	  (t (widget op))))))
+
+  (define-widget-type 'quoted make-quoted-item)
+
 
 ;;; widget used for unknown widget types
 
