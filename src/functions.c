@@ -210,7 +210,7 @@ grab-pointer WINDOW [CURSOR]
 		      GrabModeAsync, GrabModeAsync,
 		      None,
 		      CURSORP(cursor) ? VCURSOR(cursor)->cursor : None,
-		      last_event_time) == GrabSuccess)
+		      CurrentTime) == GrabSuccess)
     {
 	return Qt;
     }
@@ -218,7 +218,7 @@ grab-pointer WINDOW [CURSOR]
 	return Qnil;
 }
 
-DEFUN("ungrab-pointer", Fungrab_pointer, Sungrab_pointer, (repv win), rep_Subr1) /*
+DEFUN("ungrab-pointer", Fungrab_pointer, Sungrab_pointer, (void), rep_Subr0) /*
 ::doc:Sungrab-pointer::
 ungrab-pointer
 ::end:: */
@@ -312,6 +312,15 @@ screen-height
     return rep_MAKE_INT(screen_height);
 }
 
+DEFUN("sync-server", Fsync_server, Ssync_server, (void), rep_Subr0) /*
+::doc:Ssync-server::
+sync-server
+::end:: */
+{
+    XSync (dpy, False);
+    return Qt;
+}
+
 
 /* initialisation */
 
@@ -337,4 +346,5 @@ functions_init (void)
     rep_ADD_SUBR(Serase_window_outline);
     rep_ADD_SUBR(Sscreen_width);
     rep_ADD_SUBR(Sscreen_height);
+    rep_ADD_SUBR(Ssync_server);
 }
