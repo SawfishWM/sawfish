@@ -266,14 +266,18 @@ static void
 usage (void)
 {
     fputs ("\
-    --display DPY	connect to X display DPY\n\
-    --version		print version details\n\
-    --no-rc		don't load rc or site-init files\n\
-    --disable-nls	disable internationalization of messages\n\
-    -f FUNCTION		call the Lisp function FUNCTION\n\
-    -l FILE		load the file of Lisp forms called FILE\n\
-    -q			quit\n\
-    FILE		load the Lisp file FILE (from the cwd if possible)\n"
+    --version		Print version details\n\
+    --no-rc		Don't load rc or site-init files\n\
+\n\
+    --display=DPY	Connect to X display DPY\n\
+    --visual=VISUAL	Preferred visual type\n\
+    --depth=DEPTH	Preferred color depth\n\
+    --disable-nls	Disable internationalization of messages\n\
+\n\
+    -f FUNCTION		Call the Lisp function FUNCTION\n\
+    -l FILE		Load the file of Lisp forms called FILE\n\
+    -q			Quit\n\
+    FILE		Load the Lisp file FILE\n"
 	   , stderr);
 }
 
