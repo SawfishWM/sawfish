@@ -20,6 +20,8 @@
     managed-windows get-window-by-id stacking-order window-visibility
     window-transient-p window-shaped-p window-visible-p window-framed-p
     window-id window-group-id window-size-hints call-window-hook
+    window-maximized-p window-maximized-horizontally-p
+    window-maximized-vertically-p
 
     add-frame-style check-frame-availability set-window-frame-style
     set-frame-for-window reframe-one-window rebuild-frames-with-style
