@@ -1459,6 +1459,17 @@ DEFSTRING(super_l, "Super_L");
 DEFSTRING(super_r, "Super_R");
 
 static void
+nconc (repv x, repv y)
+{
+    repv *ptr = &x;
+
+    while (rep_CONSP (*ptr))
+	ptr = rep_CDRLOC (*ptr);
+
+    *ptr = y;
+}
+
+static void
 find_meta(void)
 {
     int min_code, max_code;
@@ -1556,17 +1567,17 @@ find_meta(void)
 
     if (meta_mod == alt_mod)
     {
-	meta_syms = Fnconc (rep_list_2 (meta_syms, alt_syms));
+	nconc (meta_syms, alt_syms);
 	alt_syms = meta_syms;
     }
     if (meta_mod == hyper_mod)
     {
-	meta_syms = Fnconc (rep_list_2 (meta_syms, hyper_syms));
+	nconc (meta_syms, hyper_syms);
 	hyper_syms = meta_syms;
     }
     if (meta_mod == super_mod)
     {
-	meta_syms = Fnconc (rep_list_2 (meta_syms, super_syms));
+	nconc (meta_syms, super_syms);
 	super_syms = meta_syms;
     }
 

@@ -568,11 +568,6 @@ property_notify (XEvent *ev)
 	    XGetWMNormalHints (dpy, w->id, &w->hints, &supplied);
 	    break;
 
-	case XA_WM_TRANSIENT_FOR:
-	    if (!XGetTransientForHint (dpy, w->id, &w->transient_for_hint))
-		w->transient_for_hint = 0;
-	    break;
-
 	default:
 	    if (ev->xproperty.atom == xa_wm_colormap_windows)
 	    {

@@ -175,8 +175,6 @@ extern repv Flist_x_properties (repv win);
 extern repv Fget_x_property (repv win, repv prop);
 extern repv Fset_x_property (repv win, repv prop, repv data,
 			     repv type, repv format);
-extern repv Fget_x_text_property (repv win, repv prop);
-extern repv Fset_x_text_property (repv win, repv prop, repv vect, repv enc);
 extern repv Fsend_client_message (repv win, repv type, repv data, repv format);
 extern repv Fcreate_window (repv parent, repv x, repv y,
 			    repv width, repv height);
@@ -343,7 +341,6 @@ extern repv Fmanaged_windows (void);
 extern repv Fget_window_by_id (repv id);
 extern repv Fstacking_order (void);
 extern repv Fwindow_visibility (repv win);
-extern repv Fwindow_transient_p (repv win);
 extern repv Fwindow_shaped_p (repv win);
 extern repv Fhide_window (repv win);
 extern repv Fshow_window (repv win);
