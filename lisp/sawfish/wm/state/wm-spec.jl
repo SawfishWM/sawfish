@@ -28,6 +28,7 @@
     (open rep
 	  rep.system
 	  sawfish.wm.misc
+	  sawfish.wm.events
 	  sawfish.wm.windows
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
@@ -418,6 +419,8 @@
 	 (when (and (windowp w) (window-mapped-p w))
 	   (require 'sawfish.wm.commands.move-resize)
 	   (let ((mode (aref data 2)))
+	     ;; don't want grabs failing, sigh
+	     (x-server-timestamp t t)
 	     (if (eq mode _NET_WM_MOVERESIZE_MOVE)
 		 (move-window-interactively w)
 	       (let ((move-resize-moving-edges

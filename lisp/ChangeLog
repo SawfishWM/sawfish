@@ -1,3 +1,9 @@
+2002-04-02  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/state/wm-spec.jl (client-message-handler): before
+	doing move-resize requests, fetch and save a timestamp so that
+	grabs don't fail. Fixes #77041
+
 2002-03-24  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/animation/outline.jl: add error handling around
