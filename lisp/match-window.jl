@@ -65,8 +65,8 @@
 		     (delete-if-not symbolp (window-group-ids))))
     (place-mode symbol ,(lambda ()
 			  (custom-get-options 'place-window-mode)))
-    (type symbol ,(lambda ()
-		    '(default transient shaped shaped-transient unframed)))
+    (frame-type symbol ,(lambda ()
+			  (mapcar car match-window-types)))
     (frame-style symbol ,(lambda ()
 			   (find-all-frame-styles t)))
     (position pair)
@@ -74,6 +74,13 @@
     (viewport pair)
     (depth number)
     (placement-weight number)))
+
+(defvar match-window-types
+  '((normal . default)
+    (title-only . shaped)
+    (border-only . transient)
+    (top-border . shaped-transient)
+    (none . unframed)))
 
 (defun match-window-widget (symbol value doc)
   (let
@@ -260,4 +267,9 @@
   (put 'viewport 'match-window-setter
        (lambda (w prop value)
 	 (set-screen-viewport (1- (car value)) (1- (cdr value)))
-	 (set-window-viewport w (1- (car value)) (1- (cdr value))))))
+	 (set-window-viewport w (1- (car value)) (1- (cdr value)))))
+
+  (put 'frame-type 'match-window-setter
+       (lambda (w prop value)
+	 (window-put w 'type (or (cdr (assq value match-window-types))
+				 value)))))
