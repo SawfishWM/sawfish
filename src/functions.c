@@ -934,9 +934,6 @@ DEFUN ("find-head", Ffind_head, Sfind_head, (repv x, repv y), rep_Subr2)
     rep_DECLARE (1, x, rep_INTP (x));
     rep_DECLARE (2, y, rep_INTP (y));
 
-    rep_DECLARE (1, x, rep_INT (x) >= 0 && rep_INT (x) < screen_width);
-    rep_DECLARE (2, y, rep_INT (y) >= 0 && rep_INT (y) < screen_height);
-
 #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
     for (i = 0; i < xinerama_heads; i++)
     {
@@ -950,8 +947,14 @@ DEFUN ("find-head", Ffind_head, Sfind_head, (repv x, repv y), rep_Subr2)
 	    return rep_MAKE_INT (i);
 	}
     }
-#endif    
-    return rep_MAKE_INT (0);
+#endif
+    if (xinerama_heads == 0
+	&& rep_INT (x) >= 0 && rep_INT (x) < screen_width
+	&& rep_INT (y) >= 0 && rep_INT (y) < screen_height)
+    {
+	return rep_MAKE_INT (0);
+    }
+    return Qnil;
 }
 
 DEFUN ("head-dimensions", Fhead_dimensions,
