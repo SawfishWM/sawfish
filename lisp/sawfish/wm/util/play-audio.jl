@@ -38,6 +38,9 @@ ESD is used."
   :allow-nil t
   :group audio)
 
+;; currently running audio process
+(define play-sample-process nil)
+
 ;;;###autoload
 (defun play-sample (filename)
   "Play the audio sample stored in file FILENAME."
@@ -52,8 +55,17 @@ ESD is used."
       (copy-file filename real-name)
       (setq delete-it t))
     (if play-sample-program
-	(call-process nil nil play-sample-program real-name)
+	;; start programs asynchronously in case they block..
+	(let ((sentinel (lambda (proc)
+			  (when (eq play-sample-process proc)
+			    (setq play-sample-process nil))
+			  (when delete-it
+			    (delete-file real-name)))))
+	  (when play-sample-process
+	    (kill-process play-sample-process))
+	  (setq play-sample-process (make-process standard-error sentinel))
+	  (start-process play-sample-process play-sample-program real-name))
       (require 'play-sample)
-      (primitive-play-sample real-name))
-    (when delete-it
-      (delete-file real-name))))
+      (primitive-play-sample real-name)
+      (when delete-it
+	(delete-file real-name)))))
