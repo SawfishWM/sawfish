@@ -72,6 +72,7 @@ state."
 
 (defun shading-add-window (w)
   (when (window-get w 'shaded)
+    (window-put w 'shaded nil)
     (shade-window w)))
 
 (add-hook 'add-window-hook shading-add-window t)
