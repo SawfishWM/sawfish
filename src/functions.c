@@ -294,11 +294,8 @@ Returns non-nil if the grab succeeded.
 	g_win = root_window;
 
 again:
-    ret = XGrabPointer (dpy, g_win, False,
-			ButtonPressMask | ButtonReleaseMask
-			| PointerMotionMask | PointerMotionHintMask,
-			GrabModeAsync, GrabModeAsync,
-			None,
+    ret = XGrabPointer (dpy, g_win, False, POINTER_GRAB_EVENTS,
+			GrabModeAsync, GrabModeAsync, None,
 			CURSORP(cursor) ? VCURSOR(cursor)->cursor : None,
 			last_event_time);
     if (ret == GrabNotViewable && g_win != root_window)
