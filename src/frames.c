@@ -59,6 +59,7 @@ DEFSYM(clicked, "clicked");
 static repv state_syms[fps_MAX];
 
 static bool frame_draw_mutex;
+bool frame_state_mutex;
 
 
 /* building frames from component lists
@@ -938,6 +939,28 @@ set to nil any pending redraws will take place.
     return frame_draw_mutex ? Qt : Qnil;
 }
 	
+DEFUN("frame-state-mutex", Vframe_state_mutex,
+      Sframe_state_mutex, (repv arg), rep_Var) /*
+::doc:Vframe-state-mutex::
+While this variable is non-nil the state of frame parts will not be
+altered when the pointer enters or leaves its window.
+::end:: */
+{
+    if (arg != 0)
+    {
+	frame_state_mutex = (arg != Qnil);
+	if (arg == Qclicked
+	    && clicked_frame_part != 0
+	    && !clicked_frame_part->clicked)
+	{
+	    /* XXX hack alert */
+	    clicked_frame_part->clicked = 1;
+	    refresh_frame_part (clicked_frame_part);
+	}
+    }   
+    return frame_state_mutex ? Qt : Qnil;
+}
+	
 
 /* initialisation */
 
@@ -951,6 +974,7 @@ frames_init (void)
     rep_SYM(Qnil_frame)->value = Qnil;
 
     rep_ADD_SUBR(Sframe_draw_mutex);
+    rep_ADD_SUBR(Sframe_state_mutex);
 
     rep_INTERN(internal);
     rep_INTERN(tiled);
