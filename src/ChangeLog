@@ -1,4 +1,23 @@
+2000-08-30    <john@dcs.warwick.ac.uk>
+
+	* windows.c (Fset_input_focus): treat Qroot arg as Qnil (since
+	root-window-keymap is searched when no_focus_window is active)
+
 2000-08-29    <john@dcs.warwick.ac.uk>
+
+	* windows.c (add_window): call place-window-hook if
+	`initialising' is true; this is the only time that
+	place-window-hook is called on a window with the 'placed
+	property
+	(windows_kill): call remove-window-hook before calling
+	remove_window () on each managed window
+
+	* windows.c (emit_pending_destroys): don't decrement
+	pending_destroys each iteration, just zero it before exiting
+
+	* windows.c (remove_window): if !destroyed and !from_error,
+	reinstall the original border-width of the client window
+	(adapted from E. Jay Berkenbilt <ejb@ql.org>)
 
 	* functions.c: if TEST_XINERAMA is defined, fakes a two-headed
 	Xinerama config, for testing purposes

@@ -1,4 +1,45 @@
+2000-08-30    <john@dcs.warwick.ac.uk>
+
+	Some work to help the desktop-in-a-window approach work
+	properly, as used by nautilus:
+
+	* sawfish/wm/focus.jl: use desktop-window-p to recognize
+	root/desktop windows. Make focusing work logically for desktop
+	windows
+
+	* sawfish/wm/windows.jl (desktop-window-p): new function, true
+	if arg is 'root or a window with 'desktop property set
+
+	* sawfish/wm/state/gnome.jl (gnome-honour-client-state): match
+	class `Nautilus/desktop_window' and set its 'desktop property.
+	Also set its 'keymap property to the root-window-keymap
+
+	* sawfish/wm/state/wm-spec.jl: set 'desktop and 'keymap
+	properties of TYPE_DESKTOP windows
+
+	* sawfish/wm/ext/shade-hover.jl (shade-hover-leave): use
+	desktop-window-p to decide when to ignore the event
+
+	* sawfish/wm/commands/x-cycle.jl (next): don't include windows
+	that are desktop-window-p in the list to be selected from
+
 2000-08-29    <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/placement.jl (adjust-window-for-gravity): new
+	optional arg UNADJUST, passed to adjust-position-for-gravity
+	(place-window): if 'placed property is set, treat it like a
+	user-specified position
+	(unplace-window): new function added to remove-window-hook to
+	undo gravity compensation
+
+	* sawfish/wm/windows.jl (adjust-position-for-gravity): new
+	optional arg UNADJUST, when set, adjust the window in the
+	opposite directions to normal
+
+	[ these last two changes are adapted from E. Jay Berkenbilt
+	<ejb@ql.org> ]
+
+	* sawfish/wm/windows.jl (window-gravity): new function
 
 	* sawfish/wm/state/maximize.jl (do-horizontal, do-vertical):
 	fixed for non-zero current-head offsets
