@@ -190,6 +190,10 @@ if test "x$LINGUAS" = x; then
       | sed -e 's/^po\/\(.*\)\.po$/\1/' \
       | tr '\n' ' '`"
 fi
+dnl too gross for words..
+if test $REP_MSGFMT = true; then
+  LINGUAS=""
+fi
 AC_MSG_RESULT($LINGUAS)
 AC_SUBST(LINGUAS)
 
