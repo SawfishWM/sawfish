@@ -94,7 +94,10 @@
 		   sawfish.wm.viewport
 		   sawfish.wm.window-anim
 		   sawfish.wm.windows
-		   sawfish.wm.workspace))
+		   sawfish.wm.workspace
+		   sawfish.wm.state.iconify
+		   sawfish.wm.state.shading
+		   sawfish.wm.state.transient))
 
 (export-bindings (parse-interface
 		  '(compound-interface
@@ -116,7 +119,10 @@
 		    (structure-interface sawfish.wm.viewport)
 		    (structure-interface sawfish.wm.window-anim)
 		    (structure-interface sawfish.wm.windows)
-		    (structure-interface sawfish.wm.workspace))))
+		    (structure-interface sawfish.wm.workspace)
+		    (structure-interface sawfish.wm.state.iconify)
+		    (structure-interface sawfish.wm.state.shading)
+		    (structure-interface sawfish.wm.state.transient))))
 
 (let ((sawfish-load-all (lambda (s)
 			  ;; ensure files are loaded in the correct structure
