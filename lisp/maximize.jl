@@ -19,6 +19,8 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'edges)
+(require 'rects)
 (provide 'maximize)
 
 ;; Commentary:
@@ -28,9 +30,19 @@
 
 (defcustom maximize-avoided-windows-re nil
   "Regular expression matching windows to avoid overlapping when maximizing."
-  :group misc
+  :group maximize
   :type string
   :allow-nil t)
+
+(defcustom maximize-always-expands nil
+  "Maxmizing a window dimension always increases the size of that dimension."
+  :group maximize
+  :type boolean)
+
+(defcustom maximize-raises t
+  "Raise windows when they're maximized."
+  :group maximize
+  :type boolean)
 
 ;; called when a window is maximized, args (W &optional DIRECTION)
 (defvar window-maximized-hook nil)
@@ -79,7 +91,7 @@
 		    (or (memq 'top edges) (memq 'bottom edges))))
 
 
-;; packing
+;; 1D packing
 
 (defmacro maximize-edges-touching (start end edge)
   `(> (- (min ,end (nth 2 ,edge)) (max ,start (nth 1 ,edge))) 0))
@@ -97,12 +109,14 @@
 	    ;; EDGE is (PERP START END OPEN-P)
 	    (if (nth 3 edge)
 		(when (and (< (car edge) max)
-			   (> (car edge) perp-2)
+			   (or (not maximize-always-expands)
+			       (> (car edge) perp-2))
 			   (> (car edge) min)
 			   (maximize-edges-touching start end edge))
 		  (setq max (car edge)))
 	      (when (and (> (car edge) min)
-			 (< (car edge) perp-1)
+			 (or (not maximize-always-expands)
+			     (< (car edge) perp-1))
 			 (< (car edge) max)
 			 (maximize-edges-touching start end edge))
 		(setq min (car edge)))))
@@ -136,31 +150,80 @@
     w))
 
 
+;; 2D packing
+
+(defun maximize-do-both (window avoided edges coords dims fdims)
+  (let*
+      ((grid (grid-from-edges (car edges) (cdr edges)))
+       (center (cons (+ (car coords) (/ (car fdims) 2))
+		     (+ (cdr coords) (/ (cdr fdims) 2))))
+       rects)
+    (setq rects (rectangles-from-grid
+		 (car grid) (cdr grid)
+		 #'(lambda (rect)
+		     ;; the rectangle mustn't overlap any avoided windows
+		     (catch 'foo
+		       (mapc #'(lambda (w)
+				 (when (> (rect-2d-overlap
+					   (window-frame-dimensions w)
+					   (window-position w)
+					   rect) 0)
+				   (throw 'foo nil)))
+			     avoided)
+		       t))))
+	  
+    ;; find the largest rectangle
+    (let
+	((max-area 0)
+	 (max-rect nil))
+      (mapc #'(lambda (rect)
+		(when (> (rectangle-area rect) max-area)
+		  (setq max-area (rectangle-area rect))
+		  (setq max-rect rect))) rects)
+      (when max-rect
+	(rplaca coords (nth 0 max-rect))
+	(rplacd coords (nth 1 max-rect))
+	(rplaca dims (- (- (nth 2 max-rect) (nth 0 max-rect))
+			(- (car fdims) (car dims))))
+	(rplacd dims (- (- (nth 3 max-rect) (nth 1 max-rect))
+			(- (cdr fdims) (cdr dims))))
+	window))))
+
+
 ;; commands
 
 ;;;###autoload
-(defun maximize-window (w &optional direction)
+(defun maximize-window (w &optional direction only-1d)
   "Maximize the dimensions of the window."
   (interactive "%W")
-  (require 'edges)
-  (let
+  (let*
       ((coords (window-position w))
        (dims (window-dimensions w))
        (fdims (window-frame-dimensions w))
+       (avoided (maximize-avoided-windows))
        (edges (get-visible-window-edges ':with-ignored-windows t
-					':windows (maximize-avoided-windows)
+					':windows avoided
 					':include-root t)))
     (unless (window-get w 'unmaximized-geometry)
       (window-put w 'unmaximized-geometry (list (car coords) (cdr coords)
 						(car dims) (cdr dims))))
-    (when (or (null direction) (eq direction 'horizontal))
-      (maximize-do-horizontal w edges coords dims fdims)
-      (window-put w 'maximized-horizontally t))
-    (when (or (null direction) (eq direction 'vertical))
-      (maximize-do-vertical w edges coords dims fdims)
-      (window-put w 'maximized-vertically t))
+    (cond ((null direction)
+	   (if (not only-1d)
+	       (maximize-do-both w avoided edges coords dims fdims)
+	     (maximize-do-horizontal w edges coords dims fdims)
+	     (maximize-do-vertical w edges coords dims fdims))
+	   (window-put w 'maximized-horizontally t)
+	   (window-put w 'maximized-vertically t))
+	  ((eq direction 'horizontal)
+	   (maximize-do-horizontal w edges coords dims fdims)
+	   (window-put w 'maximized-horizontally t))
+	  ((eq direction 'vertical)
+	   (maximize-do-vertical w edges coords dims fdims)
+	   (window-put w 'maximized-vertically t)))
     (move-window-to w (car coords) (cdr coords))
     (resize-window-to w (car dims) (cdr dims))
+    (when maximize-raises
+      (raise-window w))
     (call-window-hook 'window-maximized-hook w (list direction))
     (call-window-hook 'window-state-change-hook w)))
 
@@ -231,8 +294,9 @@ unmaximized."
   "Maximize the window without obscuring any other windows."
   (interactive "%W")
   (let
-      ((maximize-avoided-windows-re ".*"))
-    (maximize-window w direction)))
+      ((maximize-avoided-windows-re ".*")
+       (maximize-always-expands t))
+    (maximize-window w direction t)))
 
 ;;;###autoload
 (defun maximize-fill-window-vertically (w)
