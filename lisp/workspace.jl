@@ -615,24 +615,27 @@
 
 (defun window-menu ()
   (let*
-      ((limits (workspace-limits))
+      ((make-label (lambda (w)
+		     (let
+			 ((name (window-name w)))
+		       (concat (and (window-get w 'iconified) ?\[)
+			       (if (> (length name) 20)
+				   (concat
+				    (substring name 0 20) "...")
+				 name)
+			       (and (window-get w 'iconified)  ?\])
+			       (and (eq (input-focus) w) " *")))))
+       (limits (workspace-limits))
        (windows (managed-windows))
        (i (car limits))
-       menu name)
+       menu)
     (while (<= i (cdr limits))
       (mapc (lambda (w)
 	      (when (and (window-in-workspace-p w i)
 			 (window-mapped-p w)
-			 (not (window-get w 'ignored)))
-		(setq name (window-name w))
-		(setq menu (cons (list (concat
-					(and (window-get w 'iconified) ?\[)
-					(if (> (length name) 20)
-					    (concat
-					     (substring name 0 20) "...")
-					  name)
-					(and (window-get w 'iconified)  ?\])
-					(and (eq (input-focus) w) " *"))
+			 (or (not (window-get w 'ignored))
+			     (window-get w 'iconified)))
+		(setq menu (cons (list (make-label w)
 				       `(display-window
 					 (get-window-by-id ,(window-id w)) ,i))
 				 menu))))
@@ -645,7 +648,7 @@
 	(extra)
       (mapc (lambda (w)
 	      (when (and (window-get w 'iconified) (window-get w 'sticky))
-		(setq extra (cons (list (concat ?[ (window-name w) ?])
+		(setq extra (cons (list (make-label name)
 					`(display-window
 					  (get-window-by-id ,(window-id w))))
 				  extra))))
