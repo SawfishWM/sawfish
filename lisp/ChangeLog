@@ -1,3 +1,21 @@
+1999-12-07  John Harper  <john@dcs.warwick.ac.uk>
+
+	* auto-raise.jl (raise-windows-on-focus): this may no longer be
+	a regexp, instead there's a window property `raise-on-focus'
+	allowing per-window settings
+	* move-window.jl, x-cycle.jl (move-resize-window,
+	cycle-windows): disable auto-raising when appropriate
+	* match-window.jl: added new property `raise-on-focus'
+
+	* frames.jl (define-frame-class): if creating a keymap, make
+	its variable special
+
+	* match-window.jl (match-window-grab-x-property): new function,
+	used by the ui to grab properties
+
+	* custom.jl (custom-declare-variable): fix conversion of old
+	`set' types to the new method
+
 1999-12-06  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.jl (define-frame-class): if creating a keymap, add it
