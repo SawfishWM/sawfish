@@ -140,10 +140,10 @@ the mouse position relative to the window."
        (move-resize-width move-resize-old-width)
        (move-resize-height move-resize-old-height)
        (move-resize-old-ptr-x (car (if from-motion-event
-				       (query-last-pointer)
+				       (query-button-press-pointer)
 				     (query-pointer t))))
        (move-resize-old-ptr-y (cdr (if from-motion-event
-				       (query-last-pointer)
+				       (query-button-press-pointer)
 				     (query-pointer))))
        (move-resize-hints (window-size-hints w))
        (move-resize-frame (cons (- (car (window-frame-dimensions w))
