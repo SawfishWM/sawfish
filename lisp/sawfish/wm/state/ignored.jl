@@ -104,6 +104,6 @@
 			  (lambda (w) (not (window-get w 'cycle-skip))))
   (add-window-menu-toggle (_ "In _window list") 'toggle-window-list-skip
 			  (lambda (w) (not (window-get w 'window-list-skip))))
-  (add-window-menu-toggle (_ "In _task-list") 'toggle-task-list-skip
+  (add-window-menu-toggle (_ "In _task list") 'toggle-task-list-skip
                          (lambda (w) (not (window-get w 'task-list-skip)))))
 
