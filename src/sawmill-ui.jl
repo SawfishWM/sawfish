@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.30 1999/10/24 19:57:22 john Exp $
+;; $Id: sawmill-ui.jl,v 1.31 1999/10/29 13:47:09 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -895,35 +895,38 @@ exec rep "$0" "$@"
 
 (defun build-frame-style:update-readme (spec)
   (catch 'out
-    (mapc #'(lambda (dir)
-	      (let
-		  ((full (expand-file-name
-			  (symbol-name (get-key spec ':value)) dir)))
-		(when (catch 'out
-			(mapc #'(lambda (suf)
-				  (when (file-directory-p (concat full suf))
-				    (setq full (concat full suf))
-				    (throw 'out t)))
-			      '("" ".tar#tar" ".tar.gz#tar"
-			        ".tar.Z#tar" ".tar.bz2#tar"))
-			nil)
-		  (setq full (expand-file-name "README" full))
-		  (if (file-exists-p full)
-		      (let
-			  ((text (make-string-output-stream))
-			   (file (open-file full 'read)))
-			(unwind-protect
-			    (progn
-			      (copy-stream file text)
-			      (setq text (get-output-stream-string text))
-			      (when (string-match "\\s+$" text)
-				(setq text (substring text 0 (match-start))))
-			      (gtk-label-set (get-key spec ':readme) text))
-			  (close-file file)))
-		    (gtk-label-set (get-key spec ':readme) ""))
-		  (throw 'out t))))
-	  (get-key spec ':theme-path))
-    (gtk-label-set (get-key spec ':readme) "")))
+    (let
+	((theme (symbol-name (get-key spec ':value))))
+      (mapc #'(lambda (dir)
+		(let
+		    ((full (expand-file-name theme dir)))
+		  (when (catch 'out
+			  (mapc #'(lambda (suf)
+				    (let
+					((dir (format nil suf full theme)))
+				      (when (file-directory-p dir)
+					(setq full dir)
+					(throw 'out t))))
+				'("%s" "%s.tar#tar/%s" "%s.tar.gz#tar/%s"
+				 "%s.tar.Z#tar/%s" "%s.tar.bz2#tar/%s"))
+			  nil)
+		    (setq full (expand-file-name "README" full))
+		    (if (file-exists-p full)
+			(let
+			    ((text (make-string-output-stream))
+			     (file (open-file full 'read)))
+			  (unwind-protect
+			      (progn
+				(copy-stream file text)
+				(setq text (get-output-stream-string text))
+				(when (string-match "\\s+$" text)
+				  (setq text (substring text 0 (match-start))))
+				(gtk-label-set (get-key spec ':readme) text))
+			    (close-file file)))
+		      (gtk-label-set (get-key spec ':readme) ""))
+		    (throw 'out t))))
+	    (get-key spec ':theme-path))
+      (gtk-label-set (get-key spec ':readme) ""))))
 
 
 ;; building the frame for the element tree
