@@ -47,7 +47,7 @@
     "Invoke the user-customization system."
     (system (format nil "%s %s '%S' >/dev/null 2>&1 </dev/null &"
 		    customize-program
-		    (and group customize-group-opt)
+		    (if group customize-group-opt "")
 		    (or group ""))))
 
   ;;###autoload
