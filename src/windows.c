@@ -1206,10 +1206,13 @@ window_sweep (void)
 void
 manage_windows (void)
 {
-    Window root, parent, *children;
+    Window root, parent, *children, focus;
     unsigned int nchildren, i;
+    int revert_to;
 
     Fgrab_server ();
+
+    XGetInputFocus (dpy, &focus, &revert_to);
     XQueryTree (dpy, root_window, &root, &parent, &children, &nchildren);
     initialising = TRUE;
     for (i = 0; i < nchildren; i++)
@@ -1226,8 +1229,17 @@ manage_windows (void)
     initialising = FALSE;
     if (nchildren > 0)
 	XFree (children);
-    Fungrab_server ();
 
+    /* Try to keep the current focus state. */
+    focus_on_window (0);
+    if (focus != None && focus != PointerRoot)
+    {
+	Lisp_Window *w = find_window_by_id (focus);
+	if (w != 0)
+	    focus_on_window (w);
+    }
+
+    Fungrab_server ();
     Fcall_hook (Qafter_initialization_hook, Qnil, Qnil);
 }
 
