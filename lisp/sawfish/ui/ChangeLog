@@ -1,5 +1,9 @@
 2000-09-04  John Harper  <john@dcs.warwick.ac.uk>
 
+	* main.jl.in: /bin/sh on solaris 8 doesn't like to pass
+	environment settings on the same line as exec stmts. So set
+	REP_LOAD_PATH, export it, then run `rep'
+
 	* wm.jl (wm-documentation): use the `command-documentation'
 	function
 
