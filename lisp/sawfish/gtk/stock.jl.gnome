@@ -34,5 +34,35 @@
       ((ok cancel yes no close apply help)
        (gnome-stock-button type))
       ((revert)
-       (gtk-button-new-with-label (_ "Revert"))))))
+       (gtk-button-new-with-label (_ "Revert")))))
 
+  (define (simple-dialog title widget &optional ok-callback main-window)
+
+    (let ((window (gnome-dialog-new title (if ok-callback
+					      '(ok cancel)
+					    '(ok)))))
+
+      (define (on-cancel)
+	(gtk-widget-destroy window))
+
+      (define (on-ok)
+	(ok-callback)
+	(gtk-widget-destroy window))
+	  
+      (gtk-window-set-wmclass window "ok_cancel_dialog" "Nokogiri")
+      (when main-window
+	(gnome-dialog-set-parent window main-window))
+      (gtk-container-add (gnome-dialog-vbox window) widget)
+
+      (gtk-signal-connect window "clicked"
+			  (lambda (w button)
+			    (if (and (= button 0) ok-callback)
+				(ok-callback))
+			    (gtk-widget-destroy w)))
+      (gtk-signal-connect window "delete_event" gtk-widget-destroy)
+
+      (gtk-widget-show window)
+      (gtk-window-set-modal window t)
+      (gtk-widget-grab-focus widget)
+
+      window)))

@@ -25,7 +25,8 @@
 
 (define-structure nokogiri-gnome nokogiri-gnome-interface
 
-    (open rep gtk)
+    (open rep gtk
+	  nokogiri-widget)
 
   (define (stock-button type)
     (gtk-button-new-with-label
@@ -37,7 +38,52 @@
        ((yes) (_ "Yes"))
        ((no) (_ "No"))
        ((close) (_ "Close"))
-       ((help) (_ "Help"))))))
+       ((help) (_ "Help")))))
+
+  (define (simple-dialog title widget &optional ok-callback main-window)
+
+    (let ((window (gtk-window-new 'dialog))
+	  (vbox (gtk-vbox-new nil box-spacing))
+	  (hbbox (gtk-hbutton-box-new))
+	  (ok (stock-button 'ok))
+	  (cancel (and ok-callback (stock-button 'cancel))))
+
+      (define (on-cancel)
+	(gtk-widget-destroy window))
+
+      (define (on-ok)
+	(ok-callback)
+	(gtk-widget-destroy window))
+	  
+      (gtk-window-set-title window title)
+      (gtk-window-set-wmclass window "ok_cancel_dialog" "Nokogiri")
+      (gtk-container-border-width window box-border)
+      (when main-window
+	(gtk-window-set-transient-for window main-window))
+
+      (gtk-button-box-set-layout hbbox 'end)
+      (gtk-box-pack-start hbbox ok)
+      (when cancel
+	(gtk-box-pack-end hbbox cancel))
+      (gtk-box-pack-end vbox hbbox)
+      (gtk-container-add window vbox)
+      (gtk-widget-show-all vbox)
+
+      (gtk-container-add vbox widget)
+
+      (when cancel
+	(gtk-signal-connect cancel "clicked" on-cancel))
+      (gtk-signal-connect ok "clicked" (if ok-callback on-ok on-cancel))
+      (gtk-signal-connect window "delete_event" on-cancel)
+
+      (gtk-widget-show window)
+      (gtk-window-set-modal window t)
+      (gtk-widget-grab-focus widget)
+
+      window)))
+
+
+;;; simple replacement widgets for those that use GNOME
 
 (structure () (open rep gtk nokogiri-widget)
 
