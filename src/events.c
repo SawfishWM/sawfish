@@ -731,12 +731,19 @@ unmap_notify (XEvent *ev)
     }
 }
 
+static inline repv
+mode_to_sym (int mode)
+{
+    return (mode == NotifyNormal ? Qnormal
+	    : mode == NotifyGrab ? Qgrab
+	    : Qungrab);
+}
+
 static void
 enter_notify (XEvent *ev)
 {
     struct frame_part *fp;
-    repv mode = (ev->xcrossing.mode == NotifyNormal ? Qnormal
-		 : ev->xcrossing.mode == NotifyGrab ? Qgrab : Qungrab);
+    repv mode = mode_to_sym (ev->xcrossing.mode);
     if (ev->xcrossing.window == root_window)
 	Fcall_hook (Qenter_notify_hook, rep_list_2 (Qroot, mode), Qnil);
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
@@ -780,8 +787,7 @@ static void
 leave_notify (XEvent *ev)
 {
     struct frame_part *fp;
-    repv mode = (ev->xcrossing.mode == NotifyNormal ? Qnormal
-		 : ev->xcrossing.mode == NotifyGrab ? Qgrab : Qungrab);
+    repv mode = mode_to_sym (ev->xcrossing.mode);
     if (ev->xcrossing.window == root_window)
     {
 	Fcall_hook (Qleave_notify_hook, rep_LIST_2 (Qroot, mode), Qnil);
@@ -845,7 +851,11 @@ focus_in (XEvent *ev)
 		w->focus_change (w);
 	    }
 	    if (w->id != 0)
-		Fcall_window_hook (Qfocus_in_hook, rep_VAL(w), Qnil, Qnil);
+	    {
+		Fcall_window_hook (Qfocus_in_hook, rep_VAL(w),
+				   rep_LIST_1 (mode_to_sym (ev->xfocus.mode)),
+				   Qnil);
+	    }
 	}
     }
     else if (ev->xfocus.window == root_window)
@@ -872,7 +882,11 @@ focus_out (XEvent *ev)
 		w->focus_change (w);
 	    }
 	    if (w->id != 0)
-		Fcall_window_hook (Qfocus_out_hook, rep_VAL(w), Qnil, Qnil);
+	    {
+		Fcall_window_hook (Qfocus_out_hook, rep_VAL(w),
+				   rep_LIST_1 (mode_to_sym (ev->xfocus.mode)),
+				   Qnil);
+	    }
 	}
     }
 }
