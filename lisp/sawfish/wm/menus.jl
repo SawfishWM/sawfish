@@ -120,7 +120,11 @@ unused before killing it."
   (condition-case nil
       (let
 	  ((result (read-from-string output)))
-	(throw 'menu-done result))
+	;; GTK takes the focus for its menu, but later returns it to
+	;; the original window. We want the focus to be restored by the
+	;; time the menu-chosen command is invoked..
+	(accept-x-input)
+	(menu-dispatch result))
     (end-of-stream
      (setq menu-pending output))))
 
@@ -144,33 +148,30 @@ unused before killing it."
 	(setq cell (mapcar 'menu-preprocessor cell)))
       (cons label cell))))
 
+(defun menu-dispatch (result)
+  (setq menu-active nil)
+  (menu-stop-process)
+  (when result
+    (cond ((commandp result)
+	   (call-command result))
+	  ((functionp result)
+	   (funcall result))
+	  (t
+	   result))))
+
 ;;;###autoload
 (defun popup-menu (spec)
   (if menu-active
       (error "Menu already active")
-    (setq menu-active)
+    (setq menu-active t)
     (menu-start-process)
     ;; This function is probably called from a ButtonPress event,
     ;; so cancel the implicit pointer grab (to allow the menu's grab
     ;; to succeed)
     (ungrab-pointer)
     (sync-server)
-    (unwind-protect
-	(let
-	    ((result (catch 'menu-done
-		       (format menu-process "(popup-menu %S)\n"
-			       (mapcar 'menu-preprocessor spec))
-		       (while t
-			 (accept-process-output 10)))))
-	  (setq menu-active nil)
-	  (when result
-	    (cond ((commandp result)
-		   (call-command result))
-		  ((functionp result)
-		   (funcall result))
-		  (t
-		   result))))
-      (menu-stop-process))))
+    (format menu-process "(popup-menu %S)\n"
+	    (mapcar 'menu-preprocessor spec))))
 
 ;;;###autoload
 (defun popup-window-menu ()
