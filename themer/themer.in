@@ -25,14 +25,15 @@ exec rep "$0" "$@"
 
 (require 'libglade)
 
+;; todo
+;; * warn when unsaved changes would be lost
+;; * allow all frame types to be previewed
+
 ;; for debugging
 (setq backtrace-on-error '(bad-arg missing-arg void-value invalid-function))
 
 (defvar version "__version__")
 (defvar glade-file "__sawmilldir__/__version__/themer.glade")
-
-;; todo
-;; * warn when unsaved changes would be lost
 
 
 ;; configuration
@@ -109,6 +110,7 @@ exec rep "$0" "$@"
 ;; details data
 
 (defvar theme-name-entry (glade-xml-get-widget xml "theme-name-entry"))
+(defvar theme-dir-entry (glade-xml-get-widget xml "theme-dir-entry"))
 (defvar theme-about-text (glade-xml-get-widget xml "theme-about-text"))
 
 (defvar theme-name 'unnamed)
@@ -1108,7 +1110,9 @@ exec rep "$0" "$@"
 
 (defun on-mapping-add ()
   (let
-      ((name (intern (make-new-name "type" (mapcar car mapping-alist)))))
+      ((name (intern (make-new-name "type" (mapcar (lambda (x)
+						     (symbol-name (car x)))
+						   mapping-alist)))))
     (setq mapping-alist (nconc mapping-alist (list (cons name ""))))
     (gtk-clist-append mapping-clist (vector (symbol-name name) ""))
     (gtk-clist-select-row mapping-clist (1- (length mapping-alist)) 0)
@@ -1245,6 +1249,10 @@ exec rep "$0" "$@"
   (frames-update-all)
   (mappings-update-all))
 
+(defun set-current-filename (file)
+  (setq current-filename file)
+  (gtk-entry-set-text theme-dir-entry (if file (file-name-directory file) "")))
+
 (defun save-to-file (filename)
   (condition-case data
       (let
@@ -1303,6 +1311,21 @@ exec rep "$0" "$@"
 	    (cdr pat))))
    patterns))
 
+(defun generate-theme (dir)
+  (when (and (file-exists-p dir) (not (file-directory-p dir)))
+    (error "Not a directory: %s" dir))
+  (unless (file-exists-p dir)
+    (make-directory dir))
+  (set-current-filename (expand-file-name "theme.jl" dir))
+;; XXX don't do this for now
+;; (setq frames-alist (filter-unused-frames frames-alist mapping-alist))
+;; (setq patterns-alist (filter-unused-patterns patterns-alist frames-alist))
+  (let
+      ((patterns-alist (generate-patterns patterns-alist dir)))
+    (save-to-file current-filename))
+  (write-readme-file dir)
+  (message (format nil "Generated theme in directory `%s'" dir)))
+
 (defun new-theme ()
   (mapc (lambda (sym)
 	  (set sym nil)) saved-variables)
@@ -1329,41 +1352,22 @@ exec rep "$0" "$@"
 		     (format nil (_ "Read theme from `%s'") filename)))))
 	    (end-of-stream))
 	(close-file file))
-      (setq current-filename filename)
+      (set-current-filename filename)
       (read-readme-file (file-name-directory filename))
       (update-all))))
 
 (defun on-save ()
   (if current-filename
-      (save-to-file current-filename)
+      (generate-theme (file-name-directory current-filename))
     (on-save-as)))
 
 (defun on-save-as ()
   (let
-      ((file (file-dialog (_ "Save As") current-filename)))
-    (when file
-      (setq current-filename file)
-      (save-to-file file))))
-
-(defun on-generate-theme ()
-  (let
       ((dir (file-dialog (_ "Theme Directory")
-			 (file-name-directory current-filename))))
+			  (and current-filename
+			       (file-name-directory current-filename)))))
     (when dir
-      (when (and (file-exists-p dir) (not (file-directory-p dir)))
-	(error "Not a directory: %s" dir))
-      (unless (file-exists-p dir)
-	(make-directory dir))
-      (setq current-filename (expand-file-name "theme.jl" dir))
-      (setq frames-alist (filter-unused-frames frames-alist mapping-alist))
-      (setq patterns-alist (filter-unused-patterns
-			    patterns-alist frames-alist))
-      (let
-	  ((patterns-alist (generate-patterns patterns-alist dir)))
-	(format standard-error "Generated: %S\n" patterns-alist)
-	(save-to-file current-filename))
-      (write-readme-file dir)
-      (message (format nil "Generated theme in directory `%s'" dir)))))
+      (generate-theme dir))))
 
 (defun on-open ()
   (let
@@ -1380,7 +1384,7 @@ exec rep "$0" "$@"
 	 (message (format nil "%S" data)))))))
 
 (defun on-new-theme ()
-  (setq current-filename nil)
+  (set-current-filename nil)
   (new-theme))
 
 
@@ -1520,21 +1524,30 @@ through a GUI.\n" version))
       (gtk-widget-destroy filesel))))
 
 (let
-    ((message-count 0))
+    ((message-count 0)
+     (message-text nil))
 
   (defun remove-message ()
     (let
 	((statusbar (glade-xml-get-widget xml "statusbar")))
       (while (> message-count 0)
 	(gtk-statusbar-pop statusbar 1)
-	(setq message-count (1- message-count)))))
+	(setq message-count (1- message-count)))
+      (setq message-text nil)))
 
   (defun message (string)
     (let
 	((statusbar (glade-xml-get-widget xml "statusbar")))
       (remove-message)
       (gtk-statusbar-push statusbar 1 string)
-      (setq message-count (1+ message-count))))
+      (setq message-count (1+ message-count))
+      (setq message-text nil)))
+
+  (defun append-message (string)
+    (let
+	((new (concat message-text string)))
+      (remove-message)
+      (message new)))
 
   (add-hook 'idle-hook remove-message))
 
