@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.45 1999/12/07 13:23:18 john Exp $
+;; $Id: sawmill-ui.jl,v 1.46 1999/12/07 17:25:57 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -91,7 +91,7 @@ exec rep "$0" "$@"
 			   (expand-last-match "\\1")
 			 ui-lang)))
 
-(defvar ui-color-preview-width 32)
+(defvar ui-color-preview-width 28)
 (defvar ui-color-preview-height 16)
 
 
@@ -1560,7 +1560,7 @@ exec rep "$0" "$@"
       (setq i (1+ i)))
     (setq i 0)
     (while (< i ui-color-preview-height)
-      (gtk-preview-draw-row preview buf 0 i 32)
+      (gtk-preview-draw-row preview buf 0 i ui-color-preview-width)
       (setq i (1+ i)))))
 
 (defun ui-button-new-with-color (color-name)
