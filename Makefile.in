@@ -23,9 +23,9 @@ include ./Makedefs
 top_builddir=.
 top_srcdir=@top_srcdir@
 
-SUBDIRS = src lisp man images
+SUBDIRS = src lisp images
 
-all : build.h DOC.dir
+all : build.h DOC.dir NEWS
 	set -e; for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
  	done
