@@ -43,8 +43,6 @@ exec rep "$0" "$@"
 	  sawfish.ui.group
 	  sawfish.ui.user-level)
 
-  (setq backtrace-on-error '(void-value missing-arg bad-arg invalid-function))
-
   (define socket-id nil)
 
   (when (get-command-line-option "--help")
