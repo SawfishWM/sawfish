@@ -37,6 +37,9 @@
 (load-all "autoload.jl" t)
 (load-all (concat "os-" (symbol-name operating-system)) t)
 
+;; set $DISPLAY so that any subprocesses inherit it
+(setenv "DISPLAY" display-name)
+
 ;; load always-present session-manager stuff
 (require 'sm-init)
 
