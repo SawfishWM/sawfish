@@ -266,6 +266,7 @@ property_notify (XEvent *ev)
     Lisp_Window *w = find_window_by_id (ev->xproperty.window);
     if (w != 0 && ev->xproperty.window == w->id)
     {
+	bool need_refresh = FALSE, changed = TRUE;
 	switch (ev->xproperty.atom)
 	{
 	    u_char *prop;
@@ -285,10 +286,28 @@ property_notify (XEvent *ev)
 	    {
 		if (format == 8 && w->id != 0)
 		{
+		    repv str = rep_string_dup (prop);
 		    if (ev->xproperty.atom == XA_WM_NAME)
-			w->full_name = w->name = rep_string_dup (prop);
+		    {
+			if (Fequal (w->name, str) == Qnil
+			    || Fequal (w->full_name, str) == Qnil)
+			{
+			    w->full_name = w->name = str;
+			    need_refresh = TRUE;
+			}
+			else
+			    changed = FALSE;
+		    }
 		    else
-			w->icon_name = rep_string_dup (prop);
+		    {
+			if (Fequal (w->icon_name, str) == Qnil)
+			{
+			    w->icon_name = str;
+			    need_refresh = TRUE;
+			}
+			else
+			    changed = FALSE;
+		    }
 		}
 		XFree (prop);
 	    }
@@ -304,13 +323,21 @@ property_notify (XEvent *ev)
 	    XGetNormalHints (dpy, w->id, &hints);
 	    break;
 	}
-	if (w->reparented && w->property_change != 0 && w->id != 0)
-	    w->property_change (w);
 
-	Fcall_window_hook (Qproperty_notify_hook, rep_VAL(w),
-			   rep_list_2 (x_atom_symbol (ev->xproperty.atom),
-				       ev->xproperty.state == PropertyNewValue
-				       ? Qnew_value : Qdeleted), Qnil);
+	if (need_refresh && w->reparented
+	    && w->property_change != 0 && w->id != 0)
+	{
+	    w->property_change (w);
+	}
+
+	if (changed)
+	{
+	    Fcall_window_hook (Qproperty_notify_hook, rep_VAL(w),
+			       rep_list_2 (x_atom_symbol (ev->xproperty.atom),
+					   ev->xproperty.state
+					   == PropertyNewValue
+					   ? Qnew_value : Qdeleted), Qnil);
+	}
     }
 }
 
