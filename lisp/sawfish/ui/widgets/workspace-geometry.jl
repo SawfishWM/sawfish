@@ -1,4 +1,4 @@
-#| nokogiri-widgets/file.jl -- file name widget
+#| nokogiri-widgets/workspace-geometry.jl
 
    $Id$
 

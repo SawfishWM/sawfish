@@ -1,4 +1,22 @@
+2000-07-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl, custom.jl, audio-events.jl: translate some
+	strings in defcustom types
+
+	* custom.jl (custom-option-alist): added `:type*' key, similar
+	to `:type' but value isn't quoted
+
 2000-07-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* stacking.jl (stacking-constraint:transients-above-parent):
+	handle transients with more than one parent window
+	(raise-windows, lower-windows): map across the list of windows
+	twice to ensure that the optimum layout is found
+
+	* transient.jl (transient-of-p, transient-parents): new
+	functions. All these functions now understand the convention of
+	setting WM_TRANSIENT_FOR to the root window to denote that the
+	window is a transient for the whole group
 
 	* sawmill.jl: load-all "autoload" not "autoload.jl"
 

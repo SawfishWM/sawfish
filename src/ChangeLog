@@ -1,3 +1,12 @@
+2000-07-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* main.c (main): unless XSupportsLocale (), don't use FontSets
+	(patch from Tomohiro KUBOTA <kubota@surfchem0.riken.go.jp>)
+
+2000-07-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* functions.c (Froot_window_id): new function
+
 2000-07-04  John Harper  <john@dcs.warwick.ac.uk>
 
 	* session.c (ICE_input_ready): if IceProcessMessages () fails,

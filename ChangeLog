@@ -1,4 +1,20 @@
+2000-07-06  John Harper  <john@dcs.warwick.ac.uk>
+
+	* configure.in, Makefile.in, capplet/Makefile.in,
+	man/Makefile.in, nokogiri/Makefile.in, po/Makefile.in,
+	sounds/Makefile.in, src/Makefile.in, themer/Makefile.in,
+	themes/Makefile.in): some support for building in a separate
+	directory tree; but this still doesn't work properly  (adapted
+	from Martin Pottendorfer <pottendo@utanet.at>)
+
+	* po/pl.po: updated Polish translation from Daniel Koc
+
+	* configure.in: remember to delete `conftest' file after
+	checking for rep-gtk (from Brad Thompson <yak@mit.edu>)
+
 2000-07-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* configure.in: require rep-gtk 0.13 (unreleased)
 
 	* configure.in: test if we're able to use GNOME parts of
 	rep-gtk (for the configurator)
