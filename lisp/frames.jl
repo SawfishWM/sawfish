@@ -19,6 +19,7 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'timers)
 (provide 'frames)
 
 ;; Commentary:
@@ -108,13 +109,21 @@ that overrides settings set elsewhere.")
 (defcustom always-update-frames t
   "Update all windows when the default frame style is changed."
   :type boolean
-  :group appearance)
+  :group misc)
 
 (defcustom decorate-transients nil
-  "Decorate transient windows in the same way as non-transient windows."
+  "Decorate transient windows similarly to top-level windows."
   :type boolean
   :group appearance
   :after-set after-setting-frame-option)
+
+(defcustom reload-themes-when-changed t
+  "Automatically reload themes when they are updated."
+  :type boolean
+  :group misc)
+
+(defvar theme-update-interval 60
+  "Number of seconds between checking if theme files have been modified.")
 
 (defvar user-theme-directory "~/.sawmill/themes"
   "Directory containing user-local themes.")
@@ -134,6 +143,10 @@ that overrides settings set elsewhere.")
 
 (defvar frame-styles nil
   "List of (NAME . FUNCTION) defining all loaded frame styles.")
+
+;; List of (NAME FILENAME MODTIME) mapping loaded frame styles to the
+;; files they were loaded from; used to check if the theme needs reloading
+(defvar frame-style-files nil)
 
 ;; used when decorate-transients is non-nil, map transient window
 ;; types to type to pass to frame style function
@@ -158,6 +171,18 @@ that overrides settings set elsewhere.")
     (if cell
 	(rplacd cell function)
       (setq frame-styles (cons (cons name function) frame-styles)))
+    (when load-filename
+      (let
+	  ;; if we're loading from a tar-file, then check the
+	  ;; tar file itself, not its contents (for efficiency)
+	  ((file (if (string-match "#tar/" load-filename)
+		     (substring load-filename 0 (match-start))
+		   load-filename)))
+	(setq cell (assq name frame-style-files))
+	(if cell
+	    (rplacd cell (list file (file-modtime file)))
+	  (setq frame-style-files (cons (list name file (file-modtime file))
+					frame-style-files)))))
     (unless default-frame-style
       (setq default-frame-style name))))
 
@@ -165,6 +190,11 @@ that overrides settings set elsewhere.")
   (unless (assq name frame-styles)
     (load-frame-style name)
     (or (assq name frame-styles) (error "No such frame style: %s" name))))
+
+(defun reload-frame-style (name)
+  (when (assq name frame-styles)
+    (load-frame-style name)
+    (reframe-windows-with-style name)))
 
 (defun set-frame-style (name)
   (check-frame-availability name)
@@ -214,6 +244,19 @@ that overrides settings set elsewhere.")
 
 (defun reframe-all-windows ()
   (mapc reframe-one-window (managed-windows)))
+
+;; called periodically from a timer
+(defun frames-on-idle (timer)
+  (set-timer timer theme-update-interval)
+  (when reload-themes-when-changed
+    (mapc (lambda (cell)
+	    (let
+		((style (nth 0 cell))
+		 (file (nth 1 cell))
+		 (modtime (nth 2 cell)))
+	      (when (time-later-p (file-modtime file) modtime)
+		(reload-frame-style style))))
+	  frame-style-files)))
 
 
 ;; kludge different window decors by modifying the assumed window type
@@ -422,6 +465,8 @@ that overrides settings set elsewhere.")
 
 (add-hook 'add-window-hook set-frame-for-window t)
 (add-hook 'shape-notify-hook reframe-one-window t)
+
+(make-timer frames-on-idle theme-update-interval)
 
 (sm-add-saved-properties 'type 'ignored 'frame-style)
 (add-swapped-properties 'frame-active-color 'frame-inactive-color)
