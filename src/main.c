@@ -241,6 +241,7 @@ usage (void)
     --display DPY	connect to X display DPY\n\
     --version		print version details\n\
     --no-rc		don't load rc or site-init files\n\
+    --disable-nls	disable internationalization of messages\n\
     -f FUNCTION		call the Lisp function FUNCTION\n\
     -l FILE		load the file of Lisp forms called FILE\n\
     -q			quit\n"
