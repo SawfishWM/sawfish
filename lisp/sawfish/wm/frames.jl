@@ -23,8 +23,7 @@
 
     (compound-interface
      (structure-interface sawfish.wm.frames.subrs)
-     (export custom-set-frame-style
-	     after-setting-frame-option
+     (export after-setting-frame-option
 	     define-frame-type-mapper
 	     add-frame-style
 	     reload-frame-style
@@ -33,6 +32,8 @@
 	     rebuild-frames-with-style
 	     reframe-windows-with-style
 	     set-frame-style
+	     apply-frame-style
+	     apply-frame-style-and-save
 	     mark-frame-style-editable
 	     frame-style-editable-p
 	     window-type
@@ -337,6 +338,27 @@ deciding which frame type to ask a theme to generate.")
       (window-put w 'frame-style style)
       (call-window-hook 'window-state-change-hook w (list '(frame-style)))
       (reframe-window w)))
+
+  ;; return true iff successful
+  (define (apply-frame-style style)
+    (let ((old-style default-frame-style))
+      (condition-case nil
+	  (progn
+	    (setq default-frame-style style)
+	    (after-setting-default-frame)
+	    t)
+	(error
+	 (setq default-frame-style old-style)
+	 (after-setting-frame-option)
+	 nil))))
+
+  (define (save-current-frame-style)
+    (require 'sawfish.wm.customize)
+    (customize-set 'default-frame-style default-frame-style))
+
+  (define (apply-frame-style-and-save style)
+    (when (apply-frame-style style)
+      (save-current-frame-style)))
 
 
 ;;; editable frame styles
