@@ -143,8 +143,15 @@
 ;;;###autoload
 (defun raise-lower-group (w)
   (interactive "%W")
-  ;; this is suboptimal, but I see no alternative..
-  (if (window-on-top-p w)
+  (if (or (eq (window-visibility w) 'unobscured)
+	  (let ((order (windows-in-group w t)))
+	    (and (window-on-top-p (car order))
+		 ;; look for the group as a block.. this is a heuristic
+		 (let loop ((rest (memq (car order) (stacking-order))))
+		   (cond ((null rest) nil)
+			 ((eq (car rest) w) t)
+			 ((memq (car rest) order) (loop (cdr rest)))
+			 (t nil))))))
       (lower-group w)
     (raise-group w)))
 
