@@ -93,7 +93,7 @@ mapped_not_override_p (Window id)
 void
 focus_on_window (Lisp_Window *w)
 {
-    if (w != 0 && (w->id != 0 || w->frame != 0))
+    if (w != 0 && w->id != 0 && w->visible)
     {
 	Window focus;
 	DB(("focus_on_window (%s)\n", rep_STR(w->name)));
