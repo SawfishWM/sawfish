@@ -796,7 +796,7 @@ grab will be released first.
 {
     Window w = x_win_from_arg (win);
     if (w == 0)
-	return rep_signal_arg_error (win, 1);
+	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
 
     if (current_x_event != 0)
     {

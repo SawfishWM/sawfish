@@ -101,7 +101,7 @@ WINDOW may be a window object or a numeric window id.
 {
     Window w = x_win_from_arg (win);
     if (w == 0)
-	return rep_signal_arg_error (win, 1);
+	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
     if (WINDOWP(win) && VWIN(win)->does_wm_delete_window)
 	send_client_message (w, xa_wm_delete_window, last_event_time);
     else
@@ -488,9 +488,9 @@ WINDOW may be the symbol `root', a window object or a numeric window id.
 ::end:: */
 {
     Window w = x_win_from_arg (win);
-    if (w == 0)
-	return rep_signal_arg_error (win, 1);
     rep_DECLARE2(atom, rep_SYMBOLP);
+    if (w == 0)
+	return WINDOWP(win) ? atom : rep_signal_arg_error (win, 1);
     XDeleteProperty (dpy, w,
 		     XInternAtom (dpy, rep_STR(rep_SYM(atom)->name), False));
     return atom;
@@ -514,7 +514,7 @@ WINDOW may be the symbol `root', a window object or a numeric window id.
 
     w = x_win_from_arg (win);
     if (w == 0)
-	return rep_signal_arg_error (win, 1);
+	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
     atoms = XListProperties (dpy, w, &count);
     if (atoms != 0)
     {
@@ -570,9 +570,9 @@ symbols, representing the atoms read.
     rep_GC_root gc_ret_data;
 
     w = x_win_from_arg (win);
-    if (w == 0)
-	return rep_signal_arg_error (win, 1);
     rep_DECLARE2(prop, rep_SYMBOLP);
+    if (w == 0)
+	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
     a_prop = XInternAtom (dpy, rep_STR(rep_SYM(prop)->name), False);
 
     /* First read the data.. */
@@ -664,14 +664,14 @@ converted to their numeric X atoms.
     u_char *c_data = 0;
 
     w = x_win_from_arg (win);
-    if (w == 0)
-	return rep_signal_arg_error (win, 1);
     rep_DECLARE2(prop, rep_SYMBOLP);
     a_prop = XInternAtom (dpy, rep_STR(rep_SYM(prop)->name), False);
     rep_DECLARE(3, data, rep_VECTORP(data) || rep_STRINGP(data));
     rep_DECLARE4(type, rep_SYMBOLP);
     a_type = XInternAtom (dpy, rep_STR(rep_SYM(type)->name), False);
     rep_DECLARE5(format, rep_INTP);
+    if (w == 0)
+	return WINDOWP(win) ? prop : rep_signal_arg_error (win, 1);
 
     /* Convert to data array */
 
@@ -739,9 +739,9 @@ get-x-text-property WINDOW PROPERTY
     repv ret = Qnil;
 
     w = x_win_from_arg (win);
-    if (w == 0)
-	return rep_signal_arg_error (win, 1);
     rep_DECLARE2(prop, rep_SYMBOLP);
+    if (w == 0)
+	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
     a_prop = XInternAtom (dpy, rep_STR(rep_SYM(prop)->name), False);
 
     if (XGetTextProperty (dpy, w, &t_prop, a_prop) != 0)
@@ -775,10 +775,10 @@ set-x-text-property WINDOW PROPERTY STRING-VECTOR
     int count, i;
 
     w = x_win_from_arg (win);
-    if (w == 0)
-	return rep_signal_arg_error (win, 1);
     rep_DECLARE2(prop, rep_SYMBOLP);
     rep_DECLARE3(vect, rep_VECTORP);
+    if (w == 0)
+	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
     a_prop = XInternAtom (dpy, rep_STR(rep_SYM(prop)->name), False);
 
     count = rep_VECT_LEN(vect);
@@ -812,11 +812,12 @@ FORMAT sized quantities (8, 16 or 32).
     XClientMessageEvent ev;
     Window w = x_win_from_arg (win);
 
-    if (w == 0)
-	return rep_signal_arg_error (win, 1);
     rep_DECLARE2(type, rep_SYMBOLP);
     rep_DECLARE(3, data, rep_STRINGP(data) || rep_VECTORP(data));
     rep_DECLARE4(format, rep_INTP);
+
+    if (w == 0)
+	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
 
     ev.type = ClientMessage;
     ev.window = w;
@@ -869,12 +870,12 @@ Returns the window id of the new window.
 {
     Window parent_w = x_win_from_arg (parent);
     Window id;
-    if (parent_w == 0)
-	return rep_signal_arg_error (parent, 1);
     rep_DECLARE2(x, rep_INTP);
     rep_DECLARE3(y, rep_INTP);
     rep_DECLARE4(width, rep_INTP);
     rep_DECLARE5(height, rep_INTP);
+    if (parent_w == 0)
+	return WINDOWP(parent) ? Qnil : rep_signal_arg_error (parent, 1);
     id = XCreateSimpleWindow (dpy, parent_w, rep_INT(x), rep_INT(y),
 			      rep_INT(width), rep_INT(height),
 			      0, BlackPixel (dpy, screen_num),
