@@ -115,9 +115,9 @@
 (defun ws-workspace-empty-p (space)
   (catch 'out
     (mapc #'(lambda (w)
-	      (when (and (window-get w 'workspace)
-			 (= (window-get w 'workspace) space))
-		(throw 'out nil))) (managed-windows))
+	      (when (equal (window-get w 'workspace) space)
+		(throw 'out nil)))
+	  (managed-windows))
     t))
 
 (defun ws-insert-workspace (&optional before)
@@ -384,6 +384,12 @@ will be created."
     (when space
       (ws-move-window window (1+ space)))))
 
+(defun append-workspace-and-send (window)
+  "Create a new workspace at the end of the list, and move the window to it."
+  (interactive "%f")
+  (when (window-get window 'workspace)
+    (ws-move-window window total-workspaces)))
+
 (defun previous-workspace ()
   "Display the previous workspace."
   (interactive)
@@ -401,6 +407,13 @@ will be created."
 	  (ws-insert-workspace -1)	;cheeky!
 	(setq space (1- space)))
       (ws-move-window window space))))
+
+(defun prepend-workspace-and-send (window)
+  "Create a new workspace at the start of the list, and move the window to it."
+  (interactive "%f")
+  (when (window-get window 'workspace)
+    (ws-insert-workspace -1)
+    (ws-move-window window 0)))
 
 (defun next-workspace-window ()
   "Focus on the next window of the current workspace."
@@ -568,6 +581,7 @@ all workspaces."
 (unless (or batch-mode (memq 'ws-add-window add-window-hook))
   (add-hook 'add-window-hook 'ws-add-window t)
   (add-hook 'map-notify-hook 'ws-window-mapped t)
+  (add-hook 'destroy-notify-hook 'ws-remove-window t)
   (add-hook 'client-message-hook 'ws-client-msg-handler t)
   (add-hook 'before-add-window-hook 'ws-honour-client-state)
   (add-hook 'add-window-hook 'ws-set-client-state t)
