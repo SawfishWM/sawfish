@@ -55,6 +55,7 @@
 	  rep.data.tables
 	  sawfish.wm.menus
 	  sawfish.wm.state.maximize
+	  sawfish.wm.state.iconify
 	  sawfish.wm.ext.match-window)
 
   (define-structure-alias window-history sawfish.wm.ext.window-history)
@@ -188,6 +189,16 @@
 	       'vertical
 	     nil))))
 
+  (put 'sticky 'window-history-snapshotter
+       (lambda (w)
+	 (if (window-sticky-p/viewport w)
+	     (if (window-sticky-p/workspace w)
+		 t
+	       'viewport)
+	   (if (window-sticky-p/workspace w)
+	       'workspace
+	     nil))))
+
   (define (window-history-position-snapshotter w)
     (when (and window-history-auto-save-position
 	       (not (window-get w 'client-set-position)))
@@ -283,6 +294,13 @@
 	   (window-put w 'queued-vertical-maximize t))
 	 (when (memq value '(both horizontal))
 	   (window-put w 'queued-horizontal-maximize t))))
+
+  (put 'sticky 'window-history-setter
+       (lambda (w value)
+	 (when (memq value '(t both vertical))
+	   (window-put w 'sticky-viewport t))
+	 (when (memq value '(t both workspace))
+	   (window-put w 'sticky t))))
 
 
 ;;; saving and loading state
