@@ -1,3 +1,10 @@
+2001-01-26  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/placement.jl (place-window-randomly): fixed bug
+	where windows could be left off-screen. Problem was due to
+	confusing right or bottom edges of the workarea with its width
+	or height
+
 2001-01-25  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/state/wm-spec.jl (init): the change to restore the
