@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.25 1999/09/23 13:53:03 john Exp $
+;; $Id: sawmill-ui.jl,v 1.26 1999/09/23 19:02:28 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -128,6 +128,7 @@ exec rep "$0" "$@"
 ;; (string)
 ;; (set LIST)
 ;; (font)
+;; (file-name)
 ;; (keymap)
 ;; (keymap-shell (PAGES...))
 ;; (frame-style (SYMBOLS...))
@@ -439,6 +440,49 @@ exec rep "$0" "$@"
 		       (gtk-widget-destroy ',colorsel)))
     (gtk-widget-hide (gtk-color-selection-dialog-help-button colorsel))
     (gtk-widget-show colorsel)))
+
+(put 'file-name 'builder 'build-file)
+(defun build-file (spec)
+  (let
+      ((button (gtk-button-new-with-label
+		(file-name-nondirectory (or (get-key spec ':value) "")))))
+    (mapc #'(lambda (w)
+	      (when (gtk-label-p w)
+		(gtk-label-set-line-wrap w t)))
+	  (gtk-container-children button))
+    (unless (key-exists-p spec ':value)
+      (set-key spec ':value nil))
+    (gtk-signal-connect button "clicked"
+			`(lambda (w)
+			   (build-file:clicked ',spec)))
+    (setq spec (nconc spec (list ':widget button)))
+    button))
+
+(defun build-file:clicked (spec)
+  (let
+      ((filesel (gtk-file-selection-new "Select file")))
+    (when (get-key spec ':value)
+      (gtk-file-selection-set-filename filesel (get-key spec ':value)))
+    (gtk-signal-connect
+     (gtk-file-selection-ok-button filesel)
+     "clicked"
+     `(lambda (w)
+	(let
+	    ((value (gtk-file-selection-get-filename ',filesel)))
+	  (when (and (string= value "") (get-key spec ':allow-nil))
+	    (setq value nil))
+	  (ui-set ',spec (get-key ',spec ':variable) value)
+	  (ui-set-button-label ',(get-key spec ':widget)
+			       (file-name-nondirectory value))
+	  (gtk-widget-destroy ',filesel))))
+    (gtk-signal-connect
+     (gtk-file-selection-cancel-button filesel)
+     "clicked" `(lambda (w)
+		  (gtk-widget-destroy ',filesel)))
+    (gtk-signal-connect filesel
+     "delete_event" `(lambda (w)
+		       (gtk-widget-destroy ',filesel)))
+    (gtk-widget-show filesel)))
 
 (put 'set 'builder 'build-set)
 (defun build-set (spec)
