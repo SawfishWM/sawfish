@@ -313,7 +313,7 @@ unmaximized."
   (let
       ((avoid-by-default t)
        (maximize-always-expands t)
-       (avoid-ignored maximize-ignore-when-filling))
+       (dont-avoid-ignored maximize-ignore-when-filling))
     (maximize-window w direction t)))
 
 ;;;###autoload
