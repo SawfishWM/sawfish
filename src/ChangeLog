@@ -1,3 +1,13 @@
+1999-08-16  John Harper  <john@dcs.warwick.ac.uk>
+
+	* display.c (sys_init): create a new window `no_focus_window'
+	that gets given the focus when no other window has it (so we
+	receive KeyPress events from it)
+	* windows.c (focus_on_window): when told to focus on nothing,
+	focus on the `no_focus_window'
+	* events.c (unmap_notify): if the window being unmapped has the
+	focus (after calling the unmap-notify-hook), unfocus it
+
 1999-08-15  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill-ui.jl: two new elements `keymap' and `keymap-shell',

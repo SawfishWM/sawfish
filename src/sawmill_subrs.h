@@ -57,7 +57,7 @@ extern Display *dpy;
 extern int screen_num, screen_width, screen_height, screen_depth;
 extern Visual *screen_visual;
 extern Colormap screen_cmap;
-extern Window root_window;
+extern Window root_window, no_focus_window;
 extern Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols,
     xa_wm_delete_window, xa_wm_colormap_windows, xa_wm_take_focus;
 extern int shape_event_base, shape_error_base;

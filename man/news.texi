@@ -38,6 +38,12 @@ used)
 @item Transient windows can be given the same frames as normal windows
 (@code{decorate-transients})
 
+@item Newly-displayed transient windows can be automatically given the
+focus if there parent window is focused (@code{transients-get-focus})
+
+@item Any newly-displayed windows can be automatically given the input
+focus (@code{focus-windows-when-mapped})
+
 @item The @code{foreground}, @code{background} and @code{font}
 attributes of each frame part may now refer to a function
 

@@ -1,3 +1,10 @@
+1999-08-16  John Harper  <john@dcs.warwick.ac.uk>
+
+	* transient.jl (transient-unmap-window): if the window being
+	unmapped is focused, and there's no transient-parent to focus
+	on, then focus on the window under the pointer (in case the
+	pointer isn't in the unmapped window)
+
 1999-08-15  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keymaps.jl: keymaps are now customizable
