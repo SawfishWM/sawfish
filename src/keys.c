@@ -356,21 +356,17 @@ lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
 static repv
 lookup_event_binding (u_long code, u_long mods, repv context_map)
 {
-    Lisp_Window *w = focus_window;
+    Lisp_Window *w = 0;
     if (current_x_event && mods & EV_TYPE_MOUSE)
     {
 	/* If a mouse event, look for bindings in the window that
-	   the pointer is in, not where the input focus is. */
-	Lisp_Window *tem = find_window_by_id (current_x_event->xany.window);
-	if (tem != 0)
-	    w = tem;
-	else
-	{
-	    struct frame_part *fp
-		= find_frame_part_by_window (current_x_event->xany.window);
-	    w = fp ? fp->win : 0;
-	}
+	   the button was pressed in, not where the input focus is. */
+	repv tem = Fquery_button_press_window ();
+	if (tem && WINDOWP(tem))
+	    w = VWIN(tem);
     }
+    else
+	w = focus_window;
     return lookup_binding(code, mods, 0, context_map, w);
 }
 
