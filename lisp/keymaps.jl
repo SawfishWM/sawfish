@@ -21,34 +21,59 @@
 
 (provide 'keymaps)
 
-(defvar global-keymap (make-sparse-keymap)
-  "Keymap containing bindings active anywhere.")
+(put 'keymap 'custom-set 'custom-set-keymap)
+(put 'keymap 'custom-get 'custom-get-keymap)
+(put 'keymap 'custom-widget 'custom-keymap-widget)
 
-(defvar root-window-keymap (make-sparse-keymap)
-  "Keymap containing bindings active when the pointer is in the root window.")
+(defgroup bindings "Bindings"
+  :widget custom-keymap-group-widget)
 
-(defvar title-keymap (make-sparse-keymap)
+(defcustom global-keymap (make-sparse-keymap)
+  "Keymap containing bindings active anywhere."
+  :group bindings
+  :type keymap
+  :before-set (lambda ()
+		(ungrab-keymap global-keymap))
+  :after-set (lambda ()
+	       (grab-keymap global-keymap)))
+
+(defcustom window-keymap (make-sparse-keymap)
+  "Keymap containing bindings active when a client window is focused."
+  :group bindings
+  :type keymap
+  :before-set (lambda ()
+		(ungrab-keymap window-keymap))
+  :after-set (lambda ()
+	       (grab-keymap window-keymap)))
+
+(defcustom root-window-keymap (make-sparse-keymap)
+  "Keymap containing bindings active when the pointer is in the root window."
+  :group bindings
+  :type keymap)
+
+(defcustom title-keymap (make-sparse-keymap)
   "Keymap containing bindings active when the pointer is in the title of
-a window.")
+a window."
+  :group bindings
+  :type keymap)
 
-(defvar iconify-button-keymap (make-sparse-keymap)
-  "Keymap containing bindings active when the pointer is in the iconify
-button of a window.")
-
-(defvar maximize-button-keymap (make-sparse-keymap)
-  "Keymap containing bindings active when the pointer is in the  maximize
-button of a window.")
-
-(defvar close-button-keymap (make-sparse-keymap)
+(defcustom close-button-keymap (make-sparse-keymap)
   "Keymap containing bindings active when the pointer is in the close button
-of a window.")
+of a window."
+  :group bindings
+  :type keymap)
 
-(defvar menu-button-keymap (make-sparse-keymap)
+(defcustom iconify-button-keymap (make-sparse-keymap)
+  "Keymap containing bindings active when the pointer is in the iconify
+button of a window."
+  :group bindings
+  :type keymap)
+
+(defcustom menu-button-keymap (make-sparse-keymap)
   "Keymap containing bindings active when the pointer is in the menu button
-of a window.")
-
-(defvar window-keymap (make-sparse-keymap)
-  "Keymap containing bindings active when a client window is focused.")
+of a window."
+  :group bindings
+  :type keymap)
 
 
 ;; Arrange for window-keymap to be set in each window
@@ -79,8 +104,7 @@ of a window.")
 
 (bind-keys global-keymap
   "C-Left" 'previous-workspace
-  "C-Right" 'next-workspace
-  "C-M-ESC" 'quit)
+  "C-Right" 'next-workspace)
 
 (bind-keys root-window-keymap
   "Button2-Click1" 'popup-root-menu
@@ -99,10 +123,36 @@ of a window.")
   "Button3-Off" 'delete-window)
 
 
-;; placeholder for customize
+;; customize support
 
-(defcustom keymap-dummy nil
-  ""
-  :type none
-  :group bindings
-  :widget (lambda () '(label "Keybinding customization is unimplemented.")))
+(defun custom-get-keymap (symbol)
+  (cons 'keymap (mapcar #'(lambda (cell)
+			    (cons (car cell) (event-name (cdr cell))))
+			(cdr (symbol-value symbol)))))
+
+(defun custom-set-keymap (symbol value &rest args)
+  (when (eq (car value) 'keymap)
+    (apply 'custom-set-variable symbol
+	   (cons 'keymap
+		 (delq nil (mapcar #'(lambda (cell)
+				       (let
+					   ((ev (lookup-event (cdr cell))))
+					 (and ev (cons (car cell) ev))))
+				   (cdr value)))) args)))
+
+(defun custom-keymap-widget (symbol value doc)
+  `(keymap :variable ,symbol
+	   :value ,value
+	   :doc ,doc))
+
+(defun custom-keymap-group-widget (group spec)
+  (let
+      ((names (mapcar 'symbol-name (cdr (assq 'bindings custom-groups)))))
+    `(keymap-shell ,(mapcar #'(lambda (elt)
+				(list (car (prog1 names
+					     (setq names (cdr names))))
+				      elt)) spec)
+		   :commands ,(sort (apropos "" 'commandp)
+				    #'(lambda (x y)
+					(< (symbol-name x)
+					   (symbol-name y)))))))
