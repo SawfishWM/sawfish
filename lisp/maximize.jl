@@ -148,7 +148,8 @@
   (let
       ((x-span (maximize-expand-edges (cdr coords) (+ (cdr coords)
 						      (cdr fdims))
-				      0 (screen-width)
+				      (car (current-head-offset w))
+				      (car (current-head-dimensions w))
 				      (car coords) (+ (car coords)
 						      (car fdims))
 				      (car edges))))
@@ -161,7 +162,8 @@
   (let
       ((y-span (maximize-expand-edges (car coords) (+ (car coords)
 						      (car fdims))
-				      0 (screen-height)
+				      (cdr (current-head-offset w))
+				      (cdr (current-head-dimensions w))
 				      (cdr coords) (+ (cdr coords)
 						      (cdr fdims))
 				      (cdr edges))))
@@ -173,7 +175,7 @@
 
 ;; 2D packing
 
-(defun maximize-find-max-rectangle (avoided edges)
+(defun maximize-find-max-rectangle (avoided edges &optional head)
   (let*
       ((grid (grid-from-edges (car edges) (cdr edges)))
        rects)
@@ -181,12 +183,16 @@
 		 (sort (car grid)) (sort (cdr grid))
 		 (lambda (rect)
 		   ;; the rectangle mustn't overlap any avoided windows
+		   ;; or span multiple heads, or be on a different head
+		   ;; to that requested
 		   (catch 'foo
 		     (mapc (lambda (w)
-			     (when (> (rect-2d-overlap
-				       (window-frame-dimensions w)
-				       (window-position w)
-				       rect) 0)
+			     (when (or (> (rect-2d-overlap
+					   (window-frame-dimensions w)
+					   (window-position w)
+					   rect) 0)
+				       (/= (rectangle-heads rect) 1)
+				       (and head (/= head (find-head (car rect) (cadr rect)))))
 			       (throw 'foo nil)))
 			   avoided)
 		     t))))
@@ -204,7 +210,8 @@
 
 (defun maximize-do-both (window avoided edges coords dims fdims)
   (let
-      ((max-rect (maximize-find-max-rectangle avoided edges)))
+      ((max-rect (maximize-find-max-rectangle avoided edges
+					      (current-head window))))
     (when max-rect
       (rplaca coords (nth 0 max-rect))
       (rplacd coords (nth 1 max-rect))
@@ -268,7 +275,7 @@ doesn't overlap any avoided windows, or nil."
        (edges (get-visible-window-edges ':with-ignored-windows t
 					':windows avoided
 					':include-root t)))
-    (maximize-find-max-rectangle avoided edges)))
+    (maximize-find-max-rectangle avoided edges (current-head w))))
 
 
 ;; commands
