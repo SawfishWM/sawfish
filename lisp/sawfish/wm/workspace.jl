@@ -234,8 +234,7 @@ window, one of `stop', `keep-going', `wrap-around'")
       (not (window-get w 'iconified))))
 
   (define (window-appears-in-workspace-p w space)
-    (and (window-viewable-p w)
-	 (or (window-get w 'sticky) (window-in-workspace-p w space))))
+    (or (window-get w 'sticky) (window-in-workspace-p w space)))
 
   ;; add window W to those in workspace SPACE
   (define (window-add-to-workspace w space)
