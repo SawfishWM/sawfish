@@ -26,19 +26,11 @@
 
 ;; utilities
 
-;; try to create dir and all nonexistent parent dirs (like mkdir -p)
-(defun sm-make-directory (dir)
-  (while (not (file-exists-p dir))
-    (let
-	((tem dir))
-      (while (not (file-exists-p (expand-file-name ".." tem)))
-	(setq tem (expand-file-name ".." tem)))
-      (make-directory tem))))
-
 ;; create an alist defining the current state of window W
 (defun sm-get-window-state (w)
   (let
-      ((alist (nconc (mapcar #'(lambda (fun)
+      ((alist (apply 'nconc
+		     (mapcar #'(lambda (fun)
 				 (funcall fun w)) sm-window-save-functions))))
     (mapc #'(lambda (sym)
 	      (when (window-get w sym)
@@ -74,7 +66,7 @@
 ;;;###autoload
 (defun save-session (id)
   (unless (file-exists-p sm-save-directory)
-    (sm-make-directory sm-save-directory))
+    (make-directory-recursively sm-save-directory))
   (let
       ((file (open-file (sm-find-file id) 'write)))
     (when file
