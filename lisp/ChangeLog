@@ -1,3 +1,9 @@
+2002-03-24  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/animation/outline.jl: add error handling around
+	calls to the window-outline drawing code. Ungrab the server on
+	an error. Band-aid for #75984
+
 2002-03-09  John Harper  <jsh@pixelslut.com>
 
 	* sawfish/wm/state/wm-spec.jl (supported-atoms): updated to
