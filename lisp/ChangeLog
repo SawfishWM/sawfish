@@ -1,3 +1,12 @@
+1999-12-16  John Harper  <john@dcs.warwick.ac.uk>
+
+	* move-resize.jl (move-resize-pos): move the position
+	calculation to a separate function, fixes the problem of
+	showing incorrect details while snapping (from merlin@merlin.org)
+
+	* move-resize.jl (move-resize-apply): check that the window
+	isn't being placed totally off-screen in either dimension
+
 1999-12-15  John Harper  <john@dcs.warwick.ac.uk>
 
 	* workspace.jl (workspace-swap-in): handle frame-style
