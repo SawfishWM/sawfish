@@ -182,7 +182,7 @@
 
   (add-hook 'destroy-notify-hook 'gnome-set-client-list)
   (add-hook 'map-notify-hook 'gnome-set-client-list)
-  (add-hook 'umap-notify-hook 'gnome-set-client-list)
+  (add-hook 'unmap-notify-hook 'gnome-set-client-list)
 
   (add-hook 'window-state-change-hook 'gnome-set-client-state)
   (add-hook 'before-add-window-hook 'gnome-honour-client-state t)
