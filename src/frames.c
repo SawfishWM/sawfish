@@ -42,6 +42,7 @@ DEFSYM(x_justify, "x-justify");
 DEFSYM(y_justify, "y-justify");
 DEFSYM(background, "background");
 DEFSYM(foreground, "foreground");
+DEFSYM(renderer, "renderer");
 DEFSYM(font, "font");
 DEFSYM(width, "width");
 DEFSYM(height, "height");
@@ -50,6 +51,11 @@ DEFSYM(top_edge, "top-edge");
 DEFSYM(right_edge, "right-edge");
 DEFSYM(bottom_edge, "bottom-edge");
 DEFSYM(cursor, "cursor");
+DEFSYM(focused, "focused");
+DEFSYM(highlighted, "highlighted");
+DEFSYM(clicked, "clicked");
+
+static repv state_syms[fps_MAX];
 
 static bool frame_draw_mutex;
 
@@ -64,6 +70,7 @@ static bool frame_draw_mutex;
 	background . (NORMAL FOCUSED HIGHLIGHTED CLICKED)
 	foreground . COLOR
 	foreground . (NORMAL FOCUSED HIGHLIGHTED CLICKED)
+	renderer . FUNCTION
 
 	text . STRING-OR-FUNCTION-OR-NIL
 	x-justify . left OR right OR center OR NUMBER
@@ -104,6 +111,19 @@ set_frame_part_bg (struct frame_part *fp)
     Lisp_Window *win = fp->win;
 
     if (fp->id == 0)
+	return;
+
+    if (fp->renderer != Qnil && IMAGEP(fp->rendered_image))
+    {
+	bg = fp->rendered_image;
+	if (fp->rendered_state != state)
+	{
+	    rep_call_lisp2 (fp->renderer, bg, state_syms[state]);
+	    fp->rendered_state = state;
+	}
+    }
+
+    if (win->id == 0)
 	return;
 
     if (COLORP(bg))
@@ -492,6 +512,13 @@ list_frame_generator (Lisp_Window *w)
 		fp->cursor = tem;
 	}
 
+	/* get renderer function */
+	tem = Fassq (Qrenderer, elt);
+	if (tem && tem != Qnil && Ffunctionp (rep_CDR(tem)) != Qnil)
+	    fp->renderer = rep_CDR(tem);
+	else
+	    fp->renderer = Qnil;
+
 	/* get background images or colors */
 	tem = Fassq (Qbackground, elt);
 	if (tem && tem != Qnil)
@@ -650,6 +677,19 @@ list_frame_generator (Lisp_Window *w)
 	    fp->width = right_x - fp->x;
 	if (fp->height < 0)
 	    fp->height = bottom_y - fp->y;
+
+	/* if we have a renderer function, create the image to
+	   render into. */
+	if (fp->renderer != Qnil)
+	{
+	    fp->rendered_image = Fmake_sized_image (rep_MAKE_INT(fp->width),
+						    rep_MAKE_INT(fp->height),
+						    Qnil, Qnil, Qnil);
+	    fp->rendered_state = fps_none;
+	}
+	else
+	    fp->rendered_image = Qnil;
+	
 
 	DB(("  part: x=%d y=%d width=%d height=%d\n",
 	    fp->x, fp->y, fp->width, fp->height));
@@ -810,6 +850,8 @@ mark_frame_parts (Lisp_Window *w)
 	    rep_MARKVAL(fp->bg[i]);
 	}
 	rep_MARKVAL(rep_VAL(fp->cursor));
+	rep_MARKVAL(rep_VAL(fp->renderer));
+	rep_MARKVAL(rep_VAL(fp->rendered_image));
     }
 }
 
@@ -916,6 +958,7 @@ frames_init (void)
     rep_INTERN(y_justify);
     rep_INTERN(background);
     rep_INTERN(foreground);
+    rep_INTERN(renderer);
     rep_INTERN(font);
     rep_INTERN(width);
     rep_INTERN(height);
@@ -924,6 +967,14 @@ frames_init (void)
     rep_INTERN(right_edge);
     rep_INTERN(bottom_edge);
     rep_INTERN(cursor);
+    rep_INTERN(focused);
+    rep_INTERN(highlighted);
+    rep_INTERN(clicked);
+
+    state_syms[fps_normal] = Qnil;
+    state_syms[fps_focused] = Qfocused;
+    state_syms[fps_highlighted] = Qhighlighted;
+    state_syms[fps_clicked] = Qclicked;
 
     if (rep_SYM(Qbatch_mode)->value == Qnil)
 	window_fp_context = XUniqueContext ();
