@@ -28,43 +28,44 @@
 ;; static images letting Imlib resize them. Maybe you get smoother
 ;; gradients this way, who knows..?
 
-(defgroup gradient-frame "Gradient frame")
+(defgroup gradient "Gradient Theme"
+  :group appearance)
 
 (defcustom gradient:gradient-type 'horizontal
   "Direction of gradient in `gradient' frame style."
   :type symbol
   :options (horizontal vertical diagonal)
-  :group gradient-frame
+  :group (appearance gradient)
   :after-set after-setting-frame-option)
 
 (defcustom gradient:normal-from-color (get-color "#b6b6b6")
   "`From' color of inactive frames in `gradient' frame style."
   :type color
-  :group gradient-frame
+  :group (appearance gradient)
   :after-set after-setting-frame-option)
 
 (defcustom gradient:normal-to-color (get-color "#323232")
   "`To' color of inactive frames in `gradient' frame style."
   :type color
-  :group gradient-frame
+  :group (appearance gradient)
   :after-set after-setting-frame-option)
 
 (defcustom gradient:active-from-color (get-color "#64b4df")
   "`From' color of active frames in `gradient' frame style."
   :type color
-  :group gradient-frame
+  :group (appearance gradient)
   :after-set after-setting-frame-option)
 
 (defcustom gradient:active-to-color (get-color "#000030")
   "`To' color of active frames in `gradient' frame style."
   :type color
-  :group gradient-frame
+  :group (appearance gradient)
   :after-set after-setting-frame-option)
 
 (defcustom gradient:save-memory t
   "Use less memory when creating gradients, possibly affecting quality."
   :type boolean
-  :group gradient-frame
+  :group (appearance gradient)
   :after-set after-setting-frame-option)
 
 (let*

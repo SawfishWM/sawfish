@@ -1,5 +1,5 @@
 ;; smaker/theme.jl -- somewhat windowmaker like theme, heavily customizable
-;; $Id: theme.jl,v 1.7 1999/12/05 11:31:06 john Exp $
+;; $Id: theme.jl,v 1.8 1999/12/05 17:58:49 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -19,53 +19,54 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defgroup smaker-frame "SMaker Frame")
+(defgroup smaker "SMaker Theme"
+  :group appearance)
 
 (defcustom smaker:inverted-buttons nil
   "Use black-on-white button images."
-  :group smaker-frame
+  :group (appearance smaker)
   :type boolean)
 
 (defcustom smaker:fg-color "white"
   "Color to use when drawing text."
-  :group smaker-frame
+  :group (appearance smaker)
   :type color)
 
 (defcustom smaker:bar-normal "bar_normal.png"
   "Bar image for unfocused windows."
-  :group smaker-frame
+  :group (appearance smaker)
   :type file-name)
 
 (defcustom smaker:bar-normal-active "bar_normal_active.png"
   "Bar image for focused windows."
-  :group smaker-frame
+  :group (appearance smaker)
   :type file-name)
 
 (defcustom smaker:bar-hilited-active "bar_hilited_active.png"
   "Bar image for highlighted parts."
-  :group smaker-frame
+  :group (appearance smaker)
   :type file-name)
 
 (defcustom smaker:bar-clicked-active "bar_clicked_active.png"
   "Bar image for clicked parts."
-  :group smaker-frame
+  :group (appearance smaker)
   :type file-name)
 
 (defcustom smaker:bar-dimension 16
   "Height of title bar."
-  :group smaker-frame
+  :group (appearance smaker)
   :type number
   :range (14 . nil))
 
 (defcustom smaker:border-dimension 4
   "Width of window border."
-  :group smaker-frame
+  :group (appearance smaker)
   :type number
   :range (1 . nil))
 
 (defcustom smaker:image-border 4
   "Border width of bar images."
-  :group smaker-frame
+  :group (appearance smaker)
   :type number)
 
 

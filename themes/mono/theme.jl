@@ -1,5 +1,5 @@
 ;; mono/theme.jl
-;; $Id: theme.jl,v 1.4 2000/01/07 22:17:11 john Exp $
+;; $Id: theme.jl,v 1.5 2000/01/14 15:05:46 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -19,30 +19,31 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defgroup mono-frame "Mono Frame")
+(defgroup mono "Mono Theme"
+  :group appearance)
 
 (defcustom mono:gtk-background-color t
   "Use the GTK+ background color for inactive frames."
   :type boolean
-  :group mono-frame)
+  :group (appearance mono))
 
 (defcustom mono:normal-color "slateblue1"
   "Color of inactive frames. (When the above option is unset.)"
   :type color
-  :group mono-frame
+  :group (appearance mono)
   :after-set after-setting-frame-option)
 
 (defcustom mono:active-color "yellowgreen"
   "Color of active frames."
   :type color
-  :group mono-frame
+  :group (appearance mono)
   :after-set after-setting-frame-option)
 
 (defcustom mono:text-justify 'left
   "Method of justifying text in window titles."
   :type symbol
   :options (left right centered)
-  :group mono-frame
+  :group (appearance mono)
   :after-set after-setting-frame-option)
 
 (let*

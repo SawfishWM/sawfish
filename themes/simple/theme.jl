@@ -19,18 +19,19 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defgroup simple-frame "Simple Frame")
+(defgroup simple "Simple Theme"
+  :group appearance)
 
 (defcustom simple:normal-color "lightsteelblue4"
   "Color of inactive frames in `simple' frame style."
   :type color
-  :group simple-frame
+  :group (appearance simple)
   :after-set after-setting-frame-option)
 
 (defcustom simple:active-color "goldenrod"
   "Color of active frames in `simple' frame style."
   :type color
-  :group simple-frame
+  :group (appearance simple)
   :after-set after-setting-frame-option)
 
 (let*
