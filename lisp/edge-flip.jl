@@ -146,7 +146,8 @@ flipping."
     (when edge-flip-enabled
       (edge-flip-synthesize)
       (when (and (eq edge-flip-type 'workspace)
-		 (/= original-space current-workspace))
+		 (/= original-space current-workspace)
+		 (not (window-get w 'sticky)))
 	(ws-move-window w original-space current-workspace t)))))
 
 (add-hook 'enter-flipper-hook edge-flip-enter)
