@@ -1,5 +1,10 @@
 1999-09-07  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill-ui.jl (ui-quit): tell the wm to save the custom file
+	before exiting
+
+	* images.c (Ftile_image): new function
+
 	* sawmill-ui.jl: changed the architecture, instead of the wm
 	connecting with the configurator, make the configurator connect
 	with the wm (using sawmill-client); re-enabled the "revert"
