@@ -23,8 +23,6 @@ include ../Makedefs
 
 top_srcdir=@top_srcdir@
 
-SUBDIRS = themes
-
 sawmill_prog = ../src/sawmill --batch --no-rc
 COMPILE_ENV = SAWMILLLISPDIR=. SAWMILLDOCFILE=../DOC
 
@@ -41,14 +39,8 @@ INSTALL_FILES := $(LISP_SRCS) $(LISP_OBJS) autoload.jl sawmill-defaults.jl
 	  --write-docs $<
 
 all : $(LISP_OBJS)
-	set -e; for dir in $(SUBDIRS); do \
-	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
-	done
 
 install : all installdirs
-	set -e; for dir in $(SUBDIRS); do \
-	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
-	done
 	for f in $(INSTALL_FILES); do \
 	  $(INSTALL_DATA) $$f $(lispdir); \
 	done
@@ -57,23 +49,14 @@ installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(lispdir)
 
 uninstall :
-	set -e; for dir in $(SUBDIRS); do \
-	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
-	done
 	for f in $(INSTALL_FILES); do \
 	  rm -f $(lispdir)/$$f; \
 	done
 
 clean :
-	set -e; for dir in $(SUBDIRS); do \
-	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
-	done
 	rm -f *.jlc *.jld *~
 
 realclean : clean
-	set -e; for dir in $(SUBDIRS); do \
-	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ); \
-	done
 	rm -f Makefile
 
 .PHONY : all lisp install uninstall clean realclean
