@@ -43,7 +43,7 @@
 ;; this function is called for each window that is created on the display
 (defun user-add-window (w)
   (when (string-match ignored-window-names (window-name w))
-    (set-window-frame w nil))
+    (set-window-frame w 'nil-frame))
   (when (string-match sticky-window-names (window-name w))
     (window-put w 'sticky t)))
 
