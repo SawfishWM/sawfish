@@ -90,6 +90,7 @@
 
 ;; extras
 
+;;;###autoload
 (defun gnome-logout ()
   (interactive)
   (system "save-session --quit &"))

@@ -190,7 +190,7 @@ extern repv Fset_image_shape_color (repv img, repv shape);
 extern repv Fimage_border (repv img);
 extern repv Fset_image_border (repv img, repv, repv, repv, repv);
 extern repv Fmake_sized_image (repv w, repv h, repv color);
-extern repv Fbevel_image (repv img, repv border, repv up);
+extern repv Fbevel_image (repv img, repv border, repv up, repv bevel_percent);
 extern repv Fclear_image (repv img, repv color);
 extern repv Ftile_image (repv dst, repv src);
 extern void images_init (void);
