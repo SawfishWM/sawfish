@@ -27,7 +27,7 @@ AC_CONFIG_AUX_DIR(etc)
 dnl Release versioning info
 version="0.21.1"
 
-output_files="src/Makefile lisp/Makefile capplet/Makefile\
+output_files="src/Makefile lisp/Makefile\
  themes/Makefile man/Makefile po/Makefile Makedefs Makefile sawmill.spec"
 
 SUBDIRS="src lisp themes man po"
@@ -105,11 +105,14 @@ AC_ARG_ENABLE(capplet,
  [enable_capplet=yes])
 
 if test "$enable_capplet" = "yes"; then
+  AC_MSG_CHECKING([for GNOME control center config])
   GNOME_CC_CFLAGS="`gnome-config --cflags capplet`"
   GNOME_CC_LIBS="`gnome-config --libs capplet`"
   if test $? -ne 0; then
+    AC_MSG_RESULT([no])
     AC_MSG_WARN([Can't run "gnome-config capplet", not building capplet])
   else
+    AC_MSG_RESULT([yes])
     AC_SUBST(GNOME_CC_CFLAGS)
     AC_SUBST(GNOME_CC_LIBS)
     add_subdir "capplet"
@@ -122,7 +125,15 @@ AC_ARG_ENABLE(themer,
  [enable_themer=yes])
 
 if test "$enable_themer" = yes; then
-  add_subdir "themer"
+  dnl configure redirects &5 to config.log
+  AC_MSG_CHECKING([for rep-gtk libglade wrapper])
+  if rep --batch -l libglade 2>&5; then 
+    AC_MSG_RESULT([yes])
+    add_subdir "themer"
+  else 
+    AC_MSG_RESULT([no])
+    AC_MSG_WARN([Can't load rep's libglade wrapper, not building themer])
+  fi
 fi
 
 dnl Check for Doug Lea's malloc in libc, otherwise compile dlmalloc.c
