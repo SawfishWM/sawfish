@@ -69,7 +69,7 @@
 				  ;(focused . "clicked.wav")
 				  (switch-workspace . "toggled.wav")
 				  (move-viewport . "toggled.wav"))
-    "Map window events to sound files."
+    "Event mapping:"
     :type* `(alist ((symbol iconified uniconified
 			    shaded unshaded
 			    maximized unmaximized
@@ -77,7 +77,8 @@
 			    mapped-transient unmapped-transient
 			    switch-workspace move-viewport
 			    focused unfocused) ,(_ "Event"))
-		   (file ,(_ "Sample")))
+		   (file ,(_ "Audio file")))
+    :widget-flags (expand framed)
     :user-level expert
     :depends audio-events-enabled
     :group audio)

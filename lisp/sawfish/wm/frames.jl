@@ -171,13 +171,14 @@ that overrides settings set elsewhere.")
       (shaded-transient . shaped-transient)
       (icon . shaped-transient)
       (dock . icon))
-    "Frame type fallbacks."
+    "Frame type fallbacks:"
     :tooltip "Associate frame types with type to try if the theme doesn't \
 implement the requested type."
     :type (alist ((symbol default shaped transient
 			  shaped-transient icon doc) "From")
 		 ((symbol default shaped transient
 			  shaped-transient icon doc) "To"))
+    :widget-flags (expand framed)
     :group appearance
     :user-level expert
     :after-set (lambda () (after-setting-frame-option)))

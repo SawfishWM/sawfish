@@ -73,7 +73,8 @@
     "Lisp library storing default customization settings.")
 
   (define custom-quoted-keys
-    '(:group :require :type :options :range :depends :user-level :layout)
+    '(:group :require :type :options :range :depends :user-level
+      :layout :widget-flags)
     "defcustom keys whose values are quoted by the macro expansion.")
 
   (define custom-option-alist '((:group . custom-group)
@@ -88,7 +89,8 @@
 				(:widget . custom-widget)
 				(:after-set . custom-after-set)
 				(:before-set . custom-before-set)
-				(:range . custom-range)))
+				(:range . custom-range)
+				(:widget-flags . custom-widget-flags)))
 
   (define custom-group-option-alist '((:layout . custom-group-layout)
 				      (:require . custom-group-require)))

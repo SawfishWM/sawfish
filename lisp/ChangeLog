@@ -1,5 +1,14 @@
 2000-11-16  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/custom.jl: new defcustom option `:widget-flags'
+
+	* sawfish/wm/util/nokogiri.jl (nokogiri-report-slot): pass
+	widget-flags across
+
+	* sawfish/wm/workspace.jl, sawfish/wm/frames.jl,
+	sawfish/wm/ext/audio-events.jl, sawfish/wm/util/groups.jl:
+	marked some list options with `(expand framed)' flags
+
 	* sawfish/wm/state/mwm.jl (mwm-add-window): support the
 	min/max/close options of the mwm function hints
 

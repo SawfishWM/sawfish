@@ -71,7 +71,8 @@
 	   (value (if (get symbol 'custom-get)
 		      ((get symbol 'custom-get) symbol)
 		    (custom-serialize (symbol-value symbol) type)))
-	   (user-level (get symbol 'custom-user-level)))
+	   (user-level (get symbol 'custom-user-level))
+	   (widget-flags (get symbol 'custom-widget-flags)))
       (when (stringp doc)
 	(setq doc (_ doc))
 	(when customize-show-symbols
@@ -98,7 +99,8 @@
 		   #:value value)
 	     (and dep (list #:depends dep))
 	     (and doc (list #:doc doc))
-	     (and user-level (list #:user-level user-level)))))
+	     (and user-level (list #:user-level user-level))
+	     (and widget-flags (list #:widget-flags widget-flags)))))
 
   (define (nokogiri-report-slots names)
     (mapcar nokogiri-report-slot names))
