@@ -114,6 +114,7 @@ else
   AC_MSG_RESULT([no])
   AC_MSG_ERROR([You need rep-gtk version ${rep_gtk_version}+])
 fi
+rm -f conftest
 
 dnl is X available?
 if test "${no_x}" != "yes"; then
