@@ -87,7 +87,7 @@ AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS(fcntl.h sys/time.h sys/utsname.h unistd.h memory.h X11/SM/SMlib.h)
 
 dnl Check for librep
-AM_PATH_REP(0.10)
+AM_PATH_REP(0.11)
 
 dnl is X available?
 if test "${no_x}" != "yes"; then
