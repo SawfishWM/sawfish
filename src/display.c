@@ -211,6 +211,33 @@ sys_kill (void)
 
 /* utilities */
 
+repv
+x_atom_symbol (Atom atom)
+{
+    char *name = XGetAtomName (dpy, atom);
+    if (name != 0)
+    {
+	repv sym = Fintern (rep_string_dup (name), rep_obarray);
+	XFree (name);
+	return sym;
+    }
+    else
+	return Qnil;
+}
+
+Window
+x_win_from_arg (repv arg)
+{
+    if (arg == Qroot)
+	return root_window;
+    else if (WINDOWP(arg))
+	return VWIN(arg)->id;
+    else if (rep_INTP(arg))
+	return rep_INT(arg);
+    else
+	return 0;
+}
+
 /***************************************************************************
  *
  * ICCCM Client Messages - Section 4.2.8 of the ICCCM dictates that all
