@@ -33,47 +33,27 @@
   :type string
   :allow-nil t)
 
-(defcustom transients-get-focus t
-  "Mapping a transient window whose parent is currently focused transfers
-the input focus to the transient window."
-  :group focus
-  :type boolean)
-
 (defcustom focus-windows-when-mapped nil
-  "Mapping a window gives it the focus."
+  "Focus each window when first displayed."
   :type boolean
   :group focus)
 
-(defvar ignored-window-names nil
-  "A list of regular expressions matching windows that don't get a frame.")
-
-(defvar sticky-window-names nil
-  "A list of regular expressions matching window names that exist across
-workspaces.")
+(defcustom transients-get-focus t
+  "Transient windows inherit focus state from their parent."
+  :group focus
+  :type boolean)
 
 
 ;; hooks
 
 ;; called from the add-window-hook
 (defun transient-add-window (w)
-  (when (catch 'foo
-	  (when (and ignored-windows-re
-		     (string-match ignored-windows-re (window-name w)))
-	    (throw 'foo t))
-	  (mapc #'(lambda (r)
-		    (when (string-match r (window-name w))
-		      (throw 'foo t))) ignored-window-names)
-	  nil)
+  (when (and ignored-windows-re
+	     (string-match ignored-windows-re (window-name w)))
     (window-put w 'ignored t)
     (set-window-frame w nil-frame))
-  (when (catch 'foo
-	  (when (and sticky-windows-re
-		     (string-match sticky-windows-re (window-name w)))
-	    (throw 'foo t))
-	  (mapc #'(lambda (r)
-		    (when (string-match r (window-name w))
-		      (throw 'foo t))) sticky-window-names)
-	  nil)
+  (when (and sticky-windows-re
+	     (string-match sticky-windows-re (window-name w)))
     (window-put w 'sticky t)
     (window-put w 'fixed-position t)))
 

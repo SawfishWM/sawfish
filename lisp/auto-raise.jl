@@ -27,7 +27,7 @@
 ;; if a string, windows are only raised if their name matches this
 ;; regular expression.
 (defcustom raise-windows-on-focus nil
-  "Raise windows when they get the keyboard focus."
+  "Raise windows when they are focused."
   :type boolean
   :require auto-raise
   :group focus)
