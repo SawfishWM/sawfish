@@ -64,7 +64,7 @@ touch $RPM_BUILD_ROOT%{_bindir}/sawmill{,-client,-capplet,-ui,-themer}
 chmod +x $RPM_BUILD_ROOT%{_bindir}/sawmill{,-client,-capplet,-ui,-themer}
 make install \
     DESTDIR=$RPM_BUILD_ROOT \
-    GNOMEDIR=$RPM_BUILD_ROOT/%{_prefix} \
+    GNOMEDIR=%{_prefix} \
     host_type=%{_target_platform}
 gzip -9nf $RPM_BUILD_ROOT%{_infodir}/sawfish*
 
