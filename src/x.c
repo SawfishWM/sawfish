@@ -423,6 +423,12 @@ window is created unmapped.
     attributes.override_redirect = True;
     attributes.event_mask = ExposureMask;
     attributes.colormap = image_cmap;
+    if (!(attributesMask & CWBorderPixel))
+    {
+	attributes.border_pixel = BlackPixel (dpy, BlackPixel (dpy, screen_num);)
+	attributesMask |= CWBorderPixel;
+    }
+
     attributesMask |= CWOverrideRedirect | CWEventMask | CWColormap;
 
     id = XCreateWindow (dpy, root_window, _x, _y, _w, _h, _bw,
