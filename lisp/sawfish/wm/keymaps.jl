@@ -139,7 +139,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "Button3-Off" 'popup-window-menu)
 
   (bind-keys menu-button-keymap
-    "Button1-Off" 'popup-window-menu
+    "Button1-Click1" 'popup-window-menu
     "Button3-Off" 'delete-window)
 
   (bind-keys maximize-button-keymap
