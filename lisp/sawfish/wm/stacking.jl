@@ -65,22 +65,33 @@
 	     (progn ,@forms)
 	   (restack-windows ,tem)))))
 
+  ;; this will always return an integer
+  (define (window-depth w) (window-get w 'depth))
+
 
 ;;; constraint mechanics (predicates actually..)
 
   (define (stacking-constraint:layer w)
-    (let ((depth (window-get w 'depth)))
+    (let ((depth (window-depth w)))
       (lambda (above below)
 	;; constraints are met locally in ABOVE and BELOW, so just
 	;; test against windows adjacent to W
 	(and (or (null above)
-		 (<= depth (window-get (car above) 'depth)))
+		 (<= depth (window-depth (car above))))
 	     (or (null below)
-		 (>= depth (window-get (car below) 'depth)))))))
+		 (>= depth (window-depth (car below))))))))
 
   (define (stacking-constraint:transients-above-parent w)
     (let ((parents (transient-parents w))
 	  (children (transient-children w)))
+
+      ;; ignore parents with depth > W, ignore children with depth < W
+      (let ((w-depth (window-depth w)))
+	(setq parents (delete-if (lambda (x)
+				   (> (window-depth x) w-depth)) parents))
+	(setq children (delete-if (lambda (x)
+				    (< (window-depth x) w-depth)) children)))
+				 
       (lambda (above below)
 	(and (or (null parents)
 		 ;; All parents must be below W
@@ -96,21 +107,25 @@
 			 (t (loop (cdr rest))))))))))
 
   (define (stacking-constraint:transients-above-all w)
-    (if (window-transient-p w)
-	;; ensure there are no normal windows above W
+    (let ((w-depth (window-depth w)))
+      (if (window-transient-p w)
+	  ;; ensure there are no normal windows above W, unless they
+	  ;; have depth > W
+	  (lambda (above below)
+	    (declare (unused below))
+	    (let loop ((rest above))
+	      (cond ((null rest) t)
+		    ((and (not (window-transient-p (car rest)))
+			  (<= (window-depth (car rest)) w-depth)) nil)
+		    (t (loop (cdr rest))))))
+	;; ensure no transients below W, unless they're depth < W
 	(lambda (above below)
-	  (declare (unused below))
-	  (let loop ((rest above))
+	  (declare (unused above))
+	  (let loop ((rest below))
 	    (cond ((null rest) t)
-		  ((not (window-transient-p (car rest))) nil)
-		  (t (loop (cdr rest))))))
-      ;; ensure no transients below W
-      (lambda (above below)
-	(declare (unused above))
-	(let loop ((rest below))
-	  (cond ((null rest) t)
-		((window-transient-p (car rest)) nil)
-		(t (loop (cdr rest))))))))
+		  ((and (window-transient-p (car rest))
+			(>= (window-depth (car rest)) w-depth)) nil)
+		  (t (loop (cdr rest)))))))))
 
   (define (combine-constraints constraints)
     "Combine the list of secondary constraint functions into a single
@@ -285,11 +300,11 @@ window W as appropriate."
 order they are stacked within the layer (top to bottom)."
     (let ((order (stacking-order)))
       (delete-if (lambda (x)
-		   (/= (window-get x 'depth) depth)) order)))
+		   (/= (window-depth x) depth)) order)))
 
   (define (set-window-depth w depth)
     "Set the stacking depth of window W to DEPTH."
-    (let ((old (window-get w 'depth)))
+    (let ((old (window-depth w)))
       (window-put w 'depth depth)
       (cond ((> old depth)
 	     ;; window's going downwards
@@ -330,11 +345,11 @@ lowest possible position. Otherwise raise it as far as allowed."
 
   (define (lower-window-depth w)
     "Put the window in the stacking level beneath its current level."
-    (set-window-depth w (1- (window-get w 'depth))))
+    (set-window-depth w (1- (window-depth w))))
 
   (define (raise-window-depth w)
     "Put the window in the stacking level above its current level."
-    (set-window-depth w (1+ (window-get w 'depth))))
+    (set-window-depth w (1+ (window-depth w))))
 
   (define-command 'raise-single-window raise-window
     #:spec "%W" #:user-level 'expert)
@@ -424,7 +439,13 @@ lowest possible position. Otherwise raise it as far as allowed."
   ;; Called from the add-window-hook
   (define (stacking-add-window w)
     (unless (window-get w 'depth)
-      (window-put w 'depth 0)))
+      (let ((parents (transient-parents w)))
+	(if parents
+	    ;; put dialogs in at least as high a layer as their
+	    ;; highest parent
+	    (window-put w 'depth (apply max (mapcar window-depth parents)))
+	  ;; default depth
+	  (window-put w 'depth 0)))))
 
   (add-hook 'add-window-hook stacking-add-window t)
   (add-hook 'after-add-window-hook restack-window t)

@@ -1,3 +1,18 @@
+2001-10-27  John Harper  <jsh@unfactored.org>
+
+	Fixed the bug where `transients-above' and `layer' stacking
+	constraints can conflict and stop stacking working (gnome
+	bugzilla 48412):
+
+	* sawfish/wm/stacking.jl
+	(stacking-constraint:transients-above-parent,
+	stacking-constraint:transients-above-all): check the depth of
+	the windows being compared. Depth overrides the transient-of
+	stacking relation
+
+	(stacking-add-window): transient windows get the depth of their
+	highest parent window instead of the default of zero
+
 2001-10-14  John Harper  <jsh@unfactored.org>
 
 	* version 1.0.1
