@@ -56,6 +56,24 @@ Note that this can be flickery, try to avoid calling this function."
 	  (setq new-order (cdr new-order))))
       (restack-windows new-order))))
 
+(defun restack-window (w)
+  "Assuming that the current stacking order is in a consistent state
+except, possibly, for the position of window W, restore the consistent
+state including window W. This is achieved by raising or lowering
+window W as appropriate."
+  (let* ((w-depth (window-get w 'depth))
+	 (order (stacking-order))
+	 (below (member-if (lambda (x)
+			     (< (window-get x 'depth) w-depth))
+			   order))
+	 (above (member-if (lambda (x)
+			     (> (window-get x 'depth) w-depth))
+			   (reverse order))))
+    (cond ((memq w (cdr below))
+	   (x-raise-window w (car below)))
+	  ((memq w (cdr above))
+	   (x-lower-window w (car above))))))
+
 (defun stacking-order-by-depth (depth)
   "Return a list of windows containing only those in depth DEPTH, in the order
 they are stacked within the layer (top to bottom)."
@@ -77,13 +95,6 @@ they are stacked within the layer (top to bottom)."
 	   (lower-window w)))
     (call-window-hook 'window-depth-change-hook w (list depth))
     (call-window-hook 'window-state-change-hook w (list '(stacking)))))
-
-;; Called from the add-window-hook
-(defun stacking-add-window (w)
-  (let
-      ((depth (window-get w 'depth)))
-    (unless depth
-      (window-put w 'depth 0))))
 
 (defun window-on-top-p (w)
   "Return t if window W is at the top of its stacking depth."
@@ -122,20 +133,6 @@ BELOW. If the two windows aren't at the same depth, improvise."
 	   (x-raise-window above below))
 	  ((> d-above d-below)
 	   (lower-window above)))))
-
-;; called from map-notify-hook
-(defun stacking-after-map (w)
-  ;; if a transient window, maybe put it in a higher layer
-  (when (window-transient-p w)
-    (let
-	((parent (get-window-by-id (window-transient-p w))))
-      (when (or (eq transients-above 'all)
-		(and (eq transients-above 'parents) parent))
-	(set-window-depth w (if parent
-				(max (1+ (window-get parent 'depth))
-				     transient-depth)
-			      transient-depth)))))
-  (raise-window w))
 
 
 ;; Commands
@@ -198,6 +195,25 @@ bottom of this level, otherwise raise it to the top of its level."
   "Put the window in the stacking level above its current level."
   (interactive "%W")
   (set-window-depth w (1+ (window-get w 'depth))))
+
+
+;; hooks
+
+;; Called from the add-window-hook
+(defun stacking-add-window (w)
+  (unless (window-get w 'depth)
+    (window-put w 'depth 0)))
+
+(defun stacking-after-map (w)
+  (when (window-transient-p w)
+    (let ((parent (get-window-by-id (window-transient-p w))))
+      (when (or (eq transients-above 'all)
+		(and (eq transients-above 'parents) parent))
+	(window-put w 'depth (if parent
+				 (max (1+ (window-get parent 'depth))
+				      transient-depth)
+			       transient-depth)))))
+  (restack-window w))
 
 (add-hook 'after-initialization-hook restack-by-depth)
 (add-hook 'add-window-hook stacking-add-window t)
