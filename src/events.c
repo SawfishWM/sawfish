@@ -45,7 +45,7 @@ XEvent *current_x_event;
 static bool current_event_updated_mouse;
 
 /* We need a ButtonRelease on this fp. */
-static struct frame_part *clicked_frame_part;
+struct frame_part *clicked_frame_part;
 
 DEFSYM(visibility_notify_hook, "visibility-notify-hook");
 DEFSYM(destroy_notify_hook, "destroy-notify-hook");
@@ -496,12 +496,12 @@ enter_notify (XEvent *ev)
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
     {
 	bool refresh = FALSE;
-	if (!fp->highlighted)
+	if (!fp->highlighted && !frame_state_mutex)
 	{
 	    fp->highlighted = 1;
 	    refresh = TRUE;
 	}
-	if (clicked_frame_part == fp)
+	if (clicked_frame_part == fp && !frame_state_mutex)
 	{
 	    fp->clicked = 1;
 	    refresh = TRUE;
@@ -526,12 +526,12 @@ leave_notify (XEvent *ev)
     else if ((fp = find_frame_part_by_window (ev->xcrossing.window)) != 0)
     {
 	bool refresh = FALSE;
-	if (fp->highlighted)
+	if (fp->highlighted && !frame_state_mutex)
 	{
 	    fp->highlighted = 0;
 	    refresh = TRUE;
 	}
-	if (clicked_frame_part == fp)
+	if (clicked_frame_part == fp && !frame_state_mutex)
 	{
 	    fp->clicked = 0;
 	    refresh = TRUE;
