@@ -168,8 +168,7 @@ handle_fp_click (struct frame_part *fp, XEvent *ev)
 	fp->clicked = 0;
 	clicked_frame_part = 0;
     }
-    if ((old_clicked && !fp->clicked)
-	|| (!old_clicked && fp->clicked))
+    if (fp->clicked != old_clicked)
     {
 	Lisp_Window *w = fp->win;
 	set_frame_part_bg (fp);
