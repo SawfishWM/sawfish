@@ -80,6 +80,8 @@ error_handler (Display *dpy, XErrorEvent *ev)
 	    focus_window = 0;
 	if (w->id != 0)
 	    remove_window (w, Qt, Qt);
+	/* so we call emit_pending_destroys () at some point */
+	rep_mark_input_pending (ConnectionNumber (dpy));
 	return 0;			/* ?? */
     }
     else
