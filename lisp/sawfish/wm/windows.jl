@@ -60,20 +60,23 @@
 
   (defcustom ignore-window-input-hint t
     "Give focus to windows even when they haven't asked for it."
+    :tooltip "Windows should set the `accepts input' hint in their WM_HINTS
+property to show if they require the focus or not. Many windows don't do
+this, hence this option."
     :type boolean
     :user-level expert
     :group focus)
 
   (defcustom warp-to-window-x-offset -1
-    "Offset (%) from left window edge when warping pointer.
-A negative number means outside the left window edge."
+    "Offset (%) from left window edge when warping pointer."
+    :tooltip "A negative number means outside the left window edge."
     :type (number -65536 65535)
     :user-level expert
     :group focus)
  
   (defcustom warp-to-window-y-offset -1
-    "Offset (%) from top window edge when warping pointer.
-A negative number means outside the top window edge."
+    "Offset (%) from top window edge when warping pointer."
+    :tooltip "A negative number means outside the top window edge."
     :type (number -65536 65535)
     :user-level expert
     :group focus)
@@ -85,8 +88,8 @@ A negative number means outside the top window edge."
     "When non-nil, any unspecified windows are avoided by default.")
 
   (defcustom uniquify-name-format "%s [%d]"
-    "Format to create unique window names. Has two arguments (NAME INDEX)
-applied to it."
+    "Format to create unique window names."
+    :tooltip "Has two arguments (NAME INDEX) applied to it."
     :type string
     :user-level expert
     :group misc)
