@@ -29,7 +29,9 @@
 (defun custom-get-keymap (symbol)
   (cons 'keymap (mapcar (lambda (cell)
 			  (cons (car cell) (event-name (cdr cell))))
-			(cdr (symbol-value symbol)))))
+			(filter (lambda (cell)
+				  (symbolp (car cell)))
+				(cdr (symbol-value symbol))))))
 
 ;; can't just call out to custom-set-variable since we side-effect VALUE
 (defun custom-set-keymap (symbol value &optional req)
@@ -47,6 +49,10 @@
 						  (error nil))))
 					 (and ev (cons (car cell) ev))))
 				     (cdr value)))))
+      ;; add in any non-command bindings
+      (setq new-tail (nconc new-tail (filter (lambda (cell)
+					       (not (symbolp (car cell))))
+					     (cdr old-value))))
       (if (and old-value (eq (car old-value) 'keymap))
 	  ;; hijack the old keymap to preserve eq-ness
 	  (rplacd old-value new-tail)
