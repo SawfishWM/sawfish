@@ -239,7 +239,16 @@ fonts_init (void)
     rep_ADD_SUBR(Sfont_height);
     rep_INTERN_SPECIAL(default_font);
     if (rep_SYM(Qbatch_mode)->value == Qnil)
-	rep_SYM(Qdefault_font)->value = Fget_font (rep_string_dup("fixed"));
+    {
+	repv font = Fget_font (rep_string_dup("fixed"));
+	if (font == rep_NULL || !FONTP(font))
+	{
+	    fputs ("can't load fixed font during initialisation", stderr);
+	    rep_throw_value = rep_NULL;
+	    font = Qnil;
+	}
+	rep_SYM(Qdefault_font)->value = font;
+    }
 }
 
 void
