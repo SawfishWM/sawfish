@@ -77,13 +77,10 @@
   (cons (uniquify-list (mapcar car x-edges))
 	(uniquify-list (mapcar car y-edges))))
 
-(defmacro edges-abs (x)
-  `(max x (- x)))
-
 ;; returns (EDGE-1 EDGE-2) where they're within EPSILON of each other. MODE
 ;; is one of the symbols `magnetism', `resistance', or `attraction'. DELTA
 ;; is the (signed) number of pixels moved since the last call
-(defun edges-within-epsilon (list-1 list-2 epsilon &optional delta mode)
+(defun edges-within-epsilon (list-1 list-2 epsilon delta &optional mode)
   (let
       ((compare (cond ((or (null mode) (eq mode 'magnetism))
 		       (lambda (e1 e2)
