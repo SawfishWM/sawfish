@@ -658,7 +658,7 @@ list_frame_generator (Lisp_Window *w)
 	tem = Qnil;
     if (tem == Qnil)
     {
-	XRectangle *rects = alloca (sizeof (XRectangle) * nparts + 1);
+	XRectangle *rects = alloca (sizeof (XRectangle) * (nparts + 1));
 	int i;
 	for (i = 0, fp = w->frame_parts; i < nparts; i++, fp = fp->next)
 	{
