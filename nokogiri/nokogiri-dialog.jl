@@ -27,6 +27,7 @@
 
     (open rep
 	  gtk
+	  nokogiri-shell		;for main-window
 	  nokogiri-widget)		;for box- constants
 
   (define (ok-cancel-dialog widget title &optional ok-callback)
@@ -48,6 +49,9 @@
       (gtk-window-set-title window title)
       (gtk-window-set-wmclass window "ok_cancel_dialog" "Nokogiri")
       (gtk-container-border-width window box-border)
+
+      (when (boundp 'gtk-window-set-transient-for)
+	(gtk-window-set-transient-for window main-window))
 
       (gtk-button-box-set-layout hbbox 'end)
       (gtk-box-pack-start hbbox ok)
