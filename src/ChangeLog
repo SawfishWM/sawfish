@@ -1,3 +1,8 @@
+2000-11-27  John Harper  <jsh@eazel.com>
+
+	* x.c (x_window_event_handler): ignore any expose events which
+	don't have a zero `count' field
+
 2000-11-26  John Harper  <jsh@eazel.com>
 
 	* events.c, functions.c (client_message, Fget_x_property): when

@@ -568,7 +568,12 @@ x_window_event_handler (XEvent *ev)
 	switch (ev->type)
 	{
 	case Expose:
-	    type = Qexpose;
+	    /* Since we don't provide a method of detecting which
+	       part of the window to redraw, ignore all but the last
+	       expose event. (Another option is to set the clip
+	       rectangle?) */
+	    if (ev->xexpose.count == 0)
+		type = Qexpose;
 	    break;
 
 	    /* XXX other event types..? */
