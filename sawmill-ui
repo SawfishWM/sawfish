@@ -1,8 +1,15 @@
 #!/bin/sh
-exec rep "$0" "$@"
+
+if [ "$1" = "--backend" ]; then
+  exec rep "$0" "$@"
+else
+  sawmill-client -w -q -f customize || echo "sawmill server isn't running"
+  exit
+fi
+
 !#
 
-;; sawmill-ui -- subprocess to handle menus
+;; sawmill-ui -- subprocess to handle configuration user interface
 ;; $Id$
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
@@ -25,51 +32,355 @@ exec rep "$0" "$@"
 
 (require 'gtk)
 
+(defvar ui-active nil)
+
+(defvar ui-window nil)
+(defvar ui-root nil)
+(defvar ui-apply nil)
+(defvar ui-revert nil)
+
+;; list of (SPEC . VALUE)
+(defvar ui-values-to-apply nil)
+
+(defvar ui-apply-hook nil)
+(defvar ui-apply-changed-hook nil)
+
+;; list of (SYMBOL . ORIGINAL-VALUE)
+(defvar ui-original-values nil)
+
+(defvar ui-changed-variables nil)
+
+(defvar ui-box-spacing 4)
+(defvar ui-box-border 5)
+
 
-;; menus
+;; ui builder
 
-(defvar menu-selected nil)
+;; elements may be:
 
-(defun create-menu (spec &optional bar)
+;; (pages (LABEL ELEMENT)...)
+;; (hbox ELEMENTS...)
+;; (vbox ELEMENTS...)
+;; (table (COLS ROWS) ((LEFT RIGHT TOP BOTTOM) ELEMENT)...)
+;; (label TEXT)
+;; (hsep)
+;; (vsep)
+;; (frame TEXT ELEMENTS...)
+;; (toggle TEXT KEYS...)
+;; (number KEYS...)
+;; (string KEYS...)
+;; (set LIST KEYS...)
+
+;; KEYS is a plist, possible keys are:
+
+;; :feature FUNCTION
+;; :variable SYMBOL
+;; :value VALUE
+;; :doc STRING
+;; :allow-nil t
+
+(defmacro get-key (spec key)
+  `(car (cdr (memq ,key ,spec))))
+
+(defmacro key-exists-p (spec key)
+  `(memq ,key ,spec))
+
+(defun set-key (spec key value)
   (let
-      ((menu (if bar (gtk-menu-bar-new) (gtk-menu-new))))
-    (mapc #'(lambda (cell)
-	      (let
-		  (label item)
-		(when (and cell (symbolp (car cell)) (not (functionp cell)))
-		  (setq cell (symbol-value (car cell))))
-		(if (null cell)
-		    (setq item (gtk-menu-item-new))
-		  (setq label (car cell))
-		  (if (functionp (cdr cell))
-		      (setq cell (funcall (cdr cell)))
-		    (setq cell (cdr cell)))
-		  (if (and (consp (car cell)) (not (functionp (car cell))))
-		      (let
-			  ((sub (create-menu cell)))
-			(setq item (gtk-menu-item-new-with-label label))
-			(gtk-menu-item-set-submenu item sub))
-		    (setq item (gtk-menu-item-new-with-label label))
-		    (gtk-signal-connect item "activate"
-					`(lambda ()
-					   (setq menu-selected
-						 ',(car cell))))))
-		(when item
-		  (funcall (if bar 'gtk-menu-bar-append
-			     'gtk-menu-append) menu item)
-		  (gtk-widget-show item))))
-	  spec)
-    menu))
+      ((cell (memq key spec)))
+    (if cell
+	(rplaca (cdr cell) value)
+      (nconc spec (list key value)))))
 
-(defun popup-menu (spec)
-  (catch 'menu-done
-    (let
-	((menu  (create-menu spec)))
-      (gtk-signal-connect menu "deactivate" 'gtk-main-quit)
-      (setq menu-selected nil)
-      (gtk-menu-popup-interp menu nil nil 0 0)
-      (gtk-main)
-      menu-selected)))
+(defun build-ui (spec)
+  (let
+      ((fun (get (car spec) 'builder)))
+    (if fun
+	(funcall fun spec)
+      (error "Unknown ui element: %S" spec))))
+
+(put 'pages 'builder 'build-pages)
+(defun build-pages (spec)
+  (let
+      ((book (gtk-notebook-new)))
+    (mapc #'(lambda (page)
+	      (gtk-notebook-append-page book (build-ui (car (cdr page)))
+					(gtk-label-new (car page))))
+	  (cdr spec))
+    book))
+
+(put 'vbox 'builder 'build-box)
+(put 'hbox 'builder 'build-box)
+(defun build-box (spec)
+  (let
+      ((box (if (eq (car spec) 'vbox)
+		(gtk-vbox-new nil 0)
+	      (gtk-hbox-new nil 0))))
+    (gtk-box-set-spacing box ui-box-spacing)
+    (gtk-container-border-width box ui-box-border)
+    (mapc #'(lambda (widget)
+	      (gtk-box-pack-start box (build-ui widget) nil nil)) (cdr spec))
+    box))
+
+(put 'table 'builder 'build-table)
+(defun build-table (spec)
+  (let
+      ((table (gtk-table-new (car (nth 1 spec)) (nth 1 (nth 1 spec)) nil)))
+    (mapc #'(lambda (cell)
+	      (gtk-table-attach-defaults table
+					 (build-ui (nth 1 cell))
+					 (nth 0 (car cell))
+					 (nth 1 (car cell))
+					 (nth 2 (car cell))
+					 (nth 3 (car cell)))) (nthcdr 2 spec))
+    table))
+
+(put 'label 'builder 'build-label)
+(defun build-label (spec)
+  (let
+      ((label (gtk-label-new (nth 1 spec))))
+    (gtk-label-set-justify label 'left)
+    label))
+
+(put 'frame 'builder 'build-frame)
+(defun build-frame (spec)
+  (let
+      ((frame (gtk-frame-new (nth 1 spec))))
+    (when (nth 2 spec)
+      (gtk-container-add frame (build-ui (nth 2 spec))))
+    frame))
+
+(put 'hsep 'builder 'build-separator)
+(put 'vsep 'builder 'build-separator)
+(defun build-separator (spec)
+  (if (eq (car spec) 'hsep)
+      (gtk-hseparator-new)
+    (gtk-vseparator-new)))
+
+(put 'toggle 'builder 'build-toggle)
+(defun build-toggle (spec)
+  (let
+      ((toggle (gtk-check-button-new-with-label (nth 1 spec))))
+    (mapc #'(lambda (w)
+	      (when (gtk-label-p w)
+		(gtk-label-set-justify w 'left)))
+	  (gtk-container-children toggle))
+    (if (key-exists-p spec ':value)
+	(when (get-key spec ':value)
+	  (gtk-button-clicked toggle))
+      (set-key spec ':value nil))
+    (gtk-signal-connect toggle "clicked"
+			`(lambda (w)
+			   (let
+			       ((value (not (get-key ',spec ':value))))
+			     (ui-set
+			      ',spec ',(get-key spec ':variable) value))))
+    toggle))
+
+(put 'number 'builder 'build-entry)
+(put 'string 'builder 'build-entry)
+(defun build-entry (spec)
+  (let
+      ((entry (gtk-entry-new))
+       id)
+    (if (key-exists-p spec ':value)
+	(gtk-entry-set-text entry (if (eq (car spec) 'number)
+				      (format nil "%s" (get-key spec ':value))
+				    (get-key spec ':value)))
+      (set-key spec ':value nil))
+    (setq id (gtk-signal-connect entry "changed"
+				 `(lambda (w)
+				    (build-entry:changed ',spec))))
+    (setq spec (nconc spec (list ':widget entry)))
+    entry))
+
+(defun build-entry:changed (spec)
+  (unless (get-key spec ':in-apply-hook)
+    (add-hook 'ui-apply-changed-hook `(lambda ()
+					(build-entry:set ',spec)))
+    (set-key spec ':in-apply-hook nil)))
+
+(defun build-entry:set (spec)
+  (let
+      ((value (gtk-entry-get-text (get-key spec ':widget))))
+    (cond ((and (string= value "") (get-key spec ':allow-nil))
+	   (setq value nil))
+	  ((eq (car spec) 'number)
+	   (condition-case nil
+	       (progn
+		 (setq value (read-from-string value))
+		 (unless (numberp value)
+		   (setq value nil)))
+	     (error
+	      (setq value nil)))))
+    (ui-set spec (get-key spec ':variable) value)))
+
+(put 'set 'builder 'build-set)
+(defun build-set (spec)
+  (let*
+      ((values (nth 1 spec))
+       (box (gtk-vbox-new nil 0))
+       (buttons (make-vector (length values)))
+       (i 0)
+       group)
+    (unless (key-exists-p spec ':value)
+      (set-key spec ':value (car values)))
+    (while values
+      (aset buttons i (gtk-radio-button-new-with-label-from-widget
+		       (if (zerop i)
+			   nil
+			 (aref buttons (1- i)))
+		       (symbol-name (car values))))
+      (gtk-toggle-button-set-state (aref buttons i)
+				   (eq (car values) (get-key spec ':value)))
+      (gtk-box-pack-start box (aref buttons i) nil nil)
+      (gtk-signal-connect (aref buttons i) "clicked"
+			  `(lambda ()
+			     (ui-set ',spec ',(get-key spec ':variable)
+				     ',(car values))))
+      (setq i (1+ i))
+      (setq values (cdr values)))
+    box))
+
+;; XXX do radio buttons
+
+(defun show-ui (spec)
+  (let
+      ((ui-apply-hook nil)
+       (ui-apply-changed-hook nil)
+       (ui-values-to-apply nil)
+       (ui-original-values nil)
+       (ui-changed-variables nil)
+       (ui-active t)
+       (ui-window (gtk-window-new 'toplevel))
+       (ui-root (build-ui spec))
+       (vbox (gtk-vbox-new nil 0))
+       (hsep (gtk-hseparator-new))
+       (hbox (gtk-hbox-new nil 0))
+       (ok (gtk-button-new-with-label "OK"))
+       (ui-apply (gtk-button-new-with-label "Apply"))
+;XXX reinstate these
+;       (ui-revert (gtk-button-new-with-label "Revert"))
+;       (refresh (gtk-button-new-with-label "Refresh"))
+       (cancel (gtk-button-new-with-label "Cancel")))
+    (gtk-window-set-title ui-window "Sawmill configurator")
+    (gtk-widget-set-name ui-window "Sawmill configurator")
+    (gtk-signal-connect ui-window "delete_event" 'ui-quit)
+    (gtk-container-add ui-window vbox)
+    (gtk-box-set-spacing vbox ui-box-spacing)
+    (gtk-container-border-width vbox ui-box-border)
+    (gtk-box-set-spacing hbox ui-box-spacing)
+    (gtk-container-border-width hbox ui-box-border)
+    (gtk-box-pack-end vbox hbox)
+    (gtk-box-pack-end vbox hsep)
+    (gtk-signal-connect ok "clicked" 'ui-ok)
+    (gtk-signal-connect ui-apply "clicked" 'ui-apply)
+    (gtk-signal-connect cancel "clicked" 'ui-cancel)
+;    (gtk-signal-connect ui-revert "clicked" 'ui-revert)
+;    (gtk-signal-connect refresh "clicked" 'ui-refresh)
+    (gtk-box-pack-start hbox ok)
+    (gtk-box-pack-start hbox ui-apply)
+    (gtk-box-pack-start hbox cancel)
+;    (gtk-box-pack-start hbox ui-revert)
+;    (gtk-box-pack-start hbox refresh)
+    (gtk-box-pack-start vbox ui-root)
+    (ui-set-button-states)
+    (gtk-widget-show-all ui-window)
+    (gtk-main)))
+
+(defun ui-set-button-states ()
+; XXX why doesn't this work?
+;  (gtk-widget-set-state ui-apply (if (or ui-values-to-apply
+;					 ui-apply-changed-hook)
+;				     'normal
+;				   'insensitive))
+;  (gtk-widget-set-state ui-revert (if ui-changed-variables
+;				      'normal
+;				    'insensitive))
+)
+
+
+;; acting on settings
+
+(defun ui-set (spec symbol value)
+  (unless (assq symbol ui-original-values)
+    (setq ui-original-values (cons (cons symbol (get-key spec ':value))
+				   ui-original-values)))
+  (setq ui-values-to-apply (delete-if #'(lambda (x)
+					  (eq (car x) spec))
+				      ui-values-to-apply))
+  (setq ui-values-to-apply (cons (cons spec value) ui-values-to-apply))
+  (set-key spec ':value value)
+  (ui-set-button-states))
+
+(defun ui-quit ()
+  (gtk-widget-destroy ui-window)
+  (gtk-main-quit))
+
+(defun ui-set-variables (list)
+  (let
+      ((commands
+	(mapcar #'(lambda (cell)
+		    (let*
+			((spec (car cell))
+			 (new-value (cdr cell))
+			 (symbol (get-key spec ':variable)))
+		      (unless (memq symbol ui-changed-variables)
+			(setq ui-changed-variables
+			      (cons symbol ui-changed-variables)))
+		      (when (get-key spec ':in-apply-hook)
+			(set-key spec ':in-apply-hook nil))
+		      `(customize-set ',symbol ',new-value)))
+		ui-values-to-apply)))
+    (ui-command (cons 'progn commands))
+    (setq ui-values-to-apply nil)
+    (ui-set-button-states)))
+
+(defun ui-apply ()
+  (call-hook 'ui-apply-changed-hook)
+  (call-hook 'ui-apply-hook)
+  (ui-set-variables ui-values-to-apply)
+  (setq ui-apply-changed-hook nil))
+
+(defun ui-ok ()
+  (ui-apply)
+  (ui-quit))
+
+(defun ui-revert ()
+  (let
+      ((commands
+	(mapcar #'(lambda (symbol)
+		    `(customize-set
+		      ',symbol ',(cdr (assq symbol ui-original-values))))
+		ui-changed-variables)))
+    (ui-command (cons 'progn commands))
+    (setq ui-values-to-apply nil)
+    (setq ui-changed-variables nil))
+    (ui-set-button-states))
+
+(defun ui-cancel ()
+  (ui-revert)
+  (ui-quit))
+
+(defun ui-command (form)
+  (format standard-output "%S\n" form)
+  (when (filep standard-output)
+    (flush-file standard-output)))
+
+(defun ui-refresh ()
+  (let
+      ((vbox (gtk-widget-parent ui-root))
+       spec)
+    (gtk-container-remove vbox ui-root)
+    (gtk-widget-destroy ui-root)
+    (ui-command '(ui-refresh))
+    (setq spec (read standard-input))
+    (setq ui-changed-variables nil)
+    (setq ui-values-to-apply nil)
+    (setq ui-original-values nil)
+    (setq ui-root (build-ui spec))
+    (gtk-box-pack-start vbox ui-root)
+    (ui-set-button-states)))
 
 
 ;; entry point, loop reading command forms, sending back results
@@ -78,9 +389,8 @@ exec rep "$0" "$@"
     (while t
       (let
 	  ((input (read standard-input)))
-	(format standard-output "%S\n" (apply (car input) (cdr input)))
-	(when (filep standard-output)
-	  (flush-file standard-output))))
+	(show-ui input)
+	(ui-command '(ui-exit))))
   (end-of-stream))
 
 
