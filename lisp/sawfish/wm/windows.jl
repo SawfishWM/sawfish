@@ -99,7 +99,7 @@ means outside the left window edge.")
   (defvar desktop-window-depth -4
     "The stacking depth of desktop windows.")
 
-  (defvar dock-window-depth +4
+  (defvar dock-window-depth -3
     "The stacking depth of dock windows.")
 
 
