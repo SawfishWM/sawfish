@@ -372,8 +372,10 @@
 (defun next-workspace ()
   "Display the next workspace."
   (interactive)
-  (when (< current-workspace (1- total-workspaces))
-    (ws-switch-workspace (1+ current-workspace))))
+  (cond ((< current-workspace (1- total-workspaces))
+	 (ws-switch-workspace (1+ current-workspace)))
+	(cycle-through-workspaces
+	 (ws-switch-workspace 0))))
 
 (defun send-to-next-workspace (window)
   "Move the window to the next workspace. If no next workspace exists, one
@@ -393,8 +395,10 @@ will be created."
 (defun previous-workspace ()
   "Display the previous workspace."
   (interactive)
-  (when (> current-workspace 0)
-    (ws-switch-workspace (1- current-workspace))))
+  (cond ((> current-workspace 0)
+	 (ws-switch-workspace (1- current-workspace)))
+	(cycle-through-workspaces
+	 (ws-switch-workspace (1- total-workspaces)))))
 
 (defun send-to-previous-workspace (window)
   "Move the window to the previous workspace. If no such workspace exists, one
