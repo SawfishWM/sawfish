@@ -34,7 +34,7 @@
 ;; The downside is that it's harder for user extensions to redefine
 ;; existing code, IMHO this may also be a good thing..
 
-(define-structure sawfish.wm.user ()
+(define-structure user ()
 
     (open rep
 	  sawfish.wm
@@ -47,7 +47,7 @@
 
   ;; initialize the special variable pointing at this structure
   (structure () (open rep rep.structures)
-    (setq *user-module* (get-structure 'sawfish.wm.user)))
+    (setq *user-module* (get-structure 'user)))
 
   ;; they're probably not going to leave us in an unusable state
   (unless (get-command-line-option "--no-rc")
@@ -128,3 +128,6 @@
        ((member arg '("-q" "--quit"))
 	(throw 'quit 0))
        (t (do-load arg))))))
+
+;; prevent this file being loaded as a module
+nil

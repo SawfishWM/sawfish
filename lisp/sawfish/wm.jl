@@ -31,8 +31,8 @@
 (setq autoload-verbose nil)
 
 ;; so modularised rep knows where to inherit specials and load from
-(define *root-structure* 'sawfish.wm)
-(define *user-structure* 'sawfish.wm.user)
+(setq *root-structure* 'sawfish.wm)
+(setq *user-structure* 'user)
 
 ;; load always-present session-manager stuff
 (require 'sawfish.wm.session.init)

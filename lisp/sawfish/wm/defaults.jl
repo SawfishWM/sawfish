@@ -23,7 +23,7 @@
 
 ;; This file provides defaults for users without .sawmillrc files
 
-(declare (in-module sawfish.wm.user))
+(declare (in-module user))
 
 ;; if it looks like GNOME is the desktop environment, then load the
 ;; extra GNOME integration module
