@@ -27,6 +27,12 @@
 
 ;;;###autoload (setq custom-required (cons 'move-resize custom-required))
 
+(defcustom resize-by-frame-class t
+  "Choose window edges to resize by the type of frame part clicked, not by
+the mouse position relative to the window."
+  :type boolean
+  :group move)
+
 (defcustom move-outline-mode 'opaque
   "The method of drawing windows being moved interactively."
   :type (set opaque box)
@@ -77,6 +83,15 @@
 			  "Any-Off" 'move-resize-finished
 			  "Any-Move" 'move-resize-motion
 			  "Any-ESC" 'move-resize-cancel))
+
+(defvar move-resize-fp-edges-alist '((top-border top)
+				     (left-border left)
+				     (right-border right)
+				     (bottom-border bottom)
+				     (top-left-corner top left)
+				     (top-right-corner top right)
+				     (bottom-left-corner bottom left)
+				     (bottom-right-corner bottom right)))
 
 ;; specials
 (defvar move-resize-window nil)
@@ -314,33 +329,37 @@
 ;; called when moving, tries to decide which edges to move, which to stick
 (defun move-resize-infer-anchor ()
   (unless move-resize-moving-edges
-    (cond ((<= (- move-resize-old-ptr-x move-resize-old-x)
-	       (/ move-resize-old-width 3))
-	   (setq move-resize-moving-edges
-		 (cons 'left move-resize-moving-edges)))
-	  ((>= (- move-resize-old-ptr-x move-resize-old-x)
-	       (* (/ move-resize-old-width 3) 2))
-	   (setq move-resize-moving-edges
-		 (cons 'right move-resize-moving-edges))))
-    (cond ((<= (- move-resize-old-ptr-y move-resize-old-y)
-	       (/ move-resize-old-height 3))
-	   (setq move-resize-moving-edges
-		 (cons 'top move-resize-moving-edges)))
-	  ((>= (- move-resize-old-ptr-y move-resize-old-y)
-	       (* (/ move-resize-old-height 3) 2))
-	   (setq move-resize-moving-edges
-		 (cons 'bottom move-resize-moving-edges)))))
+    (let
+	(tem)
+      (if (and resize-by-frame-class
+	       (setq tem (cdr (assq 'class (clicked-frame-part))))
+	       (setq tem (cdr (assq tem move-resize-fp-edges-alist))))
+	  (setq move-resize-moving-edges (copy-sequence tem))
+	(cond ((<= (- move-resize-old-ptr-x move-resize-old-x)
+		   (/ move-resize-old-width 3))
+	       (setq move-resize-moving-edges
+		     (cons 'left move-resize-moving-edges)))
+	      ((>= (- move-resize-old-ptr-x move-resize-old-x)
+		   (* (/ move-resize-old-width 3) 2))
+	       (setq move-resize-moving-edges
+		     (cons 'right move-resize-moving-edges))))
+	(cond ((<= (- move-resize-old-ptr-y move-resize-old-y)
+		   (/ move-resize-old-height 3))
+	       (setq move-resize-moving-edges
+		     (cons 'top move-resize-moving-edges)))
+	      ((>= (- move-resize-old-ptr-y move-resize-old-y)
+		   (* (/ move-resize-old-height 3) 2))
+	       (setq move-resize-moving-edges
+		     (cons 'bottom move-resize-moving-edges)))))))
   (when (null move-resize-moving-edges)
     (setq move-resize-moving-edges '(bottom right)))
   (when move-lock-when-maximized
     (when (window-maximized-vertically-p move-resize-window)
       (setq move-resize-moving-edges
-	    (delq 'top
-		  (delq 'bottom move-resize-moving-edges))))
+	    (delq 'top (delq 'bottom move-resize-moving-edges))))
     (when (window-maximized-horizontally-p move-resize-window)
       (setq move-resize-moving-edges
-	    (delq 'left
-		  (delq 'right move-resize-moving-edges))))))
+	    (delq 'left (delq 'right move-resize-moving-edges))))))
 
 (defun move-resize-infer-directions ()
   (unless move-resize-directions
