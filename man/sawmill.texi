@@ -1809,11 +1809,11 @@ that the function may be called interactively.
 
 @item A string; zero or more lines (each separated by a newline
 character), each line defines how to compute one argument value. The
-first character of each line is a code letter defining exactly how to
-compute the argument, the rest of the line is an optional argument
-which some code letters may use.
+first one or two characters of each line is a prefix defining exactly
+how to compute the argument, the rest of the line is an optional
+argument which some prefixes may use.
 
-The currently available code letters are,
+The currently available prefixes are,
 
 @table @samp
 @item e
@@ -1821,10 +1821,6 @@ The event which caused this command to be invoked.
 
 @item E
 The event which caused this command, cooked into a string.
-
-@item f
-The window which currently has the input focus, or @code{nil} if no
-window is focused.
 
 @item p
 The prefix argument as a number, this will be 1 if no prefix argument
@@ -1836,10 +1832,14 @@ The raw prefix argument.
 @item t
 The symbol @code{t}.
 
-@item w
+@item %f
+The window which currently has the input focus, or @code{nil} if no
+window is focused.
+
+@item %w
 The result of calling the @code{current-event-window} function.
 
-@item W
+@item %W
 The result of calling the @code{current-event-window} function, or if
 this returns @code{nil} or @code{root}, the currently focused window.
 @end table

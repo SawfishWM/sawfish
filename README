@@ -139,8 +139,7 @@ created and deleted on demand. Send a window to a new workspace to
 create one, remove all windows to delete it.
 
 Minimal GNOME compliance can be obtained by requiring the `gnome'
-module, i.e. put "(require 'gnome)" in your .sawmillrc file. This is
-still a bit basic, but it does most things and will get better..
+module, i.e. put "(require 'gnome)" in your .sawmillrc file.
 
 Sawmill is fully session managed. If the environment variable
 SESSION_MANAGER is set, the window manager will attempt to connect to
@@ -157,7 +156,7 @@ shell:
 
 You probably want to redirect this to a file since it's about 150k in
 size. Also it contains many functions better documented in the librep
-manual.
+and sawmill Info manuals.
 
 Any customizations that can't be performed through the GUI can be put
 in the `~/.sawmillrc' file, a Lisp script that is executed at startup
@@ -172,57 +171,5 @@ While this script is being evaluated the image path is set so that the
 theme can load any images stored in its directory.
 
 For a description of the structures defining window frame parts, see
-src/frames.c. Search for a comment starting ``building frames from
-component lists''. Also you can look at the examples in the `themes'
-subdirectory.
+the Info manual (node `Window Frames')
 
-
-Hooks
-*****
-
-The list of hooks currently called is:
-
-	pre-command-hook	called before and after each command
-	post-command-hook	is executed
-	unbound-key-hook	called when a keyboard/pointer event
-				is unbound
-
-	add-window-hook		these all relate to X events, they're
-	destroy-notify-hook	called with a single parameter, the
-	visibility-notify-hook	window in question
-	map-notify-hook
-	unmap-notify-hook
-	reparent-notify-hook
-	enter-notify-hook
-	leave-notify-hook
-	focus-in-hook
-	focus-out-hook
-	before-add-window-hook
-
-	property-notify-hook	called with (WINDOW ATOM TYPE)
-				 where type is `new-value' or `deleted'
-
-	client-message-hook	called with (WINDOW TYPE DATA-ARRAY)
-
-	add-workspace-hook	each is called with a single parameter,
-	enter-workspace-hook	the workspace whose state has changed
-	leave-workspace-hook
-	delete-workspace-hook
-	add-to-workspace-hook	these two are called with a window
-	remove-from-workspace-hook
-	workspace-state-change-hook
-
-	place-window-hook	called the first time a window is mapped
-
-	iconify-window-hook	called with the window as parameter
-	uniconify-window-hook
-	window-state-change-hook
-
-	before-exit-hook	called immediately before exiting
-
-	sm-window-save-functions
-				called when saving window state to the
-				 session file.
-
-	sm-restore-window-hook	called after matching a window to an
-				 alist in a saved session

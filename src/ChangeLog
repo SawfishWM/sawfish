@@ -1,5 +1,9 @@
 1999-09-14  John Harper  <john@dcs.warwick.ac.uk>
 
+	* commands.c (Fcall_command): changed `f', `w' and `W'
+	interactive codes to `%f', `%w' and `%W'. `%' is now reserved
+	for app-local codes
+
 	* functions.c (Fshow_message): new optional arg POS; defines
 	the position of the message window on the screen
 
