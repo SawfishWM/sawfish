@@ -52,6 +52,8 @@ DEFSYM(user_size, "user-size");
 DEFSYM(program_size, "program-size");
 DEFSYM(user_position, "user-position");
 DEFSYM(program_position, "program-position");
+DEFSYM(window_state_change_hook, "window-state-change-hook");
+DEFSYM(iconified, "iconified");
 
 
 /* utilities */
@@ -279,11 +281,7 @@ add_window (Window id)
 
 	/* window managers are supposed to set WM_STATE to diffentiate
 	   top-level windows of applications from others */
-	{
-	    u_long data = NormalState;
-	    XChangeProperty (dpy, w->id, xa_wm_state, xa_wm_state, 32,
-			     PropModeReplace, (u_char *)&data, 1);
-	}
+	Fset_client_state (rep_VAL(w));
 
 	/* ..then call the add-window-hook.. */
 	rep_PUSHGC(gc_win, win);
@@ -768,6 +766,20 @@ out:
     return tem;
 }
 
+DEFUN("set-client-state", Fset_client_state, Sset_client_state,
+      (repv win), rep_Subr1)
+{
+    u_long data = NormalState;
+    repv tem;
+    rep_DECLARE1(win, WINDOWP);
+    tem = Fwindow_get (win, Qiconified);
+    if (tem != Qnil)
+	data = IconicState;
+    XChangeProperty (dpy, VWIN(win)->id, xa_wm_state, xa_wm_state, 32,
+		     PropModeReplace, (u_char *)&data, 1);
+    return win;
+}
+
 
 /* type hooks */
 
@@ -880,6 +892,7 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_group_id);
     rep_ADD_SUBR(Swindow_size_hints);
     rep_ADD_SUBR(Scall_window_hook);
+    rep_ADD_SUBR(Sset_client_state);
     rep_INTERN(add_window_hook);
     rep_INTERN(place_window_hook);
 
@@ -901,6 +914,10 @@ windows_init (void)
     rep_INTERN(user_position);
     rep_INTERN(program_size);
     rep_INTERN(program_position);
+    rep_INTERN(window_state_change_hook);
+    rep_INTERN(iconified);
+
+    add_hook (Qwindow_state_change_hook, rep_VAL(&Sset_client_state));
 }
 
 void
