@@ -791,7 +791,37 @@ current-event-window
     if (current_x_event != 0)
     {
 	Lisp_Window *w = find_window_by_id (current_x_event->xany.window);
-	return (w != 0) ? rep_VAL(w) : Qnil;
+	if (w != 0)
+	    return rep_VAL(w);
+	else if (current_x_event->xany.window == root_window)
+	    return Qroot;
+	else
+	    return Qnil;
+    }
+    else
+	return Qnil;
+}
+
+DEFUN("proxy-current-event", Fproxy_current_event, Sproxy_current_event,
+      (repv win), rep_Subr1) /*
+::doc:Sproxy-current-event::
+proxy-current-event WINDOW
+
+Send the current X event to WINDOW, either a window object, a numeric
+window id, or the symbol `root'. If a ButtonPress event the pointer
+grab will be released first.
+::end:: */
+{
+    Window w = x_win_from_arg (win);
+    if (w == 0)
+	return rep_signal_arg_error (win, 1);
+
+    if (current_x_event != 0)
+    {
+	if (current_x_event->type == ButtonPress)
+	    XUngrabPointer (dpy, CurrentTime);
+	XSendEvent (dpy, w, False, SubstructureNotifyMask, current_x_event);
+	return Qt;
     }
     else
 	return Qnil;
@@ -1112,6 +1142,7 @@ keys_init(void)
     rep_ADD_SUBR(Scurrent_event_string);
     rep_ADD_SUBR(Scurrent_event);
     rep_ADD_SUBR(Scurrent_event_window);
+    rep_ADD_SUBR(Sproxy_current_event);
     rep_ADD_SUBR(Slast_event);
     rep_ADD_SUBR(Sevent_name);
     rep_ADD_SUBR(Slookup_event);
