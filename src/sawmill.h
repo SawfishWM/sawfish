@@ -157,13 +157,19 @@ typedef struct lisp_font {
     repv car;
     struct lisp_font *next;
     repv name;
-    XFontSet font;
+    union {
+	XFontSet set;
+	XFontStruct *str;
+    } font;
     repv plist;
     int ascent, descent;
 } Lisp_Font;
 
 #define FONTP(v)	rep_CELL16_TYPEP(v, font_type)
 #define VFONT(v)	((Lisp_Font *)rep_PTR(v))
+
+#define FF_FONT_STRUCT	(1 << (rep_CELL16_TYPE_BITS + 0))
+#define FONT_STRUCT_P(v) (VFONT(v)->car & FF_FONT_STRUCT)
 
 /* An allocated color (from Imlib) */
 typedef struct lisp_color {
