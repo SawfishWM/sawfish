@@ -31,7 +31,8 @@
 	    WIN_HINTS_SKIP_FOCUS
 	    WIN_HINTS_SKIP_WINLIST
 	    WIN_HINTS_SKIP_TASKLIST
-	    WIN_HINTS_FOCUS_ON_CLICK)
+	    WIN_HINTS_FOCUS_ON_CLICK
+	    WIN_HINTS_DO_NOT_COVER)
 
     (open rep
 	  rep.regexp
@@ -62,6 +63,7 @@
   (defconst WIN_HINTS_SKIP_WINLIST 2)
   (defconst WIN_HINTS_SKIP_TASKLIST 4)
   (defconst WIN_HINTS_FOCUS_ON_CLICK 16)
+  (defconst WIN_HINTS_DO_NOT_COVER 32)
 
   (defvar gnome-window-id nil)
 
@@ -171,7 +173,9 @@
 		 (setq hints (logior (logand
 				      hints (lognot WIN_HINTS_SKIP_WINLIST))
 				     (if (window-get w 'window-list-skip)
-					 WIN_HINTS_SKIP_WINLIST 0))))))
+					 WIN_HINTS_SKIP_WINLIST 0)
+				     (if (window-get w 'avoid)
+					 WIN_HINTS_DO_NOT_COVER 0))))))
 	    states)
       (set-x-property w '_WIN_HINTS (vector hints) 'CARDINAL 32)))
 
@@ -181,8 +185,7 @@
 	(cond ((and (string= (aref class 1) "Panel")
 		    (string= (aref class 0) "panel"))
 	       ;; XXX I don't think the GNOME hints specify these things...
-	       (window-put w 'focus-click-through t)
-	       (window-put w 'avoid t))
+	       (window-put w 'focus-click-through t))
 	      ((string= (aref class 1) "gmc-desktop-icon")
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'never-focus t))
@@ -204,20 +207,20 @@
 	  (window-put w 'shaded t))
 	(unless (zerop (logand bits WIN_STATE_FIXED_POSITION))
 	  (window-put w 'fixed-position t))
-;;; XXX this doesn't work since the frame hasn't been created yet..
-;      (unless (zerop (logand bits WIN_STATE_MAXIMIZED_VERT))
-;	(unless (window-maximized-vertically-p w)
-;	  (maximize-window-vertically w)))
-;      (unless (zerop (logand bits WIN_STATE_MAXIMIZED_HORIZ))
-;	(unless (window-maximized-horizontally-p w)
-;	  (maximize-window-horizontally w)))
-	)
+	(unless (zerop (logand bits WIN_STATE_MAXIMIZED_VERT))
+	  (unless (window-maximized-vertically-p w)
+	    (window-put w 'queued-vertical-maximize t)))
+	(unless (zerop (logand bits WIN_STATE_MAXIMIZED_HORIZ))
+	  (unless (window-maximized-horizontally-p w)
+	    (window-put w 'queued-horizontal-maximize t))))
       (when (eq (car hints) 'CARDINAL)
 	(setq bits (aref (nth 2 hints) 0))
 	(unless (zerop (logand bits WIN_HINTS_SKIP_FOCUS))
 	  (window-put w 'cycle-skip t))
 	(unless (zerop (logand bits WIN_HINTS_SKIP_WINLIST))
-	  (window-put w 'window-list-skip t)))
+	  (window-put w 'window-list-skip t))
+	(unless (zerop (logand bits WIN_HINTS_DO_NOT_COVER))
+	  (window-put w 'avoid t)))
       (when layer
 	(setq layer (aref (nth 2 layer) 0))
 	(set-window-depth w (- layer WIN_LAYER_NORMAL)))

@@ -473,6 +473,18 @@ unmaximized."
 
 ;;; initialisation
 
+  (define (after-add-window w)
+    (let ((vert (window-get w 'queued-vertical-maximize))
+	  (horiz (window-get w 'queued-horizontal-maximize)))
+      (when (or vert horiz)
+	(window-put w 'queued-vertical-maximize nil)
+	(window-put w 'queued-horizontal-maximize nil)
+	(maximize-window w (cond ((and vert horiz) nil)
+				 (vert 'vertical)
+				 (horiz 'horizontal))))))
+
+  (add-hook 'after-add-window-hook after-add-window)
+
   (sm-add-saved-properties
    'unmaximized-geometry 'maximized-vertically 'maximized-horizontally)
   (add-swapped-properties

@@ -280,6 +280,10 @@
     (lambda (w mode)
       (require 'sawfish.wm.state.maximize)
       (case mode
+	((init)
+	 (window-put w (if (eq direction 'vertical)
+			   'queued-vertical-maximize
+			 'queued-horizontal-maximize) t))
 	((remove)
 	 (unmaximize-window w direction))
 	((add)

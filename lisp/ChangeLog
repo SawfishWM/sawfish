@@ -1,3 +1,15 @@
+2000-10-31  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/maximize.jl: added a function to the
+	after-window-hook that checks for `queued-{vertical,horizontal}-
+	maximize' properties on windows. When found the window is
+	maximized. This gets around the problem of not being able to
+	maximize a window before it's been framed
+
+	* sawfish/wm/state/wm-spec.jl, sawfish/wm/state/gnome.jl: set
+	queued maximize properties if a newly-created window needs to
+	be maximize
+
 2000-10-30  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/theming/make-theme-preview.jl: add the function
