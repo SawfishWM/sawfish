@@ -57,24 +57,15 @@ make_image (ImlibImage *im, repv plist)
     return rep_VAL(f);
 }
 
-DEFUN("make-image", Fmake_image, Smake_image,
-      (repv file, repv plist), rep_Subr2) /*
-::doc:make-image::
-make-image FILE [PLIST]
-
-Return a new image object representing the image stored in FILE (a
-string). PLIST defines the property list of the image.
-::end:: */
+static repv
+find_image_file (repv file, bool *deletep)
 {
-    repv path;
-    rep_GC_root gc_file, gc_plist, gc_path;
-    rep_DECLARE1(file, rep_STRINGP);
-
+    repv path = Fsymbol_value (Qimage_load_path, Qt), out = Qnil;
+    rep_GC_root gc_file, gc_path;
     rep_PUSHGC(gc_file, file);
-    rep_PUSHGC(gc_plist, plist);
-    path = Fsymbol_value (Qimage_load_path, Qt);
     rep_PUSHGC(gc_path, path);
-    while (rep_CONSP(path))
+
+    while (out == Qnil && rep_CONSP(path))
     {
 	repv all = Fexpand_file_name (file, rep_CAR(path));
 	if (all && rep_STRINGP(all))
@@ -85,7 +76,6 @@ string). PLIST defines the property list of the image.
 	    tem = Ffile_regular_p (all);
 	    if (tem && tem != Qnil)
 	    {
-		ImlibImage *im = 0;
 		bool delete = FALSE;
 		file = Flocal_file_name (all);
 		if (file == Qnil)
@@ -103,20 +93,62 @@ string). PLIST defines the property list of the image.
 		    }
 		}
 		if (file && rep_STRINGP(file))
-		    im = Imlib_load_image (imlib_id, rep_STR(file));
-		if (delete)
-		    Fdelete_file (file);
-		if (im != 0)
 		{
-		    rep_POPGC; rep_POPGC; rep_POPGC; rep_POPGC;
-		    return make_image (im, plist);
+		    *deletep = delete;
+		    out = file;
 		}
 	    }
 	    rep_POPGC;
 	}
 	path = rep_CDR(path);
     }
-    rep_POPGC; rep_POPGC; rep_POPGC;
+    rep_POPGC; rep_POPGC;
+    return out;
+}
+
+Pixmap
+make_bitmap (repv file, int *widthp, int *heightp, int *x_hotp, int *y_hotp)
+{
+    bool delete;
+    file = find_image_file (file, &delete);
+    if (file && rep_STRINGP(file))
+    {
+	Pixmap bitmap;
+	int ret = XReadBitmapFile (dpy, root_window, rep_STR(file),
+				   widthp, heightp, &bitmap, x_hotp, y_hotp);
+
+	if (delete)
+	    Fdelete_file (file);
+
+	return (ret == BitmapSuccess) ? bitmap : 0;
+    }
+    else
+	return 0;
+}
+
+DEFUN("make-image", Fmake_image, Smake_image,
+      (repv file, repv plist), rep_Subr2) /*
+::doc:make-image::
+make-image FILE [PLIST]
+
+Return a new image object representing the image stored in FILE (a
+string). PLIST defines the property list of the image.
+::end:: */
+{
+    bool delete;
+    rep_GC_root gc_plist;
+    rep_DECLARE1(file, rep_STRINGP);
+    rep_PUSHGC(gc_plist, plist);
+    file = find_image_file (file, &delete);
+    rep_POPGC;
+    if (file && rep_STRINGP(file))
+    {
+	ImlibImage *im = Imlib_load_image (imlib_id, rep_STR(file));
+	if (delete)
+	    Fdelete_file (file);
+	if (im != 0)
+	    return make_image (im, plist);
+    }
     return Fsignal (Qerror, rep_list_2(rep_string_dup("no such image"), file));
 }
 
