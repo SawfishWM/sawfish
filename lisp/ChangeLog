@@ -1,4 +1,16 @@
+2000-04-30  John Harper  <john@dcs.warwick.ac.uk>
+
+	* stacking.jl (raise-window): check that (/= pred w) before
+	using it to raise above (else, do nothing, since it means that
+	w is already on top)
+
 2000-04-29  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (workspace-swap-in): use move-resize-window-to
+	so that window reconfiguration happens in one step, not two
+
+	* edges.jl, rects.jl: removed uses of `named let' construct,
+	only later sub-versions of required rep 0.11 support it
 
 	* stacking.jl (raise-window): should have fixed long-standing
 	problem of raising managed windows above override_redirect
