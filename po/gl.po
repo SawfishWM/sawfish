@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawmill 0.18\n"
-"POT-Creation-Date: 1999-12-16 15:36%z\n"
+"POT-Creation-Date: 1999-12-22 22:28+0000\n"
 "PO-Revision-Date: 1999-12-13 22:18+0100\n"
 "Last-Translator: Jesús Bravo Álvarez <jba@pobox.com>\n"
 "Language-Team: Galician <gpul-traduccion@ceu.fi.udc.es>\n"
@@ -411,6 +411,26 @@ msgstr "Novo grupo"
 msgid "Reload the gtkrc settings."
 msgstr "Recarga-la configuración do gtkrc."
 
+# ../lisp/workspace.jl
+msgid "Iconify the window."
+msgstr "Iconifica-la fiestra."
+
+# ../lisp/workspace.jl
+msgid "Return the window from its iconified state."
+msgstr "Restaura-la fiestra do seu estado iconificado."
+
+# ../lisp/workspace.jl
+msgid "Display the workspace containing the window W, then focus on W."
+msgstr "Amosa-lo escritorio que contén a fiestra W, e enfocala."
+
+# ../lisp/workspace.jl
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
+msgstr ""
+"Troca-lo estado `pegañento' da fiestra (se é membro de tódolos escritorios "
+"ou non."
+
 # ../lisp/ignore-window.jl
 msgid "Ignore the window."
 msgstr "Ignora-la fiestra."
@@ -639,14 +659,6 @@ msgstr ""
 "número, tómase como o número de segundos que o programa pode estar sen usar "
 "antes de matalo."
 
-# ../lisp/menus.jl
-msgid "Move"
-msgstr "Mover"
-
-# ../lisp/custom.jl
-msgid "Resize"
-msgstr "Redimensionar"
-
 # ../lisp/custom.jl
 msgid "Iconify"
 msgstr "Iconificar"
@@ -709,12 +721,12 @@ msgstr "Escritorio seguinte"
 
 # ../lisp/workspace.jl
 #, fuzzy
-msgid "Copy to previous workspace"
+msgid "Copy to previous"
 msgstr "Amosa-lo escritorio anterior."
 
 # ../lisp/workspace.jl
 #, fuzzy
-msgid "Copy to next workspace"
+msgid "Copy to next"
 msgstr "Amosa-lo seguinte escritorio."
 
 # ../lisp/menus.jl
@@ -1070,9 +1082,20 @@ msgstr ""
 msgid "Display tooltips for window frames."
 msgstr "Amosa-lo menú con tódalas operacións de fiestra."
 
+# ../lisp/tooltips.jl
+msgid "Remove tooltips after a period of time."
+msgstr ""
+
 # ../lisp/edge-flip.jl
 #, fuzzy
-msgid "Number of milliseconds to wait before displaying tooltip."
+msgid "Number of milliseconds before displaying tooltips."
+msgstr ""
+"Número de milisegundos a agardar antes de saltar cando o punteiro chega ó "
+"eixo da pantalla."
+
+# ../lisp/edge-flip.jl
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
 msgstr ""
 "Número de milisegundos a agardar antes de saltar cando o punteiro chega ó "
 "eixo da pantalla."
@@ -1302,24 +1325,10 @@ msgid "Delete any workspaces that don't contain any windows."
 msgstr "Borrar tódolos escritorios que non conteñan ningunha fiestra."
 
 # ../lisp/workspace.jl
-msgid "Iconify the window."
-msgstr "Iconifica-la fiestra."
-
-# ../lisp/workspace.jl
-msgid "Return the window from its iconified state."
-msgstr "Restaura-la fiestra do seu estado iconificado."
-
-# ../lisp/workspace.jl
-msgid "Display the workspace containing the window W, then focus on W."
-msgstr "Amosa-lo escritorio que contén a fiestra W, e enfocala."
-
-# ../lisp/workspace.jl
 msgid ""
-"Toggle the `stickiness' of the window--whether or not it is a member of\n"
-"all workspaces."
+"Remove the copy of the window on the current workspace. If this is the last\n"
+"instance remaining, then delete the actual window."
 msgstr ""
-"Troca-lo estado `pegañento' da fiestra (se é membro de tódolos escritorios "
-"ou non."
 
 # ../lisp/x-cycle.jl
 msgid "Window Cycling"
@@ -1457,3 +1466,11 @@ msgstr "Anchura do borde da fiestra."
 # ../themes/smaker/theme.jl
 msgid "Border width of bar images."
 msgstr "Anchura do borde das imaxes da barra."
+
+# ../lisp/menus.jl
+#~ msgid "Move"
+#~ msgstr "Mover"
+
+# ../lisp/custom.jl
+#~ msgid "Resize"
+#~ msgstr "Redimensionar"
