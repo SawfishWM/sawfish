@@ -1,3 +1,19 @@
+2002-10-17  John Harper  <jsh@unfactored.org>
+
+	* sawfish/wm/state/wm-spec.jl: support some 1.1 features:
+	_NET_WM_STATE_BELOW, _NET_WM_STATE_ABOVE, _NET_WM_TYPE_UTILITY,
+	_NET_WM_TYPE_SPLASH, _NET_WM_TYPE_MENU, _NET_WM_TYPE_TOOLBAR.
+	(Last two are actually 1.0)
+
+	* sawfish/wm/frames.jl (frame-type-fallback-alist): added more
+	types: utility, toolbar, menu, splash
+
+	* sawfish/wm/windows.jl (mark-window-as-desktop,
+	mark-window-as-dock): set more properties, including window
+	depth and type
+
+	* sawfish/wm/stacking.jl: exported window-depth function
+
 2002-10-06  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/workspace.jl: don't add ``iconified'' as a
@@ -9,7 +25,7 @@
 	set-x-text-property): these functions now written in lisp so
 	that they use the property cache
 
-2002-09-29    <jsh@unfactored.org>
+2002-09-29  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/state/configure.jl (configure-request-handler): fixed
 	bug of not checking for locked dimensions before overwriting the

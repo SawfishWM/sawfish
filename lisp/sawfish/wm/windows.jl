@@ -90,6 +90,16 @@ means outside the left window edge.")
       sticky-viewport placed)
     "List of properties set (to true) on windows marked as docks.")
 
+  (defvar desktop-window-properties
+    '(fixed-position sticky sticky-viewport)
+    "List of properties set (to true) on windows marked as desktops.")
+
+  (defvar desktop-window-depth -4
+    "The stacking depth of desktop windows.")
+
+  (defvar dock-window-depth +4
+    "The stacking depth of dock windows.")
+
 
 ;;; finding windows, reading properties
 
@@ -118,8 +128,14 @@ Returns nil if no such window is found."
 
   (define (mark-window-as-desktop w)
     "Mark that the window associated with object W is a desktop window."
+    (require 'sawfish.wm.stacking)
+    (require 'sawfish.wm.frames)
     (window-put w 'desktop t)
-    (window-put w 'keymap root-window-keymap))
+    (window-put w 'keymap root-window-keymap)
+    (mapc (lambda (p)
+	    (window-put w p t)) desktop-window-properties)
+    (set-window-type w 'unframed)
+    (set-window-depth w desktop-window-depth))
 
   (define (focus-desktop)
     "Transfer input focus to the desktop window (if one exists)."
@@ -135,8 +151,12 @@ Returns nil if no such window is found."
 
   (define (mark-window-as-dock w)
     "Mark that the window associated with object W is a dock window."
+    (require 'sawfish.wm.stacking)
+    (require 'sawfish.wm.frames)
     (window-put w 'dock-type t)
-    (mapc (lambda (p) (window-put w p t)) dock-window-properties))
+    (mapc (lambda (p)
+	    (window-put w p t)) dock-window-properties)
+    (set-window-depth w dock-window-depth))
 
   (define (window-in-cycle-p w #!key ignore-cycle-skip)
     "Returns true if the window W should be included when cycling between
