@@ -1,3 +1,18 @@
+1999-08-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill.h (Lisp_Window): make `reparenting' an int so it can
+	be incremented and decremented
+	* windows.c, events.c: some magic to make the w->reparenting
+	work when called from Fset_window_frame
+
+	* frames.c (frame_part_destroyer): destroy frame part windows
+	and delete their contexts
+	(list_frame_generator): don't look at the frame's unshaped
+	property if the client window is shaped
+
+	* colors.c (Fcolor_name, Fcolorp): new functions
+	* fonts.c (Ffont_name, Ffontp): new functions
+
 1999-08-07  John Harper  <john@dcs.warwick.ac.uk>
 
 	* main.c (sawmill_symbols): set interrupt-mode and error-mode

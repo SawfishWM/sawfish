@@ -69,7 +69,7 @@ unused before killing it."
   '(("Workspaces" . workspace-menu)
     ("Windows" . window-menu)
     (apps-menu)
-    ("Customize" customize)
+    ("Customize..." customize)
     ()
     ("Restart" restart)
     ("Quit" quit)))

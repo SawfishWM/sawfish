@@ -1,3 +1,23 @@
+1999-08-09  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-defaults.jl: remove some settings that are normally
+	set by customize
+	* sawmill.jl: load absolute-e if no frame otherwise specified
+
+	* simple.jl, brushed-metal.jl, absolute-e.jl: moved to the new
+	`themes' subdirectory
+
+	* frames.jl: new file, inherited the frame setting logic from
+	transient.jl. Removed the frameset idea, now we have `frame
+	styles' which are functions; they return the frame to use for a
+	given window. Also support customization of the default	style
+	* transient.jl: moved frame stuff to frames.jl
+
+	* custom.jl, customize.jl: new custom properties `custom-set',
+	`custom-get' and `custom-widget'; inherited from type if not
+	set in each symbol. New types `font' and `color'. New group
+	`appearance'
+
 1999-08-07  John Harper  <john@dcs.warwick.ac.uk>
 
 	* workspace.jl (raise-selected-windows,

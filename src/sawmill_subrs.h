@@ -26,6 +26,8 @@
 extern int color_type;
 extern repv Qdefault_foreground;
 extern repv Fget_color (repv name);
+extern repv Fcolor_name (repv color);
+extern repv Fcolorp (repv arg);
 extern void colors_init (void);
 extern void colors_kill (void);
 
@@ -87,6 +89,8 @@ extern repv Qdefault_font;
 extern repv Fget_font(repv name);
 extern repv Ffont_get(repv font, repv prop);
 extern repv Ffont_put(repv font, repv prop, repv value);
+extern repv Ffont_name (repv font);
+extern repv Ffontp (repv font);
 extern void fonts_init (void);
 extern void fonts_kill (void);
 

@@ -31,7 +31,8 @@ sawmilldir='${datadir}/sawmill'
 lispdir='${sawmilldir}/${version}/lisp'
 sawmillexecdir='${libexecdir}/sawmill/${version}/${host_type}'
 
-output_files="src/Makefile lisp/Makefile man/Makefile images/Makefile Makedefs Makefile"
+output_files="src/Makefile lisp/Makefile lisp/themes/Makefile \
+ man/Makefile images/Makefile Makedefs Makefile"
 
 dnl Find the system type
 AC_CANONICAL_HOST
