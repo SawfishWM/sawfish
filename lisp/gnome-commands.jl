@@ -86,3 +86,10 @@
   "Unset the GNOME SKIP_TASKLIST hint of the window."
   (interactive "%W")
   (gnome-clear-hint w WIN_HINTS_SKIP_TASKLIST))
+
+
+;; extras
+
+(defun gnome-logout ()
+  (interactive)
+  (system "save-session --quit &"))
