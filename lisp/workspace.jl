@@ -67,6 +67,13 @@
   :after-set (lambda ()
 	       (call-hook 'workspace-state-change-hook)))
 
+(defcustom lock-first-workspace nil
+  "Empty workspaces before the active workspace are never deleted."
+  :type boolean
+  :group workspace
+  :after-set (lambda ()
+	       (call-hook 'workspace-state-change-hook)))
+
 (defcustom uniconify-to-current-workspace t
   "Windows are uniconified onto the current workspace."
   :type boolean
@@ -113,6 +120,8 @@ that window on (counting from zero).")
 ;; Currently active workspace, an integer
 (defvar current-workspace 0)
 
+(defvar first-interesting-workspace nil)
+
 (defvar static-workspace-menus
   '(("Insert" insert-workspace)
     ("Next" next-workspace)
@@ -142,7 +151,9 @@ that window on (counting from zero).")
 (defun ws-workspace-limits ()
   (let
       ((max-w current-workspace)
-       (min-w current-workspace)
+       (min-w (if (and lock-first-workspace first-interesting-workspace)
+		  (min first-interesting-workspace current-workspace)
+		current-workspace))
        tem)
     (mapc #'(lambda (w)
 	      (when (setq tem (window-get w 'workspace))
@@ -150,6 +161,7 @@ that window on (counting from zero).")
 		  (setq max-w tem))
 		(when (< tem min-w)
 		  (setq min-w tem)))) (managed-windows))
+    (setq first-interesting-workspace min-w)
     (cons min-w (max max-w (1- (+ preallocated-workspaces min-w))))))
 
 ;; renormalize the interesting workspaces so they being at index zero
