@@ -122,7 +122,7 @@ that overrides settings set elsewhere.")
 
 ;; list of (REGEXP DIR-EXPAND NAME-EXPAND)
 (defvar theme-suffix-regexps
-  '(("^(.*)/(.*)\\.tar(\\.gz|\\.Z|\\.bz2)$" "\\0#tar/\\2" "\\2")))
+  '(("^(.*)/(.*)\\.tar(\\.gz|\\.Z|\\.bz2|)$" "\\0#tar/\\2" "\\2")))
 
 (defvar theme-suffixes '("" ".tar" ".tar.gz" ".tar.Z" ".tar.bz2"))
 
