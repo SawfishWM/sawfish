@@ -200,6 +200,7 @@ Move the top-left corner of window object WINDOW to (X, Y).
 		     VWIN(win)->reparented ? VWIN(win)->frame : VWIN(win)->id,
 		     VWIN(win)->attr.x, VWIN(win)->attr.y);
 	send_synthetic_configure (VWIN(win));
+	Fcall_window_hook (Qwindow_moved_hook, win, Qnil, Qnil);
     }
     return win;
 }
@@ -218,6 +219,7 @@ Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
     VWIN(win)->attr.width = rep_INT(width);
     VWIN(win)->attr.height = rep_INT(height);
     fix_window_size (VWIN(win));
+    Fcall_window_hook (Qwindow_resized_hook, win, Qnil, Qnil);
     return win;
 }
 
