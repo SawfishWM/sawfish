@@ -1,5 +1,16 @@
 2000-01-11  John Harper  <john@dcs.warwick.ac.uk>
 
+	* events.c (save_timestamp): new function, records a server
+	timestamp with checks for validity
+	* server.c (server_handle_request): call save_timestamp
+
+	* events.c (record_mouse_position): only update button-press
+	details on button-release events if they're not already filled
+
+	* windows.c, keys.c, frames.c: revert to grabbing on the client
+	window, grabbing on the client causes awkward problems with
+	replaying events
+
 	* events.c, windows.c (property_notify, add_window): support
 	compound text properties in icon and window names
 	* main.c (main): call setlocale (LC_ALL, "")
