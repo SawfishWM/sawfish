@@ -27,7 +27,7 @@
 #include <X11/Xutil.h>
 
 /* max number of milliseconds between successive-clicks */
-#define DOUBLE_CLICK_TIME 250
+#define DEFAULT_DOUBLE_CLICK_TIME 250
 
 /* current_event holds the event we're processing (or 0s), last_event
    contains the previously processed event.  */
@@ -59,6 +59,8 @@ DEFSYM(async_both, "async-both");
 
 static repv next_keymap_path;
 
+DEFSYM(multi_click_delay, "multi-click-delay");
+
 /* The X modifiers being used for Meta, Alt, and Hyper */
 static u_long meta_mod, alt_mod, hyper_mod;
 
@@ -85,6 +87,9 @@ static int all_lock_combs[2*2*2];
 static bool
 translate_event(u_long *code, u_long *mods, XEvent *xev)
 {
+    repv multi_click_delay;
+    int delay;
+
     bool ret = FALSE;
     switch(xev->type)
     {
@@ -130,11 +135,22 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	break;
 
     case ButtonPress:
-	if(xev->xbutton.button == last_click_button
-	   && xev->xbutton.time < (last_click + DOUBLE_CLICK_TIME))
-	{
-	    click_count++;
-	}
+
+	if(xev->xbutton.button == last_click_button)
+        {
+            multi_click_delay = Fsymbol_value (Qmulti_click_delay, Qt);
+            if (rep_INTP(multi_click_delay))
+                delay = rep_INT(multi_click_delay);
+            else
+                delay = DEFAULT_DOUBLE_CLICK_TIME;
+  
+            if (xev->xbutton.time < (last_click + delay))
+            {
+                click_count++;
+            }
+            else
+                click_count = 1;
+        }
 	else
 	    click_count = 1;
 	switch (click_count)
@@ -1583,6 +1599,8 @@ keys_init(void)
     Fset (Qalt_keysyms, Qnil);
     rep_INTERN_SPECIAL(hyper_keysyms);
     Fset (Qhyper_keysyms, Qnil);
+    rep_INTERN_SPECIAL(multi_click_delay);
+    Fset (Qmulti_click_delay, rep_MAKE_INT(DEFAULT_DOUBLE_CLICK_TIME));
 
     rep_mark_static(&next_keymap_path);
 
