@@ -7,6 +7,82 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
 
+@heading 0.34
+
+@itemize @bullet
+
+@item Added a virtual modifier key, the @kbd{W-} modifier. This
+modifier is used for all standard window-manager key bindings, it may
+be set to any of the standard X modifiers using the configuration tool
+
+@item Optionally show window-icons when cycling through windows (Unai
+Uribarri Rodríguez, me)
+
+@item Event handlers for low-level X windows now get passed the window
+as their second argument (Unai Uribarri Rodríguez)
+
+@item Translation updates: fr (Christian Marillat), sv (Richard Hult),
+pt_BR (Flávio Bruno Leitner), it (Michele Campeotto)
+
+@item Error handler module (@code{sawfish.wm.ext.error-handler}). When
+loaded it records the most recent errors, and the time at which they
+occurred. Use the @code{display-errors} command to display all recorded
+errors.
+
+@item Added an option to not save window-history data for transient
+windows. Also added a @code{window-history-clear} command to forget
+history for all windows.
+
+@item Rearranged window operations menu to hopefully be clearer
+
+@item Attempt to catch and handle errors while loading custom options
+
+@item Labels in menu items can now be functions, they should return the
+label text when called (with any menu arguments)
+
+@item Moved installed message catalogues to $datadir/locale
+
+@item @code{defcustom} forms may now a @code{:widget-flags} keyword, a
+constant list of symbols passed to the configuration tool. Current
+flags include: @code{expand-vertically} and @code{expand-horizontally}
+
+@item Added a @code{sawfish.wm.util.ping} module, it implements the
+@code{_NET_WM_PING} protocol of the new window manager spec.
+
+@item @code{destroy-notify-hook} is no longer called asynchronously
+
+@item Bug fixes:
+
+@itemize @minus
+
+@item Fixed various bugs when dragging/resizing windows
+
+@item Reverted the changes to make the click-to-focus click-through
+setting apply to window decorations
+
+@item Fixed bug when handling 32-bit data in client messages and X
+properties
+
+@item Fixed window-focus problems when switching viewports
+
+@item Many bug-fixes to handling of maximized window state. Maximized
+state should now be preserved across wm and session restarts. It's also
+saved in the window-history attributes
+
+@item Support the function hints of the MWM window manager properties
+
+@item Updated the @code{sawfish.wm.state.wm-spec} module to match the
+current (almost final) draft of the new GNOME/KDE window manager spec
+
+@item Fixed sporadic stacking bugs when unmapped windows exist
+
+@item Fixed miscellaneous click-to-focus and focus-click-through
+related bugs
+
+@end itemize
+@end itemize
+
+
 @heading 0.33
 
 @itemize @bullet
