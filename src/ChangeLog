@@ -1,5 +1,9 @@
 2000-03-29  John Harper  <john@dcs.warwick.ac.uk>
 
+	* server.c, play-sample.c, main.c, keys.c, images.c, frames.c,
+	fonts.c, flippers.c, events.c, display.c, cursors.c, colors.c:
+	remove all direct references to `value' field of symbols
+
 	* x.c: only use double buffering extensions if
 	HAVE_X11_EXTENSIONS_XDBE_H is defined
 
