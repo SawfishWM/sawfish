@@ -1,5 +1,5 @@
 # Makefile.in -- input for the capplet directory's Makefile
-# $Id: Makefile.in,v 1.12 2000/04/24 23:55:01 john Exp $
+# $Id: Makefile.in,v 1.13 2000/04/26 19:12:29 john Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -46,6 +46,7 @@ install : all installdirs
 	rm -rf $(DESTDIR)$(G_CC_DIR)/Sawmill
 	mkdir $(DESTDIR)$(G_CC_DIR)/Sawfish
 	$(INSTALL_DATA) desktop-entries/.directory $(DESTDIR)$(G_CC_DIR)/Sawfish/
+	$(INSTALL_DATA) desktop-entries/.order $(DESTDIR)$(G_CC_DIR)/Sawfish/
 	for f in desktop-entries/*.desktop; do \
 	  $(INSTALL_DATA) $$f $(DESTDIR)$(G_CC_DIR)/Sawfish/; \
 	done
@@ -53,6 +54,7 @@ install : all installdirs
 	rm -rf $(DESTDIR)$(G_MENU_DIR)/Sawmill
 	mkdir $(DESTDIR)$(G_MENU_DIR)/Sawfish
 	$(INSTALL_DATA) desktop-entries/.directory $(DESTDIR)$(G_MENU_DIR)/Sawfish/
+	$(INSTALL_DATA) desktop-entries/.order $(DESTDIR)$(G_MENU_DIR)/Sawfish/
 	for f in desktop-entries/*.desktop; do \
 	  $(INSTALL_DATA) $$f $(DESTDIR)$(G_MENU_DIR)/Sawfish/; \
 	done
