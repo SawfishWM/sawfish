@@ -80,7 +80,7 @@ make_image (ImlibImage *im, repv plist)
 static repv
 find_image_file (repv file, bool *deletep)
 {
-    repv path = Fsymbol_value (Qimage_load_path, Qt), out = Qnil;
+    repv path = global_symbol_value (Qimage_load_path), out = Qnil;
     rep_GC_root gc_file, gc_path;
     rep_PUSHGC(gc_file, file);
     rep_PUSHGC(gc_path, path);
