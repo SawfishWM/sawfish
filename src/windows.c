@@ -353,6 +353,9 @@ add_window (Window id)
         w->visible = TRUE;
 	w->mapped = TRUE;		/* only called from map request */
 
+	if (initialising)
+	    Fwindow_put (rep_VAL (w), Qplaced, Qt);
+
 	/* ..then call the add-window-hook's.. */
 	rep_PUSHGC(gc_win, win);
 	Fcall_window_hook (Qbefore_add_window_hook, rep_VAL(w), Qnil, Qnil);
