@@ -27,10 +27,12 @@
 (defvar gtkrc-style nil)
 
 (defvar gtkrc-background nil)
-(defvar gtkrc-background-colors nil)
-(defvar gtkrc-background-images nil)	;for bg colors
-(defvar gtkrc-font nil)
+(defvar gtkrc-background-pixmaps nil)
+(defvar gtkrc-base nil)
 (defvar gtkrc-foreground nil)
+(defvar gtkrc-font nil)
+
+(defvar gtkrc-loaded-pixmaps nil)
 
 (defvar gtkrc-dummy-window nil)
 
@@ -62,10 +64,12 @@
 (defun gtkrc-apply-style ()
   (let
       (tem i)
-    (setq gtkrc-background-images nil)
-    (setq gtkrc-background-colors nil)
+    (setq gtkrc-background nil)
+    (setq gtkrc-background-pixmaps nil)
+    (setq gtkrc-base nil)
     (setq gtkrc-foreground nil)
     (setq gtkrc-font nil)
+    (setq gtkrc-loaded-pixmaps nil)
     (when (setq tem (cdr (assq 'font gtkrc-style)))
       (setq gtkrc-font (condition-case nil
 			   (get-font tem)
@@ -77,38 +81,38 @@
 				   (cdr (assq 'active tem))
 				   (cdr (assq 'selected tem)))))
     (when (setq tem (cdr (assq 'bg gtkrc-style)))
-      (setq gtkrc-background-colors (list (cdr (assq 'normal tem))
-					  (cdr (assq 'prelight tem))
-					  (cdr (assq 'active tem))
-					  (cdr (assq 'selected tem))))
-      (setq gtkrc-background-colors (mapcar #'(lambda (x)
-						(and x (get-color x)))
-					    gtkrc-background-colors)))
-    (cond ((setq tem (cdr (assq 'bg-pixmap gtkrc-style)))
-	   (setq gtkrc-background (list (cdr (assq 'normal tem))
-					(cdr (assq 'prelight tem))
-					(cdr (assq 'active tem))
-					(cdr (assq 'selected tem))))
-	   (setq gtkrc-background
-		 (mapcar #'(lambda (x)
-			     (when x
-			       (setq x (make-image (gtkrc-fix-image-name x)))
-			       (image-put x 'tiled t)
-			       x))
-			 gtkrc-background)))
-	  (gtkrc-background-colors
-	   (setq gtkrc-background gtkrc-background)
-	   (setq i -1)
-	   (setq gtkrc-background-images
-		 (mapcar #'(lambda (x)
-			     (setq i (1+ i))
-			     (and (colorp x)
-				  (progn
-				    (setq x (make-sized-image 16 16 x))
-				    (bevel-image x 1 (/= i 3))
-				    (set-image-border x 1 1 1 1)
-				    x)))
-			 gtkrc-background))))))
+      (setq gtkrc-background (list (cdr (assq 'normal tem))
+				   (cdr (assq 'prelight tem))
+				   (cdr (assq 'active tem))
+				   (cdr (assq 'selected tem)))))
+    (when (setq tem (cdr (assq 'base gtkrc-style)))
+      (setq gtkrc-base (list (cdr (assq 'normal tem))
+			     (cdr (assq 'prelight tem))
+			     (cdr (assq 'active tem))
+			     (cdr (assq 'selected tem)))))
+    (when (setq tem (cdr (assq 'bg-pixmap gtkrc-style)))
+      (setq gtkrc-background-pixmaps (list (cdr (assq 'normal tem))
+					   (cdr (assq 'prelight tem))
+					   (cdr (assq 'active tem))
+					   (cdr (assq 'selected tem)))))
+    (mapc #'(lambda (var)
+	      (when (symbol-value var)
+		(set var (mapcar #'(lambda (x)
+				     (and x (get-color x)))
+				 (symbol-value var)))))
+	  '(gtkrc-background gtkrc-base gtkrc-foreground))))
+
+;; if a theme want's to use the pixmaps, it must call this function first
+(defun gtkrc-load-pixmaps ()
+  (when (and gtkrc-background-pixmaps (not gtkrc-loaded-pixmaps))
+    (setq gtkrc-background-pixmaps
+	  (mapcar #'(lambda (x)
+		      (when x
+			(setq x (make-image (gtkrc-fix-image-name x)))
+			(image-put x 'tiled t)
+			x))
+		  gtkrc-background-pixmaps))
+    (setq gtkrc-loaded-pixmaps t)))
 
 (defun gtkrc-reload-style ()
   "Reload the gtkrc settings."
@@ -124,29 +128,6 @@
     (when (and (featurep 'menus) (not menu-active))
       (menu-stop-process t))
     t))
-
-;; for pixmap frames; this is going to use horrendous amounts of memory,
-;; but what other options are there..?
-(defun gtkrc-render-bg (img state)
-  (let
-      ((bg (cond ((eq state nil)
-		  (nth 0 gtkrc-background))
-		 ((eq state 'focused)
-		  (nth 1 gtkrc-background))
-		 ((eq state 'highlighted)
-		  (nth 2 gtkrc-background))
-		 (t
-		  (nth 3 gtkrc-background)))))
-    (tile-image img bg)
-    (bevel-image img 1 (not (eq state 'clicked)))))
-
-(defun gtkrc-foreground ()
-  gtkrc-foreground)
-
-(defun gtkrc-background ()
-  (if gtkrc-background-images
-      (cons 'background gtkrc-background-images)
-    (cons 'renderer 'gtkrc-render-bg)))
 
 
 ;; init
