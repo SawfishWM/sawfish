@@ -60,7 +60,7 @@ A value between 0 and 1023 inclusive.")
 
 ;; only when there's fewer X events than this pending do we try
 ;; to do smart placement
-(defvar sp-max-queued-events 20)
+(defvar sp-max-queued-events 256)
 
 
 ;; utility functions
