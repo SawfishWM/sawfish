@@ -392,6 +392,18 @@ previous workspace."
   (ws-move-workspace ws-current-workspace (- (or count 1))))
 
 
+;; some commands for moving directly to a workspace
+
+(let
+    ((i 1))
+  (while (< i 10)
+    (fset (intern (format nil "select-workspace:%s" i))
+	  `(lambda ()
+	     (interactive)
+	     (select-workspace ,(1- i))))
+    (setq i (1+ i))))
+
+
 ;; Iconification (but without icons)
 
 ;; If iconified, a window has its `iconified' property set to t
