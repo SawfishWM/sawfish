@@ -577,6 +577,7 @@ deciding which frame type to ask a theme to generate.")
       ok-to-bind))
 
   (define ((cursor-for-frame-part part) w)
+    (require 'sawfish.wm.state.maximize)
     (if (frame-part-movable-p w part)
 	(case part
 	  ((top-border) 'top_side)
