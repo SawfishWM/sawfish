@@ -170,7 +170,7 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	;; ungrab the pointer so that the non-click-through thing
 	;; works for window decorations as well as the client
 	;; (does this break anything?)
-	(unless (window-really-wants-input-p w)
+	(when (window-really-wants-input-p w)
 	  (ungrab-pointer)
 	  (forget-button-press)))
       ;; set-input-focus may not actually change the focus
