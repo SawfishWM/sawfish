@@ -266,6 +266,7 @@ extern repv Fwindow_shaped_p (repv win);
 extern repv Fhide_window (repv win);
 extern repv Fshow_window (repv win);
 extern repv Fwindow_visible_p (repv win);
+extern repv Fwindow_reparented_p (repv win);
 extern repv Fwindow_id (repv win);
 extern repv Fwindow_group_id (repv win);
 extern repv Fwindow_size_hints (repv win);
