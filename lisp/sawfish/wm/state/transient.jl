@@ -100,15 +100,16 @@ workspaces.")
       (set-input-focus w))))
 
 ;; If a transient window gets unmapped that currently has the input
-;; focus, pass it (the focus) to its parent
-;; XXX but this only works if the pointer isn't over a different window
+;; focus, pass it (the focus) to its parent. Otherwise, pass the focus
+;; to the window under the mouse. This helps when the pointer isn't
+;; currently in the window being unmapped (and hence no window-enter
+;; event to focus the new window)
 (defun transient-unmap-window (w)
   (when (eq (input-focus) w)
     (let
 	((parent (and (window-transient-p w)
 		      (get-window-by-id (window-transient-p w)))))
-      (when parent
-	(set-input-focus parent)))))
+	  (set-input-focus (or parent (query-pointer-window))))))
 
 (add-hook 'add-window-hook 'transient-add-window t)
 (add-hook 'map-notify-hook 'transient-map-window t)
