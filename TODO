@@ -51,9 +51,15 @@ Outstanding bugs
 
   ! very small windows look ugly/weird
 
+  ! latency when starting menu subprocesses can be annoying (pointer
+    events are handled unintuitively)
+
 
 General tasks
 =============
+
+  + in interactive placement, allow the window-pointer position to be
+    configurable 
 
   + when grabbing keymaps in windows grab in all subwindows of the
     client?
@@ -226,8 +232,8 @@ Long term ideas
     This way you should be able to drag from both netscape and the file
     manager to activate a theme
 
- - Theme builder
+  - Theme builder
 
-   Use the client to frame a temporary window with control over its
-   decorations (GTK interface), then output the Lisp code to build the
-   theme
+    Use the client to frame a temporary window with control over its
+    decorations (GTK interface), then output the Lisp code to build the
+    theme

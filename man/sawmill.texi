@@ -790,6 +790,39 @@ Wait for the user to select a window with the mouse, then interactively
 resize that window.
 @end deffn
 
+The interactive move and resize behavior can be customized through the
+following variables:
+
+@defvar move-outline-mode
+A symbol defining the visual method of interactively moving windows.
+Current options include @code{box} for a wire-frame grid, and
+@code{opaque} for full redisplay.
+@end defvar
+
+@defvar resize-outline-mode
+A symbol defining the visual method of interactively resizing windows.
+Current options include @code{box} for a wire-frame grid, and
+@code{opaque} for full redisplay.
+@end defvar
+
+@defvar move-show-position
+When non-nil, the current window position is shown in the center of the
+screen.
+@end defvar
+
+@defvar resize-show-position
+When non-nil, the window size is shown in the center of the screen.
+@end defvar
+
+@defvar move-snap-edges
+When non-nil, the window position is ``snapped'' to edges of other
+windows within close proximity.
+@end defvar
+
+@defvar move-snap-epsilon
+The distance in pixels before snapping together two edges.
+@end defvar
+
 
 @node Showing and Hiding Windows, Destroying Windows, Moving and Resizing Windows, Windows
 @section Showing and Hiding Windows
@@ -2096,8 +2129,11 @@ origin of the root window.
 @end defun
 
 @defun warp-cursor-to-window window &optional x y
-Move the mouse pointer to position (@var{x}, @var{y}) (or (0, 0) if
-undefined) relative to the origin of window object @var{window}.
+Move the mouse pointer to position (@var{x}, @var{y}) relative to the
+client window associated with object @var{window}.
+
+If @var{x} and @var{y} are @code{nil}, then they are taken as the
+top-left corner of the window's frame.
 @end defun
 
 @defun grab-server

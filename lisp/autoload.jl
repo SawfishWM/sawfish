@@ -45,4 +45,9 @@
 (autoload 'substitute-key-definition "keymap")
 (autoload 'lazy-bind-keys "keymap")
 (autoload 'where-is "keymap")
+(autoload 'next-workspace-window "cycle" t)
+(autoload 'previous-workspace-window "cycle" t)
+(autoload 'next-window "cycle" t)
+(autoload 'previous-window "cycle" t)
+(autoload 'x-cycle-entry "x-cycle" t)
 ;;; ::autoload-end::

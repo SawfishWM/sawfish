@@ -1,3 +1,22 @@
+1999-09-16  John Harper  <john@dcs.warwick.ac.uk>
+
+	* events.c (key_press): evaluate KeyRelease events again
+
+	* functions.c (Fgrab_keyboard, Fungrab_keyboard): new functions
+
+	* keys.h: EV_MOD_RELEASE extra modifier bit to mark KeyRelease
+	events from KeyPress events
+	* keys.c (Veval_modifier_events, Veval_key_release_events): new
+	options, control whether we evaluate these abnormal events
+
+	* functions.c (Fwarp_cursor_to_window): unless coordinates are
+	given, warp relative to top-left corner of the frame. If coords
+	are given, they are relative to the client window
+
+	* functions.c (Fgrab_pointer): accept a nil window, and
+	fallback to grabbing on the root if the specified window is
+	unviewable
+
 1999-09-15  John Harper  <john@dcs.warwick.ac.uk>
 
 	* frames.c (Qoverride_frame_part_classes): new variable,

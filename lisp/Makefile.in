@@ -28,12 +28,12 @@ sawmill_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/libgradient.la \
 		../src/sawmill --batch --no-rc
 COMPILE_ENV = SAWMILLLISPDIR=. SAWMILLDOCFILE=../DOC
 
-LISP_SRCS := auto-raise.jl cursors.jl custom.jl customize.jl edges.jl \
-	     focus.jl frames.jl functions.jl gnome.jl keymaps.jl keymap.jl \
-	     maximize.jl menus.jl move-resize.jl mwm.jl open-look.jl \
-	     place-window.jl sawmill.jl select-window.jl server.jl \
-	     shading.jl sm-common.jl sm-init.jl sm-save.jl sm-load.jl \
-	     stacking.jl transient.jl workspace.jl
+LISP_SRCS := auto-raise.jl cursors.jl custom.jl customize.jl cycle.jl \
+	     edges.jl focus.jl frames.jl functions.jl gnome.jl keymaps.jl \
+	     keymap.jl maximize.jl menus.jl move-resize.jl mwm.jl \
+	     open-look.jl place-window.jl sawmill.jl select-window.jl \
+	     server.jl shading.jl sm-common.jl sm-init.jl sm-save.jl \
+	     sm-load.jl stacking.jl transient.jl workspace.jl x-cycle.jl
 LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
 INSTALL_FILES := $(LISP_SRCS) $(LISP_OBJS) autoload.jl sawmill-defaults.jl
 
