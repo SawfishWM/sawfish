@@ -361,3 +361,28 @@ add_hook (repv sym, repv fun)
     val = Fcons (fun, val);
     Fset (sym, val);
 }
+
+
+/* rep compatibility */
+
+#if rep_INTERFACE < 8
+u_long
+rep_get_long_uint (repv x)
+{
+    if (rep_INTP (x))
+	return rep_INT (x);
+    else if (rep_LONG_INTP (x))
+	return rep_LONG_INT (x);
+    else
+	return 0;
+}
+
+repv
+rep_make_long_uint (u_long x)
+{
+    if (x <= rep_LISP_MAX_INT && x >= rep_LISP_MIN_INT)
+	return rep_MAKE_INT (x);
+    else
+	return rep_MAKE_LONG_INT (x);
+}
+#endif
