@@ -99,13 +99,14 @@
 
       (define (edit-item)
 	(when selection
-	  (let* ((cell (nthcdr selection value))
+	  (let* ((orig-sel selection)
+		 (cell (nthcdr orig-sel value))
 		 (callback (lambda (new)
 			     (rplaca cell new)
-			     (gtk-clist-remove clist selection)
+			     (gtk-clist-remove clist orig-sel)
 			     (gtk-clist-insert
-			      clist selection (print-value new))
-			     (gtk-clist-select-row clist selection 0)
+			      clist orig-sel (print-value new))
+			     (gtk-clist-select-row clist orig-sel 0)
 			     (call-callback changed-callback))))
 	    (if (functionp spec)
 		((spec 'dialog) (_ "Edit:") callback (car cell))
