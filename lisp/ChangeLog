@@ -1,5 +1,29 @@
 2000-02-11  John Harper  <john@dcs.warwick.ac.uk>
 
+	* sawmill-defaults.jl: remove the custom-add-required thing,
+	and don't require tooltips (custom-defaults will do this)
+
+	* sawmill.jl: do the custom-add-required thing
+
+	* sawmill.jl: require 'configure
+
+	* configure.jl (choose-window-gravity-by-position): sets window
+	gravity by the sector of the screen that the centre of the
+	window is in
+	(configure-auto-gravity): customize option controlling if the
+	above function is called automatically
+
+	* configure.jl (configure-request-handler): ConfigureRequest
+	events are now handled in software. This handler also groks
+	window gravity (default gravity may now be overridden by the
+	`gravity' window property)
+
+	* place-window.jl (adjust-window-for-gravity): look for gravity
+	first in `gravity' window property
+
+	* place-window.jl (place-window-centered-on-parent): new window
+	placement mode, option `centered-on-parent'
+
 	* move-resize.jl (resize-edge-mode): replaces options
 	resize-by-frame-class and resize-add-edges. Also allows
 	twm-style resizing (adapted from Mark Probst

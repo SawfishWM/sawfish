@@ -1,5 +1,8 @@
 2000-02-11  John Harper  <john@dcs.warwick.ac.uk>
 
+	* events.c (configure_request): marshal the event to an alist,
+	then call configure-request-hook with it
+
 	* client.c: copied the bouncing parentheses hack from librep
 	(which was copied from guile)
 
