@@ -64,13 +64,30 @@
   (defvar viewport-y-offset 0)
 
   (define (set-viewport x y)
+    ;; move W to its new position
+    (define (move-window w)
+      (unless (window-get w 'sticky-viewport)
+	(let ((pos (window-position w)))
+	  (move-window-to w (- (+ (car pos) viewport-x-offset) x)
+			  (- (+ (cdr pos) viewport-y-offset) y)))))
+
     (unless (and (= viewport-x-offset x) (= viewport-y-offset y))
-      (map-windows
-       (lambda (w)
-	 (unless (window-get w 'sticky-viewport)
-	   (let ((pos (window-position w)))
-	     (move-window-to w (- (+ (car pos) viewport-x-offset) x)
-			     (- (+ (cdr pos) viewport-y-offset) y))))))
+      (let loop ((rest (stacking-order))
+		 (inside '())
+		 (outside '()))
+	(cond ((null rest)
+	       ;; First move all windows not on the old viewport, and
+	       ;; move in top-to-bottom order..
+	       (mapc move-window (nreverse outside))
+	       ;; ..then move away the windows on the old viewport,
+	       ;; in bottom-to-top order
+	       (mapc move-window inside))
+
+	      ((window-outside-viewport-p (car rest))
+	       (loop (cdr rest) inside (cons (car rest) outside)))
+
+	      (t (loop (cdr rest) (cons (car rest) inside) outside))))
+
       (setq viewport-x-offset x)
       (setq viewport-y-offset y)
       (call-hook 'viewport-moved-hook)))
