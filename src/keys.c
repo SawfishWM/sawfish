@@ -97,14 +97,14 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	       normal keysym shifted.
 
 	       But if the keysym at index 1 is the same as that in index
-	       0, then remove the shift modifier */
+	       0, then preserve the shift modifier */
 
 	    if (shifted == NoSymbol)
 		*code = normal;
 	    else
 	    {
 		*code = shifted;
-		if (shifted == normal)
+		if (shifted != normal)
 		    *mods &= ~ShiftMask;
 	    }
 	}
