@@ -119,6 +119,7 @@
 				  ':windows-to-ignore (list w)
 				  ':include-root t))))
        (move-resize-last-outline nil)
+       (frame-draw-mutex (not (eq move-resize-mode 'opaque)))
        server-grabbed)
     (unless (eq move-resize-mode 'opaque)
       ;; prevent any other programs drawing on the display
