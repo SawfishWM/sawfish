@@ -93,6 +93,21 @@
 	      (setq out (cons x out)))) lst)
     out))
 
+;; Move the mouse pointer to position (X, Y) relative to the client
+;; window associated with object WINDOW.
+;; If X and Y are nil, then they are taken as the top-left corner of
+;; the window frame.
+(defun warp-cursor-to-window (w &optional x y)
+  (let
+      ((coords (window-position w))
+       (foff (window-frame-offset w)))
+    (unless x
+      (setq x -1))
+    (unless y
+      (setq y -1))
+    (warp-cursor (+ x (car coords) (- (car foff)))
+		 (+ y (cdr coords) (- (cdr foff))))))
+
 
 ;; property changed interface
 
