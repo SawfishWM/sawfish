@@ -128,9 +128,12 @@ for the bindings to be installed if and when it is."
 		       (loop (symbol-value binding)))
 		      (t
 		       (format standard-output
-			       "`%s' is bound to `%s'\n" components binding)
-		       (describe-function binding))))))))
+			       "`%s' is bound to `%s'\n\n" components binding)
+		       (describe-symbol binding))))))))
       (loop (or map global-keymap)))))
+
+;;;###autoload (autoload 'describe-key-to-screen "keymap" t)
+(define-command-to-screen describe-key-to-screen describe-key nil)
 
 
 ;; grab the next key event
