@@ -25,6 +25,7 @@
 /* from colors.c */
 extern int color_type;
 extern repv Qdefault_foreground;
+extern repv Fget_color_rgb (repv red, repv green, repv blue);
 extern repv Fget_color (repv name);
 extern repv Fcolor_name (repv color);
 extern repv Fcolor_rgb (repv color);
@@ -173,6 +174,8 @@ extern repv Fimage_get (repv image, repv prop);
 extern repv Fimage_put (repv image, repv prop, repv value);
 extern repv Fimagep (repv arg);
 extern repv Fimage_dimensions (repv img);
+extern repv Fimage_shape_color (repv img);
+extern repv Fset_image_shape_color (repv img, repv shape);
 extern repv Fimage_border (repv img);
 extern repv Fset_image_border (repv img, repv, repv, repv, repv);
 extern repv Fmake_sized_image (repv w, repv h, repv color);
