@@ -447,90 +447,6 @@ Release the grab on the keyboard.
     return Qt;
 }
 
-
-/* Drawing window outlines */
-
-static void
-draw_box_outline (int x, int y, int width, int height)
-{
-    static GC gc;
-    XSegment lines[8];
-    int i;
-
-    if (gc == 0)
-    {
-	long black = BlackPixel (dpy, screen_num);
-	long white = WhitePixel (dpy, screen_num);
-	XGCValues gcv;
-	gcv.line_width = 0;
-	/* I don't understand this, but it works */
-	gcv.function = GXxor;
-	gcv.foreground = black ^ white;
-	gcv.plane_mask = black ^ white;
-	gcv.subwindow_mode = IncludeInferiors;
-	gc = XCreateGC (dpy, root_window,
-			GCFunction | GCForeground
-			| GCSubwindowMode | GCLineWidth | GCPlaneMask, &gcv);
-    }
-
-    for (i = 0; i < 4; i++)
-    {
-	lines[i].x1 = x;
-	lines[i].x2 = x + width;
-	lines[i].y1 = lines[i].y2 = y + (i * height) / 3;
-    }
-    for (i = 4; i < 8; i++)
-    {
-	lines[i].y1 = y;
-	lines[i].y2 = y + height;
-	lines[i].x1 = lines[i].x2 = x + ((i-4) * width) / 3;
-    }
-    XDrawSegments(dpy, root_window, gc, lines, 8);
-}
-
-DEFUN("draw-window-outline", Fdraw_window_outline, Sdraw_window_outline,
-      (repv mode, repv x, repv y, repv width, repv height), rep_Subr5) /*
-::doc:draw-window-outline::
-draw-window-outline MODE X Y WIDTH HEIGHT
-
-Draw an outline of a window of dimensions (WIDTH, HEIGHT) at position
-(X, Y) relative to the root window.
-
-MODE is a symbol defining the type of outline drawn, currently it may
-only be `box' for a 3x3 grid.
-
-Use the `erase-window-outline' to erase the grid. Also note that since
-these functions draw directly on the root window the server should be
-grabbed until the outline is erased.
-::end:: */
-{
-    rep_DECLARE2(x, rep_INTP);
-    rep_DECLARE3(y, rep_INTP);
-    rep_DECLARE4(width, rep_INTP);
-    rep_DECLARE5(height, rep_INTP);
-    draw_box_outline (rep_INT(x), rep_INT(y), rep_INT(width), rep_INT(height));
-    return Qt;
-}
-
-DEFUN("erase-window-outline", Ferase_window_outline, Serase_window_outline,
-      (repv mode, repv x, repv y, repv width, repv height), rep_Subr5) /*
-::doc:erase-window-outline::
-erase-window-outline MODE X Y WIDTH HEIGHT
-Erase a previously drawn outline of a window of dimensions (WIDTH, HEIGHT)
-at position (X, Y) relative to the root window. See `draw-window-outline'.
-
-MODE is a symbol defining the type of outline drawn, currently it may
-only be `box' for a 3x3 grid.
-::end:: */
-{
-    rep_DECLARE2(x, rep_INTP);
-    rep_DECLARE3(y, rep_INTP);
-    rep_DECLARE4(width, rep_INTP);
-    rep_DECLARE5(height, rep_INTP);
-    draw_box_outline (rep_INT(x), rep_INT(y), rep_INT(width), rep_INT(height));
-    return Qt;
-}
-
 DEFUN("screen-width", Fscreen_width, Sscreen_width, (void), rep_Subr0) /*
 ::doc:screen-width::
 screen-width
@@ -1274,8 +1190,6 @@ functions_init (void)
     rep_ADD_SUBR(Sungrab_pointer);
     rep_ADD_SUBR(Sgrab_keyboard);
     rep_ADD_SUBR(Sungrab_keyboard);
-    rep_ADD_SUBR(Sdraw_window_outline);
-    rep_ADD_SUBR(Serase_window_outline);
     rep_ADD_SUBR(Sscreen_width);
     rep_ADD_SUBR(Sscreen_height);
     rep_ADD_SUBR(Ssync_server);
