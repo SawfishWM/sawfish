@@ -323,6 +323,7 @@ property_notify (XEvent *ev)
 	    Atom actual;
 	    int format;
 	    long nitems, bytes_after;
+	    long supplied;
 
 	case XA_WM_NAME:
 	case XA_WM_ICON_NAME:
@@ -369,7 +370,7 @@ property_notify (XEvent *ev)
 	    break;
 
 	case XA_WM_NORMAL_HINTS:
-	    XGetNormalHints (dpy, w->id, &w->hints);
+	    XGetWMNormalHints (dpy, w->id, &w->hints, &supplied);
 	    break;
 
 	case XA_WM_TRANSIENT_FOR:
