@@ -1,3 +1,25 @@
+2002-03-19  John Harper  <jsh@unfactored.org>
+
+	* Merged changes from HEAD:
+
+	2002-03-01  John Harper  <jsh@pixelslut.com>
+
+	* windows.c (manage_windows): unmap the window before faking
+	the call to the map-request event handler. Fixes #67601 (causes
+	the expected map-notify event to be sent when we later map it)
+
+	2002-02-17  John Harper  <jsh@unfactored.org>
+
+	* windows.c (remove_window): check for w->id == 0 immediately
+	before calling remove_from_stacking_list (). Avoids triggering
+	an assertion on logout (since remove_window () may be called
+	recursively from the error handler!)
+
+	2002-01-24  John Harper  <jsh@unfactored.org>
+
+	* frames.c: fixed definitions of Qtop and Qbottom. This bug
+	must have existed forever!
+
 2002-01-10  Sander Vesik <sander.vesik@sun.com>
 
 	* image.c: gdk_pixbuf_new_from_file now takes two parameters
