@@ -8,8 +8,8 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Sawfish 0.36\n"
-"POT-Creation-Date: 2001-01-20 21:29-0800\n"
+"Project-Id-Version: Sawfish 0.37.3\n"
+"POT-Creation-Date: 2001-02-12 12:08-0800\n"
 "PO-Revision-Date: 2001-01-25 21:40+0100\n"
 "Last-Translator: Michele Campeotto <micampe@f2s.com>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -23,7 +23,7 @@ msgstr "e molti altri..."
 
 #. ../scripts/sawfish-about.jl
 msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish gestisce le vostre finestre in maniera estensibile."
+msgstr "Sawfish è un gestore di finestre programmabile."
 
 #. ../scripts/sawfish-about.jl
 msgid "Protect the sawfish"
@@ -57,15 +57,38 @@ msgstr "[sopra]"
 msgid "[bottom]"
 msgstr "[sotto]"
 
+#. ../lisp/sawfish/gtk/widgets/color.jl
+#. ../themer/themer.in
+msgid "Select color"
+msgstr "Seleziona il colore"
+
 #. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
 #. ../themer/themer.in
 msgid "Browse..."
 msgstr "Sfoglia..."
 
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../themer/themer.in
+msgid "Select font"
+msgstr "Seleziona il font"
+
 #. ../themer/themer.in
 msgid "Properties..."
 msgstr "Proprietà..."
+
+#. ../themer/themer.in
+msgid "Select Image"
+msgstr "Seleziona l'immagine"
+
+#. ../themer/themer.in
+msgid "Image Properties"
+msgstr "Proprietà dell'immagine"
+
+#. ../lisp/sawfish/gtk/widget.jl
+#. ../themer/themer.in
+msgid "No matching item for %S"
+msgstr "Nessun elemento corrispondente a %S"
 
 #. ../themer/themer.in
 #, c-format
@@ -129,7 +152,7 @@ msgstr "Tema `Crux'"
 msgid ""
 "Accent color for focused windows (if unset uses the GTK+ selection color)."
 msgstr ""
-"Colore delle finstre attive (se non specificato\n"
+"Colore delle finestre attive (se non specificato\n"
 "usa il colore della selezione di GTK+)."
 
 #. ../themes/Crux/theme.jl
@@ -175,12 +198,14 @@ msgstr "Tema `Mono'"
 #. ../themes/mono/theme.jl
 msgid "Color of inactive frames (if unset use GTK+ background color)."
 msgstr ""
-"Colore delle finstre inattive (se non specificato usa\n"
+"Colore delle finestre inattive (se non specificato usa\n"
 "il colore di sfondo di GTK+)."
 
 #. ../themes/mono/theme.jl
-msgid "Color of active frames."
-msgstr "Colore delle finestre attive."
+msgid "Color of active frames (if unset use GTK+ selection color)."
+msgstr ""
+"Colore delle finestre attive (se non specificato\n"
+"usa il colore della selezione di GTK+)."
 
 #. ../themes/mono/theme.jl
 msgid "Text is \\w justified in window titles."
@@ -247,6 +272,10 @@ msgstr "Tasto"
 msgid "Value"
 msgstr "Valore"
 
+#. ../lisp/sawfish/gtk/widgets/file.jl
+msgid "Select file"
+msgstr "Seleziona il file"
+
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
 msgstr "Aggiungi..."
@@ -292,6 +321,21 @@ msgstr "Errore di Sawfish"
 msgid "Sawfish configurator"
 msgstr "Configurazione di Sawfish"
 
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Workspace:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Colonne:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Righe:"
+
 #. ../lisp/sawfish/wm/commands.jl
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 #. ../lisp/sawfish/ui/widgets/command.jl
@@ -330,18 +374,6 @@ msgstr "Azioni"
 #. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Match window properties"
 msgstr "Proprietà dei gruppi di finestre"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Workspace:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Colonne:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Righe:"
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -527,7 +559,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the title of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Comandi attivi quando il mouse a sul titolo di una finestra. (sono\n"
+"Comandi attivi quando il mouse è sul titolo di una finestra. (sono\n"
 "validi solo comandi per il mouse)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -535,7 +567,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the border of\n"
 "a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Comandi attivi quando il mouse a sul bordo di una finestra. (sono\n"
+"Comandi attivi quando il mouse è sul bordo di una finestra. (sono\n"
 "validi solo comandi per il mouse)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -543,7 +575,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the close button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Comandi attivi quando il mouse a sul bottone di chiusura di una finestra.\n"
+"Comandi attivi quando il mouse è sul bottone di chiusura di una finestra.\n"
 "(sono validi solo comandi per il mouse)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -551,7 +583,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the iconify\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Comandi attivi quando il mouse a sul bottone di riduzione ad icona di una\n"
+"Comandi attivi quando il mouse è sul bottone di riduzione ad icona di una\n"
 "finestra. (sono validi solo comandi per il mouse)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -559,7 +591,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the maximize\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Comandi attivi quando il mouse a sul bottone di ingrandimento di una\n"
+"Comandi attivi quando il mouse è sul bottone di ingrandimento di una\n"
 "finestra. (sono validi solo comandi per il mouse)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -567,7 +599,7 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Comandi attivi quando il mouse a sul bottone del menù di una finestra.\n"
+"Comandi attivi quando il mouse è sul bottone del menù di una finestra.\n"
 "(sono validi solo comandi per il mouse)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -593,6 +625,14 @@ msgstr "Mostra gli shortcut di tastiera nei menù."
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Minimize"
 msgstr "Riduci a icona"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Unmaximize"
+msgstr "Ripristina"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Maximize"
+msgstr "Ingrandisci"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
@@ -1137,7 +1177,7 @@ msgstr "Apri la finestra di informazioni su GNOME."
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Delete all windows in the group that the current window is a member of."
-msgstr ""
+msgstr "Cancella tutte le finestre dello stesso gruppo di quella corrente."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing an already grown window grows it again."
@@ -1285,10 +1325,6 @@ msgstr "Modo in cui la finestra viene attratta: \\w"
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Snap to otherwise-ignored windows."
 msgstr "Attacca a finestre altrimenti ignorate."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Lock position and size while windows are maximized."
-msgstr "Blocca posizione e dimensione quando le finestre sono ingrandite."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Only update window contents after it has stopped moving."
@@ -1696,6 +1732,10 @@ msgstr "Distanza tra finestre successive nella modalità `a scalinata'."
 msgid "Automatically select window gravity from position on screen."
 msgstr "Seleziona automaticamente la gravità secondo la posizione."
 
+#. ../lisp/sawfish/wm/state/configure.jl
+msgid "Ignore requests from applications to change window stacking."
+msgstr "Ignora le richeste delle applicazioni di modificare il livello delle finestre."
+
 #. ../lisp/sawfish/wm/state/gnome.jl
 msgid "In GNOME _task list"
 msgstr "Nella lista dei _task di GNOME"
@@ -1809,6 +1849,10 @@ msgstr "Lascia che le finestre non gestite siano coperte."
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Don't cover `avoided' windows when maximizing."
 msgstr "Non ricoprire le finestre da evitare (`avoided') quando ingrandisci."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Lock position and size while windows are maximized."
+msgstr "Blocca posizione e dimensione quando le finestre sono ingrandite."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize the dimensions of the window."
@@ -1980,6 +2024,10 @@ msgid "Prompt for a key sequence, then print its binding."
 msgstr "Chiede una sequenza di tasti e mostra i comandi associati."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Press key..."
+msgstr "Premi un tasto..."
+
+#. ../lisp/sawfish/wm/util/keymap.jl
 msgid "[Quote]"
 msgstr "[Quota]"
 
@@ -2014,6 +2062,11 @@ msgstr ""
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Finestra:"
+
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+#, c-format
+msgid "Workspace %d"
+msgstr "Workspace %d"
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Keymap containing bindings active when reading a string from the user."
@@ -2229,27 +2282,12 @@ msgstr "_Impostazioni"
 msgid "_Themes"
 msgstr "_Temi"
 
+#~ msgid "Color of active frames."
+#~ msgstr "Colore delle finestre attive."
+
 # --- Manually added strings ---
 msgid "Focus windows when they are first displayed."
 msgstr "Attiva le finestre quando compaiono."
-
-msgid "Maximize"
-msgstr "Ingrandisci"
-
-msgid "Unmaximize"
-msgstr "Ripristina"
-
-msgid "Select color"
-msgstr "Seleziona il colore"
-
-msgid "Select image"
-msgstr "Seleziona l'immagine"
-
-msgid "Select font"
-msgstr "Seleziona il font"
-
-msgid "Image Properties"
-msgstr "Proprietà dell'immagine"
 
 # No
 msgid "From"

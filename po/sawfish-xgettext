@@ -44,6 +44,18 @@ exec rep "$0" "$@"
        (let ((type* (cadr (get-key ':type* keys))))
 	 (when type*
 	   (scan type*)))
+       (let ((options (cadr (get-key ':options keys))))
+	 (when (listp options)
+	   (mapc (lambda (s)
+		   (when s
+		     (register (symbol-name s)))) options)))
+       (let ((type (cadr (get-key ':type keys))))
+	 (when (and (listp type)
+		    (symbolp (car type))
+		    (equal (car type) 'choice))
+	   (mapc (lambda (s)
+		   (when (symbolp s)
+		     (register (symbol-name s)))) (cdr type))))
        (when (stringp doc)
 	 (register doc))))
 
