@@ -36,6 +36,8 @@ DEFSYM(before_add_window_hook, "before-add-window-hook");
 DEFSYM(place_window_hook, "place-window-hook");
 DEFSYM(placed, "placed");
 
+DEFSYM(after_initialization_hook, "after-initialization-hook");
+
 /* for visibility-notify-hook */
 DEFSYM(fully_obscured, "fully-obscured");
 DEFSYM(partially_obscured, "partially-obscured");
@@ -1092,6 +1094,8 @@ manage_windows (void)
     if (nchildren > 0)
 	XFree (children);
     Fungrab_server ();
+
+    Fcall_hook (Qafter_initialization_hook, Qnil, Qnil);
 }
 
 void
@@ -1135,6 +1139,7 @@ windows_init (void)
     rep_INTERN(add_window_hook);
     rep_INTERN(place_window_hook);
     rep_INTERN(placed);
+    rep_INTERN(after_initialization_hook);
 
     rep_INTERN(fully_obscured);
     rep_INTERN(partially_obscured);
