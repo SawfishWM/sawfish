@@ -722,6 +722,14 @@ font_sweep (void)
     }
 }
 
+static int
+use_xft (void)
+{
+    char *val = getenv ("GDK_USE_XFT");
+
+    return val == NULL || strcmp (val, "0") != 0;
+}
+
 
 /* initialisation */
 
@@ -749,16 +757,26 @@ fonts_init (void)
     rep_INTERN_SPECIAL(default_font);
     if (!batch_mode_p ())
     {
-	DEFSTRING (type, "xlfd");
-	DEFSTRING (name, "fixed");
+	DEFSTRING (xlfd_type, "xlfd");
+	DEFSTRING (xlfd_name, "fixed");
+	DEFSTRING (xft_type, "Xft");
+	DEFSTRING (xft_name, "Sans");
 
-	repv font = Fget_font_typed (rep_VAL (&type), rep_VAL (&name));
+	repv font = Qnil;
+
+	if (use_xft ())
+	    font = Fget_font_typed (rep_VAL (&xft_type), rep_VAL (&xft_name));
+
+	if (font == rep_NULL || !FONTP (font))
+	    font = Fget_font_typed (rep_VAL (&xlfd_type), rep_VAL (&xlfd_name));
+
 	if (font == rep_NULL || !FONTP(font))
 	{
-	    fputs ("can't load 'fixed' font during initialisation", stderr);
+	    fputs ("can't load default font during initialisation", stderr);
 	    rep_throw_value = rep_NULL;
 	    font = Qnil;
 	}
+
 	Fset (Qdefault_font, font);
     }
     rep_pop_structure (tem);
