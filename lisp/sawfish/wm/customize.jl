@@ -115,7 +115,7 @@
 	 (let
 	     ((items (mapcar customize-symbol-spec (filter atom (cddr item))))
 	      (subtrees (mapcar customize-spec (filter consp (cddr item)))))
-	   (list (cadr item)
+	   (list (_ (cadr item))
 		 (cond
 		  ((get (car item) 'custom-group-widget)
 		   ((get (car item) 'custom-group-widget) (car item) items))
