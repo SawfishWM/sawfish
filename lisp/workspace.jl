@@ -334,7 +334,8 @@
     (while (< i total-workspaces)
       (mapc #'(lambda (w)
 		(when (and (equal (window-get w 'workspace) i)
-			   (window-mapped-p w))
+			   (window-mapped-p w)
+			   (not (window-get w 'ignored)))
 		  (setq name (window-name w))
 		  (setq menu (cons (list (concat
 					  (and (window-get w 'iconified) ?\[)
