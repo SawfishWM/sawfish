@@ -328,6 +328,18 @@ that overrides settings set elsewhere.")
   (when (window-framed-p w)
     (rebuild-frame w)))
 
+(defun set-frame-part-value (class key value &optional override)
+  (let*
+      ((var (if override 'override-frame-part-classes 'frame-part-classes))
+       (elt (assq class (symbol-value var)))
+       tem)
+    (if elt
+	(if (setq tem (assq key (cdr elt)))
+	    (rplacd tem value)
+	  (rplacd elt (cons (cons key value) (cdr elt))))
+      (set var (cons (cons class (list (cons key value)))
+		     (symbol-value var))))))
+
 
 ;; initialisation
 
