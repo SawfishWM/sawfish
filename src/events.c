@@ -313,9 +313,12 @@ button_press (XEvent *ev)
 	}
     }
 
-    /* Only use the context map if the frame part is currently clicked */
+    /* Only use the context map if the frame part is currently clicked,
+       and it's window is visible (i.e. not iconified) */
     eval_input_event ((clicked_frame_part
-		       && clicked_frame_part->clicked)
+		       && clicked_frame_part->clicked
+		       && clicked_frame_part->win != 0
+		       && clicked_frame_part->win->visible)
 		      ? current_context_map : Qnil);
 
     if (fp != 0 && w->id != 0 && ev->type == ButtonRelease)
