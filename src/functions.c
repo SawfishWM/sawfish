@@ -429,6 +429,7 @@ WINDOW may be the symbol `root', a window object or a numeric window id.
     Atom *atoms;
     int count;
     repv ret = Qnil;
+    rep_GC_root gc_ret;
 
     w = x_win_from_arg (win);
     if (w == 0)
@@ -449,7 +450,13 @@ WINDOW may be the symbol `root', a window object or a numeric window id.
 	}
 	XFree (atoms);
     }
-    return Fnreverse (ret);
+    ret = Fnreverse (ret);
+
+    rep_PUSHGC(gc_ret, ret);
+    emit_pending_destroys ();
+    rep_POPGC;
+
+    return ret;
 }
 
 DEFUN("get-x-property", Fget_x_property, Sget_x_property,
@@ -479,6 +486,7 @@ symbols, representing the atoms read.
     u_long nitems;
     u_char *data = 0;
     repv type_sym, ret_data = Qnil;
+    rep_GC_root gc_ret_data;
 
     w = x_win_from_arg (win);
     if (w == 0)
@@ -542,7 +550,13 @@ symbols, representing the atoms read.
     }
     XFree (data);
 
-    return rep_list_3 (type_sym, rep_MAKE_INT(format), ret_data);
+    ret_data = rep_list_3 (type_sym, rep_MAKE_INT(format), ret_data);
+
+    rep_PUSHGC(gc_ret_data, ret_data);
+    emit_pending_destroys ();
+    rep_POPGC;
+
+    return ret_data;
 }
 
 DEFUN("set-x-property", Fset_x_property, Sset_x_property,

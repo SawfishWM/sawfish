@@ -376,12 +376,7 @@ destroy_notify (XEvent *ev)
     if (w == focus_window)
 	focus_window = 0;
     remove_window (w, Qt, Qnil);
-    /* the window isn't windowp anymore.. */
-    if (!w->destroyed)
-    {
-	w->destroyed = 1;
-	Fcall_window_hook (Qdestroy_notify_hook, rep_VAL(w), Qnil, Qnil);
-    }
+    emit_pending_destroys ();
 }
 
 void
@@ -813,6 +808,7 @@ the server, otherwise it's taken from the current event (if possible).
 	{
 	    record_mouse_position (x, y);
 	}
+	emit_pending_destroys ();
     }
     return Fcons (rep_MAKE_INT(current_mouse_x),
 		  rep_MAKE_INT(current_mouse_y));
@@ -845,6 +841,7 @@ is in the root window.
 
     XQueryPointer (dpy, root_window, &root, &child,
 		   &current_mouse_x, &current_mouse_y, &win_x, &win_y, &state);
+    emit_pending_destroys ();
     if (child != 0)
     {
 	Lisp_Window *w = find_window_by_id (child);

@@ -187,6 +187,13 @@ sys_init(char *program_name)
 		XMapWindow (dpy, no_focus_window);
 	    }
 
+	    /* This should _never_ be used in Real Life; only for
+	       debugging. Sawmill tries to work out when the error
+	       handle might be called (i.e. after any XGet, XQuery, XFetch
+	       type function) and then call emit_pending_destroys ()
+	       as soon as possible, so that there's as small as possible
+	       delay between the window being destroyed and the hook
+	       being called.. */
 	    if (rep_get_option ("--sync", 0))
 		XSynchronize (dpy, True);
 
