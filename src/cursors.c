@@ -252,6 +252,8 @@ cursors_init (void)
     rep_ADD_SUBR(Scursorp);
     if (!batch_mode_p ())
 	Fdefault_cursor (Fget_cursor (rep_MAKE_INT (XC_left_ptr)));
+    else
+	default_cursor = Qnil;
     rep_mark_static (&default_cursor);
     rep_INTERN(cursor_shape);
     rep_pop_structure (tem);

@@ -1,3 +1,9 @@
+2001-03-09  John Harper  <jsh@eazel.com>
+
+	* cursors.c (cursors_init): set default_cursor to Qnil when in
+	batch mode (to prevent Fdefault_cursor () returning a null
+	value)
+
 2001-03-07  John Harper  <jsh@eazel.com>
 
 	* functions.c (Fx_raise_window, Fx_lower_window): when these
