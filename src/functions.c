@@ -228,18 +228,6 @@ grab-pointer WINDOW [CURSOR]
     rep_DECLARE1(win, WINDOWP);
     if (VWIN(win)->mapped && VWIN(win)->visible)
 	g_win = VWIN(win)->frame;
-    if (current_x_event)
-    {
-	/* XXX This is a hack. If we're being called from an event
-	   XXX then assume that the originating window is where we
-	   XXX want all following events to end up. This helps
-	   XXX frame parts to be ``un-clicked'' */
-
-	struct frame_part *fp
-	    = find_frame_part_by_window (current_x_event->xany.window);
-	if (fp != 0)
-	    g_win = fp->id;
-    }
     if (g_win == 0)
 	g_win = root_window;
     if (XGrabPointer (dpy, g_win, False,
@@ -262,6 +250,10 @@ ungrab-pointer
 ::end:: */
 {
     XUngrabPointer (dpy, last_event_time);
+    /* Ungrabbing the pointer means that we won't receive the
+       ButtonRelease event needed to unclick any associated
+       frame part, so.. */
+    unclick_current_fp ();
     return Qt;
 }
 
