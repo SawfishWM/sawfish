@@ -1,5 +1,17 @@
 1999-08-30  John Harper  <john@dcs.warwick.ac.uk>
 
+	* functions.c (Fgrab_pointer): pass last_event_time to
+	XGrabPointer (), not CurrentTime (since Fungrab_pointer also
+	passes last_event_time)
+
+	* events.c (handle_input_mask): set last_event_time to
+	CurrentTime on leaving the function
+
+	* sawmill.h: defining DEBUG to zero sends debugging output to
+	db_printf ()
+	* display.c (db_printf): replacement printf to store debugging
+	output in one of rep's debug buffers
+
 	* sawmill-ui.jl (keymap-shell): doesn't choke on non-symbol
 	commands anymore, but it's still not possible to edit arbitrary
 	forms..
