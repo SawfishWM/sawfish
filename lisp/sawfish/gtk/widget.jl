@@ -188,7 +188,7 @@
   (define (make-choice-item changed-callback . options)
     (let ((omenu (gtk-option-menu-new))
 	  (menu (gtk-menu-new))
-	  value)
+	  (value (car options)))
       (let loop ((rest options)
 		 (last nil))
 	(when rest
@@ -462,7 +462,7 @@
 	 (set-widget-enabled item (gtk-toggle-button-active check))
 	 (call-callback changed-callback)))
       (gtk-toggle-button-set-state check nil)
-      (gtk-widget-set-sensitive (widget-gtk-widget item) nil)
+      (disable-widget item)
       (gtk-widget-show-all box)
       (lambda (op)
 	(case op
