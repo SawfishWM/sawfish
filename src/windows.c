@@ -367,6 +367,7 @@ add_window (Window id)
 		rep_POPGC;
 	    }
 	}
+	Fwindow_put (rep_VAL(w), Qplaced, Qt);
     }
     return w;
 }
