@@ -59,5 +59,8 @@ installdirs : $(top_srcdir)/mkinstalldirs
 uninstall :
 	rm -f $(infodir)/sawmill.info*
 
-clean realclean :
-	rm -f *~ sawmill.info* sawmill.dvi sawmill.ps Makefile
+clean :
+	rm -f *~ sawmill.info* sawmill.dvi sawmill.ps
+
+realclean : clean
+	rm -f Makefile
