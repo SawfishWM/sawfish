@@ -163,12 +163,14 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 			   event (window-get w 'keymap))))
 		   ;; pass the event through to the client window unless we
 		   ;; need to keep the grab for the events that would follow
-		   (allow-events 'replay-pointer))))
+		   (allow-events 'replay-pointer)
+		   (forget-button-press))))
 	;; ungrab the pointer so that the non-click-through thing
 	;; works for window decorations as well as the client
 	;; (does this break anything?)
 	(unless (window-really-wants-input-p w)
-	  (ungrab-pointer)))
+	  (ungrab-pointer)
+	  (forget-button-press)))
       ;; set-input-focus may not actually change the focus
       (unless (eq (input-focus) w)
 	(focus-push-map w click-to-focus-map))))
