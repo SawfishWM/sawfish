@@ -89,9 +89,9 @@ focus_on_window (Lisp_Window *w)
 	}
 	else
 	    focus = w->frame;
-	DB(("  XSetInputFocus (%lx, RevertToParent, %ld)\n", focus,
+	DB(("  XSetInputFocus (%lx, RevertToNone, %ld)\n", focus,
 	    last_event_time));
-	XSetInputFocus (dpy, focus, RevertToParent, last_event_time);
+	XSetInputFocus (dpy, focus, RevertToNone, last_event_time);
 	focus_window = w;
     }
     else
@@ -99,7 +99,7 @@ focus_on_window (Lisp_Window *w)
 	DB(("focus_on_window (nil)\n"));
 	DB(("  XSetInputFocus (None, no_focus_window, %ld)\n",
 	    last_event_time));
-	XSetInputFocus (dpy, no_focus_window, RevertToParent, last_event_time);
+	XSetInputFocus (dpy, no_focus_window, RevertToNone, last_event_time);
 	focus_window = 0;
     }
 }
