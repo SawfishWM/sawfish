@@ -141,8 +141,7 @@
 	      (window-put x-cycle-current 'x-cycle-order x-cycle-highest)
 	      (setq x-cycle-highest (1+ x-cycle-highest))
 	      (display-window x-cycle-current)))
-	(when cycle-show-window-names
-	  (show-message nil))
+	(show-message nil)
 	(ungrab-keyboard)))))
 
 (defun x-cycle-next ()
@@ -176,7 +175,8 @@
 	(raise-window win))
       (when warp-to-selected-windows
 	(warp-cursor-to-window win))
-      (show-message (window-name win))
+      (when cycle-show-window-names
+	(show-message (window-name win)))
       (set-input-focus win))))
 
 (defun x-cycle-exit ()
