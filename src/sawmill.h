@@ -69,6 +69,9 @@ typedef struct lisp_window {
        a ReparentNotify event? */
     int reparenting : 1;
 
+    /* Is the client window shaped? */
+    int shaped : 1;
+
     /* The WM protocols understood by the client */
     int does_wm_take_focus : 1;
     int does_wm_delete_window : 1;
