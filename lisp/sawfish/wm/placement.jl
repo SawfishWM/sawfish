@@ -24,7 +24,7 @@
 (defcustom place-window-mode 'random
   "Method of selecting the position of a freshly-mapped window."
 ; :type (set random interactive smart)
-  :type (set random)
+  :type (set random interactive)
   :group placement)
 
 (defcustom ignore-program-positions nil
@@ -47,9 +47,13 @@
 	       ;; XXX implement this..
 	       (setq mode 'random))
 	      ((eq mode 'interactive)
-	       ;; XXX this doesn't work; why not?
+	       (require 'move-resize)
 	       (let
-		   ((move-outline-mode nil))
+		   ((move-outline-mode nil)
+		    (ptr (query-pointer))
+		    (dims (window-frame-dimensions w)))
+		 (move-window-to w (- (car ptr) (/ (car dims) 2))
+				 (- (cdr ptr) (/ (cdr dims) 2)))
 		 (move-window-interactively w)))
 	      ((eq mode 'random)
 	       (move-window-to
