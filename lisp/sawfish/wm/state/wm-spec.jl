@@ -20,7 +20,10 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.state.wm-spec ()
+(define-structure sawfish.wm.state.wm-spec
+
+    (export define-wm-spec-window-type
+	    define-wm-spec-window-state)
 
     (open rep
 	  rep.system
@@ -84,11 +87,11 @@
 
 ;; setting the desktop / viewport hints
 
-  (define current-workspace nil)
-  (define current-workspace-count 0)
-  (define current-workspace-names nil)
-  (define current-area nil)
-  (define current-area-count nil)
+  (define last-workspace nil)
+  (define last-workspace-count 0)
+  (define last-workspace-names nil)
+  (define last-area nil)
+  (define last-area-count nil)
 
   (define (wm-spec-update-workspace-hints)
     (let* ((limits (workspace-limits))
@@ -98,34 +101,34 @@
 
       (define (set-ws-hints)
 	;; _NET_NUMBER_OF_DESKTOPS
-	(unless (equal current-workspace-count total-workspaces)
-	  (setq current-workspace-count total-workspaces)
+	(unless (equal last-workspace-count total-workspaces)
+	  (setq last-workspace-count total-workspaces)
 	  (set-x-property 'root '_NET_NUMBER_OF_DESKTOPS
 			  (vector total-workspaces) 'CARDINAL 32))
 
 	;; _NET_DESKTOP_NAMES
-	(unless (equal current-workspace-names workspace-names)
-	  (setq current-workspace-names workspace-names)
+	(unless (equal last-workspace-names workspace-names)
+	  (setq last-workspace-names workspace-names)
 	  (set-x-text-property 'root '_NET_DESKTOP_NAMES
 			       (apply vector workspace-names)))
 
 	;; _NET_CURRENT_DESKTOP
-	(unless (equal current-workspace
+	(unless (equal last-workspace
 		       (- current-workspace (car limits)))
-	  (setq current-workspace (- current-workspace (car limits)))
+	  (setq last-workspace (- current-workspace (car limits)))
 	  (set-x-property 'root '_NET_CURRENT_DESKTOP
-			  (vector current-workspace) 'CARDINAL 32))
+			  (vector last-workspace) 'CARDINAL 32))
 
 	;; _NET_DESKTOP_GEOMETRY
-	(unless (equal current-area-count port-size)
-	  (setq current-area-count port-size)
+	(unless (equal last-area-count port-size)
+	  (setq last-area-count port-size)
 	  (set-x-property 'root '_NET_DESKTOP_GEOMETRY
 			  (vector (* (car port-size) (screen-width))
 				  (* (cdr port-size) (screen-height)))
 			  'CARDINAL 32))
 
 	;; _NET_DESKTOP_VIEWPORT
-	(unless (equal current-area port)
+	(unless (equal last-area port)
 	  (let ((view (make-vector (* total-workspaces 2))))
 	    (let loop ((i 0))
 	      (if (= i total-workspaces)
@@ -147,23 +150,23 @@
 		 
       ;; apparently some pagers don't like it if we place windows
       ;; on (temporarily) non-existent workspaces
-      (when (< current-workspace-count total-workspaces)
+      (when (< last-workspace-count total-workspaces)
 	(set-ws-hints))
 
       (map-windows set-window-hints)
 
-      (when (>= current-workspace-count total-workspaces)
+      (when (>= last-workspace-count total-workspaces)
 	(set-ws-hints))))
 
 
 ;;; setting the focus hints
 
-  (define current-focus nil)
+  (define last-focus nil)
 
   (define (wm-spec-update-focus-state)
     (let ((focus (input-focus)))
-      (unless (eq current-focus focus)
-	(setq current-focus focus)
+      (unless (eq last-focus focus)
+	(setq last-focus focus)
 	(set-x-property 'root '_NET_ACTIVE_WINDOW
 			(vector (if focus (window-id focus) 0)) 'WINDOW 32))))
 
@@ -207,9 +210,14 @@
 
     (let ((type (get-x-property w '_NET_WM_WINDOW_TYPE)))
       (when type
-	(setq type (aref (nth 2 type) 0))
-	(when (get type 'wm-spec-type)
-	  ((get type 'wm-spec-type) w))))
+	(setq type (nth 2 type))
+	;; _NET_WM_WINDOW_TYPE is a vector of atoms, the first atom
+	;; about which we know something is the type we'll use
+	(let loop ((i 0))
+	  (cond ((= i (length type)))
+		((get (aref type i) 'wm-spec-type)
+		 ((get (aref type i) 'wm-spec-type) w))
+		(t (loop (1+ i)))))))
 
     (let ((state (get-x-property w '_NET_WM_WINDOW_STATE)))
       (when state
@@ -222,44 +230,51 @@
 
 ;;; helper functions
 
+  (define (define-wm-spec-window-type x fun) (put x 'wm-spec-type fun))
+  (define (define-wm-spec-window-state x fun) (put x 'wm-spec-type fun))
+
   (define (wm-spec-call-state-fun w state mode)
     (let ((fun (get state 'wm-spec-state)))
       (when fun
 	(fun w mode))))
 
-  (put 'wm-spec-type '_NET_WM_WINDOW_TYPE_DESKTOP
-       (lambda (w)
-	 (require 'sawfish.wm.stacking)
-	 (set-window-depth w wm-spec-desktop-layer)
-	 (window-put w 'fixed-position t)
-	 (window-put w 'desktop t)
-	 (window-put w 'keymap root-window-keymap)))
+  (define-wm-spec-window-type
+   '_NET_WM_WINDOW_TYPE_DESKTOP
+   (lambda (w)
+     (require 'sawfish.wm.stacking)
+     (set-window-depth w wm-spec-desktop-layer)
+     (window-put w 'fixed-position t)
+     (window-put w 'desktop t)
+     (window-put w 'keymap root-window-keymap)))
 
-  (put 'wm-spec-type '_NET_WM_WINDOW_TYPE_DOCK
-       (lambda (w)
-	 (require 'sawfish.wm.stacking)
-	 (set-window-depth w wm-spec-dock-layer)))
+  (define-wm-spec-window-type
+   '_NET_WM_WINDOW_TYPE_DOCK
+   (lambda (w)
+     (require 'sawfish.wm.stacking)
+     (set-window-depth w wm-spec-dock-layer)))
 
-  (put 'wm-spec-type '_NET_WM_WINDOW_TYPE_DIALOG
-       (lambda (w)
-	 (require 'sawfish.wm.frames)
-	 (set-window-type w 'transient)))
+  (define-wm-spec-window-type
+   '_NET_WM_WINDOW_TYPE_DIALOG
+   (lambda (w)
+     (require 'sawfish.wm.frames)
+     (set-window-type w 'transient)))
 
-  (put 'wm-spec-state '_NET_WM_STATE_STICKY
-       (lambda (w mode)
-	 (require 'sawfish.wm.state.iconify)
-	 (case mode
-	   ((init)
-	    (window-put w 'sticky-viewport t))
-	   ((remove)
-	    (window-put w 'sticky-viewport nil))
-	   ((add)
-	    (window-put w 'sticky-viewport t))
-	   ((toggle)
-	    (window-put w 'sticky-viewport
-			(not (window-get w 'sticky-viewport)))))
-	 (unless (eq mode 'init)
-	   (call-window-hook w 'window-state-change-hook (list '(sticky))))))
+  (define-wm-spec-window-state
+   '_NET_WM_STATE_STICKY
+   (lambda (w mode)
+     (require 'sawfish.wm.state.iconify)
+     (case mode
+       ((init)
+	(window-put w 'sticky-viewport t))
+       ((remove)
+	(window-put w 'sticky-viewport nil))
+       ((add)
+	(window-put w 'sticky-viewport t))
+       ((toggle)
+	(window-put w 'sticky-viewport
+		    (not (window-get w 'sticky-viewport)))))
+     (unless (eq mode 'init)
+       (call-window-hook w 'window-state-change-hook (list '(sticky))))))
 
   (define (wm-spec-maximize-handler direction)
     (lambda (w mode)
@@ -272,25 +287,26 @@
 	((toggle)
 	 (maximize-window-toggle w direction)))))
 
-  (put 'wm-spec-state '_NET_WM_STATE_MAXIMIZED_VERT
-       (wm-spec-maximize-handler 'vertical))
-  (put 'wm-spec-state '_NET_WM_STATE_MAXIMIZED_HORIZ
-       (wm-spec-maximize-handler 'horizontal))
-  (put 'wm-spec-state '_NET_WM_STATE_MAXIMIZED
-       (wm-spec-maximize-handler nil))
+  (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED_VERT
+			       (wm-spec-maximize-handler 'vertical))
+  (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED_HORIZ
+			       (wm-spec-maximize-handler 'horizontal))
+  (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED
+			       (wm-spec-maximize-handler nil))
 
-  (put 'wm-spec-state '_NET_WM_STATE_SHADED
-       (lambda (w mode)
-	 (require 'sawfish.wm.state.shading)
-	 (case mode
-	   ((init)
-	    (window-put w 'shaded t))
-	   ((add)
-	    (shade-window w))
-	   ((remove)
-	    (unshade-window w))
-	   ((toggle)
-	    (toggle-window-shaded w)))))
+  (define-wm-spec-window-state
+   '_NET_WM_STATE_SHADED
+   (lambda (w mode)
+     (require 'sawfish.wm.state.shading)
+     (case mode
+       ((init)
+	(window-put w 'shaded t))
+       ((add)
+	(shade-window w))
+       ((remove)
+	(unshade-window w))
+       ((toggle)
+	(toggle-window-shaded w)))))
 
 
 ;;; client messages
@@ -400,7 +416,9 @@
     (add-hook 'focus-out-hook wm-spec-update-focus-state)
 
     (add-hook 'client-message-hook wm-spec-client-message-handler)
-    (add-hook 'before-exit-hook wm-spec-exit))
+    (add-hook 'before-exit-hook wm-spec-exit)
+
+    (map-windows wm-spec-update-client-state))
 
   (define (wm-spec-exit)
     (destroy-window wm-spec-window-id)
