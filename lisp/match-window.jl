@@ -65,6 +65,7 @@
     (ungrouped boolean)
     (unique-name boolean)
     (auto-gravity boolean)
+    (shade-hover boolean)
     (group symbol ,(lambda () (delete-if-not symbolp (window-group-ids))))
     (place-mode symbol ,(lambda () placement-modes))
     (focus-mode symbol ,(lambda () focus-modes))
@@ -80,7 +81,8 @@
 ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
 ;; libraries implementing them
 (defvar match-window-features
-  '((raise-on-focus . auto-raise)))
+  '((raise-on-focus . auto-raise)
+    (shade-hover . shade-hover)))
 
 (defvar match-window-types
   '((normal . default)
