@@ -29,6 +29,10 @@ ImlibData *imlib_id;
 DEFSYM(image_load_path, "image-load-path");
 DEFSYM(image_directory, "image-directory");
 
+DEFSYM(red, "red");
+DEFSYM(green, "green");
+DEFSYM(blue, "blue");
+
 /* Make a Lisp image object from the imlib image IM. Its initial properties
    will be taken from the list PLIST. */
 static repv
@@ -226,6 +230,58 @@ set-image-border IMAGE LEFT RIGHT TOP BOTTOM
     return img;
 }
 
+DEFUN("image-modifier", Fimage_modifier, Simage_modifier,
+      (repv img, repv type), rep_Subr2) /*
+::doc:Simage-modifier::
+image-modifier IMAGE TYPE
+
+TYPE may be one of nil, red, green, blue. returned modifier is
+(GAMMA BRIGHTNESS CONTRAST).
+::end:: */
+{
+    ImlibColorModifier modifier;
+    void (*fun)(ImlibData *, ImlibImage *, ImlibColorModifier *);
+    rep_DECLARE1(img, IMAGEP);
+    rep_DECLARE2(type, rep_SYMBOLP);
+    fun = (type == Qred ? Imlib_get_image_red_modifier
+	   : type == Qgreen ? Imlib_get_image_green_modifier
+	   : type == Qblue ? Imlib_get_image_blue_modifier
+	   : Imlib_get_image_modifier);
+    (*fun) (imlib_id, VIMAGE(img)->image, &modifier);
+    return rep_list_3 (rep_MAKE_INT(modifier.gamma),
+		       rep_MAKE_INT(modifier.brightness),
+		       rep_MAKE_INT(modifier.contrast));
+}
+
+DEFUN("set-image-modifier", Fset_image_modifier, Sset_image_modifier,
+      (repv img, repv type, repv mod), rep_Subr3) /*
+::doc:Sset-image-modifier::
+set-image-modifier IMAGE TYPE MODIFIER
+
+TYPE may be one of nil, red, green, blue. MODIFIER is (GAMMA BRIGHTNESS
+CONTRAST).
+::end:: */
+{
+    ImlibColorModifier modifier;
+    void (*fun)(ImlibData *, ImlibImage *, ImlibColorModifier *);
+    rep_DECLARE1(img, IMAGEP);
+    rep_DECLARE2(type, rep_SYMBOLP);
+    if (!rep_CONSP(mod) || !rep_CONSP(rep_CDR(mod))
+	|| !rep_CONSP(rep_CDR(rep_CDR(mod))))
+    {
+	return rep_signal_arg_error (mod, 3);
+    }
+    modifier.gamma = rep_INT(rep_CAR(mod));
+    modifier.brightness = rep_INT(rep_CAR(rep_CDR(mod)));
+    modifier.contrast = rep_INT(rep_CAR(rep_CDR(rep_CDR(mod))));
+    fun = (type == Qred ? Imlib_set_image_red_modifier
+	   : type == Qgreen ? Imlib_set_image_green_modifier
+	   : type == Qblue ? Imlib_set_image_blue_modifier
+	   : Imlib_set_image_modifier);
+    (*fun) (imlib_id, VIMAGE(img)->image, &modifier);
+    return img;
+}
+
 /* XXX stubs for suitable Imlib functions... */
 
 
@@ -291,12 +347,18 @@ images_init (void)
     rep_ADD_SUBR(Simage_dimensions);
     rep_ADD_SUBR(Simage_border);
     rep_ADD_SUBR(Sset_image_border);
+    rep_ADD_SUBR(Simage_modifier);
+    rep_ADD_SUBR(Sset_image_modifier);
     rep_INTERN(image_directory);
     rep_SYM(Qimage_directory)->value
 	= rep_concat2 (rep_STR(rep_SYM(Qsawmill_directory)->value), "/images");
     rep_INTERN(image_load_path);
     rep_SYM(Qimage_load_path)->value
 	= rep_list_2 (rep_string_dup("."), rep_SYM(Qimage_directory)->value);
+
+    rep_INTERN(red);
+    rep_INTERN(green);
+    rep_INTERN(blue);
 }
 
 void
