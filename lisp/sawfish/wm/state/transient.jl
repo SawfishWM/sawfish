@@ -39,11 +39,6 @@ the input focus to the transient window."
   :group focus
   :type boolean)
 
-(defcustom transients-above-parents t
-  "Transient windows are always stacked higher than their parent windows."
-  :group misc
-  :type boolean)
-
 (defcustom focus-windows-when-mapped nil
   "Mapping a window gives it the focus."
   :type boolean
@@ -55,9 +50,6 @@ the input focus to the transient window."
 (defvar sticky-window-names nil
   "A list of regular expressions matching window names that exist across
 workspaces.")
-
-;; number of layers above parent/normal-level for transients
-(defvar transient-layer-delta 2)
 
 
 ;; hooks
@@ -96,12 +88,7 @@ workspaces.")
 		     (eq (input-focus) parent)
 		     (window-really-wants-input-p w))
 	    (set-input-focus w)
-	    (setq set-focus t)))
-	(when transients-above-parents
-	  (set-window-depth w (if parent
-				  (+ (window-get parent 'depth)
-				     transient-layer-delta)
-				transient-layer-delta)))))
+	    (setq set-focus t)))))
     (when (and (not set-focus)
 	       focus-windows-when-mapped
 	       (window-really-wants-input-p w))
