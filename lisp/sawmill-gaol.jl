@@ -33,7 +33,9 @@
     map-window-group window-group-ids
 
     get-window-by-name save-stacking-order uniquify-list
-    call-after-property-changed))
+    call-after-property-changed
+
+    draw-vertical-gradient draw-horizontal-gradient draw-diagonal-gradient))
 
 (defvar sawmill-safe-specials
   '(default-foreground display-name canonical-display-name
@@ -45,13 +47,4 @@
 (unless batch-mode
   (mapc 'gaol-add-function sawmill-safe-functions)
   (mapc 'gaol-add-special sawmill-safe-specials)
-  (mapc 'gaol-add-feature sawmill-safe-features)
-
-  (eval-after-load
-   "gradient"
-   '(progn
-      (mapc 'gaol-add-function
-	    '(draw-vertical-gradient
-	      draw-horizontal-gradient
-	      draw-diagonal-gradient))
-      (gaol-rebuild-environment))))
+  (mapc 'gaol-add-feature sawmill-safe-features))
