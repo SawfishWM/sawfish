@@ -79,7 +79,6 @@ unused before killing it.")
 
   (defvar window-ops-menu
     `((,(_ "_Delete") delete-window)
-      (,(_ "Destroy") destroy-window)
       (,(_ "_Toggle") . window-ops-toggle-menu)
       (,(_ "_Maximize")
        (,(_ "_Vertically") maximize-window-vertically)
