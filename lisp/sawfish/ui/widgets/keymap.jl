@@ -97,4 +97,4 @@
 	       (setq name (concat (substring name 0 (match-start))
 				  ?  (substring name (match-end)))))
 	     (aset name 0 (char-upcase (aref name 0)))
-	     name)))))
+	     (_ name))))))

@@ -36,6 +36,8 @@
     (string-match "-keymap$" (symbol-name (slot-name slot))))
 
   (define (layout-keymaps style slots)
+    (declare (unused style))
+
     (let* ((menu (gtk-menu-new))
 	   (omenu (gtk-option-menu-new))
 	   (hbox (gtk-hbox-new nil box-spacing))
@@ -85,6 +87,7 @@
 
 ;;; utils
 
+  ;; also in sawfish-xgettext
   (define (beautify-keymap-name symbol)
     (cond ((stringp symbol) symbol)
 	  ((not (symbolp symbol)) (format "%s" symbol))
@@ -96,4 +99,4 @@
 	       (setq name (concat (substring name 0 (match-start))
 				  ?  (substring name (match-end)))))
 	     (aset name 0 (char-upcase (aref name 0)))
-	     name)))))
+	     (_ name))))))

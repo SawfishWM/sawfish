@@ -1,3 +1,17 @@
+2001-04-20  John Harper  <jsh@eazel.com>
+
+	Extra i18n work. Adapted from a patch by Vlad Harchev
+	<hvv@hippo.ru>
+
+	* layouts/keymaps.jl (beautify-keymap-name): try to localize
+	the name before returning it
+	* widgets/keymap.jl (beautify-symbol-name): ditto
+	* widgets/match-window.jl (beautify-symbol-name): ditto
+
+	* widgets/match-window.jl (make-match-window:matchers):
+	localizes all property names before starting, then uses that
+	list of properties
+
 2001-02-13  John Harper  <jsh@eazel.com>
 
 	* version 0.37
