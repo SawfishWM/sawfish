@@ -269,6 +269,7 @@
 
 ;; misc functions
 
+;;;###autoload
 (defun maximize-find-workarea (&optional w)
   "Return the rectangle representing the largest rectangle on the screen that
 doesn't overlap any avoided windows, or nil."
