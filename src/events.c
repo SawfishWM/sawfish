@@ -460,25 +460,13 @@ void
 map_request (XEvent *ev)
 {
     Window id = ev->xmaprequest.window;
-    Lisp_Window *w;
-    w = find_window_by_id (id);
+    Lisp_Window *w = find_window_by_id (id);
     if (w == 0)
     {
 	w = add_window (id);
 	if (w == 0)
 	    return;
-
-	XMapWindow (dpy, w->id);
 	w->mapped = TRUE;
-
-	if (w->wmhints && w->wmhints->flags & StateHint
-	    && w->wmhints->initial_state == IconicState)
-	{
-	    rep_call_lisp1 (Qiconify_window, rep_VAL(w));
-	}
-
-	if (w->visible)
-	    XMapWindow (dpy, w->frame);
     }
     else
     {
@@ -489,12 +477,15 @@ map_request (XEvent *ev)
 	    install_window_frame (w);
 	    Fungrab_server ();
 	}
-	XMapWindow (dpy, w->id);
 	w->mapped = TRUE;
 	rep_call_lisp1 (Quniconify_window, rep_VAL(w));
-	if (w->id != 0 && w->visible)
-	    XMapWindow (dpy, w->frame);
     }
+
+    if (!w->client_unmapped)
+	XMapWindow (dpy, w->id);
+
+    if (w->visible)
+	XMapWindow (dpy, w->frame);
 }
 
 static void
