@@ -33,6 +33,8 @@ DEFSYM(red, "red");
 DEFSYM(green, "green");
 DEFSYM(blue, "blue");
 
+DEFSYM(default_bevel_percent, "default-bevel-percent");
+
 /* Make a Lisp image object from the imlib image IM. Its initial properties
    will be taken from the list PLIST. */
 static repv
@@ -373,7 +375,7 @@ CONTRAST). These are integers ranging from 0 to 255.
 }
 
 static inline void
-bevel_pixel (u_char *data, bool up)
+bevel_pixel (u_char *data, bool up, double bevel_fraction)
 {
     double pix[3];
     pix[0] = ((double)data[0]) / 256.0;
@@ -381,18 +383,18 @@ bevel_pixel (u_char *data, bool up)
     pix[2] = ((double)data[2]) / 256.0;
     if (up)
     {
-	pix[0] = pix[0] + (1.0 - pix[0]) * 0.75;
-	pix[1] = pix[1] + (1.0 - pix[1]) * 0.75;
-	pix[2] = pix[2] + (1.0 - pix[2]) * 0.75;
+	pix[0] = pix[0] + (1.0 - pix[0]) * bevel_fraction;
+	pix[1] = pix[1] + (1.0 - pix[1]) * bevel_fraction;
+	pix[2] = pix[2] + (1.0 - pix[2]) * bevel_fraction;
 	data[0] = pix[0] * 256.0;
 	data[1] = pix[1] * 256.0;
 	data[2] = pix[2] * 256.0;
     }
     else
     {
-	pix[0] = pix[0] - pix[0] * 0.75;
-	pix[1] = pix[1] - pix[1] * 0.75;
-	pix[2] = pix[2] - pix[2] * 0.75;
+	pix[0] = pix[0] - pix[0] * bevel_fraction;
+	pix[1] = pix[1] - pix[1] * bevel_fraction;
+	pix[2] = pix[2] - pix[2] * bevel_fraction;
 	data[0] = pix[0] * 256.0;
 	data[1] = pix[1] * 256.0;
 	data[2] = pix[2] * 256.0;
@@ -401,7 +403,7 @@ bevel_pixel (u_char *data, bool up)
 
 static inline void
 bevel_horizontally (u_char *data, int width, int height,
-		    int border, bool top, bool up)
+		    int border, bool top, bool up, double bevel_fraction)
 {
     int rows;
     up = top ? up : !up;
@@ -415,7 +417,7 @@ bevel_horizontally (u_char *data, int width, int height,
 	    ptr += width * (height - (rows + 1)) * 3 + (rows) * 3;
 	for (x = rows; x < width - (rows + 1); x++)
 	{
-	    bevel_pixel (ptr, up);
+	    bevel_pixel (ptr, up, bevel_fraction);
 	    ptr += 3;
 	}
     }
@@ -423,7 +425,7 @@ bevel_horizontally (u_char *data, int width, int height,
 
 static inline void
 bevel_vertically (u_char *data, int width, int height,
-		  int border, bool top, bool up)
+		  int border, bool top, bool up, double bevel_fraction)
 {
     int cols;
     up = top ? up : !up;
@@ -437,40 +439,54 @@ bevel_vertically (u_char *data, int width, int height,
 	    ptr += (width - (cols + 1)) * 3 + ((cols) * width) * 3;
 	for (y = cols; y <= height - (cols + 1); y++)
 	{
-	    bevel_pixel (ptr, up);
+	    bevel_pixel (ptr, up, bevel_fraction);
 	    ptr += width * 3;
 	}
     }
 }
 
 DEFUN("bevel-image", Fbevel_image, Sbevel_image,
-      (repv image, repv border, repv up), rep_Subr3) /*
+      (repv image, repv border, repv up, repv bevel_percent),
+      rep_Subr4) /*
 ::doc:bevel-image::
-bevel-image IMAGE BORDER UP
+bevel-image IMAGE BORDER UP [BEVEL-PERCENT]
 
 Draw a bevelled edge outline onto IMAGE. BORDER is an integer defining
 the width of the bevel. If UP is non-nil the bevel is raised.
+
+If BEVEL-PERCENT is an integer between 0 and 100, then this is the
+intensity of the bevel created.
 ::end:: */
 {
+    double bevel_fraction = 0.75;
     rep_DECLARE1(image, IMAGEP);
     rep_DECLARE2(border, rep_INTP);
+
+    if (!rep_INTP(bevel_percent))
+	bevel_percent = Fsymbol_value (Qdefault_bevel_percent, Qt);
+    if (rep_INTP(bevel_percent))
+    {
+	int bp = rep_INT(bevel_percent);
+	if ((bp >= 0) && (bp <= 100))
+	    bevel_fraction = (((double) bp) / 100.0);
+    }
 
     bevel_horizontally (VIMAGE(image)->image->rgb_data,
 			VIMAGE(image)->image->rgb_width,
 			VIMAGE(image)->image->rgb_height,
-			rep_INT(border), TRUE, up != Qnil);
+			rep_INT(border), TRUE, up != Qnil, bevel_fraction);
     bevel_vertically (VIMAGE(image)->image->rgb_data,
 		      VIMAGE(image)->image->rgb_width,
 		      VIMAGE(image)->image->rgb_height,
-		      rep_INT(border), TRUE, up != Qnil);
+		      rep_INT(border), TRUE, up != Qnil, bevel_fraction);
     bevel_horizontally (VIMAGE(image)->image->rgb_data,
 			VIMAGE(image)->image->rgb_width,
 			VIMAGE(image)->image->rgb_height,
-			rep_INT(border), FALSE, up != Qnil);
+			rep_INT(border), FALSE, up != Qnil, bevel_fraction);
     bevel_vertically (VIMAGE(image)->image->rgb_data,
 		      VIMAGE(image)->image->rgb_width,
 		      VIMAGE(image)->image->rgb_height,
-		      rep_INT(border), FALSE, up != Qnil);
+		      rep_INT(border), FALSE, up != Qnil, bevel_fraction);
 
     Imlib_changed_image (imlib_id, VIMAGE(image)->image);
     return image;
@@ -660,12 +676,17 @@ images_init (void)
     rep_ADD_SUBR(Sbevel_image);
     rep_ADD_SUBR(Sclear_image);
     rep_ADD_SUBR(Stile_image);
+
     rep_INTERN_SPECIAL(image_directory);
-    rep_SYM(Qimage_directory)->value
-	= rep_concat2 (rep_STR(rep_SYM(Qsawmill_directory)->value), "/images");
+    Fset (Qimage_directory,
+	  rep_concat2 (rep_STR(rep_SYM(Qsawmill_directory)->value),
+		       "/images"));
     rep_INTERN_SPECIAL(image_load_path);
-    rep_SYM(Qimage_load_path)->value
-	= rep_list_2 (rep_string_dup("."), rep_SYM(Qimage_directory)->value);
+    Fset (Qimage_load_path,
+	  rep_list_2 (rep_string_dup("."), rep_SYM(Qimage_directory)->value));
+
+    rep_INTERN_SPECIAL(default_bevel_percent);
+    Fset (Qdefault_bevel_percent, rep_MAKE_INT(50));
 
     rep_INTERN(red);
     rep_INTERN(green);
