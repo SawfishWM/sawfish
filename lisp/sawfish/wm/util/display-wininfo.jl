@@ -76,20 +76,6 @@
 	(cons (quotient (- (screen-width) (car dims)) 2)
 	      (quotient (- (screen-height) (cdr dims)) 2)))))
 
-  ;; Fades PIXEL to white. PIXEL is a three or four element list, as used
-  ;; by image-map, etc..
-  (define (fade-pixel pixel)
-
-    ;; Calculates the average between the specified color and white
-    ;; The idea is taken from the tasklist applet.
-    (define (fade-color c)
-      (- 255 (quotient (- 255 c) 2)))
-
-    (list (fade-color (nth 0 pixel))
-	  (fade-color (nth 1 pixel))
-	  (fade-color (nth 2 pixel))
-	  (nth 3 pixel)))
-
   ;; Returns a list of strings describing window W in some way
   (define (window-info w)
     (list (concat (and (window-get w 'iconified) ?[)
@@ -100,7 +86,6 @@
 
   ;; What must be shown?
   ;;  * The window icon at left.
-  ;;  * If the window is iconified, the icon is faded.
   ;;  * At right, the window's title and (maybe) its class.
 
   (define (display-wininfo w)
@@ -152,10 +137,6 @@ icon (if available). With a null W any displayed information is removed."
 
 	       (x-destroy-gc gc)))))
 
-	;; fade the icon if the window is iconified
-	(when (and icon (window-get w 'iconified))
-	  (image-map fade-pixel icon))
-	
 	;; create new window
 	(setq info-window (x-create-window
 			   (get-window-pos w win-size) win-size 1

@@ -133,7 +133,6 @@
   (defcustom cycle-warp-pointer t
     "Warp the mouse pointer to windows as they're temporarily selected."
     :group (focus cycle)
-    :user-level expert
     :type boolean)
 
   (defcustom cycle-focus-windows t
