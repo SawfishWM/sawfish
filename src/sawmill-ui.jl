@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.11 1999/08/24 16:16:57 john Exp $
+;; $Id: sawmill-ui.jl,v 1.12 1999/08/25 11:23:13 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -66,6 +66,9 @@ fi
 
 ;; may be list or notebook
 (defvar ui-pages-style 'list)
+
+;; may be list, radio, or menu
+(defvar ui-set-style 'menu)
 
 
 ;; ui builder
@@ -378,29 +381,75 @@ fi
 (defun build-set (spec)
   (let*
       ((values (nth 1 spec))
-       (box (gtk-vbox-new nil 0))
        (buttons (make-vector (length values)))
+       (type (or (get-key spec ':widget) ui-set-style))
        (i 0)
        group)
     (unless (key-exists-p spec ':value)
       (set-key spec ':value (car values)))
-    (while values
-      (aset buttons i (gtk-radio-button-new-with-label-from-widget
-		       (if (zerop i)
-			   nil
-			 (aref buttons (1- i)))
-		       (symbol-name (car values))))
-      (gtk-toggle-button-set-state (aref buttons i)
-				   (eq (car values) (get-key spec ':value)))
-      (gtk-box-pack-start box (aref buttons i) nil nil)
-      (gtk-signal-connect (aref buttons i) "toggled"
-			  `(lambda (w)
-			     (when (gtk-toggle-button-active w)
-			       (ui-set ',spec ',(get-key spec ':variable)
-				       ',(car values)))))
-      (setq i (1+ i))
-      (setq values (cdr values)))
-    box))
+    (cond
+     ((eq type 'menu)
+      (let
+	  ((omenu (gtk-option-menu-new))
+	   (menu (gtk-menu-new))
+	   history)
+	(while values
+	  (aset buttons i (gtk-radio-menu-item-new-with-label-from-widget
+			   (if (zerop i) nil (aref buttons (1- i)))
+			   (symbol-name (car values))))
+	  (gtk-menu-append menu (aref buttons i))
+	  (when (eq (car values) (get-key spec ':value))
+	    (gtk-check-menu-item-set-state (aref buttons i) t)
+	    (setq history i))
+	  (gtk-widget-show (aref buttons i))
+	  (gtk-signal-connect (aref buttons i) "toggled"
+			      `(lambda (w)
+				 (when (gtk-check-menu-item-active w)
+				   (ui-set ',spec ',(get-key spec ':variable)
+					   ',(car values)))))
+	  (setq i (1+ i))
+	  (setq values (cdr values)))
+	(gtk-option-menu-set-menu omenu menu)
+	(gtk-option-menu-set-history omenu history)
+	omenu))
+     ((eq type 'list)
+      (let
+	  ((clist (gtk-clist-new 1)))
+	(gtk-clist-set-column-auto-resize clist 0 t)
+	(gtk-clist-set-selection-mode clist 'browse)
+	(while values
+	  (gtk-clist-append clist (vector (symbol-name (car values))))
+	  (when (eq (car values) (get-key spec ':value))
+	    (gtk-clist-select-row clist i 0)
+	    (gtk-clist-moveto clist i 0 nil 0))
+	  (setq i (1+ i))
+	  (setq values (cdr values)))
+	(gtk-signal-connect clist "select_row"
+			    `(lambda (clist row col)
+			       (build-set:select-row ',spec row)))
+	(setq spec (nconc spec (list ':clist clist)))
+	clist))
+     ((eq type 'radio)
+      (let
+	  ((box (gtk-vbox-new nil 0)))
+	(while values
+	  (aset buttons i (gtk-radio-button-new-with-label-from-widget
+			   (if (zerop i) nil (aref buttons (1- i)))
+			   (symbol-name (car values))))
+	  (when (eq (car values) (get-key spec ':history))
+	    (gtk-toggle-button-set-state (aref buttons i) t))
+	  (gtk-box-pack-start box (aref buttons i) nil nil)
+	  (gtk-signal-connect (aref buttons i) "toggled"
+			      `(lambda (w)
+				 (when (gtk-toggle-button-active w)
+				   (ui-set ',spec ',(get-key spec ':variable)
+					   ',(car values)))))
+	  (setq i (1+ i))
+	  (setq values (cdr values)))
+	box)))))
+
+(defun build-set:select-row (spec row)
+  (ui-set spec (get-key spec ':variable) (nth row (nth 1 spec))))
 
 
 ;; customizing keymaps
