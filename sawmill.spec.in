@@ -14,6 +14,7 @@ Source: ftp://ftp.dcs.warwick.ac.uk/people/John.Harper/sawmill/sawmill-%{ver}.ta
 URL: http://www.dcs.warwick.ac.uk/~john/sw/sawmill/
 Packager: John Harper <john@dcs.warwick.ac.uk>
 Buildroot: /var/tmp/%{nam}-root
+PreReq: /sbin/install-info
 
 %description
 This is an extensible window manager using a LISP-based scripting
@@ -56,9 +57,17 @@ mkdir -p $RPM_BUILD_ROOT%{_prefix}/share/control-center
 make prefix=$RPM_BUILD_ROOT%{_prefix} install
 gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawmill*
 
+%post
+/sbin/install-info /usr/info/sawmill.info.gz /usr/info/dir
+
+%preun
+if [ "$1" = 0 ]; then
+    /sbin/install-info --delete /usr/info/sawmill.info.gz /usr/info/dir
+fi
+
 %files
 %defattr(-,root,root)
-%doc README NEWS FAQ TODO po/sawmill.pot
+%doc README NEWS FAQ THANKS TODO po/sawmill.pot
 %{_prefix}/bin/sawmill
 %{_prefix}/bin/sawmill-client
 %{_prefix}/bin/sawmill-ui
