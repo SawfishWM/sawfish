@@ -1,3 +1,26 @@
+2000-10-14  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/placement/smart.jl: export the various sp-cost:
+	functions
+
+2000-10-12  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/ext/shade-hover.jl: miscellaneous improvements
+	inspired by a patch to the mailing list from Eli Barzilay
+	<eli@barzilay.org>. Unshading a hovered window doesn't flicker,
+	reshade the window if it loses focus
+
+	* sawfish/wm/commands.jl (call-command): allow pre-command-hook
+	to modify this-command and current-prefix-arg. If it sets
+	this-command to false then the command is ignored
+
+2000-10-11  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawfish/wm/stacking.jl (apply-group-order): swap do for let
+
+	* sawfish/wm/commands/x-cycle.jl (cycle-prefix): match `Foo -
+	...' as well as `Foo: ...'
+
 2000-10-09  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawfish/wm/stacking.jl (raise-windows, lower-windows):
