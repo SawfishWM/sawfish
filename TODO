@@ -37,8 +37,21 @@ Outstanding bugs
   ! the configuration tool doesn't use gtk engine themes correctly (cf.
     the scrollbars)
 
+    [ 22/9: this happens because the engine doesn't have a library
+      dependency on libglib.so. I could add RTLD_GLOBAL to
+      rep_open_dl_library () but this isn't a good idea since it would
+      expose the internals of all plugins to everything else..
+
+      the correct way to fix this is to fix the engine ]
+
   ! edge snapping doesn't always work correctly:
     <37E6D428.47F0F822@casquet.inet.net.nz>
+
+  ! install-sh script isn't found from subdirectories?
+
+    [workaround: install GNU fileutils]
+
+  ! grabbing S-C-Left doesn't work on Linux systems
 
 
 General tasks
