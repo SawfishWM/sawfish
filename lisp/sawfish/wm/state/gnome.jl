@@ -242,7 +242,9 @@
 (defun gnome-exit ()
   (destroy-window gnome-window-id)
   (delete-x-property 'root '_WIN_SUPPORTING_WM_CHECK)
-  (delete-x-property 'root '_WIN_PROTOCOLS))
+  (delete-x-property 'root '_WIN_PROTOCOLS)
+  (delete-x-property 'root '_WIN_AREA)
+  (delete-x-property 'root '_WIN_AREA_COUNT))
 
 (unless (or gnome-window-id batch-mode)
   (gnome-init))
