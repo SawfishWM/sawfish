@@ -97,7 +97,7 @@ where OPTIONS are any of:
 	     (let ((r (sawfish-client-eval
 		       `(progn
 			  (require 'rep.util.repl)
-			  (make-repl 'sawfish.wm.user)))))
+			  (make-repl 'user)))))
 	       (let-fluids ((current-repl r))
 		 (write standard-output "\nEnter `,help' to list commands.\n")
 		 (let loop ()
