@@ -44,7 +44,8 @@
     '(get-color-rgb get-color color-name color-rgb colorp get-cursor
       cursorp get-font font-name fontp text-width font-height
       screen-width screen-height get-x-property get-x-text-property
-      list-x-properties x-atom x-atom-name make-image copy-image
+      list-x-properties x-atom x-atom-name make-image
+      make-image-from-x-drawable copy-image
       flip-image-horizontally flip-image-vertically
       flip-image-diagonally image-get
       image-put imagep image-dimensions image-border set-image-border
