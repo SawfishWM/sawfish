@@ -187,16 +187,28 @@ translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
     if (rep_INT(EVENT_MODS(ev)) & EV_TYPE_KEY)
     {
 	u_int s = rep_INT(EVENT_MODS(ev)) & EV_MOD_MASK;
+	KeySym sym = rep_INT(EVENT_CODE(ev));
+	u_int k = XKeysymToKeycode (dpy, sym);
+	KeySym normal, shifted;
+
 	if (s & EV_MOD_META)
 	    s = (s & ~EV_MOD_META) | meta_mod;
 	if (s & EV_MOD_ALT)
 	    s = (s & ~EV_MOD_ALT) | alt_mod;
+
+	/* Check if we need a shift modifier */
+	normal = XKeycodeToKeysym (dpy, k, 0);
+	shifted = XKeycodeToKeysym (dpy, k, 1);
+	if (sym != normal && sym == shifted)
+	    s |= ShiftMask;
+
 	if (s & EV_MOD_RELEASE)
 	    s &= ~EV_MOD_RELEASE;
 	if (s == EV_MOD_ANY)
 	    s = AnyModifier;
+
 	*state = s;
-	*keycode = XKeysymToKeycode (dpy, rep_INT(EVENT_CODE(ev)));
+	*keycode = k;
 	return TRUE;
     }
     else
