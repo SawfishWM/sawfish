@@ -115,7 +115,8 @@
     (when from-user
       (window-put w 'frame-style style))      
     (setq fun (cdr (assq style frame-styles)))
-    (set-window-frame w (or (funcall fun w type) default-frame))))
+    (save-stacking-order
+     (set-window-frame w (or (funcall fun w type) default-frame)))))
 
 (defun set-frame-for-window (w &optional override type)
   (when (or override (not (window-frame w)))
@@ -136,11 +137,10 @@
 (add-hook 'add-window-hook 'set-frame-for-window t)
 
 (defun reframe-all-windows ()
-  (save-stacking-order
-    (mapc #'(lambda (w)
-	      (when (and (windowp w) (not (window-get w 'ignored)))
-		(set-frame-for-window w t (window-get w 'type))))
-	  (managed-windows))))
+  (mapc #'(lambda (w)
+	    (when (and (windowp w) (not (window-get w 'ignored)))
+	      (set-frame-for-window w t (window-get w 'type))))
+	(managed-windows)))
 
 
 ;; kludge different window decors by modifying the assumed window type
@@ -257,8 +257,12 @@
 (defun frame-style-menu ()
   (let
       ((styles (find-all-frame-styles)))
-    (mapcar #'(lambda (s)
-		(list (symbol-name s)
-		      `(lambda ()
-			 (set-window-frame-style (input-focus) ',s nil t))))
-	    styles)))
+    (nconc (mapcar #'(lambda (s)
+		       (list (symbol-name s)
+			     `(lambda ()
+				(set-window-frame-style
+				 (input-focus) ',s nil t))))
+		   styles)
+	   `(() ("Default" (lambda ()
+			     (window-put (input-focus) 'frame-style nil)
+			     (set-frame-for-window (input-focus) t)))))))
