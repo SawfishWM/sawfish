@@ -38,7 +38,14 @@ DEFSYM(blue, "blue");
 static repv
 make_image (ImlibImage *im, repv plist)
 {
-    Lisp_Image *f = rep_ALLOC_CELL(sizeof(Lisp_Image));
+    Lisp_Image *f;
+    for (f = image_list; f != 0; f = f->next)
+    {
+	if (f->image == im)
+	    /* XXX do what with the plist..? */
+	    return rep_VAL(f);
+    }
+    f = rep_ALLOC_CELL(sizeof(Lisp_Image));
     f->car = image_type;
     f->next = image_list;
     image_list = f;
@@ -106,7 +113,7 @@ Return a new image object, a clone of SOURCE-IMAGE.
     rep_DECLARE1(source, IMAGEP);
     im = Imlib_clone_image (imlib_id, VIMAGE(source)->image);
     if (im != 0)
-	return make_image (im, VIMAGE(source)->plist);
+	return make_image (im, Fcopy_sequence (VIMAGE(source)->plist));
     return Fsignal (Qerror,
 		    rep_list_2 (rep_string_dup("can't clone image"), source));
 }
@@ -306,7 +313,82 @@ CONTRAST).
     return img;
 }
 
+#if 0
+/* I don't this function is widespread yet.. */
+DEFUN("bevel-image", Fbevel_image, Sbevel_image,
+      (repv img, repv border, repv up), rep_Subr3) /*
+::doc:Sbevel-image::
+bevel-image IMAGE BORDER UP
+
+Draw a bevelled edge outline onto IMAGE. BORDER is (LEFT RIGHT TOP BOTTOM)
+defining the size of the bevel. If UP is non-nil the bevel is raised.
+::end:: */
+{
+    ImlibBorder bord;
+    rep_DECLARE1(img, IMAGEP);
+    rep_DECLARE2(border, rep_LISTP);
+    if (rep_CONSP(border))
+    {
+	bord.left = rep_CAR(border);
+	border = rep_CDR(border);
+	if (rep_CONSP(border))
+	{
+	    bord.right = rep_CAR(border);
+	    border = rep_CDR(border);
+	    if (rep_CONSP(border))
+	    {
+		bord.top = rep_CAR(border);
+		border = rep_CDR(border);
+		if (rep_CONSP(border))
+		    bord.bottom = rep_CAR(border);
+	    }
+	}
+    }
+    Imlib_bevel_image (imlib_id, VIMAGE(img)->image, &bord, up != Qnil);
+    Imlib_changed_image (imlib_id, VIMAGE(img)->image);
+    return img;
+}
+#endif
+
 /* XXX stubs for suitable Imlib functions... */
+
+DEFUN("make-sized-image", Fmake_sized_image, Smake_sized_image,
+      (repv width, repv height, repv r, repv g, repv b), rep_Subr5) /*
+::doc:Smake-sized-image::
+make-sized-image WIDTH HEIGHT [RED GREEN BLUE]
+
+Return a new image of dimensions (WIDTH, HEIGHT). The RED, GREEN and
+BLUE values define the color of its pixels (ranging from 0 to 65535).
+::end:: */
+{
+    u_char *data;
+    rep_DECLARE1(width, rep_INTP);
+    rep_DECLARE2(height, rep_INTP);
+    if (!rep_INTP(r))
+	r = rep_MAKE_INT(0);
+    if (!rep_INTP(g))
+	g = rep_MAKE_INT(0);
+    if (!rep_INTP(b))
+	b = rep_MAKE_INT(0);
+    data = rep_alloc (rep_INT(width) * rep_INT(height) * 3);
+    if (data != 0)
+    {
+	ImlibImage *im;
+	int i;
+	for (i = 0; i < rep_INT(width) * rep_INT(height) * 3; i += 3)
+	{
+	    data[i] = rep_INT(r);
+	    data[i+1] = rep_INT(g);
+	    data[i+2] = rep_INT(b);
+	}
+	im = Imlib_create_image_from_data (imlib_id, data, 0,
+					   rep_INT(width), rep_INT(height));
+	rep_free (data);
+	if (im != 0)
+	    return make_image (im, Qnil);
+    }
+    return Qnil;
+}
 
 
 /* type hooks */
@@ -376,6 +458,10 @@ images_init (void)
     rep_ADD_SUBR(Sset_image_border);
     rep_ADD_SUBR(Simage_modifier);
     rep_ADD_SUBR(Sset_image_modifier);
+    rep_ADD_SUBR(Smake_sized_image);
+#if 0
+    rep_ADD_SUBR(Sbevel_image);
+#endif
     rep_INTERN(image_directory);
     rep_SYM(Qimage_directory)->value
 	= rep_concat2 (rep_STR(rep_SYM(Qsawmill_directory)->value), "/images");
