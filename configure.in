@@ -25,7 +25,7 @@ AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR(etc)
 
 dnl Release versioning info
-version="0.28-pre"
+version="0.28"
 
 output_files="src/Makefile lisp/Makefile themes/Makefile\
  sounds/Makefile man/Makefile po/Makefile Makedefs Makefile sawfish.spec"
@@ -102,6 +102,9 @@ fi
 
 dnl Check for image handling libraries
 AM_PATH_IMLIB
+if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then : else
+  AC_MSG_ERROR([imlib must be built with support for png images])
+fi
 AC_DEFINE(HAVE_IMLIB,1)
 IMAGE_LIBS='${IMLIB_LIBS}'
 IMAGE_CFLAGS='${IMLIB_CFLAGS}'
