@@ -674,9 +674,10 @@ frame_part_exposer (XExposeEvent *ev, struct frame_part *fp)
 {
     if (ev->count == 0)
     {
-	/* expose events override the drawing mutex.. */
+	/* expose events override the drawing mutex,
+	   unless the server is grabbed.. */
 	bool old_mutex = frame_draw_mutex;
-	frame_draw_mutex = FALSE;
+	frame_draw_mutex = (Fserver_grabbed_p () != Qnil);
 	fp->drawn.bg = rep_NULL;
 	refresh_frame_part (fp);
 	frame_draw_mutex = old_mutex;
