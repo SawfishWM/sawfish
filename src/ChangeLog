@@ -1,3 +1,18 @@
+2000-08-31  John Harper  <john@dcs.warwick.ac.uk>
+
+	* keys.c (eval_input_event): removed `yow!' message and
+	associated call to Fbeep ()
+
+2000-08-31    <john@dcs.warwick.ac.uk>
+
+	* keys.c (window_getting_button_event): new function
+	(Fsynthesize_event): for pointer events use
+	window_getting_button_event () to locate a suitable window to
+	send the event to (one that selects for pointer events)
+	(adapted from E. Jay Berkenbilt <ejb@ql.org>, adapted from gwm)
+
+	* functions.c, frames.c, events.c: doc/comment fixes
+
 2000-08-30    <john@dcs.warwick.ac.uk>
 
 	* windows.c (Fset_input_focus): treat Qroot arg as Qnil (since
