@@ -1,5 +1,9 @@
 2000-02-27  John Harper  <john@dcs.warwick.ac.uk>
 
+	* edges.jl (edges-within-epsilon,
+	snap-window-position-to-edges): removed the need for separate
+	`hysteresis' state, much simpler now (from merlin@merlin.org)
+
 	* iconify.jl (uniconify-window): if the window is already in
 	the current workspace never remove it
 
