@@ -126,8 +126,6 @@ extern repv Qleft_edge, Qtop_edge, Qright_edge, Qbottom_edge;
 extern repv Qcursor, Qfocused, Qhighlighted, Qclicked;
 extern bool frame_state_mutex;
 extern void set_frame_shapes (Lisp_Window *w, bool atomic);
-extern void set_frame_part_bg (struct frame_part *fp);
-extern void set_frame_part_fg (struct frame_part *fp);
 extern void refresh_frame_part (struct frame_part *fp);
 extern void refresh_frame_parts (Lisp_Window *w);
 extern void create_window_frame (Lisp_Window *w);
