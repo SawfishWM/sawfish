@@ -45,6 +45,7 @@
 static int server_grabs;
 
 DEFSYM(root, "root");
+DEFSYM(after_restacking_hook, "after-restacking-hook");
 
 DEFUN("restack-windows", Frestack_windows, Srestack_windows,
       (repv list), rep_Subr1) /*
@@ -72,6 +73,7 @@ windows isn't affected.
 	list = rep_CDR(list);
     }
     XRestackWindows (dpy, frames, j);
+    Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
     return Qt;
 }
 
@@ -85,7 +87,10 @@ Bring WINDOW to the top of the display.
 {
     rep_DECLARE1(win, WINDOWP);
     if (VWIN(win)->reparented)
+    {
        XRaiseWindow (dpy, VWIN(win)->frame);
+       Fcall_hook (Qafter_restacking_hook, Qnil, Qnil);
+    }
     return win;
 }
 
@@ -99,7 +104,15 @@ just kill the owning client if not.
 WINDOW may be a window object or a numeric window id.
 ::end:: */
 {
-    Window w = x_win_from_arg (win);
+    Window w;
+
+    if (WINDOWP(win))
+    {
+	/* In case it's late in setting WM_DELETE_WINDOW */
+	get_window_protocols (VWIN(win));
+    }
+
+    w = x_win_from_arg (win);
     if (w == 0)
 	return WINDOWP(win) ? Qnil : rep_signal_arg_error (win, 1);
     if (WINDOWP(win) && VWIN(win)->does_wm_delete_window)
@@ -921,7 +934,7 @@ Return the process-id of the running Lisp interpreter.
 
 /* Displaying a `message' window */
 
-Window message_win;
+static Window message_win;
 
 static struct {
     GC gc;
@@ -931,7 +944,7 @@ static struct {
 #define MSG_PAD_X 20
 #define MSG_PAD_Y 10
 
-void
+static void
 refresh_message_window ()
 {
     if (message_win != 0)
@@ -953,6 +966,13 @@ refresh_message_window ()
 		     MSG_PAD_Y + VFONT(message.font)->font->ascent,
 		     rep_STR(message.text), rep_STRING_LEN(message.text));
     }
+}
+
+static void
+message_event_handler (XEvent *ev)
+{
+    if (ev->type == Expose)
+	refresh_message_window ();
 }
 
 DEFSTRING(white, "white");
@@ -983,6 +1003,7 @@ Note that newlines in TEXT are ignored. This may change in the future.
     {
 	if (message_win != 0)
 	{
+	    deregister_event_handler (message_win);
 	    XDestroyWindow (dpy, message_win);
 	    message_win = 0;
 	}
@@ -1059,6 +1080,7 @@ Note that newlines in TEXT are ignored. This may change in the future.
 					 | CWColormap, &attr);
 	    if (message_win == 0)
 		return Qnil;
+	    register_event_handler (message_win, message_event_handler);
 	    XMapRaised (dpy, message_win);
 	}
 	else
@@ -1116,6 +1138,7 @@ functions_init (void)
     rep_ADD_SUBR(Sgetpid);
     rep_ADD_SUBR(Sshow_message);
     rep_INTERN(root);
+    rep_INTERN(after_restacking_hook);
 
     rep_mark_static (&message.text);
     rep_mark_static (&message.fg);
