@@ -253,5 +253,5 @@ unused before killing it.")
   "Display the applications menu."
   (interactive)
   (if root-menu
-      (popup-menu (cdr apps-menu))
+      (popup-menu apps-menu)
     (beep)))
