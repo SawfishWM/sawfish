@@ -31,7 +31,8 @@
 	  sawfish.wm.windows
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
-	  sawfish.wm.state.maximize)
+	  sawfish.wm.state.maximize
+	  sawfish.wm.state.iconify)
 
   ;; todo:
 
@@ -77,7 +78,7 @@
 
 ;;; setting the client list hints
 
-  (define (update-client-list-hints)
+  (define (update-client-list-hints #!key only-stacking-list)
     (define (set-prop lst prop)
       (let loop ((rest lst)
 		 (collected '()))
@@ -88,8 +89,9 @@
 	      ((window-mapped-p (car rest))
 	       (loop (cdr rest) (cons (window-id (car rest)) collected)))
 	      (t (loop (cdr rest) collected)))))
-    (set-prop (managed-windows) '_NET_CLIENT_LIST)
-    (set-prop (stacking-order) '_NET_CLIENT_LIST_STACKING))
+    (unless only-stacking-list
+      (set-prop (managed-windows) '_NET_CLIENT_LIST))
+    (set-prop (nreverse (stacking-order)) '_NET_CLIENT_LIST_STACKING))
 
 
 ;; setting the desktop / viewport hints
@@ -148,7 +150,7 @@
       (define (set-window-hints w)
 	(let
 	    ;; XXX the gnome-wm standard sucks..!
-	    ((space (and (not (window-get w 'sticky))
+	    ((space (and (not (window-sticky-p/workspace w))
 			 (window-get w 'swapped-in))))
 	  (if space
 	      (set-x-property w '_NET_WM_DESKTOP
@@ -304,16 +306,14 @@
   (define-wm-spec-window-state
    '_NET_WM_STATE_STICKY
    (lambda (w mode)
-     (require 'sawfish.wm.state.iconify)
      (case mode
        ((init)   (window-put w 'sticky-viewport t))
-       ((remove) (window-put w 'sticky-viewport nil))
-       ((add)    (window-put w 'sticky-viewport t))
-       ((toggle) (window-put w 'sticky-viewport
-			     (not (window-get w 'sticky-viewport))))
-       ((get)    (window-get w 'sticky-viewport)))
-     (unless (memq mode '(init get))
-       (call-window-hook 'window-state-change-hook w (list '(sticky))))))
+       ((remove) (make-window-unsticky/viewport w))
+       ((add)    (make-window-sticky/viewport w))
+       ((toggle) (if (window-sticky-p/viewport w)
+		     (make-window-unsticky/viewport w)
+		   (make-window-sticky/viewport w)))
+       ((get)    (window-sticky-p/viewport w)))))
 
   (define (wm-spec-maximize-handler direction)
     (lambda (w mode)
@@ -333,7 +333,7 @@
 
   (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED_VERT
 			       (wm-spec-maximize-handler 'vertical))
-  (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED_HORIZ
+  (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED_HORZ
 			       (wm-spec-maximize-handler 'horizontal))
   (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED
 			       (wm-spec-maximize-handler nil)
@@ -406,9 +406,9 @@
 	     (loop (1+ i) (cons (aref data i) out)))))
 
 	((_NET_ACTIVE_WINDOW)
+	 (require 'sawfish.wm.util.display-window)
 	 (when (and (windowp w) (window-mapped-p w))
-	   ;; XXX select workspace / viewport automatically?
-	   (set-input-focus w)))
+	   (display-window w)))
 
 	((_NET_WM_STATE)
 	 (when (windowp w)
@@ -418,15 +418,25 @@
 		 (atom1 (x-atom-name (aref data 1)))
 		 (atom2 (x-atom-name (aref data 2))))
 	     (when (or (and (eq atom1 '_NET_WM_STATE_MAXIMIZED_VERT)
-			    (eq atom2 '_NET_WM_STATE_MAXIMIZED_HORIZ))
+			    (eq atom2 '_NET_WM_STATE_MAXIMIZED_HORZ))
 		       (and (eq atom2 '_NET_WM_STATE_MAXIMIZED_VERT)
-			    (eq atom1 '_NET_WM_STATE_MAXIMIZED_HORIZ)))
+			    (eq atom1 '_NET_WM_STATE_MAXIMIZED_HORZ)))
 	       (setq atom1 '_NET_WM_STATE_MAXIMIZED)
 	       (setq atom2 nil))
 	     (when atom1
 	       (call-state-fun w atom1 mode))
 	     (when atom2
 	       (call-state-fun w atom2 mode)))))
+
+	((_NET_WM_DESKTOP)
+	 (when (windowp w)
+	   (let ((desktop (aref data 0)))
+	     (if (eql desktop #xffffffff)
+		 ;; making window sticky
+		 (make-window-sticky/workspace w)
+	       ;; changing the desktop
+	       (make-window-unsticky/workspace w)
+	       (send-window-to-workspace-from-first w desktop)))))
 
 	(t (setq handled nil)))
       handled))
@@ -485,7 +495,7 @@
     (add-hook 'destroy-notify-hook update-client-list-hints)
     (add-hook 'map-notify-hook update-client-list-hints)
     (add-hook 'unmap-notify-hook update-client-list-hints)
-    (add-hook 'workspace-state-change-hook update-client-list-hints)
+    (add-hook 'after-restacking-hook update-client-list-hints)
 
     (add-hook 'before-add-window-hook honour-client-state)
     (add-hook 'add-window-hook update-client-state)

@@ -27,6 +27,12 @@
 	    uniconify-window
 	    toggle-window-iconified
 	    iconify-workspace-windows
+	    window-sticky-p/workspace
+	    make-window-sticky/workspace
+	    make-window-unsticky/workspace
+	    window-sticky-p/viewport
+	    make-window-sticky/viewport
+	    make-window-unsticky/viewport
 	    window-sticky-p
 	    make-window-sticky
 	    make-window-unsticky
@@ -165,29 +171,66 @@
 
 ;;; sticky-ness, could be in a separate file..
 
-  (define (window-sticky-p w)
-    (or (window-get w 'sticky) (window-get w 'sticky-viewport)))
+  ;; workspace sticky code
 
-  (define (make-window-sticky w)
-    (unless (and (window-get w 'sticky) (window-get w 'sticky-viewport))
+  (define (window-sticky-p/workspace w) (window-get w 'sticky))
+
+  (define (emit-sticky-hook w)
+    (call-window-hook 'window-state-change-hook w (list '(sticky))))
+
+  (define (make-window-sticky/workspace w #!key no-hooks)
+    (unless (window-sticky-p/workspace w)
       (ws-remove-window w t)
+      (window-put w 'sticky t)
+      (unless no-hooks
+	(emit-sticky-hook w))))
+
+  (define (make-window-unsticky/workspace w #!key no-hooks)
+    (when (window-sticky-p/workspace w)
+      (window-put w 'sticky nil)
+      (ws-add-window-to-space w current-workspace)
+      (unless no-hooks
+	(emit-sticky-hook w))))
+
+  ;; viewport sticky code
+
+  (define (window-sticky-p/viewport w) (window-get w 'sticky-viewport))
+
+  (define (make-window-sticky/viewport w #!key no-hooks)
+    (unless (window-sticky-p/viewport w)
       (when (window-outside-viewport-p w)
 	(move-window-to-current-viewport w))
-      (window-put w 'sticky t)
       (window-put w 'sticky-viewport t)
-      (call-window-hook 'window-state-change-hook w (list '(sticky)))))
+      (unless no-hooks
+	(emit-sticky-hook w))))
+
+  (define (make-window-unsticky/viewport w #!key no-hooks)
+    (when (window-sticky-p/viewport w)
+      (window-put w 'sticky-viewport nil)
+      (unless no-hooks
+	(emit-sticky-hook w))))
+
+  ;; combined code
+
+  (define (window-sticky-p w)
+    (or (window-sticky-p/workspace w) (window-sticky-p/viewport w)))
+
+  (define (make-window-sticky w)
+    (unless (window-sticky-p w)
+      (make-window-sticky/workspace w #:no-hooks t)
+      (make-window-sticky/viewport w #:no-hooks t)
+      (emit-sticky-hook w)))
   
   (define (make-window-unsticky w)
-    (when (or (window-get w 'sticky) (window-get w 'sticky-viewport))
-      (window-put w 'sticky nil)
-      (window-put w 'sticky-viewport nil)
-      (ws-add-window-to-space w current-workspace)
-      (call-window-hook 'window-state-change-hook w (list '(sticky)))))
+    (when (window-sticky-p w)
+      (make-window-unsticky/workspace w #:no-hooks t)
+      (make-window-unsticky/viewport w #:no-hooks t)
+      (emit-sticky-hook w)))
   
   (define (toggle-window-sticky w)
     "Toggle the `stickiness' of the window--whether or not it is a member of
 all workspaces."
-    (if (or (window-get w 'sticky) (window-get w 'sticky-viewport))
+    (if (window-sticky-p w)
 	(make-window-unsticky w)
       (make-window-sticky w)))
 

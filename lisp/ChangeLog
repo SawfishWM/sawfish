@@ -1,3 +1,29 @@
+2001-02-23  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/iconify.jl (window-sticky-p/workspace,
+	make-window-sticky/workspace, make-window-unsticky/workspace,
+	window-sticky-p/viewport, make-window-sticky/viewport,
+	make-window-unsticky/viewport): new functions, used to
+	implement the combined sticky functions. They're also exported
+
+	* sawfish/wm/state/wm-spec.jl: uses the new /workspace or
+	/viewport sticky functions throughout
+
+	Fixed typo of _NET_WM_STATE_MAXIMIZED_HORIZ instead of HORZ
+
+	Add update-client-list-hints to after-restacking-hook instead
+	of workspace-state-change-hook
+
+	(update-client-list-hints): added keyword arg
+	ONLY-STACKING-LIST; reverse the result of the stacking-order
+	function before storing it in the _NET_CLIENT_LIST_STACKING
+	property
+
+	(client-message-handler): use the display-window function to
+	implement the _NET_ACTIVE_WINDOW request. Added a
+	_NET_WM_DESKTOP handler - handles making the window sticky or
+	changing its workspace
+	
 2001-02-22  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/placement.jl (place-window): don't try to place
