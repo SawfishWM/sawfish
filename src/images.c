@@ -1090,8 +1090,8 @@ at position (X, Y), or (0, 0) if no position is given.
     w2 = image_width (VIMAGE (img2));
     h2 = image_height (VIMAGE (img2));
 
-    copy_w = MAX (w2, w1 - rep_INT (x));
-    copy_h = MAX (h2, h1 - rep_INT (y));
+    copy_w = MIN (w2, w1 - rep_INT (x));
+    copy_h = MIN (h2, h1 - rep_INT (y));
     
 #if defined HAVE_IMLIB
     {
@@ -1113,7 +1113,7 @@ at position (X, Y), or (0, 0) if no position is given.
 		    img1_pixel = img1_rgb + (((rep_INT (y) + row) * w1)
 					     + (rep_INT (x) + col)) * 3;
 		    /* constant size, so should be inlined */
-		    memcpy (img2_pixel, img1_pixel, 3);
+		    memcpy (img1_pixel, img2_pixel, 3);
 		}
 	    }
 	}
@@ -1121,7 +1121,7 @@ at position (X, Y), or (0, 0) if no position is given.
 #elif defined HAVE_GDK_PIXBUF
     gdk_pixbuf_composite (VIMAGE (img2)->image, VIMAGE (img1)->image,
 			  rep_INT (x), rep_INT (y),
-			  copy_w, copy_h, 0.0, 0.0, 1.0, 1.0,
+			  copy_w, copy_h, rep_INT (x), rep_INT (y), 1.0, 1.0,
 			  interp_type, 255);
 #endif
 
