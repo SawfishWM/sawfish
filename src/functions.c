@@ -1150,13 +1150,13 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	    message.fg = rep_CDR(tem);
 	    if (!COLORP(message.fg))
 	    {
-		message.fg = Fget_color (message.fg);
+		message.fg = Fget_color (message.fg, Qnil);
 		if (!message.fg)
 		    return rep_NULL;
 	    }
 	}
 	if (!COLORP(message.fg))
-	    message.fg = Fget_color (rep_VAL(&black));
+	    message.fg = Fget_color (rep_VAL(&black), Qnil);
 	if (!COLORP(message.fg))
 	    return rep_signal_arg_error (Qforeground, 1);
 
@@ -1166,13 +1166,13 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	    message.bg = rep_CDR(tem);
 	    if (!COLORP(message.bg))
 	    {
-		message.bg = Fget_color (message.bg);
+		message.bg = Fget_color (message.bg, Qnil);
 		if (!message.bg)
 		    return rep_NULL;
 	    }
 	}
 	if (!COLORP(message.bg))
-	    message.bg = Fget_color (rep_VAL(&white));
+	    message.bg = Fget_color (rep_VAL(&white), Qnil);
 	if (!COLORP(message.bg))
 	    return rep_signal_arg_error (Qbackground, 1);
 

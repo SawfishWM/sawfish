@@ -25,8 +25,8 @@
 /* from colors.c */
 extern int color_type;
 extern repv Qdefault_foreground;
-extern repv Fget_color_rgb (repv red, repv green, repv blue);
-extern repv Fget_color (repv name);
+extern repv Fget_color_rgb (repv red, repv green, repv blue, repv alpha);
+extern repv Fget_color (repv name, repv alpha);
 extern repv Fcolor_name (repv color);
 extern repv Fcolor_rgb (repv color);
 extern repv Fcolorp (repv arg);

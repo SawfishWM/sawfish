@@ -1109,6 +1109,12 @@ get_pattern_prop (struct frame_part *fp, repv *data, repv (*conv)(repv data),
     return TRUE;
 }
 
+static repv
+get_color (repv name)
+{
+    return Fget_color (name, Qnil);
+}
+
 static bool
 build_frame_part (struct frame_part *fp)
 {
@@ -1226,14 +1232,14 @@ build_frame_part (struct frame_part *fp)
 	fp->renderer = Qnil;
 
     /* get background images or colors */
-    if (!get_pattern_prop (fp, fp->bg, Fget_color,
+    if (!get_pattern_prop (fp, fp->bg, get_color,
 			   Qbackground, class_elt, ov_class_elt))
     {
 	goto next_part;
     }
 
     /* get foreground colors or images */
-    if (!get_pattern_prop (fp, fp->fg, Fget_color,
+    if (!get_pattern_prop (fp, fp->fg, get_color,
 			   Qforeground, class_elt, ov_class_elt))
     {
 	goto next_part;

@@ -1,3 +1,19 @@
+2002-11-03  John Harper  <jsh@unfactored.org>
+
+	* merged color changes from HEAD:
+
+	* sawmill.h (Lisp_Color): now contains alpha value
+
+	* colors.c (Fget_color_rgb, Fget_color): both now take an extra
+	ALPHA parameter
+	(Fcolor_rgb, Fcolor_rgb_8): both now return an extra element in
+	the list, the alpha value
+
+	* fonts.c (xft_draw): use alpha field in color, instead of
+	defaulting to fully opaque
+
+	* images.c, functions.c, frames.c, cursors.c: updated callers
+
 2002-11-02  John Harper  <jsh@unfactored.org>
 
 	* merged font changes from HEAD:

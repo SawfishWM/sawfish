@@ -592,7 +592,8 @@ image-shape-color IMAGE
     else
 	return Fget_color_rgb (rep_MAKE_INT(shape.r * 256),
 			       rep_MAKE_INT(shape.g * 256),
-			       rep_MAKE_INT(shape.b * 256));
+			       rep_MAKE_INT(shape.b * 256),
+			       Qnil);
 #elif defined HAVE_GDK_PIXBUF
     fprintf (stderr, "shape colors are unimplemented for gdk-pixbuf\n");
     return Qnil;
