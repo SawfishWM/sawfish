@@ -133,7 +133,8 @@
 	     ;; create a menu item
 	     `(,(or name exec)
 	       (system ,(concat (if terminal
-				    (concat "xterm -e " exec)
+				    ;; XXX hope that this supports `-e'
+				    (concat xterm-program " -e " exec)
 				  exec) " &"))))))))
 
 (defun gnome-menu-read-order (filename)
