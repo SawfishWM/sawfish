@@ -1,5 +1,10 @@
 2000-11-14  John Harper  <jsh@eazel.com>
 
+	* sawfish/wm/util/window-order.jl (on-viewport-change):
+	reinstated this function; this time it removes ordering
+	information from all viewport-sticky windows in the current
+	workspace/viewport pair
+
 	* sawfish/wm/commands/grow-pack.jl (gp-avoid-windows): ignore
 	unmapped windows
 

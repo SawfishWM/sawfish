@@ -97,9 +97,21 @@ function will restrict its search to the elements of this list."
   (define (window-order-focus-most-recent)
     (set-input-focus (window-order-most-recent)))
 
+  (define (on-viewport-change)
+    ;; The problem is that any sticky windows that have been focused once
+    ;; will _always_ rise to the top of the order when switching viewports
+    ;; (since the topmost window is _always_ focused when entering a new
+    ;; workspace). The hacky solution is to remove the order of any sticky
+    ;; windows
+    (let ((order (window-order current-workspace)))
+      (mapc (lambda (w)
+	      (when (window-get w 'sticky-viewport)
+		(window-put w 'order nil))) order))
+    (window-order-focus-most-recent))
+
   (sm-add-saved-properties 'order)
   (add-swapped-properties 'order)
 
   (add-hook 'sm-after-restore-hook window-order-compress)
   (add-hook 'iconify-window-hook window-order-pop)
-  (add-hook 'viewport-moved-hook window-order-focus-most-recent))
+  (add-hook 'viewport-moved-hook on-viewport-change))
