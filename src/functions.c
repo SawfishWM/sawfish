@@ -927,8 +927,7 @@ refresh_message_window ()
 
 	values.foreground = VCOLOR(message.fg)->pixel;
 	values.background = VCOLOR(message.bg)->pixel;
-	values.font = VFONT(message.font)->font->fid;
-	mask = GCForeground | GCBackground | GCFont;
+	mask = GCForeground | GCBackground;
 
 	if (message.gc == 0)
 	    message.gc = XCreateGC (dpy, message_win, mask, &values);
@@ -948,19 +947,20 @@ refresh_message_window ()
 		offset = MSG_PAD_X;
 	    else
 	    {
-		int width = XTextWidth (VFONT(message.font)->font,
-					ptr, end - ptr);
+		int width = XmbTextEscapement (VFONT(message.font)->font,
+					       ptr, end - ptr);
 		if (message.justify == Qright)
 		    offset = message.width - (width + MSG_PAD_X);
 		else
 		    offset = (message.width - width) / 2;
 	    }
-	    XDrawString (dpy, message_win, message.gc, offset,
-			 MSG_PAD_Y
-			 + row * (VFONT(message.font)->font->ascent
-				  + VFONT(message.font)->font->descent
-				  + message.spacing)
-			 + VFONT(message.font)->font->ascent, ptr, end - ptr);
+	    XmbDrawString (dpy, message_win, VFONT(message.font)->font,
+			   message.gc, offset,
+			   MSG_PAD_Y
+			   + row * (VFONT(message.font)->ascent
+				    + VFONT(message.font)->descent
+				    + message.spacing)
+			   + VFONT(message.font)->ascent, ptr, end - ptr);
 	    row++;
 	    ptr = end;
 	    if (*ptr == '\n')
@@ -1060,8 +1060,8 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 		char *end = strchr (ptr, '\n');
 		if (end == 0)
 		    end = ptr + strlen (ptr);
-		text_width = XTextWidth (VFONT(message.font)->font,
-					 ptr, end - ptr);
+		text_width = XmbTextEscapement (VFONT(message.font)->font,
+						ptr, end - ptr);
 		max_width = MAX(max_width, text_width);
 		rows++;
 		ptr = end;

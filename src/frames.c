@@ -475,8 +475,9 @@ set_frame_part_fg (struct frame_part *fp)
 		length = rep_STRING_LEN(result);
 	    }
 
-	    width = XTextWidth (VFONT(font)->font, rep_STR(string), length);
-	    height = VFONT(font)->font->ascent + VFONT(font)->font->descent;
+	    width = XmbTextEscapement (VFONT(font)->font, rep_STR(string),
+				       length);
+	    height = VFONT(font)->ascent + VFONT(font)->descent;
 	}
 
 	if (fp->x_justify == Qcenter)
@@ -584,11 +585,6 @@ set_frame_part_fg (struct frame_part *fp)
 		set_frame_part_bg (fp);
 	    }
 
-	    if (FONTP(font))
-	    {
-		gcv.font = VFONT(font)->font->fid;
-		gcv_mask |= GCFont;
-	    }
 	    if (COLORP(fg))
 	    {
 		gcv.foreground = VCOLOR(fg)->pixel;
@@ -596,8 +592,8 @@ set_frame_part_fg (struct frame_part *fp)
 	    }
 
 	    XChangeGC (dpy, fp->gc, gcv_mask, &gcv);
-	    XDrawString (dpy, fp->id, fp->gc, x, y + VFONT(font)->font->ascent,
-			 rep_STR(string), length);
+	    XmbDrawString (dpy, fp->id, VFONT(font)->font, fp->gc, x,
+			   y + VFONT(font)->ascent, rep_STR(string), length);
 
 	    fp->drawn.text = string;
 	}

@@ -150,8 +150,9 @@ typedef struct lisp_font {
     repv car;
     struct lisp_font *next;
     repv name;
-    XFontStruct *font;
+    XFontSet font;
     repv plist;
+    int ascent, descent;
 } Lisp_Font;
 
 #define FONTP(v)	rep_CELL16_TYPEP(v, font_type)

@@ -42,9 +42,17 @@ font specifier string).
 	f = f->next;
     if (f == 0)
     {
-	XFontStruct *font = XLoadQueryFont (dpy, rep_STR(name));
+	XFontSet font;
+	char **missing_charset_list, *def_string;
+	int num_missing_charset_list;
+	font = XCreateFontSet (dpy, rep_STR(name), &missing_charset_list,
+			       &num_missing_charset_list, &def_string);
 	if (font != 0)
 	{
+	    XFontStruct **fstrs;
+	    char **font_names;
+	    int i, num_fonts;
+	    num_fonts = XFontsOfFontSet (font, &fstrs, &font_names);
 	    f = rep_ALLOC_CELL(sizeof(Lisp_Font));
 	    rep_data_after_gc += sizeof (Lisp_Font);
 	    f->car = font_type;
@@ -53,6 +61,14 @@ font specifier string).
 	    f->name = name;
 	    f->font = font;
 	    f->plist = Qnil;
+	    f->ascent = f->descent = 0;
+	    for (i = 0; i < num_fonts; i++)
+	    {
+		if (fstrs[i]->ascent > f->ascent)
+		    f->ascent = fstrs[i]->ascent;
+		if (fstrs[i]->descent > f->descent)
+		    f->descent = fstrs[i]->descent;
+	    }
 	}
 	else
 	{
@@ -140,8 +156,8 @@ the text STRING using font object FONT (or the default-font).
     if (font == Qnil)
 	font = Fsymbol_value (Qdefault_font, Qt);
     rep_DECLARE2(font, FONTP);
-    return rep_MAKE_INT(XTextWidth (VFONT(font)->font, rep_STR(string),
-				    rep_STRING_LEN(string)));
+    return rep_MAKE_INT(XmbTextEscapement (VFONT(font)->font, rep_STR(string),
+					   rep_STRING_LEN(string)));
 }
 
 DEFUN("font-height", Ffont_height, Sfont_height, (repv font), rep_Subr1) /*
@@ -155,8 +171,7 @@ default-font).
     if (font == Qnil)
 	font = Fsymbol_value (Qdefault_font, Qt);
     rep_DECLARE1(font, FONTP);
-    return rep_MAKE_INT(VFONT(font)->font->ascent
-			+ VFONT(font)->font->descent);
+    return rep_MAKE_INT(VFONT(font)->ascent + VFONT(font)->descent);
 }
 
 
@@ -193,7 +208,7 @@ font_sweep (void)
 	Lisp_Font *next = w->next;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
 	{
-	    XFreeFont (dpy, w->font);
+	    XFreeFontSet (dpy, w->font);
 	    rep_FREE_CELL(w);
 	}
 	else
