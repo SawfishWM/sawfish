@@ -43,10 +43,7 @@ extern void cursors_kill (void);
 
 /* from commands.c */
 extern repv this_command, last_command, Qpost_command_hook, Qpre_command_hook;
-extern repv var_this_command (repv arg);
-extern repv var_last_command (repv arg);
-extern repv var_prefix_arg (repv arg);
-extern repv var_current_prefix_arg (repv arg);
+extern repv Qthis_command, Qlast_command, Qprefix_arg, Qcurrent_prefix_arg;
 extern repv Fcall_command (repv cmd, repv Farg);
 extern repv Fprefix_numeric_argument (repv arg);
 extern repv Finteractive (repv arg_list);

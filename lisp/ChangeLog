@@ -1,3 +1,17 @@
+2000-03-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* prompt.jl (prompt-display-fun): function to somehow format
+	the prompt contents before displaying it
+	(prompt): use call-with-keyboard-grabbed
+
+	* prompt-extras.jl (pwd-prompt): new function
+
+	* functions.jl (call-with-keyboard-grabbed): new function,
+	allows nested keyboard grabbing to work correctly (only
+	ungrabbing when the outermost exits)
+
+	* keymap.jl (read-event): use call-with-keyboard-grabbed
+
 2000-02-29  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keymaps.jl (global-keymap): bind A-x to cc-with-output-to-screen

@@ -1,3 +1,14 @@
+2000-03-02  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.c (list_frame_generator): reorder some operations,
+	maybe less flicker when resizing opaquely?
+
+	* keys.c: support multi-key bindings. Create them by binding an
+	event in one keymap to another keymap (or the name of the
+	second keymap). Also, try to detect and avoid situations where
+	the input devices are grabbed but we're not going to use the
+	input (and thus get locked in an inner event loop)
+
 2000-03-01  John Harper  <john@dcs.warwick.ac.uk>
 
 	* x.c (Fx_fill_polygon): new function

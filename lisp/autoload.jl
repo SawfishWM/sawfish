@@ -173,4 +173,5 @@
 (autoload 'call-command-with-output-to-screen "with-output" t)
 (autoload 'prompt-for-string "prompt-extras")
 (autoload 'prompt-for-number "prompt-extras")
+(autoload 'pwd-prompt "prompt-extras")
 ;;; ::autoload-end::
