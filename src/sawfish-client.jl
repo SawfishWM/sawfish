@@ -44,7 +44,7 @@ where OPTIONS are any of:
 	-		Read lines of input until EOF, evaluating each
 			 one as it is read
 	--		Read forms from standard input until EOF, evaluating
-			 the whole lot in one go (inside a progn)"))
+			 the whole lot in one go (inside a progn)\n"))
 
 (define (exit n) (throw 'quit n))
 
@@ -54,8 +54,7 @@ where OPTIONS are any of:
     (when dpy
       (sawfish-client-display dpy)))
 
-  (when (or (get-command-line-option "--help")
-	    (get-command-line-option "-?"))
+  (when (get-command-line-option "--help")
     (usage)
     (exit 0))
 
@@ -130,8 +129,10 @@ where OPTIONS are any of:
 				 "\)")))
 	       (loop (cdr args))))
 
-	    (t (format standard-error "unknown option: %s\n" (car args))
-	       (usage)
+	    (t (format standard-error
+		       "sawfish-client: unknown option `%s'\n" (car args))
+	       (format standard-error
+		       "Try `sawfish-client --help' for more information.\n")
 	       (exit 1))))
     (exit 0)))
       
