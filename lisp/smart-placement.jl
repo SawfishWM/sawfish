@@ -71,22 +71,20 @@ A value between 0 and 1023 inclusive.")
 ;; (X-EDGES . Y-EDGES)
 (defun sp-make-grid (rects &optional with-root)
   (let*
-      ((grid (grid-from-rectangles rects with-root)))
-    (rplaca grid (sort (sp-prune-points (car grid) sp-max-points)))
-    (rplacd grid (sort (sp-prune-points (cdr grid) sp-max-points)))
+      ((grid (grid-from-rectangles rects)))
+    (rplaca grid (sort (list* 0 (screen-width)
+			      (sp-prune-points (car grid) sp-max-points))))
+    (rplacd grid (sort (list* 0 (screen-height)
+			      (sp-prune-points (cdr grid) sp-max-points))))
     grid))
 
 (defun sp-prune-points (points maximum)
   (let*
       ((total (length points))
-       (cutoff (- total maximum))
-       tem)
-    (setq tem points)
-    (while (cdr (cdr tem))
-      (if (< (random total) cutoff)
-          (rplacd tem (cdr (cdr tem)))
-        (setq tem (cdr tem))))
-    points))
+       (cutoff (* (- total maximum) 100)))
+    (setq total (* total 100))
+    (delete-if (lambda (x)
+		 (> (random total) cutoff)) points)))
 
 ;; returns the list of windows to compare with when overlapping, by
 ;; default windows with their `ignored' property set are dropped
@@ -232,7 +230,8 @@ A value between 0 and 1023 inclusive.")
 		   (aref edges 2) (aref edges 3)))
 
     ;; factor in the two quantities scaled upto sp-cost-max by sp-area-weight
-    (+ (/ (* sp-area-weight (* x-cross y-cross)) (* x-total y-total))
+    (+ (/ (* sp-area-weight (* x-cross y-cross))
+	  (* x-total y-total))
        (/ (* (- sp-cost-max sp-area-weight) edges)
 	  (+ (* 2 (car dims)) (* 2 (cdr dims)))))))
 
