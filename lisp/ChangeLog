@@ -1,3 +1,13 @@
+2000-06-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* stacking.jl: rewritten to be totally `constraint' based.
+	(Actually these constraints are just predicates.) Anyway, this
+	lets me generalize the layer code into one rule, and to do
+	proper stacking of transients using other rules. (So, e.g.,
+	when (eq transients-above 'parents), transient windows are
+	actually only stacked _their own_ parents -- two people asked
+	me for this today). Slightly broken window-on-top-p?
+
 2000-06-24  John Harper  <john@dcs.warwick.ac.uk>
 
 	* iconify.jl (iconify-ignored): new option, whether or not to
