@@ -27,6 +27,7 @@
 
     (open rep
 	  rep.system
+	  rep.io.timers
 	  sawfish.wm.custom
 	  sawfish.wm.windows
 	  sawfish.wm.misc
@@ -39,7 +40,6 @@
 
   ;; for the compiler's benefit
   (eval-when-compile (require 'sawfish.wm.util.flippers))
-  (eval-when-compile (require 'rep.io.timers))
 
   (defgroup edge-flip "Edge Flipping"
     :group workspace
@@ -92,7 +92,6 @@
     (if (and edge-flip-enabled (not edge-flip-only-when-moving))
 	(progn
 	  (require 'sawfish.wm.util.flippers)
-	  (require 'rep.io.timers)
 	  (enable-flippers))
       (when (featurep 'sawfish.wm.util.flippers)
 	(disable-flippers))))
