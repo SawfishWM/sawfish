@@ -56,6 +56,9 @@ the input focus to the transient window."
   "A list of regular expressions matching window names that exist across
 workspaces.")
 
+;; number of layers above parent/normal-level for transients
+(defvar transient-layer-delta 2)
+
 
 ;; hooks
 
@@ -93,9 +96,12 @@ workspaces.")
 		     (eq (input-focus) parent)
 		     (window-really-wants-input-p w))
 	    (set-input-focus w)
-	    (setq set-focus t))
-	  (when transients-above-parents
-	    (set-window-depth w (1+ (window-get parent 'depth)))))))
+	    (setq set-focus t)))
+	(when transients-above-parents
+	  (set-window-depth w (if parent
+				  (+ (window-get parent 'depth)
+				     transient-layer-delta)
+				transient-layer-delta)))))
     (when (and (not set-focus)
 	       focus-windows-when-mapped
 	       (window-really-wants-input-p w))
