@@ -1,3 +1,9 @@
+2001-02-07  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/util/window-order.jl (on-viewport-change): only
+	call window-order-focus-most-recent if in click-to-focus mode,
+	not when not in enter-exit mode
+
 2001-02-06  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/ext/match-window.jl (match-window-x-properties):
