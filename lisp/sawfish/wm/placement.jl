@@ -131,7 +131,8 @@
 		 (not ignore-program-positions)
 		 (cdr (assq 'program-position hints))))
 	(let
-	    ((gravity (cdr (assq 'window-gravity hints))))
+	    ((gravity (or (window-get w 'gravity)
+			  (cdr (assq 'window-gravity hints)))))
 	  (when gravity
 	    (adjust-window-for-gravity w gravity)))
       (let
