@@ -1,3 +1,9 @@
+2000-12-20  John Harper  <jsh@eazel.com>
+
+	* sawfish/wm/state/transient.jl (transient-of-p): disabled the
+	code that checks if (= transient-for ROOT), it causes havoc in
+	too many places
+
 2000-12-19  John Harper  <jsh@eazel.com>
 
 	* sawfish/wm/state/iconify.jl (iconify-window,

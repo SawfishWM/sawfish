@@ -68,13 +68,15 @@
     (let ((x-for (window-transient-p x)))
       (and x-for
 	   (or (eql x-for (window-id y))
+	       ;; XXX disable this code, it causes too much weirdness
 	       ;; windows that set WM_TRANSIENT_FOR to the root window are
 	       ;; transients for their entire group (de facto standard).
 	       ;; This only makes sense for non-transient windows
-	       (and (eql x-for (root-window-id))
-		    (window-group-id x)
-		    (not (window-transient-p y))
-		    (eql (window-group-id x) (window-group-id y)))))))
+;	       (and (eql x-for (root-window-id))
+;		    (window-group-id x)
+;		    (not (window-transient-p y))
+;		    (eql (window-group-id x) (window-group-id y)))
+	       ))))
 
   (define (indirect-transient-of-p x y)
     "Return t if window X is (directly, or indirectly) a transient for window Y."
