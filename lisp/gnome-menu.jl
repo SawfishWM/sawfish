@@ -60,13 +60,38 @@
 
 ;; code
 
+(let
+    (cached-path)
+  ;; search $PATH for an executable file..
+  (defun gnome-exec-in-path (filename)
+    (let
+	((get-path (lambda ()
+		     (unless cached-path
+		       (let
+			   ((path (getenv "PATH"))
+			    (point 0)
+			    out end)
+			 (while (< point (length path))
+			   (setq end (if (string-match ":" path point)
+					 (match-start)
+				       (length path)))
+			   (setq out (cons (substring path point end) out))
+			   (setq point (1+ end)))
+			 (setq cached-path (nreverse out))))
+		     cached-path)))
+      (catch 'out
+	(mapc (lambda (d)
+		(when (file-exists-p (expand-file-name filename d))
+		  (throw 'out (expand-file-name filename d)))) (get-path))
+	nil))))
+
 (defun gnome-menu-read-desktop-entry (filename)
   (let
       ((file (condition-case nil
 		 (open-file filename 'read)
 	       (file-error nil)))
        (section nil)
-       name exec terminal type
+       name exec tryexec terminal type
        line)
     (when file
       (unwind-protect
@@ -87,6 +112,9 @@
 			(string-looking-at "Exec=(.*)\n" line 0 t))
 		   (setq exec (expand-last-match "\\1")))
 		  ((and (eq section 'desktop-entry)
+			(string-looking-at "TryExec=(.*)\n" line 0 t))
+		   (setq tryexec (expand-last-match "\\1")))
+		  ((and (eq section 'desktop-entry)
 			(string-looking-at "Terminal=(.*)\n" line 0 t))
 		   (setq terminal (expand-last-match "\\1"))
 		   (setq terminal (not (string-match
@@ -98,7 +126,7 @@
       (cond ((string= (file-name-nondirectory filename) ".directory")
 	     `(,(or name filename) ,@(gnome-menu-read-directory
 				      (file-name-directory filename))))
-	    (exec
+	    ((and exec (or (not tryexec) (gnome-exec-in-path tryexec)))
 	     ;; create a menu item
 	     `(,(or name exec)
 	       (system ,(concat (if terminal
@@ -198,5 +226,4 @@
 
 ;; init
 
-(unless (boundp 'apps-menu)
-  (setq apps-menu gnome-menus))
+(setq apps-menu gnome-menus)
