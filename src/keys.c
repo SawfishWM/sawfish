@@ -49,6 +49,8 @@ DEFSYM(keymap, "keymap");
 /* The X modifier being used for Meta */
 static u_long meta_mod;
 
+static void grab_keymap_event (repv km, long code, long mods, bool grab);
+
 
 /* Translate from X events to Lisp events */
 
@@ -591,6 +593,7 @@ Returns KEYMAP when successful.
 	    else
 		rep_CDR(km) = Fcons(key, rep_CDR(km));
 	    args = rep_CDR(args);
+	    grab_keymap_event (km, code, mods, TRUE);
 	    rc = TRUE;
 	}
 	else
@@ -664,6 +667,28 @@ unbind-keys KEY-MAP EVENT-DESCRIPTION...
 
 	    rep_TEST_INT; if(rep_INTERRUPTP) return rep_NULL;
 	}
+	/* Do we ungrab this event? */
+	{
+	    repv tem = *keyp;
+	    while (rep_CONSP(tem))
+	    {
+		repv cell = rep_CAR(tem);
+		if(rep_CONSP(cell))
+		{
+		    if((rep_INT(EVENT_MODS(KEY_EVENT(cell))) == mods)
+		       && (rep_INT(EVENT_CODE(KEY_EVENT(cell))) == code))
+		    {
+			/* A second binding. Don't ungrab. */
+			break;
+		    }
+		}
+		tem = rep_CDR(tem);
+		rep_TEST_INT; if(rep_INTERRUPTP) return rep_NULL;
+	    }
+	    if (!rep_CONSP(tem))
+		grab_keymap_event (km, code, mods, FALSE);
+	}
+
 	rc = TRUE;
 	args = rep_CDR(args);
     }
@@ -707,6 +732,21 @@ Return the event which caused the current command to be invoked.
     if(current_event[1])
 	return MAKE_EVENT(rep_MAKE_INT(current_event[0]),
 			  rep_MAKE_INT(current_event[1]));
+    else
+	return Qnil;
+}
+
+DEFUN("current-event-window", Fcurrent_event_window, Scurrent_event_window,
+      (void), rep_Subr0) /*
+::doc:Scurrent-event-window::
+current-event-window
+::end:: */
+{
+    if (current_x_event != 0)
+    {
+	Lisp_Window *w = find_window_by_id (current_x_event->xany.window);
+	return (w != 0) ? rep_VAL(w) : Qnil;
+    }
     else
 	return Qnil;
 }
@@ -826,7 +866,7 @@ find_meta(void)
     int syms_per_code;
     XModifierKeymap *mods;
 
-#if XlibSpecificationRelease >= 4
+#if defined (XlibSpecificationRelease) && XlibSpecificationRelease >= 4
     XDisplayKeycodes(dpy, &min_code, &max_code);
 #else
     min_code = dpy->min_keycode;
@@ -885,38 +925,79 @@ find_meta(void)
    XXX of passive grabs.. */
 
 static void
-grab_keylist_events (Window grab_win, repv list)
+grab_event (Window grab_win, repv ev)
+{
+    switch (rep_INT(EVENT_MODS(ev)) & EV_TYPE_MASK)
+    {
+	u_int code, state;
+
+    case EV_TYPE_KEY:
+	if (translate_event_to_x_key (ev, &code, &state))
+	{
+	    XGrabKey (dpy, code, state, grab_win,
+		      False, GrabModeAsync, GrabModeAsync);
+	}
+	break;
+
+    case EV_TYPE_MOUSE:
+	if (translate_event_to_x_button (ev, &code, &state))
+	{
+	    XGrabButton (dpy, code, state, grab_win,
+			 False, ButtonPressMask | ButtonReleaseMask,
+			 GrabModeAsync, GrabModeAsync, None, None);
+	}
+    }
+}
+
+static void
+ungrab_event (Window grab_win, repv ev)
+{
+    switch (rep_INT(EVENT_MODS(ev)) & EV_TYPE_MASK)
+    {
+	u_int code, state;
+
+    case EV_TYPE_KEY:
+	if (translate_event_to_x_key (ev, &code, &state))
+	    XUngrabKey (dpy, code, state, grab_win);
+	break;
+
+    case EV_TYPE_MOUSE:
+	if (translate_event_to_x_button (ev, &code, &state))
+	    XUngrabButton (dpy, code, state, grab_win);
+    }
+}
+
+static void
+grab_keymap_event (repv km, long code, long mods, bool grab)
+{
+    Lisp_Window *w;
+    repv ev = MAKE_EVENT(rep_MAKE_INT(code), rep_MAKE_INT(mods));
+    repv global = Fsymbol_value (Qglobal_keymap, Qt);
+    for (w = window_list; w != 0; w = w->next)
+    {
+	if (w->id != 0)
+	{
+	    repv tem = Fwindow_get (rep_VAL(w), Qkeymap);
+	    if (km == global || tem == km)
+		(grab ? grab_event : ungrab_event) (w->id, ev);
+	}
+    }
+}
+
+static void
+grab_keylist_events (Window grab_win, repv list, bool grab)
 {
     while (!rep_INTERRUPTP && rep_CONSP(list))
     {
-	repv ev = KEY_EVENT(rep_CAR(list));
-	switch (rep_INT(EVENT_MODS(ev)) & EV_TYPE_MASK)
-	{
-	    u_int code, state;
-
-	case EV_TYPE_KEY:
-	    if (translate_event_to_x_key (ev, &code, &state))
-	    {
-		XGrabKey (dpy, code, state, grab_win,
-			  False, GrabModeAsync, GrabModeAsync);
-	    }
-	    break;
-
-	case EV_TYPE_MOUSE:
-	    if (translate_event_to_x_button (ev, &code, &state))
-	    {
-		XGrabButton (dpy, code, state, grab_win,
-			     False, ButtonPressMask | ButtonReleaseMask,
-			     GrabModeAsync, GrabModeAsync, None, None);
-	    }
-	}
+	(grab ? grab_event : ungrab_event) (grab_win,
+					    KEY_EVENT(rep_CAR(list)));
 	list = rep_CDR(list);
 	rep_TEST_INT;
     }
 }
 
-static void
-grab_keymap_events (Window grab_win, repv keymap)
+void
+grab_keymap_events (Window grab_win, repv keymap, bool grab)
 {
     /* If it's a symbol, dereference it. */
     while(rep_SYMBOLP(keymap) && !rep_NILP(keymap) && !rep_INTERRUPTP)
@@ -929,26 +1010,26 @@ grab_keymap_events (Window grab_win, repv keymap)
     }
 
     if (rep_CONSP(keymap))
-	grab_keylist_events (grab_win, rep_CDR(keymap));
+	grab_keylist_events (grab_win, rep_CDR(keymap), grab);
     else if (rep_VECTORP(keymap))
     {
 	int i;
 	for (i = 0; i < rep_VECT_SIZE(keymap); i++)
-	    grab_keylist_events (grab_win, rep_VECTI(keymap, i));
+	    grab_keylist_events (grab_win, rep_VECTI(keymap, i), grab);
     }
 }
 
 /* Grab all bound events in client window W. */
 void
-grab_window_events (Lisp_Window *w)
+grab_window_events (Lisp_Window *w, bool grab)
 {
     repv tem;
     tem = Fsymbol_value (Qglobal_keymap, Qt);
     if (tem != Qnil && !rep_VOIDP(tem))
-	grab_keymap_events (w->id, tem);
+	grab_keymap_events (w->id, tem, grab);
     tem = Fwindow_get (rep_VAL(w), Qkeymap);
     if (tem && tem != Qnil)
-	grab_keymap_events (w->id, tem);
+	grab_keymap_events (w->id, tem, grab);
 }
 
 
@@ -969,6 +1050,7 @@ keys_init(void)
     rep_ADD_SUBR(Sunbind_keys);
     rep_ADD_SUBR(Scurrent_event_string);
     rep_ADD_SUBR(Scurrent_event);
+    rep_ADD_SUBR(Scurrent_event_window);
     rep_ADD_SUBR(Slast_event);
     rep_ADD_SUBR(Sevent_name);
     rep_ADD_SUBR(Slookup_event);
