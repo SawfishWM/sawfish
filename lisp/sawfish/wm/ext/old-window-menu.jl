@@ -27,6 +27,7 @@
 	  sawfish.wm.windows
 	  sawfish.wm.workspace
 	  sawfish.wm.misc
+	  sawfish.wm.menus
 	  sawfish.wm.util.display-window)
 
   (define-structure-alias old-window-menu sawfish.wm.ext.old-window-menu)
@@ -43,8 +44,8 @@
     (let* ((limits (workspace-limits))
 	   (windows (managed-windows))
 	   menu)
-      (do ((i (car limits)))
-	  ((= i (cdr limits)))
+      (do ((i (car limits) (1+ i)))
+	  ((> i (cdr limits)))
 	(mapc (lambda (w)
 		(when (and (window-in-workspace-p w i)
 			   (window-mapped-p w)
