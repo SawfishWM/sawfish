@@ -10,7 +10,7 @@ fi
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.16 1999/08/30 17:29:05 john Exp $
+;; $Id: sawmill-ui.jl,v 1.17 1999/09/04 22:18:48 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -783,7 +783,9 @@ fi
 			(unwind-protect
 			    (progn
 			      (copy-stream file text)
-			    (setq text (get-output-stream-string text))
+			      (setq text (get-output-stream-string text))
+			      (when (string-match "\\s+$" text)
+				(setq text (substring text 0 (match-start))))
 			      (gtk-label-set (get-key spec ':readme) text))
 			  (close-file file)))
 		    (gtk-label-set (get-key spec ':readme) ""))
