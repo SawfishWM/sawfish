@@ -1199,6 +1199,61 @@ WINDOW. Returns the symbol `nil' if no such image.
    return VWIN (win)->icon_image;
 }
 
+DEFUN ("map-windows", Fmap_windows, Smap_windows, (repv fun), rep_Subr1) /*
+::doc:map-windows::
+map-windows FUN
+
+Map the single-parameter function FUN over all existing windows.
+::end:: */
+{
+    repv w;
+    rep_GC_root gc_fun, gc_w;
+    repv ret = Qnil;
+
+    rep_PUSHGC (gc_fun, fun);
+    rep_PUSHGC (gc_w, w);
+    for (w = rep_VAL (window_list); w != rep_NULL; w = rep_VAL (VWIN(w)->next))
+    {
+	ret = rep_call_lisp1 (fun, w);
+	if (ret == rep_NULL)
+	    break;
+    }
+    rep_POPGC; rep_POPGC;
+    return ret;
+}
+
+DEFUN ("filter-windows", Ffilter_windows,
+       Sfilter_windows, (repv pred), rep_Subr1) /*
+::doc:filter-windows::
+filter-windows PRED
+
+Return the list of windows that match the predicate function PRED.
+::end:: */
+{
+    repv w, output = Qnil, *ptr = &output;
+    rep_GC_root gc_pred, gc_w, gc_output;
+
+    rep_PUSHGC(gc_pred, pred);
+    rep_PUSHGC(gc_w, w);
+    rep_PUSHGC(gc_output, output);
+    for (w = rep_VAL (window_list); w != rep_NULL; w = rep_VAL (VWIN(w)->next))
+    {
+	repv tem = rep_call_lisp1 (pred, w);
+	if (tem == rep_NULL)
+	{
+	    output = rep_NULL;
+	    break;
+	}
+	if (tem != Qnil)
+	{
+	    *ptr = Fcons (w, Qnil);
+	    ptr = rep_CDRLOC (*ptr);
+	}
+    }
+    rep_POPGC; rep_POPGC; rep_POPGC;
+    return output;
+}
+
 
 /* type hooks */
 
@@ -1349,6 +1404,8 @@ windows_init (void)
     rep_ADD_SUBR(Scall_window_hook);
     rep_ADD_SUBR(Swindow_border_width);
     rep_ADD_SUBR(Swindow_icon_image);
+    rep_ADD_SUBR(Smap_windows);
+    rep_ADD_SUBR(Sfilter_windows);
 
     rep_INTERN_SPECIAL(before_add_window_hook);
     rep_INTERN_SPECIAL(add_window_hook);
