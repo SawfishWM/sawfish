@@ -1,13 +1,13 @@
 # Sawfish's Portuguese Translation
 # Copyright (C) 2001 Free Software Foundation, Inc.
-# Duarte Loreto <happyguy_pt@hotmail.com>, 2001, 2002
+# Duarte Loreto <happyguy_pt@hotmail.com>, 2001, 2002, 2003
 # Rui Miguel Silva Seabra <rms@ssi.aaum.pt> 1999
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.4.1\n"
-"POT-Creation-Date: 2002-04-30 13:09+0200\n"
-"PO-Revision-Date: 2002-05-07 00:36+0000\n"
+"Project-Id-Version: 2.2\n"
+"POT-Creation-Date: 2002-11-02 23:33-0800\n"
+"PO-Revision-Date: 2003-04-06 18:36+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -93,6 +93,7 @@ msgstr "Propriedades da Imagem"
 # ../themer/themer.in
 #. ../lisp/sawfish/gtk/widget.jl
 #. ../themer/themer.in
+#, c-format
 msgid "No matching item for %S"
 msgstr "Nenhum item correspondente com %S"
 
@@ -126,6 +127,7 @@ msgstr "Adicionado tipo de moldura `%s'"
 
 # ../themer/themer.in
 #. ../themer/themer.in
+#, c-format
 msgid "error while building frame: %S"
 msgstr "erro ao gerar moldura: %S"
 
@@ -404,7 +406,7 @@ msgstr "Erro Sawfish"
 # ../src/sawfish-ui.jl
 #. ../lisp/sawfish/ui/shell.jl
 msgid "Sawfish configurator"
-msgstr "Configurador do Sawfish"
+msgstr "Configurador Sawfish"
 
 # ../lisp/menus.jl
 # ../lisp/custom.jl
@@ -452,7 +454,7 @@ msgstr "Seleccionar Ícon"
 # ../lisp/custom.jl
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 msgid "Edit binding"
-msgstr "Editar atalhos"
+msgstr "Editar atalho"
 
 # ../src/sawfish-ui.jl
 #. ../lisp/sawfish/ui/widgets/keymap.jl
@@ -476,7 +478,7 @@ msgstr "não"
 # ../src/sawfish-ui.jl
 #. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Match window properties"
-msgstr "Comparar propriedades da janela"
+msgstr "Comparar propriedades janela"
 
 # ../lisp/x-cycle.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -641,7 +643,7 @@ msgstr "O modo click-para-focus passa o clique para a aplicação."
 # ../lisp/frames.jl
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default frame style:"
-msgstr "Estilo de moldura de defeito:"
+msgstr "Estilo de moldura por omissão:"
 
 # ../lisp/frames.jl
 #. ../lisp/sawfish/wm/frames.jl
@@ -651,7 +653,7 @@ msgstr "Recarregar temas automaticamente quando actualizados."
 # ../lisp/frames.jl
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
-msgstr "Fonte de defeito: \\w"
+msgstr "Fonte por omissão: \\w"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/frames.jl
@@ -661,7 +663,7 @@ msgstr "Editar estilo da moldura"
 # ../lisp/frames.jl
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default"
-msgstr "Defeito"
+msgstr "Omissão"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/frames.jl
@@ -816,10 +818,8 @@ msgstr ""
 "mapa.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr ""
-"Tecla(s) modificador(as) utilizada(s) para atalhos de defeito do gestor de "
-"janelas."
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Tecla(s) modificador(as) utilizada(s) para atalhos por omissão."
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
@@ -874,26 +874,6 @@ msgstr "Copiar para o anterior"
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Copy to next"
 msgstr "Copiar para o seguinte"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Left"
-msgstr "_Esquerda"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Right"
-msgstr "_Direita"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Up"
-msgstr "_Acima"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Down"
-msgstr "A_baixo"
 
 #. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
@@ -1010,7 +990,7 @@ msgstr "Mostrar o menu de aplicações."
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/menus.jl
 msgid "All settings"
-msgstr "Todas as definições"
+msgstr "Todas definições"
 
 # ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/menus.jl
@@ -1203,7 +1183,8 @@ msgstr "Mover janela para a esquerda"
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
 "Move the window to the viewport on the left, and switch to that viewport."
-msgstr "Mover a janela para a área de trabalho à esquerda, e ir para essa área."
+msgstr ""
+"Mover a janela para a área de trabalho à esquerda, e ir para essa área."
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -1276,7 +1257,7 @@ msgstr "Inserir área de trabalho"
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Select next workspace"
-msgstr "Seleccionar próxima área de trabalho"
+msgstr "Seleccionar área de trabalho seguinte"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
@@ -1296,12 +1277,12 @@ msgstr "Juntar com a anterior"
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace right"
-msgstr "Mover área de trabalho para a direita"
+msgstr "Mover área de trabalho à direita"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace left"
-msgstr "Mover área de trabalho para a esquerda"
+msgstr "Mover área de trabalho à esquerda"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
@@ -1912,7 +1893,8 @@ msgstr ""
 "Aumenta janela acima até que toque noutra janela.\n"
 "Se a margem superior estava para lá do ecrã, é puxada abaixo.\n"
 "Com um argumento de prefixo universal, maximiza acima.\n"
-"Com um argumento prefixo numérico, cresce acima por esse número de incrementos\n"
+"Com um argumento prefixo numérico, cresce acima por esse número de "
+"incrementos\n"
 "especificados por janela ou pixels."
 
 # ../lisp/menus.jl
@@ -2143,8 +2125,8 @@ msgid ""
 msgstr ""
 "Distância em pixels antes das margens das janelas se alinhem.\n"
 "\n"
-"Ao mover uma janela, esta opção permite-lhe alinhar uma das suas margens "
-"com a margem de uma outra janela."
+"Ao mover uma janela, esta opção permite-lhe alinhar uma das suas margens com "
+"a margem de uma outra janela."
 
 # ../lisp/move-resize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -2477,7 +2459,7 @@ msgstr "3d hack"
 # ../lisp/tooltips.jl
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Play sound effects for window events."
-msgstr "Tocar efeitos sonoros em eventos de janelas."
+msgstr "Reproduzir efeitos sonoros em eventos de janelas."
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Event"
@@ -2852,6 +2834,88 @@ msgstr "Esquecer todo o histórico gravado da janela."
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
 msgstr "_Histórico"
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace down"
+msgstr "Área de trabalho abaixo"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Ver a área de trabalho abaixo da actual"
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace up"
+msgstr "Área de trabalho acima"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Ver a área de trabalho acima da actual"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace left"
+msgstr "Área de trabalho à esquerda"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Ver a área de trabalho à esquerda da actual"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Workspace right"
+msgstr "Área de trabalho à direita"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Ver a área de trabalho à direita da actual"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace down"
+msgstr "Enviar para área de trabalho abaixo"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Enviar janela para a área de trabalho abaixo da actual"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace up"
+msgstr "Enviar para área de trabalho acima"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Enviar janela para a área de trabalho acima da actual"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace left"
+msgstr "Enviar para área de trabalho à esquerda"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Enviar janela para a área de trabalho à esquerda da actual"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send to workspace right"
+msgstr "Enviar para área de trabalho à direita"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Enviar janela para a área de trabalho à direita da actual"
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
@@ -3360,7 +3424,7 @@ msgid ""
 "The program used to play audio samples. If unset, built-in support for ESD "
 "is used."
 msgstr ""
-"A aplicação utilizada para tocar amostras audio. Se não definido, será "
+"A aplicação utilizada para reproduzir amostras audio. Se não definido, será "
 "utilizado o suporte integrado ESD."
 
 # ../lisp/menus.jl
@@ -3616,6 +3680,34 @@ msgstr "_Definições"
 msgid "_Themes"
 msgstr "_Temas"
 
+# ../lisp/menus.jl
+#~ msgid "_Restart"
+#~ msgstr "_Reiniciar"
+
+# ../lisp/menus.jl
+#~ msgid "_Quit"
+#~ msgstr "_Sair"
+
+# ../lisp/workspace.jl
+#~ msgid "_Insert workspace"
+#~ msgstr "_Inserir área de trabalho"
+
+# ../lisp/menus.jl
+#~ msgid "_Left"
+#~ msgstr "_Esquerda"
+
+# ../lisp/menus.jl
+#~ msgid "_Right"
+#~ msgstr "_Direita"
+
+# ../lisp/menus.jl
+#~ msgid "_Up"
+#~ msgstr "_Acima"
+
+# ../lisp/menus.jl
+#~ msgid "_Down"
+#~ msgstr "A_baixo"
+
 # ../src/sawfish-ui.jl
 #~ msgid "Revert"
 #~ msgstr "Reverter"
@@ -3665,7 +3757,7 @@ msgstr "_Temas"
 #~ msgstr "Mover a janela para a área de trabalho abaixo."
 
 #~ msgid "The default window animation mode: \\w"
-#~ msgstr "O modo de animação de janela de defeito: \\w"
+#~ msgstr "O modo de animação de janela por omissão: \\w"
 
 #~ msgid ""
 #~ "Give focus to windows even when they haven't asked for it.\n"
@@ -3815,7 +3907,8 @@ msgstr "_Temas"
 #~ "Default increment for size-window commands (when the window doesn't\n"
 #~ "specify it's own increments)."
 #~ msgstr ""
-#~ "Incremento de defeito para comandos de dimensionamento de janela (quando\n"
+#~ "Incremento por omissão para comandos de dimensionamento de janela "
+#~ "(quando\n"
 #~ "a janela não especifica o seu próprio incremento)."
 
 # ../lisp/slide-window.jl
@@ -3849,7 +3942,7 @@ msgstr "_Temas"
 
 # ../lisp/workspace.jl
 #~ msgid "Play sound effects for unmanaged windows."
-#~ msgstr "Tocar efeitos sonoros para janelas não geridas."
+#~ msgstr "Reproduzir efeitos sonoros para janelas não geridas."
 
 #~ msgid "The hierarchical window menu raises singleton submenus."
 #~ msgstr "O menu de janela hierárquica eleva submenus de subjanelas."
@@ -4115,7 +4208,7 @@ msgstr "_Temas"
 # ../lisp/frames.jl
 #~ msgid "Update all windows when the default frame style is changed."
 #~ msgstr ""
-#~ "Actualizar as janelas quando o estilo de defeito das margens é mudado."
+#~ "Actualizar as janelas quando o estilo por omissão das margens é alterado."
 
 # ../lisp/frames.jl
 #~ msgid ""
