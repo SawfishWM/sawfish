@@ -1,3 +1,15 @@
+2000-02-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* sawmill-ui.jl: new option --flatten; display sub-groups
+	inline instead of using a tree widget (good for control
+	center). In normal `tree' item, don't put frame the widgets
+
+	* keys.c (Fcurrent_event_string): fix typo when checking if an
+	event is currently being handled
+
+	* events.c (button_press): only use the context map if the
+	window or its frame is visible
+
 2000-02-25  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keys.c (update_keyboard_mapping): new function, updates the

@@ -1,3 +1,31 @@
+2000-02-27  John Harper  <john@dcs.warwick.ac.uk>
+
+	* iconify.jl (uniconify-window): if the window is already in
+	the current workspace never remove it
+
+	* edges.jl (snap-window-position-to-edges): replaced the
+	HYSTERESIS parameter by STATE. This cons cells records previous
+	delta values and any currently snapped edges
+	(edges-within-epsilon): new parameter OLD-EDGE, any previously
+	snapped edge. Use this in resistance mode when the direction
+	changes, but the pointer is still past the edge
+	(adapted from merlin@merlin.org)
+
+	* move-resize.jl (move-resize-snap-state): replaces the
+	hysteresis variable
+
+2000-02-26  John Harper  <john@dcs.warwick.ac.uk>
+
+	* customize.jl (customize-ui-spec): when returning a sub-group
+	get all its children as well
+	* custom.jl: the iconify and maximize groups are now sub groups
+	of the new group min-max
+	(custom-menu-includes-all-settings): new variable
+	* gnome-int.jl: use the capplet for configuring again
+
+	* workspace.jl, viewport.jl, move-resize.jl, maximize.jl,
+	grow-pack.jl: change min/max :group keys
+
 2000-02-25  John Harper  <john@dcs.warwick.ac.uk>
 
 	* sawmill.jl: define `quotient' as `/' unless already bound
