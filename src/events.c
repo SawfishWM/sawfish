@@ -41,6 +41,7 @@ static int current_mouse_x, current_mouse_y;
 /* ..and the position (and window) at the last button-press */
 static int button_press_mouse_x = -1, button_press_mouse_y = -1;
 static Window button_press_window;
+static bool pointer_in_motion;
 
 /* Most recently seen server timestamp. */
 Time last_event_time;
@@ -78,6 +79,8 @@ DEFSYM(shape_notify_hook, "shape-notify-hook");
 DEFSYM(enter_frame_part_hook, "enter-frame-part-hook");
 DEFSYM(leave_frame_part_hook, "leave-frame-part-hook");
 DEFSYM(configure_request_hook, "configure-request-hook");
+
+DEFSYM(pointer_motion_threshold, "pointer-motion-threshold");
 
 /* for enter/leave-notify-hook */
 DEFSYM(root, "root");
@@ -160,34 +163,45 @@ record_event_time (XEvent *ev)
 static void
 record_mouse_position (int x, int y, int event_type, Window w)
 {
-    current_mouse_x = x;
-    current_mouse_y = y;
+    bool update_press = FALSE;
+
     switch (event_type)
     {
     case ButtonPress:
-	button_press_mouse_x = x;
-	button_press_mouse_y = y;
-	button_press_window = w;
+	update_press = TRUE;
 	break;
 
     case MotionNotify:
 	if (button_press_mouse_x == -1)
+	    update_press = TRUE;
+	else if (!pointer_in_motion)
 	{
-	    button_press_mouse_x = x;
-	    button_press_mouse_y = y;
-	    button_press_window = w;
+	    int delta_x = x - button_press_mouse_x;
+	    int delta_y = y - button_press_mouse_y;
+	    repv tem = Fsymbol_value (Qpointer_motion_threshold, Qt);
+	    int threshold = rep_INTP (tem) ? rep_INT (tem) : 0;
+
+	    if (ABS (delta_x) > threshold || ABS (delta_y) > threshold)
+		pointer_in_motion = TRUE;
 	}
 	break;
 
     case ButtonRelease:
 	if (button_press_mouse_x == -1)
-	{
-	    button_press_mouse_x = x;
-	    button_press_mouse_y = y;
-	    button_press_window = w;
-	}
+	    update_press = TRUE;
 	break;
     }
+
+    if (update_press)
+    {
+	button_press_mouse_x = x;
+	button_press_mouse_y = y;
+	button_press_window = w;
+	pointer_in_motion = FALSE;
+    }
+
+    current_mouse_x = x;
+    current_mouse_y = y;
     current_event_updated_mouse = TRUE;
 }
 
@@ -374,7 +388,8 @@ motion_notify (XEvent *ev)
 	record_mouse_position (x, y, ev->type, ev->xmotion.window);
     }
 
-    eval_input_event (current_context_map);
+    if (pointer_in_motion)
+	eval_input_event (current_context_map);
 
     XAllowEvents (dpy, SyncPointer, last_event_time);
 }
@@ -1487,6 +1502,9 @@ events_init (void)
     rep_INTERN_SPECIAL(enter_frame_part_hook);
     rep_INTERN_SPECIAL(leave_frame_part_hook);
     rep_INTERN_SPECIAL(configure_request_hook);
+
+    rep_INTERN_SPECIAL(pointer_motion_threshold);
+    Fset (Qpointer_motion_threshold, rep_MAKE_INT (0));
 
     rep_INTERN(iconify_window);
     rep_INTERN(uniconify_window);
