@@ -81,9 +81,9 @@
 	    (setq ex (read-from-string (cadr ex)))
 	  (error nil)))
       (format nil "%s\n\n%s: %s"
-	      (format nil (_ "While updating %s:")
+	      (format nil (_ "While changing %s:")
 		      (mapconcat (lambda (x)
-				   (format nil "`%s'" (slot-name x)))
+				   (prin1-to-string (slot-name x)))
 				 slots ", "))
 	      (or (get (car ex) 'error-message) (car ex))
 	      (mapconcat (lambda (x) (format nil "%s" x)) (cdr ex) ", ")))
@@ -101,6 +101,7 @@
 	     (revert-slots slots)
 	     (let ((label (gtk-label-new (format-error data))))
 	       (gtk-label-set-justify label 'left)
+	       (gtk-label-set-line-wrap label t)
 	       (gtk-widget-show label)
 	       (simple-dialog (_ "Sawfish Error") label nil
 			      (gtk-widget-get-toplevel
