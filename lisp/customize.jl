@@ -52,7 +52,7 @@
 (defun customize-symbol-spec (symbol)
   (let
       ((type (or (get symbol 'custom-type) 'boolean))
-       (doc (or (documentation symbol t) (symbol-name symbol)))
+       (doc (or (documentation symbol) (symbol-name symbol)))
        (value (funcall (or (get symbol 'custom-get) symbol-value) symbol)))
     (when (stringp doc)
       (setq doc (_ doc)))
