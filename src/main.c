@@ -41,6 +41,7 @@
 #include "build.h"
 #include <string.h>
 #include <limits.h>
+#include <X11/Xlocale.h>		/* for setlocale () */
 
 /* one of the ec_ values */
 int exit_code = ec_exit;
@@ -256,6 +257,7 @@ main(int argc, char **argv)
     int old_argc = argc;
 
     prog_name = *argv++; argc--;
+    setlocale(LC_ALL, "");
     rep_init (prog_name, &argc, &argv, 0, usage);
 
     stash_argv (old_argc, old_argv);
