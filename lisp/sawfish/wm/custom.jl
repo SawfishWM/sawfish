@@ -176,6 +176,9 @@ Note that the value of the `:group' key is not evaluated."
 (defun define-custom-setter (name def)
   (setq custom-set-alist (cons (cons def name) custom-set-alist)))
 
+(defun define-command-args (name spec)
+  (put name 'custom-command-args spec))
+
 (defmacro custom-set-property (sym prop value)
   "Set the custom key PROP for defcustom'd symbol SYM to value."
   (let ((tem (gensym)))
