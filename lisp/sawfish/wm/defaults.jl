@@ -23,9 +23,6 @@
 
 ;; This file provides defaults for users without .sawmillrc files
 
-;; the font to use for otherwise unspecified text
-(setq default-font (get-font "-*-lucida-medium-r-*-*-10-*-*-*-*-*-*-*"))
-
 ;; if it looks like GNOME is the desktop environment, then load the
 ;; extra GNOME integration module
 (unless batch-mode
