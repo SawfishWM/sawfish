@@ -309,6 +309,11 @@ enum exit_codes {
 #undef MIN
 #define MIN(x,y) (((x) < (y)) ? (x) : (y))
 
+#undef POS
+#define POS(x)   MAX(x, 0)
+#undef ABS
+#define ABS(x)   MAX(x, -(x))
+
 #ifndef NULL
 # define NULL 0
 #endif
