@@ -34,9 +34,25 @@
 ;;	:require FEATURE
 ;;	:type TYPE
 ;;	:allow-nil t
+;;	:set FUNCTION
+;;	:get FUNCTION
 
 ;; TYPE may be `boolean', `number', `string', `(set SYMBOLS..)',
-;; `file-name', `program-name'
+;; `file-name', `program-name', `font', `color'
+
+;; Each defcustom'd variable may have several special properties
+
+;;	custom-set (FUNCTION SYMBOL VALUE)
+;;	custom-get (FUNCTION SYMBOL)
+;;	custom-widget (FUNCTION SYMBOL VALUE DOC)
+
+;; these functions are used while constructing and responding to the
+;; customisation dialog. If not set in the symbol itself they may be
+;; inherited from the plist of the type of the variable.
+
+;; custom-set and custom-get may be used to translate data types to
+;; the string representation required by some widget types. custom-widget
+;; may construct the widget definition passed to the ui backend
 
 (defmacro defcustom (symbol value doc &rest keys)
   (list 'defvar
@@ -50,7 +66,7 @@
 
 (defun custom-declare-variable (symbol value keys)
   (let
-      (tem)
+      (tem type)
     (while keys
       (setq tem (car keys))
       (setq keys (cdr keys))
@@ -60,10 +76,25 @@
 	    ((eq tem ':require)
 	     (put symbol 'custom-require (car keys)))
 	    ((eq tem ':type)
-	     (put symbol 'custom-type (car keys)))
+	     (setq type (car keys))
+	     (put symbol 'custom-type type))
 	    ((eq tem ':allow-nil)
-	     (put symbol 'custom-allow-nil (car keys))))
+	     (put symbol 'custom-allow-nil (car keys)))
+	    ((eq tem ':set)
+	     (put symbol 'custom-set (car keys)))
+	    ((eq tem ':get)
+	     (put symbol 'custom-get (car keys))))
       (setq keys (cdr keys)))
+    (when (symbolp type)
+      (when (and (not (get symbol 'custom-get))
+		 (get type 'custom-get))
+	(put symbol 'custom-get (get type 'custom-get)))
+      (when (and (not (get symbol 'custom-set))
+		 (get type 'custom-set))
+	(put symbol 'custom-set (get type 'custom-set)))
+      (when (and (not (get symbol 'custom-widget))
+		 (get type 'custom-widget))
+	(put symbol 'custom-widget (get type 'custom-widget))))
     value))
 
 (defun custom-declare-group (group &optional doc)
@@ -86,6 +117,41 @@
   (set symbol value))
 
 
+;; support for font and color primitive types
+
+(put 'font 'custom-set 'custom-set-font)
+(put 'font 'custom-get 'custom-get-font)
+
+(defun custom-set-font (symbol value &optional require)
+  (custom-set-variable symbol (if (stringp value)
+				  (get-font value)
+				value)
+		       require))
+
+(defun custom-get-font (symbol)
+  (let
+      ((value (symbol-value symbol)))
+    (if (fontp value)
+	(font-name value)
+      value)))
+
+(put 'color 'custom-set 'custom-set-color)
+(put 'color 'custom-get 'custom-get-color)
+
+(defun custom-set-color (symbol value &optional require)
+  (custom-set-variable symbol (if (stringp value)
+				  (get-color value)
+				value)
+		       require))
+
+(defun custom-get-color (symbol)
+  (let
+      ((value (symbol-value symbol)))
+    (if (colorp value)
+	(color-name value)
+      value)))
+
+
 ;; default groups
 
 (defgroup focus "Focus")
@@ -93,10 +159,12 @@
 (defgroup menus "Menus")
 (defgroup workspace "Workspaces")
 (defgroup placement "Placement")
+(defgroup appearance "Appearance")
 (defgroup misc "Miscellaneous")
 (defgroup customize "Customization")
 
 
+;; loading user's customisations
 
 (defcustom custom-user-file "~/.sawmill-custom"
   "File used to store user's configuration settings."

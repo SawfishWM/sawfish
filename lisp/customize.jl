@@ -44,6 +44,14 @@
 (defvar customize-dirty-user-file nil)
 
 
+;; defcustom's for some built-in variables
+
+(defcustom default-font nil
+  "Font used for text which doesn't have a font explicitly specified."
+  :group appearance
+  :type font)
+
+
 ;; subprocess handling
 
 (defun customize-start-process ()
@@ -71,7 +79,7 @@
 	(cond ((eq (car result) 'ui-exit)
 	       (customize-stop-process))
 	      ((eq (car result) 'ui-refresh)
-	       (format customize-process (customize-ui-spec)))
+	       (format customize-process "%S\n" (customize-ui-spec)))
 	      (t
 	       (eval result))))
     (end-of-stream
@@ -88,7 +96,7 @@
   (let
       ((type (or (get symbol 'custom-type) 'boolean))
        (doc (or (documentation symbol t) (symbol-name symbol)))
-       (value (symbol-value symbol)))
+       (value (funcall (or (get symbol 'custom-get) 'symbol-value) symbol)))
     (when customize-show-symbols
       (setq doc (format nil "%s\n[%s]" doc (symbol-name symbol))))
     (cond ((eq type 'boolean)
@@ -102,17 +110,30 @@
 			  :allow-nil ,(get symbol 'custom-allow-nil))
 		  (label ,doc)))
 
-	  ((memq type '(string file-name program-name))
+	  ;; XXX all but the first should have their own widget types
+	  ((memq type '(string file-name program-name color))
 	   `(hbox (string :variable ,symbol
 			  :value ,(if (stringp value) value "")
 			  :allow-nil ,(get symbol 'custom-allow-nil))
+		  (label ,doc)))
+
+	  ((eq type 'font)
+	   `(hbox (font :variable ,symbol
+			:value ,value
+			:allow-nil ,(get symbol 'custom-allow-nil))
 		  (label ,doc)))
 
 	  ((and (consp type) (eq (car type) 'set))
 	   `(hbox (set ,(cdr type)
 		       :variable ,symbol
 		       :value ,value)
-		  (label ,doc))))))
+		  (label ,doc)))
+
+	  (t
+	   (let
+	       ((fun (get symbol 'custom-widget)))
+	     (when fun
+	       (funcall fun symbol value doc)))))))
 
 (defun customize-ui-spec ()
   (mapc 'require custom-required)
@@ -174,18 +195,17 @@
 (defun customize-set (symbol value)
   (customize-read-user-file)
   (let
-      ((form `(custom-set-variable
+      ((form `(,(or (get symbol 'custom-set) 'custom-set-variable)
 	       ',symbol ',value
 	       ,@(and (get symbol 'custom-require)
 		      (list (list 'quote (get symbol 'custom-require)))))))
     (catch 'done
       (mapc #'(lambda (f)
-		(when (and (eq (car f) 'custom-set-variable)
-			   (eq (nth 1 (nth 1 f)) symbol))
+		(when (eq (nth 1 (nth 1 f)) symbol)
 		  (setq customize-user-forms
 			(cons form (delq f customize-user-forms)))
 		  (throw 'done t)))
 	    customize-user-forms)
       (setq customize-user-forms (cons form customize-user-forms)))
-    (setq customize-dirty-user-file t))
-  (set symbol value))
+    (setq customize-dirty-user-file t)
+    (eval form)))
