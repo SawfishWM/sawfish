@@ -71,7 +71,7 @@
 
 ;;;###autoload
 (defun gnome-toggle-skip-tasklist (w)
-  "Toggle the GNOME SKIP_WINLIST hint of the window."
+  "Toggle the GNOME SKIP_TASKLIST hint of the window."
   (interactive "%W")
   (gnome-toggle-hint w WIN_HINTS_SKIP_TASKLIST))
 
