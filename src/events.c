@@ -148,8 +148,9 @@ record_mouse_position (int x, int y, int event_type, Window w)
 	break;
 
     case ButtonRelease:
-	button_press_mouse_x = button_press_mouse_y = -1;
-	button_press_window = 0;
+	button_press_mouse_x = x;
+	button_press_mouse_y = y;
+	break;
     }
     current_event_updated_mouse = TRUE;
 }
