@@ -44,9 +44,8 @@
 
     (define (clear)
       (unless (zerop step)
-	(erase-window-outline mode
-			      (round (car coords)) (round (cdr coords))
-			      (round (car dims)) (round (cdr dims)))))
+	(erase-window-outline mode (car coords) (cdr coords)
+			      (car dims) (cdr dims))))
 
     (define (stop)
       (delete-timer timer)
