@@ -207,10 +207,8 @@
 				 nil
 			       current-workspace)
 			     cycle-include-iconified cycle-all-viewports)))
-      (unless (eq windows t)
-	(setq win (delete-if (lambda (w)
-			       (not (memq w windows))) win)))
-      (setq win (delete-if-not window-in-cycle-p win))
+      (setq win (delete-if (lambda (w)
+			     (not (memq w windows))) win))
       (unless win
 	(throw 'x-cycle-exit t))
       (if (fluid x-cycle-current)
@@ -366,18 +364,22 @@ Any extra arguments are passed to each call to define-command."
 	    (if (fluid x-cycle-active)
 		(cycle-next windows step)
 	      (cycle-begin windows step))))))
-    (apply define-cycle-command forward-name (command-body +1) rest)
-    (apply define-cycle-command reverse-name (command-body -1) rest))
+    (when forward-name
+      (apply define-cycle-command forward-name (command-body +1) rest))
+    (when reverse-name
+      (apply define-cycle-command reverse-name (command-body -1) rest)))
 
 
 ;;; commands
 
   (define-cycle-command-pair
-   'cycle-windows 'cycle-windows-backwards (lambda () t))
+   'cycle-windows 'cycle-windows-backwards
+   (lambda () (filter-windows window-in-cycle-p)))
 
   (define-cycle-command-pair
    'cycle-group 'cycle-group-backwards
-   (lambda (w) (windows-in-group w))
+   (lambda (w)
+     (delete-if-not window-in-cycle-p (windows-in-group w)))
    #:spec "%W")
 
   (define-cycle-command-pair
@@ -386,17 +388,19 @@ Any extra arguments are passed to each call to define-command."
      (when (string-match "^([^:]+)\\s*:" (window-name w))
        (let* ((prefix (expand-last-match "\\1"))
 	      (re (concat ?^ (quote-regexp prefix) "\\s*:")))
-	 (filter-windows
-	  (lambda (x)
-	    (string-match re (window-name x)))))))
+	 (delete-if-not window-in-cycle-p
+			(filter-windows
+			 (lambda (x)
+			   (string-match re (window-name x))))))))
    #:spec "%W")
 
   (define-cycle-command-pair
    'cycle-class 'cycle-class-backwards
    (lambda (w)
      (let ((class (window-class w)))
-       (filter-windows
-	(lambda (x) (equal (window-class x) class)))))
+       (delete-if-not window-in-cycle-p
+		      (filter-windows
+		       (lambda (x) (equal (window-class x) class))))))
    #:spec "%W")
 
   (define-cycle-command-pair
@@ -405,7 +409,13 @@ Any extra arguments are passed to each call to define-command."
      (if (fluid x-cycle-active)
 	 (fluid x-cycle-windows)
        (error "%s must be bound to a key event in the cycle keymap."
-	      this-command)))))
+	      this-command))))
+
+  (define-cycle-command-pair
+   'cycle-dock 'cycle-dock-backwards
+   (lambda ()
+     (delete-if-not (lambda (x) (window-in-cycle-p x #:ignore-cycle-skip t))
+		    (filter-windows dock-window-p)))))
 
 
 #| autoload cookies:
@@ -418,6 +428,8 @@ Any extra arguments are passed to each call to define-command."
 ###autoload (autoload-command 'cycle-prefix-backwards 'sawfish.wm.commands.x-cycle)
 ###autoload (autoload-command 'cycle-class 'sawfish.wm.commands.x-cycle)
 ###autoload (autoload-command 'cycle-class-backwards 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-dock 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-dock-backwards 'sawfish.wm.commands.x-cycle)
 
 |#
 

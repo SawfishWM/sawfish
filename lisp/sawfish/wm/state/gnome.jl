@@ -225,6 +225,7 @@
 	(cond ((and (string= (aref class 1) "Panel")
 		    (string= (aref class 0) "panel_window"))
 	       ;; XXX I don't think the GNOME hints specify these things...
+	       (mark-window-as-dock w)
 	       (window-put w 'focus-click-through t)
 	       (window-put w 'no-history t)
 	       (window-put w 'never-iconify t)

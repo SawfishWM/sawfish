@@ -251,7 +251,9 @@
 	       (window-put w 'sticky t)
 	       (window-put w 'sticky-viewport t)
 	       ;; XXX see gnome.jl for why this is needed..
-	       (window-put w 'placed t))
+	       (window-put w 'placed t)
+	       ;; probably superfluous
+	       (mark-window-as-dock w))
 	      ((string= (aref class 1) "gmc-desktop-icon")
 	       (window-put w 'never-focus t)
 	       (window-put w 'never-iconify t)
@@ -329,8 +331,7 @@
    (lambda (w)
      (require 'sawfish.wm.stacking)
      (set-window-depth w dock-layer)
-     (window-put w 'window-list-skip t)
-     (window-put w 'cycle-skip t)))
+     (mark-window-as-dock w)))
 
   (define-wm-spec-window-type
    '_NET_WM_WINDOW_TYPE_DIALOG

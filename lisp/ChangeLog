@@ -1,3 +1,19 @@
+2002-04-10  John Harper  <jsh@unfactored.org>
+
+	Fixed #70071:
+
+	* sawfish/wm/windows.jl (mark-window-as-dock, dock-window-p):
+	new functions
+	* sawfish/wm/state/gnome.jl (gnome-window-class-hacks): call
+	mark-window-as-dock
+	* sawfish/wm/state/wm-spec.jl (wm-class-hacks, DOCK type): call
+	mark-window-as-dock
+	* sawfish/wm/commands/x-cycle.jl (cycle-dock,
+	cycle-dock-backwards): new commands. Also made it so that the
+	selection functions have to call window-in-cycle-p themselves
+	* sawfish/wm/windows.jl (window-in-cycle-p): new keyword arg
+	IGNORE-CYCLE-skip
+
 2002-04-02  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/state/wm-spec.jl (client-message-handler): before

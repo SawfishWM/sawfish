@@ -160,6 +160,8 @@
 (autoload-command 'cycle-prefix-backwards 'sawfish.wm.commands.x-cycle)
 (autoload-command 'cycle-class 'sawfish.wm.commands.x-cycle)
 (autoload-command 'cycle-class-backwards 'sawfish.wm.commands.x-cycle)
+(autoload-command 'cycle-dock 'sawfish.wm.commands.x-cycle)
+(autoload-command 'cycle-dock-backwards 'sawfish.wm.commands.x-cycle)
 (autoload-command (quote xterm) (quote sawfish.wm.commands.xterm))
 (autoload-command (quote 3d-hack) (quote sawfish.wm.ext.3d-hack) #:user-level (quote expert))
 (defgroup audio "Sound" :require sawfish.wm.ext.audio-events)

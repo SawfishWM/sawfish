@@ -30,6 +30,8 @@
 	     window-really-wants-input-p
 	     desktop-window-p
 	     mark-window-as-desktop
+	     dock-window-p
+	     mark-window-as-dock
 	     window-in-cycle-p
 	     window-class
 	     warp-cursor-to-window
@@ -134,11 +136,21 @@ Returns nil if no such window is found."
 
   (define-command 'focus-desktop focus-desktop)
 
-  (define (window-in-cycle-p w)
+  (define (dock-window-p arg)
+    "Return true if ARG represents a dock window (i.e. the GNOME panel)."
+    (and (windowp arg) (window-get arg 'dock-type)))
+
+  (define (mark-window-as-dock w)
+    "Mark that the window associated with object W is a dock window."
+    (window-put w 'dock-type t)
+    (window-put w 'window-list-skip t)
+    (window-put w 'cycle-skip t))
+
+  (define (window-in-cycle-p w #!key ignore-cycle-skip)
     "Returns true if the window W should be included when cycling between
 windows."
     (and (window-really-wants-input-p w)
-	 (not (or (window-get w 'cycle-skip)
+	 (not (or (and (not ignore-cycle-skip) (window-get w 'cycle-skip))
 		  (desktop-window-p w)))))
 
   (define (window-class w)
