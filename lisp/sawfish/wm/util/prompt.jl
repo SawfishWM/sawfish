@@ -20,6 +20,22 @@
 	    prompt-for-variable
 	    prompt-for-command
 
+	    ;; motion / editing commands
+	    prompt-backward-character
+	    prompt-forward-character
+	    prompt-backward-word
+	    prompt-forward-word
+	    prompt-beginning-of-line
+	    prompt-end-of-line
+	    prompt-previous
+	    prompt-next
+	    prompt-accept
+	    prompt-complete
+	    prompt-clear
+	    prompt-backspace
+	    prompt-kill-line
+	    prompt-exit
+
 	    ;; autoloaded from prompt-extras
 	    prompt-for-file
 	    prompt-for-directory
