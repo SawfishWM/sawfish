@@ -57,7 +57,8 @@
     (window-put w 'keymap window-keymap)))
 
 (defun focus-out-fun (w)
-  (when (eq focus-mode 'click)
+  (when (and (eq focus-mode 'click)
+	     (not (eq (window-get w 'keymap) click-to-focus-keymap)))
     (window-put w 'keymap click-to-focus-keymap)))
 
 (defun focus-mode-changed ()
@@ -78,3 +79,6 @@
 (add-hook 'focus-in-hook 'focus-in-fun t)
 (add-hook 'focus-out-hook 'focus-out-fun t)
 (add-hook 'add-window-hook 'focus-add-window t)
+
+(unless batch-mode
+  (mapc 'focus-add-window (managed-windows)))
