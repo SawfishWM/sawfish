@@ -223,14 +223,18 @@
 			      (not (eq (car cell) 'position)))
 			    alist)))))
 
-  ;; borrowed from sm-load.jl
-  (let (tem)
-    (when (setq tem (cdr (assq 'dimensions alist)))
-      (resize-window-to w (car tem) (cdr tem)))
-    (mapc (lambda (sym)
-	    (when (setq tem (cdr (assq sym alist)))
-	      (window-put w sym tem))) window-history-states)
-    (call-window-hook 'sm-restore-window-hook w (list alist))))
+  ;; also do `dimensions'
+  (let ((dims (cdr (assq 'dimensions alist))))
+    (when (and dims (not (cdr (assq 'user-size (window-size-hints w)))))
+      (resize-window-to w (car dims) (cdr dims))))
+
+  ;; then the rest (borrowed from sm-load.jl)
+  (mapc (lambda (sym)
+	  (let ((tem (cdr (assq sym alist))))
+	    (when tem
+	      (window-put w sym tem))))
+	window-history-states)
+  (call-window-hook 'sm-restore-window-hook w (list alist)))
 
 
 ;; saving and loading state
