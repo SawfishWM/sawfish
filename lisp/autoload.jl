@@ -85,4 +85,13 @@
 (autoload 'slide-group-right "slide-window" t)
 (autoload 'slide-group-up "slide-window" t)
 (autoload 'slide-group-down "slide-window" t)
+(autoload 'make-window-ignored "ignore-window" t)
+(autoload 'make-window-not-ignored "ignore-window" t)
+(autoload 'toggle-window-ignored "ignore-window" t)
+(autoload 'gnome-toggle-skip-winlist "gnome-commands" t)
+(autoload 'gnome-set-skip-winlist "gnome-commands" t)
+(autoload 'gnome-clear-skip-winlist "gnome-commands" t)
+(autoload 'gnome-toggle-skip-tasklist "gnome-commands" t)
+(autoload 'gnome-set-skip-tasklist "gnome-commands" t)
+(autoload 'gnome-clear-skip-tasklist "gnome-commands" t)
 ;;; ::autoload-end::

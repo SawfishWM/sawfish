@@ -1,3 +1,17 @@
+1999-11-28  John Harper  <john@dcs.warwick.ac.uk>
+
+	* menus.jl (window-ops-menu): added some more `Toggle' items
+
+	* ignore-window.jl: new file, mostly by Julian Missig
+	<julian@linuxpower.org> (X-ViRGE) controls the `ignored'
+	property of windows on-the-fly
+
+	* gnome.jl: call gnome-set-client-list from the
+	workspace-state-change-hook
+
+	* gnome-commands.jl: new file, a few commands to toggle the
+	skip-tasklist and skip-winlist hints
+
 1999-11-26  John Harper  <john@dcs.warwick.ac.uk>
 
 	* keymaps.jl (custom-set-keymap): catch and ignore errors when
