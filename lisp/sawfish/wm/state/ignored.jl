@@ -28,8 +28,9 @@
 	    make-window-ignored
 	    make-window-not-ignored
 	    toggle-window-ignored
-	    window-never-focus-p
-	    toggle-window-never-focus)
+	    toggle-window-never-focus
+	    toggle-window-cycle-skip
+	    toggle-window-list-skip)
 
     (open rep
 	  rep.system
@@ -66,30 +67,33 @@
 
   (define (toggle-window-never-focus w)
     "Toggle whether a window is focusable or not."
-    (if (window-get w 'never-focus)
-	(window-put w 'never-focus nil)
-      (window-put w 'never-focus t))
+    (window-put w 'never-focus (not (window-get w 'never-focus)))
     (when (eq (input-focus) w)
       (window-order-focus-most-recent))
     (call-window-hook 'window-state-change-hook w (list '(never-focus))))
 
   (define (toggle-window-cycle-skip w)
     "Toggle whether a window is ignored while window cycling."
-    (if (window-get w 'cycle-skip)
-	(window-put w 'cycle-skip nil)
-      (window-put w 'cycle-skip t))
+    (window-put w 'cycle-skip (not (window-get w 'cycle-skip)))
     (call-window-hook 'window-state-change-hook w (list '(cycle-skip))))
 
-  ;;###autoload
+  (define (toggle-window-list-skip w)
+    "Toggle whether a window will be include in the window list."
+    (window-put w 'window-list-skip (not (window-get w 'window-list-skip)))
+    (call-window-hook 'window-state-change-hook w (list '(window-list-skip))))
+
   (define-command 'make-window-ignored make-window-ignored #:spec "%W")
   (define-command 'make-window-not-ignored make-window-not-ignored #:spec "%W")
   (define-command 'toggle-window-ignored toggle-window-ignored #:spec "%W")
   (define-command 'toggle-window-never-focus toggle-window-never-focus #:spec "%W")
   (define-command 'toggle-window-cycle-skip toggle-window-cycle-skip #:spec "%W")
+  (define-command 'toggle-window-list-skip toggle-window-list-skip #:spec "%W")
 
   (add-window-menu-toggle (_ "_Ignored") 'toggle-window-ignored
 			  window-ignored-p)
   (add-window-menu-toggle (_ "_Focusable") 'toggle-window-never-focus
 			  (lambda (w) (not (window-get w 'never-focus))))
   (add-window-menu-toggle (_ "_Cyclable") 'toggle-window-cycle-skip
-			  (lambda (w) (not (window-get w 'cycle-skip)))))
+			  (lambda (w) (not (window-get w 'cycle-skip))))
+  (add-window-menu-toggle (_ "In _window list") 'toggle-window-list-skip
+			  (lambda (w) (not (window-get w 'window-list-skip)))))
