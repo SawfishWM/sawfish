@@ -19,6 +19,7 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+(require 'workspace)
 (provide 'viewport)
 
 ;; Commentary:
@@ -27,12 +28,8 @@
 ;; the screen dimensions. E.g. moving to the left moves all windows one
 ;; screen-width to the right. 
 
-(defcustom viewport-dimensions '(1 . 1)
-  "Number of columns and rows in each virtual workspace: \\w"
-  :group workspace
-  :type (pair (number 1) (number 1))
-  :user-level novice
-  :after-set (lambda () (viewport-size-changed)))
+(defvar viewport-dimensions '(1 . 1)
+  "Size of each virtual workspace.")
 
 (defcustom uniconify-to-current-viewport t
   "Windows uniconify to the current viewport."
@@ -266,6 +263,14 @@
 (sm-add-saved-properties 'sticky-viewport)
 (add-hook 'sm-window-save-functions viewport-saved-state)
 (add-hook 'sm-restore-window-hook viewport-load-state)
+
+
+;; config
+
+(add-hook 'workspace-geometry-changed
+	  (lambda ()
+	    (setq viewport-dimensions (cdr workspace-geometry))
+	    (viewport-size-changed)))
 
 
 ;; initialisation

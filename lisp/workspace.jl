@@ -56,6 +56,13 @@
 
 ;; Options and variables
 
+(defcustom workspace-geometry '(1 . (1 . 1))
+  "Virtual desktop configuration."
+  :type workspace-geometry
+  :user-level novice
+  :group workspace
+  :after-set (lambda () (call-hook 'workspace-geometry-changed)))
+
 (defcustom workspace-boundary-mode 'stop
   "When passing the first or last workspace: \\w"
   :type symbol
@@ -76,13 +83,8 @@
   :user-level expert
   :group workspace)
 
-(defcustom preallocated-workspaces 1
-  "Minimum number of workspaces: \\w"
-  :type number
-  :range (1 . nil)
-  :user-level novice
-  :group workspace
-  :after-set (lambda () (call-hook 'workspace-state-change-hook)))
+(defvar preallocated-workspaces 1
+  "Minimum number of workspaces.")
 
 (defcustom lock-first-workspace t
   "Preserve empty workspaces in pager."
@@ -112,7 +114,7 @@
   :group (min-max iconify))
 
 (defcustom transients-on-parents-workspace nil
-  "Dialog windows are opened on the same workspace as their application."
+  "Dialogs appear on the same workspace as their application."
   :type boolean
   :group workspace)
 
@@ -931,6 +933,14 @@ instance remaining, then delete the actual window."
 	      (setq workspace-local-properties
 		    (cons p workspace-local-properties))))
 	props))
+
+
+;; configuration
+
+(add-hook 'workspace-geometry-changed
+	  (lambda ()
+	    (setq preallocated-workspaces (car workspace-geometry))
+	    (call-hook 'workspace-state-change-hook)))
 
 
 ;; Initialisation
