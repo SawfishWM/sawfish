@@ -420,23 +420,27 @@ the width of the bevel. If UP is non-nil the bevel is raised.
 /* XXX stubs for suitable Imlib functions... */
 
 DEFUN("make-sized-image", Fmake_sized_image, Smake_sized_image,
-      (repv width, repv height, repv r, repv g, repv b), rep_Subr5) /*
+      (repv width, repv height, repv color), rep_Subr3) /*
 ::doc:Smake-sized-image::
-make-sized-image WIDTH HEIGHT [RED GREEN BLUE]
+make-sized-image WIDTH HEIGHT [COLOR]
 
-Return a new image of dimensions (WIDTH, HEIGHT). The RED, GREEN and
-BLUE values define the color of its pixels (ranging from 0 to 65535).
+Return a new image of dimensions (WIDTH, HEIGHT). The object COLOR
+defines the color of its pixels.
 ::end:: */
 {
     u_char *data;
+    int r, g, b;
     rep_DECLARE1(width, rep_INTP);
     rep_DECLARE2(height, rep_INTP);
-    if (!rep_INTP(r))
-	r = rep_MAKE_INT(0);
-    if (!rep_INTP(g))
-	g = rep_MAKE_INT(0);
-    if (!rep_INTP(b))
-	b = rep_MAKE_INT(0);
+    if (COLORP(color))
+    {
+	r = VCOLOR(color)->color.red / 256;
+	g = VCOLOR(color)->color.green / 256;
+	b = VCOLOR(color)->color.blue / 256;
+    }
+    else
+	r = g = b = 0;
+
     data = rep_alloc (rep_INT(width) * rep_INT(height) * 3);
     if (data != 0)
     {
@@ -444,9 +448,9 @@ BLUE values define the color of its pixels (ranging from 0 to 65535).
 	int i;
 	for (i = 0; i < rep_INT(width) * rep_INT(height) * 3; i += 3)
 	{
-	    data[i] = rep_INT(r);
-	    data[i+1] = rep_INT(g);
-	    data[i+2] = rep_INT(b);
+	    data[i] = r;
+	    data[i+1] = g;
+	    data[i+2] = b;
 	}
 	im = Imlib_create_image_from_data (imlib_id, data, 0,
 					   rep_INT(width), rep_INT(height));
