@@ -987,6 +987,7 @@ find_meta(void)
     KeySym *syms;
     int syms_per_code;
     XModifierKeymap *mods;
+    repv meta_syms = Qnil, alt_syms = Qnil;
 
 #if defined (XlibSpecificationRelease) && XlibSpecificationRelease >= 4
     XDisplayKeycodes(dpy, &min_code, &max_code);
@@ -1019,10 +1020,14 @@ find_meta(void)
 		    {
 		    case XK_Meta_L: case XK_Meta_R:
 			meta_mod = 1 << row;
+			meta_syms = Fcons (sym == XK_Meta_L ? rep_VAL(&meta_l)
+					   : rep_VAL(&meta_r), meta_syms);
 			break;
 
 		    case XK_Alt_L: case XK_Alt_R:
 			alt_mod = 1 << row;
+			alt_syms = Fcons (sym == XK_Alt_L ? rep_VAL(&alt_l)
+					  : rep_VAL(&alt_r), alt_syms);
 			break;
 
 		    case XK_Num_Lock:
@@ -1041,20 +1046,19 @@ find_meta(void)
 	return;
 
     if (meta_mod == 0)
-    {
 	meta_mod = alt_mod;
-	Fset (Qmeta_keysyms, rep_list_2 (rep_VAL(&alt_l), rep_VAL(&alt_r)));
-    }
-    else
-	Fset (Qmeta_keysyms, rep_list_2 (rep_VAL(&meta_l), rep_VAL(&meta_r)));
 
     if (alt_mod == 0)
-    {
 	alt_mod = meta_mod;
-	Fset (Qalt_keysyms, rep_list_2 (rep_VAL(&meta_l), rep_VAL(&meta_r)));
+
+    if (meta_mod == alt_mod)
+    {
+	meta_syms = Fnconc (rep_list_2 (meta_syms, alt_syms));
+	alt_syms = meta_syms;
     }
-    else
-	Fset (Qalt_keysyms, rep_list_2 (rep_VAL(&alt_l), rep_VAL(&alt_r)));
+
+    Fset (Qmeta_keysyms, meta_syms);
+    Fset (Qalt_keysyms, alt_syms);
 }
 
 
