@@ -65,6 +65,8 @@ DEFSYM(focus_out_hook, "focus-out-hook");
 DEFSYM(iconify_window, "iconify-window");
 DEFSYM(uniconify_window, "uniconify-window");
 DEFSYM(client_message_hook, "client-message-hook");
+DEFSYM(window_moved_hook, "window-moved-hook");
+DEFSYM(window_resized_hook, "window-resized-hook");
 
 /* for enter/leave-notify-hook */
 DEFSYM(root, "root");
@@ -727,6 +729,11 @@ configure_request (XEvent *ev)
 	    fix_window_size (w);
 	if (need_move && !need_resize)
 	    send_synthetic_configure (w);
+
+	if (need_move)
+	    Fcall_window_hook (Qwindow_moved_hook, rep_VAL(w), Qnil, Qnil);
+	if (need_resize)
+	    Fcall_window_hook (Qwindow_resized_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
 
@@ -983,6 +990,37 @@ DEFUN("x-events-queued", Fx_events_queued, Sx_events_queued, (void), rep_Subr0)
     return rep_MAKE_INT (XEventsQueued (dpy, QueuedAfterReading));
 }
 
+DEFUN("clicked-frame-part", Fclicked_frame_part,
+      Sclicked_frame_part, (void), rep_Subr0)
+{
+    return (clicked_frame_part != 0) ? clicked_frame_part->alist : Qnil;
+}
+
+DEFUN("clicked-frame-part-offset", Fclicked_frame_part_offset,
+      Sclicked_frame_part_offset, (void), rep_Subr0)
+{
+    if (clicked_frame_part != 0)
+    {
+	struct frame_part *fp = clicked_frame_part;
+	return Fcons (rep_MAKE_INT(fp->x - fp->win->frame_x),
+		      rep_MAKE_INT(fp->y - fp->win->frame_y));
+    }
+    else
+	return Qnil;
+}
+
+DEFUN("clicked-frame-part-dimensions", Fclicked_frame_part_dimensions,
+      Sclicked_frame_part_dimensions, (void), rep_Subr0)
+{
+    if (clicked_frame_part != 0)
+    {
+	struct frame_part *fp = clicked_frame_part;
+	return Fcons (rep_MAKE_INT(fp->width), rep_MAKE_INT(fp->height));
+    }
+    else
+	return Qnil;
+}
+
 
 /* initialisation */
 
@@ -1091,6 +1129,9 @@ events_init (void)
     rep_ADD_SUBR(Scurrent_event_window);
     rep_ADD_SUBR(Sx_server_timestamp);
     rep_ADD_SUBR(Sx_events_queued);
+    rep_ADD_SUBR(Sclicked_frame_part);
+    rep_ADD_SUBR(Sclicked_frame_part_offset);
+    rep_ADD_SUBR(Sclicked_frame_part_dimensions);
 
     rep_INTERN(visibility_notify_hook);
     rep_INTERN(destroy_notify_hook);
@@ -1103,6 +1144,9 @@ events_init (void)
     rep_INTERN(focus_in_hook);
     rep_INTERN(focus_out_hook);
     rep_INTERN(client_message_hook);
+    rep_INTERN(window_moved_hook);
+    rep_INTERN(window_resized_hook);
+
     rep_INTERN(iconify_window);
     rep_INTERN(uniconify_window);
     rep_INTERN(root);
