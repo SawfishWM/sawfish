@@ -19,7 +19,7 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defgroup simple-frame "Simple frame")
+(defgroup simple-frame "Simple Frame")
 
 (defcustom simple:normal-color "lightsteelblue4"
   "Color of inactive frames in `simple' frame style."

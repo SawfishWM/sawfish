@@ -1,4 +1,16 @@
+1999-12-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.18
+
+	* sawmill-ui.jl (build-color): create buttons containing a
+	preview of the color, not just its name
+
 1999-12-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* windows.c (add_window): always set the `placed' property
+	before exiting
+
+	* keys.h, keys.c: support Hyper modifier, prefix `H-'
 
 	* frames.c (set_frame_part_bg): fixed a bug when tiling shaped
 	frame parts, removed the spurious clipping code

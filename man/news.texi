@@ -7,6 +7,75 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.18
+
+@itemize @bullet
+
+@item General subsystem for matching windows to properties as they're
+created. Allows matching on one or more of the window's X properties
+(e.g. name, class, etc@dots{}), and then setting any number of window
+manager properties as a result. See the @samp{Matched Windows}
+customize group
+
+@item Removed all @code{auto-@var{foo}-alist} and
+@code{@var{bar}-windows-re} variables, they're obsoleted by the general
+match-windows mechanism
+
+@item Respect window's size hints when maximizing (both to see if the
+window is maximizable, and to truncate the maximized dimensions to an
+integral number of rows and columns)
+
+@item Show actual colors in the configurator, not just their names
+
+@item Added a new directory to the theme search path:
+@file{@var{prefix}/share/sawmill/themes}. Use this for system-wide
+themes (don't use the version specific directory)
+
+@item Included a new theme @code{mono}
+
+@item Deprecated the @code{show-message} function, replaced by
+@code{display-message} with a better calling interface; also displays
+multi-line strings
+
+@item Deprecated the menu ``expand variables when first in list''
+behaviour. Instead expand variables when the list is dotted to them, as
+is done for functions
+
+@item Support the @code{Hyper} modifier, prefix is @kbd{H-}
+
+@item In the configurator, look for i18n'd theme README files (Yukihiro
+Nakai)
+
+@item Added option to disable the ability to grab a second edge while
+resizing (@code{resize-add-edges})
+
+@item Included Danish message catalogue (Kenneth Christiansen)
+
+@item Renamed @code{fixed-position} property as @code{sticky-viewport},
+and @code{focus-proxy-click} as @code{focus-click-through}
+
+@item When evaluating mouse events, look in the window that the pointer
+was in when the button was pressed, not where the pointer currently is
+
+@item Fixed bug where focus gets totally lost after closing a Motif
+application that has grabbed the keyboard
+
+@item Fixed (again) the problems when handling remapped windows; also
+should be more ICCCM-compliant
+
+@item Fixed typos in one-dimensional maximisation (Gérard Milmeister)
+
+@item Fixed the logic deciding when it's necessary to switch workspaces
+after merging an empty one
+
+@item Fixed interactive placement showing the window when edge-flipping
+(but it still doesn't work properly, rubber band traces are left)
+
+@item Removed flicker when focusing already-focused windows
+
+@end itemize
+
+
 @unnumberedsec 0.17
 
 @itemize @bullet

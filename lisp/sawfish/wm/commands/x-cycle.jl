@@ -68,7 +68,7 @@
 
 ;; customization options
 
-(defgroup cycle "Window cycling")
+(defgroup cycle "Window Cycling")
 
 (defcustom cycle-show-window-names t
   "Display window names while cycling through windows."

@@ -1,5 +1,5 @@
 ;; smaker/theme.jl -- somewhat windowmaker like theme, heavily customizable
-;; $Id: theme.jl,v 1.6 1999/11/25 23:38:41 john Exp $
+;; $Id: theme.jl,v 1.7 1999/12/05 11:31:06 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -19,7 +19,7 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defgroup smaker-frame "SMaker frame")
+(defgroup smaker-frame "SMaker Frame")
 
 (defcustom smaker:inverted-buttons nil
   "Use black-on-white button images."

@@ -1,5 +1,5 @@
 ;; mono/theme.jl
-;; $Id$
+;; $Id: theme.jl,v 1.1 1999/12/05 11:34:19 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -19,14 +19,14 @@
 ;; along with sawmill; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(defgroup mono-frame "Mono frame")
+(defgroup mono-frame "Mono Frame")
 
-(defcustom mono:gtk-background-color nil
+(defcustom mono:gtk-background-color t
   "Use the GTK+ background color for inactive frames."
   :type boolean
   :group mono-frame)
 
-(defcustom mono:normal-color "#8d7ee1"
+(defcustom mono:normal-color "slateblue1"
   "Color of inactive frames. (When the above option is unset.)"
   :type color
   :group mono-frame

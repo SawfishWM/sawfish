@@ -61,11 +61,6 @@ gzip -9nf $RPM_BUILD_ROOT%{_prefix}/info/sawmill*
 %{_prefix}/share/control-center/Sawmill
 %{_prefix}/share/gnome/wm-properties/Sawmill.desktop
 
-%post
-if [ ! -d ${_prefix}/share/sawmill/themes ]; then
-  mkdir ${_prefix}/share/sawmill/themes
-fi
-
 %changelog
 * Fri Sep 17 1999 John Harper <john@dcs.warwick.ac.uk>
 - don't patch the Makefile

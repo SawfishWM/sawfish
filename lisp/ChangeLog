@@ -1,4 +1,32 @@
+1999-12-05  John Harper  <john@dcs.warwick.ac.uk>
+
+	* version 0.18
+
+	* x-cycle.jl, move-resize.jl, keymap.jl: replaced show-message
+	by display-message
+
+	* menus.jl (window-ops-menu, root-menu): just use function
+	names of dynamic sub-menus, don't create closures
+
+1999-12-04  John Harper  <john@dcs.warwick.ac.uk>
+
+	* frames.jl (rebuild-frames-with-style,
+	reframe-windows-with-style): new functions
+
+	* maximize.jl (maximize-window): respect the window's size
+	hints, both to see if the window is maximizable, and to
+	truncate the maximized dimensions to an integral size
+
 1999-12-03  John Harper  <john@dcs.warwick.ac.uk>
+
+	* workspace.jl (select-workspace): only hide/show windows whose
+	`placed' property is set
+
+	* x-cycle.jl (x-cycle-modifier-alist): support the Hyper
+	modifier
+
+	* workspace.jl (ws-after-removing-window): fix the logic
+	deciding when it's necessary to switch workspaces after merging
 
 	* x-cycle.jl (cycle-windows): grab the keyboard to the
 	currently focused window, prevents the ``lose focus with a

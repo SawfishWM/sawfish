@@ -4,9 +4,9 @@
 @footnotestyle end
 
 @set EDITION 0.5
-@set VERSION 0.17
-@set UPDATED 21 November 1999
-@set UPDATE-MONTH November 1999
+@set VERSION 0.18
+@set UPDATED 5 December 1999
+@set UPDATE-MONTH December 1999
 
 @ifinfo
 @direntry
@@ -658,7 +658,7 @@ When in click-to-focus mode, the focus-assigning click is only passed
 through to the client window if this variable is non-@code{nil}.
 
 This option may be set on a per-window basis by setting the
-@code{focus-proxy-click} property of the window (using the
+@code{focus-click-through} property of the window (using the
 @code{window-put} function).
 @end defvar
 
@@ -832,15 +832,6 @@ Evaluate @var{forms} in an implicit @code{progn}, then restore the
 original window stacking order, returning the value of the
 @code{progn}.
 @end defmac
-
-As windows are created their stacking depth may be automatically set
-through the contents of the @code{auto-depth-alist} variable.
-
-@defvar auto-depth-alist
-An alist associating regular expressions with integer depths. If the
-name of a newly created window matches one of the regular expressions
-it is given the associated depth.
-@end defvar
 
 For the following functions, when called interactively they all operate
 on the window that received the current event, or alternatively the
@@ -1657,11 +1648,6 @@ Returns a symbol naming the frame type currently associated with
 @var{window}.
 @end defun
 
-@defvar auto-window-type-alist
-A list of @code{(@var{regexp} . @var{type})} entries, associating
-window names with frame types.
-@end defvar
-
 
 @node Frame Styles, Themes, Frame Types, Window Frames
 @section Frame Styles
@@ -1706,9 +1692,7 @@ window).
 
 @defun set-frame-for-window window &optional force type
 If @var{window} has no frame style associated with it, then chooses the
-default value for this window, either a value from
-@code{auto-frame-style-alist} or the value of
-@code{default-frame-style}.
+default value for this window, the value of @code{default-frame-style}.
 
 If @var{force} is non-nil then the style is always re-chosen, even if
 the window already has a chosen default style.
@@ -1717,15 +1701,19 @@ If @var{type} is non-nil it defines the frame type to give the window,
 otherwise the current default for the window is used.
 @end defun
 
-@defvar auto-frame-style-alist
-Alist associating regular expressions with frame style names. If the
-name of a new window matches one of the regular expressions, it's given
-the associated frame style.
-@end defvar
-
 @defun reframe-all-windows
 Forcibly reselect all window frame styles. Only windows with a user
 specified style are not changed to the current defaults.
+@end defun
+
+@defun rebuild-frames-with-style style
+Call @code{rebuild-frame} on all windows that currently have a frame
+defined by frame style @var{style} (a symbol)
+@end defun
+
+@defun reframe-windows-with-style style
+Completely recreate all window frames that are defined by the style
+@var{style}.
 @end defun
 
 Several window properties are used while choosing frame styles:
@@ -1867,17 +1855,16 @@ for example, a single-level menu could be defined by:
 @noindent
 The null item will create a separator line in the displayed menu.
 
-If the first element of any item is a symbol, then the whole item is
-replaced by the contents of the named variable. If the cdr of the first
-element is a symbol, then the rest of the item is defined by the result
-of calling the named function.
+If the cdr of first element of any item is a symbol, then the rest of
+the item is defined by the value of the named variable. If this value
+is functional then the definition is found by calling the function.
 
 Consider the following definition:
 
 @lisp
 (("Workspaces" . workspace-menu)
  ("Windows" . window-menu)
- (apps-menu)
+ ("Programs" . apps-menu)
  ("Customize" . custom-menu)
  ("About..." (customize 'about))
  ()
@@ -1886,17 +1873,16 @@ Consider the following definition:
 @end lisp
 
 @noindent
-This is the definition of Sawmill's root menu. We can see that three
-submenus are created dynamically by calling functions
-(@code{workspace-menu}, @code{window-menu} and @code{custom-menu}),
-while one submenu is stored in a separate variable (@code{apps-menu}).
+This is the definition of Sawmill's root menu. We can see that four
+submenus are created dynamically by dereferencing variables (in fact,
+three of this variables contain functions) (@code{workspace-menu},
+@code{window-menu}, @code{apps-menu} and @code{custom-menu}).
 
 The @code{apps-menu} variable can thus be used to redefine the
 applications menu. The default definition is as follows:
 
 @lisp
-("Applications"
- ("xterm" (system "xterm &"))
+(("xterm" (system "xterm &"))
  ("Emacs" (system "emacs &"))
  ("Netscape" (system "netscape &"))
  ("The GIMP" (system "gimp &"))
@@ -1966,9 +1952,9 @@ This function returns @code{t} if its argument is an input event.
 
 Each event has a name, a string. This string contains zero or more
 modifier descriptions separated by hyphens, and then the name of the
-key itself. The standard X modifier names are provided, as well as two
-special modifiers @key{Meta} and @key{Alt} that are mapped to the
-keysyms of the same name.
+key itself. The standard X modifier names are provided, as well as
+three special modifiers @key{Meta}, @key{Alt} and @key{Hyper} that are
+mapped to the keysyms of the same name.
 
 The following table lists the possible modifier prefixes:
 
@@ -1984,6 +1970,9 @@ The alt modifier
 
 @item S
 The shift modifier
+
+@item H
+The hyper modifier
 
 @item Mod@var{k}
 The standard X modifiers, for @var{k} between 1 and 5
@@ -2057,6 +2046,11 @@ A list defining the names of the X keysyms generating the virtual
 @defvar alt-keysyms
 A list defining the names of the X keysyms generating the virtual
 @samp{A} modifier.
+@end defvar
+
+@defvar hyper-keysyms
+A list defining the names of the X keysyms generating the virtual
+@samp{H} modifier.
 @end defvar
 
 
@@ -2492,23 +2486,39 @@ the root window.
 may only be @code{box} for a 3x3 grid.
 @end defun
 
-@defun show-message &optional text font fg bg position
-Display the string @var{text} in the center of the screen. If
-@var{text} is @code{nil} then any string previously displayed is
-removed. Returns the numeric id of the window displaying the message,
-or @code{nil} if no message is displayed.
+@defun display-message &optional text attributes
+Display the string @var{text} in a window on the screen. If @var{text}
+is @code{nil} then any string previously displayed is removed. Returns
+the numeric id of the window displaying the message, or @code{nil} if
+no message is displayed.
 
-@var{font} defines the font to use, if undefined the
-@code{default-font} variable provides this value. @var{fg} and @var{bg}
-define the color of the text and its background respectively. If
-undefined they are black and white.
+@var{attributes} is an alist specifying how the string should be
+displayed; each element of the list is a cons cell @code{(@var{attr} .
+@var{value})} associating an attribute @var{attr} (a symbol) with it's
+value.
 
-@var{position} is a cons cell @code{(@var{x} . @var{y})}. @var{x} and
-@var{y} are integers or @code{nil} (for centered display). If negative
-they count in from the left and bottom edges respectively.
+Possible attributes currently include:
 
-Note that newlines in @var{text} are ignored. This may change in the
-future.
+@table @code
+@item font
+The font to use
+
+@item foreground
+The color to draw the text with
+
+@item background
+The color to draw the background with
+
+@item x-justify
+The justification method for multi-line strings. One of the symbols
+@code{left}, @code{right}, or @code{center}
+
+@item position
+A cons cell defining the coordinates at which to display the message
+window. The cell is @code{(@var{x} . @var{y})}. @var{x} and @var{y} are
+integers or @code{nil} (for centered display). If negative they count
+in from the left and bottom edges respectively.
+@end table
 @end defun
 
 
