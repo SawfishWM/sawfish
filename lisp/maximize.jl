@@ -307,11 +307,11 @@
 	(rplacd coords (nth 1 geom))
 	(rplacd dims (nth 3 geom))
 	(window-put w 'maximized-vertically nil))
-      (resize-window-to w (car dims) (cdr dims))
-      (move-window-to w (car coords) (cdr coords))
       (when (and (not (window-maximized-vertically-p w))
 		 (not (window-maximized-horizontally-p w)))
 	(window-put w 'unmaximized-geometry nil))
+      (resize-window-to w (car dims) (cdr dims))
+      (move-window-to w (car coords) (cdr coords))
       (call-window-hook 'window-unmaximized-hook w (list direction))
       (call-window-hook 'window-state-change-hook w))))
 
