@@ -188,7 +188,8 @@ key_press (XEvent *ev)
     /* Don't look for a context map, frame parts are never focused */
     eval_input_event (Qnil);
 
-    XAllowEvents (dpy, AsyncKeyboard, last_event_time);
+    XAllowEvents (dpy, ev->type == KeyPress ? SyncKeyboard : AsyncKeyboard,
+		  last_event_time);
 }
 
 static void
@@ -273,7 +274,8 @@ button_press (XEvent *ev)
     if (ev->type == ButtonRelease)
 	button_press_mouse_x = button_press_mouse_y = -1;
 
-    XAllowEvents (dpy, AsyncPointer, last_event_time);
+    XAllowEvents (dpy, ev->type == ButtonPress ? SyncPointer : AsyncPointer,
+		  last_event_time);
 }
 
 static void
@@ -304,6 +306,8 @@ motion_notify (XEvent *ev)
 	context_map = get_keymap_for_frame_part (fp);
 
     eval_input_event (context_map);
+
+    XAllowEvents (dpy, SyncPointer, last_event_time);
 }
 
 static void
