@@ -21,15 +21,13 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure nokogiri-shell
+(require 'nokogiri-interfaces)
 
-    (export initialize-shell
-	    destroy-shell
-	    run-shell
-	    main-window)
-  
+(define-structure nokogiri-shell nokogiri-shell-interface
+
     (open rep
 	  gtk
+	  nokogiri-gnome
 	  nokogiri-group
 	  nokogiri-slot
 	  nokogiri-apply
@@ -95,10 +93,10 @@
 	  (gtk-container-add vbox (or s-scroller slot-box-widget))))
 
       (unless socket-id
-	(setq ok-widget (gtk-button-new-with-label (_ "OK")))
-	(setq apply-widget (gtk-button-new-with-label (_ "Try")))
-	(setq revert-widget (gtk-button-new-with-label (_ "Revert")))
-	(setq cancel-widget (gtk-button-new-with-label (_ "Cancel")))
+	(setq ok-widget (stock-button 'ok))
+	(setq apply-widget (stock-button 'apply))
+	(setq revert-widget (stock-button 'revert))
+	(setq cancel-widget (stock-button 'cancel))
 	(gtk-window-set-title main-window (_ "Sawfish configurator"))
 	(gtk-widget-set-name main-window (_ "Sawfish configurator"))
 	(gtk-window-set-wmclass main-window "main" "Nokogiri"))
