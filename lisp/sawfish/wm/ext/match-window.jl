@@ -68,6 +68,7 @@
     '((WM_NAME . "Name")
       (WM_CLASS . "Class")
       (WM_ICON_NAME . "Icon Name")
+      (WM_WINDOW_ROLE . "Role")
       (WM_CLIENT_MACHINE . "Host")
       (WM_COMMAND . "Command")
       (WM_LOCALE_NAME . "Locale")))
