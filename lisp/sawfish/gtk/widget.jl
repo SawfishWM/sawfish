@@ -42,7 +42,8 @@
 	    enable-widget
 	    disable-widget
 	    box-spacing
-	    box-border)
+	    box-border
+	    button-box-spacing)
 
     ((open rep
 	   gui.gtk-2.gtk
@@ -52,6 +53,7 @@
 
   (defconst box-spacing 4)
   (defconst box-border 5)
+  (defconst button-box-spacing 8)
 
   ;; list of possible module prefixes when auto-loading widgets
   (define widget-prefixes '(sawfish.gtk.widgets))

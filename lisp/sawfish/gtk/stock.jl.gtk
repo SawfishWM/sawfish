@@ -66,10 +66,11 @@
       (when main-window
 	(gtk-window-set-transient-for window main-window))
 
+      (gtk-box-set-spacing hbbox button-box-spacing)
       (gtk-button-box-set-layout hbbox 'end)
-      (gtk-box-pack-start hbbox ok)
       (when cancel
 	(gtk-box-pack-end hbbox cancel))
+      (gtk-box-pack-end hbbox ok)
       (gtk-box-pack-end vbox hbbox)
       (gtk-container-add window vbox)
       (gtk-widget-show-all vbox)
