@@ -144,7 +144,8 @@ Returns nil if no such window is found."
     "Mark that the window associated with object W is a dock window."
     (window-put w 'dock-type t)
     (window-put w 'window-list-skip t)
-    (window-put w 'cycle-skip t))
+    (window-put w 'cycle-skip t)
+    (window-put w 'fixed-position t))
 
   (define (window-in-cycle-p w #!key ignore-cycle-skip)
     "Returns true if the window W should be included when cycling between

@@ -73,7 +73,7 @@
     :group (workspace edge-flip))
 
   (defcustom edge-flip-warp-pointer t
-    "Warp pointer to opposite screen edge when flipping."
+    "Preserve the pointer's logical position when flipping."
     :type boolean
     :user-level expert
     :depends edge-flip-enabled
