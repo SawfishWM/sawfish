@@ -32,10 +32,9 @@
 	     (setq type 'shaped))
 	    ((memq type '(transient unframed))
 	     (setq type 'shaped-transient)))
-      (set-window-frame-style
-       w (window-get w 'current-frame-style) type nil)
+      (set-window-frame-style w (window-get w 'current-frame-style) type nil)
       (call-window-hook 'shade-window-hook w)
-      (call-window-hook 'window-state-change-hook w))))
+      (call-window-hook 'window-state-change-hook w (list '(shaded))))))
 
 (defun unshade-window (w)
   "If the window is shaded (see `shade-window'), restore it to it's usual
@@ -48,7 +47,7 @@ state."
 			    (window-get w 'shaded-old-type) nil)
     (window-put w 'shaded-old-type nil)
     (call-window-hook 'unshade-window-hook w)
-    (call-window-hook 'window-state-change-hook w)))
+    (call-window-hook 'window-state-change-hook w (list '(shaded)))))
 
 (defun toggle-window-shaded (w)
   "Toggle the shaded (only the title bar is displayed) state of the window."

@@ -30,7 +30,7 @@
     (set-window-frame w nil-frame)
     (window-put w 'current-frame-style nil)
     (window-put w 'ignored t)
-    (call-window-hook 'window-state-change-hook w)
+    (call-window-hook 'window-state-change-hook w (list '(ignored)))
     (call-hook 'workspace-state-change-hook)))
 
 ;;;###autoload
@@ -40,7 +40,7 @@
   (when (window-get w 'ignored)
     (window-put w 'ignored nil)
     (set-frame-for-window w t)
-    (call-window-hook 'window-state-change-hook w)
+    (call-window-hook 'window-state-change-hook w (list '(ignored)))
     (call-hook 'workspace-state-change-hook)))
 
 ;;;###autoload

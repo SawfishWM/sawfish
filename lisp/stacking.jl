@@ -67,7 +67,7 @@
     (window-put w 'depth depth)
     (restack-by-depth)
     (call-window-hook 'window-depth-change-hook w (list depth))
-    (call-window-hook 'window-state-change-hook w)))
+    (call-window-hook 'window-state-change-hook w (list '(stacking)))))
 
 ;; Called from the add-window-hook
 (defun stacking-add-window (w)

@@ -291,7 +291,7 @@
       (when maximize-raises
 	(raise-window w))
       (call-window-hook 'window-maximized-hook w (list direction))
-      (call-window-hook 'window-state-change-hook w))))
+      (call-window-hook 'window-state-change-hook w (list '(maximized))))))
 
 ;;;###autoload
 (defun unmaximize-window (w &optional direction)
@@ -316,7 +316,7 @@
       (resize-window-to w (car dims) (cdr dims))
       (move-window-to w (car coords) (cdr coords))
       (call-window-hook 'window-unmaximized-hook w (list direction))
-      (call-window-hook 'window-state-change-hook w))))
+      (call-window-hook 'window-state-change-hook w (list '(maximized))))))
 
 ;;;###autoload
 (defun maximize-window-vertically (w)
