@@ -1589,7 +1589,7 @@ through a GUI.\n" version))
     (gtk-grab-add window)
     (unwind-protect
 	(catch 'string-dialog-out
-	  (gtk-main))
+	  (recursive-edit))
       (gtk-widget-destroy window))))
 
 (defun file-dialog (title &optional start)
@@ -1612,7 +1612,7 @@ through a GUI.\n" version))
     (gtk-widget-show filesel)
     (unwind-protect
 	(catch 'filesel-out
-	  (gtk-main))
+	  (recursive-edit))
       (gtk-widget-destroy filesel))))
 
 (let
