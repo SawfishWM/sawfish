@@ -130,13 +130,12 @@ Lisp_Window *
 find_window_by_id (Window id)
 {
     Lisp_Window *w;
-    DB(("find_window_by_id (%lx)\n", id));
     w = window_list;
     while (w != 0 && w->id != id && w->frame != id)
 	w = w->next;
     if (w != 0 && w->id == 0)
 	w = 0;
-    DB(("  --> %p (%s)\n", w, (w != 0) ? w->name : ""));
+    DB(("find_window_by_id (%lx) --> %s\n", id, (w != 0) ? w->name : ""));
     return w;
 }
 
@@ -146,11 +145,10 @@ Lisp_Window *
 x_find_window_by_id (Window id)
 {
     Lisp_Window *w;
-    DB(("x_find_window_by_id (%lx)\n", id));
     w = window_list;
     while (w != 0 && w->saved_id != id && w->frame != id)
 	w = w->next;
-    DB(("  --> %p (%s)\n", w, (w != 0) ? w->name : ""));
+    DB(("x_find_window_by_id (%lx) --> %s\n", id, (w != 0) ? w->name : ""));
     return w;
 }
 
