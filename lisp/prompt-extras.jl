@@ -110,7 +110,7 @@ allowed to be entered."
   (let*
       ((prompt-completion-fun prompt-complete-filename)
        (prompt-validation-fun (and existing prompt-validate-filename))
-v       (prompt-abbrev-fun prompt-abbreviate-filename)
+       (prompt-abbrev-fun prompt-abbreviate-filename)
        (str (prompt title start)))
     (when (and (string= str "") default)
       (setq str default))
@@ -159,3 +159,11 @@ Unless DONT-VALIDATE is t, only a member of PROMPT-LIST will be returned."
     (while (not (numberp num))
       (setq num (read-from-string (prompt (or title "Enter number: ")))))
     num))
+
+;;;###autoload
+(defun pwd-prompt (title)
+  (let
+      ((prompt-display-fun (lambda (string)
+			     (make-string (length string) ?*)))
+       (prompt-history nil))
+    (prompt-for-string title)))
