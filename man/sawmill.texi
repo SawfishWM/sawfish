@@ -1352,13 +1352,24 @@ precedence over values defined both in that variable and in the frame
 style itself.
 @end defvar
 
+The following function may be used to simplify the customization of
+these two variables:
+
+@defun set-frame-part-value class key value &optional override
+Associate @var{value} with property @var{key} for all frame parts of
+class @var{class}.
+
+If @var{override} is non-nil, then the setting is installed in the
+@code{override-frame-part-classes} variable, otherwise it's stored in
+the @code{frame-part-classes} variable.
+@end defun
+
 @noindent
 The following example would override the colors of all title bars:
 
 @lisp
-(setq override-frame-part-classes '((title (background
-                                            "black" "white"
-                                            "green" "blue"))))
+(set-frame-part-value 'title 'background
+                      '("black" "white" "green" "blue") t)
 @end lisp
 
 @noindent
@@ -2272,6 +2283,10 @@ move and resize functions for an example.
 Handle any X events received. If @var{mask} is non-nil then only events
 matching this numeric value are handled (see the X header files for
 details).
+@end defun
+
+@defun x-events-queued
+Returns the number of X events waiting to be handled.
 @end defun
 
 

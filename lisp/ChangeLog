@@ -1,5 +1,9 @@
 1999-10-14  John Harper  <john@dcs.warwick.ac.uk>
 
+	* smart-placement.jl (sp-max-queued-events): new variable, acts
+	as a throttle, revert to random placement when more than this
+	many X events are pending
+
 	* transient.jl (transient-unmap-window): added to
 	iconify-window-hook
 

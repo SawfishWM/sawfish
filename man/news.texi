@@ -7,6 +7,45 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawmill source tree.
 
 
+@unnumberedsec 0.13
+
+@itemize @bullet
+
+@item New option to only highlight frame parts when their window is
+focused (@code{highlight-when-unfocused})
+
+@item Typing @kbd{ESC} while moving/resizing a window cancels the
+operation, restoring the original geometry
+
+@item New session management hook @code{sm-after-restore-hook}
+
+@item New function @code{set-frame-part-value}---makes customizing the
+@code{frame-part-classes} variables easier
+
+@item Fix bug when allocating colors (choosing an incorrect cached
+color)
+
+@item Fix image tiling in frame part backgrounds
+
+@item Handle shifted keysyms when passive grabbing
+
+@item Fix another race condition when active grabbing
+
+@item Fix @code{_WIN_CLIENT_LIST} property not being set properly (both
+missing windows immediately after they're adopted, and of intentionally
+skipping ignored windows)
+
+@item Fix some problems with viewports when exiting/restarting
+
+@item Fix broken stacking of windows after they're mapped
+
+@item Prevent smart window placement blowing up when large numbers of
+windows are open/opened (throttle back to random placement when the
+event queue is too large, as well as trying to prune the search space)
+
+@end itemize
+
+
 @unnumberedsec 0.12
 
 @itemize @bullet
