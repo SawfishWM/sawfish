@@ -207,7 +207,7 @@ sys_init(char *program_name)
     repv opt;
 
 #ifdef HAVE_UNIX
-    if (rep_SYM(Qbatch_mode)->value == Qnil)
+    if (!batch_mode_p ())
 	setpgid (0, 0);
 #endif
 
@@ -220,7 +220,7 @@ sys_init(char *program_name)
     Fset (Qdisplay_name, rep_null_string ());
     Fset (Qcanonical_display_name, rep_null_string ());
 
-    if(rep_SYM(Qbatch_mode)->value == Qnil)
+    if(!batch_mode_p ())
     {
 	if (rep_get_option ("--display", &opt))
 	    display_name = strdup (rep_STR(opt));
@@ -308,7 +308,7 @@ sys_init(char *program_name)
 void
 sys_kill (void)
 {
-    if(rep_SYM(Qbatch_mode)->value == Qnil)
+    if(!batch_mode_p ())
     {
 	XSetInputFocus (dpy, PointerRoot, 0, last_event_time);
 	XDestroyWindow (dpy, no_focus_window);

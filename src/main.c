@@ -157,8 +157,8 @@ sawmill_symbols (void)
     else
     {
 	Fset (Qsawmill_site_lisp_directory,
-	      rep_concat2(rep_STR(rep_SYM(Qsawmill_directory)->value),
-			  "/site-lisp"));
+	      rep_concat2 (rep_STR (Fsymbol_value (Qsawmill_directory, Qt)),
+			   "/site-lisp"));
     }
 
     rep_INTERN_SPECIAL(sawmill_exec_directory);
@@ -172,19 +172,19 @@ sawmill_symbols (void)
     else
     {
 	Fset (Qdocumentation_file,
-	      rep_concat2(rep_STR(rep_SYM(Qsawmill_directory)->value),
-			  "/" SAWMILL_VERSION "/DOC"));
+	      rep_concat2 (rep_STR (Fsymbol_value (Qsawmill_directory, Qt)),
+			   "/" SAWMILL_VERSION "/DOC"));
     }
 
-    Fset (Qdocumentation_files, Fcons(rep_SYM(Qdocumentation_file)->value,
-				      rep_SYM(Qdocumentation_files)->value));
+    Fset (Qdocumentation_files, Fcons(Fsymbol_value (Qdocumentation_file, Qt),
+				      Fsymbol_value (Qdocumentation_files, Qt)));
 
-    Fset (Qload_path, Fcons(rep_SYM(Qsawmill_lisp_lib_directory)->value,
-			    Fcons(rep_SYM(Qsawmill_site_lisp_directory)->value,
-				  rep_SYM(Qload_path)->value)));
+    Fset (Qload_path, Fcons (Fsymbol_value (Qsawmill_lisp_lib_directory, Qt),
+			     Fcons (Fsymbol_value (Qsawmill_site_lisp_directory, Qt),
+				    Fsymbol_value (Qload_path, Qt))));
 
-    Fset (Qdl_load_path, Fcons(rep_SYM(Qsawmill_exec_directory)->value,
-			       rep_SYM(Qdl_load_path)->value));
+    Fset (Qdl_load_path, Fcons (Fsymbol_value (Qsawmill_exec_directory, Qt),
+				Fsymbol_value (Qdl_load_path, Qt)));
 
     rep_INTERN_SPECIAL(sawmill_version);
     Fset (Qsawmill_version, rep_VAL(&version_string));
@@ -229,7 +229,7 @@ stash_argv (int argc, char **argv)
 static void
 do_restart (void)
 {
-    repv args = rep_SYM(Qsaved_command_line_args)->value;
+    repv args = Fsymbol_value (Qsaved_command_line_args, Qt);
     if (rep_CONSP(args))
     {
 	repv len = Flength (args);
@@ -279,13 +279,14 @@ inner_main (repv arg)
 	rep_GC_root gc_tv;
 #endif
 
-	/* final initialisation.. */
-	if(rep_SYM(Qbatch_mode)->value == Qnil)
+	if(!batch_mode_p ())
+	{
+	    /* final initialisation.. */
 	    manage_windows ();
 
-	/* then jump into the event loop.. */
-	if(rep_SYM(Qbatch_mode)->value == Qnil)
+	    /* then jump into the event loop.. */
 	    res = Frecursive_edit ();
+	}
 
 #if (rep_INTERFACE < 8)
 	tv = rep_throw_value;
@@ -297,6 +298,13 @@ inner_main (repv arg)
 #endif
     }
     return res;
+}
+
+bool
+batch_mode_p (void)
+{
+    repv tem = Fsymbol_value (Qbatch_mode, Qt);
+    return tem != Qnil;
 }
 
 int

@@ -166,7 +166,7 @@ server_init (void)
     rep_INTERN(server_eval);
     rep_mark_static (&socket_name);
 
-    if (rep_SYM(Qbatch_mode)->value != Qnil)
+    if (batch_mode_p ())
 	return;
 
     name = Fsymbol_value (Qcanonical_display_name, Qt);

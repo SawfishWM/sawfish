@@ -144,7 +144,7 @@ rep_dl_init (void)
     rep_INTERN_SPECIAL (enter_flipper_hook);
     rep_INTERN_SPECIAL (leave_flipper_hook);
 
-    if (rep_SYM(Qbatch_mode)->value == Qnil)
+    if (!batch_mode_p ())
     {
 	edge_left = create_flipper (root_window, 0, 0, 1, screen_height);
 	edge_right = create_flipper (root_window, screen_width - 1, 0,

@@ -15,6 +15,11 @@
 #define g_warning printf
 #define g_snprintf snprintf
 
+int gnome_sound_sample_load(const char *sample_name, const char *filename);
+void gnome_sound_play (const char * filename);
+void gnome_sound_init(const char *hostname);
+void gnome_sound_shutdown(void);
+
 
 /* from gnome-libs/libgnome/gnome-sound.c HEAD as of March 12, 2000 */
 
@@ -523,7 +528,7 @@ DEFUN("primitive-play-sample", Fprimitive_play_sample,
 repv
 rep_dl_init (void)
 {
-    if (rep_SYM(Qbatch_mode)->value == Qnil)
+    if (!batch_mode_p ())
 	gnome_sound_init ("");
     rep_INTERN (play_sample);
     rep_ADD_SUBR (Sprimitive_play_sample);
@@ -533,6 +538,6 @@ rep_dl_init (void)
 void
 rep_dl_exit (void)
 {
-    if (rep_SYM(Qbatch_mode)->value == Qnil)
+    if (!batch_mode_p ())
 	gnome_sound_shutdown ();
 }

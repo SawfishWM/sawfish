@@ -249,7 +249,7 @@ cursors_init (void)
     rep_ADD_SUBR(Srecolor_cursor);
     rep_ADD_SUBR(Sdefault_cursor);
     rep_ADD_SUBR(Scursorp);
-    if (rep_SYM(Qbatch_mode)->value == Qnil)
+    if (!batch_mode_p ())
 	Fdefault_cursor (Fget_cursor (rep_MAKE_INT (XC_left_ptr)));
     rep_mark_static (&default_cursor);
     rep_INTERN(cursor_shape);

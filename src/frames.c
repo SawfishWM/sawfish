@@ -1726,10 +1726,10 @@ frames_init (void)
 					     0, 0, 0, 0, 0, 0);
 
     rep_INTERN_SPECIAL(default_frame);
-    rep_SYM(Qdefault_frame)->value = Qnil;
+    Fset (Qdefault_frame, Qnil);
 
     rep_INTERN_SPECIAL(nil_frame);
-    rep_SYM(Qnil_frame)->value = Qnil;
+    Fset (Qnil_frame, Qnil);
 
     rep_ADD_SUBR(Sframe_draw_mutex);
     rep_ADD_SUBR(Sframe_state_mutex);
@@ -1789,7 +1789,7 @@ frames_init (void)
     state_syms[fps_inactive_highlighted] = Qinactive_highlighted;
     state_syms[fps_inactive_clicked] = Qinactive_clicked;
 
-    if (rep_SYM(Qbatch_mode)->value == Qnil)
+    if (!batch_mode_p ())
 	window_fp_context = XUniqueContext ();
 }
 

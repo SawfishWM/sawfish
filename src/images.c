@@ -705,7 +705,7 @@ images_init (void)
     image_type = rep_register_new_type ("image", image_cmp, image_prin,
 					image_prin, image_sweep, image_mark,
 					0, 0, 0, 0, 0, 0, 0);
-    if (rep_SYM(Qbatch_mode)->value == Qnil)
+    if (!batch_mode_p ())
     {
 	params.visualid = screen_visual->visualid;
 	params.flags = PARAMS_VISUALID;
@@ -733,11 +733,12 @@ images_init (void)
 
     rep_INTERN_SPECIAL(image_directory);
     Fset (Qimage_directory,
-	  rep_concat2 (rep_STR(rep_SYM(Qsawmill_directory)->value),
+	  rep_concat2 (rep_STR (Fsymbol_value (Qsawmill_directory, Qt)),
 		       "/images"));
     rep_INTERN_SPECIAL(image_load_path);
     Fset (Qimage_load_path,
-	  rep_list_2 (rep_string_dup("."), rep_SYM(Qimage_directory)->value));
+	  rep_list_2 (rep_string_dup("."),
+		      Fsymbol_value (Qimage_directory, Qt)));
 
     rep_INTERN_SPECIAL(default_bevel_percent);
     Fset (Qdefault_bevel_percent, rep_MAKE_INT(50));

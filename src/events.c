@@ -1453,7 +1453,7 @@ events_init (void)
 
     event_handler_context = XUniqueContext ();
 
-    if(rep_SYM(Qbatch_mode)->value == Qnil)
+    if(!batch_mode_p ())
     {
 	xa_sawmill_timestamp = XInternAtom (dpy, "_SAWMILL_TIMESTAMP", False);
 	last_event_time = get_server_timestamp ();

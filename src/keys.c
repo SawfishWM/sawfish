@@ -1679,6 +1679,6 @@ keys_init(void)
 
     rep_mark_static(&next_keymap_path);
 
-    if (rep_SYM(Qbatch_mode)->value == Qnil)
+    if (!batch_mode_p ())
 	update_keyboard_mapping ();
 }

@@ -345,7 +345,7 @@ fonts_init (void)
     Fset (Qfonts_are_fontsets, Qt);
 
     rep_INTERN_SPECIAL(default_font);
-    if (rep_SYM(Qbatch_mode)->value == Qnil)
+    if (!batch_mode_p ())
     {
 	repv font = Fget_font (rep_string_dup("fixed"));
 	if (font == rep_NULL || !FONTP(font))
@@ -354,7 +354,7 @@ fonts_init (void)
 	    rep_throw_value = rep_NULL;
 	    font = Qnil;
 	}
-	rep_SYM(Qdefault_font)->value = font;
+	Fset (Qdefault_font, font);
     }
 }
 
