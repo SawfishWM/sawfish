@@ -1,5 +1,5 @@
 ;; absolute-e.jl
-;; $Id$
+;; $Id: absolute-e.jl,v 1.1 1999/07/23 12:14:04 john Exp $
 
 ;; The images and design of this theme are from Hallvar Helleseth's
 ;; Absolute E theme for Enlightenment
@@ -13,15 +13,15 @@
 ;;    (too many to list here/can't remeber all of them either...) But I
 ;;    give them a BIG thank you!
 
-;;  There is a GTK and WMaker version of this theme available at
-;;  themes.org
+;;    There is a GTK and WMaker version of this theme available at
+;;    themes.org
 
-;;  This theme is going to be following the cvs version of E and not
-;;  the stable version (DR0.15.5)
+;;    This theme is going to be following the cvs version of E and not
+;;    the stable version (DR0.15.5)
 
-;;  Reach me at hallvar@ii.uib.no (www.ii.uib.no/~hallvar)
+;;    Reach me at hallvar@ii.uib.no (www.ii.uib.no/~hallvar)
 
-;;  Date: July 19 1999.
+;;    Date: July 19 1999.
 
 (provide 'absolute-e)
 
@@ -53,7 +53,7 @@
     (width . 16)
     (top-edge . -16)
     (height . 16)
-    (keymap . iconify-button-keymap))
+    (keymap . menu-button-keymap))
    ;; title bar
    ((background . ,absolute-e-bar-images)
     (foreground . "white")
