@@ -101,7 +101,7 @@ on_idle (int since_last)
 	/* XXX There have been reports of sawmill locking the display,
 	   XXX I've never seen it, but this may help, and shouldn't hurt.. */
 	last_event_time = get_server_timestamp ();
-	XUngrabPointer (dpy, last_event_time);
+	ungrab_pointer ();
 	XUngrabKeyboard (dpy, last_event_time);
 	XFlush (dpy);
     }
@@ -387,6 +387,10 @@ where OPTIONS are any of:\n\
     --quit, -q		terminate the interpreter process\n", prog_name);
 	return 0;
    }
+
+#if defined (DEBUG) && DEBUG == 1
+   setvbuf (stdout, NULL, _IOLBF, BUFSIZ);
+#endif
 
     rep_push_structure ("sawfish.wm");
 

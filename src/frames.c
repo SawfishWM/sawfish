@@ -881,7 +881,7 @@ frame_part_destroyer (Lisp_Window *w)
 	    bool old_mutex = frame_draw_mutex;
 	    frame_draw_mutex = TRUE;
 	    unclick_current_fp ();
-	    XUngrabPointer (dpy, last_event_time);
+	    ungrab_pointer ();
 	    frame_draw_mutex = old_mutex;
 	}
 
