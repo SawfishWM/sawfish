@@ -172,7 +172,8 @@ BELOW. If the two windows aren't at the same depth, improvise."
 			;; override_redirect windows that should be
 			;; left on top (e.g. gtk menus, xscreensaver
 			;; virtual root)
-			(x-raise-window w pred))
+			(unless (eq pred w)
+			  (x-raise-window w pred)))
 		       ((> (window-get (car order) 'depth) depth)
 			;; found the last window above W
 			(x-lower-window w (car order)))
