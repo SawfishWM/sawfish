@@ -72,6 +72,11 @@ of the parent window in question."
 		       (indirect-transient-of-p w x)))
 		 (if by-depth (stacking-order) (managed-windows))))
 
+(defun map-transient-group (fun w)
+  "Map the single argument function FUN over all windows in the same transient
+group as window W."
+  (mapc fun (transient-group w)))
+
 
 ;; commands for raising windows with their transients
 
