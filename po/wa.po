@@ -13,14 +13,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.0.1\n"
-"POT-Creation-Date: 2002-11-02 23:33-0800\n"
-"PO-Revision-Date: 2004-04-05 14:42+0200\n"
+"POT-Creation-Date: 2003-01-12 12:11-0800\n"
+"PO-Revision-Date: 2004-09-09 14:00+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 
 #. ../scripts/sawfish-about.jl
 msgid "and many others..."
@@ -154,8 +154,8 @@ msgstr "Tinme Croe"
 #. ../themes/Crux/theme.jl
 msgid "Accent color for focused windows (if unset uses the GTK+ selection color)."
 msgstr ""
-"Mete li coleur en accint pol purnea k' a l' focusse (si nén defini, eployî les "
-"tchuzes di coleur di GTK+)."
+"Mete li coleur en accint pol purnea k' a l' focusse (si nén defini, eployî "
+"les tchuzes di coleur di GTK+)."
 
 #. ../themes/Crux/theme.jl
 msgid "Display the window's icon in its menu button."
@@ -187,19 +187,19 @@ msgstr "Sins do gradyint ezès cådes do tinme gradyint."
 
 #. ../themes/gradient/theme.jl
 msgid "`From' color of inactive frames in `gradient' frame style."
-msgstr ""
+msgstr "Coleur di cmince po les cådes essoctés, e stîle di cåde «gradyint»."
 
 #. ../themes/gradient/theme.jl
 msgid "`To' color of inactive frames in `gradient' frame style."
-msgstr ""
+msgstr "Coleur di fén po les cådes essoctés, e stîle di cåde «gradyint»."
 
 #. ../themes/gradient/theme.jl
 msgid "`From' color of active frames in `gradient' frame style."
-msgstr ""
+msgstr "Coleur di cmince po les cådes ovrants, e stîle di cåde «gradyint»."
 
 #. ../themes/gradient/theme.jl
 msgid "`To' color of active frames in `gradient' frame style."
-msgstr ""
+msgstr "Coleur di fén po les cådes ovrants, e stîle di cåde «gradyint»."
 
 #. ../themes/gradient/theme.jl
 msgid "Use less memory when creating gradients, possibly affecting quality."
@@ -261,19 +261,19 @@ msgstr "Coleur a-z eployî pol tecse."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for unfocused windows."
-msgstr ""
+msgstr "Imådje del bår po les purneas sins l' focusse."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for focused windows."
-msgstr ""
+msgstr "Imådje del bår po les purneas avou l' focusse."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for highlighted parts."
-msgstr ""
+msgstr "Imådje del bår po les bokets e sorbriyance."
 
 #. ../themes/smaker/theme.jl
 msgid "Bar image for clicked parts."
-msgstr ""
+msgstr "Imådje del bår po les bokets clitchîs."
 
 #. ../themes/smaker/theme.jl
 msgid "Height of title bar."
@@ -285,7 +285,7 @@ msgstr "Lårdjeu do boird del purnea."
 
 #. ../themes/smaker/theme.jl
 msgid "Border width of bar images."
-msgstr ""
+msgstr "Lårdjeu del boirdeure des imådjes del bår."
 
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 #. ../lisp/sawfish/gtk/widgets/alist.jl
@@ -346,7 +346,7 @@ msgid "Sawfish Error"
 msgstr "Aroke di Sawfish"
 
 #. ../lisp/sawfish/ui/shell.jl
-msgid "Sawfish configurator"
+msgid "Sawfish Configurator"
 msgstr "Apontieu di Sawfish"
 
 #. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
@@ -385,7 +385,7 @@ msgid "Select Icon"
 msgstr "Tchoezi ene imådjete"
 
 #. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Edit binding"
+msgid "Edit Binding"
 msgstr ""
 
 #. ../lisp/sawfish/ui/widgets/keymap.jl
@@ -405,8 +405,8 @@ msgid "not"
 msgstr "nén"
 
 #. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match window properties"
-msgstr ""
+msgid "Match Window Properties"
+msgstr "Corespondant ås prôpietés do purnea"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -461,12 +461,10 @@ msgstr "Secwince des comandes"
 msgid "Invoke the list of commands, one by one."
 msgstr "Enonder, ene après l' ôte, des comandes d' ene djivêye."
 
-#. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Quit"
 msgstr "Moussî foû"
 
-#. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Restart"
 msgstr "Renonder"
@@ -701,7 +699,7 @@ msgstr "_Clôre"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Toggle"
-msgstr ""
+msgstr "_Discandjî"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "In _group"
@@ -797,7 +795,15 @@ msgstr "_Manuel..."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_About Sawfish..."
-msgstr "Å _dfait di Sawfish..."
+msgstr "Å_d fwait di Sawfish..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Restart"
+msgstr "_Renonder"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Quit"
+msgstr "Moussî _foû"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup window menu"
@@ -824,8 +830,8 @@ msgid "Display the applications menu."
 msgstr "Mostrer li menu des programes."
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "All settings"
-msgstr "Tos les apontiaedjes"
+msgid "_All settings"
+msgstr "_Tos les apontiaedjes"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
@@ -1051,18 +1057,17 @@ msgstr "Foirci li purnea do moumint a n' aveur k' on seu tite."
 msgid "Workspace names"
 msgstr "Nos des scribannes"
 
-#. ../lisp/sawfish/wm/util/compat.jl
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace"
-msgstr "Sititchî scribanne"
+msgid "_Insert workspace"
+msgstr "S_ititchî scribanne"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Select next workspace"
-msgstr "Tchoezi li scribanne shuvant"
+msgid "Select _next workspace"
+msgstr "Tchoezi li scribanne _shuvant"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Select previous workspace"
-msgstr "Tchoezi li scribanne di dvant"
+msgid "Select _previous workspace"
+msgstr "Tchoezi li scribanne di d_vant"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with next"
@@ -1073,12 +1078,12 @@ msgid "Merge with previous"
 msgstr "Maxhî avou l' ci di dvant"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace right"
-msgstr "Bodjî scribanne sol droete"
+msgid "Move workspace _right"
+msgstr "Bodjî l' sicribanne viè l' _droete"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace left"
-msgstr "Bodjî scribanne sol hintche"
+msgid "Move workspace _left"
+msgstr "Bodjî l' sicribanne viè l' _hintche"
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, c-format
@@ -1394,11 +1399,11 @@ msgstr "Enonder li foyteuse di l' aidance di Gnome."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome about"
-msgstr "Å dfait di Gnome"
+msgstr "Åd fwait di Gnome"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Launch the GNOME about dialog."
-msgstr "Enonder li purnea å dfait di Gnome"
+msgstr "Enonder li purnea åd fwait di Gnome"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
@@ -1677,7 +1682,7 @@ msgstr "Aidance mostere li waibe"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
-msgstr "Aidance å dfait di"
+msgstr "Aidance åd fwait di"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Number of pixels to move pointer in `move-cursor-' commands."
@@ -2440,7 +2445,7 @@ msgstr "Waibe di Gnome..."
 
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "About GNOME..."
-msgstr "Å dfait di GNOME..."
+msgstr "Åd fwait di GNOME..."
 
 #. ../lisp/sawfish/wm/gnome/menus.jl
 msgid "Gnome menus update"
@@ -2580,7 +2585,7 @@ msgstr "Passer _houte"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Focusable"
-msgstr ""
+msgstr "Pout aveur li _focusse"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Cyclable"
@@ -2738,7 +2743,9 @@ msgstr "Erôler/disrôler l' purnea"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle the shaded (only the title bar is displayed) state of the window."
-msgstr "Discandjî l' estat d' erôlaedje (seulmint l' bår di tite est veyåve) do purnea."
+msgstr ""
+"Discandjî l' estat d' erôlaedje (seulmint l' bår di tite est veyåve) do "
+"purnea."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "S_haded"
@@ -2787,6 +2794,10 @@ msgstr ""
 "si pus basse pôzucion. Ôtrumint, el rimonter ossu lon k' possibe.\n"
 "Candjî eto l' livea di tos les purneas efants ki vont avou."
 
+#. ../lisp/sawfish/wm/util/compat.jl
+msgid "Insert workspace"
+msgstr "Sititchî scribanne"
+
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Unshade selected windows."
 msgstr "Disrôler les purneas tchoezis"
@@ -2813,7 +2824,7 @@ msgstr "Novea groupe"
 
 #. ../lisp/sawfish/wm/util/gtkrc.jl
 msgid "Gtkrc reload style"
-msgstr ""
+msgstr "Ritcherdjî les stîles gtkrc"
 
 #. ../lisp/sawfish/wm/util/gtkrc.jl
 msgid "Reload the gtkrc settings."
@@ -2849,7 +2860,9 @@ msgstr ""
 msgid ""
 "The program used to play audio samples. If unset, built-in support for ESD "
 "is used."
-msgstr "Li programe eployî po djouwer des bokets d' muzike. Si nén defini, c' est li sopoirt ESD copilé dins l' sistinme ki serè-st eployî."
+msgstr ""
+"Li programe eployî po djouwer des bokets d' muzike. Si nén defini, c' est li "
+"sopoirt ESD copilé dins l' sistinme ki serè-st eployî."
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
@@ -2890,11 +2903,11 @@ msgstr " a: "
 
 #. ../themer/themer.glade:1587
 msgid "About"
-msgstr "Å dfait"
+msgstr "Åd fwait"
 
 #. ../themer/themer.glade:412
 msgid "About:"
-msgstr "Å dfait:"
+msgstr "Åd fwait:"
 
 #. ../themer/themer.glade:879 ../themer/themer.glade:1213
 #. * ../themer/themer.glade:1458
@@ -3036,7 +3049,7 @@ msgstr "_Cådes des purneas"
 
 #. ../themer/themer.glade:1652
 msgid "[about text]"
-msgstr "[tecse «å dfait di»]"
+msgstr "[tecse «åd fwait di»]"
 
 #. ../themer/themer.glade:1106
 msgid "[frame-part-table]"
@@ -3052,7 +3065,7 @@ msgstr "[tite]"
 
 #. ../themer/themer.glade:268
 msgid "_About"
-msgstr "Å _dfait"
+msgstr "Å_d fwait"
 
 #. ../themer/themer.glade:59
 msgid "_File"
