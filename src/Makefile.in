@@ -85,10 +85,10 @@ installdirs : $(top_srcdir)/mkinstalldirs
 	  $(DESTDIR)$(sawfishexecdir)
 
 clean :
-	rm -f *~ *.o *.lo *.la build.h core
+	rm -f *~ *.o *.lo *.la *.jlc build.h core
 
 realclean : clean
-	rm -f .*.d sawfish sawfish-client Makefile *.jlc gtk-style
+	rm -f .*.d sawfish sawfish-client Makefile gtk-style
 	rm -rf .libs
 
 include $(SRCS:%.c=.%.d) $(DL_SRCS:%.c=.%.d)
