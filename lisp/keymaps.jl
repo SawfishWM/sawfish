@@ -118,8 +118,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     "C-M-Left" 'send-to-previous-workspace
     "C-M-Right" 'send-to-next-workspace
     "M-Button1-Click1" 'move-window-interactively
-    "M-Button2-Click1" 'nop		;ensure we get the ButtonRelease
-    "M-Button2-Off" 'popup-window-menu
+    "M-Button2-Click1" 'popup-window-menu
     "M-Button3-Click1" 'raise-lower-window)
 
   (bind-keys global-keymap
