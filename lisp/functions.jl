@@ -21,7 +21,7 @@
 
 (provide 'functions)
 
-(defcustom ignore-window-input-hint nil
+(defcustom ignore-window-input-hint t
   "Give focus to windows even when they haven't asked for it."
   :type boolean
   :group focus)
