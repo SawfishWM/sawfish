@@ -96,4 +96,5 @@
 (autoload 'gnome-clear-skip-tasklist "gnome-commands" t)
 (autoload 'add-window-matcher "match-window")
 (autoload 'remove-window-matcher "match-window")
+(setq custom-required (cons 'match-window custom-required))
 ;;; ::autoload-end::
