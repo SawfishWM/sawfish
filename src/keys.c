@@ -39,7 +39,8 @@ static u_long last_click_button;
 static int click_count;
 
 /* These control which types of keyboard events we actually evaluate */
-static bool eval_modifier_events = FALSE, eval_key_release_events = FALSE;
+DEFSYM(eval_modifier_events, "eval-modifier-events");
+DEFSYM(eval_key_release_events, "eval-key-release-events");
 
 DEFSYM(global_keymap, "global-keymap");
 DEFSYM(root_window_keymap, "root-window-keymap");
@@ -86,7 +87,7 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
     switch(xev->type)
     {
     case KeyRelease:
-	if (!eval_key_release_events)
+	if (Fsymbol_value (Qeval_key_release_events, Qt) == Qnil)
 	    break;
 	/* FALL THROUGH */
 
@@ -118,7 +119,8 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 	else
 	    *code = XKeycodeToKeysym(xev->xany.display, xev->xkey.keycode, 0);
 	if(*code != NoSymbol
-	   && (eval_modifier_events || !IsModifierKey (*code)))
+	   && (!IsModifierKey (*code)
+	       || Fsymbol_value (Qeval_modifier_events, Qt) == Qt))
 	{
 	    *mods |= EV_TYPE_KEY;
 	    ret = TRUE;
@@ -986,22 +988,6 @@ Returns t if the ARG is an input event.
     return EVENTP(arg) ? Qt : Qnil;
 }
 
-DEFUN("eval-key-release-events", Veval_key_release_events,
-      Seval_key_release_events, (repv arg), rep_Var)
-{
-    if (arg != rep_NULL)
-	eval_key_release_events = (arg != Qnil);
-    return eval_key_release_events ? Qt : Qnil;
-}
-
-DEFUN("eval-modifier-events", Veval_modifier_events,
-      Seval_modifier_events, (repv arg), rep_Var)
-{
-    if (arg != rep_NULL)
-	eval_modifier_events = (arg != Qnil);
-    return eval_modifier_events ? Qt : Qnil;
-}
-
 DEFUN("forget-button-press", Fforget_button_press,
       Sforget_button_press, (void), rep_Subr0)
 {
@@ -1344,6 +1330,10 @@ keys_init(void)
     rep_INTERN_SPECIAL(root_window_keymap);
     rep_INTERN_SPECIAL(override_keymap);
     rep_INTERN_SPECIAL(unbound_key_hook);
+    rep_INTERN_SPECIAL(eval_key_release_events);
+    rep_INTERN_SPECIAL(eval_modifier_events);
+    Fset (Qeval_key_release_events, Qnil);
+    Fset (Qeval_modifier_events, Qnil);
     rep_INTERN(keymap);
 
     rep_ADD_SUBR(Smake_keymap);
@@ -1363,9 +1353,6 @@ keys_init(void)
     rep_ADD_SUBR(Skeymapp);
     rep_ADD_SUBR(Seventp);
     rep_ADD_SUBR(Sforget_button_press);
-
-    rep_ADD_SUBR(Seval_key_release_events);
-    rep_ADD_SUBR(Seval_modifier_events);
 
     rep_INTERN(async_pointer);
     rep_INTERN(async_keyboard);

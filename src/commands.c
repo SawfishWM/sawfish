@@ -26,68 +26,32 @@
 DEFSYM(interactive, "interactive");
 DEFSTRING(err_interactive, "Bad interactive specification");
 
-/* Prefix argument for the next command and the current command. */
-static repv prefix_arg, current_prefix_arg;
-
-/* Command being executed and command last executed. */
-repv this_command, last_command;
-
 /* hooks.
 ::doc:pre-command-hook::
 Hook called before evaluating each command.
 ::end::
 ::doc:post-command-hook::
 Hook called after evaluating each command.
-::end:: */
-
-DEFSYM(pre_command_hook, "pre-command-hook");
-DEFSYM(post_command_hook, "post-command-hook");
-
-
-DEFUN("this-command", var_this_command, Sthis_command, (repv val), rep_Var) /*
+::end::
 ::doc:this-command::
 This variable holds the command currently being evaluated, or nil if no
 command is active. The `command' is whatever is being evaluated; it could
 be a function, a form or even a list of forms (from a menu).
-::end:: */
-{
-    if(val)
-	this_command = val;
-    return(this_command);
-}
-
-DEFUN("last-command", var_last_command, Slast_command, (repv val), rep_Var) /*
 ::doc:last-command::
 This variable holds the last interactive command evaluated. This will either
 be from a keybinding or a menu. Setting the value of the `next-keymap-path'
 variable is not considered a command. After a command finishes this variable
 takes the value of `this-command'.
 ::end:: */
-{
-    if(val)
-	last_command = val;
-    return(last_command);
-}
 
-DEFUN("prefix-arg", var_prefix_arg, Sprefix_arg, (repv val), rep_Var) /*
-::doc:prefix-arg::
-Value of the prefix argument for the next command.
-::end:: */
-{
-    if(val)
-	prefix_arg = val;
-    return(prefix_arg);
-}
+DEFSYM(pre_command_hook, "pre-command-hook");
+DEFSYM(post_command_hook, "post-command-hook");
+DEFSYM(this_command, "this-command");
+DEFSYM(last_command, "last-command");
+DEFSYM(prefix_arg, "prefix-arg");
+DEFSYM(current_prefix_arg, "current-prefix-arg");
 
-DEFUN("current-prefix-arg", var_current_prefix_arg, Scurrent_prefix_arg, (repv val), rep_Var) /*
-::doc:current-prefix-arg::
-Value of the prefix argument for the current command.
-::end:: */
-{
-    if(val)
-	current_prefix_arg = val;
-    return(current_prefix_arg);
-}
+
 
 /* Search the definition of the command CMD for an interactive calling
    spec. Return it or NULL. */
@@ -171,13 +135,13 @@ any entered arg is given to the invoked COMMAND.
 ::end:: */
 {
     repv res = rep_NULL;
-    this_command = cmd;
+    Fset (Qthis_command, cmd);
 
     /* Move the prefix arg. */
     if(rep_NILP(Farg))
-	Farg = prefix_arg;
-    prefix_arg = Qnil;
-    current_prefix_arg = Farg;
+	Farg = Fsymbol_value (Qprefix_arg, Qt);
+    Fset (Qprefix_arg, Qnil);
+    Fset (Qcurrent_prefix_arg, Farg);
 
     Fcall_hook(Qpre_command_hook, Qnil, Qnil);
 
@@ -321,7 +285,7 @@ any entered arg is given to the invoked COMMAND.
 	    args = Feval(int_spec);
 	/* Reinitialise current-prefix-arg, in case any functions called
 	   to build the list of arguments overwrote it. */
-	current_prefix_arg = Farg;
+	Fset (Qcurrent_prefix_arg, Farg);
 	if(args)
 	{
 	    if (rep_SYMBOLP(cmd))
@@ -338,9 +302,9 @@ any entered arg is given to the invoked COMMAND.
 exit:
     Fcall_hook(Qpost_command_hook, Qnil, Qnil);
 
-    last_command = this_command;
-    this_command = Qnil;
-    current_prefix_arg = Qnil;
+    Fset (Qlast_command, Fsymbol_value (Qthis_command, Qt));
+    Fset (Qthis_command, Qnil);
+    Fset (Qcurrent_prefix_arg, Qnil);
     return(res);
 }
 
@@ -475,21 +439,17 @@ commands_init(void)
 {
     rep_INTERN(interactive); rep_ERROR(interactive);
 
-    prefix_arg = current_prefix_arg = Qnil;
-    rep_mark_static(&prefix_arg);
-    rep_mark_static(&current_prefix_arg);
-
-    this_command = last_command = Qnil;
-    rep_mark_static(&this_command);
-    rep_mark_static(&last_command);
-
     rep_INTERN_SPECIAL(pre_command_hook);
     rep_INTERN_SPECIAL(post_command_hook);
+    rep_INTERN_SPECIAL(this_command);
+    rep_INTERN_SPECIAL(last_command);
+    rep_INTERN_SPECIAL(prefix_arg);
+    rep_INTERN_SPECIAL(current_prefix_arg);
+    Fset (Qthis_command, Qnil);
+    Fset (Qlast_command, Qnil);
+    Fset (Qprefix_arg, Qnil);
+    Fset (Qcurrent_prefix_arg, Qnil);
 
-    rep_ADD_SUBR(Sthis_command);
-    rep_ADD_SUBR(Slast_command);
-    rep_ADD_SUBR(Sprefix_arg);
-    rep_ADD_SUBR(Scurrent_prefix_arg);
     rep_ADD_SUBR(Scall_command);
     rep_ADD_SUBR(Sprefix_numeric_argument);
     rep_ADD_SUBR(Sinteractive);
