@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-ui -- subprocess to handle configuration user interface
-;; $Id: sawmill-ui.jl,v 1.47 1999/12/08 23:16:03 john Exp $
+;; $Id: sawmill-ui.jl,v 1.48 1999/12/12 11:55:00 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -851,8 +851,7 @@ exec rep "$0" "$@"
   (let
       ((vbox (gtk-vbox-new nil 0))
        (hbox (gtk-hbox-new nil 0))
-       (omenu (gtk-option-menu-new))
-       (menu (gtk-menu-new))
+       (combo (gtk-combo-new))
        (doc-label (gtk-label-new (get-key spec ':doc)))
        (readme-label (gtk-label-new ""))
        (frame (gtk-frame-new (_ "Details")))
@@ -866,34 +865,25 @@ exec rep "$0" "$@"
     (gtk-container-border-width vbox ui-box-border)
     (gtk-frame-set-label frame (_ "Details"))
     (gtk-container-add frame readme-label)
-    (gtk-container-add hbox omenu)
+    (gtk-container-add hbox combo)
     (gtk-container-add hbox doc-label)
-    (gtk-container-add vbox hbox)
     (gtk-container-add vbox frame)
+    (gtk-container-add vbox hbox)
     (gtk-label-set-justify doc-label 'left)
     (gtk-label-set-justify readme-label 'left)
+    (gtk-entry-set-editable (gtk-combo-entry combo) nil)
 
     (unless (key-exists-p spec ':value)
       (set-key spec ':value (car values)))
-    (while values
-      (setq button (gtk-radio-menu-item-new-with-label-from-widget
-		    previous (symbol-name (car values))))
-      (gtk-menu-append menu button)
-      (when (eq (car values) (get-key spec ':value))
-	(gtk-check-menu-item-set-state button t)
-	(setq history i))
-      (gtk-widget-show button)
-      (gtk-signal-connect button "toggled"
-			  (make-closure
-			   `(lambda (w)
-			      (when (gtk-check-menu-item-active w)
-				(build-frame-style:set spec ',(car values))))))
-      (setq i (1+ i))
-      (setq values (cdr values))
-      (setq previous button))
-    (gtk-option-menu-set-menu omenu menu)
-    (when history
-      (gtk-option-menu-set-history omenu history))
+    (gtk-combo-set-popdown-strings combo (mapcar symbol-name values))
+    (gtk-entry-set-text (gtk-combo-entry combo)
+			(symbol-name (get-key spec ':value)))
+    (gtk-signal-connect (gtk-combo-entry combo) "changed"
+			(lambda ()
+			  (build-frame-style:set
+			   spec (intern (gtk-entry-get-text
+					 (gtk-combo-entry combo))))))
+						 
 
     (setq spec (nconc spec (list ':readme readme-label)))
 
