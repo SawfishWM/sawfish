@@ -36,18 +36,18 @@ exec rep "$0" "$@"
 
 (when (and (not (get-command-line-option "--disable-nls"))
 	   (file-directory-p locale-dir))
-  (require 'gettext)
+  (require 'rep.i18n.gettext)
   (bindtextdomain "sawfish" locale-dir)
   (textdomain "sawfish"))
 
 ;; load this after gettext
-(require 'gtk)
-(require 'libglade)
+(require 'gui.gtk.gtk)
+(require 'gui.gtk.libglade)
+
+(require 'sawfish.client)
 
 
 ;; configuration
-
-(defvar sawfish-client-program "sawfish-client")
 
 ;; preferences
 (defvar reload-themes-after-saving t)
@@ -1231,7 +1231,7 @@ exec rep "$0" "$@"
   (let
       ((output (sawfish-eval
 		`(progn
-		   (require 'make-theme-preview)
+		   (require 'sawfish.wm.themeing.make-theme-preview)
 		   (make-theme-preview ',patterns-alist
 				       ',frames-alist
 				       ',mapping-alist)))))
@@ -1729,27 +1729,10 @@ through a GUI.\n" version))
 ;; wm communication
 
 (defun sawfish-eval (form &optional read-back)
-  (let*
-      ((output (make-string-output-stream))
-       (process (make-process output))
-       (print-escape t))
-    (if (zerop (call-process process nil sawfish-client-program
-			     "-e" (format nil "%S" form)))
-	(progn
-	  (setq output (get-output-stream-string output))
-	  ;; success
-	  (if read-back
-	      (read-from-string output)
-	    output))
-      (error "can't call sawfish-client"))))
+  (sawfish-client-eval form (not read-back)))
 
 (defun sawfish-eval-async (form)
-  (let
-      ((process (make-process nil))
-       (print-escape t))
-    (unless (zerop (call-process process nil sawfish-client-program
-				 "-q" "-e" (format nil "%S" form)))
-      (error "can't call sawfish-client"))))
+  (sawfish-client-eval-async form))
 
 
 ;; entry point
