@@ -50,11 +50,41 @@ static repv socket_name;
 DEFSTRING(io_error, "server_make_connection:io");
 DEFSYM(server_eval, "server-eval");
 
+#define SOCK_IO(op, sock, buf, len)			\
+	char *buf__ = (char *)buf;			\
+	int todo__ = len;				\
+	while(todo__ > 0) {				\
+	    int this__ = op (sock, buf__, todo__);	\
+	    if(this__ < 0) {				\
+		if (errno != EINTR)			\
+		    return -1;				\
+	    }						\
+	    else if(this__ == 0)			\
+		break;					\
+	    else {					\
+		todo__ -= this__;			\
+		buf__ += this__;			\
+	    }						\
+	}						\
+	return len - todo__;
+
+static int
+sock_write (int fd, void *buf, size_t len)
+{
+    SOCK_IO (write, fd, buf, len);
+}
+
+static int
+sock_read (int fd, void *buf, size_t len)
+{
+    SOCK_IO (read, fd, buf, len);
+}
+
 static void
 server_handle_request(int fd)
 {
     u_char req;
-    if(read(fd, &req, 1) != 1)
+    if(sock_read(fd, &req, 1) != 1)
 	goto disconnect;
 
     /* Need this in case the client code tries to execute a grab */
@@ -72,9 +102,9 @@ server_handle_request(int fd)
 	   3. eval and print FORM
 	   4. write length of result-string
 	   5. write LENGTH bytes of result string */
-	if(read(fd, &len, sizeof(u_long)) != sizeof(u_long)
+	if(sock_read(fd, &len, sizeof(u_long)) != sizeof(u_long)
 	   || (val = rep_make_string(len + 1)) == rep_NULL
-	   || read(fd, rep_STR(val), len) != len)
+	   || sock_read(fd, rep_STR(val), len) != len)
 	    goto io_error;
 	rep_STR(val)[len] = 0;
 	val = rep_call_lisp1 (Fsymbol_value (Qserver_eval, Qt), val);
@@ -83,14 +113,14 @@ server_handle_request(int fd)
 	    if(val && rep_STRINGP(val))
 	    {
 		len = rep_STRING_LEN(val);
-		if(write(fd, &len, sizeof(u_long)) != sizeof(u_long)
-		   || write(fd, rep_STR(val), len) != len)
+		if(sock_write(fd, &len, sizeof(u_long)) != sizeof(u_long)
+		   || sock_write(fd, rep_STR(val), len) != len)
 		    goto io_error;
 	    }
 	    else
 	    {
 		len = 0;
-		if(write(fd, &len, sizeof(u_long)) != sizeof(u_long))
+		if(sock_write(fd, &len, sizeof(u_long)) != sizeof(u_long))
 		    goto io_error;
 	    }
 	}

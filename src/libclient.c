@@ -29,6 +29,7 @@
 #include <limits.h>
 #include <string.h>
 #include <ctype.h>
+#include <errno.h>
 
 #ifdef HAVE_UNIX
 # include <sys/types.h>
@@ -301,6 +302,36 @@ net_server_init (char *display)
 
 int socket_fd = -1;
 
+#define SOCK_IO(op, sock, buf, len)			\
+	char *buf__ = (char *)buf;			\
+	int todo__ = len;				\
+	while(todo__ > 0) {				\
+	    int this__ = op (sock, buf__, todo__);	\
+	    if(this__ < 0) {				\
+		if (errno != EINTR)			\
+		    return -1;				\
+	    }						\
+	    else if(this__ == 0)			\
+		break;					\
+	    else {					\
+		todo__ -= this__;			\
+		buf__ += this__;			\
+	    }						\
+	}						\
+	return len - todo__;
+
+static int
+sock_write (int fd, void *buf, size_t len)
+{
+    SOCK_IO (write, fd, buf, len);
+}
+
+static int
+sock_read (int fd, void *buf, size_t len)
+{
+    SOCK_IO (read, fd, buf, len);
+}
+
 static char *
 unix_server_eval (char *form, int async, int *lenp)
 {
@@ -310,11 +341,11 @@ unix_server_eval (char *form, int async, int *lenp)
     u_long len = strlen(form);
     char *result;
 
-    if(write(socket_fd, &req, 1) != 1
-       || write(socket_fd, &len, sizeof(u_long)) != sizeof(u_long)
-       || write(socket_fd, form, len) != len
+    if(sock_write(socket_fd, &req, 1) != 1
+       || sock_write(socket_fd, &len, sizeof(u_long)) != sizeof(u_long)
+       || sock_write(socket_fd, form, len) != len
        || (req != req_eval_async
-	   && read(socket_fd, &len, sizeof(u_long)) != sizeof(u_long)))
+	   && sock_read(socket_fd, &len, sizeof(u_long)) != sizeof(u_long)))
     {
 	perror("eval_req");
 	return 0;
@@ -324,7 +355,7 @@ unix_server_eval (char *form, int async, int *lenp)
 	if(len > 0)
 	{
 	    result = malloc(len);
-	    if(result == 0 || read(socket_fd, result, len) != len)
+	    if(result == 0 || sock_read(socket_fd, result, len) != len)
 	    {
 		perror("eval_req");
 		free (result);
