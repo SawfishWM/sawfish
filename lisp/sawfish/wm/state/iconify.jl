@@ -34,6 +34,16 @@
   :user-level expert
   :group (min-max iconify))
 
+(defcustom iconify-group-mode 'transients
+  "Iconifying a window also iconifies the: \\w"
+  :type (choice none transients group)
+  :group (min-max iconify))
+
+(defcustom uniconify-group-mode 'transients
+  "Uniconifying a window also uniconifies the: \\w"
+  :type (choice none transients group)
+  :group (min-max iconify))
+
 (defun iconify-window (w)
   "Iconify the window."
   (interactive "%W")
@@ -44,8 +54,9 @@
       (hide-window w))
     (call-window-hook 'iconify-window-hook w)
     (call-window-hook 'window-state-change-hook w (list '(iconified)))
-    (when iconify-whole-group
-      (iconify-group w))))
+    (case iconify-group-mode
+      ((transients) (iconify-transient-group w))
+      ((group) (iconify-group w)))))
 
 (defun uniconify-window (w)
   "Return the window from its iconified state."
@@ -65,8 +76,9 @@
       (set-input-focus w))
     (call-window-hook 'uniconify-window-hook w)
     (call-window-hook 'window-state-change-hook w (list '(iconified)))
-    (when uniconify-whole-group
-      (uniconify-group w))))
+    (case uniconify-group-mode
+      ((transients) (uniconify-transient-group w))
+      ((group) (uniconify-group w)))))
 
 (defun toggle-window-iconified (w)
   "Toggle the iconification of window W."
