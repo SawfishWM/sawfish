@@ -372,6 +372,15 @@ frame_part_destroyer (Lisp_Window *w)
     struct frame_part *fp, *next;
     for (fp = w->frame_parts; fp != 0; fp = next)
     {
+	if (fp->clicked)
+	{
+	    /* This is necessary so that clicked_frame_part is cleared. */
+	    bool old_mutex = frame_draw_mutex;
+	    frame_draw_mutex = TRUE;
+	    unclick_current_fp ();
+	    frame_draw_mutex = old_mutex;
+	}
+
 	if (fp->gc)
 	    XFreeGC (dpy, fp->gc);
 
