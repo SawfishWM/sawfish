@@ -107,10 +107,8 @@ list of strings DIRS."
   "Return the screen dimensions in pixels as a cons cell `(WIDTH . HEIGHT)'."
   (cons (screen-width) (screen-height)))
 
-(define (current-head #!optional w)
+(define (current-head #!optional (w (input-focus)))
   "Return the ID of the `current' head."
-  (unless w
-    (setq w (input-focus)))
   (if w
       (let ((point (window-position w))
 	    (dims (window-dimensions w)))
