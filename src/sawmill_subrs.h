@@ -180,6 +180,7 @@ extern repv Fcreate_window (repv parent, repv x, repv y,
 extern repv Fx_atom (repv symbol);
 extern repv Fx_atom_name (repv atom);
 extern repv Fdisplay_message (repv text, repv attrs);
+extern void update_xinerama_info (void);
 extern void functions_init (void);
 extern void functions_kill (void);
 

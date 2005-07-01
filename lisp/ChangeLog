@@ -1,3 +1,10 @@
+2005-06-26  Philip Langdale <philipl@mail.utexas.edu>
+
+	* sawfish/wm/state/wm-spec.jl (init): Add a
+	configure-notify-hook to detect changes to the size of the root
+	window, which implies a screen resolution change, and call
+	update-workspace-hints
+
 2005-02-06  John Harper  <jsh@unfactored.org>
 
 	* sawfish/wm/menus.jl (popup-menu): synchronize with the server

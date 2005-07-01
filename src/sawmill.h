@@ -73,7 +73,7 @@ typedef int bool;
 #define ROOT_EVENTS (SubstructureRedirectMask | SubstructureNotifyMask \
 		     | ButtonPressMask | ButtonReleaseMask | KeyPressMask \
 		     | ButtonMotionMask | PointerMotionHintMask \
-		     | EnterWindowMask | LeaveWindowMask)
+		     | EnterWindowMask | LeaveWindowMask | StructureNotifyMask)
 
 /* Events selected on each frame part */
 #define FP_EVENTS (ButtonPressMask | ButtonReleaseMask | ButtonMotionMask \

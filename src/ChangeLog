@@ -1,3 +1,17 @@
+2005-06-26  Philip Langdale <philipl@mail.utexas.edu>
+
+	* sawmill.h: Add StructureNotify to the root window event mask.
+
+	* events.c (configure_notify): Add a configure-notify-hook and
+	emit it on the expected occasions. Respond to configureNotify
+	events on the root window by calling into Xrandr (if the
+	extension is available) and updating the cached screen 	size
+	and xinerama information.
+
+	* functions.c, sawmill_subrs.h (update_xinerama_info): Refactor
+	xinerama discovery into a separate function so it can be called
+	on Xrandr screen size change events.
+
 2005-02-11  John Harper  <jsh@unfactored.org>
 
 	* windows.c (Fwindow_frame_id): new function to return the

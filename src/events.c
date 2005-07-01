@@ -24,6 +24,9 @@
 #include <string.h>
 #include <time.h>
 #include <X11/extensions/shape.h>
+#ifdef HAVE_X11_EXTENSIONS_XRANDR_H
+#include <X11/extensions/Xrandr.h>
+#endif
 #include <X11/Xresource.h>
 #include <X11/Xatom.h>
 
@@ -83,6 +86,7 @@ DEFSYM(shape_notify_hook, "shape-notify-hook");
 DEFSYM(enter_frame_part_hook, "enter-frame-part-hook");
 DEFSYM(leave_frame_part_hook, "leave-frame-part-hook");
 DEFSYM(configure_request_hook, "configure-request-hook");
+DEFSYM(configure_notify_hook, "configure-notify-hook");
 DEFSYM(window_state_change_hook, "window-state-change-hook");
 
 DEFSYM(pointer_motion_threshold, "pointer-motion-threshold");
@@ -1099,6 +1103,29 @@ gravity_notify (XEvent *ev)
 static void
 configure_notify (XEvent *ev)
 {
+    Window window = ev->xconfigure.window;
+    Lisp_Window *w = find_window_by_id (ev->xcrossing.window);
+
+    if (window == root_window)
+    {
+        /* It will be fairly pathological case where the server
+           supports the randr extension but sawfish binary has been
+           compiled without it, but we can still respond to the
+           configureNotify event in a basic way */
+#ifdef HAVE_X11_EXTENSIONS_XRANDR_H
+        XRRUpdateConfiguration (ev);
+#endif
+        update_xinerama_info ();
+
+        screen_width = ev->xconfigure.width;
+        screen_height = ev->xconfigure.height;
+
+        Fcall_hook (Qconfigure_notify_hook, rep_LIST_1(Qroot), Qnil);
+     }
+     else if (w != 0 && w->id == window)
+     {
+        Fcall_window_hook (Qconfigure_notify_hook, rep_VAL(w), Qnil, Qnil);
+     }
 }
 
 static void
@@ -1670,6 +1697,7 @@ events_init (void)
     rep_INTERN_SPECIAL(shape_notify_hook);
     rep_INTERN_SPECIAL(enter_frame_part_hook);
     rep_INTERN_SPECIAL(leave_frame_part_hook);
+    rep_INTERN_SPECIAL(configure_notify_hook);
     rep_INTERN_SPECIAL(configure_request_hook);
     rep_INTERN_SPECIAL(window_state_change_hook);
 

@@ -939,6 +939,26 @@ Returns the numeric id of the root window of the managed screen.
 
 /* xinerama support */
 
+void
+update_xinerama_info (void)
+{
+#ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
+# ifndef TEST_XINERAMA
+    if (dpy != 0)
+    {
+	if (XineramaQueryExtension (dpy, &xinerama_event_base,
+				    &xinerama_error_base))
+	{
+	    xinerama_head_info = XineramaQueryScreens (dpy, &xinerama_heads);
+	}
+    }
+# else
+    xinerama_head_info = debug_heads;
+    xinerama_heads = debug_nheads;
+# endif
+#endif
+}
+
 DEFUN ("head-count", Fhead_count, Shead_count, (void), rep_Subr0)
 {
     return rep_MAKE_INT (MAX (1, xinerama_heads));
@@ -1382,21 +1402,7 @@ functions_init (void)
     rep_mark_static (&message.font);
     rep_mark_static (&message.justify);
 
-#ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
-# ifndef TEST_XINERAMA
-    if (dpy != 0)
-    {
-	if (XineramaQueryExtension (dpy, &xinerama_event_base,
-				    &xinerama_error_base))
-	{
-	    xinerama_head_info = XineramaQueryScreens (dpy, &xinerama_heads);
-	}
-    }
-# else
-    xinerama_head_info = debug_heads;
-    xinerama_heads = debug_nheads;
-# endif
-#endif
+    update_xinerama_info ();
 }
 
 void

@@ -588,6 +588,10 @@
 	 (out '() (cons (aref vec i) out)))
 	((= i (length vec)) (nreverse out))))
 
+  (define (update-on-configure-notify w)
+    (when (eq w 'root)
+      (update-workspace-hints)))
+
 
 ;;; initialisation
 
@@ -619,6 +623,7 @@
     (add-hook 'viewport-resized-hook update-workspace-hints)
     (add-hook 'viewport-moved-hook update-workspace-hints)
     (add-hook 'workarea-changed-hook update-workspace-hints)
+    (add-hook 'configure-notify-hook update-on-configure-notify)
 
     (add-hook 'add-window-hook update-client-list-hints)
     (add-hook 'destroy-notify-hook update-client-list-hints)

@@ -94,16 +94,23 @@ AC_CHECK_HEADERS(X11/SM/SMlib.h X11/extensions/Xdbe.h)
 
 dnl Checks for X extensions/libraries
 XINERAMA_LIBS=""
+XRANDR_LIBS=""
 XFT_LIBS=""
 XFT_CFLAGS=""
 
 AC_SUBST(XINERAMA_LIBS)
+AC_SUBST(XRANDR_LIBS)
 AC_SUBST(XFT_LIBS)
 AC_SUBST(XFT_CFLAGS)
 
 AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
 	     [XINERAMA_LIBS="-lXinerama"
 	      AC_CHECK_HEADERS(X11/extensions/Xinerama.h)],
+	     [],[$X_LIBS -lX11 -lXext])
+
+AC_CHECK_LIB(Xrandr, XRRUpdateConfiguration,
+	     [XRANDR_LIBS="-lXrandr"
+	      AC_CHECK_HEADERS(X11/extensions/Xrandr.h)],
 	     [],[$X_LIBS -lX11 -lXext])
 
 dnl Try using pkg-config first, since it looks like Xft2 may fail our
