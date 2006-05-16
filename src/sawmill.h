@@ -153,7 +153,7 @@ typedef struct lisp_window {
     /* Frame data */
     Window frame;
     struct frame_part *frame_parts;
-    u_int frame_x, frame_y;		/* relative to client-window */
+    int frame_x, frame_y;		/* relative to client-window */
     u_int frame_width, frame_height;
     void (*destroy_frame)(struct lisp_window *w);
     void (*focus_change)(struct lisp_window *w);
