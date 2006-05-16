@@ -1154,9 +1154,11 @@ shape_notify (XEvent *ev)
 {
     XShapeEvent *sev = (XShapeEvent *)ev;
     Lisp_Window *w = find_window_by_id (sev->window);
-    if (w != 0 && sev->window == w->id && sev->kind == ShapeBounding)
+    if (w != 0 && sev->window == w->id
+	&& (sev->kind == ShapeBounding || sev->kind == ShapeInput))
     {
-	w->shaped = sev->shaped ? 1 : 0;
+	if (sev->kind == ShapeBounding)
+	    w->shaped = sev->shaped ? 1 : 0;
 	queue_reshape_frame (w);
 	Fcall_window_hook (Qshape_notify_hook, rep_VAL(w), Qnil, Qnil);
     }

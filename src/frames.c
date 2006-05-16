@@ -378,6 +378,14 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 	    rects[nrects].height = w->attr.height;
 	    nrects++;
 	}
+#ifdef ShapeInput
+       	XShapeCombineShape (dpy, shape_win, ShapeInput,
+			    -w->frame_x, -w->frame_y, w->id,
+			    ShapeBounding, ShapeSubtract);
+       	XShapeCombineShape (dpy, shape_win, ShapeInput,
+			    -w->frame_x, -w->frame_y, w->id,
+			    ShapeInput, ShapeUnion);
+#endif
     }
 
     for (fp = w->frame_parts; fp != 0 && !WINDOW_IS_GONE_P (w); fp = fp->next)
@@ -466,6 +474,10 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
     {
 	XShapeCombineShape (dpy, w->frame, ShapeBounding,
 			    0, 0, shape_win, ShapeBounding, ShapeSet);
+#ifdef ShapeInput
+	XShapeCombineShape (dpy, w->frame, ShapeInput,
+			    0, 0, shape_win, ShapeInput, ShapeSet);
+#endif
 	XDestroyWindow (dpy, shape_win);
     }
 
