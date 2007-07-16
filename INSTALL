@@ -19,30 +19,29 @@ diffs or instructions to the address given in the `README' so they can
 be considered for the next release.  If at some point `config.cache'
 contains results you don't want to keep, you may remove or edit it.
 
-   The file `configure.in' is used to create `configure' by a program
-called `autoconf'.  You only need `configure.in' if you want to change
-it or regenerate `configure' using a newer version of `autoconf'.
-
 The simplest way to compile this package is:
 
-  1. `cd' to the directory containing the package's source code and type
-     `./configure' to configure the package for your system.  If you're
-     using `csh' on an old version of System V, you might need to type
-     `sh ./configure' instead to prevent `csh' from trying to execute
-     `configure' itself.
+  1. `cd' to the directory containing the package's source code and 
+     type `./autogen.sh'. This will run `aclocal' and `autoconf', which
+     will create `configure' from `configure.in'.
+     
+  2. Type `./configure' to configure the package for your system.  If
+     you're using `csh' on an old version of System V, you might need to
+     type `sh ./configure' instead to prevent `csh' from trying to
+     execute `configure' itself.
 
      Running `configure' takes a while.  While running, it prints some
      messages telling which features it is checking for.
 
-  2. Type `make' to compile the package.
+  3. Type `make' to compile the package.
 
-  3. Optionally, type `make check' to run any self-tests that come with
+  4. Optionally, type `make check' to run any self-tests that come with
      the package.
 
-  4. Type `make install' to install the programs and any data files and
+  5. Type `make install' to install the programs and any data files and
      documentation.
 
-  5. You can remove the program binaries and object files from the
+  6. You can remove the program binaries and object files from the
      source code directory by typing `make clean'.  To also remove the
      files that `configure' created (so you can compile the package for
      a different kind of computer), type `make distclean'.  There is

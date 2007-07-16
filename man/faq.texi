@@ -48,14 +48,14 @@ This is exactly what it's supposed to do. Sawfish is a @emph{window
 manager} and as such is not responsible for setting the background,
 starting programs or displaying a pager---these can all be done using
 separate applications (e.g. by using a desktop environment such as
-GNOME).
+Gnome).
 
 The default menu binding is somewhat obscure; you must middle-click on
 the background to bring up the menus. (If you have a two-button mouse,
 try clicking both buttons simultaneously)
 
-If, after reading this, you still think that sawfish isn't working,
-please send mail describing the problem to the sawfish mailing list
+If, after reading this, you still think that Sawfish isn't working,
+please send mail describing the problem to the Sawfish mailing list
 @email{sawfish-list@@gnome.org}
 
 
@@ -133,12 +133,17 @@ See the @samp{Popup Menus} node in the Info manual (@pxref{Popup
 Menus})
 
 
+@item How do I restart Sawfish?
+
+From a shell lauch the following command: @code{sawfish-client -q -f restart}
+
+
 @item How do I read the Info manual?
 
 Either execute the command @samp{info sawfish}, or enter the Info mode
 within Emacs (@kbd{C-h i}) and type @kbd{g (sawfish) RET}.
 
-If you're using GNOME, then try executing @samp{gnome-help-browser
+If you're using Gnome, then try executing @samp{gnome-help-browser
 info:sawfish}.
 
 
@@ -156,7 +161,7 @@ The configuration tool will display the contents of a file called
 @file{README} in the directory (but make it 80-column text, and only a
 few lines)
 
-Recent versions of sawfish include a program @code{sawfish-themer} that
+Recent versions of Sawfish include a program @code{sawfish-themer} that
 allows simple themes to be created using a GTK+ interface. Ian McKellar
 has created @code{GimpMill}:
 
@@ -171,7 +176,7 @@ creation like the GAP extends it to allow animation creation.
 GimpMill is available from @url{http://www.yakk.net/projects.gimpmill.html}
 
 
-@item How do I port an Enlightenment theme to sawfish?
+@item How do I port an Enlightenment theme to Sawfish?
 
 There's no automatic translation available. Get the images used in the
 window border, then write a @file{theme.jl} file telling the window
@@ -183,11 +188,11 @@ Info manual for the documentation
 
 @item Are there any other themes available?
 
-Thanks to those nice people at themes.org, there's now
-@url{http://sawmill.themes.org/} for your theming pleasure
+Yes, there are plenty actually. Most of them reside over at freshmeat: @url{http://themes.freshmeat.net/browse/926/}.
+You can also take a look at the Themes section on the Sawfish website: @url{http://sawfish.wikia.com/wiki/Themes}.
 
 
-@item Why don't GTK themes work with sawfish?
+@item Why don't GTK themes work with Sawfish?
 
 There was a problem with older versions of the @code{gtk-engines}
 package preventing engine based themes working with several interpreted
@@ -219,31 +224,22 @@ functionality as Lisp extensions
 @item Will you add background setting?
 
 No. This can easily be done by a separate application (e.g. with the
-GNOME hints, simply monitor property @code{_WIN_WORKSPACE} on the root
+Gnome hints, simply monitor property @code{_WIN_WORKSPACE} on the root
 window).
 
 
-@item Is there a sawfish mailing list?
+@item Is there a Sawfish mailing list?
 
-Yes. See @url{http://lists.gnome.org/mailman/listinfo/sawfish-list} for
-subscription instructions and archived messages.
-
-
-@item Is there a sawfish IRC channel?
-
-From Ryan Pavlik @email{rpav@@mythosource.org}:
-
-@quotation
-Sawmill has an irc channel too! It's on EFNet, and called (of all
-crazy things), #sawmill. So break out your irc clients, or hop on over
-if you're already addicted. Theme, lisp, general sawmill, and most
-other random discussion welcome.
-
-If you need an EFNet server, check www.efnet.net for a listing.
-@end quotation
+Yes. Please subscribe at @url{http://mail.gnome.org/mailman/listinfo/sawfish-list}. 
+You can browse the archives at @url{http://mail.gnome.org/archives/sawfish-list/}.
 
 
-@item Why does sawfish look weird/crash on Solaris?
+@item Is there a Sawfish IRC channel?
+
+Yes, there is. Join @code{#sawfish} on @code{irc.freenode.net}.
+
+
+@item Why does Sawfish look weird/crash on Solaris?
 
 Sawfish works stably on Solaris, but you may need to do two things:
 
@@ -274,11 +270,11 @@ WM_HINTS(WM_HINTS):
 @end example
 
 
-@item Why doesn't the GNOME desk-guide / tasklist show the true state
+@item Why doesn't the Gnome desk-guide / tasklist show the true state
 of my desktop?
 
 It seems that there is a problem with these applets that only occurs
-after restarting sawfish--they seem to lose track of the current window
+after restarting Sawfish--they seem to lose track of the current window
 states.
 
 The simplest way to correct this is to execute the following shell

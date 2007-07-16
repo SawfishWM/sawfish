@@ -3,10 +3,10 @@
 @settitle sawfish Programming Manual
 @footnotestyle end
 
-@set EDITION 0.6
-@set VERSION 0.19
-@set UPDATED 12 December 1999
-@set UPDATE-MONTH December 1999
+@set EDITION 0.11
+@set VERSION 1.3
+@set UPDATED 5 January 2004
+@set UPDATE-MONTH January 2004
 
 @ifinfo
 @direntry
@@ -80,10 +80,13 @@ last updated @value{UPDATED} for Sawfish version @value{VERSION}.
 * Customization::		Supporting user-configuration
 
 * Window Frames::		Decorating windows
+@c * Viewports::			Subdivided desktop areas
 * Workspaces::			Multiple desktop areas
+* Multi-Head Environments::     Multiple monitors
+* Window Placement::            Controlling placement of new windows
 * Popup Menus::			Displaying menus
 * Events::			Input event types
-* Commands::
+* Commands::			Functions you can invoke interactively
 * Keymaps::			Bindings events to actions
 * Event Loop::			Handling input events
 * Miscellaneous Functions::	Useful features
@@ -168,7 +171,7 @@ between Lisp functions.
 Returns @code{t} when @var{arg} is a member of the color type.
 @end defun
 
-@defun get-color name
+@defun get-color name &optional alpha
 Returns the color object representing the color specified by the string
 @var{name}. This is according to the standard X11 color specifiers,
 either a named color from the @file{rgb.txt} database, or a string
@@ -176,12 +179,20 @@ defining the red, green and blue components of the color, either eight
 or sixteen bits in hexadecimal, i.e. @samp{#RRGGBB} or
 @samp{#RRRRGGGGBBBB}.
 
+Optional argument @var{alpha} becomes the alpha value of
+the returned color.  It is passed through to @code{get-color-rgb}.
+
 Signals an error if no known color has the name @var{name}.
 @end defun
 
-@defun get-color-rgb red green blue
+@defun get-color-rgb red green blue &optional alpha
 Return the color object representing the color with RGB components as
 specified (each component ranging from 0 to 65535).
+
+Optional argument @var{alpha} becomes the alpha value of the returned
+color.  Use an integer value in the range from 0 to 65535.  Integers
+outside that range are not supported, while non-integers such as
+@code{nil} are silently converted to 65535 (fully opaque).
 @end defun
 
 Given a color object, it's possible to find both the actual rgb values
@@ -189,15 +200,24 @@ defining the color and one of the names that X11 uses to refer to the
 color.
 
 @defun color-rgb color
-Return a list of integers @code{(@var{red} @var{green} @var{blue})} the
-actual color values of the color represented by object COLOR. The
-individual values range from 0 to 65535.
+Return a list of integers @code{(@var{red} @var{green} @var{blue}
+@var{alpha})}, the actual color values of the color represented by
+object COLOR.  The individual values range from 0 to 65535.
+@end defun
+
+@defun color-rgb-8 color
+Return a list of integers @code{(@var{red} @var{green} @var{blue}
+@var{alpha})}, just like @code{color-rgb}.  However, the color values
+are scaled to fit a range from from 0 to 255.
 @end defun
 
 @defun color-name color
-Return a string defining one of the X11 names used to specify the color
-represented by the color object @var{color}. Note that this may well be
-different to the name used when the color was originally allocated.
+Return the name of the color represented by the color object
+@var{color}.  Note that this picks one name from the set of valid
+names for this color; it may well be different to the name used when
+the color was originally allocated.
+
+The X11 name does not include alpha information.
 @end defun
 
 Where a color object is used to define the foreground color of a piece
@@ -220,10 +240,34 @@ manipulated by Lisp code.
 Returns @code{t} if @var{arg} is a font object.
 @end defun
 
-@defun get-font name
-Return a font object representing the X11 font specified by the string
+Sawfish supports two types of fonts: X11 core fonts (fontsets and
+fontstructs) and Xft fonts.  Calling code must look up fonts by
+giving both a name and a type: an @code{"xlfd"} argument indicates the
+core fonts, and @code{"Xft"} indicates Xft fonts.  These types are
+always literal strings.
 
-Signals an error if no font named @var{name} is available.
+@defun font-type-exists-p type
+Returns true if fonts with the type described by the string @var{type}
+can be loaded, false otherwise.
+@end defun
+
+@defun get-font-typed type name
+Return a font object representing the X11 font specified by the string
+@var{name}.  Argument @var{type} indicates the type of font to look
+for; it must be one of the strings @code{"xlfd"} for a X11 core fonts
+(based on fontsets or a fontstructs), or @code{"Xft"} for an Xft font.
+
+Signals an error if @var{type} is not one of the literal strings
+listed above.  Also signals an error if no font named @var{name}
+can be found within the requested type.
+@end defun
+
+@defun get-font name
+Return a font object representing the X11 core font (fontset or
+fontstruct) specified by the string @var{name}.
+
+Signals an error if no font named @var{name} is available among the
+X11 core fonts.
 @end defun
 
 Several functions allow the attributes associated with a font object to
@@ -234,9 +278,24 @@ Returns the name of the X11 font represented by object @var{font} (a
 string).
 @end defun
 
+@defun font-type font
+Returns a string indicating the font's class.  This is @code{"xlfd"}
+for X11 core fonts, or @code{"Xft"} for Xft fonts.
+@end defun
+
 @defun font-height font
 Returns the bounding height of glyphs in the font represented by object
 @var{font}.
+@end defun
+
+@defun font-ascent &optional font
+Returns the ascent of glyphs rendered using the font represented by
+@var{font}.  If no font argument is given, use the default font.
+@end defun
+
+@defun font-descent &optional font
+Returns the descent of glyphs rendered using the font represented by
+@var{font}.  If no font argument is given, use the default font.
 @end defun
 
 @defun text-width string &optional font
@@ -266,6 +325,12 @@ Return the value of the property named by the symbol @var{property} of
 the font @var{font}, or @code{nil} if no such property exists.
 @end defun
 
+@defvar fonts-are-fontsets
+True if the X fonts in use are fontsets.  This will be false if
+@code{setlocale} fails, or returns an ASCII locale, or if X doesn't
+support the locale.
+@end defvar
+
 
 @node Images, Cursors, Fonts, Top
 @chapter Images
@@ -279,7 +344,7 @@ dynamically.
 Returns @code{t} when @var{arg} is a member of the image type.
 @end defun
 
-@defun make-image @var{file-name}
+@defun make-image file-name} &optional plist
 Creates and returns an image object containing the image defined by the
 contents of the file named @var{file-name} (a string). The
 @code{image-load-path} directory provides the search path used while
@@ -288,19 +353,38 @@ trying to find a directory containing the file named @var{file-name}.
 All common image formats will likely be able to be loaded. But PNG,
 JPEG and XPM should always be supported.
 
+Argument @var{plist} becomes the property list of the returned image.
+
 Signals an error if file called @var{file-name} may be found, or if an
 image may not be constructed from the file.
 @end defun
 
+@defvar image-directory
+Directory containing built-in Sawfish images.  By default, this is
+@code{@var{sawfish-directory}/images}.
+@end defvar
+
 @defvar image-load-path
 A list of directory names. This defines the search path used when
-loading images.
+loading images.  By default, this is @code{("."
+@var{image-directory})}.  Modifying @var{image-directory} does not
+modify @var{image-load-path}.
 @end defvar
 
 @defun make-sized-image width height &optional color
 Create and return a new image, of size @var{width},  @var{height}. If
 @var{color} is defined it specifies the color of all pixels in the
 image. If undefined, all pixels will be black.
+@end defun
+
+@defun make-image-from-x-drawable id &optional mask-id
+Create and return an new image.  The image is constructed by copying
+an X Drawable (identified by @var{id}) into a Sawfish image object.
+The function automatically handles depth conversion.
+
+If @var{mask-id} is given, it identifies another X Drawable.  Black
+pixels in this drawable indicate transparent pixels in the image
+object (non-black pixels have no effect on the image object).
 @end defun
 
 @defun copy-image image
@@ -315,15 +399,18 @@ dimensions of the image represented by @var{image}.
 
 @defun flip-image-horizontally image
 Flip the contents of @var{image} about the vertical axis.
+This is a mutating operation that returns the modified argument.
 @end defun
 
 @defun flip-image-vertically image
 Flip the contents of @var{image} about the horizontal axis.
+This is a mutating operation that returns the modified argument.
 @end defun
 
 @defun flip-image-diagonally image
 Flip the contents of @var{image} about an axis running from the
 top-left corner to the bottom-right corner of the image.
+This is a mutating operation that returns the modified argument.
 @end defun
 
 As with many of the other types, arbitrary state may be associated with
@@ -359,11 +446,18 @@ pixels adjacent to that edge that @emph{will not} be scaled.
 
 @defun set-image-border image left right top bottom
 Sets the border of @var{image}.
+
+The number associated with each edge of the image defines the number of
+pixels adjacent to that edge that @emph{will not} be scaled.
 @end defun
 
 The shape of the image may also be specified, this defines which pixels
 are treated as being transparent. Each image may define a single color
 as marking transparent pixels.
+
+Image shapes are not supported under GDK Pixbuf.  Sawfish will
+print a diagnostic message to @code{STDERR} if the function is called
+without being supported.
 
 @defun image-shape-color image
 Return the color marking transparent pixels in @var{image}, or
@@ -386,11 +480,13 @@ Each integer has a value between zero and 255 representing the weight
 applied to the associated attribute when rendering the image.
 
 The four types are @code{red}, @code{green}, @code{blue} and @code{nil}
-(all colors).
+(all colors).  The argument must be @code{eq} to one of those symbols.
 @end defun
 
 @defun set-image-modifier image type gamma brightness contrast
 Set the image modifier of @var{image} defined by @var{type}.
+@var{Type} may be one of the values of (not the symbols) @code{red},
+@code{green} or @code{blue}.
 @end defun
 
 There are also several other functions manipulating images:
@@ -406,7 +502,7 @@ from the @code{default-bevel-percent} variable.
 @end defun
 
 @defvar default-bevel-percent
-Default height of drawn bevels, as a percentage.
+Default height of drawn bevels, as a percentage.  Normally 50%.
 @end defvar
 
 @defun clear-image image &optional color
@@ -419,13 +515,101 @@ Tiles @var{source-image} into @var{dest-image}, starting from the
 upper-left corner, working outwards.
 @end defun
 
+@defun scale-image image width height
+Return a copy of @var{image}, scaled to @var{width} by @var{height}
+pixels.
+@end defun
+
+@defun composite-images image1 image2 &optional x y
+Copy the contents of @var{image2} into @var{image1}.  @var{Image2} is
+cropped to fit.  Arguments @var{x} and @var{y} indicate the position
+in @var{image1} of the top-left corner of @var{image2}.  If not
+supplied, they default to 0.
+@end defun
+
+@defun crop-image image x y width height
+Return a new image that is a rectangular section of @var{image}.  The
+result image starts at pixel (@var{x}, @var{y}) in @var{image}, and
+extends over @var{width} and @var{height} pixels in @var{image}.
+
+When the cropped image extends beyond the boundary of @var{image}, the
+behavior is undefined.
+@end defun
+
+The following functions allow users to manipulate images on a
+pixel-by-pixel level.  They all use a list representation for pixels:
+(@var{r}, @var{g}, @var{b}, @var{a}) indicating the red, green, blue
+and alpha components
+
+@defun image-ref image x y
+Return a list (@var{r}, @var{g}, @var{b}, @var{a}) of the red, green,
+blue and alpha components of the pixel (@var{x}, @var{y}) in
+@var{image}.
+
+When the pixel position extends outside the bounds of the image, the
+behavior is undefined.
+@end defun
+
+@defun image-set image x y pixel
+Set the pixel at (@var{x}, @var{y}) in @var{image} to @var{pixel}.
+@var{Pixel} is a list of four numbers (@var{r}, @var{g}, @var{b},
+@var{a}), the red, green, blue and alpha components.
+
+When the pixel position extends outside the bounds of the image, the
+behavior is undefined.
+@end defun
+
+@defun image-map xform image
+Transform each pixel in @var{image} in place by calling @var{xform} on
+each pixel in the image.
+
+@var{Xform} takes a single argument, a four element list (@var{r},
+@var{g}, @var{b}, @var{a}) indicating the red, green, blue and alpha
+components of a pixel.  @var{Xform} should return the new value for
+the pixel it was given.  The return format is the same four-element
+list.
+
+@var{Xform} is allowed to return @code{nil}.  In this case,
+@code{image-map} immediately returns an invalid object.
+@end defun
+
+@defun image-fill generator image
+Set each pixel in @var{image} based on the results of calling
+@var{generator}.
+
+@var{Generator} takes two arguments: the X and Y coordinates of a
+pixel.  It returns a four element list (@var{r}, @var{g}, @var{b},
+@var{a}) indicating the red, green, blue and alpha components of a
+pixel.  This new pixel replaces the current pixel contents at (X, Y).
+
+@var{Generator} is allowed to return @code{nil}.  In this case,
+@code{image-map} immediately returns an invalid object.
+@end defun
+
+@defun pixmap-cache-control max
+Tell Sawfish to cache no more than @var{max} pixels.  Returns a
+four-element list indicating the current cache status:
+@code{(@var{max-cached-pixels}, @var{cached-pixels}, @var{hits},
+@var{misses})}.
+@end defun
+
 
 @node Cursors, Windows, Images, Top
 @chapter Cursors
 @cindex Cursors
 
-Cursors define the shape and hot-spot of the mouse pointer's image. A
-lisp type is provided for manipulating these objects.
+Cursors define the shape and hot-spot of the mouse pointer's image.  A
+lisp type is provided for manipulating these objects.  In addition,
+Sawfish provides functions for manipulating the position of the
+cursor.
+
+@menu
+* Cursor Appearance::
+* Cursor Positioning::
+@end menu
+
+@node Cursor Appearance, Cursor Positioning, Cursors, Cursors
+@section Cursor Appearance
 
 @defun cursorp arg
 Returns @code{t} if @var{arg} is a member of the cursor type.
@@ -439,7 +623,7 @@ Returns the cursor object representing the cursor defined by
 Possible @var{data} values are an integer representing a glyph in the
 standard X11 cursor font, or a four-element vector.
 
-If a vector the format is @code{[@var{image} @var{mask} @var{fg}
+The format for a vector is @code{[@var{image} @var{mask} @var{fg}
 @var{bg}]} where @var{image} and @var{mask} are the filenames of
 standard X11 bitmaps, and @var{fg} and @var{bg} are colors (or names of
 colors). All bitmap files are searched for using the
@@ -451,9 +635,12 @@ Change the colors of the cursor object @var{cursor} to @var{fg} and
 @var{bg} (either color objects or the names of colors).
 @end defun
 
-@defun default-cursor cursor
+@defun default-cursor &optional cursor
 Set the cursor object displayed in the root window, and in parts of
 window frames that have no other cursor specified, to @var{cursor}.
+
+If called with no argument, simply return the current such cursor
+object.
 @end defun
 
 So that the integer indices of glyphs in the X11 cursor font do not
@@ -488,6 +675,40 @@ following symbols are automatically set:
 The glyphs associated with these names are shown in Appendix I, of
 Volume Two, @cite{Xlib Reference Manual}.
 
+@node Cursor Positioning,  , Cursor Appearance, Cursors
+@section Cursor Positioning
+
+Sawfish provides one basic command for adjusting the relative position
+of the cursor.
+
+@defun move-cursor right down
+Move the cursor @var{right} pixels to the right across the screen, and
+@var{down} pixels down the screen.  The cursor stops at the edge of
+the screen (although in multi-head environments, this may not be at
+the edge of the display).
+@end defun
+
+There are also more specialized cursor movement commands.
+
+@defun move-cursor-left-fine
+@defunx move-cursor-right-fine
+@defunx move-cursor-up-fine
+@defunx move-cursor-down-fine
+Move the cursor 1 pixel in the indicated direction.
+@end defun
+
+@defun move-cursor-left
+@defunx move-cursor-right
+@defunx move-cursor-up
+@defunx move-cursor-down
+Move the cursor @code{move-cursor-increment} pixels in the indicated
+direction.
+@end defun
+
+@defvar move-cursor-increment 16
+The @code{move-cursor-@var{DIRECTION}} functions move this cursor this
+many pixels at a time.
+@end defvar
 
 @node Windows, Customization, Cursors, Top
 @chapter Windows
@@ -515,8 +736,47 @@ Return a window object with id @var{xid}, or @code{nil}.
 Return a window object with name @var{name}, or @code{nil}.
 @end defun
 
+@defun get-window-by-name-re name
+Return a window object with name matching regular expression
+@var{name}, or @code{nil}.
+@end defun
+
+@defun activate-window window
+Do everything necessary to make @var{window} active, including raising
+it, giving it focus, etc.  Certain steps may be skipped (e.g., giving
+focus) if the window doesn't allow that operation.
+@end defun
+
+@defun filter-windows pred
+Return the list of windows (mapped or unmapped) that match the
+predicate function @var{pred}.
+@end defun
+
+@defun map-windows function
+Call @code{(@var{function} @var{window})} on all existing windows.
+Returns the value of the last @var{function} invocation.  If any
+@var{function} returns @code{nil}, @code{map-windows} returns
+@code{nil} immediately.
+@end defun
+
+@defun window-class window
+Return the class that @var{window} belongs to as a string, or nil if
+@var{window} has no associated class.
+@end defun
+
+@defun get-window-wm-protocols window
+Return a list of symbols defining the X11 window manager protocols
+supported by client @var{window}.
+@end defun
+
+@defun window-supports-wm-protocol-p window atom
+Return true if @var{window} includes @var{atom} in its
+@code{WM_PROTOCOLS} property.
+@end defun
+
 @menu
 * Window Property Lists::
+* Window Types::
 * Window Attributes::
 * Input Focus::
 * X Properties::
@@ -526,11 +786,16 @@ Return a window object with name @var{name}, or @code{nil}.
 * Destroying Windows::
 * Shading Windows::
 * Iconifying Windows::
+* Window Stickiness::
+* Ignored Windows::
 * Maximizing Windows::
+* Animating Windows::
+* Cycling Between Windows::
+* Window Groups::
 @end menu
 
 
-@node Window Property Lists, Window Attributes, , Windows
+@node Window Property Lists, Window Types, , Windows
 @section Window Property Lists
 @cindex  Window property lists
 @cindex Property lists, of windows
@@ -550,21 +815,162 @@ Note that these properties are different to the properties that X
 stores with each window, since these properties are internal to the
 window manager (@pxref{X Properties}).
 
+For a list of the standard window properties, see @ref{Standard Properties}.
+
 @defun window-put window property value
 Set the lisp property named @var{property} (a symbol) associated with
-window object @var{window} to @var{value}.
+window object @var{window} to @var{value}.  Note that these are Lisp
+properties not X properties.
 @end defun
 
 @defun window-get window property
-Return the window property named @var{property} associated with the
-window object @var{window}, or @code{nil} if no such property exists.
+Return the window property named @var{property} (a symbol) associated
+with the window object @var{window}, or @code{nil} if no such property
+exists.  Note that these are Lisp properties not X properties.
 @end defun
 
-For a list of the standard window properties, see @ref{Standard
-Properties}.
+@defun map-window-properties function window
+Call @code{(@var{function} @var{property} @var{value})} on each of the
+Lisp properties bound to @var{window}.  Returns the value of the last
+@var{function} invocation.  If any @var{function} returns @code{nil},
+@code{map-window-properties} returns @code{nil} immediately.
+@end defun
 
 
-@node Window Attributes, Input Focus, Window Property Lists, Windows
+@node Window Types, Window Attributes, Window Property Lists, Windows
+@section Window Types
+@cindex Window types
+@cindex Types, of windows
+@cindex Windows, types of
+
+Transient windows are pop-up or dialog windows associated with a main
+application.  They tend to have less window decorations, and are
+intended to last a short time only.
+
+@defun window-transient-p arg
+Returns @code{t} if @var{arg} represents a transient window.
+@end defun
+
+@defun mark-window-as-transient w
+Mark that the window associated with object @var{w} is a transient
+window.
+@end defun
+
+@defun transient-of-p child parent
+Return true if window @var{child} is directly a transient for window
+@var{parent}, false otherwise.
+@end defun
+
+@defun indirect-transient-of-p descendant ancestor
+Return true if window @var{descendant} is (directly or indirectly) a
+transient for window @var{ancestor}, false otherwise.
+@end defun
+
+@defun transient-parents child &optional indirectly
+Return the list of windows that window @var{child} is a transient
+for.  If @var{indirectly} is true, then return the list of all
+ancestors rather than parents.
+@end defun 
+
+@defun transient-children parent &optional indirectly
+Return the list of windows that are transients for window
+@var{parent}.  If @var{indirectly} is true, then return the list of
+all descendants rather than children.
+@end defun
+
+@defun transient-group window &optional by-depth
+Return the list of windows which is either a transient window for
+window @var{window}, or a window which @var{window} is a transient
+for.  This always includes W.  The `transient window for' relation holds
+for windows which are direct or indirect transients of the parent
+window in question.
+
+If the @var{by-depth} argument is true, then the retrurned list is in
+stacking order.
+@end defun
+
+@defun map-transient-group fun window
+Map the single argument function @var{fun} over all windows in the same
+transient group as window @var{window}.
+@end defun
+
+@defun raise-window-and-transients window
+Raise window @var{window} to its highest allowed position in the
+stacking order.  Also raise any transient windows that it has.
+@end defun
+
+@defun lower-window-and-transients window
+Lower window @var{window} to its lowest allowed position in the
+stacking order.  Also lower any transient windows that it has.
+@end defun
+
+@defun raise-lower-window-and-transients window
+If window @var{window} is at its highest possible position, then lower
+it to its lowest possible position.  Otherwise raise it as far as
+allowed.  Also changes the level of any transient windows it has.
+@end defun
+
+@defvr Customizable focus-windows-when-mapped
+Focus on application windows when they first appear.  Defaults to
+true, must be true or false.
+@end defvr
+
+@defvar decorate-transients
+Decorate dialog windows similarly to application windows.  Defaults to
+false.
+@end defvar
+
+Desktop windows are root windows or viewport windows.
+
+@defun desktop-window-p arg
+Returns @code{t} if @var{arg} represents a desktop window.
+@end defun
+
+@defun mark-window-as-desktop w
+Mark that the window associated with object @var{w} is a desktop
+window.
+@end defun
+
+@defvar desktop-window-properties
+List of properties set (to true) on windows marked as desktops.
+Defaults to
+@lisp
+'(fixed-position sticky sticky-viewport)
+@end lisp
+@end defvar
+
+@defvar desktop-window-depth
+The stacking depth of desktop windows.  Defaults to -4.
+@end defvar
+
+Dock windows are simply those with the @code{dock-type} property.
+GNOME panels are one example.  Sawfish does not currently assign them
+any special behavior.
+
+@defun dock-window-p arg
+Returns @code{t} if @var{arg} represents a dock window.
+@end defun
+
+@defun mark-window-as-dock w
+Mark that the window associated with object @var{w} is a dock
+window.
+@end defun
+
+@defvar dock-window-properties
+List of properties set (to true) on windows marked as docks.
+Defaults to
+@lisp
+'(window-list-skip cycle-skip fixed-position focus-click-through
+  avoid no-history never-iconify never-maximize sticky
+  sticky-viewport placed)
+@end lisp
+@end defvar
+
+@defvar dock-window-depth
+The stacking depth of dock windows.  Defaults to 0.
+@end defvar
+
+@node Window Attributes, Input Focus, Window Types, Windows
 @section Window Attributes
 @cindex Window attributes
 @cindex Attributes, of windows
@@ -578,6 +984,23 @@ Return the name associated with @var{window}.
 Return the full-name associated with @var{window}. This may or may not
 be the same as the normal name.
 @end defun
+
+Sawfish provides functions to ensure that window names are unique.
+
+@defun uniquify-name proposal existing
+Uniquify the string @var{proposal} against the list of strings
+@var{existing}.  Uses the format string @code{uniquify-name-format} to
+generate unique names.
+@end defun
+
+@defvar uniquify-name-format
+Format to create unique window names.  Defaults to @code{"%s [%d]"}.
+@end defvar
+
+@deffn Function uniquify-window-name window
+@deffnx Command uniquify-window-name window
+Force @var{window} to have a unique title.
+@end deffn
 
 @defun window-icon-name window
 Return the icon name associated with @var{window}.
@@ -603,10 +1026,13 @@ If window object @var{window} has a client window associated with,
 return an integer defining its xid, otherwise return @code{nil}.
 @end defun
 
+@defun root-window-id
+Returns the numeric ID of the root window of the managed screen.
+@end defun
+
 @defun window-group-id window
-Return an integer defining the xid of the leader of the group that
-@var{window} is a member of, or @code{nil} if @var{window} is not a
-member of a group.
+If @var{window} is part of a group, return the X window id of the
+leader of that group.  Otherwise return @code{nil}.
 @end defun
 
 @defun window-wants-input-p window
@@ -614,6 +1040,11 @@ Return @code{t} when the client window associated with object
 @var{window} has asked for the input focus to be assigned to it when
 applicable (through the @code{input} field of its @code{WM_HINTS}
 property).
+@end defun
+
+@defun window-really-wants-input-p window
+Return @code{nil} if the client window associated with object
+@var{window} should never be focused, @code{t} otherwise.
 @end defun
 
 @defun window-dimensions window
@@ -633,13 +1064,19 @@ are @code{min-height}, @code{max-height}, @code{min-width},
 @code{max-width}, @code{height-inc}, @code{width-inc},
 @code{min-aspect}, @code{max-aspect}, @code{base-height},
 @code{base-width}, @code{user-position}, @code{program-position},
-@code{user-size}, @code{program-size}, @code{window-gravity}.
+@code{user-size}, @code{program-size}, @code{window-gravity},
+@code{border-size}.
 @end defun
 
 @defun window-visibility window
 Returns a symbol defining the current visibility of @var{window}.
 Possible returned symbols are @code{fully-obscured},
 @code{partially-obscured} or @code{unobscured}.
+@end defun
+
+@defun window-urgent-p window
+Return @code{t} if the ``Urgency'' hint of the window associated with
+@var{window} is set.
 @end defun
 
 
@@ -660,21 +1097,126 @@ Returns the window object of the currently focused window, or
 
 @defun set-input-focus window
 Sets the focus to the client window associated with @var{window}.
+
+If @var{window} is @code{nil}, then no window will have the focus.
 @end defun
+
+The window manager is responsible for switching the input focus from
+client window to client window.  Sawfish implements several
+@dfn{focus modes} that provide this behavior.  Each focus mode is
+bound to a symbol; the implementation is bound to that symbol's
+@code{focus-mode} property slot.
 
 @defvar focus-mode
 Defines the current method of using the mouse to assign the input
-focus. Possible values are @code{enter-exit}, @code{enter-only} and
-@code{click}.
+focus.  This is a symbol from the list @code{focus-modes}.
 @end defvar
 
-@defvar focus-proxy-click
-When in click-to-focus mode, the focus-assigning click is only passed
-through to the client window if this variable is non-@code{nil}.
+@defvar focus-modes
+A list containing all names of focus modes.  The built-in values are
+@code{enter-exit}, @code{enter-only} and @code{click}.
+@end defvar
+
+It is possible to add additional focus modes by defining your own
+handler function.  The handler function must obey a
+``focus-mode-handler'' protocol.
+
+@deftp {Function Protocol} focus-mode-handler window event-name &optional args
+A function that implements the @code{focus-mode-handler} protocol can
+be used to define a focus mode.  A @code{focus-mode-handler} responds
+to events associated with windows.
+
+Argument @var{window} is the window that received this event.
+
+Argument @var{event-name} is one of the following symbols:
+
+@table @code
+@item pointer-in
+@itemx pointer-out
+The pointer has entered or exited the window.  The handler is
+responsible for checking whether an entered window wants input events.
+The desktop never receives @code{pointer-in} or @code{pointer-out};
+only normal windows do.
+
+@item
+@item enter-root
+@itemx leave-root
+The pointer has entered or exited the desktop (which is the
+@var{window} argument).  Normal windows never receive
+@code{enter-root} or @code{leave-root}.
+
+@item focus-in
+@itemx focus-out
+The window argument has gotten or lost focus.  Note that the
+@code{focus-in} handler is not responsible for updating the
+window-order list.
+
+@item before-mode-change
+@itemx after-mode-change
+Sawfish sends these synthetic events to each window before/after
+changing that window's focus mode.  When the global focus mode
+changes, all windows get these events.
+
+@item add-window
+Sawfish sends this event to every window immediately after mapping it.
+Handlers can use this to initialize window-internal data structures.
+
+@item warp-if-necessary
+Warp the cursor to the window if doing so would make the cursor
+position ``consistent'' with the focus mode.  For example, in
+@code{enter-exit} mode we warp the cursor if it is not already in this
+window.  In @code{enter-only} mode, we warp the cursor if it is in
+another window, but not if it is over the desktop---a window would not
+lose focus when the cursor moved from it to the desktop.
+@end table
+
+The protocol allows for any number of additional arguments, but does
+not define any.  Any handler function must be prepared to receive and
+ignore them.
+
+Unsupported events may be ignored.  The return value of this function
+is ignored.
+@end deftp
+
+@defun define-focus-mode name fun
+Defines a new focus mode called @var{name} (a symbol).  The focus-mode
+handler @var{fun} implements this focus mode.
+
+See the documentation for @code{focus-mode-handler} for more
+information.
+@end defun
+
+@defun set-focus-mode window mode
+Set the focus mode of window @var{window} to @var{mode}.
+This triggers @code{before-mode-change} and @code{after-mode-change}
+focus-mode events on @var{window}.
+@end defun
+
+@defun warp-pointer-if-necessary window
+Generate a @code{warp-if-necessary} event and send it to the window's
+focus function.
+@end defun
+
+@defvar focus-click-through
+When in @code{click} focus mode, the focus-assigning click is only
+passed through to the client window if this variable is @code{t} (the
+default).
 
 This option may be set on a per-window basis by setting the
 @code{focus-click-through} property of the window (using the
 @code{window-put} function).
+@end defvar
+
+@defvar focus-ignore-pointer-events
+When true, pointer in/out events don't cause focus changes.  This is
+independent of the current focus mode.
+@end defvar
+
+@defvar focus-within-click-event
+When true, the current command is being called from within a
+click-to-focus button press event.
+
+This is a fluid object, not an ordinary variable.
 @end defvar
 
 Sawfish also maintains the order in which windows were recently
@@ -699,11 +1241,61 @@ Push window object @var{window} onto the top of the focus stack.
 Remove window object @var{window} from the focus stack.
 @end defun
 
-@defun window-order-focus-most-recent
-Focus the most-recently-focused window on the current viewport of the
-current workspace.
+@defun window-order-most-recent &optional windows
+Return the most-recently focused window in the current workspace.  If
+the optional argument @var{windows} is given, it must be a list of
+windows.  In that case, the function will return the most-recently
+focused window from that list.
 @end defun
 
+@defun window-order-focus-most-recent
+Focus the most-recently-focused window of the current workspace.
+@end defun
+
+@defvar focus-dont-push
+When true, focusing a window doesn't change it's position in the stack of
+most-recently focused windows.
+@end defvar
+
+@defun window-in-cycle-p window &keyword ignore-cycle-skip
+Returns @code{t} if the window @var{window} should be included when
+cycling between windows.  Desktop windows and those with the
+@code{cycle-skip} property should normally not be included.
+
+When @code{t}, the @var{ignore-cycle-skip} keyword argument
+forces the function to include windows with the @code{cycle-skip}
+property.
+@end defun
+
+@defun focus-push-map window keymap
+@defunx focus-pop-map window
+Maintain a two-element keymap stack for @var{window}.
+
+@code{focus-push-map} makes @var{keymap} current for @var{window}, but
+saves the existing keymap.  We can restore this existing keymap with
+@code{focus-pop-map}.
+
+These functions are intended to support click-to-focus.  They enforce
+certain sanity rules: pushing into a two-element stack will only
+overwrite the top element, while popping a one-element stack has no
+effect.
+@end defun
+
+@defun autoload-focus-mode name func
+MISSING.  This does not seem to be used anywhere, and its behavior is
+unclear.
+@end defun
+
+@defun select-window
+Waits for the user to left-click on a window, and returns that window.
+The mouse cursor changes shape, and all normal input events are
+suppressed until a window is selected.
+@end defun
+
+@defvar select-window-cursor-shape
+The cursor shape to use when selecting a window.  Defaults to
+@code{crosshair}.
+@end defvar
 
 @node X Properties, Window Stacking, Input Focus, Windows
 @section X Properties
@@ -779,7 +1371,15 @@ of strings @var{data}.
 
 It's also possible to detect when the value of any property associated
 with a managed window changes, using the @code{property-notify-hook}.
-@xref{Standard Hooks}.
+@xref{Standard Hooks}.  The following convenience function takes
+advantage of this hook:
+
+@defun call-after-property-changed prop fun
+Arrange for function @var{fun} to be called with arguments
+@samp{(window property state)} when the X11 property named @var{prop}
+(a symbol) changes.  @var{Prop} may also be a list of property names
+to monitor.
+@end defun
 
 
 @node Window Stacking, Moving and Resizing Windows, X Properties, Windows
@@ -789,22 +1389,31 @@ with a managed window changes, using the @code{property-notify-hook}.
 @cindex Windows, stacking
 
 The stacking order of the display defines the order in which windows
-are shown, from topmost to bottommost.
+are shown, from topmost to bottommost.  Sawfish maintains this list.
+Raising or lowering windows changes their positions in this list.
+
+@menu
+* Stacking Order::
+* Raising and Lowering Windows::
+@end menu
+
+@node Stacking Order, Raising and Lowering Windows, Window Stacking, Window Stacking
+@subsection Stacking Order
 
 @defun stacking-order
 Return a list of window objects defining the current stacking order of
 all client windows, from top-most to bottom-most.
 @end defun
 
+@defun mapped-stacking-order
+Similar to @code{stacking-order}, but only returns windows that are
+mapped.
+@end defun
+
 @defun restack-windows list
 Restack all client windows specified in the list of window objects
 @var{list} in the order they occur in the list (from top to bottom).
 The stacking order of any unspecified windows isn't affected.
-@end defun
-
-@defun x-raise-window window
-Raise the client window associated with object @var{window} to the top
-of the display.
 @end defun
 
 Sawfish allows the stacking order to be managed as a sequence of
@@ -823,8 +1432,12 @@ Similar to @code{stacking-order}, but only returns windows with depth
 @var{depth}.
 @end defun
 
+@defun window-depth window
+Returns the depth of @var{window}.
+@end defun
+
 @defun set-window-depth window depth
-Set the stacking depth of @var{window} to @var{depth}, then restacks
+Sets the stacking depth of @var{window} to @var{depth}, then restacks
 the windows to reflect this change.
 @end defun
 
@@ -848,31 +1461,144 @@ original window stacking order, returning the value of the
 @code{progn}.
 @end defmac
 
-For the following functions, when called interactively they all operate
-on the window that received the current event, or alternatively the
-currently focused window.
+@defun restack-window w
+Assuming that the current stacking order is in a consistent state
+except, possibly, for the position of window @var{w}, restore the
+consistent state including window @var{w}. This is achieved by raising
+or lowering window W as appropriate.
+@end defun
 
-@deffn Command lower-window window
+@node Raising and Lowering Windows,  , Stacking Order, Window Stacking
+@subsection Raising and Lowering Windows
+@cindex Windows, raising
+@cindex Windows, lowering
+
+Over time, Sawfish has accumulated several subtle variations of
+functions for raising and lowering windows.  One set of functions
+operates on single windows.
+
+@deffn Function lower-window window
+@deffnx Command lower-single-window window
 Lower @var{window} to the bottom of its stacking depth.
 @end deffn
 
-@deffn Command raise-window window
+@deffn Function raise-window window
+@deffnx Command raise-single-window window
 Raise @var{window} to the top of its stacking depth.
 @end deffn
 
-@deffn Command raise-lower-window window
+@deffn Function raise-lower-window window
+@deffnx Command raise-lower-single-window window
 If @var{window} is the highest in its stacking level, lower it to the
 bottom of this level, otherwise raise it to the top of its level.
 @end deffn
 
-@deffn Command lower-window-depth window
+Notice how the function name and command name for each pair differs
+slightly.  Another set of functions supports operating on multiple windows
+simultaneously.  Again, the function name and command name for each
+pair is different.
+
+@deffn Function lower-window* window
+@deffnx Command lower-window window
+Lower @var{window} and possibly associated windows to the bottom of
+their stacking depths. 
+@end deffn
+
+@deffn Function raise-window* window
+@deffnx Command raise-window window
+Raise @var{window} and possibly associated windows to the top of their
+stacking depth.
+@end deffn
+
+@deffn Function raise-lower-window* window
+@deffnx Command raise-lower-window window
+If @var{window} is the highest in its stacking level, lower it and
+possibly associated windows to the bottom of their level, otherwise
+raise them to the top of their level.
+@end deffn
+
+@defvar user-raise-type
+Indicates which windows the @code{lower-window*}, @code{raise-window*}
+and @code{raise-lower-window*} functions affect.  This variable can be
+
+@table @code
+@item none
+Only the specific argument window is affected.
+@item transients
+The specific argument window and all of its transients are affected.
+This is the default.
+@item group
+The specific argument window and all windows in its group are
+affected.
+@end table
+@end defvar
+
+@defun maybe-raise-window w
+If window @var{w} supports the @code{_SAWFISH_WM_RAISE_WINDOW}
+protocol, ask it whether it wants to raise itself or not.  Otherwise,
+raise the window unconditionally.
+@end defun
+
+@defun maybe-lower-window w
+If window @var{w} supports the @code{_SAWFISH_WM_LOWER_WINDOW}
+protocol, ask it whether it wants to lower itself or not.  Otherwise,
+lower the window unconditionally.
+@end defun
+
+Sawfish has more general operations that raising a window to the top
+or lowering it to the bottom.  It can place a window relative to one
+or more other managed windows.
+
+@defun raise-windows w order
+@defunx lower-windows w order
+@defunx raise-lower-windows w order
+Raise (or lower) all windows in @var{order}, such that items earlier in
+the list are higher (or lower) than later items.  The window @var{w}
+is special, always being the highest or lowest window, even if appears
+in the middle of @var{order}.
+
+For @code{raise-lower-windows}, if @var{w} would be raised or lowered,
+then all the other windows are also raised or lowered.
+@end defun
+
+There are also functions (and associated commands) to change a
+window's depth.
+
+@deffn Function lower-window-depth window
+@deffnx Command lower-window-depth window
 Decrement the stacking depth of @var{window}.
 @end deffn
 
-@deffn Command raise-window-depth window
+@deffn Function raise-window-depth window
+@deffnx Command raise-window-depth window
 Increment the stacking depth of @var{window}.
 @end deffn
 
+Sawfish provides special support for ``click-to-focus'' mode, where
+you may or may not want to raise the window or pass the click to the
+underlying application.
+
+@defun raise-and-pass-through-click w
+Raise the window that received the current event with
+@code{maybe-raise-window}.  Then replay any pointer events that
+invoked the command.
+@end defun
+
+@defun raise-and-pass-through-click-if-focused w
+Raise the window that received the current event (if it's focused)
+with @code{maybe-raise-window}.  Then replay any pointer events that
+invoked the command.
+@end defun
+
+@defun raise-or-pass-through-click w
+If the window that received the current event is not on top, raise it
+with @code{maybe-raise-window}.  Otherwise replay any pointer events
+that invoked the command, sending them to the window.
+@end defun
+
+When the above commands are called interactively, Sawfish will try to
+invoke them on the window that received the current event.  Failing
+that, Sawfish will invoke them on the currently focused window.
 
 @node Moving and Resizing Windows, Showing and Hiding Windows, Window Stacking, Windows
 @section Moving and Resizing Windows
@@ -895,15 +1621,21 @@ Set the dimensions of the client window associated with object
 @end defun
 
 @defun move-resize-window-to window x y width height
-A combination of the previous two functions.
+Move the top-left corner of the window frame of @var{window} to
+(@var{x}, @var{y}), and set the dimensions of the frame to
+(@var{width}, @var{height}).
 @end defun
 
 @defun resize-window-with-hints window cols rows &optional hints
+@defunx resize-window-with-hints* window width height &optional hints
 Resize the window associated with object @var{window} so that it has
-@var{cols} columns and @var{rows} rows. The @var{hints} parameters is
-either the size hints alist to use, or @code{nil} in which case the
-@code{window-size-hints} function is used to retrieve the window's
-hints.
+certain X and Y dimensions.  For the first function, the dimensions
+are @var{cols} columns and @var{rows} rows.   For the second function,
+the dimensions are @var{width} pixels and @var{height} pixels.
+
+The @var{hints} parameters is either the size hints alist to use, or
+@code{nil} in which case the @code{window-size-hints} function is used
+to retrieve the window's hints.
 @end defun
 
 Usually, however, it is left to the user to configure windows. The
@@ -970,6 +1702,15 @@ windows within close proximity.
 The distance in pixels before snapping together two edges.
 @end defvar
 
+Windows have a ``gravity'' property, which affect how they are placed
+in particular positions.
+
+@defun window-gravity window &optional hints
+Returns the gravity of window.  The order of precedence is Sawfish
+@code{gravity} window property, explicit @var{hints} argument, X
+window size hints.  The default gravity when nothing else is specified
+is @code{north-west} (specified by ICCCM).
+@end defun
 
 @node Showing and Hiding Windows, Destroying Windows, Moving and Resizing Windows, Windows
 @section Showing and Hiding Windows
@@ -982,12 +1723,13 @@ from the display. These are used to implement both virtual workspaces
 (@pxref{Workspaces}) and iconification (@pxref{Iconifying Windows}).
 
 @defun hide-window window
-Prevent object @var{window} from being displayed.
+Prevent object @var{window} from being displayed.  See
+@code{show-window}.
 @end defun
 
 @defun show-window window
 Ensure that @var{window} (if it has been mapped, and is within the
-screen boundary) is visible.
+screen boundary) is visible.  See @code{hide-window}.
 @end defun
 
 @defun window-visible-p window
@@ -1039,6 +1781,10 @@ subsequently be invoked (@pxref{Standard Hooks}).
 Many window managers allow a window to be @dfn{shaded}; when in this
 state only the title bar of the window is visible.
 
+@defun window-shaded-p window
+Returns true when @var{window} is shaded, false otherwise.
+@end defun
+
 @deffn Command shade-window window
 Arrange for only the title bar of @var{window} to be visible.
 @end deffn
@@ -1051,12 +1797,16 @@ If the window is shaded, restore it to it's original state.
 Toggle the shaded state of the window.
 @end deffn
 
+@defvar raise-windows-when-unshaded nil
+When true, raise windows when they are unshaded.  Defaults to false.
+@end defvar
+
 The @code{shaded} property of a window is set to @code{t} when the
 window is shaded. If a window is added with this property already set,
 then the window will appear in its shaded state.
 
 
-@node Iconifying Windows, Maximizing Windows, Shading Windows, Windows
+@node Iconifying Windows, Window Stickiness, Shading Windows, Windows
 @section Iconifying Windows
 @cindex Iconifying windows
 @cindex Windows, iconifying
@@ -1074,16 +1824,202 @@ Iconify the window associated with object @var{window}.
 Return the window associated with @var{window} from its iconified state.
 @end deffn
 
+@deffn Command toggle-window-iconified window
+Minimize the window associated with @var{window}, or restore it if it
+is already minimized.
+@end deffn
+
+@deffn Command iconify-workspace-windows
+Minimize all windows in the current workspace.
+@end deffn
+
 A window's iconic state may be tested through examination of its
 @code{iconified} property---when @code{t} the window is iconified.
+But it is preferable to use explicit testing functions instead:
 
+@defun window-iconified-p window
+Returns true if the window associated with @var{window} is iconified,
+false otherwise.
+@end defun
 
-@node Maximizing Windows, , Iconifying Windows, Windows
+@defun window-iconifiable-p window
+Returns true if the window associated with @var{window} can be
+iconified, false otherwise.  Some reasons a window might not be
+iconifiable are: it has a @code{never-iconify} property; it is
+already iconified; it is not a desktop window; or it is marked
+@code{ignored} and @code{iconify-ignored} is not true.
+@end defun
+
+@defvar iconify-ignored nil
+Unmanaged (@code{ignored}) windows may be iconified.  Defaults to nil.
+@end defvar
+
+Sawfish allows you to control certain behaviors when restoring
+minimized windows.
+
+@defvar focus-windows-on-uniconify
+Windows are focused after being unminimized.  Defaults to false.
+@end defvar
+
+@defvar raise-windows-on-uniconify
+Windows are raised after being unminimized.  Defaults to true.
+@end defvar
+
+@defvar uniconify-to-current-workspace
+Move windows to the current workspace when they are unminimized.
+Defaults to true.
+@end defvar
+
+When iconifying, it is possible to force other windows to iconify.
+
+@defvr Customizable iconify-group-mode
+@defvrx Customizable uniconify-group-mode
+Policy for performing chains of minimizations or restorations.  When a
+particular window is minimized or restored, it can cause other windows
+to be minimized or restored at the same time.  Their allowed values
+are set to the following list.  By default, both variables are bound
+to the symbol @code{transients}. but they are not required to have the
+same value.
+@end defvr
+
+@table @code
+@item none
+No additional windows are minimized or restored.
+@item transients
+All transient windows associated with the target window are minimized
+or restored.
+@item group
+All windows in the target window's group are minimized or restored.
+@end table
+
+Finally, it's possible to get the icon that would normally be
+displayed for an iconified window.
+
+@defun window-icon-image window
+Return an image object representing the icon currently associated with
+@var{window}, or @code{nil} if there is no such image.
+@end defun
+
+@node Window Stickiness, Ignored Windows, Iconifying Windows, Windows
+@section Window Stickiness
+@cindex Window stickiness
+@cindex Sticky, windows
+
+Windows normally exist in a single workspace and a single viewport
+into that workspace.  When changing workspace or viewport, the current
+windows disappear.  This is sometimes not the correct policy; there
+are certain windows that should ``follow'' the user from window to
+window.  These are typically windows that are not bound to a
+particular activity.  The most common example is a dashboard window
+for calling other applications.  Another example might be a diagnostic
+program such as a load monitory.
+
+Each window has ``stickiness'' flags that govern this behavior.  One
+flag controls stickiness across workspaces: sticky windows will appear
+in every workspace automatically.  The other flag similarly governs
+stickiness across viewports.  A window is ``sticky'' if either of
+these flags are set.
+
+Sticky windows are often @code{ignored}, so they lack window
+decorations, and @code{avoid}ed so other windows do not cover them up.
+
+@defun window-sticky-p/workspace window
+@defunx window-sticky-p/viewport window
+@defunx window-sticky-p window
+Returns true if @var{window} is sticky across a particular environment
+(workspaces, viewports, or either), false otherwise.
+@end defun
+
+@defun make-window-sticky/workspace window
+@defunx make-window-sticky/viewport window
+@defunx make-window-sticky window
+Make the @var{window} sticky across some environment (workspaces,
+viewports, or both).
+@end defun
+
+@defun make-window-unsticky/workspace window
+@defunx make-window-unsticky/viewport window
+@defunx make-window-unsticky window
+Make the @var{window} unsticky across some environment (workspaces,
+viewports or both).
+@end defun
+
+@defun toggle-window-sticky window
+If @code{window-sticky-p} would report true for @var{window}, make
+@var{window} unsticky for all environments.  Otherwise make it sticky
+for all environments.
+@end defun
+
+@node Ignored Windows, Maximizing Windows, Window Stickiness, Windows
+@section Ignored Windows
+@cindex Windows, ignored
+
+Sawfish has a general concept of ``ignored'' windows; the user does
+not interact normally with those windows.  The concept is actually
+defined by five different window properties:
+
+@table @code
+@item ignored
+The window does not receive frames.
+
+@item never-focus
+The window never receives the input focus.
+
+@item cycle-skip
+The window is ignored while window cycling.
+
+@item window-list-skip
+The window will not be included in the window list.
+
+@item task-list-skip
+The window will not be included in the task list.
+
+@end table
+
+A monitor application such as ``xload'' might have all five of these
+flags set.
+
+Rather than directly manipulating the window properties, it is better
+to use the following access functions:
+
+@defun window-ignored-p window
+Returns true if the window has the @code{ignored} property, false
+otherwise.
+@end defun
+
+@deffn Command make-window-ignored window
+Ignore the window @var{window}.
+@end deffn
+
+@deffn Command make-window-not-ignored window
+Unignore the window @var{window}.
+@end deffn
+
+@deffn Command toggle-window-ignored window
+If @code{window-ignored-p} would return true for @var{window}, make it
+unignored.  Otherwise make it ignored.
+@end deffn
+
+The remaining flags only have toggle functions implemented right now:
+
+@deffn Command toggle-window-never-focus window
+@deffnx Command toggle-window-cycle-skip window
+@deffnx Command toggle-window-list-skip window
+@deffnx Command toggle-task-list-skip window
+Toggle the appropriate flag on @var{window}.
+@end deffn
+
+All five of the flags are available through the window menu's
+``Toggle'' entry.
+
+@node Maximizing Windows, Animating Windows, Ignored Windows, Windows
 @section Maximizing Windows
 @cindex Maximizing windows
 @cindex Windows, maximizing
 
-The dimensions of a window may be temporarily @dfn{maximized}.
+The dimensions of a window may be temporarily @dfn{maximized},
+stretching as far as possible across the screen in one or two
+dimensions.
 
 @deffn Command maximize-window window &optional direction
 Maximize both dimensions of @var{window}
@@ -1137,6 +2073,375 @@ Return @code{t} when @var{window} is vertically maximized.
 Return @code{t} when @var{window} is horizontally maximized.
 @end defun
 
+@node Animating Windows, Cycling Between Windows, Maximizing Windows, Windows
+@section Animating Windows
+@cindex Windows, Animating
+
+Sawfish provides certain window animation capabilities.  They have
+been described as ``lame'', so they are off by default.
+
+@defvar default-window-animator
+The default window animation mode, used if a window has no explicit
+animation set.  Normally @code{none}.
+@end defvar
+
+@defun define-window-animator name fun
+Define a window animator called @var{name} (a symbol) that is managed
+by function @var{fun}. @var{fun} is called as @samp{(fun window op
+[action])} when it should change the state of an animation sequence.
+@var{Op} may be one of the symbols @code{start}, @code{stop}.
+@end defun
+
+@defun autoload-window-animator name struct
+Construct an autoloader for window animator @var{name} from structure
+@var{struct}.
+@end defun
+
+@defun run-window-animator window action
+Invoke an animation for action @var{action} on @var{window}.
+@var{Action} may be one of the symbols @code{start}, @code{stop}.
+@end defun
+
+@defun record-window-animator window animator
+Note that @var{window} currently has an animation running, being
+controlled by animator function @var{animator}.
+@end defun
+
+@node Cycling Between Windows, Window Groups, Animating Windows, Windows
+@section Cycling Between Windows
+@cindex Windows, cycling between
+
+Sawfish provides two categories of commands for cycling between
+windows.  The first category cycles between windows in an order that
+is essentially fixed.  The second category cycles between windows in a
+dynamic order.
+
+@menu
+* Fixed Window Cycles::
+* Dynamic Window Cycles::
+@end menu
+
+@node Fixed Window Cycles, Dynamic Window Cycles, Cycling Between Windows, Cycling Between Windows
+@subsection Fixed Window Cycles
+@cindex Window cycles, fixed
+
+These commands organize the set of mangaged windows into loops.  A
+loop may consist of all windows in a workspace, or it may consist of
+all windows anywhere.  The positions of windows in this loop do not
+change, except when a new window is managed or unmanaged.
+
+@defun next-workspace-window
+@defunx previous-workspace-window
+Switch focus to the ``next'' or ``previous'' window in the current
+workspace.
+@end defun
+
+@defun next-window
+@defunx previous-window
+Switch focus to the ``next'' or ``previous'' window in this
+workspace.  If this function reaches the ``end'' of the windows in
+this workspace, it switches to the next workspace and displays the
+first window there.
+@end defun
+
+@node Dynamic Window Cycles,  , Fixed Window Cycles, Cycling Between Windows
+@subsection Dynamic Window Cycles
+@cindex Window cycles, dynamic
+
+These commands implement something much close to Microsoft Windows'
+@key{Alt-TAB} mechanism, working with a stack of recently used
+windows.
+
+@defun cycle-windows
+@defunx cycle-windows-backwards
+Cycle through all cycleable windows.
+@end defun
+
+@defun cycle-group
+@defunx cycle-group-backwards
+Cycle through all windows in this group.
+
+This is somewhat comparable to the @key{Control-TAB} behavior of
+windows.
+@end defun
+
+@defun cycle-prefix
+@defunx cycle-prefix-backwards
+Cycle through all windows whose titles match that of the initial
+window (up to, but not including, the first colon).
+@end defun
+
+@defun cycle-class
+@defunx cycle-class-backwards
+Cycle through all windows whose classes match that of the initial
+window.
+@end defun
+
+@defun cycle-dock
+@defunx cycle-dock-backwards
+Cycle through all windows in the dock, even those with the
+@code{cycle-skip} property.
+@end defun
+
+Each of these cycling commands may include windows that are not
+visible on-screen.
+
+@defvar cycle-include-iconified
+If true, Sawfish includes iconified windows when cycling.  Defaults to
+true.
+@end defvar
+
+@defvar cycle-all-workspaces
+If true, Sawfish includes windows on all workspaces when cycling.
+Defaults to false.
+@end defvar
+
+@c FIXME: viewports aren't documented right now
+@c @defvar cycle-all-viewports
+@c If true, Sawfish includes windows on all viewports when cycling.
+@c Defaults to false.
+@c @end defvar
+
+It is possible to configure the cycling to get more feedback during
+the process.
+
+@defvar cycle-show-window-names
+If true, Sawfish displays window names and icons while cycling through
+windows.  Defaults to true.
+@end defvar
+
+@defvar cycle-raise-windows t
+If true, Sawfish raises windows while they're temporarily selected
+during cycling.  Defaults to true.
+@end defvar
+
+It is also possible for you to define your own stacking cycle
+commands, or even to alter the window stack to suit your tastes.
+
+@defun define-cycle-command name body &rest rest
+Create a command that will not cause the current cycle operation
+to abort before execution.
+
+All arguments are passed to define-command.
+@end defun
+
+@defun define-cycle-command-pair forward-name reverse-name selector &rest rest
+Create a pair of commands for cycling through windows. The command named
+@var{forward-name} cycles forwards, while the command named
+@var{reverse-name} cycles backwards.
+
+@var{Selector} is called when initializing the cycle environment, it
+should return the list of windows to cycle through, or the symbol `t'
+to denote all cyclable windows.
+
+Any extra arguments are passed to each call to define-command.
+@end defun
+
+@defun window-order &optional workspace allow-iconified all-viewports
+Return managed windows in most-recently used order.
+
+If @var{workspace} is non-nil, then only managed windows in that
+workspace will be returned.
+
+If @var{allow-iconified} is non-nil, then iconified windows will be
+returned instead of ignored.
+
+If @var{all-viewports} is non-nil, then windows in all viewports will
+be returned, instead of just the current viewport.
+@end defun
+
+@defun window-order-push w
+Push window @var{w} onto the top of the cycle stack.
+@end defun
+
+@defun window-order-pop w
+Remove window @var{w} from the cycle stack.
+@end defun
+
+@defun window-order-most-recent &key windows
+Return the most-recently focused window in the current workspace.  If
+the @var{windows} argument is given it should be a list of windows, in
+this case the function will restrict its search to the elements of
+this list.
+@end defun
+
+@defun window-order-focus-most-recent
+Switch input focus to the most-recently focused window in the current
+workspace.
+@end defun
+
+@node Window Groups,  , Cycling Between Windows, Windows
+@section Window Groups
+@cindex Groups, windows
+
+Sawfish provides extra tools and commands for dealing with ICCCM
+groups.  Most ``normal'' groups work the same way as they do in the
+ICCCM standard: windows have a group property that is set to the X
+window ID of the group leader.  These are ``group IDs'', and they are
+always positive integers.  In addition, Sawfish allows group IDs to
+be:
+
+@table @asis
+@item negative integers
+These are anonymous user-defined groups.
+@item symbols
+These are named user-defined groups.  Named user-defined groups are
+saved as part of window properties when saving sessions.
+@end table
+
+@defun window-group-ids
+Return the list of all group ids.
+@end defun
+
+There may be certain named groups that always exist, whether or not
+any window belongs to them.
+
+@defvar peristent-group-ids
+A list of symbols naming groups that always exist.
+@end defvar
+
+In any case, a window is limited to belonging to one group, and always
+belongs to one group.
+
+@menu
+* Assigning Windows to Groups::
+* Operations on Groups::
+@end menu
+
+@node Assigning Windows to Groups, Operations on Groups, Window Groups, Window Groups
+@subsection Assigning Windows to Groups
+@cindex Groups, assigning windows to
+
+It is possible to change the group of a window in Sawfish.  Use
+@code{add-window-to-group}, or if necessary you can set the window's
+@code{group} property explicitly.
+
+@defun add-window-to-group window group-id
+Place @var{window} in group @var{group-id}, replacing any previous
+group membership.  If @var{group-id} is @code{nil}, then Sawfish
+returns the window to whatever group membership was supplied by ICCCM.
+@end defun
+
+@defun add-window-to-new-group window
+Place @var{window} into a new group, which will have @var{window} as
+its sole member.  This is an anonymous user-defined group.  The new
+group ID is returned.
+@end defun
+
+The Sawfish group assignment never overrides the ICCCM group
+assignment, just suppresses it.  The @code{window-actual-group-id}
+function implements this overriding.
+
+@defun window-actual-group-id window
+Return the (Sawfish) group ID for @var{window}.  This is, in order of
+preference:
+@itemize @bullet
+@item The group ID assigned by Sawfish
+@item The group ID passed in by ICCCM.
+@item The corresponding values for an owning window, if the given window is transient.
+@item The window's own window ID.
+@end itemize
+
+This means that a window is, at the very least, part of its own group.
+@end defun
+
+Each of the following functions operates on the ``actual group ID'' as
+returned by the above function.
+
+@defun windows-by-group group-id &optional by-depth
+Return the list of windows in the group with id @var{group-id}.
+If @var{by-depth} is non-nil, then return the windows in order of
+stacking, from topmost to bottommost.
+@end defun
+
+@defun windows-in-group w &optional by-depth
+Return the list of windows in the same group as window @var{w}.
+If @var{by-depth} is non-nil, then return the windows in order of
+stacking, from topmost to bottommost.
+@end defun
+
+@defun map-window-group fun w
+Map the single argument function @var{fun} over all windows in the
+same group as window @var{w}.  Note that @var{fun} needs to operate
+using side-effects, rather than returning values.
+@end defun
+
+@defun map-other-window-groups fun w
+Map the single argument function @var{fun} over all windows not in the
+same group as window @var{w}.  Note that @var{fun} needs to operate
+using side-effects, rather than returning values.
+@end defun
+
+@defun window-group-menu &optional w
+Return a menu definition suitable for @code{popup-menu}.  This menu
+will allow the user to assign the window @var{w} into any group of a
+managed window, or into a brand new group.  The window's current group 
+is checked or otherwise marked.
+@end defun
+
+@node Operations on Groups,  , Assigning Windows to Groups, Window Groups
+@subsection Operations on Groups
+@cindex Groups, operations on
+
+Most of the window manipulation functions that operate on windows are
+also available for window groups.  Each of these functions takes a
+window as argument; the affected group is that window's group.
+
+@defun iconify-group w
+@defunx uniconify-group w
+@defunx iconify-transient-group w
+@defunx uniconify-transient-group w
+These operate like their single-window counterparts.  They work by
+temporarily rebinding @code{iconify-group-mode} and
+@code{uniconify-group-mode}.
+@end defun
+
+@defun make-group-sticky w
+@defunx make-group-unsticky w
+These operate like their single-window counterparts.
+@end defun
+
+@defun toggle-group-sticky w
+If window @var{w} is sticky, all windows in its group have their
+stickyness removed.  Otherwise all windows in its group become sticky.
+@end defun
+
+@defun send-group-to-workspace w workspace
+@defunx send-group-to-next-workspace w count
+@defunx send-group-to-previous-workspace w count
+These operate like their single-window counterparts.
+@end defun
+
+@defun send-group-to-current-workspace w
+All windows in the group of @var{w} are moved from their existing
+workspaces to the nearest workspace that @var{w} is in.  Sticky
+windows are not affected.  If the window had the input focus and it is
+visible after the move, it retains the input focus.
+@end defun
+
+@c FIXME: viewports are deprecated, so this is commented out
+@c @defun move-group-to-current-viewport w
+@c @defunx move-group-viewport w
+@c @end defun
+
+@defun move-group-left w
+@defunx move-group-right w
+@defunx move-group-up w
+@defunx move-group-down w
+These operate like their single-window counterparts.
+@end defun
+
+@defun raise-group w
+@defunx lower-group w
+@defunx raise-lower-group w
+@defunx raise-group-depth w
+@defunx lower-group-depth w
+These operate like their single-window counterparts.
+@end defun
+
+@defun set-group-frame-style w style
+This operates like its single-window counterpart.
+@end defun
 
 @node Customization, Window Frames, Windows, Top
 @chapter Customization
@@ -1175,9 +2480,20 @@ requirement is placed on the Lisp programmer. Instead of just using the
 macro must be used. This augments the variable with extra information
 for the GUI, including such things as its required data type.
 
-Customization options are organized into groups. Each group has a name
-and contains a set of related options. Currently, it is not possible
-for groups to contain sub-groups.
+@menu
+* Defgroup and Defcustom::      
+* Customization Files::         
+* Customized Variable Status::  
+@end menu
+
+@node Defgroup and Defcustom, Customization Files, Customization, Customization
+@section Defgroup and Defcustom
+@cindex defgroup
+@cindex defcustom
+
+Customization options are organized into groups.  Each group has a name
+and contains a set of related options.  Groups can be assigned to
+parent groups using the @code{:group} parameter during construction.
 
 @defmac defgroup group real-name &rest keys
 Declares a new customization group whose name is defined by the symbol
@@ -1186,12 +2502,46 @@ seen by the user.
 
 @var{keys} is a list, defining the properties of the group. The members
 of the list are grouped into pairs of elements, the first element names
-the property, the second defines its value. Currently the only property
-is @code{:widget}, defining a function to create the group's UI widget.
+the property, the second defines its value.
+
+@table @code
+@item :group @var{group}
+Specifies the parent customization group of this group.  The value of
+this key is not evaluated.
+
+@item :require @var{struct}
+Before displaying the customization UI for this group, @code{require}
+the structure @var{struct}.  This guarantees that all customizable
+variables will be known at display time.  The value of
+this key is not evaluated.
+
+@item :layout @var{symbol}
+Use a particular UI widget to display this group.  The value is a
+symbol, one of:
+
+@table @code
+@item single
+Holds a single customizable item.
+@item vbox
+Holds any number of customizable items, arranging them vertically.
+This is the default.
+@item hbox
+Holds any number of customizable items, arranging them horizontally.
+@item frame
+Embed the items in a vbox in a frame.
+@item keymaps
+Use a special UI widget for customizing keymaps.
+@end table
+
+The value of this key is not evaluated.
+@end table
 
 This macro also creates an interactive function named
 @code{customize:@var{group}} allowing the GUI to be invoked to
 configure the new group.
+
+While @code{defgroup} is a macro, there is a corresponding
+@code{custom-declare-group} function.
 @end defmac
 
 @defmac defcustom variable value documentation &rest keys
@@ -1206,27 +2556,90 @@ possible pairs are as follows:
 @table @code
 @item :group @var{group}
 Specifies the customization group that this variable is a member of.
+This is a list of symbols, indicating a series of nested groups, e.g.,
+@code{(workspace edge-flip)}.  A variable in a top-level customization
+group can also be specified as a plain symbol, e.g., @code{workspace}.
+The value of this key is not evaluated.
 
 @item :type @var{type}
 Specifies the required type of the variable. The current possibilities
-are @code{boolean}, @code{number}, @code{string}, @code{file-name},
-@code{program-name}, @code{font}, @code{color}, @code{frame-style},
-@code{keymap} and @code{(set @var{symbols}@dots{})}.
+are:
 
-The @code{boolean} type assures a value of either @code{nil} or
-@code{t}, the @code{set} type allows the user to choose from one of the
-symbols in the list.
+@item @code{(symbol [@var{option} @dots{}])}
+A symbol.  The UI looks for a symbol property @code{:options} and
+interprets it as the list of valid symbols to select from.  The
+@var{option} arguments allow you to define a list at eval time.  It is
+also possible to change this list at run time by changing the custom
+symbol's @code{:options} property; see the access functions
+@code{custom-add-options} and @code{custom-set-options} for more
+information.
 
+@item @code{(choice @var{option} @dots{})}
+One of the @var{option} elements.  Each @var{option} is a symbol.
+Unlike the @code{symbol} type, there is no expectation that this list
+will change at run-time.
+
+@item @code{string}
+An arbitrary string.
+
+@item @code{(number [[@var{min}] @var{max}]}
+Integer number.  Two additional arguments specify the minimum and
+maximum allowed values for the integer.  One additional argument
+specified the maximum allowed value; the minimum defaults to zero.
+Zero additional arguments implies no minimum nor maximum.
+
+@item @code{boolean}
+True (@code{t}) or false (@code{nil}) value.
+
+@item @code{color}
+A color.
+
+@item @code{font}
+A font name.
+
+@item @code{file}
+A file name.
+
+@item @code{program}
+A file name that must be an executable program.
+
+@item @code{command}
+A Sawfish command.
+
+@item @code{event}
+A Sawfish event.
+
+@item @code{keymap}
+A Sawfish keymap.
+
+@item @code{frame-style}
+The name of a defined Sawfish frame style.
+
+@item @code{icon}
+An X icon.
+
+@item @code{modifier-list}
+A list of X modifier keys.
+
+@c @item @code{workspace-geometry}
+@c A @code{(@var{columns} . @var{rows})} pair.
+
+@end table
+
+Except where specified, the values of these keys are not evaluated.
+
+@table @code
 @item :require @var{feature}
 Denotes that the feature @var{feature} must be loaded if the variable
-is set to a non-@code{nil} value by user customizations. This is
+is set to a non-@code{nil} value by user customizations.  This is
 necessary because customization options are loaded on startup, possibly
 before the modules that define them.
+The value of this key is not evaluated.
 
 @item :allow-nil @var{bool}
 Specifies whether the variable may be @code{nil}, instead of a member
 of its actual type. This is only supported by the @code{string},
-@code{set}, @code{font} and @code{color} types.
+@code{symbol}, @code{font} and @code{color} types.
 
 @item :set @var{function}
 Specifies that the variable must be set by calling @var{function}
@@ -1251,11 +2664,24 @@ Functions called both immediately before and after setting the value of
 the variable. Called with a single parameter: the variable itself.
 
 @item :range (@var{min} . @var{max})
-The allowed range for numeric variables. If @var{min} is @code{nil} the
+The allowed range for numeric variables.  If @var{min} is @code{nil} the
 the default minimum allowed value is zero; if @var{max} is @code{nil}
-then the default maximum is unbounded.
+then the default maximum is unbounded.  This is obsolete, since the
+@code{:number} type now supports range declarations.
+The value of this key is not evaluated.
+
+@item :tooltop @var{string}
+A tooltip that appears when the user's mouse hovers over the widget
+item.
+
+@item :depends @var{symbol}
+This widget item is only settable when the symbol-value for
+@var{symbol} is non-nil.
 
 @end table
+
+While @code{defcustom} is a macro, there is a corresponding
+@code{custom-declare-variable} function.
 @end defmac
 
 Note that where necessary the types themselves define default
@@ -1276,13 +2702,78 @@ Consider the following example:
 (defcustom move-snap-epsilon 8
   "Proximity in pixels before snapping to a window edge."
   :group move
-  :type number
-  :range (0 . 64))
+  :type (number 0 64))
 @end lisp
 
 @noindent
 This defines a group and two customization options.
 
+There are two special accessor functions to make it easier to deal
+with lists of allowed symbols.
+
+@defun custom-add-option variable option
+Add symbol value @var{option} to the list of symbols that can be
+stored in @var{variable}.  The new option goes on the end of the
+list.
+@end defun
+
+@defun custom-get-options variable
+Return the list of symbols that can be stored in @var{variable}.
+@end defun
+
+@node Customization Files, Customized Variable Status, Defgroup and Defcustom, Customization
+@section Customization Files
+@cindex Customization files
+@cindex Files, customization
+
+@defvar custom-user-file
+User configuration settings are stored in the file referenced by this
+variable.  While this file contains valid Rep forms, users should not
+edit it directly: Sawfish will overwrite the file's contents each time
+a customization is made through the GUI.
+
+By default, this variable is set to @code{"~/.sawfish/custom"}.  The
+@code{--custom-file} command-line option sets it to a different file
+on program startup.
+@end defvar
+
+@defvar custom-default-file
+Default customization settings are stored in the file referenced by
+this variable.  These settings are only applied if the user has no
+personal settings.  By default, this variable is set to
+@code{"sawfish/wm/custom-defaults.jl"} relative to the
+@code{sawfish-lisp-lib-directory} directory.
+@end defvar
+
+@defun custom-load-user-file
+If the file referenced by @code{custom-user-file} exists, load it.
+Otherwise if @code{custom-default-file} is non-nil, interpret it as a
+filename and load it.
+@end defun
+
+@node Customized Variable Status,  , Customization Files, Customization
+@section Customized Variable Status
+
+To get information about a customizable variable, you can use the
+following functions.
+
+@defun variable-customized-p symbol
+Returns true if @var{symbol} has been customized by the user, false
+otherwise.
+@end defun
+
+@defun variable-declared-p symbol
+@defunx variable-default-value symbol
+The @code{variable-declared-p} function returns true if the variable
+named @var{symbol} has a default value declared for it, false
+otherwise.  The @code{variable-default-value} function returns the
+default value of that variable, or nil if no such default value
+exists.
+@end defun
+
+@defun variable-type symbol
+Returns the customizable type of the variable named @var{symbol}.
+@end defun
 
 @node Window Frames, Workspaces, Customization, Top
 @chapter Window Frames
@@ -1394,7 +2885,7 @@ existing value exists for that key.
 If @var{binding-forms} are given, they will be evaluated when no keymap
 already exists for the class. A keymap will be created, and stored in
 the variable named @samp{@var{class}-name}. This variable may then be
-used withing the @var{binding-forms}.
+used within the @var{binding-forms}.
 @end defmac
 
 So to define a hypothetical @code{shade-button} class, the following
@@ -1409,6 +2900,19 @@ might be used:
 In some cases it might be valuable to be able to override pre-defined
 frame part properties. For example, it might be your preference that
 text in window title bars is always blue.
+
+@defun define-frame-class class alist-form &optional with-keymap
+Creates a new frame part class named by the symbol @var{class}.
+
+Unlike @code{def-frame-class}, the trailing argument is just a boolean
+flag.  This flag only indicates whether to create a keymap for the
+class.  Any bindings have to be established through a separate call to
+@code{bind-keys}.
+
+The function returns @code{t} if it was able to create and bind the
+empty keymap, @code{nil} otherwise.  This allows us to check for
+errors.
+@end defun
 
 @defvar override-frame-part-classes
 Similar to @code{frame-part-classes} except that the properties take
@@ -1610,13 +3114,20 @@ possible to retrieve the values of individual attributes from the
 complete list of definitions (including inherited or overrided
 definitions).
 
-@defun frame-part-get window class attr
-Returns the value of the attribute @var{attr} for the frame part of
-class @var{class} in the current frame of @var{window}.
+@defun frame-part-get part property
+Returns the value of the property @var{property} for the frame part
+object @var{part}.  Returns @code{nil} if no such attribute exists.
+@end defun
 
-Returns @code{nil} if no such attribute exists. If more than one frame
-part of class @var{class} exists then the value will be taken from the
-first part found.
+@defun frame-part-put part prop value
+Set the property @var{prop} of frame part @var{part} to @var{value}.
+@end defun
+
+@defun frame-part-state part
+Return the current state for frame part @var{part}, one of the symbols
+@code{focused}, @code{highlighted}, @code{clicked},
+@code{inactive-highlighted}, @code{inactive-clicked}, or @code{nil} if
+the part is inactive.
 @end defun
 
 @node Frame Functions, Frame Types, Frame Part Definition, Window Frames
@@ -1641,6 +3152,10 @@ Return @code{t} when @var{window} has been reparented to a frame
 created by the window manager.
 @end defun
 
+@defun refresh-window window
+Refresh all the frame parts belonging to @var{window}.
+@end defun
+
 @defun rebuild-frame window
 Recreates the window frame associated with @var{window}, from the
 previously defined frame definition. All frame parts are reinitialized
@@ -1662,6 +3177,57 @@ the origin of the client window associated with @var{window} to the
 origin of its frame.
 @end defun
 
+@defun window-border-width window
+Return the width of the border of the window that @var{window}
+manages.
+@end defun
+
+@defun clicked-frame-part
+Return a pointer to the frame part object that was clicked on as part
+of the current event.  Returns @code{nil} if no frame part was clicked
+on.
+@end defun
+
+@defun frame-part-dimensions part
+Return a cons cell @code{(@var{width} . @var{height})} of dimensions
+for frame part @var{part}.
+@end defun
+
+@defun frame-part-position part
+Return a cons cell @code{(@var{x} . @var{x})} of the @emph{relative}
+position of frame part @var{part} against its window's frame
+origin.
+@end defun
+
+@defun frame-part-window part
+Return the window object associated with this frame part.
+@end defun
+
+@defun frame-part-x-window part
+Return the X11 window ID associated with this frame part.
+@end defun
+
+@defun frame-draw-mutex lock
+Called with @var{lock} equal to @code{t}, frame part redraws will be
+delayed.  The redraws will take place once the function is called with
+@var{lock} set to @code{nil}.
+@end defun
+
+@defun map-frame-parts function window
+Call @code{(@var{function} @var{part})} on each the frame parts of
+@var{window} and return @code{nil}.  If any @var{function} returns
+@code{nil}, @code{map-frame-parts} returns @code{nil} immediately.
+@end defun
+
+@defun rebuild-frame-part part
+Build a new copy of the frame part @var{part} and install the copy in
+the owning window, replacing the old part.
+@end defun
+
+@defun refresh-frame-part part
+The frame part @var{part} will be redrawn at the next opportunity.
+@end defun
+
 
 @node Frame Types, Frame Styles, Frame Functions, Window Frames
 @section Frame Types
@@ -1669,8 +3235,14 @@ origin of its frame.
 @cindex Window frames, types
 
 In order to visually differentiate between different types of windows,
-several predefined types of window frame exist. These types currently
-include the following:
+several predefined types of window frame exist.
+
+@defun window-type window
+Returns a symbol naming the frame type currently associated with
+@var{window}.
+@end defun
+
+These frame types currently include the following:
 
 @table @code
 @item default
@@ -1702,15 +3274,54 @@ No frame at all, just the client window itself. The predefined
 this frame type.
 @end table
 
-The type of frame that would ideally be given to a window is stored in
-the window's @code{type} property. It should usually be accessed
-through the @code{window-type} function:
+@defun define-frame-type-mapper fun
+Function @var{fun} maps from @{@var{window}, @var{frame-type}@} to
+@var{frame-type}.
 
-@defun window-type window
-Returns a symbol naming the frame type currently associated with
-@var{window}.
+Each time we want to determine a window's frame-type (@code{shaded},
+@code{transient}, etc.), we calculate an initial frame type with
+@code{window-type} and run the results through each frame type mapper
+in sequence (most recent to oldest).  The frame type returned from the
+final mapper function is ``the'' frame type.
+
+This sequence of mappers allows us to override window frame types
+based on window properties.  For example, any shaded window has to
+have @code{shaded} or @code{shaded-transient} type, regardless of what
+its normal type is.
 @end defun
 
+@defun window-type-add-border type
+@defunx window-type-add-title type
+@defunx window-type-remove-border type
+@defunx window-type-remove-title type
+Given a window type of @var{type}, return the closest matching window
+type with the given property change.  For example:
+
+@lisp
+(window-type-add-title 'unframed)
+@result{} 'shaped
+@end lisp
+
+@noindent
+This is because shaped windows normally have title bars but not
+borders, while unframed windows normally have neither.
+@end defun
+
+@defun frame-type-menu window
+Returns a list of frame types, suitable for use by the graphical
+customizer.  The frame type of @var{window} is automatically checked.
+@end defun
+
+We provide a function to simplify monitoring of window changes to certain
+window states.  This monitoring runs on top of the
+@code{window-state-change-hook}.
+
+@defun call-after-state-changed states fun
+Arrange for function @var{fun} to be called with arguments
+@samp{(window changed-states)} when one of the states defined by the
+list of symbols @var{states} has been changed.  @var{States} may also
+be a single symbol.
+@end defun
 
 @node Frame Styles, Themes, Frame Types, Window Frames
 @section Frame Styles
@@ -1723,80 +3334,39 @@ have a single visual appearance. Each frame style associates a name
 with a function that creates a frame definition for a particular window
 and frame type combination.
 
-@defun add-frame-style name function
-Defines a new frame style called @var{name} (a symbol). When a frame of
-this style is required for a particular window, @var{function} is
-called with two arguments, the window itself and a symbol defining the
-frame type to create (@pxref{Frame Types}).
-
-If the frame style is unable to provide a frame definition of the
-required type, it should return the symbol @code{nil}. In which case it
-may subsequently be asked for a frame of a different type.
-
-If no default frame style exists, the new style will be made the
-default.
-@end defun
-
-@defvar default-frame-style
-A symbol naming the frame style to use for windows where no other style
-is explicitly specified.
-@end defvar
-
-@defun check-frame-availability name
-Returns @code{t} if a frame style called @var{name} exists. Will try to
-load such a frame from the filing system if necessary.
-@end defun
-
-@defun set-window-frame-style window style &optional type from-user
-Sets the frame of @var{window} to the style named by the symbol
-@var{style}. If @var{type} is defined then it names the frame type to
-use, otherwise the default type for this window is used.
-
-If @var{from-user} is non-nil then the user chose this frame style for
-the window explicitly (i.e. it's not just the default choice for a new
-window).
-@end defun
-
-@defun set-frame-for-window window &optional force type
-If @var{window} has no frame style associated with it, then chooses the
-default value for this window, the value of @code{default-frame-style}.
-
-If @var{force} is non-nil then the style is always re-chosen, even if
-the window already has a chosen default style.
-
-If @var{type} is non-nil it defines the frame type to give the window,
-otherwise the current default for the window is used.
-@end defun
-
-@defun reframe-all-windows
-Forcibly reselect all window frame styles. Only windows with a user
-specified style are not changed to the current defaults.
-@end defun
-
-@defun rebuild-frames-with-style style
-Call @code{rebuild-frame} on all windows that currently have a frame
-defined by frame style @var{style} (a symbol)
-@end defun
-
-@defun reframe-windows-with-style style
-Completely recreate all window frames that are defined by the style
-@var{style}.
-@end defun
-
 Several window properties are used while choosing frame styles:
 
 @defvr {Window Property} frame-style
-The user-chosen frame style of the window, or @code{nil}.
+The user-chosen frame style of the window.  If @code{nil}, Sawfish
+will use the default frame style.
 @end defvr
 
 @defvr {Window Property} current-frame-style
-The current frame style of the window.
+The current frame style of the window.  This is not set explicitly;
+window update functions will change it behind the scenes.
 @end defvr
 
 @defvr {Window Property} ignored
 When set, the window is not given a frame.
 @end defvr
 
+It is possible to edit certain frame styles in place with
+@code{sawfish-themer}.
+
+@defun frame-style-editable-p style
+Returns @code{t} if @var{style} can be edited interactively,
+@code{nil} otherwise.
+@end defun
+
+@deffn {Command} edit-frame-style style
+Prompts for a frame style (defaulting to the value of @code{default-frame-style}),
+and runs @code{sawfish-themer-program} on it.
+@end deffn
+
+@defun reload-frame-style name
+Reloads the frame style @var{name} from disk if it is already known to
+the system.  All windows with that style are reframed.
+@end defun
 
 @node Themes, Removing Frame Parts, Frame Styles, Window Frames
 @section Themes
@@ -1856,11 +3426,31 @@ The name of the user's theme directory, by default
 @end defvar
 
 @defvar system-theme-directory
-The name of the system theme directory.
+The name of the directory holding themes from the current Sawfish
+version, by default
+@lisp
+(expand-file-name "../themes" sawfish-lisp-lib-directory)
+@end lisp
 @end defvar
 
+@defvar site-theme-directory
+The name of the directory holding system-wide themes, by default
+@lisp
+(expand-file-name "../../themes" sawfish-lisp-lib-directory)
+@end lisp
+@end defvar
 
-@node Removing Frame Parts, , Themes, Window Frames
+@defvar theme-update-interval
+Number of seconds between checking if theme files have been modified.
+Default 60.
+@end defvar
+
+@defvar themes-are-gaoled
+If @code{t}, non-nil themes are assumed to be malicious.  They will be
+evaluated in a restricted environment.
+@end defvar
+
+@node Removing Frame Parts,  , Themes, Window Frames
 @section Removing Frame Parts
 @cindex Removing frame parts
 @cindex Frame parts, removing
@@ -1873,26 +3463,758 @@ particular class to be disabled or enabled on a window by window basis.
 However, not all frame styles will support this (it depends on the
 frame part's @code{removable} property, @ref{Frame Part Definition}).
 
-@defun remove-frame-class window class
-Disable all frame parts that are a member of @var{class} in
-@var{window} where possible.
-@end defun
-
 @defun add-frame-class window class
 Enable all frame parts that are a member of @var{class} in
 @var{window}.
 @end defun
 
+@defun frame-class-removed-p window class
+Returns @code{t} if the frame part @var{class} has been removed from
+@var{window}, @code{nil} otherwise.
+@end defun
 
-@node Workspaces, Popup Menus, Window Frames, Top
+@defun remove-frame-class window class
+Disable all frame parts that are a member of @var{class} in
+@var{window} where possible.
+@end defun
+
+@c @node Viewports, Workspaces, Window Frames, Top
+@c @chapter Viewports
+@c @cindex Viewports
+@c 
+@c It is sometimes useful to have a logical display that is larger than
+@c the computer screen.  This is most often implemented by displaying
+@c only a portion of the logical display at any time.  Sawfish does this
+@c using ``viewports''.
+@c 
+@c When viewports are enabled, the Sawfish logical display becomes
+@c infinitely large in the two directions ``across'' and ``down'' (to the
+@c maximum representable size of integers).  Sawfish divides this logical
+@c display into a potentially infinite grid of cells.  Each cell of the
+@c grid is the same size of the virtual display.
+@c 
+@c @defvar viewport-dimensions
+@c The current number of viewports across and down the virtual display.
+@c This is a cons cell @code{(@var{across} . @var{down})}.  Defaults to
+@c @code{(1 . 1)}.
+@c @end defvar
+@c 
+@c @defun set-number-of-viewports width height
+@c Change @code{viewport-dimensions} to have the value
+@c @code{(@var{width} . @var{height})}.
+@c @end defun
+@c 
+@c The user then tells Sawfish to move the physical display from cell to
+@c cell.  On a cell change, windows in previous cells are removed, and
+@c windows in the current cell appear.  Windows that span two or more
+@c cells will appear in each cell, appropriately displaced.
+@c 
+@c Note that cell indices start at zero in each dimension.  Indices are
+@c never negative.
+@c 
+@c @defun screen-viewport
+@c Returns the currently displayed viewport as a pair @code{(@var{x},
+@c @var{y})}.
+@c @end defun
+@c 
+@c @defun set-screen-viewport col row
+@c Change the physical display to view cell @code{(@var{col},
+@c @var{row})}.
+@c @end defun
+@c 
+@c @defun move-viewport right down
+@c Move the viewport to see the cell @var{right} slots to the right and
+@c @var{down} slots down.  Either argument may be zero or negative.
+@c @end defun
+@c 
+@c @defun set-window-viewport window col row
+@c Move @var{window} to the cell at @code{(@var{col}, @var{row})}.  The
+@c relative position of the window within the cells is preserved.
+@c @end defun
+@c 
+@c @defun move-window-viewport window col-delta row-delta
+@c Move @var{window} to the cell @var{col-delta} positions across and
+@c @var{row-delta} positions down from its current cell.  The relative
+@c position of the window with its cells its preserved.
+@c @end defun
+@c 
+@c @defun move-viewport-to-window window
+@c Move the viewport to a cell that shows window @var{window}.  For a
+@c window that spans multiple cells, this function will pick the cell
+@c showing the window's top-left corner.
+@c @end defun
+@c 
+@c @defun move-window-to-current-viewport window
+@c Move @var{window} from its existing viewport to the current viewport.
+@c The window's relative position in the existing viewport is preserved
+@c after the move.
+@c @end defun
+@c 
+@c @defun window-viewport window
+@c Returns a cons cell @code{(@var{col} . @var{row})} of the viewport
+@c holding the top-left corner of @var{window}.
+@c @end defun
+@c 
+@c @defun window-outside-viewport-p window
+@c @defunx window-outside-workspace-p window
+@c Returns true if @var{window} is completely outside the current
+@c viewport in any direction.  The @code{window-outside-workspace-p}
+@c function is an obsolete alias for the first function; the
+@c ``workspace'' term is now used for another concept
+@c (@pxref{Workspaces}).
+@c @end defun
+@c 
+@c @defun window-absolute-position window
+@c Returns a cons cell @code{(@var{x} . @var{y})} of the position of
+@c @var{window} in its containing viewport.  The containing viewport may
+@c or may not be the current viewport.
+@c @end defun
+@c 
+@c @defun set-viewport x y
+@c Change the position of the physical display, such that location
+@c @code{(@var{x}, @var{y})} is at the top-left of the display.  The
+@c physical display may be showing more than one cell at this point.
+@c All windows are redisplayed as appropriate.
+@c @end defun
+@c 
+@c @defvar uniconify-to-current-viewport
+@c When true, windows uniconify to the current viewport, rather than to
+@c the viewport they were iconified on.  Defaults to true.
+@c @end defvar
+
+@node Workspaces, Multi-Head Environments, Window Frames, Top
 @chapter Workspaces
 @cindex Workspaces
 @cindex Desktop workspaces
 
-XXX what do I want to say here?
+Workspaces provide another way for users to organize their windows in
+Sawfish.  Instead of stretching the screen real estate to the right
+and down, workplaces stack screens on top of each other.  The user
+drills down into the stack, or pops up through the stack, seeing the
+appropriate windows in each workspace.
+
+@menu
+* Workspace Intervals::			``Interesting'' workspaces
+* Workspace Manipulation::		Creating, rearranging, deleting
+* Workspaces and Windows::		Adding, removing
+* Edge Flipping::			Moving workspaces using the mouse
+@end menu
+
+@node Workspace Intervals, Workspace Manipulation, Workspaces, Workspaces
+@section Workspace Intervals
+
+While the stack of workspaces conceptually goes from negative infinity
+to positive infinity, we normally present only the first non-empty
+workspace through the last non-empty workspace to the user.  The
+non-empty interval is occasionally re-normalized to start with zero.
+
+We typically refer to workplaces with lower IDs being to the ``left''
+of workplaces with higher IDs, as if on a number line.
+
+@defvar current-workspace
+The ID of the currently active workspace.  This is an integer.  The
+``default'' workspace has ID 0.
+@end defvar
+
+@defun workspace-limits
+Returns a pair @code{(@var{first-index} . @var{last-index})} defining
+the subset of the workspace continuum that is ``interesting'' to the
+user (typically, all those that have ever been explicitly created).
+@end defun
+
+@defun workspace-id-to-logical space-id &optional limits
+Takes an absolute workspace ID and returns its position in the
+interval of ``interesting'' workspaces.  If @var{limits} is provided,
+it must be a pair @code{(@var{first-index} . @var{last-index})} like
+that returned by @code{workspace-limits}.  If it is not provided, the
+function uses the result of @code{workspace-limits} directly.
+@end defun
+
+@defun workspace-id-from-logical offset &optional limits
+Takes an offset position into an interval of ``interesting''
+workspaces, and returns the workplace ID at that position.  If
+@var{limits} is provided, it must be a pair @code{(@var{first-index}
+. @var{last-index})} like that returned by @code{workspace-limits}.
+If it is not provided, the function uses the result of
+@code{workspace-limits} directly.
+@end defun
+
+@defun popup-workspace-list
+Display the menu containing the list of all workspaces.
+@end defun
+
+@defun workspace-menu
+Returns a list of workspaces, suitable for display in a menu.
+@end defun
+
+@defvr Customizable workspace-names
+A list of workspace names.  When displaying the workspace menu, the
+first @var{N} workspaces use the corresponding list elements as their
+display names (where @var{N} is the length of the list).  Normally
+they get the display name @samp{space N} for some value of N.
+@end defvr
+
+@node Workspace Manipulation, Workspaces and Windows, Workspace Intervals, Workspaces
+@section Workspace Manipulation
+
+Sawfish has various functions to create, rearrage and delete
+workspaces.  Windows in a deleted workspace are not lost; they are
+moved to another workspace.
+
+@defun select-workspace space &key dont-focus force
+Activate workspace @var{space}, making it current.
+
+By default in @code{enter} and @code{click} focus modes, the most
+recently used window will receive focus.  The caller can disable this
+behavior by passing a true @var{dont-focus} keyword argument.
+
+If the @var{force} keyword argument is true, we will go through the
+activation process even if @var{space} already is current.
+@end defun
+
+@defun select-workspace-from-first count
+Select the workspace in position @var{count} from the list of
+``interesting'' workspaces.
+@end defun
+
+@defun select-workspace-and-viewport space col row
+Select workspace @var{space} and then switch to viewport
+@code{(@var{col}, @var{row})} in that workspace.
+@end defun
+
+@defun insert-workspace &optional before
+Insert a new workspace, returning its index.  The new index appears
+before the workspace indicated by @var{before}, or the current
+workspace if @var{before} is @code{nil}.
+@end defun
+
+@defun insert-workspace-after
+Create a new workspace following the current workspace.
+@end defun
+
+@defun insert-workspace-before
+Create a new workspace preceeding the current workspace.
+@end defun
+
+@defun move-workspace space count
+Move the workspace @var{space} @var{count} positions forward, or
+@var{count} positions backwards if @var{count} is negative.
+@end defun
+
+@defun move-workspace-forwards &optional count
+Move the current workspace one place to the right (or @var{count}
+places to the right if @var{count} is defined).
+@end defun
+
+@defun move-workspace-backwards &optional count
+Move the current workspace one place to the left (or @var{count}
+places to the left if @var{count} is defined).
+@end defun
+
+@defun next-workspace count
+@defunx previous-workspace count
+Switch from the current workspace (index @var{i}) to the workspace
+@var{i}+@var{count}.  The @code{previous-workspace} function is
+identical to @code{(next-workspace (- @var{count}))}.
+
+These functions do not have default values for their @var{count}
+arguments.
+@end defun
+
+@defun remove-workspace &optional index
+Remove workspace @var{index} (or the current workspace if @var{index}
+is @code{nil}).  All windows in that workspace are moved to the next
+workspace @var{index}+1.  This will change the set of ``interesting''
+workspaces.
+@end defun
+
+@defun merge-next-workspace
+Delete the current workspace.  Its member windows are relocated to the
+next workspace.
+@end defun
+
+@defun merge-previous-workspace
+Delete the current workspace.  Its member windows are relocated to the
+previous workspace.
+@end defun
+
+@defun set-number-of-workspaces wanted
+Add or remove workspaces until the number of ``interesting''
+workspaces is equal to @var{wanted}.
+
+When adding workplaces, the new workplaces get indices higher than any
+existing indices.  When removing workplaces, the lowest workplaces are
+always chosen for removal (their windows are merged into the new
+lowest-index workspace).
+@end defun
+
+@defvar lock-first-workspace
+When true, preserve the outermost empty workspaces in the pager.
+Don't quietly remove them when they become empty.  Defaults to true.
+@end defvar
+
+@node Workspaces and Windows, Edge Flipping, Workspace Manipulation, Workspaces
+@section Workspaces and Windows
+
+Workspaces do not need to have windows assigned to them, but most
+operations with workspaces involve adding and removing windows.
+
+@defun all-workspaces
+Returns a list of indices for all workspaces that contain windows.
+Sticky windows appear in the current workspace.
+@end defun
+
+@defun workspace-empty-p space
+Returns true if workspace @var{space} contains zero (non-sticky)
+windows.
+@end defun
+
+@defun delete-empty-workspaces
+Delete any workspaces that don't contain any windows.
+@end defun
+
+@defvar workspace-boundary-mode
+How to act when passing the first or last workspace, one of @code{stop},
+@code{wrap-around} or @code{keep-going}.  Defaults to @code{stop}.
+@end defvar
+
+Each window can be a member of any (positive) number of workspaces;
+their @code{workspaces} property contains a list of workspace ids.
+Sticky windows appear on all workspaces, and have their @code{sticky}
+property set (with a null @code{workspaces} property).  If Sawfish
+begins managing a window with its @code{workspaces} property set, then
+the window is added to those workspaces automatically.
+
+@defun window-in-workspace-p window space
+Returns true if @var{window} is a member of workspace @var{space},
+false otherwise.
+@end defun
+
+@defun window-appears-in-workspace-p window space
+Returns true if @var{window} appears in workspace @var{space}, false
+otherwise.  To appear, @var{window} has to be visible, but it can
+either be assigned to the workspace or be sticky.
+@end defun
+
+@defun windows-share-workspace-p window1 window2
+Returns true if @var{window1} and @var{window2} are members of at
+least one common workspace.
+@end defun
+
+@defun nearest-workspace-with-window window space
+Returns the nearest workspace to @var{space} that contains
+@var{window}.
+@end defun
+
+@defun workspace-windows &optional space include-iconified
+Returns a list of all windows that are members of the current
+workspace (or @var{space} if it is not @code{nil}).  The list normally
+does not contain iconified windows, but they can by included by
+specifying a true @var{include-iconified} argument.
+@end defun
+
+@defun popup-window-menu
+Display the menu of all managed windows.
+@end defun
+
+@defun move-window-to-workspace window old new &optional was-focused
+Move @var{window} from workspace @var{old} to workspace @var{new}.
+
+We need the old workspace as an explicit argument because a window can
+be in more than one workspace.  The function does the right thing if
+the window already appears in workspace @var{new}.
+
+If @var{was-focused} is true and the window is visible, it gets the
+input focus in the new workspace.
+@end defun
+
+@defun copy-window-to-workspace window old new &optional was-focused
+Arrange it so @var{window} appears in both @var{old} and @var{new}
+workspaces.
+
+If @var{was-focused} is true and the window is visible, it gets the
+input focus in the new workspace.
+@end defun
+
+@defun send-to-next-workspace window count &optional copy select
+Move the window @var{count} workspaces to the right.  @var{Count} does
+not default to one.
+
+The window is normally removed from the current workspace (if it is in
+that workspace), or from the first workspace it belongs to.  Supplying
+a true @var{copy} argument causes Sawfish to copy the window instead.
+
+If @var{select} is true, then we switch to the destination workspace.
+If the moved window had input focus before the move, it will have
+input focus after the move as well.
+@end defun
+
+@defun send-to-previous-workspace window count &optional copy select
+Move the window @var{count} workspaces to the left.  @var{Count} does
+not default to one.
+
+The window is normally removed from the current workspace (if it is in
+that workspace), or from the first workspace it belongs to.  Supplying
+a true @var{copy} argument causes Sawfish to copy the window instead.
+
+If @var{select} is true, then we switch to the destination workspace.
+If the moved window had input focus before the move, it will have
+input focus after the move as well.
+
+This is identical to @code{(send-to-next-workspace window count copy select)}.
+@end defun
+
+@defun copy-to-next-workspace window count select
+Copy the window @var{count} workspaces to the left.  @var{Count} does
+not default to one.
+
+If @var{select} is true, then we switch to the destination workspace.
+If the moved window had input focus before the move, it will have
+input focus after the move as well.
+
+This is identical to @code{(send-to-next-workspace window count t select)}.
+@end defun
+
+@defun copy-to-previous-workspace window count &optional select
+Copy the window @var{count} workspaces to the right.  @var{Count} does
+not default to one.
+
+If @var{select} is true, then we switch to the destination workspace.
+If the moved window had input focus before the move, it will have
+input focus after the move as well.
+
+This is identical to @code{(send-to-previous-workspace window count t select)}.
+@end defun
+
+@defun send-window-to-workspace-from-first window count &optional copy select
+Move @var{window} to the workspace at position @var{count} in the
+``interesting'' list.
+
+The window is normally removed from the current workspace (if it is in
+that workspace), or from the first workspace it belongs to.  Supplying
+a true @var{copy} argument causes Sawfish to copy the window instead.
+
+If @var{select} is true, then we switch to the destination workspace.
+If the moved window had input focus before the move, it will have
+input focus after the move as well.
+@end defun
+
+@defvar workspace-send-boundary-mode
+How to act when passing the first or last workspace, while moving a
+window.  One of @code{stop}, @code{keep-going}, @code{wrap-around}.
+Defaults to @code{stop}.
+@end defvar
+
+@defun delete-window-instance window
+Remove the copy of @var{window} on the current workspace.  If this is
+the last instance remaining, then delete the actual window.  Note that
+this behavior differs from the merging that happens when you delete a
+workspace.
+@end defun
+
+@defun map-window-workspaces fun window
+Map function @var{fun} over all workspaces containing @var{window}.
+@end defun
+
+When a window appears on more than one workspace, some of its
+properties may be swapped in and out on demand when the current
+workspace is changed.
+
+@defvar workspace-local-properties
+Window properties whose values may differ on differnet workspaces.
+Defaults to the empty list.
+@end defvar
+
+@defvar add-swapped-properties props
+Add all properties in the list @var{props} to
+@var{workspace-local-properties}.
+@end defvar
+
+It is possible to hide all ``normal'' windows across workspaces.
+``Normal'' in this case excludes desktop windows and dock windows, but
+includes sticky and ignored windows.  The hidden windows are no longer
+considered ``viewable'' according to @code{window-viewable-p}.
+
+@defun show-desktop
+Hide all windows except the desktop and dock windows.
+@end defun
+
+@defun hide-desktop
+Undo the effects of the @code{show-desktop} command.
+@end defun
+
+@defun showing-desktop-p
+Return true if non-desktop and non-dock windows are hidden, false
+otherwise.
+@end defun
+
+@node Edge Flipping,  , Workspaces and Windows, Workspaces
+@section Edge Flipping
+
+Sawfish provides a way to flip between workspaces (or viewports)
+automatically by moving the mouse to the edge of the screen.  The
+technique is called ``edge flipping''.
+
+These definitions are stored in the @code{sawfish.wm.ext.edge-flip}
+structure.  They can only be enabled through the customization
+interface.
+
+@defvr Customizable edge-flip-enabled nil
+When true, select the next desktop when the pointer hits screen edge.
+Defaults to false.
+@end defvr
+
+@defvr Customizable edge-flip-type
+Indicates what is selected when hitting the screen edge.  Must be one
+of @code{viewport} or @code{workspace}.  Defaults to @code{workspace}.
+@end defvr
+
+@defvr Customizable edge-flip-only-when-moving
+When true, Sawfish only flips when the user is interactively moving a
+window.  Defaults to false.
+@end defvr
+
+This variable is not customizable, but it can be edited.
+
+@defvar edge-flip-delay
+Milliseconds to delay before edge flipping.  Defaults to 250.
+@end defvar
+
+Flippers are implemented as invisible windows on the edges of the
+display (the windows overlap at the corners).  When the pointer moves
+over any of these windows, Sawfish generates @code{enter-flipper-hook}
+and @code{leave-flipper-hook} events.
+
+Programmers can add their own callbacks to perform other actions with
+the flippers.  This depends on manually enabling the flippers, using
+the following functions in the @code{sawfish.wm.util.flippers}
+structure.  Note that you may have to manually remove the
+@code{edge-flip-enter} and @code{edge-flip-leave} callbacks from the
+hooks before adding your own callbacks.
+
+@defun enable-flippers
+Add edge windows used to implement flipping.
+@end defun
+
+@defun disable-flippers
+Remove the edge windows used to implement flipping.
+@end defun
+
+@node Multi-Head Environments, Window Placement, Workspaces, Top
+@chapter Multi-Head Environments
+@cindex Multi-head environments
+@cindex Environments, multi-head
+@cindex Monitors, multiple
+
+Sawfish has special functions to support environments with multiple
+monitors displaying a single logical screen (as provided by Xinerama).
+
+@defun find-head x y
+Return a ID for the display head that point (@var{x}, @var{y}) is in.
+The return value is an integer; the default head has ID zero.  Returns
+@code{nil} if it cannot determine the head from @var{x} and @var{y}.
+@end defun
+
+@defun head-count
+Return the number of display heads on the machine.
+@end defun
+
+@defun head-dimensions id
+Return the cons cell @code{(@var{width} . @var{height})} of the
+dimensions of the display head indicated by @var{id}.  @var{Id} must
+be a non-negative integer.  Without Xinerama support, @var{id} must be
+zero and the function returns the screen size.
+@end defun
+
+@defun head-offset id
+Return the cons cell @code{(@var{x} . @var{y})} of the
+dimensions of the display head indicated by @var{id}.  @var{Id} must
+be a non-negative integer.  Without Xinerama support, @var{id} must be
+zero and the function returns @code{(0 . 0)}.
+@end defun
+
+@defun pointer-head
+Return the ID of the head containing the mouse pointer.
+@end defun
+
+@defun current-head &optional window
+Return the ID of the head containing the window with input focus.  If
+@var{window} is supplied and a window, return the head containing that
+window.  If @var{window} is supplied and @var{nil}, return
+@code{(pointer-head)}.
+@end defun
+
+@defun current-head-dimensions &optional window
+Return a cons-cell defining the size in pixels of the current head
+(that containing the window @var{window}, or the pointer if
+@var{window} is false).  Returns the screen dimensions if no such head
+can be identified.
+@end defun
+
+@defun current-head-offset &optional window
+Return a cons-cell defining the origin of the current head (that
+containing the window @var{window}, or the pointer if @var{window} is
+false).  Returns @code{'(0 . 0)} if no such head can be identified.
+@end defun
 
 
-@node Popup Menus, Events, Workspaces, Top
+@node Window Placement, Popup Menus, Multi-Head Environments, Top
+@chapter Window Placement
+@cindex Placement of windows
+
+Sawfish supports multiple ways of placing new windows on the display.
+There is a ``current'' placement mode for normal windows, and another
+mode for transient windows.
+
+@defvar place-window-mode
+A symbol indicating the method of placing normal windows.  This
+defaults to @code{top-left}.
+@end defvar
+
+@defvar place-transient-mode
+A symbol indicating the method of placing transient windows.  This
+defaults to @code{centered-on-parent}.
+@end defvar
+
+@defun placement-mode name
+Return the placement mode object corresponding to @var{name}.
+@end defun
+
+@defvar placement-modes
+List of names of all placement modes.  Sawfish 1.3 ships with the
+following placement modes:
+
+@itemize @bullet
+@item @code{randomly}
+The new window is placed at a random location on the screen.
+
+@item @code{interactively}
+Prompt the user to select a position with the mouse.  The new window
+is created such that its top-left corner is at that position.
+
+@item @code{centered}
+The new window is created at the center of the screen.
+
+@item @code{centered-on-parent}
+The new window has a parent, it is centered on that parent.  If the
+new window instead has a focused window in the same group, it is
+centered on that focused window.  Otherwise the new window is simply
+@code{centered}.
+
+@item @code{under-pointer}
+Create the new window so that it's under the pointer, without going
+off the edge of the screen.
+
+@item @code{first-fit}
+@item @code{best-fit}
+Look for positions where the new window would have a small overlap
+area with already visible windows.  The @code{first-fit} algorithm
+uses the first ``good'' position found.  The @code{best-fit} algorithm
+looks at all possible positions and picks the best of them.
+
+@item @code{best-fit-group}
+As @code{best-fit}, but the new window is only checked for overlap
+with other windows in its group.
+
+@item @code{first-fit-or-interactive}
+As @code{first-fit}, but if Sawfish cannot find a ``good'' position,
+it falls back to @code{interactively} mode.
+
+@item @code{stagger}
+Attempts to place each new window below and to the right of the
+previous window.  See @code{stagger-placement-step}.
+
+@item @code{top-left}
+Interpret the top-left to bottom-right screen diagonal as a series of
+slots, each of which may have a window.  Find the first empty slot and
+place the window there.  @emph{Sawfish will shrink the window to
+prevent it from going past the right or bottom edge, or even beneath a
+special window like a panel.}  If Sawfish is not allowed to shrink the
+window enough to prevent this, it instead places the window randomly.
+
+@item @code{off-center}
+Tries to put windows in the center of the screen, but in such a way
+that the newly placed window doesn't fully obscure an existing
+window.
+
+This is to handle the case where two windows of the same size are
+created one after the other, so that the user is sure to see (at least
+part of) both windows.
+@end itemize
+
+@item @code{none}
+Make no changes to the window's position.  The window remains wherever
+the X server placed it initially.
+
+@end defvar
+
+In all of these placement modes, the mode is responsible for taking
+the window object as an argument, and manipulating its position with,
+e.g., @code{move-window-to}.
+
+@defvar stagger-placement-step
+In @code{stagger} placement mode, the distance down and to the right
+from the previously placed window to the new one.  This is measured
+in pixels.
+@end defvar
+
+There are two circumstances in which Sawfish will place a window:
+either the window has just been created, or Sawfish has begun managing
+the window's display.  In the latter case, the window will have the
+@code{placed} property.
+
+@defvar ignore-program-positions
+When @code{t}, program position size hints are not considered when
+placing windows.
+@end defvar
+
+``Avoided'' windows should be kept unobscured by other windows
+wherever possible.  In particular, first-fit and best-fit methods will
+attempt to place new windows away from them, and maximized windows
+will not stretch over them.
+
+@defun window-avoided-p window
+Return t if @var{window} should be kept unobscured by other windows
+wherever possible.
+@end defun
+
+@defun avoided-windows &optional window
+Returns a list of all windows that should be left unobscured where
+possible.  If @var{window} is defined, then it defines a window that
+will be never returned in the list.
+@end defun
+
+@defvar dont-avoid-ignored
+When non-nil, ignored windows aren't avoided by default.  Defaults to
+non-nil.
+@end defvar
+
+@defvar avoid-by-default
+When non-nil, any unspecified windows are avoided by default.
+Defaults to nil.
+@end defvar
+
+You can define your own placement modes.
+
+@defun define-placement-mode name fun &keywords for-normal for-dialogs
+Define a new window placement mode called @var{name} (a symbol).  The
+function @var{fun} will be called with a single argument when a window
+should be placed using this mode.  The single argument is the window
+to be placed.
+
+If the @var{for-normal} keyword is @code{t}, then this placement mode
+is marked as valid for @code{place-window-mode}.  The same applies to
+@var{for-dialogs} and @code{place-transient-mode}.
+@end defun
+
+@defun autoload-placement-mode name module-name &keywords for-normal for-dialogs
+Define placement mode @var{name} (a symbol) to be loaded from
+structure @var{structure-name} (a symbol) when first referenced.  The
+@var{keyword-args} are passed along to the call to
+@code{define-placement-mode} that creates the placement mode.
+@end defun
+
+@node Popup Menus, Events, Window Placement, Top
 @chapter Popup Menus
 @cindex Popup menus
 @cindex Menus, popup
@@ -1964,33 +4286,22 @@ applications menu. The default definition is as follows:
 The @code{system} function simply executes its single argument using
 @file{/bin/sh}.
 
-@defun popup-menu spec
-Displays a menu defined by the list of item definitions @var{spec}.
-@end defun
+When displaying a menu item, it is possible to also display the
+corresponding keyboard shortcut in the menu.
 
-@defun popup-window-menu
-Display the menu listing all window operations.
-@end defun
-
-@defun popup-root-menu
-Display the main menu.
-@end defun
-
-@defun popup-apps-menu
-Displau the applications menu.
-@end defun
-
-@defvar root-menu
-Contains the root menu definition.
+@defvar menus-include-shortcuts
+When true, menu items also display key-binding information.  Defaults
+to false.
 @end defvar
 
-@defvar apps-menu
-The variable containing the definition of the applications submenu of
-the root menu.
-@end defvar
+The actual creation of a menu is performed by an auxiliary process,
+distributed with Sawfish.  Since the overhead of starting the menu
+subprocess may be noticeable on some systems, it is possible to leave
+it running between menu requests.
 
-Since the overhead of starting the menu subprocess may be noticeable on
-some systems, it is possible to leave it running between menu requests.
+@defvar menu-program
+Location of the program implementing Sawfish's menu interface.
+@end defvar
 
 @defvar menu-program-stays-running
 This variable defines if, and for how long, the menu subprocess is
@@ -2000,6 +4311,58 @@ left running indefinitely, if an integer then the program will run for
 that many seconds (unless another menu is displayed).
 @end defvar
 
+The actual interface to invoke the external menu program is hidden in
+the @code{popup-menu} function.
+
+@defun popup-menu spec
+Displays a menu defined by the list of item definitions @var{spec}.
+@end defun
+
+In addition, Sawfish provides various canned menus, and functions to
+display those menus.
+
+@defvar root-menu
+Contains the root menu definition.
+@end defvar
+
+@defun popup-root-menu
+Display the main menu.  By default, this is bound to Button2-click on
+the root window.
+@end defun
+
+@defvar apps-menu
+The variable containing the definition of the applications submenu of
+the root menu.  The default root menu includes this as a child menu.
+@end defvar
+
+@defun popup-apps-menu
+Display the applications menu.
+@end defun
+
+@defun window-ops-menu
+The variable containing the definition of all window operations.
+@end defun
+
+@defun popup-window-menu
+Display the menu listing all window operations.  This has several
+bindings by default.  In particular, clicking on a window's menu
+button displays this menu.
+@end defun
+
+@defvar window-ops-toggle-menu
+A list of flags describing windows, e.g., ``sticky'' or ``shaded''.
+This list is displayed in a menu, and by selecting items in this menu
+a user can turn the flags on and off for a given window.
+@end defvar
+
+@defun add-window-menu-toggle label command &optional predicate
+Add additional flags to @code{window-ops-toggle-menu}.  The
+@var{command} is a function (or a symbol pointing to a function) that
+gets run when the menu item is selected.  If @var{predicate} is
+non-nil, it must be a function taking a window as argument.  If
+@var{predicate} return true, the menu item will have a check mark next
+to it.
+@end defun
 
 @node Events, Commands, Popup Menus, Top
 @chapter Events
@@ -2010,75 +4373,33 @@ either for the root window, the window frames it creates, or grabbed
 from the client windows themselves. Each event induced by the mouse or
 keyboard has a Lisp representation.
 
-Each input event is represented by a cons cell containing two integers,
-these integers encode the actual input event. The encoding is opaque;
-the only way to access an event meaningfully is via the functions
-provided.
-
 @defun eventp object
 This function returns @code{t} if its argument is an input event.
 @end defun
 
-Each event has a name, a string. This string contains zero or more
-modifier descriptions separated by hyphens, and then the name of the
-key itself. The standard X modifier names are provided, as well as
-three special modifiers @key{Meta}, @key{Alt} and @key{Hyper} that are
-mapped to the keysyms of the same name.
+@menu
+* Event Representation::        Objects versus string names
+* Event Modifiers::             Meta, Alt, Buttons
+* Event Actions::               Keys and Clicks
+* Event Matching::
+* Synthetic Events::            Creating events that seem real
+@end menu
 
-The following table lists the possible modifier prefixes:
+@node Event Representation, Event Modifiers, Events, Events
+@section Event Representation
 
-@table @kbd
-@item C
-The control modifier
+Each input event is represented by a cons cell containing two
+integers, and these integers encode the event. The encoding is opaque;
+the only way to access an event meaningfully is via the functions
+provided.
 
-@item M
-The meta modifier
-
-@item A
-The alt modifier
-
-@item S
-The shift modifier
-
-@item H
-The hyper modifier
-
-@item Mod@var{k}
-The standard X modifiers, for @var{k} between 1 and 5
-
-@item Button@var{k}
-The @var{k}'th mouse button is currently pressed
-@end table
-
-Note that the @samp{M} and @samp{A} modifiers are virtual modifiers
-assigned dynamically, according to the X server's @code{xmodmap}
-configuration. The @samp{A} virtual modifier is assigned to the X
-modifier with either the @key{Alt_L} or @key{Alt_R} keysym assigned to
-it. The @samp{M} virtual modifier is assigned to the X modifier with
-either @key{Meta_L} or @key{Meta_R} assigned to it. If either of these
-two virtual modifiers would be unassigned it is set identically to the
-other virtual modifier.
-
-There are two special modifiers: the @samp{Any} prefix matches any set
-of modifiers; the @samp{Release} modifier matches key-release events
-instead of the default key-presses.
-
-Generally keys have the same names as their X keysyms, there are
-several specially defined keys:
-
-@samp{SPC}, @samp{TAB}, @samp{RET}, @samp{ESC}, @samp{BS}, @samp{DEL},
-@samp{Up}, @samp{Down}, @samp{Left}, @samp{Right}.
-
-@noindent
-Also, there are several pseudo-keys for describing mouse events:
-
-@samp{Click1}, @samp{Click2}, @samp{Click3}, @samp{Off}, @samp{Move}.
-
-@noindent
-So, for example, a single click of the left mouse button with the
-@key{Meta} key held would be described as @kbd{M-Button1-Click1}, while
-pressing the @key{RET} key with @key{Shift} held would be described as
-@kbd{S-RET}.
+Each event has a string representation, called its ``name''.  Names
+consist of zero or more modifiers, followed by a key or mouse action
+indicator.  Modifiers are separated from succeeding elements by
+hyphens @samp{-}.  For example, hitting @key{x} while holding down the
+@key{Control} and @key{Meta} keys would generate an event named
+@key{Control-Meta-x}.  This notation is designed to closely match
+Emacs Lisp's notation.
 
 Functions are available to convert between the name of an event and the
 actual event itself, and vice versa.
@@ -2104,23 +4425,210 @@ This function returns a string naming the input event @var{event}.
 @end lisp
 @end defun
 
-The keysyms generating the two virtual modifiers may be identified
-through the following variables:
+@node Event Modifiers, Event Actions, Event Representation, Events
+@section Event Modifiers
+@cindex Event Modifiers
+@cindex Modifiers, for events
+
+Sawfish event modifiers are copied directly from the standard X
+modifiers:
+
+The standard X modifier names are provided, as well as four special
+modifiers @key{Meta}, @key{Alt} @key{Hyper} and @key{Super} that are
+mapped to the keysyms of the same name.
+
+The following table lists the possible modifier prefixes:
+
+@table @key
+@item Control
+@itemx C
+The control modifier
+
+@item Meta
+@itemx M
+The meta modifier
+
+@item Alt
+@itemx A
+The alt modifier
+
+@item Shift
+@itemx S
+The shift modifier
+
+@item Hyper
+@itemx H
+The hyper modifier
+
+@item Super
+@itemx s
+The super modifier; note that this is a lowercase @kbd{s}
+
+@item Mod@var{k}
+The standard X modifiers, for @var{k} between 1 and 5
+
+@item Any
+A special modifier that matches any set of modifiers in events.
+@xref{Event Matching}.
+
+@item Release
+A special modifier that matches key release events, not the default
+key press events.  Mouse events never have @key{Release} modifiers;
+they have separate actions instead.  @xref{Event Actions}.
+
+@item Button@var{k}
+The @var{k}'th mouse button is currently pressed.
+
+@item W
+A placeholder ``window manager'' modifier that can be bound to a real
+modifier on the fly.  See @code{wm-modifier} below.
+@end table
+
+The default Sawfish bindings use the @key{Meta} modifier.  For
+convenience, if no X keysym generates @key{Meta}, Sawfish will treat
+the first defined modifier of @key{Alt}, @key{Hyper} and @key{Super}
+(in that order) as @key{Meta}.  The mapping from keysyms to
+modifiers is exposed in the following variables:
 
 @defvar meta-keysyms
 A list defining the names of the X keysyms generating the virtual
-@samp{M} modifier.
+@samp{Meta} or @samp{M} modifier.
 @end defvar
 
 @defvar alt-keysyms
 A list defining the names of the X keysyms generating the virtual
-@samp{A} modifier.
+@samp{Alt} or @samp{A} modifier.
 @end defvar
 
 @defvar hyper-keysyms
 A list defining the names of the X keysyms generating the virtual
-@samp{H} modifier.
+@samp{Hyper} or @samp{H} modifier.
 @end defvar
+
+@defvar super-keysyms
+A list defining the names of the X keysyms generating the virtual
+@samp{Super} modifier.
+@end defvar
+
+There are two functions to manipulate the placeholder ``window
+manager'' (@key{W}) modifier.  Unfortunately, these are low-level
+functions that operate on integer encodings.
+
+@defun wm-modifier
+Return the current value (an integer) of the placeholder ``window
+manager'' (@key{W}) modifier.
+@end defun
+
+@defvr {Customizable} wm-modifier-value
+An integer encoding zero or more modifier keys that form the
+placeholder ``window manager'' (@key{W}) modifier.  Setting this value
+through the customization UI automatically calls
+@code{set-wm-modifier}.
+@end defvr
+
+@defun set-wm-modifier modifiers
+Set the value of the placeholder ``window manager'' (@key{W}) modifier
+to @var{modifiers} (an integer).
+@end defun
+
+@node Event Actions, Event Matching, Event Modifiers, Events
+@section Event Actions
+
+Sawfish recognizes keyboard actions and mouse actions.
+
+@table @asis
+@item Key Press
+@itemx Key Release
+Keys pressed on the keyboard generate one or more key press events,
+followed by a key release event.  Bindings normally recognize key
+press events only.  To recognize key releases, add a @key{Release}
+modifier to the bound event.
+@end table
+
+Generally keys have the same names as their X keysyms.  The following
+unusual names are worth listing: @samp{SPC}, @samp{TAB}, @samp{RET},
+@samp{ESC}, @samp{BS}, @samp{DEL}, @samp{Up}, @samp{Down},
+@samp{Left}, @samp{Right}.
+
+For example, pressing the @key{Delete} key while @key{Control} is held
+down generates a @kbd{Control-DEL} event, while releasing the @key{a}
+key while @key{Hyper} is held down generates a @kbd{H-Release-a}
+event.
+
+@table @asis
+@item Button Clicks
+Button presses generate @key{Click} actions.  If Sawfish receives
+several clicks in close succession (less than @code{multi-click-delay}
+milliseconds between clicks), the second and third events are
+@key{Click2} and @key{Click3}, respectively.  Any further clicks are
+simple @key{Click} events.  For consistency, @key{Click1} is a synonym
+for @key{Click}.
+
+@item Button Releases
+Once the button has been released from a @key{ClickN} action, Sawfish
+receives a corresponding @key{OffN} action.  The actions @key{Off} and
+@key{Off1} are synonyms.
+
+@item Pointer Motion
+Pointer motion generates @key{Move} actions.  The action does not
+indicate anything about the pointer position; use e.g.,
+@code{query-last-pointer} to find that information.
+@end table
+
+@noindent
+For example, a single click of the left mouse button with the
+@key{Meta} key held would be described as @kbd{M-Button1-Click1}.
+After triple-clicking with the @key{Alt} key held down, Sawfish will
+receive a @kbd{Alt-Off3} event.
+
+
+@defvar multi-click-delay
+An integer indicating the maximum number of milliseconds between
+successive clicks.  Defaults to 250 milliseconds at startup; if
+@code{nil}, Sawfish uses 250 milliseconds.
+@end defvar
+
+
+@node Event Matching, Synthetic Events, Event Actions, Events
+@section Event Matching
+@cindex Event Matching
+@cindex Matching, Events
+
+There is a special function that matches event objects.  If the
+actions of two event objects are not identical, the events do not
+match.  If they are identical, then the events match if the modifiers
+are identical, or if one of the modifiers is @key{Any}.
+@xref{Event Modifiers}.
+
+@defun event-match ev1 ev2
+Returns @code{t} if events @var{ev1} and @var{ev2} match, @code{nil}
+otherwise.
+@end defun
+
+@node Synthetic Events,  , Event Matching, Events
+@section Synthetic Events
+@cindex Synthetic Events
+@cindex Events, Synthetic
+@cindex Events, Synthesizing
+
+It is possible to create an event inside Sawfish that mimics a real
+keyboard or mouse event.
+
+@defun synthesize-event event window &optional propagate
+Generate a synthetic key press or button press and send it to the X
+window bound to the @var{window} object.  This press is automatically
+followed by the appropriate release event.
+
+The current pointer position becomes the position of the event.
+
+@var{Event} is either an event object, or the string representation of
+an event (such as @code{"A-f"} or @code{"C-M-Button3-Click2"}).
+Strings are parsed into event objects before any work is done.
+@xref{Event Representation}.
+
+If @var{propagate} is true, the event will propagate up the window
+ancestor chain until it is handled.
+@end defun
 
 
 @node Commands, Keymaps, Events, Top
@@ -2128,13 +4636,27 @@ A list defining the names of the X keysyms generating the virtual
 @cindex Commands
 
 A @dfn{command} is a Lisp function which may be called interactively,
-that is, either as a result of being bound to an input event.
+that is, as a result of being bound to an input event.  To support
+this, we mark them with metadata that the runtime system can query.
 
-Commands are defined in the same way as functions (using @code{defun}),
-but the body forms of the command must contain an @dfn{interactive
-declaration}. This marks that the function may be called interactively
-and tells the @code{call-command} function how to compute the argument
-values to apply to the command.
+@menu
+* Old-style Command Definition::  Emacs-Lisp style
+* New-style Command Definition::  Common-Lisp style
+* Interactive Calling Specification::  
+* Operations on Commands::	Accessors and the like
+* Invoking Commands::           call-commmand, command hooks
+* Default Commands::            Sawfish ships with a few commands
+@end menu
+
+@node Old-style Command Definition, New-style Command Definition, Commands, Commands
+@section Old-style Command Definition
+
+The old-style command declaration syntax looks very much like that of
+GNU Emacs Lisp.  Commands are defined like any other function (using
+@code{defun}), but the first form in the body must be an
+@dfn{interactive declaration}.  This marks that the function may be
+called interactively and tells the @code{call-command} function how to
+compute the argument values to apply to the command.
 
 The interactive declaration looks like a call to the special form
 @code{interactive}, in actual fact this special form always returns
@@ -2161,20 +4683,76 @@ declaration:
   @dots{}
 @end lisp
 
-The @var{calling-spec} form defines the argument values applied to the
-command when it is called interactively, it may be one of,
+The @var{calling-spec} is defined in @xref{Interactive Calling
+Specification}.
+
+@node New-style Command Definition, Interactive Calling Specification, Old-style Command Definition, Commands
+@section New-style Command Definition
+
+The new syntax does not depend on special magic in @code{defun}.
+Instead, it uses keyword arguments to indicate the calling
+specification and other properties.
+
+@defun define-command name fun #!key spec type doc doc-key class
+Define a window managed command called @var{name} (a symbol).  The
+function @var{fun} will be called to execute the command.
+
+@var{spec} and @var{type} may be used to define the arguments expected
+by the command; @var{spec} is an interactive specification and
+@var{type} is a custom-type specification.  @xref{Interactive Calling
+Specification}.
+
+@var{doc} is the documentation string associated with the command.
+The command-documentation may be stored in the doc file, rather than
+in the code itself; if it exists, the @var{doc-key} will be used to
+look up the doc file entry.  If both arguments are provided, both will
+be stored.  But the @code{command-documentation} function favors the
+built-in doc string over the doc file entry.
+
+@var{class} is an annotation for the command.  It allows the
+definition to mark the class as @code{'advanced}, for example.  Other
+parts of Sawfish can then take advantage of this note.
+@end defun
+
+@defun define-command-to-screen name fun #!key spec type doc doc-key class
+As @code{define-command}, but any printed output of @var{fun} is sent
+to the screen.
+@end defun
+
+@defun autoload-command name module #!key spec type doc doc-key class
+Record that loading the module called @var{module} (a symbol) will provde a
+command called @var{name}.
+
+The keyword values have the same meanings as for
+@code{define-command}.  Defining those properties as part of the
+autoload provides useful feedback to the user without having to do
+loading.
+@end defun
+
+@node Interactive Calling Specification, Operations on Commands, New-style Command Definition, Commands
+@section Interactive Calling Specification
+
+The @var{calling-spec} argument to @code{interactive} or
+@code{define-command} defines the argument values applied to the
+command when it is called interactively.  It may be one of:
 
 @itemize @bullet
-@item
-@code{nil} or undefined (i.e. @code{(interactive)}); no arguments are
-given to the command, this type of interactive declaration just shows
-that the function may be called interactively.
+@item @code{nil} or undefined (i.e. @code{(interactive)})
+No arguments are given to the command, this type of interactive
+declaration just shows that the function may be called interactively.
 
-@item A string; zero or more lines (each separated by a newline
-character), each line defines how to compute one argument value. The
+@item A string
+This is interpreted as zero or more lines (each separated by a newline
+character).  Each line defines how to compute one argument value.  The
 first one or two characters of each line is a prefix defining exactly
 how to compute the argument, the rest of the line is an optional
-argument which some prefixes may use.
+argument which some prefixes may use.  See below for a list of
+prefixes.  A null line produces an argument value of @code{nil}.
+
+@item Anything else
+The form is evaluated and expected to return a @emph{list} of
+arguments to apply to the command.
+@end itemize
 
 The currently available prefixes are,
 
@@ -2207,16 +4785,11 @@ The result of calling the @code{current-event-window} function, or if
 this returns @code{nil} or @code{root}, the currently focused window.
 @end table
 
-A null line produces an argument value of @code{nil}.
+@node Operations on Commands, Invoking Commands, Interactive Calling Specification, Commands
+@section Operations on Commands
 
-@item
-Anything else; the form is evaluated and expected to return a @emph{list}
-of arguments to apply to the command.
-@end itemize
-
-When a command is to be invoked, the @code{call-command} function is
-used. This builds a list of argument values to apply to the command
-(using its interactive declaration) then calls the command.
+Once a command has been defined, we can extract certain information
+about it.
 
 @defun commandp @var{object}
 This function returns @code{t} if its argument may be called interactively.
@@ -2228,6 +4801,28 @@ use of these types of commands is discouraged but they can be useful
 sometimes.
 @end defun
 
+@defun command-documentation name
+Return the documentation for the command @var{name}.  It returns the
+first documentation found by looking at (in order): the documentation
+property of the command; the doc file entry associated with the doc
+key property; or the documentation for the function with the same
+name.
+@end defun
+
+@defun command-spec name
+@defunx command-type name
+@defunx command-class name
+Return the specification, type or class (respectively) of the named
+command.
+@end defun
+
+@node Invoking Commands, Default Commands, Operations on Commands, Commands
+@section Invoking Commands
+
+When a command is to be invoked, the @code{call-command} function is
+used. This builds a list of argument values to apply to the command
+(using its interactive declaration) then calls the command.
+
 @defun call-command command &optional prefix-arg
 This function calls the command @var{command} interactively. See the
 documentation of @code{commandp} above for what constitutes a command.
@@ -2236,8 +4831,52 @@ If the @var{prefix-argument} is non-nil it defines the value of the
 @code{current-prefix-arg} variable for this command, normally the value
 of this variable would be taken from the global @code{prefix-arg}
 variable.
+
+There is a corresponding @code{call-command} command that prompts for
+a command to execute.
 @end defun
 
+@defun apply-command name &rest args
+Call the function underlying the command @var{name}, passing in
+@var{args} as the arguments.  This is useful for calling a command in
+a non-interactive context.
+@end defun
+
+@defvar current-prefix-arg
+When invoking an interactive command, this is set to the current
+prefix argument.
+@end defvar
+
+@defvar this-command
+The command currently being called, or @samp{nil} if no command is
+being called.
+@end defvar
+
+@defvar last-command
+The command previously called, or @samp{nil} if there is no such
+command.
+@end defvar
+
+@xref{Command Hooks}, for hooks run before and after commands.
+
+@node Default Commands,  , Invoking Commands, Commands
+@section Default Commands
+
+Sawfish defines several commands by default.
+
+@defun run-shell-command
+The command prompts the user for a string, and executes that string as
+under @code{system}.
+@end defun
+
+@defun quit
+@defunx restart
+@defunx destroy-window
+@defunx kill-client
+@defunx no-operation
+Calls the function of the same name.  @code{destroy-window} and
+@code{kill-client} both take @code{%W} as argument.
+@end defun
 
 @node Keymaps, Event Loop, Commands, Top
 @chapter Keymaps
@@ -2307,7 +4946,16 @@ Keymaps active in the title and borders of window frames.
 @itemx iconify-button-keymap
 @itemx maximize-button-keymap
 @itemx menu-button-keymap
+@itemx shade-button-keymap
 Keymaps active in the standard window frame buttons.
+
+@item override-keymap
+Must be a keymap, a symbol, or @code{nil}.  If it is a keymap,
+this becomes the keymap in which all lookups occur (overriding the window,
+root and global keymaps).  If it is a symbol, Sawfish finds the
+symbol's value and tries again.  If it is @code{nil}, Sawfish behaves
+normally.
+
 @end table
 
 
@@ -2377,9 +5025,12 @@ Return the event which caused the current command to be invoked
 Returns the string which the current event would usually insert.
 @end defun
 
-@defun current-event-window
-Return the window that received the current event, or the symbol
-@code{root}, or @code{nil} if no such window.
+@defun current-event-window &optional win
+Extract the owning window of the current X event (this is a window
+object, or the symbol @code{root} for the root window, or @code{nil}
+if there is no window or no event).  This is stored internally as the
+current event window, and returned.
+@c FIXME-DLU: why does this function take a WIN parameter?
 @end defun
 
 @defun last-event
@@ -2391,9 +5042,13 @@ Send the current X event to @var{window}, either a window object, a
 numeric window id, or the symbol @code{root}. If a @code{ButtonPress}
 event the pointer grab will be released first.
 
-@var{mask} may be an integer defining the X event mask to pass to the
+@var{Mask} may be an integer defining the X event mask to pass to the
 @code{XSendEvent} function. If not defined, a mask is chosen that would
 usually be used to select the type of event being proxied.
+
+@var{Propagate} is a flag (@code{nil}/non-@code{nil}) passed directly
+to an underlying @code{XSendEvent} call.  (And if someone would like
+to explain what @emph{that} means, please do so @enddots{}
 @end defun
 
 @defun allow-events mode
@@ -2450,8 +5105,10 @@ Returns the number of X events waiting to be handled.
 Returns a cons cell @code{(@var{x} . @var{y})} representing the current
 mouse pointer position, relative to the origin of the root window.
 
-If @var{from-server} is non-nil then the position is read directly from
-the server, otherwise it's taken from the current event (if possible).
+If there is a mouse update current event, the position is read
+directly from that event.  Otherwise it is read from the server.  If
+@var{from-server} is non-nil then the position is read directly from 
+the server in any case.
 @end defun
 
 @defun query-pointer-window
@@ -2462,6 +5119,18 @@ the cursor is in the root window.
 @defun query-last-pointer
 Returns a cons cell @code{(@var{x} . @var{y})} representing the second
 most recent mouse pointer position, relative to the root window.
+@end defun
+
+@defun query-button-press-pointer
+Returns @code{(@var{mouse-x} . @var{mouse-y})} representing the mouse
+position relative to the root window at the last button-press event.
+
+Use this function to track the displacement of the pointer during a
+drag.
+@end defun
+
+@defun query-button-press-window
+Returns the window that the mouse was in when the button was pressed.
 @end defun
 
 @defun warp-cursor x y
@@ -2476,6 +5145,23 @@ client window associated with object @var{window}.
 If @var{x} and @var{y} are @code{nil}, then they are taken as the
 top-left corner of the window's frame.
 @end defun
+
+@defvar warp-to-window-offset
+Offset (%) from window edges when warping pointer. A negative number
+means outside the left window edge.
+@end defvar
+
+@defvar warp-to-window-enabled
+When false, disable warping the cursor to windows.
+@end defvar
+
+@defvar pointer-motion-threshold
+If set to an integer value, a pointer must move by this many pixels on
+either axis before Sawfish considers it to have moved.  If the pointer
+has not moved by this amount, Sawfish will ignore @code{MotionNotify}
+events from X.  The variable defaults to 2 pixels.  If not an integer,
+Sawfish assumes a threshold of 0 pixels.
+@end defvar
 
 
 @node Grab Functions, Display Functions, Pointer Functions, Miscellaneous Functions
@@ -2499,35 +5185,81 @@ Note that calls to @code{grab-server} and @code{ungrab-server}
 Evaluate forms with the server grabbed. Releases the grab afterwards.
 @end defmac
 
+@defun call-with-server-ungrabbed thunk
+Return the result of calling the zero-parameter function
+@var{thunk}.  If the server is currently grabbed, ungrab it first,
+restoring the original grab status after the call to @var{thunk}
+returns.
+@end defun
+
 @defun server-grabbed-p
 Returns @code{t} if the X server is currently grabbed.
 @end defun
 
-@defun grab-pointer &optional window cursor
+@defun grab-pointer &optional window cursor ptr-sync kbd-sync confine-to
 Grab the mouse pointer and direct all pointer events to window object
-@var{window}. If @var{cursor} is defined and a cursor object, display
+@var{window}.  If @var{cursor} is defined and a cursor object, display
 this while the pointer is grabbed.
 
-If @var{window} is @code{nil}, or unviewable, the grab will be made on
-the root window.
+If @var{window} is a window object corresponding to a
+visible window, the grab will be made on its frame.
 
-Returns @code{y} if the grab succeeded.
+If @var{window} is an integer, it specifies the window ID of the grab
+window.
+
+Otherwise the grab will be made on the root window.  This includes
+@var{window} corresponding to a non-viewable window.
+
+@var{Confine-to}, if non-@code{nil}, is a visible window to confine
+the pointer to.  It is interpreted similarly to the rules for
+@var{window}, except that the ``otherwise'' case is to not confine the
+pointer.
+
+If the window id of a non-viewable window was specified for either
+@var{window} of @var{confine-to}, the grab will be made on the root
+window without confining the pointer.
+
+If @var{ptr-sync} or @var{kbd-sync} is non-@var{nil}, the pointer or
+keyboard will be frozen, i.e., the device will not produce events
+until either the grab is released or events are re-enabled using
+@code{allow-events}.
+
+Returns non-nil if the grab succeeded.
 @end defun
 
 @defun ungrab-pointer
 Release the grab on the mouse pointer.
 @end defun
 
-@defun grab-keyboard &optional window
+@defun grab-keyboard &optional window ptr-sync kbd-sync
 Grab the keyboard and direct all keyboard events to window object
-@var{window}. If @var{window} is @code{nil}, or unviewable, the grab
-will be made on the root window.
+@var{window}.
+
+If @var{window} is a window object corresponding to a
+visible window, the grab will be made on its frame.
+
+If @var{window} is an integer, it specifies the window ID of the grab
+window.
+
+Otherwise the grab will be made on the root window.  This includes
+@var{window} corresponding to a non-viewable window.
+
+If @var{ptr-sync} or @var{kbd-sync} is non-@var{nil}, the pointer or
+keyboard will be frozen, i.e., the device will not produce events
+until either the grab is released or events are re-enabled using
+@code{allow-events}.
 
 Returns non-nil if the grab succeeded.
 @end defun
 
 @defun ungrab-keyboard
 Release the grab on the keyboard.
+@end defun
+
+@defun call-with-keyboard-grabbed thunk
+Call the zero-parameter function @var{thunk} with the keyboard
+grabbed.  If unable to grab the keyboard then @var{thunk} won't be
+called.
 @end defun
 
 
@@ -2542,6 +5274,11 @@ Return the width of the root window.
 
 @defun screen-height
 Return the height of the root window.
+@end defun
+
+@defun screen-dimensions
+Return the screen dimensions in pixels as a cons cell
+@code{(@var{width} . @var{height})}.
 @end defun
 
 @defun draw-window-outline mode x y width height
@@ -2626,11 +5363,15 @@ smooth transition between.
 
 @defun draw-horizontal-gradient image from to
 Draw a horizontal color gradient in @var{image}, from left to right.
+The color at the left of the image will be @var{from}, the color at
+the right @var{to}, with a smooth transition between.
 @end defun
 
 @defun draw-diagonal-gradient image from to
 Draw a horizontal color gradient in @var{image}, from the top-left
-corner to the bottom-right.
+corner to the bottom-right. The color at the top-left of the image
+will be @var{from}, the color at the bottom-right @var{to}, with a
+smooth transition between.
 @end defun
 
 
@@ -2660,6 +5401,12 @@ specified dimensions.
 Returns the window id of the new window.
 @end defun
 
+@defun exit-type
+If Sawfish is shutting down, this function returns one of the strings
+@code{"user-quit"}, @code{"user-restart"} or @code{"session-quit"}.
+If Sawfish is not shutting down, it returns @code{nil}.
+@end defun
+
 @defun x-atom symbol
 Return the integer identifying the X atom with the same name as
 @var{symbol}.
@@ -2670,6 +5417,119 @@ Return the symbol with the same name as the X atom identified by the
 integer @var{integer}.
 @end defun
 
+@defvar canonical-display-name
+A string containing the canonical name of the X display.  This
+includes the full host name and the screen number.  For example:
+@code{"foo.bar.com:0.0"}.
+@end defvar
+
+@defvar display-name
+A string containing the name of the X display, exactly as passed to
+Sawfish.  For example: @code{":0"}, or @code{"foo:0.0"}.
+@end defvar
+
+@defvar saved-command-line-args
+Holds a list of all of the command line arguments (including the
+executable name).
+@end defvar
+
+@defvar sawfish-directory
+The home directory for Sawfish files.  For example:
+@code{"/usr/share/sawfish"}.
+@end defvar
+
+@defvar sawfish-exec-directory
+The directory for architechture-specific Sawfish executables.  For
+example: @code{"/usr/lib/sawfish/1.3/i386-pc-linux-gnu"}.
+@end defvar
+
+@defvar sawfish-lisp-lib-directory
+The top-level directory for Sawfish lisp files.  For example:
+@code{"/usr/share/sawfish/1.3/lisp"}.
+@end defvar
+
+@defvar sawfish-locale-directory
+The system directory where Sawfish can find locale files.  This is not
+part of the Sawfish distribution.  For example:
+@code{"/usr/share/locale"}.
+@end defvar
+
+@defvar sawfish-site-lisp-directory
+The top-level directory for site-specific Sawfish lisp files.  For
+example: @code{"/usr/share/sawfish/site-lisp"}.
+@end defvar
+
+@defvar sawfish-version
+The version number of the running Sawfish.
+@end defvar
+
+@defun primitive-play-sample filename
+Plays the sound file @var{filename} (which must be a string).
+@end defun
+
+@defun call-with-error-handler thunk
+Call the zero-parameter function @var{thunk}.  If an error occurs,
+trap it and pass its @code{car} and @code{cdr} to
+@code{error-handler-function}.
+@end defun
+
+@defun load-module name
+Ensure that module @var{name} has been loaded.  This does @emph{not}
+import its bindings or make them accessible.
+@end defun
+
+@defun eval-in form struct-name
+Evaluates @var{form} in the structure named by @var{struct-name}.
+Compare this with @code{eval}, which takes a structure object as its
+second parameter, not a structure name.
+@end defun
+
+@defvar *user-module*
+@code{*user-module*} is the default module for human interaction with
+Sawfish.
+@end defvar
+
+@defun user-eval form
+@defunx user-require feature
+@code{user-eval} evaluates @code{form} in @code{*user-module*}.
+@code{user-require} evaluates @code{(require @var{feature})} in
+@code{*user-module*}.
+@end defun
+
+@defun quote-menu-item string
+Escape any @samp{_} characters in @var{string} such that the result
+can be used as the label of a menu item.
+@end defun
+
+@defun make-directory-recursively dir
+Create directory @var{dir}.  Any missing parent directories will also
+be created.
+@end defun
+
+@defun locate-file filename dirs
+Search for a file @var{filename} in any of the directories named by
+the list of strings @var{dirs}.
+@end defun
+
+@defun clamp x lower upper
+Return @var{x} clamped between @var{lower} and @var{upper}.  If
+@var{x} is less than @var{lower}, return @var{lower}; if it is larger
+than @var{upper} return @var{upper}.  Otherwise return @var{x}.
+@end defun
+
+@defun clamp* x y lower upper
+Return the interval (@var{x}, @var{x}+@var{w}) clamped between
+@var{lower} and @var{upper}.  If @var{x} is less than @var{lower},
+return @var{lower}.  If @var{x}+@var{w} is larger than @var{upper},
+return @var{upper}-@var{w}; this is a value of @var{x} that satisfies
+the upper bound, although it may violate the lower bound.  Otherwise
+return @var{x}.
+@end defun
+
+@defun uniquify-list lst
+Remove all duplicates values from @var{lst}, using @code{eq}.  The
+order of elements is not preserved.
+@end defun
 
 @node Standard Hooks, Standard Properties, Miscellaneous Functions, Top
 @chapter Standard Hooks
@@ -2693,142 +5553,372 @@ Call @var{hook} for @var{window} with further arguments @var{args}. See
 the hook is called with arguments @code{(@var{window} . @var{args})}.
 @end defun
 
-The following table describes all standard hooks called by Sawfish, and
-the arguments they are called with:
+The available hooks are listed below.
 
-@vtable @code
-@item pre-command-hook
+@menu
+* Command Hooks::
+* Key Hooks::
+* Window Construction Hooks::
+* Window Destruction Hooks::
+* Window Mapping Hooks::
+* Window Motion Hooks::
+* X Hooks::
+* Pointer Motion Hooks::
+* Workspace Hooks::
+* Startup and Shutdown Hooks::
+* Other Hooks::
+@end menu
+
+
+@node Command Hooks, Key Hooks, Standard Hooks, Standard Hooks
+@section Command Hooks
+@cindex Command Hooks
+@cindex Hooks, Command
+
+@defvr {Hook} pre-command-hook
 Called before each command is evaluated.
+@end defvr
 
-@item post-command-hook
+@defvr {Hook} post-command-hook
 Called after each command is evaluated.
+@end defvr
 
-@item unbound-key-hook
-Called when an key or pointer event has been received which there is no
-binding for.
 
-@item before-add-window-hook
-@itemx add-window-hook
-Called with a single window when the window is first adopted by the
-window manager. @code{before-add-window-hook} is called first, it
-should only set properties of the window.
+@node Key Hooks, Window Construction Hooks, Command Hooks, Standard Hooks
+@section Key Hooks
+@cindex Key Hooks
+@cindex Hooks, Key
 
-@item destroy-notify-hook
-Called when the window is destroyed. Note that this may be called
-asynchronously to the normal event loop. In general, the window manager
-will attempt to call this hook as soon after it knows the window has
-been destroyed as is possible.
+@defvr {Hook} unbound-key-hook
+Called when an key or pointer event has been received which there is
+no binding for.  The hook functions return no arguments.  This is an
+@code{or}-type hookk---the first function that returns non-@code{nil}
+will terminate the hook call.
 
-@item map-notify-hook
-@itemx unmap-notify-hook
-@itemx reparent-notify-hook
-@itemx enter-notify-hook
-@itemx leave-notify-hook
-@itemx focus-in-hook
-@itemx focus-out-hook
-@itemx shape-notify-hook
-Called with a single window argument, analogous to the X events of the
-same names.
+Under normal circumstances, an unbound key release causes a
+@code{throw} to top-level.  Adding @emph{any} function to this hook
+suppresses that behavior.
+@end defvr
 
-@item configure-request-hook
-Called with two arguments @code{(@var{window} @var{alist})} when an X
-@code{ConfigureRequest} event is received. @var{alist} may include
-items @code{(stack . above)}, @code{(stack . below)}, @code{(position .
-@var{coordinates})}, @code{(dimensions . @var{dimensions})}.
 
-@item enter-frame-part-hook
-@itemx leave-frame-part-hook
-Called with two arguments, the window and the frame part class
-(@pxref{Frame Part Classes}), when the pointer enters or leaves a frame
-part.
+@node Window Construction Hooks, Window Destruction Hooks, Key Hooks, Standard Hooks
+@section Window Construction Hooks
+@cindex Window Construction Hooks
+@cindex Hooks, Window Construction
 
-@item window-moved-hook
-@itemx window-resized-hook
-Called with a single window argument whenever the window is moved or
-resized.
+@defvr {Window Hook} before-add-window-hook
+@defvrx {Window Hook} add-window-hook
+Called when the window is first adopted by the window manager.  This
+occurs before the window is created, installed or placed.  At this
+early stage, the only safe action is to set properties of the window
+(with @code{window-set}).
 
-@item visibility-notify-hook
-Called with two arguments, the window, and a symbol, one of:
-@code{fully-obscured}, @code{partially-obscured}, @code{unobscured}.
+@code{add-window-hook} is a deprecated hook, replaced by
+@code{before-add-window-hook}.  It is called immediately after
+@code{before-add-window-hook}.
+@end defvr
 
-@item property-notify-hook
-Called with arguments @code{(@var{window} @var{atom-name} @var{type})}
-where @var{type} is @code{new-value} or @code{deleted}.
+@defvr {Window Hook} after-add-window-hook
+Called when the window is first adopted by the window manager.  This
+occurs after the window has been created, installed and placed.
+@end defvr
 
-@item client-message-hook
-An @code{or} type hook. Called with arguments @code{(@var{window}
-@var{type} @var{data-array})}.
+@defvr {Window Hook} after-framing-hook
+Called after a window gets a frame assigned, or after a window's
+frame is rebuilt.
+@end defvr
 
-@item enter-workspace-hook
-@itemx leave-workspace-hook
-@itemx workspace-state-change-hook
-Called with a single argument: the workspace.
 
-@item add-to-workspace-hook
-@itemx remove-from-workspace-hook
-Called with a single argument: the window.
+@node Window Destruction Hooks, Window Mapping Hooks, Window Construction Hooks, Standard Hooks
+@section Window Destruction Hooks
+@cindex Window Destruction Hooks
+@cindex Hooks, Window Destruction
 
-@item viewport-resized-hook
+@defvr {Window Hook} destroy-notify-hook
+Called when the window is destroyed.  Note that this may be called
+asynchronously to the normal event loop.  In general, once the window
+manager knows the window has been destroyed, it will attempt to call
+this hook as soon as possible.
+@end defvr
+
+
+@node Window Mapping Hooks, Window Motion Hooks, Window Destruction Hooks, Standard Hooks
+@section Window Mapping Hooks
+@cindex Window Mapping Hooks
+@cindex Hooks, Window Mapping
+
+@defvr {Window Hook} map-notify-hook
+@defvrx {Window Hook} unmap-notify-hook
+@defvrx {Window Hook} reparent-notify-hook
+@defvrx {Window Hook} shape-notify-hook
+Called with a window is mapped, unmapped, reparented, or has its shape
+changed, respectively.
+
+Note that iconifying and uniconifying windows triggers unmapping and
+mapping, respectively.
+@end defvr
+
+@defvr {Window Hook} iconify-window-hook
+@defvrx {Window Hook} uniconify-window-hook
+@defvrx {Window Hook} shade-window-hook
+@defvrx {Window Hook} unshade-window-hook
+@defvrx {Window Hook} window-maximized-hook
+@defvrx {Window Hook} window-unmaximized-hook
+@defvrx {Window Hook} window-depth-change-hook
+Called when a window is iconified, uniconified, shaded, unshaded,
+maximized, unmaximized, or has its depth changed, respectively.
+@end defvr
+
+@defvr {Window Hook} visibility-notify-hook
+Called when a window's visibility changes.  In addition to the window,
+the hook is called one one of the symbols @code{fully-obscured},
+@code{partially-obscured}, or @code{unobscured}.
+@end defvr
+
+@defvr {Window Hook} place-window-hook
+An @code{or}-type hook. Called the first time a window is mapped, or
+if the window does not have a true @code{placed} property.  This is an
+@code{or}-type hook---the first function that returns non-@code{nil}
+will terminate the hook call.
+@end defvr
+
+
+@node Window Motion Hooks, X Hooks, Window Mapping Hooks, Standard Hooks
+@section Window Motion Hooks
+@cindex Window Motion Hooks
+@cindex Hooks, Window Motion
+
+@defvr {Window Hook} window-moved-hook
+@defvrx Window {Hook} window-resized-hook
+Called whenever the window is moved or resized.
+
+This hook is called inside the @code{move-window-to} and
+@code{move-resize-window-to} functions, so any operation that moves
+the window will trigger this hook.  The window motion does not have to
+be interactive.
+
+Note that outline window sizing and movement does not use
+@code{move-window-to} or @code{move-resize-window-to}, except at the
+very end of the operation.
+
+Compare with @code{while-moving-hook} and @code{while-resizing-hook}.
+@end defvr
+
+@defvr {Window Hook} before-move-hook
+@defvrx {Window Hook} before-resize-hook
+Called before starting an interactive move or resize.
+@end defvr
+
+@defvr {Window Hook} while-moving-hook
+@defvrx {Window Hook} while-resizing-hook
+Called during every pointer motion event during a move or resize.
+This includes outline window motion.  The calls take place before the
+window or its outline are actually moved.
+
+Compare with @code{window-moved-hook} and @code{window-resized-hook}.
+@end defvr
+
+@defvr {Window Hook} after-move-hook
+@defvrx {Window Hook} after-resize-hook
+Called after completion of an interactive move or resize.  In addition
+to the window, the hook is called with a list of symbols indicating how
+the window was moved or resized: 
+@code{horizontal} and @code{vertical} for movement,
+@code{right}, @code{left}, @code{bottom} and @code{top} for resizing.
+@end defvr
+
+
+@defvr {Hook} after-restacking-hook
+Called after any window restacking operation, including (but possibly
+not limited to @code{restack-windows}, @code{x-raise-window} and
+@code{x-lower-window}.  The hook functions take no arguments.
+@end defvr
+
+
+@node X Hooks, Pointer Motion Hooks, Window Motion Hooks, Standard Hooks
+@section X Hooks
+@cindex X Hooks
+@cindex Hooks, X
+
+@defvr {Window Hook} configure-request-hook
+Called when an X
+@code{ConfigureRequest} event is received.
+In addition to the window, the hook is called with an association list
+of configure request properties.  This alist may contain items
+@code{(stack . above)}, @code{(stack . below)},
+@code{(position . @var{coordinates})},
+and @code{(dimensions . @var{dimensions})}.
+@end defvr
+
+@defvr {Window Hook} property-notify-hook
+Called whenever an X window property (not a Sawfish window property)
+changes.  In addition to the window, the hook is called with the
+atom name and one of the symbols @code{new-value} or @code{deleted}.
+@end defvr
+
+@defvr {Window Hook} window-state-change-hook
+Called whenver certain window manager hints change for a window.
+Currently only @code{urgency} is monitored.  The hint is an additional
+argument to the hook.
+@end defvr
+
+
+@node Pointer Motion Hooks, Workspace Hooks, X Hooks, Standard Hooks
+@section Pointer Motion Hooks
+@cindex Pointer Motion Hooks
+@cindex Hooks, Pointer Motion
+
+In the hooks below, @var{focus-mode} is one of the symbols
+@code{normal}, @code{grab} or @code{ungrab}.
+
+@defvr {Window Hook} enter-notify-hook
+@defvrx {Window Hook} enter-frame-part-hook
+Called when the pointer enters a window (including the root window).
+
+If the window was part of a frame, then @code{enter-frame-part-hook}
+is called with three arguments: the window, the frame part class
+(@pxref{Frame Part Classes}), and @var{focus-mode}.
+
+Otherwise @code{enter-notify-hook} is called with two arguments: the
+window and @var{focus-mode}.
+
+The root window is considered to be a valid window for this hook.
+Sawfish will report entering the root window.
+@end defvr
+
+@defvr {Window Hook} leave-notify-hook
+@defvrx {Window Hook} leave-frame-part-hook
+Called when the pointer leaves a window (including the root window).
+
+If the window was part of a frame, then @code{leave-frame-part-hook}
+is called with three arguments: the window, the frame part class
+(@pxref{Frame Part Classes}), and @var{focus-mode}.
+
+Otherwise @code{leave-notify-hook} is called with two arguments: the
+window and @var{focus-mode}.
+
+The root window is considered to be a valid window for this hook.
+Sawfish will report leaving the root window.
+@end defvr
+
+@defvr {Window Hook} focus-in-hook
+Called when focus gains focus.  The hook functions take two arguments:
+the window that received focus, and @var{focus-mode}.
+
+If your @var{focus-mode} is set to @code{enter-exit}, your window
+focus is tightly bound to your pointer position; focus-related hooks
+and enter/leave hooks will be called in lockstep.  For other values of
+@code{focus-mode}, Sawfish will trigger fewer focus-related hook calls
+than enter/leave hook calls.
+
+This hook is never called for the root window, because the root window
+never gets focus.
+@end defvr
+
+@defvr {Window Hook} focus-out-hook
+Called when a window loses focus.  The hook functions take two
+arguments: the window that lost focus, and @var{focus-mode}.
+
+If your @var{focus-mode} is set to @code{enter-exit}, your window
+focus is tightly bound to your pointer position; focus-related hooks
+and enter/leave hooks will be called in lockstep.  For other values of
+@code{focus-mode}, Sawfish will trigger fewer focus-related hook calls
+than enter/leave hook calls.
+
+This hook is never called for the root window, because the root window
+never gets focus.
+@end defvr
+
+
+@node Workspace Hooks, Startup and Shutdown Hooks, Pointer Motion Hooks, Standard Hooks
+@section Workspace Hooks
+@cindex Workspace Hooks
+@cindex Hooks, Workspace
+
+@defvr {Hook} enter-workspace-hook
+@defvrx {Hook} leave-workspace-hook
+Called when switching from one workspace to another.  This includes
+switching caused by adding or removing a workspace.  The hook is
+called with a @emph{list} containing the workspace in question.
+@end defvr
+
+@defvr {Window Hook} add-to-workspace-hook
+@defvrx {Window Hook} remove-from-workspace-hook
+Called when a window is added or removed from a workspace.  In
+addition to the window, the hook is called with a @emph{list}
+containing the workspace being changed.  If the window is in multiple
+workspaces, then removing triggers @code{remove-from-workspace-hook}
+for each workspace.
+@end defvr
+
+@defvr {Hook} workspace-state-change-hook
+Called when any aspect of the workspaces change, including adding a
+workspace, removing a workspace, moving a workspace, inserting or
+removing a window from a workspace, etc.  This hook is called with no
+arguments, so you should use one of the more specific hooks if
+possible.
+@end defvr
+
+@defvr {Hook} viewport-resized-hook
 Called when the number of rows and columns in each virtual workspace is
 changed.
+@end defvr
 
-@item viewport-moved-hook
+@defvr {Hook} viewport-moved-hook
 Called when the origin of the viewport into the virtual workspace is
 moved.
+@end defvr
 
-@item place-window-hook
-An @code{or} type hook. Called the first a window is mapped.
-
-@item window-state-change-hook
-@itemx iconify-window-hook
-@itemx uniconify-window-hook
-@itemx shade-window-hook
-@itemx unshade-window-hook
-@itemx window-maximized-hook
-@itemx window-unmaximized-hook
-@itemx window-depth-change-hook
-Called with a single window.
-
-@item after-initialization-hook
-Called after adopting the initial set of windows.
-
-@item before-exit-hook
-Called immediately before exiting.
-
-@item sm-window-save-functions
-@itemx sm-restore-window-hook
-@itemx sm-after-restore-hook
-Session management hooks, @ref{Session Management}.
-
-@item before-move-hook
-@itemx before-resize-hook
-Called before starting an interactive move or resize, with a single
-argument: the window.
-
-@item while-moving-hook
-@itemx while-resizing-hook
-Called while interactively moving or resizing the window passed as the
-argument to the hook.
-
-@item after-move-hook
-@itemx after-resize-hook
-Called after completion of an interactive move or resize. Called with
-two arguments: the window, and a list of symbols defining how the
-window was moved or resized.
-
-@item gtkrc-changed-hook
-When using the @code{gtkrc} module to load the current gtk style
-parameters, this hook is called when the style changes.
-
-@item enter-flipper-hook
-@itemx leave-flipper-hook
+@defvr {Hook} enter-flipper-hook
+@defvrx {Hook} leave-flipper-hook
 When viewport edge-flipping is enabled, these hooks are called as the
 pointer enters and leaves the pixel-wide border on the edge of the
 screen. They're called with a single argument, one of the symbols
-@code{left}, @code{right}, @code{top}, @code{bottom} defining the edge
-in question.
+@code{left}, @code{right}, @code{top}, @code{bottom} indicating the
+edge in question.
+@end defvr
 
-@end vtable
+
+@node Startup and Shutdown Hooks, Other Hooks, Workspace Hooks, Standard Hooks
+@section Startup and Shutdown Hooks
+@cindex Startup and Shutdown Hooks
+@cindex Hooks, Startup and Shutdown
+
+@defvr {Hook} after-initialization-hook
+Called after adopting the initial set of windows.
+@end defvr
+
+@defvr {Window Hook} remove-window-hook
+Called on each window as Sawfish shuts down (possibly for a restart).
+The hook functions take no arguments.
+@end defvr
+
+@defvr {Hook} before-exit-hook
+Called immediately before exiting.
+@end defvr
+
+@defvr {Hook} sm-window-save-functions
+@defvrx {Hook} sm-restore-window-hook
+@defvrx {Hook} sm-after-restore-hook
+Session management hooks, @ref{Session Management}.
+@end defvr
+
+
+@node Other Hooks,  , Startup and Shutdown Hooks, Standard Hooks
+@section Other Hooks
+@cindex Other Hooks
+@cindex Hooks, Other
+
+@defvr {Hook} gtkrc-changed-hook
+When using the @code{gtkrc} module to load the current gtk style
+parameters, this hook is called when the style changes.
+@end defvr
+
+@defvr {Window Hook} client-message-hook
+Called with arguments @code{(@var{window} @var{type}
+@var{data-array})}.  This is an @code{or}-type hook---the first
+function that returns non-@code{nil} will terminate the hook call.
+@end defvr
 
 
 @node Standard Properties, Session Management, Standard Hooks, Top
@@ -2949,12 +6039,19 @@ to save and reload their own window state.
 There are two methods of doing this. If the module only wants to save
 and restore the values of properties in each window's property list
 (i.e. those values set via @code{window-put}), then the following
-function may be used:
+functions may be used:
 
 @defun sm-add-saved-properties &rest properties
-Arrange for all symbols @var{properties} to be saved and loaded with
+@defunx sm-add-restored-properties &rest properties
+Arrange for all symbols @var{properties} to be saved or restored with
 the session.
 @end defun
+
+@defvar sm-saved-window-properties
+@defvarx sm-restored-window-properties
+Lists of properties (symbols) to be saved or restored with each
+session.
+@end defvar
 
 If a Lisp module chooses to use this method it may add a function to
 the @code{add-window-hook} to act on the reloaded properties when the
@@ -2984,6 +6081,19 @@ The following hook is also called.
 
 @defvar sm-after-restore-hook
 Hook called after loading a saved session.
+@end defvar
+
+@defvar sm-save-directory
+The directory that will contain all Sawfish sessions.  It must be a
+string.  By default it is @code{"~/.sawfish/sessions"}.
+@end defvar
+
+@defvar sm-sloppy-id-matching
+When loading sessions, the algorithm that matches saved session data
+to running clients requires that if one has a session id, then so must
+the other, and they must match. Setting this variable to true turns
+that feature off, allowing some broken clients to be session managed.
+Defaults to false.
 @end defvar
 
 
