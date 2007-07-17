@@ -1,3 +1,15 @@
+Requirements
+============
+
+   To compile this distribution you'll need GNU make, Imlib, my librep
+Lisp interpreter, and the rep-gtk binding installed. Sources for some
+of these are:
+
+	http://librep.sourceforge.net/
+	http://rep-gtk.sourceforge.net/
+	ftp://ftp.enlightenment.org/e/enlightenment/libs/
+
+
 Basic Installation
 ==================
 
@@ -29,6 +41,10 @@ The simplest way to compile this package is:
      you're using `csh' on an old version of System V, you might need to
      type `sh ./configure' instead to prevent `csh' from trying to
      execute `configure' itself.
+
+     If you've got GNOME installed, and you'd like to be able to configure
+     sawfish via the control center, pass the --enable-capplet option to
+     configure
 
      Running `configure' takes a while.  While running, it prints some
      messages telling which features it is checking for.

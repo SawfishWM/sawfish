@@ -36,27 +36,3 @@ Also, most received events are exported to the Lisp environment through
 ``key-bindings'' and hooks, similar to in Emacs. These events include
 pointer behaviour and many internal X11 events (enter/leave,
 focus-in/focus-out, map/unmap, etc..)
-
-
-Installing
-**********
-
-To compile this distribution you'll need GNU make, Imlib, my librep
-Lisp interpreter, and the rep-gtk binding installed. Sources for some
-of these are:
-
-	http://librep.sourceforge.net/
-	http://rep-gtk.sourceforge.net/
-	ftp://ftp.enlightenment.org/e/enlightenment/libs/
-
-After making sure that Imlib, librep, and rep-gtk are installed, do
-something similar to the following in the root of the unpacked sawfish
-distribution:
-
-	$ ./configure
-	$ make all
-	$ make install
-
-If you've got GNOME installed, and you'd like to be able to configure
-sawfish via the control center, pass the --enable-capplet option to
-configure
