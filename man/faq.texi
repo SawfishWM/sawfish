@@ -155,25 +155,7 @@ Frames})
 Basically though, create a directory @file{~/.sawfish/themes/@var{foo}}
 where @var{foo} is the name of your theme. Then copy any images into
 this directory and create a file @file{theme.jl} that will be loaded to
-initialise the theme
-
-The configuration tool will display the contents of a file called
-@file{README} in the directory (but make it 80-column text, and only a
-few lines)
-
-Recent versions of Sawfish include a program @code{sawfish-themer} that
-allows simple themes to be created using a GTK+ interface. Ian McKellar
-has created @code{GimpMill}:
-
-@quotation
-GimpMill is a GIMP plugin written in Python using James Henstrige's 
-really cool Python GIMP bindings. It allows the construction of Sawmill
-themes within The GIMP - extending the GIMP interface to allow theme 
-creation like the GAP extends it to allow animation creation.
-@end quotation
-
-@noindent
-GimpMill is available from @url{http://www.yakk.net/projects.gimpmill.html}
+initialize the theme
 
 
 @item How do I port an Enlightenment theme to Sawfish?
@@ -256,8 +238,8 @@ Recompile GTK+ using the @samp{--disable-xim} option to configure
 @item Why don't some windows ever get focused?
 
 If you don't have the option `give focus to windows even when they
-haven't asked for it' checked (group Focus/Advanced), then windows that
-don't ask for focus don't get it.
+haven't asked for it' set to nil (define-special-variable ignore-window-input-hint nil),
+then windows that don't ask for focus don't get it.
 
 Windows ask to receive focus by setting their WM_HINTS property
 appropriately; for example if I xprop a gnome-terminal:
