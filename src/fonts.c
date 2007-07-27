@@ -148,7 +148,7 @@ xlfd_get_element (const char *xlfd, int idx)
 	    if (end == 0)
 		end = p + strlen (p);
 	    len = end - (p + 1);
-	    buf = malloc (len);
+	    buf = malloc (len + 1);
 	    memcpy (buf, p + 1, len);
 	    buf[len] = 0;
 	    return buf;

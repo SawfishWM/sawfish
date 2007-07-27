@@ -1,0 +1,36 @@
+These scripts are intended to automatically take screenshots of sawfish themes.
+
+To install/configure, do the following:
+
+  - Install dependencies:
+
+    # apt-get install cowsay xnest imagemagick xterm
+    # apt-get install feh
+    # apt-get install ... (more?)
+
+  - Add a test user to your system.
+
+    # adduser sawfish
+
+  - Set up your sawfish directory.
+
+    % su sawfish
+    % cd
+    % mkdir .sawfish
+    % cd .sawfish
+    % mkdir tarballs themes
+    % cp /path/to/theme/tarballs/*.tar.gz ~/.sawfish/tarballs
+
+  - Put these scripts in your path.
+
+    % mkdir ~/bin
+    % echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+    % cp /path/to/these/sawfish/scripts/* ~/bin
+
+Then, you should be able to actually run the scripts.
+
+  % mkdir ~/screenshots
+  % cd ~/screenshots
+  % make_screenshots.sh
+
+Scott (ToyKeeper) Scriven

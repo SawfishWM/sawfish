@@ -6,6 +6,48 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+@heading 1.3.1
+
+@itemize @bullet
+
+@item The 1.3.1 version is released to let people know that Sawfish is being
+revived by the community, and we are awaiting patches to be submitted 
+for incoming 1.3.2 release
+
+@item John Harper resigns from Sawfish maintainership and Sawfish community takes
+over. Janek Kozicki has SVN access, applies patches and makes releases.
+
+@item new official Sawfish website @url{http://sawfish.wikia.com/}
+
+@item updated documentation to v0.11 from Derek Upham
+
+@item updated FAQ from Sawfish wiki
+
+@item added tool for automatic screenshot generation for huge number of themes (Scott Scriven)
+
+@item Add detection for Xrandr extension (Philip Langdale)
+
+@item added Punjabi Lanaguage (Amanpreet Alam)
+
+@item Makefile.in: install Sawfish.desktop unconditionally (John Harper)
+
+@item generate sawfish.gtk.widgets.font from font.jl.in, define have_pango_xft
+in the substitutions (John Harper)
+
+@item Bug fixes:
+
+@itemize @minus
+
+@item fixed possible buffer overflow in src/fonts.c (Yoshiaki Kasahara)
+
+@item Updated Swedish translation (Daniel Nylander)
+
+@item check for pango libs and flags (optional dependency)
+
+@end itemize
+@end itemize
+
+
 @heading 1.3
 
 @itemize @bullet
