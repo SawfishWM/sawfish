@@ -90,7 +90,7 @@ dnl Check for X headers, etc
 _cppflags="${CPPFLAGS}"
 CPPFLAGS="${CPPFLAGS} ${X_CFLAGS}"
 
-AC_CHECK_HEADERS(X11/SM/SMlib.h X11/extensions/Xdbe.h)
+AC_CHECK_HEADERS(X11/SM/SMlib.h X11/extensions/Xdbe.h, [], [], [#include <X11/Xlib.h> ])
 
 dnl Checks for X extensions/libraries
 XINERAMA_LIBS=""
@@ -110,7 +110,8 @@ AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
 
 AC_CHECK_LIB(Xrandr, XRRUpdateConfiguration,
 	     [XRANDR_LIBS="-lXrandr"
-	      AC_CHECK_HEADERS(X11/extensions/Xrandr.h)],
+	      AC_CHECK_HEADERS(X11/extensions/Xrandr.h, [], [], 
+	         [#include <X11/Xlib.h> ])],
 	     [],[$X_LIBS -lX11 -lXext])
 
 dnl Try using pkg-config first, since it looks like Xft2 may fail our

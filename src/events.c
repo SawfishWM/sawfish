@@ -1155,7 +1155,11 @@ shape_notify (XEvent *ev)
     XShapeEvent *sev = (XShapeEvent *)ev;
     Lisp_Window *w = find_window_by_id (sev->window);
     if (w != 0 && sev->window == w->id
-	&& (sev->kind == ShapeBounding || sev->kind == ShapeInput))
+	&& (sev->kind == ShapeBounding 
+#ifdef ShapeInput
+	    || sev->kind == ShapeInput
+#endif
+	    ))
     {
 	if (sev->kind == ShapeBounding)
 	    w->shaped = sev->shaped ? 1 : 0;
