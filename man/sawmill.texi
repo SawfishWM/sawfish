@@ -3,10 +3,10 @@
 @settitle sawfish Programming Manual
 @footnotestyle end
 
-@set EDITION 0.11
-@set VERSION 1.3
-@set UPDATED 5 January 2004
-@set UPDATE-MONTH January 2004
+@set EDITION 0.12
+@set VERSION 1.3.2
+@set UPDATED 2 July 2007
+@set UPDATE-MONTH July 2007
 
 @ifinfo
 @direntry
@@ -80,7 +80,7 @@ last updated @value{UPDATED} for Sawfish version @value{VERSION}.
 * Customization::		Supporting user-configuration
 
 * Window Frames::		Decorating windows
-@c * Viewports::			Subdivided desktop areas
+* Viewports::			Subdivided desktop areas
 * Workspaces::			Multiple desktop areas
 * Multi-Head Environments::     Multiple monitors
 * Window Placement::            Controlling placement of new windows
@@ -93,6 +93,7 @@ last updated @value{UPDATED} for Sawfish version @value{VERSION}.
 * Standard Hooks::		Hooking into wm actions
 * Standard Properties::		Window properties
 * Session Management::		Saving state across sessions
+* Low-level X Interface::       Accessing the server directly
 
 * FAQ::				Frequently asked questions
 
@@ -2196,11 +2197,10 @@ If true, Sawfish includes windows on all workspaces when cycling.
 Defaults to false.
 @end defvar
 
-@c FIXME: viewports aren't documented right now
-@c @defvar cycle-all-viewports
-@c If true, Sawfish includes windows on all viewports when cycling.
-@c Defaults to false.
-@c @end defvar
+@defvar cycle-all-viewports
+If true, Sawfish includes windows on all viewports when cycling.
+Defaults to false.
+@end defvar
 
 It is possible to configure the cycling to get more feedback during
 the process.
@@ -2419,10 +2419,9 @@ windows are not affected.  If the window had the input focus and it is
 visible after the move, it retains the input focus.
 @end defun
 
-@c FIXME: viewports are deprecated, so this is commented out
-@c @defun move-group-to-current-viewport w
-@c @defunx move-group-viewport w
-@c @end defun
+@defun move-group-to-current-viewport w
+@defunx move-group-viewport w
+@end defun
 
 @defun move-group-left w
 @defunx move-group-right w
@@ -2775,7 +2774,7 @@ exists.
 Returns the customizable type of the variable named @var{symbol}.
 @end defun
 
-@node Window Frames, Workspaces, Customization, Top
+@node Window Frames, Viewports, Customization, Top
 @chapter Window Frames
 @cindex Window frames
 @cindex Frames, of windows
@@ -3478,111 +3477,111 @@ Disable all frame parts that are a member of @var{class} in
 @var{window} where possible.
 @end defun
 
-@c @node Viewports, Workspaces, Window Frames, Top
-@c @chapter Viewports
-@c @cindex Viewports
-@c 
-@c It is sometimes useful to have a logical display that is larger than
-@c the computer screen.  This is most often implemented by displaying
-@c only a portion of the logical display at any time.  Sawfish does this
-@c using ``viewports''.
-@c 
-@c When viewports are enabled, the Sawfish logical display becomes
-@c infinitely large in the two directions ``across'' and ``down'' (to the
-@c maximum representable size of integers).  Sawfish divides this logical
-@c display into a potentially infinite grid of cells.  Each cell of the
-@c grid is the same size of the virtual display.
-@c 
-@c @defvar viewport-dimensions
-@c The current number of viewports across and down the virtual display.
-@c This is a cons cell @code{(@var{across} . @var{down})}.  Defaults to
-@c @code{(1 . 1)}.
-@c @end defvar
-@c 
-@c @defun set-number-of-viewports width height
-@c Change @code{viewport-dimensions} to have the value
-@c @code{(@var{width} . @var{height})}.
-@c @end defun
-@c 
-@c The user then tells Sawfish to move the physical display from cell to
-@c cell.  On a cell change, windows in previous cells are removed, and
-@c windows in the current cell appear.  Windows that span two or more
-@c cells will appear in each cell, appropriately displaced.
-@c 
-@c Note that cell indices start at zero in each dimension.  Indices are
-@c never negative.
-@c 
-@c @defun screen-viewport
-@c Returns the currently displayed viewport as a pair @code{(@var{x},
-@c @var{y})}.
-@c @end defun
-@c 
-@c @defun set-screen-viewport col row
-@c Change the physical display to view cell @code{(@var{col},
-@c @var{row})}.
-@c @end defun
-@c 
-@c @defun move-viewport right down
-@c Move the viewport to see the cell @var{right} slots to the right and
-@c @var{down} slots down.  Either argument may be zero or negative.
-@c @end defun
-@c 
-@c @defun set-window-viewport window col row
-@c Move @var{window} to the cell at @code{(@var{col}, @var{row})}.  The
-@c relative position of the window within the cells is preserved.
-@c @end defun
-@c 
-@c @defun move-window-viewport window col-delta row-delta
-@c Move @var{window} to the cell @var{col-delta} positions across and
-@c @var{row-delta} positions down from its current cell.  The relative
-@c position of the window with its cells its preserved.
-@c @end defun
-@c 
-@c @defun move-viewport-to-window window
-@c Move the viewport to a cell that shows window @var{window}.  For a
-@c window that spans multiple cells, this function will pick the cell
-@c showing the window's top-left corner.
-@c @end defun
-@c 
-@c @defun move-window-to-current-viewport window
-@c Move @var{window} from its existing viewport to the current viewport.
-@c The window's relative position in the existing viewport is preserved
-@c after the move.
-@c @end defun
-@c 
-@c @defun window-viewport window
-@c Returns a cons cell @code{(@var{col} . @var{row})} of the viewport
-@c holding the top-left corner of @var{window}.
-@c @end defun
-@c 
-@c @defun window-outside-viewport-p window
-@c @defunx window-outside-workspace-p window
-@c Returns true if @var{window} is completely outside the current
-@c viewport in any direction.  The @code{window-outside-workspace-p}
-@c function is an obsolete alias for the first function; the
-@c ``workspace'' term is now used for another concept
-@c (@pxref{Workspaces}).
-@c @end defun
-@c 
-@c @defun window-absolute-position window
-@c Returns a cons cell @code{(@var{x} . @var{y})} of the position of
-@c @var{window} in its containing viewport.  The containing viewport may
-@c or may not be the current viewport.
-@c @end defun
-@c 
-@c @defun set-viewport x y
-@c Change the position of the physical display, such that location
-@c @code{(@var{x}, @var{y})} is at the top-left of the display.  The
-@c physical display may be showing more than one cell at this point.
-@c All windows are redisplayed as appropriate.
-@c @end defun
-@c 
-@c @defvar uniconify-to-current-viewport
-@c When true, windows uniconify to the current viewport, rather than to
-@c the viewport they were iconified on.  Defaults to true.
-@c @end defvar
+@node Viewports, Workspaces, Window Frames, Top
+@chapter Viewports
+@cindex Viewports
 
-@node Workspaces, Multi-Head Environments, Window Frames, Top
+It is sometimes useful to have a logical display that is larger than
+the computer screen.  This is most often implemented by displaying
+only a portion of the logical display at any time.  Sawfish does this
+using ``viewports''.
+
+When viewports are enabled, the Sawfish logical display becomes
+infinitely large in the two directions ``across'' and ``down'' (to the
+maximum representable size of integers).  Sawfish divides this logical
+display into a potentially infinite grid of cells.  Each cell of the
+grid is the same size of the virtual display.
+
+@defvar viewport-dimensions
+The current number of viewports across and down the virtual display.
+This is a cons cell @code{(@var{across} . @var{down})}.  Defaults to
+@code{(1 . 1)}.
+@end defvar
+
+@defun set-number-of-viewports width height
+Change @code{viewport-dimensions} to have the value
+@code{(@var{width} . @var{height})}.
+@end defun
+
+The user then tells Sawfish to move the physical display from cell to
+cell.  On a cell change, windows in previous cells are removed, and
+windows in the current cell appear.  Windows that span two or more
+cells will appear in each cell, appropriately displaced.
+
+Note that cell indices start at zero in each dimension.  Indices are
+never negative.
+
+@defun screen-viewport
+Returns the currently displayed viewport as a pair @code{(@var{x},
+@var{y})}.
+@end defun
+
+@defun set-screen-viewport col row
+Change the physical display to view cell @code{(@var{col},
+@var{row})}.
+@end defun
+
+@defun move-viewport right down
+Move the viewport to see the cell @var{right} slots to the right and
+@var{down} slots down.  Either argument may be zero or negative.
+@end defun
+
+@defun set-window-viewport window col row
+Move @var{window} to the cell at @code{(@var{col}, @var{row})}.  The
+relative position of the window within the cells is preserved.
+@end defun
+
+@defun move-window-viewport window col-delta row-delta
+Move @var{window} to the cell @var{col-delta} positions across and
+@var{row-delta} positions down from its current cell.  The relative
+position of the window with its cells its preserved.
+@end defun
+
+@defun move-viewport-to-window window
+Move the viewport to a cell that shows window @var{window}.  For a
+window that spans multiple cells, this function will pick the cell
+showing the window's top-left corner.
+@end defun
+
+@defun move-window-to-current-viewport window
+Move @var{window} from its existing viewport to the current viewport.
+The window's relative position in the existing viewport is preserved
+after the move.
+@end defun
+
+@defun window-viewport window
+Returns a cons cell @code{(@var{col} . @var{row})} of the viewport
+holding the top-left corner of @var{window}.
+@end defun
+
+@defun window-outside-viewport-p window
+@defunx window-outside-workspace-p window
+Returns true if @var{window} is completely outside the current
+viewport in any direction.  The @code{window-outside-workspace-p}
+function is an obsolete alias for the first function; the
+``workspace'' term is now used for another concept
+(@pxref{Workspaces}).
+@end defun
+
+@defun window-absolute-position window
+Returns a cons cell @code{(@var{x} . @var{y})} of the position of
+@var{window} in its containing viewport.  The containing viewport may
+or may not be the current viewport.
+@end defun
+
+@defun set-viewport x y
+Change the position of the physical display, such that location
+@code{(@var{x}, @var{y})} is at the top-left of the display.  The
+physical display may be showing more than one cell at this point.
+All windows are redisplayed as appropriate.
+@end defun
+
+@defvar uniconify-to-current-viewport
+When true, windows uniconify to the current viewport, rather than to
+the viewport they were iconified on.  Defaults to true.
+@end defvar
+
+@node Workspaces, Multi-Head Environments, Viewports, Top
 @chapter Workspaces
 @cindex Workspaces
 @cindex Desktop workspaces
@@ -5676,10 +5675,10 @@ the hook is called one one of the symbols @code{fully-obscured},
 @end defvr
 
 @defvr {Window Hook} place-window-hook
-An @code{or}-type hook. Called the first time a window is mapped, or
-if the window does not have a true @code{placed} property.  This is an
-@code{or}-type hook---the first function that returns non-@code{nil}
-will terminate the hook call.
+Called the first time a window is mapped, or if the window does not
+have a true @code{placed} property.  This is an @code{or}-type
+hook---the first function that returns non-@code{nil} will terminate
+the hook call.
 @end defvr
 
 
@@ -5689,7 +5688,7 @@ will terminate the hook call.
 @cindex Hooks, Window Motion
 
 @defvr {Window Hook} window-moved-hook
-@defvrx Window {Hook} window-resized-hook
+@defvrx {Window Hook} window-resized-hook
 Called whenever the window is moved or resized.
 
 This hook is called inside the @code{move-window-to} and
@@ -6028,7 +6027,7 @@ after it was mapped.
 @end vtable
 
 
-@node Session Management, FAQ, Standard Properties, Top
+@node Session Management, Low-level X Interface, Standard Properties, Top
 @chapter Session Management
 @cindex Session management
 
@@ -6096,8 +6095,363 @@ that feature off, allowing some broken clients to be session managed.
 Defaults to false.
 @end defvar
 
+@node Low-level X Interface, FAQ, Session Management, Top
+@chapter Low-level X Interface
 
-@node FAQ, Function Index, Session Management, Top
+@menu
+* X Server::
+* X Windows::
+* X Selections::
+* X Keysyms::
+* X Bitmaps and Pixmaps::
+* X Drawing::
+* Available X Symbols::
+@end menu
+
+
+@node X Server, X Windows, Low-level X Interface, Low-level X Interface
+@section X Server
+
+@defun x-server-timestamp &optional from-server store
+Return a recent X server timestamp as an integer.
+
+If @var{from-server} is non-@var{nil}, the timestamp is read directly
+from the server; otherwise the most recent timestamp seen by the
+window manager (i.e., from an event) is returned.
+
+If @var{store} is true, this becomes the most recent timestamp seen by
+the window manager.
+@end defun
+
+
+@node X Windows, X Selections, X Server, Low-level X Interface
+@section X Windows
+
+@defun x-create-window (x . y) (width . height) bw attrs &optional event-handler
+Create a new X window at @code{(@var{x}, @var{y})} with dimensions
+@code{(@var{width}, @var{height})} and border width @var{bw}.
+@var{Attrs} is an alist mapping attribute names to values.  Allowed
+attribute names are @code{background} and @code{border-color}.
+@end defun
+
+@defun x-configure-window window attrs
+Reconfigure the window associated with @var{window}.  @var{Attrs} is 
+an alist mapping attribute names to values.  Allowed attribute names
+are @code{x}, @code{y}, @code{width}, @code{height} and
+@code{border-width}.
+@end defun
+
+@defun x-destroy-window window
+Destroy the X window @var{window}.
+@end defun
+
+@defun x-map-window window &optional unraised
+Map the window associated with @var{window} to the display.  If
+@var{unraised} is not specified, the window will be mapped at the top
+of the window stack.
+@end defun
+
+@defun x-unmap-window window
+Unmap the window associated with @var{window}.
+@end defun
+
+@defun x-window-id window
+Return the X window ID (an integer) associated with @var{window}.
+@end defun
+
+@defun x-window-p obj
+Return @code{t} if @var{obj} is associated with an X window object.
+@end defun
+
+@defun x-change-window-attributes window attrs
+Set attributes of the window associated with @var{window}.
+@var{Attrs} is an alist mapping attribute names (symbols) to values.
+Allowed attribute names are @code{background} and @code{border-color}.
+@end defun
+
+
+@node X Selections, X Keysyms, X Windows, Low-level X Interface
+@section X Selections
+
+@defun x-get-selection sel
+Return the string corresponding to the current value of the X11
+selection defined by @var{sel}, or @code{nil} if the selection
+currently has no value.  @var{Sel} should be one of
+@code{PRIMARY}, @code{SECONDARY} or @code{CLIPBOARD}.
+@end defun
+
+@defun x-selection-active-p sel
+Returns t if the X11 selection defined by the symbol @var{sel} is
+available for reading.  @var{Sel} should be one of @code{PRIMARY},
+@code{SECONDARY} or @code{CLIPBOARD}.
+@end defun
+
+
+@node X Keysyms, X Bitmaps and Pixmaps, X Selections, Low-level X Interface
+@section X Keysyms
+
+@defun x-keysym-name ks
+Return the Lisp symbol naming the X11 keysym represented by the
+integer @var{ks}.
+@end defun
+
+@defun x-lookup-keysym name
+Return the X11 keysym (an integer) named by the Lisp symbol
+@var{name}.
+@end defun
+
+
+@node X Bitmaps and Pixmaps, X Drawing, X Keysyms, Low-level X Interface
+@section X Windows
+
+@defun x-bitmap-p
+Return @code{t} if @var{arg} is an X-bitmap object.
+@end defun
+
+@defun x-create-bitmap (width . height)
+Create a bitmap of size @var{width}x@var{height}.
+@end defun
+
+@defun x-create-pixmap (width . height)
+Create a pixmap of size @var{width}x@var{height}.
+@end defun
+
+@defun x-destroy-drawable drawable
+Destroy the X drawable @var{drawable}.
+@end defun
+
+@defun x-drawable-height drawable
+Return the height in pixels of @var{drawable}.
+@end defun
+
+@defun x-drawable-id drawable
+Return the X11 drawable-ID (an integer) associated with
+@var{drawable}.
+@end defun
+
+@defun x-drawable-p obj
+Return @code{t} if @var{obj} is an X drawable object.
+@end defun
+
+@defun x-drawable-width drawable
+Return the width in pixels of @var{drawable}.
+@end defun
+
+@defun x-grab-image-from-drawable drawable mask
+Return a new image object copied from @var{drawable}.  @var{Mask} is a
+stencil mask for the image; black pixels in @var{mask} become
+transparent in the returned image.
+@end defun
+
+@defun x-pixmap-p obj
+Return @code{t} if @var{obj} is an X pixmap object.
+@end defun
+
+
+@node X Drawing, Available X Symbols, X Bitmaps and Pixmaps, Low-level X Interface
+@section X Windows
+
+@defun x-clear-window window
+Clear the window associated with @var{window} to its background color.
+@end defun
+
+@defun x-copy-area window gc (x . y) (width . height) (dest-x . dest-y)
+Copy a region of @var{window} with top-left corner @code{(@var{x},
+@var{y})} and dimensions @code{(@var{width}, @var{height})} to the
+position @code{(@var{dest-x}, @var{dest-y})} using @var{gc}.
+@end defun
+
+@defun x-create-gc window attrs
+Create a new GC for the specified window @var{window}.  @var{Attrs} is
+an alist mapping attributes to values.  Allowed attribute names are
+@code{foreground}, @code{background}, @code{line-width},
+@code{line-style}, @code{cap-style}, @code{join-style},
+@code{fill-style}, @code{fill-rule}, @code{arc-mode}, @code{tile},
+@code{stipple}, @code{ts-x-origin}, @code{ts-y-origin},
+@code{clip-mask}, @code{clip-x-origin}, @code{clip-y-origin} and
+@code{function}.
+@end defun
+
+@defun x-change-gc gc attrs
+Sets attributes of the X Graphical Context.  @var{Attrs} is an
+association list of attribute names and values.  Allowed attribute
+names are @code{foreground}, @code{background}, @code{line-width},
+@code{line-style}, @code{cap-style}, @code{join-style},
+@code{fill-style}, @code{fill-rule}, @code{arc-mode}, @code{tile},
+@code{stipple}, @code{ts-x-origin}, @code{ts-y-origin},
+@code{clip-mask}, @code{clip-x-origin}, @code{clip-y-origin} and
+@code{function}.
+@end defun
+
+@defun x-create-root-xor-gc
+Create a graphics context specialized for XOR-ing onto the root
+window.  This is used for drawing outlines for window movement.
+@end defun
+
+@defun x-destroy-gc gc
+Destroy the X graphics context @var{gc}.
+@end defun
+
+@defun x-draw-arc window gc (x . y) (width . height) (angle1 . angle2)
+Draw a single circular or elliptical arc in @var{window} using the
+graphics context @var{gc}.  The center of the circle or ellipse is the
+center of an imaginary rectangle at @code{(@var{x}, @var{y})}.  The
+major and minor axes are the @code{(@var{width}, @var{height})} of
+that rectangle.  The arc sweeps from @var{angle1} to @var{angle2};
+positive angles are rotated counter-clockwise from zero, and negative
+angles are rotated clockwise from zero.
+@end defun
+
+@defun x-draw-image image window (x . y) &optional (width . height)
+Render the image object @var{image} in @var{window} at position
+@code{(@var{x}, @var{y})}.  If @var{width} and @var{height} are
+defined the image is first scaled to these dimensions; otherwise it is
+drawn using its natural dimensions.
+@end defun
+
+@defun x-draw-line window gc (x1 . y1) (x2 . y2)
+Draw a line from @code{(@var{x1}, @var{y1})} to @code{(@var{x2},
+@var{y2})} in @var{window} using the graphics context @var{gc}.
+@end defun
+
+@defun x-draw-rectangle window gc (x . y) (width . height)
+Draw a rectangle with its top-left corner at @code{(@var{x}, @var{y})}
+and dimensions @code{(@var{width}, @var{height})} in @var{window}
+using the graphics context @var{gc}.
+@end defun
+
+@defun x-draw-string window gc (x . y) string &optional font
+Draw the specified string at @code{(@var{x}, @var{y})} in @var{window}
+using the graphics context @var{gc}.  If @var{font} is specified use
+that font.
+@end defun
+
+@defun x-fill-arc window gc (x . y) (width . height) (angle1 . angle2)
+Draw a single filled circular or elliptical arc in @var{window} using
+the graphics context @var{gc}.  The center of the circle or ellipse is
+the center of an imaginary rectangle at @code{(@var{x}, @var{y})}.
+The major and minor axes are the @code{(@var{width}, @var{height})} of
+that rectangle.  The arc sweeps from @var{angle1} to @var{angle2};
+positive angles are rotated counter-clockwise from zero, and negative
+angles are rotated clockwise from zero.
+@end defun
+
+@defun x-fill-polygon window gc points &optional draw-mode
+Draw a single filled polygon in @var{window} using
+the graphics context @var{gc}.  @var{Points} is a list of
+@code{(@var{x}, @var{y})} pairs that defines the polygon vertices.
+
+@var{Draw-mode} is a hint to the X server on how to draw the polygon;
+if supplied, it should be one of the symbols @code{convex} or
+@code{non-convex}.  The default mode is ``Convex''.
+@end defun
+
+@defun x-fill-rectangle window gc (x . y) (width . height)
+Draw a filled rectangle with its top-left corner at @code{(@var{x},
+@var{y})} and dimensions @code{(@var{width}, @var{height})} in
+@var{window} using the graphics context @var{gc}.
+@end defun
+
+@defun x-gc-p obj
+Returns @code{t} if @var{obj} is an X GraphicsContext object.
+@end defun
+
+@defun x-gc-set-dashes gc pixels-list &optional offset
+Set the dash style of graphics context @var{gc} to the value of
+@var{pixels-list}.  @var{Pixels-list} is a list of cons cells
+@code{((pixels-on . pixels-off) ...)} indicating runs of on and off
+pixels in a dash segment.  If @var{offset} is given, this should be an
+integer indicating the number of pixels to offset the dashes.
+@end defun
+
+@defun x-window-back-buffer window
+Return the X object ID (an integer) for the back buffer associated
+with @var{window}.  If no such back buffer exists, the function will
+attempt to create one.
+
+If the function is unable to find or create a back buffer (possibly
+because the X server does not support them), it returns the window's
+own ID.
+@end defun
+
+@defun x-window-swap-buffers window
+Swap the fore and back buffers of the window associated with
+@var{window}.  If the X server does not support double buffers, the
+function quietly does nothing.
+@end defun
+
+
+@node Available X Symbols,  , X Drawing, Low-level X Interface
+@section Available X Symbols
+
+The following symbols can be used where X window attributes are
+expected:
+
+@table @code
+@item border-width
+@itemx border-color
+@itemx expose
+@itemx convex
+@itemx non-convex
+@itemx line-width
+@itemx line-style
+@itemx cap-style
+@itemx join-style
+@itemx fill-style
+@itemx fill-rule
+@itemx arc-mode
+@itemx tile
+@itemx stipple
+@itemx ts-x-origin
+@itemx ts-y-origin
+@itemx clip-mask
+@itemx clip-x-origin
+@itemx clip-y-origin
+@end table
+
+The following symbols can be used where X window attribute values are
+expected:
+
+@table @code
+@item line-solid
+@itemx line-on-off-dash
+@itemx line-double-dash
+@itemx cap-not-last
+@itemx cap-butt
+@itemx cap-round
+@itemx cap-projecting
+@itemx join-miter
+@itemx join-round
+@itemx join-bevel
+@itemx fill-solid
+@itemx fill-tiled
+@itemx fill-stippled
+@itemx fill-opaque-stippled
+@itemx even-odd-rule
+@itemx winding-rule
+@itemx arc-chord
+@itemx arc-pie-slice
+@itemx function
+@itemx clear
+@itemx and
+@itemx and-reverse
+@itemx copy
+@itemx and-inverted
+@itemx no-op
+@itemx xor
+@itemx or
+@itemx nor
+@itemx equiv
+@itemx invert
+@itemx or-reverse
+@itemx copy-inverted
+@itemx or-inverted
+@itemx nand
+@itemx set
+@end table
+
+
+@node FAQ, Function Index, Low-level X Interface, Top
 
 @include faq.texi
 
