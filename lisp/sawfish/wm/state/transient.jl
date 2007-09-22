@@ -195,7 +195,8 @@ the level of any transient windows it has."
 		  (not (window-mapped-p parent))
 		  (not (window-visible-p parent))
 		  (window-outside-viewport-p parent)
-		  (not (window-really-wants-input-p parent)))
+		  (not (window-really-wants-input-p parent))
+                  (window-get parent 'desktop))
 	  ;; if no parent, choose the topmost window (if in click-to-focus
 	  ;; mode) or the window under the pointer otherwise
 	  (if (eq focus-mode 'click)
