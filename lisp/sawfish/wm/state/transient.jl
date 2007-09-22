@@ -154,22 +154,26 @@ the level of any transient windows it has."
 
 ;;; hooks
 
+  ;; 1. Transients of the currently focused window get focus.
+  ;; 2. Transients of root belonging to the same window group as the
+  ;;    currently focused window get focus, unless the currently focused
+  ;;    window is also transient (wacky special case code in transient-of-p).
+  ;; 3. Other transients for root or non-transients may get focus depending
+  ;;    on options (yes, we also handle non-transients).
   (define (transient-map-window w)
-    (cond ((and (window-transient-p w)
-		(window-really-wants-input-p w)
-		(window-visible-p w)
-		(input-focus)
-		(transient-of-p w (input-focus) #:allow-root t))
-	   (set-input-focus w))
-	  ((and (or (and focus-windows-when-mapped
-			 (not (window-get w 'never-focus))
-			 (not (window-get w 'inhibit-focus-when-mapped)))
-		    (window-get w 'focus-when-mapped))
-		(or (not (window-transient-p w))
-		    (eql (window-transient-p w) (root-window-id)))
-		(window-really-wants-input-p w)
-		(window-visible-p w))
-	   (set-input-focus w))))
+    (when (and (window-really-wants-input-p w)
+               (window-visible-p w)
+               (or (let ((focus (input-focus)))
+                     (and focus (transient-of-p w focus #:allow-root t)))
+                   (let ((x-for (window-transient-p w)))
+                     (and (or (not x-for)
+                              (eql x-for (root-window-id)))
+                          (or (and
+                               focus-windows-when-mapped
+                               (not (window-get w 'never-focus))
+                               (not (window-get w 'inhibit-focus-when-mapped)))
+                              (window-get w 'focus-when-mapped))))))
+      (set-input-focus w)))
 
   ;; If a transient window gets unmapped that currently has the input
   ;; focus, pass it (the focus) to its parent. Otherwise, pass the focus
