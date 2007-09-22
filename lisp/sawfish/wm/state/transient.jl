@@ -158,16 +158,19 @@ the level of any transient windows it has."
   ;; 2. Transients of root belonging to the same window group as the
   ;;    currently focused window get focus, unless the currently focused
   ;;    window is also transient (wacky special case code in transient-of-p).
-  ;; 3. Other transients for root or non-transients may get focus depending
-  ;;    on options (yes, we also handle non-transients).
+  ;; 3. Other transients for root, transients for a desktop window
+  ;;    or non-transients may get focus depending on options (yes, we
+  ;;    also handle non-transients).
   (define (transient-map-window w)
     (when (and (window-really-wants-input-p w)
                (window-visible-p w)
                (or (let ((focus (input-focus)))
                      (and focus (transient-of-p w focus #:allow-root t)))
-                   (let ((x-for (window-transient-p w)))
-                     (and (or (not x-for)
-                              (eql x-for (root-window-id)))
+                   (let ((x-for-id (window-transient-p w)))
+                     (and (or (not x-for-id)
+                              (eql x-for-id (root-window-id))
+                              (let ((x-for (get-window-by-id x-for-id)))
+                                (and x-for (window-get x-for 'desktop))))
                           (or (and
                                focus-windows-when-mapped
                                (not (window-get w 'never-focus))
