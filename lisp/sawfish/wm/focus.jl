@@ -138,7 +138,9 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
     (lambda (w action . args)
       (case action
 	((pointer-in)
-	 (when (window-really-wants-input-p w)
+	 (when (and (window-really-wants-input-p w)
+                    ;; ignore grab/ungrab enter events
+                    (eq (car args) 'normal))
 	   (set-input-focus w)))
 	((pointer-out)
 	 ;; ignore grab/ungrab leave events
@@ -152,10 +154,12 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	   (warp-cursor-to-window w))))))
 
   (define-focus-mode 'enter-only
-    (lambda (w action)
+    (lambda (w action . args)
       (case action
 	((pointer-in)
-	 (when (window-really-wants-input-p w)
+	 (when (and (window-really-wants-input-p w)
+                    ;; ignore grab/ungrab enter events
+                    (eq (car args) 'normal))
 	   (set-input-focus w)))
 	((warp-if-necessary)
 	 (let ((current (query-pointer-window)))
