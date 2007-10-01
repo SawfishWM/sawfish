@@ -192,15 +192,15 @@ the level of any transient windows it has."
 			 (or (window-order-most-recent
 			      #:windows (delq w (windows-in-group w)))
 			     (get-window-by-id (window-transient-p w))))))
-	(if (or (not parent)
-                (not (window-mapped-p parent))
-                (not (window-visible-p parent))
-                (window-outside-viewport-p parent)
-                (not (window-really-wants-input-p parent))
-                (window-get parent 'desktop))
-            ;; No parent to give focus back to.
-            (focus-revert)
-          (set-input-focus parent)))))
+	(if (and parent
+                 (window-mapped-p parent)
+                 (window-visible-p parent)
+                 (not (window-outside-viewport-p parent))
+                 (window-really-wants-input-p parent)
+                 (not (window-get parent 'desktop)))
+            (set-input-focus parent)
+          ;; No parent to give focus back to.
+          (focus-revert)))))
 
   (add-hook 'map-notify-hook transient-map-window)
   (add-hook 'unmap-notify-hook transient-unmap-window)
