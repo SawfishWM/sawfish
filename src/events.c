@@ -21,6 +21,7 @@
 
 #include "sawmill.h"
 #include <limits.h>
+#include <stdint.h>
 #include <string.h>
 #include <time.h>
 #include <X11/extensions/shape.h>
@@ -641,7 +642,10 @@ client_message (XEvent *ev)
     case 32:
 	data = Fmake_vector (rep_MAKE_INT(5), Qnil);
 	for (i = 0; i < 5; i++)
-	    rep_VECTI(data,i) = rep_make_long_uint (ev->xclient.data.l[i]);
+	{
+	     unsigned long l = (uint32_t) ev->xclient.data.l[i];
+	     rep_VECTI(data,i) = rep_make_long_uint (l);
+	}
 	break;
 
     default:
