@@ -1,5 +1,5 @@
 ;; sm-save.jl -- session manager code to save the current session
-;; $Id$
+;; $Id: save.jl,v 1.10 2001/01/29 01:34:37 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -73,6 +73,7 @@
 		      (user-login-name) (system-name)
 		      sawfish-version (current-time-string))
 	      (map-windows (lambda (w)
-			     (sm-print-alist file (sm-get-window-state w))))
+                             (and (not (desktop-window-p w))
+                              (sm-print-alist file (sm-get-window-state w)))))
 	      t)
 	  (close-file file))))))
