@@ -1,5 +1,5 @@
 ;; workspace.jl -- similar to virtual desktops
-;; $Id$
+;; $Id: workspace.jl,v 1.162 2003/04/03 02:50:12 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -562,7 +562,7 @@ window, one of `stop', `keep-going', `wrap-around'")
 	(call-hook 'workspace-state-change-hook))))
 
   (define (select-workspace space #!optional dont-focus inner-thunk)
-    (select-workspace* space dont-focus inner-thunk))
+    (select-workspace* space #:dont-focus dont-focus #:inner-thunk inner-thunk))
 
   ;; return a list of all windows on workspace index SPACE
   (define (workspace-windows
