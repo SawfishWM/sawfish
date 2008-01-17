@@ -264,9 +264,10 @@ displayed. See the `display-message' function for more details.")
   (defun prompt-update-display ()
     (let ((result (if prompt-display-fun
 		      (prompt-display-fun prompt-result)
-		    prompt-result)))
-      (display-message (concat (prompt-format-completions)
-			       "\n\n"
+		   prompt-result))
+	 (completions (prompt-format-completions)))
+      (display-message (concat completions
+			      (when completions "\n\n")
 			       prompt-prompt
 			       (substring result 0 prompt-position)
 			       ?| (substring result prompt-position))
