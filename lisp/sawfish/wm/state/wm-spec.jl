@@ -1,6 +1,6 @@
 ;; wm-spec.jl -- implement the new (GNOME/KDE) wm hints spec
 
-;; $Id$
+;; $Id: wm-spec.jl,v 1.49 2005/07/01 16:04:50 jsh Exp $
 
 ;; Copyright (C) 1999, 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -519,7 +519,12 @@
 	 (set-viewport (aref data 0) (aref data 1)))
 
 	((_NET_CURRENT_DESKTOP)
-	 (select-workspace (workspace-id-from-logical (aref data 0))))
+         ; KDE spews _NET_CURRENT_DESKTOP( -1) messages so often that it
+         ; is best to just ignore out of bounds errors silently.
+         (let ((ws (workspace-id-from-logical (aref data 0)))
+               (limits (workspace-limits)))
+           (if (<= (car limits) ws (cdr limits))
+               (select-workspace ws))))
 
 	((_NET_DESKTOP_NAMES)
 	 ;; XXX this is kind of broken now we use workspace-names to
