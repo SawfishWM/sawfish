@@ -514,8 +514,9 @@ add_window (Window id)
     return w;
 }
 
-/* Remove W from the managed windows. If DESTROYED is nil, then the
-   window will be reparented back to the root window */
+/* Remove W from the managed windows. If DESTROYED is nil and
+   the window is currently reparented by us, it will be reparented back to
+   the root window */
 void
 remove_window (Lisp_Window *w, bool destroyed, bool from_error)
 {

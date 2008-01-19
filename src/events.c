@@ -693,10 +693,13 @@ map_request (XEvent *ev)
     Lisp_Window *w = find_window_by_id (id);
     if (w == 0)
     {
+        /* Also adds the frame. */
 	w = add_window (id);
 	if (w == 0)
+	{
+	    fprintf (stderr, "warning: failed to allocate a window\n");
 	    return;
-
+	}
 	if (w->wmhints && w->wmhints->flags & StateHint
 	    && w->wmhints->initial_state == IconicState)
 	{
@@ -740,10 +743,13 @@ reparent_notify (XEvent *ev)
 	if (ev->xreparent.parent != root_window
 	    && ev->xreparent.parent != w->frame)
 	{
-	    /* Not us doing the reparenting.. */
+	    /* The window is no longer on our turf and we must not
+	       reparent it to the root. -- thk */
+	    w->reparented = FALSE;
+	    XRemoveFromSaveSet (dpy, w->id);
+
+	    /* Not us doing the reparenting. */
 	    remove_window (w, FALSE, FALSE);
-	    XReparentWindow (dpy, ev->xreparent.window, ev->xreparent.parent,
-			     ev->xreparent.x, ev->xreparent.y);
 	}
 	Fcall_window_hook (Qreparent_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
@@ -761,6 +767,10 @@ map_notify (XEvent *ev)
 	{
 	    /* arrgh, the window changed its override redirect status.. */
 	    remove_window (w, FALSE, FALSE);
+#if 0
+	    fprintf(stderr, "warning: I've had it with window %#lx\n",
+		    (long)(w->id));
+#endif
 	}
 	else
 	{
@@ -769,11 +779,11 @@ map_notify (XEvent *ev)
 	    w->attr.height = wa.height;
 
 	    w->mapped = TRUE;
+	    /* This should not happen.  The window should have been
+	       framed at the map request. -- thk */
 	    if (w->frame == 0)
-		create_window_frame (w);
-	    install_window_frame (w);
-	    if (w->visible)
-		XMapWindow (dpy, w->frame);
+		fprintf (stderr, "warning: window %#1x has no frame\n",
+			 (long)(w->id));
 	    Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 	}
     }
@@ -786,6 +796,9 @@ unmap_notify (XEvent *ev)
     if (w != 0 && ev->xunmap.window == w->id
 	&& (ev->xunmap.event == w->id || ev->xunmap.send_event))
     {
+	int being_reparented = FALSE;
+	XEvent reparent_ev;
+
 	w->mapped = FALSE;
 	if (w->reparented)
 	{
@@ -794,11 +807,32 @@ unmap_notify (XEvent *ev)
 		XUnmapWindow (dpy, w->frame);
 		reset_frame_parts (w);
 	    }
-	    /* Removing the frame reparents the client window back to
-	       the root. This means that we receive the next MapRequest
-	       for the window. */
-	    remove_window_frame (w);
-	    destroy_window_frame (w, FALSE);
+	    /* Careful now.  It is possible that the unmapping was
+	       caused by someone else reparenting the window.
+	       Removing the frame involves reparenting the window to
+	       the root.  Bad things may happen if we do that while
+	       a different reparenting is in progress. -- thk */
+	    being_reparented = XCheckTypedWindowEvent (dpy, w->id,
+						       ReparentNotify,
+						       &reparent_ev);
+	    if (!being_reparented)
+	    {
+	        /* Removing the frame reparents the client window back to
+		   the root. This means that we receive the next MapRequest
+		   for the window. */
+		remove_window_frame (w);
+		destroy_window_frame (w, FALSE);
+	    }
+
+	    /* Handle a possible race condition: if the client
+	       withdrew the window while we were in the process of
+	       mapping it, the window may be mapped now.  -- thk */
+	    if (ev->xunmap.send_event && !w->client_unmapped)
+	    {
+		before_local_map (w);
+		XUnmapWindow (dpy, w->id);
+		after_local_map (w);
+	    }
 	}
 	Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 
@@ -806,7 +840,10 @@ unmap_notify (XEvent *ev)
 
 	/* Changed the window-handling model, don't let windows exist
 	   while they're withdrawn */
-	remove_window (w, FALSE, FALSE);
+	if (being_reparented)
+	    reparent_notify(&reparent_ev);
+	else
+	    remove_window (w, FALSE, FALSE);
     }
 }
 
