@@ -311,7 +311,11 @@ fontset_finalize (Lisp_Font *f)
 static int
 fontset_measure (Lisp_Font *f, u_char *string, size_t length)
 {
+#ifdef X_HAVE_UTF8_STRING
+    return Xutf8TextEscapement (f->font, string, length);
+#else
     return XmbTextEscapement (f->font, string, length);
+#endif
 }
 
 static void
@@ -322,8 +326,11 @@ fontset_draw (Lisp_Font *f, u_char *string, size_t length,
 
     gcv.foreground = fg->pixel;
     XChangeGC (dpy, gc, GCForeground, &gcv);
-
+#ifdef X_HAVE_UTF8_STRING
+    Xutf8DrawString (dpy, id, f->font, gc, x, y, string, length);
+#else
     XmbDrawString (dpy, id, f->font, gc, x, y, string, length);
+#endif
 }
 
 static const Lisp_Font_Class fontset_class = {
@@ -365,7 +372,7 @@ xft_measure (Lisp_Font *f, u_char *string, size_t length)
 {
     XGlyphInfo info;
 
-    XftTextExtents8 (dpy, f->font, string, length, &info);
+    XftTextExtentsUtf8 (dpy, f->font, string, length, &info);
 
     return info.xOff; 
 }
@@ -389,7 +396,7 @@ xft_draw (Lisp_Font *f, u_char *string, size_t length,
     xft_color.color.blue = fg->blue;
     xft_color.color.alpha = fg->alpha;
 
-    XftDrawString8 (draw, &xft_color, f->font,
+    XftDrawStringUtf8 (draw, &xft_color, f->font,
 		    x, y, string, length);
 }
 
@@ -475,24 +482,14 @@ pango_finalize (Lisp_Font *f)
 static int
 pango_measure (Lisp_Font *f, u_char *string, size_t length)
 {
-    gsize r, w;
-    u_char *utf8str;
     PangoLayout *layout;
     PangoRectangle rect;
-
-    utf8str = g_locale_to_utf8 (string, length, &r, &w, NULL);
-    if (utf8str != NULL)
-    {
-	string = utf8str;
-	length = w;
-    }
 
     layout = pango_layout_new (pango_context);
     pango_layout_set_text (layout, string, length);
 
     pango_layout_get_extents (layout, NULL, &rect);
 
-    g_free (utf8str);
     g_object_unref (layout);
  
     return rect.width / PANGO_SCALE;
@@ -529,8 +526,6 @@ pango_draw (Lisp_Font *f, u_char *string, size_t length,
 {
     static XftDraw *draw;
     XftColor xft_color;
-    gsize r, w;
-    u_char *utf8str;
     PangoLayout *layout;
     PangoLayoutIter *iter;
 
@@ -545,13 +540,6 @@ pango_draw (Lisp_Font *f, u_char *string, size_t length,
     xft_color.color.blue = fg->blue;
     xft_color.color.alpha = fg->alpha;
 
-    utf8str = g_locale_to_utf8 (string, length, &r, &w, NULL);
-    if (utf8str != NULL)
-    {
-	string = utf8str;
-	length = w;
-    }
-
     layout = pango_layout_new (pango_context);
     pango_layout_set_text (layout, string, length);
     iter = pango_layout_get_iter (layout);
@@ -565,7 +553,6 @@ pango_draw (Lisp_Font *f, u_char *string, size_t length,
 			 line, x + rect.x / PANGO_SCALE, y);
     } while (pango_layout_iter_next_line (iter));
 
-    g_free (utf8str);
     g_object_unref (layout);
     pango_layout_iter_free (iter);
 }

@@ -57,7 +57,7 @@ extern Visual *preferred_visual;
 extern Window root_window, no_focus_window;
 extern Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols,
     xa_wm_delete_window, xa_wm_colormap_windows, xa_wm_take_focus,
-    xa_compound_text;
+  xa_compound_text, xa_wm_net_name, xa_wm_net_icon_name, xa_utf8_string;
 extern int shape_event_base, shape_error_base;
 extern repv Qdisplay_name, Qcanonical_display_name;
 extern bool sys_init (char *program_name);

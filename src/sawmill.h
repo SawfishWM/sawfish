@@ -147,6 +147,7 @@ typedef struct lisp_window {
     Window *cmap_windows;
     int n_cmap_windows;
     repv full_name, name, icon_name;
+    repv net_name, net_icon_name;
     int frame_vis;
     repv icon_image;
 

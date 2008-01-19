@@ -356,6 +356,85 @@ remove_window_frame (Lisp_Window *w)
     }
 }
 
+/* Queries X properties to get the window {icon,}name */
+static void
+get_window_name(Lisp_Window * w)
+{
+  char *tem;
+  XTextProperty prop;
+
+  /* We only try to use the utf8 properties if our xlib supports them */
+#ifdef X_HAVE_UTF8_STRING
+  if (XGetTextProperty (dpy, w->id, &prop, xa_wm_net_name) && prop.value) {
+    if (prop.nitems > 0)
+      {
+        char **list;
+	int count;
+	prop.nitems = strlen(prop.value);
+	if (Xutf8TextPropertyToTextList (dpy, &prop, &list, &count)
+	    >= Success)
+	  {
+	    if (count > 0)
+	      w->net_name = rep_string_dup (list[0]);
+	    XFreeStringList (list);
+	  }
+      }
+  }
+
+  if (XGetTextProperty (dpy, w->id, &prop, xa_wm_net_icon_name) && prop.value) {
+    if (prop.nitems > 0)
+      {
+        char **list;
+	int count;
+	prop.nitems = strlen(prop.value);
+	if (Xutf8TextPropertyToTextList (dpy, &prop, &list, &count)
+	    >= Success)
+	  {
+	    if (count > 0)
+	      w->net_icon_name = rep_string_dup (list[0]);
+	    XFreeStringList (list);
+	  }
+      }
+  }
+
+  /* If we got the _NET names, there's no point in querying the others, 
+     as they won't be used anyways. */
+  if (w->net_name != Qnil)
+    return;
+
+#endif
+
+  if (XGetWMName (dpy, w->id, &prop) && prop.value)
+    {
+      if (prop.nitems > 0)
+	{
+	  char **list;
+	  int count;
+	  prop.nitems = strlen(prop.value);
+	  if (XmbTextPropertyToTextList (dpy, &prop, &list, &count)
+	      >= Success)
+	    {
+	      if (count > 0)
+		w->name = rep_string_dup (g_locale_to_utf8(list[0],
+							   -1, NULL, NULL, NULL));
+	      XFreeStringList (list);
+	    }
+	}
+      XFree (prop.value);
+    }
+  w->full_name = w->name;
+  
+  if (XGetIconName (dpy, w->id, &tem))
+    {
+      w->icon_name = rep_string_dup (g_locale_to_utf8(tem,
+						      -1, NULL, NULL, NULL));
+      XFree (tem);
+    }
+  else
+    w->icon_name = w->name;
+
+}
+
 /* Add the top-level window ID to the manager's data structures */
 Lisp_Window *
 add_window (Window id)
@@ -369,7 +448,6 @@ add_window (Window id)
 	XWindowChanges xwc;
 	u_int xwcm;
 	long supplied;
-	XTextProperty prop;
 
 	DB(("add_window (%lx)\n", id));
 
@@ -389,6 +467,8 @@ add_window (Window id)
 	w->frame_style = Qnil;;
 	w->icon_image = rep_NULL;
 	w->name = rep_null_string ();
+	w->net_name = Qnil;
+	w->net_icon_name = Qnil;
 
 	/* have to put it somewhere until it finds the right place */
 	insert_in_stacking_list_above_all (w);
@@ -401,31 +481,7 @@ add_window (Window id)
 	DB(("  orig: width=%d height=%d x=%d y=%d\n",
 	    w->attr.width, w->attr.height, w->attr.x, w->attr.y));
 
-	if (XGetWMName (dpy, id, &prop) && prop.value)
-	{
-	    if (prop.nitems > 0)
-	    {
-		char **list;
-		int count;
-		prop.nitems = strlen(prop.value);
-		if (XmbTextPropertyToTextList (dpy, &prop, &list, &count)
-		    >= Success)
-		{
-		    if (count > 0)
-			w->name = rep_string_dup (list[0]);
-		    XFreeStringList (list);
-		}
-	    }
-	    XFree (prop.value);
-	}
-	w->full_name = w->name;
-	if (XGetIconName (dpy, id, &tem))
-	{
-	    w->icon_name = rep_string_dup (tem);
-	    XFree (tem);
-	}
-	else
-	    w->icon_name = w->name;
+	get_window_name(w);
 
 	w->wmhints = XGetWMHints (dpy, id);
 	if (!XGetWMNormalHints (dpy, w->id, &w->hints, &supplied))
@@ -700,8 +756,10 @@ window-name WINDOW
 Return the name of window object WINDOW.
 ::end:: */
 {
+    Lisp_Window * w;
     rep_DECLARE1(win, WINDOWP);
-    return VWIN(win)->name;
+    w = VWIN(win);
+    return w->net_name != Qnil ? w->net_name : w->name;
 }
 
 DEFUN("window-full-name", Fwindow_full_name, Swindow_full_name,
@@ -724,8 +782,10 @@ window-icon-name WINDOW
 Return the name of window object WINDOW's icon.
 ::end:: */
 {
+    Lisp_Window * w;
     rep_DECLARE1(win, WINDOWP);
-    return VWIN(win)->icon_name;
+    w = VWIN(win);
+    return w->net_icon_name != Qnil ? w->net_icon_name : w->icon_name;
 }
 
 DEFUN("window-mapped-p", Fwindow_mapped_p, Swindow_mapped_p,
@@ -1420,6 +1480,8 @@ window_mark (repv win)
     rep_MARKVAL(VWIN(win)->name);
     rep_MARKVAL(VWIN(win)->full_name);
     rep_MARKVAL(VWIN(win)->icon_name);
+    rep_MARKVAL(VWIN(win)->net_name);
+    rep_MARKVAL(VWIN(win)->net_icon_name);
     rep_MARKVAL(VWIN(win)->icon_image);
 }
 
