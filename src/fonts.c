@@ -485,6 +485,12 @@ pango_measure (Lisp_Font *f, u_char *string, size_t length)
     PangoLayout *layout;
     PangoRectangle rect;
 
+    {
+	PangoFontDescription *desc = pango_font_describe(f->font);
+	pango_context_set_font_description(pango_context, desc);
+	pango_font_description_free(desc);
+    }
+
     layout = pango_layout_new (pango_context);
     pango_layout_set_text (layout, string, length);
 
@@ -539,6 +545,12 @@ pango_draw (Lisp_Font *f, u_char *string, size_t length,
     xft_color.color.green = fg->green;
     xft_color.color.blue = fg->blue;
     xft_color.color.alpha = fg->alpha;
+
+    {
+	PangoFontDescription *desc = pango_font_describe(f->font);
+	pango_context_set_font_description(pango_context, desc);
+	pango_font_description_free(desc);
+    }
 
     layout = pango_layout_new (pango_context);
     pango_layout_set_text (layout, string, length);
