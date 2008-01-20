@@ -1,3 +1,57 @@
+2008-01-20  Janek Kozicki <cosurgi@gmail.com>
+	* configure.in: version 1.3.2
+	
+	* documentation from Derek Upham v0.12
+	
+	* Updated Occitan translation (Yannig Marchegay)
+	
+	* patch by Luis Rodrigo Gallardo Cruz taken upstream from debian:
+	http://sawfish.wikia.com/wiki/Noprop_desktop_save
+	Sawfish saves the size of the desktop window, and although nautilus
+	requests the widget to be the same size as your screen it's forced to
+	the size that sawfish saved.
+	
+	* patch by Rodrigo Gallardo: http://sawfish.wikia.com/wiki/Update_desktop_file
+	The current Sawfish.desktop file did not comply with the
+	freedesktop.org standard. 
+	
+	* patch by GSR: http://sawfish.wikia.com/wiki/Fix_select_workspace
+	fix-select-workspace, Fixes select-workspace in
+	lisp/sawfish/wm/workspace.jl to make sure it uses key params in its
+	call to select-workspace*
+	
+	* patch by Thadeu Lima de Souza Cascardo:
+	http://sawfish.wikia.com/wiki/Fix_Xlib_client_message
+	sawfish had problems with 64 bit client messages.
+	
+	* patch by Sven Schoenung: http://sawfish.wikia.com/wiki/Blank_lines_in_prompt
+	The window opened by the prompt function shows two blank lines before
+	the prompt even when they aren't needed.
+	
+	* patch by Timo Korvola: http://sawfish.wikia.com/wiki/Reparenting_cleanup
+	This fixes reparenting fights that occur between Sawfish and the KDE
+	system tray. Both try to reparent system tray icons as they are
+	mapped, leading to a lot of flicker and an unpredictable end result.
+	
+	* patch by Rodrigo Gallardo: http://sawfish.wikia.com/wiki/Net_wm_properties
+	strings are re-encoded in UTF8
+	window titles will be set correctly regardless of title encoding
+	(useful when browsing foreign pages).
+	
+	* patch by Timo Korvola: http://sawfish.wikia.com/wiki/KDE_system_tray_fix
+	With this it will ignore out of bounds _NET_CURRENT_DESKTOP requests silently.
+	KDE system tray apps have a nasty habit of sending
+	_NET_CURRENT_DESKTOP client messages with a parameter of -1, which
+	confuses Sawfish. This patch adds some bounds checking.
+	
+	* patch by Harald van Dijk: http://sawfish.wikia.com/wiki/KDE_menus_focus
+	QT applications were losing focus when menu was active.
+
+	* patch by Fuchur and Andrea Vettorello:
+	http://sawfish.wikia.com/wiki/Multihead_placed_patch
+	fixes bad placement on xinerama/dualhead. Previous all windows always
+	appeared on first monitor, when using centered/centered-on-parent
+
 2007-07-27  Janek Kozicki <cosurgi@gmail.com>
 	* configure.in: version 1.3.1 - This version is to let people know
 	that Sawfish is being revived by the community, and we are awaiting

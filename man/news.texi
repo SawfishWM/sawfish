@@ -6,6 +6,48 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+@heading 1.3.2
+
+@itemize @bullet
+
+@item The 1.3.2 version is released with bugfixes submitted by sawfish community
+
+@item Strings are re-encoded in UTF-8. Window titles will be set correctly
+regardless of title encoding (Rodrigo Gallardo)
+
+@item updated documentation to v0.12 (Derek Upham)
+
+@item added Occitan Lanaguage (Yannig Marchegay)
+
+@item Bug fixes:
+
+@itemize @minus
+
+@item Nautilus desktop window can now restore its size properly (Rodrigo Gallardo)
+
+@item Sawfish.desktop file now complies with freedesktop.org standard (Rodrigo Gallardo)
+
+@item Fix select workspace to make sure it calls with right arguments (GSR)
+
+@item Fix 64 bit client messages (Thadeu Lima de Souza Cascardo)
+
+@item Don't display unneeded blank lines when window is opened by prompt
+function (Sven Schoenung)
+
+@item KDE system tray no longer fighs with sawfish to reparent a tray icon
+(Timo Korvola)
+
+@item Add bounds checking on _NET_CURRENT_DESKTOP requests (Timo Korvola)
+
+@item QT applications no longer lose focus when menu is active (Harald van Dijk)
+
+@item Corrected window placement in xinerama/dualhead when using
+centered/centered-on-parent (Fuchur, with comments by Andrea Vettorello)
+
+@end itemize
+@end itemize
+
+
 @heading 1.3.1
 
 @itemize @bullet
