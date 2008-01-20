@@ -1,6 +1,6 @@
 #| sawfish.wm.misc bootstrap
 
-   $Id$
+   $Id: misc.jl,v 1.12 2002/10/04 06:33:23 jsh Exp $
 
    Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -119,29 +119,34 @@ list of strings DIRS."
 
 (define (current-head #!optional (w (input-focus)))
   "Return the id of the `current' head."
-  (or (and w (let ((point (window-position w))
-		   (dims (window-dimensions w)))
-	       (find-head (+ (car point) (quotient (car dims) 2))
-			  (+ (cdr point) (quotient (cdr dims) 2)))))
-      (pointer-head)))
+  (require 'sawfish.wm.windows)
+  (if (not (desktop-window-p w))
+      (or (and w (let ((point (window-position w))
+                       (dims (window-dimensions w)))
+                   (find-head (+ (car point) (quotient (car dims) 2))
+                              (+ (cdr point) (quotient (cdr dims) 2)))))
+          (pointer-head))
+    (pointer-head)))
 
-(define (current-head-dimensions #!optional w)
+(define (current-head-dimensions #!optional (w (input-focus)))
   "Return a cons-cell defining the size in pixels of the current head (that
-containing the window W, or the pointer if W is false). Returns the screen
-dimensions if no such head can be identified."
-  (let ((head (current-head w)))
-    (if head
-	(head-dimensions head)
-      (screen-dimensions))))
+containing the window W, or containing the window with input focus if W is
+false). Returns the screen dimensions if no such head can be identified."
+  (or (and w (let ((head (current-head w)))
+               (if head
+                   (head-dimensions head)
+                 (screen-dimensions))))
+      (head-dimensions (pointer-head))))
 
-(define (current-head-offset #!optional w)
+(define (current-head-offset #!optional (w (input-focus)))
   "Return a cons-cell defining the origin of the current head (that
-containing the window W, or the pointer if W is false). Returns '(0 . 0)
-if no such head can be identified."
-  (let ((head (current-head w)))
-    (if head
-	(head-offset head)
-      (cons 0 0))))
+containing the window W, or containing the window with input focus if W is
+false). Returns '(0 . 0) if no such head can be identified."
+  (or (and w (let ((head (current-head w)))
+               (if head
+                   (head-offset head)
+                 (cons 0 0))))
+      (head-offset (pointer-head))))
 
 (define (load-module name)
   "Ensure that the module called NAME has been loaded. Note that this does

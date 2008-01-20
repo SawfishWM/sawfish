@@ -18,7 +18,7 @@
    along with sawfish; see the file COPYING.  If not, write to
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id$
+   $Id: top-left.jl,v 1.6 2002/04/24 06:57:03 jsh Exp $
 
    Authors: John Harper <jsh@eazel.com>
 |#
@@ -86,7 +86,7 @@
 	    (t (loop (next-position point))))))
 
   (define (place-window-top-left w)
-    (let* ((workarea (calculate-workarea #:window w))
+    (let* ((workarea (calculate-workarea #:window w #:head (current-head)))
 	   (dims (window-dimensions w))
 	   (f-dims (window-frame-dimensions w))
 	   (hints (window-size-hints w))
