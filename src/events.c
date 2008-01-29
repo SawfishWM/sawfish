@@ -30,6 +30,7 @@
 #endif
 #include <X11/Xresource.h>
 #include <X11/Xatom.h>
+#include <glib.h>
 
 /* Lookup table of event handlers */
 void (*event_handlers[LASTEvent])(XEvent *ev);

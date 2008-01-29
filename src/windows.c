@@ -23,6 +23,7 @@
 #include <assert.h>
 #include <string.h>
 #include <X11/extensions/shape.h>
+#include <glib.h>
 
 Lisp_Window *window_list;
 int window_type;
