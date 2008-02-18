@@ -1,6 +1,6 @@
 #| windows.jl -- miscellaneous window mgmt functions
 
-   $Id$
+   $Id: windows.jl,v 1.32 2003/03/27 06:30:30 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -201,7 +201,7 @@ supported by client window W."
 	     (nreverse out))))))
 
   (define (window-supports-wm-protocol-p w atom)
-    "Return true if winow W includes ATOM in its `WM_PROTOCOLS' property."
+    "Return true if window W includes ATOM in its `WM_PROTOCOLS' property."
     (let* ((prop (get-x-property w 'WM_PROTOCOLS))
 	   (data (and prop (eq (car prop) 'ATOM) (nth 2 prop))))
       (when data
@@ -437,10 +437,24 @@ returned in the list."
   (define (call-after-property-changed prop fun)
     "Arrange for function FUN to be called with arguments (WINDOW PROPERTY
 STATE) when the X11 property named PROP (a symbol) changes. PROP may also
-be a list of property names to monitor."
-    (setq prop-changes (cons (cons (if (listp prop)
-				       prop
-				     (list prop)) fun) prop-changes)))
+be a list of property names to monitor.
+
+Kluge: if PROP is `WM_NAME', it is replaced with `(WM_NAME _NET_WM_NAME)'.
+This is done to cope with themes that want to update title bars on name
+changes but only watch `WM_NAME'.  A warning is printed on stderr when
+this substitution occurs.  Those themes should really be fixed."
+    (setq prop-changes
+          (cons
+           (cons (cond ((listp prop) prop)
+                       ((eq prop 'WM_NAME)
+                        (format standard-error
+"(call-after-property-changed 'WM_NAME ...) should probably be
+(call-after-property-changed '(WM_NAME _NET_WM_NAME) ...);
+use '(WM_NAME) if you really want only WM_NAME\n")
+                        '(WM_NAME _NET_WM_NAME))
+                       (t (list prop)))
+                 fun)
+           prop-changes)))
   
   (add-hook 'property-notify-hook
 	    (lambda (w prop state)

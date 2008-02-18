@@ -351,5 +351,5 @@
 		       ((shaped-transient) shaped-transient-frame))))
 
   (call-after-property-changed
-   'WM_NAME (lambda ()
-	      (rebuild-frames-with-style 'microGUI))))
+   '(WM_NAME _NET_WM_NAME) (lambda ()
+                             (rebuild-frames-with-style 'microGUI))))

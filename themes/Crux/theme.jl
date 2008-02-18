@@ -16,7 +16,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id: theme.jl,v 1.7 2001/05/01 19:44:46 jsh Exp $
+   $Id: theme.jl,v 1.8 2002/03/29 04:00:23 jsh Exp $
 
    Authors: John Harper <jsh@eazel.com>
 |#
@@ -457,4 +457,4 @@
 (add-frame-style 'Crux get-frame)
 
 ;; recalibrate frames when the window-name changes
-(call-after-property-changed 'WM_NAME rebuild-frame)
+(call-after-property-changed '(WM_NAME _NET_WM_NAME) rebuild-frame)
