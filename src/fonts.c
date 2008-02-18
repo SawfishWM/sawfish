@@ -459,16 +459,21 @@ pango_load (Lisp_Font *f)
     pango_context_set_font_description (pango_context, fontdesc);
     font = pango_context_load_font (pango_context, fontdesc);
 
-    if (!font)
+    if (!font) {
+        pango_font_description_free(fontdesc);
 	return FALSE;
+    }
 
     metrics = pango_font_get_metrics (font, language);
 
-    f->font = font;
     f->ascent = metrics->ascent / PANGO_SCALE;
     f->descent = metrics->descent / PANGO_SCALE;
 
     pango_font_metrics_unref (metrics);
+
+    f->font = fontdesc; // We save the font description, not the font itself!
+                        // That's because it seems we can't recover it perfectly
+                        // later, and the layout routines want a description
 
     return TRUE;
 }
@@ -476,7 +481,7 @@ pango_load (Lisp_Font *f)
 static void
 pango_finalize (Lisp_Font *f)
 {
-    g_object_unref (f->font);
+    pango_font_description_free (f->font);
 }
 
 static int
@@ -486,6 +491,7 @@ pango_measure (Lisp_Font *f, u_char *string, size_t length)
     PangoRectangle rect;
 
     layout = pango_layout_new (pango_context);
+    pango_layout_set_font_description(layout, f->font);
     pango_layout_set_text (layout, string, length);
 
     pango_layout_get_extents (layout, NULL, &rect);
@@ -541,6 +547,7 @@ pango_draw (Lisp_Font *f, u_char *string, size_t length,
     xft_color.color.alpha = fg->alpha;
 
     layout = pango_layout_new (pango_context);
+    pango_layout_set_font_description(layout, f->font);
     pango_layout_set_text (layout, string, length);
     iter = pango_layout_get_iter (layout);
 
