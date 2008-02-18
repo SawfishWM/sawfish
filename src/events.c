@@ -800,10 +800,15 @@ reparent_notify (XEvent *ev)
 	    w->reparented = FALSE;
 	    XRemoveFromSaveSet (dpy, w->id);
 
+            Fcall_window_hook (Qreparent_notify_hook,
+                               rep_VAL(w), Qnil, Qnil);
+
 	    /* Not us doing the reparenting. */
 	    remove_window (w, FALSE, FALSE);
 	}
-	Fcall_window_hook (Qreparent_notify_hook, rep_VAL(w), Qnil, Qnil);
+        else
+            Fcall_window_hook (Qreparent_notify_hook,
+                               rep_VAL(w), Qnil, Qnil);
     }
 }
 
@@ -888,14 +893,16 @@ unmap_notify (XEvent *ev)
 	}
 	Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 
-	XDeleteProperty (dpy, w->id, xa_wm_state);
-
 	/* Changed the window-handling model, don't let windows exist
 	   while they're withdrawn */
 	if (being_reparented)
 	    reparent_notify(&reparent_ev);
 	else
 	    remove_window (w, FALSE, FALSE);
+
+	/* This lets the client know that we are done, in case it wants
+	   to reuse the window. */
+	XDeleteProperty (dpy, ev->xunmap.window, xa_wm_state);
     }
 }
 

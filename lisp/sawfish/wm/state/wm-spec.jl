@@ -630,7 +630,9 @@
     (add-hook 'workarea-changed-hook update-workspace-hints)
     (add-hook 'configure-notify-hook update-on-configure-notify)
 
-    (add-hook 'add-window-hook update-client-list-hints)
+    ; Better not expose work in progress.  map-notify-hook gets
+    ; called after this anyway.
+    ;(add-hook 'add-window-hook update-client-list-hints)
     (add-hook 'destroy-notify-hook update-client-list-hints)
     (add-hook 'map-notify-hook update-client-list-hints)
     (add-hook 'unmap-notify-hook update-client-list-hints)
