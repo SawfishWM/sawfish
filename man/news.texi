@@ -6,6 +6,31 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+@heading 1.3.3
+
+@itemize @bullet
+
+@item The followup 1.3.3 version is released with bugfixes' fixes
+
+@item Bug fixes:
+@itemize @minus
+
+@item "Utf 8 names fix" by Timo Korvola: window titles with UTF-8 working and
+no openoffice crashes
+
+@item "Pango draw() ignores font" by Yuuki Harano and Rodrigo Gallardo: allows
+using pango fonts correctly.
+
+@item "Titlebar updates" by Harald van Dijk and Timo Korvola: don't forget to
+tell the running theme that window title length has changed.
+
+@item "KDE tray fix 2" by Timo Korvola: KDE is not always using freedesktop.org
+protocol so we need to adjust a few glitches.
+
+@end itemize
+@end itemize
+
+
 @heading 1.3.2
 
 @itemize @bullet
