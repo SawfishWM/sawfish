@@ -357,84 +357,72 @@ remove_window_frame (Lisp_Window *w)
     }
 }
 
+
+static repv
+text_prop_to_utf8 (XTextProperty *prop)
+{
+    repv rval = Qnil;
+    if (prop->value && prop->nitems > 0)
+    {
+        char **list;
+        int count;
+        prop->nitems = strlen(prop->value);
+#ifdef X_HAVE_UTF8_STRING
+        if (Xutf8TextPropertyToTextList (dpy, prop, &list, &count) >= Success)
+        {
+            if (count > 0)
+                rval = rep_string_dup (list[0]);
+            XFreeStringList (list);
+        }
+#else
+        if (XmbTextPropertyToTextList (dpy, prop, &list, &count) >= Success)
+        {
+            if (count > 0) {
+                gchar *ustr = g_locale_to_utf8(list[0], -1, NULL, NULL, NULL);
+                if (ustr)
+                {
+                    rval = rep_string_dup (ustr);
+                    g_free (ustr);
+                }
+            }
+            XFreeStringList (list);
+        }
+#endif
+    }
+    return rval;
+}
+
+
 /* Queries X properties to get the window {icon,}name */
 static void
-get_window_name(Lisp_Window * w)
+get_window_name(Lisp_Window *w)
 {
-  char *tem;
-  XTextProperty prop;
+    XTextProperty prop;
 
-  /* We only try to use the utf8 properties if our xlib supports them */
+    /* We only try to use the utf8 properties if our xlib supports them.
+       Otherwise conversion would have to go via the current locale, which
+       might lose some characters. */
 #ifdef X_HAVE_UTF8_STRING
-  if (XGetTextProperty (dpy, w->id, &prop, xa_wm_net_name) && prop.value) {
-    if (prop.nitems > 0)
-      {
-        char **list;
-	int count;
-	prop.nitems = strlen(prop.value);
-	if (Xutf8TextPropertyToTextList (dpy, &prop, &list, &count)
-	    >= Success)
-	  {
-	    if (count > 0)
-	      w->net_name = rep_string_dup (list[0]);
-	    XFreeStringList (list);
-	  }
-      }
-  }
-
-  if (XGetTextProperty (dpy, w->id, &prop, xa_wm_net_icon_name) && prop.value) {
-    if (prop.nitems > 0)
-      {
-        char **list;
-	int count;
-	prop.nitems = strlen(prop.value);
-	if (Xutf8TextPropertyToTextList (dpy, &prop, &list, &count)
-	    >= Success)
-	  {
-	    if (count > 0)
-	      w->net_icon_name = rep_string_dup (list[0]);
-	    XFreeStringList (list);
-	  }
-      }
-  }
-
-  /* If we got the _NET names, there's no point in querying the others, 
-     as they won't be used anyways. */
-  if (w->net_name != Qnil)
-    return;
-
+    if (XGetTextProperty (dpy, w->id, &prop, xa_wm_net_name))
+        w->net_name = text_prop_to_utf8 (&prop);
+    if (XGetTextProperty (dpy, w->id, &prop, xa_wm_net_icon_name))
+        w->net_icon_name = text_prop_to_utf8 (&prop);
 #endif
 
-  if (XGetWMName (dpy, w->id, &prop) && prop.value)
+    if (w->net_name == Qnil && XGetWMName (dpy, w->id, &prop))
     {
-      if (prop.nitems > 0)
-	{
-	  char **list;
-	  int count;
-	  prop.nitems = strlen(prop.value);
-	  if (XmbTextPropertyToTextList (dpy, &prop, &list, &count)
-	      >= Success)
-	    {
-	      if (count > 0)
-		w->name = rep_string_dup (g_locale_to_utf8(list[0],
-							   -1, NULL, NULL, NULL));
-	      XFreeStringList (list);
-	    }
-	}
-      XFree (prop.value);
+        repv name = text_prop_to_utf8 (&prop);
+        if (name != Qnil)
+            w->name = name;
     }
-  w->full_name = w->name;
+    w->full_name = w->name;
   
-  if (XGetIconName (dpy, w->id, &tem))
-    {
-      w->icon_name = rep_string_dup (g_locale_to_utf8(tem,
-						      -1, NULL, NULL, NULL));
-      XFree (tem);
-    }
-  else
-    w->icon_name = w->name;
-
+    if (w->net_icon_name == Qnil && XGetWMIconName (dpy, w->id, &prop))
+        w->icon_name = text_prop_to_utf8 (&prop);
+    if (w->icon_name == Qnil)
+        w->icon_name = w->name;
 }
+
 
 /* Add the top-level window ID to the manager's data structures */
 Lisp_Window *

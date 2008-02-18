@@ -480,106 +480,110 @@ motion_notify (XEvent *ev)
 
 static bool
 update_window_name(Lisp_Window * w, XPropertyEvent xproperty) {
-  u_char *prop;
-  Atom actual;
-  int format;
-  long nitems, bytes_after;
-  char **text_list;
-  XTextProperty tprop;
-  int count;
-  repv str = Qnil;
-  int convert_status;
+    u_char *prop;
+    Atom actual;
+    int format;
+    long nitems, bytes_after;
+    char **text_list;
+    XTextProperty tprop;
+    int count;
+    repv str = Qnil;
+    int convert_status;
 
-  if (xproperty.state != PropertyNewValue
-      || XGetWindowProperty (dpy, w->id, xproperty.atom,
-			     0, 200, False, AnyPropertyType, &actual,
-			     &format, &nitems,
-			     &bytes_after, &prop) != Success
-      || actual == None)
-    return FALSE;
+    if (xproperty.state != PropertyNewValue
+        || XGetWindowProperty (dpy, w->id, xproperty.atom,
+                               0, 200, False, AnyPropertyType, &actual,
+                               &format, &nitems,
+                               &bytes_after, &prop) != Success
+        || actual == None)
+        return FALSE;
 
-  if (format != 8 || WINDOW_IS_GONE_P (w))
-    return FALSE;
-
-  tprop.value = prop;
-  tprop.encoding = actual;
-  tprop.format = format;
-  tprop.nitems = strlen (prop);
-
-  if (actual == xa_compound_text || actual == XA_STRING) 
+    if (format != 8 || WINDOW_IS_GONE_P (w))
     {
-      convert_status = XmbTextPropertyToTextList (dpy, &tprop, &text_list, &count);
-      if (convert_status >= Success && count > 0) 
-	{
-	  char * utf8str = g_locale_to_utf8(text_list[0], -1, NULL, NULL, NULL);
-	  if (utf8str)
-	    str = rep_string_dup (utf8str);
-	}
-      XFreeStringList(text_list);
+        XFree (prop);
+        return FALSE;
     }
 
+    tprop.value = prop;
+    tprop.encoding = actual;
+    tprop.format = format;
+    tprop.nitems = strlen (prop);
+
 #ifdef X_HAVE_UTF8_STRING
-  if (actual == xa_utf8_string) 
+    if (actual == xa_compound_text || actual == XA_STRING
+        || actual == xa_utf8_string) 
     {
-      convert_status = Xutf8TextPropertyToTextList (dpy, &tprop, &text_list, &count);
-      if (convert_status >= Success && count > 0)
-	str = rep_string_dup (text_list[0]);
-      XFreeStringList(text_list);
+        convert_status = Xutf8TextPropertyToTextList (dpy, &tprop, &text_list,
+                                                      &count);
+        if (convert_status >= Success && count > 0)
+            str = rep_string_dup (text_list[0]);
+        XFreeStringList(text_list);
+    }
+#else
+    if (actual == xa_compound_text || actual == XA_STRING)
+    {
+        convert_status = XmbTextPropertyToTextList (dpy, &tprop, &text_list,
+                                                    &count);
+        if (convert_status >= Success) 
+        {
+            if (count > 0)
+            {
+                char * utf8str = g_locale_to_utf8(text_list[0], -1,
+                                                  NULL, NULL, NULL);
+                if (utf8str)
+                {
+                    str = rep_string_dup (utf8str);
+                    g_free (utf8str);
+                }
+            }
+            XFreeStringList(text_list);
+        }
     }
 #endif
 
-  XFree (prop);
+    XFree (prop);
   
-  if (str == Qnil)
-    return FALSE;
+    if (str == Qnil)
+        return FALSE;
 
-  if (xproperty.atom == xa_wm_net_name)
+    if (xproperty.atom == xa_wm_net_name
+        && str != Qnil && Fequal (w->net_name, str) == Qnil)
     {
-      if ( str != Qnil && Fequal (w->net_name, str) == Qnil)
-	{
-	  w->net_name = str;
-	  return TRUE;
-	}
+        w->net_name = str;
+        return TRUE;
     }
   
-  if (xproperty.atom == xa_wm_net_icon_name) 
+    if (xproperty.atom == xa_wm_net_icon_name
+        && str != Qnil && Fequal (w->net_icon_name, str) == Qnil)
     {
-      if ( str != Qnil && Fequal (w->net_icon_name, str) == Qnil)
-	{
-	  w->net_icon_name = str;
-	  return TRUE;
-	}
+        w->net_icon_name = str;
+        return TRUE;
     }
   
-  /* No point in updating the rest if we have the _NET ones. They won't
-     be used anyways. */
-  if (w->net_name != Qnil)
-    return FALSE;
-  
-  if (xproperty.atom == XA_WM_NAME)
+    if (w->net_name == Qnil && xproperty.atom == XA_WM_NAME)
     {
-      if (str == Qnil)
-	str = rep_null_string ();
-      if (Fequal (w->name, str) == Qnil
-	  || Fequal (w->full_name, str) == Qnil)
-	{
-	  w->full_name = w->name = str;
-	  return TRUE;
-	}
+        if (str == Qnil)
+            str = rep_null_string ();
+        if (Fequal (w->name, str) == Qnil
+            || Fequal (w->full_name, str) == Qnil)
+        {
+            w->full_name = w->name = str;
+            return TRUE;
+        }
     }
   
-  if (xproperty.atom == XA_WM_ICON_NAME)
+    if (w->net_icon_name == Qnil && xproperty.atom == XA_WM_ICON_NAME)
     {
-      if (str == Qnil)
-	str = rep_null_string ();
-      if (Fequal (w->icon_name, str) == Qnil)
-	{
-	  w->icon_name = str;
-	  return TRUE;
-	}
-    }	  
+        if (str == Qnil)
+            str = rep_null_string ();
+        if (Fequal (w->icon_name, str) == Qnil)
+        {
+            w->icon_name = str;
+            return TRUE;
+        }
+    }    
 
-  return FALSE;
+    return FALSE;
 }
 
 static void
@@ -615,16 +619,15 @@ property_notify (XEvent *ev)
 	    break;
 
 	default:
-
-	    if (ev->xproperty.atom == XA_WM_NAME ||
-		ev->xproperty.atom == XA_WM_ICON_NAME ||
-		ev->xproperty.atom == xa_wm_net_name ||
-		ev->xproperty.atom == xa_wm_net_icon_name ) 
-	    {
-	      need_refresh = changed = 
-		update_window_name(w, ev->xproperty);
-	    }
-	    else if (ev->xproperty.atom == xa_wm_colormap_windows)
+            if (ev->xproperty.atom == XA_WM_NAME ||
+                ev->xproperty.atom == XA_WM_ICON_NAME ||
+                ev->xproperty.atom == xa_wm_net_name ||
+                ev->xproperty.atom == xa_wm_net_icon_name ) 
+            {
+                need_refresh = changed = 
+                    update_window_name(w, ev->xproperty);
+            }
+            else if (ev->xproperty.atom == xa_wm_colormap_windows)
 	    {
 		if (w->n_cmap_windows > 0)
 		    XFree (w->cmap_windows);
