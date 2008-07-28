@@ -1,5 +1,5 @@
 ;; frames.jl -- handle window framing
-;; $Id$
+;; $Id: frames.jl,v 1.93 2003/10/21 16:17:59 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -189,9 +189,6 @@ that overrides settings set elsewhere.")
   ;; files they were loaded from; used to check if the theme needs reloading
   (define frame-style-files nil)
 
-  ;; List of styles that can be edited using sawfish-themer
-  (define editable-frame-styles nil)
-
   (define frame-type-mappers '()
     "List of functions that map (WINDOW FRAME-TYPE) -> FRAME-TYPE. Used when
 deciding which frame type to ask a theme to generate.")
@@ -204,8 +201,6 @@ deciding which frame type to ask a theme to generate.")
 
   (defvar themes-are-gaolled t
     "When non-nil themes are assumed to be malicious.")
-
-  (defvar sawfish-themer-program "sawfish-themer")
 
 
 ;;; defcustom's for some built-in variables
@@ -362,15 +357,6 @@ deciding which frame type to ask a theme to generate.")
       (setq editable-frame-styles (cons style editable-frame-styles))))
 
   (define (frame-style-editable-p style) (memq style editable-frame-styles))
-
-  (define-command 'edit-frame-style
-    (lambda (style)
-      (if (not (memq style editable-frame-styles))
-	  (error "Frame style isn't editable")
-	(let ((dir (find-frame-style style)))
-	  (when dir
-	    (system (format nil "%s %s &" sawfish-themer-program dir))))))
-    #:spec (lambda () (list default-frame-style)))
 
 
 ;;; kludge different window decors by modifying the assumed window type
