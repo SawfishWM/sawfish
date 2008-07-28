@@ -234,8 +234,7 @@ Window manager tasks
 
     allow applications to inject ``policy'' into the wm to affect their
     windows. This could either be (sandboxed?) lisp code, or something
-    more declarative (but even then it could be lisp data, c.f. themes
-    created by sawfish-themer)
+    more declarative (but even then it could be lisp data)
 
     obvious uses for this: focus policy, placement policy, appearance
     (apps that must (?) theme themself could also control their frames
@@ -251,29 +250,3 @@ ui tasks
 see lisp/sawfish/ui/WISHLIST
 
 
-
-themer tasks
-============
-
-  ! only the `default' window type may be previewed
-
-    [ workaround: temporarily change the `default' mapping ]
-
-  + rewrite to use sawfish.gtk modules
-
-  + allow functional frame part attributes to be defined
-
-    possibly add an `(extra sexp)' field that is evaluated then added
-    to the end of the frame part definition 
-
-  + allow dynamic patterns to be defined (e.g. gradients)
-
-  + better previewing:
-
-    * highlight the current frame part somehow
-
-    * clicking/hovering on a frame part selects that definition
-
-    * auto-update, either after each change, or from the idle-hook?
-
-  + support a pseudo-pattern containing the window's icon

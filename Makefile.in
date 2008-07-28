@@ -1,6 +1,6 @@
 # Makefile.in for sawmill version 4
 # Copyright (C) 1998 John Harper <john@dcs.warwick.ac.uk>
-# $Id$
+# $Id: Makefile.in,v 1.31 2003/04/03 02:24:42 jsh Exp $
 #
 # This file is part of sawmill.
 #
@@ -27,7 +27,7 @@ VPATH=@srcdir@
 
 SUBDIRS = @SUBDIRS@
 
-OLD_BINARIES = sawmill sawmill-client sawmill-capplet sawmill-ui sawmill-themer
+OLD_BINARIES = sawmill sawmill-client sawmill-capplet sawmill-ui
 
 all : build.h DOC NEWS FAQ
 	for dir in $(SUBDIRS); do \
