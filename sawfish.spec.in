@@ -3,7 +3,7 @@ Name: sawfish
 Version: @version@
 Release: 1
 Requires: librep >= 0.16, rep-gtk >= 0.16
-Copyright: GPL
+License: GPL
 Group: User Interface/Desktops
 Source: http://download.sourceforge.net/sawfish/sawfish-%{version}.tar.gz
 URL: http://sawmill.sourceforge.net/
@@ -47,6 +47,7 @@ make install \
     host_type=%{_target_platform} \
     infodir=%{_infodir}
 gzip -9nf $RPM_BUILD_ROOT%{_infodir}/sawfish*
+rm -f $RPM_BUILD_ROOT%{_infodir}/dir
 
 %post
 /sbin/install-info %{_infodir}/sawfish.info.gz %{_infodir}/dir
@@ -62,13 +63,13 @@ fi
 %files
 %defattr(-,root,root)
 %doc README NEWS FAQ THANKS BUGS TODO
-%doc po/sawfish.pot lisp/sawfish/ui/WIDGETS lisp/sawfish/ui/WISHLIST
+%doc po/sawfish.pot lisp/sawfish/ui/WIDGETS-LIST lisp/sawfish/ui/WISHLIST
 %{_bindir}/sawfish
 %{_bindir}/sawfish-client
 %{_bindir}/sawfish-ui
 %{_datadir}/sawfish/%{version}
 %{_datadir}/locale
-%{_datadir}/control-center-2.0/capplets
+#%{_datadir}/control-center-2.0/capplets
 %{_datadir}/gnome/wm-properties/Sawfish.desktop
 %{_datadir}/pixmaps/sawfish*.png
 %{_libexecdir}/sawfish/%{version}/%{_target_platform}
