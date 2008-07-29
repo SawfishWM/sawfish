@@ -1,5 +1,5 @@
 # Makefile.in -- input for the src directory's Makefile
-# $Id$
+# $Id: Makefile.in,v 1.42 2003/08/14 07:12:53 jsh Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -88,7 +88,7 @@ installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(repexecdir)/sawfish \
 	  $(foreach x,$(DL_DIRS),$(DESTDIR)$(sawfishexecdir)/$(x))
 
-.libexec :
+.libexec : $(DL_OBJS)
 	$(SHELL) $(srcdir)/fake-libexec
 
 clean :
