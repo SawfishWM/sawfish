@@ -1,5 +1,5 @@
 ;; help.jl -- commands for the help menu
-;; $Id$
+;; $Id: help.jl,v 1.6 2003/01/12 20:35:09 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -29,12 +29,13 @@
 	  rep.system
 	  rep.regexp
 	  rep.io.files
-	  sawfish.wm.commands)
+	  sawfish.wm.commands
+	  sawfish.wm.commands.xterm)
 
   ;; Info
 
   (define (help-call-info document node)
-    (system (format nil "xterm -e info '%s' '%s' >/dev/null 2>&1 </dev/null &"
+    (xterm (format nil "info '%s' '%s'"
 		    document node)))
 
   (define (help-call-info-gnome document node)

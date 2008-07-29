@@ -2,6 +2,11 @@
 	* sawfish.spec.in: spec file did use deprecated keywords,
 		this patch by Ian Dall fix that.
 
+	* lisp/sawfish/wm/commands/help.jl: the "xterm" command for
+		viewing the info file is still hardcoded, instead
+		use the user-defined "xterm" command - patch by
+		Dagfinn I. Mannsåker.
+
 2008-07-28  Christopher Bratusek <nano-master@gmx.de>
 	* themer/ : remove the themer from trunk and move
 		it to the sawfish-themer branch. The reason
