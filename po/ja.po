@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-01-12 12:11-0800\n"
+"POT-Creation-Date: 2008-08-04 22:17+0200\n"
 "PO-Revision-Date: 2006-07-19 22:53+0900\n"
 "Last-Translator: Satoru SATOH <ss@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -25,119 +25,6 @@ msgstr "Sawfish はウィンドウを自在に制御できます"
 #. ../scripts/sawfish-about.jl
 msgid "Sawfish homepage"
 msgstr "Sawfish ホームページ"
-
-#. ../themer/themer.in
-msgid "Reload themes in window manager after saving."
-msgstr "ウィンドウマネージャのテーマを保存した後で再読み込み"
-
-#. ../themer/themer.in
-msgid "Remove unused definitions when saving."
-msgstr "保存時に未使用の定義を削除する"
-
-#. ../themer/themer.in
-msgid "[left]"
-msgstr "[左]"
-
-#. ../themer/themer.in
-msgid "[right]"
-msgstr "[右]"
-
-#. ../themer/themer.in
-msgid "[top]"
-msgstr "[上部]"
-
-#. ../themer/themer.in
-msgid "[bottom]"
-msgstr "[底部]"
-
-#. ../lisp/sawfish/gtk/widgets/color.jl
-#. ../themer/themer.in
-msgid "Select color"
-msgstr "色を選択"
-
-#. ../lisp/sawfish/gtk/widgets/font.jl
-#. ../lisp/sawfish/gtk/widgets/file.jl
-#. ../themer/themer.in
-msgid "Browse..."
-msgstr "閲覧..."
-
-#. ../lisp/sawfish/gtk/widgets/font.jl
-#. ../themer/themer.in
-msgid "Select font"
-msgstr "フォントを選択"
-
-#. ../themer/themer.in
-msgid "Properties..."
-msgstr "プロパティ..."
-
-#. ../themer/themer.in
-msgid "Select Image"
-msgstr "画像を選択"
-
-#. ../themer/themer.in
-msgid "Image Properties"
-msgstr "画像プロパティ"
-
-#. ../lisp/sawfish/gtk/widget.jl
-#. ../themer/themer.in
-#, c-format
-msgid "No matching item for %S"
-msgstr "%Sに一致する項目なし"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added pattern `%s'"
-msgstr "パターン `%s' を追加"
-
-#. ../themer/themer.in
-msgid "Frame name"
-msgstr "フレーム名"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added frame `%s'"
-msgstr "フレーム `%s' を追加"
-
-#. ../themer/themer.in
-msgid "<none>"
-msgstr "<なし>"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added frame type `%s'"
-msgstr "フレームタイプ `%s' を追加"
-
-#. ../themer/themer.in
-#, c-format
-msgid "error while building frame: %S"
-msgstr "フレーム構築中にエラー: %S"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Saved as `%s'"
-msgstr "`%s' として保存"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Generated theme in directory `%s'"
-msgstr "ディレクトリ `%s' 内にテーマを生成"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Read theme from `%s'"
-msgstr "`%s' からテーマを読み込み"
-
-#. ../themer/themer.in
-msgid "Theme Directory"
-msgstr "テーマディレクトリ"
-
-#. ../themer/themer.in
-msgid "Open"
-msgstr "開く"
-
-#. ../themer/themer.in
-msgid "Preferences"
-msgstr "設定"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -276,6 +163,15 @@ msgstr "ウィンドウ枠の幅"
 msgid "Border width of bar images."
 msgstr "バー画像の枠の幅"
 
+#. ../lisp/sawfish/gtk/widget.jl
+#, c-format
+msgid "No matching item for %S"
+msgstr "%Sに一致する項目なし"
+
+#. ../lisp/sawfish/gtk/widget.jl
+msgid "** unknown widget **  "
+msgstr "** 不明なウィジェット **"
+
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Key"
@@ -285,9 +181,22 @@ msgstr "キー"
 msgid "Value"
 msgstr "値:"
 
+#. ../lisp/sawfish/gtk/widgets/color.jl
+msgid "Select color"
+msgstr "色を選択"
+
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../lisp/sawfish/gtk/widgets/file.jl
+msgid "Browse..."
+msgstr "閲覧..."
+
 #. ../lisp/sawfish/gtk/widgets/file.jl
 msgid "Select file"
 msgstr "ファイルを選択"
+
+#. ../lisp/sawfish/gtk/widgets/font.jl
+msgid "Select font"
+msgstr "フォントを選択"
 
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
@@ -317,14 +226,6 @@ msgstr "はい"
 msgid "No"
 msgstr "いいえ"
 
-#. ../lisp/sawfish/gtk/widget.jl
-msgid "** unknown widget **  "
-msgstr "** 不明なウィジェット **"
-
-#. ../lisp/sawfish/ui/layouts/keymaps.jl
-msgid "Context:"
-msgstr "有効なエリア:"
-
 #. ../lisp/sawfish/ui/apply.jl
 #, c-format
 msgid "While changing %s:"
@@ -334,24 +235,13 @@ msgstr "%s を変更中:"
 msgid "Sawfish Error"
 msgstr "Sawfish エラー"
 
+#. ../lisp/sawfish/ui/layouts/keymaps.jl
+msgid "Context:"
+msgstr "有効なエリア:"
+
 #. ../lisp/sawfish/ui/shell.jl
 msgid "Sawfish Configurator"
 msgstr "Sawfish 設定ツール"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "ワークスペース:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "行:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "列:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/commands.jl
@@ -368,6 +258,21 @@ msgstr "記述なし"
 #. ../lisp/sawfish/ui/widgets/event.jl
 msgid "Grab..."
 msgstr "取り込み..."
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "ワークスペース:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "行:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "列:"
 
 #. ../lisp/sawfish/ui/widgets/icon.jl
 msgid "Select Icon"
@@ -421,876 +326,6 @@ msgstr "ツールチップ"
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
 msgstr "索引:"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command"
-msgstr "コマンド呼び出し"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-msgstr "コマンド NAME を呼び出す(引数 PFX-ARG はオプション)"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Run shell command"
-msgstr "シェルコマンドを実行"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Execute the given shell command."
-msgstr "与えられたシェルコマンドを実行"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "コマンド:"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command sequence"
-msgstr "コマンド文字列"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Invoke the list of commands, one by one."
-msgstr "マンドリストを順番に実行"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Quit"
-msgstr "終了"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Restart"
-msgstr "再起動"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Destroy window"
-msgstr "強制終了"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Kill client"
-msgstr "クライアントをkill"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "No operation"
-msgstr "無操作"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command with output to screen"
-msgstr "コマンドを呼び出す(出力は画面に)"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Prompt for a command, execute it, and print any output to the screen."
-msgstr "コマンド入力を求め、実行し、出力は画面に表示"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Focus"
-msgstr "フォーカス"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Move/Resize"
-msgstr "移動/リサイズ"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Placement"
-msgstr "配置"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Appearance"
-msgstr "外観"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Workspaces"
-msgstr "ワークスペース"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Bindings"
-msgstr "ショートカット"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing and Maximizing"
-msgstr "最大化/最小化"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Miscellaneous"
-msgstr "その他"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Customize"
-msgstr "設定"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "設定ツールを実行"
-
-#. ../lisp/sawfish/wm/focus.jl
-msgid "When does the mouse pointer affect the input focus."
-msgstr "マウスカーソルが入力フォーカスにいつ影響を及ぼすか"
-
-#. ../lisp/sawfish/wm/focus.jl
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "click-to-focus モードで、クリックイベントをアプリケーションに渡す"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default frame style:"
-msgstr "標準フレームスタイル:"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Automatically reload themes when they are updated."
-msgstr "テーマ更新時に自動的に再読み込み"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default font: \\w"
-msgstr "標準フォント: \\w"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Edit frame style"
-msgstr "フレームスタイルを編集"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default"
-msgstr "標準"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Normal"
-msgstr "普通"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Title-only"
-msgstr "タイトルだけ"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Border-only"
-msgstr "枠だけ"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Top-border"
-msgstr "上の枠だけ"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "None"
-msgstr "なし"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "global-keymap"
-msgstr "広範なキーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active anywhere."
-msgstr "常に有効なショートカットを含むキーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "window-keymap"
-msgstr "ウィンドウキーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr ""
-"クライアントウィンドウをフォーカスしているときに有効なショートカットを含む"
-"キーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "root-window-keymap"
-msgstr "ルートウィンドウキーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"マウスカーソルがルートウィンドウにある(あるいはどのウィンドウも\n"
-"フォーカスされていない)ときに有効なショートカットを含むキーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "title-keymap"
-msgstr "タイトルバーキーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"マウスカーソルがウィンドウのタイトルバー上にあるときに有効な\n"
-"ショートカットを含むキーマップ(このマップではマウス割り当て\n"
-"だけが評価される)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "border-keymap"
-msgstr "枠キーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"マウスカーソルがウィンドウ枠の上にあるときに有効なショート\n"
-"カットを含むキーマップ(このマップではマウス割り当てだけが\n"
-"評価される)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "close-button-keymap"
-msgstr "閉ボタンキーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"マウスカーソルがウィンドウの閉ボタン上にあるときに有効な\n"
-"ショートカットを含むキーマップ(このマップではマウスの\n"
-"関連付けだけが評価される)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "iconify-button-keymap"
-msgstr "アイコン化ボタンキーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"マウスカーソルがウィンドウのアイコン化ボタン上にあるときに\n"
-"有効なショートカットを含むキーマップ(このマップではマウスの\n"
-"関連付けだけが評価される)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "maximize-button-keymap"
-msgstr "最大化ボタンキーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"マウスカーソルがウィンドウの最大化ボタン上にあるときに有効な\n"
-"ショートカットを含むキーマップ(このマップではマウス割り当て\n"
-"だけが評価される)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "menu-button-keymap"
-msgstr "メニューボタンキーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"マウスカーソルがウィンドウのメニューボタン上にあるときに有効な\n"
-"ショートカットを含むキーマップ(このマップではマウス割り当て\n"
-"だけが評価される)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "shade-button-keymap"
-msgstr "シェードボタンキーマップ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"マウスカーソルがウィンドウのシェードボタン上にあるときに有効なショート\n"
-"カットを含むキーマップ(このマップ内ではマウス割り当てだけが有効)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "ショートカットのデフォルトのモディファイアキー"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Minimize"
-msgstr "最小化"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Unmaximize"
-msgstr "元の大きさに戻す"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Maximize"
-msgstr "最大化"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Close"
-msgstr "閉じる(_C)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Toggle"
-msgstr "切替(_T)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "In _group"
-msgstr "グループに入れる(_g)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Send window to"
-msgstr "ウィンドウを送る(_S)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Previous workspace"
-msgstr "前のワークスペース(_P)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Next workspace"
-msgstr "次のワークスペース(_N)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to previous"
-msgstr "前のワークスペースにコピー"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to next"
-msgstr "次のワークスペースにコピー"
-
-#. ../lisp/sawfish/wm/stacking.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Stacking"
-msgstr "スタック"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Raise"
-msgstr "前面に"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Lower"
-msgstr "後面に"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Upper layer"
-msgstr "前面のレイヤ"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Lower layer"
-msgstr "後面のレイヤ"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Frame type"
-msgstr "フレームタイプ"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Frame style"
-msgstr "フレームスタイル"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Windows"
-msgstr "ウィンドウ(_W)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Work_spaces"
-msgstr "ワークスペース(_s)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Programs"
-msgstr "プログラム(_P)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Customize"
-msgstr "設定(_C)"
-
-#. ../lisp/sawfish/wm/gnome/integration.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Help"
-msgstr "ヘルプ(_H)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_FAQ..."
-msgstr "FAQ(_F)..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_News..."
-msgstr "最新情報(_N)..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_WWW page..."
-msgstr "WWW ページ(_W)..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Manual..."
-msgstr "マニュアル(_M)..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_About Sawfish..."
-msgstr "Sawfish について(_A)..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Restart"
-msgstr "再起動(_R)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Quit"
-msgstr "終了(_Q)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup window menu"
-msgstr "ウィンドウメニューをポップアップ"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the menu listing all window operations."
-msgstr "すべてのウィンドウ操作リストを表示"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup root menu"
-msgstr "ルートメニューをポップアップ"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the main menu."
-msgstr "メインメニューを表示"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup apps menu"
-msgstr "アプリケーションメニューをポップアップ"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the applications menu."
-msgstr "アプリケーションメニューを表示"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_All settings"
-msgstr "すべての設定(_A)"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Edit theme..."
-msgstr "テーマを編集..."
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing windows: \\w"
-msgstr "ウィンドウの配置方法: \\w"
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing dialog windows: \\w"
-msgstr "ダイアログウィンドウの配置方法: \\w"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "all"
-msgstr "すべて"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "parents"
-msgstr "親"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/state/iconify.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "none"
-msgstr "なし"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Keep transient windows stacked above: \\w"
-msgstr "ダイアログを \\w の前面に出す"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise single window"
-msgstr "ウィンドウを前面に"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise the window to its highest allowed position in the stacking order."
-msgstr "ウィンドウをできるかぎりレイヤの最前面に"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower single window"
-msgstr "ウィンドウを後面に"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower the window to its lowest allowed position in the stacking order."
-msgstr "ウィンドウをできるかぎりレイヤの最後面に"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise lower single window"
-msgstr "より後面のウィンドウを前面に"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed."
-msgstr "ウィンドウが最前面にあればできるかぎり最後面に下げ、\n"
-"そうでなければできるかぎり前面に出す"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise window depth"
-msgstr "ウィンドウをより前面のレイヤに"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level above its current level."
-msgstr "ウィンドウをより前面のレイヤにおく"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower window depth"
-msgstr "ウィンドウをより後面のレイヤに"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level beneath its current level."
-msgstr "ウィンドウをより後面のレイヤにおく"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport"
-msgstr "ビューポートをアクティブに"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport."
-msgstr "指定ビューポートを選択"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Column:"
-msgstr "行:"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Row:"
-msgstr "列:"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport column"
-msgstr "ビューポート行をアクティブ化"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport column."
-msgstr "ビューポート行を選択"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport row"
-msgstr "ビューポート列をアクティブ化"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport row."
-msgstr "特定のビューポート列を選択"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window to viewport"
-msgstr "ウィンドウをビューポートに移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the current window to the specified viewport."
-msgstr "指定ビューポートにウィンドウを移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport right"
-msgstr "ビューポートを右に移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen to the right."
-msgstr "右に一画面分ビューポートを移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport left"
-msgstr "ビューポートを左に移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen to the left."
-msgstr "左に一画面分ビューポートを移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport up"
-msgstr "ビューポートを上に移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen up."
-msgstr "上に一画面分ビューポートを移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport down"
-msgstr "ビューポートを下に移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen down."
-msgstr "下に一画面分ビューポートを移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window right"
-msgstr "ウィンドウを右に移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport on the right, and switch to that viewport."
-msgstr "右のビューポートにウィンドウを移動し、切り替える。"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window left"
-msgstr "ウィンドウを左に移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport on the left, and switch to that viewport."
-msgstr "左のビューポートにウィンドウを移動し、切り替える。"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window up"
-msgstr "ウィンドウを上に移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport above, and switch to that viewport."
-msgstr "上のビューポートにウィンドウを移動し、そのビューポートに切り替え"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window down"
-msgstr "ウィンドウを下に移動"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport below, and switch to that viewport."
-msgstr "下のビューポートにウィンドウを移動し、そのビューポートに切り替え"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Focus desktop"
-msgstr "デスクトップをフォーカス"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Transfer input focus to the desktop window (if one exists)."
-msgstr "入力フォーカスを(もしあれば)デスクトップウィンドウに移動"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window"
-msgstr "ウィンドウを閉じる"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window."
-msgstr "ウィンドウを閉じる"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window safely"
-msgstr "ウィンドウを安全に閉じる"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window, or beep if the window can't be closed safely."
-msgstr "ウィンドウを閉じる; もし安全に閉じることができなければビープ音を鳴らす"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Uniquify window name"
-msgstr "ウィンドウ名を独自のものに"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Force the current window to have a unique title."
-msgstr "ウィンドウに一意な名前のタイトルをもつように強制"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspace names"
-msgstr "ワークスペース名"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "_Insert workspace"
-msgstr "ワークスペースを挿入(_I)"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select _next workspace"
-msgstr "次のワークスペースを選択(_N)"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select _previous workspace"
-msgstr "前のワークスペースを選択(_P)"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge with next"
-msgstr "次に併合"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge with previous"
-msgstr "前に併合"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace _right"
-msgstr "ワークスペースを右に移動(_R)"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace _left"
-msgstr "ワークスペースを左に移動(_L)"
-
-#. ../lisp/sawfish/wm/workspace.jl
-#, c-format
-msgid "space %d"
-msgstr "ワークスペース %d"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Popup workspace list"
-msgstr "ワークスペースリストをポップアップ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the menu containing the list of all workspaces."
-msgstr "すべてのワークスペースのリストを含むメニューを表示"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Popup window list"
-msgstr "ウィンドウリストをポップアップ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the menu of all managed windows."
-msgstr "すべての制御下のウィンドウのメニューを表示"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Next workspace"
-msgstr "次のワークスペース"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the next workspace."
-msgstr "次のワークスペースを表示"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Previous workspace"
-msgstr "前のワークスペース"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the previous workspace."
-msgstr "前のワークスペースを表示"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to next workspace"
-msgstr "次のワークスペースへ送る"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the window to the next workspace."
-msgstr "ウィンドウを次のワークスペースに移動"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to previous workspace"
-msgstr "前のワークスペースへ送る"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the window to the previous workspace."
-msgstr "ウィンドウを前のワークスペースに移動"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to next workspace"
-msgstr "次のワークスペースへコピー"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the window to the next workspace."
-msgstr "ウィンドウを次のワークスペースにコピー"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to previous workspace"
-msgstr "前のワークスペースへコピー"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the window to the previous workspace."
-msgstr "ウィンドウを前のワークスペースにコピー"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Append workspace and send"
-msgstr "ワークスペースを後に追加し、送る"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Create a new workspace at the end of the list, and move the window to it."
-msgstr "新規ワークスペースをリストの最後につくりウィンドウをそこへ移動"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Prepend workspace and send"
-msgstr "ワークスペースを前に追加し、送る"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Create a new workspace at the start of the list, and move the window to it."
-msgstr "新規ワークスペースをリストの最初につくりウィンドウをそこへ移動"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge next workspace"
-msgstr "次のワークスペースに統合"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the next\n"
-"workspace."
-msgstr ""
-"現在のワークスペースを消し、属するウィンドウを次のワークスペースに\n"
-"再配置"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge previous workspace"
-msgstr "前のワークスペースに統合"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the\n"
-"previous workspace."
-msgstr ""
-"現在のワークスペースを消し、属すウィンドウを前のワークスペースに\n"
-"再配置"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace after"
-msgstr "ワークスペースを後に挿入"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Create a new workspace following the current workspace."
-msgstr "現在のワークスペースに続く新しいワークスペースを生成"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace before"
-msgstr "ワークスペースを前に挿入"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Create a new workspace before the current workspace."
-msgstr "現在のワークスペースの前に新規ワークスペースを生成"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace forwards"
-msgstr "ワークスペースを前に移動"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current workspace one place to the right."
-msgstr "現在のワークスペースを右に一つ分移動"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace backwards"
-msgstr "ワークスペースを後に移動"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current workspace one place to the left."
-msgstr "現在のワークスペースを左に一つ分移動"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete empty workspaces"
-msgstr "空のワークスペースを削除"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete any workspaces that don't contain any windows."
-msgstr "ウィンドウを含まないすべてのワークスペースを削除する"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete window instance"
-msgstr "ウィンドウ実体を削除"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Remove the copy of the window on the current workspace. If this is the\n"
-"last instance remaining, then delete the actual window."
-msgstr ""
-"現在のワークスペースのウィンドウのコピーを削除し、それが最後の実体で\n"
-"あれば実体のウィンドウも閉じる"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Activate workspace"
-msgstr "ワークスペースをアクティブ化"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select the N'th workspace."
-msgstr "N 番目のワークスペースを選択"
-
-#. ../lisp/sawfish/wm/util/prompt-wm.jl
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspace:"
-msgstr "ワークスペース:"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to workspace"
-msgstr "ワークスペースに送る"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current window to the N'th workspace."
-msgstr "ウィンドウを N 番目のワークスペースに移動"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to workspace"
-msgstr "ワークスペースにコピー"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the current window to the N'th workspace."
-msgstr "ウィンドウを N 番目のワークスペースにコピー"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select workspace interactively"
-msgstr "ワークスペースを対話的に選択"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Prompt for a workspace and switch to it."
-msgstr "ワークスペース切替時の表示"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next workspace window"
@@ -1573,7 +608,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether to bump into ignored windows when growing or packing."
-msgstr "ウィンドウを拡大/詰める際に無視されているウィンドウにくっつけるかどうか"
+msgstr ""
+"ウィンドウを拡大/詰める際に無視されているウィンドウにくっつけるかどうか"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
@@ -1583,7 +619,8 @@ msgstr "ウィンドウを左に拡大"
 msgid ""
 "Grows window to the left until it `bumps into' another window.\n"
 "See `grow-window-up'."
-msgstr "他のウィンドウにぶつかるまで左方向に拡大\n"
+msgstr ""
+"他のウィンドウにぶつかるまで左方向に拡大\n"
 "`grow-window-up' を参照のこと。"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1594,7 +631,8 @@ msgstr "ウィンドウを右に拡大"
 msgid ""
 "Grows window to the right until it `bumps into' another window.\n"
 "See `grow-window-up'."
-msgstr "他のウィンドウにぶつかるまで右方向に拡大\n"
+msgstr ""
+"他のウィンドウにぶつかるまで右方向に拡大\n"
 "`grow-window-up' を参照のこと。"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1609,7 +647,8 @@ msgid ""
 "With a numeric prefix arg, grow upwards by that many increments specified "
 "by\n"
 "window or pixels instead."
-msgstr "他のウィンドウにぶつかるまでウィンドウを拡大する。\n"
+msgstr ""
+"他のウィンドウにぶつかるまでウィンドウを拡大する。\n"
 "上端が画面の端を越える場合、そこで拡大を停止する。\n"
 "ユニバーサル prefix 引数を伴う場合は代わりに最大化する。\n"
 "数字の prefix 引数を伴う場合は代わりにその指定された\n"
@@ -1623,7 +662,8 @@ msgstr "ウィンドウを下に拡大"
 msgid ""
 "Grows window downwards until it `bumps into' another window.\n"
 "See `grow-window-up'."
-msgstr "他のウィンドウにぶつかるまで下方向に拡大します。\n"
+msgstr ""
+"他のウィンドウにぶつかるまで下方向に拡大します。\n"
 "`grow-window-up' を参照してください。"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1634,7 +674,8 @@ msgstr "ウィンドウを左に詰める"
 msgid ""
 "Moves window to the left until it `bumps into' another window.\n"
 "See `pack-window-up'."
-msgstr "他のウィンドウにぶつかるまで左方向に移動します。\n"
+msgstr ""
+"他のウィンドウにぶつかるまで左方向に移動します。\n"
 "`grow-window-up' を参照してください。"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1645,7 +686,8 @@ msgstr "ウィンドウを右に詰める"
 msgid ""
 "Moves window to the right until it `bumps into' another window.\n"
 "See `pack-window-up'."
-msgstr "他のウィンドウにぶつかるまで右方向に移動します。\n"
+msgstr ""
+"他のウィンドウにぶつかるまで右方向に移動します。\n"
 "`pack-window-up' を参照してください。"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1658,7 +700,8 @@ msgid ""
 "If the top edge was beyond the screen edge, it is moved back in.\n"
 "With a universal prefix arg, move upwards maximally instead.\n"
 "With a numeric prefix arg, move upwards by that many pixels instead."
-msgstr "ウィンドウを他のウィンドウにぶつかるまで移動します。\n"
+msgstr ""
+"ウィンドウを他のウィンドウにぶつかるまで移動します。\n"
 "上の端が画面の端を越えたら戻ります。\n"
 "ユニバーサル prefix 引数を伴う場合はその代わりに最大限、\n"
 "数字 prefix 引数を伴う場合はそのピクセル数分だけ移動します。"
@@ -1671,7 +714,8 @@ msgstr "ウィンドウを下に詰める"
 msgid ""
 "Moves window downwards until it `bumps into' another window.\n"
 "See `pack-window-up'."
-msgstr "他のウィンドウにぶつかるまで下方向に移動します。\n"
+msgstr ""
+"他のウィンドウにぶつかるまで下方向に移動します。\n"
 "`pack-window-up' を参照してください。"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -2085,6 +1129,106 @@ msgstr "Xterm"
 msgid "Start a new xterm."
 msgstr "新規 `xterm' を起動"
 
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command"
+msgstr "コマンド呼び出し"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr "コマンド NAME を呼び出す(引数 PFX-ARG はオプション)"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Run shell command"
+msgstr "シェルコマンドを実行"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Execute the given shell command."
+msgstr "与えられたシェルコマンドを実行"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command:"
+msgstr "コマンド:"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command sequence"
+msgstr "コマンド文字列"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "マンドリストを順番に実行"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Quit"
+msgstr "終了"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Restart"
+msgstr "再起動"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Destroy window"
+msgstr "強制終了"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Kill client"
+msgstr "クライアントをkill"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "No operation"
+msgstr "無操作"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command with output to screen"
+msgstr "コマンドを呼び出す(出力は画面に)"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "コマンド入力を求め、実行し、出力は画面に表示"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Focus"
+msgstr "フォーカス"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "移動/リサイズ"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Placement"
+msgstr "配置"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Appearance"
+msgstr "外観"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "ワークスペース"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "ショートカット"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing and Maximizing"
+msgstr "最大化/最小化"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "その他"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Customize"
+msgstr "設定"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "設定ツールを実行"
+
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
 msgstr "3Dハック"
@@ -2257,6 +1401,16 @@ msgstr "フォーカスでクリックを透過"
 msgid "Focus mode"
 msgstr "フォーカスモード"
 
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame type"
+msgstr "フレームタイプ"
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame style"
+msgstr "フレームスタイル"
+
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignored"
 msgstr "無視された"
@@ -2292,6 +1446,10 @@ msgstr "巡回時にスキップ"
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Window list skip"
 msgstr "ウィンドウリストスキップ"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Task list skip"
+msgstr "タスクリストスキップ"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
@@ -2495,6 +1653,59 @@ msgstr "右のワークスペースに送る"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "ウィンドウを現在のワークスペースの右のワークスペースに送る"
 
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When does the mouse pointer affect the input focus."
+msgstr "マウスカーソルが入力フォーカスにいつ影響を及ぼすか"
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "click-to-focus モードで、クリックイベントをアプリケーションに渡す"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default frame style:"
+msgstr "標準フレームスタイル:"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Automatically reload themes when they are updated."
+msgstr "テーマ更新時に自動的に再読み込み"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default font: \\w"
+msgstr "標準フォント: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Edit frame style"
+msgstr "フレームスタイルを編集"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default"
+msgstr "標準"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Normal"
+msgstr "普通"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Title-only"
+msgstr "タイトルだけ"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Border-only"
+msgstr "枠だけ"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Top-border"
+msgstr "上の枠だけ"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "None"
+msgstr "なし"
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/gnome/integration.jl
+msgid "_Help"
+msgstr "ヘルプ(_H)"
+
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "GNOME ヘルプ(_G)..."
@@ -2511,13 +1722,347 @@ msgstr "GNOME について..."
 msgid "Gnome menus update"
 msgstr "GNOMEメニュー更新"
 
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "global-keymap"
+msgstr "広範なキーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active anywhere."
+msgstr "常に有効なショートカットを含むキーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "window-keymap"
+msgstr "ウィンドウキーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"クライアントウィンドウをフォーカスしているときに有効なショートカットを含む"
+"キーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "root-window-keymap"
+msgstr "ルートウィンドウキーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"マウスカーソルがルートウィンドウにある(あるいはどのウィンドウも\n"
+"フォーカスされていない)ときに有効なショートカットを含むキーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "title-keymap"
+msgstr "タイトルバーキーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"マウスカーソルがウィンドウのタイトルバー上にあるときに有効な\n"
+"ショートカットを含むキーマップ(このマップではマウス割り当て\n"
+"だけが評価される)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "border-keymap"
+msgstr "枠キーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"マウスカーソルがウィンドウ枠の上にあるときに有効なショート\n"
+"カットを含むキーマップ(このマップではマウス割り当てだけが\n"
+"評価される)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "close-button-keymap"
+msgstr "閉ボタンキーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"マウスカーソルがウィンドウの閉ボタン上にあるときに有効な\n"
+"ショートカットを含むキーマップ(このマップではマウスの\n"
+"関連付けだけが評価される)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "iconify-button-keymap"
+msgstr "アイコン化ボタンキーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"マウスカーソルがウィンドウのアイコン化ボタン上にあるときに\n"
+"有効なショートカットを含むキーマップ(このマップではマウスの\n"
+"関連付けだけが評価される)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "maximize-button-keymap"
+msgstr "最大化ボタンキーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"マウスカーソルがウィンドウの最大化ボタン上にあるときに有効な\n"
+"ショートカットを含むキーマップ(このマップではマウス割り当て\n"
+"だけが評価される)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "menu-button-keymap"
+msgstr "メニューボタンキーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"マウスカーソルがウィンドウのメニューボタン上にあるときに有効な\n"
+"ショートカットを含むキーマップ(このマップではマウス割り当て\n"
+"だけが評価される)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "shade-button-keymap"
+msgstr "シェードボタンキーマップ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"マウスカーソルがウィンドウのシェードボタン上にあるときに有効なショート\n"
+"カットを含むキーマップ(このマップ内ではマウス割り当てだけが有効)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "ショートカットのデフォルトのモディファイアキー"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Minimize"
+msgstr "最小化"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Unmaximize"
+msgstr "元の大きさに戻す"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Maximize"
+msgstr "最大化"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Close"
+msgstr "閉じる(_C)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Toggle"
+msgstr "切替(_T)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "In _group"
+msgstr "グループに入れる(_g)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Send window to"
+msgstr "ウィンドウを送る(_S)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Previous workspace"
+msgstr "前のワークスペース(_P)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Next workspace"
+msgstr "次のワークスペース(_N)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Copy to previous"
+msgstr "前のワークスペースにコピー"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Copy to next"
+msgstr "次のワークスペースにコピー"
+
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Stacking"
+msgstr "スタック"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Raise"
+msgstr "前面に"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Lower"
+msgstr "後面に"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Upper layer"
+msgstr "前面のレイヤ"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Lower layer"
+msgstr "後面のレイヤ"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Windows"
+msgstr "ウィンドウ(_W)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Work_spaces"
+msgstr "ワークスペース(_s)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Programs"
+msgstr "プログラム(_P)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Customize"
+msgstr "設定(_C)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_FAQ..."
+msgstr "FAQ(_F)..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_News..."
+msgstr "最新情報(_N)..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_WWW page..."
+msgstr "WWW ページ(_W)..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Manual..."
+msgstr "マニュアル(_M)..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_About Sawfish..."
+msgstr "Sawfish について(_A)..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Restart"
+msgstr "再起動(_R)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Quit"
+msgstr "終了(_Q)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup window menu"
+msgstr "ウィンドウメニューをポップアップ"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "すべてのウィンドウ操作リストを表示"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup root menu"
+msgstr "ルートメニューをポップアップ"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "メインメニューを表示"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup apps menu"
+msgstr "アプリケーションメニューをポップアップ"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "アプリケーションメニューを表示"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_All settings"
+msgstr "すべての設定(_A)"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Edit theme..."
+msgstr "テーマを編集..."
+
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
 msgstr "`stagger(よろめき)' 配置モードでの連続する配置間の距離"
 
-#. ../lisp/sawfish/wm/state/gnome.jl
-msgid "In GNOME _task list"
-msgstr "GNOME タスクリスト内(_T)"
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing windows: \\w"
+msgstr "ウィンドウの配置方法: \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing dialog windows: \\w"
+msgstr "ダイアログウィンドウの配置方法: \\w"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "all"
+msgstr "すべて"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "親"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "none"
+msgstr "なし"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Keep transient windows stacked above: \\w"
+msgstr "ダイアログを \\w の前面に出す"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise single window"
+msgstr "ウィンドウを前面に"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr "ウィンドウをできるかぎりレイヤの最前面に"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower single window"
+msgstr "ウィンドウを後面に"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr "ウィンドウをできるかぎりレイヤの最後面に"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise lower single window"
+msgstr "より後面のウィンドウを前面に"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
+msgstr ""
+"ウィンドウが最前面にあればできるかぎり最後面に下げ、\n"
+"そうでなければできるかぎり前面に出す"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise window depth"
+msgstr "ウィンドウをより前面のレイヤに"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "ウィンドウをより前面のレイヤにおく"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower window depth"
+msgstr "ウィンドウをより後面のレイヤに"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "ウィンドウをより後面のレイヤにおく"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2642,6 +2187,15 @@ msgid "Toggle whether a window will be include in the window list."
 msgstr "ウィンドウがウィンドウリストに含まれるかどうかを切り替え"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle task list skip"
+msgstr "タスクリストスキップを切替"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle whether a window will be included in the task-list."
+msgstr "ウィンドウがウィンドウリストに含まれるかどうかを切り替え"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
 msgstr "無視される(_I)"
 
@@ -2656,6 +2210,11 @@ msgstr "巡回可能(_F)"
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
 msgstr "ウィンドウリスト(_w)"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "In _task list"
+msgstr "GNOME タスクリスト内(_T)"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Lock position and size while windows are maximized."
@@ -2946,6 +2505,11 @@ msgstr "ウィンドウ:"
 msgid "Workspace %d"
 msgstr "ワークスペース%d"
 
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+msgid "Workspace:"
+msgstr "ワークスペース:"
+
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
 msgstr "プロンプトキーマップ"
@@ -2970,556 +2534,383 @@ msgstr "ウィンドウを後面に"
 msgid "Raise lower window"
 msgstr "より後面のウィンドウを前面に"
 
-#. ../themer/themer.glade:1315
-msgid " to: "
-msgstr "先:"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport"
+msgstr "ビューポートをアクティブに"
 
-#. ../themer/themer.glade:1587
-msgid "About"
-msgstr "概要"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "指定ビューポートを選択"
 
-#. ../themer/themer.glade:412
-msgid "About:"
-msgstr "概要:"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Column:"
+msgstr "行:"
 
-#. ../themer/themer.glade:879 ../themer/themer.glade:1213
-#. * ../themer/themer.glade:1458
-msgid "Add"
-msgstr "追加"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Row:"
+msgstr "列:"
 
-#. ../themer/themer.glade:1176
-msgid "Attributes"
-msgstr "属性"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport column"
+msgstr "ビューポート行をアクティブ化"
 
-#. ../themer/themer.glade:1746 ../themer/themer.glade:1856
-msgid "Cancel"
-msgstr "取り消し"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "ビューポート行を選択"
 
-#. ../themer/themer.glade:675 ../themer/themer.glade:829
-msgid "Clicked"
-msgstr "クリックされた"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport row"
+msgstr "ビューポート列をアクティブ化"
 
-#. ../themer/themer.glade:892
-msgid "Copy"
-msgstr "コピー"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "特定のビューポート列を選択"
 
-#. ../themer/themer.glade:1036
-msgid "Copy..."
-msgstr "コピー..."
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window to viewport"
+msgstr "ウィンドウをビューポートに移動"
 
-#. ../themer/themer.glade:482
-msgid "Details"
-msgstr "詳細"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "指定ビューポートにウィンドウを移動"
 
-#. ../themer/themer.glade:430
-msgid "Directory:"
-msgstr "ディレクトリ:"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport right"
+msgstr "ビューポートを右に移動"
 
-#. ../themer/themer.glade:166
-msgid "E_xit"
-msgstr "終了(_x)"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "右に一画面分ビューポートを移動"
 
-#. ../themer/themer.glade:596 ../themer/themer.glade:789
-msgid "Focused"
-msgstr "フォーカスされた"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport left"
+msgstr "ビューポートを左に移動"
 
-#. ../themer/themer.glade:987 ../themer/themer.glade:1422
-msgid "Frame"
-msgstr "フレーム"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "左に一画面分ビューポートを移動"
 
-#. ../themer/themer.glade:238
-msgid "Frame Part _Definitions"
-msgstr "フレームパーツ定義(_D)"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport up"
+msgstr "ビューポートを上に移動"
 
-#. ../themer/themer.glade:226
-msgid "Frame _Classes"
-msgstr "フレームクラス(_C)"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "上に一画面分ビューポートを移動"
 
-#. ../themer/themer.glade:1237
-msgid "Frames"
-msgstr "フレーム"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport down"
+msgstr "ビューポートを下に移動"
 
-#. ../themer/themer.glade:622
-msgid "HIghlighted"
-msgstr "強調表示された"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "下に一画面分ビューポートを移動"
 
-#. ../themer/themer.glade:802
-msgid "Highlighted"
-msgstr "強調表示された"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window right"
+msgstr "ウィンドウを右に移動"
 
-#. ../themer/themer.glade:570 ../themer/themer.glade:776
-msgid "Inactive"
-msgstr "休止状態"
-
-#. ../themer/themer.glade:702 ../themer/themer.glade:843
+#. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Inactive-\n"
-"Clicked"
-msgstr ""
-"休止状態-\n"
-"クリックされた"
+"Move the window to the viewport on the right, and switch to that viewport."
+msgstr "右のビューポートにウィンドウを移動し、切り替える。"
 
-#. ../themer/themer.glade:649 ../themer/themer.glade:816
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window left"
+msgstr "ウィンドウを左に移動"
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Inactive-\n"
-"Highlighted"
+"Move the window to the viewport on the left, and switch to that viewport."
+msgstr "左のビューポートにウィンドウを移動し、切り替える。"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window up"
+msgstr "ウィンドウを上に移動"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr "上のビューポートにウィンドウを移動し、そのビューポートに切り替え"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window down"
+msgstr "ウィンドウを下に移動"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr "下のビューポートにウィンドウを移動し、そのビューポートに切り替え"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Focus desktop"
+msgstr "デスクトップをフォーカス"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "入力フォーカスを(もしあれば)デスクトップウィンドウに移動"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window"
+msgstr "ウィンドウを閉じる"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window."
+msgstr "ウィンドウを閉じる"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window safely"
+msgstr "ウィンドウを安全に閉じる"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window, or beep if the window can't be closed safely."
+msgstr "ウィンドウを閉じる; もし安全に閉じることができなければビープ音を鳴らす"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Uniquify window name"
+msgstr "ウィンドウ名を独自のものに"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "ウィンドウに一意な名前のタイトルをもつように強制"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Workspace names"
+msgstr "ワークスペース名"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "_Insert workspace"
+msgstr "ワークスペースを挿入(_I)"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select _next workspace"
+msgstr "次のワークスペースを選択(_N)"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select _previous workspace"
+msgstr "前のワークスペースを選択(_P)"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge with next"
+msgstr "次に併合"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge with previous"
+msgstr "前に併合"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace _right"
+msgstr "ワークスペースを右に移動(_R)"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace _left"
+msgstr "ワークスペースを左に移動(_L)"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, c-format
+msgid "space %d"
+msgstr "ワークスペース %d"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup workspace list"
+msgstr "ワークスペースリストをポップアップ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu containing the list of all workspaces."
+msgstr "すべてのワークスペースのリストを含むメニューを表示"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup window list"
+msgstr "ウィンドウリストをポップアップ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu of all managed windows."
+msgstr "すべての制御下のウィンドウのメニューを表示"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Next workspace"
+msgstr "次のワークスペース"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the next workspace."
+msgstr "次のワークスペースを表示"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Previous workspace"
+msgstr "前のワークスペース"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the previous workspace."
+msgstr "前のワークスペースを表示"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to next workspace"
+msgstr "次のワークスペースへ送る"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the next workspace."
+msgstr "ウィンドウを次のワークスペースに移動"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to previous workspace"
+msgstr "前のワークスペースへ送る"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the previous workspace."
+msgstr "ウィンドウを前のワークスペースに移動"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to next workspace"
+msgstr "次のワークスペースへコピー"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "ウィンドウを次のワークスペースにコピー"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to previous workspace"
+msgstr "前のワークスペースへコピー"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "ウィンドウを前のワークスペースにコピー"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Append workspace and send"
+msgstr "ワークスペースを後に追加し、送る"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr "新規ワークスペースをリストの最後につくりウィンドウをそこへ移動"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prepend workspace and send"
+msgstr "ワークスペースを前に追加し、送る"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the start of the list, and move the window to it."
+msgstr "新規ワークスペースをリストの最初につくりウィンドウをそこへ移動"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge next workspace"
+msgstr "次のワークスペースに統合"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
 msgstr ""
-"休止状態-\n"
-"強調表示された"
-
-#. ../themer/themer.glade:1266
-msgid "Map: "
-msgstr "割り当て: "
-
-#. ../themer/themer.glade:1480
-msgid "Mapping"
-msgstr "割り当て"
-
-#. ../themer/themer.glade:74
-msgid "New Theme"
-msgstr "新規テーマ"
-
-#. ../themer/themer.glade:1571 ../themer/themer.glade:1644
-#. * ../themer/themer.glade:1733 ../themer/themer.glade:1843
-msgid "OK"
-msgstr "了解"
-
-#. ../themer/themer.glade:914
-msgid "Patterns"
-msgstr "パターン"
-
-#. ../themer/themer.glade:1676
-msgid "Properties"
-msgstr "プロパティ"
-
-#. ../themer/themer.glade:120
-msgid "Save Theme _As..."
-msgstr "名前を付けて保存(_A)"
-
-#. ../themer/themer.glade:23
-msgid "Sawfish Theme Builder"
-msgstr "sawfish テーマビルダ"
-
-#. ../themer/themer.glade:1512
-msgid "Sawfish Themer Preview"
-msgstr "sawfish themer 試行"
-
-#. ../themer/themer.glade:306
-msgid "Theme name: "
-msgstr "テーマ名: "
-
-#. ../themer/themer.glade:1531
-msgid "This window previews the current theme."
-msgstr "選択したテーマをこのウィンドウに表示"
-
-#. ../themer/themer.glade:1409
-msgid "Type"
-msgstr "タイプ"
-
-#. ../themer/themer.glade:214
-msgid "Window _Frames"
-msgstr "ウィンドウフレーム(_F)"
-
-#. ../themer/themer.glade:1652
-msgid "[about text]"
-msgstr "[概要テキスト]"
-
-#. ../themer/themer.glade:1106
-msgid "[frame-part-table]"
-msgstr "[フレーム部テーブル]"
-
-#. ../themer/themer.glade:1766
-msgid "[place holder]"
-msgstr "[位置保存]"
-
-#. ../themer/themer.glade:1786 ../themer/themer.glade:1876
-msgid "[title]"
-msgstr "[タイトル]"
-
-#. ../themer/themer.glade:268
-msgid "_About"
-msgstr "概要(_A)"
-
-#. ../themer/themer.glade:59
-msgid "_File"
-msgstr "ファイル(_F)"
-
-#. ../themer/themer.glade:91
-msgid "_Open Theme.."
-msgstr "開く(_O)..."
-
-#. ../themer/themer.glade:190
-msgid "_Preferences..."
-msgstr "設定(_P)..."
-
-#. ../themer/themer.glade:143
-msgid "_Preview"
-msgstr "試行(_P)"
-
-#. ../themer/themer.glade:108
-msgid "_Save Theme"
-msgstr "保存(_S)"
-
-#. ../themer/themer.glade:175
-msgid "_Settings"
-msgstr "設定(_S)"
-
-#. ../themer/themer.glade:250
-msgid "_Themes"
-msgstr "テーマ(_T)"
-
-#~ msgid "Show desktop"
-#~ msgstr "デスクトップを表示"
-
-#~ msgid "Hide desktop"
-#~ msgstr "デスクトップを隠す"
-
-#~ msgid "Task list skip"
-#~ msgstr "タスクリストスキップ"
-
-#~ msgid "Toggle task list skip"
-#~ msgstr "タスクリストスキップを切替"
-
-#~ msgid "Revert"
-#~ msgstr "元に戻す"
-
-#~ msgid "Minimizing"
-#~ msgstr "最小化"
-
-#~ msgid "Maximizing"
-#~ msgstr "最大化"
-
-#~ msgid ""
-#~ "Frame type fallbacks:\n"
-#~ "\n"
-#~ "Associate frame types with type to try if the theme doesn't implement the "
-#~ "requested type."
-#~ msgstr ""
-#~ "フレームタイプフォールバック:\n"
-#~ "\n"
-#~ "そのタイプに関連づける、要求されたフレームタイプをそのテーマが実装していな"
-#~ "いときに試す、フレームタイプ"
-
-#~ msgid "Bevel intensity: \\wpercent."
-#~ msgstr "傾斜の度合: \\wパーセント"
-
-#~ msgid "Motion threshold for mouse pointer: \\wpixels"
-#~ msgstr "マウスカーソルの動きのしきい値: \\wピクセル"
-
-#~ msgid "Display key-binding information in menu items."
-#~ msgstr "メニューの項目内にキー割り当ての情報を表示"
-
-#~ msgid "_Left"
-#~ msgstr "左(_L)"
-
-#~ msgid "_Right"
-#~ msgstr "右(_R)"
-
-#~ msgid "_Up"
-#~ msgstr "上(_U)"
-
-#~ msgid "_Down"
-#~ msgstr "下(_D)"
-
-#~ msgid "Ignore program-specified window placements."
-#~ msgstr "プログラムの指定するウィンドウの位置を無視"
-
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "現在のビューポートでウィンドウをアイコンから元に戻す"
-
-#~ msgid "Move the window to the viewport above."
-#~ msgstr "上のビューポートにウィンドウを移動"
-
-#~ msgid "Move the window to the viewport below."
-#~ msgstr "下のビューポートにウィンドウを移動"
-
-#~ msgid "The default window animation mode: \\w"
-#~ msgstr "標準のウィンドウのアニメーションモード: \\w"
-
-#~ msgid ""
-#~ "Give focus to windows even when they haven't asked for it.\n"
-#~ "\n"
-#~ "Windows should set the `accepts input' hint in their WM_HINTS property to "
-#~ "show if they require the focus or not."
-#~ msgstr ""
-#~ "ウィンドウが期待していなくてもフォーカス\n"
-#~ "\n"
-#~ "ウィンドウはフォーカスされたいかどうかを示すために WM_HINTS プロパティ\n"
-#~ "の `入力を受け入れる' ヒントを設定するべきです。しかし多くのウィンドウ\n"
-#~ "はそうしないので、このオプションが用意されています"
-
-#~ msgid ""
-#~ "Offset (%) from left window edge when warping pointer.\n"
-#~ "\n"
-#~ "A negative number means outside the left window edge."
-#~ msgstr ""
-#~ "ポインタ移動時のウィンドウ左端のオフセットの割合(%)\n"
-#~ "\n"
-#~ "負の値はウィンドウ左端の外側という意味"
-
-#~ msgid ""
-#~ "Offset (%) from top window edge when warping pointer.\n"
-#~ "\n"
-#~ "A negative number means outside the top window edge."
-#~ msgstr ""
-#~ "ポインタ移動時のウィンドウ上端のオフセットの割合(%)\n"
-#~ "\n"
-#~ "負の値はウィンドウ上端の外側という意味"
-
-#~ msgid ""
-#~ "Format to create unique window names.\n"
-#~ "\n"
-#~ "Has two arguments (NAME INDEX) applied to it."
-#~ msgstr ""
-#~ "固有ウィンドウ名を生成するフォーマット\n"
-#~ "\n"
-#~ "二つの文字列 (NAME INDEX) をウィンドウ名に割当てる"
-
-#~ msgid "Virtual desktop configuration."
-#~ msgstr "仮想デスクトップ設定"
-
-#~ msgid "stop"
-#~ msgstr "停止"
-
-#~ msgid "wrap-around"
-#~ msgstr "巡回"
-
-#~ msgid "keep-going"
-#~ msgstr "移動し続ける"
-
-#~ msgid "When passing the first or last workspace: \\w"
-#~ msgstr "移動して最初か最後のワークスペースを通りすぎるとき: \\w"
-
-#~ msgid "When passing the first or last workspace, while moving a window: \\w"
-#~ msgstr "ウィンドウを移動して最初か最後のワークスペースを通りすぎるとき: \\w"
-
-#~ msgid "Workspaces are deleted when their last window closes."
-#~ msgstr "最後のウィンドウが閉じられたときにワークスペースを消去"
-
-#~ msgid "Preserve empty workspaces in pager."
-#~ msgstr "ページャ内で空のワークスペースを残す"
-
-#~ msgid "Dialogs appear on the same workspace as their application."
-#~ msgstr "ダイアログをアプリケーションと同じワークスペースで開く"
-
-#~ msgid "Whether growing an already grown window grows it again."
-#~ msgstr "既に拡大したウィンドウをさらに拡大するかどうか"
-
-#~ msgid "Grows window upwards until it `bumps into' another window."
-#~ msgstr "他のウィンドウにぶつかるまで上方向に拡大"
-
-#~ msgid "Moves window upwards until it `bumps into' another window."
-#~ msgstr "他のウィンドウにぶつかるまで上方向に移動"
-
-#~ msgid "opaque"
-#~ msgstr "内容を表示"
-
-#~ msgid "box"
-#~ msgstr "枠だけ表示"
-
-#~ msgid "How windows being moved are animated: \\w"
-#~ msgstr "ウィンドウ移動時の表示方法: \\w"
-
-#~ msgid "How windows being resized are animated: \\w"
-#~ msgstr "ウィンドウリサイズ時の表示方法: \\w"
-
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "移動やリサイズ時にウィンドウを前面に出す"
-
-#~ msgid "region"
-#~ msgstr "領域"
-
-#~ msgid "border"
-#~ msgstr "枠"
-
-#~ msgid "grab"
-#~ msgstr "つかみ"
-
-#~ msgid "border-grab"
-#~ msgstr "枠/つかみ"
-
-#~ msgid "How to choose window edges when resizing: \\w"
-#~ msgstr "リサイズ時に選択するウィンドウ端: \\w"
-
-#~ msgid "Snap window position to edges of other windows while moving."
-#~ msgstr "ウィンドウ移動時に他のウィンドウ端にくっつける"
-
-#~ msgid "Proximity in pixels before snapping to a window edge."
-#~ msgstr "ウィンドウ端がくっつくまでの接近ピクセル数"
-
-#~ msgid "magnetism"
-#~ msgstr "磁石"
-
-#~ msgid "resistance"
-#~ msgstr "抵抗"
-
-#~ msgid "attraction"
-#~ msgstr "引力"
-
-#~ msgid "How to snap together window edges: \\w"
-#~ msgstr "ウィンドウの端同士をくっつける方法: \\w"
-
-#~ msgid "Snap to otherwise-ignored windows."
-#~ msgstr "otherwise-ignoredウィンドウにくっつける"
-
-#~ msgid "Only update window contents after it has stopped moving."
-#~ msgstr "移動完了時のみウィンドウの内容を再描画"
-
-#~ msgid ""
-#~ "Default increment for size-window commands (when the window doesn't\n"
-#~ "specify it's own increments)."
-#~ msgstr ""
-#~ "size-window コマンドの標準のリサイズ単位(ウィンドウが\n"
-#~ "独自に指定していないとき)"
-
-#~ msgid "Number of pixels to move window in `slide-' commands."
-#~ msgstr "`slide-' コマンドでウィンドウを移動するピクセル数"
-
-#~ msgid "Display window names while cycling through windows."
-#~ msgstr "ウィンドウを巡回していく間にウィンドウの名前を表示"
-
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "巡回する間にウィンドウが一時的に選択される際、前面に出す"
-
-#~ msgid "Warp the mouse pointer to windows as they're temporarily selected."
-#~ msgstr "ウィンドウが一時的に選択されるときにマウスカーソルがそこに移動"
-
-#~ msgid "Focus windows when they're temporarily selected during cycling."
-#~ msgstr "巡回する間にウィンドウが一時的に選択されるときにフォーカス"
-
-#~ msgid "Disable auto-raising while temporarily selecting windows."
-#~ msgstr "ウィンドウを一時的に選択するときに auto-raise を無効にする"
-
-#~ msgid "Play sound effects for unmanaged windows."
-#~ msgstr "制御下にないウィンドウのイベントで効果音を鳴らす"
-
-#~ msgid "The hierarchical window menu raises singleton submenus."
-#~ msgstr "階層化されたウィンドウメニューを単一サブメニューにする"
-
-#~ msgid "Milliseconds to delay before flipping: \\w"
-#~ msgstr "画面端で移動するまでの遅延時間(ミリ秒): \\w"
-
-#~ msgid "Warp pointer to opposite screen edge when flipping."
-#~ msgstr "画面端での移動時にマウスカーソルを反対側に移動"
-
-#~ msgid "Remove tooltips after a period of time."
-#~ msgstr "一定時間後にツールチップを消す"
-
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "ツールチップを表示するまでの待ち時間(ミリ秒)"
-
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "ツールチップを消すまでの待ち時間(ミリ秒)"
-
-#~ msgid "Font used to display tooltips."
-#~ msgstr "ツールチップのフォント"
-
-#~ msgid "Color used for the tooltips background"
-#~ msgstr "ツールチップの背景色"
-
-#~ msgid "Color used for the tooltips foreground"
-#~ msgstr "ツールチップの文字の色"
-
-#~ msgid "Invoke the GNOME control center from the `Customize' menu."
-#~ msgstr "`設定'メニューから GNOME コントロールセンターを実行"
-
-#~ msgid ""
-#~ "Try to leave at least this many pixels between window edges in first/best-"
-#~ "fit."
-#~ msgstr ""
-#~ "first/best-fit モードのとき少なくともこのピクセル数だけ\n"
-#~ "ウィンドウ間を空けるようにする"
-
-#~ msgid "Automatically select window gravity from position on screen."
-#~ msgstr "スクリーン上でウィンドウの配置位置を自動選択"
-
-#~ msgid "Ignore requests from applications to change window stacking."
-#~ msgstr "アプリケーションからのウィンドウの前後の位置関係の変更要請を無視"
-
-#~ msgid "Windows are focused after being uniconified."
-#~ msgstr "ウィンドウをアイコンから元に戻した後でフォーカス"
-
-#~ msgid "Windows are raised after being uniconified."
-#~ msgstr "ウィンドウをアイコンから元に戻した後で前面に出す"
-
-#~ msgid "Unmanaged windows may be iconified."
-#~ msgstr "制御下にないウィンドウもアイコン化"
-
-#~ msgid "Windows uniconify to the current workspace."
-#~ msgstr "ウィンドウをアイコンから現在のワークスペースで元に戻す"
-
-#~ msgid "Iconifying a window also iconifies the: \\w"
-#~ msgstr "ウィンドウをアイコン化するとき \\w と一緒にアイコン化"
-
-#~ msgid "Uniconifying a window also uniconifies the: \\w"
-#~ msgstr "ウィンドウをアイコンから元に戻すとき \\w と一緒に元に戻す"
-
-#~ msgid "Iconify the window."
-#~ msgstr "ウィンドウをアイコン化"
-
-#~ msgid "Toggle single window mode"
-#~ msgstr "ウィンドウモードを切替"
-
-#~ msgid ""
-#~ "Maximizing a window in one dimension must increase the size of that "
-#~ "dimension."
-#~ msgstr "ウィンドウの最大化で必ず大きくする"
-
-#~ msgid "Raise windows when they are maximized."
-#~ msgstr "最大化するときにウィンドウを前面に出す"
-
-#~ msgid "Let unmanaged windows be overlapped when filling windows."
-#~ msgstr ""
-#~ "ウィンドウを大きくして画面を覆いつくすとき制御下にない\n"
-#~ "ウィンドウに重ねることを許す"
-
-#~ msgid "Don't cover `avoided' windows when maximizing."
-#~ msgstr "最大化するときに `avoid' 属性のついたウィンドウを覆わないようにする"
-
-#~ msgid "Dialog windows inherit the focus from their parent."
-#~ msgstr "ダイアログが親(ウィンドウ)のフォーカスを継承"
-
-#~ msgid "Decorate dialog windows similarly to application windows."
-#~ msgstr "ダイアログもアプリケーションウィンドウと同じように装飾"
-
-#~ msgid "Windows uniconify to the current workspace when they are selected."
-#~ msgstr "選択したウィンドウをアイコンから現在のワークスペースで元に戻す"
-
-#~ msgid "Raise selected windows (normally by the Windows menu)."
-#~ msgstr "選択したウィンドウ(普通はウィンドウメニューから)を前面に出す"
-
-#~ msgid "Warp the pointer to selected windows."
-#~ msgstr "選択したウィンドウへマウスカーソルを移動"
-
-#~ msgid "Group transient windows with their parents."
-#~ msgstr "ダイアログウィンドウとその親(ウィンドウ)をグループ化"
-
-#~ msgid "Persistent group ids"
-#~ msgstr "一貫したグループ ID"
-
-#~ msgid "novice"
-#~ msgstr "初級"
-
-#~ msgid "intermediate"
-#~ msgstr "中級"
-
-#~ msgid "expert"
-#~ msgstr "上級"
-
-#~ msgid "Show options suitable for \\w users."
-#~ msgstr "\\w 者向けのオプションを表示"
-
-#~ msgid "ok"
-#~ msgstr "了解"
-
-#~ msgid "revert/cancel/ok"
-#~ msgstr "元に戻す/取り消し/了解"
-
-#~ msgid "apply/revert/cancel/ok"
-#~ msgstr "適用/元に戻す/取り消し/了解"
-
-#~ msgid "Buttons shown in configurator: \\w"
-#~ msgstr "設定ツールで表示するボタン: \\w"
-
-#~ msgid "Show variable names of each customization option."
-#~ msgstr "各カスタマイズオプションの変数名を表示"
+"現在のワークスペースを消し、属するウィンドウを次のワークスペースに\n"
+"再配置"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge previous workspace"
+msgstr "前のワークスペースに統合"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
+msgstr ""
+"現在のワークスペースを消し、属すウィンドウを前のワークスペースに\n"
+"再配置"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace after"
+msgstr "ワークスペースを後に挿入"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace following the current workspace."
+msgstr "現在のワークスペースに続く新しいワークスペースを生成"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace before"
+msgstr "ワークスペースを前に挿入"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace before the current workspace."
+msgstr "現在のワークスペースの前に新規ワークスペースを生成"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace forwards"
+msgstr "ワークスペースを前に移動"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the right."
+msgstr "現在のワークスペースを右に一つ分移動"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace backwards"
+msgstr "ワークスペースを後に移動"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the left."
+msgstr "現在のワークスペースを左に一つ分移動"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete empty workspaces"
+msgstr "空のワークスペースを削除"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete any workspaces that don't contain any windows."
+msgstr "ウィンドウを含まないすべてのワークスペースを削除する"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete window instance"
+msgstr "ウィンドウ実体を削除"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
+msgstr ""
+"現在のワークスペースのウィンドウのコピーを削除し、それが最後の実体で\n"
+"あれば実体のウィンドウも閉じる"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Show desktop"
+msgstr "デスクトップを表示"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide all windows except the desktop window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide desktop"
+msgstr "デスクトップを隠す"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Undoes the effect of the `show-desktop' command."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Activate workspace"
+msgstr "ワークスペースをアクティブ化"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select the N'th workspace."
+msgstr "N 番目のワークスペースを選択"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to workspace"
+msgstr "ワークスペースに送る"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current window to the N'th workspace."
+msgstr "ウィンドウを N 番目のワークスペースに移動"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to workspace"
+msgstr "ワークスペースにコピー"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "ウィンドウを N 番目のワークスペースにコピー"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select workspace interactively"
+msgstr "ワークスペースを対話的に選択"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "ワークスペース切替時の表示"

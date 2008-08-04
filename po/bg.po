@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2002-06-01 12:40+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-04 22:17+0200\n"
 "PO-Revision-Date: 2002-09-29 00:15+0200\n"
 "Last-Translator: Sava Chankov <sava@fmi.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -24,117 +25,6 @@ msgstr "Sawfish може да бъде разширяван."
 #. ../scripts/sawfish-about.jl
 msgid "Sawfish homepage"
 msgstr "Страница на Sawfish"
-
-#. ../themer/themer.in
-msgid "Reload themes in window manager after saving."
-msgstr "Презареди темите в мениджъра на прозорци след запазването им."
-
-#. ../themer/themer.in
-msgid "Remove unused definitions when saving."
-msgstr "Премахни неизползваните определения при запис."
-
-#. ../themer/themer.in
-msgid "[left]"
-msgstr "[ляво]"
-
-#. ../themer/themer.in
-msgid "[right]"
-msgstr "[дясно]"
-
-#. ../themer/themer.in
-msgid "[top]"
-msgstr "[горе]"
-
-#. ../themer/themer.in
-msgid "[bottom]"
-msgstr "[долу]"
-
-#. ../lisp/sawfish/gtk/widgets/color.jl
-#. ../themer/themer.in
-msgid "Select color"
-msgstr "Избeри цвят"
-
-#. ../lisp/sawfish/gtk/widgets/font.jl
-#. ../lisp/sawfish/gtk/widgets/file.jl
-#. ../themer/themer.in
-msgid "Browse..."
-msgstr "Преглед..."
-
-#. ../lisp/sawfish/gtk/widgets/font.jl
-#. ../themer/themer.in
-msgid "Select font"
-msgstr "Избери шрифт"
-
-#. ../themer/themer.in
-msgid "Properties..."
-msgstr "Настройки..."
-
-#. ../themer/themer.in
-msgid "Select Image"
-msgstr "Избери картинка"
-
-#. ../themer/themer.in
-msgid "Image Properties"
-msgstr "Настройки на картинка"
-
-#. ../lisp/sawfish/gtk/widget.jl
-#. ../themer/themer.in
-msgid "No matching item for %S"
-msgstr "Няма съвпадение за %S"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added pattern `%s'"
-msgstr "Образецът `%s' е добавен"
-
-#. ../themer/themer.in
-msgid "Frame name"
-msgstr "Име на рамка"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added frame `%s'"
-msgstr "Добавена е рамката `%s'"
-
-#. ../themer/themer.in
-msgid "<none>"
-msgstr "<без>"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added frame type `%s'"
-msgstr "Добавена е рамка тип`%s'"
-
-#. ../themer/themer.in
-msgid "error while building frame: %S"
-msgstr "грешка при построяване на рамка: %S"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Saved as `%s'"
-msgstr "Записан като `%s'"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Generated theme in directory `%s'"
-msgstr "Генерирана тема в директория `%s'"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Read theme from `%s'"
-msgstr "Чете тема от `%s'"
-
-#. ../themer/themer.in
-msgid "Theme Directory"
-msgstr "Директория с теми"
-
-#. ../themer/themer.in
-msgid "Open"
-msgstr "Отвори"
-
-#. ../themer/themer.in
-msgid "Preferences"
-msgstr "Настройки"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -276,6 +166,15 @@ msgstr "Ширина на рамката на прозорец"
 msgid "Border width of bar images."
 msgstr "Ширина на рамката за показване на текст."
 
+#. ../lisp/sawfish/gtk/widget.jl
+#, c-format
+msgid "No matching item for %S"
+msgstr "Няма съвпадение за %S"
+
+#. ../lisp/sawfish/gtk/widget.jl
+msgid "** unknown widget **  "
+msgstr "** неизвестен графичен обект **"
+
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Key"
@@ -285,9 +184,22 @@ msgstr "Клавиш"
 msgid "Value"
 msgstr "Стойност"
 
+#. ../lisp/sawfish/gtk/widgets/color.jl
+msgid "Select color"
+msgstr "Избeри цвят"
+
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../lisp/sawfish/gtk/widgets/file.jl
+msgid "Browse..."
+msgstr "Преглед..."
+
 #. ../lisp/sawfish/gtk/widgets/file.jl
 msgid "Select file"
 msgstr "Избери файл"
+
+#. ../lisp/sawfish/gtk/widgets/font.jl
+msgid "Select font"
+msgstr "Избери шрифт"
 
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
@@ -317,14 +229,6 @@ msgstr "Да"
 msgid "No"
 msgstr "Не"
 
-#. ../lisp/sawfish/gtk/widget.jl
-msgid "** unknown widget **  "
-msgstr "** неизвестен графичен обект **"
-
-#. ../lisp/sawfish/ui/layouts/keymaps.jl
-msgid "Context:"
-msgstr "Контекст:"
-
 #. ../lisp/sawfish/ui/apply.jl
 #, c-format
 msgid "While changing %s:"
@@ -334,24 +238,14 @@ msgstr "Докато сменя %s:"
 msgid "Sawfish Error"
 msgstr "Грешка в Sawfish"
 
+#. ../lisp/sawfish/ui/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Контекст:"
+
 #. ../lisp/sawfish/ui/shell.jl
-msgid "Sawfish configurator"
+#, fuzzy
+msgid "Sawfish Configurator"
 msgstr "Конфигуриране на Sawfish"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Работни площи:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Колони:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Редове:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/commands.jl
@@ -369,12 +263,28 @@ msgstr "Недокументирана функция"
 msgid "Grab..."
 msgstr "Хвани..."
 
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Работни площи:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Колони:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Редове:"
+
 #. ../lisp/sawfish/ui/widgets/icon.jl
 msgid "Select Icon"
 msgstr "Избери икона"
 
 #. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Edit binding"
+#, fuzzy
+msgid "Edit Binding"
 msgstr "Редактирай клавишна комбинация"
 
 #. ../lisp/sawfish/ui/widgets/keymap.jl
@@ -394,7 +304,8 @@ msgid "not"
 msgstr "не"
 
 #. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match window properties"
+#, fuzzy
+msgid "Match Window Properties"
 msgstr "Провери за съвпадение настройките на прозорец"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -421,880 +332,6 @@ msgstr "Подсещания"
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
 msgstr "Индекс:"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command"
-msgstr "Извикай команда"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-msgstr "Извикай команда NAME; с незадължителен аргумент PFX-ARG."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Run shell command"
-msgstr "Изпълни команда на обвивката"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Execute the given shell command."
-msgstr "Изпълни зададената команда на обвивката"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Команда:"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command sequence"
-msgstr "Командна последователност"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Invoke the list of commands, one by one."
-msgstr "Извикай списъка от команди, една след друга."
-
-#. ../lisp/sawfish/wm/menus.jl
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Quit"
-msgstr "Изход"
-
-#. ../lisp/sawfish/wm/menus.jl
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Restart"
-msgstr "Рестартирай"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Destroy window"
-msgstr "Унищожи прозорец"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Kill client"
-msgstr "Убий клиент"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "No operation"
-msgstr "Няма действие"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command with output to screen"
-msgstr "Извикай команда с изход на екрана"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Prompt for a command, execute it, and print any output to the screen."
-msgstr "Пита за команда, изпълява я, и печата нейния изход на екрана."
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Focus"
-msgstr "Фокус"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Move/Resize"
-msgstr "Премести/Преоразмери"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Placement"
-msgstr "Разположение"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Appearance"
-msgstr "Външен вид"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Workspaces"
-msgstr "Работни площи"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Bindings"
-msgstr "Клавишна комбинация"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing and Maximizing"
-msgstr "Минимизира/Максимизира"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Miscellaneous"
-msgstr "Разни"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Customize"
-msgstr "Настройки"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "Извикай потребителската система за настройки."
-
-#. ../lisp/sawfish/wm/focus.jl
-msgid "When does the mouse pointer affect the input focus."
-msgstr "Кога показалецът на мишката влияе на фокуса."
-
-#. ../lisp/sawfish/wm/focus.jl
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "Режимът щракни-за-да-фокусираш предава щракването на приложението"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default frame style:"
-msgstr "Подразбиращ се стил на рамка:"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Automatically reload themes when they are updated."
-msgstr "Автоматично презареди теми когато са обновени."
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default font: \\w"
-msgstr "Шрифт по подразбиране: \\w"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Edit frame style"
-msgstr "Редактирай стила на рамката"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default"
-msgstr "По подразбиране"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Normal"
-msgstr "Нормална"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Title-only"
-msgstr "Само заглавие"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Border-only"
-msgstr "Само рамка"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Top-border"
-msgstr "Горна рамка"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "None"
-msgstr "Без"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "global-keymap"
-msgstr "глобална клавишна комбинация"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active anywhere."
-msgstr "Клавишна комбинация, съдържаща обвързаности, активни навсякъде."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "window-keymap"
-msgstr "клавишна комбинация на прозореца"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr ""
-"Клавишна комбинация, съдържа обвързаност, която е активна когато е фокусиран "
-"клиентски прозорец."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "root-window-keymap"
-msgstr "клавишна комбинация на главния прозорец"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
-"е\n"
-" в основният прозорец (или прозореца е фокусиран)."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "title-keymap"
-msgstr "клавишна комбинация на заглавието"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
-"е\n"
-" в заглавието на прозорец."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "border-keymap"
-msgstr "клавишна комбинация на границата"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
-"е\n"
-" в рамката на прозорец."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "close-button-keymap"
-msgstr "клавишна комбинация на бутона за затваряне"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
-"е\n"
-" в бутона за затваряне на прозорец."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "iconify-button-keymap"
-msgstr "клавишна комбинация на бутона за минимизация"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
-"е\n"
-" в бутона-икона на прозорец."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "maximize-button-keymap"
-msgstr "клавишна комбинация на бутона за максимизация"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
-"е\n"
-" в бутона за максимализиране прозорец."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "menu-button-keymap"
-msgstr "клавишна комбинация на бутона за меню"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
-"е\n"
-" в бутона за меню на прозорец."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "shade-button-keymap"
-msgstr "клавишна комбинация на бутона за свиване"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Клавишна комбинация, съдържаща обвързаност, която е активна, когато "
-"показалецът \n"
-"е в бутона за свиване на прозорец. (В тази клавишна комбинация се оценяват "
-"се само обвързвания с мишката)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default window manager shortcuts."
-msgstr ""
-"Клавиш-модификатор използван за подразбиращ се за препратка на мениджъра на "
-"прозорци."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Minimize"
-msgstr "Минимизира"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Unmaximize"
-msgstr "Демаксимизира"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Maximize"
-msgstr "Максимизира"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Close"
-msgstr "_Затвори"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Toggle"
-msgstr "_Превключи"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "In _group"
-msgstr "В _група"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Send window to"
-msgstr "_Изпрати прозорец в"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Previous workspace"
-msgstr "П_редишна раб. площ"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Next workspace"
-msgstr "_Следваща раб. площ"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to previous"
-msgstr "Копирай в предишната"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to next"
-msgstr "Копирай в следващата"
-
-#. ../lisp/sawfish/wm/stacking.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Stacking"
-msgstr "Натрупване"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Raise"
-msgstr "Вдигни"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Lower"
-msgstr "Смъкни"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Upper layer"
-msgstr "Горен слой"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Lower layer"
-msgstr "Долен слой"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Frame type"
-msgstr "Тип на рамка"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Frame style"
-msgstr "Стил на рамка"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Windows"
-msgstr "_Прозорци"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Work_spaces"
-msgstr "Работни площи"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Programs"
-msgstr "_Програми"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Customize"
-msgstr "Н_астрой"
-
-#. ../lisp/sawfish/wm/gnome/integration.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Help"
-msgstr "Помо_щ"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_FAQ..."
-msgstr "_FAQ..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_News..."
-msgstr "_Новини..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_WWW page..."
-msgstr "WWW _страница..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Manual..."
-msgstr "_Ръководство..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_About Sawfish..."
-msgstr "_За Sawfish..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup window menu"
-msgstr "Покажи меню на прозорец"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the menu listing all window operations."
-msgstr "Показва меню с всички действия за прозорец."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup root menu"
-msgstr "Покажи главното меню"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the main menu."
-msgstr "Покажи главното меню"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup apps menu"
-msgstr "Покажи менюто с приложения"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the applications menu."
-msgstr "Показва менюто с приложения."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "All settings"
-msgstr "Всички настройки"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Edit theme..."
-msgstr "Редактирай тема..."
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing windows: \\w"
-msgstr "Метод за разполагане на прозорци: \\w"
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing dialog windows: \\w"
-msgstr "Метод за разполагане на диалогови прозорци: \\w"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "all"
-msgstr "всички"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "parents"
-msgstr "родители"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/state/iconify.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "none"
-msgstr "без"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Keep transient windows stacked above: \\w"
-msgstr "Запазва подчинените прозорци над: \\w"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise single window"
-msgstr "Вдигни единичен прозорец"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise the window to its highest allowed position in the stacking order."
-msgstr "Вдигни прозорец до най-високата му позволена позиция."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower single window"
-msgstr "Снижи единичен прозорец"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower the window to its lowest allowed position in the stacking order."
-msgstr "Снижи единичен прозорец до неговата най-ниска позволена позиция."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise lower single window"
-msgstr "Издига снижен единичен прозорец"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed."
-msgstr ""
-"Ако прозорецът е в най-високата си позиция, свали го в най-ниската\n"
-"възможна позиция. В противен случай го издигни колкото може."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise window depth"
-msgstr "Вдигни дълбочината на прозорец"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level above its current level."
-msgstr "Постави прозореца по-нагоре в стека."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower window depth"
-msgstr "Намали дълбочината на прозорец"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level beneath its current level."
-msgstr "Постави прозореца по-надолу в стека."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport"
-msgstr "Активирай област за преглед"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport."
-msgstr "Избира указаната област за преглед."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Column:"
-msgstr "Колона:"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Row:"
-msgstr "Ред:"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport column"
-msgstr "Активирай колона в областта за преглед."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport column."
-msgstr "Избира указаната колона в областта за преглед"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport row"
-msgstr "Активирай ред в областта за преглед"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport row."
-msgstr "Избира указания ред в областта за преглед"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window to viewport"
-msgstr "Премести прозорец в област за преглед"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the current window to the specified viewport."
-msgstr "Премества текущия прозорец в указаната област за преглед."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport right"
-msgstr "Премести областа за преглед надясно"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen to the right."
-msgstr "Премества областта за преглед един екран в дясно."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport left"
-msgstr "Премести областа за преглед наляво"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen to the left."
-msgstr "Премества областта за преглед един екран в ляво."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport up"
-msgstr "Премести областа за преглед нагоре"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen up."
-msgstr "Премества областта за преглед един екран нагоре."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport down"
-msgstr "Премести областа за преглед надолу"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen down."
-msgstr "Премества областта за преглед един екран надолу."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window right"
-msgstr "Премести прозорец в дясно"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport on the right, and switch to that viewport."
-msgstr "Премества прозореца в областта за преглед отдясно и превключва на нея."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window left"
-msgstr "Премести прозорец в ляво"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport on the left, and switch to that viewport."
-msgstr "Премества прозореца в областта за преглед отляво и превключва на нея. "
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window up"
-msgstr "Премести прозорец нагоре"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport above, and switch to that viewport."
-msgstr "Премества прозореца в областта за преглед отгоре и превключва на нея."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window down"
-msgstr "Премести прозорец надолу"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport below, and switch to that viewport."
-msgstr "Премества прозореца в областта за преглед отдолу и превключва на нея."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Focus desktop"
-msgstr "Фокусирай десктопа."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Transfer input focus to the desktop window (if one exists)."
-msgstr "Премества фокуса на прозореца на екрана (ако такъв съществува)."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window"
-msgstr "Изтрий прозорец"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window."
-msgstr "Изтрива прозореца."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window safely"
-msgstr "Изтрий прозорец безопасно"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window, or beep if the window can't be closed safely."
-msgstr ""
-"Изтрива прозореца, или бибипка, ако прозорецът не може да бъде затворен "
-"безопасно."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Uniquify window name"
-msgstr "Избери уникално име на прозорец"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Force the current window to have a unique title."
-msgstr "Слага уникално заглавие на текущия прозорец."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspace names"
-msgstr "Имена на раб. площи"
-
-#. ../lisp/sawfish/wm/util/compat.jl
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace"
-msgstr "Вмъкни раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select next workspace"
-msgstr "Избор на следваща раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select previous workspace"
-msgstr "Избор на предишна раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge with next"
-msgstr "Обединява със следващата"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge with previous"
-msgstr "Обединява с предишната"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace right"
-msgstr "Премести областта за преглед вдясно"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace left"
-msgstr "Премести областта за преглед вляво"
-
-#. ../lisp/sawfish/wm/workspace.jl
-#, c-format
-msgid "space %d"
-msgstr "площ %d"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Popup workspace list"
-msgstr "Покажи списъка на раб. площи"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the menu containing the list of all workspaces."
-msgstr "Покажи менюто със списък на всички работни площи."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Popup window list"
-msgstr "Покажи списъка с прозорци"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the menu of all managed windows."
-msgstr "Покажи менюто с всички управлявани прозорци"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Next workspace"
-msgstr "Следваща раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the next workspace."
-msgstr "Показва следващата раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Previous workspace"
-msgstr "Предишна работна площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the previous workspace."
-msgstr "Показва предишната раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to next workspace"
-msgstr "Изпрати на следващата раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the window to the next workspace."
-msgstr "Премества прозореца на следващата раб. площ."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to previous workspace"
-msgstr "Изпрати на предишната раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the window to the previous workspace."
-msgstr "Премества прозореца в предишната раб. площ."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to next workspace"
-msgstr "Копирай в следващата раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the window to the next workspace."
-msgstr "Копира прозореца в следващата раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to previous workspace"
-msgstr "Копирай в предишната раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the window to the previous workspace."
-msgstr "Копира прозореца в предишната раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Append workspace and send"
-msgstr "Добави раб. площ и изпрати"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Create a new workspace at the end of the list, and move the window to it."
-msgstr "Създава нова раб. площ на края на списъка, и премества прозореца там."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Prepend workspace and send"
-msgstr "Добави раб. площ в началото и изпрати"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Create a new workspace at the start of the list, and move the window to it."
-msgstr ""
-"Създава нова раб. площ в началото на списъка, и премества прозореца там."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge next workspace"
-msgstr "Слей следващата раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the next\n"
-"workspace."
-msgstr ""
-"Изтрива текущата раб. площ. Нейните обекти се пренасочват към\n"
-"следващата раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge previous workspace"
-msgstr "Слей предишната раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the\n"
-"previous workspace."
-msgstr ""
-"Изтрива текущата раб. площ. Нейните обекти се пренасочват към\n"
-"предишната раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace after"
-msgstr "Вмъкни раб. площ след"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Create a new workspace following the current workspace."
-msgstr "Създава нова раб. площ след текущата"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace before"
-msgstr "Вмъкни раб. площ преди"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Create a new workspace before the current workspace."
-msgstr "Създава нова раб. площ преди текущата"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace forwards"
-msgstr "Премести областта за преглед напред"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current workspace one place to the right."
-msgstr "Премества раб. площ едно място в дясно."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace backwards"
-msgstr "Премести областта за преглед назад"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current workspace one place to the left."
-msgstr "Премества раб. площ едно място в ляво."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete empty workspaces"
-msgstr "Изтрий празните раб. площи"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete any workspaces that don't contain any windows."
-msgstr "Изтрива всичките раб. площи които не съдържат прозорци."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete window instance"
-msgstr "Изтрива копие на прозорец"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Remove the copy of the window on the current workspace. If this is the\n"
-"last instance remaining, then delete the actual window."
-msgstr ""
-"Изтрива копието на прозореца върху текущата раб. площ. Ако то е единствено,\n"
-"тогава се изтрива самия прозорец."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Activate workspace"
-msgstr "Активирай раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select the N'th workspace."
-msgstr "Избира N-тата раб. площ."
-
-#. ../lisp/sawfish/wm/util/prompt-wm.jl
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspace:"
-msgstr "Раб. площ:"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to workspace"
-msgstr "Изпрати на раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current window to the N'th workspace."
-msgstr "Премества текущия прозорец на N-тата раб. площ."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to workspace"
-msgstr "Копирай на раб. площ"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the current window to the N'th workspace."
-msgstr "Копира текущия прозорец на N-тата раб. площ."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select workspace interactively"
-msgstr "Избери на раб. площ интерактивно"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Prompt for a workspace and switch to it."
-msgstr "Пита за раб. площ и превключва на нея."
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next workspace window"
@@ -2117,6 +1154,106 @@ msgstr "Xterm"
 msgid "Start a new xterm."
 msgstr "Стартира нов xterm."
 
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command"
+msgstr "Извикай команда"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr "Извикай команда NAME; с незадължителен аргумент PFX-ARG."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Run shell command"
+msgstr "Изпълни команда на обвивката"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Execute the given shell command."
+msgstr "Изпълни зададената команда на обвивката"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command:"
+msgstr "Команда:"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command sequence"
+msgstr "Командна последователност"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Извикай списъка от команди, една след друга."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Quit"
+msgstr "Изход"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Restart"
+msgstr "Рестартирай"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Destroy window"
+msgstr "Унищожи прозорец"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Kill client"
+msgstr "Убий клиент"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "No operation"
+msgstr "Няма действие"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command with output to screen"
+msgstr "Извикай команда с изход на екрана"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "Пита за команда, изпълява я, и печата нейния изход на екрана."
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Focus"
+msgstr "Фокус"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Премести/Преоразмери"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Placement"
+msgstr "Разположение"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Appearance"
+msgstr "Външен вид"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "Работни площи"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "Клавишна комбинация"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing and Maximizing"
+msgstr "Минимизира/Максимизира"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "Разни"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Customize"
+msgstr "Настройки"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "Извикай потребителската система за настройки."
+
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
 msgstr "3D хакване"
@@ -2289,6 +1426,16 @@ msgstr "Предава клик при предаване на фокус"
 msgid "Focus mode"
 msgstr "Режим на фокус"
 
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame type"
+msgstr "Тип на рамка"
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame style"
+msgstr "Стил на рамка"
+
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignored"
 msgstr "Игнорира"
@@ -2323,6 +1470,11 @@ msgstr "Пропуска при цикъл"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Window list skip"
+msgstr "Пропуска в списъка на прозорци"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Task list skip"
 msgstr "Пропуска в списъка на прозорци"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2463,6 +1615,139 @@ msgstr "Забравя всичко запазено за прозореца"
 msgid "_History"
 msgstr "_История"
 
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace down"
+msgstr "Работен екран %d"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace below the current workspace"
+msgstr "Създава нова раб. площ преди текущата"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace up"
+msgstr "раб. площ"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace above the current workspace"
+msgstr "Създава нова раб. площ преди текущата"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace left"
+msgstr "Премести областта за преглед вляво"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace to the left of the current workspace"
+msgstr "Създава нова раб. площ преди текущата"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace right"
+msgstr "Премести областта за преглед вдясно"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace to the right of the current workspace"
+msgstr "Създава нова раб. площ преди текущата"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace down"
+msgstr "Изпрати на раб. площ"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace below the current workspace"
+msgstr "Създава нова раб. площ преди текущата"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace up"
+msgstr "Изпрати на раб. площ"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace above the current workspace"
+msgstr "Създава нова раб. площ преди текущата"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace left"
+msgstr "Изпрати на раб. площ"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Създава нова раб. площ преди текущата"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace right"
+msgstr "Изпрати на раб. площ"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Създава нова раб. площ преди текущата"
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Кога показалецът на мишката влияе на фокуса."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Режимът щракни-за-да-фокусираш предава щракването на приложението"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default frame style:"
+msgstr "Подразбиращ се стил на рамка:"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Automatically reload themes when they are updated."
+msgstr "Автоматично презареди теми когато са обновени."
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default font: \\w"
+msgstr "Шрифт по подразбиране: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Edit frame style"
+msgstr "Редактирай стила на рамката"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default"
+msgstr "По подразбиране"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Normal"
+msgstr "Нормална"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Title-only"
+msgstr "Само заглавие"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Border-only"
+msgstr "Само рамка"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Top-border"
+msgstr "Горна рамка"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "None"
+msgstr "Без"
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/gnome/integration.jl
+msgid "_Help"
+msgstr "Помо_щ"
+
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "Помощ на _GNOME"
@@ -2479,15 +1764,358 @@ msgstr "Относно GNOME..."
 msgid "Gnome menus update"
 msgstr "Обновяване на менюто на Gnome"
 
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "global-keymap"
+msgstr "глобална клавишна комбинация"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active anywhere."
+msgstr "Клавишна комбинация, съдържаща обвързаности, активни навсякъде."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "window-keymap"
+msgstr "клавишна комбинация на прозореца"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"Клавишна комбинация, съдържа обвързаност, която е активна когато е фокусиран "
+"клиентски прозорец."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "root-window-keymap"
+msgstr "клавишна комбинация на главния прозорец"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в основният прозорец (или прозореца е фокусиран)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "title-keymap"
+msgstr "клавишна комбинация на заглавието"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в заглавието на прозорец."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "border-keymap"
+msgstr "клавишна комбинация на границата"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в рамката на прозорец."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "close-button-keymap"
+msgstr "клавишна комбинация на бутона за затваряне"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в бутона за затваряне на прозорец."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "iconify-button-keymap"
+msgstr "клавишна комбинация на бутона за минимизация"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в бутона-икона на прозорец."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "maximize-button-keymap"
+msgstr "клавишна комбинация на бутона за максимизация"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в бутона за максимализиране прозорец."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "menu-button-keymap"
+msgstr "клавишна комбинация на бутона за меню"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в бутона за меню на прозорец."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "shade-button-keymap"
+msgstr "клавишна комбинация на бутона за свиване"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна, когато "
+"показалецът \n"
+"е в бутона за свиване на прозорец. (В тази клавишна комбинация се оценяват "
+"се само обвързвания с мишката)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
+"Клавиш-модификатор използван за подразбиращ се за препратка на мениджъра на "
+"прозорци."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Minimize"
+msgstr "Минимизира"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Unmaximize"
+msgstr "Демаксимизира"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Maximize"
+msgstr "Максимизира"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Close"
+msgstr "_Затвори"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Toggle"
+msgstr "_Превключи"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "In _group"
+msgstr "В _група"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Send window to"
+msgstr "_Изпрати прозорец в"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Previous workspace"
+msgstr "П_редишна раб. площ"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Next workspace"
+msgstr "_Следваща раб. площ"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Copy to previous"
+msgstr "Копирай в предишната"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Copy to next"
+msgstr "Копирай в следващата"
+
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Stacking"
+msgstr "Натрупване"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Raise"
+msgstr "Вдигни"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Lower"
+msgstr "Смъкни"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Upper layer"
+msgstr "Горен слой"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Lower layer"
+msgstr "Долен слой"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Windows"
+msgstr "_Прозорци"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Work_spaces"
+msgstr "Работни площи"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Programs"
+msgstr "_Програми"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Customize"
+msgstr "Н_астрой"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_FAQ..."
+msgstr "_FAQ..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_News..."
+msgstr "_Новини..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_WWW page..."
+msgstr "WWW _страница..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Manual..."
+msgstr "_Ръководство..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_About Sawfish..."
+msgstr "_За Sawfish..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Restart"
+msgstr "Рестартирай"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Quit"
+msgstr "Изход"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup window menu"
+msgstr "Покажи меню на прозорец"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "Показва меню с всички действия за прозорец."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup root menu"
+msgstr "Покажи главното меню"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "Покажи главното меню"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup apps menu"
+msgstr "Покажи менюто с приложения"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "Показва менюто с приложения."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_All settings"
+msgstr "Всички настройки"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Edit theme..."
+msgstr "Редактирай тема..."
+
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
 msgstr ""
 "Разстояние между последователните позиции в 'клатушкащ се' режим на "
 "позициониране."
 
-#. ../lisp/sawfish/wm/state/gnome.jl
-msgid "In GNOME _task list"
-msgstr "В списъка от задачи на G_NOME"
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing windows: \\w"
+msgstr "Метод за разполагане на прозорци: \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing dialog windows: \\w"
+msgstr "Метод за разполагане на диалогови прозорци: \\w"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "all"
+msgstr "всички"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "родители"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "none"
+msgstr "без"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Запазва подчинените прозорци над: \\w"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise single window"
+msgstr "Вдигни единичен прозорец"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr "Вдигни прозорец до най-високата му позволена позиция."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower single window"
+msgstr "Снижи единичен прозорец"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr "Снижи единичен прозорец до неговата най-ниска позволена позиция."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise lower single window"
+msgstr "Издига снижен единичен прозорец"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
+msgstr ""
+"Ако прозорецът е в най-високата си позиция, свали го в най-ниската\n"
+"възможна позиция. В противен случай го издигни колкото може."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise window depth"
+msgstr "Вдигни дълбочината на прозорец"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "Постави прозореца по-нагоре в стека."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower window depth"
+msgstr "Намали дълбочината на прозорец"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "Постави прозореца по-надолу в стека."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2616,6 +2244,16 @@ msgid "Toggle whether a window will be include in the window list."
 msgstr "Превключва на това дали прозореца ще бъде в списъка на прозорци или не"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle task list skip"
+msgstr "Превключва на това дали прозореца ще бъде в списъка или не"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle whether a window will be included in the task-list."
+msgstr "Превключва на това дали прозореца ще бъде в списъка на прозорци или не"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
 msgstr "_Игнорируем"
 
@@ -2630,6 +2268,11 @@ msgstr "Показва се в списъка при превключване н
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
 msgstr "В списъка на прозорци"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "In _task list"
+msgstr "В списъка от задачи на G_NOME"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Lock position and size while windows are maximized."
@@ -2839,6 +2482,10 @@ msgstr ""
 "до най-ниската. Иначе го вдига до колкото може. Също сменя нивото\n"
 "на всички подчинени нему прозорци."
 
+#. ../lisp/sawfish/wm/util/compat.jl
+msgid "Insert workspace"
+msgstr "Вмъкни раб. площ"
+
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Unshade selected windows."
 msgstr "Разтваря свити към заглавието прозорци когато са избрани."
@@ -2916,6 +2563,11 @@ msgstr "Прозорец:"
 msgid "Workspace %d"
 msgstr "Работен екран %d"
 
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+msgid "Workspace:"
+msgstr "Раб. площ:"
+
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
 msgstr "промпт-клавишна карта"
@@ -2942,200 +2594,393 @@ msgstr "Снижи прозорец"
 msgid "Raise lower window"
 msgstr "Вдигни снижи прозорец"
 
-#. ../themer/themer.glade:1315
-msgid " to: "
-msgstr " на:"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport"
+msgstr "Активирай област за преглед"
 
-#. ../themer/themer.glade:1587
-msgid "About"
-msgstr "Относно"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "Избира указаната област за преглед."
 
-#. ../themer/themer.glade:412
-msgid "About:"
-msgstr "Относно:"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Column:"
+msgstr "Колона:"
 
-#. ../themer/themer.glade:879 ../themer/themer.glade:1213
-#. * ../themer/themer.glade:1458
-msgid "Add"
-msgstr "Добави"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Row:"
+msgstr "Ред:"
 
-#. ../themer/themer.glade:1176
-msgid "Attributes"
-msgstr "Атрибути"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport column"
+msgstr "Активирай колона в областта за преглед."
 
-#. ../themer/themer.glade:1746 ../themer/themer.glade:1856
-msgid "Cancel"
-msgstr "Откажи"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Избира указаната колона в областта за преглед"
 
-#. ../themer/themer.glade:675 ../themer/themer.glade:829
-msgid "Clicked"
-msgstr "Щракнат"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport row"
+msgstr "Активирай ред в областта за преглед"
 
-#. ../themer/themer.glade:892
-msgid "Copy"
-msgstr "Копирай"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Избира указания ред в областта за преглед"
 
-#. ../themer/themer.glade:1036
-msgid "Copy..."
-msgstr "Копирай..."
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window to viewport"
+msgstr "Премести прозорец в област за преглед"
 
-#. ../themer/themer.glade:482
-msgid "Details"
-msgstr "Подробности"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "Премества текущия прозорец в указаната област за преглед."
 
-#. ../themer/themer.glade:430
-msgid "Directory:"
-msgstr "Директория:"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport right"
+msgstr "Премести областа за преглед надясно"
 
-#. ../themer/themer.glade:166
-msgid "E_xit"
-msgstr "И_зход"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "Премества областта за преглед един екран в дясно."
 
-#. ../themer/themer.glade:596 ../themer/themer.glade:789
-msgid "Focused"
-msgstr "Фокусиран"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport left"
+msgstr "Премести областа за преглед наляво"
 
-#. ../themer/themer.glade:987 ../themer/themer.glade:1422
-msgid "Frame"
-msgstr "Рамка"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "Премества областта за преглед един екран в ляво."
 
-#. ../themer/themer.glade:238
-msgid "Frame Part _Definitions"
-msgstr "Определение на част на _рамка"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport up"
+msgstr "Премести областа за преглед нагоре"
 
-#. ../themer/themer.glade:226
-msgid "Frame _Classes"
-msgstr "Кла_с на рамка"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "Премества областта за преглед един екран нагоре."
 
-#. ../themer/themer.glade:1237
-msgid "Frames"
-msgstr "Рамки"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport down"
+msgstr "Премести областа за преглед надолу"
 
-#. ../themer/themer.glade:622
-msgid "HIghlighted"
-msgstr "Маркиран"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "Премества областта за преглед един екран надолу."
 
-#. ../themer/themer.glade:802
-msgid "Highlighted"
-msgstr "Маркиран"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window right"
+msgstr "Премести прозорец в дясно"
 
-#. ../themer/themer.glade:570 ../themer/themer.glade:776
-msgid "Inactive"
-msgstr "Неактивен"
-
-#. ../themer/themer.glade:702 ../themer/themer.glade:843
+#. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Inactive-\n"
-"Clicked"
-msgstr ""
-"Неактивен-\n"
-"Щракнат"
+"Move the window to the viewport on the right, and switch to that viewport."
+msgstr "Премества прозореца в областта за преглед отдясно и превключва на нея."
 
-#. ../themer/themer.glade:649 ../themer/themer.glade:816
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window left"
+msgstr "Премести прозорец в ляво"
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Inactive-\n"
-"Highlighted"
+"Move the window to the viewport on the left, and switch to that viewport."
+msgstr "Премества прозореца в областта за преглед отляво и превключва на нея. "
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window up"
+msgstr "Премести прозорец нагоре"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr "Премества прозореца в областта за преглед отгоре и превключва на нея."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window down"
+msgstr "Премести прозорец надолу"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr "Премества прозореца в областта за преглед отдолу и превключва на нея."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Focus desktop"
+msgstr "Фокусирай десктопа."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "Премества фокуса на прозореца на екрана (ако такъв съществува)."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window"
+msgstr "Изтрий прозорец"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window."
+msgstr "Изтрива прозореца."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window safely"
+msgstr "Изтрий прозорец безопасно"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window, or beep if the window can't be closed safely."
 msgstr ""
-"Неактивен-\n"
-"Осветен"
+"Изтрива прозореца, или бибипка, ако прозорецът не може да бъде затворен "
+"безопасно."
 
-#. ../themer/themer.glade:1266
-msgid "Map: "
-msgstr "Карта:"
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Uniquify window name"
+msgstr "Избери уникално име на прозорец"
 
-#. ../themer/themer.glade:1480
-msgid "Mapping"
-msgstr "Съответствие"
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "Слага уникално заглавие на текущия прозорец."
 
-#. ../themer/themer.glade:74
-msgid "New Theme"
-msgstr "Нова тема"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Workspace names"
+msgstr "Имена на раб. площи"
 
-#. ../themer/themer.glade:1571 ../themer/themer.glade:1644
-#. * ../themer/themer.glade:1733 ../themer/themer.glade:1843
-msgid "OK"
-msgstr "OK"
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "_Insert workspace"
+msgstr "Вмъкни раб. площ"
 
-#. ../themer/themer.glade:914
-msgid "Patterns"
-msgstr "Образци"
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Select _next workspace"
+msgstr "Избор на следваща раб. площ"
 
-#. ../themer/themer.glade:1676
-msgid "Properties"
-msgstr "Настройки"
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Select _previous workspace"
+msgstr "Избор на предишна раб. площ"
 
-#. ../themer/themer.glade:120
-msgid "Save Theme _As..."
-msgstr "Запази темата като..."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge with next"
+msgstr "Обединява със следващата"
 
-#. ../themer/themer.glade:23
-msgid "Sawfish Theme Builder"
-msgstr "Редактор на теми в Sawfish"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge with previous"
+msgstr "Обединява с предишната"
 
-#. ../themer/themer.glade:1512
-msgid "Sawfish Themer Preview"
-msgstr "Преглед на теми в Sawfish"
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Move workspace _right"
+msgstr "Премести областта за преглед вдясно"
 
-#. ../themer/themer.glade:306
-msgid "Theme name: "
-msgstr "Име на тема:"
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Move workspace _left"
+msgstr "Премести областта за преглед вляво"
 
-#. ../themer/themer.glade:1531
-msgid "This window previews the current theme."
-msgstr "Този прозрец показва текущата тема."
+#. ../lisp/sawfish/wm/workspace.jl
+#, c-format
+msgid "space %d"
+msgstr "площ %d"
 
-#. ../themer/themer.glade:1409
-msgid "Type"
-msgstr "Тип"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup workspace list"
+msgstr "Покажи списъка на раб. площи"
 
-#. ../themer/themer.glade:214
-msgid "Window _Frames"
-msgstr "Рамки на _прозорец"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu containing the list of all workspaces."
+msgstr "Покажи менюто със списък на всички работни площи."
 
-#. ../themer/themer.glade:1652
-msgid "[about text]"
-msgstr "[относно текст]"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup window list"
+msgstr "Покажи списъка с прозорци"
 
-#. ../themer/themer.glade:1106
-msgid "[frame-part-table]"
-msgstr "[таблица на части на рамка]"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu of all managed windows."
+msgstr "Покажи менюто с всички управлявани прозорци"
 
-#. ../themer/themer.glade:1766
-msgid "[place holder]"
-msgstr "[запазено]"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Next workspace"
+msgstr "Следваща раб. площ"
 
-#. ../themer/themer.glade:1786 ../themer/themer.glade:1876
-msgid "[title]"
-msgstr "[заглавие]"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the next workspace."
+msgstr "Показва следващата раб. площ"
 
-#. ../themer/themer.glade:268
-msgid "_About"
-msgstr "_За"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Previous workspace"
+msgstr "Предишна работна площ"
 
-#. ../themer/themer.glade:59
-msgid "_File"
-msgstr "_Файл"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the previous workspace."
+msgstr "Показва предишната раб. площ"
 
-#. ../themer/themer.glade:91
-msgid "_Open Theme.."
-msgstr "_Отвори тема..."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to next workspace"
+msgstr "Изпрати на следващата раб. площ"
 
-#. ../themer/themer.glade:190
-msgid "_Preferences..."
-msgstr "_Настройки..."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the next workspace."
+msgstr "Премества прозореца на следващата раб. площ."
 
-#. ../themer/themer.glade:143
-msgid "_Preview"
-msgstr "_Предварителен преглед"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to previous workspace"
+msgstr "Изпрати на предишната раб. площ"
 
-#. ../themer/themer.glade:108
-msgid "_Save Theme"
-msgstr "_Запази тема"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the previous workspace."
+msgstr "Премества прозореца в предишната раб. площ."
 
-#. ../themer/themer.glade:175
-msgid "_Settings"
-msgstr "_Настройки"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to next workspace"
+msgstr "Копирай в следващата раб. площ"
 
-#. ../themer/themer.glade:250
-msgid "_Themes"
-msgstr "_Теми"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "Копира прозореца в следващата раб. площ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to previous workspace"
+msgstr "Копирай в предишната раб. площ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "Копира прозореца в предишната раб. площ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Append workspace and send"
+msgstr "Добави раб. площ и изпрати"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr "Създава нова раб. площ на края на списъка, и премества прозореца там."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prepend workspace and send"
+msgstr "Добави раб. площ в началото и изпрати"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the start of the list, and move the window to it."
+msgstr ""
+"Създава нова раб. площ в началото на списъка, и премества прозореца там."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge next workspace"
+msgstr "Слей следващата раб. площ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
+msgstr ""
+"Изтрива текущата раб. площ. Нейните обекти се пренасочват към\n"
+"следващата раб. площ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge previous workspace"
+msgstr "Слей предишната раб. площ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
+msgstr ""
+"Изтрива текущата раб. площ. Нейните обекти се пренасочват към\n"
+"предишната раб. площ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace after"
+msgstr "Вмъкни раб. площ след"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace following the current workspace."
+msgstr "Създава нова раб. площ след текущата"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace before"
+msgstr "Вмъкни раб. площ преди"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace before the current workspace."
+msgstr "Създава нова раб. площ преди текущата"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace forwards"
+msgstr "Премести областта за преглед напред"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the right."
+msgstr "Премества раб. площ едно място в дясно."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace backwards"
+msgstr "Премести областта за преглед назад"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the left."
+msgstr "Премества раб. площ едно място в ляво."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete empty workspaces"
+msgstr "Изтрий празните раб. площи"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete any workspaces that don't contain any windows."
+msgstr "Изтрива всичките раб. площи които не съдържат прозорци."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete window instance"
+msgstr "Изтрива копие на прозорец"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
+msgstr ""
+"Изтрива копието на прозореца върху текущата раб. площ. Ако то е единствено,\n"
+"тогава се изтрива самия прозорец."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Show desktop"
+msgstr "Фокусирай десктопа."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide all windows except the desktop window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Hide desktop"
+msgstr "Фокусирай десктопа."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Undoes the effect of the `show-desktop' command."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Activate workspace"
+msgstr "Активирай раб. площ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select the N'th workspace."
+msgstr "Избира N-тата раб. площ."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to workspace"
+msgstr "Изпрати на раб. площ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current window to the N'th workspace."
+msgstr "Премества текущия прозорец на N-тата раб. площ."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to workspace"
+msgstr "Копирай на раб. площ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "Копира текущия прозорец на N-тата раб. площ."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select workspace interactively"
+msgstr "Избери на раб. площ интерактивно"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Пита за раб. площ и превключва на нея."

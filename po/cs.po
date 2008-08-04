@@ -8,7 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish VERSION\n"
-"POT-Creation-Date: 2003-01-12 12:11-0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-04 22:17+0200\n"
 "PO-Revision-Date: 2004-04-16 17:02+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -27,119 +28,6 @@ msgstr "Sawfish rozšiřitelně spravuje vaše okna."
 #. ../scripts/sawfish-about.jl
 msgid "Sawfish homepage"
 msgstr "Domácí stránka Sawfish"
-
-#. ../themer/themer.in
-msgid "Reload themes in window manager after saving."
-msgstr "Znovu načítat témata manažera oken po uložení."
-
-#. ../themer/themer.in
-msgid "Remove unused definitions when saving."
-msgstr "Odstranit nepoužité definice při ukládání."
-
-#. ../themer/themer.in
-msgid "[left]"
-msgstr "[vlevo]"
-
-#. ../themer/themer.in
-msgid "[right]"
-msgstr "[vpravo]"
-
-#. ../themer/themer.in
-msgid "[top]"
-msgstr "[nahoru]"
-
-#. ../themer/themer.in
-msgid "[bottom]"
-msgstr "[dolů]"
-
-#. ../lisp/sawfish/gtk/widgets/color.jl
-#. ../themer/themer.in
-msgid "Select color"
-msgstr "Vyberte barvu"
-
-#. ../lisp/sawfish/gtk/widgets/font.jl
-#. ../lisp/sawfish/gtk/widgets/file.jl
-#. ../themer/themer.in
-msgid "Browse..."
-msgstr "Procházet..."
-
-#. ../lisp/sawfish/gtk/widgets/font.jl
-#. ../themer/themer.in
-msgid "Select font"
-msgstr "Vyberte písmo"
-
-#. ../themer/themer.in
-msgid "Properties..."
-msgstr "Vlastnosti..."
-
-#. ../themer/themer.in
-msgid "Select Image"
-msgstr "Vyberte obrázek"
-
-#. ../themer/themer.in
-msgid "Image Properties"
-msgstr "Vlastnosti obrázku"
-
-#. ../lisp/sawfish/gtk/widget.jl
-#. ../themer/themer.in
-#, c-format
-msgid "No matching item for %S"
-msgstr "Žádná položka neodpovídá %S"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added pattern `%s'"
-msgstr "Přidán vzorek `%s'"
-
-#. ../themer/themer.in
-msgid "Frame name"
-msgstr "Jméno rámu"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added frame `%s'"
-msgstr "Přidán rám `%s'"
-
-#. ../themer/themer.in
-msgid "<none>"
-msgstr "<žádné>"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added frame type `%s'"
-msgstr "Přidán typ rámu `%s'"
-
-#. ../themer/themer.in
-#, c-format
-msgid "error while building frame: %S"
-msgstr "chyba při vytváření rámu: %S"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Saved as `%s'"
-msgstr "Uloženo jako `%s'"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Generated theme in directory `%s'"
-msgstr "Vytvořeno téma v adresáři `%s'"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Read theme from `%s'"
-msgstr "Téma přečteno z `%s'"
-
-#. ../themer/themer.in
-msgid "Theme Directory"
-msgstr "Adresář témat"
-
-#. ../themer/themer.in
-msgid "Open"
-msgstr "Otevřít"
-
-#. ../themer/themer.in
-msgid "Preferences"
-msgstr "Nastavení"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -283,6 +171,15 @@ msgstr "Šířka okraje okna."
 msgid "Border width of bar images."
 msgstr "Šířka okraje obrázků titulku."
 
+#. ../lisp/sawfish/gtk/widget.jl
+#, c-format
+msgid "No matching item for %S"
+msgstr "Žádná položka neodpovídá %S"
+
+#. ../lisp/sawfish/gtk/widget.jl
+msgid "** unknown widget **  "
+msgstr "** neznámý widget **  "
+
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Key"
@@ -292,9 +189,22 @@ msgstr "Klávesa"
 msgid "Value"
 msgstr "Hodnota"
 
+#. ../lisp/sawfish/gtk/widgets/color.jl
+msgid "Select color"
+msgstr "Vyberte barvu"
+
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../lisp/sawfish/gtk/widgets/file.jl
+msgid "Browse..."
+msgstr "Procházet..."
+
 #. ../lisp/sawfish/gtk/widgets/file.jl
 msgid "Select file"
 msgstr "Vyberte soubor"
+
+#. ../lisp/sawfish/gtk/widgets/font.jl
+msgid "Select font"
+msgstr "Vyberte písmo"
 
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
@@ -324,14 +234,6 @@ msgstr "Ano"
 msgid "No"
 msgstr "Ne"
 
-#. ../lisp/sawfish/gtk/widget.jl
-msgid "** unknown widget **  "
-msgstr "** neznámý widget **  "
-
-#. ../lisp/sawfish/ui/layouts/keymaps.jl
-msgid "Context:"
-msgstr "Kontext:"
-
 #. ../lisp/sawfish/ui/apply.jl
 #, c-format
 msgid "While changing %s:"
@@ -341,24 +243,13 @@ msgstr "Při změně %s:"
 msgid "Sawfish Error"
 msgstr "Chyba Sawfish"
 
+#. ../lisp/sawfish/ui/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Kontext:"
+
 #. ../lisp/sawfish/ui/shell.jl
 msgid "Sawfish Configurator"
 msgstr "Nastavení Sawfish"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Pracovní plochy:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Sloupce:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Řádky:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/commands.jl
@@ -375,6 +266,21 @@ msgstr "Nedokumentované"
 #. ../lisp/sawfish/ui/widgets/event.jl
 msgid "Grab..."
 msgstr "Zachytit..."
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Pracovní plochy:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Sloupce:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Řádky:"
 
 #. ../lisp/sawfish/ui/widgets/icon.jl
 msgid "Select Icon"
@@ -428,871 +334,6 @@ msgstr "Tipy"
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
 msgstr "Index:"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command"
-msgstr "Vykonat příkaz"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-msgstr "Vykonat příkaz JMÉNO; volitelně s prefixovým argumentem PFX-ARG."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Run shell command"
-msgstr "Vykonat příkaz shellu"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Execute the given shell command."
-msgstr "Provést daný příkaz shellu."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Příkaz:"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command sequence"
-msgstr "Posloupnost příkazů"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Invoke the list of commands, one by one."
-msgstr "Provést postupně seznam příkazů"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Quit"
-msgstr "Konec"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Restart"
-msgstr "Restartovat"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Destroy window"
-msgstr "Zničit okno"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Kill client"
-msgstr "Zabít klienta"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "No operation"
-msgstr "Žádná operace"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command with output to screen"
-msgstr "Vykonat příkaz s výstupem na obrazovku"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Prompt for a command, execute it, and print any output to the screen."
-msgstr "Zeptat se na příkaz, provést ho a vypsat výstup na obrazovku."
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Focus"
-msgstr "Aktivování oken"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Move/Resize"
-msgstr "Přesun/Změna velikosti"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Placement"
-msgstr "Umísťování"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Appearance"
-msgstr "Vzhled"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Workspaces"
-msgstr "Pracovní plochy"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Bindings"
-msgstr "Klávesové zkratky"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing and Maximizing"
-msgstr "Minimalizace a maximalizace"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Miscellaneous"
-msgstr "Různé"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Customize"
-msgstr "Přizpůsobit"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "Spustit systém nastavení."
-
-#. ../lisp/sawfish/wm/focus.jl
-msgid "When does the mouse pointer affect the input focus."
-msgstr "Kdy kurzor myši ovlivňuje aktivitu oken."
-
-#. ../lisp/sawfish/wm/focus.jl
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "Předávat kliknutí oknu v módu `změna aktivity při kliknutí'."
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default frame style:"
-msgstr "Implicitní styl rámu:"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Automatically reload themes when they are updated."
-msgstr "Automaticky načítat témata při jejich aktualizaci."
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default font: \\w"
-msgstr "Implicitní písmo: \\w"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Edit frame style"
-msgstr "Upravit styl rámu"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default"
-msgstr "Implicitní"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Normal"
-msgstr "Normální"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Title-only"
-msgstr "Jen titulek"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Border-only"
-msgstr "Jen okraj"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Top-border"
-msgstr "Titulek s okrajem"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "None"
-msgstr "Žádný"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "global-keymap"
-msgstr "globální zkratky"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active anywhere."
-msgstr "Klávesové zkratky aktivní všude."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "window-keymap"
-msgstr "zkratky okna"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr "Klávesové zkratky aktivní, když je aktivní nějaké okno."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "root-window-keymap"
-msgstr "zkratky plochy"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"Klávesové zkratky aktivní, když je kurzor nad plochou\n"
-"(nebo když není aktivní žádné okno)."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "title-keymap"
-msgstr "zkratky titulku"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Klávesové zkratky aktivní, když je kurzor nad titulkem okna.\n"
-"(Použijí se jen zkratky s myší)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "border-keymap"
-msgstr "zkratky okrajů"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Klávesové zkratky aktivní, když je kurzor na okraji okna.\n"
-"(Použijí se jen zkratky s myší)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "close-button-keymap"
-msgstr "zkratky zavíracího tlačítka"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Klávesové zkratky aktivní, když je kurzor nad zavíracím tlačítkem okna.\n"
-"(Použijí se jen zkratky s myší)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "iconify-button-keymap"
-msgstr "zkratky minimalizačního tlačítka"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Klávesové zkratky aktivní, když je kurzor nad minimalizačním tlačítkem "
-"okna.\n"
-"(Použijí se jen zkratky s myší)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "maximize-button-keymap"
-msgstr "zkratky maximalizačního tlačítka"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Klávesové zkratky aktivní, když je kurzor nad maximalizačním tlačítkem "
-"okna.\n"
-"(Použijí se jen zkratky s myší)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "menu-button-keymap"
-msgstr "zkratky tlačítka menu"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Klávesové zkratky aktivní, když je kurzor nad tlačítkem menu okna.\n"
-"(Použijí se jen zkratky s myší)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "shade-button-keymap"
-msgstr "zkratky sbalovacího tlačítka"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Klávesové zkratky aktivní, když je kurzor nad sbalovacím tlačítkem okna.\n"
-"(Použijí se jen zkratky s myší)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "Modifikátor(y) používané pro implicitní zkratky."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Minimize"
-msgstr "Minimalizovat"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Unmaximize"
-msgstr "Odmaximalizovat"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Maximize"
-msgstr "Maximalizovat"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Close"
-msgstr "_Zavřít"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Toggle"
-msgstr "_Přepnout"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "In _group"
-msgstr "Ve _skupině"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Send window to"
-msgstr "P_oslat okno"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Previous workspace"
-msgstr "Na _předchozí plochu"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Next workspace"
-msgstr "Na _následující plochu"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to previous"
-msgstr "Kopírovat na předchozí"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to next"
-msgstr "Kopírovat na následující"
-
-#. ../lisp/sawfish/wm/stacking.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Stacking"
-msgstr "Vrstvení"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Raise"
-msgstr "Dopředu"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Lower"
-msgstr "Dozadu"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Upper layer"
-msgstr "Vyšší vrstva"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Lower layer"
-msgstr "Nižší vrstva"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Frame type"
-msgstr "Typ rámu"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Frame style"
-msgstr "Styl rámu"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Windows"
-msgstr "_Okna"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Work_spaces"
-msgstr "Pracovní _plochy"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Programs"
-msgstr "P_rogramy"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Customize"
-msgstr "Při_způsobit"
-
-#. ../lisp/sawfish/wm/gnome/integration.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Help"
-msgstr "_Nápověda"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_FAQ..."
-msgstr "_FAQ..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_News..."
-msgstr "_Novinky..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_WWW page..."
-msgstr "_WWW stránka..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Manual..."
-msgstr "_Manuál..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_About Sawfish..."
-msgstr "_O Sawfish..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Restart"
-msgstr "_Restartovat"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Quit"
-msgstr "U_končit"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup window menu"
-msgstr "Zobrazit menu okna"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the menu listing all window operations."
-msgstr "Zobrazit menu všech operací s oknem."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup root menu"
-msgstr "Zobrazit hlavní menu"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the main menu."
-msgstr "Zobrazit hlavní menu"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup apps menu"
-msgstr "Zobraz menu aplikací"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the applications menu."
-msgstr "Zobrazit menu aplikací."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_All settings"
-msgstr "_Všechna nastavení"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Edit theme..."
-msgstr "Upravit téma..."
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing windows: \\w"
-msgstr "Způsob umísťování oken: \\w"
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing dialog windows: \\w"
-msgstr "Způsob umísťování dialogů: \\w"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "all"
-msgstr "vším"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "parents"
-msgstr "rodiči"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/state/iconify.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "none"
-msgstr "nic"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Keep transient windows stacked above: \\w"
-msgstr "Udržovat podřízená okna nad: \\w"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise single window"
-msgstr "Zvýšit jedno okno"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise the window to its highest allowed position in the stacking order."
-msgstr "Zvýšit okno na svou nejvyšší povolenou pozici v pořadí oken."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower single window"
-msgstr "Snížit jedno okno"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower the window to its lowest allowed position in the stacking order."
-msgstr "Snížit okno na svou nejnižší povolenou pozici v pořadí oken."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise lower single window"
-msgstr "Zvýšit-snížit jedno okno"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed."
-msgstr ""
-"Je-li okno na své nejvyšší možné pozici, snížit jej na svou nejnižší možnou\n"
-"pozici. Jinak je zvýšit co možná nejvýš."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise window depth"
-msgstr "Přesunout okno výše"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level above its current level."
-msgstr "Umístit okno nad jeho aktuální úroveň v pořadí oken."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower window depth"
-msgstr "Přesunout okno níže"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level beneath its current level."
-msgstr "Umístit okno pod jeho aktuální úroveň v pořadí oken."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport"
-msgstr "Aktivovat pohled"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport."
-msgstr "Vybrat zadaný pohled."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Column:"
-msgstr "Sloupec:"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Row:"
-msgstr "Řádek:"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport column"
-msgstr "Vybrat sloupec pohledu"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport column."
-msgstr "Vybrat zadaný sloupec pohledu."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport row"
-msgstr "Vybrat řádek pohledu"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport row."
-msgstr "Vybrat zadaný řádek pohledu."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window to viewport"
-msgstr "Přesunout okno na pohled"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the current window to the specified viewport."
-msgstr "Přesunout aktuální okno na zadaný pohled."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport right"
-msgstr "Přesunout pohled doprava"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen to the right."
-msgstr "Přesunout pohled o jednu obrazovku doprava."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport left"
-msgstr "Přesunout pohled doleva"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen to the left."
-msgstr "Přesunout pohled o jednu obrazovku doleva."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport up"
-msgstr "Přesunout pohled nahoru"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen up."
-msgstr "Přesunout pohled o jednu obrazovku nahoru."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport down"
-msgstr "Přesunout pohled dolů"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen down."
-msgstr "Přesunout pohled o jednu obrazovku dolů."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window right"
-msgstr "Přesunout okno doprava"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport on the right, and switch to that viewport."
-msgstr "Přesunout okno do pohledu napravo a přepnout se do toho pohledu."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window left"
-msgstr "Přesunout okno doleva"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport on the left, and switch to that viewport."
-msgstr "Přesunout okno do pohledu nalevo a přepnout se do toho pohledu."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window up"
-msgstr "Přesunout okno nahoru"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport above, and switch to that viewport."
-msgstr "Přesunout okno do pohledu nahoře a přepnout se do toho pohledu."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window down"
-msgstr "Přesunout okno dolů"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport below, and switch to that viewport."
-msgstr "Přesunout okno do pohledu dole a přepnout se do toho pohledu."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Focus desktop"
-msgstr "Aktivovat pracovní plochu"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Transfer input focus to the desktop window (if one exists)."
-msgstr "Aktivovat okno pracovní plochy (pokud existuje)"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window"
-msgstr "Zavřít okno"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window."
-msgstr "Zavřít okno."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window safely"
-msgstr "Bezpečně zavřít okno"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window, or beep if the window can't be closed safely."
-msgstr "Zavřít okno nebo pípnout, pokud okno nejde bezpečně zavřít."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Uniquify window name"
-msgstr "Vynutit jednoznačné jméno okna"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Force the current window to have a unique title."
-msgstr "Vynutit jednoznačné jméno aktuálního okna"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspace names"
-msgstr "Jména pracovních ploch"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "_Insert workspace"
-msgstr "_Vložit plochu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select _next workspace"
-msgstr "Vybrat _následující plochu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select _previous workspace"
-msgstr "Vybrat _předchozí plochu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge with next"
-msgstr "Spojit s následující"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge with previous"
-msgstr "Spojit s předchozí"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace _right"
-msgstr "Přesunout plochu dop_rava"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace _left"
-msgstr "Přesunout plochu do_leva"
-
-#. ../lisp/sawfish/wm/workspace.jl
-#, c-format
-msgid "space %d"
-msgstr "plocha %d"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Popup workspace list"
-msgstr "Zobrazit seznam pracovních ploch"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the menu containing the list of all workspaces."
-msgstr "Zobrazit menu obsahující seznam všech pracovních ploch."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Popup window list"
-msgstr "Zobrazit seznam oken"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the menu of all managed windows."
-msgstr "Zobrazit seznam všech spravovaných oken."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Next workspace"
-msgstr "Následující plocha"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the next workspace."
-msgstr "Zobrazit následující plochu."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Previous workspace"
-msgstr "Předchozí plocha"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the previous workspace."
-msgstr "Zobrazit předchozí plochu."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to next workspace"
-msgstr "Poslat na následující plochu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the window to the next workspace."
-msgstr "Poslat okno na následující plochu."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to previous workspace"
-msgstr "Poslat na předchozí plochu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the window to the previous workspace."
-msgstr "Poslat okno na předchozí plochu."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to next workspace"
-msgstr "Kopírovat na následující plochu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the window to the next workspace."
-msgstr "Kopírovat okno na následující plochu."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to previous workspace"
-msgstr "Kopírovat na předchozí plochu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the window to the previous workspace."
-msgstr "Kopírovat okno na předchozí plochu."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Append workspace and send"
-msgstr "Přidat plochu na konec a poslat"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Create a new workspace at the end of the list, and move the window to it."
-msgstr "Vytvořit novou pracovní plochu na konci seznamu a poslat tam okno."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Prepend workspace and send"
-msgstr "Přidat plochu na začátek a poslat"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Create a new workspace at the start of the list, and move the window to it."
-msgstr "Vytvořit novou pracovní plochu na začátku seznamu a poslat tam okno."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge next workspace"
-msgstr "Spojit s následující plochou"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the next\n"
-"workspace."
-msgstr ""
-"Odstranit aktuální pracovní plochu. Její okna jsou přemístěna na\n"
-"následující plochu."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge previous workspace"
-msgstr "Spojit s předchozí plochou"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the\n"
-"previous workspace."
-msgstr ""
-"Odstranit aktuální pracovní plochu. Její okna jsou přemístěna na\n"
-"předchozí plochu."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace after"
-msgstr "Vložit plochu za"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Create a new workspace following the current workspace."
-msgstr "Vytvořit novou pracovní plochu za aktuální plochou."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace before"
-msgstr "Vložit plochu před"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Create a new workspace before the current workspace."
-msgstr "Vytvořit novou pracovní plochu před aktuální plochou."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace forwards"
-msgstr "Přesunout plochu dopředu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current workspace one place to the right."
-msgstr "Přesunout aktuální plochu o jedno místo vpravo."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace backwards"
-msgstr "Přesunout plochu dozadu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current workspace one place to the left."
-msgstr "Přesunout aktuální plochu o jedno místo vlevo."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete empty workspaces"
-msgstr "Odstranit prázdné plochy"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete any workspaces that don't contain any windows."
-msgstr "Odstranit pracovní plochy, které neobsahují žádná okna."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete window instance"
-msgstr "Odstranit instanci okna"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Remove the copy of the window on the current workspace. If this is the\n"
-"last instance remaining, then delete the actual window."
-msgstr ""
-"Odstranit kopii okna na aktuální pracovní ploše. Pokud je to poslední\n"
-"zbývající instance, tak okno zavřít."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Activate workspace"
-msgstr "Vybrat plochu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select the N'th workspace."
-msgstr "Přejít na N-tou plochu."
-
-#. ../lisp/sawfish/wm/util/prompt-wm.jl
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspace:"
-msgstr "Plocha:"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to workspace"
-msgstr "Poslat na plochu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current window to the N'th workspace."
-msgstr "Poslat aktuální okno na N-tou plochu."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to workspace"
-msgstr "Zkopírovat na plochu"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the current window to the N'th workspace."
-msgstr "Zkopírovat aktuální okno na N-tou plochu."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select workspace interactively"
-msgstr "Vybrat plochu interaktivně"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Prompt for a workspace and switch to it."
-msgstr "Zeptat se na plochu a přepnout se na ni."
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next workspace window"
@@ -2098,6 +1139,106 @@ msgstr "Xterm"
 msgid "Start a new xterm."
 msgstr "Spustit nový xterm."
 
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command"
+msgstr "Vykonat příkaz"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr "Vykonat příkaz JMÉNO; volitelně s prefixovým argumentem PFX-ARG."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Run shell command"
+msgstr "Vykonat příkaz shellu"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Execute the given shell command."
+msgstr "Provést daný příkaz shellu."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command:"
+msgstr "Příkaz:"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command sequence"
+msgstr "Posloupnost příkazů"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Provést postupně seznam příkazů"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Quit"
+msgstr "Konec"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Restart"
+msgstr "Restartovat"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Destroy window"
+msgstr "Zničit okno"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Kill client"
+msgstr "Zabít klienta"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "No operation"
+msgstr "Žádná operace"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command with output to screen"
+msgstr "Vykonat příkaz s výstupem na obrazovku"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "Zeptat se na příkaz, provést ho a vypsat výstup na obrazovku."
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Focus"
+msgstr "Aktivování oken"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Přesun/Změna velikosti"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Placement"
+msgstr "Umísťování"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Appearance"
+msgstr "Vzhled"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "Pracovní plochy"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "Klávesové zkratky"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing and Maximizing"
+msgstr "Minimalizace a maximalizace"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "Různé"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Customize"
+msgstr "Přizpůsobit"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "Spustit systém nastavení."
+
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
 msgstr "3d hack"
@@ -2270,6 +1411,16 @@ msgstr "Předávat aktivující kliknutí"
 msgid "Focus mode"
 msgstr "Způsob aktivování"
 
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame type"
+msgstr "Typ rámu"
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame style"
+msgstr "Styl rámu"
+
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignored"
 msgstr "Ignorované"
@@ -2304,6 +1455,11 @@ msgstr "Přeskakovat při přepínání"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Window list skip"
+msgstr "Neuvádět v seznamu oken"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Task list skip"
 msgstr "Neuvádět v seznamu oken"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2508,6 +1664,59 @@ msgstr "Poslat na plochu vpravo"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "Poslat okno na pracovní plochu vpravo od aktuální plochy"
 
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Kdy kurzor myši ovlivňuje aktivitu oken."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Předávat kliknutí oknu v módu `změna aktivity při kliknutí'."
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default frame style:"
+msgstr "Implicitní styl rámu:"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Automatically reload themes when they are updated."
+msgstr "Automaticky načítat témata při jejich aktualizaci."
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default font: \\w"
+msgstr "Implicitní písmo: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Edit frame style"
+msgstr "Upravit styl rámu"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default"
+msgstr "Implicitní"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Normal"
+msgstr "Normální"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Title-only"
+msgstr "Jen titulek"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Border-only"
+msgstr "Jen okraj"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Top-border"
+msgstr "Titulek s okrajem"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "None"
+msgstr "Žádný"
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/gnome/integration.jl
+msgid "_Help"
+msgstr "_Nápověda"
+
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "_GNOME Nápověda..."
@@ -2524,13 +1733,341 @@ msgstr "O GNOME..."
 msgid "Gnome menus update"
 msgstr "Gnome obnovit nabídky"
 
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "global-keymap"
+msgstr "globální zkratky"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active anywhere."
+msgstr "Klávesové zkratky aktivní všude."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "window-keymap"
+msgstr "zkratky okna"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr "Klávesové zkratky aktivní, když je aktivní nějaké okno."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "root-window-keymap"
+msgstr "zkratky plochy"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Klávesové zkratky aktivní, když je kurzor nad plochou\n"
+"(nebo když není aktivní žádné okno)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "title-keymap"
+msgstr "zkratky titulku"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové zkratky aktivní, když je kurzor nad titulkem okna.\n"
+"(Použijí se jen zkratky s myší)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "border-keymap"
+msgstr "zkratky okrajů"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové zkratky aktivní, když je kurzor na okraji okna.\n"
+"(Použijí se jen zkratky s myší)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "close-button-keymap"
+msgstr "zkratky zavíracího tlačítka"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové zkratky aktivní, když je kurzor nad zavíracím tlačítkem okna.\n"
+"(Použijí se jen zkratky s myší)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "iconify-button-keymap"
+msgstr "zkratky minimalizačního tlačítka"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové zkratky aktivní, když je kurzor nad minimalizačním tlačítkem "
+"okna.\n"
+"(Použijí se jen zkratky s myší)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "maximize-button-keymap"
+msgstr "zkratky maximalizačního tlačítka"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové zkratky aktivní, když je kurzor nad maximalizačním tlačítkem "
+"okna.\n"
+"(Použijí se jen zkratky s myší)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "menu-button-keymap"
+msgstr "zkratky tlačítka menu"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové zkratky aktivní, když je kurzor nad tlačítkem menu okna.\n"
+"(Použijí se jen zkratky s myší)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "shade-button-keymap"
+msgstr "zkratky sbalovacího tlačítka"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové zkratky aktivní, když je kurzor nad sbalovacím tlačítkem okna.\n"
+"(Použijí se jen zkratky s myší)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Modifikátor(y) používané pro implicitní zkratky."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Minimize"
+msgstr "Minimalizovat"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Unmaximize"
+msgstr "Odmaximalizovat"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Maximize"
+msgstr "Maximalizovat"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Close"
+msgstr "_Zavřít"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Toggle"
+msgstr "_Přepnout"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "In _group"
+msgstr "Ve _skupině"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Send window to"
+msgstr "P_oslat okno"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Previous workspace"
+msgstr "Na _předchozí plochu"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Next workspace"
+msgstr "Na _následující plochu"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Copy to previous"
+msgstr "Kopírovat na předchozí"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Copy to next"
+msgstr "Kopírovat na následující"
+
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Stacking"
+msgstr "Vrstvení"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Raise"
+msgstr "Dopředu"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Lower"
+msgstr "Dozadu"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Upper layer"
+msgstr "Vyšší vrstva"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Lower layer"
+msgstr "Nižší vrstva"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Windows"
+msgstr "_Okna"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Work_spaces"
+msgstr "Pracovní _plochy"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Programs"
+msgstr "P_rogramy"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Customize"
+msgstr "Při_způsobit"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_FAQ..."
+msgstr "_FAQ..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_News..."
+msgstr "_Novinky..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_WWW page..."
+msgstr "_WWW stránka..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Manual..."
+msgstr "_Manuál..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_About Sawfish..."
+msgstr "_O Sawfish..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Restart"
+msgstr "_Restartovat"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Quit"
+msgstr "U_končit"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup window menu"
+msgstr "Zobrazit menu okna"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "Zobrazit menu všech operací s oknem."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup root menu"
+msgstr "Zobrazit hlavní menu"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "Zobrazit hlavní menu"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup apps menu"
+msgstr "Zobraz menu aplikací"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "Zobrazit menu aplikací."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_All settings"
+msgstr "_Všechna nastavení"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Edit theme..."
+msgstr "Upravit téma..."
+
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
 msgstr "Vzdálenost mezi následujícími umístěními v módu 'stagger'."
 
-#. ../lisp/sawfish/wm/state/gnome.jl
-msgid "In GNOME _task list"
-msgstr "V seznamu úl_oh GNOME"
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing windows: \\w"
+msgstr "Způsob umísťování oken: \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing dialog windows: \\w"
+msgstr "Způsob umísťování dialogů: \\w"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "all"
+msgstr "vším"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "rodiči"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "none"
+msgstr "nic"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Udržovat podřízená okna nad: \\w"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise single window"
+msgstr "Zvýšit jedno okno"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr "Zvýšit okno na svou nejvyšší povolenou pozici v pořadí oken."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower single window"
+msgstr "Snížit jedno okno"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr "Snížit okno na svou nejnižší povolenou pozici v pořadí oken."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise lower single window"
+msgstr "Zvýšit-snížit jedno okno"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
+msgstr ""
+"Je-li okno na své nejvyšší možné pozici, snížit jej na svou nejnižší možnou\n"
+"pozici. Jinak je zvýšit co možná nejvýš."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise window depth"
+msgstr "Přesunout okno výše"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "Umístit okno nad jeho aktuální úroveň v pořadí oken."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower window depth"
+msgstr "Přesunout okno níže"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "Umístit okno pod jeho aktuální úroveň v pořadí oken."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2653,6 +2190,16 @@ msgid "Toggle whether a window will be include in the window list."
 msgstr "Přepnout, jestli je okno zahrnuto v seznamu oken."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle task list skip"
+msgstr "Přepnout uvádění v seznamu oken"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle whether a window will be included in the task-list."
+msgstr "Přepnout, jestli je okno zahrnuto v seznamu oken."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
 msgstr "_Ignorováno"
 
@@ -2667,6 +2214,11 @@ msgstr "_Přepínatelné"
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
 msgstr "V seznamu _oken"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "In _task list"
+msgstr "V seznamu úl_oh GNOME"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Lock position and size while windows are maximized."
@@ -2959,6 +2511,11 @@ msgstr "Okno:"
 msgid "Workspace %d"
 msgstr "Pracovní plocha %d"
 
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+msgid "Workspace:"
+msgstr "Plocha:"
+
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
 msgstr "zkratky výzvy"
@@ -2983,501 +2540,385 @@ msgstr "Snížit okno"
 msgid "Raise lower window"
 msgstr "Zvýšit-snížit okno"
 
-#. ../themer/themer.glade:1315
-msgid " to: "
-msgstr " na: "
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport"
+msgstr "Aktivovat pohled"
 
-#. ../themer/themer.glade:1587
-msgid "About"
-msgstr "O programu"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "Vybrat zadaný pohled."
 
-#. ../themer/themer.glade:412
-msgid "About:"
-msgstr "O tématu:"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Column:"
+msgstr "Sloupec:"
 
-#. ../themer/themer.glade:879 ../themer/themer.glade:1213
-#. * ../themer/themer.glade:1458
-msgid "Add"
-msgstr "Přidat"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Row:"
+msgstr "Řádek:"
 
-#. ../themer/themer.glade:1176
-msgid "Attributes"
-msgstr "Atributy"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport column"
+msgstr "Vybrat sloupec pohledu"
 
-#. ../themer/themer.glade:1746 ../themer/themer.glade:1856
-msgid "Cancel"
-msgstr "Zrušit"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Vybrat zadaný sloupec pohledu."
 
-#. ../themer/themer.glade:675 ../themer/themer.glade:829
-msgid "Clicked"
-msgstr "Stisknuté"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport row"
+msgstr "Vybrat řádek pohledu"
 
-#. ../themer/themer.glade:892
-msgid "Copy"
-msgstr "Kopírovat"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Vybrat zadaný řádek pohledu."
 
-#. ../themer/themer.glade:1036
-msgid "Copy..."
-msgstr "Kopírovat..."
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window to viewport"
+msgstr "Přesunout okno na pohled"
 
-#. ../themer/themer.glade:482
-msgid "Details"
-msgstr "Detaily"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "Přesunout aktuální okno na zadaný pohled."
 
-#. ../themer/themer.glade:430
-msgid "Directory:"
-msgstr "Adresář:"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport right"
+msgstr "Přesunout pohled doprava"
 
-#. ../themer/themer.glade:166
-msgid "E_xit"
-msgstr "_Konec"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "Přesunout pohled o jednu obrazovku doprava."
 
-#. ../themer/themer.glade:596 ../themer/themer.glade:789
-msgid "Focused"
-msgstr "Aktivní"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport left"
+msgstr "Přesunout pohled doleva"
 
-#. ../themer/themer.glade:987 ../themer/themer.glade:1422
-msgid "Frame"
-msgstr "Rám"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "Přesunout pohled o jednu obrazovku doleva."
 
-#. ../themer/themer.glade:238
-msgid "Frame Part _Definitions"
-msgstr "_Definice částí rámu"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport up"
+msgstr "Přesunout pohled nahoru"
 
-#. ../themer/themer.glade:226
-msgid "Frame _Classes"
-msgstr "_Třídy rámů"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "Přesunout pohled o jednu obrazovku nahoru."
 
-#. ../themer/themer.glade:1237
-msgid "Frames"
-msgstr "Rámy"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport down"
+msgstr "Přesunout pohled dolů"
 
-#. ../themer/themer.glade:622
-msgid "HIghlighted"
-msgstr "Zvýrazněné"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "Přesunout pohled o jednu obrazovku dolů."
 
-#. ../themer/themer.glade:802
-msgid "Highlighted"
-msgstr "Zvýrazněné"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window right"
+msgstr "Přesunout okno doprava"
 
-#. ../themer/themer.glade:570 ../themer/themer.glade:776
-msgid "Inactive"
-msgstr "Neaktivní"
-
-#. ../themer/themer.glade:702 ../themer/themer.glade:843
+#. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Inactive-\n"
-"Clicked"
-msgstr ""
-"Neaktivní-\n"
-"Stisknuté"
+"Move the window to the viewport on the right, and switch to that viewport."
+msgstr "Přesunout okno do pohledu napravo a přepnout se do toho pohledu."
 
-#. ../themer/themer.glade:649 ../themer/themer.glade:816
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window left"
+msgstr "Přesunout okno doleva"
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Inactive-\n"
-"Highlighted"
+"Move the window to the viewport on the left, and switch to that viewport."
+msgstr "Přesunout okno do pohledu nalevo a přepnout se do toho pohledu."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window up"
+msgstr "Přesunout okno nahoru"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr "Přesunout okno do pohledu nahoře a přepnout se do toho pohledu."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window down"
+msgstr "Přesunout okno dolů"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr "Přesunout okno do pohledu dole a přepnout se do toho pohledu."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Focus desktop"
+msgstr "Aktivovat pracovní plochu"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "Aktivovat okno pracovní plochy (pokud existuje)"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window"
+msgstr "Zavřít okno"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window."
+msgstr "Zavřít okno."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window safely"
+msgstr "Bezpečně zavřít okno"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window, or beep if the window can't be closed safely."
+msgstr "Zavřít okno nebo pípnout, pokud okno nejde bezpečně zavřít."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Uniquify window name"
+msgstr "Vynutit jednoznačné jméno okna"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "Vynutit jednoznačné jméno aktuálního okna"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Workspace names"
+msgstr "Jména pracovních ploch"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "_Insert workspace"
+msgstr "_Vložit plochu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select _next workspace"
+msgstr "Vybrat _následující plochu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select _previous workspace"
+msgstr "Vybrat _předchozí plochu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge with next"
+msgstr "Spojit s následující"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge with previous"
+msgstr "Spojit s předchozí"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace _right"
+msgstr "Přesunout plochu dop_rava"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace _left"
+msgstr "Přesunout plochu do_leva"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, c-format
+msgid "space %d"
+msgstr "plocha %d"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup workspace list"
+msgstr "Zobrazit seznam pracovních ploch"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu containing the list of all workspaces."
+msgstr "Zobrazit menu obsahující seznam všech pracovních ploch."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup window list"
+msgstr "Zobrazit seznam oken"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu of all managed windows."
+msgstr "Zobrazit seznam všech spravovaných oken."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Next workspace"
+msgstr "Následující plocha"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the next workspace."
+msgstr "Zobrazit následující plochu."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Previous workspace"
+msgstr "Předchozí plocha"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the previous workspace."
+msgstr "Zobrazit předchozí plochu."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to next workspace"
+msgstr "Poslat na následující plochu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the next workspace."
+msgstr "Poslat okno na následující plochu."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to previous workspace"
+msgstr "Poslat na předchozí plochu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the previous workspace."
+msgstr "Poslat okno na předchozí plochu."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to next workspace"
+msgstr "Kopírovat na následující plochu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "Kopírovat okno na následující plochu."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to previous workspace"
+msgstr "Kopírovat na předchozí plochu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "Kopírovat okno na předchozí plochu."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Append workspace and send"
+msgstr "Přidat plochu na konec a poslat"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr "Vytvořit novou pracovní plochu na konci seznamu a poslat tam okno."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prepend workspace and send"
+msgstr "Přidat plochu na začátek a poslat"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the start of the list, and move the window to it."
+msgstr "Vytvořit novou pracovní plochu na začátku seznamu a poslat tam okno."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge next workspace"
+msgstr "Spojit s následující plochou"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
 msgstr ""
-"Neaktivní-\n"
-"Zvýrazněné"
-
-#. ../themer/themer.glade:1266
-msgid "Map: "
-msgstr "Mapovat: "
-
-#. ../themer/themer.glade:1480
-msgid "Mapping"
-msgstr "Mapování"
-
-#. ../themer/themer.glade:74
-msgid "New Theme"
-msgstr "Nové téma"
-
-#. ../themer/themer.glade:1571 ../themer/themer.glade:1644
-#. * ../themer/themer.glade:1733 ../themer/themer.glade:1843
-msgid "OK"
-msgstr "Budiž"
-
-#. ../themer/themer.glade:914
-msgid "Patterns"
-msgstr "Vzorky"
-
-#. ../themer/themer.glade:1676
-msgid "Properties"
-msgstr "Vlastnosti"
-
-#. ../themer/themer.glade:120
-msgid "Save Theme _As..."
-msgstr "U_ložit téma jako..."
-
-#. ../themer/themer.glade:23
-msgid "Sawfish Theme Builder"
-msgstr "Tvůrce témat Sawfish"
+"Odstranit aktuální pracovní plochu. Její okna jsou přemístěna na\n"
+"následující plochu."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge previous workspace"
+msgstr "Spojit s předchozí plochou"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
+msgstr ""
+"Odstranit aktuální pracovní plochu. Její okna jsou přemístěna na\n"
+"předchozí plochu."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace after"
+msgstr "Vložit plochu za"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace following the current workspace."
+msgstr "Vytvořit novou pracovní plochu za aktuální plochou."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace before"
+msgstr "Vložit plochu před"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace before the current workspace."
+msgstr "Vytvořit novou pracovní plochu před aktuální plochou."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace forwards"
+msgstr "Přesunout plochu dopředu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the right."
+msgstr "Přesunout aktuální plochu o jedno místo vpravo."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace backwards"
+msgstr "Přesunout plochu dozadu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the left."
+msgstr "Přesunout aktuální plochu o jedno místo vlevo."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete empty workspaces"
+msgstr "Odstranit prázdné plochy"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete any workspaces that don't contain any windows."
+msgstr "Odstranit pracovní plochy, které neobsahují žádná okna."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete window instance"
+msgstr "Odstranit instanci okna"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
+msgstr ""
+"Odstranit kopii okna na aktuální pracovní ploše. Pokud je to poslední\n"
+"zbývající instance, tak okno zavřít."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Show desktop"
+msgstr "Aktivovat pracovní plochu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide all windows except the desktop window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Hide desktop"
+msgstr "Aktivovat pracovní plochu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Undoes the effect of the `show-desktop' command."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Activate workspace"
+msgstr "Vybrat plochu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select the N'th workspace."
+msgstr "Přejít na N-tou plochu."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to workspace"
+msgstr "Poslat na plochu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current window to the N'th workspace."
+msgstr "Poslat aktuální okno na N-tou plochu."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to workspace"
+msgstr "Zkopírovat na plochu"
 
-#. ../themer/themer.glade:1512
-msgid "Sawfish Themer Preview"
-msgstr "Ukázka témat Sawfish"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "Zkopírovat aktuální okno na N-tou plochu."
 
-#. ../themer/themer.glade:306
-msgid "Theme name: "
-msgstr "Jméno tématu: "
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select workspace interactively"
+msgstr "Vybrat plochu interaktivně"
 
-#. ../themer/themer.glade:1531
-msgid "This window previews the current theme."
-msgstr "Toto okno ukazuje upravované téma."
-
-#. ../themer/themer.glade:1409
-msgid "Type"
-msgstr "Typ"
-
-#. ../themer/themer.glade:214
-msgid "Window _Frames"
-msgstr "_Rámy okna"
-
-#. ../themer/themer.glade:1652
-msgid "[about text]"
-msgstr "[text o programu]"
-
-#. ../themer/themer.glade:1106
-msgid "[frame-part-table]"
-msgstr "[tabulka-částí-rámu]"
-
-#. ../themer/themer.glade:1766
-msgid "[place holder]"
-msgstr "[místo]"
-
-#. ../themer/themer.glade:1786 ../themer/themer.glade:1876
-msgid "[title]"
-msgstr "[titulek]"
-
-#. ../themer/themer.glade:268
-msgid "_About"
-msgstr "_O programu"
-
-#. ../themer/themer.glade:59
-msgid "_File"
-msgstr "_Soubor"
-
-#. ../themer/themer.glade:91
-msgid "_Open Theme.."
-msgstr "_Otevřít téma..."
-
-#. ../themer/themer.glade:190
-msgid "_Preferences..."
-msgstr "_Nastavení..."
-
-#. ../themer/themer.glade:143
-msgid "_Preview"
-msgstr "_Ukázka"
-
-#. ../themer/themer.glade:108
-msgid "_Save Theme"
-msgstr "_Uložit téma"
-
-#. ../themer/themer.glade:175
-msgid "_Settings"
-msgstr "Na_stavení"
-
-#. ../themer/themer.glade:250
-msgid "_Themes"
-msgstr "_Témata"
-
-#~ msgid ""
-#~ "Frame type fallbacks:\n"
-#~ "\n"
-#~ "Associate frame types with type to try if the theme doesn't implement the "
-#~ "requested type."
-#~ msgstr ""
-#~ "Náhrada typů rámů:\n"
-#~ "\n"
-#~ "Přiřadit typy rámu, jestliže téma nedefinuje požadovaný typ."
-
-#~ msgid "Bevel intensity: \\wpercent."
-#~ msgstr "Intenzita zkosení: \\w procent."
-
-#~ msgid "Motion threshold for mouse pointer: \\wpixels"
-#~ msgstr "Hranice pro pohyb myši: \\w bodů"
-
-#~ msgid "Display key-binding information in menu items."
-#~ msgstr "Zobrazit informaci o klávesových zkratkách v položkách menu"
-
-#~ msgid "_Left"
-#~ msgstr "V_levo"
-
-#~ msgid "_Right"
-#~ msgstr "V_pravo"
-
-#~ msgid "_Up"
-#~ msgstr "Nahor_u"
-
-#~ msgid "_Down"
-#~ msgstr "_Dolů"
-
-#~ msgid "Ignore program-specified window placements."
-#~ msgstr "Ignorovat umístění dané programem."
-
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Obnovovat okna z ikon do současného pohledu."
-
-#~ msgid "The default window animation mode: \\w"
-#~ msgstr "Standardní způsob animace oken: \\w"
-
-#~ msgid ""
-#~ "Give focus to windows even when they haven't asked for it.\n"
-#~ "\n"
-#~ "Windows should set the `accepts input' hint in their WM_HINTS property to "
-#~ "show if they require the focus or not."
-#~ msgstr ""
-#~ "Aktivovat okna, i když o to nežádala.\n"
-#~ "\n"
-#~ "Okna by měla nastavit příznak 'accepts input' ve svých WM_HINTS aby "
-#~ "naznačila, či požadují aktivaci či ne."
-
-#~ msgid ""
-#~ "Offset (%) from left window edge when warping pointer.\n"
-#~ "\n"
-#~ "A negative number means outside the left window edge."
-#~ msgstr ""
-#~ "Vzdálenost (%) od levého okraje okna při přesunu kurzoru.\n"
-#~ "\n"
-#~ "Záporné číslo znamená mimo okna."
-
-#~ msgid ""
-#~ "Offset (%) from top window edge when warping pointer.\n"
-#~ "\n"
-#~ "A negative number means outside the top window edge."
-#~ msgstr ""
-#~ "Vzdálenost (%) od horního okraje okna při přesunu kurzoru.\n"
-#~ "\n"
-#~ "Záporné číslo znamená mimo okna."
-
-#~ msgid ""
-#~ "Format to create unique window names.\n"
-#~ "\n"
-#~ "Has two arguments (NAME INDEX) applied to it."
-#~ msgstr ""
-#~ "Formát pro vytváření jednoznačných jmen oken.\n"
-#~ "\n"
-#~ "Použijí se dva argumenty (JMÉNO INDEX)."
-
-#~ msgid "Virtual desktop configuration."
-#~ msgstr "Nastavení virtuálních pracovních ploch."
-
-#~ msgid "stop"
-#~ msgstr "zastav"
-
-#~ msgid "wrap-around"
-#~ msgstr "jdi dokola"
-
-#~ msgid "keep-going"
-#~ msgstr "pokračuj"
-
-#~ msgid "When passing the first or last workspace, while moving a window: \\w"
-#~ msgstr "Při přepnutí za první či poslední plochu při přesunu okna: \\w"
-
-#~ msgid "Workspaces are deleted when their last window closes."
-#~ msgstr "Zavřít pracovní plochy po zavření posledního okna."
-
-#~ msgid "Preserve empty workspaces in pager."
-#~ msgstr "Zachovat prázdné plochy v Pageru."
-
-#~ msgid "Dialogs appear on the same workspace as their application."
-#~ msgstr "Zobrazit dialogy na stejné ploše jako jejich aplikace."
-
-#~ msgid "Whether growing an already grown window grows it again."
-#~ msgstr "Zdali se má zvětšovat už jednou zvětšené okno."
-
-#~ msgid "opaque"
-#~ msgstr "celé okno"
-
-#~ msgid "box"
-#~ msgstr "rámeček"
-
-#~ msgid "How windows being moved are animated: \\w"
-#~ msgstr "Způsob animování oken při přesunu: \\w"
-
-#~ msgid "How windows being resized are animated: \\w"
-#~ msgstr "Způsob animování oken při změně velikosti: \\w"
-
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Přesunout okna dopředu při přesunu nebo změně velikosti."
-
-#~ msgid "region"
-#~ msgstr "oblast"
-
-#~ msgid "border"
-#~ msgstr "okraj"
-
-#~ msgid "grab"
-#~ msgstr "zachytit"
-
-#~ msgid "border-grab"
-#~ msgstr "okraj-zachytit"
-
-#~ msgid "How to choose window edges when resizing: \\w"
-#~ msgstr "Způsob výběru okraje při změně velikosti: \\w"
-
-#~ msgid "Snap window position to edges of other windows while moving."
-#~ msgstr "Přitahovat okno k okrajům ostatních oken během přesouvání."
-
-#~ msgid "Proximity in pixels before snapping to a window edge."
-#~ msgstr "Vzdálenost v bodech pro přitahování k okrajům oken."
-
-#~ msgid "magnetism"
-#~ msgstr "magnetismus"
-
-#~ msgid "resistance"
-#~ msgstr "odpor"
-
-#~ msgid "attraction"
-#~ msgstr "přitahování"
-
-#~ msgid "How to snap together window edges: \\w"
-#~ msgstr "Způsob přitahování okrajů oken: \\w"
-
-#~ msgid "Snap to otherwise-ignored windows."
-#~ msgstr "Přitahovat k jinak ignorovaným oknům."
-
-#~ msgid "Only update window contents after it has stopped moving."
-#~ msgstr "Obnovit obsah okna až po skončení přesunu."
-
-#~ msgid ""
-#~ "Default increment for size-window commands (when the window doesn't\n"
-#~ "specify it's own increments)."
-#~ msgstr ""
-#~ "Standardní změna pro size-window příkazy. (pokud neuvedou jinou\n"
-#~ "hodnotu změny)."
-
-#~ msgid "Number of pixels to move window in `slide-' commands."
-#~ msgstr "Počet bodů, o který se přesune okno při příkazech `slide-'."
-
-#~ msgid "Display window names while cycling through windows."
-#~ msgstr "Zobrazit jména oken během přepínání mezi okny."
-
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Přesunout dopředu okno, když jsou dočasně vybráno během přepínání."
-
-#~ msgid "Warp the mouse pointer to windows as they're temporarily selected."
-#~ msgstr "Přesunout kurzor do okna, když je dočasně vybráno během přepínání."
-
-#~ msgid "Focus windows when they're temporarily selected during cycling."
-#~ msgstr "Aktivovat okno, když je dočasně vybráno během přepínání."
-
-#~ msgid "Disable auto-raising while temporarily selecting windows."
-#~ msgstr "Zakázat automatický přesun dopředu během dočasného vybrání."
-
-#~ msgid "The hierarchical window menu raises singleton submenus."
-#~ msgstr "Hierarchické menu oken zobrazuje jednoprvkové podmenu."
-
-#~ msgid "Milliseconds to delay before flipping: \\w"
-#~ msgstr "Zpoždění v milisekundách před přepnutím: \\w"
-
-#~ msgid "Warp pointer to opposite screen edge when flipping."
-#~ msgstr "Při přepnutí přesunout kurzor na opačnou stranu obrazovky."
-
-#~ msgid "Remove tooltips after a period of time."
-#~ msgstr "Odstranit rady po uvedeném čase."
-
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Počet milisekund před zobrazením rady."
-
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Počet milisekund před odstraněním rady."
-
-#~ msgid "Font used to display tooltips."
-#~ msgstr "Písmo pro rady."
-
-#~ msgid "Color used for the tooltips background"
-#~ msgstr "Barva pozadí pro rady"
-
-#~ msgid "Color used for the tooltips foreground"
-#~ msgstr "Barva popředí pro rady"
-
-#~ msgid "Invoke the GNOME control center from the `Customize' menu."
-#~ msgstr "Vyvolat ovládací centrum GNOME z menu 'Přizpůsobit'."
-
-#~ msgid ""
-#~ "Try to leave at least this many pixels between window edges in first/best-"
-#~ "fit."
-#~ msgstr ""
-#~ "Pokusit se o ponechání aspoň tolika bodů mezi okraji oken při first/best-"
-#~ "fit."
-
-#~ msgid "Automatically select window gravity from position on screen."
-#~ msgstr "Automaticky vybrat přitažlivost okna podle pozice na obrazovce."
-
-#~ msgid "Ignore requests from applications to change window stacking."
-#~ msgstr "Ignorovat požadavky aplikací na změny ve vrstvení oken."
-
-#~ msgid "Windows are focused after being uniconified."
-#~ msgstr "Aktivovat okna při obnovení z ikony."
-
-#~ msgid "Windows are raised after being uniconified."
-#~ msgstr "Přesunout okna dopředu při obnovení z ikony."
-
-#~ msgid "Unmanaged windows may be iconified."
-#~ msgstr "Nespravovaná okna je možno zmenšit do ikony."
-
-#~ msgid "Iconifying a window also iconifies the: \\w"
-#~ msgstr "Zmenšení okna do ikony též zmenší: \\w"
-
-#~ msgid "Uniconifying a window also uniconifies the: \\w"
-#~ msgstr "Obnovení okna též obnoví: \\w"
-
-#~ msgid ""
-#~ "Maximizing a window in one dimension must increase the size of that "
-#~ "dimension."
-#~ msgstr "Maximalizace v jednom směru musí zvětšovat velikost okna."
-
-#~ msgid "Raise windows when they are maximized."
-#~ msgstr "Přesunou okna dopředu při maximalizaci."
-
-#~ msgid "Let unmanaged windows be overlapped when filling windows."
-#~ msgstr "Nespravovaná okna mohou být zakryta při maximalizování oken."
-
-#~ msgid "Don't cover `avoided' windows when maximizing."
-#~ msgstr "Nezakrývat 'chráněná' okna při maximalizaci."
-
-#~ msgid "Dialog windows inherit the focus from their parent."
-#~ msgstr "Dialogy přebírají fokus od rodičovského okna."
-
-#~ msgid "Decorate dialog windows similarly to application windows."
-#~ msgstr "Rámy dialogů jsou podobné rámům normálních oken."
-
-#~ msgid "Raise selected windows (normally by the Windows menu)."
-#~ msgstr "Vybraná okna přesunout dopředu (normálně pomocí menu oken)."
-
-#~ msgid "Warp the pointer to selected windows."
-#~ msgstr "Přesunout kurzor do vybraných oken."
-
-#~ msgid "Group transient windows with their parents."
-#~ msgstr "Seskupit podřazená okna s jejich rodiči."
-
-#~ msgid "Persistent group ids"
-#~ msgstr "Stálé ID skupin"
-
-#~ msgid "novice"
-#~ msgstr "začínajícího"
-
-#~ msgid "intermediate"
-#~ msgstr "středně pokročilého"
-
-#~ msgid "expert"
-#~ msgstr "pokročilého"
-
-#~ msgid "Show options suitable for \\w users."
-#~ msgstr "Zobrazit možnosti vhodné pro \\w uživatele."
-
-#~ msgid "ok"
-#~ msgstr "OK"
-
-#~ msgid "revert/cancel/ok"
-#~ msgstr "Zpět/zrušit/OK"
-
-#~ msgid "apply/revert/cancel/ok"
-#~ msgstr "Zkusit/zpět/zrušit/OK"
-
-#~ msgid "Buttons shown in configurator: \\w"
-#~ msgstr "Tlačítka zobrazená v nastavení: \\w"
-
-#~ msgid "Show variable names of each customization option."
-#~ msgstr "Zobrazit jména proměnných pro každou volbu."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Zeptat se na plochu a přepnout se na ni."

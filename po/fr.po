@@ -10,7 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.3\n"
-"POT-Creation-Date: 2006-08-29 15:06+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-04 22:17+0200\n"
 "PO-Revision-Date: 2006-08-29 15:06+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -29,119 +30,6 @@ msgstr "Sawfish gère complètement vos fenêtres."
 #. ../scripts/sawfish-about.jl
 msgid "Sawfish homepage"
 msgstr "Page Web de Sawfish"
-
-#. ../themer/themer.in
-msgid "Reload themes in window manager after saving."
-msgstr "Recharger le thème du gestionnaire de fenêtres après la sauvegarde."
-
-#. ../themer/themer.in
-msgid "Remove unused definitions when saving."
-msgstr "Supprimer les définitions inutilisés lors de la sauvegarde."
-
-#. ../themer/themer.in
-msgid "[left]"
-msgstr "[gauche]"
-
-#. ../themer/themer.in
-msgid "[right]"
-msgstr "[droite]"
-
-#. ../themer/themer.in
-msgid "[top]"
-msgstr "[haut]"
-
-#. ../themer/themer.in
-msgid "[bottom]"
-msgstr "[bas]"
-
-#. ../lisp/sawfish/gtk/widgets/color.jl
-#. ../themer/themer.in
-msgid "Select color"
-msgstr "Choisir une couleur"
-
-#. ../lisp/sawfish/gtk/widgets/font.jl
-#. ../lisp/sawfish/gtk/widgets/file.jl
-#. ../themer/themer.in
-msgid "Browse..."
-msgstr "Parcourir..."
-
-#. ../lisp/sawfish/gtk/widgets/font.jl
-#. ../themer/themer.in
-msgid "Select font"
-msgstr "Choisir une police"
-
-#. ../themer/themer.in
-msgid "Properties..."
-msgstr "Propriétés..."
-
-#. ../themer/themer.in
-msgid "Select Image"
-msgstr "Choisir une image"
-
-#. ../themer/themer.in
-msgid "Image Properties"
-msgstr "Propriétés de l'image"
-
-#. ../lisp/sawfish/gtk/widget.jl
-#. ../themer/themer.in
-#, c-format
-msgid "No matching item for %S"
-msgstr "Pas d'élément trouvé pour %S"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added pattern `%s'"
-msgstr "Ajouter le motif « %s »"
-
-#. ../themer/themer.in
-msgid "Frame name"
-msgstr "Nom du cadre"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added frame `%s'"
-msgstr "Cadre ajouté « %s »"
-
-#. ../themer/themer.in
-msgid "<none>"
-msgstr "<aucun>"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Added frame type `%s'"
-msgstr "Type de cadre « %s » ajouté"
-
-#. ../themer/themer.in
-#, c-format
-msgid "error while building frame: %S"
-msgstr "erreur lors de la construction du cadre : %S"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Saved as `%s'"
-msgstr "Enregistré sous « %s »"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Generated theme in directory `%s'"
-msgstr "Thème généré dans le répertoire « %s »"
-
-#. ../themer/themer.in
-#, c-format
-msgid "Read theme from `%s'"
-msgstr "Lire le thème à partir de « %s »"
-
-#. ../themer/themer.in
-msgid "Theme Directory"
-msgstr "Répertoire des thèmes"
-
-#. ../themer/themer.in
-msgid "Open"
-msgstr "Ouvrir"
-
-#. ../themer/themer.in
-msgid "Preferences"
-msgstr "Préférences"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -287,6 +175,15 @@ msgstr "Largeur de la bordure de fenêtre."
 msgid "Border width of bar images."
 msgstr "Largeur de la bordure de la barre d'images."
 
+#. ../lisp/sawfish/gtk/widget.jl
+#, c-format
+msgid "No matching item for %S"
+msgstr "Pas d'élément trouvé pour %S"
+
+#. ../lisp/sawfish/gtk/widget.jl
+msgid "** unknown widget **  "
+msgstr "** widget inconnue **  "
+
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Key"
@@ -296,9 +193,22 @@ msgstr "Touche"
 msgid "Value"
 msgstr "Valeur"
 
+#. ../lisp/sawfish/gtk/widgets/color.jl
+msgid "Select color"
+msgstr "Choisir une couleur"
+
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../lisp/sawfish/gtk/widgets/file.jl
+msgid "Browse..."
+msgstr "Parcourir..."
+
 #. ../lisp/sawfish/gtk/widgets/file.jl
 msgid "Select file"
 msgstr "Choisir un fichier"
+
+#. ../lisp/sawfish/gtk/widgets/font.jl
+msgid "Select font"
+msgstr "Choisir une police"
 
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
@@ -328,14 +238,6 @@ msgstr "Oui"
 msgid "No"
 msgstr "Non"
 
-#. ../lisp/sawfish/gtk/widget.jl
-msgid "** unknown widget **  "
-msgstr "** widget inconnue **  "
-
-#. ../lisp/sawfish/ui/layouts/keymaps.jl
-msgid "Context:"
-msgstr "Contexte :"
-
 #. ../lisp/sawfish/ui/apply.jl
 #, c-format
 msgid "While changing %s:"
@@ -345,24 +247,13 @@ msgstr "Lors du changement %s :"
 msgid "Sawfish Error"
 msgstr "Erreur de Sawfish"
 
+#. ../lisp/sawfish/ui/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Contexte :"
+
 #. ../lisp/sawfish/ui/shell.jl
 msgid "Sawfish Configurator"
 msgstr "Configurateur de Sawfish"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Espaces de travail :"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Colonnes :"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Lignes :"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/commands.jl
@@ -379,6 +270,21 @@ msgstr "Non documenté"
 #. ../lisp/sawfish/ui/widgets/event.jl
 msgid "Grab..."
 msgstr "Capturer..."
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Espaces de travail :"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Colonnes :"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Lignes :"
 
 #. ../lisp/sawfish/ui/widgets/icon.jl
 msgid "Select Icon"
@@ -432,889 +338,6 @@ msgstr "Bulles d'aide"
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
 msgstr "Index :"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command"
-msgstr "Appeler la Commande"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-msgstr "Appelez la commande NAME; avec le préfixe optionnel PFX-ARG."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Run shell command"
-msgstr "Exécuter la commande shell"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Execute the given shell command."
-msgstr "Exécuter la commande shell spécifiée."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Commande :"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command sequence"
-msgstr "Séquence de commande"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Invoke the list of commands, one by one."
-msgstr "Invoquer la liste des commandes, une après l'autre."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Quit"
-msgstr "Quitter"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Restart"
-msgstr "Redémarrer"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Destroy window"
-msgstr "Détruire la fenêtre"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Kill client"
-msgstr "Tuer le client"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "No operation"
-msgstr "Pas d'opération"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command with output to screen"
-msgstr "Appeler la commande avec sortie à l'écran"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Prompt for a command, execute it, and print any output to the screen."
-msgstr "Attendre une commande, l'exécuter, et afficher la sortie à l'écran."
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Focus"
-msgstr "Focus"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Move/Resize"
-msgstr "Déplacer/Redimensionner"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Placement"
-msgstr "Placement"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Appearance"
-msgstr "Apparence"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Workspaces"
-msgstr "Espaces de travail"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Bindings"
-msgstr "Raccourcis"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing and Maximizing"
-msgstr "Minimiser et maximiser"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Miscellaneous"
-msgstr "Divers"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Customize"
-msgstr "Personnaliser"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "Invoquer le système de personnalisation de l'utilisateur."
-
-#. ../lisp/sawfish/wm/focus.jl
-msgid "When does the mouse pointer affect the input focus."
-msgstr "Quand le pointeur de la souris affecte-t-il le focus d'entrée."
-
-#. ../lisp/sawfish/wm/focus.jl
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "Le mode clic-focus transmet le clic à l'application."
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default frame style:"
-msgstr "Style de cadres par défaut :"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Automatically reload themes when they are updated."
-msgstr "Recharger automatiquement les thèmes quand ils sont mis à jour."
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default font: \\w"
-msgstr "Police par défaut : \\w"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Edit frame style"
-msgstr "Éditer le style de cadre"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default"
-msgstr "Défaut"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Normal"
-msgstr "Normal"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Title-only"
-msgstr "Titre seulement"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Border-only"
-msgstr "Bordure seulement"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Top-border"
-msgstr "Bordure principale"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "None"
-msgstr "Aucun"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "global-keymap"
-msgstr "global-keymap"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active anywhere."
-msgstr "Table des touches contenant les raccourcis actifs partout."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "window-keymap"
-msgstr "window-keymap"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr ""
-"Table des touches contenant les raccourcis actifs quand une\n"
-"fenêtre cliente a le focus."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "root-window-keymap"
-msgstr "root-window-keymap"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-"au-dessus de la fenêtre source (ou quand aucune fenêtre n'a le focus)."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "title-keymap"
-msgstr "title-keymap"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-"au-dessus du titre d'une fenêtre. (Seuls les raccourcis-souris sont testés\n"
-"dans cette table.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "border-keymap"
-msgstr "border-keymap"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-"au-dessus de la bordure d'une fenêtre. (Seuls les raccourcis souris sont\n"
-"testés dans cette table.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "close-button-keymap"
-msgstr "close-button-keymap"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-"au-dessus du bouton fermer d'une fenêtre. (Seuls les raccourcis souris sont\n"
-"testés dans cette table.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "iconify-button-keymap"
-msgstr "iconify-button-keymap"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-"au-dessus du bouton icônifier d'une fenêtre. (Seuls les raccourcis souris\n"
-"sont testés dans cette table.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "maximize-button-keymap"
-msgstr "maximize-button-keymap"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-"au-dessus du bouton maximiser d'une fenêtre. (Seuls les raccourcis souris\n"
-"sont testés dans cette table.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "menu-button-keymap"
-msgstr "menu-button-keymap"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-"au-dessus du bouton menu d'une fenêtre. (Seuls les raccourcis souris sont\n"
-"testés dans cette table.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "shade-button-keymap"
-msgstr "shade-button-keymap"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-"au-dessus du bouton ombré d'une fenêtre. (Seuls les raccourcis souris sont\n"
-"testés dans cette table.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default shortcuts."
-msgstr ""
-"Touche(s) modificatrice utilisée(s) pour les raccourcis clavier par défaut."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Minimize"
-msgstr "Minimiser"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Unmaximize"
-msgstr "Démaximiser"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Maximize"
-msgstr "Maximiser"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Close"
-msgstr "_Fermer"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Toggle"
-msgstr "_Inverser"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "In _group"
-msgstr "En _groupe"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Send window to"
-msgstr "Envoyer la fenêtre _vers"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Previous workspace"
-msgstr "Espace de travail _précédent"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Next workspace"
-msgstr "Espace de travail _suivant"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to previous"
-msgstr "Copier vers le précédent"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to next"
-msgstr "Copier vers le suivant"
-
-#. ../lisp/sawfish/wm/stacking.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Stacking"
-msgstr "Empilement"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Raise"
-msgstr "Mettre au premier plan"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Lower"
-msgstr "Inférieure"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Upper layer"
-msgstr "Couche supérieure"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Lower layer"
-msgstr "Couche inférieure"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Frame type"
-msgstr "Type de cadre"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Frame style"
-msgstr "Style de cadre"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Windows"
-msgstr "_Fenêtres"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Work_spaces"
-msgstr "_Bureaux"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Programs"
-msgstr "_Programmes"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Customize"
-msgstr "Perso_nnaliser"
-
-#. ../lisp/sawfish/wm/gnome/integration.jl
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Help"
-msgstr "_Aide"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_FAQ..."
-msgstr "_FAQ..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_News..."
-msgstr "_Nouveautés..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_WWW page..."
-msgstr "Page _Web..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Manual..."
-msgstr "_Manuel..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_About Sawfish..."
-msgstr "À _propos de Sawfish..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Restart"
-msgstr "_Redémarrer"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Quit"
-msgstr "_Quitter"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup window menu"
-msgstr "Popup le menu des fenêtres"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the menu listing all window operations."
-msgstr "Afficher le menu listant toutes les opérations des fenêtres."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup root menu"
-msgstr "Popup le menu root"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the main menu."
-msgstr "Afficher le menu principal."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup apps menu"
-msgstr "Popup le menu des apps"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the applications menu."
-msgstr "Afficher le menu des applications."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_All settings"
-msgstr "_Tous les paramètres"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Edit theme..."
-msgstr "Éditer le thème..."
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing windows: \\w"
-msgstr "Méthode de placement des fenêtres : \\w"
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing dialog windows: \\w"
-msgstr "Méthode de placement des boîtes de dialogue : \\w"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "all"
-msgstr "Tous"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "parents"
-msgstr "parent"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/state/iconify.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "none"
-msgstr "aucun"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Keep transient windows stacked above: \\w"
-msgstr "Garder les fenêtres temporaires empilées au-dessus : \\w"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise single window"
-msgstr "Mettre au premier plan une simple fenêtre"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise the window to its highest allowed position in the stacking order."
-msgstr ""
-"Élever la fenêtre à sa position la plus haute autorisée dans\n"
-"l'ordre d'empilement."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower single window"
-msgstr "Diminuer une simple fenêtre"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower the window to its lowest allowed position in the stacking order."
-msgstr ""
-"Descendre la fenêtre à sa position la plus basse autorisée dans\n"
-"l'ordre d'empilement."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise lower single window"
-msgstr "Augmenter la diminution d'une simple fenêtre"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed."
-msgstr ""
-"Si la fenêtre est au plus haut de la pile, la descendre au plus bas\n"
-"possible, sinon l'élever le plus haut possible."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise window depth"
-msgstr "Profondeur de la mise en premier plan"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level above its current level."
-msgstr "Élever la fenêtre d'un niveau dans l'ordre d'empilement."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower window depth"
-msgstr "Diminuer la profondeur de la fenêtre"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level beneath its current level."
-msgstr "Descendre la fenêtre d'un niveau dans l'ordre d'empilement."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport"
-msgstr "Activer le visuel"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport."
-msgstr "Sélectionner le visuel spécifié."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Column:"
-msgstr "Colonne :"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Row:"
-msgstr "Ligne :"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport column"
-msgstr "Activer le visuel de la colonne"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport column."
-msgstr "Sélectionner le visuel de la colonne spécifiée."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport row"
-msgstr "Activer le visuel de la ligne"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport row."
-msgstr "Sélectionner le visuel de la ligne spécifiée."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window to viewport"
-msgstr "Déplacer la fenêtre vers le visuel"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the current window to the specified viewport."
-msgstr "Déplacer la fenêtre courante vers le visuel spécifié."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport right"
-msgstr "Déplacer le visuel vers la droite"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen to the right."
-msgstr "Déplacer le visuel d'un écran vers la droite."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport left"
-msgstr "Déplacer le visuel vers la gauche"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen to the left."
-msgstr "Déplacer le visuel d'un écran vers la gauche."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport up"
-msgstr "Déplacer le visuel vers le haut"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen up."
-msgstr "Déplacer le visuel d'un écran vers le haut."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport down"
-msgstr "Déplacer le visuel vers le bas."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen down."
-msgstr "Déplacer le visuel d'un écran vers le bas."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window right"
-msgstr "Déplacer la fenêtre vers la droite"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport on the right, and switch to that viewport."
-msgstr "Envoie la fenêtre vers le bureau de droite et affiche ce bureau."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window left"
-msgstr "Envoyer la fenêtre à gauche"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport on the left, and switch to that viewport."
-msgstr "Envoie la fenêtre vers le bureau de gauche, et affiche ce bureau."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window up"
-msgstr "Envoyer la fenêtre vers le haut"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport above, and switch to that viewport."
-msgstr "Envoie la fenêtre vers le bureau du dessus, et affiche ce bureau."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window down"
-msgstr "Envoyer la fenêtre vers le bas"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the window to the viewport below, and switch to that viewport."
-msgstr "Envoie la fenêtre vers le bureau du dessous et affiche ce bureau."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Focus desktop"
-msgstr "Focus du bureau"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Transfer input focus to the desktop window (if one exists)."
-msgstr "Transférer le focus d'entrée au bureau (si il existe)."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window"
-msgstr "Détruire fenêtre"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window."
-msgstr "Détruire la fenêtre."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window safely"
-msgstr "Détruire la fenêtre sans rique"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window, or beep if the window can't be closed safely."
-msgstr ""
-"Détruire la fenêtre, ou biper si la fenêtre ne peut pas être fermée en toute "
-"sécurité."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Uniquify window name"
-msgstr "Le nom de la fenêtre devient unique"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Force the current window to have a unique title."
-msgstr "Forcer la fenêtre courante à avoir un titre unique."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspace names"
-msgstr "Nom des espaces de travail"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "_Insert workspace"
-msgstr "_Insérer un espace de travail"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select _next workspace"
-msgstr "Sélectionner l'espace de travail _suivant"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select _previous workspace"
-msgstr "Sélectionner l'espace de travail _précédent"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge with next"
-msgstr "Fusionner avec le suivant"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge with previous"
-msgstr "Fusionner avec le précédent"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace _right"
-msgstr "Déplacer l'espace de travail à _droite"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace _left"
-msgstr "Déplacer l'espace de travail à _gauche"
-
-#. ../lisp/sawfish/wm/workspace.jl
-#, c-format
-msgid "space %d"
-msgstr "espace de travail %d"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Popup workspace list"
-msgstr "Popup la liste des espaces de travail"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the menu containing the list of all workspaces."
-msgstr "Afficher le menu contenant la liste de tous les espaces de travail."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Popup window list"
-msgstr "Popup la liste des fenêtres"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the menu of all managed windows."
-msgstr "Afficher le menu de toutes les fenêtre gérées."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Next workspace"
-msgstr "Espace de travail suivant"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the next workspace."
-msgstr "Afficher l'espace de travail suivant."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Previous workspace"
-msgstr "Espace de travail précédent"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Display the previous workspace."
-msgstr "Afficher l'espace de travail précédent."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to next workspace"
-msgstr "Envoyer à l'espace de travail suivant"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the window to the next workspace."
-msgstr "Déplacer la fenêtre vers l'espace de travail suivant."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to previous workspace"
-msgstr "Envoyer à l'espace de travail précédent"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the window to the previous workspace."
-msgstr "Déplacer la fenêtre vers l'espace de travail précédent."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to next workspace"
-msgstr "Copier dans l'espace de travail suivant"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the window to the next workspace."
-msgstr "Copier la fenêtre vers l'espace de travail suivant."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to previous workspace"
-msgstr "Copier dans l'espace de travail précédent"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the window to the previous workspace."
-msgstr "Copier la fenêtre vers l'espace de travail précédent."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Append workspace and send"
-msgstr "Ajouter un espace de travail et envoyer"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Create a new workspace at the end of the list, and move the window to it."
-msgstr ""
-"Créer un nouvel espace de travail à la fin de la liste, et déplacer la "
-"fenêtre vers celui-ci."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Prepend workspace and send"
-msgstr "Pré-ajouter un espace de travail et envoyer"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Create a new workspace at the start of the list, and move the window to it."
-msgstr ""
-"Créer un nouvel espace de travail au début de la liste, et déplacer la "
-"fenêtre vers celui-ci."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge next workspace"
-msgstr "Fusionner avec l'espace de travail suivant"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the next\n"
-"workspace."
-msgstr ""
-"Supprimer l'espace de travail actuel. Ses fenêtres membres serons déplacées\n"
-"vers l'espace de travail suivant."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Merge previous workspace"
-msgstr "Fusionner avec l'espace de travail précédent"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the\n"
-"previous workspace."
-msgstr ""
-"Supprimer l'espace de travail actuel. Ses fenêtres membres serons déplacées\n"
-"vers l'espace de travail précédent."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace after"
-msgstr "Insérer un espace de travail après"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Create a new workspace following the current workspace."
-msgstr "Créer un nouvel espace de travail après l'espace de travail actuel."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Insert workspace before"
-msgstr "Insérer un espace de travail avant"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Create a new workspace before the current workspace."
-msgstr "Créer un nouvel espace de travail avant l'espace de travail actuel."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace forwards"
-msgstr "Déplacer l'espace de travail en avant"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current workspace one place to the right."
-msgstr "Déplacer l'espace de travail actuel d'une place vers la droite."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move workspace backwards"
-msgstr "Déplacer l'espace de travail en arrière"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current workspace one place to the left."
-msgstr "Déplacer l'espace de travail actuel d'une place vers la gauche."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete empty workspaces"
-msgstr "Détruire les espaces de travail vide"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete any workspaces that don't contain any windows."
-msgstr "Supprimer tous les espaces de travail ne contenant aucune fenêtre."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Delete window instance"
-msgstr "Effacer l'instance de la fenêtre."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Remove the copy of the window on the current workspace. If this is the\n"
-"last instance remaining, then delete the actual window."
-msgstr ""
-"Supprime la copie de la fenêtre sur le bureau courant. Si c'est la dernière\n"
-"instance, alors supprime la fenêtre actuelle."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Activate workspace"
-msgstr "Activer l'espace de travail"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select the N'th workspace."
-msgstr "Sélectionner le N'eme espace de travail."
-
-#. ../lisp/sawfish/wm/util/prompt-wm.jl
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Workspace:"
-msgstr "Espace de travail :"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Send to workspace"
-msgstr "Envoyer dans l'espace de travail"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Move the current window to the N'th workspace."
-msgstr "Déplacer la fenêtre courante vers le N'eme espace de travail."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy to workspace"
-msgstr "Copier dans l'espace de travail"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the current window to the N'th workspace."
-msgstr "Copier la fenêtre courante vers le N'eme espace de travail."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select workspace interactively"
-msgstr "Sélectionner l'espace de travail interactivement"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Prompt for a workspace and switch to it."
-msgstr "Demander un espace de travail et s'y rendre."
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next workspace window"
@@ -2141,6 +1164,106 @@ msgstr "Xterm"
 msgid "Start a new xterm."
 msgstr "Démarrer un nouveau xterm."
 
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command"
+msgstr "Appeler la Commande"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr "Appelez la commande NAME; avec le préfixe optionnel PFX-ARG."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Run shell command"
+msgstr "Exécuter la commande shell"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Execute the given shell command."
+msgstr "Exécuter la commande shell spécifiée."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command:"
+msgstr "Commande :"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command sequence"
+msgstr "Séquence de commande"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Invoquer la liste des commandes, une après l'autre."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Quit"
+msgstr "Quitter"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Restart"
+msgstr "Redémarrer"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Destroy window"
+msgstr "Détruire la fenêtre"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Kill client"
+msgstr "Tuer le client"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "No operation"
+msgstr "Pas d'opération"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command with output to screen"
+msgstr "Appeler la commande avec sortie à l'écran"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "Attendre une commande, l'exécuter, et afficher la sortie à l'écran."
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Focus"
+msgstr "Focus"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Déplacer/Redimensionner"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Placement"
+msgstr "Placement"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Appearance"
+msgstr "Apparence"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "Espaces de travail"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "Raccourcis"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Minimizing and Maximizing"
+msgstr "Minimiser et maximiser"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "Divers"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Customize"
+msgstr "Personnaliser"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "Invoquer le système de personnalisation de l'utilisateur."
+
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
 msgstr "Logo 3d"
@@ -2316,6 +1439,16 @@ msgstr "Le focus passe à travers"
 msgid "Focus mode"
 msgstr "Mode de focus"
 
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame type"
+msgstr "Type de cadre"
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame style"
+msgstr "Style de cadre"
+
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignored"
 msgstr "Ignoré"
@@ -2350,6 +1483,11 @@ msgstr "Pas dans la rotation"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Window list skip"
+msgstr "Pas dans la liste des fenêtres"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Task list skip"
 msgstr "Pas dans la liste des fenêtres"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2564,6 +1702,59 @@ msgstr ""
 "Envoyer la fenêtre dans l'espace de travail à droite de l'espace de travail "
 "actuel."
 
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Quand le pointeur de la souris affecte-t-il le focus d'entrée."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Le mode clic-focus transmet le clic à l'application."
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default frame style:"
+msgstr "Style de cadres par défaut :"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Automatically reload themes when they are updated."
+msgstr "Recharger automatiquement les thèmes quand ils sont mis à jour."
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default font: \\w"
+msgstr "Police par défaut : \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Edit frame style"
+msgstr "Éditer le style de cadre"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default"
+msgstr "Défaut"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Normal"
+msgstr "Normal"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Title-only"
+msgstr "Titre seulement"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Border-only"
+msgstr "Bordure seulement"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Top-border"
+msgstr "Bordure principale"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "None"
+msgstr "Aucun"
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/gnome/integration.jl
+msgid "_Help"
+msgstr "_Aide"
+
 #. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "Aide _GNOME..."
@@ -2580,13 +1771,353 @@ msgstr "À propos de GNOME..."
 msgid "Gnome menus update"
 msgstr "Mise à jour des menus GNOME"
 
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "global-keymap"
+msgstr "global-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active anywhere."
+msgstr "Table des touches contenant les raccourcis actifs partout."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "window-keymap"
+msgstr "window-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand une\n"
+"fenêtre cliente a le focus."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "root-window-keymap"
+msgstr "root-window-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus de la fenêtre source (ou quand aucune fenêtre n'a le focus)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "title-keymap"
+msgstr "title-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du titre d'une fenêtre. (Seuls les raccourcis-souris sont testés\n"
+"dans cette table.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "border-keymap"
+msgstr "border-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus de la bordure d'une fenêtre. (Seuls les raccourcis souris sont\n"
+"testés dans cette table.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "close-button-keymap"
+msgstr "close-button-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du bouton fermer d'une fenêtre. (Seuls les raccourcis souris sont\n"
+"testés dans cette table.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "iconify-button-keymap"
+msgstr "iconify-button-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du bouton icônifier d'une fenêtre. (Seuls les raccourcis souris\n"
+"sont testés dans cette table.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "maximize-button-keymap"
+msgstr "maximize-button-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du bouton maximiser d'une fenêtre. (Seuls les raccourcis souris\n"
+"sont testés dans cette table.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "menu-button-keymap"
+msgstr "menu-button-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du bouton menu d'une fenêtre. (Seuls les raccourcis souris sont\n"
+"testés dans cette table.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "shade-button-keymap"
+msgstr "shade-button-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du bouton ombré d'une fenêtre. (Seuls les raccourcis souris sont\n"
+"testés dans cette table.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
+"Touche(s) modificatrice utilisée(s) pour les raccourcis clavier par défaut."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Minimize"
+msgstr "Minimiser"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Unmaximize"
+msgstr "Démaximiser"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Maximize"
+msgstr "Maximiser"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Close"
+msgstr "_Fermer"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Toggle"
+msgstr "_Inverser"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "In _group"
+msgstr "En _groupe"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Send window to"
+msgstr "Envoyer la fenêtre _vers"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Previous workspace"
+msgstr "Espace de travail _précédent"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Next workspace"
+msgstr "Espace de travail _suivant"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Copy to previous"
+msgstr "Copier vers le précédent"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Copy to next"
+msgstr "Copier vers le suivant"
+
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Stacking"
+msgstr "Empilement"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Raise"
+msgstr "Mettre au premier plan"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Lower"
+msgstr "Inférieure"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Upper layer"
+msgstr "Couche supérieure"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Lower layer"
+msgstr "Couche inférieure"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Windows"
+msgstr "_Fenêtres"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Work_spaces"
+msgstr "_Bureaux"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Programs"
+msgstr "_Programmes"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Customize"
+msgstr "Perso_nnaliser"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_FAQ..."
+msgstr "_FAQ..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_News..."
+msgstr "_Nouveautés..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_WWW page..."
+msgstr "Page _Web..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Manual..."
+msgstr "_Manuel..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_About Sawfish..."
+msgstr "À _propos de Sawfish..."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Restart"
+msgstr "_Redémarrer"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Quit"
+msgstr "_Quitter"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup window menu"
+msgstr "Popup le menu des fenêtres"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "Afficher le menu listant toutes les opérations des fenêtres."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup root menu"
+msgstr "Popup le menu root"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "Afficher le menu principal."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup apps menu"
+msgstr "Popup le menu des apps"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "Afficher le menu des applications."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_All settings"
+msgstr "_Tous les paramètres"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Edit theme..."
+msgstr "Éditer le thème..."
+
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
 msgstr "Distance entre les placements successif dans le mode `stagger'."
 
-#. ../lisp/sawfish/wm/state/gnome.jl
-msgid "In GNOME _task list"
-msgstr "Dans la liste des tâches GNOME"
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing windows: \\w"
+msgstr "Méthode de placement des fenêtres : \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing dialog windows: \\w"
+msgstr "Méthode de placement des boîtes de dialogue : \\w"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "all"
+msgstr "Tous"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "parent"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "none"
+msgstr "aucun"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Garder les fenêtres temporaires empilées au-dessus : \\w"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise single window"
+msgstr "Mettre au premier plan une simple fenêtre"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr ""
+"Élever la fenêtre à sa position la plus haute autorisée dans\n"
+"l'ordre d'empilement."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower single window"
+msgstr "Diminuer une simple fenêtre"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr ""
+"Descendre la fenêtre à sa position la plus basse autorisée dans\n"
+"l'ordre d'empilement."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise lower single window"
+msgstr "Augmenter la diminution d'une simple fenêtre"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
+msgstr ""
+"Si la fenêtre est au plus haut de la pile, la descendre au plus bas\n"
+"possible, sinon l'élever le plus haut possible."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise window depth"
+msgstr "Profondeur de la mise en premier plan"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "Élever la fenêtre d'un niveau dans l'ordre d'empilement."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower window depth"
+msgstr "Diminuer la profondeur de la fenêtre"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "Descendre la fenêtre d'un niveau dans l'ordre d'empilement."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2711,6 +2242,16 @@ msgid "Toggle whether a window will be include in the window list."
 msgstr "Intervertir si la fenêtre est incluse dans la liste des fenêtres."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle task list skip"
+msgstr "Basculer la liste des fenêtres à oubliées"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle whether a window will be included in the task-list."
+msgstr "Intervertir si la fenêtre est incluse dans la liste des fenêtres."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
 msgstr "Ignoré"
 
@@ -2725,6 +2266,11 @@ msgstr "_Rotation"
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
 msgstr "Dans la liste des fenêtres"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "In _task list"
+msgstr "Dans la liste des tâches GNOME"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Lock position and size while windows are maximized."
@@ -3026,6 +2572,11 @@ msgstr "Fenêtre :"
 msgid "Workspace %d"
 msgstr "Espace de travail %d"
 
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+msgid "Workspace:"
+msgstr "Espace de travail :"
+
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
 msgstr "prompt-keymap"
@@ -3052,200 +2603,391 @@ msgstr "Dépiler la fenêtre."
 msgid "Raise lower window"
 msgstr "Augmenter la diminution de la fenêtre"
 
-#. ../themer/themer.glade:1315
-msgid " to: "
-msgstr " à : "
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport"
+msgstr "Activer le visuel"
 
-#. ../themer/themer.glade:1587
-msgid "About"
-msgstr "À propos"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "Sélectionner le visuel spécifié."
 
-#. ../themer/themer.glade:412
-msgid "About:"
-msgstr "À propos :"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Column:"
+msgstr "Colonne :"
 
-#. ../themer/themer.glade:879 ../themer/themer.glade:1213
-#. * ../themer/themer.glade:1458
-msgid "Add"
-msgstr "Ajouter"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Row:"
+msgstr "Ligne :"
 
-#. ../themer/themer.glade:1176
-msgid "Attributes"
-msgstr "Attributs"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport column"
+msgstr "Activer le visuel de la colonne"
 
-#. ../themer/themer.glade:1746 ../themer/themer.glade:1856
-msgid "Cancel"
-msgstr "Annuler"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Sélectionner le visuel de la colonne spécifiée."
 
-#. ../themer/themer.glade:675 ../themer/themer.glade:829
-msgid "Clicked"
-msgstr "Cliqué"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport row"
+msgstr "Activer le visuel de la ligne"
 
-#. ../themer/themer.glade:892
-msgid "Copy"
-msgstr "Copier"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Sélectionner le visuel de la ligne spécifiée."
 
-#. ../themer/themer.glade:1036
-msgid "Copy..."
-msgstr "Copier..."
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window to viewport"
+msgstr "Déplacer la fenêtre vers le visuel"
 
-#. ../themer/themer.glade:482
-msgid "Details"
-msgstr "Détails"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "Déplacer la fenêtre courante vers le visuel spécifié."
 
-#. ../themer/themer.glade:430
-msgid "Directory:"
-msgstr "Répertoire :"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport right"
+msgstr "Déplacer le visuel vers la droite"
 
-#. ../themer/themer.glade:166
-msgid "E_xit"
-msgstr "_Quitter"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "Déplacer le visuel d'un écran vers la droite."
 
-#. ../themer/themer.glade:596 ../themer/themer.glade:789
-msgid "Focused"
-msgstr "Sélectionné"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport left"
+msgstr "Déplacer le visuel vers la gauche"
 
-#. ../themer/themer.glade:987 ../themer/themer.glade:1422
-msgid "Frame"
-msgstr "Cadre"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "Déplacer le visuel d'un écran vers la gauche."
 
-#. ../themer/themer.glade:238
-msgid "Frame Part _Definitions"
-msgstr "_Définitions du cadre"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport up"
+msgstr "Déplacer le visuel vers le haut"
 
-#. ../themer/themer.glade:226
-msgid "Frame _Classes"
-msgstr "_Classes de cadre"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "Déplacer le visuel d'un écran vers le haut."
 
-#. ../themer/themer.glade:1237
-msgid "Frames"
-msgstr "Cadres"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport down"
+msgstr "Déplacer le visuel vers le bas."
 
-#. ../themer/themer.glade:622
-msgid "HIghlighted"
-msgstr "Surbrillant"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "Déplacer le visuel d'un écran vers le bas."
 
-#. ../themer/themer.glade:802
-msgid "Highlighted"
-msgstr "Surbrillant"
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window right"
+msgstr "Déplacer la fenêtre vers la droite"
 
-#. ../themer/themer.glade:570 ../themer/themer.glade:776
-msgid "Inactive"
-msgstr "Inactif"
-
-#. ../themer/themer.glade:702 ../themer/themer.glade:843
+#. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Inactive-\n"
-"Clicked"
-msgstr ""
-"Non active\n"
-"Cliqué"
+"Move the window to the viewport on the right, and switch to that viewport."
+msgstr "Envoie la fenêtre vers le bureau de droite et affiche ce bureau."
 
-#. ../themer/themer.glade:649 ../themer/themer.glade:816
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window left"
+msgstr "Envoyer la fenêtre à gauche"
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Inactive-\n"
-"Highlighted"
+"Move the window to the viewport on the left, and switch to that viewport."
+msgstr "Envoie la fenêtre vers le bureau de gauche, et affiche ce bureau."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window up"
+msgstr "Envoyer la fenêtre vers le haut"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr "Envoie la fenêtre vers le bureau du dessus, et affiche ce bureau."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window down"
+msgstr "Envoyer la fenêtre vers le bas"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr "Envoie la fenêtre vers le bureau du dessous et affiche ce bureau."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Focus desktop"
+msgstr "Focus du bureau"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "Transférer le focus d'entrée au bureau (si il existe)."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window"
+msgstr "Détruire fenêtre"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window."
+msgstr "Détruire la fenêtre."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window safely"
+msgstr "Détruire la fenêtre sans rique"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window, or beep if the window can't be closed safely."
 msgstr ""
-"Non active\n"
-"Surbrillance"
+"Détruire la fenêtre, ou biper si la fenêtre ne peut pas être fermée en toute "
+"sécurité."
 
-#. ../themer/themer.glade:1266
-msgid "Map: "
-msgstr "Carte : "
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Uniquify window name"
+msgstr "Le nom de la fenêtre devient unique"
 
-#. ../themer/themer.glade:1480
-msgid "Mapping"
-msgstr "Cartographie"
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "Forcer la fenêtre courante à avoir un titre unique."
 
-#. ../themer/themer.glade:74
-msgid "New Theme"
-msgstr "Nouveau thème"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Workspace names"
+msgstr "Nom des espaces de travail"
 
-#. ../themer/themer.glade:1571 ../themer/themer.glade:1644
-#. * ../themer/themer.glade:1733 ../themer/themer.glade:1843
-msgid "OK"
-msgstr "Valider"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "_Insert workspace"
+msgstr "_Insérer un espace de travail"
 
-#. ../themer/themer.glade:914
-msgid "Patterns"
-msgstr "Motifs"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select _next workspace"
+msgstr "Sélectionner l'espace de travail _suivant"
 
-#. ../themer/themer.glade:1676
-msgid "Properties"
-msgstr "Propriétés"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select _previous workspace"
+msgstr "Sélectionner l'espace de travail _précédent"
 
-#. ../themer/themer.glade:120
-msgid "Save Theme _As..."
-msgstr "Enregistrer le thème _sous..."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge with next"
+msgstr "Fusionner avec le suivant"
 
-#. ../themer/themer.glade:23
-msgid "Sawfish Theme Builder"
-msgstr "Créateur de thèmes de Sawfish"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge with previous"
+msgstr "Fusionner avec le précédent"
 
-#. ../themer/themer.glade:1512
-msgid "Sawfish Themer Preview"
-msgstr "Prévisualisateur de thèmes de Sawfish"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace _right"
+msgstr "Déplacer l'espace de travail à _droite"
 
-#. ../themer/themer.glade:306
-msgid "Theme name: "
-msgstr "Nom du thème : "
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace _left"
+msgstr "Déplacer l'espace de travail à _gauche"
 
-#. ../themer/themer.glade:1531
-msgid "This window previews the current theme."
-msgstr "Cette fenêtre pré-visualise le thème courant."
+#. ../lisp/sawfish/wm/workspace.jl
+#, c-format
+msgid "space %d"
+msgstr "espace de travail %d"
 
-#. ../themer/themer.glade:1409
-msgid "Type"
-msgstr "Type"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup workspace list"
+msgstr "Popup la liste des espaces de travail"
 
-#. ../themer/themer.glade:214
-msgid "Window _Frames"
-msgstr "Cadres de _fenêtre"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu containing the list of all workspaces."
+msgstr "Afficher le menu contenant la liste de tous les espaces de travail."
 
-#. ../themer/themer.glade:1652
-msgid "[about text]"
-msgstr "[Texte à propos]"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup window list"
+msgstr "Popup la liste des fenêtres"
 
-#. ../themer/themer.glade:1106
-msgid "[frame-part-table]"
-msgstr "[frame-part-table]"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu of all managed windows."
+msgstr "Afficher le menu de toutes les fenêtre gérées."
 
-#. ../themer/themer.glade:1766
-msgid "[place holder]"
-msgstr "[place holder]"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Next workspace"
+msgstr "Espace de travail suivant"
 
-#. ../themer/themer.glade:1786 ../themer/themer.glade:1876
-msgid "[title]"
-msgstr "[titre]"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the next workspace."
+msgstr "Afficher l'espace de travail suivant."
 
-#. ../themer/themer.glade:268
-msgid "_About"
-msgstr "À _propos"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Previous workspace"
+msgstr "Espace de travail précédent"
 
-#. ../themer/themer.glade:59
-msgid "_File"
-msgstr "_Fichier"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the previous workspace."
+msgstr "Afficher l'espace de travail précédent."
 
-#. ../themer/themer.glade:91
-msgid "_Open Theme.."
-msgstr "_Ouvrir le thème..."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to next workspace"
+msgstr "Envoyer à l'espace de travail suivant"
 
-#. ../themer/themer.glade:190
-msgid "_Preferences..."
-msgstr "_Préférences..."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the next workspace."
+msgstr "Déplacer la fenêtre vers l'espace de travail suivant."
 
-#. ../themer/themer.glade:143
-msgid "_Preview"
-msgstr "_Prévisualiser"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to previous workspace"
+msgstr "Envoyer à l'espace de travail précédent"
 
-#. ../themer/themer.glade:108
-msgid "_Save Theme"
-msgstr "_Enregistrer le thème"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the previous workspace."
+msgstr "Déplacer la fenêtre vers l'espace de travail précédent."
 
-#. ../themer/themer.glade:175
-msgid "_Settings"
-msgstr "_Paramètres"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to next workspace"
+msgstr "Copier dans l'espace de travail suivant"
 
-#. ../themer/themer.glade:250
-msgid "_Themes"
-msgstr "_Thèmes"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "Copier la fenêtre vers l'espace de travail suivant."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to previous workspace"
+msgstr "Copier dans l'espace de travail précédent"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "Copier la fenêtre vers l'espace de travail précédent."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Append workspace and send"
+msgstr "Ajouter un espace de travail et envoyer"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr ""
+"Créer un nouvel espace de travail à la fin de la liste, et déplacer la "
+"fenêtre vers celui-ci."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prepend workspace and send"
+msgstr "Pré-ajouter un espace de travail et envoyer"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the start of the list, and move the window to it."
+msgstr ""
+"Créer un nouvel espace de travail au début de la liste, et déplacer la "
+"fenêtre vers celui-ci."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge next workspace"
+msgstr "Fusionner avec l'espace de travail suivant"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
+msgstr ""
+"Supprimer l'espace de travail actuel. Ses fenêtres membres serons déplacées\n"
+"vers l'espace de travail suivant."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge previous workspace"
+msgstr "Fusionner avec l'espace de travail précédent"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
+msgstr ""
+"Supprimer l'espace de travail actuel. Ses fenêtres membres serons déplacées\n"
+"vers l'espace de travail précédent."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace after"
+msgstr "Insérer un espace de travail après"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace following the current workspace."
+msgstr "Créer un nouvel espace de travail après l'espace de travail actuel."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace before"
+msgstr "Insérer un espace de travail avant"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace before the current workspace."
+msgstr "Créer un nouvel espace de travail avant l'espace de travail actuel."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace forwards"
+msgstr "Déplacer l'espace de travail en avant"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the right."
+msgstr "Déplacer l'espace de travail actuel d'une place vers la droite."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace backwards"
+msgstr "Déplacer l'espace de travail en arrière"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the left."
+msgstr "Déplacer l'espace de travail actuel d'une place vers la gauche."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete empty workspaces"
+msgstr "Détruire les espaces de travail vide"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete any workspaces that don't contain any windows."
+msgstr "Supprimer tous les espaces de travail ne contenant aucune fenêtre."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete window instance"
+msgstr "Effacer l'instance de la fenêtre."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
+msgstr ""
+"Supprime la copie de la fenêtre sur le bureau courant. Si c'est la dernière\n"
+"instance, alors supprime la fenêtre actuelle."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Show desktop"
+msgstr "Focus du bureau"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide all windows except the desktop window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Hide desktop"
+msgstr "Focus du bureau"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Undoes the effect of the `show-desktop' command."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Activate workspace"
+msgstr "Activer l'espace de travail"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select the N'th workspace."
+msgstr "Sélectionner le N'eme espace de travail."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to workspace"
+msgstr "Envoyer dans l'espace de travail"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current window to the N'th workspace."
+msgstr "Déplacer la fenêtre courante vers le N'eme espace de travail."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to workspace"
+msgstr "Copier dans l'espace de travail"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "Copier la fenêtre courante vers le N'eme espace de travail."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select workspace interactively"
+msgstr "Sélectionner l'espace de travail interactivement"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Demander un espace de travail et s'y rendre."
