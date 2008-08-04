@@ -72,7 +72,7 @@ VALUE. VALUE may be either an integer, a string, or a list of strings.
     sm_prop.name = rep_STR(prop);
     if (rep_INTP(value))
     {
-	u_char val = rep_INT(value);
+	unsigned char val = rep_INT(value);
 	sm_prop.type = SmCARD8;
 	sm_prop.num_vals = 1;
 	sm_prop.vals = alloca (sizeof (SmPropValue));

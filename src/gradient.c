@@ -24,10 +24,10 @@
 DEFUN("draw-vertical-gradient", Fdraw_vertical_gradient,
       Sdraw_vertical_gradient, (repv img, repv from_, repv to_), rep_Subr3)
 {
-    u_char from[3], to[3];
+    unsigned char from[3], to[3];
     int width, height, stride, channels;
     int x, y;
-    u_char *data;
+    unsigned char *data;
 
     rep_DECLARE1(img, IMAGEP);
     rep_DECLARE2(from_, COLORP);
@@ -66,10 +66,10 @@ DEFUN("draw-vertical-gradient", Fdraw_vertical_gradient,
 DEFUN("draw-horizontal-gradient", Fdraw_horizontal_gradient,
       Sdraw_horizontal_gradient, (repv img, repv from_, repv to_), rep_Subr3)
 {
-    u_char from[3], to[3];
+    unsigned char from[3], to[3];
     int width, height, stride, channels;
     int x, y;
-    u_char *data;
+    unsigned char *data;
 
     rep_DECLARE1(img, IMAGEP);
     rep_DECLARE2(from_, COLORP);
@@ -111,7 +111,7 @@ DEFUN("draw-diagonal-gradient", Fdraw_diagonal_gradient,
     double from[3], to[3];
     int width, height, stride, channels;
     int x, y;
-    u_char *data;
+    unsigned char *data;
 
     rep_DECLARE1(img, IMAGEP);
     rep_DECLARE2(from_, COLORP);

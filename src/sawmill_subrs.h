@@ -106,9 +106,9 @@ extern void events_kill (void);
 /* from fonts.c */
 extern int font_type;
 extern repv Qdefault_font;
-extern int x_text_width (repv font, u_char *string, size_t len);
+extern int x_text_width (repv font, unsigned char *string, size_t len);
 extern void x_draw_string (Window id, repv font, GC gc, Lisp_Color *fg_color,
-			   int x, int y, u_char *string, size_t len);
+			   int x, int y, unsigned char *string, size_t len);
 extern repv Fget_font(repv name);
 extern repv Ffont_get(repv font, repv prop);
 extern repv Ffont_put(repv font, repv prop, repv value);
@@ -216,7 +216,7 @@ extern void paste_image_to_drawable (Lisp_Image *img, Drawable d,
 				     int x, int y, int w, int h);
 extern int image_width (Lisp_Image *im);
 extern int image_height (Lisp_Image *im);
-extern u_char *image_pixels (Lisp_Image *im);
+extern unsigned char *image_pixels (Lisp_Image *im);
 extern int image_row_stride (Lisp_Image *im);
 extern int image_channels (Lisp_Image *im);
 extern void image_changed (Lisp_Image *im);

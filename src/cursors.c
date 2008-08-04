@@ -203,7 +203,7 @@ static void
 cursor_prin (repv stream, repv obj)
 {
     char buf[256];
-    sprintf (buf, "#<cursor %x>", (u_int) VCURSOR(obj)->cursor);
+    sprintf (buf, "#<cursor %x>", (unsigned int) VCURSOR(obj)->cursor);
     rep_stream_puts (stream, buf, -1, FALSE);
 }
 

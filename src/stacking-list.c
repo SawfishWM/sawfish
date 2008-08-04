@@ -181,7 +181,7 @@ restack_window (Lisp_Window *w)
     if (!WINDOW_IS_GONE_P (w))
     {
 	XWindowChanges wc;
-	u_int mask = 0;
+	unsigned int mask = 0;
 
 	return_if_fail (window_in_stacking_list_p (w));
 

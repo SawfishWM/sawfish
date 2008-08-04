@@ -32,7 +32,7 @@
 
 /* current_event holds the event we're processing (or 0s), last_event
    contains the previously processed event.  */
-static u_long current_event[2], last_event[2];
+static unsigned long current_event[2], last_event[2];
 
 /* print_prefix means echo all events upto the end of the key-sequence.
    printed_this_prefix says the last event has been echoed. */
@@ -40,12 +40,12 @@ static bool print_prefix, printed_this_prefix;
 
 /* Buffer holding the events making this key-sequence. */
 #define EVENT_BUFSIZ 20
-static u_long event_buf[EVENT_BUFSIZ]; /* one event = (code,mods) */
+static unsigned long event_buf[EVENT_BUFSIZ]; /* one event = (code,mods) */
 static int event_index;
 
 /* Data for testing double-clicks */
 static Time last_click;
-static u_long last_click_button;
+static unsigned long last_click_button;
 static int click_count;
 
 /* These control which types of keyboard events we actually evaluate */
@@ -80,14 +80,14 @@ static repv next_keymap_path;
 DEFSYM(multi_click_delay, "multi-click-delay");
 
 /* The X modifiers being used for Meta, Alt, and Hyper */
-static u_long meta_mod, alt_mod, hyper_mod, super_mod;
+static unsigned long meta_mod, alt_mod, hyper_mod, super_mod;
 
 /* The user-customizable modifier; used for default key bindings. This
    shouldn't include any bits that don't have a fixed meaning. */
-static u_long wm_mod = EV_MOD_META;
+static unsigned long wm_mod = EV_MOD_META;
 
 /* The X modifiers bound to the Num_Lock and Scroll_Lock keysyms */
-static u_long num_lock_mod, scroll_lock_mod;
+static unsigned long num_lock_mod, scroll_lock_mod;
 
 DEFSYM(meta_keysyms, "meta-keysyms");
 DEFSYM(alt_keysyms, "alt-keysyms");
@@ -106,8 +106,8 @@ static int all_lock_combs[2*2*2];
 
 /* Translate from X events to Lisp events */
 
-static u_long
-direct_modifiers (u_long mods)
+static unsigned long
+direct_modifiers (unsigned long mods)
 {
     /* Do this first, since it may contain other indirect mods */
     if (wm_mod != 0 && (mods & EV_MOD_WM))
@@ -125,8 +125,8 @@ direct_modifiers (u_long mods)
     return mods;
 }
 
-static u_long
-indirect_modifiers (u_long mods)
+static unsigned long
+indirect_modifiers (unsigned long mods)
 {
     if(mods & meta_mod)
 	mods = (mods & ~meta_mod) | EV_MOD_META;
@@ -142,7 +142,7 @@ indirect_modifiers (u_long mods)
 
 /* Translate the X key or button event XEV to *CODE and *MODS */
 static bool
-translate_event(u_long *code, u_long *mods, XEvent *xev)
+translate_event(unsigned long *code, unsigned long *mods, XEvent *xev)
 {
     repv multi_click_delay;
     int delay;
@@ -296,14 +296,14 @@ translate_event(u_long *code, u_long *mods, XEvent *xev)
 /* Translate the Lisp key event EV to X keycode *KEYCODE and modifier
    mask *STATE, returning true if successful. */
 static bool
-translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
+translate_event_to_x_key (repv ev, unsigned int *keycode, unsigned int *state)
 {
     if (rep_INT(EVENT_MODS(ev)) & EV_TYPE_KEY)
     {
-	u_int s = rep_INT(EVENT_MODS(ev)) & EV_MOD_MASK;
+	unsigned int s = rep_INT(EVENT_MODS(ev)) & EV_MOD_MASK;
 	KeySym sym = rep_INT(EVENT_CODE(ev));
 	KeySym normal, shifted;
-	u_int k = XKeysymToKeycode (dpy, sym);
+	unsigned int k = XKeysymToKeycode (dpy, sym);
 
 	if (k == 0)
 	    return FALSE;
@@ -334,13 +334,13 @@ translate_event_to_x_key (repv ev, u_int *keycode, u_int *state)
 
 /* Translate the Lisp button event EV to X button identifier *BUTTON and
    modifier mask *STATE, returning true if successful. */
-static u_int
-translate_event_to_x_button (repv ev, u_int *button, u_int *state)
+static unsigned int
+translate_event_to_x_button (repv ev, unsigned int *button, unsigned int *state)
 {
     if (rep_INT(EVENT_MODS(ev)) & EV_TYPE_MOUSE)
     {
-	u_long mods = rep_INT(EVENT_MODS(ev));
-	static struct { u_int button; u_int mask; } buttons[] = {
+	unsigned long mods = rep_INT(EVENT_MODS(ev));
+	static struct { unsigned int button; unsigned int mask; } buttons[] = {
 	    { Button1, Button1Mask },
 	    { Button2, Button2Mask },
 	    { Button3, Button3Mask },
@@ -358,7 +358,7 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 	{
 	    if (mods & buttons[i].mask)
 	    {
-		u_int s;
+		unsigned int s;
 		mods &= ~buttons[i].mask;
 		s = direct_modifiers (mods & EV_MOD_MASK);
 		if (s == EV_MOD_ANY)
@@ -387,7 +387,7 @@ translate_event_to_x_button (repv ev, u_int *button, u_int *state)
 /* Keymap searching */
 
 static inline bool
-compare_events (u_long code1, u_long mods1, u_long code2, u_long mods2)
+compare_events (unsigned long code1, unsigned long mods1, unsigned long code2, unsigned long mods2)
 {
     return (code1 == code2
 	    && ((mods1 == mods2)
@@ -405,7 +405,7 @@ compare_events (u_long code1, u_long mods1, u_long code2, u_long mods2)
    If this function returns true, then this binding is acceptable and
    is returned from the function. */
 static repv
-search_keymap(repv km, u_long code, u_long mods, bool (*callback)(repv key))
+search_keymap(repv km, unsigned long code, unsigned long mods, bool (*callback)(repv key))
 {
     /* If it's a symbol, dereference it. */
     while(rep_SYMBOLP(km) && !rep_NILP(km) && !rep_INTERRUPTP)
@@ -449,7 +449,7 @@ search_keymap(repv km, u_long code, u_long mods, bool (*callback)(repv key))
 
 /* Search for a binding of CODE&MODS.  */
 static repv
-lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
+lookup_binding(unsigned long code, unsigned long mods, bool (*callback)(repv key),
 	       repv context_keymap, Lisp_Window *current_window)
 {
     repv k = rep_NULL, nkp = next_keymap_path;
@@ -537,7 +537,7 @@ eval_input_callback(repv key)
 }
 
 static repv
-lookup_event_binding (u_long code, u_long mods, repv context_map)
+lookup_event_binding (unsigned long code, unsigned long mods, repv context_map)
 {
     Lisp_Window *w = 0;
     if (current_x_event && (mods & EV_TYPE_MOUSE))
@@ -559,7 +559,7 @@ lookup_event_binding (u_long code, u_long mods, repv context_map)
 repv
 eval_input_event(repv context_map)
 {
-    u_long code, mods;
+    unsigned long code, mods;
     repv result = Qnil, cmd, orig_next_keymap_path = next_keymap_path;
 
     if (!translate_event (&code, &mods, current_x_event))
@@ -647,7 +647,7 @@ eval_input_event(repv context_map)
 
 struct key_def {
     const char *name;
-    u_long mods, code;
+    unsigned long mods, code;
 };
 
 static struct key_def default_mods[] = {
@@ -742,14 +742,14 @@ static struct key_def default_codes[] = {
 /* Puts the integers defining the event described in DESC into CODE
    and MODS. */
 static bool
-lookup_event(u_long *code, u_long *mods, u_char *desc)
+lookup_event(unsigned long *code, unsigned long *mods, unsigned char *desc)
 {
     char *tem;
     char buf[100];
     *code = *mods = 0;
 
     /* First handle all modifiers */
-    while(*desc && (tem = strchr(desc + 1, '-')) != 0)
+    while(*desc && (tem = strchr((gpointer) desc + 1, '-')) != 0)
     {
 	struct key_def *x = default_mods;
 
@@ -774,10 +774,10 @@ lookup_event(u_long *code, u_long *mods, u_char *desc)
     /* Then go for the code itself */
     {
 	struct key_def *x = default_codes;
-	u_int ks;
+	unsigned int ks;
 	while(x->name != 0)
 	{
-	    if(strcasecmp(desc, x->name) == 0)
+	    if(strcasecmp((gpointer) desc, x->name) == 0)
 	    {
 		*mods |= x->mods;
 		*code = x->code;
@@ -793,7 +793,7 @@ lookup_event(u_long *code, u_long *mods, u_char *desc)
 	    }
 	    x++;
 	}
-	ks = XStringToKeysym(desc);
+	ks = XStringToKeysym((gpointer) desc);
 	if(ks != NoSymbol)
 	{
 	    if (*mods & ShiftMask)
@@ -822,19 +822,19 @@ error:
 
 /* Constructs the name of the event defined by CODE and MODS in BUF.  */
 static bool
-lookup_event_name(u_char *buf, u_long code, u_long mods)
+lookup_event_name(unsigned char *buf, unsigned long code, unsigned long mods)
 {
     int i;
     struct key_def *x;
-    u_long type = mods & EV_TYPE_MASK;
+    unsigned long type = mods & EV_TYPE_MASK;
 
-    char *end = buf, *tem;
+    char *end = (gpointer) buf, *tem;
     *buf = 0;
 
     mods &= EV_MOD_MASK;
     for(i = 32; i >= 0 && mods != 0; i--)	/* magic numbers!? */
     {
-	u_long mask = 1 << i;
+	unsigned long mask = 1 << i;
 	if(mods & mask)
 	{
 	    mods &= ~mask;
@@ -878,8 +878,8 @@ bool
 print_event_prefix(void)
 {
     int i;
-    u_char buf[256];
-    u_char *bufp = buf;
+    unsigned char buf[256];
+    unsigned char *bufp = buf;
 
     if (next_keymap_path == rep_NULL)
 	return FALSE;
@@ -891,7 +891,7 @@ print_event_prefix(void)
     {
 	if (lookup_event_name (bufp, event_buf[i], event_buf[i+1]))
 	{
-	    bufp += strlen (bufp);
+	    bufp += strlen ((gpointer) bufp);
 	    *bufp++ = ' ';
 	}
     }
@@ -905,7 +905,7 @@ print_event_prefix(void)
     }
 
     rep_call_lisp1 (global_symbol_value (Qdisplay_message),
-		    rep_string_dupn (buf, bufp - buf));
+		    rep_string_dupn ((gpointer) buf, bufp - buf));
     printed_this_prefix = TRUE;
 
     return TRUE;
@@ -943,13 +943,13 @@ Returns KEYMAP when successful.
     args = rep_CDR(args);
     while (rep_CONSP(args) && rep_CONSP(rep_CDR(args)))
     {
-	u_long code, mods;
+	unsigned long code, mods;
 	repv key;
 	arg1 = rep_CAR(args);
 	args = rep_CDR(args);
 	if (rep_STRINGP(arg1))
 	{
-	    if (!lookup_event (&code, &mods, rep_STR(arg1)))
+	    if (!lookup_event (&code, &mods, (gpointer) rep_STR(arg1)))
 		return Fsignal (Qbad_event_desc, rep_LIST_1(arg1));
 	}
 	else if(Feventp(arg1) != Qnil)
@@ -991,12 +991,12 @@ unbind-keys KEY-MAP EVENT-DESCRIPTION...
     args = rep_CDR(args);
     while (rep_CONSP(args))
     {
-	u_long code, mods;
+	unsigned long code, mods;
 	repv *keyp;
 	arg1 = rep_CAR(args);
 	if (rep_STRINGP(arg1))
 	{
-	    if (!lookup_event (&code, &mods, rep_STR(arg1)))
+	    if (!lookup_event (&code, &mods, (gpointer) rep_STR(arg1)))
 		return Fsignal (Qbad_event_desc, rep_LIST_1(arg1));
 	}
 	else if(Feventp(arg1) != Qnil)
@@ -1066,16 +1066,16 @@ a Lisp function hadn't been called instead.
 ::end:: */
 {
     KeySym ks;
-    u_char buf[256];
+    unsigned char buf[256];
     int len;
 
     if(current_x_event == 0)
 	return Fsignal(Qerror, rep_LIST_1(rep_VAL(&not_in_handler)));
 
     len = XLookupString(&current_x_event->xkey,
-			 buf, sizeof (buf) - 1, &ks, NULL);
+			 (gpointer) buf, sizeof (buf) - 1, &ks, NULL);
     if(len > 0)
-	return rep_string_dupn(buf, len);
+	return rep_string_dupn((gpointer) buf, len);
     else
 	return rep_null_string();
 }
@@ -1172,14 +1172,14 @@ event-name EVENT
 Returns a string naming the event EVENT.
 ::end:: */
 {
-    u_char buf[256];
+    unsigned char buf[256];
     if(!EVENTP(ev))
 	return rep_signal_arg_error(ev, 1);
 
     if(lookup_event_name(buf, rep_INT(EVENT_CODE(ev)),
 			 rep_INT(EVENT_MODS(ev))))
     {
-	return rep_string_dup(buf);
+	return rep_string_dup((gpointer) buf);
     }
     else
 	return Qnil;
@@ -1192,10 +1192,10 @@ lookup-event EVENT-NAME
 Return the event whose name is EVENT-NAME.
 ::end:: */
 {
-    u_long code, mods;
+    unsigned long code, mods;
     rep_DECLARE1(name, rep_STRINGP);
 
-    if(lookup_event(&code, &mods, rep_STR(name)))
+    if(lookup_event(&code, &mods, (gpointer) rep_STR(name)))
 	return MAKE_EVENT(rep_MAKE_INT(code), rep_MAKE_INT(mods));
     else
 	return Qnil;
@@ -1214,7 +1214,7 @@ currently focused window for keyboard events.
 ::end:: */
 {
     repv res, context = Qnil;
-    u_long code, mods;
+    unsigned long code, mods;
 
     if(!EVENTP(ev))
 	return(rep_signal_arg_error(ev, 1));
@@ -1346,7 +1346,7 @@ again:
 	&& !(wa.all_event_masks & (ButtonPressMask | ButtonReleaseMask)))
     {
 	Window d1, *d2, parent;
-	u_int d3;
+	unsigned int d3;
 	    
 	XQueryTree (dpy, w, &d1, &parent, &d2, &d3);
 	if (d2 != 0)
@@ -1398,7 +1398,7 @@ synthesize-event EVENT WINDOW [PROPAGATE]
 
     switch (rep_INT(EVENT_MODS(event)) & EV_TYPE_MASK)
     {
-	u_int mask;
+	unsigned int mask;
 
     case EV_TYPE_KEY:
 	if (!translate_event_to_x_key (event, &ev.xkey.keycode,
@@ -1627,7 +1627,7 @@ update_keyboard_mapping (void)
 }
 
 static void
-set_wm_modifier (u_long mods)
+set_wm_modifier (unsigned long mods)
 {
     wm_mod = indirect_modifiers (mods);
 }
@@ -1663,7 +1663,7 @@ grab_event (Window grab_win, repv ev)
 {
     switch (rep_INT(EVENT_MODS(ev)) & EV_TYPE_MASK)
     {
-	u_int code, state;
+	unsigned int code, state;
 	int i;
 
     case EV_TYPE_KEY:
@@ -1723,7 +1723,7 @@ ungrab_event (Window grab_win, repv ev)
 {
     switch (rep_INT(EVENT_MODS(ev)) & EV_TYPE_MASK)
     {
-	u_int code, state;
+	unsigned int code, state;
 	int i;
 
     case EV_TYPE_KEY:

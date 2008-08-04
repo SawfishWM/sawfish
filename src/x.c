@@ -424,7 +424,7 @@ mapping attributes to values. Known attributes are `foreground' and
     if (gc != rep_NULL)
     {
 	XGCValues gcv;
-	u_long mask;
+	unsigned long mask;
 
 	mask = x_gc_parse_attrs (VX_GC (gc), &gcv, attrs);
 	if (mask != 0)
@@ -1036,10 +1036,10 @@ specified font in the window associated with WINDOW.
 
     x = rep_INT (rep_CAR (xy));
     y = rep_INT (rep_CDR (xy));
-    str = rep_STR (string);
+    str = (gpointer) rep_STR (string);
 
     x_draw_string (id, font, VX_GC (gc)->gc,
-		   &VX_GC (gc)->fg_copy, x, y, str, strlen (str));
+		   &VX_GC (gc)->fg_copy, x, y, str, strlen ((gpointer) str));
     return Qt;
 }
 

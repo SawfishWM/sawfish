@@ -34,16 +34,16 @@ static repv *cache_ids;
 static repv *cache_props;
 static repv *cache_values;
 static repv cache_vec;
-static u_int cache_ages[CACHE_SIZE];
-static u_int cache_updates[CACHE_SIZE];
-static u_int cache_clock;
+static unsigned int cache_ages[CACHE_SIZE];
+static unsigned int cache_updates[CACHE_SIZE];
+static unsigned int cache_clock;
 
-static u_int cache_hits, cache_misses;
+static unsigned int cache_hits, cache_misses;
 
 repv
 property_cache_ref (repv id, repv prop)
 {
-    u_int h, i;
+    unsigned int h, i;
 
     if (cache_vec == rep_NULL)
 	return rep_NULL;
@@ -71,7 +71,7 @@ property_cache_ref (repv id, repv prop)
 void
 property_cache_set (repv id, repv prop, repv value, int invals)
 {
-    u_int h, i, oldest, oldest_age;
+    unsigned int h, i, oldest, oldest_age;
 
     if (cache_vec == rep_NULL)
     {
@@ -140,7 +140,7 @@ property_cache_invalidate_window (repv id)
 void
 property_cache_invalidate (repv id, repv prop)
 {
-    u_int h, i;
+    unsigned int h, i;
 
     if (cache_vec == rep_NULL)
 	return;

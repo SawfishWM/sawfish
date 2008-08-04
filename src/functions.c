@@ -641,8 +641,8 @@ symbols, representing the atoms read.
     Atom a_prop;
     Atom type;
     int format;
-    u_long nitems;
-    u_char *data = 0;
+    unsigned long nitems;
+    unsigned char *data = 0;
     repv type_sym, ret_data = Qnil;
 
     w = x_win_from_arg (win);
@@ -662,7 +662,7 @@ symbols, representing the atoms read.
     /* First read the data.. */
     {
 	long long_length = 32;
-	u_long bytes_after;
+	unsigned long bytes_after;
 	while (1)
 	{
 	    ret_data = Qnil;
@@ -676,7 +676,7 @@ symbols, representing the atoms read.
 		goto out;
 	    if (bytes_after == 0)
 		break;
-	    long_length += (bytes_after / sizeof(u_long)) + 1;
+	    long_length += (bytes_after / sizeof(unsigned long)) + 1;
 	}
     }
 
@@ -686,24 +686,24 @@ symbols, representing the atoms read.
     /* Then convert the contents to a vector or string */
     switch (format)
     {
-	u_short *s_data;
-	u_long *l_data;
+	unsigned short *s_data;
+	unsigned long *l_data;
 	int i;
 
     case 8:
-	ret_data = rep_string_dupn (data, nitems);
+	ret_data = rep_string_dupn ((gpointer) data, nitems);
 	break;
 
     case 16:
 	ret_data = Fmake_vector (rep_MAKE_INT(nitems), Qnil);
-	s_data = (u_short *)data;
+	s_data = (unsigned short *)data;
 	for (i = 0; i < nitems; i++)
 	    rep_VECTI(ret_data, i) = rep_MAKE_INT(s_data[i]);
 	break;
 
     case 32:
 	ret_data = Fmake_vector (rep_MAKE_INT(nitems), Qnil);
-	l_data = (u_long *)data;
+	l_data = (unsigned long *)data;
 	for (i = 0; i < nitems; i++)
 	{
 	    repv name;
@@ -747,8 +747,8 @@ converted to their numeric X atoms.
 {
     Window w;
     Atom a_prop, a_type;
-    u_long nitems;
-    u_char *c_data = 0;
+    unsigned long nitems;
+    unsigned char *c_data = 0;
 
     w = x_win_from_arg (win);
     rep_DECLARE2(prop, rep_SYMBOLP);
@@ -773,12 +773,12 @@ converted to their numeric X atoms.
     switch (rep_INT(format))
     {
 	int i;
-	u_short *s_data;
-	u_long *l_data;
+	unsigned short *s_data;
+	unsigned long *l_data;
 
     case 8:
 	if (rep_STRINGP(data))
-	    c_data = rep_STR (data);
+	    c_data = (gpointer) rep_STR (data);
 	else
 	{
 	    c_data = alloca (nitems);
@@ -790,8 +790,8 @@ converted to their numeric X atoms.
     case 16:
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
-	c_data = alloca (nitems * sizeof (u_short));
-	s_data = (u_short *)c_data;
+	c_data = alloca (nitems * sizeof (unsigned short));
+	s_data = (unsigned short *)c_data;
 	for (i = 0; i < nitems; i++)
 	    s_data[i] = rep_INT(rep_VECTI(data, i));
 	break;
@@ -799,8 +799,8 @@ converted to their numeric X atoms.
     case 32:
 	if (rep_STRINGP(data))
 	    return rep_signal_arg_error (data, 3);
-	c_data = alloca (nitems * sizeof (u_long));
-	l_data = (u_long *)c_data;
+	c_data = alloca (nitems * sizeof (unsigned long));
+	l_data = (unsigned long *)c_data;
 	for (i = 0; i < nitems; i++)
 	{
 	    if (a_type == XA_ATOM && rep_SYMBOLP(rep_VECTI(data, i)))
@@ -1064,7 +1064,7 @@ refresh_message_window ()
     if (message_win != 0)
     {
 	XGCValues values;
-	u_long mask;
+	unsigned long mask;
 	char *ptr;
 	int row = 0;
 
@@ -1090,7 +1090,7 @@ refresh_message_window ()
 		offset = MSG_PAD_X;
 	    else
 	    {
-		int width = x_text_width (message.font, ptr, end - ptr);
+		int width = x_text_width (message.font, (gpointer) ptr, end - ptr);
 		if (message.justify == Qright)
 		    offset = message.width - (width + MSG_PAD_X);
 		else
@@ -1102,7 +1102,7 @@ refresh_message_window ()
 			   + row * (VFONT(message.font)->ascent
 				    + VFONT(message.font)->descent
 				    + message.spacing)
-			   + VFONT(message.font)->ascent, ptr, end - ptr);
+			   + VFONT(message.font)->ascent, (gpointer) ptr, end - ptr);
 	    row++;
 	    ptr = end;
 	    if (*ptr == '\n')
@@ -1223,7 +1223,7 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 		char *end = strchr (ptr, '\n');
 		if (end == 0)
 		  end = ptr + strlen (ptr);
-		text_width = x_text_width (message.font, ptr, end - ptr);
+		text_width = x_text_width (message.font, (gpointer) ptr, end - ptr);
 		max_width = MAX(max_width, text_width);
 		rows++;
 		ptr = end;

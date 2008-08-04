@@ -179,7 +179,7 @@ make_bitmap (repv file, int *widthp, int *heightp, int *x_hotp, int *y_hotp)
     {
 	Pixmap bitmap;
 	int ret = XReadBitmapFile (dpy, root_window, rep_STR(file),
-				   widthp, heightp, &bitmap, x_hotp, y_hotp);
+				   (gpointer) widthp, (gpointer) heightp, &bitmap, x_hotp, y_hotp);
 
 	if (delete)
 	    Fdelete_file (file);
@@ -235,7 +235,7 @@ make-image-from-x-drawable ID [MASK-ID]
    if (rep_INTP (mask_id))
        mask = rep_INT (mask_id);
 
-   if (!XGetGeometry (dpy, d, &root, &x, &y, &w, &h, &bdr, &dp))
+   if (!XGetGeometry (dpy, d, &root, &x, &y, (gpointer) &w, (gpointer) &h, (gpointer) &bdr, (gpointer) &dp))
        return Qnil;
 
 #if defined HAVE_IMLIB
@@ -247,7 +247,7 @@ make-image-from-x-drawable ID [MASK-ID]
        XImage *xim = XGetImage (dpy, mask, 0, 0, w, h, AllPlanes, ZPixmap);
        if (xim != 0)
        {
-	   u_char *pixels = im->rgb_data;
+	   unsigned char *pixels = im->rgb_data;
 	   int x, y;
 	   ImlibColor shape;
 
@@ -259,8 +259,8 @@ make-image-from-x-drawable ID [MASK-ID]
 	   {
 	       for (x = 0; x < w; x++)
 	       {
-		   u_long pixel = XGetPixel (xim, x, y);
-		   u_char *rgb = pixels + ((y * w) + x) * 3;
+		   unsigned long pixel = XGetPixel (xim, x, y);
+		   unsigned char *rgb = pixels + ((y * w) + x) * 3;
 		   if (pixel != 0 && rgb[0] == shape.r
 		       && rgb[1] == shape.g && rgb[2] == shape.b)
 		   {
@@ -287,7 +287,7 @@ make-image-from-x-drawable ID [MASK-ID]
 	       {
 		   if (XGetPixel (xim, x, y) == 0)
 		   {
-		       u_char *rgb = pixels + ((y * w) + x) * 3;
+		       unsigned char *rgb = pixels + ((y * w) + x) * 3;
 		       rgb[0] = shape.r;
 		       rgb[1] = shape.g;
 		       rgb[2] = shape.b;
@@ -309,14 +309,14 @@ make-image-from-x-drawable ID [MASK-ID]
        if (xim != 0)
        {
 	   int rowstride = gdk_pixbuf_get_rowstride (im);
-	   u_char *pixels = gdk_pixbuf_get_pixels (im);
+	   unsigned char *pixels = gdk_pixbuf_get_pixels (im);
 	   int x, y;
 	   for (y = 0; y < h; y++)
 	   {
 	       for (x = 0; x < w; x++)
 	       {
 		   int idx = y * rowstride + x * 3;
-		   u_char chan = (XGetPixel (xim, x, y) != 0) ? 0 : 255;
+		   unsigned char chan = (XGetPixel (xim, x, y) != 0) ? 0 : 255;
 		   pixels[idx+0] = chan;
 		   pixels[idx+1] = chan;
 		   pixels[idx+2] = chan;
@@ -400,17 +400,17 @@ Flip the contents of IMAGE around the vertical axis.
     Imlib_flip_image_horizontal (imlib_id, VIMAGE(image)->image);
 #else
     {
-	u_char *pixels = image_pixels (VIMAGE (image));
+	unsigned char *pixels = image_pixels (VIMAGE (image));
 	int channels = image_channels (VIMAGE (image));
 	int stride = image_row_stride (VIMAGE (image));
 	int width = image_width (VIMAGE (image));
 	int height = image_height (VIMAGE (image));
-	u_char *buf = alloca (channels);
+	unsigned char *buf = alloca (channels);
 	int y;
 	for (y = 0; y < height; y++)
 	{
-	    u_char *left = pixels + y * stride;
-	    u_char *right = left + channels * (width - 1);
+	    unsigned char *left = pixels + y * stride;
+	    unsigned char *right = left + channels * (width - 1);
 	    while (left < right)
 	    {
 		memcpy (buf, left, channels);
@@ -439,11 +439,11 @@ Flip the contents of IMAGE around the horizontal axis.
     Imlib_flip_image_vertical (imlib_id, VIMAGE(image)->image);
 #else
     {
-	u_char *pixels = image_pixels (VIMAGE (image));
+	unsigned char *pixels = image_pixels (VIMAGE (image));
 	int stride = image_row_stride (VIMAGE (image));
 	int height = image_height (VIMAGE (image));
-	u_char *buf = alloca (stride);
-	u_char *top = pixels, *bottom = pixels + (height - 1) * stride;
+	unsigned char *buf = alloca (stride);
+	unsigned char *top = pixels, *bottom = pixels + (height - 1) * stride;
 	while (top < bottom)
 	{
 	    memcpy (buf, top, stride);
@@ -478,13 +478,13 @@ the bottom right of the image.
 	int in_stride = gdk_pixbuf_get_rowstride (in);
 	int in_width = gdk_pixbuf_get_width (in);
 	int in_height = gdk_pixbuf_get_height (in);
-	u_char *in_pixels = gdk_pixbuf_get_pixels (in);
+	unsigned char *in_pixels = gdk_pixbuf_get_pixels (in);
 	GdkPixbuf *out = gdk_pixbuf_new (gdk_pixbuf_get_colorspace (in),
 					 gdk_pixbuf_get_has_alpha (in),
 					 gdk_pixbuf_get_bits_per_sample (in),
 					 in_height, in_width);
 	int out_stride = gdk_pixbuf_get_rowstride (out);
-	u_char *out_pixels = gdk_pixbuf_get_pixels (out);
+	unsigned char *out_pixels = gdk_pixbuf_get_pixels (out);
 	int x, y;
 	for (y = 0; y < in_height; y++)
 	{
@@ -745,7 +745,7 @@ CONTRAST). These are integers ranging from 0 to 255.
 }
 
 static inline void
-bevel_pixel (u_char *data, bool up, int bevel_percent)
+bevel_pixel (unsigned char *data, bool up, int bevel_percent)
 {
     unsigned int t0 = data[0], t1 = data[1], t2 = data[2];
     if (up)
@@ -763,13 +763,13 @@ bevel_pixel (u_char *data, bool up, int bevel_percent)
 }
 
 static inline void
-bevel_region (u_char *data, int row_stride, int bpp,
+bevel_region (unsigned char *data, int row_stride, int bpp,
 	      int rx, int ry, int rw, int rh, bool up, int bevel_percent)
 {
     int x, y;
     for (y = ry; y < ry + rh; y++)
     {
-	u_char *row = data + y * row_stride + rx * bpp;
+	unsigned char *row = data + y * row_stride + rx * bpp;
 	for (x = rx; x < rx + rh; x++)
 	{
 	    bevel_pixel (row, up, bevel_percent);
@@ -779,7 +779,7 @@ bevel_region (u_char *data, int row_stride, int bpp,
 }
 
 static inline void
-bevel_horizontally (u_char *data, int width, int height,
+bevel_horizontally (unsigned char *data, int width, int height,
 		    int row_stride, int channels, 
 		    int border, bool top, bool up, int bevel_percent)
 {
@@ -787,7 +787,7 @@ bevel_horizontally (u_char *data, int width, int height,
     up = top ? up : !up;
     for (rows = 0; rows < border; rows++)
     {
-	u_char *ptr = data;
+	unsigned char *ptr = data;
 	int x;
 	if (top)
 	    ptr += (rows * row_stride) + (rows + 1) * channels;
@@ -802,7 +802,7 @@ bevel_horizontally (u_char *data, int width, int height,
 }
 
 static inline void
-bevel_vertically (u_char *data, int width, int height,
+bevel_vertically (unsigned char *data, int width, int height,
 		  int row_stride, int channels,
 		  int border, bool top, bool up, int bevel_percent)
 {
@@ -810,7 +810,7 @@ bevel_vertically (u_char *data, int width, int height,
     up = top ? up : !up;
     for (cols = 0; cols < border; cols++)
     {
-	u_char *ptr = data;
+	unsigned char *ptr = data;
 	int y;
 	if (top)
 	    ptr += cols * channels + (cols * row_stride);
@@ -888,7 +888,7 @@ Set all pixels in IMAGE to COLOR (or black if COLOR is undefined).
 {
     int width, height, stride, channels;
     int x, y, r, g, b;
-    u_char *data;
+    unsigned char *data;
 
     rep_DECLARE1(image, IMAGEP);
     if (COLORP(color))
@@ -936,7 +936,7 @@ Return a new image of dimensions (WIDTH, HEIGHT). The object COLOR
 defines the color of its pixels.
 ::end:: */
 {
-    u_char *data;
+    unsigned char *data;
     int r, g, b;
     rep_DECLARE1(width, rep_INTP);
     rep_DECLARE2(height, rep_INTP);
@@ -998,7 +998,7 @@ Tile SOURCE-IMAGE into DEST-IMAGE.
     image_t src_im, dst_im;
     int src_width, src_height;
     int dst_width, dst_height;
-    int x, src_y, dst_y;
+    int x,dst_y;
 
     rep_DECLARE1(dst, IMAGEP);
     rep_DECLARE2(src, IMAGEP);
@@ -1103,8 +1103,8 @@ at position (X, Y), or (0, 0) if no position is given.
     
 #if defined HAVE_IMLIB
     {
-	u_char *img1_rgb = image_pixels (VIMAGE (img1));
-	u_char *img2_rgb = image_pixels (VIMAGE (img2));
+	unsigned char *img1_rgb = image_pixels (VIMAGE (img1));
+	unsigned char *img2_rgb = image_pixels (VIMAGE (img2));
 	int row, col;
 	ImlibColor shape;
 	Imlib_get_image_shape (imlib_id, VIMAGE (img2)->image, &shape);
@@ -1112,12 +1112,12 @@ at position (X, Y), or (0, 0) if no position is given.
 	{
 	    for (col = 0; col < copy_w; col++)
 	    {
-		u_char *img2_pixel = img2_rgb + (row * w2 + col) * 3;
+		unsigned char *img2_pixel = img2_rgb + (row * w2 + col) * 3;
 		if (img2_pixel[0] != shape.r
 		    || img2_pixel[1] != shape.g
 		    || img2_pixel[2] != shape.b)
 		{
-		    u_char *img1_pixel;
+		    unsigned char *img1_pixel;
 		    img1_pixel = img1_rgb + (((rep_INT (y) + row) * w1)
 					     + (rep_INT (x) + col)) * 3;
 		    /* constant size, so should be inlined */
@@ -1209,7 +1209,7 @@ image_height (Lisp_Image *im)
 #endif
 }
 
-u_char *
+unsigned char *
 image_pixels (Lisp_Image *im)
 {
 #if defined HAVE_IMLIB
@@ -1487,7 +1487,7 @@ static repv
 get_pixel (Lisp_Image *im, int x, int y)
 {
     int nchannels = image_channels (im);
-    u_char *data = (image_pixels (im)
+    unsigned char *data = (image_pixels (im)
 		    + (y * image_row_stride (im)) + (x * nchannels));
     repv alpha;
 #ifdef HAVE_IMLIB
@@ -1510,7 +1510,7 @@ set_pixel (Lisp_Image *im, int x, int y, repv pixel)
     {
 	int nchannels = image_channels (im);
 	int alpha = (length > 3) ? rep_INT (rep_CADDDR (pixel)) : 255;
-	u_char *data;
+	unsigned char *data;
 
 #ifdef HAVE_GDK_PIXBUF
 	if (alpha != 255 && nchannels < 4)

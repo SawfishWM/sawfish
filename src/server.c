@@ -83,7 +83,7 @@ sock_read (int fd, void *buf, size_t len)
 static void
 server_handle_request(int fd)
 {
-    u_char req;
+    unsigned char req;
     if(sock_read(fd, &req, 1) != 1)
 	goto disconnect;
 
@@ -92,7 +92,7 @@ server_handle_request(int fd)
 
     switch(req)
     {
-	u_long len;
+	unsigned long len;
 	repv val;
 
     case req_eval:
@@ -102,7 +102,7 @@ server_handle_request(int fd)
 	   3. eval and print FORM
 	   4. write length of result-string
 	   5. write LENGTH bytes of result string */
-	if(sock_read(fd, &len, sizeof(u_long)) != sizeof(u_long)
+	if(sock_read(fd, &len, sizeof(unsigned long)) != sizeof(unsigned long)
 	   || (val = rep_make_string(len + 1)) == rep_NULL
 	   || sock_read(fd, rep_STR(val), len) != len)
 	    goto io_error;
@@ -113,14 +113,14 @@ server_handle_request(int fd)
 	    if(val && rep_STRINGP(val))
 	    {
 		len = rep_STRING_LEN(val);
-		if(sock_write(fd, &len, sizeof(u_long)) != sizeof(u_long)
+		if(sock_write(fd, &len, sizeof(unsigned long)) != sizeof(unsigned long)
 		   || sock_write(fd, rep_STR(val), len) != len)
 		    goto io_error;
 	    }
 	    else
 	    {
 		len = 0;
-		if(sock_write(fd, &len, sizeof(u_long)) != sizeof(u_long))
+		if(sock_write(fd, &len, sizeof(unsigned long)) != sizeof(unsigned long))
 		    goto io_error;
 	    }
 	}
@@ -148,7 +148,7 @@ server_accept_connection(int unused_fd)
     /* Linux manpage states that we can pass NULL for addr parameters,
        but that has been reported to crash on some systems.. */
 
-    confd = accept(socket_fd, (struct sockaddr *) &addr, &addr_len);
+    confd = accept(socket_fd, (struct sockaddr *) &addr, (gpointer) &addr_len);
 
     if(confd >= 0)
     {

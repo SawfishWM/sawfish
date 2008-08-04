@@ -64,17 +64,6 @@ DEFSYM(canonical_display_name, "canonical-display-name");
 
 /* X error handlers */
 
-static void
-print_error (XErrorEvent *ev)
-{
-    char buf[256];
-    XGetErrorText(dpy, ev->error_code, buf, sizeof (buf));
-    fprintf(stderr, "X Error: %s\n", buf);
-    fprintf(stderr, "  Request Major code: %d\n", ev->request_code);
-    fprintf(stderr, "  Request Minor code: %d\n", ev->minor_code);
-    fprintf(stderr, "  ResourceId 0x%x\n", (u_int)ev->resourceid);
-}
-
 /* General error handler. Probably due to lag between windows being
    killed and us receiving DestroyNotify events */
 static int

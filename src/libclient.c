@@ -67,7 +67,7 @@ static char * (*eval_fun)(char *form, int *lenp, int *errorp);
 static char *
 system_name(void)
 {
-    u_char buf[256];
+    unsigned char buf[256];
     struct hostent *h;
 
     static char *system_name;
@@ -75,7 +75,7 @@ system_name(void)
 	return system_name;
 
 #ifdef HAVE_GETHOSTNAME
-    if(gethostname(buf, 256))
+    if(gethostname((gpointer) buf, 256))
 	return rep_NULL;
 #else
     {
@@ -84,7 +84,7 @@ system_name(void)
 	strncpy(buf, uts.nodename, 256);
     }
 #endif
-    h = gethostbyname(buf);
+    h = gethostbyname((gpointer) buf);
     if(h)
     {
 	if(!strchr(h->h_name, '.'))
@@ -97,10 +97,10 @@ system_name(void)
 	    system_name = strdup(*aliases ? *aliases : h->h_name);
 	}
 	else
-	    system_name = strdup((u_char *)h->h_name);
+	    system_name = strdup(h->h_name);
     }
     else
-	system_name = strdup(buf);
+	system_name = strdup((gpointer) buf);
     return system_name;
 }
 
@@ -199,12 +199,12 @@ Display *dpy;
 static char *
 net_server_eval (char *form, int *lenp, int *errorp)
 {
-    u_char *data = 0;
-    u_long nitems;
+    unsigned char *data = 0;
+    unsigned long nitems;
     XEvent ev;
 
     XChangeProperty (dpy, portal, xa_sawfish_request, XA_STRING,
-		     8, PropModeReplace, form, strlen (form));
+		     8, PropModeReplace, (gpointer) form, strlen (form));
     /* swallow the event created by the above */
     XWindowEvent (dpy, portal, PropertyChangeMask, &ev);
 
@@ -226,7 +226,7 @@ net_server_eval (char *form, int *lenp, int *errorp)
 	Atom type;
 	int format;
         long long_length = 16;
-	u_long bytes_after;
+	unsigned long bytes_after;
 
 	while (1)
 	{
@@ -270,8 +270,8 @@ net_server_init (char *display)
 {
     Atom type;
     int format;
-    u_long bytes_after, nitems;
-    u_char *data;
+    unsigned long bytes_after, nitems;
+    unsigned char *data;
 
     dpy = XOpenDisplay (display);
     if (dpy == 0)
@@ -342,15 +342,15 @@ unix_server_eval (char *form, int *lenp, int *errorp)
 {
     /* Protocol is; >req_eval:1, >FORM-LEN:4, >FORM:?, <RES-LEN:4, <RES:?
        in the local byte-order. */
-    u_char req = (lenp != 0) ? req_eval : req_eval_async;
-    u_long len = strlen(form);
+    unsigned char req = (lenp != 0) ? req_eval : req_eval_async;
+    unsigned long len = strlen(form);
     char *result;
 
     if(sock_write(socket_fd, &req, 1) != 1
-       || sock_write(socket_fd, &len, sizeof(u_long)) != sizeof(u_long)
+       || sock_write(socket_fd, &len, sizeof(unsigned long)) != sizeof(unsigned long)
        || sock_write(socket_fd, form, len) != len
        || (req != req_eval_async
-	   && sock_read(socket_fd, &len, sizeof(u_long)) != sizeof(u_long)))
+	   && sock_read(socket_fd, &len, sizeof(unsigned long)) != sizeof(unsigned long)))
     {
 	perror("eval_req");
 	return 0;

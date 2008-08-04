@@ -722,7 +722,7 @@ set_frame_part_fg (struct frame_part *fp)
 		length = rep_STRING_LEN(result);
 	    }
 
-	    width = x_text_width (font, rep_STR(string), length);
+	    width = x_text_width (font, (gpointer) rep_STR(string), length);
 	    height = VFONT(font)->ascent + VFONT(font)->descent;
 	}
 
@@ -755,7 +755,7 @@ set_frame_part_fg (struct frame_part *fp)
 	if (IMAGEP(fg))
 	{
 	    XGCValues gcv;
-	    u_long gcv_mask = 0;
+	    unsigned long gcv_mask = 0;
 	    Pixmap fg_pixmap, fg_mask;
 
 	    if (fp->drawn.fg == fg
@@ -831,7 +831,7 @@ set_frame_part_fg (struct frame_part *fp)
 
 	    x_draw_string (fp->id, font, fp->gc, VCOLOR(fg),
 			   x, y + VFONT(font)->ascent,
-			   rep_STR(string), length);
+			   (gpointer) rep_STR(string), length);
 
 	    fp->drawn.text = string;
 	}
@@ -1378,7 +1378,7 @@ configure_frame_part (struct frame_part *fp)
 {
     Lisp_Window *w = fp->win;
     XSetWindowAttributes wa;
-    u_long wamask;
+    unsigned long wamask;
     if (fp->id == 0)
     {
 	if (fp->width > 0 && fp->height > 0)
@@ -1458,7 +1458,7 @@ list_frame_generator (Lisp_Window *w)
     bool bigger;
     int nparts = 0;
     XSetWindowAttributes wa;
-    u_long wamask;
+    unsigned long wamask;
     int old_x_off, old_y_off;
 
     /* bounding box of frame */

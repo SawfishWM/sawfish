@@ -228,10 +228,10 @@ void
 get_window_protocols (Lisp_Window *w)
 {
     Atom *prot;
-    u_int n;
+    unsigned int n;
     w->does_wm_take_focus = 0;
     w->does_wm_delete_window = 0;
-    if (XGetWMProtocols (dpy, w->id, &prot, &n) != 0)
+    if (XGetWMProtocols (dpy, w->id, &prot, (gpointer) &n) != 0)
     {
 	int i;
 	for (i = 0; i < n; i++)
@@ -367,7 +367,7 @@ text_prop_to_utf8 (XTextProperty *prop)
     {
         char **list;
         int count;
-        prop->nitems = strlen(prop->value);
+        prop->nitems = strlen((gpointer) prop->value);
 #ifdef X_HAVE_UTF8_STRING
         if (Xutf8TextPropertyToTextList (dpy, prop, &list, &count) >= Success)
         {
@@ -429,14 +429,13 @@ get_window_name(Lisp_Window *w)
 Lisp_Window *
 add_window (Window id)
 {
-    char *tem;
     Lisp_Window *w = rep_ALLOC_CELL(sizeof (Lisp_Window));
     if (w != 0)
     {
 	rep_GC_root gc_win;
 	repv win = rep_VAL(w);
 	XWindowChanges xwc;
-	u_int xwcm;
+	unsigned int xwcm;
 	long supplied;
 
 	DB(("add_window (%lx)\n", id));
@@ -486,7 +485,7 @@ add_window (Window id)
 	{
 	    /* Is the window shaped? */
 	    int xws, yws, xbs, ybs;
-	    u_int wws, hws, wbs, hbs;
+	    unsigned int wws, hws, wbs, hbs;
 	    int bounding, clip;
 	    XShapeSelectInput (dpy, w->id, ShapeNotifyMask);
 	    XShapeQueryExtents (dpy, w->id, &bounding, &xws, &yws, &wws, &hws,
@@ -1396,8 +1395,8 @@ WINDOW. Returns the symbol `nil' if no such image.
 	   int actual_format;
 	   long nitems, bytes_after;
 	   union {
-	       u_long *l;
-	       u_char *c;
+	       unsigned long *l;
+	       unsigned char *c;
 	   } data;
 
 	   static Atom kwm_win_icon = 0;
@@ -1409,7 +1408,7 @@ WINDOW. Returns the symbol `nil' if no such image.
 	   if (XGetWindowProperty (dpy, VWIN (win)->id, kwm_win_icon,
 				   0, 2, False, kwm_win_icon,
 				   &actual_type, &actual_format,
-				   &nitems, &bytes_after,
+				   (gpointer) &nitems, (gpointer) &bytes_after,
 				   &data.c) == Success
 	       && actual_type == kwm_win_icon
 	       && bytes_after == 0)

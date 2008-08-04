@@ -106,37 +106,37 @@ typedef struct lisp_window {
     struct lisp_window *above, *below;
 
     /* Is the client window mapped? (by its app) */
-    u_int mapped : 1;
+    unsigned int mapped : 1;
 
     /* Is the frame visible? (not hidden by hide-window) */
-    u_int visible : 1;
+    unsigned int visible : 1;
 
     /* Is the client window hidden by us?
        (controlled by window's `hide-client' property -- used for shading) */
-    u_int client_hidden : 1;
+    unsigned int client_hidden : 1;
 
     /* Is the client window unmapped by us?
        (because it's !visible or client_hidden) */
-    u_int client_unmapped : 1;
+    unsigned int client_unmapped : 1;
 
     /* Is the client window reparented to the frame? */
-    u_int reparented : 1;
+    unsigned int reparented : 1;
 
     /* Is the client window shaped? */
-    u_int shaped : 1;
+    unsigned int shaped : 1;
 
     /* Have we called the destroy-notify-hook? */
-    u_int destroyed : 1;
+    unsigned int destroyed : 1;
 
     /* The WM protocols understood by the client */
-    u_int does_wm_take_focus : 1;
-    u_int does_wm_delete_window : 1;
+    unsigned int does_wm_take_focus : 1;
+    unsigned int does_wm_delete_window : 1;
 
     /* Do we need to send a synthetic ConfigureNotify to this window? */
-    u_int pending_configure : 1;
+    unsigned int pending_configure : 1;
 
     /* Do we need to recalculate the shape mask of the frame? */
-    u_int pending_reshape : 1;
+    unsigned int pending_reshape : 1;
 
     /* The position and dimensions of `attr' is always maintained.
        But the position is the position of the frame, while the
@@ -155,7 +155,7 @@ typedef struct lisp_window {
     Window frame;
     struct frame_part *frame_parts;
     int frame_x, frame_y;		/* relative to client-window */
-    u_int frame_width, frame_height;
+    unsigned int frame_width, frame_height;
     void (*destroy_frame)(struct lisp_window *w);
     void (*focus_change)(struct lisp_window *w);
     void (*rebuild_frame)(struct lisp_window *w);
@@ -256,11 +256,11 @@ struct frame_part {
     Window id;
     GC gc;
 
-    u_int clicked : 1;
-    u_int highlighted : 1;
-    u_int pending_refresh : 1;
-    u_int below_client : 1;
-    u_int scale_foreground : 1;
+    unsigned int clicked : 1;
+    unsigned int highlighted : 1;
+    unsigned int pending_refresh : 1;
+    unsigned int below_client : 1;
+    unsigned int scale_foreground : 1;
 
     repv text;			/* may be nil, a string, or a function */
     repv x_justify, y_justify;

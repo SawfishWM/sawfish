@@ -455,7 +455,7 @@ motion_notify (XEvent *ev)
        until the pointer's position has been queried. I should
        check the Xlib manuals about this. */
     if(XQueryPointer(dpy, ev->xmotion.window,
-		     &tmpw, &tmpw, &x, &y, &tmp, &tmp, &tmp))
+		     &tmpw, &tmpw, &x, &y, &tmp, &tmp, (gpointer) &tmp))
     {
 	record_mouse_position (x, y, ev->type, ev->xmotion.window);
     }
@@ -480,7 +480,7 @@ motion_notify (XEvent *ev)
 
 static bool
 update_window_name(Lisp_Window * w, XPropertyEvent xproperty) {
-    u_char *prop;
+    unsigned char *prop;
     Atom actual;
     int format;
     long nitems, bytes_after;
@@ -493,8 +493,8 @@ update_window_name(Lisp_Window * w, XPropertyEvent xproperty) {
     if (xproperty.state != PropertyNewValue
         || XGetWindowProperty (dpy, w->id, xproperty.atom,
                                0, 200, False, AnyPropertyType, &actual,
-                               &format, &nitems,
-                               &bytes_after, &prop) != Success
+                               &format, (gpointer) &nitems,
+                               (gpointer) &bytes_after, &prop) != Success
         || actual == None)
         return FALSE;
 
@@ -507,7 +507,7 @@ update_window_name(Lisp_Window * w, XPropertyEvent xproperty) {
     tprop.value = prop;
     tprop.encoding = actual;
     tprop.format = format;
-    tprop.nitems = strlen (prop);
+    tprop.nitems = strlen ((gpointer) prop);
 
 #ifdef X_HAVE_UTF8_STRING
     if (actual == xa_compound_text || actual == XA_STRING
@@ -843,7 +843,7 @@ map_notify (XEvent *ev)
 	       framed at the map request. -- thk */
 	    if (w->frame == 0)
 		fprintf (stderr, "warning: window %#1x has no frame\n",
-			 (long)(w->id));
+			 (uint)(w->id));
 	    Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 	}
     }
@@ -1096,7 +1096,7 @@ configure_request (XEvent *ev)
     if (w == 0)
     {
 	XWindowChanges xwc;
-	u_int xwcm = (ev->xconfigurerequest.value_mask & 
+	unsigned int xwcm = (ev->xconfigurerequest.value_mask & 
 		      (CWX | CWY | CWWidth | CWHeight
 		       | CWStackMode | CWSibling));
 	xwc.x = ev->xconfigurerequest.x;
@@ -1109,12 +1109,12 @@ configure_request (XEvent *ev)
     }
     else if (w != 0)
     {
-	u_long mask = ev->xconfigurerequest.value_mask;
+	unsigned long mask = ev->xconfigurerequest.value_mask;
 	repv alist = Qnil;
 	{
 	    /* Is the window shaped? */
 	    int xws, yws, xbs, ybs;
-	    u_int wws, hws, wbs, hbs;
+	    unsigned int wws, hws, wbs, hbs;
 	    int bounding, clip;
 	    XShapeSelectInput (dpy, w->id, ShapeNotifyMask);
 	    XShapeQueryExtents (dpy, w->id, &bounding, &xws, &yws, &wws, &hws,
@@ -1351,7 +1351,7 @@ get_server_timestamp (void)
     while (XCheckWindowEvent (dpy, w, PropertyChangeMask, &ev)) ;
     XSelectInput (dpy, w, PropertyChangeMask | KeyPressMask);
     XChangeProperty (dpy, w, xa_sawmill_timestamp,
-		     XA_STRING, 8, PropModeReplace, "foo", 3);
+		     XA_STRING, 8, PropModeReplace, (gpointer) "foo", 3);
     XSelectInput (dpy, w, KeyPressMask);
     XWindowEvent (dpy, w, PropertyChangeMask, &ev);
 
@@ -1518,7 +1518,7 @@ the server, otherwise it's taken from the current event (if possible).
 	int tmp;
 	int x, y;
 	if(XQueryPointer(dpy, root_window, &tmpw, &tmpw,
-			 &x, &y, &tmp, &tmp, &tmp))
+			 &x, &y, &tmp, &tmp, (gpointer) &tmp))
 	{
 	    record_mouse_position (x, y, -1, 0);
 	}
@@ -1578,7 +1578,7 @@ is in the root window.
 {
     Window child, root;
     int win_x, win_y;
-    u_int state;
+    unsigned int state;
 
     XQueryPointer (dpy, root_window, &root, &child,
 		   &current_mouse_x, &current_mouse_y, &win_x, &win_y, &state);
