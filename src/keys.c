@@ -477,7 +477,7 @@ lookup_binding(u_long code, u_long mods, bool (*callback)(repv key),
 	    if (!k && current_window)
 	    {
 		/* 3. search focused/pointer window keymap property */
-		tem = Fwindow_get (rep_VAL(current_window), Qkeymap);
+	        tem = Fwindow_get (rep_VAL(current_window), Qkeymap, Qnil);
 		if (tem && tem != Qnil)
 		    k = search_keymap(tem, code, mods, callback);
 	    }
@@ -1778,7 +1778,7 @@ grab_keymap_event (repv km, long code, long mods, bool grab)
     {
 	if (!WINDOW_IS_GONE_P (w))
 	{
-	    repv tem = Fwindow_get (rep_VAL(w), Qkeymap);
+	    repv tem = Fwindow_get (rep_VAL(w), Qkeymap, Qnil);
 	    if (rep_SYMBOLP(tem) && tem != Qnil)
 		tem = Fsymbol_value (tem, Qt);
 	    if (km == global || tem == km)
@@ -1838,7 +1838,7 @@ grab_window_events (Lisp_Window *w, bool grab)
     tem = Fsymbol_value (Qglobal_keymap, Qt);
     if (tem != Qnil && !rep_VOIDP(tem) && !WINDOW_IS_GONE_P (w))
 	grab_keymap_events (w->id, tem, grab);
-    tem = Fwindow_get (rep_VAL(w), Qkeymap);
+    tem = Fwindow_get (rep_VAL(w), Qkeymap, Qnil);
     if (tem && tem != Qnil && !WINDOW_IS_GONE_P (w))
 	grab_keymap_events (w->id, tem, grab);
 }

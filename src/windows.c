@@ -536,7 +536,7 @@ add_window (Window id)
 
 	if (!WINDOW_IS_GONE_P (w))
 	{
-	    repv tem = Fwindow_get (rep_VAL(w), Qplaced);
+           repv tem = Fwindow_get (rep_VAL(w), Qplaced, Qnil);
 	    if (initialising || (tem && tem == Qnil))
 	    {
 		/* ..then the place-window-hook.. */
@@ -639,13 +639,19 @@ emit_pending_destroys (void)
 /* Lisp functions */
 
 DEFUN("window-get", Fwindow_get, Swindow_get,
-      (repv win, repv prop), rep_Subr2) /*
+      (repv win, repv prop, repv checker), rep_Subr3) /*
 ::doc:sawfish.wm.windows.subrs#window-get::
-window-get WINDOW PROPERTY
+window-get WINDOW PROPERTY &optional CHECKER
 
 Return the value of the property named PROPERTY (a symbol) of WINDOW.
 
 Note that these are Lisp properties not X properties.
+
+If the optional argument CHECKER is nil, then the return value is
+nil, either when the property value is nil, or the property is absent.
+
+If CHECKER is non-nil, than it returns CHECKER if the property
+is unset.
 ::end:: */
 {
     repv plist;
@@ -661,7 +667,7 @@ Note that these are Lisp properties not X properties.
 	}
 	plist = rep_CDR(rep_CDR(plist));
     }
-    return Qnil;
+    return checker;
 }
 
 DEFUN("map-window-properties", Fmap_window_properties,
@@ -1292,7 +1298,7 @@ description of HOOK-TYPE.
     rep_PUSHGC(gc_hook, hook);
     rep_PUSHGC(gc_args, args);
     rep_PUSHGC(gc_type, type);
-    tem = Fwindow_get (win, hook);
+    tem = Fwindow_get (win, hook, Qnil);
     if (tem && tem != Qnil)
     {
 	tem = Fcall_hook (tem, args, type);

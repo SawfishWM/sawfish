@@ -1179,7 +1179,7 @@ build_frame_part (struct frame_part *fp)
     tem = Fassq (Qremovable, fp->alist);
     if (tem && tem != Qnil && rep_CDR(tem) != Qnil)
     {
-	tem = Fwindow_get (rep_VAL(w), Qremoved_classes);	/* XXX hoist */
+       tem = Fwindow_get (rep_VAL(w), Qremoved_classes, Qnil);	/* XXX hoist */
 	if (tem && rep_CONSP(tem))
 	{
 	    tem = Fmemq (class, tem);
@@ -1464,7 +1464,7 @@ list_frame_generator (Lisp_Window *w)
     /* bounding box of frame */
     int left_x, top_y, right_x, bottom_y;
 
-    tem = Fwindow_get (rep_VAL(w), Qhide_client);
+    tem = Fwindow_get (rep_VAL(w), Qhide_client, Qnil);
     if (tem && tem != Qnil)
 	w->client_hidden = 1;
     else

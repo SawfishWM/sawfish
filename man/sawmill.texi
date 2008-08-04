@@ -824,10 +824,14 @@ window object @var{window} to @var{value}.  Note that these are Lisp
 properties not X properties.
 @end defun
 
-@defun window-get window property
+@defun window-get window property &optional checker
 Return the window property named @var{property} (a symbol) associated
 with the window object @var{window}, or @code{nil} if no such property
 exists.  Note that these are Lisp properties not X properties.
+
+If the optional third argument @var{checker} is non-nil, then @var{checker}
+is returned if the requested property does not exist. This is used to
+distinguish the assigned value of @code{nil} from property's absence.
 @end defun
 
 @defun map-window-properties function window
