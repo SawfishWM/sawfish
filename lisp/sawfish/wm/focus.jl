@@ -1,5 +1,5 @@
 ;; focus.jl -- implement standard focus behaviour
-;; $Id$
+;; $Id: focus.jl,v 1.50 2002/04/21 03:39:31 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -212,6 +212,14 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	 (unless (or (not (window-really-wants-input-p w))
 		     (eq w (input-focus)))
 	   (focus-push-map w click-to-focus-map))))))
+
+  (define-focus-mode 'enter-click
+    (lambda (w action . args)
+      (case action
+        ((pointer-in warp-if-necessary)
+         (apply (focus-mode-ref 'enter-only) w action args))
+        ((focus-in focus-out add-window before-mode-change after-mode-change)
+         (apply (focus-mode-ref 'click) w action args)))))
 
 
 ;;; hooks
