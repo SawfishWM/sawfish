@@ -6,6 +6,44 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+@heading 1.3.4-rc1
+
+@itemize @bullet
+
+@item The 1.3.4-rc1 version has new features and bugfixes
+
+@item New features:
+@itemize @minus
+
+@item "Enter-Click focus mode" by Dagfinn I. Mannsake, Christopher Bratusek and Timo Korvola: windows get focus only when mouse enters it or if it is clicked and was unfocused.
+
+@item "Parallel make" by Harald van Dijk: allows building using more processors
+
+@item Improved window property handling by Teika Kazura
+
+@end itemize
+
+@item Bug fixes:
+@itemize @minus
+
+@item "Refresh icons" by Timo Korvola: when window changes its icon, the frame gets updated.
+
+@item Major C part cleanup, removing compilation warnings, by Christopher Bratusek
+
+@item "Keep Focus on move-window-'direction'" by Mark Schreiber: allows moving windows around viewports without losing focus.
+
+@item "Selfdefine xterm command" by Dagfinn I. Mannsaker: allow using custom xterm instead of hardcoded one
+
+@item "Update the Spec-file" by Ian Dall: update deprecated keywords.
+
+@item "Fix make-pot" by Christopher Bratusek: the make-pot script works again.
+
+@item Themer was removed, because rep-glade is not yet ported to glade2
+
+@end itemize
+@end itemize
+
+
 @heading 1.3.3
 
 @itemize @bullet
