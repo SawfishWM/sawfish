@@ -1,5 +1,5 @@
 ;; viewport.jl -- virtual desktops
-;; $Id$
+;; $Id: viewport.jl,v 1.46 2002/04/23 03:44:18 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -266,7 +266,8 @@
       (window-put window 'sticky-viewport t)
       (with-server-grabbed
        (raise-window* window)
-       (move-viewport col row))
+       (move-viewport col row)
+       (set-input-focus window))
       (unless sticky-viewport
 	(window-put window 'sticky-viewport nil))))
 
