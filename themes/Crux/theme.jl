@@ -417,6 +417,10 @@
 (define (reframe-all)
   (reframe-windows-with-style 'Crux))
 
+(define (reset-icon w)
+  (table-unset icon-table w)
+  (rebuild-frame w))
+
 (define (color-changed)
   (recolor-all)
   (reframe-all))
@@ -458,3 +462,6 @@
 
 ;; recalibrate frames when the window-name changes
 (call-after-property-changed '(WM_NAME _NET_WM_NAME) rebuild-frame)
+
+;; Konqueror changes the icon by page.
+(call-after-property-changed 'WM_HINTS reset-icon)
