@@ -744,7 +744,7 @@ Note that these are Lisp properties not X properties.
     return val;
 }
 
-DEFUN("window-prop-del", Fwindow_prop_del, Swindow_prop_del,
+DEFUN("window-remprop", Fwindow_remprop, Swindow_remprop,
       (repv win, repv prop), rep_Subr2) /*
 ::doc:sawfish.wm.windows.subrs#window-prop-del::
 window-put WINDOW PROPERTY
@@ -1642,7 +1642,7 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_get);
     rep_ADD_SUBR(Smap_window_properties);
     rep_ADD_SUBR(Swindow_put);
-    rep_ADD_SUBR(Swindow_prop_del);
+    rep_ADD_SUBR(Swindow_remprop);
     rep_ADD_SUBR(Swindow_plist);
     rep_ADD_SUBR(Swindow_name);
     rep_ADD_SUBR(Swindow_full_name);
