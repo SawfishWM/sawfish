@@ -841,6 +841,22 @@ Lisp properties bound to @var{window}.  Returns the value of the last
 @code{map-window-properties} returns @code{nil} immediately.
 @end defun
 
+@defun window-plist window
+Returns the property list of the window @var{window} which is of the form
+@code{(prop value prop value ...)}. 
+
+The returned list is ``copied once'', i.e., its structure is copied,
+but elements other than symbol, lists for example, are the original ones.
+Do NOT modify them to change the property value. Use @code{window-put}
+instead.
+@end defun
+
+@defun window-prop-del window property
+Delete @var{property} of @var{window}. Returs @code{t} for success,
+otherwise @code{nil}.
+
+Do NOT delete keymap with this function. Use @code{window-put} instead.
+@end defun
 
 @node Window Types, Window Attributes, Window Property Lists, Windows
 @section Window Types

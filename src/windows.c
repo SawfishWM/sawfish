@@ -80,6 +80,7 @@ DEFSYM(south_east, "south-east");
 
 static repv gravity_map[StaticGravity+1];
 
+// In sawfish-1.3.3, the only callback used is keymap_prop_change. 
 struct prop_handler {
     struct prop_handler *next;
     repv prop;
@@ -742,6 +743,51 @@ Note that these are Lisp properties not X properties.
     if (plist != rep_NULL)
 	VWIN(win)->plist = plist;
     return val;
+}
+
+DEFUN("window-prop-del", Fwindow_prop_del, Swindow_prop_del,
+      (repv win, repv prop), rep_Subr2) /*
+::doc:sawfish.wm.windows.subrs#window-prop-del::
+window-put WINDOW PROPERTY
+
+Delete PROPERTY of WINDOW. Returs t for success, otherwise nil.
+
+Do NOT delete keymap with this function. Use `window-put' instead.
+::end:: */
+{
+    repv plist;
+    rep_DECLARE1(win, XWINDOWP);
+    plist = VWIN(win)->plist;
+    while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
+    {
+	if (rep_CAR(plist) == prop
+	    || (!rep_SYMBOLP(prop)
+		&& rep_value_cmp (rep_CAR(plist), prop) == 0))
+	{
+            rep_CAR(plist) = rep_CADDR(plist);
+	    rep_CDR(plist) = rep_CDDDR(plist);
+	    return Qt;
+	}
+	plist = rep_CDDR(plist);
+    }
+    return Qnil;
+}
+
+DEFUN("window-plist", Fwindow_plist, Swindow_plist,
+      (repv win), rep_Subr1) /*
+::doc:sawfish.wm.windows.subrs#window-plist::
+window-plist WINDOW
+
+Returns the property list of the window window which is of the form
+(prop value prop value ...).
+
+The returned list is ``copied once'', i.e., its structure is copied,
+but elements other than atom, lists for example, are the original ones.
+Do NOT modify them to change the property value. Use window-put instead.
+::end:: */
+{
+    rep_DECLARE1(win, XWINDOWP);
+    return Fcopy_sequence (VWIN(win)->plist);
 }
 
 DEFUN("window-name", Fwindow_name, Swindow_name, (repv win), rep_Subr1) /*
@@ -1597,6 +1643,8 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_get);
     rep_ADD_SUBR(Smap_window_properties);
     rep_ADD_SUBR(Swindow_put);
+    rep_ADD_SUBR(Swindow_prop_del);
+    rep_ADD_SUBR(Swindow_plist);
     rep_ADD_SUBR(Swindow_name);
     rep_ADD_SUBR(Swindow_full_name);
     rep_ADD_SUBR(Swindow_icon_name);

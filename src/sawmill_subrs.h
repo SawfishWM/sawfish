@@ -322,6 +322,8 @@ extern repv Fwindow_get (repv win, repv prop, repv checker);
 extern void register_property_monitor (repv prop, void (*callback)
 				       (Lisp_Window *, repv, repv, repv));
 extern repv Fwindow_put (repv win, repv prop, repv value);
+extern repv Fwindow_prop_del (repv win, repv prop);
+extern repv Fwindow_plist (repv win);
 extern repv Fwindow_name (repv win);
 extern repv Fwindow_full_name (repv win);
 extern repv Fwindow_icon_name (repv win);
