@@ -1,5 +1,5 @@
 ;; menus.jl -- popup menus
-;; $Id$
+;; $Id: menus.jl,v 1.76 2005/02/07 00:12:18 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -83,16 +83,18 @@ before killing it.")
   (define menu-timer nil)
 
   (defvar window-ops-menu
-    `((,(_ "Minimize") iconify-window
+    `((,(_ "Mi_nimize") iconify-window
        (insensitive . ,(lambda (w)
-			 (not (window-iconifiable-p w)))))
+                         (not (window-iconifiable-p w)))))
       (,(lambda (w)
-	  (if (window-maximized-p w)
-	      (_ "Unmaximize")
-	    (_ "Maximize"))) maximize-window-toggle
-       (insensitive . ,(lambda (w)
-			 (not (or (window-maximized-p w)
-				  (window-maximizable-p w))))))
+          (if (window-maximized-p w)
+              (_ "Unma_ximize")
+            (_ "Ma_ximize"))) maximize-window-toggle
+            (insensitive . ,(lambda (w)
+                              (not (or (window-maximized-p w)
+                                       (window-maximizable-p w))))))
+      (,(_ "_Move") move-window-interactively)
+      (,(_ "_Resize") resize-window-interactively)
       (,(_ "_Close") delete-window)
       ()
       (,(_ "_Toggle") . window-ops-toggle-menu)
@@ -100,15 +102,15 @@ before killing it.")
       (,(_ "_Send window to")
        (,(_ "_Previous workspace") send-to-previous-workspace)
        (,(_ "_Next workspace") send-to-next-workspace)
-       (,(_ "Copy to previous") copy-to-previous-workspace)
-       (,(_ "Copy to next") copy-to-next-workspace))
-      (,(_ "Stacking")
-       (,(_ "Raise") raise-window)
-       (,(_ "Lower") lower-window)
-       (,(_ "Upper layer") raise-window-depth)
-       (,(_ "Lower layer") lower-window-depth))
-      (,(_ "Frame type") . frame-type-menu)
-      (,(_ "Frame style") . frame-style-menu)))
+       (,(_ "Copy to p_revious") copy-to-previous-workspace)
+       (,(_ "Copy to ne_xt") copy-to-next-workspace))
+      (,(_ "Stac_king")
+       (,(_ "_Raise") raise-window)
+       (,(_ "_Lower") lower-window)
+       (,(_ "_Upper layer") raise-window-depth)
+       (,(_ "Lo_wer layer") lower-window-depth))
+      (,(_ "Frame ty_pe") . frame-type-menu)
+      (,(_ "Frame sty_le") . frame-style-menu)))
 
   (defvar window-ops-toggle-menu '())
 
