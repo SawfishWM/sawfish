@@ -1,0 +1,14 @@
+To use this theme, you'll need to do slightly more than just unpack it and
+select it.  After untarring, add this to your sawfish config:
+
+  (define-special-variable default-frame-style 'get-S-tabbed "Default frame style")
+  (custom-set-typed-variable 'tab-left-dec-width '5 'number)
+  (custom-set-typed-variable 'tab-right-dec-width '5 'number)
+  (custom-set-typed-variable 'tab-left-margin '14 'number)
+  (custom-set-typed-variable 'tab-right-margin '38 'number)
+  ; choose whatever font you like...
+  (custom-set-typed-variable 
+    (quote default-font) (quote ("Pango" . "Sans 10")) (quote font))
+
+I don't yet have a way to get those tab-* variables directly from the theme to
+the tab layout code, so it's currently necessary to configure them manually.
