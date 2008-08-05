@@ -845,10 +845,8 @@ Lisp properties bound to @var{window}.  Returns the value of the last
 Returns the property list of the window @var{window} which is of the form
 @code{(prop value prop value ...)}. 
 
-The returned list is ``copied once'', i.e., its structure is copied,
-but elements other than symbol, lists for example, are the original ones.
-Do NOT modify them to change the property value. Use @code{window-put}
-instead.
+Do not attempt to change properties by modifying the property list in place.
+Use window-put instead.
 @end defun
 
 @defun window-remprop window property

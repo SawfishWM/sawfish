@@ -733,10 +733,10 @@ Note that these are Lisp properties not X properties.
 		if (ph->prop == prop && old != val)
 		    ph->callback (VWIN (win), prop, old, val);
 	    }
-	    rep_CAR(rep_CDR(plist)) = val;
+	    rep_CADR(plist) = val;
 	    return val;
 	}
-	plist = rep_CDR(rep_CDR(plist));
+	plist = rep_CDDR(plist);
     }
     plist = Fcons(prop, Fcons(val, VWIN(win)->plist));
     if (plist != rep_NULL)
@@ -784,13 +784,12 @@ window-plist WINDOW
 Returns the property list of the window window which is of the form
 (prop value prop value ...).
 
-The returned list is ``copied once'', i.e., its structure is copied,
-but elements other than atom, lists for example, are the original ones.
-Do NOT modify them to change the property value. Use window-put instead.
+Do not attempt to change properties by modifying the property list in place.
+Use window-put instead.
 ::end:: */
 {
     rep_DECLARE1(win, XWINDOWP);
-    return Fcopy_sequence (VWIN(win)->plist);
+    return VWIN(win)->plist;
 }
 
 DEFUN("window-name", Fwindow_name, Swindow_name, (repv win), rep_Subr1) /*
