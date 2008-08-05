@@ -27,7 +27,7 @@ VPATH=@srcdir@
 
 SUBDIRS = @SUBDIRS@
 
-OLD_BINARIES = sawmill sawmill-client sawmill-capplet sawmill-ui
+OLD_BINARIES = sawmill sawmill-client sawmill-ui
 
 all : build.h DOC NEWS FAQ
 	for dir in $(SUBDIRS); do \

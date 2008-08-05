@@ -248,15 +248,6 @@ if test "$with_esd" = "yes"; then
     AC_DEFINE(HAVE_ESD)
 fi
 
-AC_ARG_ENABLE(capplet,
- [  --enable-capplet	  Build the sawfish GNOME capplet [default]
-  --disable-capplet	  Don't built the capplet], [],
- [enable_capplet=no])
-
-if test "$enable_capplet" = "yes"; then
-  add_subdir "capplet"
-fi
-
 AC_ARG_ENABLE(gnome-widgets,
  [  --enable-gnome-widgets  Use GNOME widgets in places [default]
   --disable-gnome-widgets Don't use GNOME widgets], [],
