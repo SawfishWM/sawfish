@@ -1,5 +1,5 @@
 # Makefile.in for sawmill's themes
-# $Id$
+# $Id: Makefile.in,v 1.20 2001/01/20 02:40:29 jsh Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -36,7 +36,7 @@ COMPILE_ENV = SAWFISHLISPDIR=../lisp \
 	      SAWFISHEXECDIR=$(top_builddir)/src/.libs \
 	      SAWFISHDOCFILE=../DOC
 
-THEMES := absolute-e Crux brushed-metal gradient gtk microGUI mono simple smaker
+THEMES := absolute-e Crux brushed-metal gradient gtk microGUI mono simple smaker get-S-tabbed
 
 all :
 # only uncompiled themes are loaded for now, so no point doing this
