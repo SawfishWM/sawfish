@@ -749,25 +749,29 @@ DEFUN("window-remprop", Fwindow_remprop, Swindow_remprop,
 ::doc:sawfish.wm.windows.subrs#window-prop-del::
 window-put WINDOW PROPERTY
 
-Delete PROPERTY of WINDOW. Returs t for success, otherwise nil.
-
-Do NOT delete keymap with this function. Use `window-put' instead.
+Delete PROPERTY of WINDOW. Return t for success, nil if WINDOW
+did not have PROPERTY.
 ::end:: */
 {
-    repv plist;
+    repv *pplist;
     rep_DECLARE1(win, XWINDOWP);
-    plist = VWIN(win)->plist;
-    while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
+    pplist = &VWIN(win)->plist;
+    while (rep_CONSP(*pplist) && rep_CONSP(rep_CDR(*pplist)))
     {
-	if (rep_CAR(plist) == prop
+	if (rep_CAR(*pplist) == prop
 	    || (!rep_SYMBOLP(prop)
-		&& rep_value_cmp (rep_CAR(plist), prop) == 0))
+		&& rep_value_cmp (rep_CAR(*pplist), prop) == 0))
 	{
-            rep_CAR(plist) = rep_CADDR(plist);
-	    rep_CDR(plist) = rep_CDDDR(plist);
+	    struct prop_handler *ph;
+            repv old = rep_CADR(*pplist);
+            if (old != Qnil)
+                for (ph = prop_handlers; ph != 0; ph = ph->next)
+                    if (ph->prop == prop)
+                        ph->callback(VWIN (win), prop, old, Qnil);
+            *pplist = rep_CDDR(*pplist);
 	    return Qt;
 	}
-	plist = rep_CDDR(plist);
+	pplist = &rep_CDDR(*pplist);
     }
     return Qnil;
 }

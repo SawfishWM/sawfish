@@ -852,10 +852,8 @@ instead.
 @end defun
 
 @defun window-remprop window property
-Remove @var{property} of @var{window}. Returs @code{t} for success,
-otherwise @code{nil}.
-
-Do NOT remove a keymap with this function. Use @code{window-put} instead.
+Remove @var{property} of @var{window}. Returns @code{t} for success,
+@code{nil} if the property did not exist.
 @end defun
 
 @node Window Types, Window Attributes, Window Property Lists, Windows
