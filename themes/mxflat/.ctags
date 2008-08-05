@@ -1,0 +1,4 @@
+--langdef=sftheme
+--langmap=sftheme:.jl
+--regex-sftheme=/^;;;[ \t]*([ a-zA-Z0-9_-]+)/\1/s,sections/
+--regex-sftheme=/^;;[ \t]*(.*):([ a-zA-Z0-9_-]+)/. \2/s,sections/

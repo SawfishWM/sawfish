@@ -1,0 +1,22 @@
+#!/bin/sh
+
+echo "processing theme.jl"
+echo
+
+TOPTS=`grep defcustom theme.jl |wc -l |awk '{print $1 }'`
+echo "options total: $TOPTS"
+NOPTS=`grep defcustom theme.jl |grep -v color |wc -l |awk '{print $1 }'`
+echo "options normal: $NOPTS"
+COPTS=`grep defcustom theme.jl |grep color |wc -l |awk '{print $1 }'`
+echo "options colors: $COPTS"
+SIZE=`ls -la theme.jl |awk '{print $5 }'`
+echo "size: $SIZE bytes"
+LINES=`cat theme.jl |wc -l |awk '{print $1 }'`
+echo "lines: $LINES"
+COM=`grep ";" theme.jl |wc -l |awk '{print $1 }'`
+echo "comment lines: $COM"
+
+echo
+
+echo "saving reformatted code to 'theme.reformatted.jl'"
+tr "\t" "  " < theme.jl >theme.reformatted.jl

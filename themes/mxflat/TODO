@@ -1,0 +1,40 @@
+known bugs/limitations
+----------------------
+
+-maximized window is too small/big if the maximized/unmaximized border size
+  are not equal or if you've set bigger corners (this is hard to correct since
+  themes only have restriced access to sawfish's window functions)
+  (update: i dont know if mmc's patch has already reached the sf cvs, let me know if it should
+  work someday)
+  
+-when resizing the button icons you have to restart sawfish for this to take effect
+  (this is also necessary for the button icon set)
+  besides quality is very poor (thats because the images are so small, there's not much
+  one could do about it)
+
+-the fake shadow can bearly be called so, improve it:
+  eg the fake shadow's position is wrong if border-offset != 0
+  and the window is shaded
+
+-many gradient things have to be improved:
+  eg when the gradient titlebar background is activated and the window is
+  too small for the gradient sawfish reports an error on console
+  (i think this is because the gradient function tries to fill a 0x0 pixel image)
+
+-with gnome2/sawfish-1.2 the options in sawfish-ui change on the fly but that is
+  sometimes really slow, improve speed
+
+-due to the newer update behaviour we have some problems with sawfish >=1.0
+
+
+some things i can imagine to/will implement if they are possible
+----------------------------------------------------------------
+
+-rounded window frames like the rounded edges of gtk-flat-engine buttons
+  (either through recolorable half-transparent images or alltogether with lisp functions)
+
+-completely customizable buttons, ie one has a list and an add button and an
+  add dialog for each button with adjustable colors, icons, zoom, size, command-key bindings etc
+  (note: this is, at least as far as i know, not possible right now since sawfish is missing
+  a defcustom table type with freely configurable add dialogs and one cannot create custom types
+  in a theme because this is restriced to sawfish modules)

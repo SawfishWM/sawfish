@@ -1,0 +1,3 @@
+#!/bin/sh
+
+find $1 -type f -exec convert -resize $2x$2 '{}' '{}' \;

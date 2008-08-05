@@ -1,0 +1,134 @@
+v0.7.4 (ta)    2003-04-09
+ -added periodic title string update option; the interval is adjustable
+ -fixed bug with button positions where gaps in the titlebar could be
+ 	created (as it seems i simply mixed up left and right)
+
+v0.7.3 (ta)    2003-01-19
+ -added button icon set option, we now have different button icon sets
+   that are chooseable, ie have other icons than the default ones with
+   different sizes
+ -added some more very small scripts that help me develop the theme
+ -changed names of title string vars $height and $width to $width-content
+   and $height-content because they contain only the width and height
+   of the content window
+ -titlestring vars $depth, $width and $height were also added
+ -added .ctags file
+ -improved theme updating speed a bit of some options
+ -added title vertical alignment option (besides the alignment options
+   can be turned of completely now)
+ -clean up & reformatting
+ -changed/improved internal button handling a bit
+   (in the hope that this will make work easier in the future)
+ -buttons now have a default (built-in) keymap
+   (custom keymaps are still possible of course)
+ -changed button position/keymap grouping
+ -added look position button
+ -fixed title string alignment bug for non-gradient mode
+ -corner width adjustment is configurable for maximized windows
+ -fixed a bugs in colorspace conversion
+   (rgb2hsv: ignore the alpha channel for calculation;
+   fixed rounding loss in both functions)
+ 
+v0.7.2 (ta)    2002-12-24
+ -fixed some minor other bugs
+ -changed direction of button position models,
+   negative value now mean left and positiv values mean right
+ -clean up & reformatting
+ -implemented experimental gradient titlebar mode
+ -the left and right offset for the buttons can be set independently
+   (they were both 1 before (hardcoded)
+ -the buttons are resizeable (not only the icons, the whole button)
+   (this includes an alignment option)
+ -more configurable button colors
+ -many color options can be turn on/off so one doesn't
+   have to fiddle around with colors too much
+ -another level of config tabs was introduced to make the navigation easier
+ -no more compiler warnings when you run 'comile', yes, we made it :)
+ -set tooltips with default bindings for all keymap defcustom options
+ -an 'always-on-top' button was added (the button is, of course, deactivated by default)
+ -the fake-shadow is working in a very basic version (the window corners arent respected)
+ -the theme knows about vertically and horizontally maximized windows and
+   sets the corners and borders accordingly
+ -clean up button code
+ -the titlebar frame part is no longer behind the top border
+ -fixed a bug with 'real-center' title-x-alignment that occured when the title string could
+   not be in the center because there was a button in the way
+ -border width of focused window is adjustable (cpu intensive and turned off by default)
+ -fixed a bug with maximized windows, the corner width adjustment
+   is only taken into account on not-maximized windows
+ -button3 click on the configure button toggles "custom-title" option
+   button2 click toggles show-workspace-buttons option
+   (somehow that isn't shown in sawfish-ui, but it's there, believe me!)
+ -fixed a bug with the title x-alignment when the title of a window changes
+
+v0.7.1 (ta)    2002-12-12
+ -do not make such big version changes anymore, there's much to do till v1.0
+ -real-center mode for title string x-alignment
+ -2 new buttons: info and customize (not visible by default)
+ -button-size is 9 pixel, they've actually always been 9 pixel big but there
+   was a small transparent border, that i've cut off so that one can make the
+   titlebar even smaller
+ -all buttons icons are resizeable, i know the quality is not perfect, but we may include
+   different butten sizes in future releases
+ -changed the possible number range of many options
+ -introduced 3 different decoration modes (normal, all, none)
+ -it is possible to keep the window frame displayed, even when your windows are shaded
+ -border offset in bigger ranges (not that anyone would need this ;-))
+ -the last and first wirkspace is not adjustable anymore, this is done automatically now
+ -set tooltips for many options
+ -window corners are adjustable in width and length now
+ -title string pattern customizable with variables (built-in and envitonment vars or rep-functions)
+ -fixed title left/right alignment introducing title-x-adjustment option
+ -the titlebar disappears instead of being behind the buttons when the window is too small
+ -changed the button position model (buttons with position >0 are drawn on the left
+   edge and with position <0 on the right edge);
+   buttons models: title (button positions as multiple of titlebar height), pixel and none
+ -the border width is adjustable for maximized and unmaximized windows
+   (NEEDS FIXING, this is not really working yet, it was only introduced because this is needed
+   for future features)
+ -the width of the line between titlebar contents window is adjustable
+ -code cleanup, reformatting
+ -much more colors adjustable and thus some new config groups
+
+v0.7 (ta)   2002-11-24
+ -adjusted default colors
+ -border offset is adjustable (range -1 - 1) because many gtk2 apps draw a small
+   black border around their contents window and with a border offset of
+   1 the sawfish window border will overlay the gtk2 border exactly;
+   no more ugly gtk2 windows!
+ -focused/unfocused button foreground color is adjustable through image recolor
+   function taken from crux theme
+   (the button images were all changed, we now only need one image for
+   one button icon, the focused/unfocused color change is done through recoloring)
+ -split button configuration into 3 tabs (misc/basic/extended)
+ -next/prev button indicates when you are on your first/last workspace
+   (set the workspace to -10 or something else if you don't want the button to change,
+   but be aware of the default keymap of the next-prev button, if you button-3 click one of them
+   many workspaces might be created)
+ -button3 click on next/prev button brings you to your first/last workspace
+   (you have to manually adjust your first/last workspace in the mxflat theme
+   configuration group/tab; this is because i cannot (or i do not know how to) get
+   the number of workspaces from within a theme since this information seemes
+   to be restriced)
+   (note: this is only for the default keymap, if you've changed the next/prev button's
+   keymap it will stay as it is)
+ -it is now possible to display the window/app icon on the menu button
+   and to set its size
+ -further reformatting and clean-up
+ -the highlighted and clicked bg color of buttons of unfocused windows is now
+   adjustable
+
+v0.6 (ta)   2002-11-14
+ 2 new buttons (next and previous workspace)
+ several additions, border fixes, code cleanup
+ code reformatting (you may not like it but note that i am not
+ very firm with lisp/rep yet and i think  it helps me
+ to understand the code easier. besides i am sure the code can
+ still be optimized (in length) if you know more about
+ lisp than i do)
+
+v0.5/unofficial (ta)   2002
+ initial version from mx with help of me
+ we ripped of the code from several
+ other themes but mx created the imagaes of his own
+ inspired by the mono theme i think
