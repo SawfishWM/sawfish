@@ -1,5 +1,5 @@
 ;; x-cycle.jl -- stack-based window cycling
-;; $Id$
+;; $Id: x-cycle.jl,v 1.68 2002/04/21 03:39:33 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -127,6 +127,9 @@
     :group bindings
     :type keymap)
 
+  (defvar after-cycle-step-hook '()
+    "Window hook called after each step of window cycling.")
+
 
 ;; variables
 
@@ -167,46 +170,47 @@
   (define (cycle-next windows count)
     (fluid-set x-cycle-windows windows)
     (let ((win (window-order (if cycle-all-workspaces
-				 nil
-			       current-workspace)
-			     cycle-include-iconified cycle-all-viewports)))
+                                 nil
+                               current-workspace)
+                             cycle-include-iconified cycle-all-viewports)))
       (setq win (delete-if (lambda (w)
-			     (not (memq w windows))) win))
+                             (not (memq w windows))) win))
       (unless win
-	(throw 'x-cycle-exit t))
+        (throw 'x-cycle-exit t))
       (if (fluid x-cycle-current)
-	  (when (or (window-get (fluid x-cycle-current) 'iconified)
-		    (not (window-appears-in-workspace-p
-			  (fluid x-cycle-current) current-workspace)))
-	    (hide-window (fluid x-cycle-current)))
-	;; first call, push the currently focused window onto
-	;; the top of the stack
-	(when (input-focus)
-	  (fluid-set x-cycle-current (input-focus))
-	  (window-order-push (fluid x-cycle-current))
-	  (setq win (cons (fluid x-cycle-current)
-			  (delq (fluid x-cycle-current) win)))))
+          (when (or (window-get (fluid x-cycle-current) 'iconified)
+                    (not (window-appears-in-workspace-p
+                          (fluid x-cycle-current) current-workspace)))
+            (hide-window (fluid x-cycle-current)))
+        ;; first call, push the currently focused window onto
+        ;; the top of the stack
+        (when (input-focus)
+          (fluid-set x-cycle-current (input-focus))
+          (window-order-push (fluid x-cycle-current))
+          (setq win (cons (fluid x-cycle-current)
+                          (delq (fluid x-cycle-current) win)))))
       (when (fluid x-cycle-stacking)
-	(restack-windows (fluid x-cycle-stacking))
-	(fluid-set x-cycle-stacking nil))
+        (restack-windows (fluid x-cycle-stacking))
+        (fluid-set x-cycle-stacking nil))
       (if (fluid x-cycle-current)
-	  (setq win (forwards win (fluid x-cycle-current) count))
-	(setq win (car win)))
+          (setq win (forwards win (fluid x-cycle-current) count))
+        (setq win (car win)))
       (fluid-set x-cycle-current win)
       (when (not (window-get win 'sticky))
-	(select-workspace (nearest-workspace-with-window
-			   win current-workspace)))
+        (select-workspace (nearest-workspace-with-window
+                           win current-workspace)))
       (move-viewport-to-window win)
       (when (window-get win 'iconified)
-	(show-window win))
+        (show-window win))
       (when cycle-raise-windows
-	(fluid-set x-cycle-stacking (stacking-order))
-	(raise-window* win))
+        (fluid-set x-cycle-stacking (stacking-order))
+        (raise-window* win))
       (when cycle-show-window-names
-	(cycle-display-message))
+        (cycle-display-message))
       (when (window-really-wants-input-p win)
-	(set-input-focus win))
-      (allow-events 'sync-keyboard)))
+        (set-input-focus win))
+      (allow-events 'sync-keyboard)
+      (call-window-hook 'after-cycle-step-hook win)))
 
   (define (cycle-begin windows step)
     "Cycle through all windows in order of recent selections."

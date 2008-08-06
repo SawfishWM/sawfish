@@ -5577,6 +5577,7 @@ The available hooks are listed below.
 * Window Destruction Hooks::
 * Window Mapping Hooks::
 * Window Motion Hooks::
+* Window Cycling Hooks::
 * X Hooks::
 * Pointer Motion Hooks::
 * Workspace Hooks::
@@ -5698,7 +5699,7 @@ the hook call.
 @end defvr
 
 
-@node Window Motion Hooks, X Hooks, Window Mapping Hooks, Standard Hooks
+@node Window Motion Hooks, Window Cycling Hooks, Window Mapping Hooks, Standard Hooks
 @section Window Motion Hooks
 @cindex Window Motion Hooks
 @cindex Hooks, Window Motion
@@ -5749,8 +5750,16 @@ not limited to @code{restack-windows}, @code{x-raise-window} and
 @code{x-lower-window}.  The hook functions take no arguments.
 @end defvr
 
+@node Window Cycling Hooks, X Hooks, Window Motion Hooks, Standard Hooks
+@section Window Cycling Hooks
+@cindex Window Cycling Hooks
+@cindex Hooks, Window Cycling
 
-@node X Hooks, Pointer Motion Hooks, Window Motion Hooks, Standard Hooks
+@defvr {Window Hook} after-cycle-step-hook
+Called after each step of window cycling. (See @ref{Cycling Between Windows}.)
+@end defvr
+
+@node X Hooks, Pointer Motion Hooks, Window Cycling Hooks, Standard Hooks
 @section X Hooks
 @cindex X Hooks
 @cindex Hooks, X
