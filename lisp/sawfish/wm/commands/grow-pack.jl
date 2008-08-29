@@ -1,5 +1,5 @@
 ;; grow-pack.jl -- window resize and movement
-;; $Id$
+;; $Id: grow-pack.jl,v 1.15 2002/09/27 06:20:42 jsh Exp $
 
 ;; Copyright (C) 2000, 01 Kai Grossjohann <Kai.Grossjohann@CS.Uni-Dortmund.DE>
 
@@ -54,6 +54,7 @@
 	  sawfish.wm.commands
 	  sawfish.wm.focus
 	  sawfish.wm.workspace
+         sawfish.wm.stacking
 	  sawfish.wm.util.stacking)
 
   (define-structure-alias grow-pack sawfish.wm.commands.grow-pack)
@@ -214,7 +215,7 @@ See `pack-window-up'."
 			    (window-avoided-p x)
 			  (eq grow-pack-bump-other-depth 'always))))
 		  (or grow-pack-bump-obscured
-		      (not (eq (window-visibility x) 'fully-obscured)))
+                     (not (eq (stacking-visibility x) 'fully-obscured)))
 		  (or grow-pack-bump-ignored
 		      (not (window-ignored-p x)))
 		  (setq xa (window-position x)

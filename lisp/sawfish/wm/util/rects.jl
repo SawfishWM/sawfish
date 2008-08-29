@@ -1,5 +1,5 @@
 ;; rects.jl -- rectangle manipulation
-;; $Id$
+;; $Id: rects.jl,v 1.15 2002/04/24 06:57:05 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -21,7 +21,9 @@
 
 (define-structure sawfish.wm.util.rects
 
-    (export rectangles-from-grid
+    (export rect-left rect-top rect-right rect-bottom
+            rect-obscured rect-minus
+            rectangles-from-grid
 	    rectangles-from-windows
 	    grid-from-rectangles
 	    rectangle-area
@@ -47,10 +49,75 @@
   ;; Commentary:
 
   ;; A rectangle is (LEFT TOP RIGHT BOTTOM [WEIGHT])
+  ;; The left and top edges are considered part of the rectangle,
+  ;; the right and bottom edges are not.
 
-
+
 ;;; rectangles
 
+  (define rect-left car)
+  (define rect-top cadr)
+  (define rect-right caddr)
+  (define rect-bottom cadddr)
+
+  (define (rect-obscured r by)
+    "Check whether rectangle R is wholly or partially contained in
+rectangle BY.  Return `unobscured', `partially-obscured' or `fully-obscured'."
+    (cond ((or (<= (rect-right by) (rect-left r))
+               (<= (rect-right r) (rect-left by))
+               (<= (rect-bottom by) (rect-top r))
+               (<= (rect-bottom r) (rect-top by)))
+           'unobscured)
+          ((and (<= (rect-left by) (rect-left r))
+                (<= (rect-right r) (rect-right by))
+                (<= (rect-top by) (rect-top r))
+                (<= (rect-bottom r) (rect-bottom by)))
+           'fully-obscured)
+          (t 'partially-obscured)))
+
+  (define (rect-minus r s #!optional tail)
+    "Return a list of disjoint rectangles whose union is the part of
+rectangle R not contained in rectangle S.  If TAIL is given, the
+result is prepended to it."
+    (let rminus ((r r) (result tail))
+         (cond
+          ;; Check for complete disjointness.
+          ((or (<= (rect-right s) (rect-left r))
+               (<= (rect-right r) (rect-left s))
+               (<= (rect-bottom s) (rect-top r))
+               (<= (rect-bottom r) (rect-top s)))
+           (cons r result))
+          ;; Extract a free slice from the bottom of r.
+          ((< (rect-bottom s) (rect-bottom r))
+           (rminus (list (rect-left r) (rect-top r)
+                         (rect-right r) (rect-bottom s))
+                   (cons (list (rect-left r) (rect-bottom s)
+                               (rect-right r) (rect-bottom r))
+                         result)))
+          ;; Extract a free slice from the right side of r.
+          ((< (rect-right s) (rect-right r))
+           (rminus (list (rect-left r) (rect-top r)
+                         (rect-right s) (rect-bottom r))
+                   (cons (list (rect-right s) (rect-top r)
+                               (rect-right r) (rect-bottom r))
+                         result)))
+          ;; Extract a free slice from the top of r.
+          ((> (rect-top s) (rect-top r))
+           (rminus (list (rect-left r) (rect-top s)
+                         (rect-right r) (rect-bottom r))
+                   (cons (list (rect-left r) (rect-top r)
+                               (rect-right r) (rect-top s))
+                         result)))
+          ;; Extract a free slice from the left side of r.
+          ((> (rect-left s) (rect-left r))
+           (rminus (list (rect-left s) (rect-top r)
+                         (rect-right r) (rect-bottom r))
+                   (cons (list (rect-left r) (rect-top r)
+                               (rect-left s) (rect-bottom r))
+                         result)))
+          ;; Completely covered.
+          (t result))))
+                 
   (define (rectangles-from-grid x-points y-points #!optional pred)
     "The two lists of integers X-POINTS and Y-POINTS define a rectangular
 grid. Return the complete list of rectangles formed by the

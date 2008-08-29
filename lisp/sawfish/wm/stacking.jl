@@ -1,5 +1,5 @@
 ;; stacking.jl -- window stacking
-;; $Id$
+;; $Id: stacking.jl,v 1.59 2002/10/18 06:46:16 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -23,6 +23,8 @@
 
     (export save-stacking-order
 	    mapped-stacking-order
+            window-obscured
+            stacking-visibility
 	    raise-window
 	    lower-window
 	    stack-window-above
@@ -46,7 +48,8 @@
 	  sawfish.wm.custom
 	  sawfish.wm.session.init
 	  sawfish.wm.workspace
-	  sawfish.wm.state.transient)
+         sawfish.wm.state.transient
+          sawfish.wm.util.rects)
 
   ;; Each window will have a `depth' property--an integer, zero
   ;; represents the level of normal windows, negative for windows below
@@ -208,7 +211,54 @@ the empty list."
   (define (mapped-stacking-order)
     (delete-if-not window-mapped-p (stacking-order)))
 
-
+  (define (window-obscured window)
+    "Check whether WINDOW is obscured.  Return `t' if WINDOW is fully obscured
+by some other window, otherwise a list of windows partially obscuring WINDOW.
+In particular return `nil' if WINDOW is unobscured.  Note that if a list of
+partially obscuring windows is returned, taken together they may or may not
+fully obscure WINDOW."
+    (define w window)
+    (define ws (nearest-workspace-with-window w current-workspace))
+    (let loop ((stack (stacking-order))
+               (obs nil))
+         (if (null stack)               ; Should not happen
+             obs
+           (let ((w2 (car stack)))
+             (cond ((eq w2 w) obs)
+                   ((and (window-visible-p w2)
+                         (window-appears-in-workspace-p w2 ws))
+                    (case (apply rect-obscured
+                                 (rectangles-from-windows (list w w2)))
+                      ((unobscured) (loop (cdr stack) obs))
+                      ((fully-obscured) t)
+                      (t (loop (cdr stack) (cons w2 obs))))) ; Partially
+                   (t (loop (cdr stack) obs)))))))
+
+  (define (stacking-visibility window)
+    "Compute the visibility of WINDOW from the stacking order.  This should
+work even with the Composite extension, which appears to disable
+VisibilityNotify events.  Note that deciding between fully and partially
+obscured may require quite a bit of computation.  If you do not need that
+distinction, window-obscured should be faster."
+    (define (rect-list-minus rs s tail)
+      (if (null rs)
+          tail
+        (rect-list-minus (cdr rs) s
+                         (rect-minus (car rs) s tail))))
+    (let ((obs (window-obscured window)))
+      (case obs
+        ((t) 'fully-obscured)
+        ((()) 'unobscured)
+        (t
+         (do ((unobs (rectangles-from-windows (list window))
+                     (rect-list-minus unobs (car robs) nil))
+              (robs (rectangles-from-windows obs) (cdr robs)))
+             ((or (null unobs) (null robs))
+              (if (null unobs)
+                  'fully-obscured
+                'partially-obscured)))))))
+
+
 ;;; stacking functions
 
   (define (raise-window w)
@@ -340,7 +390,7 @@ order they are stacked within the layer (top to bottom)."
   (define (raise-lower-window w)
     "If the window is at its highest possible position, then lower it to its
 lowest possible position. Otherwise raise it as far as allowed."
-    (if (or (eq (window-visibility w) 'unobscured)
+    (if (or (not (window-obscured w))
 	    (window-on-top-p w))
 	(lower-window w)
       (raise-window w)))
@@ -424,7 +474,7 @@ lowest possible position. Otherwise raise it as far as allowed."
 	  (loop (delq lowest rest) (cons lowest out))))))
 
   (define (raise-lower-windows w order)
-    (if (or (eq (window-visibility w) 'unobscured)
+    (if (or (not (window-obscured w))
 	    (and (window-on-top-p (car order))
 		 ;; look for the group as a block.. this is a heuristic
 		 (let loop ((rest (memq (car order) (stacking-order))))
