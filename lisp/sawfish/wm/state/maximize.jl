@@ -1,5 +1,5 @@
 ;; maximize.jl -- window maximization
-;; $Id$
+;; $Id: maximize.jl,v 1.67 2002/09/23 07:33:17 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -47,7 +47,9 @@
 	    maximize-fill-window-vertically-toggle
 	    maximize-fill-window-horizontally-toggle
 	    maximize-window-fullscreen
-	    maximize-window-fullscreen-toggle)
+	    maximize-window-fullscreen-toggle
+	    maximize-window-fullxinerama
+	    maximize-window-fullxinerama-toggle)
 
     (open rep
 	  rep.system
@@ -494,10 +496,10 @@ unmaximized."
 ;; fullscreen commands
 
   (define (maximize-window-fullscreen w state)
+    "Fullscreen maximize the window."
     (cond ((and state (not (window-maximized-fullscreen-p w)))
 	   (when (window-maximizable-p w)
-	     (let ((head-offset (current-head-offset w))
-		   (head-dims (current-head-dimensions w)))
+	     (let ((head-offset (current-head-offset w)) (head-dims (current-head-dimensions w)))
 	       (save-unmaximized-geometry w)
 	       (window-put w 'unmaximized-type (window-type w))
 	       (push-window-type w 'unframed 'sawfish.wm.state.maximize)
@@ -516,12 +518,43 @@ unmaximized."
 	   (unmaximize-window w 'fullscreen))))
 
   (define (maximize-window-fullscreen-toggle w)
+    "Toggle the state of the window between fullscreen maximized and unmaximized."
     (maximize-window-fullscreen w (not (window-maximized-fullscreen-p w))))
 
   (define-command 'maximize-window-fullscreen
     maximize-window-fullscreen #:spec "%W")
   (define-command 'maximize-window-fullscreen-toggle
     maximize-window-fullscreen-toggle #:spec "%W")
+
+  (define (maximize-window-fullxinerama w state)
+    "Fullscreen maximize the window across all Xinerama screens."
+    (cond ((and state (not (window-maximized-fullscreen-p w)))
+	   (when (window-maximizable-p w)
+	     ( let ((screen-dims (screen-dimensions w)))
+	       (save-unmaximized-geometry w)
+	       (window-put w 'unmaximized-type (window-type w))
+	       (push-window-type w 'unframed 'sawfish.wm.state.maximize)
+	       (move-resize-window-to w 0 0 (car screen-dims) (cdr screen-dims))
+	       (raise-window* w)
+	       (window-put w 'maximized-fullscreen t)
+	       (window-put w 'maximized-vertically t)
+	       (window-put w 'maximized-horizontally t)
+	       (call-window-hook 'window-maximized-hook
+				 w (list 'fullscreen))
+	       (call-window-hook 'window-state-change-hook
+				 w (list '(maximized))))))
+
+	  ((and (not state) (window-maximized-fullscreen-p w))
+	   (unmaximize-window w 'fullscreen))))
+
+  (define (maximize-window-fullxinerama-toggle w)
+    "Toggle the state of the window between fullscreen maximized across all Xinerama and unmaximized."
+    (maximize-window-fullxinerama w (not (window-maximized-fullscreen-p w))))
+
+  (define-command 'maximize-window-fullxinerama
+    maximize-window-fullxinerama #:spec "%W")
+  (define-command 'maximize-window-fullxinerama-toggle
+    maximize-window-fullxinerama-toggle #:spec "%W")
 
 
 ;;; initialisation
