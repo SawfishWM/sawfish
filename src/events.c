@@ -1080,8 +1080,8 @@ focus_out (XEvent *ev)
 	    }
 	}
     }
-    else if ((w = x_find_window_by_id (ev->xunmap.window)) != 0
-	     && WINDOW_IS_GONE_P (w) && ev->xunmap.window == w->saved_id)
+    else if ((w = x_find_window_by_id (ev->xfocus.window)) != 0
+	     && WINDOW_IS_GONE_P (w) && ev->xfocus.window == w->saved_id)
     {
 	/* focus-out event from a deleted window */
 	if (focus_window == w)
