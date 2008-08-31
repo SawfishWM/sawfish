@@ -445,6 +445,7 @@ motion_notify (XEvent *ev)
 {
     Window tmpw;
     int tmp;
+    unsigned tmpu;
     int x, y;
     
     /* Swallow any pending motion events as well. */
@@ -455,7 +456,7 @@ motion_notify (XEvent *ev)
        until the pointer's position has been queried. I should
        check the Xlib manuals about this. */
     if(XQueryPointer(dpy, ev->xmotion.window,
-		     &tmpw, &tmpw, &x, &y, &tmp, &tmp, (gpointer) &tmp))
+		     &tmpw, &tmpw, &x, &y, &tmp, &tmp, &tmpu))
     {
 	record_mouse_position (x, y, ev->type, ev->xmotion.window);
     }
@@ -483,7 +484,7 @@ update_window_name(Lisp_Window * w, XPropertyEvent xproperty) {
     unsigned char *prop;
     Atom actual;
     int format;
-    long nitems, bytes_after;
+    unsigned long nitems, bytes_after;
     char **text_list;
     XTextProperty tprop;
     int count;
@@ -491,10 +492,9 @@ update_window_name(Lisp_Window * w, XPropertyEvent xproperty) {
     int convert_status;
 
     if (xproperty.state != PropertyNewValue
-        || XGetWindowProperty (dpy, w->id, xproperty.atom,
-                               0, 200, False, AnyPropertyType, &actual,
-                               &format, (gpointer) &nitems,
-                               (gpointer) &bytes_after, &prop) != Success
+        || XGetWindowProperty (dpy, w->id, xproperty.atom, 0, 200, False,
+                               AnyPropertyType, &actual, &format, &nitems,
+                               &bytes_after, &prop) != Success
         || actual == None)
         return FALSE;
 
@@ -507,7 +507,7 @@ update_window_name(Lisp_Window * w, XPropertyEvent xproperty) {
     tprop.value = prop;
     tprop.encoding = actual;
     tprop.format = format;
-    tprop.nitems = strlen ((gpointer) prop);
+    tprop.nitems = strlen ((char *) prop);
 
 #ifdef X_HAVE_UTF8_STRING
     if (actual == xa_compound_text || actual == XA_STRING
@@ -528,8 +528,8 @@ update_window_name(Lisp_Window * w, XPropertyEvent xproperty) {
         {
             if (count > 0)
             {
-                char * utf8str = g_locale_to_utf8(text_list[0], -1,
-                                                  NULL, NULL, NULL);
+                char *utf8str = g_locale_to_utf8(text_list[0], -1,
+                                                 NULL, NULL, NULL);
                 if (utf8str)
                 {
                     str = rep_string_dup (utf8str);
@@ -1351,7 +1351,7 @@ get_server_timestamp (void)
     while (XCheckWindowEvent (dpy, w, PropertyChangeMask, &ev)) ;
     XSelectInput (dpy, w, PropertyChangeMask | KeyPressMask);
     XChangeProperty (dpy, w, xa_sawmill_timestamp,
-		     XA_STRING, 8, PropModeReplace, (gpointer) "foo", 3);
+		     XA_STRING, 8, PropModeReplace, (unsigned char *)"foo", 3);
     XSelectInput (dpy, w, KeyPressMask);
     XWindowEvent (dpy, w, PropertyChangeMask, &ev);
 
@@ -1516,9 +1516,10 @@ the server, otherwise it's taken from the current event (if possible).
     {
 	Window tmpw;
 	int tmp;
+        unsigned tmpu;
 	int x, y;
 	if(XQueryPointer(dpy, root_window, &tmpw, &tmpw,
-			 &x, &y, &tmp, &tmp, (gpointer) &tmp))
+			 &x, &y, &tmp, &tmp, &tmpu))
 	{
 	    record_mouse_position (x, y, -1, 0);
 	}

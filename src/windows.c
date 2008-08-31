@@ -228,10 +228,10 @@ void
 get_window_protocols (Lisp_Window *w)
 {
     Atom *prot;
-    unsigned int n;
+    int n;
     w->does_wm_take_focus = 0;
     w->does_wm_delete_window = 0;
-    if (XGetWMProtocols (dpy, w->id, &prot, (gpointer) &n) != 0)
+    if (XGetWMProtocols (dpy, w->id, &prot, &n) != 0)
     {
 	int i;
 	for (i = 0; i < n; i++)
@@ -367,7 +367,7 @@ text_prop_to_utf8 (XTextProperty *prop)
     {
         char **list;
         int count;
-        prop->nitems = strlen((gpointer) prop->value);
+        prop->nitems = strlen((char *) prop->value);
 #ifdef X_HAVE_UTF8_STRING
         if (Xutf8TextPropertyToTextList (dpy, prop, &list, &count) >= Success)
         {
@@ -1396,7 +1396,7 @@ WINDOW. Returns the symbol `nil' if no such image.
        {
 	   Atom actual_type;
 	   int actual_format;
-	   long nitems, bytes_after;
+	   unsigned long nitems, bytes_after;
 	   union {
 	       unsigned long *l;
 	       unsigned char *c;
@@ -1411,7 +1411,7 @@ WINDOW. Returns the symbol `nil' if no such image.
 	   if (XGetWindowProperty (dpy, VWIN (win)->id, kwm_win_icon,
 				   0, 2, False, kwm_win_icon,
 				   &actual_type, &actual_format,
-				   (gpointer) &nitems, (gpointer) &bytes_after,
+				   &nitems, &bytes_after,
 				   &data.c) == Success
 	       && actual_type == kwm_win_icon
 	       && bytes_after == 0)

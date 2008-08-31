@@ -171,7 +171,8 @@ find_image_file (repv file, bool *deletep)
 }
 
 Pixmap
-make_bitmap (repv file, int *widthp, int *heightp, int *x_hotp, int *y_hotp)
+make_bitmap (repv file, unsigned *widthp, unsigned *heightp,
+             int *x_hotp, int *y_hotp)
 {
     bool delete;
     file = find_image_file (file, &delete);
@@ -179,7 +180,7 @@ make_bitmap (repv file, int *widthp, int *heightp, int *x_hotp, int *y_hotp)
     {
 	Pixmap bitmap;
 	int ret = XReadBitmapFile (dpy, root_window, rep_STR(file),
-				   (gpointer) widthp, (gpointer) heightp, &bitmap, x_hotp, y_hotp);
+				   widthp, heightp, &bitmap, x_hotp, y_hotp);
 
 	if (delete)
 	    Fdelete_file (file);

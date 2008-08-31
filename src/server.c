@@ -143,12 +143,12 @@ server_accept_connection(int unused_fd)
 {
     int confd;
     struct sockaddr_un addr;
-    int addr_len = sizeof (addr);
+    socklen_t addr_len;
 
     /* Linux manpage states that we can pass NULL for addr parameters,
        but that has been reported to crash on some systems.. */
 
-    confd = accept(socket_fd, (struct sockaddr *) &addr, (gpointer) &addr_len);
+    confd = accept(socket_fd, (struct sockaddr *) &addr, &addr_len);
 
     if(confd >= 0)
     {

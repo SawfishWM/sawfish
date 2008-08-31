@@ -189,7 +189,7 @@ extern int image_type;
 extern Colormap image_cmap;
 extern Visual *image_visual;
 extern int image_depth;
-extern Pixmap make_bitmap (repv file, int *widthp, int *heightp,
+extern Pixmap make_bitmap (repv file, unsigned *widthp, unsigned *heightp,
 			   int *x_hotp, int *y_hotp);
 extern repv Fmake_image (repv file, repv plist);
 extern repv Fmake_image_from_x_drawable (repv id, repv mask_id);

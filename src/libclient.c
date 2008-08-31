@@ -203,8 +203,8 @@ net_server_eval (char *form, int *lenp, int *errorp)
     unsigned long nitems;
     XEvent ev;
 
-    XChangeProperty (dpy, portal, xa_sawfish_request, XA_STRING,
-		     8, PropModeReplace, (gpointer) form, strlen (form));
+    XChangeProperty (dpy, portal, xa_sawfish_request, XA_STRING, 8,
+                     PropModeReplace, (unsigned char *) form, strlen (form));
     /* swallow the event created by the above */
     XWindowEvent (dpy, portal, PropertyChangeMask, &ev);
 
