@@ -742,19 +742,19 @@ static struct key_def default_codes[] = {
 /* Puts the integers defining the event described in DESC into CODE
    and MODS. */
 static bool
-lookup_event(unsigned long *code, unsigned long *mods, unsigned char *desc)
+lookup_event(unsigned long *code, unsigned long *mods, char *desc)
 {
     char *tem;
     char buf[100];
     *code = *mods = 0;
 
     /* First handle all modifiers */
-    while(*desc && (tem = strchr((gpointer) desc + 1, '-')) != 0)
+    while(*desc && (tem = strchr(desc + 1, '-')) != 0)
     {
 	struct key_def *x = default_mods;
 
-	memcpy(buf, desc, tem - (char *)desc);
-	buf[tem - (char *)desc] = 0;
+	memcpy(buf, desc, tem - desc);
+	buf[tem - desc] = 0;
 
 	while(x->name != 0)
 	{
@@ -777,7 +777,7 @@ lookup_event(unsigned long *code, unsigned long *mods, unsigned char *desc)
 	unsigned int ks;
 	while(x->name != 0)
 	{
-	    if(strcasecmp((gpointer) desc, x->name) == 0)
+	    if(strcasecmp(desc, x->name) == 0)
 	    {
 		*mods |= x->mods;
 		*code = x->code;
@@ -793,7 +793,7 @@ lookup_event(unsigned long *code, unsigned long *mods, unsigned char *desc)
 	    }
 	    x++;
 	}
-	ks = XStringToKeysym((gpointer) desc);
+	ks = XStringToKeysym(desc);
 	if(ks != NoSymbol)
 	{
 	    if (*mods & ShiftMask)
@@ -822,14 +822,16 @@ error:
 
 /* Constructs the name of the event defined by CODE and MODS in BUF.  */
 static bool
-lookup_event_name(unsigned char *buf, unsigned long code, unsigned long mods)
+lookup_event_name(char *buf, unsigned long code, unsigned long mods)
 {
     int i;
     struct key_def *x;
     unsigned long type = mods & EV_TYPE_MASK;
+    char
+        *end = buf,
+        *tem;
 
-    char *end = (gpointer) buf, *tem;
-    *buf = 0;
+    *buf = '\0';
 
     mods &= EV_MOD_MASK;
     for(i = 32; i >= 0 && mods != 0; i--)	/* magic numbers!? */
@@ -878,8 +880,8 @@ bool
 print_event_prefix(void)
 {
     int i;
-    unsigned char buf[256];
-    unsigned char *bufp = buf;
+    char buf[256];
+    char *bufp = buf;
 
     if (next_keymap_path == rep_NULL)
 	return FALSE;
@@ -891,7 +893,7 @@ print_event_prefix(void)
     {
 	if (lookup_event_name (bufp, event_buf[i], event_buf[i+1]))
 	{
-	    bufp += strlen ((gpointer) bufp);
+	    bufp += strlen (bufp);
 	    *bufp++ = ' ';
 	}
     }
@@ -905,7 +907,7 @@ print_event_prefix(void)
     }
 
     rep_call_lisp1 (global_symbol_value (Qdisplay_message),
-		    rep_string_dupn ((gpointer) buf, bufp - buf));
+		    rep_string_dupn (buf, bufp - buf));
     printed_this_prefix = TRUE;
 
     return TRUE;
@@ -949,7 +951,7 @@ Returns KEYMAP when successful.
 	args = rep_CDR(args);
 	if (rep_STRINGP(arg1))
 	{
-	    if (!lookup_event (&code, &mods, (gpointer) rep_STR(arg1)))
+	    if (!lookup_event (&code, &mods, rep_STR(arg1)))
 		return Fsignal (Qbad_event_desc, rep_LIST_1(arg1));
 	}
 	else if(Feventp(arg1) != Qnil)
@@ -996,7 +998,7 @@ unbind-keys KEY-MAP EVENT-DESCRIPTION...
 	arg1 = rep_CAR(args);
 	if (rep_STRINGP(arg1))
 	{
-	    if (!lookup_event (&code, &mods, (gpointer) rep_STR(arg1)))
+	    if (!lookup_event (&code, &mods, rep_STR(arg1)))
 		return Fsignal (Qbad_event_desc, rep_LIST_1(arg1));
 	}
 	else if(Feventp(arg1) != Qnil)
@@ -1066,16 +1068,16 @@ a Lisp function hadn't been called instead.
 ::end:: */
 {
     KeySym ks;
-    unsigned char buf[256];
+    char buf[256];
     int len;
 
     if(current_x_event == 0)
 	return Fsignal(Qerror, rep_LIST_1(rep_VAL(&not_in_handler)));
 
     len = XLookupString(&current_x_event->xkey,
-			 (gpointer) buf, sizeof (buf) - 1, &ks, NULL);
+                        buf, sizeof (buf) - 1, &ks, NULL);
     if(len > 0)
-	return rep_string_dupn((gpointer) buf, len);
+	return rep_string_dupn(buf, len);
     else
 	return rep_null_string();
 }
@@ -1172,14 +1174,14 @@ event-name EVENT
 Returns a string naming the event EVENT.
 ::end:: */
 {
-    unsigned char buf[256];
+    char buf[256];
     if(!EVENTP(ev))
 	return rep_signal_arg_error(ev, 1);
 
     if(lookup_event_name(buf, rep_INT(EVENT_CODE(ev)),
 			 rep_INT(EVENT_MODS(ev))))
     {
-	return rep_string_dup((gpointer) buf);
+	return rep_string_dup(buf);
     }
     else
 	return Qnil;
@@ -1195,7 +1197,7 @@ Return the event whose name is EVENT-NAME.
     unsigned long code, mods;
     rep_DECLARE1(name, rep_STRINGP);
 
-    if(lookup_event(&code, &mods, (gpointer) rep_STR(name)))
+    if(lookup_event(&code, &mods, rep_STR(name)))
 	return MAKE_EVENT(rep_MAKE_INT(code), rep_MAKE_INT(mods));
     else
 	return Qnil;

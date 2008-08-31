@@ -228,7 +228,8 @@ make-image-from-x-drawable ID [MASK-ID]
    Drawable d;
    Pixmap mask = 0;
    Window root;
-   int x, y, w, h, bdr, dp;
+   int x, y;
+   unsigned w, h, bdr, dp;
    image_t im;
 
    rep_DECLARE1 (id, rep_INTP);
@@ -236,7 +237,7 @@ make-image-from-x-drawable ID [MASK-ID]
    if (rep_INTP (mask_id))
        mask = rep_INT (mask_id);
 
-   if (!XGetGeometry (dpy, d, &root, &x, &y, (gpointer) &w, (gpointer) &h, (gpointer) &bdr, (gpointer) &dp))
+   if (!XGetGeometry (dpy, d, &root, &x, &y, &w, &h, &bdr, &dp))
        return Qnil;
 
 #if defined HAVE_IMLIB

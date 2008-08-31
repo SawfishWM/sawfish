@@ -1023,12 +1023,12 @@ specified font in the window associated with WINDOW.
     Drawable id = drawable_from_arg (window);
     int x = 0;
     int y = 0;
-    unsigned char *str;
+    char *str;
 
     rep_DECLARE (1, window, id != 0);
     rep_DECLARE (2, gc, X_VALID_GCP (gc, id));
     rep_DECLARE (3, xy, rep_CONSP (xy)
-		 && rep_INTP (rep_CAR (xy)) && rep_INTP (rep_CDR (xy)));
+                 && rep_INTP (rep_CAR (xy)) && rep_INTP (rep_CDR (xy)));
     rep_DECLARE4 (string, rep_STRINGP);
     if (font == Qnil)
 	font = global_symbol_value (Qdefault_font);
@@ -1036,10 +1036,10 @@ specified font in the window associated with WINDOW.
 
     x = rep_INT (rep_CAR (xy));
     y = rep_INT (rep_CDR (xy));
-    str = (gpointer) rep_STR (string);
+    str = rep_STR (string);
 
     x_draw_string (id, font, VX_GC (gc)->gc,
-		   &VX_GC (gc)->fg_copy, x, y, str, strlen ((gpointer) str));
+                   &VX_GC (gc)->fg_copy, x, y, str, strlen (str));
     return Qt;
 }
 

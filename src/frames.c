@@ -722,7 +722,7 @@ set_frame_part_fg (struct frame_part *fp)
 		length = rep_STRING_LEN(result);
 	    }
 
-	    width = x_text_width (font, (gpointer) rep_STR(string), length);
+	    width = x_text_width (font, rep_STR(string), length);
 	    height = VFONT(font)->ascent + VFONT(font)->descent;
 	}
 
@@ -831,7 +831,7 @@ set_frame_part_fg (struct frame_part *fp)
 
 	    x_draw_string (fp->id, font, fp->gc, VCOLOR(fg),
 			   x, y + VFONT(font)->ascent,
-			   (gpointer) rep_STR(string), length);
+                           rep_STR(string), length);
 
 	    fp->drawn.text = string;
 	}

@@ -691,7 +691,7 @@ symbols, representing the atoms read.
 	int i;
 
     case 8:
-	ret_data = rep_string_dupn ((gpointer) data, nitems);
+	ret_data = rep_string_dupn ((char *) data, nitems);
 	break;
 
     case 16:
@@ -778,7 +778,7 @@ converted to their numeric X atoms.
 
     case 8:
 	if (rep_STRINGP(data))
-	    c_data = (gpointer) rep_STR (data);
+	    c_data = (unsigned char *) rep_STR (data);
 	else
 	{
 	    c_data = alloca (nitems);
@@ -1090,7 +1090,7 @@ refresh_message_window ()
 		offset = MSG_PAD_X;
 	    else
 	    {
-		int width = x_text_width (message.font, (gpointer) ptr, end - ptr);
+		int width = x_text_width (message.font, ptr, end - ptr);
 		if (message.justify == Qright)
 		    offset = message.width - (width + MSG_PAD_X);
 		else
@@ -1102,7 +1102,7 @@ refresh_message_window ()
 			   + row * (VFONT(message.font)->ascent
 				    + VFONT(message.font)->descent
 				    + message.spacing)
-			   + VFONT(message.font)->ascent, (gpointer) ptr, end - ptr);
+			   + VFONT(message.font)->ascent, ptr, end - ptr);
 	    row++;
 	    ptr = end;
 	    if (*ptr == '\n')
@@ -1223,7 +1223,7 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 		char *end = strchr (ptr, '\n');
 		if (end == 0)
 		  end = ptr + strlen (ptr);
-		text_width = x_text_width (message.font, (gpointer) ptr, end - ptr);
+		text_width = x_text_width (message.font, ptr, end - ptr);
 		max_width = MAX(max_width, text_width);
 		rows++;
 		ptr = end;

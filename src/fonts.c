@@ -72,8 +72,8 @@ struct Lisp_Font_Class_struct {
     const char *type;
     bool (*load) (Lisp_Font *f);
     void (*finalize) (Lisp_Font *f);
-    int (*measure) (Lisp_Font *f, unsigned char *string, size_t length);
-    void (*draw) (Lisp_Font *f, unsigned char *string, size_t length,
+    int (*measure) (Lisp_Font *f, char *string, size_t length);
+    void (*draw) (Lisp_Font *f, char *string, size_t length,
 		  Window id, GC gc, Lisp_Color *fg, int x, int y);
 };
 
@@ -104,13 +104,13 @@ fontstruct_finalize (Lisp_Font *f)
 }
 
 static int
-fontstruct_measure (Lisp_Font *f, unsigned char *string, size_t length)
+fontstruct_measure (Lisp_Font *f, char *string, size_t length)
 {
-    return XTextWidth (f->font, (gpointer) string, length);
+    return XTextWidth (f->font, string, length);
 }
 
 static void
-fontstruct_draw (Lisp_Font *f, unsigned char *string, size_t length,
+fontstruct_draw (Lisp_Font *f, char *string, size_t length,
 		 Window id, GC gc, Lisp_Color *fg, int x, int y)
 {
     XFontStruct *fs;
@@ -122,7 +122,7 @@ fontstruct_draw (Lisp_Font *f, unsigned char *string, size_t length,
     gcv.font = fs->fid;
     XChangeGC (dpy, gc, GCForeground | GCFont, &gcv);
 
-    XDrawString (dpy, id, gc, x, y, (gpointer) string, length);
+    XDrawString (dpy, id, gc, x, y, string, length);
 }
 
 static const Lisp_Font_Class fontstruct_class = {
@@ -309,17 +309,17 @@ fontset_finalize (Lisp_Font *f)
 }
 
 static int
-fontset_measure (Lisp_Font *f, unsigned char *string, size_t length)
+fontset_measure (Lisp_Font *f, char *string, size_t length)
 {
 #ifdef X_HAVE_UTF8_STRING
-    return Xutf8TextEscapement (f->font, (gpointer) string, length);
+    return Xutf8TextEscapement (f->font, string, length);
 #else
     return XmbTextEscapement (f->font, string, length);
 #endif
 }
 
 static void
-fontset_draw (Lisp_Font *f, unsigned char *string, size_t length,
+fontset_draw (Lisp_Font *f, char *string, size_t length,
 	      Window id, GC gc, Lisp_Color *fg, int x, int y)
 {
     XGCValues gcv;
@@ -327,7 +327,7 @@ fontset_draw (Lisp_Font *f, unsigned char *string, size_t length,
     gcv.foreground = fg->pixel;
     XChangeGC (dpy, gc, GCForeground, &gcv);
 #ifdef X_HAVE_UTF8_STRING
-    Xutf8DrawString (dpy, id, f->font, gc, x, y, (gpointer) string, length);
+    Xutf8DrawString (dpy, id, f->font, gc, x, y, string, length);
 #else
     XmbDrawString (dpy, id, f->font, gc, x, y, string, length);
 #endif
@@ -368,17 +368,17 @@ xft_finalize (Lisp_Font *f)
 }
 
 static int
-xft_measure (Lisp_Font *f, unsigned char *string, size_t length)
+xft_measure (Lisp_Font *f, char *string, size_t length)
 {
     XGlyphInfo info;
 
-    XftTextExtentsUtf8 (dpy, f->font, string, length, &info);
+    XftTextExtentsUtf8 (dpy, f->font, (FcChar8 *)string, length, &info);
 
     return info.xOff; 
 }
 
 static void
-xft_draw (Lisp_Font *f, unsigned char *string, size_t length,
+xft_draw (Lisp_Font *f, char *string, size_t length,
 	  Window id, GC gc, Lisp_Color *fg, int x, int y)
 {
     static XftDraw *draw;
@@ -397,7 +397,7 @@ xft_draw (Lisp_Font *f, unsigned char *string, size_t length,
     xft_color.color.alpha = fg->alpha;
 
     XftDrawStringUtf8 (draw, &xft_color, f->font,
-		    x, y, string, length);
+                       x, y, (FcChar8 *)string, length);
 }
 
 static const Lisp_Font_Class xft_class = {
@@ -485,14 +485,14 @@ pango_finalize (Lisp_Font *f)
 }
 
 static int
-pango_measure (Lisp_Font *f, unsigned char *string, size_t length)
+pango_measure (Lisp_Font *f, char *string, size_t length)
 {
     PangoLayout *layout;
     PangoRectangle rect;
 
     layout = pango_layout_new (pango_context);
     pango_layout_set_font_description(layout, f->font);
-    pango_layout_set_text (layout, (gpointer) string, length);
+    pango_layout_set_text (layout, string, length);
 
     pango_layout_get_extents (layout, NULL, &rect);
 
@@ -527,7 +527,7 @@ pango_draw_line (XftDraw *draw, Window id, GC gc, XftColor *xft_color,
 }
 
 static void
-pango_draw (Lisp_Font *f, unsigned char *string, size_t length,
+pango_draw (Lisp_Font *f, char *string, size_t length,
 	    Window id, GC gc, Lisp_Color *fg, int x, int y)
 {
     static XftDraw *draw;
@@ -548,7 +548,7 @@ pango_draw (Lisp_Font *f, unsigned char *string, size_t length,
 
     layout = pango_layout_new (pango_context);
     pango_layout_set_font_description(layout, f->font);
-    pango_layout_set_text (layout, (gpointer) string, length);
+    pango_layout_set_text (layout, string, length);
     iter = pango_layout_get_iter (layout);
 
     do {
@@ -791,7 +791,7 @@ Return t if ARG is a font object.
 }
 
 int
-x_text_width (repv font, unsigned char *string, size_t len)
+x_text_width (repv font, char *string, size_t len)
 {
     return (*VFONT (font)->class->measure) (VFONT (font), string, len);
 }
@@ -799,7 +799,7 @@ x_text_width (repv font, unsigned char *string, size_t len)
 /* The foreground pixel of GC is undefined after this function returns. */
 void
 x_draw_string (Window id, repv font, GC gc, Lisp_Color *fg_color,
-	       int x, int y, unsigned char *string, size_t len)
+	       int x, int y, char *string, size_t len)
 {
     (*VFONT (font)->class->draw) (VFONT (font), string, len,
 				  id, gc, fg_color, x, y);
@@ -817,7 +817,7 @@ the text STRING using font object FONT (or the default-font).
     if (font == Qnil)
 	font = global_symbol_value (Qdefault_font);
     rep_DECLARE2(font, FONTP);
-    return rep_MAKE_INT (x_text_width (font, (gpointer) rep_STR(string),
+    return rep_MAKE_INT (x_text_width (font, rep_STR(string),
 				       rep_STRING_LEN(string)));
 }
 

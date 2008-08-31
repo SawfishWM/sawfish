@@ -67,7 +67,7 @@ static char * (*eval_fun)(char *form, int *lenp, int *errorp);
 static char *
 system_name(void)
 {
-    unsigned char buf[256];
+    char buf[256];
     struct hostent *h;
 
     static char *system_name;
@@ -75,7 +75,7 @@ system_name(void)
 	return system_name;
 
 #ifdef HAVE_GETHOSTNAME
-    if(gethostname((gpointer) buf, 256))
+    if(gethostname(buf, 256))
 	return rep_NULL;
 #else
     {
@@ -84,7 +84,7 @@ system_name(void)
 	strncpy(buf, uts.nodename, 256);
     }
 #endif
-    h = gethostbyname((gpointer) buf);
+    h = gethostbyname(buf);
     if(h)
     {
 	if(!strchr(h->h_name, '.'))
@@ -100,7 +100,7 @@ system_name(void)
 	    system_name = strdup(h->h_name);
     }
     else
-	system_name = strdup((gpointer) buf);
+	system_name = strdup(buf);
     return system_name;
 }
 
