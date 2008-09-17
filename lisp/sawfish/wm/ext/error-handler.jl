@@ -1,5 +1,5 @@
 ;; error-handler.jl -- replace the standard rep error handler
-;; $Id$
+;; $Id: error-handler.jl,v 1.7 2002/04/21 03:39:34 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -43,7 +43,7 @@
 
   (defcustom error-destination 'standard-error
     "Display error messages to: \\w"
-    :type (choice nowhere screen standard-error)
+    :type (choice nowhere screen standard-error both)
     :group (misc error-handling))
 
   ;; ring buffer for containing error messages
@@ -68,6 +68,10 @@
 	((screen)
 	 (display-message text))
 	((standard-error)
+	 (write standard-error text)
+	 (write standard-error #\newline))
+	((both)
+	 (display-message text)
 	 (write standard-error text)
 	 (write standard-error #\newline)))))
 
