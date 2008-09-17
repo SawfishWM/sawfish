@@ -1,5 +1,5 @@
 ;; compat.jl -- aliases for obsolete functions
-;; $Id$
+;; $Id: compat.jl,v 1.18 2002/04/21 23:11:40 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -96,7 +96,7 @@
 
   (mapc (lambda (x)
 	  (put x 'custom-obsolete t))
-	'(viewport-columns viewport-rows viewport-dimensions
+	'(viewport-columns viewport-rows
 	  preallocated-workspaces iconify-whole-group
 	  uniconify-whole-group always-update-frames
 	  cycle-disable-auto-raise cycle-show-window-icons
