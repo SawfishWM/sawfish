@@ -1,5 +1,5 @@
 ;; viewport-linear.jl -- linear address of viewports
-;; $Id$
+;; $Id: viewport-linear.jl,v 1.10 2002/04/21 22:25:12 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -49,7 +49,7 @@
   (define-command 'set-viewport-linear set-viewport-linear
     #:spec "NIndex:"
     #:type `(and (labelled ,(_ "Index:") (number 0)))
-    #:class 'viewport)
+    #:class 'default)
 
   ;; Move window to viewport INDEX using linear addressing
   (define (set-window-viewport-linear index)
@@ -61,7 +61,7 @@
   (define-command 'set-window-viewport-linear set-window-viewport-linear
     #:spec "NIndex:"
     #:type `(and (labelled ,(_ "Index:") (number 0)))
-    #:class 'viewport)
+    #:class 'default)
 
   (define (define-linear-viewport-commands index)
     (let ((fn (lambda (base)
@@ -81,21 +81,21 @@
       ((= i viewport-linear-last))
     (define-linear-viewport-commands i)))
 
-;;###autoload (autoload-command 'set-viewport-linear:1 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-window-viewport-linear:1 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-viewport-linear:2 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-window-viewport-linear:2 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-viewport-linear:3 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-window-viewport-linear:3 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-viewport-linear:4 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-window-viewport-linear:4 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-viewport-linear:5 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-window-viewport-linear:5 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-viewport-linear:6 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-window-viewport-linear:6 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-viewport-linear:7 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-window-viewport-linear:7 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-viewport-linear:8 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-window-viewport-linear:8 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-viewport-linear:9 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
-;;###autoload (autoload-command 'set-window-viewport-linear:9 'sawfish.wm.commands.viewport-linear #:class 'deprecated)
+;;###autoload (autoload-command 'set-viewport-linear:1 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:1 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:2 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:2 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:3 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:3 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:4 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:4 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:5 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:5 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:6 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:6 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:7 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:7 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:8 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:8 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-viewport-linear:9 'sawfish.wm.commands.viewport-linear)
+;;###autoload (autoload-command 'set-window-viewport-linear:9 'sawfish.wm.commands.viewport-linear)
