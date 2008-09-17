@@ -1,5 +1,5 @@
 ;; sawmill-default.jl -- default user startup
-;; $Id$
+;; $Id: defaults.jl,v 1.20 2002/04/20 20:59:15 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -40,3 +40,6 @@
 
 ;; save errors to aid debugging
 (require 'sawfish.wm.ext.error-handler)
+
+;; load edge-fliping support
+(require 'sawfish.wm.ext.edge-flip)

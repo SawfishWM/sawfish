@@ -116,7 +116,7 @@
 	  move-resize-inhibit-configure move-snap-edges
 	  raise-windows-when-unshaded persistent-group-ids
 	  delete-workspaces-when-empty transients-on-parents-workspace
-	  edge-flip-delay audio-for-ignored-windows
+         audio-for-ignored-windows
 	  size-window-def-increment slide-window-increment
 	  default-bevel-percent sp-padding nokogiri-user-level
 	  nokogiri-buttons workspace-boundary-mode

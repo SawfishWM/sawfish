@@ -1,5 +1,5 @@
 ;; edge-flip.jl -- move viewports by pushing pointer against screen edges
-;; $Id$
+;; $Id: edge-flip.jl,v 1.31 2002/08/18 21:30:05 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -66,8 +66,12 @@
     :group (workspace edge-flip)
     :after-set (lambda () (edge-flip-enable)))
 
-  (defvar edge-flip-delay 250
-    "Milliseconds to delay before edge flipping.")
+  (defcustom edge-flip-delay 250
+    "Milliseconds to delay before edge flipping."
+    :type number
+    :depends edge-flip-enabled
+    :group (workspace edge-flip)
+    :after-set (lambda () (edge-flip-enable)))
 
   (define ef-current-edge nil)
   (define ef-timer nil)
