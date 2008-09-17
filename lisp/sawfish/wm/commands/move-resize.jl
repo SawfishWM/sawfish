@@ -1,5 +1,5 @@
 ;; move-resize.jl -- interactive moving and resizing of windows
-;; $Id$
+;; $Id: move-resize.jl,v 1.91 2002/05/29 06:39:02 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -54,8 +54,10 @@
   (defvar resize-outline-mode 'opaque
     "How windows being resized are animated, either `opaque' or `box'")
   
-  (defvar move-resize-raise-window nil
-    "Raise windows when they are moved or resized.")
+  (defcustom move-resize-raise-window nil
+    "Raise windows when they are moved or resized."
+    :type boolean
+    :group move)
   
   (defcustom move-show-position nil
     "Show current position of windows while moving."
@@ -67,9 +69,10 @@
     :group move
     :type boolean)
   
-  (defvar resize-edge-mode 'border-grab
-    "How to choose window edges when resizing. One of `region', `border',
-`grab', `border-grab'")
+  (defcustom resize-edge-mode 'border-grab
+    "How to choose window edges when resizing."
+    :type (choice region border grab border-grab)
+    :group move)
   
   (defcustom move-snap-epsilon 12
     "Distance in pixels before window edges align with each other."
