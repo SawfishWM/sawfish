@@ -1,5 +1,5 @@
 ;; tooltips.jl -- display frame-part keymap descriptions
-;; $Id$
+;; $Id: tooltips.jl,v 1.33 2004/01/06 06:48:02 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -31,6 +31,7 @@
 	  rep.io.timers
 	  sawfish.wm.commands
 	  sawfish.wm.custom
+	  sawfish.wm.colors
 	  sawfish.wm.misc
 	  sawfish.wm.windows
 	  sawfish.wm.frames
@@ -59,20 +60,35 @@
     :depends tooltips-enabled
     :group (misc tooltips))
 
-  (defvar tooltips-delay 500
-    "Number of milliseconds before displaying tooltips.")
+  (defcustom tooltips-delay 500
+    "Number of milliseconds before displaying tooltips."
+    :type number
+    :depends tooltips-enabled
+    :group (misc tooltips))
 
-  (defvar tooltips-timeout-delay 5000
-    "Number of milliseconds before removing tooltips.")
+  (defcustom tooltips-timeout-delay 5000
+    "Number of milliseconds before removing tooltips."
+    :type number
+    :depends tooltips-enabled
+    :group (misc tooltips))
 
-  (defvar tooltips-font nil
-    "Font used to display tooltips, or nil for default.")
+  (defcustom tooltips-font default-font
+    "Font used to display tooltips, or nil for default."
+    :type font
+    :depends tooltips-enabled
+    :group (misc tooltips))
 
-  (defvar tooltips-background-color "grey85"
-    "Color used for the tooltips background")
+  (defcustom tooltips-background-color "grey85"
+    "Color used for the tooltips background"
+    :type color
+    :depends tooltips-enabled
+    :group (misc tooltips))
 
-  (defvar tooltips-foreground-color "black"
-    "Color used for the tooltips foreground")
+  (defcustom tooltips-foreground-color "black"
+    "Color used for the tooltips foreground"
+    :type color
+    :depends tooltips-enabled
+    :group (misc tooltips))
 
 ;;; displaying tooltips
 

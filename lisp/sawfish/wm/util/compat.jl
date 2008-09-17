@@ -112,9 +112,6 @@
 	  warp-to-selected-windows menus-include-shortcuts
 	  configure-auto-gravity configure-ignore-stacking-requests
 	  beos-window-menu-simplifies customize-show-symbols
-	  tooltips-timeout-enabled tooltips-delay
-	  tooltips-timeout-delay tooltips-font
-	  tooltips-foreground-color tooltips-background-color
 	  move-snap-mode move-snap-ignored-windows
 	  move-resize-inhibit-configure move-snap-edges
 	  raise-windows-when-unshaded persistent-group-ids
