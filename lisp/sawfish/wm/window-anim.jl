@@ -1,5 +1,5 @@
 ;; window-anim.jl -- visual feedback for window actions
-;; $Id$
+;; $Id: window-anim.jl,v 1.6 2002/04/21 04:52:13 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -37,11 +37,10 @@
   (define window-animators nil
     "List of all possible window animation types.")
 
-  ;; this used to be a defcustom, and I don't have anything against
-  ;; that, except the current animations are so lame it's embarassing
-
-  (defvar default-window-animator 'none
-    "The default window animation mode")
+  (defcustom default-window-animator 'none
+    "The default window animation mode"
+    :type (choice none solid wireframe)
+    :group move)
 
 ;;; animator registration
 
