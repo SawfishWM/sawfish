@@ -6,6 +6,40 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+@heading 1.3.4-experimental
+
+@itemize @bullet
+
+@item The sawfish-experimental 1.3.4 release has new features added for testing purposes
+
+@item New features:
+@itemize @minus
+
+@item Option to warp mouse cursor to active window has been exposed in configurator, by Christopher Bratusek
+
+@item When window is unmaximized it doesn't lose focus now, even if mouse pointer is outside the unmaximized window. But instead the mouse pointer is wrapped to this window (when this option is enabled), by Fernando Carmona Varo.
+
+@item An option allowing to warp the mouse pointer to windows while cycling was added, by Christopher Bratusek.
+
+@item Added an option for smooth animation when changing viewports (using specified number of steps), by Fernando Carmona Varo.
+
+@item Re-expose hidden options in sawfish-ui configurator by Christopher Bratusek: viewport bindings and dimensions, window animation options, tooltips options, window movement outline modes, move/resize options and edge-flip delay.
+
+@item A new error handler which allows printing errors to both: a file and onto screen dialog box, by Christopher Bratusek.
+
+@item A new hook after raise/lower window has been added, for future extensibility of tabbed windowing, by Fernando Carmona Varo.
+
+@end itemize
+
+@item Bug fixes:
+@itemize @minus
+
+@item Another code cleanup by Christopher Bratusek.
+
+@end itemize
+@end itemize
+
+
 @heading 1.3.4
 
 @itemize @bullet
