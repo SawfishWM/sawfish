@@ -70,12 +70,17 @@
   (defvar ignore-window-input-hint nil
     "Give focus to windows even when they haven't asked for it.")
 
-  (defvar warp-to-window-offset (cons -1 -1)
-    "Offset (%) from window edges when warping pointer. A negative number
-means outside the left window edge.")
+  (defgroup warp "Warping" :group misc)
 
-  (defvar warp-to-window-enabled nil
-    "When false, disable warping the cursor to windows.")
+  (defcustom warp-to-window-offset (cons -1 -1)
+    "Offset (%) from window edges when warping pointer."
+    :type (pair (number 1) (number 1))
+    :group (misc warp))
+
+  (defcustom warp-to-window-enabled nil
+    "When false, disable warping the cursor to windows."
+    :type boolean
+    :group (misc warp))
  
   (defvar dont-avoid-ignored t
     "When non-nil, ignored windows aren't avoided by default.")
