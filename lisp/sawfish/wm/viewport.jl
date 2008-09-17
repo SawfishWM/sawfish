@@ -55,6 +55,12 @@
 
   (defvar uniconify-to-current-viewport t
     "Windows uniconify to the current viewport.")
+  
+  (defcustom scroll-viewport-steps 5
+    "Number of steps in which to scroll between viewports (less steps = faster scrolling)."
+    :group workspace
+    :type number
+    :range (1 . 100))
 
 
 ;;; raw viewport handling
@@ -62,7 +68,8 @@
   (defvar viewport-x-offset 0)
   (defvar viewport-y-offset 0)
 
-  (define (set-viewport x y)
+  (define (warp-viewport x y)
+    "Change view by incrementing the coordinates of the x,y position."
     ;; move W to its new position
     (define (move-window w)
       (unless (window-get w 'sticky-viewport)
@@ -91,6 +98,19 @@
       (setq viewport-x-offset x)
       (setq viewport-y-offset y)
       (call-hook 'viewport-moved-hook)))
+
+  (define (set-viewport x y)
+    "Scroll viewport view by incrementing the coordinates of the x,y position.
+The scrolling makes a number of increments equal to `scroll-viewport-steps'."
+    (let ((step-count scroll-viewport-steps)
+          (xstep (quotient (- x viewport-x-offset) scroll-viewport-steps))
+          (ystep (quotient (- y viewport-y-offset) scroll-viewport-steps)))
+      (when (= xstep ystep 0)
+        (setq step-count 0))
+      (while (> step-count 1)
+        (warp-viewport (+ viewport-x-offset xstep) (+ viewport-y-offset ystep))
+        (setq step-count (1- step-count)))
+      (warp-viewport x y)))
 
   (define (viewport-before-exiting)
     (set-screen-viewport 0 0))
