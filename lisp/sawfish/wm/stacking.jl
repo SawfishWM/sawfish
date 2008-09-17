@@ -67,13 +67,28 @@
     (let ((tem (gensym)))
       `(let ((,tem (stacking-order)))
 	 (unwind-protect
-	     (progn ,@forms)
-	   (restack-windows ,tem)))))
+            (progn ,@forms)
+          (restack-windows ,tem)))))
+
+  (defvar before-raise-window-hook '()
+    "List of functions called before a window is raised. Each is called
+with the raised window as arg.")
+
+  (defvar before-lower-window-hook '()
+    "List of functions called before a window is lowered. Each is called
+with the lowered window as arg.")
+
+  (defvar after-raise-window-hook '()
+    "List of functions called after a window is raised. Each is called
+with the raised window as arg.")
+
+  (defvar after-lower-window-hook '()
+    "List of functions called after a window is lowered. Each is called
+with the lowered window as arg.")
 
   ;; this will always return an integer
   (define (window-depth w) (window-get w 'depth))
 
-
 ;;; constraint mechanics (predicates actually..)
 
   (define (stacking-constraint:layer w)
@@ -263,6 +278,7 @@ distinction, window-obscured should be faster."
 
   (define (raise-window w)
     "Raise the window to its highest allowed position in the stacking order."
+    (call-window-hook 'before-raise-window-hook w)
     ;; work downwards from top
     (let ((constraint (make-constraint w))
 	  (stack (cons '() (delq w (stacking-order)))))
@@ -276,10 +292,12 @@ distinction, window-obscured should be faster."
 	       nil)
 	      (t
 	       (stack-rotate-downwards stack)
-	       (loop))))))
+               (loop)))))
+    (call-window-hook 'after-raise-window-hook w))
 
   (define (lower-window w)
     "Lower the window to its lowest allowed position in the stacking order."
+    (call-window-hook 'before-lower-window-hook w)
     (let ((constraint (make-constraint w))
 	  (stack (cons (nreverse (delq w (stacking-order))) '())))
       ;; work upwards from bottom
@@ -294,7 +312,9 @@ distinction, window-obscured should be faster."
 	       nil)
 	      (t
 	       (stack-rotate-upwards stack)
-	       (loop))))))
+               (loop)))))
+    (call-window-hook 'after-lower-window-hook w))
+
 
   (define (stack-window-above above below)
     "Change the stacking of window ABOVE so that it is as closely above window

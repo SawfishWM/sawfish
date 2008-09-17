@@ -49,6 +49,10 @@
 	* lisp/sawfish/wm/windows.jl: Expose warp-pointer by Christopher
 	Bratusek. Add a way to setup the warping functions from withing the
 	UI.
+	* lisp/sawfish/wm/stacking.jl: After raise/lower-window hooks by
+	Fernando Carmona Varo. This adds two new window hooks:
+	'after-raise-window-hook' and 'after-lower-window-hook' which are
+	called at the end of raise-window and lower-window respectively.
 
 2008-08-29  Janek Kozicki <cosurgi@gmail.com>
 	* lisp/sawfish/wm/commands/grow-pack.jl
