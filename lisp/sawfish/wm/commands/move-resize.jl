@@ -48,11 +48,15 @@
   ;; todo:
   ;;  * obey the aspect ratio size hints
 
-  (defvar move-outline-mode 'opaque
-    "How windows being moved are animated, either `opaque' or `box'")
+  (defcustom move-outline-mode 'opaque
+    "How windows being moved are animated"
+    :type (choice opaque box)
+    :group move)
   
-  (defvar resize-outline-mode 'opaque
-    "How windows being resized are animated, either `opaque' or `box'")
+  (defcustom resize-outline-mode 'opaque
+    "How windows being resized are animated"
+    :type (choice opaque box)
+    :group move)
   
   (defcustom move-resize-raise-window nil
     "Raise windows when they are moved or resized."

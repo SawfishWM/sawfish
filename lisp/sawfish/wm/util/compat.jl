@@ -125,7 +125,7 @@
 	  nokogiri-buttons workspace-boundary-mode
 	  workspace-send-boundary-mode lock-first-workspace
 	  ignore-window-input-hint
-         move-outline-mode resize-outline-mode
+         
          workspace-geometry
 	  pointer-motion-threshold ignore-program-positions))
 
