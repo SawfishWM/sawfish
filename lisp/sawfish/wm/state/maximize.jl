@@ -65,7 +65,8 @@
 	  sawfish.wm.util.display-window
 	  sawfish.wm.util.stacking
 	  sawfish.wm.frames
-	  sawfish.wm.misc)
+	  sawfish.wm.misc
+	  sawfish.wm.focus)
 
   (define-structure-alias maximize sawfish.wm.state.maximize)
 
@@ -406,6 +407,7 @@
 		  (not (window-maximized-horizontally-p w))
 		  (not (window-maximized-fullscreen-p w)))
 	 (discard-unmaximized-geometry w))))
+    (warp-pointer-if-necessary w)
     (call-window-hook 'window-unmaximized-hook w (list direction))
     (call-window-hook 'window-state-change-hook w (list '(maximized))))
 

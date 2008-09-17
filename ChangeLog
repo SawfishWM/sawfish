@@ -38,6 +38,11 @@
 	window-plist and window-remprop patch by Teika and Timo broke building
 	with "-Wall -ansi -pedantic". Make it work again. (also requires
 	librep r2925 - or newer).
+	* lisp/sawfish/wm/state/maximize.jl: Warp-if-necessary when
+	unmaximizing by Fernando Carmona Varo. When window is unmaximized it
+	doesn't lose focus now, even if mouse pointer is outside the
+	unmaximized window. But instead the mouse pointer is wrapped to this
+	window.
 
 
 
