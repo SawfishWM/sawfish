@@ -129,7 +129,7 @@ PKG_CHECK_MODULES(XFT, xft >= 1.0,
 CPPFLAGS="${_cppflags}"
 
 dnl Checks for pango
-PKG_CHECK_MODULES(PANGO, pango >= 1.16.0,
+PKG_CHECK_MODULES(PANGO, pango >= 1.8.0,
   [if $PKG_CONFIG --exists pangoxft; then
      AC_DEFINE(HAVE_PANGO_XFT, 1)
      PANGO_MODULES="pangoxft pangox"
