@@ -80,14 +80,15 @@ DEFSYM(south_east, "south-east");
 
 static repv gravity_map[StaticGravity+1];
 
-// In sawfish-1.3.3, the only callback used is keymap_prop_change. 
+/* In sawfish-1.3.3, the only callback used is keymap_prop_change. */
+
+static struct prop_handler *prop_handlers;
+
 struct prop_handler {
     struct prop_handler *next;
     repv prop;
     void (*callback) (Lisp_Window *w, repv prop, repv old, repv new);
 };
-
-static struct prop_handler *prop_handlers;
 
 
 /* utilities */
