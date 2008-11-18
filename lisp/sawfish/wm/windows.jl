@@ -39,6 +39,7 @@
 	     warp-cursor-to-window
 	     activate-window
 	     constrain-dimension-to-hints
+	     constrain-aspect-to-hints
 	     resize-window-with-hints
 	     resize-window-with-hints*
 	     window-gravity
@@ -264,6 +265,13 @@ specified by the user."
 	  (setq x (inexact->exact
 		   (+ (* (ceiling (/ (- x bottom) inc)) inc) bottom)))))
       (clamp x (or minimum base 1) maximum)))
+
+  (define (constrain-aspect-to-hints a old-b dimension min-aspect max-aspect)
+    (let ((min-ratio (/ (cadr min-aspect) (cddr min-aspect)))
+          (max-ratio (/ (cadr max-aspect) (cddr min-aspect))))
+      (if (eq dimension 'y)
+          (clamp old-b (floor (* a min-ratio)) (floor (* a max-ratio)))
+        (clamp old-b (floor (/ a max-ratio)) (floor (/ a min-ratio))))))
 
   (define (resize-window-with-hints w cols rows #!optional hints)
     "Resize window W to COLS x ROWS, using the window's size hints to define

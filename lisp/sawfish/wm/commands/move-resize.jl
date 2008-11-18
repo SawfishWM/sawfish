@@ -1,5 +1,5 @@
 ;; move-resize.jl -- interactive moving and resizing of windows
-;; $Id$
+;; $Id: move-resize.jl,v 1.91 2002/05/29 06:39:02 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -308,7 +308,10 @@
 		 ((x-base (or (cdr (assq 'base-width move-resize-hints)) 0))
 		  (x-inc (or (cdr (assq 'width-inc move-resize-hints)) 1))
 		  (y-base (or (cdr (assq 'base-height move-resize-hints)) 0))
-		  (y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1)))
+		  (y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1))
+		  (min-aspect (assq 'min-aspect move-resize-hints))
+		  (max-aspect (assq 'max-aspect move-resize-hints)))
+               
 	       (when (memq resize-edge-mode '(grab border-grab))
 		 (add-edges ptr-x ptr-y))
 	       (cond
@@ -317,13 +320,23 @@
 		       (constrain-dimension-to-hints
 			(+ move-resize-old-width
 			   (- ptr-x move-resize-old-ptr-x))
-			'x move-resize-hints)))
+			'x move-resize-hints))
+                 (when (or min-aspect max-aspect)
+                   (setq move-resize-height
+                         (constrain-aspect-to-hints
+                          move-resize-width
+                          move-resize-old-height 'x min-aspect max-aspect))))
+                
 		((memq 'left move-resize-moving-edges)
 		 (setq move-resize-width
 		       (constrain-dimension-to-hints
 			(+ move-resize-old-width
-			   (- move-resize-old-ptr-x ptr-x))
-			'x move-resize-hints))
+			   (- move-resize-old-ptr-x ptr-x)) 'x move-resize-hints))
+                 (when (or min-aspect max-aspect)
+                   (setq move-resize-height
+                         (constrain-aspect-to-hints
+                          move-resize-width
+                          move-resize-old-height 'x min-aspect max-aspect)))
 		 (setq move-resize-x (- move-resize-old-x
 					(- move-resize-width
 					   move-resize-old-width)))))
@@ -333,13 +346,24 @@
 		       (constrain-dimension-to-hints
 			(+ move-resize-old-height
 			   (- ptr-y move-resize-old-ptr-y))
-			'y move-resize-hints)))
+			'y move-resize-hints))
+                 (when (or min-aspect max-aspect)
+                   (setq move-resize-width
+                         (constrain-aspect-to-hints
+                          move-resize-height
+                          move-resize-old-width 'y min-aspect max-aspect)))
+                 )
 		((memq 'top move-resize-moving-edges)
 		 (setq move-resize-height
 		       (constrain-dimension-to-hints
 			(+ move-resize-old-height
 			   (- move-resize-old-ptr-y ptr-y))
 			'y move-resize-hints))
+                 (when (or min-aspect max-aspect)
+                   (setq move-resize-width
+                         (constrain-aspect-to-hints
+                          move-resize-height
+                          move-resize-old-width 'y min-aspect max-aspect)))
 		 (setq move-resize-y (- move-resize-old-y
 					(- move-resize-height
 					   move-resize-old-height)))))
