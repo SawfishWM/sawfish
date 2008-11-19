@@ -3,10 +3,10 @@
 @settitle sawfish Programming Manual
 @footnotestyle end
 
-@set EDITION 0.12
-@set VERSION 1.3.2
-@set UPDATED 2 July 2007
-@set UPDATE-MONTH July 2007
+@set EDITION 0.13
+@set VERSION 1.3.4
+@set UPDATED 18 Nov 2008
+@set UPDATE-MONTH Nov 2008
 
 @ifinfo
 @direntry
@@ -2035,56 +2035,252 @@ All five of the flags are available through the window menu's
 @cindex Windows, maximizing
 
 The dimensions of a window may be temporarily @dfn{maximized},
-stretching as far as possible across the screen in one or two
-dimensions.
+stretching as far as possible in one or two dimensions, subject to
+various constraints.
+
+ defun window-maximizable-p window
+Return @code{t} when @var{window} is maximizable.
+
+The window property @var{never-maximize} prevents maximization.
+ end defun
+
+ defun window-maximized-p window
+Return @code{t} when @var{window} is maximized in any direction.
+ end defun
+
+ defun window-maximized-vertically-p window
+Return @code{t} when @var{window} is vertically maximized.
+ end defun
+
+ defun window-maximized-horizontally-p window
+Return @code{t} when @var{window} is horizontally maximized.
+ end defun
+
+ menu
+* Simple Maximization::         
+* Maximizing Without Overlap::  
+* Maximizing Without Borders::  
+* Unmaximizing::                
+ end menu
+
+ node Simple Maximization, Maximizing Without Overlap, Maximizing Windows, Maximizing Windows
+ subsection Simple Maximization
+
+By default, maximization occurs on the current screen, ignoring other
+windows but obeying the screen edges and possibly rounding down to fit
+character sizes.
 
 @deffn Command maximize-window window &optional direction
-Maximize both dimensions of @var{window}
+Maximize both dimensions of @var{window} on the screen.
 
 If defined, @var{direction} may be either @code{vertical} or
-@code{horizontal}.
+@code{horizontal} and maximization will only occur for that
+direction.
 @end deffn
 
 @deffn Command maximize-window-vertically window
-Maximize the vertical dimension of @var{window}.
+Maximize the vertical dimension of @var{window} in the screen.
 @end deffn
 
 @deffn Command maximize-window-horizontally window
-Maximize the horizontal dimension of @var{window}.
-@end deffn
-
-@deffn Command unmaximize-window window &optional direction
-Restore the dimensions of @var{window} to its original, unmaximized,
-state.
-
-If defined, @var{direction} may be either @code{vertical} or
-@code{horizontal}.
+Maximize the horizontal dimension of @var{window} in the screen.
 @end deffn
 
 @deffn Command maximize-window-toggle window
-Toggle the state of @var{window} between maximized and unmaximized.
+Toggle the state of @var{window} between maximized and unmaximized
+in the screen.
 
 If defined, @var{direction} may be either @code{vertical} or
-@code{horizontal}.
+@code{horizontal} and maximization will only occur for that
+direction.
 @end deffn
 
 @deffn Command maximize-window-vertically-toggle window
 Toggle the state of @var{window} between vertically maximized and
-unmaximized.
+unmaximized in the screen.
 @end deffn
 
 @deffn Command maximize-window-horizontally-toggle window
 Toggle the state of @var{window} between horizontally maximized and
-unmaximized.
+unmaximized in the screen.
 @end deffn
 
-@defun window-maximized-p window
-Return @code{t} when @var{window} is in the maximized state.
-@end defun
+ defvr Custom move-lock-when-maximized
+When true (the default), Sawfish will not allow the user to manually
+resize maximized windows.  It will also prevent the user from moving
+the windows along their maximized axes.
 
-@defun window-maximized-vertically-p window
-Return @code{t} when @var{window} is vertically maximized.
-@end defun
+For example, a vertically maximized window is vertically locked, so a
+user can slide it left and right, but cannot move it up or down.
+ end defvr
+
+ defun window-locked-vertically-p window
+Return @code{t} when @var{window} is vertically locked.
+ end defun
+
+ defun frame-part-movable-p window part
+Return @code{t} if the @var{part} of @var{window} can be moved.
+
+ @var{part} is one of the symbols @code{top-border},
+ @code{bottom-border}, @code{left-border}, @code{right-border},
+ @code{top-left-border}, @code{top-right-border},
+ @code{bottom-left-border}, @code{bottom-right-border}, or
+ @code{title} 
+ end defun
+
+ defvar maximize-raises
+When true (the default), maximizing a window raises it as well.
+ end defvar
+
+ defvar maximize-avoid-avoided
+When true (the default), Sawfish will limit maximized windows so they
+do not cover windows with the @code{avoid} property.
+ end defvar
+
+ defvar maximize-always-expands
+If a window's dimension is larger than the screen size, maximizing
+that dimension can actually shrink it to fit into the screen.  When
+this variable is true (default false), maximizing a window's dimension
+will never shrink it.
+ end defvar
+
+ node Maximizing Without Overlap, Maximizing Without Borders, Simple Maximization, Maximizing Windows
+ subsection Maximizing Without Overlap
+
+The ``fill'' category of maximizing commands stretch the windows, but only
+large enough to not overlap with other windows on the screen.  This is
+in addition to the behavior of the @code{maximize-avoid-avoided}
+variable for avoided windows.
+
+ deffn Command maximize-fill-window window &optional direction
+Maximize both dimensions of @var{window} without overlapping other
+windows.
+
+If defined, @var{direction} may be either @code{vertical} or
+@code{horizontal}, and maximization will only occur for that
+direction.
+ end deffn
+
+ deffn Command maximize-fill-window-vertically window
+Maximize the vertical dimension of @var{window} in the screen without
+overlapping other windows.
+ end deffn
+
+ deffn Command maximize-fill-window-horizontally window
+Maximize the horizontal dimension of @var{window} in the screen
+without overlapping other windows.
+ end deffn
+
+ deffn Command maximize-fill-window-toggle window
+Toggle the state of @var{window} between maximized and unmaximized in
+the screen without overlapping other windows.
+
+If defined, @var{direction} may be either @code{vertical} or
+@code{horizontal}, and maximization will only occur for that
+direction.
+ end deffn
+
+ deffn Command maximize-fill-window-vertically-toggle window
+Toggle the state of @var{window} between vertically maximized and
+unmaximized in the screen without overlapping other windows.
+ end deffn
+
+ deffn Command maximize-fill-window-horizontally-toggle window
+Toggle the state of @var{window} between horizontally maximized and
+unmaximized in the screen without overlapping other windows.
+ end deffn
+
+ defvar maximize-ignore-when-filling
+When true (the default), unmanaged windows are ignored for filling
+maximization.
+ end defvar
+
+ node Maximizing Without Borders, Unmaximizing, Maximizing Without Overlap, Maximizing Windows
+ subsection Maximizing Without Borders
+
+he ``fullscreen'' and ``fullxinerama'' categories of maximizing
+commands maximize the window to some extent and remove all the
+window's decorations.  If necessary, Sawfish will pad the bottom and
+right window edges to make the window fill the complete extent.  (This
+is usually required for terminal windows, for example.)
+
+The ``fullscreen'' category maximizes the window to the current
+screen.
+
+ deffn Command maximize-window-fullscreen window
+Maximize both dimensions of @var{window} on the screen, removing
+window decorations and making the window edges flush with the screen
+sides.
+
+If defined, @var{direction} may be either @code{vertical} or
+@code{horizontal}, and maximization will only occur for that
+direction.
+ end deffn
+
+ deffn Command maximize-window-fullscreen-toggle window
+Toggle the state of @var{window} between maximized and unmaximized in
+the screen, removing window decorations and making the window edges
+flush with the screen sides.
+
+If defined, @var{direction} may be either @code{vertical} or
+@code{horizontal}, and maximization will only occur for that
+direction.
+ end deffn
+
+The ``fullxinerama'' category maximizes the window to the entire
+Xinerama display.
+
+ deffn Command maximize-window-fullxinerama window
+Maximize both dimensions of @var{window} across all Xinerama screens,
+removing window decorations and making the window edges flush with the
+screen sides.
+
+If defined, @var{direction} may be either @code{vertical} or
+@code{horizontal}, and maximization will only occur for that
+direction.
+ end deffn
+
+ deffn Command maximize-window-fullxinerama-toggle window
+Toggle the state of @var{window} between maximized and unmaximized
+across all Xinerama screeens, removing window decorations and making
+the window edges flush with the screen sides.
+
+If defined, @var{direction} may be either @code{vertical} or
+@code{horizontal}, and maximization will only occur for that
+direction.
+ end deffn
+
+ node Unmaximizing,  , Maximizing Without Borders, Maximizing Windows
+ subsection Unmaximizing
+
+One command restores windows from all the different types of
+maximization.
+
+ deffn Command unmaximize-window window &optional direction
+Restore the position and dimensions of @var{window} to their original,
+unmaximized, states.
+
+Positions and dimensions that were not maximized are not affected by
+unmaximizing.
+ end deffn
+
+ defun window-unmaximized-position window
+Returns a cons-cell @code{(@var{x} . @var{y})} indicating the position
+that the @code{window} would unmaximize to.
+
+Sawfish preserves the positions of maximized axes only, so a
+vertically maximized window will be restored to its original @var{y}
+coordinate, but its @var{x} coordinate may have changed.
+ end defun
+
+ defun window-unmaximized-position window
+Returns a cons-cell @code{(@var{w} . @var{h})} indicating the
+dimensions that @code{window} would unmaximize to.
+
+Sawfish preserves the dimensions of maximized axes only, so a
+vertically maximized window will be restored to its original @var{h}
+dimension, but its @var{w} coordinate may have changed.
+ end defun
 
 @defun window-maximized-horizontally-p window
 Return @code{t} when @var{window} is horizontally maximized.
