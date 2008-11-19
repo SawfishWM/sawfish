@@ -1,5 +1,5 @@
 ;; transient.jl -- support transient windows
-;; $Id$
+;; $Id: transient.jl,v 1.63 2002/04/27 19:31:25 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -52,7 +52,6 @@
   (defvar decorate-transients nil
     "Decorate dialog windows similarly to application windows.")
 
-
 ;;; functions
 
   (define (transient-of-p x y #!key allow-root)
@@ -116,7 +115,6 @@ indirect transients of the parent window in question."
 transient group as window W."
     (mapc fun (transient-group w)))
 
-
 ;;; commands for raising windows with their transients
 
   (define (raise-window-and-transients w)
@@ -142,7 +140,6 @@ the level of any transient windows it has."
   (define-command 'raise-lower-window-and-transients
     raise-lower-window-and-transients #:spec "%W" #:class 'advanced)
 
-
 ;;; displaying
 
   (define (transient-frame-type w type)
@@ -155,7 +152,6 @@ the level of any transient windows it has."
 
   (define-frame-type-mapper transient-frame-type)
 
-
 ;;; hooks
 
   (define (transient-map-window w)

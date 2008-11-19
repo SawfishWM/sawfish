@@ -71,7 +71,6 @@
 ;; maps WINDOW -> BUTTON-LIST
 (define button-table (make-weak-table eq-hash eq))
 
-
 ;; images
 
 ;; 16x3
@@ -195,7 +194,6 @@
     (make-button-fg (make-image "inactive:shade-button.png")
 		    (make-image "active:shade-button.png"))))
 
-
 ;; geometry computations
 
 (define (title-left-width w)
@@ -222,7 +220,6 @@
 (define (horizontal-justification w)
   (+ (* (length (car (table-ref button-table w))) 18) 2))
 
-
 ;; recolouring images
 
 (define (foreground-color)
@@ -257,7 +254,6 @@
     (mapc (lambda (x)
 	    (recolorer (cdr x))) menu-button)))
 
-
 ;; window icons
 
 (define icon-table (make-weak-table eq-hash eq))
@@ -271,7 +267,6 @@
 	      (table-set icon-table w scaled)
 	      scaled))))))
 
-
 ;; frames
 
 (define common-frame-parts
@@ -372,7 +367,6 @@
      (top-edge . -19)
      (class . top-right-corner))))
 
-
 ;; packing buttons
 
 (define button-map
@@ -408,7 +402,6 @@
 				   point) out)))
       ((null rest) out)))
 
-
 ;; misc stuff
 
 (define (rebuild-all)
@@ -442,7 +435,6 @@
     ((shaped-transient)
      (make-frame w shaped-frame (button-theme 'transient)))))
 
-
 ;; initialization
 
 (define initialize-gtkrc

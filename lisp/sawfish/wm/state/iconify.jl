@@ -1,5 +1,5 @@
 ;; iconify.jl -- handling window state
-;; $Id$
+;; $Id: iconify.jl,v 1.33 2002/04/21 22:25:15 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -156,7 +156,6 @@
 
   (define-command 'iconify-workspace-windows iconify-workspace-windows)
 
-
 ;;; sticky-ness, could be in a separate file..
 
   ;; workspace sticky code
@@ -226,7 +225,6 @@ all workspaces."
   (define-command 'make-window-unsticky make-window-unsticky #:spec "%W")
   (define-command 'toggle-window-sticky toggle-window-sticky #:spec "%W")
 
-
 ;;; hooks
 
   (define (ws-client-msg-handler w prop data)

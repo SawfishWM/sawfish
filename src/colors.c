@@ -161,7 +161,6 @@ Returns t if ARG is a color object.
     return COLORP(win) ? Qt : Qnil;
 }
 
-
 /* type hooks */
 
 static int
@@ -199,7 +198,6 @@ color_sweep (void)
     }
 }
 
-
 /* initialisation */
 
 void

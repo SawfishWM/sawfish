@@ -222,7 +222,6 @@ x_function_from_sym (repv sym)
     return GXcopy;
 }
 
-
 /* GC Functions */
 
 static long
@@ -515,7 +514,6 @@ Return t if ARG is a X-GC object.
     return X_GCP (gc) ? Qt : Qnil;
 }
 
-
 /* Window functions */
 
 static long
@@ -993,7 +991,6 @@ DEFUN ("x-window-swap-buffers", Fx_window_swap_buffers,
     return Qt;
 }
 
-
 /* Drawing functions */
 
 DEFUN ("x-clear-window", Fx_clear_window,
@@ -1340,7 +1337,6 @@ DEFUN ("x-grab-image-from-drawable", Fx_grab_image_from_drawable,
 					m == 0 ? Qnil : rep_MAKE_INT (m));
 }
 
-
 /* Utility functions */
 
 DEFUN ("x-gc-set-dashes", Fx_gc_set_dashes, Sx_gc_set_dashes,
@@ -1394,7 +1390,6 @@ the offset.
     return Qt;
 }
 
-
 /* gc type hooks */
 
 static int
@@ -1440,7 +1435,6 @@ x_gc_sweep (void)
     }
 }
 
-
 /* window type hooks */
 
 static int
@@ -1487,7 +1481,6 @@ x_window_sweep (void)
     }
 }
 
-
 /* initialisation */
 
 repv

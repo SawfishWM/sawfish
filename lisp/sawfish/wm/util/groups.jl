@@ -1,5 +1,5 @@
 ;; group-funs.jl -- ever-present window-group support
-;; $Id$
+;; $Id: groups.jl,v 1.31 2002/04/20 20:59:20 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -125,7 +125,6 @@ id of the new group."
 	(setq i (1- i)))
       (add-window-to-group w i)))
 
-
 ;;; menu constructor
 
   (define (window-group-menu #!optional w)
@@ -155,7 +154,6 @@ id of the new group."
 			 (lambda ()
 			   (add-window-to-new-group w)))))))
 
-
 ;;; session management -- only save group-ids that are _symbols_
 
   (define (group-saved-state w)

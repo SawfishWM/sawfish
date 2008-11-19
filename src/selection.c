@@ -25,7 +25,6 @@
 #include <string.h>
 #include <X11/Xatom.h>
 
-
 /* selection functions */
 
 static Atom sawmill_selection;
@@ -123,7 +122,6 @@ If the selection currently has no value, nil is returned.
     return res;
 }
 
-
 /* dl hooks */
 
 repv

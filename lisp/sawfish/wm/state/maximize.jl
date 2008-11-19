@@ -95,7 +95,6 @@
   ;; called when a window is un-maximized, args (W #!optional DIRECTION)
   (defvar window-unmaximized-hook nil)
 
-
 ;;; handling maximized state
 
   (define (window-maximized-p w)
@@ -171,7 +170,6 @@
       (maximize-discard w (or (memq 'left edges) (memq 'right edges))
 			(or (memq 'top edges) (memq 'bottom edges)))))
 
-
 ;;; 1D packing
 
   (defmacro edges-touching (start end edge)
@@ -248,7 +246,6 @@
 			(- (cdr fdims) (cdr dims))))
 	w)))
 
-
 ;;; 2D packing
 
   (define (do-both window avoided edges coords dims fdims)
@@ -263,7 +260,6 @@
 			(- (cdr fdims) (cdr dims))))
 	window)))
 
-
 ;;; size hints stuff
 
   (define (window-maximizable-p w #!optional direction hints)
@@ -306,7 +302,6 @@
 	(rplacd dims (trunc (cdr dims) y-inc y-base y-max)))
       dims))
 
-
 ;;; misc functions
 
   (define (maximize-find-workarea #!optional w #!key head head-fallback)
@@ -334,7 +329,6 @@
 	    bottom-left-corner bottom-right-corner title)
 	   (not (and h-maximized v-maximized)))))))
 
-
 ;;; commands
 
   (define (maximize-window w #!optional direction only-1d)
@@ -446,7 +440,6 @@ unmaximized."
   (define-command 'maximize-window-horizontally-toggle maximize-window-horizontally-toggle #:spec "%W")
   (define-command 'maximize-window-vertically-toggle maximize-window-vertically-toggle #:spec "%W")
 
-
 ;;; fill commands
 
   (define (maximize-fill-window w #!optional direction)
@@ -492,7 +485,6 @@ unmaximized."
   (define-command 'maximize-fill-window-horizontally-toggle maximize-fill-window-horizontally-toggle #:spec "%W")
   (define-command 'maximize-fill-window-vertically-toggle maximize-fill-window-vertically-toggle #:spec "%W")
 
-
 ;; fullscreen commands
 
   (define (maximize-window-fullscreen w state)
@@ -556,7 +548,6 @@ unmaximized."
   (define-command 'maximize-window-fullxinerama-toggle
     maximize-window-fullxinerama-toggle #:spec "%W")
 
-
 ;;; initialisation
 
   (define (after-add-window w)

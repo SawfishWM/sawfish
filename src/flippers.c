@@ -107,7 +107,6 @@ DEFUN("flippers-after-restacking", Fflippers_after_restacking,
     return Qt;
 }
 
-
 /* DL hooks / initialisation */
 
 static Window

@@ -61,7 +61,6 @@ static char * (*eval_fun)(char *form, int *lenp, int *errorp);
 
 #define PROTOCOL_X11_VERSION 1
 
-
 
 /* copied from src/unix_main.c */
 static char *
@@ -189,7 +188,6 @@ user_login_name (void)
     return tmp;
 }
 
-
 /* using the X based server io */
 
 Atom xa_sawfish_request, xa_sawfish_request_win;
@@ -300,7 +298,6 @@ net_server_init (char *display)
     return 0;
 }
 
-
 /* unix domain socket server */
 
 #ifdef HAVE_UNIX
@@ -412,7 +409,6 @@ unix_server_init (char *display)
 
 #endif /* HAVE_UNIX */
 
-
 /* entry points */
 
 int

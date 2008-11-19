@@ -112,7 +112,6 @@
   ;; non-maximized. (In fact the frame-type != window-type scheme is
   ;; largely just for compatibility)
 
-
 ;;; custom support
 
   (define (custom-make-frame-style-widget)
@@ -120,7 +119,6 @@
 
   (put 'frame-style 'custom-widget custom-make-frame-style-widget)
 
-
 ;;; variables etc
 
   (defvar frame-part-classes nil
@@ -207,7 +205,6 @@ deciding which frame type to ask a theme to generate.")
 
   (defvar sawfish-themer-program "sawfish-themer")
 
-
 ;;; defcustom's for some built-in variables
 
   (defcustom default-font nil
@@ -220,7 +217,6 @@ deciding which frame type to ask a theme to generate.")
   (defvar default-bevel-percent nil
     "Bevel intensity as a percentage.")
 
-
 ;;; managing frame types
 
   (define (define-frame-type-mapper fun)
@@ -247,7 +243,6 @@ deciding which frame type to ask a theme to generate.")
 	;; else, apply this transformation and keep looping
 	(loop-1 (cdr rest) ((car rest) w type)))))
 
-
 ;;; managing frame styles
 
   (define (add-frame-style name function)
@@ -292,7 +287,6 @@ deciding which frame type to ask a theme to generate.")
 		  (reload-frame-style style))))
 	    frame-style-files)))
 
-
 ;;; applying frame styles to windows
 
   (define (reframe-window w)
@@ -354,7 +348,6 @@ deciding which frame type to ask a theme to generate.")
     (when (apply-frame-style style)
       (save-current-frame-style)))
 
-
 ;;; editable frame styles
 
   (define (mark-frame-style-editable style)
@@ -372,7 +365,6 @@ deciding which frame type to ask a theme to generate.")
 	    (system (format nil "%s %s &" sawfish-themer-program dir))))))
     #:spec (lambda () (list default-frame-style)))
 
-
 ;;; kludge different window decors by modifying the assumed window type
 
   (define (window-type w)
@@ -444,7 +436,6 @@ deciding which frame type to ask a theme to generate.")
 	    (lambda (w) (set-window-type w type)) #:spec "%W"))
 	'(default transient shaped shaped-transient unframed))
 
-
 ;;; loading ``themes'' (currently just frame styles)
 
   (define (frame-style-directory dir #!optional get-name)
@@ -541,7 +532,6 @@ deciding which frame type to ask a theme to generate.")
        (check . ,(eq (window-type w) 'unframed))
        (group . menu-type))))
 
-
 ;;; removing frame parts
 
   (define (remove-frame-class w class)
@@ -559,7 +549,6 @@ deciding which frame type to ask a theme to generate.")
   (define (frame-class-removed-p w class)
     (memq class (window-get w 'removed-classes)))
 
-
 ;;; manipulating the frame part classes variables
 
   (define (set-frame-part-value class key value #!optional override)
@@ -625,7 +614,6 @@ deciding which frame type to ask a theme to generate.")
 	  ((bottom-right-corner) 'bottom_right_corner))
       nil))
 
-
 ;;; initialisation
 
   (define-frame-class 'menu-button '((keymap . menu-button-keymap)))

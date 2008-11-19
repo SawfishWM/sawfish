@@ -103,7 +103,6 @@ means outside the left window edge.")
   (defvar dock-window-depth 0
     "The stacking depth of dock windows.")
 
-
 ;;; finding windows, reading properties
 
   (define (get-window-by-name name)
@@ -211,7 +210,6 @@ supported by client window W."
 		((eq (aref data i) atom) t)
 		(t (loop (1+ i))))))))
 
-
 ;;; warping
 
   (define (warp-cursor-to-window w #!optional x y)
@@ -248,7 +246,6 @@ specified by the user."
     (window-order-push w)
     (call-window-hook 'activate-window-hook w))
 
-
 ;;; resizing windows in accordance with their size hints
 
   (define (constrain-dimension-to-hints x dimension hints)
@@ -354,7 +351,6 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
 	  (adjust-position-for-gravity/y
 	   w grav (cdr coords) #:inverse unadjust)))
 
-
 ;;; deleting windows
 
   (define (delete-window w #!optional safely)
@@ -374,7 +370,6 @@ If HINTS is non-nil, then it is the size hints structure to use. Otherwise
 
   (define-command 'delete-window-safely delete-window-safely #:spec "%W")
 
-
 ;;; making window names unique
 
   (define (uniquify-name in existing)
@@ -398,7 +393,6 @@ string `uniquify-name-format' to generate unique names."
 
   (define-command 'uniquify-window-name uniquify-window-name #:spec "%W")
 
-
 ;; selecting a single window
 
   (define select-window-map
@@ -417,7 +411,6 @@ string `uniquify-name-format' to generate unique names."
 	      (recursive-edit)))
 	(ungrab-pointer))))
 
-
 ;;; avoided (i.e. non-overlapped) windows
 
   (define (window-avoided-p w)
@@ -437,7 +430,6 @@ returned in the list."
 		      (and (not (eq w window))
 			   (window-avoided-p w)))))
 
-
 ;;; property and window-state changed interface
 
   (define prop-changes '())
@@ -492,7 +484,6 @@ STATES has been changed. STATES may also be a single symbol."
 		 ((cdr cell) w relevant))))
 	    state-changes)))
 
-
 ;; gaollable functions
 
   (gaol-add window-really-wants-input-p window-class window-avoided-p

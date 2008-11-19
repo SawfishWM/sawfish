@@ -62,7 +62,6 @@
     :type number
     :range (1 . 50))
 
-
 ;;; raw viewport handling
 
   (defvar viewport-x-offset 0)
@@ -115,7 +114,6 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
 
   (add-hook 'before-exit-hook viewport-before-exiting t)
 
-
 ;; screen sized viewport handling
 
   (define (screen-viewport)
@@ -220,7 +218,6 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
     (setq viewport-dimensions (cons width height))
     (viewport-size-changed))
 
-
 ;; commands
 
   (define (activate-viewport x y)
@@ -314,7 +311,6 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
   (define-command 'move-window-up move-window-up #:spec "%W" #:class 'viewport)
   (define-command 'move-window-down move-window-down #:spec "%W" #:class 'viewport)
 
-
 ;;; session management, config
 
   (define (viewport-saved-state w)

@@ -24,7 +24,6 @@
 
 ;; $Id: OPTIONS,v 1.5 2004/01/11 17:26:15 jsh Exp $
 
-
 ;; window animation options
 
 ;;  (define-special-variable default-window-animator 'none
@@ -39,7 +38,6 @@
 ;;  (define-special-variable anim-outline-steps 16)
 ;;  (define-special-variable anim-outline-delay 20)
 
-
 ;; customization options
 
 ;;  (define-special-variable customize-program "sawfish-ui"
@@ -55,7 +53,6 @@
 ;;    "Also include commands of these classes the key bindings panel.
 ;;Add the `viewport' keyboard to make viewport commands show up.")
  
-
 ;; focus options
 
 ;;  (define-special-variable focus-mode 'click
@@ -78,7 +75,6 @@
 ;;  (define-special-variable ignore-window-input-hint nil
 ;;    "Give focus to windows even when they haven't asked for it.")
 
-
 ;; window frame (theme) options
 
 ;;  (define-special-variable default-frame-style nil
@@ -127,7 +123,6 @@
 ;;  (define-special-variable default-bevel-percent nil
 ;;    "Bevel intensity as a percentage.")
 
-
 ;; menu options
 
 ;;  (define-special-variable menus-include-shortcuts nil
@@ -151,7 +146,6 @@
 ;;  (define-special-variable custom-menu-includes-all-settings t
 ;;    "When non-nil, the custom menu includes the `All settings' item.")
 
-
 ;; window placement options
 
 ;;  (define-special-variable place-window-mode 'top-left
@@ -165,7 +159,6 @@
 ;;  (define-special-variable ignore-program-positions t
 ;;    "Ignore program-specified window placements.")
 
-
 ;; viewport options
 
 ;;  (define-special-variable viewport-dimensions '(1 . 1)
@@ -178,7 +171,6 @@
 ;;    "How to act when passing the first or last workspace, one of
 ;;`stop', `wrap-around' or `keep-going'")
 
-
 ;; workspace options
 
 ;;  (define-special-variable workspace-send-boundary-mode 'stop
@@ -193,7 +185,6 @@
 
 ;;  (define-special-variable static-workspace-menus)
 
-
 ;; grow/pack options
 
 ;;  (define-special-variable grow-is-maximize t
@@ -223,7 +214,6 @@
 
 ;;  (define-special-variable grow-pack-menu)
 
-
 ;; window cycling options
 
 ;;  (define-special-variable cycle-show-window-names t
@@ -241,7 +231,6 @@
 ;;  (define-special-variable cycle-raise-windows t
 ;;    "Raise windows while they're temporarily selected during cycling.")
 
-
 ;; move/resize options
 
 ;;  (define-special-variable move-outline-mode 'opaque
@@ -279,7 +268,6 @@
 ;;  (define-special-variable move-cursor-shape (default-cursor))
 ;;  (define-special-variable resize-cursor-shape (default-cursor))
 
-
 ;; audio options
 
 ;;  (define-special-variable audio-events-enabled nil
@@ -303,7 +291,6 @@
 ;;    "The program used to play audio samples. If unset, built-in
 ;;support for ESD is used.")
 
-
 ;; edge flip options
 
 ;;  (require 'sawfish.wm.ext.edge-flip)
@@ -320,7 +307,6 @@
 ;;  (define-special-variable edge-flip-delay 250
 ;;    "Milliseconds to delay before edge flipping.")
 
-
 ;; error handling options
 
 ;;  (require 'sawfish.wm.ext.error-handler)
@@ -332,7 +318,6 @@
 ;;    "Where to display error messages; one of nowhere, screen, or
 ;;standard-error")
 
-
 ;; tooltips options
 
 ;;  (require 'sawfish.wm.ext.tooltips)
@@ -358,7 +343,6 @@
 ;;  (define-special-variable tooltips-foreground-color "black"
 ;;    "Color used for the tooltips foreground")
 
-
 ;; window history options
 
 ;;  (require 'sawfish.wm.ext.window-history)
@@ -388,7 +372,6 @@
 ;;  (define-special-variable window-history-ignore-transients t
 ;;    "Don't automatically remember details of transient windows.")
 
-
 ;; auto raise optiosn
 
 ;;  (require 'sawfish.wm.ext.auto-raise)
@@ -399,7 +382,6 @@
 ;;  (define-special-variable raise-window-timeout 500
 ;;    "Delay in milliseconds until focused windows are raised.")
 
-
 ;; shade-hover options
 
 ;;  (require 'sawfish.wm.ext.shade-hover)
@@ -413,7 +395,6 @@
 ;;  (defcustom shade-hover-raise nil
 ;;    "Raise windows when they are unshaded.")
 
-
 ;; gnome menus options
 
 ;;  (require 'sawfish.wm.gnome.menus)
@@ -427,7 +408,6 @@
 ;;				 "~/.gnome/apps")
 ;;    "List of directories to read GNOME menu entries from.")
 
-
 ;; smart placement modes
 
 ;;  (define-special-variable sp-avoided-windows-weight 100)
@@ -444,7 +424,6 @@
 ;;    "Only when there's fewer X events than this pending do we try to
 ;;do smart placement.")
 
-
 ;; configure-request handler
 
 ;;  (define-special-variable configure-auto-gravity t
@@ -453,14 +432,12 @@
 ;;  (define-special-variable configure-ignore-stacking-requests nil
 ;;    "Ignore requests from applications to change window stacking.")
 
-
 ;; original (obsolete) gnome hints
 
 ;;  ;; this is needed since the gnome tasklist applet doesn't honour
 ;;  ;; the _WIN_HIDDEN property (?)
 ;;  (define-special-variable gnome-ignored-windows-in-client-list t)
 
-
 ;; iconify options
 
 ;;  (define-special-variable focus-windows-on-uniconify nil
@@ -489,7 +466,6 @@
 ;;  (defcustom unshade-selected-windows nil
 ;;    "Unshade selected windows.")
 
-
 ;; maximize options
 
 ;;  (define-special-variable maximize-always-expands nil
@@ -508,7 +484,6 @@
 ;;  (define-special-variable move-lock-when-maximized t
 ;;    "Lock position and size while windows are maximized.")
 
-
 ;; Miscellaneous options
 
 ;;  (define-special-variable transients-above 'parents
@@ -571,7 +546,6 @@
 ;;    "Shell command used to direct a web browser to load a url. Any
 ;;`%s' substrings will be replaced by the name of the url.")
 
-
 ;; prompt options
 
 ;;  (define-special-variable prompt-max-display 20

@@ -50,7 +50,6 @@
   ;; cover but existed in the old GNOME spec; e.g. _GNOME_WM_STATE_FOO
   ;; for FOO being DO_NOT_COVER, SKIP_FOCUS, ..?
 
-
 ;;; constants
 
   (defconst _NET_WM_MOVERESIZE_SIZE_TOPLEFT 0)
@@ -130,7 +129,6 @@
 
   (define supported-states '())
 
-
 ;;; setting the client list hints
 
   (define (update-client-list-hints #!key only-stacking-list)
@@ -148,7 +146,6 @@
       (set-prop (managed-windows) '_NET_CLIENT_LIST))
     (set-prop (nreverse (stacking-order)) '_NET_CLIENT_LIST_STACKING))
 
-
 ;; setting the desktop / viewport hints
 
   (define last-workspace nil)
@@ -253,7 +250,6 @@
       (when (>= last-workspace-count total-workspaces)
 	(set-ws-hints))))
 
-
 ;;; setting the focus hints
 
   (define last-focus nil)
@@ -265,7 +261,6 @@
 	(set-x-property 'root '_NET_ACTIVE_WINDOW
 			(vector (if focus (window-id focus) 0)) 'WINDOW 32))))
 
-
 ;;; setting the window state hints
 
   (define (update-client-state w)
@@ -277,7 +272,6 @@
 	    supported-states)
       (set-x-property w '_NET_WM_STATE (apply vector state) 'ATOM 32)))
 
-
 ;;; honouring the initially set window state hints
 
   (define (update-icon-geometry w geom)
@@ -324,7 +318,6 @@
       (when geom
 	(update-icon-geometry w (nth 2 geom)))))
 
-
 ;;; helper functions
 
   (define (define-wm-spec-window-type x fun)
@@ -474,7 +467,6 @@
    (lambda (w mode)
      (above-below-handler wm-spec-above-depth w mode)))
 
-
 ;;; client messages
 
   (define (client-message-handler w type data)
@@ -572,7 +564,6 @@
 	(t (setq handled nil)))
       handled))
 
-
 ;;; property changes
 
   (define (property-change-handler w prop kind)
@@ -585,7 +576,6 @@
       ((_NET_WM_STRUT)
        (update-strut w))))
 
-
 ;;; utilities
 
   (define (vector->list vec)
@@ -597,7 +587,6 @@
     (when (eq w 'root)
       (update-workspace-hints)))
 
-
 ;;; initialisation
 
   (define (init)

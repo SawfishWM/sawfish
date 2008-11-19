@@ -103,7 +103,6 @@ static int all_buttons[9] = { Button1, Button2, Button3, Button4, Button5, Butto
 static int total_lock_combs, all_lock_mask;
 static int all_lock_combs[2*2*2];
 
-
 /* Translate from X events to Lisp events */
 
 static unsigned long
@@ -383,7 +382,6 @@ translate_event_to_x_button (repv ev, unsigned int *button, unsigned int *state)
     return 0;
 }
 
-
 /* Keymap searching */
 
 static inline bool
@@ -642,7 +640,6 @@ eval_input_event(repv context_map)
     return result;
 }
 
-
 /* Translate text->event and vice versa */
 
 struct key_def {
@@ -913,7 +910,6 @@ print_event_prefix(void)
     return TRUE;
 }
 
-
 /* Lisp functions */
 
 DEFUN("make-keymap", Fmake_keymap, Smake_keymap, (void), rep_Subr0) /*
@@ -1457,7 +1453,6 @@ synthesize-event EVENT WINDOW [PROPAGATE]
     return Qt;
 }
 
-
 /* Find the lisp modifier mask used by the meta and alt keys. This code
    shamelessly stolen from Emacs 19. :-) */
 
@@ -1657,7 +1652,6 @@ Returns the current value of the `Window Manager' modifier, an integer.
     return rep_MAKE_INT (wm_mod);
 }
 
-
 /* Key and button grabbing */
 
 static void
@@ -1856,7 +1850,6 @@ keymap_prop_change (Lisp_Window *w, repv prop, repv old, repv new)
     }
 }
 
-
 /* initialisation */
 
 void

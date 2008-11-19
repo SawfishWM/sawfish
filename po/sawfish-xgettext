@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawfish-xgettext -- extract i18n strings from lisp scripts
-;; $Id$
+;; $Id: sawfish-xgettext,v 1.8 2001/04/20 21:40:50 jsh Exp $
 
 ;; This file is part of sawfish.
 
@@ -28,7 +28,6 @@ exec rep "$0" "$@"
 
 (define (exit n) (throw 'quit n))
 
-
 ;; random hackery
 
 ;; from sawfish.ui.widgets.match-window
@@ -57,7 +56,6 @@ exec rep "$0" "$@"
 	   (aset name 0 (char-upcase (aref name 0)))
 	   name))))
 
-
 ;; helper function that groks sawfish specific forms
 
 (define (get-key key args) (and (listp args) (memq key args)))
@@ -143,7 +141,6 @@ exec rep "$0" "$@"
 
     (t (scan-list form))))
 
-
 ;; entry point
 
 (when (get-command-line-option "--help")

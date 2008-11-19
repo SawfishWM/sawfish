@@ -1,5 +1,5 @@
 ;; slide-window.jl -- simple code to move a window via the keyboard
-;; $Id$
+;; $Id: slide-window.jl,v 1.8 2002/04/21 03:39:33 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -69,7 +69,6 @@
   (define-command 'slide-window-up slide-window-up #:spec "%W")
   (define-command 'slide-window-down slide-window-down #:spec "%W")
 
-
 ;; group commands
 
   (define (slide-group-left w)

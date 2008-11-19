@@ -1,5 +1,5 @@
 ;; window-history.jl -- store state across window instances
-;; $Id$
+;; $Id: window-history.jl,v 1.34 2003/02/04 05:43:19 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -85,7 +85,6 @@
       ()
       (,(_ "_Forget saved state") window-history-forget)))
 
-
 ;;; customizations
 
   (defgroup window-history "History" :group misc)
@@ -113,7 +112,6 @@
     :group (misc window-history)
     :type boolean)
 
-
 ;;; matching windows
 
   (define (window-history-key w)
@@ -164,7 +162,6 @@
       (when alist
 	(window-history-apply w alist))))
 
-
 ;;; recording attributes
 
   (define (window-history-snapshotter w state)
@@ -222,7 +219,6 @@
 	(window-history-snapshotter w (car states)))
       (window-history-state-snapshotter w (cdr states))))
 
-
 ;;; manual state recording
 
   (defun window-history-save-position (w)
@@ -252,7 +248,6 @@
   (define-command 'window-history-forget
     window-history-forget #:spec "%W")
 
-
 ;;; restoring attributes
 
   (define (window-history-apply w alist)
@@ -309,7 +304,6 @@
 	 (when (memq value '(t both workspace))
 	   (window-put w 'sticky t))))
 
-
 ;;; saving and loading state
 
   (define (window-history-load)
@@ -365,7 +359,6 @@
 	      alist)
 	(write stream "\)\n\n"))))
 
-
 ;;; init
 
   (let ((tem (get-command-line-option "--window-history-file" t)))

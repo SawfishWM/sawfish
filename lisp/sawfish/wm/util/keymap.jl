@@ -1,5 +1,5 @@
 ;; keymap.jl -- some keymap utilities, mostly copied from jade
-;; $Id$
+;; $Id: keymap.jl,v 1.18 2000/12/19 23:49:54 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -41,7 +41,6 @@
 
   (define-structure-alias keymap sawfish.wm.util.keymap)
 
-
 ;;; Map a function over all key bindings in a keymap
 
   (defvar map-keymap-recursively t
@@ -70,7 +69,6 @@ cons cell (COMMAND . EVENT)."
 	      (mapc (lambda (k)
 		      (funcall function k)) (cdr keymap))))))))
 
-
 ;;; Substitute one command for another in a keymap
 
   (define (substitute-keymap-command olddef newdef #!optional keymap)
@@ -92,7 +90,6 @@ in the keybindings under the keymap or list of keymaps KEYMAP."
 		    (rplacd k new-ev))) keymap))
 
 
-
 ;;; Adding bindings to a feature that may not yet be loaded
 
   (defmacro lazy-bind-keys (feature keymap #!rest bindings)
@@ -104,7 +101,6 @@ for the bindings to be installed if and when it is."
        (eval-after-load ,(symbol-name feature)
 			'(bind-keys ,keymap ,@bindings))))
 
-
 ;;; Search for a named command in the current keymap configuration
 
   (define (where-is command #!optional keymap)
@@ -164,7 +160,6 @@ the command is found in the list of keymaps KEYMAPS."
   (define-command 'describe-key describe-key)
   (define-command-to-screen 'describe-key-to-screen describe-key)
 
-
 ;;; grab the next key event
 
   (define (read-event #!optional prompt)

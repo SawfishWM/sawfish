@@ -1,5 +1,5 @@
 ;; gnome-menu.jl -- replace the apps-menu by the gnome menu tree
-;; $Id$
+;; $Id: menus.jl,v 1.27 2003/02/04 05:43:19 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -34,7 +34,6 @@
 
   (eval-when-compile (require 'sawfish.wm.menus))
 
-
 ;;; variables
 
   (defvar gnome-share-directory
@@ -82,7 +81,6 @@
   ;; split $PATH
   (define cached-path)
 
-
 ;;; code
 
   ;; search $PATH for an executable file..
@@ -244,7 +242,6 @@
       (gnome-menus-update))
     gnome-cached-menus)
 
-
 ;;; init
 
   ;; take over the applications submenu of the root window menu

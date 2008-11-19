@@ -504,7 +504,6 @@
 		      (copy-sequence move-resize-moving-edges)
 		    (list 'top 'bottom 'left 'right)))))))
 
-
 ;;; hook functions
 
   (define (lost-window w)
@@ -514,7 +513,6 @@
   (add-hook 'unmap-notify-hook lost-window t)
   (add-hook 'destroy-notify-hook lost-window t)
 
-
 ;;; Entry points
 
   (define (move-window-interactively w)

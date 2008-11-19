@@ -53,7 +53,6 @@
   (defvar placement-modes '()
     "List of names of all placement modes.")
 
-
 ;;; utility functions
 
   ;; autoload handling
@@ -128,7 +127,6 @@ this mode. The single argument is the window to be placed."
   (add-hook 'place-window-hook place-window t)
   (add-hook 'remove-window-hook unplace-window)
 
-
 ;;; standard placement modes
 
   (define (place-window-randomly w)

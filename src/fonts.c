@@ -77,7 +77,6 @@ struct Lisp_Font_Class_struct {
 		  Window id, GC gc, Lisp_Color *fg, int x, int y);
 };
 
-
 /* Xlib font structs */
 
 static bool
@@ -131,7 +130,6 @@ static const Lisp_Font_Class fontstruct_class = {
     fontstruct_measure, fontstruct_draw,
 };
 
-
 /* Xlib font sets */
 
 static char *
@@ -339,7 +337,6 @@ static const Lisp_Font_Class fontset_class = {
     fontset_measure, fontset_draw,
 };
 
-
 /* Xft fonts */
 
 #ifdef HAVE_X11_XFT_XFT_H
@@ -408,7 +405,6 @@ static const Lisp_Font_Class xft_class = {
 
 #endif /* HAVE_X11_XFT_XFT_H */
 
-
 /* Pango fonts */
 
 #ifdef HAVE_PANGO
@@ -572,7 +568,6 @@ static const Lisp_Font_Class pango_class = {
 
 #endif /* HAVE_PANGO */
 
-
 /* All classes */
 
 static const Lisp_Font_Class *classes[] = {
@@ -587,7 +582,6 @@ static const Lisp_Font_Class *classes[] = {
     0,
 };
 
-
 /* Entry points */
 
 DEFUN ("font-type-exists-p", Ffont_type_exists_p,
@@ -863,7 +857,6 @@ default-font).
     return rep_MAKE_INT(VFONT(font)->descent);
 }
 
-
 /* type hooks */
 
 static int
@@ -921,7 +914,6 @@ use_xft (void)
     return val == NULL || strcmp (val, "0") != 0;
 }
 
-
 /* initialisation */
 
 void

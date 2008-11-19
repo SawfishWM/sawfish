@@ -162,7 +162,6 @@ server_accept_connection(int unused_fd)
     }
 }
 
-
 /* initialisation */
 
 void

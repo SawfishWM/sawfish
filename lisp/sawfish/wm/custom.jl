@@ -1,5 +1,5 @@
 ;; custom.jl -- Emacs-like ``customizing'' (but more simple)
-;; $Id$
+;; $Id: custom.jl,v 1.64 2002/11/03 10:53:59 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -102,7 +102,6 @@
   ;; hash group names (lists of symbols) to alist of options 
   (define custom-group-table (make-table equal-hash equal))
 
-
 ;;; defining custom variables and groups
 
   (defmacro defcustom (symbol value doc #!rest keys)
@@ -222,7 +221,6 @@ Note that the value of the `:group' key is not evaluated."
 	(setq keys (nthcdr 2 keys)))
       (cons 'list (nreverse out))))
 
-
 ;;; general management
 
   (define custom-setter-table (make-table symbol-hash eq))
@@ -312,7 +310,6 @@ of choices."
 				 (string-lessp (cadr x) (cadr y))))
 			 (filter atom (cddr custom-groups))))))))
 
-
 ;;; setting values
 
   (define (custom-set setter symbol)
@@ -392,7 +389,6 @@ of choices."
 		       ;; XXX alternatives to user-eval
 		       (user-eval x))) (cdr form))))
 
-
 ;;; serializing unreadable types
 
   ;; property name (symbol) to find type converters on during custom-convert
@@ -455,7 +451,6 @@ of choices."
   (define (define-custom-deserializer type fun)
     (put type 'custom-deserializer fun))
 
-
 ;;; support for font and color primitive types
 
   (define-custom-serializer 'font (lambda (value)
@@ -482,7 +477,6 @@ of choices."
 					   (get-color value)
 					 value)))
 
-
 ;;; default groups
 
   (defgroup focus "Focus")
@@ -494,7 +488,6 @@ of choices."
   (defgroup min-max "Minimizing and Maximizing")
   (defgroup misc "Miscellaneous")
 
-
 ;;; loading user's customisations
 
   (define (custom-load filename)
@@ -515,7 +508,6 @@ of choices."
 	  (custom-default-file
 	   (custom-load custom-default-file))))
 
-
 ;;; init
 
   (let ((tem (get-command-line-option "--custom-file" t)))

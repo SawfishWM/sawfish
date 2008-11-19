@@ -1,6 +1,6 @@
 #| nokogiri-widgets/match-window.jl -- match-window widget
 
-   $Id$
+   $Id: match-window.jl,v 1.11 2003/01/12 20:30:49 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -32,7 +32,6 @@
 
   (defconst matcher-count 3)
 
-
 ;;; the widget representing the `matchers' frame
 
   ;; (match-window:matchers x-properties)
@@ -112,7 +111,6 @@
 
   (define-widget-type 'match-window:matchers make-match-window:matchers)
 
-
 ;;; the widget representing the `Actions' frame
 
   (define (make-match-window:actions changed-callback properties)
@@ -193,7 +191,6 @@
 	     (aset name 0 (char-upcase (aref name 0)))
 	     (_ name)))))
 
-
 ;;; the main widget
 		     
   ;; (match-window ...)

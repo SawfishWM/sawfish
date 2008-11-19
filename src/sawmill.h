@@ -62,7 +62,6 @@ typedef int bool;
 
 /* #define DEBUG 1 */
 
-
 /* Event masks */
 
 /* Events selected on client windows */
@@ -91,7 +90,6 @@ typedef int bool;
 #define POINTER_GRAB_EVENTS (ButtonPressMask | ButtonReleaseMask \
 			     | PointerMotionMask | PointerMotionHintMask)
 
-
 /* Type defs */
 
 /* A managed window */
@@ -297,7 +295,6 @@ enum exit_codes {
     ec_session_died
 };
 
-
 /* bring in prototypes */
 
 #ifndef XlibSpecificationRelease
@@ -311,7 +308,6 @@ enum exit_codes {
 
 #include "sawmill_subrs.h"
 
-
 /* Miscellaneous macro defs */
 
 /* Maximum/minimum macros. Don't use when X or Y have side-effects! */

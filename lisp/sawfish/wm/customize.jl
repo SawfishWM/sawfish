@@ -1,5 +1,5 @@
 ;; customize.jl -- configuration user interface
-;; $Id$
+;; $Id: customize.jl,v 1.46 2000/11/29 00:54:47 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -44,7 +44,6 @@
   (define customize-user-file-read nil)
   (define customize-user-file-dirty nil)
 
-
 ;;; ui
 
   (define (customize #!optional group)
@@ -57,7 +56,6 @@
   ;;###autoload
   (define-command 'customize customize)
 
-
 ;;; setting variables
 
   (define (customize-read-user-file)

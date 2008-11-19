@@ -936,7 +936,6 @@ Returns the numeric id of the root window of the managed screen.
     return rep_MAKE_INT (root_window);
 }
 
-
 /* xinerama support */
 
 void
@@ -1044,7 +1043,6 @@ DEFUN ("head-offset", Fhead_offset, Shead_offset, (repv id), rep_Subr1)
     }
 }
 
-
 /* Displaying a `message' window */
 
 static Window message_win;
@@ -1340,7 +1338,6 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
     }
 }
 
-
 /* initialisation */
 
 void

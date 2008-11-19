@@ -156,7 +156,6 @@ DEFUN("draw-diagonal-gradient", Fdraw_diagonal_gradient,
     return img;
 }
 
-
 /* DL hooks */
 
 repv

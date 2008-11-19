@@ -28,7 +28,6 @@ int cursor_type;
 repv default_cursor;
 DEFSYM(cursor_shape, "cursor-shape");
 
-
 /* Cursors from bitmaps */
 
 static Cursor
@@ -81,7 +80,6 @@ make_bm_cursor (repv image, repv mask, repv fg, repv bg)
     return cursor;
 }
 
-
 
 DEFUN("get-cursor", Fget_cursor, Sget_cursor, (repv data), rep_Subr1) /*
 ::doc:sawfish.wm.cursors#get-cursor::
@@ -191,7 +189,6 @@ Returns t if ARG is an cursor object.
     return CURSORP(arg) ? Qt : Qnil;
 }
 
-
 /* type hooks */
 
 static int
@@ -237,7 +234,6 @@ cursor_sweep (void)
     }
 }
 
-
 /* initialisation */
 
 void

@@ -1,5 +1,5 @@
 ;; smart-placement.jl -- ``intelligent'' window placement
-;; $Id$
+;; $Id: smart.jl,v 1.50 2002/07/01 03:07:18 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -60,7 +60,6 @@
 	  sawfish.wm.custom
 	  sawfish.wm.workspace)
 
-
 ;;; options/variables
 
   (defvar sp-avoided-windows-weight 100)
@@ -76,7 +75,6 @@
   ;; to do smart placement
   (defvar sp-max-queued-events 256)
 
-
 ;;; utility functions
 
   ;; RECTS is a list of (LEFT TOP RIGHT BOTTOM); returns sorted, uniquified
@@ -132,7 +130,6 @@
 		(window-get x 'iconified)
 		(not (windows-share-workspace-p x w)))))))
 
-
 ;;; calculating overlaps
 
   ;; returns (POINT . OVERLAP), find the alignment of the rectangle
@@ -160,7 +157,6 @@
 	    '((0 . 0) (0 . -1) (-1 . 0) (-1 . -1)))
       (and min-point (cons min-point min-overlap))))
 
-
 ;;; first-fit search
 
   (define (sp-first-fit dims grid rects)
@@ -199,7 +195,6 @@
 	      (cdr grid))
 	nil)))
 
-
 ;;; best-fit search
 
   (defmacro sp-edges-adjacent (align-1 start-1 end-1 align-2 start-2 end-2)
@@ -358,7 +353,6 @@ the proposed placement to the center of the screen."
 		     points)
 	       max-point)))))
 
-
 ;;; entry-points
 
   (define (sp-do-placement w fit-fun #!optional fall-back-fun #!key window-filter)
@@ -418,7 +412,6 @@ the proposed placement to the center of the screen."
     (sp-do-placement w sp-fit-or-nil (placement-mode 'interactively)))
 						     
 
-
 ;;; init
 
   ;;###autoload

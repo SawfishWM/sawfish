@@ -73,7 +73,6 @@
   ;; this will always return an integer
   (define (window-depth w) (window-get w 'depth))
 
-
 ;;; constraint mechanics (predicates actually..)
 
   (define (stacking-constraint:layer w)
@@ -161,7 +160,6 @@ for a particular stacking configuration, it will return non-`nil'."
 		      basic-stacking-constraints))
 	       (t basic-stacking-constraints)))))
 
-
 ;;; utilities
 
   ;; returns (BEFORE . AFTER), modifies LST
@@ -412,7 +410,6 @@ lowest possible position. Otherwise raise it as far as allowed."
   (define-command 'raise-window-depth raise-window-depth #:spec "%W")
   (define-command 'lower-window-depth lower-window-depth #:spec "%W")
 
-
 ;;; stacking groups of windows
 
   ;; Helper function for raise-windows and lower-windows. Calls (FIRST
@@ -485,7 +482,6 @@ lowest possible position. Otherwise raise it as far as allowed."
 	(lower-windows w order)
       (raise-windows w order)))
 
-
 ;;; hooks
 
   ;; Called from the add-window-hook

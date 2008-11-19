@@ -3,7 +3,7 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-menu -- subprocess to handle menus
-;; $Id$
+;; $Id: sawfish-menu.jl,v 1.8 2003/04/03 02:23:33 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -26,7 +26,6 @@ exec rep "$0" "$@"
 (require 'gui.gtk-2.gtk)
 (require 'rep.data.tables)
 
-
 ;; menus
 
 (define menu-selected nil)
@@ -110,7 +109,6 @@ exec rep "$0" "$@"
       (gtk-main))
     menu-selected))
 
-
 ;; entry point, loop reading command forms, sending back results
 
 (condition-case nil

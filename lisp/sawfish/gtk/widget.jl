@@ -1,6 +1,6 @@
 #| nokogiri-widget.jl -- high-level widget encapsulation
 
-   $Id$
+   $Id: widget.jl,v 1.21 2003/07/30 05:56:04 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -109,7 +109,6 @@
 
   (define callback-enabled (make-fluid t))
 
-
 ;;; High level widget management
 
   ;; each widget is a function taking a single argument, the operation to
@@ -167,7 +166,6 @@
 
   (define (make-signal-callback fun) (lambda () (call-callback fun)))
 
-
 ;;; tooltip support
 
   (define tooltips)
@@ -184,7 +182,6 @@
       (setq tooltips (gtk-tooltips-new)))
     (gtk-tooltips-set-tip tooltips widget tip-string key))
 
-
 ;;; Predefined widget constructors
 
   (define (make-choice-item changed-callback . options)
@@ -317,7 +314,6 @@
   (define-widget-type 'boolean make-boolean-item)
   (widget-accepts-doc-string 'boolean)
 
-
 ;;; ``Meta'' widgets
 
   (define (make-or-item changed-callback #!rest items)
@@ -498,7 +494,6 @@
 
   (define-widget-type 'quoted make-quoted-item)
 
-
 ;;; widget used for unknown widget types
 
   (define (make-unknown-item changed-callback)
@@ -516,7 +511,6 @@
 
   (define-widget-type 'unknown make-unknown-item)
 
-
 ;;; utility functions
 
   (define string->symbol intern)

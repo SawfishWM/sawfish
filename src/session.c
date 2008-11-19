@@ -50,7 +50,6 @@ static IceConn ice_conn;
 static SmcConn sm_conn;
 #endif
 
-
 /* Lisp functions */
 
 DEFUN("sm-set-property", Fsm_set_property, Ssm_set_property,
@@ -135,7 +134,6 @@ Deletes the session manager property called PROPERTY-NAME (a string).
     return Qt;
 }
 
-
 /* SM callbacks */
 
 #ifdef HAVE_X11_SM_SMLIB_H
@@ -193,7 +191,6 @@ shutdown_cancelled (SmcConn conn, SmPointer data)
 
 #endif /* HAVE_X11_SM_SMLIB_H */
 
-
 /* ICE hooks */
 
 #ifdef HAVE_X11_SM_SMLIB_H
@@ -220,7 +217,6 @@ ICE_watch_callback (IceConn ice, IcePointer client_data,
 
 #endif /* HAVE_X11_SM_SMLIB_H */
 
-
 /* initialisation */
 
 DEFUN("sm-connect", Fsm_connect, Ssm_connect, (repv id), rep_Subr1)

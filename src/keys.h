@@ -22,7 +22,6 @@
 #ifndef SAWMILL_KEYS_H
 #define SAWMILL_KEYS_H
 
-
 /* An event object is (CODE . MODS) */
 
 #define EVENTP(v)	(rep_CONSP(v) && rep_INTP(rep_CAR(v)) && rep_INTP(rep_CDR(v)))
@@ -72,7 +71,6 @@ enum {
     EV_VIRT_MOD_MASK = 0x0ff00000
 };
 
-
 /* Support for buttons 6, 7, 8 and 9.
 
    <X11/X.h> doesn't define these, even though XFree supports them.. */
@@ -125,7 +123,6 @@ enum {
 			     | Button7Mask | Button8Mask | Button9Mask)
 #endif
 
-
 /* In key maps, a `key' is (COMMAND . EVENT) */
 
 #define KEYP(v)		(rep_CONSP(v) && rep_CONSP(rep_CDR(v)))

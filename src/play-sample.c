@@ -21,7 +21,6 @@ void gnome_sound_play (const char * filename);
 void gnome_sound_init(const char *hostname);
 void gnome_sound_shutdown(void);
 
-
 /* from gnome-libs/libgnome/gnome-sound.c HEAD as of March 12, 2000 */
 
 /*
@@ -522,7 +521,6 @@ gnome_sound_shutdown(void)
 #endif
 }
 
-
 /* sawmill code */
 
 DEFUN("primitive-play-sample", Fprimitive_play_sample,

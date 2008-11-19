@@ -1188,7 +1188,6 @@ contents of IMAGE starting at position (X, Y).
 	return rep_mem_error ();
 }
 
-
 /* image structure accessors */
 
 int
@@ -1252,7 +1251,6 @@ image_changed (Lisp_Image *im)
 #endif
 }
 
-
 /* render functions */
 
 #if defined HAVE_GDK_PIXBUF
@@ -1482,7 +1480,6 @@ paste_image_to_drawable (Lisp_Image *img, Drawable d,
 #endif
 }
 
-
 /* lisp functions for accessing image contents */
 
 static repv
@@ -1690,7 +1687,6 @@ of the specified pixel to (as accepted by `image-set').
     return Qnil;
 }
 
-
 /* type hooks */
 
 static int
@@ -1744,7 +1740,6 @@ image_sweep (void)
     }
 }
 
-
 /* initialisation */
 
 void

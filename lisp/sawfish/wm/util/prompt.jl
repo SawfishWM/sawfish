@@ -340,7 +340,6 @@ displayed. See the `display-message' function for more details.")
   (defun prompt-for-command (#!optional title)
     (prompt-for-symbol title commandp commandp))
 
-
 ;;; autoloads
 
   (autoload 'prompt-for-file "sawfish/wm/util/prompt-extras")
@@ -353,7 +352,6 @@ displayed. See the `display-message' function for more details.")
   (autoload 'prompt-for-window "sawfish/wm/util/prompt-wm")
   (autoload 'prompt-for-workspace "sawfish/wm/util/prompt-wm")
 
-
 ;;; init keymap
 
   (bind-keys prompt-keymap

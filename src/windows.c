@@ -90,7 +90,6 @@ struct prop_handler {
     void (*callback) (Lisp_Window *w, repv prop, repv old, repv new);
 };
 
-
 /* utilities */
 
 /* Returns true if we should manage window ID */
@@ -272,7 +271,6 @@ after_local_map (Lisp_Window *w)
     Fungrab_server ();
 }
 
-
 /* manipulating the Lisp window structures */
 
 /* Return the window object containing ID, or a null pointer */
@@ -636,7 +634,6 @@ emit_pending_destroys (void)
     pending_destroys = 0;
 }
 
-
 /* Lisp functions */
 
 DEFUN("window-get", Fwindow_get, Swindow_get,
@@ -1498,7 +1495,6 @@ Return the list of windows that match the predicate function PRED.
     return output;
 }
 
-
 /* type hooks */
 
 static int
@@ -1570,7 +1566,6 @@ window_sweep (void)
     }
 }
 
-
 /* initialisation */
 
 void

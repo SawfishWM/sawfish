@@ -27,7 +27,6 @@
 
 static Lisp_Window *lowest_window, *highest_window;
 
-
 /* Assertions and consistency checking */
 
 #if !defined (NDEBUG)
@@ -43,7 +42,6 @@ assert_constraints (Lisp_Window *w)
 # define assert_constraints(w) do { ; } while (0)
 #endif
 
-
 /* Stacking list manipulation */
 
 /* Return true if window W is currently in the stacking list. */
@@ -163,7 +161,6 @@ insert_in_stacking_list_below (Lisp_Window *w, Lisp_Window *x)
     assert_constraints (w);
 }
 
-
 /* Making the X stacking order reflect the stacking list */
 
 static inline Window
@@ -203,7 +200,6 @@ restack_window (Lisp_Window *w)
     }
 }
 
-
 /* Miscellaneous public functions */
 
 /* Return a list of windows in top->bottom order */

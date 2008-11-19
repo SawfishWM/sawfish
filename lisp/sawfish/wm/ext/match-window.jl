@@ -1,5 +1,5 @@
 ;; match-window.jl -- match windows to properties
-;; $Id$
+;; $Id: match-window.jl,v 1.52 2003/02/20 04:56:05 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -55,7 +55,6 @@
 
   (define-structure-alias match-window sawfish.wm.ext.match-window)
 
-
 ;;; configuration and customize stuff
 
   (i18n-defvar match-window-x-properties
@@ -187,7 +186,6 @@
   (define (define-match-window-formatter name formatter)
     (put name 'match-window-formatter formatter))
 
-
 ;;; main entry point
 
   (define (add-window-matcher prop value #!rest actions)
@@ -232,7 +230,6 @@
 	    (delete-if (lambda (cell)
 			 (null (cdr cell))) match-window-profile))))
 
-
 ;;; matcher code
 
   (define (safe-string-match re . args)
@@ -311,7 +308,6 @@
 
   (add-hook 'before-add-window-hook match-window t)
 
-
 ;;; custom property formatters and setters
 
   (define-match-window-formatter 'WM_CLASS

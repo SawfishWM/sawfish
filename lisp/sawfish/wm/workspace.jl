@@ -116,7 +116,6 @@
 	  sawfish.wm.custom
 	  sawfish.wm.session.init)
 
-
 ;;; Options and variables
 
   (defvar workspace-boundary-mode 'stop
@@ -171,7 +170,6 @@ window, one of `stop', `keep-going', `wrap-around'")
   ;; true when in "show desktop" mode
   (define showing-desktop nil)
 
-
 ;;; Workspace ``swapping''
 
   ;; Property swapping is done on demand, and for each window
@@ -209,7 +207,6 @@ window, one of `stop', `keep-going', `wrap-around'")
 	    (window-put w 'swapped (delq alist (window-get w 'swapped))))
 	  (window-put w 'swapped-in space)))))
 
-
 ;;; Low level functions
 
   ;; return list of all workspaces containing window W
@@ -622,7 +619,6 @@ window, one of `stop', `keep-going', `wrap-around'")
 	       (not (or (desktop-window-p w) (dock-window-p w))))
       (hide-desktop)))
 
-
 ;;; Menu constructors
 
   (define (workspace-menu)
@@ -654,7 +650,6 @@ window, one of `stop', `keep-going', `wrap-around'")
   (define-command 'popup-workspace-list popup-workspace-list)
   (define-command 'popup-window-list popup-window-list)
 
-
 ;;; Commands
 
   (define (ws-call-with-workspace fun count mode)
@@ -878,7 +873,6 @@ last instance remaining, then delete the actual window."
   (define-command 'show-desktop show-desktop)
   (define-command 'hide-desktop hide-desktop)
 
-
 ;; some commands for moving directly to a workspace
 
   (define (activate-workspace n)
@@ -915,7 +909,6 @@ last instance remaining, then delete the actual window."
   (define-command 'select-workspace-interactively
     select-workspace-interactively)
 
-
 ;;; session management
 
   (define (ws-saved-state w)
@@ -943,7 +936,6 @@ last instance remaining, then delete the actual window."
 		      (cons p workspace-local-properties))))
 	  props))
 
-
 ;;; configuration
 
   (define (workspace-names-changed)
@@ -954,7 +946,6 @@ last instance remaining, then delete the actual window."
     (setq last-interesting-workspace nil)
     (call-hook 'workspace-state-change-hook))
 
-
 ;;; Initialisation
 
   (sm-add-saved-properties 'sticky 'iconified 'fixed-position)

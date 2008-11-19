@@ -1,5 +1,5 @@
 ;; gnome.jl -- minimal GNOME compliance
-;; $Id$
+;; $Id: gnome.jl,v 1.77 2003/02/20 04:56:05 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -382,7 +382,6 @@
 	       (proxy-current-event gnome-window-id (lsh 1 19))
 	       t)))))
 
-
 ;;; initialisation
 
   (define (gnome-init)

@@ -1,5 +1,5 @@
 ;; shading.jl -- window ``shading''
-;; $Id$
+;; $Id: shading.jl,v 1.24 2003/10/21 16:17:59 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -75,7 +75,6 @@ state."
   (define-command 'unshade-window unshade-window #:spec "%W")
   (define-command 'toggle-window-shaded toggle-window-shaded #:spec "%W")
 
-
 ;;; displaying
 
   (define (shaded-frame-type-mapper w type)
@@ -91,7 +90,6 @@ state."
 
   (define-frame-type-mapper shaded-frame-type-mapper)
 
-
 ;;; hooks
 
   (define (shading-add-window w)

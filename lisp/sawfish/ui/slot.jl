@@ -1,6 +1,6 @@
 #| nokogiri-slot.jl -- managing individual config items
 
-   $Id$
+   $Id: slot.jl,v 1.9 2003/01/12 20:30:47 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -65,7 +65,6 @@
 
   (defvar *nokogiri-slot-changed-hook* '())
 
-
 ;;; slot creation, data structure mgmt
 
   (define (slot-dependences slot)
@@ -149,7 +148,6 @@
 		  (cdr slots-rest)
 		  to-fetch))))))
 
-
 ;;; misc
 
   (define (custom-symbol-value symbol)

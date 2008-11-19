@@ -61,7 +61,6 @@ Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols, xa_wm_delete_window,
 DEFSYM(display_name, "display-name");
 DEFSYM(canonical_display_name, "canonical-display-name");
 
-
 /* X error handlers */
 
 /* General error handler. Probably due to lag between windows being
@@ -103,7 +102,6 @@ error_other_wm (Display *dpy, XErrorEvent *ev)
     exit (1);
 }
 
-
 
 static char *
 canonical_host (char *host)
@@ -177,7 +175,6 @@ canonical_display (char *name)
     return buf;
 }
 
-
 
 static void
 redisplay (void)
@@ -399,7 +396,6 @@ sys_kill (void)
     }
 }
 
-
 /* utilities */
 
 repv

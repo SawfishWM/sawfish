@@ -1,5 +1,5 @@
 ;; gtkrc.jl -- code to read current gtkrc settings
-;; $Id$
+;; $Id: gtkrc.jl,v 1.16 2001/01/15 18:57:23 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -185,7 +185,6 @@
       (menu-stop-process t)
       t))
 
-
 ;;; for restricted themes
 
   (define gtkrc-funs '())
@@ -205,7 +204,6 @@
     (gaol-define 'gtkrc-foreground gtkrc-foreground)
     (gaol-define 'gtkrc-font gtkrc-font))
 
-
 ;;; init
 
   (define (gtkrc-quit)

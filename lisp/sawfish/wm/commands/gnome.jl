@@ -1,5 +1,5 @@
 ;; gnome-commands.jl -- more GNOME stuff
-;; $Id$
+;; $Id: gnome.jl,v 1.14 2003/02/07 06:24:26 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -41,7 +41,6 @@
 
   (define-structure-alias gnome-commands sawfish.wm.commands.gnome)
 
-
 ;;; commands
 
   (define (gnome-toggle-skip-winlist w)
@@ -86,7 +85,6 @@
   (define-command 'gnome-clear-skip-tasklist gnome-clear-skip-tasklist
     #:spec "%W")
 
-
 ;; extras
 
   (define (gnome-logout)

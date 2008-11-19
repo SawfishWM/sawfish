@@ -1,5 +1,5 @@
 ;; keymaps.jl -- the default keymaps
-;; $Id$
+;; $Id: keymaps.jl,v 1.55 2003/01/12 20:30:50 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -32,7 +32,6 @@
   (defgroup bindings "Bindings"
     :layout keymaps)
 
-
 ;;; Customize support
 
   (define (customizable-command-p x)
@@ -83,7 +82,6 @@
   (put 'keymap 'custom-set 'custom-set-keymap)
   (put 'keymap 'custom-get custom-get-keymap)
 
-
 ;;; Options
 
   (defcustom global-keymap (bind-keys (make-keymap)
@@ -190,7 +188,6 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
 		 (grab-keymap window-keymap)
 		 (grab-keymap global-keymap)))
 
-
 ;;; Arrange for window-keymap to be set in each window
 
   (define (keymap-add-window w)
@@ -199,7 +196,6 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
   
   (add-hook 'add-window-hook keymap-add-window)
 
-
 ;; custom support for modifiers
 
   (define-custom-serializer 'modifier-list

@@ -1,6 +1,6 @@
 #| nokogiri-sawfish.jl -- code to load into window manager
 
-   $Id$
+   $Id: nokogiri.jl,v 1.20 2002/04/21 04:52:17 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -45,7 +45,6 @@
   (defvar customize-command-classes '(default)
     "Also include commands of these classes the key bindings panel.")
 
-
 ;;; interfaces
 
   (define (nokogiri-report-slot symbol)
@@ -123,7 +122,6 @@
   (define (nokogiri-grab-match-window-property name)
     (match-window-grab-x-property name))
 
-
 ;;; ignore these commands in customizer
 
   (mapc (lambda (x) (put x 'deprecated-command t))

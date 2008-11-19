@@ -92,7 +92,6 @@ static repv state_syms[fps_MAX];
 static bool frame_draw_mutex;
 bool frame_state_mutex;
 
-
 /* type hooks */
 
 static struct frame_part *
@@ -183,7 +182,6 @@ fp_sweep (void)
     }
 }
 
-
 /* building frames from component lists
 
    build the frame from the list of components. Each element
@@ -1692,7 +1690,6 @@ restack_frame_parts (Lisp_Window *w)
     }
 }
 
-
 /* creating window frames */
 
 /* Create a frame for window W. Called with the server grabbed. If
@@ -1734,7 +1731,6 @@ destroy_window_frame (Lisp_Window *w, bool leave_frame_win)
     }
 }
 
-
 /* Lisp functions */
 
 DEFUN("frame-draw-mutex", Fframe_draw_mutex,
@@ -1906,7 +1902,6 @@ DEFUN("refresh-window", Frefresh_window,
     return Qt;
 }
 
-
 /* initialisation */
 
 void

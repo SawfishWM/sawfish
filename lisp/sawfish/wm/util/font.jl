@@ -1,6 +1,6 @@
 #| font.jl -- some font-related functions
 
-   $Id$
+   $Id: font.jl,v 1.4 2003/08/14 06:55:36 jsh Exp $
 
    Author: John Harper <jsh@unfactored.org>
 
@@ -73,7 +73,6 @@
   (define (face-style face style)
     (cdr (assoc-case style (face-styles face))))
 
-
 ;; Xft naming scheme
 
   (define xft-abbrev-map
@@ -140,7 +139,6 @@
 					(format nil "%s=%s" (car x) (cdr x)))
 				       (t (car x)))) styles)) #\:)))
 
-
 ;; Pango naming scheme
 
   (define pango-style-map
@@ -224,7 +222,6 @@
 	      (loop (cdr rest) (cons (car tem) out))
 	    (loop (cdr rest) out))))))
 
-
 ;; XLFD naming scheme
 
   (define xlfd-style-names

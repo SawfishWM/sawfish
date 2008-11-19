@@ -55,7 +55,6 @@ struct pixmap_cache_node_struct {
 
 static pixmap_cache_node *oldest, *newest;
 
-
 /* list manipulators */
 
 static void
@@ -129,7 +128,6 @@ delete_node (pixmap_cache_node *n, bool dealloc)
     free_node (n, dealloc);
 }
 
-
 /* public interface */
 
 bool

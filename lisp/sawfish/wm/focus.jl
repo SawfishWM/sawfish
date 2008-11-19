@@ -67,7 +67,6 @@ most-recently focused windows.")
     "When true, the current command is being called from within a
 click-to-focus button press event.")
 
-
 ;;; general utilities
 
   (define (define-focus-mode name fun)
@@ -130,7 +129,6 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
   (define (warp-pointer-if-necessary #!optional (w (input-focus)))
     (focus-invoke-mode w 'warp-if-necessary))
 
-
 ;;; modes
 
   (define-focus-mode 'enter-exit
@@ -221,7 +219,6 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
         ((focus-in focus-out add-window before-mode-change after-mode-change)
          (apply (focus-mode-ref 'click) w action args)))))
 
-
 ;;; hooks
 
   (define (focus-enter-fun w mode)
@@ -264,7 +261,6 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 
   (sm-add-saved-properties 'never-focus 'focus-mode)
 
-
 ;; bug prevention
 
   ;; XXX Pavel reported this bug (windows becoming unfocusable in

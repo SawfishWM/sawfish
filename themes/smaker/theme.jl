@@ -1,5 +1,5 @@
 ;; smaker/theme.jl -- somewhat windowmaker like theme, heavily customizable
-;; $Id: theme.jl,v 1.10 2000/05/15 16:37:52 john Exp $
+;; $Id: theme.jl,v 1.11 2000/06/28 15:53:06 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -71,7 +71,6 @@
   :group (appearance smaker)
   :type number)
 
-
 ;; image loading
 
 (let*

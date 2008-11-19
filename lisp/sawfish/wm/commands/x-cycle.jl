@@ -130,7 +130,6 @@
   (defvar after-cycle-step-hook '()
     "Window hook called after each step of window cycling.")
 
-
 ;; variables
 
   ;; the current window
@@ -148,7 +147,6 @@
   ;; list of all cycle command names
   (define cycle-commands '())
 
-
 ;;; code
 
   (define (forwards lst elt count)
@@ -334,7 +332,6 @@ Any extra arguments are passed to each call to define-command."
     (when reverse-name
       (apply define-cycle-command reverse-name (command-body -1) rest)))
 
-
 ;;; commands
 
   (define-cycle-command-pair
@@ -382,7 +379,6 @@ Any extra arguments are passed to each call to define-command."
      (delete-if-not (lambda (x) (window-in-cycle-p x #:ignore-cycle-skip t))
 		    (filter-windows dock-window-p)))))
 
-
 #| autoload cookies:
 
 ###autoload (autoload-command 'cycle-windows 'sawfish.wm.commands.x-cycle)

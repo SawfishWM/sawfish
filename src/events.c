@@ -269,7 +269,6 @@ install_colormaps (Lisp_Window *w)
     }
 }
 
-
 /* Individual event handlers */
 
 static void
@@ -1274,7 +1273,6 @@ shape_notify (XEvent *ev)
     }
 }
 
-
 
 static int synthetic_configure_mutex;
 
@@ -1371,7 +1369,6 @@ ungrab_pointer (void)
     XUngrabPointer (dpy, last_event_time);
 }
 
-
 /* Window-local event handlers */
 
 /* Register that FUN should be called for any events received from
@@ -1401,7 +1398,6 @@ window_event_handler (Window w)
 			 &fun.p) ? 0 : fun.v;
 }
 
-
 /* Event loop */
 
 static repv
@@ -1498,7 +1494,6 @@ handle_sync_input (int fd)
     handle_input_mask (0);
 }
 
-
 /* Lisp functions */
 
 DEFUN("query-pointer", Fquery_pointer, Squery_pointer, (repv get), rep_Subr1) /*
@@ -1676,7 +1671,6 @@ DEFUN("clicked-frame-part", Fclicked_frame_part,
     return (clicked_frame_part != 0) ? rep_VAL (clicked_frame_part) : Qnil;
 }
 
-
 /* initialisation */
 
 void
