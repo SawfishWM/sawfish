@@ -41,20 +41,21 @@
   :after-set (lambda () (rebuild-all)))
 
 (defvar Crux:button-themes '((default
-			      ((close-button)
-			       . (iconify-button maximize-button shade-button)))
+			      ((close-button) . (iconify-button maximize-button shade-button)))
 			     (platinum
 			      ((close-button) . (maximize-button shade-button)))
 			     (macos-x
 			      ((close-button maximize-button iconify-button)))
 			     (windows
-			      ((menu-button)
-			       . (iconify-button maximize-button close-button))
+			      ((menu-button) . (iconify-button maximize-button close-button))
 			      ((menu-button)))
 			     (next
 			      ((iconify-button) . (close-button))
-			      ((iconify-button) . (close-button)))))
-			       
+			      ((iconify-button) . (close-button)))
+			     (complete
+			      ((close-button) . (shade-button iconify-button maximize-button menu-button)))
+			     (complete-inverse
+			      ((menu-button maximize-button iconify-button shade-button) . (close-button)))))
 
 (defcustom Crux:button-theme 'default
   "Display title buttons to mimic: \\w"
@@ -64,7 +65,9 @@
 		(platinum "Mac OS Platinum")
 		(macos-x "Mac OS X")
 		(windows "MS Windows")
-		(next "NeXTSTEP"))
+		(next "NeXTSTEP")
+		(complete "Complete")
+		(complete-inverse "Complete (Inverse)"))
   :group (appearance Crux)
   :after-set (lambda () (reframe-all)))
 
