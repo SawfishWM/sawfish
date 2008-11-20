@@ -62,6 +62,11 @@
     :type number
     :range (1 . 50))
 
+  (defcustom viewport-boundary-mode 'stop
+    "Wether to stop or wrap-around on first/last viewport"
+     :group workspace
+    :type (choice wrap-around stop))
+
 ;;; raw viewport handling
 
   (defvar viewport-x-offset 0)
@@ -122,10 +127,13 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
 
   ;; returns t if it actually moved the viewport
   (define (set-screen-viewport col row)
+    (when (eq viewport-boundary-mode 'wrap-around)
+      (setq col (mod col (car viewport-dimensions))
+            row (mod row (cdr viewport-dimensions))))
     (when (and (>= col 0) (< col (car viewport-dimensions))
-	       (>= row 0) (< row (cdr viewport-dimensions)))
+               (>= row 0) (< row (cdr viewport-dimensions)))
       (set-viewport (* col (screen-width))
-		    (* row (screen-height)))
+                    (* row (screen-height)))
       t))
 
   (define (select-workspace-and-viewport space col row)
