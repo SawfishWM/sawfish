@@ -67,8 +67,8 @@
   (defvar viewport-x-offset 0)
   (defvar viewport-y-offset 0)
 
-  (define (set-viewport x y)
-    ;; move W to its new position
+  (define (warp-viewport x y)
+    "Change view by incrementing the coordinates of the x,y position."
     (define (move-window w)
       (unless (window-get w 'sticky-viewport)
 	(let ((pos (window-position w)))
