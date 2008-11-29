@@ -1,6 +1,6 @@
 #| nokogiri-widgets/frame-style.jl -- theme chooser widget
 
-   $Id$
+   $Id: frame-style.jl,v 1.9 2003/01/12 20:30:49 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -53,6 +53,7 @@
 	  (update-readme value readme-text-view path)
 	  (call-callback changed-callback)))
 
+      (gtk-widget-relate-label combo doc-label)
       (gtk-box-set-spacing hbox box-spacing)
       (gtk-box-set-spacing vbox box-spacing)
       (gtk-container-add readme-scroller readme-text-view)

@@ -1,6 +1,6 @@
 #| nokogiri-layout.jl -- arranging groups of slots
 
-   $Id$
+   $Id: layout.jl,v 1.9 2003/01/12 20:30:47 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -35,6 +35,10 @@
 	   sawfish.ui.slot
 	   sawfish.gtk.widget)
      (access rep.structures))
+
+  (defvar widget-ptr nil)
+  (defvar label-ptr nil)
+  (defvar tempstring nil)
 
   (define (define-layout-type name fun) (put name 'nokogiri-layout fun))
 
@@ -124,14 +128,21 @@
 		  (break (if (string-match "\\\\w" doc)
 			     (match-start)
 			   -2)))
+	      (setq widget-ptr (slot-gtk-widget slot))
 	      (when (> break 0)
-		(gtk-box-pack-start hbox (make-label (substring doc 0 break))))
+		(setq label-ptr (make-label (substring doc 0 break)))
+		(gtk-box-pack-start hbox label-ptr)
+		(gtk-widget-relate-label widget-ptr label-ptr))
 	      (if (memq 'expand-horizontally (slot-flags slot))
-		  (gtk-box-pack-start hbox (slot-gtk-widget slot) t t)
-		(gtk-box-pack-start hbox (slot-gtk-widget slot) nil nil))
+		  (gtk-box-pack-start hbox widget-ptr t t)
+		(gtk-box-pack-start hbox widget-ptr nil nil))
 	      (when (< break (length doc))
-		(gtk-box-pack-start
-		 hbox (make-label (substring doc (+ break 2)))))
+		(setq tempstring (substring doc (+ break 2)))	
+		(if (> (length tempstring) 0)
+		(progn
+		(setq label-ptr (make-label tempstring))
+		(gtk-box-pack-start hbox label-ptr)
+		(gtk-widget-relate-label widget-ptr label-ptr))))
 	      (setq hbox (add-tooltip hbox))
 	      (gtk-widget-show-all hbox)
 	      hbox))))))

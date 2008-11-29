@@ -1,6 +1,6 @@
 #| nokogiri-layouts/keymaps.jl -- shell for binding group
 
-   $Id$
+   $Id: keymaps.jl,v 1.8 2003/01/12 20:30:49 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -31,6 +31,8 @@
 	  sawfish.ui.layout
 	  sawfish.gtk.widget)
 
+  (defvar label-ptr nil)
+
   (define (keymap-slot-p slot)
     ;; XXX so fucking evil!
     (string-match "-keymap$" (symbol-name (slot-name slot))))
@@ -48,8 +50,10 @@
 	   (active (car keymap-slots)))
 
       (when keymap-slots
-	(gtk-box-pack-start hbox (gtk-label-new (_ "Context:")))
+	(setq label-ptr (gtk-label-new (_ "Context:")))	
+	(gtk-box-pack-start hbox label-ptr)
 	(gtk-box-pack-start hbox omenu)
+	(gtk-widget-relate-label omenu label-ptr)
 	(gtk-box-pack-start vbox hbox)
 
 	(let loop ((rest keymap-slots)

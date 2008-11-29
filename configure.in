@@ -145,10 +145,10 @@ PKG_CHECK_MODULES(PANGO, pango >= 1.8.0,
    fi], [: nothing])
 
 dnl Check for librep
-AM_PATH_REP(0.14)
+AM_PATH_REP(0.17)
 
 rep_gtk_function=gtk-widget-set-size-request
-rep_gtk_version=0.17
+rep_gtk_version=0.18.3
 
 AC_MSG_CHECKING([for rep-gtk >= $rep_gtk_version])
 cat >conftest <<EOF
