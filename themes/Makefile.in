@@ -47,10 +47,10 @@ all :
 install : all installdirs
 	for d in $(THEMES); do \
 	  rm -rf $(DESTDIR)$(themedir)/$$d; \
-	  mkdir $(DESTDIR)$(themedir)/$$d; \
 	  for f in $(srcdir)/$$d/*; do \
 	    if [ $$f != $(srcdir)/$$d/CVS ]; then \
-	      $(INSTALL_DATA) $$f $(DESTDIR)$(themedir)/$$d; \
+	      ( cd $(srcdir) && tar czf $$d.tar.gz $$d/* ) ; \
+	      $(INSTALL_DATA) $$d.tar.gz $(DESTDIR)$(themedir)/$$d.tar.gz; \
 	    fi \
 	  done \
 	done
