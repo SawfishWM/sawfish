@@ -162,7 +162,8 @@ the level of any transient windows it has."
 		(transient-of-p w (input-focus) #:allow-root t))
 	   (set-input-focus w))
 	  ((and (or (and focus-windows-when-mapped
-			 (not (window-get w 'never-focus)))
+			 (not (window-get w 'never-focus))
+			 (not (window-get w 'inhibit-focus-when-mapped)))
 		    (window-get w 'focus-when-mapped))
 		(or (not (window-transient-p w))
 		    (eql (window-transient-p w) (root-window-id)))

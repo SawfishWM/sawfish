@@ -122,7 +122,8 @@
      _NET_WM_WINDOW_TYPE_TOOLBAR
      _NET_WM_WINDOW_TYPE_MENU
      _NET_WM_WINDOW_TYPE_UTILITY
-     _NET_WM_WINDOW_TYPE_SPLASH])
+     _NET_WM_WINDOW_TYPE_SPLASH
+     _NET_WM_USER_TIME])
   
   (defvar wm-spec-below-depth -2)
   (defvar wm-spec-above-depth +2)
@@ -316,7 +317,10 @@
 
     (let ((geom (get-x-property w '_NET_WM_ICON_GEOMETRY)))
       (when geom
-	(update-icon-geometry w (nth 2 geom)))))
+	(update-icon-geometry w (nth 2 geom))))
+      (when (equal (get-x-property w '_NET_WM_USER_TIME)
+          '(CARDINAL 32 #(0)))
+        (window-put w 'inhibit-focus-when-mapped t)))
 
 ;;; helper functions
 
