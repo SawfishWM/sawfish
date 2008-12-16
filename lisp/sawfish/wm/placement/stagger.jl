@@ -1,6 +1,6 @@
 ;; stagger-placement.jl -- for jwz
 
-;; $Id$
+;; $Id: stagger.jl,v 1.3 2002/05/27 05:18:56 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -51,4 +51,4 @@
 	  (move-window-to w last-x last-y)))))
 
   ;;###autoload
-  (define-placement-mode 'stagger place-window-stagger))
+  (define-placement-mode 'stagger place-window-stagger #:for-normal t))

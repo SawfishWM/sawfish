@@ -18,7 +18,7 @@
    along with sawfish; see the file COPYING.  If not, write to
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id$
+   $Id: off-center.jl,v 1.3 2002/04/24 06:57:02 jsh Exp $
 
    Authors: John Harper <jsh@eazel.com>
 |#
@@ -123,4 +123,4 @@
 	      (loop (1+ index))))))))
 
   ;;###autoload
-  (define-placement-mode 'off-center place-window-off-center))
+  (define-placement-mode 'off-center place-window-off-center #:for-normal t))
