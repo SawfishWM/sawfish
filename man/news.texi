@@ -6,6 +6,63 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+@heading 1.3.5
+
+@itemize @bullet
+
+@item The 1.3.5 version has new features and bugfixes
+
+@item New/Updated requirements:
+@itemize @minus
+
+@item librep 0.14 -> 0.17
+
+@item rep-gtk 0.18 -> 0.18.3
+@end itemize
+
+@item New features:
+@itemize @minus
+
+@item Support _NET_WM_USER_TIME by Hellmut Eller
+
+@item Added ATK-A11Y Support by Shobbit Marthur
+
+@item Added Viewport-Boundary by Christopher Bratusek
+
+@item Added Error-Handler "both" by Christopher Bratusek
+
+@item Added 2 new Buttonlayouts to Crux "complete" and "complete inverse" by Christopher Bratusek
+
+@item Honour ICCCM Aspect Ratio by Andrea Vettorello
+
+@item Expose all Keybindings in SawfishUI by Christopher Bratusek
+
+@item Added Animated Viewport Scrolling by Fernando Carmona Varo
+
+@item Also expose the "Stagger" and "Off-Center" placement-modes
+@end itemize
+
+@item Bugfixes:
+@itemize @minus
+
+@item Minimum pango version is 1.8.0 not 1.16.0 by Christopher Bratusek
+
+@item Fix Installation of mxflat by Michal Jaegermann
+@end itemize
+
+@item Other Changes:
+@itemize @minus
+
+@item Remove all ^L in the source by Teika Kazura
+
+@item Small Code-cleanup to make build with "-Wall -ansi -pedantic" possible again (also requires recent librep for this to work)
+
+@item Major Documentation Update by Derek Upham
+
+@item updated the shipped config.sub and config.guess by Christopher Bratusek
+@end itemize
+@end itemize
+
 @heading 1.3.4
 
 @itemize @bullet
