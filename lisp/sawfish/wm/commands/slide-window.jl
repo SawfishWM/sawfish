@@ -40,7 +40,11 @@
   (defvar slide-window-increment 16
     "Number of pixels to move window in `slide-' commands.")
 
+  (defvar before-slide-hook '()
+    "Window hook called before a window is moved with the keyboard.")
+
   (define (slide-window w right down)
+    (call-window-hook 'before-slide-hook w)
     (unless (window-get w 'fixed-position)
       (let ((coords (window-position w)))
 	(move-window-to w (+ (car coords) right) (+ (cdr coords) down)))))

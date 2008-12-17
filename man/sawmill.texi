@@ -4,9 +4,9 @@
 @footnotestyle end
 
 @set EDITION 0.13
-@set VERSION 1.3.4
-@set UPDATED 18 Nov 2008
-@set UPDATE-MONTH Nov 2008
+@set VERSION 1.3.5
+@set UPDATED 16 Dec 2008
+@set UPDATE-MONTH Dec 2008
 
 @ifinfo
 @direntry
@@ -5937,6 +5937,10 @@ to the window, the hook is called with a list of symbols indicating how
 the window was moved or resized: 
 @code{horizontal} and @code{vertical} for movement,
 @code{right}, @code{left}, @code{bottom} and @code{top} for resizing.
+@end defvr
+
+@defvr {Window Hook} before-slide-hook
+Called before a window move when using key binding.
 @end defvr
 
 
