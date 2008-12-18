@@ -1,5 +1,5 @@
 ;; gnome-int.jl -- more GNOME integration
-;; $Id$
+;; $Id: integration.jl,v 1.20 2003/08/14 06:55:36 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -51,7 +51,7 @@
 
   ;; invoke the GNOME terminal instead of xterm
   (unless (variable-customized-p 'xterm-program)
-    (setq xterm-program "gnome-terminal"))
+    (setq xterm-program "x-terminal-emulator"))
 
   ;; use the GNOME help browser and url launcher
   (setq help-display-info-function help-call-info-gnome)
