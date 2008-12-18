@@ -72,6 +72,8 @@
   (defvar gnome-menu-roots (list (expand-file-name
 				  "apps" gnome-share-directory)
 				 "/etc/X11/applnk"	;on RedHat systems
+				 "/usr/share/applications"
+				 "/var/lib/menu-xdg/applications/menu-xdg"
 				 "~/.gnome/apps")
     "List of directories to read GNOME menu entries from.")
 
@@ -146,7 +148,7 @@
 	       ;; create a menu item
 	       `(,(or name exec)
 		 (system ,(concat (if terminal
-				      (concat "gnome-terminal -e " exec)
+				      (concat "x-terminal-emulator -e " exec)
 				    exec) " &"))))))))
 
   (define (gnome-menu-read-order filename)
