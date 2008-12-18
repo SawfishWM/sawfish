@@ -24,7 +24,7 @@
     (open rep
 	  sawfish.wm.state.gnome
 ;; FIXME: add support for GNOME 2 applications
-;;	  sawfish.wm.gnome.menus
+	  sawfish.wm.gnome.menus
 	  sawfish.wm.menus
 	  sawfish.wm.custom
 	  sawfish.wm.commands.help
@@ -41,8 +41,8 @@
     (when quit
       (setq root-menu (delq quit root-menu)))
     ;; FIXME: until GNOME 2 applications are supported
-    (when programs
-      (setq root-menu (delq programs root-menu)))
+;;    (when programs
+;;      (setq root-menu (delq programs root-menu)))
     (when (null (last root-menu))
       (setq root-menu (delq (last root-menu) root-menu))))
 
