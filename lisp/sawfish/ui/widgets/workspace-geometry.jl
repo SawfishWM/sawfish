@@ -1,6 +1,6 @@
 #| nokogiri-widgets/workspace-geometry.jl
 
-   $Id$
+   $Id: workspace-geometry.jl,v 1.9 2003/01/12 20:30:49 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -28,7 +28,6 @@
     (open rep
 	  gui.gtk-2.gtk
 	  gui.gtk-2.gnome-canvas
-	  gui.gtk-2.gdk-pixbuf
 	  rep.io.files
 	  sawfish.gtk.widget
 	  sawfish.ui.layout)
