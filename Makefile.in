@@ -55,7 +55,8 @@ install : all installdirs
 	    $(INSTALL_SCRIPT) $(srcdir)/moved $(DESTDIR)$(bindir)/$$f; \
 	  fi \
 	done
-
+	mkdir -p $(DESTDIR)$(libdir)/pkgconfig/
+	$(INSTALL_DATA) $(top_srcdir)/sawfish.pc $(DESTDIR)$(libdir)/pkgconfig/
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(sawfishdir)/$(version) \
 	  $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir) \
@@ -87,7 +88,7 @@ realclean :
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ) || exit 1; \
 	done
 	rm -f config.cache config.h config.log config.status Makedefs Makefile
-	rm -f *~ NEWS DOC* TAGS build.h sawfish.spec
+	rm -f *~ NEWS DOC* TAGS build.h sawfish.spec sawfish*.ebuild sawfish.pc
 
 distclean : realclean
 

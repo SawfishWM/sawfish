@@ -31,7 +31,7 @@ subversion=""
 output_files="src/Makefile lisp/Makefile scripts/Makefile themes/Makefile\
  lisp/sawfish/ui/Makefile lisp/sawfish/gtk/Makefile sounds/Makefile\
  man/Makefile po/Makefile Makedefs Makefile sawfish.spec\
- lisp/sawfish/gtk/widgets/font.jl"
+ lisp/sawfish/gtk/widgets/font.jl sawfish.pc sawfish.ebuild"
 
 SUBDIRS="src lisp scripts themes sounds man po"
 AC_SUBST(SUBDIRS)
@@ -361,6 +361,8 @@ AC_SUBST(IMLIB_LIBS)
 
 dnl Build all files
 AC_OUTPUT(${output_files})
+
+mv sawfish.ebuild sawfish-$version.ebuild
 
 dnl If it doesn't look like GNU Make is being used, give a friendly warning
 tem=`make --version -f /dev/null 2>&1 | grep GNU`
