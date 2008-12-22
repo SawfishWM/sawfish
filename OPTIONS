@@ -167,11 +167,17 @@
 ;;  (define-special-variable uniconify-to-current-viewport t
 ;;    "Windows uniconify to the current viewport.")
 
+;;  (define-special-variable viewport-boundary-mode 'stop
+;;    "How to act when passing the first or last workspace stop or wrap-around")
+
+;;  (define-special-variable scroll-viewport-steps '1
+;;    "Number of steps in which to scroll between viewports (less steps = faster scrolling)."
+
+;; workspace options
+
 ;;  (define-special-variable workspace-boundary-mode 'stop
 ;;    "How to act when passing the first or last workspace, one of
 ;;`stop', `wrap-around' or `keep-going'")
-
-;; workspace options
 
 ;;  (define-special-variable workspace-send-boundary-mode 'stop
 ;;    "How to act when passing the first or last workspace, while
@@ -315,8 +321,8 @@
 ;;    "Beep when errors occur.")
 
 ;;  (define-special-variable error-destination 'standard-error
-;;    "Where to display error messages; one of nowhere, screen, or
-;;standard-error")
+;;    "Where to display error messages; one of nowhere, screen,
+;;standard-error or both")
 
 ;; tooltips options
 
