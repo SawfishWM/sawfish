@@ -131,15 +131,15 @@ CPPFLAGS="${_cppflags}"
 dnl Checks for pango
 PKG_CHECK_MODULES(PANGO, pango >= 1.8.0,
   [if $PKG_CONFIG --exists pangoxft; then
-     AC_DEFINE(HAVE_PANGO_XFT, 1)
+     AC_DEFINE(HAVE_PANGO_XFT, 1, [Have pangoxft])
      PANGO_MODULES="pangoxft pangox"
      dnl for sawfish.gtk.widgets.font
      have_pango_xft=yes
      AC_SUBST(have_pango_xft)
    fi
    if test "x$PANGO_MODULES" != x; then
-     AC_DEFINE(HAVE_PANGO, 1)
-     AC_DEFINE(HAVE_PANGO_X, 1)
+     AC_DEFINE(HAVE_PANGO, 1, [Have pango])
+     AC_DEFINE(HAVE_PANGO_X, 1, [Have pango x])
      PANGO_LIBS=`$PKG_CONFIG --libs $PANGO_MODULES`
      PANGO_CFLAGS=`$PKG_CONFIG --cflags $PANGO_MODULES`
    fi], [: nothing])
@@ -161,7 +161,7 @@ PKG_CHECK_MODULES(REP_GTK, rep-gtk >= 0.18.4)
 
 dnl is X available?
 if test "${no_x}" != "yes"; then
-  AC_DEFINE(HAVE_X11)
+  AC_DEFINE(HAVE_X11, 1, [Have X11])
 else
   AC_MSG_ERROR([You need X11 for sawfish])
 fi
@@ -178,8 +178,8 @@ if test "$with_gdk_pixbuf" != "no"; then
     AC_SUBST(GDK_PIXBUF_VERSION)
     AC_SUBST(GDK_PIXBUF_CFLAGS)
     AC_SUBST(GDK_PIXBUF_LIBS)
-    AC_DEFINE(HAVE_GDK_PIXBUF,1)
-    AC_DEFINE(NEED_PIXMAP_CACHE,1)
+    AC_DEFINE(HAVE_GDK_PIXBUF,1,[Have gdk-pixbuf])
+    AC_DEFINE(NEED_PIXMAP_CACHE,1,[Neex pixmap cache])
     IMAGE_LIBS='${GDK_PIXBUF_LIBS}'
     IMAGE_CFLAGS='${GDK_PIXBUF_CFLAGS}'
     with_gdk_pixbuf=yes
@@ -206,7 +206,7 @@ if test "$with_gdk_pixbuf" = "no"; then
     if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then true; else
       AC_MSG_ERROR([imlib must be built with support for png images])
     fi
-    AC_DEFINE(HAVE_IMLIB,1)
+    AC_DEFINE(HAVE_IMLIB,1,[Have ImLib])
     IMAGE_LIBS='${IMLIB_LIBS}'
     IMAGE_CFLAGS='${IMLIB_CFLAGS}'
     AC_SUBST(IMLIB_VERSION)
@@ -226,7 +226,7 @@ if test "$with_audiofile" = "yes"; then
     PKG_CHECK_MODULES(AUDIOFILE, audiofile >= 0.2.3)
     AC_SUBST(AUDIOFILE_LIBS)
     AC_SUBST(AUDIOFILE_CFLAGS)
-    AC_DEFINE(HAVE_LIBAUDIOFILE)
+    AC_DEFINE(HAVE_LIBAUDIOFILE,1,[Have libaudiofile])
 fi
 
 AC_ARG_WITH(esd,
@@ -236,7 +236,7 @@ if test "$with_esd" = "yes"; then
     PKG_CHECK_MODULES(ESD, esound >= 0.2.23)
     AC_SUBST(ESD_LIBS)
     AC_SUBST(ESD_CFLAGS)
-    AC_DEFINE(HAVE_ESD)
+    AC_DEFINE(HAVE_ESD,1,[Have ESD])
 fi
 
 AC_ARG_ENABLE(gnome-widgets,
@@ -267,10 +267,10 @@ if test "$doug_lea_malloc" = "no"; then
   dnl We used to compile our own version of dlmalloc on most
   dnl platforms that didn't have it in their libc. But the list
   dnl of exceptions was growing too long..
-  AC_DEFINE(LIBC_MALLOC)
+  AC_DEFINE(LIBC_MALLOC,1,[libc malloc])
 else
-  AC_DEFINE(DOUG_LEA_MALLOC)
-  AC_DEFINE(LIBC_MALLOC)
+  AC_DEFINE(DOUG_LEA_MALLOC,1,[Doug Lea malloc])
+  AC_DEFINE(LIBC_MALLOC,1,[libc malloc])
 fi
 
 dnl Check for GNOME location
