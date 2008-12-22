@@ -70,7 +70,7 @@ install : all installdirs
 	$(foreach x,$(DL_DSTS),\
 	  $(rep_LIBTOOL) --mode=install $(INSTALL_PROGRAM) \
 	  $(notdir $(x)) $(DESTDIR)$(sawfishexecdir)/$(dir $(x));)
-	$(rep_INSTALL_ALIASES) -c . $(DESTDIR)$(sawfishexecdir)
+	$(rep_INSTALL_ALIASES) -c $(srcdir) $(DESTDIR)$(sawfishexecdir)
 	$(rep_LIBTOOL) --mode=install $(INSTALL_PROGRAM) client.la $(DESTDIR)$(repexecdir)/sawfish/
 
 uninstall :
