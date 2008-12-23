@@ -1,5 +1,5 @@
 # Makedefs.in -- input for the common Makefile definitions
-# $Id$
+# $Id: Makedefs.in,v 1.29 2005/07/01 16:04:49 jsh Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -46,7 +46,7 @@ GNOMEDIR=@GNOMEDIR@
 
 CC=@CC@
 MAKEDEP=@MAKEDEP@
-CPPFLAGS=-DHAVE_CONFIG_H -DSAWFISH -I. -I.. @CPPFLAGS@
+CPPFLAGS=-DHAVE_CONFIG_H -DSAWFISH -D__STRICT_ANSI__ -I. -I.. @CPPFLAGS@
 CFLAGS=@CFLAGS@
 LDFLAGS=@LDFLAGS@
 LIBS=@LIBS@
