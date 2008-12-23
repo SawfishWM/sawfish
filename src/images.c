@@ -1001,6 +1001,9 @@ Tile SOURCE-IMAGE into DEST-IMAGE.
     int src_width, src_height;
     int dst_width, dst_height;
     int x,dst_y;
+#if defined HAVE_IMLIB
+    int src_y;
+#endif
 
     rep_DECLARE1(dst, IMAGEP);
     rep_DECLARE2(src, IMAGEP);
