@@ -143,7 +143,7 @@ server_accept_connection(int unused_fd)
 {
     int confd;
     struct sockaddr_un addr;
-    socklen_t addr_len;
+    socklen_t addr_len = sizeof(addr);
 
     /* Linux manpage states that we can pass NULL for addr parameters,
        but that has been reported to crash on some systems.. */
