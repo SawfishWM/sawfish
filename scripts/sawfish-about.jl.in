@@ -9,7 +9,7 @@ exec rep "$0" "$@"
 
 #| sawfish-about.jl.in -- helper process for sawfish about dialog
 
-   $Id$
+   $Id: sawfish-about.jl.in,v 1.10 2003/01/12 20:35:21 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -52,7 +52,7 @@ exec rep "$0" "$@"
   (define logo "sawfish-logo.png")
 
   (let* ((hbox (gtk-hbox-new t 0))
-	 (ref (make-url-widget "http://sawmill.sourceforge.net/"
+	 (ref (make-url-widget "http://sawfish.wikia.com/"
 				(_ "Sawfish homepage"))))
     (gtk-box-pack-start hbox ref)
     (gtk-widget-show-all hbox)
