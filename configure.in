@@ -31,7 +31,7 @@ dnl Release versioning info
 version="1.5.0"
 subversion=""
 
-SUBDIRS="src lisp screenshotter scripts themes sounds man po"
+SUBDIRS="src lisp scripts themes sounds man po"
 AC_SUBST(SUBDIRS)
 
 dnl Remove trailing slash in $prefix if necessary
@@ -301,6 +301,8 @@ if test $REP_MSGFMT = true; then
 fi
 AC_MSG_RESULT($LINGUAS)
 AC_SUBST(LINGUAS)
+
+AC_PROG_INSTALL
 
 dnl Nonstandard exported symbols
 AC_SUBST(version)
