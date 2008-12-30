@@ -1,6 +1,6 @@
 #| nokogiri-shell.jl -- shell displaying custom groups
 
-   $Id$
+   $Id: shell.jl,v 1.23 2003/01/12 20:30:47 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -93,7 +93,7 @@
 	      (gtk-container-add vbox paned)
 	      (gtk-paned-add1 paned g-scroller)
 	      (gtk-paned-add2 paned (or s-scroller slot-box-widget))
-	      (gtk-paned-set-position paned 150)
+	      (gtk-paned-set-position paned 250)
 	      (gtk-scrolled-window-add-with-viewport g-scroller
 						     group-tree-widget))
 	  (gtk-container-add vbox (or s-scroller slot-box-widget))))

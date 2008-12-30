@@ -40,15 +40,17 @@
   (defcustom place-window-mode 'top-left
     "Method of placing windows: \\w"
     :type symbol
-    :group placement)
+    :group (misc placement))
 
   (defcustom place-transient-mode 'centered-on-parent
     "Method of placing dialog windows: \\w"
     :type symbol
-    :group placement)
+    :group (misc placement))
 
-  (defvar ignore-program-positions t
-    "Ignore program-specified window placements.")
+  (defcustom ignore-program-positions t
+    "Ignore program-specified window placements."
+    :type boolean
+    :group (misc placement))
 
   (defvar placement-modes '()
     "List of names of all placement modes.")

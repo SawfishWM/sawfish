@@ -68,24 +68,38 @@
 	  sawfish.wm.misc
 	  sawfish.wm.commands)
 
-  (defvar ignore-window-input-hint nil
-    "Give focus to windows even when they haven't asked for it.")
 
-  (defvar warp-to-window-offset (cons -1 -1)
-    "Offset (%) from window edges when warping pointer. A negative number
-means outside the left window edge.")
+  (defcustom ignore-window-input-hint nil
+    "Give focus to windows even when they haven't asked for it."
+    :type boolean
+    :group focus)
 
-  (defvar warp-to-window-enabled nil
-    "When false, disable warping the cursor to windows.")
- 
-  (defvar dont-avoid-ignored t
-    "When non-nil, ignored windows aren't avoided by default.")
+  (defgroup warp "Warping" :group misc)
 
-  (defvar avoid-by-default nil
-    "When non-nil, any unspecified windows are avoided by default.")
+  (defcustom warp-to-window-offset (cons -1 -1)
+    "Offset (%) from window edges when warping pointer."
+    :type (pair (number 1) (number 1))
+    :group (misc warp))
 
-  (defvar uniquify-name-format "%s [%d]"
-    "Format to create unique window names.")
+  (defcustom warp-to-window-enabled nil
+    "Wether to enable warping the cursor to windows."
+    :type boolean
+    :group (misc warp))
+
+  (defcustom dont-avoid-ignored t
+    "Wether to not ignore avoided windows by default."
+    :type boolean
+    :group misc)
+
+  (defcustom avoid-by-default nil
+    "Wether to avoid any unspecified window by default."
+    :type boolean
+    :group misc)
+
+  (defcustom uniquify-name-format "%s [%d]"
+    "Format to create unique window names."
+    :type string
+    :group misc)
 
   (defvar dock-window-properties
     '(window-list-skip cycle-skip fixed-position focus-click-through

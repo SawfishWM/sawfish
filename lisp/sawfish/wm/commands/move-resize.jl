@@ -48,15 +48,22 @@
   ;; todo:
   ;;  * obey the aspect ratio size hints
 
-  (defvar move-outline-mode 'opaque
-    "How windows being moved are animated, either `opaque' or `box'")
-  
-  (defvar resize-outline-mode 'opaque
-    "How windows being resized are animated, either `opaque' or `box'")
-  
-  (defvar move-resize-raise-window nil
-    "Raise windows when they are moved or resized.")
-  
+ 
+  (defcustom move-outline-mode 'opaque
+    "How windows being moved are animated"
+    :type (choice opaque box)
+    :group (appearance animation))
+
+  (defcustom resize-outline-mode 'opaque
+    "How windows being resized are animated"
+    :type (choice opaque box)
+    :group (appearance animation))
+
+  (defcustom move-resize-raise-window nil
+    "Raise windows when they are moved or resized."
+    :type boolean
+    :group move)
+
   (defcustom move-show-position nil
     "Show current position of windows while moving."
     :group move
@@ -66,10 +73,11 @@
     "Show current dimensions of windows while resizing."
     :group move
     :type boolean)
-  
-  (defvar resize-edge-mode 'border-grab
-    "How to choose window edges when resizing. One of `region', `border',
-`grab', `border-grab'")
+ 
+ (defcustom resize-edge-mode 'border-grab
+   "How to choose window edges when resizing."
+   :type (choice region border grab border-grab)
+   :group move)
   
   (defcustom move-snap-epsilon 12
     "Distance in pixels before window edges align with each other."

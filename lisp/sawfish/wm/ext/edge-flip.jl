@@ -66,8 +66,12 @@
     :group (workspace edge-flip)
     :after-set (lambda () (edge-flip-enable)))
 
-  (defvar edge-flip-delay 250
-    "Milliseconds to delay before edge flipping.")
+  (defcustom edge-flip-delay 250
+    "Milliseconds to delay before edge flipping."
+    :type number
+    :depends edge-flip-enabled
+    :group (workspace edge-flip)
+    :after-set (lambda () (edge-flip-enable)))
 
   (define ef-current-edge nil)
   (define ef-timer nil)

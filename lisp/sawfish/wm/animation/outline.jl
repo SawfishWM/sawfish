@@ -28,15 +28,28 @@
 	  sawfish.wm.events
 	  sawfish.wm.windows
 	  sawfish.wm.window-anim
+	  sawfish.wm.custom
 	  sawfish.wm.util.window-outline
 	  rep.io.timers)
 
   (define-structure-alias anim-outline sawfish.wm.animation.outline)
 
-  (defvar anim-outline-icon-coords (cons (screen-width) (screen-height)))
+  (defcustom anim-outline-icon-coords '(cons (screen-width) (screen-height))
+    "Animation Outline Coordinates"
+    :type (pair (number 1) (number 1))
+    :group (appearance animation))
 
-  (defvar anim-outline-steps 16)
-  (defvar anim-outline-delay 20)
+  (defcustom anim-outline-steps 16
+    "Animation Steps"
+    :type number
+    :group (appearance animation)
+    :range ( 1 . 1000 ))
+
+  (defcustom anim-outline-delay 20
+    "Animation Delay"
+    :type number
+    :group (appearance animation)
+    :range ( 1 . 1000 ))
 
   (define (anim-outline-run w mode initial-coords initial-dims
 			    final-coords final-dims)

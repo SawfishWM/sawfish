@@ -56,12 +56,15 @@
     :type boolean
     :group focus)
 
-  (defvar focus-dont-push nil
-    "When true, focusing a window doesn't change it's position in the stack of
-most-recently focused windows.")
+  (defcustom focus-dont-push nil
+    "Wether focusing a window doesn't change it's position in the stack."
+    :type boolean
+    :group focus)
 
-  (defvar focus-ignore-pointer-events nil
-    "When true, pointer in/out events don't cause focus changes.")
+  (defcustom focus-ignore-pointer-events nil
+    "When true, pointer in/out events don't cause focus changes."
+    :type boolean
+    :group focus)
 
   (define focus-within-click-event (make-fluid nil)
     "When true, the current command is being called from within a

@@ -118,13 +118,15 @@
 
 ;;; Options and variables
 
-  (defvar workspace-boundary-mode 'stop
-    "How to act when passing the first or last workspace, one of `stop',
-`wrap-around' or `keep-going'")
+  (defcustom workspace-boundary-mode 'stop
+    "How to act when passing the first or last workspace."
+    :type (choice stop wrap-around keep-going)
+    :group workspace)
 
-  (defvar workspace-send-boundary-mode 'stop
-    "How to act when passing the first or last workspace, while moving a
-window, one of `stop', `keep-going', `wrap-around'")
+  (defcustom workspace-send-boundary-mode 'stop
+    "How to act when passing the first or last workspace, while moving a window"
+    :type (choice stop wrap-around keep-going)
+    :group workspace)
 
   (defcustom workspace-names nil
     nil
@@ -133,8 +135,10 @@ window, one of `stop', `keep-going', `wrap-around'")
     :widget-flags (expand-vertically)
     :after-set (lambda () (workspace-names-changed)))
 
-  (defvar lock-first-workspace t
-    "Preserve outermost empty workspaces in the pager.")
+  (defcustom lock-first-workspace t
+    "Preserve outermost empty workspaces in the pager."
+    :type boolean
+    :group workspace)
 
   ;; Currently active workspace, an integer
   (define current-workspace 0)

@@ -37,11 +37,12 @@
   (define window-animators nil
     "List of all possible window animation types.")
 
-  ;; this used to be a defcustom, and I don't have anything against
-  ;; that, except the current animations are so lame it's embarassing
+  (defgroup animation "Animation" :group appearance)
 
-  (defvar default-window-animator 'none
-    "The default window animation mode")
+  (defcustom default-window-animator 'none
+    "The default window animation mode"
+    :type (choice none solid wireframe)
+    :group (appearance animation))
 
 ;;; animator registration
 

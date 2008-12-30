@@ -50,11 +50,18 @@
   ;; the screen dimensions. E.g. moving to the left moves all windows one
   ;; screen-width to the right. 
 
-  (defvar viewport-dimensions '(1 . 1)
-    "Size of each virtual workspace.")
+  (defgroup viewport "Viewport" :group workspace)
 
-  (defvar uniconify-to-current-viewport t
-    "Windows uniconify to the current viewport.")
+  (defcustom viewport-dimensions '(1 . 1)
+    "Number of columns and rows in each virtual workspace: \\w"
+    :group (workspace viewport)
+    :type (pair (number 1) (number 1))
+    :after-set (lambda () (viewport-size-changed)))
+
+  (defcustom uniconify-to-current-viewport t
+    "Windows uniconify to the current viewport."
+    :type boolean
+    :group (workspace viewport))
 
   (defcustom scroll-viewport-steps 1
     "Number of steps in which to scroll between viewports (less steps = faster scrolling)."

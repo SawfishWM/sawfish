@@ -142,7 +142,7 @@ that overrides settings set elsewhere.")
   (defcustom reload-themes-when-changed t
     "Automatically reload themes when they are updated."
     :type boolean
-    :group misc)
+    :group appearance)
 
   (defvar frame-type-fallback-alist
     '((transient . default)

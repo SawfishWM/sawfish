@@ -31,6 +31,7 @@
 	  rep.io.timers
 	  sawfish.wm.commands
 	  sawfish.wm.custom
+	  sawfish.wm.colors
 	  sawfish.wm.misc
 	  sawfish.wm.windows
 	  sawfish.wm.frames
@@ -41,38 +42,53 @@
 
   (define tooltips-timer nil)
 
-  ;;###autoload (defgroup tooltips "Tooltips" :group misc :require sawfish.wm.ext.tooltips)
+  ;;###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
 
   (defgroup tooltips "Tooltips"
-    :group misc
+    :group appearance
     :require sawfish.wm.ext.tooltips)
 
   (defcustom tooltips-enabled nil
     "Display tooltips for window frames."
     :type boolean
-    :group (misc tooltips)
+    :group (appearance tooltips)
     :require sawfish.wm.ext.tooltips)
 
   (defcustom tooltips-show-doc-strings nil
     "Show full documentation in tooltips."
     :type boolean
     :depends tooltips-enabled
-    :group (misc tooltips))
+    :group (appearance tooltips))
 
-  (defvar tooltips-delay 500
-    "Number of milliseconds before displaying tooltips.")
+  (defcustom tooltips-delay 500
+    "Number of milliseconds before displaying tooltips."
+    :type number
+    :depends tooltips-enabled
+    :group (appearance tooltips))
 
-  (defvar tooltips-timeout-delay 5000
-    "Number of milliseconds before removing tooltips.")
+  (defcustom tooltips-timeout-delay 5000
+    "Number of milliseconds before removing tooltips."
+    :type number
+    :depends tooltips-enabled
+    :group (appearance tooltips))
 
-  (defvar tooltips-font nil
-    "Font used to display tooltips, or nil for default.")
+  (defcustom tooltips-font default-font
+    "Font used to display tooltips, or nil for default."
+    :type font
+    :depends tooltips-enabled
+    :group (appearance tooltips))
 
-  (defvar tooltips-background-color "grey85"
-    "Color used for the tooltips background")
+  (defcustom tooltips-background-color "grey85"
+    "Color used for the tooltips background"
+    :type color
+    :depends tooltips-enabled
+    :group (appearance tooltips))
 
-  (defvar tooltips-foreground-color "black"
-    "Color used for the tooltips foreground")
+  (defcustom tooltips-foreground-color "black"
+    "Color used for the tooltips foreground"
+    :type color
+    :depends tooltips-enabled
+    :group (appearance tooltips))
 
 ;;; displaying tooltips
 

@@ -30,7 +30,7 @@
 	  sawfish.wm.commands)
 
   (defcustom move-cursor-increment 16
-    "Number of pixels to move pointer in `move-cursor-' commands."
+    "Number of pixels to move pointer in."
     :group misc
     :type (number 1))
 

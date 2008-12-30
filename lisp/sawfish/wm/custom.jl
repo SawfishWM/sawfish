@@ -481,12 +481,12 @@ of choices."
 
   (defgroup focus "Focus")
   (defgroup move "Move/Resize" :require sawfish.wm.commands.move-resize)
-  (defgroup placement "Placement")
   (defgroup appearance "Appearance")
   (defgroup workspace "Workspaces")
   (defgroup bindings "Bindings")
-  (defgroup min-max "Minimizing and Maximizing")
+  (defgroup min-max "Mini/Maximizing")
   (defgroup misc "Miscellaneous")
+  (defgroup placement "Placement" :group misc)
 
 ;;; loading user's customisations
 

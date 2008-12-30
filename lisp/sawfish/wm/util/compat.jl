@@ -96,11 +96,9 @@
 
   (mapc (lambda (x)
 	  (put x 'custom-obsolete t))
-	'(viewport-columns viewport-rows viewport-dimensions
+	'(viewport-columns viewport-rows
 	  preallocated-workspaces iconify-whole-group
 	  uniconify-whole-group always-update-frames
-	  cycle-disable-auto-raise cycle-show-window-icons
-	  cycle-warp-pointer cycle-focus-windows cycle-raise-windows
 	  edge-flip-warp-pointer frame-type-fallbacks
 	  warp-to-window-x-offset warp-to-window-y-offset
 	  uniquify-name-format transients-get-focus decorate-transients
@@ -112,21 +110,16 @@
 	  warp-to-selected-windows menus-include-shortcuts
 	  configure-auto-gravity configure-ignore-stacking-requests
 	  beos-window-menu-simplifies customize-show-symbols
-	  tooltips-timeout-enabled tooltips-delay
-	  tooltips-timeout-delay tooltips-font
-	  tooltips-foreground-color tooltips-background-color
 	  move-snap-mode move-snap-ignored-windows
 	  move-resize-inhibit-configure move-snap-edges
 	  raise-windows-when-unshaded persistent-group-ids
 	  delete-workspaces-when-empty transients-on-parents-workspace
-	  edge-flip-delay audio-for-ignored-windows
+	  audio-for-ignored-windows
 	  size-window-def-increment slide-window-increment
 	  default-bevel-percent sp-padding nokogiri-user-level
 	  nokogiri-buttons workspace-boundary-mode
 	  workspace-send-boundary-mode lock-first-workspace
-	  ignore-window-input-hint default-window-animator
-	  resize-edge-mode move-outline-mode resize-outline-mode
-	  move-resize-raise-window workspace-geometry
+	  ignore-window-input-hint workspace-geometry
 	  pointer-motion-threshold ignore-program-positions))
 
 ;;; obsolete custom setters

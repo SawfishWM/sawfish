@@ -11,7 +11,7 @@ exec rep "$0" "$@"
 
 #| nokogiri-main.jl -- entry point
 
-   $Id$
+   $Id: main.jl.in,v 1.12 2003/01/12 20:30:47 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -59,8 +59,7 @@ where OPTIONS are any of:\n
       (setq group (read-from-string group))
       (set-top-group (if (listp group) group `(root ,group)))))
 
-  ;; XXX remove the "or t" when trees work again
-  (when (or t (get-command-line-option "--flatten"))
+  (when (get-command-line-option "--flatten")
     (setq *nokogiri-flatten-groups* t))
 
   (when (get-command-line-option "--single-level")

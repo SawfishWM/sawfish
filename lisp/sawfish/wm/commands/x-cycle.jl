@@ -119,8 +119,10 @@
     :group (focus cycle)
     :type boolean)
 
-  (defvar cycle-raise-windows t
-    "Raise windows while they're temporarily selected during cycling.")
+  (defcustom cycle-raise-windows t
+    "Raise windows while they're temporarily selected during cycling."
+    :type boolean
+    :group (focus cycle))
 
   (defcustom cycle-keymap (make-keymap)
     "Keymap containing bindings active only during window cycling operations."
