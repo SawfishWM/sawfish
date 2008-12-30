@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ -f configure.in ]; then
-  if grep "A[MC]_CONFIG_HEADER" configure.in >/dev/null; then
+  if grep "AM_CONFIG_HEADER" configure.in >/dev/null; then
     if [ ! -f config.h.in ]; then
       echo "Running autoheader"
       autoheader || exit 1
