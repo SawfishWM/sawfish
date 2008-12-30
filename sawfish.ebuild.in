@@ -1,3 +1,6 @@
+# Copyright 1999-2008 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/x11-wm/sawfish/sawfish-1.3.3.ebuild,v 1.7 2008/10/06 17:13:50 truedfx Exp $
 
 inherit eutils
 
@@ -7,14 +10,15 @@ SRC_URI="mirror://sourceforge/sawmill/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="alpha amd64 ia64 ppc ppc64 sparc x86"
 IUSE="gnome esd nls audiofile"
 
-RDEPEND=">=x11-libs/rep-gtk-0.17
-	>=dev-libs/librep-0.16
-	>=x11-libs/gtk+-2.6.0
-	audiofile? ( >=media-libs/audiofile-0.2.3 )
-	esd? ( >=media-sound/esound-0.2.23 )
+RDEPEND=">=x11-libs/rep-gtk-@REP_GTK_MIN_VER@
+	>=dev-libs/librep-@REP_MIN_VER@
+	>=x11-libs/gtk+-@GTK_MIN_VER@
+	>=x11-libs/pango-@PANGO_MIN_VER@
+	audiofile? ( >=media-libs/audiofile-@AUDIOFILE_MIN_VER@ )
+	esd? ( >=media-sound/esound-@ESD_MIN_VER@ )
 	nls? ( sys-devel/gettext )"
 DEPEND="${RDEPEND}
 	>=dev-util/pkgconfig-0.12.0"
@@ -22,7 +26,6 @@ DEPEND="${RDEPEND}
 src_unpack() {
 	unpack ${A}
 	cd "${S}"
-	epatch "${FILESDIR}"/libtool.patch
 }
 
 src_compile() {
