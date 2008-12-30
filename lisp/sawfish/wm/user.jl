@@ -1,6 +1,6 @@
 #| user.jl -- do user-local initialization
 
-   $Id$
+   $Id: user.jl,v 1.16 2001/02/14 00:03:21 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -53,7 +53,7 @@
   ;; frame-style loaded if user hasn't set their own
   (define fallback-frame-style 'Crux)
 
-  (define rc-files '("~/.sawfishrc" "~/.sawfish/rc" "~/.sawmillrc"))
+  (define rc-files '("~/.sawfishrc" "~/.sawfish/rc"))
 
   ;; initialize the special variable pointing at this structure
   (structure () (open rep rep.structures)
@@ -90,7 +90,7 @@
 					  (file-exists-p (concat f ".jl"))
 					  (file-exists-p (concat f ".jlc"))))))
 	      ;; load these before customized settings (but only if there's
-	      ;; no .sawmillrc file)
+	      ;; no .sawfishrc file)
 	      (unless (let loop ((rest rc-files))
 			(when rest
 			  (or (rc-file-exists-p (car rest))
@@ -103,7 +103,7 @@
 		(error
 		 (format (stderr-file) "error in custom file--> %S\n" data)))
 
-	      ;; then the sawmill specific user configuration
+	      ;; then the sawfish specific user configuration
 	      (let loop ((rest rc-files))
 		(when rest
 		  (if (rc-file-exists-p (car rest))

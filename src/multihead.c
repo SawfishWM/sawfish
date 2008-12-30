@@ -37,7 +37,7 @@
 # endif
 #endif
    
-#include "sawmill.h"
+#include "sawfish.h"
 
 #include <string.h>
 #include <assert.h>

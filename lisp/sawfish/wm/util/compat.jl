@@ -1,22 +1,22 @@
 ;; compat.jl -- aliases for obsolete functions
-;; $Id$
+;; $Id: compat.jl,v 1.18 2002/04/21 23:11:40 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
-;; This file is part of sawmill.
+;; This file is part of sawfish.
 
-;; sawmill is free software; you can redistribute it and/or modify it
+;; sawfish is free software; you can redistribute it and/or modify it
 ;; under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation; either version 2, or (at your option)
 ;; any later version.
 
-;; sawmill is distributed in the hope that it will be useful, but
+;; sawfish is distributed in the hope that it will be useful, but
 ;; WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with sawmill; see the file COPYING.  If not, write to
+;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.wm.util.compat
@@ -26,11 +26,11 @@
 	    ws-move-window
 	    ws-insert-workspace
 	    ws-remove-workspace
-	    sawmill-directory
-	    sawmill-lisp-lib-directory
-	    sawmill-site-lisp-directory
-	    sawmill-exec-directory
-	    sawmill-version
+	    sawfish-directory
+	    sawfish-lisp-lib-directory
+	    sawfish-site-lisp-directory
+	    sawfish-exec-directory
+	    sawfish-version
 	    custom-set-color
 	    custom-set-font
 	    custom-set-frame-style)
@@ -62,11 +62,11 @@
 
 ;;; obsolete variables
 
-  (define sawmill-directory sawfish-directory)
-  (define sawmill-lisp-lib-directory sawfish-lisp-lib-directory)
-  (define sawmill-site-lisp-directory sawfish-site-lisp-directory)
-  (define sawmill-exec-directory sawfish-exec-directory)
-  (define sawmill-version sawfish-version)
+  (define sawfish-directory sawfish-directory)
+  (define sawfish-lisp-lib-directory sawfish-lisp-lib-directory)
+  (define sawfish-site-lisp-directory sawfish-site-lisp-directory)
+  (define sawfish-exec-directory sawfish-exec-directory)
+  (define sawfish-version sawfish-version)
 
 ;;; obsolete commands
 

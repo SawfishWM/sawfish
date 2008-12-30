@@ -1,26 +1,26 @@
-/* sawmill.h -- Main include file, brings in all the rest
+/* sawfish.h -- Main include file, brings in all the rest
    $Id$
 
    Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
-   This file is part of sawmill.
+   This file is part of sawfish.
 
-   sawmill is free software; you can redistribute it and/or modify it
+   sawfish is free software; you can redistribute it and/or modify it
    under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
    any later version.
 
-   sawmill is distributed in the hope that it will be useful, but
+   sawfish is distributed in the hope that it will be useful, but
    WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with sawmill; see the file COPYING.   If not, write to
+   along with sawfish; see the file COPYING.   If not, write to
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. */
 
-#ifndef SAWMILL_H
-#define SAWMILL_H
+#ifndef SAWFISH_H
+#define SAWFISH_H
 
 #define _GNU_SOURCE
 
@@ -57,7 +57,7 @@ typedef int bool;
    the server is grabbed => deadlock)
 
    You can also define it to zero to store the debugging output in
-   one of rep's buffers. Send the sawmill process a SIGUSR2 to print
+   one of rep's buffers. Send the sawfish process a SIGUSR2 to print
    the last 4k or so to stderr. */
 
 /* #define DEBUG 1 */
@@ -306,7 +306,7 @@ enum exit_codes {
 #define XUrgencyHint (1 << 8)
 #endif
 
-#include "sawmill_subrs.h"
+#include "sawfish_subrs.h"
 
 /* Miscellaneous macro defs */
 
@@ -376,4 +376,4 @@ enum exit_codes {
 # define nonterminal_assert(x) do {} while (0)
 #endif
 
-#endif /* SAWMILL_H */
+#endif /* SAWFISH_H */

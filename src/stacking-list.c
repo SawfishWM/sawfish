@@ -22,7 +22,7 @@
 
    Authors: John Harper <jsh@eazel.com>  */
 
-#include "sawmill.h"
+#include "sawfish.h"
 #include <assert.h>
 
 static Lisp_Window *lowest_window, *highest_window;

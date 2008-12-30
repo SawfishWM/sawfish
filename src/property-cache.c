@@ -22,7 +22,7 @@
 
    Authors: John Harper <jsh@unfactored.org>  */
 
-#include "sawmill.h"
+#include "sawfish.h"
 #include <assert.h>
 
 #define CACHE_ASSOC 4

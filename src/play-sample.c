@@ -7,7 +7,7 @@
 
    XXX need to make sure WORDS_BIGENDIAN is defined on big-endian systems */
 
-#include "sawmill.h"
+#include "sawfish.h"
 
 #ifndef GLIB_MAJOR_VERSION		/* Have we got <glib.h> ? */
 # define g_malloc malloc
@@ -521,7 +521,7 @@ gnome_sound_shutdown(void)
 #endif
 }
 
-/* sawmill code */
+/* sawfish code */
 
 DEFUN("primitive-play-sample", Fprimitive_play_sample,
       Sprimitive_play_sample, (repv filename), rep_Subr1)

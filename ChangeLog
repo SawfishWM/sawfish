@@ -1,4 +1,117 @@
-2008-12-28  Christopher Bratusek <nano-master@gmx.de>
+2008-12-30  Christopher Bratusek <nano-master@gmx.de>
+	* Makedefs.in
+	* configure.in: Major rework of configure.in [breaks build with XFree86 atm]
+
+	* config.h.in: regenerated
+
+	* sawmill.h
+	* sawfish.h: renamed sawmill.h to sawfish.h
+
+	* sawmill_subrs.h
+	* sawfish_subrs.h: renamed sawmill_subrs.h to sawfish_subrs.h
+
+	* src/*.[ch]: include sawfish.h/sawfish_subrs.h from now on
+		      replace any occurence of sawmill with sawfish
+
+	* etc/config.guess
+	* etc/config.sub
+	* etc/install-sh: don't ship those files
+
+	* man/Makefile
+	* man/sawmill.texi
+	* man/sawfish.texi: renamed sawmill.texi to sawfish.texi
+
+	* sawfish.ebuild.in: don't leak copyright info
+			     more configure magic
+			     don't apply libtool.patch -> obsolete
+			     don't mark ppc64 as ~ since librep(svn) does now compile on ppc64
+	
+	* lisp/sawfish/wm/defaults.jl: renamed alias to sawfish-defaults
+
+	* lisp/sawfish/wm/animation/outline.jl
+	* lisp/sawfish/wm/frames.jl
+	* lisp/sawfish/wm/custom-defaults.jl
+	* lisp/sawfish/wm/gaol.jl
+	* lisp/sawfish/wm/customize.jl
+	* lisp/sawfish/wm/theming/make-theme-preview.jl
+	* lisp/sawfish/wm/theming/make-theme.jl
+	* lisp/sawfish/wm/ext/edge-flip.jl
+	* lisp/sawfish/wm/ext/tooltips.jl
+	* lisp/sawfish/wm/ext/beos-window-menu.jl
+	* lisp/sawfish/wm/ext/match-window.jl
+	* lisp/sawfish/wm/ext/audio-events.jl
+	* lisp/sawfish/wm/ext/error-handler.jl
+	* lisp/sawfish/wm/ext/old-window-menu.jl
+	* lisp/sawfish/wm/ext/shade-hover.jl
+	* lisp/sawfish/wm/ext/window-history.jl
+	* lisp/sawfish/wm/ext/auto-raise.jl
+	* lisp/sawfish/wm/ext/hide-dialogs.jl
+	* lisp/sawfish/wm/ext/3d-hack.jl
+	* lisp/sawfish/wm/workspace.jl
+	* lisp/sawfish/wm/placement.jl
+	* lisp/sawfish/wm/custom.jl
+	* lisp/sawfish/wm/state/wm-spec.jl
+	* lisp/sawfish/wm/state/shading.jl
+	* lisp/sawfish/wm/state/iconify.jl
+	* lisp/sawfish/wm/state/mwm.jl
+	* lisp/sawfish/wm/state/configure.jl
+	* lisp/sawfish/wm/state/maximize.jl
+	* lisp/sawfish/wm/state/open-look.jl
+	* lisp/sawfish/wm/state/gnome.jl
+	* lisp/sawfish/wm/state/ignored.jl
+	* lisp/sawfish/wm/state/transient.jl
+	* lisp/sawfish/wm/user.jl
+	* lisp/sawfish/wm/viewport.jl
+	* lisp/sawfish/wm/focus.jl
+	* lisp/sawfish/wm/session/save.jl
+	* lisp/sawfish/wm/session/load.jl
+	* lisp/sawfish/wm/session/init.jl
+	* lisp/sawfish/wm/menus.jl
+	* lisp/sawfish/wm/window-anim.jl
+	* lisp/sawfish/wm/misc.jl
+	* lisp/sawfish/wm/commands/size-window.jl
+	* lisp/sawfish/wm/commands/groups.jl
+	* lisp/sawfish/wm/commands/describe.jl
+	* lisp/sawfish/wm/commands/move-cursor.jl
+	* lisp/sawfish/wm/commands/viewport-linear.jl
+	* lisp/sawfish/wm/commands/help.jl
+	* lisp/sawfish/wm/commands/cycle.jl
+	* lisp/sawfish/wm/commands/raise-commands.jl
+	* lisp/sawfish/wm/commands/x-cycle.jl
+	* lisp/sawfish/wm/commands/slide-window.jl
+	* lisp/sawfish/wm/commands/move-resize.jl
+	* lisp/sawfish/wm/commands/gnome.jl
+	* lisp/sawfish/wm/cursors.jl
+	* lisp/sawfish/wm/gnome/match-window.jl
+	* lisp/sawfish/wm/gnome/integration.jl
+	* lisp/sawfish/wm/gnome/menus.jl
+	* lisp/sawfish/wm/stacking.jl
+	* lisp/sawfish/wm/placement/smart.jl
+	* lisp/sawfish/wm/server.jl
+	* lisp/sawfish/wm/defaults.jl
+	* lisp/sawfish/wm/autoload.jl
+	* lisp/sawfish/wm/util/groups.jl
+	* lisp/sawfish/wm/util/window-order.jl
+	* lisp/sawfish/wm/util/rects.jl
+	* lisp/sawfish/wm/util/compat.jl
+	* lisp/sawfish/wm/util/window-outline.jl
+	* lisp/sawfish/wm/util/decode-events.jl
+	* lisp/sawfish/wm/util/prompt-extras.jl
+	* lisp/sawfish/wm/util/keymap.jl
+	* lisp/sawfish/wm/util/edges.jl
+	* lisp/sawfish/wm/util/prompt-wm.jl
+	* lisp/sawfish/wm/util/play-audio.jl
+	* lisp/sawfish/wm/util/with-output.jl
+	* lisp/sawfish/wm/util/gtkrc.jl
+	* lisp/sawfish/wm/keymaps.jl
+	* lisp/sawfish/wm.jl: replaced any occurence of sawmill with sawfish
+
+	* sawfish.spec.in
+	* scripts/sawfish-about.jl.in: corrected homepage
+
+	* lisp/sawfish/wm/user.jl: remove ~/.sawmillrc from list of config files
+
+2008-12-28 Christopher Bratusek <nano-master@gmx.de>
 	* src/server.c: fixed an "unknown remote error", that might appear [Alexey I. Froloff]
 
 2008-12-27  Christopher Bratusek <nano-master@gmx.de>
