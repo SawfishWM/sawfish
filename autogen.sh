@@ -4,8 +4,12 @@ if [ -f Makefile ]; then
 	make distclean
 fi
 
+if [ -f aclocal.m4 ]; then
+	rm -fv aclocal.m4
+fi
+
 if [ -d m4 ]; then
-	rm -rf m4
+	rm -fv m4/*
 fi
 
 if [ -f configure.in ]; then
@@ -15,7 +19,11 @@ if [ -f configure.in ]; then
   fi
   if grep "AM_PROG_LIBTOOL" configure.in >/dev/null; then
     echo "Running libtoolize"
-    libtoolize --force --copy --install || exit 1
+    lver=$(libtool --version | grep 1.5)
+    if [[ ${lver} != "" ]]; then
+	    libtoolize --force --copy || exit 1
+    else    libtoolize --force --copy --install || exit 1
+    fi
   fi
   echo "Running aclocal $ACLOCAL_FLAGS"
   aclocal -I m4 $ACLOCAL_FLAGS || exit 1
