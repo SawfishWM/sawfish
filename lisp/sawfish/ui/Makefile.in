@@ -1,6 +1,6 @@
 # Makefile.in for nokogiri subdirectory
 
-# $Id$
+# $Id: Makefile.in,v 1.13 2002/04/21 03:38:25 jsh Exp $
 
 # Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -27,14 +27,7 @@ top_srcdir=@top_srcdir@
 srcdir=@srcdir@
 VPATH=@srcdir@:@top_srcdir@
 
-REP_GTK_GNOME=@REP_GTK_GNOME@
 REP_ENVIRON:=$(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp
-
-ifeq ($(REP_GTK_GNOME),yes)
- GNOME:=
-else
- GNOME:=gtk/
-endif
 
 SRCS :=	apply.jl		\
 	config.jl		\
@@ -52,8 +45,8 @@ W_SRCS := widgets/command.jl	\
 	widgets/keymap.jl	\
 	widgets/match-window.jl \
 	widgets/modifier-list.jl \
-	widgets/$(GNOME)workspace-geometry.jl \
-	widgets/$(GNOME)icon.jl
+	widgets/workspace-geometry.jl \
+	widgets/icon.jl		
 
 L_SRCS := layouts/keymaps.jl
 

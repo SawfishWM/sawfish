@@ -1,6 +1,6 @@
 #| nokogiri-widgets/icon.jl -- GNOME icon entry widget
 
-   $Id$
+   $Id: icon.jl,v 1.1 2000/09/01 20:03:29 john Exp $
 
    Originally written by Bruce Miller <docmad@md.prestige.net>
 
@@ -21,38 +21,11 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-;; GNOME version of this widget
+;; GNOME-less version of this widget
 
 (define-structure sawfish.ui.widgets.icon ()
 
     (open rep
-	  gui.gtk-2.gtk
-	  gui.gtk-2.gnome-ui
-	  rep.io.files
 	  sawfish.gtk.widget)
 
-  (define (make-icon-item changed-callback)
-    (let* ((widget (gnome-icon-entry-new "IconEntry" (_ "Select Icon"))))
-      (when changed-callback
-	(g-signal-connect (gnome-icon-entry-gtk-entry widget) "changed"
-			    (make-signal-callback changed-callback)))
-      (gtk-widget-show widget)
-      (lambda (op)
-	(case op
-	  ((set) (lambda (x)
-		   (if x
-		       (gnome-icon-entry-set-icon widget x)
-		     (gtk-entry-set-text
-		      (gnome-icon-entry-gtk-entry widget) ""))))
-	  ((clear) (lambda ()
-		     (gtk-entry-set-text
-		      (gnome-icon-entry-gtk-entry widget) "")))
-	  ((ref) (lambda ()
-		   (let ((file (gtk-entry-get-text
-				(gnome-icon-entry-gtk-entry widget))))
-		     (and (file-regular-p file) file))))
-	  ((gtk-widget) widget)
-	  ((validp) (lambda (x) (and (stringp x)
-				     (file-exists-p x))))))))
-
-  (define-widget-type 'icon make-icon-item))
+  (define-widget-type 'icon (lambda (changed) (make-widget 'file changed))))

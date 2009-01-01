@@ -210,28 +210,6 @@ if test "$with_esd" = "yes"; then
 		      ,AC_MSG_ERROR([can't locate esound]))
 fi
 
-dnl XXX Deprecated
-dnl Check for libgnome|gnomeui|gnomecanvas
-
-AC_ARG_ENABLE(gnome-widgets,
-	      [  --enable-gnome-widgets  Use GNOME widgets in places [default]
-	      --disable-gnome-widgets Don't use GNOME widgets], [], [enable_gnome_widgets=no])
-
-if test "$enable_gnome_widgets" != "no"; then
-  AC_MSG_CHECKING([for rep-gtk GNOME wrappers])
-  if REP_GTK_DONT_INITIALIZE=1 rep --batch -l gui.gtk-2.gnome-ui 2>&5; then 
-    AC_MSG_RESULT([yes])
-    REP_GTK_GNOME=yes
-  else 
-    AC_MSG_RESULT([no])
-    REP_GTK_GNOME=no
-    AC_MSG_WARN([Can't load rep's gnome wrappers])
-  fi
-else
-  REP_GTK_GNOME=no
-fi
-AC_SUBST(REP_GTK_GNOME)
-
 dnl Check for Doug Lea's malloc in libc
 doug_lea_malloc=yes
 AC_CHECK_FUNC(malloc_get_state, , doug_lea_malloc=no)

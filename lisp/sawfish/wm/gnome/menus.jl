@@ -36,29 +36,13 @@
 
 ;;; variables
 
-  (defvar gnome-share-directory
-    ;; search $PATH for a known GNOME binary..
-    (catch 'out
-      (let ((path (getenv "PATH"))
-	    (point 0)
-	    end tem)
-	(while (< point (length path))
-	  (setq end (if (string-match ":" path point)
-			(match-start)
-		      (length path)))
-	  (setq tem (substring path point end))
-	  (when (file-exists-p (expand-file-name "gnome-session" tem))
-	    (throw 'out (expand-file-name "../share/gnome" tem)))
-	  (setq point (1+ end))))
-      ;; default to /usr/share/gnome, better than nothing at all
-      "/usr/share/gnome"))
-
-  (defvar gnome-menu-lang (let ((lang (or (getenv "LANGUAGE")
-					  (getenv "LC_ALL")
+  (defvar gnome-menu-lang (let ((lang (or (getenv "LC_ALL")
 					  (getenv "LC_MESSAGES")
 					  (getenv "LANG")))
 				(all '()))
-			    (when (and lang (not (string= lang "en")))
+			    (when (and lang (not (or (string= lang "C")
+						     (string= lang "POSIX")
+						     (string= lang "en"))))
 			      (setq all (cons lang all))
 			      (when (string-match "[.@]" lang)
 				(setq lang (substring lang 0 (match-start)))
@@ -69,12 +53,9 @@
 			    all)
     "List of language codes used when constructing GNOME menus.")
 
-  (defvar gnome-menu-roots (list (expand-file-name
-				  "apps" gnome-share-directory)
-				 "/etc/X11/applnk"	;on RedHat systems
-				 "/usr/share/applications"
-				 "/var/lib/menu-xdg/applications/menu-xdg"
-				 "~/.gnome/apps")
+  (defvar gnome-menu-roots (list "/etc/X11/applnk"	;on RedHat systems
+  				"/usr/share/applications"
+    				"~/.local/share/applications")
     "List of directories to read GNOME menu entries from.")
 
   ;; previously read menus

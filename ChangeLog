@@ -14,6 +14,16 @@
 
 	* m4: add that directory to make libtool 1.x shut up
 
+	* lisp/sawfish/wm/gnome/menus.jl
+	* lisp/sawfish/wm/util/display-wininfo.jl
+	* lisp/sawfish/gtk/Makefile.in
+	* lisp/sawfish/ui/Makefile.in
+	* lisp/sawfish/ui/widgets/workspace-geometry.jl
+	* lisp/sawfish/ui/widgets/icon.jl
+	* configure.in: dropped libgnome|gnomeui|gnomecanvas related widgets, use pure-gtk instead
+
+	* src/Makefile.in: make uninstall target work again
+
 2008-12-31  Christopher Bratusek <nano-master@gmx.de>
 	* config.h.in
 	* configure.in

@@ -32,7 +32,9 @@
 	  sawfish.wm.images
 	  sawfish.wm.misc
 	  sawfish.wm.util.x
-	  sawfish.wm.windows)
+	  sawfish.wm.windows
+	  sawfish.wm.workspace
+	  )
 
 ;;; variables
 
@@ -41,6 +43,8 @@
   (defconst y-margin 10)
 
   (defconst icon-size (32 . 32))
+
+  (defvar display-wininfo-show-workspace nil)
 
   ;; window currently displayed, or nil
   (define info-window nil)
@@ -79,8 +83,18 @@
   ;; Returns a list of strings describing window W in some way
   (define (window-info w)
     (list (concat (and (window-get w 'iconified) ?[)
-		  (window-name w)
-		  (and (window-get w 'iconified) ?]))))
+                  (window-name w)
+                  (and (window-get w 'iconified) ?])
+		  ; potentially include the workspace where the window is
+		  (if (and
+		       display-wininfo-show-workspace
+		       (not (window-in-workspace-p w current-workspace)))
+		      (concat " <" (number->string (car (window-workspaces w))) ">")
+		    ""
+		    )
+                  )
+          )
+    )
 
 ;;; entry point
 
