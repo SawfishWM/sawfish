@@ -384,6 +384,7 @@ AC_OUTPUT
 
 mv sawfish.ebuild sawfish-$version.ebuild
 
+chmod +x build-info
 ./build-info
 
 dnl If it doesn't look like GNU Make is being used, give a friendly warning
