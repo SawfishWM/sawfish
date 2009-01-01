@@ -65,13 +65,13 @@
 
   (defcustom scroll-viewport-steps 1
     "Number of steps in which to scroll between viewports (less steps = faster scrolling)."
-    :group workspace
+    :group (workspace viewport)
     :type number
     :range (1 . 50))
 
   (defcustom viewport-boundary-mode 'stop
     "Wether to stop or wrap-around on first/last viewport"
-     :group workspace
+    :group (workspace viewport)
     :type (choice wrap-around stop))
 
 ;;; raw viewport handling
