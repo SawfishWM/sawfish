@@ -1,3 +1,14 @@
+2009-01-01  Christopher Bratusek <nano-master@gmx.de>
+	* autogen.sh: small rework
+
+	* config.h.in
+	* configure.in
+	* Makedefs.in: new configure.in working now (some necassary #define have not been created)
+
+	* build-info: make +x and create ./src/build.h instead of ./build.in
+
+	* configure.in: execute build-info, since some .c files include it, but it hasn't been there before
+
 2008-12-31  Christopher Bratusek <nano-master@gmx.de>
 	* config.h.in
 	* configure.in

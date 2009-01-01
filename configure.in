@@ -2,53 +2,39 @@ dnl  Process this file with autoconf to produce a configure script.
 dnl  Copyright (C) 1998 John Harper <john@dcs.warwick.ac.uk>
 dnl  $Id: configure.in,v 1.140 2008/02/18 20:59:59 jkozicki Exp $
 dnl
-dnl  This file is part of sawmill.
+dnl  This file is part of sawfish.
 dnl
-dnl  sawmill is free software; you can redistribute it and/or modify it
+dnl  sawfish is free software; you can redistribute it and/or modify it
 dnl  under the terms of the GNU General Public License as published by
 dnl  the Free Software Foundation; either version 2, or (at your option)
 dnl  any later version.
 dnl
-dnl  sawmill is distributed in the hope that it will be useful, but
+dnl  sawfish is distributed in the hope that it will be useful, but
 dnl  WITHOUT ANY WARRANTY; without even the implied warranty of
 dnl  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 dnl  GNU General Public License for more details.
 dnl
 dnl  You should have received a copy of the GNU General Public License
-dnl  along with sawmill; see the file COPYING.  If not, write to
+dnl  along with sawfish; see the file COPYING.  If not, write to
 dnl  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 AC_REVISION($Revision: 1.141 $)
-
 AC_INIT(src/sawfish.h)
+
 AC_CONFIG_HEADER(config.h)
+AC_CONFIG_MACRO_DIR([m4])
+
+AM_PROG_LIBTOOL
 
 dnl Release versioning info
 version="1.5.0"
 subversion=""
 
-output_files="src/Makefile lisp/Makefile scripts/Makefile themes/Makefile\
- lisp/sawfish/ui/Makefile lisp/sawfish/gtk/Makefile sounds/Makefile\
- man/Makefile po/Makefile Makedefs Makefile sawfish.spec\
- lisp/sawfish/gtk/widgets/font.jl sawfish.pc sawfish.ebuild"
-
 SUBDIRS="src lisp scripts themes sounds man po"
 AC_SUBST(SUBDIRS)
 
-add_subdir () {
-  sub=$1; shift
-  SUBDIRS="$SUBDIRS $sub"
-  output_files="$output_files $sub/Makefile"
-  for ext in $*; do
-    output_files="$output_files $sub/$ext"
-  done
-  unset sub
-}
-
-dnl Find the system type
-AC_CANONICAL_HOST
-
 dnl Remove trailing slash in $prefix if necessary
+dnl /usr// is the same than /usr/ ... so why would we need this? 
 case "${prefix}" in
   */)
     prefix=`echo ${prefix} | sed -e 's/^\(.*\)\/$/\1/'`
@@ -60,36 +46,20 @@ lispdir='${sawfishdir}/${version}/lisp'
 localedir='${datadir}/locale'
 sawfishexecdir='${libexecdir}/sawfish/${version}/${host_type}'
 
-dnl Checks for programs.
-AC_PROG_CC
-AC_PROG_CPP
-AC_PROG_INSTALL
-AC_PROG_LN_S
-AC_PROG_MAKE_SET
-AC_PROG_GCC_TRADITIONAL
-
-dnl Workaround etc/install-sh not being found from subdirectories
-if test "$INSTALL" = "$ac_install_sh"; then
-  dnl Why is the backslash needed?
-  INSTALL='\${top_srcdir}/etc/install-sh -c'
-fi
-
 dnl Checks for libraries.
 AC_CHECK_LIB(nsl, xdr_void)
 AC_CHECK_LIB(socket, bind)
 
-dnl Checks for header files.
-AC_PATH_XTRA
-AC_HEADER_STDC
-AC_HEADER_TIME
+dnl Checks for headers
 AC_HEADER_SYS_WAIT
-AC_CHECK_HEADERS(fcntl.h sys/time.h sys/utsname.h unistd.h memory.h)
+AC_HEADER_TIME
+AC_CHECK_HEADERS(fcntl.h sys/time.h sys/utsname.h)
 
 dnl Check for X headers, etc
 _cppflags="${CPPFLAGS}"
 CPPFLAGS="${CPPFLAGS} ${X_CFLAGS}"
 
-AC_CHECK_HEADERS(X11/SM/SMlib.h X11/extensions/Xdbe.h, [], [], [#include <X11/Xlib.h> ])
+AC_CHECK_HEADERS(X11/extensions/Xdbe.h, [], [], [#include <X11/Xlib.h> ])
 
 dnl Checks for X extensions/libraries
 XINERAMA_LIBS=""
@@ -97,151 +67,155 @@ XRANDR_LIBS=""
 XFT_LIBS=""
 XFT_CFLAGS=""
 
-AC_SUBST(XINERAMA_LIBS)
-AC_SUBST(XRANDR_LIBS)
-AC_SUBST(XFT_LIBS)
-AC_SUBST(XFT_CFLAGS)
+PKG_CHECK_MODULES(libXineRama, xinerama >= 1.0
+		  ,XINERAMA_LIBS="-lXinerama"
+		  AC_DEFINE(HAVE_X11_EXTENSIONS_XINERAMA_H, 1, [Have xinerama])
+		  ,AC_MSG_ERROR([can't locate libXineRama]))
 
-AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
-	     [XINERAMA_LIBS="-lXinerama"
-	      AC_CHECK_HEADERS(X11/extensions/Xinerama.h)],
-	     [],[$X_LIBS -lX11 -lXext])
+PKG_CHECK_MODULES(libXRandR, xrandr >= 1.0
+		  ,XRANDR_LIBS="-lXrandr"
+		  AC_DEFINE(HAVE_X11_EXTENSIONS_XRANDR_H, 1, [Have xrandr])
+		  ,AC_MSG_ERROR([can't locate libXRandR]))
 
-AC_CHECK_LIB(Xrandr, XRRUpdateConfiguration,
-	     [XRANDR_LIBS="-lXrandr"
-	      AC_CHECK_HEADERS(X11/extensions/Xrandr.h, [], [], 
-	         [#include <X11/Xlib.h> ])],
-	     [],[$X_LIBS -lX11 -lXext])
-
-dnl Try using pkg-config first, since it looks like Xft2 may fail our
-dnl hand-crafted tests
-PKG_CHECK_MODULES(XFT, xft >= 1.0,
- [_cppflags=$CPPFLAGS
-  CPPFLAGS="$CPPFLAGS $XFT_CFLAGS"
-  AC_CHECK_HEADERS(X11/Xft/Xft.h)
-  CPPFLAGS=$_cppflags],
- [AC_CHECK_LIB(Xft, XftDrawCreate,
-	       [XFT_LIBS="-lXft -lXrender"
-	       AC_CHECK_HEADERS(X11/Xft/Xft.h)],
-	       [], [$X_LIBS -lX11 -lXext])])
-
-CPPFLAGS="${_cppflags}"
+PKG_CHECK_MODULES(libXft, xft >= 1.0
+		  ,XFT_LIBS="-lXft"
+		  XFT_CFLAGS="`pkg-config --cflags xft`"
+		  AC_DEFINE(HAVE_X11_XFT_XFT_H, 1, [Have xft])
+		  ,AC_MSG_ERROR([can't locate libXft]))
 
 dnl Checks for pango
-PKG_CHECK_MODULES(PANGO, pango >= 1.8.0,
-  [if $PKG_CONFIG --exists pangoxft; then
-     AC_DEFINE(HAVE_PANGO_XFT, 1, [Have pangoxft])
-     PANGO_MODULES="pangoxft pangox"
-     dnl for sawfish.gtk.widgets.font
-     have_pango_xft=yes
-     AC_SUBST(have_pango_xft)
-   fi
-   if test "x$PANGO_MODULES" != x; then
-     AC_DEFINE(HAVE_PANGO, 1, [Have pango])
-     AC_DEFINE(HAVE_PANGO_X, 1, [Have pango x])
-     PANGO_LIBS=`$PKG_CONFIG --libs $PANGO_MODULES`
-     PANGO_CFLAGS=`$PKG_CONFIG --cflags $PANGO_MODULES`
-   fi], [: nothing])
+PANGO_MIN_VER="1.8.0"
+
+PANGO_MODULES="pango "
+
+PKG_CHECK_MODULES(PANGO, pango >= ${PANGO_MIN_VER}
+		  ,AC_DEFINE(HAVE_PANGO, 1, [Have pango])
+		  ,AC_MSG_ERROR([can't locate pango]))
+
+PKG_CHECK_MODULES(PANGOX, pangox >= ${PANGO_MIN_VER}
+		  ,AC_DEFINE(HAVE_PANGO_X, 1, [Have pangox]) PANGO_MODULES+="pangox " 
+		  ,AC_MSG_WARN([pango x support not available]))
+
+PKG_CHECK_MODULES(PANGOXFT, pangoxft >= ${PANGO_MIN_VER}
+		  ,AC_DEFINE(HAVE_PANGO_XFT, 1, [Have pangoxft]) PANGO_MODULES+="pangoxft" have_pango_xft="yes" AC_SUBST(have_pango_xft)
+		  ,AC_MSG_WARN([pango xft support not available]))
+
+PANGO_LIBS=`pkg-config --libs $PANGO_MODULES`
+PANGO_CFLAGS=`pkg-config --cflags $PANGO_MODULES`
 
 dnl Check for librep
-PKG_CHECK_MODULES(LIBREP, librep >= 0.17.3)
-REP_EXECDIR="`pkg-config --variable=repcommonexecdir librep`"
-REP_CFLAGS="`pkg-config --cflags librep`"
-REP_LIBS="`pkg-config --libs librep`"
-REP_MSGFMT="`which msgfmt`"
+REP_MIN_VER="0.17.3"
 
-AC_SUBST(REP_EXECDIR)
-AC_SUBST(REP_CFLAGS)
-AC_SUBST(REP_LIBS)
-AC_SUBST(REP_MSGFMT)
+PKG_CHECK_MODULES(LIBREP, librep >= ${REP_MIN_VER}
+		  ,REP_EXECDIR="`pkg-config --variable=repcommonexecdir librep`"
+		  REP_CFLAGS="`pkg-config --cflags librep`"
+		  REP_LIBS="`pkg-config --libs librep`"
+		  REP_MSGFMT="`which msgfmt`"
+		  REP_VERSION="`pkg-config --variable=version librep`"
+		  ,AC_MSG_ERROR([can't locate librep])) 
 
 dnl Check for rep-gtk
-PKG_CHECK_MODULES(REP_GTK, rep-gtk >= 0.18.4)
+REP_GTK_MIN_VER="0.18.4"
+
+PKG_CHECK_MODULES(REP_GTK, rep-gtk >= 0.18.4
+		  ,
+		  ,AC_MSG_ERROR([can't locate rep-gtk]))
 
 dnl is X available?
-if test "${no_x}" != "yes"; then
-  AC_DEFINE(HAVE_X11, 1, [Have X11])
-else
-  AC_MSG_ERROR([You need X11 for sawfish])
-fi
+X_LIBS=""
+
+PKG_CHECK_MODULES(libX11, x11 >= 1.0
+		  ,AC_DEFINE(HAVE_X11, 1, [Have X11])
+		  X_LIBS="`pkg-config --libs x11`"
+		  X_CFLAGS="`pkg-config --cflags x11`"
+		  AC_DEFINE(X_DISPLAY_MISSING, 0, [Have x11])
+		  ,AC_MSG_ERROR([can't locate libX11]))
+
+X_LIBS+=" -lXext -lXrender"
+
+X_EXTRA_LIBS=""
+
+PKG_CHECK_MODULES(libICE, ice >= 1.0
+		  ,X_EXTRA_LIBS+="-lICE "
+		  ,AC_MSG_ERROR([can't locate libICE]))
+
+PKG_CHECK_MODULES(libSM, sm >= 1.0
+		  ,X_EXTRA_LIBS+="-lSM "
+		  ,AC_MSG_ERROR([can't locate libSM]))
+
+dnl Check for GTK+2
+GTK_MIN_VER="2.6.0"
+
+PKG_CHECK_MODULES(GTK, gtk+-2.0 >= ${GTK_MIN_VER}
+		  ,GTK_LIBS="`pkg-config --libs gtk+-2.0`"
+		  GTK_CFLAGS="`pkg-config --cflags gtk+-2.0`"
+		  AC_DEFINE(HAVE_GTK, 1, [Have GTK])
+		  ,AC_MSG_ERROR([can't locate gtk+2]))
 
 dnl Check for image handling libraries
 AC_ARG_WITH(gdk-pixbuf,
- [  --with-gdk-pixbuf	  Use gdk-pixbuf for image management
-  --without-gdk-pixbuf	  Use Imlib1 instead], [],
- [with_gdk_pixbuf=yes])
-if test "$with_gdk_pixbuf" != "no"; then
-  AC_MSG_CHECKING([for gdk_pixbuf (xlib version)])
-    PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= 2.6.0)
-    GDK_PIXBUF_VERSION=`pkg-config --modversion gdk-pixbuf-xlib-2.0`
-    AC_SUBST(GDK_PIXBUF_VERSION)
-    AC_SUBST(GDK_PIXBUF_CFLAGS)
-    AC_SUBST(GDK_PIXBUF_LIBS)
-    AC_DEFINE(HAVE_GDK_PIXBUF,1,[Have gdk-pixbuf])
-    AC_DEFINE(NEED_PIXMAP_CACHE,1,[Neex pixmap cache])
-    IMAGE_LIBS='${GDK_PIXBUF_LIBS}'
-    IMAGE_CFLAGS='${GDK_PIXBUF_CFLAGS}'
-    with_gdk_pixbuf=yes
-  else
-    AC_MSG_RESULT(no)
-    if test "$with_gdk_pixbuf" = "yes"; then
-      AC_MSG_ERROR([can't locate gdk-pixbuf-xlib library])
-    else
-      with_gdk_pixbuf=no
-    fi
-fi
-if test "$with_gdk_pixbuf" = "no"; then
-  AC_PATH_PROG(IMLIB_CONFIG, imlib-config, no)
-  AC_MSG_CHECKING([for Imlib])
-  if test "$IMLIB_CONFIG" = "no"; then
-    AC_MSG_RESULT([no])
-    AC_MSG_ERROR([can't find imlib-config])
-  else
-    IMLIB_VERSION=`$IMLIB_CONFIG --version`
-    dnl XXX do version check..
-    AC_MSG_RESULT([version $IMLIB_VERSION])
-    IMLIB_CFLAGS=`$IMLIB_CONFIG --cflags`
-    IMLIB_LIBS=`$IMLIB_CONFIG --libs`
-    if $IMLIB_CONFIG --libs | grep " -lpng" >/dev/null 2>&1; then true; else
-      AC_MSG_ERROR([imlib must be built with support for png images])
-    fi
-    AC_DEFINE(HAVE_IMLIB,1,[Have ImLib])
-    IMAGE_LIBS='${IMLIB_LIBS}'
-    IMAGE_CFLAGS='${IMLIB_CFLAGS}'
-    AC_SUBST(IMLIB_VERSION)
-    AC_SUBST(IMLIB_CFLAGS)
-    AC_SUBST(IMLIB_LIBS)
-  fi
-fi
-AC_SUBST(IMAGE_LIBS)
-AC_SUBST(IMAGE_CFLAGS)
+	    [  --with-gdk-pixbuf	  Use gdk-pixbuf for image management
+	     --without-gdk-pixbuf	  Use Imlib1 instead], [], [with_gdk_pixbuf=yes])
 
-AM_PATH_GTK_2_0(2.6.0)
+if test "$with_gdk_pixbuf" != "no"; then
+	PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= ${GTK_MIN_VER}
+			  ,GDK_PIXBUF_CFLAGS="`pkg-config --cflags gdk-pixbuf-xlib-2.0`"
+			  GDK_PIXBUF_LIBS="`pkg-config --libs gdk-pixbuf-xlib-2.0`"
+			  AC_DEFINE(HAVE_GDK_PIXBUF, 1, [Have gdk-pixbuf])
+			  AC_DEFINE(NEED_PIXMAP_CACHE, 1, [Need pixmap cache])
+			  IMAGE_LIBS='${GDK_PIXBUF_LIBS}'
+			  IMAGE_CFLAGS='${GDK_PIXBUF_CFLAGS}'
+			  with_gdk_pixbuf=yes
+			  ,AC_MSG_ERROR([can't locate gdk-pixbuf-xlib])
+			  with_gdk_pixbuf=no)
+fi
+
+if test "$with_gdk_pixbuf" = "no"; then
+	PKG_CHECK_MODULES(IMLIB1, imlib >= 1.9
+			  ,IMLIB_CFLAGS="`pkg-config --cflags imlib`"
+			  IMLIB_LIBS="`pkg-config --libs imlib`"
+			  AC_DEFINE(HAVE_IMLIB, 1, [Have Imlib1])
+			  IMAGE_LIBS='${IMLIB1_LIBS}'
+			  IMAGE_CFLAGS='${IMLIB1_CFLAGS}'
+			  ,AC_MSG_ERROR([can't locate imlib1 library]))
+fi
+
+dnl Check for libaudiofile
+AUDIOFILE_MIN_VER="0.2.3"
 
 AC_ARG_WITH(audiofile,
- [  --with-audiofile	  Use libaudiofile for sound manipulation
-  --without-audiofile], [], [with_audiofile=yes])
+	    [  --with-audiofile	  Use libaudiofile for sound manipulation
+	     --without-audiofile], [], [with_audiofile=yes])
+
 if test "$with_audiofile" = "yes"; then
-    PKG_CHECK_MODULES(AUDIOFILE, audiofile >= 0.2.3)
-    AC_SUBST(AUDIOFILE_LIBS)
-    AC_SUBST(AUDIOFILE_CFLAGS)
-    AC_DEFINE(HAVE_LIBAUDIOFILE,1,[Have libaudiofile])
+    PKG_CHECK_MODULES(AUDIOFILE, audiofile >= ${AUDIOFILE_MIN_VER},
+		      ,AUDIOFILE_LIBS="`pkg-config --libs audiofile`"
+		      AUDIOFILE_CFLAGS="`pkg-config --cflags audiofile`"
+		      AC_DEFINE(HAVE_LIBAUDIOFILE, 1, [Have libaudiofile])
+		      ,AC_MSG_ERROR([can't locate libaudiofile]))
 fi
+
+dnl Check for esound
+ESD_MIN_VER="0.2.23"
 
 AC_ARG_WITH(esd,
- [  --with-esd		  Use the Enlightened Sound Daemon
-  --without-esd], [], [with_esd=yes])
+	    [  --with-esd	  Use the Enlightened Sound Daemon
+	     --without-esd], [], [with_esd=yes])
+
 if test "$with_esd" = "yes"; then
-    PKG_CHECK_MODULES(ESD, esound >= 0.2.23)
-    AC_SUBST(ESD_LIBS)
-    AC_SUBST(ESD_CFLAGS)
-    AC_DEFINE(HAVE_ESD,1,[Have ESD])
+    PKG_CHECK_MODULES(ESD, esound >= ${ESD_MIN_VER}
+		      ,ESD_LIBS="`pkg-config --libs esound`"
+		      ESD_CFLAGS="`pkg-config --cflags esound`"
+		      AC_DEFINE(HAVE_ESD, 1, [Have ESD])
+		      ,AC_MSG_ERROR([can't locate esound]))
 fi
 
+dnl XXX Deprecated
+dnl Check for libgnome|gnomeui|gnomecanvas
+
 AC_ARG_ENABLE(gnome-widgets,
- [  --enable-gnome-widgets  Use GNOME widgets in places [default]
-  --disable-gnome-widgets Don't use GNOME widgets], [],
- [enable_gnome_widgets=no])
+	      [  --enable-gnome-widgets  Use GNOME widgets in places [default]
+	      --disable-gnome-widgets Don't use GNOME widgets], [], [enable_gnome_widgets=no])
 
 if test "$enable_gnome_widgets" != "no"; then
   AC_MSG_CHECKING([for rep-gtk GNOME wrappers])
@@ -341,6 +315,8 @@ fi
 AC_MSG_RESULT($LINGUAS)
 AC_SUBST(LINGUAS)
 
+AC_PROG_INSTALL
+
 dnl Nonstandard exported symbols
 AC_SUBST(version)
 AC_SUBST(subversion)
@@ -357,11 +333,58 @@ AC_SUBST(X_LIBS)
 AC_SUBST(X_EXTRA_LIBS)
 AC_SUBST(IMLIB_CFLAGS)
 AC_SUBST(IMLIB_LIBS)
+AC_SUBST(XINERAMA_LIBS)
+AC_SUBST(XRANDR_LIBS)
+AC_SUBST(XFT_LIBS)
+AC_SUBST(XFT_CFLAGS)
+AC_SUBST(PANGO_MIN_VER)
+AC_SUBST(PANGO_LIBS)
+AC_SUBST(PANGO_CFLAGS)
+AC_SUBST(REP_EXECDIR)
+AC_SUBST(REP_CFLAGS)
+AC_SUBST(REP_LIBS)
+AC_SUBST(REP_VERSION)
+AC_SUBST(REP_MSGFMT)
+AC_SUBST(GDK_PIXBUF_LIBS)
+AC_SUBST(GDK_PIXBUF_CFLAGS)
+AC_SUBST(IMAGE_LIBS)
+AC_SUBST(IMAGE_CFLAGS)
+AC_SUBST(GTK_MIN_VER)
+AC_SUBST(GTK_LIBS)
+AC_SUBST(GTK_CFLAGS)
+AC_SUBST(REP_MIN_VER)
+AC_SUBST(REP_GTK_MIN_VER)
+AC_SUBST(AUDIOFILE_MIN_VER)
+AC_SUBST(AUDIOFILE_LIBS)
+AC_SUBST(AUDIOFILE_CFLAGS)
+AC_SUBST(ESD_MIN_VER)
+AC_SUBST(ESD_LIBS)
+AC_SUBST(ESD_CFLAGS)
 
 dnl Build all files
-AC_OUTPUT(${output_files})
+AC_CONFIG_FILES([
+Makedefs
+Makefile
+sawfish.ebuild
+sawfish.pc
+sawfish.spec
+lisp/Makefile
+lisp/sawfish/ui/Makefile
+lisp/sawfish/gtk/Makefile
+lisp/sawfish/gtk/widgets/font.jl
+man/Makefile
+po/Makefile
+scripts/Makefile
+sounds/Makefile
+src/Makefile
+themes/Makefile
+])
+
+AC_OUTPUT
 
 mv sawfish.ebuild sawfish-$version.ebuild
+
+./build-info
 
 dnl If it doesn't look like GNU Make is being used, give a friendly warning
 tem=`make --version -f /dev/null 2>&1 | grep GNU`

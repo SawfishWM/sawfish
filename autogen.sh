@@ -1,18 +1,24 @@
 #!/bin/sh
 
+if [ -f Makefile ]; then
+	make distclean
+fi
+
+if [ -d m4 ]; then
+	rm -rf m4
+fi
+
 if [ -f configure.in ]; then
-  if grep "AM_CONFIG_HEADER" configure.in >/dev/null; then
-    if [ ! -f config.h.in ]; then
+  if grep "AC_CONFIG_HEADER" configure.in >/dev/null; then
       echo "Running autoheader"
       autoheader || exit 1
-    fi
   fi
   if grep "AM_PROG_LIBTOOL" configure.in >/dev/null; then
     echo "Running libtoolize"
     libtoolize --force --copy --install || exit 1
   fi
   echo "Running aclocal $ACLOCAL_FLAGS"
-  aclocal $ACLOCAL_FLAGS || exit 1
+  aclocal -I m4 $ACLOCAL_FLAGS || exit 1
 
   echo "Running autoconf $AUTOCONF_FLAGS"
   autoconf $AUTOCONF_FLAGS || exit 1

@@ -1,154 +1,193 @@
-/* config.h.in -- config.h configure input
-   $Id: config.h.in,v 1.16 2005/07/01 16:04:49 jsh Exp $
+/* config.h.in.  Generated from configure.in by autoheader.  */
 
-   Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+/* Define if building universal (internal helper macro) */
+#undef AC_APPLE_UNIVERSAL_BUILD
 
-   This file is part of sawmill.
-
-   sawmill is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawmill is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawmill; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
-
-#ifndef SAWMILL_CONFIG_H
-#define SAWMILL_CONFIG_H
-
-/* Define if X11 is available */
-#undef HAVE_X11
-
-/* Define if using alloca.c.  */
-#undef C_ALLOCA
-
-/* Define to empty if the keyword does not work.  */
-#undef const
-
-/* Define as __inline if that's what the C compiler calls it.  */
-#undef inline
-
-/* Define if words are stored with the most significant byte first */
-#undef WORDS_BIGENDIAN
-
-/* Define to one of _getb67, GETB67, getb67 for Cray-2 and Cray-YMP systems.
-   This function is required for alloca.c support on those systems.  */
+/* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
+   systems. This function is required for `alloca.c' support on those systems.
+   */
 #undef CRAY_STACKSEG_END
 
-/* Define if you have alloca, as a function or macro.  */
+/* Define to 1 if using `alloca.c'. */
+#undef C_ALLOCA
+
+/* Doug Lea malloc */
+#undef DOUG_LEA_MALLOC
+
+/* Define to 1 if you have `alloca', as a function or macro. */
 #undef HAVE_ALLOCA
 
-/* Define if you have <alloca.h> and it should be used (not on Ultrix).  */
+/* Define to 1 if you have <alloca.h> and it should be used (not on Ultrix).
+   */
 #undef HAVE_ALLOCA_H
 
-/* Define if you don't have vprintf but do have _doprnt.  */
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you don't have `vprintf' but do have `_doprnt.' */
 #undef HAVE_DOPRNT
 
-/* Define if you have the vprintf function.  */
+/* Have ESD */
+#undef HAVE_ESD
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#undef HAVE_FCNTL_H
+
+/* Have gdk-pixbuf */
+#undef HAVE_GDK_PIXBUF
+
+/* Define to 1 if you have the `gethostname' function. */
+#undef HAVE_GETHOSTNAME
+
+/* Define to 1 if you have the `getpagesize' function. */
+#undef HAVE_GETPAGESIZE
+
+/* Have GTK */
+#undef HAVE_GTK
+
+/* Have Imlib1 */
+#undef HAVE_IMLIB
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Have libaudiofile */
+#undef HAVE_LIBAUDIOFILE
+
+/* Define to 1 if you have the `nsl' library (-lnsl). */
+#undef HAVE_LIBNSL
+
+/* Define to 1 if you have the `socket' library (-lsocket). */
+#undef HAVE_LIBSOCKET
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Have pango */
+#undef HAVE_PANGO
+
+/* Have pangox */
+#undef HAVE_PANGO_X
+
+/* Have pangoxft */
+#undef HAVE_PANGO_XFT
+
+/* Define to 1 if you have the `snprintf' function. */
+#undef HAVE_SNPRINTF
+
+/* Define to 1 if you have the `socket' function. */
+#undef HAVE_SOCKET
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/time.h> header file. */
+#undef HAVE_SYS_TIME_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <sys/utsname.h> header file. */
+#undef HAVE_SYS_UTSNAME_H
+
+/* Define to 1 if you have <sys/wait.h> that is POSIX.1 compatible. */
+#undef HAVE_SYS_WAIT_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if you have the `vprintf' function. */
 #undef HAVE_VPRINTF
 
-/* Define to `unsigned' if <sys/types.h> doesn't define.  */
-#undef size_t
+/* Have X11 */
+#undef HAVE_X11
+
+/* Define to 1 if you have the <X11/extensions/Xdbe.h> header file. */
+#undef HAVE_X11_EXTENSIONS_XDBE_H
+
+/* Have xinerama */
+#undef HAVE_X11_EXTENSIONS_XINERAMA_H
+
+/* Have xrandr */
+#undef HAVE_X11_EXTENSIONS_XRANDR_H
+
+/* Have xft */
+#undef HAVE_X11_XFT_XFT_H
+
+/* libc malloc */
+#undef LIBC_MALLOC
+
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#undef LT_OBJDIR
+
+/* Need pixmap cache */
+#undef NEED_PIXMAP_CACHE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
 
 /* If using the C implementation of alloca, define if you know the
    direction of stack growth for your system; otherwise it will be
-   automatically deduced at run-time.
- STACK_DIRECTION > 0 => grows toward higher addresses
- STACK_DIRECTION < 0 => grows toward lower addresses
- STACK_DIRECTION = 0 => direction of growth unknown
- */
+   automatically deduced at runtime.
+	STACK_DIRECTION > 0 => grows toward higher addresses
+	STACK_DIRECTION < 0 => grows toward lower addresses
+	STACK_DIRECTION = 0 => direction of growth unknown */
 #undef STACK_DIRECTION
 
-/* Define if you have the ANSI C header files.  */
+/* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
-/* Define if you can safely include both <sys/time.h> and <time.h>.  */
+/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
 #undef TIME_WITH_SYS_TIME
 
-/* Define if <memory.h> exists */
-#undef HAVE_MEMORY_H
-#ifdef HAVE_MEMORY_H
-# define NEED_MEMORY_H		/* backwards compatibility */
+/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
+   significant byte first (like Motorola and SPARC, unlike Intel). */
+#if defined AC_APPLE_UNIVERSAL_BUILD
+# if defined __BIG_ENDIAN__
+#  define WORDS_BIGENDIAN 1
+# endif
+#else
+# ifndef WORDS_BIGENDIAN
+#  undef WORDS_BIGENDIAN
+# endif
 #endif
 
-/* Define if <X11/SM/SMlib.h> exists */
-#undef HAVE_X11_SM_SMLIB_H
+/* Have x11 */
+#undef X_DISPLAY_MISSING
 
-/* Define if <X11/extensions/Xdbe.h> exists */
-#undef HAVE_X11_EXTENSIONS_XDBE_H
+/* Define to empty if `const' does not conform to ANSI C. */
+#undef const
 
-/* Define if <X11/extensions/Xinerama.h> exists */
-#undef HAVE_X11_EXTENSIONS_XINERAMA_H
+/* Define to `__inline__' or `__inline' if that's what the C compiler
+   calls it, or to nothing if 'inline' is not supported under any name.  */
+#ifndef __cplusplus
+#undef inline
+#endif
 
-/* Define if <X11/extensions/Xrandr.h> exists */
-#undef HAVE_X11_EXTENSIONS_XRANDR_H
-
-/* Define if <X11/Xft/Xft.h> exists */
-#undef HAVE_X11_XFT_XFT_H
-
-/* Define if you have <sys/wait.h> that is POSIX.1 compatible.  */
-#undef HAVE_SYS_WAIT_H
-
-/* Define if you have the gethostname function.  */
-#undef HAVE_GETHOSTNAME
-
-/* Define if you have the snprintf function. */
-#undef HAVE_SNPRINTF
-
-/* Define if you have the getpagesize function. */
-#undef HAVE_GETPAGESIZE
-
-/* Define if you have the <fcntl.h> header file.  */
-#undef HAVE_FCNTL_H
-
-/* Define if you have the <sys/time.h> header file.  */
-#undef HAVE_SYS_TIME_H
-
-/* Define if you have the <sys/utsname.h> header file.  */
-#undef HAVE_SYS_UTSNAME_H
-
-/* Define if you have the <unistd.h> header file.  */
-#undef HAVE_UNISTD_H
-
-/* Define if you have the nsl library (-lnsl).  */
-#undef HAVE_LIBNSL
-
-/* Define if you have the og library (-log).  */
-#undef HAVE_LIBOG
-
-/* Define if you have the socket library (-lsocket).  */
-#undef HAVE_LIBSOCKET
-
-/* Define if using Doug Lea's malloc */
-#undef DOUG_LEA_MALLOC
-
-/* Define if using libc's malloc */
-#undef LIBC_MALLOC
-
-/* Define if using r_alloc and friends */
-#undef USE_R_ALLOC
-
-/* Define if you have the enlightened sound daemon */
-#undef HAVE_ESD
-
-/* Define if using Imlib 1 */
-#undef HAVE_IMLIB
-
-/* Define if using pixmap-cache.c */
-#undef NEED_PIXMAP_CACHE
-
-/* Define if you have gdk-pixbuf (the xlib version) */
-#undef HAVE_GDK_PIXBUF
-
-/* Define if you have pango */
-#undef HAVE_PANGO
-#undef HAVE_PANGO_X
-#undef HAVE_PANGO_XFT
-
-#endif /* SAWMILL_CONFIG_H */
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#undef size_t
