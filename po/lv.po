@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish for latvian\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-04 22:17+0200\n"
+"POT-Creation-Date: 2009-01-03 08:14+0100\n"
 "PO-Revision-Date: 2002-11-10 11:48+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <ll10nt@ttc.lv>\n"
@@ -49,14 +49,17 @@ msgstr "Parādīt virsraksta pogas uz imitatora: \\w"
 msgid "Gradient Theme"
 msgstr "Gradientu Tēma"
 
+#. ../themes/mxflat/theme.jl
 #. ../themes/gradient/theme.jl
 msgid "horizontal"
 msgstr "horizontāli"
 
+#. ../themes/mxflat/theme.jl
 #. ../themes/gradient/theme.jl
 msgid "vertical"
 msgstr "vertikāli"
 
+#. ../themes/mxflat/theme.jl
 #. ../themes/gradient/theme.jl
 msgid "diagonal"
 msgstr "diognāli"
@@ -99,14 +102,17 @@ msgstr "Neaktīvo rāmju krāsa (ja neuzstādīts, lietot GTK+ fona krāsu)."
 msgid "Color of active frames (if unset use GTK+ selection color)."
 msgstr "Aktīvo rāmju krāsa (ja neuzstādīts, lietot GTK+ izvēles krāsu)."
 
+#. ../themes/mxflat/theme.jl
 #. ../themes/mono/theme.jl
 msgid "left"
 msgstr "pa kreisi"
 
+#. ../themes/mxflat/theme.jl
 #. ../themes/mono/theme.jl
 msgid "right"
 msgstr "pa labi"
 
+#. ../themes/mxflat/theme.jl
 #. ../themes/mono/theme.jl
 msgid "center"
 msgstr "centrā"
@@ -114,6 +120,903 @@ msgstr "centrā"
 #. ../themes/mono/theme.jl
 msgid "Text is \\w justified in window titles."
 msgstr "Teksts ir \\w izlīdzināts logu virsrakstos."
+
+#. ../themes/mxflat/theme.jl
+msgid "mxflat"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "title"
+msgstr "Stāvoklis"
+
+#. ../themes/mxflat/theme.jl
+msgid "basic"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "gradient"
+msgstr "pagaidu"
+
+#. ../themes/mxflat/theme.jl
+msgid "colors"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "buttons"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "positions 1"
+msgstr "Pozīcija"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "positions 2"
+msgstr "Pozīcija"
+
+#. ../themes/mxflat/theme.jl
+msgid "keymaps 1"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "keymaps 2"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "borders"
+msgstr "Augšietvars"
+
+#. ../themes/mxflat/theme.jl
+msgid "extended"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "normal"
+msgstr "Normāls"
+
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../themes/mxflat/theme.jl
+msgid "all"
+msgstr "visi"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../themes/mxflat/theme.jl
+msgid "none"
+msgstr "nekas"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"decoration mode\n"
+"\n"
+"set the mode 'when to draw a titlebar and window buttons'. the decoration "
+"mode 'all' means that all windows, even transients/dialogs, will get a "
+"titlebar and buttons. none means no window will get any :-). usually "
+"transients only have a contents-border. this option is for reimplementing a "
+"sawfish feature that is gone in the latest version."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "titlebar height (9 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize title string\n"
+"\n"
+"see the tooltip for the 'title string' option below for more information. "
+"(NOTE: i hope the redrawing problems with this option are solved. if not, "
+"write an email please!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string\n"
+"\n"
+"the string you insert here will be your new title string. variables always "
+"start with a dollar-sign $ and are replaced with their actual values. to get "
+"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
+"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
+"string]. the following vars are built-in: $name, $fullname, $width, $width-"
+"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
+"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
+"if not, write an email please!"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"update title string periodically\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string update interval (1 - 1000000 s)\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string font\n"
+"\n"
+"you should really choose a better font. verdana bold 8 pt looks nice."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize title position\n"
+"\n"
+"by default the title string is centered horizontally and vertically."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "real-center"
+msgstr "centrā"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string horizontal alignment\n"
+"\n"
+"'real-center' means to take the whole titlebar into account while centering "
+"the string. when selecting 'center' only the distance between the buttons is "
+"taken into account."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
+"\n"
+"the horizontal position of the title string can only be adjusted if the "
+"horizontal alignment is not 'center'. the range also depends on the setting "
+"of the option above. it the title string is already aligned left, you cannot "
+"adjust it to be even further left because there are button in the way."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "top"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "bottom"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "title string vertical alignment"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient titlebar background (experimental)\n"
+"\n"
+"when activating the gradient background the normal titlebar background "
+"colors will be ignored. besides the button background colors will be "
+"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
+"low value, ie high quality.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient mode\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient quality (1 best - 20 worst)\n"
+"\n"
+"the value here is the factor the calculated gradient image will be scaled "
+"down. this increases speed but decreases quality."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "rainbow"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "jamaica"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "rgb"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "custom"
+msgstr "Pielāgot"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient color mode\n"
+"\n"
+"the custom mode will respect the colors set in the list below."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used. besides the gradient color mode must be set to "
+"custom to activate this list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "reverse colors"
+msgstr "Izvēlēties krāsu"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused/highlighted titlebar colors hue (0 - 360)\n"
+"\n"
+"this value changes the hue of a color, by moving (0 - 360) degress around "
+"the color cycle...180 for example inverts the color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, c-format
+msgid ""
+"unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
+"color)\n"
+"\n"
+"the saturation of a color is a measurement of the color intensity"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, c-format
+msgid ""
+"unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
+"color)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"  focused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"  focused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize extended title string colors\n"
+"\n"
+"you can customize additional colors of the title string. if you deactivate "
+"this, these colors will be set to the focused title string color."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "default-9"
+msgstr "Noklusētais"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "default-12"
+msgstr "Noklusētais"
+
+#. ../themes/mxflat/theme.jl
+msgid "square-6"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-9"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-12"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-15"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-18"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "ball-9"
+msgstr "visi"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "ball-12"
+msgstr "visi"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button icon set (experimental)\n"
+"\n"
+"the number at the end is the width/height of the button icons in the icon "
+"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button size\n"
+"\n"
+"by default the button size follows the size of the titlebar, but by "
+"activating this you can set it to something different."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"buttons size (1 - 1000 pixel)\n"
+"\n"
+"a buttons size that is bigger than your current titlebar height is ignored."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button vertical alignment\n"
+"\n"
+"if a button is smaller than the titlebar you might want to set its vertical "
+"alignment."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"scale button icons (experimental)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"display window icon on menu button\n"
+"\n"
+"many people like having the window-icon displayed on the menu-button. this "
+"icon is defined by the application itself and is also shown in your pager "
+"and task-list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "menu icon scale (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "button distance (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "buttons left offset (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "buttons right offset (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
+"\n"
+"enabling this will allow you to set the positon of each button in the "
+"titlebar manually. a negative/positiv value means the button will be drawn "
+"on left/right side of the titlebar."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "title-height"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "pixel"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button position model\n"
+"\n"
+"'titel-height' means calculate position as multiple of title height. when "
+"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
+"mind that several buttons might slide on top of each other. 'none' means no "
+"buttons at all."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "menu button position"
+msgstr "Atcerēties _pozīciju"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "shade button position"
+msgstr "ēnošanas-pogas-taustiņkarte"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "iconify button position"
+msgstr "ikonificēšanas-pogas-taustiņkarte"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "maximize button position"
+msgstr "maksimizēšanas-pogas-taustiņkarte"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "close button position"
+msgstr "aizvēršanas-pogas-taustiņkarte"
+
+#. ../themes/mxflat/theme.jl
+msgid "sticky button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "previous workspace button position"
+msgstr "Iepriekšējais darba vietas logs"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "next workspace button position"
+msgstr "Nākošais darba vietas logs"
+
+#. ../themes/mxflat/theme.jl
+msgid "configure button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "info button position"
+msgstr "Loga vēsture saglabā pozīciju"
+
+#. ../themes/mxflat/theme.jl
+msgid "always-on-top button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "lock button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize sticky button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: toggle sticky "
+"state of window"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:sticky-button-keymap"
+msgstr "ikonificēšanas-pogas-taustiņkarte"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize previous button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"previous workspace - button2 workspace-list - button3 send window to first "
+"workspace - button6 pack window left"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:previous-button-keymap"
+msgstr "izvēlnes-pogas-taustiņkarte"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize next button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"next workspace - button2 workspace-list - button3 send window to last "
+"workspace - button6 pack window right"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:next-button-keymap"
+msgstr "izvēlnes-pogas-taustiņkarte"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: send window to next workspace - button2 workspace-list - button3 "
+"send window to last workspace - button6 pack window right"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize configure button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: start sawfish-"
+"ui - button3: toggle custom title string"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:configure-button-keymap"
+msgstr "izvēlnes-pogas-taustiņkarte"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: start sawfish-ui - button3: toggle custom title string"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize info button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: window list - "
+"button3 window snooper (not included by default)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:info-button-keymap"
+msgstr "izvēlnes-pogas-taustiņkarte"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"always on top depth (-1000 - 1000)\n"
+"\n"
+"a window will have this depth after you have pressed the always-on-top "
+"button. 0 is the normal window level. every positive value means above other "
+"windows, a negative value means below. keept it at a positive value in order "
+"to have the always-on-top button do it's job."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize always-on-top button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: sets window "
+"depth to the adjusted value"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:always-on-top-button-keymap"
+msgstr "izvēlnes-pogas-taustiņkarte"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize look button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: lock window "
+"position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:lock-button-keymap"
+msgstr "aizvēršanas-pogas-taustiņkarte"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button-colors\n"
+"\n"
+"when you active this you will be able to set custom button colors. by "
+"default the button colors depend on the titlebar colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width (0 - 1000 pixel)\n"
+"\n"
+"set the width border around the window."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width for maximized windows (0 - 1000 pixel)\n"
+"\n"
+"when you like having a big border around your windows you might have noticed "
+"that sawfish still draws that big border when the window is maximized. if "
+"you don't want that, set the border width for maximized windows smaller than "
+"the border width for unmaximized windows. (NOTE: this feature is still buggy "
+"as sawfish does not resize the windows correctly yet, so the best might be "
+"to set it to the normal border width.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize border for focused windows (experimental)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width for focused windows (0 - 1000 pixel)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title-contents border width (0 - 1000 pixel)\n"
+"\n"
+"sets the widths of the line between titlebar and contents window"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border offset (-1000 - 1000 pixel)\n"
+"\n"
+"adjust the point where the border actually starts. many gtk2 apps draw a "
+"small black border around their contents window and this is just ugly when "
+"sawfish draws another border around the window. with a border offset of -1 "
+"the sawfish window border will overlay the gtk2 border exactly."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"keep window borders and corners at their place when shading a window\n"
+"\n"
+"when shading a window borders and corners will stay where they were and not "
+"merge with the titlebar."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"show window corners\n"
+"\n"
+" the corners are used to resize a window in two directions at the same time. "
+"usually the width and length of window corners are determined by the border "
+"width but you can adjust them below."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"corners length adjustement (-1 - 100 pixel)\n"
+"\n"
+"increasing the corner length will grow the window corners along the window "
+"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
+"grab the 1 pixel corner to be able to resize the window in two directions; "
+"thus, make it bigger."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "outside"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "inside"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "corner direction"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"corners width adjustement (0 - 100 pixel)\n"
+"\n"
+"this option makes the window corners broader. with a border width of 1 pixel "
+"it is hard to grab this 1 pixel corner to be able to resize the window in "
+"two directions; thus, make it bigger."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow (experimental)\n"
+"\n"
+"draw a small additional border around your windows emulating a solid shadow "
+"effect. use the options below to adjust its width and direction. (NOTE: this "
+"is VERY cpu intensive and might slow down your computer noticably. so turn "
+"it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "fake shadow only on focused windows"
+msgstr "Joslas attēls nefokusētajiem logiem."
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "north"
+msgstr "nē"
+
+#. ../themes/mxflat/theme.jl
+msgid "east"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "south"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "west"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "north-east"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "north-west"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "south-east"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "south-west"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow light source\n"
+"\n"
+"set the direction of the fake shadow. usually only 2 or 3 borders of your "
+"window have a fake shadow. this depends on where the light comes from."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow light distance (0 - 100)\n"
+"\n"
+"this option has only an effect on the north, east, south and west light "
+"sources. the further away the light source is, the smaller will the two "
+"'side' shadows be."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "fake shadow width (0 - 100 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "shadow color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize border colors\n"
+"\n"
+"you can customize your border colors here. if you deactivate this, these "
+"colors will be set to the focused title string color."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked border color"
+msgstr ""
 
 #. ../themes/simple/theme.jl
 msgid "Simple Theme"
@@ -279,10 +1182,6 @@ msgstr "Kolonnas:"
 msgid "Rows:"
 msgstr "Rindas:"
 
-#. ../lisp/sawfish/ui/widgets/icon.jl
-msgid "Select Icon"
-msgstr "Izvēlieties Ikonu"
-
 #. ../lisp/sawfish/ui/widgets/keymap.jl
 #, fuzzy
 msgid "Edit Binding"
@@ -308,6 +1207,18 @@ msgstr "nē"
 #, fuzzy
 msgid "Match Window Properties"
 msgstr "Sakrtītoši loga rekvizīti"
+
+#. ../lisp/sawfish/wm/animation/outline.jl
+msgid "Animation Outline Coordinates"
+msgstr ""
+
+#. ../lisp/sawfish/wm/animation/outline.jl
+msgid "Animation Steps"
+msgstr ""
+
+#. ../lisp/sawfish/wm/animation/outline.jl
+msgid "Animation Delay"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -784,7 +1695,8 @@ msgid "Help about"
 msgstr "Palīdzība par"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-msgid "Number of pixels to move pointer in `move-cursor-' commands."
+#, fuzzy
+msgid "Number of pixels to move pointer in."
 msgstr ""
 "Pikseļu daudzums, par cik pārvietot kursoru `pārvietot-kursoru-' komandās."
 
@@ -853,11 +1765,56 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr "Pārvietot kursoru 1 pikseli uz leju."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "opaque"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "box"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Paaugstināt logus, kad tie tiek atēnoti."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "How windows being resized are animated"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Paaugstināt logus, kad tie tiek fokusēti."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Show current position of windows while moving."
 msgstr "Parādīt pašreizējo loga pozīciju, kamēr to pārvieto."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Show current dimensions of windows while resizing."
+msgstr "Parādīt pašreizējās loga dimensijas, kamēr maina to izmērus."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "region"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "border"
+msgstr "Augšietvars"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "grab"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "border-grab"
+msgstr "ietvara-taustiņkarte"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "How to choose window edges when resizing."
 msgstr "Parādīt pašreizējās loga dimensijas, kamēr maina to izmērus."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -1117,6 +2074,11 @@ msgid "Include windows on all viewports when cycling."
 msgstr "Iekļaut logus no visiem skatpunktiem, kad cirkulē."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Paaugstināt logus, kad tie tiek fokusēti."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "cycle-keymap"
 msgstr "cirkulēšanas-taustiņkarte"
 
@@ -1214,11 +2176,6 @@ msgstr "Pārvietot/Mainīt izmēru"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
-msgid "Placement"
-msgstr "Novietojums"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
 msgid "Appearance"
 msgstr "Izskats"
 
@@ -1232,12 +2189,18 @@ msgid "Bindings"
 msgstr "Sasaistes"
 
 #. ../lisp/sawfish/wm/custom.jl
-msgid "Minimizing and Maximizing"
+#, fuzzy
+msgid "Mini/Maximizing"
 msgstr "Minimizēšana un Maksimizēšana"
 
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Miscellaneous"
 msgstr "Dažādi"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Placement"
+msgstr "Novietojums"
 
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Customize"
@@ -1299,6 +2262,10 @@ msgstr "Ekrāna malu sasniedzot, izvēlas nākamo: \\w"
 msgid "Only flip when interactively moving a window."
 msgstr "Tikai viegli uzsist, kad interaktīvi pārvieto logu."
 
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Error Handling"
 msgstr "Kļūdu Pārvalde"
@@ -1318,6 +2285,10 @@ msgstr "ekrāns"
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "standard-error"
 msgstr "standarta-kļūda"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "both"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display error messages to: \\w"
@@ -1383,6 +2354,7 @@ msgstr "Dimensijas"
 msgid "Workspace"
 msgstr "Darba vieta"
 
+#. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Viewport"
 msgstr "Skatpunkts"
@@ -1419,12 +2391,10 @@ msgstr "Fokusēt caur klikšķi"
 msgid "Focus mode"
 msgstr "Fokusa režīms"
 
-#. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Frame type"
 msgstr "Rāmja tips"
 
-#. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Frame style"
 msgstr "Rāmja stils"
@@ -1527,6 +2497,28 @@ msgstr "Parādīt knifus logu rāmjiem."
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Show full documentation in tooltips."
 msgstr "Parādīt pilnu dokumentāciju knifos."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Aizture milisekundēs pirms logu atēnošanas."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Aizture milisekundēs pirms logu atēnošanas."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _position"
@@ -1679,6 +2671,15 @@ msgstr "Kad peles kursors ietekmē ievades fokusu."
 #. ../lisp/sawfish/wm/focus.jl
 msgid "Click-to-focus mode passes the click through to the application."
 msgstr "Klikšķis-lai-fokusēt režīms nodod klikšķus caur aplikāciju."
+
+#. ../lisp/sawfish/wm/focus.jl
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Pazemināt logu uz tā zemāko iespējamo pozīciju krāvuma secībā."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default frame style:"
@@ -1863,16 +2864,28 @@ msgid "Modifier key(s) used for default shortcuts."
 msgstr "Modifikatora taustiņš(i), kurus lieto noklusētajām saīsnēm."
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Minimize"
+#, fuzzy
+msgid "Mi_nimize"
 msgstr "Minimizēt"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Unmaximize"
+#, fuzzy
+msgid "Unma_ximize"
 msgstr "Atmaksimizēt"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Maximize"
+#, fuzzy
+msgid "Ma_ximize"
 msgstr "Maksimizēt"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Move"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Resize"
+msgstr "Pārvietot/Mainīt izmēru"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
@@ -1899,33 +2912,49 @@ msgid "_Next workspace"
 msgstr "_Nākošā darba vieta"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to previous"
+#, fuzzy
+msgid "Copy to p_revious"
 msgstr "Kopēt uz iepriekšējo"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to next"
+#, fuzzy
+msgid "Copy to ne_xt"
 msgstr "Kopēt uz nākošo"
 
-#. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Stacking"
+#, fuzzy
+msgid "Stac_king"
 msgstr "Kraušana"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Raise"
+#, fuzzy
+msgid "_Raise"
 msgstr "Paaugstināt"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Lower"
+#, fuzzy
+msgid "_Lower"
 msgstr "Pazemināt"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Upper layer"
+#, fuzzy
+msgid "_Upper layer"
 msgstr "Augšējais slānis"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Lower layer"
+#, fuzzy
+msgid "Lo_wer layer"
 msgstr "Zemākais slānis"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Frame ty_pe"
+msgstr "Rāmja tips"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Frame sty_le"
+msgstr "Rāmja stils"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Windows"
@@ -2018,19 +3047,17 @@ msgstr "Logu novietošanas metode: \\w"
 msgid "Method of placing dialog windows: \\w"
 msgstr "Dialoga logu novietošanas metode: \\w"
 
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Ignore program-specified window placements."
+msgstr ""
+
 #. ../lisp/sawfish/wm/stacking.jl
-msgid "all"
-msgstr "visi"
+msgid "Stacking"
+msgstr "Kraušana"
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "parents"
 msgstr "pirmavoti"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-#. ../lisp/sawfish/wm/state/iconify.jl
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "none"
-msgstr "nekas"
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Keep transient windows stacked above: \\w"
@@ -2367,8 +3394,40 @@ msgid "Maximize window fullscreen"
 msgstr "Maksimizēt logu pilnekrānā"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Fullscreen maximize the window."
+msgstr "Minimizēt logu."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen toggle"
 msgstr "Slēgt loga pilnekrāna maksimizēšanu"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized and unmaximized."
+msgstr "Slēgt loga stāvokli starp maksimizētu un atmaksimizētu."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullxinerama"
+msgstr "Maksimizēt logu pilnekrānā"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Fullscreen maximize the window across all Xinerama screens."
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullxinerama toggle"
+msgstr "Slēgt loga pilnekrāna maksimizēšanu"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized across all "
+"Xinerama and unmaximized."
+msgstr "Slēgt loga stāvokli starp maksimizētu-aizpildītu un atmaksimizētu."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
@@ -2559,6 +3618,35 @@ msgid "Raise lower window"
 msgstr "Paaugstināt zemāko logu"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Pārvietot grupu uz pašreizējo skatpunktu"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "wrap-around"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "stop"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
 msgstr "Aktivizēt skatpunktu"
 
@@ -2665,6 +3753,52 @@ msgstr "Pārvietot logu lejup"
 msgid "Move the window to the viewport below, and switch to that viewport."
 msgstr "Pārvietot logu uz lejējo skatpunktu un pārslēgties uz šo skatpunktu."
 
+#. ../lisp/sawfish/wm/window-anim.jl
+#, fuzzy
+msgid "Animation"
+msgstr "Darbības"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#, fuzzy
+msgid "solid"
+msgstr "Izvairīties"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+msgid "wireframe"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+msgid "The default window animation mode"
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Warping"
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Format to create unique window names."
+msgstr ""
+
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Focus desktop"
 msgstr "Fokusēt darba virsmu"
@@ -2698,8 +3832,26 @@ msgid "Force the current window to have a unique title."
 msgstr "Likt pašreizējam logam būt ar unikālu virsrakstu."
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "keep-going"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Parādīt saraksta izvēlni par visām darba vietām."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace names"
 msgstr "Darba vietu nosaukumi"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
@@ -2946,3 +4098,6 @@ msgstr "Izvēlēties darba vietu interaktīvi"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Pieprasīt darba vietu un pārslēgties uz to."
+
+#~ msgid "Select Icon"
+#~ msgstr "Izvēlieties Ikonu"
