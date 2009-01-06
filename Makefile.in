@@ -69,6 +69,7 @@ uninstall :
 	  ( cd $$dir && $(MAKE) $@ ) || exit 1; \
 	done
 	rm -rf $(DESTDIR)$(sawfishdir)/$(version)
+	rm -f $(DESTDIR)/$(libdir)/pkgconfig/sawfish.pc
 
 DOC :
 	repdoc DOC `find $(srcdir) \( -name '*.c' -o -name '*.jl' \) -print`
