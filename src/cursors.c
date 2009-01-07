@@ -34,7 +34,7 @@ static Cursor
 make_bm_cursor (repv image, repv mask, repv fg, repv bg)
 {
     rep_GC_root gc_image, gc_mask, gc_fg, gc_bg;
-    unsigned width, height;
+    unsigned int width, height;
     int x_hot, y_hot;
     Pixmap bm_image, bm_mask;
     Cursor cursor = 0;
