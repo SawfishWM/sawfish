@@ -1,6 +1,6 @@
 #| workspace-swapper.jl -- swapping window attributes per-workspace
 
-   $Id$
+   $Id: swapper.jl,v 1.6 2001/01/05 04:12:38 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -17,7 +17,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with librep; see the file COPYING.  If not, write to
+   along with sawfish; see the file COPYING.  If not, write to
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
