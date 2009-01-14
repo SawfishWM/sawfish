@@ -49,9 +49,9 @@
     (unless (window-get w 'shaded)
       (window-put w 'shaded t)
       (window-put w 'hide-client t)
+      (reframe-window w)
       (call-window-hook 'shade-window-hook w)
-      (call-window-hook 'window-state-change-hook w (list '(shaded)))
-      (reframe-window w)))
+      (call-window-hook 'window-state-change-hook w (list '(shaded)))))
 
   (define (unshade-window w)
     "If the window is shaded (see `shade-window'), restore it to it's usual
@@ -59,9 +59,9 @@ state."
     (when (window-get w 'shaded)
       (window-put w 'shaded nil)
       (window-put w 'hide-client nil)
+      (reframe-window w)
       (call-window-hook 'unshade-window-hook w)
       (call-window-hook 'window-state-change-hook w (list '(shaded)))
-      (reframe-window w)
       (when raise-windows-when-unshaded
 	(raise-window* w))))
 

@@ -47,7 +47,10 @@
     (call-window-hook 'before-slide-hook w)
     (unless (window-get w 'fixed-position)
       (let ((coords (window-position w)))
-	(move-window-to w (+ (car coords) right) (+ (cdr coords) down)))))
+	(move-window-to w (+ (car coords) right) (+ (cdr coords) down)))
+      (call-window-hook 'after-move-hook w
+			`((,@(if (/= right 0) '(horizontal))
+			   ,@(if (/= down 0) '(vertical)))))))
 
 ;;; window commands
 
