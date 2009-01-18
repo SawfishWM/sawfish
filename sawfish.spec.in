@@ -8,9 +8,10 @@ Group: User Interface/Desktops
 Source: http://download.sourceforge.net/sawmill/sawfish-%{version}.tar.bz2
 URL: http://sawfish.wikia.com/
 Packager: Christopher Bratusek <zanghar@freenet.de>
-Buildroot: /var/tmp/%{name}-root
-BuildRequires: gmp-devel texinfo /sbin/install-info
+Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRequires: gmp-devel texinfo
 Provides: windowmanager
+Obsoletes: sawmill sawmill-gnome sawfish-gnome sawfish-themer
 
 %description
 Sawfish is an extensible window manager which uses a Lisp-based
@@ -24,24 +25,29 @@ using a GTK+ interface.  Sawfish is mostly GNOME compliant
 %setup -q
 
 %build
-
-LC_ALL=""
-LINGUAS=""
-LANG=""
-export LC_ALL LINGUAS LANG
+./autogen.sh \
+	--x-libraries=%{_libdir} \
+	--x-includes=/usr/include/X11 
 
 %configure
 make host_type=%{_target_platform}
+( cd po && ./make-pot update )
+
+%define librepdir %(\
+   repl=$(rpm -ql librep.%{_arch}| grep -m 1 /rep/); \
+   [ "$repl" ] || repl=$(rpm -ql librep-devel.%{_arch} | grep -m 1 /rep/); \
+   echo ${repl%%/rep/*})
 
 %install
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
+rm -rf $RPM_BUILD_ROOT
+
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties/
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications/
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
-make install \
-    DESTDIR=$RPM_BUILD_ROOT \
-    GNOMEDIR=%{_prefix} \
-    host_type=%{_target_platform} \
-    infodir=%{_infodir}
+
+make install DESTDIR=$RPM_BUILD_ROOT
+%find_lang %{name}
+
 gzip -9nf $RPM_BUILD_ROOT%{_infodir}/sawfish*
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir
 
@@ -54,23 +60,24 @@ if [ "$1" = 0 ]; then
 fi
 
 %clean
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
-%files
-%defattr(-,root,root)
-%doc README README.IMPORTANT NEWS FAQ THANKS BUGS TODO
+%define _host %{_host_cpu}-redhat-linux-gnu
+
+%files -f %{name}.lang
+%defattr(-,root,root,-)
+%doc README NEWS FAQ THANKS BUGS TODO OPTIONS README.IMPORTANT
 %doc po/sawfish.pot lisp/sawfish/ui/WIDGETS-LIST lisp/sawfish/ui/WISHLIST
-%{_bindir}/sawfish
-%{_bindir}/sawfish-client
-%{_bindir}/sawfish-ui
-%{_datadir}/applications/sawfish.desktop
+%{_bindir}/*
+%dir %{_datadir}/sawfish
 %{_datadir}/sawfish/%{version}
 %{_datadir}/locale
 %{_datadir}/gnome/wm-properties/sawfish-wm.desktop
+%{_datadir}/applications/sawfish.desktop
 %{_datadir}/pixmaps/sawfish*.png
 %{_libdir}/pkgconfig/sawfish.pc
-%{_libexecdir}/sawfish/%{version}/%{_target_platform}
-%{_libexecdir}/rep/%{_target_platform}/sawfish
+%{_libexecdir}/sawfish/%{version}/%{_host}
+%{librepdir}/rep/%{_host}/sawfish
 %{_infodir}/sawfish*
 
 %changelog
