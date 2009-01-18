@@ -2,17 +2,15 @@ Summary: An extensible window manager for the X Window System.
 Name: sawfish
 Version: @version@
 Release: 1
-Requires: librep >= 0.16, rep-gtk >= 0.16
+Requires: librep >= @REP_MIN_VER@, rep-gtk >= @REP_GTK_MIN_VER@
 License: GPL
 Group: User Interface/Desktops
-Source: http://download.sourceforge.net/sawfish/sawfish-%{version}.tar.gz
+Source: http://download.sourceforge.net/sawmill/sawfish-%{version}.tar.bz2
 URL: http://sawfish.wikia.com/
-Packager: John Harper <john@dcs.warwick.ac.uk>
+Packager: Christopher Bratusek <zanghar@freenet.de>
 Buildroot: /var/tmp/%{name}-root
-BuildPrereq: rep-gtk-libglade control-center-devel gmp-devel texinfo
-PreReq: /sbin/install-info
+BuildRequires: gmp-devel texinfo /sbin/install-info
 Provides: windowmanager
-Obsoletes: sawmill sawmill-gnome sawfish-gnome
 
 %description
 Sawfish is an extensible window manager which uses a Lisp-based
@@ -38,8 +36,6 @@ make host_type=%{_target_platform}
 %install
 [ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/control-center
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/apps/Settings
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
 make install \
     DESTDIR=$RPM_BUILD_ROOT \
@@ -62,20 +58,25 @@ fi
 
 %files
 %defattr(-,root,root)
-%doc README NEWS FAQ THANKS BUGS TODO
+%doc README README.IMPORTANT NEWS FAQ THANKS BUGS TODO
 %doc po/sawfish.pot lisp/sawfish/ui/WIDGETS-LIST lisp/sawfish/ui/WISHLIST
 %{_bindir}/sawfish
 %{_bindir}/sawfish-client
 %{_bindir}/sawfish-ui
+%{_datadir}/applications/sawfish.desktop
 %{_datadir}/sawfish/%{version}
 %{_datadir}/locale
-%{_datadir}/gnome/wm-properties/sawfish.desktop
+%{_datadir}/gnome/wm-properties/sawfish-wm.desktop
 %{_datadir}/pixmaps/sawfish*.png
+%{_libdir}/pkgconfig/sawfish.pc
 %{_libexecdir}/sawfish/%{version}/%{_target_platform}
 %{_libexecdir}/rep/%{_target_platform}/sawfish
 %{_infodir}/sawfish*
 
 %changelog
+* Sun Jan 18 2008 Christopher Bratusek <zanghar@freenet.de>
+- several fixups
+
 * Tue Jun 12 2000 John Harper <john@dcs.warwick.ac.uk>
 - merged differences from RH spec file
 

@@ -8,6 +8,16 @@
 
 	* src/events.c: Iconify before repyfying (as requested by WM_HINTS) [Ian Zimmerman]
 
+	* sawfish.spec.in: - fixed download location 
+			   - changed extension to .tar.bz2
+			   - don't require rep-gtk-libglade
+			   - don't require control-center-devel
+			   - don't create unused directories
+			   - package sawfish.desktop
+			   - package sawfish-wm.desktop
+			   - package sawfish.pc
+			   - let configure create librep/rep-gtk minimum requirement
+
 2009-01-17  Christopher Bratusek <zanghar@freenet.de>
 	* OPTIONS: fixed a typo
 
