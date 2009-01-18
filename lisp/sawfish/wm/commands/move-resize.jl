@@ -48,15 +48,15 @@
   ;; todo:
   ;;  * obey the aspect ratio size hints
 
- 
+
   (defcustom move-outline-mode 'opaque
     "How windows being moved are animated"
-    :type (choice opaque box)
+    :type (choice opaque box cross elliptical draft)
     :group (appearance animation))
 
   (defcustom resize-outline-mode 'opaque
     "How windows being resized are animated"
-    :type (choice opaque box)
+    :type (choice opaque box cross elliptical draft)
     :group (appearance animation))
 
   (defcustom move-resize-raise-window nil
@@ -68,30 +68,30 @@
     "Show current position of windows while moving."
     :group move
     :type boolean)
-  
+
   (defcustom resize-show-dimensions t
     "Show current dimensions of windows while resizing."
     :group move
     :type boolean)
- 
+
  (defcustom resize-edge-mode 'border-grab
    "How to choose window edges when resizing."
    :type (choice region border grab border-grab)
    :group move)
-  
+
   (defcustom move-snap-epsilon 12
     "Distance in pixels before window edges align with each other."
     :group move
     :type (number 0 64)
     :tooltip "When moving a window, this option lets you align one of its edges with an edge of another window.")
-  
+
   (defvar move-snap-mode 'resistance
     "How to snap together window edges, one of `magnetism', `resistance', or
 `attraction'.")
-  
+
   (defvar move-snap-ignored-windows nil
     "Snap to otherwise-ignored windows.")
-  
+
   (defvar move-resize-inhibit-configure nil
     "Only update window contents after it has stopped moving.")
 
@@ -319,7 +319,7 @@
 		  (y-inc (or (cdr (assq 'height-inc move-resize-hints)) 1))
 		  (min-aspect (assq 'min-aspect move-resize-hints))
 		  (max-aspect (assq 'max-aspect move-resize-hints)))
-               
+
 	       (when (memq resize-edge-mode '(grab border-grab))
 		 (add-edges ptr-x ptr-y))
 	       (cond
@@ -334,7 +334,7 @@
                          (constrain-aspect-to-hints
                           move-resize-width
                           move-resize-old-height 'x min-aspect max-aspect))))
-                
+
 		((memq 'left move-resize-moving-edges)
 		 (setq move-resize-width
 		       (constrain-dimension-to-hints

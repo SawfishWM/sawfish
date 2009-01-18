@@ -75,7 +75,7 @@
 	(call-with-exception-handler fun (lambda (ex)
 					   (stop)
 					   (raise-exception ex))))
-      
+
       (define (clear)
 	(unless (zerop step)
 	  (protect (lambda ()
@@ -126,7 +126,13 @@
 
   (define wireframe-animator (make-outline-animator 'box))
   (define solid-animator (make-outline-animator 'solid))
+  (define cross-animator (make-outline-animator 'cross))
+  (define elliptical-animator (make-outline-animator 'elliptical))
+  (define draft-animator (make-outline-animator 'draft))
 
   ;;###autoload
   (define-window-animator 'wireframe wireframe-animator)
-  (define-window-animator 'solid solid-animator))
+  (define-window-animator 'solid solid-animator)
+  (define-window-animator 'cross cross-animator)
+  (define-window-animator 'elliptical elliptical-animator)
+  (define-window-animator 'draft draft-animator))

@@ -41,7 +41,7 @@
 
   (defcustom default-window-animator 'none
     "The default window animation mode"
-    :type (choice none solid wireframe)
+    :type (choice none solid wireframe cross elliptical draft)
     :group (appearance animation))
 
 ;;; animator registration
@@ -59,7 +59,7 @@ the state of an animation sequence. OP may be one of the symbols `start',
       ))
 
   (define (getter name) (get name 'window-animator))
-  
+
   (define autoload-window-animator
     (make-autoloader getter define-window-animator))
 

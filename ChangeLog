@@ -1,3 +1,11 @@
+2009-01-18  Christopher Bratusek <zanghar@freenet.de>
+	* OPTIONS
+	* lisp/sawfish/wm/animation/outline.jl
+	* lisp/sawfish/wm/window-anim.jl
+	* lisp/sawfish/wm/commands/move-resize.jl
+	* lisp/sawfish/wm/autoload.jl
+	* lisp/sawfish/wm/util/window-outline.jl: added 3 new animators (cross, elliptical and draft)
+
 2009-01-17  Christopher Bratusek <zanghar@freenet.de>
 	* OPTIONS: fixed a typo
 
@@ -85,7 +93,7 @@
 			     more configure magic
 			     don't apply libtool.patch -> obsolete
 			     don't mark ppc64 as ~ since librep(svn) does now compile on ppc64
-	
+
 	* lisp/sawfish/wm/defaults.jl: renamed alias to sawfish-defaults
 
 	* lisp/sawfish/wm/animation/outline.jl
@@ -224,9 +232,9 @@
 
 	* Makefile.in: updated to install both .desktop files into correct directory
 
-	* src/Makefile.in: remove a "." by $(srcdir) 
+	* src/Makefile.in: remove a "." by $(srcdir)
 
-	* OPTIONS: added viewport-boundary-mode, error-handler -> both, focus-mode -> enter-click 
+	* OPTIONS: added viewport-boundary-mode, error-handler -> both, focus-mode -> enter-click
 		   and scroll-viewport-steps
 
 	* sawfish.desktop
@@ -249,7 +257,7 @@
 	* Makefile.in: Improved distclean rule
 
 2008-12-18  Christopher Bratusek <nano-master@gmx.de>
-	* lisp/sawfish/wm/gnome/integration.jl: invoke x-terminal-emulator instead of gnome-terminal [Christian Marillat] 
+	* lisp/sawfish/wm/gnome/integration.jl: invoke x-terminal-emulator instead of gnome-terminal [Christian Marillat]
 
 	* lisp/sawfish/wm/gnome/menus.jl: invoke x-terminal-emulator instead of gnome-terminal
 	and add /usr/share/applications aswell as /var/lib/menu-xdg/applications/menu-xdg to the menu-paths [Christian Marillat]
@@ -332,7 +340,7 @@
 	patch by Jonathan Sambrook (Uploaded by Christopher Bratusek)
 
 2008-08-07  Christopher Bratusek <nano-master@gmx.de>
-	* themes/Makefile.in: install Elberg-tabbed 
+	* themes/Makefile.in: install Elberg-tabbed
 
 2008-08-07  Scott Scriven <sawfish@toykeeper.net>
 	* themes/Elberg-tabbed/: added Elberg-tabbed theme
@@ -438,7 +446,7 @@
 		for doing so, is that rep-glade is not yet
 		ported to glade2, therefore the themer does
 		not work.
-	
+
 	* configure.in
 	* Makefile.in
 	* TODO
@@ -446,13 +454,13 @@
 
 2008-02-18  Janek Kozicki <cosurgi@gmail.com>
 	* configure.in: version 1.3.3
-	
+
 	* "Utf 8 names fix" by Timo Korvola: window titles with UTF-8 working
 	and no openoffice crashes
-	
+
 	* "Pango draw() ignores font" by Yuuki Harano and Rodrigo Gallardo:
 	allows using pango fonts correctly.
-	
+
 	* "Titlebar updates" by Harald van Dijk and Timo Korvola: don't forget
 	to tell the running theme that window title length has changed.
 
@@ -461,50 +469,50 @@
 
 2008-01-20  Janek Kozicki <cosurgi@gmail.com>
 	* configure.in: version 1.3.2
-	
+
 	* documentation from Derek Upham v0.12
-	
+
 	* Updated Occitan translation (Yannig Marchegay)
-	
+
 	* patch by Luis Rodrigo Gallardo Cruz taken upstream from debian:
 	http://sawfish.wikia.com/wiki/Noprop_desktop_save
 	Sawfish saves the size of the desktop window, and although nautilus
 	requests the widget to be the same size as your screen it's forced to
 	the size that sawfish saved.
-	
+
 	* patch by Rodrigo Gallardo: http://sawfish.wikia.com/wiki/Update_desktop_file
 	The current Sawfish.desktop file did not comply with the
-	freedesktop.org standard. 
-	
+	freedesktop.org standard.
+
 	* patch by GSR: http://sawfish.wikia.com/wiki/Fix_select_workspace
 	fix-select-workspace, Fixes select-workspace in
 	lisp/sawfish/wm/workspace.jl to make sure it uses key params in its
 	call to select-workspace*
-	
+
 	* patch by Thadeu Lima de Souza Cascardo:
 	http://sawfish.wikia.com/wiki/Fix_Xlib_client_message
 	sawfish had problems with 64 bit client messages.
-	
+
 	* patch by Sven Schoenung: http://sawfish.wikia.com/wiki/Blank_lines_in_prompt
 	The window opened by the prompt function shows two blank lines before
 	the prompt even when they aren't needed.
-	
+
 	* patch by Timo Korvola: http://sawfish.wikia.com/wiki/Reparenting_cleanup
 	This fixes reparenting fights that occur between Sawfish and the KDE
 	system tray. Both try to reparent system tray icons as they are
 	mapped, leading to a lot of flicker and an unpredictable end result.
-	
+
 	* patch by Rodrigo Gallardo: http://sawfish.wikia.com/wiki/Net_wm_properties
 	strings are re-encoded in UTF8
 	window titles will be set correctly regardless of title encoding
 	(useful when browsing foreign pages).
-	
+
 	* patch by Timo Korvola: http://sawfish.wikia.com/wiki/KDE_system_tray_fix
 	With this it will ignore out of bounds _NET_CURRENT_DESKTOP requests silently.
 	KDE system tray apps have a nasty habit of sending
 	_NET_CURRENT_DESKTOP client messages with a parameter of -1, which
 	confuses Sawfish. This patch adds some bounds checking.
-	
+
 	* patch by Harald van Dijk: http://sawfish.wikia.com/wiki/KDE_menus_focus
 	QT applications were losing focus when menu was active.
 
@@ -533,7 +541,7 @@
 2006-01-26  Daniel Nylander <po@danielnylander.se>
 
         * po/sv.po: Updated Swedish translation
-	
+
 2005-06-26  Philip Langdale <philipl@mail.utexas.edu>
 
 	* configure.in
@@ -645,7 +653,7 @@
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
 	* po/sawfish.pot: Updated.
-	
+
 2002-05-17  Abel Cheung  <maddog@linux.org.hk>
 
 	* po/zh_TW.po: Converted to UTF-8.
@@ -665,7 +673,7 @@
 2002-04-30  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
-	
+
 2002-04-26  Tõivo Leedjärv  <toivo@linux.ee>
 
 	* po/et.po: Updated Estonian translation.
@@ -718,7 +726,7 @@
 	2002-02-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
-	
+
 	2002-01-31  Simos Xenitellis  <simos@hellug.gr>
 
 	* po/el.po: Updated Greek translation.
@@ -731,7 +739,7 @@
 
 	* po/zh_CN.po: Updated Simplified Chinese translation by
 	Wang Li <charlesw1234@163.com>.
-	
+
 2002-03-17  Tõivo Leedjärv  <toivo@linux.ee>
 
 	* po/et.po: Updated Estonian translation.
@@ -741,10 +749,10 @@
 	* po/sawfish.pot: updated
 
 2002-03-02  JeyaSudha <jeyasudha.duraipandy@wipro.com>
-	
-	* configure.in: No need for checking the cflags and libs for 
+
+	* configure.in: No need for checking the cflags and libs for
 	gnome capplets as sawfish-ui is used instead of sawfish-capplet
-	
+
 2002-03-02  John Harper  <jsh@pixelslut.com>
 
 	* configure.in: readded the --with-gnome-prefix option that
@@ -772,15 +780,15 @@
 2002-02-12  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
-	
+
 2002-02-03  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
-	
+
 2002-02-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
-	
+
 2002-01-29  John Harper  <jsh@unfactored.org>
 
 	* configure.in: Fix imlib mess. Add -gnome2-n prefix to the
@@ -789,7 +797,7 @@
 2002-01-27  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated this a bit.
-	
+
 2002-01-27  Christian Rose  <menthos@menthos.com>
 
 	* po/sv.po: Converted to UTF-8.
@@ -822,7 +830,7 @@
 
 2001-11-17  Roy-Magne Mo  <rmo@sunnmore.net>
 
-	* po/nn.po: Added initial Norwegian (nynorsk) translation. 
+	* po/nn.po: Added initial Norwegian (nynorsk) translation.
 
 2001-11-15  Karl Eichwalder  <ke@suse.de>
 
@@ -947,7 +955,7 @@
 2001-06-22  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2001-06-20  John Harper  <jsh@pixelslut.com>
 
 	* Makefile.in: fixed SUBDIRS commands to exit if an error
@@ -968,7 +976,7 @@
 2001-05-22  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian translation.
-	
+
 2001-05-21  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* po/es.po: Merged with sawfish.pot file
@@ -1110,10 +1118,10 @@
 	* po/de.po: Patched in diff from Christian Meyer.
 
 2001-03-11  Timur Bakeyev  <mc@bat.ru>
-	
+
 	* capplet/desktop-entries/*.desktop:  added Russian translations
-	from Vlad Harchev <hvv@hippo.ru>	
-	
+	from Vlad Harchev <hvv@hippo.ru>
+
 2001-03-11  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* po/es.po: Updated Spanish translation by Joseba García
@@ -1262,7 +1270,7 @@
 2001-01-30  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian translation.
-	
+
 2001-01-27  John Harper  <jsh@eazel.com>
 
 	* po/it.po: updated Italian translation from Michele Campeotto
@@ -1288,7 +1296,7 @@
 
 2001-01-19  John Harper  <jsh@eazel.com>
 
-	* themes/Makefile.in: 
+	* themes/Makefile.in:
 	* themes/Crux/theme.jl,	themes/Crux/*.png, themes/Crux/README:
 
 	New theme `Crux' - designed by Arlo, implemented by me. The new
@@ -1554,7 +1562,7 @@
 
 2000-07-20  Joaquim Fellmann <joaquim@hrnet.fr>
 
-	* po/fr.po: Updated French translation with patch from 
+	* po/fr.po: Updated French translation with patch from
           Christian Marillat <marillat.christian@wanadoo.fr>
 
 2000-07-23  John Harper  <john@dcs.warwick.ac.uk>

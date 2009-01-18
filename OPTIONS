@@ -26,12 +26,12 @@
 
 ;; window animation options
 
-;; sawfish-ui does use a treeview by default, if you prefer the 
+;; sawfish-ui does use a treeview by default, if you prefer the
 ;; notebook-style instead use: sawfish-ui --flatten
 
 ;;  (define-special-variable default-window-animator 'none
 ;;    "The default window animation mode. Options include none,
-;;wireframe and solid.")
+;;wireframe, solid, cross, elliptical and draft.")
 
 ;;  (define-special-variable anim-outline-icon-coords
 ;;    (cons (screen-width) (screen-height))
@@ -55,7 +55,7 @@
 ;;  (define-special-variable customize-command-classes '(default)
 ;;    "Also include commands of these classes the key bindings panel.
 ;;Add the `viewport' keyboard to make viewport commands show up.")
- 
+
 ;; focus options
 
 ;;  (define-special-variable focus-mode 'click
@@ -243,10 +243,10 @@
 ;; move/resize options
 
 ;;  (define-special-variable move-outline-mode 'opaque
-;;    "How windows being moved are animated, either `opaque' or `box'")
+;;    "How windows being moved are animated, either opaque, box, cross, elliptical or draft")
 
 ;;  (define-special-variable resize-outline-mode 'opaque
-;;    "How windows being resized are animated, either `opaque' or `box'")
+;;    "How windows being resized are animated, either opaque, box, cross, elliptical or draft")
 
 ;;  (define-special-variable move-resize-raise-window nil
 ;;    "Raise windows when they are moved or resized.")
@@ -363,7 +363,7 @@
 ;;    '(sticky ignored never-focus type maximized frame-style
 ;;      cycle-skip window-list-skip)
 ;;    "List of states in window-state-change-hook that should be tracked.")
-;;  
+;;
 ;;  (define-special-variable window-history-key-property 'WM_CLASS
 ;;    "Window property matched on.")
 

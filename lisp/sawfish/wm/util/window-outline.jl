@@ -27,7 +27,8 @@
 	    autoload-window-outliner)
 
     (open rep
-	  rep.util.autoloader)
+	  rep.util.autoloader
+	  sawfish.wm.misc)
 
   (define-structure-alias window-outline sawfish.wm.util.window-outline)
 
@@ -94,4 +95,148 @@ only be `box' for a 3x3 grid."
       (x-fill-rectangle 'root gc (cons x y) (cons width height))
       (x-destroy-gc gc)))
 
-  (define-window-outliner 'solid draw-solid-outline))
+  (define-window-outliner 'solid draw-solid-outline)
+
+  (define (draw-cross-outline x y width height)
+    (require 'sawfish.wm.util.x)
+      (let
+        ((gc (x-create-root-xor-gc))
+         (ul (cons x y))                      ; upper left
+         (ur (cons (+ x width) y))            ; upper right
+         (ll (cons x (+ y height)))           ; lower left
+         (lr (cons (+ x width) (+ y height))) ; lower right
+        )
+      ; perimeter outline
+      (x-draw-line 'root gc ul ur)
+      (x-draw-line 'root gc ll lr)
+      (x-draw-line 'root gc ul ll)
+      (x-draw-line 'root gc ur lr)
+      ; cross
+      (x-draw-line 'root gc ul lr)
+      (x-draw-line 'root gc ur ll)
+      (x-destroy-gc gc)))
+
+  (define-window-outliner 'cross draw-cross-outline)
+
+  (define (draw-elliptical-outline x y width height)
+    (require 'sawfish.wm.util.x)
+    (let
+      ((gc (x-create-root-xor-gc))
+       (height-prime (inexact->exact (floor (* height 1.4142))))
+       (width-prime  (inexact->exact (floor (* width 1.4142))))
+      )
+    ; draw the circumscribed ellipse (the outside one)
+    (x-draw-arc 'root gc (cons (inexact->exact (- x (floor (/ width 4.8))))
+			       (inexact->exact (- y (floor (/ height 4.8)))))
+		(cons width-prime height-prime)
+		(cons 0 (* 360 64)))
+    ; draw the inscribed ellipse (the inside one)
+    (x-draw-arc 'root gc (cons x y)
+		(cons width height)
+		(cons 0 (* 360 64)))
+    (x-destroy-gc gc)))
+
+  (define-window-outliner 'elliptical draw-elliptical-outline)
+
+  (define (draw-draft-line rw gc pta ptb dim-p arrow-p)
+    (require 'sawfish.wm.util.x)
+    (let ((pta-x (car pta)) ; recover the components
+	(pta-y (cdr pta))
+	(ptb-x (car ptb))
+	(ptb-y (cdr ptb))
+	(delta-x (- (car ptb) (car pta))) ; figure out the difference
+	(delta-y (- (cdr ptb) (cdr pta)))
+	(xah 4)  ; cope with different window scales
+	(yah 3)  ; to ensure arrow heads look the same
+	(x-dim-offset 5) ; how far to offset the dimension from the
+	(y-dim-offset 5) ; draft line
+	)
+    ; first off, we know we are going to draw the line, always
+    (x-draw-line rw gc pta ptb)
+    ; now figure out if we drawing vertically or horizontally
+    (if (= pta-x ptb-x)
+	(progn ; vertical
+	 (if dim-p
+	     (x-draw-string rw gc (cons (+ pta-x x-dim-offset)
+					(+ pta-y (floor (/ delta-y 2)))
+					)
+			    (format nil "%d" delta-y)))
+	 (if arrow-p
+	     (progn
+	       (x-draw-line rw gc pta (cons (+ pta-x xah) (+ pta-y yah)))
+	       (x-draw-line rw gc pta (cons (- pta-x xah) (+ pta-y yah)))
+	       (x-draw-line rw gc ptb (cons (+ ptb-x xah) (- ptb-y yah)))
+	       (x-draw-line rw gc ptb (cons (- ptb-x xah) (- ptb-y yah)))
+	      ))
+	 )
+	(progn ; horizontal
+         (if dim-p
+	   (x-draw-string rw gc (cons (+ pta-x (floor (/ delta-x 2)))
+				      (- pta-y y-dim-offset)
+				      )
+			    (format nil "%d" delta-x)))
+         (if arrow-p
+	     (progn
+	       (x-draw-line rw gc pta (cons (+ pta-x xah) (+ pta-y yah)))
+	       (x-draw-line rw gc pta (cons (+ pta-x xah) (- pta-y yah)))
+	       (x-draw-line rw gc ptb (cons (- ptb-x xah) (+ ptb-y yah)))
+	       (x-draw-line rw gc ptb (cons (- ptb-x xah) (- ptb-y yah)))
+	       ))
+        ))))
+
+  (define (draw-draft-outline x y width height)
+    (require 'sawfish.wm.util.x)
+    (let
+      ((gc (x-create-root-xor-gc))
+       ; window Upper (Left Middle Right)
+       (ul (cons x y))
+       (um (cons (+ x (floor (/ width 2))) y))
+       (ur (cons (+ x width) y))
+
+       ; window Middle (Left Right)
+       (ml (cons x           (+ y (floor (/ height 2)))))
+       (mr (cons (+ x width) (+ y (floor (/ height 2)))))
+
+       ; window Lower (Left Middle Right)
+       (ll (cons x (+ y height)))
+       (lm (cons (+ x (floor (/ width 2))) (+ y height)))
+       (lr (cons (+ x width) (+ y height)))
+
+       ; window Screen (Left Right Top Bottom)
+       (sl (cons 0              (+ y (floor (/ height 2)))))
+       (sr (cons (screen-width) (+ y (floor (/ height 2)))))
+       (st (cons (+ x (floor (/ width 2))) 0))
+       (sb (cons (+ x (floor (/ width 2))) (screen-height)))
+
+       (offset 3) ; how much to offset the guidelines from the window
+       )
+    ; perimeter outline of window + frame
+    ; is there an x-draw-retangle ?
+    (x-draw-line 'root gc ul ur)
+    (x-draw-line 'root gc ll lr)
+    (x-draw-line 'root gc ul ll)
+    (x-draw-line 'root gc ur lr)
+    ; from screen left to left border
+    (x-draw-line 'root gc (cons 0 y)            (cons (- x offset) y))
+    (x-draw-line 'root gc (cons 0 (+ y height))
+		 (cons (- x offset) (+ y height)))
+    (draw-draft-line 'root gc sl ml t t)
+    ; from screen top to top border
+    (x-draw-line 'root gc (cons x 0) (cons x (- y offset)))
+    (x-draw-line 'root gc (cons (+ x width) 0) (cons (+ x width) (- y offset)))
+    (draw-draft-line 'root gc st um t t)
+    ; from screen right to right border
+    (x-draw-line 'root gc (cons (screen-width) y)
+		 (cons (+ x width offset) y))
+    (x-draw-line 'root gc (cons (screen-width) (+ y height))
+		 (cons (+ x width offset) (+ y height)))
+    (draw-draft-line 'root gc mr sr t t)
+    ; from screen bottom to bottom border
+    (x-draw-line 'root gc (cons x (screen-height))
+		 (cons x (+ y height offset)))
+    (x-draw-line 'root gc (cons (+ x width) (screen-height))
+		 (cons (+ x width) (+ y height offset)))
+    (draw-draft-line 'root gc lm sb 't 't)
+    (x-destroy-gc gc)))
+
+  (define-window-outliner 'draft draw-draft-outline))
