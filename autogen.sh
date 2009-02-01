@@ -25,8 +25,10 @@ if [ -f configure.in ]; then
     else    libtoolize --force --copy --install || exit 1
     fi
   fi
+  echo "Running intltoolize"
+  intltoolize --force --copy
   echo "Running aclocal $ACLOCAL_FLAGS"
-  aclocal -I m4 $ACLOCAL_FLAGS || exit 1
+  aclocal -I m4 -I /usr/share/aclocal/ $ACLOCAL_FLAGS || exit 1
 
   echo "Running autoconf $AUTOCONF_FLAGS"
   autoconf $AUTOCONF_FLAGS || exit 1

@@ -86,15 +86,13 @@ clean :
 	done
 	rm -f *~ NEWS DOC* TAGS build.h
 
-realclean :
+distclean :
 	-for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ) || exit 1; \
 	done
 	rm -f config.cache config.h config.log config.status Makedefs Makefile
 	rm -f *~ NEWS DOC* TAGS build.h sawfish.spec sawfish*.ebuild sawfish.pc
 	rm -rf aclocal.m4 autom4te.cache
-
-distclean : realclean
 
 TAGS :
 	etags --language=c `find $(srcdir) -name '*.[ch]' -print` \
