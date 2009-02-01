@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2002-11-05 22:25+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -158,6 +158,29 @@ msgstr "mitte"
 msgid "Match Window Properties"
 msgstr "Vastavuses olevate akende omadused"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Akende vahetamine"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Heli"
+
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Vastavuses olevad aknad"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Vihjed"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -168,37 +191,170 @@ msgstr "Indeks:"
 msgid "Command:"
 msgstr "Käsk:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+msgid "Whether and how to move the pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+msgid "Whether to bump into ignored windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
 msgstr "Kasva vasakule"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 msgid "Grow right"
 msgstr "Kasva paremale"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 msgid "Grow up"
 msgstr "Kasva üles"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 msgid "Grow down"
 msgstr "Kasva alla"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 msgid "Pack left"
 msgstr "Paki vasakule"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 msgid "Pack right"
 msgstr "Paki paremale"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr "Paki üles"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr "Paki alla"
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+msgid "Number of pixels to move pointer in."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+msgid "How windows being moved are animated"
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+msgid "How windows being resized are animated"
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Tõsta aknad fokuseerimisel."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+msgid "How to choose window edges when resizing."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Tõsta aknad fokuseerimisel."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+#, fuzzy
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr ""
+"Klahvivastend, mis sisaldab ainult fokuseeritud aknale mõjuvaid "
+"klahviseoseid."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+msgid "Arguments given to the `xterm' command."
+msgstr ""
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Fookus"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Liigutamine/suuruse muutmine"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Väljanägemine"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Töötsoonid"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Seosed"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Minimeerimine ja maksimeerimine"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Mitmesugust"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Paigutamine"
+
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Mängi aknasündmustele heliefekte."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -208,21 +364,37 @@ msgstr "Sündmus"
 msgid "Audio file"
 msgstr "Helifail"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Üle ääre hüppamine"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr "Vali järgmine töölaud kui hiirekursor jõuab ekraani ääreni."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Ekraani ääreni jõudmine valib järgmise: \\w"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Vaheta töölauda ainult interaktiivsel akna liigutamisel."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+msgid "Display error messages to: \\w"
+msgstr "Kus näidata veateateid: \\w"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Veateateid pole."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Paigutamine"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Fookus"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Väljanägemine"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -231,6 +403,53 @@ msgstr "Olek"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Muu"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+#, fuzzy
+msgid "Shade Hover"
+msgstr "Keri aken kokku"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+#, fuzzy
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Viivitus enne akende tõstmist (millisekundites)."
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+#, fuzzy
+msgid "Raise windows when they are unshaded."
+msgstr "Tõsta aknad fokuseerimisel."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Näita akende raamidele vihjeid."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "Näita vihjetes täit dokumentatsiooni."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+msgid "Number of milliseconds before displaying tooltips."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+msgid "Number of milliseconds before removing tooltips."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -248,9 +467,59 @@ msgstr "Jäta a_tribuudid meelde"
 msgid "_Forget saved state"
 msgstr "_Unusta meeldejäetud olek"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+msgid "History"
+msgstr "Ajalugu"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Jäta akna asukoht automaatselt meelde."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Jäta akna mõõtmed automaatselt meelde."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Jäta muud akna parameetrid automaatselt meelde."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+#, fuzzy
+msgid "Don't automatically remember details of transient windows."
+msgstr "Jäta akna asukoht automaatselt meelde."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Ajalugu"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Millal mõjutab hiirekursor sisestusfookust."
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Click-to-focus annab klõpsu rakendusele edasi."
+
+#: ../lisp/sawfish/wm/focus.jl:60
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr ""
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Vaikimisi raami laad:"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "Kui teemasid uuendatakse, lae need automaatselt uuesti."
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Vaikimisi kirjatüüp: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -292,6 +561,89 @@ msgstr "GNOMEi veeb..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "GNOMEi info..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "Klahvivastend, mis sisaldab igal pool toimivaid klahviseoseid."
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"Klahvivastend, mis sisaldab ainult fokuseeritud aknale mõjuvaid "
+"klahviseoseid."
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Klahvivatend, mis sisaldab klahviseoseid, mis toimivad kui hiirekursor on\n"
+"juuraknas (või ükski aken pole fokuseeritud)."
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klahvivastend, mis sisaldab akna tiitliribal toimivaid seoseid. (Selles\n"
+"vastendis töötavad ainult hiireseosed.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klahvivatend, mis sisaldab akna äärisel toimivaid seoseid. (Selles\n"
+"vastendis töötavad ainult hiireseosed.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klahvivastend, mis sisaldab akna tiitliribal toimivaid seoseid. (Selles\n"
+"vastendis töötavad ainult hiireseosed.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klahvivastend, mis sisaldab akna tiitliribal toimivaid seoseid. (Selles\n"
+"vastendis töötavad ainult hiireseosed.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klahvivastend, mis sisaldab akna tiitliribal toimivaid seoseid. (Selles\n"
+"vastendis töötavad ainult hiireseosed.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klahvivastend, mis sisaldab akna tiitliribal toimivaid seoseid. (Selles\n"
+"vastendis töötavad ainult hiireseosed.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klahvivatend, mis sisaldab akna äärisel toimivaid seoseid. (Selles\n"
+"vastendis töötavad ainult hiireseosed.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Aknahalduri vaikimisi kiirklahvidega kasutatav(ad) muuteklahv(id)."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -438,6 +790,41 @@ msgstr "_Kõik sätted"
 msgid "Edit theme..."
 msgstr "Teema redigeerimine..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Akende paigutamise meetod: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "Dialoogiakende paigutamise meetod: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+msgid "Distance between successive placements in stagger mode."
+msgstr ""
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Virnastamine"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+msgid "Minimizing a window also removes its: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+msgid "Unminimizing a window also restores its: \\w"
+msgstr ""
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Kleepuv"
@@ -463,9 +850,22 @@ msgstr "_Akende nimekirjas"
 msgid "In _task list"
 msgstr "GNOME _teguminimekirjas"
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr ""
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "Kokku k_eritud"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr ""
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+#, fuzzy
+msgid "Unshade selected windows."
+msgstr "Keri aken lahti"
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -478,6 +878,17 @@ msgstr "Vajuta klahvi..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr ""
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+msgid "The program used to play audio samples."
+msgstr ""
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+#, fuzzy
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr ""
+"Klahvivastend, mis sisaldab ainult fokuseeritud aknale mõjuvaid "
+"klahviseoseid."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -493,6 +904,35 @@ msgstr "Töötsoon %d"
 msgid "Workspace:"
 msgstr "Töötsoon:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr ""
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Vaateava"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+msgid "Windows uniconify to the current viewport."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Veerg:"
@@ -501,9 +941,51 @@ msgstr "Veerg:"
 msgid "Row:"
 msgstr "Rida:"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Tõsta aknad fokuseerimisel."
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+msgid "How to act when passing the first or last workspace."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr ""
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Töötsoonide nimed"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 msgid "_Insert workspace"
@@ -756,18 +1238,6 @@ msgstr "Saekala koduleht"
 #~ msgid "Width of window border."
 #~ msgstr "Akna äärise laius."
 
-#~ msgid "Window Cycling"
-#~ msgstr "Akende vahetamine"
-
-#~ msgid "Sound"
-#~ msgstr "Heli"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Vastavuses olevad aknad"
-
-#~ msgid "Tooltips"
-#~ msgstr "Vihjed"
-
 #~ msgid "Next window"
 #~ msgstr "Järgmine aken"
 
@@ -782,20 +1252,12 @@ msgstr "Saekala koduleht"
 #~ msgstr "Kõigi käesoleva aknaga samasse gruppi kuuluvate akende kustutamine."
 
 #, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Tõsta aknad fokuseerimisel."
-
-#, fuzzy
 #~ msgid "border"
 #~ msgstr "Ülemine ääris"
 
 #, fuzzy
 #~ msgid "border-grab"
 #~ msgstr "äärise-klahvivastend"
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Tõsta aknad fokuseerimisel."
 
 #~ msgid "Terminal"
 #~ msgstr "Terminal"
@@ -824,22 +1286,6 @@ msgstr "Saekala koduleht"
 #~ msgid "Kill client"
 #~ msgstr "Tapa klient"
 
-#~ msgid "Move/Resize"
-#~ msgstr "Liigutamine/suuruse muutmine"
-
-#~ msgid "Workspaces"
-#~ msgstr "Töötsoonid"
-
-#~ msgid "Bindings"
-#~ msgstr "Seosed"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Minimeerimine ja maksimeerimine"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Mitmesugust"
-
 #~ msgid "Customize"
 #~ msgstr "Kohanda"
 
@@ -849,32 +1295,11 @@ msgstr "Saekala koduleht"
 #~ msgid "3d hack"
 #~ msgstr "3d häkk"
 
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Mängi aknasündmustele heliefekte."
-
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Tõsta aknad fokuseerimisel."
-
-#~ msgid "Delay in milliseconds until focused windows are raised."
-#~ msgstr "Viivitus enne akende tõstmist (millisekundites)."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Üle ääre hüppamine"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr "Vali järgmine töölaud kui hiirekursor jõuab ekraani ääreni."
-
 #~ msgid "viewport"
 #~ msgstr "vaateava"
 
 #~ msgid "workspace"
 #~ msgstr "töötsooni"
-
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "Ekraani ääreni jõudmine valib järgmise: \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Vaheta töölauda ainult interaktiivsel akna liigutamisel."
 
 #~ msgid "nowhere"
 #~ msgstr "mitte kuskil"
@@ -884,9 +1309,6 @@ msgstr "Saekala koduleht"
 
 #~ msgid "standard-error"
 #~ msgstr "standardses veaväljundis"
-
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Kus näidata veateateid: \\w"
 
 #~ msgid "Display errors"
 #~ msgstr "Näita veateateid"
@@ -920,9 +1342,6 @@ msgstr "Saekala koduleht"
 
 #~ msgid "Workspace"
 #~ msgstr "Töölaud"
-
-#~ msgid "Viewport"
-#~ msgstr "Vaateava"
 
 #~ msgid "Depth"
 #~ msgstr "Sügavus"
@@ -959,24 +1378,6 @@ msgstr "Saekala koduleht"
 
 #~ msgid "Unique name"
 #~ msgstr "Unikaalne nimi"
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Näita akende raamidele vihjeid."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Näita vihjetes täit dokumentatsiooni."
-
-#~ msgid "History"
-#~ msgstr "Ajalugu"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Jäta akna asukoht automaatselt meelde."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Jäta akna mõõtmed automaatselt meelde."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Jäta muud akna parameetrid automaatselt meelde."
 
 #~ msgid "Workspace down"
 #~ msgstr "Töötsoon alla"
@@ -1026,68 +1427,23 @@ msgstr "Saekala koduleht"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Saada aken aktiivsest paremale jäävasse töötsooni"
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Millal mõjutab hiirekursor sisestusfookust."
-
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "Click-to-focus annab klõpsu rakendusele edasi."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Vaikimisi raami laad:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Kui teemasid uuendatakse, lae need automaatselt uuesti."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Vaikimisi kirjatüüp: \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Muuda raami laadi"
 
 #~ msgid "global-keymap"
 #~ msgstr "üldine-klahvivastend"
 
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Klahvivastend, mis sisaldab igal pool toimivaid klahviseoseid."
-
 #~ msgid "window-keymap"
 #~ msgstr "akna-klahvivastend"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr ""
-#~ "Klahvivastend, mis sisaldab ainult fokuseeritud aknale mõjuvaid "
-#~ "klahviseoseid."
 
 #~ msgid "root-window-keymap"
 #~ msgstr "juurakna-klahvivastend"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Klahvivatend, mis sisaldab klahviseoseid, mis toimivad kui hiirekursor "
-#~ "on\n"
-#~ "juuraknas (või ükski aken pole fokuseeritud)."
-
 #~ msgid "title-keymap"
 #~ msgstr "pealkirja-klahvivastend"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Klahvivastend, mis sisaldab akna tiitliribal toimivaid seoseid. (Selles\n"
-#~ "vastendis töötavad ainult hiireseosed.)"
-
 #~ msgid "border-keymap"
 #~ msgstr "äärise-klahvivastend"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Klahvivatend, mis sisaldab akna äärisel toimivaid seoseid. (Selles\n"
-#~ "vastendis töötavad ainult hiireseosed.)"
 
 #~ msgid "close-button-keymap"
 #~ msgstr "sulge-nupu-klahvivastend"
@@ -1103,18 +1459,6 @@ msgstr "Saekala koduleht"
 
 #~ msgid "shade-button-keymap"
 #~ msgstr "keri-nupu-klahvivastend"
-
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr "Aknahalduri vaikimisi kiirklahvidega kasutatav(ad) muuteklahv(id)."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Akende paigutamise meetod: \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Dialoogiakende paigutamise meetod: \\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Virnastamine"
 
 #~ msgid "Minimize the window."
 #~ msgstr "Minimeeri aken."
@@ -1151,12 +1495,6 @@ msgstr "Saekala koduleht"
 #, fuzzy
 #~ msgid "Maximize window fullxinerama toggle"
 #~ msgstr "Maksimeeri aken täisekraanile"
-
-#~ msgid "Shade window"
-#~ msgstr "Keri aken kokku"
-
-#~ msgid "Unshade window"
-#~ msgstr "Keri aken lahti"
 
 #~ msgid "Insert workspace"
 #~ msgstr "Lisa töötsoon"

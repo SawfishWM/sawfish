@@ -119,12 +119,12 @@
 ;;; Options and variables
 
   (defcustom workspace-boundary-mode 'stop
-    "How to act when passing the first or last workspace."
+    (_"How to act when passing the first or last workspace.")
     :type (choice stop wrap-around keep-going)
     :group workspace)
 
   (defcustom workspace-send-boundary-mode 'stop
-    "How to act when passing the first or last workspace, while moving a window"
+    (_"How to act when passing the first or last workspace, while moving a window")
     :type (choice stop wrap-around keep-going)
     :group workspace)
 
@@ -136,7 +136,7 @@
     :after-set (lambda () (workspace-names-changed)))
 
   (defcustom lock-first-workspace t
-    "Preserve outermost empty workspaces in the pager."
+    (_"Preserve outermost empty workspaces in the pager.")
     :type boolean
     :group workspace)
 

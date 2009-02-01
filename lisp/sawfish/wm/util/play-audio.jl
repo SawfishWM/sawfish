@@ -40,8 +40,7 @@
     "List of directories to search for sound samples.")
 
   (defcustom play-sample-program nil
-    "The program used to play audio samples. If unset, built-in support for \
-ESD is used."
+    (_"The program used to play audio samples.")
     :type (optional program)
     :group audio)
 

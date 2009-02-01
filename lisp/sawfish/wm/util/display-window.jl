@@ -40,7 +40,7 @@
 	  sawfish.wm.util.window-order)
 
   (defcustom unshade-selected-windows nil
-    "Unshade selected windows."
+    (_"Unshade selected windows.")
     :type boolean
     :group min-max)
 

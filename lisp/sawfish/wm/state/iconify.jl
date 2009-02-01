@@ -72,12 +72,12 @@
     "Unmanaged windows may be iconified.")
 
   (defcustom iconify-group-mode 'transients
-    "Minimizing a window also removes its: \\w"
+    (_"Minimizing a window also removes its: \\w")
     :type (choice none transients group)
     :group min-max)
 
   (defcustom uniconify-group-mode 'transients
-    "Unminimizing a window also restores its: \\w"
+    (_"Unminimizing a window also restores its: \\w")
     :type (choice none transients group)
     :group min-max)
 

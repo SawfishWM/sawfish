@@ -38,17 +38,17 @@
 	  sawfish.wm.custom)
 
   (defcustom place-window-mode 'top-left
-    "Method of placing windows: \\w"
+    (_"Method of placing windows: \\w")
     :type symbol
     :group (misc placement))
 
   (defcustom place-transient-mode 'centered-on-parent
-    "Method of placing dialog windows: \\w"
+    (_"Method of placing dialog windows: \\w")
     :type symbol
     :group (misc placement))
 
   (defcustom ignore-program-positions t
-    "Ignore program-specified window placements."
+    (_"Ignore program-specified window placements.")
     :type boolean
     :group (misc placement))
 

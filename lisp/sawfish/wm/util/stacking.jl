@@ -1,6 +1,6 @@
 #| stacking.jl -- customizable stacking functions
 
-   $Id$
+   $Id: stacking.jl,v 1.5 2002/04/20 20:59:20 jsh Exp $
 
    Copyright (C) 2000 Eazel, Inc
 
@@ -42,7 +42,7 @@
 	  sawfish.wm.commands.groups)
 
   (defcustom user-raise-type 'transients
-    "When raising a window, also raise its: \\w"
+    (_"When raising a window, also raise its: \\w")
     :type (choice none transients group)
     :group (misc stacking))
 

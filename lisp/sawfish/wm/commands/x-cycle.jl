@@ -97,35 +97,35 @@
 ;;; customization options
 
   ;;###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-  (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+  (defgroup cycle (_"Window Cycling") :group focus :require sawfish.wm.commands.x-cycle)
 
   (defcustom cycle-show-window-names t
-    "Display window names and icons while cycling through windows."
+    (_"Display window names and icons while cycling through windows.")
     :group (focus cycle)
     :type boolean)
 
   (defcustom cycle-include-iconified t
-    "Include iconified windows when cycling."
+    (_"Include iconified windows when cycling.")
     :group (focus cycle)
     :type boolean)
 
   (defcustom cycle-all-workspaces nil
-    "Include windows on all workspaces when cycling."
+    (_"Include windows on all workspaces when cycling.")
     :group (focus cycle)
     :type boolean)
 
   (defcustom cycle-all-viewports nil
-    "Include windows on all viewports when cycling."
+    (_"Include windows on all viewports when cycling.")
     :group (focus cycle)
     :type boolean)
 
   (defcustom cycle-raise-windows t
-    "Raise windows while they're temporarily selected during cycling."
+    (_"Raise windows while they're temporarily selected during cycling.")
     :type boolean
     :group (focus cycle))
 
   (defcustom cycle-keymap (make-keymap)
-    "Keymap containing bindings active only during window cycling operations."
+    (_"Keymap containing bindings active only during window cycling operations.")
     :group bindings
     :type keymap)
 

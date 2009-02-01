@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2006-01-10 19:16+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
@@ -156,6 +156,29 @@ msgstr "không"
 msgid "Match Window Properties"
 msgstr "Khớp thuộc tính cửa sổ"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Xoay vòng cửa sổ"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Âm thanh"
+
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Cửa sổ đã khớp"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Mẹo công cụ"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -166,37 +189,181 @@ msgstr "Chỉ mục:"
 msgid "Command:"
 msgstr "Lệnh:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr "Nới và nén cửa sổ"
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Di chuyển cửa sổ sang cổng xem kế tiếp."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Có nên đâm sầm vào cửa sổ bị lấp hoàn toàn hay không,\n"
+"khi tăng kích cỡ hoặc nén cửa sổ."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+#, fuzzy
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+"Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
+"khi tăng kích cỡ hoặc nén cửa sổ."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr ""
+"Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
+"khi tăng kích cỡ hoặc nén cửa sổ."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
 msgstr "Nới bên trái"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 msgid "Grow right"
 msgstr "Nới bên phải"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 msgid "Grow up"
 msgstr "Nới lên"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 msgid "Grow down"
 msgstr "Nới xuống"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 msgid "Pack left"
 msgstr "Nén bên trái"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 msgid "Pack right"
 msgstr "Nén bên phải"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr "Nén bên trên"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr "Nén bên dưới"
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr "Số điểm ảnh cần chuyển con trỏ trong lệnh « đẩy con trỏ »."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Hiện cửa sổ khi bị bỏ bóng."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Hiện cửa sổ khi bị bỏ bóng."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Nâng cửa sổ nhận tiêu điểm lên"
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr "Hiện vị trí hiện thời của cửa sổ trong khi di chuyển."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr "Hiện kích cỡ hiện thời của cửa sổ trong khi đổi kích cỡ."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Hiện kích cỡ hiện thời của cửa sổ trong khi đổi kích cỡ."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr "Hiển thị tên cửa sổ và biểu tượng trong khi xoay vòng các cửa sổ."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr "Xoay vòng cả cửa sổ thu nhỏ."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr "Xoay vòng cửa sổ trên mọi vùng làm việc."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr "Xoay vòng cửa sổ trên mọi cổng xem."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Nâng cửa sổ nhận tiêu điểm lên"
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr "Ánh xạ phím chứa tổ hợp hoạt động chỉ trong khi xoay vòng cửa sổ."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr "Chương trình được thực hiện bởi lệnh « xterm »."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+msgid "Arguments given to the `xterm' command."
+msgstr "Đối số được đưa cho lệnh « xterm »."
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Tiêu điểm"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Chuyển/Đổi cỡ"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Diện mạo"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Vùng làm việc"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Tổ hợp"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Thu nhỏ/Phóng to"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Linh tinh"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Vị trí"
+
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Phát hiệu ứng âm thanh khi xảy ra dữ kiện cửa sổ."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -206,21 +373,37 @@ msgstr "Dữ kiện"
 msgid "Audio file"
 msgstr "Tập tin âm thanh"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Lật cạnh"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr "Chọn màn hình nền tiếp khi con trỏ chạm cạnh màn hình."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Chạm cạnh màn hình thì chọn điều kế: \\w"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Chỉ lật khi di chuyển tương tác cửa sổ."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr "Kêu bíp khi xảy ra lỗi."
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+msgid "Display error messages to: \\w"
+msgstr "Hiển thị thông báo lỗi ra: \\w"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Không có lỗi."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Vị trí"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Tiêu điểm"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Diện mạo"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -229,6 +412,52 @@ msgstr "Tình trạng"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Khác"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+msgid "Shade Hover"
+msgstr "Thoáng bóng"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr "Hiện cửa sổ khi bị bỏ bóng."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Hiện mẹo công cụ cho các khung cửa sổ."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "Hiện toàn bộ tài liệu trong mẹo công cụ."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -246,9 +475,61 @@ msgstr "Nhớ _thuộc tính"
 msgid "_Forget saved state"
 msgstr "_Quên tính trạng đã lưu"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+msgid "History"
+msgstr "Lược sử"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Tự động nhớ vị trí các cửa sổ"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Tự động nhớ kích thước các cửa sổ."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Tự động nhớ các thuộc tính khác của cửa sổ."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+msgid "Don't automatically remember details of transient windows."
+msgstr "Không tự động nhớ chi tiết các cửa sổ tạm."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Lược sử"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Khi con chuột tác động lên tiêu điểm nhập."
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr ""
+"Chế độ nhắp để được tiêu điểm (click-to-focus) gởi tín hiệu nhấn chuột sang "
+"cho ứng dụng"
+
+#: ../lisp/sawfish/wm/focus.jl:60
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Hạ thấp cửa sổ xuống vị trí thấp nhất được phép trong thứ tự chồng."
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Kiểu dáng khung mặc định:"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "Tự động tải lại sắc thái khi được cập nhật"
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Phông chữ mặc định: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -290,6 +571,89 @@ msgstr "Trang Mạng của GNOME..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "Giới thiệu về GNOME..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "Ánh xạ phím chứa tổ hợp hoạt động suốt nơi."
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr "Ánh xạ phím chứa tổ hợp hoạt động khi cửa sổ khách nhận tiêu điểm."
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ có trong cửa sổ gốc\n"
+"(hoặc khi không có cửa sổ nhận tiêu điểm)."
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trong tựa đề của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên viền của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút đóng của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút co lại thành biểu tượng của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này."
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút phóng to của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút trình đơn của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút bóng của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Phím sửa đổi dùng cho phím tắt mặc định."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -436,6 +800,42 @@ msgstr "Tất _cả thiết lập"
 msgid "Edit theme..."
 msgstr "Sửa sắc thái..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Cách đặt cửa sổ : \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "Cách đặt cửa sổ hộp thoại: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+#, fuzzy
+msgid "Distance between successive placements in stagger mode."
+msgstr "Khoảng cách giữa hai lần để vị trí trong chế độ để « chéo nhau »."
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Cách làm chồng"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Giữ cửa sổ tạm đặt trên: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Thủ nhỏ cửa sổ cũng gở bỏ ra nó : \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Phục hồi kích cỡ gốc của cửa sổ cũng phục hồi cho nó : \\w"
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Dính"
@@ -461,9 +861,21 @@ msgstr "Trong _danh sách cửa sổ"
 msgid "In _task list"
 msgstr "Trong danh sách _tác vụ GNOME"
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr "Khóa vị trí và kích thước khi đang phóng to."
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "Có _bóng"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr "Chuyển tiêu điểm cho cửa sổ ứng dụng khi lần đầu tiên hiển thị."
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+msgid "Unshade selected windows."
+msgstr "Bỏ bóng các cửa sổ đã chọn."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -476,6 +888,17 @@ msgstr "Nhấn phím..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Trích dẫn]"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+#, fuzzy
+msgid "The program used to play audio samples."
+msgstr ""
+"Chương trình được dùng để phát mẫu âm thanh. Nếu bỏ chọn thì sẽ dùng sự hỗ "
+"trợ ESD có sẵn."
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr "Ánh xạ phím chứa tổ hợp hoạt động khi đọc chuỗi từ người dùng."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -491,6 +914,36 @@ msgstr "Vùng làm việc %d"
 msgid "Workspace:"
 msgstr "Vùng làm việc:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr "Khi nâng cửa sổ lên, cũng nâng lên điều của nó: \\w"
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Cổng xem"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Chuyển nhóm sang cổng xem hiện thời"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Cột:"
@@ -499,9 +952,53 @@ msgstr "Cột:"
 msgid "Row:"
 msgstr "Hàng:"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Nâng cửa sổ nhận tiêu điểm lên"
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Hiện trình đơn chứa danh sách các vùng làm việc."
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr "Hiện trình đơn chứa danh sách các vùng làm việc."
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Tên vùng làm việc"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 msgid "_Insert workspace"
@@ -778,18 +1275,6 @@ msgstr "Trang chủ của Sawfish"
 #~ msgid "Border width of bar images."
 #~ msgstr "Độ rộng viền của ảnh thanh ngang."
 
-#~ msgid "Window Cycling"
-#~ msgstr "Xoay vòng cửa sổ"
-
-#~ msgid "Sound"
-#~ msgstr "Âm thanh"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Cửa sổ đã khớp"
-
-#~ msgid "Tooltips"
-#~ msgstr "Mẹo công cụ"
-
 #~ msgid "Next workspace window"
 #~ msgstr "Cửa sổ kế trong vùng làm việc"
 
@@ -953,9 +1438,6 @@ msgstr "Trang chủ của Sawfish"
 #~ "Delete all windows in the group that the current window is a member of."
 #~ msgstr "Xóa bỏ mọi cửa sổ trong nhóm chứa cửa sổ hiện thời."
 
-#~ msgid "Growing and packing of windows"
-#~ msgstr "Nới và nén cửa sổ"
-
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
 #~ "this on, you can use `unmaximize-window' or something similar to get\n"
@@ -996,13 +1478,6 @@ msgstr "Trang chủ của Sawfish"
 #~ " • không bao giờ\tđừng kéo con trỏ từ chỗ."
 
 #~ msgid ""
-#~ "Whether to bump into fully obscured windows when growing or packing\n"
-#~ "windows."
-#~ msgstr ""
-#~ "Có nên đâm sầm vào cửa sổ bị lấp hoàn toàn hay không,\n"
-#~ "khi tăng kích cỡ hoặc nén cửa sổ."
-
-#~ msgid ""
 #~ "Whether to bump into windows on a different depth when growing or "
 #~ "packing\n"
 #~ "windows.\n"
@@ -1011,11 +1486,6 @@ msgstr "Trang chủ của Sawfish"
 #~ "Có nên đâm sầm vào cửa sổ nằm trên độ sâu khác hay không,\n"
 #~ "khi tăng kích cỡ hoặc nén cửa sổ.\n"
 #~ " • có thể\t\tchỉ tránh các cửa sổ nằm trên độ sâu khác."
-
-#~ msgid "Whether to bump into ignored windows when growing or packing."
-#~ msgstr ""
-#~ "Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
-#~ "khi tăng kích cỡ hoặc nén cửa sổ."
 
 #~ msgid "Grow window left"
 #~ msgstr "Nới bên trái cửa sổ"
@@ -1132,10 +1602,6 @@ msgstr "Trang chủ của Sawfish"
 #~ msgid "Help about"
 #~ msgstr "Trợ giúp: giới thiệu"
 
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr "Số điểm ảnh cần chuyển con trỏ trong lệnh « đẩy con trỏ »."
-
 #~ msgid "Move cursor right"
 #~ msgstr "Đẩy con trỏ sang phải"
 
@@ -1185,30 +1651,12 @@ msgstr "Trang chủ của Sawfish"
 #~ msgstr "Di chuyển con trỏ xuống dưới một điểm ảnh."
 
 #, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Hiện cửa sổ khi bị bỏ bóng."
-
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Nâng cửa sổ nhận tiêu điểm lên"
-
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Hiện vị trí hiện thời của cửa sổ trong khi di chuyển."
-
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr "Hiện kích cỡ hiện thời của cửa sổ trong khi đổi kích cỡ."
-
-#, fuzzy
 #~ msgid "border"
 #~ msgstr "Viền trên"
 
 #, fuzzy
 #~ msgid "border-grab"
 #~ msgstr "Ánh xạ viền"
-
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr "Hiện kích cỡ hiện thời của cửa sổ trong khi đổi kích cỡ."
 
 #~ msgid ""
 #~ "Distance in pixels before window edges align with each other.\n"
@@ -1393,46 +1841,17 @@ msgstr "Trang chủ của Sawfish"
 #~ msgid "Move window next"
 #~ msgstr "Cửa sổ tới kế"
 
-#~ msgid "Move the window to the next viewport."
-#~ msgstr "Di chuyển cửa sổ sang cổng xem kế tiếp."
-
 #~ msgid "Set viewport linear"
 #~ msgstr "Lập cổng xem tuyến"
 
 #~ msgid "Set window viewport linear"
 #~ msgstr "Lập cửa sổ cổng xem là tuyến"
 
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr "Hiển thị tên cửa sổ và biểu tượng trong khi xoay vòng các cửa sổ."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Xoay vòng cả cửa sổ thu nhỏ."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Xoay vòng cửa sổ trên mọi vùng làm việc."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Xoay vòng cửa sổ trên mọi cổng xem."
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Nâng cửa sổ nhận tiêu điểm lên"
-
 #~ msgid "cycle-keymap"
 #~ msgstr "ánh xạ phím xoay vòng"
 
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr "Ánh xạ phím chứa tổ hợp hoạt động chỉ trong khi xoay vòng cửa sổ."
-
 #~ msgid "Terminal"
 #~ msgstr "Thiết bị cuối"
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "Chương trình được thực hiện bởi lệnh « xterm »."
-
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Đối số được đưa cho lệnh « xterm »."
 
 #~ msgid "Xterm"
 #~ msgstr "Xterm"
@@ -1481,22 +1900,6 @@ msgstr "Trang chủ của Sawfish"
 #~ msgstr ""
 #~ "Nhắc với lệnh, thực hiện nó, và hiển thị dữ liệu xuất nào lên màn hình"
 
-#~ msgid "Move/Resize"
-#~ msgstr "Chuyển/Đổi cỡ"
-
-#~ msgid "Workspaces"
-#~ msgstr "Vùng làm việc"
-
-#~ msgid "Bindings"
-#~ msgstr "Tổ hợp"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Thu nhỏ/Phóng to"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Linh tinh"
-
 #~ msgid "Customize"
 #~ msgstr "Tùy chỉnh"
 
@@ -1506,23 +1909,11 @@ msgstr "Trang chủ của Sawfish"
 #~ msgid "3d hack"
 #~ msgstr "Việc cố chỉnh sửa ba chiều"
 
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Phát hiệu ứng âm thanh khi xảy ra dữ kiện cửa sổ."
-
 #~ msgid "Auto-Raise"
 #~ msgstr "Tự động nâng lên"
 
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Nâng cửa sổ nhận tiêu điểm lên"
-
 #~ msgid "Delay in milliseconds until focused windows are raised."
 #~ msgstr "Trễ theo mili-giây trước khi nâng cửa sổ có tiêu điểm lên."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Lật cạnh"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr "Chọn màn hình nền tiếp khi con trỏ chạm cạnh màn hình."
 
 #~ msgid "viewport"
 #~ msgstr "cổng xem"
@@ -1530,17 +1921,8 @@ msgstr "Trang chủ của Sawfish"
 #~ msgid "workspace"
 #~ msgstr "vùng làm việc"
 
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "Chạm cạnh màn hình thì chọn điều kế: \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Chỉ lật khi di chuyển tương tác cửa sổ."
-
 #~ msgid "Error Handling"
 #~ msgstr "Xử lý lỗi"
-
-#~ msgid "Beep when errors occur."
-#~ msgstr "Kêu bíp khi xảy ra lỗi."
 
 #~ msgid "nowhere"
 #~ msgstr "không ở đâu cả"
@@ -1550,9 +1932,6 @@ msgstr "Trang chủ của Sawfish"
 
 #~ msgid "standard-error"
 #~ msgstr "thiết bị lỗi chuẩn"
-
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Hiển thị thông báo lỗi ra: \\w"
 
 #~ msgid "Display errors"
 #~ msgstr "Hiển thị lỗi"
@@ -1595,9 +1974,6 @@ msgstr "Trang chủ của Sawfish"
 
 #~ msgid "Workspace"
 #~ msgstr "Vùng làm việc"
-
-#~ msgid "Viewport"
-#~ msgstr "Cổng xem"
 
 #~ msgid "Depth"
 #~ msgstr "Độ sâu"
@@ -1675,9 +2051,6 @@ msgstr "Trang chủ của Sawfish"
 #~ msgid "Ignore stacking requests"
 #~ msgstr "Bỏ qua yêu cầu tạo chồng"
 
-#~ msgid "Shade Hover"
-#~ msgstr "Thoáng bóng"
-
 #~ msgid ""
 #~ "Enable shade-hover mode.\n"
 #~ "\n"
@@ -1686,41 +2059,6 @@ msgstr "Trang chủ của Sawfish"
 #~ "Bật chế độ thoáng bóng.\n"
 #~ "\n"
 #~ "(Tạm thời bỏ bóng cửa sổ khi con trỏ di chuyển trên nó.)"
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Hiện cửa sổ khi bị bỏ bóng."
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Hiện mẹo công cụ cho các khung cửa sổ."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Hiện toàn bộ tài liệu trong mẹo công cụ."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
-
-#~ msgid "History"
-#~ msgstr "Lược sử"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Tự động nhớ vị trí các cửa sổ"
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Tự động nhớ kích thước các cửa sổ."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Tự động nhớ các thuộc tính khác của cửa sổ."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr "Không tự động nhớ chi tiết các cửa sổ tạm."
 
 #~ msgid "Window history save position"
 #~ msgstr "Lược sử cửa sổ : lưu vị trí"
@@ -1800,27 +2138,6 @@ msgstr "Trang chủ của Sawfish"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Gởi cửa sổ qua vùng làm việc bên phải vùng làm việc hiện thời"
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Khi con chuột tác động lên tiêu điểm nhập."
-
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr ""
-#~ "Chế độ nhắp để được tiêu điểm (click-to-focus) gởi tín hiệu nhấn chuột "
-#~ "sang cho ứng dụng"
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr "Hạ thấp cửa sổ xuống vị trí thấp nhất được phép trong thứ tự chồng."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Kiểu dáng khung mặc định:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Tự động tải lại sắc thái khi được cập nhật"
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Phông chữ mặc định: \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Sửa kiểu dáng khung"
 
@@ -1830,106 +2147,32 @@ msgstr "Trang chủ của Sawfish"
 #~ msgid "global-keymap"
 #~ msgstr "ánh xạ phím toàn cục"
 
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Ánh xạ phím chứa tổ hợp hoạt động suốt nơi."
-
 #~ msgid "window-keymap"
 #~ msgstr "ánh xạ cửa sổ"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr "Ánh xạ phím chứa tổ hợp hoạt động khi cửa sổ khách nhận tiêu điểm."
 
 #~ msgid "root-window-keymap"
 #~ msgstr "ánh xạ cửa sổ gốc"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ có trong cửa sổ gốc\n"
-#~ "(hoặc khi không có cửa sổ nhận tiêu điểm)."
-
 #~ msgid "title-keymap"
 #~ msgstr "ánh xạ tựa"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-#~ "có trong tựa đề của cửa sổ.\n"
-#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
 
 #~ msgid "border-keymap"
 #~ msgstr "Ánh xạ viền"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-#~ "có trên viền của cửa sổ.\n"
-#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
 #~ msgid "close-button-keymap"
 #~ msgstr "Ánh xạ nút đóng"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-#~ "có trên cái nút đóng của cửa sổ.\n"
-#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
 
 #~ msgid "iconify-button-keymap"
 #~ msgstr "Ánh xạ nút làm hình nhỏ"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-#~ "có trên cái nút co lại thành biểu tượng của cửa sổ.\n"
-#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này."
-
 #~ msgid "maximize-button-keymap"
 #~ msgstr "Ánh xạ nút phóng to"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-#~ "có trên cái nút phóng to của cửa sổ.\n"
-#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
 
 #~ msgid "menu-button-keymap"
 #~ msgstr "Ánh xạ nút trình đơn"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-#~ "có trên cái nút trình đơn của cửa sổ.\n"
-#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
 #~ msgid "shade-button-keymap"
 #~ msgstr "Ánh xạ nút bóng"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-#~ "có trên cái nút bóng của cửa sổ.\n"
-#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr "Phím sửa đổi dùng cho phím tắt mặc định."
 
 #~ msgid "Popup window menu"
 #~ msgstr "Bật trình đơn cửa sổ lên"
@@ -1949,23 +2192,8 @@ msgstr "Trang chủ của Sawfish"
 #~ msgid "Display the applications menu."
 #~ msgstr "Hiện trình đơn ứng dụng."
 
-#~ msgid "Distance between successive placements in `stagger' placement mode."
-#~ msgstr "Khoảng cách giữa hai lần để vị trí trong chế độ để « chéo nhau »."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Cách đặt cửa sổ : \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Cách đặt cửa sổ hộp thoại: \\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Cách làm chồng"
-
 #~ msgid "parents"
 #~ msgstr "cha"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Giữ cửa sổ tạm đặt trên: \\w"
 
 #~ msgid "Raise single window"
 #~ msgstr "Nâng cửa sổ đơn lên"
@@ -2008,12 +2236,6 @@ msgstr "Trang chủ của Sawfish"
 
 #~ msgid "group"
 #~ msgstr "nhóm"
-
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Thủ nhỏ cửa sổ cũng gở bỏ ra nó : \\w"
-
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr "Phục hồi kích cỡ gốc của cửa sổ cũng phục hồi cho nó : \\w"
 
 #~ msgid "Iconify window"
 #~ msgstr "Biểu tượng hóa cửa sổ"
@@ -2098,9 +2320,6 @@ msgstr "Trang chủ của Sawfish"
 #, fuzzy
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr "Bật/tắt cửa sổ có được tính trong danh sách cửa sổ không."
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr "Khóa vị trí và kích thước khi đang phóng to."
 
 #~ msgid "Maximize window"
 #~ msgstr "Phóng to cửa sổ"
@@ -2244,9 +2463,6 @@ msgstr "Trang chủ của Sawfish"
 #~ "Toggle the shaded (only the title bar is displayed) state of the window."
 #~ msgstr "Bật/tắt tính trạng có bóng (chỉ hiện thanh tựa đề) của cửa sổ."
 
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Chuyển tiêu điểm cho cửa sổ ứng dụng khi lần đầu tiên hiển thị."
-
 #~ msgid "Raise window and transients"
 #~ msgstr "Nâng cửa sổ và các điều tạm lên"
 
@@ -2283,9 +2499,6 @@ msgstr "Trang chủ của Sawfish"
 #~ msgid "Insert workspace"
 #~ msgstr "Chèn vùng làm việc"
 
-#~ msgid "Unshade selected windows."
-#~ msgstr "Bỏ bóng các cửa sổ đã chọn."
-
 #~ msgid "Display window without focusing"
 #~ msgstr "Hiện cửa sổ không có tiêu điểm"
 
@@ -2320,22 +2533,8 @@ msgstr "Trang chủ của Sawfish"
 #~ "Gởi dữ kiến phím kế tiếp trực tiếp cho cửa sổ khách có tiêu điểm,\n"
 #~ "bỏ qua tổ hợp bộ quản lý cửa sổ nào của nó."
 
-#~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for "
-#~ "ESD is used."
-#~ msgstr ""
-#~ "Chương trình được dùng để phát mẫu âm thanh. Nếu bỏ chọn thì sẽ dùng sự "
-#~ "hỗ trợ ESD có sẵn."
-
 #~ msgid "prompt-keymap"
 #~ msgstr "nhắc ánh xạ phím"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr "Ánh xạ phím chứa tổ hợp hoạt động khi đọc chuỗi từ người dùng."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Khi nâng cửa sổ lên, cũng nâng lên điều của nó: \\w"
 
 #~ msgid "Raise window"
 #~ msgstr "Nâng cửa sổ lên"
@@ -2345,10 +2544,6 @@ msgstr "Trang chủ của Sawfish"
 
 #~ msgid "Raise lower window"
 #~ msgstr "Nâng/hạ thấp cửa sổ"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Chuyển nhóm sang cổng xem hiện thời"
 
 #~ msgid "Activate viewport"
 #~ msgstr "Kích hoạt cổng xem"
@@ -2461,10 +2656,6 @@ msgstr "Trang chủ của Sawfish"
 
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "Ép cửa sổ hiện thời có tựa đề duy nhất."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Hiện trình đơn chứa danh sách các vùng làm việc."
 
 #~ msgid "Popup workspace list"
 #~ msgstr "Bật danh sách vùng làm việc lên"

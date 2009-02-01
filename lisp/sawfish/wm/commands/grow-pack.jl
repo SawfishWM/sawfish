@@ -61,43 +61,30 @@
 
 ;;; Customization options.
    
-  (defgroup grow-pack "Growing and packing of windows" :group misc)
+  (defgroup grow-pack (_"Growing and packing of windows") :group misc)
 
   (defcustom grow-is-maximize t
-    "Whether growing is considered to be maximization.  When you turn
-this on, you can use `unmaximize-window' or something similar to get
-back to the original size."
+    (_"Whether growing is considered to be maximization.")
     :type boolean
     :group (misc grow-pack))
 
   (defcustom pack-warp-pointer 'maybe
-    "Whether and how to move the pointer when packing windows.
-
-`maybe' means that the pointer is moved along with the window, if the
-pointer was within the window area before packing.
-
-`always' warps the pointer to the center of the window if it isn't
-already in the window, then does like `maybe'.
-
-`never' means not to warp the pointer."
+    (_"Whether and how to move the pointer.")
     :type (choice always maybe never)
     :group (misc grow-pack))
 
   (defcustom grow-pack-bump-obscured ()
-    "Whether to bump into fully obscured windows when growing or packing
-windows."
+    (_"Whether to bump into fully obscured windows.")
     :type boolean
     :group (misc grow-pack))
 
   (defcustom grow-pack-bump-other-depth 'always
-    "Whether to bump into windows on a different depth when growing or packing
-windows.
-`maybe' means only avoided windows in other depths."
+    (_"Whether to bump into windows on a different depth.")
     :type (choice always maybe never)
     :group (misc grow-pack))
 
   (defcustom grow-pack-bump-ignored t
-    "Whether to bump into ignored windows when growing or packing."
+    (_"Whether to bump into ignored windows.")
     :type boolean
     :group (misc grow-pack))
 

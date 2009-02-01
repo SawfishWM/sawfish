@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2000-07-03 11:46+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -156,6 +156,29 @@ msgstr "ne"
 msgid "Match Window Properties"
 msgstr "Poišči okna z ustreznimi lastnostmi"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Kroženje oken"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Zvok"
+
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Ustrezajoča okna"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Namigi"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -166,37 +189,178 @@ msgstr "Kazalo:"
 msgid "Command:"
 msgstr "Ukaz:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr "Povečevanje in zmanjševanje oken"
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Prestavi okno v naslednji pogled."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Ali naj se zaletim v popolnoma obskurno okno ob povečevanju ali "
+"zmanjševanju\n"
+"okna."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+#, fuzzy
+msgid "Whether to bump into windows on a different depth."
+msgstr "Ali naj se ob povečevanju in zmanjševanju zaletim v prezrta okna."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr "Ali naj se ob povečevanju in zmanjševanju zaletim v prezrta okna."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
 msgstr "Povečaj okno levo"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 msgid "Grow right"
 msgstr "Povečaj okno desno"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 msgid "Grow up"
 msgstr "Povečaj okno navzgor"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 msgid "Grow down"
 msgstr "Povečaj okno navzdol"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 msgid "Pack left"
 msgstr "Pomanjšaj okno levo"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 msgid "Pack right"
 msgstr "Pomanjšaj okno desno"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr "Pomanjšaj okno navzgor"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr "Pomanjšaj okno navzdol"
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr "Število pikslov za premik kazalca v 'premakni-kazalec' ukazu."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Dvigni okna, kadar se odsenčijo."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Dvigni okna, kadar se odsenčijo."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Dvigni okna, ko dobijo fokus."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr "Kaži treuntni položaj oken ob premikanju."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr "Kaži trenutno velikost oken ob spreminjanju le te."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Kaži trenutno velikost oken ob spreminjanju le te."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr "Ob kroženju preko oken kaži imena in ikone oken."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr "Ob kroženju vključuj pomanjšana okna."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr "Ob kroženju vključuj okna na vseh delovnih površinah."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr "Ob kroženju vključuj okna vseh pogledov."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Dvigni okna, ko dobijo fokus."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr "Mapiranje tipk, ki je dejavno le ob kroženju skozi okna."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr "Program pognan z ukazom 'xterm'."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+msgid "Arguments given to the `xterm' command."
+msgstr "Argumenti podani k ukazu 'xterm'."
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Fokus"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Premakni/Spremeni velikost"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Videz"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Delovne površine"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Povezave"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Krčenje in razpenjanje"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Razno"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Namestitev"
+
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Igraj zvočne učinke za okenske dogodke."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -206,21 +370,37 @@ msgstr "Dogodek"
 msgid "Audio file"
 msgstr "Datoteka z zvokom"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Preskok preko roba na drug pogled"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr "Preskoči na naslednje namizje, ko kazalec zadane ob rob zaslona."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Zadetek roba zaslona izbere naslednje: \\w"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Preskoči le kadar se okno interaktivno premika."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr "Ob napakah zapiskaj."
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+msgid "Display error messages to: \\w"
+msgstr "Poročilo o napaki pokaži: \\w"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Ni napak."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Namestitev"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Fokus"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Videz"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -229,6 +409,52 @@ msgstr "Stanje"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Drugo"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+msgid "Shade Hover"
+msgstr "Začasna odsenčitev"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Premor v milisekundah preden se okna odsenčijo."
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr "Dvigni okna, kadar se odsenčijo."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Kaži namige za okvirje oken."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "V namigih kaži polno dokumentacijo."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Premor v milisekundah preden se okna odsenčijo."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Premor v milisekundah preden se okna odsenčijo."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -246,9 +472,59 @@ msgstr "Pomni _atribute"
 msgid "_Forget saved state"
 msgstr "Po_zabi shranjeno stanje"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+msgid "History"
+msgstr "Zgodovina"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Samodejno si zapomni položaje okna."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Samodejno si zapomni velikosti okna."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Samodejno si zapomni ostale atribute okna."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+msgid "Don't automatically remember details of transient windows."
+msgstr "Položaja pogovornih oken ne pomni samodejno."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Zgodovina"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Kdaj kazalec miške vpliva na fokus."
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Ali način klik-za-fokus pošlje klik naprej programu."
+
+#: ../lisp/sawfish/wm/focus.jl:60
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Znižaj okno na dno znotraj njegovega sklada."
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Privzet slog okvirjev:"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "Samodejno znova naloži teme, ko so posodobljene."
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Privzeta pisava: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -290,6 +566,84 @@ msgstr "GNOME Splet..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "O GNOME..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "Mapiranje tipk, ki je dejavno povsod."
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr "Mapiranje tipk, ki je dejavno kadar je okno fokusirano."
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Mapiranje tipk, ki je dejavno kadar je kazalec izven oken\n"
+"(ali ni fokusirano nobeno okno)."
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapiranje tipk, ki je dejavno kadar je kazalec na nazivu okna.\n"
+"(Delujejo le miškine povezave.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapiranje tipk, ki je dejavno kadar je kazalec na robu okna\n"
+"(Delujejo le miškine povezave.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapiranje tip, ki je dejavno kadar je kazalec nad gumbom za zapiranje\n"
+"(Delujejo le miškine povezave.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapiranje tipk, ki je dejavno kadar je kazalec nad gumbom za pomanjšanje\n"
+"(Delujejo le miškine povezave.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapiranje tipk, ki je dejavno kadar je kazalec nad gumbom za razenjanje\n"
+"(Delujejo le miškine povezave.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapiranje tipk, ki je dejavno kadar je kazalec nad gumbom za menu\n"
+"(Delujejo le miškine povezave.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapiranje tipk, ki je dejavno kadar je kazalec nad gumbom za senčenje\n"
+"(Delujejo le miškine povezave.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+#, fuzzy
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
+"Ubežna tipka, ki se uporablja za privzete bližnjice upravljalnika oken."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -439,6 +793,42 @@ msgstr "Vse nastavitve"
 msgid "Edit theme..."
 msgstr "Uredi temo..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Način določitve položaja oken: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "Način določitve položaja oken dialogov: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+#, fuzzy
+msgid "Distance between successive placements in stagger mode."
+msgstr "Razdalja med zaporednimi postavitvami v `stager' načinu postavitev."
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Skladanje"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Pusti transistentna okna nad: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Ob pomanjkanju okna se odstrani tudi njegovo: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Ob odpomanjšanju okna se povrne tudi njegova: \\w"
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Lepljivo"
@@ -464,9 +854,21 @@ msgstr "V seznamu _oken"
 msgid "In _task list"
 msgstr "V seznamu _poslov GNOME"
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr "Zakleni geometrijo okna medtem, ko je to razpeto."
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "S_enčeno"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr "Fokusiraj okna programov, ki so prvič prikazani."
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+msgid "Unshade selected windows."
+msgstr "Odsenči izbrana okna."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -479,6 +881,17 @@ msgstr "Pritisnite tipko..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Citat]"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+#, fuzzy
+msgid "The program used to play audio samples."
+msgstr ""
+"Program za igranje zvočnih vzorcev. Če ni nastavljeno bo uporabljena že "
+"vgrajena ESD podpora."
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr "Mapiranje tipk, ki je aktivno kadar uporabnik vpisuje besedilo."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -494,6 +907,36 @@ msgstr "Delovna površina %d"
 msgid "Workspace:"
 msgstr "Delovna površina:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr "Ob dvigu okna dvigni tudi: \\w"
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Pogled"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Prestavi skupino v trenutni pogled"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Stolpec:"
@@ -502,9 +945,53 @@ msgstr "Stolpec:"
 msgid "Row:"
 msgstr "Vrstica:"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Dvigni okna, ko dobijo fokus."
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Pokaži menu, ki vsebuje seznam vseh delovnih površin."
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr "Pokaži menu, ki vsebuje seznam vseh delovnih površin."
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Imena delovnih površin"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 #, fuzzy
@@ -791,18 +1278,6 @@ msgstr "Domača stran Sawfish"
 #~ msgid "Border width of bar images."
 #~ msgstr "Širina vrstice slik."
 
-#~ msgid "Window Cycling"
-#~ msgstr "Kroženje oken"
-
-#~ msgid "Sound"
-#~ msgstr "Zvok"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Ustrezajoča okna"
-
-#~ msgid "Tooltips"
-#~ msgstr "Namigi"
-
 #~ msgid "Next workspace window"
 #~ msgstr "Naslednje okno delovno površine"
 
@@ -966,9 +1441,6 @@ msgstr "Domača stran Sawfish"
 #~ "Delete all windows in the group that the current window is a member of."
 #~ msgstr "Zbriši vsa okna v skupini katere član je trenutno okno."
 
-#~ msgid "Growing and packing of windows"
-#~ msgstr "Povečevanje in zmanjševanje oken"
-
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
 #~ "this on, you can use `unmaximize-window' or something similar to get\n"
@@ -1010,14 +1482,6 @@ msgstr "Domača stran Sawfish"
 #~ "`nikoli' pomeni, naj se kazalec ne prestavi v okno."
 
 #~ msgid ""
-#~ "Whether to bump into fully obscured windows when growing or packing\n"
-#~ "windows."
-#~ msgstr ""
-#~ "Ali naj se zaletim v popolnoma obskurno okno ob povečevanju ali "
-#~ "zmanjševanju\n"
-#~ "okna."
-
-#~ msgid ""
 #~ "Whether to bump into windows on a different depth when growing or "
 #~ "packing\n"
 #~ "windows.\n"
@@ -1026,9 +1490,6 @@ msgstr "Domača stran Sawfish"
 #~ "Ali naj se ob povečevanju in zmanjševanju oken zaletim v okna drugih "
 #~ "globin.\n"
 #~ "`maybe' pomeni, da le izogibana okna drugih globin."
-
-#~ msgid "Whether to bump into ignored windows when growing or packing."
-#~ msgstr "Ali naj se ob povečevanju in zmanjševanju zaletim v prezrta okna."
 
 #~ msgid "Grow window left"
 #~ msgstr "Pvečaj okno levo"
@@ -1135,10 +1596,6 @@ msgstr "Domača stran Sawfish"
 #~ msgid "Help about"
 #~ msgstr "Pomoč o"
 
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr "Število pikslov za premik kazalca v 'premakni-kazalec' ukazu."
-
 #~ msgid "Move cursor right"
 #~ msgstr "Premakni kazalec desno"
 
@@ -1188,30 +1645,12 @@ msgstr "Domača stran Sawfish"
 #~ msgstr "Premakni kazalec za 1 piksel navzdol."
 
 #, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Dvigni okna, kadar se odsenčijo."
-
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Dvigni okna, ko dobijo fokus."
-
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Kaži treuntni položaj oken ob premikanju."
-
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr "Kaži trenutno velikost oken ob spreminjanju le te."
-
-#, fuzzy
 #~ msgid "border"
 #~ msgstr "Zgornja meja"
 
 #, fuzzy
 #~ msgid "border-grab"
 #~ msgstr "povezave tipk roba"
-
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr "Kaži trenutno velikost oken ob spreminjanju le te."
 
 #~ msgid ""
 #~ "Distance in pixels before window edges align with each other.\n"
@@ -1394,46 +1833,17 @@ msgstr "Domača stran Sawfish"
 #~ msgid "Move window next"
 #~ msgstr "Prestavi okno naprej"
 
-#~ msgid "Move the window to the next viewport."
-#~ msgstr "Prestavi okno v naslednji pogled."
-
 #~ msgid "Set viewport linear"
 #~ msgstr "Nastavi linerani pogled"
 
 #~ msgid "Set window viewport linear"
 #~ msgstr "Nastavi linearne delovne površine"
 
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr "Ob kroženju preko oken kaži imena in ikone oken."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Ob kroženju vključuj pomanjšana okna."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Ob kroženju vključuj okna na vseh delovnih površinah."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Ob kroženju vključuj okna vseh pogledov."
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Dvigni okna, ko dobijo fokus."
-
 #~ msgid "cycle-keymap"
 #~ msgstr "povezave tipk ob kroženju"
 
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr "Mapiranje tipk, ki je dejavno le ob kroženju skozi okna."
-
 #~ msgid "Terminal"
 #~ msgstr "Terminal"
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "Program pognan z ukazom 'xterm'."
-
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Argumenti podani k ukazu 'xterm'."
 
 #~ msgid "Xterm"
 #~ msgstr "Xterm"
@@ -1481,22 +1891,6 @@ msgstr "Domača stran Sawfish"
 #~ "Prompt for a command, execute it, and print any output to the screen."
 #~ msgstr "Vprašaj za ukaz, ga izvedi in izpiši izhod na zaslon."
 
-#~ msgid "Move/Resize"
-#~ msgstr "Premakni/Spremeni velikost"
-
-#~ msgid "Workspaces"
-#~ msgstr "Delovne površine"
-
-#~ msgid "Bindings"
-#~ msgstr "Povezave"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Krčenje in razpenjanje"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Razno"
-
 #~ msgid "Customize"
 #~ msgstr "Prilagodi"
 
@@ -1506,23 +1900,11 @@ msgstr "Domača stran Sawfish"
 #~ msgid "3d hack"
 #~ msgstr "3d hack"
 
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Igraj zvočne učinke za okenske dogodke."
-
 #~ msgid "Auto-Raise"
 #~ msgstr "Samoejni-dvig"
 
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Dvigni okna, ko dobijo fokus."
-
 #~ msgid "Delay in milliseconds until focused windows are raised."
 #~ msgstr "Čas v mikrosekundah, preden so fokusirana okna dvignjena."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Preskok preko roba na drug pogled"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr "Preskoči na naslednje namizje, ko kazalec zadane ob rob zaslona."
 
 #~ msgid "viewport"
 #~ msgstr "pogled"
@@ -1530,17 +1912,8 @@ msgstr "Domača stran Sawfish"
 #~ msgid "workspace"
 #~ msgstr "delovna površina"
 
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "Zadetek roba zaslona izbere naslednje: \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Preskoči le kadar se okno interaktivno premika."
-
 #~ msgid "Error Handling"
 #~ msgstr "Obravnavanje napak"
-
-#~ msgid "Beep when errors occur."
-#~ msgstr "Ob napakah zapiskaj."
 
 #~ msgid "nowhere"
 #~ msgstr "nikjer"
@@ -1550,9 +1923,6 @@ msgstr "Domača stran Sawfish"
 
 #~ msgid "standard-error"
 #~ msgstr "običajna-napaka"
-
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Poročilo o napaki pokaži: \\w"
 
 #~ msgid "Display errors"
 #~ msgstr "Kaži napake"
@@ -1595,9 +1965,6 @@ msgstr "Domača stran Sawfish"
 
 #~ msgid "Workspace"
 #~ msgstr "Delovna površina"
-
-#~ msgid "Viewport"
-#~ msgstr "Pogled"
 
 #~ msgid "Depth"
 #~ msgstr "Globina"
@@ -1675,9 +2042,6 @@ msgstr "Domača stran Sawfish"
 #~ msgid "Ignore stacking requests"
 #~ msgstr "Prezri zahtevke po določenem skladanju"
 
-#~ msgid "Shade Hover"
-#~ msgstr "Začasna odsenčitev"
-
 #~ msgid ""
 #~ "Enable shade-hover mode.\n"
 #~ "\n"
@@ -1685,41 +2049,6 @@ msgstr "Domača stran Sawfish"
 #~ msgstr ""
 #~ "Vključi začasne odsenčitve.\n"
 #~ "(Začasno odsenči okna, kadar je nad njimi kazalec.)"
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Premor v milisekundah preden se okna odsenčijo."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Dvigni okna, kadar se odsenčijo."
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Kaži namige za okvirje oken."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "V namigih kaži polno dokumentacijo."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Premor v milisekundah preden se okna odsenčijo."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Premor v milisekundah preden se okna odsenčijo."
-
-#~ msgid "History"
-#~ msgstr "Zgodovina"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Samodejno si zapomni položaje okna."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Samodejno si zapomni velikosti okna."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Samodejno si zapomni ostale atribute okna."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr "Položaja pogovornih oken ne pomni samodejno."
 
 #~ msgid "Window history save position"
 #~ msgstr "Shrani zgodovino položaja okna"
@@ -1815,25 +2144,6 @@ msgstr "Domača stran Sawfish"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Ustvari novo delovno površino, ki naj bo pred trenutno."
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Kdaj kazalec miške vpliva na fokus."
-
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "Ali način klik-za-fokus pošlje klik naprej programu."
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr "Znižaj okno na dno znotraj njegovega sklada."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Privzet slog okvirjev:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Samodejno znova naloži teme, ko so posodobljene."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Privzeta pisava: \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Uredi slog okvirja"
 
@@ -1843,101 +2153,32 @@ msgstr "Domača stran Sawfish"
 #~ msgid "global-keymap"
 #~ msgstr "Globalne povezave tipk"
 
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Mapiranje tipk, ki je dejavno povsod."
-
 #~ msgid "window-keymap"
 #~ msgstr "Povezave tipk okna"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr "Mapiranje tipk, ki je dejavno kadar je okno fokusirano."
 
 #~ msgid "root-window-keymap"
 #~ msgstr "povezave tipk osnovnega okna"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec izven oken\n"
-#~ "(ali ni fokusirano nobeno okno)."
-
 #~ msgid "title-keymap"
 #~ msgstr "povezave tipk naziva"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec na nazivu okna.\n"
-#~ "(Delujejo le miškine povezave.)"
 
 #~ msgid "border-keymap"
 #~ msgstr "povezave tipk roba"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec na robu okna\n"
-#~ "(Delujejo le miškine povezave.)"
-
 #~ msgid "close-button-keymap"
 #~ msgstr "povezave tipk gumba \"zapri\""
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapiranje tip, ki je dejavno kadar je kazalec nad gumbom za zapiranje\n"
-#~ "(Delujejo le miškine povezave.)"
 
 #~ msgid "iconify-button-keymap"
 #~ msgstr "povezave tipk gumba \"skrči\""
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec nad gumbom za pomanjšanje\n"
-#~ "(Delujejo le miškine povezave.)"
-
 #~ msgid "maximize-button-keymap"
 #~ msgstr "povezave tipk gumba \"razpni\""
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec nad gumbom za razenjanje\n"
-#~ "(Delujejo le miškine povezave.)"
 
 #~ msgid "menu-button-keymap"
 #~ msgstr "povezave tipk gumba \"menu\""
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec nad gumbom za menu\n"
-#~ "(Delujejo le miškine povezave.)"
-
 #~ msgid "shade-button-keymap"
 #~ msgstr "povezave tipk gumba \"senči\""
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec nad gumbom za senčenje\n"
-#~ "(Delujejo le miškine povezave.)"
-
-#, fuzzy
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr ""
-#~ "Ubežna tipka, ki se uporablja za privzete bližnjice upravljalnika oken."
 
 #~ msgid "Popup window menu"
 #~ msgstr "Vklični menu okna"
@@ -1957,23 +2198,8 @@ msgstr "Domača stran Sawfish"
 #~ msgid "Display the applications menu."
 #~ msgstr "Kaži menu aplikacij."
 
-#~ msgid "Distance between successive placements in `stagger' placement mode."
-#~ msgstr "Razdalja med zaporednimi postavitvami v `stager' načinu postavitev."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Način določitve položaja oken: \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Način določitve položaja oken dialogov: \\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Skladanje"
-
 #~ msgid "parents"
 #~ msgstr "starši"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Pusti transistentna okna nad: \\w"
 
 #~ msgid "Raise single window"
 #~ msgstr "Dvigni za eno okno"
@@ -2017,12 +2243,6 @@ msgstr "Domača stran Sawfish"
 
 #~ msgid "group"
 #~ msgstr "skupino"
-
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Ob pomanjkanju okna se odstrani tudi njegovo: \\w"
-
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr "Ob odpomanjšanju okna se povrne tudi njegova: \\w"
 
 #~ msgid "Iconify window"
 #~ msgstr "Skrči okno v ikono"
@@ -2107,9 +2327,6 @@ msgstr "Domača stran Sawfish"
 #, fuzzy
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr "Preklopi ali je okno vključeno v seznam oken."
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr "Zakleni geometrijo okna medtem, ko je to razpeto."
 
 #~ msgid "Maximize window"
 #~ msgstr "Razpni okno"
@@ -2257,9 +2474,6 @@ msgstr "Domača stran Sawfish"
 #~ "Toggle the shaded (only the title bar is displayed) state of the window."
 #~ msgstr "Preklopi senčeno (prikazana je le nazivna vrstica) stanje okna."
 
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Fokusiraj okna programov, ki so prvič prikazani."
-
 #~ msgid "Raise window and transients"
 #~ msgstr "Dvigni okno in njegova transistenta okna"
 
@@ -2293,9 +2507,6 @@ msgstr "Domača stran Sawfish"
 
 #~ msgid "Insert workspace"
 #~ msgstr "Vstavi delovno površino"
-
-#~ msgid "Unshade selected windows."
-#~ msgstr "Odsenči izbrana okna."
 
 #~ msgid "Display window without focusing"
 #~ msgstr "Kaži okno brez fokusa"
@@ -2331,22 +2542,8 @@ msgstr "Domača stran Sawfish"
 #~ "Pošlje naslednji tipkovničin dogodek neposredno na fokusirano okno, ne \n"
 #~ "oziraje se na povezave, ki jih ima upravljalnik oken za ta dogodek."
 
-#~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for "
-#~ "ESD is used."
-#~ msgstr ""
-#~ "Program za igranje zvočnih vzorcev. Če ni nastavljeno bo uporabljena že "
-#~ "vgrajena ESD podpora."
-
 #~ msgid "prompt-keymap"
 #~ msgstr "povezave tipk ob vpisu besedila"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr "Mapiranje tipk, ki je aktivno kadar uporabnik vpisuje besedilo."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Ob dvigu okna dvigni tudi: \\w"
 
 #~ msgid "Raise window"
 #~ msgstr "Dvigni okno"
@@ -2356,10 +2553,6 @@ msgstr "Domača stran Sawfish"
 
 #~ msgid "Raise lower window"
 #~ msgstr "Dvigni/spusti okno"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Prestavi skupino v trenutni pogled"
 
 #~ msgid "Activate viewport"
 #~ msgstr "Aktiviraj pogled"
@@ -2466,10 +2659,6 @@ msgstr "Domača stran Sawfish"
 
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "Prisili trenutno okno da ima unikaten naziv."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Pokaži menu, ki vsebuje seznam vseh delovnih površin."
 
 #~ msgid "Popup workspace list"
 #~ msgstr "Vzklični seznam delovnih površin"

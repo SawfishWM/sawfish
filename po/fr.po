@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2006-08-29 15:06+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -158,6 +158,29 @@ msgstr "non"
 msgid "Match Window Properties"
 msgstr "Correspondre aux propriétés de la fenêtre"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Rotation des fenêtres"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Sons"
+
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Propriétés des fenêtres"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Bulles d'aide"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -168,37 +191,188 @@ msgstr "Index :"
 msgid "Command:"
 msgstr "Commande :"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr "Agrandissement et empilement des fenêtres"
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Déplacer la fenêtre vers le visuel suivant."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Indique si on passe dans des fenêtres complètement obscurci lorsque l'on\n"
+"agrandit ou empile les fenêtres."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+#, fuzzy
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+"Indique si on passe les fenêtres ignorées lorsqu'on les agrandit ou les "
+"empile."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr ""
+"Indique si on passe les fenêtres ignorées lorsqu'on les agrandit ou les "
+"empile."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
 msgstr "Agrandir la fenêtre sur la gauche"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 msgid "Grow right"
 msgstr "Agrandir la fenêtre sur la droite"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 msgid "Grow up"
 msgstr "Agrandir"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 msgid "Grow down"
 msgstr "Agrandir vers le bas"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 msgid "Pack left"
 msgstr "Coller vers la gauche"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 msgid "Pack right"
 msgstr "Coller vers la droite"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr "Coller vers le haut"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr "Coller vers le bas"
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr ""
+"Nombre de pixel duquel il faut déplacer le pointeur avec les\n"
+"commandes « move-cursor- »."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Mettre au premier plan les fenêtres lorsqu'elles n'ont pas le focus."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Mettre au premier plan les fenêtres lorsqu'elles n'ont pas le focus."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Mettre au premier plan les fenêtres lorsqu'elles ont le focus."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr "Afficher la position de la fenêtre pendant son déplacement."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr "Afficher les dimensions de la fenêtre pendant son redimensionnement."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Afficher les dimensions de la fenêtre pendant son redimensionnement."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr ""
+"Afficher les icônes et noms des fenêtres lors de la rotation à travers les "
+"fenêtres."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr "Inclure les fenêtres icônifées lors de la rotation."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr ""
+"Inclure les fenêtres de tous les espaces de travail lors de la rotation."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr "Inclure les fenêtres de tous les visuels lors de la rotation."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Mettre au premier plan les fenêtres lorsqu'elles ont le focus."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr ""
+"Table des touches contenant les raccourcis actifs uniquement pendant les "
+"opérations de rotation."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr "Le programme lancé par la commande « xterm »."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+msgid "Arguments given to the `xterm' command."
+msgstr "Paramètres passés à la commande « xterm »."
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Focus"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Déplacer/Redimensionner"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Apparence"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Espaces de travail"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Raccourcis"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Minimiser et maximiser"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Divers"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Placement"
+
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Activer les effets audio pour les événements des fenêtres."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -208,21 +382,38 @@ msgstr "Événement"
 msgid "Audio file"
 msgstr "Fichier audio"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Basculement des bords"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr ""
+"Passer au bureau suivant lorsque le pointeur atteint le bord de l'écran."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "En atteignant le bord de l'écran, sélectionner le prochain : \\w"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Basculer uniquement lors du déplacement interactif d'une fenêtre."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr "Émettre un beep quand une erreur survient."
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+msgid "Display error messages to: \\w"
+msgstr "Afficher les messages d'erreur sur : \\w"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Aucune erreur."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Placement"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Focus"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Apparence"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -231,6 +422,52 @@ msgstr "État"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Autre"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+msgid "Shade Hover"
+msgstr "Shade Over"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Délai en millisecondes avant de dé-ombrer les fenêtres."
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr "Mettre au premier plan les fenêtres lorsqu'elles n'ont pas le focus."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Afficher les bulles d'aide pour les cadres des fenêtres."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "Afficher toute la documentation dans les bulles d'aide."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Délai en millisecondes avant de dé-ombrer les fenêtres."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Délai en millisecondes avant de dé-ombrer les fenêtres."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -248,9 +485,61 @@ msgstr "Mémoriser les _attributs"
 msgid "_Forget saved state"
 msgstr "_Oublier l'état sauvé"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+msgid "History"
+msgstr "Historique"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Mémoriser automatiquement la position des fenêtres."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Mémoriser automatiquement la taille des fenêtres."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Mémoriser automatiquement les autres attributs des fenêtres."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+msgid "Don't automatically remember details of transient windows."
+msgstr "Ne pas mémoriser automatiquement les détails des fenêtres temporaire."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Historique"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Quand le pointeur de la souris affecte-t-il le focus d'entrée."
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Le mode clic-focus transmet le clic à l'application."
+
+#: ../lisp/sawfish/wm/focus.jl:60
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr ""
+"Descendre la fenêtre à sa position la plus basse autorisée dans\n"
+"l'ordre d'empilement."
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Style de cadres par défaut :"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "Recharger automatiquement les thèmes quand ils sont mis à jour."
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Police par défaut : \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -292,6 +581,92 @@ msgstr "Web GNOME..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "À propos de GNOME..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "Table des touches contenant les raccourcis actifs partout."
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand une\n"
+"fenêtre cliente a le focus."
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus de la fenêtre source (ou quand aucune fenêtre n'a le focus)."
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du titre d'une fenêtre. (Seuls les raccourcis-souris sont testés\n"
+"dans cette table.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus de la bordure d'une fenêtre. (Seuls les raccourcis souris sont\n"
+"testés dans cette table.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du bouton fermer d'une fenêtre. (Seuls les raccourcis souris sont\n"
+"testés dans cette table.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du bouton icônifier d'une fenêtre. (Seuls les raccourcis souris\n"
+"sont testés dans cette table.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du bouton maximiser d'une fenêtre. (Seuls les raccourcis souris\n"
+"sont testés dans cette table.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du bouton menu d'une fenêtre. (Seuls les raccourcis souris sont\n"
+"testés dans cette table.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Table des touches contenant les raccourcis actifs quand le pointeur est\n"
+"au-dessus du bouton ombré d'une fenêtre. (Seuls les raccourcis souris sont\n"
+"testés dans cette table.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
+"Touche(s) modificatrice utilisée(s) pour les raccourcis clavier par défaut."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -438,6 +813,42 @@ msgstr "_Tous les paramètres"
 msgid "Edit theme..."
 msgstr "Éditer le thème..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Méthode de placement des fenêtres : \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "Méthode de placement des boîtes de dialogue : \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+#, fuzzy
+msgid "Distance between successive placements in stagger mode."
+msgstr "Distance entre les placements successif dans le mode `stagger'."
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Empilement"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Garder les fenêtres temporaires empilées au-dessus : \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Icônifier une fenêtre supprime aussi : \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Restaurer une fenêtre restaure aussi : \\w"
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Collant"
@@ -463,9 +874,23 @@ msgstr "Dans la liste des fenêtres"
 msgid "In _task list"
 msgstr "Dans la liste des tâches GNOME"
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr ""
+"Bloquer la taille et la position d'une fenêtre pendant que la\n"
+"fenêtre est maximisée."
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "_Ombré"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr "Donner le focus à l'application lors du premier affichage."
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+msgid "Unshade selected windows."
+msgstr "Désombrer la fenêtre sélectionnée."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -478,6 +903,19 @@ msgstr "Appuyer sur une touche..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[citer]"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+#, fuzzy
+msgid "The program used to play audio samples."
+msgstr ""
+"Le programme utilisé pour jouer les échantillons sonores. Si non définit,\n"
+"le support interne d'ESD est utilisé."
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr ""
+"La table des touches contenant les raccourcis actifs lorsque\n"
+"l'utilisateur entre une chaîne."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -493,6 +931,36 @@ msgstr "Espace de travail %d"
 msgid "Workspace:"
 msgstr "Espace de travail :"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr "Icônifier une fenêtre, icônifie aussi le : \\w"
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Visuel"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Déplacer le groupe dans le visuel courant"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Colonne :"
@@ -501,9 +969,53 @@ msgstr "Colonne :"
 msgid "Row:"
 msgstr "Ligne :"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Mettre au premier plan les fenêtres lorsqu'elles ont le focus."
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Afficher le menu contenant la liste de tous les espaces de travail."
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr "Afficher le menu contenant la liste de tous les espaces de travail."
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Nom des espaces de travail"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 msgid "_Insert workspace"
@@ -790,18 +1302,6 @@ msgstr "Page Web de Sawfish"
 #~ msgid "Border width of bar images."
 #~ msgstr "Largeur de la bordure de la barre d'images."
 
-#~ msgid "Window Cycling"
-#~ msgstr "Rotation des fenêtres"
-
-#~ msgid "Sound"
-#~ msgstr "Sons"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Propriétés des fenêtres"
-
-#~ msgid "Tooltips"
-#~ msgstr "Bulles d'aide"
-
 #~ msgid "Next workspace window"
 #~ msgstr "Fenêtre de l'espace de travail suivant"
 
@@ -972,9 +1472,6 @@ msgstr "Page Web de Sawfish"
 #~ "Effacer toutes les fenêtres du groupe duquel appartient la fenêtre "
 #~ "courante."
 
-#~ msgid "Growing and packing of windows"
-#~ msgstr "Agrandissement et empilement des fenêtres"
-
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
 #~ "this on, you can use `unmaximize-window' or something similar to get\n"
@@ -1015,13 +1512,6 @@ msgstr "Page Web de Sawfish"
 #~ "« never » ne jamais cacher le pointeur."
 
 #~ msgid ""
-#~ "Whether to bump into fully obscured windows when growing or packing\n"
-#~ "windows."
-#~ msgstr ""
-#~ "Indique si on passe dans des fenêtres complètement obscurci lorsque l'on\n"
-#~ "agrandit ou empile les fenêtres."
-
-#~ msgid ""
 #~ "Whether to bump into windows on a different depth when growing or "
 #~ "packing\n"
 #~ "windows.\n"
@@ -1032,11 +1522,6 @@ msgstr "Page Web de Sawfish"
 #~ "agrandit ou les empile.\n"
 #~ "« maybe » signifie seulement les fenêtres ignorés dans d'autres "
 #~ "profondeurs."
-
-#~ msgid "Whether to bump into ignored windows when growing or packing."
-#~ msgstr ""
-#~ "Indique si on passe les fenêtres ignorées lorsqu'on les agrandit ou les "
-#~ "empile."
 
 #~ msgid "Grow window left"
 #~ msgstr "Agrandir la fenêtre sur la gauche"
@@ -1122,12 +1607,6 @@ msgstr "Page Web de Sawfish"
 #~ msgid "Help about"
 #~ msgstr "Aide à propos"
 
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr ""
-#~ "Nombre de pixel duquel il faut déplacer le pointeur avec les\n"
-#~ "commandes « move-cursor- »."
-
 #~ msgid "Move cursor right"
 #~ msgstr "Déplacer le curseur vers la droite"
 
@@ -1177,33 +1656,12 @@ msgstr "Page Web de Sawfish"
 #~ msgstr "Déplacer le curseur d'un pixel vers le bas."
 
 #, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr ""
-#~ "Mettre au premier plan les fenêtres lorsqu'elles n'ont pas le focus."
-
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Mettre au premier plan les fenêtres lorsqu'elles ont le focus."
-
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Afficher la position de la fenêtre pendant son déplacement."
-
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr ""
-#~ "Afficher les dimensions de la fenêtre pendant son redimensionnement."
-
-#, fuzzy
 #~ msgid "border"
 #~ msgstr "Bordure principale"
 
 #, fuzzy
 #~ msgid "border-grab"
 #~ msgstr "border-keymap"
-
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr ""
-#~ "Afficher les dimensions de la fenêtre pendant son redimensionnement."
 
 #~ msgid ""
 #~ "Distance in pixels before window edges align with each other.\n"
@@ -1400,45 +1858,11 @@ msgstr "Page Web de Sawfish"
 #~ msgid "Move window next"
 #~ msgstr "Déplacer la fenêtre suivante"
 
-#~ msgid "Move the window to the next viewport."
-#~ msgstr "Déplacer la fenêtre vers le visuel suivant."
-
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr ""
-#~ "Afficher les icônes et noms des fenêtres lors de la rotation à travers "
-#~ "les fenêtres."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Inclure les fenêtres icônifées lors de la rotation."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr ""
-#~ "Inclure les fenêtres de tous les espaces de travail lors de la rotation."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Inclure les fenêtres de tous les visuels lors de la rotation."
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Mettre au premier plan les fenêtres lorsqu'elles ont le focus."
-
 #~ msgid "cycle-keymap"
 #~ msgstr "cycle-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr ""
-#~ "Table des touches contenant les raccourcis actifs uniquement pendant les "
-#~ "opérations de rotation."
-
 #~ msgid "Terminal"
 #~ msgstr "Terminal"
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "Le programme lancé par la commande « xterm »."
-
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Paramètres passés à la commande « xterm »."
 
 #~ msgid "Xterm"
 #~ msgstr "Xterm"
@@ -1486,22 +1910,6 @@ msgstr "Page Web de Sawfish"
 #~ "Prompt for a command, execute it, and print any output to the screen."
 #~ msgstr "Attendre une commande, l'exécuter, et afficher la sortie à l'écran."
 
-#~ msgid "Move/Resize"
-#~ msgstr "Déplacer/Redimensionner"
-
-#~ msgid "Workspaces"
-#~ msgstr "Espaces de travail"
-
-#~ msgid "Bindings"
-#~ msgstr "Raccourcis"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Minimiser et maximiser"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Divers"
-
 #~ msgid "Customize"
 #~ msgstr "Personnaliser"
 
@@ -1511,26 +1919,13 @@ msgstr "Page Web de Sawfish"
 #~ msgid "3d hack"
 #~ msgstr "Logo 3d"
 
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Activer les effets audio pour les événements des fenêtres."
-
 #~ msgid "Auto-Raise"
 #~ msgstr "Mettre au premier plan automatiquement"
-
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Mettre au premier plan les fenêtres lorsqu'elles ont le focus."
 
 #~ msgid "Delay in milliseconds until focused windows are raised."
 #~ msgstr ""
 #~ "Délai en millisecondes avant que les fenêtres ayant le focus\n"
 #~ "soient mises au premier plan."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Basculement des bords"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr ""
-#~ "Passer au bureau suivant lorsque le pointeur atteint le bord de l'écran."
 
 #~ msgid "viewport"
 #~ msgstr "visuel"
@@ -1538,17 +1933,8 @@ msgstr "Page Web de Sawfish"
 #~ msgid "workspace"
 #~ msgstr "espace de travail"
 
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "En atteignant le bord de l'écran, sélectionner le prochain : \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Basculer uniquement lors du déplacement interactif d'une fenêtre."
-
 #~ msgid "Error Handling"
 #~ msgstr "Gestion des erreurs"
-
-#~ msgid "Beep when errors occur."
-#~ msgstr "Émettre un beep quand une erreur survient."
 
 #~ msgid "nowhere"
 #~ msgstr "nulle part"
@@ -1558,9 +1944,6 @@ msgstr "Page Web de Sawfish"
 
 #~ msgid "standard-error"
 #~ msgstr "erreur standard"
-
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Afficher les messages d'erreur sur : \\w"
 
 #~ msgid "Display errors"
 #~ msgstr "Affichage des erreurs"
@@ -1603,9 +1986,6 @@ msgstr "Page Web de Sawfish"
 
 #~ msgid "Workspace"
 #~ msgstr "Espace de travail"
-
-#~ msgid "Viewport"
-#~ msgstr "Visuel"
 
 #~ msgid "Depth"
 #~ msgstr "Profondeur"
@@ -1683,9 +2063,6 @@ msgstr "Page Web de Sawfish"
 #~ msgid "Ignore stacking requests"
 #~ msgstr "Ignorer la requête d'empilage"
 
-#~ msgid "Shade Hover"
-#~ msgstr "Shade Over"
-
 #~ msgid ""
 #~ "Enable shade-hover mode.\n"
 #~ "\n"
@@ -1695,43 +2072,6 @@ msgstr "Page Web de Sawfish"
 #~ "\n"
 #~ "(Enlever temporairement le focus de la fenêtre quand la souris passe "
 #~ "dessus)."
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Délai en millisecondes avant de dé-ombrer les fenêtres."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr ""
-#~ "Mettre au premier plan les fenêtres lorsqu'elles n'ont pas le focus."
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Afficher les bulles d'aide pour les cadres des fenêtres."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Afficher toute la documentation dans les bulles d'aide."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Délai en millisecondes avant de dé-ombrer les fenêtres."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Délai en millisecondes avant de dé-ombrer les fenêtres."
-
-#~ msgid "History"
-#~ msgstr "Historique"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Mémoriser automatiquement la position des fenêtres."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Mémoriser automatiquement la taille des fenêtres."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Mémoriser automatiquement les autres attributs des fenêtres."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr ""
-#~ "Ne pas mémoriser automatiquement les détails des fenêtres temporaire."
 
 #~ msgid "Window history save position"
 #~ msgstr "Historique des fenêtres sauver la position"
@@ -1823,27 +2163,6 @@ msgstr "Page Web de Sawfish"
 #~ "Envoyer la fenêtre dans l'espace de travail à droite de l'espace de "
 #~ "travail actuel."
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Quand le pointeur de la souris affecte-t-il le focus d'entrée."
-
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "Le mode clic-focus transmet le clic à l'application."
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr ""
-#~ "Descendre la fenêtre à sa position la plus basse autorisée dans\n"
-#~ "l'ordre d'empilement."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Style de cadres par défaut :"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Recharger automatiquement les thèmes quand ils sont mis à jour."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Police par défaut : \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Éditer le style de cadre"
 
@@ -1853,116 +2172,32 @@ msgstr "Page Web de Sawfish"
 #~ msgid "global-keymap"
 #~ msgstr "global-keymap"
 
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Table des touches contenant les raccourcis actifs partout."
-
 #~ msgid "window-keymap"
 #~ msgstr "window-keymap"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr ""
-#~ "Table des touches contenant les raccourcis actifs quand une\n"
-#~ "fenêtre cliente a le focus."
 
 #~ msgid "root-window-keymap"
 #~ msgstr "root-window-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-#~ "au-dessus de la fenêtre source (ou quand aucune fenêtre n'a le focus)."
-
 #~ msgid "title-keymap"
 #~ msgstr "title-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-#~ "au-dessus du titre d'une fenêtre. (Seuls les raccourcis-souris sont "
-#~ "testés\n"
-#~ "dans cette table.)"
 
 #~ msgid "border-keymap"
 #~ msgstr "border-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-#~ "au-dessus de la bordure d'une fenêtre. (Seuls les raccourcis souris sont\n"
-#~ "testés dans cette table.)"
-
 #~ msgid "close-button-keymap"
 #~ msgstr "close-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-#~ "au-dessus du bouton fermer d'une fenêtre. (Seuls les raccourcis souris "
-#~ "sont\n"
-#~ "testés dans cette table.)"
 
 #~ msgid "iconify-button-keymap"
 #~ msgstr "iconify-button-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-#~ "au-dessus du bouton icônifier d'une fenêtre. (Seuls les raccourcis "
-#~ "souris\n"
-#~ "sont testés dans cette table.)"
-
 #~ msgid "maximize-button-keymap"
 #~ msgstr "maximize-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-#~ "au-dessus du bouton maximiser d'une fenêtre. (Seuls les raccourcis "
-#~ "souris\n"
-#~ "sont testés dans cette table.)"
 
 #~ msgid "menu-button-keymap"
 #~ msgstr "menu-button-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-#~ "au-dessus du bouton menu d'une fenêtre. (Seuls les raccourcis souris "
-#~ "sont\n"
-#~ "testés dans cette table.)"
-
 #~ msgid "shade-button-keymap"
 #~ msgstr "shade-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Table des touches contenant les raccourcis actifs quand le pointeur est\n"
-#~ "au-dessus du bouton ombré d'une fenêtre. (Seuls les raccourcis souris "
-#~ "sont\n"
-#~ "testés dans cette table.)"
-
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr ""
-#~ "Touche(s) modificatrice utilisée(s) pour les raccourcis clavier par "
-#~ "défaut."
 
 #~ msgid "Popup window menu"
 #~ msgstr "Popup le menu des fenêtres"
@@ -1982,23 +2217,8 @@ msgstr "Page Web de Sawfish"
 #~ msgid "Display the applications menu."
 #~ msgstr "Afficher le menu des applications."
 
-#~ msgid "Distance between successive placements in `stagger' placement mode."
-#~ msgstr "Distance entre les placements successif dans le mode `stagger'."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Méthode de placement des fenêtres : \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Méthode de placement des boîtes de dialogue : \\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Empilement"
-
 #~ msgid "parents"
 #~ msgstr "parent"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Garder les fenêtres temporaires empilées au-dessus : \\w"
 
 #~ msgid "Raise single window"
 #~ msgstr "Mettre au premier plan une simple fenêtre"
@@ -2045,12 +2265,6 @@ msgstr "Page Web de Sawfish"
 
 #~ msgid "group"
 #~ msgstr "groupe"
-
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Icônifier une fenêtre supprime aussi : \\w"
-
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr "Restaurer une fenêtre restaure aussi : \\w"
 
 #~ msgid "Iconify window"
 #~ msgstr "Icônifier la fenêtre"
@@ -2135,11 +2349,6 @@ msgstr "Page Web de Sawfish"
 #, fuzzy
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr "Intervertir si la fenêtre est incluse dans la liste des fenêtres."
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr ""
-#~ "Bloquer la taille et la position d'une fenêtre pendant que la\n"
-#~ "fenêtre est maximisée."
 
 #~ msgid "Maximize window"
 #~ msgstr "Maximiser la fenêtre"
@@ -2298,9 +2507,6 @@ msgstr "Page Web de Sawfish"
 #~ "Basculer l'état d'ombrage de la fenêtre (seul la barre de titre est "
 #~ "affichée)."
 
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Donner le focus à l'application lors du premier affichage."
-
 #~ msgid "Raise window and transients"
 #~ msgstr "Mettre au premier plan les fenêtres principale et provisoire"
 
@@ -2339,9 +2545,6 @@ msgstr "Page Web de Sawfish"
 #~ msgid "Insert workspace"
 #~ msgstr "Insérer un espace de travail"
 
-#~ msgid "Unshade selected windows."
-#~ msgstr "Désombrer la fenêtre sélectionnée."
-
 #~ msgid "Display window without focusing"
 #~ msgstr "Afficher la fenêtre sans la mettre en premier plan"
 
@@ -2379,25 +2582,8 @@ msgstr "Page Web de Sawfish"
 #~ "possédant le focus, en ignorant tous les raccourcis du gestionnaire de\n"
 #~ "fenêtres."
 
-#~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for "
-#~ "ESD is used."
-#~ msgstr ""
-#~ "Le programme utilisé pour jouer les échantillons sonores. Si non "
-#~ "définit,\n"
-#~ "le support interne d'ESD est utilisé."
-
 #~ msgid "prompt-keymap"
 #~ msgstr "prompt-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr ""
-#~ "La table des touches contenant les raccourcis actifs lorsque\n"
-#~ "l'utilisateur entre une chaîne."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Icônifier une fenêtre, icônifie aussi le : \\w"
 
 #~ msgid "Raise window"
 #~ msgstr "Mettre au premier plan la fenêtre"
@@ -2407,10 +2593,6 @@ msgstr "Page Web de Sawfish"
 
 #~ msgid "Raise lower window"
 #~ msgstr "Augmenter la diminution de la fenêtre"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Déplacer le groupe dans le visuel courant"
 
 #~ msgid "Activate viewport"
 #~ msgstr "Activer le visuel"
@@ -2519,10 +2701,6 @@ msgstr "Page Web de Sawfish"
 
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "Forcer la fenêtre courante à avoir un titre unique."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Afficher le menu contenant la liste de tous les espaces de travail."
 
 #~ msgid "Popup workspace list"
 #~ msgstr "Popup la liste des espaces de travail"

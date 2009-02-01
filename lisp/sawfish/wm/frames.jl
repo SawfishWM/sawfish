@@ -133,14 +133,14 @@ that overrides settings set elsewhere.")
     "Frame definition used for unframed windows.")
 
   (defcustom default-frame-style nil
-    "Default frame style:"
+    (_"Default frame style:")
     :type frame-style
     :widget-flags (expand-vertically)
     :group appearance
     :after-set (lambda () (after-setting-default-frame)))
 
   (defcustom reload-themes-when-changed t
-    "Automatically reload themes when they are updated."
+    (_"Automatically reload themes when they are updated.")
     :type boolean
     :group appearance)
 
@@ -208,7 +208,7 @@ deciding which frame type to ask a theme to generate.")
 ;;; defcustom's for some built-in variables
 
   (defcustom default-font nil
-    "Default font: \\w"
+    (_"Default font: \\w")
     :group appearance
     :type font
     :widget-flags (expand-horizontally)

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.HEAD.sk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2003-01-23 23:55+0100\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@kde.org>\n"
 "Language-Team: Slovak <sk-i18n@linux.sk>\n"
@@ -158,6 +158,29 @@ msgstr "nie"
 msgid "Match Window Properties"
 msgstr "Porovnať vlastnosti okna"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Prepínanie okien"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Zvuk"
+
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Okná"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Rady"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -168,37 +191,178 @@ msgstr "Index:"
 msgid "Command:"
 msgstr "Príkaz:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr "Zväčšovanie a zabalenie okna"
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Presunúť okno na nasledujúci pohľad."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Či sa má naraziť do neviditeľných okien pri zväčšovaní alebo balení okien."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+#, fuzzy
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+"Či sa má naraziť do ignorovaných okien pri zväčšovaní alebo balení okien."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr ""
+"Či sa má naraziť do ignorovaných okien pri zväčšovaní alebo balení okien."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
 msgstr "Roztiahnuť doľava"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 msgid "Grow right"
 msgstr "Roztiahnuť doprava"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 msgid "Grow up"
 msgstr "Roztiahnuť hore"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 msgid "Grow down"
 msgstr "Roztiahnuť dolu"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 msgid "Pack left"
 msgstr "Stiahnuť doľava"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 msgid "Pack right"
 msgstr "Stiahnuť doprava"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr "Stiahnuť hore"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr "Stiahnuť dolu"
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr "Počet bodov o ktoré posunúť kurzor v príkazoch `move-cursor-'."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Presunúť okná návrh pri rozbalení."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Presunúť okná návrh pri rozbalení."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Presunúť okná dopredu, keď získajú fokus."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr "Zobraziť aktuálnu pozíciu okna pri presune."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr "Zobraziť aktuálne rozmery okna pri zmene veľkosti."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Zobraziť aktuálne rozmery okna pri zmene veľkosti."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr "Zobraziť mená okien pri prepínaní medzi oknami dookola."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr "Prepínať aj medzi minimalizovanými oknami."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr "Prepínať medzi oknami na všetkých plochách."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr "Prepínať medzi oknami vo všetkých pohľadoch."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Presunúť okná dopredu, keď získajú fokus."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr "Klávesové skratky aktívne iba počas prepínania okien dookola."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr "Program spúšťaný príkazom 'xterm'."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+msgid "Arguments given to the `xterm' command."
+msgstr "Ďalšie argumenty predané príkazu 'xterm'."
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Fokus"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Presun/Zmena veľkosti"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Vzhľad"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Pracovné plochy"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Klávesové skratky"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Minimalizácia a maximalizácia"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Rôzne"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Umiestnenie"
+
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Zahrať zvukové efekty pre udalosti okien."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -208,21 +372,37 @@ msgstr "Udalosť"
 msgid "Audio file"
 msgstr "Zvukový súbor"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Okraje obrazovky"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr "Vybrať nasledujúcu plochu keď kurzor dosiahne okraj obrazovky."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Dosiahnutie okraja obrazovky vyberie ďalší: \\w"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Prepnúť obrazovku len pri interaktívnom presune okna."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr "Pri chybe zapípať."
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+msgid "Display error messages to: \\w"
+msgstr "Zobrazovať chybové správy v:\\w"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Žiadne chyby."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Umiestnenie"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Fokus"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Vzhľad"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -231,6 +411,52 @@ msgstr "Stav"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Iný"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+msgid "Shade Hover"
+msgstr "Auto-rozbaľovanie"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Pauza v milisekundách pred rozbalením okien."
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr "Presunúť okná návrh pri rozbalení."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Zobraziť rady pre rámy okien."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "Zobraziť úplnú dokumentáciu v rade."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Pauza v milisekundách pred rozbalením okien."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Pauza v milisekundách pred rozbalením okien."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -248,9 +474,59 @@ msgstr "Zapamätať si _atribúty"
 msgid "_Forget saved state"
 msgstr "_Zabudnúť uložený stav"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+msgid "History"
+msgstr "História"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Automaticky si zapamätať pozície okien."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Automaticky si zapamätať veľkosti okien."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Automaticky si zapamätať iné atribúty okien."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+msgid "Don't automatically remember details of transient windows."
+msgstr "Automaticky si nezapamätať detaily podriadených okien."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_História"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Kedy kurzor myši ovplyvňuje fokus vstupu."
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Mód zmeny fokusu pri kliknutí predáva kliknutie aj do okna."
+
+#: ../lisp/sawfish/wm/focus.jl:60
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Presunúť okno dozadu na najnižšiu úroveň."
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Štandardný štýl rámu:"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "Automaticky znovu načítať témy pri ich obnovení."
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Štandardné písmo: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -292,6 +568,82 @@ msgstr "GNOME WWW..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "O GNOME..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "Klávesové skratky aktívne všade."
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr "Klávesové skratky aktívne ak má klientské okno fokus."
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Klávesové skratky aktívne ak je kurzor nad plochou\n"
+"(alebo keď nemá žiadne okno fokus)."
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové skratky aktívne keď je kurzor nad titulkom okna.\n"
+"(Použijú sa len skratky myši.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové skratky aktívne keď je kurzor na okraji okna.\n"
+"(Použijú sa len skratky myši.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové skratky aktívne keď je kurzor nad zatváracím tlačidlom okna.\n"
+"(Použijú sa len skratky myši.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové skratky aktívne keď je kurzor nad minimalizačným tlačidlom okna.\n"
+"(Použijú sa len skratky myši.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové skratky aktívne keď je kurzor nad maximalizačným tlačidlom okna.\n"
+"(Použijú sa len skratky myši.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové skratky aktívne keď je kurzor nad tlačidlom menu okna.\n"
+"(Použijú sa len skratky myši.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Klávesové skratky aktívne keď je kurzor nad zabaľovacím tlačidlom okna.\n"
+"(Použijú sa len skratky myši.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Modifikátor použitý pre štandardné skratky."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -438,6 +790,42 @@ msgstr "_Všetky nastavenia"
 msgid "Edit theme..."
 msgstr "Upraviť tému..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Metóda umiestňovania okien:\\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "Metóda umiestňovania dialógov:\\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+#, fuzzy
+msgid "Distance between successive placements in stagger mode."
+msgstr "Vzdialenosť medzi nasledujúci umiestneniami v móde 'stagger'."
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Hromadenie"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Udržiavať podriadené okná nad: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Minimalizácia okna odstráni aj jeho: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Obnovenie po minimalizácii obnoví aj jeho: \\w"
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Prilepené"
@@ -463,9 +851,21 @@ msgstr "V zozname _okien"
 msgid "In _task list"
 msgstr "V zozname úl_oh GNOME"
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr "Zamknúť pozíciu a veľkosť počas maximalizácie okien."
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "_Zabalené"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr "Pri prvom zobrazení okna aplikácie mu dať fokus."
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+msgid "Unshade selected windows."
+msgstr "Vybrané okná rozbaliť."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -478,6 +878,17 @@ msgstr "Stlačte kláves..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Apostrof]"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+#, fuzzy
+msgid "The program used to play audio samples."
+msgstr ""
+"Program používaný pre prehrávanie zvukov. Ak nie je nastavený, použije sa "
+"zabudovaná podpora ESD."
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr "Klávesové skratky aktívne pri vstupe textu od používateľa."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -493,6 +904,36 @@ msgstr "Pracovná plocha %d"
 msgid "Workspace:"
 msgstr "Plocha:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr "Pri presune okna dopredu sa presunú aj jeho: \\w"
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Pohľad"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Presunúť skupinu na aktuálny pohľad"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Stĺpec:"
@@ -501,9 +942,53 @@ msgstr "Stĺpec:"
 msgid "Row:"
 msgstr "Riadok:"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Presunúť okná dopredu, keď získajú fokus."
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Zobraziť menu so zoznamom všetkých pracovných plôch."
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr "Zobraziť menu so zoznamom všetkých pracovných plôch."
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Mená pracovných priestorov"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 msgid "_Insert workspace"
@@ -783,18 +1268,6 @@ msgstr "Domovská stránka Sawfish"
 #~ msgid "Border width of bar images."
 #~ msgstr "Šírka okraja obrázkov titulku."
 
-#~ msgid "Window Cycling"
-#~ msgstr "Prepínanie okien"
-
-#~ msgid "Sound"
-#~ msgstr "Zvuk"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Okná"
-
-#~ msgid "Tooltips"
-#~ msgstr "Rady"
-
 #~ msgid "Next workspace window"
 #~ msgstr "Nasledujúce okno plochy"
 
@@ -958,9 +1431,6 @@ msgstr "Domovská stránka Sawfish"
 #~ "Delete all windows in the group that the current window is a member of."
 #~ msgstr "Odstrániť všetky okná v skupine ako je aktuálne okno."
 
-#~ msgid "Growing and packing of windows"
-#~ msgstr "Zväčšovanie a zabalenie okna"
-
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
 #~ "this on, you can use `unmaximize-window' or something similar to get\n"
@@ -1001,12 +1471,6 @@ msgstr "Domovská stránka Sawfish"
 #~ "'nikdy' znamená, že kurzor nebude presunutý."
 
 #~ msgid ""
-#~ "Whether to bump into fully obscured windows when growing or packing\n"
-#~ "windows."
-#~ msgstr ""
-#~ "Či sa má naraziť do neviditeľných okien pri zväčšovaní alebo balení okien."
-
-#~ msgid ""
 #~ "Whether to bump into windows on a different depth when growing or "
 #~ "packing\n"
 #~ "windows.\n"
@@ -1015,10 +1479,6 @@ msgstr "Domovská stránka Sawfish"
 #~ "Či sa má naraziť do okien na ostatných úrovniach pri zväčšovaní\n"
 #~ "alebo balení okien. 'Možno' znamená, že sa majú ignorovať okná\n"
 #~ "na ostatných úrovnia."
-
-#~ msgid "Whether to bump into ignored windows when growing or packing."
-#~ msgstr ""
-#~ "Či sa má naraziť do ignorovaných okien pri zväčšovaní alebo balení okien."
 
 #~ msgid "Grow window left"
 #~ msgstr "Roztiahnuť okno doľava"
@@ -1125,10 +1585,6 @@ msgstr "Domovská stránka Sawfish"
 #~ msgid "Help about"
 #~ msgstr "Zobraziť O programe"
 
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr "Počet bodov o ktoré posunúť kurzor v príkazoch `move-cursor-'."
-
 #~ msgid "Move cursor right"
 #~ msgstr "Presunúť kurzor doprava"
 
@@ -1178,30 +1634,12 @@ msgstr "Domovská stránka Sawfish"
 #~ msgstr "Posunúť kurzor o jeden bod dolu."
 
 #, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Presunúť okná návrh pri rozbalení."
-
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Presunúť okná dopredu, keď získajú fokus."
-
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Zobraziť aktuálnu pozíciu okna pri presune."
-
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr "Zobraziť aktuálne rozmery okna pri zmene veľkosti."
-
-#, fuzzy
 #~ msgid "border"
 #~ msgstr "Titulok s okrajom"
 
 #, fuzzy
 #~ msgid "border-grab"
 #~ msgstr "mapa okraja"
-
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr "Zobraziť aktuálne rozmery okna pri zmene veľkosti."
 
 #~ msgid ""
 #~ "Distance in pixels before window edges align with each other.\n"
@@ -1384,46 +1822,17 @@ msgstr "Domovská stránka Sawfish"
 #~ msgid "Move window next"
 #~ msgstr "Presunúť okno na nasledujúcu"
 
-#~ msgid "Move the window to the next viewport."
-#~ msgstr "Presunúť okno na nasledujúci pohľad."
-
 #~ msgid "Set viewport linear"
 #~ msgstr "Nastaviť pohľad lineárny"
 
 #~ msgid "Set window viewport linear"
 #~ msgstr "Nastaviť pohľad okna lineárny"
 
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr "Zobraziť mená okien pri prepínaní medzi oknami dookola."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Prepínať aj medzi minimalizovanými oknami."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Prepínať medzi oknami na všetkých plochách."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Prepínať medzi oknami vo všetkých pohľadoch."
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Presunúť okná dopredu, keď získajú fokus."
-
 #~ msgid "cycle-keymap"
 #~ msgstr "mapa prepínania"
 
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr "Klávesové skratky aktívne iba počas prepínania okien dookola."
-
 #~ msgid "Terminal"
 #~ msgstr "Terminál"
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "Program spúšťaný príkazom 'xterm'."
-
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Ďalšie argumenty predané príkazu 'xterm'."
 
 #~ msgid "Xterm"
 #~ msgstr "Xterm"
@@ -1472,22 +1881,6 @@ msgstr "Domovská stránka Sawfish"
 #~ msgstr ""
 #~ "Vyzvať k zadaniu príkazu, vykonať ho a vytlačiť jeho výstup na obrazovku."
 
-#~ msgid "Move/Resize"
-#~ msgstr "Presun/Zmena veľkosti"
-
-#~ msgid "Workspaces"
-#~ msgstr "Pracovné plochy"
-
-#~ msgid "Bindings"
-#~ msgstr "Klávesové skratky"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Minimalizácia a maximalizácia"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Rôzne"
-
 #~ msgid "Customize"
 #~ msgstr "Prispôsobiť"
 
@@ -1497,23 +1890,11 @@ msgstr "Domovská stránka Sawfish"
 #~ msgid "3d hack"
 #~ msgstr "3d hack"
 
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Zahrať zvukové efekty pre udalosti okien."
-
 #~ msgid "Auto-Raise"
 #~ msgstr "Automaticky dopredu"
 
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Presunúť okná dopredu, keď získajú fokus."
-
 #~ msgid "Delay in milliseconds until focused windows are raised."
 #~ msgstr "Pauza v milisekundách pred presunom okien s fokusom dopredu."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Okraje obrazovky"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr "Vybrať nasledujúcu plochu keď kurzor dosiahne okraj obrazovky."
 
 #~ msgid "viewport"
 #~ msgstr "pohľad"
@@ -1521,17 +1902,8 @@ msgstr "Domovská stránka Sawfish"
 #~ msgid "workspace"
 #~ msgstr "pracovná plocha"
 
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "Dosiahnutie okraja obrazovky vyberie ďalší: \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Prepnúť obrazovku len pri interaktívnom presune okna."
-
 #~ msgid "Error Handling"
 #~ msgstr "Spracovanie chýb"
-
-#~ msgid "Beep when errors occur."
-#~ msgstr "Pri chybe zapípať."
 
 #~ msgid "nowhere"
 #~ msgstr "nikde"
@@ -1541,9 +1913,6 @@ msgstr "Domovská stránka Sawfish"
 
 #~ msgid "standard-error"
 #~ msgstr "štandardná chyba"
-
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Zobrazovať chybové správy v:\\w"
 
 #~ msgid "Display errors"
 #~ msgstr "Zobraziť chyby"
@@ -1586,9 +1955,6 @@ msgstr "Domovská stránka Sawfish"
 
 #~ msgid "Workspace"
 #~ msgstr "Pracovná plocha"
-
-#~ msgid "Viewport"
-#~ msgstr "Pohľad"
 
 #~ msgid "Depth"
 #~ msgstr "Hĺbka"
@@ -1666,9 +2032,6 @@ msgstr "Domovská stránka Sawfish"
 #~ msgid "Ignore stacking requests"
 #~ msgstr "Ignorovať požiadavky na hromadenie"
 
-#~ msgid "Shade Hover"
-#~ msgstr "Auto-rozbaľovanie"
-
 #~ msgid ""
 #~ "Enable shade-hover mode.\n"
 #~ "\n"
@@ -1677,41 +2040,6 @@ msgstr "Domovská stránka Sawfish"
 #~ "Povoliť automatické rozbaľovanie okien.\n"
 #~ "\n"
 #~ "(Dočasne rozbalí okná pokým na ne ukazuje kurzor.)"
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Pauza v milisekundách pred rozbalením okien."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Presunúť okná návrh pri rozbalení."
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Zobraziť rady pre rámy okien."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Zobraziť úplnú dokumentáciu v rade."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Pauza v milisekundách pred rozbalením okien."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Pauza v milisekundách pred rozbalením okien."
-
-#~ msgid "History"
-#~ msgstr "História"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Automaticky si zapamätať pozície okien."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Automaticky si zapamätať veľkosti okien."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Automaticky si zapamätať iné atribúty okien."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr "Automaticky si nezapamätať detaily podriadených okien."
 
 #~ msgid "Window history save position"
 #~ msgstr "Uložiť pozíciu v histórii okna"
@@ -1791,25 +2119,6 @@ msgstr "Domovská stránka Sawfish"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Poslať okno na pracovnú plochu vpravo od aktuálnej plochy"
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Kedy kurzor myši ovplyvňuje fokus vstupu."
-
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "Mód zmeny fokusu pri kliknutí predáva kliknutie aj do okna."
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr "Presunúť okno dozadu na najnižšiu úroveň."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Štandardný štýl rámu:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Automaticky znovu načítať témy pri ich obnovení."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Štandardné písmo: \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Upraviť štýl rámu"
 
@@ -1819,101 +2128,32 @@ msgstr "Domovská stránka Sawfish"
 #~ msgid "global-keymap"
 #~ msgstr "globálna mapa"
 
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Klávesové skratky aktívne všade."
-
 #~ msgid "window-keymap"
 #~ msgstr "mapa okna"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr "Klávesové skratky aktívne ak má klientské okno fokus."
 
 #~ msgid "root-window-keymap"
 #~ msgstr "mapa root okna"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Klávesové skratky aktívne ak je kurzor nad plochou\n"
-#~ "(alebo keď nemá žiadne okno fokus)."
-
 #~ msgid "title-keymap"
 #~ msgstr "mapa titulku"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Klávesové skratky aktívne keď je kurzor nad titulkom okna.\n"
-#~ "(Použijú sa len skratky myši.)"
 
 #~ msgid "border-keymap"
 #~ msgstr "mapa okraja"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Klávesové skratky aktívne keď je kurzor na okraji okna.\n"
-#~ "(Použijú sa len skratky myši.)"
-
 #~ msgid "close-button-keymap"
 #~ msgstr "mapa zatváracieho tlačidla"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Klávesové skratky aktívne keď je kurzor nad zatváracím tlačidlom okna.\n"
-#~ "(Použijú sa len skratky myši.)"
 
 #~ msgid "iconify-button-keymap"
 #~ msgstr "mapa minimalizačného tlačidla"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Klávesové skratky aktívne keď je kurzor nad minimalizačným tlačidlom "
-#~ "okna.\n"
-#~ "(Použijú sa len skratky myši.)"
-
 #~ msgid "maximize-button-keymap"
 #~ msgstr "mapa maximalizačného tlačidla"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Klávesové skratky aktívne keď je kurzor nad maximalizačným tlačidlom "
-#~ "okna.\n"
-#~ "(Použijú sa len skratky myši.)"
 
 #~ msgid "menu-button-keymap"
 #~ msgstr "mapa tlačidla menu"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Klávesové skratky aktívne keď je kurzor nad tlačidlom menu okna.\n"
-#~ "(Použijú sa len skratky myši.)"
-
 #~ msgid "shade-button-keymap"
 #~ msgstr "mapa zabaľovacieho tlačidla"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Klávesové skratky aktívne keď je kurzor nad zabaľovacím tlačidlom okna.\n"
-#~ "(Použijú sa len skratky myši.)"
-
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr "Modifikátor použitý pre štandardné skratky."
 
 #~ msgid "Popup window menu"
 #~ msgstr "Kontextové menu okna"
@@ -1933,23 +2173,8 @@ msgstr "Domovská stránka Sawfish"
 #~ msgid "Display the applications menu."
 #~ msgstr "Zobraziť menu aplikácií."
 
-#~ msgid "Distance between successive placements in `stagger' placement mode."
-#~ msgstr "Vzdialenosť medzi nasledujúci umiestneniami v móde 'stagger'."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Metóda umiestňovania okien:\\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Metóda umiestňovania dialógov:\\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Hromadenie"
-
 #~ msgid "parents"
 #~ msgstr "rodičia"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Udržiavať podriadené okná nad: \\w"
 
 #~ msgid "Raise single window"
 #~ msgstr "Dopredu jedno okno"
@@ -1992,12 +2217,6 @@ msgstr "Domovská stránka Sawfish"
 
 #~ msgid "group"
 #~ msgstr "skupina"
-
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Minimalizácia okna odstráni aj jeho: \\w"
-
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr "Obnovenie po minimalizácii obnoví aj jeho: \\w"
 
 #~ msgid "Iconify window"
 #~ msgstr "Minimalizovať okno"
@@ -2080,9 +2299,6 @@ msgstr "Domovská stránka Sawfish"
 #, fuzzy
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr "Prepnúť, či je okno zahrnuté v zozname okien."
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr "Zamknúť pozíciu a veľkosť počas maximalizácie okien."
 
 #~ msgid "Maximize window"
 #~ msgstr "Maximalizovať okno"
@@ -2237,9 +2453,6 @@ msgstr "Domovská stránka Sawfish"
 #~ "Toggle the shaded (only the title bar is displayed) state of the window."
 #~ msgstr "Prepnúť stav zabalené/rozbalené okno (viditeľný iba titulok)."
 
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Pri prvom zobrazení okna aplikácie mu dať fokus."
-
 #~ msgid "Raise window and transients"
 #~ msgstr "Okno a podriadené okná dopredu"
 
@@ -2277,9 +2490,6 @@ msgstr "Domovská stránka Sawfish"
 #~ msgid "Insert workspace"
 #~ msgstr "Vložiť plochu"
 
-#~ msgid "Unshade selected windows."
-#~ msgstr "Vybrané okná rozbaliť."
-
 #~ msgid "Display window without focusing"
 #~ msgstr "Zobraziť okno bez fokusu"
 
@@ -2316,22 +2526,8 @@ msgstr "Domovská stránka Sawfish"
 #~ "Poslať nasledujúcu klávesovú udalosť priamo klientskému oknu s fokusom,\n"
 #~ "ignorovať klávesové skratky nastavené v správcovi okien."
 
-#~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for "
-#~ "ESD is used."
-#~ msgstr ""
-#~ "Program používaný pre prehrávanie zvukov. Ak nie je nastavený, použije sa "
-#~ "zabudovaná podpora ESD."
-
 #~ msgid "prompt-keymap"
 #~ msgstr "mapa pri výzve"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr "Klávesové skratky aktívne pri vstupe textu od používateľa."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Pri presune okna dopredu sa presunú aj jeho: \\w"
 
 #~ msgid "Raise window"
 #~ msgstr "Okno dopredu"
@@ -2341,10 +2537,6 @@ msgstr "Domovská stránka Sawfish"
 
 #~ msgid "Raise lower window"
 #~ msgstr "Dopredu dozadu okno"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Presunúť skupinu na aktuálny pohľad"
 
 #~ msgid "Activate viewport"
 #~ msgstr "Aktivovať pohľad"
@@ -2451,10 +2643,6 @@ msgstr "Domovská stránka Sawfish"
 
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "Vynútiť si jednoznačný titulok okna."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Zobraziť menu so zoznamom všetkých pracovných plôch."
 
 #~ msgid "Popup workspace list"
 #~ msgstr "Presunúť plochu doľava"

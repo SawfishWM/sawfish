@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2002-09-29 00:15+0200\n"
 "Last-Translator: Sava Chankov <sava@fmi.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -156,6 +156,29 @@ msgstr "не"
 msgid "Match Window Properties"
 msgstr "Провери за съвпадение настройките на прозорец"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Обхождане на прозорците"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Звук"
+
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Съвпадащи прозорци"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Подсещания"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -166,37 +189,183 @@ msgstr "Индекс:"
 msgid "Command:"
 msgstr "Команда:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr "Увеличаване и опаковане на прозорци"
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Премества прозореца в следващата област за преглед."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Дали да се блъска в напълно засенчени прозорци при увеличаване или\n"
+"опаковане на прозорци."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+#, fuzzy
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+"Дали да се блъска в игнорирани прозорци при увеличаване \n"
+"или опаковане."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr ""
+"Дали да се блъска в игнорирани прозорци при увеличаване \n"
+"или опаковане."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
 msgstr "Увеличава наляво"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 msgid "Grow right"
 msgstr "Увеличава надясно"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 msgid "Grow up"
 msgstr "Увеличава прозореца нагоре"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 msgid "Grow down"
 msgstr "Увеличава надолу"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 msgid "Pack left"
 msgstr "Опакова наляво"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 msgid "Pack right"
 msgstr "Опакова надясно"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr "Опакова нагоре"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr "Опакова надолу"
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr ""
+"Брой пиксели за преместине на указателя в командите 'преместване на "
+"показалец'"
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Вдигни прозорците, когато са отвити от лентата."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Вдигни прозорците, когато са отвити от лентата."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Издига прозорци когато са фокусирани."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr "Показва текущата позиция на прозореца при преместване"
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr "Показва текущия размер на прозореца при промяната му."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Показва текущия размер на прозореца при промяната му."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr "Показва иконите на прозорците при обхождането им."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr "Включва иконизираните прозорци при обхождането им."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr "Включва прозорците на всички раб. площи при обхождането им."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr "Включва прозорците на всички раб. области при обхождането им."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Издига прозорци когато са фокусирани."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr "Клавишна карта, съдържаща комбинации, активни само при обхождането им."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr "Програмата се стартира чрез команда `xterm'."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+msgid "Arguments given to the `xterm' command."
+msgstr "Аргументи, предавани на командата `xterm'."
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Фокус"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Премести/Преоразмери"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Външен вид"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Работни площи"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Клавишна комбинация"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Минимизира/Максимизира"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Разни"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Разположение"
+
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Включва звуков ефект за събития на прозорец."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -206,21 +375,37 @@ msgstr "Събитие"
 msgid "Audio file"
 msgstr "Аудио файл"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Обръщане на края"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr "Избор на следваща раб. площ когато показалеца достигне края на екрана."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Съприкосновение с края на екрана избира следващото: \\w"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Преобръщай само при интерактивно движение на прозорец."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr "Бибипка при грешка."
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+msgid "Display error messages to: \\w"
+msgstr "Покажи съобщенията за грешки на: \\w"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Няма грешки."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Разположение"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Фокус"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Външен вид"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -229,6 +414,52 @@ msgstr "Състояние"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Други"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+msgid "Shade Hover"
+msgstr "Временно свиване към заглавието"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Закъснение в милисекунди при разтворяне на свит към заглавие прозрец."
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr "Вдигни прозорците, когато са отвити от лентата."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Показва подсещане за рамките на прозорци."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "Показва пълната документация в подсещанията."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Закъснение в милисекунди при разтворяне на свит към заглавие прозрец."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Закъснение в милисекунди при разтворяне на свит към заглавие прозрец."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -246,9 +477,59 @@ msgstr "_Запомня атрибутите"
 msgid "_Forget saved state"
 msgstr "За_бравя запазеното състояние"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+msgid "History"
+msgstr "_История"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Автоматично запомня позицията на прозореца."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Автоматично запомня размера на прозореца."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Автоматично запомня други атрибути на прозореца."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+msgid "Don't automatically remember details of transient windows."
+msgstr "Не запомня автоматично подробности за временните прозорци."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_История"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Кога показалецът на мишката влияе на фокуса."
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Режимът щракни-за-да-фокусираш предава щракването на приложението"
+
+#: ../lisp/sawfish/wm/focus.jl:60
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Снижи единичен прозорец до неговата най-ниска позволена позиция."
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Подразбиращ се стил на рамка:"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "Автоматично презареди теми когато са обновени."
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Шрифт по подразбиране: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -290,6 +571,96 @@ msgstr "GNOME WWW..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "Относно GNOME..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "Клавишна комбинация, съдържаща обвързаности, активни навсякъде."
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"Клавишна комбинация, съдържа обвързаност, която е активна когато е фокусиран "
+"клиентски прозорец."
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в основният прозорец (или прозореца е фокусиран)."
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в заглавието на прозорец."
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в рамката на прозорец."
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в бутона за затваряне на прозорец."
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в бутона-икона на прозорец."
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в бутона за максимализиране прозорец."
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна когато указателя "
+"е\n"
+" в бутона за меню на прозорец."
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Клавишна комбинация, съдържаща обвързаност, която е активна, когато "
+"показалецът \n"
+"е в бутона за свиване на прозорец. (В тази клавишна комбинация се оценяват "
+"се само обвързвания с мишката)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+#, fuzzy
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
+"Клавиш-модификатор използван за подразбиращ се за препратка на мениджъра на "
+"прозорци."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -439,6 +810,44 @@ msgstr "Всички настройки"
 msgid "Edit theme..."
 msgstr "Редактирай тема..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Метод за разполагане на прозорци: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "Метод за разполагане на диалогови прозорци: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+#, fuzzy
+msgid "Distance between successive placements in stagger mode."
+msgstr ""
+"Разстояние между последователните позиции в 'клатушкащ се' режим на "
+"позициониране."
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Натрупване"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Запазва подчинените прозорци над: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Минимизирането на  прозорец премахва неговия: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Деминимизирането на прозорец възстановява неговия: \\w"
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Прилепен"
@@ -464,9 +873,21 @@ msgstr "В списъка на прозорци"
 msgid "In _task list"
 msgstr "В списъка от задачи на G_NOME"
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr "Фиксира позицията и размера докато прозорците са максимализирани"
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "_Свива към заглавието"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr "Фокусирай прозорците, когато се появяват за първи път"
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+msgid "Unshade selected windows."
+msgstr "Разтваря свити към заглавието прозорци когато са избрани."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -479,6 +900,19 @@ msgstr "Натиснете клавиш..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Кавичка]"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+#, fuzzy
+msgid "The program used to play audio samples."
+msgstr ""
+"Програма за слушане на аудио мострите. Ако не е нагласена се използва "
+"вградената поддръжка на ESD."
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr ""
+"Карта на клавишите, съдържаща активните клавишни комбинации при прочитане на "
+"низ от потребителя."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -494,6 +928,36 @@ msgstr "Работен екран %d"
 msgid "Workspace:"
 msgstr "Раб. площ:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr "Когато вдигаш прозорец, също вдигни и: \\w"
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Област на преглед"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Премести  групата на текущата област за преглед"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Колона:"
@@ -502,9 +966,53 @@ msgstr "Колона:"
 msgid "Row:"
 msgstr "Ред:"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Издига прозорци когато са фокусирани."
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Покажи менюто със списък на всички работни площи."
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr "Покажи менюто със списък на всички работни площи."
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Имена на раб. площи"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 #, fuzzy
@@ -789,18 +1297,6 @@ msgstr "Страница на Sawfish"
 #~ msgid "Border width of bar images."
 #~ msgstr "Ширина на рамката за показване на текст."
 
-#~ msgid "Window Cycling"
-#~ msgstr "Обхождане на прозорците"
-
-#~ msgid "Sound"
-#~ msgstr "Звук"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Съвпадащи прозорци"
-
-#~ msgid "Tooltips"
-#~ msgstr "Подсещания"
-
 #~ msgid "Next workspace window"
 #~ msgstr "Следващ прозорец на раб. площ"
 
@@ -965,9 +1461,6 @@ msgstr "Страница на Sawfish"
 #~ msgstr ""
 #~ "Изтрива всички прозорци в групата, на които е член текущият прозорец."
 
-#~ msgid "Growing and packing of windows"
-#~ msgstr "Увеличаване и опаковане на прозорци"
-
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
 #~ "this on, you can use `unmaximize-window' or something similar to get\n"
@@ -1007,13 +1500,6 @@ msgstr "Страница на Sawfish"
 #~ "`никога' значи Не мести показалеца!"
 
 #~ msgid ""
-#~ "Whether to bump into fully obscured windows when growing or packing\n"
-#~ "windows."
-#~ msgstr ""
-#~ "Дали да се блъска в напълно засенчени прозорци при увеличаване или\n"
-#~ "опаковане на прозорци."
-
-#~ msgid ""
 #~ "Whether to bump into windows on a different depth when growing or "
 #~ "packing\n"
 #~ "windows.\n"
@@ -1022,11 +1508,6 @@ msgstr "Страница на Sawfish"
 #~ "Дали да се блъска в прозорци от различна дълбочина при увеличаване\n"
 #~ "или опаковане на прозорци.\n"
 #~ "`може би' значи само избягвай прозорци от друга дълбочина."
-
-#~ msgid "Whether to bump into ignored windows when growing or packing."
-#~ msgstr ""
-#~ "Дали да се блъска в игнорирани прозорци при увеличаване \n"
-#~ "или опаковане."
 
 #~ msgid "Grow window left"
 #~ msgstr "Увеличава прозореца наляво"
@@ -1133,12 +1614,6 @@ msgstr "Страница на Sawfish"
 #~ msgid "Help about"
 #~ msgstr "Помощ за"
 
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr ""
-#~ "Брой пиксели за преместине на указателя в командите 'преместване на "
-#~ "показалец'"
-
 #~ msgid "Move cursor right"
 #~ msgstr "Преместване на показалец вдясно"
 
@@ -1196,30 +1671,12 @@ msgstr "Страница на Sawfish"
 #~ msgstr "Преместване на показалец на долу на 1 пиксел"
 
 #, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Вдигни прозорците, когато са отвити от лентата."
-
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Издига прозорци когато са фокусирани."
-
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Показва текущата позиция на прозореца при преместване"
-
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr "Показва текущия размер на прозореца при промяната му."
-
-#, fuzzy
 #~ msgid "border"
 #~ msgstr "Горна рамка"
 
 #, fuzzy
 #~ msgid "border-grab"
 #~ msgstr "клавишна комбинация на границата"
-
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr "Показва текущия размер на прозореца при промяната му."
 
 #~ msgid ""
 #~ "Distance in pixels before window edges align with each other.\n"
@@ -1420,47 +1877,17 @@ msgstr "Страница на Sawfish"
 #~ msgid "Move window next"
 #~ msgstr "Премества прозореца в следващата област"
 
-#~ msgid "Move the window to the next viewport."
-#~ msgstr "Премества прозореца в следващата област за преглед."
-
 #~ msgid "Set viewport linear"
 #~ msgstr "Направи областта за преглед линия"
 
 #~ msgid "Set window viewport linear"
 #~ msgstr "Направи областта за преглед на прозорци линейна"
 
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr "Показва иконите на прозорците при обхождането им."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Включва иконизираните прозорци при обхождането им."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Включва прозорците на всички раб. площи при обхождането им."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Включва прозорците на всички раб. области при обхождането им."
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Издига прозорци когато са фокусирани."
-
 #~ msgid "cycle-keymap"
 #~ msgstr "клавишна карта-преминаване"
 
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr ""
-#~ "Клавишна карта, съдържаща комбинации, активни само при обхождането им."
-
 #~ msgid "Terminal"
 #~ msgstr "Терминал"
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "Програмата се стартира чрез команда `xterm'."
-
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Аргументи, предавани на командата `xterm'."
 
 #~ msgid "Xterm"
 #~ msgstr "Xterm"
@@ -1508,22 +1935,6 @@ msgstr "Страница на Sawfish"
 #~ "Prompt for a command, execute it, and print any output to the screen."
 #~ msgstr "Пита за команда, изпълява я, и печата нейния изход на екрана."
 
-#~ msgid "Move/Resize"
-#~ msgstr "Премести/Преоразмери"
-
-#~ msgid "Workspaces"
-#~ msgstr "Работни площи"
-
-#~ msgid "Bindings"
-#~ msgstr "Клавишна комбинация"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Минимизира/Максимизира"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Разни"
-
 #~ msgid "Customize"
 #~ msgstr "Настройки"
 
@@ -1533,24 +1944,11 @@ msgstr "Страница на Sawfish"
 #~ msgid "3d hack"
 #~ msgstr "3D хакване"
 
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Включва звуков ефект за събития на прозорец."
-
 #~ msgid "Auto-Raise"
 #~ msgstr "Автоматично издига"
 
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Издига прозорци когато са фокусирани."
-
 #~ msgid "Delay in milliseconds until focused windows are raised."
 #~ msgstr "Закъснение в милисекуди при издигане на фокусирани прозорци."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Обръщане на края"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr ""
-#~ "Избор на следваща раб. площ когато показалеца достигне края на екрана."
 
 #~ msgid "viewport"
 #~ msgstr "област на преглед"
@@ -1558,17 +1956,8 @@ msgstr "Страница на Sawfish"
 #~ msgid "workspace"
 #~ msgstr "раб. площ"
 
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "Съприкосновение с края на екрана избира следващото: \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Преобръщай само при интерактивно движение на прозорец."
-
 #~ msgid "Error Handling"
 #~ msgstr "Обработка на грешка"
-
-#~ msgid "Beep when errors occur."
-#~ msgstr "Бибипка при грешка."
 
 #~ msgid "nowhere"
 #~ msgstr "никъде"
@@ -1578,9 +1967,6 @@ msgstr "Страница на Sawfish"
 
 #~ msgid "standard-error"
 #~ msgstr "стандартен поток за грешки"
-
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Покажи съобщенията за грешки на: \\w"
 
 #~ msgid "Display errors"
 #~ msgstr "Показва грешки"
@@ -1623,9 +2009,6 @@ msgstr "Страница на Sawfish"
 
 #~ msgid "Workspace"
 #~ msgstr "раб. площ"
-
-#~ msgid "Viewport"
-#~ msgstr "Област на преглед"
 
 #~ msgid "Depth"
 #~ msgstr "Дълбочина"
@@ -1703,9 +2086,6 @@ msgstr "Страница на Sawfish"
 #~ msgid "Ignore stacking requests"
 #~ msgstr "Игнорирай заявките за трупане."
 
-#~ msgid "Shade Hover"
-#~ msgstr "Временно свиване към заглавието"
-
 #~ msgid ""
 #~ "Enable shade-hover mode.\n"
 #~ "\n"
@@ -1714,44 +2094,6 @@ msgstr "Страница на Sawfish"
 #~ "Разреши режим 'свиване във въздуха'.\n"
 #~ "\n"
 #~ "(Временно развива прозорците, ако мишия показалец е над тях.) "
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr ""
-#~ "Закъснение в милисекунди при разтворяне на свит към заглавие прозрец."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Вдигни прозорците, когато са отвити от лентата."
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Показва подсещане за рамките на прозорци."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Показва пълната документация в подсещанията."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr ""
-#~ "Закъснение в милисекунди при разтворяне на свит към заглавие прозрец."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr ""
-#~ "Закъснение в милисекунди при разтворяне на свит към заглавие прозрец."
-
-#~ msgid "History"
-#~ msgstr "_История"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Автоматично запомня позицията на прозореца."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Автоматично запомня размера на прозореца."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Автоматично запомня други атрибути на прозореца."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr "Не запомня автоматично подробности за временните прозорци."
 
 #~ msgid "Window history save position"
 #~ msgstr "Запазва атрибутите на прозореца"
@@ -1847,25 +2189,6 @@ msgstr "Страница на Sawfish"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Създава нова раб. площ преди текущата"
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Кога показалецът на мишката влияе на фокуса."
-
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "Режимът щракни-за-да-фокусираш предава щракването на приложението"
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr "Снижи единичен прозорец до неговата най-ниска позволена позиция."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Подразбиращ се стил на рамка:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Автоматично презареди теми когато са обновени."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Шрифт по подразбиране: \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Редактирай стила на рамката"
 
@@ -1875,113 +2198,32 @@ msgstr "Страница на Sawfish"
 #~ msgid "global-keymap"
 #~ msgstr "глобална клавишна комбинация"
 
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Клавишна комбинация, съдържаща обвързаности, активни навсякъде."
-
 #~ msgid "window-keymap"
 #~ msgstr "клавишна комбинация на прозореца"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr ""
-#~ "Клавишна комбинация, съдържа обвързаност, която е активна когато е "
-#~ "фокусиран клиентски прозорец."
 
 #~ msgid "root-window-keymap"
 #~ msgstr "клавишна комбинация на главния прозорец"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Клавишна комбинация, съдържаща обвързаност, която е активна когато "
-#~ "указателя е\n"
-#~ " в основният прозорец (или прозореца е фокусиран)."
-
 #~ msgid "title-keymap"
 #~ msgstr "клавишна комбинация на заглавието"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Клавишна комбинация, съдържаща обвързаност, която е активна когато "
-#~ "указателя е\n"
-#~ " в заглавието на прозорец."
 
 #~ msgid "border-keymap"
 #~ msgstr "клавишна комбинация на границата"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Клавишна комбинация, съдържаща обвързаност, която е активна когато "
-#~ "указателя е\n"
-#~ " в рамката на прозорец."
-
 #~ msgid "close-button-keymap"
 #~ msgstr "клавишна комбинация на бутона за затваряне"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Клавишна комбинация, съдържаща обвързаност, която е активна когато "
-#~ "указателя е\n"
-#~ " в бутона за затваряне на прозорец."
 
 #~ msgid "iconify-button-keymap"
 #~ msgstr "клавишна комбинация на бутона за минимизация"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Клавишна комбинация, съдържаща обвързаност, която е активна когато "
-#~ "указателя е\n"
-#~ " в бутона-икона на прозорец."
-
 #~ msgid "maximize-button-keymap"
 #~ msgstr "клавишна комбинация на бутона за максимизация"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Клавишна комбинация, съдържаща обвързаност, която е активна когато "
-#~ "указателя е\n"
-#~ " в бутона за максимализиране прозорец."
 
 #~ msgid "menu-button-keymap"
 #~ msgstr "клавишна комбинация на бутона за меню"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Клавишна комбинация, съдържаща обвързаност, която е активна когато "
-#~ "указателя е\n"
-#~ " в бутона за меню на прозорец."
-
 #~ msgid "shade-button-keymap"
 #~ msgstr "клавишна комбинация на бутона за свиване"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Клавишна комбинация, съдържаща обвързаност, която е активна, когато "
-#~ "показалецът \n"
-#~ "е в бутона за свиване на прозорец. (В тази клавишна комбинация се "
-#~ "оценяват се само обвързвания с мишката)"
-
-#, fuzzy
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr ""
-#~ "Клавиш-модификатор използван за подразбиращ се за препратка на мениджъра "
-#~ "на прозорци."
 
 #~ msgid "Popup window menu"
 #~ msgstr "Покажи меню на прозорец"
@@ -2001,25 +2243,8 @@ msgstr "Страница на Sawfish"
 #~ msgid "Display the applications menu."
 #~ msgstr "Показва менюто с приложения."
 
-#~ msgid "Distance between successive placements in `stagger' placement mode."
-#~ msgstr ""
-#~ "Разстояние между последователните позиции в 'клатушкащ се' режим на "
-#~ "позициониране."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Метод за разполагане на прозорци: \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Метод за разполагане на диалогови прозорци: \\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Натрупване"
-
 #~ msgid "parents"
 #~ msgstr "родители"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Запазва подчинените прозорци над: \\w"
 
 #~ msgid "Raise single window"
 #~ msgstr "Вдигни единичен прозорец"
@@ -2062,12 +2287,6 @@ msgstr "Страница на Sawfish"
 
 #~ msgid "group"
 #~ msgstr "група"
-
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Минимизирането на  прозорец премахва неговия: \\w"
-
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr "Деминимизирането на прозорец възстановява неговия: \\w"
 
 #~ msgid "Iconify window"
 #~ msgstr "Иконизира прозорец"
@@ -2159,9 +2378,6 @@ msgstr "Страница на Sawfish"
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr ""
 #~ "Превключва на това дали прозореца ще бъде в списъка на прозорци или не"
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr "Фиксира позицията и размера докато прозорците са максимализирани"
 
 #~ msgid "Maximize window"
 #~ msgstr "Максимализира прозорец"
@@ -2314,9 +2530,6 @@ msgstr "Страница на Sawfish"
 #~ msgstr ""
 #~ "Превключване на режимите свит (показва се само заглавието) и нормален."
 
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Фокусирай прозорците, когато се появяват за първи път"
-
 #~ msgid "Raise window and transients"
 #~ msgstr "Издига прозорец и неговите подчинени"
 
@@ -2353,9 +2566,6 @@ msgstr "Страница на Sawfish"
 #~ msgid "Insert workspace"
 #~ msgstr "Вмъкни раб. площ"
 
-#~ msgid "Unshade selected windows."
-#~ msgstr "Разтваря свити към заглавието прозорци когато са избрани."
-
 #~ msgid "Display window without focusing"
 #~ msgstr "Покажи прозореца без фокусиране"
 
@@ -2391,24 +2601,8 @@ msgstr "Страница на Sawfish"
 #~ "Изпраща следващото клавишно събитие към клиентския прозорец\n"
 #~ "на фокус, като игнорира значението му за прозоречния управител."
 
-#~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for "
-#~ "ESD is used."
-#~ msgstr ""
-#~ "Програма за слушане на аудио мострите. Ако не е нагласена се използва "
-#~ "вградената поддръжка на ESD."
-
 #~ msgid "prompt-keymap"
 #~ msgstr "промпт-клавишна карта"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr ""
-#~ "Карта на клавишите, съдържаща активните клавишни комбинации при прочитане "
-#~ "на низ от потребителя."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Когато вдигаш прозорец, също вдигни и: \\w"
 
 #~ msgid "Raise window"
 #~ msgstr "Вдигни прозорец"
@@ -2418,10 +2612,6 @@ msgstr "Страница на Sawfish"
 
 #~ msgid "Raise lower window"
 #~ msgstr "Вдигни снижи прозорец"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Премести  групата на текущата област за преглед"
 
 #~ msgid "Activate viewport"
 #~ msgstr "Активирай област за преглед"
@@ -2534,10 +2724,6 @@ msgstr "Страница на Sawfish"
 
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "Слага уникално заглавие на текущия прозорец."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Покажи менюто със списък на всички работни площи."
 
 #~ msgid "Popup workspace list"
 #~ msgstr "Покажи списъка на раб. площи"

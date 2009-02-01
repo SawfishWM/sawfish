@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish 0.99\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2003-09-06 12:57+0300\n"
 "Last-Translator: Tommi Vainikainen <Tommi.Vainikainen@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -157,6 +157,29 @@ msgstr "ei"
 msgid "Match Window Properties"
 msgstr "Täsmää ikkunoiden ominaisuuksiin"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Ikkunoiden selaus"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Äänet"
+
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Erikoiskoiskäsittely"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Vinkit"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -167,37 +190,177 @@ msgstr "Indeksi:"
 msgid "Command:"
 msgstr "Komento:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr "Ikkunoiden kasvatus ja pakkaus"
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Siirrä ikkuna seuraavaalle näyttöalueelle."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Törmätäänkö täysin piilotettuihin ikkunoihin kasvatettaessa tai pakatessa "
+"ikkunoita."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+#, fuzzy
+msgid "Whether to bump into windows on a different depth."
+msgstr "Törmätäänkö ohitettaviin ikkunoihin kasvatettaessa ja pakatessa."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr "Törmätäänkö ohitettaviin ikkunoihin kasvatettaessa ja pakatessa."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
 msgstr "Kasvata vasemmalle"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 msgid "Grow right"
 msgstr "Kasvata oikealle"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 msgid "Grow up"
 msgstr "Kasvata ylös"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 msgid "Grow down"
 msgstr "Kasvata alaspäin"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 msgid "Pack left"
 msgstr "Pakkaa vasemmalle"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 msgid "Pack right"
 msgstr "Pakkaa oikealle"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr "Pakkaa ylös"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr "Pakkaa alas"
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr "Osoittimen kulkema matka pikseleinä \"siirrä osoitinta\"-komennoissa."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Nosta ikkunat, kun rullaus avataan."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Nosta ikkunat, kun rullaus avataan."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Nosta ikkunat, kun ne kohdistetaan."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr "Näytä ikkunoiden sijainti niitä siirrettäessä."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr "Näytä ikkunoiden koko sitä muutettaessa."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Näytä ikkunoiden koko sitä muutettaessa."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr "Näytä ikkunoiden nimet ja kuvakkeet selauksen aikana."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr "Huomioi selatessa myös pienennetyt ikkunat."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr "Huomioi selatessa kaikkien työpöytien ikkunat."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr "Huomioi selatessa kaikkien työtilojen ikkunat."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Nosta ikkunat, kun ne kohdistetaan."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr "Näppäimet, jotka toimivat ikkunoiden selausoperaatioiden aikana."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr "Xterm-komennolla käynnistettävä ohjelma."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+msgid "Arguments given to the `xterm' command."
+msgstr "Xterm-komennolle annettavat valitsimet."
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Kohdistus"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Siirto ja koko"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Ulkonäkö"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Työpöydät"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Oikotiet"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Pienennys ja suurennus"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Sekalaiset"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Sijoittelu"
+
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Soita toimintoäänet ikkunatapahtumille."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -207,21 +370,37 @@ msgstr "Tapahtuma"
 msgid "Audio file"
 msgstr "Äänitiedosto"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Reunavaihto"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr "Valitse seuraava työpöytä, kun osoitin osuu ruudun reunaan."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Ruudun reunaan osuminen valitsee seuraavan: \\w"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Vaihda työpöytää vain ikkunaa siirtäessä."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr "Piippaa virheen sattuessa."
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+msgid "Display error messages to: \\w"
+msgstr "Minne virheilmoitukset näytetään: \\w"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Ei virheitä."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Sijoittelu"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Kohdistus"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Ulkonäkö"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -230,6 +409,52 @@ msgstr "Tila"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Muu"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+msgid "Shade Hover"
+msgstr "Älykäs rullaus"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Viive [ms] ennen rullauksen avaamista."
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr "Nosta ikkunat, kun rullaus avataan."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Näytä vinkit ikkunoiden kehyksille."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "Näytä vinkeissä täysi ohjeistus."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Viive [ms] ennen rullauksen avaamista."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Viive [ms] ennen rullauksen avaamista."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -247,9 +472,59 @@ msgstr "Muista _asetukset"
 msgid "_Forget saved state"
 msgstr "_Unohda kaikki"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+msgid "History"
+msgstr "Historia"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Tallenna ikkunan sijainti automaattisesti."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Tallenna ikkunan mitat automaattisesti."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Tallenna muut ikkunan ominaisuudet automaattisesti."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+msgid "Don't automatically remember details of transient windows."
+msgstr "Älä muista ali-ikkunoiden asetuksia."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Historia"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Milloin osoitin vaikuttaa kohdistukseen."
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Kohdista napsauttamalla välittää napsautuksen ohjelmalle."
+
+#: ../lisp/sawfish/wm/focus.jl:60
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Laske ikkuna sen pinoustason alimmalle sallitulle paikalle."
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Kehystyyli:"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "Lataa teemat uudelleen niiden päivityksen jälkeen."
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Kirjasinlaji: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -291,6 +566,80 @@ msgstr "GNOME WWW..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "Tietoja GNOME:sta..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "Aina aktiiviset näppäimet."
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr "Aktiiviset näppäimet ikkunan ollessa kohdistettu."
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr "Aktiiviset näppäimet osoittimen ollessa juuri-ikkunassa."
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Aktiiviset näppäimet osoittimen ollessa ikkunan otsikkopalkin yllä.\n"
+"Koskee vain hiiren nappeja."
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Aktiiviset näppäimet osoittimen ollessa ikkunan reunan yllä.\n"
+"Koskee vain hiiren nappeja."
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Aktiiviset näppäimet osoittimen ollessa ikkunan sulkemisnapin yllä.\n"
+"Koskee vain hiiren nappeja."
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Aktiiviset näppäimet osoittimen ollessa ikkunan pienennysnapin \n"
+"päällä. Koskee vain hiiren nappeja."
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Aktiiviset näppäimet osoittimen ollessa ikkunan suurennusnapin yllä.\n"
+"Koskee vain hiiren nappeja."
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Aktiiviset näppäimet osoittimen ollessa ikkunan valikkonapin yllä.\n"
+"Koskee vain hiiren nappeja."
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Aktiiviset näppäimet osoittimen ollessa ikkunan rullausnapin yllä.\n"
+"Koskee vain hiiren nappeja."
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Muunnosnäppäin/näppäimet, jota käytetään oletusoikoteihin."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -437,6 +786,43 @@ msgstr "_Kaikki asetukset"
 msgid "Edit theme..."
 msgstr "Muokkaa teemaa..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Ikkunoiden sijoittelutapa: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "Ali-ikkunoiden sijoittelutapa: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+#, fuzzy
+msgid "Distance between successive placements in stagger mode."
+msgstr ""
+"Onnistuneiden sijoitusten välimatka muihin sijoittelutavassa \"stagger\"."
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Pinous"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Pidä ali-ikkunat näiden yläpuolella: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Ikkunan piilottaminen poistaa myös sen: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Ikkunan palauttaminen palauttaa myös sen: \\w"
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Kiinnitys"
@@ -462,9 +848,21 @@ msgstr "_Ikkunalistalla"
 msgid "In _task list"
 msgstr "Gnomen _tehtävälistalla"
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr "Lukitse ikkunoiden koko ja sijainti suurennettaessa."
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "_Rullaus"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr "Kohdista ohjelmaikkunat, kun ne näytetään ensimmäistä kertaa."
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+msgid "Unshade selected windows."
+msgstr "Avaa ikkunoiden rullaus, kun ne valitaan."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -477,6 +875,17 @@ msgstr "Paina nappia..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Lainaus]"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+#, fuzzy
+msgid "The program used to play audio samples."
+msgstr ""
+"Äänitiedostojen soittamiseen käytettävä ohjelma. Jos määrittelemätön, "
+"käytetään sisäänrakennettua ESD-tukea."
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr "Näppäimet, jotka toimivat lukiessa syötettä käyttäjältä."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -492,6 +901,36 @@ msgstr "Työpöytä %d"
 msgid "Workspace:"
 msgstr "Työpöytä:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr "Ikkunan piilottaminen piilottaa myös: \\w"
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Työtila"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Siirrä ryhmä käytetylle näyttöalueelle"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Sarake:"
@@ -500,9 +939,53 @@ msgstr "Sarake:"
 msgid "Row:"
 msgstr "Rivi:"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Nosta ikkunat, kun ne kohdistetaan."
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Näytä kaikki työpöydät listaava valikko."
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr "Näytä kaikki työpöydät listaava valikko."
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Työpöytien nimet"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 msgid "_Insert workspace"
@@ -782,18 +1265,6 @@ msgstr "Sawfishin kotisivu"
 #~ msgid "Border width of bar images."
 #~ msgstr "Palkkikuvion reunojen leveys."
 
-#~ msgid "Window Cycling"
-#~ msgstr "Ikkunoiden selaus"
-
-#~ msgid "Sound"
-#~ msgstr "Äänet"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Erikoiskoiskäsittely"
-
-#~ msgid "Tooltips"
-#~ msgstr "Vinkit"
-
 #~ msgid "Next workspace window"
 #~ msgstr "Seuraava työpöydän ikkuna"
 
@@ -960,9 +1431,6 @@ msgstr "Sawfishin kotisivu"
 #~ "Delete all windows in the group that the current window is a member of."
 #~ msgstr "Sulje kaikki ikkunat ryhmästä, joka jäsen kohdistettu ikkuna on."
 
-#~ msgid "Growing and packing of windows"
-#~ msgstr "Ikkunoiden kasvatus ja pakkaus"
-
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
 #~ "this on, you can use `unmaximize-window' or something similar to get\n"
@@ -1003,13 +1471,6 @@ msgstr "Sawfishin kotisivu"
 #~ "\"ei koskaan\" ei siirrä osoitinta."
 
 #~ msgid ""
-#~ "Whether to bump into fully obscured windows when growing or packing\n"
-#~ "windows."
-#~ msgstr ""
-#~ "Törmätäänkö täysin piilotettuihin ikkunoihin kasvatettaessa tai pakatessa "
-#~ "ikkunoita."
-
-#~ msgid ""
 #~ "Whether to bump into windows on a different depth when growing or "
 #~ "packing\n"
 #~ "windows.\n"
@@ -1018,9 +1479,6 @@ msgstr "Sawfishin kotisivu"
 #~ "Törmätäänkö eri syvyydellä oleviin ikkunoihin kasvatettaessa tai "
 #~ "pakatessa ikkunoita.\n"
 #~ "\"ehkä\" tarkoittaa vain vältettäviä ikkunoita muissa syvyyksissä."
-
-#~ msgid "Whether to bump into ignored windows when growing or packing."
-#~ msgstr "Törmätäänkö ohitettaviin ikkunoihin kasvatettaessa ja pakatessa."
 
 #~ msgid "Grow window left"
 #~ msgstr "Kasvata ikkunaa vasemmalle"
@@ -1130,11 +1588,6 @@ msgstr "Sawfishin kotisivu"
 #~ msgid "Help about"
 #~ msgstr "Ohje näytä tietoja"
 
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr ""
-#~ "Osoittimen kulkema matka pikseleinä \"siirrä osoitinta\"-komennoissa."
-
 #~ msgid "Move cursor right"
 #~ msgstr "Siirrä osoitinta oikealle"
 
@@ -1184,30 +1637,12 @@ msgstr "Sawfishin kotisivu"
 #~ msgstr "Siirrä osoitinta pikselin verran alaspäin."
 
 #, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Nosta ikkunat, kun rullaus avataan."
-
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Nosta ikkunat, kun ne kohdistetaan."
-
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Näytä ikkunoiden sijainti niitä siirrettäessä."
-
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr "Näytä ikkunoiden koko sitä muutettaessa."
-
-#, fuzzy
 #~ msgid "border"
 #~ msgstr "Yläreuna"
 
 #, fuzzy
 #~ msgid "border-grab"
 #~ msgstr "reuna"
-
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr "Näytä ikkunoiden koko sitä muutettaessa."
 
 #~ msgid ""
 #~ "Distance in pixels before window edges align with each other.\n"
@@ -1392,46 +1827,17 @@ msgstr "Sawfishin kotisivu"
 #~ msgid "Move window next"
 #~ msgstr "Siirrä ikkuna seuraava"
 
-#~ msgid "Move the window to the next viewport."
-#~ msgstr "Siirrä ikkuna seuraavaalle näyttöalueelle."
-
 #~ msgid "Set viewport linear"
 #~ msgstr "Aseta näyttöalue lineaariseksi"
 
 #~ msgid "Set window viewport linear"
 #~ msgstr "Aseta ikkuna näyttöalue lineaariseksi"
 
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr "Näytä ikkunoiden nimet ja kuvakkeet selauksen aikana."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Huomioi selatessa myös pienennetyt ikkunat."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Huomioi selatessa kaikkien työpöytien ikkunat."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Huomioi selatessa kaikkien työtilojen ikkunat."
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Nosta ikkunat, kun ne kohdistetaan."
-
 #~ msgid "cycle-keymap"
 #~ msgstr "selaus"
 
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr "Näppäimet, jotka toimivat ikkunoiden selausoperaatioiden aikana."
-
 #~ msgid "Terminal"
 #~ msgstr "Pääte"
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "Xterm-komennolla käynnistettävä ohjelma."
-
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Xterm-komennolle annettavat valitsimet."
 
 #~ msgid "Xterm"
 #~ msgstr "Xterm"
@@ -1479,22 +1885,6 @@ msgstr "Sawfishin kotisivu"
 #~ "Prompt for a command, execute it, and print any output to the screen."
 #~ msgstr "Pyydä komento, suorita se ja tulosta kaikki palaute ruudulle."
 
-#~ msgid "Move/Resize"
-#~ msgstr "Siirto ja koko"
-
-#~ msgid "Workspaces"
-#~ msgstr "Työpöydät"
-
-#~ msgid "Bindings"
-#~ msgstr "Oikotiet"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Pienennys ja suurennus"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Sekalaiset"
-
 #~ msgid "Customize"
 #~ msgstr "Asetukset"
 
@@ -1504,23 +1894,11 @@ msgstr "Sawfishin kotisivu"
 #~ msgid "3d hack"
 #~ msgstr "3d-viritys"
 
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Soita toimintoäänet ikkunatapahtumille."
-
 #~ msgid "Auto-Raise"
 #~ msgstr "Nosta itsestään"
 
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Nosta ikkunat, kun ne kohdistetaan."
-
 #~ msgid "Delay in milliseconds until focused windows are raised."
 #~ msgstr "Viive [ms] ennen kohdistetun ikkunan nostamista."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Reunavaihto"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr "Valitse seuraava työpöytä, kun osoitin osuu ruudun reunaan."
 
 #~ msgid "viewport"
 #~ msgstr "näyttöalueen"
@@ -1528,17 +1906,8 @@ msgstr "Sawfishin kotisivu"
 #~ msgid "workspace"
 #~ msgstr "työpöydän"
 
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "Ruudun reunaan osuminen valitsee seuraavan: \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Vaihda työpöytää vain ikkunaa siirtäessä."
-
 #~ msgid "Error Handling"
 #~ msgstr "Virheenkäsittely"
-
-#~ msgid "Beep when errors occur."
-#~ msgstr "Piippaa virheen sattuessa."
 
 #~ msgid "nowhere"
 #~ msgstr "ei mihinkään"
@@ -1548,9 +1917,6 @@ msgstr "Sawfishin kotisivu"
 
 #~ msgid "standard-error"
 #~ msgstr "standardi virhe"
-
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Minne virheilmoitukset näytetään: \\w"
 
 #~ msgid "Display errors"
 #~ msgstr "Näytä virheet"
@@ -1593,9 +1959,6 @@ msgstr "Sawfishin kotisivu"
 
 #~ msgid "Workspace"
 #~ msgstr "Työpöytä"
-
-#~ msgid "Viewport"
-#~ msgstr "Työtila"
 
 #~ msgid "Depth"
 #~ msgstr "Syvyys"
@@ -1673,9 +2036,6 @@ msgstr "Sawfishin kotisivu"
 #~ msgid "Ignore stacking requests"
 #~ msgstr "Ohita pinousvaatimukset"
 
-#~ msgid "Shade Hover"
-#~ msgstr "Älykäs rullaus"
-
 #~ msgid ""
 #~ "Enable shade-hover mode.\n"
 #~ "\n"
@@ -1685,41 +2045,6 @@ msgstr "Sawfishin kotisivu"
 #~ "\n"
 #~ "Rullaus avataan siksi ajaksi, kun osoitin on rullatun ikkunan "
 #~ "otsikkopalkin yllä."
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Viive [ms] ennen rullauksen avaamista."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Nosta ikkunat, kun rullaus avataan."
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Näytä vinkit ikkunoiden kehyksille."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Näytä vinkeissä täysi ohjeistus."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Viive [ms] ennen rullauksen avaamista."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Viive [ms] ennen rullauksen avaamista."
-
-#~ msgid "History"
-#~ msgstr "Historia"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Tallenna ikkunan sijainti automaattisesti."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Tallenna ikkunan mitat automaattisesti."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Tallenna muut ikkunan ominaisuudet automaattisesti."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr "Älä muista ali-ikkunoiden asetuksia."
 
 #~ msgid "Window history save position"
 #~ msgstr "Ikkunahistoria tallenna sijainti"
@@ -1799,25 +2124,6 @@ msgstr "Sawfishin kotisivu"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Lähetä ikkuna nykyisestä oikealla olevalle työpöydälle"
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Milloin osoitin vaikuttaa kohdistukseen."
-
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "Kohdista napsauttamalla välittää napsautuksen ohjelmalle."
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr "Laske ikkuna sen pinoustason alimmalle sallitulle paikalle."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Kehystyyli:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Lataa teemat uudelleen niiden päivityksen jälkeen."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Kirjasinlaji: \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Muokkaa kehystyyliä"
 
@@ -1827,97 +2133,32 @@ msgstr "Sawfishin kotisivu"
 #~ msgid "global-keymap"
 #~ msgstr "globaali"
 
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Aina aktiiviset näppäimet."
-
 #~ msgid "window-keymap"
 #~ msgstr "ikkuna"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr "Aktiiviset näppäimet ikkunan ollessa kohdistettu."
 
 #~ msgid "root-window-keymap"
 #~ msgstr "juuri-ikkuna"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr "Aktiiviset näppäimet osoittimen ollessa juuri-ikkunassa."
-
 #~ msgid "title-keymap"
 #~ msgstr "otsikko"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Aktiiviset näppäimet osoittimen ollessa ikkunan otsikkopalkin yllä.\n"
-#~ "Koskee vain hiiren nappeja."
 
 #~ msgid "border-keymap"
 #~ msgstr "reuna"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Aktiiviset näppäimet osoittimen ollessa ikkunan reunan yllä.\n"
-#~ "Koskee vain hiiren nappeja."
-
 #~ msgid "close-button-keymap"
 #~ msgstr "sulkemisnappi"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Aktiiviset näppäimet osoittimen ollessa ikkunan sulkemisnapin yllä.\n"
-#~ "Koskee vain hiiren nappeja."
 
 #~ msgid "iconify-button-keymap"
 #~ msgstr "pienennysnappi"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Aktiiviset näppäimet osoittimen ollessa ikkunan pienennysnapin \n"
-#~ "päällä. Koskee vain hiiren nappeja."
-
 #~ msgid "maximize-button-keymap"
 #~ msgstr "suurennusnappi"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Aktiiviset näppäimet osoittimen ollessa ikkunan suurennusnapin yllä.\n"
-#~ "Koskee vain hiiren nappeja."
 
 #~ msgid "menu-button-keymap"
 #~ msgstr "valikkonappi"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Aktiiviset näppäimet osoittimen ollessa ikkunan valikkonapin yllä.\n"
-#~ "Koskee vain hiiren nappeja."
-
 #~ msgid "shade-button-keymap"
 #~ msgstr "rullausnappi"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Aktiiviset näppäimet osoittimen ollessa ikkunan rullausnapin yllä.\n"
-#~ "Koskee vain hiiren nappeja."
-
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr "Muunnosnäppäin/näppäimet, jota käytetään oletusoikoteihin."
 
 #~ msgid "Popup window menu"
 #~ msgstr "Näytä ikkunavalikko"
@@ -1937,24 +2178,8 @@ msgstr "Sawfishin kotisivu"
 #~ msgid "Display the applications menu."
 #~ msgstr "Näytä ohjelmavalikko."
 
-#~ msgid "Distance between successive placements in `stagger' placement mode."
-#~ msgstr ""
-#~ "Onnistuneiden sijoitusten välimatka muihin sijoittelutavassa \"stagger\"."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Ikkunoiden sijoittelutapa: \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Ali-ikkunoiden sijoittelutapa: \\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Pinous"
-
 #~ msgid "parents"
 #~ msgstr "vanhemmat"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Pidä ali-ikkunat näiden yläpuolella: \\w"
 
 #~ msgid "Raise single window"
 #~ msgstr "Nosta yksittäinen ikkuna"
@@ -1997,12 +2222,6 @@ msgstr "Sawfishin kotisivu"
 
 #~ msgid "group"
 #~ msgstr "ryhmän"
-
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Ikkunan piilottaminen poistaa myös sen: \\w"
-
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr "Ikkunan palauttaminen palauttaa myös sen: \\w"
 
 #~ msgid "Iconify window"
 #~ msgstr "Pienennä ikkuna"
@@ -2087,9 +2306,6 @@ msgstr "Sawfishin kotisivu"
 #, fuzzy
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr "Tee ikkunasta ikkunalistalla näkyvä tai näkymätön."
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr "Lukitse ikkunoiden koko ja sijainti suurennettaessa."
 
 #~ msgid "Maximize window"
 #~ msgstr "Suurenna ikkuna"
@@ -2233,9 +2449,6 @@ msgstr "Sawfishin kotisivu"
 #~ "Toggle the shaded (only the title bar is displayed) state of the window."
 #~ msgstr "Rullaa tai avaa rullaus."
 
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Kohdista ohjelmaikkunat, kun ne näytetään ensimmäistä kertaa."
-
 #~ msgid "Raise window and transients"
 #~ msgstr "Nosta ikkuna ali-ikkunoineen"
 
@@ -2272,9 +2485,6 @@ msgstr "Sawfishin kotisivu"
 #~ msgid "Insert workspace"
 #~ msgstr "Lisää työpöytä"
 
-#~ msgid "Unshade selected windows."
-#~ msgstr "Avaa ikkunoiden rullaus, kun ne valitaan."
-
 #~ msgid "Display window without focusing"
 #~ msgstr "Näytä ikkuna ilman kohdistusta"
 
@@ -2309,22 +2519,8 @@ msgstr "Sawfishin kotisivu"
 #~ "Lähettää seuraavan näppäintapahtuman suoraan kohdistetulle ikkunalle,\n"
 #~ "vaikka näppäinyhdistelmä olisi sidottu ikkunointiohjelmaan."
 
-#~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for "
-#~ "ESD is used."
-#~ msgstr ""
-#~ "Äänitiedostojen soittamiseen käytettävä ohjelma. Jos määrittelemätön, "
-#~ "käytetään sisäänrakennettua ESD-tukea."
-
 #~ msgid "prompt-keymap"
 #~ msgstr "Syöte"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr "Näppäimet, jotka toimivat lukiessa syötettä käyttäjältä."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Ikkunan piilottaminen piilottaa myös: \\w"
 
 #~ msgid "Raise window"
 #~ msgstr "Nosta ikkuna"
@@ -2334,10 +2530,6 @@ msgstr "Sawfishin kotisivu"
 
 #~ msgid "Raise lower window"
 #~ msgstr "Nosta alempi ikkuna"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Siirrä ryhmä käytetylle näyttöalueelle"
 
 #~ msgid "Activate viewport"
 #~ msgstr "Aktivoi näyttöalue"
@@ -2452,10 +2644,6 @@ msgstr "Sawfishin kotisivu"
 
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "Aseta ikkunalle uniikki ikkunanimi."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Näytä kaikki työpöydät listaava valikko."
 
 #~ msgid "Popup workspace list"
 #~ msgstr "Näytä työpöytälista"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2002-10-18 16:43+0200\n"
 "Last-Translator: DOMA Peter <zelin@pointernet.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -156,6 +156,29 @@ msgstr "nem"
 msgid "Match Window Properties"
 msgstr "Ablakok tulajdonságainak illesztése"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Lépegetés az ablakokon"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Hang"
+
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Illesztett ablakok"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Buboréksúgók"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -166,37 +189,181 @@ msgstr "Index:"
 msgid "Command:"
 msgstr "Parancs:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr "Ablakok növesztése és tömörítése"
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Ablak áthelyezése a következő munkalapra."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Ablakok növesztésénél vagy tömörítésénél a teljesen elfedett ablakokhoz való "
+"ütközés kapcsolása."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+#, fuzzy
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+"Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott ablakokkal "
+"való ütközésének kapcsolása."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr ""
+"Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott ablakokkal "
+"való ütközésének kapcsolása."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
 msgstr "Növesztés balra"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 msgid "Grow right"
 msgstr "Növesztés jobbra"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 msgid "Grow up"
 msgstr "Növesztés felfelé"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 msgid "Grow down"
 msgstr "Növesztés lefelé"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 msgid "Pack left"
 msgstr "Tömörítés balra"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 msgid "Pack right"
 msgstr "Tömörítés jobbra"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr "Tömörítés fel"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr "Tömörítés lefelé"
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr "A `kurzor-mozgatás-' parancsokban mozgatás ennyi képponttal."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Ablakok előhozása az árnyékból előhozáskor"
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Ablakok előhozása az árnyékból előhozáskor"
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr "Az ablak aktuális pozíciójának megjelenítés mozgatáskor."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr "Az ablak aktuális méretének megjelenítése átméretezéskor."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Az ablak aktuális méretének megjelenítése átméretezéskor."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr "Ablakok ikonjainak és nevének megjelenítése lapozgatás közben."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr "Lapozgatás az ikonizált ablakokkal együtt."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr "Lapozgatás az összes munkaterület ablakaival együtt."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr "Lapozgatás minden nézet ablakaival együtt."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr "A billentyűtábla bejegyzései csak ablak lapozás közben aktívak."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr "Az `xterm' parancsra elindított program."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+msgid "Arguments given to the `xterm' command."
+msgstr "Az `xterm' parancsnak adott paraméterek."
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Fókusz"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Mozgatás/Méretezés"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Megjelenítés"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Munkaterületek"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Hozzárendelések"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Minimalizálás/Maximalizálás"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Egyéb"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Elhelyezés"
+
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Ablak eseményekhez hangok lejátszása."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -206,21 +373,38 @@ msgstr "Esemény"
 msgid "Audio file"
 msgstr "Hangfájl"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Élek váltása"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr ""
+"Válaszd a következő munkaterületet amikor a mutató eléri a képernyő szélét."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "A képernyő szélének érintése kiválasztja a következőt: \\w"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Lapváltás csak az ablak interaktív mozgatásakor."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr "Hiba esetén csengetés."
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+msgid "Display error messages to: \\w"
+msgstr "Hibaüzenetek kijelzése: \\w"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Nincs hiba."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Elhelyezés"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Fókusz"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Megjelenítés"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -229,6 +413,52 @@ msgstr "Állapot"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Más"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+msgid "Shade Hover"
+msgstr "Lebegő árnyékolás"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr "Ablakok előhozása az árnyékból előhozáskor"
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Ablakkeretekhez tippek megjelenítése."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "Mutassa a teljes dokumentációt a tippekben."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -246,9 +476,59 @@ msgstr "_Attribútumok megjegyzése"
 msgid "_Forget saved state"
 msgstr "Mentett állapot el_felejtése"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+msgid "History"
+msgstr "Előzmények"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Ablak helyének megjegyzése."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Ablak méretének megjegyzése."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Egyéb ablak attribútumok megjegyzése."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+msgid "Don't automatically remember details of transient windows."
+msgstr "Ne jegyezd meg automatikusan a tranziens ablakok beállításait."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Előzmények"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Mikor befolyásolja az egérmutató a bemenet fókuszt."
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "A kattints-a-fókuszhoz üzemmód átadja a kattintást az ablaknak."
+
+#: ../lisp/sawfish/wm/focus.jl:60
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Az ablak legmagasabb pozícióba süllyesztése a rétegek között."
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Alapértelmezett keretstílus:"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "A témák automatikus újratöltése frissítéskor."
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Alap betűtípus: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -290,6 +570,93 @@ msgstr "GNOME WWW..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "GNOME névjegy..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "A billentyűtábla mindenütt aktív hozzárendeléseket tartalmaz."
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a kliens ablak van "
+"fókuszban."
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
+"áll,\n"
+"(vagy egy ablak sincs fókuszban)."
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"címsorán van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az "
+"ablakkereten\n"
+"van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"bezár gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"ikonizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"maximalizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"menü gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak shade\n"
+"gombján van. (Csak az egér-hozzárendelések értékelődnek ki ebben a táblában.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+#, fuzzy
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
+"Az alapértelmezett ablakkezelő gyorsbillentyűkhöz használt módosító billentyű"
+"(k)."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -439,6 +806,44 @@ msgstr "Minden beállítás"
 msgid "Edit theme..."
 msgstr "Téma szerkesztése..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Az ablakok elhelyezésének módja: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "A párbeszédablakok elhelyezésének módja: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+#, fuzzy
+msgid "Distance between successive placements in stagger mode."
+msgstr ""
+"Egymás melletti elhelyezések távolsága a `lépcsőzetes' elhelyezési módban."
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Pakolás"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Tranziens ablakok fölé nem kerülhet: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Ablak minimalizálásakor el kell törölni a: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+msgid "Unminimizing a window also restores its: \\w"
+msgstr ""
+"Ablak minimalizált állapotból visszahozásakor vissza kell állítani a: \\w"
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Ragadós"
@@ -464,9 +869,21 @@ msgstr "_Ablaklistában"
 msgid "In _task list"
 msgstr "A GNOME _feladatlistában"
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr "Ablakok maximalizálása közben a pozíció és a méret zárolása."
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "Á_rnyékolt"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr "Fókuszálás az ablakokra, amikor először megjelennek."
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+msgid "Unshade selected windows."
+msgstr "Kiválasztott ablakok előhozása."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -479,6 +896,19 @@ msgstr "Nyomj meg egy billentyűt..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Idézet]"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+#, fuzzy
+msgid "The program used to play audio samples."
+msgstr ""
+"A hangok lejátszására használt program. Ha nincs beállítva, akkor a "
+"beépített ESD támogatás használható"
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr ""
+"Billentyűtábla, melynek hozzárendelései akkor aktívak, ha felhasználótól "
+"kérünk be egy karakterláncot."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -494,6 +924,36 @@ msgstr "%d. munkaterület"
 msgid "Workspace:"
 msgstr "Munkaterület:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr "Ablak felemelésekor szintén fel kell emelni a következőt: \\w"
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Munkalap"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Csoport mozgatása a jelenlegi munkalapra"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Oszlop:"
@@ -502,9 +962,53 @@ msgstr "Oszlop:"
 msgid "Row:"
 msgstr "Sor:"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Az összes munkaterület menüjének megjelenítése."
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr "Az összes munkaterület menüjének megjelenítése."
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Munkaterületek nevei"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 #, fuzzy
@@ -793,18 +1297,6 @@ msgstr "Sawfish honlap"
 #~ msgid "Border width of bar images."
 #~ msgstr "Fejléc háttérképek keretszélessége"
 
-#~ msgid "Window Cycling"
-#~ msgstr "Lépegetés az ablakokon"
-
-#~ msgid "Sound"
-#~ msgstr "Hang"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Illesztett ablakok"
-
-#~ msgid "Tooltips"
-#~ msgstr "Buboréksúgók"
-
 #~ msgid "Next workspace window"
 #~ msgstr "Következő munkaterület ablak"
 
@@ -973,9 +1465,6 @@ msgstr "Sawfish honlap"
 #~ "Minden ablak törlése abból a csoportból, aminek a jelenlegi ablak is "
 #~ "tagja."
 
-#~ msgid "Growing and packing of windows"
-#~ msgstr "Ablakok növesztése és tömörítése"
-
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
 #~ "this on, you can use `unmaximize-window' or something similar to get\n"
@@ -1016,13 +1505,6 @@ msgstr "Sawfish honlap"
 #~ "A `soha' nem mozgatja a mutatót."
 
 #~ msgid ""
-#~ "Whether to bump into fully obscured windows when growing or packing\n"
-#~ "windows."
-#~ msgstr ""
-#~ "Ablakok növesztésénél vagy tömörítésénél a teljesen elfedett ablakokhoz "
-#~ "való ütközés kapcsolása."
-
-#~ msgid ""
 #~ "Whether to bump into windows on a different depth when growing or "
 #~ "packing\n"
 #~ "windows.\n"
@@ -1031,11 +1513,6 @@ msgstr "Sawfish honlap"
 #~ "Ablak növesztésénél vagy tömörítésénél a más mélységű ablakhoz ütközés "
 #~ "kapcsolása.\n"
 #~ "A `néha' azt jelenti, hogy más mélységben levő ablakokat elkerüli."
-
-#~ msgid "Whether to bump into ignored windows when growing or packing."
-#~ msgstr ""
-#~ "Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott "
-#~ "ablakokkal való ütközésének kapcsolása."
 
 #~ msgid "Grow window left"
 #~ msgstr "Ablak növesztése balra"
@@ -1146,10 +1623,6 @@ msgstr "Sawfish honlap"
 #~ msgid "Help about"
 #~ msgstr "Súgó névjegy"
 
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr "A `kurzor-mozgatás-' parancsokban mozgatás ennyi képponttal."
-
 #~ msgid "Move cursor right"
 #~ msgstr "Kurzor mozgatása jobbra"
 
@@ -1199,30 +1672,12 @@ msgstr "Sawfish honlap"
 #~ msgstr "A kurzor mozgatása 1 képponttal jobbra."
 
 #, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Ablakok előhozása az árnyékból előhozáskor"
-
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
-
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Az ablak aktuális pozíciójának megjelenítés mozgatáskor."
-
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr "Az ablak aktuális méretének megjelenítése átméretezéskor."
-
-#, fuzzy
 #~ msgid "border"
 #~ msgstr "Felső keret"
 
 #, fuzzy
 #~ msgid "border-grab"
 #~ msgstr "border-keymap"
-
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr "Az ablak aktuális méretének megjelenítése átméretezéskor."
 
 #~ msgid ""
 #~ "Distance in pixels before window edges align with each other.\n"
@@ -1411,46 +1866,17 @@ msgstr "Sawfish honlap"
 #~ msgid "Move window next"
 #~ msgstr "Ablak áthelyezése következőre"
 
-#~ msgid "Move the window to the next viewport."
-#~ msgstr "Ablak áthelyezése a következő munkalapra."
-
 #~ msgid "Set viewport linear"
 #~ msgstr "Munkalap sorossá tétele"
 
 #~ msgid "Set window viewport linear"
 #~ msgstr "A munkalapok lineárissá tétele"
 
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr "Ablakok ikonjainak és nevének megjelenítése lapozgatás közben."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Lapozgatás az ikonizált ablakokkal együtt."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Lapozgatás az összes munkaterület ablakaival együtt."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Lapozgatás minden nézet ablakaival együtt."
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
-
 #~ msgid "cycle-keymap"
 #~ msgstr "cycle-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr "A billentyűtábla bejegyzései csak ablak lapozás közben aktívak."
-
 #~ msgid "Terminal"
 #~ msgstr "Terminál"
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "Az `xterm' parancsra elindított program."
-
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Az `xterm' parancsnak adott paraméterek."
 
 #~ msgid "Xterm"
 #~ msgstr "X-terminál"
@@ -1501,22 +1927,6 @@ msgstr "Sawfish honlap"
 #~ msgstr ""
 #~ "Parancs bekérése, futtatása, majd minden kimenet kiírása a képernyőre."
 
-#~ msgid "Move/Resize"
-#~ msgstr "Mozgatás/Méretezés"
-
-#~ msgid "Workspaces"
-#~ msgstr "Munkaterületek"
-
-#~ msgid "Bindings"
-#~ msgstr "Hozzárendelések"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Minimalizálás/Maximalizálás"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Egyéb"
-
 #~ msgid "Customize"
 #~ msgstr "Testreszabás"
 
@@ -1526,25 +1936,11 @@ msgstr "Sawfish honlap"
 #~ msgid "3d hack"
 #~ msgstr "3d hack"
 
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Ablak eseményekhez hangok lejátszása."
-
 #~ msgid "Auto-Raise"
 #~ msgstr "Automatikus előrehozás"
 
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
-
 #~ msgid "Delay in milliseconds until focused windows are raised."
 #~ msgstr "Késleltetés ezredmásodpercben, mielőtt az ablakok előre kerülnek."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Élek váltása"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr ""
-#~ "Válaszd a következő munkaterületet amikor a mutató eléri a képernyő "
-#~ "szélét."
 
 #~ msgid "viewport"
 #~ msgstr "munkalap"
@@ -1552,17 +1948,8 @@ msgstr "Sawfish honlap"
 #~ msgid "workspace"
 #~ msgstr "munkaterület"
 
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "A képernyő szélének érintése kiválasztja a következőt: \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Lapváltás csak az ablak interaktív mozgatásakor."
-
 #~ msgid "Error Handling"
 #~ msgstr "Hibakezelés"
-
-#~ msgid "Beep when errors occur."
-#~ msgstr "Hiba esetén csengetés."
 
 #~ msgid "nowhere"
 #~ msgstr "sehol"
@@ -1572,9 +1959,6 @@ msgstr "Sawfish honlap"
 
 #~ msgid "standard-error"
 #~ msgstr "standard-error"
-
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Hibaüzenetek kijelzése: \\w"
 
 #~ msgid "Display errors"
 #~ msgstr "Hibák megjelenítése"
@@ -1617,9 +2001,6 @@ msgstr "Sawfish honlap"
 
 #~ msgid "Workspace"
 #~ msgstr "Munkaterület"
-
-#~ msgid "Viewport"
-#~ msgstr "Munkalap"
 
 #~ msgid "Depth"
 #~ msgstr "Mélység"
@@ -1697,9 +2078,6 @@ msgstr "Sawfish honlap"
 #~ msgid "Ignore stacking requests"
 #~ msgstr "Halmozási kérelmek figyelmen kívül hagyása"
 
-#~ msgid "Shade Hover"
-#~ msgstr "Lebegő árnyékolás"
-
 #~ msgid ""
 #~ "Enable shade-hover mode.\n"
 #~ "\n"
@@ -1708,41 +2086,6 @@ msgstr "Sawfish honlap"
 #~ "Lebegő árnyékolás engedélyezése.\n"
 #~ "\n"
 #~ "(Ideiglenesen lenyitja az ablakot, ha az egérmutató felette van.)"
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Ablakok előhozása az árnyékból előhozáskor"
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Ablakkeretekhez tippek megjelenítése."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Mutassa a teljes dokumentációt a tippekben."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
-
-#~ msgid "History"
-#~ msgstr "Előzmények"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Ablak helyének megjegyzése."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Ablak méretének megjegyzése."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Egyéb ablak attribútumok megjegyzése."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr "Ne jegyezd meg automatikusan a tranziens ablakok beállításait."
 
 #~ msgid "Window history save position"
 #~ msgstr "Ablak előzményei pozíciók mentése"
@@ -1838,25 +2181,6 @@ msgstr "Sawfish honlap"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Mikor befolyásolja az egérmutató a bemenet fókuszt."
-
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "A kattints-a-fókuszhoz üzemmód átadja a kattintást az ablaknak."
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr "Az ablak legmagasabb pozícióba süllyesztése a rétegek között."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Alapértelmezett keretstílus:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "A témák automatikus újratöltése frissítéskor."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Alap betűtípus: \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Keretstílus szerkesztése"
 
@@ -1866,112 +2190,32 @@ msgstr "Sawfish honlap"
 #~ msgid "global-keymap"
 #~ msgstr "global-keymap"
 
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "A billentyűtábla mindenütt aktív hozzárendeléseket tartalmaz."
-
 #~ msgid "window-keymap"
 #~ msgstr "window-keymap"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a kliens ablak van "
-#~ "fókuszban."
 
 #~ msgid "root-window-keymap"
 #~ msgstr "root-window-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
-#~ "áll,\n"
-#~ "(vagy egy ablak sincs fókuszban)."
-
 #~ msgid "title-keymap"
 #~ msgstr "title-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "címsorán van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
 
 #~ msgid "border-keymap"
 #~ msgstr "border-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az "
-#~ "ablakkereten\n"
-#~ "van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
-
 #~ msgid "close-button-keymap"
 #~ msgstr "close-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "bezár gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
 
 #~ msgid "iconify-button-keymap"
 #~ msgstr "iconify-button-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "ikonizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
-
 #~ msgid "maximize-button-keymap"
 #~ msgstr "maximize-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "maximalizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
 
 #~ msgid "menu-button-keymap"
 #~ msgstr "menu-button-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "menü gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
-
 #~ msgid "shade-button-keymap"
 #~ msgstr "shade-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak "
-#~ "shade\n"
-#~ "gombján van. (Csak az egér-hozzárendelések értékelődnek ki ebben a "
-#~ "táblában.)"
-
-#, fuzzy
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr ""
-#~ "Az alapértelmezett ablakkezelő gyorsbillentyűkhöz használt módosító "
-#~ "billentyű(k)."
 
 #~ msgid "Popup window menu"
 #~ msgstr "Ablak menü nyitása"
@@ -1991,24 +2235,8 @@ msgstr "Sawfish honlap"
 #~ msgid "Display the applications menu."
 #~ msgstr "Az alkalmazások menü megjelenítése."
 
-#~ msgid "Distance between successive placements in `stagger' placement mode."
-#~ msgstr ""
-#~ "Egymás melletti elhelyezések távolsága a `lépcsőzetes' elhelyezési módban."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Az ablakok elhelyezésének módja: \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "A párbeszédablakok elhelyezésének módja: \\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Pakolás"
-
 #~ msgid "parents"
 #~ msgstr "szülők"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Tranziens ablakok fölé nem kerülhet: \\w"
 
 #~ msgid "Raise single window"
 #~ msgstr "Ablak előhozása"
@@ -2052,13 +2280,6 @@ msgstr "Sawfish honlap"
 
 #~ msgid "group"
 #~ msgstr "csoport"
-
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Ablak minimalizálásakor el kell törölni a: \\w"
-
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr ""
-#~ "Ablak minimalizált állapotból visszahozásakor vissza kell állítani a: \\w"
 
 #~ msgid "Iconify window"
 #~ msgstr "Ablak ikonizálása"
@@ -2144,9 +2365,6 @@ msgstr "Sawfish honlap"
 #, fuzzy
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr "Az ablak ablaklistában való szereplésének be/kikapcsolása."
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr "Ablakok maximalizálása közben a pozíció és a méret zárolása."
 
 #~ msgid "Maximize window"
 #~ msgstr "Ablak maximalizálása"
@@ -2320,9 +2538,6 @@ msgstr "Sawfish honlap"
 #~ msgstr ""
 #~ "Bekapcsolja az ablak árnyékolt állapotát (csak a címsor jelenik meg)."
 
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Fókuszálás az ablakokra, amikor először megjelennek."
-
 #~ msgid "Raise window and transients"
 #~ msgstr "Ablak és tranziensek előrehozása"
 
@@ -2360,9 +2575,6 @@ msgstr "Sawfish honlap"
 #~ msgid "Insert workspace"
 #~ msgstr "Munkaterület beillesztése"
 
-#~ msgid "Unshade selected windows."
-#~ msgstr "Kiválasztott ablakok előhozása."
-
 #~ msgid "Display window without focusing"
 #~ msgstr "Ablak megjelenítése fókuszálás nélkül"
 
@@ -2399,24 +2611,8 @@ msgstr "Sawfish honlap"
 #~ "ablaknak\n"
 #~ "az esetleges ablakkezelő hozzárendeléseket figyelmen kívül hagyva."
 
-#~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for "
-#~ "ESD is used."
-#~ msgstr ""
-#~ "A hangok lejátszására használt program. Ha nincs beállítva, akkor a "
-#~ "beépített ESD támogatás használható"
-
 #~ msgid "prompt-keymap"
 #~ msgstr "prompt-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr ""
-#~ "Billentyűtábla, melynek hozzárendelései akkor aktívak, ha felhasználótól "
-#~ "kérünk be egy karakterláncot."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Ablak felemelésekor szintén fel kell emelni a következőt: \\w"
 
 #~ msgid "Raise window"
 #~ msgstr "Ablak előhozása"
@@ -2426,10 +2622,6 @@ msgstr "Sawfish honlap"
 
 #~ msgid "Raise lower window"
 #~ msgstr "Alsó ablak előhozása"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Csoport mozgatása a jelenlegi munkalapra"
 
 #~ msgid "Activate viewport"
 #~ msgstr "Nézet  aktiválása"
@@ -2537,10 +2729,6 @@ msgstr "Sawfish honlap"
 
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "A jelenlegi ablak kényszerítése egyedi címsor használatára."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Az összes munkaterület menüjének megjelenítése."
 
 #~ msgid "Popup workspace list"
 #~ msgstr "Munkaterület-lista megnyitása"

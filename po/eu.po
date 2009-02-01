@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2005-04-14 11:57+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <eu@li.org>\n"
@@ -157,6 +157,29 @@ msgstr "ez"
 msgid "Match Window Properties"
 msgstr "Parekatu leiho-propietateak"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Leiho-zikloa"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Soinua"
+
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Leiho parekatuak"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Argibideak"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -167,37 +190,183 @@ msgstr "Indizea:"
 msgid "Command:"
 msgstr "Komandoa:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr "Leihoak handitzea eta paketatzea"
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Eraman leihoa hurrengo goiko leihatilera."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Leihoak handitzean edo paketatzean leiho guztiz ilunekin topo egingo dugun "
+"ala\n"
+"ez adierazten du."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+#, fuzzy
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+"Handitzean edo paketatzean, ez ikusi egin zaien leihoekin topo egingo dugun "
+"ala ez adierazten du."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr ""
+"Handitzean edo paketatzean, ez ikusi egin zaien leihoekin topo egingo dugun "
+"ala ez adierazten du."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
 msgstr "Handitu ezkerrerantz"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 msgid "Grow right"
 msgstr "Handitu eskuinerantz"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 msgid "Grow up"
 msgstr "Handitu gorantz"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 msgid "Grow down"
 msgstr "Handitu beherantz"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 msgid "Pack left"
 msgstr "Paketatu ezkerrerantz"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 msgid "Pack right"
 msgstr "Paketatu eskuinerantz"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr "Paketatu gorantz"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr "Paketatu beherantz"
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr "`move-cursor-' komandoetan erakuslea mugituko den pixel-kopurua."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Goratu leihoak zabaltzen direnean."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Goratu leihoak zabaltzen direnean."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Goratu leihoak fokua dutenean."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr "Erakutsi leihoen uneko posizioa lekuz aldatzen ari direnean."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr "Erakutsi leihoen uneko tamaina tamainaz aldatzen ari direnean."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Erakutsi leihoen uneko tamaina tamainaz aldatzen ari direnean."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr "Bistaratu leiho-izenak eta -ikonoak leiho-zikloan zehar."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr "Sartu ikonotutako leihoak leiho-zikloan."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr "Sartu laneko area guztietako leihoak leiho-zikloan."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr "Sartu leihatila guztietako leihoak leiho-zikloan."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Goratu leihoak fokua dutenean."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr ""
+"Leiho-zikloetan bakarrik aktibo dauden laster-teklak dituen tekla-mapa."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr "`xterm' komandoak abiarazitako programa."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+msgid "Arguments given to the `xterm' command."
+msgstr "`xterm' komandoari emandako argumentuak."
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Fokua"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Lekuz/Tamainaz aldatu"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Itxura"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Laneko areak"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Loturak"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Ikonotzea eta maximizatzea"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Hainbat"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Kokapena"
+
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Erreproduzitu soinu-efektuak leiho-gertaeretarako."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -207,21 +376,38 @@ msgstr "Gertaera"
 msgid "Audio file"
 msgstr "Audio-fitxategia"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Ertz-iraultzea"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr ""
+"Hautatu hurrengo mahaigaina erakusleak pantailaren ertza ukitzen duenean."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Pantailaren ertza ukitzean hautatu hurrengo: \\w"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Leiho bat interaktiboki mugitzean soilik irauli."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr "Jo soinua erroreak gertatzean."
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+msgid "Display error messages to: \\w"
+msgstr "Bistaratu errore-mezuak: \\w"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Errorerik ez."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Kokapena"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Fokua"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Itxura"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -230,6 +416,52 @@ msgstr "Egoera"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Bestelakoa"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+msgid "Shade Hover"
+msgstr "Zabaldu kurtsorearekin"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Leihoa zabaldu aurretiko atzerapena milisegundotan."
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr "Goratu leihoak zabaltzen direnean."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Bistaratu leiho-markoen argibideak."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "Erakutsi dokumentazio osoa argibideetan."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Leihoa zabaldu aurretiko atzerapena milisegundotan."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Leihoa zabaldu aurretiko atzerapena milisegundotan."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -247,9 +479,59 @@ msgstr "Gogoratu _atributuak"
 msgid "_Forget saved state"
 msgstr "A_haztu gordetako egoera"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+msgid "History"
+msgstr "Historia"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Automatikoki gogoratu leiho-posizioak."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Automatikoki gogoratu leiho-tamainak."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Automatikoki gogoratu bestelako leiho-atributuak."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+msgid "Don't automatically remember details of transient windows."
+msgstr "Ez gogoratu automatikoki behin-behineko leihoen xehetasunak."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Historia"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Saguaren erakusleak noiz duen eragina sarrera-fokuan."
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "'Klik eta fokatu' moduak klika aplikazioan zehar pasatzen du."
+
+#: ../lisp/sawfish/wm/focus.jl:60
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Leihoa pilatze-ordenan izan lezakeen posizio apalenera beheratzen du."
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Marko-estilo lehenetsia:"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "Gaiak automatikoki berritu eguneratzen direnean."
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Letra-tipo lehenetsia: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -291,6 +573,86 @@ msgstr "GNOME WWW..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "GNOMEri buruz..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "Edonon aktibo dauden loturak dituen tekla-mapa."
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"Bezero-leihoa enfokatzen denean aktibo dauden loturak dituen tekla-mapa."
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Erakuslea erroko leihoan dagoenean (edo leihorik enfokatzen ez denean)\n"
+"aktibo dauden loturak dituen tekla-mapa."
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Erakuslea leiho baten tituluan dagoenean aktibo dauden loturak dituen\n"
+"tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Erakuslea leiho baten ertzean dagoenean aktibo dauden loturak dituen\n"
+"tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Erakuslea leiho bat ixteko botoian dagoenean aktibo dauden loturak dituen\n"
+"tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Erakuslea leihoaren ikonotzeko botoian dagoenean aktibo dauden loturak\n"
+"dituen tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Erakuslea leiho baten maximizatzeko botoian dagoenean aktibo dauden \n"
+"loturak dituen tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa "
+"honetan.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Erakuslea leiho baten menu-botoian dagoenean aktibo dauden loturak dituen\n"
+"tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Erakuslea leiho bat biltzeko botoian dagoenean aktibo dauden loturak\n"
+"dituen tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
+"Laster-tekla lehenetsietan erabililitako tekla aldatzailea(k).Leiho-"
+"kudeatzailearen laster-tekla lehenetsietan erabilitako tekla aldatzailea(k)."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -437,6 +799,42 @@ msgstr "_Ezarpen guztiak"
 msgid "Edit theme..."
 msgstr "Editatu gaia..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Leihoak kokatzeko metodoa: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "Elkarrizketa-leihoak kokatzeko metodoa: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+#, fuzzy
+msgid "Distance between successive placements in stagger mode."
+msgstr "Elkarren ondoko kokapenen arteko distantzia `stagger' kokatze-moduan."
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Pilatzea"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Mantendu behin-behineko leihoak goian pilatuta: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Leihoa ikonotzean, hauek ere kendu egiten dira: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Leihoa maximizatzean, hauek ere leheneratzen dira: \\w"
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Itsaskorra"
@@ -462,9 +860,21 @@ msgstr "_Leiho-zerrendan"
 msgid "In _task list"
 msgstr "GNOMEren ata_za-zerrendan"
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr "Blokeatu kokalekua eta tamaina leihoak maximizatzean."
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "Bildu_ta"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr "Enfokatu aplikazio-leihoak lehen agerraldian."
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+msgid "Unshade selected windows."
+msgstr "Zabaldu hautatutako leihoak."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -477,6 +887,19 @@ msgstr "Sakatu tekla..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Aipamena]"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+#, fuzzy
+msgid "The program used to play audio samples."
+msgstr ""
+"Audio-adibideak erreproduzitzeko programa. Ezarri gabe badago, ESDren "
+"euskarri inkorporatua erabiliko da."
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr ""
+"Erabiltzailearen kate bat irakurtzean aktibo dauden loturak dauzkan tekla-"
+"mapa."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -492,6 +915,36 @@ msgstr "%d laneko area"
 msgid "Workspace:"
 msgstr "Laneko area:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr "Leihoa goratzean, hauek ere goratu egiten dira: \\w"
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Leihatila"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Eraman taldea uneko leihatilara"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Zutabea:"
@@ -500,9 +953,53 @@ msgstr "Zutabea:"
 msgid "Row:"
 msgstr "Errenkada:"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Goratu leihoak fokua dutenean."
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Laneko area guztiak dituen menua bistaratzen du."
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr "Laneko area guztiak dituen menua bistaratzen du."
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Laneko areen izenak"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 msgid "_Insert workspace"
@@ -786,18 +1283,6 @@ msgstr "Sawfish-en etxeko orria"
 #~ msgid "Border width of bar images."
 #~ msgstr "Barra-irudien ertzaren zabalera."
 
-#~ msgid "Window Cycling"
-#~ msgstr "Leiho-zikloa"
-
-#~ msgid "Sound"
-#~ msgstr "Soinua"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Leiho parekatuak"
-
-#~ msgid "Tooltips"
-#~ msgstr "Argibideak"
-
 #~ msgid "Next workspace window"
 #~ msgstr "Hurrengo laneko areako leihoa"
 
@@ -965,9 +1450,6 @@ msgstr "Sawfish-en etxeko orria"
 #~ "Delete all windows in the group that the current window is a member of."
 #~ msgstr "Uneko leihoari dagokion taldeko leiho guztiak ezabatzen ditu."
 
-#~ msgid "Growing and packing of windows"
-#~ msgstr "Leihoak handitzea eta paketatzea"
-
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
 #~ "this on, you can use `unmaximize-window' or something similar to get\n"
@@ -1008,14 +1490,6 @@ msgstr "Sawfish-en etxeko orria"
 #~ "`inoiz ez'ek erakuslea ez mugitzea esan nahi du."
 
 #~ msgid ""
-#~ "Whether to bump into fully obscured windows when growing or packing\n"
-#~ "windows."
-#~ msgstr ""
-#~ "Leihoak handitzean edo paketatzean leiho guztiz ilunekin topo egingo "
-#~ "dugun ala\n"
-#~ "ez adierazten du."
-
-#~ msgid ""
 #~ "Whether to bump into windows on a different depth when growing or "
 #~ "packing\n"
 #~ "windows.\n"
@@ -1026,11 +1500,6 @@ msgstr "Sawfish-en etxeko orria"
 #~ "ala ez.\n"
 #~ "`agian'ek esan nahi du beste sakoneratako leihoak bakarrik saihestuko "
 #~ "direla."
-
-#~ msgid "Whether to bump into ignored windows when growing or packing."
-#~ msgstr ""
-#~ "Handitzean edo paketatzean, ez ikusi egin zaien leihoekin topo egingo "
-#~ "dugun ala ez adierazten du."
 
 #~ msgid "Grow window left"
 #~ msgstr "Handitu leihoa ezkerrerantz"
@@ -1140,10 +1609,6 @@ msgstr "Sawfish-en etxeko orria"
 #~ msgid "Help about"
 #~ msgstr "Laguntza honi buruz"
 
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr "`move-cursor-' komandoetan erakuslea mugituko den pixel-kopurua."
-
 #~ msgid "Move cursor right"
 #~ msgstr "Eraman kurtsorea eskuinera"
 
@@ -1193,30 +1658,12 @@ msgstr "Sawfish-en etxeko orria"
 #~ msgstr "Kurtsorea pixel bat behera eramaten du."
 
 #, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Goratu leihoak zabaltzen direnean."
-
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Goratu leihoak fokua dutenean."
-
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Erakutsi leihoen uneko posizioa lekuz aldatzen ari direnean."
-
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr "Erakutsi leihoen uneko tamaina tamainaz aldatzen ari direnean."
-
-#, fuzzy
 #~ msgid "border"
 #~ msgstr "Goiko ertza"
 
 #, fuzzy
 #~ msgid "border-grab"
 #~ msgstr "border-keymap"
-
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr "Erakutsi leihoen uneko tamaina tamainaz aldatzen ari direnean."
 
 #~ msgid ""
 #~ "Distance in pixels before window edges align with each other.\n"
@@ -1403,47 +1850,17 @@ msgstr "Sawfish-en etxeko orria"
 #~ msgid "Move window next"
 #~ msgstr "Eraman leihoa hurrengora"
 
-#~ msgid "Move the window to the next viewport."
-#~ msgstr "Eraman leihoa hurrengo goiko leihatilera."
-
 #~ msgid "Set viewport linear"
 #~ msgstr "Ezarri leihatila lineala"
 
 #~ msgid "Set window viewport linear"
 #~ msgstr "Ezarri leihoaren leihatila lineala"
 
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr "Bistaratu leiho-izenak eta -ikonoak leiho-zikloan zehar."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Sartu ikonotutako leihoak leiho-zikloan."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Sartu laneko area guztietako leihoak leiho-zikloan."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Sartu leihatila guztietako leihoak leiho-zikloan."
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Goratu leihoak fokua dutenean."
-
 #~ msgid "cycle-keymap"
 #~ msgstr "cycle-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr ""
-#~ "Leiho-zikloetan bakarrik aktibo dauden laster-teklak dituen tekla-mapa."
-
 #~ msgid "Terminal"
 #~ msgstr "Terminala"
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "`xterm' komandoak abiarazitako programa."
-
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "`xterm' komandoari emandako argumentuak."
 
 #~ msgid "Xterm"
 #~ msgstr "Xterm"
@@ -1491,22 +1908,6 @@ msgstr "Sawfish-en etxeko orria"
 #~ "Prompt for a command, execute it, and print any output to the screen."
 #~ msgstr "Komandoa eskatu, exekutatu, eta irteera pantailan inprimatu."
 
-#~ msgid "Move/Resize"
-#~ msgstr "Lekuz/Tamainaz aldatu"
-
-#~ msgid "Workspaces"
-#~ msgstr "Laneko areak"
-
-#~ msgid "Bindings"
-#~ msgstr "Loturak"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Ikonotzea eta maximizatzea"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Hainbat"
-
 #~ msgid "Customize"
 #~ msgstr "Pertsonalizatu"
 
@@ -1516,24 +1917,11 @@ msgstr "Sawfish-en etxeko orria"
 #~ msgid "3d hack"
 #~ msgstr "d hack"
 
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Erreproduzitu soinu-efektuak leiho-gertaeretarako."
-
 #~ msgid "Auto-Raise"
 #~ msgstr "Automatikoki goratu"
 
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Goratu leihoak fokua dutenean."
-
 #~ msgid "Delay in milliseconds until focused windows are raised."
 #~ msgstr "Enfokatutako leihoak goratu arteko atzerapena milisegundotan."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Ertz-iraultzea"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr ""
-#~ "Hautatu hurrengo mahaigaina erakusleak pantailaren ertza ukitzen duenean."
 
 #~ msgid "viewport"
 #~ msgstr "leihatila"
@@ -1541,17 +1929,8 @@ msgstr "Sawfish-en etxeko orria"
 #~ msgid "workspace"
 #~ msgstr "laneko area"
 
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "Pantailaren ertza ukitzean hautatu hurrengo: \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Leiho bat interaktiboki mugitzean soilik irauli."
-
 #~ msgid "Error Handling"
 #~ msgstr "Errore-maneiatzea"
-
-#~ msgid "Beep when errors occur."
-#~ msgstr "Jo soinua erroreak gertatzean."
 
 #~ msgid "nowhere"
 #~ msgstr "inon ez"
@@ -1561,9 +1940,6 @@ msgstr "Sawfish-en etxeko orria"
 
 #~ msgid "standard-error"
 #~ msgstr "errore estandarra"
-
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Bistaratu errore-mezuak: \\w"
 
 #~ msgid "Display errors"
 #~ msgstr "Bistaratu erroreak"
@@ -1606,9 +1982,6 @@ msgstr "Sawfish-en etxeko orria"
 
 #~ msgid "Workspace"
 #~ msgstr "Laneko area"
-
-#~ msgid "Viewport"
-#~ msgstr "Leihatila"
 
 #~ msgid "Depth"
 #~ msgstr "Sakonera"
@@ -1686,9 +2059,6 @@ msgstr "Sawfish-en etxeko orria"
 #~ msgid "Ignore stacking requests"
 #~ msgstr "Ezikusi egin pilatze-eskaerei"
 
-#~ msgid "Shade Hover"
-#~ msgstr "Zabaldu kurtsorearekin"
-
 #~ msgid ""
 #~ "Enable shade-hover mode.\n"
 #~ "\n"
@@ -1698,41 +2068,6 @@ msgstr "Sawfish-en etxeko orria"
 #~ "\n"
 #~ "(Bildutako leihoa aldi baterako zabaltzen du, saguaren erakuslea gainean "
 #~ "dagoenean.)"
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Leihoa zabaldu aurretiko atzerapena milisegundotan."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Goratu leihoak zabaltzen direnean."
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Bistaratu leiho-markoen argibideak."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Erakutsi dokumentazio osoa argibideetan."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Leihoa zabaldu aurretiko atzerapena milisegundotan."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Leihoa zabaldu aurretiko atzerapena milisegundotan."
-
-#~ msgid "History"
-#~ msgstr "Historia"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Automatikoki gogoratu leiho-posizioak."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Automatikoki gogoratu leiho-tamainak."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Automatikoki gogoratu bestelako leiho-atributuak."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr "Ez gogoratu automatikoki behin-behineko leihoen xehetasunak."
 
 #~ msgid "Window history save position"
 #~ msgstr "Leihoaren historia gorde kokalekua"
@@ -1812,26 +2147,6 @@ msgstr "Sawfish-en etxeko orria"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Bidali leihoa uneko laneko arearen eskuineko laneko areara"
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Saguaren erakusleak noiz duen eragina sarrera-fokuan."
-
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "'Klik eta fokatu' moduak klika aplikazioan zehar pasatzen du."
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr ""
-#~ "Leihoa pilatze-ordenan izan lezakeen posizio apalenera beheratzen du."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Marko-estilo lehenetsia:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Gaiak automatikoki berritu eguneratzen direnean."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Letra-tipo lehenetsia: \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Editatu marko-estiloa"
 
@@ -1841,106 +2156,32 @@ msgstr "Sawfish-en etxeko orria"
 #~ msgid "global-keymap"
 #~ msgstr "global-keymap"
 
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Edonon aktibo dauden loturak dituen tekla-mapa."
-
 #~ msgid "window-keymap"
 #~ msgstr "window-keymap"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr ""
-#~ "Bezero-leihoa enfokatzen denean aktibo dauden loturak dituen tekla-mapa."
 
 #~ msgid "root-window-keymap"
 #~ msgstr "root-window-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Erakuslea erroko leihoan dagoenean (edo leihorik enfokatzen ez denean)\n"
-#~ "aktibo dauden loturak dituen tekla-mapa."
-
 #~ msgid "title-keymap"
 #~ msgstr "title-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Erakuslea leiho baten tituluan dagoenean aktibo dauden loturak dituen\n"
-#~ "tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
 
 #~ msgid "border-keymap"
 #~ msgstr "border-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Erakuslea leiho baten ertzean dagoenean aktibo dauden loturak dituen\n"
-#~ "tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
-
 #~ msgid "close-button-keymap"
 #~ msgstr "close-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Erakuslea leiho bat ixteko botoian dagoenean aktibo dauden loturak "
-#~ "dituen\n"
-#~ "tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
 
 #~ msgid "iconify-button-keymap"
 #~ msgstr "iconify-button-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Erakuslea leihoaren ikonotzeko botoian dagoenean aktibo dauden loturak\n"
-#~ "dituen tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
-
 #~ msgid "maximize-button-keymap"
 #~ msgstr "maximize-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Erakuslea leiho baten maximizatzeko botoian dagoenean aktibo dauden \n"
-#~ "loturak dituen tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa "
-#~ "honetan.)"
 
 #~ msgid "menu-button-keymap"
 #~ msgstr "menu-button-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Erakuslea leiho baten menu-botoian dagoenean aktibo dauden loturak "
-#~ "dituen\n"
-#~ "tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
-
 #~ msgid "shade-button-keymap"
 #~ msgstr "shade-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Erakuslea leiho bat biltzeko botoian dagoenean aktibo dauden loturak\n"
-#~ "dituen tekla-mapa. (Saguaren loturak soilik ebaluatzen dira mapa honetan.)"
-
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr ""
-#~ "Laster-tekla lehenetsietan erabililitako tekla aldatzailea(k).Leiho-"
-#~ "kudeatzailearen laster-tekla lehenetsietan erabilitako tekla aldatzailea"
-#~ "(k)."
 
 #~ msgid "Popup window menu"
 #~ msgstr "Agerrarazi leiho-menua"
@@ -1960,24 +2201,8 @@ msgstr "Sawfish-en etxeko orria"
 #~ msgid "Display the applications menu."
 #~ msgstr "Aplikazioen menua bistaratzen du."
 
-#~ msgid "Distance between successive placements in `stagger' placement mode."
-#~ msgstr ""
-#~ "Elkarren ondoko kokapenen arteko distantzia `stagger' kokatze-moduan."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Leihoak kokatzeko metodoa: \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Elkarrizketa-leihoak kokatzeko metodoa: \\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Pilatzea"
-
 #~ msgid "parents"
 #~ msgstr "gurasoak"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Mantendu behin-behineko leihoak goian pilatuta: \\w"
 
 #~ msgid "Raise single window"
 #~ msgstr "Goratu leiho bakarra"
@@ -2022,12 +2247,6 @@ msgstr "Sawfish-en etxeko orria"
 
 #~ msgid "group"
 #~ msgstr "taldea"
-
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Leihoa ikonotzean, hauek ere kendu egiten dira: \\w"
-
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr "Leihoa maximizatzean, hauek ere leheneratzen dira: \\w"
 
 #~ msgid "Iconify window"
 #~ msgstr "Ikonotu leihoa"
@@ -2113,9 +2332,6 @@ msgstr "Sawfish-en etxeko orria"
 #, fuzzy
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr "Leihoa leiho-zerrendan sartu ala ez zehazten du, txandaka "
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr "Blokeatu kokalekua eta tamaina leihoak maximizatzean."
 
 #~ msgid "Maximize window"
 #~ msgstr "Maximizatu leihoa"
@@ -2277,9 +2493,6 @@ msgstr "Sawfish-en etxeko orria"
 #~ "Leihoaren egoera aldatzen du txandaka: bilduta (titulu-barra bakarrik\n"
 #~ "ikusten da) edo zabalduta."
 
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Enfokatu aplikazio-leihoak lehen agerraldian."
-
 #~ msgid "Raise window and transients"
 #~ msgstr "Goratu leihoa eta behin-behinekoak"
 
@@ -2318,9 +2531,6 @@ msgstr "Sawfish-en etxeko orria"
 #~ msgid "Insert workspace"
 #~ msgstr "Txertatu laneko area"
 
-#~ msgid "Unshade selected windows."
-#~ msgstr "Zabaldu hautatutako leihoak."
-
 #~ msgid "Display window without focusing"
 #~ msgstr "Bistaratu leihoa enfokatu gabe"
 
@@ -2356,24 +2566,8 @@ msgstr "Sawfish-en etxeko orria"
 #~ "eta\n"
 #~ "ezikusi egiten die izan ditzakeen leiho-kudeatzailearen loturei."
 
-#~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for "
-#~ "ESD is used."
-#~ msgstr ""
-#~ "Audio-adibideak erreproduzitzeko programa. Ezarri gabe badago, ESDren "
-#~ "euskarri inkorporatua erabiliko da."
-
 #~ msgid "prompt-keymap"
 #~ msgstr "prompt-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr ""
-#~ "Erabiltzailearen kate bat irakurtzean aktibo dauden loturak dauzkan tekla-"
-#~ "mapa."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Leihoa goratzean, hauek ere goratu egiten dira: \\w"
 
 #~ msgid "Raise window"
 #~ msgstr "Goratu leihoa"
@@ -2383,10 +2577,6 @@ msgstr "Sawfish-en etxeko orria"
 
 #~ msgid "Raise lower window"
 #~ msgstr "Goratu beheko leihoa"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Eraman taldea uneko leihatilara"
 
 #~ msgid "Activate viewport"
 #~ msgstr "Aktibatu leihatila"
@@ -2495,10 +2685,6 @@ msgstr "Sawfish-en etxeko orria"
 
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "Uneko leihoa titulu bakarra izatera behartzen du."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Laneko area guztiak dituen menua bistaratzen du."
 
 #~ msgid "Popup workspace list"
 #~ msgstr "Agerrarazi laneko areen zerrenda"

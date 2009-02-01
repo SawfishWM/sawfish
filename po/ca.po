@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2002-11-09 04:05+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <gnome@softcatala.net>\n"
@@ -159,6 +159,29 @@ msgstr "no"
 msgid "Match Window Properties"
 msgstr "Detecció de propietats de finestra"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Rotació per les finestres"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "So"
+
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Detecció de propietats"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Rètols indicadors de funció"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -169,37 +192,181 @@ msgstr "Índex:"
 msgid "Command:"
 msgstr "Ordre:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr "Moviment i redimensionament de finestres"
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Envia la finestra cap a la subàrea següent."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Si topar amb finestres totalment coberta al redimensionar o moure\n"
+"finestres."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+#, fuzzy
+msgid "Whether to bump into windows on a different depth."
+msgstr "Si topar amb finestres ignorades al redimensionar o moure finestres."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr "Si topar amb finestres ignorades al redimensionar o moure finestres."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
 msgstr "Redimensiona la finestra fent-la créixer a l'esquerra"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 msgid "Grow right"
 msgstr "Redimensiona la finestra fent-la créixer a la dreta."
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 msgid "Grow up"
 msgstr "Redimensiona la finestra fent-la créixer amunt"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 msgid "Grow down"
 msgstr "Redimensiona la finestra fent-la créixer avall"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 msgid "Pack left"
 msgstr "Mou la finestra a l'esquerra"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 msgid "Pack right"
 msgstr "Mou la finestra a la dreta"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr "Mou la finestra amunt"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr "Mou la finestra avall"
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr "Nombre de píxels utilitzat per les ordres que mouen el cursor."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Eleva les finestres quan es desenrotllen."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Eleva les finestres quan es desenrotllen."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Eleva les finestres enfocades."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr "Mostra la posició actual de les finestres que s'estan movent."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr ""
+"Mostra les dimensions actuals de les finestres que s'estan redimensionant."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr ""
+"Mostra les dimensions actuals de les finestres que s'estan redimensionant."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr "Mostra els noms de les finestres i les icones durant la rotació."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr "Inclou les finestres iconificades a la rotació."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr "Inclou les finestres de totes les àrees a la rotació."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr "Inclou les finestres de totes les subàrees a la rotació."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Eleva les finestres enfocades."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr ""
+"Mapa de tecles amb vinculacions actives durant la rotació per les finestres."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr "El programa que s'executa amb l'ordre «crida un terminal»."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+msgid "Arguments given to the `xterm' command."
+msgstr "Arguments opcionals que es passen a l'ordre «crida un terminal»."
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Focus"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Canvi de posició i mida"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Aparença"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Àrees de treball"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Vinculacions"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Minimització i maximització"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Miscel·lània"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Col·locació"
+
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Reprodueix sons quan es produeixen esdeveniments de finestra."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -209,21 +376,38 @@ msgstr "Esdeveniment"
 msgid "Audio file"
 msgstr "Fitxer d'àudio"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Traspàs"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr ""
+"Selecciona l'escriptori següent quan el punter toca la vora de la pantalla."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Què se selecciona? \\w"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Traspassa només quan s'està movent una finestra interactivament."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr "Emet un so quan es produeixin errors."
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+msgid "Display error messages to: \\w"
+msgstr "Mostra els missatges d'error en: \\w"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "No hi ha errors."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Col·locació"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Focus"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Aparença"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -232,6 +416,52 @@ msgstr "Estat"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Altres"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+msgid "Shade Hover"
+msgstr "Desenrotllament temporal"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Retard abans de desenrotllar les finestres (en mil·lisegons)."
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr "Eleva les finestres quan es desenrotllen."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Mostra els rètols indicadors de funció dels marcs de finestra."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "Mostra tota la documentació als rètols indicadors de funció."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Retard abans de desenrotllar les finestres (en mil·lisegons)."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Retard abans de desenrotllar les finestres (en mil·lisegons)."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -249,9 +479,59 @@ msgstr "Recorda'n els _atributs"
 msgid "_Forget saved state"
 msgstr "_Oblida'n l'estat desat"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+msgid "History"
+msgstr "Historial"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Recorda automàticament les posicions de les finestres."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Recorda automàticament les mides de les finestres."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Recorda automàticament altres atributs de finestra."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+msgid "Don't automatically remember details of transient windows."
+msgstr "No recordis automàticament els detalls de les finestres transitòries."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Historial"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Quan afecta el punter del ratolí el focus d'entrada?"
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "El mode «fer clic per enfocar» passa el clic a l'applicació."
+
+#: ../lisp/sawfish/wm/focus.jl:60
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Abaixa la finestra a la posició més baixa dins la capa."
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Estil de marc predeterminat:"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "Refresca els temes automàticament quan s'actualitzen."
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Tipus de lletra predeterminat: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -293,6 +573,84 @@ msgstr "Web del GNOME..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "Quant al GNOME..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "Mapa de tecles amb vinculacions actives a tot arreu."
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"Mapa de tecles amb vinculacions actives quan hi ha una finestra client "
+"enfocada."
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Mapa de tecles amb vinculacions actives quan el punter és a la\n"
+"finestra arrel (o quan no hi ha cap finestra enfocada)."
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de tecles amb vinculacions actives quan el punter és al títol\n"
+"d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de tecles amb vinculacions actives quan el punter és a una vora\n"
+"de finestra. (Només s'hi avaluen vinculacions de ratolí.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de tecles amb vinculacions actives quan el punter és al botó de\n"
+"tancar d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de tecles amb vinculacions actives quan el punter és al botó\n"
+"d'iconificar d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de tecles amb vinculacions actives quan el punter és al botó de\n"
+"maximitzar d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de tecles amb vinculacions actives quan el punter és al botó de\n"
+"menú d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de tecles amb vinculacions actives quan el punter és al botó\n"
+"d'enrotllar d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Tecles modificadores usades per a les vinculacions predeterminades."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -444,6 +802,44 @@ msgstr "Tots els paràmetres"
 msgid "Edit theme..."
 msgstr "Edita el tema..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Col·locació de finestres: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "Col·locació de finestres de diàleg: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+#, fuzzy
+msgid "Distance between successive placements in stagger mode."
+msgstr ""
+"Distància entre col·locacions successives en el mode de col·locació "
+"`stagger'."
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Apilament"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Conserva les finestres transitòries damunt: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Minimitzar una finestra també la elimina: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Desminimitzar una finestra també la restaura: \\w"
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "Omnipre_sent"
@@ -469,9 +865,21 @@ msgstr "Dins la llista de _finestres"
 msgid "In _task list"
 msgstr "Dins la llista de _tasques del GNOME"
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr "Bloca la posició i la mida de les finestres maximitzades."
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "En_rotllada"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr "Enfoca les finestres d'aplicació el primer cop que apareixen."
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+msgid "Unshade selected windows."
+msgstr "Desenrotlla les finestres quan se seleccionen."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -484,6 +892,17 @@ msgstr "Premeu una tecla..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Teclegeu]"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+#, fuzzy
+msgid "The program used to play audio samples."
+msgstr ""
+"El programa que reprodueix mostres d'àudio. Si no s'especifica, s'utilitza "
+"el suport integrat per a l'ESD."
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr "Mapa de tecles amb vinculacions actives en llegir cadenes de l'usuari."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -499,6 +918,36 @@ msgstr "Àrea de treball %d"
 msgid "Workspace:"
 msgstr "Àrea de treball:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr "Elevar una finestra també n'eleva: \\w"
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Subàrea"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Envia el grup a la subàrea actual"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Columna:"
@@ -507,9 +956,53 @@ msgstr "Columna:"
 msgid "Row:"
 msgstr "Fila:"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Eleva les finestres enfocades."
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Mostra el menú que conté la llista de totes les àrees."
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr "Mostra el menú que conté la llista de totes les àrees."
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Noms de les àrees de treball"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 #, fuzzy
@@ -800,18 +1293,6 @@ msgstr "Web del Sawfish"
 #~ msgid "Border width of bar images."
 #~ msgstr "Amplada de la vora de les barres."
 
-#~ msgid "Window Cycling"
-#~ msgstr "Rotació per les finestres"
-
-#~ msgid "Sound"
-#~ msgstr "So"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Detecció de propietats"
-
-#~ msgid "Tooltips"
-#~ msgstr "Rètols indicadors de funció"
-
 #~ msgid "Next workspace window"
 #~ msgstr "Rotació simple: següent dins l'àrea"
 
@@ -986,9 +1467,6 @@ msgstr "Web del Sawfish"
 #~ "Delete all windows in the group that the current window is a member of."
 #~ msgstr "Suprimeix totes les finestres del grup de l'actual."
 
-#~ msgid "Growing and packing of windows"
-#~ msgstr "Moviment i redimensionament de finestres"
-
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
 #~ "this on, you can use `unmaximize-window' or something similar to get\n"
@@ -1029,13 +1507,6 @@ msgstr "Web del Sawfish"
 #~ "`mai': no."
 
 #~ msgid ""
-#~ "Whether to bump into fully obscured windows when growing or packing\n"
-#~ "windows."
-#~ msgstr ""
-#~ "Si topar amb finestres totalment coberta al redimensionar o moure\n"
-#~ "finestres."
-
-#~ msgid ""
 #~ "Whether to bump into windows on a different depth when growing or "
 #~ "packing\n"
 #~ "windows.\n"
@@ -1045,10 +1516,6 @@ msgstr "Web del Sawfish"
 #~ "moure\n"
 #~ "finestres.\n"
 #~ "«potser» vol dir que només s'eviten finestres en altres profunditats."
-
-#~ msgid "Whether to bump into ignored windows when growing or packing."
-#~ msgstr ""
-#~ "Si topar amb finestres ignorades al redimensionar o moure finestres."
 
 #~ msgid "Grow window left"
 #~ msgstr "Redimensiona la finestra fent-la créixer a l'esquerra fins que topi"
@@ -1157,10 +1624,6 @@ msgstr "Web del Sawfish"
 #~ msgid "Help about"
 #~ msgstr "Mostra documentació: quant al Sawfish"
 
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr "Nombre de píxels utilitzat per les ordres que mouen el cursor."
-
 #~ msgid "Move cursor right"
 #~ msgstr "Mou el cursor a la dreta"
 
@@ -1220,32 +1683,12 @@ msgstr "Web del Sawfish"
 #~ msgstr "Mou el cursor 1 píxel avall."
 
 #, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Eleva les finestres quan es desenrotllen."
-
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Eleva les finestres enfocades."
-
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Mostra la posició actual de les finestres que s'estan movent."
-
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr ""
-#~ "Mostra les dimensions actuals de les finestres que s'estan redimensionant."
-
-#, fuzzy
 #~ msgid "border"
 #~ msgstr "Només la vora superior"
 
 #, fuzzy
 #~ msgid "border-grab"
 #~ msgstr "mapa de tecles de vora"
-
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr ""
-#~ "Mostra les dimensions actuals de les finestres que s'estan redimensionant."
 
 #~ msgid ""
 #~ "Distance in pixels before window edges align with each other.\n"
@@ -1453,49 +1896,17 @@ msgstr "Web del Sawfish"
 #~ msgid "Move window next"
 #~ msgstr "Envia-la a la subàrea següent"
 
-#
-#~ msgid "Move the window to the next viewport."
-#~ msgstr "Envia la finestra cap a la subàrea següent."
-
 #~ msgid "Set viewport linear"
 #~ msgstr "Selecciona aquesta subàrea (en format lineal)"
 
 #~ msgid "Set window viewport linear"
 #~ msgstr "Envia-la a aquesta subàrea (en format lineal)"
 
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr "Mostra els noms de les finestres i les icones durant la rotació."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Inclou les finestres iconificades a la rotació."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Inclou les finestres de totes les àrees a la rotació."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Inclou les finestres de totes les subàrees a la rotació."
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Eleva les finestres enfocades."
-
 #~ msgid "cycle-keymap"
 #~ msgstr "mapa de tecles de rotació"
 
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr ""
-#~ "Mapa de tecles amb vinculacions actives durant la rotació per les "
-#~ "finestres."
-
 #~ msgid "Terminal"
 #~ msgstr "Terminal"
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "El programa que s'executa amb l'ordre «crida un terminal»."
-
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Arguments opcionals que es passen a l'ordre «crida un terminal»."
 
 #~ msgid "Xterm"
 #~ msgstr "Crida un terminal"
@@ -1544,22 +1955,6 @@ msgstr "Web del Sawfish"
 #~ "Prompt for a command, execute it, and print any output to the screen."
 #~ msgstr "Sol·licita una ordre, executa-la, i mostra'n la sortida."
 
-#~ msgid "Move/Resize"
-#~ msgstr "Canvi de posició i mida"
-
-#~ msgid "Workspaces"
-#~ msgstr "Àrees de treball"
-
-#~ msgid "Bindings"
-#~ msgstr "Vinculacions"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Minimització i maximització"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Miscel·lània"
-
 #~ msgid "Customize"
 #~ msgstr "Crida el configurador"
 
@@ -1569,25 +1964,11 @@ msgstr "Web del Sawfish"
 #~ msgid "3d hack"
 #~ msgstr "Crida la frivolitat tridimensional"
 
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Reprodueix sons quan es produeixen esdeveniments de finestra."
-
 #~ msgid "Auto-Raise"
 #~ msgstr "Autoelevació"
 
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Eleva les finestres enfocades."
-
 #~ msgid "Delay in milliseconds until focused windows are raised."
 #~ msgstr "Retard abans d'elevar les finestres enfocades (en mil·lisegons)."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Traspàs"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr ""
-#~ "Selecciona l'escriptori següent quan el punter toca la vora de la "
-#~ "pantalla."
 
 #~ msgid "viewport"
 #~ msgstr "la subàrea"
@@ -1595,17 +1976,8 @@ msgstr "Web del Sawfish"
 #~ msgid "workspace"
 #~ msgstr "l'àrea de treball"
 
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "Què se selecciona? \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Traspassa només quan s'està movent una finestra interactivament."
-
 #~ msgid "Error Handling"
 #~ msgstr "Manejament d'errors"
-
-#~ msgid "Beep when errors occur."
-#~ msgstr "Emet un so quan es produeixin errors."
 
 #~ msgid "nowhere"
 #~ msgstr "enlloc"
@@ -1615,9 +1987,6 @@ msgstr "Web del Sawfish"
 
 #~ msgid "standard-error"
 #~ msgstr "`standard-error'"
-
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Mostra els missatges d'error en: \\w"
 
 #~ msgid "Display errors"
 #~ msgstr "Mostra els errors"
@@ -1660,9 +2029,6 @@ msgstr "Web del Sawfish"
 
 #~ msgid "Workspace"
 #~ msgstr "Àrea de treball"
-
-#~ msgid "Viewport"
-#~ msgstr "Subàrea"
 
 #~ msgid "Depth"
 #~ msgstr "Capa"
@@ -1740,9 +2106,6 @@ msgstr "Web del Sawfish"
 #~ msgid "Ignore stacking requests"
 #~ msgstr "Ignora les sol·licituds d'apilament"
 
-#~ msgid "Shade Hover"
-#~ msgstr "Desenrotllament temporal"
-
 #~ msgid ""
 #~ "Enable shade-hover mode.\n"
 #~ "\n"
@@ -1751,42 +2114,6 @@ msgstr "Web del Sawfish"
 #~ "Habilita el mode `desenrotllament temporal'.\n"
 #~ "\n"
 #~ "(Desenrotlla les finestres temporalment mentre el punter hi és a sobre.)"
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Retard abans de desenrotllar les finestres (en mil·lisegons)."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Eleva les finestres quan es desenrotllen."
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Mostra els rètols indicadors de funció dels marcs de finestra."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Mostra tota la documentació als rètols indicadors de funció."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Retard abans de desenrotllar les finestres (en mil·lisegons)."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Retard abans de desenrotllar les finestres (en mil·lisegons)."
-
-#~ msgid "History"
-#~ msgstr "Historial"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Recorda automàticament les posicions de les finestres."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Recorda automàticament les mides de les finestres."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Recorda automàticament altres atributs de finestra."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr ""
-#~ "No recordis automàticament els detalls de les finestres transitòries."
 
 #~ msgid "Window history save position"
 #~ msgstr "Historial: recorda la posició de la finestra"
@@ -1868,25 +2195,6 @@ msgstr "Web del Sawfish"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Envia la finestra a l'àrea de treball a la dreta de l'actual"
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Quan afecta el punter del ratolí el focus d'entrada?"
-
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "El mode «fer clic per enfocar» passa el clic a l'applicació."
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr "Abaixa la finestra a la posició més baixa dins la capa."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Estil de marc predeterminat:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Refresca els temes automàticament quan s'actualitzen."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Tipus de lletra predeterminat: \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Crida el constructor de temes"
 
@@ -1896,101 +2204,32 @@ msgstr "Web del Sawfish"
 #~ msgid "global-keymap"
 #~ msgstr "mapa de tecles global"
 
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Mapa de tecles amb vinculacions actives a tot arreu."
-
 #~ msgid "window-keymap"
 #~ msgstr "mapa de tecles de finestra"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr ""
-#~ "Mapa de tecles amb vinculacions actives quan hi ha una finestra client "
-#~ "enfocada."
 
 #~ msgid "root-window-keymap"
 #~ msgstr "mapa de tecles de la finestra arrel"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Mapa de tecles amb vinculacions actives quan el punter és a la\n"
-#~ "finestra arrel (o quan no hi ha cap finestra enfocada)."
-
 #~ msgid "title-keymap"
 #~ msgstr "mapa de tecles de títol"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de tecles amb vinculacions actives quan el punter és al títol\n"
-#~ "d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
 
 #~ msgid "border-keymap"
 #~ msgstr "mapa de tecles de vora"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de tecles amb vinculacions actives quan el punter és a una vora\n"
-#~ "de finestra. (Només s'hi avaluen vinculacions de ratolí.)"
-
 #~ msgid "close-button-keymap"
 #~ msgstr "mapa de tecles del botó de tancar"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de tecles amb vinculacions actives quan el punter és al botó de\n"
-#~ "tancar d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
 
 #~ msgid "iconify-button-keymap"
 #~ msgstr "mapa de tecles del botó d'iconificar"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de tecles amb vinculacions actives quan el punter és al botó\n"
-#~ "d'iconificar d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
-
 #~ msgid "maximize-button-keymap"
 #~ msgstr "mapa de tecles del botó de maximitzar"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de tecles amb vinculacions actives quan el punter és al botó de\n"
-#~ "maximitzar d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
 
 #~ msgid "menu-button-keymap"
 #~ msgstr "mapa de tecles del botó de menú"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de tecles amb vinculacions actives quan el punter és al botó de\n"
-#~ "menú d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
-
 #~ msgid "shade-button-keymap"
 #~ msgstr "mapa de tecles del botó d'enrotllar"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de tecles amb vinculacions actives quan el punter és al botó\n"
-#~ "d'enrotllar d'una finestra. (Només s'hi avaluen vinculacions de ratolí.)"
-
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr "Tecles modificadores usades per a les vinculacions predeterminades."
 
 #~ msgid "Popup window menu"
 #~ msgstr "Mostra el menú emergent d'operacions de finestra"
@@ -2011,25 +2250,8 @@ msgstr "Web del Sawfish"
 #~ msgid "Display the applications menu."
 #~ msgstr "Mostra el menú d'aplicacions."
 
-#~ msgid "Distance between successive placements in `stagger' placement mode."
-#~ msgstr ""
-#~ "Distància entre col·locacions successives en el mode de col·locació "
-#~ "`stagger'."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Col·locació de finestres: \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Col·locació de finestres de diàleg: \\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Apilament"
-
 #~ msgid "parents"
 #~ msgstr "finestres mare"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Conserva les finestres transitòries damunt: \\w"
 
 #~ msgid "Raise single window"
 #~ msgstr "Eleva la finestra única"
@@ -2072,12 +2294,6 @@ msgstr "Web del Sawfish"
 
 #~ msgid "group"
 #~ msgstr "el grup"
-
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Minimitzar una finestra també la elimina: \\w"
-
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr "Desminimitzar una finestra també la restaura: \\w"
 
 #~ msgid "Iconify window"
 #~ msgstr "Iconifica la finestra"
@@ -2165,9 +2381,6 @@ msgstr "Web del Sawfish"
 #, fuzzy
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr "Commuta si la finestra s'inclou a la llista de finestres."
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr "Bloca la posició i la mida de les finestres maximitzades."
 
 #~ msgid "Maximize window"
 #~ msgstr "Maximitza la finestra"
@@ -2330,9 +2543,6 @@ msgstr "Web del Sawfish"
 #~ "Commuta si la finestra està enrotllada (només se'n mostra la barra de "
 #~ "títol)."
 
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Enfoca les finestres d'aplicació el primer cop que apareixen."
-
 #~ msgid "Raise window and transients"
 #~ msgstr "Eleva la finestra i les seves transitòries"
 
@@ -2367,9 +2577,6 @@ msgstr "Web del Sawfish"
 
 #~ msgid "Insert workspace"
 #~ msgstr "Insereix una àrea"
-
-#~ msgid "Unshade selected windows."
-#~ msgstr "Desenrotlla les finestres quan se seleccionen."
 
 #~ msgid "Display window without focusing"
 #~ msgstr "Selecciona l'àrea on és una finestra sense enfocar la finestra"
@@ -2408,23 +2615,8 @@ msgstr "Web del Sawfish"
 #~ "client que estigui enfocada, ignorant qualsevol vinculació anterior\n"
 #~ "provinent del gestor de finestres."
 
-#~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for "
-#~ "ESD is used."
-#~ msgstr ""
-#~ "El programa que reprodueix mostres d'àudio. Si no s'especifica, "
-#~ "s'utilitza el suport integrat per a l'ESD."
-
 #~ msgid "prompt-keymap"
 #~ msgstr "mapa de tecles de sol·licitud"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr ""
-#~ "Mapa de tecles amb vinculacions actives en llegir cadenes de l'usuari."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Elevar una finestra també n'eleva: \\w"
 
 #~ msgid "Raise window"
 #~ msgstr "Eleva la finestra"
@@ -2434,10 +2626,6 @@ msgstr "Web del Sawfish"
 
 #~ msgid "Raise lower window"
 #~ msgstr "Eleva o abaixa la finestra"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Envia el grup a la subàrea actual"
 
 #~ msgid "Activate viewport"
 #~ msgstr "Selecciona aquesta subàrea (en coordenades)"
@@ -2557,10 +2745,6 @@ msgstr "Web del Sawfish"
 
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "Fes que la finestra actual tingui un títol únic."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Mostra el menú que conté la llista de totes les àrees."
 
 #~ msgid "Popup workspace list"
 #~ msgstr "Mostra el menú emergent d'àrees de treball"

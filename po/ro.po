@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish-1.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2001-11-11 12:42+0200\n"
 "Last-Translator: Tutu Valentin <valentin@tutu.ro>\n"
 "Language-Team: Românã <ro@li.org>\n"
@@ -165,6 +165,30 @@ msgstr ""
 msgid "Match Window Properties"
 msgstr "Potriveºte proprietãþile ferestrei"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Ciclare ferestre"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Sunet"
+
+# parca ferestrele potrivite nu suna chiar cum trebuie ...
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Ferestrele care se potrivesc"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Ponturi"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -175,43 +199,182 @@ msgstr "Index:"
 msgid "Command:"
 msgstr "Comanda:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Mutã fereastra cãtre viewport-ul urmãtor."
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+msgid "Whether to bump into ignored windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 #, fuzzy
 msgid "Grow left"
 msgstr "Mãreºte fereastra cãtre stânga"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 #, fuzzy
 msgid "Grow right"
 msgstr "Mãreºte fereastra cãtre dreapta"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 #, fuzzy
 msgid "Grow up"
 msgstr "Grup"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 #, fuzzy
 msgid "Grow down"
 msgstr "Mãreºte fereastra în jos"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 #, fuzzy
 msgid "Pack left"
 msgstr "stânga"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 #, fuzzy
 msgid "Pack right"
 msgstr "dreapta"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr ""
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr "Numãrul de pixeli cu care mut cursorul la comenzile `move-cursor-'."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Ridicã ferestrele când sunt dezumbrite."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Ridicã ferestrele când sunt dezumbrite."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Ridicã ferestrele focalizate."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr "Aratâ poziþia curentã a ferestrelor în timpul mutãrii."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr "Aratã dimensiunea curentã a ferestrelor în timpul redimensionãrii."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Aratã dimensiunea curentã a ferestrelor în timpul redimensionãrii."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+#, fuzzy
+msgid "Display window names and icons while cycling through windows."
+msgstr "Afiºeazã numele ferestrelor în timpul ciclãrii printre ele."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr "Include ferestrele iconificate în timpul ciclãrii."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr "Include ferestrele din toate spaþiile de lucru în timpul ciclãrii."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr "Include ferestrele din toate viewport-urile în timpul ciclãrii."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Ridicã ferestrele focalizate."
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr ""
+"Maparea tastelor care conþine scurtãturile este activã doar când se cicleazã "
+"ferestrele."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr "Programul lansat prin comanda `xterm'."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+#, fuzzy
+msgid "Arguments given to the `xterm' command."
+msgstr "Argumente opþionale date comenzii `xterm'."
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Focalizare"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Mutã/Redimensioneazã"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Aparenþã"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Spaþii de lucru"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Legãturi"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Minimizare/Maximizare"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Diverse"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Plasament"
+
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Efecte sonore pentru evenimentele ferestrelor."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -221,21 +384,39 @@ msgstr "Eveniment"
 msgid "Audio file"
 msgstr "Fiºier audio"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr "Selecteazã desktop-ul urmãtor când cursorul atinge marginea ecranului."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Atingerea marginii ecranului selecteazã urmatorul: \\w"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Mutã pe alt desktop doar la miºcarea interactivã a ferestrelor."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+#, fuzzy
+msgid "Beep when errors occur."
+msgstr "Emite un sunet când au loc erori."
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+#, fuzzy
+msgid "Display error messages to: \\w"
+msgstr "Afiºeazã erorile: \\w"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Fãrã erori."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Plasament"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Focalizare"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Aparenþã"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -244,6 +425,53 @@ msgstr "Stare"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Altele"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+#, fuzzy
+msgid "Shade Hover"
+msgstr "Umbreºte fereastra"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Timpul în milisecunde pânã la dezumbrirea ferestrelor."
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr "Ridicã ferestrele când sunt dezumbrite."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Afiºeazã indicii pentru cadrele ferestrelor."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "Aratã întreaga documentaþie în indicii."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Timpul în milisecunde pânã la dezumbrirea ferestrelor."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Timpul în milisecunde pânã la dezumbrirea ferestrelor."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -261,9 +489,62 @@ msgstr "Reþine atributele"
 msgid "_Forget saved state"
 msgstr "_Uitã starea salvatã"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+#, fuzzy
+msgid "History"
+msgstr "Istorie"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Amintirea automatã a poziþiilor ferestrei."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Amintirea automatã a dimensiunilor ferestrei."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Amintirea automatã a altor atribute ale ferestrei."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+msgid "Don't automatically remember details of transient windows."
+msgstr "Fãrã amintirea automatã a detaliilor ferestrelor tranzitorii."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "Istorie"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Când pointerul mouse-ului afecteazã focusul pentru intrare."
+
+# ???
+#: ../lisp/sawfish/wm/focus.jl:55
+#, fuzzy
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Modul click-pentru-focalizare paseazã clickul la fereastrã"
+
+#: ../lisp/sawfish/wm/focus.jl:60
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Coboarã fereastra la cea mai joasã poziþie de ordine permisã de stivã."
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Stilul de cadru implicit:"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "Reîncarcã temele automat când sunt modificate."
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Font implicit:  \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -305,6 +586,94 @@ msgstr "GNOME WWW..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "Despre GNOME..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "Combinaþiile de taste sunt active oriunde."
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"Combinaþiile de taste sunt active când o fereastrã client este focalizatã."
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Combinaþiile de taste sunt active când cursorul este deasupra ferestrei-"
+"rãdãcinã\n"
+"(sau când nici o fereastrã nu este focalizatã)."
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în titlul unei "
+"ferestre.\n"
+"(Doar setãrile mouse-ului sunt evaluate)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în chenarul unei "
+"ferestre.\n"
+"(Doar setãrile mouse-ului sunt evaluate)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în butonul de "
+"închidere\n"
+"al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în butonul de "
+"iconificare\n"
+"al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)Combinaþiile de "
+"taste sunt active când cursorul este în unei ferestre.\n"
+"(Doar setãrile mouse-ului sunt evaluate)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în butonul de "
+"maximizare\n"
+"al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în butonul de meniu\n"
+"al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Combinaþiile de taste sunt active când cursorul este în butonul de umbrire\n"
+"al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+#, fuzzy
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
+"Tasta (tastele) folositã pentru shortcut-urile implicite ale managerului de "
+"ferestre. "
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -454,6 +823,44 @@ msgstr "Toate satãrile"
 msgid "Edit theme..."
 msgstr "Editeazã tema..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Metoda de plasare a ferestrelor: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "Metoda de plasare a ferestrelor de dialog: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+#, fuzzy
+msgid "Distance between successive placements in stagger mode."
+msgstr "Distanþa dintre poziþionãrile succesive în modul `stagger'(zigzag)."
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Stivã"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Pãstreazã ferestrele tranzitorii deasupra: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+#, fuzzy
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Când ridic o fereastrã, ridic de asemenea ºi: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+#, fuzzy
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Când ridic o fereastrã, ridic de asemenea ºi: \\w"
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "Lipicios"
@@ -479,9 +886,21 @@ msgstr "În lista de ferestre"
 msgid "In _task list"
 msgstr "În lis_ta GNOME de task-uri."
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr "Blocheazã poziþia ºi mãrimea cât timp ferestrele sunt maximizate."
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "Umbrit"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr "Focalizeazã ferestrele aplicaþiilor când apar pentru prima oarã."
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+msgid "Unshade selected windows."
+msgstr "Dezumbreºte ferestrele selectate."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -494,6 +913,19 @@ msgstr "Apasã tasta..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Ghilimea]"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+#, fuzzy
+msgid "The program used to play audio samples."
+msgstr ""
+"Programul folosit pentru a reda sunete. Dacã nu este setat, suportul nativ "
+"pentru ESD va fi folosit."
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr ""
+"Maparea tastelor conþinând scurtãturile active când se citeºte un ºir de la "
+"utilizator."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -509,6 +941,36 @@ msgstr "Spaþiul de lucru %d"
 msgid "Workspace:"
 msgstr "Spaþiul de lucru:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr "Când ridic o fereastrã, ridic de asemenea ºi: \\w"
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Viewport"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Mutã grupul cãtre viewport-ul curent"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Coloana:"
@@ -517,9 +979,53 @@ msgstr "Coloana:"
 msgid "Row:"
 msgstr "Rândul:"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Ridicã ferestrele focalizate."
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Afiºeazã meniul cu lista tuturor spaþiilor de lucru."
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr "Afiºeazã meniul cu lista tuturor spaþiilor de lucru."
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Numele spaþiilor de lucru"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 #, fuzzy
@@ -808,19 +1314,6 @@ msgstr "Site-ul Sawfish"
 #~ msgid "Border width of bar images."
 #~ msgstr "Grosimea marginii imaginilor barei."
 
-#~ msgid "Window Cycling"
-#~ msgstr "Ciclare ferestre"
-
-#~ msgid "Sound"
-#~ msgstr "Sunet"
-
-# parca ferestrele potrivite nu suna chiar cum trebuie ...
-#~ msgid "Matched Windows"
-#~ msgstr "Ferestrele care se potrivesc"
-
-#~ msgid "Tooltips"
-#~ msgstr "Ponturi"
-
 #~ msgid "Next workspace window"
 #~ msgstr "Urmãtoarea fereastrã a spaþiului de lucru"
 
@@ -1079,10 +1572,6 @@ msgstr "Site-ul Sawfish"
 #~ msgid "Help about"
 #~ msgstr "Ajutor despre"
 
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr "Numãrul de pixeli cu care mut cursorul la comenzile `move-cursor-'."
-
 #~ msgid "Move cursor right"
 #~ msgstr "Mutã cursorul la dreapta"
 
@@ -1126,30 +1615,12 @@ msgstr "Site-ul Sawfish"
 #~ msgstr "Mutã cursorul cu un pixel în jos."
 
 #, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Ridicã ferestrele când sunt dezumbrite."
-
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Ridicã ferestrele focalizate."
-
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Aratâ poziþia curentã a ferestrelor în timpul mutãrii."
-
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr "Aratã dimensiunea curentã a ferestrelor în timpul redimensionãrii."
-
-#, fuzzy
 #~ msgid "border"
 #~ msgstr "Marginea de sus"
 
 #, fuzzy
 #~ msgid "border-grab"
 #~ msgstr "border-keymap"
-
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr "Aratã dimensiunea curentã a ferestrelor în timpul redimensionãrii."
 
 #~ msgid "Move window interactively"
 #~ msgstr "Mutã interactiv fereastra"
@@ -1289,45 +1760,12 @@ msgstr "Site-ul Sawfish"
 #~ msgid "Move window next"
 #~ msgstr "Mutã fereastra înainte"
 
-#~ msgid "Move the window to the next viewport."
-#~ msgstr "Mutã fereastra cãtre viewport-ul urmãtor."
-
 #~ msgid "Set window viewport linear"
 #~ msgstr "Seteazã viewport-ul ferestrei liniar"
 
 #, fuzzy
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr "Afiºeazã numele ferestrelor în timpul ciclãrii printre ele."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Include ferestrele iconificate în timpul ciclãrii."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Include ferestrele din toate spaþiile de lucru în timpul ciclãrii."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Include ferestrele din toate viewport-urile în timpul ciclãrii."
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Ridicã ferestrele focalizate."
-
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr ""
-#~ "Maparea tastelor care conþine scurtãturile este activã doar când se "
-#~ "cicleazã ferestrele."
-
-#, fuzzy
 #~ msgid "Terminal"
 #~ msgstr "vertical"
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "Programul lansat prin comanda `xterm'."
-
-#, fuzzy
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Argumente opþionale date comenzii `xterm'."
 
 #~ msgid "Xterm"
 #~ msgstr "Xterm"
@@ -1372,22 +1810,6 @@ msgstr "Site-ul Sawfish"
 #~ "Prompt for a command, execute it, and print any output to the screen."
 #~ msgstr "Cere o comandã ºi afiºeazã rezultatul execuþiei sale pe ecran."
 
-#~ msgid "Move/Resize"
-#~ msgstr "Mutã/Redimensioneazã"
-
-#~ msgid "Workspaces"
-#~ msgstr "Spaþii de lucru"
-
-#~ msgid "Bindings"
-#~ msgstr "Legãturi"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Minimizare/Maximizare"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Diverse"
-
 #~ msgid "Customize"
 #~ msgstr "Personalizeazã"
 
@@ -1397,39 +1819,19 @@ msgstr "Site-ul Sawfish"
 #~ msgid "3d hack"
 #~ msgstr "3d hack"
 
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Efecte sonore pentru evenimentele ferestrelor."
-
 #, fuzzy
 #~ msgid "Auto-Raise"
 #~ msgstr "Ridicã"
 
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Ridicã ferestrele focalizate."
-
 #~ msgid "Delay in milliseconds until focused windows are raised."
 #~ msgstr ""
 #~ "Timpul în milisecunde pânã când ferestrele focalizate sunt ridicate."
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr ""
-#~ "Selecteazã desktop-ul urmãtor când cursorul atinge marginea ecranului."
 
 #~ msgid "viewport"
 #~ msgstr "viewport"
 
 #~ msgid "workspace"
 #~ msgstr "spaþiul de lucru"
-
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "Atingerea marginii ecranului selecteazã urmatorul: \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Mutã pe alt desktop doar la miºcarea interactivã a ferestrelor."
-
-#, fuzzy
-#~ msgid "Beep when errors occur."
-#~ msgstr "Emite un sunet când au loc erori."
 
 #~ msgid "nowhere"
 #~ msgstr "nicãieri"
@@ -1439,10 +1841,6 @@ msgstr "Site-ul Sawfish"
 
 #~ msgid "standard-error"
 #~ msgstr "eroare-standard"
-
-#, fuzzy
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Afiºeazã erorile: \\w"
 
 #~ msgid "Display errors"
 #~ msgstr "Afiºeazã erorile"
@@ -1479,9 +1877,6 @@ msgstr "Site-ul Sawfish"
 
 #~ msgid "Workspace"
 #~ msgstr "Spaþiu de lucru"
-
-#~ msgid "Viewport"
-#~ msgstr "Viewport"
 
 #~ msgid "Depth"
 #~ msgstr "Adâncime"
@@ -1544,42 +1939,6 @@ msgstr "Site-ul Sawfish"
 #~ "\n"
 #~ "(Ferestrele sunt dezumbrite temporar cât timp cursorul mouse-ului este "
 #~ "deasupra lor.)"
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Timpul în milisecunde pânã la dezumbrirea ferestrelor."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Ridicã ferestrele când sunt dezumbrite."
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Afiºeazã indicii pentru cadrele ferestrelor."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Aratã întreaga documentaþie în indicii."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Timpul în milisecunde pânã la dezumbrirea ferestrelor."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Timpul în milisecunde pânã la dezumbrirea ferestrelor."
-
-#, fuzzy
-#~ msgid "History"
-#~ msgstr "Istorie"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Amintirea automatã a poziþiilor ferestrei."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Amintirea automatã a dimensiunilor ferestrei."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Amintirea automatã a altor atribute ale ferestrei."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr "Fãrã amintirea automatã a detaliilor ferestrelor tranzitorii."
 
 #~ msgid "Remember the current position of the focused window."
 #~ msgstr "Amintirea poziþiei curente a ferestrei focalizate."
@@ -1660,140 +2019,38 @@ msgstr "Site-ul Sawfish"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Creazã un nou spaþiu de lucru înainte de cel prezent."
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Când pointerul mouse-ului afecteazã focusul pentru intrare."
-
-# ???
-#, fuzzy
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "Modul click-pentru-focalizare paseazã clickul la fereastrã"
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr ""
-#~ "Coboarã fereastra la cea mai joasã poziþie de ordine permisã de stivã."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Stilul de cadru implicit:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Reîncarcã temele automat când sunt modificate."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Font implicit:  \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Editeazã stilul cadrului"
 
 #~ msgid "global-keymap"
 #~ msgstr "hartã-taste-globalã"
 
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Combinaþiile de taste sunt active oriunde."
-
 #~ msgid "window-keymap"
 #~ msgstr "combinaþia de taste a ferestrei"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr ""
-#~ "Combinaþiile de taste sunt active când o fereastrã client este focalizatã."
 
 #~ msgid "root-window-keymap"
 #~ msgstr "combinaþia de taste a ferestrei rãdãcinã"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Combinaþiile de taste sunt active când cursorul este deasupra ferestrei-"
-#~ "rãdãcinã\n"
-#~ "(sau când nici o fereastrã nu este focalizatã)."
-
 #~ msgid "title-keymap"
 #~ msgstr "title-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Combinaþiile de taste sunt active când cursorul este în titlul unei "
-#~ "ferestre.\n"
-#~ "(Doar setãrile mouse-ului sunt evaluate)"
 
 #~ msgid "border-keymap"
 #~ msgstr "border-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Combinaþiile de taste sunt active când cursorul este în chenarul unei "
-#~ "ferestre.\n"
-#~ "(Doar setãrile mouse-ului sunt evaluate)"
-
 #~ msgid "close-button-keymap"
 #~ msgstr "close-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Combinaþiile de taste sunt active când cursorul este în butonul de "
-#~ "închidere\n"
-#~ "al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
 
 #~ msgid "iconify-button-keymap"
 #~ msgstr "iconify-button-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Combinaþiile de taste sunt active când cursorul este în butonul de "
-#~ "iconificare\n"
-#~ "al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)Combinaþiile de "
-#~ "taste sunt active când cursorul este în unei ferestre.\n"
-#~ "(Doar setãrile mouse-ului sunt evaluate)"
-
 #~ msgid "maximize-button-keymap"
 #~ msgstr "maximize-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Combinaþiile de taste sunt active când cursorul este în butonul de "
-#~ "maximizare\n"
-#~ "al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
 
 #~ msgid "menu-button-keymap"
 #~ msgstr "menu-button-keymap"
 
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Combinaþiile de taste sunt active când cursorul este în butonul de meniu\n"
-#~ "al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
-
 #~ msgid "shade-button-keymap"
 #~ msgstr "shade-button-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Combinaþiile de taste sunt active când cursorul este în butonul de "
-#~ "umbrire\n"
-#~ "al unei ferestre. (Doar setãrile mouse-ului sunt evaluate)"
-
-#, fuzzy
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr ""
-#~ "Tasta (tastele) folositã pentru shortcut-urile implicite ale managerului "
-#~ "de ferestre. "
 
 #~ msgid "Popup window menu"
 #~ msgstr "Saltã meniul ferestrei"
@@ -1813,23 +2070,8 @@ msgstr "Site-ul Sawfish"
 #~ msgid "Display the applications menu."
 #~ msgstr "Afiºeazã meniul aplicaþiilor."
 
-#~ msgid "Distance between successive placements in `stagger' placement mode."
-#~ msgstr "Distanþa dintre poziþionãrile succesive în modul `stagger'(zigzag)."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Metoda de plasare a ferestrelor: \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Metoda de plasare a ferestrelor de dialog: \\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Stivã"
-
 #~ msgid "parents"
 #~ msgstr "pãrinþi"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Pãstreazã ferestrele tranzitorii deasupra: \\w"
 
 #~ msgid "Raise single window"
 #~ msgstr "Ridicã singura fereastrã"
@@ -1876,14 +2118,6 @@ msgstr "Site-ul Sawfish"
 
 #~ msgid "group"
 #~ msgstr "grup"
-
-#, fuzzy
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Când ridic o fereastrã, ridic de asemenea ºi: \\w"
-
-#, fuzzy
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr "Când ridic o fereastrã, ridic de asemenea ºi: \\w"
 
 #~ msgid "Iconify window"
 #~ msgstr "Iconificã fereastra."
@@ -1952,9 +2186,6 @@ msgstr "Site-ul Sawfish"
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr ""
 #~ "Activeazã posibilitatea de a include fereastra în lista de ferestre."
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr "Blocheazã poziþia ºi mãrimea cât timp ferestrele sunt maximizate."
 
 #~ msgid "Maximize window"
 #~ msgstr "Maximizeazã fereastra"
@@ -2057,9 +2288,6 @@ msgstr "Site-ul Sawfish"
 #~ msgstr ""
 #~ "Activeazã starea ferestrei dintre cea de maximizare-plinã ºi cea normalã."
 
-#~ msgid "Shade window"
-#~ msgstr "Umbreºte fereastra"
-
 #~ msgid "Display only the title bar of the window."
 #~ msgstr "Afiºeazã numai bara de titlu a ferestrei."
 
@@ -2078,9 +2306,6 @@ msgstr "Site-ul Sawfish"
 #~ msgstr ""
 #~ "Activeazã starea de umbrire a ferestrei (numai bara de titlu este "
 #~ "afiºatã)."
-
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Focalizeazã ferestrele aplicaþiilor când apar pentru prima oarã."
 
 #~ msgid "Raise window and transients"
 #~ msgstr "Ridicã fereastra ºi cele tranzitorii"
@@ -2119,9 +2344,6 @@ msgstr "Site-ul Sawfish"
 #~ msgid "Insert workspace"
 #~ msgstr "Insereazã un spaþiu de lucru"
 
-#~ msgid "Unshade selected windows."
-#~ msgstr "Dezumbreºte ferestrele selectate."
-
 #~ msgid "Display window without focusing"
 #~ msgstr "Afiºeazã fereastra farã focalizare"
 
@@ -2158,24 +2380,8 @@ msgstr "Site-ul Sawfish"
 #~ "focalizatã,\n"
 #~ "ignorând orice legãturi ale managerului de ferestre."
 
-#~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for "
-#~ "ESD is used."
-#~ msgstr ""
-#~ "Programul folosit pentru a reda sunete. Dacã nu este setat, suportul "
-#~ "nativ pentru ESD va fi folosit."
-
 #~ msgid "prompt-keymap"
 #~ msgstr "prompt-keymap"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr ""
-#~ "Maparea tastelor conþinând scurtãturile active când se citeºte un ºir de "
-#~ "la utilizator."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Când ridic o fereastrã, ridic de asemenea ºi: \\w"
 
 #~ msgid "Raise window"
 #~ msgstr "Ridicã fereastra"
@@ -2185,10 +2391,6 @@ msgstr "Site-ul Sawfish"
 
 #~ msgid "Raise lower window"
 #~ msgstr "Ridicã fereastra inferioarã"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Mutã grupul cãtre viewport-ul curent"
 
 #~ msgid "Activate viewport"
 #~ msgstr "Activeazã viewport-ul."
@@ -2299,10 +2501,6 @@ msgstr "Site-ul Sawfish"
 
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "Forþeazã fereastra curenta sã aivã titlu unic."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Afiºeazã meniul cu lista tuturor spaþiilor de lucru."
 
 #~ msgid "Popup workspace list"
 #~ msgstr "Saltã lista spaþiilor de lucru"

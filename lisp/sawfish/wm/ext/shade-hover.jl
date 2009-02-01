@@ -31,25 +31,25 @@
 
   (define-structure-alias shade-hover sawfish.wm.ext.shade-hover)
 
-  (defgroup shade-hover "Shade Hover"
+  (defgroup shade-hover (_"Shade Hover")
     :group focus
     :require sawfish.wm.ext.shade-hover)
 
   (defcustom shade-hover-mode nil
-    "Enable shade-hover mode."
+    (_"Enable shade-hover mode.")
     :tooltip "(Temporarily unshades windows while the mouse pointer is over them.)"
     :group (focus shade-hover)
     :type boolean
     :require sawfish.wm.ext.shade-hover)
 
   (defcustom shade-hover-delay 250
-    "Delay in milliseconds before unshading windows."
+    (_"Delay in milliseconds before unshading windows.")
     :group (focus shade-hover)
     :depends shade-hover-mode
     :type (number 0 5000))
 
   (defcustom shade-hover-raise nil
-    "Raise windows when they are unshaded."
+    (_"Raise windows when they are unshaded.")
     :group (focus shade-hover)
     :depends shade-hover-mode
     :type boolean)

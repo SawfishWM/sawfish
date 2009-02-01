@@ -33,18 +33,15 @@
 
   (define-structure-alias error-handler sawfish.wm.ext.error-handler)
 
-  (defgroup error-handling "Error Handling"
+  (defcustom error-handler-beep t
+    (_"Beep when errors occur.")
+    :type boolean
     :group misc)
 
-  (defcustom error-handler-beep t
-    "Beep when errors occur."
-    :type boolean
-    :group (misc error-handling))
-
   (defcustom error-destination 'standard-error
-    "Display error messages to: \\w"
+    (_"Display error messages to: \\w")
     :type (choice nowhere screen standard-error both)
-    :group (misc error-handling))
+    :group misc)
 
   ;; ring buffer for containing error messages
   (define error-ring (make-ring))

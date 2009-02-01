@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2001-11-10 21:14+0100\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -163,6 +163,30 @@ msgstr ""
 msgid "Match Window Properties"
 msgstr "Eigenskapar for meny"
 
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Vindaugeskifting"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Lyd"
+
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+#, fuzzy
+msgid "Matched Windows"
+msgstr "Snakkevindauge"
+
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Verktytips"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -173,46 +197,180 @@ msgstr "Indeks:"
 msgid "Command:"
 msgstr "Kommando:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+msgid "Whether and how to move the pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+msgid "Whether to bump into ignored windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 #, fuzzy
 msgid "Grow left"
 msgstr "X window bilete"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 #, fuzzy
 msgid "Grow right"
 msgstr "X window bilete"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 #, fuzzy
 msgid "Grow up"
 msgstr "Gruppe"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 #, fuzzy
 msgid "Grow down"
 msgstr "Nytt vindauge"
 
 # panel/panel_config.c:1376
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 #, fuzzy
 msgid "Pack left"
 msgstr "Vindaugsnivå for panelet:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 #, fuzzy
 msgid "Pack right"
 msgstr "X window bilete"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 #, fuzzy
 msgid "Pack up"
 msgstr "Hovudvindauge"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 #, fuzzy
 msgid "Pack down"
 msgstr "Hovudvindauge"
+
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+msgid "Number of pixels to move pointer in."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+msgid "How windows being moved are animated"
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+msgid "How windows being resized are animated"
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+msgid "Raise windows when they are moved or resized."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+msgid "How to choose window edges when resizing."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr ""
+
+# gsm/manager.c:834
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+#, fuzzy
+msgid "The program launched by the `xterm' command."
+msgstr "Ikkje noko svar på kommandoen %s."
+
+# gsm/manager.c:834
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+#, fuzzy
+msgid "Arguments given to the `xterm' command."
+msgstr "Ikkje noko svar på kommandoen %s."
+
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Fokus"
+
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Flytt/Endre storleik"
+
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Utsjånad"
+
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Arbeidsområder"
+
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Bindingar"
+
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Minimering/Maksimering"
+
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Ymse"
+
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Plassering"
+
+# applets/tasklist/tasklist_properties.c:355
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+#, fuzzy
+msgid "Play sound effects for window events."
+msgstr "Syn verktytips med fulle oppgåvenamn"
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -224,21 +382,38 @@ msgstr "Hending"
 msgid "Audio file"
 msgstr "Lydfil"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Kantvending"
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+#, fuzzy
+msgid "Display error messages to: \\w"
+msgstr "Detaljar feilmelding"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Ingen feil."
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Plassering"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Fokus"
-
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Utsjånad"
 
 # gsm/gsm-client-list.c:121
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
@@ -248,6 +423,55 @@ msgstr "Tilstand"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Anna"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+#, fuzzy
+msgid "Shade Hover"
+msgstr "Trekk"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr ""
+
+# applets/tasklist/tasklist_properties.c:355
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+#, fuzzy
+msgid "Display tooltips for window frames."
+msgstr "Syn verktytips med fulle oppgåvenamn"
+
+# applets/gen_util/clock.c:837
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+#, fuzzy
+msgid "Show full documentation in tooltips."
+msgstr "Syn dato i verktytips"
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+msgid "Number of milliseconds before displaying tooltips."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+msgid "Number of milliseconds before removing tooltips."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 #, fuzzy
@@ -270,9 +494,66 @@ msgid "_Forget saved state"
 msgstr "Formater som dato"
 
 # help-browser/window.c:208
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+#, fuzzy
+msgid "History"
+msgstr "_Historikk"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+#, fuzzy
+msgid "Automatically remember window positions."
+msgstr "Lagre vindaugeposisjonar"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+#, fuzzy
+msgid "Automatically remember window sizes."
+msgstr "Automatisk gjenkjenning av lenkjer"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+#, fuzzy
+msgid "Automatically remember other window attributes."
+msgstr "enkle innlegg"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+#, fuzzy
+msgid "Don't automatically remember details of transient windows."
+msgstr "Lagre vindaugeposisjonar"
+
+# help-browser/window.c:208
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Historikk"
+
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr ""
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr ""
+
+#: ../lisp/sawfish/wm/focus.jl:60
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr ""
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#: ../lisp/sawfish/wm/frames.jl:136
+#, fuzzy
+msgid "Default frame style:"
+msgstr "Fjern ramme"
+
+#: ../lisp/sawfish/wm/frames.jl:143
+#, fuzzy
+msgid "Automatically reload themes when they are updated."
+msgstr "Signer automatisk meldingar ved hjelp av PGP"
+
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Forvald skrifttype: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -321,6 +602,66 @@ msgstr "GNOME WWW ..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "Om GNOME ..."
+
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr ""
+
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -474,6 +815,41 @@ msgstr "&Tilgjengelege handlingar:"
 msgid "Edit theme..."
 msgstr "Rediger teneste ..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+msgid "Distance between successive placements in stagger mode."
+msgstr ""
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Stabling"
+
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+msgid "Minimizing a window also removes its: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+msgid "Unminimizing a window also restores its: \\w"
+msgstr ""
+
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "Fe_sta"
@@ -503,9 +879,23 @@ msgstr "Flytt vindauger"
 msgid "In _task list"
 msgstr "GNOME oppgåveliste"
 
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr ""
+
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "S_kuggelagd"
+
+#: ../lisp/sawfish/wm/state/transient.jl:48
+#, fuzzy
+msgid "Focus on application windows when they first appear."
+msgstr "Plasser dialogar over programvindauget når det er mogleg"
+
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+#, fuzzy
+msgid "Unshade selected windows."
+msgstr "Gøym valde rader"
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -520,6 +910,14 @@ msgstr "Trykk ein tast ..."
 #, fuzzy
 msgid "[Quote]"
 msgstr "Ingen"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+msgid "The program used to play audio samples."
+msgstr ""
+
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr ""
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -536,6 +934,37 @@ msgstr "Arbeidsområde %d"
 msgid "Workspace:"
 msgstr "Arbeidsområder:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr ""
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+#, fuzzy
+msgid "Viewport"
+msgstr "Fileigenskapar"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Lukkar prosjektet"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Kolonne:"
@@ -544,10 +973,51 @@ msgstr "Kolonne:"
 msgid "Row:"
 msgstr "Rad:"
 
+#: ../lisp/sawfish/wm/windows.jl:73
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+msgid "How to act when passing the first or last workspace."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr ""
+
 #: ../lisp/sawfish/wm/workspace.jl:133
 #, fuzzy
 msgid "Workspace names"
 msgstr "Arbeidsområder:"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 #, fuzzy
@@ -757,19 +1227,6 @@ msgstr "Sawfish heimeside"
 #, fuzzy
 #~ msgid "Border width of bar images."
 #~ msgstr "Breidde på kant"
-
-#~ msgid "Window Cycling"
-#~ msgstr "Vindaugeskifting"
-
-#~ msgid "Sound"
-#~ msgstr "Lyd"
-
-#, fuzzy
-#~ msgid "Matched Windows"
-#~ msgstr "Snakkevindauge"
-
-#~ msgid "Tooltips"
-#~ msgstr "Verktytips"
 
 #, fuzzy
 #~ msgid "Next workspace window"
@@ -1101,11 +1558,6 @@ msgstr "Sawfish heimeside"
 #~ msgid "Terminal"
 #~ msgstr "loddrett"
 
-# gsm/manager.c:834
-#, fuzzy
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Ikkje noko svar på kommandoen %s."
-
 #~ msgid "Xterm"
 #~ msgstr "Xterm"
 
@@ -1139,22 +1591,6 @@ msgstr "Sawfish heimeside"
 #~ msgid "Kill client"
 #~ msgstr "Drep klient"
 
-#~ msgid "Move/Resize"
-#~ msgstr "Flytt/Endre storleik"
-
-#~ msgid "Workspaces"
-#~ msgstr "Arbeidsområder"
-
-#~ msgid "Bindings"
-#~ msgstr "Bindingar"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Minimering/Maksimering"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Ymse"
-
 #, fuzzy
 #~ msgid "Customize"
 #~ msgstr "Tilpasse"
@@ -1162,9 +1598,6 @@ msgstr "Sawfish heimeside"
 #, fuzzy
 #~ msgid "Auto-Raise"
 #~ msgstr "Hev"
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Kantvending"
 
 #, fuzzy
 #~ msgid "viewport"
@@ -1190,10 +1623,6 @@ msgstr "Sawfish heimeside"
 #, fuzzy
 #~ msgid "standard-error"
 #~ msgstr "_Standard feil"
-
-#, fuzzy
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Detaljar feilmelding"
 
 #, fuzzy
 #~ msgid "Display errors"
@@ -1241,10 +1670,6 @@ msgstr "Sawfish heimeside"
 
 #~ msgid "Workspace"
 #~ msgstr "Arbeidsområder"
-
-#, fuzzy
-#~ msgid "Viewport"
-#~ msgstr "Fileigenskapar"
 
 #~ msgid "Depth"
 #~ msgstr "Djupne"
@@ -1324,37 +1749,6 @@ msgstr "Sawfish heimeside"
 #, fuzzy
 #~ msgid "Transients above"
 #~ msgstr "Send"
-
-#, fuzzy
-#~ msgid "Shade Hover"
-#~ msgstr "Trekk"
-
-# applets/tasklist/tasklist_properties.c:355
-#, fuzzy
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Syn verktytips med fulle oppgåvenamn"
-
-# applets/gen_util/clock.c:837
-#, fuzzy
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Syn dato i verktytips"
-
-# help-browser/window.c:208
-#, fuzzy
-#~ msgid "History"
-#~ msgstr "_Historikk"
-
-#, fuzzy
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Lagre vindaugeposisjonar"
-
-#, fuzzy
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Automatisk gjenkjenning av lenkjer"
-
-#, fuzzy
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "enkle innlegg"
 
 #, fuzzy
 #~ msgid "Window history save position"
@@ -1452,17 +1846,6 @@ msgstr "Sawfish heimeside"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Opprette eit nytt delt visning av arbeidsboka"
 
-#, fuzzy
-#~ msgid "Default frame style:"
-#~ msgstr "Fjern ramme"
-
-#, fuzzy
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Signer automatisk meldingar ved hjelp av PGP"
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Forvald skrifttype: \\w"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Rediger rammestil"
 
@@ -1504,9 +1887,6 @@ msgstr "Sawfish heimeside"
 #, fuzzy
 #~ msgid "Display the applications menu."
 #~ msgstr "Program meny"
-
-#~ msgid "Stacking"
-#~ msgstr "Stabling"
 
 #~ msgid "parents"
 #~ msgstr "foreldre"
@@ -1736,20 +2116,12 @@ msgstr "Sawfish heimeside"
 #~ msgstr "Slår av/på syning av menylina."
 
 #, fuzzy
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Plasser dialogar over programvindauget når det er mogleg"
-
-#, fuzzy
 #~ msgid "Raise lower window and transients"
 #~ msgstr "Vil du lukka alle vindauge og avslutta?"
 
 #, fuzzy
 #~ msgid "Insert workspace"
 #~ msgstr "Sett arbeidsområde"
-
-#, fuzzy
-#~ msgid "Unshade selected windows."
-#~ msgstr "Gøym valde rader"
 
 #, fuzzy
 #~ msgid "Display window"
@@ -1777,10 +2149,6 @@ msgstr "Sawfish heimeside"
 # panel/panel_config.c:1408
 #~ msgid "Raise lower window"
 #~ msgstr "Hev nederste vindauge"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Lukkar prosjektet"
 
 #, fuzzy
 #~ msgid "Activate viewport"

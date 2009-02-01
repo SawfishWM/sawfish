@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 21:40+0100\n"
+"POT-Creation-Date: 2009-02-01 23:36+0100\n"
 "PO-Revision-Date: 2002-09-18 05:27+0300\n"
 "Last-Translator: Ömer Fadýl USTA <omer_fad@hotmail.com>\n"
 "Language-Team: GNOME Turk <gnome-turk@gnome.org>\n"
@@ -185,6 +185,32 @@ msgstr ""
 msgid "Match Window Properties"
 msgstr "Pencere özelliklerini yakala"
 
+# ../lisp/x-cycle.jl
+#. customization options
+#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+#: ../lisp/sawfish/wm/autoload.jl:119
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
+msgid "Window Cycling"
+msgstr "Pencere Deðiþimi"
+
+#: ../lisp/sawfish/wm/autoload.jl:132
+#: ../lisp/sawfish/wm/ext/audio-events.jl:36
+msgid "Sound"
+msgstr "Ses"
+
+# ../lisp/match-window.jl
+#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
+#: ../lisp/sawfish/wm/autoload.jl:133
+#: ../lisp/sawfish/wm/ext/match-window.jl:138
+msgid "Matched Windows"
+msgstr "Eþleþen Pencereler"
+
+# ../lisp/tooltips.jl
+#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
+msgid "Tooltips"
+msgstr "Ýpuçlarý"
+
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -196,42 +222,203 @@ msgstr "Ýndeks:"
 msgid "Command:"
 msgstr "Komut:"
 
+#. Customization options.
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
+msgid "Growing and packing of windows"
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
+msgid "Whether and how to move the pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
+msgid "Whether to bump into ignored windows."
+msgstr ""
+
 # ../lisp/menus.jl
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:168
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
 msgstr ""
 
 # ../lisp/menus.jl
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:169
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
 msgid "Grow right"
 msgstr ""
 
 # ../lisp/menus.jl
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:170
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
 msgid "Grow up"
 msgstr ""
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:171
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
 msgid "Grow down"
 msgstr ""
 
 # ../lisp/menus.jl
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:172
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
 msgid "Pack left"
 msgstr ""
 
 # ../lisp/menus.jl
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:173
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
 msgid "Pack right"
 msgstr ""
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:174
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
 msgid "Pack up"
 msgstr ""
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:175
+#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
 msgid "Pack down"
 msgstr ""
+
+# ../lisp/slide-window.jl
+#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr "`move-cursor-' komutundaki taþýnacak piksel sayýsý."
+
+# ../lisp/auto-raise.jl
+#: ../lisp/sawfish/wm/commands/move-resize.jl:53
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Pencereler açýlýnca onlarý yükselt."
+
+# ../lisp/auto-raise.jl
+#: ../lisp/sawfish/wm/commands/move-resize.jl:58
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Pencereler açýlýnca onlarý yükselt."
+
+# ../lisp/auto-raise.jl
+#: ../lisp/sawfish/wm/commands/move-resize.jl:63
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Pencereler odaklanýnca yükselt."
+
+# ../lisp/move-resize.jl
+#: ../lisp/sawfish/wm/commands/move-resize.jl:68
+msgid "Show current position of windows while moving."
+msgstr "Pencereler taþýnýrken pencerelerin geçerli yerini göster."
+
+# ../lisp/move-resize.jl
+#: ../lisp/sawfish/wm/commands/move-resize.jl:73
+msgid "Show current dimensions of windows while resizing."
+msgstr "Pencereler boyutlanýrken, pencerenin geçerli ebatlarýný göster."
+
+# ../lisp/move-resize.jl
+#: ../lisp/sawfish/wm/commands/move-resize.jl:78
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Pencereler boyutlanýrken, pencerenin geçerli ebatlarýný göster."
+
+#: ../lisp/sawfish/wm/commands/move-resize.jl:83
+msgid "Distance in pixels before window edges align with each other."
+msgstr ""
+
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
+msgid "Display window names and icons while cycling through windows."
+msgstr ""
+
+# ../lisp/x-cycle.jl
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
+msgid "Include iconified windows when cycling."
+msgstr ""
+"Pencerelerin arasýnda gezerken simge halindeki pencereleri de gözönüne al."
+
+# ../lisp/x-cycle.jl
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
+msgid "Include windows on all workspaces when cycling."
+msgstr "Gezerken çalýþma alanlarýndaki pencereleri gözönünde bulundur."
+
+# ../lisp/x-cycle.jl
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
+msgid "Include windows on all viewports when cycling."
+msgstr "Gezerken görüntü alanýndaki pencereleri gözönünde bulundur."
+
+# ../lisp/auto-raise.jl
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Pencereler odaklanýnca yükselt."
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr ""
+"Pencereler arasýnda gezinirken odaklanmýþ penceredeki etkin baðýntýlarý "
+"içeren tuþ haritasý."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:34
+msgid "The program launched by the `xterm' command."
+msgstr "`xterm' komutuyla çalýþtýrýlacak uygulama."
+
+#: ../lisp/sawfish/wm/commands/xterm.jl:39
+#, fuzzy
+msgid "Arguments given to the `xterm' command."
+msgstr "`xterm' komutuyla çalýþtýrýlacak uygulama."
+
+# ../lisp/custom.jl
+#. default groups
+#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Odaklama"
+
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/custom.jl:483
+msgid "Move/Resize"
+msgstr "Taþý/Boyutlandýr"
+
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Görünüm"
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/custom.jl:485
+msgid "Workspaces"
+msgstr "Çalýþma alanlarý"
+
+# ../lisp/keymaps.jl
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
+msgid "Bindings"
+msgstr "Baðýntýlar"
+
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/custom.jl:487
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Alçaltma ve Yükseltme"
+
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/custom.jl:488
+msgid "Miscellaneous"
+msgstr "Çeþitli"
+
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Yerleþtirme"
+
+# ../themer/themer.in
+#: ../lisp/sawfish/wm/ext/audio-events.jl:42
+msgid "Play sound effects for window events."
+msgstr "Pencere eylemlerinde ses çal."
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -241,24 +428,41 @@ msgstr "Eylem"
 msgid "Audio file"
 msgstr "Ses dosyasý"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:85
+# ../lisp/edge-flip.jl
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
+msgid "Edge Flipping"
+msgstr "Kenar Zýplamasý"
+
+# ../lisp/edge-flip.jl
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr "Gösterge ekran kenarýna gelince önümüzdeki masaüstünü seç."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Ekran kenarýna çarpýnca sonraki seçilir: \\w"
+
+# ../lisp/move-resize.jl
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
+msgid "Only flip when interactively moving a window."
+msgstr "Sadece pencereyi etkileþimli taþýrken çevir."
+
+#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:37
+msgid "Beep when errors occur."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:42
+#, fuzzy
+msgid "Display error messages to: \\w"
+msgstr "Hatalarý göster"
+
+#: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Hata yok."
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Yerleþtirme"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Odaklama"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Görünüm"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -268,6 +472,57 @@ msgstr "Durum"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Diðer"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
+msgid "Shade Hover"
+msgstr "Gölgele"
+
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
+msgid "Enable shade-hover mode."
+msgstr ""
+
+# ../lisp/auto-raise.jl
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Pencereleri açma arasý (ms)."
+
+# ../lisp/auto-raise.jl
+#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
+msgid "Raise windows when they are unshaded."
+msgstr "Pencereler açýlýnca onlarý yükselt."
+
+# ../lisp/tooltips.jl
+#: ../lisp/sawfish/wm/ext/tooltips.jl:52
+msgid "Display tooltips for window frames."
+msgstr "Pencere çerçeveleri için ipuçlarý göster."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:58
+msgid "Show full documentation in tooltips."
+msgstr "Detaylý ipuçlarý kullan."
+
+# ../lisp/auto-raise.jl
+#: ../lisp/sawfish/wm/ext/tooltips.jl:64
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Pencereleri açma arasý (ms)."
+
+# ../lisp/auto-raise.jl
+#: ../lisp/sawfish/wm/ext/tooltips.jl:70
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Pencereleri açma arasý (ms)."
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:76
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:82
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#: ../lisp/sawfish/wm/ext/tooltips.jl:88
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -285,9 +540,63 @@ msgstr "Ö_zellikleri hatýrla"
 msgid "_Forget saved state"
 msgstr "Kaydedilen durumu unut"
 
+#. customizations
+#: ../lisp/sawfish/wm/ext/window-history.jl:90
+msgid "History"
+msgstr "Tarihçe"
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:93
+msgid "Automatically remember window positions."
+msgstr "Pencerelerin yerini otomatik hatýrla."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:99
+msgid "Automatically remember window sizes."
+msgstr "Pencere boyutlarýný otomatik hatýrla."
+
+# ../lisp/frames.jl
+#: ../lisp/sawfish/wm/ext/window-history.jl:105
+msgid "Automatically remember other window attributes."
+msgstr "Diðer pencere özelliklerini otomatik hatýrla."
+
+#: ../lisp/sawfish/wm/ext/window-history.jl:111
+msgid "Don't automatically remember details of transient windows."
+msgstr "Mat pencerelerin detaylarýný otomatik olarak hatýrlama."
+
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Geçmiþ"
+
+# ../lisp/focus.jl
+#: ../lisp/sawfish/wm/focus.jl:48
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Giriþ odaðýna fare noktalayýcý nezaman tesir etti."
+
+#: ../lisp/sawfish/wm/focus.jl:55
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr ""
+
+#: ../lisp/sawfish/wm/focus.jl:60
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr ""
+
+#: ../lisp/sawfish/wm/focus.jl:65
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+# ../lisp/frames.jl
+#: ../lisp/sawfish/wm/frames.jl:136
+msgid "Default frame style:"
+msgstr "Öntanýmlý çerçeve stili:"
+
+# ../lisp/frames.jl
+#: ../lisp/sawfish/wm/frames.jl:143
+msgid "Automatically reload themes when they are updated."
+msgstr "Görünümler yenilenince görünümleri yeniden yükle "
+
+# ../lisp/frames.jl
+#: ../lisp/sawfish/wm/frames.jl:211
+msgid "Default font: \\w"
+msgstr "Öntanýmlý yazýtipi: \\w"
 
 # ../lisp/frames.jl
 #: ../lisp/sawfish/wm/frames.jl:512
@@ -335,6 +644,96 @@ msgstr "GNOME WWW..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "GNOME Hakkýnda..."
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/keymaps.jl:91
+msgid "Keymap containing bindings active anywhere."
+msgstr "Baðlayýcýlar içeren keymap(anahtar) heryerde aktif."
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/keymaps.jl:104
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr "Odaklanmýþ penceredeki etkin baðýntýlarý içeren tuþ haritasý."
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/keymaps.jl:112
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Noktalayýcý root penceresinde olduðu zaman (veya pencere odaklanmadýðý "
+"zaman)\n"
+"klavye haritasýný aktif yap."
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/keymaps.jl:122
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pencerelerin baþlýðýnda geçerli olan tuþ haritasý.\n"
+"(Sadece fare hareketleri analiz ediliyor.)"
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/keymaps.jl:131
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pencerelerin kenarýnda geçerli olan tuþ haritasý ;\n"
+"(Sadece fare hareketleri analiz ediliyor)."
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/keymaps.jl:140
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pencerelerin kapatma basmasýnýn üstünde geçerli olan tuþ haritasý\n"
+"(Sadece fare hareketleri analiz ediliyor)."
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/keymaps.jl:148
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pencerelerin simgeleþtirme basmasýnýn üstünde geçerli olan tuþ haritasý\n"
+"(Sadece fare hareketleri analiz ediliyor)."
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/keymaps.jl:157
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pencerelerin büyültme basmasýnýn üstünde geçerli olan tuþ haritasý\n"
+"(Sadece fare hareketleri analiz ediliyor)."
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/keymaps.jl:165
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pencerelerin menü düðmesinin üstünde geçerli olan tuþ haritasý\n"
+"(Sadece fare hareketleri analiz ediliyor.)"
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/keymaps.jl:172
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pencerelerin kapatma basmasýnýn üstünde geçerli olan tuþ haritasý\n"
+"(Sadece fare hareketleri analiz ediliyor)."
+
+#: ../lisp/sawfish/wm/keymaps.jl:181
+#, fuzzy
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
+"Tanýmlayýcý anahtar(lar) varsayýlan pencere yöneticisi kýsa yollarý için "
+"kullanýlýr."
 
 # ../lisp/custom.jl
 #: ../lisp/sawfish/wm/menus.jl:86
@@ -510,6 +909,44 @@ msgstr "Tüm ayarlar"
 msgid "Edit theme..."
 msgstr "Temayý düzenle..."
 
+#: ../lisp/sawfish/wm/placement.jl:41
+msgid "Method of placing windows: \\w"
+msgstr "Pencereleri yerleþtirme türü : \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:46
+msgid "Method of placing dialog windows: \\w"
+msgstr "Diyalog pencerelerini yerleþtirme türü: \\w"
+
+#: ../lisp/sawfish/wm/placement.jl:51
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#: ../lisp/sawfish/wm/placement/stagger.jl:34
+msgid "Distance between successive placements in stagger mode."
+msgstr ""
+
+#. Each window will have a `depth' property--an integer, zero
+#. represents the level of normal windows, negative for windows below
+#. this level, and positive for windows above the normal level
+#: ../lisp/sawfish/wm/stacking.jl:58
+msgid "Stacking"
+msgstr "Yýðma"
+
+# ../lisp/stacking.jl
+#: ../lisp/sawfish/wm/stacking.jl:61
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Ufakca pencereleri, bunlardan üstte tut : \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:75
+#, fuzzy
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Bir pencereyi yükseltirken, ayný iþlemi bunlara uygula: \\w"
+
+#: ../lisp/sawfish/wm/state/iconify.jl:80
+#, fuzzy
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Bir pencereyi yükseltirken, ayný iþlemi bunlara uygula: \\w"
+
 # ../lisp/menus.jl
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
@@ -541,10 +978,25 @@ msgstr "Pencere _listesinde"
 msgid "In _task list"
 msgstr "_GNOME iþlem listesinde"
 
+# ../lisp/move-resize.jl
+#: ../lisp/sawfish/wm/state/maximize.jl:89
+msgid "Lock position and size while windows are maximized."
+msgstr "Pencere yükselince pencerenin büyüklüðünü ve yerini kilitle."
+
 # ../lisp/menus.jl
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "_Toplanmýþ"
+
+# ../lisp/transient.jl
+#: ../lisp/sawfish/wm/state/transient.jl:48
+msgid "Focus on application windows when they first appear."
+msgstr "Uygulama penceresi ilk defa gösterilince odakla."
+
+# ../lisp/workspace.jl
+#: ../lisp/sawfish/wm/util/display-window.jl:43
+msgid "Unshade selected windows."
+msgstr "Seçilmiþ olan pencereleri normallaþtir ."
 
 # ../lisp/group-funs.jl
 #: ../lisp/sawfish/wm/util/groups.jl:153
@@ -558,6 +1010,19 @@ msgstr "Tuþa basýn..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Yazý]"
+
+#: ../lisp/sawfish/wm/util/play-audio.jl:43
+#, fuzzy
+msgid "The program used to play audio samples."
+msgstr ""
+"Ses parçalarýný çalacak olan uygulama. Belirtilmezse sesler ESD yardýmýyla "
+"çalýnacaktýr."
+
+# ../lisp/keymaps.jl
+#: ../lisp/sawfish/wm/util/prompt.jl:63
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr ""
+"Tuþ haritalarýný içeren baðlar, kullanýcýdan metin alýrken etkinleþsin."
 
 # ../lisp/menus.jl
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
@@ -578,6 +1043,37 @@ msgstr "%d. Çalýþma Alaný"
 msgid "Workspace:"
 msgstr "Çalýþma Alaný:"
 
+#: ../lisp/sawfish/wm/util/stacking.jl:45
+msgid "When raising a window, also raise its: \\w"
+msgstr "Bir pencereyi yükseltirken, ayný iþlemi bunlara uygula: \\w"
+
+#. Virtual workspaces are implemented by moving windows in and out of
+#. the screen dimensions. E.g. moving to the left moves all windows one
+#. screen-width to the right.
+#: ../lisp/sawfish/wm/viewport.jl:53
+msgid "Viewport"
+msgstr "Görüntü alaný"
+
+#: ../lisp/sawfish/wm/viewport.jl:56
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+# ../lisp/viewport.jl
+#: ../lisp/sawfish/wm/viewport.jl:62
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Grubu aktif bakýþ noktasýna taþý"
+
+#: ../lisp/sawfish/wm/viewport.jl:67
+msgid ""
+"Number of steps in which to scroll between viewports (less steps = faster "
+"scrolling)."
+msgstr ""
+
+#: ../lisp/sawfish/wm/viewport.jl:73
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Sütun:"
@@ -586,11 +1082,54 @@ msgstr "Sütun:"
 msgid "Row:"
 msgstr "Sýra:"
 
+# ../lisp/auto-raise.jl
+#: ../lisp/sawfish/wm/windows.jl:73
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Pencereler odaklanýnca yükselt."
+
+#: ../lisp/sawfish/wm/windows.jl:77
+msgid "Warping"
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:80
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:85
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:90
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:95
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#: ../lisp/sawfish/wm/windows.jl:100
+msgid "Format to create unique window names."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:122
+msgid "How to act when passing the first or last workspace."
+msgstr ""
+
+#: ../lisp/sawfish/wm/workspace.jl:127
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr ""
+
 # ../lisp/menus.jl
 # ../lisp/custom.jl
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Çalýþma alaný isimleri"
+
+#: ../lisp/sawfish/wm/workspace.jl:139
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
 
 # ../lisp/workspace.jl
 #: ../lisp/sawfish/wm/workspace.jl:150
@@ -869,21 +1408,6 @@ msgstr "Sawfish web sayfasý"
 #~ msgid "Border width of bar images."
 #~ msgstr "Çubuk resimlerinin kenar kalýnlýðý."
 
-# ../lisp/x-cycle.jl
-#~ msgid "Window Cycling"
-#~ msgstr "Pencere Deðiþimi"
-
-#~ msgid "Sound"
-#~ msgstr "Ses"
-
-# ../lisp/match-window.jl
-#~ msgid "Matched Windows"
-#~ msgstr "Eþleþen Pencereler"
-
-# ../lisp/tooltips.jl
-#~ msgid "Tooltips"
-#~ msgstr "Ýpuçlarý"
-
 # ../lisp/menus.jl
 #~ msgid "Next workspace window"
 #~ msgstr "Sonraki çalýþma alaný penceresi"
@@ -1056,11 +1580,6 @@ msgstr "Sawfish web sayfasý"
 #~ msgid "Help about"
 #~ msgstr "Yardým Hakkýnda"
 
-# ../lisp/slide-window.jl
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr "`move-cursor-' komutundaki taþýnacak piksel sayýsý."
-
 # ../lisp/workspace.jl
 #~ msgid "Move cursor right"
 #~ msgstr "Ýmleci saða taþý"
@@ -1091,33 +1610,10 @@ msgstr "Sawfish web sayfasý"
 #~ msgid "Move cursor down fine"
 #~ msgstr "Ýmleci iyice aþaðý taþý"
 
-# ../lisp/auto-raise.jl
-#, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Pencereler açýlýnca onlarý yükselt."
-
-# ../lisp/auto-raise.jl
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Pencereler odaklanýnca yükselt."
-
-# ../lisp/move-resize.jl
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Pencereler taþýnýrken pencerelerin geçerli yerini göster."
-
-# ../lisp/move-resize.jl
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr "Pencereler boyutlanýrken, pencerenin geçerli ebatlarýný göster."
-
 # ../lisp/menus.jl
 #, fuzzy
 #~ msgid "border"
 #~ msgstr "Üst kenar"
-
-# ../lisp/move-resize.jl
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr "Pencereler boyutlanýrken, pencerenin geçerli ebatlarýný göster."
 
 # ../lisp/move-resize.jl
 #~ msgid "Move window interactively"
@@ -1180,36 +1676,8 @@ msgstr "Sawfish web sayfasý"
 #~ msgid "Move window next"
 #~ msgstr "Pencereyi Sonrakiyle birleþtir"
 
-# ../lisp/x-cycle.jl
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr ""
-#~ "Pencerelerin arasýnda gezerken simge halindeki pencereleri de gözönüne al."
-
-# ../lisp/x-cycle.jl
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Gezerken çalýþma alanlarýndaki pencereleri gözönünde bulundur."
-
-# ../lisp/x-cycle.jl
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Gezerken görüntü alanýndaki pencereleri gözönünde bulundur."
-
-# ../lisp/auto-raise.jl
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Pencereler odaklanýnca yükselt."
-
 #~ msgid "cycle-keymap"
 #~ msgstr "dönen-anahtarharitasý"
-
-# ../lisp/keymaps.jl
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr ""
-#~ "Pencereler arasýnda gezinirken odaklanmýþ penceredeki etkin baðýntýlarý "
-#~ "içeren tuþ haritasý."
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "`xterm' komutuyla çalýþtýrýlacak uygulama."
 
 # ../src/sawfish-ui.jl
 #~ msgid "Xterm"
@@ -1247,52 +1715,13 @@ msgstr "Sawfish web sayfasý"
 #~ msgid "Call command with output to screen"
 #~ msgstr "Çýktýsý ile beraber ekrana yazýlmasý için bir komut çaðýrýn"
 
-# ../lisp/custom.jl
-#~ msgid "Move/Resize"
-#~ msgstr "Taþý/Boyutlandýr"
-
-# ../lisp/menus.jl
-# ../lisp/custom.jl
-#~ msgid "Workspaces"
-#~ msgstr "Çalýþma alanlarý"
-
-# ../lisp/keymaps.jl
-# ../lisp/custom.jl
-#~ msgid "Bindings"
-#~ msgstr "Baðýntýlar"
-
-# ../lisp/custom.jl
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Alçaltma ve Yükseltme"
-
-# ../lisp/custom.jl
-#~ msgid "Miscellaneous"
-#~ msgstr "Çeþitli"
-
 # ../lisp/menus.jl
 #~ msgid "Customize"
 #~ msgstr "Özelleþtir"
 
-# ../themer/themer.in
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Pencere eylemlerinde ses çal."
-
-# ../lisp/auto-raise.jl
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Pencereler odaklanýnca yükselt."
-
 # ../lisp/auto-raise.jl
 #~ msgid "Delay in milliseconds until focused windows are raised."
 #~ msgstr "Yükseltme gecikmesi (ms)."
-
-# ../lisp/edge-flip.jl
-#~ msgid "Edge Flipping"
-#~ msgstr "Kenar Zýplamasý"
-
-# ../lisp/edge-flip.jl
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr "Gösterge ekran kenarýna gelince önümüzdeki masaüstünü seç."
 
 #~ msgid "viewport"
 #~ msgstr "görümbaðlantýsý"
@@ -1301,13 +1730,6 @@ msgstr "Sawfish web sayfasý"
 # ../lisp/custom.jl
 #~ msgid "workspace"
 #~ msgstr "çalýþma alaný"
-
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "Ekran kenarýna çarpýnca sonraki seçilir: \\w"
-
-# ../lisp/move-resize.jl
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Sadece pencereyi etkileþimli taþýrken çevir."
 
 #~ msgid "Error Handling"
 #~ msgstr "Hata Yakalama"
@@ -1321,9 +1743,6 @@ msgstr "Sawfish web sayfasý"
 
 #~ msgid "standard-error"
 #~ msgstr "standart-hata"
-
-#~ msgid "Display errors"
-#~ msgstr "Hatalarý göster"
 
 #~ msgid "Name"
 #~ msgstr "Ýsim"
@@ -1361,9 +1780,6 @@ msgstr "Sawfish web sayfasý"
 # ../lisp/custom.jl
 #~ msgid "Workspace"
 #~ msgstr "Çalýþma alaný"
-
-#~ msgid "Viewport"
-#~ msgstr "Görüntü alaný"
 
 #~ msgid "Depth"
 #~ msgstr "Derinlik"
@@ -1441,9 +1857,6 @@ msgstr "Sawfish web sayfasý"
 #~ msgid "Shade hover"
 #~ msgstr "Gölgele"
 
-#~ msgid "Shade Hover"
-#~ msgstr "Gölgele"
-
 #~ msgid ""
 #~ "Enable shade-hover mode.\n"
 #~ "\n"
@@ -1453,47 +1866,6 @@ msgstr "Sawfish web sayfasý"
 #~ "\n"
 #~ "(Geçici olarak pencereleri fare üzerine geldiði zaman gölgesiz hale "
 #~ "getirir.)"
-
-# ../lisp/auto-raise.jl
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Pencereleri açma arasý (ms)."
-
-# ../lisp/auto-raise.jl
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Pencereler açýlýnca onlarý yükselt."
-
-# ../lisp/tooltips.jl
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Pencere çerçeveleri için ipuçlarý göster."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Detaylý ipuçlarý kullan."
-
-# ../lisp/auto-raise.jl
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Pencereleri açma arasý (ms)."
-
-# ../lisp/auto-raise.jl
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Pencereleri açma arasý (ms)."
-
-#~ msgid "History"
-#~ msgstr "Tarihçe"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Pencerelerin yerini otomatik hatýrla."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Pencere boyutlarýný otomatik hatýrla."
-
-# ../lisp/frames.jl
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Diðer pencere özelliklerini otomatik hatýrla."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr "Mat pencerelerin detaylarýný otomatik olarak hatýrlama."
 
 # ../lisp/menus.jl
 # ../lisp/custom.jl
@@ -1567,22 +1939,6 @@ msgstr "Sawfish web sayfasý"
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Grubu Aktif çalýþma alanýna yolla"
 
-# ../lisp/focus.jl
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Giriþ odaðýna fare noktalayýcý nezaman tesir etti."
-
-# ../lisp/frames.jl
-#~ msgid "Default frame style:"
-#~ msgstr "Öntanýmlý çerçeve stili:"
-
-# ../lisp/frames.jl
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Görünümler yenilenince görünümleri yeniden yükle "
-
-# ../lisp/frames.jl
-#~ msgid "Default font: \\w"
-#~ msgstr "Öntanýmlý yazýtipi: \\w"
-
 # ../lisp/menus.jl
 #~ msgid "Edit frame style"
 #~ msgstr "Çerçeve stilini düzenle"
@@ -1593,92 +1949,11 @@ msgstr "Sawfish web sayfasý"
 #~ msgid "global-keymap"
 #~ msgstr "genel tuþ haritasý"
 
-# ../lisp/keymaps.jl
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Baðlayýcýlar içeren keymap(anahtar) heryerde aktif."
-
 #~ msgid "window-keymap"
 #~ msgstr "pencere tuþ haritasý"
 
-# ../lisp/keymaps.jl
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr "Odaklanmýþ penceredeki etkin baðýntýlarý içeren tuþ haritasý."
-
-# ../lisp/keymaps.jl
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Noktalayýcý root penceresinde olduðu zaman (veya pencere odaklanmadýðý "
-#~ "zaman)\n"
-#~ "klavye haritasýný aktif yap."
-
 #~ msgid "title-keymap"
 #~ msgstr "baþlýk tuþ haritasý"
-
-# ../lisp/keymaps.jl
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Pencerelerin baþlýðýnda geçerli olan tuþ haritasý.\n"
-#~ "(Sadece fare hareketleri analiz ediliyor.)"
-
-# ../lisp/keymaps.jl
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Pencerelerin kenarýnda geçerli olan tuþ haritasý ;\n"
-#~ "(Sadece fare hareketleri analiz ediliyor)."
-
-# ../lisp/keymaps.jl
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Pencerelerin kapatma basmasýnýn üstünde geçerli olan tuþ haritasý\n"
-#~ "(Sadece fare hareketleri analiz ediliyor)."
-
-# ../lisp/keymaps.jl
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Pencerelerin simgeleþtirme basmasýnýn üstünde geçerli olan tuþ haritasý\n"
-#~ "(Sadece fare hareketleri analiz ediliyor)."
-
-# ../lisp/keymaps.jl
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Pencerelerin büyültme basmasýnýn üstünde geçerli olan tuþ haritasý\n"
-#~ "(Sadece fare hareketleri analiz ediliyor)."
-
-# ../lisp/keymaps.jl
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Pencerelerin menü düðmesinin üstünde geçerli olan tuþ haritasý\n"
-#~ "(Sadece fare hareketleri analiz ediliyor.)"
-
-# ../lisp/keymaps.jl
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Pencerelerin kapatma basmasýnýn üstünde geçerli olan tuþ haritasý\n"
-#~ "(Sadece fare hareketleri analiz ediliyor)."
-
-#, fuzzy
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr ""
-#~ "Tanýmlayýcý anahtar(lar) varsayýlan pencere yöneticisi kýsa yollarý için "
-#~ "kullanýlýr."
 
 #~ msgid "Popup window menu"
 #~ msgstr "Pencere menüsü aç"
@@ -1693,21 +1968,8 @@ msgstr "Sawfish web sayfasý"
 #~ msgid "Display the applications menu."
 #~ msgstr "Uygulama menüsünü göster."
 
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Pencereleri yerleþtirme türü : \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Diyalog pencerelerini yerleþtirme türü: \\w"
-
-#~ msgid "Stacking"
-#~ msgstr "Yýðma"
-
 #~ msgid "parents"
 #~ msgstr "aileler"
-
-# ../lisp/stacking.jl
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Ufakca pencereleri, bunlardan üstte tut : \\w"
 
 #~ msgid "Raise single window"
 #~ msgstr "Tek pencereyi yükselt"
@@ -1745,10 +2007,6 @@ msgstr "Sawfish web sayfasý"
 # ../src/sawfish-ui.jl
 #~ msgid "Make window not ignored"
 #~ msgstr "Penceredeki göz ardý durumunu kaldýr"
-
-# ../lisp/move-resize.jl
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr "Pencere yükselince pencerenin büyüklüðünü ve yerini kilitle."
 
 # ../lisp/custom.jl
 #~ msgid "Maximize window"
@@ -1807,36 +2065,12 @@ msgstr "Sawfish web sayfasý"
 #~ msgid "Toggle window shaded"
 #~ msgstr "Pencereyi topla/aç"
 
-# ../lisp/transient.jl
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Uygulama penceresi ilk defa gösterilince odakla."
-
 # ../lisp/workspace.jl
 #~ msgid "Insert workspace"
 #~ msgstr "Bir çalýþma alaný ekle"
 
-# ../lisp/workspace.jl
-#~ msgid "Unshade selected windows."
-#~ msgstr "Seçilmiþ olan pencereleri normallaþtir ."
-
 #~ msgid "Display window"
 #~ msgstr "Görüntü penceresi"
-
-#~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for "
-#~ "ESD is used."
-#~ msgstr ""
-#~ "Ses parçalarýný çalacak olan uygulama. Belirtilmezse sesler ESD "
-#~ "yardýmýyla çalýnacaktýr."
-
-# ../lisp/keymaps.jl
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr ""
-#~ "Tuþ haritalarýný içeren baðlar, kullanýcýdan metin alýrken etkinleþsin."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Bir pencereyi yükseltirken, ayný iþlemi bunlara uygula: \\w"
 
 #~ msgid "Raise window"
 #~ msgstr "Pencereyi yükselt"
@@ -1844,11 +2078,6 @@ msgstr "Sawfish web sayfasý"
 # ../lisp/ignore-window.jl
 #~ msgid "Lower window"
 #~ msgstr "Pencereyi alçalt"
-
-# ../lisp/viewport.jl
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Grubu aktif bakýþ noktasýna taþý"
 
 #~ msgid "Activate viewport"
 #~ msgstr "Bakýþ noktasýný aktifleþtir"

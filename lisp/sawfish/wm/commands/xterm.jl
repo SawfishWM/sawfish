@@ -1,6 +1,6 @@
 #| xterm.jl -- command to launch an xterm
 
-   $Id$
+   $Id: xterm.jl,v 1.7 2002/04/21 22:25:12 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -30,19 +30,15 @@
 	  sawfish.wm.custom
 	  sawfish.wm.commands)
 
-  (defgroup xterm "Terminal"
-    :group misc
-    :require sawfish.wm.commands.xterm)
-
   (defcustom xterm-program "xterm"
-    "The program launched by the `xterm' command."
+    (_"The program launched by the `xterm' command.")
     :type string
-    :group (misc xterm))
+    :group misc)
 
   (defcustom xterm-args ""
-    "Arguments given to the `xterm' command."
+    (_"Arguments given to the `xterm' command.")
     :type string
-    :group (misc xterm))
+    :group misc)
 
   (define (xterm #!optional command)
     "Start a new xterm."
