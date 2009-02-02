@@ -20,15 +20,15 @@ if [ -f configure.in ]; then
   if grep "AM_PROG_LIBTOOL" configure.in >/dev/null; then
     echo "Running libtoolize"
     lver=$(libtool --version | grep 1.5)
-    if [[ ${lver} != "" ]]; then
+    if [ "x${lver}" != "x" ]; then
 	    libtoolize --force --copy || exit 1
     else    libtoolize --force --copy --install || exit 1
     fi
   fi
   echo "Running intltoolize"
-  intltoolize --force --copy
+  intltoolize --force --copy || exit 1
   echo "Running aclocal $ACLOCAL_FLAGS"
-  aclocal -I m4 -I /usr/share/aclocal/ $ACLOCAL_FLAGS || exit 1
+  aclocal -I m4 $ACLOCAL_FLAGS || exit 1
 
   echo "Running autoconf $AUTOCONF_FLAGS"
   autoconf $AUTOCONF_FLAGS || exit 1

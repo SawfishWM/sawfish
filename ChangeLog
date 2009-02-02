@@ -2,6 +2,10 @@
 	* Makefile.in: create $DESTDIR$datadir/applications before 
 	               installing desktop file into it
 
+	* autogen.sh: - make sure we check if intltoolize successfully exited
+		      - make sure we don't use bash-specific syntax [Mark Diekhans]
+		      - don't -I /usr/share/aclocal/ [Mark Diekhans]
+
 2009-02-01  Christopher Bratusek <zanghar@freenet.de>
 	* MAINTAINERS: updated my mail address
 
