@@ -34,5 +34,4 @@ if [ -f configure.in ]; then
   autoconf $AUTOCONF_FLAGS || exit 1
 fi
 
-./configure "$@" && ( echo ; echo "Now type \`make' to compile." )
-
+./configure "$@"
