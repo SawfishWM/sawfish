@@ -57,12 +57,14 @@ install : all installdirs
 	    $(INSTALL_SCRIPT) $(srcdir)/moved $(DESTDIR)$(bindir)/$$f; \
 	  fi \
 	done
-	mkdir -p $(DESTDIR)$(libdir)/pkgconfig/
 	$(INSTALL_DATA) $(top_srcdir)/sawfish.pc $(DESTDIR)$(libdir)/pkgconfig/
+
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(sawfishdir)/$(version) \
 	  $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir) \
-	  $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties
+	  $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties \
+	  $(DESTDIR)$(datadir)/applications/ \
+	  $(DESTDIR)$(libdir)/pkgconfig/
 
 uninstall :
 	for dir in $(SUBDIRS); do \
