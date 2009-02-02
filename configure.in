@@ -167,6 +167,7 @@ if test "$with_gdk_pixbuf" != "no"; then
 			  AC_DEFINE(NEED_PIXMAP_CACHE, 1, [Need pixmap cache])
 			  IMAGE_LIBS='${GDK_PIXBUF_LIBS}'
 			  IMAGE_CFLAGS='${GDK_PIXBUF_CFLAGS}'
+			  IMAGE_LOADER=gdk
 			  with_gdk_pixbuf=yes
 			  ,AC_MSG_ERROR([can't locate gdk-pixbuf-xlib])
 			  with_gdk_pixbuf=no)
@@ -179,6 +180,8 @@ if test "$with_gdk_pixbuf" = "no"; then
 			  AC_DEFINE(HAVE_IMLIB, 1, [Have Imlib1])
 			  IMAGE_LIBS='${IMLIB1_LIBS}'
 			  IMAGE_CFLAGS='${IMLIB1_CFLAGS}'
+			  IMLIB_VERSION="`pkg-config --modversion imlib`"
+			  IMAGE_LOADER=imlib1
 			  ,AC_MSG_ERROR([can't locate imlib1 library]))
 fi
 
@@ -285,7 +288,7 @@ GETTEXT_PACKAGE=sawfish
 PACKAGE=sawfish
 VERSION=$version
 
-install_sh=../install-sh
+install_sh=../install.sh
 
 dnl Nonstandard exported symbols
 AC_SUBST(version)
@@ -360,6 +363,49 @@ mv sawfish.ebuild sawfish-$version.ebuild
 
 chmod +x build-info
 ./build-info
+
+REP_VERSION="`pkg-config --modversion librep`"
+REP_GTK_VERSION="`pkg-config --modversion rep-gtk`"
+GLIB_VERSION="`pkg-config --modversion glib-2.0`"
+CAIRO_VERSION="`pkg-config --modversion cairo`"
+GTK_VERSION="`pkg-config --modversion gtk+-2.0`"
+
+echo "
+  == == == == == == == == == == == == ==
+
+  sawfish:	$version
+
+  == == == == == == == == == == == == ==
+
+  prefix:	$prefix
+  exec_prefix:	$exec_prefix
+  libdir:	$libdir
+  libexecdir:	$libexecdir
+
+  == == == == == == == == == == == == ==
+
+  compiler:	$CC
+  cflags:	$CFLAGS $DEVELOPMENT_CFLAGS
+  
+  == == == == == == == == == == == == ==
+
+  rep:		$REP_VERSION
+  rep-gtk:	$REP_GTK_VERSION
+  glib:		$GLIB_VERSION
+  cairo:	$CAIRO_VERSION
+  gtk+:		$GTK_VERSION"
+
+if test "$with_gdk_pixbuf" = "no"; then
+echo "  imlib1:	$IMLIB_VERSION"
+fi
+
+echo "
+  == == == == == == == == == == == == ==
+  
+  image loader:	$IMAGE_LOADER
+  
+  == == == == == == == == == == == == ==
+  "
 
 dnl If it doesn't look like GNU Make is being used, give a friendly warning
 tem=`make --version -f /dev/null 2>&1 | grep GNU`
