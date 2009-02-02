@@ -3,6 +3,8 @@ all:
 clean:
 	rm -f *~
 
+distclean: clean
+
 dist: clean
 	rm -rf screenshotter screenshotter.tar.gz
 	rm -f .*.sw?

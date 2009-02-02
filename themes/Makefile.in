@@ -69,6 +69,8 @@ clean :
 	done
 	rm -f *.jlc *.jld *~
 
+distclean: realclean
+
 realclean : clean
 	rm -f Makefile
 

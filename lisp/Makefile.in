@@ -1,5 +1,5 @@
 # Makefile.in for sawmill's Lisp files
-# $Id$
+# $Id: Makefile.in,v 1.30 2002/07/05 01:17:35 jsh Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -87,6 +87,8 @@ clean :
 	  ( cd $$d && $(MAKE) $@ ); \
 	done
 	rm -f `find . \( -name '*.jlc' -o -name '*~' -o -name core \) -print`
+
+distclean: realclean
 
 realclean : clean
 	set -e; for d in $(SUBDIRS); do \

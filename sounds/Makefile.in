@@ -1,5 +1,5 @@
 # Makefile.in for sawmill's sound files
-# $Id$
+# $Id: Makefile.in,v 1.3 2000/07/06 13:30:07 john Exp $
 #
 # Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -44,6 +44,8 @@ uninstall :
 
 clean :
 	rm -f *~ core
+
+distclean: realclean
 
 realclean : clean
 	rm -f Makefile

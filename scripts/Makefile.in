@@ -1,5 +1,5 @@
 # Makefile.in
-# $Id$
+# $Id: Makefile.in,v 1.6 2001/02/14 04:28:35 jsh Exp $
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
@@ -63,6 +63,8 @@ installdirs : mkinstalldirs
 
 clean :
 	rm -f *~ *.jlc core
+
+distclean: realclean
 
 realclean : clean
 	rm -f sawfish-about.jl Makefile

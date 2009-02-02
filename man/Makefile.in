@@ -70,5 +70,7 @@ uninstall :
 clean :
 	rm -f *~ sawfish.info* sawfish.?? sawfish.???
 
+distclean: realclean
+
 realclean : clean
 	rm -f Makefile
