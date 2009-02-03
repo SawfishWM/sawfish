@@ -31,7 +31,6 @@ using a GTK+ interface.  Sawfish is mostly GNOME compliant
 
 %configure
 make host_type=%{_target_platform}
-( cd po && ./make-pot update )
 
 %define librepdir %(\
    repl=$(rpm -ql librep.%{_arch}| grep -m 1 /rep/); \
