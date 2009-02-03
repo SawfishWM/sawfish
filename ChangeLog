@@ -9,6 +9,19 @@
 	* librep.spec.in: don't call make-pot (deprecated)
 	                  don't %doc deprecated files
 
+	* lisp/sawfish/wm/keymaps.jl: - merged tab-keymap.jl
+	                              - add keymap for tabs (tab-keymap)
+
+	* lisp/sawfish/wm/tabs/tab.jl
+	* lisp/sawfish/wm/tabs/tabgroup.jl
+	* lisp/sawfish/wm/tabs/marks.jl: Merged tab-system [Yann Hodique, Scott Scriven, Nathan Froyd, Christopher Bratusek]
+
+	* lisp/Makefile.in: install tabbing code
+
+	* po/Makefile.in.in: remove file, add symlink instead (fixes issue with older intltool)
+
+	* autogen.sh: remove --copy flag from intltoolize
+
 2009-02-02  Christopher Bratusek <zanghar@freenet.de>
 	* Makefile.in: create $DESTDIR$datadir/applications before 
 	               installing desktop file into it

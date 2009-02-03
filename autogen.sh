@@ -26,7 +26,7 @@ if [ -f configure.in ]; then
     fi
   fi
   echo "Running intltoolize"
-  intltoolize --force --copy || exit 1
+  intltoolize --force || exit 1
   echo "Running aclocal $ACLOCAL_FLAGS"
   aclocal -I m4 $ACLOCAL_FLAGS || exit 1
 

@@ -87,7 +87,9 @@
   (defcustom global-keymap (bind-keys (make-keymap)
 			     "W-Left" 'previous-workspace
 			     "W-Right" 'next-workspace
-			     "W-Tab" 'cycle-windows)
+			     "W-Tab" 'cycle-windows
+			     "W-ISO_Left_Tab" 'tab-raise-left-window
+			     "H-ISO_Left_Tab" 'tab-raise-right-window)
     (_"Keymap containing bindings active anywhere.")
     :group bindings
     :type keymap
@@ -100,7 +102,8 @@
 			     "W-Button3-Click1" 'raise-lower-window
 			     "W-Button2-Click1" 'popup-window-menu
 			     "W-Button1-Move" 'move-window-interactively
-			     "Button1-Click1" 'raise-and-pass-through-click)
+			     "Button1-Click1" 'raise-and-pass-through-click
+			     "H-g" 'add-to-group)
     (_"Keymap containing bindings active when a client window is focused.")
     :group bindings
     :type keymap
@@ -171,6 +174,15 @@ of a window. (Only mouse-bindings are evaluated in this map.)")
 				   "Button1-Off" 'toggle-window-shaded)
     (_"Keymap containing bindings active when the pointer is in the shade button
 of a window. (Only mouse-bindings are evaluated in this map.)")
+    :group bindings
+    :type keymap)
+
+  (defcustom tab-keymap (bind-keys (make-keymap)
+  				   "Button1-Move" 'move-window-interactively
+				   "Button1-Off" 'raise-window
+				   "Button2-Off" 'mygroup
+				   "Button3-Off" 'raise-lower-window)
+    (_"Keymap containing bindings active when the pointer is on a tab")
     :group bindings
     :type keymap)
 
