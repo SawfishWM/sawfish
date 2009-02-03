@@ -36,7 +36,7 @@ SUBDIRS="src lisp scripts themes sounds man po"
 AC_SUBST(SUBDIRS)
 
 dnl Remove trailing slash in $prefix if necessary
-dnl /usr// is the same than /usr/ ... so why would we need this? 
+dnl /usr// is the same than /usr/ ... so why would we need this?
 case "${prefix}" in
   */)
     prefix=`echo ${prefix} | sed -e 's/^\(.*\)\/$/\1/'`
@@ -57,9 +57,17 @@ AC_HEADER_SYS_WAIT
 AC_HEADER_TIME
 AC_CHECK_HEADERS(fcntl.h sys/time.h sys/utsname.h)
 
+AC_PATH_PROG(PKG_CONFIG, [pkg-config], [no])
+
 dnl Check for X headers, etc
 _cppflags="${CPPFLAGS}"
 CPPFLAGS="${CPPFLAGS} ${X_CFLAGS}"
+
+AC_ARG_WITH(xorg-x11r7,
+	    [  --with-xorg-x11r7	  Use X.Org X11R7
+	     --without-xorg-x11r7	  Use X.Org/XFree86 X11R6 instead], [], [with_xorg_x11r7=yes])
+
+if test "$with_xorg_x11r7" != "no"; then
 
 AC_CHECK_HEADERS(X11/extensions/Xdbe.h, [], [], [#include <X11/Xlib.h> ])
 
@@ -72,18 +80,92 @@ XFT_CFLAGS=""
 PKG_CHECK_MODULES(libXineRama, xinerama >= 1.0
 		  ,XINERAMA_LIBS="-lXinerama"
 		  AC_DEFINE(HAVE_X11_EXTENSIONS_XINERAMA_H, 1, [Have xinerama])
-		  ,AC_MSG_ERROR([can't locate libXineRama]))
+		  ,AC_MSG_ERROR([can not locate libXineRama]))
 
 PKG_CHECK_MODULES(libXRandR, xrandr >= 1.0
 		  ,XRANDR_LIBS="-lXrandr"
 		  AC_DEFINE(HAVE_X11_EXTENSIONS_XRANDR_H, 1, [Have xrandr])
-		  ,AC_MSG_ERROR([can't locate libXRandR]))
+		  ,AC_MSG_ERROR([can not locate libXRandR]))
 
 PKG_CHECK_MODULES(libXft, xft >= 1.0
 		  ,XFT_LIBS="-lXft"
 		  XFT_CFLAGS="`pkg-config --cflags xft`"
 		  AC_DEFINE(HAVE_X11_XFT_XFT_H, 1, [Have xft])
-		  ,AC_MSG_ERROR([can't locate libXft]))
+		  ,AC_MSG_ERROR([can not locate libXft]))
+
+dnl is X available?
+X_LIBS=""
+
+PKG_CHECK_MODULES(libX11, x11 >= 1.0
+		  ,AC_DEFINE(HAVE_X11, 1, [Have X11])
+		  X_LIBS="`pkg-config --libs x11`"
+		  X_CFLAGS="`pkg-config --cflags x11`"
+		  AC_DEFINE(X_DISPLAY_MISSING, 0, [Have x11])
+		  ,AC_MSG_ERROR([can not locate libX11]))
+
+X_LIBS+=" -lXext -lXrender"
+
+X_EXTRA_LIBS=""
+
+PKG_CHECK_MODULES(libICE, ice >= 1.0
+		  ,X_EXTRA_LIBS+="-lICE "
+		  ,AC_MSG_ERROR([can't locate libICE]))
+
+PKG_CHECK_MODULES(libSM, sm >= 1.0
+		  ,X_EXTRA_LIBS+="-lSM "
+		  ,AC_MSG_ERROR([can't locate libSM]))
+
+X_SERVER="X.Org X11R7"
+
+CPPFLAGS="${_cppflags}"
+
+else
+
+AC_CHECK_HEADERS(X11/ICE/ICE.h X11/SM/SMlib.h X11/extensions/Xdbe.h, [], [], [#include <X11/Xlib.h> ])
+
+dnl Checks for X extensions/libraries
+XINERAMA_LIBS=""
+XRANDR_LIBS=""
+XFT_LIBS=""
+XFT_CFLAGS=""
+
+AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
+	     [XINERAMA_LIBS="-lXinerama"
+	      AC_CHECK_HEADERS(X11/extensions/Xinerama.h)],
+	     [],[$X_LIBS -lX11 -lXext])
+
+AC_CHECK_LIB(Xrandr, XRRUpdateConfiguration,
+	     [XRANDR_LIBS="-lXrandr"
+	      AC_CHECK_HEADERS(X11/extensions/Xrandr.h, [], [],
+	         [#include <X11/Xlib.h> ])],
+	     [],[$X_LIBS -lX11 -lXext])
+
+dnl Try using pkg-config first, since it looks like Xft2 may fail our
+dnl hand-crafted tests
+PKG_CHECK_MODULES(XFT, xft >= 1.0,
+ [_cppflags=$CPPFLAGS
+  CPPFLAGS="$CPPFLAGS $XFT_CFLAGS"
+  AC_CHECK_HEADERS(X11/Xft/Xft.h)
+  CPPFLAGS=$_cppflags],
+ [AC_CHECK_LIB(Xft, XftDrawCreate,
+	       [XFT_LIBS="-lXft -lXrender"
+	       AC_CHECK_HEADERS(X11/Xft/Xft.h)],
+	       [], [$X_LIBS -lX11 -lXext])])
+
+dnl is X available?
+if test "${no_x}" != "yes"; then
+  AC_DEFINE(HAVE_X11)
+  X_LIBS+=" -lXext -lXrender -lSM -lICE"
+  X_EXTRA_LIBS=""
+else
+  AC_MSG_ERROR([You need X11 for sawfish])
+fi
+
+X_SERVER="X.Org/XFree86 X11R6"
+
+CPPFLAGS="${_cppflags}"
+
+fi
 
 dnl Checks for pango
 PANGO_MIN_VER="1.8.0"
@@ -92,10 +174,10 @@ PANGO_MODULES="pango "
 
 PKG_CHECK_MODULES(PANGO, pango >= ${PANGO_MIN_VER}
 		  ,AC_DEFINE(HAVE_PANGO, 1, [Have pango])
-		  ,AC_MSG_ERROR([can't locate pango]))
+		  ,AC_MSG_ERROR([can not locate pango]))
 
 PKG_CHECK_MODULES(PANGOX, pangox >= ${PANGO_MIN_VER}
-		  ,AC_DEFINE(HAVE_PANGO_X, 1, [Have pangox]) PANGO_MODULES+="pangox " 
+		  ,AC_DEFINE(HAVE_PANGO_X, 1, [Have pangox]) PANGO_MODULES+="pangox "
 		  ,AC_MSG_WARN([pango x support not available]))
 
 PKG_CHECK_MODULES(PANGOXFT, pangoxft >= ${PANGO_MIN_VER}
@@ -114,36 +196,14 @@ PKG_CHECK_MODULES(LIBREP, librep >= ${REP_MIN_VER}
 		  REP_LIBS="`pkg-config --libs librep`"
 		  REP_MSGFMT="`which msgfmt`"
 		  REP_VERSION="`pkg-config --variable=version librep`"
-		  ,AC_MSG_ERROR([can't locate librep])) 
+		  ,AC_MSG_ERROR([can not locate librep]))
 
 dnl Check for rep-gtk
 REP_GTK_MIN_VER="0.18.4"
 
 PKG_CHECK_MODULES(REP_GTK, rep-gtk >= 0.18.4
 		  ,
-		  ,AC_MSG_ERROR([can't locate rep-gtk]))
-
-dnl is X available?
-X_LIBS=""
-
-PKG_CHECK_MODULES(libX11, x11 >= 1.0
-		  ,AC_DEFINE(HAVE_X11, 1, [Have X11])
-		  X_LIBS="`pkg-config --libs x11`"
-		  X_CFLAGS="`pkg-config --cflags x11`"
-		  AC_DEFINE(X_DISPLAY_MISSING, 0, [Have x11])
-		  ,AC_MSG_ERROR([can't locate libX11]))
-
-X_LIBS+=" -lXext -lXrender"
-
-X_EXTRA_LIBS=""
-
-PKG_CHECK_MODULES(libICE, ice >= 1.0
-		  ,X_EXTRA_LIBS+="-lICE "
-		  ,AC_MSG_ERROR([can't locate libICE]))
-
-PKG_CHECK_MODULES(libSM, sm >= 1.0
-		  ,X_EXTRA_LIBS+="-lSM "
-		  ,AC_MSG_ERROR([can't locate libSM]))
+		  ,AC_MSG_ERROR([can not locate rep-gtk]))
 
 dnl Check for GTK+2
 GTK_MIN_VER="2.6.0"
@@ -152,7 +212,7 @@ PKG_CHECK_MODULES(GTK, gtk+-2.0 >= ${GTK_MIN_VER}
 		  ,GTK_LIBS="`pkg-config --libs gtk+-2.0`"
 		  GTK_CFLAGS="`pkg-config --cflags gtk+-2.0`"
 		  AC_DEFINE(HAVE_GTK, 1, [Have GTK])
-		  ,AC_MSG_ERROR([can't locate gtk+2]))
+		  ,AC_MSG_ERROR([can not locate gtk+2]))
 
 dnl Check for image handling libraries
 AC_ARG_WITH(gdk-pixbuf,
@@ -169,7 +229,7 @@ if test "$with_gdk_pixbuf" != "no"; then
 			  IMAGE_CFLAGS='${GDK_PIXBUF_CFLAGS}'
 			  IMAGE_LOADER=gdk
 			  with_gdk_pixbuf=yes
-			  ,AC_MSG_ERROR([can't locate gdk-pixbuf-xlib])
+			  ,AC_MSG_ERROR([can not locate gdk-pixbuf-xlib])
 			  with_gdk_pixbuf=no)
 fi
 
@@ -182,7 +242,7 @@ if test "$with_gdk_pixbuf" = "no"; then
 			  IMAGE_CFLAGS='${IMLIB1_CFLAGS}'
 			  IMLIB_VERSION="`pkg-config --modversion imlib`"
 			  IMAGE_LOADER=imlib1
-			  ,AC_MSG_ERROR([can't locate imlib1 library]))
+			  ,AC_MSG_ERROR([can not locate imlib1 library]))
 fi
 
 dnl Check for libaudiofile
@@ -197,7 +257,7 @@ if test "$with_audiofile" = "yes"; then
 		      ,AUDIOFILE_LIBS="`pkg-config --libs audiofile`"
 		      AUDIOFILE_CFLAGS="`pkg-config --cflags audiofile`"
 		      AC_DEFINE(HAVE_LIBAUDIOFILE, 1, [Have libaudiofile])
-		      ,AC_MSG_ERROR([can't locate libaudiofile]))
+		      ,AC_MSG_ERROR([can not locate libaudiofile]))
 fi
 
 dnl Check for esound
@@ -212,7 +272,7 @@ if test "$with_esd" = "yes"; then
 		      ,ESD_LIBS="`pkg-config --libs esound`"
 		      ESD_CFLAGS="`pkg-config --cflags esound`"
 		      AC_DEFINE(HAVE_ESD, 1, [Have ESD])
-		      ,AC_MSG_ERROR([can't locate esound]))
+		      ,AC_MSG_ERROR([can not locate esound]))
 fi
 
 dnl Check for Doug Lea's malloc in libc
@@ -386,7 +446,7 @@ echo "
 
   compiler:	$CC
   cflags:	$CFLAGS $DEVELOPMENT_CFLAGS
-  
+
   == == == == == == == == == == == == ==
 
   rep:		$REP_VERSION
@@ -401,9 +461,13 @@ fi
 
 echo "
   == == == == == == == == == == == == ==
-  
+
+  xserver:	$X_SERVER
+
+  == == == == == == == == == == == == ==
+
   image loader:	$IMAGE_LOADER
-  
+
   == == == == == == == == == == == == ==
   "
 

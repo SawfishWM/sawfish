@@ -2,21 +2,26 @@ In Sawfish 1.5.0 there are the following major changes:
 
 **********
 
-- sawmill-defaults is now sawfish-defaults
+sawmill-defaults is now sawfish-defaults
 
-This means if you got
+This means if you got:
 
-(require 'sawmill-defaults) in your sawfishrc, replace it by
-(require 'sawfish-defaults)
+>> (require 'sawmill-defaults) 
 
-**********
+in your sawfishrc, replace it by:
 
-- ~/.sawmillrc is no longer a valid configuration file, if
-you still use it, rename it to either ~/.sawfishrc or ~/sawfish/rc
+>> (require 'sawfish-defaults)
 
 **********
 
-- XFree86 is no longer detected by configure.in 
-(XXX Will add work-around for XFree86 Users later on XXX)
+~/.sawmillrc is no longer a valid configuration file, if you 
+still use it, rename it to either ~/.sawfishrc or ~/sawfish/rc
+
+**********
+
+by default only X11R7 (X.Org 7.0 or newer) is detected, if you
+use X11R6 (X.Org 6.8x/6.9x or XFree86), add the following flag:
+
+>> --without-xorg-x11r7
 
 **********
