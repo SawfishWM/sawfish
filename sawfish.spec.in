@@ -66,7 +66,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(-,root,root,-)
 %doc README NEWS FAQ THANKS BUGS TODO OPTIONS README.IMPORTANT
-%doc po/sawfish.pot lisp/sawfish/ui/WIDGETS-LIST lisp/sawfish/ui/WISHLIST
 %{_bindir}/*
 %dir %{_datadir}/sawfish
 %{_datadir}/sawfish/%{version}
