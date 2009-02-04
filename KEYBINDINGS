@@ -1,0 +1,96 @@
+This is the complete list of default sawfish keybindings.
+
+Toggle = Switch Status (Maximized -> Unmaximized ...)
+
+W = Alt
+H = Hyper
+M = Meta
+C = Control
+S = Shift
+
+Left = Left Arrow Key
+Right = Right Arrow Key
+Up = Up Arrow Key
+Down = Down Arrow Key
+
+KP_Left = Keypad Left Arrow Key
+KP_Right = Keypad Right Arrow Key
+KP_Up = Keypad Up Arrow Key
+KP_Down = Keypad Down Arrow Key
+
+Tab = Tabulator Key
+
+ISO_Left_Tab = Left Tabulator Key (same as Tab)
+ISO_Right_Tab = Right Tabulator Key (if existent)
+
+Button1 = Left Mouse Button
+Button2 = Middle Mouse Button/Scroll Wheel (Button 1 and 3 together should emulate this)
+Button3 = Right Mouse Button
+
+Off = When Mouse Button Is Released
+Off1 = Same as Off
+Off2 = When Mouse Button Is Released Twice
+Click = When Mouse Button Is Clicked
+Click1 = Same as Click
+Click2 = When Mouse Button Is Clicked Twice
+Move = When Button Is Clicked and Pointer Moved
+
+global-keymap (Those bindings take place everywhere):
+
+W-Left -> Previous Workspace
+W-Right -> Next Workspace
+W-Tab -> Cycle Windows
+W-ISO_Left_Tab -> tab-raise-left-window
+H-ISO_Left_Tab -> tab-raise-right-window
+
+window-keymap (Those bindings take place when the pointer is inside a window, but not on the titlebar)
+
+W-Up -> Raise Window
+W-Down -> Lower Window
+W-Button3-Click1 -> Raise Or Lower Window
+W-Button1-Move -> Move Window Interactively
+Button1-Click1 -> Raise And Pass Trough Click (Raise And Focus) Window
+
+root-window-keymap (Those bindings take place on the root window ("The desktop background"))
+
+Button2-Click1 -> Popup Sawfish Menu
+
+title-keymap (Those bindings take place when the pointer is on the titlebar)
+
+Button3-Off -> Raise Or Lower Window
+Button2-Move -> Resize Window Interactively
+Button1-Off2 -> Toggle Window Shaded
+Button1-Move -> Move Window Interactively
+Button2-Off -> Add Window To Tab Group
+
+border-keymap (Those bindings take place when the pointer is on the border)
+
+Button3-Off -> Raise Or Lower Window
+Button1-Move -> Resize Window Interactively
+Button2-Move -> Move Window Interactively
+
+close-button-keymap (Those bindings take place when the pointer is on the close button)
+
+Button3-Click1 -> Popup Window Menu
+S-Button1-Off -> Delete Group
+Button1-Off -> Delete Window
+
+iconify-button-keymap (Those bindings take place when the pointer is on the iconify button)
+
+Button3-Click1 -> Popup Window Menu
+Button1-Off -> Iconify Window
+
+maximize-button-keymap (Those bindings take place when the pointer is on the maximize button)
+
+Button3-Off -> Toggle Horizontal Maximization
+Button2-Off -> Toggle Vertical Maximization
+Button1-Off -> Toggle Maximization
+
+menu-button-keymap (Those bindings take place when the pointer is on the menu button)
+
+Button3-Off -> Delete Window
+Button1-Click1 -> Popup Window Menu
+
+shade-button-keymap (Those bindings take place when the pointer is on the shade button)
+
+Button1-Off -> Toggle Window Shaded
