@@ -102,8 +102,7 @@
 			     "W-Button3-Click1" 'raise-lower-window
 			     "W-Button2-Click1" 'popup-window-menu
 			     "W-Button1-Move" 'move-window-interactively
-			     "Button1-Click1" 'raise-and-pass-through-click
-			     "H-g" 'add-to-group)
+			     "Button1-Click1" 'raise-and-pass-through-click)
     (_"Keymap containing bindings active when a client window is focused.")
     :group bindings
     :type keymap
@@ -121,7 +120,8 @@
 			    "Button3-Off" 'raise-lower-window
 			    "Button2-Move" 'resize-window-interactively
 			    "Button1-Off2" 'toggle-window-shaded
-			    "Button1-Move" 'move-window-interactively)
+			    "Button1-Move" 'move-window-interactively
+			    "Button2-Off" 'add-to-group)
     (_"Keymap containing bindings active when the pointer is in the title of
 a window. (Only mouse-bindings are evaluated in this map.)")
     :group bindings
@@ -174,15 +174,6 @@ of a window. (Only mouse-bindings are evaluated in this map.)")
 				   "Button1-Off" 'toggle-window-shaded)
     (_"Keymap containing bindings active when the pointer is in the shade button
 of a window. (Only mouse-bindings are evaluated in this map.)")
-    :group bindings
-    :type keymap)
-
-  (defcustom tab-keymap (bind-keys (make-keymap)
-  				   "Button1-Move" 'move-window-interactively
-				   "Button1-Off" 'raise-window
-				   "Button2-Off" 'mygroup
-				   "Button3-Off" 'raise-lower-window)
-    (_"Keymap containing bindings active when the pointer is on a tab")
     :group bindings
     :type keymap)
 
