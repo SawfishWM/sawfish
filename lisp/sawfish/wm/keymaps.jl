@@ -87,9 +87,7 @@
   (defcustom global-keymap (bind-keys (make-keymap)
 			     "W-Left" 'previous-workspace
 			     "W-Right" 'next-workspace
-			     "W-Tab" 'cycle-windows
-			     "W-ISO_Left_Tab" 'tab-raise-left-window
-			     "H-ISO_Left_Tab" 'tab-raise-right-window)
+			     "W-Tab" 'cycle-windows)
     (_"Keymap containing bindings active anywhere.")
     :group bindings
     :type keymap
@@ -102,7 +100,9 @@
 			     "W-Button3-Click1" 'raise-lower-window
 			     "W-Button2-Click1" 'popup-window-menu
 			     "W-Button1-Move" 'move-window-interactively
-			     "Button1-Click1" 'raise-and-pass-through-click)
+			     "Button1-Click1" 'raise-and-pass-through-click
+			     "W-ISO_Left_Tab" 'tab-raise-left-window 
+			     "H-ISO_Left_Tab" 'tab-raise-right-window)
     (_"Keymap containing bindings active when a client window is focused.")
     :group bindings
     :type keymap

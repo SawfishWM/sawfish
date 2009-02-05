@@ -40,8 +40,6 @@ global-keymap (Those bindings take place everywhere):
 W-Left -> Previous Workspace
 W-Right -> Next Workspace
 W-Tab -> Cycle Windows
-W-ISO_Left_Tab -> tab-raise-left-window
-H-ISO_Left_Tab -> tab-raise-right-window
 
 window-keymap (Those bindings take place when the pointer is inside a window, but not on the titlebar)
 
@@ -50,6 +48,8 @@ W-Down -> Lower Window
 W-Button3-Click1 -> Raise Or Lower Window
 W-Button1-Move -> Move Window Interactively
 Button1-Click1 -> Raise And Pass Trough Click (Raise And Focus) Window
+W-ISO_Left_Tab -> tab-raise-left-window
+H-ISO_Left_Tab -> tab-raise-right-window
 
 root-window-keymap (Those bindings take place on the root window ("The desktop background"))
 
