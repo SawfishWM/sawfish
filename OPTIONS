@@ -600,3 +600,17 @@
 
 ;; (define-special-variable yank-window-minimum-visible 10
 ;;   "The minimum amount of window left visible, if yanked over the edge.")
+
+;; infinite-desktop options
+
+;; (define-special-variable dtm.infinite-desktop-p 1
+;;   "Simulate an infinite desktop (Conflicts edge-flipping).")
+
+;; (define-special-variable dtm.infinite-desktop.move-distance 64
+;;   "Amount to move the workspace.")
+
+;; (define-special-variable dtm.infinite-desktop.move-cursor-distance 32
+;;   "Amount to move the cursor after moving the workspace.")
+
+;; (define-special-variable dtm.infinite-desktop.stop-at-workspace-borders nil
+;;   "Stop scrolling at workspace borders (Fixes warp-to-window bugs).")
