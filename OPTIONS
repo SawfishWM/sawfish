@@ -578,7 +578,6 @@
 ;;window is displayed. See the `display-message' function for more
 ;;details.")
 
-
 ;; tab options
 
 ;; (define-special-variable tab-left-dec-width 11
@@ -592,4 +591,12 @@
 
 
 ;; (define-special-variable tab-right-margin 16
-;;   "Width of tab area's right-edge decoration"
+;;   "Width of tab area's right-edge decoration")
+
+;; shrink-yank options
+
+;; (define-special-variable shrink-window-minimum-size 10
+;;   "The minimum height or width to which a window may be shrunk.")
+
+;; (define-special-variable yank-window-minimum-visible 10
+;;   "The minimum amount of window left visible, if yanked over the edge.")

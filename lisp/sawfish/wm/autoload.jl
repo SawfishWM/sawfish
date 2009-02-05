@@ -127,7 +127,6 @@
 (autoload-command 'cycle-class-backwards 'sawfish.wm.commands.x-cycle)
 (autoload-command 'cycle-dock 'sawfish.wm.commands.x-cycle)
 (autoload-command 'cycle-dock-backwards 'sawfish.wm.commands.x-cycle)
-(defgroup tabs (_"Tabs"))
 (autoload-command (quote xterm) (quote sawfish.wm.commands.xterm))
 (autoload-command (quote 3d-hack) (quote sawfish.wm.ext.3d-hack) #:class 'default)
 (defgroup audio (_"Sound") :require sawfish.wm.ext.audio-events)
