@@ -34,7 +34,7 @@
 	      sawfish.wm.commands
 	      sawfish.wm.frames
 	      sawfish.wm.tabs.tabgroup
-	      sawfish.wm.tabs.marks
+	      sawfish.wm.util.marks
 	      sawfish.wm.windows)
 
      (define-structure-alias tab sawfish.wm.tabs.tab)
