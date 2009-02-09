@@ -31,7 +31,7 @@
 	  sawfish.wm.util.workarea)
 
   (defcustom stagger-placement-step 32
-    (_"Distance between successive placements in stagger mode.")
+    "Distance between successive placements in `stagger' placement mode."
     :type number
     :range (1)
     :group placement)

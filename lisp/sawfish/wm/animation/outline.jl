@@ -35,18 +35,18 @@
   (define-structure-alias anim-outline sawfish.wm.animation.outline)
 
   (defcustom anim-outline-icon-coords '(cons (screen-width) (screen-height))
-    (_"Animation Outline Coordinates")
+    "Animation Outline Coordinates"
     :type (pair (number 1) (number 1))
     :group (appearance animation))
 
   (defcustom anim-outline-steps 16
-    (_"Animation Steps")
+    "Animation Steps"
     :type number
     :group (appearance animation)
     :range ( 1 . 1000 ))
 
   (defcustom anim-outline-delay 20
-    (_"Animation Delay")
+    "Animation Delay"
     :type number
     :group (appearance animation)
     :range ( 1 . 1000 ))

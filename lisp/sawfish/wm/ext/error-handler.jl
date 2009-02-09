@@ -34,12 +34,12 @@
   (define-structure-alias error-handler sawfish.wm.ext.error-handler)
 
   (defcustom error-handler-beep t
-    (_"Beep when errors occur.")
+    "Beep when errors occur."
     :type boolean
     :group misc)
 
   (defcustom error-destination 'standard-error
-    (_"Display error messages to: \\w")
+    "Display error messages to: \\w"
     :type (choice nowhere screen standard-error both)
     :group misc)
 

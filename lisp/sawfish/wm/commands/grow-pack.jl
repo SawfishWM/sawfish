@@ -61,30 +61,30 @@
 
 ;;; Customization options.
    
-  (defgroup grow-pack (_"Growing and packing of windows") :group misc)
+  (defgroup grow-pack "Growing and packing of windows" :group misc)
 
   (defcustom grow-is-maximize t
-    (_"Whether growing is considered to be maximization.")
+    "Whether growing is considered to be maximization."
     :type boolean
     :group (misc grow-pack))
 
   (defcustom pack-warp-pointer 'maybe
-    (_"Whether and how to move the pointer.")
+    "Whether and how to move the pointer."
     :type (choice always maybe never)
     :group (misc grow-pack))
 
   (defcustom grow-pack-bump-obscured ()
-    (_"Whether to bump into fully obscured windows.")
+    "Whether to bump into fully obscured windows."
     :type boolean
     :group (misc grow-pack))
 
   (defcustom grow-pack-bump-other-depth 'always
-    (_"Whether to bump into windows on a different depth.")
+    "Whether to bump into windows on a different depth."
     :type (choice always maybe never)
     :group (misc grow-pack))
 
   (defcustom grow-pack-bump-ignored t
-    (_"Whether to bump into ignored windows.")
+    "Whether to bump into ignored windows."
     :type boolean
     :group (misc grow-pack))
 

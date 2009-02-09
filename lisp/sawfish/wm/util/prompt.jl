@@ -60,7 +60,7 @@
   (define-structure-alias prompt sawfish.wm.util.prompt)
 
   (defcustom prompt-keymap (make-keymap)
-    (_"Keymap containing bindings active when reading a string from the user.")
+    "Keymap containing bindings active when reading a string from the user."
     :group bindings
     :type keymap)
 

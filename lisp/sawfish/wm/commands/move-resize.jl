@@ -50,37 +50,37 @@
 
 
   (defcustom move-outline-mode 'opaque
-    (_"How windows being moved are animated")
+    "How windows being moved are animated"
     :type (choice opaque box cross elliptical draft)
     :group (appearance animation))
 
   (defcustom resize-outline-mode 'opaque
-    (_"How windows being resized are animated")
+    "How windows being resized are animated"
     :type (choice opaque box cross elliptical draft)
     :group (appearance animation))
 
   (defcustom move-resize-raise-window nil
-    (_"Raise windows when they are moved or resized.")
+    "Raise windows when they are moved or resized."
     :type boolean
     :group move)
 
   (defcustom move-show-position nil
-    (_"Show current position of windows while moving.")
+    "Show current position of windows while moving."
     :group move
     :type boolean)
 
   (defcustom resize-show-dimensions t
-    (_"Show current dimensions of windows while resizing.")
+    "Show current dimensions of windows while resizing."
     :group move
     :type boolean)
 
  (defcustom resize-edge-mode 'border-grab
-   (_"How to choose window edges when resizing.")
+   "How to choose window edges when resizing."
    :type (choice region border grab border-grab)
    :group move)
 
   (defcustom move-snap-epsilon 12
-    (_"Distance in pixels before window edges align with each other.")
+    "Distance in pixels before window edges align with each other."
     :group move
     :type (number 0 64)
     :tooltip "When moving a window, this option lets you align one of its edges with an edge of another window.")

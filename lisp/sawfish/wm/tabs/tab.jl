@@ -45,23 +45,23 @@
   ;; - hide some frame parts on leftmost and rightmost tabs
   ;; - add a drag-n-drop way to group windows by tabs
 
-  ;;###autoload (defgroup tabs (_"Tabs"))
+  ;;###autoload (defgroup tabs "Tabs")
 
-  (defgroup tabs (_"Tabs"))
+  (defgroup tabs "Tabs")
 
-  (defcustom tab-left-dec-width 11 (_"Width of tab's left-edge decoration")
+  (defcustom tab-left-dec-width 11 "Width of tab's left-edge decoration"
     :group tabs
     :type number)
 
-  (defcustom tab-right-dec-width 11 (_"Width of tab's right-edge decoration")
+  (defcustom tab-right-dec-width 11 "Width of tab's right-edge decoration"
     :group tabs
     :type number)
 
-  (defcustom tab-left-margin 16 (_"Width of tab area's left-edge decoration")
+  (defcustom tab-left-margin 16 "Width of tab area's left-edge decoration"
     :group tabs
     :type number)
 
-  (defcustom tab-right-margin 16 (_"Width of tab area's right-edge decoration")
+  (defcustom tab-right-margin 16 "Width of tab area's right-edge decoration"
     :group tabs
     :type number)
 

@@ -70,34 +70,34 @@
 
 
   (defcustom ignore-window-input-hint nil
-    (_"Give focus to windows even when they haven't asked for it.")
+    "Give focus to windows even when they haven't asked for it."
     :type boolean
     :group focus)
 
-  (defgroup warp (_"Warping") :group misc)
+  (defgroup warp "Warping" :group misc)
 
   (defcustom warp-to-window-offset (cons -1 -1)
-    (_"Offset (%) from window edges when warping pointer.")
+    "Offset (%) from window edges when warping pointer."
     :type (pair (number 1) (number 1))
     :group (misc warp))
 
   (defcustom warp-to-window-enabled nil
-    (_"Wether to enable warping the cursor to windows.")
+    "Wether to enable warping the cursor to windows."
     :type boolean
     :group (misc warp))
 
   (defcustom dont-avoid-ignored t
-    (_"Wether to not ignore avoided windows by default.")
+    "Wether to not ignore avoided windows by default."
     :type boolean
     :group misc)
 
   (defcustom avoid-by-default nil
-    (_"Wether to avoid any unspecified window by default.")
+    "Wether to avoid any unspecified window by default."
     :type boolean
     :group misc)
 
   (defcustom uniquify-name-format "%s [%d]"
-    (_"Format to create unique window names.")
+    "Format to create unique window names."
     :type string
     :group misc)
 

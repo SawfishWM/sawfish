@@ -45,24 +45,24 @@
     "List containing all symbols naming focus modes.")
 
   (defcustom focus-mode 'click
-    (_"When does the mouse pointer affect the input focus.")
+    "When does the mouse pointer affect the input focus."
     :type symbol
     :group focus
     :before-set (lambda () (focus-mode-changed 'before))
     :after-set (lambda () (focus-mode-changed 'after)))
 
   (defcustom focus-click-through t
-    (_"Click-to-focus mode passes the click through to the application.")
+    "Click-to-focus mode passes the click through to the application."
     :type boolean
     :group focus)
 
   (defcustom focus-dont-push nil
-    (_"Wether focusing a window doesn't change it's position in the stack.")
+    "Wether focusing a window doesn't change it's position in the stack."
     :type boolean
     :group focus)
 
   (defcustom focus-ignore-pointer-events nil
-    (_"When true, pointer in/out events don't cause focus changes.")
+    "When true, pointer in/out events don't cause focus changes."
     :type boolean
     :group focus)
 

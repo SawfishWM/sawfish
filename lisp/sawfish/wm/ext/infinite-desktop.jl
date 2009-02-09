@@ -33,29 +33,29 @@
 	((eq a (car l)) (infinite-desktop.remove a (cdr l)))
 	(t (cons (car l) (infinite-desktop.remove a (cdr l))))))
 
-(defgroup infinite-desktop (_"Infinite Desktop")
+(defgroup infinite-desktop "Infinite Desktop"
   :group workspace)
 
 (defcustom infinite-desktop-p 1
-  (_"Simulate an infinite desktop (Conflicts edge-flipping).")
+  "Simulate an infinite desktop (Conflicts edge-flipping)."
   :group (workspace infinite-desktop)
   :after-set (lambda () (infinite-desktop.infinite-desktop))
   :type boolean)
 
 (defcustom infinite-desktop.move-distance 64
-  (_"Amount to move the workspace.")
+  "Amount to move the workspace."
   :group (workspace infinite-desktop)
   :type number
   :range (1 . nil))
 
 (defcustom infinite-desktop.move-cursor-distance 32
-  (_"Amount to move the cursor after moving the workspace.")
+  "Amount to move the cursor after moving the workspace."
   :group (workspace infinite-desktop)
   :type number
   :range (1 . nil))
 
 (defcustom infinite-desktop.stop-at-workspace-borders nil
-  (_"Stop scrolling at workspace borders (Fixes warp-to-window bugs).")
+  "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
   :group (workspace infinite-desktop)
   :type boolean )
 

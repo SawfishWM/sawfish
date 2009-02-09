@@ -87,28 +87,28 @@
 
 ;;; customizations
 
-  (defgroup window-history (_"History") :group match-window)
+  (defgroup window-history "History" :group match-window)
 
   (defcustom window-history-auto-save-position t
-    (_"Automatically remember window positions.")
+    "Automatically remember window positions."
     :group (match-window window-history)
     :type boolean
     :require sawfish.wm.ext.window-history)
 
   (defcustom window-history-auto-save-dimensions nil
-    (_"Automatically remember window sizes.")
+    "Automatically remember window sizes."
     :group (match-window window-history)
     :type boolean
     :require sawfish.wm.ext.window-history)
 
   (defcustom window-history-auto-save-state nil
-    (_"Automatically remember other window attributes.")
+    "Automatically remember other window attributes."
     :group (match-window window-history)
     :type boolean
     :require sawfish.wm.ext.window-history)
 
   (defcustom window-history-ignore-transients t
-    (_"Don't automatically remember details of transient windows.")
+    "Don't automatically remember details of transient windows."
     :group (match-window window-history)
     :type boolean)
 

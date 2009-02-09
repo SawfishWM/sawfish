@@ -479,14 +479,14 @@ of choices."
 
 ;;; default groups
 
-  (defgroup focus (_"Focus"))
-  (defgroup move (_"Move/Resize") :require sawfish.wm.commands.move-resize)
-  (defgroup appearance (_"Appearance"))
-  (defgroup workspace (_"Workspaces"))
-  (defgroup bindings (_"Bindings"))
-  (defgroup min-max (_"Mini/Maximizing"))
-  (defgroup misc (_"Miscellaneous"))
-  (defgroup placement (_"Placement") :group misc)
+  (defgroup focus "Focus")
+  (defgroup move "Move/Resize" :require sawfish.wm.commands.move-resize)
+  (defgroup appearance "Appearance")
+  (defgroup workspace "Workspaces")
+  (defgroup bindings "Bindings")
+  (defgroup min-max "Mini/Maximizing")
+  (defgroup misc "Miscellaneous")
+  (defgroup placement "Placement" :group misc)
 
 ;;; loading user's customisations
 

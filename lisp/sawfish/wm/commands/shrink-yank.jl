@@ -24,7 +24,7 @@
 
 (define-structure sawfish.wm.commands.shrink-yank ()
 
-  (open rep
+  (open   rep
 	  sawfish.wm.commands
 	  sawfish.wm.commands.grow-pack
 	  sawfish.wm.events
@@ -33,19 +33,20 @@
 	  sawfish.wm.state.iconify
 	  sawfish.wm.util.rects
 	  sawfish.wm.windows
-	  sawfish.wm.workspace)
+	  sawfish.wm.workspace
+	  sawfish.wm.custom)
   
   (define-structure-alias shrink-yank sawfish.wm.commands.shrink-yank)
 
-  (defgroup shrink-yank (_"Shrinking and Yanking of windows") :group misc)
+  (defgroup shrink-yank "Shrinking and Yanking of windows" :group misc)
 
   (defcustom shrink-window-minimum-size 10
-    (_"The minimum height or width to which a window may be shrunk.")
+    "The minimum height or width to which a window may be shrunk."
     :type number
     :group (misc shrink-yank))
 
   (defcustom yank-window-minimum-visible 10
-    (_"The minimum amount of window left visible, if yanked over the edge.")
+    "The minimum amount of window left visible, if yanked over the edge."
     :type number
     :group (misc shrink-yank))
 

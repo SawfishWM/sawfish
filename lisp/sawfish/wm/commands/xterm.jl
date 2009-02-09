@@ -31,12 +31,12 @@
 	  sawfish.wm.commands)
 
   (defcustom xterm-program "xterm"
-    (_"The program launched by the `xterm' command.")
+    "The program launched by the `xterm' command."
     :type string
     :group misc)
 
   (defcustom xterm-args ""
-    (_"Arguments given to the `xterm' command.")
+    "Arguments given to the `xterm' command."
     :type string
     :group misc)
 

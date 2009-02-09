@@ -44,48 +44,48 @@
 
   ;;###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
 
-  (defgroup tooltips (_"Tooltips")
+  (defgroup tooltips "Tooltips"
     :group appearance
     :require sawfish.wm.ext.tooltips)
 
   (defcustom tooltips-enabled nil
-    (_"Display tooltips for window frames.")
+    "Display tooltips for window frames."
     :type boolean
     :group (appearance tooltips)
     :require sawfish.wm.ext.tooltips)
 
   (defcustom tooltips-show-doc-strings nil
-    (_"Show full documentation in tooltips.")
+    "Show full documentation in tooltips."
     :type boolean
     :depends tooltips-enabled
     :group (appearance tooltips))
 
   (defcustom tooltips-delay 500
-    (_"Number of milliseconds before displaying tooltips.")
+    "Number of milliseconds before displaying tooltips."
     :type number
     :depends tooltips-enabled
     :group (appearance tooltips))
 
   (defcustom tooltips-timeout-delay 5000
-    (_"Number of milliseconds before removing tooltips.")
+    "Number of milliseconds before removing tooltips."
     :type number
     :depends tooltips-enabled
     :group (appearance tooltips))
 
   (defcustom tooltips-font default-font
-    (_"Font used to display tooltips, or nil for default.")
+    "Font used to display tooltips, or nil for default."
     :type font
     :depends tooltips-enabled
     :group (appearance tooltips))
 
   (defcustom tooltips-background-color "grey85"
-    (_"Color used for the tooltips background")
+    "Color used for the tooltips background"
     :type color
     :depends tooltips-enabled
     :group (appearance tooltips))
 
   (defcustom tooltips-foreground-color "black"
-    (_"Color used for the tooltips foreground")
+    "Color used for the tooltips foreground"
     :type color
     :depends tooltips-enabled
     :group (appearance tooltips))

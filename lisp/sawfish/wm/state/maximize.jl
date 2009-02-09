@@ -86,7 +86,7 @@
     "Don't cover `avoided' windows when maximizing.")
 
   (defcustom move-lock-when-maximized t
-    (_"Lock position and size while windows are maximized.")
+    "Lock position and size while windows are maximized."
     :type boolean
     :group min-max)
   

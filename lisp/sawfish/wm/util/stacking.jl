@@ -42,7 +42,7 @@
 	  sawfish.wm.commands.groups)
 
   (defcustom user-raise-type 'transients
-    (_"When raising a window, also raise its: \\w")
+    "When raising a window, also raise its: \\w"
     :type (choice none transients group)
     :group (misc stacking))
 

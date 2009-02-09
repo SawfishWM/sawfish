@@ -42,32 +42,32 @@
   ;; for the compiler's benefit
   (eval-when-compile (require 'sawfish.wm.util.flippers))
 
-  (defgroup edge-flip (_"Edge Flipping")
+  (defgroup edge-flip "Edge Flipping"
     :group workspace
     :require sawfish.wm.ext.edge-flip)
 
   (defcustom edge-flip-enabled nil
-    (_"Select the next desktop when the pointer hits screen edge.")
+    "Select the next desktop when the pointer hits screen edge."
     :type boolean
     :require sawfish.wm.ext.edge-flip
     :group (workspace edge-flip)
     :after-set (lambda () (edge-flip-enable)))
 
   (defcustom edge-flip-type 'workspace
-    (_"Hitting the screen edge selects the next: \\w")
+    "Hitting the screen edge selects the next: \\w"
     :type (choice viewport workspace)
     :depends edge-flip-enabled
     :group (workspace edge-flip))
 
   (defcustom edge-flip-only-when-moving nil
-    (_"Only flip when interactively moving a window.")
+    "Only flip when interactively moving a window."
     :type boolean
     :depends edge-flip-enabled
     :group (workspace edge-flip)
     :after-set (lambda () (edge-flip-enable)))
 
   (defcustom edge-flip-delay 250
-    (_"Milliseconds to delay before edge flipping.")
+    "Milliseconds to delay before edge flipping."
     :type number
     :depends edge-flip-enabled
     :group (workspace edge-flip)

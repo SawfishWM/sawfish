@@ -37,10 +37,10 @@
   (define window-animators nil
     "List of all possible window animation types.")
 
-  (defgroup animation (_"Animation") :group appearance)
+  (defgroup animation "Animation" :group appearance)
 
   (defcustom default-window-animator 'none
-    (_"The default window animation mode")
+    "The default window animation mode"
     :type (choice none solid wireframe cross elliptical draft)
     :group (appearance animation))
 

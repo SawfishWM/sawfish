@@ -33,13 +33,13 @@
 
   (define-structure-alias audio-events sawfish.wm.ext.audio-events)
 
-  (defgroup audio (_"Sound")
+  (defgroup audio "Sound"
     :require sawfish.wm.ext.audio-events)
 
   ;; XXX it would be cool to merge the customization with the GNOME sound prefs
 
   (defcustom audio-events-enabled nil
-    (_"Play sound effects for window events.")
+    "Play sound effects for window events."
     :type boolean
     :require sawfish.wm.ext.audio-events
     :group audio)

@@ -140,7 +140,7 @@ that overrides settings set elsewhere.")
     :after-set (lambda () (after-setting-default-frame)))
 
   (defcustom reload-themes-when-changed t
-    (_"Automatically reload themes when they are updated.")
+    "Automatically reload themes when they are updated."
     :type boolean
     :group appearance)
 
@@ -208,7 +208,7 @@ deciding which frame type to ask a theme to generate.")
 ;;; defcustom's for some built-in variables
 
   (defcustom default-font nil
-    (_"Default font: \\w")
+    "Default font: \\w"
     :group appearance
     :type font
     :widget-flags (expand-horizontally)
