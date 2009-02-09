@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.2-gtk2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 23:36+0100\n"
+"POT-Creation-Date: 2009-02-09 10:44+0100\n"
 "PO-Revision-Date: 2002-11-11 18:56+0000\n"
 "Last-Translator: Simos Xenitellis <simos74@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -164,29 +164,6 @@ msgstr "όχι"
 msgid "Match Window Properties"
 msgstr "Ταίριασμα ιδιοτήτων παραθύρων"
 
-#. customization options
-#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-#: ../lisp/sawfish/wm/autoload.jl:119
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
-msgid "Window Cycling"
-msgstr "Μεταφορά Μεταξύ Παραθύρων"
-
-#: ../lisp/sawfish/wm/autoload.jl:132
-#: ../lisp/sawfish/wm/ext/audio-events.jl:36
-msgid "Sound"
-msgstr "Ήχος"
-
-#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
-#: ../lisp/sawfish/wm/autoload.jl:133
-#: ../lisp/sawfish/wm/ext/match-window.jl:138
-msgid "Matched Windows"
-msgstr "Ταιριασμένα Παράθυρα"
-
-#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
-#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
-msgid "Tooltips"
-msgstr "Βοηθήματα"
-
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -196,42 +173,6 @@ msgstr "Ευρετήριο:"
 #: ../lisp/sawfish/wm/commands.jl:365
 msgid "Command:"
 msgstr "Εντολή:"
-
-#. Customization options.
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
-msgid "Growing and packing of windows"
-msgstr "Μεγάλωμα και συσκευασία παραθύρων"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
-msgid "Whether growing is considered to be maximization."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
-#, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Μετακίνηση του παραθύρου στην επόμενη θύρα όψης."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
-#, fuzzy
-msgid "Whether to bump into fully obscured windows."
-msgstr ""
-"Αν θα ακουμπάει σε πλήρως αποκρυμμένα παράθυρα κατά το μεγάλωμα ή τη "
-"συσκευασία\n"
-"παραθύρων."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
-#, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr ""
-"Αν θα ακουμπάει σε παράθυρα διαφορετικού βάθους κατά το μεγάλωμα ή τη "
-"συσκευασία."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
-#, fuzzy
-msgid "Whether to bump into ignored windows."
-msgstr ""
-"Αν θα ακουμπάει σε παράθυρα διαφορετικού βάθους κατά το μεγάλωμα ή τη "
-"συσκευασία."
 
 #: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
@@ -265,123 +206,6 @@ msgstr "Συσκευασία πάνω"
 msgid "Pack down"
 msgstr "Συσκευασία κάτω"
 
-#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
-#, fuzzy
-msgid "Number of pixels to move pointer in."
-msgstr ""
-"Αριθμός εικονοστοιχείων για μετακίνηση σε εντολές `μετακίνηση-δρομέα-'."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:53
-#, fuzzy
-msgid "How windows being moved are animated"
-msgstr "Ανασήκωση παραθύρων όταν αποσκιάζονται."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:58
-#, fuzzy
-msgid "How windows being resized are animated"
-msgstr "Ανασήκωση παραθύρων όταν αποσκιάζονται."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:63
-#, fuzzy
-msgid "Raise windows when they are moved or resized."
-msgstr "Ανασήκωση παραθύρων όταν εστιάζονται."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:68
-msgid "Show current position of windows while moving."
-msgstr "Εμφάνιση τρέχουσας θέσης παραθύρων καθώς μετακινούνται."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:73
-msgid "Show current dimensions of windows while resizing."
-msgstr "Εμφάνιση τρεχόντων διαστάσεων παραθύρων καθών αλλάζουν μέγεθος."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:78
-#, fuzzy
-msgid "How to choose window edges when resizing."
-msgstr "Εμφάνιση τρεχόντων διαστάσεων παραθύρων καθών αλλάζουν μέγεθος."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:83
-msgid "Distance in pixels before window edges align with each other."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
-msgid "Display window names and icons while cycling through windows."
-msgstr ""
-"Εμφάνιση των ονομάτων εικονιδίων και παραθύρων κατά τη διαδοχή ανάμεσα στα "
-"παράθυρα."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
-msgid "Include iconified windows when cycling."
-msgstr "Συμπερίληψη και των εικονοποιημένων παραθύρων στη διαδοχή παραθύρων."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
-msgid "Include windows on all workspaces when cycling."
-msgstr ""
-"Συμπερίληψη παραθύρων από όλους τους χώρους εργασίας στη διαδοχή παραθύρων."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
-msgid "Include windows on all viewports when cycling."
-msgstr "Συμπερίληψη παραθύρων από όλες τις θύρες όψεων στη διαδοχή παραθύρων."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
-#, fuzzy
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Ανασήκωση παραθύρων όταν εστιάζονται."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
-msgid ""
-"Keymap containing bindings active only during window cycling operations."
-msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται μόνο κατά των λειτουργιών "
-"διαδοχής παραθύρων."
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:34
-msgid "The program launched by the `xterm' command."
-msgstr "Το πρόγραμμα που εκτελέστηκε από την εντολή `xterm'."
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:39
-msgid "Arguments given to the `xterm' command."
-msgstr "Παράμετροι για την εντολή `xterm'."
-
-# # NOTE: "send focus" refers to whether the remote
-# #   client will be notified about chat window focus changes
-#. default groups
-#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Εστίαση"
-
-#: ../lisp/sawfish/wm/custom.jl:483
-msgid "Move/Resize"
-msgstr "Μετακίνηση/Αλλαγή μεγέθους"
-
-#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Εμφάνιση"
-
-#: ../lisp/sawfish/wm/custom.jl:485
-msgid "Workspaces"
-msgstr "Χώροι εργασίας"
-
-#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
-msgid "Bindings"
-msgstr "Συνδέσεις"
-
-#: ../lisp/sawfish/wm/custom.jl:487
-#, fuzzy
-msgid "Mini/Maximizing"
-msgstr "Ελαχιστοποίηση και Μεγιστοποίηση"
-
-#: ../lisp/sawfish/wm/custom.jl:488
-msgid "Miscellaneous"
-msgstr "Διάφορα"
-
-#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Τοποθέτηση"
-
-#: ../lisp/sawfish/wm/ext/audio-events.jl:42
-msgid "Play sound effects for window events."
-msgstr "Αναπαραγωγή ηχητικών εφφέ στα γεγονότα των παραθύρων."
-
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
 msgstr "Συμβάν"
@@ -390,39 +214,23 @@ msgstr "Συμβάν"
 msgid "Audio file"
 msgstr "Αρχείο ήχου"
 
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
-msgid "Edge Flipping"
-msgstr "Τίναγμα Άκρης"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
-msgid "Select the next desktop when the pointer hits screen edge."
-msgstr ""
-"Επιλογή της επόμενης επιφάνειας εργασίας όταν ο δείκτης πατήσει την άκρη της "
-"οθόνης."
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
-msgid "Hitting the screen edge selects the next: \\w"
-msgstr "Ακουμπώντας την άκρη της οθόνης επιλέγει την επόμενη: \\w"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
-msgid "Only flip when interactively moving a window."
-msgstr "Αντιλάκτισμα μόνο όταν μετακινήται διαδραστικά ένα παράθυρο."
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
-msgid "Milliseconds to delay before edge flipping."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:37
-msgid "Beep when errors occur."
-msgstr "Ήχηση όταν συμβαίνουν σφάλματα."
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:42
-msgid "Display error messages to: \\w"
-msgstr "Εμφάνιση μηνυμάτων σφάλματος στο: \\w"
-
 #: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Κανένα σφάλμα."
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Τοποθέτηση"
+
+# # NOTE: "send focus" refers to whether the remote
+# #   client will be notified about chat window focus changes
+#: ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Εστίαση"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Εμφάνιση"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -431,52 +239,6 @@ msgstr "Κατάσταση"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Λοιπά"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
-msgid "Shade Hover"
-msgstr "Σκίαση Μετεώρισμα"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
-msgid "Enable shade-hover mode."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
-msgid "Delay in milliseconds before unshading windows."
-msgstr "Καθυστέρηση σε ms πριν την αποσκίαση παραθύρων."
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
-msgid "Raise windows when they are unshaded."
-msgstr "Ανασήκωση παραθύρων όταν αποσκιάζονται."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:52
-msgid "Display tooltips for window frames."
-msgstr "Εμφάνιση βοηθημάτων για τα πλαίσια παραθύρων."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:58
-msgid "Show full documentation in tooltips."
-msgstr "Εμφάνιση πλήρης τεκμηρίωσης στα βοηθήματα."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:64
-#, fuzzy
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Καθυστέρηση σε ms πριν την αποσκίαση παραθύρων."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:70
-#, fuzzy
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Καθυστέρηση σε ms πριν την αποσκίαση παραθύρων."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:76
-msgid "Font used to display tooltips, or nil for default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:82
-msgid "Color used for the tooltips background"
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:88
-msgid "Color used for the tooltips foreground"
-msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -494,61 +256,9 @@ msgstr "Απομνημόνευση _ιδιοτήτων"
 msgid "_Forget saved state"
 msgstr "_Λησμόνηση αποθηκευμένης κατάστασης"
 
-#. customizations
-#: ../lisp/sawfish/wm/ext/window-history.jl:90
-msgid "History"
-msgstr "Ιστορικό"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:93
-msgid "Automatically remember window positions."
-msgstr "Αυτόματη απομνημόνευση θέσεων παραθύρων."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:99
-msgid "Automatically remember window sizes."
-msgstr "Αυτόματη απομνημόνευση μεγέθους παραθύρων."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:105
-msgid "Automatically remember other window attributes."
-msgstr "Αυτόματη απομνημόνευση άλλων ιδιοτήτων παραθύρων."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:111
-msgid "Don't automatically remember details of transient windows."
-msgstr ""
-"Να μη γίνετε αυτόματη απομνημόνευση των θέσεων των βραχύβιων παραθύρων."
-
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Ιστορικό"
-
-#: ../lisp/sawfish/wm/focus.jl:48
-msgid "When does the mouse pointer affect the input focus."
-msgstr "Πότε ο δείκτης του ποντικιού επηρεάζει την εστίαση της εισόδου."
-
-#: ../lisp/sawfish/wm/focus.jl:55
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "Η κατάσταση πάτημα-για-εστίαση μεταβιβάζει το πάτημα στο παράθυρο."
-
-#: ../lisp/sawfish/wm/focus.jl:60
-#, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
-msgstr ""
-"Κατέβασμα του παραθύρου στη χαμηλότερη δυνατή θέση στη σειρά στοιβάγματος."
-
-#: ../lisp/sawfish/wm/focus.jl:65
-msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
-
-#: ../lisp/sawfish/wm/frames.jl:136
-msgid "Default frame style:"
-msgstr "Εξ ορισμού στυλ πλαισίου:"
-
-#: ../lisp/sawfish/wm/frames.jl:143
-msgid "Automatically reload themes when they are updated."
-msgstr "Αυτόματη επαναφόρτωση των θεμάτων όταν ενημερώνονται."
-
-#: ../lisp/sawfish/wm/frames.jl:211
-msgid "Default font: \\w"
-msgstr "Εξ ορισμού γραμματοσειρά: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -590,90 +300,6 @@ msgstr "Δικτυακός τόπος του GNOME..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "Περί του GNOME..."
-
-#: ../lisp/sawfish/wm/keymaps.jl:91
-msgid "Keymap containing bindings active anywhere."
-msgstr "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται για παντού."
-
-#: ../lisp/sawfish/wm/keymaps.jl:104
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν το παράθυρο πελάτης "
-"εστιαστεί."
-
-#: ../lisp/sawfish/wm/keymaps.jl:112
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο "
-"ριζικό παράθυρο\n"
-"(ή όταν κανένα παράθυρο δεν είναι εστιασμένο.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:122
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στον "
-"τίτλο\n"
-"ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:131
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"περιθώριο ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:140
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"κουμπί κλεισίματος ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
-"ποντίκι.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:148
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"κουμπί εικονοποίησης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
-"ποντίκι.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:157
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"κουμπί μεγιστοποίησης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
-"ποντίκι.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:165
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"κουμπί μενού ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:172
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"κουμπί σκίασης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι, "
-"σε αυτό το χάρτη.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:181
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "Πλήκτρο/α τροποποίησης για τις εξ ορισμού συντομεύσεις."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -825,43 +451,6 @@ msgstr "Όλες οι ρυθμίσεις"
 msgid "Edit theme..."
 msgstr "Επεξεργασία θέματος..."
 
-#: ../lisp/sawfish/wm/placement.jl:41
-msgid "Method of placing windows: \\w"
-msgstr "Μέθοδος τοποθέτησης παραθύρων: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:46
-msgid "Method of placing dialog windows: \\w"
-msgstr "Μέθοδος τοποθέτησης παραθύρων διαλόγου: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:51
-msgid "Ignore program-specified window placements."
-msgstr ""
-
-#: ../lisp/sawfish/wm/placement/stagger.jl:34
-#, fuzzy
-msgid "Distance between successive placements in stagger mode."
-msgstr ""
-"Διάστημα μεταξύ διαδοχικών τοποθετήσεων σε κατάσταση τοποθέτησης `stagger'."
-
-#. Each window will have a `depth' property--an integer, zero
-#. represents the level of normal windows, negative for windows below
-#. this level, and positive for windows above the normal level
-#: ../lisp/sawfish/wm/stacking.jl:58
-msgid "Stacking"
-msgstr "Στοίβαγμα"
-
-#: ../lisp/sawfish/wm/stacking.jl:61
-msgid "Keep transient windows stacked above: \\w"
-msgstr "Διατήρηση των βραχύβιων παραθύρων στοιβαγμένων πάνω από: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:75
-msgid "Minimizing a window also removes its: \\w"
-msgstr "Η ελαχιστοποίηση παραθύρου επίσης απομακρύνει το: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:80
-msgid "Unminimizing a window also restores its: \\w"
-msgstr "Η ανασήκωση παραθύρου επίσης επαναφέρει το: \\w"
-
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Κολλώδες"
@@ -887,21 +476,9 @@ msgstr "Στη λίστα _παραθύρων"
 msgid "In _task list"
 msgstr "Στη λίστα _διεργασιών του GNOME"
 
-#: ../lisp/sawfish/wm/state/maximize.jl:89
-msgid "Lock position and size while windows are maximized."
-msgstr "Κλείδωμα θέσης και μεγέθους κατά τη μεγιστοποίηση παραθύρων."
-
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "Σ_κιασμένο"
-
-#: ../lisp/sawfish/wm/state/transient.jl:48
-msgid "Focus on application windows when they first appear."
-msgstr "Εστίαση σε παράθυρα εφαρμογών όταν εμφανίζονται για πρώτη φορά."
-
-#: ../lisp/sawfish/wm/util/display-window.jl:43
-msgid "Unshade selected windows."
-msgstr "Αποσκίαση επιλεγμένων παραθύρων."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -914,19 +491,6 @@ msgstr "Πιέστε κάποιο πλήκτρο..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Παράθεση]"
-
-#: ../lisp/sawfish/wm/util/play-audio.jl:43
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr ""
-"Το πρόγραμμα για αναπαραγωγή δειγμάτων ήχου. Αν δεν οριστεί, θα "
-"χρησιμοποιηθεί εσωτερική υποστήριξη του ESD."
-
-#: ../lisp/sawfish/wm/util/prompt.jl:63
-msgid "Keymap containing bindings active when reading a string from the user."
-msgstr ""
-"Πίνακας χαρακτήρων με ενεργές συνδέσεις όταν αναγιγνώσκεται αλφαριθμητικό "
-"από το χρήστη."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -942,36 +506,6 @@ msgstr "Χώρος εργασίας %d"
 msgid "Workspace:"
 msgstr "Χώρος εργασίας:"
 
-#: ../lisp/sawfish/wm/util/stacking.jl:45
-msgid "When raising a window, also raise its: \\w"
-msgstr "Η ανασήκωση παραθύρου επίσης ανασηκώνει το: \\w"
-
-#. Virtual workspaces are implemented by moving windows in and out of
-#. the screen dimensions. E.g. moving to the left moves all windows one
-#. screen-width to the right.
-#: ../lisp/sawfish/wm/viewport.jl:53
-msgid "Viewport"
-msgstr "Θύρα όψης"
-
-#: ../lisp/sawfish/wm/viewport.jl:56
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:62
-#, fuzzy
-msgid "Windows uniconify to the current viewport."
-msgstr "Μετακίνηση ομάδας στην τρέχουσα θύρα όψης"
-
-#: ../lisp/sawfish/wm/viewport.jl:67
-msgid ""
-"Number of steps in which to scroll between viewports (less steps = faster "
-"scrolling)."
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:73
-msgid "Wether to stop or wrap-around on first/last viewport"
-msgstr ""
-
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Στήλη:"
@@ -980,53 +514,9 @@ msgstr "Στήλη:"
 msgid "Row:"
 msgstr "Σειρά:"
 
-#: ../lisp/sawfish/wm/windows.jl:73
-#, fuzzy
-msgid "Give focus to windows even when they haven't asked for it."
-msgstr "Ανασήκωση παραθύρων όταν εστιάζονται."
-
-#: ../lisp/sawfish/wm/windows.jl:77
-msgid "Warping"
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:80
-msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:85
-msgid "Wether to enable warping the cursor to windows."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:90
-msgid "Wether to not ignore avoided windows by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:95
-msgid "Wether to avoid any unspecified window by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:100
-msgid "Format to create unique window names."
-msgstr ""
-
-#: ../lisp/sawfish/wm/workspace.jl:122
-#, fuzzy
-msgid "How to act when passing the first or last workspace."
-msgstr "Εμφάνιση του μενού που περιέχει τη λίστα όλων των χώρων εργασίας."
-
-#: ../lisp/sawfish/wm/workspace.jl:127
-#, fuzzy
-msgid ""
-"How to act when passing the first or last workspace, while moving a window"
-msgstr "Εμφάνιση του μενού που περιέχει τη λίστα όλων των χώρων εργασίας."
-
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Ονόματα χώρων εργασίας"
-
-#: ../lisp/sawfish/wm/workspace.jl:139
-msgid "Preserve outermost empty workspaces in the pager."
-msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 #, fuzzy
@@ -1077,6 +567,352 @@ msgstr "Το Πριονόψαρο διαχειρίζεται τα παράθυρ
 #: ../scripts/sawfish-about.jl.in:56
 msgid "Sawfish homepage"
 msgstr "Αρχική Σελίδα Πριονόψαρου"
+
+#~ msgid "Window Cycling"
+#~ msgstr "Μεταφορά Μεταξύ Παραθύρων"
+
+#~ msgid "Sound"
+#~ msgstr "Ήχος"
+
+#~ msgid "Matched Windows"
+#~ msgstr "Ταιριασμένα Παράθυρα"
+
+#~ msgid "Tooltips"
+#~ msgstr "Βοηθήματα"
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "Μεγάλωμα και συσκευασία παραθύρων"
+
+#, fuzzy
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Μετακίνηση του παραθύρου στην επόμενη θύρα όψης."
+
+#, fuzzy
+#~ msgid "Whether to bump into fully obscured windows."
+#~ msgstr ""
+#~ "Αν θα ακουμπάει σε πλήρως αποκρυμμένα παράθυρα κατά το μεγάλωμα ή τη "
+#~ "συσκευασία\n"
+#~ "παραθύρων."
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr ""
+#~ "Αν θα ακουμπάει σε παράθυρα διαφορετικού βάθους κατά το μεγάλωμα ή τη "
+#~ "συσκευασία."
+
+#, fuzzy
+#~ msgid "Whether to bump into ignored windows."
+#~ msgstr ""
+#~ "Αν θα ακουμπάει σε παράθυρα διαφορετικού βάθους κατά το μεγάλωμα ή τη "
+#~ "συσκευασία."
+
+#, fuzzy
+#~ msgid "Number of pixels to move pointer in."
+#~ msgstr ""
+#~ "Αριθμός εικονοστοιχείων για μετακίνηση σε εντολές `μετακίνηση-δρομέα-'."
+
+#, fuzzy
+#~ msgid "How windows being moved are animated"
+#~ msgstr "Ανασήκωση παραθύρων όταν αποσκιάζονται."
+
+#, fuzzy
+#~ msgid "How windows being resized are animated"
+#~ msgstr "Ανασήκωση παραθύρων όταν αποσκιάζονται."
+
+#, fuzzy
+#~ msgid "Raise windows when they are moved or resized."
+#~ msgstr "Ανασήκωση παραθύρων όταν εστιάζονται."
+
+#~ msgid "Show current position of windows while moving."
+#~ msgstr "Εμφάνιση τρέχουσας θέσης παραθύρων καθώς μετακινούνται."
+
+#~ msgid "Show current dimensions of windows while resizing."
+#~ msgstr "Εμφάνιση τρεχόντων διαστάσεων παραθύρων καθών αλλάζουν μέγεθος."
+
+#, fuzzy
+#~ msgid "How to choose window edges when resizing."
+#~ msgstr "Εμφάνιση τρεχόντων διαστάσεων παραθύρων καθών αλλάζουν μέγεθος."
+
+#~ msgid "Display window names and icons while cycling through windows."
+#~ msgstr ""
+#~ "Εμφάνιση των ονομάτων εικονιδίων και παραθύρων κατά τη διαδοχή ανάμεσα "
+#~ "στα παράθυρα."
+
+#~ msgid "Include iconified windows when cycling."
+#~ msgstr ""
+#~ "Συμπερίληψη και των εικονοποιημένων παραθύρων στη διαδοχή παραθύρων."
+
+#~ msgid "Include windows on all workspaces when cycling."
+#~ msgstr ""
+#~ "Συμπερίληψη παραθύρων από όλους τους χώρους εργασίας στη διαδοχή "
+#~ "παραθύρων."
+
+#~ msgid "Include windows on all viewports when cycling."
+#~ msgstr ""
+#~ "Συμπερίληψη παραθύρων από όλες τις θύρες όψεων στη διαδοχή παραθύρων."
+
+#, fuzzy
+#~ msgid "Raise windows while they're temporarily selected during cycling."
+#~ msgstr "Ανασήκωση παραθύρων όταν εστιάζονται."
+
+#~ msgid ""
+#~ "Keymap containing bindings active only during window cycling operations."
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται μόνο κατά των "
+#~ "λειτουργιών διαδοχής παραθύρων."
+
+#~ msgid "The program launched by the `xterm' command."
+#~ msgstr "Το πρόγραμμα που εκτελέστηκε από την εντολή `xterm'."
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "Παράμετροι για την εντολή `xterm'."
+
+#~ msgid "Move/Resize"
+#~ msgstr "Μετακίνηση/Αλλαγή μεγέθους"
+
+#~ msgid "Workspaces"
+#~ msgstr "Χώροι εργασίας"
+
+#~ msgid "Bindings"
+#~ msgstr "Συνδέσεις"
+
+#, fuzzy
+#~ msgid "Mini/Maximizing"
+#~ msgstr "Ελαχιστοποίηση και Μεγιστοποίηση"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Διάφορα"
+
+#~ msgid "Play sound effects for window events."
+#~ msgstr "Αναπαραγωγή ηχητικών εφφέ στα γεγονότα των παραθύρων."
+
+#~ msgid "Edge Flipping"
+#~ msgstr "Τίναγμα Άκρης"
+
+#~ msgid "Select the next desktop when the pointer hits screen edge."
+#~ msgstr ""
+#~ "Επιλογή της επόμενης επιφάνειας εργασίας όταν ο δείκτης πατήσει την άκρη "
+#~ "της οθόνης."
+
+#~ msgid "Hitting the screen edge selects the next: \\w"
+#~ msgstr "Ακουμπώντας την άκρη της οθόνης επιλέγει την επόμενη: \\w"
+
+#~ msgid "Only flip when interactively moving a window."
+#~ msgstr "Αντιλάκτισμα μόνο όταν μετακινήται διαδραστικά ένα παράθυρο."
+
+#~ msgid "Beep when errors occur."
+#~ msgstr "Ήχηση όταν συμβαίνουν σφάλματα."
+
+#~ msgid "Display error messages to: \\w"
+#~ msgstr "Εμφάνιση μηνυμάτων σφάλματος στο: \\w"
+
+#~ msgid "Shade Hover"
+#~ msgstr "Σκίαση Μετεώρισμα"
+
+#~ msgid "Delay in milliseconds before unshading windows."
+#~ msgstr "Καθυστέρηση σε ms πριν την αποσκίαση παραθύρων."
+
+#~ msgid "Raise windows when they are unshaded."
+#~ msgstr "Ανασήκωση παραθύρων όταν αποσκιάζονται."
+
+#~ msgid "Display tooltips for window frames."
+#~ msgstr "Εμφάνιση βοηθημάτων για τα πλαίσια παραθύρων."
+
+#~ msgid "Show full documentation in tooltips."
+#~ msgstr "Εμφάνιση πλήρης τεκμηρίωσης στα βοηθήματα."
+
+#, fuzzy
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "Καθυστέρηση σε ms πριν την αποσκίαση παραθύρων."
+
+#, fuzzy
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "Καθυστέρηση σε ms πριν την αποσκίαση παραθύρων."
+
+#~ msgid "History"
+#~ msgstr "Ιστορικό"
+
+#~ msgid "Automatically remember window positions."
+#~ msgstr "Αυτόματη απομνημόνευση θέσεων παραθύρων."
+
+#~ msgid "Automatically remember window sizes."
+#~ msgstr "Αυτόματη απομνημόνευση μεγέθους παραθύρων."
+
+#~ msgid "Automatically remember other window attributes."
+#~ msgstr "Αυτόματη απομνημόνευση άλλων ιδιοτήτων παραθύρων."
+
+#~ msgid "Don't automatically remember details of transient windows."
+#~ msgstr ""
+#~ "Να μη γίνετε αυτόματη απομνημόνευση των θέσεων των βραχύβιων παραθύρων."
+
+#~ msgid "When does the mouse pointer affect the input focus."
+#~ msgstr "Πότε ο δείκτης του ποντικιού επηρεάζει την εστίαση της εισόδου."
+
+#~ msgid "Click-to-focus mode passes the click through to the application."
+#~ msgstr "Η κατάσταση πάτημα-για-εστίαση μεταβιβάζει το πάτημα στο παράθυρο."
+
+#, fuzzy
+#~ msgid "Wether focusing a window doesn't change it's position in the stack."
+#~ msgstr ""
+#~ "Κατέβασμα του παραθύρου στη χαμηλότερη δυνατή θέση στη σειρά στοιβάγματος."
+
+#~ msgid "Default frame style:"
+#~ msgstr "Εξ ορισμού στυλ πλαισίου:"
+
+#~ msgid "Automatically reload themes when they are updated."
+#~ msgstr "Αυτόματη επαναφόρτωση των θεμάτων όταν ενημερώνονται."
+
+#~ msgid "Default font: \\w"
+#~ msgstr "Εξ ορισμού γραμματοσειρά: \\w"
+
+#~ msgid "Keymap containing bindings active anywhere."
+#~ msgstr "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται για παντού."
+
+#~ msgid "Keymap containing bindings active when a client window is focused."
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν το παράθυρο πελάτης "
+#~ "εστιαστεί."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the root window\n"
+#~ "(or when no window is focused)."
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο "
+#~ "ριζικό παράθυρο\n"
+#~ "(ή όταν κανένα παράθυρο δεν είναι εστιασμένο.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στον τίτλο\n"
+#~ "ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "περιθώριο ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "κουμπί κλεισίματος ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
+#~ "ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "κουμπί εικονοποίησης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
+#~ "ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "κουμπί μεγιστοποίησης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
+#~ "ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "κουμπί μενού ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "κουμπί σκίασης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
+#~ "ποντίκι, σε αυτό το χάρτη.)"
+
+#~ msgid "Modifier key(s) used for default shortcuts."
+#~ msgstr "Πλήκτρο/α τροποποίησης για τις εξ ορισμού συντομεύσεις."
+
+#~ msgid "Method of placing windows: \\w"
+#~ msgstr "Μέθοδος τοποθέτησης παραθύρων: \\w"
+
+#~ msgid "Method of placing dialog windows: \\w"
+#~ msgstr "Μέθοδος τοποθέτησης παραθύρων διαλόγου: \\w"
+
+#, fuzzy
+#~ msgid "Distance between successive placements in stagger mode."
+#~ msgstr ""
+#~ "Διάστημα μεταξύ διαδοχικών τοποθετήσεων σε κατάσταση τοποθέτησης "
+#~ "`stagger'."
+
+#~ msgid "Stacking"
+#~ msgstr "Στοίβαγμα"
+
+#~ msgid "Keep transient windows stacked above: \\w"
+#~ msgstr "Διατήρηση των βραχύβιων παραθύρων στοιβαγμένων πάνω από: \\w"
+
+#~ msgid "Minimizing a window also removes its: \\w"
+#~ msgstr "Η ελαχιστοποίηση παραθύρου επίσης απομακρύνει το: \\w"
+
+#~ msgid "Unminimizing a window also restores its: \\w"
+#~ msgstr "Η ανασήκωση παραθύρου επίσης επαναφέρει το: \\w"
+
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr "Κλείδωμα θέσης και μεγέθους κατά τη μεγιστοποίηση παραθύρων."
+
+#~ msgid "Focus on application windows when they first appear."
+#~ msgstr "Εστίαση σε παράθυρα εφαρμογών όταν εμφανίζονται για πρώτη φορά."
+
+#~ msgid "Unshade selected windows."
+#~ msgstr "Αποσκίαση επιλεγμένων παραθύρων."
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "Το πρόγραμμα για αναπαραγωγή δειγμάτων ήχου. Αν δεν οριστεί, θα "
+#~ "χρησιμοποιηθεί εσωτερική υποστήριξη του ESD."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when reading a string from the user."
+#~ msgstr ""
+#~ "Πίνακας χαρακτήρων με ενεργές συνδέσεις όταν αναγιγνώσκεται αλφαριθμητικό "
+#~ "από το χρήστη."
+
+#~ msgid "When raising a window, also raise its: \\w"
+#~ msgstr "Η ανασήκωση παραθύρου επίσης ανασηκώνει το: \\w"
+
+#~ msgid "Viewport"
+#~ msgstr "Θύρα όψης"
+
+#, fuzzy
+#~ msgid "Windows uniconify to the current viewport."
+#~ msgstr "Μετακίνηση ομάδας στην τρέχουσα θύρα όψης"
+
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "Ανασήκωση παραθύρων όταν εστιάζονται."
+
+#, fuzzy
+#~ msgid "How to act when passing the first or last workspace."
+#~ msgstr "Εμφάνιση του μενού που περιέχει τη λίστα όλων των χώρων εργασίας."
+
+#, fuzzy
+#~ msgid ""
+#~ "How to act when passing the first or last workspace, while moving a window"
+#~ msgstr "Εμφάνιση του μενού που περιέχει τη λίστα όλων των χώρων εργασίας."
 
 #~ msgid "Crux Theme"
 #~ msgstr "Θέμα Crux"

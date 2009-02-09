@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 23:36+0100\n"
+"POT-Creation-Date: 2009-02-09 10:44+0100\n"
 "PO-Revision-Date: 2004-04-16 12:19-0400\n"
 "Last-Translator: Gareth Owen <gowen72@yahoo.com>\n"
 "Language-Team: British English\n"
@@ -169,32 +169,6 @@ msgstr "not"
 msgid "Match Window Properties"
 msgstr "Match Window Properties"
 
-# ../lisp/x-cycle.jl
-#. customization options
-#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-#: ../lisp/sawfish/wm/autoload.jl:119
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
-msgid "Window Cycling"
-msgstr "Window Cycling"
-
-#: ../lisp/sawfish/wm/autoload.jl:132
-#: ../lisp/sawfish/wm/ext/audio-events.jl:36
-msgid "Sound"
-msgstr "Sound"
-
-# ../lisp/match-window.jl
-#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
-#: ../lisp/sawfish/wm/autoload.jl:133
-#: ../lisp/sawfish/wm/ext/match-window.jl:138
-msgid "Matched Windows"
-msgstr "Matched Windows"
-
-# ../lisp/tooltips.jl
-#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
-#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
-msgid "Tooltips"
-msgstr "Tooltips"
-
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -204,37 +178,6 @@ msgstr "Index:"
 #: ../lisp/sawfish/wm/commands.jl:365
 msgid "Command:"
 msgstr "Command:"
-
-#. Customization options.
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
-msgid "Growing and packing of windows"
-msgstr "Growing and packing of windows"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
-msgid "Whether growing is considered to be maximization."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
-#, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Move the window to the next viewport."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
-#, fuzzy
-msgid "Whether to bump into fully obscured windows."
-msgstr ""
-"Whether to bump into fully obscured windows when growing or packing\n"
-"windows."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
-#, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr "Whether to bump into ignored windows when growing or packing."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
-#, fuzzy
-msgid "Whether to bump into ignored windows."
-msgstr "Whether to bump into ignored windows when growing or packing."
 
 #: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
@@ -268,133 +211,6 @@ msgstr "Pack up"
 msgid "Pack down"
 msgstr "Pack down"
 
-#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
-#, fuzzy
-msgid "Number of pixels to move pointer in."
-msgstr "Number of pixels to move pointer in `move-cursor-' commands."
-
-# ../lisp/maximize.jl
-#: ../lisp/sawfish/wm/commands/move-resize.jl:53
-#, fuzzy
-msgid "How windows being moved are animated"
-msgstr "Raise windows when they are unshaded."
-
-# ../lisp/maximize.jl
-#: ../lisp/sawfish/wm/commands/move-resize.jl:58
-#, fuzzy
-msgid "How windows being resized are animated"
-msgstr "Raise windows when they are unshaded."
-
-# ../lisp/maximize.jl
-#: ../lisp/sawfish/wm/commands/move-resize.jl:63
-#, fuzzy
-msgid "Raise windows when they are moved or resized."
-msgstr "Raise windows when they are focused."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:68
-msgid "Show current position of windows while moving."
-msgstr "Show current position of windows while moving."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:73
-msgid "Show current dimensions of windows while resizing."
-msgstr "Show current dimensions of windows while resizing."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:78
-#, fuzzy
-msgid "How to choose window edges when resizing."
-msgstr "Show current dimensions of windows while resizing."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:83
-msgid "Distance in pixels before window edges align with each other."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
-msgid "Display window names and icons while cycling through windows."
-msgstr "Display window names and icons while cycling through windows."
-
-# ../lisp/x-cycle.jl
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
-msgid "Include iconified windows when cycling."
-msgstr "Include iconified windows when cycling."
-
-# ../lisp/x-cycle.jl
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
-msgid "Include windows on all workspaces when cycling."
-msgstr "Include windows on all workspaces when cycling."
-
-# ../lisp/x-cycle.jl
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
-msgid "Include windows on all viewports when cycling."
-msgstr "Include windows on all viewports when cycling."
-
-# ../lisp/maximize.jl
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
-#, fuzzy
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Raise windows when they are focused."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
-msgid ""
-"Keymap containing bindings active only during window cycling operations."
-msgstr ""
-"Keymap containing bindings active only during window cycling operations."
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:34
-msgid "The program launched by the `xterm' command."
-msgstr "The program launched by the `xterm' command."
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:39
-msgid "Arguments given to the `xterm' command."
-msgstr "Arguments given to the `xterm' command."
-
-# ../lisp/custom.jl
-#. default groups
-#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Focus"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:483
-msgid "Move/Resize"
-msgstr "Move/Resize"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Appearance"
-
-# ../lisp/menus.jl
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:485
-msgid "Workspaces"
-msgstr "Workspaces"
-
-# ../lisp/keymaps.jl
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
-msgid "Bindings"
-msgstr "Bindings"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:487
-#, fuzzy
-msgid "Mini/Maximizing"
-msgstr "Minimising and Maximising"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:488
-msgid "Miscellaneous"
-msgstr "Miscellaneous"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Placement"
-
-#: ../lisp/sawfish/wm/ext/audio-events.jl:42
-msgid "Play sound effects for window events."
-msgstr "Play sound effects for window events."
-
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
 msgstr "Event"
@@ -403,38 +219,24 @@ msgstr "Event"
 msgid "Audio file"
 msgstr "Audio file"
 
-# ../lisp/edge-flip.jl
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
-msgid "Edge Flipping"
-msgstr "Edge Flipping"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
-msgid "Select the next desktop when the pointer hits screen edge."
-msgstr "Select the next desktop when the pointer hits screen edge."
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
-msgid "Hitting the screen edge selects the next: \\w"
-msgstr "Hitting the screen edge selects the next: \\w"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
-msgid "Only flip when interactively moving a window."
-msgstr "Only flip when interactively moving a window."
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
-msgid "Milliseconds to delay before edge flipping."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:37
-msgid "Beep when errors occur."
-msgstr "Beep when errors occur."
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:42
-msgid "Display error messages to: \\w"
-msgstr "Display error messages to: \\w"
-
 #: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "No errors."
+
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Placement"
+
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Focus"
+
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Appearance"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -443,54 +245,6 @@ msgstr "State"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Other"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
-msgid "Shade Hover"
-msgstr "Shade Hover"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
-msgid "Enable shade-hover mode."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
-msgid "Delay in milliseconds before unshading windows."
-msgstr "Delay in milliseconds before unshading windows."
-
-# ../lisp/maximize.jl
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
-msgid "Raise windows when they are unshaded."
-msgstr "Raise windows when they are unshaded."
-
-# ../lisp/tooltips.jl
-#: ../lisp/sawfish/wm/ext/tooltips.jl:52
-msgid "Display tooltips for window frames."
-msgstr "Display tooltips for window frames."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:58
-msgid "Show full documentation in tooltips."
-msgstr "Show full documentation in tooltips."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:64
-#, fuzzy
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Delay in milliseconds before unshading windows."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:70
-#, fuzzy
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Delay in milliseconds before unshading windows."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:76
-msgid "Font used to display tooltips, or nil for default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:82
-msgid "Color used for the tooltips background"
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:88
-msgid "Color used for the tooltips foreground"
-msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -508,61 +262,9 @@ msgstr "Remember _attributes"
 msgid "_Forget saved state"
 msgstr "_Forget saved state"
 
-#. customizations
-#: ../lisp/sawfish/wm/ext/window-history.jl:90
-msgid "History"
-msgstr "History"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:93
-msgid "Automatically remember window positions."
-msgstr "Automatically remember window positions."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:99
-msgid "Automatically remember window sizes."
-msgstr "Automatically remember window sizes."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:105
-msgid "Automatically remember other window attributes."
-msgstr "Automatically remember other window attributes."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:111
-msgid "Don't automatically remember details of transient windows."
-msgstr "Don't automatically remember details of transient windows."
-
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_History"
-
-# ../lisp/focus.jl
-#: ../lisp/sawfish/wm/focus.jl:48
-msgid "When does the mouse pointer affect the input focus."
-msgstr "When does the mouse pointer affect the input focus."
-
-#: ../lisp/sawfish/wm/focus.jl:55
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "Click-to-focus mode passes the click through to the application."
-
-#: ../lisp/sawfish/wm/focus.jl:60
-#, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
-msgstr "Lower the window to its lowest allowed position in the stacking order."
-
-#: ../lisp/sawfish/wm/focus.jl:65
-msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
-
-#: ../lisp/sawfish/wm/frames.jl:136
-msgid "Default frame style:"
-msgstr "Default frame style:"
-
-# ../lisp/frames.jl
-#: ../lisp/sawfish/wm/frames.jl:143
-msgid "Automatically reload themes when they are updated."
-msgstr "Automatically reload themes when they are updated."
-
-#: ../lisp/sawfish/wm/frames.jl:211
-msgid "Default font: \\w"
-msgstr "Default font: \\w"
 
 # ../lisp/frames.jl
 #: ../lisp/sawfish/wm/frames.jl:512
@@ -610,92 +312,6 @@ msgstr "GNOME WWW..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "About GNOME..."
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:91
-msgid "Keymap containing bindings active anywhere."
-msgstr "Keymap containing bindings active anywhere."
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:104
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr "Keymap containing bindings active when a client window is focused."
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:112
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:122
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:131
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:140
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:148
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:157
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Keymap containing bindings active when the pointer is in the maximise\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:165
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:172
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:181
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "Modifier key(s) used for default shortcuts."
 
 # ../lisp/custom.jl
 #: ../lisp/sawfish/wm/menus.jl:86
@@ -858,42 +474,6 @@ msgstr "_All settings"
 msgid "Edit theme..."
 msgstr "Edit theme..."
 
-#: ../lisp/sawfish/wm/placement.jl:41
-msgid "Method of placing windows: \\w"
-msgstr "Method of placing windows: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:46
-msgid "Method of placing dialog windows: \\w"
-msgstr "Method of placing dialog windows: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:51
-msgid "Ignore program-specified window placements."
-msgstr ""
-
-#: ../lisp/sawfish/wm/placement/stagger.jl:34
-#, fuzzy
-msgid "Distance between successive placements in stagger mode."
-msgstr "Distance between successive placements in `stagger' placement mode."
-
-#. Each window will have a `depth' property--an integer, zero
-#. represents the level of normal windows, negative for windows below
-#. this level, and positive for windows above the normal level
-#: ../lisp/sawfish/wm/stacking.jl:58
-msgid "Stacking"
-msgstr "Stacking"
-
-#: ../lisp/sawfish/wm/stacking.jl:61
-msgid "Keep transient windows stacked above: \\w"
-msgstr "Keep transient windows stacked above: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:75
-msgid "Minimizing a window also removes its: \\w"
-msgstr "Minimising a window also removes its: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:80
-msgid "Unminimizing a window also restores its: \\w"
-msgstr "Unminimising a window also restores its: \\w"
-
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Sticky"
@@ -919,23 +499,9 @@ msgstr "In _window list"
 msgid "In _task list"
 msgstr "In GNOME _task list"
 
-# ../lisp/move-resize.jl
-#: ../lisp/sawfish/wm/state/maximize.jl:89
-msgid "Lock position and size while windows are maximized."
-msgstr "Lock position and size while windows are maximised."
-
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "S_haded"
-
-#: ../lisp/sawfish/wm/state/transient.jl:48
-msgid "Focus on application windows when they first appear."
-msgstr "Focus on application windows when they first appear."
-
-# ../lisp/workspace.jl
-#: ../lisp/sawfish/wm/util/display-window.jl:43
-msgid "Unshade selected windows."
-msgstr "Unshade selected windows."
 
 # ../lisp/group-funs.jl
 #: ../lisp/sawfish/wm/util/groups.jl:153
@@ -951,17 +517,6 @@ msgstr "Press key..."
 msgid "[Quote]"
 msgstr "[Quote]"
 
-#: ../lisp/sawfish/wm/util/play-audio.jl:43
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr ""
-"The program used to play audio samples. If unset, built-in support for ESD "
-"is used."
-
-#: ../lisp/sawfish/wm/util/prompt.jl:63
-msgid "Keymap containing bindings active when reading a string from the user."
-msgstr "Keymap containing bindings active when reading a string from the user."
-
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
 msgstr "Window:"
@@ -976,36 +531,6 @@ msgstr "Workspace %d"
 msgid "Workspace:"
 msgstr "Workspace:"
 
-#: ../lisp/sawfish/wm/util/stacking.jl:45
-msgid "When raising a window, also raise its: \\w"
-msgstr "When raising a window, also raise its: \\w"
-
-#. Virtual workspaces are implemented by moving windows in and out of
-#. the screen dimensions. E.g. moving to the left moves all windows one
-#. screen-width to the right.
-#: ../lisp/sawfish/wm/viewport.jl:53
-msgid "Viewport"
-msgstr "Viewport"
-
-#: ../lisp/sawfish/wm/viewport.jl:56
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:62
-#, fuzzy
-msgid "Windows uniconify to the current viewport."
-msgstr "Move group to current viewport"
-
-#: ../lisp/sawfish/wm/viewport.jl:67
-msgid ""
-"Number of steps in which to scroll between viewports (less steps = faster "
-"scrolling)."
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:73
-msgid "Wether to stop or wrap-around on first/last viewport"
-msgstr ""
-
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Column:"
@@ -1014,56 +539,9 @@ msgstr "Column:"
 msgid "Row:"
 msgstr "Row:"
 
-# ../lisp/maximize.jl
-#: ../lisp/sawfish/wm/windows.jl:73
-#, fuzzy
-msgid "Give focus to windows even when they haven't asked for it."
-msgstr "Raise windows when they are focused."
-
-#: ../lisp/sawfish/wm/windows.jl:77
-msgid "Warping"
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:80
-msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:85
-msgid "Wether to enable warping the cursor to windows."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:90
-msgid "Wether to not ignore avoided windows by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:95
-msgid "Wether to avoid any unspecified window by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:100
-msgid "Format to create unique window names."
-msgstr ""
-
-# ../lisp/workspace.jl
-#: ../lisp/sawfish/wm/workspace.jl:122
-#, fuzzy
-msgid "How to act when passing the first or last workspace."
-msgstr "Display the menu containing the list of all workspaces."
-
-# ../lisp/workspace.jl
-#: ../lisp/sawfish/wm/workspace.jl:127
-#, fuzzy
-msgid ""
-"How to act when passing the first or last workspace, while moving a window"
-msgstr "Display the menu containing the list of all workspaces."
-
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Workspace names"
-
-#: ../lisp/sawfish/wm/workspace.jl:139
-msgid "Preserve outermost empty workspaces in the pager."
-msgstr ""
 
 # ../lisp/workspace.jl
 #: ../lisp/sawfish/wm/workspace.jl:150
@@ -1116,6 +594,358 @@ msgstr "Sawfish manages your windows extensibly."
 #: ../scripts/sawfish-about.jl.in:56
 msgid "Sawfish homepage"
 msgstr "Sawfish homepage"
+
+# ../lisp/x-cycle.jl
+#~ msgid "Window Cycling"
+#~ msgstr "Window Cycling"
+
+#~ msgid "Sound"
+#~ msgstr "Sound"
+
+# ../lisp/match-window.jl
+#~ msgid "Matched Windows"
+#~ msgstr "Matched Windows"
+
+# ../lisp/tooltips.jl
+#~ msgid "Tooltips"
+#~ msgstr "Tooltips"
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "Growing and packing of windows"
+
+#, fuzzy
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Move the window to the next viewport."
+
+#, fuzzy
+#~ msgid "Whether to bump into fully obscured windows."
+#~ msgstr ""
+#~ "Whether to bump into fully obscured windows when growing or packing\n"
+#~ "windows."
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr "Whether to bump into ignored windows when growing or packing."
+
+#, fuzzy
+#~ msgid "Whether to bump into ignored windows."
+#~ msgstr "Whether to bump into ignored windows when growing or packing."
+
+#, fuzzy
+#~ msgid "Number of pixels to move pointer in."
+#~ msgstr "Number of pixels to move pointer in `move-cursor-' commands."
+
+# ../lisp/maximize.jl
+#, fuzzy
+#~ msgid "How windows being moved are animated"
+#~ msgstr "Raise windows when they are unshaded."
+
+# ../lisp/maximize.jl
+#, fuzzy
+#~ msgid "How windows being resized are animated"
+#~ msgstr "Raise windows when they are unshaded."
+
+# ../lisp/maximize.jl
+#, fuzzy
+#~ msgid "Raise windows when they are moved or resized."
+#~ msgstr "Raise windows when they are focused."
+
+#~ msgid "Show current position of windows while moving."
+#~ msgstr "Show current position of windows while moving."
+
+#~ msgid "Show current dimensions of windows while resizing."
+#~ msgstr "Show current dimensions of windows while resizing."
+
+#, fuzzy
+#~ msgid "How to choose window edges when resizing."
+#~ msgstr "Show current dimensions of windows while resizing."
+
+#~ msgid "Display window names and icons while cycling through windows."
+#~ msgstr "Display window names and icons while cycling through windows."
+
+# ../lisp/x-cycle.jl
+#~ msgid "Include iconified windows when cycling."
+#~ msgstr "Include iconified windows when cycling."
+
+# ../lisp/x-cycle.jl
+#~ msgid "Include windows on all workspaces when cycling."
+#~ msgstr "Include windows on all workspaces when cycling."
+
+# ../lisp/x-cycle.jl
+#~ msgid "Include windows on all viewports when cycling."
+#~ msgstr "Include windows on all viewports when cycling."
+
+# ../lisp/maximize.jl
+#, fuzzy
+#~ msgid "Raise windows while they're temporarily selected during cycling."
+#~ msgstr "Raise windows when they are focused."
+
+#~ msgid ""
+#~ "Keymap containing bindings active only during window cycling operations."
+#~ msgstr ""
+#~ "Keymap containing bindings active only during window cycling operations."
+
+#~ msgid "The program launched by the `xterm' command."
+#~ msgstr "The program launched by the `xterm' command."
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "Arguments given to the `xterm' command."
+
+# ../lisp/custom.jl
+#~ msgid "Move/Resize"
+#~ msgstr "Move/Resize"
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#~ msgid "Workspaces"
+#~ msgstr "Workspaces"
+
+# ../lisp/keymaps.jl
+# ../lisp/custom.jl
+#~ msgid "Bindings"
+#~ msgstr "Bindings"
+
+# ../lisp/custom.jl
+#, fuzzy
+#~ msgid "Mini/Maximizing"
+#~ msgstr "Minimising and Maximising"
+
+# ../lisp/custom.jl
+#~ msgid "Miscellaneous"
+#~ msgstr "Miscellaneous"
+
+#~ msgid "Play sound effects for window events."
+#~ msgstr "Play sound effects for window events."
+
+# ../lisp/edge-flip.jl
+#~ msgid "Edge Flipping"
+#~ msgstr "Edge Flipping"
+
+#~ msgid "Select the next desktop when the pointer hits screen edge."
+#~ msgstr "Select the next desktop when the pointer hits screen edge."
+
+#~ msgid "Hitting the screen edge selects the next: \\w"
+#~ msgstr "Hitting the screen edge selects the next: \\w"
+
+#~ msgid "Only flip when interactively moving a window."
+#~ msgstr "Only flip when interactively moving a window."
+
+#~ msgid "Beep when errors occur."
+#~ msgstr "Beep when errors occur."
+
+#~ msgid "Display error messages to: \\w"
+#~ msgstr "Display error messages to: \\w"
+
+#~ msgid "Shade Hover"
+#~ msgstr "Shade Hover"
+
+#~ msgid "Delay in milliseconds before unshading windows."
+#~ msgstr "Delay in milliseconds before unshading windows."
+
+# ../lisp/maximize.jl
+#~ msgid "Raise windows when they are unshaded."
+#~ msgstr "Raise windows when they are unshaded."
+
+# ../lisp/tooltips.jl
+#~ msgid "Display tooltips for window frames."
+#~ msgstr "Display tooltips for window frames."
+
+#~ msgid "Show full documentation in tooltips."
+#~ msgstr "Show full documentation in tooltips."
+
+#, fuzzy
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "Delay in milliseconds before unshading windows."
+
+#, fuzzy
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "Delay in milliseconds before unshading windows."
+
+#~ msgid "History"
+#~ msgstr "History"
+
+#~ msgid "Automatically remember window positions."
+#~ msgstr "Automatically remember window positions."
+
+#~ msgid "Automatically remember window sizes."
+#~ msgstr "Automatically remember window sizes."
+
+#~ msgid "Automatically remember other window attributes."
+#~ msgstr "Automatically remember other window attributes."
+
+#~ msgid "Don't automatically remember details of transient windows."
+#~ msgstr "Don't automatically remember details of transient windows."
+
+# ../lisp/focus.jl
+#~ msgid "When does the mouse pointer affect the input focus."
+#~ msgstr "When does the mouse pointer affect the input focus."
+
+#~ msgid "Click-to-focus mode passes the click through to the application."
+#~ msgstr "Click-to-focus mode passes the click through to the application."
+
+#, fuzzy
+#~ msgid "Wether focusing a window doesn't change it's position in the stack."
+#~ msgstr ""
+#~ "Lower the window to its lowest allowed position in the stacking order."
+
+#~ msgid "Default frame style:"
+#~ msgstr "Default frame style:"
+
+# ../lisp/frames.jl
+#~ msgid "Automatically reload themes when they are updated."
+#~ msgstr "Automatically reload themes when they are updated."
+
+#~ msgid "Default font: \\w"
+#~ msgstr "Default font: \\w"
+
+# ../lisp/keymaps.jl
+#~ msgid "Keymap containing bindings active anywhere."
+#~ msgstr "Keymap containing bindings active anywhere."
+
+# ../lisp/keymaps.jl
+#~ msgid "Keymap containing bindings active when a client window is focused."
+#~ msgstr "Keymap containing bindings active when a client window is focused."
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the root window\n"
+#~ "(or when no window is focused)."
+#~ msgstr ""
+#~ "Keymap containing bindings active when the pointer is in the root window\n"
+#~ "(or when no window is focused)."
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Keymap containing bindings active when the pointer is in the maximise\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+
+#~ msgid "Modifier key(s) used for default shortcuts."
+#~ msgstr "Modifier key(s) used for default shortcuts."
+
+#~ msgid "Method of placing windows: \\w"
+#~ msgstr "Method of placing windows: \\w"
+
+#~ msgid "Method of placing dialog windows: \\w"
+#~ msgstr "Method of placing dialog windows: \\w"
+
+#, fuzzy
+#~ msgid "Distance between successive placements in stagger mode."
+#~ msgstr "Distance between successive placements in `stagger' placement mode."
+
+#~ msgid "Stacking"
+#~ msgstr "Stacking"
+
+#~ msgid "Keep transient windows stacked above: \\w"
+#~ msgstr "Keep transient windows stacked above: \\w"
+
+#~ msgid "Minimizing a window also removes its: \\w"
+#~ msgstr "Minimising a window also removes its: \\w"
+
+#~ msgid "Unminimizing a window also restores its: \\w"
+#~ msgstr "Unminimising a window also restores its: \\w"
+
+# ../lisp/move-resize.jl
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr "Lock position and size while windows are maximised."
+
+#~ msgid "Focus on application windows when they first appear."
+#~ msgstr "Focus on application windows when they first appear."
+
+# ../lisp/workspace.jl
+#~ msgid "Unshade selected windows."
+#~ msgstr "Unshade selected windows."
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "The program used to play audio samples. If unset, built-in support for "
+#~ "ESD is used."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when reading a string from the user."
+#~ msgstr ""
+#~ "Keymap containing bindings active when reading a string from the user."
+
+#~ msgid "When raising a window, also raise its: \\w"
+#~ msgstr "When raising a window, also raise its: \\w"
+
+#~ msgid "Viewport"
+#~ msgstr "Viewport"
+
+#, fuzzy
+#~ msgid "Windows uniconify to the current viewport."
+#~ msgstr "Move group to current viewport"
+
+# ../lisp/maximize.jl
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "Raise windows when they are focused."
+
+# ../lisp/workspace.jl
+#, fuzzy
+#~ msgid "How to act when passing the first or last workspace."
+#~ msgstr "Display the menu containing the list of all workspaces."
+
+# ../lisp/workspace.jl
+#, fuzzy
+#~ msgid ""
+#~ "How to act when passing the first or last workspace, while moving a window"
+#~ msgstr "Display the menu containing the list of all workspaces."
 
 #~ msgid "Crux Theme"
 #~ msgstr "Crux Theme"

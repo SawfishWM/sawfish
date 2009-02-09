@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 23:36+0100\n"
+"POT-Creation-Date: 2009-02-09 10:44+0100\n"
 "PO-Revision-Date: 2001-08-15 14:59+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -158,29 +158,6 @@ msgstr ""
 msgid "Match Window Properties"
 msgstr "對照視窗的內容"
 
-#. customization options
-#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-#: ../lisp/sawfish/wm/autoload.jl:119
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
-msgid "Window Cycling"
-msgstr "循環各個視窗"
-
-#: ../lisp/sawfish/wm/autoload.jl:132
-#: ../lisp/sawfish/wm/ext/audio-events.jl:36
-msgid "Sound"
-msgstr "聲音"
-
-#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
-#: ../lisp/sawfish/wm/autoload.jl:133
-#: ../lisp/sawfish/wm/ext/match-window.jl:138
-msgid "Matched Windows"
-msgstr "符合條件的視窗"
-
-#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
-#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
-msgid "Tooltips"
-msgstr "工具提示"
-
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -190,32 +167,6 @@ msgstr "索引："
 #: ../lisp/sawfish/wm/commands.jl:365
 msgid "Command:"
 msgstr "指令："
-
-#. Customization options.
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
-msgid "Growing and packing of windows"
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
-msgid "Whether growing is considered to be maximization."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
-#, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "將視窗移至下一個視區."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
-msgid "Whether to bump into fully obscured windows."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
-msgid "Whether to bump into windows on a different depth."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
-msgid "Whether to bump into ignored windows."
-msgstr ""
 
 #: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 #, fuzzy
@@ -257,119 +208,6 @@ msgstr "視窗向上移"
 msgid "Pack down"
 msgstr "視窗向下移"
 
-#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
-#, fuzzy
-msgid "Number of pixels to move pointer in."
-msgstr "在「移動-游標-」指令中游標所移動的像點數。"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:53
-#, fuzzy
-msgid "How windows being moved are animated"
-msgstr "當視窗由隱藏狀態還原時提至最頂層。"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:58
-#, fuzzy
-msgid "How windows being resized are animated"
-msgstr "當視窗由隱藏狀態還原時提至最頂層。"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:63
-#, fuzzy
-msgid "Raise windows when they are moved or resized."
-msgstr "當視窗在焦點中時把它提昇到上層來。"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:68
-msgid "Show current position of windows while moving."
-msgstr "移動視窗時顯示目前位置。"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:73
-msgid "Show current dimensions of windows while resizing."
-msgstr "改變視窗大小時顯示目前視窗大小。"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:78
-#, fuzzy
-msgid "How to choose window edges when resizing."
-msgstr "改變視窗大小時顯示目前視窗大小。"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:83
-msgid "Distance in pixels before window edges align with each other."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
-#, fuzzy
-msgid "Display window names and icons while cycling through windows."
-msgstr "循環視窗時顯示視窗名稱。"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
-msgid "Include iconified windows when cycling."
-msgstr "循環視窗時也包括被圖像化的視窗。"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
-msgid "Include windows on all workspaces when cycling."
-msgstr "循環視窗時包括所有工作區的視窗。"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
-#, fuzzy
-msgid "Include windows on all viewports when cycling."
-msgstr "循環視窗時包括在所有視界的視窗。"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
-#, fuzzy
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "當視窗在焦點中時把它提昇到上層來。"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
-#, fuzzy
-msgid ""
-"Keymap containing bindings active only during window cycling operations."
-msgstr "按鍵對應包含只在循環視窗時有效的鍵結."
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:34
-msgid "The program launched by the `xterm' command."
-msgstr "由 `xterm' 指令所啟動的程式。"
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:39
-#, fuzzy
-msgid "Arguments given to the `xterm' command."
-msgstr "`xterm' 指令的選擇性選項。"
-
-#. default groups
-#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "焦點"
-
-#: ../lisp/sawfish/wm/custom.jl:483
-msgid "Move/Resize"
-msgstr "移動/改變大小"
-
-#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "外觀"
-
-#: ../lisp/sawfish/wm/custom.jl:485
-msgid "Workspaces"
-msgstr "工作區"
-
-#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
-msgid "Bindings"
-msgstr "按鍵結合"
-
-#: ../lisp/sawfish/wm/custom.jl:487
-#, fuzzy
-msgid "Mini/Maximizing"
-msgstr "最小化/最大化"
-
-#: ../lisp/sawfish/wm/custom.jl:488
-msgid "Miscellaneous"
-msgstr "其它"
-
-#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "放置"
-
-#: ../lisp/sawfish/wm/ext/audio-events.jl:42
-msgid "Play sound effects for window events."
-msgstr "為視窗事件播放音效。"
-
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
 msgstr "事件"
@@ -378,39 +216,21 @@ msgstr "事件"
 msgid "Audio file"
 msgstr "音效檔"
 
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
-msgid "Edge Flipping"
-msgstr "邊界翻頁"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
-msgid "Select the next desktop when the pointer hits screen edge."
-msgstr "當鼠標移動到螢幕邊緣時選擇下一個桌面。"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
-msgid "Hitting the screen edge selects the next: \\w"
-msgstr "游標移動到螢幕邊緣時選擇下一個：\\w"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
-msgid "Only flip when interactively moving a window."
-msgstr "只在手動移動視窗時翻頁。"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
-msgid "Milliseconds to delay before edge flipping."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:37
-#, fuzzy
-msgid "Beep when errors occur."
-msgstr "當發生錯誤時發出嗶聲。"
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:42
-#, fuzzy
-msgid "Display error messages to: \\w"
-msgstr "將錯誤訊息顯示在：\\w"
-
 #: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "沒有錯誤。"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "放置"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "焦點"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "外觀"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -419,53 +239,6 @@ msgstr "狀態"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "其它"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
-#, fuzzy
-msgid "Shade Hover"
-msgstr "蔭遮顯藏"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
-msgid "Enable shade-hover mode."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
-msgid "Delay in milliseconds before unshading windows."
-msgstr "由隱藏狀態還原前所等待的毫秒數。"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
-msgid "Raise windows when they are unshaded."
-msgstr "當視窗由隱藏狀態還原時提至最頂層。"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:52
-msgid "Display tooltips for window frames."
-msgstr "顯示邊框的工具提示。"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:58
-msgid "Show full documentation in tooltips."
-msgstr "在工具提示中顯示完整的文檔。"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:64
-#, fuzzy
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "由隱藏狀態還原前所等待的毫秒數。"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:70
-#, fuzzy
-msgid "Number of milliseconds before removing tooltips."
-msgstr "由隱藏狀態還原前所等待的毫秒數。"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:76
-msgid "Font used to display tooltips, or nil for default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:82
-msgid "Color used for the tooltips background"
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:88
-msgid "Color used for the tooltips foreground"
-msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -483,61 +256,9 @@ msgstr "記住屬性(_a)"
 msgid "_Forget saved state"
 msgstr "忘記所有狀態(_F)"
 
-#. customizations
-#: ../lisp/sawfish/wm/ext/window-history.jl:90
-#, fuzzy
-msgid "History"
-msgstr "紀錄(_H)"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:93
-msgid "Automatically remember window positions."
-msgstr "自動記憶視窗位置。"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:99
-msgid "Automatically remember window sizes."
-msgstr "自動記憶視窗大小。"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:105
-msgid "Automatically remember other window attributes."
-msgstr "自動記憶視窗的其它屬性。"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:111
-msgid "Don't automatically remember details of transient windows."
-msgstr "不要自動記憶過渡視窗的細節。"
-
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "紀錄(_H)"
-
-#: ../lisp/sawfish/wm/focus.jl:48
-msgid "When does the mouse pointer affect the input focus."
-msgstr "游標何時會影響到輸入焦點。"
-
-#: ../lisp/sawfish/wm/focus.jl:55
-#, fuzzy
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "按擊焦點是否將按擊給視窗."
-
-#: ../lisp/sawfish/wm/focus.jl:60
-#, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
-msgstr "將視窗降低到最低的疊放順序。"
-
-#: ../lisp/sawfish/wm/focus.jl:65
-msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
-
-#: ../lisp/sawfish/wm/frames.jl:136
-msgid "Default frame style:"
-msgstr "預設的邊框款式："
-
-#: ../lisp/sawfish/wm/frames.jl:143
-msgid "Automatically reload themes when they are updated."
-msgstr "當佈景主題被更新時自動重新載入。"
-
-#: ../lisp/sawfish/wm/frames.jl:211
-msgid "Default font: \\w"
-msgstr "預設字形：\\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -579,79 +300,6 @@ msgstr "GNOME 網頁..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "關於 GNOME..."
-
-#: ../lisp/sawfish/wm/keymaps.jl:91
-msgid "Keymap containing bindings active anywhere."
-msgstr "任何地方都有效的按鍵對應。"
-
-#: ../lisp/sawfish/wm/keymaps.jl:104
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr "用戶視窗在焦點中時的有效按鍵對應。"
-
-#: ../lisp/sawfish/wm/keymaps.jl:112
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr "游標在根視窗（或是視窗不在焦點中）時的有效按鍵對應。"
-
-#: ../lisp/sawfish/wm/keymaps.jl:122
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"游標在視窗標題上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被考慮。）"
-
-#: ../lisp/sawfish/wm/keymaps.jl:131
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"游標在視窗邊界上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被考慮。）"
-
-#: ../lisp/sawfish/wm/keymaps.jl:140
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"游標在視窗關閉按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
-"考慮。）"
-
-#: ../lisp/sawfish/wm/keymaps.jl:148
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"游標在視窗圖示化按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
-"考慮。）"
-
-#: ../lisp/sawfish/wm/keymaps.jl:157
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"游標在視窗最大化按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
-"考慮。）"
-
-#: ../lisp/sawfish/wm/keymaps.jl:165
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"游標在視窗選單按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
-"考慮。）"
-
-#: ../lisp/sawfish/wm/keymaps.jl:172
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"游標在視窗隱藏按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
-"考慮。）"
-
-#: ../lisp/sawfish/wm/keymaps.jl:181
-#, fuzzy
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "視窗管理程式預設快速鍵的變化鍵組合。"
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -801,44 +449,6 @@ msgstr "所有設定"
 msgid "Edit theme..."
 msgstr "編輯佈景主題..."
 
-#: ../lisp/sawfish/wm/placement.jl:41
-msgid "Method of placing windows: \\w"
-msgstr "放置視窗的方法：\\w"
-
-#: ../lisp/sawfish/wm/placement.jl:46
-msgid "Method of placing dialog windows: \\w"
-msgstr "放置對話窗的方法：\\w"
-
-#: ../lisp/sawfish/wm/placement.jl:51
-msgid "Ignore program-specified window placements."
-msgstr ""
-
-#: ../lisp/sawfish/wm/placement/stagger.jl:34
-#, fuzzy
-msgid "Distance between successive placements in stagger mode."
-msgstr "在 `交替' 放置模式下接連放置間的距離."
-
-#. Each window will have a `depth' property--an integer, zero
-#. represents the level of normal windows, negative for windows below
-#. this level, and positive for windows above the normal level
-#: ../lisp/sawfish/wm/stacking.jl:58
-msgid "Stacking"
-msgstr "疊放"
-
-#: ../lisp/sawfish/wm/stacking.jl:61
-msgid "Keep transient windows stacked above: \\w"
-msgstr "讓過渡的視窗疊放於何者之上：\\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:75
-#, fuzzy
-msgid "Minimizing a window also removes its: \\w"
-msgstr "提昇一個視窗時，同時提昇其：\\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:80
-#, fuzzy
-msgid "Unminimizing a window also restores its: \\w"
-msgstr "提昇一個視窗時，同時提昇其：\\w"
-
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "固定(_S)"
@@ -864,21 +474,9 @@ msgstr "在視窗列表中(_w)"
 msgid "In _task list"
 msgstr "在 GNOME 工作列表中(_t)"
 
-#: ../lisp/sawfish/wm/state/maximize.jl:89
-msgid "Lock position and size while windows are maximized."
-msgstr "當視窗被最大化後，鎖定其位置和大小。"
-
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "隱藏(_h)"
-
-#: ../lisp/sawfish/wm/state/transient.jl:48
-msgid "Focus on application windows when they first appear."
-msgstr "視窗第一次顯示時會獲得焦點。"
-
-#: ../lisp/sawfish/wm/util/display-window.jl:43
-msgid "Unshade selected windows."
-msgstr "將選擇的視窗由隱藏模式還原。"
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -891,16 +489,6 @@ msgstr "請按鍵..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[引用]"
-
-#: ../lisp/sawfish/wm/util/play-audio.jl:43
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr "用來播放音效的程式。若無設定，則使用內置的 ESD 支援。"
-
-#: ../lisp/sawfish/wm/util/prompt.jl:63
-#, fuzzy
-msgid "Keymap containing bindings active when reading a string from the user."
-msgstr "按鍵對應包含從使用者讀入一個字串時有效的鍵結。"
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -916,36 +504,6 @@ msgstr "工作區 %d"
 msgid "Workspace:"
 msgstr "工作區："
 
-#: ../lisp/sawfish/wm/util/stacking.jl:45
-msgid "When raising a window, also raise its: \\w"
-msgstr "提昇一個視窗時，同時提昇其：\\w"
-
-#. Virtual workspaces are implemented by moving windows in and out of
-#. the screen dimensions. E.g. moving to the left moves all windows one
-#. screen-width to the right.
-#: ../lisp/sawfish/wm/viewport.jl:53
-msgid "Viewport"
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:56
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:62
-#, fuzzy
-msgid "Windows uniconify to the current viewport."
-msgstr "將視窗移至下一個視區."
-
-#: ../lisp/sawfish/wm/viewport.jl:67
-msgid ""
-"Number of steps in which to scroll between viewports (less steps = faster "
-"scrolling)."
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:73
-msgid "Wether to stop or wrap-around on first/last viewport"
-msgstr ""
-
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "列："
@@ -954,53 +512,9 @@ msgstr "列："
 msgid "Row:"
 msgstr "行："
 
-#: ../lisp/sawfish/wm/windows.jl:73
-#, fuzzy
-msgid "Give focus to windows even when they haven't asked for it."
-msgstr "當視窗在焦點中時把它提昇到上層來。"
-
-#: ../lisp/sawfish/wm/windows.jl:77
-msgid "Warping"
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:80
-msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:85
-msgid "Wether to enable warping the cursor to windows."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:90
-msgid "Wether to not ignore avoided windows by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:95
-msgid "Wether to avoid any unspecified window by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:100
-msgid "Format to create unique window names."
-msgstr ""
-
-#: ../lisp/sawfish/wm/workspace.jl:122
-#, fuzzy
-msgid "How to act when passing the first or last workspace."
-msgstr "顯示包含所有工作區列表的選單。"
-
-#: ../lisp/sawfish/wm/workspace.jl:127
-#, fuzzy
-msgid ""
-"How to act when passing the first or last workspace, while moving a window"
-msgstr "顯示包含所有工作區列表的選單。"
-
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "工作區名稱"
-
-#: ../lisp/sawfish/wm/workspace.jl:139
-msgid "Preserve outermost empty workspaces in the pager."
-msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 #, fuzzy
@@ -1051,6 +565,307 @@ msgstr "Sawfish 以可擴展的方式管理你的視窗。"
 #: ../scripts/sawfish-about.jl.in:56
 msgid "Sawfish homepage"
 msgstr "Sawfish 網頁"
+
+#~ msgid "Window Cycling"
+#~ msgstr "循環各個視窗"
+
+#~ msgid "Sound"
+#~ msgstr "聲音"
+
+#~ msgid "Matched Windows"
+#~ msgstr "符合條件的視窗"
+
+#~ msgid "Tooltips"
+#~ msgstr "工具提示"
+
+#, fuzzy
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "將視窗移至下一個視區."
+
+#, fuzzy
+#~ msgid "Number of pixels to move pointer in."
+#~ msgstr "在「移動-游標-」指令中游標所移動的像點數。"
+
+#, fuzzy
+#~ msgid "How windows being moved are animated"
+#~ msgstr "當視窗由隱藏狀態還原時提至最頂層。"
+
+#, fuzzy
+#~ msgid "How windows being resized are animated"
+#~ msgstr "當視窗由隱藏狀態還原時提至最頂層。"
+
+#, fuzzy
+#~ msgid "Raise windows when they are moved or resized."
+#~ msgstr "當視窗在焦點中時把它提昇到上層來。"
+
+#~ msgid "Show current position of windows while moving."
+#~ msgstr "移動視窗時顯示目前位置。"
+
+#~ msgid "Show current dimensions of windows while resizing."
+#~ msgstr "改變視窗大小時顯示目前視窗大小。"
+
+#, fuzzy
+#~ msgid "How to choose window edges when resizing."
+#~ msgstr "改變視窗大小時顯示目前視窗大小。"
+
+#, fuzzy
+#~ msgid "Display window names and icons while cycling through windows."
+#~ msgstr "循環視窗時顯示視窗名稱。"
+
+#~ msgid "Include iconified windows when cycling."
+#~ msgstr "循環視窗時也包括被圖像化的視窗。"
+
+#~ msgid "Include windows on all workspaces when cycling."
+#~ msgstr "循環視窗時包括所有工作區的視窗。"
+
+#, fuzzy
+#~ msgid "Include windows on all viewports when cycling."
+#~ msgstr "循環視窗時包括在所有視界的視窗。"
+
+#, fuzzy
+#~ msgid "Raise windows while they're temporarily selected during cycling."
+#~ msgstr "當視窗在焦點中時把它提昇到上層來。"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active only during window cycling operations."
+#~ msgstr "按鍵對應包含只在循環視窗時有效的鍵結."
+
+#~ msgid "The program launched by the `xterm' command."
+#~ msgstr "由 `xterm' 指令所啟動的程式。"
+
+#, fuzzy
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "`xterm' 指令的選擇性選項。"
+
+#~ msgid "Move/Resize"
+#~ msgstr "移動/改變大小"
+
+#~ msgid "Workspaces"
+#~ msgstr "工作區"
+
+#~ msgid "Bindings"
+#~ msgstr "按鍵結合"
+
+#, fuzzy
+#~ msgid "Mini/Maximizing"
+#~ msgstr "最小化/最大化"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "其它"
+
+#~ msgid "Play sound effects for window events."
+#~ msgstr "為視窗事件播放音效。"
+
+#~ msgid "Edge Flipping"
+#~ msgstr "邊界翻頁"
+
+#~ msgid "Select the next desktop when the pointer hits screen edge."
+#~ msgstr "當鼠標移動到螢幕邊緣時選擇下一個桌面。"
+
+#~ msgid "Hitting the screen edge selects the next: \\w"
+#~ msgstr "游標移動到螢幕邊緣時選擇下一個：\\w"
+
+#~ msgid "Only flip when interactively moving a window."
+#~ msgstr "只在手動移動視窗時翻頁。"
+
+#, fuzzy
+#~ msgid "Beep when errors occur."
+#~ msgstr "當發生錯誤時發出嗶聲。"
+
+#, fuzzy
+#~ msgid "Display error messages to: \\w"
+#~ msgstr "將錯誤訊息顯示在：\\w"
+
+#, fuzzy
+#~ msgid "Shade Hover"
+#~ msgstr "蔭遮顯藏"
+
+#~ msgid "Delay in milliseconds before unshading windows."
+#~ msgstr "由隱藏狀態還原前所等待的毫秒數。"
+
+#~ msgid "Raise windows when they are unshaded."
+#~ msgstr "當視窗由隱藏狀態還原時提至最頂層。"
+
+#~ msgid "Display tooltips for window frames."
+#~ msgstr "顯示邊框的工具提示。"
+
+#~ msgid "Show full documentation in tooltips."
+#~ msgstr "在工具提示中顯示完整的文檔。"
+
+#, fuzzy
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "由隱藏狀態還原前所等待的毫秒數。"
+
+#, fuzzy
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "由隱藏狀態還原前所等待的毫秒數。"
+
+#, fuzzy
+#~ msgid "History"
+#~ msgstr "紀錄(_H)"
+
+#~ msgid "Automatically remember window positions."
+#~ msgstr "自動記憶視窗位置。"
+
+#~ msgid "Automatically remember window sizes."
+#~ msgstr "自動記憶視窗大小。"
+
+#~ msgid "Automatically remember other window attributes."
+#~ msgstr "自動記憶視窗的其它屬性。"
+
+#~ msgid "Don't automatically remember details of transient windows."
+#~ msgstr "不要自動記憶過渡視窗的細節。"
+
+#~ msgid "When does the mouse pointer affect the input focus."
+#~ msgstr "游標何時會影響到輸入焦點。"
+
+#, fuzzy
+#~ msgid "Click-to-focus mode passes the click through to the application."
+#~ msgstr "按擊焦點是否將按擊給視窗."
+
+#, fuzzy
+#~ msgid "Wether focusing a window doesn't change it's position in the stack."
+#~ msgstr "將視窗降低到最低的疊放順序。"
+
+#~ msgid "Default frame style:"
+#~ msgstr "預設的邊框款式："
+
+#~ msgid "Automatically reload themes when they are updated."
+#~ msgstr "當佈景主題被更新時自動重新載入。"
+
+#~ msgid "Default font: \\w"
+#~ msgstr "預設字形：\\w"
+
+#~ msgid "Keymap containing bindings active anywhere."
+#~ msgstr "任何地方都有效的按鍵對應。"
+
+#~ msgid "Keymap containing bindings active when a client window is focused."
+#~ msgstr "用戶視窗在焦點中時的有效按鍵對應。"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the root window\n"
+#~ "(or when no window is focused)."
+#~ msgstr "游標在根視窗（或是視窗不在焦點中）時的有效按鍵對應。"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "游標在視窗標題上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被考"
+#~ "慮。）"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "游標在視窗邊界上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被考"
+#~ "慮。）"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "游標在視窗關閉按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
+#~ "考慮。）"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "游標在視窗圖示化按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會"
+#~ "被\n"
+#~ "考慮。）"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "游標在視窗最大化按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會"
+#~ "被\n"
+#~ "考慮。）"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "游標在視窗選單按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
+#~ "考慮。）"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "游標在視窗隱藏按鈕上時的有效按鍵對應。（在這對應中只有滑鼠的按鍵結合會被\n"
+#~ "考慮。）"
+
+#, fuzzy
+#~ msgid "Modifier key(s) used for default shortcuts."
+#~ msgstr "視窗管理程式預設快速鍵的變化鍵組合。"
+
+#~ msgid "Method of placing windows: \\w"
+#~ msgstr "放置視窗的方法：\\w"
+
+#~ msgid "Method of placing dialog windows: \\w"
+#~ msgstr "放置對話窗的方法：\\w"
+
+#, fuzzy
+#~ msgid "Distance between successive placements in stagger mode."
+#~ msgstr "在 `交替' 放置模式下接連放置間的距離."
+
+#~ msgid "Stacking"
+#~ msgstr "疊放"
+
+#~ msgid "Keep transient windows stacked above: \\w"
+#~ msgstr "讓過渡的視窗疊放於何者之上：\\w"
+
+#, fuzzy
+#~ msgid "Minimizing a window also removes its: \\w"
+#~ msgstr "提昇一個視窗時，同時提昇其：\\w"
+
+#, fuzzy
+#~ msgid "Unminimizing a window also restores its: \\w"
+#~ msgstr "提昇一個視窗時，同時提昇其：\\w"
+
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr "當視窗被最大化後，鎖定其位置和大小。"
+
+#~ msgid "Focus on application windows when they first appear."
+#~ msgstr "視窗第一次顯示時會獲得焦點。"
+
+#~ msgid "Unshade selected windows."
+#~ msgstr "將選擇的視窗由隱藏模式還原。"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr "用來播放音效的程式。若無設定，則使用內置的 ESD 支援。"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when reading a string from the user."
+#~ msgstr "按鍵對應包含從使用者讀入一個字串時有效的鍵結。"
+
+#~ msgid "When raising a window, also raise its: \\w"
+#~ msgstr "提昇一個視窗時，同時提昇其：\\w"
+
+#, fuzzy
+#~ msgid "Windows uniconify to the current viewport."
+#~ msgstr "將視窗移至下一個視區."
+
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "當視窗在焦點中時把它提昇到上層來。"
+
+#, fuzzy
+#~ msgid "How to act when passing the first or last workspace."
+#~ msgstr "顯示包含所有工作區列表的選單。"
+
+#, fuzzy
+#~ msgid ""
+#~ "How to act when passing the first or last workspace, while moving a window"
+#~ msgstr "顯示包含所有工作區列表的選單。"
 
 #~ msgid "Crux Theme"
 #~ msgstr "Crux 佈景主題"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 23:36+0100\n"
+"POT-Creation-Date: 2009-02-09 10:44+0100\n"
 "PO-Revision-Date: 2004-05-02 01:47+0200\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -189,32 +189,6 @@ msgstr "niet"
 msgid "Match Window Properties"
 msgstr "Venstereigenschappen overeen laten komen"
 
-# ../lisp/x-cycle.jl
-#. customization options
-#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-#: ../lisp/sawfish/wm/autoload.jl:119
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
-msgid "Window Cycling"
-msgstr "Vensterlijst"
-
-#: ../lisp/sawfish/wm/autoload.jl:132
-#: ../lisp/sawfish/wm/ext/audio-events.jl:36
-msgid "Sound"
-msgstr "Geluid"
-
-# ../lisp/match-window.jl
-#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
-#: ../lisp/sawfish/wm/autoload.jl:133
-#: ../lisp/sawfish/wm/ext/match-window.jl:138
-msgid "Matched Windows"
-msgstr "Speciale vensters"
-
-# ../lisp/tooltips.jl
-#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
-#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
-msgid "Tooltips"
-msgstr "Gereedschapstips."
-
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -225,42 +199,6 @@ msgstr "Index:"
 #: ../lisp/sawfish/wm/commands.jl:365
 msgid "Command:"
 msgstr "Opdracht:"
-
-#. Customization options.
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
-msgid "Growing and packing of windows"
-msgstr "Groeien en uitvullen van vensters"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
-msgid "Whether growing is considered to be maximization."
-msgstr ""
-
-# ../lisp/viewport.jl
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
-#, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Verplaats het venster naar het volgende blikveld."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
-#, fuzzy
-msgid "Whether to bump into fully obscured windows."
-msgstr ""
-"Of er tegen volledig onzichtbare vensters aan gebotst moet worden bij het "
-"groeien of uitvullen van vensters."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
-#, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr ""
-"Of er tegen genegeerde vensters aan gebotst moet worden bij het groeien of "
-"uitvullen."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
-#, fuzzy
-msgid "Whether to bump into ignored windows."
-msgstr ""
-"Of er tegen genegeerde vensters aan gebotst moet worden bij het groeien of "
-"uitvullen."
 
 # ../lisp/menus.jl
 #: ../lisp/sawfish/wm/commands/grow-pack.jl:155
@@ -298,140 +236,6 @@ msgstr "Uitvullen naar boven"
 msgid "Pack down"
 msgstr "Uitvullen naar beneden"
 
-# ../lisp/slide-window.jl
-#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
-#, fuzzy
-msgid "Number of pixels to move pointer in."
-msgstr ""
-"Aantal puntjes om de muis te verplaatsen met de `verplaats-muis' opdrachten."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:53
-#, fuzzy
-msgid "How windows being moved are animated"
-msgstr "Verhoog vensters wanneer ze de opengerold worden."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:58
-#, fuzzy
-msgid "How windows being resized are animated"
-msgstr "Verhoog vensters wanneer ze de opengerold worden."
-
-# ../lisp/auto-raise.jl
-#: ../lisp/sawfish/wm/commands/move-resize.jl:63
-#, fuzzy
-msgid "Raise windows when they are moved or resized."
-msgstr "Verhoog vensters wanneer ze de aandacht hebben."
-
-# ../lisp/move-resize.jl
-#: ../lisp/sawfish/wm/commands/move-resize.jl:68
-msgid "Show current position of windows while moving."
-msgstr "Toon de huidige positie bij verplaatsen van vensters."
-
-# ../lisp/move-resize.jl
-#: ../lisp/sawfish/wm/commands/move-resize.jl:73
-msgid "Show current dimensions of windows while resizing."
-msgstr "Toon de huidige afmetingen bij grootteverandering van venster."
-
-# ../lisp/move-resize.jl
-#: ../lisp/sawfish/wm/commands/move-resize.jl:78
-#, fuzzy
-msgid "How to choose window edges when resizing."
-msgstr "Toon de huidige afmetingen bij grootteverandering van venster."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:83
-msgid "Distance in pixels before window edges align with each other."
-msgstr ""
-
-# ../lisp/x-cycle.jl
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
-msgid "Display window names and icons while cycling through windows."
-msgstr ""
-"Vensternamen en pictogrammen weergeven bij doorlopen van vensterlijst. "
-
-# ../lisp/x-cycle.jl
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
-msgid "Include iconified windows when cycling."
-msgstr "Neem geminimaliseerde vensters op in vensterlijst."
-
-# ../lisp/x-cycle.jl
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
-msgid "Include windows on all workspaces when cycling."
-msgstr "Neem vensters op alle werkruimtes op in vensterlijst."
-
-# ../lisp/x-cycle.jl
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
-msgid "Include windows on all viewports when cycling."
-msgstr "Neem vensters op alle blikvelden op in vensterlijst."
-
-# ../lisp/auto-raise.jl
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
-#, fuzzy
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Verhoog vensters wanneer ze de aandacht hebben."
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
-msgid ""
-"Keymap containing bindings active only during window cycling operations."
-msgstr "Toetstabel met bindingen die werken bij doorlopen vensterlijst."
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:34
-msgid "The program launched by the `xterm' command."
-msgstr "Het programma wat wordt gestart door de 'xterm' opdracht."
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:39
-msgid "Arguments given to the `xterm' command."
-msgstr "Optionele argumenten voor de opdracht voor 'xterm'."
-
-# ../lisp/custom.jl
-#. default groups
-#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Aandacht"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:483
-msgid "Move/Resize"
-msgstr "Verplaats/Vergroot"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Uiterlijk"
-
-# ../lisp/menus.jl
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:485
-msgid "Workspaces"
-msgstr "Werkruimte"
-
-# ../lisp/keymaps.jl
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
-msgid "Bindings"
-msgstr "Bindingen"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:487
-#, fuzzy
-msgid "Mini/Maximizing"
-msgstr "Minimaliseren en Maximaliseren"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:488
-msgid "Miscellaneous"
-msgstr "Allerlei"
-
-# ../lisp/custom.jl
-#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Plaatsing"
-
-# ugh.
-# ../lisp/tooltips.jl
-#: ../lisp/sawfish/wm/ext/audio-events.jl:42
-msgid "Play sound effects for window events."
-msgstr "Sleep geluid effectjes bij window gebeurtenissen"
-
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
 msgstr "Gebeurtenis"
@@ -440,41 +244,24 @@ msgstr "Gebeurtenis"
 msgid "Audio file"
 msgstr "Geluid"
 
-# ../lisp/edge-flip.jl
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
-msgid "Edge Flipping"
-msgstr "Rand omslaan"
-
-# ../lisp/edge-flip.jl
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
-msgid "Select the next desktop when the pointer hits screen edge."
-msgstr ""
-"Sla om naar volgende blikveld/werkruimte als het pijltje de schermrand raakt."
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
-msgid "Hitting the screen edge selects the next: \\w"
-msgstr "Het raken van de scherm randen selecteer de volgende: \\w"
-
-# ../lisp/move-resize.jl
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
-msgid "Only flip when interactively moving a window."
-msgstr "Alleen omslaan bij verplaatsen van venster."
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
-msgid "Milliseconds to delay before edge flipping."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:37
-msgid "Beep when errors occur."
-msgstr "Een piep produceren bij fouten."
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:42
-msgid "Display error messages to: \\w"
-msgstr "Foutmeldingen weergeven op: \\w"
-
 #: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Geen fouten."
+
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Plaatsing"
+
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Aandacht"
+
+# ../lisp/custom.jl
+#: ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Uiterlijk"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -484,57 +271,6 @@ msgstr "Staat"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Anders"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
-msgid "Shade Hover"
-msgstr "Zweefrollen"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
-msgid "Enable shade-hover mode."
-msgstr ""
-
-# ../lisp/auto-raise.jl
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
-msgid "Delay in milliseconds before unshading windows."
-msgstr "Vertraging in miliseconden totdat venster opengerold wordt."
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
-msgid "Raise windows when they are unshaded."
-msgstr "Verhoog vensters wanneer ze de opengerold worden."
-
-# ugh.
-# ../lisp/tooltips.jl
-#: ../lisp/sawfish/wm/ext/tooltips.jl:52
-msgid "Display tooltips for window frames."
-msgstr "Toon gereedschaptips."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:58
-msgid "Show full documentation in tooltips."
-msgstr "Volledige documentatie weergeven in tooltips."
-
-# ../lisp/auto-raise.jl
-#: ../lisp/sawfish/wm/ext/tooltips.jl:64
-#, fuzzy
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Vertraging in miliseconden totdat venster opengerold wordt."
-
-# ../lisp/auto-raise.jl
-#: ../lisp/sawfish/wm/ext/tooltips.jl:70
-#, fuzzy
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Vertraging in miliseconden totdat venster opengerold wordt."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:76
-msgid "Font used to display tooltips, or nil for default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:82
-msgid "Color used for the tooltips background"
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:88
-msgid "Color used for the tooltips foreground"
-msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -552,68 +288,9 @@ msgstr "_Attributen onthouden"
 msgid "_Forget saved state"
 msgstr "_Vergeet deze instellingen"
 
-#. customizations
-#: ../lisp/sawfish/wm/ext/window-history.jl:90
-msgid "History"
-msgstr "Geschiedenis"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:93
-msgid "Automatically remember window positions."
-msgstr "Vensterpositie automatisch herinneren."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:99
-msgid "Automatically remember window sizes."
-msgstr "Vensterafmetingen automatisch herinneren."
-
-# ../lisp/frames.jl
-#: ../lisp/sawfish/wm/ext/window-history.jl:105
-msgid "Automatically remember other window attributes."
-msgstr "Vensterattributen automatisch onthouden."
-
-# ../lisp/frames.jl
-#: ../lisp/sawfish/wm/ext/window-history.jl:111
-msgid "Don't automatically remember details of transient windows."
-msgstr "Onthoud de details van dialoogvensters niet."
-
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Geschiedenis"
-
-# ../lisp/focus.jl
-#: ../lisp/sawfish/wm/focus.jl:48
-msgid "When does the mouse pointer affect the input focus."
-msgstr "Wanneer beinvloedt het muispijltje de invoer-aandacht."
-
-# ../lisp/focus.jl
-#: ../lisp/sawfish/wm/focus.jl:55
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "Klik-vppr-aandacht geeft de klik door aan het venster."
-
-# ?
-# ../lisp/stacking.jl
-#: ../lisp/sawfish/wm/focus.jl:60
-#, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
-msgstr "Verlaag het venster naar de onderkant van zijn stapelniveau."
-
-#: ../lisp/sawfish/wm/focus.jl:65
-msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
-
-# ../lisp/frames.jl
-#: ../lisp/sawfish/wm/frames.jl:136
-msgid "Default frame style:"
-msgstr "Standaard Vensterrand:"
-
-# ../lisp/frames.jl
-#: ../lisp/sawfish/wm/frames.jl:143
-msgid "Automatically reload themes when they are updated."
-msgstr "Herlaad thema's automatisch zodra ze bij de tijd zijn gebracht."
-
-# ../lisp/frames.jl
-#: ../lisp/sawfish/wm/frames.jl:211
-msgid "Default font: \\w"
-msgstr "Standaard lettertype: \\w"
 
 # ../lisp/frames.jl
 #: ../lisp/sawfish/wm/frames.jl:512
@@ -662,92 +339,6 @@ msgstr "GNOME WWW..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "GNOME Info..."
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:91
-msgid "Keymap containing bindings active anywhere."
-msgstr "Toetstabel met bindingen die overal werken."
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:104
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr "Toetstabel met bindingen die werken als een venster aandacht heeft."
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:112
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"Toetstabel met bindingen als het pijltje in het achtergrondvenster is\n"
-"(of als geen enkel venster aandacht heeft)."
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:122
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Toetstabel met bindingen die werken als het pijltje in de titelbalk van een\n"
-"venster staat.  (Alleen muisbindingen werken hier.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:131
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Toetstabel met bindingen die werken als het pijltje op de rand van een\n"
-"venster staat. (Alleen muisbindingen werken hier.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:140
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Toetstabel met bindingen die werken als het pijltje op Sluiten knop van een\n"
-"venster staat. (Alleen muisbindingen werken hier.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:148
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Toetstabel met bindingen die werken als het pijltje op de minimaliseerknop\n"
-"van een venster staat. (Alleen muisbindingen werken hier.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:157
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Toetstabel met bindingen die werken als het pijltje op de maximaliseer knop\n"
-"van een venster staat. (Alleen muisbindingen werken hier.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:165
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Toetstabel met bindingen die werken als het pijltje op de menu knop van een\n"
-"venster staat. (Alleen muisbindingen werken hier.)"
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/keymaps.jl:172
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Toetstabel met bindingen die werken als het pijltje op de Oprolknop van een\n"
-"venster staat. (Alleen muisbindingen werken hier)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:181
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "Extra toets(en) om te gebruiken voor standaard toetsbindingen."
 
 # ../lisp/custom.jl
 #: ../lisp/sawfish/wm/menus.jl:86
@@ -923,43 +514,6 @@ msgstr "_Alle instellingen"
 msgid "Edit theme..."
 msgstr "Thema wijzigen..."
 
-#: ../lisp/sawfish/wm/placement.jl:41
-msgid "Method of placing windows: \\w"
-msgstr "Vensterplaatsing: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:46
-msgid "Method of placing dialog windows: \\w"
-msgstr "Dialoogvenster plaatsing: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:51
-msgid "Ignore program-specified window placements."
-msgstr ""
-
-#: ../lisp/sawfish/wm/placement/stagger.jl:34
-#, fuzzy
-msgid "Distance between successive placements in stagger mode."
-msgstr "Afstand tussen vensters in 'stapelen' plaatsingsmethode."
-
-#. Each window will have a `depth' property--an integer, zero
-#. represents the level of normal windows, negative for windows below
-#. this level, and positive for windows above the normal level
-#: ../lisp/sawfish/wm/stacking.jl:58
-msgid "Stacking"
-msgstr "Niveau's"
-
-# ../lisp/stacking.jl
-#: ../lisp/sawfish/wm/stacking.jl:61
-msgid "Keep transient windows stacked above: \\w"
-msgstr "Houd dialoogvensters boven: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:75
-msgid "Minimizing a window also removes its: \\w"
-msgstr "Minimaliseren van een venster verwijdert ook zijn: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:80
-msgid "Unminimizing a window also restores its: \\w"
-msgstr "Formaat herstellen van een venster herstelt ook zijn: \\w"
-
 # ../lisp/menus.jl
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
@@ -991,27 +545,10 @@ msgstr "In venster_lijst"
 msgid "In _task list"
 msgstr "In GNOME _takenlijst"
 
-# ../lisp/move-resize.jl
-#: ../lisp/sawfish/wm/state/maximize.jl:89
-msgid "Lock position and size while windows are maximized."
-msgstr ""
-"Vergrendel de vensterafmetingen en -positie als het venster is "
-"gemaximaliseerd."
-
 # ../lisp/menus.jl
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "_Dichtgerold"
-
-# ../lisp/transient.jl
-#: ../lisp/sawfish/wm/state/transient.jl:48
-msgid "Focus on application windows when they first appear."
-msgstr "Geef ieder nieuw venster de invoeraandacht."
-
-# ../lisp/workspace.jl
-#: ../lisp/sawfish/wm/util/display-window.jl:43
-msgid "Unshade selected windows."
-msgstr "Rol de geselecteerde vensters open."
 
 # ../lisp/group-funs.jl
 #: ../lisp/sawfish/wm/util/groups.jl:153
@@ -1026,18 +563,6 @@ msgstr "Druk op de toets..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Quote]"
-
-#: ../lisp/sawfish/wm/util/play-audio.jl:43
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr ""
-"Het programma om geluiden mee af te spelen. Wanneer u niets heeft gekozen,\n"
-"zal de ingebouwde ESD ondersteuning gebruikt worden."
-
-# ../lisp/keymaps.jl
-#: ../lisp/sawfish/wm/util/prompt.jl:63
-msgid "Keymap containing bindings active when reading a string from the user."
-msgstr "Toetstabel met bindingen die werken als om tekstinvoer gevraagd wordt."
 
 # ../lisp/menus.jl
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
@@ -1058,37 +583,6 @@ msgstr "Werkruimte %d"
 msgid "Workspace:"
 msgstr "Werkruimte:"
 
-#: ../lisp/sawfish/wm/util/stacking.jl:45
-msgid "When raising a window, also raise its: \\w"
-msgstr "Bij het optillen van vensters, til dan ook de: \\w op."
-
-#. Virtual workspaces are implemented by moving windows in and out of
-#. the screen dimensions. E.g. moving to the left moves all windows one
-#. screen-width to the right.
-#: ../lisp/sawfish/wm/viewport.jl:53
-msgid "Viewport"
-msgstr "Blikveld"
-
-#: ../lisp/sawfish/wm/viewport.jl:56
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr ""
-
-# ../lisp/viewport.jl
-#: ../lisp/sawfish/wm/viewport.jl:62
-#, fuzzy
-msgid "Windows uniconify to the current viewport."
-msgstr "Stuur groep naar huidige blikveld"
-
-#: ../lisp/sawfish/wm/viewport.jl:67
-msgid ""
-"Number of steps in which to scroll between viewports (less steps = faster "
-"scrolling)."
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:73
-msgid "Wether to stop or wrap-around on first/last viewport"
-msgstr ""
-
 # ../src/sawmill-ui.jl
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
@@ -1098,58 +592,11 @@ msgstr "Kolom:"
 msgid "Row:"
 msgstr "Rij:"
 
-# ../lisp/auto-raise.jl
-#: ../lisp/sawfish/wm/windows.jl:73
-#, fuzzy
-msgid "Give focus to windows even when they haven't asked for it."
-msgstr "Verhoog vensters wanneer ze de aandacht hebben."
-
-#: ../lisp/sawfish/wm/windows.jl:77
-msgid "Warping"
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:80
-msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:85
-msgid "Wether to enable warping the cursor to windows."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:90
-msgid "Wether to not ignore avoided windows by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:95
-msgid "Wether to avoid any unspecified window by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:100
-msgid "Format to create unique window names."
-msgstr ""
-
-# ../lisp/workspace.jl
-#: ../lisp/sawfish/wm/workspace.jl:122
-#, fuzzy
-msgid "How to act when passing the first or last workspace."
-msgstr "Toon het menu met alle werkruimtes"
-
-# ../lisp/workspace.jl
-#: ../lisp/sawfish/wm/workspace.jl:127
-#, fuzzy
-msgid ""
-"How to act when passing the first or last workspace, while moving a window"
-msgstr "Toon het menu met alle werkruimtes"
-
 # ../lisp/menus.jl
 # ../lisp/custom.jl
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Namen van werkruimten"
-
-#: ../lisp/sawfish/wm/workspace.jl:139
-msgid "Preserve outermost empty workspaces in the pager."
-msgstr ""
 
 # ../lisp/workspace.jl
 #: ../lisp/sawfish/wm/workspace.jl:150
@@ -1203,6 +650,395 @@ msgstr "Sawfish beheert uw vensters."
 #: ../scripts/sawfish-about.jl.in:56
 msgid "Sawfish homepage"
 msgstr "Sawfish Web-pagina"
+
+# ../lisp/x-cycle.jl
+#~ msgid "Window Cycling"
+#~ msgstr "Vensterlijst"
+
+#~ msgid "Sound"
+#~ msgstr "Geluid"
+
+# ../lisp/match-window.jl
+#~ msgid "Matched Windows"
+#~ msgstr "Speciale vensters"
+
+# ../lisp/tooltips.jl
+#~ msgid "Tooltips"
+#~ msgstr "Gereedschapstips."
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "Groeien en uitvullen van vensters"
+
+# ../lisp/viewport.jl
+#, fuzzy
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Verplaats het venster naar het volgende blikveld."
+
+#, fuzzy
+#~ msgid "Whether to bump into fully obscured windows."
+#~ msgstr ""
+#~ "Of er tegen volledig onzichtbare vensters aan gebotst moet worden bij het "
+#~ "groeien of uitvullen van vensters."
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr ""
+#~ "Of er tegen genegeerde vensters aan gebotst moet worden bij het groeien "
+#~ "of uitvullen."
+
+#, fuzzy
+#~ msgid "Whether to bump into ignored windows."
+#~ msgstr ""
+#~ "Of er tegen genegeerde vensters aan gebotst moet worden bij het groeien "
+#~ "of uitvullen."
+
+# ../lisp/slide-window.jl
+#, fuzzy
+#~ msgid "Number of pixels to move pointer in."
+#~ msgstr ""
+#~ "Aantal puntjes om de muis te verplaatsen met de `verplaats-muis' "
+#~ "opdrachten."
+
+#, fuzzy
+#~ msgid "How windows being moved are animated"
+#~ msgstr "Verhoog vensters wanneer ze de opengerold worden."
+
+#, fuzzy
+#~ msgid "How windows being resized are animated"
+#~ msgstr "Verhoog vensters wanneer ze de opengerold worden."
+
+# ../lisp/auto-raise.jl
+#, fuzzy
+#~ msgid "Raise windows when they are moved or resized."
+#~ msgstr "Verhoog vensters wanneer ze de aandacht hebben."
+
+# ../lisp/move-resize.jl
+#~ msgid "Show current position of windows while moving."
+#~ msgstr "Toon de huidige positie bij verplaatsen van vensters."
+
+# ../lisp/move-resize.jl
+#~ msgid "Show current dimensions of windows while resizing."
+#~ msgstr "Toon de huidige afmetingen bij grootteverandering van venster."
+
+# ../lisp/move-resize.jl
+#, fuzzy
+#~ msgid "How to choose window edges when resizing."
+#~ msgstr "Toon de huidige afmetingen bij grootteverandering van venster."
+
+# ../lisp/x-cycle.jl
+#~ msgid "Display window names and icons while cycling through windows."
+#~ msgstr ""
+#~ "Vensternamen en pictogrammen weergeven bij doorlopen van vensterlijst. "
+
+# ../lisp/x-cycle.jl
+#~ msgid "Include iconified windows when cycling."
+#~ msgstr "Neem geminimaliseerde vensters op in vensterlijst."
+
+# ../lisp/x-cycle.jl
+#~ msgid "Include windows on all workspaces when cycling."
+#~ msgstr "Neem vensters op alle werkruimtes op in vensterlijst."
+
+# ../lisp/x-cycle.jl
+#~ msgid "Include windows on all viewports when cycling."
+#~ msgstr "Neem vensters op alle blikvelden op in vensterlijst."
+
+# ../lisp/auto-raise.jl
+#, fuzzy
+#~ msgid "Raise windows while they're temporarily selected during cycling."
+#~ msgstr "Verhoog vensters wanneer ze de aandacht hebben."
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active only during window cycling operations."
+#~ msgstr "Toetstabel met bindingen die werken bij doorlopen vensterlijst."
+
+#~ msgid "The program launched by the `xterm' command."
+#~ msgstr "Het programma wat wordt gestart door de 'xterm' opdracht."
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "Optionele argumenten voor de opdracht voor 'xterm'."
+
+# ../lisp/custom.jl
+#~ msgid "Move/Resize"
+#~ msgstr "Verplaats/Vergroot"
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#~ msgid "Workspaces"
+#~ msgstr "Werkruimte"
+
+# ../lisp/keymaps.jl
+# ../lisp/custom.jl
+#~ msgid "Bindings"
+#~ msgstr "Bindingen"
+
+# ../lisp/custom.jl
+#, fuzzy
+#~ msgid "Mini/Maximizing"
+#~ msgstr "Minimaliseren en Maximaliseren"
+
+# ../lisp/custom.jl
+#~ msgid "Miscellaneous"
+#~ msgstr "Allerlei"
+
+# ugh.
+# ../lisp/tooltips.jl
+#~ msgid "Play sound effects for window events."
+#~ msgstr "Sleep geluid effectjes bij window gebeurtenissen"
+
+# ../lisp/edge-flip.jl
+#~ msgid "Edge Flipping"
+#~ msgstr "Rand omslaan"
+
+# ../lisp/edge-flip.jl
+#~ msgid "Select the next desktop when the pointer hits screen edge."
+#~ msgstr ""
+#~ "Sla om naar volgende blikveld/werkruimte als het pijltje de schermrand "
+#~ "raakt."
+
+#~ msgid "Hitting the screen edge selects the next: \\w"
+#~ msgstr "Het raken van de scherm randen selecteer de volgende: \\w"
+
+# ../lisp/move-resize.jl
+#~ msgid "Only flip when interactively moving a window."
+#~ msgstr "Alleen omslaan bij verplaatsen van venster."
+
+#~ msgid "Beep when errors occur."
+#~ msgstr "Een piep produceren bij fouten."
+
+#~ msgid "Display error messages to: \\w"
+#~ msgstr "Foutmeldingen weergeven op: \\w"
+
+#~ msgid "Shade Hover"
+#~ msgstr "Zweefrollen"
+
+# ../lisp/auto-raise.jl
+#~ msgid "Delay in milliseconds before unshading windows."
+#~ msgstr "Vertraging in miliseconden totdat venster opengerold wordt."
+
+#~ msgid "Raise windows when they are unshaded."
+#~ msgstr "Verhoog vensters wanneer ze de opengerold worden."
+
+# ugh.
+# ../lisp/tooltips.jl
+#~ msgid "Display tooltips for window frames."
+#~ msgstr "Toon gereedschaptips."
+
+#~ msgid "Show full documentation in tooltips."
+#~ msgstr "Volledige documentatie weergeven in tooltips."
+
+# ../lisp/auto-raise.jl
+#, fuzzy
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "Vertraging in miliseconden totdat venster opengerold wordt."
+
+# ../lisp/auto-raise.jl
+#, fuzzy
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "Vertraging in miliseconden totdat venster opengerold wordt."
+
+#~ msgid "History"
+#~ msgstr "Geschiedenis"
+
+#~ msgid "Automatically remember window positions."
+#~ msgstr "Vensterpositie automatisch herinneren."
+
+#~ msgid "Automatically remember window sizes."
+#~ msgstr "Vensterafmetingen automatisch herinneren."
+
+# ../lisp/frames.jl
+#~ msgid "Automatically remember other window attributes."
+#~ msgstr "Vensterattributen automatisch onthouden."
+
+# ../lisp/frames.jl
+#~ msgid "Don't automatically remember details of transient windows."
+#~ msgstr "Onthoud de details van dialoogvensters niet."
+
+# ../lisp/focus.jl
+#~ msgid "When does the mouse pointer affect the input focus."
+#~ msgstr "Wanneer beinvloedt het muispijltje de invoer-aandacht."
+
+# ../lisp/focus.jl
+#~ msgid "Click-to-focus mode passes the click through to the application."
+#~ msgstr "Klik-vppr-aandacht geeft de klik door aan het venster."
+
+# ?
+# ../lisp/stacking.jl
+#, fuzzy
+#~ msgid "Wether focusing a window doesn't change it's position in the stack."
+#~ msgstr "Verlaag het venster naar de onderkant van zijn stapelniveau."
+
+# ../lisp/frames.jl
+#~ msgid "Default frame style:"
+#~ msgstr "Standaard Vensterrand:"
+
+# ../lisp/frames.jl
+#~ msgid "Automatically reload themes when they are updated."
+#~ msgstr "Herlaad thema's automatisch zodra ze bij de tijd zijn gebracht."
+
+# ../lisp/frames.jl
+#~ msgid "Default font: \\w"
+#~ msgstr "Standaard lettertype: \\w"
+
+# ../lisp/keymaps.jl
+#~ msgid "Keymap containing bindings active anywhere."
+#~ msgstr "Toetstabel met bindingen die overal werken."
+
+# ../lisp/keymaps.jl
+#~ msgid "Keymap containing bindings active when a client window is focused."
+#~ msgstr "Toetstabel met bindingen die werken als een venster aandacht heeft."
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the root window\n"
+#~ "(or when no window is focused)."
+#~ msgstr ""
+#~ "Toetstabel met bindingen als het pijltje in het achtergrondvenster is\n"
+#~ "(of als geen enkel venster aandacht heeft)."
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Toetstabel met bindingen die werken als het pijltje in de titelbalk van "
+#~ "een\n"
+#~ "venster staat.  (Alleen muisbindingen werken hier.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Toetstabel met bindingen die werken als het pijltje op de rand van een\n"
+#~ "venster staat. (Alleen muisbindingen werken hier.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Toetstabel met bindingen die werken als het pijltje op Sluiten knop van "
+#~ "een\n"
+#~ "venster staat. (Alleen muisbindingen werken hier.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Toetstabel met bindingen die werken als het pijltje op de "
+#~ "minimaliseerknop\n"
+#~ "van een venster staat. (Alleen muisbindingen werken hier.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Toetstabel met bindingen die werken als het pijltje op de maximaliseer "
+#~ "knop\n"
+#~ "van een venster staat. (Alleen muisbindingen werken hier.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Toetstabel met bindingen die werken als het pijltje op de menu knop van "
+#~ "een\n"
+#~ "venster staat. (Alleen muisbindingen werken hier.)"
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Toetstabel met bindingen die werken als het pijltje op de Oprolknop van "
+#~ "een\n"
+#~ "venster staat. (Alleen muisbindingen werken hier)"
+
+#~ msgid "Modifier key(s) used for default shortcuts."
+#~ msgstr "Extra toets(en) om te gebruiken voor standaard toetsbindingen."
+
+#~ msgid "Method of placing windows: \\w"
+#~ msgstr "Vensterplaatsing: \\w"
+
+#~ msgid "Method of placing dialog windows: \\w"
+#~ msgstr "Dialoogvenster plaatsing: \\w"
+
+#, fuzzy
+#~ msgid "Distance between successive placements in stagger mode."
+#~ msgstr "Afstand tussen vensters in 'stapelen' plaatsingsmethode."
+
+#~ msgid "Stacking"
+#~ msgstr "Niveau's"
+
+# ../lisp/stacking.jl
+#~ msgid "Keep transient windows stacked above: \\w"
+#~ msgstr "Houd dialoogvensters boven: \\w"
+
+#~ msgid "Minimizing a window also removes its: \\w"
+#~ msgstr "Minimaliseren van een venster verwijdert ook zijn: \\w"
+
+#~ msgid "Unminimizing a window also restores its: \\w"
+#~ msgstr "Formaat herstellen van een venster herstelt ook zijn: \\w"
+
+# ../lisp/move-resize.jl
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr ""
+#~ "Vergrendel de vensterafmetingen en -positie als het venster is "
+#~ "gemaximaliseerd."
+
+# ../lisp/transient.jl
+#~ msgid "Focus on application windows when they first appear."
+#~ msgstr "Geef ieder nieuw venster de invoeraandacht."
+
+# ../lisp/workspace.jl
+#~ msgid "Unshade selected windows."
+#~ msgstr "Rol de geselecteerde vensters open."
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "Het programma om geluiden mee af te spelen. Wanneer u niets heeft "
+#~ "gekozen,\n"
+#~ "zal de ingebouwde ESD ondersteuning gebruikt worden."
+
+# ../lisp/keymaps.jl
+#~ msgid ""
+#~ "Keymap containing bindings active when reading a string from the user."
+#~ msgstr ""
+#~ "Toetstabel met bindingen die werken als om tekstinvoer gevraagd wordt."
+
+#~ msgid "When raising a window, also raise its: \\w"
+#~ msgstr "Bij het optillen van vensters, til dan ook de: \\w op."
+
+#~ msgid "Viewport"
+#~ msgstr "Blikveld"
+
+# ../lisp/viewport.jl
+#, fuzzy
+#~ msgid "Windows uniconify to the current viewport."
+#~ msgstr "Stuur groep naar huidige blikveld"
+
+# ../lisp/auto-raise.jl
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "Verhoog vensters wanneer ze de aandacht hebben."
+
+# ../lisp/workspace.jl
+#, fuzzy
+#~ msgid "How to act when passing the first or last workspace."
+#~ msgstr "Toon het menu met alle werkruimtes"
+
+# ../lisp/workspace.jl
+#, fuzzy
+#~ msgid ""
+#~ "How to act when passing the first or last workspace, while moving a window"
+#~ msgstr "Toon het menu met alle werkruimtes"
 
 #~ msgid "Crux Theme"
 #~ msgstr "Crux thema"

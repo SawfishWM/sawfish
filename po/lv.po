@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish for latvian\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 23:36+0100\n"
+"POT-Creation-Date: 2009-02-09 10:44+0100\n"
 "PO-Revision-Date: 2002-11-10 11:48+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <ll10nt@ttc.lv>\n"
@@ -156,29 +156,6 @@ msgstr "nē"
 msgid "Match Window Properties"
 msgstr "Sakrtītoši loga rekvizīti"
 
-#. customization options
-#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-#: ../lisp/sawfish/wm/autoload.jl:119
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
-msgid "Window Cycling"
-msgstr "Logu Cirkulēšana"
-
-#: ../lisp/sawfish/wm/autoload.jl:132
-#: ../lisp/sawfish/wm/ext/audio-events.jl:36
-msgid "Sound"
-msgstr "Skaņa"
-
-#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
-#: ../lisp/sawfish/wm/autoload.jl:133
-#: ../lisp/sawfish/wm/ext/match-window.jl:138
-msgid "Matched Windows"
-msgstr "Sakrtītošie Logi"
-
-#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
-#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
-msgid "Tooltips"
-msgstr "Knifi"
-
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -188,37 +165,6 @@ msgstr "Indekss:"
 #: ../lisp/sawfish/wm/commands.jl:365
 msgid "Command:"
 msgstr "Komanda:"
-
-#. Customization options.
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
-msgid "Growing and packing of windows"
-msgstr "Logu palielināšana un samazināšana"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
-msgid "Whether growing is considered to be maximization."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
-#, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Pārvietot logu uz nākamo skatpunktu."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
-#, fuzzy
-msgid "Whether to bump into fully obscured windows."
-msgstr ""
-"Vai uzskriet virsū pinībā aizklātiem logiem, kad palielina vai samazina\n"
-"logus."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
-#, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr "Vai uzskriet virsū ignorētiem logiem, kad palielina vai samazina."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
-#, fuzzy
-msgid "Whether to bump into ignored windows."
-msgstr "Vai uzskriet virsū ignorētiem logiem, kad palielina vai samazina."
 
 #: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
@@ -252,118 +198,6 @@ msgstr "Samazināt no augšas"
 msgid "Pack down"
 msgstr "Samazināt no lejas"
 
-#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
-#, fuzzy
-msgid "Number of pixels to move pointer in."
-msgstr ""
-"Pikseļu daudzums, par cik pārvietot kursoru `pārvietot-kursoru-' komandās."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:53
-#, fuzzy
-msgid "How windows being moved are animated"
-msgstr "Paaugstināt logus, kad tie tiek atēnoti."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:58
-#, fuzzy
-msgid "How windows being resized are animated"
-msgstr "Paaugstināt logus, kad tie tiek atēnoti."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:63
-#, fuzzy
-msgid "Raise windows when they are moved or resized."
-msgstr "Paaugstināt logus, kad tie tiek fokusēti."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:68
-msgid "Show current position of windows while moving."
-msgstr "Parādīt pašreizējo loga pozīciju, kamēr to pārvieto."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:73
-msgid "Show current dimensions of windows while resizing."
-msgstr "Parādīt pašreizējās loga dimensijas, kamēr maina to izmērus."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:78
-#, fuzzy
-msgid "How to choose window edges when resizing."
-msgstr "Parādīt pašreizējās loga dimensijas, kamēr maina to izmērus."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:83
-msgid "Distance in pixels before window edges align with each other."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
-msgid "Display window names and icons while cycling through windows."
-msgstr "Parādīt logu nosaukumus un ikonas, kad cirkulē cauri logiem."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
-msgid "Include iconified windows when cycling."
-msgstr "Iekļaut ikonificētos logus, kad cirkulē."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
-msgid "Include windows on all workspaces when cycling."
-msgstr "Iekļaut logus no visām darba vietām, kad cirkulē."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
-msgid "Include windows on all viewports when cycling."
-msgstr "Iekļaut logus no visiem skatpunktiem, kad cirkulē."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
-#, fuzzy
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Paaugstināt logus, kad tie tiek fokusēti."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
-msgid ""
-"Keymap containing bindings active only during window cycling operations."
-msgstr ""
-"Sasaistu saturošā taustiņkarte aktīva tikai logu cirkulēšanas operāciju "
-"laikā."
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:34
-msgid "The program launched by the `xterm' command."
-msgstr "Programma, palaista ar `xterm' komandu."
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:39
-msgid "Arguments given to the `xterm' command."
-msgstr "Dotie argumenti `xterm' komandai."
-
-#. default groups
-#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Fokuss"
-
-#: ../lisp/sawfish/wm/custom.jl:483
-msgid "Move/Resize"
-msgstr "Pārvietot/Mainīt izmēru"
-
-#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Izskats"
-
-#: ../lisp/sawfish/wm/custom.jl:485
-msgid "Workspaces"
-msgstr "Darba vietas"
-
-#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
-msgid "Bindings"
-msgstr "Sasaistes"
-
-#: ../lisp/sawfish/wm/custom.jl:487
-#, fuzzy
-msgid "Mini/Maximizing"
-msgstr "Minimizēšana un Maksimizēšana"
-
-#: ../lisp/sawfish/wm/custom.jl:488
-msgid "Miscellaneous"
-msgstr "Dažādi"
-
-#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Novietojums"
-
-#: ../lisp/sawfish/wm/ext/audio-events.jl:42
-msgid "Play sound effects for window events."
-msgstr "Atskaņot skaņas efektus logu notikumiem."
-
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
 msgstr "Notikums"
@@ -372,37 +206,21 @@ msgstr "Notikums"
 msgid "Audio file"
 msgstr "Audio fails"
 
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
-msgid "Edge Flipping"
-msgstr "Stūru Aplaušana"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
-msgid "Select the next desktop when the pointer hits screen edge."
-msgstr "Izvēlēties nākamo daba virsmu, kad kursors sasniedz ekrāna malu."
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
-msgid "Hitting the screen edge selects the next: \\w"
-msgstr "Ekrāna malu sasniedzot, izvēlas nākamo: \\w"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
-msgid "Only flip when interactively moving a window."
-msgstr "Tikai viegli uzsist, kad interaktīvi pārvieto logu."
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
-msgid "Milliseconds to delay before edge flipping."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:37
-msgid "Beep when errors occur."
-msgstr "Pīkstēt, kad atgadās kļūda."
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:42
-msgid "Display error messages to: \\w"
-msgstr "Parādīt kļūdu paziņojumus uz: \\w"
-
 #: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Nav kļūdu."
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Novietojums"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Fokuss"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Izskats"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -411,52 +229,6 @@ msgstr "Stāvoklis"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Cits"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
-msgid "Shade Hover"
-msgstr "Ēnošanas Svārstības"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
-msgid "Enable shade-hover mode."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
-msgid "Delay in milliseconds before unshading windows."
-msgstr "Aizture milisekundēs pirms logu atēnošanas."
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
-msgid "Raise windows when they are unshaded."
-msgstr "Paaugstināt logus, kad tie tiek atēnoti."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:52
-msgid "Display tooltips for window frames."
-msgstr "Parādīt knifus logu rāmjiem."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:58
-msgid "Show full documentation in tooltips."
-msgstr "Parādīt pilnu dokumentāciju knifos."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:64
-#, fuzzy
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Aizture milisekundēs pirms logu atēnošanas."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:70
-#, fuzzy
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Aizture milisekundēs pirms logu atēnošanas."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:76
-msgid "Font used to display tooltips, or nil for default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:82
-msgid "Color used for the tooltips background"
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:88
-msgid "Color used for the tooltips foreground"
-msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -474,59 +246,9 @@ msgstr "Atcerēties _atribūtus"
 msgid "_Forget saved state"
 msgstr "_Aizmirst saglabāto stāvokli"
 
-#. customizations
-#: ../lisp/sawfish/wm/ext/window-history.jl:90
-msgid "History"
-msgstr "Vēsture"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:93
-msgid "Automatically remember window positions."
-msgstr "Automātiski atcerēties logu pozīcijas."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:99
-msgid "Automatically remember window sizes."
-msgstr "Automātiski atcerēties logu izmērus."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:105
-msgid "Automatically remember other window attributes."
-msgstr "Automātiski atcerēties citu logu atribūtus."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:111
-msgid "Don't automatically remember details of transient windows."
-msgstr "Automātiski neatcerēties detaļas par pagaidu logiem."
-
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Vēsture"
-
-#: ../lisp/sawfish/wm/focus.jl:48
-msgid "When does the mouse pointer affect the input focus."
-msgstr "Kad peles kursors ietekmē ievades fokusu."
-
-#: ../lisp/sawfish/wm/focus.jl:55
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "Klikšķis-lai-fokusēt režīms nodod klikšķus caur aplikāciju."
-
-#: ../lisp/sawfish/wm/focus.jl:60
-#, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
-msgstr "Pazemināt logu uz tā zemāko iespējamo pozīciju krāvuma secībā."
-
-#: ../lisp/sawfish/wm/focus.jl:65
-msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
-
-#: ../lisp/sawfish/wm/frames.jl:136
-msgid "Default frame style:"
-msgstr "Noklusētais rāmja stils:"
-
-#: ../lisp/sawfish/wm/frames.jl:143
-msgid "Automatically reload themes when they are updated."
-msgstr "Automātiski pārlādēt tēmas, kad tās ir atjauninātas."
-
-#: ../lisp/sawfish/wm/frames.jl:211
-msgid "Default font: \\w"
-msgstr "Noklusētais fonts: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -568,87 +290,6 @@ msgstr "GNOME WWW..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "Par GNOME..."
-
-#: ../lisp/sawfish/wm/keymaps.jl:91
-msgid "Keymap containing bindings active anywhere."
-msgstr "Taustiņkarte, kas satur visur aktīvās sasaistes."
-
-#: ../lisp/sawfish/wm/keymaps.jl:104
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr "Sasaistu saturošā taustiņkarte aktīva, kad klienta logs ir fokusēts."
-
-#: ../lisp/sawfish/wm/keymaps.jl:112
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"Sasaistu saturošā taustiņkarte aktīva, kad kursors ir pamata logā\n"
-"(vai, kad neviens logs nav fokusēts)."
-
-#: ../lisp/sawfish/wm/keymaps.jl:122
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga virsraksta.\n"
-"(Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:131
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga ietvara.\n"
-"(Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:140
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga aizvēršanas "
-"pogas.\n"
-"(Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:148
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga "
-"ikonificešanas\n"
-"pogas. (Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:157
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga "
-"maksimizēšanas\n"
-"pogas. (Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:165
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga izvēlnes "
-"pogas.\n"
-"(Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:172
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga ēnošanas "
-"pogas.\n"
-"(Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:181
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "Modifikatora taustiņš(i), kurus lieto noklusētajām saīsnēm."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -798,42 +439,6 @@ msgstr "Visi uzstādījumi"
 msgid "Edit theme..."
 msgstr "Rediģēt tēmu..."
 
-#: ../lisp/sawfish/wm/placement.jl:41
-msgid "Method of placing windows: \\w"
-msgstr "Logu novietošanas metode: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:46
-msgid "Method of placing dialog windows: \\w"
-msgstr "Dialoga logu novietošanas metode: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:51
-msgid "Ignore program-specified window placements."
-msgstr ""
-
-#: ../lisp/sawfish/wm/placement/stagger.jl:34
-#, fuzzy
-msgid "Distance between successive placements in stagger mode."
-msgstr "Distance starp veiksmīgām novietnēm `grīļošanās' novietojuma režīmā."
-
-#. Each window will have a `depth' property--an integer, zero
-#. represents the level of normal windows, negative for windows below
-#. this level, and positive for windows above the normal level
-#: ../lisp/sawfish/wm/stacking.jl:58
-msgid "Stacking"
-msgstr "Kraušana"
-
-#: ../lisp/sawfish/wm/stacking.jl:61
-msgid "Keep transient windows stacked above: \\w"
-msgstr "Paturēt pagaidu logus sakrautus virspusē: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:75
-msgid "Minimizing a window also removes its: \\w"
-msgstr "Loga minimizēšana izņem arī tā: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:80
-msgid "Unminimizing a window also restores its: \\w"
-msgstr "Loga atminimizēšana atjauno arī tā: \\w"
-
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Lipīgs"
@@ -859,21 +464,9 @@ msgstr "Logu _sarakstā"
 msgid "In _task list"
 msgstr "GNOME _uzdevumu sarakstā"
 
-#: ../lisp/sawfish/wm/state/maximize.jl:89
-msgid "Lock position and size while windows are maximized."
-msgstr "Noslēgt pozīciju un izmērus, kāmēr logi ir maksimizēti."
-
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "Ē_nots"
-
-#: ../lisp/sawfish/wm/state/transient.jl:48
-msgid "Focus on application windows when they first appear."
-msgstr "Fokusēties uz aplikāciju logiem, kad tie parādās."
-
-#: ../lisp/sawfish/wm/util/display-window.jl:43
-msgid "Unshade selected windows."
-msgstr "Atēnot izvēlētos logus."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -886,19 +479,6 @@ msgstr "Spiediet taustiņu..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Citāts]"
-
-#: ../lisp/sawfish/wm/util/play-audio.jl:43
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr ""
-"Programma, kura atskaņo mūzikas paraugs. Ja nav uzstādīta, tiek izmantots "
-"ESD iebūvētais atbalsts."
-
-#: ../lisp/sawfish/wm/util/prompt.jl:63
-msgid "Keymap containing bindings active when reading a string from the user."
-msgstr ""
-"Taustiņkarte, saturoša sasaistes, kas ir aktīvas, nolasot virkni no "
-"lietotāja."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -914,36 +494,6 @@ msgstr "Darba vieta %d"
 msgid "Workspace:"
 msgstr "Darba vieta:"
 
-#: ../lisp/sawfish/wm/util/stacking.jl:45
-msgid "When raising a window, also raise its: \\w"
-msgstr "Kad paaugstina logu, paaugstināt arī tā: \\w"
-
-#. Virtual workspaces are implemented by moving windows in and out of
-#. the screen dimensions. E.g. moving to the left moves all windows one
-#. screen-width to the right.
-#: ../lisp/sawfish/wm/viewport.jl:53
-msgid "Viewport"
-msgstr "Skatpunkts"
-
-#: ../lisp/sawfish/wm/viewport.jl:56
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:62
-#, fuzzy
-msgid "Windows uniconify to the current viewport."
-msgstr "Pārvietot grupu uz pašreizējo skatpunktu"
-
-#: ../lisp/sawfish/wm/viewport.jl:67
-msgid ""
-"Number of steps in which to scroll between viewports (less steps = faster "
-"scrolling)."
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:73
-msgid "Wether to stop or wrap-around on first/last viewport"
-msgstr ""
-
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Kolonna:"
@@ -952,53 +502,9 @@ msgstr "Kolonna:"
 msgid "Row:"
 msgstr "Rinda:"
 
-#: ../lisp/sawfish/wm/windows.jl:73
-#, fuzzy
-msgid "Give focus to windows even when they haven't asked for it."
-msgstr "Paaugstināt logus, kad tie tiek fokusēti."
-
-#: ../lisp/sawfish/wm/windows.jl:77
-msgid "Warping"
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:80
-msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:85
-msgid "Wether to enable warping the cursor to windows."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:90
-msgid "Wether to not ignore avoided windows by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:95
-msgid "Wether to avoid any unspecified window by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:100
-msgid "Format to create unique window names."
-msgstr ""
-
-#: ../lisp/sawfish/wm/workspace.jl:122
-#, fuzzy
-msgid "How to act when passing the first or last workspace."
-msgstr "Parādīt saraksta izvēlni par visām darba vietām."
-
-#: ../lisp/sawfish/wm/workspace.jl:127
-#, fuzzy
-msgid ""
-"How to act when passing the first or last workspace, while moving a window"
-msgstr "Parādīt saraksta izvēlni par visām darba vietām."
-
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Darba vietu nosaukumi"
-
-#: ../lisp/sawfish/wm/workspace.jl:139
-msgid "Preserve outermost empty workspaces in the pager."
-msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 #, fuzzy
@@ -1049,6 +555,329 @@ msgstr "Sawfish pārvalda jūsu logus paplašināti."
 #: ../scripts/sawfish-about.jl.in:56
 msgid "Sawfish homepage"
 msgstr "Sawfish mājas lapa"
+
+#~ msgid "Window Cycling"
+#~ msgstr "Logu Cirkulēšana"
+
+#~ msgid "Sound"
+#~ msgstr "Skaņa"
+
+#~ msgid "Matched Windows"
+#~ msgstr "Sakrtītošie Logi"
+
+#~ msgid "Tooltips"
+#~ msgstr "Knifi"
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "Logu palielināšana un samazināšana"
+
+#, fuzzy
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Pārvietot logu uz nākamo skatpunktu."
+
+#, fuzzy
+#~ msgid "Whether to bump into fully obscured windows."
+#~ msgstr ""
+#~ "Vai uzskriet virsū pinībā aizklātiem logiem, kad palielina vai samazina\n"
+#~ "logus."
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr "Vai uzskriet virsū ignorētiem logiem, kad palielina vai samazina."
+
+#, fuzzy
+#~ msgid "Whether to bump into ignored windows."
+#~ msgstr "Vai uzskriet virsū ignorētiem logiem, kad palielina vai samazina."
+
+#, fuzzy
+#~ msgid "Number of pixels to move pointer in."
+#~ msgstr ""
+#~ "Pikseļu daudzums, par cik pārvietot kursoru `pārvietot-kursoru-' komandās."
+
+#, fuzzy
+#~ msgid "How windows being moved are animated"
+#~ msgstr "Paaugstināt logus, kad tie tiek atēnoti."
+
+#, fuzzy
+#~ msgid "How windows being resized are animated"
+#~ msgstr "Paaugstināt logus, kad tie tiek atēnoti."
+
+#, fuzzy
+#~ msgid "Raise windows when they are moved or resized."
+#~ msgstr "Paaugstināt logus, kad tie tiek fokusēti."
+
+#~ msgid "Show current position of windows while moving."
+#~ msgstr "Parādīt pašreizējo loga pozīciju, kamēr to pārvieto."
+
+#~ msgid "Show current dimensions of windows while resizing."
+#~ msgstr "Parādīt pašreizējās loga dimensijas, kamēr maina to izmērus."
+
+#, fuzzy
+#~ msgid "How to choose window edges when resizing."
+#~ msgstr "Parādīt pašreizējās loga dimensijas, kamēr maina to izmērus."
+
+#~ msgid "Display window names and icons while cycling through windows."
+#~ msgstr "Parādīt logu nosaukumus un ikonas, kad cirkulē cauri logiem."
+
+#~ msgid "Include iconified windows when cycling."
+#~ msgstr "Iekļaut ikonificētos logus, kad cirkulē."
+
+#~ msgid "Include windows on all workspaces when cycling."
+#~ msgstr "Iekļaut logus no visām darba vietām, kad cirkulē."
+
+#~ msgid "Include windows on all viewports when cycling."
+#~ msgstr "Iekļaut logus no visiem skatpunktiem, kad cirkulē."
+
+#, fuzzy
+#~ msgid "Raise windows while they're temporarily selected during cycling."
+#~ msgstr "Paaugstināt logus, kad tie tiek fokusēti."
+
+#~ msgid ""
+#~ "Keymap containing bindings active only during window cycling operations."
+#~ msgstr ""
+#~ "Sasaistu saturošā taustiņkarte aktīva tikai logu cirkulēšanas operāciju "
+#~ "laikā."
+
+#~ msgid "The program launched by the `xterm' command."
+#~ msgstr "Programma, palaista ar `xterm' komandu."
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "Dotie argumenti `xterm' komandai."
+
+#~ msgid "Move/Resize"
+#~ msgstr "Pārvietot/Mainīt izmēru"
+
+#~ msgid "Workspaces"
+#~ msgstr "Darba vietas"
+
+#~ msgid "Bindings"
+#~ msgstr "Sasaistes"
+
+#, fuzzy
+#~ msgid "Mini/Maximizing"
+#~ msgstr "Minimizēšana un Maksimizēšana"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Dažādi"
+
+#~ msgid "Play sound effects for window events."
+#~ msgstr "Atskaņot skaņas efektus logu notikumiem."
+
+#~ msgid "Edge Flipping"
+#~ msgstr "Stūru Aplaušana"
+
+#~ msgid "Select the next desktop when the pointer hits screen edge."
+#~ msgstr "Izvēlēties nākamo daba virsmu, kad kursors sasniedz ekrāna malu."
+
+#~ msgid "Hitting the screen edge selects the next: \\w"
+#~ msgstr "Ekrāna malu sasniedzot, izvēlas nākamo: \\w"
+
+#~ msgid "Only flip when interactively moving a window."
+#~ msgstr "Tikai viegli uzsist, kad interaktīvi pārvieto logu."
+
+#~ msgid "Beep when errors occur."
+#~ msgstr "Pīkstēt, kad atgadās kļūda."
+
+#~ msgid "Display error messages to: \\w"
+#~ msgstr "Parādīt kļūdu paziņojumus uz: \\w"
+
+#~ msgid "Shade Hover"
+#~ msgstr "Ēnošanas Svārstības"
+
+#~ msgid "Delay in milliseconds before unshading windows."
+#~ msgstr "Aizture milisekundēs pirms logu atēnošanas."
+
+#~ msgid "Raise windows when they are unshaded."
+#~ msgstr "Paaugstināt logus, kad tie tiek atēnoti."
+
+#~ msgid "Display tooltips for window frames."
+#~ msgstr "Parādīt knifus logu rāmjiem."
+
+#~ msgid "Show full documentation in tooltips."
+#~ msgstr "Parādīt pilnu dokumentāciju knifos."
+
+#, fuzzy
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "Aizture milisekundēs pirms logu atēnošanas."
+
+#, fuzzy
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "Aizture milisekundēs pirms logu atēnošanas."
+
+#~ msgid "History"
+#~ msgstr "Vēsture"
+
+#~ msgid "Automatically remember window positions."
+#~ msgstr "Automātiski atcerēties logu pozīcijas."
+
+#~ msgid "Automatically remember window sizes."
+#~ msgstr "Automātiski atcerēties logu izmērus."
+
+#~ msgid "Automatically remember other window attributes."
+#~ msgstr "Automātiski atcerēties citu logu atribūtus."
+
+#~ msgid "Don't automatically remember details of transient windows."
+#~ msgstr "Automātiski neatcerēties detaļas par pagaidu logiem."
+
+#~ msgid "When does the mouse pointer affect the input focus."
+#~ msgstr "Kad peles kursors ietekmē ievades fokusu."
+
+#~ msgid "Click-to-focus mode passes the click through to the application."
+#~ msgstr "Klikšķis-lai-fokusēt režīms nodod klikšķus caur aplikāciju."
+
+#, fuzzy
+#~ msgid "Wether focusing a window doesn't change it's position in the stack."
+#~ msgstr "Pazemināt logu uz tā zemāko iespējamo pozīciju krāvuma secībā."
+
+#~ msgid "Default frame style:"
+#~ msgstr "Noklusētais rāmja stils:"
+
+#~ msgid "Automatically reload themes when they are updated."
+#~ msgstr "Automātiski pārlādēt tēmas, kad tās ir atjauninātas."
+
+#~ msgid "Default font: \\w"
+#~ msgstr "Noklusētais fonts: \\w"
+
+#~ msgid "Keymap containing bindings active anywhere."
+#~ msgstr "Taustiņkarte, kas satur visur aktīvās sasaistes."
+
+#~ msgid "Keymap containing bindings active when a client window is focused."
+#~ msgstr ""
+#~ "Sasaistu saturošā taustiņkarte aktīva, kad klienta logs ir fokusēts."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the root window\n"
+#~ "(or when no window is focused)."
+#~ msgstr ""
+#~ "Sasaistu saturošā taustiņkarte aktīva, kad kursors ir pamata logā\n"
+#~ "(vai, kad neviens logs nav fokusēts)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga "
+#~ "virsraksta.\n"
+#~ "(Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga ietvara.\n"
+#~ "(Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga aizvēršanas "
+#~ "pogas.\n"
+#~ "(Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga "
+#~ "ikonificešanas\n"
+#~ "pogas. (Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga "
+#~ "maksimizēšanas\n"
+#~ "pogas. (Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga izvēlnes "
+#~ "pogas.\n"
+#~ "(Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Sasaistu saturošā taustiņkarte aktīva, kad kursors ir uz loga ēnošanas "
+#~ "pogas.\n"
+#~ "(Tikai peles-sasaistes tiek ņemtas vērā šajā kartē.)"
+
+#~ msgid "Modifier key(s) used for default shortcuts."
+#~ msgstr "Modifikatora taustiņš(i), kurus lieto noklusētajām saīsnēm."
+
+#~ msgid "Method of placing windows: \\w"
+#~ msgstr "Logu novietošanas metode: \\w"
+
+#~ msgid "Method of placing dialog windows: \\w"
+#~ msgstr "Dialoga logu novietošanas metode: \\w"
+
+#, fuzzy
+#~ msgid "Distance between successive placements in stagger mode."
+#~ msgstr ""
+#~ "Distance starp veiksmīgām novietnēm `grīļošanās' novietojuma režīmā."
+
+#~ msgid "Stacking"
+#~ msgstr "Kraušana"
+
+#~ msgid "Keep transient windows stacked above: \\w"
+#~ msgstr "Paturēt pagaidu logus sakrautus virspusē: \\w"
+
+#~ msgid "Minimizing a window also removes its: \\w"
+#~ msgstr "Loga minimizēšana izņem arī tā: \\w"
+
+#~ msgid "Unminimizing a window also restores its: \\w"
+#~ msgstr "Loga atminimizēšana atjauno arī tā: \\w"
+
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr "Noslēgt pozīciju un izmērus, kāmēr logi ir maksimizēti."
+
+#~ msgid "Focus on application windows when they first appear."
+#~ msgstr "Fokusēties uz aplikāciju logiem, kad tie parādās."
+
+#~ msgid "Unshade selected windows."
+#~ msgstr "Atēnot izvēlētos logus."
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "Programma, kura atskaņo mūzikas paraugs. Ja nav uzstādīta, tiek izmantots "
+#~ "ESD iebūvētais atbalsts."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when reading a string from the user."
+#~ msgstr ""
+#~ "Taustiņkarte, saturoša sasaistes, kas ir aktīvas, nolasot virkni no "
+#~ "lietotāja."
+
+#~ msgid "When raising a window, also raise its: \\w"
+#~ msgstr "Kad paaugstina logu, paaugstināt arī tā: \\w"
+
+#~ msgid "Viewport"
+#~ msgstr "Skatpunkts"
+
+#, fuzzy
+#~ msgid "Windows uniconify to the current viewport."
+#~ msgstr "Pārvietot grupu uz pašreizējo skatpunktu"
+
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "Paaugstināt logus, kad tie tiek fokusēti."
+
+#, fuzzy
+#~ msgid "How to act when passing the first or last workspace."
+#~ msgstr "Parādīt saraksta izvēlni par visām darba vietām."
+
+#, fuzzy
+#~ msgid ""
+#~ "How to act when passing the first or last workspace, while moving a window"
+#~ msgstr "Parādīt saraksta izvēlni par visām darba vietām."
 
 #~ msgid "Crux Theme"
 #~ msgstr "Crux Tēma"

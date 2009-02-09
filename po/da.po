@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 23:36+0100\n"
+"POT-Creation-Date: 2009-02-09 10:44+0100\n"
 "PO-Revision-Date: 2002-11-10 11:39+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Dansk <dansk@klid.dk>\n"
@@ -172,29 +172,6 @@ msgstr "ikke"
 msgid "Match Window Properties"
 msgstr "Tilpas vinduesegenskaber"
 
-#. customization options
-#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-#: ../lisp/sawfish/wm/autoload.jl:119
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
-msgid "Window Cycling"
-msgstr "Vinduesgennemgang"
-
-#: ../lisp/sawfish/wm/autoload.jl:132
-#: ../lisp/sawfish/wm/ext/audio-events.jl:36
-msgid "Sound"
-msgstr "Lydeffekter"
-
-#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
-#: ../lisp/sawfish/wm/autoload.jl:133
-#: ../lisp/sawfish/wm/ext/match-window.jl:138
-msgid "Matched Windows"
-msgstr "Tilpasninger"
-
-#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
-#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
-msgid "Tooltips"
-msgstr "Værktøjstip"
-
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -204,41 +181,6 @@ msgstr "Index:"
 #: ../lisp/sawfish/wm/commands.jl:365
 msgid "Command:"
 msgstr "Kommando:"
-
-#. Customization options.
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
-msgid "Growing and packing of windows"
-msgstr "Forstørrelse og indpasning af vinduer"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
-msgid "Whether growing is considered to be maximization."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
-#, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Flyt vinduet til det næste visningsområde."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
-#, fuzzy
-msgid "Whether to bump into fully obscured windows."
-msgstr ""
-"Om der skal stødes mod helt skjulte vinduer ved forstørrelse og indpasning "
-"af vinduer."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
-#, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr ""
-"Om der skal stødes mod ignorerede vinduer ved forstørrelse og indpasning af "
-"vinduer."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
-#, fuzzy
-msgid "Whether to bump into ignored windows."
-msgstr ""
-"Om der skal stødes mod ignorerede vinduer ved forstørrelse og indpasning af "
-"vinduer."
 
 #: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
@@ -272,119 +214,6 @@ msgstr "Indpas opad"
 msgid "Pack down"
 msgstr "Indpas nedad"
 
-#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
-#, fuzzy
-msgid "Number of pixels to move pointer in."
-msgstr "Antal punkter markøren flyttes ved 'move-cursor-'-kommandoer."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:53
-#, fuzzy
-msgid "How windows being moved are animated"
-msgstr "Hæv vinduer når de bliver rullet ned."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:58
-#, fuzzy
-msgid "How windows being resized are animated"
-msgstr "Hæv vinduer når de bliver rullet ned."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:63
-#, fuzzy
-msgid "Raise windows when they are moved or resized."
-msgstr "Hæv vinduer når de modtager fokus."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:68
-msgid "Show current position of windows while moving."
-msgstr "Vis positionen for vinduerne ved flytning."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:73
-msgid "Show current dimensions of windows while resizing."
-msgstr "Vis dimensioner for vinduer ved ændring af størrelse."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:78
-#, fuzzy
-msgid "How to choose window edges when resizing."
-msgstr "Vis dimensioner for vinduer ved ændring af størrelse."
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:83
-msgid "Distance in pixels before window edges align with each other."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
-msgid "Display window names and icons while cycling through windows."
-msgstr "Vis vinduesnavne og ikoner når der skiftes mellem vinduer."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
-msgid "Include iconified windows when cycling."
-msgstr "Medtag minimerede vinduer under gennemgang."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
-msgid "Include windows on all workspaces when cycling."
-msgstr "Medtag vinduer på alle arbejdsområder under gennemgang."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
-msgid "Include windows on all viewports when cycling."
-msgstr "Medtag vinduer på alle visningsområder under gennemgang."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
-#, fuzzy
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Hæv vinduer når de modtager fokus."
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
-msgid ""
-"Keymap containing bindings active only during window cycling operations."
-msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder mens der skiftes "
-"mellem vinduer."
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:34
-msgid "The program launched by the `xterm' command."
-msgstr "Det program som køres af 'xterm'-kommandoen."
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:39
-msgid "Arguments given to the `xterm' command."
-msgstr "Parametre til 'xterm'-kommandoen."
-
-# forsøg på at koordinere med capplet-tingesterne
-#. default groups
-#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "Fokusopførsel"
-
-#: ../lisp/sawfish/wm/custom.jl:483
-msgid "Move/Resize"
-msgstr "Flytning/størrelsesændring"
-
-#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "Udseende"
-
-#: ../lisp/sawfish/wm/custom.jl:485
-msgid "Workspaces"
-msgstr "Arbejdsområder"
-
-# ditto
-#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
-msgid "Bindings"
-msgstr "Genveje"
-
-#: ../lisp/sawfish/wm/custom.jl:487
-#, fuzzy
-msgid "Mini/Maximizing"
-msgstr "Maksimering/minimering"
-
-#: ../lisp/sawfish/wm/custom.jl:488
-msgid "Miscellaneous"
-msgstr "Diverse"
-
-#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Placering"
-
-#: ../lisp/sawfish/wm/ext/audio-events.jl:42
-msgid "Play sound effects for window events."
-msgstr "Afspil lydeffekter ved vindueshændelser"
-
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
 msgstr "Hændelse"
@@ -393,37 +222,22 @@ msgstr "Hændelse"
 msgid "Audio file"
 msgstr "Lydfil"
 
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
-msgid "Edge Flipping"
-msgstr "Kantskiftning"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
-msgid "Select the next desktop when the pointer hits screen edge."
-msgstr "Skift til det næste område når markøren rammer skærmkanten."
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
-msgid "Hitting the screen edge selects the next: \\w"
-msgstr "Når skærmkanten rammes vælges næste: \\w"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
-msgid "Only flip when interactively moving a window."
-msgstr "Skift kun under interaktiv flytning af vinduer."
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
-msgid "Milliseconds to delay before edge flipping."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:37
-msgid "Beep when errors occur."
-msgstr "Bip ved fejl."
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:42
-msgid "Display error messages to: \\w"
-msgstr "Send fejlbeskeder til: \\w"
-
 #: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "Ingen fejl."
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "Placering"
+
+# forsøg på at koordinere med capplet-tingesterne
+#: ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "Fokusopførsel"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "Udseende"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -432,52 +246,6 @@ msgstr "Tilstand"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "Andre"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
-msgid "Shade Hover"
-msgstr "Smart nedrulning"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
-msgid "Enable shade-hover mode."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
-msgid "Delay in milliseconds before unshading windows."
-msgstr "Pause i millisekunder før nedrulning af vinduer."
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
-msgid "Raise windows when they are unshaded."
-msgstr "Hæv vinduer når de bliver rullet ned."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:52
-msgid "Display tooltips for window frames."
-msgstr "Vis værktøjstip til vinduesrammer."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:58
-msgid "Show full documentation in tooltips."
-msgstr "Vis fuld dokumentation i værktøjstip."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:64
-#, fuzzy
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Pause i millisekunder før nedrulning af vinduer."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:70
-#, fuzzy
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Pause i millisekunder før nedrulning af vinduer."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:76
-msgid "Font used to display tooltips, or nil for default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:82
-msgid "Color used for the tooltips background"
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:88
-msgid "Color used for the tooltips foreground"
-msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -495,59 +263,9 @@ msgstr "Husk _egenskaber"
 msgid "_Forget saved state"
 msgstr "_Glem gemte oplysninger"
 
-#. customizations
-#: ../lisp/sawfish/wm/ext/window-history.jl:90
-msgid "History"
-msgstr "Historie"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:93
-msgid "Automatically remember window positions."
-msgstr "Husk automatisk vinduespositioner."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:99
-msgid "Automatically remember window sizes."
-msgstr "Husk automatisk vinduesstørrelser."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:105
-msgid "Automatically remember other window attributes."
-msgstr "Husk automatisk andre vinduesegenskaber."
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:111
-msgid "Don't automatically remember details of transient windows."
-msgstr "Husk ikke automatisk detaljer om midlertidige vinduer."
-
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "_Historie"
-
-#: ../lisp/sawfish/wm/focus.jl:48
-msgid "When does the mouse pointer affect the input focus."
-msgstr "Hvornår musemarkøren påvirker tastaturfokuset."
-
-#: ../lisp/sawfish/wm/focus.jl:55
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "Videregiver fokuseringsklikket til vinduet."
-
-#: ../lisp/sawfish/wm/focus.jl:60
-#, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
-msgstr "Sænk vinduet til den lavest tilladte position i stablingsordenen."
-
-#: ../lisp/sawfish/wm/focus.jl:65
-msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
-
-#: ../lisp/sawfish/wm/frames.jl:136
-msgid "Default frame style:"
-msgstr "Automatisk valgt rammestil:"
-
-#: ../lisp/sawfish/wm/frames.jl:143
-msgid "Automatically reload themes when they are updated."
-msgstr "Genindlæs automatisk temaer hvis de bliver opdateret."
-
-#: ../lisp/sawfish/wm/frames.jl:211
-msgid "Default font: \\w"
-msgstr "Standard-skrifttype: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -589,95 +307,6 @@ msgstr "Gnomes netsted..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "Om Gnome..."
-
-#: ../lisp/sawfish/wm/keymaps.jl:91
-msgid "Keymap containing bindings active anywhere."
-msgstr "Tastekombinationsliste som indeholder bindinger der gælder alle steder"
-
-#: ../lisp/sawfish/wm/keymaps.jl:104
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder for et "
-"klientvindue med fokus."
-
-#: ../lisp/sawfish/wm/keymaps.jl:112
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-"befinder sig\n"
-"i rod-vinduet (eller når ingen vinduer har fokus)."
-
-#: ../lisp/sawfish/wm/keymaps.jl:122
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
-"over\n"
-"titlen på et vindue (i denne liste bliver kun musebindinger brugt)."
-
-#: ../lisp/sawfish/wm/keymaps.jl:131
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
-"over\n"
-"kanten på et vindue (i denne liste bliver kun musebindinger brugt)."
-
-#: ../lisp/sawfish/wm/keymaps.jl:140
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
-"over\n"
-"luk-knappen på et vindue (i denne liste bliver kun musebindinger brugt)."
-
-#: ../lisp/sawfish/wm/keymaps.jl:148
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
-"over\n"
-"minimeringsknappen på et vindue (i denne liste bliver kun musebindinger "
-"brugt)."
-
-#: ../lisp/sawfish/wm/keymaps.jl:157
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
-"over\n"
-"maksimeringsknappen på et vindue (i denne liste bliver kun musebindinger "
-"brugt)."
-
-#: ../lisp/sawfish/wm/keymaps.jl:165
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
-"over\n"
-"menuknappen på et vindue (i denne liste bliver kun musebindinger brugt)."
-
-#: ../lisp/sawfish/wm/keymaps.jl:172
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
-"over\n"
-"op-/nedrulningsknappen på et vindue (i denne liste bliver kun musebindinger "
-"brugt)."
-
-#: ../lisp/sawfish/wm/keymaps.jl:181
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "Modificeringstaster til standardgenveje i vindueshåndteringen."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -827,43 +456,6 @@ msgstr "Alle indstillinger"
 msgid "Edit theme..."
 msgstr "Ændr tema..."
 
-#: ../lisp/sawfish/wm/placement.jl:41
-msgid "Method of placing windows: \\w"
-msgstr "Metode til placering af vinduer: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:46
-msgid "Method of placing dialog windows: \\w"
-msgstr "Metode til placering af meddelelsesvinduer: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:51
-msgid "Ignore program-specified window placements."
-msgstr ""
-
-#: ../lisp/sawfish/wm/placement/stagger.jl:34
-#, fuzzy
-msgid "Distance between successive placements in stagger mode."
-msgstr ""
-"Afstand mellem efterfølgende placeringer i 'stagger'-placeringstilstand."
-
-#. Each window will have a `depth' property--an integer, zero
-#. represents the level of normal windows, negative for windows below
-#. this level, and positive for windows above the normal level
-#: ../lisp/sawfish/wm/stacking.jl:58
-msgid "Stacking"
-msgstr "Sta_bling"
-
-#: ../lisp/sawfish/wm/stacking.jl:61
-msgid "Keep transient windows stacked above: \\w"
-msgstr "Sørg for at midlertidige vinduer er stablet over: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:75
-msgid "Minimizing a window also removes its: \\w"
-msgstr "Minimering af et vindue fjerner også dets: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:80
-msgid "Unminimizing a window also restores its: \\w"
-msgstr "Gendannelse af et vindue gendanner også dets: \\w"
-
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "_Klæbrig"
@@ -889,21 +481,9 @@ msgstr "I _vinduesliste"
 msgid "In _task list"
 msgstr "I o_pgaveliste"
 
-#: ../lisp/sawfish/wm/state/maximize.jl:89
-msgid "Lock position and size while windows are maximized."
-msgstr "Lås position og størrelse mens vinduer er maksimeret."
-
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "_Oprullet"
-
-#: ../lisp/sawfish/wm/state/transient.jl:48
-msgid "Focus on application windows when they first appear."
-msgstr "Giv fokus til programvinduer når de vises første gang."
-
-#: ../lisp/sawfish/wm/util/display-window.jl:43
-msgid "Unshade selected windows."
-msgstr "Nedrul valgte vinduer."
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -916,19 +496,6 @@ msgstr "Tryk en tastekombination..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[Citat]"
-
-#: ../lisp/sawfish/wm/util/play-audio.jl:43
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr ""
-"Program til lydafspilning. Hvis ikke angivet, benyttes indbygget ESD-"
-"understøttelse "
-
-#: ../lisp/sawfish/wm/util/prompt.jl:63
-msgid "Keymap containing bindings active when reading a string from the user."
-msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når der indtastes "
-"tekst."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -944,36 +511,6 @@ msgstr "Arbejdsområde %d"
 msgid "Workspace:"
 msgstr "Arbejdsområde:"
 
-#: ../lisp/sawfish/wm/util/stacking.jl:45
-msgid "When raising a window, also raise its: \\w"
-msgstr "Når et vindue hæves, hæves også dets \\w"
-
-#. Virtual workspaces are implemented by moving windows in and out of
-#. the screen dimensions. E.g. moving to the left moves all windows one
-#. screen-width to the right.
-#: ../lisp/sawfish/wm/viewport.jl:53
-msgid "Viewport"
-msgstr "Visningsområde"
-
-#: ../lisp/sawfish/wm/viewport.jl:56
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:62
-#, fuzzy
-msgid "Windows uniconify to the current viewport."
-msgstr "Send gruppe til det aktive visningsområde"
-
-#: ../lisp/sawfish/wm/viewport.jl:67
-msgid ""
-"Number of steps in which to scroll between viewports (less steps = faster "
-"scrolling)."
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:73
-msgid "Wether to stop or wrap-around on first/last viewport"
-msgstr ""
-
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "Kolonne:"
@@ -982,53 +519,9 @@ msgstr "Kolonne:"
 msgid "Row:"
 msgstr "Række:"
 
-#: ../lisp/sawfish/wm/windows.jl:73
-#, fuzzy
-msgid "Give focus to windows even when they haven't asked for it."
-msgstr "Hæv vinduer når de modtager fokus."
-
-#: ../lisp/sawfish/wm/windows.jl:77
-msgid "Warping"
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:80
-msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:85
-msgid "Wether to enable warping the cursor to windows."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:90
-msgid "Wether to not ignore avoided windows by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:95
-msgid "Wether to avoid any unspecified window by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:100
-msgid "Format to create unique window names."
-msgstr ""
-
-#: ../lisp/sawfish/wm/workspace.jl:122
-#, fuzzy
-msgid "How to act when passing the first or last workspace."
-msgstr "Vis menu med alle arbejdsområder."
-
-#: ../lisp/sawfish/wm/workspace.jl:127
-#, fuzzy
-msgid ""
-"How to act when passing the first or last workspace, while moving a window"
-msgstr "Vis menu med alle arbejdsområder."
-
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "Navn på arbejdsområde"
-
-#: ../lisp/sawfish/wm/workspace.jl:139
-msgid "Preserve outermost empty workspaces in the pager."
-msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 #, fuzzy
@@ -1079,6 +572,340 @@ msgstr "Sawfish håndterer dine vinduer intensivt."
 #: ../scripts/sawfish-about.jl.in:56
 msgid "Sawfish homepage"
 msgstr "Sawfish's hjemmeside"
+
+#~ msgid "Window Cycling"
+#~ msgstr "Vinduesgennemgang"
+
+#~ msgid "Sound"
+#~ msgstr "Lydeffekter"
+
+#~ msgid "Matched Windows"
+#~ msgstr "Tilpasninger"
+
+#~ msgid "Tooltips"
+#~ msgstr "Værktøjstip"
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "Forstørrelse og indpasning af vinduer"
+
+#, fuzzy
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Flyt vinduet til det næste visningsområde."
+
+#, fuzzy
+#~ msgid "Whether to bump into fully obscured windows."
+#~ msgstr ""
+#~ "Om der skal stødes mod helt skjulte vinduer ved forstørrelse og "
+#~ "indpasning af vinduer."
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr ""
+#~ "Om der skal stødes mod ignorerede vinduer ved forstørrelse og indpasning "
+#~ "af vinduer."
+
+#, fuzzy
+#~ msgid "Whether to bump into ignored windows."
+#~ msgstr ""
+#~ "Om der skal stødes mod ignorerede vinduer ved forstørrelse og indpasning "
+#~ "af vinduer."
+
+#, fuzzy
+#~ msgid "Number of pixels to move pointer in."
+#~ msgstr "Antal punkter markøren flyttes ved 'move-cursor-'-kommandoer."
+
+#, fuzzy
+#~ msgid "How windows being moved are animated"
+#~ msgstr "Hæv vinduer når de bliver rullet ned."
+
+#, fuzzy
+#~ msgid "How windows being resized are animated"
+#~ msgstr "Hæv vinduer når de bliver rullet ned."
+
+#, fuzzy
+#~ msgid "Raise windows when they are moved or resized."
+#~ msgstr "Hæv vinduer når de modtager fokus."
+
+#~ msgid "Show current position of windows while moving."
+#~ msgstr "Vis positionen for vinduerne ved flytning."
+
+#~ msgid "Show current dimensions of windows while resizing."
+#~ msgstr "Vis dimensioner for vinduer ved ændring af størrelse."
+
+#, fuzzy
+#~ msgid "How to choose window edges when resizing."
+#~ msgstr "Vis dimensioner for vinduer ved ændring af størrelse."
+
+#~ msgid "Display window names and icons while cycling through windows."
+#~ msgstr "Vis vinduesnavne og ikoner når der skiftes mellem vinduer."
+
+#~ msgid "Include iconified windows when cycling."
+#~ msgstr "Medtag minimerede vinduer under gennemgang."
+
+#~ msgid "Include windows on all workspaces when cycling."
+#~ msgstr "Medtag vinduer på alle arbejdsområder under gennemgang."
+
+#~ msgid "Include windows on all viewports when cycling."
+#~ msgstr "Medtag vinduer på alle visningsområder under gennemgang."
+
+#, fuzzy
+#~ msgid "Raise windows while they're temporarily selected during cycling."
+#~ msgstr "Hæv vinduer når de modtager fokus."
+
+#~ msgid ""
+#~ "Keymap containing bindings active only during window cycling operations."
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder mens der "
+#~ "skiftes mellem vinduer."
+
+#~ msgid "The program launched by the `xterm' command."
+#~ msgstr "Det program som køres af 'xterm'-kommandoen."
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "Parametre til 'xterm'-kommandoen."
+
+#~ msgid "Move/Resize"
+#~ msgstr "Flytning/størrelsesændring"
+
+#~ msgid "Workspaces"
+#~ msgstr "Arbejdsområder"
+
+# ditto
+#~ msgid "Bindings"
+#~ msgstr "Genveje"
+
+#, fuzzy
+#~ msgid "Mini/Maximizing"
+#~ msgstr "Maksimering/minimering"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Diverse"
+
+#~ msgid "Play sound effects for window events."
+#~ msgstr "Afspil lydeffekter ved vindueshændelser"
+
+#~ msgid "Edge Flipping"
+#~ msgstr "Kantskiftning"
+
+#~ msgid "Select the next desktop when the pointer hits screen edge."
+#~ msgstr "Skift til det næste område når markøren rammer skærmkanten."
+
+#~ msgid "Hitting the screen edge selects the next: \\w"
+#~ msgstr "Når skærmkanten rammes vælges næste: \\w"
+
+#~ msgid "Only flip when interactively moving a window."
+#~ msgstr "Skift kun under interaktiv flytning af vinduer."
+
+#~ msgid "Beep when errors occur."
+#~ msgstr "Bip ved fejl."
+
+#~ msgid "Display error messages to: \\w"
+#~ msgstr "Send fejlbeskeder til: \\w"
+
+#~ msgid "Shade Hover"
+#~ msgstr "Smart nedrulning"
+
+#~ msgid "Delay in milliseconds before unshading windows."
+#~ msgstr "Pause i millisekunder før nedrulning af vinduer."
+
+#~ msgid "Raise windows when they are unshaded."
+#~ msgstr "Hæv vinduer når de bliver rullet ned."
+
+#~ msgid "Display tooltips for window frames."
+#~ msgstr "Vis værktøjstip til vinduesrammer."
+
+#~ msgid "Show full documentation in tooltips."
+#~ msgstr "Vis fuld dokumentation i værktøjstip."
+
+#, fuzzy
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "Pause i millisekunder før nedrulning af vinduer."
+
+#, fuzzy
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "Pause i millisekunder før nedrulning af vinduer."
+
+#~ msgid "History"
+#~ msgstr "Historie"
+
+#~ msgid "Automatically remember window positions."
+#~ msgstr "Husk automatisk vinduespositioner."
+
+#~ msgid "Automatically remember window sizes."
+#~ msgstr "Husk automatisk vinduesstørrelser."
+
+#~ msgid "Automatically remember other window attributes."
+#~ msgstr "Husk automatisk andre vinduesegenskaber."
+
+#~ msgid "Don't automatically remember details of transient windows."
+#~ msgstr "Husk ikke automatisk detaljer om midlertidige vinduer."
+
+#~ msgid "When does the mouse pointer affect the input focus."
+#~ msgstr "Hvornår musemarkøren påvirker tastaturfokuset."
+
+#~ msgid "Click-to-focus mode passes the click through to the application."
+#~ msgstr "Videregiver fokuseringsklikket til vinduet."
+
+#, fuzzy
+#~ msgid "Wether focusing a window doesn't change it's position in the stack."
+#~ msgstr "Sænk vinduet til den lavest tilladte position i stablingsordenen."
+
+#~ msgid "Default frame style:"
+#~ msgstr "Automatisk valgt rammestil:"
+
+#~ msgid "Automatically reload themes when they are updated."
+#~ msgstr "Genindlæs automatisk temaer hvis de bliver opdateret."
+
+#~ msgid "Default font: \\w"
+#~ msgstr "Standard-skrifttype: \\w"
+
+#~ msgid "Keymap containing bindings active anywhere."
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder alle steder"
+
+#~ msgid "Keymap containing bindings active when a client window is focused."
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder for et "
+#~ "klientvindue med fokus."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the root window\n"
+#~ "(or when no window is focused)."
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "befinder sig\n"
+#~ "i rod-vinduet (eller når ingen vinduer har fokus)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "titlen på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "kanten på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "luk-knappen på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "minimeringsknappen på et vindue (i denne liste bliver kun musebindinger "
+#~ "brugt)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "maksimeringsknappen på et vindue (i denne liste bliver kun musebindinger "
+#~ "brugt)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "menuknappen på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "op-/nedrulningsknappen på et vindue (i denne liste bliver kun "
+#~ "musebindinger brugt)."
+
+#~ msgid "Modifier key(s) used for default shortcuts."
+#~ msgstr "Modificeringstaster til standardgenveje i vindueshåndteringen."
+
+#~ msgid "Method of placing windows: \\w"
+#~ msgstr "Metode til placering af vinduer: \\w"
+
+#~ msgid "Method of placing dialog windows: \\w"
+#~ msgstr "Metode til placering af meddelelsesvinduer: \\w"
+
+#, fuzzy
+#~ msgid "Distance between successive placements in stagger mode."
+#~ msgstr ""
+#~ "Afstand mellem efterfølgende placeringer i 'stagger'-placeringstilstand."
+
+#~ msgid "Stacking"
+#~ msgstr "Sta_bling"
+
+#~ msgid "Keep transient windows stacked above: \\w"
+#~ msgstr "Sørg for at midlertidige vinduer er stablet over: \\w"
+
+#~ msgid "Minimizing a window also removes its: \\w"
+#~ msgstr "Minimering af et vindue fjerner også dets: \\w"
+
+#~ msgid "Unminimizing a window also restores its: \\w"
+#~ msgstr "Gendannelse af et vindue gendanner også dets: \\w"
+
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr "Lås position og størrelse mens vinduer er maksimeret."
+
+#~ msgid "Focus on application windows when they first appear."
+#~ msgstr "Giv fokus til programvinduer når de vises første gang."
+
+#~ msgid "Unshade selected windows."
+#~ msgstr "Nedrul valgte vinduer."
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "Program til lydafspilning. Hvis ikke angivet, benyttes indbygget ESD-"
+#~ "understøttelse "
+
+#~ msgid ""
+#~ "Keymap containing bindings active when reading a string from the user."
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når der "
+#~ "indtastes tekst."
+
+#~ msgid "When raising a window, also raise its: \\w"
+#~ msgstr "Når et vindue hæves, hæves også dets \\w"
+
+#~ msgid "Viewport"
+#~ msgstr "Visningsområde"
+
+#, fuzzy
+#~ msgid "Windows uniconify to the current viewport."
+#~ msgstr "Send gruppe til det aktive visningsområde"
+
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "Hæv vinduer når de modtager fokus."
+
+#, fuzzy
+#~ msgid "How to act when passing the first or last workspace."
+#~ msgstr "Vis menu med alle arbejdsområder."
+
+#, fuzzy
+#~ msgid ""
+#~ "How to act when passing the first or last workspace, while moving a window"
+#~ msgstr "Vis menu med alle arbejdsområder."
 
 #~ msgid "Crux Theme"
 #~ msgstr "Crux-temaet"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 23:36+0100\n"
+"POT-Creation-Date: 2009-02-09 10:44+0100\n"
 "PO-Revision-Date: 2002-06-19 15:18GMT+10.00\n"
 "Last-Translator: Michelle Kim <mkim@brisbane.redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -158,29 +158,6 @@ msgstr "아님"
 msgid "Match Window Properties"
 msgstr "창 등록정보 일치"
 
-#. customization options
-#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-#: ../lisp/sawfish/wm/autoload.jl:119
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
-msgid "Window Cycling"
-msgstr "창 순환"
-
-#: ../lisp/sawfish/wm/autoload.jl:132
-#: ../lisp/sawfish/wm/ext/audio-events.jl:36
-msgid "Sound"
-msgstr "사운드"
-
-#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
-#: ../lisp/sawfish/wm/autoload.jl:133
-#: ../lisp/sawfish/wm/ext/match-window.jl:138
-msgid "Matched Windows"
-msgstr "일치하는 창"
-
-#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
-#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
-msgid "Tooltips"
-msgstr "툴팁"
-
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -190,35 +167,6 @@ msgstr "색인:"
 #: ../lisp/sawfish/wm/commands.jl:365
 msgid "Command:"
 msgstr "명령:"
-
-#. Customization options.
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
-msgid "Growing and packing of windows"
-msgstr "창 확장과 축소"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
-msgid "Whether growing is considered to be maximization."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
-#, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "창을 다음 뷰포트로 이동"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
-#, fuzzy
-msgid "Whether to bump into fully obscured windows."
-msgstr "창을 확장하거나 축소할때 완전히 어두운 창에 부딛힐 것인지 여부"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
-#, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr "창을 확대하거나 축소할때 무시된 창에 부딛힐 것인지 여부."
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
-#, fuzzy
-msgid "Whether to bump into ignored windows."
-msgstr "창을 확대하거나 축소할때 무시된 창에 부딛힐 것인지 여부."
 
 #: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
@@ -252,115 +200,6 @@ msgstr "창 위쪽으로 채워넣기"
 msgid "Pack down"
 msgstr "창 밑으로 채워넣기"
 
-#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
-#, fuzzy
-msgid "Number of pixels to move pointer in."
-msgstr "`move-cursor-' 명령에서 포인터를 옮길 픽셀 수"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:53
-#, fuzzy
-msgid "How windows being moved are animated"
-msgstr "은둔 상태 해제시 창 올리기"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:58
-#, fuzzy
-msgid "How windows being resized are animated"
-msgstr "은둔 상태 해제시 창 올리기"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:63
-#, fuzzy
-msgid "Raise windows when they are moved or resized."
-msgstr "초점을 받으면 창 올림"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:68
-msgid "Show current position of windows while moving."
-msgstr "사용자가 창을 옮길 때 현재 위치 표시하기"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:73
-msgid "Show current dimensions of windows while resizing."
-msgstr "사용자가 크기조정하는 동안 현재 크기 표시하기"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:78
-#, fuzzy
-msgid "How to choose window edges when resizing."
-msgstr "사용자가 크기조정하는 동안 현재 크기 표시하기"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:83
-msgid "Distance in pixels before window edges align with each other."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
-msgid "Display window names and icons while cycling through windows."
-msgstr "창 순환 중 창 이름과 아이콘 표시하기"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
-msgid "Include iconified windows when cycling."
-msgstr "순환 중 아이콘화된 창 포함하기"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
-msgid "Include windows on all workspaces when cycling."
-msgstr "순환 중 모든 작업공간의 창 포함하기"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
-msgid "Include windows on all viewports when cycling."
-msgstr "순환 중 모든 뷰포트의 창 포함하기"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
-#, fuzzy
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "초점을 받으면 창 올림"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
-msgid ""
-"Keymap containing bindings active only during window cycling operations."
-msgstr "클라이언트 창이 초점 상태일 때만 작동하는 바인딩을 가진 키맵"
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:34
-msgid "The program launched by the `xterm' command."
-msgstr "`xterm'명령으로 실행할 프로그램"
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:39
-msgid "Arguments given to the `xterm' command."
-msgstr "`xterm'명령에 줄 인자"
-
-#. default groups
-#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "초점"
-
-#: ../lisp/sawfish/wm/custom.jl:483
-msgid "Move/Resize"
-msgstr "이동/크기조정"
-
-#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "외양"
-
-#: ../lisp/sawfish/wm/custom.jl:485
-msgid "Workspaces"
-msgstr "작업공간"
-
-#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
-msgid "Bindings"
-msgstr "바인딩"
-
-#: ../lisp/sawfish/wm/custom.jl:487
-#, fuzzy
-msgid "Mini/Maximizing"
-msgstr "최소화와 최대화"
-
-#: ../lisp/sawfish/wm/custom.jl:488
-msgid "Miscellaneous"
-msgstr "기타"
-
-#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "배치"
-
-#: ../lisp/sawfish/wm/ext/audio-events.jl:42
-msgid "Play sound effects for window events."
-msgstr "창 이벤트에 대하여 음향 효과 사용."
-
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
 msgstr "이벤트"
@@ -369,37 +208,21 @@ msgstr "이벤트"
 msgid "Audio file"
 msgstr "오디오 파일"
 
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
-msgid "Edge Flipping"
-msgstr "테두리 전환"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
-msgid "Select the next desktop when the pointer hits screen edge."
-msgstr "포인터가 화면 가장자리에 닿으면 다음 바탕화면을 선택"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
-msgid "Hitting the screen edge selects the next: \\w"
-msgstr "화면 가장자리에 마우스 포인트가 닿으면 다음 \\w 를 선택"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
-msgid "Only flip when interactively moving a window."
-msgstr "창을 직접 이동할 때에만 전환"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
-msgid "Milliseconds to delay before edge flipping."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:37
-msgid "Beep when errors occur."
-msgstr "오류가 발생하면 소리를 냅니다."
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:42
-msgid "Display error messages to: \\w"
-msgstr "오류 메세지를 표시할 곳: \\w"
-
 #: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "오류 없음."
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "배치"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "초점"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "외양"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -408,52 +231,6 @@ msgstr "상태"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "기타"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
-msgid "Shade Hover"
-msgstr "쉐이드 호버"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
-msgid "Enable shade-hover mode."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
-msgid "Delay in milliseconds before unshading windows."
-msgstr "창을 잠시 보여주기 전에 지연될 밀리 초."
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
-msgid "Raise windows when they are unshaded."
-msgstr "은둔 상태 해제시 창 올리기"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:52
-msgid "Display tooltips for window frames."
-msgstr "창 프레임에 대한 툴팁 보여주기"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:58
-msgid "Show full documentation in tooltips."
-msgstr "툴팁에서 전체 문서를 보여주기"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:64
-#, fuzzy
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "창을 잠시 보여주기 전에 지연될 밀리 초."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:70
-#, fuzzy
-msgid "Number of milliseconds before removing tooltips."
-msgstr "창을 잠시 보여주기 전에 지연될 밀리 초."
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:76
-msgid "Font used to display tooltips, or nil for default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:82
-msgid "Color used for the tooltips background"
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:88
-msgid "Color used for the tooltips foreground"
-msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -471,61 +248,9 @@ msgstr "속성 저장(_a)"
 msgid "_Forget saved state"
 msgstr "저장 상태 지움(_F)"
 
-#. customizations
-#: ../lisp/sawfish/wm/ext/window-history.jl:90
-msgid "History"
-msgstr "기록"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:93
-msgid "Automatically remember window positions."
-msgstr "창 위치 자동 기억"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:99
-msgid "Automatically remember window sizes."
-msgstr "창 크기 자동 기억"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:105
-msgid "Automatically remember other window attributes."
-msgstr "다른 창 속성 자동 기억"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:111
-msgid "Don't automatically remember details of transient windows."
-msgstr "임시창의 세부사항을 자동으로 기억하지 않음."
-
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "기록(_H)"
-
-#: ../lisp/sawfish/wm/focus.jl:48
-msgid "When does the mouse pointer affect the input focus."
-msgstr "마우스 포인터가 입력 초점에 영향을 줄 때는?"
-
-#: ../lisp/sawfish/wm/focus.jl:55
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr ""
-"마우스 클릭하여 창에 활성화하는 모드(Click-to-focus)는 응용 프로그램으로 클릭"
-"을 전달합니다."
-
-#: ../lisp/sawfish/wm/focus.jl:60
-#, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
-msgstr "창을 가장 아래로 쌓습니다."
-
-#: ../lisp/sawfish/wm/focus.jl:65
-msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
-
-#: ../lisp/sawfish/wm/frames.jl:136
-msgid "Default frame style:"
-msgstr "기본 프레임 스타일:"
-
-#: ../lisp/sawfish/wm/frames.jl:143
-msgid "Automatically reload themes when they are updated."
-msgstr "테마가 갱신되면 자동으로 다시 읽기"
-
-#: ../lisp/sawfish/wm/frames.jl:211
-msgid "Default font: \\w"
-msgstr "기본 글꼴: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -567,83 +292,6 @@ msgstr "그놈 웹 페이지..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "그놈은..."
-
-#: ../lisp/sawfish/wm/keymaps.jl:91
-msgid "Keymap containing bindings active anywhere."
-msgstr "모든 곳에서 작동하는 바인딩을 가진 키맵"
-
-#: ../lisp/sawfish/wm/keymaps.jl:104
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr "클라이언트 창이 초점 상태일 때만 작동하는 바인딩을 가진 키맵"
-
-#: ../lisp/sawfish/wm/keymaps.jl:112
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
-"(또는 창에 초점이 없을 때)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:122
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"포인터가 창의 제목에 있을 때 작동하는 바인딩을 가진 키맵\n"
-"(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:131
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"포인터가 창의 테두리에 있을 때 작동하는 바인딩을 가진 키맵\n"
-"(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:140
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"포인터가 닫기 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
-"(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:148
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"포인터가 아이콘화 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
-"(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:157
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"포인터가 최대화 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
-"(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:165
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"포인터가 메뉴 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
-"(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:172
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"포인터가 가리기 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
-"(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:181
-#, fuzzy
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "기본 창관리자 단축키에 사용되는 키 수정."
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -793,42 +441,6 @@ msgstr "모든 설정"
 msgid "Edit theme..."
 msgstr "테마 편집..."
 
-#: ../lisp/sawfish/wm/placement.jl:41
-msgid "Method of placing windows: \\w"
-msgstr "창위치를 정하는 방법: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:46
-msgid "Method of placing dialog windows: \\w"
-msgstr "대화창 위치를 정하는 방법: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:51
-msgid "Ignore program-specified window placements."
-msgstr ""
-
-#: ../lisp/sawfish/wm/placement/stagger.jl:34
-#, fuzzy
-msgid "Distance between successive placements in stagger mode."
-msgstr "`stagger' placement모드에 연속하는 placements사이의 거리."
-
-#. Each window will have a `depth' property--an integer, zero
-#. represents the level of normal windows, negative for windows below
-#. this level, and positive for windows above the normal level
-#: ../lisp/sawfish/wm/stacking.jl:58
-msgid "Stacking"
-msgstr "쌓기 수준"
-
-#: ../lisp/sawfish/wm/stacking.jl:61
-msgid "Keep transient windows stacked above: \\w"
-msgstr "임시 창을 위로 쌓습니다.: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:75
-msgid "Minimizing a window also removes its: \\w"
-msgstr "창을 최소화하면 그것의 \\w 도 제거합니다"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:80
-msgid "Unminimizing a window also restores its: \\w"
-msgstr "창 최소화를 해제하면 그것의 \\w 도 보이게 합니다"
-
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "고정(_S)"
@@ -854,21 +466,9 @@ msgstr "창 목록에(_w)"
 msgid "In _task list"
 msgstr "그놈 작업 목록에(_t)"
 
-#: ../lisp/sawfish/wm/state/maximize.jl:89
-msgid "Lock position and size while windows are maximized."
-msgstr "창을 최대화할 때 창 위치와 크기를 고정"
-
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "가림(_h)"
-
-#: ../lisp/sawfish/wm/state/transient.jl:48
-msgid "Focus on application windows when they first appear."
-msgstr "창이 처음 나타날 때 초점을 줍니다."
-
-#: ../lisp/sawfish/wm/util/display-window.jl:43
-msgid "Unshade selected windows."
-msgstr "선택한 창의 은둔 상태 해제"
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -881,15 +481,6 @@ msgstr "키를 누르십시오..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[쿼우트]"
-
-#: ../lisp/sawfish/wm/util/play-audio.jl:43
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr "오디오 샘플을 연주할 때 사용할 프로그램.  설정하지 않으면 ESD를 사용함"
-
-#: ../lisp/sawfish/wm/util/prompt.jl:63
-msgid "Keymap containing bindings active when reading a string from the user."
-msgstr "사용자로부터 문자열을 입력받을 때 작동하는 바인딩을 가진 키맵."
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -905,36 +496,6 @@ msgstr "작업공간 %d"
 msgid "Workspace:"
 msgstr "작업공간:"
 
-#: ../lisp/sawfish/wm/util/stacking.jl:45
-msgid "When raising a window, also raise its: \\w"
-msgstr "창이 보이게 되면 그것의 \\w 도 보이게 합니다"
-
-#. Virtual workspaces are implemented by moving windows in and out of
-#. the screen dimensions. E.g. moving to the left moves all windows one
-#. screen-width to the right.
-#: ../lisp/sawfish/wm/viewport.jl:53
-msgid "Viewport"
-msgstr "뷰포트"
-
-#: ../lisp/sawfish/wm/viewport.jl:56
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:62
-#, fuzzy
-msgid "Windows uniconify to the current viewport."
-msgstr "그룹을 현재 뷰포트로 이동"
-
-#: ../lisp/sawfish/wm/viewport.jl:67
-msgid ""
-"Number of steps in which to scroll between viewports (less steps = faster "
-"scrolling)."
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:73
-msgid "Wether to stop or wrap-around on first/last viewport"
-msgstr ""
-
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "열:"
@@ -943,53 +504,9 @@ msgstr "열:"
 msgid "Row:"
 msgstr "행:"
 
-#: ../lisp/sawfish/wm/windows.jl:73
-#, fuzzy
-msgid "Give focus to windows even when they haven't asked for it."
-msgstr "초점을 받으면 창 올림"
-
-#: ../lisp/sawfish/wm/windows.jl:77
-msgid "Warping"
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:80
-msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:85
-msgid "Wether to enable warping the cursor to windows."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:90
-msgid "Wether to not ignore avoided windows by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:95
-msgid "Wether to avoid any unspecified window by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:100
-msgid "Format to create unique window names."
-msgstr ""
-
-#: ../lisp/sawfish/wm/workspace.jl:122
-#, fuzzy
-msgid "How to act when passing the first or last workspace."
-msgstr "모든 작업공간을 포함하는 메뉴 보여주기"
-
-#: ../lisp/sawfish/wm/workspace.jl:127
-#, fuzzy
-msgid ""
-"How to act when passing the first or last workspace, while moving a window"
-msgstr "모든 작업공간을 포함하는 메뉴 보여주기"
-
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "작업공간 이름"
-
-#: ../lisp/sawfish/wm/workspace.jl:139
-msgid "Preserve outermost empty workspaces in the pager."
-msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 #, fuzzy
@@ -1040,6 +557,316 @@ msgstr "소피쉬는 윈도를 확장성있게 관리합니다."
 #: ../scripts/sawfish-about.jl.in:56
 msgid "Sawfish homepage"
 msgstr "소피쉬 홈페이지"
+
+#~ msgid "Window Cycling"
+#~ msgstr "창 순환"
+
+#~ msgid "Sound"
+#~ msgstr "사운드"
+
+#~ msgid "Matched Windows"
+#~ msgstr "일치하는 창"
+
+#~ msgid "Tooltips"
+#~ msgstr "툴팁"
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "창 확장과 축소"
+
+#, fuzzy
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "창을 다음 뷰포트로 이동"
+
+#, fuzzy
+#~ msgid "Whether to bump into fully obscured windows."
+#~ msgstr "창을 확장하거나 축소할때 완전히 어두운 창에 부딛힐 것인지 여부"
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr "창을 확대하거나 축소할때 무시된 창에 부딛힐 것인지 여부."
+
+#, fuzzy
+#~ msgid "Whether to bump into ignored windows."
+#~ msgstr "창을 확대하거나 축소할때 무시된 창에 부딛힐 것인지 여부."
+
+#, fuzzy
+#~ msgid "Number of pixels to move pointer in."
+#~ msgstr "`move-cursor-' 명령에서 포인터를 옮길 픽셀 수"
+
+#, fuzzy
+#~ msgid "How windows being moved are animated"
+#~ msgstr "은둔 상태 해제시 창 올리기"
+
+#, fuzzy
+#~ msgid "How windows being resized are animated"
+#~ msgstr "은둔 상태 해제시 창 올리기"
+
+#, fuzzy
+#~ msgid "Raise windows when they are moved or resized."
+#~ msgstr "초점을 받으면 창 올림"
+
+#~ msgid "Show current position of windows while moving."
+#~ msgstr "사용자가 창을 옮길 때 현재 위치 표시하기"
+
+#~ msgid "Show current dimensions of windows while resizing."
+#~ msgstr "사용자가 크기조정하는 동안 현재 크기 표시하기"
+
+#, fuzzy
+#~ msgid "How to choose window edges when resizing."
+#~ msgstr "사용자가 크기조정하는 동안 현재 크기 표시하기"
+
+#~ msgid "Display window names and icons while cycling through windows."
+#~ msgstr "창 순환 중 창 이름과 아이콘 표시하기"
+
+#~ msgid "Include iconified windows when cycling."
+#~ msgstr "순환 중 아이콘화된 창 포함하기"
+
+#~ msgid "Include windows on all workspaces when cycling."
+#~ msgstr "순환 중 모든 작업공간의 창 포함하기"
+
+#~ msgid "Include windows on all viewports when cycling."
+#~ msgstr "순환 중 모든 뷰포트의 창 포함하기"
+
+#, fuzzy
+#~ msgid "Raise windows while they're temporarily selected during cycling."
+#~ msgstr "초점을 받으면 창 올림"
+
+#~ msgid ""
+#~ "Keymap containing bindings active only during window cycling operations."
+#~ msgstr "클라이언트 창이 초점 상태일 때만 작동하는 바인딩을 가진 키맵"
+
+#~ msgid "The program launched by the `xterm' command."
+#~ msgstr "`xterm'명령으로 실행할 프로그램"
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "`xterm'명령에 줄 인자"
+
+#~ msgid "Move/Resize"
+#~ msgstr "이동/크기조정"
+
+#~ msgid "Workspaces"
+#~ msgstr "작업공간"
+
+#~ msgid "Bindings"
+#~ msgstr "바인딩"
+
+#, fuzzy
+#~ msgid "Mini/Maximizing"
+#~ msgstr "최소화와 최대화"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "기타"
+
+#~ msgid "Play sound effects for window events."
+#~ msgstr "창 이벤트에 대하여 음향 효과 사용."
+
+#~ msgid "Edge Flipping"
+#~ msgstr "테두리 전환"
+
+#~ msgid "Select the next desktop when the pointer hits screen edge."
+#~ msgstr "포인터가 화면 가장자리에 닿으면 다음 바탕화면을 선택"
+
+#~ msgid "Hitting the screen edge selects the next: \\w"
+#~ msgstr "화면 가장자리에 마우스 포인트가 닿으면 다음 \\w 를 선택"
+
+#~ msgid "Only flip when interactively moving a window."
+#~ msgstr "창을 직접 이동할 때에만 전환"
+
+#~ msgid "Beep when errors occur."
+#~ msgstr "오류가 발생하면 소리를 냅니다."
+
+#~ msgid "Display error messages to: \\w"
+#~ msgstr "오류 메세지를 표시할 곳: \\w"
+
+#~ msgid "Shade Hover"
+#~ msgstr "쉐이드 호버"
+
+#~ msgid "Delay in milliseconds before unshading windows."
+#~ msgstr "창을 잠시 보여주기 전에 지연될 밀리 초."
+
+#~ msgid "Raise windows when they are unshaded."
+#~ msgstr "은둔 상태 해제시 창 올리기"
+
+#~ msgid "Display tooltips for window frames."
+#~ msgstr "창 프레임에 대한 툴팁 보여주기"
+
+#~ msgid "Show full documentation in tooltips."
+#~ msgstr "툴팁에서 전체 문서를 보여주기"
+
+#, fuzzy
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "창을 잠시 보여주기 전에 지연될 밀리 초."
+
+#, fuzzy
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "창을 잠시 보여주기 전에 지연될 밀리 초."
+
+#~ msgid "History"
+#~ msgstr "기록"
+
+#~ msgid "Automatically remember window positions."
+#~ msgstr "창 위치 자동 기억"
+
+#~ msgid "Automatically remember window sizes."
+#~ msgstr "창 크기 자동 기억"
+
+#~ msgid "Automatically remember other window attributes."
+#~ msgstr "다른 창 속성 자동 기억"
+
+#~ msgid "Don't automatically remember details of transient windows."
+#~ msgstr "임시창의 세부사항을 자동으로 기억하지 않음."
+
+#~ msgid "When does the mouse pointer affect the input focus."
+#~ msgstr "마우스 포인터가 입력 초점에 영향을 줄 때는?"
+
+#~ msgid "Click-to-focus mode passes the click through to the application."
+#~ msgstr ""
+#~ "마우스 클릭하여 창에 활성화하는 모드(Click-to-focus)는 응용 프로그램으로 "
+#~ "클릭을 전달합니다."
+
+#, fuzzy
+#~ msgid "Wether focusing a window doesn't change it's position in the stack."
+#~ msgstr "창을 가장 아래로 쌓습니다."
+
+#~ msgid "Default frame style:"
+#~ msgstr "기본 프레임 스타일:"
+
+#~ msgid "Automatically reload themes when they are updated."
+#~ msgstr "테마가 갱신되면 자동으로 다시 읽기"
+
+#~ msgid "Default font: \\w"
+#~ msgstr "기본 글꼴: \\w"
+
+#~ msgid "Keymap containing bindings active anywhere."
+#~ msgstr "모든 곳에서 작동하는 바인딩을 가진 키맵"
+
+#~ msgid "Keymap containing bindings active when a client window is focused."
+#~ msgstr "클라이언트 창이 초점 상태일 때만 작동하는 바인딩을 가진 키맵"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the root window\n"
+#~ "(or when no window is focused)."
+#~ msgstr ""
+#~ "포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
+#~ "(또는 창에 초점이 없을 때)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "포인터가 창의 제목에 있을 때 작동하는 바인딩을 가진 키맵\n"
+#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "포인터가 창의 테두리에 있을 때 작동하는 바인딩을 가진 키맵\n"
+#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "포인터가 닫기 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
+#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "포인터가 아이콘화 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
+#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "포인터가 최대화 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
+#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "포인터가 메뉴 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
+#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "포인터가 가리기 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
+#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
+
+#, fuzzy
+#~ msgid "Modifier key(s) used for default shortcuts."
+#~ msgstr "기본 창관리자 단축키에 사용되는 키 수정."
+
+#~ msgid "Method of placing windows: \\w"
+#~ msgstr "창위치를 정하는 방법: \\w"
+
+#~ msgid "Method of placing dialog windows: \\w"
+#~ msgstr "대화창 위치를 정하는 방법: \\w"
+
+#, fuzzy
+#~ msgid "Distance between successive placements in stagger mode."
+#~ msgstr "`stagger' placement모드에 연속하는 placements사이의 거리."
+
+#~ msgid "Stacking"
+#~ msgstr "쌓기 수준"
+
+#~ msgid "Keep transient windows stacked above: \\w"
+#~ msgstr "임시 창을 위로 쌓습니다.: \\w"
+
+#~ msgid "Minimizing a window also removes its: \\w"
+#~ msgstr "창을 최소화하면 그것의 \\w 도 제거합니다"
+
+#~ msgid "Unminimizing a window also restores its: \\w"
+#~ msgstr "창 최소화를 해제하면 그것의 \\w 도 보이게 합니다"
+
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr "창을 최대화할 때 창 위치와 크기를 고정"
+
+#~ msgid "Focus on application windows when they first appear."
+#~ msgstr "창이 처음 나타날 때 초점을 줍니다."
+
+#~ msgid "Unshade selected windows."
+#~ msgstr "선택한 창의 은둔 상태 해제"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "오디오 샘플을 연주할 때 사용할 프로그램.  설정하지 않으면 ESD를 사용함"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when reading a string from the user."
+#~ msgstr "사용자로부터 문자열을 입력받을 때 작동하는 바인딩을 가진 키맵."
+
+#~ msgid "When raising a window, also raise its: \\w"
+#~ msgstr "창이 보이게 되면 그것의 \\w 도 보이게 합니다"
+
+#~ msgid "Viewport"
+#~ msgstr "뷰포트"
+
+#, fuzzy
+#~ msgid "Windows uniconify to the current viewport."
+#~ msgstr "그룹을 현재 뷰포트로 이동"
+
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "초점을 받으면 창 올림"
+
+#, fuzzy
+#~ msgid "How to act when passing the first or last workspace."
+#~ msgstr "모든 작업공간을 포함하는 메뉴 보여주기"
+
+#, fuzzy
+#~ msgid ""
+#~ "How to act when passing the first or last workspace, while moving a window"
+#~ msgstr "모든 작업공간을 포함하는 메뉴 보여주기"
 
 #~ msgid "Crux Theme"
 #~ msgstr "Crux 테마"

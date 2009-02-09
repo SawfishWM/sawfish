@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.HEAD.ne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-01 23:36+0100\n"
+"POT-Creation-Date: 2009-02-09 10:44+0100\n"
 "PO-Revision-Date: 2006-06-16 15:32+0545\n"
 "Last-Translator: Mahesh subedi <submanesh@hotmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -167,29 +167,6 @@ msgstr "होइन"
 msgid "Match Window Properties"
 msgstr "सञ्झ्याल गुण मिलाउनुहोस्"
 
-#. customization options
-#. ###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-#: ../lisp/sawfish/wm/autoload.jl:119
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:100
-msgid "Window Cycling"
-msgstr "सञ्झ्याल चक्कर"
-
-#: ../lisp/sawfish/wm/autoload.jl:132
-#: ../lisp/sawfish/wm/ext/audio-events.jl:36
-msgid "Sound"
-msgstr "ध्वनि"
-
-#. ###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
-#: ../lisp/sawfish/wm/autoload.jl:133
-#: ../lisp/sawfish/wm/ext/match-window.jl:138
-msgid "Matched Windows"
-msgstr "मिलेको सञ्झ्यालहरू"
-
-#. ###autoload (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
-#: ../lisp/sawfish/wm/autoload.jl:134 ../lisp/sawfish/wm/ext/tooltips.jl:47
-msgid "Tooltips"
-msgstr "औजार टिपहरू"
-
 #: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
@@ -199,37 +176,6 @@ msgstr "अनुक्रमणिका:"
 #: ../lisp/sawfish/wm/commands.jl:365
 msgid "Command:"
 msgstr "आदेश:"
-
-#. Customization options.
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:64
-msgid "Growing and packing of windows"
-msgstr "सञ्झ्यालको वृद्धि हुदै र प्याकिङ गर्दै"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:67
-msgid "Whether growing is considered to be maximization."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:72
-#, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "सञ्झ्याललाई अघिल्लो दृश्यकेन्द्रमा सार्नुहोस्"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:77
-#, fuzzy
-msgid "Whether to bump into fully obscured windows."
-msgstr ""
-"सञ्झ्यालहरू बढ्दै गरेको र प्याकिङ गरेको बेलामा पूर्णरूपले अस्पष्ट सञ्झ्यालहरूमा\n"
-"बम्प गर्ने कि।"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:82
-#, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr "बढ्दै गरेको वा प्याकिङ गरेको बेलामा उपेक्षित सञ्झ्यालहरूमा बम्प गर्ने कि।"
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:87
-#, fuzzy
-msgid "Whether to bump into ignored windows."
-msgstr "बढ्दै गरेको वा प्याकिङ गरेको बेलामा उपेक्षित सञ्झ्यालहरूमा बम्प गर्ने कि।"
 
 #: ../lisp/sawfish/wm/commands/grow-pack.jl:155
 msgid "Grow left"
@@ -263,117 +209,6 @@ msgstr "माथी प्याक गर्नुहोस्"
 msgid "Pack down"
 msgstr "तल प्याक गर्नुहोस्"
 
-#: ../lisp/sawfish/wm/commands/move-cursor.jl:33
-#, fuzzy
-msgid "Number of pixels to move pointer in."
-msgstr "पिक्सेलका सङ्ख्याहरू, सूचकलाई 'क्रसर-चलाउनुहोस्-'आदेशमा लेजानका लागि"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:53
-#, fuzzy
-msgid "How windows being moved are animated"
-msgstr "तिनिहरू अनसेड भएको बेलामा सञ्झ्यालहरू बढाउनुहोस्।"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:58
-#, fuzzy
-msgid "How windows being resized are animated"
-msgstr "तिनिहरू अनसेड भएको बेलामा सञ्झ्यालहरू बढाउनुहोस्।"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:63
-#, fuzzy
-msgid "Raise windows when they are moved or resized."
-msgstr "फोकस गरिएको बेलामा सञ्झ्याललाई बढाउनुहोस्।"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:68
-msgid "Show current position of windows while moving."
-msgstr "सरिरेहको बेलामा, सञ्झ्यालजको चालु अवस्था देखाउनुहोस्"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:73
-msgid "Show current dimensions of windows while resizing."
-msgstr "साइज मिलाएको बेलामा, सञ्झ्यालको चालु आयामिकहरू देखाउनुहोस्"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:78
-#, fuzzy
-msgid "How to choose window edges when resizing."
-msgstr "साइज मिलाएको बेलामा, सञ्झ्यालको चालु आयामिकहरू देखाउनुहोस्"
-
-#: ../lisp/sawfish/wm/commands/move-resize.jl:83
-msgid "Distance in pixels before window edges align with each other."
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:103
-msgid "Display window names and icons while cycling through windows."
-msgstr "सञ्झ्यालहरूबाट घुमिरहेको बेलामा सञ्झ्याल नामहरू र प्रतिमाहरू प्रदर्शन गर्नुहोस्।"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:108
-msgid "Include iconified windows when cycling."
-msgstr "घुमिरहेको बेलामा प्रतिमित सञ्झ्यालहरूलाई समावेस गराउनुहोस्।"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:113
-msgid "Include windows on all workspaces when cycling."
-msgstr "घुमिरहेको बेलामा सञ्झ्यालहरूलाई सबै कार्यस्थानहरूमा समावेस गराउनुहोस्।"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:118
-msgid "Include windows on all viewports when cycling."
-msgstr "घुमिरहेको बेलामा सञ्झ्यालहरूलाई सबै दृश्यबिन्दुहरूमा समावेस गराउनुहोस्।"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:123
-#, fuzzy
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "फोकस गरिएको बेलामा सञ्झ्याललाई बढाउनुहोस्।"
-
-#: ../lisp/sawfish/wm/commands/x-cycle.jl:128
-msgid ""
-"Keymap containing bindings active only during window cycling operations."
-msgstr ""
-"कुञ्जीमानचित्र भएको बाइन्डिङ्गहरू सक्रिय हुन्छन् जुन बेला मात्र सञ्झ्याल घुम्ने कामहरू भइरहेको "
-"हुन्छ।"
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:34
-msgid "The program launched by the `xterm' command."
-msgstr "यो कार्यक्रम 'एक्सटर्म'आदेशवाट सुरु गरिएको हो"
-
-#: ../lisp/sawfish/wm/commands/xterm.jl:39
-msgid "Arguments given to the `xterm' command."
-msgstr "'एक्सटर्म'आदेशका लागि दिइएको तर्क"
-
-#. default groups
-#: ../lisp/sawfish/wm/custom.jl:482 ../lisp/sawfish/wm/ext/match-window.jl:81
-msgid "Focus"
-msgstr "फोकस"
-
-#: ../lisp/sawfish/wm/custom.jl:483
-msgid "Move/Resize"
-msgstr "सार्नुहोस्/रिसाइज गर्नुहोस्"
-
-#: ../lisp/sawfish/wm/custom.jl:484 ../lisp/sawfish/wm/ext/match-window.jl:87
-msgid "Appearance"
-msgstr "देखावट"
-
-#: ../lisp/sawfish/wm/custom.jl:485
-msgid "Workspaces"
-msgstr "कार्यक्षेत्रहरू"
-
-#: ../lisp/sawfish/wm/custom.jl:486 ../lisp/sawfish/wm/keymaps.jl:32
-msgid "Bindings"
-msgstr "बाइन्डिङ्ग"
-
-#: ../lisp/sawfish/wm/custom.jl:487
-#, fuzzy
-msgid "Mini/Maximizing"
-msgstr "न्युनतम गर्दै र अधिकतम गर्दै"
-
-#: ../lisp/sawfish/wm/custom.jl:488
-msgid "Miscellaneous"
-msgstr "विविध"
-
-#: ../lisp/sawfish/wm/custom.jl:489 ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "राख्नुहोस्"
-
-#: ../lisp/sawfish/wm/ext/audio-events.jl:42
-msgid "Play sound effects for window events."
-msgstr "सञ्झ्याल घटनाहरूका लागि आवाज असरहरू प्ले गर्नुहोस्।"
-
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
 msgstr "घटना"
@@ -382,37 +217,21 @@ msgstr "घटना"
 msgid "Audio file"
 msgstr "अडियो फाइल"
 
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:45
-msgid "Edge Flipping"
-msgstr "किनारा फ्लिपिङ्"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:50
-msgid "Select the next desktop when the pointer hits screen edge."
-msgstr "दृश्य किनारालाई सूचकले हानेको बेला अघिल्लो डेस्कटप चयन गर्नुहोस्।"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:57
-msgid "Hitting the screen edge selects the next: \\w"
-msgstr "पर्दाको किनारामा हानेको बेला अघिल्लो : \\w चयन गर्नुहोस्"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:63
-msgid "Only flip when interactively moving a window."
-msgstr "सञ्झ्याल अन्तर्क्रियात्मक तरिकाले चलेमा मात्र फ्लिप हुन्छ।"
-
-#: ../lisp/sawfish/wm/ext/edge-flip.jl:70
-msgid "Milliseconds to delay before edge flipping."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:37
-msgid "Beep when errors occur."
-msgstr "त्रुटिहरू भएको बेलामा बिप हुन्छ।"
-
-#: ../lisp/sawfish/wm/ext/error-handler.jl:42
-msgid "Display error messages to: \\w"
-msgstr ": \\w लाई त्रुटि सन्देशहरू प्रदर्शन गर्नुहोस्"
-
 #: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
 msgstr "कुनै त्रुटिहरू छैन"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:70
+msgid "Placement"
+msgstr "राख्नुहोस्"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:81
+msgid "Focus"
+msgstr "फोकस"
+
+#: ../lisp/sawfish/wm/ext/match-window.jl:87
+msgid "Appearance"
+msgstr "देखावट"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:90
 msgid "State"
@@ -421,52 +240,6 @@ msgstr "स्थिति"
 #: ../lisp/sawfish/wm/ext/match-window.jl:102
 msgid "Other"
 msgstr "अन्य"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:34
-msgid "Shade Hover"
-msgstr "छायाँ होभर"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:39
-msgid "Enable shade-hover mode."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:46
-msgid "Delay in milliseconds before unshading windows."
-msgstr "सञ्झ्यालहरू छायाँरहित गर्नुभन्दा पहिले मिलिसेकेण्डमा ढिलो गर्नुहोस्।"
-
-#: ../lisp/sawfish/wm/ext/shade-hover.jl:52
-msgid "Raise windows when they are unshaded."
-msgstr "तिनिहरू अनसेड भएको बेलामा सञ्झ्यालहरू बढाउनुहोस्।"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:52
-msgid "Display tooltips for window frames."
-msgstr "सञ्झ्याल फ्रेमहरूका लागि उपकरण टिपहरू प्रदर्शन गर्नुहोस्।"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:58
-msgid "Show full documentation in tooltips."
-msgstr "उपकरण टिपहरूमा सम्पूर्ण मिसिलिकरण देखाउनुहोस्"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:64
-#, fuzzy
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "सञ्झ्यालहरू छायाँरहित गर्नुभन्दा पहिले मिलिसेकेण्डमा ढिलो गर्नुहोस्।"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:70
-#, fuzzy
-msgid "Number of milliseconds before removing tooltips."
-msgstr "सञ्झ्यालहरू छायाँरहित गर्नुभन्दा पहिले मिलिसेकेण्डमा ढिलो गर्नुहोस्।"
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:76
-msgid "Font used to display tooltips, or nil for default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:82
-msgid "Color used for the tooltips background"
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/tooltips.jl:88
-msgid "Color used for the tooltips foreground"
-msgstr ""
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
@@ -484,59 +257,9 @@ msgstr "गुण सम्झिनुहोस्"
 msgid "_Forget saved state"
 msgstr "बचत गरिएको अवस्था बिर्सनुहोस्"
 
-#. customizations
-#: ../lisp/sawfish/wm/ext/window-history.jl:90
-msgid "History"
-msgstr "इतिहास"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:93
-msgid "Automatically remember window positions."
-msgstr "सञ्झ्याल अवस्थाहरूलाई स्वत: सम्झिनुहोस्।"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:99
-msgid "Automatically remember window sizes."
-msgstr "सञ्झ्याल साइजलाई स्वत: सम्झिनुहोस्।"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:105
-msgid "Automatically remember other window attributes."
-msgstr "अरू सञ्झ्यालको गुणलाई स्वत: सम्झिनुहोस्।"
-
-#: ../lisp/sawfish/wm/ext/window-history.jl:111
-msgid "Don't automatically remember details of transient windows."
-msgstr "अस्थिर सञ्झ्यालहरूको विवरण स्वत: तरिकाले नसम्झिनुहोस्।"
-
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
 msgstr "ईतिहास"
-
-#: ../lisp/sawfish/wm/focus.jl:48
-msgid "When does the mouse pointer affect the input focus."
-msgstr "माउस सूचकले आगत फोकसमा कति बेला असर गर्दछ"
-
-#: ../lisp/sawfish/wm/focus.jl:55
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "फोकस अवस्थामा क्लिक गर्नाले अनुप्रयोगद्वारा क्लिक गर्नेमा पठाउँछ"
-
-#: ../lisp/sawfish/wm/focus.jl:60
-#, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
-msgstr "एकल सञ्झ्याललाई तल निर्धारण गरिएको ठाउमा वढाउने क्रममा सार्नुहोस्"
-
-#: ../lisp/sawfish/wm/focus.jl:65
-msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
-
-#: ../lisp/sawfish/wm/frames.jl:136
-msgid "Default frame style:"
-msgstr "पूर्वनिर्धारित फ्रेम शैली"
-
-#: ../lisp/sawfish/wm/frames.jl:143
-msgid "Automatically reload themes when they are updated."
-msgstr "स्वाचालित तरिकाले पुन: लोड विषयवस्तुहरू जब तिनिहरू अद्यावधिक गरिन्छन्"
-
-#: ../lisp/sawfish/wm/frames.jl:211
-msgid "Default font: \\w"
-msgstr "पूर्वनिर्धारित फन्ट: \\w"
 
 #: ../lisp/sawfish/wm/frames.jl:512
 msgid "Default"
@@ -578,89 +301,6 @@ msgstr "जिनोम WWW..."
 #: ../lisp/sawfish/wm/gnome/integration.jl:66
 msgid "About GNOME..."
 msgstr "जिनोमका बारेमा..."
-
-#: ../lisp/sawfish/wm/keymaps.jl:91
-msgid "Keymap containing bindings active anywhere."
-msgstr "बाइन्डिङ कुञ्जीमानचित्रहरू जहाँ पनि सक्रिय"
-
-#: ../lisp/sawfish/wm/keymaps.jl:104
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr "जव एउटा ग्राहक सञ्झ्याललाई फोकस गरिन्छ, बाइन्डिङ कुञ्जीमानचित्रहरू सक्रिय हुन्छन्"
-
-#: ../lisp/sawfish/wm/keymaps.jl:112
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"जव सूचक मूल सञ्झ्यालमा हुन्छ, बाइन्डिङ्गका कुञ्जीमानचित्रहरू सक्रिय हुन्छन्\n"
-"(अथवा कुनै पनि सञ्झ्याल फोकस गरिएको हुँदैछन्)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:122
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"जव सूचक \n"
-"सञ्झ्यालको शीर्षकमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्रहरू सक्रिय हुन्छन् (अथवा कुनै पनि सञ्झ्याल "
-"फोकस गरिएको हुँदैछन्। (यो नक्सामा माउस बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्.)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:131
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"जव सूचक \n"
-" सञ्झ्यालको किनारमा हुन्छ,बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
-"बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:140
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"जव सूचक \n"
-"बटनको बन्द गर्नुस सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
-"बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:148
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"जव सूचक प्रतिमित \n"
-"बटनको सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
-"बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:157
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"जव सूचक सञ्झ्यालको बढाउनुस् \n"
-"बटनमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन्(यो नक्सामा माउस बाइन्डिङ्गहरू मात्र "
-"मूल्याङ्कन् गरिन्छन्।)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:165
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"जव सूचक \n"
-"मेनुबटनको सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
-"बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:172
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"जव सूचक \n"
-"बटनको सेड द गर्नुस सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
-"बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
-
-#: ../lisp/sawfish/wm/keymaps.jl:181
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "पूर्वनिर्धारित सर्टकटहरूका लागि प्रयोग गरिएको परिमार्जन कुञ्जी(हरू)"
 
 #: ../lisp/sawfish/wm/menus.jl:86
 #, fuzzy
@@ -807,42 +447,6 @@ msgstr "सबै सेटिङ"
 msgid "Edit theme..."
 msgstr "विषयवस्तु सम्पादन..."
 
-#: ../lisp/sawfish/wm/placement.jl:41
-msgid "Method of placing windows: \\w"
-msgstr "सञ्झ्यालहरू राख्ने विधि: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:46
-msgid "Method of placing dialog windows: \\w"
-msgstr "संवाद सञ्झ्यालहरू राख्ने तरिका: \\w"
-
-#: ../lisp/sawfish/wm/placement.jl:51
-msgid "Ignore program-specified window placements."
-msgstr ""
-
-#: ../lisp/sawfish/wm/placement/stagger.jl:34
-#, fuzzy
-msgid "Distance between successive placements in stagger mode."
-msgstr "सफल स्थापनामा 'स्ट्यागर' स्थापना अवस्था विचको दुरि"
-
-#. Each window will have a `depth' property--an integer, zero
-#. represents the level of normal windows, negative for windows below
-#. this level, and positive for windows above the normal level
-#: ../lisp/sawfish/wm/stacking.jl:58
-msgid "Stacking"
-msgstr "थाक गर्दै"
-
-#: ../lisp/sawfish/wm/stacking.jl:61
-msgid "Keep transient windows stacked above: \\w"
-msgstr "अस्थायी सञ्झ्यालहरूलाई धेरै माथि राख्नुहोस्: \\w"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:75
-msgid "Minimizing a window also removes its: \\w"
-msgstr "सञ्झ्याल घटाईले यसको \\w पनि हटाउछ"
-
-#: ../lisp/sawfish/wm/state/iconify.jl:80
-msgid "Unminimizing a window also restores its: \\w"
-msgstr "सञ्झ्याल नघटाईनुले पनि यसको \\w लाई पूर्वावस्थामा ल्याउने गर्दछ"
-
 #: ../lisp/sawfish/wm/state/iconify.jl:256
 msgid "_Sticky"
 msgstr "टाँसिने"
@@ -868,21 +472,9 @@ msgstr "सञ्झ्याल सूचीमा"
 msgid "In _task list"
 msgstr "जिनोम कार्यसूची मा"
 
-#: ../lisp/sawfish/wm/state/maximize.jl:89
-msgid "Lock position and size while windows are maximized."
-msgstr "सञ्झ्यालहरूको साइज ठूलो पारेको बेलामा, स्थिति र साइजलाई ताल्चा लगाउनुहोस्"
-
 #: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "छायाँ पारिएको"
-
-#: ../lisp/sawfish/wm/state/transient.jl:48
-msgid "Focus on application windows when they first appear."
-msgstr "जव सञ्झ्याल पहिलो पटक देखिन्छन्, अनुप्रयोगमा फोकस गर्नुहोस्।"
-
-#: ../lisp/sawfish/wm/util/display-window.jl:43
-msgid "Unshade selected windows."
-msgstr "चयन गरिएको सञ्झ्यालहरूको छायाँ हटाउनुहोस्।"
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
@@ -895,15 +487,6 @@ msgstr "कुञ्जी थिच्नुहोस्..."
 #: ../lisp/sawfish/wm/util/keymap.jl:198
 msgid "[Quote]"
 msgstr "[उद्धरण]"
-
-#: ../lisp/sawfish/wm/util/play-audio.jl:43
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr "अडियो कार्यक्रमको नमूना चलाउन यदि नमिलेमा पुर्व निर्मित ESD मद्दत प्रयोग हुन्छ।"
-
-#: ../lisp/sawfish/wm/util/prompt.jl:63
-msgid "Keymap containing bindings active when reading a string from the user."
-msgstr "प्रयोगकर्ता बाट स्ट्रीङ पढेको बेला कुञ्जीमानचित्र भएको वाईन्डिङ सक्रिय हुन्छ।"
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
@@ -919,36 +502,6 @@ msgstr "%d कार्यक्षेत्र"
 msgid "Workspace:"
 msgstr "कार्यक्षेत्र:"
 
-#: ../lisp/sawfish/wm/util/stacking.jl:45
-msgid "When raising a window, also raise its: \\w"
-msgstr "सञ्झ्याल उठाएको बेलामा यसको: \\w पनि उठाउनुहोस्"
-
-#. Virtual workspaces are implemented by moving windows in and out of
-#. the screen dimensions. E.g. moving to the left moves all windows one
-#. screen-width to the right.
-#: ../lisp/sawfish/wm/viewport.jl:53
-msgid "Viewport"
-msgstr "दृश्यबिन्दु"
-
-#: ../lisp/sawfish/wm/viewport.jl:56
-msgid "Number of columns and rows in each virtual workspace: \\w"
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:62
-#, fuzzy
-msgid "Windows uniconify to the current viewport."
-msgstr "चालु दृश्यकेन्द्रमा समूह सार्नुहोस्"
-
-#: ../lisp/sawfish/wm/viewport.jl:67
-msgid ""
-"Number of steps in which to scroll between viewports (less steps = faster "
-"scrolling)."
-msgstr ""
-
-#: ../lisp/sawfish/wm/viewport.jl:73
-msgid "Wether to stop or wrap-around on first/last viewport"
-msgstr ""
-
 #: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
 msgid "Column:"
 msgstr "स्तम्भ:"
@@ -957,53 +510,9 @@ msgstr "स्तम्भ:"
 msgid "Row:"
 msgstr "पङ्क्ति:"
 
-#: ../lisp/sawfish/wm/windows.jl:73
-#, fuzzy
-msgid "Give focus to windows even when they haven't asked for it."
-msgstr "फोकस गरिएको बेलामा सञ्झ्याललाई बढाउनुहोस्।"
-
-#: ../lisp/sawfish/wm/windows.jl:77
-msgid "Warping"
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:80
-msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:85
-msgid "Wether to enable warping the cursor to windows."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:90
-msgid "Wether to not ignore avoided windows by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:95
-msgid "Wether to avoid any unspecified window by default."
-msgstr ""
-
-#: ../lisp/sawfish/wm/windows.jl:100
-msgid "Format to create unique window names."
-msgstr ""
-
-#: ../lisp/sawfish/wm/workspace.jl:122
-#, fuzzy
-msgid "How to act when passing the first or last workspace."
-msgstr "सम्पूर्ण कार्यक्षेत्र समाविष्ट मेनु देखाउनुहोस्"
-
-#: ../lisp/sawfish/wm/workspace.jl:127
-#, fuzzy
-msgid ""
-"How to act when passing the first or last workspace, while moving a window"
-msgstr "सम्पूर्ण कार्यक्षेत्र समाविष्ट मेनु देखाउनुहोस्"
-
 #: ../lisp/sawfish/wm/workspace.jl:133
 msgid "Workspace names"
 msgstr "कार्यक्षेत्रको नाम"
-
-#: ../lisp/sawfish/wm/workspace.jl:139
-msgid "Preserve outermost empty workspaces in the pager."
-msgstr ""
 
 #: ../lisp/sawfish/wm/workspace.jl:150
 msgid "_Insert workspace"
@@ -1049,6 +558,325 @@ msgstr "सफिसले तपाईँको सञ्झ्यालला�
 #: ../scripts/sawfish-about.jl.in:56
 msgid "Sawfish homepage"
 msgstr "सफिस मुख्य पाना"
+
+#~ msgid "Window Cycling"
+#~ msgstr "सञ्झ्याल चक्कर"
+
+#~ msgid "Sound"
+#~ msgstr "ध्वनि"
+
+#~ msgid "Matched Windows"
+#~ msgstr "मिलेको सञ्झ्यालहरू"
+
+#~ msgid "Tooltips"
+#~ msgstr "औजार टिपहरू"
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "सञ्झ्यालको वृद्धि हुदै र प्याकिङ गर्दै"
+
+#, fuzzy
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "सञ्झ्याललाई अघिल्लो दृश्यकेन्द्रमा सार्नुहोस्"
+
+#, fuzzy
+#~ msgid "Whether to bump into fully obscured windows."
+#~ msgstr ""
+#~ "सञ्झ्यालहरू बढ्दै गरेको र प्याकिङ गरेको बेलामा पूर्णरूपले अस्पष्ट सञ्झ्यालहरूमा\n"
+#~ "बम्प गर्ने कि।"
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr "बढ्दै गरेको वा प्याकिङ गरेको बेलामा उपेक्षित सञ्झ्यालहरूमा बम्प गर्ने कि।"
+
+#, fuzzy
+#~ msgid "Whether to bump into ignored windows."
+#~ msgstr "बढ्दै गरेको वा प्याकिङ गरेको बेलामा उपेक्षित सञ्झ्यालहरूमा बम्प गर्ने कि।"
+
+#, fuzzy
+#~ msgid "Number of pixels to move pointer in."
+#~ msgstr "पिक्सेलका सङ्ख्याहरू, सूचकलाई 'क्रसर-चलाउनुहोस्-'आदेशमा लेजानका लागि"
+
+#, fuzzy
+#~ msgid "How windows being moved are animated"
+#~ msgstr "तिनिहरू अनसेड भएको बेलामा सञ्झ्यालहरू बढाउनुहोस्।"
+
+#, fuzzy
+#~ msgid "How windows being resized are animated"
+#~ msgstr "तिनिहरू अनसेड भएको बेलामा सञ्झ्यालहरू बढाउनुहोस्।"
+
+#, fuzzy
+#~ msgid "Raise windows when they are moved or resized."
+#~ msgstr "फोकस गरिएको बेलामा सञ्झ्याललाई बढाउनुहोस्।"
+
+#~ msgid "Show current position of windows while moving."
+#~ msgstr "सरिरेहको बेलामा, सञ्झ्यालजको चालु अवस्था देखाउनुहोस्"
+
+#~ msgid "Show current dimensions of windows while resizing."
+#~ msgstr "साइज मिलाएको बेलामा, सञ्झ्यालको चालु आयामिकहरू देखाउनुहोस्"
+
+#, fuzzy
+#~ msgid "How to choose window edges when resizing."
+#~ msgstr "साइज मिलाएको बेलामा, सञ्झ्यालको चालु आयामिकहरू देखाउनुहोस्"
+
+#~ msgid "Display window names and icons while cycling through windows."
+#~ msgstr "सञ्झ्यालहरूबाट घुमिरहेको बेलामा सञ्झ्याल नामहरू र प्रतिमाहरू प्रदर्शन गर्नुहोस्।"
+
+#~ msgid "Include iconified windows when cycling."
+#~ msgstr "घुमिरहेको बेलामा प्रतिमित सञ्झ्यालहरूलाई समावेस गराउनुहोस्।"
+
+#~ msgid "Include windows on all workspaces when cycling."
+#~ msgstr "घुमिरहेको बेलामा सञ्झ्यालहरूलाई सबै कार्यस्थानहरूमा समावेस गराउनुहोस्।"
+
+#~ msgid "Include windows on all viewports when cycling."
+#~ msgstr "घुमिरहेको बेलामा सञ्झ्यालहरूलाई सबै दृश्यबिन्दुहरूमा समावेस गराउनुहोस्।"
+
+#, fuzzy
+#~ msgid "Raise windows while they're temporarily selected during cycling."
+#~ msgstr "फोकस गरिएको बेलामा सञ्झ्याललाई बढाउनुहोस्।"
+
+#~ msgid ""
+#~ "Keymap containing bindings active only during window cycling operations."
+#~ msgstr ""
+#~ "कुञ्जीमानचित्र भएको बाइन्डिङ्गहरू सक्रिय हुन्छन् जुन बेला मात्र सञ्झ्याल घुम्ने कामहरू "
+#~ "भइरहेको हुन्छ।"
+
+#~ msgid "The program launched by the `xterm' command."
+#~ msgstr "यो कार्यक्रम 'एक्सटर्म'आदेशवाट सुरु गरिएको हो"
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "'एक्सटर्म'आदेशका लागि दिइएको तर्क"
+
+#~ msgid "Move/Resize"
+#~ msgstr "सार्नुहोस्/रिसाइज गर्नुहोस्"
+
+#~ msgid "Workspaces"
+#~ msgstr "कार्यक्षेत्रहरू"
+
+#~ msgid "Bindings"
+#~ msgstr "बाइन्डिङ्ग"
+
+#, fuzzy
+#~ msgid "Mini/Maximizing"
+#~ msgstr "न्युनतम गर्दै र अधिकतम गर्दै"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "विविध"
+
+#~ msgid "Play sound effects for window events."
+#~ msgstr "सञ्झ्याल घटनाहरूका लागि आवाज असरहरू प्ले गर्नुहोस्।"
+
+#~ msgid "Edge Flipping"
+#~ msgstr "किनारा फ्लिपिङ्"
+
+#~ msgid "Select the next desktop when the pointer hits screen edge."
+#~ msgstr "दृश्य किनारालाई सूचकले हानेको बेला अघिल्लो डेस्कटप चयन गर्नुहोस्।"
+
+#~ msgid "Hitting the screen edge selects the next: \\w"
+#~ msgstr "पर्दाको किनारामा हानेको बेला अघिल्लो : \\w चयन गर्नुहोस्"
+
+#~ msgid "Only flip when interactively moving a window."
+#~ msgstr "सञ्झ्याल अन्तर्क्रियात्मक तरिकाले चलेमा मात्र फ्लिप हुन्छ।"
+
+#~ msgid "Beep when errors occur."
+#~ msgstr "त्रुटिहरू भएको बेलामा बिप हुन्छ।"
+
+#~ msgid "Display error messages to: \\w"
+#~ msgstr ": \\w लाई त्रुटि सन्देशहरू प्रदर्शन गर्नुहोस्"
+
+#~ msgid "Shade Hover"
+#~ msgstr "छायाँ होभर"
+
+#~ msgid "Delay in milliseconds before unshading windows."
+#~ msgstr "सञ्झ्यालहरू छायाँरहित गर्नुभन्दा पहिले मिलिसेकेण्डमा ढिलो गर्नुहोस्।"
+
+#~ msgid "Raise windows when they are unshaded."
+#~ msgstr "तिनिहरू अनसेड भएको बेलामा सञ्झ्यालहरू बढाउनुहोस्।"
+
+#~ msgid "Display tooltips for window frames."
+#~ msgstr "सञ्झ्याल फ्रेमहरूका लागि उपकरण टिपहरू प्रदर्शन गर्नुहोस्।"
+
+#~ msgid "Show full documentation in tooltips."
+#~ msgstr "उपकरण टिपहरूमा सम्पूर्ण मिसिलिकरण देखाउनुहोस्"
+
+#, fuzzy
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "सञ्झ्यालहरू छायाँरहित गर्नुभन्दा पहिले मिलिसेकेण्डमा ढिलो गर्नुहोस्।"
+
+#, fuzzy
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "सञ्झ्यालहरू छायाँरहित गर्नुभन्दा पहिले मिलिसेकेण्डमा ढिलो गर्नुहोस्।"
+
+#~ msgid "History"
+#~ msgstr "इतिहास"
+
+#~ msgid "Automatically remember window positions."
+#~ msgstr "सञ्झ्याल अवस्थाहरूलाई स्वत: सम्झिनुहोस्।"
+
+#~ msgid "Automatically remember window sizes."
+#~ msgstr "सञ्झ्याल साइजलाई स्वत: सम्झिनुहोस्।"
+
+#~ msgid "Automatically remember other window attributes."
+#~ msgstr "अरू सञ्झ्यालको गुणलाई स्वत: सम्झिनुहोस्।"
+
+#~ msgid "Don't automatically remember details of transient windows."
+#~ msgstr "अस्थिर सञ्झ्यालहरूको विवरण स्वत: तरिकाले नसम्झिनुहोस्।"
+
+#~ msgid "When does the mouse pointer affect the input focus."
+#~ msgstr "माउस सूचकले आगत फोकसमा कति बेला असर गर्दछ"
+
+#~ msgid "Click-to-focus mode passes the click through to the application."
+#~ msgstr "फोकस अवस्थामा क्लिक गर्नाले अनुप्रयोगद्वारा क्लिक गर्नेमा पठाउँछ"
+
+#, fuzzy
+#~ msgid "Wether focusing a window doesn't change it's position in the stack."
+#~ msgstr "एकल सञ्झ्याललाई तल निर्धारण गरिएको ठाउमा वढाउने क्रममा सार्नुहोस्"
+
+#~ msgid "Default frame style:"
+#~ msgstr "पूर्वनिर्धारित फ्रेम शैली"
+
+#~ msgid "Automatically reload themes when they are updated."
+#~ msgstr "स्वाचालित तरिकाले पुन: लोड विषयवस्तुहरू जब तिनिहरू अद्यावधिक गरिन्छन्"
+
+#~ msgid "Default font: \\w"
+#~ msgstr "पूर्वनिर्धारित फन्ट: \\w"
+
+#~ msgid "Keymap containing bindings active anywhere."
+#~ msgstr "बाइन्डिङ कुञ्जीमानचित्रहरू जहाँ पनि सक्रिय"
+
+#~ msgid "Keymap containing bindings active when a client window is focused."
+#~ msgstr ""
+#~ "जव एउटा ग्राहक सञ्झ्याललाई फोकस गरिन्छ, बाइन्डिङ कुञ्जीमानचित्रहरू सक्रिय हुन्छन्"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the root window\n"
+#~ "(or when no window is focused)."
+#~ msgstr ""
+#~ "जव सूचक मूल सञ्झ्यालमा हुन्छ, बाइन्डिङ्गका कुञ्जीमानचित्रहरू सक्रिय हुन्छन्\n"
+#~ "(अथवा कुनै पनि सञ्झ्याल फोकस गरिएको हुँदैछन्)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक \n"
+#~ "सञ्झ्यालको शीर्षकमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्रहरू सक्रिय हुन्छन् (अथवा कुनै पनि "
+#~ "सञ्झ्याल फोकस गरिएको हुँदैछन्। (यो नक्सामा माउस बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक \n"
+#~ " सञ्झ्यालको किनारमा हुन्छ,बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
+#~ "बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक \n"
+#~ "बटनको बन्द गर्नुस सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा "
+#~ "माउस बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक प्रतिमित \n"
+#~ "बटनको सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
+#~ "बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक सञ्झ्यालको बढाउनुस् \n"
+#~ "बटनमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन्(यो नक्सामा माउस बाइन्डिङ्गहरू मात्र "
+#~ "मूल्याङ्कन् गरिन्छन्।)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक \n"
+#~ "मेनुबटनको सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
+#~ "बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक \n"
+#~ "बटनको सेड द गर्नुस सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा "
+#~ "माउस बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+
+#~ msgid "Modifier key(s) used for default shortcuts."
+#~ msgstr "पूर्वनिर्धारित सर्टकटहरूका लागि प्रयोग गरिएको परिमार्जन कुञ्जी(हरू)"
+
+#~ msgid "Method of placing windows: \\w"
+#~ msgstr "सञ्झ्यालहरू राख्ने विधि: \\w"
+
+#~ msgid "Method of placing dialog windows: \\w"
+#~ msgstr "संवाद सञ्झ्यालहरू राख्ने तरिका: \\w"
+
+#, fuzzy
+#~ msgid "Distance between successive placements in stagger mode."
+#~ msgstr "सफल स्थापनामा 'स्ट्यागर' स्थापना अवस्था विचको दुरि"
+
+#~ msgid "Stacking"
+#~ msgstr "थाक गर्दै"
+
+#~ msgid "Keep transient windows stacked above: \\w"
+#~ msgstr "अस्थायी सञ्झ्यालहरूलाई धेरै माथि राख्नुहोस्: \\w"
+
+#~ msgid "Minimizing a window also removes its: \\w"
+#~ msgstr "सञ्झ्याल घटाईले यसको \\w पनि हटाउछ"
+
+#~ msgid "Unminimizing a window also restores its: \\w"
+#~ msgstr "सञ्झ्याल नघटाईनुले पनि यसको \\w लाई पूर्वावस्थामा ल्याउने गर्दछ"
+
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr "सञ्झ्यालहरूको साइज ठूलो पारेको बेलामा, स्थिति र साइजलाई ताल्चा लगाउनुहोस्"
+
+#~ msgid "Focus on application windows when they first appear."
+#~ msgstr "जव सञ्झ्याल पहिलो पटक देखिन्छन्, अनुप्रयोगमा फोकस गर्नुहोस्।"
+
+#~ msgid "Unshade selected windows."
+#~ msgstr "चयन गरिएको सञ्झ्यालहरूको छायाँ हटाउनुहोस्।"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "अडियो कार्यक्रमको नमूना चलाउन यदि नमिलेमा पुर्व निर्मित ESD मद्दत प्रयोग हुन्छ।"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when reading a string from the user."
+#~ msgstr "प्रयोगकर्ता बाट स्ट्रीङ पढेको बेला कुञ्जीमानचित्र भएको वाईन्डिङ सक्रिय हुन्छ।"
+
+#~ msgid "When raising a window, also raise its: \\w"
+#~ msgstr "सञ्झ्याल उठाएको बेलामा यसको: \\w पनि उठाउनुहोस्"
+
+#~ msgid "Viewport"
+#~ msgstr "दृश्यबिन्दु"
+
+#, fuzzy
+#~ msgid "Windows uniconify to the current viewport."
+#~ msgstr "चालु दृश्यकेन्द्रमा समूह सार्नुहोस्"
+
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "फोकस गरिएको बेलामा सञ्झ्याललाई बढाउनुहोस्।"
+
+#, fuzzy
+#~ msgid "How to act when passing the first or last workspace."
+#~ msgstr "सम्पूर्ण कार्यक्षेत्र समाविष्ट मेनु देखाउनुहोस्"
+
+#, fuzzy
+#~ msgid ""
+#~ "How to act when passing the first or last workspace, while moving a window"
+#~ msgstr "सम्पूर्ण कार्यक्षेत्र समाविष्ट मेनु देखाउनुहोस्"
 
 #~ msgid "Crux Theme"
 #~ msgstr "क्रक्स विषयवस्तु"
