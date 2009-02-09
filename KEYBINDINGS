@@ -35,13 +35,13 @@ Click1 = Same as Click
 Click2 = When Mouse Button Is Clicked Twice
 Move = When Button Is Clicked and Pointer Moved
 
-global-keymap (Those bindings take place everywhere):
+global-keymap (Those bindings are active everywhere):
 
 W-Left -> Previous Workspace
 W-Right -> Next Workspace
 W-Tab -> Cycle Windows
 
-window-keymap (Those bindings take place when the pointer is inside a window, but not on the titlebar)
+window-keymap (Those bindings are active when the pointer is inside a window, but not on the titlebar)
 
 W-Up -> Raise Window
 W-Down -> Lower Window
@@ -51,11 +51,11 @@ Button1-Click1 -> Raise And Pass Trough Click (Raise And Focus) Window
 W-ISO_Left_Tab -> tab-raise-left-window
 H-ISO_Left_Tab -> tab-raise-right-window
 
-root-window-keymap (Those bindings take place on the root window ("The desktop background"))
+root-window-keymap (Those bindings are active on the root window ("The desktop background"))
 
 Button2-Click1 -> Popup Sawfish Menu
 
-title-keymap (Those bindings take place when the pointer is on the titlebar)
+title-keymap (Those bindings are active when the pointer is on the titlebar)
 
 Button3-Off -> Raise Or Lower Window
 Button2-Move -> Resize Window Interactively
@@ -63,34 +63,34 @@ Button1-Off2 -> Toggle Window Shaded
 Button1-Move -> Move Window Interactively
 Button2-Off -> Add Window To Tab Group
 
-border-keymap (Those bindings take place when the pointer is on the border)
+border-keymap (Those bindings are active when the pointer is on the border)
 
 Button3-Off -> Raise Or Lower Window
 Button1-Move -> Resize Window Interactively
 Button2-Move -> Move Window Interactively
 
-close-button-keymap (Those bindings take place when the pointer is on the close button)
+close-button-keymap (Those bindings are active when the pointer is on the close button)
 
 Button3-Click1 -> Popup Window Menu
 S-Button1-Off -> Delete Group
 Button1-Off -> Delete Window
 
-iconify-button-keymap (Those bindings take place when the pointer is on the iconify button)
+iconify-button-keymap (Those bindings are active when the pointer is on the iconify button)
 
 Button3-Click1 -> Popup Window Menu
 Button1-Off -> Iconify Window
 
-maximize-button-keymap (Those bindings take place when the pointer is on the maximize button)
+maximize-button-keymap (Those bindings are active when the pointer is on the maximize button)
 
 Button3-Off -> Toggle Horizontal Maximization
 Button2-Off -> Toggle Vertical Maximization
 Button1-Off -> Toggle Maximization
 
-menu-button-keymap (Those bindings take place when the pointer is on the menu button)
+menu-button-keymap (Those bindings are active when the pointer is on the menu button)
 
 Button3-Off -> Delete Window
 Button1-Click1 -> Popup Window Menu
 
-shade-button-keymap (Those bindings take place when the pointer is on the shade button)
+shade-button-keymap (Those bindings are active when the pointer is on the shade button)
 
 Button1-Off -> Toggle Window Shaded
