@@ -35,7 +35,10 @@ MAKEINFOFLAGS =
 TEXI2DVI = texi2dvi
 DVIPS = dvips
 
-all : sawfish.info ../NEWS
+all : sawfish.info ../NEWS ../USERDOC
+
+../USERDOC : user-doc.texi
+	$(MAKEINFO) $(MAKEINFOFLAGS) --no-headers $< -o ../USERDOC
 
 ../NEWS : news.texi
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-headers $< -o ../NEWS
