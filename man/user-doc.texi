@@ -2,9 +2,65 @@
 
 @heading User Documentation for Sawfish 1.5.0
 
-@heading 1 Basic Window Managing Functions
+@heading 1 Basic Introduction
 
-@heading 1.0 Window-Menu
+@heading 1.0 What is that "X"?
+
+@itemize @bullet
+
+@item X, also called X11, is a protocoll defining the XServer and all related stuff. 
+
+@item There are currently two major implementations XFree86 and X.Org, the later is a fork of the former.
+
+@item Currently R7 (X11R7) is the most recent definition. R6 (X11R6) is also still used and available.
+
+@item XFree86 and X.Org < 7.0 are X11R6, X.Org >= 7.0 is X11R7.
+
+@item Major changes between R6 and R7 are the introduction of a modular X11, XDamage and XComposite (sawfish does currently not make use of that new stuff)
+
+@item The XServer is an applications that creates an graphical display in opposite to the linux-console (also known as "Textmode"). Which is then used to display graphical applications.
+@end itemize
+
+@heading 1.1 What is a Window Manager?
+
+@itemize @bullet
+
+@item Sawfish is a Window Manager, but what is that?
+
+@item A Window Manager is an application that takes care of your windows, X-Events and more.
+
+@item Some Window Managers include a Compositing Manager.
+@end itemize
+
+@heading 1.2 What is a Compositing Manager?
+
+@itemize @bullet
+
+@item A Compositing Manager is a plugin for a Window Manager (if built-in it's an Compositing Window Manager), that let's it create fancy graphical 3d effects, using XDamage and XComposite.
+
+@item Sawfish does not ship a Compositing Manager yet. This is planned for version 3.0, if you want/need 3d effects, have a closer look at projects like the cairo-compositing-manager. (http://cairo-compmgr.tuxfamily.org/)
+@end itemize
+
+@heading 1.3 Why Sawfish?
+
+@itemize @bullet
+
+@item Well, sawfish is a very fast and extensible window-manager.
+
+@item Powerfull key-bindings: Virtually every function can be bound to keys or mouse-buttons
+
+@item Event Hooking: For many events (moving, edge-flipping ...) you can alter the way sawfish behaves
+
+@item Window Matching: For each window you may set a set of actions to automatically perform. (different size, start-state ...)
+
+@item Flexible Theming: Sawfish allows very different themes to be created and a variety is already available (http://sawfish.wikia.com/wiki/Themes)
+
+@item Extensibility: Sawfish can load 3rdparty scripts easily and a whole bunch is just waiting to be discovered by you. (http://sawfish.wikia.com/wiki/Scripts)
+@end itemize
+
+@heading 2 Basic Window Managing Functions
+
+@heading 2.0 Window-Menu
 
 @itemize @bullet
 
@@ -13,7 +69,7 @@
 @item You can access it by left-click on the menu button, or middle-click on the close or iconify button
 @end itemize
 
-@heading 1.1 Iconify
+@heading 2.1 Iconify
 
 @itemize @bullet
   
@@ -22,7 +78,7 @@
 @item You can iconify a window by left-click on the iconify button.
 @end itemize
 
-@heading 1.2 Uniconify
+@heading 2.2 Uniconify
 
 @itemize @bullet
 
@@ -31,7 +87,7 @@
 @item You can uniconify a window by left-click on it's dock-icon or task-list entry.
 @end itemize
 
-@heading 1.3 Maximize
+@heading 2.3 Maximize
 
 @itemize @bullet
 
@@ -40,7 +96,7 @@
 @item You can maximize a window by left-click on the maximize button.
 @end itemize
 
-@heading 1.4 Unmaximize
+@heading 2.4 Unmaximize
 
 @itemize @bullet
 
@@ -49,7 +105,7 @@
 @item You can unmaximize a window by left-click on the maximize button, on a maximized window.
 @end itemize
 
-@heading 1.5 Delete Window
+@heading 2.5 Delete Window
 
 @itemize @bullet
 
@@ -58,7 +114,7 @@
 @item You can delete a window by left-click on the close button.
 @end itemize
 
-@heading 1.6 Shade Window
+@heading 2.6 Shade Window
 
 @itemize @bullet
 
@@ -67,7 +123,7 @@
 @item You can shade a window by double-left-click on the titlebar or left-click on the shade button
 @end itemize
 
-@heading 1.7 Unshade Window
+@heading 2.7 Unshade Window
 
 @itemize @bullet
 
@@ -76,7 +132,7 @@
 @item You can unshade a window by double-left-click on the titlebar or left-click on the shade button, of a shaded window.
 @end itemize
 
-@heading 1.8 Raise Window
+@heading 2.8 Raise Window
 
 @itemize @bullet
 
@@ -85,7 +141,7 @@
 @item To raise a window press ALT + UP (Arrow Up Key).
 @end itemize
 
-@heading 1.9 Lower Window
+@heading 2.9 Lower Window
 
 @itemize @bullet
 
@@ -94,7 +150,7 @@
 @item To lower a window press ALT + DOWN (Arrow Down Key).
 @end itemize
 
-@heading 1.10 Cycle Windows
+@heading 2.10 Cycle Windows
 
 @itemize @bullet
 
@@ -104,9 +160,3 @@
 
 @item There's also the possibility to cycle backwards, but that is not bound to any keybinding by default.
 @end itemize
-
-@heading 2 Advanced Window Managing Functions
-
-@heading 3 Tabbed Windowing
-
-@heading 4 Additional Sawfish Window Managing Functions
