@@ -471,6 +471,16 @@ echo "
   == == == == == == == == == == == == ==
   "
 
+echo "  ***** ***** ***** ***** ***** ***** *****
+
+  Please read 
+  
+  README.IMPORTANT 
+  
+  if this is an upgrade
+
+  ***** ***** ***** ***** ***** ***** *****"
+
 dnl If it doesn't look like GNU Make is being used, give a friendly warning
 tem=`make --version -f /dev/null 2>&1 | grep GNU`
 if test "x$tem" = "x"; then

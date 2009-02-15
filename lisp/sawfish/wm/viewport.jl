@@ -64,7 +64,7 @@
     :group (workspace viewport))
 
   (defcustom scroll-viewport-steps 1
-    "Number of steps in which to scroll between viewports (less steps = faster scrolling)."
+    "Number of steps for viewport scrolling."
     :group (workspace viewport)
     :type number
     :range (1 . 50))
