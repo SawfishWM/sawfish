@@ -10,15 +10,17 @@ Because the old name (@samp{Sawmill}) was already being used by another
 company, who were in the process of registering it as a trademark.
 
 The rename should be mostly painless, all old binaries still work for
-the time being, but will be phased out over time. Where before you
-would execute a program called @file{sawmill*}, replace it by
-@file{sawfish*}. E.g. @file{sawmill} becomes @file{sawfish}, and
-@file{sawmill-client} becomes @file{sawfish-client}.
+the time being, but will be phased out over time (final phasing out
+started around 1.5.0). Where before you would execute a program called
+@file{sawmill*}, replace it by @file{sawfish*}. E.g. @file{sawmill}
+becomes @file{sawfish}, and @file{sawmill-client} becomes
+@file{sawfish-client}.
 
 Your @file{~/.sawmill} directory will automatically be renamed
-@file{~/.sawfish} unless it would overwrite an existing file. Both
-@file{~/.sawfishrc} and @file{~/.sawmillrc} will be checked currently
-(though only one will be actually loaded).
+@file{~/.sawfish} unless it would overwrite an existing file. Only
+user configuration @file{~/.sawfish[/]rc} will be checked currently,
+@file{~/.sawmillrc} is not used anymore (it was also read up to
+version 1.3.5).
 
 My apologies for any inconvenience caused.
 
@@ -64,34 +66,37 @@ please send mail describing the problem to the Sawfish mailing list
 There are several files controlling this:
 
 @table @file
-@item ~/.sawfishrc
+@item ~/.sawfishrc and ~/.sawfish/rc
 Hand written lisp code, loaded at startup. This is where almost all
-explicit customization should be done.
+explicit customization should be done. You can choose using a stand
+alone file @file{.sawfishrc} or a @file{rc} file inside the
+@file{.sawfish} directory to keep a more compact layout. This will be
+referenced @file{.sawfish[/]rc} as shorthand.
 
-@item sawmill-defaults
-This lisp library is only loaded if there's no @file{.sawfishrc} file.
+@item sawfish-defaults
+This lisp library is only loaded if there's no @file{.sawfish[/]rc} file.
 
 @item ~/.sawfish/custom
 This stores customizations created by the configuration tool; it
 shouldn't really be edited manually.
 
-This file is loaded @emph{after} @file{sawmill-defaults}, but @emph{before}
-@file{.sawfishrc}.
+This file is loaded @emph{after} @file{sawfish-defaults}, but @emph{before}
+@file{.sawfish[/]rc}.
 @end table
 
 
-@item I created @file{.sawfishrc}, now things have changed?
+@item I created @file{.sawfish[/]rc}, now things have changed?
 
-If a @file{~/.sawfishrc} file exists, it prevents
-@file{sawmill-defaults} from being loaded. But it's
-@file{sawmill-defaults} that loads some of the common window manager
+If a @file{~/.sawfish[/]rc} file exists, it prevents
+@file{sawfish-defaults} from being loaded. But it's
+@file{sawfish-defaults} that loads some of the common window manager
 features, so add the line
 
 @lisp
-(require 'sawmill-defaults)
+(require 'sawfish-defaults)
 @end lisp
 
-@noindent to your @file{.sawfishrc} file if you want to start with all
+@noindent to your @file{.sawfish[/]rc} file if you want to start with all
 the standard features loaded.
 
 
