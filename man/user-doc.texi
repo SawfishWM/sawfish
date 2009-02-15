@@ -8,7 +8,7 @@
 
 @itemize @bullet
 
-@item X, also called X11, is a protocoll defining the XServer and all related stuff. 
+@item X, also called X11, is a protocol defining the XServer and all related stuff. 
 
 @item There are currently two major implementations XFree86 and X.Org, the later is a fork of the former.
 
@@ -160,3 +160,65 @@
 
 @item There's also the possibility to cycle backwards, but that is not bound to any keybinding by default.
 @end itemize
+
+
+@heading 3 Organizing Windows
+
+Sawfish offers multiple means to organize windows, most can work at
+the same time than others, as you need.
+
+
+@heading 3.1 Workspaces
+
+@itemize @bullet
+
+@item Workspaces are virtual surfaces where to place windows. They are
+also called (Virtual) Desktops in other WMs. You must have at least
+one.
+
+@item Windows can be in one or more workspaces at the same time, with
+different positions in each.
+
+@c navigate, add, merge, naming, etc
+
+@end itemize
+
+
+@heading 3.2 Viewports
+
+@itemize @bullet
+
+@item Workspaces can be bigger than your monitor, here is where the
+concept of Viewport comes into play, it gives you a view into this bigger
+space. All Workspaces must share the same size, though, like if they
+were cut all at once.
+
+@item You can move the Viewport around, and you will see how windows that
+go out of the right side of the screen will appear from the left, if
+you moved your viewport to the right. It is a continous surface. The
+scrolling can be in full monitor increments or partial.
+
+@c navigate, configure, etc
+
+@end itemize
+
+@heading 3.3 Layers
+
+@itemize @bullet
+
+@item Sometimes you want to keep some windows above all other windows. Or
+maybe below them. Sawfish does this by means of Layers. A window in a
+layer will always appear in a given depth, above lower valued layers, but
+below.
+
+@item Default level is 0, windows below are in negative levels, and windows
+above are in positive levels. Many WMs support just three layers, Sawfish
+by default assigns them the numbers -2, 0 and 2.
+
+@c change, configure matchers, etc
+
+@end itemize
+
+@heading 3.4 Tabs
+
+@c to be written once that settles
