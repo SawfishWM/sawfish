@@ -30,11 +30,12 @@
 	  sawfish.wm.window-anim
 	  sawfish.wm.custom
 	  sawfish.wm.util.window-outline
+	  sawfish.wm.gaol
 	  rep.io.timers)
 
   (define-structure-alias anim-outline sawfish.wm.animation.outline)
 
-  (defcustom anim-outline-icon-coords '(cons (screen-width) (screen-height))
+  (defcustom anim-outline-icon-coords (cons (screen-width) (screen-height))
     "Animation Outline Coordinates"
     :type (pair (number 1) (number 1))
     :group (appearance animation))
