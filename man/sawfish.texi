@@ -1085,11 +1085,35 @@ are @code{min-height}, @code{max-height}, @code{min-width},
 @code{border-size}.
 @end defun
 
-@defun window-visibility window
+@defun stacking-visibility window
+Returns @code{unobscured} if @code{window} is unobscured,
+@code{fully-obscured} if one or more windows completely obscure
+@code{window}, or @code{partially-obscured} if one or more window
+partially obscure @code{window}.
+
+Deciding between fully and partially obscured can be expensive.  If
+@code{window-obscured} satisfies your needs, use that in preference to
+@code{stacking-visibility}.
+@end defun
+
+@defun window-obscured window
+Returns @code{nil} if @code{window} is unobscured, @code{t} if
+@code{window} is completely obscured by exactly one other window, or a
+list of windows that partially obscure @code{window}.
+
+If a list of partially obscuring windows is returned, taken together
+they may or may not fully obscure @code{window}.
+@end defun
+
+@deffn {Obsolete Function} window-visibility window
 Returns a symbol defining the current visibility of @var{window}.
 Possible returned symbols are @code{fully-obscured},
 @code{partially-obscured} or @code{unobscured}.
-@end defun
+
+@code{window-visibility} is deprecated.  It is unreliable when using
+the Composite extention, as every window is reported unobscured.  Use
+@code{window-obscured} and @code{stacking-visibility} instead.
+@end deffn
 
 @defun window-urgent-p window
 Return @code{t} if the ``Urgency'' hint of the window associated with
@@ -1131,8 +1155,16 @@ focus.  This is a symbol from the list @code{focus-modes}.
 
 @defvar focus-modes
 A list containing all names of focus modes.  The built-in values are
-@code{enter-exit}, @code{enter-only} and @code{click}.
+@code{enter-exit}, @code{enter-only}, @code{enter-click} and @code{click}.
 @end defvar
+
+Focus mode @code{enter-exit} changes focus when the pointer enters a
+window or leaves the focused window.  Focus mode @code{enter-only}
+changes focus when the pointer enters a window, but not when it leaves
+the focused window.  Focus mode @code{click} changes focus when you
+click on a window.  Focus mode @code{enter-click} is the union of
+@code{enter-only} and @code{click}, and changes focus on any
+of their conditions.
 
 It is possible to add additional focus modes by defining your own
 handler function.  The handler function must obey a
@@ -1185,6 +1217,9 @@ position ``consistent'' with the focus mode.  For example, in
 window.  In @code{enter-only} mode, we warp the cursor if it is in
 another window, but not if it is over the desktop---a window would not
 lose focus when the cursor moved from it to the desktop.
+
+This event is implemented via @code{warp-cursor-to-window}, so Sawfish
+will not warp unless @code{warp-to-window-enabled} is true.
 @end table
 
 The protocol allows for any number of additional arguments, but does
@@ -1210,8 +1245,11 @@ focus-mode events on @var{window}.
 @end defun
 
 @defun warp-pointer-if-necessary window
-Generate a @code{warp-if-necessary} event and send it to the window's
+Generate a @code{warp-if-necessary} event and sends it to the window's
 focus function.
+
+Various functions call @code{warp-pointer-if-necessary} if they move
+the focused window out from underneath the pointer.
 @end defun
 
 @defvar focus-click-through
@@ -1659,6 +1697,9 @@ Usually, however, it is left to the user to configure windows. The
 following functions may be called interactively: their sole argument is
 then either the window that received the current event or the currently
 focused window.
+
+Sawfish honors the @code{min-aspect} and @code{max-aspect} window
+hints when interactively resizing a window.
 
 @deffn Command move-window-interactively window
 Move @var{window} interactively using the mouse. Releasing any mouse
@@ -2424,7 +2465,8 @@ windows.  Defaults to true.
 
 @defvar cycle-raise-windows t
 If true, Sawfish raises windows while they're temporarily selected
-during cycling.  Defaults to true.
+during cycling, and invokes @code{warp-pointer-if-necessary}.
+Defaults to true.
 @end defvar
 
 It is also possible for you to define your own stacking cycle
@@ -3699,10 +3741,10 @@ only a portion of the logical display at any time.  Sawfish does this
 using ``viewports''.
 
 When viewports are enabled, the Sawfish logical display becomes
-infinitely large in the two directions ``across'' and ``down'' (to the
-maximum representable size of integers).  Sawfish divides this logical
-display into a potentially infinite grid of cells.  Each cell of the
-grid is the same size of the virtual display.
+potentially infinitely large in the two directions ``across'' and
+``down'' (to the maximum representable size of integers).  Sawfish
+divides this logical display into a potentially infinite grid of
+cells.  Each cell of the grid is the same size of the virtual display.
 
 @defvar viewport-dimensions
 The current number of viewports across and down the virtual display.
@@ -3715,13 +3757,22 @@ Change @code{viewport-dimensions} to have the value
 @code{(@var{width} . @var{height})}.
 @end defun
 
-The user then tells Sawfish to move the physical display from cell to
-cell.  On a cell change, windows in previous cells are removed, and
-windows in the current cell appear.  Windows that span two or more
-cells will appear in each cell, appropriately displaced.
-
 Note that cell indices start at zero in each dimension.  Indices are
 never negative.
+
+@menu
+* Switching Viewports::
+* Windows and Viewports::
+@end menu
+
+@node Switching Viewports, Windows and Viewports, Viewports, Viewports
+@section Switching Viewports
+
+A user switches viewports by telling Sawfish to move the physical
+display from cell to cell.  On a cell change, windows in previous
+cells are removed, and windows in the current cell appear.  Windows
+that span two or more cells will appear in each cell, appropriately
+displaced.
 
 @defun screen-viewport
 Returns the currently displayed viewport as a pair @code{(@var{x},
@@ -3738,6 +3789,58 @@ Move the viewport to see the cell @var{right} slots to the right and
 @var{down} slots down.  Either argument may be zero or negative.
 @end defun
 
+@defvar viewport-boundary-mode
+How to act when switching via @code{set-screen-viewport} to a viewport
+that is outside of @code{viewport-dimensions}.  When set to
+@code{wrap-around}, it loops in the vertical and horizontal axes
+enough times to keep the viewport within the defined dimensions.  When
+set to @code{stop}, it refuses to switch to a viewport outside of
+@code{viewport-dimensions}.  Defaults to @code{wrap-around}.
+@end defvar
+
+@defun warp-viewport x y
+Change the position of the physical display, such that location
+@code{(@var{x}, @var{y})} is at the top-left of the display.  The
+physical display may be showing more than one cell at this point.
+All windows are redisplayed as appropriate.
+@end defun
+
+@defun set-viewport x y
+Change the position of the physical display, such that location
+@code{(@var{x}, @var{y})} is at the top-left of the display.  The
+physical display may be showing more than one cell at this point.
+
+Unlike @code{warp-viewport}, the change takes place by dividing the
+motion into @code{scroll-viewport-steps} steps, and redisplaying after
+each step in the motion.
+@end defun
+
+@defvr Customizable scroll-viewport-steps
+Number of steps in which to divide a viewport change for
+@code{set-viewport}.  Each step requires a redisplay.  Defaults to 1,
+which causes an instantaneous change to the new viewport.  The
+customization limit is 50.
+@end defvr
+
+@node Windows and Viewports,  , Switching Viewports, Viewports
+@section Windows and Viewports
+
+@defun window-viewport window
+Returns a cons cell @code{(@var{col} . @var{row})} of the viewport
+holding the top-left corner of @var{window}.
+@end defun
+
+@defun window-outside-viewport-p window
+Returns true if @var{window} is completely outside the current
+viewport in any direction.
+@end defun
+
+@defun window-absolute-position window
+Returns a cons cell @code{(@var{x} . @var{y})} of the position of
+@var{window} in its containing viewport.  The containing viewport may
+or may not be the current viewport.
+@end defun
+
 @defun set-window-viewport window col row
 Move @var{window} to the cell at @code{(@var{col}, @var{row})}.  The
 relative position of the window within the cells is preserved.
@@ -3749,43 +3852,16 @@ Move @var{window} to the cell @var{col-delta} positions across and
 position of the window with its cells its preserved.
 @end defun
 
-@defun move-viewport-to-window window
-Move the viewport to a cell that shows window @var{window}.  For a
-window that spans multiple cells, this function will pick the cell
-showing the window's top-left corner.
-@end defun
-
 @defun move-window-to-current-viewport window
 Move @var{window} from its existing viewport to the current viewport.
 The window's relative position in the existing viewport is preserved
 after the move.
 @end defun
 
-@defun window-viewport window
-Returns a cons cell @code{(@var{col} . @var{row})} of the viewport
-holding the top-left corner of @var{window}.
-@end defun
-
-@defun window-outside-viewport-p window
-@defunx window-outside-workspace-p window
-Returns true if @var{window} is completely outside the current
-viewport in any direction.  The @code{window-outside-workspace-p}
-function is an obsolete alias for the first function; the
-``workspace'' term is now used for another concept
-(@pxref{Workspaces}).
-@end defun
-
-@defun window-absolute-position window
-Returns a cons cell @code{(@var{x} . @var{y})} of the position of
-@var{window} in its containing viewport.  The containing viewport may
-or may not be the current viewport.
-@end defun
-
-@defun set-viewport x y
-Change the position of the physical display, such that location
-@code{(@var{x}, @var{y})} is at the top-left of the display.  The
-physical display may be showing more than one cell at this point.
-All windows are redisplayed as appropriate.
+@defun move-viewport-to-window window
+Move the viewport to a cell that shows window @var{window}.  For a
+window that spans multiple cells, this function will pick the cell
+showing the window's top-left corner.
 @end defun
 
 @defvar uniconify-to-current-viewport
@@ -5355,6 +5431,9 @@ client window associated with object @var{window}.
 
 If @var{x} and @var{y} are @code{nil}, then they are taken as the
 top-left corner of the window's frame.
+
+If @code{warp-to-window-enabled} is @code{nil}, this function does
+nothing.
 @end defun
 
 @defvar warp-to-window-offset
