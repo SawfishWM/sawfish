@@ -170,19 +170,7 @@
 					 (aref 3d-face-gcs i)
 				       3d-white-gc))))
 
-    (define (annotate-points)
-      (do ((i 0 (1+ i))
-	   (len (length 3d-vertices)))
-	  ((= i len))
-	(x-draw-string (x-window-back-buffer 3d-window)
-		       3d-white-gc (aref 3d-flattened-vertices i)
-		       (format nil "(%.2d %.2d %.2d)"
-			       (aref (aref 3d-rotated-vertices i) 0)
-			       (aref (aref 3d-rotated-vertices i) 1)
-			       (aref (aref 3d-rotated-vertices i) 2)))))
-
     (draw-all)
-    ;;(annotate-points)
     )
 
   (define (3d-rotate)
