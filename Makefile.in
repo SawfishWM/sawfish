@@ -58,13 +58,15 @@ install : all installdirs
 	  fi \
 	done
 	$(INSTALL_DATA) $(top_srcdir)/sawfish.pc $(DESTDIR)$(libdir)/pkgconfig/
+	$(INSTALL_DATA) $(top_srcdir)/sawfish-session.desktop $(DESTDIR)/$(datadir)/xsessions/sawfish.desktop
 
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(sawfishdir)/$(version) \
 	  $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir) \
 	  $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties \
 	  $(DESTDIR)$(datadir)/applications/ \
-	  $(DESTDIR)$(libdir)/pkgconfig/
+	  $(DESTDIR)$(libdir)/pkgconfig/ \
+	  $(DESTDIR)$(datadir)/xsessions/
 
 uninstall :
 	for dir in $(SUBDIRS); do \
