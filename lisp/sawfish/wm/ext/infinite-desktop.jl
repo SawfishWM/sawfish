@@ -1,11 +1,23 @@
-;;
-;;  Then, in your ~/.sawfishrc, put the command: 
-;;       (require 'sawfish.wm.ext.infinite-desktop)
-;;
-;;  Use the Customize->Sawfish->Infinite Desktop
-;;   configurator to enable and configure the option.  Edge
-;;   flipping should be disabled.
-;;
+;; infinite-desktop.jl -- make the virtual desktop bigger than the physical
+;; $Id: infinite-desktop.jl,v 1.33 2008/02/05 06:48:02 chrisb Exp $
+
+;; Copyright (C) 2008 David T. McWherter
+
+;; This file is part of sawfish.
+
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.wm.ext.infinite-desktop
 
@@ -24,12 +36,12 @@
 	(define-structure-alias infinite-desktop sawfish.wm.ext.infinite-desktop)
 
 ;;
-;; Remove our hooks if they're already installed - 
+;; Remove our hooks if they're already installed -
 ;; allows us to be imported multiple times safely.
 ;;
 
-(define (infinite-desktop.remove a l) 
-  (cond ((not l) nil)		
+(define (infinite-desktop.remove a l)
+  (cond ((not l) nil)
 	((eq a (car l)) (infinite-desktop.remove a (cdr l)))
 	(t (cons (car l) (infinite-desktop.remove a (cdr l))))))
 
@@ -63,18 +75,18 @@
   (let ((dist infinite-desktop.move-distance)
 	(cdist infinite-desktop.move-cursor-distance)
 	(maxx (* (screen-width) (1- (car viewport-dimensions)))))
-    (if 
+    (if
 	(and infinite-desktop.stop-at-workspace-borders
 	     (> (+ dist viewport-x-offset) maxx))
 	(setq dist (- maxx viewport-x-offset)))
     (set-viewport (+ viewport-x-offset dist) viewport-y-offset)
     (move-cursor (- (min dist cdist)) 0)))
-  
+
 (define (infinite-desktop.move-left)
   (let ((dist (- infinite-desktop.move-distance))
 	(cdist (- infinite-desktop.move-cursor-distance))
 	(minx 0))
-    (if 
+    (if
 	(and infinite-desktop.stop-at-workspace-borders
 	     (< (+ viewport-x-offset dist) minx))
 	(setq dist (- minx viewport-x-offset)))
@@ -85,7 +97,7 @@
   (let ((dist (- infinite-desktop.move-distance))
 	(cdist (- infinite-desktop.move-cursor-distance))
 	(miny 0))
-    (if 
+    (if
 	(and infinite-desktop.stop-at-workspace-borders
 	     (< (+ viewport-y-offset dist) miny))
 	(setq dist (- miny viewport-y-offset)))
@@ -96,7 +108,7 @@
   (let ((dist infinite-desktop.move-distance)
 	(cdist infinite-desktop.move-cursor-distance)
 	(maxy (* (screen-height) (1- (cdr viewport-dimensions)))))
-    (if 
+    (if
 	(and infinite-desktop.stop-at-workspace-borders
 	     (> (+ dist viewport-y-offset) maxy))
 	(setq dist (- maxy viewport-y-offset)))
@@ -104,15 +116,15 @@
     (move-cursor 0 (- (min dist cdist)))))
 
 (define (infinite-desktop.enter-flipper-hook w)
-  (if infinite-desktop-p 
+  (if infinite-desktop-p
       (cond ((eq w 'right) (infinite-desktop.move-right))
 	    ((eq w 'left) (infinite-desktop.move-left))
 	    ((eq w 'bottom) (infinite-desktop.move-bottom))
 	    ((eq w 'top) (infinite-desktop.move-top))
 	    (t (display-message "move-unknown")))))
 
-(define (infinite-desktop.infinite-desktop) 
-  (if infinite-desktop-p 
+(define (infinite-desktop.infinite-desktop)
+  (if infinite-desktop-p
       (enable-flippers)))
 
 (unless batch-mode
