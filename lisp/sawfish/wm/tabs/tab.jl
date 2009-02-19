@@ -1,27 +1,25 @@
-;; tab.jl - Emulate fluxbox tabs system
-;;
-;; Author : Yann Hodique <Yann.Hodique@lifl.fr>
-;;
-;; Heavily modified by Scott Scriven <sawfish@toykeeper.net>
-;;
-;; Modified by Nathan Froyd <froydnj@gmail.com>
-;;
-;; Intltoolized/Reworked by Christopher Bratusek <zanghar@freenet.de>
-;;
-;; Usage:
-;;  Copy this file to somewhere in your sawfish load-path, for example
-;;  "~/.sawfish/lisp". Then add (require 'tab) to your ~/.sawfishrc and restart
-;;  sawfish or issue the (load "tab") from sawfish-client.
-;;
-;;  Be sure to also put marks.jl and tabgroup.jl in the same location.  The tab.jl
-;;  file requires these.
-;;
-;;  After loading "tab", be sure to do the same with "tab-keymap" .  Feel free to
-;;  customize the key bindings in that file.
-;;
-;;  You will also need a tab-enabled theme, in order to see any visual difference.
-;;  There should be such a theme included with this file.
+#| tab.jl - emulate fluxbox tab system
 
+   $Id: tab.jl 4424 2009-02-18 21:38:42+0100 chrisb $
+
+   Copyright (C) Yann Hodique <Yann.Hodique@lifl.fr>
+
+   This file is an official accepted contribution into sawfish.
+
+   This script is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 3, or (at your option)
+   any later version.
+
+   sawfish is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with sawfish; see the file COPYING.  If not, write to
+   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+|#
 
 (define-structure sawfish.wm.tabs.tab
 
@@ -68,14 +66,14 @@
   (define (get-tab-pos win)
     (let* ((group (tab-find-window win))
        	   (tabnum (tab-rank win (tab-group-window-list group))))
-      (tab-pos group tabnum win))) 
+      (tab-pos group tabnum win)))
 
   (define (tab-pos group tabnum win)
     "find the left and right pixel offsets of a tab"
-    (let* ((tabarea-width (+ 
+    (let* ((tabarea-width (+
 	     ; get width of a window in this group
-	     ;(car (window-dimensions (car (tab-group-window-list group)))) 
-	     (car (window-dimensions win)) 
+	     ;(car (window-dimensions (car (tab-group-window-list group))))
+	     (car (window-dimensions win))
 	     (- tab-left-margin)
 	     (- tab-right-margin)))
 	 (numtabs (length (tab-group-window-list group)))
@@ -89,7 +87,7 @@
   (define (tab-title-text-width win)
     "width of the title text area is the tabwidth minus decorations"
     (let* ((tabwidth (nth 2 (get-tab-pos win))))
-      (+ tabwidth 
+      (+ tabwidth
         (- tab-left-dec-width)
         (- tab-right-dec-width))))
 
@@ -137,10 +135,10 @@
   ;(define-cycle-command-pair
   ;  'cycle-tabgroup 'cycle-tabgroup-backwards
   ;  (lambda (w)
-  ;    (delete-if-not window-in-cycle-p   
+  ;    (delete-if-not window-in-cycle-p
   ;                   (delete-if (lambda (win)
   ;                                (and (not (eq win w))
-  ;                                     (tab-same-group-p win w))) 
+  ;                                     (tab-same-group-p win w)))
   ;                              (workspace-windows current-workspace))
   ;                   )
   ;    )

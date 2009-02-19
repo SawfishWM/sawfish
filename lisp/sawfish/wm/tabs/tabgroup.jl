@@ -1,9 +1,25 @@
-;; group.jl - Make windows 
-;;
-;; Author : Yann Hodique <Yann.Hodique@lifl.fr>
-;;
-;; Modified by Scott Scriven <sawfish@toykeeper.net>
-;; (mostly hook updates)
+#| tabgroup.jl - emulate fluxbox tab system
+
+   $Id: tabgroup.jl 4424 2009-02-18 21:38:42+0100 chrisb $
+
+   Copyright (C) Yann Hodique <Yann.Hodique@lifl.fr>
+
+   This file is an official accepted contribution into sawfish.
+
+   This script is free software; you can redistribute it and/or modify it
+   under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 3, or (at your option)
+   any later version.
+
+   sawfish is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with sawfish; see the file COPYING.  If not, write to
+   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+|#
 
 (define-structure sawfish.wm.tabs.tabgroup
 
@@ -65,13 +81,13 @@
          )
         ((member win (tab-group-window-list (car gr)))
          (car gr))
-        (t 
+        (t
          (loop (cdr gr))))))
-  
+
   (define (tab-window-group-index win)
-    "Return the index of the group containing win"  
+    "Return the index of the group containing win"
     (let loop ((index 0))
-       (cond 
+       (cond
         ((eq index (length tab-groups))
          (tab-make-new-group win)
          index)
@@ -105,9 +121,9 @@
          (dim (tab-group-dimensions group))
          (pos (tab-group-position group)))
       (rplaca (nthcdr index tab-groups)
-            (tab-build-group (tab-group-position group) 
-                         (tab-group-dimensions group) 
-                         (append (tab-group-window-list group) (list win))))    
+            (tab-build-group (tab-group-position group)
+                         (tab-group-dimensions group)
+                         (append (tab-group-window-list group) (list win))))
       (tab-move-resize-frame-window-to win (car pos) (cdr pos) (car dim) (cdr dim))
       (rebuild-frame win)))
 
@@ -197,8 +213,8 @@
         (tab-group-window-list (tab-find-window win)))) )
 
   (unless batch-mode
-    (add-hook 'window-state-change-hook 
-  	  (lambda (win args) 
+    (add-hook 'window-state-change-hook
+  	  (lambda (win args)
 	    (if (= 'sticky args)
 	      (tab-refresh-group win 'stick))))
     (add-hook 'after-move-hook (lambda (win) (tab-refresh-group win 'move)))
