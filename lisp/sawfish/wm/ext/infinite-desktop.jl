@@ -1,7 +1,7 @@
 ;; infinite-desktop.jl -- make the virtual desktop bigger than the physical
 ;; $Id: infinite-desktop.jl,v 1.33 2008/02/05 06:48:02 chrisb Exp $
 
-;; Copyright (C) 2008 David T. McWherter
+;; Copyright (C) 2008 David T. McWherter <udmcwher@mcs.drexel.edu>
 
 ;; This file is part of sawfish.
 
