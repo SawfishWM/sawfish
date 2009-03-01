@@ -1,224 +1,254 @@
 @c -*- texinfo -*- 
 
-@heading User Documentation for Sawfish 1.5.0
+@chapter User Documentation for Sawfish 1.5.0
+
+@enumerate
+
+@item Introduction
+
+If you know the basics of X11, you can skip to the next section.
+
+@enumerate
+@item What is that X11 thing?
+
+In the 80s at MIT a graphical system for computers was developed. Some
+of the idea behind it was to be multiplataform, have network
+transparency and provide the means to have graphics, but not enforce
+rules like how things should look or behave. The solution found was
+creating a protocol (think ``language'') that defined how programs and
+computers should communicate to each other to do request and provide
+the results.
+
+As time passed, different versions of the protocol were done, up to
+the 11th. Of this 11th version there have been multiple releases, so
+you can see references to X11R5; the latest being X11R7. Other names
+you can see when refering to the protocol or to the systems that
+implements it are the full name, X Window System (singular window, not
+windows), or even just the X letter alone.
+
+On other fronts, the global result of X11 and the applications that
+run on it is like many other graphics systems for computers: you have
+pointers controlled by devices such as mouses or tablets, keyboards to
+input text, monitors to show things such as windows, icons, menus. And
+you can probably have multiple items of each, even accross different
+computers. The X11 flexibility obtained by definining the language but
+not the rules have allowed it to survive for to decades, and at the
+same time evolve to include new concepts.
 
-@heading 1 Basic Introduction
+@item What is a Window Manager?
 
-@heading 1.0 What is that "X"?
+As we said, X11 provides the means to have graphics, but leaves to
+others tasks such as how things have to look or behave. A Window
+Manager (WM for short) is a special type of program that runs on X11
+and which main tasks are organizing windows of other programs.
 
-@itemize @bullet
+If you ever run X11 without a WM, programs will show their windows
+without any decoration and placement on the screen would leave a lot
+to be desired. You probably will be unable to move windows, for
+example.
 
-@item X, also called X11, is a protocol defining the XServer and all related stuff. 
+Window Managers, such as Sawfish, take care of all that, provide
+decorations to windows (title bars, side and bottom frame, etc),
+decide where to place them, in which order they should overlap, when
+they should move or resize, what window will receive your keypresses,
+etc.
 
-@item There are currently two major implementations XFree86 and X.Org, the later is a fork of the former.
+@item Why Sawfish?
 
-@item Currently R7 (X11R7) is the most recent definition. R6 (X11R6) is also still used and available.
+Sawfish is a very fast and extensible Window Manager.
 
-@item XFree86 and X.Org < 7.0 are X11R6, X.Org >= 7.0 is X11R7.
+Powerfull key bindings: virtually every function can be bound to keys
+or mouse buttons or combinations of them. If you want, you can run
+without touching the mouse for a long time.
 
-@item Major changes between R6 and R7 are the introduction of a modular X11, XDamage and XComposite (sawfish does currently not make use of that new stuff)
+Hooks: many events like moving or changing workspace (more on this
+later) can trigger extra functions to make the behavior fit your
+needs. So when you change workspace, you can trigger a wallpaper
+change by putting the right function call in the hook that is
+triggered by change workspace action.
 
-@item The XServer is an applications that creates an graphical display in opposite to the linux-console (also known as "Textmode"). Which is then used to display graphical applications.
-@end itemize
+Window matching: for each new window Sawfish can assign different
+behaviours as they are created. For example you can set some windows
+to always appear like if they were glued to your monitor, above any
+other window, like in the case of taskbars.
 
-@heading 1.1 What is a Window Manager?
+Flexible theming: Sawfish allows very different themes to be created
+and a variety is already available. You can even run different themes
+at the same time.
+http://sawfish.wikia.com/wiki/Themes
 
-@itemize @bullet
+Extensibility: Sawfish can load 3rd party scripts easily and a whole
+bunch is just waiting to be discovered by you.
+http://sawfish.wikia.com/wiki/Scripts
 
-@item Sawfish is a Window Manager, but what is that?
+@item What are those Mouse Button 2?
 
-@item A Window Manager is an application that takes care of your windows, X-Events and more.
+You probably know about Shift or Control keys, that you can press at
+the same time than others to get different results, like Shift and
+``a'' to get uppercase A. X11 inherits some extra modifier keys from
+past computers that had really special keyboards like the Space Cadet
+keyboard. In modern keyboards unused keys can emit these key symbols,
+or even multiple symbols from the same key.
 
-@item Some Window Managers include a Compositing Manager.
-@end itemize
+The avaliable extra key symbols you will see are Meta (pretty common
+to be in Alt key... probably emiting Alt symbol at the same time) and
+Hyper & Super (both typically assigned to the keys with logos). Hyper
+and Meta can be shortened to H and M, as well as C for Control, A for
+Alt and S for Shift.
 
-@heading 1.2 What is a Compositing Manager?
+Mouse buttons in X11 are also named, allowing different hardware to be
+used easily as applications only have to support and document things
+like Mouse Button number 1, no matter if the mouse is configured for
+right hand, left hand... or is a tablet with a pen. Sometimes you will
+see the names shortened to MB1, MB2, etc. The typical configuration
+for a right handed mouse is MB1 left button, MB2 center button or
+press wheel, MB3 rigth button, with wheel rotation creating virtual
+presses and releases of MB4 and MB5 with every fraction of turn.
 
-@itemize @bullet
+For futher reading, please refer to the documentation of your X
+system, specially xev and xmodmap programs.
 
-@item A Compositing Manager is a plugin for a Window Manager (if built-in it's an Compositing Window Manager), that let's it create fancy graphical 3d effects, using XDamage and XComposite.
+@end enumerate
+@c end of Introduction
 
-@item Sawfish does not ship a Compositing Manager yet. This is planned for version 3.0, if you want/need 3d effects, have a closer look at projects like the cairo-compositing-manager. (http://cairo-compmgr.tuxfamily.org/)
-@end itemize
 
-@heading 1.3 Why Sawfish?
+@item Basic Window Managing Functions
 
-@itemize @bullet
+@enumerate
+@item Window-Menu
 
-@item Well, sawfish is a very fast and extensible window-manager.
+The window-menu is a menu which offers you an easy way to modify the
+current window.
 
-@item Powerfull key-bindings: Virtually every function can be bound to keys or mouse-buttons
+You can access it by left-click on the menu button, or middle-click on
+the close or iconify button
 
-@item Event Hooking: For many events (moving, edge-flipping ...) you can alter the way sawfish behaves
+@item Iconify
 
-@item Window Matching: For each window you may set a set of actions to automatically perform. (different size, start-state ...)
+To iconify a window means to display a small icon, or task-list entry
+representing the window, instead of displaying the whole one, You may
+know that feature as "Minimize", which is a different term, having the
+same meaning.
 
-@item Flexible Theming: Sawfish allows very different themes to be created and a variety is already available (http://sawfish.wikia.com/wiki/Themes)
+You can iconify a window by left-click on the iconify button.
 
-@item Extensibility: Sawfish can load 3rdparty scripts easily and a whole bunch is just waiting to be discovered by you. (http://sawfish.wikia.com/wiki/Scripts)
-@end itemize
+@item Uniconify
 
-@heading 2 Basic Window Managing Functions
+To uniconify a window means to restore a previously iconified window,
+to it's prior state.
 
-@heading 2.0 Window-Menu
+You can uniconify a window by left-click on it's dock-icon or task-list entry.
 
-@itemize @bullet
+@item Maximize
 
-@item The window-menu is a menu which offers you an easy way to modify the current window.
+To maximize a window means to make it as big as possible, but without
+overlapping panel or dock windows, which may be there.
 
-@item You can access it by left-click on the menu button, or middle-click on the close or iconify button
-@end itemize
+You can maximize a window by left-click on the maximize button.
 
-@heading 2.1 Iconify
+@item Unmaximize
 
-@itemize @bullet
-  
-@item To iconify a window means to display a small icon, or task-list entry representing the window, instead of displaying the whole one, You may know that feature as "Minimize", which is a different term, having the same meaning.
+To unmaximize a window means to restore it to the size it got before
+it has been maximized (therefore only maximized windows can be
+unmaximized).
 
-@item You can iconify a window by left-click on the iconify button.
-@end itemize
+You can unmaximize a window by left-click on the maximize button, on a
+maximized window.
 
-@heading 2.2 Uniconify
+@item Delete Window
 
-@itemize @bullet
+To delete a window simply means to close it, any transient (sub-windows, belonging to that main-window) will be deleted, too.
 
-@item To uniconify a window means to restore a previously iconified window, to it's prior state.
+You can delete a window by left-click on the close button.
 
-@item You can uniconify a window by left-click on it's dock-icon or task-list entry.
-@end itemize
+@item Shade Window
 
-@heading 2.3 Maximize
+To shade a window means to only display the titlebar.
 
-@itemize @bullet
+You can shade a window by double-left-click on the titlebar or left-click on the shade button
 
-@item To maximize a window means to make it as big as possible, but without overlapping panel or dock windows, which may be there.
+@item Unshade Window
 
-@item You can maximize a window by left-click on the maximize button.
-@end itemize
+To unshade a window means to restore a previously shaded window.
 
-@heading 2.4 Unmaximize
+You can unshade a window by double-left-click on the titlebar or
+left-click on the shade button, of a shaded window.
 
-@itemize @bullet
+@item Raise Window
 
-@item To unmaximize a window means to restore it to the size it got before it has been maximized (therefore only maximized windows can be unmaximized).
+To raise a window means to put it above other windows.
 
-@item You can unmaximize a window by left-click on the maximize button, on a maximized window.
-@end itemize
+To raise a window press ALT + UP (Arrow Up Key).
 
-@heading 2.5 Delete Window
+@item Lower Window
 
-@itemize @bullet
+To lower a window means to put it below other windows.
 
-@item To delete a window simply means to close it, any transient (sub-windows, belonging to that main-window) will be deleted, too.
+To lower a window press ALT + DOWN (Arrow Down Key).
 
-@item You can delete a window by left-click on the close button.
-@end itemize
+@item Cycle Windows
 
-@heading 2.6 Shade Window
+To cycle trough windows simply means that you'll look trough all
+windows and as you stop the currently cycled window will be the new
+active window.
 
-@itemize @bullet
+You can cycle trough windows by keeping ALT pressed and press TAB one
+time for each window to cycle.
 
-@item To shade a window means to only display the titlebar.
+There's also the possibility to cycle backwards, but that is not bound
+to any keybinding by default.
 
-@item You can shade a window by double-left-click on the titlebar or left-click on the shade button
-@end itemize
+@end enumerate
+@c end of Basics
 
-@heading 2.7 Unshade Window
-
-@itemize @bullet
-
-@item To unshade a window means to restore a previously shaded window.
-
-@item You can unshade a window by double-left-click on the titlebar or left-click on the shade button, of a shaded window.
-@end itemize
-
-@heading 2.8 Raise Window
-
-@itemize @bullet
-
-@item To raise a window means to put it above other windows.
-
-@item To raise a window press ALT + UP (Arrow Up Key).
-@end itemize
-
-@heading 2.9 Lower Window
-
-@itemize @bullet
-
-@item To lower a window means to put it below other windows.
-
-@item To lower a window press ALT + DOWN (Arrow Down Key).
-@end itemize
-
-@heading 2.10 Cycle Windows
-
-@itemize @bullet
-
-@item To cycle trough windows simply means that you'll look trough all windows and as you stop the currently cycled window will be the new active window.
-
-@item You can cycle trough windows by keeping ALT pressed and press TAB one time for each window to cycle.
-
-@item There's also the possibility to cycle backwards, but that is not bound to any keybinding by default.
-@end itemize
-
-
-@heading 3 Organizing Windows
+@item Organizing Windows
 
 Sawfish offers multiple means to organize windows, most can work at
 the same time than others, as you need.
 
+@enumerate
+@item Workspaces
 
-@heading 3.1 Workspaces
+Workspaces are virtual surfaces where to place windows. They are also
+called (Virtual) Desktops in other WMs. You must have at least one.
 
-@itemize @bullet
-
-@item Workspaces are virtual surfaces where to place windows. They are
-also called (Virtual) Desktops in other WMs. You must have at least
-one.
-
-@item Windows can be in one or more workspaces at the same time, with
+Windows can be in one or more workspaces at the same time, with
 different positions in each.
 
 @c navigate, add, merge, naming, etc
 
-@end itemize
+@item Viewports
 
-
-@heading 3.2 Viewports
-
-@itemize @bullet
-
-@item Workspaces can be bigger than your monitor, here is where the
-concept of Viewport comes into play, it gives you a view into this bigger
+Workspaces can be bigger than your monitor, here is where the concept
+of Viewport comes into play, it gives you a view into this bigger
 space. All Workspaces must share the same size, though, like if they
 were cut all at once.
 
-@item You can move the Viewport around, and you will see how windows that
-go out of the right side of the screen will appear from the left, if
-you moved your viewport to the right. It is a continous surface. The
+You can move the Viewport around, and you will see how windows that go
+out of the right side of the screen will appear from the left, if you
+moved your viewport to the right. It is a continous surface. The
 scrolling can be in full monitor increments or partial.
 
 @c navigate, configure, etc
 
-@end itemize
+@item Layers
 
-@heading 3.3 Layers
-
-@itemize @bullet
-
-@item Sometimes you want to keep some windows above all other windows. Or
+Sometimes you want to keep some windows above all other windows. Or
 maybe below them. Sawfish does this by means of Layers. A window in a
-layer will always appear in a given depth, above lower valued layers, but
-below.
+layer will always appear in a given depth, above lower valued layers,
+but below.
 
-@item Default level is 0, windows below are in negative levels, and windows
-above are in positive levels. Many WMs support just three layers, Sawfish
-by default assigns them the numbers -2, 0 and 2.
+Default level is 0, windows below are in negative levels, and windows
+above are in positive levels. Many WMs support just three layers,
+Sawfish by default assigns them the numbers -2, 0 and 2.
 
 @c change, configure matchers, etc
 
-@end itemize
-
-@heading 3.4 Tabs
+@item Tabs
 
 @c to be written once that settles
+
+@end enumerate
+@c end of Organization
+@end enumerate
+@c end of global
