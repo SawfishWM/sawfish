@@ -11,6 +11,7 @@ C = Control
 S = Shift
 A = Alt
 Super = Super
+Mod5 = Alt Gr (Right Alt Key)
 
 Left = Left Arrow Key
 Right = Right Arrow Key
@@ -24,11 +25,14 @@ KP_Down = Keypad Down Arrow Key
 
 Tab = Tabulator Key
 
-ISO_Left_Tab = 
+ISO_Left_Tab = Same as Shift + TAB
+ISO_Level3_Shift = Same as Mod5
 
 Button1 = Left Mouse Button
 Button2 = Middle Mouse Button/Scroll Wheel (Button 1 and 3 together should emulate this)
 Button3 = Right Mouse Button
+Button4 = Scroll Wheel Up
+Button5 = Scroll Wheel Down
 
 Off = When Mouse Button Is Released
 Off1 = Same as Off
@@ -37,6 +41,14 @@ Click = When Mouse Button Is Clicked
 Click1 = Same as Click
 Click2 = When Mouse Button Is Clicked Twice
 Move = When Button Is Clicked and Pointer Moved
+
+how to set keybindings manually:
+
+( bind-keys keymap "keybinding" 'action )
+
+for example:
+
+( bind-keys global-keymap "W-Tab" 'cycle-windows )
 
 global-keymap (Those bindings are active everywhere):
 
