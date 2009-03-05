@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-09 10:44+0100\n"
+"POT-Creation-Date: 2009-03-05 08:31+0100\n"
 "PO-Revision-Date: 2002-10-18 16:43+0200\n"
 "Last-Translator: DOMA Peter <zelin@pointernet.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -14,1279 +14,3490 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../lisp/sawfish/gtk/widgets/alist.jl:37
-#: ../lisp/sawfish/ui/widgets/keymap.jl:66
-msgid "Key"
-msgstr "Kulcs"
+#. ../themes/Crux/theme.jl
+msgid "Crux Theme"
+msgstr "Crux téma"
 
-#: ../lisp/sawfish/gtk/widgets/alist.jl:38
-msgid "Value"
-msgstr "Érték"
+#. ../themes/Crux/theme.jl
+msgid ""
+"Accent color for focused windows (if unset uses the GTK+ selection color)."
+msgstr ""
+"Fókuszban lévő ablakok színe (ha nincs beállítva, akkor az mint a GTK+ "
+"kiválasztás színe)."
 
-#: ../lisp/sawfish/gtk/widgets/color.jl:40
-msgid "Select color"
+#. ../themes/Crux/theme.jl
+msgid "Display the window's icon in its menu button."
+msgstr "Az ablak ikonjának megjelenítése a menügombon."
+
+#. ../themes/Crux/theme.jl
+msgid "Display title buttons to mimic: \\w"
+msgstr "A következő mimic-ekhez cím gombok megjelenítése: \\w"
+
+#. ../themes/gradient/theme.jl
+msgid "Gradient Theme"
+msgstr "Színátmenet keretstílusnál"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/gradient/theme.jl
+msgid "horizontal"
+msgstr "vízszintes"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/gradient/theme.jl
+msgid "vertical"
+msgstr "függőleges"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/gradient/theme.jl
+msgid "diagonal"
+msgstr "átlós"
+
+#. ../themes/gradient/theme.jl
+msgid "Direction of gradient in `gradient' frame style."
+msgstr "Színátmenet iránya a `színátmenet' keretstílusnál."
+
+#. ../themes/gradient/theme.jl
+msgid "`From' color of inactive frames in `gradient' frame style."
+msgstr "`Tól-' szín az inaktív kereteknél `színátmenet' keretstílusnál."
+
+#. ../themes/gradient/theme.jl
+msgid "`To' color of inactive frames in `gradient' frame style."
+msgstr "`-Ig' szín az inaktív kereteknél `színátmenet' keretstílusnál."
+
+#. ../themes/gradient/theme.jl
+msgid "`From' color of active frames in `gradient' frame style."
+msgstr "`Tól-' szín az aktív kereteknél `színátmenet' keretstílusnál."
+
+#. ../themes/gradient/theme.jl
+msgid "`To' color of active frames in `gradient' frame style."
+msgstr "`-Ig' szín az aktív kereteknél `színátmenet' keretstílusnál."
+
+#. ../themes/gradient/theme.jl
+msgid "Use less memory when creating gradients, possibly affecting quality."
+msgstr ""
+"Színátmenetek létrehozásakor kevesebb memória használata, akár a minőség "
+"rovására is."
+
+#. ../themes/mono/theme.jl
+msgid "Mono Theme"
+msgstr "Mono téma"
+
+#. ../themes/mono/theme.jl
+msgid "Color of inactive frames (if unset use GTK+ background color)."
+msgstr ""
+"Inaktív keretek színe (ha nincs beállítva, akkor az mint a GTK+ háttérszín)."
+
+#. ../themes/mono/theme.jl
+msgid "Color of active frames (if unset use GTK+ selection color)."
+msgstr ""
+"Aktív keretek színe (ha nincs beállítva, akkor az mint a GTK+ kiválasztás "
+"színe)."
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/mono/theme.jl
+msgid "left"
+msgstr "bal"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/mono/theme.jl
+msgid "right"
+msgstr "jobbra"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/mono/theme.jl
+msgid "center"
+msgstr "középre"
+
+#. ../themes/mono/theme.jl
+msgid "Text is \\w justified in window titles."
+msgstr "A szöveg \\w igazított az ablakok fejlécében."
+
+#. ../themes/mxflat/theme.jl
+msgid "mxflat"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "title"
+msgstr "Állapot"
+
+#. ../themes/mxflat/theme.jl
+msgid "basic"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "gradient"
+msgstr "tranziensek"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "colors"
 msgstr "Szín kiválasztása"
 
-#: ../lisp/sawfish/gtk/widgets/file.jl:33
-#: ../lisp/sawfish/gtk/widgets/font.jl.in:45
-msgid "Browse..."
-msgstr "Keresés..."
+#. ../themes/mxflat/theme.jl
+msgid "buttons"
+msgstr ""
 
-#: ../lisp/sawfish/gtk/widgets/file.jl:43
-msgid "Select file"
-msgstr "Fájl kiválasztása"
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "positions 1"
+msgstr "Pozíció"
 
-#: ../lisp/sawfish/gtk/widgets/font.jl.in:55
-msgid "Select font"
-msgstr "Betűtípus kiválasztása"
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "positions 2"
+msgstr "Pozíció"
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:53
-msgid "Add..."
-msgstr "Hozzáadás..."
+#. ../themes/mxflat/theme.jl
+msgid "keymaps 1"
+msgstr ""
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:54
-msgid "Delete"
-msgstr "Törlés"
+#. ../themes/mxflat/theme.jl
+msgid "keymaps 2"
+msgstr ""
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:55
-msgid "Edit..."
-msgstr "Szerkesztés..."
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "borders"
+msgstr "Felső keret"
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:88
-#: ../lisp/sawfish/gtk/widgets/list.jl:89
-msgid "Add:"
-msgstr "Hozzáadás:"
+#. ../themes/mxflat/theme.jl
+msgid "extended"
+msgstr ""
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:120
-#: ../lisp/sawfish/gtk/widgets/list.jl:122
-msgid "Edit:"
-msgstr "Szerkesztés:"
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "normal"
+msgstr "Normál"
 
-#: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:32
-#: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:36
-msgid "Yes"
-msgstr "Igen"
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../themes/mxflat/theme.jl
+msgid "all"
+msgstr "összes"
 
-#: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:36
-msgid "No"
-msgstr "Nem"
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../themes/mxflat/theme.jl
+msgid "none"
+msgstr "nincs"
 
-#: ../lisp/sawfish/gtk/widget.jl:371
-#, librep-format
+#. ../themes/mxflat/theme.jl
+msgid ""
+"decoration mode\n"
+"\n"
+"set the mode 'when to draw a titlebar and window buttons'. the decoration "
+"mode 'all' means that all windows, even transients/dialogs, will get a "
+"titlebar and buttons. none means no window will get any :-). usually "
+"transients only have a contents-border. this option is for reimplementing a "
+"sawfish feature that is gone in the latest version."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "titlebar height (9 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize title string\n"
+"\n"
+"see the tooltip for the 'title string' option below for more information. "
+"(NOTE: i hope the redrawing problems with this option are solved. if not, "
+"write an email please!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string\n"
+"\n"
+"the string you insert here will be your new title string. variables always "
+"start with a dollar-sign $ and are replaced with their actual values. to get "
+"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
+"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
+"string]. the following vars are built-in: $name, $fullname, $width, $width-"
+"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
+"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
+"if not, write an email please!"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"update title string periodically\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string update interval (1 - 1000000 s)\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string font\n"
+"\n"
+"you should really choose a better font. verdana bold 8 pt looks nice."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize title position\n"
+"\n"
+"by default the title string is centered horizontally and vertically."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "real-center"
+msgstr "középre"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string horizontal alignment\n"
+"\n"
+"'real-center' means to take the whole titlebar into account while centering "
+"the string. when selecting 'center' only the distance between the buttons is "
+"taken into account."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
+"\n"
+"the horizontal position of the title string can only be adjusted if the "
+"horizontal alignment is not 'center'. the range also depends on the setting "
+"of the option above. it the title string is already aligned left, you cannot "
+"adjust it to be even further left because there are button in the way."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "top"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "bottom"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "title string vertical alignment"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient titlebar background (experimental)\n"
+"\n"
+"when activating the gradient background the normal titlebar background "
+"colors will be ignored. besides the button background colors will be "
+"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
+"low value, ie high quality.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient mode\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient quality (1 best - 20 worst)\n"
+"\n"
+"the value here is the factor the calculated gradient image will be scaled "
+"down. this increases speed but decreases quality."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "rainbow"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "jamaica"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "rgb"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "custom"
+msgstr "Testreszabás"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient color mode\n"
+"\n"
+"the custom mode will respect the colors set in the list below."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used. besides the gradient color mode must be set to "
+"custom to activate this list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "reverse colors"
+msgstr "Szín kiválasztása"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused/highlighted titlebar colors hue (0 - 360)\n"
+"\n"
+"this value changes the hue of a color, by moving (0 - 360) degress around "
+"the color cycle...180 for example inverts the color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, c-format
+msgid ""
+"unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
+"color)\n"
+"\n"
+"the saturation of a color is a measurement of the color intensity"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, c-format
+msgid ""
+"unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
+"color)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"  focused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"  focused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize extended title string colors\n"
+"\n"
+"you can customize additional colors of the title string. if you deactivate "
+"this, these colors will be set to the focused title string color."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "default-9"
+msgstr "Alapértelmezett"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "default-12"
+msgstr "Alapértelmezett"
+
+#. ../themes/mxflat/theme.jl
+msgid "square-6"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-9"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-12"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-15"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-18"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "ball-9"
+msgstr "összes"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "ball-12"
+msgstr "összes"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button icon set (experimental)\n"
+"\n"
+"the number at the end is the width/height of the button icons in the icon "
+"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button size\n"
+"\n"
+"by default the button size follows the size of the titlebar, but by "
+"activating this you can set it to something different."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"buttons size (1 - 1000 pixel)\n"
+"\n"
+"a buttons size that is bigger than your current titlebar height is ignored."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button vertical alignment\n"
+"\n"
+"if a button is smaller than the titlebar you might want to set its vertical "
+"alignment."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"scale button icons (experimental)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"display window icon on menu button\n"
+"\n"
+"many people like having the window-icon displayed on the menu-button. this "
+"icon is defined by the application itself and is also shown in your pager "
+"and task-list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "menu icon scale (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "button distance (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "buttons left offset (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "buttons right offset (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
+"\n"
+"enabling this will allow you to set the positon of each button in the "
+"titlebar manually. a negative/positiv value means the button will be drawn "
+"on left/right side of the titlebar."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "title-height"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "pixel"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button position model\n"
+"\n"
+"'titel-height' means calculate position as multiple of title height. when "
+"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
+"mind that several buttons might slide on top of each other. 'none' means no "
+"buttons at all."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "menu button position"
+msgstr "_Hely megjegyzése"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "shade button position"
+msgstr "shade-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "iconify button position"
+msgstr "iconify-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "maximize button position"
+msgstr "maximize-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "close button position"
+msgstr "close-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "sticky button position"
+msgstr "iconify-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "previous workspace button position"
+msgstr "Előző munkaterület ablak"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "next workspace button position"
+msgstr "Következő munkaterület ablak"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "configure button position"
+msgstr "iconify-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "info button position"
+msgstr "Ablak előzményei pozíciók mentése"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "always-on-top button position"
+msgstr "Ablak előzményei pozíciók mentése"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "lock button position"
+msgstr "close-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize sticky button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: toggle sticky "
+"state of window"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:sticky-button-keymap"
+msgstr "iconify-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize previous button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"previous workspace - button2 workspace-list - button3 send window to first "
+"workspace - button6 pack window left"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:previous-button-keymap"
+msgstr "menu-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize next button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"next workspace - button2 workspace-list - button3 send window to last "
+"workspace - button6 pack window right"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:next-button-keymap"
+msgstr "menu-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: send window to next workspace - button2 workspace-list - button3 "
+"send window to last workspace - button6 pack window right"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize configure button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: start sawfish-"
+"ui - button3: toggle custom title string"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:configure-button-keymap"
+msgstr "menu-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: start sawfish-ui - button3: toggle custom title string"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize info button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: window list - "
+"button3 window snooper (not included by default)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:info-button-keymap"
+msgstr "menu-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"always on top depth (-1000 - 1000)\n"
+"\n"
+"a window will have this depth after you have pressed the always-on-top "
+"button. 0 is the normal window level. every positive value means above other "
+"windows, a negative value means below. keept it at a positive value in order "
+"to have the always-on-top button do it's job."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize always-on-top button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: sets window "
+"depth to the adjusted value"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:always-on-top-button-keymap"
+msgstr "menu-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize look button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: lock window "
+"position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:lock-button-keymap"
+msgstr "close-button-keymap"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button-colors\n"
+"\n"
+"when you active this you will be able to set custom button colors. by "
+"default the button colors depend on the titlebar colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width (0 - 1000 pixel)\n"
+"\n"
+"set the width border around the window."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width for maximized windows (0 - 1000 pixel)\n"
+"\n"
+"when you like having a big border around your windows you might have noticed "
+"that sawfish still draws that big border when the window is maximized. if "
+"you don't want that, set the border width for maximized windows smaller than "
+"the border width for unmaximized windows. (NOTE: this feature is still buggy "
+"as sawfish does not resize the windows correctly yet, so the best might be "
+"to set it to the normal border width.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize border for focused windows (experimental)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width for focused windows (0 - 1000 pixel)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title-contents border width (0 - 1000 pixel)\n"
+"\n"
+"sets the widths of the line between titlebar and contents window"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border offset (-1000 - 1000 pixel)\n"
+"\n"
+"adjust the point where the border actually starts. many gtk2 apps draw a "
+"small black border around their contents window and this is just ugly when "
+"sawfish draws another border around the window. with a border offset of -1 "
+"the sawfish window border will overlay the gtk2 border exactly."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"keep window borders and corners at their place when shading a window\n"
+"\n"
+"when shading a window borders and corners will stay where they were and not "
+"merge with the titlebar."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"show window corners\n"
+"\n"
+" the corners are used to resize a window in two directions at the same time. "
+"usually the width and length of window corners are determined by the border "
+"width but you can adjust them below."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"corners length adjustement (-1 - 100 pixel)\n"
+"\n"
+"increasing the corner length will grow the window corners along the window "
+"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
+"grab the 1 pixel corner to be able to resize the window in two directions; "
+"thus, make it bigger."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "outside"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "inside"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "corner direction"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"corners width adjustement (0 - 100 pixel)\n"
+"\n"
+"this option makes the window corners broader. with a border width of 1 pixel "
+"it is hard to grab this 1 pixel corner to be able to resize the window in "
+"two directions; thus, make it bigger."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow (experimental)\n"
+"\n"
+"draw a small additional border around your windows emulating a solid shadow "
+"effect. use the options below to adjust its width and direction. (NOTE: this "
+"is VERY cpu intensive and might slow down your computer noticably. so turn "
+"it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "fake shadow only on focused windows"
+msgstr "Fejléc-háttérképek fókuszon kívüli ablakokhoz."
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "north"
+msgstr "nem"
+
+#. ../themes/mxflat/theme.jl
+msgid "east"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "south"
+msgstr "nem"
+
+#. ../themes/mxflat/theme.jl
+msgid "west"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "north-east"
+msgstr "nem"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "north-west"
+msgstr "nem"
+
+#. ../themes/mxflat/theme.jl
+msgid "south-east"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "south-west"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow light source\n"
+"\n"
+"set the direction of the fake shadow. usually only 2 or 3 borders of your "
+"window have a fake shadow. this depends on where the light comes from."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow light distance (0 - 100)\n"
+"\n"
+"this option has only an effect on the north, east, south and west light "
+"sources. the further away the light source is, the smaller will the two "
+"'side' shadows be."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "fake shadow width (0 - 100 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "shadow color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize border colors\n"
+"\n"
+"you can customize your border colors here. if you deactivate this, these "
+"colors will be set to the focused title string color."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked border color"
+msgstr ""
+
+#. ../themes/simple/theme.jl
+msgid "Simple Theme"
+msgstr "Egyszerű téma"
+
+#. ../themes/simple/theme.jl
+msgid "Color of inactive frames in `simple' frame style."
+msgstr "Inaktív keretek színe az `egyszerű' keretstílushoz."
+
+#. ../themes/simple/theme.jl
+msgid "Color of active frames in `simple' frame style."
+msgstr "Aktív keretek színe az `egyszerű' keretstílushoz."
+
+#. ../themes/smaker/theme.jl
+msgid "SMaker Theme"
+msgstr "SMaker téma"
+
+#. ../themes/smaker/theme.jl
+msgid "Use black-on-white button images."
+msgstr "Fekete-fehér képek használata a gombokon."
+
+#. ../themes/smaker/theme.jl
+msgid "Color to use when drawing text."
+msgstr "Szöveg rajzolásához használt szín."
+
+#. ../themes/smaker/theme.jl
+msgid "Bar image for unfocused windows."
+msgstr "Fejléc-háttérképek fókuszon kívüli ablakokhoz."
+
+#. ../themes/smaker/theme.jl
+msgid "Bar image for focused windows."
+msgstr "Fejléc-háttérkép fókuszban levő ablakokhoz."
+
+#. ../themes/smaker/theme.jl
+msgid "Bar image for highlighted parts."
+msgstr "Fejléc-háttérkép a kijelölt részekhez."
+
+#. ../themes/smaker/theme.jl
+msgid "Bar image for clicked parts."
+msgstr "Fejléc-háttérkép a kattintott részekhez."
+
+#. ../themes/smaker/theme.jl
+msgid "Height of title bar."
+msgstr "Fejléc magassága"
+
+#. ../themes/smaker/theme.jl
+msgid "Width of window border."
+msgstr "Ablakkeret szélessége."
+
+#. ../themes/smaker/theme.jl
+msgid "Border width of bar images."
+msgstr "Fejléc háttérképek keretszélessége"
+
+#. ../lisp/sawfish/gtk/widget.jl
+#, c-format
 msgid "No matching item for %S"
 msgstr "Nem találtam illeszkedőt a következőre: %S"
 
-#: ../lisp/sawfish/gtk/widget.jl:501
-#, librep-format
+#. ../lisp/sawfish/gtk/widget.jl
 msgid "** unknown widget **  "
 msgstr "** ismeretlen widget **  "
 
-#: ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl:33
-#: ../lisp/sawfish/ui/widgets/workspace-geometry.jl:33
-msgid "Workspaces:"
-msgstr "Munkaterületek:"
+#. ../lisp/sawfish/ui/widgets/keymap.jl
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+msgid "Key"
+msgstr "Kulcs"
 
-#: ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl:34
-#: ../lisp/sawfish/ui/widgets/workspace-geometry.jl:34
-msgid "Columns:"
-msgstr "Oszlop:"
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+msgid "Value"
+msgstr "Érték"
 
-#: ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl:35
-#: ../lisp/sawfish/ui/widgets/workspace-geometry.jl:35
-msgid "Rows:"
-msgstr "Sor:"
+#. ../lisp/sawfish/gtk/widgets/color.jl
+msgid "Select color"
+msgstr "Szín kiválasztása"
 
-#: ../lisp/sawfish/ui/apply.jl:87
-#, librep-format
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../lisp/sawfish/gtk/widgets/file.jl
+msgid "Browse..."
+msgstr "Keresés..."
+
+#. ../lisp/sawfish/gtk/widgets/file.jl
+msgid "Select file"
+msgstr "Fájl kiválasztása"
+
+#. ../lisp/sawfish/gtk/widgets/font.jl
+msgid "Select font"
+msgstr "Betűtípus kiválasztása"
+
+#. ../lisp/sawfish/gtk/widgets/list.jl
+msgid "Add..."
+msgstr "Hozzáadás..."
+
+#. ../lisp/sawfish/gtk/widgets/list.jl
+msgid "Delete"
+msgstr "Törlés"
+
+#. ../lisp/sawfish/gtk/widgets/list.jl
+msgid "Edit..."
+msgstr "Szerkesztés..."
+
+#. ../lisp/sawfish/gtk/widgets/list.jl
+msgid "Add:"
+msgstr "Hozzáadás:"
+
+#. ../lisp/sawfish/gtk/widgets/list.jl
+msgid "Edit:"
+msgstr "Szerkesztés:"
+
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "Yes"
+msgstr "Igen"
+
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "No"
+msgstr "Nem"
+
+#. ../lisp/sawfish/ui/apply.jl
+#, c-format
 msgid "While changing %s:"
 msgstr "%s változtatása közben:"
 
-#: ../lisp/sawfish/ui/apply.jl:109
+#. ../lisp/sawfish/ui/apply.jl
 msgid "Sawfish Error"
 msgstr "Sawfish hiba"
 
-#: ../lisp/sawfish/ui/shell.jl:104 ../lisp/sawfish/ui/shell.jl:105
+#. ../lisp/sawfish/ui/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Környezet:"
+
+#. ../lisp/sawfish/ui/shell.jl
 #, fuzzy
 msgid "Sawfish Configurator"
 msgstr "Sawfish konfiguráló"
 
-#: ../lisp/sawfish/ui/layouts/keymaps.jl:53
-msgid "Context:"
-msgstr "Környezet:"
-
-#: ../lisp/sawfish/ui/widgets/command.jl:52
-#: ../lisp/sawfish/ui/widgets/keymap.jl:66 ../lisp/sawfish/wm/commands.jl:372
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/ui/widgets/keymap.jl
+#. ../lisp/sawfish/ui/widgets/command.jl
 msgid "Command"
 msgstr "Parancs"
 
-#: ../lisp/sawfish/ui/widgets/command.jl:66
+#. ../lisp/sawfish/ui/widgets/command.jl
 msgid "Undocumented"
 msgstr "Nincs dokumentálva"
 
-#: ../lisp/sawfish/ui/widgets/event.jl:35
-#: ../lisp/sawfish/ui/widgets/match-window.jl:53
+#. ../lisp/sawfish/ui/widgets/match-window.jl
+#. ../lisp/sawfish/ui/widgets/event.jl
 msgid "Grab..."
 msgstr "Megragadás..."
 
-#: ../lisp/sawfish/ui/widgets/keymap.jl:54
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Munkaterületek:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Oszlop:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Sor:"
+
+#. ../lisp/sawfish/ui/widgets/keymap.jl
 #, fuzzy
 msgid "Edit Binding"
 msgstr "Hozzárendelés szerkesztése"
 
-#: ../lisp/sawfish/ui/widgets/keymap.jl:85
+#. ../lisp/sawfish/ui/widgets/keymap.jl
 msgid "Key:"
 msgstr "Kulcs:"
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:42
-#: ../lisp/sawfish/ui/widgets/match-window.jl:242
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Matchers"
 msgstr "Illesztők"
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:119
-#: ../lisp/sawfish/ui/widgets/match-window.jl:242
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Actions"
 msgstr "Műveletek"
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:207
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "not"
 msgstr "nem"
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:228
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 #, fuzzy
 msgid "Match Window Properties"
 msgstr "Ablakok tulajdonságainak illesztése"
 
-#: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
-#: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
-#: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
+#. ../lisp/sawfish/wm/animation/outline.jl
+msgid "Animation Outline Coordinates"
+msgstr ""
+
+#. ../lisp/sawfish/wm/animation/outline.jl
+#, fuzzy
+msgid "Animation Steps"
+msgstr "Műveletek"
+
+#. ../lisp/sawfish/wm/animation/outline.jl
+#, fuzzy
+msgid "Animation Delay"
+msgstr "Műveletek"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Window Cycling"
+msgstr "Lépegetés az ablakokon"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Sound"
+msgstr "Hang"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Matched Windows"
+msgstr "Illesztett ablakok"
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tooltips"
+msgstr "Buboréksúgók"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+#. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
 msgstr "Index:"
 
-#: ../lisp/sawfish/wm/commands.jl:365
-msgid "Command:"
-msgstr "Parancs:"
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Next workspace window"
+msgstr "Következő munkaterület ablak"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Previous workspace window"
+msgstr "Előző munkaterület ablak"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Next window"
+msgstr "Következő ablak"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Previous window"
+msgstr "Előző ablak"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Describe symbol"
+msgstr "Szimbólum leírása"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos function"
+msgstr "Apropos függvény"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos variable"
+msgstr "Apropos változó"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome toggle skip winlist"
+msgstr "Gnome ablaklista kihagyásának kapcsolása"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome set skip winlist"
+msgstr "Gnome ablaklista kihagyásának bekapcsolása"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome clear skip winlist"
+msgstr "Gnome ablaklista kihagyásának törlése"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome toggle skip tasklist"
+msgstr "Gnome feladatlista kihagyásának kapcsolása"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome set skip tasklist"
+msgstr "Gnome feladatlista kihagyásának bekapcsolása"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome clear skip tasklist"
+msgstr "Gnome feladatlista kihagyásának törlése"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome logout"
+msgstr "Kilépés a Gnome-ból"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome www page"
+msgstr "GNOME honlap"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome help browser"
+msgstr "GNOME súgóböngésző"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome about"
+msgstr "Gnome névjegy"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Iconify group"
+msgstr "Csoport ikonizálása"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Uniconify group"
+msgstr "Csoport visszaállítása"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Iconify transient group"
+msgstr "Tranziens csoport ikonizálása"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Uniconify transientgroup"
+msgstr "Tranziens csoport nagyítása"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Make group sticky"
+msgstr "Csoport ragadóssá tétele"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Make group unsticky"
+msgstr "Csoport ragadósságának megszűntetése"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Toggle group sticky"
+msgstr "Csoport ragadósságának állítása"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Send group to current workspace"
+msgstr "Csoport küldése a jelenlegi munkaterületre"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Send group to next workspace"
+msgstr "Csoport küldése a következő munkaterületre"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Send group to previous workspace"
+msgstr "Csoport küldése az előző munkaterületre"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group to current viewport"
+msgstr "Csoport mozgatása a jelenlegi munkalapra"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group left"
+msgstr "Csoport mozgatása balra"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group right"
+msgstr "Csoport mozgatása jobbra"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group up"
+msgstr "Csoport mozgatása fel"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group down"
+msgstr "Csoport mozgatása lefelé"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Raise group"
+msgstr "Csoport előhozása"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Lower group"
+msgstr "Csoport kicsinyítése"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Raise lower group"
+msgstr "Alsó csoport előhozása"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Raise group depth"
+msgstr "Csoport mélységének növelése"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Lower group depth"
+msgstr "Csoport mélységének csökkentése"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete group"
+msgstr "Csoport törlése"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Growing and packing of windows"
+msgstr "Ablakok növesztése és tömörítése"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "always"
+msgstr "mindig"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr "néha"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "never"
+msgstr "soha"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Ablak áthelyezése a következő munkalapra."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Ablakok növesztésénél vagy tömörítésénél a teljesen elfedett ablakokhoz való "
+"ütközés kapcsolása."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+"Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott ablakokkal "
+"való ütközésének kapcsolása."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr ""
+"Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott ablakokkal "
+"való ütközésének kapcsolása."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window left"
+msgstr "Ablak növesztése balra"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window right"
+msgstr "Ablak növesztése jobbra"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window up"
+msgstr "Ablak növesztése felfelé"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window down"
+msgstr "Ablak növesztése lefelé"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window left"
+msgstr "Ablak tömörítése balra"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window right"
+msgstr "Ablak tömörítése jobbra"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window up"
+msgstr "Ablak tömörítése felfelé"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window down"
+msgstr "Ablak tömörítése lefelé"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow left"
 msgstr "Növesztés balra"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow right"
 msgstr "Növesztés jobbra"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow up"
 msgstr "Növesztés felfelé"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow down"
 msgstr "Növesztés lefelé"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack left"
 msgstr "Tömörítés balra"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack right"
 msgstr "Tömörítés jobbra"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack up"
 msgstr "Tömörítés fel"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack down"
 msgstr "Tömörítés lefelé"
 
-#: ../lisp/sawfish/wm/ext/audio-events.jl:75
-msgid "Event"
-msgstr "Esemény"
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show faq"
+msgstr "Súgó GYIK"
 
-#: ../lisp/sawfish/wm/ext/audio-events.jl:76
-msgid "Audio file"
-msgstr "Hangfájl"
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show news"
+msgstr "Súgó hírek"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:82
-msgid "No errors."
-msgstr "Nincs hiba."
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show programmer manual"
+msgstr "Súgó programozói kézikönyv"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Elhelyezés"
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show homepage"
+msgstr "Súgó honlap megtekintése"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help about"
+msgstr "Súgó névjegy"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr "A `kurzor-mozgatás-' parancsokban mozgatás ennyi képponttal."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor right"
+msgstr "Kurzor mozgatása jobbra"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor left"
+msgstr "Kurzor mozgatása balra"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor up"
+msgstr "Kurzor mozgatása felfelé"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor down"
+msgstr "Kurzor mozgatása lefelé"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor right fine"
+msgstr "Kurzor mozgatása finoman jobbra"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor left fine"
+msgstr "Kurzor mozgatása finoman balra"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor up fine"
+msgstr "Kurzor mozgatása finoman felfelé"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor down fine"
+msgstr "Kurzor mozgatása finoman lefelé"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "opaque"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "box"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "cross"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "elliptical"
+msgstr "függőleges"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "draft"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Ablakok előhozása az árnyékból előhozáskor"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Ablakok előhozása az árnyékból előhozáskor"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Raise windows when they are moved or resized."
+msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Show current position of windows while moving."
+msgstr "Az ablak aktuális pozíciójának megjelenítés mozgatáskor."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Show current dimensions of windows while resizing."
+msgstr "Az ablak aktuális méretének megjelenítése átméretezéskor."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "region"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "border"
+msgstr "Felső keret"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "grab"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "border-grab"
+msgstr "border-keymap"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Az ablak aktuális méretének megjelenítése átméretezéskor."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Distance in pixels before window edges align with each other.\n"
+"\n"
+"When moving a window, this option lets you align one of its edges with an "
+"edge of another window."
+msgstr ""
+"Ablakok szélei közti távolság (pixelekben).\n"
+"\n"
+"Ablakok mozgatásánál, ez a beállítás segíti az ablakok sarkainak egymás "
+"mellé helyezését."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move window interactively"
+msgstr "Ablak interaktív mozgatása"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize window interactively"
+msgstr "Ablak interaktív átméretezése"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move selected window"
+msgstr "Kiválasztott ablak mozgatása"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize selected window"
+msgstr "Kiválasztott ablak átméretezése"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click"
+msgstr "Előhozás és váltás kattintásra"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click if focused"
+msgstr "Előhozás és váltás kattintásra ha fókuszban van"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise or pass through click"
+msgstr "Előhozás vagy váltás kattintásra"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise window and pass through click"
+msgstr "Csoport előhozása és váltás kattintásra"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise group and pass through click"
+msgstr "Csoport előhozása és váltás kattintásra"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise transients and pass through click"
+msgstr "Tranziensek előhozása és váltás kattintásra"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrinking and Yanking of windows"
+msgstr "Ablakok növesztése és tömörítése"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "The minimum height or width to which a window may be shrunk."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "The minimum amount of window left visible, if yanked over the edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window left"
+msgstr "Ablak csúsztatása balra"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window right"
+msgstr "Ablak csúsztatása jobbra"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window up"
+msgstr "Ablak csúsztatása felfelé"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window down"
+msgstr "Ablak csúsztatása lefelé"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window left"
+msgstr "Ablak tömörítése balra"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window right"
+msgstr "Ablak tömörítése jobbra"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window up"
+msgstr "Ablak tömörítése felfelé"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window down"
+msgstr "Ablak tömörítése lefelé"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window add row"
+msgstr "Ablakméret: sor hozzáadása"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window subtract row"
+msgstr "Ablakméret: sor kivonása"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window add column"
+msgstr "Ablakméret oszlop hozzáadása"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window subtract column"
+msgstr "Ablakméret oszlop kivonása"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window left"
+msgstr "Ablak csúsztatása balra"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window right"
+msgstr "Ablak csúsztatása jobbra"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window up"
+msgstr "Ablak csúsztatása felfelé"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window down"
+msgstr "Ablak csúsztatása lefelé"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group left"
+msgstr "Csoport csúsztatása balra"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group right"
+msgstr "Csoport csúsztatása jobbra"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group up"
+msgstr "Csoport csúsztatása felfelé"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group down"
+msgstr "Csoport csúsztatása lefelé"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move viewport next"
+msgstr "Mozgatás a következő munkalapra"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move viewport previous"
+msgstr "Mozgatás a előző munkalapra"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move window previous"
+msgstr "Ablak áthelyezése előzőre"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move window next"
+msgstr "Ablak áthelyezése következőre"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Set viewport linear"
+msgstr "Munkalap sorossá tétele"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Set window viewport linear"
+msgstr "A munkalapok lineárissá tétele"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Display window names and icons while cycling through windows."
+msgstr "Ablakok ikonjainak és nevének megjelenítése lapozgatás közben."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include iconified windows when cycling."
+msgstr "Lapozgatás az ikonizált ablakokkal együtt."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include windows on all workspaces when cycling."
+msgstr "Lapozgatás az összes munkaterület ablakaival együtt."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include windows on all viewports when cycling."
+msgstr "Lapozgatás minden nézet ablakaival együtt."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "cycle-keymap"
+msgstr "cycle-keymap"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr "A billentyűtábla bejegyzései csak ablak lapozás közben aktívak."
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "The program launched by the `xterm' command."
+msgstr "Az `xterm' parancsra elindított program."
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Arguments given to the `xterm' command."
+msgstr "Az `xterm' parancsnak adott paraméterek."
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Xterm"
+msgstr "X-terminál"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command"
+msgstr "Parancs hívása"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Run shell command"
+msgstr "Héjparancs futtatása."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command:"
+msgstr "Parancs:"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command sequence"
+msgstr "Parancssorozat"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Quit"
+msgstr "Kilépés"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Restart"
+msgstr "Újraindítás"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Destroy window"
+msgstr "Ablak megsemmisítése"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Kill client"
+msgstr "Kliens kilövése"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "No operation"
+msgstr "Nincs művelet"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command with output to screen"
+msgstr "Parancs hívása, majd a kimenetének kiírása a képernyőre"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
 msgid "Focus"
 msgstr "Fókusz"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Mozgatás/Méretezés"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
 msgid "Appearance"
 msgstr "Megjelenítés"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:90
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "Munkaterületek"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "Hozzárendelések"
+
+#. ../lisp/sawfish/wm/custom.jl
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Minimalizálás/Maximalizálás"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "Egyéb"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Placement"
+msgstr "Elhelyezés"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Customize"
+msgstr "Testreszabás"
+
+#. ../lisp/sawfish/wm/ext/3d-hack.jl
+msgid "3d hack"
+msgstr "3d hack"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Play sound effects for window events."
+msgstr "Ablak eseményekhez hangok lejátszása."
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Event"
+msgstr "Esemény"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Audio file"
+msgstr "Hangfájl"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+msgid "Auto-Raise"
+msgstr "Automatikus előrehozás"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+#, fuzzy
+msgid "Raise windows when they are focused."
+msgstr "Ablakok előhozása az árnyékból előhozáskor"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+msgid "Delay in milliseconds until focused windows are raised."
+msgstr "Késleltetés ezredmásodpercben, mielőtt az ablakok előre kerülnek."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Edge Flipping"
+msgstr "Élek váltása"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr ""
+"Válaszd a következő munkaterületet amikor a mutató eléri a képernyő szélét."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "viewport"
+msgstr "munkalap"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "workspace"
+msgstr "munkaterület"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "A képernyő szélének érintése kiválasztja a következőt: \\w"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Only flip when interactively moving a window."
+msgstr "Lapváltás csak az ablak interaktív mozgatásakor."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Beep when errors occur."
+msgstr "Hiba esetén csengetés."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "nowhere"
+msgstr "sehol"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "screen"
+msgstr "képernyőre"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "standard-error"
+msgstr "standard-error"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+#, fuzzy
+msgid "both"
+msgstr "nem"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display error messages to: \\w"
+msgstr "Hibaüzenetek kijelzése: \\w"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "No errors."
+msgstr "Nincs hiba."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display errors"
+msgstr "Hibák megjelenítése"
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+#, fuzzy
+msgid "Infinite Desktop"
+msgstr "Fókuszálás az asztalra"
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid "Simulate an infinite desktop (Conflicts edge-flipping)."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+#, fuzzy
+msgid "Amount to move the workspace."
+msgstr "Küldés a következő munkaterületre"
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+#, fuzzy
+msgid "Amount to move the cursor after moving the workspace."
+msgstr "Az aktuális ablak átmozgatása az n-edik munkaterületre."
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Name"
+msgstr "Név"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Class"
+msgstr "Osztály"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Icon Name"
+msgstr "Ikon neve"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Role"
+msgstr "Feladat"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Host"
+msgstr "Gépnév"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Locale"
+msgstr "Nyelv"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Elkerülő"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignore program position"
+msgstr "Alkalmazás pozíciójának figyelmen kívül hagyása"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Place mode"
+msgstr "Elhelyezés"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Position"
+msgstr "Pozíció"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Dimensions"
+msgstr "Méret"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Workspace"
+msgstr "Munkaterület"
+
+#. ../lisp/sawfish/wm/viewport.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Viewport"
+msgstr "Munkalap"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Depth"
+msgstr "Mélység"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Placement weight"
+msgstr "Elhelyezés súlya"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Maximized"
+msgstr "Teljes méretű"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Raise on focus"
+msgstr "Előrehozás fókuszba kerüléskör"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus when mapped"
+msgstr "Fókusz leképezéskor"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never focus"
+msgstr "Soha ne legyen fókuszált"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus click through"
+msgstr "Fókusz kattintásra"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus mode"
+msgstr "Fókusz módja"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame type"
+msgstr "Kerettípus"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame style"
+msgstr "Keretstílus"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "Ignorált"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Iconified"
+msgstr "Ikonizált"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Shaded"
+msgstr "Árnyékolt"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Sticky"
+msgstr "Ragadós"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Sticky viewport"
+msgstr "Ragadós munkalap"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Group"
+msgstr "Csoport"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ungrouped"
+msgstr "Csoporton kívüli"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Cycle skip"
+msgstr "Lapozgatásból kimarad"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Window list skip"
+msgstr "Ablaklista mellőzése"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Task list skip"
+msgstr "Ablaklista mellőzése"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Unique name"
+msgstr "Egyedi név"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Auto gravity"
+msgstr "Automatikus vonzás"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Shade hover"
+msgstr "Lebegő árnyékolás"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Transients above"
+msgstr "Tranziensek fölötte"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignore stacking requests"
+msgstr "Halmozási kérelmek figyelmen kívül hagyása"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
 msgstr "Állapot"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:102
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
 msgstr "Más"
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:82
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Shade Hover"
+msgstr "Lebegő árnyékolás"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid ""
+"Enable shade-hover mode.\n"
+"\n"
+"(Temporarily unshades windows while the mouse pointer is over them.)"
+msgstr ""
+"Lebegő árnyékolás engedélyezése.\n"
+"\n"
+"(Ideiglenesen lenyitja az ablakot, ha az egérmutató felette van.)"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Raise windows when they are unshaded."
+msgstr "Ablakok előhozása az árnyékból előhozáskor"
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Display tooltips for window frames."
+msgstr "Ablakkeretekhez tippek megjelenítése."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Show full documentation in tooltips."
+msgstr "Mutassa a teljes dokumentációt a tippekben."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips foreground"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _position"
 msgstr "_Hely megjegyzése"
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:83
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _dimensions"
 msgstr "_Méretek megjegyzése"
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:84
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _attributes"
 msgstr "_Attribútumok megjegyzése"
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:86
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "Mentett állapot el_felejtése"
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:376
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "History"
+msgstr "Előzmények"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember window positions."
+msgstr "Ablak helyének megjegyzése."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember window sizes."
+msgstr "Ablak méretének megjegyzése."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember other window attributes."
+msgstr "Egyéb ablak attribútumok megjegyzése."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Don't automatically remember details of transient windows."
+msgstr "Ne jegyezd meg automatikusan a tranziens ablakok beállításait."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save position"
+msgstr "Ablak előzményei pozíciók mentése"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save dimensions"
+msgstr "Ablak előzményei méretek mentése"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save attributes"
+msgstr "Ablak előzményei tulajdonságok mentése"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history forget"
+msgstr "Ablakok előzményeinek elfelejtése"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history clear"
+msgstr "Ablakok előzményeinek törlése"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
 msgstr "_Előzmények"
 
-#: ../lisp/sawfish/wm/frames.jl:512
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace down"
+msgstr "%d. munkaterület"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace up"
+msgstr "Munkaterület"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace left"
+msgstr "Munkaterület mozgatása balra"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace right"
+msgstr "Munkaterület mozgatása jobbra"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace down"
+msgstr "Küldés munkaterületre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace up"
+msgstr "Küldés munkaterületre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace left"
+msgstr "Küldés munkaterületre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace right"
+msgstr "Küldés munkaterületre"
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Mikor befolyásolja az egérmutató a bemenet fókuszt."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "A kattints-a-fókuszhoz üzemmód átadja a kattintást az ablaknak."
+
+#. ../lisp/sawfish/wm/focus.jl
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Az ablak legmagasabb pozícióba süllyesztése a rétegek között."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default frame style:"
+msgstr "Alapértelmezett keretstílus:"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Automatically reload themes when they are updated."
+msgstr "A témák automatikus újratöltése frissítéskor."
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default font: \\w"
+msgstr "Alap betűtípus: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Edit frame style"
+msgstr "Keretstílus szerkesztése"
+
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Default"
 msgstr "Alapértelmezett"
 
-#: ../lisp/sawfish/wm/frames.jl:519
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Normal"
 msgstr "Normál"
 
-#: ../lisp/sawfish/wm/frames.jl:522
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Title-only"
 msgstr "Csak cím"
 
-#: ../lisp/sawfish/wm/frames.jl:525
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Border-only"
 msgstr "Csak keret"
 
-#: ../lisp/sawfish/wm/frames.jl:528
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Top-border"
 msgstr "Felső keret"
 
-#: ../lisp/sawfish/wm/frames.jl:531
+#. ../lisp/sawfish/wm/frames.jl
 msgid "None"
 msgstr "Nincs"
 
-#. add some GNOME help menus
-#: ../lisp/sawfish/wm/gnome/integration.jl:61 ../lisp/sawfish/wm/menus.jl:124
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../lisp/sawfish/wm/gnome/integration.jl:64
+#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "_GNOME Súgó..."
 
-#: ../lisp/sawfish/wm/gnome/integration.jl:65
+#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "GNOME WWW..."
 msgstr "GNOME WWW..."
 
-#: ../lisp/sawfish/wm/gnome/integration.jl:66
+#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "About GNOME..."
 msgstr "GNOME névjegy..."
 
-#: ../lisp/sawfish/wm/menus.jl:86
+#. ../lisp/sawfish/wm/gnome/menus.jl
+msgid "Gnome menus update"
+msgstr "Gnome menük frissítése"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "global-keymap"
+msgstr "global-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active anywhere."
+msgstr "A billentyűtábla mindenütt aktív hozzárendeléseket tartalmaz."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "window-keymap"
+msgstr "window-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a kliens ablak van "
+"fókuszban."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "root-window-keymap"
+msgstr "root-window-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
+"áll,\n"
+"(vagy egy ablak sincs fókuszban)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "title-keymap"
+msgstr "title-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"címsorán van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "border-keymap"
+msgstr "border-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az "
+"ablakkereten\n"
+"van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "close-button-keymap"
+msgstr "close-button-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"bezár gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "iconify-button-keymap"
+msgstr "iconify-button-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"ikonizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "maximize-button-keymap"
+msgstr "maximize-button-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"maximalizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "menu-button-keymap"
+msgstr "menu-button-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"menü gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "shade-button-keymap"
+msgstr "shade-button-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak shade\n"
+"gombján van. (Csak az egér-hozzárendelések értékelődnek ki ebben a táblában.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
+"Az alapértelmezett ablakkezelő gyorsbillentyűkhöz használt módosító billentyű"
+"(k)."
+
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Mi_nimize"
 msgstr "Minimalizálás"
 
-#: ../lisp/sawfish/wm/menus.jl:91
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Unma_ximize"
 msgstr "Eredeti méret"
 
-#: ../lisp/sawfish/wm/menus.jl:92
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Ma_ximize"
 msgstr "Maximalizálás"
 
-#: ../lisp/sawfish/wm/menus.jl:96
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Move"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:97
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Resize"
 msgstr "Mozgatás/Méretezés"
 
-#: ../lisp/sawfish/wm/menus.jl:98
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
 msgstr "_Bezárás"
 
-#: ../lisp/sawfish/wm/menus.jl:100
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Toggle"
 msgstr "Át_váltás"
 
-#: ../lisp/sawfish/wm/menus.jl:101
+#. ../lisp/sawfish/wm/menus.jl
 msgid "In _group"
 msgstr "_Csoportba"
 
-#: ../lisp/sawfish/wm/menus.jl:102
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Send window to"
 msgstr "Ablak át_helyezése ide: "
 
-#: ../lisp/sawfish/wm/menus.jl:103
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Previous workspace"
 msgstr "_Előző munkaterület"
 
-#: ../lisp/sawfish/wm/menus.jl:104
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Next workspace"
 msgstr "_Következő munkaterület"
 
-#: ../lisp/sawfish/wm/menus.jl:105
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Copy to p_revious"
 msgstr "Másolás az előzőre"
 
-#: ../lisp/sawfish/wm/menus.jl:106
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Copy to ne_xt"
 msgstr "Másolás a következőre"
 
-#: ../lisp/sawfish/wm/menus.jl:107
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Stac_king"
 msgstr "Pakolás"
 
-#: ../lisp/sawfish/wm/menus.jl:108
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Raise"
 msgstr "Előre hoz"
 
-#: ../lisp/sawfish/wm/menus.jl:109
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Lower"
 msgstr "Hátra küld"
 
-#: ../lisp/sawfish/wm/menus.jl:110
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Upper layer"
 msgstr "Felső szint"
 
-#: ../lisp/sawfish/wm/menus.jl:111
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Lo_wer layer"
 msgstr "Alsó szint"
 
-#: ../lisp/sawfish/wm/menus.jl:112
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Frame ty_pe"
 msgstr "Kerettípus"
 
-#: ../lisp/sawfish/wm/menus.jl:113
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Frame sty_le"
 msgstr "Keretstílus"
 
-#: ../lisp/sawfish/wm/menus.jl:120
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Windows"
 msgstr "_Ablakok"
 
-#: ../lisp/sawfish/wm/menus.jl:121
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Work_spaces"
 msgstr "Munka_lapok"
 
-#: ../lisp/sawfish/wm/menus.jl:122
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Programs"
 msgstr "_Programok"
 
-#: ../lisp/sawfish/wm/menus.jl:123
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Customize"
 msgstr "_Testreszabás"
 
-#: ../lisp/sawfish/wm/menus.jl:125
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_FAQ..."
 msgstr "_GYIK..."
 
-#: ../lisp/sawfish/wm/menus.jl:126
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_News..."
 msgstr "_Hírek..."
 
-#: ../lisp/sawfish/wm/menus.jl:127
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_WWW page..."
 msgstr "_WWW-oldal..."
 
-#: ../lisp/sawfish/wm/menus.jl:128
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Manual..."
 msgstr "_Kézikönyv..."
 
-#: ../lisp/sawfish/wm/menus.jl:129
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_About Sawfish..."
 msgstr "A Sawfish névjegye..."
 
-#: ../lisp/sawfish/wm/menus.jl:131
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Restart"
 msgstr "Újraindítás"
 
-#: ../lisp/sawfish/wm/menus.jl:132
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Quit"
 msgstr "Kilépés"
 
-#: ../lisp/sawfish/wm/menus.jl:354
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup window menu"
+msgstr "Ablak menü nyitása"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup root menu"
+msgstr "Gyökér menü nyitása"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup apps menu"
+msgstr "Alkalmazás menü nyitása"
+
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_All settings"
 msgstr "Minden beállítás"
 
-#: ../lisp/sawfish/wm/menus.jl:361
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
 msgstr "Téma szerkesztése..."
 
-#: ../lisp/sawfish/wm/state/iconify.jl:256
+#. ../lisp/sawfish/wm/placement/stagger.jl
+#, fuzzy
+msgid "Distance between successive placements in `stagger' placement mode."
+msgstr ""
+"Egymás melletti elhelyezések távolsága a `lépcsőzetes' elhelyezési módban."
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing windows: \\w"
+msgstr "Az ablakok elhelyezésének módja: \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing dialog windows: \\w"
+msgstr "A párbeszédablakok elhelyezésének módja: \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Stacking"
+msgstr "Pakolás"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "szülők"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Tranziens ablakok fölé nem kerülhet: \\w"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise single window"
+msgstr "Ablak előhozása"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower single window"
+msgstr "Ablak hátraküldése"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise lower single window"
+msgstr "Alacsonyabb ablak előhozása"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise window depth"
+msgstr "Ablak mélységének növelése"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower window depth"
+msgstr "Ablak mélységének csökkentése"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "transients"
+msgstr "tranziensek"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "group"
+msgstr "csoport"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Ablak minimalizálásakor el kell törölni a: \\w"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Unminimizing a window also restores its: \\w"
+msgstr ""
+"Ablak minimalizált állapotból visszahozásakor vissza kell állítani a: \\w"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Iconify window"
+msgstr "Ablak ikonizálása"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Uniconify window"
+msgstr "Ablak visszaállítása ikonizált állapotból"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle window iconified"
+msgstr "Ablak ikonizálása"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Iconify workspace windows"
+msgstr "Munkaterület ablakainak ikonizálása"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Make window sticky"
+msgstr "Ablak ragadóssá tétele"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Make window unsticky"
+msgstr "Ablak ragadósságának kikapcsolása"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle window sticky"
+msgstr "Ablak ragadósságának kapcsolása"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Ragadós"
 
-#: ../lisp/sawfish/wm/state/ignored.jl:99
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Make window ignored"
+msgstr "Ablak figyelmen kívül hagyása"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Make window not ignored"
+msgstr "Ablak figyelembevétele"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window ignored"
+msgstr "Ablak figyelmen kívül hagyása"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window never focus"
+msgstr "Ablak fókuszba sohasem kerülésének kapcsolása"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window cycle skip"
+msgstr "Ablak lapozgatásból való kimaradásának kapcsolása"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window list skip"
+msgstr "Ablaklistából kihagyás beállítása"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle task list skip"
+msgstr "Ablaklistából kihagyás beállítása"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
 msgstr "_Ignorált"
 
-#: ../lisp/sawfish/wm/state/ignored.jl:101
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Focusable"
 msgstr "_Fókuszálható"
 
-#: ../lisp/sawfish/wm/state/ignored.jl:103
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Cyclable"
 msgstr "_Lapozható"
 
-#: ../lisp/sawfish/wm/state/ignored.jl:105
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
 msgstr "_Ablaklistában"
 
-#: ../lisp/sawfish/wm/state/ignored.jl:107
+#. ../lisp/sawfish/wm/state/ignored.jl
 #, fuzzy
 msgid "In _task list"
 msgstr "A GNOME _feladatlistában"
 
-#: ../lisp/sawfish/wm/state/shading.jl:113
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Lock position and size while windows are maximized."
+msgstr "Ablakok maximalizálása közben a pozíció és a méret zárolása."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window"
+msgstr "Ablak maximalizálása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Unmaximize window"
+msgstr "Ablak maximalizálásának visszaállítása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window vertically"
+msgstr "Ablak függőleges maximalizálása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window horizontally"
+msgstr "Ablak maximalizálása vízszintesen"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window toggle"
+msgstr "Maximalizálás kapcsolása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window horizontally toggle"
+msgstr "Ablak vízszintes maximalizálásának kapcsolása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window vertically toggle"
+msgstr "Ablak függőleges maximalizálásának kapcsolása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window"
+msgstr "Ablak maximalizált kitöltése"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window vertically"
+msgstr "Ablak maximális kitöltése függőlegesen"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window horizontally"
+msgstr "Ablak maximális kitöltése vízszintesen"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window toggle"
+msgstr "Ablak maximalizált töltésének kapcsolása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window horizontally toggle"
+msgstr "Ablak vízszintes maximalizált töltésének kapcsolása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window vertically toggle"
+msgstr "Ablak függőleges maximalizált töltésének kapcsolása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window fullscreen"
+msgstr "Maximalizálás teljes képernyőre"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window fullscreen toggle"
+msgstr "Teljes képernyős maximalizálás kapcsolása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullxinerama"
+msgstr "Maximalizálás teljes képernyőre"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullxinerama toggle"
+msgstr "Teljes képernyős maximalizálás kapcsolása"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid "Shade window"
+msgstr "Ablak árnyékolása"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid "Unshade window"
+msgstr "Ablak lenyitása"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid "Toggle window shaded"
+msgstr "Ablak árnyékolásának kapcsolása"
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "S_haded"
 msgstr "Á_rnyékolt"
 
-#: ../lisp/sawfish/wm/util/groups.jl:153
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Focus on application windows when they first appear."
+msgstr "Fókuszálás az ablakokra, amikor először megjelennek."
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Raise window and transients"
+msgstr "Ablak és tranziensek előrehozása"
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Lower window and transients"
+msgstr "Ablak és tranzienseinek hátraküldése"
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Raise lower window and transients"
+msgstr "Alsó ablak és tranzienseinek előhozása"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Tabs"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab's left-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab's right-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's left-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's right-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Add to group"
+msgstr "Csoport kicsinyítése"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab release window"
+msgstr "Ablak törlése"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab raise left window"
+msgstr "Alsó ablak előhozása"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab raise right window"
+msgstr "Ablak előhozása"
+
+#. ../lisp/sawfish/wm/util/compat.jl
+msgid "Insert workspace"
+msgstr "Munkaterület beillesztése"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Unshade selected windows."
+msgstr "Kiválasztott ablakok előhozása."
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display window without focusing"
+msgstr "Ablak megjelenítése fókuszálás nélkül"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display window"
+msgstr "Ablak megjelenítése"
+
+#. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
 msgstr "Új csoport"
 
-#: ../lisp/sawfish/wm/util/keymap.jl:174
+#. ../lisp/sawfish/wm/util/gtkrc.jl
+msgid "Gtkrc reload style"
+msgstr "Gtkrc stílus újratöltése"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Describe key"
+msgstr "Kulcs leírása"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Press key..."
 msgstr "Nyomj meg egy billentyűt..."
 
-#: ../lisp/sawfish/wm/util/keymap.jl:198
+#. ../lisp/sawfish/wm/util/keymap.jl
 msgid "[Quote]"
 msgstr "[Idézet]"
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:51
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Quote event"
+msgstr "Esemény idézése"
+
+#. ../lisp/sawfish/wm/util/marks.jl
+#, fuzzy
+msgid "Mark window"
+msgstr "Ablak tömörítése felfelé"
+
+#. ../lisp/sawfish/wm/util/marks.jl
+#, fuzzy
+msgid "Unmark window"
+msgstr "Ablak lenyitása"
+
+#. ../lisp/sawfish/wm/util/marks.jl
+#, fuzzy
+msgid "Unmark all windows"
+msgstr "Ablak maximalizálásának visszaállítása"
+
+#. ../lisp/sawfish/wm/util/play-audio.jl
+#, fuzzy
+msgid ""
+"The program used to play audio samples. If unset, built-in support for ESD "
+"is used."
+msgstr ""
+"A hangok lejátszására használt program. Ha nincs beállítva, akkor a "
+"beépített ESD támogatás használható"
+
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Ablak:"
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:63
-#, librep-format
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+#, c-format
 msgid "Workspace %d"
 msgstr "%d. munkaterület"
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:77 ../lisp/sawfish/wm/workspace.jl:888
-#: ../lisp/sawfish/wm/workspace.jl:896 ../lisp/sawfish/wm/workspace.jl:904
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Workspace:"
 msgstr "Munkaterület:"
 
-#: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "prompt-keymap"
+msgstr "prompt-keymap"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr ""
+"Billentyűtábla, melynek hozzárendelései akkor aktívak, ha felhasználótól "
+"kérünk be egy karakterláncot."
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "When raising a window, also raise its: \\w"
+msgstr "Ablak felemelésekor szintén fel kell emelni a következőt: \\w"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Raise window"
+msgstr "Ablak előhozása"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Lower window"
+msgstr "Ablak lecsukása"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Raise lower window"
+msgstr "Alsó ablak előhozása"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Windows uniconify to the current viewport."
+msgstr "Csoport mozgatása a jelenlegi munkalapra"
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Number of steps for viewport scrolling."
+msgstr "A `kurzor-mozgatás-' parancsokban mozgatás ennyi képponttal."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "wrap-around"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "stop"
+msgstr "Testreszabás"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport"
+msgstr "Nézet  aktiválása"
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Column:"
 msgstr "Oszlop:"
 
-#: ../lisp/sawfish/wm/viewport.jl:245 ../lisp/sawfish/wm/viewport.jl:263
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Row:"
 msgstr "Sor:"
 
-#: ../lisp/sawfish/wm/workspace.jl:133
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport column"
+msgstr "Nézet oszlopának aktiválása"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport row"
+msgstr "Nézet sorának aktiválása"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window to viewport"
+msgstr "Ablak áthelyezése másik munkalapra"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport right"
+msgstr "Munkalap mozgatása jobbra"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport left"
+msgstr "Munkalap mozgatása balra"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport up"
+msgstr "Nézet mozgatása felfelé"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport down"
+msgstr "Nézet mozgatása lefelé"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window right"
+msgstr "Ablak mozgatása jobbra"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window left"
+msgstr "Ablak mozgatása balra"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window up"
+msgstr "Ablak mozgatása fel"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window down"
+msgstr "Ablak mozgatása le"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#, fuzzy
+msgid "Animation"
+msgstr "Műveletek"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#, fuzzy
+msgid "solid"
+msgstr "Elkerülő"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+msgid "wireframe"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+msgid "The default window animation mode"
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Warping"
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+"Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott ablakokkal "
+"való ütközésének kapcsolása."
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+"Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott ablakokkal "
+"való ütközésének kapcsolása."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Format to create unique window names."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Focus desktop"
+msgstr "Fókuszálás az asztalra"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window"
+msgstr "Ablak törlése"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window safely"
+msgstr "Ablak biztonságos törlése"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Uniquify window name"
+msgstr "Ablak nevének egyedivé tétele"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "keep-going"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Az összes munkaterület menüjének megjelenítése."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr "Az összes munkaterület menüjének megjelenítése."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace names"
 msgstr "Munkaterületek nevei"
 
-#: ../lisp/sawfish/wm/workspace.jl:150
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "_Insert workspace"
 msgstr "Munkaterület beillesztése"
 
-#: ../lisp/sawfish/wm/workspace.jl:151
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Select _next workspace"
 msgstr "Következő munkaterület"
 
-#: ../lisp/sawfish/wm/workspace.jl:152
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Select _previous workspace"
 msgstr "Előző munkaterület"
 
-#: ../lisp/sawfish/wm/workspace.jl:153
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with next"
 msgstr "Összefűzés a következővel"
 
-#: ../lisp/sawfish/wm/workspace.jl:154
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with previous"
 msgstr "Összefűzés az előzővel"
 
-#: ../lisp/sawfish/wm/workspace.jl:155
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Move workspace _right"
 msgstr "Munkaterület mozgatása jobbra"
 
-#: ../lisp/sawfish/wm/workspace.jl:156
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Move workspace _left"
 msgstr "Munkaterület mozgatása balra"
 
-#: ../lisp/sawfish/wm/workspace.jl:634
-#, librep-format
+#. ../lisp/sawfish/wm/workspace.jl
+#, c-format
 msgid "space %d"
 msgstr "%d. hely"
 
-#: ../scripts/sawfish-about.jl.in:50
-msgid "and many others..."
-msgstr "és sokan mások..."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup workspace list"
+msgstr "Munkaterület-lista megnyitása"
 
-#: ../scripts/sawfish-about.jl.in:51
-msgid "Sawfish manages your windows extensibly."
-msgstr "A Sawfish egy kiterjeszthető ablakkezelő."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup window list"
+msgstr "Ablaklista megnyitása"
 
-#: ../scripts/sawfish-about.jl.in:56
-msgid "Sawfish homepage"
-msgstr "Sawfish honlap"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Next workspace"
+msgstr "Következő munkaterület"
 
-#~ msgid "Window Cycling"
-#~ msgstr "Lépegetés az ablakokon"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Previous workspace"
+msgstr "Előző munkaterület"
 
-#~ msgid "Sound"
-#~ msgstr "Hang"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to next workspace"
+msgstr "Küldés a következő munkaterületre"
 
-#~ msgid "Matched Windows"
-#~ msgstr "Illesztett ablakok"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to previous workspace"
+msgstr "Küldés az előző munkaterületre"
 
-#~ msgid "Tooltips"
-#~ msgstr "Buboréksúgók"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to next workspace"
+msgstr "Másolás a következő munkaterületre"
 
-#~ msgid "Growing and packing of windows"
-#~ msgstr "Ablakok növesztése és tömörítése"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to previous workspace"
+msgstr "Másolás az előző munkaterületre"
 
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Append workspace and send"
+msgstr "Munkaterület hozzáfűzése és küldés"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prepend workspace and send"
+msgstr "Munkaterület előre fűzése és küldés"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge next workspace"
+msgstr "Következő munkaterület összefűzése"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge previous workspace"
+msgstr "Előző munkaterület összefűzése"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace after"
+msgstr "Munkaterület beillesztése mögé"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace before"
+msgstr "Munkaterület beillesztése elé"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace forwards"
+msgstr "Munkaterület mozgatása előre"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace backwards"
+msgstr "Munkaterület mozgatása hátra"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete empty workspaces"
+msgstr "Üres munkaterületek törlése"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete window instance"
+msgstr "Ablak törlése"
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid "Whether and how to move the pointer."
-#~ msgstr "Ablak áthelyezése a következő munkalapra."
+msgid "Show desktop"
+msgstr "Fókuszálás az asztalra"
 
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid "Whether to bump into fully obscured windows."
-#~ msgstr ""
-#~ "Ablakok növesztésénél vagy tömörítésénél a teljesen elfedett ablakokhoz "
-#~ "való ütközés kapcsolása."
+msgid "Hide desktop"
+msgstr "Fókuszálás az asztalra"
 
-#, fuzzy
-#~ msgid "Whether to bump into windows on a different depth."
-#~ msgstr ""
-#~ "Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott "
-#~ "ablakokkal való ütközésének kapcsolása."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Activate workspace"
+msgstr "Munkaterület aktívvá tétele"
 
-#, fuzzy
-#~ msgid "Whether to bump into ignored windows."
-#~ msgstr ""
-#~ "Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott "
-#~ "ablakokkal való ütközésének kapcsolása."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to workspace"
+msgstr "Küldés munkaterületre"
 
-#, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr "A `kurzor-mozgatás-' parancsokban mozgatás ennyi képponttal."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to workspace"
+msgstr "Másolás munkaterületre"
 
-#, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Ablakok előhozása az árnyékból előhozáskor"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select workspace interactively"
+msgstr "Munkaterület kiválasztása interaktívan"
 
-#, fuzzy
-#~ msgid "How windows being resized are animated"
-#~ msgstr "Ablakok előhozása az árnyékból előhozáskor"
+#~ msgid "and many others..."
+#~ msgstr "és sokan mások..."
 
-#, fuzzy
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "A Sawfish egy kiterjeszthető ablakkezelő."
 
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Az ablak aktuális pozíciójának megjelenítés mozgatáskor."
-
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr "Az ablak aktuális méretének megjelenítése átméretezéskor."
-
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr "Az ablak aktuális méretének megjelenítése átméretezéskor."
-
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr "Ablakok ikonjainak és nevének megjelenítése lapozgatás közben."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Lapozgatás az ikonizált ablakokkal együtt."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Lapozgatás az összes munkaterület ablakaival együtt."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Lapozgatás minden nézet ablakaival együtt."
-
-#, fuzzy
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
-
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr "A billentyűtábla bejegyzései csak ablak lapozás közben aktívak."
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "Az `xterm' parancsra elindított program."
-
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Az `xterm' parancsnak adott paraméterek."
-
-#~ msgid "Move/Resize"
-#~ msgstr "Mozgatás/Méretezés"
-
-#~ msgid "Workspaces"
-#~ msgstr "Munkaterületek"
-
-#~ msgid "Bindings"
-#~ msgstr "Hozzárendelések"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Minimalizálás/Maximalizálás"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Egyéb"
-
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Ablak eseményekhez hangok lejátszása."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Élek váltása"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr ""
-#~ "Válaszd a következő munkaterületet amikor a mutató eléri a képernyő "
-#~ "szélét."
-
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "A képernyő szélének érintése kiválasztja a következőt: \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Lapváltás csak az ablak interaktív mozgatásakor."
-
-#~ msgid "Beep when errors occur."
-#~ msgstr "Hiba esetén csengetés."
-
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Hibaüzenetek kijelzése: \\w"
-
-#~ msgid "Shade Hover"
-#~ msgstr "Lebegő árnyékolás"
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Ablakok előhozása az árnyékból előhozáskor"
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Ablakkeretekhez tippek megjelenítése."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Mutassa a teljes dokumentációt a tippekben."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
-
-#, fuzzy
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
-
-#~ msgid "History"
-#~ msgstr "Előzmények"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Ablak helyének megjegyzése."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Ablak méretének megjegyzése."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Egyéb ablak attribútumok megjegyzése."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr "Ne jegyezd meg automatikusan a tranziens ablakok beállításait."
-
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Mikor befolyásolja az egérmutató a bemenet fókuszt."
-
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "A kattints-a-fókuszhoz üzemmód átadja a kattintást az ablaknak."
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr "Az ablak legmagasabb pozícióba süllyesztése a rétegek között."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Alapértelmezett keretstílus:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "A témák automatikus újratöltése frissítéskor."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Alap betűtípus: \\w"
-
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "A billentyűtábla mindenütt aktív hozzárendeléseket tartalmaz."
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a kliens ablak van "
-#~ "fókuszban."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
-#~ "áll,\n"
-#~ "(vagy egy ablak sincs fókuszban)."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "címsorán van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az "
-#~ "ablakkereten\n"
-#~ "van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "bezár gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "ikonizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "maximalizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "menü gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak "
-#~ "shade\n"
-#~ "gombján van. (Csak az egér-hozzárendelések értékelődnek ki ebben a "
-#~ "táblában.)"
-
-#, fuzzy
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr ""
-#~ "Az alapértelmezett ablakkezelő gyorsbillentyűkhöz használt módosító "
-#~ "billentyű(k)."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Az ablakok elhelyezésének módja: \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "A párbeszédablakok elhelyezésének módja: \\w"
-
-#, fuzzy
-#~ msgid "Distance between successive placements in stagger mode."
-#~ msgstr ""
-#~ "Egymás melletti elhelyezések távolsága a `lépcsőzetes' elhelyezési módban."
-
-#~ msgid "Stacking"
-#~ msgstr "Pakolás"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Tranziens ablakok fölé nem kerülhet: \\w"
-
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Ablak minimalizálásakor el kell törölni a: \\w"
-
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr ""
-#~ "Ablak minimalizált állapotból visszahozásakor vissza kell állítani a: \\w"
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr "Ablakok maximalizálása közben a pozíció és a méret zárolása."
-
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Fókuszálás az ablakokra, amikor először megjelennek."
-
-#~ msgid "Unshade selected windows."
-#~ msgstr "Kiválasztott ablakok előhozása."
-
-#, fuzzy
-#~ msgid "The program used to play audio samples."
-#~ msgstr ""
-#~ "A hangok lejátszására használt program. Ha nincs beállítva, akkor a "
-#~ "beépített ESD támogatás használható"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr ""
-#~ "Billentyűtábla, melynek hozzárendelései akkor aktívak, ha felhasználótól "
-#~ "kérünk be egy karakterláncot."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Ablak felemelésekor szintén fel kell emelni a következőt: \\w"
-
-#~ msgid "Viewport"
-#~ msgstr "Munkalap"
-
-#, fuzzy
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Csoport mozgatása a jelenlegi munkalapra"
-
-#, fuzzy
-#~ msgid "Give focus to windows even when they haven't asked for it."
-#~ msgstr "Ablakok előrehozása, ha fókuszba kerülnek."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Az összes munkaterület menüjének megjelenítése."
-
-#, fuzzy
-#~ msgid ""
-#~ "How to act when passing the first or last workspace, while moving a window"
-#~ msgstr "Az összes munkaterület menüjének megjelenítése."
-
-#~ msgid "Crux Theme"
-#~ msgstr "Crux téma"
-
-#~ msgid ""
-#~ "Accent color for focused windows (if unset uses the GTK+ selection color)."
-#~ msgstr ""
-#~ "Fókuszban lévő ablakok színe (ha nincs beállítva, akkor az mint a GTK+ "
-#~ "kiválasztás színe)."
-
-#~ msgid "Display the window's icon in its menu button."
-#~ msgstr "Az ablak ikonjának megjelenítése a menügombon."
-
-#~ msgid "Display title buttons to mimic: \\w"
-#~ msgstr "A következő mimic-ekhez cím gombok megjelenítése: \\w"
-
-#~ msgid "Gradient Theme"
-#~ msgstr "Színátmenet keretstílusnál"
-
-#~ msgid "horizontal"
-#~ msgstr "vízszintes"
-
-#~ msgid "vertical"
-#~ msgstr "függőleges"
-
-#~ msgid "diagonal"
-#~ msgstr "átlós"
-
-#~ msgid "Direction of gradient in `gradient' frame style."
-#~ msgstr "Színátmenet iránya a `színátmenet' keretstílusnál."
-
-#~ msgid "`From' color of inactive frames in `gradient' frame style."
-#~ msgstr "`Tól-' szín az inaktív kereteknél `színátmenet' keretstílusnál."
-
-#~ msgid "`To' color of inactive frames in `gradient' frame style."
-#~ msgstr "`-Ig' szín az inaktív kereteknél `színátmenet' keretstílusnál."
-
-#~ msgid "`From' color of active frames in `gradient' frame style."
-#~ msgstr "`Tól-' szín az aktív kereteknél `színátmenet' keretstílusnál."
-
-#~ msgid "`To' color of active frames in `gradient' frame style."
-#~ msgstr "`-Ig' szín az aktív kereteknél `színátmenet' keretstílusnál."
-
-#~ msgid "Use less memory when creating gradients, possibly affecting quality."
-#~ msgstr ""
-#~ "Színátmenetek létrehozásakor kevesebb memória használata, akár a minőség "
-#~ "rovására is."
-
-#~ msgid "Mono Theme"
-#~ msgstr "Mono téma"
-
-#~ msgid "Color of inactive frames (if unset use GTK+ background color)."
-#~ msgstr ""
-#~ "Inaktív keretek színe (ha nincs beállítva, akkor az mint a GTK+ "
-#~ "háttérszín)."
-
-#~ msgid "Color of active frames (if unset use GTK+ selection color)."
-#~ msgstr ""
-#~ "Aktív keretek színe (ha nincs beállítva, akkor az mint a GTK+ kiválasztás "
-#~ "színe)."
-
-#~ msgid "left"
-#~ msgstr "bal"
-
-#~ msgid "right"
-#~ msgstr "jobbra"
-
-#~ msgid "center"
-#~ msgstr "középre"
-
-#~ msgid "Text is \\w justified in window titles."
-#~ msgstr "A szöveg \\w igazított az ablakok fejlécében."
-
-#, fuzzy
-#~ msgid "title"
-#~ msgstr "Állapot"
-
-#, fuzzy
-#~ msgid "gradient"
-#~ msgstr "tranziensek"
-
-#, fuzzy
-#~ msgid "positions 1"
-#~ msgstr "Pozíció"
-
-#, fuzzy
-#~ msgid "positions 2"
-#~ msgstr "Pozíció"
-
-#, fuzzy
-#~ msgid "borders"
-#~ msgstr "Felső keret"
-
-#, fuzzy
-#~ msgid "normal"
-#~ msgstr "Normál"
-
-#~ msgid "all"
-#~ msgstr "összes"
-
-#~ msgid "none"
-#~ msgstr "nincs"
-
-#, fuzzy
-#~ msgid "real-center"
-#~ msgstr "középre"
-
-#, fuzzy
-#~ msgid "custom"
-#~ msgstr "Testreszabás"
-
-#, fuzzy
-#~ msgid "reverse colors"
-#~ msgstr "Szín kiválasztása"
-
-#, fuzzy
-#~ msgid "default-9"
-#~ msgstr "Alapértelmezett"
-
-#, fuzzy
-#~ msgid "default-12"
-#~ msgstr "Alapértelmezett"
-
-#, fuzzy
-#~ msgid "ball-9"
-#~ msgstr "összes"
-
-#, fuzzy
-#~ msgid "ball-12"
-#~ msgstr "összes"
-
-#, fuzzy
-#~ msgid "menu button position"
-#~ msgstr "_Hely megjegyzése"
-
-#, fuzzy
-#~ msgid "shade button position"
-#~ msgstr "shade-button-keymap"
-
-#, fuzzy
-#~ msgid "iconify button position"
-#~ msgstr "iconify-button-keymap"
-
-#, fuzzy
-#~ msgid "maximize button position"
-#~ msgstr "maximize-button-keymap"
-
-#, fuzzy
-#~ msgid "close button position"
-#~ msgstr "close-button-keymap"
-
-#, fuzzy
-#~ msgid "previous workspace button position"
-#~ msgstr "Előző munkaterület ablak"
-
-#, fuzzy
-#~ msgid "next workspace button position"
-#~ msgstr "Következő munkaterület ablak"
-
-#, fuzzy
-#~ msgid "info button position"
-#~ msgstr "Ablak előzményei pozíciók mentése"
-
-#, fuzzy
-#~ msgid "mxflat:sticky-button-keymap"
-#~ msgstr "iconify-button-keymap"
-
-#, fuzzy
-#~ msgid "mxflat:previous-button-keymap"
-#~ msgstr "menu-button-keymap"
-
-#, fuzzy
-#~ msgid "mxflat:next-button-keymap"
-#~ msgstr "menu-button-keymap"
-
-#, fuzzy
-#~ msgid "mxflat:configure-button-keymap"
-#~ msgstr "menu-button-keymap"
-
-#, fuzzy
-#~ msgid "mxflat:info-button-keymap"
-#~ msgstr "menu-button-keymap"
-
-#, fuzzy
-#~ msgid "mxflat:always-on-top-button-keymap"
-#~ msgstr "menu-button-keymap"
-
-#, fuzzy
-#~ msgid "mxflat:lock-button-keymap"
-#~ msgstr "close-button-keymap"
-
-#, fuzzy
-#~ msgid "fake shadow only on focused windows"
-#~ msgstr "Fejléc-háttérképek fókuszon kívüli ablakokhoz."
-
-#, fuzzy
-#~ msgid "north"
-#~ msgstr "nem"
-
-#~ msgid "Simple Theme"
-#~ msgstr "Egyszerű téma"
-
-#~ msgid "Color of inactive frames in `simple' frame style."
-#~ msgstr "Inaktív keretek színe az `egyszerű' keretstílushoz."
-
-#~ msgid "Color of active frames in `simple' frame style."
-#~ msgstr "Aktív keretek színe az `egyszerű' keretstílushoz."
-
-#~ msgid "SMaker Theme"
-#~ msgstr "SMaker téma"
-
-#~ msgid "Use black-on-white button images."
-#~ msgstr "Fekete-fehér képek használata a gombokon."
-
-#~ msgid "Color to use when drawing text."
-#~ msgstr "Szöveg rajzolásához használt szín."
-
-#~ msgid "Bar image for unfocused windows."
-#~ msgstr "Fejléc-háttérképek fókuszon kívüli ablakokhoz."
-
-#~ msgid "Bar image for focused windows."
-#~ msgstr "Fejléc-háttérkép fókuszban levő ablakokhoz."
-
-#~ msgid "Bar image for highlighted parts."
-#~ msgstr "Fejléc-háttérkép a kijelölt részekhez."
-
-#~ msgid "Bar image for clicked parts."
-#~ msgstr "Fejléc-háttérkép a kattintott részekhez."
-
-#~ msgid "Height of title bar."
-#~ msgstr "Fejléc magassága"
-
-#~ msgid "Width of window border."
-#~ msgstr "Ablakkeret szélessége."
-
-#~ msgid "Border width of bar images."
-#~ msgstr "Fejléc háttérképek keretszélessége"
-
-#~ msgid "Next workspace window"
-#~ msgstr "Következő munkaterület ablak"
+#~ msgid "Sawfish homepage"
+#~ msgstr "Sawfish honlap"
 
 #~ msgid "Select the next window of the current workspace."
 #~ msgstr "Válaszd a következő ablakot az aktuális munkaterületen."
 
-#~ msgid "Previous workspace window"
-#~ msgstr "Előző munkaterület ablak"
-
 #~ msgid "Focus on the previous window of the current workspace."
 #~ msgstr "Fókuszálj az előző ablakra az aktuális munkaterületen."
-
-#~ msgid "Next window"
-#~ msgstr "Következő ablak"
 
 #~ msgid "Select the next window, cycling through all possible workspaces."
 #~ msgstr ""
 #~ "Válaszd a következő ablakot, az összes lehetséges munkaterületen "
 #~ "végigfutva."
 
-#~ msgid "Previous window"
-#~ msgstr "Előző ablak"
-
 #~ msgid "Select the previous window, cycling through all possible workspaces."
 #~ msgstr ""
 #~ "Válaszd az előző ablakot, az összes lehetséges munkaterületen végigfutva."
 
-#~ msgid "Describe symbol"
-#~ msgstr "Szimbólum leírása"
-
 #~ msgid "Display the documentation of a specified symbol."
 #~ msgstr "Megadott szimbólum dokumentációjának megjelenítése."
-
-#~ msgid "Apropos function"
-#~ msgstr "Apropos függvény"
-
-#~ msgid "Apropos variable"
-#~ msgstr "Apropos változó"
-
-#~ msgid "Gnome toggle skip winlist"
-#~ msgstr "Gnome ablaklista kihagyásának kapcsolása"
 
 #~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
 #~ msgstr "Az ablak GNOME_SKIP_WINLIST segédjének kapcsolása."
 
-#~ msgid "Gnome set skip winlist"
-#~ msgstr "Gnome ablaklista kihagyásának bekapcsolása"
-
 #~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
 #~ msgstr "Az ablak GNOME_SKIP_WINLIST segédjének bekapcsolása."
-
-#~ msgid "Gnome clear skip winlist"
-#~ msgstr "Gnome ablaklista kihagyásának törlése"
 
 #~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
 #~ msgstr "Az ablak GNOME_SKIP_WINLIST segédjének kikapcsolása."
 
-#~ msgid "Gnome toggle skip tasklist"
-#~ msgstr "Gnome feladatlista kihagyásának kapcsolása"
-
 #~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
 #~ msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének kapcsolása."
-
-#~ msgid "Gnome set skip tasklist"
-#~ msgstr "Gnome feladatlista kihagyásának bekapcsolása"
 
 #~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
 #~ msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének bekapcsolása."
 
-#~ msgid "Gnome clear skip tasklist"
-#~ msgstr "Gnome feladatlista kihagyásának törlése"
-
 #~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
 #~ msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének kikapcsolása."
-
-#~ msgid "Gnome logout"
-#~ msgstr "Kilépés a Gnome-ból"
 
 #~ msgid "Logout from the current GNOME session."
 #~ msgstr "Kilépés az aktuális GNOME-munkamenetből."
 
-#~ msgid "Gnome www page"
-#~ msgstr "GNOME honlap"
-
 #~ msgid "Display the WWW page of the GNOME project."
 #~ msgstr "A GNOME projekt honlapjának indítása."
-
-#~ msgid "Gnome help browser"
-#~ msgstr "GNOME súgóböngésző"
 
 #~ msgid "Launch the GNOME help browser."
 #~ msgstr "A GNOME súgó böngésző indítása."
 
-#~ msgid "Gnome about"
-#~ msgstr "Gnome névjegy"
-
 #~ msgid "Launch the GNOME about dialog."
 #~ msgstr "GNOME névjegy indítása."
-
-#~ msgid "Iconify group"
-#~ msgstr "Csoport ikonizálása"
-
-#~ msgid "Uniconify group"
-#~ msgstr "Csoport visszaállítása"
-
-#~ msgid "Iconify transient group"
-#~ msgstr "Tranziens csoport ikonizálása"
-
-#~ msgid "Uniconify transientgroup"
-#~ msgstr "Tranziens csoport nagyítása"
-
-#~ msgid "Make group sticky"
-#~ msgstr "Csoport ragadóssá tétele"
-
-#~ msgid "Make group unsticky"
-#~ msgstr "Csoport ragadósságának megszűntetése"
-
-#~ msgid "Toggle group sticky"
-#~ msgstr "Csoport ragadósságának állítása"
-
-#~ msgid "Send group to current workspace"
-#~ msgstr "Csoport küldése a jelenlegi munkaterületre"
-
-#~ msgid "Send group to next workspace"
-#~ msgstr "Csoport küldése a következő munkaterületre"
-
-#~ msgid "Send group to previous workspace"
-#~ msgstr "Csoport küldése az előző munkaterületre"
-
-#~ msgid "Move group to current viewport"
-#~ msgstr "Csoport mozgatása a jelenlegi munkalapra"
-
-#~ msgid "Move group left"
-#~ msgstr "Csoport mozgatása balra"
-
-#~ msgid "Move group right"
-#~ msgstr "Csoport mozgatása jobbra"
-
-#~ msgid "Move group up"
-#~ msgstr "Csoport mozgatása fel"
-
-#~ msgid "Move group down"
-#~ msgstr "Csoport mozgatása lefelé"
-
-#~ msgid "Raise group"
-#~ msgstr "Csoport előhozása"
-
-#~ msgid "Lower group"
-#~ msgstr "Csoport kicsinyítése"
-
-#~ msgid "Raise lower group"
-#~ msgstr "Alsó csoport előhozása"
-
-#~ msgid "Raise group depth"
-#~ msgstr "Csoport mélységének növelése"
-
-#~ msgid "Lower group depth"
-#~ msgstr "Csoport mélységének csökkentése"
-
-#~ msgid "Delete group"
-#~ msgstr "Csoport törlése"
 
 #~ msgid ""
 #~ "Delete all windows in the group that the current window is a member of."
@@ -1302,15 +3513,6 @@ msgstr "Sawfish honlap"
 #~ "A növesztés maximalizációként való figyelembevétele.  Ha ezt bekapcsolod, "
 #~ "használhatod az `unmaximize-window'-t vagy valami hasonlót az eredeti "
 #~ "mérethez való visszatéréshez."
-
-#~ msgid "always"
-#~ msgstr "mindig"
-
-#~ msgid "maybe"
-#~ msgstr "néha"
-
-#~ msgid "never"
-#~ msgstr "soha"
 
 #~ msgid ""
 #~ "Whether and how to move the pointer when packing windows.\n"
@@ -1343,9 +3545,6 @@ msgstr "Sawfish honlap"
 #~ "kapcsolása.\n"
 #~ "A `néha' azt jelenti, hogy más mélységben levő ablakokat elkerüli."
 
-#~ msgid "Grow window left"
-#~ msgstr "Ablak növesztése balra"
-
 #~ msgid ""
 #~ "Grows window to the left until it `bumps into' another window.\n"
 #~ "See `grow-window-up'."
@@ -1353,18 +3552,12 @@ msgstr "Sawfish honlap"
 #~ "Ablak növelése balra, amíg `nekiütközik' egy másik ablaknak.\n"
 #~ "Lásd `grow-window-up'."
 
-#~ msgid "Grow window right"
-#~ msgstr "Ablak növesztése jobbra"
-
 #~ msgid ""
 #~ "Grows window to the right until it `bumps into' another window.\n"
 #~ "See `grow-window-up'."
 #~ msgstr ""
 #~ "Ablak növelése jobbra, amíg `nekiütközik' egy másik ablaknak.\n"
 #~ "Lásd `grow-window-up'."
-
-#~ msgid "Grow window up"
-#~ msgstr "Ablak növesztése felfelé"
 
 #~ msgid ""
 #~ "Grows window upwards until it `bumps into' another window.\n"
@@ -1381,18 +3574,12 @@ msgstr "Sawfish honlap"
 #~ "Numerikus prefix arg használatakor növessze felfelé a megadott értékű "
 #~ "ablakkal vagy képponttal."
 
-#~ msgid "Grow window down"
-#~ msgstr "Ablak növesztése lefelé"
-
 #~ msgid ""
 #~ "Grows window downwards until it `bumps into' another window.\n"
 #~ "See `grow-window-up'."
 #~ msgstr ""
 #~ "Ablak növelése lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
 #~ "Lásd `grow-window-up'."
-
-#~ msgid "Pack window left"
-#~ msgstr "Ablak tömörítése balra"
 
 #~ msgid ""
 #~ "Moves window to the left until it `bumps into' another window.\n"
@@ -1401,18 +3588,12 @@ msgstr "Sawfish honlap"
 #~ "Ablak mozgatása balra, amíg `nekiütközik' egy másik ablaknak.\n"
 #~ "Lásd `pack-window-up'."
 
-#~ msgid "Pack window right"
-#~ msgstr "Ablak tömörítése jobbra"
-
 #~ msgid ""
 #~ "Moves window to the right until it `bumps into' another window.\n"
 #~ "See `pack-window-up'."
 #~ msgstr ""
 #~ "Ablak mozgatása jobbra, amíg `nekiütközik' egy másik ablaknak.\n"
 #~ "Lásd `pack-window-up'."
-
-#~ msgid "Pack window up"
-#~ msgstr "Ablak tömörítése felfelé"
 
 #~ msgid ""
 #~ "Moves window upwards until it `bumps into' another window.\n"
@@ -1427,9 +3608,6 @@ msgstr "Sawfish honlap"
 #~ "Numerikus prefix arg használatakor mozgassa felfelé a megadott értékű "
 #~ "képponttal."
 
-#~ msgid "Pack window down"
-#~ msgstr "Ablak tömörítése lefelé"
-
 #~ msgid ""
 #~ "Moves window downwards until it `bumps into' another window.\n"
 #~ "See `pack-window-up'."
@@ -1437,119 +3615,46 @@ msgstr "Sawfish honlap"
 #~ "Ablak mozgatása lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
 #~ "Lásd `pack-window-up'."
 
-#~ msgid "Help show faq"
-#~ msgstr "Súgó GYIK"
-
-#~ msgid "Help show news"
-#~ msgstr "Súgó hírek"
-
-#~ msgid "Help show programmer manual"
-#~ msgstr "Súgó programozói kézikönyv"
-
-#~ msgid "Help show homepage"
-#~ msgstr "Súgó honlap megtekintése"
-
-#~ msgid "Help about"
-#~ msgstr "Súgó névjegy"
-
-#~ msgid "Move cursor right"
-#~ msgstr "Kurzor mozgatása jobbra"
-
 #~ msgid "Move the cursor `move-cursor-increment' pixels to the right."
 #~ msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal jobbra."
-
-#~ msgid "Move cursor left"
-#~ msgstr "Kurzor mozgatása balra"
 
 #~ msgid "Move the cursor `move-cursor-increment' pixels to the left."
 #~ msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal balra."
 
-#~ msgid "Move cursor up"
-#~ msgstr "Kurzor mozgatása felfelé"
-
 #~ msgid "Move the cursor `move-cursor-increment' pixels upwards."
 #~ msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal felfelé."
-
-#~ msgid "Move cursor down"
-#~ msgstr "Kurzor mozgatása lefelé"
 
 #~ msgid "Move the cursor `move-cursor-increment' pixels downwards."
 #~ msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal lefelé."
 
-#~ msgid "Move cursor right fine"
-#~ msgstr "Kurzor mozgatása finoman jobbra"
-
 #~ msgid "Move the cursor 1 pixel to the right."
 #~ msgstr "A kurzor mozgatása 1 képponttal jobbra."
-
-#~ msgid "Move cursor left fine"
-#~ msgstr "Kurzor mozgatása finoman balra"
 
 #~ msgid "Move the cursor 1 pixel to the left."
 #~ msgstr "A kurzor mozgatása 1 képponttal balra."
 
-#~ msgid "Move cursor up fine"
-#~ msgstr "Kurzor mozgatása finoman felfelé"
-
 #~ msgid "Move the cursor 1 pixel upwards."
 #~ msgstr "A kurzor mozgatása 1 képponttal fel."
-
-#~ msgid "Move cursor down fine"
-#~ msgstr "Kurzor mozgatása finoman lefelé"
 
 #~ msgid "Move the cursor 1 pixel downwards."
 #~ msgstr "A kurzor mozgatása 1 képponttal jobbra."
 
-#, fuzzy
-#~ msgid "border"
-#~ msgstr "Felső keret"
-
-#, fuzzy
-#~ msgid "border-grab"
-#~ msgstr "border-keymap"
-
-#~ msgid ""
-#~ "Distance in pixels before window edges align with each other.\n"
-#~ "\n"
-#~ "When moving a window, this option lets you align one of its edges with an "
-#~ "edge of another window."
-#~ msgstr ""
-#~ "Ablakok szélei közti távolság (pixelekben).\n"
-#~ "\n"
-#~ "Ablakok mozgatásánál, ez a beállítás segíti az ablakok sarkainak egymás "
-#~ "mellé helyezését."
-
-#~ msgid "Move window interactively"
-#~ msgstr "Ablak interaktív mozgatása"
-
 #~ msgid "Move the window interactively using the mouse."
 #~ msgstr "Ablak interaktív mozgatása az egérrel."
 
-#~ msgid "Resize window interactively"
-#~ msgstr "Ablak interaktív átméretezése"
-
 #~ msgid "Resize the window interactively using the mouse."
 #~ msgstr "Ablak interaktív átméretezése az egér segítségével."
-
-#~ msgid "Move selected window"
-#~ msgstr "Kiválasztott ablak mozgatása"
 
 #~ msgid ""
 #~ "Wait for the user to select a window, then interactively move that window."
 #~ msgstr ""
 #~ "Várok a felhasználóra, hogy kiválasszon egy ablakot, és mozgassa azt."
 
-#~ msgid "Resize selected window"
-#~ msgstr "Kiválasztott ablak átméretezése"
-
 #~ msgid ""
 #~ "Wait for the user to select a window, then interactively resize that "
 #~ "window."
 #~ msgstr ""
 #~ "Várakozás egy ablak kiválasztására, majd az ablak interaktív mozgatása."
-
-#~ msgid "Raise and pass through click"
-#~ msgstr "Előhozás és váltás kattintásra"
 
 #~ msgid ""
 #~ "Raise the window that received the current event, then replay any "
@@ -1559,9 +3664,6 @@ msgstr "Sawfish honlap"
 #~ "A jelenlegi eseményt kapó ablak előhúzása, majd újra végezzen el minden "
 #~ "pointer eseményt, ami a parancsot hívta."
 
-#~ msgid "Raise and pass through click if focused"
-#~ msgstr "Előhozás és váltás kattintásra ha fókuszban van"
-
 #~ msgid ""
 #~ "Raise the window that received the current event (if it's focused), then\n"
 #~ "replay any pointer events that invoked the command."
@@ -1569,15 +3671,6 @@ msgstr "Sawfish honlap"
 #~ "A jelenlegi eseményt kapó ablak előhúzása (ha fókuszált), az összes "
 #~ "tranziens ablakával együtt, majd újra végezzen el minden pointer "
 #~ "eseményt, ami a parancsot hívta."
-
-#~ msgid "Raise or pass through click"
-#~ msgstr "Előhozás vagy váltás kattintásra"
-
-#~ msgid "Raise window and pass through click"
-#~ msgstr "Csoport előhozása és váltás kattintásra"
-
-#~ msgid "Raise group and pass through click"
-#~ msgstr "Csoport előhozása és váltás kattintásra"
 
 #~ msgid ""
 #~ "Raise the group of windows that received the current event, then replay\n"
@@ -1587,9 +3680,6 @@ msgstr "Sawfish honlap"
 #~ "ablakával együtt, majd újra végezzen el minden pointer eseményt, ami a "
 #~ "parancsot hívta."
 
-#~ msgid "Raise transients and pass through click"
-#~ msgstr "Tranziensek előhozása és váltás kattintásra"
-
 #~ msgid ""
 #~ "Raise the window that received the current event and any transients it\n"
 #~ "has, then replay any pointer events that invoked the command."
@@ -1598,491 +3688,149 @@ msgstr "Sawfish honlap"
 #~ "együtt, majd újra végezzen el minden pointer eseményt, ami a parancsot "
 #~ "hívta."
 
-#~ msgid "Size window add row"
-#~ msgstr "Ablakméret: sor hozzáadása"
-
 #~ msgid "Increase the size of the current window by one row."
 #~ msgstr "Az aktuális ablak méretének növelése egy sorral."
-
-#~ msgid "Size window subtract row"
-#~ msgstr "Ablakméret: sor kivonása"
 
 #~ msgid "Decrease the size of the current window by one row."
 #~ msgstr "Az aktuális ablak méretének csökkentése egy sorral."
 
-#~ msgid "Size window add column"
-#~ msgstr "Ablakméret oszlop hozzáadása"
-
 #~ msgid "Increase the size of the current window by one column."
 #~ msgstr "Az aktuális ablak méretének növelése egy oszloppal."
-
-#~ msgid "Size window subtract column"
-#~ msgstr "Ablakméret oszlop kivonása"
 
 #~ msgid "Decrease the size of the current window by one column."
 #~ msgstr "Az aktuális ablak méretének csökkentése egy oszloppal."
 
-#~ msgid "Slide window left"
-#~ msgstr "Ablak csúsztatása balra"
-
 #~ msgid "Move the window `slide-window-increment' pixels to the left."
 #~ msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal balra."
-
-#~ msgid "Slide window right"
-#~ msgstr "Ablak csúsztatása jobbra"
 
 #~ msgid "Move the window `slide-window-increment' pixels to the right."
 #~ msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal jobbra."
 
-#~ msgid "Slide window up"
-#~ msgstr "Ablak csúsztatása felfelé"
-
 #~ msgid "Move the window `slide-window-increment' pixels upwards."
 #~ msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal felfelé."
 
-#~ msgid "Slide window down"
-#~ msgstr "Ablak csúsztatása lefelé"
-
 #~ msgid "Move the window `slide-window-increment' pixels downwards."
 #~ msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal lefelé."
-
-#~ msgid "Slide group left"
-#~ msgstr "Csoport csúsztatása balra"
 
 #~ msgid "Move the window group `slide-window-increment' pixels to the left."
 #~ msgstr ""
 #~ "Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal balra."
 
-#~ msgid "Slide group right"
-#~ msgstr "Csoport csúsztatása jobbra"
-
 #~ msgid "Move the window group `slide-window-increment' pixels to the right."
 #~ msgstr ""
 #~ "Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal jobbra."
-
-#~ msgid "Slide group up"
-#~ msgstr "Csoport csúsztatása felfelé"
 
 #~ msgid "Move the window group `slide-window-increment' pixels upwards."
 #~ msgstr ""
 #~ "Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal felfelé."
 
-#~ msgid "Slide group down"
-#~ msgstr "Csoport csúsztatása lefelé"
-
 #~ msgid "Move the window group `slide-window-increment' pixels downwards."
 #~ msgstr ""
 #~ "Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal lefelé."
 
-#~ msgid "Move viewport next"
-#~ msgstr "Mozgatás a következő munkalapra"
-
 #~ msgid "Move to the next viewport."
 #~ msgstr "Mozgatás a következő munkalapra."
-
-#~ msgid "Move viewport previous"
-#~ msgstr "Mozgatás a előző munkalapra"
 
 #~ msgid "Move to the previous viewport."
 #~ msgstr "Mozgatás a előző munkalapra."
 
-#~ msgid "Move window previous"
-#~ msgstr "Ablak áthelyezése előzőre"
-
 #~ msgid "Move the window to the previous viewport."
 #~ msgstr "Ablak áthelyezése az előző munkalapra."
-
-#~ msgid "Move window next"
-#~ msgstr "Ablak áthelyezése következőre"
-
-#~ msgid "Set viewport linear"
-#~ msgstr "Munkalap sorossá tétele"
-
-#~ msgid "Set window viewport linear"
-#~ msgstr "A munkalapok lineárissá tétele"
-
-#~ msgid "cycle-keymap"
-#~ msgstr "cycle-keymap"
 
 #~ msgid "Terminal"
 #~ msgstr "Terminál"
 
-#~ msgid "Xterm"
-#~ msgstr "X-terminál"
-
 #~ msgid "Start a new xterm."
 #~ msgstr "Új xterm indítása."
-
-#~ msgid "Call command"
-#~ msgstr "Parancs hívása"
 
 #~ msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
 #~ msgstr ""
 #~ "Meghívja a NAME nevű parancsot; lehetőség szerint a PFX-ARG "
 #~ "paraméterekkel."
 
-#~ msgid "Run shell command"
-#~ msgstr "Héjparancs futtatása."
-
 #~ msgid "Execute the given shell command."
 #~ msgstr "A megadott héjparancs futtatása."
 
-#~ msgid "Command sequence"
-#~ msgstr "Parancssorozat"
-
 #~ msgid "Invoke the list of commands, one by one."
 #~ msgstr "Parancslista elemeinek futtatása, egymás után."
-
-#~ msgid "Quit"
-#~ msgstr "Kilépés"
-
-#~ msgid "Restart"
-#~ msgstr "Újraindítás"
-
-#~ msgid "Destroy window"
-#~ msgstr "Ablak megsemmisítése"
-
-#~ msgid "Kill client"
-#~ msgstr "Kliens kilövése"
-
-#~ msgid "No operation"
-#~ msgstr "Nincs művelet"
-
-#~ msgid "Call command with output to screen"
-#~ msgstr "Parancs hívása, majd a kimenetének kiírása a képernyőre"
 
 #~ msgid ""
 #~ "Prompt for a command, execute it, and print any output to the screen."
 #~ msgstr ""
 #~ "Parancs bekérése, futtatása, majd minden kimenet kiírása a képernyőre."
 
-#~ msgid "Customize"
-#~ msgstr "Testreszabás"
-
 #~ msgid "Invoke the user-customization system."
 #~ msgstr "A felhasználói-testreszabási rendszer hívása."
-
-#~ msgid "3d hack"
-#~ msgstr "3d hack"
-
-#~ msgid "Auto-Raise"
-#~ msgstr "Automatikus előrehozás"
-
-#~ msgid "Delay in milliseconds until focused windows are raised."
-#~ msgstr "Késleltetés ezredmásodpercben, mielőtt az ablakok előre kerülnek."
-
-#~ msgid "viewport"
-#~ msgstr "munkalap"
-
-#~ msgid "workspace"
-#~ msgstr "munkaterület"
 
 #~ msgid "Error Handling"
 #~ msgstr "Hibakezelés"
 
-#~ msgid "nowhere"
-#~ msgstr "sehol"
-
-#~ msgid "screen"
-#~ msgstr "képernyőre"
-
-#~ msgid "standard-error"
-#~ msgstr "standard-error"
-
-#~ msgid "Display errors"
-#~ msgstr "Hibák megjelenítése"
-
 #~ msgid "Display all errors that have occurred to the screen."
 #~ msgstr "A képernyővel kapcsolatos összes hiba megjelenítése."
-
-#~ msgid "Name"
-#~ msgstr "Név"
-
-#~ msgid "Class"
-#~ msgstr "Osztály"
-
-#~ msgid "Icon Name"
-#~ msgstr "Ikon neve"
-
-#~ msgid "Role"
-#~ msgstr "Feladat"
-
-#~ msgid "Host"
-#~ msgstr "Gépnév"
-
-#~ msgid "Locale"
-#~ msgstr "Nyelv"
-
-#~ msgid "Avoid"
-#~ msgstr "Elkerülő"
-
-#~ msgid "Ignore program position"
-#~ msgstr "Alkalmazás pozíciójának figyelmen kívül hagyása"
-
-#~ msgid "Place mode"
-#~ msgstr "Elhelyezés"
-
-#~ msgid "Position"
-#~ msgstr "Pozíció"
-
-#~ msgid "Dimensions"
-#~ msgstr "Méret"
-
-#~ msgid "Workspace"
-#~ msgstr "Munkaterület"
-
-#~ msgid "Depth"
-#~ msgstr "Mélység"
-
-#~ msgid "Placement weight"
-#~ msgstr "Elhelyezés súlya"
-
-#~ msgid "Maximized"
-#~ msgstr "Teljes méretű"
-
-#~ msgid "Raise on focus"
-#~ msgstr "Előrehozás fókuszba kerüléskör"
-
-#~ msgid "Focus when mapped"
-#~ msgstr "Fókusz leképezéskor"
-
-#~ msgid "Never focus"
-#~ msgstr "Soha ne legyen fókuszált"
-
-#~ msgid "Focus click through"
-#~ msgstr "Fókusz kattintásra"
-
-#~ msgid "Focus mode"
-#~ msgstr "Fókusz módja"
-
-#~ msgid "Frame type"
-#~ msgstr "Kerettípus"
-
-#~ msgid "Frame style"
-#~ msgstr "Keretstílus"
-
-#~ msgid "Ignored"
-#~ msgstr "Ignorált"
-
-#~ msgid "Iconified"
-#~ msgstr "Ikonizált"
-
-#~ msgid "Shaded"
-#~ msgstr "Árnyékolt"
-
-#~ msgid "Sticky"
-#~ msgstr "Ragadós"
-
-#~ msgid "Sticky viewport"
-#~ msgstr "Ragadós munkalap"
-
-#~ msgid "Group"
-#~ msgstr "Csoport"
-
-#~ msgid "Ungrouped"
-#~ msgstr "Csoporton kívüli"
-
-#~ msgid "Cycle skip"
-#~ msgstr "Lapozgatásból kimarad"
-
-#~ msgid "Window list skip"
-#~ msgstr "Ablaklista mellőzése"
-
-#, fuzzy
-#~ msgid "Task list skip"
-#~ msgstr "Ablaklista mellőzése"
-
-#~ msgid "Unique name"
-#~ msgstr "Egyedi név"
-
-#~ msgid "Auto gravity"
-#~ msgstr "Automatikus vonzás"
-
-#~ msgid "Shade hover"
-#~ msgstr "Lebegő árnyékolás"
-
-#~ msgid "Transients above"
-#~ msgstr "Tranziensek fölötte"
-
-#~ msgid "Ignore stacking requests"
-#~ msgstr "Halmozási kérelmek figyelmen kívül hagyása"
-
-#~ msgid ""
-#~ "Enable shade-hover mode.\n"
-#~ "\n"
-#~ "(Temporarily unshades windows while the mouse pointer is over them.)"
-#~ msgstr ""
-#~ "Lebegő árnyékolás engedélyezése.\n"
-#~ "\n"
-#~ "(Ideiglenesen lenyitja az ablakot, ha az egérmutató felette van.)"
-
-#~ msgid "Window history save position"
-#~ msgstr "Ablak előzményei pozíciók mentése"
 
 #~ msgid "Remember the current position of the focused window."
 #~ msgstr "A fókuszban levő ablak jelenlegi pozíciójának megjegyzése."
 
-#~ msgid "Window history save dimensions"
-#~ msgstr "Ablak előzményei méretek mentése"
-
 #~ msgid "Remember the current dimensions of the focused window."
 #~ msgstr "A fókuszban levő ablak jelenlegi méreteinek megjegyzése."
-
-#~ msgid "Window history save attributes"
-#~ msgstr "Ablak előzményei tulajdonságok mentése"
 
 #~ msgid "Remember the current attributes of the focused window."
 #~ msgstr "A fókuszban levő ablak jelenlegi tulajdonságainak megjegyzése."
 
-#~ msgid "Window history forget"
-#~ msgstr "Ablakok előzményeinek elfelejtése"
-
 #~ msgid "Forget any persistent state associated with the current window."
 #~ msgstr "A jelenlegi ablakhoz rendelt összes állapot elfelejtése."
 
-#~ msgid "Window history clear"
-#~ msgstr "Ablakok előzményeinek törlése"
-
 #~ msgid "Forget all saved window history."
 #~ msgstr "Összes mentett ablak előzmény elfelejtése."
-
-#, fuzzy
-#~ msgid "Workspace down"
-#~ msgstr "%d. munkaterület"
 
 #, fuzzy
 #~ msgid "View the workspace below the current workspace"
 #~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
 #, fuzzy
-#~ msgid "Workspace up"
-#~ msgstr "Munkaterület"
-
-#, fuzzy
 #~ msgid "View the workspace above the current workspace"
 #~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#, fuzzy
-#~ msgid "Workspace left"
-#~ msgstr "Munkaterület mozgatása balra"
 
 #, fuzzy
 #~ msgid "View the workspace to the left of the current workspace"
 #~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
 #, fuzzy
-#~ msgid "Workspace right"
-#~ msgstr "Munkaterület mozgatása jobbra"
-
-#, fuzzy
 #~ msgid "View the workspace to the right of the current workspace"
 #~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#, fuzzy
-#~ msgid "Send to workspace down"
-#~ msgstr "Küldés munkaterületre"
 
 #, fuzzy
 #~ msgid "Send window to the workspace below the current workspace"
 #~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
 #, fuzzy
-#~ msgid "Send to workspace up"
-#~ msgstr "Küldés munkaterületre"
-
-#, fuzzy
 #~ msgid "Send window to the workspace above the current workspace"
 #~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#, fuzzy
-#~ msgid "Send to workspace left"
-#~ msgstr "Küldés munkaterületre"
 
 #, fuzzy
 #~ msgid "Send window to the workspace left of the current workspace"
 #~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
 #, fuzzy
-#~ msgid "Send to workspace right"
-#~ msgstr "Küldés munkaterületre"
-
-#, fuzzy
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#~ msgid "Edit frame style"
-#~ msgstr "Keretstílus szerkesztése"
-
-#~ msgid "Gnome menus update"
-#~ msgstr "Gnome menük frissítése"
-
-#~ msgid "global-keymap"
-#~ msgstr "global-keymap"
-
-#~ msgid "window-keymap"
-#~ msgstr "window-keymap"
-
-#~ msgid "root-window-keymap"
-#~ msgstr "root-window-keymap"
-
-#~ msgid "title-keymap"
-#~ msgstr "title-keymap"
-
-#~ msgid "border-keymap"
-#~ msgstr "border-keymap"
-
-#~ msgid "close-button-keymap"
-#~ msgstr "close-button-keymap"
-
-#~ msgid "iconify-button-keymap"
-#~ msgstr "iconify-button-keymap"
-
-#~ msgid "maximize-button-keymap"
-#~ msgstr "maximize-button-keymap"
-
-#~ msgid "menu-button-keymap"
-#~ msgstr "menu-button-keymap"
-
-#~ msgid "shade-button-keymap"
-#~ msgstr "shade-button-keymap"
-
-#~ msgid "Popup window menu"
-#~ msgstr "Ablak menü nyitása"
 
 #~ msgid "Display the menu listing all window operations."
 #~ msgstr "Az összes ablakművelet megjelenítése a menüben."
 
-#~ msgid "Popup root menu"
-#~ msgstr "Gyökér menü nyitása"
-
 #~ msgid "Display the main menu."
 #~ msgstr "Főmenü megjelenítése"
 
-#~ msgid "Popup apps menu"
-#~ msgstr "Alkalmazás menü nyitása"
-
 #~ msgid "Display the applications menu."
 #~ msgstr "Az alkalmazások menü megjelenítése."
-
-#~ msgid "parents"
-#~ msgstr "szülők"
-
-#~ msgid "Raise single window"
-#~ msgstr "Ablak előhozása"
 
 #~ msgid ""
 #~ "Raise the window to its highest allowed position in the stacking order."
 #~ msgstr "Az ablak legmagasabb pozícióba emelése a rétegek között."
 
-#~ msgid "Lower single window"
-#~ msgstr "Ablak hátraküldése"
-
 #~ msgid ""
 #~ "Lower the window to its lowest allowed position in the stacking order."
 #~ msgstr "Az ablak legmagasabb pozícióba süllyesztése a rétegek között."
-
-#~ msgid "Raise lower single window"
-#~ msgstr "Alacsonyabb ablak előhozása"
 
 #~ msgid ""
 #~ "If the window is at its highest possible position, then lower it to its\n"
@@ -2092,56 +3840,23 @@ msgstr "Sawfish honlap"
 #~ "a lehető legalacsonyabb pozícióba. Egyéb esetben előrehozza\n"
 #~ "amennyire csak lehet."
 
-#~ msgid "Raise window depth"
-#~ msgstr "Ablak mélységének növelése"
-
 #~ msgid "Put the window in the stacking level above its current level."
 #~ msgstr "Az ablak a jelenlegi szintnél feljebb helyezése a rétegekben."
-
-#~ msgid "Lower window depth"
-#~ msgstr "Ablak mélységének csökkentése"
 
 #~ msgid "Put the window in the stacking level beneath its current level."
 #~ msgstr "Az ablak a jelenlegi szintnél lejjebb helyezése a rétegekben."
 
-#~ msgid "transients"
-#~ msgstr "tranziensek"
-
-#~ msgid "group"
-#~ msgstr "csoport"
-
-#~ msgid "Iconify window"
-#~ msgstr "Ablak ikonizálása"
-
 #~ msgid "Minimize the window."
 #~ msgstr "Ablak minimalizálása"
-
-#~ msgid "Uniconify window"
-#~ msgstr "Ablak visszaállítása ikonizált állapotból"
 
 #~ msgid "Restore the window from its minimized state."
 #~ msgstr "Az ablak visszaállítása az ikonizált állapotból."
 
-#~ msgid "Toggle window iconified"
-#~ msgstr "Ablak ikonizálása"
-
 #~ msgid "Toggle the iconification of window W."
 #~ msgstr "A W ablak ikonizáltságának átállítása."
 
-#~ msgid "Iconify workspace windows"
-#~ msgstr "Munkaterület ablakainak ikonizálása"
-
 #~ msgid "Minimize all windows on the current workspace."
 #~ msgstr "Minden ablak ikonizálása az aktuális munkaterületen."
-
-#~ msgid "Make window sticky"
-#~ msgstr "Ablak ragadóssá tétele"
-
-#~ msgid "Make window unsticky"
-#~ msgstr "Ablak ragadósságának kikapcsolása"
-
-#~ msgid "Toggle window sticky"
-#~ msgstr "Ablak ragadósságának kapcsolása"
 
 #~ msgid ""
 #~ "Toggle the `stickiness' of the window--whether or not it is a member of\n"
@@ -2150,59 +3865,31 @@ msgstr "Sawfish honlap"
 #~ "Az ablak `ragadásának' átállítása -- rajta van-e minden munkaterületen,\n"
 #~ "vagy nem."
 
-#~ msgid "Make window ignored"
-#~ msgstr "Ablak figyelmen kívül hagyása"
-
 #~ msgid "Ignore the window."
 #~ msgstr "Ablak figyelmen kívül hagyása."
-
-#~ msgid "Make window not ignored"
-#~ msgstr "Ablak figyelembevétele"
 
 #~ msgid "Unignore the window."
 #~ msgstr "Az ablak figyelembevétele."
 
-#~ msgid "Toggle window ignored"
-#~ msgstr "Ablak figyelmen kívül hagyása"
-
 #~ msgid "Toggle whether a window is ignored or not."
 #~ msgstr "Ablak figyelembevételének állítása."
 
-#~ msgid "Toggle window never focus"
-#~ msgstr "Ablak fókuszba sohasem kerülésének kapcsolása"
-
 #~ msgid "Toggle whether a window is focusable or not."
 #~ msgstr "Fókuszálhatóság átállítása."
-
-#~ msgid "Toggle window cycle skip"
-#~ msgstr "Ablak lapozgatásból való kimaradásának kapcsolása"
 
 #~ msgid "Toggle whether a window is ignored while window cycling."
 #~ msgstr ""
 #~ "Ablakok lapozgatásánál az ablak figyelmen kívül hagyásának beállítása."
 
-#~ msgid "Toggle window list skip"
-#~ msgstr "Ablaklistából kihagyás beállítása"
-
 #~ msgid "Toggle whether a window will be include in the window list."
 #~ msgstr "Az ablak ablaklistában való szereplésének be/kikapcsolása."
-
-#, fuzzy
-#~ msgid "Toggle task list skip"
-#~ msgstr "Ablaklistából kihagyás beállítása"
 
 #, fuzzy
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr "Az ablak ablaklistában való szereplésének be/kikapcsolása."
 
-#~ msgid "Maximize window"
-#~ msgstr "Ablak maximalizálása"
-
 #~ msgid "Maximize the dimensions of the window."
 #~ msgstr "Az ablak méreteinek maximalizálása."
-
-#~ msgid "Unmaximize window"
-#~ msgstr "Ablak maximalizálásának visszaállítása"
 
 #~ msgid ""
 #~ "Restore the dimensions of the window to its original, unmaximized, state."
@@ -2210,28 +3897,16 @@ msgstr "Sawfish honlap"
 #~ "Az ablak méreteinek visszaállítása az eredeti, nem maximalizált "
 #~ "állapotára."
 
-#~ msgid "Maximize window vertically"
-#~ msgstr "Ablak függőleges maximalizálása"
-
 #~ msgid "Maximize the vertical dimension of the window."
 #~ msgstr "Az ablak függőleges méretének maximalizálása."
 
-#~ msgid "Maximize window horizontally"
-#~ msgstr "Ablak maximalizálása vízszintesen"
-
 #~ msgid "Maximize the horizontal dimension of the window."
 #~ msgstr "Az ablak vízszintes méretének maximálása."
-
-#~ msgid "Maximize window toggle"
-#~ msgstr "Maximalizálás kapcsolása"
 
 #~ msgid "Toggle the state of the window between maximized and unmaximized."
 #~ msgstr ""
 #~ "Az ablak állapotának kapcsolása a maximalizált és a nem maximalizált\n"
 #~ "között."
-
-#~ msgid "Maximize window horizontally toggle"
-#~ msgstr "Ablak vízszintes maximalizálásának kapcsolása"
 
 #~ msgid ""
 #~ "Toggle the state of the window between horizontally maximized and\n"
@@ -2241,9 +3916,6 @@ msgstr "Sawfish honlap"
 #~ "maximalizált\n"
 #~ "között."
 
-#~ msgid "Maximize window vertically toggle"
-#~ msgstr "Ablak függőleges maximalizálásának kapcsolása"
-
 #~ msgid ""
 #~ "Toggle the state of the window between vertically maximized and\n"
 #~ "unmaximized."
@@ -2252,22 +3924,13 @@ msgstr "Sawfish honlap"
 #~ "maximalizált\n"
 #~ "között."
 
-#~ msgid "Maximize fill window"
-#~ msgstr "Ablak maximalizált kitöltése"
-
 #~ msgid "Maximize the window without obscuring any other windows."
 #~ msgstr "Az ablak méreteinek maximalizálása a többi ablak zavarása nélkül."
-
-#~ msgid "Maximize fill window vertically"
-#~ msgstr "Ablak maximális kitöltése függőlegesen"
 
 #~ msgid "Maximize the window vertically without obscuring any other windows."
 #~ msgstr ""
 #~ "Az ablak függőleges méretének maximalizálása a többi ablak zavarása "
 #~ "nélkül."
-
-#~ msgid "Maximize fill window horizontally"
-#~ msgstr "Ablak maximális kitöltése vízszintesen"
 
 #~ msgid ""
 #~ "Maximize the window horizontally without obscuring any other windows."
@@ -2275,18 +3938,12 @@ msgstr "Sawfish honlap"
 #~ "Az ablak vízszintes méretének maximalizálása a többi ablak zavarása "
 #~ "nélkül."
 
-#~ msgid "Maximize fill window toggle"
-#~ msgstr "Ablak maximalizált töltésének kapcsolása"
-
 #~ msgid ""
 #~ "Toggle the state of the window between maximized-filled and unmaximized."
 #~ msgstr ""
 #~ "Az ablak állapotának kapcsolása a maximalizált-kitöltött és a nem "
 #~ "maximalizált\n"
 #~ "között."
-
-#~ msgid "Maximize fill window horizontally toggle"
-#~ msgstr "Ablak vízszintes maximalizált töltésének kapcsolása"
 
 #~ msgid ""
 #~ "Toggle the state of the window between horizontally maximized-filled and\n"
@@ -2296,9 +3953,6 @@ msgstr "Sawfish honlap"
 #~ "a nem maximalizált\n"
 #~ "között."
 
-#~ msgid "Maximize fill window vertically toggle"
-#~ msgstr "Ablak függőleges maximalizált töltésének kapcsolása"
-
 #~ msgid ""
 #~ "Toggle the state of the window between vertically maximized-filled and\n"
 #~ "unmaximized."
@@ -2307,15 +3961,9 @@ msgstr "Sawfish honlap"
 #~ "a nem maximalizált\n"
 #~ "között."
 
-#~ msgid "Maximize window fullscreen"
-#~ msgstr "Maximalizálás teljes képernyőre"
-
 #, fuzzy
 #~ msgid "Fullscreen maximize the window."
 #~ msgstr "Ablak minimalizálása"
-
-#~ msgid "Maximize window fullscreen toggle"
-#~ msgstr "Teljes képernyős maximalizálás kapcsolása"
 
 #, fuzzy
 #~ msgid ""
@@ -2326,14 +3974,6 @@ msgstr "Sawfish honlap"
 #~ "között."
 
 #, fuzzy
-#~ msgid "Maximize window fullxinerama"
-#~ msgstr "Maximalizálás teljes képernyőre"
-
-#, fuzzy
-#~ msgid "Maximize window fullxinerama toggle"
-#~ msgstr "Teljes képernyős maximalizálás kapcsolása"
-
-#, fuzzy
 #~ msgid ""
 #~ "Toggle the state of the window between fullscreen maximized across all "
 #~ "Xinerama and unmaximized."
@@ -2342,14 +3982,8 @@ msgstr "Sawfish honlap"
 #~ "maximalizált\n"
 #~ "között."
 
-#~ msgid "Shade window"
-#~ msgstr "Ablak árnyékolása"
-
 #~ msgid "Display only the title bar of the window."
 #~ msgstr "Csak az ablak címsorának megjelenítése."
-
-#~ msgid "Unshade window"
-#~ msgstr "Ablak lenyitása"
 
 #~ msgid ""
 #~ "If the window is shaded (see `shade-window'), restore it to it's usual\n"
@@ -2359,16 +3993,10 @@ msgstr "Sawfish honlap"
 #~ "szokásos\n"
 #~ "állapotát."
 
-#~ msgid "Toggle window shaded"
-#~ msgstr "Ablak árnyékolásának kapcsolása"
-
 #~ msgid ""
 #~ "Toggle the shaded (only the title bar is displayed) state of the window."
 #~ msgstr ""
 #~ "Bekapcsolja az ablak árnyékolt állapotát (csak a címsor jelenik meg)."
-
-#~ msgid "Raise window and transients"
-#~ msgstr "Ablak és tranziensek előrehozása"
 
 #~ msgid ""
 #~ "Raise the current window to its highest allowed position in the stacking\n"
@@ -2377,18 +4005,12 @@ msgstr "Sawfish honlap"
 #~ "Jelenlegi ablak előhúzása a lehető legmagasabb pozícióra. A tranziens "
 #~ "ablakok együtt mozognak a jelenlegi ablakkal."
 
-#~ msgid "Lower window and transients"
-#~ msgstr "Ablak és tranzienseinek hátraküldése"
-
 #~ msgid ""
 #~ "Lower the current window to its lowest allowed position in the stacking\n"
 #~ "order. Also lower any transient windows that it has."
 #~ msgstr ""
 #~ "Ablak hátraküldése a lehető legalacsonyabb pozícióba. Az ablak tranziens "
 #~ "ablakai szintén mozognak vele együtt"
-
-#~ msgid "Raise lower window and transients"
-#~ msgstr "Alsó ablak és tranzienseinek előhozása"
 
 #~ msgid ""
 #~ "If the window is at its highest possible position, then lower it to its\n"
@@ -2401,36 +4023,18 @@ msgstr "Sawfish honlap"
 #~ "lehet.\n"
 #~ "Az ablak tranziens ablakainak szintjét szintén változtatja."
 
-#~ msgid "Insert workspace"
-#~ msgstr "Munkaterület beillesztése"
-
-#~ msgid "Display window without focusing"
-#~ msgstr "Ablak megjelenítése fókuszálás nélkül"
-
 #~ msgid "Display the workspace/viewport containing the window W."
 #~ msgstr "A W ablakot tartalmazó munkaterület megjelenítése."
-
-#~ msgid "Display window"
-#~ msgstr "Ablak megjelenítése"
 
 #~ msgid "Display the workspace containing the window W, then focus on W."
 #~ msgstr ""
 #~ "A W ablakot tartalmazó munkaterület megjelenítése, és fókuszálás W-re."
 
-#~ msgid "Gtkrc reload style"
-#~ msgstr "Gtkrc stílus újratöltése"
-
 #~ msgid "Reload the gtkrc settings."
 #~ msgstr "gtkrc beállítások újratöltése."
 
-#~ msgid "Describe key"
-#~ msgstr "Kulcs leírása"
-
 #~ msgid "Prompt for a key sequence, then print its binding."
 #~ msgstr "Bekér egy billentyűsorozatot, majd megjeleníti a hozzárendelést."
-
-#~ msgid "Quote event"
-#~ msgstr "Esemény idézése"
 
 #~ msgid ""
 #~ "Sends the next key event directly to the focused client window, ignoring\n"
@@ -2440,175 +4044,80 @@ msgstr "Sawfish honlap"
 #~ "ablaknak\n"
 #~ "az esetleges ablakkezelő hozzárendeléseket figyelmen kívül hagyva."
 
-#~ msgid "prompt-keymap"
-#~ msgstr "prompt-keymap"
-
-#~ msgid "Raise window"
-#~ msgstr "Ablak előhozása"
-
-#~ msgid "Lower window"
-#~ msgstr "Ablak lecsukása"
-
-#~ msgid "Raise lower window"
-#~ msgstr "Alsó ablak előhozása"
-
-#~ msgid "Activate viewport"
-#~ msgstr "Nézet  aktiválása"
-
 #~ msgid "Select the specified viewport."
 #~ msgstr "A megadott munkalap kiválasztása."
-
-#~ msgid "Activate viewport column"
-#~ msgstr "Nézet oszlopának aktiválása"
 
 #~ msgid "Select the specified viewport column."
 #~ msgstr "A megadott munkalap-oszlop kiválasztása."
 
-#~ msgid "Activate viewport row"
-#~ msgstr "Nézet sorának aktiválása"
-
 #~ msgid "Select the specified viewport row."
 #~ msgstr "A megadott munkalap-sor kiválasztása."
-
-#~ msgid "Move window to viewport"
-#~ msgstr "Ablak áthelyezése másik munkalapra"
 
 #~ msgid "Move the current window to the specified viewport."
 #~ msgstr "Az aktuális ablak átmozgatása a megadott munkalapra."
 
-#~ msgid "Move viewport right"
-#~ msgstr "Munkalap mozgatása jobbra"
-
 #~ msgid "Move the viewport one screen to the right."
 #~ msgstr "Az aktuális munkalap mozgatása egy képernyővel jobbra."
-
-#~ msgid "Move viewport left"
-#~ msgstr "Munkalap mozgatása balra"
 
 #~ msgid "Move the viewport one screen to the left."
 #~ msgstr "Az aktuális munkalap mozgatása egy képernyővel balra."
 
-#~ msgid "Move viewport up"
-#~ msgstr "Nézet mozgatása felfelé"
-
 #~ msgid "Move the viewport one screen up."
 #~ msgstr "Ablak áthelyezése, majd váltás a lenti munkalapra."
 
-#~ msgid "Move viewport down"
-#~ msgstr "Nézet mozgatása lefelé"
-
 #~ msgid "Move the viewport one screen down."
 #~ msgstr "Munkalap mozgatása egy képernyőnyit le."
-
-#~ msgid "Move window right"
-#~ msgstr "Ablak mozgatása jobbra"
 
 #~ msgid ""
 #~ "Move the window to the viewport on the right, and switch to that viewport."
 #~ msgstr "Mozgassa az ablakot a jobbra levő nézetre, és kapcsoljon oda."
 
-#~ msgid "Move window left"
-#~ msgstr "Ablak mozgatása balra"
-
 #~ msgid ""
 #~ "Move the window to the viewport on the left, and switch to that viewport."
 #~ msgstr "Mozgassa az ablakot a balra levő nézetre, és kapcsoljon oda."
 
-#~ msgid "Move window up"
-#~ msgstr "Ablak mozgatása fel"
-
 #~ msgid "Move the window to the viewport above, and switch to that viewport."
 #~ msgstr "Ablak áthelyezése, majd váltás a fenti munkalapra."
-
-#~ msgid "Move window down"
-#~ msgstr "Ablak mozgatása le"
 
 #~ msgid "Move the window to the viewport below, and switch to that viewport."
 #~ msgstr "Ablak áthelyezése, majd váltás a lenti munkalapra."
 
-#, fuzzy
-#~ msgid "Animation"
-#~ msgstr "Műveletek"
-
-#, fuzzy
-#~ msgid "solid"
-#~ msgstr "Elkerülő"
-
-#~ msgid "Focus desktop"
-#~ msgstr "Fókuszálás az asztalra"
-
 #~ msgid "Transfer input focus to the desktop window (if one exists)."
 #~ msgstr "A beviteli fókusz mozgatása az asztal ablakára (ha létezik)."
 
-#~ msgid "Delete window"
-#~ msgstr "Ablak törlése"
-
 #~ msgid "Delete the window."
 #~ msgstr "Ablak törlése."
-
-#~ msgid "Delete window safely"
-#~ msgstr "Ablak biztonságos törlése"
 
 #~ msgid "Delete the window, or beep if the window can't be closed safely."
 #~ msgstr ""
 #~ "Az ablak törlése, vagy csengetés, ha nem lehet biztonságosan bezárni."
 
-#~ msgid "Uniquify window name"
-#~ msgstr "Ablak nevének egyedivé tétele"
-
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "A jelenlegi ablak kényszerítése egyedi címsor használatára."
-
-#~ msgid "Popup workspace list"
-#~ msgstr "Munkaterület-lista megnyitása"
 
 #~ msgid "Display the menu containing the list of all workspaces."
 #~ msgstr "Az összes munkaterület menüjének megjelenítése."
 
-#~ msgid "Popup window list"
-#~ msgstr "Ablaklista megnyitása"
-
 #~ msgid "Display the menu of all managed windows."
 #~ msgstr "Az összes kezelt ablak menüjének megjelenítése."
-
-#~ msgid "Next workspace"
-#~ msgstr "Következő munkaterület"
 
 #~ msgid "Display the next workspace."
 #~ msgstr "Következő munkaterület megjelenítése."
 
-#~ msgid "Previous workspace"
-#~ msgstr "Előző munkaterület"
-
 #~ msgid "Display the previous workspace."
 #~ msgstr "Előző munkaterület megjelenítése."
-
-#~ msgid "Send to next workspace"
-#~ msgstr "Küldés a következő munkaterületre"
 
 #~ msgid "Move the window to the next workspace."
 #~ msgstr "Ablak áthelyezése a következő munkaterületre"
 
-#~ msgid "Send to previous workspace"
-#~ msgstr "Küldés az előző munkaterületre"
-
 #~ msgid "Move the window to the previous workspace."
 #~ msgstr "Ablak áthelyezése az előző munkaterületre."
-
-#~ msgid "Copy to next workspace"
-#~ msgstr "Másolás a következő munkaterületre"
 
 #~ msgid "Copy the window to the next workspace."
 #~ msgstr "Ablak másolása a következő munkaterületre."
 
-#~ msgid "Copy to previous workspace"
-#~ msgstr "Másolás az előző munkaterületre"
-
 #~ msgid "Copy the window to the previous workspace."
 #~ msgstr "Ablak másolása az előző munkaterületre."
-
-#~ msgid "Append workspace and send"
-#~ msgstr "Munkaterület hozzáfűzése és küldés"
 
 #~ msgid ""
 #~ "Create a new workspace at the end of the list, and move the window to it."
@@ -2616,18 +4125,12 @@ msgstr "Sawfish honlap"
 #~ "Új munkaterület létrehozása a lista végén, és az ablak mozgatása erre a "
 #~ "munkaterületre."
 
-#~ msgid "Prepend workspace and send"
-#~ msgstr "Munkaterület előre fűzése és küldés"
-
 #~ msgid ""
 #~ "Create a new workspace at the start of the list, and move the window to "
 #~ "it."
 #~ msgstr ""
 #~ "Új munkaterület létrehozása a lista elején, és az ablak mozgatása erre a "
 #~ "munkaterületre."
-
-#~ msgid "Merge next workspace"
-#~ msgstr "Következő munkaterület összefűzése"
 
 #~ msgid ""
 #~ "Delete the current workspace. Its member windows are relocated to the "
@@ -2637,9 +4140,6 @@ msgstr "Sawfish honlap"
 #~ "A jelenlegi munkaterület törlése. A munkaterület ablakai átkerülnek a "
 #~ "következő munkaterületre."
 
-#~ msgid "Merge previous workspace"
-#~ msgstr "Előző munkaterület összefűzése"
-
 #~ msgid ""
 #~ "Delete the current workspace. Its member windows are relocated to the\n"
 #~ "previous workspace."
@@ -2647,38 +4147,20 @@ msgstr "Sawfish honlap"
 #~ "A jelenlegi munkaterület törlése. A munkaterület ablakai az előző\n"
 #~ "munkaterületre kerülnek."
 
-#~ msgid "Insert workspace after"
-#~ msgstr "Munkaterület beillesztése mögé"
-
 #~ msgid "Create a new workspace following the current workspace."
 #~ msgstr "Új munkaterület létrehozása az aktuális munkaterület után."
-
-#~ msgid "Insert workspace before"
-#~ msgstr "Munkaterület beillesztése elé"
 
 #~ msgid "Create a new workspace before the current workspace."
 #~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
-#~ msgid "Move workspace forwards"
-#~ msgstr "Munkaterület mozgatása előre"
-
 #~ msgid "Move the current workspace one place to the right."
 #~ msgstr "Az aktuális munkaterület mozgatása egy hellyel jobbra."
-
-#~ msgid "Move workspace backwards"
-#~ msgstr "Munkaterület mozgatása hátra"
 
 #~ msgid "Move the current workspace one place to the left."
 #~ msgstr "Az aktuális munkaterület mozgatása egy hellyel balra."
 
-#~ msgid "Delete empty workspaces"
-#~ msgstr "Üres munkaterületek törlése"
-
 #~ msgid "Delete any workspaces that don't contain any windows."
 #~ msgstr "Az összes olyan munkaterület törlése, ami nem tartalmaz ablakot."
-
-#~ msgid "Delete window instance"
-#~ msgstr "Ablak törlése"
 
 #~ msgid ""
 #~ "Remove the copy of the window on the current workspace. If this is the\n"
@@ -2687,34 +4169,11 @@ msgstr "Sawfish honlap"
 #~ "Az ablak másolatának eltávolítása a jelenlegi munkaterületről. Ha ez az\n"
 #~ "utolsó példány, törölje az aktuális ablakot."
 
-#, fuzzy
-#~ msgid "Show desktop"
-#~ msgstr "Fókuszálás az asztalra"
-
-#, fuzzy
-#~ msgid "Hide desktop"
-#~ msgstr "Fókuszálás az asztalra"
-
-#~ msgid "Activate workspace"
-#~ msgstr "Munkaterület aktívvá tétele"
-
 #~ msgid "Select the N'th workspace."
 #~ msgstr "Az n-edik munkaterület kiválasztása."
 
-#~ msgid "Send to workspace"
-#~ msgstr "Küldés munkaterületre"
-
-#~ msgid "Move the current window to the N'th workspace."
-#~ msgstr "Az aktuális ablak átmozgatása az n-edik munkaterületre."
-
-#~ msgid "Copy to workspace"
-#~ msgstr "Másolás munkaterületre"
-
 #~ msgid "Copy the current window to the N'th workspace."
 #~ msgstr "Az aktuális ablak átmásolása az n-edik munkaterületre."
-
-#~ msgid "Select workspace interactively"
-#~ msgstr "Munkaterület kiválasztása interaktívan"
 
 #~ msgid "Prompt for a workspace and switch to it."
 #~ msgstr "Bekér egy munkaterületet, majd átkapcsol rá."

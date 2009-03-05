@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# make-pot -- extract .pot file from sources
+
+# $Id: make-pot,v 1.5 2000/09/01 22:45:15 john Exp $
+
+# This file is part of sawfish.
+
+# sawfish is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+
+# sawfish is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with sawfish; see the file COPYING.  If not, write to
+# the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+case $1 in
+	*update)
+		intltool-update --pot
+		mv -f untitled.pot sawfish.pot
+	;;
+
+	*generate)
+		REP_SRCS="../scripts/*.jl\
+		 ../themes/*/theme.jl"
+
+		REP_SRCS="$REP_SRCS `find ../lisp -name '*.jl' -print`"
+
+		rm -f sawfish.pot
+
+		if [ ! -r ../DOC ]; then
+  			echo "error: Need a DOC file!"
+  			exit 1
+		fi
+
+		lisp_c=.$$.lisp.c
+
+		./sawfish-xgettext --doc-file=../DOC --c $REP_SRCS >$lisp_c
+		
+		xgettext --add-comments -a --no-location $lisp_c 
+		mv -f messages.po sawfish.pot
+
+		rm -f $lisp_c
+	;;
+esac

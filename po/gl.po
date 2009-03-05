@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-09 10:44+0100\n"
+"POT-Creation-Date: 2009-03-05 08:31+0100\n"
 "PO-Revision-Date: 2001-08-19 13:25+0200\n"
 "Last-Translator: Jesús Bravo Álvarez <jba@pobox.com>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
@@ -19,1307 +19,3486 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../lisp/sawfish/gtk/widgets/alist.jl:37
-#: ../lisp/sawfish/ui/widgets/keymap.jl:66
+#. ../themes/Crux/theme.jl
+msgid "Crux Theme"
+msgstr "Tema Crux"
+
+#. ../themes/Crux/theme.jl
+msgid ""
+"Accent color for focused windows (if unset uses the GTK+ selection color)."
+msgstr ""
+"Cor das fiestras enfocadas (se non se indica, úsase a cor de selección de GTK"
+"+)."
+
+#. ../themes/Crux/theme.jl
+msgid "Display the window's icon in its menu button."
+msgstr "Amosar a icona da fiestra no botón do menú."
+
+#. ../themes/Crux/theme.jl
+msgid "Display title buttons to mimic: \\w"
+msgstr "Os botóns do título semellan: \\w"
+
+#. ../themes/gradient/theme.jl
+msgid "Gradient Theme"
+msgstr "Tema gradiente"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/gradient/theme.jl
+msgid "horizontal"
+msgstr "horizontal"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/gradient/theme.jl
+msgid "vertical"
+msgstr "vertical"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/gradient/theme.jl
+msgid "diagonal"
+msgstr "diagonal"
+
+#. ../themes/gradient/theme.jl
+msgid "Direction of gradient in `gradient' frame style."
+msgstr "Dirección do gradiente no estilo de marco `gradiente'."
+
+#. ../themes/gradient/theme.jl
+msgid "`From' color of inactive frames in `gradient' frame style."
+msgstr "Cor de orixe dos marcos inactivos no estilo de marco `gradiente'."
+
+#. ../themes/gradient/theme.jl
+msgid "`To' color of inactive frames in `gradient' frame style."
+msgstr "Cor de destino dos marcos inactivos no estilo de marco `gradiente'."
+
+#. ../themes/gradient/theme.jl
+msgid "`From' color of active frames in `gradient' frame style."
+msgstr "Cor de orixe dos marcos activos no estilo de marco `gradiente'."
+
+#. ../themes/gradient/theme.jl
+msgid "`To' color of active frames in `gradient' frame style."
+msgstr "Cor de destino dos marcos activos no estilo de marco `gradiente'."
+
+#. ../themes/gradient/theme.jl
+msgid "Use less memory when creating gradients, possibly affecting quality."
+msgstr ""
+"Usar menos memoria ao crear os gradientes, posiblemente afectando á calidade."
+
+#. ../themes/mono/theme.jl
+msgid "Mono Theme"
+msgstr "Tema monocromo"
+
+#. ../themes/mono/theme.jl
+msgid "Color of inactive frames (if unset use GTK+ background color)."
+msgstr ""
+"Cor dos marcos inactivos (se non se indica, úsase a cor de fondo de GTK+)."
+
+#. ../themes/mono/theme.jl
+msgid "Color of active frames (if unset use GTK+ selection color)."
+msgstr ""
+"Cor dos marcos activos (se non se indica, úsase a cor de selección de GTK+)."
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/mono/theme.jl
+msgid "left"
+msgstr "esquerda"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/mono/theme.jl
+msgid "right"
+msgstr "dereita"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/mono/theme.jl
+msgid "center"
+msgstr "centro"
+
+#. ../themes/mono/theme.jl
+msgid "Text is \\w justified in window titles."
+msgstr "Xustificación do texto nos títulos das fiestras: \\w"
+
+#. ../themes/mxflat/theme.jl
+msgid "mxflat"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "title"
+msgstr "[title]"
+
+#. ../themes/mxflat/theme.jl
+msgid "basic"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "gradient"
+msgstr "temporais"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "colors"
+msgstr "Seleccionar cor"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "buttons"
+msgstr "[abaixo]"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "positions 1"
+msgstr "Posición"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "positions 2"
+msgstr "Posición"
+
+#. ../themes/mxflat/theme.jl
+msgid "keymaps 1"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "keymaps 2"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "borders"
+msgstr "bordo"
+
+#. ../themes/mxflat/theme.jl
+msgid "extended"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "normal"
+msgstr "Normal"
+
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../themes/mxflat/theme.jl
+msgid "all"
+msgstr "todas"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../themes/mxflat/theme.jl
+msgid "none"
+msgstr "ningún"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"decoration mode\n"
+"\n"
+"set the mode 'when to draw a titlebar and window buttons'. the decoration "
+"mode 'all' means that all windows, even transients/dialogs, will get a "
+"titlebar and buttons. none means no window will get any :-). usually "
+"transients only have a contents-border. this option is for reimplementing a "
+"sawfish feature that is gone in the latest version."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "titlebar height (9 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize title string\n"
+"\n"
+"see the tooltip for the 'title string' option below for more information. "
+"(NOTE: i hope the redrawing problems with this option are solved. if not, "
+"write an email please!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string\n"
+"\n"
+"the string you insert here will be your new title string. variables always "
+"start with a dollar-sign $ and are replaced with their actual values. to get "
+"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
+"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
+"string]. the following vars are built-in: $name, $fullname, $width, $width-"
+"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
+"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
+"if not, write an email please!"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"update title string periodically\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string update interval (1 - 1000000 s)\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string font\n"
+"\n"
+"you should really choose a better font. verdana bold 8 pt looks nice."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize title position\n"
+"\n"
+"by default the title string is centered horizontally and vertically."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "real-center"
+msgstr "centro"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string horizontal alignment\n"
+"\n"
+"'real-center' means to take the whole titlebar into account while centering "
+"the string. when selecting 'center' only the distance between the buttons is "
+"taken into account."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
+"\n"
+"the horizontal position of the title string can only be adjusted if the "
+"horizontal alignment is not 'center'. the range also depends on the setting "
+"of the option above. it the title string is already aligned left, you cannot "
+"adjust it to be even further left because there are button in the way."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "top"
+msgstr "parar"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "bottom"
+msgstr "[abaixo]"
+
+#. ../themes/mxflat/theme.jl
+msgid "title string vertical alignment"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient titlebar background (experimental)\n"
+"\n"
+"when activating the gradient background the normal titlebar background "
+"colors will be ignored. besides the button background colors will be "
+"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
+"low value, ie high quality.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient mode\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient quality (1 best - 20 worst)\n"
+"\n"
+"the value here is the factor the calculated gradient image will be scaled "
+"down. this increases speed but decreases quality."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "rainbow"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "jamaica"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "rgb"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "custom"
+msgstr "Configurar"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient color mode\n"
+"\n"
+"the custom mode will respect the colors set in the list below."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used. besides the gradient color mode must be set to "
+"custom to activate this list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "reverse colors"
+msgstr "Seleccionar cor"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused/highlighted titlebar colors hue (0 - 360)\n"
+"\n"
+"this value changes the hue of a color, by moving (0 - 360) degress around "
+"the color cycle...180 for example inverts the color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, c-format
+msgid ""
+"unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
+"color)\n"
+"\n"
+"the saturation of a color is a measurement of the color intensity"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, c-format
+msgid ""
+"unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
+"color)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"  focused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"  focused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize extended title string colors\n"
+"\n"
+"you can customize additional colors of the title string. if you deactivate "
+"this, these colors will be set to the focused title string color."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "default-9"
+msgstr "Por defecto"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "default-12"
+msgstr "Por defecto"
+
+#. ../themes/mxflat/theme.jl
+msgid "square-6"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-9"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-12"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-15"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-18"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "ball-9"
+msgstr "todas"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "ball-12"
+msgstr "todas"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button icon set (experimental)\n"
+"\n"
+"the number at the end is the width/height of the button icons in the icon "
+"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button size\n"
+"\n"
+"by default the button size follows the size of the titlebar, but by "
+"activating this you can set it to something different."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"buttons size (1 - 1000 pixel)\n"
+"\n"
+"a buttons size that is bigger than your current titlebar height is ignored."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button vertical alignment\n"
+"\n"
+"if a button is smaller than the titlebar you might want to set its vertical "
+"alignment."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"scale button icons (experimental)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"display window icon on menu button\n"
+"\n"
+"many people like having the window-icon displayed on the menu-button. this "
+"icon is defined by the application itself and is also shown in your pager "
+"and task-list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "menu icon scale (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "button distance (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "buttons left offset (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "buttons right offset (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
+"\n"
+"enabling this will allow you to set the positon of each button in the "
+"titlebar manually. a negative/positiv value means the button will be drawn "
+"on left/right side of the titlebar."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "title-height"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "pixel"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button position model\n"
+"\n"
+"'titel-height' means calculate position as multiple of title height. when "
+"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
+"mind that several buttons might slide on top of each other. 'none' means no "
+"buttons at all."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "menu button position"
+msgstr "Lembrar _posición"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "shade button position"
+msgstr "Mapa de teclado do botón de enrolar"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "iconify button position"
+msgstr "Mapa de teclado do botón de iconificar"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "maximize button position"
+msgstr "Mapa de teclado do botón de maximizar"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "close button position"
+msgstr "Mapa de teclado do botón de pechar"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "sticky button position"
+msgstr "Mapa de teclado do botón de iconificar"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "previous workspace button position"
+msgstr "Anterior fiestra do escritorio"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "next workspace button position"
+msgstr "Seguinte fiestra do escritorio"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "configure button position"
+msgstr "Mapa de teclado do botón de iconificar"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "info button position"
+msgstr "Gardar a posición na historia da fiestra"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "always-on-top button position"
+msgstr "Gardar a posición na historia da fiestra"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "lock button position"
+msgstr "Mapa de teclado do botón de pechar"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize sticky button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: toggle sticky "
+"state of window"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:sticky-button-keymap"
+msgstr "Mapa de teclado do botón de iconificar"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize previous button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"previous workspace - button2 workspace-list - button3 send window to first "
+"workspace - button6 pack window left"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:previous-button-keymap"
+msgstr "Mapa de teclado do botón de menú"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize next button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"next workspace - button2 workspace-list - button3 send window to last "
+"workspace - button6 pack window right"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:next-button-keymap"
+msgstr "Mapa de teclado do botón de menú"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: send window to next workspace - button2 workspace-list - button3 "
+"send window to last workspace - button6 pack window right"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize configure button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: start sawfish-"
+"ui - button3: toggle custom title string"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:configure-button-keymap"
+msgstr "Mapa de teclado do botón de menú"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: start sawfish-ui - button3: toggle custom title string"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize info button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: window list - "
+"button3 window snooper (not included by default)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:info-button-keymap"
+msgstr "Mapa de teclado do botón de menú"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"always on top depth (-1000 - 1000)\n"
+"\n"
+"a window will have this depth after you have pressed the always-on-top "
+"button. 0 is the normal window level. every positive value means above other "
+"windows, a negative value means below. keept it at a positive value in order "
+"to have the always-on-top button do it's job."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize always-on-top button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: sets window "
+"depth to the adjusted value"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:always-on-top-button-keymap"
+msgstr "Mapa de teclado do botón de menú"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize look button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: lock window "
+"position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "mxflat:lock-button-keymap"
+msgstr "Mapa de teclado do botón de pechar"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button-colors\n"
+"\n"
+"when you active this you will be able to set custom button colors. by "
+"default the button colors depend on the titlebar colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width (0 - 1000 pixel)\n"
+"\n"
+"set the width border around the window."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width for maximized windows (0 - 1000 pixel)\n"
+"\n"
+"when you like having a big border around your windows you might have noticed "
+"that sawfish still draws that big border when the window is maximized. if "
+"you don't want that, set the border width for maximized windows smaller than "
+"the border width for unmaximized windows. (NOTE: this feature is still buggy "
+"as sawfish does not resize the windows correctly yet, so the best might be "
+"to set it to the normal border width.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize border for focused windows (experimental)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width for focused windows (0 - 1000 pixel)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title-contents border width (0 - 1000 pixel)\n"
+"\n"
+"sets the widths of the line between titlebar and contents window"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border offset (-1000 - 1000 pixel)\n"
+"\n"
+"adjust the point where the border actually starts. many gtk2 apps draw a "
+"small black border around their contents window and this is just ugly when "
+"sawfish draws another border around the window. with a border offset of -1 "
+"the sawfish window border will overlay the gtk2 border exactly."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"keep window borders and corners at their place when shading a window\n"
+"\n"
+"when shading a window borders and corners will stay where they were and not "
+"merge with the titlebar."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"show window corners\n"
+"\n"
+" the corners are used to resize a window in two directions at the same time. "
+"usually the width and length of window corners are determined by the border "
+"width but you can adjust them below."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"corners length adjustement (-1 - 100 pixel)\n"
+"\n"
+"increasing the corner length will grow the window corners along the window "
+"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
+"grab the 1 pixel corner to be able to resize the window in two directions; "
+"thus, make it bigger."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "outside"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "inside"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "corner direction"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"corners width adjustement (0 - 100 pixel)\n"
+"\n"
+"this option makes the window corners broader. with a border width of 1 pixel "
+"it is hard to grab this 1 pixel corner to be able to resize the window in "
+"two directions; thus, make it bigger."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow (experimental)\n"
+"\n"
+"draw a small additional border around your windows emulating a solid shadow "
+"effect. use the options below to adjust its width and direction. (NOTE: this "
+"is VERY cpu intensive and might slow down your computer noticably. so turn "
+"it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "fake shadow only on focused windows"
+msgstr "Imaxe da barra para as fiestras sen foco."
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "north"
+msgstr "Acerca"
+
+#. ../themes/mxflat/theme.jl
+msgid "east"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "south"
+msgstr "Acerca"
+
+#. ../themes/mxflat/theme.jl
+msgid "west"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "north-east"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "north-west"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "south-east"
+msgstr "Acerca"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "south-west"
+msgstr "Acerca"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow light source\n"
+"\n"
+"set the direction of the fake shadow. usually only 2 or 3 borders of your "
+"window have a fake shadow. this depends on where the light comes from."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow light distance (0 - 100)\n"
+"\n"
+"this option has only an effect on the north, east, south and west light "
+"sources. the further away the light source is, the smaller will the two "
+"'side' shadows be."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "fake shadow width (0 - 100 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "shadow color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize border colors\n"
+"\n"
+"you can customize your border colors here. if you deactivate this, these "
+"colors will be set to the focused title string color."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked border color"
+msgstr ""
+
+#. ../themes/simple/theme.jl
+msgid "Simple Theme"
+msgstr "Tema simple"
+
+#. ../themes/simple/theme.jl
+msgid "Color of inactive frames in `simple' frame style."
+msgstr "Cor dos marcos inactivos no estilo de marcos `simple'."
+
+#. ../themes/simple/theme.jl
+msgid "Color of active frames in `simple' frame style."
+msgstr "Cor dos marcos activos no estilo de marcos `simple'."
+
+#. ../themes/smaker/theme.jl
+msgid "SMaker Theme"
+msgstr "Tema SMaker"
+
+#. ../themes/smaker/theme.jl
+msgid "Use black-on-white button images."
+msgstr "Imaxes dos botóns en negro sobre branco."
+
+#. ../themes/smaker/theme.jl
+msgid "Color to use when drawing text."
+msgstr "Cor para escribir o texto."
+
+#. ../themes/smaker/theme.jl
+msgid "Bar image for unfocused windows."
+msgstr "Imaxe da barra para as fiestras sen foco."
+
+#. ../themes/smaker/theme.jl
+msgid "Bar image for focused windows."
+msgstr "Imaxe da barra para as fiestras enfocadas."
+
+#. ../themes/smaker/theme.jl
+msgid "Bar image for highlighted parts."
+msgstr "Imaxe da barra para as partes destacadas."
+
+#. ../themes/smaker/theme.jl
+msgid "Bar image for clicked parts."
+msgstr "Imaxe da barra para as partes premidas."
+
+#. ../themes/smaker/theme.jl
+msgid "Height of title bar."
+msgstr "Altura da barra de título."
+
+#. ../themes/smaker/theme.jl
+msgid "Width of window border."
+msgstr "Ancho do bordo da fiestra."
+
+#. ../themes/smaker/theme.jl
+msgid "Border width of bar images."
+msgstr "Ancho do bordo das imaxes da barra."
+
+#. ../lisp/sawfish/gtk/widget.jl
+#, c-format
+msgid "No matching item for %S"
+msgstr "Ningún elemento coincide con %S"
+
+#. ../lisp/sawfish/gtk/widget.jl
+msgid "** unknown widget **  "
+msgstr "** widget descoñecido **  "
+
+#. ../lisp/sawfish/ui/widgets/keymap.jl
+#. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Key"
 msgstr "Tecla"
 
-#: ../lisp/sawfish/gtk/widgets/alist.jl:38
+#. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
 msgstr "Valor"
 
-#: ../lisp/sawfish/gtk/widgets/color.jl:40
+#. ../lisp/sawfish/gtk/widgets/color.jl
 msgid "Select color"
 msgstr "Seleccionar cor"
 
-#: ../lisp/sawfish/gtk/widgets/file.jl:33
-#: ../lisp/sawfish/gtk/widgets/font.jl.in:45
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../lisp/sawfish/gtk/widgets/file.jl
 msgid "Browse..."
 msgstr "Examinar..."
 
-#: ../lisp/sawfish/gtk/widgets/file.jl:43
+#. ../lisp/sawfish/gtk/widgets/file.jl
 msgid "Select file"
 msgstr "Seleccionar ficheiro"
 
-#: ../lisp/sawfish/gtk/widgets/font.jl.in:55
+#. ../lisp/sawfish/gtk/widgets/font.jl
 msgid "Select font"
 msgstr "Seleccionar fonte"
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:53
+#. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
 msgstr "Engadir..."
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:54
+#. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Delete"
 msgstr "Eliminar"
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:55
+#. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Edit..."
 msgstr "Editar..."
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:88
-#: ../lisp/sawfish/gtk/widgets/list.jl:89
+#. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add:"
 msgstr "Engadir:"
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:120
-#: ../lisp/sawfish/gtk/widgets/list.jl:122
+#. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Edit:"
 msgstr "Editar:"
 
-#: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:32
-#: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:36
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
 msgid "Yes"
 msgstr ""
 
-#: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:36
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
 #, fuzzy
 msgid "No"
 msgstr "Ningún"
 
-#: ../lisp/sawfish/gtk/widget.jl:371
-#, librep-format
-msgid "No matching item for %S"
-msgstr "Ningún elemento coincide con %S"
-
-#: ../lisp/sawfish/gtk/widget.jl:501
-#, librep-format
-msgid "** unknown widget **  "
-msgstr "** widget descoñecido **  "
-
-#: ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl:33
-#: ../lisp/sawfish/ui/widgets/workspace-geometry.jl:33
-msgid "Workspaces:"
-msgstr "Escritorios:"
-
-#: ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl:34
-#: ../lisp/sawfish/ui/widgets/workspace-geometry.jl:34
-msgid "Columns:"
-msgstr "Columnas:"
-
-#: ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl:35
-#: ../lisp/sawfish/ui/widgets/workspace-geometry.jl:35
-msgid "Rows:"
-msgstr "Ringleiras:"
-
-#: ../lisp/sawfish/ui/apply.jl:87
-#, librep-format
+#. ../lisp/sawfish/ui/apply.jl
+#, c-format
 msgid "While changing %s:"
 msgstr "Ao cambiar %s:"
 
-#: ../lisp/sawfish/ui/apply.jl:109
+#. ../lisp/sawfish/ui/apply.jl
 msgid "Sawfish Error"
 msgstr "Erro do Sawfish"
 
-#: ../lisp/sawfish/ui/shell.jl:104 ../lisp/sawfish/ui/shell.jl:105
+#. ../lisp/sawfish/ui/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Contexto:"
+
+#. ../lisp/sawfish/ui/shell.jl
 #, fuzzy
 msgid "Sawfish Configurator"
 msgstr "Configuración do sawfish"
 
-#: ../lisp/sawfish/ui/layouts/keymaps.jl:53
-msgid "Context:"
-msgstr "Contexto:"
-
-#: ../lisp/sawfish/ui/widgets/command.jl:52
-#: ../lisp/sawfish/ui/widgets/keymap.jl:66 ../lisp/sawfish/wm/commands.jl:372
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/ui/widgets/keymap.jl
+#. ../lisp/sawfish/ui/widgets/command.jl
 msgid "Command"
 msgstr "Comando"
 
-#: ../lisp/sawfish/ui/widgets/command.jl:66
+#. ../lisp/sawfish/ui/widgets/command.jl
 msgid "Undocumented"
 msgstr "Sen documentación"
 
-#: ../lisp/sawfish/ui/widgets/event.jl:35
-#: ../lisp/sawfish/ui/widgets/match-window.jl:53
+#. ../lisp/sawfish/ui/widgets/match-window.jl
+#. ../lisp/sawfish/ui/widgets/event.jl
 msgid "Grab..."
 msgstr "Adquirir..."
 
-#: ../lisp/sawfish/ui/widgets/keymap.jl:54
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Escritorios:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Columnas:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Ringleiras:"
+
+#. ../lisp/sawfish/ui/widgets/keymap.jl
 #, fuzzy
 msgid "Edit Binding"
 msgstr "Editar atallo"
 
-#: ../lisp/sawfish/ui/widgets/keymap.jl:85
+#. ../lisp/sawfish/ui/widgets/keymap.jl
 msgid "Key:"
 msgstr "Tecla:"
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:42
-#: ../lisp/sawfish/ui/widgets/match-window.jl:242
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Matchers"
 msgstr "Patróns"
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:119
-#: ../lisp/sawfish/ui/widgets/match-window.jl:242
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Actions"
 msgstr "Accións"
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:207
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "not"
 msgstr ""
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:228
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 #, fuzzy
 msgid "Match Window Properties"
 msgstr "Comparar as propiedades das fiestras"
 
-#: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
-#: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
-#: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
+#. ../lisp/sawfish/wm/animation/outline.jl
+msgid "Animation Outline Coordinates"
+msgstr ""
+
+#. ../lisp/sawfish/wm/animation/outline.jl
+#, fuzzy
+msgid "Animation Steps"
+msgstr "Accións"
+
+#. ../lisp/sawfish/wm/animation/outline.jl
+#, fuzzy
+msgid "Animation Delay"
+msgstr "Accións"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Window Cycling"
+msgstr "Circulación de fiestras"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Sound"
+msgstr "Son"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Matched Windows"
+msgstr "Patróns de fiestras"
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tooltips"
+msgstr "Tooltips"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+#. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
 msgstr "Índice:"
 
-#: ../lisp/sawfish/wm/commands.jl:365
-msgid "Command:"
-msgstr "Comando:"
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Next workspace window"
+msgstr "Seguinte fiestra do escritorio"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Previous workspace window"
+msgstr "Anterior fiestra do escritorio"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Next window"
+msgstr "Seguinte fiestra"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Previous window"
+msgstr "Anterior fiestra"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Describe symbol"
+msgstr "Describir o símbolo"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos function"
+msgstr "Función Apropos"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos variable"
+msgstr "Variable Apropos"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome toggle skip winlist"
+msgstr "Trocar o ignorar na lista de fiestras de Gnome"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome set skip winlist"
+msgstr "Ignorar na lista de fiestras de Gnome"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome clear skip winlist"
+msgstr "Non ignorar na lista de fiestras de Gnome"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome toggle skip tasklist"
+msgstr "Trocar o ignorar na lista de tarefas de Gnome"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome set skip tasklist"
+msgstr "Ignorar na lista de tarefas de Gnome"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome clear skip tasklist"
+msgstr "Non ignorar na lista de tarefas de Gnome"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome logout"
+msgstr "Saír de Gnome"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome www page"
+msgstr "Páxina www de Gnome"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome help browser"
+msgstr "Explorador de axuda de Gnome"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome about"
+msgstr "Acerca de Gnome"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Iconify group"
+msgstr "Iconificar grupo"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Uniconify group"
+msgstr "Restaurar grupo"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Iconify transient group"
+msgstr "Iconificar grupo temporal"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Uniconify transientgroup"
+msgstr "Restaurar grupo temporal"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Make group sticky"
+msgstr "Facer o grupo pegañento"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Make group unsticky"
+msgstr "Facer o grupo non pegañento"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Toggle group sticky"
+msgstr "Trocar o grupo pegañento"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Send group to current workspace"
+msgstr "Enviar o grupo para o escritorio actual"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Send group to next workspace"
+msgstr "Enviar o grupo para o escritorio seguinte"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Send group to previous workspace"
+msgstr "Enviar o grupo para o escritorio anterior"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group to current viewport"
+msgstr "Mover o grupo para a área virtual actual"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group left"
+msgstr "Mover o grupo para a esquerda"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group right"
+msgstr "Mover o grupo para a dereita"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group up"
+msgstr "Mover o grupo para arriba"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group down"
+msgstr "Mover o grupo para abaixo"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Raise group"
+msgstr "Elevar grupo"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Lower group"
+msgstr "Baixar grupo"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Raise lower group"
+msgstr "Elevar-Baixar grupo"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Raise group depth"
+msgstr "Elevar a profundidade do grupo"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Lower group depth"
+msgstr "Baixar a profundidade do grupo"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete group"
+msgstr "Pechar grupo"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Growing and packing of windows"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "always"
+msgstr "sempre"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr "quizais"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "never"
+msgstr "nunca"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Whether and how to move the pointer."
+msgstr "Mover a fiestra á seguinte área virtual."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into ignored windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window left"
+msgstr "Medrar a fiestra para a esquerda"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window right"
+msgstr "Medrar a fiestra para a dereita"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window up"
+msgstr "Medrar fiestra para arriba"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window down"
+msgstr "Medrar fiestra para abaixo"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window left"
+msgstr "Empaquetar fiestra para a esquerda"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window right"
+msgstr "Empaquetar fiestra para a dereita"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window up"
+msgstr "Empaquetar fiestra para arriba"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window down"
+msgstr "Empaquetar fiestra para abaixo"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
 msgid "Grow left"
 msgstr "Medrar a fiestra para a esquerda"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
 msgid "Grow right"
 msgstr "Medrar a fiestra para a dereita"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
 msgid "Grow up"
 msgstr "Grupo"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
 msgid "Grow down"
 msgstr "Medrar fiestra para abaixo"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
 msgid "Pack left"
 msgstr "Empaquetar fiestra para a esquerda"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
 msgid "Pack right"
 msgstr "Empaquetar fiestra para a dereita"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
 msgid "Pack up"
 msgstr "Empaquetar fiestra para arriba"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
 msgid "Pack down"
 msgstr "Empaquetar fiestra para abaixo"
 
-#: ../lisp/sawfish/wm/ext/audio-events.jl:75
-msgid "Event"
-msgstr "Evento"
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show faq"
+msgstr "Axuda - amosar faq"
 
-#: ../lisp/sawfish/wm/ext/audio-events.jl:76
-msgid "Audio file"
-msgstr "Ficheiro de audio"
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show news"
+msgstr "Axuda - amosar novas"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:82
-msgid "No errors."
-msgstr "Sen erros."
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show programmer manual"
+msgstr "Axuda - amosar o manual de programador"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-msgid "Placement"
-msgstr "Colocación"
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show homepage"
+msgstr "Axuda - amosar páxina web"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help about"
+msgstr "Axuda - acerca de"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Number of pixels to move pointer in."
+msgstr ""
+"Número de puntos que hai que mover o punteiro nos comandos `move-cursor-'."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor right"
+msgstr "Mover o cursor para a dereita"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor left"
+msgstr "Mover o cursor para a esquerda"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor up"
+msgstr "Mover o cursor para arriba"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor down"
+msgstr "Mover o cursor para abaixo"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor right fine"
+msgstr "Mover finamente o cursor para a dereita"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor left fine"
+msgstr "Mover finamente o cursor para a esquerda"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor up fine"
+msgstr "Mover finamente o cursor para arriba"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor down fine"
+msgstr "Mover finamente o cursor para abaixo"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "opaque"
+msgstr "opaco"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "box"
+msgstr "caixa"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "cross"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "elliptical"
+msgstr "vertical"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "draft"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "How windows being moved are animated"
+msgstr "Animación das fiestras ao movelas: \\w"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "How windows being resized are animated"
+msgstr "Animación das fiestras ao redimensionalas: \\w"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Raise windows when they are moved or resized."
+msgstr "Elevar as fiestras ao movelas ou redimensionalas."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Show current position of windows while moving."
+msgstr "Amosar a posición actual das fiestras ao movelas."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Show current dimensions of windows while resizing."
+msgstr "Amosar as dimensións actuais das fiestras ao redimensionalas."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "region"
+msgstr "rexión"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "border"
+msgstr "bordo"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "grab"
+msgstr "agarrar"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "border-grab"
+msgstr "agarrar-bordo"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "How to choose window edges when resizing."
+msgstr "Modo de escoller as beiras das fiestras ao redimensionar: \\w"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Distance in pixels before window edges align with each other.\n"
+"\n"
+"When moving a window, this option lets you align one of its edges with an "
+"edge of another window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move window interactively"
+msgstr "Mover fiestra interactivamente"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize window interactively"
+msgstr "Redimensionar fiestra interactivamente"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move selected window"
+msgstr "Mover a fiestra seleccionada"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize selected window"
+msgstr "Redimensionar a fiestra seleccionada"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click"
+msgstr "Elevar e transmitir o clic"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click if focused"
+msgstr "Elevar e transmitir o clic se está enfocada"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise or pass through click"
+msgstr "Elevar ou transmitir o clic"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise window and pass through click"
+msgstr "Elevar fiestra e transmitir o clic"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise group and pass through click"
+msgstr "Elevar o grupo e transmitir o clic"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise transients and pass through click"
+msgstr "Elevar as temporais e transmitir o clic"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Shrinking and Yanking of windows"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "The minimum height or width to which a window may be shrunk."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "The minimum amount of window left visible, if yanked over the edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window left"
+msgstr "Deslizar a fiestra para a esquerda"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window right"
+msgstr "Deslizar a fiestra para a dereita"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window up"
+msgstr "Deslizar a fiestra para arriba"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window down"
+msgstr "Deslizar a fiestra para abaixo"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window left"
+msgstr "Empaquetar fiestra para a esquerda"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window right"
+msgstr "Empaquetar fiestra para a dereita"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window up"
+msgstr "Empaquetar fiestra para arriba"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window down"
+msgstr "Empaquetar fiestra para abaixo"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window add row"
+msgstr "Engadir unha ringleira á fiestra"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window subtract row"
+msgstr "Quitar unha ringleira á fiestra"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window add column"
+msgstr "Engadir unha columna á fiestra"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window subtract column"
+msgstr "Quitar unha columna á fiestra"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window left"
+msgstr "Deslizar a fiestra para a esquerda"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window right"
+msgstr "Deslizar a fiestra para a dereita"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window up"
+msgstr "Deslizar a fiestra para arriba"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window down"
+msgstr "Deslizar a fiestra para abaixo"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group left"
+msgstr "Deslizar o grupo para a esquerda"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group right"
+msgstr "Deslizar o grupo para a dereita"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group up"
+msgstr "Deslizar o grupo para arriba"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group down"
+msgstr "Deslizar o grupo para abaixo"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move viewport next"
+msgstr "Mover á seguinte área virtual"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move viewport previous"
+msgstr "Mover á anterior área virtual"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move window previous"
+msgstr "Mover a fiestra á anterior"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move window next"
+msgstr "Mover a fiestra á seguinte"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Set viewport linear"
+msgstr "Facer área virtual lineal"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Set window viewport linear"
+msgstr "Facer a área virtual lineal"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#, fuzzy
+msgid "Display window names and icons while cycling through windows."
+msgstr "Amosar os nomes das fiestras ao circular."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include iconified windows when cycling."
+msgstr "Incluír as fiestras iconificadas ao circular."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include windows on all workspaces when cycling."
+msgstr "Incluír as fiestras de tódolos escritorios ao circular."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include windows on all viewports when cycling."
+msgstr "Incluír as fiestras de tódalas áreas virtuais ao circular."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Elevar as fiestras ao seleccionalas temporalmente ao circular."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "cycle-keymap"
+msgstr "Mapa de teclado ao circular"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr "Mapa de teclado cos atallos activos durante a circulación de fiestras."
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "The program launched by the `xterm' command."
+msgstr "O programa executado polo comando `xterm'."
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
+#, fuzzy
+msgid "Arguments given to the `xterm' command."
+msgstr "Argumentos opcionais para o comando `xterm'."
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command"
+msgstr "Chamar comando"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Run shell command"
+msgstr "Executar comando de shell"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command:"
+msgstr "Comando:"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command sequence"
+msgstr "Secuencia de comandos"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Quit"
+msgstr "Saír"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Restart"
+msgstr "Reiniciar"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Destroy window"
+msgstr "Destruír a fiestra."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Kill client"
+msgstr "Matar o cliente"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "No operation"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command with output to screen"
+msgstr "Chamar ao comando coa saída na pantalla"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
 msgid "Focus"
 msgstr "Foco"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Mover/Redimensionar"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
 msgid "Appearance"
 msgstr "Aparencia"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:90
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "Escritorios"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "Atallos"
+
+#. ../lisp/sawfish/wm/custom.jl
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Minimizar"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "Varios"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Placement"
+msgstr "Colocación"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Customize"
+msgstr "Configurar"
+
+#. ../lisp/sawfish/wm/ext/3d-hack.jl
+msgid "3d hack"
+msgstr "Hack 3d"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Play sound effects for window events."
+msgstr "Reproducir efectos de son nos eventos das fiestras."
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Event"
+msgstr "Evento"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Audio file"
+msgstr "Ficheiro de audio"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+#, fuzzy
+msgid "Auto-Raise"
+msgstr "Elevar"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+msgid "Raise windows when they are focused."
+msgstr "Elevar as fiestras ao enfocalas."
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+msgid "Delay in milliseconds until focused windows are raised."
+msgstr "Retardo en milisegundos para elevar as fiestras enfocadas."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Edge Flipping"
+msgstr "Salto nas beiras"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr ""
+"Activar o seguinte escritorio cando o punteiro chega á beira da pantalla."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "viewport"
+msgstr "área virtual"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "workspace"
+msgstr "escritorio"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Ao chegar á beira da pantalla, actívase o seguinte: \\w"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Only flip when interactively moving a window."
+msgstr "Saltar soamente ao mover unha fiestra interactivamente."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+#, fuzzy
+msgid "Milliseconds to delay before edge flipping."
+msgstr "Milisegundos de espera antes de saltar: \\w"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+#, fuzzy
+msgid "Beep when errors occur."
+msgstr "Emitir un pitido cando ocorre un erro."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "nowhere"
+msgstr "ningures"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "screen"
+msgstr "pantalla"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "standard-error"
+msgstr "erro estándar"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+#, fuzzy
+msgid "both"
+msgstr "Acerca"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+#, fuzzy
+msgid "Display error messages to: \\w"
+msgstr "Onde amosar as mensaxes de erro: \\w"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "No errors."
+msgstr "Sen erros."
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display errors"
+msgstr "Amosar os erros"
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid "Infinite Desktop"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid "Simulate an infinite desktop (Conflicts edge-flipping)."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+#, fuzzy
+msgid "Amount to move the workspace."
+msgstr "Enviar para o seguinte escritorio"
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+#, fuzzy
+msgid "Amount to move the cursor after moving the workspace."
+msgstr "Mover a fiestra actual ao escritorio N."
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Name"
+msgstr "Nome"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Class"
+msgstr "Clase"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Icon Name"
+msgstr "Nome da icona"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Role"
+msgstr "Rol"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Host"
+msgstr "Máquina"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Locale"
+msgstr "Locale"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Evitar"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignore program position"
+msgstr "Ignorar a posición do programa"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Place mode"
+msgstr "Xeito de colocación"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Position"
+msgstr "Posición"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Dimensions"
+msgstr "Dimensións"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Workspace"
+msgstr "Escritorio"
+
+#. ../lisp/sawfish/wm/viewport.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Viewport"
+msgstr "Área virtual"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Depth"
+msgstr "Profundidade"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Placement weight"
+msgstr "Peso da colocación"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Maximized"
+msgstr "Maximizada"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Raise on focus"
+msgstr "Elevar ao enfocar"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus when mapped"
+msgstr "Enfocar ao crearse"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never focus"
+msgstr "Nunca enfocar"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus click through"
+msgstr "Transmitir o clic do foco"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus mode"
+msgstr "Modo de enfocado"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame type"
+msgstr "Tipo de marco"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Frame style"
+msgstr "Tema"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "Ignorada"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Iconified"
+msgstr "Iconificada"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Shaded"
+msgstr "Enrolada"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Sticky"
+msgstr "Pegañenta"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Sticky viewport"
+msgstr "Área virtual pegañenta"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Group"
+msgstr "Grupo"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ungrouped"
+msgstr "Desagrupada"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Cycle skip"
+msgstr "Ignorar ao circular"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Window list skip"
+msgstr "Ignorar na lista de fiestras"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Task list skip"
+msgstr "Ignorar na lista de fiestras"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Unique name"
+msgstr "Nome único"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Auto gravity"
+msgstr "Auto gravidade"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Shade hover"
+msgstr "Desenrolar ao sobrevoar"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Transients above"
+msgstr "Temporais por riba"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignore stacking requests"
+msgstr "Ignorar as peticións de posición na pila"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
 msgstr "Estado"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:102
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
 msgstr "Outro"
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:82
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Shade Hover"
+msgstr "Desenrolar ao sobrevoar"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid ""
+"Enable shade-hover mode.\n"
+"\n"
+"(Temporarily unshades windows while the mouse pointer is over them.)"
+msgstr ""
+"Habilitar o modo desenrolar-ao-sobrevoar.\n"
+"\n"
+"(Desenrola temporalmente as fiestras cando o punteiro está sobre elas.)"
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Delay in milliseconds before unshading windows."
+msgstr "Retardo en milisegundos antes de desenrolar as fiestras."
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Raise windows when they are unshaded."
+msgstr "Elevar as fiestras ao desenrolalas."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Display tooltips for window frames."
+msgstr "Amosar os tooltips dos marcos das fiestras."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Show full documentation in tooltips."
+msgstr "Amosar a documentación completa nos tooltips."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Número de milisegundos de espera para amosar os tooltips."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Número de milisegundos de espera para quitar os tooltips."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#, fuzzy
+msgid "Font used to display tooltips, or nil for default."
+msgstr "Fonte usada para amosar os tooltips."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips background"
+msgstr "Cor do fondo dos tooltips"
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips foreground"
+msgstr "Cor do texto dos tooltips"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _position"
 msgstr "Lembrar _posición"
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:83
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _dimensions"
 msgstr "Lembrar _dimensións"
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:84
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _attributes"
 msgstr "Lembrar _atributos"
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:86
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "_Esquecer o estado gardado"
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:376
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "History"
+msgstr "_Historia"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember window positions."
+msgstr "Lembrar automaticamente as posicións das fiestras."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember window sizes."
+msgstr "Lembrar automaticamente as dimensións das fiestras."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember other window attributes."
+msgstr "Lembrar automaticamente outros atributos das fiestras."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Don't automatically remember details of transient windows."
+msgstr "Non lembrar automaticamente os detalles das fiestras temporais."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save position"
+msgstr "Gardar a posición na historia da fiestra"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save dimensions"
+msgstr "Gardar as dimensións na historia da fiestra"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save attributes"
+msgstr "Gardar os atributos na historia da fiestra"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history forget"
+msgstr "Esquecer a historia da fiestra"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history clear"
+msgstr "Limpar a historia da fiestra"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
 msgstr "_Historia"
 
-#: ../lisp/sawfish/wm/frames.jl:512
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace down"
+msgstr "Escritorio %d"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace up"
+msgstr "Escritorio"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace left"
+msgstr "Mover o escritorio para a esquerda"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace right"
+msgstr "Mover o escritorio para a dereita"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace down"
+msgstr "Enviar para o escritorio"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace up"
+msgstr "Enviar para o escritorio"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace left"
+msgstr "Enviar para o escritorio"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace right"
+msgstr "Enviar para o escritorio"
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Cándo afecta o punteiro do rato ao foco de entrada."
+
+#. ../lisp/sawfish/wm/focus.jl
+#, fuzzy
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "O modo premer-para-enfocar (click-to-focus) pásalle o clic á fiestra."
+
+#. ../lisp/sawfish/wm/focus.jl
+#, fuzzy
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr "Baixar a fiestra á posición máis baixa permitida na pila."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default frame style:"
+msgstr "Tema por omisión:"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Automatically reload themes when they are updated."
+msgstr "Recargar automaticamente os temas cando son actualizados."
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default font: \\w"
+msgstr "Fonte por defecto: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Edit frame style"
+msgstr "Editar o estilo do marco"
+
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Default"
 msgstr "Por defecto"
 
-#: ../lisp/sawfish/wm/frames.jl:519
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Normal"
 msgstr "Normal"
 
-#: ../lisp/sawfish/wm/frames.jl:522
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Title-only"
 msgstr "Só o título"
 
-#: ../lisp/sawfish/wm/frames.jl:525
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Border-only"
 msgstr "Só o bordo"
 
-#: ../lisp/sawfish/wm/frames.jl:528
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Top-border"
 msgstr "Beira superior"
 
-#: ../lisp/sawfish/wm/frames.jl:531
+#. ../lisp/sawfish/wm/frames.jl
 msgid "None"
 msgstr "Ningún"
 
-#. add some GNOME help menus
-#: ../lisp/sawfish/wm/gnome/integration.jl:61 ../lisp/sawfish/wm/menus.jl:124
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_Help"
 msgstr "A_xuda"
 
-#: ../lisp/sawfish/wm/gnome/integration.jl:64
+#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr "Axuda de _GNOME..."
 
-#: ../lisp/sawfish/wm/gnome/integration.jl:65
+#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "GNOME WWW..."
 msgstr "Web de GNOME..."
 
-#: ../lisp/sawfish/wm/gnome/integration.jl:66
+#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "About GNOME..."
 msgstr "Acerca de GNOME..."
 
-#: ../lisp/sawfish/wm/menus.jl:86
+#. ../lisp/sawfish/wm/gnome/menus.jl
+msgid "Gnome menus update"
+msgstr "Actualizar os menús de Gnome"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "global-keymap"
+msgstr "Mapa de teclado global"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active anywhere."
+msgstr "Mapa de teclado que contén os atallos sempre activos."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "window-keymap"
+msgstr "Mapa de teclado das fiestras"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr "Mapa de teclado cos atallos activos cando hai unha fiestra enfocada."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "root-window-keymap"
+msgstr "Mapa de teclado da fiestra raíz"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
+"no escritorio (ou cando non hai ningunha fiestra enfocada)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "title-keymap"
+msgstr "Mapa de teclado do título"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
+"no título dunha fiestra. (Só se evalúan as funcións do rato.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "border-keymap"
+msgstr "Mapa de teclado do bordo"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
+"no bordo dunha fiestra. (Só se evalúan as funcións de rato.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "close-button-keymap"
+msgstr "Mapa de teclado do botón de pechar"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
+"no botón de pechar dunha fiestra. (Só se evalúan as funcións do rato.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "iconify-button-keymap"
+msgstr "Mapa de teclado do botón de iconificar"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
+"no botón de iconificar dunha fiestra. (Só se evalúan as funcións do rato.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "maximize-button-keymap"
+msgstr "Mapa de teclado do botón de maximizar"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de teclado cos atallos activos cando o punteiro do rato está no\n"
+"botón de maximizar dunha fiestra. (Só se evalúan as funcións do rato.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "menu-button-keymap"
+msgstr "Mapa de teclado do botón de menú"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
+"no botón de menú dunha fiestra. (Só se evalúan as funcións do rato.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "shade-button-keymap"
+msgstr "Mapa de teclado do botón de enrolar"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
+"no botón de enrolar dunha fiestra. (Só se evalúan as funcións do rato.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Tecla(s) modificadoras usadas por omisión para os atallos."
+
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Mi_nimize"
 msgstr "Minimizar"
 
-#: ../lisp/sawfish/wm/menus.jl:91
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Unma_ximize"
 msgstr "Restaurar"
 
-#: ../lisp/sawfish/wm/menus.jl:92
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Ma_ximize"
 msgstr "Maximizar"
 
-#: ../lisp/sawfish/wm/menus.jl:96
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Move"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:97
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Resize"
 msgstr "Mover/Redimensionar"
 
-#: ../lisp/sawfish/wm/menus.jl:98
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
 msgstr "_Pechar"
 
-#: ../lisp/sawfish/wm/menus.jl:100
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Toggle"
 msgstr "_Trocar"
 
-#: ../lisp/sawfish/wm/menus.jl:101
+#. ../lisp/sawfish/wm/menus.jl
 msgid "In _group"
 msgstr "En _grupo"
 
-#: ../lisp/sawfish/wm/menus.jl:102
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Send window to"
 msgstr "_Enviar fiestra"
 
-#: ../lisp/sawfish/wm/menus.jl:103
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Previous workspace"
 msgstr "Escritorio _anterior"
 
-#: ../lisp/sawfish/wm/menus.jl:104
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Next workspace"
 msgstr "Escritorio _seguinte"
 
-#: ../lisp/sawfish/wm/menus.jl:105
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Copy to p_revious"
 msgstr "Copiar ao anterior"
 
-#: ../lisp/sawfish/wm/menus.jl:106
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Copy to ne_xt"
 msgstr "Copiar ao seguinte"
 
-#: ../lisp/sawfish/wm/menus.jl:107
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Stac_king"
 msgstr "Capas"
 
-#: ../lisp/sawfish/wm/menus.jl:108
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Raise"
 msgstr "Elevar"
 
-#: ../lisp/sawfish/wm/menus.jl:109
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Lower"
 msgstr "Baixar"
 
-#: ../lisp/sawfish/wm/menus.jl:110
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Upper layer"
 msgstr "Capa superior"
 
-#: ../lisp/sawfish/wm/menus.jl:111
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Lo_wer layer"
 msgstr "Capa inferior"
 
-#: ../lisp/sawfish/wm/menus.jl:112
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Frame ty_pe"
 msgstr "Tipo de marco"
 
-#: ../lisp/sawfish/wm/menus.jl:113
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Frame sty_le"
 msgstr "Tema"
 
-#: ../lisp/sawfish/wm/menus.jl:120
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Windows"
 msgstr "_Fiestras"
 
-#: ../lisp/sawfish/wm/menus.jl:121
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Work_spaces"
 msgstr "_Escritorios"
 
-#: ../lisp/sawfish/wm/menus.jl:122
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Programs"
 msgstr "_Programas"
 
-#: ../lisp/sawfish/wm/menus.jl:123
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Customize"
 msgstr "_Configurar"
 
-#: ../lisp/sawfish/wm/menus.jl:125
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_FAQ..."
 msgstr "_FAQ..."
 
-#: ../lisp/sawfish/wm/menus.jl:126
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_News..."
 msgstr "_Novas..."
 
-#: ../lisp/sawfish/wm/menus.jl:127
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_WWW page..."
 msgstr "_Páxina WWW..."
 
-#: ../lisp/sawfish/wm/menus.jl:128
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Manual..."
 msgstr "_Manual..."
 
-#: ../lisp/sawfish/wm/menus.jl:129
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_About Sawfish..."
 msgstr "_Acerca do Sawfish..."
 
-#: ../lisp/sawfish/wm/menus.jl:131
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Restart"
 msgstr "Reiniciar"
 
-#: ../lisp/sawfish/wm/menus.jl:132
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Quit"
 msgstr "Saír"
 
-#: ../lisp/sawfish/wm/menus.jl:354
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup window menu"
+msgstr "Amosar menú de fiestra"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup root menu"
+msgstr "Amosar menú raíz"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup apps menu"
+msgstr "Amosar menú de aplicacións"
+
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_All settings"
 msgstr "Tódalas propiedades"
 
-#: ../lisp/sawfish/wm/menus.jl:361
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
 msgstr "Editar tema..."
 
-#: ../lisp/sawfish/wm/state/iconify.jl:256
+#. ../lisp/sawfish/wm/placement/stagger.jl
+#, fuzzy
+msgid "Distance between successive placements in `stagger' placement mode."
+msgstr ""
+"Distancia entre as posicións sucesivas no modo de colocación `stagger'."
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing windows: \\w"
+msgstr "Método de colocación das fiestras: \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing dialog windows: \\w"
+msgstr "Método de colocación das fiestras de diálogo: \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Ignore program-specified window placements."
+msgstr "Ignorar as posicións das fiestras indicadas polos programas."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Stacking"
+msgstr "Capas"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "nais"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Manter as fiestras temporais por riba de: \\w"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise single window"
+msgstr "Elevar fiestra simple"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower single window"
+msgstr "Baixar fiestra simple"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise lower single window"
+msgstr "Elevar-Baixar fiestra simple"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise window depth"
+msgstr "Elevar a profundidade da fiestra"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower window depth"
+msgstr "Baixar a profundidade da fiestra"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "transients"
+msgstr "temporais"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "group"
+msgstr "grupo"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "Minimizing a window also removes its: \\w"
+msgstr "Ao elevar unha fiestra, elevar tamén: \\w"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "Unminimizing a window also restores its: \\w"
+msgstr "Ao elevar unha fiestra, elevar tamén: \\w"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Iconify window"
+msgstr "Iconificar fiestra"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Uniconify window"
+msgstr "Restaurar fiestra"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle window iconified"
+msgstr "Trocar a iconificación da fiestra"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Iconify workspace windows"
+msgstr "Iconificar fiestras do escritorio"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Make window sticky"
+msgstr "Facer a fiestra pegañenta"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Make window unsticky"
+msgstr "Facer a fiestra non pegañenta"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle window sticky"
+msgstr "Trocar a fiestra pegañenta"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Pegañenta"
 
-#: ../lisp/sawfish/wm/state/ignored.jl:99
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Make window ignored"
+msgstr "Facer a fiestra ignorada"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Make window not ignored"
+msgstr "Facer a fiestra non ignorada"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window ignored"
+msgstr "Trocar a ignoración da fiestra"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window never focus"
+msgstr "Trocar o 'nunca enfocar' da fiestra"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window cycle skip"
+msgstr "Trocar o 'ignorar ao circular' da fiestra"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window list skip"
+msgstr "Trocar o ignorar na lista de fiestras"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle task list skip"
+msgstr "Trocar o ignorar na lista de fiestras"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
 msgstr "_Ignorada"
 
-#: ../lisp/sawfish/wm/state/ignored.jl:101
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Focusable"
 msgstr "_Enfocable"
 
-#: ../lisp/sawfish/wm/state/ignored.jl:103
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Cyclable"
 msgstr "_Circulable"
 
-#: ../lisp/sawfish/wm/state/ignored.jl:105
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
 msgstr "Na _lista de fiestras"
 
-#: ../lisp/sawfish/wm/state/ignored.jl:107
+#. ../lisp/sawfish/wm/state/ignored.jl
 #, fuzzy
 msgid "In _task list"
 msgstr "Na lista de _tarefas de GNOME"
 
-#: ../lisp/sawfish/wm/state/shading.jl:113
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Lock position and size while windows are maximized."
+msgstr ""
+"Bloquear a posición e as dimensións das fiestras mentres están maximizadas."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window"
+msgstr "Maximizar fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Unmaximize window"
+msgstr "Restaurar fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window vertically"
+msgstr "Maximizar a fiestra verticalmente"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window horizontally"
+msgstr "Maximizar a fiestra horizontalmente"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window toggle"
+msgstr "Trocar maximización da fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window horizontally toggle"
+msgstr "Trocar maximización horizontal da fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize window vertically toggle"
+msgstr "Trocar maximización vertical da fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window"
+msgstr "Maximizar-encher fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window vertically"
+msgstr "Maximizar-encher fiestra verticalmente"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window horizontally"
+msgstr "Maximizar-encher fiestra horizontalmente"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window toggle"
+msgstr "Trocar maximización-enchido da fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window horizontally toggle"
+msgstr "Trocar maximización-enchido horizontal da fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize fill window vertically toggle"
+msgstr "Trocar maximización-enchido vertical da fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullscreen"
+msgstr "Trocar maximización da fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullscreen toggle"
+msgstr "Trocar maximización da fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullxinerama"
+msgstr "Trocar maximización da fiestra"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullxinerama toggle"
+msgstr "Trocar maximización da fiestra"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid "Shade window"
+msgstr "Enrolar fiestra"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid "Unshade window"
+msgstr "Desenrolar fiestra"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid "Toggle window shaded"
+msgstr "Trocar o enrolamento da fiestra"
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "S_haded"
 msgstr "_Enrolada"
 
-#: ../lisp/sawfish/wm/util/groups.jl:153
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Focus on application windows when they first appear."
+msgstr "Enfocar as fiestras de aplicación cando aparecen por primeira vez."
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Raise window and transients"
+msgstr "Elevar a fiestra e as temporais"
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Lower window and transients"
+msgstr "Baixar a fiestra e as temporais"
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Raise lower window and transients"
+msgstr "Elevar-Baixar a fiestra e as temporais"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Tabs"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab's left-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab's right-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's left-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's right-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Add to group"
+msgstr "Baixar grupo"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab release window"
+msgstr "Pechar a fiestra"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab raise left window"
+msgstr "Elevar-Baixar fiestra"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab raise right window"
+msgstr "Elevar fiestra simple"
+
+#. ../lisp/sawfish/wm/util/compat.jl
+msgid "Insert workspace"
+msgstr "Inserir escritorio"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Unshade selected windows."
+msgstr "Desenrolar as fiestras seleccionadas."
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display window without focusing"
+msgstr "Amosar a fiestra sen enfocar"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display window"
+msgstr "Amosar a fiestra"
+
+#. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
 msgstr "Novo grupo"
 
-#: ../lisp/sawfish/wm/util/keymap.jl:174
+#. ../lisp/sawfish/wm/util/gtkrc.jl
+msgid "Gtkrc reload style"
+msgstr "Recargar o estilo do gtkrc"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Describe key"
+msgstr "Describir tecla"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Press key..."
 msgstr "Prema unha tecla..."
 
-#: ../lisp/sawfish/wm/util/keymap.jl:198
+#. ../lisp/sawfish/wm/util/keymap.jl
 msgid "[Quote]"
 msgstr "[Quote]"
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:51
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Quote event"
+msgstr "Enviar evento"
+
+#. ../lisp/sawfish/wm/util/marks.jl
+#, fuzzy
+msgid "Mark window"
+msgstr "Empaquetar fiestra para arriba"
+
+#. ../lisp/sawfish/wm/util/marks.jl
+#, fuzzy
+msgid "Unmark window"
+msgstr "Desenrolar fiestra"
+
+#. ../lisp/sawfish/wm/util/marks.jl
+#, fuzzy
+msgid "Unmark all windows"
+msgstr "Restaurar fiestra"
+
+#. ../lisp/sawfish/wm/util/play-audio.jl
+#, fuzzy
+msgid ""
+"The program used to play audio samples. If unset, built-in support for ESD "
+"is used."
+msgstr ""
+"O programa para reproducir as gravacións de son. Se non se indica, usarase o "
+"soporte integrado para ESD."
+
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Fiestra:"
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:63
-#, librep-format
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+#, c-format
 msgid "Workspace %d"
 msgstr "Escritorio %d"
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:77 ../lisp/sawfish/wm/workspace.jl:888
-#: ../lisp/sawfish/wm/workspace.jl:896 ../lisp/sawfish/wm/workspace.jl:904
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Workspace:"
 msgstr "Escritorio:"
 
-#: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "prompt-keymap"
+msgstr "Mapa de teclado da pregunta ao usuario"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr "Mapa de teclado cos atallos activos ao ler unha cadea do usuario."
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "When raising a window, also raise its: \\w"
+msgstr "Ao elevar unha fiestra, elevar tamén: \\w"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Raise window"
+msgstr "Elevar fiestra"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Lower window"
+msgstr "Baixar fiestra"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Raise lower window"
+msgstr "Elevar-Baixar fiestra"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Windows uniconify to the current viewport."
+msgstr "Restaurar as fiestras na área virtual actual."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "Number of steps for viewport scrolling."
+msgstr ""
+"Número de puntos que hai que mover o punteiro nos comandos `move-cursor-'."
+
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "wrap-around"
+msgstr "circular"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "stop"
+msgstr "parar"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport"
+msgstr "Activar a área virtual"
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Column:"
 msgstr "Columna:"
 
-#: ../lisp/sawfish/wm/viewport.jl:245 ../lisp/sawfish/wm/viewport.jl:263
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Row:"
 msgstr "Ringleira:"
 
-#: ../lisp/sawfish/wm/workspace.jl:133
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport column"
+msgstr "Activar a columna da área virtual"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport row"
+msgstr "Activar a ringleira da área virtual"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window to viewport"
+msgstr "Mover a fiestra á área virtual"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport right"
+msgstr "Mover a área virtual para a dereita"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport left"
+msgstr "Mover a área virtual para a esquerda"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport up"
+msgstr "Mover a área virtual para arriba"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport down"
+msgstr "Mover a área virtual para abaixo"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window right"
+msgstr "Mover a fiestra para a dereita"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window left"
+msgstr "Mover a fiestra para a esquerda"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window up"
+msgstr "Mover a fiestra para arriba"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window down"
+msgstr "Mover a fiestra para abaixo"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#, fuzzy
+msgid "Animation"
+msgstr "Accións"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#, fuzzy
+msgid "solid"
+msgstr "Evitar"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+msgid "wireframe"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#, fuzzy
+msgid "The default window animation mode"
+msgstr "Método de animación das fiestras por defecto: \\w"
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr "Elevar as fiestras ao movelas ou redimensionalas."
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Warping"
+msgstr "Asociar"
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+"Desprazamento (%) dende a beira superior da fiestra,\n"
+"cando se leva o punteiro ás fiestras.\n"
+"Un número negativo significa movelo fóra da beira superior."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Format to create unique window names."
+msgstr ""
+"Formato para crear nomes de fiestras únicos.\n"
+"\n"
+"Aplícanselle dous argumentos (NOME ÍNDICE)."
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Focus desktop"
+msgstr "Modo de enfocado"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window"
+msgstr "Pechar a fiestra"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window safely"
+msgstr "Pechar a fiestra con seguridade"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Uniquify window name"
+msgstr "Forzar a unicidade do nome da fiestra"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "keep-going"
+msgstr "continuar"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "How to act when passing the first or last workspace."
+msgstr "Ao superar o primeiro ou derradeiro escritorio: \\w"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr ""
+"Ao superar o primeiro primeiro ou derradeiro escritorio movendo unha "
+"fiestra: \\w"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace names"
 msgstr "Nomes dos escritorios"
 
-#: ../lisp/sawfish/wm/workspace.jl:150
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr "Manter os escritorios baleiros no paxinador."
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "_Insert workspace"
 msgstr "Inserir escritorio"
 
-#: ../lisp/sawfish/wm/workspace.jl:151
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Select _next workspace"
 msgstr "Activar o seguinte escritorio"
 
-#: ../lisp/sawfish/wm/workspace.jl:152
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Select _previous workspace"
 msgstr "Activar o escritorio anterior."
 
-#: ../lisp/sawfish/wm/workspace.jl:153
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with next"
 msgstr "Mesturar co seguinte"
 
-#: ../lisp/sawfish/wm/workspace.jl:154
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with previous"
 msgstr "Mesturar co anterior"
 
-#: ../lisp/sawfish/wm/workspace.jl:155
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Move workspace _right"
 msgstr "Mover o escritorio para a dereita"
 
-#: ../lisp/sawfish/wm/workspace.jl:156
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Move workspace _left"
 msgstr "Mover o escritorio para a esquerda"
 
-#: ../lisp/sawfish/wm/workspace.jl:634
-#, librep-format
+#. ../lisp/sawfish/wm/workspace.jl
+#, c-format
 msgid "space %d"
 msgstr "escritorio %d"
 
-#: ../scripts/sawfish-about.jl.in:50
-msgid "and many others..."
-msgstr "e moitos outros..."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup workspace list"
+msgstr "Amosar a lista de escritorios"
 
-#: ../scripts/sawfish-about.jl.in:51
-msgid "Sawfish manages your windows extensibly."
-msgstr "O sawfish xestiona as fiestras de modo extensible."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup window list"
+msgstr "Amosar a lista de fiestras"
 
-#: ../scripts/sawfish-about.jl.in:56
-msgid "Sawfish homepage"
-msgstr "Páxina web do Sawfish"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Next workspace"
+msgstr "Escritorio seguinte"
 
-#~ msgid "Window Cycling"
-#~ msgstr "Circulación de fiestras"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Previous workspace"
+msgstr "Escritorio anterior"
 
-#~ msgid "Sound"
-#~ msgstr "Son"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to next workspace"
+msgstr "Enviar para o seguinte escritorio"
 
-#~ msgid "Matched Windows"
-#~ msgstr "Patróns de fiestras"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to previous workspace"
+msgstr "Enviar para o escritorio anterior"
 
-#~ msgid "Tooltips"
-#~ msgstr "Tooltips"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to next workspace"
+msgstr "Copiar ao seguinte escritorio"
 
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to previous workspace"
+msgstr "Copiar ao escritorio anterior"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Append workspace and send"
+msgstr "Engadir un escritorio ao final e enviar"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prepend workspace and send"
+msgstr "Engadir escritorio ao inicio e enviar"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge next workspace"
+msgstr "Mesturar co seguinte escritorio"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge previous workspace"
+msgstr "Mesturar co anterior escritorio"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace after"
+msgstr "Insertar escritorio despois"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Insert workspace before"
+msgstr "Insertar escritorio antes"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace forwards"
+msgstr "Mover o escritorio para adiante"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace backwards"
+msgstr "Mover o escritorio para atrás"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete empty workspaces"
+msgstr "Eliminar os escritorios baleiros"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete window instance"
+msgstr "Pechar a instancia da fiestra"
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid "Whether and how to move the pointer."
-#~ msgstr "Mover a fiestra á seguinte área virtual."
+msgid "Show desktop"
+msgstr "Modo de enfocado"
 
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid "Number of pixels to move pointer in."
-#~ msgstr ""
-#~ "Número de puntos que hai que mover o punteiro nos comandos `move-cursor-'."
+msgid "Hide desktop"
+msgstr "Modo de enfocado"
 
-#, fuzzy
-#~ msgid "How windows being moved are animated"
-#~ msgstr "Animación das fiestras ao movelas: \\w"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Activate workspace"
+msgstr "Activar escritorio"
 
-#, fuzzy
-#~ msgid "How windows being resized are animated"
-#~ msgstr "Animación das fiestras ao redimensionalas: \\w"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to workspace"
+msgstr "Enviar para o escritorio"
 
-#~ msgid "Raise windows when they are moved or resized."
-#~ msgstr "Elevar as fiestras ao movelas ou redimensionalas."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to workspace"
+msgstr "Copiar ao escritorio"
 
-#~ msgid "Show current position of windows while moving."
-#~ msgstr "Amosar a posición actual das fiestras ao movelas."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select workspace interactively"
+msgstr "Seleccionar o escritorio interactivamente"
 
-#~ msgid "Show current dimensions of windows while resizing."
-#~ msgstr "Amosar as dimensións actuais das fiestras ao redimensionalas."
+#~ msgid "and many others..."
+#~ msgstr "e moitos outros..."
 
-#, fuzzy
-#~ msgid "How to choose window edges when resizing."
-#~ msgstr "Modo de escoller as beiras das fiestras ao redimensionar: \\w"
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "O sawfish xestiona as fiestras de modo extensible."
 
-#, fuzzy
-#~ msgid "Display window names and icons while cycling through windows."
-#~ msgstr "Amosar os nomes das fiestras ao circular."
-
-#~ msgid "Include iconified windows when cycling."
-#~ msgstr "Incluír as fiestras iconificadas ao circular."
-
-#~ msgid "Include windows on all workspaces when cycling."
-#~ msgstr "Incluír as fiestras de tódolos escritorios ao circular."
-
-#~ msgid "Include windows on all viewports when cycling."
-#~ msgstr "Incluír as fiestras de tódalas áreas virtuais ao circular."
-
-#~ msgid "Raise windows while they're temporarily selected during cycling."
-#~ msgstr "Elevar as fiestras ao seleccionalas temporalmente ao circular."
-
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr ""
-#~ "Mapa de teclado cos atallos activos durante a circulación de fiestras."
-
-#~ msgid "The program launched by the `xterm' command."
-#~ msgstr "O programa executado polo comando `xterm'."
-
-#, fuzzy
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Argumentos opcionais para o comando `xterm'."
-
-#~ msgid "Move/Resize"
-#~ msgstr "Mover/Redimensionar"
-
-#~ msgid "Workspaces"
-#~ msgstr "Escritorios"
-
-#~ msgid "Bindings"
-#~ msgstr "Atallos"
-
-#, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Minimizar"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Varios"
-
-#~ msgid "Play sound effects for window events."
-#~ msgstr "Reproducir efectos de son nos eventos das fiestras."
-
-#~ msgid "Edge Flipping"
-#~ msgstr "Salto nas beiras"
-
-#~ msgid "Select the next desktop when the pointer hits screen edge."
-#~ msgstr ""
-#~ "Activar o seguinte escritorio cando o punteiro chega á beira da pantalla."
-
-#~ msgid "Hitting the screen edge selects the next: \\w"
-#~ msgstr "Ao chegar á beira da pantalla, actívase o seguinte: \\w"
-
-#~ msgid "Only flip when interactively moving a window."
-#~ msgstr "Saltar soamente ao mover unha fiestra interactivamente."
-
-#, fuzzy
-#~ msgid "Milliseconds to delay before edge flipping."
-#~ msgstr "Milisegundos de espera antes de saltar: \\w"
-
-#, fuzzy
-#~ msgid "Beep when errors occur."
-#~ msgstr "Emitir un pitido cando ocorre un erro."
-
-#, fuzzy
-#~ msgid "Display error messages to: \\w"
-#~ msgstr "Onde amosar as mensaxes de erro: \\w"
-
-#~ msgid "Shade Hover"
-#~ msgstr "Desenrolar ao sobrevoar"
-
-#~ msgid "Delay in milliseconds before unshading windows."
-#~ msgstr "Retardo en milisegundos antes de desenrolar as fiestras."
-
-#~ msgid "Raise windows when they are unshaded."
-#~ msgstr "Elevar as fiestras ao desenrolalas."
-
-#~ msgid "Display tooltips for window frames."
-#~ msgstr "Amosar os tooltips dos marcos das fiestras."
-
-#~ msgid "Show full documentation in tooltips."
-#~ msgstr "Amosar a documentación completa nos tooltips."
-
-#~ msgid "Number of milliseconds before displaying tooltips."
-#~ msgstr "Número de milisegundos de espera para amosar os tooltips."
-
-#~ msgid "Number of milliseconds before removing tooltips."
-#~ msgstr "Número de milisegundos de espera para quitar os tooltips."
-
-#, fuzzy
-#~ msgid "Font used to display tooltips, or nil for default."
-#~ msgstr "Fonte usada para amosar os tooltips."
-
-#~ msgid "Color used for the tooltips background"
-#~ msgstr "Cor do fondo dos tooltips"
-
-#~ msgid "Color used for the tooltips foreground"
-#~ msgstr "Cor do texto dos tooltips"
-
-#, fuzzy
-#~ msgid "History"
-#~ msgstr "_Historia"
-
-#~ msgid "Automatically remember window positions."
-#~ msgstr "Lembrar automaticamente as posicións das fiestras."
-
-#~ msgid "Automatically remember window sizes."
-#~ msgstr "Lembrar automaticamente as dimensións das fiestras."
-
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Lembrar automaticamente outros atributos das fiestras."
-
-#~ msgid "Don't automatically remember details of transient windows."
-#~ msgstr "Non lembrar automaticamente os detalles das fiestras temporais."
-
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Cándo afecta o punteiro do rato ao foco de entrada."
-
-#, fuzzy
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr ""
-#~ "O modo premer-para-enfocar (click-to-focus) pásalle o clic á fiestra."
-
-#, fuzzy
-#~ msgid "Wether focusing a window doesn't change it's position in the stack."
-#~ msgstr "Baixar a fiestra á posición máis baixa permitida na pila."
-
-#~ msgid "Default frame style:"
-#~ msgstr "Tema por omisión:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Recargar automaticamente os temas cando son actualizados."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Fonte por defecto: \\w"
-
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Mapa de teclado que contén os atallos sempre activos."
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr ""
-#~ "Mapa de teclado cos atallos activos cando hai unha fiestra enfocada."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
-#~ "no escritorio (ou cando non hai ningunha fiestra enfocada)."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
-#~ "no título dunha fiestra. (Só se evalúan as funcións do rato.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
-#~ "no bordo dunha fiestra. (Só se evalúan as funcións de rato.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
-#~ "no botón de pechar dunha fiestra. (Só se evalúan as funcións do rato.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
-#~ "no botón de iconificar dunha fiestra. (Só se evalúan as funcións do rato.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de teclado cos atallos activos cando o punteiro do rato está no\n"
-#~ "botón de maximizar dunha fiestra. (Só se evalúan as funcións do rato.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
-#~ "no botón de menú dunha fiestra. (Só se evalúan as funcións do rato.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Mapa de teclado cos atallos activos cando o punteiro do rato está\n"
-#~ "no botón de enrolar dunha fiestra. (Só se evalúan as funcións do rato.)"
-
-#, fuzzy
-#~ msgid "Modifier key(s) used for default shortcuts."
-#~ msgstr "Tecla(s) modificadoras usadas por omisión para os atallos."
-
-#~ msgid "Method of placing windows: \\w"
-#~ msgstr "Método de colocación das fiestras: \\w"
-
-#~ msgid "Method of placing dialog windows: \\w"
-#~ msgstr "Método de colocación das fiestras de diálogo: \\w"
-
-#~ msgid "Ignore program-specified window placements."
-#~ msgstr "Ignorar as posicións das fiestras indicadas polos programas."
-
-#, fuzzy
-#~ msgid "Distance between successive placements in stagger mode."
-#~ msgstr ""
-#~ "Distancia entre as posicións sucesivas no modo de colocación `stagger'."
-
-#~ msgid "Stacking"
-#~ msgstr "Capas"
-
-#~ msgid "Keep transient windows stacked above: \\w"
-#~ msgstr "Manter as fiestras temporais por riba de: \\w"
-
-#, fuzzy
-#~ msgid "Minimizing a window also removes its: \\w"
-#~ msgstr "Ao elevar unha fiestra, elevar tamén: \\w"
-
-#, fuzzy
-#~ msgid "Unminimizing a window also restores its: \\w"
-#~ msgstr "Ao elevar unha fiestra, elevar tamén: \\w"
-
-#~ msgid "Lock position and size while windows are maximized."
-#~ msgstr ""
-#~ "Bloquear a posición e as dimensións das fiestras mentres están "
-#~ "maximizadas."
-
-#~ msgid "Focus on application windows when they first appear."
-#~ msgstr "Enfocar as fiestras de aplicación cando aparecen por primeira vez."
-
-#~ msgid "Unshade selected windows."
-#~ msgstr "Desenrolar as fiestras seleccionadas."
-
-#, fuzzy
-#~ msgid "The program used to play audio samples."
-#~ msgstr ""
-#~ "O programa para reproducir as gravacións de son. Se non se indica, "
-#~ "usarase o soporte integrado para ESD."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr "Mapa de teclado cos atallos activos ao ler unha cadea do usuario."
-
-#~ msgid "When raising a window, also raise its: \\w"
-#~ msgstr "Ao elevar unha fiestra, elevar tamén: \\w"
-
-#~ msgid "Viewport"
-#~ msgstr "Área virtual"
-
-#~ msgid "Windows uniconify to the current viewport."
-#~ msgstr "Restaurar as fiestras na área virtual actual."
-
-#, fuzzy
-#~ msgid "Give focus to windows even when they haven't asked for it."
-#~ msgstr "Elevar as fiestras ao movelas ou redimensionalas."
-
-#, fuzzy
-#~ msgid "Warping"
-#~ msgstr "Asociar"
-
-#, fuzzy
-#~ msgid "Offset (%) from window edges when warping pointer."
-#~ msgstr ""
-#~ "Desprazamento (%) dende a beira superior da fiestra,\n"
-#~ "cando se leva o punteiro ás fiestras.\n"
-#~ "Un número negativo significa movelo fóra da beira superior."
-
-#, fuzzy
-#~ msgid "Format to create unique window names."
-#~ msgstr ""
-#~ "Formato para crear nomes de fiestras únicos.\n"
-#~ "\n"
-#~ "Aplícanselle dous argumentos (NOME ÍNDICE)."
-
-#, fuzzy
-#~ msgid "How to act when passing the first or last workspace."
-#~ msgstr "Ao superar o primeiro ou derradeiro escritorio: \\w"
-
-#, fuzzy
-#~ msgid ""
-#~ "How to act when passing the first or last workspace, while moving a window"
-#~ msgstr ""
-#~ "Ao superar o primeiro primeiro ou derradeiro escritorio movendo unha "
-#~ "fiestra: \\w"
-
-#, fuzzy
-#~ msgid "Preserve outermost empty workspaces in the pager."
-#~ msgstr "Manter os escritorios baleiros no paxinador."
-
-#~ msgid "Crux Theme"
-#~ msgstr "Tema Crux"
-
-#~ msgid ""
-#~ "Accent color for focused windows (if unset uses the GTK+ selection color)."
-#~ msgstr ""
-#~ "Cor das fiestras enfocadas (se non se indica, úsase a cor de selección de "
-#~ "GTK+)."
-
-#~ msgid "Display the window's icon in its menu button."
-#~ msgstr "Amosar a icona da fiestra no botón do menú."
-
-#~ msgid "Display title buttons to mimic: \\w"
-#~ msgstr "Os botóns do título semellan: \\w"
-
-#~ msgid "Gradient Theme"
-#~ msgstr "Tema gradiente"
-
-#~ msgid "horizontal"
-#~ msgstr "horizontal"
-
-#~ msgid "vertical"
-#~ msgstr "vertical"
-
-#~ msgid "diagonal"
-#~ msgstr "diagonal"
-
-#~ msgid "Direction of gradient in `gradient' frame style."
-#~ msgstr "Dirección do gradiente no estilo de marco `gradiente'."
-
-#~ msgid "`From' color of inactive frames in `gradient' frame style."
-#~ msgstr "Cor de orixe dos marcos inactivos no estilo de marco `gradiente'."
-
-#~ msgid "`To' color of inactive frames in `gradient' frame style."
-#~ msgstr "Cor de destino dos marcos inactivos no estilo de marco `gradiente'."
-
-#~ msgid "`From' color of active frames in `gradient' frame style."
-#~ msgstr "Cor de orixe dos marcos activos no estilo de marco `gradiente'."
-
-#~ msgid "`To' color of active frames in `gradient' frame style."
-#~ msgstr "Cor de destino dos marcos activos no estilo de marco `gradiente'."
-
-#~ msgid "Use less memory when creating gradients, possibly affecting quality."
-#~ msgstr ""
-#~ "Usar menos memoria ao crear os gradientes, posiblemente afectando á "
-#~ "calidade."
-
-#~ msgid "Mono Theme"
-#~ msgstr "Tema monocromo"
-
-#~ msgid "Color of inactive frames (if unset use GTK+ background color)."
-#~ msgstr ""
-#~ "Cor dos marcos inactivos (se non se indica, úsase a cor de fondo de GTK+)."
-
-#~ msgid "Color of active frames (if unset use GTK+ selection color)."
-#~ msgstr ""
-#~ "Cor dos marcos activos (se non se indica, úsase a cor de selección de GTK"
-#~ "+)."
-
-#~ msgid "left"
-#~ msgstr "esquerda"
-
-#~ msgid "right"
-#~ msgstr "dereita"
-
-#~ msgid "center"
-#~ msgstr "centro"
-
-#~ msgid "Text is \\w justified in window titles."
-#~ msgstr "Xustificación do texto nos títulos das fiestras: \\w"
-
-#, fuzzy
-#~ msgid "title"
-#~ msgstr "[title]"
-
-#, fuzzy
-#~ msgid "gradient"
-#~ msgstr "temporais"
-
-#, fuzzy
-#~ msgid "positions 1"
-#~ msgstr "Posición"
-
-#, fuzzy
-#~ msgid "positions 2"
-#~ msgstr "Posición"
-
-#, fuzzy
-#~ msgid "borders"
-#~ msgstr "bordo"
-
-#, fuzzy
-#~ msgid "normal"
-#~ msgstr "Normal"
-
-#~ msgid "all"
-#~ msgstr "todas"
-
-#~ msgid "none"
-#~ msgstr "ningún"
-
-#, fuzzy
-#~ msgid "real-center"
-#~ msgstr "centro"
-
-#, fuzzy
-#~ msgid "top"
-#~ msgstr "parar"
-
-#, fuzzy
-#~ msgid "bottom"
-#~ msgstr "[abaixo]"
-
-#, fuzzy
-#~ msgid "custom"
-#~ msgstr "Configurar"
-
-#, fuzzy
-#~ msgid "reverse colors"
-#~ msgstr "Seleccionar cor"
-
-#, fuzzy
-#~ msgid "default-9"
-#~ msgstr "Por defecto"
-
-#, fuzzy
-#~ msgid "default-12"
-#~ msgstr "Por defecto"
-
-#, fuzzy
-#~ msgid "ball-9"
-#~ msgstr "todas"
-
-#, fuzzy
-#~ msgid "ball-12"
-#~ msgstr "todas"
-
-#, fuzzy
-#~ msgid "menu button position"
-#~ msgstr "Lembrar _posición"
-
-#, fuzzy
-#~ msgid "shade button position"
-#~ msgstr "Mapa de teclado do botón de enrolar"
-
-#, fuzzy
-#~ msgid "iconify button position"
-#~ msgstr "Mapa de teclado do botón de iconificar"
-
-#, fuzzy
-#~ msgid "maximize button position"
-#~ msgstr "Mapa de teclado do botón de maximizar"
-
-#, fuzzy
-#~ msgid "close button position"
-#~ msgstr "Mapa de teclado do botón de pechar"
-
-#, fuzzy
-#~ msgid "previous workspace button position"
-#~ msgstr "Anterior fiestra do escritorio"
-
-#, fuzzy
-#~ msgid "next workspace button position"
-#~ msgstr "Seguinte fiestra do escritorio"
-
-#, fuzzy
-#~ msgid "info button position"
-#~ msgstr "Gardar a posición na historia da fiestra"
-
-#, fuzzy
-#~ msgid "mxflat:sticky-button-keymap"
-#~ msgstr "Mapa de teclado do botón de iconificar"
-
-#, fuzzy
-#~ msgid "mxflat:previous-button-keymap"
-#~ msgstr "Mapa de teclado do botón de menú"
-
-#, fuzzy
-#~ msgid "mxflat:next-button-keymap"
-#~ msgstr "Mapa de teclado do botón de menú"
-
-#, fuzzy
-#~ msgid "mxflat:configure-button-keymap"
-#~ msgstr "Mapa de teclado do botón de menú"
-
-#, fuzzy
-#~ msgid "mxflat:info-button-keymap"
-#~ msgstr "Mapa de teclado do botón de menú"
-
-#, fuzzy
-#~ msgid "mxflat:always-on-top-button-keymap"
-#~ msgstr "Mapa de teclado do botón de menú"
-
-#, fuzzy
-#~ msgid "mxflat:lock-button-keymap"
-#~ msgstr "Mapa de teclado do botón de pechar"
-
-#, fuzzy
-#~ msgid "fake shadow only on focused windows"
-#~ msgstr "Imaxe da barra para as fiestras sen foco."
-
-#, fuzzy
-#~ msgid "south"
-#~ msgstr "Acerca"
-
-#~ msgid "Simple Theme"
-#~ msgstr "Tema simple"
-
-#~ msgid "Color of inactive frames in `simple' frame style."
-#~ msgstr "Cor dos marcos inactivos no estilo de marcos `simple'."
-
-#~ msgid "Color of active frames in `simple' frame style."
-#~ msgstr "Cor dos marcos activos no estilo de marcos `simple'."
-
-#~ msgid "SMaker Theme"
-#~ msgstr "Tema SMaker"
-
-#~ msgid "Use black-on-white button images."
-#~ msgstr "Imaxes dos botóns en negro sobre branco."
-
-#~ msgid "Color to use when drawing text."
-#~ msgstr "Cor para escribir o texto."
-
-#~ msgid "Bar image for unfocused windows."
-#~ msgstr "Imaxe da barra para as fiestras sen foco."
-
-#~ msgid "Bar image for focused windows."
-#~ msgstr "Imaxe da barra para as fiestras enfocadas."
-
-#~ msgid "Bar image for highlighted parts."
-#~ msgstr "Imaxe da barra para as partes destacadas."
-
-#~ msgid "Bar image for clicked parts."
-#~ msgstr "Imaxe da barra para as partes premidas."
-
-#~ msgid "Height of title bar."
-#~ msgstr "Altura da barra de título."
-
-#~ msgid "Width of window border."
-#~ msgstr "Ancho do bordo da fiestra."
-
-#~ msgid "Border width of bar images."
-#~ msgstr "Ancho do bordo das imaxes da barra."
-
-#~ msgid "Next workspace window"
-#~ msgstr "Seguinte fiestra do escritorio"
+#~ msgid "Sawfish homepage"
+#~ msgstr "Páxina web do Sawfish"
 
 #~ msgid "Select the next window of the current workspace."
 #~ msgstr "Activar a seguinte fiestra no escritorio actual."
 
-#~ msgid "Previous workspace window"
-#~ msgstr "Anterior fiestra do escritorio"
-
 #~ msgid "Focus on the previous window of the current workspace."
 #~ msgstr "Activar a fiestra anterior no escritorio actual."
-
-#~ msgid "Next window"
-#~ msgstr "Seguinte fiestra"
 
 #~ msgid "Select the next window, cycling through all possible workspaces."
 #~ msgstr ""
 #~ "Activar a seguinte fiestra, circulando por tódolos escritorios posibles."
 
-#~ msgid "Previous window"
-#~ msgstr "Anterior fiestra"
-
 #~ msgid "Select the previous window, cycling through all possible workspaces."
 #~ msgstr ""
 #~ "Activar a fiestra anterior, circulando por tódolos escritorios posibles."
 
-#~ msgid "Describe symbol"
-#~ msgstr "Describir o símbolo"
-
 #~ msgid "Display the documentation of a specified symbol."
 #~ msgstr "Amosar a documentación dun símbolo específico."
-
-#~ msgid "Apropos function"
-#~ msgstr "Función Apropos"
-
-#~ msgid "Apropos variable"
-#~ msgstr "Variable Apropos"
-
-#~ msgid "Gnome toggle skip winlist"
-#~ msgstr "Trocar o ignorar na lista de fiestras de Gnome"
 
 #~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
 #~ msgstr "Mudar a opción SKIP_WINLIST de GNOME para esta fiestra."
 
-#~ msgid "Gnome set skip winlist"
-#~ msgstr "Ignorar na lista de fiestras de Gnome"
-
 #~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
 #~ msgstr "Activar a opción SKIP_WINLIST de GNOME para esta fiestra."
-
-#~ msgid "Gnome clear skip winlist"
-#~ msgstr "Non ignorar na lista de fiestras de Gnome"
 
 #~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
 #~ msgstr "Desactivar a opción SKIP_WINLIST de GNOME para esta fiestra."
 
-#~ msgid "Gnome toggle skip tasklist"
-#~ msgstr "Trocar o ignorar na lista de tarefas de Gnome"
-
 #~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
 #~ msgstr "Mudar a opción SKIP_TASKLIST de GNOME para esta fiestra."
-
-#~ msgid "Gnome set skip tasklist"
-#~ msgstr "Ignorar na lista de tarefas de Gnome"
 
 #~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
 #~ msgstr "Activar a opción SKIP_TASKLIST de GNOME para esta fiestra."
 
-#~ msgid "Gnome clear skip tasklist"
-#~ msgstr "Non ignorar na lista de tarefas de Gnome"
-
 #~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
 #~ msgstr "Desactivar a opción SKIP_TASKLIST de GNOME para esta fiestra."
-
-#~ msgid "Gnome logout"
-#~ msgstr "Saír de Gnome"
 
 #~ msgid "Logout from the current GNOME session."
 #~ msgstr "Saír da sesión actual de GNOME."
 
-#~ msgid "Gnome www page"
-#~ msgstr "Páxina www de Gnome"
-
 #~ msgid "Display the WWW page of the GNOME project."
 #~ msgstr "Mostrar a páxina WWW do proxecto GNOME."
-
-#~ msgid "Gnome help browser"
-#~ msgstr "Explorador de axuda de Gnome"
 
 #~ msgid "Launch the GNOME help browser."
 #~ msgstr "Executar o navegador de axuda de GNOME."
 
-#~ msgid "Gnome about"
-#~ msgstr "Acerca de Gnome"
-
 #~ msgid "Launch the GNOME about dialog."
 #~ msgstr "Lanzar o diálogo 'acerca' de GNOME."
-
-#~ msgid "Iconify group"
-#~ msgstr "Iconificar grupo"
-
-#~ msgid "Uniconify group"
-#~ msgstr "Restaurar grupo"
-
-#~ msgid "Iconify transient group"
-#~ msgstr "Iconificar grupo temporal"
-
-#~ msgid "Uniconify transientgroup"
-#~ msgstr "Restaurar grupo temporal"
-
-#~ msgid "Make group sticky"
-#~ msgstr "Facer o grupo pegañento"
-
-#~ msgid "Make group unsticky"
-#~ msgstr "Facer o grupo non pegañento"
-
-#~ msgid "Toggle group sticky"
-#~ msgstr "Trocar o grupo pegañento"
-
-#~ msgid "Send group to current workspace"
-#~ msgstr "Enviar o grupo para o escritorio actual"
-
-#~ msgid "Send group to next workspace"
-#~ msgstr "Enviar o grupo para o escritorio seguinte"
-
-#~ msgid "Send group to previous workspace"
-#~ msgstr "Enviar o grupo para o escritorio anterior"
-
-#~ msgid "Move group to current viewport"
-#~ msgstr "Mover o grupo para a área virtual actual"
-
-#~ msgid "Move group left"
-#~ msgstr "Mover o grupo para a esquerda"
-
-#~ msgid "Move group right"
-#~ msgstr "Mover o grupo para a dereita"
-
-#~ msgid "Move group up"
-#~ msgstr "Mover o grupo para arriba"
-
-#~ msgid "Move group down"
-#~ msgstr "Mover o grupo para abaixo"
-
-#~ msgid "Raise group"
-#~ msgstr "Elevar grupo"
-
-#~ msgid "Lower group"
-#~ msgstr "Baixar grupo"
-
-#~ msgid "Raise lower group"
-#~ msgstr "Elevar-Baixar grupo"
-
-#~ msgid "Raise group depth"
-#~ msgstr "Elevar a profundidade do grupo"
-
-#~ msgid "Lower group depth"
-#~ msgstr "Baixar a profundidade do grupo"
-
-#~ msgid "Delete group"
-#~ msgstr "Pechar grupo"
 
 #~ msgid ""
 #~ "Delete all windows in the group that the current window is a member of."
@@ -1332,15 +3511,6 @@ msgstr "Páxina web do Sawfish"
 #~ msgstr ""
 #~ "Considerar medrar como maximizar.  Activando isto, pódese usar\n"
 #~ "`unmaximize-window', ou algo similar, para voltar ao tamaño orixinal."
-
-#~ msgid "always"
-#~ msgstr "sempre"
-
-#~ msgid "maybe"
-#~ msgstr "quizais"
-
-#~ msgid "never"
-#~ msgstr "nunca"
 
 #~ msgid ""
 #~ "Whether and how to move the pointer when packing windows.\n"
@@ -1363,17 +3533,11 @@ msgstr "Páxina web do Sawfish"
 #~ "\n"
 #~ "`never' (nunca) significa que non fai nada co punteiro."
 
-#~ msgid "Grow window left"
-#~ msgstr "Medrar a fiestra para a esquerda"
-
 #, fuzzy
 #~ msgid ""
 #~ "Grows window to the left until it `bumps into' another window.\n"
 #~ "See `grow-window-up'."
 #~ msgstr "Medra a fiestra para a esquerda ata que peta con outra fiestra."
-
-#~ msgid "Grow window right"
-#~ msgstr "Medrar a fiestra para a dereita"
 
 #, fuzzy
 #~ msgid ""
@@ -1381,20 +3545,11 @@ msgstr "Páxina web do Sawfish"
 #~ "See `grow-window-up'."
 #~ msgstr "Medra a fiestra para a dereita ata que peta con outra fiestra."
 
-#~ msgid "Grow window up"
-#~ msgstr "Medrar fiestra para arriba"
-
-#~ msgid "Grow window down"
-#~ msgstr "Medrar fiestra para abaixo"
-
 #, fuzzy
 #~ msgid ""
 #~ "Grows window downwards until it `bumps into' another window.\n"
 #~ "See `grow-window-up'."
 #~ msgstr "Medra a fiestra para abaixo ata que peta con outra fiestra."
-
-#~ msgid "Pack window left"
-#~ msgstr "Empaquetar fiestra para a esquerda"
 
 #, fuzzy
 #~ msgid ""
@@ -1402,20 +3557,11 @@ msgstr "Páxina web do Sawfish"
 #~ "See `pack-window-up'."
 #~ msgstr "Move a fiestra para a esquerda ata que peta con outra fiestra."
 
-#~ msgid "Pack window right"
-#~ msgstr "Empaquetar fiestra para a dereita"
-
 #, fuzzy
 #~ msgid ""
 #~ "Moves window to the right until it `bumps into' another window.\n"
 #~ "See `pack-window-up'."
 #~ msgstr "Move a fiestra para a dereita ata que peta con outra fiestra."
-
-#~ msgid "Pack window up"
-#~ msgstr "Empaquetar fiestra para arriba"
-
-#~ msgid "Pack window down"
-#~ msgstr "Empaquetar fiestra para abaixo"
 
 #, fuzzy
 #~ msgid ""
@@ -1423,101 +3569,35 @@ msgstr "Páxina web do Sawfish"
 #~ "See `pack-window-up'."
 #~ msgstr "Move a fiestra para abaixo ata que peta con outra fiestra."
 
-#~ msgid "Help show faq"
-#~ msgstr "Axuda - amosar faq"
-
-#~ msgid "Help show news"
-#~ msgstr "Axuda - amosar novas"
-
-#~ msgid "Help show programmer manual"
-#~ msgstr "Axuda - amosar o manual de programador"
-
-#~ msgid "Help show homepage"
-#~ msgstr "Axuda - amosar páxina web"
-
-#~ msgid "Help about"
-#~ msgstr "Axuda - acerca de"
-
-#~ msgid "Move cursor right"
-#~ msgstr "Mover o cursor para a dereita"
-
 #~ msgid "Move the cursor `move-cursor-increment' pixels to the right."
 #~ msgstr "Mover o cursor `move-cursor-increment' puntos para a dereita."
-
-#~ msgid "Move cursor left"
-#~ msgstr "Mover o cursor para a esquerda"
 
 #~ msgid "Move the cursor `move-cursor-increment' pixels to the left."
 #~ msgstr "Mover o cursor `move-cursor-increment' puntos para a esquerda."
 
-#~ msgid "Move cursor up"
-#~ msgstr "Mover o cursor para arriba"
-
 #~ msgid "Move the cursor `move-cursor-increment' pixels upwards."
 #~ msgstr "Mover o cursor `move-cursor-increment' puntos para arriba."
-
-#~ msgid "Move cursor down"
-#~ msgstr "Mover o cursor para abaixo"
 
 #~ msgid "Move the cursor `move-cursor-increment' pixels downwards."
 #~ msgstr "Mover o cursor `move-cursor-increment' puntos para abaixo."
 
-#~ msgid "Move cursor right fine"
-#~ msgstr "Mover finamente o cursor para a dereita"
-
 #~ msgid "Move the cursor 1 pixel to the right."
 #~ msgstr "Mover o cursor 1 punto para a dereita."
-
-#~ msgid "Move cursor left fine"
-#~ msgstr "Mover finamente o cursor para a esquerda"
 
 #~ msgid "Move the cursor 1 pixel to the left."
 #~ msgstr "Mover o cursor 1 punto para a esquerda."
 
-#~ msgid "Move cursor up fine"
-#~ msgstr "Mover finamente o cursor para arriba"
-
 #~ msgid "Move the cursor 1 pixel upwards."
 #~ msgstr "Mover o cursor 1 punto para arriba."
-
-#~ msgid "Move cursor down fine"
-#~ msgstr "Mover finamente o cursor para abaixo"
 
 #~ msgid "Move the cursor 1 pixel downwards."
 #~ msgstr "Mover o cursor 1 punto para abaixo."
 
-#~ msgid "opaque"
-#~ msgstr "opaco"
-
-#~ msgid "box"
-#~ msgstr "caixa"
-
-#~ msgid "region"
-#~ msgstr "rexión"
-
-#~ msgid "border"
-#~ msgstr "bordo"
-
-#~ msgid "grab"
-#~ msgstr "agarrar"
-
-#~ msgid "border-grab"
-#~ msgstr "agarrar-bordo"
-
-#~ msgid "Move window interactively"
-#~ msgstr "Mover fiestra interactivamente"
-
 #~ msgid "Move the window interactively using the mouse."
 #~ msgstr "Mover a fiestra interactivamente co rato."
 
-#~ msgid "Resize window interactively"
-#~ msgstr "Redimensionar fiestra interactivamente"
-
 #~ msgid "Resize the window interactively using the mouse."
 #~ msgstr "Redimensionar a fiestra interactivamente co rato."
-
-#~ msgid "Move selected window"
-#~ msgstr "Mover a fiestra seleccionada"
 
 #~ msgid ""
 #~ "Wait for the user to select a window, then interactively move that window."
@@ -1525,18 +3605,12 @@ msgstr "Páxina web do Sawfish"
 #~ "Agardar a que o usuario seleccione unha fiestra, e logo movela "
 #~ "interactivamente."
 
-#~ msgid "Resize selected window"
-#~ msgstr "Redimensionar a fiestra seleccionada"
-
 #~ msgid ""
 #~ "Wait for the user to select a window, then interactively resize that "
 #~ "window."
 #~ msgstr ""
 #~ "Agardar a que o usuario seleccione unha fiestra, e logo redimensionala "
 #~ "interactivamente."
-
-#~ msgid "Raise and pass through click"
-#~ msgstr "Elevar e transmitir o clic"
 
 #~ msgid ""
 #~ "Raise the window that received the current event, then replay any "
@@ -1547,9 +3621,6 @@ msgstr "Páxina web do Sawfish"
 #~ "do\n"
 #~ "punteiro, reproducilos."
 
-#~ msgid "Raise and pass through click if focused"
-#~ msgstr "Elevar e transmitir o clic se está enfocada"
-
 #~ msgid ""
 #~ "Raise the window that received the current event (if it's focused), then\n"
 #~ "replay any pointer events that invoked the command."
@@ -1558,24 +3629,12 @@ msgstr "Páxina web do Sawfish"
 #~ "caso\n"
 #~ "de seren eventos do punteiro, reproducilos."
 
-#~ msgid "Raise or pass through click"
-#~ msgstr "Elevar ou transmitir o clic"
-
-#~ msgid "Raise window and pass through click"
-#~ msgstr "Elevar fiestra e transmitir o clic"
-
-#~ msgid "Raise group and pass through click"
-#~ msgstr "Elevar o grupo e transmitir o clic"
-
 #~ msgid ""
 #~ "Raise the group of windows that received the current event, then replay\n"
 #~ "any pointer events that invoked the command."
 #~ msgstr ""
 #~ "Elevar o grupo de fiestras que recibiron o evento actual e, en caso\n"
 #~ "de seren eventos do punteiro, reproducilos."
-
-#~ msgid "Raise transients and pass through click"
-#~ msgstr "Elevar as temporais e transmitir o clic"
 
 #~ msgid ""
 #~ "Raise the window that received the current event and any transients it\n"
@@ -1585,495 +3644,148 @@ msgstr "Páxina web do Sawfish"
 #~ "teña,\n"
 #~ "e, en caso de seren eventos de punteiro, reproducilos."
 
-#~ msgid "Size window add row"
-#~ msgstr "Engadir unha ringleira á fiestra"
-
 #~ msgid "Increase the size of the current window by one row."
 #~ msgstr "Incrementar unha ringleira o tamaño da fiestra actual."
-
-#~ msgid "Size window subtract row"
-#~ msgstr "Quitar unha ringleira á fiestra"
 
 #~ msgid "Decrease the size of the current window by one row."
 #~ msgstr "Diminuír unha ringleira o tamaño da fiestra actual."
 
-#~ msgid "Size window add column"
-#~ msgstr "Engadir unha columna á fiestra"
-
 #~ msgid "Increase the size of the current window by one column."
 #~ msgstr "Incrementar unha columna o tamaño da fiestra actual."
-
-#~ msgid "Size window subtract column"
-#~ msgstr "Quitar unha columna á fiestra"
 
 #~ msgid "Decrease the size of the current window by one column."
 #~ msgstr "Diminuír unha ringleira o tamaño da fiestra actual."
 
-#~ msgid "Slide window left"
-#~ msgstr "Deslizar a fiestra para a esquerda"
-
 #~ msgid "Move the window `slide-window-increment' pixels to the left."
 #~ msgstr "Mover a fiestra `slide-window-increment' puntos para a esquerda."
-
-#~ msgid "Slide window right"
-#~ msgstr "Deslizar a fiestra para a dereita"
 
 #~ msgid "Move the window `slide-window-increment' pixels to the right."
 #~ msgstr "Mover a fiestra `slide-window-increment' puntos para a dereita."
 
-#~ msgid "Slide window up"
-#~ msgstr "Deslizar a fiestra para arriba"
-
 #~ msgid "Move the window `slide-window-increment' pixels upwards."
 #~ msgstr "Mover a fiestra `slide-window-increment' puntos para arriba."
 
-#~ msgid "Slide window down"
-#~ msgstr "Deslizar a fiestra para abaixo"
-
 #~ msgid "Move the window `slide-window-increment' pixels downwards."
 #~ msgstr "Mover a fiestra `slide-window-increment' puntos para abaixo."
-
-#~ msgid "Slide group left"
-#~ msgstr "Deslizar o grupo para a esquerda"
 
 #~ msgid "Move the window group `slide-window-increment' pixels to the left."
 #~ msgstr ""
 #~ "Mover o grupo de fiestras `slide-window-increment' puntos para a esquerda."
 
-#~ msgid "Slide group right"
-#~ msgstr "Deslizar o grupo para a dereita"
-
 #~ msgid "Move the window group `slide-window-increment' pixels to the right."
 #~ msgstr ""
 #~ "Mover o grupo de fiestras `slide-window-increment' puntos para a dereita."
-
-#~ msgid "Slide group up"
-#~ msgstr "Deslizar o grupo para arriba"
 
 #~ msgid "Move the window group `slide-window-increment' pixels upwards."
 #~ msgstr ""
 #~ "Mover o grupo de fiestras `slide-window-increment' puntos para arriba."
 
-#~ msgid "Slide group down"
-#~ msgstr "Deslizar o grupo para abaixo"
-
 #~ msgid "Move the window group `slide-window-increment' pixels downwards."
 #~ msgstr ""
 #~ "Mover o grupo de fiestras `slide-window-increment' puntos para abaixo."
 
-#~ msgid "Move viewport next"
-#~ msgstr "Mover á seguinte área virtual"
-
 #~ msgid "Move to the next viewport."
 #~ msgstr "Mover á seguinte área virtual."
-
-#~ msgid "Move viewport previous"
-#~ msgstr "Mover á anterior área virtual"
 
 #~ msgid "Move to the previous viewport."
 #~ msgstr "Mover á anterior área virtual."
 
-#~ msgid "Move window previous"
-#~ msgstr "Mover a fiestra á anterior"
-
 #~ msgid "Move the window to the previous viewport."
 #~ msgstr "Mover a fiestra á anterior área virtual."
-
-#~ msgid "Move window next"
-#~ msgstr "Mover a fiestra á seguinte"
-
-#~ msgid "Set viewport linear"
-#~ msgstr "Facer área virtual lineal"
-
-#~ msgid "Set window viewport linear"
-#~ msgstr "Facer a área virtual lineal"
-
-#~ msgid "cycle-keymap"
-#~ msgstr "Mapa de teclado ao circular"
 
 #, fuzzy
 #~ msgid "Terminal"
 #~ msgstr "vertical"
 
-#~ msgid "Xterm"
-#~ msgstr "Xterm"
-
 #~ msgid "Start a new xterm."
 #~ msgstr "Iniciar un novo xterm."
-
-#~ msgid "Call command"
-#~ msgstr "Chamar comando"
 
 #~ msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
 #~ msgstr ""
 #~ "Chamar ao comando NAME; opcionalmente co argumento de prefixo PFX-ARG."
 
-#~ msgid "Run shell command"
-#~ msgstr "Executar comando de shell"
-
 #~ msgid "Execute the given shell command."
 #~ msgstr "Executar o comando de shell indicado."
 
-#~ msgid "Command sequence"
-#~ msgstr "Secuencia de comandos"
-
 #~ msgid "Invoke the list of commands, one by one."
 #~ msgstr "Invocar a lista de comandos, un a un."
-
-#~ msgid "Quit"
-#~ msgstr "Saír"
-
-#~ msgid "Restart"
-#~ msgstr "Reiniciar"
-
-#~ msgid "Destroy window"
-#~ msgstr "Destruír a fiestra."
-
-#~ msgid "Kill client"
-#~ msgstr "Matar o cliente"
-
-#~ msgid "Call command with output to screen"
-#~ msgstr "Chamar ao comando coa saída na pantalla"
 
 #~ msgid ""
 #~ "Prompt for a command, execute it, and print any output to the screen."
 #~ msgstr "Pedir un comando, executalo, e escribir a saída na pantalla."
 
-#~ msgid "Customize"
-#~ msgstr "Configurar"
-
 #~ msgid "Invoke the user-customization system."
 #~ msgstr "Lanzar o sistema de configuración de usuario."
-
-#~ msgid "3d hack"
-#~ msgstr "Hack 3d"
-
-#, fuzzy
-#~ msgid "Auto-Raise"
-#~ msgstr "Elevar"
-
-#~ msgid "Raise windows when they are focused."
-#~ msgstr "Elevar as fiestras ao enfocalas."
-
-#~ msgid "Delay in milliseconds until focused windows are raised."
-#~ msgstr "Retardo en milisegundos para elevar as fiestras enfocadas."
-
-#~ msgid "viewport"
-#~ msgstr "área virtual"
-
-#~ msgid "workspace"
-#~ msgstr "escritorio"
 
 #~ msgid "Error Handling"
 #~ msgstr "Manexo de erros"
 
-#~ msgid "nowhere"
-#~ msgstr "ningures"
-
-#~ msgid "screen"
-#~ msgstr "pantalla"
-
-#~ msgid "standard-error"
-#~ msgstr "erro estándar"
-
-#, fuzzy
-#~ msgid "both"
-#~ msgstr "Acerca"
-
-#~ msgid "Display errors"
-#~ msgstr "Amosar os erros"
-
 #~ msgid "Display all errors that have occurred to the screen."
 #~ msgstr "Amosar na pantalla os erros que ocorreron."
-
-#~ msgid "Name"
-#~ msgstr "Nome"
-
-#~ msgid "Class"
-#~ msgstr "Clase"
-
-#~ msgid "Icon Name"
-#~ msgstr "Nome da icona"
-
-#~ msgid "Role"
-#~ msgstr "Rol"
-
-#~ msgid "Host"
-#~ msgstr "Máquina"
-
-#~ msgid "Locale"
-#~ msgstr "Locale"
-
-#~ msgid "Avoid"
-#~ msgstr "Evitar"
-
-#~ msgid "Ignore program position"
-#~ msgstr "Ignorar a posición do programa"
-
-#~ msgid "Place mode"
-#~ msgstr "Xeito de colocación"
-
-#~ msgid "Position"
-#~ msgstr "Posición"
-
-#~ msgid "Dimensions"
-#~ msgstr "Dimensións"
-
-#~ msgid "Workspace"
-#~ msgstr "Escritorio"
-
-#~ msgid "Depth"
-#~ msgstr "Profundidade"
-
-#~ msgid "Placement weight"
-#~ msgstr "Peso da colocación"
-
-#~ msgid "Maximized"
-#~ msgstr "Maximizada"
-
-#~ msgid "Raise on focus"
-#~ msgstr "Elevar ao enfocar"
-
-#~ msgid "Focus when mapped"
-#~ msgstr "Enfocar ao crearse"
-
-#~ msgid "Never focus"
-#~ msgstr "Nunca enfocar"
-
-#~ msgid "Focus click through"
-#~ msgstr "Transmitir o clic do foco"
-
-#~ msgid "Focus mode"
-#~ msgstr "Modo de enfocado"
-
-#~ msgid "Frame type"
-#~ msgstr "Tipo de marco"
-
-#~ msgid "Frame style"
-#~ msgstr "Tema"
-
-#~ msgid "Ignored"
-#~ msgstr "Ignorada"
-
-#~ msgid "Iconified"
-#~ msgstr "Iconificada"
-
-#~ msgid "Shaded"
-#~ msgstr "Enrolada"
-
-#~ msgid "Sticky"
-#~ msgstr "Pegañenta"
-
-#~ msgid "Sticky viewport"
-#~ msgstr "Área virtual pegañenta"
-
-#~ msgid "Group"
-#~ msgstr "Grupo"
-
-#~ msgid "Ungrouped"
-#~ msgstr "Desagrupada"
-
-#~ msgid "Cycle skip"
-#~ msgstr "Ignorar ao circular"
-
-#~ msgid "Window list skip"
-#~ msgstr "Ignorar na lista de fiestras"
-
-#, fuzzy
-#~ msgid "Task list skip"
-#~ msgstr "Ignorar na lista de fiestras"
-
-#~ msgid "Unique name"
-#~ msgstr "Nome único"
-
-#~ msgid "Auto gravity"
-#~ msgstr "Auto gravidade"
-
-#~ msgid "Shade hover"
-#~ msgstr "Desenrolar ao sobrevoar"
-
-#~ msgid "Transients above"
-#~ msgstr "Temporais por riba"
-
-#~ msgid "Ignore stacking requests"
-#~ msgstr "Ignorar as peticións de posición na pila"
-
-#~ msgid ""
-#~ "Enable shade-hover mode.\n"
-#~ "\n"
-#~ "(Temporarily unshades windows while the mouse pointer is over them.)"
-#~ msgstr ""
-#~ "Habilitar o modo desenrolar-ao-sobrevoar.\n"
-#~ "\n"
-#~ "(Desenrola temporalmente as fiestras cando o punteiro está sobre elas.)"
-
-#~ msgid "Window history save position"
-#~ msgstr "Gardar a posición na historia da fiestra"
 
 #~ msgid "Remember the current position of the focused window."
 #~ msgstr "Lembrar a posición actual da fiestra enfocada."
 
-#~ msgid "Window history save dimensions"
-#~ msgstr "Gardar as dimensións na historia da fiestra"
-
 #~ msgid "Remember the current dimensions of the focused window."
 #~ msgstr "Lembrar as dimensións actuais da fiestra enfocada."
-
-#~ msgid "Window history save attributes"
-#~ msgstr "Gardar os atributos na historia da fiestra"
 
 #~ msgid "Remember the current attributes of the focused window."
 #~ msgstr "Lembrar os atributos actuais da fiestra enfocada."
 
-#~ msgid "Window history forget"
-#~ msgstr "Esquecer a historia da fiestra"
-
 #~ msgid "Forget any persistent state associated with the current window."
 #~ msgstr "Esquecer calquera estado persistente asociado á fiestra actual."
 
-#~ msgid "Window history clear"
-#~ msgstr "Limpar a historia da fiestra"
-
 #~ msgid "Forget all saved window history."
 #~ msgstr "Esquecer toda a historia gardada da fiestra."
-
-#, fuzzy
-#~ msgid "Workspace down"
-#~ msgstr "Escritorio %d"
 
 #, fuzzy
 #~ msgid "View the workspace below the current workspace"
 #~ msgstr "Crear un novo escritorio antes do actual."
 
 #, fuzzy
-#~ msgid "Workspace up"
-#~ msgstr "Escritorio"
-
-#, fuzzy
 #~ msgid "View the workspace above the current workspace"
 #~ msgstr "Crear un novo escritorio antes do actual."
-
-#, fuzzy
-#~ msgid "Workspace left"
-#~ msgstr "Mover o escritorio para a esquerda"
 
 #, fuzzy
 #~ msgid "View the workspace to the left of the current workspace"
 #~ msgstr "Crear un novo escritorio antes do actual."
 
 #, fuzzy
-#~ msgid "Workspace right"
-#~ msgstr "Mover o escritorio para a dereita"
-
-#, fuzzy
 #~ msgid "View the workspace to the right of the current workspace"
 #~ msgstr "Crear un novo escritorio antes do actual."
-
-#, fuzzy
-#~ msgid "Send to workspace down"
-#~ msgstr "Enviar para o escritorio"
 
 #, fuzzy
 #~ msgid "Send window to the workspace below the current workspace"
 #~ msgstr "Crear un novo escritorio antes do actual."
 
 #, fuzzy
-#~ msgid "Send to workspace up"
-#~ msgstr "Enviar para o escritorio"
-
-#, fuzzy
 #~ msgid "Send window to the workspace above the current workspace"
 #~ msgstr "Crear un novo escritorio antes do actual."
-
-#, fuzzy
-#~ msgid "Send to workspace left"
-#~ msgstr "Enviar para o escritorio"
 
 #, fuzzy
 #~ msgid "Send window to the workspace left of the current workspace"
 #~ msgstr "Crear un novo escritorio antes do actual."
 
 #, fuzzy
-#~ msgid "Send to workspace right"
-#~ msgstr "Enviar para o escritorio"
-
-#, fuzzy
 #~ msgid "Send window to the workspace right of the current workspace"
 #~ msgstr "Crear un novo escritorio antes do actual."
-
-#~ msgid "Edit frame style"
-#~ msgstr "Editar o estilo do marco"
-
-#~ msgid "Gnome menus update"
-#~ msgstr "Actualizar os menús de Gnome"
-
-#~ msgid "global-keymap"
-#~ msgstr "Mapa de teclado global"
-
-#~ msgid "window-keymap"
-#~ msgstr "Mapa de teclado das fiestras"
-
-#~ msgid "root-window-keymap"
-#~ msgstr "Mapa de teclado da fiestra raíz"
-
-#~ msgid "title-keymap"
-#~ msgstr "Mapa de teclado do título"
-
-#~ msgid "border-keymap"
-#~ msgstr "Mapa de teclado do bordo"
-
-#~ msgid "close-button-keymap"
-#~ msgstr "Mapa de teclado do botón de pechar"
-
-#~ msgid "iconify-button-keymap"
-#~ msgstr "Mapa de teclado do botón de iconificar"
-
-#~ msgid "maximize-button-keymap"
-#~ msgstr "Mapa de teclado do botón de maximizar"
-
-#~ msgid "menu-button-keymap"
-#~ msgstr "Mapa de teclado do botón de menú"
-
-#~ msgid "shade-button-keymap"
-#~ msgstr "Mapa de teclado do botón de enrolar"
-
-#~ msgid "Popup window menu"
-#~ msgstr "Amosar menú de fiestra"
 
 #~ msgid "Display the menu listing all window operations."
 #~ msgstr "Amosar o menú coas operacións de fiestra."
 
-#~ msgid "Popup root menu"
-#~ msgstr "Amosar menú raíz"
-
 #~ msgid "Display the main menu."
 #~ msgstr "Amosar o menú principal."
 
-#~ msgid "Popup apps menu"
-#~ msgstr "Amosar menú de aplicacións"
-
 #~ msgid "Display the applications menu."
 #~ msgstr "Amosar o menú de aplicacións."
-
-#~ msgid "parents"
-#~ msgstr "nais"
-
-#~ msgid "Raise single window"
-#~ msgstr "Elevar fiestra simple"
 
 #~ msgid ""
 #~ "Raise the window to its highest allowed position in the stacking order."
 #~ msgstr "Elevar a fiestra á posición máis alta permitida na pila."
 
-#~ msgid "Lower single window"
-#~ msgstr "Baixar fiestra simple"
-
 #~ msgid ""
 #~ "Lower the window to its lowest allowed position in the stacking order."
 #~ msgstr "Baixar a fiestra á posición máis baixa permitida na pila."
-
-#~ msgid "Raise lower single window"
-#~ msgstr "Elevar-Baixar fiestra simple"
 
 #~ msgid ""
 #~ "If the window is at its highest possible position, then lower it to its\n"
@@ -2082,59 +3794,26 @@ msgstr "Páxina web do Sawfish"
 #~ "Se a fiestra está na súa posición máis alta posible, baixala á\n"
 #~ "posición máis baixa. Se non, elevala tanto como se poida."
 
-#~ msgid "Raise window depth"
-#~ msgstr "Elevar a profundidade da fiestra"
-
 #~ msgid "Put the window in the stacking level above its current level."
 #~ msgstr "Colocar a fiestra na capa por riba da actual."
 
-#~ msgid "Lower window depth"
-#~ msgstr "Baixar a profundidade da fiestra"
-
 #~ msgid "Put the window in the stacking level beneath its current level."
 #~ msgstr "Colocar a fiestra na capa debaixo da actual."
-
-#~ msgid "transients"
-#~ msgstr "temporais"
-
-#~ msgid "group"
-#~ msgstr "grupo"
-
-#~ msgid "Iconify window"
-#~ msgstr "Iconificar fiestra"
 
 #, fuzzy
 #~ msgid "Minimize the window."
 #~ msgstr "Non ignorar a fiestra."
 
-#~ msgid "Uniconify window"
-#~ msgstr "Restaurar fiestra"
-
 #, fuzzy
 #~ msgid "Restore the window from its minimized state."
 #~ msgstr "Restaurar a fiestra do seu estado iconificado."
 
-#~ msgid "Toggle window iconified"
-#~ msgstr "Trocar a iconificación da fiestra"
-
 #~ msgid "Toggle the iconification of window W."
 #~ msgstr "Mudar o estado de iconificación da fiestra W."
-
-#~ msgid "Iconify workspace windows"
-#~ msgstr "Iconificar fiestras do escritorio"
 
 #, fuzzy
 #~ msgid "Minimize all windows on the current workspace."
 #~ msgstr "Iconificar tódalas fiestras do escritorio actual."
-
-#~ msgid "Make window sticky"
-#~ msgstr "Facer a fiestra pegañenta"
-
-#~ msgid "Make window unsticky"
-#~ msgstr "Facer a fiestra non pegañenta"
-
-#~ msgid "Toggle window sticky"
-#~ msgstr "Trocar a fiestra pegañenta"
 
 #~ msgid ""
 #~ "Toggle the `stickiness' of the window--whether or not it is a member of\n"
@@ -2143,84 +3822,44 @@ msgstr "Páxina web do Sawfish"
 #~ "Mudar o estado `pegañento' da fiestra (se aparece en tódolos\n"
 #~ "escritorios ou non)."
 
-#~ msgid "Make window ignored"
-#~ msgstr "Facer a fiestra ignorada"
-
 #~ msgid "Ignore the window."
 #~ msgstr "Ignorar a fiestra."
-
-#~ msgid "Make window not ignored"
-#~ msgstr "Facer a fiestra non ignorada"
 
 #~ msgid "Unignore the window."
 #~ msgstr "Non ignorar a fiestra."
 
-#~ msgid "Toggle window ignored"
-#~ msgstr "Trocar a ignoración da fiestra"
-
 #~ msgid "Toggle whether a window is ignored or not."
 #~ msgstr "Mudar o estado de 'ignorada' dunha fiestra."
-
-#~ msgid "Toggle window never focus"
-#~ msgstr "Trocar o 'nunca enfocar' da fiestra"
 
 #~ msgid "Toggle whether a window is focusable or not."
 #~ msgstr "Mudar o estado de 'enfocable' dunha fiestra."
 
-#~ msgid "Toggle window cycle skip"
-#~ msgstr "Trocar o 'ignorar ao circular' da fiestra"
-
 #~ msgid "Toggle whether a window is ignored while window cycling."
 #~ msgstr "Mudar o estado de 'ignorada' dunha fiestra ao circular."
-
-#~ msgid "Toggle window list skip"
-#~ msgstr "Trocar o ignorar na lista de fiestras"
 
 #~ msgid "Toggle whether a window will be include in the window list."
 #~ msgstr "Mudar o estado de incluíble na lista de fiestras."
 
 #, fuzzy
-#~ msgid "Toggle task list skip"
-#~ msgstr "Trocar o ignorar na lista de fiestras"
-
-#, fuzzy
 #~ msgid "Toggle whether a window will be included in the task-list."
 #~ msgstr "Mudar o estado de incluíble na lista de fiestras."
 
-#~ msgid "Maximize window"
-#~ msgstr "Maximizar fiestra"
-
 #~ msgid "Maximize the dimensions of the window."
 #~ msgstr "Maximizar as dimensións da fiestra."
-
-#~ msgid "Unmaximize window"
-#~ msgstr "Restaurar fiestra"
 
 #~ msgid ""
 #~ "Restore the dimensions of the window to its original, unmaximized, state."
 #~ msgstr ""
 #~ "Restaurar as dimensións da fiestra ao seu estado orixinal sen maximizar."
 
-#~ msgid "Maximize window vertically"
-#~ msgstr "Maximizar a fiestra verticalmente"
-
 #~ msgid "Maximize the vertical dimension of the window."
 #~ msgstr "Maximizar a dimensión vertical da fiestra."
-
-#~ msgid "Maximize window horizontally"
-#~ msgstr "Maximizar a fiestra horizontalmente"
 
 #~ msgid "Maximize the horizontal dimension of the window."
 #~ msgstr "Maximizar a dimensión horizontal da fiestra."
 
-#~ msgid "Maximize window toggle"
-#~ msgstr "Trocar maximización da fiestra"
-
 #~ msgid "Toggle the state of the window between maximized and unmaximized."
 #~ msgstr "Mudar o estado da fiestra entre maximizada e non maximizada."
-
-#~ msgid "Maximize window horizontally toggle"
-#~ msgstr "Trocar maximización horizontal da fiestra"
 
 #~ msgid ""
 #~ "Toggle the state of the window between horizontally maximized and\n"
@@ -2229,9 +3868,6 @@ msgstr "Páxina web do Sawfish"
 #~ "Mudar o estado da fiestra entre maximizada horizontalmente e\n"
 #~ "non maximizada."
 
-#~ msgid "Maximize window vertically toggle"
-#~ msgstr "Trocar maximización vertical da fiestra"
-
 #~ msgid ""
 #~ "Toggle the state of the window between vertically maximized and\n"
 #~ "unmaximized."
@@ -2239,35 +3875,20 @@ msgstr "Páxina web do Sawfish"
 #~ "Mudar o estado da fiestra entre maximizada verticalmente e non\n"
 #~ "maximizada."
 
-#~ msgid "Maximize fill window"
-#~ msgstr "Maximizar-encher fiestra"
-
 #~ msgid "Maximize the window without obscuring any other windows."
 #~ msgstr "Maximizar a fiestra sen cubrir ningunha outra."
 
-#~ msgid "Maximize fill window vertically"
-#~ msgstr "Maximizar-encher fiestra verticalmente"
-
 #~ msgid "Maximize the window vertically without obscuring any other windows."
 #~ msgstr "Maximizar a fiestra verticalmente sen cubrir ningunha outra."
-
-#~ msgid "Maximize fill window horizontally"
-#~ msgstr "Maximizar-encher fiestra horizontalmente"
 
 #~ msgid ""
 #~ "Maximize the window horizontally without obscuring any other windows."
 #~ msgstr "Maximizar a fiestra horizontalmente sen cubrir ningunha outra."
 
-#~ msgid "Maximize fill window toggle"
-#~ msgstr "Trocar maximización-enchido da fiestra"
-
 #~ msgid ""
 #~ "Toggle the state of the window between maximized-filled and unmaximized."
 #~ msgstr ""
 #~ "Mudar o estado da fiestra entre maximizada-enchida e non maximizada."
-
-#~ msgid "Maximize fill window horizontally toggle"
-#~ msgstr "Trocar maximización-enchido horizontal da fiestra"
 
 #~ msgid ""
 #~ "Toggle the state of the window between horizontally maximized-filled and\n"
@@ -2275,9 +3896,6 @@ msgstr "Páxina web do Sawfish"
 #~ msgstr ""
 #~ "Mudar o estado da fiestra entre maximizada-enchida horizontalmente e\n"
 #~ "non maximizada."
-
-#~ msgid "Maximize fill window vertically toggle"
-#~ msgstr "Trocar maximización-enchido vertical da fiestra"
 
 #~ msgid ""
 #~ "Toggle the state of the window between vertically maximized-filled and\n"
@@ -2287,16 +3905,8 @@ msgstr "Páxina web do Sawfish"
 #~ "non maximizada."
 
 #, fuzzy
-#~ msgid "Maximize window fullscreen"
-#~ msgstr "Trocar maximización da fiestra"
-
-#, fuzzy
 #~ msgid "Fullscreen maximize the window."
 #~ msgstr "Non ignorar a fiestra."
-
-#, fuzzy
-#~ msgid "Maximize window fullscreen toggle"
-#~ msgstr "Trocar maximización da fiestra"
 
 #, fuzzy
 #~ msgid ""
@@ -2305,28 +3915,14 @@ msgstr "Páxina web do Sawfish"
 #~ msgstr "Mudar o estado da fiestra entre maximizada e non maximizada."
 
 #, fuzzy
-#~ msgid "Maximize window fullxinerama"
-#~ msgstr "Trocar maximización da fiestra"
-
-#, fuzzy
-#~ msgid "Maximize window fullxinerama toggle"
-#~ msgstr "Trocar maximización da fiestra"
-
-#, fuzzy
 #~ msgid ""
 #~ "Toggle the state of the window between fullscreen maximized across all "
 #~ "Xinerama and unmaximized."
 #~ msgstr ""
 #~ "Mudar o estado da fiestra entre maximizada-enchida e non maximizada."
 
-#~ msgid "Shade window"
-#~ msgstr "Enrolar fiestra"
-
 #~ msgid "Display only the title bar of the window."
 #~ msgstr "Amosar só a barra de título da fiestra."
-
-#~ msgid "Unshade window"
-#~ msgstr "Desenrolar fiestra"
 
 #~ msgid ""
 #~ "If the window is shaded (see `shade-window'), restore it to it's usual\n"
@@ -2335,16 +3931,10 @@ msgstr "Páxina web do Sawfish"
 #~ "Se a fiestra está enrolada (mirar `shade-window'), restaurala ao seu\n"
 #~ "estado normal."
 
-#~ msgid "Toggle window shaded"
-#~ msgstr "Trocar o enrolamento da fiestra"
-
 #~ msgid ""
 #~ "Toggle the shaded (only the title bar is displayed) state of the window."
 #~ msgstr ""
 #~ "Mudar o estado de 'enrolada' (só se amosa a barra de título) da fiestra."
-
-#~ msgid "Raise window and transients"
-#~ msgstr "Elevar a fiestra e as temporais"
 
 #~ msgid ""
 #~ "Raise the current window to its highest allowed position in the stacking\n"
@@ -2353,18 +3943,12 @@ msgstr "Páxina web do Sawfish"
 #~ "Elevar a fiestra actual á posición máis alta permitida na pila.\n"
 #~ "Elevar tamén as fiestras temporais asociadas."
 
-#~ msgid "Lower window and transients"
-#~ msgstr "Baixar a fiestra e as temporais"
-
 #~ msgid ""
 #~ "Lower the current window to its lowest allowed position in the stacking\n"
 #~ "order. Also lower any transient windows that it has."
 #~ msgstr ""
 #~ "Baixar a fiestra actual á posición máis baixa permitida na pila.\n"
 #~ "Baixar tamén as fiestras temporais asociadas."
-
-#~ msgid "Raise lower window and transients"
-#~ msgstr "Elevar-Baixar a fiestra e as temporais"
 
 #~ msgid ""
 #~ "If the window is at its highest possible position, then lower it to its\n"
@@ -2376,36 +3960,18 @@ msgstr "Páxina web do Sawfish"
 #~ "máis baixa. Se non, elevala tanto como se poida. Cambia tamén o\n"
 #~ "nivel das fiestras temporais asociadas."
 
-#~ msgid "Insert workspace"
-#~ msgstr "Inserir escritorio"
-
-#~ msgid "Display window without focusing"
-#~ msgstr "Amosar a fiestra sen enfocar"
-
 #~ msgid "Display the workspace/viewport containing the window W."
 #~ msgstr "Amosar o escritorio/área virtual que contén a fiestra W."
-
-#~ msgid "Display window"
-#~ msgstr "Amosar a fiestra"
 
 #~ msgid "Display the workspace containing the window W, then focus on W."
 #~ msgstr "Amosar o escritorio que contén a fiestra W, e enfocala."
 
-#~ msgid "Gtkrc reload style"
-#~ msgstr "Recargar o estilo do gtkrc"
-
 #~ msgid "Reload the gtkrc settings."
 #~ msgstr "Recargar as opcións do gtkrc."
-
-#~ msgid "Describe key"
-#~ msgstr "Describir tecla"
 
 #~ msgid "Prompt for a key sequence, then print its binding."
 #~ msgstr ""
 #~ "Pedir unha secuencia de teclas, e escribir o comando ao que está asociada."
-
-#~ msgid "Quote event"
-#~ msgstr "Enviar evento"
 
 #~ msgid ""
 #~ "Sends the next key event directly to the focused client window, ignoring\n"
@@ -2414,204 +3980,89 @@ msgstr "Páxina web do Sawfish"
 #~ "Envía o seguinte evento de teclado directamente á fiestra cliente\n"
 #~ "enfocada, ignorando os atallos do xestor de fiestras."
 
-#~ msgid "prompt-keymap"
-#~ msgstr "Mapa de teclado da pregunta ao usuario"
-
-#~ msgid "Raise window"
-#~ msgstr "Elevar fiestra"
-
-#~ msgid "Lower window"
-#~ msgstr "Baixar fiestra"
-
-#~ msgid "Raise lower window"
-#~ msgstr "Elevar-Baixar fiestra"
-
-#~ msgid "wrap-around"
-#~ msgstr "circular"
-
-#~ msgid "stop"
-#~ msgstr "parar"
-
-#~ msgid "Activate viewport"
-#~ msgstr "Activar a área virtual"
-
 #~ msgid "Select the specified viewport."
 #~ msgstr "Activar a área virtual indicada."
-
-#~ msgid "Activate viewport column"
-#~ msgstr "Activar a columna da área virtual"
 
 #~ msgid "Select the specified viewport column."
 #~ msgstr "Activar a columna de área virtual indicada."
 
-#~ msgid "Activate viewport row"
-#~ msgstr "Activar a ringleira da área virtual"
-
 #~ msgid "Select the specified viewport row."
 #~ msgstr "Activar a ringleira de área virtual indicada."
-
-#~ msgid "Move window to viewport"
-#~ msgstr "Mover a fiestra á área virtual"
 
 #~ msgid "Move the current window to the specified viewport."
 #~ msgstr "Mover a fiestra á área virtual indicada."
 
-#~ msgid "Move viewport right"
-#~ msgstr "Mover a área virtual para a dereita"
-
 #~ msgid "Move the viewport one screen to the right."
 #~ msgstr "Mover a área virtual unha pantalla para a dereita."
-
-#~ msgid "Move viewport left"
-#~ msgstr "Mover a área virtual para a esquerda"
 
 #~ msgid "Move the viewport one screen to the left."
 #~ msgstr "Mover a área virtual un escritorio para a esquerda."
 
-#~ msgid "Move viewport up"
-#~ msgstr "Mover a área virtual para arriba"
-
 #~ msgid "Move the viewport one screen up."
 #~ msgstr "Mover a área virtual un escritorio para arriba."
 
-#~ msgid "Move viewport down"
-#~ msgstr "Mover a área virtual para abaixo"
-
 #~ msgid "Move the viewport one screen down."
 #~ msgstr "Mover a área virtual un escritorio para abaixo."
-
-#~ msgid "Move window right"
-#~ msgstr "Mover a fiestra para a dereita"
 
 #, fuzzy
 #~ msgid ""
 #~ "Move the window to the viewport on the right, and switch to that viewport."
 #~ msgstr "Mover a fiestra á área virtual da dereita."
 
-#~ msgid "Move window left"
-#~ msgstr "Mover a fiestra para a esquerda"
-
 #, fuzzy
 #~ msgid ""
 #~ "Move the window to the viewport on the left, and switch to that viewport."
 #~ msgstr "Mover a fiestra á área virtual da esquerda."
 
-#~ msgid "Move window up"
-#~ msgstr "Mover a fiestra para arriba"
-
 #, fuzzy
 #~ msgid "Move the window to the viewport above, and switch to that viewport."
 #~ msgstr "Mover a fiestra á área virtual da esquerda."
-
-#~ msgid "Move window down"
-#~ msgstr "Mover a fiestra para abaixo"
 
 #, fuzzy
 #~ msgid "Move the window to the viewport below, and switch to that viewport."
 #~ msgstr "Mover a fiestra á área virtual da esquerda."
 
-#, fuzzy
-#~ msgid "Animation"
-#~ msgstr "Accións"
-
-#, fuzzy
-#~ msgid "solid"
-#~ msgstr "Evitar"
-
-#, fuzzy
-#~ msgid "The default window animation mode"
-#~ msgstr "Método de animación das fiestras por defecto: \\w"
-
-#, fuzzy
-#~ msgid "Focus desktop"
-#~ msgstr "Modo de enfocado"
-
-#~ msgid "Delete window"
-#~ msgstr "Pechar a fiestra"
-
 #~ msgid "Delete the window."
 #~ msgstr "Pechar a fiestra."
-
-#~ msgid "Delete window safely"
-#~ msgstr "Pechar a fiestra con seguridade"
 
 #~ msgid "Delete the window, or beep if the window can't be closed safely."
 #~ msgstr "Pechar a fiestra, ou pitar se non é posible pechala con seguridade."
 
-#~ msgid "Uniquify window name"
-#~ msgstr "Forzar a unicidade do nome da fiestra"
-
 #~ msgid "Force the current window to have a unique title."
 #~ msgstr "Forzar que a fiestra actual teña un título único."
-
-#~ msgid "keep-going"
-#~ msgstr "continuar"
-
-#~ msgid "Popup workspace list"
-#~ msgstr "Amosar a lista de escritorios"
 
 #~ msgid "Display the menu containing the list of all workspaces."
 #~ msgstr "Amosar o menú que contén a lista dos escritorios."
 
-#~ msgid "Popup window list"
-#~ msgstr "Amosar a lista de fiestras"
-
 #~ msgid "Display the menu of all managed windows."
 #~ msgstr "Amosar o menú con tódalas fiestras xestionadas."
-
-#~ msgid "Next workspace"
-#~ msgstr "Escritorio seguinte"
 
 #~ msgid "Display the next workspace."
 #~ msgstr "Amosar o seguinte escritorio."
 
-#~ msgid "Previous workspace"
-#~ msgstr "Escritorio anterior"
-
 #~ msgid "Display the previous workspace."
 #~ msgstr "Amosar o escritorio anterior."
-
-#~ msgid "Send to next workspace"
-#~ msgstr "Enviar para o seguinte escritorio"
 
 #~ msgid "Move the window to the next workspace."
 #~ msgstr "Mover a fiestra ao seguinte escritorio."
 
-#~ msgid "Send to previous workspace"
-#~ msgstr "Enviar para o escritorio anterior"
-
 #~ msgid "Move the window to the previous workspace."
 #~ msgstr "Mover a fiestra ao escritorio anterior."
-
-#~ msgid "Copy to next workspace"
-#~ msgstr "Copiar ao seguinte escritorio"
 
 #~ msgid "Copy the window to the next workspace."
 #~ msgstr "Copiar a fiestra ao seguinte escritorio."
 
-#~ msgid "Copy to previous workspace"
-#~ msgstr "Copiar ao escritorio anterior"
-
 #~ msgid "Copy the window to the previous workspace."
 #~ msgstr "Copiar a fiestra ao escritorio anterior."
-
-#~ msgid "Append workspace and send"
-#~ msgstr "Engadir un escritorio ao final e enviar"
 
 #~ msgid ""
 #~ "Create a new workspace at the end of the list, and move the window to it."
 #~ msgstr "Crear un novo escritorio ao final da lista, e mover alí a fiestra."
 
-#~ msgid "Prepend workspace and send"
-#~ msgstr "Engadir escritorio ao inicio e enviar"
-
 #~ msgid ""
 #~ "Create a new workspace at the start of the list, and move the window to "
 #~ "it."
 #~ msgstr "Crear un novo escritorio ao inicio da lista, e mover alí a fiestra."
-
-#~ msgid "Merge next workspace"
-#~ msgstr "Mesturar co seguinte escritorio"
 
 #~ msgid ""
 #~ "Delete the current workspace. Its member windows are relocated to the "
@@ -2621,9 +4072,6 @@ msgstr "Páxina web do Sawfish"
 #~ "Eliminar o escritorio actual, e mover as súas fiestras ao seguinte "
 #~ "escritorio."
 
-#~ msgid "Merge previous workspace"
-#~ msgstr "Mesturar co anterior escritorio"
-
 #~ msgid ""
 #~ "Delete the current workspace. Its member windows are relocated to the\n"
 #~ "previous workspace."
@@ -2631,38 +4079,20 @@ msgstr "Páxina web do Sawfish"
 #~ "Eliminar o escritorio actual, e mover as súas fiestras ao escritorio "
 #~ "anterior."
 
-#~ msgid "Insert workspace after"
-#~ msgstr "Insertar escritorio despois"
-
 #~ msgid "Create a new workspace following the current workspace."
 #~ msgstr "Crear un novo escritorio despois do actual."
-
-#~ msgid "Insert workspace before"
-#~ msgstr "Insertar escritorio antes"
 
 #~ msgid "Create a new workspace before the current workspace."
 #~ msgstr "Crear un novo escritorio antes do actual."
 
-#~ msgid "Move workspace forwards"
-#~ msgstr "Mover o escritorio para adiante"
-
 #~ msgid "Move the current workspace one place to the right."
 #~ msgstr "Mover o escritorio actual unha posición para a dereita."
-
-#~ msgid "Move workspace backwards"
-#~ msgstr "Mover o escritorio para atrás"
 
 #~ msgid "Move the current workspace one place to the left."
 #~ msgstr "Mover o escritorio actual unha posición para a esquerda."
 
-#~ msgid "Delete empty workspaces"
-#~ msgstr "Eliminar os escritorios baleiros"
-
 #~ msgid "Delete any workspaces that don't contain any windows."
 #~ msgstr "Eliminar tódolos escritorios que non conteñan ningunha fiestra."
-
-#~ msgid "Delete window instance"
-#~ msgstr "Pechar a instancia da fiestra"
 
 #~ msgid ""
 #~ "Remove the copy of the window on the current workspace. If this is the\n"
@@ -2671,26 +4101,11 @@ msgstr "Páxina web do Sawfish"
 #~ "Eliminar a copia desta fiestra no escritorio actual. Se é a última\n"
 #~ "instancia que queda, eliminar a fiestra."
 
-#~ msgid "Activate workspace"
-#~ msgstr "Activar escritorio"
-
 #~ msgid "Select the N'th workspace."
 #~ msgstr "Activar o escritorio N."
 
-#~ msgid "Send to workspace"
-#~ msgstr "Enviar para o escritorio"
-
-#~ msgid "Move the current window to the N'th workspace."
-#~ msgstr "Mover a fiestra actual ao escritorio N."
-
-#~ msgid "Copy to workspace"
-#~ msgstr "Copiar ao escritorio"
-
 #~ msgid "Copy the current window to the N'th workspace."
 #~ msgstr "Copiar a fiestra actual ao escritorio N."
-
-#~ msgid "Select workspace interactively"
-#~ msgstr "Seleccionar o escritorio interactivamente"
 
 #~ msgid "Prompt for a workspace and switch to it."
 #~ msgstr "Preguntar por un escritorio e activalo."

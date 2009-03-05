@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.gnome-2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-09 10:44+0100\n"
+"POT-Creation-Date: 2009-03-05 08:31+0100\n"
 "PO-Revision-Date: 2003-06-15 09:44+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <mk@li.org>\n"
@@ -18,1046 +18,3494 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0\n"
 
-#: ../lisp/sawfish/gtk/widgets/alist.jl:37
-#: ../lisp/sawfish/ui/widgets/keymap.jl:66
+#. ../themes/Crux/theme.jl
+msgid "Crux Theme"
+msgstr "Тема Crux"
+
+#. ../themes/Crux/theme.jl
+msgid ""
+"Accent color for focused windows (if unset uses the GTK+ selection color)."
+msgstr ""
+"Нагласена боја за фокусирани прозори (ако не е сетирано, користи ја бојата "
+"за селекција од GTK+)."
+
+#. ../themes/Crux/theme.jl
+msgid "Display the window's icon in its menu button."
+msgstr "Прикажи ја иконата на прозорот во неговото мени копче."
+
+#. ../themes/Crux/theme.jl
+#, fuzzy
+msgid "Display title buttons to mimic: \\w"
+msgstr "Прикажувај ги копчињата од насловната линија како: \\w"
+
+#. ../themes/gradient/theme.jl
+msgid "Gradient Theme"
+msgstr "Тема Gradient"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/gradient/theme.jl
+msgid "horizontal"
+msgstr "хоризонтално"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/gradient/theme.jl
+msgid "vertical"
+msgstr "вертикално"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/gradient/theme.jl
+msgid "diagonal"
+msgstr "дијагонално"
+
+#. ../themes/gradient/theme.jl
+msgid "Direction of gradient in `gradient' frame style."
+msgstr "Насока на градацијата во стилот на рамки 'gradient'"
+
+#. ../themes/gradient/theme.jl
+msgid "`From' color of inactive frames in `gradient' frame style."
+msgstr "'Од' боја на неактивните рамки во 'gradient' стилот на рамки."
+
+#. ../themes/gradient/theme.jl
+msgid "`To' color of inactive frames in `gradient' frame style."
+msgstr "'До' боја на неактивните рамки во 'gradient' стилот на рамки."
+
+#. ../themes/gradient/theme.jl
+msgid "`From' color of active frames in `gradient' frame style."
+msgstr "'Од' боја на активните рамки во 'gradient' стилот на рамки."
+
+#. ../themes/gradient/theme.jl
+msgid "`To' color of active frames in `gradient' frame style."
+msgstr "'До' боја на активните рамки во 'gradient' стилот на рамки."
+
+#. ../themes/gradient/theme.jl
+msgid "Use less memory when creating gradients, possibly affecting quality."
+msgstr ""
+"Употребувај помалку меморија при креирање на градиенти, со можно влијание на "
+"квалитетот."
+
+#. ../themes/mono/theme.jl
+msgid "Mono Theme"
+msgstr "Тема Mono"
+
+#. ../themes/mono/theme.jl
+msgid "Color of inactive frames (if unset use GTK+ background color)."
+msgstr ""
+"Боја на неактивните рамки (ако не е сетирана, користи ја позадинската боја "
+"на GTK+)."
+
+#. ../themes/mono/theme.jl
+msgid "Color of active frames (if unset use GTK+ selection color)."
+msgstr ""
+"Боја на активните рамки (ако не е сетирана, користи ја бојата за избор на GTK"
+"+)"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/mono/theme.jl
+#, fuzzy
+msgid "left"
+msgstr "лево"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/mono/theme.jl
+#, fuzzy
+msgid "right"
+msgstr "десно"
+
+#. ../themes/mxflat/theme.jl
+#. ../themes/mono/theme.jl
+msgid "center"
+msgstr "центар"
+
+#. ../themes/mono/theme.jl
+msgid "Text is \\w justified in window titles."
+msgstr "Текстот е \\w порамнет во насловот на прозорите."
+
+#. ../themes/mxflat/theme.jl
+msgid "mxflat"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "title"
+msgstr "Состојба"
+
+#. ../themes/mxflat/theme.jl
+msgid "basic"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "gradient"
+msgstr "Тема Gradient"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "colors"
+msgstr "Одбери боја"
+
+#. ../themes/mxflat/theme.jl
+msgid "buttons"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "positions 1"
+msgstr "Позиција"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "positions 2"
+msgstr "Позиција"
+
+#. ../themes/mxflat/theme.jl
+msgid "keymaps 1"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "keymaps 2"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "borders"
+msgstr "Горен раб"
+
+#. ../themes/mxflat/theme.jl
+msgid "extended"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "normal"
+msgstr "Нормално"
+
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../themes/mxflat/theme.jl
+msgid "all"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#. ../lisp/sawfish/wm/stacking.jl
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "none"
+msgstr "ништо"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"decoration mode\n"
+"\n"
+"set the mode 'when to draw a titlebar and window buttons'. the decoration "
+"mode 'all' means that all windows, even transients/dialogs, will get a "
+"titlebar and buttons. none means no window will get any :-). usually "
+"transients only have a contents-border. this option is for reimplementing a "
+"sawfish feature that is gone in the latest version."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "titlebar height (9 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize title string\n"
+"\n"
+"see the tooltip for the 'title string' option below for more information. "
+"(NOTE: i hope the redrawing problems with this option are solved. if not, "
+"write an email please!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string\n"
+"\n"
+"the string you insert here will be your new title string. variables always "
+"start with a dollar-sign $ and are replaced with their actual values. to get "
+"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
+"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
+"string]. the following vars are built-in: $name, $fullname, $width, $width-"
+"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
+"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
+"if not, write an email please!"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"update title string periodically\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string update interval (1 - 1000000 s)\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string font\n"
+"\n"
+"you should really choose a better font. verdana bold 8 pt looks nice."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize title position\n"
+"\n"
+"by default the title string is centered horizontally and vertically."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "real-center"
+msgstr "центар"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string horizontal alignment\n"
+"\n"
+"'real-center' means to take the whole titlebar into account while centering "
+"the string. when selecting 'center' only the distance between the buttons is "
+"taken into account."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
+"\n"
+"the horizontal position of the title string can only be adjusted if the "
+"horizontal alignment is not 'center'. the range also depends on the setting "
+"of the option above. it the title string is already aligned left, you cannot "
+"adjust it to be even further left because there are button in the way."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "top"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "bottom"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "title string vertical alignment"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient titlebar background (experimental)\n"
+"\n"
+"when activating the gradient background the normal titlebar background "
+"colors will be ignored. besides the button background colors will be "
+"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
+"low value, ie high quality.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient mode\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient quality (1 best - 20 worst)\n"
+"\n"
+"the value here is the factor the calculated gradient image will be scaled "
+"down. this increases speed but decreases quality."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "rainbow"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "jamaica"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "rgb"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "custom"
+msgstr "Персонализирај"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient color mode\n"
+"\n"
+"the custom mode will respect the colors set in the list below."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used. besides the gradient color mode must be set to "
+"custom to activate this list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "reverse colors"
+msgstr "Одбери боја"
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused/highlighted titlebar colors hue (0 - 360)\n"
+"\n"
+"this value changes the hue of a color, by moving (0 - 360) degress around "
+"the color cycle...180 for example inverts the color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, c-format
+msgid ""
+"unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
+"color)\n"
+"\n"
+"the saturation of a color is a measurement of the color intensity"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, c-format
+msgid ""
+"unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
+"color)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"  focused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"  focused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize extended title string colors\n"
+"\n"
+"you can customize additional colors of the title string. if you deactivate "
+"this, these colors will be set to the focused title string color."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked title string color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "default-9"
+msgstr "Стандардно"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "default-12"
+msgstr "Стандардно"
+
+#. ../themes/mxflat/theme.jl
+msgid "square-6"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-9"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-12"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-15"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "square-18"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "ball-9"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "ball-12"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button icon set (experimental)\n"
+"\n"
+"the number at the end is the width/height of the button icons in the icon "
+"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button size\n"
+"\n"
+"by default the button size follows the size of the titlebar, but by "
+"activating this you can set it to something different."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"buttons size (1 - 1000 pixel)\n"
+"\n"
+"a buttons size that is bigger than your current titlebar height is ignored."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button vertical alignment\n"
+"\n"
+"if a button is smaller than the titlebar you might want to set its vertical "
+"alignment."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"scale button icons (experimental)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"display window icon on menu button\n"
+"\n"
+"many people like having the window-icon displayed on the menu-button. this "
+"icon is defined by the application itself and is also shown in your pager "
+"and task-list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "menu icon scale (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "button distance (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "buttons left offset (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "buttons right offset (0 - 1000 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
+"\n"
+"enabling this will allow you to set the positon of each button in the "
+"titlebar manually. a negative/positiv value means the button will be drawn "
+"on left/right side of the titlebar."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "title-height"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "pixel"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button position model\n"
+"\n"
+"'titel-height' means calculate position as multiple of title height. when "
+"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
+"mind that several buttons might slide on top of each other. 'none' means no "
+"buttons at all."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "menu button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "shade button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "iconify button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "maximize button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "close button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "sticky button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "previous workspace button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "next workspace button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "configure button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "info button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "always-on-top button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "lock button position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize sticky button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: toggle sticky "
+"state of window"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "mxflat:sticky-button-keymap"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize previous button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"previous workspace - button2 workspace-list - button3 send window to first "
+"workspace - button6 pack window left"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "mxflat:previous-button-keymap"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize next button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"next workspace - button2 workspace-list - button3 send window to last "
+"workspace - button6 pack window right"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "mxflat:next-button-keymap"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: send window to next workspace - button2 workspace-list - button3 "
+"send window to last workspace - button6 pack window right"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize configure button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: start sawfish-"
+"ui - button3: toggle custom title string"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "mxflat:configure-button-keymap"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: start sawfish-ui - button3: toggle custom title string"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize info button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: window list - "
+"button3 window snooper (not included by default)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "mxflat:info-button-keymap"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"always on top depth (-1000 - 1000)\n"
+"\n"
+"a window will have this depth after you have pressed the always-on-top "
+"button. 0 is the normal window level. every positive value means above other "
+"windows, a negative value means below. keept it at a positive value in order "
+"to have the always-on-top button do it's job."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize always-on-top button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: sets window "
+"depth to the adjusted value"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "mxflat:always-on-top-button-keymap"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize look button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: lock window "
+"position"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "mxflat:lock-button-keymap"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize button-colors\n"
+"\n"
+"when you active this you will be able to set custom button colors. by "
+"default the button colors depend on the titlebar colors."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked button background color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked button foreground color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width (0 - 1000 pixel)\n"
+"\n"
+"set the width border around the window."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width for maximized windows (0 - 1000 pixel)\n"
+"\n"
+"when you like having a big border around your windows you might have noticed "
+"that sawfish still draws that big border when the window is maximized. if "
+"you don't want that, set the border width for maximized windows smaller than "
+"the border width for unmaximized windows. (NOTE: this feature is still buggy "
+"as sawfish does not resize the windows correctly yet, so the best might be "
+"to set it to the normal border width.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize border for focused windows (experimental)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width for focused windows (0 - 1000 pixel)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title-contents border width (0 - 1000 pixel)\n"
+"\n"
+"sets the widths of the line between titlebar and contents window"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border offset (-1000 - 1000 pixel)\n"
+"\n"
+"adjust the point where the border actually starts. many gtk2 apps draw a "
+"small black border around their contents window and this is just ugly when "
+"sawfish draws another border around the window. with a border offset of -1 "
+"the sawfish window border will overlay the gtk2 border exactly."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"keep window borders and corners at their place when shading a window\n"
+"\n"
+"when shading a window borders and corners will stay where they were and not "
+"merge with the titlebar."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"show window corners\n"
+"\n"
+" the corners are used to resize a window in two directions at the same time. "
+"usually the width and length of window corners are determined by the border "
+"width but you can adjust them below."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"corners length adjustement (-1 - 100 pixel)\n"
+"\n"
+"increasing the corner length will grow the window corners along the window "
+"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
+"grab the 1 pixel corner to be able to resize the window in two directions; "
+"thus, make it bigger."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "outside"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "inside"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "corner direction"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"corners width adjustement (0 - 100 pixel)\n"
+"\n"
+"this option makes the window corners broader. with a border width of 1 pixel "
+"it is hard to grab this 1 pixel corner to be able to resize the window in "
+"two directions; thus, make it bigger."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow (experimental)\n"
+"\n"
+"draw a small additional border around your windows emulating a solid shadow "
+"effect. use the options below to adjust its width and direction. (NOTE: this "
+"is VERY cpu intensive and might slow down your computer noticably. so turn "
+"it on at your own risk.)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "fake shadow only on focused windows"
+msgstr "Правоаголна слика за нефокусирани прозори."
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "north"
+msgstr "не"
+
+#. ../themes/mxflat/theme.jl
+msgid "east"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "south"
+msgstr "не"
+
+#. ../themes/mxflat/theme.jl
+msgid "west"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "north-east"
+msgstr "не"
+
+#. ../themes/mxflat/theme.jl
+#, fuzzy
+msgid "north-west"
+msgstr "не"
+
+#. ../themes/mxflat/theme.jl
+msgid "south-east"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "south-west"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow light source\n"
+"\n"
+"set the direction of the fake shadow. usually only 2 or 3 borders of your "
+"window have a fake shadow. this depends on where the light comes from."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow light distance (0 - 100)\n"
+"\n"
+"this option has only an effect on the north, east, south and west light "
+"sources. the further away the light source is, the smaller will the two "
+"'side' shadows be."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "fake shadow width (0 - 100 pixel)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "shadow color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize border colors\n"
+"\n"
+"you can customize your border colors here. if you deactivate this, these "
+"colors will be set to the focused title string color."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused highlighted border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused highlighted border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "  focused clicked border color"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid "unfocused clicked border color"
+msgstr ""
+
+#. ../themes/simple/theme.jl
+msgid "Simple Theme"
+msgstr "Проста тема"
+
+#. ../themes/simple/theme.jl
+msgid "Color of inactive frames in `simple' frame style."
+msgstr "Боја на неактивните рамки во 'простиот' стил на рамки."
+
+#. ../themes/simple/theme.jl
+msgid "Color of active frames in `simple' frame style."
+msgstr "Боја на активните рамки во 'простиот' стил на рамки."
+
+#. ../themes/smaker/theme.jl
+msgid "SMaker Theme"
+msgstr "Тема SMaker"
+
+#. ../themes/smaker/theme.jl
+msgid "Use black-on-white button images."
+msgstr "Користи црно-на-бело слики на копчиња."
+
+#. ../themes/smaker/theme.jl
+msgid "Color to use when drawing text."
+msgstr "Боја што се користи при цртање на текст."
+
+#. ../themes/smaker/theme.jl
+#, fuzzy
+msgid "Bar image for unfocused windows."
+msgstr "Правоаголна слика за нефокусирани прозори."
+
+#. ../themes/smaker/theme.jl
+#, fuzzy
+msgid "Bar image for focused windows."
+msgstr "Правоаголна слика за фокусирани прозори."
+
+#. ../themes/smaker/theme.jl
+#, fuzzy
+msgid "Bar image for highlighted parts."
+msgstr "Правоаголна слика за осветлени делови."
+
+#. ../themes/smaker/theme.jl
+#, fuzzy
+msgid "Bar image for clicked parts."
+msgstr "Правоаголна слика за кликнати делови."
+
+#. ../themes/smaker/theme.jl
+msgid "Height of title bar."
+msgstr "Висина на насловната лента."
+
+#. ../themes/smaker/theme.jl
+msgid "Width of window border."
+msgstr "Ширина на раб на прозор."
+
+#. ../themes/smaker/theme.jl
+#, fuzzy
+msgid "Border width of bar images."
+msgstr "Ширина на работ од правоаголни слики."
+
+#. ../lisp/sawfish/gtk/widget.jl
+#, c-format
+msgid "No matching item for %S"
+msgstr "Не постои предмет што се совпаѓа со %S"
+
+#. ../lisp/sawfish/gtk/widget.jl
+msgid "** unknown widget **  "
+msgstr "** непознат елемент **  "
+
+#. ../lisp/sawfish/ui/widgets/keymap.jl
+#. ../lisp/sawfish/gtk/widgets/alist.jl
 #, fuzzy
 msgid "Key"
 msgstr "Копче"
 
-#: ../lisp/sawfish/gtk/widgets/alist.jl:38
+#. ../lisp/sawfish/gtk/widgets/alist.jl
 #, fuzzy
 msgid "Value"
 msgstr "Вредност"
 
-#: ../lisp/sawfish/gtk/widgets/color.jl:40
+#. ../lisp/sawfish/gtk/widgets/color.jl
 msgid "Select color"
 msgstr "Одбери боја"
 
-#: ../lisp/sawfish/gtk/widgets/file.jl:33
-#: ../lisp/sawfish/gtk/widgets/font.jl.in:45
+#. ../lisp/sawfish/gtk/widgets/font.jl
+#. ../lisp/sawfish/gtk/widgets/file.jl
 #, fuzzy
 msgid "Browse..."
 msgstr "Разгледај..."
 
-#: ../lisp/sawfish/gtk/widgets/file.jl:43
+#. ../lisp/sawfish/gtk/widgets/file.jl
 #, fuzzy
 msgid "Select file"
 msgstr "Избери датотека"
 
-#: ../lisp/sawfish/gtk/widgets/font.jl.in:55
+#. ../lisp/sawfish/gtk/widgets/font.jl
 msgid "Select font"
 msgstr "Одбери фонт"
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:53
+#. ../lisp/sawfish/gtk/widgets/list.jl
 #, fuzzy
 msgid "Add..."
 msgstr "Додај..."
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:54
+#. ../lisp/sawfish/gtk/widgets/list.jl
 #, fuzzy
 msgid "Delete"
 msgstr "Избриши"
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:55
+#. ../lisp/sawfish/gtk/widgets/list.jl
 #, fuzzy
 msgid "Edit..."
 msgstr "Уреди..."
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:88
-#: ../lisp/sawfish/gtk/widgets/list.jl:89
+#. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add:"
 msgstr "Додади:"
 
-#: ../lisp/sawfish/gtk/widgets/list.jl:120
-#: ../lisp/sawfish/gtk/widgets/list.jl:122
+#. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Edit:"
 msgstr "Уреди:"
 
-#: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:32
-#: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:36
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
 #, fuzzy
 msgid "Yes"
 msgstr "Да"
 
-#: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:36
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
 #, fuzzy
 msgid "No"
 msgstr "Не"
 
-#: ../lisp/sawfish/gtk/widget.jl:371
-#, librep-format
-msgid "No matching item for %S"
-msgstr "Не постои предмет што се совпаѓа со %S"
-
-#: ../lisp/sawfish/gtk/widget.jl:501
-#, librep-format
-msgid "** unknown widget **  "
-msgstr "** непознат елемент **  "
-
-#: ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl:33
-#: ../lisp/sawfish/ui/widgets/workspace-geometry.jl:33
-msgid "Workspaces:"
-msgstr "Работни простори"
-
-#: ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl:34
-#: ../lisp/sawfish/ui/widgets/workspace-geometry.jl:34
-#, fuzzy
-msgid "Columns:"
-msgstr "Колони:"
-
-#: ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl:35
-#: ../lisp/sawfish/ui/widgets/workspace-geometry.jl:35
-#, fuzzy
-msgid "Rows:"
-msgstr "Редици:"
-
-#: ../lisp/sawfish/ui/apply.jl:87
-#, librep-format
+#. ../lisp/sawfish/ui/apply.jl
+#, c-format
 msgid "While changing %s:"
 msgstr "Додека го променувам %s:"
 
-#: ../lisp/sawfish/ui/apply.jl:109
+#. ../lisp/sawfish/ui/apply.jl
 msgid "Sawfish Error"
 msgstr "Sawfish грешка"
 
-#: ../lisp/sawfish/ui/shell.jl:104 ../lisp/sawfish/ui/shell.jl:105
+#. ../lisp/sawfish/ui/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Содржина:"
+
+#. ../lisp/sawfish/ui/shell.jl
 #, fuzzy
 msgid "Sawfish Configurator"
 msgstr "Sawfish конфигуратор"
 
-#: ../lisp/sawfish/ui/layouts/keymaps.jl:53
-msgid "Context:"
-msgstr "Содржина:"
-
-#: ../lisp/sawfish/ui/widgets/command.jl:52
-#: ../lisp/sawfish/ui/widgets/keymap.jl:66 ../lisp/sawfish/wm/commands.jl:372
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/ui/widgets/keymap.jl
+#. ../lisp/sawfish/ui/widgets/command.jl
 #, fuzzy
 msgid "Command"
 msgstr "Команда"
 
-#: ../lisp/sawfish/ui/widgets/command.jl:66
+#. ../lisp/sawfish/ui/widgets/command.jl
 msgid "Undocumented"
 msgstr "Недокументирани"
 
-#: ../lisp/sawfish/ui/widgets/event.jl:35
-#: ../lisp/sawfish/ui/widgets/match-window.jl:53
+#. ../lisp/sawfish/ui/widgets/match-window.jl
+#. ../lisp/sawfish/ui/widgets/event.jl
 msgid "Grab..."
 msgstr "Грабни..."
 
-#: ../lisp/sawfish/ui/widgets/keymap.jl:54
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Работни простори"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+#, fuzzy
+msgid "Columns:"
+msgstr "Колони:"
+
+#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
+#, fuzzy
+msgid "Rows:"
+msgstr "Редици:"
+
+#. ../lisp/sawfish/ui/widgets/keymap.jl
 #, fuzzy
 msgid "Edit Binding"
 msgstr "Промени мапирање"
 
-#: ../lisp/sawfish/ui/widgets/keymap.jl:85
+#. ../lisp/sawfish/ui/widgets/keymap.jl
 msgid "Key:"
 msgstr "Клуч:"
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:42
-#: ../lisp/sawfish/ui/widgets/match-window.jl:242
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "Matchers"
 msgstr ""
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:119
-#: ../lisp/sawfish/ui/widgets/match-window.jl:242
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 #, fuzzy
 msgid "Actions"
 msgstr "Дејства"
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:207
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 msgid "not"
 msgstr "не"
 
-#: ../lisp/sawfish/ui/widgets/match-window.jl:228
+#. ../lisp/sawfish/ui/widgets/match-window.jl
 #, fuzzy
 msgid "Match Window Properties"
 msgstr "Совпадни својства на прозори"
 
-#: ../lisp/sawfish/wm/autoload.jl:158 ../lisp/sawfish/wm/autoload.jl:159
-#: ../lisp/sawfish/wm/commands/viewport-linear.jl:51
-#: ../lisp/sawfish/wm/commands/viewport-linear.jl:63
+#. ../lisp/sawfish/wm/animation/outline.jl
+msgid "Animation Outline Coordinates"
+msgstr ""
+
+#. ../lisp/sawfish/wm/animation/outline.jl
+#, fuzzy
+msgid "Animation Steps"
+msgstr "Дејства"
+
+#. ../lisp/sawfish/wm/animation/outline.jl
+#, fuzzy
+msgid "Animation Delay"
+msgstr "Дејства"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Window Cycling"
+msgstr "Кружи низ прозори"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+#. ../lisp/sawfish/wm/autoload.jl
+#, fuzzy
+msgid "Sound"
+msgstr "Звук"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/autoload.jl
+#, fuzzy
+msgid "Matched Windows"
+msgstr "Еднакви Прозори"
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tooltips"
+msgstr "Кратки совети"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+#. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
 msgstr "Индекс:"
 
-#: ../lisp/sawfish/wm/commands.jl:365
+#. ../lisp/sawfish/wm/commands/cycle.jl
+#, fuzzy
+msgid "Next workspace window"
+msgstr "Работен простор"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Previous workspace window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+#, fuzzy
+msgid "Next window"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+#, fuzzy
+msgid "Previous window"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Describe symbol"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos function"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos variable"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome toggle skip winlist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome set skip winlist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome clear skip winlist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome toggle skip tasklist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome set skip tasklist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome clear skip tasklist"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome logout"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome www page"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome help browser"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Gnome about"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Iconify group"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Uniconify group"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Iconify transient group"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Uniconify transientgroup"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Make group sticky"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Make group unsticky"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Toggle group sticky"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Send group to current workspace"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Send group to next workspace"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Send group to previous workspace"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group to current viewport"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Move group down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+#, fuzzy
+msgid "Raise group"
+msgstr "група"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+#, fuzzy
+msgid "Lower group"
+msgstr "група"
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Raise lower group"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Raise group depth"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Lower group depth"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/groups.jl
+#, fuzzy
+msgid "Delete group"
+msgstr "Избриши"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Growing and packing of windows"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "always"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "never"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether and how to move the pointer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into windows on a different depth."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether to bump into ignored windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow window left"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow window up"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Grow window down"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show faq"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show news"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show programmer manual"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/help.jl
+#, fuzzy
+msgid "Help show homepage"
+msgstr "Web страната на Sawfish"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help about"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Number of pixels to move pointer in."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor right fine"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor left fine"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor up fine"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move cursor down fine"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "opaque"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "box"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "cross"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "elliptical"
+msgstr "вертикално"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "draft"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "How windows being moved are animated"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "How windows being resized are animated"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Raise windows when they are moved or resized."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Show current position of windows while moving."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Show current dimensions of windows while resizing."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "region"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "border"
+msgstr "Горен раб"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "grab"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "border-grab"
+msgstr "border-keymap"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "How to choose window edges when resizing."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Distance in pixels before window edges align with each other.\n"
+"\n"
+"When moving a window, this option lets you align one of its edges with an "
+"edge of another window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Move window interactively"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Resize window interactively"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move selected window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize selected window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click if focused"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise or pass through click"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise window and pass through click"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise group and pass through click"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise transients and pass through click"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Shrinking and Yanking of windows"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "The minimum height or width to which a window may be shrunk."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "The minimum amount of window left visible, if yanked over the edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Shrink window left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Shrink window right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Shrink window up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Shrink window down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Yank window left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Yank window right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Yank window up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Yank window down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window add row"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window subtract row"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window add column"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window subtract column"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move viewport next"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move viewport previous"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move window previous"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move window next"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Set viewport linear"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Set window viewport linear"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Display window names and icons while cycling through windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include iconified windows when cycling."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include windows on all workspaces when cycling."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include windows on all viewports when cycling."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#, fuzzy
+msgid "cycle-keymap"
+msgstr "title-keymap"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr ""
+"Мапа што ги содржи поврзувањатаактивни кога клиентскиот прозор е фокусиран."
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "The program launched by the `xterm' command."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Arguments given to the `xterm' command."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/xterm.jl
+#, fuzzy
+msgid "Xterm"
+msgstr "Друго"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command"
+msgstr "Повикај команда"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Run shell command"
+msgstr "Изврши команда"
+
+#. ../lisp/sawfish/wm/commands.jl
 #, fuzzy
 msgid "Command:"
 msgstr "Команда:"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:155
-msgid "Grow left"
-msgstr ""
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command sequence"
+msgstr "Командна секвенца"
 
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:156
-msgid "Grow right"
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:157
-msgid "Grow up"
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:158
-msgid "Grow down"
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:159
-msgid "Pack left"
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:160
-msgid "Pack right"
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:161
-msgid "Pack up"
-msgstr ""
-
-#: ../lisp/sawfish/wm/commands/grow-pack.jl:162
-msgid "Pack down"
-msgstr ""
-
-#: ../lisp/sawfish/wm/ext/audio-events.jl:75
+#. ../lisp/sawfish/wm/commands.jl
 #, fuzzy
-msgid "Event"
-msgstr "Настан"
+msgid "Quit"
+msgstr "Напушти"
 
-#: ../lisp/sawfish/wm/ext/audio-events.jl:76
+#. ../lisp/sawfish/wm/commands.jl
 #, fuzzy
-msgid "Audio file"
-msgstr "Аудио датотека"
+msgid "Restart"
+msgstr "Рестартирај"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:82
-msgid "No errors."
-msgstr ""
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Destroy window"
+msgstr "Уништи го прозорот"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:70
-#, fuzzy
-msgid "Placement"
-msgstr "Сместување"
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Kill client"
+msgstr "Убиј го клиентот"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:81
+#. ../lisp/sawfish/wm/commands.jl
+msgid "No operation"
+msgstr "Нема операција"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command with output to screen"
+msgstr "Повикај команда со излез на екранот"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
 #, fuzzy
 msgid "Focus"
 msgstr "Фокусирање"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:87
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Помести/Промени големина"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
 #, fuzzy
 msgid "Appearance"
 msgstr "Изглед"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:90
+#. ../lisp/sawfish/wm/custom.jl
+#, fuzzy
+msgid "Workspaces"
+msgstr "Работни простори"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "Поврзувања"
+
+#. ../lisp/sawfish/wm/custom.jl
+#, fuzzy
+msgid "Mini/Maximizing"
+msgstr "Криење и Раширување"
+
+#. ../lisp/sawfish/wm/custom.jl
+#, fuzzy
+msgid "Miscellaneous"
+msgstr "Разно"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+#, fuzzy
+msgid "Placement"
+msgstr "Сместување"
+
+#. ../lisp/sawfish/wm/customize.jl
+#, fuzzy
+msgid "Customize"
+msgstr "Персонализирај"
+
+#. ../lisp/sawfish/wm/ext/3d-hack.jl
+msgid "3d hack"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Play sound effects for window events."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+#, fuzzy
+msgid "Event"
+msgstr "Настан"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+#, fuzzy
+msgid "Audio file"
+msgstr "Аудио датотека"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+#, fuzzy
+msgid "Auto-Raise"
+msgstr "Крени"
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+msgid "Raise windows when they are focused."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/auto-raise.jl
+msgid "Delay in milliseconds until focused windows are raised."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Edge Flipping"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "viewport"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+#, fuzzy
+msgid "workspace"
+msgstr "Работен простор"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Only flip when interactively moving a window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Milliseconds to delay before edge flipping."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Beep when errors occur."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+#, fuzzy
+msgid "nowhere"
+msgstr "Долни"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "screen"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "standard-error"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+#, fuzzy
+msgid "both"
+msgstr "не"
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display error messages to: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "No errors."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display errors"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid "Infinite Desktop"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid "Simulate an infinite desktop (Conflicts edge-flipping)."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid "Amount to move the workspace."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid "Amount to move the cursor after moving the workspace."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Name"
+msgstr "Име"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Class"
+msgstr "Класа"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Icon Name"
+msgstr "Име на Икона"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Role"
+msgstr "Улога"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Host"
+msgstr "Хост"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Locale"
+msgstr "Локале"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignore program position"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Place mode"
+msgstr "Сместување"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Position"
+msgstr "Позиција"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Dimensions"
+msgstr "Димензии"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Workspace"
+msgstr "Работен простор"
+
+#. ../lisp/sawfish/wm/viewport.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Viewport"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Depth"
+msgstr "Длабочина"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Placement weight"
+msgstr "Сместување"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Maximized"
+msgstr "Најголемо"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Raise on focus"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus when mapped"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never focus"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus click through"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Focus mode"
+msgstr "Фокусирање"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Frame type"
+msgstr "Промени го стилот на рамка"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Frame style"
+msgstr "Промени го стилот на рамка"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Iconified"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Shaded"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Sticky"
+msgstr "Лепливо"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Sticky viewport"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Group"
+msgstr "Група"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Ungrouped"
+msgstr "група"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Cycle skip"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Window list skip"
+msgstr "Кружи низ прозори"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Task list skip"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Unique name"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Auto gravity"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Shade hover"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Transients above"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignore stacking requests"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
 msgid "State"
 msgstr "Состојба"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:102
+#. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
 msgid "Other"
 msgstr "Друго"
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:82
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Shade Hover"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid ""
+"Enable shade-hover mode.\n"
+"\n"
+"(Temporarily unshades windows while the mouse pointer is over them.)"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Delay in milliseconds before unshading windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
+msgid "Raise windows when they are unshaded."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Display tooltips for window frames."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Show full documentation in tooltips."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Number of milliseconds before displaying tooltips."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Number of milliseconds before removing tooltips."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Font used to display tooltips, or nil for default."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips background"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips foreground"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _position"
 msgstr ""
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:83
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _dimensions"
 msgstr ""
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:84
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _attributes"
 msgstr ""
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:86
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr ""
 
-#: ../lisp/sawfish/wm/ext/window-history.jl:376
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "History"
+msgstr "Историја"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "Automatically remember window positions."
+msgstr "Автоматски препрочитај ги темите кога ќе се променат."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "Automatically remember window sizes."
+msgstr "Автоматски препрочитај ги темите кога ќе се променат."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "Automatically remember other window attributes."
+msgstr "Автоматски препрочитај ги темите кога ќе се променат."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "Don't automatically remember details of transient windows."
+msgstr "Автоматски препрочитај ги темите кога ќе се променат."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save position"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save dimensions"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save attributes"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history forget"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history clear"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
 msgstr ""
 
-#: ../lisp/sawfish/wm/frames.jl:512
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace down"
+msgstr "Работно Место %d"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace up"
+msgstr "Работен простор"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace left"
+msgstr "Работен простор"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Workspace right"
+msgstr "Работен простор"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace down"
+msgstr "Работен простор"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace up"
+msgstr "Работен простор"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace left"
+msgstr "Работен простор"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send to workspace right"
+msgstr "Работен простор"
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Кога покажувачот од глувчето влијае на фокусот за внесување"
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Модот кликни-за-фокус го предава кликот до апликацијата."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "Wether focusing a window doesn't change it's position in the stack."
+msgstr ""
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default frame style:"
+msgstr "Стандарден стил на рамка:"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Automatically reload themes when they are updated."
+msgstr "Автоматски препрочитај ги темите кога ќе се променат."
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default font: \\w"
+msgstr "Стандарден фонт: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Edit frame style"
+msgstr "Промени го стилот на рамка"
+
+#. ../lisp/sawfish/wm/frames.jl
 #, fuzzy
 msgid "Default"
 msgstr "Стандардно"
 
-#: ../lisp/sawfish/wm/frames.jl:519
+#. ../lisp/sawfish/wm/frames.jl
 #, fuzzy
 msgid "Normal"
 msgstr "Нормално"
 
-#: ../lisp/sawfish/wm/frames.jl:522
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Title-only"
 msgstr "Само наслов"
 
-#: ../lisp/sawfish/wm/frames.jl:525
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Border-only"
 msgstr "Само раб"
 
-#: ../lisp/sawfish/wm/frames.jl:528
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Top-border"
 msgstr "Горен раб"
 
-#: ../lisp/sawfish/wm/frames.jl:531
+#. ../lisp/sawfish/wm/frames.jl
 #, fuzzy
 msgid "None"
 msgstr "Ништо"
 
-#. add some GNOME help menus
-#: ../lisp/sawfish/wm/gnome/integration.jl:61 ../lisp/sawfish/wm/menus.jl:124
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/gnome/integration.jl
 #, fuzzy
 msgid "_Help"
 msgstr "_Помош"
 
-#: ../lisp/sawfish/wm/gnome/integration.jl:64
+#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "_GNOME Help..."
 msgstr ""
 
-#: ../lisp/sawfish/wm/gnome/integration.jl:65
+#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "GNOME WWW..."
 msgstr ""
 
-#: ../lisp/sawfish/wm/gnome/integration.jl:66
+#. ../lisp/sawfish/wm/gnome/integration.jl
 msgid "About GNOME..."
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:86
+#. ../lisp/sawfish/wm/gnome/menus.jl
+msgid "Gnome menus update"
+msgstr ""
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "global-keymap"
+msgstr "глобална мапа"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active anywhere."
+msgstr "Мапа што ги содржи поврзувањата активни насекаде"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "window-keymap"
+msgstr "прозор-мапа"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr ""
+"Мапа што ги содржи поврзувањатаактивни кога клиентскиот прозор е фокусиран."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "root-window-keymap"
+msgstr "root-window-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Мапа што содржи поврзувања кои се активни кога поинтерот е во коренскиот "
+"прозор\n"
+"(или кога ниеден прозор не е фокусиран)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "title-keymap"
+msgstr "title-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Мапа што содржи поврзувања кои се активни кога поинтерот се наоѓа на "
+"насловната лента\n"
+"од прозорот (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "border-keymap"
+msgstr "border-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Мапа што ги содржи поврзувањата кои се активни кога покажувачот се наоѓа на "
+"работ од \n"
+"прозор. (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "close-button-keymap"
+msgstr "глобална мапа"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Мапа што содржи поврзувања кои се активни кога поинтерот се наоѓа на "
+"насловната лента\n"
+"од прозорот (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "iconify-button-keymap"
+msgstr ""
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Мапа што содржи поврзувања кои се активни кога поинтерот се наоѓа на "
+"насловната лента\n"
+"од прозорот (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "maximize-button-keymap"
+msgstr ""
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Мапа што содржи поврзувања кои се активни кога поинтерот се наоѓа на "
+"насловната лента\n"
+"од прозорот (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "menu-button-keymap"
+msgstr "title-keymap"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Мапа што содржи поврзувања кои се активни кога поинтерот се наоѓа на "
+"насловната лента\n"
+"од прозорот (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "shade-button-keymap"
+msgstr ""
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Мапа што ги содржи поврзувањата кои се активни кога покажувачот се наоѓа на "
+"работ од \n"
+"прозор. (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Modifier key(s) used for default shortcuts."
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Mi_nimize"
 msgstr "Минимизирај"
 
-#: ../lisp/sawfish/wm/menus.jl:91
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Unma_ximize"
 msgstr "Максимизирај"
 
-#: ../lisp/sawfish/wm/menus.jl:92
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Ma_ximize"
 msgstr "Максимизирај"
 
-#: ../lisp/sawfish/wm/menus.jl:96
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Move"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:97
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Resize"
 msgstr "Помести/Промени големина"
 
-#: ../lisp/sawfish/wm/menus.jl:98
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Close"
 msgstr "_Затвори"
 
-#: ../lisp/sawfish/wm/menus.jl:100
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Toggle"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:101
+#. ../lisp/sawfish/wm/menus.jl
 msgid "In _group"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:102
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Send window to"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:103
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Previous workspace"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:104
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Next workspace"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:105
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Copy to p_revious"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:106
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Copy to ne_xt"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:107
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Stac_king"
 msgstr "Подредување"
 
-#: ../lisp/sawfish/wm/menus.jl:108
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Raise"
 msgstr "Крени"
 
-#: ../lisp/sawfish/wm/menus.jl:109
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Lower"
 msgstr "Долни"
 
-#: ../lisp/sawfish/wm/menus.jl:110
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Upper layer"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:111
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Lo_wer layer"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:112
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Frame ty_pe"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:113
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "Frame sty_le"
 msgstr "Промени го стилот на рамка"
 
-#: ../lisp/sawfish/wm/menus.jl:120
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Windows"
 msgstr "_Прозорец"
 
-#: ../lisp/sawfish/wm/menus.jl:121
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Work_spaces"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:122
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Programs"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:123
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Customize"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:125
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_FAQ..."
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:126
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_News..."
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:127
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_WWW page..."
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:128
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Manual..."
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:129
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_About Sawfish..."
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:131
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Restart"
 msgstr "Рестартирај"
 
-#: ../lisp/sawfish/wm/menus.jl:132
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_Quit"
 msgstr "Напушти"
 
-#: ../lisp/sawfish/wm/menus.jl:354
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup window menu"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup root menu"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup apps menu"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
 msgid "_All settings"
 msgstr "_Подесувања"
 
-#: ../lisp/sawfish/wm/menus.jl:361
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
 msgstr ""
 
-#: ../lisp/sawfish/wm/state/iconify.jl:256
+#. ../lisp/sawfish/wm/placement/stagger.jl
+msgid "Distance between successive placements in `stagger' placement mode."
+msgstr ""
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing windows: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing dialog windows: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#. ../lisp/sawfish/wm/stacking.jl
+#, fuzzy
+msgid "Stacking"
+msgstr "Подредување"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr ""
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Keep transient windows stacked above: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise single window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower single window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise lower single window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise window depth"
+msgstr ""
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower window depth"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "transients"
+msgstr "Тема Gradient"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "group"
+msgstr "група"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimizing a window also removes its: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Unminimizing a window also restores its: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "Iconify window"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "Uniconify window"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle window iconified"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Iconify workspace windows"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "Make window sticky"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+#, fuzzy
+msgid "Make window unsticky"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle window sticky"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr ""
 
-#: ../lisp/sawfish/wm/state/ignored.jl:99
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Make window ignored"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Make window not ignored"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window ignored"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window never focus"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window cycle skip"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle window list skip"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle task list skip"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
 msgstr ""
 
-#: ../lisp/sawfish/wm/state/ignored.jl:101
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Focusable"
 msgstr ""
 
-#: ../lisp/sawfish/wm/state/ignored.jl:103
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Cyclable"
 msgstr ""
 
-#: ../lisp/sawfish/wm/state/ignored.jl:105
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _window list"
 msgstr ""
 
-#: ../lisp/sawfish/wm/state/ignored.jl:107
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "In _task list"
 msgstr ""
 
-#: ../lisp/sawfish/wm/state/shading.jl:113
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Lock position and size while windows are maximized."
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window"
+msgstr "Најголемо"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Unmaximize window"
+msgstr "Максимизирај"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window vertically"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window horizontally"
+msgstr "Максимизирај прозорец хоризонтално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window toggle"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window horizontally toggle"
+msgstr "Максимизирај прозорец хоризонтално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window vertically toggle"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize fill window"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize fill window vertically"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize fill window horizontally"
+msgstr "Максимизирај прозорец хоризонтално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize fill window toggle"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize fill window horizontally toggle"
+msgstr "Максимизирај прозорец хоризонтално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize fill window vertically toggle"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullscreen"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullscreen toggle"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullxinerama"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize window fullxinerama toggle"
+msgstr "Максимизирај прозорец вертикално"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+#, fuzzy
+msgid "Shade window"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid "Unshade window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid "Toggle window shaded"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "S_haded"
 msgstr ""
 
-#: ../lisp/sawfish/wm/util/groups.jl:153
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Focus on application windows when they first appear."
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Raise window and transients"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Lower window and transients"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid "Raise lower window and transients"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Tabs"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab's left-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab's right-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's left-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's right-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Add to group"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+msgid "Tab release window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+msgid "Tab raise left window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+msgid "Tab raise right window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/compat.jl
+#, fuzzy
+msgid "Insert workspace"
+msgstr "Работен простор"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Unshade selected windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display window without focusing"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+#, fuzzy
+msgid "Display window"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
 msgstr ""
 
-#: ../lisp/sawfish/wm/util/keymap.jl:174
+#. ../lisp/sawfish/wm/util/gtkrc.jl
+msgid "Gtkrc reload style"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Describe key"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Press key..."
 msgstr ""
 
-#: ../lisp/sawfish/wm/util/keymap.jl:198
+#. ../lisp/sawfish/wm/util/keymap.jl
 msgid "[Quote]"
 msgstr ""
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:51
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Quote event"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/marks.jl
+#, fuzzy
+msgid "Mark window"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/util/marks.jl
+msgid "Unmark window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/marks.jl
+msgid "Unmark all windows"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/play-audio.jl
+msgid ""
+"The program used to play audio samples. If unset, built-in support for ESD "
+"is used."
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr ""
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:63
-#, fuzzy, librep-format
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
+#, fuzzy, c-format
 msgid "Workspace %d"
 msgstr "Работно Место %d"
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:77 ../lisp/sawfish/wm/workspace.jl:888
-#: ../lisp/sawfish/wm/workspace.jl:896 ../lisp/sawfish/wm/workspace.jl:904
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Workspace:"
 msgstr ""
 
-#: ../lisp/sawfish/wm/viewport.jl:244 ../lisp/sawfish/wm/viewport.jl:254
+#. ../lisp/sawfish/wm/util/prompt.jl
+#, fuzzy
+msgid "prompt-keymap"
+msgstr "root-window-keymap"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+#, fuzzy
+msgid "Keymap containing bindings active when reading a string from the user."
+msgstr ""
+"Мапа што ги содржи поврзувањатаактивни кога клиентскиот прозор е фокусиран."
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "When raising a window, also raise its: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#, fuzzy
+msgid "Raise window"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#, fuzzy
+msgid "Lower window"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Raise lower window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Windows uniconify to the current viewport."
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Number of steps for viewport scrolling."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "wrap-around"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#. ../lisp/sawfish/wm/viewport.jl
+#, fuzzy
+msgid "stop"
+msgstr "Персонализирај"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Wether to stop or wrap-around on first/last viewport"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Column:"
 msgstr ""
 
-#: ../lisp/sawfish/wm/viewport.jl:245 ../lisp/sawfish/wm/viewport.jl:263
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Row:"
 msgstr ""
 
-#: ../lisp/sawfish/wm/workspace.jl:133
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport column"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport row"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window to viewport"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window right"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window left"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window up"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window down"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+#, fuzzy
+msgid "Animation"
+msgstr "Дејства"
+
+#. ../lisp/sawfish/wm/window-anim.jl
+msgid "solid"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+msgid "wireframe"
+msgstr ""
+
+#. ../lisp/sawfish/wm/window-anim.jl
+msgid "The default window animation mode"
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Give focus to windows even when they haven't asked for it."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Warping"
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Wether to enable warping the cursor to windows."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Wether to not ignore avoided windows by default."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Wether to avoid any unspecified window by default."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Format to create unique window names."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Focus desktop"
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Delete window"
+msgstr "Уништи го прозорот"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window safely"
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Uniquify window name"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "keep-going"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "How to act when passing the first or last workspace."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"How to act when passing the first or last workspace, while moving a window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace names"
 msgstr ""
 
-#: ../lisp/sawfish/wm/workspace.jl:150
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Preserve outermost empty workspaces in the pager."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "_Insert workspace"
 msgstr "Работен простор"
 
-#: ../lisp/sawfish/wm/workspace.jl:151
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Select _next workspace"
 msgstr ""
 
-#: ../lisp/sawfish/wm/workspace.jl:152
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Select _previous workspace"
 msgstr ""
 
-#: ../lisp/sawfish/wm/workspace.jl:153
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with next"
 msgstr ""
 
-#: ../lisp/sawfish/wm/workspace.jl:154
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge with previous"
 msgstr ""
 
-#: ../lisp/sawfish/wm/workspace.jl:155
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace _right"
 msgstr ""
 
-#: ../lisp/sawfish/wm/workspace.jl:156
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace _left"
 msgstr ""
 
-#: ../lisp/sawfish/wm/workspace.jl:634
-#, librep-format
+#. ../lisp/sawfish/wm/workspace.jl
+#, c-format
 msgid "space %d"
 msgstr ""
 
-#: ../scripts/sawfish-about.jl.in:50
-msgid "and many others..."
-msgstr "и многу други..."
-
-#: ../scripts/sawfish-about.jl.in:51
-msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish управува со вашите прозори."
-
-#: ../scripts/sawfish-about.jl.in:56
-msgid "Sawfish homepage"
-msgstr "Web страната на Sawfish"
-
-#~ msgid "Window Cycling"
-#~ msgstr "Кружи низ прозори"
-
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid "Sound"
-#~ msgstr "Звук"
+msgid "Popup workspace list"
+msgstr "Работни простори"
 
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Popup window list"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid "Matched Windows"
-#~ msgstr "Еднакви Прозори"
+msgid "Next workspace"
+msgstr "Работен простор"
 
-#~ msgid "Tooltips"
-#~ msgstr "Кратки совети"
-
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active only during window cycling operations."
-#~ msgstr ""
-#~ "Мапа што ги содржи поврзувањатаактивни кога клиентскиот прозор е "
-#~ "фокусиран."
+msgid "Previous workspace"
+msgstr "Работен простор"
 
-#~ msgid "Move/Resize"
-#~ msgstr "Помести/Промени големина"
-
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid "Workspaces"
-#~ msgstr "Работни простори"
+msgid "Send to next workspace"
+msgstr "Работен простор"
 
-#~ msgid "Bindings"
-#~ msgstr "Поврзувања"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Send to previous workspace"
+msgstr ""
 
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid "Mini/Maximizing"
-#~ msgstr "Криење и Раширување"
+msgid "Copy to next workspace"
+msgstr "Работен простор"
 
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy to previous workspace"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Append workspace and send"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prepend workspace and send"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid "Miscellaneous"
-#~ msgstr "Разно"
+msgid "Merge next workspace"
+msgstr "Работен простор"
 
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Merge previous workspace"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid "History"
-#~ msgstr "Историја"
+msgid "Insert workspace after"
+msgstr "Работен простор"
 
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid "Automatically remember other window attributes."
-#~ msgstr "Автоматски препрочитај ги темите кога ќе се променат."
+msgid "Insert workspace before"
+msgstr "Работен простор"
 
-#~ msgid "When does the mouse pointer affect the input focus."
-#~ msgstr "Кога покажувачот од глувчето влијае на фокусот за внесување"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace forwards"
+msgstr ""
 
-#~ msgid "Click-to-focus mode passes the click through to the application."
-#~ msgstr "Модот кликни-за-фокус го предава кликот до апликацијата."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move workspace backwards"
+msgstr ""
 
-#~ msgid "Default frame style:"
-#~ msgstr "Стандарден стил на рамка:"
-
-#~ msgid "Automatically reload themes when they are updated."
-#~ msgstr "Автоматски препрочитај ги темите кога ќе се променат."
-
-#~ msgid "Default font: \\w"
-#~ msgstr "Стандарден фонт: \\w"
-
-#~ msgid "Keymap containing bindings active anywhere."
-#~ msgstr "Мапа што ги содржи поврзувањата активни насекаде"
-
-#~ msgid "Keymap containing bindings active when a client window is focused."
-#~ msgstr ""
-#~ "Мапа што ги содржи поврзувањатаактивни кога клиентскиот прозор е "
-#~ "фокусиран."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the root window\n"
-#~ "(or when no window is focused)."
-#~ msgstr ""
-#~ "Мапа што содржи поврзувања кои се активни кога поинтерот е во коренскиот "
-#~ "прозор\n"
-#~ "(или кога ниеден прозор не е фокусиран)."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Мапа што содржи поврзувања кои се активни кога поинтерот се наоѓа на "
-#~ "насловната лента\n"
-#~ "од прозорот (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Мапа што ги содржи поврзувањата кои се активни кога покажувачот се наоѓа "
-#~ "на работ од \n"
-#~ "прозор. (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
-
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Мапа што содржи поврзувања кои се активни кога поинтерот се наоѓа на "
-#~ "насловната лента\n"
-#~ "од прозорот (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+msgid "Delete empty workspaces"
+msgstr "Работен простор"
 
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete window instance"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Show desktop"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide desktop"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Мапа што содржи поврзувања кои се активни кога поинтерот се наоѓа на "
-#~ "насловната лента\n"
-#~ "од прозорот (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+msgid "Activate workspace"
+msgstr "Работен простор"
 
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Мапа што содржи поврзувања кои се активни кога поинтерот се наоѓа на "
-#~ "насловната лента\n"
-#~ "од прозорот (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+msgid "Send to workspace"
+msgstr "Работен простор"
 
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Мапа што содржи поврзувања кои се активни кога поинтерот се наоѓа на "
-#~ "насловната лента\n"
-#~ "од прозорот (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+msgid "Copy to workspace"
+msgstr "Работен простор"
 
-#, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Мапа што ги содржи поврзувањата кои се активни кога покажувачот се наоѓа "
-#~ "на работ од \n"
-#~ "прозор. (само поврзувањата на глувчето се разгледуваат во оваа мапа)."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select workspace interactively"
+msgstr ""
 
-#, fuzzy
-#~ msgid "Stacking"
-#~ msgstr "Подредување"
+#~ msgid "and many others..."
+#~ msgstr "и многу други..."
 
-#, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when reading a string from the user."
-#~ msgstr ""
-#~ "Мапа што ги содржи поврзувањатаактивни кога клиентскиот прозор е "
-#~ "фокусиран."
-
-#~ msgid "Crux Theme"
-#~ msgstr "Тема Crux"
-
-#~ msgid ""
-#~ "Accent color for focused windows (if unset uses the GTK+ selection color)."
-#~ msgstr ""
-#~ "Нагласена боја за фокусирани прозори (ако не е сетирано, користи ја "
-#~ "бојата за селекција од GTK+)."
-
-#~ msgid "Display the window's icon in its menu button."
-#~ msgstr "Прикажи ја иконата на прозорот во неговото мени копче."
-
-#, fuzzy
-#~ msgid "Display title buttons to mimic: \\w"
-#~ msgstr "Прикажувај ги копчињата од насловната линија како: \\w"
-
-#~ msgid "Gradient Theme"
-#~ msgstr "Тема Gradient"
-
-#~ msgid "horizontal"
-#~ msgstr "хоризонтално"
-
-#~ msgid "vertical"
-#~ msgstr "вертикално"
-
-#~ msgid "diagonal"
-#~ msgstr "дијагонално"
-
-#~ msgid "Direction of gradient in `gradient' frame style."
-#~ msgstr "Насока на градацијата во стилот на рамки 'gradient'"
-
-#~ msgid "`From' color of inactive frames in `gradient' frame style."
-#~ msgstr "'Од' боја на неактивните рамки во 'gradient' стилот на рамки."
-
-#~ msgid "`To' color of inactive frames in `gradient' frame style."
-#~ msgstr "'До' боја на неактивните рамки во 'gradient' стилот на рамки."
-
-#~ msgid "`From' color of active frames in `gradient' frame style."
-#~ msgstr "'Од' боја на активните рамки во 'gradient' стилот на рамки."
-
-#~ msgid "`To' color of active frames in `gradient' frame style."
-#~ msgstr "'До' боја на активните рамки во 'gradient' стилот на рамки."
-
-#~ msgid "Use less memory when creating gradients, possibly affecting quality."
-#~ msgstr ""
-#~ "Употребувај помалку меморија при креирање на градиенти, со можно влијание "
-#~ "на квалитетот."
-
-#~ msgid "Mono Theme"
-#~ msgstr "Тема Mono"
-
-#~ msgid "Color of inactive frames (if unset use GTK+ background color)."
-#~ msgstr ""
-#~ "Боја на неактивните рамки (ако не е сетирана, користи ја позадинската "
-#~ "боја на GTK+)."
-
-#~ msgid "Color of active frames (if unset use GTK+ selection color)."
-#~ msgstr ""
-#~ "Боја на активните рамки (ако не е сетирана, користи ја бојата за избор на "
-#~ "GTK+)"
-
-#, fuzzy
-#~ msgid "left"
-#~ msgstr "лево"
-
-#, fuzzy
-#~ msgid "right"
-#~ msgstr "десно"
-
-#~ msgid "center"
-#~ msgstr "центар"
-
-#~ msgid "Text is \\w justified in window titles."
-#~ msgstr "Текстот е \\w порамнет во насловот на прозорите."
-
-#, fuzzy
-#~ msgid "title"
-#~ msgstr "Состојба"
-
-#, fuzzy
-#~ msgid "gradient"
-#~ msgstr "Тема Gradient"
-
-#, fuzzy
-#~ msgid "positions 1"
-#~ msgstr "Позиција"
-
-#, fuzzy
-#~ msgid "positions 2"
-#~ msgstr "Позиција"
-
-#, fuzzy
-#~ msgid "borders"
-#~ msgstr "Горен раб"
-
-#, fuzzy
-#~ msgid "normal"
-#~ msgstr "Нормално"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "ништо"
-
-#, fuzzy
-#~ msgid "real-center"
-#~ msgstr "центар"
-
-#, fuzzy
-#~ msgid "custom"
-#~ msgstr "Персонализирај"
-
-#, fuzzy
-#~ msgid "reverse colors"
-#~ msgstr "Одбери боја"
-
-#, fuzzy
-#~ msgid "default-9"
-#~ msgstr "Стандардно"
-
-#, fuzzy
-#~ msgid "default-12"
-#~ msgstr "Стандардно"
-
-#, fuzzy
-#~ msgid "fake shadow only on focused windows"
-#~ msgstr "Правоаголна слика за нефокусирани прозори."
-
-#, fuzzy
-#~ msgid "north"
-#~ msgstr "не"
-
-#~ msgid "Simple Theme"
-#~ msgstr "Проста тема"
-
-#~ msgid "Color of inactive frames in `simple' frame style."
-#~ msgstr "Боја на неактивните рамки во 'простиот' стил на рамки."
-
-#~ msgid "Color of active frames in `simple' frame style."
-#~ msgstr "Боја на активните рамки во 'простиот' стил на рамки."
-
-#~ msgid "SMaker Theme"
-#~ msgstr "Тема SMaker"
-
-#~ msgid "Use black-on-white button images."
-#~ msgstr "Користи црно-на-бело слики на копчиња."
-
-#~ msgid "Color to use when drawing text."
-#~ msgstr "Боја што се користи при цртање на текст."
-
-#, fuzzy
-#~ msgid "Bar image for unfocused windows."
-#~ msgstr "Правоаголна слика за нефокусирани прозори."
-
-#, fuzzy
-#~ msgid "Bar image for focused windows."
-#~ msgstr "Правоаголна слика за фокусирани прозори."
-
-#, fuzzy
-#~ msgid "Bar image for highlighted parts."
-#~ msgstr "Правоаголна слика за осветлени делови."
-
-#, fuzzy
-#~ msgid "Bar image for clicked parts."
-#~ msgstr "Правоаголна слика за кликнати делови."
-
-#~ msgid "Height of title bar."
-#~ msgstr "Висина на насловната лента."
-
-#~ msgid "Width of window border."
-#~ msgstr "Ширина на раб на прозор."
-
-#, fuzzy
-#~ msgid "Border width of bar images."
-#~ msgstr "Ширина на работ од правоаголни слики."
-
-#, fuzzy
-#~ msgid "border"
-#~ msgstr "Горен раб"
-
-#, fuzzy
-#~ msgid "border-grab"
-#~ msgstr "border-keymap"
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Sawfish управува со вашите прозори."
 
 #, fuzzy
 #~ msgid "Terminal"
 #~ msgstr "Терминал"
 
-#~ msgid "Call command"
-#~ msgstr "Повикај команда"
-
 #~ msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
 #~ msgstr "Повикај ја командата ИМЕ; опционо со префикс аргумент PFX-ARG."
-
-#~ msgid "Run shell command"
-#~ msgstr "Изврши команда"
 
 #~ msgid "Execute the given shell command."
 #~ msgstr "Изврши ја дадената команда."
 
-#~ msgid "Command sequence"
-#~ msgstr "Командна секвенца"
-
 #~ msgid "Invoke the list of commands, one by one."
 #~ msgstr "Повикај ја листата на команди, една по една."
-
-#, fuzzy
-#~ msgid "Quit"
-#~ msgstr "Напушти"
-
-#, fuzzy
-#~ msgid "Restart"
-#~ msgstr "Рестартирај"
-
-#~ msgid "Destroy window"
-#~ msgstr "Уништи го прозорот"
-
-#~ msgid "Kill client"
-#~ msgstr "Убиј го клиентот"
-
-#~ msgid "No operation"
-#~ msgstr "Нема операција"
-
-#~ msgid "Call command with output to screen"
-#~ msgstr "Повикај команда со излез на екранот"
 
 #~ msgid ""
 #~ "Prompt for a command, execute it, and print any output to the screen."
 #~ msgstr "Прашај за команда, изврши ја, и испечати го излезот на екран."
 
-#, fuzzy
-#~ msgid "Customize"
-#~ msgstr "Персонализирај"
-
 #~ msgid "Invoke the user-customization system."
 #~ msgstr "Повикај го системот за корисничко подесување."
-
-#, fuzzy
-#~ msgid "Name"
-#~ msgstr "Име"
-
-#, fuzzy
-#~ msgid "Class"
-#~ msgstr "Класа"
-
-#, fuzzy
-#~ msgid "Icon Name"
-#~ msgstr "Име на Икона"
-
-#, fuzzy
-#~ msgid "Role"
-#~ msgstr "Улога"
-
-#, fuzzy
-#~ msgid "Host"
-#~ msgstr "Хост"
-
-#, fuzzy
-#~ msgid "Locale"
-#~ msgstr "Локале"
-
-#, fuzzy
-#~ msgid "Position"
-#~ msgstr "Позиција"
-
-#, fuzzy
-#~ msgid "Dimensions"
-#~ msgstr "Димензии"
-
-#, fuzzy
-#~ msgid "Workspace"
-#~ msgstr "Работен простор"
-
-#, fuzzy
-#~ msgid "Depth"
-#~ msgstr "Длабочина"
-
-#, fuzzy
-#~ msgid "Maximized"
-#~ msgstr "Најголемо"
-
-#, fuzzy
-#~ msgid "Sticky"
-#~ msgstr "Лепливо"
-
-#, fuzzy
-#~ msgid "Group"
-#~ msgstr "Група"
-
-#~ msgid "Edit frame style"
-#~ msgstr "Промени го стилот на рамка"
-
-#~ msgid "global-keymap"
-#~ msgstr "глобална мапа"
-
-#~ msgid "window-keymap"
-#~ msgstr "прозор-мапа"
-
-#~ msgid "root-window-keymap"
-#~ msgstr "root-window-keymap"
-
-#~ msgid "title-keymap"
-#~ msgstr "title-keymap"
-
-#~ msgid "border-keymap"
-#~ msgstr "border-keymap"
-
-#, fuzzy
-#~ msgid "group"
-#~ msgstr "група"
-
-#, fuzzy
-#~ msgid "Maximize window vertically"
-#~ msgstr "Максимизирај прозорец вертикално"
-
-#, fuzzy
-#~ msgid "Maximize window horizontally"
-#~ msgstr "Максимизирај прозорец хоризонтално"
-
-#, fuzzy
-#~ msgid "Maximize window fullxinerama"
-#~ msgstr "Максимизирај прозорец вертикално"
-
-#, fuzzy
-#~ msgid "Maximize window fullxinerama toggle"
-#~ msgstr "Максимизирај прозорец вертикално"
-
-#, fuzzy
-#~ msgid "Animation"
-#~ msgstr "Дејства"
 
 #, fuzzy
 #~ msgid "Select Icon"

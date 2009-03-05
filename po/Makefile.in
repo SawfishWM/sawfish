@@ -1,0 +1,87 @@
+# Makefile.in for sawmill's message catalogues
+# $Id: Makefile.in,v 1.7 2000/07/06 13:30:07 john Exp $
+#
+# Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+#
+# This file is part of sawmill.
+#
+# sawmill is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# sawmill is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with sawmill; see the file COPYING.  If not, write to
+# the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+include ../Makedefs
+top_srcdir=@top_srcdir@
+top_builddir=..
+srcdir=@srcdir@
+VPATH=@srcdir@:@top_srcdir@
+
+PACKAGE=sawfish
+MSGMERGE=msgmerge
+CATOBJEXT=.mo
+
+POFILES=$(LINGUAS:%=%.po)
+CATALOGS=$(LINGUAS:%=%$(CATOBJEXT))
+
+all : $(CATALOGS) $(PACKAGE).pot
+
+$(PACKAGE).pot :
+	./make-pot
+
+ifneq ($(CATALOGS),)
+install : $(CATALOGS) installdirs
+	for f in $(CATALOGS); do \
+	  st=`basename $$f .mo`; \
+	  if test '!' -d $(DESTDIR)$(localedir)/$$st/LC_MESSAGES/; then \
+	    $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(localedir)/$$st/LC_MESSAGES; \
+	  fi; \
+	  $(INSTALL_DATA) $$f $(DESTDIR)$(localedir)/$$st/LC_MESSAGES/$(PACKAGE).mo; \
+	done
+else
+install : $(CATALOGS) installdirs
+
+endif
+
+update-po:
+	$(MAKE) $(PACKAGE).pot
+	cd $(srcdir); \
+	catalogs='$(CATALOGS)'; \
+	for cat in $$catalogs; do \
+	  cat=`basename $$cat`; \
+	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
+	  mv $$lang.po $$lang.old.po; \
+	  echo "$$lang:"; \
+	  if $(MSGMERGE) $$lang.old.po $(PACKAGE).pot -o $$lang.po.x; then \
+	    if grep -v "^# \.\." $$lang.po.x >$$lang.po; then \
+	      rm -f $$lang.po.x; \
+	    fi; \
+	    rm -f $$lang.old.po; \
+	  else \
+	    echo "msgmerge for $$cat failed!"; \
+	    rm -f $$lang.po; \
+	    mv $$lang.old.po $$lang.po; \
+	  fi; \
+	done
+
+installdirs : $(top_srcdir)/mkinstalldirs
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(localedir)
+
+uninstall :
+	rm -f $(DESTDIR)$(localedirdir)
+
+clean :
+	rm -f core *~ *.mo
+
+realclean : clean
+	rm -f Makefile $(PACKAGE).pot
+
+.PHONY : all install uninstall clean realclean
