@@ -65,13 +65,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(-,root,root,-)
-%doc README NEWS FAQ THANKS BUGS TODO OPTIONS README.IMPORTANT KEYBINDINGS USERDOC HACKING
+%doc README NEWS FAQ THANKS BUGS TODO OPTIONS README.IMPORTANT KEYBINDINGS USERDOC HACKING COPYING COPYING.SOUNDS
 %{_bindir}/*
 %dir %{_datadir}/sawfish
 %{_datadir}/sawfish/%{version}
 %{_datadir}/locale
 %{_datadir}/gnome/wm-properties/sawfish-wm.desktop
 %{_datadir}/applications/sawfish.desktop
+%{_datadir}/xsessions/sawfish.desktop
 %{_datadir}/pixmaps/sawfish*.png
 %{_libdir}/pkgconfig/sawfish.pc
 %{_libexecdir}/sawfish/%{version}/%{_host}
