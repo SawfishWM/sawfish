@@ -50,6 +50,14 @@ for example:
 
 ( bind-keys global-keymap "W-Tab" 'cycle-windows )
 
+how to unset keybindings manually:
+
+( unbind-keys keymap "keybindings" 'action )
+
+for example:
+
+( unbind-keys global-keymap "W-Tab" 'cycle-windows )
+
 global-keymap (Those bindings are active everywhere):
 
 W-Left -> Previous Workspace
