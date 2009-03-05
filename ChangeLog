@@ -1,603 +1,12 @@
 2009-03-05  Christopher Bratusek <zanghar@freenet.de>
-	* HACKING: updated
-
-	* sawfish.ebuild.in
-	* sawfish.spec.in: add HACKING to doc-files
-
-	* autogen.sh
-	* configure.in: de-intltoolize sawfish ... not working properly
-	
-	* po/LINGUAS
-	* po/Makefile.in.in: removed
-
-	* po/update.sh
-	* po/make-pot
-	* po/sawfish.pot
-	* po/Makefile.in
-	* po/sawfish-xgettext: added back
-
-	* po/*.po
-	* po/sawfish.pot: updated
-
-2009-03-04  Christopher Bratusek <zanghar@freenet.de>
-	* KEYBINDINGS: - added description of ISO_Left_Tab
-	               - mention Alt Gr
-		       - mention Buttons 4 and 5
-		       - add how to add keybindings manually
-
-2009-03-03  Christopher Bratusek <zanghar@freenet.de>
-	* man/user-doc.texi: fixed a typo
-
-	* sawfish.ebuild.in
-	* sawfish.spec.in: add USERDOC to doc-files
-
-2009-03-01  Guillermo S. Romero <gsromero@svn.gnome.org>
-	* man/user-doc.texi: on going work on user docs.
-	
-2009-02-19  Christopher Bratusek <zanghar@freenet.de>
-	* sawfish.desktop
-	* sawfish-wm.desktop
-	* sawfish-session.desktop: remove useless translations, which are equal to the original string
-
-	* lisp/sawfish/wm/ext/infinite-desktop.jl: update file-header
-
-	* lisp/sawfish/wm/tabs/tab.jl
-	* lisp/sawfish/wm/tabs/tabgroup.jl: update file-headers
-
-	* man/news.texi: better description for infinite-desktop.jl
-
-	* themes/*/.jl: s/sawmill/sawfish/g
-
-2009-02-17  Christopher Bratusek <zanghar@freenet.de>
-	* Makefile.in
-	* sawfish-session.desktop: added session desktop file
-
-	* configure.in: don't just read README.IMPORTANT if this is an upgrade
-
-	* lisp/sawfish/wm/ext/3d-hack.jl: remove annotate-points - not beeing used
-
-	* man/sawfish.texi: Major Documentation updated [Derek Upham]
-
-2009-02-16  Christopher Bratusek <zanghar@freenet.de>
-	* lisp/sawfish/wm/animation/outline.jl: load sawfish.wm.gaol for screen-width/height to be set
-
 	* man/news.texi: updated
 
-2009-02-15  Christopher Bratusek <zanghar@freenet.de>
-	* configure.in: print message at the end that README.IMPORTANT should be read
+	* configure.in: bump version to 1.3.5.1
 
-	* lisp/sawfish/wm/viewport.jl: changed a string
-
-2009-02-15  Guillermo S. Romero <gsromero@svn.gnome.org>
-	* man/faq.texi: more s/sawmill/sawfish/ clean up
-	                also explained rc duality (~/.sawfish[/]rc).
-
-	* KEYBINDINGS: Suggest xmodmap and xev. Super (not s) is Super
-	
-	* man/user-doc.texi: brain backup about workspaces, viewports, etc
-	
-2009-02-14  Christopher Bratusek <zanghar@freenet.de>
-	* man/user-doc.texi: added introduction
-
-	* KEYBINDINGS: fixed some misstakes
-
-2009-02-12  Christopher Bratusek <zanghar@freenet.de>
-	* man/user-doc.texi: added uniconify, maximize, unmaximize, delete, shade, unshade, raise, lower, cycle
-	                     nicer formatting
-
-2009-02-11  Christopher Bratusek <zanghar@freenet.de>
-	* man/user-doc.texi
-	* man/Makefile.in: add intial try of a user-doc
-
-2009-02-09  Christopher Bratusek <zanghar@freenet.de>
-	* KEYBINDINGS: S is Super not Shift
-	               W is Modifier and M is Alt
-	               s/take place/are active/g
-	
-	* lisp/sawfish/wm/commands/shrink-yank: Don't forget to load sawfish.wm.custom
-
-	* po/POTFILES.in: marks.jl is now in .util
-
-	* lisp/sawfish/wm/animation/outline.jl
-	* lisp/sawfish/wm/frames.jl
-	* lisp/sawfish/wm/ext/edge-flip.jl
-	* lisp/sawfish/wm/ext/infinite-desktop.jl
-	* lisp/sawfish/wm/ext/tooltips.jl
-	* lisp/sawfish/wm/ext/match-window.jl
-	* lisp/sawfish/wm/ext/audio-events.jl
-	* lisp/sawfish/wm/ext/error-handler.jl
-	* lisp/sawfish/wm/ext/shade-hover.jl
-	* lisp/sawfish/wm/ext/window-history.jl
-	* lisp/sawfish/wm/ext/auto-raise.jl
-	* lisp/sawfish/wm/workspace.jl
-	* lisp/sawfish/wm/placement.jl
-	* lisp/sawfish/wm/custom.jl
-	* lisp/sawfish/wm/state/iconify.jl
-	* lisp/sawfish/wm/state/maximize.jl
-	* lisp/sawfish/wm/state/transient.jl
-	* lisp/sawfish/wm/focus.jl
-	* lisp/sawfish/wm/viewport.jl
-	* lisp/sawfish/wm/tabs/tab.jl
-	* lisp/sawfish/wm/menus.jl
-	* lisp/sawfish/wm/window-anim.jl
-	* lisp/sawfish/wm/windows.jl
-	* lisp/sawfish/wm/commands/move-cursor.jl
-	* lisp/sawfish/wm/commands/grow-pack.jl
-	* lisp/sawfish/wm/commands/shrink-yank.jl
-	* lisp/sawfish/wm/commands/xterm.jl
-	* lisp/sawfish/wm/commands/x-cycle.jl
-	* lisp/sawfish/wm/commands/move-resize.jl
-	* lisp/sawfish/wm/stacking.jl
-	* lisp/sawfish/wm/placement/stagger.jl
-	* lisp/sawfish/wm/autoload.jl
-	* lisp/sawfish/wm/keymaps.jl
-	* lisp/sawfish/wm/util/prompt.jl
-	* lisp/sawfish/wm/util/stacking.jl
-	* lisp/sawfish/wm/util/play-audio.jl
-	* lisp/sawfish/wm/util/display-window.jl: temporarly remove translatable strings
-
-2009-02-08  Christopher Bratusek <zanghar@freenet.de>
-	* lisp/sawfish/wm/ext/infinite-desktop.jl: remove dtm. prefix from functions
-
-	* lisp/sawfish/wm/frames.jl: fix an issue, that broke sawfish-ui
-
-2009-02-07  Christopher Bratusek <zanghar@freenet.de>
-        * configure.in: use POSIX code [Mark Diekhans]
-
-2009-02-07  Guillermo S. Romero <gsromero@svn.gnome.org>
-        * lisp/sawfish/wm/tabs/marks.jl
-        * lisp/sawfish/wm/util/marks.jl: move marks from tabs to util
-        
-        * lisp/sawfish/wm/tabs/tab.jl: update accordingly
-
-2009-02-05  Christopher Bratusek <zanghar@freenet.de>
-	* lisp/sawfish/wm/keymaps.jl
-	* KEYBINDINGS: move tab-raising bindings from global to window keymap
-
-	* po/POTFILES.in: updated for tab and shrink/yank files
-
-	* OPTIONS: updated
-
-	* man/news.texi: updated
-
-	* lisp/sawfish/wm/commands/shrink-yank.jl: Shrinking/Yanking Support [Timo Korvola]
-
-	* configure.in: bump minimum intltool version to 0.40.0
-
-	* lisp/sawfish/wm/ext/infinite-desktop.jl : Added [David T. McWherter]
-
-2009-02-04  Christopher Bratusek <zanghar@freenet.de>
-	* lisp/sawfish/wm/keymaps.jl: remove tab-keymap, add grouping to Button2-Off on titlebar
-
-	* KEYBINDINGS: complete list of default keybindings
-
-	* OPTIONS: added new options coming from tabs
-
-	* sawfish.spec.in: add KEYBINDINGS to %doc
-
-	* sawfish.ebuild.in: add KEYBINDINGS README.IMPORTANT to %doc
-
-	* README.IMPORTANT: changed syntax
-
-2009-02-03  Christopher Bratusek <zanghar@freenet.de>
-	* configure.in: - re-add checks for XFree86 (add --without-xorg-x11r7 flag)
-                        - fixed a typo
-
-	* README.IMPORTANT: updated
-
-	* install-sh: added for libtool < 2.2
-
-	* librep.spec.in: don't call make-pot (deprecated)
-	                  don't %doc deprecated files
-
-	* lisp/sawfish/wm/keymaps.jl: - merged tab-keymap.jl
-	                              - add keymap for tabs (tab-keymap)
-
-	* lisp/sawfish/wm/tabs/tab.jl
-	* lisp/sawfish/wm/tabs/tabgroup.jl
-	* lisp/sawfish/wm/tabs/marks.jl: Merged tab-system [Yann Hodique, Scott Scriven, Nathan Froyd, Christopher Bratusek]
-
-	* lisp/Makefile.in: install tabbing code
-
-	* po/Makefile.in.in: remove file, add symlink instead (fixes issue with older intltool)
-
-	* autogen.sh: remove --copy flag from intltoolize
-
-2009-02-02  Christopher Bratusek <zanghar@freenet.de>
-	* Makefile.in: create $DESTDIR$datadir/applications before 
-	               installing desktop file into it
-
-	* */Makefile.in: add distclean rule to all subdir Makefiles
-
-	* autogen.sh: - make sure we check if intltoolize successfully exited
-		      - make sure we don't use bash-specific syntax [Mark Diekhans]
-		      - don't -I /usr/share/aclocal/ [Mark Diekhans]
-
-	* configure.in: print usefull stuff at the end of configure
-
-2009-02-01  Christopher Bratusek <zanghar@freenet.de>
-	* MAINTAINERS: updated my mail address
-
-	* autogen.sh
-	* configure.in: intltoolize sawfish
-
-	* po/LINGUAS: added
-
-	* po/POTFILES.in: updated
-
-	* po/Makefile.in
-	* po/make-pot
-	* po/sawfish.pot
-	* po/sawfish-xgettext
-	* po/update.sh
-	* po/README: removed
-
-	* lisp/sawfish/wm/animation/outline.jl
-	* lisp/sawfish/wm/frames.jl
-	* lisp/sawfish/wm/ext/edge-flip.jl
-	* lisp/sawfish/wm/ext/tooltips.jl
-	* lisp/sawfish/wm/ext/match-window.jl
-	* lisp/sawfish/wm/ext/audio-events.jl
-	* lisp/sawfish/wm/ext/error-handler.jl
-	* lisp/sawfish/wm/ext/shade-hover.jl
-	* lisp/sawfish/wm/ext/window-history.jl
-	* lisp/sawfish/wm/ext/auto-raise.jl
-	* lisp/sawfish/wm/workspace.jl
-	* lisp/sawfish/wm/placement.jl
-	* lisp/sawfish/wm/custom.jl
-	* lisp/sawfish/wm/state/iconify.jl
-	* lisp/sawfish/wm/state/maximize.jl
-	* lisp/sawfish/wm/state/transient.jl
-	* lisp/sawfish/wm/focus.jl
-	* lisp/sawfish/wm/viewport.jl
-	* lisp/sawfish/wm/window-anim.jl
-	* lisp/sawfish/wm/windows.jl
-	* lisp/sawfish/wm/commands/move-cursor.jl
-	* lisp/sawfish/wm/commands/grow-pack.jl
-	* lisp/sawfish/wm/commands/xterm.jl
-	* lisp/sawfish/wm/commands/x-cycle.jl
-	* lisp/sawfish/wm/commands/move-resize.jl
-	* lisp/sawfish/wm/stacking.jl
-	* lisp/sawfish/wm/placement/stagger.jl
-	* lisp/sawfish/wm/autoload.jl
-	* lisp/sawfish/wm/util/prompt.jl
-	* lisp/sawfish/wm/util/stacking.jl
-	* lisp/sawfish/wm/util/play-audio.jl
-	* lisp/sawfish/wm/util/display-window.jl
-	* lisp/sawfish/wm/keymaps.jl: mark all translatable strings with (_ )
-
-	* po/ne.po
-	* po/sr@Latn.po
-	* po/bs.po
-	* po/cs.po
-	* po/pt_BR.po
-	* po/mk.po
-	* po/es.po
-	* po/wa.po
-	* po/ko.po
-	* po/eu.po
-	* po/en_GB.po
-	* po/hu.po
-	* po/no.po
-	* po/sk.po
-	* po/vi.po
-	* po/uk.po
-	* po/ms.po
-	* po/ro.po
-	* po/ru.po
-	* po/rw.po
-	* po/nb.po
-	* po/el.po
-	* po/ar.po
-	* po/gl.po
-	* po/en_CA.po
-	* po/fr.po
-	* po/et.po
-	* po/nl.po
-	* po/az.po
-	* po/nn.po
-	* po/pl.po
-	* po/it.po
-	* po/dz.po
-	* po/sl.po
-	* po/lv.po
-	* po/ca.po
-	* po/pt.po
-	* po/da.po
-	* po/sr.po
-	* po/tr.po
-	* po/be.po
-	* po/ga.po
-	* po/bg.po
-	* po/de.po
-	* po/sv.po
-	* po/ja.po
-	* po/zh_TW.po
-	* po/am.po
-	* po/fi.po
-	* po/pa.po
-	* po/oc.po
-	* po/zh_CN.po: make -C po update-po
-
-2009-01-25  Daniel Nylander <po@danielnylander.se>
-
-        * po/sv.po: Updated Swedish translation
-
-2009-01-18  Christopher Bratusek <zanghar@freenet.de>
-	* OPTIONS
-	* lisp/sawfish/wm/animation/outline.jl
-	* lisp/sawfish/wm/window-anim.jl
-	* lisp/sawfish/wm/commands/move-resize.jl
-	* lisp/sawfish/wm/autoload.jl
-	* lisp/sawfish/wm/util/window-outline.jl: added 3 new animators (cross, elliptical and draft)
-
-	* src/events.c: Iconify before repyfying (as requested by WM_HINTS) [Ian Zimmerman]
-
-	* sawfish.spec.in: - fixed download location
-			   - changed extension to .tar.bz2
-			   - don't require rep-gtk-libglade
-			   - don't require control-center-devel
-			   - don't create unused directories
-			   - package sawfish.desktop
-			   - package sawfish-wm.desktop
-			   - package sawfish.pc
-			   - package README.IMPORTANT
-			   - let configure create librep/rep-gtk minimum requirement
-			   - use _tmppath instead of /var/tmp
-			   - merge changes from Michal Jaegermann's spec-file
-
-2009-01-17  Christopher Bratusek <zanghar@freenet.de>
-	* OPTIONS: fixed a typo
-
-2009-01-14  Christopher Bratusek <zanghar@freenet.de>
-	* lisp/sawfish/wm/commands/slide-window.jl: merge changes from sawfish-pager
-
-	* lisp/sawfish/wm/state/shading.jl: merge changes from sawfish-pager
-
-	* lisp/sawfish/wm/swapper
-	* lisp/sawfish/wm/windows
-	* lisp/sawfish/wm/util/display-window.jl: replace "librep"/"Jade" by "sawfish" in the copyright header
-
-	* lisp/gtk/stock.jl: Added. (Why has it been missing?)
-
-	* sawfish.pc.in: add libexecdir and sawfishhosttype
-
-2009-01-11  Mario Blättermann  <mariobl@svn.gnome.org>
-	* po/de.po: Updated German translation.
-
-2009-01-06  Christopher Bratusek <nano-master@gmx.de>
-	* Makefile.in: don't forget to uninstall sawfish.pc upon "make uninstall"
-
-2009-01-03  Christopher Bratusek <nano-master@gmx.de>
-	* po/sawfish.pot: updated .pot file
-
-	* po/*.po: updated all .po files
-
-2009-01-01  Christopher Bratusek <nano-master@gmx.de>
-	* autogen.sh: small rework
-
-	* config.h.in
-	* configure.in
-	* Makedefs.in: new configure.in working now (some necassary #define have not been created)
-
-	* build-info: create ./src/build.h instead of ./build.in
-
-	* configure.in: execute build-info, since some .c files include it, but it hasn't been there before
-
-	* lisp/sawfish/wm/viewport.jl: move viewport-boundary-mode and scroll-viewport-steps from Workspace
-				       to Workspace/Viewport in Sawfish-UI
-
-	* m4: add that directory to make libtool 1.x shut up
-
-	* lisp/sawfish/wm/gnome/menus.jl
-	* lisp/sawfish/wm/util/display-wininfo.jl
-	* lisp/sawfish/gtk/Makefile.in
-	* lisp/sawfish/ui/Makefile.in
-	* lisp/sawfish/ui/widgets/workspace-geometry.jl
-	* lisp/sawfish/ui/widgets/icon.jl
-	* configure.in: dropped libgnome|gnomeui|gnomecanvas related widgets, use pure-gtk instead
-
-	* src/Makefile.in: make uninstall target work again
-
-	* README.IMPORTANT: added
-
-2008-12-31  Christopher Bratusek <nano-master@gmx.de>
-	* config.h.in
-	* configure.in
-	* Makedefs.in: temporarily revert configure.in rework, since pango checks seem to not work
-
-2008-12-30  Christopher Bratusek <nano-master@gmx.de>
-	* Makedefs.in
-	* configure.in: Major rework of configure.in [breaks build with XFree86 atm]
-
-	* config.h.in: regenerated
-
-	* sawmill.h
-	* sawfish.h: renamed sawmill.h to sawfish.h
-
-	* sawmill_subrs.h
-	* sawfish_subrs.h: renamed sawmill_subrs.h to sawfish_subrs.h
-
-	* src/*.[ch]: include sawfish.h/sawfish_subrs.h from now on
-		      replace any occurence of sawmill with sawfish
-
-	* etc/config.guess
-	* etc/config.sub
-	* etc/install-sh: don't ship those files
-
-	* man/Makefile
-	* man/sawmill.texi
-	* man/sawfish.texi: renamed sawmill.texi to sawfish.texi
-
-	* sawfish.ebuild.in: don't leak copyright info
-			     more configure magic
-			     don't apply libtool.patch -> obsolete
-			     don't mark ppc64 as ~ since librep(svn) does now compile on ppc64
-
-	* lisp/sawfish/wm/defaults.jl: renamed alias to sawfish-defaults
-
-	* lisp/sawfish/wm/animation/outline.jl
-	* lisp/sawfish/wm/frames.jl
-	* lisp/sawfish/wm/custom-defaults.jl
-	* lisp/sawfish/wm/gaol.jl
-	* lisp/sawfish/wm/customize.jl
-	* lisp/sawfish/wm/theming/make-theme-preview.jl
-	* lisp/sawfish/wm/theming/make-theme.jl
-	* lisp/sawfish/wm/ext/edge-flip.jl
-	* lisp/sawfish/wm/ext/tooltips.jl
-	* lisp/sawfish/wm/ext/beos-window-menu.jl
-	* lisp/sawfish/wm/ext/match-window.jl
-	* lisp/sawfish/wm/ext/audio-events.jl
-	* lisp/sawfish/wm/ext/error-handler.jl
-	* lisp/sawfish/wm/ext/old-window-menu.jl
-	* lisp/sawfish/wm/ext/shade-hover.jl
-	* lisp/sawfish/wm/ext/window-history.jl
-	* lisp/sawfish/wm/ext/auto-raise.jl
-	* lisp/sawfish/wm/ext/hide-dialogs.jl
-	* lisp/sawfish/wm/ext/3d-hack.jl
-	* lisp/sawfish/wm/workspace.jl
-	* lisp/sawfish/wm/placement.jl
-	* lisp/sawfish/wm/custom.jl
-	* lisp/sawfish/wm/state/wm-spec.jl
-	* lisp/sawfish/wm/state/shading.jl
-	* lisp/sawfish/wm/state/iconify.jl
-	* lisp/sawfish/wm/state/mwm.jl
-	* lisp/sawfish/wm/state/configure.jl
-	* lisp/sawfish/wm/state/maximize.jl
-	* lisp/sawfish/wm/state/open-look.jl
-	* lisp/sawfish/wm/state/gnome.jl
-	* lisp/sawfish/wm/state/ignored.jl
-	* lisp/sawfish/wm/state/transient.jl
-	* lisp/sawfish/wm/user.jl
-	* lisp/sawfish/wm/viewport.jl
-	* lisp/sawfish/wm/focus.jl
-	* lisp/sawfish/wm/session/save.jl
-	* lisp/sawfish/wm/session/load.jl
-	* lisp/sawfish/wm/session/init.jl
-	* lisp/sawfish/wm/menus.jl
-	* lisp/sawfish/wm/window-anim.jl
-	* lisp/sawfish/wm/misc.jl
-	* lisp/sawfish/wm/commands/size-window.jl
-	* lisp/sawfish/wm/commands/groups.jl
-	* lisp/sawfish/wm/commands/describe.jl
-	* lisp/sawfish/wm/commands/move-cursor.jl
-	* lisp/sawfish/wm/commands/viewport-linear.jl
-	* lisp/sawfish/wm/commands/help.jl
-	* lisp/sawfish/wm/commands/cycle.jl
-	* lisp/sawfish/wm/commands/raise-commands.jl
-	* lisp/sawfish/wm/commands/x-cycle.jl
-	* lisp/sawfish/wm/commands/slide-window.jl
-	* lisp/sawfish/wm/commands/move-resize.jl
-	* lisp/sawfish/wm/commands/gnome.jl
-	* lisp/sawfish/wm/cursors.jl
-	* lisp/sawfish/wm/gnome/match-window.jl
-	* lisp/sawfish/wm/gnome/integration.jl
-	* lisp/sawfish/wm/gnome/menus.jl
-	* lisp/sawfish/wm/stacking.jl
-	* lisp/sawfish/wm/placement/smart.jl
-	* lisp/sawfish/wm/server.jl
-	* lisp/sawfish/wm/defaults.jl
-	* lisp/sawfish/wm/autoload.jl
-	* lisp/sawfish/wm/util/groups.jl
-	* lisp/sawfish/wm/util/window-order.jl
-	* lisp/sawfish/wm/util/rects.jl
-	* lisp/sawfish/wm/util/compat.jl
-	* lisp/sawfish/wm/util/window-outline.jl
-	* lisp/sawfish/wm/util/decode-events.jl
-	* lisp/sawfish/wm/util/prompt-extras.jl
-	* lisp/sawfish/wm/util/keymap.jl
-	* lisp/sawfish/wm/util/edges.jl
-	* lisp/sawfish/wm/util/prompt-wm.jl
-	* lisp/sawfish/wm/util/play-audio.jl
-	* lisp/sawfish/wm/util/with-output.jl
-	* lisp/sawfish/wm/util/gtkrc.jl
-	* lisp/sawfish/wm/keymaps.jl
-	* lisp/sawfish/wm.jl: replaced any occurence of sawmill with sawfish
-
-	* sawfish.spec.in
-	* scripts/sawfish-about.jl.in: corrected homepage
-
-	* lisp/sawfish/wm/user.jl: remove ~/.sawmillrc from list of config files
-
-	* lisp/sawfish/wm/animation/outline.jl
-	* lisp/sawfish/wm/frames.jl
-	* lisp/sawfish/wm/ext/edge-flip.jl
-	* lisp/sawfish/wm/ext/tooltips.jl
-	* lisp/sawfish/wm/ext/window-history.jl
-	* lisp/sawfish/wm/workspace.jl
-	* lisp/sawfish/wm/placement.jl
-	* lisp/sawfish/wm/custom.jl
-	* lisp/sawfish/wm/focus.jl
-	* lisp/sawfish/wm/viewport.jl
-	* lisp/sawfish/wm/window-anim.jl
-	* lisp/sawfish/wm/windows.jl
-	* lisp/sawfish/wm/commands/move-cursor.jl
-	* lisp/sawfish/wm/commands/x-cycle.jl
-	* lisp/sawfish/wm/commands/move-resize.jl
-	* lisp/sawfish/wm/util/compat.jl
-	* lisp/sawfish/ui/main.jl.in
-	* lisp/sawfish/ui/shell.jl: Reworked Sawfish-UI
-
-2008-12-28 Christopher Bratusek <nano-master@gmx.de>
-	* src/server.c: fixed an "unknown remote error", that might appear [Alexey I. Froloff]
-
-2008-12-27  Christopher Bratusek <nano-master@gmx.de>
-	* lisp/sawfish/wm/commands/x-cycle.jl: Warp pointer to windows when cycling, if warp-cursor is enabled
-
-	* lisp/sawfish/wm/state/maximize.jl: Warp pointer to windows when unmaximizing, if warp-cursor is enabled
-					     [Fernando Carmona Varo]
-
-2008-12-24  Christopher Bratusek <nano-master@gmx.de>
-	* autogen.sh: fixed for libtool >2.2
-
-2008-12-23  Christopher Bratusek <nano-master@gmx.de>
-	* Makedefs.in: workaround an compilation-error caused by glib [Michal Jaegermann]
-
-	* src/images.c: make building with imlib1 instead of gdk-pixbuf work again [Michal Jaegermann]
-
-	* man/news.texi: updated
-
-	* Makefile.in: improved distclean rule
-
-2008-12-22  Christopher Bratusek <nano-master@gmx.de>
-	* sawfish.ebuild.in: forgot to add this file
-
-	* configure.in: improved [ALT-Linux]
-
-	* man/news.texi: updated
-
-	* sawfish.desktop
-	* sawfish-wm.desktop: added sawfish-wm.desktop
-			      updated content to make it possible for gnome-session >=2.23 to auto-start sawfish
-
-	* Makefile.in: updated to install both .desktop files into correct directory
-
-	* src/Makefile.in: remove a "." by $(srcdir)
-
-	* OPTIONS: added viewport-boundary-mode, error-handler -> both, focus-mode -> enter-click
-		   and scroll-viewport-steps
-
-	* sawfish.desktop
-	* sawfish-wm.desktop: different files. drop unused stuff from both.
-
-2008-12-20  Christopher Bratusek <nano-master@gmx.de>
-	* configure.in: 1.3.5 released, bump to 1.5.0
-			bumped minimum librep to 0.17.3 and rep-gtk to 0.18.4,
-			since rep.m4 has been removed in favour of an improved librep.pc/rep-gtk.pc
-
-	* configure.in
-	* sawfish.ebuild.in: Added ebuild [Harald van Dijk]
-
-	* man/news.texi: Updated
-
-	* configure.in
-	* Makefile.in
-	* sawfish.pc.in: Added pc file for sawfish
-
-	* Makefile.in: Improved distclean rule
+	* Makedefs.in: fixed an compilation error caused by glib [Michal Jaegermann]
 
 2008-12-18  Christopher Bratusek <nano-master@gmx.de>
-	* lisp/sawfish/wm/gnome/integration.jl: invoke x-terminal-emulator instead of gnome-terminal [Christian Marillat]
+	* lisp/sawfish/wm/gnome/integration.jl: invoke x-terminal-emulator instead of gnome-terminal [Christian Marillat] 
 
 	* lisp/sawfish/wm/gnome/menus.jl: invoke x-terminal-emulator instead of gnome-terminal
 	and add /usr/share/applications aswell as /var/lib/menu-xdg/applications/menu-xdg to the menu-paths [Christian Marillat]
@@ -680,7 +89,7 @@
 	patch by Jonathan Sambrook (Uploaded by Christopher Bratusek)
 
 2008-08-07  Christopher Bratusek <nano-master@gmx.de>
-	* themes/Makefile.in: install Elberg-tabbed
+	* themes/Makefile.in: install Elberg-tabbed 
 
 2008-08-07  Scott Scriven <sawfish@toykeeper.net>
 	* themes/Elberg-tabbed/: added Elberg-tabbed theme
@@ -786,7 +195,7 @@
 		for doing so, is that rep-glade is not yet
 		ported to glade2, therefore the themer does
 		not work.
-
+	
 	* configure.in
 	* Makefile.in
 	* TODO
@@ -794,13 +203,13 @@
 
 2008-02-18  Janek Kozicki <cosurgi@gmail.com>
 	* configure.in: version 1.3.3
-
+	
 	* "Utf 8 names fix" by Timo Korvola: window titles with UTF-8 working
 	and no openoffice crashes
-
+	
 	* "Pango draw() ignores font" by Yuuki Harano and Rodrigo Gallardo:
 	allows using pango fonts correctly.
-
+	
 	* "Titlebar updates" by Harald van Dijk and Timo Korvola: don't forget
 	to tell the running theme that window title length has changed.
 
@@ -809,50 +218,50 @@
 
 2008-01-20  Janek Kozicki <cosurgi@gmail.com>
 	* configure.in: version 1.3.2
-
+	
 	* documentation from Derek Upham v0.12
-
+	
 	* Updated Occitan translation (Yannig Marchegay)
-
+	
 	* patch by Luis Rodrigo Gallardo Cruz taken upstream from debian:
 	http://sawfish.wikia.com/wiki/Noprop_desktop_save
 	Sawfish saves the size of the desktop window, and although nautilus
 	requests the widget to be the same size as your screen it's forced to
 	the size that sawfish saved.
-
+	
 	* patch by Rodrigo Gallardo: http://sawfish.wikia.com/wiki/Update_desktop_file
 	The current Sawfish.desktop file did not comply with the
-	freedesktop.org standard.
-
+	freedesktop.org standard. 
+	
 	* patch by GSR: http://sawfish.wikia.com/wiki/Fix_select_workspace
 	fix-select-workspace, Fixes select-workspace in
 	lisp/sawfish/wm/workspace.jl to make sure it uses key params in its
 	call to select-workspace*
-
+	
 	* patch by Thadeu Lima de Souza Cascardo:
 	http://sawfish.wikia.com/wiki/Fix_Xlib_client_message
 	sawfish had problems with 64 bit client messages.
-
+	
 	* patch by Sven Schoenung: http://sawfish.wikia.com/wiki/Blank_lines_in_prompt
 	The window opened by the prompt function shows two blank lines before
 	the prompt even when they aren't needed.
-
+	
 	* patch by Timo Korvola: http://sawfish.wikia.com/wiki/Reparenting_cleanup
 	This fixes reparenting fights that occur between Sawfish and the KDE
 	system tray. Both try to reparent system tray icons as they are
 	mapped, leading to a lot of flicker and an unpredictable end result.
-
+	
 	* patch by Rodrigo Gallardo: http://sawfish.wikia.com/wiki/Net_wm_properties
 	strings are re-encoded in UTF8
 	window titles will be set correctly regardless of title encoding
 	(useful when browsing foreign pages).
-
+	
 	* patch by Timo Korvola: http://sawfish.wikia.com/wiki/KDE_system_tray_fix
 	With this it will ignore out of bounds _NET_CURRENT_DESKTOP requests silently.
 	KDE system tray apps have a nasty habit of sending
 	_NET_CURRENT_DESKTOP client messages with a parameter of -1, which
 	confuses Sawfish. This patch adds some bounds checking.
-
+	
 	* patch by Harald van Dijk: http://sawfish.wikia.com/wiki/KDE_menus_focus
 	QT applications were losing focus when menu was active.
 
@@ -881,7 +290,7 @@
 2006-01-26  Daniel Nylander <po@danielnylander.se>
 
         * po/sv.po: Updated Swedish translation
-
+	
 2005-06-26  Philip Langdale <philipl@mail.utexas.edu>
 
 	* configure.in
@@ -993,7 +402,7 @@
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
 	* po/sawfish.pot: Updated.
-
+	
 2002-05-17  Abel Cheung  <maddog@linux.org.hk>
 
 	* po/zh_TW.po: Converted to UTF-8.
@@ -1013,7 +422,7 @@
 2002-04-30  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
-
+	
 2002-04-26  Tõivo Leedjärv  <toivo@linux.ee>
 
 	* po/et.po: Updated Estonian translation.
@@ -1066,7 +475,7 @@
 	2002-02-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
-
+	
 	2002-01-31  Simos Xenitellis  <simos@hellug.gr>
 
 	* po/el.po: Updated Greek translation.
@@ -1079,7 +488,7 @@
 
 	* po/zh_CN.po: Updated Simplified Chinese translation by
 	Wang Li <charlesw1234@163.com>.
-
+	
 2002-03-17  Tõivo Leedjärv  <toivo@linux.ee>
 
 	* po/et.po: Updated Estonian translation.
@@ -1089,10 +498,10 @@
 	* po/sawfish.pot: updated
 
 2002-03-02  JeyaSudha <jeyasudha.duraipandy@wipro.com>
-
-	* configure.in: No need for checking the cflags and libs for
+	
+	* configure.in: No need for checking the cflags and libs for 
 	gnome capplets as sawfish-ui is used instead of sawfish-capplet
-
+	
 2002-03-02  John Harper  <jsh@pixelslut.com>
 
 	* configure.in: readded the --with-gnome-prefix option that
@@ -1120,15 +529,15 @@
 2002-02-12  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
-
+	
 2002-02-03  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
-
+	
 2002-02-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian (bokmål) translation.
-
+	
 2002-01-29  John Harper  <jsh@unfactored.org>
 
 	* configure.in: Fix imlib mess. Add -gnome2-n prefix to the
@@ -1137,7 +546,7 @@
 2002-01-27  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated this a bit.
-
+	
 2002-01-27  Christian Rose  <menthos@menthos.com>
 
 	* po/sv.po: Converted to UTF-8.
@@ -1170,7 +579,7 @@
 
 2001-11-17  Roy-Magne Mo  <rmo@sunnmore.net>
 
-	* po/nn.po: Added initial Norwegian (nynorsk) translation.
+	* po/nn.po: Added initial Norwegian (nynorsk) translation. 
 
 2001-11-15  Karl Eichwalder  <ke@suse.de>
 
@@ -1295,7 +704,7 @@
 2001-06-22  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-
+	
 2001-06-20  John Harper  <jsh@pixelslut.com>
 
 	* Makefile.in: fixed SUBDIRS commands to exit if an error
@@ -1316,7 +725,7 @@
 2001-05-22  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian translation.
-
+	
 2001-05-21  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* po/es.po: Merged with sawfish.pot file
@@ -1458,10 +867,10 @@
 	* po/de.po: Patched in diff from Christian Meyer.
 
 2001-03-11  Timur Bakeyev  <mc@bat.ru>
-
+	
 	* capplet/desktop-entries/*.desktop:  added Russian translations
-	from Vlad Harchev <hvv@hippo.ru>
-
+	from Vlad Harchev <hvv@hippo.ru>	
+	
 2001-03-11  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* po/es.po: Updated Spanish translation by Joseba García
@@ -1610,7 +1019,7 @@
 2001-01-30  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* po/no.po: Updated Norwegian translation.
-
+	
 2001-01-27  John Harper  <jsh@eazel.com>
 
 	* po/it.po: updated Italian translation from Michele Campeotto
@@ -1636,7 +1045,7 @@
 
 2001-01-19  John Harper  <jsh@eazel.com>
 
-	* themes/Makefile.in:
+	* themes/Makefile.in: 
 	* themes/Crux/theme.jl,	themes/Crux/*.png, themes/Crux/README:
 
 	New theme `Crux' - designed by Arlo, implemented by me. The new
@@ -1902,7 +1311,7 @@
 
 2000-07-20  Joaquim Fellmann <joaquim@hrnet.fr>
 
-	* po/fr.po: Updated French translation with patch from
+	* po/fr.po: Updated French translation with patch from 
           Christian Marillat <marillat.christian@wanadoo.fr>
 
 2000-07-23  John Harper  <john@dcs.warwick.ac.uk>

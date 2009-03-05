@@ -6,107 +6,14 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
-@heading 1.5.0
+@heading 1.3.5.1
 
 @itemize @bullet
 
-@item The 1.5.0 release has new features and bugfixes
-
-@item New/Updated requirements:
+@item Fixes:
 @itemize @minus
 
-@item librep 0.17 -> 0.17.3
-
-@item rep-gtk 0.18.3 -> 0.18.4
-@end itemize
-
-@item Bugs fixed:
-@itemize @minus
-
-@item Fixed an compilation-error caused by glib [Michal Jaegermann]
-
-@item Make building with imlib1 instead of gdk-pixbuf work again [Michal Jaegermann]
-
-@item Create src/build.h, since it has been missing before [Christopher Bratusek]
-
-@item Fixed an "unknown remote error" that might appear [Alexey I. Froloff]
-
-@item Make "make uninstall" work again [Christopher Bratusek]
-
-@item Iconify before repyfying (as requested by WM_HINTS) [Ian Zimmerman]
-
-@item First create $data/applications, then install the desktop file [Christopher Bratusek]
-
-@item Fixed default animation outline coordinates [Christopher Bratusek]
-@end itemize
-
-@item New features:
-@itemize @minus
-
-@item Tabbed Windowing Support [Yann Hodique, Scott Scriven, Nathan Froyd, Christopher Bratusek]
-
-@item Warp cursor to cycled windows, if warp-cursor is enabled [Christopher Bratusek]
-
-@item Warp cursor to unmaximied windows, if warp-cursor is enabled [Fernando Carmona Varo]
-
-@item 3 New Window-Animators: cross, elliptical and draft [Christopher Bratusek]
-
-@item Shrinking/Yanking Support [Timo Korvola]
-
-@item Infinite Desktop Feature (make the virtual desktop bigger than the physical) [David T. McWherter]
-@end itemize
-
-@item Other changes:
-@itemize @minus
-@item To build with XFree86/X.Org < 7.0 add --without-xorg-x11r7 flag [Christopher Bratusek]
-
-@item Major Documentation update [Derek Upham]
-
-@item Added ebuild [Harald van Dijk]
-
-@item Added session desktop file [Christopher Bratusek]
-
-@item rep.m4 has been dropped use librep.pc/rep-gtk.pc instead [Christopher Bratusek]
-
-@item Added sawfish.pc [Christopher Bratusek]
-
-@item Improved Makefile's distclean rule [Christopher Bratusek]
-
-@item Improved configure.in checks [ALT-Linux]
-
-@item Updated .desktop files for gnome-session >=2.23 [Christopher Bratusek]
-
-@item Updated OPTIONS [Christopher Bratusek]
-
-@item Fixed autogen for libtool >2.2 [Christopher Bratusek]
-
-@item Finally fully renamed from sawmill to sawfish [Christopher Bratusek]
-
-@item Major configure script rework [Christopher Bratusek]
-
-@item Don't ship config.sub config.guess and install-sh in $srcdir/etc [Christopher Bratusek]
-
-@item sawmill-defaults is now sawfish-defaults [Christopher Bratusek]
-
-@item ~/.sawmillrc has been dropped from the list of configuration files [Christopher Bratusek]
-
-@item Reworked Sawfish-UI [Christopher Bratusek]
-
-@item Dropped libgnome|gnomeui|gnomecanvas widgets, use pure gtk instead [Christopher Bratusek]
-
-@item Merged changes from sawfish-pager [Christopher Bratusek]
-
-@item Major update of the spec file [Christopher Bratusek] [Michal Jaegermann]
-
-@item Intltoolize Sawfish [Christopher Bratusek]
-
-@item Print usefull stuff at the end of configure [Christopher Bratusek]
-
-@item Add distclean rule to all Makefiles [Christopher Bratusek]
-
-@item Add KEYBINDINGS file, containing a list of all default keybindings [Christopher Bratusek]
-
-@item Updated OPTIONS for all new options [Christopher Bratusek]
+@item Fixed a compilation error caused by glib [Michal Jagermann]
 @end itemize
 @end itemize
 
@@ -291,7 +198,7 @@ centered/centered-on-parent (Fuchur, with comments by Andrea Vettorello)
 @itemize @bullet
 
 @item The 1.3.1 version is released to let people know that Sawfish is being
-revived by the community, and we are awaiting patches to be submitted
+revived by the community, and we are awaiting patches to be submitted 
 for incoming 1.3.2 release
 
 @item John Harper resigns from Sawfish maintainership and Sawfish community takes
@@ -399,7 +306,7 @@ van Adrighem, Christian Rose, Stanislav Visnovsky, Daniel Yacob, Andras
 Timar, Sava Chankov, Christian Neumair, Peteris Krisjanis, Gustavo
 Noronha Silva, Christian Meyer, Fatih Demir, Hasbullah Bin Pit,
 Christophe Fergeau)
-
+ 
 @item Bug fixes:
 
 @itemize @minus
@@ -1259,7 +1166,7 @@ to the image when necessary (when using gdk-pixbuf)
 @item Canonify @kbd{S-x} as @kbd{X} where possible
 
 @item Catch and handle errors when matching properties in the
-@code{sawfish.wm.ext.match-window}
+@code{sawfish.wm.ext.match-window} 
 
 @item Escape underscores in menu items where they shouldn't introduce
 accelerators. (Added @code{quote-menu-item} function to help with this)
@@ -2195,7 +2102,7 @@ García Etxebarria), nl (Han-Wen Nienhuys)
 
 @item Rewrote workspace handling---windows can now appear on multiple
 workspaces, with each instance having different properties (position,
-size, whatever@dots{})
+size, whatever@dots{}) 
 
 Create new window instances by using the @code{copy-to-next-workspace},
 @code{copy-to-previous-workspace}, and @code{copy-to-workspace:@var{n}}
@@ -2387,7 +2294,7 @@ New option @samp{--disable-nls} to disable i18n
 
 @item New command @code{raise-window-and-pass-through-click}; bind it
 to a mouse button in the @code{window-keymap} to get the ``raise window
-on click'' behaviour that seems popular
+on click'' behaviour that seems popular 
 
 @item New commands to move windows incrementally:
 @code{slide-window-@var{x}} and @code{slide-group-@var{x}} for @var{x}

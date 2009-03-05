@@ -3,20 +3,20 @@
 #
 # Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 #
-# This file is part of sawfish.
+# This file is part of sawmill.
 #
-# sawfish is free software; you can redistribute it and/or modify it
+# sawmill is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2, or (at your option)
 # any later version.
 #
-# sawfish is distributed in the hope that it will be useful, but
+# sawmill is distributed in the hope that it will be useful, but
 # WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with sawfish; see the file COPYING.  If not, write to
+# along with sawmill; see the file COPYING.  If not, write to
 # the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 version=@version@
@@ -53,7 +53,7 @@ LIBS=@LIBS@
 #LIBOBJS=@LIBOBJS@
 LIBOBJS=
 X11_CFLAGS=@X_CFLAGS@ @XFT_CFLAGS@
-X11_LIBS=-lX11 @X_LIBS@ @X_EXTRA_LIBS@
+X11_LIBS=@X_PRE_LIBS@ -lX11 @X_LIBS@ @X_EXTRA_LIBS@
 EXTRA_X11_LIBS=@XINERAMA_LIBS@ @XRANDR_LIBS@ @XFT_LIBS@ -lXext
 IMLIB_CFLAGS=@IMLIB_CFLAGS@
 IMLIB_LIBS=@IMLIB_LIBS@
