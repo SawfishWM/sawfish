@@ -6,6 +6,33 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} files in the Sawfish source tree.
 
+@heading 1.3.5.2
+
+@itemize @bullet
+
+@item New/Updated Requirements:
+@itemize @minus
+
+@item librep 0.17 -> 0.17.3
+
+@item rep-gtk 0.18.3 -> 0.18.4
+@end itemize
+
+@item Fixes:
+@itemize @minus
+
+@item allow compilation with librep 0.17.3
+
+@item fix templates in configure.in (fixes autoheader issue)
+
+@item add AC_CONFIG_MACRO_DIR([m4]) to shut up libtool
+
+@item add AM_PROG_LIBTOOL for autogen.sh to run libtoolize
+
+@item new autogen.sh (take from upstream svn) to solve libtool 1.5/2.2 issues
+@end itemize
+@end itemize
+
 @heading 1.3.5.1
 
 @itemize @bullet
