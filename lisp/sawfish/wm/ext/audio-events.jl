@@ -52,19 +52,20 @@
   ;; unmapped-transient, switch-workspace, move-viewport, focused,
   ;; unfocused
 
-  (defcustom audio-events-alist '((iconified . "slide.wav")
-				  (uniconified . "slide.wav")
-				  (shaded . "slide.wav")
-				  (unshaded . "slide.wav")
-				  (maximized . "slide.wav")
-				  (unmaximized . "slide.wav")
-				  (mapped . "activate.wav")
-				  (unmapped . "gameover.wav")
-				  (mapped-transient . "activate.wav")
-				  (unmapped-transient . "toggled.wav")
-				  ;(focused . "clicked.wav")
-				  (switch-workspace . "toggled.wav")
-				  (move-viewport . "toggled.wav"))
+  (defcustom audio-events-alist '((iconified . "iconify.wav")
+				  (uniconified . "uniconify.wav")
+				  (shaded . "shade.wav")
+				  (unshaded . "unshade.wav")
+				  (maximized . "maximize.wav")
+				  (unmaximized . "unmaximize.wav")
+				  (mapped . "map.wav")
+				  (unmapped . "unmap.wav")
+				  (mapped-transient . "map-transient.wav")
+				  (unmapped-transient . "unmap-transient.wav")
+				  ;(focused . "focused.wav")
+				  ;(unfocused . "unfocused.wav")
+				  (switch-workspace . "switch-workspace.wav")
+				  (move-viewport . "move-viewport.wav"))
     nil
     :type* `(alist ((symbol iconified uniconified
 			    shaded unshaded
