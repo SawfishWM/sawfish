@@ -26,8 +26,6 @@ AC_CONFIG_MACRO_DIR([m4])
 
 AM_PROG_LIBTOOL
 
-IT_PROG_INTLTOOL([0.40.0])
-
 dnl Release versioning info
 version="1.5.0"
 subversion=""
@@ -350,6 +348,24 @@ VERSION=$version
 
 install_sh=../install-sh
 
+AC_MSG_CHECKING(for languages to install)
+AC_ARG_ENABLE(linguas,
+	      [  --enable-linguas=LANGS... Install language catalogs for language codes LANGS],
+	      [ LINGUAS="$enableval" ], [ LINGUAS="" ])
+
+if test "x$LINGUAS" = x; then
+	changequote({,})
+	LINGUAS="`echo $srcdir/po/*.po | sed -e 's/[^ ]*\/po\/\([^ ]*\)\.po/\1/g'`"
+	changequote([,])
+fi
+
+dnl too gross for words..
+if test $REP_MSGFMT = true; then
+	LINGUAS=""
+fi
+
+AC_MSG_RESULT($LINGUAS)
+
 dnl Nonstandard exported symbols
 AC_SUBST(version)
 AC_SUBST(subversion)
@@ -397,6 +413,7 @@ AC_SUBST(ESD_CFLAGS)
 AC_SUBST(GETTEXT_PACKAGE)
 AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)
+AC_SUBST(LINGUAS)
 
 dnl Build all files
 AC_CONFIG_FILES([
@@ -410,7 +427,7 @@ lisp/sawfish/ui/Makefile
 lisp/sawfish/gtk/Makefile
 lisp/sawfish/gtk/widgets/font.jl
 man/Makefile
-po/Makefile.in
+po/Makefile
 scripts/Makefile
 sounds/Makefile
 src/Makefile
