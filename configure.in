@@ -33,6 +33,8 @@ subversion=""
 SUBDIRS="src lisp scripts themes sounds man po"
 AC_SUBST(SUBDIRS)
 
+AC_SUBST(datarootdir)
+
 dnl Remove trailing slash in $prefix if necessary
 dnl /usr// is the same than /usr/ ... so why would we need this?
 case "${prefix}" in
