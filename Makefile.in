@@ -58,7 +58,7 @@ install : all installdirs
 	  fi \
 	done
 	$(INSTALL_DATA) $(top_srcdir)/sawfish.pc $(DESTDIR)$(libdir)/pkgconfig/
-	$(INSTALL_DATA) $(top_srcdir)/sawfish-session.desktop $(DESTDIR)/$(datadir)/xsessions/sawfish.desktop
+	$(INSTALL_DATA) $(top_srcdir)/sawfish-session.desktop $(DESTDIR)$(datadir)/xsessions/sawfish.desktop
 
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(sawfishdir)/$(version) \

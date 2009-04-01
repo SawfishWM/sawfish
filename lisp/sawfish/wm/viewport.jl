@@ -48,7 +48,7 @@
 
   ;; Virtual workspaces are implemented by moving windows in and out of
   ;; the screen dimensions. E.g. moving to the left moves all windows one
-  ;; screen-width to the right. 
+  ;; screen-width to the right.
 
   (defgroup viewport "Viewport" :group workspace)
 
@@ -146,7 +146,7 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
   (define (select-workspace-and-viewport space col row)
     (select-workspace space nil (lambda ()
 				  (set-screen-viewport col row))))
-  
+
   ;; returns t if it actually moved the viewport
   (define (move-viewport right down)
     (let ((port (screen-viewport)))
@@ -243,7 +243,7 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
     #:spec "NX:\nNY:"
     #:type `(and (labelled ,(_ "Column:") (number 1))
 		 (labelled ,(_ "Row:") (number 1)))
-    #:class 'viewport)
+    #:class 'default)
 
   (define (activate-viewport-column x)
     "Select the specified viewport column."
@@ -252,7 +252,7 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
   (define-command 'activate-viewport-column activate-viewport-column
     #:spec "NX:"
     #:type `(and (labelled ,(_ "Column:") (number 1)))
-    #:class 'viewport)
+    #:class 'default)
 
   (define (activate-viewport-row y)
     "Select the specified viewport row."
@@ -261,7 +261,7 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
   (define-command 'activate-viewport-row activate-viewport-row
     #:spec "NY:"
     #:type `(and (labelled ,(_ "Row:") (number 1)))
-    #:class 'viewport)
+    #:class 'default)
 
   (define (move-window-to-viewport x y)
     "Move the current window to the specified viewport."
@@ -270,7 +270,7 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
   (define-command 'move-window-to-viewport move-window-to-viewport
     #:spec "NX:\nNY:"
     #:type '(and (labelled "X:" (number 1)) (labelled "Y:" (number 1)))
-    #:class 'viewport)
+    #:class 'default)
 
   (define (move-viewport-right)
     "Move the viewport one screen to the right."
@@ -317,14 +317,14 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
     "Move the window to the viewport above, and switch to that viewport."
     (move-window-to-viewport-and-move-viewport w 0 -1))
 
-  (define-command 'move-viewport-right move-viewport-right #:class 'viewport)
-  (define-command 'move-viewport-left move-viewport-left #:class 'viewport)
-  (define-command 'move-viewport-up move-viewport-up #:class 'viewport)
-  (define-command 'move-viewport-down move-viewport-down #:class 'viewport)
-  (define-command 'move-window-right move-window-right #:spec "%W" #:class 'viewport)
-  (define-command 'move-window-left move-window-left #:spec "%W" #:class 'viewport)
-  (define-command 'move-window-up move-window-up #:spec "%W" #:class 'viewport)
-  (define-command 'move-window-down move-window-down #:spec "%W" #:class 'viewport)
+  (define-command 'move-viewport-right move-viewport-right #:class 'default)
+  (define-command 'move-viewport-left move-viewport-left #:class 'default)
+  (define-command 'move-viewport-up move-viewport-up #:class 'default)
+  (define-command 'move-viewport-down move-viewport-down #:class 'default)
+  (define-command 'move-window-right move-window-right #:spec "%W" #:class 'default)
+  (define-command 'move-window-left move-window-left #:spec "%W" #:class 'default)
+  (define-command 'move-window-up move-window-up #:spec "%W" #:class 'default)
+  (define-command 'move-window-down move-window-down #:spec "%W" #:class 'default)
 
 ;;; session management, config
 
@@ -351,7 +351,7 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
 	  (when (window-outside-workspace-p w)
 	    (move-window-to-current-viewport w)))
 	(window-put w 'placed t))))
-			     
+
   (sm-add-saved-properties 'sticky-viewport)
   (add-hook 'sm-window-save-functions viewport-saved-state)
   (add-hook 'sm-restore-window-hook viewport-load-state)

@@ -1,3 +1,23 @@
+2009-03-24  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/viewport.jl
+	* lisp/sawfish/wm/autoload.jl: make viewport commands appear in sawfish-ui
+
+	* configure.in: changed appearance of ending message a bit
+	                display additional infos
+			added codename field
+			re-ordered some checks
+	                only display cairo version if it exists
+			put all AC_SUBST at the end of the file
+
+	* Makedefs.in: remove nokogiridir (not beeing used)
+	               first define host_type then stuff that refers to it
+		       first define datarootdir then stuff that refers to it
+
+	* man/news.texi: updated
+
+2009-03-15  Christopher Bratusek <zanghar@freenet.de>
+	* KEYBINDINGS: added description of several extra keys
+
 2009-03-06  Christopher Bratusek <zanghar@freenet.de>
 	* configure.in
 	* Makedefs.in: don't ignore datarootdir setting
@@ -12,7 +32,7 @@
 
 	* autogen.sh
 	* configure.in: de-intltoolize sawfish ... not working properly
-	
+
 	* po/LINGUAS
 	* po/Makefile.in.in: removed
 
@@ -27,7 +47,7 @@
 
 	* COPYING.SOUNDS: license for the sounds is Artistic2.0beta4
 
-	* THANKS: updated 
+	* THANKS: updated
 
 	* sounds/focused.wav
 	* sounds/iconify.wav
@@ -67,7 +87,7 @@
 
 2009-03-01  Guillermo S. Romero <gsromero@svn.gnome.org>
 	* man/user-doc.texi: on going work on user docs.
-	
+
 2009-02-19  Christopher Bratusek <zanghar@freenet.de>
 	* sawfish.desktop
 	* sawfish-wm.desktop
@@ -107,9 +127,9 @@
 	                also explained rc duality (~/.sawfish[/]rc).
 
 	* KEYBINDINGS: Suggest xmodmap and xev. Super (not s) is Super
-	
+
 	* man/user-doc.texi: brain backup about workspaces, viewports, etc
-	
+
 2009-02-14  Christopher Bratusek <zanghar@freenet.de>
 	* man/user-doc.texi: added introduction
 
@@ -127,7 +147,7 @@
 	* KEYBINDINGS: S is Super not Shift
 	               W is Modifier and M is Alt
 	               s/take place/are active/g
-	
+
 	* lisp/sawfish/wm/commands/shrink-yank: Don't forget to load sawfish.wm.custom
 
 	* po/POTFILES.in: marks.jl is now in .util
@@ -181,7 +201,7 @@
 2009-02-07  Guillermo S. Romero <gsromero@svn.gnome.org>
         * lisp/sawfish/wm/tabs/marks.jl
         * lisp/sawfish/wm/util/marks.jl: move marks from tabs to util
-        
+
         * lisp/sawfish/wm/tabs/tab.jl: update accordingly
 
 2009-02-05  Christopher Bratusek <zanghar@freenet.de>
@@ -238,7 +258,7 @@
 	* autogen.sh: remove --copy flag from intltoolize
 
 2009-02-02  Christopher Bratusek <zanghar@freenet.de>
-	* Makefile.in: create $DESTDIR$datadir/applications before 
+	* Makefile.in: create $DESTDIR$datadir/applications before
 	               installing desktop file into it
 
 	* */Makefile.in: add distclean rule to all subdir Makefiles
