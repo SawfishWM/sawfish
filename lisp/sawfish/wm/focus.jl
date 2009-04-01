@@ -57,7 +57,7 @@
     :group focus)
 
   (defcustom focus-dont-push nil
-    "Wether focusing a window doesn't change it's position in the stack."
+    "Whether focusing a window doesn't change it's position in the stack."
     :type boolean
     :group focus)
 

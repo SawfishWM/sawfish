@@ -68,7 +68,6 @@
 
   (i18n-defvar match-window-properties
     `((placement ,(_ "Placement")
-       (avoid boolean)
        (ignore-program-position boolean)
        (place-mode ,(lambda () `(choice ,@placement-modes)))
        (position (pair number number))
@@ -88,6 +87,7 @@
        (frame-type ,(lambda () `(choice ,@(mapcar car match-window-types))))
        (frame-style ,(lambda () `(symbol ,@(find-all-frame-styles t)))))
       (state ,(_ "State")
+       (avoid boolean)
        (ignored boolean)
        (iconified boolean)
        (shaded boolean)

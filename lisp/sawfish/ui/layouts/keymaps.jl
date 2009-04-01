@@ -31,7 +31,7 @@
 	  sawfish.ui.layout
 	  sawfish.gtk.widget)
 
-  (defvar label-ptr nil)
+  (define label-ptr nil)
 
   (define (keymap-slot-p slot)
     ;; XXX so fucking evil!

@@ -36,9 +36,9 @@
 	   sawfish.gtk.widget)
      (access rep.structures))
 
-  (defvar widget-ptr nil)
-  (defvar label-ptr nil)
-  (defvar tempstring nil)
+  (define widget-ptr nil)
+  (define label-ptr nil)
+  (define tempstring nil)
 
   (define (define-layout-type name fun) (put name 'nokogiri-layout fun))
 
@@ -139,10 +139,10 @@
 	      (when (< break (length doc))
 		(setq tempstring (substring doc (+ break 2)))	
 		(if (> (length tempstring) 0)
-		(progn
-		(setq label-ptr (make-label tempstring))
-		(gtk-box-pack-start hbox label-ptr)
-		(gtk-widget-relate-label widget-ptr label-ptr))))
+		    (progn
+		      (setq label-ptr (make-label tempstring))
+		      (gtk-box-pack-start hbox label-ptr)
+		      (gtk-widget-relate-label widget-ptr label-ptr))))
 	      (setq hbox (add-tooltip hbox))
 	      (gtk-widget-show-all hbox)
 	      hbox))))))
@@ -150,10 +150,10 @@
   (define (remove-newlines string)
     (let loop ((point 0)
 	       (out '()))
-      (if (string-match "\n" string point)
-	  (loop (match-end)
-		(list* #\space (substring string point (match-start)) out))
-	(apply concat (nreverse (cons (substring string point) out))))))
+	 (if (string-match "\n" string point)
+	     (loop (match-end)
+		   (list* #\space (substring string point (match-start)) out))
+	   (apply concat (nreverse (cons (substring string point) out))))))
   
   (define (make-label text)
     (let ((label (gtk-label-new text)))

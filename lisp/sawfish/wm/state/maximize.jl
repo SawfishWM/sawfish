@@ -70,9 +70,6 @@
 
   (define-structure-alias maximize sawfish.wm.state.maximize)
 
-  ;; This sets the window property `unmaximized-geometry' of each
-  ;; currently maximize window to `(X Y W H)', the saved geometry.
-
   (defvar maximize-always-expands nil
     "Maximizing a window in one dimension must increase the size of that dimension.")
 
@@ -128,6 +125,8 @@
 	(rplacd dims (nth 3 old-geom)))
       dims))
 
+  ;; This sets the window property `unmaximized-geometry' of each
+  ;; currently maximize window to `(X Y W H)', the saved geometry.
   (define (save-unmaximized-geometry w)
     (unless (window-get w 'unmaximized-geometry)
       (let ((coords (window-position w))

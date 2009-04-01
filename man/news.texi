@@ -20,6 +20,24 @@ they occurred between. For more detailed information see the
 @item rep-gtk 0.18.3 -> 0.18.4
 @end itemize
 
+@item User visible changes:
+@itemize @minus
+@item Renamed ``sawmill'' to ``sawfish''
+
+If your @file{.sawfishrc} has a line @code{(require 'sawmill-defaults)},
+then change it to @code{(require 'sawfish-defaults)}.
+
+If your configuration file is named @code{~/.sawmillrc}, then rename it
+to @code{~/.sawfish/rc} or @code{~/.sawfishrc}.
+
+@item Configurator GUI's default style is tree view of categories.
+
+Configurator GUI (sawfish-ui) used to display categories in flat row,
+but now arranges them in tree diagram.
+
+To use the old style, put @code{(define-special-variable customize-program "sawfish-ui --flatten")} in your configuration file.
+@end itemize
+
 @item Bugs fixed:
 @itemize @minus
 
@@ -64,7 +82,7 @@ they occurred between. For more detailed information see the
 @itemize @minus
 @item To build with XFree86/X.Org < 7.0 add --without-xorg-x11r7 flag [Christopher Bratusek]
 
-@item Major Documentation update [Derek Upham]
+@item Major Documentation update [Derek Upham, Teika Kazura]
 
 @item New Sound Theme [glh Pimenta]
 
@@ -84,13 +102,13 @@ they occurred between. For more detailed information see the
 
 @item Finally fully renamed from sawmill to sawfish [Christopher Bratusek]
 
-@item Major configure script rework [Christopher Bratusek]
-
-@item Don't ship config.sub config.guess and install-sh in $srcdir/etc [Christopher Bratusek]
-
 @item sawmill-defaults is now sawfish-defaults [Christopher Bratusek]
 
 @item ~/.sawmillrc has been dropped from the list of configuration files [Christopher Bratusek]
+
+@item Major configure script rework [Christopher Bratusek]
+
+@item Don't ship config.sub config.guess and install-sh in $srcdir/etc [Christopher Bratusek]
 
 @item Reworked Sawfish-UI [Christopher Bratusek]
 
@@ -109,6 +127,10 @@ they occurred between. For more detailed information see the
 @item Updated OPTIONS for all new options [Christopher Bratusek]
 
 @item Cleaned Up Makedefs.in [Christopher Bratusek]
+
+@item Move 'avoid' window-matcher from placement to state [Teika Kazura]
+
+@item Updated compat.jl [Teika Kazura]
 @end itemize
 @end itemize
 

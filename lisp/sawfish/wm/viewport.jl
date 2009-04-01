@@ -70,7 +70,7 @@
     :range (1 . 50))
 
   (defcustom viewport-boundary-mode 'stop
-    "Wether to stop or wrap-around on first/last viewport"
+    "Whether to stop or wrap-around on first/last viewport"
     :group (workspace viewport)
     :type (choice wrap-around stop))
 

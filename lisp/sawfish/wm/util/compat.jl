@@ -104,8 +104,7 @@
 	  uniquify-name-format transients-get-focus decorate-transients
 	  raise-windows-on-uniconify uniconify-to-current-workspace
 	  uniconify-to-current-viewport iconify-ignored
-	  maximize-always-expands maximize-ignore-when-filling
-	  maximize-avoid-avoided focus-windows-on-uniconify
+	  focus-windows-on-uniconify
 	  transients-are-group-members raise-selected-windows
 	  warp-to-selected-windows menus-include-shortcuts
 	  configure-auto-gravity configure-ignore-stacking-requests

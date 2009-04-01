@@ -82,17 +82,17 @@
     :group (misc warp))
 
   (defcustom warp-to-window-enabled nil
-    "Wether to enable warping the cursor to windows."
+    "Whether to enable warping the cursor to windows."
     :type boolean
     :group (misc warp))
 
   (defcustom dont-avoid-ignored t
-    "Wether to not ignore avoided windows by default."
+    "Whether to not ignore avoided windows by default."
     :type boolean
     :group misc)
 
   (defcustom avoid-by-default nil
-    "Wether to avoid any unspecified window by default."
+    "Whether to avoid any unspecified window by default."
     :type boolean
     :group misc)
 
