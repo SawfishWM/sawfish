@@ -3,8 +3,8 @@
 @settitle sawfish Programming Manual
 @footnotestyle end
 
-@set EDITION 0.14
-@set VERSION 1.5.0
+@set EDITION 0.13
+@set VERSION 1.3.5
 @set UPDATED 28 Mar 2009
 @set UPDATE-MONTH Mar 2009
 
@@ -842,7 +842,7 @@ Lisp properties bound to @var{window}.  Returns the value of the last
 
 @defun window-plist window
 Returns the property list of the window @var{window} which is of the form
-@code{(prop value prop value ...)}.
+@code{(prop value prop value ...)}. 
 
 Do not attempt to change properties by modifying the property list in place.
 Use window-put instead.
@@ -886,7 +886,7 @@ transient for window @var{ancestor}, false otherwise.
 Return the list of windows that window @var{child} is a transient
 for.  If @var{indirectly} is true, then return the list of all
 ancestors rather than parents.
-@end defun
+@end defun 
 
 @defun transient-children parent &optional indirectly
 Return the list of windows that are transients for window
@@ -1555,7 +1555,7 @@ pair is different.
 @deffn Function lower-window* window
 @deffnx Command lower-window window
 Lower @var{window} and possibly associated windows to the bottom of
-their stacking depths.
+their stacking depths. 
 @end deffn
 
 @deffn Function raise-window* window
@@ -2069,176 +2069,247 @@ Toggle the appropriate flag on @var{window}.
 All five of the flags are available through the window menu's
 ``Toggle'' entry.
 
-@node Maximizing Windows, Animating Windows, Ignored Windows, Windows
+@node Avoided Windows, Maximizing Windows, Ignored Windows, Windows
+@section Avoided Windows
+@cindex Windows, avoided
+@cindex avoid
+
+``Avoided'' windows are kept unobscured by other windows
+wherever possible. It is involved in window placement (@pxref{Window
+Placement}) and maximization (@pxref{Maximizing Windows}).
+Most placement modes will attempt to place a new window avoiding
+overlap with them. Windows can be maximized avoiding overlap to
+avoided windows.
+
+In this context, windows are categorized into three: windows with
+@code{avoid} property, those with
+@code{ignored} property (@pxref{Ignored Windows}), and the others.
+
+It is possible to avoid overlap only with avoided windows, and
+also is possible @emph{not} to avoid overlap only with ignored windows.
+
+Remember that the window with @code{avoid} property is @emph{avoided}
+by @emph{other} windows. Thus property name @code{avoid} should have
+been named ``avoided''. On the other hand, related functions and
+variables are named correctly, and no special care is necessary.
+
+@defvar dont-avoid-ignored
+When non-nil (the default), ignored windows aren't avoided.
+@end defvar
+
+@defvar avoid-by-default
+When non-nil, any windows are avoided. Defaults to nil.
+@end defvar
+
+@defun window-avoided-p window
+Returns t if @var{window} is avoided by other windows.
+It is determined in the following order:
+
+@enumerate
+@item A window with @code{avoid} property is always avoided.
+@item A window with @code{ignored} property is always @emph{not} avoided
+unless @code{dont-avoid-ignored} is non-nil.
+@item Otherwise, @code{avoid-by-default} determines if it should be avoided.
+@end enumerate
+@end defun
+
+@defun avoided-windows &optional window
+Returns a list of all windows that are avoided. If
+@var{window} is defined, then it is excluded from the returned list.
+@end defun
+
+@node Maximizing Windows, Animating Windows, Avoided Windows, Windows
 @section Maximizing Windows
 @cindex Maximizing windows
 @cindex Windows, maximizing
 
 The dimensions of a window may be temporarily @dfn{maximized},
-stretching as far as possible in one or two dimensions, subject to
-various constraints.
+stretching as far as possible within the screen in one or two dimensions.
 
- defun window-maximizable-p window
-Return @code{t} when @var{window} is maximizable.
+@defun window-maximizable-p window &optional direcion hints
+Return @code{t} when @var{window} is maximizable. The window property
+@var{never-maximize} prevents maximization.
 
-The window property @var{never-maximize} prevents maximization.
- end defun
+If defined, @var{direction} is a symbol, either @code{vertical} or
+@code{horizontal}, and maximization will only occur for that
+direction.
 
- defun window-maximized-p window
+The optional argument @var{hints} overrides the window's hints.
+@end defun
+
+@defun window-maximized-p window
 Return @code{t} when @var{window} is maximized in any direction.
- end defun
+@end defun
 
- defun window-maximized-vertically-p window
+@defun window-maximized-vertically-p window
 Return @code{t} when @var{window} is vertically maximized.
- end defun
+@end defun
 
- defun window-maximized-horizontally-p window
+@defun window-maximized-horizontally-p window
 Return @code{t} when @var{window} is horizontally maximized.
- end defun
+@end defun
 
- menu
-* Simple Maximization::
+@menu
+* Basic Maximizations::         
 * Maximizing Without Overlap::
-* Maximizing Without Borders::
-* Unmaximizing::
- end menu
+* Maximizing Without Borders::  
+* Unmaximizing::                
+@end menu
 
- node Simple Maximization, Maximizing Without Overlap, Maximizing Windows, Maximizing Windows
- subsection Simple Maximization
+@node Basic Maximizations, Maximizing Without Overlap, Maximizing Windows, Maximizing Windows
+@subsection Basic Maximizations
 
-By default, maximization occurs on the current screen, ignoring other
-windows but obeying the screen edges and possibly rounding down to fit
-character sizes.
+Ordinary maximization occurs on the current screen, and possibly
+rounding down to fit character sizes.
 
-@deffn Command maximize-window window &optional direction
+@deffn Function maximize-window window &optional direction only-1d
+@deffnx Command maximize-window window
 Maximize both dimensions of @var{window} on the screen.
 
-If defined, @var{direction} may be either @code{vertical} or
-@code{horizontal} and maximization will only occur for that
+If defined, @var{direction} is a symbol, either @code{vertical} or
+@code{horizontal}, and maximization will only occur for that
 direction.
+
+The optional argument @var{only-1d} is for internal use. Don't use it.
 @end deffn
 
-@deffn Command maximize-window-vertically window
+@deffn Function maximize-window-vertically window
+@deffnx Command maximize-window-vertically window
 Maximize the vertical dimension of @var{window} in the screen.
 @end deffn
 
-@deffn Command maximize-window-horizontally window
+@deffn Function maximize-window-horizontally window
+@deffnx Command maximize-window-horizontally window
 Maximize the horizontal dimension of @var{window} in the screen.
 @end deffn
 
-@deffn Command maximize-window-toggle window
+@deffn Function maximize-window-toggle window &optional direction
+@deffnx Command maximize-window-toggle window
 Toggle the state of @var{window} between maximized and unmaximized
 in the screen.
 
-If defined, @var{direction} may be either @code{vertical} or
-@code{horizontal} and maximization will only occur for that
+If defined, @var{direction} is a symbol, either @code{vertical} or
+@code{horizontal}, and maximization will only occur for that
 direction.
 @end deffn
 
-@deffn Command maximize-window-vertically-toggle window
+@deffn Function maximize-window-vertically-toggle window
+@deffnx Command maximize-window-vertically-toggle window
 Toggle the state of @var{window} between vertically maximized and
 unmaximized in the screen.
 @end deffn
 
-@deffn Command maximize-window-horizontally-toggle window
+@deffn Function maximize-window-horizontally-toggle window
+@deffnx Command maximize-window-horizontally-toggle window
 Toggle the state of @var{window} between horizontally maximized and
 unmaximized in the screen.
 @end deffn
 
- defvr Custom move-lock-when-maximized
+@defvr Customizable move-lock-when-maximized
 When true (the default), Sawfish will not allow the user to manually
 resize maximized windows.  It will also prevent the user from moving
 the windows along their maximized axes.
 
 For example, a vertically maximized window is vertically locked, so a
 user can slide it left and right, but cannot move it up or down.
- end defvr
+@end defvr
 
- defun window-locked-vertically-p window
+@defun window-locked-vertically-p window
 Return @code{t} when @var{window} is vertically locked.
- end defun
+@end defun
 
- defun frame-part-movable-p window part
+@defun frame-part-movable-p window part
 Return @code{t} if the @var{part} of @var{window} can be moved.
 
- @var{part} is one of the symbols @code{top-border},
- @code{bottom-border}, @code{left-border}, @code{right-border},
- @code{top-left-border}, @code{top-right-border},
- @code{bottom-left-border}, @code{bottom-right-border}, or
- @code{title}
- end defun
+@var{part} is one of the symbols: @code{top-border},
+@code{bottom-border}, @code{left-border}, @code{right-border},
+@code{top-left-corner}, @code{top-right-corner},
+@code{bottom-left-corner}, @code{bottom-right-corner}, or
+@code{title} 
+@end defun
 
- defvar maximize-raises
+@defvar maximize-raises
 When true (the default), maximizing a window raises it as well.
- end defvar
+@end defvar
 
- defvar maximize-avoid-avoided
-When true (the default), Sawfish will limit maximized windows so they
-do not cover windows with the @code{avoid} property.
- end defvar
+@defvar maximize-always-expands
+In general, if a window's dimension is larger than the screen size,
+maximizing that dimension can actually shrink it to fit into the
+screen.  When this variable is true (default false), maximizing a
+window's dimension will never shrink it.
+@end defvar
 
- defvar maximize-always-expands
-If a window's dimension is larger than the screen size, maximizing
-that dimension can actually shrink it to fit into the screen.  When
-this variable is true (default false), maximizing a window's dimension
-will never shrink it.
- end defvar
+@node Maximizing Without Overlap, Maximizing Without Borders, Basic Maximizations, Maximizing Windows
+@subsection Maximizing Without Overlap
 
- node Maximizing Without Overlap, Maximizing Without Borders, Simple Maximization, Maximizing Windows
- subsection Maximizing Without Overlap
+It is possible to maximize a window where it gets only large enough
+not to overlap with other windows. 
 
-The ``fill'' category of maximizing commands stretch the windows, but only
-large enough to not overlap with other windows on the screen.  This is
-in addition to the behavior of the @code{maximize-avoid-avoided}
-variable for avoided windows.
+@defvar maximize-avoid-avoided
+When true (the default), maximized window does not cover avoided
+windows. (@pxref{Avoided Windows})
+@end defvar
 
- deffn Command maximize-fill-window window &optional direction
+The ``fill'' category of maximizing commands provides a convenient way to
+maximize without overlap to any other windows, except ``ignored'' ones.
+(@pxref{Ignored Windows})
+
+In addition, they don't shrink the window even if it is already bigger
+than the screen size.
+
+@deffn Function maximize-fill-window window &optional direction
+@deffnx Command maximize-fill-window window
 Maximize both dimensions of @var{window} without overlapping other
 windows.
 
-If defined, @var{direction} may be either @code{vertical} or
+If defined, @var{direction} is a symbol, either @code{vertical} or
 @code{horizontal}, and maximization will only occur for that
 direction.
- end deffn
+@end deffn
 
- deffn Command maximize-fill-window-vertically window
+@deffn Function maximize-fill-window-vertically window
+@deffnx Command maximize-fill-window-vertically window
 Maximize the vertical dimension of @var{window} in the screen without
 overlapping other windows.
- end deffn
+@end deffn
 
- deffn Command maximize-fill-window-horizontally window
+@deffn Function maximize-fill-window-horizontally window
+@deffnx Command maximize-fill-window-horizontally window
 Maximize the horizontal dimension of @var{window} in the screen
 without overlapping other windows.
- end deffn
+@end deffn
 
- deffn Command maximize-fill-window-toggle window
+@deffn Function maximize-fill-window-toggle window
+@deffnx Command maximize-fill-window-toggle window
 Toggle the state of @var{window} between maximized and unmaximized in
 the screen without overlapping other windows.
 
-If defined, @var{direction} may be either @code{vertical} or
+If defined, @var{direction} is a symbol, either @code{vertical} or
 @code{horizontal}, and maximization will only occur for that
 direction.
- end deffn
+@end deffn
 
- deffn Command maximize-fill-window-vertically-toggle window
+@deffn Function maximize-fill-window-vertically-toggle window
+@deffnx Command maximize-fill-window-vertically-toggle window
 Toggle the state of @var{window} between vertically maximized and
 unmaximized in the screen without overlapping other windows.
- end deffn
+@end deffn
 
- deffn Command maximize-fill-window-horizontally-toggle window
+@deffn Function maximize-fill-window-horizontally-toggle window
+@deffnx Command maximize-fill-window-horizontally-toggle window
 Toggle the state of @var{window} between horizontally maximized and
 unmaximized in the screen without overlapping other windows.
- end deffn
+@end deffn
 
- defvar maximize-ignore-when-filling
-When true (the default), unmanaged windows are ignored for filling
-maximization.
- end defvar
+@defvar maximize-ignore-when-filling
+For ``filling'' maximization, ``ignored'' windows are ignored when true
+(the default). (@pxref{Ignored Windows})
+@end defvar
 
- node Maximizing Without Borders, Unmaximizing, Maximizing Without Overlap, Maximizing Windows
- subsection Maximizing Without Borders
+@node Maximizing Without Borders, Unmaximizing, Maximizing Without Overlap, Maximizing Windows
+@subsection Maximizing Without Borders
 
-he ``fullscreen'' and ``fullxinerama'' categories of maximizing
+The ``fullscreen'' and ``fullxinerama'' categories of maximizing
 commands maximize the window to some extent and remove all the
 window's decorations.  If necessary, Sawfish will pad the bottom and
 right window edges to make the window fill the complete extent.  (This
@@ -2632,7 +2703,7 @@ using side-effects, rather than returning values.
 @defun window-group-menu &optional w
 Return a menu definition suitable for @code{popup-menu}.  This menu
 will allow the user to assign the window @var{w} into any group of a
-managed window, or into a brand new group.  The window's current group
+managed window, or into a brand new group.  The window's current group 
 is checked or otherwise marked.
 @end defun
 
@@ -2737,9 +2808,9 @@ macro must be used. This augments the variable with extra information
 for the GUI, including such things as its required data type.
 
 @menu
-* Defgroup and Defcustom::
-* Customization Files::
-* Customized Variable Status::
+* Defgroup and Defcustom::      
+* Customization Files::         
+* Customized Variable Status::  
 @end menu
 
 @node Defgroup and Defcustom, Customization Files, Customization, Customization
@@ -4909,7 +4980,7 @@ this, we mark them with metadata that the runtime system can query.
 @menu
 * Old-style Command Definition::  Emacs-Lisp style
 * New-style Command Definition::  Common-Lisp style
-* Interactive Calling Specification::
+* Interactive Calling Specification::  
 * Operations on Commands::	Accessors and the like
 * Invoking Commands::           call-commmand, command hooks
 * Default Commands::            Sawfish ships with a few commands
@@ -5374,7 +5445,7 @@ mouse pointer position, relative to the origin of the root window.
 
 If there is a mouse update current event, the position is read
 directly from that event.  Otherwise it is read from the server.  If
-@var{from-server} is non-nil then the position is read directly from
+@var{from-server} is non-nil then the position is read directly from 
 the server in any case.
 @end defun
 
@@ -5993,7 +6064,7 @@ Compare with @code{window-moved-hook} and @code{window-resized-hook}.
 @defvrx {Window Hook} after-resize-hook
 Called after completion of an interactive move or resize.  In addition
 to the window, the hook is called with a list of symbols indicating how
-the window was moved or resized:
+the window was moved or resized: 
 @code{horizontal} and @code{vertical} for movement,
 @code{right}, @code{left}, @code{bottom} and @code{top} for resizing.
 @end defvr
@@ -6420,7 +6491,7 @@ attribute names are @code{background} and @code{border-color}.
 @end defun
 
 @defun x-configure-window window attrs
-Reconfigure the window associated with @var{window}.  @var{Attrs} is
+Reconfigure the window associated with @var{window}.  @var{Attrs} is 
 an alist mapping attribute names to values.  Allowed attribute names
 are @code{x}, @code{y}, @code{width}, @code{height} and
 @code{border-width}.
