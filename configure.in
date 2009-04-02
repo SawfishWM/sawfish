@@ -420,9 +420,6 @@ AC_OUTPUT
 
 mv sawfish.ebuild sawfish-$version.ebuild
 
-chmod +x build-info
-$PWD/build-info
-
 REP_VERSION="`pkg-config --modversion librep`"
 REP_GTK_VERSION="`pkg-config --modversion rep-gtk`"
 GLIB_VERSION="`pkg-config --modversion glib-2.0`"
