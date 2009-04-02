@@ -4,120 +4,82 @@
 
 @enumerate
 
-@item Why is it now called @emph{Sawfish}?
+@item How can I get informations on Sawfish?
 
-Because the old name (@samp{Sawmill}) was already being used by another
-company, who were in the process of registering it as a trademark.
-
-The rename should be mostly painless, all old binaries still work for
-the time being, but will be phased out over time (final phasing out
-started around 1.5.0). Where before you would execute a program called
-@file{sawmill*}, replace it by @file{sawfish*}. E.g. @file{sawmill}
-becomes @file{sawfish}, and @file{sawmill-client} becomes
-@file{sawfish-client}.
-
-Your @file{~/.sawmill} directory will automatically be renamed
-@file{~/.sawfish} unless it would overwrite an existing file. Only
-user configuration @file{~/.sawfish[/]rc} will be checked currently,
-@file{~/.sawmillrc} is not used anymore (it was also read up to
-version 1.3.5).
-
-My apologies for any inconvenience caused.
-
-
-@item But why @emph{Sawfish}, and not <insert your favourite
-alternative>?
-
-Well I had to choose something! And hopefully it satisfies the main
-requirements:
-
-@itemize @bullet
-@item There are no other computer-related users of the name (as checked
-in April 2000,)
-
-@item It's similar enough to the old name to hopefully carry some
-recognition across,
-
-@item It has no tenuous relationship to window-managing.
+@itemize
+@item Homepage: @url{http://sawfish.wikia.com/}.
+@item Mailing list: Please subscribe at @url{http://mail.gnome.org/mailman/listinfo/sawfish-list}. You can browse the archives at @url{http://mail.gnome.org/archives/sawfish-list/}.
+@item IRC: Join @code{#sawfish} on @code{irc.freenode.net}.
 @end itemize
 
+@item How do I read the Info manual?
+
+Either execute the command @samp{info sawfish}, or enter the Info mode
+within Emacs (@kbd{C-h i}) and type @kbd{g (sawfish) RET}.
+
+If you're using Gnome, then try executing @samp{gnome-help-browser
+info:sawfish}.
 
 @item I installed Sawfish but it's not working!  All I see when I
 start X is the default stipple background: no programs, no menus, no
 pager.
 
-This is exactly what it's supposed to do. Sawfish is a @emph{window
+This is exactly what it's supposed to do, but first try middle-click
+(by default) on the background. This invokes the menu. (If you have a
+two-button mouse, try clicking both buttons simultaneously).
+
+Why this is so? Because Sawfish is minimal - Sawfish is a @emph{window
 manager} and as such is not responsible for setting the background,
-starting programs or displaying a pager---these can all be done using
-separate applications (e.g. by using a desktop environment such as
-Gnome).
+starting programs or displaying a pager --- these can all be done
+using separate applications (e.g. by using a desktop environment such
+as Gnome).
 
-The default menu binding is somewhat obscure; you must middle-click on
-the background to bring up the menus (If you have a two-button mouse,
-try clicking both buttons simultaneously)
+@item How do I customize Sawfish?
 
-If, after reading this, you still think that Sawfish isn't working,
-please send mail describing the problem to the Sawfish mailing list
-@email{sawfish-list@@gnome.org}
+There're two ways, by the configurator GUI and by preparing lisp
+code. The GUI can be run by middle-clicking background ->
+``Customize''. Most customizations similar to other window managers
+can be done through GUI.
 
+For customizations by lisp, first understand that in the startup, three
+files are read, in the order: @file{sawfish-defaults},
+@file{~/.sawfish/custom}, @file{.sawfishrc}.
 
-@item How do I add customizations?
+@table @asis
+@item @file{sawfish-defaults}
+This is a system default lisp library. It loads some of the common
+window manager features. More precisely, it currently does:
 
-There are several files controlling this:
-
-@table @file
-@item ~/.sawfishrc and ~/.sawfish/rc
-Hand written lisp code, loaded at startup. This is where almost all
-explicit customization should be done. You can choose using a stand
-alone file @file{.sawfishrc} or a @file{rc} file inside the
-@file{.sawfish} directory to keep a more compact layout. This will be
-referenced @file{.sawfish[/]rc} as shorthand.
-
-@item sawfish-defaults
-This lisp library is only loaded if there's no @file{.sawfish[/]rc} file.
-
-@item ~/.sawfish/custom
-This stores customizations created by the configuration tool; it
+@itemize
+@item Gnome setup, by opening @code{sawfish.wm.gnome.integration},
+if Gnome is running.
+@item Error handling enhancements, by opening
+@code{sawfish.wm.ext.error-handler}
+@end itemize
+@item @file{~/.sawfish/custom}
+This stores customizations created by the configurator GUI; it
 shouldn't really be edited manually.
 
-This file is loaded @emph{after} @file{sawfish-defaults}, but @emph{before}
-@file{.sawfish[/]rc}.
-@end table
+@item @file{~/.sawfish/rc}  or @file{~/.sawfishrc}
+This is the file you edit. It is a hand written lisp code, and almost
+all explicit customization should be done here.
 
+Choose either @file{~/.sawfish/rc} or @file{~/.sawfishrc}. The
+former is recommended, because the directory @file{~/.sawfish} is
+anyway created to store @file{custom}, and you can also put other lisp
+scripts, like user-contributed codes there.
 
-@item I created @file{.sawfish[/]rc}, now things have changed?
-
-If a @file{~/.sawfish[/]rc} file exists, it prevents
-@file{sawfish-defaults} from being loaded. But it's
-@file{sawfish-defaults} that loads some of the common window manager
-features, so add the line
+If this file is present, then @file{sawfish-defaults} isn't read by
+default. But it loads standard features, so if you want it, add the
+following line to your @file{~/.sawfishrc} (or @file{~/.sawfish/rc})
+file:
 
 @lisp
 (require 'sawfish-defaults)
 @end lisp
 
-@noindent to your @file{.sawfish[/]rc} file if you want to start with all
-the standard features loaded.
-
-
-@item What's this @code{sawfish-client} program?
-
-This allows you to connect to a window manager process and evaluate
-arbitrary Lisp forms. Do @samp{sawfish-client -?} for more details
-(@samp{sawfish-client -} for a read-eval-print loop)
-
-By default you can only connect from the host running the wm (through a
-unix-domain socket). To enable the network based server, evaluate the
-lisp form @code{(server-net-init)}.
-
-Note however that this connects through the X server, meaning that
-anyone who can open windows on your display can also execute any Lisp
-code on the host running the window manager (and by extension,
-@emph{execute any program}).
-
-So @emph{don't} run the net server with X access control disabled
-(unless you're not connected to a network)
-
+In fact, @file{sawfish-defaults} is an alias of @file{sawfish.wm.defaults}.
+@end table
 
 @item How do I bind a key to execute a shell command?
 
@@ -137,20 +99,21 @@ Bind the event @kbd{Button1-Click1} in the @code{window-keymap} to the
 See the @samp{Popup Menus} node in the Info manual (@pxref{Popup
 Menus})
 
+@item How do I compile Lisp files?
 
-@item How do I restart Sawfish?
+Use the shell command:
 
-From a shell lauch the following command: @code{sawfish-client -q -f restart}
+@example
+sawfish --batch -l compiler -f compile-batch @var{files@dots{}}
+@end example
 
+@noindent where @var{files@dots{}} are the names of the files you want
+to compile. They will normally have @file{.jl} suffixes, the compiler
+will create associated files with @file{.jlc} suffixes containing the
+compiled Lisp code.
 
-@item How do I read the Info manual?
-
-Either execute the command @samp{info sawfish}, or enter the Info mode
-within Emacs (@kbd{C-h i}) and type @kbd{g (sawfish) RET}.
-
-If you're using Gnome, then try executing @samp{gnome-help-browser
-info:sawfish}.
-
+Remember that always the latest code is read, i.e., if the source is
+newer than the byte compiled file, the source is used, unlike emacs.
 
 @item How do I create a new theme?
 
@@ -186,6 +149,27 @@ package preventing engine based themes working with several interpreted
 languages. Get the latest @code{gtk-engines} from
 @url{ftp://ftp.gnome.org/}
 
+@item What's this @code{sawfish-client} program?
+
+This allows you to connect to a window manager process and evaluate
+arbitrary Lisp forms. Do @samp{sawfish-client -?} for more details
+(@samp{sawfish-client -} for a read-eval-print loop)
+
+By default you can only connect from the host running the wm (through a
+unix-domain socket). To enable the network based server, evaluate the
+lisp form @code{(server-net-init)}.
+
+Note however that this connects through the X server, meaning that
+anyone who can open windows on your display can also execute any Lisp
+code on the host running the window manager (and by extension,
+@emph{execute any program}).
+
+So @emph{don't} run the net server with X access control disabled
+(unless you're not connected to a network).
+
+@item How do I restart Sawfish?
+
+From a shell lauch the following command: @code{sawfish-client -q -f restart}
 
 @item Why don't you use GUILE?
 
@@ -195,7 +179,7 @@ has some features not available in GUILE (byte-code compilation,
 autoloading, built-in event-loop, @dots{})
 
 But before you flame me: yes I do think scheme is a more elegant
-language
+language.
 
 
 @item Will you add feature @var{x}?
@@ -215,17 +199,6 @@ Gnome hints, simply monitor property @code{_WIN_WORKSPACE} on the root
 window).
 
 
-@item Is there a Sawfish mailing list?
-
-Yes. Please subscribe at @url{http://mail.gnome.org/mailman/listinfo/sawfish-list}. 
-You can browse the archives at @url{http://mail.gnome.org/archives/sawfish-list/}.
-
-
-@item Is there a Sawfish IRC channel?
-
-Yes, there is. Join @code{#sawfish} on @code{irc.freenode.net}.
-
-
 @item Why does Sawfish look weird/crash on Solaris?
 
 Sawfish works stably on Solaris, but you may need to do two things:
@@ -239,12 +212,12 @@ the MIT-SHM option is on the @samp{Rendering} page)
 Recompile GTK+ using the @samp{--disable-xim} option to configure
 @end enumerate
 
-
 @item Why don't some windows ever get focused?
 
-If you don't have the option `give focus to windows even when they
-haven't asked for it' set to nil (define-special-variable ignore-window-input-hint nil),
-then windows that don't ask for focus don't get it.
+If you don't have the option ``give focus to windows even when they
+haven't asked for it'' set to nil (define-special-variable
+ignore-window-input-hint nil), then windows that don't ask for focus
+don't get it.
 
 Windows ask to receive focus by setting their WM_HINTS property
 appropriately; for example if I xprop a gnome-terminal:
@@ -283,18 +256,43 @@ an outdated version of the Lisp virtual machine. Recompile any Lisp
 files that you have installed locally.
 
 
-@item How do I compile Lisp files?
+@item Historical question: Why is it now called @emph{Sawfish}?
 
-Use the shell command:
+Because the old name (@samp{Sawmill}) was already being used by another
+company, who were in the process of registering it as a trademark.
 
-@example
-sawfish --batch -l compiler -f compile-batch @var{files@dots{}}
-@end example
+The rename should be mostly painless, all old binaries still work for
+the time being, but will be phased out over time (final phasing out
+started around 1.5.0). Where before you would execute a program called
+@file{sawmill*}, replace it by @file{sawfish*}. E.g. @file{sawmill}
+becomes @file{sawfish}, and @file{sawmill-client} becomes
+@file{sawfish-client}.
 
-@noindent where @var{files@dots{}} are the names of the files you want
-to compile. They will normally have @file{.jl} suffixes, the compiler
-will create associated files with @file{.jlc} suffixes containing the
-compiled Lisp code.
+Your @file{~/.sawmill} directory will automatically be renamed
+@file{~/.sawfish} unless it would overwrite an existing file. Only
+user configuration @file{~/.sawfish[/]rc} will be checked currently,
+@file{~/.sawmillrc} is not used anymore (it was also read up to
+version 1.3.5).
 
+My apologies for any inconvenience caused.
+
+@item Historical question: But why @emph{Sawfish}, and not <insert your favourite
+alternative>?
+
+Well I had to choose something! And hopefully it satisfies the main
+requirements:
+
+@itemize @bullet
+@item There are no other computer-related users of the name (as checked
+in April 2000,)
+
+@item It's similar enough to the old name to hopefully carry some
+recognition across,
+
+@item It has no tenuous relationship to window-managing.
+@end itemize
+
+Incidentally, there was no meaning to the name ``Sawmill'', the author
+grepped @file{/usr/dict/words} for something containing ``wm''.
 
 @end enumerate

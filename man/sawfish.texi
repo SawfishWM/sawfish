@@ -3,10 +3,10 @@
 @settitle sawfish Programming Manual
 @footnotestyle end
 
-@set EDITION 0.13
-@set VERSION 1.3.5
-@set UPDATED 16 Dec 2008
-@set UPDATE-MONTH Dec 2008
+@set EDITION 0.14
+@set VERSION 1.5.0
+@set UPDATED 28 Mar 2009
+@set UPDATE-MONTH Mar 2009
 
 @ifinfo
 @direntry
@@ -151,9 +151,7 @@ Emacs-Lisp Manual}), but with many extensions, and using lexical
 instead of dynamic scope. This manual assumes at least a basic
 knowledge of the language.
 
-@c Incidentally, there is no meaning to the name ``Sawmill'', the author
-@c grepped @file{/usr/dict/words} for something containing ``wm''.
-
+Homepage and mailing list are listed in @xref{FAQ}.
 
 @node News, Colors, Introduction, Top
 
@@ -243,8 +241,8 @@ Returns @code{t} if @var{arg} is a font object.
 
 Sawfish supports two types of fonts: X11 core fonts (fontsets and
 fontstructs) and Xft fonts.  Calling code must look up fonts by
-giving both a name and a type: an @code{"xlfd"} argument indicates the
-core fonts, and @code{"Xft"} indicates Xft fonts.  These types are
+giving both a name and a type: an @code{xlfd} argument indicates the
+core fonts, and @code{Xft} indicates Xft fonts.  These types are
 always literal strings.
 
 @defun font-type-exists-p type
@@ -255,8 +253,8 @@ can be loaded, false otherwise.
 @defun get-font-typed type name
 Return a font object representing the X11 font specified by the string
 @var{name}.  Argument @var{type} indicates the type of font to look
-for; it must be one of the strings @code{"xlfd"} for a X11 core fonts
-(based on fontsets or a fontstructs), or @code{"Xft"} for an Xft font.
+for; it must be one of the strings @code{xlfd} for a X11 core fonts
+(based on fontsets or a fontstructs), or @code{Xft} for an Xft font.
 
 Signals an error if @var{type} is not one of the literal strings
 listed above.  Also signals an error if no font named @var{name}
@@ -280,8 +278,8 @@ string).
 @end defun
 
 @defun font-type font
-Returns a string indicating the font's class.  This is @code{"xlfd"}
-for X11 core fonts, or @code{"Xft"} for Xft fonts.
+Returns a string indicating the font's class.  This is @code{xlfd}
+for X11 core fonts, or @code{Xft} for Xft fonts.
 @end defun
 
 @defun font-height font
@@ -769,7 +767,6 @@ Return the class that @var{window} belongs to as a string, or nil if
 Return a list of symbols defining the X11 window manager protocols
 supported by client @var{window}.
 @end defun
-
 @defun window-supports-wm-protocol-p window atom
 Return true if @var{window} includes @var{atom} in its
 @code{WM_PROTOCOLS} property.
@@ -789,6 +786,7 @@ Return true if @var{window} includes @var{atom} in its
 * Iconifying Windows::
 * Window Stickiness::
 * Ignored Windows::
+* Avoided Windows::
 * Maximizing Windows::
 * Animating Windows::
 * Cycling Between Windows::
@@ -832,6 +830,7 @@ exists.  Note that these are Lisp properties not X properties.
 If the optional third argument @var{checker} is non-nil, then @var{checker}
 is returned if the requested property does not exist. This is used to
 distinguish the assigned value of @code{nil} from property's absence.
+A symbol is usually a good choice for @var{checker}.
 @end defun
 
 @defun map-window-properties function window
@@ -843,7 +842,7 @@ Lisp properties bound to @var{window}.  Returns the value of the last
 
 @defun window-plist window
 Returns the property list of the window @var{window} which is of the form
-@code{(prop value prop value ...)}. 
+@code{(prop value prop value ...)}.
 
 Do not attempt to change properties by modifying the property list in place.
 Use window-put instead.
@@ -887,7 +886,7 @@ transient for window @var{ancestor}, false otherwise.
 Return the list of windows that window @var{child} is a transient
 for.  If @var{indirectly} is true, then return the list of all
 ancestors rather than parents.
-@end defun 
+@end defun
 
 @defun transient-children parent &optional indirectly
 Return the list of windows that are transients for window
@@ -1556,7 +1555,7 @@ pair is different.
 @deffn Function lower-window* window
 @deffnx Command lower-window window
 Lower @var{window} and possibly associated windows to the bottom of
-their stacking depths. 
+their stacking depths.
 @end deffn
 
 @deffn Function raise-window* window
@@ -1830,7 +1829,6 @@ by @var{window} (a window object, or numeric id).
 When a managed window is destroyed, the @code{destroy-notify-hook} will
 subsequently be invoked (@pxref{Standard Hooks}).
 
-
 @node Shading Windows, Iconifying Windows, Destroying Windows, Windows
 @section Shading Windows
 @cindex Shading windows
@@ -2008,9 +2006,10 @@ If @code{window-sticky-p} would report true for @var{window}, make
 for all environments.
 @end defun
 
-@node Ignored Windows, Maximizing Windows, Window Stickiness, Windows
+@node Ignored Windows, Avoided Windows, Window Stickiness, Windows
 @section Ignored Windows
 @cindex Windows, ignored
+@cindex ignored
 
 Sawfish has a general concept of ``ignored'' windows; the user does
 not interact normally with those windows.  The concept is actually
@@ -2098,10 +2097,10 @@ Return @code{t} when @var{window} is horizontally maximized.
  end defun
 
  menu
-* Simple Maximization::         
-* Maximizing Without Overlap::  
-* Maximizing Without Borders::  
-* Unmaximizing::                
+* Simple Maximization::
+* Maximizing Without Overlap::
+* Maximizing Without Borders::
+* Unmaximizing::
  end menu
 
  node Simple Maximization, Maximizing Without Overlap, Maximizing Windows, Maximizing Windows
@@ -2166,7 +2165,7 @@ Return @code{t} if the @var{part} of @var{window} can be moved.
  @code{bottom-border}, @code{left-border}, @code{right-border},
  @code{top-left-border}, @code{top-right-border},
  @code{bottom-left-border}, @code{bottom-right-border}, or
- @code{title} 
+ @code{title}
  end defun
 
  defvar maximize-raises
@@ -2248,83 +2247,87 @@ is usually required for terminal windows, for example.)
 The ``fullscreen'' category maximizes the window to the current
 screen.
 
- deffn Command maximize-window-fullscreen window
+@deffn Function maximize-window-fullscreen window
+@deffnx Command maximize-window-fullscreen window
 Maximize both dimensions of @var{window} on the screen, removing
 window decorations and making the window edges flush with the screen
 sides.
 
-If defined, @var{direction} may be either @code{vertical} or
+If defined, @var{direction} is a symbol, either @code{vertical} or
 @code{horizontal}, and maximization will only occur for that
 direction.
- end deffn
+@end deffn
 
- deffn Command maximize-window-fullscreen-toggle window
+@deffn Function maximize-window-fullscreen-toggle window
+@deffnx Command maximize-window-fullscreen-toggle window
 Toggle the state of @var{window} between maximized and unmaximized in
 the screen, removing window decorations and making the window edges
 flush with the screen sides.
 
-If defined, @var{direction} may be either @code{vertical} or
+If defined, @var{direction} is a symbol, either @code{vertical} or
 @code{horizontal}, and maximization will only occur for that
 direction.
- end deffn
+@end deffn
 
 The ``fullxinerama'' category maximizes the window to the entire
 Xinerama display.
 
- deffn Command maximize-window-fullxinerama window
+@deffn Function maximize-window-fullxinerama window
+@deffnx Command maximize-window-fullxinerama window
 Maximize both dimensions of @var{window} across all Xinerama screens,
 removing window decorations and making the window edges flush with the
 screen sides.
 
-If defined, @var{direction} may be either @code{vertical} or
+If defined, @var{direction} is a symbol, either @code{vertical} or
 @code{horizontal}, and maximization will only occur for that
 direction.
- end deffn
+@end deffn
 
- deffn Command maximize-window-fullxinerama-toggle window
+@deffn Function maximize-window-fullxinerama-toggle window
+@deffnx Command maximize-window-fullxinerama-toggle window
 Toggle the state of @var{window} between maximized and unmaximized
 across all Xinerama screeens, removing window decorations and making
 the window edges flush with the screen sides.
 
-If defined, @var{direction} may be either @code{vertical} or
+If defined, @var{direction} is a symbol, either @code{vertical} or
 @code{horizontal}, and maximization will only occur for that
 direction.
- end deffn
+@end deffn
 
- node Unmaximizing,  , Maximizing Without Borders, Maximizing Windows
- subsection Unmaximizing
+@node Unmaximizing,  , Maximizing Without Borders, Maximizing Windows
+@subsection Unmaximizing
 
 One command restores windows from all the different types of
 maximization.
 
- deffn Command unmaximize-window window &optional direction
+@deffn Command unmaximize-window window &optional direction
 Restore the position and dimensions of @var{window} to their original,
 unmaximized, states.
 
 Positions and dimensions that were not maximized are not affected by
 unmaximizing.
- end deffn
 
- defun window-unmaximized-position window
+If defined, @var{direction} is a symbol, either @code{vertical} or
+@code{horizontal}, and maximization will only occur for that
+direction.
+@end deffn
+
+@defun window-unmaximized-position window
 Returns a cons-cell @code{(@var{x} . @var{y})} indicating the position
 that the @code{window} would unmaximize to.
 
 Sawfish preserves the positions of maximized axes only, so a
 vertically maximized window will be restored to its original @var{y}
 coordinate, but its @var{x} coordinate may have changed.
- end defun
+@end defun
 
- defun window-unmaximized-position window
+@defun window-unmaximized-dimensions window
 Returns a cons-cell @code{(@var{w} . @var{h})} indicating the
 dimensions that @code{window} would unmaximize to.
 
 Sawfish preserves the dimensions of maximized axes only, so a
 vertically maximized window will be restored to its original @var{h}
 dimension, but its @var{w} coordinate may have changed.
- end defun
-
-@defun window-maximized-horizontally-p window
-Return @code{t} when @var{window} is horizontally maximized.
 @end defun
 
 @node Animating Windows, Cycling Between Windows, Maximizing Windows, Windows
@@ -2629,7 +2632,7 @@ using side-effects, rather than returning values.
 @defun window-group-menu &optional w
 Return a menu definition suitable for @code{popup-menu}.  This menu
 will allow the user to assign the window @var{w} into any group of a
-managed window, or into a brand new group.  The window's current group 
+managed window, or into a brand new group.  The window's current group
 is checked or otherwise marked.
 @end defun
 
@@ -2734,9 +2737,9 @@ macro must be used. This augments the variable with extra information
 for the GUI, including such things as its required data type.
 
 @menu
-* Defgroup and Defcustom::      
-* Customization Files::         
-* Customized Variable Status::  
+* Defgroup and Defcustom::
+* Customization Files::
+* Customized Variable Status::
 @end menu
 
 @node Defgroup and Defcustom, Customization Files, Customization, Customization
@@ -4427,17 +4430,22 @@ window.
 This is to handle the case where two windows of the same size are
 created one after the other, so that the user is sure to see (at least
 part of) both windows.
-@end itemize
 
 @item @code{none}
 Make no changes to the window's position.  The window remains wherever
 the X server placed it initially.
+@end itemize
 
 @end defvar
 
 In all of these placement modes, the mode is responsible for taking
 the window object as an argument, and manipulating its position with,
 e.g., @code{move-window-to}.
+
+The window to be placed avoids overlapping with already existing
+``avoided'' windows (@pxref{Avoided Windows}), unless
+the position is explicitly specified by coordinates, or placement mode
+@code{interactively} is used.
 
 @defvar stagger-placement-step
 In @code{stagger} placement mode, the distance down and to the right
@@ -4453,32 +4461,6 @@ the window's display.  In the latter case, the window will have the
 @defvar ignore-program-positions
 When @code{t}, program position size hints are not considered when
 placing windows.
-@end defvar
-
-``Avoided'' windows should be kept unobscured by other windows
-wherever possible.  In particular, first-fit and best-fit methods will
-attempt to place new windows away from them, and maximized windows
-will not stretch over them.
-
-@defun window-avoided-p window
-Return t if @var{window} should be kept unobscured by other windows
-wherever possible.
-@end defun
-
-@defun avoided-windows &optional window
-Returns a list of all windows that should be left unobscured where
-possible.  If @var{window} is defined, then it defines a window that
-will be never returned in the list.
-@end defun
-
-@defvar dont-avoid-ignored
-When non-nil, ignored windows aren't avoided by default.  Defaults to
-non-nil.
-@end defvar
-
-@defvar avoid-by-default
-When non-nil, any unspecified windows are avoided by default.
-Defaults to nil.
 @end defvar
 
 You can define your own placement modes.
@@ -4868,13 +4850,11 @@ For example, a single click of the left mouse button with the
 After triple-clicking with the @key{Alt} key held down, Sawfish will
 receive a @kbd{Alt-Off3} event.
 
-
 @defvar multi-click-delay
 An integer indicating the maximum number of milliseconds between
 successive clicks.  Defaults to 250 milliseconds at startup; if
 @code{nil}, Sawfish uses 250 milliseconds.
 @end defvar
-
 
 @node Event Matching, Synthetic Events, Event Actions, Events
 @section Event Matching
@@ -4929,7 +4909,7 @@ this, we mark them with metadata that the runtime system can query.
 @menu
 * Old-style Command Definition::  Emacs-Lisp style
 * New-style Command Definition::  Common-Lisp style
-* Interactive Calling Specification::  
+* Interactive Calling Specification::
 * Operations on Commands::	Accessors and the like
 * Invoking Commands::           call-commmand, command hooks
 * Default Commands::            Sawfish ships with a few commands
@@ -5394,7 +5374,7 @@ mouse pointer position, relative to the origin of the root window.
 
 If there is a mouse update current event, the position is read
 directly from that event.  Otherwise it is read from the server.  If
-@var{from-server} is non-nil then the position is read directly from 
+@var{from-server} is non-nil then the position is read directly from
 the server in any case.
 @end defun
 
@@ -6013,7 +5993,7 @@ Compare with @code{window-moved-hook} and @code{window-resized-hook}.
 @defvrx {Window Hook} after-resize-hook
 Called after completion of an interactive move or resize.  In addition
 to the window, the hook is called with a list of symbols indicating how
-the window was moved or resized: 
+the window was moved or resized:
 @code{horizontal} and @code{vertical} for movement,
 @code{right}, @code{left}, @code{bottom} and @code{top} for resizing.
 @end defvr
@@ -6237,11 +6217,12 @@ documents a subset of the keys currently used.
 @vtable @code
 
 @item ignored
-When set, the window is ignored in many operations.
+When set, the window is ignored in many operations. @xref{Ignored
+Windows}.
 
 @item avoid
-When set, the window will not be covered when maximizing, or when
-placing using the first-fit or best-fit methods
+When set, the window will not be covered by other windows when they
+are maximized or newly placed. @xref{Avoided Windows}.
 
 @item workspaces
 A list of integers defining the workspaces that the window is a member of, or
@@ -6439,7 +6420,7 @@ attribute names are @code{background} and @code{border-color}.
 @end defun
 
 @defun x-configure-window window attrs
-Reconfigure the window associated with @var{window}.  @var{Attrs} is 
+Reconfigure the window associated with @var{window}.  @var{Attrs} is
 an alist mapping attribute names to values.  Allowed attribute names
 are @code{x}, @code{y}, @code{width}, @code{height} and
 @code{border-width}.
