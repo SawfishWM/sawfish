@@ -132,6 +132,7 @@
 (defgroup audio "Sound" :require sawfish.wm.ext.audio-events)
 (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
 (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)
+(defgroup window-history "History" :group match-window :require sawfish.wm.ext.window-history)
 (autoload-placement-mode 'first-fit 'sawfish.wm.placement.smart #:for-normal t)
 (autoload-placement-mode 'best-fit 'sawfish.wm.placement.smart #:for-normal t)
 (autoload-placement-mode 'best-fit-group 'sawfish.wm.placement.smart #:for-normal t)
