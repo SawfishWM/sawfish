@@ -1,0 +1,226 @@
+BUGS
+****
+
+If you think you have found a bug, first check for newer versions of sawfish 
+and/or librep/rep-gtk and update, if it still happens with the latest versions: 
+
+Report Bugs in the GNOME BugZilla (http://bugzilla.gnome.org), we 
+prefer this over the mailing-list, because it's easier to find older
+reports in the BugZilla Database than in the Mailinglist-Archives
+
+As product choose: Other -> Sawfish
+
+Then choose the version you're using: 
+	- pre-1.3.x (obsolete)
+	- 1.3.x 
+	- 1.5.x
+
+At last choose the sawfish component you want to report the bug for:
+	- config tool
+	- general
+	- theme editor (obsolete)
+	- window-manager
+
+When reporting bugs try to include as much relevant information as
+possible:
+
+ - Most importantly: a reliable method for triggering the bug. (Once
+   the bug can be reproduced it's often straightforward to fix.)
+
+ - If you hear beeping sounds while the problem manifests itself it may
+   mean that sawfish's Lisp interpreter is printing error messages to
+   the standard error stream (often stored in ~/.xsession-errors or
+   ~/.gnomerc-errors). Include any such messages in your bug report.
+
+ - If sawfish crashes it will try to print information describing the
+   position at which it did so, look for any `backtrace' messages in
+   the error output and include them
+
+ - The operating system type and version (including distribution details)
+
+ - How you installed sawfish, e.g. compiled from source, from binary
+   packages, etc.. If from packages, where did you get the packages
+   from, and what are their version numbers?
+
+ - Any other information you feel may be relevant. E.g. the values of
+   customization options that you feel may affect the problem
+
+Also please make sure to not report bugs multiple times, first check if
+there's already a report for your issue. If it already has been reported,
+simply reply to the existing report, rather than opening a new one.
+
+The full bug-database is here: http://bugzilla.gnome.org/buglist.cgi?product=sawfish
+
+DEVELOPMENT
+***********
+
+Please send all patches to the sawfish mailing list <sawfish-list@gnome.org>
+and the sawfish wiki http://sawfish.wikia.com
+
+When possible, please make patches in unified diff format (i.e. `diff -u'),
+or, if you use a svn-checkout, simply use `svn diff' to create the diff.
+
+ - Christopher Bratusek <zanghar@freenet.de>
+
+
+THANKS
+******
+
+After June 2007
+Janek Kozicki (Re-Animator and Maintainer until Dec 2008)
+Christopher Bratusek (Maintainer since Dec 2008)
+************************************************
+(A..Z)
+
+ - Alexey I. Froloff for sawfish-ui bugfix
+ - Andrea Vettorello for a lot of wok on wiki and several patches
+ - Christopher Bratusek for numerous patches & cleanup and other active contribution
+ - Dagfinn I. Mannsake for enter-click focus mode patch and xterm command patch
+ - David T. McWherter for Infinite-Desktop
+ - Derek Upham for his documentation
+ - Fuchur for xinerama placement patch
+ - glh Pimenta for new sound
+ - GSR for patches and other active contribution
+ - Harald van Dijk for QT menu focus patch, titlebar updates, ebuilds and parallel make
+ - Ian Dall for update spec-file patch
+ - Jonathan Sambrook for Maximize fullscreen xinerama patch
+ - Mark Schreiber for move-window-"direction" focus patch
+ - Michael Jägermann specfile/glib issue/imlib issue
+ - Nathan Froyd for updated tab-system
+ - Philippe-Pierre for typo fix
+ - Rodrigo Gallardo for numerous patches and taking care of debian package
+ - Scott Scriven for tool for automatic screenshot generation
+ - Sven Schoenung for his hard work on our wiki website and some patches
+ - Thadeu Lima de Souza Cascardo for improving 64 bit support
+ - Timo Korvola for numerous patches and other active contribution
+ - Teika Kazura for a lot of patches
+ - Yannig Marchegay for occitan translation
+ - Yoshiaki Kasahara for buffer overflow fix
+ - Yuuki Harano for Pango draw() ignores font patch
+
+Before June 2007
+John Harper (The Author)
+************************************************
+
+ - Merlin for x.c and making snapping work
+ - Kai Großjohann for grow-pack.jl
+ - Topi Paavola for read-line.jl (now prompt.jl)
+ - Julian Missig for ignore-window.jl
+ - Ben Liblit for gnome-match.jl
+ - Eric Kidd for the basis of viewport-linear.jl
+ - James Antill for call-after-state-changed and many bug fixes
+ - Ryan Lovett for the microGUI theme
+ - Tigert for the brushed-metal images and control center icons
+ - Erik Arneson for hosting the sawmill mailing list
+ - David Chan (adraken) for managing sawmill.themes.org
+ - Brad Thompson (yak) for rewriting the event handler for window
+   stacking, plus many other patches
+
+Many others have also contributed patches, including:
+************************************************
+
+   Alexander Barinov
+   Andreas Degert
+   Aron Griffis
+   Bruce Miller
+   Chris Hanson
+   Christopher P Goller
+   Dams Nadé
+   Dan Winship
+   Dave Dribin
+   Dave Pearson
+   David Kaelbling
+   E. Jay Berkenbilt
+   Eli Barzilay
+   Florent Guillaume
+   Geoff Reedy
+   George Lebl
+   Gérard Milmeister
+   Hamish Macdonald
+   Ian
+   Jens Finke
+   Jens-Ulrik Petersen
+   Jesus Bravo Alvarez
+   John H. Palmieri
+   John N S Gill
+   Kirk Saranathan
+   Mahmood Ali
+   Mark Probst
+   Martin Blais
+   Matt Kraai
+   Matt Tucker
+   Michael Vogt
+   Morgan Schweers
+   Paul Warren
+   Ricardo R. Massaro
+   Richard Kilgore
+   Rob Hodges
+   Ronald Wahl
+   Ryan Pavlik
+   Scott Sams
+   Steve Haslam
+   Timo Korvola
+   Tomohiro Kubota
+   Unai Uribarri Rodríguez
+   Vlad Harchev
+   Yaron M. Minsky
+   Yoshiki Hayashi
+   Yukihiro Nakai
+
+Thanks also to everyone who has contributed translations:
+************************************************
+
+   Andraz Tori
+   Andreas Persenius
+   Antti Ahvensalmi
+   Birger Langkjer
+   Carlos Perelló Marín
+   Christian Gillot
+   Christian Marillat
+   Christian Meyer
+   Christoph Rauch
+   Christian Rose
+   Christopher R. Gabriel
+   Chun-Chung Chen
+   Daniel Koc
+   Dennis Smit
+   Douglas Moura Ferreira
+   Fâtih Demir
+   Han-Wen Nienhuys
+   Hubert Nachbaur
+   Iñaki García Etxebarria
+   Jan Nieuwenhuizen
+   Jesus Bravo Alvarez
+   Jiri Cerny
+   Joaquim Fellmann
+   Johan Dahlin
+   Joseba García Etxebarria
+   Kai Lahmann
+   Karl Eichwalder
+   Keld Simonsen
+   Kenneth Christiansen
+   Kjartan Maraas
+   Man-Yong Lee
+   Marius Andreiana
+   Martin Norbäck
+   Matthias Warkus
+   Michele Campeotto
+   Ole Laursen
+   Peter Winnberg
+   Robert Brady
+   Róbert Ványi
+   Rui Silva
+   Pablo Saratxaga
+   Satoru Sato
+   Seán Ó Ceallaigh
+   Simos Xenitellis
+   Stanislav Visnovsky
+   Valek Filippov
+   Wandy Christiansen
+   Yuri Syrota
+
+Apologies if I've missed any names, mail me if you should be listed.
+
+Thanks also to the numerous people who have contributed bug reports and
+feature suggestions, too many to list individually.
+
