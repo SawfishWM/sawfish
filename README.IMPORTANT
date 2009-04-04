@@ -1,45 +1,37 @@
 In Sawfish 1.5.0 there are the following major changes:
 
-**********
-
-ISSUE :
-
 sawmill-defaults is now sawfish-defaults
+****************************************
 
-SOLUTION :
+sawfish-defaults is an alias to the standard sawfish
+configuration, if your ~/.sawfish[/]rc contains the line:
 
-Change (if existent), in your sawfishrc ->
+(require 'sawmill-defaults)
 
-:> (require 'sawmill-defaults) 
+then updated the line to the new value:
 
-to ->
+(require 'sawfish-defaults)
 
-:> (require 'sawfish-defaults)
+~/.sawmillrc is no longer a valid configuration file
+****************************************************
 
-**********
+now, there we fully renamed from sawmil to sawfish,
+also ~/.sawmillrc is no longer a valid configuration file.
 
-ISSUE :
+if you're using it, simply rename it to:
 
-~/.sawmillrc is no longer a valid configuration file,
+~/.sawfishrc -or- ~/.sawfish/rc
 
-SOLUTION :
+both are valid and please restart sawfish after renaming
+your configuration file.
 
-Rename (if existent) ->
+Building using XFree86 or X.Org 6.x instead of X.Org 7.x:
+*********************************************************
 
-:> $HOME/.sawmillrc $HOME/.sawfishrc
+simply add the following flag to configure:
 
-and restart sawfish
+--without-xorg-x11r7
 
-**********
+(eg: ./configure --prefix=/usr --without-xorg-x11r7)
 
-ISSUE :
-
-Building using XFree86
-
-SOLUTION :
-
-Add the following flag to configure ->
-
-:> --without-xorg-x11r7
-
-**********
+ - Christopher Bratusek <zanghar@freenet.de>
