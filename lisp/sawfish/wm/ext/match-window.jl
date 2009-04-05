@@ -243,7 +243,7 @@
     (let ((prop-cache '()))
 
       ;; Get the X property P of window W, uses a cache, will
-      ;; reformat properties with a match-window-formatter property 
+      ;; reformat properties with a match-window-formatter property
       (define (get-prop p)
 	(let
 	    ((tem (assq p prop-cache)))
@@ -312,7 +312,7 @@
 
   (define-match-window-formatter 'WM_CLASS
    (lambda (vec)
-     (format nil "%s/%s" (aref vec 1) (aref vec 0))))
+     (format nil "%s/%s" (and (> (length vec) 1) (aref vec 1)) (aref vec 0))))
 
   (define-match-window-formatter 'WM_COMMAND
    (lambda (vec)

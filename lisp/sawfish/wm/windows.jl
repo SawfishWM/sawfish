@@ -201,7 +201,7 @@ windows."
     "Return the class that window W belongs to, as a string. Returns `nil' if W
 has no associated class."
     (let ((prop (get-x-text-property w 'WM_CLASS)))
-      (and prop (aref prop 1))))
+      (and prop (> (length prop) 1) (aref prop 1))))
 
   (define (get-window-wm-protocols w)
     "Return a list of symbols defining the X11 window manager protocols
@@ -469,7 +469,7 @@ use '(WM_NAME) if you really want only WM_NAME\n")
                        (t (list prop)))
                  fun)
            prop-changes)))
-  
+
   (add-hook 'property-notify-hook
 	    (lambda (w prop state)
 	      (mapc (lambda (cell)
@@ -478,7 +478,7 @@ use '(WM_NAME) if you really want only WM_NAME\n")
 		    prop-changes)))
 
   (define state-changes '())
-  
+
   (define (call-after-state-changed states fun)
     "Arrange for function FUN to be called with arguments (WINDOW
 CHANGED-STATES) when one of the states defined by the list of symbols
@@ -486,7 +486,7 @@ STATES has been changed. STATES may also be a single symbol."
     (setq state-changes (cons (cons (if (listp states)
 					states
 				      (list states)) fun) state-changes)))
-  
+
   (add-hook
    'window-state-change-hook
    (lambda (w states)
