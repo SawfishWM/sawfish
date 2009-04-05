@@ -747,22 +747,6 @@ map_request (XEvent *ev)
     Lisp_Window *w = find_window_by_id (id);
     if (w == 0)
     {
-        /* The reason for doing this before the add is to give matchers
-         * a chance to do their thing and reverse the iconification,
-         * if the user desires.  There's a minor downside: rep doesn't
-         * know about this, so any hooks that might be operative for
-         * iconification don't get run, and there's no iconify sound.
-         * But it can be argued that this is the Right Thing anyway,
-         * since the hint was set outside of rep's watch too. */
-
-        XWMHints* wmhints = XGetWMHints(dpy, id);
-
-	if (wmhints && (wmhints->flags & StateHint) && wmhints->initial_state == IconicState)
-            XIconifyWindow(dpy, id, screen_num);
-        
-	if (wmhints)
-            XFree(wmhints);
-        
 	/* Also adds the frame. */
 	w = add_window (id);
 	if (w == 0)

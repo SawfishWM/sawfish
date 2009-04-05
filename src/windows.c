@@ -424,7 +424,8 @@ get_window_name(Lisp_Window *w)
 }
 
 
-/* Add the top-level window ID to the manager's data structures */
+/* Add the top-level window ID to the manager's data structures.
+ * This is called only from events.c -> map_request */
 Lisp_Window *
 add_window (Window id)
 {
@@ -510,6 +511,21 @@ add_window (Window id)
 	if (initialising)
 	    Fwindow_put (rep_VAL (w), Qplaced, Qt);
 
+	/* If the window requires to start as icon, then iconify it.
+	 * It is better to be done before 'before_add_window_hook', where
+	 * matching takes place, because in future, matcher can have an
+	 * option to un-iconify, overrinding the application's request
+	 * to iconify. 
+	 */
+	if (w->wmhints && w->wmhints->flags & StateHint
+	    && w->wmhints->initial_state == IconicState)
+	  {
+	    DEFSTRING (iconify_mod, "sawfish.wm.state.iconify");
+	    rep_call_lisp1 (module_symbol_value
+			    (rep_VAL (&iconify_mod), Qiconify_window),
+			    rep_VAL(w));
+	  }
+	
 	/* ..then call the add-window-hook's.. */
 	rep_PUSHGC(gc_win, win);
 	Fcall_window_hook (Qbefore_add_window_hook, rep_VAL(w), Qnil, Qnil);
