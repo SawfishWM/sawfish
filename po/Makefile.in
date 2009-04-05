@@ -76,7 +76,7 @@ installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(localedir)
 
 uninstall :
-	rm -f $(DESTDIR)$(localedirdir)
+	rm -f $(DESTDIR)$(localedir)/*/LC_MESSAGES/sawfish.mo
 
 clean :
 	rm -f core *~ *.mo

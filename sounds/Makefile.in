@@ -40,7 +40,7 @@ installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(soundsdir) $(DESTDIR)$(sitesoundsdir)
 
 uninstall :
-	rm -f $(DESTDIR)$(soundsdir)
+	rm -rf $(DESTDIR)$(soundsdir)
 
 clean :
 	rm -f *~ core

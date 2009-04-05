@@ -73,7 +73,10 @@ uninstall :
 	  ( cd $$dir && $(MAKE) $@ ) || exit 1; \
 	done
 	rm -rf $(DESTDIR)$(sawfishdir)/$(version)
-	rm -f $(DESTDIR)/$(libdir)/pkgconfig/sawfish.pc
+	rm -f $(DESTDIR)$(libdir)/pkgconfig/sawfish.pc
+	rm -f $(DESTDIR)$(datadir)/xsessions/sawfish.desktop
+	rm -f $(DESTDIR)$(datadir)/applications/sawfish.desktop
+	rm -f $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties/sawfish-wm.desktop
 
 DOC :
 	repdoc DOC `find $(srcdir) \( -name '*.c' -o -name '*.jl' \) -print`

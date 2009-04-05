@@ -75,14 +75,14 @@ install : all installdirs
 
 uninstall :
 	for p in sawfish; do \
-	  $(rep_LIBTOOL) --mode=uninstall rm $(DESTDIR)${bindir}/$$p; \
+	  $(rep_LIBTOOL) --mode=uninstall rm -f $(DESTDIR)${bindir}/$$p; \
 	done
 	rm -f $(DESTDIR)$(bindir)/sawfish-client
-	$(rep_DL_UNINSTALL) $(DESTDIR)${sawfishexecdir}/gtk-style
+	$(rep_DL_UNINSTALL) -f $(DESTDIR)${sawfishexecdir}/gtk-style
 	for dl in $(DL_DSTS); do \
-	  $(rep_LIBTOOL) --mode=uninstall rm $(DESTDIR)${sawfishexecdir}/$$dl; \
+	  $(rep_LIBTOOL) --mode=uninstall rm -f $(DESTDIR)${sawfishexecdir}/$$dl; \
 	done
-	$(rep_DL_UNINSTALL) $(DESTDIR)$(repexecdir)/sawfish/client.la
+	$(rep_DL_UNINSTALL) -f $(DESTDIR)$(repexecdir)/sawfish/client.la
 
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(repexecdir)/sawfish \
