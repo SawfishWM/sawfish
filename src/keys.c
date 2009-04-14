@@ -79,7 +79,7 @@ static repv next_keymap_path;
 
 DEFSYM(multi_click_delay, "multi-click-delay");
 
-/* The X modifiers being used for Meta, Alt, and Hyper */
+/* The X modifiers being used for Meta, Alt, Hyper, Super */
 static unsigned long meta_mod, alt_mod, hyper_mod, super_mod;
 
 /* The user-customizable modifier; used for default key bindings. This
@@ -664,6 +664,7 @@ static struct key_def default_mods[] = {
     { "Mod2",     Mod2Mask },
     { "Mod3",     Mod3Mask },
     { "Mod4",     Mod4Mask },
+    { "AltGR",    Mod5Mask },
     { "Mod5",     Mod5Mask },
     { "Button1",  Button1Mask },
     { "Button2",  Button2Mask },
@@ -1522,6 +1523,9 @@ find_meta(void)
 		{
 		    int sym = syms[((code - min_code) * syms_per_code)
 				  + code_col];
+		    /* Is this a fake key? */
+		    if (code_col == 0 && sym == NoSymbol)
+			break;
 		    switch(sym)
 		    {
 		    case XK_Meta_L: case XK_Meta_R:
