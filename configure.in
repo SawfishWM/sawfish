@@ -151,7 +151,7 @@ PKG_CHECK_MODULES(XFT, xft >= 1.0,
 
 dnl is X available?
 if test "${no_x}" != "yes"; then
-  AC_DEFINE(HAVE_X11)
+  AC_DEFINE(HAVE_X11, 1, [Have X11])
   X_LIBS="${X_LIBS} -lXext -lXrender -lSM -lICE"
   X_EXTRA_LIBS=""
 else
