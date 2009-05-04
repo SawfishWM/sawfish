@@ -36,7 +36,7 @@
     (let ((vbox (gtk-vbox-new nil 0))
 	  (hbox (gtk-hbox-new nil 0))
 	  (combo (gtk-combo-new))
-	  (doc-label (gtk-label-new doc))
+	  (doc-label (gtk-label-new (_ doc)))	  
 	  (readme-text-view (gtk-text-view-new))
 	  (readme-scroller (gtk-scrolled-window-new))
 	  (value (car options))
