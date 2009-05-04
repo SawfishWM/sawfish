@@ -1049,16 +1049,14 @@ static void
 focus_out (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xfocus.window);
-    if (ev->xfocus.detail == NotifyPointer ||
-	ev->xfocus.mode == NotifyGrab || ev->xfocus.mode == NotifyUngrab)
+    if (ev->xfocus.detail == NotifyPointer
+        || ev->xfocus.mode == NotifyGrab || ev->xfocus.mode == NotifyUngrab)
 	return;
     if (w != 0 && ev->xfocus.detail != NotifyInferior)
     {
 	if (focus_window == w)
 	{
-	    if (ev->xfocus.mode == NotifyNormal || \
-		ev->xfocus.mode == NotifyWhileGrabbed)
-		focus_window = 0;
+            focus_window = 0;
 	    report_focus_change (w);
 	}
 
