@@ -71,7 +71,7 @@ enum {
     EV_VIRT_MOD_MASK = 0x0ff00000
 };
 
-/* Support for buttons 6, 7, 8 and 9.
+/* Support for buttons 6 and 7.
 
    <X11/X.h> doesn't define these, even though XFree supports them.. */
 
@@ -89,38 +89,16 @@ enum {
 # define Button7Mask (1<<14)
 #endif
 
-#ifndef Button8
-# define Button8 8
-#endif
-#ifndef Button8Mask
-# define Button8Mask (1<<15)
-#endif
-
-#ifndef Button9
-# define Button9 9
-#endif
-#ifndef Button9Mask
-# define Button9Mask (1<<16)
-#endif
-
 #if !defined (Button6)
 # define EV_MOD_BUTTON_MASK (Button1Mask | Button2Mask | Button3Mask \
 			     | Button4Mask | Button5Mask)
 #elif !defined (Button7)
 # define EV_MOD_BUTTON_MASK (Button1Mask | Button2Mask | Button3Mask \
 			     | Button4Mask | Button5Mask | Button6Mask)
-#elif !defined (Button8)
-# define EV_MOD_BUTTON_MASK (Button1Mask | Button2Mask | Button3Mask \
-			     | Button4Mask | Button5Mask | Button6Mask \
-			     | Button7Mask)
-#elif !defined (Button9)
-# define EV_MOD_BUTTON_MASK (Button1Mask | Button2Mask | Button3Mask \
-			     | Button4Mask | Button5Mask | Button6Mask \
-                             | Button7Mask | Button8Mask)
 #else
 # define EV_MOD_BUTTON_MASK (Button1Mask | Button2Mask | Button3Mask \
 			     | Button4Mask | Button5Mask | Button6Mask \
-			     | Button7Mask | Button8Mask | Button9Mask)
+			     | Button7Mask)
 #endif
 
 /* In key maps, a `key' is (COMMAND . EVENT) */
