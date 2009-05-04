@@ -1,5 +1,21 @@
 2009-05-04  Christopher Bratusek <zanghar@freenet.de>
-	* configure.in: fix the last incomplete AC_DEFINE
+	* configure.in: - fix the last incomplete AC_DEFINE
+			- remove unsed configure flags
+			- don't add CFLAGS if non given
+			- check for intltool 0.40.0
+
+	* autogen.sh: run intltoolize
+
+	* po/POTFILES.in: updated
+
+	* sawfish.ebuild.in: updated
+
+	* po/LINGUAS: added
+
+	* po/sawfish.pot
+	* po/make-pot
+	* po/sawfish-xgettext
+	* po/update.sh: removed, using intltool instead
 
 2009-05-03  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/ui/slot.jl: make defcustoms strings translatable [Alexey I. Froloff]

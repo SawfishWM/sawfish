@@ -49,16 +49,9 @@ src_compile() {
 	fi
 
 	if ! use nls; then
-		# Use a space because configure script reads --enable-linguas="" as
-		# "install everything"
-		# Don't use --disable-linguas, because that means --enable-linguas="no",
-		# which means "install Norwegian translations"
-		set -- "$@" --enable-linguas=" "
-	elif [[ "${LINGUAS+set}" == "set" ]]; then
-		strip-linguas -i po
-		set -- "$@" --enable-linguas=" ${LINGUAS} "
-	else
-		set -- "$@" --enable-linguas=""
+		set -- "$@" \
+			--disable-nls
+
 	fi
 
 	econf "$@" || die "configure failed"
