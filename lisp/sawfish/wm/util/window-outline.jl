@@ -158,7 +158,7 @@ only be `box' for a 3x3 grid."
 	(progn ; vertical
 	 (if dim-p
 	     (x-draw-string rw gc (cons (+ pta-x x-dim-offset)
-					(+ pta-y (floor (/ delta-y 2)))
+					(+ pta-y (quotient delta-y 2))
 					)
 			    (format nil "%d" delta-y)))
 	 (if arrow-p
@@ -171,7 +171,7 @@ only be `box' for a 3x3 grid."
 	 )
 	(progn ; horizontal
          (if dim-p
-	   (x-draw-string rw gc (cons (+ pta-x (floor (/ delta-x 2)))
+	   (x-draw-string rw gc (cons (+ pta-x (quotient delta-x 2))
 				      (- pta-y y-dim-offset)
 				      )
 			    (format nil "%d" delta-x)))
@@ -190,23 +190,23 @@ only be `box' for a 3x3 grid."
       ((gc (x-create-root-xor-gc))
        ; window Upper (Left Middle Right)
        (ul (cons x y))
-       (um (cons (+ x (floor (/ width 2))) y))
+       (um (cons (+ x (quotient width 2)) y))
        (ur (cons (+ x width) y))
 
        ; window Middle (Left Right)
-       (ml (cons x           (+ y (floor (/ height 2)))))
-       (mr (cons (+ x width) (+ y (floor (/ height 2)))))
+       (ml (cons x           (+ y (quotient height 2))))
+       (mr (cons (+ x width) (+ y (quotient height 2))))
 
        ; window Lower (Left Middle Right)
        (ll (cons x (+ y height)))
-       (lm (cons (+ x (floor (/ width 2))) (+ y height)))
+       (lm (cons (+ x (quotient width 2)) (+ y height)))
        (lr (cons (+ x width) (+ y height)))
 
        ; window Screen (Left Right Top Bottom)
-       (sl (cons 0              (+ y (floor (/ height 2)))))
-       (sr (cons (screen-width) (+ y (floor (/ height 2)))))
-       (st (cons (+ x (floor (/ width 2))) 0))
-       (sb (cons (+ x (floor (/ width 2))) (screen-height)))
+       (sl (cons 0              (+ y (quotient height 2))))
+       (sr (cons (screen-width) (+ y (quotient height 2))))
+       (st (cons (+ x (quotient width 2)) 0))
+       (sb (cons (+ x (quotient width 2)) (screen-height)))
 
        (offset 3) ; how much to offset the guidelines from the window
        )
