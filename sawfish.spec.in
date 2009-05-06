@@ -61,8 +61,6 @@ fi
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%define _host %{_host_cpu}-redhat-linux-gnu
-
 %files -f %{name}.lang
 %defattr(-,root,root,-)
 %doc README NEWS FAQ TODO OPTIONS README.IMPORTANT KEYBINDINGS USERDOC COPYING COPYING.SOUNDS
