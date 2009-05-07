@@ -121,7 +121,7 @@
 			    "Button2-Move" 'resize-window-interactively
 			    "Button1-Off2" 'toggle-window-shaded
 			    "Button1-Move" 'move-window-interactively
-			    "Button2-Off" 'add-to-group)
+			    "Button2-Off" 'tab-add-to-group)
     "Keymap containing bindings active when the pointer is in the title of
 a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings

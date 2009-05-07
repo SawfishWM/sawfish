@@ -23,7 +23,7 @@
 
 (define-structure sawfish.wm.tabs.tab
 
-	(export add-to-group )
+	(export tab-add-to-group )
 
 	(open rep
 	      rep.system
@@ -135,7 +135,7 @@
           (unmark-all-windows))
       (mark-window win)))
 
-  (define-command 'add-to-group mygroup #:spec "%W")
+  (define-command 'tab-add-to-group mygroup #:spec "%W")
 
   (if (eq tab-raise-on-hover 't)
     (add-hook 'enter-frame-part-hook
