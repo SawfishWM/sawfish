@@ -348,6 +348,14 @@ Any extra arguments are passed to each call to define-command."
    #:spec "%W")
 
   (define-cycle-command-pair
+   'cycle-among-groups 'cycle-among-groups-backwards
+   (lambda ()
+     "Only cycle the top members of each group."
+     (delete-if-not window-in-cycle-p
+                    (mapcar (lambda (gid) (car (windows-by-group gid t)))
+                            (window-group-ids)))))
+
+  (define-cycle-command-pair
    'cycle-prefix 'cycle-prefix-backwards
    (lambda (w)
      (when (string-match "^([^:]+)\\s*:" (window-name w))
@@ -388,6 +396,8 @@ Any extra arguments are passed to each call to define-command."
 ###autoload (autoload-command 'cycle-windows-backwards 'sawfish.wm.commands.x-cycle)
 ###autoload (autoload-command 'cycle-group 'sawfish.wm.commands.x-cycle)
 ###autoload (autoload-command 'cycle-group-backwards 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-among-groups 'sawfish.wm.commands.x-cycle)
+###autoload (autoload-command 'cycle-among-groups-backwards 'sawfish.wm.commands.x-cycle)
 ###autoload (autoload-command 'cycle-prefix 'sawfish.wm.commands.x-cycle)
 ###autoload (autoload-command 'cycle-prefix-backwards 'sawfish.wm.commands.x-cycle)
 ###autoload (autoload-command 'cycle-class 'sawfish.wm.commands.x-cycle)
@@ -413,6 +423,14 @@ Cycle through all windows in the same group as the current window.
 
 ::doc:sawfish.wm.commands.x-cycle#cycle-group-backwards::
 Reverse cycle through all windows in the same group as the current window.
+::end::
+
+::doc:sawfish.wm.commands.x-cycle#cycle-among-groups::
+Cycle through different groups (only the top window of each group).
+::end::
+
+::doc:sawfish.wm.commands.x-cycle#cycle-among-groups-backwards::
+Reverse cycle through different groups (only the top window of each group).
 ::end::
 
 ::doc:sawfish.wm.commands.x-cycle#cycle-prefix::

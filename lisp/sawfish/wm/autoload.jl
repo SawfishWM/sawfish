@@ -121,6 +121,8 @@
 (autoload-command 'cycle-windows-backwards 'sawfish.wm.commands.x-cycle)
 (autoload-command 'cycle-group 'sawfish.wm.commands.x-cycle)
 (autoload-command 'cycle-group-backwards 'sawfish.wm.commands.x-cycle)
+(autoload-command 'cycle-among-groups 'sawfish.wm.commands.x-cycle)
+(autoload-command 'cycle-among-groups-backwards 'sawfish.wm.commands.x-cycle)
 (autoload-command 'cycle-prefix 'sawfish.wm.commands.x-cycle)
 (autoload-command 'cycle-prefix-backwards 'sawfish.wm.commands.x-cycle)
 (autoload-command 'cycle-class 'sawfish.wm.commands.x-cycle)
