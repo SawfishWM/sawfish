@@ -33,7 +33,8 @@
 	      sawfish.wm.frames
 	      sawfish.wm.tabs.tabgroup
 	      sawfish.wm.util.marks
-	      sawfish.wm.windows)
+	      sawfish.wm.windows
+	      sawfish.wm.stacking)
 
      (define-structure-alias tab sawfish.wm.tabs.tab)
 
@@ -62,6 +63,11 @@
   (defcustom tab-right-margin 16 "Width of tab area's right-edge decoration"
     :group tabs
     :type number)
+
+  (defcustom tab-raise-on-hover nil 
+    "Raise Tabs on Hover"
+    :group tabs
+    :type boolean)
 
   (define (get-tab-pos win)
     (let* ((group (tab-find-window win))
@@ -129,7 +135,11 @@
           (unmark-all-windows))
       (mark-window win)))
 
-  (define-command 'add-to-group mygroup #:spec "%W"))
+  (define-command 'add-to-group mygroup #:spec "%W")
+
+  (if (eq tab-raise-on-hover 't)
+    (add-hook 'enter-frame-part-hook
+      (lambda (win) (raise-window win)))))
 
   ;(require 'x-cycle)
   ;(define-cycle-command-pair
