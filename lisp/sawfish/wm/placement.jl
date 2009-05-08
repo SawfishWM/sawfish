@@ -208,7 +208,7 @@ this mode. The single argument is the window to be placed."
       (move-window-to w (car coords) (cdr coords))))
 
   (define-placement-mode 'randomly place-window-randomly #:for-normal t #:for-dialogs t)
-  (define-placement-mode 'interactively place-window-interactively #:for-normal t)
+  (define-placement-mode 'interactively place-window-interactively #:for-normal t #:for-dialogs t)
   (define-placement-mode 'centered place-window-centered #:for-normal t #:for-dialogs t)
   (define-placement-mode 'centered-on-parent place-window-centered-on-parent #:for-normal t #:for-dialogs t)
   (define-placement-mode 'under-pointer place-window-under-pointer #:for-normal t #:for-dialogs t)
