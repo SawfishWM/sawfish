@@ -1,11 +1,12 @@
 ;; prompt.jl -- read line from user
 ;; Time-stamp: <2000-02-25 22:02:54 tjp>
 ;;
+;; Copyright (C) 2008 Sergey I. Sharybin <sharybin@nm.ru>
 ;; Copyright (C) 2000 Topi Paavola <tjp@iki.fi>
 ;;   
 ;; This file is free software; you can redistribute it and/or modify it
 ;; under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+:q;; the Free Software Foundation; either version 2, or (at your option)
 ;; any later version.
 
 ;; Commentary:
@@ -53,9 +54,23 @@
 	  rep.regexp
 	  rep.data.ring
 	  sawfish.wm.misc
+	  sawfish.wm.colors
 	  sawfish.wm.events
 	  sawfish.wm.custom
-	  sawfish.wm.commands)
+	  sawfish.wm.commands
+	  sawfish.wm.fonts)
+
+  (defgroup messages "Messages" :group misc)
+
+(defcustom prompt-font default-font
+  "Font for prompt: \\w"
+  :type font
+  :group (misc messages))
+
+(defcustom prompt-color (cons (get-color "black") (get-color "white"))
+    "Prompt message's colors."
+    :type (pair (labelled "Foreground:" color) (labelled "Background:" color))
+    :group (misc messages))
 
   (define-structure-alias prompt sawfish.wm.util.prompt)
 
@@ -102,6 +117,25 @@ displayed. See the `display-message' function for more details.")
   (defvar prompt-completions-outdated nil)
   (defvar prompt-history-pos nil)
   (defvar prompt-saved nil)
+  (defvar prompt-attr nil)
+
+
+;; From merlin
+;; But maybe better if we'd include this util?
+
+  ;; string/font -> font
+  (define (prompt-fontify font)
+    (if (stringp font) (get-font font) font))
+
+  ;; string/color -> color
+  (define (prompt-colorify color)
+    (if (stringp color) (get-color color) color))
+
+  ;; assq with default
+  (define (prompt-assqd key alist default)
+    (if (assq key alist)
+      (assq key alist)
+      (cons key default)))
 
   (defun prompt-exit ()
     "Cancel string input."
@@ -266,12 +300,23 @@ displayed. See the `display-message' function for more details.")
 		      (prompt-display-fun prompt-result)
 		   prompt-result))
 	 (completions (prompt-format-completions)))
-      (display-message (concat completions
+     (let
+       (
+         (fg (prompt-colorify (cdr (prompt-assqd 'foreground prompt-attr (car prompt-color)))))
+         (bg (prompt-colorify (cdr (prompt-assqd 'background prompt-attr (cdr prompt-color)))))
+         (font (prompt-fontify (cdr (prompt-assqd 'font prompt-attr prompt-font))))
+       )
+       (display-message
+         (concat completions
 			      (when completions "\n\n")
 			       prompt-prompt
 			       (substring result 0 prompt-position)
 			       ?| (substring result prompt-position))
-		       `((position . ,prompt-window-position)))))
+		       `((position . ,prompt-window-position)
+             (foreground . ,fg)
+             (background . ,bg)
+             (font . , font)
+             )))))
 
   ;; Insert all unbound keys to result.
   (defun prompt-unbound-callback ()
@@ -285,7 +330,7 @@ displayed. See the `display-message' function for more details.")
       (prompt-update-display)
       t))
 
-  (defun prompt (#!optional title start)
+  (defun prompt (#!optional title start attributes)
     "Prompt the user for a string."
     (unless (stringp title)
       (setq title "Enter string:"))
@@ -300,6 +345,7 @@ displayed. See the `display-message' function for more details.")
 		  (prompt-position (length prompt-result))
 		  (prompt-history-pos 0)
 		  (prompt-saved nil)
+		  (prompt-attr attributes)
 		  (prompt-completion-position nil)
 		  (prompt-completions nil)
 		  (prompt-completions-outdated t)
@@ -340,6 +386,7 @@ displayed. See the `display-message' function for more details.")
   (defun prompt-for-command (#!optional title)
     (prompt-for-symbol title commandp commandp))
 
+
 ;;; autoloads
 
   (autoload 'prompt-for-file "sawfish/wm/util/prompt-extras")
@@ -351,6 +398,7 @@ displayed. See the `display-message' function for more details.")
 
   (autoload 'prompt-for-window "sawfish/wm/util/prompt-wm")
   (autoload 'prompt-for-workspace "sawfish/wm/util/prompt-wm")
+
 
 ;;; init keymap
 
