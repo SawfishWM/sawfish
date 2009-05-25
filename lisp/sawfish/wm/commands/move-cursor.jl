@@ -21,7 +21,15 @@
 
 (define-structure sawfish.wm.commands.move-cursor
 
-    (export move-cursor)
+    (export move-cursor
+            move-cursor-left-fine
+            move-cursor-right-fine
+            move-cursor-up-fine
+            move-cursor-down-fine
+            move-cursor-left
+            move-cursor-right
+            move-cursor-up
+            move-cursor-down)
 
     (open rep
 	  sawfish.wm.misc
