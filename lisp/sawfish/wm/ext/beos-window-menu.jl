@@ -25,6 +25,7 @@
     (export beos-window-menu)
 
     (open rep
+	  rep.util.utf8
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.custom
@@ -38,8 +39,8 @@
 
   (define (abbreviate name #!optional len)
     (unless len (setq len 20))
-    (if (> (length name) len)
-	(concat (substring name 0 len) "...")
+    (if (> (utf8-string-length name) len)
+	(concat (utf8-substring name 0 len) "...")
       name))
 
   (define (make-label w)

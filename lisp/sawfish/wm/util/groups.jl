@@ -51,6 +51,7 @@
 	    window-group-menu)
 
     (open rep
+	  rep.util.utf8
 	  rep.system
 	  sawfish.wm.misc
 	  sawfish.wm.events
@@ -140,9 +141,9 @@ id of the new group."
 		(let ((name (if (symbolp id)
 				(symbol-name id)
 			      (cdr (assq id group-names)))))
-		  (when (> (length name) 20)
+		  (when (> (utf8-string-length name) 20)
 		    (setq name (concat
-				(substring name 0 20) "...")))
+				(utf8-substring name 0 20) "...")))
 		  (list (quote-menu-item name)
 			(lambda ()
 			  (add-window-to-group w id))
