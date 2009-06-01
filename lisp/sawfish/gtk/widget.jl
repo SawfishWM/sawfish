@@ -48,6 +48,7 @@
     ((open rep
 	   gui.gtk-2.gtk
 	   rep.system
+	   rep.util.utf8
 	   rep.regexp)
      (access rep.structures))
 
@@ -173,8 +174,8 @@
   ;; returns (LABEL-STRING . TOOLTIP-STRING-OR-NIL)
   (define (tooltip-split doc)
     (if (string-match "\n\n\\s*" doc)
-	(cons (substring doc 0 (match-start))
-	      (substring doc (match-end)))
+	(cons (utf8-substring (_ doc) 0 (match-start))
+	      (utf8-substring (_ doc) (match-end)))
       (cons doc nil)))
 
   (define (tooltip-set widget tip-string #!optional (key "Foo"))
