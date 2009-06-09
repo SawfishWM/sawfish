@@ -1219,6 +1219,13 @@ lose focus when the cursor moved from it to the desktop.
 
 This event is implemented via @code{warp-cursor-to-window}, so Sawfish
 will not warp unless @code{warp-to-window-enabled} is true.
+
+@item focus-revert
+The focused window has disappeared (the @var{window} argument is not
+used here).  The focus mode may react by setting focus to some other
+window.  If a focused transient window disappears, focus normally
+reverts to the window that the disappearing window was transient for.
+@code{focus-revert} is not invoked in that case.
 @end table
 
 The protocol allows for any number of additional arguments, but does
