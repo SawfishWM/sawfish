@@ -442,12 +442,6 @@
 		       ((shaped) shaped-frame)
 		       ((shaped-transient) shaped-transient-frame))))
 
-  ;(call-after-property-changed
-  ; 'WM_NAME (lambda ()
-  ;	      (rebuild-frames-with-style 'Elberg-tabbed))))
   (call-after-property-changed
-    'WM_NAME (lambda (w prop state)
-	       (reframe-window w)
-	       ;(rebuild-frames-with-style 'Elberg-tabbed)
-	       ))
-)
+    '(WM_NAME _NET_WM_NAME) (lambda (w prop state)
+	       (reframe-window w))))
