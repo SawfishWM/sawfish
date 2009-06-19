@@ -28,6 +28,7 @@
 	    focus-push-map
 	    focus-pop-map
 	    warp-pointer-if-necessary
+           focus-revert
 	    focus-within-click-event)
 
     (open rep
@@ -77,7 +78,8 @@ click-to-focus button press event.")
 used to implement this focus mode, it will be called with arguments `(WINDOW
 EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 `pointer-in', `pointer-out', `focus-in', `focus-out', `add-window'
-`before-mode-change', `after-mode-change'"
+`before-mode-change', `after-mode-change', `warp-if-necessary' and
+`focus-revert'."
 
     (unless (memq name focus-modes)
       (setq focus-modes (nconc focus-modes (list name))))
@@ -132,13 +134,22 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
   (define (warp-pointer-if-necessary #!optional (w (input-focus)))
     (focus-invoke-mode w 'warp-if-necessary))
 
+  ;; Put focus in some window that hopefully feels natural.  This is
+  ;; typically used when the window in focus has disappeared.  Thus
+  ;; there is no reference window.
+  (define (focus-revert)
+    (let ((fun (focus-mode-ref focus-mode)))
+      (when fun (fun nil 'focus-revert))))
+
 ;;; modes
 
   (define-focus-mode 'enter-exit
     (lambda (w action . args)
       (case action
 	((pointer-in)
-	 (when (window-really-wants-input-p w)
+	 (when (and (window-really-wants-input-p w)
+                    ;; ignore grab/ungrab enter events
+                    (eq (car args) 'normal))
 	   (set-input-focus w)))
 	((pointer-out)
 	 ;; ignore grab/ungrab leave events
@@ -149,18 +160,33 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	 (set-input-focus w))
 	((warp-if-necessary)
 	 (unless (eq (query-pointer-window) w)
-	   (warp-cursor-to-window w))))))
+	   (warp-cursor-to-window w)))
+        ((focus-revert)
+         (setq w (query-pointer-window))
+         (when (or (null w)
+                   (window-really-wants-input-p w))
+           (set-input-focus w))))))
 
   (define-focus-mode 'enter-only
-    (lambda (w action)
+    (lambda (w action . args)
       (case action
 	((pointer-in)
-	 (when (window-really-wants-input-p w)
+	 (when (and (window-really-wants-input-p w)
+                    ;; ignore grab/ungrab enter events
+                    (eq (car args) 'normal))
 	   (set-input-focus w)))
 	((warp-if-necessary)
 	 (let ((current (query-pointer-window)))
 	   (unless (or (eq current w) (desktop-window-p current))
-	     (warp-cursor-to-window w)))))))
+	     (warp-cursor-to-window w))))
+        ((focus-revert)
+         (setq w (query-pointer-window))
+         (when (or (null w)
+                   (desktop-window-p w))
+           (setq w (window-order-most-recent)))
+         (when (or (null w)
+                   (window-really-wants-input-p w))
+           (set-input-focus w))))))
 
   (define (focus-click)
     (let ((w (current-event-window))
@@ -212,12 +238,17 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	((after-mode-change)
 	 (unless (or (not (window-really-wants-input-p w))
 		     (eq w (input-focus)))
-	   (focus-push-map w click-to-focus-map))))))
+	   (focus-push-map w click-to-focus-map)))
+        ((focus-revert)
+         (setq w (window-order-most-recent))
+         (when (or (null w)
+                   (window-really-wants-input-p w))
+           (set-input-focus w))))))
 
   (define-focus-mode 'enter-click
     (lambda (w action . args)
       (case action
-        ((pointer-in warp-if-necessary)
+        ((pointer-in warp-if-necessary focus-revert)
          (apply (focus-mode-ref 'enter-only) w action args))
         ((focus-in focus-out add-window before-mode-change after-mode-change)
          (apply (focus-mode-ref 'click) w action args)))))

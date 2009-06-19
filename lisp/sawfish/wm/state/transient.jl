@@ -37,6 +37,7 @@
 	  sawfish.wm.events
 	  sawfish.wm.custom
 	  sawfish.wm.commands
+         sawfish.wm.focus
 	  sawfish.wm.windows
 	  sawfish.wm.stacking
 	  sawfish.wm.viewport
@@ -154,22 +155,29 @@ the level of any transient windows it has."
 
 ;;; hooks
 
+  ;; 1. Transients of the currently focused window get focus.
+  ;; 2. Transients of root belonging to the same window group as the
+  ;;    currently focused window get focus, unless the currently focused
+  ;;    window is also transient (wacky special case code in transient-of-p).
+  ;; 3. Other transients for root, transients for a desktop window
+  ;;    or non-transients may get focus depending on options (yes, we
+  ;;    also handle non-transients).
   (define (transient-map-window w)
-    (cond ((and (window-transient-p w)
-		(window-really-wants-input-p w)
-		(window-visible-p w)
-		(input-focus)
-		(transient-of-p w (input-focus) #:allow-root t))
-	   (set-input-focus w))
-	  ((and (or (and focus-windows-when-mapped
-			 (not (window-get w 'never-focus))
-			 (not (window-get w 'inhibit-focus-when-mapped)))
-		    (window-get w 'focus-when-mapped))
-		(or (not (window-transient-p w))
-		    (eql (window-transient-p w) (root-window-id)))
-		(window-really-wants-input-p w)
-		(window-visible-p w))
-	   (set-input-focus w))))
+    (when (and (window-really-wants-input-p w)
+               (window-visible-p w)
+               (or (let ((focus (input-focus)))
+                     (and focus (transient-of-p w focus #:allow-root t)))
+                   (let ((x-for-id (window-transient-p w)))
+                     (and (or (not x-for-id)
+                              (eql x-for-id (root-window-id))
+                              (let ((x-for (get-window-by-id x-for-id)))
+                                (and x-for (window-get x-for 'desktop))))
+                          (or (and
+                               focus-windows-when-mapped
+                               (not (window-get w 'never-focus))
+                               (not (window-get w 'inhibit-focus-when-mapped)))
+                              (window-get w 'focus-when-mapped))))))
+      (set-input-focus w)))
 
   ;; If a transient window gets unmapped that currently has the input
   ;; focus, pass it (the focus) to its parent. Otherwise, pass the focus
@@ -184,25 +192,15 @@ the level of any transient windows it has."
 			 (or (window-order-most-recent
 			      #:windows (delq w (windows-in-group w)))
 			     (get-window-by-id (window-transient-p w))))))
-	(when (or (not parent)
-		  (not (window-mapped-p parent))
-		  (not (window-visible-p parent))
-		  (window-outside-viewport-p parent)
-		  (not (window-really-wants-input-p parent)))
-	  ;; if no parent, choose the topmost window (if in click-to-focus
-	  ;; mode) or the window under the pointer otherwise
-	  (if (eq focus-mode 'click)
-	      (setq parent nil)
-	    (setq parent (query-pointer-window))
-	    (when (and (eq focus-mode 'enter-only)
-		       parent (desktop-window-p parent))
-	      ;; in sloppy-focus mode, don't want to focus on the
-	      ;; desktop window just because the pointer is under it
-	      (setq parent nil)))
-	  (unless (or parent (eq focus-mode 'enter-exit))
-	    (setq parent (window-order-most-recent))))
-	(when (or (null parent) (window-really-wants-input-p parent))
-	  (set-input-focus parent)))))
+	(if (and parent
+                 (window-mapped-p parent)
+                 (window-visible-p parent)
+                 (not (window-outside-viewport-p parent))
+                 (window-really-wants-input-p parent)
+                 (not (window-get parent 'desktop)))
+            (set-input-focus parent)
+          ;; No parent to give focus back to.
+          (focus-revert)))))
 
   (add-hook 'map-notify-hook transient-map-window)
   (add-hook 'unmap-notify-hook transient-unmap-window)
