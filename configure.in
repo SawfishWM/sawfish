@@ -172,24 +172,34 @@ CPPFLAGS="${_cppflags}"
 fi
 
 dnl Checks for pango
+
+AC_ARG_WITH(pango,
+  [  --with-pango Use Pango instead of Xft
+  --without-pango], [], [with_pango=yes])
+
+if test "$with_pango" = "yes"; then
+
 PANGO_MIN_VER="1.8.0"
 
 PANGO_MODULES="pango "
 
 PKG_CHECK_MODULES(PANGO, pango >= ${PANGO_MIN_VER}
-		  ,AC_DEFINE(HAVE_PANGO, 1, [Have pango])
+		  ,AC_DEFINE(HAVE_PANGO, 1, [Have pango]) FONT_LOADER="Pango"
 		  ,AC_MSG_ERROR([can not locate pango]))
 
 PKG_CHECK_MODULES(PANGOX, pangox >= ${PANGO_MIN_VER}
-		  ,AC_DEFINE(HAVE_PANGO_X, 1, [Have pangox]) PANGO_MODULES="${PANGO_MODULES} pangox"
+		  ,AC_DEFINE(HAVE_PANGO_X, 1, [Have pangox]) PANGO_MODULES="${PANGO_MODULES} pangox" FONT_LOADER="Pango X"
 		  ,AC_MSG_WARN([pango x support not available]))
 
 PKG_CHECK_MODULES(PANGOXFT, pangoxft >= ${PANGO_MIN_VER}
-		  ,AC_DEFINE(HAVE_PANGO_XFT, 1, [Have pangoxft]) PANGO_MODULES="${PANGO_MODULES} pangoxft" have_pango_xft="yes" AC_SUBST(have_pango_xft)
+		  ,AC_DEFINE(HAVE_PANGO_XFT, 1, [Have pangoxft]) PANGO_MODULES="${PANGO_MODULES} pangoxft" have_pango_xft="yes" FONT_LOADER="Pango XFT" AC_SUBST(have_pango_xft)
 		  ,AC_MSG_WARN([pango xft support not available]))
 
 PANGO_LIBS=`pkg-config --libs $PANGO_MODULES`
 PANGO_CFLAGS=`pkg-config --cflags $PANGO_MODULES`
+
+else FONT_LOADER="X.Org"
+fi
 
 dnl Check for librep
 REP_MIN_VER="0.90.0"
@@ -231,7 +241,7 @@ if test "$with_gdk_pixbuf" != "no"; then
 			  AC_DEFINE(NEED_PIXMAP_CACHE, 1, [Need pixmap cache])
 			  IMAGE_LIBS='${GDK_PIXBUF_LIBS}'
 			  IMAGE_CFLAGS='${GDK_PIXBUF_CFLAGS}'
-			  IMAGE_LOADER=gdk
+			  IMAGE_LOADER="GDK Pixbuf Xlib"
 			  with_gdk_pixbuf=yes
 			  ,AC_MSG_ERROR([can not locate gdk-pixbuf-xlib])
 			  with_gdk_pixbuf=no)
@@ -245,7 +255,7 @@ if test "$with_gdk_pixbuf" = "no"; then
 			  IMAGE_LIBS='${IMLIB1_LIBS}'
 			  IMAGE_CFLAGS='${IMLIB1_CFLAGS}'
 			  IMLIB_VERSION="`pkg-config --modversion imlib`"
-			  IMAGE_LOADER=imlib1
+			  IMAGE_LOADER="IMLIB 1"
 			  ,AC_MSG_ERROR([can not locate imlib1 library]))
 fi
 
@@ -402,6 +412,7 @@ mv sawfish.ebuild sawfish-$version.ebuild
 REP_VERSION="`pkg-config --modversion librep`"
 REP_GTK_VERSION="`pkg-config --modversion rep-gtk`"
 GLIB_VERSION="`pkg-config --modversion glib-2.0`"
+PANGO_VERSION="`pkg-config --modversion pango`"
 
 if $PKG_CONFIG --exists cairo; then
 	CAIRO_VERSION="`pkg-config --modversion cairo`"
@@ -439,7 +450,9 @@ echo "
 if $PKG_CONFIG --exists cairo; then
 	echo "  cairo:	$CAIRO_VERSION"
 fi
-echo "  gtk+:		$GTK_VERSION"
+
+echo "  pango:	$PANGO_VERSION
+  gtk+:		$GTK_VERSION"
 
 if test "$with_gdk_pixbuf" = "no"; then
 echo "  imlib1:	$IMLIB_VERSION"
@@ -453,6 +466,10 @@ echo "
   == == == == == == == == == == == == ==
 
   image loader:	$IMAGE_LOADER
+
+  == == == == == == == == == == == == ==
+
+  font loader:	$FONT_LOADER
 
   == == == == == == == == == == == == ==
 
