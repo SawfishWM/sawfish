@@ -34,7 +34,14 @@ simply add the following flag to configure:
 
 (eg: ./configure --prefix=/usr --without-xorg-x11r7)
 
- - Christopher Bratusek <zanghar@freenet.de>
+Building without using PANGO for font-rendering:
+************************************************
+
+simply add the following flag to configure:
+
+--without-pango
+
+(eg: ./configure --prefix=/usr --without-pango)
 
 Sawfish-UI GtkTree:
 *******************
@@ -45,4 +52,7 @@ it, so you need to double-click it.
 
 but: the old ui is -of course- still available, use:
 
-sawfish-ui --flatten
+sawfish-ui --flatten [in a terminal]
+(define-special-variable customize-program "sawfish-ui --flatten") [in your config-file]
+
+- Christopher Bratusek <zanghar@freenet.de>
