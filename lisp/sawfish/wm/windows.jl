@@ -188,6 +188,7 @@ then be the numeric id of its parent window."
     (window-put w 'dock-type t)
     (mapc (lambda (p)
 	    (window-put w p t)) dock-window-properties)
+    (set-window-type w 'dock)
     (set-window-depth w dock-window-depth))
 
   (define (window-in-cycle-p w #!key ignore-cycle-skip)
