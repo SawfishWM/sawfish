@@ -436,7 +436,7 @@
     (let ((box (gtk-hbox-new nil box-spacing)))
       (setq item (make-widget item changed-callback))
       ;; XXX i18n the label string?
-      (gtk-box-pack-start box (gtk-label-new label))
+      (gtk-box-pack-start box (gtk-label-new (_ label)))
       (gtk-container-add box (widget-gtk-widget item))
       (gtk-widget-show-all box)
       (lambda (op)

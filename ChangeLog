@@ -1,3 +1,21 @@
+2009-06-26  Christopher Bratusek <zanghar@freenet.de>
+	* configure.in: added --with/without-nls option [disable installing
+	translations files, default=enabled]
+
+	* scripts/Makefile.in
+	* lisp/Makefile.in
+	* lisp/sawfish/ui/Makefile.in
+	* lisp/sawfish/gtk/Makefile.in: expand REP_ENVIRON
+
+	* lisp/sawfish/wm/session/init.jl: set RestartStyleHint to 2
+	[Christian Marillat]
+
+	* lisp/sawfish/wm/session/load.jl: when matching window to alist try
+	to match according WM_NAME if there's no WM_CLASS [Christian Marillat]
+
+	* README.IMPORTANT
+	* man/news.texi: updated
+
 2009-06-19  Christopher Bratusek <zanghar@freenet.de>
 	* themes/microGUI/theme.jl: fixed a speed-issue
 

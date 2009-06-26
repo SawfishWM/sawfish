@@ -176,7 +176,7 @@ that feature off, allowing some broken clients to be session managed.")
 
       ;; XXX should I set this to SmRestartImmediately (2) instead
       ;; XXX of SmRestartIfRunning (0) ?
-      (sm-set-property "RestartStyleHint" 0)
+      (sm-set-property "RestartStyleHint" 2)
 
       (remove-sm-options)
       (sm-set-property "CloneCommand" saved-command-line-args)

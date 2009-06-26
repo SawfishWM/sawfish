@@ -40,7 +40,7 @@ GETTEXT_PACKAGE=${PACKAGE}
 
 install_sh=../install-sh
 
-SUBDIRS="src lisp scripts themes sounds man po"
+SUBDIRS="src lisp scripts themes sounds man"
 
 sawfishdir='${datadir}/sawfish'
 lispdir='${sawfishdir}/${version}/lisp'
@@ -287,6 +287,16 @@ if test "$with_esd" = "yes"; then
 		      ESD_CFLAGS="`pkg-config --cflags esound`"
 		      AC_DEFINE(HAVE_ESD, 1, [Have ESD])
 		      ,AC_MSG_ERROR([can not locate esound]))
+fi
+
+dnl Check wether to install mo files
+
+AC_ARG_WITH(nls,
+	   [ --with-nls		Install translations
+	    --without-nls], [], [with_nls=yes])
+
+if test "$with_nls" = "yes"; then
+	SUBDIRS+=" po"
 fi
 
 dnl Check for Doug Lea's malloc in libc

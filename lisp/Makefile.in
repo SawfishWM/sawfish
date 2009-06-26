@@ -25,6 +25,8 @@ top_builddir=..
 top_srcdir=@top_srcdir@
 VPATH=@srcdir@:@top_srcdir@
 
+REP_ENVIRON:=$(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp:$(top_builddir)/lisp
+
 # also in themes/Makefile.in
 sawfish_prog = ../src/sawfish --batch --no-rc
 COMPILE_ENV = SAWFISHLISPDIR=. \

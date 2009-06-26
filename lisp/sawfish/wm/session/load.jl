@@ -71,6 +71,7 @@
     (let ((client-id (sm-get-window-prop w 'SM_CLIENT_ID))
 	  (role (nth 2 (get-x-property w 'WM_WINDOW_ROLE)))
 	  (class (sm-get-window-prop w 'WM_CLASS))
+	  (name (sm-get-window-prop w 'WM_NAME))
 	  (command (sm-get-window-prop w 'WM_COMMAND)))
       (catch 'out
 	(when (and (not sm-sloppy-id-matching)
@@ -97,6 +98,10 @@
 	  ;; no WM_WINDOW_ROLE, so try matching WM_CLASS
 	  (when (and class (cdr (assq 'class alist))
 		     (not (string= class (cdr (assq 'class alist)))))
+	      (throw 'out nil))
+	  ;; no WM_CLASS, so try matching WM_NAME
+	  (when (and name (cdr (assq 'name alist))
+		     (not (string= name (cdr (assq 'name alist)))))
 	    (throw 'out nil)))
 
 	;; XXX match on WM_NAME and WM_CLIENT_MACHINE..?
